@@ -7,9 +7,9 @@ package org.kudryavtsev.gojava.basic.helloworld;
 
 /**
  * @author Omicron
- * @version 0.02
+ * @version 0.03
  */
-public class Main {
+public class HelloWorld {
 
 	public static void main(String[] args) {
 		System.out.println("Hello world");
