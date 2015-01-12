@@ -16,7 +16,7 @@ import java.util.Scanner;
 public class LongDivision {
 
     public static void main(String[] args) {
-	final int DEPTH = 1;
+	final int DEPTH = 6;
 	String inputString = "12/42";
 	// Scanner in = new Scanner(System.in);
 	// inputString = in.nextLine();
@@ -41,29 +41,41 @@ public class LongDivision {
 
 	System.out.println(" " + numerator + " |" + denominator);
 
-	for (int i = 0; i < DEPTH; i++) {
 	    int t;
+	    int tempDigit;
 	    String adjust = "";
+	    String suffix = "|" + result;
+	    t = numerator * 10;
+	    System.out.print(" ");
 	    
-	    int tempDigit = (int) (result * 10) % 10;
-	    System.out.println("  " + adjust + tempDigit * denominator + "|" + result + "\n" + " ---");
-	    t = (numerator * 10 - tempDigit * denominator) * 10;
-	    adjust +=" ";	    
+	for (int i = 0; i < DEPTH; i++) {
+
+	    tempDigit = (int) (result * 10 * Math.pow(10, i)) % 10;
+	    System.out.println(adjust + "-" + tempDigit * denominator + suffix + "\n" + adjust + " ---");
+	    t = (t - tempDigit * denominator) * 10;
+	    adjust +=" ";
+	    suffix = "";
 	    System.out.println(" " + adjust + t);
+//	    i++;
+//	    
+//
+//	    tempDigit = (int) (result * 10 * Math.pow(10, i)) % 10;
+//	    System.out.println(adjust + "-" + tempDigit * denominator + suffix + "\n" + adjust + " ---");
+//	    t = (t - tempDigit * denominator) * 10;
+//	    adjust +=" ";
+//	    suffix = "";	    
+//	    System.out.println(" " + adjust + t);
+//	    i++;
+//
+//
+//	    tempDigit = (int) (result * 10 * Math.pow(10, i)) % 10;
+//	    System.out.println(adjust + "-" + tempDigit * denominator + suffix + "\n" + adjust + " ---");
+//	    t = (t  - tempDigit * denominator) * 10;
+//	    adjust +=" ";
+//	    suffix = "";	    
+//	    System.out.println(" " + adjust + t);
+//	    i++;
 
-
-	    int tempDigit2 = (int) (result * 100) % 100 - tempDigit * 10;
-	    System.out.println(adjust + "-" + tempDigit2 * denominator + "\n" + " " + " ---");
-	    t = (t - tempDigit2 * denominator)* 10;
-	    adjust +=" ";	    
-	    System.out.println(" " + adjust + t );
-
-	    
-	    int tempDigit3 = (int) (result * 1000) % 1000 - tempDigit * 100 - tempDigit2 * 10;
-	    System.out.println(adjust + "-" + tempDigit3 * denominator + "\n" + " " + " ---");
-	    t = (t  - tempDigit3 * denominator)* 10;
-	    adjust +=" ";	    
-	    System.out.println(" "+ adjust + t );
 
 	    
 	    
