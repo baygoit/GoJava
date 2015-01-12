@@ -39,25 +39,32 @@ public class LongDivision {
 	    int denominator) {
 	double result = (double) numerator / denominator;
 
-	System.out.println(numerator + " |" + denominator);
+	System.out.println(" " + numerator + " |" + denominator);
 
 	for (int i = 0; i < DEPTH; i++) {
 	    int t;
+	    String adjust = "";
 	    
 	    int tempDigit = (int) (result * 10) % 10;
-	    System.out.println(" " + tempDigit * denominator + "|" + result + "\n" + "---");
+	    System.out.println("  " + adjust + tempDigit * denominator + "|" + result + "\n" + " ---");
 	    t = (numerator * 10 - tempDigit * denominator) * 10;
-	    System.out.println(" " + t);
+	    adjust +=" ";	    
+	    System.out.println(" " + adjust + t);
+
 
 	    int tempDigit2 = (int) (result * 100) % 100 - tempDigit * 10;
-	    System.out.println("" + "-" + tempDigit2 * denominator + "\n" + " " + "---");
-	    t = (numerator * 10 - tempDigit * denominator) * 10 - tempDigit2 * denominator;
-	    System.out.println("  " + t * 10);
+	    System.out.println(adjust + "-" + tempDigit2 * denominator + "\n" + " " + " ---");
+	    t = (t - tempDigit2 * denominator)* 10;
+	    adjust +=" ";	    
+	    System.out.println(" " + adjust + t );
+
 	    
 	    int tempDigit3 = (int) (result * 1000) % 1000 - tempDigit * 100 - tempDigit2 * 10;
-	    System.out.println(" " + "-" + tempDigit3 * denominator + "\n" + " " + "---");
-	    t = (numerator * 10 - tempDigit * denominator) * 100 - tempDigit2 * denominator * 10 - tempDigit3 * denominator;
-	    System.out.println("  " + t * 10);
+	    System.out.println(adjust + "-" + tempDigit3 * denominator + "\n" + " " + " ---");
+	    t = (t  - tempDigit3 * denominator)* 10;
+	    adjust +=" ";	    
+	    System.out.println(" "+ adjust + t );
+
 	    
 	    
 	}
