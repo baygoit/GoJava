@@ -15,30 +15,52 @@ import java.util.Scanner;
 
 public class LongDivision {
 
-	public static void main(String[] args) {
+    public static void main(String[] args) {
+	final int DEPTH = 1;
+	String inputString = "12/42";
+	// Scanner in = new Scanner(System.in);
+	// inputString = in.nextLine();
+	// in.close();
 
-		String stringToAnalize = "";
-		Scanner in = new Scanner(System.in);
-		stringToAnalize = in.nextLine();
-		final int DEPTH = 6;
+	analize(DEPTH, inputString);
+    }
 
-		int positionOfDevider = stringToAnalize.indexOf("/");
-		// System.out.println(stringToAnalize + " " + positionOfDevider);
+    private static void analize(final int DEPTH, String stringToAnalize) {
+	int positionOfDevider = stringToAnalize.indexOf("/");
+	int numerator = Integer.parseInt(stringToAnalize.substring(0,
+		positionOfDevider));
+	int denominator = Integer.parseInt(stringToAnalize.substring(
+		positionOfDevider + 1, stringToAnalize.length()));
 
-		int numerator = Integer.parseInt(stringToAnalize.substring(0,
-				positionOfDevider));
-		int denominator = Integer.parseInt(stringToAnalize.substring(
-				positionOfDevider + 1, stringToAnalize.length()));
-		//double 
+	printDivision(DEPTH, numerator, denominator);
+    }
 
-		System.out.println(numerator + " |" + denominator + "\n "
-				+ (double) numerator / denominator);
+    private static void printDivision(final int DEPTH, int numerator,
+	    int denominator) {
+	double result = (double) numerator / denominator;
 
-		in.close();
-		
-		for(int i = 0; i <= DEPTH; i++) {
-			
-		}
+	System.out.println(numerator + " |" + denominator);
+
+	for (int i = 0; i < DEPTH; i++) {
+	    int t;
+	    
+	    int tempDigit = (int) (result * 10) % 10;
+	    System.out.println(" " + tempDigit * denominator + "|" + result + "\n" + "---");
+	    t = (numerator * 10 - tempDigit * denominator) * 10;
+	    System.out.println(" " + t);
+
+	    int tempDigit2 = (int) (result * 100) % 100 - tempDigit * 10;
+	    System.out.println("" + "-" + tempDigit2 * denominator + "\n" + " " + "---");
+	    t = (numerator * 10 - tempDigit * denominator) * 10 - tempDigit2 * denominator;
+	    System.out.println("  " + t * 10);
+	    
+	    int tempDigit3 = (int) (result * 1000) % 1000 - tempDigit * 100 - tempDigit2 * 10;
+	    System.out.println(" " + "-" + tempDigit3 * denominator + "\n" + " " + "---");
+	    t = (numerator * 10 - tempDigit * denominator) * 100 - tempDigit2 * denominator * 10 - tempDigit3 * denominator;
+	    System.out.println("  " + t * 10);
+	    
+	    
 	}
+    }
 
 }
