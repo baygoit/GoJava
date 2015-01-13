@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 /**
  * @author Omicron
- * @version 0.08
+ * @version 0.09
  */
 
 public class LongDivision {
@@ -36,19 +36,19 @@ public class LongDivision {
 
     private static void printDivision(final int DEPTH, int numerator, int denominator) {
 	double result = (double) numerator / denominator;
-	System.out.println(" " + numerator + " |" + denominator);
-	System.out.print(" ");
-	
+	System.out.print(" " + numerator + " |" + denominator + "\n ");
+
+	final int DIGIT = 10;	
 	int tempNumber;
 	int tempDigit;
 	String adjust = "";
 	String suffix = "|" + result;
-	tempNumber = numerator * 10;
+	tempNumber = numerator * DIGIT;
 
 	for (int i = 0; i < DEPTH; i++) {
-	    tempDigit = (int) (result * 10 * Math.pow(10, i)) % 10;
+	    tempDigit = (int) (result * DIGIT * Math.pow(DIGIT, i)) % DIGIT;
 	    System.out.println(adjust + "-" + tempDigit * denominator + suffix + "\n" + adjust + " ---");
-	    tempNumber = (tempNumber - tempDigit * denominator) * 10;
+	    tempNumber = (tempNumber - tempDigit * denominator) * DIGIT;
 	    adjust += " ";
 	    suffix = "";
 	    System.out.println(" " + adjust + tempNumber);
