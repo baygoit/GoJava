@@ -10,82 +10,48 @@
 
 package org.kudryavtsev.gojava.basic.distanceBeth2Min;
 
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 /**
  * @author Omicron
- * @version 0.21
+ * @version 0.25
  */
 public class Distance {
-    public static void main(String[] args) {
 
-	/*
-	 * least - the most minimal value in the given row of int numbers min -
-	 * the second minimal value distance - distance between them
-	 * positionLeast - position of the least value positionMin - position of
-	 * the min value
-	 */
+    public static void main(String[] args) throws IOException {
+	System.out.print("Enter numbers: ");
+	BufferedReader inputString = new BufferedReader(new InputStreamReader(
+		System.in));
+	String[] numbers = inputString.readLine().split(" ");
 
-	int positionLeast = 0;
-	int positionCurrent = 1;
-
-	System.out.println("Enter numbers, as a last number type any letter:");
-	Scanner in = new Scanner(System.in);
-
-	// Assign least and min for first two given numbers
-
-	if (in.hasNextInt()) {
-	    define2Minimums(positionLeast, positionCurrent, in);
-	}
+	define2Minimums(numbers);
     }
 
-    private static void define2Minimums(int positionLeast, int positionCurrent,
-	    Scanner in) {
-	int temp;
-	int min;
-	int least;
-	int positionMin;
-	least = in.nextInt();
-	if (in.hasNextInt()) {
-	    temp = in.nextInt();
-	    if (temp <= least) {
-		min = least;
-		least = temp;
-		positionMin = 0;
-		positionLeast = 1;
+    private static void define2Minimums(String[] numbers) {
+	int least = Integer.MAX_VALUE;
+	int min = Integer.MAX_VALUE;
+	int positionMin = 1;
+	int positionLeast = 0;
 
-	    } else {
-		min = temp;
-		positionMin = 1;
-	    }
-
-	    /*
-	     * Check other numbers till the and If current value less then least
-	     * - shift least to min and current to least If current value
-	     * between the least and min - shifting just min value
-	     */
-
-	    while (in.hasNextInt()) {
-		temp = in.nextInt();
-		positionCurrent++;
-		if (temp <= least) {
+	if (numbers.length > 1) {
+	    for (int i = 1; i < numbers.length; i++) {
+		int currentValue = Integer.parseInt(numbers[i]);
+		if (currentValue <= least) {
 		    min = least;
-		    least = temp;
+		    least = currentValue;
 		    positionMin = positionLeast;
-		    positionLeast = positionCurrent;
-		} else if (temp <= min) {
-		    min = temp;
-		    positionMin = positionCurrent;
+		    positionLeast = i;
+		} else if (currentValue <= min) {
+		    min = currentValue;
+		    positionMin = i;
 		}
 	    }
-
-	    in.close();
 	    System.out.println("The smallest numbers " + least + " and " + min
 		    + ". Distance between them - "
 		    + Math.abs(positionMin - positionLeast));
-
-	} else {
-	    System.out.println("Unable to find. You entered just one number.");
-	}
+	} else
+	    System.out.println("Not enough numbers.");
     }
 }
