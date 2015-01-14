@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 /**
  * @author Omicron
- * @version 0.15
+ * @version 0.16
  */
 public class Anagram {
 
@@ -23,11 +23,10 @@ public class Anagram {
     }
 
     static void printReversedLine(String stringToReverse) {
-	String word = "", letter = "";
+	String word = "";
 	for (int i = 0; i < stringToReverse.length(); i++) {
-	    letter = stringToReverse.substring(i, i + 1);
-	    word = letter + word;
-	    if (letter.equals(" ")) {
+	    word = stringToReverse.substring(i, i + 1) + word;
+	    if (stringToReverse.substring(i, i + 1).equals(" ")) {
 		System.out.print(word.substring(1, word.length()) + " ");
 		word = "";
 	    } else {
