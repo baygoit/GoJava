@@ -1,13 +1,6 @@
-package generator;
+package ua.scread.generator;
 
-import java.util.Arrays;
-
-/**
- * Generates sorted array <i>(values are from 0 to 100)</i>.
- * @author ScreaD
- *
- */
-public class SortedArray implements GeneratorAlgorithm {
+public class RandomArray implements GeneratorAlgorithm {
 	
 	@Override
 	public Integer[] generate(int size) {
@@ -16,11 +9,10 @@ public class SortedArray implements GeneratorAlgorithm {
 		for(int i = 0; i < array.length; i++){
 			array[i] = (int)(Math.random()*(size*10 + 1));
 		}
-		Arrays.sort(array);
 		return array;
 	}
 	@Override
 	public String toString(){
-		return SortedArray.class.getSimpleName();
+		return RandomArray.class.getSimpleName();
 	}
 }

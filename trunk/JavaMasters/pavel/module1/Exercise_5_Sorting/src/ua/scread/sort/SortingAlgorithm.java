@@ -1,4 +1,4 @@
-package sort;
+package ua.scread.sort;
 
 /**
  * Represents general interface for different sorting algorithms(states of Sorter).

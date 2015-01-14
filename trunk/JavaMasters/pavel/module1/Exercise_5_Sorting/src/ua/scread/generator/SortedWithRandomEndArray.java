@@ -1,4 +1,4 @@
-package generator;
+package ua.scread.generator;
 
 import java.util.Arrays;
 

@@ -1,4 +1,4 @@
-package sort;
+package ua.scread.sort;
 
 /**
  * Realization of insertion sort (or Exchange sorting).

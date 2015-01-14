@@ -1,4 +1,4 @@
-package sort;
+package ua.scread.sort;
 
 import java.util.Arrays;
 

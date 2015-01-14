@@ -1,4 +1,4 @@
-package sort;
+package ua.scread.sort;
 
 /**
  * Array's sorting with merge.

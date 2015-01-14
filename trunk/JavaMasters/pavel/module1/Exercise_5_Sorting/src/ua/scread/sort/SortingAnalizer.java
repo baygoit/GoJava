@@ -1,12 +1,12 @@
-package sort;
-
-import generator.GeneratorAlgorithm;
+package ua.scread.sort;
 
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+
+import ua.scread.generator.GeneratorAlgorithm;
 
 /**
  * Perform statistical calculations of sorting speed.

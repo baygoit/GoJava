@@ -1,4 +1,4 @@
-package sort;
+package ua.scread.sort;
 
 /**
  * Bubble sorting. Each min element sink from array's end to beginning.

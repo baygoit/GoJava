@@ -1,4 +1,4 @@
-package generator;
+package ua.scread.generator;
 
 /**
  * It is a class for generation different types of array.

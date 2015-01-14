@@ -1,4 +1,4 @@
-package generator;
+package ua.scread.generator;
 
 /**
  * Represents general interface for ArrayGenerator's states.

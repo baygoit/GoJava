@@ -1,4 +1,4 @@
-package sort;
+package ua.scread.sort;
 
 /**
  * Recursive sorting using the method of bisection.
