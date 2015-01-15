@@ -28,5 +28,10 @@ public class Hero {
     public void removeSkill(Skill skill) {
         this.Skills.remove(skill);
     }
+
+    public String getName() {
+        // TODO Auto-generated method stub
+        return this.name;
+    }
     
 }

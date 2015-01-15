@@ -12,8 +12,8 @@ public class Account {
     }
     
     public boolean login (String login, String password) {
-         this.logged = ((login    == this.login) && 
-                        (password == this.password));
+         this.logged = ((this.login.equals(login)) && 
+                        (this.password.equals(password)));
          return this.logged;
         
     }

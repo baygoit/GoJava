@@ -23,12 +23,18 @@ public class MainGameLoop
         String pass = null;
         while (true) {
             while (!myAccount.loggedIn()) {
+                Scanner scanner = new Scanner(System.in);
                 System.out.println("Login:");
-                login = new Scanner(System.in).nextLine();
+                login = scanner.nextLine();
                 System.out.println("Password");
-                pass = new Scanner(System.in).nextLine();
-                myAccount.login(login, pass);
+                pass = scanner.nextLine();
+                scanner.close();
+                System.out.println(myAccount.login(login, pass) ?
+                            "Welcome " + myAccount.getHero().getName() + "!":
+                            "Access Denied!");
             }
+            System.out.println(myAccount.getHero().listSkills());
+            System.exit(0);
         }
     }
 }
