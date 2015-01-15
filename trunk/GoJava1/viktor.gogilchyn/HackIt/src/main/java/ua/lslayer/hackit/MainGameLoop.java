@@ -6,19 +6,10 @@ import java.util.Scanner;
 
 public class MainGameLoop 
 {
-    static Account myAccount;
     public static void main( String[] args )
     {
-        ArrayList<Skill> skillList = new ArrayList<Skill>();
-        skillList.add(new Skill("Hacking",10));
-        skillList.add(new Skill("Security",2));
-        skillList.add(new Skill("Bruteforce",100));
-        Hero myHero = new Hero("Hero1");
-        for (Skill element : skillList) {
-            myHero.addSkill(element);
-        }
-        myAccount = new Account("accname", "masterkey");
-        myAccount.setHero(myHero);
+        __Assistant assistant = new __Assistant();
+        Account myAccount = assistant.makeMeAnAccountFilledWithAllINeed();
         String login = null;
         String pass = null;
         while (true) {
@@ -33,7 +24,11 @@ public class MainGameLoop
                             "Welcome " + myAccount.getHero().getName() + "!": //I know it's wrong.
                             "Access Denied!");
             }
-            System.out.println(myAccount.getHero().listSkills());
+            Hero currentHero = myAccount.getHero();
+            System.out.println(currentHero.listSkills());
+            //Here comes some funny stuff, which will make some changes to currnetHero
+            myAccount.setHero(currentHero);
+            myAccount.logOut();
             System.exit(0);
         }
     }

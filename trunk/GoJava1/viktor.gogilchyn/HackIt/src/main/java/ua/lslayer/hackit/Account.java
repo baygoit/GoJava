@@ -3,21 +3,29 @@ package ua.lslayer.hackit;
 public class Account {
     private String login;
     private String password;
-    private boolean logged;
+    private boolean loggedIn;
     private Hero hero;
     
     public Account (String login, String password) {
         this.login = login;
         this.password = password;
         this.hero = null;
-        this.logged = false;
+        this.loggedIn = false;
         
     }
     
+    public void saveProgress() {
+        //Here I will save a hero to database
+    }
+    
+    public void loadProgress() {
+        //Here I will load a hero from database
+    }
+    
     public boolean login (String login, String password) {
-         this.logged = ((this.login.equals(login)) && 
+         this.loggedIn = ((this.login.equals(login)) && 
                         (this.password.equals(password)));
-         return this.logged;
+         return this.loggedIn;
         
     }
 
@@ -30,6 +38,11 @@ public class Account {
     }
 
     public boolean loggedIn() {
-        return this.logged;
+        return this.loggedIn;
+    }
+    
+    public void logOut() {
+        this.loggedIn = false;
+        this.saveProgress();
     }
 }
