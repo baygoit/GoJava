@@ -30,7 +30,7 @@ public class MainGameLoop
                 pass = scanner.nextLine();
                 scanner.close();
                 System.out.println(myAccount.login(login, pass) ?
-                            "Welcome " + myAccount.getHero().getName() + "!":
+                            "Welcome " + myAccount.getHero().getName() + "!": //I know it's wrong.
                             "Access Denied!");
             }
             System.out.println(myAccount.getHero().listSkills());
