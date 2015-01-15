@@ -4,27 +4,45 @@ import java.util.*;
 
 public class MedicalSystem {
 		
-	public static void main(String[] args) {
-		
-		ArrayList<Object> doctors = new ArrayList<Object>();
-		int choose = 0;
-		
-		while (choose != 3) try {
-			System.out.println("Хотите создать врача (1) или просмотреть список(2). 3 - для выхода");
-			choose = Integer.parseInt(Doctor.input());
-			if (choose == 1){
-				doctors.add(new Doctor());
-			} else if (choose == 2){
-				System.out.println("Количество записй в базе - " + doctors.size());
-			} 
-		} catch (NumberFormatException e){
-			System.err.println("Вы должны внести цыфру 1, 2 или 3");
-		}
-		
-		for (int i = 0; i < doctors.size(); i++){						//TODO: вынести в метод
-			System.out.println(((Doctor) doctors.get(i)).getSpec());
-		}
-				 						
-	}
+		public static void main(String[] args) {
+ 
+        ArrayList<Doctor> doctors = new ArrayList<Doctor>();
+        int choose = 0;
+ 
+        while (choose != 3) try {
+            System.out.println();
+            choose = Integer.parseInt(input("Р”Р»СЏ СЃРѕР·РґР°РЅРёСЏ РЅРѕРІРѕРіРѕ РІСЂР°С‡Р° РІРІРµРґРёС‚Рµ '1'" + "\n" +
+                                            "Р”Р»СЏ РїСЂРѕСЃРјРѕС‚СЂР° СЃРїРёСЃРєР° РІСЂР°С‡РµР№ РІРІРµРґРёС‚Рµ '2'" + "\n" +
+                                            "Р”Р»СЏ РІС‹С…РѕРґР° РІРІРµРґРёС‚Рµ '3'"));
+            System.out.println();
+            if (choose == 1){
+                doctors.add(createDoctor());
+            } else if (choose == 2){
+                System.out.println("РљРѕР»РёС‡РµСЃС‚РІРѕ Р·Р°РїРёСЃР№ РІ Р±Р°Р·Рµ - " + doctors.size());
+            }
+        } catch (NumberFormatException e){
+            System.err.println("Р’С‹ РґРѕР»Р¶РЅС‹ РІРЅРµСЃС‚Рё С†РёС„СЂСѓ 1, 2 РёР»Рё 3");
+        }
+ 
+        for (int i = 0; i < doctors.size(); i++){	//TODO: move to method
+            System.out.println(((Doctor) doctors.get(i)).getSpec());
+        }
+ 
+    }
+ 
+    public static String input(String prompt){
+        Scanner sc = new Scanner(System.in);
+        System.out.println(prompt);
+        return sc.nextLine();
+    }
+ 
+    private static Doctor createDoctor(){
+        String name = input("Р’РІРµРґРёС‚Рµ РёРјСЏ РІСЂР°С‡Р°");
+        String surname = input("Р’РІРµРґРёС‚Рµ С„Р°РјРёР»РёСЋ РІСЂР°С‡Р°");
+        String spec = input("Р’РІРµРґРёС‚Рµ СЃРїРµС†РёР°Р»РёР·Р°С†РёСЋ РІСЂР°С‡Р°");
+ 
+        return new Doctor(name, surname, spec);
+ 
+    }
 	
 }
