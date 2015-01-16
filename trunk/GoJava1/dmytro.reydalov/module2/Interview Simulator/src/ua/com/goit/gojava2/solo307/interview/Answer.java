@@ -2,21 +2,24 @@ package ua.com.goit.gojava2.solo307.interview;
 
 public class Answer {
 	
-	public Answer(){
-		answer = "answer";
-		isAnswerRight = false;
-	}
-	
-	public Answer(String answer, boolean isRight){
-		this.answer = answer;
-		this.isAnswerRight = isRight;
-	}
-	
 	private String answer;
-	boolean isAnswerRight;
+	boolean isRight;
+	int numberOfAnswer;
+	
+	public Answer(){
+		answer = "here, must be The Answer...";
+		isRight = false;
+		numberOfAnswer = 0;
+	}
+	
+	public Answer(String answer, boolean isRight, int numberOfAnswer){
+		this.answer = answer;
+		this.isRight = isRight;
+		this.numberOfAnswer = numberOfAnswer;
+	}
 	
 	public String toString(){
-		return answer + " - " + isAnswerRight;
+		return answer + " - " + isRight;
 	}
 	
 	public String getAnswer() {
@@ -26,10 +29,21 @@ public class Answer {
 		this.answer = answer;
 	}
 	public boolean isAnswerRight() {
-		return isAnswerRight;
+		return isRight;
 	}
 	public void setAnswerRight(boolean isAnswerRight) {
-		this.isAnswerRight = isAnswerRight;
+		this.isRight = isAnswerRight;
+	}
+
+	public int getNumberOfAnswer() {
+		return numberOfAnswer;
+	}
+
+	public void setNumberOfAnswer(int numberOfAnswer) {
+		this.numberOfAnswer = numberOfAnswer;
 	}
 	
+	public void printNumberAndAnswer(){
+		System.out.println(numberOfAnswer + ". " + answer + "\n");
+	}
 }

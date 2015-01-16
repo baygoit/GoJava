@@ -5,23 +5,22 @@ import java.util.List;
 
 public class Question {
 	
-	public Question(){
-		question = "question";
-	}
-	
-	public Question(String question, Answer wrightAnswer, Answer wrongAnswer){
-		this.question = question;
-		answersList.add(wrightAnswer);
-		answersList.add(wrongAnswer);
-		menu = new Menu();
-	}
-	
 	private String question;
-	List <Answer> answersList = new ArrayList <Answer>();
-	Menu menu;
+	List <Answer> answers = new ArrayList <Answer>();
+	
+	public Question(){
+		question = "there is a question must be here...";
+	}
+	
+	public Question(String question, List <Answer> answers){
+		this.question = question;
+		for(Answer answer: answers){
+			this.answers.add(answer);
+		}
+	}
 	
 	public String toString(){
-		return this.question + "\n" + answersList + "\n";
+		return this.question + "\n" + answers + "\n";
 	}
 	
 	public String getQuestion() {
@@ -33,49 +32,47 @@ public class Question {
 	}
 	
 	public void printAllAnswers(){
-		for(Answer answs: answersList){
-			System.out.println(answs.getAnswer());
+		for(Answer answer: answers){
+			System.out.println(answer.getAnswer());
 		}
 	}
 	
 	public void printRightAnswers(){
-		for(Answer answs: answersList){
-			if(answs.isAnswerRight)System.out.println(answs.getAnswer());
+		for(Answer answer: answers){
+			if(answer.isRight)System.out.println(answer.getAnswer() + "\n");
 		}
 	}
 	
-	public Answer getRightAnswer(Question question){
-		Answer rightAnswer = new Answer();
-		for(Answer answs: answersList){
-			if(answs.isAnswerRight)rightAnswer = answs;
+	public int searchNumberOfRightAnswer(){
+	int numOfRightAnswer = 0;
+		for(Answer answer: answers){
+			if(answer.isRight){
+				numOfRightAnswer = answer.getNumberOfAnswer();
+				break;
+			}
 		}
-		return rightAnswer;
+		return numOfRightAnswer;
 	}
 	
-	public Answer getWrongAnswer(Question question){
-		Answer wrongAnswer = new Answer();
-		for(Answer answs: answersList){
-			if(!answs.isAnswerRight)wrongAnswer = answs;
+	public void printAswers(Question question){
+		for(Answer answer: answers){
+			answer.printNumberAndAnswer();
 		}
-		return wrongAnswer;
 	}
 	
-	public Answer readUserAnswer(Question question){
-		Answer rightAnswer = getRightAnswer(question);
-		Answer wrongAnswer = getWrongAnswer(question);
-		System.out.println("1. " + rightAnswer.getAnswer());
-		System.out.println("2. " + wrongAnswer.getAnswer());
-		int choose = menu.ReadInt();
-		if(choose == 1) return rightAnswer;
-		else if(choose == 2)return wrongAnswer;
-		else {
-			System.out.println("Такого пункта не существует");
-			readUserAnswer(question);
+	public boolean isRight(){
+		int choose = 0;
+		boolean isRight = false;
+		while(choose < 1 || choose > 4){
+			int numberOfRightAnswer = searchNumberOfRightAnswer();
+			choose = Menu.ReadInt();
+			if(choose == numberOfRightAnswer){
+				isRight = true;
+			}
 		}
-		return new Answer();
+		return isRight;
 	}
 }
-
 
 
 

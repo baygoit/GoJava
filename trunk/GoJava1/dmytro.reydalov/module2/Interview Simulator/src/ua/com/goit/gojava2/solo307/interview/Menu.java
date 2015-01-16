@@ -5,17 +5,17 @@ import java.util.Scanner;
 
 public class Menu {
 	
+	static ArrayList <String> options = new ArrayList<String>();
+	
 	public Menu(){
-		menuList.add("\n" + "1. Показать список вопросов и ответов");
-		menuList.add("2. Начать собеседование");
-		menuList.add("0. Выход");
+		options.add("\n" + "1. Показать список вопросов и ответов");
+		options.add("2. Начать собеседование");
+		options.add("0. Выход");
 	}
 	
-	static ArrayList <String> menuList = new ArrayList<String>();
-	
 	public static void printMenu(){
-		for(String s : menuList){
-			System.out.println(s);
+		for(String option : options){
+			System.out.println(option);
 		}
 	}
 	 
@@ -34,10 +34,11 @@ public class Menu {
 	public static void chooseOperation(int choise){
 		switch (choise){
 			case 1: Interview.showQuestionsAndAnswers();break; 
-			case 2: Interview.startInterview();break;
+			case 2: int rightAnswers = Interview.countRightAnswers();
+				Interview.isPassed(rightAnswers);
+				break;
 			case 0: System.exit(0);
 			default: System.out.println("Вы ввели несуществующий пункт");
-			System.exit(0);
 		}
 	}
 }
