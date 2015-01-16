@@ -3,46 +3,58 @@ package ua.com.goit.gojava.alejnikovi;
 import java.util.*;
 
 public class MedicalSystem {
+	
+	public static void main(String[] args) {
 		
-		public static void main(String[] args) {
- 
         ArrayList<Doctor> doctors = new ArrayList<Doctor>();
-        int choose = 0;
+        ArrayList<String> specs = new ArrayList<String>();
+        int userSelection = 0;
  
-        while (choose != 3) try {
+        while (userSelection != 3) try {
             System.out.println();
-            choose = Integer.parseInt(input("Р”Р»СЏ СЃРѕР·РґР°РЅРёСЏ РЅРѕРІРѕРіРѕ РІСЂР°С‡Р° РІРІРµРґРёС‚Рµ '1'" + "\n" +
-                                            "Р”Р»СЏ РїСЂРѕСЃРјРѕС‚СЂР° СЃРїРёСЃРєР° РІСЂР°С‡РµР№ РІРІРµРґРёС‚Рµ '2'" + "\n" +
-                                            "Р”Р»СЏ РІС‹С…РѕРґР° РІРІРµРґРёС‚Рµ '3'"));
+            userSelection = Integer.parseInt(input("Для создания нового врача введите '1'" + "\n" +
+                                            "Для просмотра списка врачей введите '2'" + "\n" +
+                                            "Для выхода введите '3'"));
             System.out.println();
-            if (choose == 1){
+            if (userSelection == 1){
                 doctors.add(createDoctor());
-            } else if (choose == 2){
-                System.out.println("РљРѕР»РёС‡РµСЃС‚РІРѕ Р·Р°РїРёСЃР№ РІ Р±Р°Р·Рµ - " + doctors.size());
+                //System.out.println(specs);
+            	if(specs.isEmpty()){
+                    specs.add(doctors.get(doctors.size() - 1).specialization);
+            	}
+
+                for (String s: specs){
+                	if(s.equals(doctors.get(doctors.size() - 1).specialization)){
+                		System.out.println("Спец уже встреч ");
+                       // specs.add(doctors.get(doctors.size() - 1).specialization);
+                	}
+
+                }
+                
+                
+            } else if (userSelection == 2){
+            	System.out.println("Выберите специализацию врача:");
+            	for (Doctor doc: doctors){      
+                    System.out.println(doc.specialization);
+                }
+            	
             }
         } catch (NumberFormatException e){
-            System.err.println("Р’С‹ РґРѕР»Р¶РЅС‹ РІРЅРµСЃС‚Рё С†РёС„СЂСѓ 1, 2 РёР»Рё 3");
-        }
- 
-        for (int i = 0; i < doctors.size(); i++){	//TODO: move to method
-            System.out.println(((Doctor) doctors.get(i)).getSpec());
-        }
+            System.err.println("Вы должны внести цифру 1, 2 или 3");
+        }        
  
     }
  
     public static String input(String prompt){
-        Scanner sc = new Scanner(System.in);
-        System.out.println(prompt);
-        return sc.nextLine();
+    	System.out.println(prompt);     	
+        return (new Scanner(System.in)).nextLine();
     }
  
     private static Doctor createDoctor(){
-        String name = input("Р’РІРµРґРёС‚Рµ РёРјСЏ РІСЂР°С‡Р°");
-        String surname = input("Р’РІРµРґРёС‚Рµ С„Р°РјРёР»РёСЋ РІСЂР°С‡Р°");
-        String spec = input("Р’РІРµРґРёС‚Рµ СЃРїРµС†РёР°Р»РёР·Р°С†РёСЋ РІСЂР°С‡Р°");
- 
+        String name = input("Введите имя врача");
+        String surname = input("Введите фамилию врача");
+        String spec = input("Введите специализацию врача"); 
         return new Doctor(name, surname, spec);
- 
-    }
+     }
 	
 }
