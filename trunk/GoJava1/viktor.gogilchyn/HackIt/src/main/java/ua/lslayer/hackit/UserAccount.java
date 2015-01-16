@@ -23,11 +23,14 @@ public class UserAccount {
     }
     
     public static UserAccount registerUserAccount(String login, String password) {
+        //TODO make an account creation mechanism
         //Some mess with database to make an account
         return null;
     }
     
-    public void changePassword()
+    public void changePassword() {
+        //TODO make an password change mechanism
+    }
     
     public boolean login (String login, String password) {
          this.loggedIn = ((this.login.equals(login)) && 
