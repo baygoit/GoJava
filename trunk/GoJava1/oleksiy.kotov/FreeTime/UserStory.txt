@@ -21,6 +21,8 @@ If (E) is busy (M) can see who made him busy.
 (E) has skills list, default, hours per day.
 (T) has skills list.
 (R) has start and end dates, and optional parameters (skills, minimun hours per day). 
+Schedule -
+
  
 
 
