@@ -15,6 +15,10 @@ public class UserSession {
 	
 	protected String userName;	
 	
+	void printBlockSeparator(){
+		outStream.println("\n===========================================\n");
+	}
+	
 	static {
 		setProblemsList();
 		setGuestBook();
@@ -53,11 +57,13 @@ public class UserSession {
 	private void startSession(){
 		System.out.println("Your session is launched.");
 		printProblemList();
+		
 	}
 	
 	public void printProblemList(){
+		outStream.println("Choose a problem You want to solve:");
 		for (String row : listOfProblems)
-			outStream.println(row);
+			outStream.println('-' + row);
 	}
 	
 	private void chooseProblem(int numberOfProblem){
