@@ -1,0 +1,31 @@
+Users can register in the System.
+User has login, password, name, email, contact phone 
+
+There are 2 types of Users in system: Employee(E), Manager(M).
+
+(E) mark himself in Calendar as free for work or not working.
+(E) can set value of hours free for work per day as default
+and specify another value for each day.
+If value of hours is zero - (E) doesn't work in this day.
+
+
+(M) chooses a period of dates and see all free (E)s.
+(M) can  make Request(R) for (E). 
+(R) consists of (E)'s id, list of dates and optional a number of hours for each date. 
+
+If (E) is requested he is marked as requested until (E) accept Request. 
+After accepting (E) is marked as busy for full day or several hours per day during date interva.
+If (E) is busy (M) can see who made him busy.
+
+(M) has Tasks with needed (E)'s skills
+(E) has skills list, default, hours per day.
+(T) has skills list.
+(R) has start and end dates, and optional parameters (skills, minimun hours per day). 
+ 
+
+
+
+
+
+
+ 
