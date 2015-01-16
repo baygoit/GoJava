@@ -1,12 +1,12 @@
 package ua.lslayer.hackit;
 
-public class Account {
+public class UserAccount {
     private String login;
     private String password;
     private boolean loggedIn;
     private Hero hero;
     
-    public Account (String login, String password) {
+    public UserAccount (String login, String password) {
         this.login = login;
         this.password = password;
         this.hero = null;

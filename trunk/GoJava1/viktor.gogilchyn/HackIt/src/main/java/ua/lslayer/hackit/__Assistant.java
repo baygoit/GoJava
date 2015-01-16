@@ -14,8 +14,8 @@ public class __Assistant {
         return randomNum;
     }
     
-    public Account makeMeAnAccountFilledWithAllINeed() {
-        Account returnValue = new Account(ACC_NAME, PASSWORD);
+    public UserAccount makeMeAnAccountFilledWithAllINeed() {
+        UserAccount returnValue = new UserAccount(ACC_NAME, PASSWORD);
         Hero goodBoy = new Hero(HERO_NAME);
         for (String skillName : SKILL_ARRAY) {
             goodBoy.addSkill(new Skill(skillName, randInt(1, 100) ));

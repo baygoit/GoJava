@@ -8,7 +8,7 @@ public class MainGameLoop
     public static void main( String[] args )
     {
         __Assistant assistant = new __Assistant();
-        Account myAccount = assistant.makeMeAnAccountFilledWithAllINeed();
+        UserAccount myAccount = assistant.makeMeAnAccountFilledWithAllINeed();
         String login = null;
         String pass = null;
         while (true) {
