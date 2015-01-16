@@ -11,21 +11,29 @@ public class UserSession {
 	
 	private PrintStream outStream;
 	
-	public SolubleProblem solubleProblemUnit;
+	public SolubleProblem solubleProblemUnit;//TODO - SET AS PRIVATE
 	
-	protected String userName;
-	
+	protected String userName;	
 	
 	static {
 		setProblemsList();
 		setGuestBook();
 	}
 	
+	protected static void setProblemsList() {
+		listOfProblems = new ArrayList<String>();
+		listOfProblems.add(SolubleProblem.LINEAR_PROGRAM.toString());
+		listOfProblems.add(SolubleProblem.TRANSPORTATION_PROBLEM.toString());
+		//TODO: Extract list automatically.  
+	}
+	
+	protected static void setGuestBook() {
+		guestBook = new ArrayList<String>();
+	}
+	
 	public static void main(String[] args) throws Exception{
 		UserSession actualSession = UserSession.newSession("default", System.out);
-		actualSession.chooseProblem(0);//TODO - DELETE
-		System.out.println(actualSession.solubleProblemUnit.descriptionString());//TODO - DELETE
-	}	
+	}
 	
 	public static UserSession newSession(String login, PrintStream outStreamArg){
 		return new UserSession(login, outStreamArg);
@@ -42,32 +50,24 @@ public class UserSession {
 		guestBook.add(userName+ " has entered the system.");
 	}
 	
-	public void startSession(){
+	private void startSession(){
 		System.out.println("Your session is launched.");
-		printProblemList(outStream);
+		printProblemList();
+	}
+	
+	public void printProblemList(){
+		for (String row : listOfProblems)
+			outStream.println(row);
 	}
 	
 	private void chooseProblem(int numberOfProblem){
 		switch (numberOfProblem){
 			case 0: solubleProblemUnit = SolubleProblem.LINEAR_PROGRAM;
+			break;
 			case 1: solubleProblemUnit = SolubleProblem.TRANSPORTATION_PROBLEM;
+			break;
 			default: solubleProblemUnit = null;
+			break;
 		}
-	}
-	
-	protected static void setProblemsList() {
-		listOfProblems = new ArrayList<String>();
-		listOfProblems.add(SolubleProblem.LINEAR_PROGRAM.toString());
-		listOfProblems.add(SolubleProblem.TRANSPORTATION_PROBLEM.toString());
-		//TODO: Extract list automatically.  
-	}
-	
-	protected static void setGuestBook() {
-		guestBook = new ArrayList<String>();
-	}
-	
-	public static void printProblemList(PrintStream outStream){
-		for (String row : listOfProblems)
-			outStream.println(row);
-	}	
+	}		
 }
