@@ -5,7 +5,8 @@ import java.util.Scanner;
 
 public class Players {
 
-
+ //Why static? 
+  //GOOGLE: Encapsulation (object-oriented programming)
 		static String [] bestPlayers = {"Michael Jordan", "Larry Bird", "Magic Johnson", "Wilt Chambelain", "John Stockton", "Moses Malobe", "Bob Cousy", "Kareem Abdul-Jabbar", "Julius Erving", "Karl Malone", "Pete Maravich", "Hakeem Olajuwon", "Shaquille O'Neal", "Bill Russell", "Jerry West"};  
 		int i;
 		ArrayList toplist = new ArrayList(); 
@@ -46,6 +47,7 @@ public class Players {
 			       }
 			   }
 		
+     
 		public void showList (){
 			String correct = "Yes";
 			System.out.println("Please type <Yes> if you want to see full list of Hall of Fame and press <Enter> ?");
