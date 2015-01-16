@@ -12,9 +12,9 @@ public class MedicalSystem {
  
         while (userSelection != 3) try {
             System.out.println();
-            userSelection = Integer.parseInt(input("Для создания нового врача введите '1'" + "\n" +
-                                            "Для просмотра списка врачей введите '2'" + "\n" +
-                                            "Для выхода введите '3'"));
+            userSelection = Integer.parseInt(input("Р”Р»СЏ СЃРѕР·РґР°РЅРёСЏ РЅРѕРІРѕРіРѕ РІСЂР°С‡Р° РІРІРµРґРёС‚Рµ '1'" + "\n" +
+                                            "Р”Р»СЏ РїСЂРѕСЃРјРѕС‚СЂР° СЃРїРёСЃРєР° РІСЂР°С‡РµР№ РІРІРµРґРёС‚Рµ '2'" + "\n" +
+                                            "Р”Р»СЏ РІС‹С…РѕРґР° РІРІРµРґРёС‚Рµ '3'"));
             System.out.println();
             if (userSelection == 1){
                 doctors.add(createDoctor());
@@ -25,7 +25,7 @@ public class MedicalSystem {
 
                 for (String s: specs){
                 	if(s.equals(doctors.get(doctors.size() - 1).specialization)){
-                		System.out.println("Спец уже встреч ");
+                		System.out.println("РЎРїРµС† СѓР¶Рµ РІСЃС‚СЂРµС‡ ");
                        // specs.add(doctors.get(doctors.size() - 1).specialization);
                 	}
 
@@ -33,14 +33,14 @@ public class MedicalSystem {
                 
                 
             } else if (userSelection == 2){
-            	System.out.println("Выберите специализацию врача:");
+            	System.out.println("Р’С‹Р±РµСЂРёС‚Рµ СЃРїРµС†РёР°Р»РёР·Р°С†РёСЋ РІСЂР°С‡Р°:");
             	for (Doctor doc: doctors){      
                     System.out.println(doc.specialization);
                 }
             	
             }
         } catch (NumberFormatException e){
-            System.err.println("Вы должны внести цифру 1, 2 или 3");
+            System.err.println("Р’С‹ РґРѕР»Р¶РЅС‹ РІРЅРµСЃС‚Рё С†РёС„СЂСѓ 1, 2 РёР»Рё 3");
         }        
  
     }
@@ -51,9 +51,9 @@ public class MedicalSystem {
     }
  
     private static Doctor createDoctor(){
-        String name = input("Введите имя врача");
-        String surname = input("Введите фамилию врача");
-        String spec = input("Введите специализацию врача"); 
+        String name = input("Р’РІРµРґРёС‚Рµ РёРјСЏ РІСЂР°С‡Р°");
+        String surname = input("Р’РІРµРґРёС‚Рµ С„Р°РјРёР»РёСЋ РІСЂР°С‡Р°");
+        String spec = input("Р’РІРµРґРёС‚Рµ СЃРїРµС†РёР°Р»РёР·Р°С†РёСЋ РІСЂР°С‡Р°"); 
         return new Doctor(name, surname, spec);
      }
 	
