@@ -97,10 +97,10 @@ public class UserSession {
 	
 	private void printCommands(int flags){
 		StringBuilder output = new StringBuilder();
-		output.append("x - exit; ");
-		if (flags / 2 == 0) output.append("n - next; ");
-		if (flags / 2 == 1) output.append("b - back; ");
-		if (flags / 4 == 1) output.append("v - vendetta; ");//TODO - delete
+		if (flags / 2 == 0) output.append("x - exit; ");
+		if (flags / 2 == 1) output.append("n - next; ");
+		if (flags / 4 == 1) output.append("b - back; ");
+		if (flags / 8 == 1) output.append("v - vendetta; ");//TODO - delete
 		outStream.println(output);
 	}
 	
@@ -135,13 +135,9 @@ public class UserSession {
 	private void launchMenu(){
 		printBlockSeparator();
 		printProblemList();
-		goNext();
+		goFromMainMenu();
 		//TODO - farawell();
 	}			
-	
-	private void goNext(){
-		goFromMainMenu();
-	}
 	
 	private void goFromMainMenu(){
 		printCommands(FLAG_X);
