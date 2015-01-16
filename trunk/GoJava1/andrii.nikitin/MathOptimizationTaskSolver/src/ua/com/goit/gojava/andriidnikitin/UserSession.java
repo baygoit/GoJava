@@ -65,7 +65,7 @@ public class UserSession {
 	}
 	
 	private void addNewVisit(){
-		guestBook.add(userName+ " has entered the system.");
+		guestBook.add(userName + " has entered the system.");
 	}
 	
 	private void startSession(){
@@ -105,42 +105,42 @@ public class UserSession {
 	}
 	
 	private int getCommand(){
-		char inputSymbol =  getChar();
+		//String input =  getString(); TODO is proxy needed
+		String input =  inputSource.nextLine();
 		try {
-			return Integer.parseInt(Character.toString(inputSymbol));
-		} catch (Exception e){
-			
-		}
+			return Integer.parseInt(input);
+		} catch (NumberFormatException exception){
 		boolean exitCycle = false;
 		while (!exitCycle){
 			exitCycle = true;
-			switch (inputSymbol){
-				case 'x': return COMMAND_EXIT;
-				case 'b': return COMMAND_BACK;
-				case 'n': return COMMAND_NEXT;
+			switch (input){
+				case "x": return COMMAND_EXIT;
+				case "b": return COMMAND_BACK;
+				case "n": return COMMAND_NEXT;
 				default : {
 					outStream.println("Unknown command.");
 					exitCycle = false;
-					inputSymbol =  getChar();
+					input =  getString();
 				}
 			}
+		}
 		}
 		return COMMAND_UNKNOWN;
 	}	
 	
+	private String getString(){//is such proxy needed?
+		return inputSource.nextLine();
+	}
+		
 	private void launchMenu(){
 		printBlockSeparator();
 		printProblemList();
 		goNext();
 		//TODO - farawell();
-	}
+	}			
 	
 	private void goNext(){
 		goFromMainMenu();
-	}
-	
-	private char getChar(){
-			return (char) inputSource.nextInt();
 	}
 	
 	private void goFromMainMenu(){
