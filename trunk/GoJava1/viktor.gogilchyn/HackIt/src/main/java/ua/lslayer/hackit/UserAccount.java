@@ -14,17 +14,25 @@ public class UserAccount {
         
     }
     
-    public void saveProgress() {
+    private void saveProgress() {
         //Here I will save a hero to database
     }
     
-    public void loadProgress() {
+    private void loadProgress() {
         //Here I will load a hero from database
     }
+    
+    public static UserAccount registerUserAccount(String login, String password) {
+        //Some mess with database to make an account
+        return null;
+    }
+    
+    public void changePassword()
     
     public boolean login (String login, String password) {
          this.loggedIn = ((this.login.equals(login)) && 
                         (this.password.equals(password)));
+         this.loadProgress();
          return this.loggedIn;
         
     }
