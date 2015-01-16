@@ -1,0 +1,10 @@
+﻿Part 1 console variant
+
+1.Main Menu class.
+	constructor with a menu points
+	method that draw menu
+	method, that read point menu from user and return it, or return 0
+	method, that choose class that realize own calculation variant
+
+2.Classes, that represent calculation for a different type of consruction
+3.Class main
