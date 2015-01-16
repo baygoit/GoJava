@@ -1,0 +1,7 @@
+﻿A program for calculating the strength of structural elements .
+
+A Web interface, where User select type of calculation.
+Then fills required for this type of calculation, of the field on the basis of their task.
+All the necessary calculations for the constants, graphics or characteristics of various materials, components and structural elements have in the system.
+After completing the form, User select "calculate" and the system outputs the result of calculation, with the ability to save the document. 
+It is also possible to build graphs, charts (optional). 
