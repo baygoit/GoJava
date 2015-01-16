@@ -24,10 +24,33 @@ public class Employee extends User {
 
     }
     
+    // if Date is in the list, this day is free
     public boolean isFree(Date checkingDate) {
         
         return (schedule.containsKey(checkingDate) ? true : false);
         
     }
+    
+    public void becomBusy(Date checkingDate) {
+        
+        this.schedule.put(checkingDate, workTimePerDay);
+        
+    }
+    
+    public void addFreeDay(Date freeDate) {
+        
+        this.schedule.put(freeDate, workTimePerDay);
+        
+    }
+
+    public Map<Date, Integer> getSchedule() {
+        return schedule;
+    }
+
+    public void setSchedule(Map<Date, Integer> schedule) {
+        this.schedule = schedule;
+    }
+    
+    
 
 }
