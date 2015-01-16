@@ -12,8 +12,7 @@ public class GameConsole {
 	private Action currentAction = new Action();
 
 	private String readCommandFromSystemConsole() throws IOException {
-		BufferedReader console = 
-		new BufferedReader( new InputStreamReader(System.in));
+		BufferedReader console = new BufferedReader( new InputStreamReader(System.in));
 		String returnValue = console.readLine();
 		return returnValue;
 	}

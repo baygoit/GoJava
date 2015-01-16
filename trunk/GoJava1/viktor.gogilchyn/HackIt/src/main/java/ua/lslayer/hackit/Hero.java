@@ -6,6 +6,8 @@ public class Hero {
     private String name;
     private ArrayList<Skill> Skills;
     
+    //TODO Make an static method to create a hero with random skill list
+    
     public Hero(String name) {
         this.name = name;
         this.Skills = new ArrayList<Skill>();
