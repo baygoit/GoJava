@@ -1,30 +1,50 @@
 package ua.com.goit.gojava.andriidnikitin;
 
+import java.io.PrintStream;
 import java.util.ArrayList;
 
 public class UserSession {
+	
 	static ArrayList<String> listOfProblems;
+	
 	static ArrayList<String> guestBook;
+	
+	private PrintStream outStream;
+	
+	public SolubleProblem solubleProblemUnit;
+	
+	protected String userName;
+	
+	
 	static {
 		setProblemsList();
 		setGuestBook();
 	}
 	
-	public SolubleProblem solubleProblemUnit;
-	protected String userName;
+	public static void main(String[] args) throws Exception{
+		UserSession actualSession = UserSession.newSession("default", System.out);
+		actualSession.chooseProblem(0);//TODO - DELETE
+		System.out.println(actualSession.solubleProblemUnit.descriptionString());//TODO - DELETE
+	}	
 	
-	public static UserSession newSession(String login){
-		return new UserSession(login);
+	public static UserSession newSession(String login, PrintStream outStreamArg){
+		return new UserSession(login, outStreamArg);
 	}
 	
-	private UserSession (String login){
+	private UserSession (String login, PrintStream outStreamArg){
 		userName = login;
-		addNewVisit();
+		outStream = outStreamArg;
+		addNewVisit();		
 		startSession();
 	}
 	
 	private void addNewVisit(){
 		guestBook.add(userName+ " has entered the system.");
+	}
+	
+	public void startSession(){
+		System.out.println("Your session is launched.");
+		printProblemList(outStream);
 	}
 	
 	private void chooseProblem(int numberOfProblem){
@@ -33,11 +53,6 @@ public class UserSession {
 			case 1: solubleProblemUnit = SolubleProblem.TRANSPORTATION_PROBLEM;
 			default: solubleProblemUnit = null;
 		}
-	}
-
-	public void startSession(){
-		System.out.println("Your session is launched.");
-		//printProblemList();
 	}
 	
 	protected static void setProblemsList() {
@@ -51,13 +66,8 @@ public class UserSession {
 		guestBook = new ArrayList<String>();
 	}
 	
-	/*
-	public static void printProblemList(){
+	public static void printProblemList(PrintStream outStream){
 		for (String row : listOfProblems)
-	}*/
-	public static void main(String[] args) throws Exception{
-		UserSession actualSession = UserSession.newSession("default");
-		actualSession.chooseProblem(0);
-		System.out.println(actualSession.solubleProblemUnit.descriptionString());
-	}
+			outStream.println(row);
+	}	
 }
