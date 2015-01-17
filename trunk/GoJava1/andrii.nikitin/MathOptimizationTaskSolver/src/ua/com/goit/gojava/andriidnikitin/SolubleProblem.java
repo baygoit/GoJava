@@ -1,6 +1,7 @@
 package ua.com.goit.gojava.andriidnikitin;
 
 import java.io.PrintStream;
+import java.util.Scanner;
 
 public enum SolubleProblem {
 	LINEAR_PROGRAM {
@@ -13,17 +14,19 @@ public enum SolubleProblem {
 			return "Transportation Problem";
 		}
 	};
-	
-	public String descriptionString(){
-		return "This method is called " + this.toString();
-	}//TODO - delete
-		
-	public String resultString(){
-		return "This is result of solving " + toString();
-	}	
-	
+
 	public void describe(PrintStream outStream){
-		outStream.println("This method is called " + this.toString());	
+		outStream.println("This problem is called " + this.toString());	
 		//TODO - handle null
+	}
+	
+	public void solveProblem(Scanner inStream, PrintStream outStream){
+		outStream.println("Type magic number:");
+		String result = inStream.nextLine();		
+		try{
+			outStream.println("Result is " + Integer.parseInt(result));
+		} catch (NumberFormatException exception){
+			outStream.println("Result is not a number");
+		}
 	}
 }
