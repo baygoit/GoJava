@@ -1,40 +1,40 @@
-Name of the application: "Body Training" (предварительное название).
-Application description: "Body Training" - программа (предварительно на mobile devices) предназначенная 
-помогать пользовательям - любителям спорта, фитнеса, боди фитнеса, или тем кто то только делает первые шаги 
-в занятии спортом, добиваться поставленной цели.
+* Name of the application: "Body Training" (it's a pre name).
+* Application description: "Body Training" is application (a pre for mobile devices) designed to help 
+  users who love fitness, bodyfitness, bodybuilding, and just for beginners keep a diary of workouts,
+  select the training program or create your own, and also select a diet. So as you can see, the application is assistant to achieve the goal. 
 
-Actors: 
-   - Пользователь.
-   - Зарегестрированный пользователь.
+* Actors: 
+   - Unregistered user.
+   - Registered user.
 
-* User story 1: Поиск контента (выбор интересующей категории спорта).
-   	Actor: Пользователь системы.
-   	Goal: Ознакомление с той или иной категорией спорта.
-   	Prerequisites: Пользователь находиться на любом этапе исполльзования системы (любая страница системы).
+* User story 1: Looking for general information about kind of sports.
+   	Actor: Unregistered user, Registered user.
+   	Goal: Familiarization with one or another category of sport.
+   	Prerequisites: The actor is at any stage of use of the system (any page of system).
 	
 	Use cases:   
-	1) Пользователь нажимает кнопку "Выбрать категорию спорта".
-   	2) Программа отображает перечень доступных категорий спорта.
-   	3) Пользователь выбирает из предложенного списка ту категории спорта, которая ему интересна.
-   	4) Программа отображает информацию о выбранной категории спорта.
+	1) The actor click on the button "Kind of sports".
+   	2) The program displays a list of available kinds of sports.
+   	3) The user selects from a list of the categories of sports, which he is interested.
+   	4) The program displays basic information about the selected category of sports.
 
-* User story 2: Регистрация в системе.
-	Actor: Пользователь.
-	Goal: Доступ к полному функционалу и контенту системы.
-	Prerequisites: Сестема запущена, пользователь находится на любом этапе исполльзования системы (любая страница системы).
+* User story 2: Registration in the system.
+	Actor: Unregistered user.
+	Goal: Access to the full functionality and content of the system.
+	Prerequisites: The system is launched, the user is at any stage of use of the system (any system page).
 	
 	Use cases:
-	1) Пользователь нажимает кнопку "Зарегестрироваться".
-   	2) Программа отображает форму регестрации.
-   	3) Пользователь заполняет поля формы регистрации. 
-   	4) Пользователь подтверждает регестрацию.
-   	5) Программа подтверждает правильность заполнения формы.
-   	6) Программа регестрирует пользователя.
+	1) The actor click on the button "Create account".
+   	2) The system displays the registration form.
+   	3) The actor fill out the registration form. 
+   	4) The actor confirms the registration.
+   	5) The system confirms the correctness of filling the form.
+   	6) The program creates a registered user.
    
 	Alternative cases:
-		5a - Есть ошибки заполнения формы:
-			5a1 - Система сообщает об ошибках заполнения формы.
-			5a2 - Переход к шагу 4.
-		5b - Пользователь с таким именем (e-mail) уже зарегестрирован:
-			5b1 - Система сообщает, что пользователь с таким именем (e-mail) уже зарегестрирован.
-			5b2 - Переход к шагу 4.
+		5a - There are mistakes	filling in the form:
+			5a1 - The system reports about an mistakes form filling.
+			5a2 - Moving to the step number 3.
+		5b - This user name (e-mail) has already been registered:
+			5b1 - The system informs the user of the same name (e-mail) is already registered.
+			5b2 - Moving to the step number 3.
