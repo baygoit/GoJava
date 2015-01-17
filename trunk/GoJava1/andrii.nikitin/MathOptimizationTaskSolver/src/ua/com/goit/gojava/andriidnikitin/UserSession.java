@@ -13,7 +13,7 @@ public class UserSession {
 	
 	private PrintStream outStream;
 	
-	public SolubleProblem solubleProblemUnit;//TODO - SET AS PRIVATE
+	private SolubleProblem solubleProblemUnit;
 	
 	protected String userName;	
 	
@@ -102,7 +102,7 @@ public class UserSession {
 		outStream.println(output + "\n");
 	}
 	
-	private int getCommand(){//TODO- refactor
+	private int getCommand(){//TODO- refactor, too dirty
 		String input =  getString();
 		try {
 			return Integer.parseInt(input);
@@ -110,10 +110,10 @@ public class UserSession {
 		boolean exitCycle = false;
 		while (!exitCycle){
 			exitCycle = true;
-			switch (input){
-				case "x": return COMMAND_EXIT;
-				case "b": return COMMAND_BACK;
-				case "n": return COMMAND_NEXT;
+			switch (input.charAt(0)){
+				case 'x': return COMMAND_EXIT;
+				case 'b': return COMMAND_BACK;
+				case 'n': return COMMAND_NEXT;
 				default : {
 					outStream.println("Unknown command.");
 					exitCycle = false;
