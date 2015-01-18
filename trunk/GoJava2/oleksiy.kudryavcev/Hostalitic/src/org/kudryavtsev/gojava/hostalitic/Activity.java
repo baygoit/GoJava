@@ -3,17 +3,17 @@ package org.kudryavtsev.gojava.hostalitic;
 public class Activity {
     private String name;
 
-    public Activity(String activityName) {
+    public Activity(final String activityName) {
 	// TODO Create other activity items
 	setName(activityName);
 	System.out.println("Activity " + this.getName() + " created.");
     }
 
-    public String getName() {
+    public final String getName() {
 	return name;
     }
 
-    private void setName(String name) {
-	this.name = name;
+    private void setName(final String newName) {
+	name = newName;
     }
 }

@@ -3,16 +3,24 @@ package org.kudryavtsev.gojava.hostalitic.reports;
 import org.kudryavtsev.gojava.hostalitic.User;
 
 public class Report {
-    User userWantedReport;
+    private User userWantedReport;
 //    ReportType reportType;
 
-    public Report(User user) {
-	userWantedReport = user;
+    public Report(final User user) {
+	setUserWantedReport(user);
     }
 
-    public void show(String currentReportType) {
+    public final void show(final String currentReportType) {
 	
 	System.out.println(currentReportType + ": " 
-	+ userWantedReport.getName() + "\nReport done.");
+	+ getUserWantedReport().getName() + "\nReport done.");
+    }
+
+    final User getUserWantedReport() {
+	return userWantedReport;
+    }
+
+    final void setUserWantedReport(final User userWantedReport) {
+	this.userWantedReport = userWantedReport;
     }
 }

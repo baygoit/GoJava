@@ -3,7 +3,7 @@ package org.kudryavtsev.gojava.hostalitic.menu;
 import java.util.Scanner;
 
 public class Menu {
-    public void showMenu() {
+    public final void showMenu() {
 	Scanner in = new Scanner(System.in);
 	do {
 	    System.out.println("(1) To show users\n"

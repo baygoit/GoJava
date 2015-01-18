@@ -1,15 +1,17 @@
 package org.kudryavtsev.gojava.hostalitic;
 
-import java.util.Scanner;
-
 import org.kudryavtsev.gojava.hostalitic.menu.Menu;
 import org.kudryavtsev.gojava.hostalitic.reports.Report;
 
-public class Hostalitic {
+public final class Hostalitic {
 
-//    private static Menu menu;
+    // private static Menu menu;
 
-    public static void main(String[] args) {
+    private Hostalitic() {
+	System.out.println("Hostalitic starting...");
+    }
+
+    public static void main(final String[] args) {
 	Hostalitic hostalitic = new Hostalitic();
 
 	User user1 = new User("Sasha");
@@ -29,21 +31,19 @@ public class Hostalitic {
 
     }
 
-
-
-    private void addService(Activity activity, Service service) {
-	//TODO implement add service
+    private void addService(final Activity activity, final Service service) {
+	// TODO implement add service
 	System.out.println("Service " + service.getName() + " for activity "
 		+ activity.getName() + " added.");
 
     }
 
-    private void addActivity(Activity activity) {
+    private void addActivity(final Activity activity) {
 	// TODO implement add activity
 	System.out.println("Activity " + activity.getName() + " added.");
     }
 
-    private void addUser(User user) {
+    private void addUser(final User user) {
 	// System.out.println("Enter user name: ");
 	// return (new Scanner(System.in).nextLine());
 	// TODO implement add user
