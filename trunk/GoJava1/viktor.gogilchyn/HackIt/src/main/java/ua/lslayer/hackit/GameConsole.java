@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.List;
 import java.util.LinkedList;
-import java.util.Scanner;
 
 public class GameConsole {
 	private List<String> commands = new LinkedList<String>();

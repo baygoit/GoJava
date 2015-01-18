@@ -15,7 +15,6 @@ public class ComputerSystem {
 
     private int storageSizeAvailable; //Should I make an distinct field or compute it every time?  
     
-    
     private void checkDiskForErrors () {
         int installedSoftwareSize = 0;
         for (Software soft : installedSoftware) {
