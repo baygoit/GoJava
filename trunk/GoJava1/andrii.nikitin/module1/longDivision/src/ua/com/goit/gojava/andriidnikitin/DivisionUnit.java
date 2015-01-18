@@ -29,56 +29,71 @@ public class DivisionUnit {
 			System.out.println("Wrong input!");
 		}
 	}
-	static String longDivision(int inputDividend, int inputDivider){
+	public static String longDivision(int inputDividend, int inputDivider){
 		if (inputDividend == 0){
-			if (inputDivider == 0) {
-				log.add("0 : 0 = NaN");
-				return "NaN";
-			}
-			else {
-				log.add("0 : " 
-						+ inputDivider + " = 0");
-				return "0"; 
-			}					
+			return divisionZeroDividendCase(inputDividend, inputDivider);
 		}
 		if (inputDivider == 0) {
-			log.add(inputDividend + " : 0 = infinity");
-			return "infinity";
+			return divisionZeroDividerCase(inputDividend, inputDivider);
 		}				
-		else{
-			indentation = new StringBuilder();
-			String result = "0";
-			int dividendFractive = inputDividend % inputDivider;
-			if (inputDividend - dividendFractive != 0) 
-				result = Integer.valueOf(divisionNaturalPart(inputDividend, 
-						inputDivider)).toString(); 
-			else {
-				visualiseStep(0, 0, 0, inputDivider);
-			}
-			if (dividendFractive != 0)
-				result+= divisionFractivePart(dividendFractive, 
-						inputDivider);
-			else {
-				result+= ".0";
-				log.add(indentation + "0");
-			}
-			log.set(0, " " + inputDividend);
-			int maxLengthBetween0and1LogRows = 
-					Math.abs(log.get(0).length() - log.get(1).length());
-			StringBuilder finalIndentantion = new StringBuilder();
-			for (int i = 0; i < maxLengthBetween0and1LogRows; i++) 
-				finalIndentantion.append(' ');
-			if (log.get(0).length() > log.get(1).length()){
-				log.set(0, log.get(0) + "|_" + inputDivider);
-				log.set(1, log.elementAt(1) + finalIndentantion + '|' + result);
-			}
-			else{
-				log.set(0, log.get(0) + finalIndentantion + "|_" + inputDivider);
-				log.set(1, log.elementAt(1) + '|' + result);
-			}	
-			return result;
+		else {
+			return divisionRegularCase(inputDividend, inputDivider);
 		}
 	}
+			
+	private static String divisionZeroDividendCase(int inputDividend, 
+			int inputDivider){
+		if (inputDivider == 0) {
+			log.add("0 / 0 = NaN");
+			return "Not a Number";
+		}
+		else {
+			log.add("0 / " 
+			+ inputDivider + " = 0");
+			return "0"; 	
+		}
+	}
+	
+	private static String divisionZeroDividerCase(int inputDividend, 
+			int inputDivider){
+		log.add(inputDividend + " / 0 = infinity");
+		return "infinity";
+	}
+	
+	private static String divisionRegularCase(int inputDividend, 
+			int inputDivider){indentation = new StringBuilder();
+		String result = "0";
+		int dividendFractive = inputDividend % inputDivider;
+		if (inputDividend - dividendFractive != 0) 
+			result = Integer.valueOf(divisionNaturalPart(inputDividend, 
+					inputDivider)).toString(); 
+		else {
+			visualiseStep(0, 0, 0, inputDivider);
+		}
+		if (dividendFractive != 0)
+			result+= divisionFractivePart(dividendFractive, 
+					inputDivider);
+		else {
+			result+= ".0";
+			log.add(indentation + "0");
+		}
+		log.set(0, " " + inputDividend);
+		int maxLengthBetween0and1LogRows = 
+				Math.abs(log.get(0).length() - log.get(1).length());
+		StringBuilder finalIndentantion = new StringBuilder();
+		for (int i = 0; i < maxLengthBetween0and1LogRows; i++) 
+			finalIndentantion.append(' ');
+		if (log.get(0).length() > log.get(1).length()){
+			log.set(0, log.get(0) + "|_" + inputDivider);
+			log.set(1, log.elementAt(1) + finalIndentantion + '|' + result);
+		}
+		else{
+			log.set(0, log.get(0) + finalIndentantion + "|_" + inputDivider);
+			log.set(1, log.elementAt(1) + '|' + result);
+		}	
+		return result;
+	}	
+	
 	static int divisionNaturalPart(int dividend, int divider){
 		int shiftLength = 0;
 		int tempSubtrahend = 0;
@@ -174,5 +189,6 @@ public class DivisionUnit {
 		String input = inputSource.nextLine();
 		return Integer.parseInt(input);
 	}
+	
 	
 }
