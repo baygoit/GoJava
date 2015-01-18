@@ -59,11 +59,10 @@ public class ReverseString {
                 for (int j = endWordIndex; j >= startWordIndex; j--) {
                     strReverse += charArray[j];
                 }
-                i++;
             } else {
                 strReverse += charArray[i];
-                i++;
             }
+            i++;
         }
         return strReverse;
     } 
