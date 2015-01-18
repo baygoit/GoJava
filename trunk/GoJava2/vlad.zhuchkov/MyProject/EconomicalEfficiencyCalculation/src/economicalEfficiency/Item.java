@@ -7,17 +7,15 @@ public class Item {
 	double price;
 	int quantity;
 		
-	public void set(String role){
+	Item(){
 		Scanner sc = new Scanner(System.in);
-		System.out.print("name of "+role+" \n");
+		System.out.print("name of item\n");
 		name = sc.nextLine();
 		System.out.print("it's price\n");
 		price = Integer.valueOf(sc.nextLine());
-		if(role=="product")
-			System.out.print("How many product does it produce per cycle?\n");
-		else if (role=="resorse")
-			System.out.print("How many resorses does it need per cycle?\n");
-		sc.close();
+		System.out.print("it's quantity\n");
+		quantity = Integer.valueOf(sc.nextLine());
+	
 		}
 	public double getMyValue(){
 		return price*quantity;
