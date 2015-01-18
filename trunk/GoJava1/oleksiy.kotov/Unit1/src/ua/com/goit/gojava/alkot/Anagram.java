@@ -8,19 +8,19 @@ public class Anagram {
 
         Scanner scan = new Scanner(System.in);
 
-        System.out.println("Введите фразу:");
+        System.out.println("Р’РІРµРґРёС‚Рµ С„СЂР°Р·Сѓ:");
         String s = scan.nextLine();
         scan.close();
 
-        String[] alphabeticStringsArray = s.split("[^a-zA-Zа-яА-Я]+");
-        String[] otherStringsArray = s.split("[a-zA-Zа-яА-Я]+");
+        String[] alphabeticStringsArray = s.split("[^a-zA-ZР°-СЏРђ-РЇ]+");
+        String[] otherStringsArray = s.split("[a-zA-ZР°-СЏРђ-РЇ]+");
 
         String result = "";
         int maxIndex = Math.max(alphabeticStringsArray.length,
                 otherStringsArray.length);
 
-        if (alphabeticStringsArray[0].equals("")) // то фраза начинается с
-                                                  // разделителя, а не буквы
+        if (alphabeticStringsArray[0].equals("")) // С‚Рѕ С„СЂР°Р·Р° РЅР°С‡РёРЅР°РµС‚СЃСЏ СЃ
+                                                  // СЂР°Р·РґРµР»РёС‚РµР»СЏ, Р° РЅРµ Р±СѓРєРІС‹
             for (int i = 0; i < maxIndex; i++) {
                 if (i < otherStringsArray.length)
                     result += otherStringsArray[i];
