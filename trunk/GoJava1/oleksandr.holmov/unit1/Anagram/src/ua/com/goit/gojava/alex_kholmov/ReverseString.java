@@ -35,34 +35,35 @@ public class ReverseString {
         strInput = scan.nextLine();
         scan.close();
         
-        return strInput;
+        return strInput + "\n";
     }
     
-    //method reverse input string
+    // method reverse input string
     public static String reverseInputString(String inpStr) {
-        int startWordIndex, endWordIndex; //index begin and end word which find
+        int startWordIndex, endWordIndex; // index begin and end word which find
         String strReverse = "";
-        Character ch;
-        
-        //convert string to char array
+
+        // convert string to char array
         char[] charArray = inpStr.toCharArray();
-        
-        //reversing string
-        for (int i = 0; i < charArray.length; i++) {
-            ch = new Character(charArray[i]);
-            if (Character.isAlphabetic(ch)) {
+
+        // reversing string
+        int i = 0;
+        while (i < charArray.length) {
+            if (Character.isAlphabetic(charArray[i])) {
                 startWordIndex = i;
-                do {
-                    ch = charArray[i];
+                i++;
+                while (Character.isAlphabetic(charArray[i])) {
                     i++;
-                } while (Character.isAlphabetic(ch));
-                endWordIndex = i - 2;
+                }
+                endWordIndex = i - 1;
+                i--;
                 for (int j = endWordIndex; j >= startWordIndex; j--) {
                     strReverse += charArray[j];
                 }
-                i -= 2;
+                i++;
             } else {
-                strReverse += ch;
+                strReverse += charArray[i];
+                i++;
             }
         }
         return strReverse;
