@@ -1,5 +1,7 @@
 package ua.lslayer.hackit;
 
+import ua.lslayer.hackit.computers.ComputerSystem;
+
 public class Software {
     private static final float SIZE_INCREASE_RATIO = 0.3f;
     private String name;
@@ -20,7 +22,7 @@ public class Software {
         return this.name + " v. " + this.version;
     }
 
-    public void runSoftware() {
+    public void runSoftware(ComputerSystem system) {
         //Here we go!
     }
     
