@@ -35,7 +35,7 @@ public class ReverseString {
         strInput = scan.nextLine();
         scan.close();
         
-        return strInput + "\n";
+        return strInput;
     }
     
     // method reverse input string
@@ -51,8 +51,7 @@ public class ReverseString {
         while (i < charArray.length) {
             if (Character.isAlphabetic(charArray[i])) {
                 startWordIndex = i;
-                i++;
-                while (Character.isAlphabetic(charArray[i])) {
+                while (i < charArray.length && Character.isAlphabetic(charArray[i])) {
                     i++;
                 }
                 endWordIndex = i - 1;
