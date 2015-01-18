@@ -1,14 +1,33 @@
 * Name of the application: "Body Training" (it's a pre name).
 * Application description: "Body Training" is application (a pre for mobile devices) designed to help 
   users who love fitness, bodyfitness, bodybuilding, and just for beginners keep a diary of workouts,
-  select the training program or create your own, and also select a diet. So as you can see, the application is assistant to achieve the goal. 
+  select the training program or create your own, and also select a diet. So as you can see, the application is assistant to achieve the goal.
 
-* Actors: 
+* Actors:
    - Unregistered user.
    - Registered user.
 
-* User story 1: Looking for general information about kind of sports.
-   	Actor: Unregistered user, Registered user.
+* User story 1: Create a diary of workouts.
+	Actor: Registered user.
+	Goal: Monitoring the progress of training.
+	Prerequisites: The actor is logged in the system and at any stage of use of the system (any page of system).
+	
+	Use cases:
+	1) The actor click on the button "To cabinet".
+	2) The system displays the user's personal account.
+	3) The actor click on the button "Create a diary".
+	4) The system displays a form to fill the name of diary.
+	5) The actor fill out the form.
+	6) The actor confirms the form.
+	7) The system creates a new diary of workouts. 
+	
+	Alternative cases:	
+		7a - There is a diary with the same name.
+			7a1 - The system reports: there is a diary with the same name.
+			7a2 - Moving to the step number 5.
+		
+* User story 2: Looking for general information about kind of sports.
+   	Actor: Unregistered user, registered user.
    	Goal: Familiarization with one or another category of sport.
    	Prerequisites: The actor is at any stage of use of the system (any page of system).
 	
@@ -18,7 +37,7 @@
    	3) The user selects from a list of the categories of sports, which he is interested.
    	4) The program displays basic information about the selected category of sports.
 
-* User story 2: Registration in the system.
+* User story 3: Registration in the system.
 	Actor: Unregistered user.
 	Goal: Access to the full functionality and content of the system.
 	Prerequisites: The system is launched, the user is at any stage of use of the system (any system page).
@@ -29,7 +48,7 @@
    	3) The actor fill out the registration form. 
    	4) The actor confirms the registration.
    	5) The system confirms the correctness of filling the form.
-   	6) The program creates a registered user.
+   	6) The system creates a registered user.
    
 	Alternative cases:
 		5a - There are mistakes	filling in the form:
