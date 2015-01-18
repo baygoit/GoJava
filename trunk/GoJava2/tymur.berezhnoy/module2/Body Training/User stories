@@ -10,7 +10,7 @@
 * User story 1: Create a diary of workouts.
 	Actor: Registered user.
 	Goal: Monitoring the progress of training.
-	Prerequisites: The actor is logged in the system and at any stage of use of the system (any page of system).
+	Pre condition: The actor is at any stage of use of the system (any page of system).
 	
 	Use cases:
 	1) The actor click on the button "To cabinet".
@@ -21,15 +21,20 @@
 	6) The actor confirms the form.
 	7) The system creates a new diary of workouts. 
 	
-	Alternative cases:	
-		7a - There is a diary with the same name.
+	Alternative cases:
+		2a - The actor are not logged in. (Exception)
+			2a1 - The system reports: "You are not logged in. Please enter your login name and password".
+			2a2 - The system displays logining form to fill.
+			2a3 - The actor fill the login form and confirm it.
+			2a4 - Moving to the step number 3.
+		7a - There is a diary with the same name. (Exception)
 			7a1 - The system reports: there is a diary with the same name.
 			7a2 - Moving to the step number 5.
 		
 * User story 2: Looking for general information about kind of sports.
    	Actor: Unregistered user, registered user.
    	Goal: Familiarization with one or another category of sport.
-   	Prerequisites: The actor is at any stage of use of the system (any page of system).
+   	Pre condition: The actor is at any stage of use of the system (any page of system).
 	
 	Use cases:   
 	1) The actor click on the button "Kind of sports".
@@ -40,7 +45,7 @@
 * User story 3: Registration in the system.
 	Actor: Unregistered user.
 	Goal: Access to the full functionality and content of the system.
-	Prerequisites: The system is launched, the user is at any stage of use of the system (any system page).
+	Pre condition: The system is launched, the user is at any stage of use of the system (any system page).
 	
 	Use cases:
 	1) The actor click on the button "Create account".
@@ -51,9 +56,9 @@
    	6) The system creates a registered user.
    
 	Alternative cases:
-		5a - There are mistakes	filling in the form:
+		5a - There are mistakes	filling in the form. (Exception)
 			5a1 - The system reports about an mistakes form filling.
 			5a2 - Moving to the step number 3.
-		5b - This user name (e-mail) has already been registered:
+		5b - This user name (e-mail) has already been registered. (Exception)
 			5b1 - The system informs the user of the same name (e-mail) is already registered.
 			5b2 - Moving to the step number 3.
