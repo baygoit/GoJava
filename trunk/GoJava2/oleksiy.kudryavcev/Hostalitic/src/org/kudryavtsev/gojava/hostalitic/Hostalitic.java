@@ -1,11 +1,13 @@
 package org.kudryavtsev.gojava.hostalitic;
 
+import java.util.Scanner;
+
 import org.kudryavtsev.gojava.hostalitic.menu.Menu;
 import org.kudryavtsev.gojava.hostalitic.reports.Report;
 
 public class Hostalitic {
 
-    private static Menu menu;
+//    private static Menu menu;
 
     public static void main(String[] args) {
 	Hostalitic hostalitic = new Hostalitic();
@@ -18,22 +20,21 @@ public class Hostalitic {
 
 	Service service1 = new Service("IP address");
 	hostalitic.addService(activity1, service1);
-	
+
 	Report report1 = new Report(user1);
 	report1.show("User info");
-	
-	hostalitic.showMenu(menu);
+
+	Menu mainMenu = new Menu();
+	mainMenu.showMenu();
 
     }
 
-    private void showMenu(Menu menu) {
-	// TODO Auto-generated method stub
-	
-    }
+
 
     private void addService(Activity activity, Service service) {
-	System.out.println("Service " + service.getName() + 
-		" for activity " + activity.getName() + " added.");
+	//TODO implement add service
+	System.out.println("Service " + service.getName() + " for activity "
+		+ activity.getName() + " added.");
 
     }
 
