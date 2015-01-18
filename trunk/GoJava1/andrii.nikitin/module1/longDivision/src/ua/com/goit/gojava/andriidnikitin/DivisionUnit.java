@@ -1,17 +1,19 @@
 package ua.com.goit.gojava.andriidnikitin;
 
+import java.awt.List;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Stack;
 import java.util.Vector;
-
+//TODO: TRY 2/37
 public class DivisionUnit {
 	public static final double MAX_FRACTAL_DEPTH = 35;			
 	static StringBuilder indentation = new StringBuilder();
-	static Vector<String> log = new Vector<String>();
+	static ArrayList<String> log = new ArrayList<String>();
 	static StringBuilder dividerShift = new StringBuilder();
 	static int steps = 0;
-	public static Vector<Integer> dividends = new Vector<Integer>();
+	public static ArrayList<Integer> dividends = new ArrayList<Integer>();
 	public static void main(String[] args) throws IOException{
 		int dividend;
 		int divider;	
@@ -77,6 +79,11 @@ public class DivisionUnit {
 			result+= ".0";
 			log.add(indentation + "0");
 		}
+		return finalBlock(inputDividend, inputDivider, result);
+	}	
+	
+	private static String finalBlock(int inputDividend, //TODO: rename
+			int inputDivider, String result){
 		log.set(0, " " + inputDividend);
 		int maxLengthBetween0and1LogRows = 
 				Math.abs(log.get(0).length() - log.get(1).length());
@@ -85,14 +92,14 @@ public class DivisionUnit {
 			finalIndentantion.append(' ');
 		if (log.get(0).length() > log.get(1).length()){
 			log.set(0, log.get(0) + "|_" + inputDivider);
-			log.set(1, log.elementAt(1) + finalIndentantion + '|' + result);
+			log.set(1, log.get(1) + finalIndentantion + '|' + result);
 		}
 		else{
 			log.set(0, log.get(0) + finalIndentantion + "|_" + inputDivider);
-			log.set(1, log.elementAt(1) + '|' + result);
+			log.set(1, log.get(1) + '|' + result);
 		}	
 		return result;
-	}	
+	}
 	
 	static int divisionNaturalPart(int dividend, int divider){
 		int shiftLength = 0;
@@ -125,7 +132,7 @@ public class DivisionUnit {
 		int periodisedElement = -1;
 		int tempSubtrahend = 0;
 		boolean pushZeroToResult = false;
-		Vector<Integer> dividendVector = new Vector<Integer>();
+		ArrayList<Integer> dividendVector = new ArrayList<Integer>();
 		for (int i = 0; i < MAX_FRACTAL_DEPTH; i++){	
 			if (dividend!= 0)
 				while (dividend < divider){ 	
@@ -190,5 +197,7 @@ public class DivisionUnit {
 		return Integer.parseInt(input);
 	}
 	
-	
+	private static  String getIndentation(){
+		return " ";
+	}
 }
