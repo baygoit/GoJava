@@ -5,7 +5,7 @@ import java.util.Scanner;
 import java.util.Stack;
 import java.util.Vector;
 
-public class Main {
+public class DivisionUnit {
 	public static final double MAX_FRACTAL_DEPTH = 35;			
 	static StringBuilder indentation = new StringBuilder();
 	static Vector<String> log = new Vector<String>();
