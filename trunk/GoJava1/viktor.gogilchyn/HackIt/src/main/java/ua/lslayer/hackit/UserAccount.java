@@ -1,28 +1,26 @@
 package ua.lslayer.hackit;
 
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+
+
+@XmlRootElement (name = "user_account")
 public class UserAccount {
 	private String login;
 	private String password;
+	@XmlTransient
 	private boolean loggedIn;
 	private Hero hero;
-
-	public static UserAccount registerUserAccount(String login, String password) {
-		// TODO make an account creation mechanism
-		// Some mess with database to make an account
-		return null;
+	
+	public UserAccount() {
+		
 	}
 	
-	public static UserAccount getAccount (String login, String password) {
-		//TODO Here I should find a way to load an account from database
-		return null;
-	}
-
 	public UserAccount(String login, String password) {
 		this.login = login;
 		this.password = password;
 		this.hero = null;
 		this.loggedIn = false;
-
 	}
 
 	public void changePassword() {
@@ -60,5 +58,32 @@ public class UserAccount {
 	private void loadProgress() {
 		// Here I will load account data from database
 	}
+
+	public String getLogin() {
+		return login;
+	}
+
+	public void setLogin(String login) {
+		this.login = login;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	@XmlTransient
+	public boolean isLoggedIn() {
+		return loggedIn;
+	}
+
+	public void setLoggedIn(boolean loggedIn) {
+		this.loggedIn = loggedIn;
+	}
+	
+	
 
 }

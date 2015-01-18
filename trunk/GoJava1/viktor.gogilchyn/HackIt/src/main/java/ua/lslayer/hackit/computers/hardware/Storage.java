@@ -1,7 +1,8 @@
 package ua.lslayer.hackit.computers.hardware;
 
-public class Storage {
+public class Storage implements Hardware {
 	private int id = 0;
+	private String manufacturer = "ACME Corp.";
 	private String name = "";
 	private int size = 0;
 
@@ -14,13 +15,22 @@ public class Storage {
 
 	@Override
 	public String toString() {
-		//TODO Same as ram, make diff for Mb, Gb, Tb
+		//TODO Make diff for Mb, Gb, Tb
 		return name + ", " + size + " MB";
 	}
 
 	public int getStorageSize() {
-		// TODO Auto-generated method stub
 		return this.size;
+	}
+
+	@Override
+	public String getManufacturer() {
+		return this.manufacturer;
+	}
+
+	@Override
+	public String getName() {
+		return this.name;
 	}
 
 }

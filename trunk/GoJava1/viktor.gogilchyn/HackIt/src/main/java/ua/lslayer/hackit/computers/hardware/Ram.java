@@ -1,7 +1,8 @@
 package ua.lslayer.hackit.computers.hardware;
 
-public class Ram {
+public class Ram implements Hardware {
 	private int id;
+	private String manufacturer = "ACME Corp.";
 	private String name = "";
 	private int size = 0;
 
@@ -16,6 +17,16 @@ public class Ram {
 	public String toString() {
 		//TODO make MB, GB, TB differentiation in output
 		return name + ", " + size + " Mb";
+	}
+
+	@Override
+	public String getManufacturer() {
+		return this.manufacturer;
+	}
+
+	@Override
+	public String getName() {
+		return this.name;
 	}
 	
 

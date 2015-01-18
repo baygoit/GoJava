@@ -1,7 +1,8 @@
 package ua.lslayer.hackit.computers.hardware;
 
-public class Cpu {
+public class Cpu implements Hardware {
 	private int id;
+	private String manufacturer = "ACME Corp.";
 	private String name = "";
 	private int power = 0;
 
@@ -20,6 +21,16 @@ public class Cpu {
 	public String toString() {
 		//TODO Make diff for MHz, GHz
 		return name + ", " +power+" MHz";
+	}
+
+	@Override
+	public String getManufacturer() {
+		return this.manufacturer;
+	}
+
+	@Override
+	public String getName() {
+		return this.name;
 	}
 	
 	
