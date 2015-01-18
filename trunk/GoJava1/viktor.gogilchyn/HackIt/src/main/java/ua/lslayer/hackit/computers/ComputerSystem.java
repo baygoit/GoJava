@@ -56,7 +56,7 @@ public class ComputerSystem {
     }
     
     public void installSoftware(Software soft) {
-        if (this.operative && soft.getSize() < this. storageSizeAvailable) {
+        if (this.operative && soft.getSize() < this.storageSizeAvailable) {
             this.installedSoftware.add(soft);
             this.storageSizeAvailable -= soft.getSize();
         } else {
