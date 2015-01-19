@@ -1,9 +1,11 @@
 use cases:
 
-1. пользователь открывает список категорий
-2. пользователь открывает список товаров
-3. пользователь открывает описание товара
-4. пользователь добавляет товар в корзину
-5. админ добавляет новый товар/ категорию
-6. пользователь регистрируется на сайте
-7. пользователь добавляет комментарий к товару
+1. user opens the list of goods categories
+2. user opens list of goods in specified category
+
+
+3. user opens the good's description
+4. user adds good to the basket
+5. admin adds new good/ category
+6. user create an account on the store
+7. user comments a good
