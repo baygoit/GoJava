@@ -5,46 +5,50 @@ import java.io.Serializable;
 class BusinessTransaction implements Serializable {
 	
 	private static final long serialVersionUID = 2628805920953022724L;
-
+	private static final int NUMBER_OF_FIELDS = 3;
 	private static final int COLUMN_LENGTH = 20;
 	
-	private String projectName;
+	private String project;
 	private String costItem;
 	private long sum;
 	
 	public BusinessTransaction(String projectName, String costItem, long sum) {
 
-		this.projectName = projectName;
+		this.project = projectName;
 		this.costItem = costItem;
 		this.sum = sum;
 	}
 	
-	public static void showTitle() {
+	public static String getTitle() {
 		
 		String formatString = "%-" + (COLUMN_LENGTH) + "s"; 
-		System.out.format(formatString,"Project name");
-		System.out.format(formatString,"Cost item name");
-		System.out.format(formatString,"Sum");
+		String resultString = "";
 		
-		System.out.println("");
-		for (int i = 0; i < COLUMN_LENGTH *3; i++) {
-			System.out.print("-");
+		resultString = resultString.concat(String.format(formatString, "Project name"));
+		resultString = resultString.concat(String.format(formatString, "Cost item name"));
+		resultString = resultString.concat(String.format(formatString, "Sum"));
+
+		resultString = resultString.concat("\r\n");
+		for (int i = 0; i < COLUMN_LENGTH * NUMBER_OF_FIELDS; i++) {
+			resultString = resultString.concat("-");
 		}
-		System.out.println("");
+		
+		return resultString;
 		
 	}
 	
-	public void show() {
+	public String toString() {
 		
 		String formatString = "%-" + (COLUMN_LENGTH) + "s"; 
-		System.out.format(formatString,"" + projectName);
-		System.out.format(formatString,"" + costItem);
+		String resultString = "";
+		
+		resultString = resultString.concat(String.format(formatString, "" + project));
+		resultString = resultString.concat(String.format(formatString, "" + costItem));
 		
 		formatString = "%" + (COLUMN_LENGTH) + "s"; 
-		System.out.format(formatString,"" + sum);
+		resultString = resultString.concat(String.format(formatString, "" + sum));
 		
-		System.out.println("");
-		
+		return resultString;
 	}
 	
 }

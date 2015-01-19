@@ -1,43 +1,39 @@
 package ua.com.goit.gojava.myshko;
 
-import java.util.Scanner;
-
 class Menu {
 	
-	private void processCommand(String command) {
+	UserScreen userScreen;
+	
+	public Menu(UserScreen userScreen) {
+		
+		this.userScreen = userScreen;
+
+	}
+
+	private void processCommand(String command, DataObject obj) {
 	
 		if (command.contentEquals("-show")) {
 			
-			ProjectPNL manager = new ProjectPNL();
-			manager.show();
+			userScreen.showDataObject(obj);
 			
 		} else if (command.contentEquals("-update")) {
 	
-			ProjectPNL manager = new ProjectPNL();
-			manager.update();
+			obj.update(userScreen);
 		
 		} else if (!command.isEmpty()) {
 		
-			System.out.println("Unknown command");
+			userScreen.showString("Unknown command");
 			
 		}
 		
 	}
 	
-	public void show() {
+	public void show(DataObject obj) {
 
-		System.out.println("Welcome to 'Project Office Management System'!");
-		System.out.println("Type '-show' for view data, '-update' for update data or press Enter for exit:");
+		userScreen.showString("Welcome to 'Project Office Management System'!");
+		userScreen.showString("Type '-show' for view data, '-update' for update data or press Enter for exit:");
 		
-		Scanner sc = new Scanner(System.in);
-		String command = ""; 
-		
-		if(sc.hasNextLine()) {
-			command = sc.nextLine();
-			processCommand(command);
-		}
-		
-		sc.close();
+		processCommand(userScreen.getString(), obj);
 		
 	}
 	

@@ -4,8 +4,17 @@ public class Main {
 
 	public static void main(String[] args) {
 
-		Menu m = new Menu();
-		m.show();
+		DataManager dataManager = new DataManager();
+		UserScreen userScreen = new UserScreen();
+		
+		TransactionsStore transactionsData = dataManager.readTransactionsStore();
+				
+		Menu m = new Menu(userScreen);
+		m.show(transactionsData);
+		
+		dataManager.saveTransactionsStore(transactionsData);
+		userScreen.close();	
+
 	}
 
 }
