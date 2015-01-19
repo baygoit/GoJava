@@ -1,11 +1,12 @@
 package ua.com.goit.gojava.poznyak;
 
 /**
- * This class implements the dish
+ * This class implements the ingredient
+ * 
  * @version 0.02 19 Jan 2015
  * @author Sergey Poznyak
  */
-public class Dish {
+public class Ingredient {
 	
 	private static int nextId = 1;
 	
@@ -13,27 +14,26 @@ public class Dish {
 	
 	private String name;
 	
-	public Dish(String dishName) {
+	private double weight;
+	
+	public Ingredient(String ingrName, double ingrWeight) {
 		id = nextId;
 		nextId++;
-		name = dishName;
-	}
-	
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
+		name = ingrName;
+		weight = ingrWeight;
 	}
 	
 	public String getName() {
 		return name;
 	}
-
+	
+	public double getWeight() {
+		return weight;
+	}
+	
 	@Override
 	public String toString() {
-		return id + ". " + name;
+		return name + " x " + weight + "kg";
 	}
 	
 }
