@@ -19,12 +19,24 @@ public class Chat {
         Contacts contact = new Contacts();
         contact.addNewContact();
 
-        Search search = new Search();
-        search.searchUser();
+        ChoiceFriedSend choice = new ChoiceFriedSend();
+        User receiver = choice.searchInContact();
         
         Message message = new Message();
         message.addNewMessage();
         
+        Delivery.delivery(receiver, message);
+        
+        String messageToMe = Message.getMyMessage();
+        
+        System.out.println(messageToMe);
+        
+        Encryption.encryption(message);
+        
+        Encryption.encryption(message);
+        
+        //TODO DELETE MESSAGE
         
     }
+	
 }
