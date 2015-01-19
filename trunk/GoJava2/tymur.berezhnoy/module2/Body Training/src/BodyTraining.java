@@ -6,5 +6,8 @@ public class BodyTraining {
 		user.createAccount("Supe Duper User", "123456789");
 		System.out.println("Login name is: " + user.getNickName());
 		System.out.println("Password is: " + user.getPassword());
+		LoggedUser loggedUser = new LoggedUser();
+		loggedUser.createDiary(1, "First training diary");
+		loggedUser.showUserDiary();
 	}
 }
