@@ -30,15 +30,15 @@ public class UserAccountDAO {
         JAXBContext context = JAXBContext.newInstance(UserAccount.class);
         Marshaller m = context.createMarshaller();
         m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
-        m.marshal(newAccount, new File(PATH_TO_SAVE_FILES+newAccount.getLogin()+"@"+newAccount.getPassword()+".xml"));
+        m.marshal(newAccount, new File(PATH_TO_SAVE_FILES+newAccount.getLogin()+"__"+newAccount.getPassword()+".xml"));
     }
     
     public static UserAccount get(String login, String password) throws FileNotFoundException, JAXBException {
-    	File f = new File(PATH_TO_SAVE_FILES+login+"@"+password+".xml");
+    	File f = new File(PATH_TO_SAVE_FILES+login+"__"+password+".xml");
     	if (!f.exists()) return null;  
     	JAXBContext context = JAXBContext.newInstance(UserAccount.class);
     	Unmarshaller um = context.createUnmarshaller();
-        UserAccount returnValue = (UserAccount) um.unmarshal(new FileReader(PATH_TO_SAVE_FILES+login+"@"+password+".xml"));
+        UserAccount returnValue = (UserAccount) um.unmarshal(new FileReader(PATH_TO_SAVE_FILES+login+"__"+password+".xml"));
         returnValue.setLogin(login);
         returnValue.setPassword(password);
         return returnValue;

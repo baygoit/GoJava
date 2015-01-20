@@ -75,6 +75,11 @@ public class UserAccount {
 		this.password = password;
 	}
 
+	@Override
+	public String toString() {
+		return "Your new login is " + login + ", password is " + password;
+	}
+
 	@XmlTransient
 	public boolean isLoggedIn() {
 		return loggedIn;

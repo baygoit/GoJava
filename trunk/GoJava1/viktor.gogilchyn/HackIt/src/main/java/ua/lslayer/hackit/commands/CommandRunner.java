@@ -22,7 +22,7 @@ public class CommandRunner {
 	}
 	public String runCommand(String commandName, String args) {
 		for (Command command : this.registeredCommands) {
-			if (command.getClass().getSimpleName().equals(commandName + "Command")) return command.runCommand(args);
+			if (command.getClass().getSimpleName().toLowerCase().equals(commandName + "command")) return command.runCommand(args);
 		}
 		return "Unregistered command, try \"help\" to get all available commands!";
 	}
