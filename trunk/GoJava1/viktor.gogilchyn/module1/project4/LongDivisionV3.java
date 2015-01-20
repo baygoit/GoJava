@@ -89,7 +89,7 @@ public class LongDivisionV3 {
         int nextDivider = 0;
         int innerResult = 0;
             innerDivider *= 10;
-            innerRest = restOf(innerDivider, divisor);
+            innerRest = innerDivider % divisor;
             nextDivider = changeFirstNumbers(innerDivider, innerRest,
                     intLength(innerDivider) - innerLevel + 1);
             innerResult = (innerDivider / divisor);
@@ -106,23 +106,19 @@ public class LongDivisionV3 {
 
 
     private int findBottomIndent(int top, int bottom, boolean leftEdge) {
-        int indent = 0;
         if (intLength(bottom) + 1 >= intLength(top)) {
-            indent = intLength(top) - intLength(bottom);
-        }
+            return intLength(top) - intLength(bottom);
+        } 
         if (leftEdge && intLength(bottom) + 1 >= intLength(top)) {
-            indent = intLength(top) - intLength(bottom) - 1;
+            return intLength(top) - intLength(bottom) - 1;
         }
-        return indent;
-
+        return -1;
     }
 
     private int findTopIndent(int top, int bottom, boolean leftEdge) {
-        int indent = 0;
         if (intLength(bottom) == intLength(top) && leftEdge) {
-            indent = 1;
-        }
-        return indent;
+            return 1;
+        } else return 0;
     }
 
     private String formatResult(DivisionContainer result) {
@@ -139,10 +135,6 @@ public class LongDivisionV3 {
         if (result.periodPosition != -1 && result.periodPosition != result.rests.size() - 1)
             returnValue += ")";
         return returnValue;
-    }
-
-    private int restOf(int divider, int divisor) {
-        return divider % divisor;
     }
 
     private int intLength(int i) {
@@ -195,8 +187,8 @@ public class LongDivisionV3 {
         int indent = 0;
         int i = 0;
         while (divisionResult.results.get(i) == 0)
-            i++; // We don't need to visualize heading zeroes in result
-        
+            i++; // We don't need to visualize leading zeroes in result
+                                                                                //Here comes magic!
         int top = divisionResult.tops.get(i); 
         int bottom = divisionResult.results.get(i) * divisor;
         int topSpaces = findTopIndent(intLength(top) > intLength(divider) ? top
