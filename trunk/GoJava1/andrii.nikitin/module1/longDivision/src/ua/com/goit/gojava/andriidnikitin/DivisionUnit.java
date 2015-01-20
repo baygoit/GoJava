@@ -10,6 +10,8 @@ import java.util.Stack;
 public class DivisionUnit {
 	
 	public static final double MAX_FRACTAL_DEPTH = 35;	
+	
+	public static int FRACTAL_IS_NOT_SYSTEMATIC = -1;
 				
 	static List<String> log = new ArrayList<String>();
 				
@@ -142,19 +144,17 @@ public class DivisionUnit {
 		}
 		return dividendDigits;
 	}
-		
+		//_____________________________________________________________________1
 	private static String divisionFractivePart(int dividend, int divider,
 			StringBuilder indentation){
 		
 		StringBuilder resultRow = new StringBuilder(); 
-		boolean fractalIsSystematic = false;
-		int periodisedElement = -1;
-		int tempSubtrahend = 0;
+		int periodisedElement = FRACTAL_IS_NOT_SYSTEMATIC;
 		boolean pushZeroToResult = false;
-		ArrayList<Integer> dividendVector = new ArrayList<Integer>();
+		List<Integer> dividendVector = new ArrayList<Integer>();
 		for (int i = 0; i < MAX_FRACTAL_DEPTH; i++){	
 			if (dividend!= 0)
-				while (dividend < divider){ 	
+				while (dividend < divider) { 	
 					if (pushZeroToResult){
 						i++;
 						resultRow.append('0');
@@ -165,20 +165,19 @@ public class DivisionUnit {
 			else break;
 			pushZeroToResult = false;
 			if (dividendVector.contains(dividend)){
-				fractalIsSystematic = true;	
 				periodisedElement = dividendVector.indexOf(dividend);
 				indentation.append(' ');
 				log.add(indentation.toString() + dividend);
 				break;
 			}			
-			dividendVector.add(dividend);
+			dividendVectorAdd(dividendVector, dividend);
 			resultRow.append(dividend / divider);
-			tempSubtrahend = dividend % divider;
+			int tempSubtrahend = dividend % divider;
 			visualiseStep(dividend, tempSubtrahend, 0, 0, indentation);
 			dividend = tempSubtrahend;
 		}
 		String result = resultRow.toString();
-		if (fractalIsSystematic) {
+		if (periodisedElement != FRACTAL_IS_NOT_SYSTEMATIC) {
 			if (periodisedElement == 0) result = "(" + result + ")";	
 			else 
 				result = result.substring(0, periodisedElement) 
@@ -187,39 +186,41 @@ public class DivisionUnit {
 		return "." + result;
 	}
 	
-	public static void visualiseStep(int dividend, int subtrahend, int shift, int divider,
-			StringBuilder indentation){	
+	//_____________________________________________________________________|
 		
-		StringBuilder dividerShift = new StringBuilder();
+	private static void dividendVectorAdd(List<Integer> dividendVector, int number){
+		while (number % 10 != 0)
+			number = number / 10;
+		dividendVector.add(number);
+	}
+	
+	private static void visualiseStep(int dividend, int subtrahend, 
+			int shift, int divider,	StringBuilder indentation){	
+		
 		shift+= differenceOfLengths(dividend - subtrahend, subtrahend);
 		subtrahend = dividend - subtrahend;
 		int dividerShiftLength = differenceOfLengths(dividend, subtrahend);
+		StringBuilder dividerShift = new StringBuilder();
 			for (int i = 0; i < dividerShiftLength; i++)
 				dividerShift.append(' ');
 		log.add(" " + indentation.toString() + dividend);
 		log.add(indentation.toString() + '-' + dividerShift + subtrahend);
 		for (int i = 0; i < shift; i++) indentation.append(' ');
 		indentation.append(dividerShift);
-		dividerShift = new StringBuilder();
 	}
-	
-	public static void visualise(){
+		
+	private static void visualise(){
 		
 		for (String x: log) System.out.println(x);
 	}
 	
-	public static int differenceOfLengths(int arg0, int arg1){
+	private static int differenceOfLengths(int arg0, int arg1){
 		
 		return Integer.valueOf(arg0).toString().length()
 				-Integer.valueOf(arg1).toString().length();
 	}
 	
-	public static int lengthOfNumber(int number){
-		
-		return Integer.valueOf(number).toString().length();
-	}
-	
-	public static int getIntNumber(Scanner inputSource) 
+	private static int getIntNumber(Scanner inputSource) 
 			throws NumberFormatException{
 		
 		String input = inputSource.nextLine();
