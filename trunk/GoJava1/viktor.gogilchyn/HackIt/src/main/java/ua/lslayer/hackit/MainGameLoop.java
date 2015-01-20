@@ -13,7 +13,7 @@ public class MainGameLoop
 //        __Assistant assistant = new __Assistant();
 //        UserAccount myUnneedenAccount = assistant.makeMeAnAccountFilledWithAllINeed();
 //        UserAccount myAccount = UserAccountDAO.create("accname", "password");
-        UserAccount myAccount = UserAccountDAO.read("accname", "password");
+        UserAccount myAccount = UserAccountDAO.get("accname", "password");
 //        myAccount.setHero(myUnneedenAccount.getHero());
 //        UserAccountDAO.save(myAccount);
 //        String login = null;

@@ -19,7 +19,7 @@ public class UserAccountDAO {
     	 * 2. Create file.
     	 * 3. Fill file with default data;
     	 */
-    	if (UserAccountDAO.read(login, password) == null) {
+    	if (UserAccountDAO.get(login, password) == null) {
     		UserAccount newAccount = new UserAccount(login, password);
     		save(newAccount);
     		return newAccount; 
@@ -33,7 +33,7 @@ public class UserAccountDAO {
         m.marshal(newAccount, new File(PATH_TO_SAVE_FILES+newAccount.getLogin()+"@"+newAccount.getPassword()+".xml"));
     }
     
-    public static UserAccount read(String login, String password) throws FileNotFoundException, JAXBException {
+    public static UserAccount get(String login, String password) throws FileNotFoundException, JAXBException {
     	File f = new File(PATH_TO_SAVE_FILES+login+"@"+password+".xml");
     	if (!f.exists()) return null;  
     	JAXBContext context = JAXBContext.newInstance(UserAccount.class);

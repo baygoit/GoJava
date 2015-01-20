@@ -1,6 +1,6 @@
 package ua.lslayer.hackit.computers;
 
-import ua.lslayer.hackit.Action;
+import ua.lslayer.hackit.commands.Action;
 import ua.lslayer.hackit.computers.hardware.Hardware;
 
 public interface Computable {

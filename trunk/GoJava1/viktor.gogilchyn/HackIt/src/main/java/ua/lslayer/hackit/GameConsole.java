@@ -6,6 +6,8 @@ import java.io.InputStreamReader;
 import java.util.List;
 import java.util.LinkedList;
 
+import ua.lslayer.hackit.commands.Action;
+
 public class GameConsole {
 	private List<String> commands = new LinkedList<String>();
 	private Action currentAction = new Action();
