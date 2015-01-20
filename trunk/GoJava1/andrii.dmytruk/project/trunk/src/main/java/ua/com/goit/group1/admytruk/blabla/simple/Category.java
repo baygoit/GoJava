@@ -1,26 +1,27 @@
-package ua.com.goit.group1.admytruk.blabla;
+package ua.com.goit.group1.admytruk.blabla.simple;
 
-public class Product {
+public class Category {
 
-	private int id;
+	private Integer id;
 	
 	private String name;
 	
-	public Product() {
+	public Category() {
 	}
 	
-	protected Product(int idValue, String nameValue) {
+	protected Category(Integer idValue, String nameValue) {
 		this.id = idValue;
 		this.name = nameValue;
 	}
 	
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
+
 
 	public String getName() {
 		return name;
@@ -37,5 +38,5 @@ public class Product {
 			.append(", name = ").append(getName())
 			.toString();
 	}
-	
+
 }
