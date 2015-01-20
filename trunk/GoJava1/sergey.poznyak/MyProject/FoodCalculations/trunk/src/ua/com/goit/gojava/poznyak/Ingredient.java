@@ -8,17 +8,11 @@ package ua.com.goit.gojava.poznyak;
  */
 public class Ingredient {
 	
-	private static int nextId = 1;
-	
-	private int id;
-	
 	private String name;
 	
 	private double weight;
 	
 	public Ingredient(String ingrName, double ingrWeight) {
-		id = nextId;
-		nextId++;
 		name = ingrName;
 		weight = ingrWeight;
 	}

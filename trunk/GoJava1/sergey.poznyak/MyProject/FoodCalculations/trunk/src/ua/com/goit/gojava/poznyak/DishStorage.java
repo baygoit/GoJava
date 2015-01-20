@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * This class stores the dishes and theirs ingredients
@@ -13,13 +14,15 @@ import java.util.Map;
  */
 public class DishStorage {
 	
+	private static AtomicInteger dishesCounter = new AtomicInteger(0);
+	
 	public static List<Dish> createDishes() {
 		List<Dish> result = new ArrayList<Dish>();
-		result.add(new Dish("Borshch"));
-		result.add(new Dish("Buckwheat porridge"));
-		result.add(new Dish("Rice porridge"));
-		result.add(new Dish("Buckwheat soup"));
-		result.add(new Dish("Pasta with meat"));
+		result.add(new Dish(dishesCounter.incrementAndGet(), "Borshch"));
+		result.add(new Dish(dishesCounter.incrementAndGet(), "Buckwheat porridge"));
+		result.add(new Dish(dishesCounter.incrementAndGet(), "Rice porridge"));
+		result.add(new Dish(dishesCounter.incrementAndGet(), "Buckwheat soup"));
+		result.add(new Dish(dishesCounter.incrementAndGet(), "Pasta with meat"));
 		return result;
 	}
 	

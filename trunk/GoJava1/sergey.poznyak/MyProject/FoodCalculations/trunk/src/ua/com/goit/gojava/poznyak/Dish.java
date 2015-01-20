@@ -7,15 +7,12 @@ package ua.com.goit.gojava.poznyak;
  */
 public class Dish {
 	
-	private static int nextId = 1;
-	
 	private int id;
 	
 	private String name;
 	
-	public Dish(String dishName) {
-		id = nextId;
-		nextId++;
+	public Dish(int dishId, String dishName) {
+		id = dishId;
 		name = dishName;
 	}
 	
