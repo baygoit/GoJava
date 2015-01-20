@@ -16,10 +16,9 @@ import java.util.Scanner;
 public class FoodCalculations {
 
 	/**
-	 * Prints the list of dishes into the console.
-	 * Then prints the list of required ingredients
-	 * for the chosen dish
-	 * (list is present for dish #2)
+	 * Calls the displaying methods
+	 * and provides with possibility to input
+	 * the number of chosen dish
 	 * @param args
 	 */
 	public static void main(String[] args) {
@@ -34,6 +33,10 @@ public class FoodCalculations {
 		displayIngredients(service.getIngredients(index));
 	}
 	
+	/**
+	 * Prints the list of dishes into the console.
+	 * @param dishes is the list of Dish instances
+	 */
 	public static void displayDishes(List<Dish> dishes) {
 		if (dishes == null || dishes.isEmpty()) {
 			System.out.println("There are no dishes.");
@@ -43,6 +46,11 @@ public class FoodCalculations {
 		}
 	}
 	
+	/**
+	 * Prints the list of required ingredients
+	 * for the chosen dish
+	 * @param ingredients is the list of Ingredient instances
+	 */
 	public static void displayIngredients(List<Ingredient> ingredients) {
 		if (ingredients == null || ingredients.isEmpty()) {
 			System.out.println("There are no ingredients for chosen dish.");
