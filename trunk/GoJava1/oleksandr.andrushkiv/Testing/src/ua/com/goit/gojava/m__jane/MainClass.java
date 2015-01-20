@@ -1,14 +1,19 @@
 package ua.com.goit.gojava.m__jane;
 
+import java.util.List;
 import java.util.Scanner;
 
+import ua.com.goit.gojava.m__jane.model.Profile;
 import ua.com.goit.gojava.m__jane.model.Question;
+import ua.com.goit.gojava.m__jane.service.ProfileService;
 import ua.com.goit.gojava.m__jane.service.QuestionService;
+import ua.com.goit.gojava.m__jane.service.impl.ProfileServiceImpl;
 import ua.com.goit.gojava.m__jane.service.impl.QuestionServiceImpl;
 
 public class MainClass {
 
 	private static QuestionService questionService = new QuestionServiceImpl();
+	private static ProfileService profileService = new ProfileServiceImpl();
 	
 	public static void main(String[] args) {
 
@@ -17,9 +22,9 @@ public class MainClass {
 		int choice = Integer.parseInt(scanIn.nextLine());
 
 		if (choice == 1) {
-			printAllQuestions();
+			printAllProfiles();
 		} else if (choice == 2) {
-			askAndPrintOneQuestions(scanIn);
+			askAndPrintQuestionsOfOneProfile(scanIn);
 		} else {
 			System.out.println("Wrong choice");
 		}
@@ -27,20 +32,23 @@ public class MainClass {
 	}
 
 
-	private static void printAllQuestions() {
-		for (Question question : questionService.getAllQuestions()) {
-			System.out.println(question);
+	private static void printAllProfiles() {
+		for (Profile profile : profileService.getProfileList()) {
+			System.out.println(profile);
 		}				
 	}
 
-	private static void askAndPrintOneQuestions(Scanner scanIn) {
+	private static void askAndPrintQuestionsOfOneProfile(Scanner scanIn) {
 				
-		System.out.println("Enter number the question from 1 to " + questionService.getCount());
-		Question question= questionService.getQuestionByNumber(scanIn.nextLine().trim());
-		if (question == null) {
-			System.out.println("Not found such question");
+		System.out.println("Enter number the question from 1 to " + profileService.getCount());
+		Profile profile = profileService.getProfileById(Integer.parseInt(scanIn.nextLine().trim()));
+		if (profile == null) {
+			System.out.println("Not found such profile");
 		} else {
-			System.out.println(question);
+			List<Question> list = questionService.getQuestionListByProfile(profile);
+			for (Question question : list) {
+				System.out.println(question);
+			}
 		}
 		
 	}

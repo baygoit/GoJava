@@ -4,6 +4,7 @@ import java.util.List;
 
 import ua.com.goit.gojava.m__jane.dao.QuestionDao;
 import ua.com.goit.gojava.m__jane.dao.impl.QuestionDaoImpl;
+import ua.com.goit.gojava.m__jane.model.Profile;
 import ua.com.goit.gojava.m__jane.model.Question;
 import ua.com.goit.gojava.m__jane.service.QuestionService;
 
@@ -16,27 +17,32 @@ public class QuestionServiceImpl implements QuestionService{
 	}
 
 	@Override
-	public List<Question> getAllQuestions() {		
-		return questionDao.getAllQuestions();
+	public List<Question> getQuestionList() {		
+		return questionDao.getQuestionList();
 	}
 
 	@Override
 	public int getCount() {		
-		return questionDao.getAllQuestions().size();
+		return questionDao.getQuestionList().size();
 	}
 
 	@Override
-	public Question getQuestionByNumber(String number) {
+	public Question getQuestionById(int id) {
 		Question foundQuestion = null;
 		//TODO replaced by map
-		List<Question> listQuestions = questionDao.getAllQuestions();
+		List<Question> listQuestions = questionDao.getQuestionList();
 		for (Question question : listQuestions) {
-			if(question.getNumber().equals(number)) {
+			if(question.getId() == id) {
 				foundQuestion = question;
 				break;
 			}
 		}
 		return foundQuestion;
+	}
+
+	@Override
+	public List<Question> getQuestionListByProfile(Profile profile) {		
+		return questionDao.getQuestionList(profile.getId());
 	}
 
 }
