@@ -25,39 +25,32 @@ public class FoodCalculations {
 	public static void main(String[] args) {
 		ListService service = new ListServiceImplementation();
 		System.out.println("Menu:");
-		/*for (Dish value : service.getDishes()) {
-			System.out.println(value);
-		}*/
-		System.out.println(displayDishes(service.getDishes()));
-		System.out.println("Choose a dish (enter number from 1 to 5):");
+		displayDishes(service.getDishes());
+		System.out.println("Choose a dish (enter its number):");
 		Scanner input = new Scanner(System.in);
 		int index = input.nextInt();
 		input.close();
 		System.out.println("Ingredients (for 1 person):");
-		/*for (Ingredient value : service.getIngredients(index)) {
-			System.out.println(value);
-		}*/
-		System.out.println(displayIngredients(service.getIngredients(index)));
+		displayIngredients(service.getIngredients(index));
 	}
 	
-	public static String displayDishes(List<Dish> dishes) {
+	public static void displayDishes(List<Dish> dishes) {
 		if (dishes == null || dishes.isEmpty()) {
-			return "There are no dishes.";
+			System.out.println("There are no dishes.");
 		}
 		for (Dish value : dishes) {
-			return value.toString();
+			System.out.println(value);
 		}
-		return null;
 	}
 	
-	public static String displayIngredients(List<Ingredient> ingredients) {
+	public static void displayIngredients(List<Ingredient> ingredients) {
 		if (ingredients == null || ingredients.isEmpty()) {
-			return "There are no ingredients.";
+			System.out.println("There are no ingredients for chosen dish.");
+		} else {
+			for (Ingredient value : ingredients) {
+				System.out.println(value);
+			}
 		}
-		for (Ingredient value : ingredients) {
-			return value.toString();
-		}
-		return null;
 	}
 	
 }
