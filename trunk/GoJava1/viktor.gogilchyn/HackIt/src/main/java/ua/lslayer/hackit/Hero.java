@@ -8,25 +8,26 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 @XmlRootElement(name = "hero")
-@XmlType(propOrder = { "name", "skill" })
+@XmlType(propOrder = { "name", "skills" })
 public class Hero {
 	@XmlElementWrapper (name = "skills")
-    private List<Skill> skill;
+    private List<Skill> skills;
 	private String name;
     
 
 	public Hero() {
+	    this.skills = new ArrayList<Skill>();
 	}
 
 	public Hero(String name) {
         this.name = name;
-        this.skill = new ArrayList<Skill>();
+        this.skills = new ArrayList<Skill>();
     }
     
     public String listSkills() {
         String eol = System.getProperty("line.separator");  
         String returnValue = new String();
-        for (Skill element : this.skill) {
+        for (Skill element : this.skills) {
             returnValue += element;
             returnValue += eol;
         }
@@ -34,11 +35,11 @@ public class Hero {
     }
     
     public void addSkill(Skill skill) {
-        this.skill.add(skill);
+        this.skills.add(skill);
     }
     
     public void removeSkill(Skill skill) {
-        this.skill.remove(skill);
+        this.skills.remove(skill);
     }
 
     public String getName() {
@@ -46,11 +47,11 @@ public class Hero {
     }
 
 	public List<Skill> getSkills() {
-		return skill;
+		return skills;
 	}
 
 	public void setSkills(ArrayList<Skill> skills) {
-		this.skill = skills;
+		this.skills = skills;
 	}
 
 	public void setName(String name) {

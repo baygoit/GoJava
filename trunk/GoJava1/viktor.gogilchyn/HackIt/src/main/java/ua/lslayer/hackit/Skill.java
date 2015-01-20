@@ -5,7 +5,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement (name = "skill")
 public final class Skill {
-    private static final String OUTPUT_TEMPLATE = "%1$s --- %2$s";
+    private static final String OUTPUT_TEMPLATE = "%1$s - %2$s";
     private String name;
     private int value;
     
