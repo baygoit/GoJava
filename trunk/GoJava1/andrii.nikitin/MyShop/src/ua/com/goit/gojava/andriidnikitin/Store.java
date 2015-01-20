@@ -4,15 +4,21 @@ import java.io.PrintStream;
 
 public class Store {
 
-	GoodsStorage storage;	
+	private GoodsStorage storage;	
 	
-	PrintStream outStream;
+	private PrintStream outStream;
 	
 	public Store (PrintStream outStreamArg ){
-		storage = new GoodsStorage (System.out);
+		storage = new GoodsStorage (outStreamArg);
 	}
 	
+	public void showCategories(){
+		storage.showCategories();
+	}
 	
+	public void showGoodsInCategory(int categoryID){
+		storage.showGoodsInCategory(categoryID);
+	}
 }
 
 

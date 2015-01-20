@@ -15,8 +15,8 @@ public class GoodsStorage {
 	public GoodsStorage (PrintStream outStreamArg ) {//TODO: set as private
 		super();
 		outStream = outStreamArg;
-		initGoods();
 		initCategories();
+		initGoods();
 	}	
 
 	public Goods getGood(int index) {
@@ -47,16 +47,18 @@ public class GoodsStorage {
 	
 	public void showCategories(){
 		for (int i = 0; i < categories.size(); i++) 
-			System.out.println(i + 1 + " - " + categories.get(i));
+			outStream.println(i + 1 + " - " + categories.get(i));
 	}
 	
 	public void showGoodsInCategory(int categoryID){
 		int numberInListOfGoodsInSpecifiedCategory = 0;
+		categoryID--;
 		for (Goods good : goods){
 			if (good.getCategory() == getCategory(categoryID))
-				System.out.println(numberInListOfGoodsInSpecifiedCategory++ + 
+				outStream.println(++numberInListOfGoodsInSpecifiedCategory +
 						" - " + good);
 		}
+		outStream.println();
 	}	
 	
 }
