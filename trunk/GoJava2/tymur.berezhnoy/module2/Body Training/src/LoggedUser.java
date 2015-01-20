@@ -1,6 +1,11 @@
 public class LoggedUser {
 	
-	Diary diary = new CreateDiary().createDiary(1, "First Diary");
+	private Diary diary;
+	
+	public void setDiary(Diary d) {
+		diary = d;
+	}
+		
 	public void showMyDiary() {
 		System.out.print(diary.getId() + " " + diary.getName());
 	}
