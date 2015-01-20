@@ -11,5 +11,8 @@ public class ItemDatabase {
 	Item newItem = new Item();
 	item.put(newItem.name,newItem);
 	}
-
+	public void remove(String name) {
+		item.remove(name);
+		
+	}
 }

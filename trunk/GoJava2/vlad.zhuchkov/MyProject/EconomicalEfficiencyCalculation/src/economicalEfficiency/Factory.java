@@ -29,7 +29,6 @@ public class Factory {
 		tempU.product.price = Integer.valueOf(sc.nextLine());
 	}
 	public void cangeWorkersPay() {
-		Collection<ProductionUnit> list = new ArrayList<>();
 		System.out.println("set new worker's pay");
 		for (ProductionUnit value : factoryUnitDatabase.unit.values()) {
 		    value.worker.pay=Integer.valueOf(sc.nextLine());

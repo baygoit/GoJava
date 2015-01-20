@@ -13,7 +13,7 @@ public class UnitDatabase {
 	}
 
 	public void remove(String name) {
-		// TODO Auto-generated method stub
+		unit.remove(name);
 		
 	}
 }

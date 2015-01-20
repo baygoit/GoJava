@@ -62,7 +62,8 @@ public class UI {
 				break;
 			}
 			case "4":{
-				//TODO 
+				Simulator sim = new Simulator();
+				sim.startimulation();
 				break;
 			}
 			}
