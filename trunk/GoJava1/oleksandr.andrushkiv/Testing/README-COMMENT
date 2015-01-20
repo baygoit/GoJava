@@ -1,0 +1,44 @@
+21.01.2015 00:20
+
+service and dao
+
+	1. В именованиях классов принято DAO писать большими буквами
+	
+	2. поведение DAO и сервисов у тебя полностостью дублируются, потому
+	
+	2.1 я бы удалил все DAO
+	2.2. отказался бы от InnerStorage и хранил бы все данные в реализациях сервисов.
+	2.3. поскольку мы потом прийдем к использованию JPA и рефакторинг сервисов будет
+		 очень простым. Множество разношерстных источников встречается редко, и я пока
+		 не создавал бы себе доп работ
+		 
+Именование методов.
+
+	Есть методы
+		public List<Question> getQuestionList();
+		public List<Question> getQuestionListByProfile(Profile profile);
+	
+	Оба возврщают один и тот же тип. Результат зависит от аргументов.
+	Потому правильно их именовать так:	
+		public List<Question> getQuestionList();
+		public List<Question> getQuestionList(Profile profile);	
+	Необходим рефакторинг всех подобных случаев.
+	
+	Аналогично public Question getQuestionById(int id); было бы лучше назвать
+		public Question getQuestion(int questionId);
+		
+		public int getCount(); - public int getQuestionCount();	
+		
+порядок методов
+	
+	 в java bean лучше getter and setter приводить вместе, а toString, equals and hashcode - в конце.
+	 
+
+UML:
+
+	1. http://www.ibm.com/developerworks/rational/library/content/RationalEdge/sep04/bell/
+	2. http://www.uml-diagrams.org/class-diagrams-overview.html	
+		 
+P.S.
+	после внесения правок - приведем в порядок остальной код.
+
