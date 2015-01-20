@@ -1,19 +1,18 @@
 package ua.com.goit.gojava.andriidnikitin;
 
-import java.awt.List;
+import java.util.List;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Stack;
-import java.util.Vector;
 //TODO: TRY 2/37
+//SOLUTION: ADD TO DIVIDEND LIST BEFORE ADDING ZEROS
 public class DivisionUnit {
-	public static final double MAX_FRACTAL_DEPTH = 35;			
-	static StringBuilder indentation = new StringBuilder();
-	static ArrayList<String> log = new ArrayList<String>();
-	static StringBuilder dividerShift = new StringBuilder();
-	static int steps = 0;
-	public static ArrayList<Integer> dividends = new ArrayList<Integer>();
+	
+	public static final double MAX_FRACTAL_DEPTH = 35;	
+				
+	static List<String> log = new ArrayList<String>();
+				
 	public static void main(String[] args) throws IOException{
 		int dividend;
 		int divider;	
@@ -31,6 +30,7 @@ public class DivisionUnit {
 			System.out.println("Wrong input!");
 		}
 	}
+	
 	public static String longDivision(int inputDividend, int inputDivider){
 		if (inputDividend == 0){
 			return divisionZeroDividendCase(inputDividend, inputDivider);
@@ -63,32 +63,34 @@ public class DivisionUnit {
 	}
 	
 	private static String divisionRegularCase(int inputDividend, 
-			int inputDivider){indentation = new StringBuilder();
+			int inputDivider){
+		StringBuilder indentation = new StringBuilder();
 		String result = "0";
 		int dividendFractive = inputDividend % inputDivider;
 		if (inputDividend - dividendFractive != 0) 
 			result = Integer.valueOf(divisionNaturalPart(inputDividend, 
-					inputDivider)).toString(); 
+					inputDivider, indentation)).toString(); 
 		else {
-			visualiseStep(0, 0, 0, inputDivider);
+			visualiseStep(0, 0, 0, inputDivider, indentation);
 		}
 		if (dividendFractive != 0)
 			result+= divisionFractivePart(dividendFractive, 
-					inputDivider);
+					inputDivider, indentation);
 		else {
 			result+= ".0";
 			log.add(indentation + "0");
 		}
-		return finalBlock(inputDividend, inputDivider, result);
+		completeLog(inputDividend, inputDivider, result);
+		return result;
 	}	
 	
-	private static String finalBlock(int inputDividend, //TODO: rename
+	private static void completeLog(int inputDividend,
 			int inputDivider, String result){
 		log.set(0, " " + inputDividend);
-		int maxLengthBetween0and1LogRows = 
+		int maxLengthOf0and1LogRows = 
 				Math.abs(log.get(0).length() - log.get(1).length());
 		StringBuilder finalIndentantion = new StringBuilder();
-		for (int i = 0; i < maxLengthBetween0and1LogRows; i++) 
+		for (int i = 0; i < maxLengthOf0and1LogRows; i++) 
 			finalIndentantion.append(' ');
 		if (log.get(0).length() > log.get(1).length()){
 			log.set(0, log.get(0) + "|_" + inputDivider);
@@ -98,10 +100,10 @@ public class DivisionUnit {
 			log.set(0, log.get(0) + finalIndentantion + "|_" + inputDivider);
 			log.set(1, log.get(1) + '|' + result);
 		}	
-		return result;
 	}
 	
-	static int divisionNaturalPart(int dividend, int divider){
+	static int divisionNaturalPart(int dividend, int divider,
+			StringBuilder indentation){
 		int shiftLength = 0;
 		int tempSubtrahend = 0;
 		Stack<Integer> dividendDigits = new Stack<Integer>();
@@ -121,12 +123,14 @@ public class DivisionUnit {
 			if ((dividendDigits.empty()) && (dividend < divider)) break;
 			resultNatural = resultNatural * 10 + dividend / divider;
 			tempSubtrahend = dividend % divider;
-			visualiseStep(dividend, tempSubtrahend, shiftLength, divider);
+			visualiseStep(dividend, tempSubtrahend, shiftLength, divider, indentation);
 			dividend = tempSubtrahend; 
 		}
 		return resultNatural;
 	}
-	public static String divisionFractivePart(int dividend, int divider){
+	
+	public static String divisionFractivePart(int dividend, int divider,
+			StringBuilder indentation){
 		StringBuilder resultRow = new StringBuilder(); 
 		boolean fractalIsSystematic = false;
 		int periodisedElement = -1;
@@ -155,7 +159,7 @@ public class DivisionUnit {
 			dividendVector.add(dividend);
 			resultRow.append(dividend / divider);
 			tempSubtrahend = dividend % divider;
-			visualiseStep(dividend, tempSubtrahend, 0, 0);
+			visualiseStep(dividend, tempSubtrahend, 0, 0, indentation);
 			dividend = tempSubtrahend;
 		}
 		String result = resultRow.toString();
@@ -167,7 +171,10 @@ public class DivisionUnit {
 		}
 		return "." + result;
 	}
-	public static void visualiseStep(int dividend, int subtrahend, int shift, int divider){	
+	
+	public static void visualiseStep(int dividend, int subtrahend, int shift, int divider,
+			StringBuilder indentation){	
+		StringBuilder dividerShift = new StringBuilder();
 		shift+= differenceOfLengths(dividend - subtrahend, subtrahend);
 		subtrahend = dividend - subtrahend;
 		int dividerShiftLength = differenceOfLengths(dividend, subtrahend);
@@ -179,9 +186,11 @@ public class DivisionUnit {
 		indentation.append(dividerShift);
 		dividerShift = new StringBuilder();
 	}
+	
 	public static void visualise(){
 		for (String x: log) System.out.println(x);
 	}
+	
 	public static int differenceOfLengths(int arg0, int arg1){
 		return Integer.valueOf(arg0).toString().length()
 				-Integer.valueOf(arg1).toString().length();
@@ -197,7 +206,4 @@ public class DivisionUnit {
 		return Integer.parseInt(input);
 	}
 	
-	private static  String getIndentation(){
-		return " ";
-	}
 }
