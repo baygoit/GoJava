@@ -89,7 +89,7 @@ public class LongDivisionV3 {
         int nextDivider = 0;
         int innerResult = 0;
             innerDivider *= 10;
-            innerRest = giveRest(innerDivider, divisor);
+            innerRest = restOf(innerDivider, divisor);
             nextDivider = changeFirstNumbers(innerDivider, innerRest,
                     intLength(innerDivider) - innerLevel + 1);
             innerResult = (innerDivider / divisor);
@@ -141,7 +141,7 @@ public class LongDivisionV3 {
         return returnValue;
     }
 
-    private int giveRest(int divider, int divisor) {
+    private int restOf(int divider, int divisor) {
         return divider % divisor;
     }
 
