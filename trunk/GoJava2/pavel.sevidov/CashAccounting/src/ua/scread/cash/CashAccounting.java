@@ -12,13 +12,13 @@ public class CashAccounting {
 	public static void timeCicle() {
 		Transaction transaction = new Transaction(new Check("Salary", 2, 5.00), true);
 		
-		transaction.send();
+		//transaction.send();
 		
 		System.out.println("Balance: " + Transactions.getInstance().getBalance());
 		
 		transaction = new Transaction(new Check("Apple", 1, 2), false);
 		
-		transaction.send();
+		//transaction.send();
 		
 		System.out.println("Balance: " + Transactions.getInstance().getBalance());
 		
