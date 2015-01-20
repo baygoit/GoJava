@@ -14,12 +14,10 @@ public class LongDivision {
      * @param args
      */
     private static final int MAX_DIGIT_IN_FRACTION = 10;
-    
-    static int[] fNumArray = new int[MAX_DIGIT_IN_FRACTION];
-    
+
     public static void main(String[] args) {
         // division A / B
-        
+
         String inputString = inputString();
         int[] numArray = stringToArray(inputString);
 
@@ -27,14 +25,13 @@ public class LongDivision {
         int divisor = numArray[1];
 
         int[] digitArray = numberToArray(dividend);
-        
-        String result = divisionResult(digitArray, dividend, divisor); 
-        
+
+        String result = divisionResult(digitArray, dividend, divisor);
+
         // display result
         System.out.print("\n" + dividend + " / " + divisor);
         System.out.print("\nResult: " + result);
-        
-        viewResult(dividend, divisor, fNumArray, result);
+
     }
 
     public static String inputString() {
@@ -79,22 +76,30 @@ public class LongDivision {
         // find first part of dividend, if first part dividend is whole dividend
         // exit loop
         int j = 0;
-        int m = 0;
         while (fNumber < b && fNumber != a) {
             fNumber = fNumber * 10 + aArray[j + 1];
             j++;
         }
 
         // find reminders in each step
+        int tempNum = 0;
+        boolean isFirst = false;
         while (j < aArray.length) {
             result += fNumber / b;
+            if (fNumber / b > 0) {
+                tempNum = (fNumber / b) * b;
+                if (isFirst) {
+                    System.out.print("\n" + tab(fNumber, j) + " " + fNumber);
+                }
+                System.out.print("\n" + tab(tempNum, j) + "-" + tempNum);
+                System.out.print("\n" + tab(tempNum, j) + " " + "---");
+            }
             reminder = fNumber % b;
             fNumber = (j == (aArray.length - 1)) 
-                      ? reminder * 10 
-                      : reminder * 10 + aArray[j + 1];
-            fNumArray[m] = fNumber;
+                       ? reminder * 10 
+                       : reminder * 10 + aArray[j + 1];
             j++;
-            m++;
+            isFirst = true;
         }
 
         if (reminder != 0) {
@@ -114,15 +119,20 @@ public class LongDivision {
                     break;
                 }
             }
+            if (fNumber / b > 0) {
+                tempNum = (fNumber / b) * b;
+                System.out.print("\n" + tab(fNumber, j) + " " + fNumber);
+                System.out.print("\n" + tab(tempNum, j) + "-" + tempNum);
+                System.out.print("\n" + tab(tempNum, j) + " " + "---");
+            }
             reminderArray[i] = reminder;
             reminder = fNumber % b;
             if (isPeriod == false) {
                 result += fNumber / b;
                 fNumber = reminder * 10;
-                fNumArray[m] = fNumber;
                 fraction++;
                 i++;
-                m++;
+                j++;
             }
         }
         if (isPeriod && reminder != 0) {
@@ -141,30 +151,21 @@ public class LongDivision {
         return bSubStr + eSubStr;
     }
     
-    public static void viewResult(int a, int b, int[] fNumArr, String res) {
-        String tab1 = "";
-        String dash = "";
-        for (int k = 1; k < (Integer.toString(a).length() - Integer.toString(b)
-                .length()); k++) {
-            tab1 += " ";
+    public static String tab(Object o, int width) {
+        String tabStr = "";
+        int length = o.toString().length();
+        tabStr =  repeatString(" ", width - length);
+        return tabStr;
+    }
+    
+    public static String repeatString(String s, int j) {
+        String resStr = "";
+        if (s == null) {
+            return "";
         }
-        for (int k = 0; k < Integer.toString(b).length(); k++) {
-            dash += "-";
+        for (int i = 1; i <= j; i++) {
+            resStr += s;
         }
-
-        char[] resArray = res.toCharArray();
-        int tmp = Character.getNumericValue(resArray[0]);
-        System.out.print("\n" + " " + a + "|" + b);
-        System.out.print("\n" + "-" + tmp * b + tab1 + "|" + res);
-        System.out.print("\n" + " " + dash);
-
-        for (int k = 1, n = 0; k < resArray.length; k++, n++) {
-            if (Character.isDigit(resArray[k])) {
-                System.out.print("\n" + " " + fNumArr[n]);
-                System.out.print("\n" + "-"
-                        + Character.getNumericValue(resArray[k]) * b);
-                System.out.print("\n" + " " + dash);
-            }
-        }
+        return resStr;
     }
 }
