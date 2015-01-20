@@ -1,0 +1,80 @@
+20.01.2015 23:30
+
+Dish class:
+
+	Это java bean, потому более правильно описание делать:
+		The Dish bean.
+		<empty line>
+		This bean describes blabla
+		
+Dish.nextId field:
+
+	В java bean не нужно  использовать такой подход к генерации идентификаторов.
+	
+	Так как мы грузим бины откуда-то, и пускай это что-то присваивает идентификаторы,
+	в текущей реализации это DishStorage. Потому я бы удалил данный подход генерации комментариев из бинов.
+	
+	Соответственно изменится конструктор: protected Dish(int dishId, String dishName)
+	protected - поскольку еще не определн список аргументов, и этот конструктор используется только для удобного создания бина в нашем хранилише, и больше ни где
+	
+	Для почитать и изучить: http://docs.oracle.com/javase/7/docs/api/java/util/concurrent/atomic/AtomicInteger.html	
+	
+DishStorage class:
+
+	Мой пример был неудачным, чем я подтолкнул к применению плохой практики
+	В нашей задаче этот функционал (хранение данных) лучше поместить в твой сервис, а этот клас удалить.
+	Приношу свои извинения.
+	
+	К тому же я бы отказался от использования статического сиквенса для инициализации идентификаторов, лучше на текущем этапе захардкодить:
+		dishList.add(new Dish(1, "Borshch"));
+		dishList.add(new Dish(2, "Buckwheat porridge"));
+	Почему - будет более ясно при создании unit тестов.
+	
+FoodCalculations.class:
+
+	Классы всегда называются в единственном числе.
+	
+FoodCalculations.main method:
+
+	Запуск приложения: 
+	
+		Menu:
+		1. Borshch
+		2. Buckwheat porridge
+		3. Rice porridge
+		4. Buckwheat soup
+		5. Pasta with meat
+		Choose a dish (enter number from 1 to 5):
+		1
+		Ingredients (for 1 person):
+		Exception in thread "main" java.lang.NullPointerException
+			at ua.com.goit.gojava.poznyak.FoodCalculations.main(FoodCalculations.java:36)
+			
+Ingredient.class:
+
+	см. пожелания к Dish class
+	
+Ingredient.id field:
+
+	Нужна ли где-то не используемая переменная?
+	
+ListService class:
+
+	Методы возвращают список, потому их имена лучше заканчивать на List: getDishList, getIngradientList.
+	Описание интерфейса потом придумаем, в зависимости от контекста.
+	
+ListServiceImplementation class:
+
+	Перенеси функционал из DishStorage. И, думаю, списки в которых будешь хранить информацию - не нужно делать static.
+	Пускай для каждого инстанса класса будет свой набор данных, пока не стыкнемся с обратным.
+	
+ListServiceImplementation.getIngredients(int dishId) method
+	
+	Может вернуть null. Если мы возвращаем список, но данных нету - лучше возвращать пустой список.
+			
+	
+Диаграмма классов:
+
+	1. Я ее перенес в trunk
+	2. http://www.ibm.com/developerworks/rational/library/content/RationalEdge/sep04/bell/
+	3. http://www.uml-diagrams.org/class-diagrams-overview.html	
