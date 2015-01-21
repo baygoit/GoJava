@@ -1,8 +1,8 @@
 package ua.com.goit.gojava.andriidnikitin;
 
-public class CustomerBasket {
+public class Main {
 	
-	public static void main(String[] args){
+	public static void main(String[] args){		
 		Store myStore = new Store(System.out);
 		System.out.println("Categories:");
 		myStore.showCategories();

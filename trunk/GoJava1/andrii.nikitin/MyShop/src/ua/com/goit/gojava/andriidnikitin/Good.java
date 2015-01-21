@@ -1,8 +1,8 @@
 package ua.com.goit.gojava.andriidnikitin;
 
-public class Goods {
+public class Good {
 	
-	private String category;
+	private Category category;
 	
 	private String name;
 	
@@ -10,7 +10,7 @@ public class Goods {
 		
 	static private int maxID = 1;
 	
-	public Goods(String category, String name) {
+	public Good(Category category, String name) {
 		super();
 		this.category = category;
 		this.name = name;
@@ -22,22 +22,28 @@ public class Goods {
 		return getName();
 	}
 	
-	public String getCategory() {
+	public Category getCategory() {
 		return category;
 	}
-	public void setCategory(String category) {
+	
+	public void setCategory(Category category) {
 		this.category = category;
 	}
+	
 	public String getName() {
 		return name;
 	}
+	
 	public void setName(String name) {
 		this.name = name;
 	}
+	
 	public int getId() {
 		return id;
 	}
+	
 	public void setId(int id) {
 		this.id = id;
 	}
+	
 }
