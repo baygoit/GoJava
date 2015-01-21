@@ -1,21 +1,25 @@
 package accountant;
 
-import java.util.Scanner;
-
 public class Record {
-	String name;
-	int price;
+	private String name;
+	private int price;
+	
+	public String getName() {
+		return name;
+	}
+
+	public int getPrice() {
+		return price;
+	}
 	
 	public void setName(){
 		System.out.println("enter name");
-		Scanner scan = new Scanner(System.in);
-		name = scan.nextLine(); 
+		name = Input.name(); 
 	}
 
 	public void setPrice() {
 		System.out.println("введите сумму");
-		Scanner scan = new Scanner(System.in);
-		price = scan.nextInt();
+		price = Input.price();
 		
 		
 		
