@@ -1,8 +1,0 @@
-﻿There is the task to develop the accounting system for the organization, which based its activities on projects.
-
-1. The application should give possibility to entering (and saving) an information about financial operations: 
-	sums of cost (or income) item for a certain project.
-2. The application should be able to show all previously entered transactions data.
-3. The application should be able to show an information about projects (the list of project).
-4. The application should be able to calculate the profit of project (the difference between costs and incomes).
-5. ...
