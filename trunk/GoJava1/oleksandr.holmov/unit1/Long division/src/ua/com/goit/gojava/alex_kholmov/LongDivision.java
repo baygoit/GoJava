@@ -26,12 +26,8 @@ public class LongDivision {
 
         int[] digitArray = numberToArray(dividend);
 
-        String result = divisionResult(digitArray, dividend, divisor);
-
         // display result
-        System.out.print("\n" + dividend + " / " + divisor);
-        System.out.print("\nResult: " + result);
-
+        divisionResult(digitArray, dividend, divisor);
     }
 
     public static String inputString() {
@@ -66,9 +62,14 @@ public class LongDivision {
         return digitArray;
     }
 
-    public static String divisionResult(int[] aArray, int a, int b) {
+    public static void divisionResult(int[] aArray, int a, int b) {
         boolean isPeriod = false;
         String result = "";
+        String tempResult = "";
+        String str1 = "";
+        String str2 = "";
+        String str3 = "";
+        String strfNum = "";
         int fNumber = aArray[0];
         int reminder = 0;
         int[] reminderArray = new int[MAX_DIGIT_IN_FRACTION];
@@ -80,7 +81,7 @@ public class LongDivision {
             fNumber = fNumber * 10 + aArray[j + 1];
             j++;
         }
-
+        strfNum = Integer.toString(fNumber);
         // find reminders in each step
         int tempNum = 0;
         boolean isFirst = false;
@@ -89,10 +90,11 @@ public class LongDivision {
             if (fNumber / b > 0) {
                 tempNum = (fNumber / b) * b;
                 if (isFirst) {
-                    System.out.print("\n" + tab(fNumber, j) + " " + fNumber);
+                    str1 = "\n" + tab(fNumber, j) + " " + fNumber; 
                 }
-                System.out.print("\n" + tab(tempNum, j) + "-" + tempNum);
-                System.out.print("\n" + tab(tempNum, j) + " " + "---");
+                str2 = "\n" + tab(tempNum, j) + "-" + tempNum; 
+                str3 = "\n" + tab(tempNum, j) + " " + "---";
+                tempResult += str1 + str2 + str3;
             }
             reminder = fNumber % b;
             fNumber = (j == (aArray.length - 1)) 
@@ -121,9 +123,10 @@ public class LongDivision {
             }
             if (fNumber / b > 0) {
                 tempNum = (fNumber / b) * b;
-                System.out.print("\n" + tab(fNumber, j) + " " + fNumber);
-                System.out.print("\n" + tab(tempNum, j) + "-" + tempNum);
-                System.out.print("\n" + tab(tempNum, j) + " " + "---");
+                str1 = "\n" + tab(fNumber, j) + " " + fNumber; 
+                str2 = "\n" + tab(tempNum, j) + "-" + tempNum; 
+                str3 = "\n" + tab(tempNum, j) + " " + "---";
+                tempResult += str1 + str2 + str3;
             }
             reminderArray[i] = reminder;
             reminder = fNumber % b;
@@ -135,10 +138,15 @@ public class LongDivision {
                 j++;
             }
         }
+        String firstTab = repeatString(" ", Integer.toString(a).length() - strfNum.length());
         if (isPeriod && reminder != 0) {
-            return formatPeriodResult(periodIndex, result);
+            System.out.print("\n" + a + "|" + b);
+            System.out.print("\n" + strfNum + firstTab + "|" + formatPeriodResult(periodIndex, result));
+            System.out.print(tempResult);
         } else {
-            return result;
+            System.out.print("\n" + a + "|" + b);
+            System.out.print("\n" + strfNum + firstTab + "|" + result);
+            System.out.print(tempResult);
         }
     }
 
