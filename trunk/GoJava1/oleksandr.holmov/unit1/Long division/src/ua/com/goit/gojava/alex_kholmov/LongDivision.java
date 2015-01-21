@@ -62,7 +62,7 @@ public class LongDivision {
         return digitArray;
     }
 
-    public static void divisionResult(int[] aArray, int a, int b) {
+    public static void divisionResult(int[] digitArray, int a, int b) {
         boolean isPeriod = false;
         String divisionResult = "";
         String graficsResult = "";
@@ -70,7 +70,7 @@ public class LongDivision {
         String formatTempNumb = "";
         String formatDelimiter = "";
         String firstDividend = "";
-        int temporaryDividend = aArray[0];
+        int temporaryDividend = digitArray[0];
         int reminder = 0;
         int[] reminderArray = new int[MAX_DIGIT_IN_FRACTION];
 
@@ -78,14 +78,14 @@ public class LongDivision {
         // exit loop
         int j = 0;
         while (temporaryDividend < b && temporaryDividend != a) {
-            temporaryDividend = temporaryDividend * 10 + aArray[j + 1];
+            temporaryDividend = temporaryDividend * 10 + digitArray[j + 1];
             j++;
         }
         firstDividend = Integer.toString(temporaryDividend);
         // find reminders in each step
         int tempNum = 0;
         boolean isFirst = false;
-        while (j < aArray.length) {
+        while (j < digitArray.length) {
             divisionResult += temporaryDividend / b;
             if (temporaryDividend / b > 0) {
                 tempNum = (temporaryDividend / b) * b;
@@ -97,9 +97,9 @@ public class LongDivision {
                 graficsResult += formatTempDividend + formatTempNumb + formatDelimiter;
             }
             reminder = temporaryDividend % b;
-            temporaryDividend = (j == (aArray.length - 1)) 
+            temporaryDividend = (j == (digitArray.length - 1)) 
                        ? reminder * 10 
-                       : reminder * 10 + aArray[j + 1];
+                       : reminder * 10 + digitArray[j + 1];
             j++;
             isFirst = true;
         }
