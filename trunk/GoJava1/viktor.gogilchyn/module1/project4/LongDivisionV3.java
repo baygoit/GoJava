@@ -29,7 +29,7 @@ public class LongDivisionV3 {
        
     }
 
-    private static final int DEPTH = 100;
+    private static final int MAX_DEPTH = 100;
     private int divider;
     private int divisor;
 
