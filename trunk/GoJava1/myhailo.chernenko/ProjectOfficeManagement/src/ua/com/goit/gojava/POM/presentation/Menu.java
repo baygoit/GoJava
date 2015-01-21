@@ -20,7 +20,7 @@ class Menu {
 			
 		} else if (command.contentEquals("-update")) {
 	
-			obj.update(userScreen);
+			userScreen.updateDataObject(obj);
 		
 		} else if (!command.isEmpty()) {
 		

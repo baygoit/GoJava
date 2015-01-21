@@ -3,17 +3,31 @@ package ua.com.goit.gojava.POM.dataModel;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-import ua.com.goit.gojava.POM.presentation.UserScreen;
+//import java.util.logging.Level;
+//import java.util.logging.Logger;
 
 public class TransactionsStore implements DataObject, Serializable {
+
+	private static final int NUMER_OF_REQUIRED_PARAM = 3;
 
 	private static final long serialVersionUID = 2466728848243498110L;
 	
 	private List<BusinessTransaction> transactionList = new ArrayList<BusinessTransaction>();
-	
+
+	private String checkData(String[] fieldsArray) {
+		
+		String checkResult = "";
+		
+		if (fieldsArray.length != NUMER_OF_REQUIRED_PARAM) {
+			
+			checkResult = "Wrong number of variables";
+			
+		}
+		
+		return checkResult;
+		
+	}
+
 	public String toString() {
 		
 		String resultString = "";
@@ -31,42 +45,39 @@ public class TransactionsStore implements DataObject, Serializable {
 		
 	}
 	
-	public void update(UserScreen userScreen) {
+	public String getFieldsForUpdatePresentation() {
 		
-		userScreen.showString("Input Project, Cost item and Sum, separated by '; ' and press Enter or press Enter for exit");
-		
-		String enteredString = userScreen.getString();
-		while (!enteredString.isEmpty()) {
+		return "Project, Cost item and Sum";
+
+	}
+
+	public String update(String[] fieldsArray) {
+
+		String checkResult = checkData(fieldsArray);
+		if (checkResult.isEmpty()) {
 			
-			String[] enteredStringArray = enteredString.split("; ");
+			long sum = 0;
+			boolean isDataCorrect = false; 
 			
-			if (enteredStringArray.length != 3) {
+			try {
+				sum =  Integer.parseInt(fieldsArray[2]);
+				isDataCorrect = true;
 				
-				userScreen.showString("You can input 3 value, separated by '; ': Project, Cost item and Sum !");
+			} catch (NumberFormatException e) {		
 				
-			} else {
-				
-				long sum = 0;
-				boolean isDataCorrect = false; 
-				
-				try {
-					sum =  Integer.parseInt(enteredStringArray[2]);
-					isDataCorrect = true;
-					
-				} catch (NumberFormatException e) {		
-					
-					Logger.getLogger("TransactionsStore.class").log(Level.SEVERE , "Cannot convert entered sum to int!");
-				
-				}
-				
-				if(isDataCorrect) {
-					transactionList.add( new BusinessTransaction(enteredStringArray[0], enteredStringArray[1], sum));
-				}
+				//Logger.getLogger("TransactionsStore.class").log(Level.SEVERE , "Cannot convert entered sum to int!");
+				checkResult = "Cannot convert entered sum to int!";
 				
 			}
 			
-			enteredString = userScreen.getString();
+			if(isDataCorrect) {
+				
+                transactionList.add( new BusinessTransaction(fieldsArray[0], fieldsArray[1], sum));
+			}
+
 		}
+		
+		return checkResult;
 		
 	}
 

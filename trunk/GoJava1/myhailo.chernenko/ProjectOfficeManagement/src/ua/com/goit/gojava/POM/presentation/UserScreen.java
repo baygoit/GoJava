@@ -26,6 +26,28 @@ public class UserScreen implements java.io.Closeable {
 		
 	}
 
+	public void updateDataObject(DataObject obj) {
+	
+		showString("Input values of "+obj.getFieldsForUpdatePresentation()+", separated by '; ' and press Enter or press Enter for exit");
+		
+		String enteredString = getString();
+		while (!enteredString.isEmpty()) {
+			
+			String[] enteredStringArray = enteredString.split("; ");
+			
+			String updateResult = obj.update(enteredStringArray);
+			
+			if (!updateResult.isEmpty()) {
+				
+				showString("Failed to update by reason: "+updateResult);
+				
+			}
+			
+			enteredString = getString();
+		}
+		
+	}
+	
 	public String getString() {
 		
 		String info = "";

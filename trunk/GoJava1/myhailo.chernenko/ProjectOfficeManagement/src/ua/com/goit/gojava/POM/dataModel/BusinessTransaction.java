@@ -4,18 +4,18 @@ import java.io.Serializable;
 
 class BusinessTransaction implements Serializable {
 	
-	private static final long serialVersionUID = 2628805920953022724L;
+	private static final long serialVersionUID = -2555250596540838902L;
 	private static final int NUMBER_OF_FIELDS = 3;
 	private static final int COLUMN_LENGTH = 20;
 	
-	private String project;
-	private String costItem;
+	private Project project;
+	private CostItem costItem;
 	private long sum;
 	
 	public BusinessTransaction(String projectName, String costItem, long sum) {
 
-		this.project = projectName;
-		this.costItem = costItem;
+		this.project = new Project(projectName);
+		this.costItem = new CostItem(costItem);
 		this.sum = sum;
 	}
 	
@@ -42,8 +42,8 @@ class BusinessTransaction implements Serializable {
 		String formatString = "%-" + (COLUMN_LENGTH) + "s"; 
 		String resultString = "";
 		
-		resultString = resultString.concat(String.format(formatString, "" + project));
-		resultString = resultString.concat(String.format(formatString, "" + costItem));
+		resultString = resultString.concat(String.format(formatString, "" + project.toString()));
+		resultString = resultString.concat(String.format(formatString, "" + costItem.toString()));
 		
 		formatString = "%" + (COLUMN_LENGTH) + "s"; 
 		resultString = resultString.concat(String.format(formatString, "" + sum));
