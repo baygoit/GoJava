@@ -7,7 +7,9 @@ to construct the RC (radio control) model (car, helicopter, ship etc.).
 
 User story 1
 
-At the start of program you will see the list of the parts types for RCModel with number behind it and the prompt to enter the number.
+At the start of program you will see 
+the list of the parts types for RCModel 
+with number behind it and the prompt to enter the number.
 
 User story 2
 
