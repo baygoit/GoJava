@@ -1,39 +1,39 @@
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 
 public class Chat {
-	public static User user1 = new User();
-	public static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 	public static void main(String[] args) throws IOException {
 		
-		System.out.println("Are you registered, so click \"y\" or - press \"n\"");
-        String yesOrNo = reader.readLine();
-        if (yesOrNo.equals("n")){
-        	user1.registerUser(user1);
-        }
-        else{
-        	user1.checkUser();
-        }
+		User user = new User();
+		Authorization userAuthor = new Authorization();
+		user = userAuthor.authorization(user);
 		
         Contacts contact = new Contacts();
         contact.addNewContact();
 
         ChoiceFriedSend choice = new ChoiceFriedSend();
-        User receiver = choice.searchInContact();
+        User receiver = new User();
+        receiver = choice.addReceiver(receiver);
         
         Message message = new Message();
-        message.addNewMessage();
+        Encryption encryption = new Encryption();
         
-        Delivery.delivery(receiver, message);
+        for (int i = 0; i < 5; i++){
+        	message.addNewMessage();
+            encryption.encryption(message);
+            System.out.println(user + " -- > " + message.message);
+            encryption.encryption(message);
+            System.out.println(user + " -- > " + message.message);
+        	
+            message.addNewMessage();
+            encryption.encryption(message);
+            System.out.println(receiver + " -- > " + message.message);
+            encryption.encryption(message);
+            System.out.println(receiver + " -- > " + message.message);
+        }
         
-        String messageToMe = Message.getMyMessage();
+        Delivery delivery = new Delivery();
+        delivery.delivery(receiver, message);
         
-        System.out.println(messageToMe);
-        
-        Encryption.encryption(message);
-        
-        Encryption.encryption(message);
         
         //TODO DELETE MESSAGE
         

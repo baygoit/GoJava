@@ -4,25 +4,23 @@ import java.io.InputStreamReader;
 
 
 public class Message {
-	private static String message;
-	BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+	public String message;
 	
 	public void  addNewMessage() throws IOException{
+		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 		System.out.println("Enter the your message: ");
 		message = reader.readLine();
-		Story.addToStory(message);
+		Story story = new Story();
+		story.addToStory(message);
 	}
 
-	public static String getMessage() {
+	public String getMessage() {
 		return message;
 	}
 
 	public void setMessage() throws IOException {
+		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 		message = reader.readLine();
-	}
-	
-	public static String getMyMessage(){
-		return message;
 	}
 	
 }

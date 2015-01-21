@@ -4,9 +4,8 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 
-
 public class WriteToFile {
-	public static void writeToFile(File fileNname, String string) throws IOException {
+	public void writeToFile(File fileNname, String string) throws IOException {
 		BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(fileNname, true));
         try {
         	bufferedWriter.write(string);

@@ -1,6 +1,6 @@
 
 public class Delivery {
-	public static void delivery(User reciver, Message message){
+	public void delivery(User reciver, Message message){
 		//TODO
 	}
 

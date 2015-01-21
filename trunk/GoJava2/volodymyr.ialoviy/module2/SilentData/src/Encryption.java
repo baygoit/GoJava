@@ -1,20 +1,18 @@
-import java.util.Arrays;
-
 
 public class Encryption {
 
-	public static Message encryption(Message message) {
-		// TODO Auto-generated method stub
-		String strings = String.valueOf(message);
+	private String stringMessage;
+
+	public Message encryption(Message message) {
+		String strings = message.getMessage();
 		String[] string = strings.split(" ");
 		
+		stringMessage = "";
 		for (int i = 0; i < string.length; i++){
-			string[i] = new StringBuffer(string[i]).reverse().toString();
+			stringMessage += new StringBuffer(string[i]).reverse().toString() + " ";
 			}
-		
-		message = (Message) Arrays.asList(string);
-		
-		System.out.println(Arrays.asList(string));
+
+		message.message = stringMessage;
 		
 		return message;
 	}
