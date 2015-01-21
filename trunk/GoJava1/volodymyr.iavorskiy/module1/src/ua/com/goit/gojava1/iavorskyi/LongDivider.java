@@ -1,127 +1,131 @@
 package ua.com.goit.gojava1.iavorskyi;
 
-//import java.util.Scanner;
+import java.util.Scanner;
 
 public class LongDivider {
 
-    public static void main(String[] args) {
-    		
-    	
-    	
-    	
-    	
-    	
-    	
-    	
-/*
-        System.out.println("input x/y");
-        Scanner in = new Scanner(System.in);
-        String input = in.nextLine();
-        String[] numbers = input.split("/");
-        String result = " ";
-        String space = " ";
-        String line = "----";
-        int div1 = Integer.parseInt(numbers[0]);
-        final int div2 = Integer.parseInt(numbers[1]);
-        int ten = 10;
-        int module;
-        int tempResult = 0;
-        int part = 0;
-        int pow = numbers[0].length();
-        int i = 0;
-        int j = 0;
-        int afterPoint = 10;
+	private static final int TEN = 10;
 
-        System.out.println(div1 + " / " + div2);
+	public static void main(String[] args) {
+ 
+		Scanner in = new Scanner(System.in);
+		System.out.println("This programs divides A/B. Only int numbers permited.");
+		System.out.println("Enter A:");
+		int dividend = in.nextInt();
+		System.out.println("Enter B:");
+		int divisor = in.nextInt();
+		in.close();
+		int[] dividendAsArray = dividendToArray(dividend);
+		String result = calculateResult(dividend, divisor, dividendAsArray);
+		System.out.print("\n" + dividend + " / " + divisor + " = " + result);
+		
+	}
 
-        if (div2 == 0) {
-            System.out.println("You can not divide by 0.");
-        } else {
+	
+	public static String calculateResult(int dividend, int divisor, int[] dividendAsArray) {
+		int reminder = 0;
+		int part = dividendAsArray[0];
+		int[] reminderArray = new int[TEN];
+		boolean period = false;
+		boolean first = false;
+		String result = "";
 
-            if (div1 < div2) {
-                result += "0,";
-                div1 *= ten;
-                while (div1 < div2) {
-                    div1 *= ten;
-                    result += "0";
-                }
-            }
+		int j = 0;
+		while (part < divisor && part != dividend) {
+			part = part * 10 + dividendAsArray[j + 1];
+			j++;
+		}
 
-            // finding first number to divide
-            do {
-                // if (div1 < div2) {
-                // break;
-                // }
-                module = (int) Math.pow(ten, pow - i);
-                tempResult = (div1 / module) / div2;
-                if (tempResult >= 1) {
-                    System.out.println(tempResult * div2);
-                    result += tempResult;
-                    part = div1 / module - (tempResult * div2);
-                    break;
-                }
-                i++;
-            } while (tempResult < 1);
+		int f = 0;
+		while (j < dividendAsArray.length) {
+			result += part / divisor;
+			if (part / divisor > 0) {
+				f = (part / divisor) * divisor;
+				if (first) {
+					System.out.print("\n" + tab(part, j) + " " + part);
+				}
+				System.out.print("\n" + tab(f, j) + "-" + f);
+				System.out.print("\n" + tab(f, j) + " " + "---");
+			}
+			reminder = part % divisor;
+			part = (j == (dividendAsArray.length - 1)) ? reminder * 10 : reminder
+					* 10 + dividendAsArray[j + 1];
+			j++;
+			first = true;
+		}
 
-            System.out.println(line);
+		if (reminder != 0) {
+			result += ".";
+		}
 
-            // dividing rest
-            do {
-                if (numbers[0].length() <= i) {
-                    break;
-                } else {
-                    if (part == 0) {
-                        result += numbers[0].substring(i);
-                        break;
-                    }
-                    part = part * 10 + Integer.parseInt(String.valueOf(numbers[0].charAt(i)));
-                }
+		int i = 0;
+		int fraction = 0;
+		int periodIndex = 0;
+		while (reminder != 0 && fraction < TEN && !period) {
+			for (int k = 0; k < reminderArray.length; k++) {
+				if (reminder == reminderArray[k]) {
+					period = true;
+					periodIndex = k - 1;
+					break;
+				}
+			}
+			if (part / divisor > 0) {
+				f = (part / divisor) * divisor;
+				System.out.print("\n" + tab(part, j) + " " + part);
+				System.out.print("\n" + tab(f, j) + "-" + f);
+				System.out.print("\n" + tab(f, j) + " " + "---");
+			}
+			reminderArray[i] = reminder;
+			reminder = part % divisor;
+			if (period == false) {
+				result += part / divisor;
+				part = reminder * 10;
+				fraction++;
+				i++;
+				j++;
+			}
+		}
+		if (period && reminder != 0) {
+			return formatPeriodResult(periodIndex, result);
+		} else {
+			return result;
+		}
+	}
 
-                if (part / div2 >= 1) {
-                    System.out.println(space + part);
-                    tempResult = part / div2;
-                    part -= div2 * tempResult;
-                    result += tempResult;
-                    i++;
-                    System.out.println(space + (div2 * tempResult));
-                    System.out.println(space + line);
-                    space += " ";
-                }
+	public static int[] dividendToArray(int dividend) {
+		String stringDividend = Integer.toString(dividend);
+		int[] dividendAsArray = new int[stringDividend.length()];
+		for (int i = 0; i < dividendAsArray.length; i++) {
+			dividendAsArray[i] = Integer.parseInt(Character.toString(stringDividend.charAt(i)));
+		}
+		return dividendAsArray;
+	}
 
-                if (i >= numbers[0].length()) {
-                    break;
-                }
+	public static String repeatString(String str, int j) {
+		String result = "";
+		if (str == null) {
+			return "";
+		}
+		for (int i = 1; i <= j; i++) {
+			result += str;
+		}
+		return result;
+	}
+	
+	public static String tab(int i, int width) {
+		String tab = "";
+		int length = Integer.toString(i).length();
+		tab = repeatString(" ", width - length);
+		return tab;
+	}
 
-            } while (part / div2 < 1);
+	public static String formatPeriodResult(int index, String result) {
+		int dotIndex = result.indexOf(".");
+		String str1 = result.substring(0, index + dotIndex + 2);
+		String str2 = result.substring(index + dotIndex + 2, result.length());
+		str1 += "(";
+		str2 += ")";
+		return str1 + str2;
+	}
 
-            if (result.charAt(2) != ',') {
-                result += ",";
-            }
-
-            // dividing after floating point
-            do {
-                if (part / div2 < 1) {
-                    part *= 10;
-                }
-                System.out.println(space + part);
-                tempResult = part / div2;
-                part -= div2 * tempResult;
-                result += tempResult;
-                j++;
-                System.out.println(space + (div2 * tempResult));
-                System.out.println(space + line);
-                space += " ";
-                if (part == 0) {
-                    break;
-                }
-            } while (j < afterPoint);
-
-            result = result.trim();
-            System.out.println();
-            System.out.println(result);
-
-        }
-        in.close();
-        */
-    }
 }
