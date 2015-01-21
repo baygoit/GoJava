@@ -1,4 +1,4 @@
-package ua.com.goit.gojava.myshko;
+package ua.com.goit.gojava.POM.dataModel;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -6,7 +6,9 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-class TransactionsStore implements DataObject, Serializable {
+import ua.com.goit.gojava.POM.presentation.UserScreen;
+
+public class TransactionsStore implements DataObject, Serializable {
 
 	private static final long serialVersionUID = 2466728848243498110L;
 	

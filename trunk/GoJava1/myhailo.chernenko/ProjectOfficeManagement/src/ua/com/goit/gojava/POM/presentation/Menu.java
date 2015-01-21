@@ -1,4 +1,6 @@
-package ua.com.goit.gojava.myshko;
+package ua.com.goit.gojava.POM.presentation;
+
+import ua.com.goit.gojava.POM.dataModel.DataObject;
 
 class Menu {
 	

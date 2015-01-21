@@ -1,8 +1,10 @@
-package ua.com.goit.gojava.myshko;
+package ua.com.goit.gojava.POM.presentation;
 
 import java.util.Scanner;
 
-class UserScreen implements java.io.Closeable {
+import ua.com.goit.gojava.POM.dataModel.DataObject;
+
+public class UserScreen implements java.io.Closeable {
 	
 	private Scanner scanner = new Scanner(System.in);
 	

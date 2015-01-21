@@ -1,4 +1,4 @@
-package ua.com.goit.gojava.myshko;
+package ua.com.goit.gojava.POM.dataModel;
 
 import java.io.Serializable;
 

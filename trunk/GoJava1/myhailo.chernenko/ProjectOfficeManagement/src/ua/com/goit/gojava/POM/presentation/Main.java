@@ -1,4 +1,7 @@
-package ua.com.goit.gojava.myshko;
+package ua.com.goit.gojava.POM.presentation;
+
+import ua.com.goit.gojava.POM.dataModel.TransactionsStore;
+import ua.com.goit.gojava.POM.persistence.DataManager;
 
 public class Main {
 

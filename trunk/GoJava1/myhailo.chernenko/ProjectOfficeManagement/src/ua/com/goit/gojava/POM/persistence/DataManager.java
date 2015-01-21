@@ -1,4 +1,4 @@
-package ua.com.goit.gojava.myshko;
+package ua.com.goit.gojava.POM.persistence;
 
 import java.io.IOException;
 import java.io.FileInputStream;
@@ -8,7 +8,9 @@ import java.io.ObjectOutputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-class DataManager {
+import ua.com.goit.gojava.POM.dataModel.TransactionsStore;
+
+public class DataManager {
 
 	private static final String DATA_FILE = "C:\\workspace\\ProjectOfficeManagement.dat";
 	
