@@ -11,11 +11,18 @@ public class RecordList {
 		
 	}
 
-	private static Record createNewRecord() {
+	public static Record createNewRecord() {
 		Record rNew = new Record();
 		rNew.setName();
 		rNew.setPrice();
 		return rNew;
+	}
+	
+	public static void output(){
+		int sum=0;
+		for(int j = 0; j < list.size(); j++){
+		System.out.println(list.get(j).getName() + " - " + list.get(j).getPrice());
+		}
 	}
 
 }
