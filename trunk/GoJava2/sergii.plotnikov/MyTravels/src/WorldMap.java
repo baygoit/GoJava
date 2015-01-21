@@ -1,8 +1,7 @@
 
 public enum WorldMap {
 	Afghanistan, Albania, Algeria, Andorra, Angola, Antarctica, Argentina, Armenia, 
-	Australia, Austria, Azerbaijan, Bahamas, Bahrain, Bangladesh, 
-	Barbados, Belarus, Belgium;
+	Australia, Austria;
 	
 	public static String getCountry(int index){
 		return WorldMap.values()[index].toString();
