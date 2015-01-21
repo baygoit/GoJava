@@ -1,19 +1,21 @@
 package accountant;
 
-import java.util.Scanner;
-
 public class Menu {
 	public void ask(){
-		System.out.println("Выберите операцию:\n 1- расход \n 2- доход \n 3- и того ");
-		Scanner scan = new Scanner(System.in);
-		int a = scan.nextInt();
+		System.out.println("Выберите операцию:\n 1-внести расход \n 2- внести доход \n 3- увидеть бюджет ");
+		Input input = new Input();
+		int a = input.choise();
 		switch (a){
 			case (1):
 				RecordList.addList();
-			break;
+				break;
 			case (2):
-				
-			break;
+				Budget.getSum();
+				break;
+			
+			case (3):
+				RecordList.output();
+				break;	
 		}
 	}
 }
