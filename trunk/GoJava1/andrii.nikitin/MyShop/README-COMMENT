@@ -1,3 +1,68 @@
+21.01.2015 22:40:
+
+Category class
+
+	1. порядок полей - изменить
+		1. переменные
+		2. конструкторы
+		3. методы, сначала твои, в конце toString()
+		
+	2. Конструктор:
+		1. super() - будет вызван по умолчанию
+		2. если делаешь конструктор с аргументами - делай конструктор по умолчанию.
+		3. в java bean лучше не использовать кастомный конструктор. но в реализации
+		   он используется для простого кода создания набора данных, потому его лучше
+		   сделать protected
+		
+Good class:
+
+	1. см предыдущее описание
+	2. конструктор, порядок лучше сделать таким: int id, String name, Category category
+	    причина - важность данных
+	    
+GoodStorageInMemory class:
+	
+	1. см предыдущие комментарии
+	2. лучше переименовать в GoodStorageImpl
+	3. лучшу убрать методы инициализации, а инициализацию сделать так:
+			private List<Category> categoryList = new ArrayList<Category>() {{
+				this.add(new Category("Guitars")));
+			}};
+	4. goods и categories переименовать в goodList, categoryList: у нас же список
+	
+GoodStorageInMemory.getGoodList method:
+	
+	1. я аргументом могу передать null, лучше сделать вначале проверку и если null-
+	   вернуть пусток список
+	   
+	2. Допустим, мы из inputStream получили имя категории Guitars
+	   и хотим получить список good для єтой категории. соотв наш код будет:
+	   List<Good> goodList = service.getGoodList(new Category("Guitars"));
+	   будет работать?
+	   
+Main class:	   
+	1. метод printGoodsInCategory представит как  private static void printCategory(Category category, PrintStream stream);
+	2. реализовать use cases:
+		1. получить из сервиса список всех категорий
+		2. отобразить список категорий
+		3. для каждой из категорий получить список goods и отобразить их.
+		
+MyShopUML.pdf, README, user_story files
+	1. перенеcти в /project/doc
+	
+UML: 
+	1. GoodStorageInMemory:	
+		1. я бы не указывал связи с java beans. связь видна из декларации методов.
+		
+	2. Good:
+		1. агрегирует Category
+		     вопрос: может ли существовать Good без Сategory? 
+		     если да, то ромбик зарисовываем
+	
+	
+	 
+======================================================
+
 
 21.01.2015 01:00
 
