@@ -7,16 +7,12 @@ public class Good {
 	private String name;
 	
 	private int id;
-		
-	static private int maxID = 1;
-	
-	public Good(Category category, String name) {
+			
+	public Good(Category category, String name, int id) {
 		super();
 		this.category = category;
 		this.name = name;
-		id = maxID;
-		maxID++;
-	}
+		this.id = id;	}
 
 	public String toString(){
 		return getName();
