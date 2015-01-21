@@ -64,40 +64,40 @@ public class LongDivision {
 
     public static void divisionResult(int[] aArray, int a, int b) {
         boolean isPeriod = false;
-        String result = "";
-        String tempResult = "";
-        String str1 = "";
-        String str2 = "";
-        String str3 = "";
-        String strfNum = "";
-        int fNumber = aArray[0];
+        String divisionResult = "";
+        String graficsResult = "";
+        String formatTempDividend = "";
+        String formatTempNumb = "";
+        String formatDelimiter = "";
+        String firstDividend = "";
+        int temporaryDividend = aArray[0];
         int reminder = 0;
         int[] reminderArray = new int[MAX_DIGIT_IN_FRACTION];
 
         // find first part of dividend, if first part dividend is whole dividend
         // exit loop
         int j = 0;
-        while (fNumber < b && fNumber != a) {
-            fNumber = fNumber * 10 + aArray[j + 1];
+        while (temporaryDividend < b && temporaryDividend != a) {
+            temporaryDividend = temporaryDividend * 10 + aArray[j + 1];
             j++;
         }
-        strfNum = Integer.toString(fNumber);
+        firstDividend = Integer.toString(temporaryDividend);
         // find reminders in each step
         int tempNum = 0;
         boolean isFirst = false;
         while (j < aArray.length) {
-            result += fNumber / b;
-            if (fNumber / b > 0) {
-                tempNum = (fNumber / b) * b;
+            divisionResult += temporaryDividend / b;
+            if (temporaryDividend / b > 0) {
+                tempNum = (temporaryDividend / b) * b;
                 if (isFirst) {
-                    str1 = "\n" + tab(fNumber, j) + " " + fNumber; 
+                    formatTempDividend = "\n" + tab(temporaryDividend, j) + " " + temporaryDividend; 
                 }
-                str2 = "\n" + tab(tempNum, j) + "-" + tempNum; 
-                str3 = "\n" + tab(tempNum, j) + " " + "---";
-                tempResult += str1 + str2 + str3;
+                formatTempNumb = "\n" + tab(tempNum, j) + "-" + tempNum; 
+                formatDelimiter = "\n" + tab(tempNum, j) + " " + "---";
+                graficsResult += formatTempDividend + formatTempNumb + formatDelimiter;
             }
-            reminder = fNumber % b;
-            fNumber = (j == (aArray.length - 1)) 
+            reminder = temporaryDividend % b;
+            temporaryDividend = (j == (aArray.length - 1)) 
                        ? reminder * 10 
                        : reminder * 10 + aArray[j + 1];
             j++;
@@ -105,7 +105,7 @@ public class LongDivision {
         }
 
         if (reminder != 0) {
-            result += ".";
+            divisionResult += ".";
         }
 
         // calculation fraction part
@@ -121,32 +121,36 @@ public class LongDivision {
                     break;
                 }
             }
-            if (fNumber / b > 0) {
-                tempNum = (fNumber / b) * b;
-                str1 = "\n" + tab(fNumber, j) + " " + fNumber; 
-                str2 = "\n" + tab(tempNum, j) + "-" + tempNum; 
-                str3 = "\n" + tab(tempNum, j) + " " + "---";
-                tempResult += str1 + str2 + str3;
+            if (temporaryDividend / b > 0) {
+                tempNum = (temporaryDividend / b) * b;
+                formatTempDividend = "\n" + tab(temporaryDividend, j) + " " + temporaryDividend; 
+                formatTempNumb = "\n" + tab(tempNum, j) + "-" + tempNum; 
+                formatDelimiter = "\n" + tab(tempNum, j) + " " + "---";
+                graficsResult += formatTempDividend + formatTempNumb + formatDelimiter;
             }
             reminderArray[i] = reminder;
-            reminder = fNumber % b;
+            reminder = temporaryDividend % b;
             if (isPeriod == false) {
-                result += fNumber / b;
-                fNumber = reminder * 10;
+                divisionResult += temporaryDividend / b;
+                temporaryDividend = reminder * 10;
                 fraction++;
                 i++;
                 j++;
             }
         }
-        String firstTab = repeatString(" ", Integer.toString(a).length() - strfNum.length());
+
+        String formatReminder = tab(reminder, j+1) + Integer.toString(reminder);
+        String firstTab = repeatString(" ", Integer.toString(a).length() - firstDividend.length());
         if (isPeriod && reminder != 0) {
             System.out.print("\n" + a + "|" + b);
-            System.out.print("\n" + strfNum + firstTab + "|" + formatPeriodResult(periodIndex, result));
-            System.out.print(tempResult);
+            System.out.print("\n" + firstDividend + firstTab + "|" + formatPeriodResult(periodIndex, divisionResult));
+            System.out.print(graficsResult);
+            System.out.print("\n" + formatReminder);
         } else {
             System.out.print("\n" + a + "|" + b);
-            System.out.print("\n" + strfNum + firstTab + "|" + result);
-            System.out.print(tempResult);
+            System.out.print("\n" + firstDividend + firstTab + "|" + divisionResult);
+            System.out.print(graficsResult);
+            System.out.print("\n" + formatReminder);
         }
     }
 
