@@ -17,7 +17,7 @@ public class LongDivider {
 		in.close();
 		int[] dividendAsArray = dividendToArray(dividend);
 		String result = calculateResult(dividend, divisor, dividendAsArray);
-		System.out.print("\n" + dividend + " / " + divisor + " = " + result);
+		System.out.println(dividend + " / " + divisor + " = " + result);
 		
 	}
 
@@ -30,9 +30,11 @@ public class LongDivider {
 		boolean first = false;
 		String result = "";
 
+		System.out.println(" " + dividend);
+		
 		int j = 0;
 		while (part < divisor && part != dividend) {
-			part = part * 10 + dividendAsArray[j + 1];
+			part = part * TEN + dividendAsArray[j + 1];
 			j++;
 		}
 
@@ -42,14 +44,14 @@ public class LongDivider {
 			if (part / divisor > 0) {
 				f = (part / divisor) * divisor;
 				if (first) {
-					System.out.print("\n" + tab(part, j) + " " + part);
+					System.out.println(tab(part, j) + " " + part);
 				}
-				System.out.print("\n" + tab(f, j) + "-" + f);
-				System.out.print("\n" + tab(f, j) + " " + "---");
+				System.out.println(tab(f, j) + "-" + f);
+				System.out.println(tab(f, j) + " " + "---");
 			}
 			reminder = part % divisor;
-			part = (j == (dividendAsArray.length - 1)) ? reminder * 10 : reminder
-					* 10 + dividendAsArray[j + 1];
+			part = (j == (dividendAsArray.length - 1)) ? reminder * TEN : reminder
+					* TEN + dividendAsArray[j + 1];
 			j++;
 			first = true;
 		}
@@ -71,15 +73,15 @@ public class LongDivider {
 			}
 			if (part / divisor > 0) {
 				f = (part / divisor) * divisor;
-				System.out.print("\n" + tab(part, j) + " " + part);
-				System.out.print("\n" + tab(f, j) + "-" + f);
-				System.out.print("\n" + tab(f, j) + " " + "---");
+				System.out.println(tab(part, j) + " " + part);
+				System.out.println(tab(f, j) + "-" + f);
+				System.out.println(tab(f, j) + " " + "---");
 			}
 			reminderArray[i] = reminder;
 			reminder = part % divisor;
-			if (period == false) {
+			if (!period) {
 				result += part / divisor;
-				part = reminder * 10;
+				part = reminder * TEN;
 				fraction++;
 				i++;
 				j++;
