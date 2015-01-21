@@ -3,7 +3,7 @@ package ua.com.goit.gojava.m__jane.model;
 public class Profile {
 	private int id;
 	private String name;
-	
+
 	public Profile() {
 	}
 
@@ -22,27 +22,29 @@ public class Profile {
 	}
 
 	/**
-	 * @param id the id to set
+	 * @param id
+	 *            the id to set
 	 */
 	public void setId(int id) {
 		this.id = id;
 	}
 
 	/**
-	 * @param name the name to set
+	 * @param name
+	 *            the name to set
 	 */
 	public void setName(String name) {
 		this.name = name;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
 		return "Profile [id=" + id + ", name=" + name + "]";
 	}
-	
-	
-	
+
 }

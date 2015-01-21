@@ -7,7 +7,7 @@ import ua.com.goit.gojava.m__jane.model.Profile;
 public interface ProfileService {
 	
 	public List<Profile> getProfileList();
-	public int getCount();
-	public Profile getProfileById(int id);
+	public int getProfileCount();
+	public Profile getProfile(int profileId);
 
 }

@@ -9,9 +9,7 @@ public interface QuestionService {
 
 	
 	public List<Question> getQuestionList();
-	public List<Question> getQuestionListByProfile(Profile profile);
-
-    public int getCount();
-
-    public Question getQuestionById(int id);
+	public List<Question> getQuestionList(Profile profile);
+    public int getQuestionCount();
+    public Question getQuestion(int profileId);
 }

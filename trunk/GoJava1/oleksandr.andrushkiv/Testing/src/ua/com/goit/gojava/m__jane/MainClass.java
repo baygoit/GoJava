@@ -40,12 +40,12 @@ public class MainClass {
 
 	private static void askAndPrintQuestionsOfOneProfile(Scanner scanIn) {
 				
-		System.out.println("Enter number the question from 1 to " + profileService.getCount());
-		Profile profile = profileService.getProfileById(Integer.parseInt(scanIn.nextLine().trim()));
+		System.out.println("Enter number the question from 1 to " + profileService.getProfileCount());
+		Profile profile = profileService.getProfile(Integer.parseInt(scanIn.nextLine().trim()));
 		if (profile == null) {
 			System.out.println("Not found such profile");
 		} else {
-			List<Question> list = questionService.getQuestionListByProfile(profile);
+			List<Question> list = questionService.getQuestionList(profile);
 			for (Question question : list) {
 				System.out.println(question);
 			}
