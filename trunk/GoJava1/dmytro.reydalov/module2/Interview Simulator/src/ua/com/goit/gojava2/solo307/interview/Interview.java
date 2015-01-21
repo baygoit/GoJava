@@ -4,12 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Interview {
+	
+	private List <Question> questions = new ArrayList <Question>();
+	
 	public Interview(){
-	}
-	
-	static List <Question> questions = new ArrayList <Question>();
-	
-	public void fillQuestionList(){
 		List <Answer> answers = new ArrayList<Answer>();
 		answers.add(new Answer("Процедурность, инкапсуляция, полиморфизм.", false, 1));
 		answers.add(new Answer("Инкапсуляция, полиморфизм, наследование.", true, 2));
@@ -19,7 +17,7 @@ public class Interview {
 		answers.removeAll(answers);
 		answers.add(new Answer("Использование специальных капсул для программистов, чтоб лучше думать.", false, 1));
 		answers.add(new Answer("Возможность в программе избежать дублирования кода в программе.", false, 2));
-		answers.add(new Answer("Механизм, используюемый для зашиты полей обьекта от попытки их изменения извне.", true, 3));
+		answers.add(new Answer("Механизм, используемый для зашиты полей обьекта от попытки их изменения извне.", true, 3));
 		answers.add(new Answer("Процесс создания графической оболочки.", false, 4));
 		questions.add(new Question("Что такое инкапсуляция?", answers));
 		answers.removeAll(answers);
@@ -37,24 +35,27 @@ public class Interview {
 		questions.add(new Question("Что такое полиморфизм?", answers));
 	}
 	
-	public static void showQuestionsAndAnswers(){
+	public List<Question> getQuestions() {
+		return questions;
+	}
+
+	public void setQuestions(List<Question> questions) {
+		this.questions = questions;
+	}
+
+	public void printQuestionsAndCorrectAnswers(){
 		for(Question question: questions){
 			System.out.println(question.getQuestion());
-			question.printRightAnswers();
+			question.printCorrectAnswers();
 		}
 	}
 	
-	public static int countRightAnswers(){
-		int successAnswers = 0;
-		for(Question question: questions){
+	public void printQuestionAndAllAnswers(Question question){
 			System.out.println(question.getQuestion() + "\n");
 			question.printAswers(question);
-			if(question.isRight())successAnswers++;
-		}
-		return successAnswers;
 	}
-		
-	public static boolean isPassed(int successAnswers){
+			
+	public boolean isPassed(int successAnswers){
 		if(successAnswers > (questions.size() / 2)){
 			System.out.println("Вы приняты на работу!!!" + "\n" + "Правильных ответов: " + successAnswers + "\n");
 			System.exit(0);
