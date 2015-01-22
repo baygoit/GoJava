@@ -12,7 +12,7 @@ public class Kickstarter {
 		this.categories = categories;
 		this.projects = projects;
 	}
-
+ // С‚РµСЃС‚
 	public static void main(String[] arguments) {		
 		Category category1 = new Category("Photo");
 		Category category2 = new Category("Video");
@@ -24,11 +24,11 @@ public class Kickstarter {
 		categories.add(category2);
 		categories.add(category3);
 		
-		Project project1 = new Project("Фильм \"Как кодить на java\"", 100000, 15, 
-				"Фильм о том, как можно самому научиться кодить на Java");
+		Project project1 = new Project("пїЅпїЅпїЅпїЅпїЅ \"пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ java\"", 100000, 15, 
+				"пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅ, пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ Java");
 		
-		Project project2 = new Project("Фильм \"GoJava\"", 2345, 10, 
-				"Фильм о том, как ребята учатся Java с GoIT");
+		Project project2 = new Project("пїЅпїЅпїЅпїЅпїЅ \"GoJava\"", 2345, 10, 
+				"пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅ, пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ Java пїЅ GoIT");
 
 		project1.setCategory(category2);
 		project2.setCategory(category2); 
@@ -49,14 +49,14 @@ public class Kickstarter {
 		
 		while (true) {
 			System.out.println();
-			System.out.println("Выберите категорию:");
+			System.out.println("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ:");
 			System.out.println(Arrays.toString(categories.getCategories()));
 			
 			Scanner scanner = new Scanner(System.in);
 			int categoryIndex = scanner.nextInt();
 	
 			Category category = categories.getName(categoryIndex);
-			System.out.println("Вы выбрали категорию: " + category.getName());
+			System.out.println("пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ: " + category.getName());
 			
 			System.out.println("--------------------------------------"); 
 			Project[] foundProjects = projects.getProjects(category);
@@ -64,8 +64,8 @@ public class Kickstarter {
 			for (Project project : foundProjects) {
 				System.out.println(project.getName());
 				System.out.println(project.getDescription()); 
-				System.out.println("Надо собрать " + project.getAmount() + " грн за " + project.getDays() + " дней"); 
-				System.out.println("Уже собрано " + project.getExist() + " грн");
+				System.out.println("пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ " + project.getAmount() + " пїЅпїЅпїЅ пїЅпїЅ " + project.getDays() + " пїЅпїЅпїЅпїЅ"); 
+				System.out.println("пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ " + project.getExist() + " пїЅпїЅпїЅ");
 				System.out.println("--------------------------------------"); 				
 			}
 		}
