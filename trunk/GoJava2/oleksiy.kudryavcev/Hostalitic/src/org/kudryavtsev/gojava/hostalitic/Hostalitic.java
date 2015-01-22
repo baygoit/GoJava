@@ -20,14 +20,15 @@ public final class Hostalitic {
     }
 
     public static void main(final String[] args) {
-	Hostalitic hostalitic = new Hostalitic();
-	fillDemoData(hostalitic);
+	Hostalitic system = new Hostalitic();
+	fillDemoData(system);
 	org.kudryavtsev.gojava.hostalitic.menu.MainMenu.show();
     }
 
-    private static void fillDemoData(Hostalitic hostalitic) {
+    private static void fillDemoData(Hostalitic system) {
 
 	System.out.println("Demo starting...");
+	
 	Client client1 = new Client("Max");
 	Client client2 = new Client("Misha");
 
@@ -49,5 +50,8 @@ public final class Hostalitic {
 	client1.addService(service1);
 	client1.addService(service2);
 	client2.addService(service1);
+	
+	
+	Fabric.createClient("Maxan");
     }
 }

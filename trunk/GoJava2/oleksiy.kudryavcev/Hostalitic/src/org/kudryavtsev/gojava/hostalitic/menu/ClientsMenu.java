@@ -1,7 +1,9 @@
 package org.kudryavtsev.gojava.hostalitic.menu;
 
 import java.util.Scanner;
+
 import org.kudryavtsev.gojava.hostalitic.Client;
+import org.kudryavtsev.gojava.hostalitic.Fabric;
 import org.kudryavtsev.gojava.hostalitic.Hostalitic;
 
 public class ClientsMenu extends Menu {
@@ -37,7 +39,8 @@ public class ClientsMenu extends Menu {
 		break;
 
 	    case 2:
-		System.out.println("add not implemented yet");
+		System.out.println("Enter client name:");
+		Fabric.createClient((new Scanner(System.in)).nextLine());
 		break;
 
 	    case 3:
