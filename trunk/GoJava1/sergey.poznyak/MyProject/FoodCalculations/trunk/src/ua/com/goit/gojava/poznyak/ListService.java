@@ -5,13 +5,13 @@ import java.util.List;
 /**
  * This is the service interface
  * 
- * @version 0.02 19 Jan 2015
+ * @version 0.03 22 Jan 2015
  * @author Sergey Poznyak
  */
 public interface ListService {
 	
-	List<Dish> getDishes();
+	List<Dish> getDishList();
 	
-	List<Ingredient> getIngredients(int dishId);
+	List<Ingredient> getIngredientList(int dishId);
 	
 }

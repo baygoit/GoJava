@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 /**
  * The main class
- * @version 0.02 19 Jan 2015
+ * @version 0.03 22 Jan 2015
  * @author Sergey Poznyak
  */
 public class FoodCalculations {
@@ -22,15 +22,15 @@ public class FoodCalculations {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		ListService service = new ListServiceImplementation();
+		ListService service = new ListServiceHardcodedData();
 		System.out.println("Menu:");
-		displayDishes(service.getDishes());
+		displayDishes(service.getDishList());
 		System.out.println("Choose a dish (enter its number):");
 		Scanner input = new Scanner(System.in);
 		int index = input.nextInt();
 		input.close();
 		System.out.println("Ingredients (for 1 person):");
-		displayIngredients(service.getIngredients(index));
+		displayIngredients(service.getIngredientList(index));
 	}
 	
 	/**

@@ -1,8 +1,10 @@
 package ua.com.goit.gojava.poznyak;
 
 /**
- * This class implements the dish
- * @version 0.02 19 Jan 2015
+ * The Dish bean.
+ * 
+ * This bean implements the dish image
+ * @version 0.03 22 Jan 2015
  * @author Sergey Poznyak
  */
 public class Dish {
@@ -10,6 +12,11 @@ public class Dish {
 	private int id;
 	
 	private String name;
+
+	public Dish() {
+		id = 0;
+		name = "";
+	}
 	
 	public Dish(int dishId, String dishName) {
 		id = dishId;
@@ -26,6 +33,10 @@ public class Dish {
 	
 	public String getName() {
 		return name;
+	}
+	
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	@Override
