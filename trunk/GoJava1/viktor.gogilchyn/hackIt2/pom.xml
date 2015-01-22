@@ -15,7 +15,7 @@
    <plugin>
     <groupId>org.codehaus.mojo</groupId>
     <artifactId>cobertura-maven-plugin</artifactId>
-    <version>2.5</version>
+    <version>2.6</version>
    </plugin>
   </plugins>
  </reporting>
@@ -24,13 +24,23 @@
    <plugin>
     <groupId>org.codehaus.mojo</groupId>
     <artifactId>cobertura-maven-plugin</artifactId>
-    <version>2.5</version>
+    <version>2.6</version>
     <configuration>
+     <argLine>-XX:-UseSplitVerifier</argLine>
+     <quiet>true</quiet>
      <formats>
       <format>html</format>
       <format>xml</format>
      </formats>
     </configuration>
+    <executions>
+     <execution>
+      <phase>test</phase>
+      <goals>
+       <goal>cobertura</goal>
+      </goals>
+     </execution>
+    </executions>
    </plugin>
    <plugin>
     <artifactId>maven-compiler-plugin</artifactId>
@@ -59,6 +69,18 @@
   </plugins>
  </build>
  <dependencies>
+  <dependency>
+   <groupId>xalan</groupId>
+   <artifactId>xalan</artifactId>
+   <version>2.7.1</version>
+   <scope>test</scope>
+  </dependency>
+  <dependency>
+   <groupId>xerces</groupId>
+   <artifactId>xercesImpl</artifactId>
+   <version>2.11.0</version>
+   <scope>test</scope>
+  </dependency>
   <dependency>
    <groupId>junit</groupId>
    <artifactId>junit</artifactId>
