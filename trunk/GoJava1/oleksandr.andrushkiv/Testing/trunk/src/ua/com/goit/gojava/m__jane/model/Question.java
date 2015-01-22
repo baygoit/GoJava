@@ -3,8 +3,11 @@ package ua.com.goit.gojava.m__jane.model;
 public class Question {
 
 	private int id;
+	
 	private String content;
+	
 	private QuestionCategory questionCategory;
+	
 	private Profile profile;
 	/**
 	 * if openQuestion==false then question has many variants of
@@ -15,6 +18,19 @@ public class Question {
 	public Question() {
 
 	}
+	
+	public Question(int id, String content,
+			QuestionCategory questionCategory, Profile profile,
+			boolean openQuestion) {
+		super();
+		this.id = id;
+		this.content = content;
+		this.questionCategory = questionCategory;
+		this.profile = profile;
+		this.openQuestion = openQuestion;
+	}
+
+
 
 	/**
 	 * @return the content

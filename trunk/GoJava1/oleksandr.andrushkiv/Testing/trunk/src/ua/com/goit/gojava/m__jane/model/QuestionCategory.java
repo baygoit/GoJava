@@ -2,6 +2,7 @@ package ua.com.goit.gojava.m__jane.model;
 
 public class QuestionCategory {
 	private int id;
+	
 	private String name;
 
 	public QuestionCategory() {

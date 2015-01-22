@@ -8,12 +8,18 @@ import ua.com.goit.gojava.m__jane.model.Question;
 import ua.com.goit.gojava.m__jane.service.ProfileService;
 import ua.com.goit.gojava.m__jane.service.QuestionService;
 import ua.com.goit.gojava.m__jane.service.impl.ProfileServiceImpl;
+import ua.com.goit.gojava.m__jane.service.impl.QuestionCategoryServiceImpl;
 import ua.com.goit.gojava.m__jane.service.impl.QuestionServiceImpl;
 
 public class MainClass {
 
 	private static QuestionService questionService = new QuestionServiceImpl();
 	private static ProfileService profileService = new ProfileServiceImpl();
+	static {
+		questionService.setProfileService(new ProfileServiceImpl());
+		questionService.setQuestionCategoryService(new QuestionCategoryServiceImpl());
+		questionService.initQuestions();
+	}
 	
 	public static void main(String[] args) {
 

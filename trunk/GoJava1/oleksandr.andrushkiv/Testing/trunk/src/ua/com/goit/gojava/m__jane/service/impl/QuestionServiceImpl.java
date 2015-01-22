@@ -2,6 +2,7 @@ package ua.com.goit.gojava.m__jane.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import ua.com.goit.gojava.m__jane.model.Profile;
 import ua.com.goit.gojava.m__jane.model.Question;
 import ua.com.goit.gojava.m__jane.service.ProfileService;
@@ -9,12 +10,11 @@ import ua.com.goit.gojava.m__jane.service.QuestionCategoryService;
 import ua.com.goit.gojava.m__jane.service.QuestionService;
 
 public class QuestionServiceImpl implements QuestionService{
+		
+	private ProfileService profileService;	
+	private QuestionCategoryService questionCategoryService; 
 	
-	private final String splitter = "`";
-	private final ProfileService profileService = new ProfileServiceImpl();
-	private final QuestionCategoryService questionCategoryService = new QuestionCategoryServiceImpl(); 
-	
-	 private final static String[] QUESTIONS;
+	/*private final static String[] QUESTIONS;
 	 static {
 	    	QUESTIONS = new String[6];
 	    	//id`content`questionCategory_id`profile_id`openQuestion
@@ -29,43 +29,62 @@ public class QuestionServiceImpl implements QuestionService{
 //	        QUESTIONS[8] = "Що таке комплексний продаж? Наведіть приклад.";
 //	        QUESTIONS[9] = "Чому продавець повинен завжди здійснювати комплексний продаж?";
 	 }
-	
+	*/
+	 
+	private final List<Question> questions = new ArrayList<Question>();
+	 
 	public QuestionServiceImpl() {
-
+		//initQuestions();
 	}
+	
+
+	public void initQuestions() {
+		questions.add(new Question(1, "Як має поводитись продавець у торговому залі, якщо Покупець змушений чекати?",
+				questionCategoryService.getQuestionCategory(1), profileService.getProfile(1), true));	
+		
+		questions.add(new Question(2, "Яким є завдання продавця на етапі «Презентація товару»?",
+				questionCategoryService.getQuestionCategory(2), profileService.getProfile(1), true));	
+		
+		questions.add(new Question(3, "Як продавець має презентувати товар Покупцю?",
+				questionCategoryService.getQuestionCategory(1), profileService.getProfile(1), true));	
+		
+		questions.add(new Question(4, "В чому полягає суть методу презентації Т-Х-В? Наведіть приклад по товару з вашого відділу.",
+				questionCategoryService.getQuestionCategory(2), profileService.getProfile(1), true));	
+		
+		questions.add(new Question(5, "Назвіть основні етапи продажу",
+				questionCategoryService.getQuestionCategory(1), profileService.getProfile(2), true));
+		
+		questions.add(new Question(6, "Яким є завдання продавця на етапі «Зустріч покупця»?",
+				questionCategoryService.getQuestionCategory(3), profileService.getProfile(1), true));	
+	}
+
+	
+	public void setProfileService(ProfileService profileService) {
+		this.profileService = profileService;
+	}
+
+
+	public void setQuestionCategoryService(
+			QuestionCategoryService questionCategoryService) {
+		this.questionCategoryService = questionCategoryService;
+	}
+
 
 	@Override
 	public List<Question> getQuestionList() {
-		
-		List<Question> listQuestions = new ArrayList<>();
-				
-		for (int i = 0; i < QUESTIONS.length; i++) {			
-			String[] arr = QUESTIONS[i].split(splitter);
-			//id|content|questionCategory_id|profile_id|openQuestion
-				Question q = new Question();
-				q.setId(Integer.parseInt(arr[0]));
-				q.setContent(arr[1]);
-				q.setQuestionCategory(questionCategoryService.getQuestionCategory(Integer.parseInt(arr[2])));
-				q.setProfile(profileService.getProfile(Integer.parseInt(arr[3])));
-				q.setOpenQuestion(Boolean.parseBoolean(arr[4]));	
-				listQuestions.add(q);		
-		}
-		
-		return listQuestions;
+		return questions;
 	}
 
 
 	@Override
 	public int getQuestionCount() {		
-		return getQuestionList().size();
+		return questions.size();
 	}
 
 	@Override
 	public Question getQuestion(int questionId) {
 		Question foundQuestion = null;
-		//TODO replaced by map
-		List<Question> listQuestions = getQuestionList();
-		for (Question question : listQuestions) {
+		for (Question question : questions) {
 			if(question.getId() == questionId) {
 				foundQuestion = question;
 				break;
@@ -78,22 +97,13 @@ public class QuestionServiceImpl implements QuestionService{
 	public List<Question> getQuestionList(Profile profile) {
 		
 		List<Question> listQuestions = new ArrayList<>();
-				
 
-		for (int i = 0; i < QUESTIONS.length; i++) {			
-			String[] arr = QUESTIONS[i].split(splitter);
-			
-			if (Integer.parseInt(arr[3])!=profile.getId()) continue;
-			//id|content|questionCategory_id|profile_id|openQuestion
-				Question q = new Question();
-				q.setId(Integer.parseInt(arr[0]));
-				q.setContent(arr[1]);
-				q.setQuestionCategory(questionCategoryService.getQuestionCategory(Integer.parseInt(arr[2])));
-				q.setProfile(profileService.getProfile(Integer.parseInt(arr[3])));
-				q.setOpenQuestion(Boolean.parseBoolean(arr[4]));	
-				listQuestions.add(q);		
+		for (Question question : questions) {
+			if (question.getProfile().equals(profile)) {
+				listQuestions.add(question);
+			}		
 		}
-		
+
 		return listQuestions;
 	}
 
