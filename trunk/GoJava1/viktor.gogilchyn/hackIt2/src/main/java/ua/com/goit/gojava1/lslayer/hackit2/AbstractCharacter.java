@@ -10,7 +10,6 @@ public abstract class AbstractCharacter implements Actor{
     public AbstractCharacter (String name) {
         this.name = name;
     }
-    @Override
     public void addSkill(Skill skill) {
         this.skills.add(skill);
     }
