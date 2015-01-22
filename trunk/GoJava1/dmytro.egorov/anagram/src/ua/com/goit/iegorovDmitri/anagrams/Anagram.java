@@ -10,7 +10,6 @@ public class Anagram {
 		BufferedReader reader = new BufferedReader(new
 		InputStreamReader(System.in));
 		String inputString = reader.readLine();
-		//String inputString = "\\gena+++gean---  gean  fre";
 		String outputString = "";
 		Boolean check = null;
 		String stringWhioutSpecial = inputString.replaceAll("[^a-zA-Zà-ÿÀ-ß']", " ").replaceAll(
