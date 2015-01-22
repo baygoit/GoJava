@@ -6,11 +6,11 @@ import org.junit.Test;
 
 public class GoodStorageInMemoryTest extends Assert {
 	
-	public GoodStorageInMemory store; 
+	public GoodStorageImpl store; 
 	
 	@Before
 	public void initialize(){
-		store = new GoodStorageInMemory(); 
+		store = new GoodStorageImpl(); 
 	}
 	
 	@Test

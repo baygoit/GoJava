@@ -2,28 +2,29 @@ package ua.com.goit.gojava.andriidnikitin;
 
 public class Good {
 	
-	private Category category;
-	
+	private int id;	
+
 	private String name;
 	
-	private int id;
-			
-	public Good(Category category, String name, int id) {
-		super();
-		this.category = category;
+	private Category category;	
+	
+	public Good() {
+		name = new String();
+		category = new Category();
+	}	
+	
+	protected Good( int id, String name, Category category) {
+		this.id = id;	
 		this.name = name;
-		this.id = id;	}
-
-	public String toString(){
-		return getName();
-	}
-	
-	public Category getCategory() {
-		return category;
-	}
-	
-	public void setCategory(Category category) {
 		this.category = category;
+	}	
+	
+	public int getId() {
+		return id;
+	}
+	
+	public void setId(int id) {
+		this.id = id;
 	}
 	
 	public String getName() {
@@ -34,12 +35,17 @@ public class Good {
 		this.name = name;
 	}
 	
-	public int getId() {
-		return id;
+	
+	public Category getCategory() {
+		return category;
 	}
 	
-	public void setId(int id) {
-		this.id = id;
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+
+	public String toString(){
+		return getName();
 	}
 	
 }

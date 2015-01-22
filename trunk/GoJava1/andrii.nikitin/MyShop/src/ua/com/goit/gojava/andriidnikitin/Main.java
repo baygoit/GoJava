@@ -6,15 +6,16 @@ import java.util.List;
 public class Main {
 	
 	public static void main(String[] args){		
-		GoodStorageInMemory myStore = new GoodStorageInMemory();
+		GoodStorageImpl myStore = new GoodStorageImpl();
 		System.out.println("Categories:");
+		List<Category> categoryList = myStore.getCategoryList();
 		printListWithNumeration(myStore.getCategoryList(), System.out);
 		System.out.println("Goods in 3 category:");		
-		printGoodsInCategory(myStore, System.out, 3 );
+		printCategory(myStore, categoryList.get(3), System.out);
 		System.out.println("Goods in 2 category:");
-		printGoodsInCategory(myStore, System.out, 2 );
+		printCategory(myStore,  categoryList.get(2), System.out);
 		System.out.println("Goods in 1 category:");
-		printGoodsInCategory(myStore, System.out, 1 );
+		printCategory(myStore, categoryList.get(1), System.out);
 	}
 	
 	private static <T> void printListWithNumeration (List<T> list, 
@@ -25,9 +26,14 @@ public class Main {
 		outStream.println();
 	}
 	
-	private static void printGoodsInCategory(GoodStorageInMemory myStore, 
-			PrintStream outStream, int numberOfCategory ){
-	//	printListWithNumeration(myStore.getGoodList(myStore.getCategory(numberOfCategory - 1)) ,outStream);
+	private static void printCategory(GoodStorageImpl myStore, 
+			Category category, PrintStream stream){ 
+		try {
+			printListWithNumeration(myStore.getGoodList(category), stream);			
+		}
+		catch (NullPointerException exception){
+			stream.println("Not found!");
+		}
 	}
 	
 }
