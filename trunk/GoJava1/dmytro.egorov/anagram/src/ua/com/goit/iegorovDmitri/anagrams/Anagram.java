@@ -7,27 +7,42 @@ import java.util.regex.Pattern;
 
 public class Anagram {
 	public static void main(String[] args) throws IOException {
-		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-		String inputString = reader.readLine();
+		// BufferedReader reader = new BufferedReader(new
+		// InputStreamReader(System.in));
+		// String inputString = reader.readLine();
+		String inputString = "gena+++gean---  gean  fre==";
 		String outputString = "";
-		
-		String[] words = (inputString.replaceAll("[^a-zA-Z0-9à-ÿÀ-ß']", " ")).replaceAll(" +"," ").split("[^a-zA-Z0-9à-ÿÀ-ß']");
+		Boolean check = null;
+		String s = inputString.replaceAll("[^a-zA-Zà-ÿÀ-ß']", " ").replaceAll(
+				" +", " ");
+		if (s.charAt(0) == ' ') {
+			s = s.substring(1);
+			check = true;
+		}
+		System.out.println(s);
+		String[] words = s.split("[^a-zA-Zà-ÿÀ-ß']");
 		String punctuation = inputString.replaceAll("\\s", "\u0001");
-		punctuation = (punctuation.replaceAll("[a-zA-Z0-9à-ÿÀ-ß]| ", " ")).replaceAll(" +"," ");
+		punctuation = (punctuation.replaceAll("[a-zA-Zà-ÿÀ-ß]", " "))
+				.replaceAll(" +", " ");
+		if (punctuation.charAt(0) == ' ') {
+			punctuation = punctuation.substring(1);
+			check = false;
+		}
+		System.out.println(punctuation);
 		String[] specChar = punctuation.split(" ");
-		
-		
-		for (int i=0; i < words.length; i++){
+		System.out.println(words.length + " " + specChar.length);
+
+		for (int i = 0; i < words.length; i++) {
 			StringBuilder builder = new StringBuilder(words[i]);
-			if(i+1<specChar.length){
-			outputString+=builder.reverse().toString() + specChar[i+1];}
-			else{
-				outputString+=builder.reverse().toString();
+			if (check != true) {
+				outputString+=builder.reverse().toString() + specChar[i];
+			} else {
+				outputString += specChar[i] + builder.reverse().toString();
 			}
 		}
-		
+
 		System.out.println(outputString.replaceAll("\u0001", " "));
-		
+
 	}
-		
+
 }
