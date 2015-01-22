@@ -2,6 +2,12 @@ package ua.com.goit.gojava.andriidnikitin;
 
 public class Category {
 	private String name;
+	
+	public Category() {
+		super();
+		name =  new String();
+	}
+	
 
 	public String getName() {
 		return name;

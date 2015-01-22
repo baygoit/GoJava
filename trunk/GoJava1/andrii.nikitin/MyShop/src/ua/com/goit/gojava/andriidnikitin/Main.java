@@ -27,7 +27,7 @@ public class Main {
 	
 	private static void printGoodsInCategory(GoodStorageInMemory myStore, 
 			PrintStream outStream, int numberOfCategory ){
-		printListWithNumeration(myStore.getGoodList(myStore.getCategory(numberOfCategory - 1)) ,outStream);
+	//	printListWithNumeration(myStore.getGoodList(myStore.getCategory(numberOfCategory - 1)) ,outStream);
 	}
 	
 }
