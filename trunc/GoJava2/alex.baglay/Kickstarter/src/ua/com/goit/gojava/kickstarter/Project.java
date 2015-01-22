@@ -10,7 +10,6 @@ public class Project {
 	private int exist;
 
 	public Project(String name, int amount, int days, String description) {
-		// сразу же запишем значения в поля
 		this.name = name;
 		this.amount = amount;
 		this.days = days;
@@ -39,7 +38,6 @@ public class Project {
 	}
 
 	public int getExist() {
-		// а вот тут новое поле, которое будет пересчитываться с каждым income
 		return exist;
 	}
 
