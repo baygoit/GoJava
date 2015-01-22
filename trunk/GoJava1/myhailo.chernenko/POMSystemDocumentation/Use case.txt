@@ -1,7 +1,0 @@
-﻿1. A user runs the program, writes the command and gets possibility to enter transactions data 
-	(information about economic operation: the name of project, the cost (or income) item and sum )
-2. A user runs the program, writes the command and sees the list of transaction data, which was entered before
-3. A user runs the program, writes the command and sees the list of projects
-4. A user runs the program, writes the command and sees the table with projects profit
-	(count the sum of all transactions for each project)
-5. ...
