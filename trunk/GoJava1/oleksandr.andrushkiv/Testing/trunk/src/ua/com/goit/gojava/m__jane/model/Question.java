@@ -117,9 +117,9 @@ public class Question {
 	public String toString() {
 		return new StringBuilder().append("Question [id=").append(id)
 				.append(", content=").append(content)
-				.append(", questionCategory=")
-				.append(questionCategory.getName()).append(", profile=")
-				.append(profile.getName()).append(", openQuestion=")
-				.append(openQuestion).append("]").toString();
+				.append(", questionCategory=").append(questionCategory.getName())
+				.append(", profile=").append(profile.getName())
+				.append(", openQuestion=").append(openQuestion)
+				.append("]").toString();
 	}
 }
