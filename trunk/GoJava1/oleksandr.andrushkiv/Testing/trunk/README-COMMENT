@@ -1,3 +1,57 @@
+23.01.2015 01:20
+
+Profile.equals,hash fields:
+
+		пропоную для розгляду такі реалізації::
+		
+			@Override
+			public int hashCode() {
+				return Objects.hash(id, name);
+			}
+		
+			@Override
+			public boolean equals(Object obj) {
+				if (this == obj) {
+					return true;
+				}
+				if (obj == null || !(obj instanceof Profile)) {
+					return false;
+				}
+		
+				Profile other = (Profile) obj;
+				if (id != other.id) {
+					return false;
+				}
+				if (!Objects.equals(name, other.name)) {
+					return false;
+				}
+				return true;
+			}	
+	
+ProfileServiceImpl.profileList
+, QuestionCategoryServiceImpl.questionCategories
+, QuestionServiceImpl.questions fields:
+
+	спробуй ініціалізацію зробити більш компактною.
+	serialVersionUID використосовувати тут не потрібно.		
+	
+	
+ua.com.goit.gojava.m__jane.model classes:
+
+	getter and setter вкажи поруч, 
+	в ідеалі в тому ж порядку що і fields
+	порядок для прикладу:
+	
+		getId
+		setId
+		getName
+		setName
+	
+Глобально: видали коментарі та не використані елементи.
+           відсутні тести
+
+=====================
+
 
 22.01.2015 23:30
 
