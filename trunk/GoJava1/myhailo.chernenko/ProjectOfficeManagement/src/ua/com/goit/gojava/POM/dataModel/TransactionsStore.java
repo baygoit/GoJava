@@ -6,6 +6,11 @@ import java.util.List;
 //import java.util.logging.Level;
 //import java.util.logging.Logger;
 
+
+
+
+import ua.com.goit.gojava.POM.persistence.DataManager;
+
 public class TransactionsStore implements DataObject, Serializable {
 
 	private static final int NUMER_OF_REQUIRED_PARAM = 3;
@@ -22,12 +27,26 @@ public class TransactionsStore implements DataObject, Serializable {
 			
 			checkResult = "Wrong number of variables";
 			
+		} else {
+			
+			try {
+				
+				Long.parseLong(fieldsArray[2]);
+				
+			} catch (NumberFormatException e) {		
+			
+				//Logger.getLogger("TransactionsStore.class").log(Level.SEVERE , "Cannot convert entered sum to int!");
+				checkResult = "Cannot convert entered sum to int!";
+				
+			}
+			
 		}
 		
 		return checkResult;
 		
 	}
 
+	@Override
 	public String toString() {
 		
 		String resultString = "";
@@ -45,36 +64,32 @@ public class TransactionsStore implements DataObject, Serializable {
 		
 	}
 	
+	@Override
 	public String getFieldsForUpdatePresentation() {
 		
 		return "Project, Cost item and Sum";
 
 	}
 
-	public String update(String[] fieldsArray) {
+	@Override
+	public String update(String[] fieldsArray, DataManager dataManager) {
 
 		String checkResult = checkData(fieldsArray);
 		if (checkResult.isEmpty()) {
 			
 			long sum = 0;
-			boolean isDataCorrect = false; 
 			
 			try {
-				sum =  Integer.parseInt(fieldsArray[2]);
-				isDataCorrect = true;
 				
-			} catch (NumberFormatException e) {		
+				sum =  Long.parseLong(fieldsArray[2]);
 				
-				//Logger.getLogger("TransactionsStore.class").log(Level.SEVERE , "Cannot convert entered sum to int!");
-				checkResult = "Cannot convert entered sum to int!";
+			} catch (NumberFormatException e) {
 				
 			}
 			
-			if(isDataCorrect) {
-				
-                transactionList.add( new BusinessTransaction(fieldsArray[0], fieldsArray[1], sum));
-			}
-
+			transactionList.add( new BusinessTransaction(dataManager.getProject(fieldsArray[0]), 
+                										dataManager.getCostItem(fieldsArray[1]),
+                										sum));
 		}
 		
 		return checkResult;

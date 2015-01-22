@@ -5,7 +5,7 @@
     project="ProjectOfficeManagement" 
     file="/ProjectOfficeManagement/src/ua/com/goit/gojava/POM/dataModel/BusinessTransaction.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="178" y="148"/>    
+    <position height="-1" width="-1" x="138" y="126"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -15,7 +15,7 @@
   <class id="2" language="java" name="ua.com.goit.gojava.POM.persistence.DataManager" project="ProjectOfficeManagement" 
     file="/ProjectOfficeManagement/src/ua/com/goit/gojava/POM/persistence/DataManager.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="230" y="558"/>    
+    <position height="-1" width="-1" x="479" y="351"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -25,7 +25,7 @@
   <interface id="3" language="java" name="ua.com.goit.gojava.POM.dataModel.DataObject" project="ProjectOfficeManagement" 
     file="/ProjectOfficeManagement/src/ua/com/goit/gojava/POM/dataModel/DataObject.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="440" y="180"/>    
+    <position height="-1" width="-1" x="469" y="616"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -35,7 +35,7 @@
   <class id="4" language="java" name="ua.com.goit.gojava.POM.presentation.Main" project="ProjectOfficeManagement" 
     file="/ProjectOfficeManagement/src/ua/com/goit/gojava/POM/presentation/Main.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="832" y="547"/>    
+    <position height="-1" width="-1" x="801" y="126"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -45,7 +45,7 @@
   <class id="5" language="java" name="ua.com.goit.gojava.POM.presentation.Menu" project="ProjectOfficeManagement" 
     file="/ProjectOfficeManagement/src/ua/com/goit/gojava/POM/presentation/Menu.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="651" y="413"/>    
+    <position height="-1" width="-1" x="482" y="79"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -56,7 +56,7 @@
     project="ProjectOfficeManagement" 
     file="/ProjectOfficeManagement/src/ua/com/goit/gojava/POM/dataModel/TransactionsStore.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="183" y="383"/>    
+    <position height="-1" width="-1" x="126" y="426"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -66,7 +66,7 @@
   <class id="7" language="java" name="ua.com.goit.gojava.POM.presentation.UserScreen" project="ProjectOfficeManagement" 
     file="/ProjectOfficeManagement/src/ua/com/goit/gojava/POM/presentation/UserScreen.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="749" y="114"/>    
+    <position height="-1" width="-1" x="789" y="374"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -74,60 +74,80 @@
     </display>  
   </class>  
   <dependency id="8">    
-    <end type="SOURCE" refId="6"/>    
-    <end type="TARGET" refId="7"/>  
-  </dependency>  
-  <dependency id="9">    
-    <end type="SOURCE" refId="5"/>    
+    <end type="SOURCE" refId="7"/>    
     <end type="TARGET" refId="3"/>  
   </dependency>  
-  <dependency id="10">    
-    <end type="SOURCE" refId="2"/>    
-    <end type="TARGET" refId="6"/>  
-  </dependency>  
-  <dependency id="11">    
+  <dependency id="9">    
     <end type="SOURCE" refId="4"/>    
     <end type="TARGET" refId="7"/>  
   </dependency>  
-  <dependency id="12">    
-    <end type="SOURCE" refId="3"/>    
-    <end type="TARGET" refId="7"/>  
+  <dependency id="10">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="2"/>  
   </dependency>  
-  <association id="13">    
+  <dependency id="11">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="6"/>  
+  </dependency>  
+  <association id="12">    
     <end type="SOURCE" refId="5" navigable="false">      
-      <attribute id="14" name="userScreen">        
-        <position height="0" width="0" x="0" y="0"/>      
+      <attribute id="13" name="userScreen">        
+        <position height="0" width="0" x="40" y="260"/>      
       </attribute>      
-      <multiplicity id="15" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
+      <multiplicity id="14" minimum="0" maximum="1">        
+        <position height="0" width="0" x="40" y="260"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="7" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <dependency id="16">    
-    <end type="SOURCE" refId="4"/>    
-    <end type="TARGET" refId="6"/>  
-  </dependency>  
-  <realization id="17">    
+  <realization id="15">    
     <end type="SOURCE" refId="6"/>    
     <end type="TARGET" refId="3"/>  
   </realization>  
+  <dependency id="16">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="5"/>  
+  </dependency>  
+  <dependency id="17">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="6"/>  
+  </dependency>  
   <association id="18">    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="19" name="transactionsData"/>      
+      <multiplicity id="20" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="6" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="21">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="2"/>  
+  </dependency>  
+  <association id="22">    
     <end type="SOURCE" refId="6" navigable="false">      
-      <attribute id="19" name="transactionList">        
-        <position height="0" width="0" x="0" y="0"/>      
+      <attribute id="23" name="transactionList">        
+        <position height="0" width="0" x="-40" y="-22"/>      
       </attribute>      
-      <multiplicity id="20" minimum="0" maximum="2147483647">        
-        <position height="0" width="0" x="0" y="0"/>      
+      <multiplicity id="24" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="-40" y="-22"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="1" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <dependency id="21">    
-    <end type="SOURCE" refId="4"/>    
-    <end type="TARGET" refId="5"/>  
+  <dependency id="25">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="2"/>  
+  </dependency>  
+  <dependency id="26">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="2"/>  
+  </dependency>  
+  <dependency id="27">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="2"/>  
   </dependency>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
     sort-features="false" accessors="true" visibility="true">    

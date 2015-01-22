@@ -2,7 +2,9 @@ package ua.com.goit.gojava.POM.dataModel;
 
 import java.io.Serializable;
 
-public class Project implements Serializable {
+import ua.com.goit.gojava.POM.persistence.DataManager;
+
+public class Project implements DataObject, Serializable {
 	
 	private static final long serialVersionUID = 9089675474277705813L;
 	private String shortName;
@@ -25,10 +27,23 @@ public class Project implements Serializable {
 		
 	}
 	
+	@Override
 	public String toString() {
 	
 		return getShortName();
 		
+	}
+
+	@Override
+	public String getFieldsForUpdatePresentation() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String update(String[] fieldsArray, DataManager dataManager) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

@@ -1,6 +1,6 @@
 package ua.com.goit.gojava.POM.presentation;
 
-import ua.com.goit.gojava.POM.dataModel.DataObject;
+import ua.com.goit.gojava.POM.persistence.DataManager;
 
 class Menu {
 	
@@ -12,15 +12,23 @@ class Menu {
 
 	}
 
-	private void processCommand(String command, DataObject obj) {
+	private void processCommand(String command, DataManager dataManager) {
 	
 		if (command.contentEquals("-show")) {
 			
-			userScreen.showDataObject(obj);
+			userScreen.showDataObject(dataManager.getTransactionsStore());
+			
+		} else if (command.contentEquals("-showProjects")) {
+			
+			userScreen.showDataObject(dataManager.getProjectMap());
+			
+		} else if (command.contentEquals("-showCostItems")) {
+			
+			userScreen.showDataObject(dataManager.getCostItemMap());
 			
 		} else if (command.contentEquals("-update")) {
 	
-			userScreen.updateDataObject(obj);
+			userScreen.updateDataObject(dataManager.getTransactionsStore(), dataManager);
 		
 		} else if (!command.isEmpty()) {
 		
@@ -30,12 +38,16 @@ class Menu {
 		
 	}
 	
-	public void show(DataObject obj) {
+	public void show(DataManager dataManager) {
 
 		userScreen.showString("Welcome to 'Project Office Management System'!");
-		userScreen.showString("Type '-show' for view data, '-update' for update data or press Enter for exit:");
+		userScreen.showString("Type '-show' for view data;"+"\r\n"
+								+ " '-update' for update data;"+"\r\n"
+								+ " '-showProjects' for view projects list;"+"\r\n"
+								+ " '-showCostItems' for view cost items list;"+"\r\n"
+								+ "or press Enter for exit:");
 		
-		processCommand(userScreen.getString(), obj);
+		processCommand(userScreen.getString(), dataManager);
 		
 	}
 	

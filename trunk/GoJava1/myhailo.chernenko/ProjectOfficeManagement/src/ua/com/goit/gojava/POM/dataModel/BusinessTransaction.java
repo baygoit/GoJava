@@ -12,11 +12,12 @@ class BusinessTransaction implements Serializable {
 	private CostItem costItem;
 	private long sum;
 	
-	public BusinessTransaction(String projectName, String costItem, long sum) {
+	public BusinessTransaction(Project project, CostItem costItem, long sum) {
 
-		this.project = new Project(projectName);
-		this.costItem = new CostItem(costItem);
+		this.project = project;
+		this.costItem = costItem;
 		this.sum = sum;
+		
 	}
 	
 	public static String getTitle() {
@@ -37,6 +38,7 @@ class BusinessTransaction implements Serializable {
 		
 	}
 	
+	@Override
 	public String toString() {
 		
 		String formatString = "%-" + (COLUMN_LENGTH) + "s"; 
