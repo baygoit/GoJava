@@ -18,13 +18,19 @@ public class SkillTest {
         assertNotNull(skill);
     }
     @Test
-    public void testSkillNamedCreationWithNull() {
-        this.skill = new Skill(null);
-        assertNotNull(skill);
-    }
-    @Test
     public void testSkillDefaultName() {
         this.skill = new Skill();
         assertEquals("Default", skill.getName());
     }
+    @Test
+    public void testSkillConcreteName() {
+        this.skill = new Skill("Concrete");
+        assertEquals("Concrete", skill.getName());
+    }
+    @Test
+    public void testSkillNamedCreationWithNull() {
+        this.skill = new Skill(null);
+        assertEquals("Default", skill.getName());
+    }
+    
 }
