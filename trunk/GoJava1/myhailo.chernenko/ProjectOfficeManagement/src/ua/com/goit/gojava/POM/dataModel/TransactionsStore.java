@@ -2,6 +2,7 @@ package ua.com.goit.gojava.POM.dataModel;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 //import java.util.logging.Level;
 //import java.util.logging.Logger;
@@ -9,9 +10,10 @@ import java.util.List;
 
 
 
+
 import ua.com.goit.gojava.POM.persistence.DataManager;
 
-public class TransactionsStore implements DataObject, Serializable {
+public class TransactionsStore implements DataObject, Serializable, Iterable<BusinessTransaction> {
 
 	private static final int NUMER_OF_REQUIRED_PARAM = 3;
 
@@ -93,6 +95,14 @@ public class TransactionsStore implements DataObject, Serializable {
 		}
 		
 		return checkResult;
+		
+	}
+
+	
+	@Override
+	public Iterator<BusinessTransaction> iterator() {
+
+		return transactionList.iterator();
 		
 	}
 

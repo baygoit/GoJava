@@ -22,6 +22,10 @@ class Menu {
 			
 			userScreen.showDataObject(dataManager.getProjectMap());
 			
+		} else if (command.contentEquals("-showProjectsProfit")) {
+			
+			userScreen.showDataObject(dataManager.getProjectsProfit());
+			
 		} else if (command.contentEquals("-showCostItems")) {
 			
 			userScreen.showDataObject(dataManager.getCostItemMap());
@@ -45,6 +49,7 @@ class Menu {
 								+ " '-update' for update data;"+"\r\n"
 								+ " '-showProjects' for view projects list;"+"\r\n"
 								+ " '-showCostItems' for view cost items list;"+"\r\n"
+								+ " '-showProjectsProfit' for view projects profit list;"+"\r\n"
 								+ "or press Enter for exit:");
 		
 		processCommand(userScreen.getString(), dataManager);

@@ -78,6 +78,23 @@ public class DataManager implements Serializable {
 		
 	}
 
+	public Map<Project, Long> getProjectsProfit() {
+		
+		Map<Project, Long> result = new HashMap<Project, Long>();
+		
+		for(BusinessTransaction currentTransaction:getTransactionsStore()) {
+			
+			Long calculatedSum = result.get(currentTransaction.getProject());
+			calculatedSum = (calculatedSum == null) ? 0 : calculatedSum;
+			
+			result.put(currentTransaction.getProject(), calculatedSum + currentTransaction.getSum());
+			
+		}
+		
+		return result;
+		
+	}
+	
 	public void readData() {
 		
 		FileInputStream fis;

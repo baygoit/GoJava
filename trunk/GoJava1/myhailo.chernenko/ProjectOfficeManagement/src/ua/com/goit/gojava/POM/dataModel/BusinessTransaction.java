@@ -2,7 +2,7 @@ package ua.com.goit.gojava.POM.dataModel;
 
 import java.io.Serializable;
 
-class BusinessTransaction implements Serializable {
+public class BusinessTransaction implements Serializable {
 	
 	private static final long serialVersionUID = -2555250596540838902L;
 	private static final int NUMBER_OF_FIELDS = 3;
@@ -20,6 +20,24 @@ class BusinessTransaction implements Serializable {
 		
 	}
 	
+	public Project getProject() {
+		
+		return project;
+		
+	}
+
+	public CostItem getCostItem() {
+		
+		return costItem;
+		
+	}
+
+	public long getSum() {
+		
+		return sum;
+		
+	}
+
 	public static String getTitle() {
 		
 		String formatString = "%-" + (COLUMN_LENGTH) + "s"; 
