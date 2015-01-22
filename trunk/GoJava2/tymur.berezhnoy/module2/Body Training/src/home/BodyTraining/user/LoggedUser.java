@@ -3,7 +3,6 @@ import home.BodyTraining.diary.Diary;
 import home.BodyTraining.diary.DiaryManager;
 
 import java.util.List;
-import java.util.Scanner;
 
 public class LoggedUser {
 	
@@ -13,13 +12,12 @@ public class LoggedUser {
 		this.diaryManager = diaryManager;
 	}
 	
-	public void createD(Scanner scanner) {
-		System.out.print("Enter the name of diary: ");
-		diaryManager.createDiary(scanner.nextLine());
+	public void createDiary(String name) {
+		diaryManager.createDiary(name);
 	}
 	
 	public void myDiary() {
-		System.out.println("\n******* My diary *******");
+		System.out.println("******* My diary *******");
 		List<Diary> diary = diaryManager.getArrayOfDiary();
 		int i = 1;
 		for(Diary d: diary) {
