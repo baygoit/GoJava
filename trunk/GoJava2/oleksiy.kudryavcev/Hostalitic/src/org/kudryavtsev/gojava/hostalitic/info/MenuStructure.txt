@@ -7,19 +7,19 @@
 (2) Activities
 	List of activities: ...
 	(1)Modify activity
-		List of services ...
-		(1) Modify service
-		(2) Add service
-		(3) Delete service
-		(4) Change activity properties
-		(0) Go to previous menu
 	(2)Add activity
 	(3)Delete activity
 	(0) Go to previous menu
 (3) Reports
 	List of reports ...
-	(1) First report
-	(2) Second report
-	(3) Third report
+	(1) First report (to be renamed)
+	(2) Second report (to be renamed)
+	(3) Third report (to be renamed)
 	(0) Go to previous menu
-(0) To exit
+(4) List of services ...
+	(1) Modify service
+	(2) Add service
+	(3) Delete service
+	(4) Change activity properties
+	(0) Go to previous menu
+(0) Exit

@@ -1,12 +1,12 @@
 package org.kudryavtsev.gojava.hostalitic.reports;
 
-import org.kudryavtsev.gojava.hostalitic.User;
+import org.kudryavtsev.gojava.hostalitic.Client;
 
 public class Report {
-    private User userWantedReport;
+    private Client userWantedReport;
 //    ReportType reportType;
 
-    public Report(final User user) {
+    public Report(final Client user) {
 	setUserWantedReport(user);
     }
 
@@ -16,11 +16,11 @@ public class Report {
 	+ getUserWantedReport().getName() + "\nReport done.");
     }
 
-    final User getUserWantedReport() {
+    final Client getUserWantedReport() {
 	return userWantedReport;
     }
 
-    final void setUserWantedReport(final User userWantedReport) {
+    final void setUserWantedReport(final Client userWantedReport) {
 	this.userWantedReport = userWantedReport;
     }
 }

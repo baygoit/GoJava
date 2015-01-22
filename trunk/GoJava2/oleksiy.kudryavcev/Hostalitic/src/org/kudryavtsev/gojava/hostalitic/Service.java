@@ -1,10 +1,17 @@
 package org.kudryavtsev.gojava.hostalitic;
 
+import java.util.Calendar;
+
 public class Service {
     private String name;
+    private int serviceId;
+    private String description;
+    private Calendar startDate;
+    private int term;
+    private Activity activity;
+    private double cost;
 
     public Service(final String serviceName) {
-	// TODO Create other activity items
 	setName(serviceName);
 	System.out.println("Service " + this.getName() + " created.");
     }

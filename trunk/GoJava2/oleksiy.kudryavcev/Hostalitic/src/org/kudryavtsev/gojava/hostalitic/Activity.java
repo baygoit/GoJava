@@ -2,10 +2,13 @@ package org.kudryavtsev.gojava.hostalitic;
 
 public class Activity {
     private String name;
+    private int activityId;
+    private String description;
 
     public Activity(final String activityName) {
 	// TODO Create other activity items
 	setName(activityName);
+	setDescription("Some descrition.");
 	System.out.println("Activity " + this.getName() + " created.");
     }
 
@@ -15,5 +18,13 @@ public class Activity {
 
     private void setName(final String newName) {
 	name = newName;
+    }
+
+    public final String getDescription() {
+	return description;
+    }
+
+    public void setDescription(final String description) {
+	this.description = description;
     }
 }
