@@ -10,7 +10,7 @@ public class SkillTest {
     private Skill skill;
     @Test
     public void testSkillCreation() {
-        this.skill = new Skill("");
+        this.skill = new Skill("TestSkill");
         assertNotNull(skill);
     }
     @Test
@@ -30,10 +30,19 @@ public class SkillTest {
     }
     @Test
     public void testSkillEquals() {
-        Skill skillOne = new Skill("_");
-        Skill skillTwo = new Skill("_");
+        Skill skillOne = new Skill("TestSkill");
+        Skill skillTwo = new Skill("TestSkill");
         skillOne.evolve();
         assertTrue(skillOne.equals(skillTwo));
         assertNotEquals(skillOne.toString(), skillTwo.toString());
+    }
+    @Test
+    public void testRandomSkillReturn() {
+        Skill skillOne = new Skill("SkillOne");
+        Skill skillTwo = new Skill("SkillTwo");
+        Skill skillThree = new Skill("SkillTree");
+        Skill skillFour = new Skill("TestSkill");
+        assertEquals(3, Skill.getRandomSkills(3).size());
+        assertNull(Skill.getRandomSkills(9));
     }
 }

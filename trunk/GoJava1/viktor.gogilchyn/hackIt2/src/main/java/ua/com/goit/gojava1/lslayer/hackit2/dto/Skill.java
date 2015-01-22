@@ -1,9 +1,9 @@
 package ua.com.goit.gojava1.lslayer.hackit2.dto;
 
 import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Random;
 import java.util.Set;
-
-import ua.com.goit.gojava1.lslayer.hackit2.SkillDefaultValueException;
 
 public class Skill {
     private String name = null;
@@ -50,6 +50,22 @@ public class Skill {
     @Override
     public String toString() {
         return this.name + " - " + this.value;
+    }
+    
+    public static Set<Skill> getRandomSkills(int quantity) {
+        if (quantity < 0) return new HashSet<Skill>();
+        if (quantity < Skill.allPossibleSkills.size()) {
+            Set<Skill> returnSet = new HashSet<Skill>();
+            int index = new Random().nextInt(allPossibleSkills.size());
+            Iterator<Skill> iter = allPossibleSkills.iterator();
+            for (int i = 0; i < index; i++) {
+                iter.next();
+            }
+            returnSet.add(iter.next());
+            returnSet.addAll(Skill.getRandomSkills(quantity - returnSet.size()));
+            return returnSet;
+        }
+        return null;
     }
 
 }
