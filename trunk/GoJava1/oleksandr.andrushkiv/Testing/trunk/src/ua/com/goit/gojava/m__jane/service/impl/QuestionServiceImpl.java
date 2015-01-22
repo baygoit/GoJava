@@ -5,14 +5,15 @@ import java.util.List;
 
 import ua.com.goit.gojava.m__jane.model.Profile;
 import ua.com.goit.gojava.m__jane.model.Question;
+import ua.com.goit.gojava.m__jane.model.QuestionCategory;
 import ua.com.goit.gojava.m__jane.service.ProfileService;
 import ua.com.goit.gojava.m__jane.service.QuestionCategoryService;
 import ua.com.goit.gojava.m__jane.service.QuestionService;
 
 public class QuestionServiceImpl implements QuestionService{
 		
-	private ProfileService profileService;	
-	private QuestionCategoryService questionCategoryService; 
+	//private ProfileService profileService;	
+	//private QuestionCategoryService questionCategoryService; 
 	
 	/*private final static String[] QUESTIONS;
 	 static {
@@ -31,14 +32,144 @@ public class QuestionServiceImpl implements QuestionService{
 	 }
 	*/
 	 
-	private final List<Question> questions = new ArrayList<Question>();
+	private final List<Question> questions = new ArrayList<Question>() {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 3L;
+
+		{			
+			
+			this.add(new Question() {
+				{
+					this.setId(1);
+					this.setContent("Як має поводитись продавець у торговому залі, якщо Покупець змушений чекати?");
+					this.setQuestionCategory(new QuestionCategory() {
+						{
+							this.setId(1);
+							this.setName("Продавець");
+						}
+					});
+					this.setProfile(new Profile() {
+						{
+							this.setId(1);
+							this.setName("Торгові питання");
+						}
+					});
+					this.setOpenQuestion(true);
+					
+				}
+			});
+			this.add(new Question() {
+				{
+					this.setId(2);
+					this.setContent("Яким є завдання продавця на етапі «Презентація товару»?");
+					this.setQuestionCategory(new QuestionCategory() {
+						{
+							this.setId(2);
+							this.setName("Старший продавець");
+						}
+					});
+					this.setProfile(new Profile() {
+						{
+							this.setId(1);
+							this.setName("Торгові питання");
+						}
+					});
+					this.setOpenQuestion(false);
+					
+				}
+			});
+			this.add(new Question() {
+				{
+					this.setId(3);
+					this.setContent("Як продавець має презентувати товар Покупцю?");
+					this.setQuestionCategory(new QuestionCategory() {
+						{
+							this.setId(1);
+							this.setName("Продавець");
+						}
+					});
+					this.setProfile(new Profile() {
+						{
+							this.setId(1);
+							this.setName("Торгові питання");
+						}
+					});
+					this.setOpenQuestion(true);
+					
+				}
+			});
+			this.add(new Question() {
+				{
+					this.setId(4);
+					this.setContent("В чому полягає суть методу презентації Т-Х-В? Наведіть приклад по товару з вашого відділу.");
+					this.setQuestionCategory(new QuestionCategory() {
+						{
+							this.setId(2);
+							this.setName("Старший продавець");
+						}
+					});
+					this.setProfile(new Profile() {
+						{
+							this.setId(1);
+							this.setName("Торгові питання");
+						}
+					});
+					this.setOpenQuestion(true);
+					
+				}
+			});
+			this.add(new Question() {
+				{
+					this.setId(5);
+					this.setContent("Назвіть основні етапи продажу");
+					this.setQuestionCategory(new QuestionCategory() {
+						{
+							this.setId(1);
+							this.setName("Продавець");
+						}
+					});
+					this.setProfile(new Profile() {
+						{
+							this.setId(2);
+							this.setName("Законодавство");
+						}
+					});
+					this.setOpenQuestion(false);
+					
+				}
+			});
+			this.add(new Question() {
+				{
+					this.setId(1);
+					this.setContent("Яким є завдання продавця на етапі «Зустріч покупця»?");
+					this.setQuestionCategory(new QuestionCategory() {
+						{
+							this.setId(3);
+							this.setName("Босс");
+						}
+					});
+					this.setProfile(new Profile() {
+						{
+							this.setId(1);
+							this.setName("Торгові питання");
+						}
+					});
+					this.setOpenQuestion(true);
+					
+				}
+			});
+		}
+	};
+		
 	 
 	public QuestionServiceImpl() {
 		//initQuestions();
 	}
 	
 
-	public void initQuestions() {
+	/*public void initQuestions() {
 		questions.add(new Question(1, "Як має поводитись продавець у торговому залі, якщо Покупець змушений чекати?",
 				questionCategoryService.getQuestionCategory(1), profileService.getProfile(1), true));	
 		
@@ -57,19 +188,9 @@ public class QuestionServiceImpl implements QuestionService{
 		questions.add(new Question(6, "Яким є завдання продавця на етапі «Зустріч покупця»?",
 				questionCategoryService.getQuestionCategory(3), profileService.getProfile(1), true));	
 	}
-
+*/
 	
-	public void setProfileService(ProfileService profileService) {
-		this.profileService = profileService;
-	}
-
-
-	public void setQuestionCategoryService(
-			QuestionCategoryService questionCategoryService) {
-		this.questionCategoryService = questionCategoryService;
-	}
-
-
+	
 	@Override
 	public List<Question> getQuestionList() {
 		return questions;
@@ -83,27 +204,24 @@ public class QuestionServiceImpl implements QuestionService{
 
 	@Override
 	public Question getQuestion(int questionId) {
-		Question foundQuestion = null;
+
 		for (Question question : questions) {
 			if(question.getId() == questionId) {
-				foundQuestion = question;
-				break;
+				return question;
 			}
 		}
-		return foundQuestion;
+		return null;
 	}
 
 	@Override
 	public List<Question> getQuestionList(Profile profile) {
 		
 		List<Question> listQuestions = new ArrayList<>();
-
 		for (Question question : questions) {
 			if (question.getProfile().equals(profile)) {
 				listQuestions.add(question);
 			}		
 		}
-
 		return listQuestions;
 	}
 

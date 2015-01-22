@@ -43,13 +43,11 @@ public class ProfileServiceImpl implements ProfileService {
 
 	@Override
 	public Profile getProfile(int profileId) {
-		Profile foundProfile = null;
 		for (Profile profile : profileList) {
 			if (profile.getId() == profileId) {
-				foundProfile = profile;
-				break;
+				return profile;
 			}
 		}
-		return foundProfile;
-	}
+		return null;
+	}	
 }

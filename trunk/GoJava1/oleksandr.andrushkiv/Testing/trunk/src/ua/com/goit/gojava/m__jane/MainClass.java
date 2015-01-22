@@ -8,19 +8,13 @@ import ua.com.goit.gojava.m__jane.model.Question;
 import ua.com.goit.gojava.m__jane.service.ProfileService;
 import ua.com.goit.gojava.m__jane.service.QuestionService;
 import ua.com.goit.gojava.m__jane.service.impl.ProfileServiceImpl;
-import ua.com.goit.gojava.m__jane.service.impl.QuestionCategoryServiceImpl;
 import ua.com.goit.gojava.m__jane.service.impl.QuestionServiceImpl;
 
 public class MainClass {
 
 	private static QuestionService questionService = new QuestionServiceImpl();
 	private static ProfileService profileService = new ProfileServiceImpl();
-	static {
-		questionService.setProfileService(new ProfileServiceImpl());
-		questionService.setQuestionCategoryService(new QuestionCategoryServiceImpl());
-		questionService.initQuestions();
-	}
-	
+		
 	public static void main(String[] args) {
 
 		System.out.println("User story 1 - press 1 | User story 2 - press 2");
@@ -45,7 +39,9 @@ public class MainClass {
 	}
 
 	private static void askAndPrintQuestionsOfOneProfile(Scanner scanIn) {
-				
+		
+														//яке призначення методу getProfileCount() для бізнес логіки?
+														//ось я його використовую
 		System.out.println("Enter number the question from 1 to " + profileService.getProfileCount());
 		Profile profile = profileService.getProfile(Integer.parseInt(scanIn.nextLine().trim()));
 		if (profile == null) {

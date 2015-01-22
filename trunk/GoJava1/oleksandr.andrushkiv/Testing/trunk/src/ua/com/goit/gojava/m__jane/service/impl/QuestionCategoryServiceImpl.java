@@ -39,15 +39,13 @@ public class QuestionCategoryServiceImpl implements QuestionCategoryService {
 
 	@Override
 	public QuestionCategory getQuestionCategory(int questionCategoryId) {
-		QuestionCategory foundQuestionCategory = null;
 
 		for (QuestionCategory questionCategory : questionCategories) {
 			if (questionCategory.getId() == questionCategoryId) {
-				foundQuestionCategory = questionCategory;
-				break;
+				return questionCategory;
 			}
 		}
-		return foundQuestionCategory;
+		return null;
 	}
 
 	protected List<QuestionCategory> getQuestionCategoryList() {

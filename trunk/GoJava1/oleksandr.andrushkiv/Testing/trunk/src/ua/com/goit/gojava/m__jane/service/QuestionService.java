@@ -13,7 +13,4 @@ public interface QuestionService {
     public int getQuestionCount();
     public Question getQuestion(int profileId);
     
-    public void setProfileService(ProfileService profileService);
-    public void setQuestionCategoryService(QuestionCategoryService questionCategoryService);
-    public void initQuestions();
 }
