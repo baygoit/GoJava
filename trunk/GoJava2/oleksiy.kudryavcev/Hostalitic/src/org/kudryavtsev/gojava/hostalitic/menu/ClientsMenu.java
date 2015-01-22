@@ -39,7 +39,7 @@ public class ClientsMenu extends Menu {
 		break;
 
 	    case 2:
-		System.out.println("Enter client name:");
+		System.out.print("Enter client name: ");
 		Fabric.createClient((new Scanner(System.in)).nextLine());
 		break;
 

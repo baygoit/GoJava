@@ -50,8 +50,5 @@ public final class Hostalitic {
 	client1.addService(service1);
 	client1.addService(service2);
 	client2.addService(service1);
-	
-	
-	Fabric.createClient("Maxan");
     }
 }

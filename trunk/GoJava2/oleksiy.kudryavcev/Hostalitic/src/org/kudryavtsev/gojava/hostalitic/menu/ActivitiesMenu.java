@@ -1,7 +1,9 @@
 package org.kudryavtsev.gojava.hostalitic.menu;
 
 import java.util.Scanner;
+
 import org.kudryavtsev.gojava.hostalitic.Activity;
+import org.kudryavtsev.gojava.hostalitic.Fabric;
 import org.kudryavtsev.gojava.hostalitic.Hostalitic;
 
 public class ActivitiesMenu extends Menu {
@@ -36,7 +38,8 @@ public class ActivitiesMenu extends Menu {
 		break;
 
 	    case 2:
-		System.out.println("add not implemented yet");
+		System.out.print("Enter activity name: ");
+		Fabric.createActivity((new Scanner(System.in)).nextLine());
 		break;
 
 	    case 3:

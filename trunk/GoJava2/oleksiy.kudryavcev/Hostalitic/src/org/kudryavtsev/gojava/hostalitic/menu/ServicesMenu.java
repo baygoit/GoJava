@@ -2,6 +2,7 @@ package org.kudryavtsev.gojava.hostalitic.menu;
 
 import java.util.Scanner;
 
+import org.kudryavtsev.gojava.hostalitic.Fabric;
 import org.kudryavtsev.gojava.hostalitic.Hostalitic;
 import org.kudryavtsev.gojava.hostalitic.Service;
 
@@ -37,7 +38,9 @@ public class ServicesMenu extends Menu {
 		break;
 
 	    case 2:
-		System.out.println("add not implemented yet");
+		System.out.println("add not implemented");
+//		System.out.print("Enter activity name: ");
+//		Fabric.createActivity((new Scanner(System.in)).nextLine());
 		break;
 
 	    case 3:
