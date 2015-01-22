@@ -4,7 +4,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-public class GoodStorageInMemoryTest extends Assert {
+public class GoodStorageImplTest extends Assert {
 	
 	public GoodStorageImpl store; 
 	
@@ -24,6 +24,11 @@ public class GoodStorageInMemoryTest extends Assert {
 	}
 	
 	@Test
+	public void testGoodListNotNull(){
+		assertNotNull(store.getGoodList());
+	}
+	
+	@Test
 	public void testGoodFromNullCategoryIsNull(){
 		assertNull(store.getGoodList(null));
 	}
@@ -33,4 +38,6 @@ public class GoodStorageInMemoryTest extends Assert {
 		Category category = new Category();
 		assertNull(store.getGoodList(category));
 	}	
+	
+	
 }
