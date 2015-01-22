@@ -5,8 +5,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Stack;
+
 //TODO: TRY 2/37
+//TODO: TRY 1234/2
 //SOLUTION: ADD TO DIVIDEND LIST BEFORE ADDING ZEROS
+
 public class DivisionUnit {
 	
 	public static final double MAX_FRACTAL_DEPTH = 35;	
@@ -63,10 +66,14 @@ public class DivisionUnit {
 	
 	private static String divisionRegularCase(int inputDividend, 
 			int inputDivider){
+		
 		String result = "0";
+		
 		int dividendFractive = inputDividend % inputDivider;
 		
-		if (inputDividend - dividendFractive != 0) 
+		int dividendNatural = inputDividend - dividendFractive;
+		
+		if (dividendNatural != 0) 
 			result = Integer.valueOf(divisionNaturalPart(inputDividend, 
 					inputDivider)).toString(); 
 		if (dividendFractive != 0)
@@ -75,43 +82,45 @@ public class DivisionUnit {
 		else {
 			result+= ".0";
 		}
-		
-		completeLog(inputDividend, inputDivider, result);
 		return result;
 	}	
 	
-	private static void completeLog(int inputDividend,
-			int inputDivider, String result){
-	}
-	
-	private static int divisionNaturalPart(int dividend, int divider){
+	private static int divisionNaturalPart(int inputDividend, int divider){
+		
+		int dividend = inputDividend;
+		
 		Stack<Integer> dividendDigits = numberToStackOfDigits (dividend);
+		
 		int resultNatural = 0;
+		
+		dividend = 0;
+		
 		while (!dividendDigits.empty()) {
-			if (dividend == 0) {
-				resultNatural = resultNatural * 10;				
+						
+			if (dividend < divider) {
+				dividend = dividend * 10 + (Integer)dividendDigits.pop(); 
+				if (dividend < divider){
+					resultNatural = resultNatural * 10;
+				}					
 			}
-			if (dividend< divider){
-				while (!dividendDigits.empty())
-						dividend = dividend * 10 + (Integer)dividendDigits.pop(); 
-				if (dividendDigits.empty()) break;
+			
+			if (dividend >= divider) {
+				resultNatural = resultNatural * 10 + dividend / divider;				
+				dividend = dividend % divider;
 			}
-			resultNatural = resultNatural * 10 + dividend / divider;
-			int tempSubtrahend = dividend % divider;
-			dividend = tempSubtrahend; 
 		}
 		return resultNatural;
 	}
 	
 	private static Stack<Integer> numberToStackOfDigits(int inputNumber){
 		Stack<Integer> dividendDigits = new Stack<Integer>();
-		while (inputNumber > 9){
+		while (inputNumber > 0){
 			dividendDigits.push(inputNumber % 10);
 			inputNumber = inputNumber / 10;
 		}
 		return dividendDigits;
 	}
-		//_____________________________________________________________________1
+
 	private static String divisionFractivePart(int dividend, int divider){
 		
 		StringBuilder resultRow = new StringBuilder(); 
