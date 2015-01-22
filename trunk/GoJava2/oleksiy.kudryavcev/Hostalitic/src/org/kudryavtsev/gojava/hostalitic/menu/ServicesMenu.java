@@ -2,27 +2,26 @@ package org.kudryavtsev.gojava.hostalitic.menu;
 
 import java.util.Scanner;
 
-import org.kudryavtsev.gojava.hostalitic.Client;
 import org.kudryavtsev.gojava.hostalitic.Hostalitic;
+import org.kudryavtsev.gojava.hostalitic.Service;
 
-public class usersMenu extends Menu {
-
+public class ServicesMenu extends Menu {
     public final void showMenu() {
 	int selection = 0;
 	boolean exit;
 	exit = false;
 
 	Scanner in = new Scanner(System.in);
-
-	for (Client item : Hostalitic.clients) {
+	
+	for (Service item : Hostalitic.services) {
 	    String element = item.toString();
 	    System.out.println(element);
 	}
-
+	
 	while (!exit) {
 
-	    System.out.println("(1) Modify user\n" + "(2) Add user\n"
-		    + "(3) Delete user\n" + "(0) Go to previous menu\n"
+	    System.out.println("(1) Modify service\n" + "(2) Add service\n"
+		    + "(3) Delete service\n" + "(0) Go to previous menu\n"
 		    + "Choice: ");
 	    try {
 		selection = in.nextInt();
@@ -46,7 +45,7 @@ public class usersMenu extends Menu {
 		break;
 
 	    case 0:
-		mainMenu.show();
+		MainMenu.show();
 		exit = true;
 		break;
 

@@ -2,17 +2,17 @@ package org.kudryavtsev.gojava.hostalitic.menu;
 
 import java.util.Scanner;
 
-public class mainMenu extends Menu {
-    private static Menu usersMenu;
+public class MainMenu extends Menu {
+    private static Menu clientsMenu;
     private static Menu activitiesMenu;
     private static Menu reportsMenu;
     private static Menu servicesMenu;
 
-    public mainMenu() {
-	usersMenu = (Menu) new usersMenu();
-	activitiesMenu = (Menu) new activitiesMenu();
-	reportsMenu = (Menu) new reportsMenu();
-	servicesMenu = (Menu) new servicesMenu();
+    public MainMenu() {
+	clientsMenu = (Menu) new ClientsMenu();
+	activitiesMenu = (Menu) new ActivitiesMenu();
+	reportsMenu = (Menu) new ReportsMenu();
+	servicesMenu = (Menu) new ServicesMenu();
     }
 
     public static final void show() {
@@ -22,7 +22,7 @@ public class mainMenu extends Menu {
 
 	Scanner in = new Scanner(System.in);
 	while (!exit) {
-	    System.out.println("(1) To show users\n"
+	    System.out.println("(1) To show clients\n"
 		    + "(2) To show activities\n" + "(3) To show reports\n"
 		    + "(4) To show services\n" + "(0) To exit\n" + "Choice: ");
 
@@ -36,7 +36,7 @@ public class mainMenu extends Menu {
 	    switch (selection) {
 
 	    case 1:
-		usersMenu.showMenu();
+		clientsMenu.showMenu();
 		exit = true;
 		break;
 
@@ -55,7 +55,7 @@ public class mainMenu extends Menu {
 		break;
 
 	    case 0:
-		System.out.println("Quitin...");
+		System.out.println("Exiting...");
 		exit = true;
 		break;
 
@@ -68,7 +68,6 @@ public class mainMenu extends Menu {
 
     @Override
     public void showMenu() {
-	// this.show();
 
     }
 }

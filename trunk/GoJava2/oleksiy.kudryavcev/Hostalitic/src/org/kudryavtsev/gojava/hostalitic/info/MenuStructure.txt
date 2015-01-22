@@ -1,8 +1,8 @@
-(1) Users
-	List of users: ...
-	(1) Modify user
-	(2) Add user
-	(3) Delete user
+(1) Client
+	List of clients: ...
+	(1) Modify client
+	(2) Add client
+	(3) Delete client
 	(0) Go to previous menu
 (2) Activities
 	List of activities: ...

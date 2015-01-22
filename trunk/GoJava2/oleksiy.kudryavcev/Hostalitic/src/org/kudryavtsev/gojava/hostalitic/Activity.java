@@ -6,7 +6,6 @@ public class Activity {
     private String description;
 
     public Activity(final String activityName) {
-	// TODO Create other activity items
 	setName(activityName);
 	setDescription("Some descrition.");
 	System.out.println("Activity " + this.getName() + " created.");
@@ -26,5 +25,10 @@ public class Activity {
 
     public void setDescription(final String description) {
 	this.description = description;
+    }
+    
+    @Override
+    public String toString(){
+	return getName();
     }
 }

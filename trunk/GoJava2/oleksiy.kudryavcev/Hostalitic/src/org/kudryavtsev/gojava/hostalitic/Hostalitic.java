@@ -3,74 +3,51 @@ package org.kudryavtsev.gojava.hostalitic;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.kudryavtsev.gojava.hostalitic.menu.Menu;
-import org.kudryavtsev.gojava.hostalitic.menu.mainMenu;
-import org.kudryavtsev.gojava.hostalitic.reports.Report;
+import org.kudryavtsev.gojava.hostalitic.menu.MainMenu;
 
 public final class Hostalitic {
 
     public static List<Client> clients;
-    private static List<Activity> activities;
-    private static List<Service> services;
-    private static mainMenu mainMenu;
+    public static List<Activity> activities;
+    public static List<Service> services;
 
     private Hostalitic() {
 	System.out.println("Hostalitic starting...");
 	clients = new ArrayList<Client>();
 	services = new ArrayList<Service>();
 	activities = new ArrayList<Activity>();
-	mainMenu = new mainMenu();	
+	new MainMenu();
     }
 
     public static void main(final String[] args) {
 	Hostalitic hostalitic = new Hostalitic();
-
 	fillDemoData(hostalitic);
-	org.kudryavtsev.gojava.hostalitic.menu.mainMenu.show();
-
+	org.kudryavtsev.gojava.hostalitic.menu.MainMenu.show();
     }
 
     private static void fillDemoData(Hostalitic hostalitic) {
-	
+
 	System.out.println("Demo starting...");
 	Client client1 = new Client("Max");
 	Client client2 = new Client("Misha");
-	
+
 	clients.add(client1);
 	clients.add(client2);
-	
-	// for(Client item : clients) {
-	// String element = item.toString();
-	// System.out.println(element);
-	// }
 
-//	Activity activity1 = new Activity("Hosting");
-//	hostalitic.addActivity(activity1);
-//
-//	Service service1 = new Service("IP address");
-//	hostalitic.addService(activity1, service1);
-//
-//	Report report1 = new Report(user1);
-//	report1.show("Client info");
+	Activity activity1 = new Activity("Hosting");
+	Activity activity2 = new Activity("Domain registering");
+
+	activities.add(activity1);
+	activities.add(activity2);
+
+	Service service1 = new Service("Provide hosting", activity1);
+	Service service2 = new Service("Domain", activity2);
+
+	services.add(service1);
+	services.add(service2);
+
+	client1.addService(service1);
+	client1.addService(service2);
+	client2.addService(service1);
     }
-
-    private void addService(final Activity activity, final Service service) {
-	// TODO implement add service
-	System.out.println("Service " + service.getName() + " for activity "
-		+ activity.getName() + " added.");
-
-    }
-
-    private void addActivity(final Activity activity) {
-	// TODO implement add activity
-	System.out.println("Activity " + activity.getName() + " added.");
-    }
-
-    private void addUser(final Client user) {
-	// System.out.println("Enter user name: ");
-	// return (new Scanner(System.in).nextLine());
-	// TODO implement add user
-	System.out.println("Client " + user.getName() + " added.");
-    }
-
 }

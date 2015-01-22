@@ -1,11 +1,10 @@
 package org.kudryavtsev.gojava.hostalitic.menu;
 
 import java.util.Scanner;
-
-import org.kudryavtsev.gojava.hostalitic.Client;
+import org.kudryavtsev.gojava.hostalitic.Activity;
 import org.kudryavtsev.gojava.hostalitic.Hostalitic;
 
-public class reportsMenu extends Menu {
+public class ActivitiesMenu extends Menu {
     public final void showMenu() {
 	int selection = 0;
 	boolean exit;
@@ -13,33 +12,39 @@ public class reportsMenu extends Menu {
 
 	Scanner in = new Scanner(System.in);
 
+	for (Activity item : Hostalitic.activities) {
+	    String element = item.toString();
+	    System.out.println(element);
+	}
+
 	while (!exit) {
 
-	    System.out.println("(1) Report 1\n" + "(2) Report 2\n"
-		    + "(3) Report 3\n" + "(0) Go to previous menu\n"
+	    System.out.println("(1) Modify activity\n" + "(2) Add activity\n"
+		    + "(3) Delete activity\n" + "(0) Go to previous menu\n"
 		    + "Choice: ");
 	    try {
 		selection = in.nextInt();
 	    } catch (Exception e) {
 		System.out.println("Input correct number!");
-		selection = 0;	    }
+		selection = 0;
+	    }
 
 	    switch (selection) {
 
 	    case 1:
-		System.out.println("report 1 not implemented yet");
+		System.out.println("modify not implemented yet");
 		break;
 
 	    case 2:
-		System.out.println("report 2 not implemented yet");
+		System.out.println("add not implemented yet");
 		break;
 
 	    case 3:
-		System.out.println("report 3 not implemented yet");
+		System.out.println("delete not implemented yet");
 		break;
 
 	    case 0:
-		mainMenu.show();
+		MainMenu.show();
 		exit = true;
 		break;
 

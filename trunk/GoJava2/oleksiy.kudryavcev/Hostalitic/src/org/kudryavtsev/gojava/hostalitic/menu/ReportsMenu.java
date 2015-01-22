@@ -2,17 +2,18 @@ package org.kudryavtsev.gojava.hostalitic.menu;
 
 import java.util.Scanner;
 
-public class activitiesMenu extends Menu {
+public class ReportsMenu extends Menu {
     public final void showMenu() {
 	int selection = 0;
 	boolean exit;
 	exit = false;
 
 	Scanner in = new Scanner(System.in);
+
 	while (!exit) {
 
-	    System.out.println("(1) Modify activity\n" + "(2) Add activity\n"
-		    + "(3) Delete activity\n" + "(0) Go to previous menu\n"
+	    System.out.println("(1) Report 1\n" + "(2) Report 2\n"
+		    + "(3) Report 3\n" + "(0) Go to previous menu\n"
 		    + "Choice: ");
 	    try {
 		selection = in.nextInt();
@@ -24,19 +25,19 @@ public class activitiesMenu extends Menu {
 	    switch (selection) {
 
 	    case 1:
-		System.out.println("modify not implemented yet");
+		System.out.println("report 1 not implemented yet");
 		break;
 
 	    case 2:
-		System.out.println("add not implemented yet");
+		System.out.println("report 2 not implemented yet");
 		break;
 
 	    case 3:
-		System.out.println("delete not implemented yet");
+		System.out.println("report 3 not implemented yet");
 		break;
 
 	    case 0:
-		mainMenu.show();
+		MainMenu.show();
 		exit = true;
 		break;
 

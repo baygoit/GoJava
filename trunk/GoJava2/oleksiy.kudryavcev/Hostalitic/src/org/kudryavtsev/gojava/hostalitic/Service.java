@@ -11,9 +11,11 @@ public class Service {
     private Activity activity;
     private double cost;
 
-    public Service(final String serviceName) {
+    public Service(final String serviceName, Activity activityName) {
 	setName(serviceName);
-	System.out.println("Service " + this.getName() + " created.");
+	activity = activityName;
+	System.out.println("Service " + this.getName() + " with activity "
+		+ activity + " created.");
     }
 
     public final String getName() {
@@ -22,5 +24,10 @@ public class Service {
 
     private void setName(final String newName) {
 	name = newName;
+    }
+    
+    @Override
+    public String toString(){
+	return getName();
     }
 }
