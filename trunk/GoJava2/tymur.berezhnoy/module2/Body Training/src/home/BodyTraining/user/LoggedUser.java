@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public class LoggedUser {
 	
-	 DiaryManager diaryManager;
+	private DiaryManager diaryManager;
 	
 	public LoggedUser(DiaryManager diaryManager) {
 		this.diaryManager = diaryManager;
