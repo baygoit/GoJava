@@ -47,5 +47,10 @@ public class SkillTest {
         skill.evolve();
         assertEquals(2, skill.getValue());
     }
+    @Test 
+    public void testSkillToString() {
+        this.skill = new Skill("TestSkill");
+        assertEquals("TestSkill - 1", skill.toString());
+    }
     
 }

@@ -30,8 +30,12 @@ public class Skill {
     }
 
     public int getValue() {
-        // TODO Auto-generated method stub
         return this.value;
+    }
+
+    @Override
+    public String toString() {
+        return this.name + " - " + this.value;
     }
 
 }
