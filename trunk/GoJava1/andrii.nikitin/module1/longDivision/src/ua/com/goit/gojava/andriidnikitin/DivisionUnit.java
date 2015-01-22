@@ -63,6 +63,8 @@ public class DivisionUnit {
 	private static String divisionRegularCase(int inputDividend, 
 			int inputDivider){
 		
+		List<StringBuilder> log = new ArrayList<StringBuilder>();
+		
 		String result = "0";
 		
 		int dividendFractive = inputDividend % inputDivider;
@@ -71,21 +73,26 @@ public class DivisionUnit {
 		
 		if (dividendNatural != 0) {
 			result = Integer.valueOf(divisionNaturalPart(inputDividend, 
-					inputDivider)).toString(); 
+					inputDivider, log)).toString(); 
 		}
 					
 		if (dividendFractive != 0){
 			result+= divisionFractivePart(dividendFractive, 
-					inputDivider);
+					inputDivider, log);
 		}
 		else {
 			result+= ".0";
 		}
 		
+		for (int i = 0; i < log.size(); i++){
+			System.out.println(log.get(i));
+		}
+		
 		return result;
 	}	
 	
-	private static int divisionNaturalPart(int inputDividend, int divider){
+	private static int divisionNaturalPart(int inputDividend, int divider, 
+			List<StringBuilder> log){
 		
 		int dividend = inputDividend;
 		
@@ -107,7 +114,7 @@ public class DivisionUnit {
 			if (dividend >= divider) {
 				resultNatural = resultNatural * 10 + dividend / divider;	
 				int newDividend = dividend % divider;
-				writeDividendAndSubtrahend(dividend, dividend - newDividend);
+				log = writeToLog(dividend, newDividend, log);
 				dividend = dividend % divider;
 			}
 		}
@@ -123,7 +130,8 @@ public class DivisionUnit {
 		return dividendDigits;
 	}
 
-	private static String divisionFractivePart(int dividend, int divider){
+	private static String divisionFractivePart(int dividend, int divider,
+			List<StringBuilder> log){
 		
 		StringBuilder resultRow = new StringBuilder(); 
 		int periodisedElement = FRACTAL_IS_NOT_SYSTEMATIC;
@@ -153,9 +161,9 @@ public class DivisionUnit {
 			
 			dividendListAdd(dividendList, dividend);
 			resultRow.append(dividend / divider);
-			int tempSubtrahend = dividend % divider;
-			writeDividendAndSubtrahend(dividend, tempSubtrahend);
-			dividend = tempSubtrahend;
+			int newDividend = dividend % divider;
+			log = writeToLog(dividend, newDividend,log);
+			dividend = newDividend;
 		}
 		
 		return formattedResult(resultRow, periodisedElement);
@@ -203,7 +211,62 @@ public class DivisionUnit {
 		return Integer.parseInt(input);
 	}	
 	
-	private static void writeDividendAndSubtrahend(int dividend, int subtrahend){
+	private static List<StringBuilder> writeToLog(int dividend, int newDividend, 
+			List<StringBuilder> log){
 		
+		int subtrahend = dividend - newDividend;
+		int identationSize = readIdentation(log);
+		StringBuilder identationDividend = getIdentation(identationSize).append(' ');
+		StringBuilder identationSubtrahend = new StringBuilder(identationDividend);
+		identationSubtrahend.setCharAt(0,'-');
+		int shiftLength = differenceOfLengths(dividend,  subtrahend);
+		StringBuilder shift = getIdentation(shiftLength);
+		identationSubtrahend.append(shift);
+		log.add(identationDividend.append(dividend));
+		log.add(identationSubtrahend.append(subtrahend));	
+		identationSize += differenceOfLengths(dividend, newDividend);
+		log = saveIdentation(identationSize, log);
+		return log;
 	}
+	
+	private static int readIdentation(List<StringBuilder> log){
+		int result;
+		if ( log.isEmpty() ) {
+			return 0;
+		}
+		try {
+			int index = log.size() - 1;
+			result = Integer.parseInt(log.get(index).toString());
+			
+		} catch (IndexOutOfBoundsException exception) {
+			result = 0;
+		} catch (NumberFormatException exception) {
+			result = 0;
+		}
+		
+		return result;
+	}
+	
+	private static StringBuilder getIdentation(int length){
+		StringBuilder result = new StringBuilder();
+		if (length <= 0) {
+			return result;
+		}
+		for (int i = 0; i < length; i++) {
+			result.append(' ');
+		}
+		return result;
+	}
+	
+	private static List<StringBuilder>saveIdentation(int identationSize, 
+			List<StringBuilder> log){
+		log.add(new StringBuilder(identationSize));
+		return log;
+	}
+	
+private static int differenceOfLengths(int arg0, int arg1){		
+		return Integer.valueOf(arg0).toString().length()
+				-Integer.valueOf(arg1).toString().length();
+	}
+	
 }
