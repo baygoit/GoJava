@@ -6,10 +6,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Stack;
 
-//TODO: TRY 2/37
-//TODO: TRY 1234/2
-//SOLUTION: ADD TO DIVIDEND LIST BEFORE ADDING ZEROS
-
 public class DivisionUnit {
 	
 	public static final double MAX_FRACTAL_DEPTH = 35;	
@@ -73,15 +69,19 @@ public class DivisionUnit {
 		
 		int dividendNatural = inputDividend - dividendFractive;
 		
-		if (dividendNatural != 0) 
+		if (dividendNatural != 0) {
 			result = Integer.valueOf(divisionNaturalPart(inputDividend, 
 					inputDivider)).toString(); 
-		if (dividendFractive != 0)
+		}
+					
+		if (dividendFractive != 0){
 			result+= divisionFractivePart(dividendFractive, 
 					inputDivider);
+		}
 		else {
 			result+= ".0";
 		}
+		
 		return result;
 	}	
 	
@@ -105,7 +105,9 @@ public class DivisionUnit {
 			}
 			
 			if (dividend >= divider) {
-				resultNatural = resultNatural * 10 + dividend / divider;				
+				resultNatural = resultNatural * 10 + dividend / divider;	
+				int newDividend = dividend % divider;
+				writeDividendAndSubtrahend(dividend, dividend - newDividend);
 				dividend = dividend % divider;
 			}
 		}
@@ -126,28 +128,50 @@ public class DivisionUnit {
 		StringBuilder resultRow = new StringBuilder(); 
 		int periodisedElement = FRACTAL_IS_NOT_SYSTEMATIC;
 		boolean pushZeroToResult = false;
-		List<Integer> dividendVector = new ArrayList<Integer>();
-		for (int i = 0; i < MAX_FRACTAL_DEPTH; i++){	
-			if (dividend!= 0)
-				while (dividend < divider) { 	
+		List<Integer> dividendList = new ArrayList<Integer>();
+		for (int position = 0; position < MAX_FRACTAL_DEPTH; position++){
+			if (dividendListContainsDividend(dividend, dividendList)){
+				periodisedElement = indexOfElementInDividendList(dividend, dividendList);
+				break;
+			}					
+			
+			if (dividend!= 0){
+				while (dividend < divider) { 
 					if (pushZeroToResult){
-						i++;
+						position++;
 						resultRow.append('0');
 					}
 					dividend = dividend * 10;
 					pushZeroToResult = true;					
 				}
-			else break;
-			pushZeroToResult = false;
-			if (dividendVector.contains(dividend)){
-				periodisedElement = dividendVector.indexOf(dividend);
+			}
+			else {
 				break;
-			}			
-			dividendVectorAdd(dividendVector, dividend);
+			}
+			
+			pushZeroToResult = false;
+			
+			dividendListAdd(dividendList, dividend);
 			resultRow.append(dividend / divider);
 			int tempSubtrahend = dividend % divider;
+			writeDividendAndSubtrahend(dividend, tempSubtrahend);
 			dividend = tempSubtrahend;
 		}
+		
+		return formattedResult(resultRow, periodisedElement);
+	}
+	
+	private static int indexOfElementInDividendList(int element, List<Integer> list){
+		element = cutZerosFromEnd(element);
+		return list.indexOf(element);
+	}
+	
+	private static boolean dividendListContainsDividend(int element, List<Integer> list){
+		return list.contains(cutZerosFromEnd(element));
+	}
+	
+	
+	private static String formattedResult(StringBuilder resultRow, int periodisedElement ){
 		String result = resultRow.toString();
 		if (periodisedElement != FRACTAL_IS_NOT_SYSTEMATIC) {
 			if (periodisedElement == 0) result = "(" + result + ")";	
@@ -158,11 +182,18 @@ public class DivisionUnit {
 		return "." + result;
 	}
 	
-	private static void dividendVectorAdd(List<Integer> dividendVector, int number){
-		while (number % 10 != 0)
-			number = number / 10;
+	private static void dividendListAdd(List<Integer> dividendVector, int number) {
+			number = cutZerosFromEnd(number);
 		dividendVector.add(number);
 	}
+	
+	private static int cutZerosFromEnd(int number){
+		while ((number != 0) && (number % 10 == 0)) {
+			number = number / 10;
+		}
+		return number;
+	}
+	
 	
 	
 	private static int getIntNumber(Scanner inputSource) 
@@ -171,4 +202,8 @@ public class DivisionUnit {
 		String input = inputSource.nextLine();
 		return Integer.parseInt(input);
 	}	
+	
+	private static void writeDividendAndSubtrahend(int dividend, int subtrahend){
+		
+	}
 }
