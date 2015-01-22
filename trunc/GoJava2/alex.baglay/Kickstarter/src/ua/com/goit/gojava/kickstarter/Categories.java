@@ -20,7 +20,7 @@ public class Categories {
 	}
 
 	public Category getName(int index) {
-		return categories[index]; // Ќебольшое изменение, мы изначально выдавали только им€, но теперь нам надо больше! 
+		return categories[index];  
 	}
 
 }
