@@ -1,3 +1,75 @@
+
+22.01.2015 23:30
+
+Profile class:
+
+	клас реалізує свою equals логіку.
+	пропоную додати наступний тест:
+		@Test
+		public void profileEqualsTest() {
+			Profile pFirst = new Profile();
+			pFirst.setId(1);
+			pFirst.setName("First");
+			
+			Profile pSecond = new Profile();
+			pSecond.setId(1);
+			pSecond.setName("Second");
+			
+			assertFalse(pFirst.equals(pSecond));
+		}	 
+	причина:
+		ProfileService може (і навіть буде) реалізовувати методи модифікації профайлу.
+		наприклад, перейменувати.
+		Але перед збереженням потрібно перевірити чи дійсно профайл переданий від користувача
+		був змінений (причини для цього можуть бути різноманітні).
+		
+QuestionService class:
+	
+	   Яка причина наявності наступних методів в інтерфейсі? 
+	   Гадаю, це технічні методи QuestionServiceImpl.
+		    public void setProfileService(ProfileService profileService);
+		    public void setQuestionCategoryService(QuestionCategoryService questionCategoryService);
+		    public void initQuestions();	
+
+	яке призначення методу getProfileCount() для бізнес логіки?
+
+ProfileServiceImpl.profileList field:		       
+
+	Гадаю, що краще ініціалізацію представити так:
+
+			@SuppressWarnings("serial")
+			private final List<Profile> profileList = new ArrayList<Profile>() {{
+					this.add(new Profile() {{
+							this.setId(1);
+							this.setName("Торгові питання");
+						}});
+					this.add(new Profile() {{
+							this.setId(2);
+							this.setName("Законодавство");
+						}});
+				}};		
+	Читабельність не страждає, компактніше, і суть та сама
+	Потрібно такі зміни примінити до усіх подібних випадків.
+	
+ProfileServiceImpl.getProfile method:
+
+	Яка причина використання foundProfile змінної?
+	Вона ще десь в методі використосовується?
+	Рекомендований приклад:
+	
+		public Profile getProfile2(int profileId) {
+			for (Profile profile : profileList) {
+				if (profile.getId() == profileId) {
+					return profile;
+				}
+			}
+			return null;
+		}	
+		
+	Потрібно такі зміни примінити до усіх подібних випадків.
+
+=========================================
+
 21.01.2015 23:30:
 
 ua.com.goit.gojava.m__jane.model package:
