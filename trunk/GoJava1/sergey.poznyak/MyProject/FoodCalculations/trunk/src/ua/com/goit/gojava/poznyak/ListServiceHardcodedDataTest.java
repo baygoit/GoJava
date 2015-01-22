@@ -6,8 +6,10 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * @author Serge
- *
+ * This class tests ListServiceHardcodedData class
+ * 
+ * @version 0.03 22 Jan 2015
+ * @author Sergey Poznyak
  */
 public class ListServiceHardcodedDataTest {
 	
