@@ -3,8 +3,8 @@
   realizations="true" associations="true" dependencies="true" nesting-relationships="true">  
   <interface id="1" language="java" name="ua.com.goit.gojava1.lslayer.hackit2.Actor" project="hackit2" 
     file="/hackit2/src/main/java/ua/com/goit/gojava1/lslayer/hackit2/Actor.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="162" y="87"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+    <position height="100" width="191" x="300" y="212"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="true" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
@@ -13,7 +13,7 @@
   <class id="2" language="java" name="ua.com.goit.gojava1.lslayer.hackit2.AbstractCharacter" project="hackit2" 
     file="/hackit2/src/main/java/ua/com/goit/gojava1/lslayer/hackit2/AbstractCharacter.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="135" width="185" x="69" y="223"/>    
+    <position height="135" width="219" x="41" y="37"/>    
     <display autosize="false" stereotype="true" package="true" initial-value="true" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -23,65 +23,83 @@
   <class id="3" language="java" name="ua.com.goit.gojava1.lslayer.hackit2.HumanControlledCharacter" project="hackit2" 
     file="/hackit2/src/main/java/ua/com/goit/gojava1/lslayer/hackit2/HumanControlledCharacter.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="162" y="488"/>    
+    <position height="99" width="191" x="69" y="212"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="4" language="java" name="ua.com.goit.gojava1.lslayer.hackit2.ActorFactory" project="hackit2" 
-    file="/hackit2/src/main/java/ua/com/goit/gojava1/lslayer/hackit2/ActorFactory.java" binary="false" 
+  <interface id="4" language="java" name="ua.com.goit.gojava1.lslayer.hackit2.Gear" project="hackit2" 
+    file="/hackit2/src/main/java/ua/com/goit/gojava1/lslayer/hackit2/Gear.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="100" width="159" x="41" y="491"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="5" language="java" name="ua.com.goit.gojava1.lslayer.hackit2.UserAccount" project="hackit2" 
+    file="/hackit2/src/main/java/ua/com/goit/gojava1/lslayer/hackit2/UserAccount.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="492" y="86"/>    
+    <position height="104" width="362" x="300" y="37"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="false" static="true"/>      
+      <operations public="true" package="true" protected="true" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="6" language="java" name="ua.com.goit.gojava1.lslayer.hackit2.Action" project="hackit2" 
+    file="/hackit2/src/main/java/ua/com/goit/gojava1/lslayer/hackit2/Action.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="207" x="69" y="352"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
-  </class>  
-  <class id="5" language="java" name="ua.com.goit.gojava1.lslayer.hackit2.dto.Skill" project="hackit2" 
-    file="/hackit2/src/main/java/ua/com/goit/gojava1/lslayer/hackit2/dto/Skill.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="504" y="362"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <realization id="6">    
-    <end type="SOURCE" refId="2"/>    
-    <end type="TARGET" refId="1"/>  
-  </realization>  
-  <association id="7">    
-    <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="8" name="skills"/>      
-      <multiplicity id="9" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="5" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="10">    
-    <end type="SOURCE" refId="5" navigable="false">      
-      <attribute id="11" name="allPossibleSkills"/>      
-      <multiplicity id="12" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="5" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <dependency id="13">    
-    <end type="SOURCE" refId="4"/>    
-    <end type="TARGET" refId="3"/>  
+  </interface>  
+  <dependency id="7">    
+    <end type="SOURCE" refId="1"/>    
+    <end type="TARGET" refId="6"/>  
   </dependency>  
-  <generalization id="14">    
+  <generalization id="8">    
     <end type="SOURCE" refId="3"/>    
     <end type="TARGET" refId="2"/>  
   </generalization>  
-  <dependency id="15">    
-    <end type="SOURCE" refId="4"/>    
-    <end type="TARGET" refId="1"/>  
+  <association id="9">    
+    <bendpoint x="38" y="212"/>    
+    <bendpoint x="38" y="352"/>    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="10" name="possesions"/>      
+      <multiplicity id="11" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="12">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="3"/>  
   </dependency>  
+  <association id="13">    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="14" name="character"/>      
+      <multiplicity id="15" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="1" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="16">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="6"/>  
+  </dependency>  
+  <dependency id="17">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="4"/>  
+  </dependency>  
+  <realization id="18">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="1"/>  
+  </realization>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
     sort-features="false" accessors="true" visibility="true">    
     <attributes public="true" package="true" protected="true" private="true" static="true"/>    

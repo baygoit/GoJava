@@ -1,6 +1,6 @@
 package ua.com.goit.gojava1.lslayer.hackit2;
 
-import ua.com.goit.gojava1.lslayer.hackit2.dto.CommandResult;
+import ua.com.goit.gojava1.lslayer.hackit2.dto.ActionResult;
 
 public class HumanControlledCharacter extends AbstractCharacter {
 
@@ -10,13 +10,7 @@ public class HumanControlledCharacter extends AbstractCharacter {
     }
 
     @Override
-    public CommandResult act(Action action) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public CommandResult act(Action action, Gear equipment) {
+    public ActionResult act(Action action) {
         // TODO Auto-generated method stub
         return null;
     }
