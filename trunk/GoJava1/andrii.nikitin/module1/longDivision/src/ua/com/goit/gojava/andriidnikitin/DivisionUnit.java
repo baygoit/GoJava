@@ -1,69 +1,67 @@
 package ua.com.goit.gojava.andriidnikitin;
 
 import java.util.List;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Scanner;
 import java.util.Stack;
 
 public class DivisionUnit {
 	
-	public static final double MAX_FRACTAL_DEPTH = 35;	
+	public final double MAX_FRACTAL_DEPTH = 35;	
 	
-	public static int FRACTAL_IS_NOT_SYSTEMATIC = -1;
-				
-	public static void main(String[] args) throws IOException{
-		
-		int dividend;
-		int divider;	
-		try(Scanner inputSource = new Scanner(System.in)){
-			System.out.println ("Type input numbers:"
-					+ "");
-			System.out.println ("dividend = ");	
-			dividend = getIntNumber(inputSource);
-			System.out.println("divider = ");
-			divider = getIntNumber(inputSource);
-			System.out.println(longDivision(dividend, divider));
-		}
-		catch (IllegalArgumentException e){
-			System.out.println("Wrong input!");
-		}
+	public final int FRACTAL_IS_NOT_SYSTEMATIC = -1;
+	
+	List<StringBuilder> log;
+	
+	String result;
+	
+	public DivisionUnit(){
+		log = new ArrayList<StringBuilder>();		
+		result = new String();					
+	}	
+	
+	public List<StringBuilder> getLog(){
+		return log;
 	}
 	
-	public static String longDivision(int inputDividend, int inputDivider){
+	public String getResult(){
+		return result;
+	}
+	
+	public void longDivision(int inputDividend, int inputDivider) 
+			throws IllegalArgumentException, ArithmeticException {
+		
+		if ((inputDividend < 0) || (inputDivider < 0)) {
+			throw new IllegalArgumentException("One or more arguments are less than zero.");
+		}
+		
+		if (inputDivider == 0) {
+			throw new ArithmeticException("Divide by zero.");
+		}	
+		
 		if (inputDividend == 0){			
-			return divisionZeroDividendCase(inputDividend, inputDivider);
+			result =  divisionZeroDividendCase(inputDividend, inputDivider);
+		}		
+		else {		
+			result =  divisionRegularCase(inputDividend, inputDivider);		
 		}
-		
-		if (inputDivider == 0) {
-			return divisionZeroDividerCase(inputDividend, inputDivider);
-		}				
-		else {
-			return divisionRegularCase(inputDividend, inputDivider);
-		}
-	}
+
+		logFormatting(inputDividend, inputDivider);		
+	}	
 			
-	private static String divisionZeroDividendCase(int inputDividend, 
-			int inputDivider){
-		
+	private String divisionZeroDividendCase(int inputDividend, int inputDivider) 
+			throws  ArithmeticException {
 		if (inputDivider == 0) {
-			return "Not a Number";
-		}
-		else {
-			return "0"; 	
-		}
+			throw new ArithmeticException("Divide by zero.");
+		}			
+		log.add(new StringBuilder().append(inputDividend));
+		log.add(new StringBuilder());
+		log.add(new StringBuilder());
+		return "0";
 	}
 	
-	private static String divisionZeroDividerCase(int inputDividend, 
-			int inputDivider){
+	private String divisionRegularCase(int inputDividend, int inputDivider){
 		
-		return "infinity";
-	}
-	
-	private static String divisionRegularCase(int inputDividend, 
-			int inputDivider){
-		
-		List<StringBuilder> log = new ArrayList<StringBuilder>();
+		log = new ArrayList<StringBuilder>();
 		
 		String result = "0";
 		
@@ -73,26 +71,41 @@ public class DivisionUnit {
 		
 		if (dividendNatural != 0) {
 			result = Integer.valueOf(divisionNaturalPart(inputDividend, 
-					inputDivider, log)).toString(); 
+					inputDivider)).toString(); 
+		}
+		else {
+			writeToLog(inputDividend, inputDividend);
+			trimFirstSymbolOfLogRow(1);
 		}
 					
 		if (dividendFractive != 0){
-			result+= divisionFractivePart(dividendFractive, 
-					inputDivider, log);
+			result+= divisionFractivePart(dividendFractive, inputDivider);
 		}
 		else {
 			result+= ".0";
-		}
-		
-		for (int i = 0; i < log.size(); i++){
-			System.out.println(log.get(i));
-		}
-		
+			writeZeroToEndOfLog();
+		}		
 		return result;
 	}	
 	
-	private static int divisionNaturalPart(int inputDividend, int divider, 
-			List<StringBuilder> log){
+	private void logFormatting(int inputDividend, int inputDivider) {
+		deleteLastRowFromLog();
+		StringBuilder firstRow = new StringBuilder().append(' ').append(inputDividend);
+		StringBuilder secondRow = log.get(1);
+		int difference =  firstRow.length() -  secondRow.length();
+		if (difference <= 0){
+			firstRow.append(getIdentation(-difference));
+		}
+		else {
+			secondRow.append(getIdentation(difference));
+		}
+		firstRow.append("|_").append(inputDivider);
+		secondRow.append("|").append(result);	
+		log.set(0, firstRow);
+		log.set(1, secondRow);
+	}
+
+	private int divisionNaturalPart(int inputDividend, int divider){
 		
 		int dividend = inputDividend;
 		
@@ -114,14 +127,14 @@ public class DivisionUnit {
 			if (dividend >= divider) {
 				resultNatural = resultNatural * 10 + dividend / divider;	
 				int newDividend = dividend % divider;
-				log = writeToLog(dividend, newDividend, log);
+				writeToLog(dividend, newDividend);
 				dividend = dividend % divider;
 			}
 		}
 		return resultNatural;
 	}
 	
-	private static Stack<Integer> numberToStackOfDigits(int inputNumber){
+	private Stack<Integer> numberToStackOfDigits(int inputNumber){
 		Stack<Integer> dividendDigits = new Stack<Integer>();
 		while (inputNumber > 0){
 			dividendDigits.push(inputNumber % 10);
@@ -130,8 +143,7 @@ public class DivisionUnit {
 		return dividendDigits;
 	}
 
-	private static String divisionFractivePart(int dividend, int divider,
-			List<StringBuilder> log){
+	private String divisionFractivePart(int dividend, int divider){
 		
 		StringBuilder resultRow = new StringBuilder(); 
 		int periodisedElement = FRACTAL_IS_NOT_SYSTEMATIC;
@@ -140,6 +152,8 @@ public class DivisionUnit {
 		for (int position = 0; position < MAX_FRACTAL_DEPTH; position++){
 			if (dividendListContainsDividend(dividend, dividendList)){
 				periodisedElement = indexOfElementInDividendList(dividend, dividendList);
+				writeToLog(dividend, 0);
+				deleteLastRowFromLog();
 				break;
 			}					
 			
@@ -162,24 +176,24 @@ public class DivisionUnit {
 			dividendListAdd(dividendList, dividend);
 			resultRow.append(dividend / divider);
 			int newDividend = dividend % divider;
-			log = writeToLog(dividend, newDividend,log);
+			writeToLog(dividend, newDividend);
 			dividend = newDividend;
 		}
 		
 		return formattedResult(resultRow, periodisedElement);
 	}
 	
-	private static int indexOfElementInDividendList(int element, List<Integer> list){
+	private int indexOfElementInDividendList(int element, List<Integer> list){
 		element = cutZerosFromEnd(element);
 		return list.indexOf(element);
 	}
 	
-	private static boolean dividendListContainsDividend(int element, List<Integer> list){
+	private boolean dividendListContainsDividend(int element, List<Integer> list){
 		return list.contains(cutZerosFromEnd(element));
 	}
 	
 	
-	private static String formattedResult(StringBuilder resultRow, int periodisedElement ){
+	private String formattedResult(StringBuilder resultRow, int periodisedElement ){
 		String result = resultRow.toString();
 		if (periodisedElement != FRACTAL_IS_NOT_SYSTEMATIC) {
 			if (periodisedElement == 0) result = "(" + result + ")";	
@@ -190,53 +204,43 @@ public class DivisionUnit {
 		return "." + result;
 	}
 	
-	private static void dividendListAdd(List<Integer> dividendVector, int number) {
+	private void dividendListAdd(List<Integer> dividendVector, int number) {
 			number = cutZerosFromEnd(number);
 		dividendVector.add(number);
 	}
 	
-	private static int cutZerosFromEnd(int number){
+	private int cutZerosFromEnd(int number){
 		while ((number != 0) && (number % 10 == 0)) {
 			number = number / 10;
 		}
 		return number;
 	}
 	
-	
-	
-	private static int getIntNumber(Scanner inputSource) 
-			throws NumberFormatException{
-		
-		String input = inputSource.nextLine();
-		return Integer.parseInt(input);
-	}	
-	
-	private static List<StringBuilder> writeToLog(int dividend, int newDividend, 
-			List<StringBuilder> log){
+	private void writeToLog(int dividend, int newDividend){
 		
 		int subtrahend = dividend - newDividend;
-		int identationSize = readIdentation(log);
-		StringBuilder identationDividend = getIdentation(identationSize).append(' ');
+		int identationSize = readIdentation();
+		StringBuilder identationDividend = getIdentation(identationSize);
 		StringBuilder identationSubtrahend = new StringBuilder(identationDividend);
-		identationSubtrahend.setCharAt(0,'-');
 		int shiftLength = differenceOfLengths(dividend,  subtrahend);
 		StringBuilder shift = getIdentation(shiftLength);
 		identationSubtrahend.append(shift);
-		log.add(identationDividend.append(dividend));
-		log.add(identationSubtrahend.append(subtrahend));	
+		log.add(identationDividend.append(' ').append(dividend));
+		log.add(identationSubtrahend.append('-').append(subtrahend));	
 		identationSize += differenceOfLengths(dividend, newDividend);
-		log = saveIdentation(identationSize, log);
-		return log;
+		log = saveIdentation(identationSize);
 	}
 	
-	private static int readIdentation(List<StringBuilder> log){
+	private int readIdentation(){
 		int result;
 		if ( log.isEmpty() ) {
-			return 0;
+			result = 0;
 		}
+		
 		try {
 			int index = log.size() - 1;
 			result = Integer.parseInt(log.get(index).toString());
+			deleteLastRowFromLog();
 			
 		} catch (IndexOutOfBoundsException exception) {
 			result = 0;
@@ -247,7 +251,7 @@ public class DivisionUnit {
 		return result;
 	}
 	
-	private static StringBuilder getIdentation(int length){
+	private StringBuilder getIdentation(int length){
 		StringBuilder result = new StringBuilder();
 		if (length <= 0) {
 			return result;
@@ -258,15 +262,37 @@ public class DivisionUnit {
 		return result;
 	}
 	
-	private static List<StringBuilder>saveIdentation(int identationSize, 
-			List<StringBuilder> log){
-		log.add(new StringBuilder(identationSize));
+	private List<StringBuilder>saveIdentation(int identationSize){
+		log.add(new StringBuilder().append(identationSize));
 		return log;
 	}
 	
-private static int differenceOfLengths(int arg0, int arg1){		
-		return Integer.valueOf(arg0).toString().length()
-				-Integer.valueOf(arg1).toString().length();
+	private int differenceOfLengths(int arg0, int arg1){		
+		return lengthsOfNumber(arg0)
+				- lengthsOfNumber(arg1);
+	}
+
+	private int lengthsOfNumber(int arg0){
+		if (arg0 == 0){
+			return 0;
+		}
+		return Integer.valueOf(arg0).toString().length();
 	}
 	
+	private void deleteLastRowFromLog(){
+		int lastElementIndex = log.size() - 1;
+		log.remove(lastElementIndex);
+	}	
+	
+	private void trimFirstSymbolOfLogRow(int index){		
+		StringBuilder row =  log.get(index);
+		row.deleteCharAt(0);
+		log.set(index, row);
+	}
+	
+	private void writeZeroToEndOfLog(){
+		writeToLog(0, 0);		
+		deleteLastRowFromLog();
+		trimFirstSymbolOfLogRow(log.size() - 2);
+	}
 }
