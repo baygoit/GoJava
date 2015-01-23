@@ -197,6 +197,7 @@
     <display labels="true" multiplicity="true"/>  
   </association>  
   <realization id="30">    
+    <bendpoint x="409" y="384"/>    
     <end type="SOURCE" refId="6"/>    
     <end type="TARGET" refId="8"/>  
   </realization>  
