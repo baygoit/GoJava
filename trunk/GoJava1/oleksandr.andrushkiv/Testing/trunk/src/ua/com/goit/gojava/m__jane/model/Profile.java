@@ -64,11 +64,14 @@ public class Profile {
 		Profile other = (Profile) obj;
 		if (id != other.id)
 			return false;
-		if (name == null) {
+	/*	if (name == null) {
 			if (other.name != null)
 				return false;
 		} else if (!name.equals(other.name))
+			return false;*/		
+		if (!Objects.equals(name, other.name)) {
 			return false;
+		}		
 		return true;
 	}
 	
