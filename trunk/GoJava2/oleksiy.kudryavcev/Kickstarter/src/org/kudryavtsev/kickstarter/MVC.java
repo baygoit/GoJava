@@ -9,7 +9,7 @@ public class MVC {
         controller.addModel(model);
         controller.addView(view);
         model.addView(view);
-        System.out.println("MVC created");
-        // controller.initModel();
+        // System.out.println("MVC created");
+        controller.start();
     }
 }
