@@ -35,7 +35,7 @@ public class UserAccount {
         return UserAccount.createAccount(login, password);
     }
     
-    public boolean checkLogin(String login, String password) { //Sometimes, when some important thisng happens,
+    public boolean checkLogin(String login, String password) { //Sometimes, when some important things happens,
                                   //I should check if it's really this account
         return this.loginName.equals(login) && this.password.equals(password);
     }

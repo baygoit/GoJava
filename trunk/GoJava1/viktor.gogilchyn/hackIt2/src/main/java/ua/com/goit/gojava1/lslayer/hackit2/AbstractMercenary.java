@@ -14,5 +14,17 @@ public class AbstractMercenary implements Actor {
         return null;
     }
 
+    @Override
+    public void addSkill(String string) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void evolveSkill(String skillName) {
+        // TODO Auto-generated method stub
+        
+    }
+
 
 }

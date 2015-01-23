@@ -8,12 +8,6 @@ public class HumanControlledCharacter extends AbstractCharacter implements Human
     }
 
     @Override
-    public int skillValue(String skillName) {
-        // TODO Auto-generated method stub
-        return 0;
-    }
-    
-    @Override
     public void readSomethingFromUser() {
         // TODO Auto-generated method stub
         

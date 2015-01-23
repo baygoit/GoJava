@@ -1,22 +1,48 @@
 package ua.com.goit.gojava1.lslayer.hackit2;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
+import ua.com.goit.gojava1.lslayer.hackit2.gear.Gear;
+
 public abstract class AbstractCharacter implements Actor{
+
+    private Skill getSkillByName(String skillName) {
+        if (this.skills.contains(new Skill(skillName))) {
+            return this.skills.get(this.skills.indexOf(new Skill(skillName)));
+        } else return null;
+    }
+    @Override
+    public int skillValue(String skillName) {
+        if (this.getSkillByName(skillName) != null) {
+            return this.getSkillByName(skillName).getValue();
+        } else 
+            return 0;
+    }
+    
+    
+    @Override
+    public void evolveSkill(String skillName) {
+        if (this.skillValue(skillName) > 0) {
+            this.getSkillByName(skillName).evolve();
+        }
+    }
+
+
     protected String name;
-    private List<Skill> skills;
+    private List<Skill> skills = new ArrayList<Skill>();
     private List<Gear> possesions;
     public void addGear(Gear gear) {
         //There will be a lot of checks. Somewhen
-        possesions.add(gear);
+//        possesions.add(gear);
     }
     public void removeGear(Gear gear) {
         //There will be a lot of checks. Somewhen
-        possesions.remove(gear);
+//        possesions.remove(gear);
     }
     public boolean checkIfPossesed (Gear gear) {
         return this.possesions.contains(gear);
@@ -24,8 +50,8 @@ public abstract class AbstractCharacter implements Actor{
     public AbstractCharacter (String name) {
         this.name = name;
     }
-    public void addSkill(Skill skill) {
-        this.skills.add(skill);
+    public void addSkill(String skillName) {
+        this.skills.add(new Skill(skillName));
     }
  
 
@@ -34,11 +60,6 @@ class Skill {
     private String name = null;
     private int value = 0;
     private static Set<Skill> allPossibleSkills = new HashSet<Skill>();
-
-    @SuppressWarnings("unused")
-    private Skill() {
-        
-    }
 
     public Skill(String name) {
         if (name != null) {
@@ -53,7 +74,7 @@ class Skill {
     }
 
     public void evolve() {
-            this.value += 1;
+        this.value += 1;
     }
 
     public int getValue() {

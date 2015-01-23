@@ -14,15 +14,15 @@ public class AIControleldCharacter extends AbstractCharacter implements AIContro
     }
 
     @Override
-    public int skillValue(String skillName) {
-        // TODO Auto-generated method stub
-        return 0;
-    }
-
-    @Override
     public String getName() {
         // TODO Auto-generated method stub
         return null;
+    }
+
+    @Override
+    public void addSkill(String string) {
+        // TODO Auto-generated method stub
+        
     }
 
 }

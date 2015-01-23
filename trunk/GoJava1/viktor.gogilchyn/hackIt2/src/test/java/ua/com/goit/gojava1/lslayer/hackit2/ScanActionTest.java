@@ -1,0 +1,29 @@
+package ua.com.goit.gojava1.lslayer.hackit2;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+import ua.com.goit.gojava1.lslayer.hackit2.dto.ActionResult;
+
+public class ScanActionTest {
+    @Test
+    public void testSmoke() {
+        Action action = new ScanAction(); 
+        assertNotNull(action);
+    }
+    @Test
+    public void testFailedAndSuccessAction() {
+        Actor actor = new HumanControlledCharacter("Test name");
+        actor.addSkill("test");
+        Action action = new ScanAction();
+        ActionResult result = action.performAction(actor);
+        assertFalse(result.isSuccess());
+        assertEquals(result.getResultMessage(), "Scan failed");
+        actor.addSkill("scan");
+        ActionResult resultTwo = action.performAction(actor);
+        assertTrue(resultTwo.isSuccess());
+        assertEquals(resultTwo.getResultMessage(), "Scan successful");
+    }
+
+}

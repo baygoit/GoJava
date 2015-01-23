@@ -19,8 +19,28 @@ public class AbstractCharaterTest {
         Skill s = new Skill("SkillName");
         assertEquals(s.getName(), "SkillName");
     }
+    @Test 
+    public void testSkillEquals() {
+        Skill s1 = new Skill("TestSkillName");
+        Skill s2 = new Skill("TestSkillName");
+        assertTrue(s1.equals(s2));
+        assertNotEquals(s1, null);
+    }
     @Test
-    public void testStaticSkill() {
-        assertNull(Skill.getRandomSkills(1));
+    public void testSkillValueFromActor() {
+        Actor actor = new HumanControlledCharacter("Test name");
+        actor.addSkill("test");
+        assertEquals(actor.skillValue("test"), 1);
+        assertNotEquals(actor.skillValue("test_skill"), 1);
+    }
+    @Test
+    public void testSkillEvolve() {
+        Actor actor = new HumanControlledCharacter("Test name");
+        actor.addSkill("test");
+        actor.evolveSkill("test");
+        assertEquals(actor.skillValue("test"), 2);
+        actor.evolveSkill("test_skill");
+        assertEquals(actor.skillValue("test_skill"), 0);
+        
     }
 }
