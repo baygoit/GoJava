@@ -2,17 +2,20 @@ package com.gojava.projects;
 
 public class Project {
     private String name;
-    private String desc;
+    private String description;
     private int needSum;
     private int currentSum;
     private String daysLeft;
+    private String projectHistory;
+    private String linkOnvideo;
+    private String questionsAndAnswers;
 
     public String getName() {
         return name;
     }
 
     public String getDesc() {
-        return desc;
+        return description;
     }
 
     public int getNeedSum() {
@@ -30,7 +33,7 @@ public class Project {
     public Project(String name, String desc, int needSum, int currentSum,
             String daysLeft) {
         this.name = name;
-        this.desc = desc;
+        this.description = desc;
         this.needSum = needSum;
         this.currentSum = currentSum;
         this.daysLeft = daysLeft;
