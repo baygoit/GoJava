@@ -1,7 +1,5 @@
 package com.gojava.launch;
 
-import java.util.ArrayList;
-
 import com.gojava.projects.CategoriesList;
 
 public class Launch {
@@ -11,11 +9,7 @@ public class Launch {
         quote.displayQuote();
 
         CategoriesList categoriesList = new CategoriesList();
-        categoriesList.addCategoryList();
-        categoriesList.addCategoryList();
-        categoriesList.addCategoryList();
         categoriesList.dispalyProjectCategories();
-
     }
 
 }
