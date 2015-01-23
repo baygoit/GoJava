@@ -18,95 +18,57 @@ public class Question {
 	public Question() {
 
 	}
-	
-	public Question(int id, String content,
-			QuestionCategory questionCategory, Profile profile,
-			boolean openQuestion) {
-		super();
-		this.id = id;
-		this.content = content;
-		this.questionCategory = questionCategory;
-		this.profile = profile;
-		this.openQuestion = openQuestion;
-	}
 
 
-
-	/**
-	 * @return the content
-	 */
-	public String getContent() {
-		return content;
-	}
-
-	/**
-	 * @param content
-	 *            the content to set
-	 */
-	public void setContent(String content) {
-
-		this.content = content;
-	}
-
-	/**
-	 * @return the id
-	 */
 	public int getId() {
 		return id;
 	}
 
-	/**
-	 * @return the questionCategory
-	 */
-	public QuestionCategory getQuestionCategory() {
-		return questionCategory;
-	}
 
-	/**
-	 * @return the profile
-	 */
-	public Profile getProfile() {
-		return profile;
-	}
-
-	/**
-	 * @return the openQuestion
-	 */
-	public boolean isOpenQuestion() {
-		return openQuestion;
-	}
-
-	/**
-	 * @param id
-	 *            the id to set
-	 */
 	public void setId(int id) {
 		this.id = id;
 	}
 
-	/**
-	 * @param questionCategory
-	 *            the questionCategory to set
-	 */
+
+	public String getContent() {
+		return content;
+	}
+
+
+	public void setContent(String content) {
+		this.content = content;
+	}
+
+
+	public QuestionCategory getQuestionCategory() {
+		return questionCategory;
+	}
+
+
 	public void setQuestionCategory(QuestionCategory questionCategory) {
 		this.questionCategory = questionCategory;
 	}
 
-	/**
-	 * @param profile
-	 *            the profile to set
-	 */
+
+	public Profile getProfile() {
+		return profile;
+	}
+
+
 	public void setProfile(Profile profile) {
 		this.profile = profile;
 	}
 
-	/**
-	 * @param openQuestion
-	 *            the openQuestion to set
-	 */
+
+	public boolean isOpenQuestion() {
+		return openQuestion;
+	}
+
+
 	public void setOpenQuestion(boolean openQuestion) {
 		this.openQuestion = openQuestion;
 	}
+
 
 	/*
 	 * (non-Javadoc)

@@ -1,39 +1,32 @@
 package ua.com.goit.gojava.m__jane.model;
 
+import java.util.Objects;
+
 public class Profile {
 	private int id;
 	
 	private String name;
 
 	public Profile() {
+	}	
+
+	public Profile(int id, String name) {
+		this.id = id;
+		this.name = name;
 	}
 
-	/**
-	 * @return the id
-	 */
 	public int getId() {
 		return id;
 	}
 
-	/**
-	 * @return the name
-	 */
-	public String getName() {
-		return name;
-	}
-
-	/**
-	 * @param id
-	 *            the id to set
-	 */
 	public void setId(int id) {
 		this.id = id;
 	}
 
-	/**
-	 * @param name
-	 *            the name to set
-	 */
+	public String getName() {
+		return name;
+	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -50,11 +43,14 @@ public class Profile {
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
+		
+		return Objects.hash(id, name);
+		
+		/*final int prime = 31;
 		int result = 1;
 		result = prime * result + id;
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		return result;
+		return result;*/
 	}
 
 	@Override
@@ -63,8 +59,8 @@ public class Profile {
 			return true;
 		if (obj == null)
 			return false;
-		//if (getClass() != obj.getClass())
-		//	return false;
+		if (getClass() != obj.getClass())
+			return false;
 		Profile other = (Profile) obj;
 		if (id != other.id)
 			return false;
@@ -75,7 +71,5 @@ public class Profile {
 			return false;
 		return true;
 	}
-
-	
 	
 }
