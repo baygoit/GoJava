@@ -1,6 +1,6 @@
 package ua.com.goit.gojava1.lslayer.hackit2;
 
-public class AbstractMercenary implements Actor {
+public class AIControlledMercenary extends AbstractMercenary implements AIControlled {
 
     @Override
     public int skillValue(String skillName) {
@@ -14,5 +14,10 @@ public class AbstractMercenary implements Actor {
         return null;
     }
 
+    @Override
+    public void setStrategy(String strategy) {
+        // TODO Auto-generated method stub
+        
+    }
 
 }

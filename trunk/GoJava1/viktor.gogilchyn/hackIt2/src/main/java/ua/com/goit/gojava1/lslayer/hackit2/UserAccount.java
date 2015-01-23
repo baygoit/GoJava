@@ -48,7 +48,7 @@ public class UserAccount {
     }
     
     public static UserAccount createCharacterInAccount(UserAccount account, String characterName) {
-        account.setCharacter(new HumanControlledCharacter(characterName));
+        account.setCharacter(new HumanControlledCharacter(characterName)); //Here will be Factory creation. But for now - mock-up.
         return account;
     }
 }

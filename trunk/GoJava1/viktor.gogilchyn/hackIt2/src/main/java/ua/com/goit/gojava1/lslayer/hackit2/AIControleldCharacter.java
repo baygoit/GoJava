@@ -1,22 +1,22 @@
 package ua.com.goit.gojava1.lslayer.hackit2;
 
-public class HumanControlledCharacter extends AbstractCharacter implements HumanControlled {
+public class AIControleldCharacter extends AbstractCharacter implements AIControlled {
 
-    public HumanControlledCharacter(String name) {
+    public AIControleldCharacter(String name) {
         super(name);
         // TODO Auto-generated constructor stub
+    }
+
+    @Override
+    public void setStrategy(String strategy) {
+        // TODO Auto-generated method stub
+
     }
 
     @Override
     public int skillValue(String skillName) {
         // TODO Auto-generated method stub
         return 0;
-    }
-    
-    @Override
-    public void readSomethingFromUser() {
-        // TODO Auto-generated method stub
-        
     }
 
     @Override
