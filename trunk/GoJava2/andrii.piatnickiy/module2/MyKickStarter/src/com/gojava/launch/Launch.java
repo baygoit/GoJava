@@ -10,6 +10,8 @@ public class Launch {
 
         CategoriesList categoriesList = new CategoriesList();
         categoriesList.dispalyProjectCategories();
+        
+        System.out.println("Choose number of categories");
     }
 
 }

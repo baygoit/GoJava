@@ -1,10 +1,17 @@
 package com.gojava.projects;
 
 public class ProjectCategory {
-    private String desc = "I'm category";
+    String name;
+    int number;
+    static int preNumber = 0;
+    
 
-    public String getDesc() {
-        return desc;
+    ProjectCategory(String name, int number){
+        this.name = name;
+        this.number = number;
+    }
+    public String getName() {
+        return name;
     }
 
 }
