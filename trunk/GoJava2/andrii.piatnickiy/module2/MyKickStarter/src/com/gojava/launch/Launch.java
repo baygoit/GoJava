@@ -3,6 +3,7 @@ package com.gojava.launch;
 import java.util.Scanner;
 
 import com.gojava.projects.CategoriesList;
+import com.gojava.projects.ProjectCategory;
 
 public class Launch {
 
@@ -17,7 +18,12 @@ public class Launch {
         
         Scanner in = new Scanner(System.in);
         int a = in.nextInt();
-        categoriesList.chooseProjectCategory(a);
+        categoriesList.displaySpecificProjectCategory(a);
+        
+        ProjectCategory projectCategory = categoriesList.getChhosedProjectCategory();
+        System.out.println("Project name = " + projectCategory.getName());
+        projectCategory.dispalyProjectList();
+        
     }   
 
 }

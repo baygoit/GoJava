@@ -18,9 +18,14 @@ public class CategoriesList {
 
     }
 
-    public void chooseProjectCategory(int i) {
+    public void displaySpecificProjectCategory(int i) {
         System.out.println("You choose progect " + this.categoryList.get(i - 1).getName());
-
     }
 
+    public ProjectCategory getChhosedProjectCategory() {
+        // TODO Auto-generated method stub
+        return this.categoryList.get(0);
+    }
+
+    
 }
