@@ -8,15 +8,19 @@ public class Main {
 
 	private void menu() {
 		Kickstarter kickstarter = new Kickstarter();
+		Quotations quotation = new Quotations();
+		ProjectsDescription projectsDescription = new ProjectsDescription();
 		kickstarter.process();
+		System.out.println(quotation.quotations());
+		System.out.println();
 		while (true) {
-			System.out.println("Категории:");
+			System.out.println("РљР°С‚РµРіРѕСЂРёРё:");
 
 			for (String text : kickstarter.categories) {
 				System.out.println(text);
 			}
 
-			System.out.println("Для выбора категории введите ее номер.");
+			System.out.println("Р”Р»СЏ РІС‹Р±РѕСЂР° РєР°С‚РµРіРѕСЂРёРё РІРІРµРґРёС‚Рµ РµРµ РЅРѕРјРµСЂ.");
 			Scanner scanner = new Scanner(System.in);
 
 			int category = Integer.parseInt(scanner.nextLine());
@@ -24,45 +28,45 @@ public class Main {
 				break;
 			while (true) {
 				if (category <= kickstarter.categories.size()) {
-					System.out.println("Вы выбрали категорию " + kickstarter.categories.get(category - 1));
+					System.out.println("Р’С‹ РІС‹Р±СЂР°Р»Рё РєР°С‚РµРіРѕСЂРёСЋ " + kickstarter.categories.get(category - 1));
 				} else {
-					System.out.println("Вы выбрали несуществующую категорию");
+					System.out.println("Р’С‹ РІС‹Р±СЂР°Р»Рё РЅРµСЃСѓС‰РµСЃС‚РІСѓСЋС‰СѓСЋ РєР°С‚РµРіРѕСЂРёСЋ");
 				}
 
 				if (category == 1) {
 
-					kickstarter.projectsDescription(kickstarter.game1);
-					kickstarter.projectsDescription(kickstarter.game2);
-					kickstarter.projectsDescription(kickstarter.game3);
-					System.out.println("0 - Выход");
-					System.out.println("Для выбора проекта введите его номер.");
+					projectsDescription.projectsDescription(kickstarter.game1);
+					projectsDescription.projectsDescription(kickstarter.game2);
+					projectsDescription.projectsDescription(kickstarter.game3);
+					System.out.println("0 - Р’С‹С…РѕРґ");
+					System.out.println("Р”Р»СЏ РІС‹Р±РѕСЂР° РїСЂРѕРµРєС‚Р° РІРІРµРґРёС‚Рµ РµРіРѕ РЅРѕРјРµСЂ.");
 
 					int project = Integer.parseInt(scanner.nextLine());
 					if (project == 0)
 						break;
 					if (project == 1) {
-						kickstarter.projectsFullDescription(kickstarter.game1);
+						projectsDescription.projectsFullDescription(kickstarter.game1);
 					} else if (project == 2) {
-						kickstarter.projectsFullDescription(kickstarter.game2);
+						projectsDescription.projectsFullDescription(kickstarter.game2);
 					} else if (project == 3) {
-						kickstarter.projectsFullDescription(kickstarter.game3);
+						projectsDescription.projectsFullDescription(kickstarter.game3);
 					}
 
 				} else if (category == 2) {
 
-					kickstarter.projectsDescription(kickstarter.technology1);
-					kickstarter.projectsDescription(kickstarter.technology2);
-					kickstarter.projectsDescription(kickstarter.technology3);
-					System.out.println("Для выбора проекта введите его номер.");
+					projectsDescription.projectsDescription(kickstarter.technology1);
+					projectsDescription.projectsDescription(kickstarter.technology2);
+					projectsDescription.projectsDescription(kickstarter.technology3);
+					System.out.println("Р”Р»СЏ РІС‹Р±РѕСЂР° РїСЂРѕРµРєС‚Р° РІРІРµРґРёС‚Рµ РµРіРѕ РЅРѕРјРµСЂ.");
 					int project = Integer.parseInt(scanner.nextLine());
 					if (project == 0)
 						break;
 					if (project == 1) {
-						kickstarter.projectsFullDescription(kickstarter.technology1);
+						projectsDescription.projectsFullDescription(kickstarter.technology1);
 					} else if (project == 2) {
-						kickstarter.projectsFullDescription(kickstarter.technology2);
+						projectsDescription.projectsFullDescription(kickstarter.technology2);
 					} else if (project == 3) {
-						kickstarter.projectsFullDescription(kickstarter.technology3);
+						projectsDescription.projectsFullDescription(kickstarter.technology3);
 					}
 				}
 				int project = Integer.parseInt(scanner.nextLine());
