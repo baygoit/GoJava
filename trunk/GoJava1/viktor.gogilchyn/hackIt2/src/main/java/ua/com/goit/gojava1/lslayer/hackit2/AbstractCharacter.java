@@ -27,6 +27,7 @@ public abstract class AbstractCharacter implements Actor{
     public void addSkill(Skill skill) {
         this.skills.add(skill);
     }
+ 
 
 }
 class Skill {

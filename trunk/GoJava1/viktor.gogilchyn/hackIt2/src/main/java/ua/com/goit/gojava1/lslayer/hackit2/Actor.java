@@ -1,7 +1,6 @@
 package ua.com.goit.gojava1.lslayer.hackit2;
 
-import ua.com.goit.gojava1.lslayer.hackit2.dto.ActionResult;
-
 public interface Actor {
-    public ActionResult act(Action action);
+    public int skillValue(String skillName);
+    public String getName(); 
 }

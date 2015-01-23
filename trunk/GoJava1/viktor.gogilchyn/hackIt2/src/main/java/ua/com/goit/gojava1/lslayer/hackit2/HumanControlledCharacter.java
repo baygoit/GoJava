@@ -10,9 +10,15 @@ public class HumanControlledCharacter extends AbstractCharacter {
     }
 
     @Override
-    public ActionResult act(Action action) {
+    public int skillValue(String skillName) {
         // TODO Auto-generated method stub
-        return null;
+        return 0;
+    }
+
+    @Override
+    public String getName() {
+        // TODO Auto-generated method stub
+        return super.getName();
     }
 
 }
