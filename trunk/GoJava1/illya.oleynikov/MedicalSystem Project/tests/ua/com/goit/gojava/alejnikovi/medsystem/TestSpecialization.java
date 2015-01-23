@@ -4,13 +4,14 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-public class TestDoctor {
+public class TestSpecialization {
 
 	@Test
 	public void testSmoke() {
-		
-		assertNotNull(new Doctor(null, null, null));
-
+		Specialization spec = new Specialization(null);
+		assertNotNull(spec);
 	}
+	
+
 
 }

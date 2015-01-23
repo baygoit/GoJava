@@ -9,25 +9,25 @@ public class MedicalSystem {
     public static void main(String[] args){
         
         List<Doctor> doctors = new ArrayList<Doctor>();
-        List<String> specs = new ArrayList<String>();
-        specs.add("Терапевт");
-        specs.add("Хирург");
-        specs.add("Уростоматолог");
+        List<Specialization> specializations = new ArrayList<Specialization>();
+        specializations.add(new Specialization("Терапевт"));
+        specializations.add(new Specialization("Хирург"));
+        specializations.add(new Specialization("Уростоматолог"));
         
         int userSelection = 0;
-        String specSelection;
+        Specialization specSelection;
         
         while (userSelection != 3) try {
             System.out.println();
-            userSelection = Integer.parseInt(input("Для создания нового врача введите '1'" + "\n" +
+            userSelection = Integer.parseInt(input("1"));/*Для создания нового врача введите '1'" + "\n" +
                                             "Для просмотра списка врачей введите '2'" + "\n" +
-                                            "Для выхода введите '3'"));
+                                            "Для выхода введите '3'"));*/
             System.out.println();
             if (userSelection == 1){
-                doctors.add(createDoctor(specs));
+                doctors.add(createDoctor(specializations));
             } else if (userSelection == 2){
-                specSelection = selectSpec(specs);
-                if (isHaveSpec(doctors, specSelection)){
+                specSelection = selectSpecialization(specializations);
+                if (isHaveSpecialisation(doctors, specSelection)){
                     System.out.println("Список врачей по выбранной Вами специализации:");
                     for (Doctor doc: doctors){
                         if (doc.getSpecialization().equals(specSelection)){
@@ -48,30 +48,34 @@ public class MedicalSystem {
 
 	public static String input(String prompt){
         System.out.println(prompt);         
-        return (new Scanner(System.in)).nextLine();
+        return prompt;//(new Scanner(System.in)).nextLine();
+    }
+	
+	public static String mockInput(String result){
+        return result;
     }
  
-    private static Doctor createDoctor(List<String> specs){
+    private static Doctor createDoctor(List<Specialization> specializations){
         String name = input("Введите имя врача");
         String surname = input("Введите фамилию врача");
-        String spec = selectSpec(specs); 
-        System.out.println("Добавлен новый врач - " + name + " " + surname + ", " + spec);
-        return new Doctor(name, surname, spec);
+        Specialization specialization = selectSpecialization(specializations); 
+        System.out.println("Добавлен новый врач - " + name + " " + surname + ", " + specialization.getName());
+        return new Doctor(name, surname, specialization);
      }
     
-    private static String selectSpec(List<String> specs){
+    public static Specialization selectSpecialization(List<Specialization> specializations){
         System.out.println('\n' + "Введите номер специализации врача, которую вы хотите выбрать:");
-        for (int i = 0; i < specs.size(); i++){
-            System.out.println((i + 1) + ". " + specs.get(i));
+        for (int i = 0; i < specializations.size(); i++){
+            System.out.println((i + 1) + ". " + specializations.get(i).getName());
         }
-        int specIndex = Integer.parseInt(input("")) - 1;
-        return specs.get(specIndex);
+        int specIndex = Integer.parseInt(input("2")) - 1;
+        return specializations.get(specIndex);
         
     }    
     
-    private static boolean isHaveSpec(List<Doctor> doctors, String spec){
+    private static boolean isHaveSpecialisation(List<Doctor> doctors, Specialization specSelection){
         for(Doctor doc: doctors){
-            if(doc.getSpecialization().equals(spec)) return true;
+            if(doc.getSpecialization().equals(specSelection)) return true;
         }
 		return false;
 	}

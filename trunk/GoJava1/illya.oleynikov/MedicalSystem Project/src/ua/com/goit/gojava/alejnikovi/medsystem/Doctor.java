@@ -4,15 +4,15 @@ class Doctor {
 
 	private String firstName;
 	private String secondName;
-	private String specialization;
+	private Specialization specialization;
 
-	Doctor (String firstName, String secondName, String specialization){
+	Doctor (String firstName, String secondName, Specialization specialization){
 		this.firstName = firstName;
 		this.secondName = secondName;
 		this.specialization = specialization;
 	}  
   
-	String getSpecialization() {
+	Specialization getSpecialization() {
 		return specialization;
 	}
 	
