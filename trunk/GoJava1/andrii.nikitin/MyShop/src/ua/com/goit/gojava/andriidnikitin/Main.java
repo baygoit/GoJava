@@ -11,11 +11,11 @@ public class Main {
 		List<Category> categoryList = myStore.getCategoryList();
 		printListWithNumeration(myStore.getCategoryList(), System.out);
 		System.out.println("Goods in 3 category:");		
-		printCategory(myStore, categoryList.get(3), System.out);
+		printCategory(myStore, categoryList.get(2), System.out);
 		System.out.println("Goods in 2 category:");
-		printCategory(myStore,  categoryList.get(2), System.out);
+		printCategory(myStore,  categoryList.get(1), System.out);
 		System.out.println("Goods in 1 category:");
-		printCategory(myStore, categoryList.get(1), System.out);
+		printCategory(myStore, categoryList.get(0), System.out);
 	}
 	
 	private static <T> void printListWithNumeration (List<T> list, 

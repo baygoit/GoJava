@@ -1,38 +1,22 @@
 package ua.com.goit.gojava.andriidnikitin;
 
-import org.junit.Assert;
-import org.junit.Before;
+import static org.junit.Assert.*;
+
 import org.junit.Test;
+public class CategoryTest {
 
-public class CategoryTest extends Assert {
-
-public Category category; 
-	
-	@Before
-	public void initialize(){
-		category = new Category(); 
-	}
+	public Category category; 
 	
 	@Test
-	public void testSmoke() {
-		assertNotNull(category);
-	}
-	
-	@Test
-	public void testNameNotNull() {
-		assertNotNull(category.getName());
-	}
-	
-	@Test
-	public void testEmptyNameIfSetAsNull() {//TODO: field must be default or null?
-		category.setName(null);
-		assertEquals("", category.getName());
-	}
-	
-	@Test
-	public void testNullToStringIsNotNull() {
-		category = null;
-		assertNotNull(category.toString());
-	}
-	
+	public void createInstanceTest() {
+		final Category categoryEmpty = new Category();
+		assertNull(categoryEmpty.getName());
+		
+		final Category categorySetter = new Category();
+		categorySetter.setName("default");
+		assertEquals("default", categorySetter.getName());
+		
+		final Category categoryConstructor = new Category("default");
+		assertEquals("default", categoryConstructor.getName());		
+	}	   
 }

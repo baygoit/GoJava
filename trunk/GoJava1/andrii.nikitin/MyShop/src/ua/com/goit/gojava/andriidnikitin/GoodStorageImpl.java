@@ -23,13 +23,7 @@ public class GoodStorageImpl implements GoodStorage {
 	}};
 		
 	public List<Good> getGoodList() {
-		if (goodList != null) {
-			return goodList;
-		}
-		else {
-			return new ArrayList<Good>();
-		}
-		
+		return goodList != null ? goodList : new ArrayList<Good>();		
 	}	
 	
 	public List<Category> getCategoryList() {
@@ -42,14 +36,16 @@ public class GoodStorageImpl implements GoodStorage {
 	}
 	
 	public List<Good> getGoodList(Category category) {
-		if ((category == null ) || (!categoryList.contains(category)) ){
-			return null;
+		final List<Good> result = new ArrayList<Good>();
+		if (category == null) {	
+			return result;			
+		}		
+		for (Good good : goodList){
+			if (good.getCategory().equals(category)) {	
+				result.add(good);
+			}
 		}
-		List<Good> listOfGoods = new ArrayList<Good>();
-		for (Good tempGood : goodList){
-			if (tempGood.getCategory() == category)
-				listOfGoods.add(tempGood);
-		}
-		return listOfGoods;
+		return result;
 	}	
+	
 }

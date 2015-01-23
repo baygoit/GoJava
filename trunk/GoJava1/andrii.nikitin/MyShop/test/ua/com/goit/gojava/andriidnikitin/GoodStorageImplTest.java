@@ -1,10 +1,14 @@
 package ua.com.goit.gojava.andriidnikitin;
 
-import org.junit.Assert;
+import static org.junit.Assert.*;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
 
-public class GoodStorageImplTest extends Assert {
+public class GoodStorageImplTest {
 	
 	public GoodStorageImpl store; 
 	
@@ -14,30 +18,17 @@ public class GoodStorageImplTest extends Assert {
 	}
 	
 	@Test
-	public void testSmoke() {
-		assertNotNull(store);
-	}
-	
-	@Test
-	public void testCategoryListNotNull(){
+	public void getCategoryListTest() {
 		assertNotNull(store.getCategoryList());
+		
 	}
-	
+						
 	@Test
-	public void testGoodListNotNull(){
+	public void getGoodList() {
 		assertNotNull(store.getGoodList());
-	}
-	
-	@Test
-	public void testGoodFromNullCategoryIsNull(){
-		assertNull(store.getGoodList(null));
-	}
-	
-	@Test
-	public void testGetGoodFromUnexistingCategoryIsNull(){
+		List<Good> emptyGoodList = new ArrayList<Good>();
+		assertEquals(emptyGoodList, store.getGoodList(null));
 		Category category = new Category();
-		assertNull(store.getGoodList(category));
-	}	
-	
-	
+		assertEquals(emptyGoodList, store.getGoodList(category));
+	}
 }
