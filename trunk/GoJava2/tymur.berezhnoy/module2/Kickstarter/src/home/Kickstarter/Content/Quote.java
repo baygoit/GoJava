@@ -1,7 +1,7 @@
 package home.Kickstarter.Content;
 public class Quote {
 	
-	private final char copyright = 169;
+	private final char copyrightSymbol = 169;
 	private String content;
 	private String author;
 	
@@ -15,6 +15,6 @@ public class Quote {
 	}
 	
 	public String getOwner() {
-		return new String(" " + copyright + " " + author);
+		return new String(" " + copyrightSymbol + " " + author);
 	}
 }
