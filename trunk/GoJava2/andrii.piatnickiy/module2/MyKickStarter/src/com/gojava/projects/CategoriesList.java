@@ -18,9 +18,13 @@ public class CategoriesList {
     public void dispalyProjectCategories() {
         for (ProjectCategory p : this.categoryList) {
             System.out.println(p.number + " " + p.getName());
-            
         }
+        
+    }
 
+    public void chooseProjectCategory(int i) {
+        System.out.println("You choose progect " + this.categoryList.get(i).getName());
+        
     }
 
 }

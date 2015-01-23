@@ -1,5 +1,7 @@
 package com.gojava.launch;
 
+import java.util.Scanner;
+
 import com.gojava.projects.CategoriesList;
 
 public class Launch {
@@ -12,6 +14,10 @@ public class Launch {
         categoriesList.dispalyProjectCategories();
         
         System.out.println("Choose number of categories");
-    }
+        
+        Scanner in = new Scanner(System.in);
+        int a = in.nextInt();
+        categoriesList.chooseProjectCategory(a);
+    }   
 
 }
