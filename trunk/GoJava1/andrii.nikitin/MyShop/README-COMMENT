@@ -1,3 +1,118 @@
+23.01.2015 10:10
+
+Category class:
+
+	1. Не нужно в конструкторе указывать значение по умолчанию (конструктор пустой)
+	   И вообще, такая структура не рекомендуется к использованию.
+	   Какова цель использование ее? Нужно удалить эту запись!
+	   
+			name =  new String();
+			
+	   Если у тебя будет значение null - это значит, что поле не проинициализировалось
+	   и будет ясно, что нужн осмотреть в источник данных - почему там нету значения.
+	   
+	   Если ты установил по умолчанию пустую строку - то это уже установленное поле,
+	   и в первую очередь возникнет вопрос - в источнике нету значения, а у нас есть!
+	   и время будет тратиться на поиск ошибки. а не решения главных задач. 
+	   		
+Good сlass:
+
+	1. 	public Good() {
+			name = new String();
+			category = new Category();
+		}
+		аналогично предыдущему комментарию.
+		К тому же присваиваяя категории объект по умолчанию - потенциальная ошибка в бизнес логике.
+		Так как возможна бизнес логика подобного типа:
+			public boolean hasCategory(Good good) {
+				return good != null && good.getCategory() != null;
+			}
+		и такое построение бизнес логики будет более правым, чем подобная запись в конструкторе.
+
+GoodStorageImpl.getGoodList method:
+
+	Привожу две реализации. Существующий вариант не валидный, поскольку только наш частный случай гарантирует
+	что tempGood.getCategory() == category. На практике такого не будет.
+	
+		public List<Good> getGoodList(Category category) {
+			final List<Good> result = new ArrayList<Good>();
+			if (category == null) {
+				return result;
+			}
+			for (Good good : goodList){
+				if (category.equals(good.getCategory())) {
+					result.add(good);
+				}
+			}
+			return result;
+		}
+	
+		public List<Good> getGoodList(Category category) {
+			final List<Good> result = new ArrayList<Good>();
+			final String categoryName = category.getName();
+			if (category == null || categoryName == null) {	
+				return result;			
+			}		
+			for (Good good : goodList){
+				if (good.getCategory() != null && categoryName.equals(good.getCategory().getName())) {	
+					result.add(good);
+				}
+			}
+			return result;
+		}	
+
+	Если мы объявляем, что возвращаем список, то не нужно возвращать null.
+	Нету данных - возвращать пустой список.
+	
+GoodStorageImpl.getGoodList method:
+
+	лучше реализовать так: return goodList != null ? goodList : new ArrayList<Good>();
+
+ 
+Test classes:
+	
+	1. Более правильно объявить так:
+	
+			import static org.junit.Assert.*;
+			public class CategoryTest {
+			    ....	
+	2. в нашем случае не нужно так детально описывать, поскольку получается, что тест пишем ради теста 
+	   а не проверки функциональности. 
+	   
+CategoryTest.class:
+
+	1. слишком много тестов. Думаю будет достаточно такого 
+	   (так как наш бин простой, и ничего особо тестировать не нужно)	
+			@Test
+			public void createInstanceTest() {
+				final Category categoryEmpty = new Category();
+				assertNull(categoryEmpty.getName());
+				
+				final Category categorySetter = new Category();
+				categorySetter.setName("default");
+				assertEquals("default", categorySetter.getName());
+				
+				final Category categoryConstructor = new Category("default");
+				assertEquals("default", categoryConstructor.getName());		
+			}	   
+
+	2. тестировать junit framework не нужно (хотя Сергей другого мнения):
+					@Test
+					public void testSmoke() {
+						assertNotNull(category);
+					}
+					
+GoodStorageImplTest.class:
+	Думаю, что достаточно сделать только следующие тесты, и в них описать все ассерты:
+						
+		@Test
+		public void getCategoryListTest();
+							
+		@Test
+		public void getGoodList();
+					
+======================================
+
 21.01.2015 22:40:
 
 Category class
