@@ -22,10 +22,6 @@ public class GoodStorageImpl implements GoodStorage {
 		this.add(new Good(5, "VOX Overdrive", categoryList.get(2)));
 	}};
 		
-	public List<Good> getGoodList() {
-		return goodList != null ? goodList : new ArrayList<Good>();		
-	}	
-	
 	public List<Category> getCategoryList() {
 		if (categoryList != null) {
 			return categoryList;
@@ -34,6 +30,10 @@ public class GoodStorageImpl implements GoodStorage {
 			return new ArrayList<Category>();
 		}
 	}
+	
+	public List<Good> getGoodList() {
+		return goodList != null ? goodList : new ArrayList<Good>();		
+	}	
 	
 	public List<Good> getGoodList(Category category) {
 		final List<Good> result = new ArrayList<Good>();
