@@ -14,4 +14,8 @@ public class CategoryStorage {
             System.out.println(projectCategory.getCategoryId() + " " + projectCategory.getName());
         }
     }
+    
+    public void displayChoosedCategory(int i){
+        System.out.println("You choose progect " + categoryStorageList.get(i - 1).getName());
+    }
 }
