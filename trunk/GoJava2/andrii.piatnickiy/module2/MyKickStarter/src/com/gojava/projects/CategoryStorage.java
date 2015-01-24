@@ -16,6 +16,6 @@ public class CategoryStorage {
     }
     
     public void displayChoosedCategory(int i){
-        System.out.println("You choose progect " + categoryStorageList.get(i - 1).getName());
+        System.out.println("You choosed progect " + categoryStorageList.get(i - 1).getName());
     }
 }

@@ -25,13 +25,20 @@ public class Launch {
         int categoryNumber = in.nextInt();
         manager.displaySpecificProjectCategory(categoryNumber);
         
-        manager.addProject("Bicycle", "Bicycle description", 10000, 100, 30, 1);
-        manager.addProject("Snowboard", "Snowboard description", 2000, 200, 20, 1);
-        manager.addProject("BMW X3", "BMW X3 description", 30000, 3000, 300, 2);
-        manager.addProject("Audi Q5", "Audi Q5 description", 40000, 400, 40, 2);
-        manager.addProject("Laptop", "Laptop description", 500, 50, 50, 3);
-        manager.addProject("Mobile phone", "Mobile phone description", 60, 60, 6, 3);
+        manager.addProjects("Bicycle", "Bicycle description", 10000, 100, 10, "History", "Link on video", "Questions and answers", 1);
+        manager.addProjects("Snowboard", "Snowboard description", 2000, 200, 20, "History", "Link on video", "Questions and answers", 1);
+        manager.addProjects("BMW X3", "BMW X3 description", 30000, 3000, 300, "History", "Link on video", "Questions and answers", 2);
+        manager.addProjects("Audi Q5", "Audi Q5 description", 40000, 400, 40, "History", "Link on video", "Questions and answers", 2);
+        manager.addProjects("Laptop", "Laptop description", 500, 50, 50, "History", "Link on video", "Questions and answers", 3);
+        manager.addProjects("Mobile phone", "Mobile phone description", 60, 60, 6, "History", "Link on video", "Questions and answers", 3);
         manager.displayProjects(categoryNumber);
+        
+        Scanner in1 = new Scanner(System.in);
+        int projectNumber = in1.nextInt();
+        manager.displaySpecificProject(categoryNumber, projectNumber);
+
+        
+        
     }
 
 }

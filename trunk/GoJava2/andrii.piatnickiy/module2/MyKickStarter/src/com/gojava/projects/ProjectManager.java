@@ -18,17 +18,28 @@ public class ProjectManager {
         categoryStorage.dispalyCategoryStorageList();
     }
 
-    public void addProject(String name, String description, int needSum, int currentSum, int daysLeft, int categoryId) {
-        projectStorage.addToProjectList(name, description, needSum, currentSum, daysLeft, categoryId);
+    public void addProjects(String name, String description, int needSum,
+            int currentSum, int daysLeft, String projectHistory,
+            String LinkOnvideo, String QuestionsAndAnswers, int categoryId) {
+        projectStorage.addToProjectList(name, description, needSum, currentSum,
+                daysLeft, projectHistory, LinkOnvideo, QuestionsAndAnswers, categoryId);
     }
-    
+
     public void displayProjects(int categoryNumber) {
         projectStorage.dispalyProjectStorageList(categoryNumber);
     }
-    
+
     public void displaySpecificProjectCategory(int i) {
         categoryStorage.displayChoosedCategory(i);
     }
 
+    public void displaySpecificProject(int categoryNumber,int projectNumber) {
+        projectStorage.displaySpecificProject(categoryNumber, projectNumber);
+    }
+
+    public void diplayProjectCount() {
+        System.out.println("projectsCount = " + projectStorage.projectsCount);
+        
+    }
 
 }

@@ -3,24 +3,51 @@ package com.gojava.projects;
 import java.util.ArrayList;
 
 public class ProjectStorage {
+    public static int projectsCount = 0;
     ArrayList<Project> projectStorageList = new ArrayList<Project>();
 
     public void addToProjectList(String name, String description, int needSum,
-            int currentSum, int daysLeft, int categoryId) {
+            int currentSum, int daysLeft, String projectHistory,
+            String getLinkOnvideo, String getQuestionsAndAnswers, int categoryId) {
         projectStorageList.add(new Project(name, description, needSum,
-                currentSum, daysLeft, categoryId));
+                currentSum, daysLeft, projectHistory, getLinkOnvideo,
+                getQuestionsAndAnswers, categoryId));
     }
 
     public void dispalyProjectStorageList(int categoryNumber) {
         for (Project project : this.projectStorageList) {
             if (project.getCategoryId() == categoryNumber) {
                 System.out.println("Project Name: " + project.getName());
-                System.out.println("Description: " + project.getDesc());
+                System.out.println("Description: " + project.getDescription());
                 System.out.println("Need Sum: " + project.getNeedSum());
                 System.out.println("Current Sum: " + project.getCurrentSum());
                 System.out.println("Days Left: " + project.getDaysLeft());
                 System.out.println();
+                projectsCount++;
             }
         }
     }
+
+    public void displaySpecificProject(int categoryNumber, int projectNumber) {
+        int i = 1;
+        for (Project project : projectStorageList) {
+            if (project.getCategoryId() == categoryNumber) {
+                if (i == projectNumber) {
+                    System.out.println("Project Name: " + project.getName());
+                    System.out.println("Description: "
+                            + project.getDescription());
+                    System.out.println("Need Sum: " + project.getNeedSum());
+                    System.out.println("Current Sum: "
+                            + project.getCurrentSum());
+                    System.out.println("Days Left: " + project.getDaysLeft());
+                    System.out.println();
+                    i++;
+                } else {
+                    i++;
+                }
+            }
+
+        }
+    }
+
 }
