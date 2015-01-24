@@ -1,6 +1,8 @@
 package com.gojava.projects;
 
 public class Project {
+
+
     private String name;
     private String description;
     private int needSum;
@@ -9,6 +11,7 @@ public class Project {
     private String projectHistory;
     private String linkOnvideo;
     private String questionsAndAnswers;
+    private int categoryId;;
 
     public String getName() {
         return name;
@@ -31,11 +34,12 @@ public class Project {
     }
 
     public Project(String name, String desc, int needSum, int currentSum,
-            String daysLeft) {
+            String daysLeft, int categoryId) {
         this.name = name;
         this.description = desc;
         this.needSum = needSum;
         this.currentSum = currentSum;
         this.daysLeft = daysLeft;
+        this.categoryId = categoryId;
     }
 }

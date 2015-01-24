@@ -3,17 +3,17 @@ package com.gojava.projects;
 import java.util.ArrayList;
 
 public class CategoriesList {
-    private ArrayList<ProjectCategory> categoryList = new ArrayList<>();
+    private ArrayList<Category> categoryList = new ArrayList<>();
 
     public CategoriesList() {
-        categoryList.add(new ProjectCategory("Sport", 1));
-        categoryList.add(new ProjectCategory("Health", 2));
-        categoryList.add(new ProjectCategory("Devices", 3));
+        categoryList.add(new Category("Sport", 1));
+        categoryList.add(new Category("Health", 2));
+        categoryList.add(new Category("Devices", 3));
     }
 
     public void dispalyProjectCategories() {
-        for (int i = 0; i < categoryList.size(); i++) {
-            System.out.println((i + 1) + " " + categoryList.get(i).getName());
+        for (Category projectCategory : categoryList) {
+            System.out.println(projectCategory.getCategoryId() + " " + projectCategory.getName());
         }
 
     }
@@ -22,7 +22,7 @@ public class CategoriesList {
         System.out.println("You choose progect " + this.categoryList.get(i - 1).getName());
     }
 
-    public ProjectCategory getChhosedProjectCategory() {
+    public Category getChhosedProjectCategory() {
         // TODO Auto-generated method stub
         return this.categoryList.get(0);
     }

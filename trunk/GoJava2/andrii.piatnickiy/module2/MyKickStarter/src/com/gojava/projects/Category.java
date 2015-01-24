@@ -2,18 +2,25 @@ package com.gojava.projects;
 
 import java.util.ArrayList;
 
-public class ProjectCategory {
-    String name;
+public class Category {
+    private String name;
+    private int categoryId;
+
     private ArrayList<Project> projectList = new ArrayList<Project>();
 
-    ProjectCategory(String name, int number) {
+    Category(String name, int categoryId) {
         this.name = name;
-        projectList.add(new Project("Robot", "I'm robot", 1000, 10, "60"));
-        projectList.add(new Project("Car", "I'm car", 2000, 20, "80"));
+        this.categoryId = categoryId; 
+        projectList.add(new Project("Robot", "I'm robot", 1000, 10, "60", 1));
+        projectList.add(new Project("Car", "I'm car", 2000, 20, "80", 1));
     }
 
     public String getName() {
         return name;
+    }
+
+    public int getCategoryId() {
+        return categoryId;
     }
 
     public void dispalyProjectList() {
