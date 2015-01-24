@@ -18,7 +18,7 @@ public Good good;
 		goodSetter.setName("default");
 		assertEquals("default", goodSetter.getName());
 		
-		Category defaultCategory = new Category("default");		
+		Category defaultCategory = new Category(0, "default");		
 		final Good goodConstructor = new Good(100, "default", defaultCategory);
 		assertEquals("default", goodConstructor.getName());		
 		assertEquals(defaultCategory, goodConstructor.getCategory());		

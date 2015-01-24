@@ -7,9 +7,9 @@ public class GoodStorageImpl implements GoodStorage {
 	
 	@SuppressWarnings("serial")
 	private List<Category> categoryList = new ArrayList<Category>(){{
-		this.add(new Category("Guitars"));
-		this.add(new Category("Synths"));
-		this.add(new Category("Other"));		
+		this.add(new Category(1, "Guitars"));
+		this.add(new Category(2, "Synths"));
+		this.add(new Category(3, "Other"));		
 	}};
 	
 	@SuppressWarnings("serial")
@@ -41,7 +41,8 @@ public class GoodStorageImpl implements GoodStorage {
 			return result;			
 		}		
 		for (Good good : goodList){
-			if (good.getCategory().equals(category)) {	
+			Integer tempId = good.getCategory().getId();
+			if (tempId.equals(category.getId())) {	
 				result.add(good);
 			}
 		}
