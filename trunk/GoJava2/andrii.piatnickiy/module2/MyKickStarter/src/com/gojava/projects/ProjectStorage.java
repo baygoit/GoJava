@@ -8,10 +8,10 @@ public class ProjectStorage {
 
     public void addToProjectList(String name, String description, int needSum,
             int currentSum, int daysLeft, String projectHistory,
-            String getLinkOnvideo, String getQuestionsAndAnswers, int categoryId) {
+            String linkOnvideo, String questionsAndAnswers, int categoryId) {
         projectStorageList.add(new Project(name, description, needSum,
-                currentSum, daysLeft, projectHistory, getLinkOnvideo,
-                getQuestionsAndAnswers, categoryId));
+                currentSum, daysLeft, projectHistory, linkOnvideo,
+                questionsAndAnswers, categoryId));
     }
 
     public void dispalyProjectStorageList(int categoryNumber) {
@@ -40,6 +40,9 @@ public class ProjectStorage {
                     System.out.println("Current Sum: "
                             + project.getCurrentSum());
                     System.out.println("Days Left: " + project.getDaysLeft());
+                    System.out.println("ProjectHistory: " + project.getProjectHistory());
+                    System.out.println("LinkOnvideo: " + project.getLinkOnvideo());
+                    System.out.println("Questions and answers: " + project.getQuestionsAndAnswers());
                     System.out.println();
                     i++;
                 } else {
