@@ -6,11 +6,8 @@ public class Quotes {
 	
 	public String getQuote() throws FileNotFoundException{
 		ReaderBD reader = new ReaderBD();
-		
 		String[] linesAsArray = reader.read("Quotes.properties", "");
-		
-		
-		quote = linesAsArray[(int) (Math.random() * (linesAsArray.length - 1) + 1)];
+		quote = linesAsArray[(int) (Math.random() * (linesAsArray.length - 1) + 0.5)];
 		return quote;
 	}
 	
