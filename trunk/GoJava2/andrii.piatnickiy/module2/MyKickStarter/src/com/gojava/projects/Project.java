@@ -18,6 +18,9 @@ public class Project {
         this.needSum = needSum;
         this.currentSum = currentSum;
         this.daysLeft = daysLeft;
+        this.projectHistory = projectHistory;
+        this.linkOnvideo = linkOnvideo;
+        this.questionsAndAnswers = questionsAndAnswers;
         this.categoryId = categoryId;
     }
     
