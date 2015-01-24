@@ -5,11 +5,9 @@ public class MVC {
         Model model = new Model();
         View view = new View();
         Controller controller = new Controller();
+        Scan scan = new Scan();
 
-        controller.addModel(model);
-        controller.addView(view);
-        model.addView(view);
-        // System.out.println("MVC created");
+        controller.add(model, view, scan);
         controller.start();
     }
 }

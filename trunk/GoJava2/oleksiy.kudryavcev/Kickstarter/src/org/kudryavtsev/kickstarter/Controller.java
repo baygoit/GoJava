@@ -1,33 +1,34 @@
 package org.kudryavtsev.kickstarter;
 
-import java.util.Locale.Category;
+import java.util.List;
 
 public class Controller {
     private Model model;
     private View view;
-
-    // private boolean exit;
+    private Scan scan;
 
     public Controller() {
-        // System.out.println("Controller created");
-        // exit = false;
     }
 
-    public void addModel(Model model) {
+    public void add(Model model, View view, Scan scan) {
         this.model = model;
-        // System.out.println("Controller added model");
-    }
-
-    public void addView(View view) {
         this.view = view;
-        // System.out.println("Controller added view");
+        this.scan = scan;
     }
 
     public void start() {
-        model.init(10);
+        model.init();
         view.show();
-        view.showCategories(model.getCategoryList());
-        
-    }
+        List<String> list = model.getCategoriesList();
 
+        boolean exit = false;
+        // while (!exit) {
+        view.showCategories(list);
+        int result = scan.getAnswer();
+        if (result > 0 && result <= list.size()) {
+            view.showCategories(result - 1, list);
+            // } else
+            // exit = true;
+        }
+    }
 }
