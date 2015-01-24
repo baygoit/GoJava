@@ -1,4 +1,4 @@
-package ua.com.goit.gojava1.iavorskyi;
+package gojava1.iavorskyi;
 
 public class HelloWorld {
 
