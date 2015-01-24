@@ -2,6 +2,8 @@ package ua.com.goit.gojava.poznyak;
 
 import static org.junit.Assert.*;
 
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -21,38 +23,19 @@ public class ListServiceHardcodedDataTest {
 	}
 
 	@Test
-	public void testGetDishListNotNull() {
-		assertNotNull(service.getDishList());
-	}
-	
-	@Test
-	public void testGetDishListNotEmpty() {
-		assertFalse(service.getDishList().isEmpty());
+	public void testGetDishList() {
+		List<Dish> dishList = service.getDishList();
+		assertNotNull(dishList);
+		assertEquals(5, dishList.size());
+		assertEquals("1. Borshch", dishList.get(0).toString());
 	}
 
 	@Test
-	public void testGetIngredientListNotNull() {
-		assertNotNull(service.getIngredientList(77));
-	}
-	
-	@Test
-	public void testGetIngredientListZero() {
-		assertNotNull(service.getIngredientList(0));
-	}
-	
-	@Test
-	public void testGetIngredientListNotEmpty() {
-		assertFalse(service.getIngredientList(2).isEmpty());
-	}
-	
-	@Test
-	public void testGetIngredientMax() {
+	public void testGetIngredientList() {
 		assertNotNull(service.getIngredientList(Integer.MAX_VALUE));
-	}
-	
-	@Test
-	public void testGetIngredientMin() {
 		assertNotNull(service.getIngredientList(Integer.MIN_VALUE));
+		assertEquals(3, service.getIngredientList(2).size());
+		assertEquals("salt x 0.005kg", service.getIngredientList(2).get(1).toString());
 	}
 
 }

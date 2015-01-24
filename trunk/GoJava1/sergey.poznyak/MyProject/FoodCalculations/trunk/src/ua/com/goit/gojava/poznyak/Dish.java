@@ -9,16 +9,13 @@ package ua.com.goit.gojava.poznyak;
  */
 public class Dish {
 	
-	private int id;
+	private Integer id;
 	
 	private String name;
 
-	public Dish() {
-		id = 0;
-		name = "";
-	}
+	public Dish() {}
 	
-	public Dish(int dishId, String dishName) {
+	protected Dish(int dishId, String dishName) {
 		id = dishId;
 		name = dishName;
 	}

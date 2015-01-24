@@ -13,27 +13,29 @@ import java.util.Map;
  */
 public class ListServiceHardcodedData implements ListService {
 	
-	private List<Dish> dishesList = new ArrayList<Dish>();
+	private List<Dish> dishesList = new ArrayList<Dish>() {{
+		this.add(new Dish(1, "Borshch"));
+		this.add(new Dish(2, "Buckwheat porridge"));
+		this.add(new Dish(3, "Rice porridge"));
+		this.add(new Dish(4, "Buckwheat soup"));
+		this.add(new Dish(5, "Pasta with meat"));
+	}};
 	
-	private Map<Integer, List<Ingredient>> ingredientsList = new HashMap<Integer, List<Ingredient>>();
-
-	@Override
-	public List<Dish> getDishList() {
-		dishesList.add(new Dish(1, "Borshch"));
-		dishesList.add(new Dish(2, "Buckwheat porridge"));
-		dishesList.add(new Dish(3, "Rice porridge"));
-		dishesList.add(new Dish(4, "Buckwheat soup"));
-		dishesList.add(new Dish(5, "Pasta with meat"));
-		return dishesList;
-	}
-
-	@Override
-	public List<Ingredient> getIngredientList(int dishId) {
+	private Map<Integer, List<Ingredient>> ingredientsList = new HashMap<Integer, List<Ingredient>>() {{
 		List<Ingredient> currentDish = new ArrayList<Ingredient>();
 		ingredientsList.put(2, currentDish);
 		currentDish.add(new Ingredient("buckwheat", 0.08));
 		currentDish.add(new Ingredient("salt", 0.005));
 		currentDish.add(new Ingredient("stew", 0.125));
+	}};
+
+	@Override
+	public List<Dish> getDishList() {
+		return dishesList;
+	}
+
+	@Override
+	public List<Ingredient> getIngredientList(int dishId) {
 		List<Ingredient> result = ingredientsList.get(dishId);
 		if (result == null) {
 			return new ArrayList<Ingredient>();

@@ -13,12 +13,9 @@ public class Ingredient {
 	
 	private double weight;
 	
-	public Ingredient() {
-		name = "";
-		weight = 0.0;
-	}
+	public Ingredient() {}
 
-	public Ingredient(String ingrName, double ingrWeight) {
+	protected Ingredient(String ingrName, double ingrWeight) {
 		name = ingrName;
 		weight = ingrWeight;
 	}
