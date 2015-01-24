@@ -3,7 +3,9 @@ package goit.iavorskyi;
 public class Main {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+
+		Autorizer autorizer = new Autorizer();
+        autorizer.autorize();
 
 	}
 
