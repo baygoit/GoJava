@@ -18,10 +18,10 @@ public Good good;
 		goodSetter.setName("default");
 		assertEquals("default", goodSetter.getName());
 		
-		Category defaultCategory = new Category(0, "default");		
+		Category defaultCategory = new Category("default");		
 		final Good goodConstructor = new Good(100, "default", defaultCategory);
 		assertEquals("default", goodConstructor.getName());		
 		assertEquals(defaultCategory, goodConstructor.getCategory());		
-		assertEquals(100, goodConstructor.getId());		
+		assertEquals(Integer.valueOf(100), goodConstructor.getId());		
 	}	   
 }

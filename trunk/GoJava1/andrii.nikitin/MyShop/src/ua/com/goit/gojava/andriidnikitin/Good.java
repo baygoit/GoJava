@@ -2,7 +2,7 @@ package ua.com.goit.gojava.andriidnikitin;
 
 public class Good {
 	
-	private Integer id;	// TODO: make all int to Integer
+	private Integer id;	
 
 	private String name;
 	
@@ -11,19 +11,17 @@ public class Good {
 	public Good() {
 	}	
 	
-	
-	
-	protected Good( int id, String name, Category category) {
+	protected Good( Integer id, String name, Category category) {
 		this.id = id;	
 		this.name = name;
 		this.category = category;
 	}	
 	
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 	
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	
@@ -48,5 +46,4 @@ public class Good {
 	public String toString(){
 		return getName();
 	}
-
 }
