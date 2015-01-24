@@ -1,0 +1,32 @@
+import java.util.ArrayList;
+import java.util.Random;
+
+public class Category {
+	private String name;
+	private ArrayList<Project> projectCatalog = new ArrayList<>();
+
+	public Category(String name) {
+		StringBuffer sb = new StringBuffer(name);
+		sb.deleteCharAt(name.length() - 1);
+		this.name = sb.toString();
+		Random rand = new Random();
+		for (int i = 0; i < rand.nextInt(10) + 1; i++) {
+			Project project = new Project(this.name + " " + (i + 1), i + 1);
+			projectCatalog.add(project);
+		}
+
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public ArrayList<Project> getProjectCatalog() {
+		return projectCatalog;
+	}
+
+	public Project getProject(int num) {
+		return projectCatalog.get(num);
+	}
+
+}
