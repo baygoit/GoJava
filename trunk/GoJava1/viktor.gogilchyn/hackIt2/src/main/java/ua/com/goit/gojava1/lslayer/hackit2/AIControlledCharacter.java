@@ -1,8 +1,8 @@
 package ua.com.goit.gojava1.lslayer.hackit2;
 
-public class AIControleldCharacter extends AbstractCharacter implements AIControlled {
+public class AIControlledCharacter extends AbstractCharacter implements AIControlled {
 
-    public AIControleldCharacter(String name) {
+    public AIControlledCharacter(String name) {
         super(name);
         // TODO Auto-generated constructor stub
     }

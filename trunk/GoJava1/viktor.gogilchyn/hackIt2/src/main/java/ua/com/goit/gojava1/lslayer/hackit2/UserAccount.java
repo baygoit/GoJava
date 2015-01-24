@@ -24,10 +24,10 @@ public class UserAccount {
         return this.character;
     }
     public static UserAccount login(String login, String password) {
-        /*
+        /* TODO
          * Here comes description-code. 
          * When persistent will be allowed by pro100fox,
-         * here I should check whether there is an account 
+         * I should check whether there is an account 
          * with given credentials in database, and I will return it. 
          * For now, new account is created and returned;
          */
@@ -35,8 +35,7 @@ public class UserAccount {
         return UserAccount.createAccount(login, password);
     }
     
-    public boolean checkLogin(String login, String password) { //Sometimes, when some important things happens,
-                                  //I should check if it's really this account
+    public boolean checkLogin(String login, String password) { 
         return this.loginName.equals(login) && this.password.equals(password);
     }
     
