@@ -18,12 +18,12 @@ public class ProjectManager {
         categoryStorage.dispalyCategoryStorageList();
     }
 
-    public void addProject() {
-        projectStorage.addToProjectList(null, null, 0, 0, 0);
+    public void addProject(String name, String description, int needSum, int currentSum, int daysLeft, int categoryId) {
+        projectStorage.addToProjectList(name, description, needSum, currentSum, daysLeft, categoryId);
     }
     
-    public void displayProjects() {
-        projectStorage.dispalyProjectStorageList();
+    public void displayProjects(int categoryNumber) {
+        projectStorage.dispalyProjectStorageList(categoryNumber);
     }
     
     public void displaySpecificProjectCategory(int i) {
