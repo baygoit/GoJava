@@ -1,5 +1,5 @@
 package myRealization;
 
-public interface Category {	
+public interface Category {
 	public String getName();
 }

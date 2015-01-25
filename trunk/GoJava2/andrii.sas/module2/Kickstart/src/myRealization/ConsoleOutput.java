@@ -1,12 +1,11 @@
 package myRealization;
 
-public class ConsoleOutput {
-	private Quote quote;
+public class ConsoleOutput implements Output {
 	
-	public void printQuote(){
-		quote = new Quote();
-		System.out.println(quote.getQuote());
+	public void print(String s){
+		System.out.print(s);
 	}
-	
-	
+	public void println(String s){
+		System.out.println(s);
+	}
 }
