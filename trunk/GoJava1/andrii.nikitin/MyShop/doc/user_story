@@ -2,10 +2,10 @@ use cases:
 
 1. user opens the list of goods categories
 2. user opens list of goods in specified category
+3. user checks does particular good is available in store
+4. administrator adds new good/ category
 
-
-3. user opens the good's description
-4. user adds good to the basket
-5. admin adds new good/ category
+5. user adds good to the basket
 6. user create an account on the store
 7. user comments a good
+8. user opens the good's description
