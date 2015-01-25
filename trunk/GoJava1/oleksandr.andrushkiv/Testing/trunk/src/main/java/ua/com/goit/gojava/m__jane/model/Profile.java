@@ -21,7 +21,7 @@ public class Profile {
 	
 	@XmlElement(name = "questionCategory")
 	@XmlElementWrapper(name = "questionCategories")
-	private List<QuestionCategory> QuestionCategories;
+	private List<QuestionCategory> QuestionCategoryList;
 
 	public Profile() {
 	}	
@@ -46,39 +46,29 @@ public class Profile {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
-	public List<QuestionCategory> getQuestionCategories() {
-		return QuestionCategories;
+
+	public List<QuestionCategory> getQuestionCategoryList() {
+		return QuestionCategoryList;
 	}
 
-	public void setQuestionCategories(List<QuestionCategory> questionCategories) {
-		QuestionCategories = questionCategories;
+	public void setQuestionCategoryList(List<QuestionCategory> questionCategoryList) {
+		QuestionCategoryList = questionCategoryList;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString() {
-		return "Profile [id=" + id + ", name=" + name + "]" + QuestionCategories;
+		return "Profile [id=" + id + ", "
+				+ "name=" + name 
+				+ ", QuestionCategories="	+ QuestionCategoryList + "]";
 	}
 
 	@Override
-	public int hashCode() {
-		
+	public int hashCode() {		
 		return Objects.hash(id, name);
-		
-		/*final int prime = 31;
-		int result = 1;
-		result = prime * result + id;
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		return result;*/
 	}
 
 	@Override
-	public boolean equals(Object obj) {
+	public boolean equals(Object obj) {	
 		if (this == obj)
 			return true;
 		if (obj == null)
@@ -88,14 +78,14 @@ public class Profile {
 		Profile other = (Profile) obj;
 		if (id != other.id)
 			return false;
-	/*	if (name == null) {
+		if (name == null) {
 			if (other.name != null)
 				return false;
 		} else if (!name.equals(other.name))
-			return false;*/		
-		if (!Objects.equals(name, other.name)) {
+			return false;		
+		/*if (!Objects.equals(this, obj)) {
 			return false;
-		}		
+		}*/		
 		return true;
 	}
 	

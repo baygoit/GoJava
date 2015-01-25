@@ -2,17 +2,11 @@ package ua.com.goit.gojava.m__jane.service;
 
 import static org.junit.Assert.*;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
 import ua.com.goit.gojava.m__jane.model.Profile;
-import ua.com.goit.gojava.m__jane.service.impl.ProfileServiceImpl;
+
 
 public class ProfileServiceTest {
 
@@ -20,7 +14,8 @@ public class ProfileServiceTest {
 	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		profileService = new ProfileServiceImpl();
+		profileService = DataBuilder.getInstance()
+				.getProfileService();
 	}
 
 	@Test
@@ -37,12 +32,12 @@ public class ProfileServiceTest {
 
 	@Test
 	public void testGetProfileCount() {
-		assertEquals(2, profileService.getProfileCount());
+		assertEquals(3, profileService.getProfileCount());
 	}
 
 	@Test
 	public void testGetProfile() {
-		assertEquals(new Profile(1,"Торгові питання"), profileService.getProfile(1));
+		assertEquals(new Profile(1,"Продавець"), profileService.getProfile(1));
 	}
 
 }

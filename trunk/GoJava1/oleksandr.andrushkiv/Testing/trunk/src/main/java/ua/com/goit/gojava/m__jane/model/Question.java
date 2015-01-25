@@ -7,12 +7,12 @@ import javax.xml.bind.annotation.XmlAttribute;
 
 //@XmlSeeAlso({Admin.class})
 @XmlAccessorType(XmlAccessType.FIELD)
-public class Question {
+public abstract class Question {
 	
 	@XmlAttribute
 	private int id;
 	@XmlAttribute
-	private String content;
+	protected String content;
 	
 	private QuestionCategory questionCategory;
 	
@@ -24,7 +24,6 @@ public class Question {
 	//private boolean openQuestion;
 
 	public Question() {
-
 	}
 
 	public int getId() {
@@ -65,7 +64,7 @@ public class Question {
 	public String toString() {
 		return new StringBuilder().append("Question [id=").append(id)
 				.append(", content=").append(content)
-				//.append(", questionCategory=").append(questionCategory.getName())
+				.append(", questionCategory=").append(questionCategory.getName())
 				//.append(", profile=").append(profile.getName())
 				//.append(", openQuestion=").append(openQuestion)
 				.append("]").toString();

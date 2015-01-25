@@ -7,6 +7,8 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlElements;
+import javax.xml.bind.annotation.XmlIDREF;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 public class QuestionCategory {
@@ -16,10 +18,10 @@ public class QuestionCategory {
 	@XmlAttribute
 	private String name;
 	
-	@XmlElement(name = "question")
+	@XmlElements(value = {@XmlElement(name = "question", type=OpenQuestion.class),@XmlElement(name = "question", type=ClosedQuestion.class)})	
 	@XmlElementWrapper(name = "questions")
-	private List<Question> Questions;
-	
+	private List<Question> QuestionList;
+
 	private Profile profile;
 
 	public QuestionCategory() {
@@ -46,12 +48,12 @@ public class QuestionCategory {
 		this.name = name;
 	}
 
-	public List<Question> getQuestions() {
-		return Questions;
+	public List<Question> getQuestionList() {
+		return QuestionList;
 	}
 
-	public void setQuestions(List<Question> questions) {
-		Questions = questions;
+	public void setQuestionList(List<Question> questionList) {
+		QuestionList = questionList;
 	}
 
 	public Profile getProfile() {
@@ -64,8 +66,16 @@ public class QuestionCategory {
 
 	@Override
 	public String toString() {
-		return "QuestionCategory [id=" + id + ", name=" + name;
+		
+		return new StringBuilder()
+				.append("QuestionCategory [id=").append(id)
+				.append(", name=").append(name)
+				.append(", QuestionList=").append(QuestionList)
+				.append(", profile=").append(profile).append("]")
+				.toString();
+		
 	}
 
+	
 	
 }

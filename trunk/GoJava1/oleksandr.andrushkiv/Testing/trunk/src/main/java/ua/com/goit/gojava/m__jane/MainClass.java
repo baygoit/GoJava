@@ -1,48 +1,35 @@
 package ua.com.goit.gojava.m__jane;
 
-import java.io.File;
-import java.util.List;
-import java.util.Scanner;
-
-import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
-import javax.xml.bind.Unmarshaller;
-
-import ua.com.goit.gojava.m__jane.model.OpenQuestion;
 import ua.com.goit.gojava.m__jane.model.Profile;
 import ua.com.goit.gojava.m__jane.model.Question;
 import ua.com.goit.gojava.m__jane.model.QuestionCategory;
+import ua.com.goit.gojava.m__jane.service.DataBuilder;
 import ua.com.goit.gojava.m__jane.service.ProfileService;
-import ua.com.goit.gojava.m__jane.service.QuestionService;
-import ua.com.goit.gojava.m__jane.service.impl.ProfileServiceImpl;
-import ua.com.goit.gojava.m__jane.service.impl.QuestionServiceImpl;
 
 public class MainClass {
 
 	
 	public static void main(String[] args) throws JAXBException{
 
-		File file = new File("NewFile.xml");
-		JAXBContext jaxbContext = JAXBContext.newInstance(new Class[] {Profile.class,ProfileServiceImpl.class, QuestionCategory.class, OpenQuestion.class});
-		Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-		ProfileServiceImpl profileService = (ProfileServiceImpl) jaxbUnmarshaller.unmarshal(file);
-				
 		
-		System.out.println(profileService.getProfiles().size());
-		
-		for (Profile profile : profileService.getProfiles()) {
-			
+		ProfileService profileService = DataBuilder.getInstance()
+				.getProfileService();
+
+		for (Profile profile : profileService.getProfileList()) {
+
 			System.out.println(profile);
-			
-			for (QuestionCategory questionCategory : profile.getQuestionCategories()) {
-				System.out.println("	Category="+ questionCategory);
-				
-				for (Question question : questionCategory.getQuestions()) {
-					System.out.println("		question="+ question);
+
+			for (QuestionCategory questionCategory : profile
+					.getQuestionCategoryList()) {
+				System.out.println("	Category=" + questionCategory);
+
+				for (Question question : questionCategory.getQuestionList()) {
+					System.out.println("		question=" + question);
 				}
 			}
+			System.out.println("\n");
 		}
-		
 
 	}
 	
