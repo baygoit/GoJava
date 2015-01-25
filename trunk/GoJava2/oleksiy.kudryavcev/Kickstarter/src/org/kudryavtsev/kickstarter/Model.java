@@ -11,9 +11,9 @@ public class Model {
     }
 
     public void init() {
-        getCategoriesList().add("Sport");
-        getCategoriesList().add("Technology");
-        getCategoriesList().add("Science");
+        categoriesList.add("Sport");
+        categoriesList.add("Technology");
+        categoriesList.add("Science");
     }
 
     public List<String> getCategoriesList() {

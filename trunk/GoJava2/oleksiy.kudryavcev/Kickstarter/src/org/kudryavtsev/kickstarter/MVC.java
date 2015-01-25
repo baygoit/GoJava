@@ -4,10 +4,9 @@ public class MVC {
     public MVC() {
         Model model = new Model();
         View view = new View();
-        Controller controller = new Controller();
         Scan scan = new Scan();
+        Controller controller = new Controller(model, view, scan);
 
-        controller.add(model, view, scan);
         controller.start();
     }
 }
