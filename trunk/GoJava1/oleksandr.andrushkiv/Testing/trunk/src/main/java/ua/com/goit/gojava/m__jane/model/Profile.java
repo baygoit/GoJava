@@ -1,11 +1,27 @@
 package ua.com.goit.gojava.m__jane.model;
 
+import java.util.List;
 import java.util.Objects;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlRootElement;
+
+
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Profile {
-	private int id;
 	
+	@XmlAttribute
+	private int id;
+	@XmlAttribute
 	private String name;
+	
+	@XmlElement(name = "questionCategory")
+	@XmlElementWrapper(name = "questionCategories")
+	private List<QuestionCategory> QuestionCategories;
 
 	public Profile() {
 	}	
@@ -30,6 +46,14 @@ public class Profile {
 	public void setName(String name) {
 		this.name = name;
 	}
+	
+	public List<QuestionCategory> getQuestionCategories() {
+		return QuestionCategories;
+	}
+
+	public void setQuestionCategories(List<QuestionCategory> questionCategories) {
+		QuestionCategories = questionCategories;
+	}
 
 	/*
 	 * (non-Javadoc)
@@ -38,7 +62,7 @@ public class Profile {
 	 */
 	@Override
 	public String toString() {
-		return "Profile [id=" + id + ", name=" + name + "]";
+		return "Profile [id=" + id + ", name=" + name + "]" + QuestionCategories;
 	}
 
 	@Override

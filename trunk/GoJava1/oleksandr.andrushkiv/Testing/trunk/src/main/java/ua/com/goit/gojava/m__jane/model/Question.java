@@ -1,24 +1,31 @@
 package ua.com.goit.gojava.m__jane.model;
 
-public class Question {
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
 
-	private int id;
+
+//@XmlSeeAlso({Admin.class})
+@XmlAccessorType(XmlAccessType.FIELD)
+public class Question {
 	
+	@XmlAttribute
+	private int id;
+	@XmlAttribute
 	private String content;
 	
 	private QuestionCategory questionCategory;
 	
-	private Profile profile;
+	//private Profile profile;
 	/**
 	 * if openQuestion==false then question has many variants of
 	 * answers(a,b,c.... ), else only one (text the expected response)
 	 */
-	private boolean openQuestion;
+	//private boolean openQuestion;
 
 	public Question() {
 
 	}
-
 
 	public int getId() {
 		return id;
@@ -49,27 +56,6 @@ public class Question {
 		this.questionCategory = questionCategory;
 	}
 
-
-	public Profile getProfile() {
-		return profile;
-	}
-
-
-	public void setProfile(Profile profile) {
-		this.profile = profile;
-	}
-
-
-	public boolean isOpenQuestion() {
-		return openQuestion;
-	}
-
-
-	public void setOpenQuestion(boolean openQuestion) {
-		this.openQuestion = openQuestion;
-	}
-
-
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -79,9 +65,9 @@ public class Question {
 	public String toString() {
 		return new StringBuilder().append("Question [id=").append(id)
 				.append(", content=").append(content)
-				.append(", questionCategory=").append(questionCategory.getName())
-				.append(", profile=").append(profile.getName())
-				.append(", openQuestion=").append(openQuestion)
+				//.append(", questionCategory=").append(questionCategory.getName())
+				//.append(", profile=").append(profile.getName())
+				//.append(", openQuestion=").append(openQuestion)
 				.append("]").toString();
 	}
 }

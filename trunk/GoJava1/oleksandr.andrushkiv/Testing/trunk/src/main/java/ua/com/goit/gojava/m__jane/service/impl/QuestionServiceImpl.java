@@ -8,9 +8,9 @@ import ua.com.goit.gojava.m__jane.model.Question;
 import ua.com.goit.gojava.m__jane.model.QuestionCategory;
 import ua.com.goit.gojava.m__jane.service.QuestionService;
 
-public class QuestionServiceImpl implements QuestionService{
+public class QuestionServiceImpl{ //implements QuestionService{
 			 
-	@SuppressWarnings("serial")
+/*	@SuppressWarnings("serial")
 	private final List<Question> questions = new ArrayList<Question>() {
 
 		{			
@@ -116,5 +116,5 @@ public class QuestionServiceImpl implements QuestionService{
 		}
 		return listQuestions;
 	}
-
+*/
 }
