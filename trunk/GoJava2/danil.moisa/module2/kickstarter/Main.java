@@ -2,8 +2,12 @@ package kickstarter;
 
 public class Main {
 	public static void main (String [] args){
-		 Output q = new Output();
-		 q.quatation();
+		 Output output = new Output();
+		 output.quatation();
+		 output.category();
+		 Engine eng = new Engine();
+		 eng.choiceCategory();
+
 		
 	}
 
