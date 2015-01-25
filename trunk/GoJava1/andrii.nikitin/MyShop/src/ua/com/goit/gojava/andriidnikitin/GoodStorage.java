@@ -9,5 +9,12 @@ public interface GoodStorage {
 	public List<Good> getGoodList();
 	
 	public List<Good> getGoodList(Category category) ;
-
+	
+	public boolean categoryExists(Category category);
+	
+	public boolean goodExists(Good good);
+	
+	public void addCategory (Category category) throws IllegalArgumentException;
+	
+	public void addGood (Good good) throws IllegalArgumentException;
 }

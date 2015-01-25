@@ -21,20 +21,32 @@ public class GoodStorageImpl implements GoodStorage {
 		this.add(new Good(4, "Korg MS-20", categoryList.get(1)));
 		this.add(new Good(5, "VOX Overdrive", categoryList.get(2)));
 	}};
+	
+	public GoodStorageImpl() {
 		
-	public List<Category> getCategoryList() {
-		if (categoryList != null) {
-			return categoryList;
-		}
-		else {
-			return new ArrayList<Category>();
-		}
 	}
 	
+	protected GoodStorageImpl setCategoryList(List<Category> categoryList) {
+		this.categoryList = categoryList;
+		return this;
+	}
+
+	protected GoodStorageImpl setGoodList(List<Good> goodList) {
+		this.goodList = goodList;
+		return this;
+	}
+
+	@Override
+	public List<Category> getCategoryList() {
+		return categoryList != null ? categoryList : new ArrayList<Category>();
+	}
+	
+	@Override
 	public List<Good> getGoodList() {
 		return goodList != null ? goodList : new ArrayList<Good>();		
 	}	
-	
+
+	@Override
 	public List<Good> getGoodList(Category category) {
 		final List<Good> result = new ArrayList<Good>();
 		if (category == null || category.getName() == null) { 
@@ -48,5 +60,74 @@ public class GoodStorageImpl implements GoodStorage {
 		}
 		return result;
 	}
+	
+	@Override
+	public boolean categoryExists(Category category){
+		if ((category == null) || (categoryList == null)) {
+			return false;			
+		}
+		boolean answer = false;
+		for (int i = 0; i < categoryList.size(); i++){			
+			if (categoryList.get(i).getName().equals(category.getName())) {
+				answer = true;
+			}
+		}
+		return answer;		
+	}
+	
+	@Override
+	public boolean goodExists(Good good){
+		if ((good == null) || (goodList == null)) {
+			return false;			
+		}
+		boolean answer = false;
+		for (int i = 0; i < goodList.size(); i++){			
+			if (goodList.get(i).getId().equals(good.getId())) {
+				answer = true;
+			}
+		}
+		return answer;		
+	}
+	
+	
+	@Override
+	public void addCategory (Category category) throws IllegalArgumentException {
+		if (category == null) {
+			throw new IllegalArgumentException("Invalid argument: added category is null");
+		}		
+		if  (categoryList == null) {
+			throw new NullPointerException("List of categories is not initialised.");
+		}		
+		if (!categoryExists(category)){
+			categoryList.add(category);
+		}
+		else {
+			throw new IllegalArgumentException("You are trying to add existing category.");
+		}
+	}
+
+	@Override
+	public void addGood(Good good)  throws IllegalArgumentException {
+		if (good == null) {
+		throw new IllegalArgumentException("Invalid argument: added good is null");
+		}
+			
+		if  (goodList == null) {
+			throw new NullPointerException("List of goods is not initialised.");
+		}
+		
+		if (!categoryExists(good.getCategory())){
+			throw new IllegalArgumentException("You are trying to add "
+					+ "good from unexisting category");
+		}
+		
+		if (!goodExists(good)){
+			goodList.add(good);
+		}
+		else{
+			throw new IllegalArgumentException("You are trying to add existing item.");
+		}
+			
+	}	
 	
 }
