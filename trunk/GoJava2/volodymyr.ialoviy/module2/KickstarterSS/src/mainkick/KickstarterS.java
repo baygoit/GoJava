@@ -4,7 +4,7 @@ import java.io.IOException;
 
 public class KickstarterS {
 	static Category cat = new Category();
-	static Output choicePN = new Output();
+	static Output choicePN = new OutputConsole();
 	static Enter choiceCN = new Enter();
 	static Project project = new Project();
 	static int choiceCat;
