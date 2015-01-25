@@ -8,15 +8,9 @@ public class HumanControlledCharacter extends AbstractCharacter implements Human
     }
 
     @Override
-    public void readSomethingFromUser() {
-        // TODO Auto-generated method stub
-        
-    }
-
-    @Override
     public String getName() {
         // TODO Auto-generated method stub
-        return null;
+        return super.name;
     }
 
 }

@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import ua.com.goit.gojava1.lslayer.hackit2.dto.ActionResult;
+import ua.com.goit.gojava1.lslayer.hackit2.exceptions.SkillUninitilizedException;
 
 public class ScanActionTest {
     @Test
@@ -13,7 +14,7 @@ public class ScanActionTest {
         assertNotNull(action);
     }
     @Test
-    public void testFailedAndSuccessAction() {
+    public void testFailedAndSuccessAction() throws SkillUninitilizedException {
         Actor actor = new HumanControlledCharacter("Test name");
         actor.addSkill("test");
         Action action = new ScanAction();

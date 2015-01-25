@@ -2,22 +2,21 @@ package ua.com.goit.gojava1.lslayer.hackit2;
 
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Random;
+//import java.util.Random;
 import java.util.Set;
 
-import ua.com.goit.gojava1.lslayer.hackit2.gear.Gear;
+import ua.com.goit.gojava1.lslayer.hackit2.exceptions.SkillUninitilizedException;
 
 public abstract class AbstractCharacter implements Actor{
 
-    private Skill getSkillByName(String skillName) {
+    private Skill getSkillByName(String skillName) throws SkillUninitilizedException {
         if (this.skills.contains(new Skill(skillName))) {
             return this.skills.get(this.skills.indexOf(new Skill(skillName)));
         } else return null;
     }
     @Override
-    public int skillValue(String skillName) {
+    public int skillValue(String skillName) throws SkillUninitilizedException {
         if (this.getSkillByName(skillName) != null) {
             return this.getSkillByName(skillName).getValue();
         } else 
@@ -26,7 +25,7 @@ public abstract class AbstractCharacter implements Actor{
     
     
     @Override
-    public void evolveSkill(String skillName) {
+    public void evolveSkill(String skillName) throws SkillUninitilizedException {
         if (this.skillValue(skillName) > 0) {
             this.getSkillByName(skillName).evolve();
         }
@@ -35,24 +34,36 @@ public abstract class AbstractCharacter implements Actor{
 
     protected String name;
     private List<Skill> skills = new ArrayList<Skill>();
-    private List<Gear> possesions;
-    public void addGear(Gear gear) {
-        //There will be a lot of checks. Somewhen
-//        possesions.add(gear);
-    }
-    public void removeGear(Gear gear) {
-        //There will be a lot of checks. Somewhen
-//        possesions.remove(gear);
-    }
-    public boolean checkIfPossesed (Gear gear) {
-        return this.possesions.contains(gear);
-    }
+//  private List<Gear> possesionsList;
+//  private List<Gear> ControlList;
+//    public void addGear(Gear gear) {
+//        //There will be a lot of checks. Somewhen
+////        possesions.add(gear);
+//    }
+//    public void removeGear(Gear gear) {
+//        //There will be a lot of checks. Somewhen
+////        possesions.remove(gear);
+//    }
+//    public boolean checkIfPossesed (Gear gear) {
+//        return this.possesions.contains(gear);
+//    }
     public AbstractCharacter (String name) {
         this.name = name;
     }
-    public void addSkill(String skillName) {
+    public void addSkill(String skillName) throws SkillUninitilizedException {
         this.skills.add(new Skill(skillName));
     }
+    @Override
+    
+    public List<String> listAllSkills() {
+        // TODO Auto-generated method stub
+        List<String> returnValue = new ArrayList<String>();
+        for (Skill s : this.skills) {
+            returnValue.add(s.toString());
+        }
+        return returnValue;
+    }
+    
  
 
 }
@@ -61,12 +72,12 @@ class Skill {
     private int value = 0;
     private static Set<Skill> allPossibleSkills = new HashSet<Skill>();
 
-    public Skill(String name) {
+    public Skill(String name) throws SkillUninitilizedException {
         if (name != null) {
             this.value = 1;
             this.name = name;
             Skill.allPossibleSkills.add(this);
-        }
+        } else throw new SkillUninitilizedException("null can't be a Skill name");
     }
     
     public String getName() {
@@ -98,20 +109,22 @@ class Skill {
         return this.name + " - " + this.value;
     }
     
-    public static Set<Skill> getRandomSkills(int quantity) {
-        if (quantity < 0) return new HashSet<Skill>();
-        if (quantity < Skill.allPossibleSkills.size()) {
-            Set<Skill> returnSet = new HashSet<Skill>();
-            int index = new Random().nextInt(allPossibleSkills.size());
-            Iterator<Skill> iter = allPossibleSkills.iterator();
-            for (int i = 0; i < index; i++) {
-                iter.next();
-            }
-            returnSet.add(iter.next());
-            returnSet.addAll(Skill.getRandomSkills(quantity - returnSet.size()));
-            return returnSet;
-        }
-        return null;
-    }
+//I don't know why I left this code. Mayne some time it will be needed.
+    
+//    public static Set<Skill> getRandomSkills(int quantity) {
+//        Set<Skill> returnSet = new HashSet<Skill>();
+//        if (quantity < Skill.allPossibleSkills.size()) {
+//            Random rand = new Random(System.currentTimeMillis());
+//            Skill[] setArray = (Skill[]) Skill.allPossibleSkills.toArray();
+//            returnSet
+//                    .add(setArray[rand.nextInt(Skill.allPossibleSkills.size())]);
+//            if (quantity > 1) {
+//                returnSet.addAll(Skill.getRandomSkills(quantity
+//                        - returnSet.size()));
+//            }
+//            return returnSet;
+//        }
+//        return null;
+//    }
 
 }

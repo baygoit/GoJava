@@ -1,5 +1,7 @@
 package ua.com.goit.gojava1.lslayer.hackit2;
 
+import ua.com.goit.gojava1.lslayer.hackit2.exceptions.SkillUninitilizedException;
+
 public class UserAccount {
     private String loginName;
     private String password;
@@ -46,8 +48,11 @@ public class UserAccount {
         return account;
     }
     
-    public static UserAccount createCharacterInAccount(UserAccount account, String characterName) {
+    public static UserAccount createCharacterInAccount(UserAccount account, String characterName) throws SkillUninitilizedException {
         account.setCharacter(new HumanControlledCharacter(characterName)); //Here will be Factory creation. But for now - mock-up.
+        account.character.addSkill("scan");   //
+        account.character.addSkill("develop");// Three default skills added to newborn hero
+        account.character.addSkill("hack");   //
         return account;
     }
 }
