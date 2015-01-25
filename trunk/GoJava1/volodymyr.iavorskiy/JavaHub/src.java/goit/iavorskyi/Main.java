@@ -6,7 +6,14 @@ public class Main {
 
 		Autorizer autorizer = new Autorizer();
         autorizer.autorize();
+        
+        
 
 	}
 
+	
+	public int add(int a, int b) {
+    	return a + b;
+    }
+	
 }
