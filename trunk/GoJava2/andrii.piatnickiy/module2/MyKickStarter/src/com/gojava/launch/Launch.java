@@ -23,14 +23,17 @@ public class Launch {
         in = new Scanner(System.in);
         int projectNumber = in.nextInt();
 
-        if (projectNumber == 0) {
-            manager.displayCategories();
-            in = new Scanner(System.in);
-            categoryNumber = in.nextInt();
-            manager.displayProjects(categoryNumber);
-        } else {
-            manager.displaySpecificProject(categoryNumber, projectNumber);
-        }
+        while(true){
+            if (projectNumber == 0) {
+                manager.displayCategories();
+                in = new Scanner(System.in);
+                categoryNumber = in.nextInt();
+                manager.displayProjects(categoryNumber);
+            } else {
+                manager.displaySpecificProject(categoryNumber, projectNumber);
+            }
+        }        
+        
 
     }
 
