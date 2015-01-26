@@ -12,20 +12,13 @@ public class MedicalSystemTest {
 	//List<Specialization> specializations = new ArrayList<Specialization>();
 	
 	@Test
-	public void addSpecialisationTest() {
+	public void testAddSpecialisation() {
 		String name = "Hirurg";
 		MedicalSystem.addSpecialisation(name);
 		assertEquals("Hirurg", MedicalSystem.specializations.get(0).getName());
 
 	}
 	
-	@Test
-	public void addSpecTest() {
-		String name = "Hirurg";
-		MedicalSystem.addSpecialisation(name);
-		assertEquals("Hirurg", MedicalSystem.specializations.get(0).getName());
-
-	}
 
 	/*@Test
 	public void testSelectSpecialization() {
