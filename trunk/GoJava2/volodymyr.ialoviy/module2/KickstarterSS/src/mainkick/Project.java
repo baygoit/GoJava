@@ -13,7 +13,7 @@ public class Project{
 	private int howMuchNeeded;
 	private int howMuchCollected;
 	private int howMuchRemaining;
-	public static int counterProject;
+	private int counterProject;
 	
 	public void showProject(int selectProjectID) throws FileNotFoundException{
 		stringConvertToProject(selectProjectID);
@@ -47,6 +47,7 @@ public class Project{
 		ReaderBD reader = new ReaderBD();
 		Map<Integer, String> linesAsArray = reader.read("Projects.properties", "Project");
 		String[] string = linesAsArray.get(projectID-1).split("\\[\\]");
+		counterProject = linesAsArray.size();
 		return string;
 	}
 	
@@ -71,12 +72,12 @@ public class Project{
 	public void addProject(){
 		//TODO
 		//EntriesInTheDB.record()
-		counterProject++;
+		//counterProject++;
 	}
 	
 	public void deleteProject(){
 		//TODO
 		//EntriesInTheDB.record()
-		counterProject--;
+		//counterProject--;
 	}
 }

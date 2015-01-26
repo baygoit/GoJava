@@ -6,7 +6,7 @@ public class Category{
 	private int categoryID;
 	private String categoryName;
 	private int[] projectsThatContain;
-	public static int counterCategory;
+	private int counterCategory;
 
 	public void showAllCatecories() throws FileNotFoundException{
 		recordingCategoryFromBD(1);
@@ -22,6 +22,7 @@ public class Category{
 		ReaderBD reader = new ReaderBD();
 		Map<Integer, String> linesAsArray = reader.read("Categories.properties", "Category");
 		String[] string = linesAsArray.get(projectID-1).split("\\[\\]");
+		counterCategory = linesAsArray.size();
 		return string;
 	}
 	
