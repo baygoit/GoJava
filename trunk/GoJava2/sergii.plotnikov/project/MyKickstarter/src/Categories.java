@@ -5,18 +5,22 @@ public class Categories {
 	private ArrayList<MyCategory> categoriesList = new ArrayList<MyCategory>();
 		
 	public void showList() {
+		if(categoriesList.size()==0){
+			System.out.println("Empty!");
+		}
 		int num = 1;
 		for(int i = 0; i<categoriesList.size(); i++){
 			System.out.println(num + " - " + getCategory(i).getTitle());
 			num++;
 		}
+		System.out.println("0 - Go back");
 	}
 	
 	public MyCategory getCategory(int i){
 		return categoriesList.get(i);
 	}
 	
-	public void addCategories(){
+	public Categories(){
 		MyCategory sports = new MyCategory("Sports");
 		MyCategory music = new MyCategory("Music");
 		MyCategory games = new MyCategory("Games");

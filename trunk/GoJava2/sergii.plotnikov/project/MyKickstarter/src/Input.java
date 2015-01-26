@@ -1,9 +1,8 @@
 import java.util.Scanner;
 
-
 public class Input {
 
-	public int chooseCategory() {
+	public int choose() {
 		Scanner scanner = new Scanner(System.in);
 		return scanner.nextInt();
 	}

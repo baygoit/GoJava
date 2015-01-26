@@ -1,5 +1,6 @@
 
 public class Output {
+		
 	public void hello(){
 		System.out.println("Welcome to the place where your dreams become real possibilities! ;)");
 	}
@@ -9,8 +10,12 @@ public class Output {
 		c.showList();
 	}
 	
-	public void projectsMenu(MyCategory c){ 
+	public void projectsMenu(MyCategory category){ 		
+		System.out.println("You have chosen Category " + category.getTitle());
 		System.out.println("Choose a project:");
-		c.showList();
+		category.showList();
 	}
+
+
+	public void showProject(Project project) { project.showProject();}
 }
