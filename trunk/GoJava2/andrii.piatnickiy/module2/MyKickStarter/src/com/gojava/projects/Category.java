@@ -16,4 +16,10 @@ public class Category {
     public int getCategoryId() {
         return categoryId;
     }
+
+    @Override
+    public String toString() {
+        return categoryId + ") " + name;
+
+    }
 }

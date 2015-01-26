@@ -15,17 +15,20 @@ public class ProjectStorage {
     }
 
     public void dispalyProjectStorageList(int categoryNumber) {
+        int i=1;
         for (Project project : this.projectStorageList) {
             if (project.getCategoryId() == categoryNumber) {
-                System.out.println("Project Name: " + project.getName());
+                System.out.println(i+") Project Name: " + project.getName());
                 System.out.println("Description: " + project.getDescription());
                 System.out.println("Need Sum: " + project.getNeedSum());
                 System.out.println("Current Sum: " + project.getCurrentSum());
                 System.out.println("Days Left: " + project.getDaysLeft());
                 System.out.println();
-                projectsCount++;
+                i++;
             }
         }
+        System.out.println("Enter the number 0 to return to the list of categories");
+        System.out.println();
     }
 
     public void displaySpecificProject(int categoryNumber, int projectNumber) {

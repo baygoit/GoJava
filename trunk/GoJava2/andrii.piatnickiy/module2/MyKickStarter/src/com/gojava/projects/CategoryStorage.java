@@ -11,7 +11,7 @@ public class CategoryStorage {
 
     public void dispalyCategoryStorageList() {
         for (Category projectCategory : categoryStorageList) {
-            System.out.println(projectCategory.getCategoryId() + " " + projectCategory.getName());
+            System.out.println(projectCategory.toString());
         }
     }
     
