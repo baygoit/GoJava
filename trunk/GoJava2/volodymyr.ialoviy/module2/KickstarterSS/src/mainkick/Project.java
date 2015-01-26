@@ -1,5 +1,6 @@
 package mainkick;
 import java.io.FileNotFoundException;
+import java.util.Map;
 
 
 public class Project{
@@ -44,8 +45,8 @@ public class Project{
 	
 	private String[] recordingProjectsFromBD(int projectID) throws FileNotFoundException{
 		ReaderBD reader = new ReaderBD();
-		String[] linesAsArray = reader.read("Projects.properties", "Project");
-		String[] string = linesAsArray[projectID-1].split("\\[\\]");
+		Map<Integer, String> linesAsArray = reader.read("Projects.properties", "Project");
+		String[] string = linesAsArray.get(projectID-1).split("\\[\\]");
 		return string;
 	}
 	

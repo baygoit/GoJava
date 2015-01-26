@@ -5,21 +5,26 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class ReaderBD {
 	
-	public String[] read(String fileName, String counter) throws FileNotFoundException {
+	public HashMap<Integer, String> read(String fileName, String counter) throws FileNotFoundException {
 	    exists(fileName);
-	    String[] linesAsArray;
 	    Project.counterProject = 0;
 	    Category.counterCategory = 0;
+	    Map<Integer, String> hashmap = new HashMap<Integer, String>();
 	    try {
 	        BufferedReader in = new BufferedReader(new FileReader(fileName));
 	        try {
 	            String line;
+	            Integer i = 0;
 	            ArrayList<String> lines = new ArrayList<String>();
 	            while ((line = in.readLine()) != null) {
+	            	hashmap.put(i, line);
+	            	i++;
 	            	lines.add(line);
 	            	if (counter.equals("Project")){
 		    	    	Project.counterProject++;
@@ -28,14 +33,14 @@ public class ReaderBD {
 		    	    	Category.counterCategory++;
 		    	    }
 	            }
-	            linesAsArray = lines.toArray(new String[lines.size()]);
 	        } finally {
 	            in.close();
 	        }
 	    } catch(IOException e) {
 	        throw new RuntimeException(e);
 	    }
-	    return linesAsArray;
+	    
+		return (HashMap<Integer, String>) hashmap;
 	}
 	
 	private void exists(String fileName) throws FileNotFoundException {

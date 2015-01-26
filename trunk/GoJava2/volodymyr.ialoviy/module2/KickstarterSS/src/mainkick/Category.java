@@ -1,5 +1,6 @@
 package mainkick;
 import java.io.FileNotFoundException;
+import java.util.Map;
 
 public class Category{
 	private int categoryID;
@@ -19,8 +20,8 @@ public class Category{
 	
 	public String[] recordingCategoryFromBD(int projectID) throws FileNotFoundException{
 		ReaderBD reader = new ReaderBD();
-		String[] linesAsArray = reader.read("Categories.properties", "Category");
-		String[] string = linesAsArray[projectID-1].split("\\[\\]");
+		Map<Integer, String> linesAsArray = reader.read("Categories.properties", "Category");
+		String[] string = linesAsArray.get(projectID-1).split("\\[\\]");
 		return string;
 	}
 	
