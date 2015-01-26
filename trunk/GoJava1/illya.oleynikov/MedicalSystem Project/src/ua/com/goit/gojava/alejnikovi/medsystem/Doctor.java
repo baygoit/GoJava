@@ -23,5 +23,10 @@ class Doctor {
 	String getSecondName() {
 		return secondName;
 	}
+	
+	@Override
+	public String toString() {
+		return this.firstName + " " + this.secondName + ", " + this.specialization.toString();
+	}
 
 }

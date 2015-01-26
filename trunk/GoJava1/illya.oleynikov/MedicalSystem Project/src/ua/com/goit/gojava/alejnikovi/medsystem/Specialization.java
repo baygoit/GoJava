@@ -16,10 +16,9 @@ class Specialization {
 		this.name = name;
 	}
 	
-	/*@Override 					//commented for id implementation
+	@Override
 	public String toString() {
-		String result = this.name;
-		return result;
-	}*/
+		return this.name;
+	}
 
 }

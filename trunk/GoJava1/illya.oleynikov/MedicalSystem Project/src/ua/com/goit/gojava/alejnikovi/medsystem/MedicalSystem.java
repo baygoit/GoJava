@@ -5,24 +5,21 @@ import java.util.List;
 
 public class MedicalSystem {
 	
-    static List<Specialization> specializations = new ArrayList<Specialization>();
-	private static List<Doctor> doctors = new ArrayList<Doctor>();
-    
-    //public static List<Clinic> clinics = new ArrayList<Clinic>(); //next user scenario
-
-
-	public static void addDoctors(Doctor doctor) {
-		doctors.add(doctor);
+	static List<Specialization> specializations = new ArrayList<Specialization>();
+	static List<Doctor> doctors = new ArrayList<Doctor>();
+	
+	private MedicalSystem() {}
+	    
+    static List<Doctor> getDoctors() {
+		return doctors;
 	}
 
-	public static void main(String[] args){
+	static void addDoctor(Doctor doctor) {
+		doctors.add(doctor);
+	}
 		
-		
- 
-    }
-	
-    static List<Specialization> getSpecializations() {
-		return specializations;
+    static Specialization getSpecializationByIndex(int specIndex) {
+		return specializations.get(specIndex);
 	}
 
     static boolean isSpecialisationUnique(String specializationName){
