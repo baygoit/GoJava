@@ -17,4 +17,10 @@ public interface GoodStorage {
 	public void addCategory (Category category) throws IllegalArgumentException;
 	
 	public void addGood (Good good) throws IllegalArgumentException;
+	
+	public void updateCategory(Category oldCategory, Category newCategory) 
+			throws IllegalArgumentException;	
+
+	public void updateGood(Good oldGood, Good newGood) 
+			throws IllegalArgumentException;
 }

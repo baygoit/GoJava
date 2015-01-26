@@ -4,7 +4,7 @@ import java.io.PrintStream;
 import java.util.List;
 
 public class Main {
-	
+	/*
 	public static void main(String[] args){		
 		GoodStorageImpl myStore = new GoodStorageImpl();
 		System.out.println("Categories:");
@@ -34,6 +34,6 @@ public class Main {
 		catch (NullPointerException exception){
 			stream.println("Not found!");
 		}
-	}
+	}*/
 	
 }

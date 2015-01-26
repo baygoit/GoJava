@@ -17,6 +17,8 @@ public class CategoryTest {
 		assertEquals("default", categorySetter.getName());
 		
 		final Category categoryConstructor = new Category("default");
-		assertEquals("default", categoryConstructor.getName());		
+		assertEquals("default", categoryConstructor.getName());	
+		assertEquals("default", categoryConstructor.toString());	
+		
 	}	   
 }

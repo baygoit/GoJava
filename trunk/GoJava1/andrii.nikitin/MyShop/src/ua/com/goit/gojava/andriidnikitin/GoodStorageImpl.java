@@ -130,4 +130,33 @@ public class GoodStorageImpl implements GoodStorage {
 			
 	}	
 	
+	public void updateCategory(Category oldCategory, Category newCategory) {
+		
+	}
+	
+	public void updateGood(Good oldGood, Good newGood) {
+		if (goodExists(oldGood)) {
+			
+		}
+		
+		else {
+			throw new IllegalArgumentException("Such good does not exist.");
+		}
+		
+		oldGood.setCategory(newGood.getCategory());
+		oldGood.setId(newGood.getId());
+		oldGood.setName(newGood.getName());
+	}	
+	
+	public void updateCategoty (Category oldCategory, Category newCategory) {
+		if (categoryExists(oldCategory)) {
+			
+		}
+		
+		else {
+			throw new IllegalArgumentException("Such good does not exist.");
+		}
+
+		oldCategory.setName(newCategory.getName());
+	}	
 }
