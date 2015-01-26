@@ -1,10 +1,7 @@
-﻿Part 1 console variant
-
-1.Main Menu class.
-	constructor with a menu points
-	method that draw menu
-	method, that read point menu from user and return it, or return 0
-	method, that choose class that realize own calculation variant
-
-2.Classes, that represent calculation for a different type of consruction
-3.Class main
+ Basic class model
+ 1. class Customer that include name and contacts of customer
+ 2. class FotoStudio that include name, contacts and reserve date of studio
+ 3. class FotoPackage that include amount of foto in package, time to editing one foto and time to reserve in percent.
+ 4. class SellService. This is what photografer provide to customer. Including fotopackage, describe this service, price and time (for ex. one week or two week in depending of service type)
+ 5. class Order that include deadline date, begining work date with choosen servise, class  SellService and class Customer
+ 6. class Shooting that include shooting date and class Order.
