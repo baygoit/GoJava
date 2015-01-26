@@ -7,6 +7,7 @@ public class Project {
     private int funded;
     private int pledged;
     private int daysToGo;
+    private String longDescription;
 
     public Project(String category, String name, String description,
             int funded, int pledged, int daysToGo) {

@@ -23,8 +23,8 @@ public class Controller {
             view.showCategories(list);
             int result = scan.getAnswer();
             if (result > 0 && result <= list.size()) {
-                view.showProjectsInCategory(list, list.get(result - 1).getCategory());
-                // view.showCategories(result - 1, list);
+                view.showProjectsInCategory(list, list.get(result - 1)
+                        .getCategory());
             } else
                 exit = true;
         }
