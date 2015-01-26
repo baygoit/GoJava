@@ -7,7 +7,7 @@ import org.junit.Test;
 public class TestSpecialization {
 
 	@Test
-	public void testSmoke() {
+	public void smokeTest() {
 		Specialization spec = new Specialization(null);
 		assertNotNull(spec);
 	}

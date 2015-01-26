@@ -7,7 +7,7 @@ import org.junit.Test;
 public class TestDoctor {
 
 	@Test
-	public void testSmoke() {
+	public void smokeTest() {
 		
 		assertNotNull(new Doctor(null, null, null));
 
