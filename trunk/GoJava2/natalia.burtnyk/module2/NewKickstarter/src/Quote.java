@@ -2,10 +2,10 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Quote {
+    ArrayList<String> printQuote = new ArrayList<String>();
 
 	public String printQuote() {
-        ArrayList<String> printQuote = new ArrayList<String>();
-
+		
 		printQuote.add("\"Lost time is never found again.\"");
 		printQuote.add("\"The future belongs to those, who believe of their dreams.\"");
 		printQuote.add("\"If you never try you'll never know.\"");
