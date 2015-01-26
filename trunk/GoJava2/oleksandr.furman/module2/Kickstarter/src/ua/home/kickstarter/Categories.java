@@ -1,27 +1,24 @@
 package ua.home.kickstarter;
 
+import java.util.ArrayList;
+
 public class Categories {
 
-	private int numberOfCategories = 10;
-	
-	private Category[] categories = new Category[numberOfCategories];
-
-	private int count = 0;
+	private ArrayList<Category> categories = new ArrayList<Category>();
 
 	public void add(Category category) {
-		categories[count] = category;
-		count++;
+		categories.add(category);
 	}
 
-	public String[] getCategories() {
-		String[] result = new String[count];
-		for (int index = 0; index < count; index++) {
-			result[index] = String.valueOf(index + 1) + " - " + categories[index].getName();
+	public ArrayList<Object> getCategories() {
+		ArrayList<Object> result = new ArrayList<Object>();
+		for (int index = 0; index < categories.size(); index++) {
+			result.add(String.valueOf(index + 1) + " - " + categories.get(index).getName());
 		}
 		return result;
 	}
 
 	public Category getName(int index) {
-		return categories[index - 1];
+		return categories.get(index - 1);
 	}
 }
