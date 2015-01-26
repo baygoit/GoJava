@@ -1,37 +1,39 @@
 package ua.home.kickstarter;
 
+import java.util.ArrayList;
+
 public class Projects {
-	private int numberOfProjects = 100;
-	private Project[] projects = new Project[numberOfProjects];
-	private int count = 0;
+	private ArrayList<Project> projects = new ArrayList<Project>();
 
 	public void add(Project project) {
-		projects[count] = project;
-		count++;
+		projects.add(project);
 	}
 
-	public Project[] getProjects(Category category) {
-		Project[] result = new Project[count];
-		int found = 0;
-		for (int index = 0; index < count; index++) {
-			Project project = projects[index];
-			if (projects[index].getCategory().equals(category)) {
-				result[found] = project;
-				found++;
+	public ArrayList<Project> getProjects(Category category) {
+		ArrayList<Project> result = new ArrayList<Project>();
+
+		for (int index = 0; index < projects.size(); index++) {
+			Project project = projects.get(index);
+			if (projects.get(index).getCategory().equals(category)) {
+				result.add(project);
+
 			}
 		}
 		return result;
 	}
-	public Project[] getFullProject(int projectIndex) {
-		Project[] result = new Project[count];
-			result[0] = projects[projectIndex-1];
-		
+
+	public ArrayList<Project> getFullProject(int projectIndex, Category category) {
+		ArrayList<Project> result = new ArrayList<Project>();
+		result.add(getProjects(category).get(projectIndex - 1));
 		return result;
 	}
 
-	public Project getName(int index) {
-		return projects[index - 1];
+	public Project getName(int index, Category category) {
+		ArrayList<Project> result = new ArrayList<Project>();
+		if (getProjects(category).get(index - 1).getCategory().equals(category)) {
+			result.add(getProjects(category).get(index - 1));
+		}
+		return result.get(0);
 	}
-
 
 }
