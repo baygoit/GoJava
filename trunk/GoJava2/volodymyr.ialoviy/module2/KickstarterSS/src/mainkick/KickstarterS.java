@@ -9,25 +9,25 @@ public class KickstarterS {
 			Project project = new Project();
 			Output out = new OutputConsole();
 			Inputs choiceCN = new InputsConsole();
-			int choiceCat;
-			int choiceProj;
-			int choiceToProj;
+			int chosenCategory;
+			int chosenProject;
+			int choiceToProject;
 			
 			cat.showAllCatecories();
 			out.print("Choice Category Number: ");
-			choiceCat = choiceCN.enter();
+			chosenCategory = choiceCN.enter();
 			
 			while (true){
-				cat.showAllProjectInCategory(choiceCat);
+				cat.showAllProjectInCategory(chosenCategory);
 				out.print("Choice Project Number or 0 for exit to Category: ");
-				choiceProj = choiceCN.enter();
-				if (choiceProj == 0){
+				chosenProject = choiceCN.enter();
+				if (chosenProject == 0){
 					break;
 				}
-				project.showProject(choiceProj);
+				project.showProject(chosenProject);
 				out.print("Choice 0 for exit to Project: ");
-				choiceToProj = choiceCN.enter();
-				if (choiceToProj == 0){
+				choiceToProject = choiceCN.enter();
+				if (choiceToProject == 0){
 					continue;
 				}
 			}
