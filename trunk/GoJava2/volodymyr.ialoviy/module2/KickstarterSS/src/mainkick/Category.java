@@ -26,9 +26,10 @@ public class Category{
 	
 	public void showCategory(int selectCategoryID) throws FileNotFoundException{
 		stringConvertToCategory(selectCategoryID);
-		System.out.println("categoryID = " + categoryID);
-		System.out.println("categoryName: " + categoryName);
-		System.out.println("projectsThatContain: " + projectsThatContain);
+		Output out = new OutputConsole();
+		out.print("categoryID = " + categoryID);
+		out.print("categoryName: " + categoryName);
+		out.print("projectsThatContain: " + projectsThatContain);
 	}
 	
 	private int[] stringConvertToCategory(int selectProjectID) throws FileNotFoundException{

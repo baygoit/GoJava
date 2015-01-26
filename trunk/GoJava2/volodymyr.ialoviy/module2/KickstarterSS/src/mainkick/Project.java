@@ -16,16 +16,16 @@ public class Project{
 	
 	public void showProject(int selectProjectID) throws FileNotFoundException{
 		stringConvertToProject(selectProjectID);
-
-		System.out.println("projectID = " + projectID);
-		System.out.println("projectName: " + projectName);
-		System.out.println("shortDescription: " + shortDescription);
-		System.out.println("fullDescription: " + fullDescription);
-		System.out.println("foto: " + foto);
-		System.out.println("link: " + link);
-		System.out.println("howMuchNeeded = " + howMuchNeeded);
-		System.out.println("howMuchCollected = " + howMuchCollected);
-		System.out.println("howMuchRemaining = " + howMuchRemaining);
+		Output out = new OutputConsole();
+		out.print("projectID = " + projectID);
+		out.print("projectName: " + projectName);
+		out.print("shortDescription: " + shortDescription);
+		out.print("fullDescription: " + fullDescription);
+		out.print("foto: " + foto);
+		out.print("link: " + link);
+		out.print("howMuchNeeded = " + howMuchNeeded);
+		out.print("howMuchCollected = " + howMuchCollected);
+		out.print("howMuchRemaining = " + howMuchRemaining);
 	}
 	
 	private void stringConvertToProject(int selectProjectID) throws FileNotFoundException{
@@ -53,14 +53,16 @@ public class Project{
 		stringConvertToProject(1);
 		for (int i = 1; i <= counterProject; i++){
 			stringConvertToProject(i);
-			System.out.println(projectID + ", " + projectName + ", " + shortDescription + ", " + howMuchNeeded + ", " + howMuchRemaining);
+			Output out = new OutputConsole();
+			out.print(projectID + ", " + projectName + ", " + shortDescription + ", " + howMuchNeeded + ", " + howMuchRemaining);
 		}
 	}
 	
 	public void showAllProjectInCategory(int[] projectsThatContain) throws FileNotFoundException{
 		for (int i = 0; i < projectsThatContain.length; i++){
 			stringConvertToProject(projectsThatContain[i]);
-			System.out.println(projectID + ", " + projectName + ", " + shortDescription + ", " + howMuchNeeded + ", " + howMuchRemaining);
+			Output out = new OutputConsole();
+			out.print(projectID + ", " + projectName + ", " + shortDescription + ", " + howMuchNeeded + ", " + howMuchRemaining);
 		}
 	}
 	
