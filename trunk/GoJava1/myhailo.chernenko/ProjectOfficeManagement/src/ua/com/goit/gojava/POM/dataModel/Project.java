@@ -1,49 +1,125 @@
 package ua.com.goit.gojava.POM.dataModel;
 
+import java.util.List;
 import java.io.Serializable;
+//import ua.com.goit.gojava.POM.persistence.DataManager;
 
-import ua.com.goit.gojava.POM.persistence.DataManager;
+import ua.com.goit.gojava.POM.persistence.DataObject;
 
 public class Project implements DataObject, Serializable {
 	
-	private static final long serialVersionUID = 9089675474277705813L;
-	private String shortName;
-
-	public Project(String shortName) {
+	private static final long serialVersionUID = 3538434347597125924L;
+	private long id;
+	private String name;
+	private String description;
+	private ProjectType type;
+	private boolean active;
+	private String pm;
+	private List<ProjectStage> stages;
+	
+	public long getId() {
 		
-		setShortName(shortName);
-		
-	}
-
-	private void setShortName(String shortName) {
-		
-		this.shortName = shortName;
+		return id;
 		
 	}
 	
-	public String getShortName() {
+	public void setId(long id) {
 		
-		return shortName;
+		this.id = id;
 		
 	}
 	
-	@Override
-	public String toString() {
-	
-		return getShortName();
+	public String getName() {
+		
+		return name;
 		
 	}
-
-	@Override
-	public String getFieldsForUpdatePresentation() {
-		// TODO Auto-generated method stub
-		return null;
+	
+	public void setName(String name) {
+		
+		this.name = name;
+		
 	}
+	
+	public String getDescription() {
+		
+		return description;
+		
+	}
+	
+	public void setDescription(String description) {
+		
+		this.description = description;
+		
+	}
+	
+	public ProjectType getType() {
+		
+		return type;
+		
+	}
+	
+	public void setType(ProjectType type) {
+		
+		this.type = type;
+		
+	}
+	
+	public boolean isActive() {
+		
+		return active;
+		
+	}
+	
+	public void setActive(boolean active) {
+		
+		this.active = active;
+		
+	}
+	
+	public String getPm() {
+		
+		return pm;
+		
+	}
+	
+	public void setPm(String pm) {
+		
+		this.pm = pm;
+		
+	}
+	
+	public List<ProjectStage> getStages() {
+		
+		return stages;
+		
+	}
+	
+	public ProjectStage createStage() {
+		
+		ProjectStage newStage = new ProjectStage();
+		stages.add(newStage);
+		
+		return newStage;
+		
+	}
+	
+	public void addTransaction(ProjectStage currentStage) {
+		
+		currentStage.addTransaction();
+		
+	}
+	
+	public long getProfit() {
 
-	@Override
-	public String update(String[] fieldsArray, DataManager dataManager) {
-		// TODO Auto-generated method stub
-		return null;
+		long result = 0;
+		for (ProjectStage stage:getStages()) {
+			
+			result += stage.getProfit();
+			
+		}
+		
+		return result;
 	}
 
 }

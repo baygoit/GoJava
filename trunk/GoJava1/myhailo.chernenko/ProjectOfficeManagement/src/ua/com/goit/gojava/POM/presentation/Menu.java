@@ -16,23 +16,23 @@ class Menu {
 	
 		if (command.contentEquals("-show")) {
 			
-			userScreen.showDataObject(dataManager.getTransactionsStore());
+			//userScreen.showDataObject(dataManager.getTransactionsStore());
 			
 		} else if (command.contentEquals("-showProjects")) {
 			
-			userScreen.showDataObject(dataManager.getProjectMap());
+			//userScreen.showDataObject(dataManager.getProjectMap());
 			
 		} else if (command.contentEquals("-showProjectsProfit")) {
 			
-			userScreen.showDataObject(dataManager.getProjectsProfit());
+			//userScreen.showDataObject(dataManager.getProjectsProfit());
 			
 		} else if (command.contentEquals("-showCostItems")) {
 			
-			userScreen.showDataObject(dataManager.getCostItemMap());
+			//userScreen.showDataObject(dataManager.getCostItemMap());
 			
 		} else if (command.contentEquals("-update")) {
 	
-			userScreen.updateDataObject(dataManager.getTransactionsStore(), dataManager);
+			//userScreen.updateDataObject(dataManager.getTransactionsStore(), dataManager);
 		
 		} else if (!command.isEmpty()) {
 		

@@ -5,97 +5,30 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.ConcurrentModificationException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import ua.com.goit.gojava.POM.dataModel.*;
-
-public class DataManager implements Serializable {
-
-	private static final long serialVersionUID = 5073603663447554094L;
+public class DataManager implements DAOFactory{
 
 	private static final String DATA_FILE = "C:\\workspace\\ProjectOfficeManagement.dat";
 	
-	private Map<String, Project> projectList; 
-	private Map<String, CostItem> costItemList; 
-	private TransactionsStore transactionsData;
+	// for DB imitation:
+	private Map<String, List<DataObject>> objectsMap; 
 	
 	public DataManager() {
-		
-		this.projectList = new HashMap<String, Project>();
-		this.costItemList = new HashMap<String, CostItem>();
-		this.transactionsData = new TransactionsStore();
 		
 		readData();
 		
 	}
 	
-	public Map<String, Project>  getProjectMap() {
-		
-		return projectList;
-		
-	}
-	
-	public Project getProject(String projectID) {
-		
-		Project findedProject = projectList.get(projectID);
-		if (findedProject == null) {
-			
-			findedProject = new Project(projectID);
-			projectList.put(projectID, findedProject);
-			
-		}
-		
-		return findedProject;
-		
-	}
-
-	public Map<String, CostItem> getCostItemMap() {
-		
-		return costItemList;
-		
-	}
-	
-	public CostItem getCostItem(String costItemID) {
-		
-		CostItem findedCostItem = costItemList.get(costItemID);
-		if (findedCostItem == null) {
-			
-			findedCostItem = new CostItem(costItemID);
-			costItemList.put(costItemID, findedCostItem);
-			
-		}
-		
-		return findedCostItem;
-	}
-
-	public TransactionsStore getTransactionsStore() {
-		
-		return transactionsData;
-		
-	}
-
-	public Map<Project, Long> getProjectsProfit() {
-		
-		Map<Project, Long> result = new HashMap<Project, Long>();
-		
-		for(BusinessTransaction currentTransaction:getTransactionsStore()) {
-			
-			Long calculatedSum = result.get(currentTransaction.getProject());
-			calculatedSum = (calculatedSum == null) ? 0 : calculatedSum;
-			
-			result.put(currentTransaction.getProject(), calculatedSum + currentTransaction.getSum());
-			
-		}
-		
-		return result;
-		
-	}
-	
 	public void readData() {
+		
+		this.objectsMap = new HashMap<String, List<DataObject>>();
 		
 		FileInputStream fis;
 		ObjectInputStream ois;
@@ -104,21 +37,20 @@ public class DataManager implements Serializable {
 			fis = new FileInputStream(DATA_FILE);
 			ois = new ObjectInputStream(fis);
 			Object obj = ois.readObject();
+			
+			ois.close();
+			fis.close();
 					
-			if(obj instanceof DataManager ) {
+			if(obj instanceof HashMap<?, ?> ) {
 				
-				DataManager restoredDataManager = (DataManager) obj;
-				
-				this.costItemList = restoredDataManager.getCostItemMap();
-				this.projectList = restoredDataManager.getProjectMap();
-				this.transactionsData = restoredDataManager.getTransactionsStore();
+				@SuppressWarnings("unchecked")
+				HashMap<String, List<DataObject>> objectsMap = (HashMap<String, List<DataObject>>) obj;
+				this.objectsMap = objectsMap;
 				
 			}
 		
-			ois.close();
-			fis.close();
 			
-		} catch (IOException | ClassNotFoundException e) {
+		} catch (IOException | ClassNotFoundException | ConcurrentModificationException e) {
 			
 			Logger.getLogger("DataManager.class").log(Level.SEVERE , "Cannot read program data!");
 		
@@ -134,7 +66,7 @@ public class DataManager implements Serializable {
 			
 			fos = new FileOutputStream(DATA_FILE);
 			oos = new ObjectOutputStream(fos);
-			oos.writeObject(this);
+			oos.writeObject(objectsMap);
 			oos.close();
 			fos.close();
 				
@@ -147,4 +79,43 @@ public class DataManager implements Serializable {
 		
 	}
 	
+	@Override
+	public List<DataObject> getObjectList(String key) {
+
+		return objectsMap.get(key);
+		
+	}
+	
+	@Override
+	public void saveObject(DataObject obj, String key) {
+
+		List<DataObject> objList = objectsMap.get(key);
+		int indexOfObj = -1;
+		if(objList == null) {		
+			objList = new ArrayList<DataObject>();
+			objectsMap.put(key, objList);		
+		} else {			
+			indexOfObj = objList.indexOf(obj);			
+		}
+		if(indexOfObj == -1) {			
+			objList.add(obj);				
+		} else {			
+			objList.set(indexOfObj, obj);			
+		}
+		
+	}
+
+	
+	@Override
+	public void deleteObject(DataObject obj, String key) {
+
+		List<DataObject> objList = objectsMap.get(key);
+		if(objList != null) {
+			int indexOfObj = objList.indexOf(obj);
+			if(indexOfObj != -1) {
+				objList.remove(indexOfObj);
+			}
+		}
+	}
+
 }

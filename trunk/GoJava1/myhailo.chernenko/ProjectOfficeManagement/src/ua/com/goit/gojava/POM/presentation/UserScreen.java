@@ -2,8 +2,8 @@ package ua.com.goit.gojava.POM.presentation;
 
 import java.util.Scanner;
 
-import ua.com.goit.gojava.POM.dataModel.DataObject;
 import ua.com.goit.gojava.POM.persistence.DataManager;
+import ua.com.goit.gojava.POM.persistence.DataObject;
 
 public class UserScreen implements java.io.Closeable {
 	
@@ -30,6 +30,9 @@ public class UserScreen implements java.io.Closeable {
 
 	public void updateDataObject(DataObject obj, DataManager dataManager) {
 	
+		/* not applied for new version of data model 
+		 *  
+		 *
 		showString("Input values of "+obj.getFieldsForUpdatePresentation()+", separated by '; ' and press Enter or press Enter for exit");
 		
 		String enteredString = getString();
@@ -46,7 +49,7 @@ public class UserScreen implements java.io.Closeable {
 			}
 			
 			enteredString = getString();
-		}
+		}*/
 		
 	}
 	
