@@ -3,39 +3,38 @@ import java.io.IOException;
 
 
 public class KickstarterS {
-	static Category cat = new Category();
-	static Output choicePN = new OutputConsole();
-	static Enter choiceCN = new EnterConsole();
-	static Project project = new Project();
-	static int choiceCat;
-	static int choiceProj;
-	static int choiceToProj;
-	
 	private static void toCategory() throws IOException{
-		cat.showAllCatecories();
-		choicePN.print("Choice Category Number: ");
-		choiceCat = choiceCN.enter();
-		cat.showAllProjectInCategory(choiceCat);
-		toProject();
-	}
-	
-	private static void toProject() throws IOException{
-		choicePN.print("Choice Project Number or 0 for exit to Category: ");
-		choiceProj = choiceCN.enter();
-		if (choiceProj == 0){
-			toCategory();
-		}
-		project.showProject(choiceProj);
-		choicePN.print("Choice 0 for exit to Project: ");
-		choiceToProj = choiceCN.enter();
-		if (choiceToProj == 0){
-			cat.showAllProjectInCategory(choiceCat);
-			toProject();
+		while (true){
+			Category cat = new Category();
+			Project project = new Project();
+			Output out = new OutputConsole();
+			Inputs choiceCN = new InputsConsole();
+			int choiceCat;
+			int choiceProj;
+			int choiceToProj;
+			
+			cat.showAllCatecories();
+			out.print("Choice Category Number: ");
+			choiceCat = choiceCN.enter();
+			
+			while (true){
+				cat.showAllProjectInCategory(choiceCat);
+				out.print("Choice Project Number or 0 for exit to Category: ");
+				choiceProj = choiceCN.enter();
+				if (choiceProj == 0){
+					break;
+				}
+				project.showProject(choiceProj);
+				out.print("Choice 0 for exit to Project: ");
+				choiceToProj = choiceCN.enter();
+				if (choiceToProj == 0){
+					continue;
+				}
+			}
 		}
 	}
 	
 	public static void main(String[] args) throws IOException{
-		
 		Quotes quote = new Quotes();
 		System.out.println(quote.getQuote());
 		

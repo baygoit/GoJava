@@ -3,7 +3,7 @@ package mainkick;
 import java.io.IOException;
 
 
-public interface Enter {
+public interface Inputs {
 	public int enter() throws IOException;
 
 }
