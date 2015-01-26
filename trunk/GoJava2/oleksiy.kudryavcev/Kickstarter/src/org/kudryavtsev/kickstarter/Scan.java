@@ -6,7 +6,7 @@ public class Scan {
     private Scanner in = new Scanner(System.in);
 
     public int getAnswer() {
-        Scanner in = new Scanner(System.in);
+//        Scanner in = new Scanner(System.in);
         System.out.print("You choice: ");
         int answer = 0;
         // if (in.hasNextInt()) {

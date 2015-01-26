@@ -28,5 +28,6 @@ public class Controller {
             } else
                 exit = true;
         }
+        scan.close();
     }
 }
