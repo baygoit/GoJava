@@ -15,15 +15,16 @@ public class Controller {
 
     public void start() {
         model.init();
-        view.show();
-        List<String> list = model.getCategoriesList();
+        view.showGreeting();
+        List<Project> list = model.getCategoriesList();
 
         boolean exit = false;
         while (!exit) {
             view.showCategories(list);
             int result = scan.getAnswer();
             if (result > 0 && result <= list.size()) {
-                view.showCategories(result - 1, list);
+                view.showProjectsInCategory(list, list.get(result - 1).getCategory());
+                // view.showCategories(result - 1, list);
             } else
                 exit = true;
         }
