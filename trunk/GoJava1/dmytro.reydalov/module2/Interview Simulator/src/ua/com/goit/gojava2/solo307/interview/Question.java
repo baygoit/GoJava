@@ -2,29 +2,40 @@ package ua.com.goit.gojava2.solo307.interview;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Question {
 	
-	private String question;
+	private int id;
+	private String text;
 	private List <Answer> answers = new ArrayList <Answer>();
 	
 	public Question(){
-		question = "there is a question must be here...";
+		text = "there is a question must be here...";
 	}
 	
-	public Question(String question, List <Answer> answers){
-		this.question = question;
+	public Question(String question, List <Answer> answers, int id){
+		this.text = question;
 		for(Answer answer: answers){
 			this.answers.add(answer);
 		}
+		this.id = id;
 	}
 	
-	public String getQuestion() {
-		return question;
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getText() {
+		return text;
 	}
 	
-	public void setQuestion(String question) {
-		this.question = question;
+	public void setText(String question) {
+		this.text = question;
 	}
 	
 	public List<Answer> getAnswers() {
@@ -33,10 +44,6 @@ public class Question {
 
 	public void setAnswers(List<Answer> answers) {
 		this.answers = answers;
-	}
-
-	public String toString(){
-		return this.question + "\n" + answers + "\n";
 	}
 	
 	public void printAllAnswers(){
@@ -71,15 +78,20 @@ public class Question {
 	public boolean isCorrect(Question question, int answer){
 		int numberOfRightAnswer = searchNumberOfCorrectAnswer();	
 		if(answer == numberOfRightAnswer){
-				return true;
-			}
-			else return false;
+			return true;
 		}
+		else return false;
+	}
 		
-	public int readAnswer(Menu menu){
+	public int readAnswer(){
 		int choise = 0;
-		while(choise < 1 || choise > 4){
-			choise = menu.readInt();
+		Scanner sc = new Scanner(System.in);
+		System.out.println("\n" + "Пожалуйста, выберите пункт.");
+		if(sc.hasNextInt()){
+			return new Integer(sc.nextInt());
+		}
+		else{
+			System.out.println("Вы ввели не число, Введите еще раз");
 		}
 		return choise;
 	}

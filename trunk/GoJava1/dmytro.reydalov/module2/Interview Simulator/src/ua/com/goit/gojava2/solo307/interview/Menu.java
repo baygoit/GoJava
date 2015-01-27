@@ -38,21 +38,4 @@ public class Menu {
 			return 0;
 		}
 	}
-	
-	public void chooseOperation(int choise, Interview interview){
-		switch (choise){
-			case 1: interview.printQuestionsAndCorrectAnswers();break; 
-			case 2: 
-				int correctAnswers = 0;
-				for(Question question: interview.getQuestions()){
-					interview.printQuestionAndAllAnswers(question);
-					int answer = question.readAnswer(this);
-					if(question.isCorrect(question, answer)) correctAnswers++;
-				}
-				interview.isPassed(correctAnswers);
-				break;
-			case 0: System.exit(0);
-			default: System.out.println("Вы ввели несуществующий пункт");
-		}
-	}
 }

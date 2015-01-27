@@ -4,18 +4,18 @@ public class Answer {
 	
 	private String answer;
 	boolean isCorrect;
-	int numberOfAnswer;
+	int id;
 	
 	public Answer(){
 		answer =  "there is an answer must be here...";
 		isCorrect = false;
-		numberOfAnswer = 0;
+		id = 0;
 	}
 	
-	public Answer(String answer, boolean isRight, int numberOfAnswer){
+	public Answer(int numberOfAnswer, String answer, boolean isRight){
 		this.answer = answer;
 		this.isCorrect = isRight;
-		this.numberOfAnswer = numberOfAnswer;
+		this.id = numberOfAnswer;
 	}
 	
 	public String getAnswer() {
@@ -35,18 +35,14 @@ public class Answer {
 	}
 
 	public int getNumberOfAnswer() {
-		return numberOfAnswer;
+		return id;
 	}
 
 	public void setNumberOfAnswer(int numberOfAnswer) {
-		this.numberOfAnswer = numberOfAnswer;
-	}
-	
-	public String toString(){
-		return answer + " - " + isCorrect;
+		this.id = numberOfAnswer;
 	}
 	
 	public void printNumberAndAnswer(){
-		System.out.println(numberOfAnswer + ". " + answer + "\n");
+		System.out.println(id + ". " + answer + "\n");
 	}
 }
