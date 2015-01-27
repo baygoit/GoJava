@@ -14,8 +14,6 @@ public class Controller {
     public void start() {
         model.init();
         view.greed();
-        view.showCategoies(model.getCategories());		
-        view.showCategory(model.getCategories().getCategory(scan.getAnswer()-1));
     }
 
 }
