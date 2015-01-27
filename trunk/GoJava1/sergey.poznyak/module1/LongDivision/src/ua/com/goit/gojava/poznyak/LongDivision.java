@@ -36,7 +36,7 @@ public class LongDivision {
 	private static int transitionalRemainder;
 
 	/**
-	 * Gets user's input and calls divide method.
+	 * Gets user's input and prints visualization.
 	 * 
 	 * @param args is not used
 	 * @throws LongDivisionException 
@@ -49,10 +49,13 @@ public class LongDivision {
 		divisor = inputScan.nextInt();
 		inputScan.close();
 		divide();
+		for (StringBuilder value : divisionVisualisation) {
+			System.out.println(value);
+		}
 	}
 	
 	/**
-	 * Divides numbers and prints visualization.
+	 * Divides numbers.
 	 * 
 	 * @throws LongDivisionException for incorrect parameters
 	 */
@@ -103,9 +106,6 @@ public class LongDivision {
 			divisionVisualisation.get(1).append(" ");
 		}
 		divisionVisualisation.get(1).append("|" + quotient);
-		for (StringBuilder value : divisionVisualisation) {
-			System.out.println(value);
-		}
 	}
 	
 	/**
