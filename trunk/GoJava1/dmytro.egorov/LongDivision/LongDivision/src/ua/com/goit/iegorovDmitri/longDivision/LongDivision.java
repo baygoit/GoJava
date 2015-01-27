@@ -115,7 +115,6 @@ public class LongDivision {
 			while (i + k < string.length()) {
 				strings[j] = string.substring(i, i + k);
 				i += k;
-				System.out.print(strings[j] + " ");
 				j++;
 			}
 
