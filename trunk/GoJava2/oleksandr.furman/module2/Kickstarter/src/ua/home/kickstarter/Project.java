@@ -26,7 +26,7 @@ public class Project {
 		this.category = category;		
 	}
 
-	public Object getCategory() {
+	public Category getCategory() {
 		return category;
 	}
 
