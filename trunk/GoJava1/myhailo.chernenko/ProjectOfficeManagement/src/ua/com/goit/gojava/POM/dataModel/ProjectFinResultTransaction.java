@@ -1,16 +1,17 @@
 package ua.com.goit.gojava.POM.dataModel;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.io.Serializable;
 
 public class ProjectFinResultTransaction implements Serializable {
 	
 	private static final long serialVersionUID = 2510846589492989967L;
-	private long id;
-	private Date date;
+	private long id = 0;
+	private Date date = Calendar.getInstance().getTime();
 	private CostItem costItem;
-	private String description;
-	private long sum;
+	private String description = "";
+	private long sum = 0;
 	private FinanceDocument doc;
 	
 	public long getId() {

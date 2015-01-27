@@ -1,21 +1,23 @@
 package ua.com.goit.gojava.POM.dataModel;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.io.Serializable;
 //import ua.com.goit.gojava.POM.persistence.DataManager;
+
 
 import ua.com.goit.gojava.POM.persistence.DataObject;
 
 public class Project implements DataObject, Serializable {
 	
 	private static final long serialVersionUID = 3538434347597125924L;
-	private long id;
-	private String name;
-	private String description;
-	private ProjectType type;
-	private boolean active;
-	private String pm;
-	private List<ProjectStage> stages;
+	private long id = 0;
+	private String name = "";
+	private String description = "";
+	private ProjectType type = ProjectType.OUTER;
+	private boolean active = true;
+	private String pm = "";
+	private List<ProjectStage> stages = new ArrayList<ProjectStage>();
 	
 	public long getId() {
 		
@@ -104,9 +106,9 @@ public class Project implements DataObject, Serializable {
 		
 	}
 	
-	public void addTransaction(ProjectStage currentStage) {
+	public ProjectFinResultTransaction addTransaction(ProjectStage currentStage) {
 		
-		currentStage.addTransaction();
+		return currentStage.addTransaction();
 		
 	}
 	

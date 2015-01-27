@@ -1,19 +1,21 @@
 package ua.com.goit.gojava.POM.dataModel;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 //import ua.com.goit.gojava.POM.persistence.DataManager;
+
 
 import ua.com.goit.gojava.POM.persistence.DataObject;
 
 public class CostItem implements DataObject , Serializable {
 	
 	private static final long serialVersionUID = -6737879737443630451L;
-	private long id;
-	private String name;
-	private ProfitLostsType type;
+	private long id = 0;
+	private String name = "";
+	private ProfitLostsType type = ProfitLostsType.LOSTS;
 	private CostItem parent;
-	private List<CostItemTransaction> transactions;
+	private List<CostItemTransaction> transactions = new ArrayList<CostItemTransaction>();
 	
 	public long getId() {
 		return id;
@@ -46,10 +48,11 @@ public class CostItem implements DataObject , Serializable {
 		
 	}
 	
-	public void addTransaction() {
+	public CostItemTransaction addTransaction() {
 		
 		CostItemTransaction transaction = new CostItemTransaction();
-		transactions.add(transaction );
+		transactions.add(transaction);
+		return transaction;
 		
 	}
 	

@@ -1,15 +1,16 @@
 package ua.com.goit.gojava.POM.dataModel;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
 
 public class CostItemTransaction implements Serializable {
 
 	private static final long serialVersionUID = -916804494020185343L;
-	private long id;
-	private Date date;
-	private String description;
-	private long sum;
+	private long id = 0;
+	private Date date = Calendar.getInstance().getTime();
+	private String description = "";
+	private long sum = 0;
 	private FinanceDocument doc;
 	
 	public long getId() {

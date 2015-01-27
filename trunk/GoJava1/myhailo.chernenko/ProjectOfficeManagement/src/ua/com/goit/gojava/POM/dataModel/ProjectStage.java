@@ -1,6 +1,7 @@
 package ua.com.goit.gojava.POM.dataModel;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import ua.com.goit.gojava.POM.persistence.DataObject;
@@ -8,10 +9,10 @@ import ua.com.goit.gojava.POM.persistence.DataObject;
 public class ProjectStage  implements DataObject , Serializable {
 
 	private static final long serialVersionUID = 1143600705771401105L;
-	private long id;
-	private String name;
-	private String description;
-	private List<ProjectFinResultTransaction> transactions;
+	private long id = 0;
+	private String name = "";
+	private String description = "";
+	private List<ProjectFinResultTransaction> transactions = new ArrayList<ProjectFinResultTransaction>();
 	
 	public long getId() {
 		return id;
@@ -41,11 +42,12 @@ public class ProjectStage  implements DataObject , Serializable {
 		return transactions;
 	}
 	
-	public void addTransaction() {
+	public ProjectFinResultTransaction addTransaction() {
 
 		ProjectFinResultTransaction transaction = new ProjectFinResultTransaction();
 		transactions.add(transaction);
-	
+		return transaction;
+		
 	}
 
 	public long getProfit() {
