@@ -9,14 +9,15 @@ public class LongDivision {
 
 	public static void main(String[] args) throws IOException {
 
-		int divisor = 23;
-		int devident = 667;
+		int divisor = 3;
+		int devident = 43;
 		LinkedList<Integer> splitDevident = toArray(devident);
 		System.out.println(splitDevident);
 		String quotient = "";
 		int counter = 0;
+		Boolean check= true;
 
-		while (true) {
+		while (check == true) {
 			int i = 0;
 			if ((splitDevident.size() == 1) && (splitDevident.get(0) == 0)) {
 				break;
@@ -25,7 +26,7 @@ public class LongDivision {
 			stringNumber = "" + splitDevident.get(i);
 			int number = Integer.parseInt(stringNumber);
 
-			while (true) {
+			while (check == true) {
 				if (counter == 10) {
 					break;
 				}
@@ -54,7 +55,7 @@ public class LongDivision {
 						counter++;
 					}
 
-					while (true) {
+					while (check == true) {
 						if (splitDevident.size() == 1) {
 							splitDevident.addLast(0);
 							if (counter == 0) {
@@ -107,11 +108,12 @@ public class LongDivision {
 
 	public static String checkPeriod(String string) {
 		String s = "";
+		Boolean check = true;
 		int i = 0, j = 0;
-		for (int k = 1; k < 2; k++) {
-			String[] strings = new String[15];
+		for (int k = 1; k < string.length()/2; k++) {
+			String[] strings = new String[string.length()];
 
-			while (true) {
+			while (check == true) {
 				strings[j] = string.substring(i, i + k);
 				i += k;
 				j++;
