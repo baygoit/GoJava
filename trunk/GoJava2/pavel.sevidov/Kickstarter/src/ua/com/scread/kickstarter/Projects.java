@@ -27,5 +27,4 @@ public class Projects {
 	public void add(Project project) {
 		projects.add(project);		
 	}
-
 }

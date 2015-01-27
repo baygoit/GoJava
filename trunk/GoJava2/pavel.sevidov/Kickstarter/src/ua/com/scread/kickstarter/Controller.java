@@ -13,13 +13,12 @@ public class Controller {
         this.scan = scan;
     }
     
-//    UserStory III
-//    Как гость я хочу изучить список проектов определенной категории, чтобы понять во что я 
-//    хочу инвестировать
-//    Сценарий: захожу в приложение -> выбираю любую категорию (например, 1 - спорт) -> вижу 
-//    список проектов, каждый из которых содержит: название, краткое описание, сумму необходиму 
-//    для сбора, сколько собрали уже, сколько дней осталось
-
+//    UserStory IV
+//    Как гость я хочу изучить конкретный проект, чтобы понять хочу ли я в него инвестировать
+//    Сценарий: Находясь в списке проектов -> вижу запрос на выбор проекта -> Выбираю, например 
+//    (12 - разработка нового эргономичного мяча для футбола) -> вижу подробное описание проекта, 
+//    среди которых: все то же что в списке + история проекта + линк на видео с демо + вопросы/ответы
+    
     public void start() {
         model.init();
         view.greed();
@@ -31,8 +30,12 @@ public class Controller {
         Category category = categories.getCategory(answer);
         view.showCategory(category);
         
-        ArrayList<Project> foundProjects = model.getProjects(category);
-        view.showProjects(foundProjects);
+        ArrayList<Project> projects = model.getProjects(category);
+        view.showProjects(projects);
+        
+        answer = scan.getAnswer()-1;
+        Project project = projects.get(answer);
+        view.showFullProject(project);
     }
 
 }

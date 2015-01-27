@@ -24,14 +24,41 @@ public class View {
 	}
 	
 	public void showProjects(ArrayList<Project> projects) {
-		System.out.println("--------------------------------------");
+		
         for (Project project : projects) {
-                System.out.println(project.getName());
-                System.out.println(project.getDescription()); 
-                System.out.println("Already collected " + project.getCollected() + " UAH for " + project.getDays() + " days"); 
-                System.out.println("Need collect " + project.getAmount() + " UAH");
-                System.out.println("--------------------------------------");                           
+        	showProject(project);  
+        	showLine();
         }
+        System.out.println("\nChoose project: ");
+        for (int i = 0; i < projects.size(); i++) {
+        	System.out.print(String.valueOf(i+1) + " - " + projects.get(i).getName() + "; ");
+        }
+        System.out.println();
 	}
+	
+	private void showLine() {
+		System.out.println("--------------------------------------");
+	}
+
+	private void showProject(Project project) {
+		System.out.println(project.getName());
+        System.out.println(project.getDescription()); 
+        System.out.println("Already collected " + project.getCollected() + " UAH for " + project.getDays() + " days"); 
+        System.out.println("Need collect " + project.getAmount() + " UAH");	
+	}
+
+	public void showFullProject(Project project) {
+		showLine();
+		showProject(project);
+		Details details = project.getDetails();
+		FAQ faq = details.getFAQ();
+		System.out.println("History: " + details.getHistory());
+		System.out.println("Video link: " + details.getVideo());
+		System.out.println("\nFrequently Asked Questions: ");
+		System.out.println(faq.getQuestion());
+		System.out.println("\n" + faq.getAnswer());
+		showLine();
+	}
+	
 	
 }

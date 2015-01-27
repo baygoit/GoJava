@@ -7,12 +7,14 @@ public class Project {
 	private double amount;
 	private int days;
 	private Category category;
+	private Details details;
 
-	public Project(String name, String description, double amount, int days) {
+	public Project(String name, String description, double amount, int days, Details delails) {
 		this.name = name;
 		this.description = description;
 		this.amount = amount;
 		this.days = days;
+		this.details = delails;
 		collected = 0;
 	}
 
@@ -44,6 +46,7 @@ public class Project {
 		this.category = category;
 	}
 	
-	
-
+	public Details getDetails() {
+		return details;
+	}
 }
