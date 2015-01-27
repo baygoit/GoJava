@@ -1,24 +1,23 @@
 package ua.home.kickstarter;
 
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Categories {
 
-	private ArrayList<Category> categories = new ArrayList<Category>();
+	private Map<Integer, Category> categories = new HashMap<Integer, Category>();
+	private int categoryNumber = 1;
 
 	public void add(Category category) {
-		categories.add(category);
+		categories.put(categoryNumber, category);
+		categoryNumber++;
 	}
 
-	public ArrayList<Object> getCategories() {
-		ArrayList<Object> result = new ArrayList<Object>();
-		for (int index = 0; index < categories.size(); index++) {
-			result.add(String.valueOf(index + 1) + " - " + categories.get(index).getName());
-		}
-		return result;
+	public Map<Integer, Category> getCategories() {
+		return categories;
 	}
 
 	public Category getName(int index) {
-		return categories.get(index - 1);
+		return categories.get(index);
 	}
 }
