@@ -3,14 +3,14 @@ Line-by-line comments:
 File: /trunk/GoJava1/dmytro.reydalov/module2/Interview Simulator/src/ua/com/goit/gojava2/solo307/interview/Interview.java (r306)
 ===============================================================================
 
-Снова "не чистая" функция - судя по названию, должна что-то считать, а она еще и на экран выводит.
+пїЅпїЅпїЅпїЅпїЅ "пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ" пїЅпїЅпїЅпїЅпїЅпїЅпїЅ - пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ-пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅ пїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
 
 Line 47:        public static int countRightAnswers(){ 
 
 ==> the method was renamed to printQuestionsAndCorrectAnswers, and now its clear.
 ----------------------------------------------------------------------------------
 
-Кстати, почему static?
+пїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅ static?
 
 Line 57:        public static boolean isPassed(int successAnswers){
 
@@ -26,32 +26,23 @@ Line 12:                question = "there is a question must be here...";
 ==> Thanks for advice - a used this magic String in all similar constructors
 ----------------------------------------------------------------------------------
 
-Два подлежащих.
+пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
 Line 40:        public void printRightAnswers(){
 
 ==> I has renamed to printCorrectAnswers
 
 -------------------------------------------------------------------------------
-Зачем нужен этот метод?
+пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ?
 Line 63:        public boolean isRight(){
 -------------------------------------------------------------------------------
-Раздели на две чистых функции.
+пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
 
 ==> i has splitted it to 2 clear methods "isCorrect" and "readAnswer"
 
 =================================================================================
 
-
-My questions:
-
-Dima - please, look to 
-
-File: /trunk/GoJava1/dmytro.reydalov/module2/Interview Simulator/src/ua/com/goit/gojava2/solo307/interview/Menu.java
-
-=================================================================================
-Line 42:	public void chooseOperation(int choise, Interview interview){
-
-This method choosing different methods, depending from users choise. i Think
-that it not clear, and i want to make its more predictible and more 	
-corresponding to its name. But a can't figure, where else i can make a sequented call of
-needed methods, can i replace it to Main class somehowe?
+- added DOM parser and a class XMLParser readFromXML();
+- Project coverage 62.2%.
+- unclear method "Choose operation" was removed.
+- UML has been updated.
+- 

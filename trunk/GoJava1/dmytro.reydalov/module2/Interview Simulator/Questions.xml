@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<questions>
+	<question id = "1" line = "Какие 3 принципа Обьектно - ориентированного программирования?">
+			<answer id = "1" line = "Процедурность, инкапсуляция, полиморфизм." isRight = "false"></answer>
+			<answer id = "2" line = "Инкапсуляция, полиморфизм, наследование." isRight = "true"></answer>
+			<answer id = "3" line = "Обьектность, ориентированность, программированность." isRight = "false"></answer>
+			<answer id = "4" line = "Яйка, млако , колбаса." isRight = "false"></answer>
+	</question>
+	
+	<question id = "2" line = "Что такое инкапсуляция?">
+			<answer id = "1" line = "Использование специальных капсул для программистов, чтоб лучше думать." isRight = "false"></answer>
+			<answer id = "2" line = "Возможность избежать дублирования кода в программе." isRight = "false"></answer>
+			<answer id = "3" line = "Механизм, используемый для защиты полей обьекта от попытки их изменения извне." isRight = "true"></answer>
+			<answer id = "4" line = "Процесс создания графической оболочки." isRight = "false"></answer>
+	</question>
+	
+	<question id = "3" line = "Что такое наследование?">
+			<answer id = "1" line = "Возможность импортировать код с других языков программирования." isRight = "false"></answer>
+			<answer id = "2" line = "Технология следования различным указателям." isRight = "false"></answer>
+			<answer id = "3" line = "Инструмент для создания программных интерфейсов." isRight = "false"></answer>
+			<answer id = "4" line = "Способность классом расширить уже существующий класс." isRight = "true"></answer>
+	</question>
+	
+	<question id = "4" line = "Что такое полиморфизм?">
+			<answer id = "1" line = "Способность обращаться ко всем подклассам расширенного класса одинаково, но при этом каждый будет вести себя по своему." isRight = "true"></answer>
+			<answer id = "2" line = "Элемент полимонального морфизма." isRight = "false"></answer>
+			<answer id = "3" line = "Инструмент для оформления различных строк." isRight = "false"></answer>
+			<answer id = "4" line = "Шаблон проэктрования." isRight = "false"></answer>
+	</question>
+
+</questions>
