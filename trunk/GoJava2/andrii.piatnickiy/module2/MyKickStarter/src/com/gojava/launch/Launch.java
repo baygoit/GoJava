@@ -2,6 +2,7 @@ package com.gojava.launch;
 
 import java.util.Scanner;
 
+import com.gojava.input.Scan;
 import com.gojava.projects.CategoryStorage;
 import com.gojava.projects.ProjectManager;
 import com.gojava.projects.ProjectStorage;
@@ -9,31 +10,29 @@ import com.gojava.projects.ProjectStorage;
 public class Launch {
 
     public static void main(String[] args) {
+        int categoryNumber;
+        int projectNumber;
+        Scan scan = new Scan();
         Quote quote = new Quote();
         quote.displayQuote();
-
+        
         ProjectManager manager = new ProjectManager();
 
         manager.displayCategories();
 
-        Scanner in = new Scanner(System.in);
-        int categoryNumber = in.nextInt();
+        categoryNumber = scan.inputInt();
         manager.displayProjects(categoryNumber);
 
-        in = new Scanner(System.in);
-        int projectNumber = in.nextInt();
-
-        while(true){
+        projectNumber = scan.inputInt();
+        while (true) {
             if (projectNumber == 0) {
                 manager.displayCategories();
-                in = new Scanner(System.in);
-                categoryNumber = in.nextInt();
+                categoryNumber = scan.inputInt();
                 manager.displayProjects(categoryNumber);
             } else {
                 manager.displaySpecificProject(categoryNumber, projectNumber);
             }
-        }        
-        
+        }
 
     }
 
