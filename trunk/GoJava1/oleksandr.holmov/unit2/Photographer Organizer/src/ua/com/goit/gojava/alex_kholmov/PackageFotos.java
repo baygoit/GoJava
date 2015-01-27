@@ -9,7 +9,7 @@ package ua.com.goit.gojava.alex_kholmov;
  */
 public class PackageFotos {
     private int amountFotos;
-    private int timeEditingFoto; //hours
+    private int timeEditingFoto; //minutes
     private int timeReserve;     //percents
     
     int getAmountFotos() {
@@ -18,7 +18,7 @@ public class PackageFotos {
     void setAmountFotos(int amountFotos) {
         this.amountFotos = amountFotos;
     }
-    int getTimeEditingFoto() {
+    float getTimeEditingFoto() {
         return timeEditingFoto;
     }
     void setTimeEditingFoto(int timeEditingFoto) {
@@ -31,8 +31,8 @@ public class PackageFotos {
         this.timeReserve = timeReserve;
     }
     //return in hours
-    public int timeEditingAllFotos() {
-        int editAllFotos = timeEditingFoto * amountFotos;
+    public float timeEditingAllFotos() {
+        float editAllFotos = timeEditingFoto * amountFotos;
         return editAllFotos + ((editAllFotos * timeReserve) / 100);
     }
 }
