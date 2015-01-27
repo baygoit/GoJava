@@ -22,19 +22,19 @@ public class LongDivision {
 		int counter = 0;
 		Boolean check = true;
 
-		while (check == true) {
+		while ((splitDevident.size() != 1) || (splitDevident.get(0) != 0)) {
 			int i = 0;
-			if ((splitDevident.size() == 1) && (splitDevident.get(0) == 0)) {
+			/*if ((splitDevident.size() == 1) && (splitDevident.get(0) == 0)) {
 				break;
-			}
+			}*/
 			String stringNumber;
 			stringNumber = "" + splitDevident.get(i);
 			int number = Integer.parseInt(stringNumber);
 
-			while (check == true) {
-				if (counter == numberAfterPoint) {
+			while (counter != numberAfterPoint) {
+				/*if (counter == numberAfterPoint) {
 					break;
-				}
+				}*/
 				if (number / divisor > 0) {
 					number = Integer.parseInt(stringNumber);
 					quotient += number / divisor;
@@ -61,7 +61,7 @@ public class LongDivision {
 						counter++;
 					}
 
-					while (check == true) {
+					while (number / divisor < 1) {
 						if (splitDevident.size() == 1) {
 							splitDevident.addLast(0);
 							if (counter == 0) {
@@ -76,9 +76,9 @@ public class LongDivision {
 						splitDevident.removeFirst();
 						number = Integer.parseInt(stringNumber);
 
-						if (number / divisor > 0) {
+						/*if (number / divisor > 0) {
 							break;
-						}
+						}*/
 					}
 
 					System.out.println(stringNumber);
@@ -123,14 +123,14 @@ public class LongDivision {
 		for (int k = 1; k < 2; k++) {
 			String[] strings = new String[string.length()];
 
-			while (check == true) {
+			while (i + k < string.length()) {
 				strings[j] = string.substring(i, i + k);
 				i += k;
 				j++;
 				System.out.println(i + k);
-				if (i + k > string.length()) {
+				/*if (i + k > string.length()) {
 					break;
-				}
+				}*/
 			}
 
 			for (int n = 0; n < strings.length; n++) {
