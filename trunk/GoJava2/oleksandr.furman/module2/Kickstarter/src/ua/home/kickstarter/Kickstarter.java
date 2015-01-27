@@ -1,8 +1,8 @@
 package ua.home.kickstarter;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.InputMismatchException;
+import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 public class Kickstarter {
@@ -56,7 +56,7 @@ public class Kickstarter {
 				30000,
 				19,
 				"Most reliable, easy to use, fun and affordable electric bike, ever! Available for delivery to anywhere in the world for under $400",
-				"Тут будет история проекта №5", "Тут будут линки на видео и демо проекта №5");
+				"Тут будет история проекта №6", "Тут будут линки на видео и демо проекта №6");
 
 		project1.setCategory(category1);
 		project2.setCategory(category1);
@@ -84,7 +84,9 @@ public class Kickstarter {
 			try {
 				System.out.println();
 				System.out.println("Выберите категорию:");
-				System.out.println(Arrays.toString(categories.getCategories().toArray()));
+				for (Map.Entry<Integer, Category> pair : categories.getCategories().entrySet()) {
+					System.out.println(pair.getKey() + " - " + pair.getValue().getName());
+				}
 				Scanner scanner = new Scanner(System.in);
 				int categoryIndex = scanner.nextInt();
 				Category category = categories.getName(categoryIndex);
@@ -93,7 +95,7 @@ public class Kickstarter {
 					System.out.println();
 					System.out.println("Выберите проект:");
 					System.out.println("------------------------------------");
-					ArrayList<Project> foundProjects = projects.getProjects(category);
+					List<Project> foundProjects = projects.getProjects(category);
 					for (Project project : foundProjects) {
 						System.out.println("Название проекта:           " + project.getName());
 						System.out.println("Описание проекта:           " + project.getDescription());
@@ -109,18 +111,17 @@ public class Kickstarter {
 					int projectIndex = scanner.nextInt();
 					if (projectIndex == 0)
 						break;
-					Project project = projects.getName(projectIndex, category);
+					Project project = projects.getFullProject(projectIndex, category);
 					System.out.println("Вы выбрали проект " + project.getName());
 					System.out.println();
-					ArrayList<Project> foundProjects2 = projects.getFullProject(projectIndex, category);
-					System.out.println("Название проекта:           " + foundProjects2.get(0).getName());
-					System.out.println("Описание проекта:           " + foundProjects2.get(0).getDescription());
-					System.out.println("Необходимая сумма:          " + foundProjects2.get(0).getGoal() + "$");
-					System.out.println("Собранная сумма:            " + foundProjects2.get(0).getPledged() + "$");
-					System.out.println("До окончания сбора средств: " + foundProjects2.get(0).getDaysLeft() + " дней");
-					System.out.println("История проекта:            " + foundProjects2.get(0).getHistory());
-					System.out.println("Линки на видео с демо       " + foundProjects2.get(0).getLinksToVideo());
-					System.out.println("Вопросы/ответы:             " + foundProjects2.get(0).getQuestions());
+					System.out.println("Название проекта:           " + project.getName());
+					System.out.println("Описание проекта:           " + project.getDescription());
+					System.out.println("Необходимая сумма:          " + project.getGoal() + "$");
+					System.out.println("Собранная сумма:            " + project.getPledged() + "$");
+					System.out.println("До окончания сбора средств: " + project.getDaysLeft() + " дней");
+					System.out.println("История проекта:            " + project.getHistory());
+					System.out.println("Линки на видео с демо       " + project.getLinksToVideo());
+					System.out.println("Вопросы/ответы:             " + project.getQuestions());
 					System.out.println("------------------------------------");
 					System.out.println("Введите 0 для выхода");
 					int exit = scanner.nextInt();
