@@ -1,5 +1,6 @@
 package com.gojava.launch;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import com.gojava.input.Scan;
@@ -12,28 +13,36 @@ public class Launch {
     public static void main(String[] args) {
         int categoryNumber;
         int projectNumber;
+        int nubberForNextLevel;
         Scan scan = new Scan();
         Quote quote = new Quote();
-        quote.displayQuote();
-        
+        Menu menu = new Menu();
         ProjectManager manager = new ProjectManager();
+        quote.displayQuote();
+       
+        
+        menu.level1.displayMySelf(menu.currentPosition);
+        menu.currentPosition++;
+        System.out.println(menu.currentPosition);
+        nubberForNextLevel = scan.inputInt(); 
+        menu.nextLevel(nubberForNextLevel, menu.levelsList);
+        
+ //        categoryNumber = scan.inputInt();        
+//        menu.level2.displayMySelf(categoryNumber);
+        
 
-        manager.displayCategories();
-
-        categoryNumber = scan.inputInt();
-        manager.displayProjects(categoryNumber);
-
-        projectNumber = scan.inputInt();
-        while (true) {
-            if (projectNumber == 0) {
-                manager.displayCategories();
-                categoryNumber = scan.inputInt();
-                manager.displayProjects(categoryNumber);
-            } else {
-                manager.displaySpecificProject(categoryNumber, projectNumber);
-            }
-        }
-
+        // manager.displayCategories();
+        // categoryNumber = scan.inputInt();
+        // manager.displayProjects(categoryNumber);
+        // projectNumber = scan.inputInt();
+        // while (true) {
+        // if (projectNumber == 0) {
+        // manager.displayCategories();
+        // } else {
+        // manager.displaySpecificProject(categoryNumber, projectNumber);
+        // }
+        // categoryNumber = scan.inputInt();
+        // manager.displayProjects(categoryNumber);
+        // }
     }
-
 }
