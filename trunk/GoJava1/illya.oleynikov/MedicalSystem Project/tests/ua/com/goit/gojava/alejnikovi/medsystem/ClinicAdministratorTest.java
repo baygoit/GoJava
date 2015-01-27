@@ -4,13 +4,11 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-public class TestDoctor {
+public class ClinicAdministratorTest {
 
 	@Test
-	public void smokeTest() {
-		
-		assertNotNull(new Doctor(null, null, null));
-
+	public void testCreateDoctor() {
+		fail("Not yet implemented");
 	}
 
 }

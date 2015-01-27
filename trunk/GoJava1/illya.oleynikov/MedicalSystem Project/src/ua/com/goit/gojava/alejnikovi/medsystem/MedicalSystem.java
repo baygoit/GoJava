@@ -8,7 +8,7 @@ public class MedicalSystem {
 	static List<Specialization> specializations = new ArrayList<Specialization>();
 	static List<Doctor> doctors = new ArrayList<Doctor>();
 	
-	private MedicalSystem() {}
+	private MedicalSystem() {}	
 	    
     static List<Doctor> getDoctors() {
 		return doctors;
@@ -34,7 +34,7 @@ public class MedicalSystem {
     static void addSpecialisation (String specializationName){
     	if (isSpecialisationUnique(specializationName)){
     		specializations.add(new Specialization(specializationName));
-    	}
+    	} 
     }
     
 

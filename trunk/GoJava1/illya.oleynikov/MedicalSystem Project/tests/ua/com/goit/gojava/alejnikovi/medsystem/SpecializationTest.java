@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-public class TestSpecialization {
+public class SpecializationTest {
 
 	@Test
 	public void smokeTest() {

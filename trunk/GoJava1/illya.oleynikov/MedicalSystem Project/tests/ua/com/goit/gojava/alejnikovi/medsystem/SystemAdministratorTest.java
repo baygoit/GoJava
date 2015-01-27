@@ -16,7 +16,6 @@ public class SystemAdministratorTest {
 	public void testAddSpecialisation() {
 		sysAd.addSpecialisation("Hirurg");
 		assertSame(MedicalSystem.specializations.get(0).getName(), "Hirurg");
-		System.out.println(MedicalSystem.specializations);
 	}
 
 

@@ -3,7 +3,7 @@ package ua.com.goit.gojava.alejnikovi.medsystem;
 import java.util.ArrayList;
 import java.util.List;
 
-abstract class User {
+class User {
 	private String login;
 	private String password;
 	
