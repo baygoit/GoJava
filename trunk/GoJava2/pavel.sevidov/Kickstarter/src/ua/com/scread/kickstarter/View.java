@@ -1,5 +1,6 @@
 package ua.com.scread.kickstarter;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class View {
@@ -22,5 +23,15 @@ public class View {
 		System.out.println("You choosed: " + category.getName());
 	}
 	
+	public void showProjects(ArrayList<Project> projects) {
+		System.out.println("--------------------------------------");
+        for (Project project : projects) {
+                System.out.println(project.getName());
+                System.out.println(project.getDescription()); 
+                System.out.println("Already collected " + project.getCollected() + " UAH for " + project.getDays() + " days"); 
+                System.out.println("Need collect " + project.getAmount() + " UAH");
+                System.out.println("--------------------------------------");                           
+        }
+	}
 	
 }
