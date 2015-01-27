@@ -20,21 +20,14 @@ public class LongDivision {
 		System.out.println(splitDevident);
 		String quotient = "";
 		int counter = 0;
-		Boolean check = true;
 
 		while ((splitDevident.size() != 1) || (splitDevident.get(0) != 0)) {
 			int i = 0;
-			/*if ((splitDevident.size() == 1) && (splitDevident.get(0) == 0)) {
-				break;
-			}*/
 			String stringNumber;
 			stringNumber = "" + splitDevident.get(i);
 			int number = Integer.parseInt(stringNumber);
 
-			while (counter != numberAfterPoint) {
-				/*if (counter == numberAfterPoint) {
-					break;
-				}*/
+			while (counter < numberAfterPoint+1) {
 				if (number / divisor > 0) {
 					number = Integer.parseInt(stringNumber);
 					quotient += number / divisor;
@@ -75,10 +68,6 @@ public class LongDivision {
 						stringNumber += splitDevident.get(i + 1);
 						splitDevident.removeFirst();
 						number = Integer.parseInt(stringNumber);
-
-						/*if (number / divisor > 0) {
-							break;
-						}*/
 					}
 
 					System.out.println(stringNumber);
@@ -115,22 +104,19 @@ public class LongDivision {
 
 	public static String checkPeriod(String string) {
 		String s = "";
-		Boolean check = true;
-		int i = 0, j = 0;
 		if (string.length() < numberAfterPoint){
 			return string;
 		}
-		for (int k = 1; k < 2; k++) {
+		for (int k = 1; k < string.length()/2; k++) {
+			int j = 0, i = 0;
+			s = "";
 			String[] strings = new String[string.length()];
 
 			while (i + k < string.length()) {
 				strings[j] = string.substring(i, i + k);
 				i += k;
+				System.out.print(strings[j] + " ");
 				j++;
-				System.out.println(i + k);
-				/*if (i + k > string.length()) {
-					break;
-				}*/
 			}
 
 			for (int n = 0; n < strings.length; n++) {
@@ -150,7 +136,7 @@ public class LongDivision {
 					}
 				}
 			}
-			if (s != "") {
+			if (s.contains("(")) {
 				break;
 			}
 
