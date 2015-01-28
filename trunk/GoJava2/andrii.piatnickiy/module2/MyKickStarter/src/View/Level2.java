@@ -1,12 +1,13 @@
-package com.gojava.launch;
+package View;
 
 import com.gojava.projects.ProjectManager;
 
 public class Level2 implements Level {
+    Menu menu;
     ProjectManager manager;
     int position = 2;
-    Menu menu;
-
+    int parentPosition;
+    
     public Level2(ProjectManager manager, Menu menu) {
         this.manager = manager;
         this.menu = menu;
@@ -23,5 +24,14 @@ public class Level2 implements Level {
     @Override
     public int getPosition() {
         return position;
+    }
+
+    @Override
+    public void setParentPosition(int parentPosition) {
+        this.parentPosition = parentPosition;
+    }
+    
+    public int getParentPosition() {
+        return parentPosition;
     }
 }

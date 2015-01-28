@@ -1,4 +1,4 @@
-package com.gojava.launch;
+package View;
 
 import java.util.ArrayList;
 
@@ -6,12 +6,12 @@ import com.gojava.projects.ProjectManager;
 
 public class Menu {
     ProjectManager manager = new ProjectManager();
-    int currentPosition;
-    Level1 level1;
+    public int currentPosition;
+    public Level1 level1;
     Level2 level2;
-    Level3 level3;
+    public Level3 level3;
 
-    ArrayList<Level> levelsList = new ArrayList<>();
+    public ArrayList<Level> levelsList = new ArrayList<>();
 
     public Menu() {
         this.level1 = new Level1(manager, this);
@@ -38,11 +38,17 @@ public class Menu {
     public void levelDown(ArrayList<Level> levelsList, int nubberForNextLevel) {
         currentPosition++;
         for (Level level : levelsList) {
-//            System.out.println("level.getPosition() = " + level.getPosition());
+            
+            System.out.println();
             if(currentPosition == level.getPosition()){
+                level.setParentPosition(nubberForNextLevel);
+                
                 level.displayMySelf(nubberForNextLevel);
             }
+//            System.out.println("level.getPosition() = " + level.getPosition());
+//            System.out.println("level.getParentPosition() = " + level.getParentPosition());
         }
-    }
+//        
+    }   
 
 }

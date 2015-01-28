@@ -42,7 +42,7 @@ public class ProjectManager {
         categoryStorage.displayChoosedCategory(i);
     }
 
-    public void displaySpecificProject(int categoryNumber,int projectNumber) {
+    public void displaySpecificProject(int categoryNumber, int projectNumber) {
         projectStorage.displaySpecificProject(categoryNumber, projectNumber);
     }
 

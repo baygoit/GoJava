@@ -3,6 +3,8 @@ package com.gojava.launch;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import View.Menu;
+
 import com.gojava.input.Scan;
 import com.gojava.projects.CategoryStorage;
 import com.gojava.projects.ProjectManager;
@@ -23,7 +25,6 @@ public class Launch {
         
         menu.level1.displayMySelf(menu.currentPosition);
         menu.currentPosition++;
-        System.out.println(menu.currentPosition);
         nubberForNextLevel = scan.inputInt(); 
         menu.level3.parentPosition = nubberForNextLevel;
         menu.nextLevel(nubberForNextLevel, menu.levelsList);
