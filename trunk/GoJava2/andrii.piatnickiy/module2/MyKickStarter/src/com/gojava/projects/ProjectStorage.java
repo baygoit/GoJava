@@ -27,7 +27,7 @@ public class ProjectStorage {
                 i++;
             }
         }
-        System.out.println("Enter the number 0 to return to the list of categories");
+//        System.out.println("Enter the number 0 to return to the list of categories");
         System.out.println();
     }
 

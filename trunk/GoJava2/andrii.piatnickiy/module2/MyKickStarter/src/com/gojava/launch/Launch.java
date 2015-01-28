@@ -25,13 +25,14 @@ public class Launch {
        
         
         menu.level1.displayMySelf(menu.currentPosition);
-        menu.currentPosition++;
-        nubberForNextLevel = scan.inputInt(); 
-        menu.level3.parentPosition = nubberForNextLevel;
-        menu.nextLevel(nubberForNextLevel, menu.levelsList);
-        nubberForNextLevel = scan.inputInt(); 
-        menu.nextLevel(nubberForNextLevel, menu.levelsList);
-        
+        while(true){
+            nubberForNextLevel = scan.inputInt(); 
+            menu.nextLevel(nubberForNextLevel);
+        }
+       
+//        nubberForNextLevel = scan.inputInt(); 
+//        menu.nextLevel(nubberForNextLevel, menu.levelsList);
+//        
 
         // manager.displayCategories();
         // categoryNumber = scan.inputInt();

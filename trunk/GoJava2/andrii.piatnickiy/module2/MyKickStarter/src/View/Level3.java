@@ -6,26 +6,22 @@ public class Level3 implements Level {
     Menu menu;
     ProjectManager manager;
     int position = 3;
-    public int parentPosition;
-    public void setParentPosition(int parentPosition) {
-        this.parentPosition = parentPosition;
-    }
-
-    
 
     public Level3(ProjectManager manager, Menu menu) {
         this.manager = manager;
         this.menu = menu;
     }
-
-
-    public int initPosition(int currentPosition) {
-        return currentPosition = position;
-    }
-
+    
+//    public void displaySpecificProject(int categoryNumber, int projectNumber) {
+//        projectStorage.displaySpecificProject(categoryNumber, projectNumber);
+//    }
+//  nubberForNextLevel == project
     @Override
-    public void displayMySelf(int projectNumber) {
-        manager.displaySpecificProject(this.parentPosition, projectNumber);
+    public void displayMySelf(int nubberForNextLevel) {
+        System.out.println("menu.parrentLevelPositon = " + menu.parrentLevelPositon);
+        System.out.println();
+        manager.displaySpecificProject(menu.parrentLevelPositon, nubberForNextLevel);
+//        manager.displaySpecificProject(1, 2);
 
     }
 
@@ -33,8 +29,5 @@ public class Level3 implements Level {
     public int getPosition() {
         return position;
     }
-    
-    public int getParentPosition() {
-        return parentPosition;
-    }
+
 }
