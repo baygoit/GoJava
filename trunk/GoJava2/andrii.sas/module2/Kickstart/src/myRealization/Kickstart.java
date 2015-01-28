@@ -8,7 +8,7 @@ public class Kickstart {
 	private List<Project> projects = new ArrayList<>();
 	private List<Project> categoryProjects = new ArrayList<>();
 	private int i = 1;
-	private int j = 1;
+	private int j = 0;
 	private int choice;
 	private int projectChoice;
 	private Output output;
@@ -61,8 +61,9 @@ public class Kickstart {
 		for (Project project : projects) {
 			if (project.getCategory() == categories.get(choice)) {
 				categoryProjects.add(project);
-				output.println(j + writeProject(project));
+				categoryProjects.set(0, project);
 				j++;
+				output.println(j + writeProject(project));
 			}
 		}
 		output.println("If you want to return press \"0\"");
@@ -88,11 +89,13 @@ public class Kickstart {
 				showChosenProject(k);
 					output.println("If you want to return press \"0\"");
 					if (input.readChoice() == 0){
-						i = j = 1;
+						i = 1;
+						j = 0;
 						showProjects();
 					}
 				} else {
-					i = j = 1;
+					i = 1; 
+					j = 0;
 					showList();
 					showChoice();
 					showProjects();
