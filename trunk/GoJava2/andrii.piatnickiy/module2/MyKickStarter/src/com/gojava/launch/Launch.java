@@ -3,6 +3,7 @@ package com.gojava.launch;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import Quote.Quote;
 import View.Menu;
 
 import com.gojava.input.Scan;

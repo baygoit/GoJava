@@ -1,4 +1,4 @@
-package com.gojava.launch;
+package Quote;
 
 public class Quote {
     private String desc = "This is motivating creativity quote!!";
