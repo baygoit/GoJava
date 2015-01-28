@@ -14,7 +14,6 @@ public class Level2 implements Level {
 
     public void displayMySelf(int categoryNumber) {
         manager.displayProjects(categoryNumber);
-//        menu.currentPosition = initPosition(currentPosition);
     }
     
     public int initPosition(int currentPosition) {

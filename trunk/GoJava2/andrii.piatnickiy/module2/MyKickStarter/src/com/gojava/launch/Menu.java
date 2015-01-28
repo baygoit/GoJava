@@ -28,23 +28,21 @@ public class Menu {
             currentPosition--;
         } else {
             levelDown(levelsList, nubberForNextLevel);
-           
         }
     }
 
     public void levelUp() {
-
+        //TODO will realise body
     }
 
     public void levelDown(ArrayList<Level> levelsList, int nubberForNextLevel) {
         currentPosition++;
         for (Level level : levelsList) {
-            System.out.println(level.getPosition());
+//            System.out.println("level.getPosition() = " + level.getPosition());
             if(currentPosition == level.getPosition()){
                 level.displayMySelf(nubberForNextLevel);
             }
         }
-        
     }
 
 }
