@@ -27,7 +27,6 @@ public abstract class AbstractHardware implements Hardware {
     }
     @Override
     public String toString() {
-        String eol = System.getProperty("line.separator");
         return name + listParameters();
     }
     

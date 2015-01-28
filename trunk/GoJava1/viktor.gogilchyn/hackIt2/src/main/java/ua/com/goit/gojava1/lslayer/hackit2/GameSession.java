@@ -5,9 +5,9 @@ import java.util.List;
 
 import ua.com.goit.gojava1.lslayer.hackit2.gear.Gear;
 
-public class GameSession { //Singleton. There is only one game per app. Multithreading ignored for a while 
+public final class GameSession { //Singleton. There is only one game per app. Multithreading ignored for a while 
     private static GameSession instance = new GameSession(); 
-    private List<Actor> gamers = new ArrayList<Actor>();
+//    private List<Actor> gamers = new ArrayList<Actor>();
     private List<Gear> stuff = new ArrayList<Gear>();
     private GameSession() {
         

@@ -21,6 +21,7 @@ public class AbstractCharaterTest {
     @Test
     public void testWrongSkillCreation() {
         try {
+            @SuppressWarnings("unused")
             Skill s = new Skill(null);
             fail("Exception expected");
         } catch (SkillUninitilizedException e) {
