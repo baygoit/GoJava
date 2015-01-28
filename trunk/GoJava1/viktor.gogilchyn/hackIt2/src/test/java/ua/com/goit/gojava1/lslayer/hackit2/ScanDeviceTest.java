@@ -17,7 +17,7 @@ public class ScanDeviceTest {
         ScanDevice scanner = new ScanDevice("Vizor3000");
         String eol = System.getProperty("line.separator");
         assertEquals("Vizor3000", scanner.toString());
-        scanner.addParameter("scan", 100);
-        assertEquals("Vizor3000"+ eol +"scan: 100", scanner.toString());
+        scanner.addParameter("cpu", 100);
+        assertEquals("Vizor3000"+ eol +"cpu: 100", scanner.toString());
     }
 }

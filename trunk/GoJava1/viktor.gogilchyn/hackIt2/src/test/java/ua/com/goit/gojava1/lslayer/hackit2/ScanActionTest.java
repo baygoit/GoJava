@@ -18,11 +18,11 @@ public class ScanActionTest {
         Actor actor = new HumanControlledCharacter("Test name");
         actor.addSkill("test");
         Action action = new ScanAction();
-        ActionResult result = action.performAction(actor);
+        ActionResult result = action.execute(actor);
         assertFalse(result.isSuccess());
         assertEquals(result.getResultMessage(), "Scan failed");
         actor.addSkill("scan");
-        ActionResult resultTwo = action.performAction(actor);
+        ActionResult resultTwo = action.execute(actor);
         assertTrue(resultTwo.isSuccess());
         assertEquals(resultTwo.getResultMessage(), "Scan successful");
     }

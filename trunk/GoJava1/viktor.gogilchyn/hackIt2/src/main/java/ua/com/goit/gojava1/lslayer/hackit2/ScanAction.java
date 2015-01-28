@@ -10,7 +10,7 @@ public class ScanAction extends AbstractAction implements Action {
     }
 
     @Override
-    public ActionResult performAction(Actor actor) throws SkillUninitilizedException {
+    public ActionResult execute(Actor actor) throws SkillUninitilizedException {
         //Basic action - scan nothing. 
         //If actor have skill for scanning - action will succeed
         //Otherwise action will fail
