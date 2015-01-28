@@ -13,8 +13,8 @@ public class Category{
 		for (int i = 1; i <= counterCategory; i++){
 			String[] categoryInString = recordingCategoryFromBD(i);
 			categoryID = Integer.valueOf(categoryInString[0]);
-			categoryName = categoryInString[1];
-			System.out.println(categoryID + " " + categoryName);
+			setCategoryName(categoryInString[1]);
+			System.out.println(categoryID + " " + getCategoryName());
 		}
 	}
 	
@@ -30,14 +30,14 @@ public class Category{
 		stringConvertToCategory(selectCategoryID);
 		Output out = new OutputConsole();
 		out.print("categoryID = " + categoryID);
-		out.print("categoryName: " + categoryName);
+		out.print("categoryName: " + getCategoryName());
 		out.print("projectsThatContain: " + projectsThatContain);
 	}
 	
 	private int[] stringConvertToCategory(int selectProjectID) throws FileNotFoundException{
 		String[] projectInString = recordingCategoryFromBD(selectProjectID);
 		categoryID = Integer.valueOf(projectInString[0]);
-		categoryName = projectInString[1];
+		setCategoryName(projectInString[1]);
 		String[] string = projectInString[2].split(",");
 		projectsThatContain = new int[string.length];
 		for (int i = 0; i < string.length; i++){
@@ -61,6 +61,17 @@ public class Category{
 		//TODO
 		counterCategory--;
 	}
+
+	public String getCategoryName() {
+		return categoryName;
+	}
+
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
+	}
 	
-	
+	public String showCategoryName(int selectCategoryID) throws FileNotFoundException{
+		stringConvertToCategory(selectCategoryID);
+		return getCategoryName();
+	}
 }
