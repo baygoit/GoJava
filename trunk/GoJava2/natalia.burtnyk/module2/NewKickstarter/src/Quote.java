@@ -1,11 +1,10 @@
 import java.util.ArrayList;
-import java.util.Random;
+import java.util.List;
 
 public class Quote {
-    ArrayList<String> printQuote = new ArrayList<String>();
-
-	public String printQuote() {
-		
+	private List<String> printQuote;
+	public Quote() {
+		printQuote = new ArrayList<String>();
 		printQuote.add("\"Lost time is never found again.\"");
 		printQuote.add("\"The future belongs to those, who believe of their dreams.\"");
 		printQuote.add("\"If you never try you'll never know.\"");
@@ -14,10 +13,10 @@ public class Quote {
 		printQuote.add("\"An investment in knowledge always pays the best interest.\"");
 		printQuote.add("\"It does not matter how slowly you go so long as you do not stop.\"");
 		printQuote.add("\"Money spent on the brain, is never spent in vain.\"");
+   }
 
-        Random ran = new Random();
-        String quote = printQuote.get(ran.nextInt(printQuote.size()));
-        return quote;
+   public String getRundomQuote() {
+	   int i = (int)(Math.random() * printQuote.size());
+	   return printQuote.get(i);
 	}
-
 }

@@ -1,30 +1,25 @@
-import java.util.List;
-
 public class Engine {
-
-	private CategoryStorage categoryStorage;
-	private Сategory category;
-
-	public void run(CategoryStorage categoryStorage) {
-		this.categoryStorage = categoryStorage;
+	private DataStorage dataStorage;
+	public Engine() {
+		this.dataStorage = new DataStorage();
+	}
+	
+	public void run() {
 		Quote quote = new Quote();
 		System.out.println(" Welcome to Kickstarter" + "\n"
-				+ "  *** *** *** *** *** " + "\n" + quote.printQuote() + "\n"
-				+ "  *** *** *** *** *** ");
-
-		List<Сategory> a = categoryStorage.getCategoriesList();
+							+ "  *** *** *** *** *** " + "\n" + quote.getRundomQuote()
+							+ "\n" + "  *** *** *** *** *** ");
 		int i = 1;
-		for (Сategory c : a) {
-			System.out.println(i + ". " + c.getName());
+		for (Сategory сategory : dataStorage.getCategoriesList()) {
+			System.out.println(i + ". " + сategory.getName());
 			i++;
 		}
-		System.out.println("\n" + "Please select category :");
-
+		System.out.print("\n" + "Please select category: ");
 		choise(new InPut().scan());
 	}
-
+	
 	public void choise(int i) {
-		System.out.println("Your choise : " + i);
-		// TO DO
+		System.out.print("Your choise: " + i + ". "
+						+ dataStorage.getCategoriesList().get(i - 1).getName());
 	}
 }
