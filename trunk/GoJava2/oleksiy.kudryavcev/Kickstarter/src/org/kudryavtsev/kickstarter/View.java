@@ -14,35 +14,27 @@ public class View {
         System.out.println(greeting);
     }
 
-    public void showCategories(List<Project> list) {
-        System.out
-                .println("Categories (type the number to select one, 0 - exit): ");
-
-        List<String> categoryList = new ArrayList<String>();
-        String insert = "";
-        for (int i = 0; i < list.size(); i++) {
-            insert = list.get(i).getCategory();
-            if (!categoryList.contains(insert)) {
-                categoryList.add(insert);
-            }
-        }
-        for (int i = 0; i < categoryList.size(); i++) {
-            System.out
-                    .println("(" + (i + 1) + ") " + categoryList.get(i));
+    public void showProjects(List<Project> projectslist) {
+        int counter = 1;
+        for (Project project : projectslist) {
+            System.out.println("(" + counter + ") " + project);
+            counter++;
         }
     }
 
-    public void showCategories(int i, List<Project> list) {
-        System.out.println("(" + (i + 1) + ") " + list.get(i).getCategory());
+    public void showCategories(List<Category> list, int i) {
+        System.out.println("You entered: " + list.get(i - 1));
     }
 
-    public void showProjectsInCategory(List<Project> list, String category) {
-        int counter = 0;
-        for (int i = 0; i < list.size(); i++) {
-            if (list.get(i).getCategory().equals(category)) {
-                counter++;
-                System.out.println("(" + counter + ") " + list.get(i));
-            }
+    public void showCategories(List<Category> categoryList) {
+        int counter = 1;
+        for (Category category : categoryList) {
+            System.out.println("(" + counter + ") " + category);
+            counter++;
         }
+    }
+
+    public void showProject(Project project) {
+        System.out.println(project.toStringFull());
     }
 }

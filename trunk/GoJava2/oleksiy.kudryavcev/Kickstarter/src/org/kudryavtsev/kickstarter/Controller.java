@@ -16,18 +16,31 @@ public class Controller {
     public void start() {
         model.init();
         view.showGreeting();
-        List<Project> list = model.getCategoriesList();
+        List<Project> list = model.getProjectsList();
+        List<Category> categoryList = model.getCategoriesList();
 
-        boolean exit = false;
-        while (!exit) {
-            view.showCategories(list);
-            int result = scan.getAnswer();
-            if (result > 0 && result <= list.size()) {
-                view.showProjectsInCategory(list, list.get(result - 1)
-                        .getCategory());
-            } else
-                exit = true;
+        boolean exitFromApplication = false;
+        while (!exitFromApplication) {
+            view.showCategories(categoryList);
+            int numberOfCategory = scan.getAnswer();
+            boolean exitFromCategories = false;
+            while (!exitFromCategories) {
+                view.showProjects(categoryList.get(numberOfCategory - 1).getProjectsList());
+                int numberOfProject = scan.getAnswer();
+                boolean exitFromProject = false;
+                // while(!exitFromProject){
+                // int projectOption = scan.getAnswer();
+                // if (projectOption != 0){
+                view.showProject(categoryList.get(numberOfCategory - 1).getProjectsList()
+                        .get(numberOfProject - 1));
+                // }else
+                // exitFromProject = true;
+
+                // }
+                exitFromCategories = true;
+            }
+            exitFromApplication = true;
         }
-        scan.close();
+       scan.close();
     }
 }
