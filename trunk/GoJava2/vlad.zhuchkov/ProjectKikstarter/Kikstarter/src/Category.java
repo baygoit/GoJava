@@ -25,8 +25,15 @@ public class Category {
 		return projectCatalog;
 	}
 
-	public Project getProject(int num) {
-		return projectCatalog.get(num);
+	public Project getProject(int i) {
+		Reader reader = new Reader();
+		if(i>projectCatalog.size()){
+			System.out.println("Illigal category number. Try again");
+			i = reader.readInt();
+		}
+		return projectCatalog.get(i);
 	}
+		
+	
 
 }
