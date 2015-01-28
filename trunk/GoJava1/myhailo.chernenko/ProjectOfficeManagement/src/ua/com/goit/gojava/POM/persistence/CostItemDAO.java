@@ -1,12 +1,12 @@
 package ua.com.goit.gojava.POM.persistence;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import ua.com.goit.gojava.POM.dataModel.*;
 
 public class CostItemDAO implements GenericDAO<CostItem> {
 	
+	private static final String CLASS_NAME = "CostItem";
 	DAOFactory dataManager;
 	
 	public CostItemDAO(DAOFactory dataManager) {
@@ -19,42 +19,45 @@ public class CostItemDAO implements GenericDAO<CostItem> {
 	public CostItem create() {
 
 		CostItem newCostItem = new CostItem();
-		dataManager.saveObject(newCostItem, "CostItem");
+		dataManager.saveObject(newCostItem, CLASS_NAME);
 		return newCostItem;
 
 	}
 
 	@Override
 	public CostItem getByName(String name) {
-		// TODO Auto-generated method stub
-		return null;
+
+		CostItem findedCostItem = null;
+		List<CostItem> list = getList();
+		for(CostItem costItem : list) {
+			if(costItem.getName().equals(name)){
+				findedCostItem = costItem;
+			}
+		}
+
+		return findedCostItem;
 	}
 
 	@Override
 	public void update(CostItem obj) {
 		
-		dataManager.saveObject(obj, "CostItem");
+		dataManager.saveObject(obj, CLASS_NAME);
 		
 	}
 
 	@Override
 	public void delete(CostItem obj) {
 
-		dataManager.deleteObject(obj, "CostItem");
+		dataManager.deleteObject(obj, CLASS_NAME);
 		
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public List<CostItem> getList() {
 		
-		ArrayList<CostItem> result = new ArrayList<CostItem>();
-		Object objectList = dataManager.getObjectList("CostItem");
-		if (objectList instanceof ArrayList<?> ) {
-			
-			result = (ArrayList<CostItem>) objectList;
-					
-		}
+		List<DataObject> objectList = dataManager.getObjectList(CLASS_NAME);
+		@SuppressWarnings("unchecked")
+		List<CostItem> result =  (List<CostItem>)(List<?>) objectList;
 		
 		return result;
 	}

@@ -1,12 +1,12 @@
 package ua.com.goit.gojava.POM.persistence;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import ua.com.goit.gojava.POM.dataModel.*;
 
 public class ProjectDAO implements GenericDAO<Project> {
 	
+	private static final String CLASS_NAME = "Project";
 	DataManager dataManager;
 	
 	public ProjectDAO(DataManager dataManager) {
@@ -19,42 +19,45 @@ public class ProjectDAO implements GenericDAO<Project> {
 	public Project create() {
 
 		Project newProject = new Project();
-		dataManager.saveObject(newProject, "Project");
+		dataManager.saveObject(newProject, CLASS_NAME);
 		return newProject;
 
 	}
 
 	@Override
 	public Project getByName(String name) {
-		// TODO Auto-generated method stub
-		return null;
+
+		Project findedProject = null;
+		List<Project> list = getList();
+		for(Project project : list) {
+			if(project.getName().equals(name)){
+				findedProject = project;
+			}
+		}
+
+		return findedProject;
 	}
 
 	@Override
 	public void update(Project obj) {
 
-		dataManager.saveObject(obj, "Project");
+		dataManager.saveObject(obj, CLASS_NAME);
 	
 	}
 
 	@Override
 	public void delete(Project obj) {
 
-		dataManager.deleteObject(obj, "Project");
+		dataManager.deleteObject(obj, CLASS_NAME);
 			
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public List<Project> getList() {
 
-		ArrayList<Project> result = new ArrayList<Project>();
-		Object objectList = dataManager.getObjectList("Project");
-		if (objectList instanceof ArrayList<?> ) {
-			
-			result = (ArrayList<Project>) objectList;
-					
-		}
+		List<DataObject> objectList = dataManager.getObjectList(CLASS_NAME);
+		@SuppressWarnings("unchecked")
+		List<Project> result =  (List<Project>)(List<?>) objectList;
 		
 		return result;
 	} 

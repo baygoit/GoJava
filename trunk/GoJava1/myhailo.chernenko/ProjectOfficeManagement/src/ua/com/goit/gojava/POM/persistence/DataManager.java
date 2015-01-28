@@ -18,7 +18,7 @@ public class DataManager implements DAOFactory{
 	private static final String DATA_FILE = "C:\\workspace\\ProjectOfficeManagement.dat";
 	
 	// for DB imitation:
-	private Map<String, List<DataObject>> objectsMap; 
+	private Map<String, List<DataObject>> objectsMap = new HashMap<String, List<DataObject>>(); 
 	
 	public DataManager() {
 		
@@ -52,7 +52,7 @@ public class DataManager implements DAOFactory{
 			
 		} catch (IOException | ClassNotFoundException | ConcurrentModificationException e) {
 			
-			Logger.getLogger("DataManager.class").log(Level.SEVERE , "Cannot read program data!");
+			Logger.getLogger("DataManager.class").log(Level.SEVERE , "Cannot read programs data!");
 		
 		}
 		
@@ -72,7 +72,7 @@ public class DataManager implements DAOFactory{
 				
 		} catch (IOException e) {
 			
-			Logger.getLogger("DataManager.class").log(Level.SEVERE , "Cannot save TransactionsStore!");
+			Logger.getLogger("DataManager.class").log(Level.SEVERE , "Cannot save programs data!");
 			e.printStackTrace();
 			
 		}
@@ -82,21 +82,21 @@ public class DataManager implements DAOFactory{
 	@Override
 	public List<DataObject> getObjectList(String key) {
 
-		return objectsMap.get(key);
+		List<DataObject> objList = objectsMap.get(key);
+		if(objList == null) {
+			objList = new ArrayList<DataObject>();
+			objectsMap.put(key, objList);	
+		}
+		
+		return objList;
 		
 	}
 	
 	@Override
 	public void saveObject(DataObject obj, String key) {
 
-		List<DataObject> objList = objectsMap.get(key);
-		int indexOfObj = -1;
-		if(objList == null) {		
-			objList = new ArrayList<DataObject>();
-			objectsMap.put(key, objList);		
-		} else {			
-			indexOfObj = objList.indexOf(obj);			
-		}
+		List<DataObject> objList = getObjectList(key);
+		int indexOfObj = objList.indexOf(obj);			
 		if(indexOfObj == -1) {			
 			objList.add(obj);				
 		} else {			
@@ -109,12 +109,10 @@ public class DataManager implements DAOFactory{
 	@Override
 	public void deleteObject(DataObject obj, String key) {
 
-		List<DataObject> objList = objectsMap.get(key);
-		if(objList != null) {
-			int indexOfObj = objList.indexOf(obj);
-			if(indexOfObj != -1) {
-				objList.remove(indexOfObj);
-			}
+		List<DataObject> objList = getObjectList(key);
+		int indexOfObj = objList.indexOf(obj);
+		if(indexOfObj != -1) {
+			objList.remove(indexOfObj);
 		}
 	}
 
