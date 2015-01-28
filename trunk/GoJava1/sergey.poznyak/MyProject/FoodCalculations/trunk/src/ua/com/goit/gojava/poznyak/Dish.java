@@ -3,8 +3,9 @@ package ua.com.goit.gojava.poznyak;
 /**
  * The Dish bean.
  * 
- * This bean implements the dish image
- * @version 0.03 22 Jan 2015
+ * This bean implements the dish image.
+ * 
+ * @version 0.04 28 Jan 2015
  * @author Sergey Poznyak
  */
 public class Dish {
@@ -39,6 +40,31 @@ public class Dish {
 	@Override
 	public String toString() {
 		return id + ". " + name;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Dish other = (Dish) obj;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		return true;
 	}
 	
 }

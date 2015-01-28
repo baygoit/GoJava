@@ -4,30 +4,42 @@ package ua.com.goit.gojava.poznyak;
  * The Ingredient bean.
  * 
  * This class implements the ingredient image
- * @version 0.03 22 Jan 2015
+ * 
+ * @version 0.04 28 Jan 2015
  * @author Sergey Poznyak
  */
 public class Ingredient {
 	
-	private String name;
+	private Dish dish;
 	
-	private double weight;
+	private Foodstuff foodstuff;
+	
+	private Double weight;
 	
 	public Ingredient() {}
 
-	protected Ingredient(String ingrName, double ingrWeight) {
-		name = ingrName;
-		weight = ingrWeight;
+	protected Ingredient(Dish dish, Foodstuff foodstuff, double weight) {
+		this.dish = dish;
+		this.foodstuff = foodstuff;
+		this.weight = weight;
 	}
-	
-	public String getName() {
-		return name;
+
+	public Dish getDish() {
+		return dish;
 	}
-	
-	public void setName(String name) {
-		this.name = name;
+
+	public void setDish(Dish dish) {
+		this.dish = dish;
 	}
-	
+
+	public Foodstuff getFoodstuff() {
+		return foodstuff;
+	}
+
+	public void setFoodstuff(Foodstuff foodstuff) {
+		this.foodstuff = foodstuff;
+	}
+
 	public double getWeight() {
 		return weight;
 	}
@@ -35,10 +47,10 @@ public class Ingredient {
 	public void setWeight(double weight) {
 		this.weight = weight;
 	}
-	
+
 	@Override
 	public String toString() {
-		return name + " x " + weight + "kg";
+		return weight.toString();
 	}
 	
 }

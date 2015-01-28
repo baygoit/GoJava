@@ -1,20 +1,25 @@
 package ua.com.goit.gojava.poznyak;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
- * This class implements the service interface
+ * This class implements the listing service.
  * 
- * @version 0.03 22 Jan 2015
+ * @version 0.04 28 Jan 2015
  * @author Sergey Poznyak
  */
-public class ListServiceHardcodedData implements ListService {
+public class ListServiceHardcodedData {
 	
 	@SuppressWarnings("serial")
-	private List<Dish> dishesList = new ArrayList<Dish>() {{
+	private static List<Foodstuff> foodstuffList = new ArrayList<Foodstuff>() {{
+		this.add(new Foodstuff(1, "buckwheat"));
+		this.add(new Foodstuff(2, "salt"));
+		this.add(new Foodstuff(3, "stew"));
+	}};
+	
+	@SuppressWarnings("serial")
+	private static List<Dish> dishList = new ArrayList<Dish>() {{
 		this.add(new Dish(1, "Borshch"));
 		this.add(new Dish(2, "Buckwheat porridge"));
 		this.add(new Dish(3, "Rice porridge"));
@@ -23,24 +28,27 @@ public class ListServiceHardcodedData implements ListService {
 	}};
 	
 	@SuppressWarnings("serial")
-	private Map<Integer, List<Ingredient>> ingredientsList = new HashMap<Integer, List<Ingredient>>() {{
-		List<Ingredient> currentDish = new ArrayList<Ingredient>();
-		this.put(2, currentDish);
-		currentDish.add(new Ingredient("buckwheat", 0.08));
-		currentDish.add(new Ingredient("salt", 0.005));
-		currentDish.add(new Ingredient("stew", 0.125));
+	private static List<Ingredient> ingredientList = new ArrayList<Ingredient>() {{
+		this.add(new Ingredient(dishList.get(1), foodstuffList.get(0), 0.08));
+		this.add(new Ingredient(dishList.get(1), foodstuffList.get(1), 0.005));
+		this.add(new Ingredient(dishList.get(1), foodstuffList.get(2), 0.125));
 	}};
-
-	@Override
-	public List<Dish> getDishList() {
-		return dishesList;
+	
+	
+	public static List<Foodstuff> getFoodstuffList() {
+		return foodstuffList;
+	}
+	
+	public static List<Dish> getDishList() {
+		return dishList;
 	}
 
-	@Override
-	public List<Ingredient> getIngredientList(int dishId) {
-		List<Ingredient> result = ingredientsList.get(dishId);
-		if (result == null) {
-			return new ArrayList<Ingredient>();
+	public static List<Ingredient> getIngredientList(Dish dish) {
+		List<Ingredient> result = new ArrayList<Ingredient>();
+		for (Ingredient value : ingredientList) {
+			if (value.getDish().equals(dish)) {
+				result.add(value);
+			}
 		}
 		return result;
 	}

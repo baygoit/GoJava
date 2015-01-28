@@ -8,23 +8,23 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * This class tests ListServiceHardcodedData class
+ * This class tests ListServiceHardcodedData class.
  * 
- * @version 0.03 22 Jan 2015
+ * @version 0.04 28 Jan 2015
  * @author Sergey Poznyak
  */
 public class ListServiceHardcodedDataTest {
 	
-	private ListService service;
+	
+	private List<Dish> dishList;
 	
 	@Before 
 	public void initialize() {
-		service = new ListServiceHardcodedData();
+		dishList = ListServiceHardcodedData.getDishList();
 	}
 
 	@Test
 	public void testGetDishList() {
-		List<Dish> dishList = service.getDishList();
 		assertNotNull(dishList);
 		assertEquals(5, dishList.size());
 		assertEquals("1. Borshch", dishList.get(0).toString());
@@ -32,10 +32,9 @@ public class ListServiceHardcodedDataTest {
 
 	@Test
 	public void testGetIngredientList() {
-		assertNotNull(service.getIngredientList(Integer.MAX_VALUE));
-		assertNotNull(service.getIngredientList(Integer.MIN_VALUE));
-		assertEquals(3, service.getIngredientList(2).size());
-		assertEquals("salt x 0.005kg", service.getIngredientList(2).get(1).toString());
+		assertNotNull(ListServiceHardcodedData.getIngredientList(null));
+		assertNotNull(ListServiceHardcodedData.getIngredientList(new Dish()));
+		assertNotNull(ListServiceHardcodedData.getIngredientList(dishList.get(4)));
 	}
 
 }

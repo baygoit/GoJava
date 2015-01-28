@@ -9,8 +9,9 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- * The main class
- * @version 0.03 22 Jan 2015
+ * The main class.
+ * 
+ * @version 0.04 28 Jan 2015
  * @author Sergey Poznyak
  */
 public class FoodCalculations {
@@ -21,16 +22,23 @@ public class FoodCalculations {
 	 * the number of chosen dish
 	 * @param args
 	 */
-	public static void main(String[] args) {
-		ListService service = new ListServiceHardcodedData();
+	public static void main(String[] args) throws IndexOutOfBoundsException {
 		System.out.println("Menu:");
-		displayDishes(service.getDishList());
+		List<Dish> dishes = ListServiceHardcodedData.getDishList();
+		displayDishes(dishes);
 		System.out.println("Choose a dish (enter its number):");
 		Scanner input = new Scanner(System.in);
 		int index = input.nextInt();
 		input.close();
 		System.out.println("Ingredients (for 1 person):");
-		displayIngredients(service.getIngredientList(index));
+		try {
+			displayIngredients(ListServiceHardcodedData
+					           .getIngredientList(dishes.get(index - 1)));
+		} catch(IndexOutOfBoundsException e) {
+			System.out.println("No such dish");
+		}
+		System.out.println("Ingredients for the list of dishes:");
+		System.out.println(CalculationService.calculateWeights());
 	}
 	
 	/**
@@ -56,7 +64,8 @@ public class FoodCalculations {
 			System.out.println("There are no ingredients for chosen dish.");
 		} else {
 			for (Ingredient value : ingredients) {
-				System.out.println(value);
+				System.out.println(value.getFoodstuff() + " x " + value
+						           + " kg");
 			}
 		}
 	}
