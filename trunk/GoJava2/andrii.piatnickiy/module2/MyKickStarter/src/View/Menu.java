@@ -22,7 +22,8 @@ public class Menu {
         levelsList.add(level2);
         levelsList.add(level3);
     }
-//TODO bugs is still
+
+    // TODO bugs is still
     public void nextLevel(int nubberForNextLevel) {
         if (nubberForNextLevel == 0) {
             levelUp(parrentLevelPositon);

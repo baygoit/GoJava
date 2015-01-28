@@ -35,12 +35,7 @@ public class ProjectManager {
 
 
     public void displayProjects(int categoryNumber) {
-        System.out.println("categoryNumber = " + categoryNumber);
         projectStorage.dispalyProjectStorageList(categoryNumber);
-    }
-
-    public void displaySpecificProjectCategory(int i) {
-        categoryStorage.displayChoosedCategory(i);
     }
 
     public void displaySpecificProject(int categoryNumber, int projectNumber) {

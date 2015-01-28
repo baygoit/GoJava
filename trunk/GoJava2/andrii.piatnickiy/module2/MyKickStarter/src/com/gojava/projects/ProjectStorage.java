@@ -15,7 +15,6 @@ public class ProjectStorage {
     }
 
     public void dispalyProjectStorageList(int categoryNumber) {
-        // TODO refactoring sysout to toString();
         int i = 1;
         for (Project project : this.projectStorageList) {
             if (project.getCategoryId() == categoryNumber) {
@@ -28,7 +27,6 @@ public class ProjectStorage {
                 i++;
             }
         }
-        System.out.println("111");
     }
 
     public void displaySpecificProject(int categoryNumber, int projectNumber) {
