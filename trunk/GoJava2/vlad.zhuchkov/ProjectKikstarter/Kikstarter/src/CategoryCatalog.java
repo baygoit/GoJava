@@ -3,8 +3,8 @@ import java.util.ArrayList;
 public class CategoryCatalog {
 	private ArrayList<Category> categoryCatalog = new ArrayList<>();
 
-	public void addCategory(Category name) {
-		categoryCatalog.add(name);
+	public void addCategory(String name) {
+		categoryCatalog.add(new Category(name));
 	}
 
 	public ArrayList<Category> getCatalogList() {

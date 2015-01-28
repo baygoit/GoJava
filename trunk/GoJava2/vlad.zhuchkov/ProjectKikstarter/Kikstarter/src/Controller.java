@@ -1,59 +1,58 @@
-import java.util.Scanner;
-
 public class Controller {
-	public static void main(String[] args) {
-		boolean inputRight = true;
-		int option = 0;
-		Category selectedCategory = null;
-		Project selectedProject = null;
-		Scanner sc = new Scanner(System.in);
-		ConsoleWriter writer = new ConsoleWriter();
-		QuoteConteiner quote = new QuoteConteiner();
-		System.out.println(quote.getQuote());
+	private CategoryCatalog catalog;
 
-		Category games = new Category("games");
-		Category movies = new Category("movies");
-		Category books = new Category("books");
-		Category programs = new Category("programs");
+	public Controller(CategoryCatalog catalog) {
+		this.catalog = catalog;
+	}
+
+	public static void main(String[] args) {
 
 		CategoryCatalog catalog = new CategoryCatalog();
-		catalog.addCategory(games);
-		catalog.addCategory(movies);
-		catalog.addCategory(books);
-		catalog.addCategory(programs);
-		System.out.println("select category 1-" + catalog.size());
-		writer.showCategoryCatalog(catalog);
+		catalog.addCategory("games");
+		catalog.addCategory("movies");
+		catalog.addCategory("books");
+		catalog.addCategory("programs");
+		Controller app = new Controller(catalog);
+		app.run();
+
+	}
+
+	public void run() {
+		int option = 0;
+		Printer printer = new Printer();
+
+		QuoteConteiner quote = new QuoteConteiner();
+		printer.print(quote.getQuote());
+		printer.print("select category (1-" + catalog.size() + " only)");
+
+		Category selectedCategory = null;
+		Reader reader = new Reader();
 		do {
-			try {
-				option = Integer.valueOf(sc.nextLine()) - 1;
+
+			do {
+				printer.showCategoryCatalog(catalog);
+				option = reader.readInt() - 1;
 				selectedCategory = catalog.getCategory(option);
-				System.out.println("You select " + selectedCategory.getName());
-				System.out.println("select project");
-				inputRight = true;
-			} catch (NumberFormatException Integer) {
-				System.out.println("invalid input");
-				inputRight = false;
-			} catch (IndexOutOfBoundsException ArrayList) {
-				System.out.println("invalid input");
-				inputRight = false;
-			}
-		} while (!inputRight);
-		writer.showCategoryProjects(selectedCategory);
-		System.out.println("Select project for more details ");
-		do {
-			try {
-				option = Integer.valueOf(sc.nextLine()) - 1;
+				printer.print("You select " + selectedCategory.getName());
+				printer.print("select project");
+				printer.showProjects(selectedCategory);
+				printer.print("Select project for more details\n 0 - up ");
+				option = reader.readInt() - 1;
+			} while (option == -1);
+			do {
+				Project selectedProject = null;
 				selectedProject = selectedCategory.getProject(option);
-				inputRight = true;
-			} catch (NumberFormatException Integer) {
-				System.out.println("invalid input");
-				inputRight = false;
-			} catch (IndexOutOfBoundsException ArrayList) {
-				System.out.println("invalid input");
-				inputRight = false;
-			}
-		} while (!inputRight);
-		writer.showProjectInfo(selectedProject);
-		sc.close();
+				printer.showProjectInfo(selectedProject);
+				System.out.println("0 up");
+				option = reader.readInt() - 1;
+				if(option == -1)
+				{
+					printer.print("select project");
+					printer.showProjects(selectedCategory);
+					printer.print("Select project for more details\n 0 - up ");
+					option = reader.readInt() - 1;
+				}
+			} while (option == 0);
+		} while (true);
 	}
 }

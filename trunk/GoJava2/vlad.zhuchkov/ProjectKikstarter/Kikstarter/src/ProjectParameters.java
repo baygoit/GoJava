@@ -56,7 +56,7 @@ public class ProjectParameters {
 			return demo.getUrl();
 		}
 
-		public String getFaqLink() {
+		public String getFaqLink(){
 			return faq.getUrl();
 		}
 	}
