@@ -7,8 +7,9 @@ public class Printer {
 	
 	public void showCategoryCatalog(CategoryCatalog catalog){
 		ArrayList<Category> list = catalog.getCatalogList();
-		for (int i=0;i<list.size();i++)
-			System.out.println((i+1)+")"+list.get(i).getName());
+		int i=1;
+		for (Category t : list)
+			System.out.println((i++)+")"+t.getName());
 		
 	}
 	public void showCategoryName(CategoryCatalog catalog,int num){

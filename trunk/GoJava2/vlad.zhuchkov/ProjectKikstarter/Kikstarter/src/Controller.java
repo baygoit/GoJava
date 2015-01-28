@@ -19,7 +19,7 @@ public class Controller {
 
 	private void printProjects(Printer printer, Category selectedCategory) {
 		printer.showProjects(selectedCategory);
-		printer.print("Select project for more details\nexit 0 ");
+		printer.print("Select project for more details\n0 - up");
 
 	}
 
@@ -49,19 +49,27 @@ public class Controller {
 				if (option == -1) {
 
 					printProjects(printer, selectedCategory);
-					projectNum = reader.readInt() - 1;
-				}
-				Project selectedProject = null;
-				selectedProject = selectedCategory.getProject(projectNum);
-				printer.showProjectInfo(selectedProject);
-				do {
-					printer.print("\npres 0 to return to project's list\npres 1 to exit\npres 2 to return to category's list ");
 					option = reader.readInt() - 1;
-					if (option > 2) {
-						printer.print("only 0-2 required");
-					}
-				} while (option > 2);
+
+				}
+				if (option != -1) {
+					projectNum = option;
+					Project selectedProject = null;
+					selectedProject = selectedCategory.getProject(projectNum);
+					printer.showProjectInfo(selectedProject);
+					do {
+						printer.print("\npres 0 to return to project's list\npres 1 to exit\npres 2 to return to category's list ");
+						option = reader.readInt() - 1;
+						if (option > 2) {
+							printer.print("only 0-2 required");
+						}
+					} while (option > 2);
+				}
+				else {
+					option = 1;
+				}
 			} while (option == -1);
+			
 
 		} while (option == 1);
 	}

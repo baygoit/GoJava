@@ -13,10 +13,16 @@ public class CategoryCatalog {
 
 	public Category getCategory(int i) {
 		Reader reader = new Reader();
-		if(i>categoryCatalog.size()){
-			System.out.println("Illigal category number. Try again");
-			i = reader.readInt();
-		}
+		boolean inputRight = true;
+		do {
+			if (i > categoryCatalog.size()||i<0) {
+				System.out.println("Illigal category number. Try again");
+				i = reader.readInt()-1;
+				inputRight  = false;
+			}else{
+				inputRight = true;
+			}
+		} while (!inputRight);
 		return categoryCatalog.get(i);
 	}
 
