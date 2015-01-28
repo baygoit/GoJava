@@ -15,10 +15,11 @@ public class ProjectStorage {
     }
 
     public void dispalyProjectStorageList(int categoryNumber) {
-        int i=1;
+        // TODO refactoring sysout to toString();
+        int i = 1;
         for (Project project : this.projectStorageList) {
             if (project.getCategoryId() == categoryNumber) {
-                System.out.println(i+") Project Name: " + project.getName());
+                System.out.println(i + ") Project Name: " + project.getName());
                 System.out.println("Description: " + project.getDescription());
                 System.out.println("Need Sum: " + project.getNeedSum());
                 System.out.println("Current Sum: " + project.getCurrentSum());
@@ -27,8 +28,7 @@ public class ProjectStorage {
                 i++;
             }
         }
-//        System.out.println("Enter the number 0 to return to the list of categories");
-        System.out.println();
+        System.out.println("111");
     }
 
     public void displaySpecificProject(int categoryNumber, int projectNumber) {
@@ -43,17 +43,16 @@ public class ProjectStorage {
                     System.out.println("Current Sum: "
                             + project.getCurrentSum());
                     System.out.println("Days Left: " + project.getDaysLeft());
-                    System.out.println("ProjectHistory: " + project.getProjectHistory());
-                    System.out.println("LinkOnvideo: " + project.getLinkOnvideo());
-                    System.out.println("Questions and answers: " + project.getQuestionsAndAnswers());
+                    System.out.println("ProjectHistory: "
+                            + project.getProjectHistory());
+                    System.out.println("LinkOnvideo: "
+                            + project.getLinkOnvideo());
+                    System.out.println("Questions and answers: "
+                            + project.getQuestionsAndAnswers());
                     System.out.println();
-                    i++;
-                } else {
-                    i++;
                 }
+                i++;
             }
-
         }
     }
-
 }

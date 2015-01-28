@@ -16,7 +16,6 @@ public class Level1 implements Level {
         manager.displayCategories();
     }
 
-
     @Override
     public int getPosition() {
         return position;

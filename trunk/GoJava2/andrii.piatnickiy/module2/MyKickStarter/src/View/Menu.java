@@ -24,31 +24,32 @@ public class Menu {
     }
 
     public void nextLevel(int nubberForNextLevel) {
-        
         if (nubberForNextLevel == 0) {
-            levelUp();
-            currentPosition--;
+            levelUp(nubberForNextLevel);
+
         } else {
-            levelDown(this.levelsList, nubberForNextLevel);
+            levelDown(nubberForNextLevel);
         }
-        this.parrentLevelPositon = nubberForNextLevel;
+        parrentLevelPositon = nubberForNextLevel;
     }
 
-    public void levelUp() {
-        // TODO will realise body
+    public void levelUp(int nubberForNextLevel) {
+        currentPosition--;
+        for (Level level : levelsList) {
+            System.out.println();
+            if (currentPosition == level.getPosition()) {
+                level.displayMySelf(nubberForNextLevel);
+            }
+        }
     }
 
-    public void levelDown(ArrayList<Level> levelsList, int nubberForNextLevel) {
+    public void levelDown(int nubberForNextLevel) {
         currentPosition++;
         for (Level level : levelsList) {
             System.out.println();
             if (currentPosition == level.getPosition()) {
                 level.displayMySelf(nubberForNextLevel);
             }
-            
-            
-            System.out.println("level.getPosition() = " + level.getPosition());
         }
-        System.out.println("currentPosition = " + currentPosition);
     }
 }
