@@ -12,6 +12,10 @@ import java.util.GregorianCalendar;
  *
  */
 public class FotoStudio extends Contacts {
+    public FotoStudio(String name, String address, int phone) {
+        super(name, address, phone);
+    }
+
     private Calendar reserveDate;
     private int reserveTime;
 

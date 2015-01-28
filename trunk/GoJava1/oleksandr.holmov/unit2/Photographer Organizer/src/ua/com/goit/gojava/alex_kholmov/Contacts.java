@@ -11,7 +11,13 @@ public class Contacts {
     private String name;
     private String address;
     private int phone;
- 
+
+    public Contacts(String name, String address, int phone) {
+        this.name = name;
+        this.address = address;
+        this.phone = phone;
+    }
+    
     String getName() {
         return name;
     }

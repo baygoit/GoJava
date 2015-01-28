@@ -3,22 +3,28 @@
  */
 package ua.com.goit.gojava.alex_kholmov;
 
+import java.util.ArrayList;
+
 /**
  * @author SASH
  *
  */
 public class SellService {
-    private PackageFotos fotos;
+    ArrayList<PackageFotos> packagesFotos = new ArrayList<PackageFotos>();
     private String describe;
     private int price;
     private int serviceTime; //hours
 
-    PackageFotos getFotos() {
-        return fotos;
+    public SellService(String describe, int price, int serviceTime) {
+        this.describe = describe;
+        this.price = price;
+        this.serviceTime = serviceTime;
     }
-    void setFotos(PackageFotos fotos) {
-        this.fotos = fotos;
+    
+    void addPackage(PackageFotos pFotos) {
+        packagesFotos.add(pFotos);
     }
+    
     String getDescribe() {
         return describe;
     }
