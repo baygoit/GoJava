@@ -36,7 +36,8 @@ public class KickstarterS {
 	
 	public static void main(String[] args) throws IOException{
 		Quotes quote = new Quotes();
-		System.out.println(quote.getQuote());
+		Output out = new OutputConsole();
+		out.print(quote.getQuote());
 		
 		toCategory();
 	}
