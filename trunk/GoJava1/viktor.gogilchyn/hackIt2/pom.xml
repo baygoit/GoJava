@@ -29,14 +29,9 @@
 					<instrumentation>
 						<ignores>
 							<ignore>ua.com.goit.gojava1.lslayer.hackit2.exceptions.*</ignore>
-							<ignore>ua.com.goit.gojava1.lslayer.hackit2.gear.*</ignore>
 						</ignores>
 						<excludes>
                             <exclude>ua/com/goit/gojava1/lslayer/hackit2/exceptions/*.class</exclude>
-                            <exclude>ua/com/goit/gojava1/lslayer/hackit2/gear/*.class</exclude>
-                            <exclude>ua/com/goit/gojava1/lslayer/hackit2/AI*.class</exclude>
-                            <exclude>ua/com/goit/gojava1/lslayer/hackit2/gear/*.class</exclude>
-                            <exclude>ua/com/goit/gojava1/lslayer/hackit2/gear/*.class</exclude>
 						</excludes>
 					</instrumentation>
 					<quiet>true</quiet>
