@@ -7,8 +7,8 @@ public class Engine {
 	public void run() {
 		Quote quote = new Quote();
 		System.out.println(" Welcome to Kickstarter" + "\n"
-					+ "  *** *** *** *** *** " + "\n" + quote.getRundomQuote()
-					+ "\n" + "  *** *** *** *** *** ");
+				+ "  *** *** *** *** *** " + "\n" + quote.getRundomQuote()
+				+ "\n" + "  *** *** *** *** *** ");
 		int i = 1;
 		for (Сategory сategory : dataStorage.getCategoriesList()) {
 			System.out.println(i + ". " + сategory.getName());
