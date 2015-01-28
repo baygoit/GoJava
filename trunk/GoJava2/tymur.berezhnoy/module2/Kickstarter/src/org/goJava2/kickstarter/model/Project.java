@@ -52,7 +52,7 @@ public class Project {
 	
 	@Override
 	public String toString() {
-		return new String("*** " + name + " ***" + "\nDescription: " + desription + " \nRequired amount: " + requiredAmount + symbolDollar
+		return new String("Description: " + desription + " \nRequired amount: " + requiredAmount + symbolDollar
 						  + "\nTotal: " + total + symbolDollar + " \nDays left: " + days);
 	}
 }
