@@ -5,7 +5,7 @@ import java.io.FileNotFoundException;
 import mainkick.Quotes;
 import org.junit.Test;
 
-public class quoteIsNotEmpty {
+public class QuoteIsNotEmpty {
 	
 	@Test 
 	public void shouldLengthMoreZero_expectedLengthZero() throws FileNotFoundException {
