@@ -1,0 +1,170 @@
+package ua.com.goit.gojava1.grigorius0sol.Division;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+
+public class Division{
+	
+	static private String input;
+	static private List<Integer> numbersFromString = new ArrayList<Integer>();
+	static private StringBuilder quotient = new StringBuilder();
+	static private List<StringBuilder > visualize = new ArrayList<StringBuilder>();
+	static private int tempDivisor;
+	static private int tempRemainder;
+	static private int tempQuotient ;
+	static private int tempResult;
+	static private int dividen;
+	static private int divider;
+	
+	
+	public static void main(String args[]){
+		
+		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+		System.out.println("Please enter two numbers like 1/2");
+		
+		try {
+			input = reader.readLine();
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+		}
+		
+		firstOutPut(getNumbersFromString(input));
+	}
+	
+	public static List<Integer> getNumbersFromString(String source){
+		
+		
+		List<String> tempList = Arrays.asList(source.split("/"));
+		for (int i = 0; i < tempList.size(); i++) {
+			
+			int x = Integer.parseInt(tempList.get(i));
+			numbersFromString.add(x);
+
+		}
+		return numbersFromString;
+	}
+	
+	public static void firstOutPut(List<Integer> numbers){
+		
+		divider = numbers.get(0);
+		dividen = numbers.get(1);
+		
+		System.out.println(divider + " | " + dividen);
+		
+		divide(divider, dividen);
+	}
+	
+	public static void divide(int divider, int dividen){
+		
+		String dividerToString = String.valueOf(divider);
+		
+		int nextValue = 0;
+		while(nextValue < dividerToString.length()){
+			
+			tempDivisor = tempRemainder * 10 + Integer.parseInt(dividerToString.substring(nextValue, nextValue + 1));
+			tempQuotient = tempDivisor / dividen;
+			quotient.append(tempQuotient);
+			
+			tempResult = tempQuotient * dividen; 
+			tempRemainder = tempDivisor -  tempResult;  
+			
+			nextValue++;
+		}
+		
+		if(tempRemainder != 0){
+			
+			fractionDivide();
+            
+		}
+
+		if (quotient.charAt(0) == '0') {
+            int counter = 0;
+            int i = 0;
+            while (quotient.charAt(i) == '0') {
+                    counter++;
+                    i++;
+            }
+            if (quotient.charAt(i) == '.') {
+                    counter--;
+            }
+            quotient.delete(0, counter);
+		}
+		
+		
+		System.out.println("   |" + quotient);
+		for(StringBuilder value: visualize){
+			
+			System.out.println(value);
+		}
+	}
+	
+	
+	public static void fractionDivide(){
+		
+
+		StringBuilder fractionPartResult = new StringBuilder();
+		List<Integer> fractionRemainder = new ArrayList<Integer>();
+		int indexPeriodRepeat;
+		
+		while(fractionRemainder.size() < 100){
+			
+			indexPeriodRepeat = getIndexPeriodRepeat(fractionRemainder);
+			if (indexPeriodRepeat != -1) {
+				fractionPartResult.insert(indexPeriodRepeat, "(");
+				fractionPartResult.append(")");
+                break;
+			}
+			
+			fractionRemainder.add(tempRemainder);
+			tempDivisor = tempRemainder * 10;
+			tempQuotient = tempDivisor / dividen;
+			fractionPartResult.append(tempQuotient);
+			tempResult = tempQuotient * dividen;
+			tempRemainder = tempDivisor - tempResult;
+			
+			outPut(tempDivisor, tempResult, tempRemainder);
+			
+			if(tempRemainder == 0){
+				break;
+			}
+		}
+		quotient.append(".");
+        quotient.append(fractionPartResult);
+	}
+	
+	public static int getIndexPeriodRepeat(List<Integer> remainder) {
+        for (int i = 0; i < remainder.size()-1; i++) {
+                if (remainder.get(remainder.size() - 1).equals(remainder.get(i))) {
+                        return i;
+                }
+        }
+        return -1;
+	}
+	
+	public static void outPut(int minuend, int subtrahend, int difference){
+		
+		String minuendToString = "" + minuend;
+		String subtrahendToString = "" + subtrahend;
+		String differenceToString = "" + difference;
+		
+		writeIn(minuendToString);
+		writeIn("-" + subtrahendToString + " ");
+		writeIn("-----");
+		writeIn(differenceToString);
+		writeIn("-----");
+		
+		
+	}
+	
+	public static void writeIn(String value){
+		visualize.add(new StringBuilder(""));
+		visualize.get(visualize.size() - 1).append("");
+		visualize.get(visualize.size() - 1).append(value);
+	}
+}
