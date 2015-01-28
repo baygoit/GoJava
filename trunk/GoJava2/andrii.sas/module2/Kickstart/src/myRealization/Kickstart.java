@@ -1,6 +1,5 @@
 package myRealization;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,8 +13,8 @@ public class Kickstart {
 	private int projectChoice;
 	private Output output;
 	private Input input;
-	
-	public Kickstart(Output output, Input input){
+
+	public Kickstart(Output output, Input input) {
 		this.output = output;
 		this.input = input;
 	}
@@ -23,8 +22,8 @@ public class Kickstart {
 	public void buildList(Category category) {
 		categories.add(category);
 	}
-	
-	public void printQuote(){
+
+	public void printQuote() {
 		Quote quote = new Quote();
 		output.println(quote.getQuote());
 	}
@@ -45,31 +44,63 @@ public class Kickstart {
 		choice = input.readChoice() - 1;
 		output.println("You chose - " + categories.get(choice).getName());
 	}
-	
-	public String writeProject(Project project){
-		return " - Name - " + project.getProjectName() + ", Description - " + project.getDescription() +
-				", Money we need - " + project.getMoneyNeed() + ", Money we have - " + project.getMoneyHas() + ", Days left - " + project.getDaysLeft();
+
+	public String writeProject(Project project) {
+		return " Name - " + project.getProjectName() + ", Description - "
+				+ project.getDescription() + ", Money we need - "
+				+ project.getMoneyNeed() + ", Money we have - "
+				+ project.getMoneyHas() + ", Days left - "
+				+ project.getDaysLeft();
 	}
-	
-	public void addProject(Project project){
+
+	public void addProject(Project project) {
 		projects.add(project);
 	}
-	
-	public void showProjects(){
-		for (Project project : projects){
-			if (project.getCategory() == categories.get(choice)){
+
+	public void showProjects() {
+		for (Project project : projects) {
+			if (project.getCategory() == categories.get(choice)) {
 				categoryProjects.add(project);
 				output.println(j + writeProject(project));
 				j++;
 			}
 		}
+		output.println("If you want to return press \"0\"");
 	}
-	
-	public void showChosenProject(){
-		projectChoice = input.readChoice() - 1;
-		output.println("You chose: " + writeProject(categoryProjects.get(projectChoice)));
+
+	public void showChosenProject(int choice) {
+		projectChoice = choice - 1;
+		output.println("You chose:"
+				+ writeProject(categoryProjects.get(projectChoice)));
 	}
-	
+
+	public void buildMenu(){
+		boolean firstTime = true;
+		while (true){
+			if (firstTime){
+			showList();
+			showChoice();
+			showProjects();
+			firstTime = false;
+			} else {
+				int k = input.readChoice();
+				if (k != 0){
+				showChosenProject(k);
+					output.println("If you want to return press \"0\"");
+					if (input.readChoice() == 0){
+						i = j = 1;
+						showProjects();
+					}
+				} else {
+					i = j = 1;
+					showList();
+					showChoice();
+					showProjects();
+				}
+			}
+		}
+	}
+
 	public static void main(String[] args) {
 		Kickstart kick = new Kickstart(new ConsoleOutput(), new ConsoleInput());
 		Category sport = new Sport();
@@ -89,19 +120,22 @@ public class Kickstart {
 		kick.buildList(sport);
 		kick.buildList(science);
 		kick.buildList(music);
-		kick.showList();
-		kick.showChoice();
-		pro.setProject("Band", "We want to create new music band", 15000, 12540, 35,
-				"bla-bla-bla", "youtube.com", "Q: Have you invested your money? A: yes");
+		pro.setProject("Band", "We want to create new music band", 15000,
+				12540, 35, "bla-bla-bla", "youtube.com",
+				"Q: Have you invested your money? A: yes");
 		pro1.setProject("Swiming team", "We need sponsor", 5000, 540, 65,
-				"bla-bla-bla", "youtube.com", "Q: Have you invested your money? A: yes");
-		proj1.setProject("", "We need sponsor", 1420, 450, 72,
-				"bla-bla-bla", "youtube.com", "Q: Have you invested your money? A: yes");
+				"bla-bla-bla", "youtube.com",
+				"Q: Have you invested your money? A: yes");
+		proj1.setProject("Baseball team", "We need sponsor", 1420, 450, 72,
+				"bla-bla-bla", "youtube.com",
+				"Q: Have you invested your money? A: yes");
 		proj12.setProject("Swiming team", "We need sponsor", 5000, 540, 65,
-				"bla-bla-bla", "youtube.com", "Q: Have you invested your money? A: yes");
-		pro2.setProject("Space Warning", "Discover the univerce", 156540, 125140, 42,
-				"bla-bla-bla", "youtube.com", "Q: Have you invested your money? A: yes");
-		kick.showProjects();
-		kick.showChosenProject();
+				"bla-bla-bla", "youtube.com",
+				"Q: Have you invested your money? A: yes");
+		pro2.setProject("Space Warning", "Discover the univerce", 156540,
+				125140, 42, "bla-bla-bla", "youtube.com",
+				"Q: Have you invested your money? A: yes");
+		kick.buildMenu();
+
 	}
 }
