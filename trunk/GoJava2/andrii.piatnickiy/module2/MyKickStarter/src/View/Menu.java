@@ -6,13 +6,13 @@ import com.gojava.projects.ProjectManager;
 
 public class Menu {
     ProjectManager manager = new ProjectManager();
-    public int currentPosition = 1;
-    public Level1 level1;
-    public Level2 level2;
-    public Level3 level3;
+    private int currentPosition = 1;
+    private Level1 level1;
+    private Level2 level2;
+    private Level3 level3;
     int parrentLevelPositon;
 
-    public ArrayList<Level> levelsList = new ArrayList<>();
+    private ArrayList<Level> levelsList = new ArrayList<>();
 
     public Menu() {
         this.level1 = new Level1(manager, this);
@@ -37,7 +37,7 @@ public class Menu {
 
     }
 
-    public void levelUp(int nubberForNextLevel) {
+    private void levelUp(int nubberForNextLevel) {
         currentPosition--;
         for (Level level : levelsList) {
             System.out.println();
@@ -47,7 +47,7 @@ public class Menu {
         }
     }
 
-    public void levelDown(int nubberForNextLevel) {
+    private void levelDown(int nubberForNextLevel) {
         currentPosition++;
         for (Level level : levelsList) {
             System.out.println();
