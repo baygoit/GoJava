@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 
 
-public class ConsoleWriter {
+public class Printer {
 	
 	public void showCategoryCatalog(CategoryCatalog catalog){
 		ArrayList<Category> list = catalog.getCatalogList();
@@ -14,9 +14,8 @@ public class ConsoleWriter {
 	public void showCategoryName(CategoryCatalog catalog,int num){
 		ArrayList<Category> list = catalog.getCatalogList();
 		System.out.println(list.get(num).getName());
-		
 	}
-	public void showCategoryProjects(Category category){
+	public void showProjects(Category category){
 		ArrayList<Project> Projects = category.getProjectCatalog();
 		for (int i=0;i<Projects.size();i++){
 			showProjectPreviev(category.getProject(i));
@@ -40,4 +39,7 @@ public class ConsoleWriter {
 		System.out.println("Link on demo video: "+param.getDemoLink());
 		System.out.println("FAQ: "+param.getFaqLink());	
 		}
+	public void print (String s){
+		System.out.println(s);
+	}
 }
