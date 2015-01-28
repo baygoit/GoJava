@@ -1,6 +1,5 @@
 package com.gojava.launch;
 
-
 import Quote.Quote;
 import View.Menu;
 
@@ -13,11 +12,12 @@ public class Launch {
         Scan scan = new Scan();
         Quote quote = new Quote();
         Menu menu = new Menu();
+
         quote.displayQuote();
-       
-        menu.level1.displayMySelf(menu.currentPosition);
-        while(true){
-            nubberForNextLevel = scan.inputInt(); 
+
+        menu.initMenu();
+        while (true) {
+            nubberForNextLevel = scan.inputInt();
             menu.nextLevel(nubberForNextLevel);
         }
     }

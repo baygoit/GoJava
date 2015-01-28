@@ -22,7 +22,9 @@ public class Menu {
         levelsList.add(level2);
         levelsList.add(level3);
     }
-
+    public void initMenu(){
+        level1.displayMySelf(currentPosition);
+    }
     // TODO bugs is still
     public void nextLevel(int nubberForNextLevel) {
         if (nubberForNextLevel == 0) {
@@ -30,8 +32,9 @@ public class Menu {
 
         } else {
             levelDown(nubberForNextLevel);
+            parrentLevelPositon = nubberForNextLevel;
         }
-        parrentLevelPositon = nubberForNextLevel;
+
     }
 
     public void levelUp(int nubberForNextLevel) {
