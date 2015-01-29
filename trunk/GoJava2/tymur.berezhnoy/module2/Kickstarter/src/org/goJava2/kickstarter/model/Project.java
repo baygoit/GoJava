@@ -1,6 +1,5 @@
 package org.goJava2.kickstarter.model;
 
-
 public class Project {
 	
 	private final char symbolDollar = 36;

@@ -1,4 +1,5 @@
 package org.goJava2.kickstarter.model;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Scann {
@@ -8,10 +9,10 @@ public class Scann {
          int choise = 0;
          do {
         	 try {
-        		 choise = Integer.valueOf(new Scanner(System.in).nextLine());
+        		 choise = new Scanner(System.in).nextInt();
         		 inputRight = true;
-        	 } catch (NumberFormatException Integer) {
-        		 System.out.println("Wrong input. Only digits!");
+        	 } catch (InputMismatchException e) {
+        		 System.out.print("- Only numbers! Try again\n> ");
         		 inputRight = false;
         	 }
          } while (!inputRight);

@@ -1,6 +1,5 @@
 package org.goJava2.kickstarter.model;
 
-
 public class Category {
 	
 	private String name;
