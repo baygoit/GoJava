@@ -3,13 +3,11 @@ package View;
 import com.gojava.projects.ProjectManager;
 
 public class Level2 implements Level {
-    private Menu menu;
     private ProjectManager manager;
     private int position = 2;
 
-    public Level2(ProjectManager manager, Menu menu) {
+    public Level2(ProjectManager manager) {
         this.manager = manager;
-        this.menu = menu;
     }
 
     public void displayMySelf(int categoryNumber) {

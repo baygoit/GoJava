@@ -11,13 +11,15 @@ public class Menu {
     private Level2 level2;
     private Level3 level3;
     int categoryPosition;
+    
 
     private ArrayList<Level> levelsList = new ArrayList<>();
 
     public Menu() {
-        this.level1 = new Level1(manager, this);
-        this.level2 = new Level2(manager, this);
-        this.level3 = new Level3(manager, this);
+        this.level1 = new Level1(manager);
+        this.level2 = new Level2(manager);
+        this.level3 = new Level3(manager);
+        level3.setMenu(this);
         levelsList.add(level1);
         levelsList.add(level2);
         levelsList.add(level3);
@@ -29,13 +31,12 @@ public class Menu {
         level1.displayMySelf(currentLevelPosition);
     }
 
-    // TODO bugs is still
     public void nextLevel(int nubberForNextLevel) {
         if (nubberForNextLevel == 0) {
             currentLevelPosition--;
-            if(currentLevelPosition == 2){
+            if (currentLevelPosition == 2) {
                 displayCurrentLevel(categoryPosition);
-            }else{
+            } else {
                 displayCurrentLevel(nubberForNextLevel);
             }
         } else {
@@ -45,8 +46,7 @@ public class Menu {
             }
             displayCurrentLevel(nubberForNextLevel);
         }
-        
-        System.out.println("currentLevelPosition = " + currentLevelPosition);
+
     }
 
     private void displayCurrentLevel(int nubberForNextLevel) {

@@ -4,12 +4,15 @@ import com.gojava.projects.ProjectManager;
 
 public class Level3 implements Level {
     private Menu menu;
+    public void setMenu(Menu menu) {
+        this.menu = menu;
+    }
+
     private ProjectManager manager;
     private int position = 3;
 
-    public Level3(ProjectManager manager, Menu menu) {
+    public Level3(ProjectManager manager) {
         this.manager = manager;
-        this.menu = menu;
     }
 
     @Override
