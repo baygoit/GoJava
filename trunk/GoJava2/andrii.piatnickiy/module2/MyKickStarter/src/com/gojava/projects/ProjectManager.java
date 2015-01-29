@@ -14,32 +14,32 @@ public class ProjectManager {
     
     private void initCategories()
     {
-        categoryStorage.addToCategoryStorageList("Sport", 1);
-        categoryStorage.addToCategoryStorageList("Car", 2);
-        categoryStorage.addToCategoryStorageList("Devices", 3);
+        categoryStorage.add("Sport", 1);
+        categoryStorage.add("Car", 2);
+        categoryStorage.add("Devices", 3);
     }
     
     private void initProjects(){
-        projectStorage.addToProjectList("Bicycle", "Bicycle description", 10000, 100, 10, "History", "Link on video", "Questions and answers", 1);
-        projectStorage.addToProjectList("Snowboard", "Snowboard description", 2000, 200, 20, "History", "Link on video", "Questions and answers", 1);
-        projectStorage.addToProjectList("BMW X3", "BMW X3 description", 30000, 3000, 300, "History", "Link on video", "Questions and answers", 2);
-        projectStorage.addToProjectList("Audi Q5", "Audi Q5 description", 40000, 400, 40, "History", "Link on video", "Questions and answers", 2);
-        projectStorage.addToProjectList("Laptop", "Laptop description", 500, 50, 50, "History", "Link on video", "Questions and answers", 3);
-        projectStorage.addToProjectList("Mobile phone", "Mobile phone description", 60, 60, 6, "History", "Link on video", "Questions and answers", 3);
+        projectStorage.add("Bicycle", "Bicycle description", 10000, 100, 10, "History", "Link on video", "Questions and answers", 1);
+        projectStorage.add("Snowboard", "Snowboard description", 2000, 200, 20, "History", "Link on video", "Questions and answers", 1);
+        projectStorage.add("BMW X3", "BMW X3 description", 30000, 3000, 300, "History", "Link on video", "Questions and answers", 2);
+        projectStorage.add("Audi Q5", "Audi Q5 description", 40000, 400, 40, "History", "Link on video", "Questions and answers", 2);
+        projectStorage.add("Laptop", "Laptop description", 500, 50, 50, "History", "Link on video", "Questions and answers", 3);
+        projectStorage.add("Mobile phone", "Mobile phone description", 60, 60, 6, "History", "Link on video", "Questions and answers", 3);
     }
     
 
     public void displayCategories() {
-        categoryStorage.dispalyCategoryStorageList();
+        categoryStorage.display();
     }
 
 
     public void displayProjects(int categoryNumber) {
-        projectStorage.dispalyProjectStorageList(categoryNumber);
+        projectStorage.displayAll(categoryNumber);
     }
 
     public void displaySpecificProject(int categoryNumber, int projectNumber) {
-        projectStorage.displaySpecificProject(categoryNumber, projectNumber);
+        projectStorage.displaySpecific(categoryNumber, projectNumber);
     }
 
 }

@@ -5,11 +5,11 @@ import java.util.ArrayList;
 public class CategoryStorage {
     private ArrayList<Category> categoryStorageList = new ArrayList<Category>();
 
-    public void addToCategoryStorageList(String name, int categoryId) {
+    public void add(String name, int categoryId) {
         categoryStorageList.add(new Category(name, categoryId));
     }
 
-    public void dispalyCategoryStorageList() {
+    public void display() {
         for (Category projectCategory : categoryStorageList) {
             System.out.println(projectCategory.toString());
         }
