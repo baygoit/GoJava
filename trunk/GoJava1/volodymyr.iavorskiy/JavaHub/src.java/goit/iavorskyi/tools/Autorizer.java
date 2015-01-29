@@ -1,4 +1,4 @@
-package goit.iavorskyi;
+package goit.iavorskyi.tools;
 
 public class Autorizer {
 // 123
