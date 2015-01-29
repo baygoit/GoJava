@@ -64,8 +64,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="8" language="java" name="org.kudryavtsev.kickstarter.CategoryTest" project="Kickstarter" 
-    file="/Kickstarter/src/org/kudryavtsev/kickstarter/CategoryTest.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="8" language="java" name="org.kudryavtsev.kickstarter.test.CategoryTest" project="Kickstarter" 
+    file="/Kickstarter/src/org/kudryavtsev/kickstarter/test/CategoryTest.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="797" y="559"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      

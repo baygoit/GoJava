@@ -1,8 +1,9 @@
-package org.kudryavtsev.kickstarter;
+package org.kudryavtsev.kickstarter.test;
 
 import static org.junit.Assert.*;
 
 import org.junit.Test;
+import org.kudryavtsev.kickstarter.Category;
 
 public class CategoryTest {
 
@@ -25,4 +26,30 @@ public class CategoryTest {
         
         assertEquals(expected, actual);
     }
+    
+    @Test
+    public void testCategory() {
+        fail("Not yet implemented");
+    }
+
+    @Test
+    public void testCategoryStringString() {
+        fail("Not yet implemented");
+    }
+
+    @Test
+    public void testToString() {
+        fail("Not yet implemented");
+    }
+
+    @Test
+    public void testGetProjectsList() {
+        fail("Not yet implemented");
+    }
+
+    @Test
+    public void testSetProjectsList() {
+        fail("Not yet implemented");
+    }
+
 }
