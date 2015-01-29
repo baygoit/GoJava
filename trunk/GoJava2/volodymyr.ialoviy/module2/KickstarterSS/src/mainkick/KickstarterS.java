@@ -8,28 +8,27 @@ public class KickstarterS {
 			Category cat = new Category();
 			Project project = new Project();
 			Output out = new OutputConsole();
-			Inputs choiceCN = new InputsConsole();
+			Check check = new Check();
 			int chosenCategory;
 			int chosenProject;
 			int choiceToProject;
 			
 			cat.showAllCatecories();
 			out.print("Choice Category Number: ");
-			chosenCategory = choiceCN.enter();
-			Check check = new Check();
+			chosenCategory = check.checkNumber();
 			
 			out.print("Your chosen category: " + cat.showCategoryName(chosenCategory) + ", containing the following projects: ");
 			
 			while (true){
 				cat.showAllProjectInCategory(chosenCategory);
 				out.print("Choice Project Number or 0 for exit to Category: ");
-				chosenProject = choiceCN.enter();
+				chosenProject = check.checkNumber();
 				if (chosenProject == 0){
 					break;
 				}
 				project.showProject(chosenProject);
 				out.print("Choice 0 for exit to Project: ");
-				choiceToProject = choiceCN.enter();
+				choiceToProject = check.checkNumber();
 				if (choiceToProject == 0){
 					continue;
 				}
