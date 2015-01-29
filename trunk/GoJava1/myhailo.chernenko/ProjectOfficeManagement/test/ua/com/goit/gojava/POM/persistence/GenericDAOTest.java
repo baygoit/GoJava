@@ -8,47 +8,31 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import ua.com.goit.gojava.POM.dataModel.CostItem;
 
-@SuppressWarnings("unused")
-public class GenericDAOTest <T extends GenericDAO<?> > {
+public abstract class GenericDAOTest<T extends DataObject> {
 
-	private String className = "";
-	private Class<T> classT;
-	
 	private DataManager dataManager;
-	private T genericDAO; 
+	private GenericDAO<T> genericDAO;
+	private Class<T> classT;
 	
 	public GenericDAOTest(Class<T> classT) {
 		
 		this.classT = classT;
-		className = classT.getName().replace("DAO", "");
 				
 	}
-	
-	public T getNewT() {
-		
-		try {
-			return classT.newInstance();
-		} catch (InstantiationException | IllegalAccessException e) {
-			e.printStackTrace();
-		}
-		return genericDAO;
-	} 
 	
 	@Before
 	public void setUp() throws Exception {
 		
 		dataManager = new DataManager();
-		for (int i = dataManager.getObjectList(className).size() - 1; i >= 0 ;i--) {
-			DataObject obj = dataManager.getObjectList(className).get(i);
-			dataManager.deleteObject(obj, className);
+		for (int i = dataManager.getObjectList(classT.getName()).size() - 1; i >= 0 ;i--) {
+			DataObject obj = dataManager.getObjectList(classT.getName()).get(i);
+			dataManager.deleteObject(obj, classT.getName());
 		}
 
-		genericDAO = getNewT();
+		genericDAO = new GenericDAO<T>(classT, dataManager);
 		
 	}
-	
 
 	@After
 	public void tearDown() throws Exception {
@@ -57,60 +41,73 @@ public class GenericDAOTest <T extends GenericDAO<?> > {
 	@Test
 	public void testCreate() {
 
-		//CostItem costItem = genericDAO.create();
-		//assertTrue(dataManager.getObjectList(className).contains(costItem));
+		T genericObj = genericDAO.create();
+		assertTrue(dataManager.getObjectList(classT.getName()).contains(genericObj));
 		
 	}
 
 	@Test
 	public void testGetByName() {
-		//fail("Not yet implemented");
+
+		T genericObj = genericDAO.getByName("name");
+		
+		assertEquals(null,genericObj);
+		
+		genericObj = genericDAO.create();
+		genericObj.setName("name");
+		genericDAO.update(genericObj);
+		T genericObj2 = genericDAO.getByName("name");
+				
+		assertEquals(genericObj,genericObj2);
+		
+		genericObj = genericDAO.getByName("name2");
+		
+		assertEquals(null,genericObj);
 	}
 
 	@Test
 	public void testUpdate() {
+
+		T genericObj = genericDAO.create();
+		genericObj.setName("name");
+		genericDAO.update(genericObj);
 		
-		/*CostItem costItem = genericDAO.create();
-		costItem.setName("name");
-		genericDAO.update(costItem);
+		assertEquals(dataManager.getObjectList(classT.getName()).size(),1);
 		
-		assertEquals(dataManager.getObjectList(className).size(),1);
-		
-		assertEquals(genericDAO.getList().get(0).getName(),costItem.getName());
-		*/
+		assertEquals(genericDAO.getList().get(0).getName(),genericObj.getName());
 	}
 
 	@Test
-	public void testDeleteObj() {
+	public void testDelete() {
 
-		/*CostItem costItem = genericDAO.create();
-		genericDAO.update(costItem);
-		CostItem costItem2 = genericDAO.create();
-		genericDAO.update(costItem2);
+		T genericObj = genericDAO.create();
+		genericDAO.update(genericObj);
+		T genericObj2 = genericDAO.create();
+		genericDAO.update(genericObj2);
 		
-		List<DataObject> objectList = dataManager.getObjectList(className);
+		List<DataObject> objectList = dataManager.getObjectList(classT.getName());
 		
 		assertEquals(objectList.size(),2);
-		assertTrue(objectList.contains(costItem));
-		assertTrue(objectList.contains(costItem2));
+		assertTrue(objectList.contains(genericObj));
+		assertTrue(objectList.contains(genericObj2));
 		
-		genericDAO.delete(costItem2);
+		genericDAO.delete(genericObj2);
 		
-		assertFalse(objectList.contains(costItem2));
-		*/
+		assertFalse(objectList.contains(genericObj2));
+		
 	}
 
 	@Test
 	public void testGetList() {
 
-		/*CostItem costItem = genericDAO.create();
-		costItem.setName("name");
-		genericDAO.update(costItem);
+		T genericObj = genericDAO.create();
+		genericObj.setName("name");
+		genericDAO.update(genericObj);
 		
 		assertEquals(genericDAO.getList().size(),1);
 		
-		assertEquals(genericDAO.getList().get(0).getName(),costItem.getName());
-		*/
+		assertEquals(genericDAO.getList().get(0).getName(),genericObj.getName());
+		
 	}
 
 }

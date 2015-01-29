@@ -1,18 +1,22 @@
 package ua.com.goit.gojava.POM.persistence;
 
-import static org.junit.Assert.*;
+/*import static org.junit.Assert.*;
 
 import java.util.List;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Test;
+import org.junit.Test;*/
 
 import ua.com.goit.gojava.POM.dataModel.Project;
 
-public class ProjectDAOTest {
+public class ProjectDAOTest extends GenericDAOTest<Project> {
 
-	private static final String CLASS_NAME = "Project";
+	public ProjectDAOTest() {
+		super(Project.class);
+	}
+	
+	/*private static final String CLASS_NAME = "Project";
 	private DataManager dataManager;
 	private ProjectDAO projectDAO; 
 	
@@ -96,5 +100,5 @@ public class ProjectDAOTest {
 		assertEquals(projectDAO.getList().get(0).getName(),project.getName());
 		
 	}
-
+	*/
 }

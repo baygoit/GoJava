@@ -6,5 +6,7 @@ public interface DataObject {
 
 	//public String getFieldsForUpdatePresentation();
 	//public String update(String [] fieldsArray, DataManager dataManager);
+	public String getName();
+	public void setName(String name);
 	
 }

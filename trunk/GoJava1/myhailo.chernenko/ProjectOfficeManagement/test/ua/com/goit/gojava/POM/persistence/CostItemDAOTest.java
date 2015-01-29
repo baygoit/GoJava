@@ -1,18 +1,22 @@
 package ua.com.goit.gojava.POM.persistence;
 
-import static org.junit.Assert.*;
+/*import static org.junit.Assert.*;
 
 import java.util.List;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Test;
+import org.junit.Test;*/
 
 import ua.com.goit.gojava.POM.dataModel.CostItem;
 
-public class CostItemDAOTest {
+public class CostItemDAOTest extends GenericDAOTest<CostItem> {
 
-	private static final String CLASS_NAME = "CostItem";
+	public CostItemDAOTest() {
+		super(CostItem.class);
+	}
+
+	/*private static final String CLASS_NAME = "CostItem";
 	private DataManager dataManager;
 	private CostItemDAO costItemDAO; 
 	
@@ -45,12 +49,20 @@ public class CostItemDAOTest {
 	@Test
 	public void testGetByName() {
 
-		CostItem costItem = costItemDAO.create();
+		CostItem costItem = costItemDAO.getByName("name");
+		
+		assertEquals(null,costItem);
+		
+		costItem = costItemDAO.create();
 		costItem.setName("name");
 		costItemDAO.update(costItem);
 		CostItem costItem2 = costItemDAO.getByName("name");
 				
 		assertEquals(costItem,costItem2);
+		
+		costItem = costItemDAO.getByName("name2");
+		
+		assertEquals(null,costItem);
 		
 	}
 
@@ -98,6 +110,6 @@ public class CostItemDAOTest {
 		
 		assertEquals(costItemDAO.getList().get(0).getName(),costItem.getName());
 		
-	}
+	} */
 
 }

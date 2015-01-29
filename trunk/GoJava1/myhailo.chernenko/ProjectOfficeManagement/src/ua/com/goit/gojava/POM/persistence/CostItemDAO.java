@@ -4,7 +4,7 @@ import java.util.List;
 
 import ua.com.goit.gojava.POM.dataModel.*;
 
-public class CostItemDAO implements GenericDAO<CostItem> {
+public class CostItemDAO {//implements GenericDAO<CostItem> {
 	
 	private static final String CLASS_NAME = "CostItem";
 	DAOFactory dataManager;
@@ -15,7 +15,6 @@ public class CostItemDAO implements GenericDAO<CostItem> {
 		
 	}
 
-	@Override
 	public CostItem create() {
 
 		CostItem newCostItem = new CostItem();
@@ -24,7 +23,6 @@ public class CostItemDAO implements GenericDAO<CostItem> {
 
 	}
 
-	@Override
 	public CostItem getByName(String name) {
 
 		CostItem findedCostItem = null;
@@ -38,21 +36,18 @@ public class CostItemDAO implements GenericDAO<CostItem> {
 		return findedCostItem;
 	}
 
-	@Override
 	public void update(CostItem obj) {
 		
 		dataManager.saveObject(obj, CLASS_NAME);
 		
 	}
 
-	@Override
 	public void delete(CostItem obj) {
 
 		dataManager.deleteObject(obj, CLASS_NAME);
 		
 	}
 
-	@Override
 	public List<CostItem> getList() {
 		
 		List<DataObject> objectList = dataManager.getObjectList(CLASS_NAME);
