@@ -33,21 +33,24 @@ public class Menu {
     public void nextLevel(int nubberForNextLevel) {
         if (nubberForNextLevel == 0) {
             currentLevelPosition--;
+            if(currentLevelPosition == 2){
+                displayCurrentLevel(categoryPosition);
+            }else{
+                displayCurrentLevel(nubberForNextLevel);
+            }
         } else {
             currentLevelPosition++;
             if (currentLevelPosition == 2) {
                 categoryPosition = nubberForNextLevel;
-                System.out.println("category = " + categoryPosition);
             }
-         
+            displayCurrentLevel(nubberForNextLevel);
         }
-        currentLevel(nubberForNextLevel);
+        
         System.out.println("currentLevelPosition = " + currentLevelPosition);
     }
 
-    private void currentLevel(int nubberForNextLevel) {
+    private void displayCurrentLevel(int nubberForNextLevel) {
         for (Level level : levelsList) {
-            System.out.println();
             if (currentLevelPosition == level.getPosition()) {
                 level.displayMySelf(nubberForNextLevel);
             }
