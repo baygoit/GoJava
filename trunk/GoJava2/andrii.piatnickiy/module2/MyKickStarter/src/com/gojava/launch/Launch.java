@@ -8,17 +8,13 @@ import com.gojava.input.Scan;
 public class Launch {
 
     public static void main(String[] args) {
-        int nubberForNextLevel;
         Scan scan = new Scan();
         Quote quote = new Quote();
-        Menu menu = new Menu();
-
         quote.displayQuote();
 
-        menu.initMenu();
+        Menu menu = new Menu();
         while (true) {
-            nubberForNextLevel = scan.inputInt();
-            menu.nextLevel(nubberForNextLevel);
+            menu.nextLevel(scan.inputInt());
         }
     }
 }
