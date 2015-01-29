@@ -14,7 +14,7 @@ public class Level3 implements Level {
 
     @Override
     public void displayMySelf(int nubberForNextLevel) {
-        manager.displaySpecificProject(menu.parrentLevelPositon,
+        manager.displaySpecificProject(menu.categoryPosition,
                 nubberForNextLevel);
     }
 

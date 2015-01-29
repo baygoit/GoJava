@@ -6,11 +6,11 @@ import com.gojava.projects.ProjectManager;
 
 public class Menu {
     ProjectManager manager = new ProjectManager();
-    private int currentPosition;
+    private int currentLevelPosition;
     private Level1 level1;
     private Level2 level2;
     private Level3 level3;
-    int parrentLevelPositon;
+    int categoryPosition;
 
     private ArrayList<Level> levelsList = new ArrayList<>();
 
@@ -25,30 +25,30 @@ public class Menu {
     }
 
     public void initMenu() {
-        currentPosition = 1;
-        level1.displayMySelf(currentPosition);
+        currentLevelPosition = 1;
+        level1.displayMySelf(currentLevelPosition);
     }
 
     // TODO bugs is still
     public void nextLevel(int nubberForNextLevel) {
         if (nubberForNextLevel == 0) {
-            currentPosition--;
-            currentLevel(nubberForNextLevel);
+            currentLevelPosition--;
         } else {
-            currentPosition++;
-            currentLevel(nubberForNextLevel);
-            if (currentPosition == 2) {
-                parrentLevelPositon = nubberForNextLevel;
+            currentLevelPosition++;
+            if (currentLevelPosition == 2) {
+                categoryPosition = nubberForNextLevel;
+                System.out.println("category = " + categoryPosition);
             }
-
+         
         }
-
+        currentLevel(nubberForNextLevel);
+        System.out.println("currentLevelPosition = " + currentLevelPosition);
     }
 
     private void currentLevel(int nubberForNextLevel) {
         for (Level level : levelsList) {
             System.out.println();
-            if (currentPosition == level.getPosition()) {
+            if (currentLevelPosition == level.getPosition()) {
                 level.displayMySelf(nubberForNextLevel);
             }
         }
