@@ -4,8 +4,6 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import ua.com.goit.gojava1.lslayer.hackit2.exceptions.SkillUninitilizedException;
-
 public class UserAccountTest {
     @Test
     public void testSmoke() {
@@ -29,7 +27,7 @@ public class UserAccountTest {
         assertFalse(account.checkLogin("myWronglogin", "myWrongpassword"));
     }
     @Test
-    public void testNewbornCharacterSkillList() throws SkillUninitilizedException {
+    public void testNewbornCharacterSkillList() {
         UserAccount account = UserAccount.createAccount("mylogin", "mypassword");
         UserAccount.createCharacterInAccount(account, "MegaPihar2000");
         Actor actor = account.getActor();
