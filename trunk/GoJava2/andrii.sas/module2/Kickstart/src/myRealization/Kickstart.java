@@ -2,6 +2,7 @@ package myRealization;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class Kickstart {
 	private List<Category> categories = new ArrayList<>();
@@ -21,11 +22,6 @@ public class Kickstart {
 
 	public void buildList(Category category) {
 		categories.add(category);
-	}
-
-	public void printQuote() {
-		Quote quote = new Quote();
-		output.println(quote.getQuote());
 	}
 
 	public void showList() {
@@ -106,6 +102,7 @@ public class Kickstart {
 
 	public static void main(String[] args) {
 		Kickstart kick = new Kickstart(new ConsoleOutput(), new ConsoleInput());
+		Quote quote = new Quote(new ConsoleOutput(), new Random());
 		Category sport = new Sport();
 		Category science = new Science();
 		Category music = new Music();
@@ -119,7 +116,7 @@ public class Kickstart {
 		kick.addProject(pro2);
 		kick.addProject(proj1);
 		kick.addProject(proj12);
-		kick.printQuote();
+		quote.printQuote();
 		kick.buildList(sport);
 		kick.buildList(science);
 		kick.buildList(music);
