@@ -30,7 +30,7 @@ public class MedicalSystem {
 		}
 		return true;
 	}
-    
+   
     static void addSpecialisation (String specializationName){
     	if (isSpecialisationUnique(specializationName)){
     		specializations.add(new Specialization(specializationName));
