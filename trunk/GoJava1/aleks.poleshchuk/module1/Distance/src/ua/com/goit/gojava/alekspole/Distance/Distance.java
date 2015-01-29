@@ -4,51 +4,59 @@ import java.util.Scanner;
 import java.util.Arrays;
 
 public class Distance {
+	
 	public static void main (String[] args){
 		Scanner scan = new Scanner (System.in);
-		System.out.println("Input array length:");		
-		int arrayLength = scan.nextInt();
-		int[] array = getArray(arrayLength);
-		calcArray (array);
+		
+		System.out.println("Input array elements with spaces:");	
+		
+		String arrayString = scan.toString();
+		
+		int [] arrayInt = stringToIntConv (arrayString);
+		
+		findMinElements (arrayInt);
+		
 		scan.close();
 		
 	}
 
-	public static int[] getArray(int arrayLength){
-			Scanner scan = new Scanner (System.in);
-			int [] array = new int [arrayLength];
-			
-			System.out.print("Input array elements:");
-			
-			for (int i = 0; i < array.length; i++){
-				array[i] = scan.nextInt();
-			}
-			
-			for (int i = 0; i < array.length-1; i++) {
-				System.out.print (array[i] + ", ");
-				}
-			for (int i = array.length-1; i <= array.length-1; i++) {
-				System.out.print (array[i]);
-				}
-			System.out.println();	
-			scan.close();
-	return array;	
-	}	
 	
-	public static void calcArray (int[] array){
-			int[] temp = array.clone();
+	public static int[] stringToIntConv (String arrayString){
+		
+		String delims = "[ ] + ";
+		String [] arrayStr = arrayString.split(delims);	
+		int[] arrayInt = new int [arrayStr.length];
+		
+		for (int i = 0; i < arrayStr.length; i++){
+			try {
+				arrayInt[i] = Integer.parseInt(arrayStr[i]);
+			} catch (NumberFormatException nfe) {};
 			
-			Arrays.sort(array);
+		}
+		
+		return arrayInt;
+	}
+	
+	public static void findMinElements (int[] arrayInt){
+			int[] temp = arrayInt.clone();
 			
-			int firstMin = temp[0];
-			int secondMin = temp[1];
+			Arrays.sort(arrayInt);
+			
+			for (int i = 0; i < temp.length; i++){
+				System.out.print(temp[i] + " ");
+			}
+			System.out.println();
+			
+			int firstMin = arrayInt[0];
+			int secondMin = arrayInt[1];
 			int min1Pos = 0;
 			int min2Pos = 0;
-			for (int i = 0; i<array.length; i++){
-				if (array[i] == firstMin){
+			
+			for (int i = 0; i<arrayInt.length; i++){
+				if (temp[i] == firstMin){
 				min1Pos = i;	
 				}
-				if (array[i] == secondMin){
+				if (temp[i] == secondMin){
 					min2Pos = i;	
 				}
 			}
