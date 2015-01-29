@@ -24,11 +24,11 @@ public class ScanAction extends AbstractAction implements Action {
         if (target == null) {
             return new ActionResult(false, "You scanned, but recevied no result. Try scan something!");
         }
-        if (tool.getSkillBonus(this.getCommand()) == 0) {
+        if (tool.getPurposeValue(this.getCommand()) == 0) {
             return new ActionResult(false, "You tried to scan with " + tool.getName() + " but it can't do it. Use proper tool");
         }
-        int bonus = actor.getSkillValue(this.getCommand()) + tool.getSkillBonus(this.getCommand());
-        int antibonus = target.getSkillBonus(this.getCommand());
+        int bonus = actor.getSkillValue(this.getCommand()) + tool.getPurposeValue(this.getCommand());
+        int antibonus = target.getPurposeValue(this.getCommand());
         boolean succeed = bonus - antibonus > 0;
         return new ActionResult(succeed, 
                 succeed ? "You successfully scanned "+ target.getName() +". Got new information" :

@@ -4,12 +4,10 @@ public class HumanControlledCharacter extends AbstractCharacter implements Human
 
     public HumanControlledCharacter(String name) {
         super(name);
-        // TODO Auto-generated constructor stub
     }
 
     @Override
     public String getName() {
-        // TODO Auto-generated method stub
         return super.name;
     }
 

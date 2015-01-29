@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import ua.com.goit.gojava1.lslayer.hackit2.dto.ActionResult;
 import ua.com.goit.gojava1.lslayer.hackit2.gear.Gear;
-import ua.com.goit.gojava1.lslayer.hackit2.gear.ScanDevice;
+import ua.com.goit.gojava1.lslayer.hackit2.gear.hardware.Devices.ScanDevice;
 
 public class ScanActionTest {
     @Test

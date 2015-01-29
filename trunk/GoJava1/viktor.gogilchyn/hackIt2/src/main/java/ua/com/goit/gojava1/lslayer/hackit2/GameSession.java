@@ -26,7 +26,6 @@ public final class GameSession { //Singleton. There is only one game per app. Mu
             result += eol + element.toString();
         }
         return result;
-        
     }
 
 }

@@ -9,7 +9,6 @@ public class SkillUninitilizedException extends Exception {
 
     public SkillUninitilizedException(String message) {
         super(message);
-        // TODO Auto-generated constructor stub
     }
 
 

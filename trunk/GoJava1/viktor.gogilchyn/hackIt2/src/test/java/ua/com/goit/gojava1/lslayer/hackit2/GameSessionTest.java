@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import ua.com.goit.gojava1.lslayer.hackit2.gear.ScanDevice;
+import ua.com.goit.gojava1.lslayer.hackit2.gear.hardware.Devices.ScanDevice;
 
 public class GameSessionTest {
 
