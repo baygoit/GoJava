@@ -18,11 +18,8 @@ public class ProjectStorage {
         int i = 1;
         for (Project project : this.projectStorageList) {
             if (project.getCategoryId() == categoryNumber) {
-                System.out.println(i + ") Project Name: " + project.getName());
-                System.out.println("Description: " + project.getDescription());
-                System.out.println("Need Sum: " + project.getNeedSum());
-                System.out.println("Current Sum: " + project.getCurrentSum());
-                System.out.println("Days Left: " + project.getDaysLeft());
+                System.out.print(i + ") ");
+                previewProject(project);
                 System.out.println();
                 i++;
             }
@@ -34,23 +31,27 @@ public class ProjectStorage {
         for (Project project : projectStorageList) {
             if (project.getCategoryId() == categoryNumber) {
                 if (i == projectNumber) {
-                    System.out.println("Project Name: " + project.getName());
-                    System.out.println("Description: "
-                            + project.getDescription());
-                    System.out.println("Need Sum: " + project.getNeedSum());
-                    System.out.println("Current Sum: "
-                            + project.getCurrentSum());
-                    System.out.println("Days Left: " + project.getDaysLeft());
-                    System.out.println("ProjectHistory: "
-                            + project.getProjectHistory());
-                    System.out.println("LinkOnvideo: "
-                            + project.getLinkOnvideo());
-                    System.out.println("Questions and answers: "
-                            + project.getQuestionsAndAnswers());
-                    System.out.println();
+                    displayAllProjectFields(project);
                 }
                 i++;
             }
         }
+    }
+
+    private void previewProject(Project project) {
+        System.out.println("Project Name: " + project.getName());
+        System.out.println("Description: " + project.getDescription());
+        System.out.println("Need Sum: " + project.getNeedSum());
+        System.out.println("Current Sum: " + project.getCurrentSum());
+        System.out.println("Days Left: " + project.getDaysLeft());
+    }
+
+    private void displayAllProjectFields(Project project) {
+        previewProject(project);
+        System.out.println("ProjectHistory: " + project.getProjectHistory());
+        System.out.println("LinkOnvideo: " + project.getLinkOnvideo());
+        System.out.println("Questions and answers: "
+                + project.getQuestionsAndAnswers());
+        System.out.println();
     }
 }
