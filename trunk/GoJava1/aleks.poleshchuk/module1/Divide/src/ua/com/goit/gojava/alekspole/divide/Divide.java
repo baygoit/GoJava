@@ -2,6 +2,7 @@ package ua.com.goit.gojava.alekspole.divide;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Divide {
 
@@ -131,35 +132,73 @@ public class Divide {
 		 
 	 }
 	 
+	 
+	 public static int[] stringToIntConv (String arrayString){
+			
+			String delims = "/";
+			int pos = arrayString.indexOf("/");
+			Search:
+			if (pos == -1) {
+				System.out.println("/ not found");
+				break Search;
+			}
+			
+			String [] arrayStr = arrayString.split(delims);	
+			int[] arrayInt = new int [arrayStr.length];
+			
+			for (int i = 0; i < arrayStr.length; i++){
+				try {
+					arrayInt[i] = Integer.parseInt(arrayStr[i]);
+				} catch (NumberFormatException nfe) {};
+				
+			}
+			
+			return arrayInt;
+		}
 	
 	
 	public static void main (String[] args){
 		
-		if (args.length == 0){
-			System.out.println("Input something");
-			return;
-		}
-		int pos = args[0].indexOf("/");
+		System.out.println("Input your equasion in following format: 10/3 ");
+		
+		Scanner scan = new Scanner(System.in);
+		
+		String arrayString = scan.nextLine();
+		
+		scan.close();
+		
+		String delims = "/";
+		
+		int pos = arrayString.indexOf("/");
+		
 		if (pos == -1) {
 			System.out.println("/ not found");
 			return;
 		}
 		
-		int divisor;
-		int dividend;
+		String [] arrayStr = arrayString.split(delims);	
 		
-		try {
-			dividend = Integer.parseInt(args[0].substring(0, pos));
-			divisor = Integer.parseInt(args[0].substring(pos+1, args[0].length()));
-		} catch (NumberFormatException e) {
-			throw new NumberFormatException("Cannot convert numbers to int!");
+		int[] arrayInt = new int [arrayStr.length];
+		
+		for (int i = 0; i < arrayStr.length; i++){
+			try {
+				arrayInt[i] = Integer.parseInt(arrayStr[i]);
+			} catch (NumberFormatException nfe) {};
+			
 		}
+		
+		if (arrayInt.length == 0){
+			System.out.println("Input something");
+			return;
+		}
+		
+		int dividend = arrayInt[0];
+		int divisor = arrayInt[1];
 		
 		if (divisor == 0) {
 			System.out.println ("Can't divide with 0");
 			return;
 		}
-		
 		
 		int[] dividendAsArray = dividendToArray(dividend);
 		List<String> resultList = new ArrayList<String>();
