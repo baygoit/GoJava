@@ -17,27 +17,28 @@ public class Check {
 				breakCounter++;
 				continue;
 			}
-			choiceNumber = Integer.valueOf(chosen);
 			if (!rangeOfNumbers(choiceNumber, 1, 3)){
 				out.print("This number does not exist, please try again");
 				breakCounter++;
 				continue;
 			}
+			break;
 		}
 		if (breakCounter == 3){
 			out.print("You have used three attempts, try ten minutes");
-			bannedFor10Minutes();
+			choiceNumber = bannedFor10Minutes();
 		}
 		return choiceNumber;
 	}
 	
-	private void bannedFor10Minutes() {
-		// TODO Auto-generated method stub
-		
+	private int bannedFor10Minutes() {
+		// TODO
+		int choiceNumber = 777;
+		return choiceNumber;
 	}
 
 	private boolean isNumber(String string){  
-        return Pattern.compile("^[0-9]{1,5}$").matcher(string).matches();  
+        return Pattern.compile("^[0-9]{1,3}$").matcher(string).matches();  
     }
 	
 	private boolean rangeOfNumbers(int number, int lower, int top){

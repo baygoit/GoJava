@@ -3,7 +3,7 @@ import java.io.IOException;
 
 
 public class KickstarterS {
-	private static void toCategory() throws IOException{
+	private static void toCategory() throws IOException, InterruptedException{
 		while (true){
 			Category cat = new Category();
 			Project project = new Project();
@@ -16,7 +16,14 @@ public class KickstarterS {
 			cat.showAllCatecories();
 			out.print("Choice Category Number: ");
 			chosenCategory = check.checkNumber();
-			
+			out.print("" + chosenCategory);
+			if (chosenCategory == 777){
+				
+				Thread.sleep(10000);
+				
+				continue;
+			}
+			out.print("" + chosenCategory);
 			out.print("Your chosen category: " + cat.showCategoryName(chosenCategory) + ", containing the following projects: ");
 			
 			while (true){
@@ -36,7 +43,7 @@ public class KickstarterS {
 		}
 	}
 	
-	public static void main(String[] args) throws IOException{
+	public static void main(String[] args) throws IOException, InterruptedException{
 		Quotes quote = new Quotes();
 		Output out = new OutputConsole();
 		out.print(quote.getQuote());
