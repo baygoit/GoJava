@@ -32,6 +32,7 @@ public class ProjectStorage {
             if (project.getCategoryId() == categoryNumber) {
                 if (i == projectNumber) {
                     displayAllProjectFields(project);
+                    System.out.println();
                 }
                 i++;
             }
@@ -52,6 +53,5 @@ public class ProjectStorage {
         System.out.println("LinkOnvideo: " + project.getLinkOnvideo());
         System.out.println("Questions and answers: "
                 + project.getQuestionsAndAnswers());
-        System.out.println();
     }
 }
