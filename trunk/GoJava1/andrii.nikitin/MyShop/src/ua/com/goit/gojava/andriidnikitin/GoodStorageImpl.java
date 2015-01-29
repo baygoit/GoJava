@@ -35,17 +35,16 @@ public class GoodStorageImpl implements GoodStorage {
 		this.goodList = goodList;
 		return this;
 	}
-
+	
+	protected List<Good> getGoodList() {
+		return goodList != null ? goodList : new ArrayList<Good>();		
+	}	
+	
 	@Override
 	public List<Category> getCategoryList() {
 		return categoryList != null ? categoryList : new ArrayList<Category>();
 	}
 	
-	@Override
-	public List<Good> getGoodList() {
-		return goodList != null ? goodList : new ArrayList<Good>();		
-	}	
-
 	@Override
 	public List<Good> getGoodList(Category category) {
 		final List<Good> result = new ArrayList<Good>();
@@ -91,7 +90,7 @@ public class GoodStorageImpl implements GoodStorage {
 	
 	
 	@Override
-	public void addCategory (Category category) throws IllegalArgumentException {
+	public void addCategory (Category category) {
 		if (category == null) {
 			throw new IllegalArgumentException("Invalid argument: added category is null");
 		}		
@@ -107,7 +106,7 @@ public class GoodStorageImpl implements GoodStorage {
 	}
 
 	@Override
-	public void addGood(Good good)  throws IllegalArgumentException {
+	public void addGood(Good good) {
 		if (good == null) {
 		throw new IllegalArgumentException("Invalid argument: added good is null");
 		}
