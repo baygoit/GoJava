@@ -11,7 +11,6 @@ public class Menu {
     private Level2 level2;
     private Level3 level3;
     int categoryPosition;
-    
 
     private ArrayList<Level> levelsList = new ArrayList<>();
 
