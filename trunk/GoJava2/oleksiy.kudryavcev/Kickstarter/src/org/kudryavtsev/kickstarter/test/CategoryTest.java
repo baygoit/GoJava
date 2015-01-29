@@ -2,54 +2,43 @@ package org.kudryavtsev.kickstarter.test;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Test;
 import org.kudryavtsev.kickstarter.Category;
+import org.kudryavtsev.kickstarter.Project;
 
 public class CategoryTest {
 
     @Test
     public void shouldBeCertainString_whenNewCertainCategory() {
         String expected = "Movies - Movies category";
-        String actual = "";
         Category category = new Category("Movies", "Movies category");
-        actual = category.toString();
-        
-        assertEquals(expected, actual);
+        categoryCheck(expected, category);
     }
-    
+
     @Test
     public void shouldBeDefault_whenNewDefaultnCategory() {
         String expected = "Other - For other projects";
-        String actual = "";
         Category category = new Category();
+        categoryCheck(expected, category);
+    }
+
+    private void categoryCheck(String expected, Category category) {
+        String actual;
         actual = category.toString();
-        
         assertEquals(expected, actual);
     }
-    
-    @Test
-    public void testCategory() {
-        fail("Not yet implemented");
-    }
 
     @Test
-    public void testCategoryStringString() {
-        fail("Not yet implemented");
-    }
-
-    @Test
-    public void testToString() {
-        fail("Not yet implemented");
-    }
-
-    @Test
-    public void testGetProjectsList() {
-        fail("Not yet implemented");
-    }
-
-    @Test
-    public void testSetProjectsList() {
-        fail("Not yet implemented");
+    public void shouldReturnProjectToString_whenSetProjectsList() {
+        List<Project> projectsList = new ArrayList<Project>();
+        projectsList.add(new Project("TestProject", "TestDescption", 100, 100, 100));
+        Category category = new Category();
+        category.setProjectsList(projectsList);
+        assertEquals("TestProject; TestDescption; funded: 100; pledged: 100; days to go: 100",
+                category.getProjectsList().get(0).toString());
     }
 
 }
