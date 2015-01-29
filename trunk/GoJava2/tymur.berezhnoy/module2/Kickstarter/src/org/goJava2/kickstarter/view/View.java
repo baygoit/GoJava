@@ -26,11 +26,12 @@ public class View {
 	
 	public void displaySelectedCategory(Category category) {
 		path += category.getNameCategory().toUpperCase() + "/";
-		System.out.println(path);
+		//System.out.println(path);
 	}
 	
 	public void displayProjects(ArrayList<Project> projects) {
 		int i = 1;
+		System.out.println(path);
 		for(Project project: projects) {
 			System.out.println(i + ") " + project.getName() + "\n" + project.toString());
 			i++;
@@ -38,7 +39,8 @@ public class View {
 	}
 	
 	public void displayCurrentProject(Project project) {
-		path = project.getName().toUpperCase() + "/";
-		System.out.println(path + "\n" + project.toString());
+		String newPath = path;
+		newPath += project.getName().toUpperCase() + "/";
+		System.out.println(newPath + "\n" + project.toString());
 	}
 }
