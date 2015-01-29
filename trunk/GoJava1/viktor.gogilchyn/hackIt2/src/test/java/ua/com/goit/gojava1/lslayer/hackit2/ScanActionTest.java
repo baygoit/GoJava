@@ -5,7 +5,8 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import ua.com.goit.gojava1.lslayer.hackit2.dto.ActionResult;
-import ua.com.goit.gojava1.lslayer.hackit2.exceptions.SkillUninitilizedException;
+import ua.com.goit.gojava1.lslayer.hackit2.gear.Gear;
+import ua.com.goit.gojava1.lslayer.hackit2.gear.ScanDevice;
 
 public class ScanActionTest {
     @Test
@@ -14,17 +15,16 @@ public class ScanActionTest {
         assertNotNull(action);
     }
     @Test
-    public void testFailedAndSuccessAction() throws SkillUninitilizedException {
+    public void testSimpleAction() {
         Actor actor = new HumanControlledCharacter("Test name");
-        actor.addSkill("test");
-        Action action = new ScanAction();
+        Action action = new SimpleLookAction();
         ActionResult result = action.execute(actor);
-        assertFalse(result.isSuccess());
-        assertEquals(result.getResultMessage(), "Scan failed");
-        actor.addSkill("scan");
-        ActionResult resultTwo = action.execute(actor);
-        assertTrue(resultTwo.isSuccess());
-        assertEquals(resultTwo.getResultMessage(), "Scan successful");
+        assertTrue(result.isSuccess());
+        assertEquals(result.getResultMessage(), "You examined the universe. Looks simple, yeah?");
+        Gear target = new ScanDevice("ScanMaster");
+        result = action.execute(actor, null, target);
+        assertTrue(result.isSuccess());
+        assertEquals(result.getResultMessage(), "You examined " + target.getName() + ". Looks simple, yeah?");
     }
 
 }

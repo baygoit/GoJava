@@ -10,5 +10,4 @@ public class HumanControlledCharacterTest {
         HumanControlledCharacter newChar = new HumanControlledCharacter("TestName");
         assertEquals("TestName", newChar.getName());
     }
-    
 }
