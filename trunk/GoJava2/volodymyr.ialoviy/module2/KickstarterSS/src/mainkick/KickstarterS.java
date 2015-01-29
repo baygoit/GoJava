@@ -16,14 +16,10 @@ public class KickstarterS {
 			cat.showAllCatecories();
 			out.print("Choice Category Number: ");
 			chosenCategory = check.checkNumber();
-			out.print("" + chosenCategory);
 			if (chosenCategory == 777){
-				
 				Thread.sleep(10000);
-				
 				continue;
 			}
-			out.print("" + chosenCategory);
 			out.print("Your chosen category: " + cat.showCategoryName(chosenCategory) + ", containing the following projects: ");
 			
 			while (true){

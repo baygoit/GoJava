@@ -17,7 +17,8 @@ public class Check {
 				breakCounter++;
 				continue;
 			}
-			if (!rangeOfNumbers(choiceNumber, 1, 3)){
+			choiceNumber = Integer.valueOf(chosen);
+			if (!rangeOfNumbers(choiceNumber, 0, 3)){
 				out.print("This number does not exist, please try again");
 				breakCounter++;
 				continue;
@@ -42,9 +43,9 @@ public class Check {
     }
 	
 	private boolean rangeOfNumbers(int number, int lower, int top){
-		boolean f = true;
-		if (!(number >= lower && number <= top)){
-			f = false;
+		boolean f = false;
+		if (number >= lower && number <= top){
+			f = true;
 		}
 		return f;
     }
