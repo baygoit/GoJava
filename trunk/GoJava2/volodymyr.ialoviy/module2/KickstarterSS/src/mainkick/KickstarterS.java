@@ -16,6 +16,8 @@ public class KickstarterS {
 			cat.showAllCatecories();
 			out.print("Choice Category Number: ");
 			chosenCategory = choiceCN.enter();
+			Check check = new Check();
+			
 			out.print("Your chosen category: " + cat.showCategoryName(chosenCategory) + ", containing the following projects: ");
 			
 			while (true){
