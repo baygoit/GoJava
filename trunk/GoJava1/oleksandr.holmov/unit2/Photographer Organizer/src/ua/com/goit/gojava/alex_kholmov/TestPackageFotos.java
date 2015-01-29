@@ -15,7 +15,7 @@ public class TestPackageFotos {
     @Test
     public void testTimeEditingAllFotos() {
         float res = myPackageFotos.timeEditingAllFotos();
-        assertEquals(450.0, res, 0);
+        assertEquals(7.0, res, 0);
     }
 
 }

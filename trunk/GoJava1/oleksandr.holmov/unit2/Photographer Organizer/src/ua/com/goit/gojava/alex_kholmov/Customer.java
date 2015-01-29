@@ -9,7 +9,7 @@ package ua.com.goit.gojava.alex_kholmov;
  */
 public class Customer extends Contacts {
 
-    public Customer(String name, String address, int phone) {
+    public Customer(String name, String address, String phone) {
         super(name, address, phone);
     }
 

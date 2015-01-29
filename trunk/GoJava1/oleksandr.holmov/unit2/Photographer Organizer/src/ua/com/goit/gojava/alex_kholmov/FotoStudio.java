@@ -12,7 +12,7 @@ import java.util.GregorianCalendar;
  *
  */
 public class FotoStudio extends Contacts {
-    public FotoStudio(String name, String address, int phone) {
+    public FotoStudio(String name, String address, String phone) {
         super(name, address, phone);
     }
 
@@ -26,13 +26,14 @@ public class FotoStudio extends Contacts {
         this.reserveTime = reserveTime;
     }
     
-    String displayReserveDate() {
-        SimpleDateFormat dateFormat = new SimpleDateFormat();
-        return dateFormat.format(reserveDate.getTime());
+    void displayReserveDateTime() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy hh:mm");
+        System.out.println(dateFormat.format(reserveDate.getTime()));
+        System.out.println("Time to work in studio " + reserveTime + " hours");
     }
     
     void setReserveDate(int year, int month, int date, int hourOfDay, int minute) {
         reserveDate = new GregorianCalendar();
-        reserveDate.set(year, month, date, hourOfDay, minute);
+        reserveDate.set(year, Calendar.MONTH, date, hourOfDay, minute);
     }
 }
