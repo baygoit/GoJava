@@ -12,7 +12,7 @@
   </interface>  
   <class id="2" language="java" name="mainkick.EntriesInTheDB" project="KickstarterSS" 
     file="/KickstarterSS/src/mainkick/EntriesInTheDB.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="511" y="746"/>    
+    <position height="-1" width="-1" x="249" y="549"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -21,7 +21,7 @@
   </class>  
   <class id="3" language="java" name="mainkick.Quotes" project="KickstarterSS" 
     file="/KickstarterSS/src/mainkick/Quotes.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="573" y="442"/>    
+    <position height="-1" width="-1" x="529" y="359"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -39,7 +39,7 @@
   </class>  
   <class id="5" language="java" name="mainkick.Project" project="KickstarterSS" 
     file="/KickstarterSS/src/mainkick/Project.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1039" y="552"/>    
+    <position height="-1" width="-1" x="969" y="458"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -48,7 +48,7 @@
   </class>  
   <class id="6" language="java" name="mainkick.Category" project="KickstarterSS" 
     file="/KickstarterSS/src/mainkick/Category.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="777" y="498"/>    
+    <position height="-1" width="-1" x="732" y="425"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -84,7 +84,7 @@
   </class>  
   <class id="10" language="java" name="mainkick.ReaderBD" project="KickstarterSS" 
     file="/KickstarterSS/src/mainkick/ReaderBD.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="702" y="755"/>    
+    <position height="-1" width="-1" x="478" y="551"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -93,55 +93,55 @@
   </class>  
   <dependency id="11">    
     <end type="SOURCE" refId="9"/>    
-    <end type="TARGET" refId="7"/>  
+    <end type="TARGET" refId="3"/>  
   </dependency>  
-  <realization id="12">    
-    <end type="SOURCE" refId="7"/>    
-    <end type="TARGET" refId="1"/>  
-  </realization>  
-  <dependency id="13">    
-    <end type="SOURCE" refId="5"/>    
-    <end type="TARGET" refId="10"/>  
-  </dependency>  
-  <realization id="14">    
-    <end type="SOURCE" refId="4"/>    
-    <end type="TARGET" refId="8"/>  
-  </realization>  
-  <dependency id="15">    
-    <end type="SOURCE" refId="9"/>    
-    <end type="TARGET" refId="8"/>  
-  </dependency>  
-  <dependency id="16">    
+  <dependency id="12">    
     <end type="SOURCE" refId="9"/>    
     <end type="TARGET" refId="4"/>  
   </dependency>  
-  <dependency id="17">    
+  <realization id="13">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="1"/>  
+  </realization>  
+  <dependency id="14">    
     <end type="SOURCE" refId="6"/>    
     <end type="TARGET" refId="10"/>  
   </dependency>  
-  <dependency id="18">    
-    <end type="SOURCE" refId="9"/>    
-    <end type="TARGET" refId="5"/>  
-  </dependency>  
-  <dependency id="19">    
-    <end type="SOURCE" refId="3"/>    
+  <dependency id="15">    
+    <end type="SOURCE" refId="5"/>    
     <end type="TARGET" refId="10"/>  
   </dependency>  
-  <dependency id="20">    
+  <dependency id="16">    
     <end type="SOURCE" refId="9"/>    
     <end type="TARGET" refId="1"/>  
   </dependency>  
-  <dependency id="21">    
+  <dependency id="17">    
     <end type="SOURCE" refId="9"/>    
-    <end type="TARGET" refId="3"/>  
+    <end type="TARGET" refId="8"/>  
   </dependency>  
-  <dependency id="22">    
-    <end type="SOURCE" refId="6"/>    
-    <end type="TARGET" refId="5"/>  
-  </dependency>  
-  <dependency id="23">    
+  <dependency id="18">    
     <end type="SOURCE" refId="9"/>    
     <end type="TARGET" refId="6"/>  
+  </dependency>  
+  <dependency id="19">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="5"/>  
+  </dependency>  
+  <dependency id="20">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="10"/>  
+  </dependency>  
+  <dependency id="21">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="7"/>  
+  </dependency>  
+  <realization id="22">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="8"/>  
+  </realization>  
+  <dependency id="23">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="5"/>  
   </dependency>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
     sort-features="false" accessors="true" visibility="true">    
