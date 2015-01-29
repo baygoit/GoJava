@@ -1,9 +1,8 @@
 package com.gojava.launch;
 
-import Quote.Quote;
-import View.Menu;
-
 import com.gojava.input.Scan;
+import com.gojava.quote.Quote;
+import com.gojava.view.Menu;
 
 public class Launch {
 
