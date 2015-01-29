@@ -23,24 +23,36 @@ public class Controller {
         while (!exitFromApplication) {
             view.showCategories(categoryList);
             int numberOfCategory = scan.getAnswer();
+            if (numberOfCategory == 0)
+                break;
             boolean exitFromCategories = false;
             while (!exitFromCategories) {
                 view.showProjects(categoryList.get(numberOfCategory - 1).getProjectsList());
                 int numberOfProject = scan.getAnswer();
+                if (numberOfProject == 0)
+                    break;
                 boolean exitFromProject = false;
-                // while(!exitFromProject){
-                // int projectOption = scan.getAnswer();
-                // if (projectOption != 0){
-                view.showProject(categoryList.get(numberOfCategory - 1).getProjectsList()
-                        .get(numberOfProject - 1));
-                // }else
-                // exitFromProject = true;
-
-                // }
-                exitFromCategories = true;
+                while (!exitFromProject) {
+                    view.showProject(categoryList.get(numberOfCategory - 1).getProjectsList()
+                            .get(numberOfProject - 1));
+                    view.showProjectMenu();
+                    int projectOption = scan.getAnswer();
+                    if (projectOption != 0) {
+                        System.out.println("Selected option: ");
+                    } else
+                        System.out.println("Exiting from project");
+                    exitFromProject = true;
+                }
+                if (numberOfProject == 0) {
+                    System.out.println("Exiting from categories");
+                    exitFromCategories = true;
+                }
             }
-            exitFromApplication = true;
+            if (numberOfCategory == 0) {
+                System.out.println("Exiting from application");
+                exitFromApplication = true;
+            }
         }
-       scan.close();
+        scan.close();
     }
 }

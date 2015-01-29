@@ -37,4 +37,8 @@ public class View {
     public void showProject(Project project) {
         System.out.println(project.toStringFull());
     }
+
+    public void showProjectMenu() {
+        System.out.println("Select option: (not implemented, just '0' to exit)");
+    }
 }
