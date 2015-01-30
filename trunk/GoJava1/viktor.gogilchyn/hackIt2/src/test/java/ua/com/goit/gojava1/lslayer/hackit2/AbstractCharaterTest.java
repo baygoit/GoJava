@@ -4,6 +4,9 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import ua.com.goit.gojava1.lslayer.hackit2.actor.Actor;
+import ua.com.goit.gojava1.lslayer.hackit2.actor.HumanControlledCharacter;
+
 public class AbstractCharaterTest {
     private String eol = System.getProperty("line.separator");
 

@@ -1,5 +1,8 @@
 package ua.com.goit.gojava1.lslayer.hackit2;
 
+import ua.com.goit.gojava1.lslayer.hackit2.actor.Actor;
+import ua.com.goit.gojava1.lslayer.hackit2.actor.HumanControlledCharacter;
+
 
 public class UserAccount {
     private String loginName;

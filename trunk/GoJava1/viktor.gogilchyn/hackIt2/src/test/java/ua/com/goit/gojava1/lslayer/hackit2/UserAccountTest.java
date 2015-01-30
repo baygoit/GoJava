@@ -4,6 +4,8 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import ua.com.goit.gojava1.lslayer.hackit2.actor.Actor;
+
 public class UserAccountTest {
     @Test
     public void testSmoke() {
