@@ -23,24 +23,24 @@ public class CalculationService {
 		this.add(dishes.get(1));
 	}};
 	
-	public static Map<Foodstuff, Double> calculateWeights() {
-		Map<Foodstuff, Double> result = new HashMap<Foodstuff, Double>();
+	public static Map<Foodstuff, Integer> calculateWeights() {
+		Map<Foodstuff, Integer> result = new HashMap<Foodstuff, Integer>();
 		List<Foodstuff> foodstuffList = ListServiceHardcodedData.getFoodstuffList();
 		List<Ingredient> ingredientList = new ArrayList<Ingredient>();
-		double currentWeight = 0.0;
+		int currentWeight = 0;
 		for (Dish dish : dishList) {
 			ingredientList.addAll(ListServiceHardcodedData.getIngredientList(dish));
 		}
 		for (Foodstuff foodstuff : foodstuffList) {
 			for (Ingredient ingred : ingredientList) {
-				if (ingred.getFoodstuff().equals(foodstuff)) {
+				if (ingred.getFoodstuff() == foodstuff) {
 					currentWeight += ingred.getWeight();
 				}
 			}
 			if (currentWeight > 0.0) {
 				result.put(foodstuff, currentWeight);
 			}
-			currentWeight = 0.0;
+			currentWeight = 0;
 		}
 		return result;
 	}

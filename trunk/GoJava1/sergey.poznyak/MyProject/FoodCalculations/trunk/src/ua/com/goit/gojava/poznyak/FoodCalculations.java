@@ -37,7 +37,7 @@ public class FoodCalculations {
 		} catch(IndexOutOfBoundsException e) {
 			System.out.println("No such dish");
 		}
-		System.out.println("Ingredients for the list of dishes:");
+		System.out.println("\n" + "Ingredients for the list of dishes:");
 		System.out.println(CalculationService.calculateWeights());
 	}
 	
@@ -65,7 +65,7 @@ public class FoodCalculations {
 		} else {
 			for (Ingredient value : ingredients) {
 				System.out.println(value.getFoodstuff() + " x " + value
-						           + " kg");
+						           + " g");
 			}
 		}
 	}

@@ -14,11 +14,11 @@ public class Ingredient {
 	
 	private Foodstuff foodstuff;
 	
-	private Double weight;
+	private Integer weight;
 	
 	public Ingredient() {}
 
-	protected Ingredient(Dish dish, Foodstuff foodstuff, double weight) {
+	protected Ingredient(Dish dish, Foodstuff foodstuff, int weight) {
 		this.dish = dish;
 		this.foodstuff = foodstuff;
 		this.weight = weight;
@@ -44,7 +44,7 @@ public class Ingredient {
 		return weight;
 	}
 
-	public void setWeight(double weight) {
+	public void setWeight(int weight) {
 		this.weight = weight;
 	}
 

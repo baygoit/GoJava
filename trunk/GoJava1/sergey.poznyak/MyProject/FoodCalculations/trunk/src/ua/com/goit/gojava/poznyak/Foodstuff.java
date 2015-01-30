@@ -10,23 +10,12 @@ package ua.com.goit.gojava.poznyak;
  */
 public class Foodstuff {
 	
-	private Integer id;
-	
 	private String name;
 	
 	public Foodstuff() {}
 	
-	protected Foodstuff(int foodstuffId, String foodstuffName) {
-		id = foodstuffId;
+	protected Foodstuff(String foodstuffName) {
 		name = foodstuffName;
-	}
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
 	}
 
 	public String getName() {

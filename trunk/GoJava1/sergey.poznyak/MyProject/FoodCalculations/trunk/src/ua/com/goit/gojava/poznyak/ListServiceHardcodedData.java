@@ -2,6 +2,7 @@ package ua.com.goit.gojava.poznyak;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * This class implements the listing service.
@@ -13,9 +14,9 @@ public class ListServiceHardcodedData {
 	
 	@SuppressWarnings("serial")
 	private static List<Foodstuff> foodstuffList = new ArrayList<Foodstuff>() {{
-		this.add(new Foodstuff(1, "buckwheat"));
-		this.add(new Foodstuff(2, "salt"));
-		this.add(new Foodstuff(3, "stew"));
+		this.add(new Foodstuff("buckwheat"));
+		this.add(new Foodstuff("salt"));
+		this.add(new Foodstuff("stew"));
 	}};
 	
 	@SuppressWarnings("serial")
@@ -29,9 +30,9 @@ public class ListServiceHardcodedData {
 	
 	@SuppressWarnings("serial")
 	private static List<Ingredient> ingredientList = new ArrayList<Ingredient>() {{
-		this.add(new Ingredient(dishList.get(1), foodstuffList.get(0), 0.08));
-		this.add(new Ingredient(dishList.get(1), foodstuffList.get(1), 0.005));
-		this.add(new Ingredient(dishList.get(1), foodstuffList.get(2), 0.125));
+		this.add(new Ingredient(dishList.get(1), foodstuffList.get(0), 80));
+		this.add(new Ingredient(dishList.get(1), foodstuffList.get(1), 5));
+		this.add(new Ingredient(dishList.get(1), foodstuffList.get(2), 125));
 	}};
 	
 	
@@ -46,7 +47,7 @@ public class ListServiceHardcodedData {
 	public static List<Ingredient> getIngredientList(Dish dish) {
 		List<Ingredient> result = new ArrayList<Ingredient>();
 		for (Ingredient value : ingredientList) {
-			if (value.getDish().equals(dish)) {
+			if (Objects.equals(value.getDish(), dish)) {
 				result.add(value);
 			}
 		}

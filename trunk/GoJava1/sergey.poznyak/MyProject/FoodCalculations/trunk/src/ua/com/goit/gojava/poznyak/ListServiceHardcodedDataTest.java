@@ -14,17 +14,10 @@ import org.junit.Test;
  * @author Sergey Poznyak
  */
 public class ListServiceHardcodedDataTest {
-	
-	
-	private List<Dish> dishList;
-	
-	@Before 
-	public void initialize() {
-		dishList = ListServiceHardcodedData.getDishList();
-	}
 
 	@Test
 	public void testGetDishList() {
+		List<Dish> dishList = ListServiceHardcodedData.getDishList();
 		assertNotNull(dishList);
 		assertEquals(5, dishList.size());
 		assertEquals("1. Borshch", dishList.get(0).toString());
@@ -32,6 +25,7 @@ public class ListServiceHardcodedDataTest {
 
 	@Test
 	public void testGetIngredientList() {
+		List<Dish> dishList = ListServiceHardcodedData.getDishList();
 		assertNotNull(ListServiceHardcodedData.getIngredientList(null));
 		assertNotNull(ListServiceHardcodedData.getIngredientList(new Dish()));
 		assertNotNull(ListServiceHardcodedData.getIngredientList(dishList.get(4)));
