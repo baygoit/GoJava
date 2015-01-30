@@ -1,5 +1,7 @@
 package ua.com.goit.gojava.andriidnikitin;
 
+import java.math.BigDecimal;
+
 public class Good {
 	
 	private Integer id;	
@@ -8,13 +10,25 @@ public class Good {
 	
 	private Category category;	
 	
-	public Good() {
-	}	
+	private BigDecimal price;
 	
-	protected Good( Integer id, String name, Category category) {
-		this.id = id;	
+	protected Good(Integer id, String name, Category category, BigDecimal price) {
+		super();
+		this.id = id;
 		this.name = name;
 		this.category = category;
+		this.price = price;
+	}
+
+	public BigDecimal getPrice() {
+		return price;
+	}
+
+	public void setPrice(BigDecimal price) {
+		this.price = price;
+	}
+
+	public Good() {
 	}	
 	
 	public Integer getId() {
@@ -44,9 +58,10 @@ public class Good {
 		this.category = category;
 		return this;
 	}
-	
+
 	@Override
-	public String toString(){
-		return getName() + " [id: " + id.toString() + " ]";
+	public String toString() {
+		return "Good [id=" + id + ", name=" + name + ", category=" + category
+				+ "]";
 	}	
 }

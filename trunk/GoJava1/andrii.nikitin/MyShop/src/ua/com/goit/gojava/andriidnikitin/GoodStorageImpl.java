@@ -1,5 +1,6 @@
 package ua.com.goit.gojava.andriidnikitin;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,12 +15,12 @@ public class GoodStorageImpl implements GoodStorage {
 	
 	@SuppressWarnings("serial")
 	private List<Good> goodList = new ArrayList<Good>() {{
-		this.add(setId(new Good(0, "Fender Strat", categoryList.get(0))));
-		this.add(setId(new Good(1, "Fender Tele", categoryList.get(0))));
-		this.add(setId(new Good(2, "Gibson SG", categoryList.get(0))));
-		this.add(setId(new Good(3, "Fender Rhodes", categoryList.get(1))));
-		this.add(setId(new Good(4, "Korg MS-20", categoryList.get(1))));
-		this.add(setId(new Good(5, "VOX Overdrive", categoryList.get(2))));
+		this.add(setId(new Good(0, "Fender Strat", categoryList.get(0), new BigDecimal(1000.0))));
+		this.add(setId(new Good(1, "Fender Tele", categoryList.get(0), new BigDecimal(1200.0))));
+		this.add(setId(new Good(2, "Gibson SG", categoryList.get(0), new BigDecimal(1337.0))));
+		this.add(setId(new Good(3, "Fender Rhodes", categoryList.get(1), new BigDecimal(3000.0))));
+		this.add(setId(new Good(4, "Korg MS-20", categoryList.get(1), new BigDecimal(2000.0))));
+		this.add(setId(new Good(5, "VOX Overdrive", categoryList.get(2), new BigDecimal(300.0))));
 	}};
 	
 	public GoodStorageImpl() {

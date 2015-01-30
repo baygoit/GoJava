@@ -31,9 +31,9 @@ public class Category {
 	}
 
 	@Override
-	public String toString(){
-		return name + " [id: " + id.toString() + " ]";
+	public String toString() {
+		return "Category [name=" + name + "]";
 	}
-	
-	
+
+		
 }

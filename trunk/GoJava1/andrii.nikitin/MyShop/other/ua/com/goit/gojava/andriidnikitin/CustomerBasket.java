@@ -12,8 +12,6 @@ public interface CustomerBasket {
 	public void confirmOrder ();
 	
 	public void cancelOrder();
-	
-	public List<Good> getList();
-	
+		
 	public BigDecimal total();
 }

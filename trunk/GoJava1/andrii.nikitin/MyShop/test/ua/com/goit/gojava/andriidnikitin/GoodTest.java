@@ -2,6 +2,9 @@ package ua.com.goit.gojava.andriidnikitin;
 
 
 import static org.junit.Assert.*;
+
+import java.math.BigDecimal;
+
 import org.junit.Test;
 
 public class GoodTest {
@@ -23,7 +26,7 @@ public Good good;
 		goodSetter.setId(100);		
 		assertEquals(Integer.valueOf(100), goodSetter.getId());
 		
-		final Good goodConstructor = new Good(100, "default", defaultCategory);
+		final Good goodConstructor = new Good(100, "default", defaultCategory, new BigDecimal(1000.0));
 		assertEquals("default", goodConstructor.getName());		
 		assertEquals(defaultCategory, goodConstructor.getCategory());		
 		assertEquals(Integer.valueOf(100), goodConstructor.getId());	

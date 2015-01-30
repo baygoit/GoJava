@@ -7,10 +7,10 @@ import java.util.Map;
 
 public class CustomerBasketImpl implements CustomerBasket {
 	
-	private Map<Good, Integer> basket;
+	private Order order;
 	
 	public CustomerBasketImpl(){
-		basket = new HashMap<Good, Integer>();
+		order= new Order ();
 	}
 
 	@Override
@@ -18,6 +18,7 @@ public class CustomerBasketImpl implements CustomerBasket {
 		if (good == null) {
 			throw new NullPointerException("Good is not have been initialized.");
 		}
+		Map <Good, Integer> basket = order.getOrderedGoods(); 
 		if (basket.containsKey(good)){
 			int oldValue = basket.get(good);
 			basket.put(good, quantity + oldValue);
@@ -30,6 +31,7 @@ public class CustomerBasketImpl implements CustomerBasket {
 		if (good == null) {
 			throw new NullPointerException("Good is not have been initialized.");
 		}
+		Map <Good, Integer> basket = order.getOrderedGoods(); 
 		if (basket.containsKey(good)) {
 			basket.remove(good);
 		}
@@ -48,14 +50,7 @@ public class CustomerBasketImpl implements CustomerBasket {
 	}
 
 	@Override
-	public List<Good> getList() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public BigDecimal total() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
