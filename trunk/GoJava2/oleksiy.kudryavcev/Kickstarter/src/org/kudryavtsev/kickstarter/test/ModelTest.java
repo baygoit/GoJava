@@ -1,4 +1,4 @@
-package org.kudryavtsev.kickstarter;
+package org.kudryavtsev.kickstarter.test;
 
 import static org.junit.Assert.*;
 

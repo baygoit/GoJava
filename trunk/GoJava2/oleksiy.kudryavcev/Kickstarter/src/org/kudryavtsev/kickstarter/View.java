@@ -1,44 +1,49 @@
 package org.kudryavtsev.kickstarter;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class View {
+public class View implements Out {
     private String greeting;
+    private Out out = new OutConsole();
 
     public View() {
         greeting = "Лучший способ предвидеть будущее - это самим создать его.";
     }
 
     public void showGreeting() {
-        System.out.println(greeting);
+        out.output(greeting);
     }
 
     public void showProjects(List<Project> projectslist) {
         int counter = 1;
-        for (Project project : projectslist) {
-            System.out.println("(" + counter + ") " + project);
+        for (Object project : projectslist) {
+            out.output("(" + counter + ") " + project);
             counter++;
         }
     }
 
     public void showCategories(List<Category> list, int i) {
-        System.out.println("You entered: " + list.get(i - 1));
+        out.output("You entered: " + list.get(i - 1));
     }
 
     public void showCategories(List<Category> categoryList) {
         int counter = 1;
-        for (Category category : categoryList) {
-            System.out.println("(" + counter + ") " + category);
+        for (Object category : categoryList) {
+            out.output("(" + counter + ") " + category);
             counter++;
         }
     }
 
     public void showProject(Project project) {
-        System.out.println(project.toStringFull());
+        out.output(project.toStringFull());
     }
 
     public void showProjectMenu() {
-        System.out.println("Select option: (not implemented, just '0' to exit)");
+        out.output("Select option: (not implemented, just '0' to exit)");
     }
+
+    @Override
+    public void output(String output) {
+    }
+
 }
