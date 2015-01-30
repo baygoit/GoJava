@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 public class TestPackageFotos {
-    private PackageFotos  myPackageFotos = new PackageFotos(30, 15, 0);
+    private PackageFotos  myPackageFotos = new PackageFotos(200, 10, 10);
     
     @Test
     public void testObbjectCreate() {
@@ -15,7 +15,7 @@ public class TestPackageFotos {
     @Test
     public void testTimeEditingAllFotos() {
         float res = myPackageFotos.timeEditingAllFotos();
-        assertEquals(7.0, res, 0);
+        assertEquals("Error", 36, res, 0);
     }
 
 }

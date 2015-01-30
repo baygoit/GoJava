@@ -23,22 +23,20 @@ public class Main {
         Customer myCustomer = new Customer("vasya i petya", "34 stree, house 12", "+38096 888 89 65");
         myCustomer.printInfo();
         
-        PackageFotos pFotos1 = new PackageFotos(25, 10, 5);
-        PackageFotos pFotos2 = new PackageFotos(15, 20, 10);
+        PackageFotos pFotos1 = new PackageFotos(200, 10, 10);
+        PackageFotos pFotos2 = new PackageFotos(35, 20, 15);
         
         SellService service = new SellService("type of fotoset package", 1500, 2);
         service.addPackage(pFotos1);
         service.addPackage(pFotos2);
+        service.daysEditFotosInService();
+        System.out.println("Amount work days: " + service.amountDays);
         
         Order myOrder = new Order();
         myOrder.setDeadline(2015, 3, 22);
-        myOrder.setStartWork(2015, 3, 12);
-        int time = myOrder.timeEditFotosInService(service);
-        myOrder.daysEditFotosInService(time);
-        myOrder.setEndWork();
+        myOrder.setStartWork(2015, 3, 20);
+        myOrder.calcEndWork(service.amountDays);
         myOrder.displayOrder();
-        //System.out.println("time to edit all fotos in first package " + pFotos1.timeEditingAllFotos());
-        //System.out.println("time to edit all fotos in second package " + pFotos2.timeEditingAllFotos());
     }
 
 }

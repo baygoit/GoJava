@@ -10,6 +10,10 @@ import java.util.ArrayList;
  *
  */
 public class SellService {
+    static int TIME_WORKING_IN_DAY = 4; //hours
+    
+    int amountDays;
+    
     ArrayList<PackageFotos> packagesFotos = new ArrayList<PackageFotos>();
     private String describe;
     private int price;
@@ -43,6 +47,13 @@ public class SellService {
     void setServiceTime(int serviceTime) {
         this.serviceTime = serviceTime;
     }
-    
+
+    void daysEditFotosInService() {
+        int timeSum = 0;
+        for (PackageFotos pf : packagesFotos) {
+            timeSum += pf.timeEditingAllFotos();
+        }
+        amountDays = timeSum / TIME_WORKING_IN_DAY;
+    }
     
 }

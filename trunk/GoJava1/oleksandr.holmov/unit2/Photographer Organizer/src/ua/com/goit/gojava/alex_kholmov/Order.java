@@ -9,19 +9,14 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-import org.hamcrest.Condition.Step;
-
 /**
  * @author SASH
  *
  */
 public class Order {
-    private static final int TIME_WORKING_IN_DAY = 4; //hours
-    
-    private int amountDays;
     private Calendar deadline;
     private Calendar startWork;
-    private Calendar endWork;
+    Calendar endWork;
     private Customer customer;
     private SellService service;
     
@@ -35,23 +30,11 @@ public class Order {
         startWork.set(year, Calendar.MONTH, date);
     }
     
-    int timeEditFotosInService(SellService service) {
-        int timeSum = 0;
-        for (PackageFotos pf : service.packagesFotos) {
-            timeSum += pf.timeEditingAllFotos();
-        }
-        return timeSum;
-    }
-    
-    void daysEditFotosInService(int hTime) {
-        amountDays = hTime / TIME_WORKING_IN_DAY;
-    }
-    
-    void setEndWork() {
+    void calcEndWork(int amountDays) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
-        String date1 = dateFormat.format(startWork.getTime());
+        String startWorkDate = dateFormat.format(startWork.getTime());
         try {
-            Date dateParse = dateFormat.parse(date1);
+            Date dateParse = dateFormat.parse(startWorkDate);
             endWork = new GregorianCalendar();
             endWork.setTime(dateParse);
             endWork.add(Calendar.DAY_OF_MONTH, amountDays);
@@ -63,7 +46,6 @@ public class Order {
     
     void displayOrder() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
-        System.out.println(amountDays);
         System.out.println(dateFormat.format(deadline.getTime()));
         System.out.println(dateFormat.format(startWork.getTime()));
         System.out.println(dateFormat.format(endWork.getTime()));
