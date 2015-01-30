@@ -21,16 +21,18 @@ public class Good {
 		return id;
 	}
 	
-	public void setId(Integer id) {
+	public Good setId(Integer id) {
 		this.id = id;
+		return this;
 	}
 	
 	public String getName() {
 		return name;
 	}
 	
-	public void setName(String name) {
+	public Good setName(String name) {
 		this.name = name;
+		return this;
 	}
 	
 	
@@ -38,12 +40,13 @@ public class Good {
 		return category;
 	}
 	
-	public void setCategory(Category category) {
+	public Good setCategory(Category category) {
 		this.category = category;
+		return this;
 	}
 	
 	@Override
 	public String toString(){
-		return getName();
-	}
+		return getName() + " [id: " + id.toString() + " ]";
+	}	
 }

@@ -3,6 +3,8 @@ package ua.com.goit.gojava.andriidnikitin;
 public class Category {
 	private String name;
 	
+	private Integer id;
+	
 	public Category() {
 	}
 
@@ -14,12 +16,24 @@ public class Category {
 		return name;
 	}
 
-	public void setName(String name) {
+	public Category setName(String name) {
 		this.name = name;
+		return this;
+	}
+	
+	public Integer getId() {
+		return id;
+	}
+
+	public Category setId(Integer id) {
+		this.id = id;
+		return this;
 	}
 
 	@Override
 	public String toString(){
-		return name;
+		return name + " [id: " + id.toString() + " ]";
 	}
+	
+	
 }

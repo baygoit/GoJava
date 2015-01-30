@@ -8,16 +8,8 @@ public interface GoodStorage {
 	
 	public List<Good> getGoodList(Category category) ;
 	
-	public boolean categoryExists(Category category);
+	public void save (Category category) ;
 	
-	public boolean goodExists(Good good);
-	
-	public void addCategory (Category category) ;
-	
-	public void addGood (Good good) ;
-	
-	public void updateCategory(Category oldCategory, Category newCategory) ;
-	
-	public void updateGood(Good oldGood, Good newGood) ;
+	public void save (Good good) ;
 	
 }	

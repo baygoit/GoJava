@@ -27,6 +27,5 @@ public Good good;
 		assertEquals("default", goodConstructor.getName());		
 		assertEquals(defaultCategory, goodConstructor.getCategory());		
 		assertEquals(Integer.valueOf(100), goodConstructor.getId());	
-		assertEquals("default", goodConstructor.toString());
 	}	   
 }

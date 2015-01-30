@@ -7,19 +7,19 @@ public class GoodStorageImpl implements GoodStorage {
 	
 	@SuppressWarnings("serial")
 	private List<Category> categoryList = new ArrayList<Category>(){{
-		this.add(new Category("Guitars"));
-		this.add(new Category("Synths"));
-		this.add(new Category("Other"));		
+		this.add(setId(new Category("Guitars")));
+		this.add(setId(new Category("Synths")));
+		this.add(setId(new Category("Other")));		
 	}};
 	
 	@SuppressWarnings("serial")
 	private List<Good> goodList = new ArrayList<Good>() {{
-		this.add(new Good(0, "Fender Strat", categoryList.get(0)));
-		this.add(new Good(1, "Fender Tele", categoryList.get(0)));
-		this.add(new Good(2, "Gibson SG", categoryList.get(0)));
-		this.add(new Good(3, "Fender Rhodes", categoryList.get(1)));
-		this.add(new Good(4, "Korg MS-20", categoryList.get(1)));
-		this.add(new Good(5, "VOX Overdrive", categoryList.get(2)));
+		this.add(setId(new Good(0, "Fender Strat", categoryList.get(0))));
+		this.add(setId(new Good(1, "Fender Tele", categoryList.get(0))));
+		this.add(setId(new Good(2, "Gibson SG", categoryList.get(0))));
+		this.add(setId(new Good(3, "Fender Rhodes", categoryList.get(1))));
+		this.add(setId(new Good(4, "Korg MS-20", categoryList.get(1))));
+		this.add(setId(new Good(5, "VOX Overdrive", categoryList.get(2))));
 	}};
 	
 	public GoodStorageImpl() {
@@ -51,111 +51,63 @@ public class GoodStorageImpl implements GoodStorage {
 		if (category == null || category.getName() == null) { 
 				return result;   
 		}  
-		String categoryName = category.getName();
 		for (Good good : goodList){
-			if (categoryName.equals(category.getName())) { 
+			if (category.getId().equals(good.getCategory().getId())) { 
 					result.add(good);
 			}
 		}
 		return result;
 	}
-	
+
 	@Override
-	public boolean categoryExists(Category category){
-		if ((category == null) || (categoryList == null)) {
-			return false;			
+	public void save (Category category) {
+		if (category.getId() == null) {
+			categoryList.add(setId(category));
 		}
-		boolean answer = false;
-		for (int i = 0; i < categoryList.size(); i++){			
-			if (categoryList.get(i).getName().equals(category.getName())) {
-				answer = true;
-			}
+		else {
+			for (int index = 0; index < categoryList.size(); index++) {
+				if (category.getId().equals(categoryList.get(index).getId())) {
+					categoryList.set(index, category);
+					break;
+				}
+			
+			}		
 		}
-		return answer;		
+	}
+
+	@Override
+	public void save (Good good) {
+		if (good.getId() == null) {
+			goodList.add(setId(good));
+		}
+		else {
+			for (int index = 0; index < goodList.size(); index++) {
+				if (good.getId().equals(goodList.get(index).getId())) {
+					goodList.set(index, good);
+					break;
+				}
+			
+			}		
+		}
+		
 	}
 	
-	@Override
-	public boolean goodExists(Good good){
-		if ((good == null) || (goodList == null)) {
-			return false;			
-		}
-		boolean answer = false;
-		for (int i = 0; i < goodList.size(); i++){			
-			if (goodList.get(i).getId().equals(good.getId())) {
-				answer = true;
-			}
-		}
-		return answer;		
-	}
-	
-	
-	@Override
-	public void addCategory (Category category) {
+	private Category setId (Category category) {
 		if (category == null) {
-			throw new IllegalArgumentException("Invalid argument: added category is null");
-		}		
-		if  (categoryList == null) {
-			throw new NullPointerException("List of categories is not initialised.");
-		}		
-		if (!categoryExists(category)){
-			categoryList.add(category);
+			return null;
 		}
-		else {
-			throw new IllegalArgumentException("You are trying to add existing category.");
-		}
-	}
-
-	@Override
-	public void addGood(Good good) {
-		if (good == null) {
-		throw new IllegalArgumentException("Invalid argument: added good is null");
-		}
-			
-		if  (goodList == null) {
-			throw new NullPointerException("List of goods is not initialised.");
-		}
-		
-		if (!categoryExists(good.getCategory())){
-			throw new IllegalArgumentException("You are trying to add "
-					+ "good from unexisting category");
-		}
-		
-		if (!goodExists(good)){
-			goodList.add(good);
-		}
-		else{
-			throw new IllegalArgumentException("You are trying to add existing item.");
-		}
-			
-	}	
-	
-	public void updateCategory(Category oldCategory, Category newCategory) {
-		
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + category.getName().hashCode();
+		return category.setId(result);
 	}
 	
-	public void updateGood(Good oldGood, Good newGood) {
-		if (goodExists(oldGood)) {
-			
-		}
-		
-		else {
-			throw new IllegalArgumentException("Such good does not exist.");
-		}
-		
-		oldGood.setCategory(newGood.getCategory());
-		oldGood.setId(newGood.getId());
-		oldGood.setName(newGood.getName());
-	}	
-	
-	public void updateCategoty (Category oldCategory, Category newCategory) {
-		if (categoryExists(oldCategory)) {
-			
-		}
-		
-		else {
-			throw new IllegalArgumentException("Such good does not exist.");
-		}
-
-		oldCategory.setName(newCategory.getName());
-	}	
+	private Good setId(Good good) {
+		final int prime = 31;
+		int result = 1;
+		Category category = good.getCategory();
+		result = prime * result + category.getId();
+		result = prime * result + good.getName().hashCode();
+		return good.setId(result);
+	}
 }
