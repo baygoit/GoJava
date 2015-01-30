@@ -10,7 +10,7 @@ public class Distance {
 		
 		System.out.println("Input array elements with spaces:");	
 		
-		String arrayString = scan.toString();
+		String arrayString = scan.nextLine();
 		
 		int [] arrayInt = stringToIntConv (arrayString);
 		
@@ -23,14 +23,17 @@ public class Distance {
 	
 	public static int[] stringToIntConv (String arrayString){
 		
-		String delims = "[ ] + ";
-		String [] arrayStr = arrayString.split(delims);	
+		String [] arrayStr = arrayString.split("\\s+");	
+		
 		int[] arrayInt = new int [arrayStr.length];
 		
-		for (int i = 0; i < arrayStr.length; i++){
+		for (int i = 0; i < arrayInt.length; i++){
 			try {
 				arrayInt[i] = Integer.parseInt(arrayStr[i]);
-			} catch (NumberFormatException nfe) {};
+			} catch (NumberFormatException nfe) {
+				System.out.println("Incorrect values!");
+				break;
+			  }
 			
 		}
 		
