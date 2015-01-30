@@ -183,7 +183,10 @@ public class Divide {
 		for (int i = 0; i < arrayStr.length; i++){
 			try {
 				arrayInt[i] = Integer.parseInt(arrayStr[i]);
-			} catch (NumberFormatException nfe) {};
+			} catch (NumberFormatException nfe) {
+				System.out.println("Incorrect values!");
+				return;
+			  };
 			
 		}
 		
