@@ -22,11 +22,11 @@ public class Menu {
         levelsList.add(level1);
         levelsList.add(level2);
         levelsList.add(level3);
+        currentLevelPosition = 1;
         initMenu();
     }
 
     public void initMenu() {
-        currentLevelPosition = 1;
         level1.displayMySelf(currentLevelPosition);
     }
 
