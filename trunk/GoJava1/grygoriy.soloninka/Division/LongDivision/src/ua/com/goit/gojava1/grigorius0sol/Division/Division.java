@@ -20,6 +20,7 @@ public class Division{
 	static private int tempResult;
 	static private int dividen;
 	static private int divider;
+	static private int tab;
 	
 	
 	public static void main(String args[]){
@@ -33,7 +34,7 @@ public class Division{
 			
 			e.printStackTrace();
 		}
-		
+		tab++;
 		firstOutPut(getNumbersFromString(input));
 	}
 	
@@ -97,7 +98,8 @@ public class Division{
 		}
 		
 		
-		System.out.println("   |" + quotient);
+		System.out.println("   | " + quotient);
+		
 		for(StringBuilder value: visualize){
 			
 			System.out.println(value);
@@ -108,8 +110,8 @@ public class Division{
 	public static void fractionDivide(){
 		
 
-		StringBuilder fractionPartResult = new StringBuilder();
-		List<Integer> fractionRemainder = new ArrayList<Integer>();
+		StringBuilder fractionPartResult = new StringBuilder(100);
+		List<Integer> fractionRemainder = new ArrayList<Integer>(100);
 		int indexPeriodRepeat;
 		
 		while(fractionRemainder.size() < 100){
@@ -152,19 +154,28 @@ public class Division{
 		String minuendToString = "" + minuend;
 		String subtrahendToString = "" + subtrahend;
 		String differenceToString = "" + difference;
+		int aditionalTab = minuendToString.length() - subtrahendToString.length(); 
 		
-		writeIn(minuendToString);
-		writeIn("-" + subtrahendToString + " ");
-		writeIn("-----");
-		writeIn(differenceToString);
-		writeIn("-----");
+		writeIn(minuendToString, tab);
+		writeIn("-" + subtrahendToString, tab - 1 + aditionalTab);
+		writeIn("-----", tab);
 		
+		
+		tab += (minuendToString.length() - differenceToString.length());
+		if(difference == 0){
+			
+			tab++;
+		}
 		
 	}
-	
-	public static void writeIn(String value){
+
+	public static void writeIn(String value, int tabulation){
 		visualize.add(new StringBuilder(""));
-		visualize.get(visualize.size() - 1).append("");
+		
+		for(int i = 0; i < tabulation; i++){
+			visualize.get(visualize.size() - 1).append(" ");
+		}
+
 		visualize.get(visualize.size() - 1).append(value);
 	}
 }
