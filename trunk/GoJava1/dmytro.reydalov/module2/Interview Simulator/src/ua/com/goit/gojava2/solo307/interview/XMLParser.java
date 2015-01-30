@@ -15,17 +15,14 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 public class XMLParser {
+	
 	List <Question> questions = new ArrayList<Question>();
 	
-	public void writeData(String questionLine, List<Answer> answers, int questionId){
-		questions.add(new Question(questionLine, answers, questionId));
-	}
-	
-	public void parse() {
+	public XMLParser(String path){
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		try{
 			DocumentBuilder builder = factory.newDocumentBuilder();
-			Document document = builder.parse("Questions.xml");
+			Document document = builder.parse(path);
 			NodeList questions = document.getElementsByTagName("question");
 			for(int i = 0; i < questions.getLength(); i++){
 				Node q = questions.item(i);
@@ -69,5 +66,10 @@ public class XMLParser {
 			e.printStackTrace();
 		}
 	}
-}
+	
+	public void writeData(String questionLine, List<Answer> answers, int questionId){
+		questions.add(new Question(questionLine, answers, questionId));
+	}
+}	
+
 

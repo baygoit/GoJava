@@ -2,6 +2,8 @@ package ua.com.goit.gojava2.solo307.interview;
 
 import static org.junit.Assert.*;
 
+import java.util.InputMismatchException;
+
 import org.junit.Before;
 import org.junit.Test;
 

@@ -2,47 +2,48 @@ package ua.com.goit.gojava2.solo307.interview;
 
 public class Answer {
 	
-	private String answer;
-	boolean isCorrect;
 	int id;
+	private String text;
+	boolean isCorrect;
 	
 	public Answer(){
-		answer =  "there is an answer must be here...";
+		text =  "there is an answer must be here...";
 		isCorrect = false;
 		id = 0;
 	}
 	
-	public Answer(int numberOfAnswer, String answer, boolean isRight){
-		this.answer = answer;
-		this.isCorrect = isRight;
-		this.id = numberOfAnswer;
+	public Answer(int id, String text, boolean isCorrect){
+		this.text = text;
+		this.isCorrect = isCorrect;
+		this.id = id;
 	}
 	
-	public String getAnswer() {
-		return answer;
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 	
-	public void setAnswer(String answer) {
-		this.answer = answer;
+	public String getText() {
+		return text;
+	}
+	
+	public void setText(String text) {
+		this.text = text;
 	}
 	
 	public boolean isAnswerCorrect() {
 		return isCorrect;
 	}
 	
-	public void setAnswerCorrect(boolean isRight) {
-		this.isCorrect = isRight;
+	public void setAnswerCorrect(boolean isCorrect) {
+		this.isCorrect = isCorrect;
 	}
 
-	public int getNumberOfAnswer() {
-		return id;
-	}
-
-	public void setNumberOfAnswer(int numberOfAnswer) {
-		this.id = numberOfAnswer;
+	public void printIdAndAnswer(){
+		System.out.println(id + ". " + text + "\n");
 	}
 	
-	public void printNumberAndAnswer(){
-		System.out.println(id + ". " + answer + "\n");
-	}
 }

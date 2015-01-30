@@ -1,16 +1,20 @@
 package ua.com.goit.gojava2.solo307.interview;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Menu {
 	
 	private ArrayList <String> options = new ArrayList<String>();
+	final int EXIT = 9;
+	final int SHOW_QUESTIONS = 1;
+	final int START = 2;
 	
 	public Menu(){
 		options.add("\n" + "1. Показать список вопросов и ответов");
 		options.add("2. Начать собеседование");
-		options.add("0. Выход");
+		options.add("9. Выход");
 	}
 	
 	public ArrayList<String> getOptions() {
@@ -28,14 +32,12 @@ public class Menu {
 	}
 	 
 	public int readInt(){
-		Scanner sc = new Scanner(System.in);
+		final int NULL = 0;
 		System.out.println("\n" + "Пожалуйста, выберите пункт.");
-		if(sc.hasNextInt()){
-			return new Integer(sc.nextInt());
-		}
-		else{
-			System.out.println("Вы ввели не число, запустите программу еще раз...");
-			return 0;
+		try{
+			return new Integer(new Scanner(System.in).nextInt());
+		} catch(InputMismatchException e){
+			return NULL;
 		}
 	}
 }

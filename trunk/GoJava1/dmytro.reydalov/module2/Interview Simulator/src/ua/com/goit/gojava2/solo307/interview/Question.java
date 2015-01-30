@@ -11,11 +11,11 @@ public class Question {
 	private List <Answer> answers = new ArrayList <Answer>();
 	
 	public Question(){
-		text = "there is a question must be here...";
+		this.text = "there is a question must be here...";
 	}
 	
-	public Question(String question, List <Answer> answers, int id){
-		this.text = question;
+	public Question(String text, List <Answer> answers, int id){
+		this.text = text;
 		for(Answer answer: answers){
 			this.answers.add(answer);
 		}
@@ -46,21 +46,15 @@ public class Question {
 		this.answers = answers;
 	}
 	
-	public void printAllAnswers(){
-		for(Answer answer: answers){
-			System.out.println(answer.getAnswer());
-		}
-	}
-	
 	public void printCorrectAnswers(){
 		for(Answer answer: answers){
-			if(answer.isCorrect)System.out.println(answer.getAnswer() + "\n");
+			if(answer.isCorrect)System.out.println(answer.getText() + "\n");
 		}
 	}
 	
 	public void printAswers(Question question){
 		for(Answer answer: answers){
-			answer.printNumberAndAnswer();
+			answer.printIdAndAnswer();
 		}
 	}
 	
@@ -68,7 +62,7 @@ public class Question {
 	int numOfRightAnswer = 0;
 		for(Answer answer: answers){
 			if(answer.isCorrect){
-				numOfRightAnswer = answer.getNumberOfAnswer();
+				numOfRightAnswer = answer.getId();
 				break;
 			}
 		}
@@ -84,7 +78,7 @@ public class Question {
 	}
 		
 	public int readAnswer(){
-		int choise = 0;
+		int option = 0;
 		Scanner sc = new Scanner(System.in);
 		System.out.println("\n" + "Пожалуйста, выберите пункт.");
 		if(sc.hasNextInt()){
@@ -93,6 +87,15 @@ public class Question {
 		else{
 			System.out.println("Вы ввели не число, Введите еще раз");
 		}
-		return choise;
+		return option;
+	}
+	
+	public boolean isAnswerIdExists(int id){
+		for(Answer answer: answers){
+			if(id == answer.getId()){
+				return true;
+			}
+		}
+		return false;
 	}
 }

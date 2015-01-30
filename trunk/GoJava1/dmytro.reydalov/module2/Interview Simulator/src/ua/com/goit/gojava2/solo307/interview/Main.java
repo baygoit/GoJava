@@ -1,29 +1,32 @@
 package ua.com.goit.gojava2.solo307.interview;
 
+import java.util.Collections;
+import java.util.List;
+
 public class Main {
 	public static void main(String[] args) {
 		Interview interview = new Interview();
 		Menu menu = new Menu();
-		int choise = 1;
-		while(choise != 0){
+		int option = 0;
+		while(option != menu.EXIT){
 			menu.printMenu();
-			choise = menu.readInt();
-			switch (choise){
+			option = menu.readInt();
+			switch (option){
 			case 1: interview.printQuestionsAndCorrectAnswers();break; 
 			case 2: 
 				int correctAnswers = 0;
-				for(Question question: interview.getQuestions()){
+				List <Question> randomQuestions = interview.getQuestions();
+				Collections.shuffle(randomQuestions);
+				for(Question question: randomQuestions){
 					interview.printQuestionAndAllAnswers(question);
 					int answerNumber = 0;
-					while(answerNumber < 1 || answerNumber > 4){
+					while(!question.isAnswerIdExists(answerNumber)){
 						answerNumber = menu.readInt();
 					}
 					if(question.isCorrect(question, answerNumber)) correctAnswers++;
 				}
 				interview.isPassed(correctAnswers);
 				break;
-			case 0: System.exit(0);
-			default: System.out.println("Вы ввели несуществующий пункт");
 			}
 		}
 	}

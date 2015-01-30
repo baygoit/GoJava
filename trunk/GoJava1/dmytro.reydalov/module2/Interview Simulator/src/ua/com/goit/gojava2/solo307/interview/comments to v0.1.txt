@@ -1,8 +1,0 @@
-A version 0.1 of Interview Simulator
-I have 2 user stories -
-1) Make an interactive menu with 3 options.
-2) If i choose 1 - i will receive a question and answer to it, later it will be
-a big list of questions and answers...
-if 2 - i receive question and 2 options of answer, i need choose right answer,
-and get a job.
-if 3 - program will terminated.

@@ -19,8 +19,7 @@ public class Interview {
 	}
 
 	public List<Question> readFromXml(){
-		XMLParser parser = new XMLParser();
-		parser.parse();
+		XMLParser parser = new XMLParser("Questions.xml");
 		return parser.questions;
 	}
 	
