@@ -8,7 +8,7 @@ public class View implements Out {
 
     public View() {
         greeting = "Лучший способ предвидеть будущее - это самим создать его.";
-        out = new OutConsole();
+        out = new OutArrayList();
     }
 
     public void showGreeting() {
