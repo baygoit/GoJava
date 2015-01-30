@@ -6,5 +6,4 @@ public class OutConsole implements Out {
     public void output(String output) {
         System.out.println(output);
     }
-
 }

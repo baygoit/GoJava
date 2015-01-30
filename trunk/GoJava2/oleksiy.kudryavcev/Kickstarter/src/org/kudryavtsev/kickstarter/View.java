@@ -4,10 +4,11 @@ import java.util.List;
 
 public class View implements Out {
     private String greeting;
-    private Out out = new OutConsole();
+    private Out out;
 
     public View() {
         greeting = "Лучший способ предвидеть будущее - это самим создать его.";
+        out = new OutConsole();
     }
 
     public void showGreeting() {
