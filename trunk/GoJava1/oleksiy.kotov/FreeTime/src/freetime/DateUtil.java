@@ -12,4 +12,9 @@ public class DateUtil {
         cal.add(Calendar.DATE, days); //minus number would decrement the days
         return cal.getTime();
     }
+    
+    public static Date today()  {
+        Calendar cal = Calendar.getInstance();
+        return cal.getTime();
+    }
 }

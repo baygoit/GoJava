@@ -20,23 +20,23 @@ public class Demo {
                 "111");
         empList[3] = new Employee("Egor", "egor", "", "egor@gmail.com", "111");
 
-        for (int i = 16; i < 30; i++) {
+        for (int i = 16; i < 25; i++) {
             
-            Date d = Date.valueOf("2015-01-" + i);
+            Date d = Date.valueOf("2015-02-" + i);
 
             if (i % 2 == 0) {
-                empList[0].addFreeDay(d);
+                empList[0].markDayFree(d);
             }
 
             if (i % 3 == 0) {
-                empList[1].addFreeDay(d);
+                empList[1].markDayFree(d);
             }
 
             if (i % 4 == 0) {
-                empList[2].addFreeDay(d);
+                empList[2].markDayFree(d);
             }
 
-            empList[3].addFreeDay(d);
+            empList[3].markDayFree(d);
         }
     }
     
@@ -60,7 +60,7 @@ public class Demo {
 
                     String s = sc.next(DATE_PATTERN);
                     Date d = Date.valueOf(s);
-                    empList[0].addFreeDay(d);
+                    empList[0].markDayFree(d);
 
                 }
         }
@@ -77,7 +77,8 @@ public class Demo {
                         String s = sc.next("\\d{4}-\\d{2}-\\d{2}");
 
                         for (Employee emp : empList) {
-                            if (emp.isFree(Date.valueOf(s))) {
+                            Date date = Date.valueOf(s);
+                            if (emp.isDayFree(date)) {
                                 System.out.println(emp.getName());
                             }
                         }
@@ -90,5 +91,7 @@ public class Demo {
 
         }
     }
+    
+    
      
 }
