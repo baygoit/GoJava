@@ -5,7 +5,7 @@ import org.goJava2.kickstarter.controller.Controller;
 import org.goJava2.kickstarter.model.GeneralStorage;
 import org.goJava2.kickstarter.model.Quote;
 import org.goJava2.kickstarter.model.QuoteStorage;
-import org.goJava2.kickstarter.model.Scann;
+import org.goJava2.kickstarter.view.Scann;
 import org.goJava2.kickstarter.view.View;
 
 public class Engine {

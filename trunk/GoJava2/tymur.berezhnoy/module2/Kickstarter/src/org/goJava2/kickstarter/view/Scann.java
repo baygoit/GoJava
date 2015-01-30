@@ -1,4 +1,4 @@
-package org.goJava2.kickstarter.model;
+package org.goJava2.kickstarter.view;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
