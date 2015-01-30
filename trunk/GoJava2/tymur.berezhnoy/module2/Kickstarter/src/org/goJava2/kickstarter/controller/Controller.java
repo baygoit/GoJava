@@ -8,23 +8,23 @@ import org.goJava2.kickstarter.view.View;
 public class Controller implements QuoteManagement, StorageManagement {
 
 	private GeneralStorage storage;
-	private QuoteStorage qouteStorage;
+	private QuoteStorage quoteStorage;
 	private View view;
 	private Category category;
 	
-	public Controller(QuoteStorage qouteStorage, GeneralStorage storage, View view) {
+	public Controller(QuoteStorage quoteStorage, GeneralStorage storage, View view) {
 		this.storage = storage;
-		this.qouteStorage = qouteStorage;
+		this.quoteStorage = quoteStorage;
 		this.view = view;
 	}
 	
 	@Override
 	public void displayQuote() {
-		view.displayHead(qouteStorage.getRandomQuote());
+		view.displayHead(quoteStorage.getRandomQuote());
 	}
 	
 	@Override
-	public void displayCategorys() {
+	public void displayCategories() {
 		view.displayCategories(storage.getCategories());
 	}
 	

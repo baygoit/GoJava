@@ -12,7 +12,7 @@ public class Category {
 		this.name = name;
 	}
 	
-	public String getNameCategory() {
+	public String getName() {
 		return name;
 	}
 }

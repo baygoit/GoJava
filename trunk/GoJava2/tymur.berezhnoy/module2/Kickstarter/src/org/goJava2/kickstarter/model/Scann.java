@@ -4,18 +4,18 @@ import java.util.Scanner;
 
 public class Scann {
 	
-	public int choise() {
+	public int choice() {
 		 boolean inputRight = false;
-         int choise = 0;
+         int choice = 0;
          do {
         	 try {
-        		 choise = new Scanner(System.in).nextInt();
+        		 choice = new Scanner(System.in).nextInt();
         		 inputRight = true;
         	 } catch (InputMismatchException e) {
         		 System.out.print("- Only numbers! Try again\n> ");
         		 inputRight = false;
         	 }
          } while (!inputRight);
-         return choise;
+         return choice;
 	}
 }

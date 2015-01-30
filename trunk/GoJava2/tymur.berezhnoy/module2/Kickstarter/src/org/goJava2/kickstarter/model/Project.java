@@ -4,14 +4,14 @@ public class Project {
 	
 	private final char symbolDollar = 36;
 	private String name;
-	private String desription;
+	private String description;
 	private int requiredAmount;
 	private int total;
 	private int days;
 	
 	public Project(String name, String description, int requiredAmount, int total, int days) {
 		this.name = name;
-		this.desription = description;
+		this.description = description;
 		this.requiredAmount = requiredAmount;
 		this.total = total;
 		this.days = days;
@@ -25,12 +25,12 @@ public class Project {
 		this.name = name;
 	}
 
-	public String getDesription() {
-		return desription;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setNewDesription(String desription) {
-		this.desription = desription;
+	public void setNewDescription(String desription) {
+		this.description = desription;
 	}
 
 	public int getRequiredAmount() {
@@ -51,7 +51,7 @@ public class Project {
 	
 	@Override
 	public String toString() {
-		return new String("Description: " + desription + " \nRequired amount: " + requiredAmount + symbolDollar
+		return new String("Description: " + description + " \nRequired amount: " + requiredAmount + symbolDollar
 						  + "\nTotal: " + total + symbolDollar + " \nDays left: " + days);
 	}
 }

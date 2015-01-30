@@ -26,17 +26,17 @@ public class Engine {
 	
 	public void start() {
 		controller.displayQuote();
-		controller.displayCategorys();
+		controller.displayCategories();
 		int input;
 		
 		while(true) {
 			System.out.print("[0 - exit; 1 - * - select category]\n> ");
-			input = scann.choise();
+			input = scann.choice();
 			if(input > 0 && input <= generalStorage.getCategories().size()) {
 				controller.selectCategory(input);
 				while(true) {
 					System.out.print("[0 - to categories; 1 - * - select project]\n> ");
-					input = scann.choise();
+					input = scann.choice();
 					if(input > 0) {
 						try {
 						controller.selectProject(input);
@@ -45,14 +45,14 @@ public class Engine {
 						}
 						while(true) {
 							System.out.print("[0 - to projects;]\n> ");
-							input = scann.choise();
+							input = scann.choice();
 							if(input == 0) {
 								controller.displaySpecificProjects();
 								break;
 							}
 						}
 					} else if(input == 0) {
-						controller.displayCategorys();
+						controller.displayCategories();
 						break;
 					}
 				}

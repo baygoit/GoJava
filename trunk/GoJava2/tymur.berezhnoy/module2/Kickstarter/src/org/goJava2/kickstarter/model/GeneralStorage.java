@@ -26,13 +26,13 @@ public class GeneralStorage {
 		projectsDance = new ArrayList<Project>();
 		projectsGames = new ArrayList<Project>();
 		
-		projectsArt.add(new Project("NY artists", "Some description", 10000, 200, 25));
-		projectsArt.add(new Project("The Observatory", "Little observatory", 2000, 100, 17));
-		projectsArt.add(new Project("The Sing for Hope Pianos", "The pianos who play in the streat", 15000, 5000, 30));
+		projectsArt.add(new Project("NY artists", "Some description.", 10000, 200, 25));
+		projectsArt.add(new Project("The observatory", "Little observatory/", 2000, 100, 17));
+		projectsArt.add(new Project("The sing for hope pianos", "The pianos who play in the streat.", 15000, 5000, 30));
 		
-		projectsComics.add(new Project("Super Man", "Flying like a thunder!", 50000, 1000, 15));
-		projectsComics.add(new Project("Hulk", "Comics about a green hero by name Hulk", 20000, 100, 50));
-		projectsComics.add(new Project("Spider man", "Little - little spider man", 4000, 200, 40));
+		projectsComics.add(new Project("Super Man", "Comic about a man having super powers.", 50000, 1000, 15));
+		projectsComics.add(new Project("Hulk", "Comics on the green hero named Hulk.", 20000, 100, 50));
+		projectsComics.add(new Project("Spider man", "Little - little spider man.", 4000, 200, 40));
 		
 		projectsDance.add(new Project("Dance & Fly", "You can dance, you can fly, we belive in you!", 5000, 1000, 15));
 		
