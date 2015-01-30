@@ -31,21 +31,28 @@ public class Menu {
     }
 
     public void nextLevel(int nubberForNextLevel) {
-        if (nubberForNextLevel == 0) {
-            currentLevelPosition--;
-            if (currentLevelPosition == 2) {
-                displayCurrentLevel(categoryPosition);
+        beyondLevel(nubberForNextLevel);
+    }
+
+    private void beyondLevel(int nubberForNextLevel) {
+        if ((nubberForNextLevel == 0 && currentLevelPosition == 1) || (nubberForNextLevel > 0 && currentLevelPosition == 3)) {
+            System.out.println("not allowed to go below this level");
+        }else{
+            if (nubberForNextLevel == 0) {
+                currentLevelPosition--;
+                if (currentLevelPosition == 2) {
+                    displayCurrentLevel(categoryPosition);
+                } else {
+                    displayCurrentLevel(nubberForNextLevel);
+                }
             } else {
+                currentLevelPosition++;
+                if (currentLevelPosition == 2) {
+                    categoryPosition = nubberForNextLevel;
+                }
                 displayCurrentLevel(nubberForNextLevel);
             }
-        } else {
-            currentLevelPosition++;
-            if (currentLevelPosition == 2) {
-                categoryPosition = nubberForNextLevel;
-            }
-            displayCurrentLevel(nubberForNextLevel);
         }
-
     }
 
     private void displayCurrentLevel(int nubberForNextLevel) {
