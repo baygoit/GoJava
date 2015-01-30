@@ -5,40 +5,29 @@ import java.util.List;
 import java.util.Random;
 
 public class Kickstart {
-	private List<Category> categories = new ArrayList<>();
 	private List<Project> projects = new ArrayList<>();
 	private List<Project> categoryProjects = new ArrayList<>();
-	private int i = 1;
 	private int j = 0;
 	private int choice;
 	private int projectChoice;
 	private Output output;
 	private Input input;
+	private Categories categories;
+	
 
-	public Kickstart(Output output, Input input) {
+	public Kickstart(Output output, Input input, Categories categories) {
 		this.output = output;
 		this.input = input;
-	}
-
-	public void buildList(Category category) {
-		categories.add(category);
+		this.categories = categories;
 	}
 
 	public void showList() {
-		for (Category category : categories) {
-			if (i == categories.size()) {
-				output.println(i + " - " + category.getName());
-			} else {
-				output.print(i + " - " + category.getName() + ", ");
-				i++;
-			}
-		}
-		output.println("What are you interested in? Pleace, make your choice:");
+		output.println(categories.getCategories() + "\nWhat are you interested in? Pleace, make your choice:");
 	}
 
 	public void showChoice() {
 		choice = input.readChoice() - 1;
-		output.println("You chose - " + categories.get(choice).getName());
+		output.println("You chose - " + categories.readCategory(choice).getName());
 	}
 
 	public String writeProject(Project project) {
@@ -55,7 +44,7 @@ public class Kickstart {
 
 	public void showProjects() {
 		for (Project project : projects) {
-			if (project.getCategory() == categories.get(choice)) {
+			if (project.getCategory() == categories.readCategory(choice)) {
 				categoryProjects.add(project);
 				categoryProjects.set(0, project);
 				j++;
@@ -85,12 +74,10 @@ public class Kickstart {
 				showChosenProject(k);
 					output.println("If you want to return press \"0\"");
 					if (input.readChoice() == 0){
-						i = 1;
 						j = 0;
 						showProjects();
 					}
 				} else {
-					i = 1; 
 					j = 0;
 					showList();
 					showChoice();
@@ -101,11 +88,12 @@ public class Kickstart {
 	}
 
 	public static void main(String[] args) {
-		Kickstart kick = new Kickstart(new ConsoleOutput(), new ConsoleInput());
-		Quote quote = new Quote(new ConsoleOutput(), new Random());
-		Category sport = new Sport();
-		Category science = new Science();
-		Category music = new Music();
+		Categories cat = new Categories();
+		Kickstart kick = new Kickstart(new ConsoleOutput(), new ConsoleInput(), cat);
+		Quote quote = new QuoteGenerator(new ConsoleOutput(), new Random());
+		Category sport = new Category("Sport");
+		Category science = new Category("Science");
+		Category music = new Category("Music");
 		Project pro = new Project(music);
 		Project pro1 = new Project(sport);
 		Project pro2 = new Project(science);
@@ -117,9 +105,9 @@ public class Kickstart {
 		kick.addProject(proj1);
 		kick.addProject(proj12);
 		quote.printQuote();
-		kick.buildList(sport);
-		kick.buildList(science);
-		kick.buildList(music);
+		cat.addCategory(sport);
+		cat.addCategory(science);
+		cat.addCategory(music);
 		pro.setProject("Band", "We want to create new music band", 15000,
 				12540, 35, "bla-bla-bla", "youtube.com",
 				"Q: Have you invested your money? A: yes");
