@@ -16,11 +16,11 @@ public class QuoteGenerator implements Quote{
 		this.output = output;
 	}
 
-	public String getQuote(){
-		return quotes[rand.nextInt(quotes.length)];
+	public String getQuote(int r){
+		return quotes[r];
 	}
 	
 	public void printQuote() {
-		output.println(getQuote());
+		output.println(getQuote(rand.nextInt(quotes.length)));
 	}
 }
