@@ -3,6 +3,8 @@ import java.io.IOException;
 
 
 public class KickstarterS {
+	private static BD bd;
+
 	private static void toCategory() throws IOException, InterruptedException{
 		while (true){
 			Category cat = new Category();
@@ -40,13 +42,21 @@ public class KickstarterS {
 	}
 	
 	public static void main(String[] args) throws IOException, InterruptedException{
-		BD bd = new BD();
+		setBd(new BD());
 		Quotes quote = new Quotes();
 		Output out = new OutputConsole();
 		
 		out.print(quote.getQuote());
 		
 		toCategory();
+	}
+
+	public static BD getBd() {
+		return bd;
+	}
+
+	public static void setBd(BD bd) {
+		KickstarterS.bd = bd;
 	}
 	
 }
