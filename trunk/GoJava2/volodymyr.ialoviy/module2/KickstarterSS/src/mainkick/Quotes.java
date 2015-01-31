@@ -4,10 +4,10 @@ import java.util.Map;
 
 
 public class Quotes {
-	private String quote;
+	private String[] quote;
 	
-	public String getQuote() throws FileNotFoundException{
-		Map<Integer, String> linesAsArray = BD.quoteBD;
+	public String[] getQuote() throws FileNotFoundException{
+		Map<Integer, String[]> linesAsArray = BD.quoteBD;
 		quote = linesAsArray.get((int) (Math.random() * (linesAsArray.size() - 1) + 0.5));
 		return quote;
 	}

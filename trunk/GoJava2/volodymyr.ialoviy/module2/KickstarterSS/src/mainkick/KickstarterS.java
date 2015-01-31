@@ -1,5 +1,6 @@
 package mainkick;
 import java.io.IOException;
+import java.util.Arrays;
 
 
 public class KickstarterS {
@@ -7,10 +8,13 @@ public class KickstarterS {
 
 	private static void toCategory() throws IOException, InterruptedException{
 		while (true){
-			Category cat = new Category();
-			Project project = new Project();
 			Output out = new OutputConsole();
 			Check check = new Check();
+			Categories cat = new Categories();
+			Category caty = new Category();
+			Project project = new Project();
+			Projects projects = new Projects();
+			projects.writeAllCatecories();
 			int chosenCategory;
 			int chosenProject;
 			int choiceToProject;
@@ -22,16 +26,16 @@ public class KickstarterS {
 				Thread.sleep(10000);
 				continue;
 			}
-			out.print("Your chosen category: " + cat.showCategoryName(chosenCategory) + ", containing the following projects: ");
+			out.print("Your chosen category: " + cat.listCatecories.get(chosenCategory - 1).categoryName + ", containing the following projects: ");
 			
 			while (true){
-				cat.showAllProjectInCategory(chosenCategory);
+				caty.showAllProjectInCategory(chosenCategory - 1);
 				out.print("Choice Project Number or 0 for exit to Category: ");
 				chosenProject = check.checkNumber();
 				if (chosenProject == 0){
 					break;
 				}
-				project.showProject(chosenProject);
+				project.showProjectFull(chosenProject - 1);
 				out.print("Choice 0 for exit to Project: ");
 				choiceToProject = check.checkNumber();
 				if (choiceToProject == 0){
@@ -43,10 +47,11 @@ public class KickstarterS {
 	
 	public static void main(String[] args) throws IOException, InterruptedException{
 		setBd(new BD());
+		
 		Quotes quote = new Quotes();
 		Output out = new OutputConsole();
 		
-		out.print(quote.getQuote());
+		out.print(Arrays.toString(quote.getQuote()));
 		
 		toCategory();
 	}
@@ -58,5 +63,5 @@ public class KickstarterS {
 	public static void setBd(BD bd) {
 		KickstarterS.bd = bd;
 	}
-	
+
 }

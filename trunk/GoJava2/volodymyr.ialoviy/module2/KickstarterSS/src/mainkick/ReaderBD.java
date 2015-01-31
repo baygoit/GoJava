@@ -10,16 +10,16 @@ import java.util.Map;
 
 public class ReaderBD {
 	
-	public HashMap<Integer, String> read(String fileName) throws FileNotFoundException {
+	public HashMap<Integer, String[]> read(String fileName) throws FileNotFoundException {
 	    exists(fileName);
-	    Map<Integer, String> hashmap = new HashMap<Integer, String>();
+	    Map<Integer, String[]> hashmap = new HashMap<Integer, String[]>();
 	    try {
 	        BufferedReader in = new BufferedReader(new FileReader(fileName));
 	        try {
 	            String line;
 	            Integer i = 0;
 	            while ((line = in.readLine()) != null) {
-	            	hashmap.put(i, line);
+	            	hashmap.put(i, line.split("\\[\\]"));
 	            	i++;
 	            }
 	        } finally {
@@ -28,7 +28,7 @@ public class ReaderBD {
 	    } catch(IOException e) {
 	        throw new RuntimeException(e);
 	    }
-		return (HashMap<Integer, String>) hashmap;
+		return (HashMap<Integer, String[]>) hashmap;
 	}
 	
 	private void exists(String fileName) throws FileNotFoundException {
