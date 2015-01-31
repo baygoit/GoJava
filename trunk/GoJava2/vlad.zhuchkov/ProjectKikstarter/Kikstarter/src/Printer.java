@@ -3,18 +3,18 @@ import java.util.ArrayList;
 
 
 
-public class Printer {
+public class Printer implements Output {
 	
 	public void showCategoryCatalog(CategoryCatalog catalog){
 		ArrayList<Category> list = catalog.getCatalogList();
 		int i=1;
 		for (Category t : list)
-			System.out.println((i++)+")"+t.getName());
+			print((i++)+")"+t.getName());
 		
 	}
 	public void showCategoryName(CategoryCatalog catalog,int num){
 		ArrayList<Category> list = catalog.getCatalogList();
-		System.out.println(list.get(num).getName());
+		print(list.get(num).getName());
 	}
 	public void showProjects(Category category){
 		ArrayList<Project> Projects = category.getProjectCatalog();
@@ -27,20 +27,21 @@ public class Printer {
 		showProjectDetailedInfo(project);
 	}
 	private void showProjectPreviev(Project project){
-		System.out.println(project.getName());
-		System.out.println(project.getDescription());
+		print(project.getName());
+		print(project.getDescription());
 		ProjectParameters param = project.getParameters();
-		System.out.println("Need to collect "+param.getCost()+"$");
-		System.out.println("Already Collected "+param.getAlreadyCollected()+"$");
-		System.out.println("Days left "+param.getDays());
+		print("Need to collect "+param.getCost()+"$");
+		print("Already Collected "+param.getAlreadyCollected()+"$");
+		print("Days left "+param.getDays());
 		}
 	private void showProjectDetailedInfo(Project project){
 		ProjectParameters.DetailedParameters param = project.getParameters().getDetailedParameters();
-		System.out.println(param.getHisory());
-		System.out.println("Link on demo video: "+param.getDemoLink());
-		System.out.println("FAQ: "+param.getFaqLink());	
+		print(param.getHisory());
+		print("Link on demo video: "+param.getDemoLink());
+		print("FAQ: "+param.getFaqLink());	
 		}
 	public void print (String s){
 		System.out.println(s);
 	}
+	
 }

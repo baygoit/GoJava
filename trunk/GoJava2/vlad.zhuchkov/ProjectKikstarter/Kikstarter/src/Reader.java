@@ -1,20 +1,24 @@
 import java.util.Scanner;
 
-public class Reader {
-	private Scanner sc = new Scanner(System.in);
+public class Reader implements Input {
+	Printer printer;
 
-	public Integer readInt() {
-		boolean inputRight = false;
-		int temp = 0;
-		do {
-			try {
-				temp = Integer.valueOf(sc.nextLine());
-				inputRight = true;
-			} catch (NumberFormatException Integer) {
-				System.out.println("Illigal input. Only integr required");
-				inputRight = false;
-			}
-		} while (!inputRight);
-		return temp;
+	public Reader(Printer pr){
+	this.printer = 	pr;
 	}
+	private Scanner sc = new Scanner(System.in);
+	@Override
+	public int readInt() {
+		int input = 0;
+		try {
+			input = Integer.valueOf(sc.nextLine());
+		} catch (NumberFormatException e) {
+			printer.print("invalid input. Only integer");
+			input = readInt();
+		}
+		
+		return input;
+	}
+	
+	
 }

@@ -7,7 +7,6 @@ public class Category {
 
 	public Category(String name) {
 		StringBuffer sb = new StringBuffer(name);
-		// имя проекта - это имя католога в единственном числе + №. Временно.
 		sb.deleteCharAt(name.length() - 1);
 		this.name = sb.toString();
 		Random rand = new Random();
@@ -27,18 +26,12 @@ public class Category {
 	}
 
 	public Project getProject(int i) {
-		Reader reader = new Reader();
-		boolean inputRight = true;
-		do {
-			if (i > projectCatalog.size()||i<0) {
-				System.out.println("Illigal category number. Try again");
-				i = reader.readInt()-1;
-				inputRight = false;
-			}else{
-				inputRight = true;
-			}
-		} while (!inputRight);
+		Reader reader = new Reader(new Printer());	
+		while (i >= projectCatalog.size()||i<0) {
+			System.out.println("Illigal project number. Try again");
+			i = reader.readInt()-1;
+		} 
 		return projectCatalog.get(i);
 	}
-
+	
 }

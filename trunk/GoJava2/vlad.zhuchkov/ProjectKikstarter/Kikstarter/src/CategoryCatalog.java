@@ -12,17 +12,11 @@ public class CategoryCatalog {
 	}
 
 	public Category getCategory(int i) {
-		Reader reader = new Reader();
-		boolean inputRight = true;
-		do {
-			if (i > categoryCatalog.size()||i<0) {
+		Input reader = new Reader(new Printer());
+		while (i >= categoryCatalog.size()||i<0) {
 				System.out.println("Illigal category number. Try again");
 				i = reader.readInt()-1;
-				inputRight  = false;
-			}else{
-				inputRight = true;
-			}
-		} while (!inputRight);
+				} 
 		return categoryCatalog.get(i);
 	}
 
