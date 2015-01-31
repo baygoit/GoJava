@@ -14,7 +14,8 @@ public class Category{
 	}
 	
 	public void showProjectInShort(int i) throws FileNotFoundException{
-		out.print(Projects.listProject.get(i-1).projectID
+		i -= 1;
+		out.print(Projects.listProject.get(i).projectID
 				+ ", " + Projects.listProject.get(i).projectName
 				+ ", " + Projects.listProject.get(i).shortDescription
 				+ ", " + Projects.listProject.get(i).howMuchNeeded
