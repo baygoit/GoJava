@@ -19,8 +19,7 @@ public class Category{
 	}
 	
 	public String[] recordingCategoryFromBD(int projectID) throws FileNotFoundException{
-		ReaderBD reader = new ReaderBD();
-		Map<Integer, String> linesAsArray = reader.read("Categories.properties", "Category");
+		Map<Integer, String> linesAsArray = BD.categoryBD;
 		String[] string = linesAsArray.get(projectID-1).split("\\[\\]");
 		counterCategory = linesAsArray.size();
 		return string;

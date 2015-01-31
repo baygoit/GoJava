@@ -40,8 +40,10 @@ public class KickstarterS {
 	}
 	
 	public static void main(String[] args) throws IOException, InterruptedException{
+		BD bd = new BD();
 		Quotes quote = new Quotes();
 		Output out = new OutputConsole();
+		
 		out.print(quote.getQuote());
 		
 		toCategory();

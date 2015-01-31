@@ -10,7 +10,7 @@ import java.util.Map;
 
 public class ReaderBD {
 	
-	public HashMap<Integer, String> read(String fileName, String counter) throws FileNotFoundException {
+	public HashMap<Integer, String> read(String fileName) throws FileNotFoundException {
 	    exists(fileName);
 	    Map<Integer, String> hashmap = new HashMap<Integer, String>();
 	    try {

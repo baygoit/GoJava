@@ -44,8 +44,7 @@ public class Project{
 	}
 	
 	private String[] recordingProjectsFromBD(int projectID) throws FileNotFoundException{
-		ReaderBD reader = new ReaderBD();
-		Map<Integer, String> linesAsArray = reader.read("Projects.properties", "Project");
+		Map<Integer, String> linesAsArray = BD.projectBD;
 		String[] string = linesAsArray.get(projectID-1).split("\\[\\]");
 		counterProject = linesAsArray.size();
 		return string;

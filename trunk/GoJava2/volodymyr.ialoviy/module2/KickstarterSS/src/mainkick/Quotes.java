@@ -7,8 +7,7 @@ public class Quotes {
 	private String quote;
 	
 	public String getQuote() throws FileNotFoundException{
-		ReaderBD reader = new ReaderBD();
-		Map<Integer, String> linesAsArray = reader.read("Quotes.properties", "");
+		Map<Integer, String> linesAsArray = BD.quoteBD;
 		quote = linesAsArray.get((int) (Math.random() * (linesAsArray.size() - 1) + 0.5));
 		return quote;
 	}
