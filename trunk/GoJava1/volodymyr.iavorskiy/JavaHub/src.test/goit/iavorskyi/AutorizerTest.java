@@ -1,7 +1,6 @@
 package goit.iavorskyi;
 
 import static org.junit.Assert.*;
-import goit.iavorskyi.tools.Autorizer;
 
 import org.junit.Test;
 

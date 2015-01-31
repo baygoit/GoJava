@@ -1,6 +1,6 @@
-package goit.iavorskyi.tools;
+package goit.iavorskyi;
 
-public class RegisteredUserTools {
+public class UserTools {
 
 	public void like() {
 

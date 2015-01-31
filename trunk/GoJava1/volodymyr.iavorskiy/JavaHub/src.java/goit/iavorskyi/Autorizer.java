@@ -1,7 +1,7 @@
-package goit.iavorskyi.tools;
+package goit.iavorskyi;
 
 public class Autorizer {
-// 123
+ 
 	public boolean login(String login, String password) {
 		if (login.equals("user") && password.equals("pass")) {
 			return true;

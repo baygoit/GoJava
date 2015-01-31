@@ -1,4 +1,4 @@
-package goit.iavorskyi.tools;
+package goit.iavorskyi;
 
 public class AdminTools {
 	
