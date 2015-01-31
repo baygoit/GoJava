@@ -9,9 +9,9 @@ public class Project {
 	private String history;
 	private String linksToVideo;
 	private String questions;
-	private Category category; 
-	
-	public Project(String name, int goal, int daysLeft, String description, String history, String linksToVideo) {
+	private Category category;
+
+	public Project(String name, String description, int goal, int daysLeft, String history, String linksToVideo) {
 		this.name = name;
 		this.goal = goal;
 		this.daysLeft = daysLeft;
@@ -23,7 +23,7 @@ public class Project {
 	}
 
 	public void setCategory(Category category) {
-		this.category = category;		
+		this.category = category;
 	}
 
 	public Category getCategory() {
