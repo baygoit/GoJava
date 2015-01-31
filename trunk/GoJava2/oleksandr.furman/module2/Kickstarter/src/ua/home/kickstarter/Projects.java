@@ -8,12 +8,13 @@ import java.util.Map;
 public class Projects {
 
 	private Map<Category, List<Project>> projects = new HashMap<Category, List<Project>>();
-
+	
 	public void add(Project project) {
-		ArrayList<Project> projectsList = new ArrayList<Project>();
+		
 		if (projects.containsKey(project.getCategory())) {
 			projects.get(project.getCategory()).add(project);
 		} else {
+			ArrayList<Project> projectsList = new ArrayList<Project>();
 			projectsList.add(project);
 			projects.put(project.getCategory(), projectsList);
 		}
