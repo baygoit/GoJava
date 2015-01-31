@@ -12,10 +12,14 @@ public class OutArrayList implements Out {
     @Override
     public void output(String output) {
         list.add(output);
-        System.out.println(this.print());
+        printAll();
     }
-    
+
     public String print() {
         return list.remove(0);
+    }
+
+    public void printAll() {
+        System.out.println(this.print());
     }
 }

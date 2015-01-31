@@ -1,194 +1,166 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <class-diagram version="1.1.8" icons="true" automaticImage="PNG" always-add-relationships="true" generalizations="true" 
   realizations="true" associations="true" dependencies="true" nesting-relationships="true">  
-  <class id="1" language="java" name="org.kudryavtsev.kickstarter.MVC" project="Kickstarter" 
-    file="/Kickstarter/src/org/kudryavtsev/kickstarter/MVC.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="996" y="201"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="2" language="java" name="org.kudryavtsev.kickstarter.Kickstarter" project="Kickstarter" 
-    file="/Kickstarter/src/org/kudryavtsev/kickstarter/Kickstarter.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="106" width="152" x="424" y="37"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="3" language="java" name="org.kudryavtsev.kickstarter.Controller" project="Kickstarter" 
-    file="/Kickstarter/src/org/kudryavtsev/kickstarter/Controller.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="106" width="189" x="214" y="311"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="4" language="java" name="org.kudryavtsev.kickstarter.Scan" project="Kickstarter" 
-    file="/Kickstarter/src/org/kudryavtsev/kickstarter/Scan.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="105" y="138"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="5" language="java" name="org.kudryavtsev.kickstarter.Model" project="Kickstarter" 
-    file="/Kickstarter/src/org/kudryavtsev/kickstarter/Model.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="196" width="256" x="275" y="457"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="6" language="java" name="org.kudryavtsev.kickstarter.View" project="Kickstarter" 
+  <class id="1" language="java" name="org.kudryavtsev.kickstarter.View" project="Kickstarter" 
     file="/Kickstarter/src/org/kudryavtsev/kickstarter/View.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1547" y="559"/>    
+    <position height="-1" width="-1" x="1148" y="503"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="7" language="java" name="org.kudryavtsev.kickstarter.Project" project="Kickstarter" 
+  <class id="2" language="java" name="org.kudryavtsev.kickstarter.Scan" project="Kickstarter" 
+    file="/Kickstarter/src/org/kudryavtsev/kickstarter/Scan.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="127" y="641"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="3" language="java" name="org.kudryavtsev.kickstarter.Project" project="Kickstarter" 
     file="/Kickstarter/src/org/kudryavtsev/kickstarter/Project.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="304" width="201" x="275" y="929"/>    
+    <position height="-1" width="-1" x="773" y="940"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="8" language="java" name="org.kudryavtsev.kickstarter.test.CategoryTest" project="Kickstarter" 
-    file="/Kickstarter/src/org/kudryavtsev/kickstarter/test/CategoryTest.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="797" y="559"/>    
+  <class id="4" language="java" name="org.kudryavtsev.kickstarter.MVC" project="Kickstarter" 
+    file="/Kickstarter/src/org/kudryavtsev/kickstarter/MVC.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="566" y="38"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="9" language="java" name="org.kudryavtsev.kickstarter.Category" project="Kickstarter" 
+  <class id="5" language="java" name="org.kudryavtsev.kickstarter.Controller" project="Kickstarter" 
+    file="/Kickstarter/src/org/kudryavtsev/kickstarter/Controller.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="129" y="119"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="org.kudryavtsev.kickstarter.Category" project="Kickstarter" 
     file="/Kickstarter/src/org/kudryavtsev/kickstarter/Category.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1091" y="861"/>    
+    <position height="-1" width="-1" x="272" y="862"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <dependency id="10">    
-    <bendpoint x="624" y="693"/>    
-    <end type="SOURCE" refId="6"/>    
-    <end type="TARGET" refId="7"/>  
-  </dependency>  
-  <dependency id="11">    
-    <bendpoint x="183" y="311"/>    
-    <end type="SOURCE" refId="1"/>    
-    <end type="TARGET" refId="4"/>  
-  </dependency>  
+  <class id="7" language="java" name="org.kudryavtsev.kickstarter.Model" project="Kickstarter" 
+    file="/Kickstarter/src/org/kudryavtsev/kickstarter/Model.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="659" y="486"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="8" language="java" name="org.kudryavtsev.kickstarter.Kickstarter" project="Kickstarter" 
+    file="/Kickstarter/src/org/kudryavtsev/kickstarter/Kickstarter.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1225" y="10"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <association id="9">    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="10" name="scan"/>      
+      <multiplicity id="11" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
   <association id="12">    
-    <bendpoint x="284" y="693"/>    
-    <end type="SOURCE" refId="5" navigable="false">      
-      <attribute id="13" name="projectsList"/>      
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="13" name="categoriesList"/>      
       <multiplicity id="14" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="7" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="15">    
-    <end type="SOURCE" refId="5" navigable="false">      
-      <attribute id="16" name="categoriesList"/>      
-      <multiplicity id="17" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="9" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <dependency id="18">    
-    <bendpoint x="433" y="311"/>    
-    <end type="SOURCE" refId="1"/>    
-    <end type="TARGET" refId="5"/>  
-  </dependency>  
-  <dependency id="19">    
-    <bendpoint x="223" y="457"/>    
-    <bendpoint x="223" y="693"/>    
-    <end type="SOURCE" refId="3"/>    
-    <end type="TARGET" refId="7"/>  
-  </dependency>  
-  <dependency id="20">    
-    <end type="SOURCE" refId="8"/>    
-    <end type="TARGET" refId="9"/>  
-  </dependency>  
-  <dependency id="21">    
-    <end type="SOURCE" refId="2"/>    
-    <end type="TARGET" refId="1"/>  
-  </dependency>  
-  <association id="22">    
-    <end type="SOURCE" refId="3" navigable="false">      
-      <attribute id="23" name="view">        
-        <position height="0" width="0" x="844" y="-104"/>      
-      </attribute>      
-      <multiplicity id="24" minimum="0" maximum="1">        
-        <position height="0" width="0" x="844" y="-104"/>      
-      </multiplicity>    
     </end>    
     <end type="TARGET" refId="6" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="25">    
-    <end type="SOURCE" refId="9" navigable="false">      
-      <attribute id="26" name="projectsList"/>      
-      <multiplicity id="27" minimum="0" maximum="2147483647"/>    
+  <dependency id="15">    
+    <bendpoint x="200" y="420"/>    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="6"/>  
+  </dependency>  
+  <dependency id="16">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="1"/>  
+  </dependency>  
+  <dependency id="17">    
+    <bendpoint x="145" y="128"/>    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="3"/>  
+  </dependency>  
+  <association id="18">    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="19" name="projectsList"/>      
+      <multiplicity id="20" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="21">    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="22" name="model"/>      
+      <multiplicity id="23" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="7" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="28">    
-    <end type="SOURCE" refId="3" navigable="false">      
-      <attribute id="29" name="scan">        
-        <position height="0" width="0" x="1444" y="-918"/>      
-      </attribute>      
-      <multiplicity id="30" minimum="0" maximum="1">        
-        <position height="0" width="0" x="1444" y="-918"/>      
-      </multiplicity>    
+  <dependency id="24">    
+    <bendpoint x="707" y="304"/>    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="7"/>  
+  </dependency>  
+  <dependency id="25">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="4"/>  
+  </dependency>  
+  <association id="26">    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="27" name="view"/>      
+      <multiplicity id="28" minimum="0" maximum="1"/>    
     </end>    
-    <end type="TARGET" refId="4" navigable="true"/>    
+    <end type="TARGET" refId="1" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <dependency id="31">    
-    <bendpoint x="244" y="457"/>    
-    <end type="SOURCE" refId="3"/>    
-    <end type="TARGET" refId="9"/>  
-  </dependency>  
-  <dependency id="32">    
-    <end type="SOURCE" refId="6"/>    
-    <end type="TARGET" refId="9"/>  
-  </dependency>  
-  <dependency id="33">    
-    <end type="SOURCE" refId="1"/>    
-    <end type="TARGET" refId="3"/>  
-  </dependency>  
-  <association id="34">    
-    <end type="SOURCE" refId="3" navigable="false">      
-      <attribute id="35" name="model">        
-        <position height="0" width="0" x="472" y="670"/>      
-      </attribute>      
-      <multiplicity id="36" minimum="0" maximum="1">        
-        <position height="0" width="0" x="472" y="670"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="5" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <dependency id="37">    
-    <bendpoint x="698" y="311"/>    
+  <dependency id="29">    
     <end type="SOURCE" refId="1"/>    
     <end type="TARGET" refId="6"/>  
+  </dependency>  
+  <association id="30">    
+    <bendpoint x="586" y="618"/>    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="31" name="projectsList"/>      
+      <multiplicity id="32" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="33">    
+    <bendpoint x="419" y="331"/>    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="2"/>  
+  </dependency>  
+  <dependency id="34">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="5"/>  
+  </dependency>  
+  <dependency id="35">    
+    <end type="SOURCE" refId="1"/>    
+    <end type="TARGET" refId="3"/>  
   </dependency>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
     sort-features="false" accessors="true" visibility="true">    

@@ -44,13 +44,15 @@ public class Controller {
                     exitFromProject = true;
                 }
                 if (numberOfProject == 0) {
-                    System.out.println("Exiting from categories");
-                    exitFromCategories = true;
+                    break;
+//                    System.out.println("Exiting from categories");
+//                    exitFromCategories = true;
                 }
             }
             if (numberOfCategory == 0) {
-                System.out.println("Exiting from application");
-                exitFromApplication = true;
+                break;
+//                System.out.println("Exiting from application");
+//                exitFromApplication = true;
             }
         }
         scan.close();

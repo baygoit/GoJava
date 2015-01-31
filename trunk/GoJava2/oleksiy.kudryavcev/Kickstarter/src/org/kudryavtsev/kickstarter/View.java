@@ -2,13 +2,13 @@ package org.kudryavtsev.kickstarter;
 
 import java.util.List;
 
-public class View implements Out {
+public class View {
     private String greeting;
     private Out out;
 
-    public View() {
+    public View(Out output) {
         greeting = "Лучший способ предвидеть будущее - это самим создать его.";
-        out = new OutArrayList();
+        out = output;
     }
 
     public void showGreeting() {
@@ -33,6 +33,8 @@ public class View implements Out {
             out.output("(" + counter + ") " + category);
             counter++;
         }
+        // List<Object> list = categoryList;
+        // showList(list);
     }
 
     public void showProject(Project project) {
@@ -43,8 +45,11 @@ public class View implements Out {
         out.output("Select option: (not implemented, just '0' to exit)");
     }
 
-    @Override
-    public void output(String output) {
+    public void showList(List<Object> list) {
+        int counter = 1;
+        for (Object element : list) {
+            out.output("(" + counter + ") " + element);
+            counter++;
+        }
     }
-
 }
