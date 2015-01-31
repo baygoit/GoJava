@@ -38,8 +38,13 @@ public class Kickstart {
 
 	public void showChosenProject(int choice) {
 		projectChoice = choice - 1;
+		output.println("--------------------------------------------------");
 		output.println("You chose:"
 				+ (projects.readProject(projectChoice)));
+		for (String s : projects.giveAllInfo(projects.readObject(projectChoice))){
+			output.println(s);
+		}
+		output.println("--------------------------------------------------");
 	}
 
 	public void buildMenu(){

@@ -7,6 +7,7 @@ public class Projects {
 	private List<Project> projects = new ArrayList<>();
 	private List<Project> categoryProjects = new ArrayList<>();
 	private List<String> projectData = new ArrayList<>();
+	private List<String> projectAllInfo = new ArrayList<>();
 	
 	public void addProject(Project project) {
 		projects.add(project);
@@ -37,8 +38,21 @@ public class Projects {
 				+ project.getDaysLeft();
 	}
 	
+	public ArrayList<String> giveAllInfo(Project project){
+		projectAllInfo.clear();
+		projectAllInfo.add(project.getHistory());
+		projectAllInfo.add(project.getVideoLink());
+		projectAllInfo.add(project.getQuestion());	
+		
+		return (ArrayList<String>) projectAllInfo;
+ 	}
+	
 	public String readProject(int index){
 		return projectData.get(index);
+	}
+	
+	public Project readObject(int index){
+		return categoryProjects.get(index);
 	}
 	
 }
