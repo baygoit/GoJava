@@ -26,7 +26,7 @@ public class KickstarterS {
 				Thread.sleep(10000);
 				continue;
 			}
-			out.print("Your chosen category: " + categories.listCatecories.get(chosenCategory - 1).categoryName + ", containing the following projects: ");
+			out.print("Your chosen category: " + Categories.listCatecories.get(chosenCategory - 1).getCategoryName() + ", containing the following projects: ");
 			
 			while (true){
 				category.showAllProjectInCategory(chosenCategory - 1);
