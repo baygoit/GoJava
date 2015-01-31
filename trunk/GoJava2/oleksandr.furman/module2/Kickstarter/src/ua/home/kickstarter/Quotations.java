@@ -1,20 +1,29 @@
 package ua.home.kickstarter;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Random;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
 public class Quotations {
-
-	public String nextQuote() {
-String[] quotations = new String[] {
-		"Нельзя же сказать человеку: «Ты можешь творить. Так давай, твори». \nГораздо вернее подождать, пока он сам не скажет: "
-				+ "\n«Я могу творить, и я буду творить, хотите вы этого или нет». (c) Айзек Азимов",
-				"Я не хочу создавать что-то для того, чтобы мне платили. \nЯ хочу, чтобы мне платили за то, что я что-то создаю. (c) Леонард Коэн",
-				"Ключ к открытию вашей мечты – это, в первую очередь, творчество. (c) Зак Эфрон"			
-};
-		int index = new Random().nextInt(quotations.length);
-
-		String quote = quotations[index];
-
-		return quote;
-	}
+	String quote = "";
+    public String nextQuote() {
+    	JSONParser parser = new JSONParser();
+		try {
+			Object obj = parser.parse(new FileReader("d:\\ss33.json"));
+			JSONObject jsonObject = (JSONObject) obj;
+			quote = (String) jsonObject.get("" + new Random().nextInt(jsonObject.size()));
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+  return quote;
+ }
 }

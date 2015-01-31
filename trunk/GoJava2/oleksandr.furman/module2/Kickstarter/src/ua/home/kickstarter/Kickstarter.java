@@ -1,9 +1,16 @@
 package ua.home.kickstarter;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Map;
-import java.util.Scanner;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 public class Kickstarter {
 
@@ -16,120 +23,128 @@ public class Kickstarter {
 	}
 
 	public static void main(String[] args) {
-		Category category1 = new Category("Games");
-		Category category2 = new Category("Technology");
-		Category category3 = new Category("Design");
+		JSONParser parser = new JSONParser();
+		try {
+			JSONArray a = (JSONArray) parser.parse(new FileReader("d:\\ss12.json"));
 
-		Categories categories = new Categories();
+			Category category1 = new Category("Games");
+			Category category2 = new Category("Technology");
+			Category category3 = new Category("Design");
 
-		categories.add(category1);
-		categories.add(category2);
-		categories.add(category3);
+			Categories categories = new Categories();
 
-		Project project1 = new Project("Space Cadets: Away Missions", 40000, 28,
-				"A cooperative game, the 3rd title in the Space Cadets line. "
-						+ "Explore UFOs, acquire alien technology and fight hordes of hostile aliens!",
-				"Тут будет история проекта №1", "Тут будут линки на видео и демо проекта №1");
-		Project project2 = new Project("Epic PvP: Fantasy", 15000, 32,
-				"Make a character by choosing a Class Deck, a Race Deck, "
-						+ "and shuffling them together. Then battle in this fast-paced card game.",
-				"Тут будет история проекта №2", "Тут будут линки на видео и демо проекта №2");
-		Project project3 = new Project("BaneBeasts: Mighty Monsters", 11940, 17,
-				"Grab the mightiest of monsters, from dragons and demons "
-						+ "to rat beasts and orc wyverns, for your tabletop fantasy armies!",
-				"Тут будет история проекта №3", "Тут будут линки на видео и демо проекта №3");
+			categories.add(category1);
+			categories.add(category2);
+			categories.add(category3);
 
-		Project project4 = new Project(
-				"Flotilla for Raspberry Pi - Friendly Electronics",
-				50000,
-				21,
-				"Build your next great idea in minutes, not hours. Hassle-free digital tinkering for everyone with Flotilla for Raspberry Pi!",
-				"Тут будет история проекта №4", "Тут будут линки на видео и демо проекта №4");
-		Project project5 = new Project(
-				"Blynk - build an app for your Arduino project in 5 minutes",
-				10000,
-				35,
-				"Platform with iOs and Android apps to control Arduino, Raspberry Pi and similar microcontroller boards over Internet.",
-				"Тут будет история проекта №5", "Тут будут линки на видео и демо проекта №5");
-		Project project6 = new Project(
-				"A quality Dillenger folding electric bike for under $400.00!",
-				30000,
-				19,
-				"Most reliable, easy to use, fun and affordable electric bike, ever! Available for delivery to anywhere in the world for under $400",
-				"Тут будет история проекта №6", "Тут будут линки на видео и демо проекта №6");
+			JSONObject jsonObject1 = (JSONObject) a.get(0);
+			JSONObject jsonObject2 = (JSONObject) a.get(1);
+			JSONObject jsonObject3 = (JSONObject) a.get(2);
+			JSONObject jsonObject4 = (JSONObject) a.get(3);
+			JSONObject jsonObject5 = (JSONObject) a.get(4);
+			JSONObject jsonObject6 = (JSONObject) a.get(5);
 
-		project1.setCategory(category1);
-		project2.setCategory(category1);
-		project3.setCategory(category1);
-		project4.setCategory(category2);
-		project5.setCategory(category2);
-		project6.setCategory(category2);
+			Project project1 = new Project("" + jsonObject1.get("name"), "" + jsonObject1.get("description"),
+					Integer.parseInt("" + jsonObject1.get("goal")), Integer.parseInt("" + jsonObject1.get("daysLeft")),
+					"" + jsonObject1.get("history"), "" + jsonObject1.get("linksToVideo"));
+			Project project2 = new Project("" + jsonObject2.get("name"), "" + jsonObject2.get("description"),
+					Integer.parseInt("" + jsonObject2.get("goal")), Integer.parseInt("" + jsonObject2.get("daysLeft")),
+					"" + jsonObject2.get("history"), "" + jsonObject2.get("linksToVideo"));
+			Project project3 = new Project("" + jsonObject3.get("name"), "" + jsonObject3.get("description"),
+					Integer.parseInt("" + jsonObject3.get("goal")), Integer.parseInt("" + jsonObject3.get("daysLeft")),
+					"" + jsonObject3.get("history"), "" + jsonObject3.get("linksToVideo"));
+			Project project4 = new Project("" + jsonObject4.get("name"), "" + jsonObject4.get("description"),
+					Integer.parseInt("" + jsonObject4.get("goal")), Integer.parseInt("" + jsonObject4.get("daysLeft")),
 
-		Projects projects = new Projects();
-		projects.add(project1);
-		projects.add(project2);
-		projects.add(project3);
-		projects.add(project4);
-		projects.add(project5);
-		projects.add(project6);
+					"" + jsonObject4.get("history"), "" + jsonObject4.get("linksToVideo"));
+			Project project5 = new Project("" + jsonObject5.get("name"), "" + jsonObject5.get("description"),
+					Integer.parseInt("" + jsonObject5.get("goal")), Integer.parseInt("" + jsonObject5.get("daysLeft")),
+					"" + jsonObject5.get("history"), "" + jsonObject5.get("linksToVideo"));
+			Project project6 = new Project("" + jsonObject6.get("name"), "" + jsonObject6.get("description"),
+					Integer.parseInt("" + jsonObject6.get("goal")), Integer.parseInt("" + jsonObject6.get("daysLeft")),
+					"" + jsonObject6.get("history"), "" + jsonObject6.get("linksToVideo"));
 
-		Kickstarter kickstarter = new Kickstarter(categories, projects);
-		kickstarter.run();
+			project1.setCategory(category1);
+			project2.setCategory(category1);
+			project3.setCategory(category1);
+			project4.setCategory(category2);
+			project5.setCategory(category2);
+			project6.setCategory(category2);
+
+			Projects projects = new Projects();
+			projects.add(project1);
+			projects.add(project2);
+			projects.add(project3);
+			projects.add(project4);
+			projects.add(project5);
+			projects.add(project6);
+
+			Kickstarter kickstarter = new Kickstarter(categories, projects);
+			kickstarter.run();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
 	}
 
 	private void run() {
+		InOut inOut = new InOut();
 		Quotations quotations = new Quotations();
-		System.out.println(quotations.nextQuote());
+		inOut.output(quotations.nextQuote());
+
 		while (true) {
 			try {
-				System.out.println();
-				System.out.println("Выберите категорию:");
+				inOut.output("");
+				inOut.output("Выберите категорию:");
 				for (Map.Entry<Integer, Category> pair : categories.getCategories().entrySet()) {
-					System.out.println(pair.getKey() + " - " + pair.getValue().getName());
+					inOut.output(pair.getKey() + " - " + pair.getValue().getName());
 				}
-				Scanner scanner = new Scanner(System.in);
-				int categoryIndex = scanner.nextInt();
+
+				int categoryIndex = inOut.input();
 				Category category = categories.getName(categoryIndex);
-				System.out.println("Вы выбрали категорию " + category.getName());
+				inOut.output("Вы выбрали категорию " + category.getName());
 				while (true) {
-					System.out.println();
-					System.out.println("Выберите проект:");
-					System.out.println("------------------------------------");
+					inOut.output("");
+					inOut.output("Выберите проект:");
+					inOut.output("------------------------------------");
 					List<Project> foundProjects = projects.getProjects(category);
 					for (Project project : foundProjects) {
-						System.out.println("Название проекта:           " + project.getName());
-						System.out.println("Описание проекта:           " + project.getDescription());
-						System.out.println("Необходимая сумма:          " + project.getGoal() + "$");
-						System.out.println("Собранная сумма:            " + project.getPledged() + "$");
-						System.out.println("До окончания сбора средств: " + project.getDaysLeft() + " дней");
-						System.out.println("------------------------------------");
+						inOut.output("Название проекта:           " + project.getName());
+						inOut.output("Описание проекта:           " + project.getDescription());
+						inOut.output("Необходимая сумма:          " + project.getGoal() + "$");
+						inOut.output("Собранная сумма:            " + project.getPledged() + "$");
+						inOut.output("До окончания сбора средств: " + project.getDaysLeft() + " дней");
+						inOut.output("------------------------------------");
 					}
 
-					System.out.println("Введите 0 для выхода");
-					System.out.println();
+					inOut.output("Введите 0 для выхода");
+					inOut.output("");
 
-					int projectIndex = scanner.nextInt();
+					int projectIndex = inOut.input();
 					if (projectIndex == 0)
 						break;
 					Project project = projects.getFullProject(projectIndex, category);
-					System.out.println("Вы выбрали проект " + project.getName());
-					System.out.println();
-					System.out.println("Название проекта:           " + project.getName());
-					System.out.println("Описание проекта:           " + project.getDescription());
-					System.out.println("Необходимая сумма:          " + project.getGoal() + "$");
-					System.out.println("Собранная сумма:            " + project.getPledged() + "$");
-					System.out.println("До окончания сбора средств: " + project.getDaysLeft() + " дней");
-					System.out.println("История проекта:            " + project.getHistory());
-					System.out.println("Линки на видео с демо       " + project.getLinksToVideo());
-					System.out.println("Вопросы/ответы:             " + project.getQuestions());
-					System.out.println("------------------------------------");
-					System.out.println("Введите 0 для выхода");
-					int exit = scanner.nextInt();
+					inOut.output("Вы выбрали проект " + project.getName());
+					inOut.output("");
+					inOut.output("Название проекта:           " + project.getName());
+					inOut.output("Описание проекта:           " + project.getDescription());
+					inOut.output("Необходимая сумма:          " + project.getGoal() + "$");
+					inOut.output("Собранная сумма:            " + project.getPledged() + "$");
+					inOut.output("До окончания сбора средств: " + project.getDaysLeft() + " дней");
+					inOut.output("История проекта:            " + project.getHistory());
+					inOut.output("Линки на видео с демо       " + project.getLinksToVideo());
+					inOut.output("Вопросы/ответы:             " + project.getQuestions());
+					inOut.output("------------------------------------");
+					inOut.output("Введите 0 для выхода");
+					int exit = inOut.input();
 				}
 			} catch (IndexOutOfBoundsException e) {
-				System.out.println("Введенный номер не соответствует ни одной категории(проекту), повторите ввод.");
+				inOut.output("Введенный номер не соответствует ни одной категории(проекту), повторите ввод.");
 			} catch (InputMismatchException e) {
-				System.out.println("Введен некорректный символ, допустим ввод цифр от 0-9. Повторите ввод.");
+				inOut.output("Введен некорректный символ, допустим ввод цифр от 0-9. Повторите ввод.");
 			}
 		}
 	}
