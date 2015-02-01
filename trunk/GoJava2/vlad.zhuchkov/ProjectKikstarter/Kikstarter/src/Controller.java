@@ -19,14 +19,12 @@ public class Controller {
 			Category selectedCategory;
 			do {
 				selectedCategory = selectCategory(catalog, printer, reader);
-				printer.showProjects(selectedCategory);
-				printer.print("select project or 0 to change category");
+				selectProject(printer, selectedCategory);
 				option = reader.readInt();
 			} while (option == 0);
 			do {
 				if (option == 0) {
-					printer.showProjects(selectedCategory);
-					printer.print("select project or 0 to change category");
+					selectProject(printer, selectedCategory);
 					option = reader.readInt() - 1;
 				}
 				Project selectedProject = selectedCategory.getProject(option);
@@ -35,6 +33,11 @@ public class Controller {
 				option = reader.readInt();
 			} while (option == 0);
 		} while (option != 1);
+	}
+
+	private void selectProject(Printer printer, Category selectedCategory) {
+		printer.showProjects(selectedCategory);
+		printer.print("select project or 0 to change category");
 	}
 
 	private Category selectCategory(CategoryCatalog catalog, Printer printer,
@@ -46,4 +49,5 @@ public class Controller {
 		printer.print("You select " + selectedCategory.getName() + "\n");
 		return selectedCategory;
 	}
+	
 }
