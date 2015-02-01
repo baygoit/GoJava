@@ -5,9 +5,9 @@ import java.util.List;
 public class Controller {
     private Model model;
     private View view;
-    private Scan scan;
+    private Input scan;
 
-    public Controller(Model model, View view, Scan scan) {
+    public Controller(Model model, View view, Input scan) {
         this.model = model;
         this.view = view;
         this.scan = scan;
@@ -23,13 +23,13 @@ public class Controller {
         while (!exitFromApplication) {
             view.showCategories(categoriesList);
             int numberOfCategory = scan.getAnswer();
-            if (numberOfCategory == 0)
+            if ((numberOfCategory == 0) || (numberOfCategory > categoriesList.size()))
                 break;
             boolean exitFromCategories = false;
             while (!exitFromCategories) {
                 view.showProjects(categoriesList.get(numberOfCategory - 1).getProjectsList());
                 int numberOfProject = scan.getAnswer();
-                if (numberOfProject == 0)
+                if ((numberOfProject == 0) || (numberOfProject > categoriesList.get(numberOfCategory - 1).getProjectsList().size()))
                     break;
                 boolean exitFromProject = false;
                 while (!exitFromProject) {
@@ -45,14 +45,10 @@ public class Controller {
                 }
                 if (numberOfProject == 0) {
                     break;
-//                    System.out.println("Exiting from categories");
-//                    exitFromCategories = true;
                 }
             }
             if (numberOfCategory == 0) {
                 break;
-//                System.out.println("Exiting from application");
-//                exitFromApplication = true;
             }
         }
         scan.close();

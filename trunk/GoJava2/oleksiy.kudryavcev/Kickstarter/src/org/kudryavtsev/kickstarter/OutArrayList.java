@@ -13,6 +13,7 @@ public class OutArrayList implements Out {
     public void output(String output) {
         list.add(output);
         printAll();
+//        list.clear();
     }
 
     public String print() {
