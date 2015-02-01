@@ -4,9 +4,9 @@ import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
 
-public class CostItemTransaction implements Serializable {
+public class BankAccountTransaction implements Serializable {
 
-	private static final long serialVersionUID = -916804494020185343L;
+	private static final long serialVersionUID = 4386873221423578793L;
 	private long id = 0;
 	private Date date = Calendar.getInstance().getTime();
 	private String description = "";

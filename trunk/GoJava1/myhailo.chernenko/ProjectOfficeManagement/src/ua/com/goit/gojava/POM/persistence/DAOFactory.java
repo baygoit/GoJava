@@ -4,8 +4,8 @@ import java.util.List;
 
 public interface DAOFactory {
 	
-	public void saveObject(DataObject obj, String key);
-	public void deleteObject(DataObject obj, String key);
-	public List<DataObject> getObjectList(String key);
+	public void saveObject(Object obj, String key);
+	public void deleteObject(Object obj, String key);
+	public List<Object> getObjectList(String key);
 	
 }

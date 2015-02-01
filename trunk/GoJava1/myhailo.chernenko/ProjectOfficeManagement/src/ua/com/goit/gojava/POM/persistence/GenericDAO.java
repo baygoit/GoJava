@@ -4,7 +4,7 @@ import java.util.List;
 
 //import ua.com.goit.gojava.POM.dataModel.*;
 
-public class GenericDAO<T extends DataObject> {
+public class GenericDAO<T> {
 	
 	private Class<T> classT;
 	private DAOFactory dataManager;
@@ -40,7 +40,8 @@ public class GenericDAO<T extends DataObject> {
 		T findedGenericObj = null;
 		List<T> list = getList();
 		for(T genericObj : list) {
-			if(genericObj.getName().equals(name)){
+			if((genericObj instanceof DataObject)
+					&&(((DataObject)genericObj).getName().equals(name))	){
 				findedGenericObj = genericObj;
 			}
 		}
@@ -62,9 +63,9 @@ public class GenericDAO<T extends DataObject> {
 
 	public List<T> getList() {
 		
-		List<DataObject> objectList = dataManager.getObjectList(classT.getName());
+		List<Object> objectList = dataManager.getObjectList(classT.getName());
 		@SuppressWarnings("unchecked")
-		List<T> result =  (List<T>)(List<?>) objectList;
+		List<T> result =  (List<T>)objectList;
 		
 		return result;
 	}

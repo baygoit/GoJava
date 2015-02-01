@@ -18,6 +18,7 @@ public class Project implements DataObject, Serializable {
 	private boolean active = true;
 	private String pm = "";
 	private List<ProjectStage> stages = new ArrayList<ProjectStage>();
+	private List<FinancialProjectPlan> projectsPlans = new ArrayList<FinancialProjectPlan>();
 	
 	public long getId() {
 		
@@ -112,6 +113,21 @@ public class Project implements DataObject, Serializable {
 		
 	}
 	
+	public FinancialProjectPlan createProjectPlan() {
+		
+		FinancialProjectPlan newProjectPlan = new FinancialProjectPlan();
+		projectsPlans.add(newProjectPlan);
+		
+		return newProjectPlan;
+		
+	}
+	
+	public List<FinancialProjectPlan> getProjectsPlans() {
+		
+		return projectsPlans;
+		
+	}
+
 	public long getProfit() {
 
 		long result = 0;
@@ -124,4 +140,25 @@ public class Project implements DataObject, Serializable {
 		return result;
 	}
 
+	public long getPlanFactDifference() {
+
+		long result = 0;
+		for (ProjectStage stage:getStages()) {
+			
+			result += stage.getProfit();
+			
+		}
+		
+		for (FinancialProjectPlan projectPlan:getProjectsPlans()) {
+			
+			if(projectPlan.isActive()) {
+				
+				result -= projectPlan.getPlannedProfit();
+				
+			}
+			
+		}
+		
+		return result;
+	}
 }

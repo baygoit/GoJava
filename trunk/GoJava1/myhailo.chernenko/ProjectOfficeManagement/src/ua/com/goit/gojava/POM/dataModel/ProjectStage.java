@@ -50,6 +50,16 @@ public class ProjectStage  implements DataObject , Serializable {
 		
 	}
 
+	public void deleteTransactionByDoc(FinanceDocument doc) {
+		
+		for (int i = transactions.size() - 1; i >= 0 ; i--) {
+			if (transactions.get(i).getDoc() == doc) {
+				transactions.remove(i);
+			}
+		}
+		
+	}
+	
 	public long getProfit() {
 
 		long result = 0;
@@ -61,5 +71,5 @@ public class ProjectStage  implements DataObject , Serializable {
 		
 		return result;
 	}
-
+	
 }

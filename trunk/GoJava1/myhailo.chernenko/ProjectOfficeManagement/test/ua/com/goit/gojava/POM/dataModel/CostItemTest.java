@@ -60,5 +60,40 @@ public class CostItemTest {
 		assertEquals(costItem.getProfit(), 0);
 		
 	}
+	
+	@Test
+	public void testDeleteDocTransaction() {
+
+		FinanceDocument financeDocument1 = new FinanceDocument() {};
+		FinanceDocument financeDocument2 = new FinanceDocument() {};
+		
+		CostItemTransaction addedTransaction = costItem.addTransaction();
+		addedTransaction.setDoc(financeDocument1);
+		addedTransaction = costItem.addTransaction();
+		addedTransaction.setDoc(financeDocument1);
+		
+		assertEquals(costItem.getTransactions().size(), 2);
+		
+		costItem.deleteDocTransaction(financeDocument1);
+		
+		assertEquals(costItem.getTransactions().size(), 0);
+		
+		addedTransaction = costItem.addTransaction();
+		addedTransaction.setDoc(financeDocument1);
+		addedTransaction = costItem.addTransaction();
+		addedTransaction.setDoc(financeDocument1);
+		addedTransaction = costItem.addTransaction();
+		addedTransaction.setDoc(financeDocument2);
+		
+		costItem.deleteDocTransaction(financeDocument1);
+		
+		assertEquals(costItem.getTransactions().size(), 1);
+		
+		for (CostItemTransaction trans: costItem.getTransactions()) {
+			assertEquals(trans.getDoc(), financeDocument2);
+			assertNotEquals(trans.getDoc(), financeDocument1);
+		}
+		
+	}
 
 }

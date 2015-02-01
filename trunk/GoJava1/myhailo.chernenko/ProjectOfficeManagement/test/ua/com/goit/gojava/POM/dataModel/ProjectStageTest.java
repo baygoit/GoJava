@@ -55,9 +55,47 @@ public class ProjectStageTest {
 		ProjectFinResultTransaction addedTransaction = projectStage.addTransaction();
 		addedTransaction.setSum(10);
 		assertEquals(projectStage.getProfit(), 10);
+		addedTransaction = projectStage.addTransaction();
+		addedTransaction.setSum(20);
+		assertEquals(projectStage.getProfit(), 30);
 		ProjectFinResultTransaction added2Transaction = projectStage.addTransaction();
-		added2Transaction.setSum(-10);
+		added2Transaction.setSum(-30);
 		assertEquals(projectStage.getProfit(), 0);
+		
+	}
+	
+	@Test
+	public void testDeleteDocTransaction() {
+
+		FinanceDocument financeDocument1 = new FinanceDocument() {};
+		FinanceDocument financeDocument2 = new FinanceDocument() {};
+		
+		ProjectFinResultTransaction addedTransaction = projectStage.addTransaction();
+		addedTransaction.setDoc(financeDocument1);
+		addedTransaction = projectStage.addTransaction();
+		addedTransaction.setDoc(financeDocument1);
+		
+		assertEquals(projectStage.getTransactions().size(), 2);
+		
+		projectStage.deleteTransactionByDoc(financeDocument1);
+		
+		assertEquals(projectStage.getTransactions().size(), 0);
+		
+		addedTransaction = projectStage.addTransaction();
+		addedTransaction.setDoc(financeDocument1);
+		addedTransaction = projectStage.addTransaction();
+		addedTransaction.setDoc(financeDocument1);
+		addedTransaction = projectStage.addTransaction();
+		addedTransaction.setDoc(financeDocument2);
+		
+		projectStage.deleteTransactionByDoc(financeDocument1);
+		
+		assertEquals(projectStage.getTransactions().size(), 1);
+		
+		for (ProjectFinResultTransaction trans: projectStage.getTransactions()) {
+			assertEquals(trans.getDoc(), financeDocument2);
+			assertNotEquals(trans.getDoc(), financeDocument1);
+		}
 		
 	}
 

@@ -1,295 +1,339 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <class-diagram version="1.1.8" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
   associations="true" dependencies="true" nesting-relationships="true">  
-  <class id="1" language="java" name="ua.com.goit.gojava.POM.dataModel.CostItem" project="ProjectOfficeManagement" 
-    file="/ProjectOfficeManagement/src/ua/com/goit/gojava/POM/dataModel/CostItem.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="333" width="242" x="245" y="1547"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="2" language="java" name="ua.com.goit.gojava.POM.dataModel.CostItemTransaction" 
+  <class id="1" language="java" name="ua.com.goit.gojava.POM.dataModel.FinancialProjectPlan" 
     project="ProjectOfficeManagement" 
-    file="/ProjectOfficeManagement/src/ua/com/goit/gojava/POM/dataModel/CostItemTransaction.java" binary="false" 
+    file="/ProjectOfficeManagement/src/ua/com/goit/gojava/POM/dataModel/FinancialProjectPlan.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="351" width="177" x="320" y="1930"/>    
+    <position height="387" width="316" x="477" y="1143"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <interface id="3" language="java" name="ua.com.goit.gojava.POM.dataModel.FinanceDocument" 
+  <interface id="2" language="java" name="ua.com.goit.gojava.POM.dataModel.FinanceDocument" 
     project="ProjectOfficeManagement" 
     file="/ProjectOfficeManagement/src/ua/com/goit/gojava/POM/dataModel/FinanceDocument.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="63" width="158" x="518" y="2321"/>    
+    <position height="63" width="158" x="670" y="2789"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <enumeration id="4" language="java" name="ua.com.goit.gojava.POM.dataModel.ProfitLostsType" 
-    project="ProjectOfficeManagement" 
-    file="/ProjectOfficeManagement/src/ua/com/goit/gojava/POM/dataModel/ProfitLostsType.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="117" width="158" x="122" y="1930"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </enumeration>  
-  <class id="5" language="java" name="ua.com.goit.gojava.POM.dataModel.Project" project="ProjectOfficeManagement" 
-    file="/ProjectOfficeManagement/src/ua/com/goit/gojava/POM/dataModel/Project.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="477" width="193" x="557" y="248"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="6" language="java" name="ua.com.goit.gojava.POM.dataModel.ProjectFinResultTransaction" 
+  <class id="3" language="java" name="ua.com.goit.gojava.POM.dataModel.ProjectFinResultTransaction" 
     project="ProjectOfficeManagement" 
     file="/ProjectOfficeManagement/src/ua/com/goit/gojava/POM/dataModel/ProjectFinResultTransaction.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="387" width="184" x="502" y="1120"/>    
+    <position height="387" width="184" x="670" y="1570"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="7" language="java" name="ua.com.goit.gojava.POM.dataModel.ProjectStage" project="ProjectOfficeManagement" 
+  <class id="4" language="java" name="ua.com.goit.gojava.POM.dataModel.ProjectStage" project="ProjectOfficeManagement" 
     file="/ProjectOfficeManagement/src/ua/com/goit/gojava/POM/dataModel/ProjectStage.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="315" width="278" x="502" y="765"/>    
+    <position height="333" width="278" x="875" y="1143"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <enumeration id="8" language="java" name="ua.com.goit.gojava.POM.dataModel.ProjectType" 
+  <enumeration id="5" language="java" name="ua.com.goit.gojava.POM.dataModel.ProjectType" 
     project="ProjectOfficeManagement" 
     file="/ProjectOfficeManagement/src/ua/com/goit/gojava/POM/dataModel/ProjectType.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="117" width="158" x="304" y="765"/>    
+    <position height="117" width="158" x="279" y="1143"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </enumeration>  
-  <class id="9" language="java" name="ua.com.goit.gojava.POM.persistence.CostItemDAO" project="ProjectOfficeManagement" 
-    file="/ProjectOfficeManagement/src/ua/com/goit/gojava/POM/persistence/CostItemDAO.java" binary="false" 
+  <class id="6" language="java" name="ua.com.goit.gojava.POM.dataModel.PaymentDocument" 
+    project="ProjectOfficeManagement" 
+    file="/ProjectOfficeManagement/src/ua/com/goit/gojava/POM/dataModel/PaymentDocument.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="171" width="164" x="245" y="1120"/>    
+    <position height="495" width="202" x="875" y="37"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <interface id="10" language="java" name="ua.com.goit.gojava.POM.persistence.DAOFactory" 
+  <class id="7" language="java" name="ua.com.goit.gojava.POM.dataModel.BankAccountTransaction" 
     project="ProjectOfficeManagement" 
-    file="/ProjectOfficeManagement/src/ua/com/goit/gojava/POM/persistence/DAOFactory.java" binary="false" 
+    file="/ProjectOfficeManagement/src/ua/com/goit/gojava/POM/dataModel/BankAccountTransaction.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="117" width="201" x="558" y="1547"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </interface>  
-  <class id="11" language="java" name="ua.com.goit.gojava.POM.persistence.DataManager" project="ProjectOfficeManagement" 
-    file="/ProjectOfficeManagement/src/ua/com/goit/gojava/POM/persistence/DataManager.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="207" width="232" x="841" y="1120"/>    
+    <position height="351" width="177" x="62" y="1143"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <interface id="12" language="java" name="ua.com.goit.gojava.POM.persistence.DataObject" 
-    project="ProjectOfficeManagement" 
-    file="/ProjectOfficeManagement/src/ua/com/goit/gojava/POM/persistence/DataObject.java" binary="false" 
+  <class id="8" language="java" name="ua.com.goit.gojava.POM.dataModel.Project" project="ProjectOfficeManagement" 
+    file="/ProjectOfficeManagement/src/ua/com/goit/gojava/POM/dataModel/Project.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="63" width="164" x="780" y="1930"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </interface>  
-  <interface id="13" language="java" name="ua.com.goit.gojava.POM.persistence.GenericDAO" 
-    project="ProjectOfficeManagement" 
-    file="/ProjectOfficeManagement/src/ua/com/goit/gojava/POM/persistence/GenericDAO.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="153" width="164" x="41" y="1547"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </interface>  
-  <class id="14" language="java" name="ua.com.goit.gojava.POM.persistence.ProjectDAO" project="ProjectOfficeManagement" 
-    file="/ProjectOfficeManagement/src/ua/com/goit/gojava/POM/persistence/ProjectDAO.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="171" width="164" x="557" y="37"/>    
+    <position height="531" width="307" x="507" y="572"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
+  <enumeration id="9" language="java" name="ua.com.goit.gojava.POM.dataModel.ProfitLostsType" 
+    project="ProjectOfficeManagement" 
+    file="/ProjectOfficeManagement/src/ua/com/goit/gojava/POM/dataModel/ProfitLostsType.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="117" width="158" x="916" y="2398"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </enumeration>  
+  <class id="10" language="java" name="ua.com.goit.gojava.POM.dataModel.CostItemTransaction" 
+    project="ProjectOfficeManagement" 
+    file="/ProjectOfficeManagement/src/ua/com/goit/gojava/POM/dataModel/CostItemTransaction.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="351" width="177" x="1114" y="2398"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="11" language="java" name="ua.com.goit.gojava.POM.dataModel.CostItem" project="ProjectOfficeManagement" 
+    file="/ProjectOfficeManagement/src/ua/com/goit/gojava/POM/dataModel/CostItem.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="351" width="248" x="916" y="1997"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="12" language="java" name="ua.com.goit.gojava.POM.dataModel.BankAccount" project="ProjectOfficeManagement" 
+    file="/ProjectOfficeManagement/src/ua/com/goit/gojava/POM/dataModel/BankAccount.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="333" width="266" x="62" y="572"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <dependency id="13">    
+    <bendpoint x="884" y="1570"/>    
+    <bendpoint x="874" y="1997"/>    
+    <bendpoint x="864" y="2398"/>    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="2"/>  
+  </dependency>  
+  <dependency id="14">    
+    <bendpoint x="844" y="572"/>    
+    <bendpoint x="844" y="1143"/>    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="3"/>  
+  </dependency>  
   <association id="15">    
-    <end type="SOURCE" refId="5" navigable="false">      
-      <attribute id="16" name="stages"/>      
-      <multiplicity id="17" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="7" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <realization id="18">    
-    <end type="SOURCE" refId="9"/>    
-    <end type="TARGET" refId="13"/>  
-  </realization>  
-  <association id="19">    
-    <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="20" name="type"/>      
-      <multiplicity id="21" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="4" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <realization id="22">    
-    <end type="SOURCE" refId="11"/>    
-    <end type="TARGET" refId="10"/>  
-  </realization>  
-  <association id="23">    
-    <end type="SOURCE" refId="9" navigable="false">      
-      <attribute id="24" name="dataManager"/>      
-      <multiplicity id="25" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="10" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="26">    
-    <bendpoint x="527" y="1547"/>    
-    <bendpoint x="527" y="1930"/>    
+    <bendpoint x="1183" y="572"/>    
+    <bendpoint x="1183" y="1143"/>    
+    <bendpoint x="1183" y="1570"/>    
     <end type="SOURCE" refId="6" navigable="false">      
-      <attribute id="27" name="doc"/>      
-      <multiplicity id="28" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="3" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <dependency id="29">    
-    <end type="SOURCE" refId="10"/>    
-    <end type="TARGET" refId="12"/>  
-  </dependency>  
-  <dependency id="30">    
-    <bendpoint x="831" y="1547"/>    
-    <end type="SOURCE" refId="11"/>    
-    <end type="TARGET" refId="12"/>  
-  </dependency>  
-  <dependency id="31">    
-    <end type="SOURCE" refId="14"/>    
-    <end type="TARGET" refId="5"/>  
-  </dependency>  
-  <association id="32">    
-    <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="33" name="doc"/>      
-      <multiplicity id="34" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="3" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="35">    
-    <end type="SOURCE" refId="7" navigable="false">      
-      <attribute id="36" name="transactions"/>      
-      <multiplicity id="37" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="6" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="38">    
-    <bendpoint x="831" y="248"/>    
-    <bendpoint x="831" y="765"/>    
-    <end type="SOURCE" refId="14" navigable="false">      
-      <attribute id="39" name="dataManager"/>      
-      <multiplicity id="40" minimum="0" maximum="1"/>    
+      <attribute id="16" name="costItem"/>      
+      <multiplicity id="17" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="11" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <dependency id="41">    
-    <end type="SOURCE" refId="9"/>    
-    <end type="TARGET" refId="1"/>  
+  <association id="18">    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="19" name="stages"/>      
+      <multiplicity id="20" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="21">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="22" name="costItem"/>      
+      <multiplicity id="23" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="11" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="24">    
+    <bendpoint x="823" y="1143"/>    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="3"/>  
   </dependency>  
-  <realization id="42">    
-    <end type="SOURCE" refId="1"/>    
-    <end type="TARGET" refId="12"/>  
-  </realization>  
-  <realization id="43">    
-    <bendpoint x="789" y="1120"/>    
-    <bendpoint x="789" y="1547"/>    
-    <end type="SOURCE" refId="7"/>    
-    <end type="TARGET" refId="12"/>  
-  </realization>  
-  <association id="44">    
-    <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="45" name="parent"/>      
-      <multiplicity id="46" minimum="0" maximum="1"/>    
+  <association id="25">    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="26" name="bankAccount"/>      
+      <multiplicity id="27" minimum="0" maximum="1"/>    
     </end>    
-    <end type="TARGET" refId="1" navigable="true"/>    
+    <end type="TARGET" refId="12" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <realization id="47">    
-    <bendpoint x="810" y="765"/>    
-    <bendpoint x="810" y="1120"/>    
-    <bendpoint x="810" y="1547"/>    
-    <end type="SOURCE" refId="5"/>    
-    <end type="TARGET" refId="12"/>  
-  </realization>  
-  <association id="48">    
-    <end type="SOURCE" refId="5" navigable="false">      
-      <attribute id="49" name="type"/>      
-      <multiplicity id="50" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="8" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="51">    
-    <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="52" name="transactions"/>      
-      <multiplicity id="53" minimum="0" maximum="2147483647"/>    
+  <association id="28">    
+    <bendpoint x="679" y="1997"/>    
+    <bendpoint x="679" y="2398"/>    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="29" name="doc"/>      
+      <multiplicity id="30" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="2" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="54">    
+  <realization id="31">    
+    <bendpoint x="582" y="1570"/>    
+    <bendpoint x="582" y="1997"/>    
+    <bendpoint x="582" y="2398"/>    
+    <end type="SOURCE" refId="1"/>    
+    <end type="TARGET" refId="2"/>  
+  </realization>  
+  <association id="32">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="33" name="plannedTransactions"/>      
+      <multiplicity id="34" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="35">    
+    <bendpoint x="885" y="2398"/>    
+    <end type="SOURCE" refId="11"/>    
+    <end type="TARGET" refId="2"/>  
+  </dependency>  
+  <association id="36">    
+    <end type="SOURCE" refId="11" navigable="false">      
+      <attribute id="37" name="type"/>      
+      <multiplicity id="38" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="39">    
     <end type="SOURCE" refId="6" navigable="false">      
-      <attribute id="55" name="costItem"/>      
-      <multiplicity id="56" minimum="0" maximum="1"/>    
+      <attribute id="40" name="project"/>      
+      <multiplicity id="41" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="8" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="42">    
+    <bendpoint x="884" y="572"/>    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="43" name="projectStage"/>      
+      <multiplicity id="44" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="45">    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="46" name="projectsPlans"/>      
+      <multiplicity id="47" minimum="0" maximum="2147483647"/>    
     </end>    
     <end type="TARGET" refId="1" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <realization id="57">    
-    <bendpoint x="214" y="248"/>    
-    <bendpoint x="214" y="765"/>    
-    <bendpoint x="214" y="1120"/>    
-    <end type="SOURCE" refId="14"/>    
-    <end type="TARGET" refId="13"/>  
+  <association id="48">    
+    <end type="SOURCE" refId="10" navigable="false">      
+      <attribute id="49" name="doc"/>      
+      <multiplicity id="50" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="51">    
+    <bendpoint x="1321" y="572"/>    
+    <bendpoint x="1321" y="1143"/>    
+    <bendpoint x="1321" y="1570"/>    
+    <bendpoint x="1321" y="1997"/>    
+    <bendpoint x="1321" y="2398"/>    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="2"/>  
   </realization>  
+  <association id="52">    
+    <bendpoint x="375" y="1570"/>    
+    <bendpoint x="375" y="1997"/>    
+    <bendpoint x="375" y="2398"/>    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="53" name="doc"/>      
+      <multiplicity id="54" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="55">    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="56" name="type"/>      
+      <multiplicity id="57" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="5" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="58">    
+    <bendpoint x="1204" y="572"/>    
+    <bendpoint x="1204" y="1143"/>    
+    <bendpoint x="1204" y="1570"/>    
+    <bendpoint x="1204" y="1997"/>    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="10"/>  
+  </dependency>  
+  <association id="59">    
+    <end type="SOURCE" refId="11" navigable="false">      
+      <attribute id="60" name="parent"/>      
+      <multiplicity id="61" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="11" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="62">    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="63" name="transactions"/>      
+      <multiplicity id="64" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="65">    
+    <bendpoint x="31" y="1143"/>    
+    <bendpoint x="31" y="1570"/>    
+    <bendpoint x="31" y="1997"/>    
+    <bendpoint x="31" y="2398"/>    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="2"/>  
+  </dependency>  
+  <dependency id="66">    
+    <bendpoint x="476" y="572"/>    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="7"/>  
+  </dependency>  
+  <association id="67">    
+    <end type="SOURCE" refId="11" navigable="false">      
+      <attribute id="68" name="transactions"/>      
+      <multiplicity id="69" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="70">    
+    <end type="SOURCE" refId="12" navigable="false">      
+      <attribute id="71" name="transactions"/>      
+      <multiplicity id="72" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
     sort-features="false" accessors="true" visibility="true">    
     <attributes public="true" package="true" protected="true" private="true" static="true"/>    

@@ -8,14 +8,13 @@ import java.util.List;
 
 import ua.com.goit.gojava.POM.persistence.DataObject;
 
-public class CostItem implements DataObject , Serializable {
+public class BankAccount implements DataObject , Serializable {
 	
-	private static final long serialVersionUID = -6737879737443630451L;
+	private static final long serialVersionUID = 3817213953018189950L;
 	private long id = 0;
 	private String name = "";
-	private ProfitLostsType type = ProfitLostsType.LOSTS;
-	private CostItem parent;
-	private List<CostItemTransaction> transactions = new ArrayList<CostItemTransaction>();
+	private String bankName = "";
+	private List<BankAccountTransaction> transactions = new ArrayList<BankAccountTransaction>();
 	
 	public long getId() {
 		
@@ -41,39 +40,27 @@ public class CostItem implements DataObject , Serializable {
 		
 	}
 	
-	public ProfitLostsType getType() {
+	public String getBankName() {
 		
-		return type;
-		
-	}
-	
-	public void setType(ProfitLostsType type) {
-		
-		this.type = type;
+		return bankName;
 		
 	}
 	
-	public CostItem getParent() {
+	public void setBankName(String bankName) {
 		
-		return parent;
-		
-	}
-	
-	public void setParent(CostItem parent) {
-		
-		this.parent = parent;
+		this.bankName = bankName;
 		
 	}
 	
-	public List<CostItemTransaction> getTransactions() {
+	public List<BankAccountTransaction> getTransactions() {
 		
 		return transactions;
 		
 	}
 	
-	public CostItemTransaction addTransaction() {
+	public BankAccountTransaction addTransaction() {
 		
-		CostItemTransaction transaction = new CostItemTransaction();
+		BankAccountTransaction transaction = new BankAccountTransaction();
 		transactions.add(transaction);
 		return transaction;
 		
@@ -89,10 +76,10 @@ public class CostItem implements DataObject , Serializable {
 		
 	}
 	
-	public long getProfit() {
+	public long getTotal() {
 
 		long result = 0;
-		for (CostItemTransaction transaction:getTransactions()) {
+		for (BankAccountTransaction transaction:getTransactions()) {
 			
 			result += transaction.getSum();
 			

@@ -9,7 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 
-public abstract class GenericDAOTest<T extends DataObject> {
+public abstract class GenericDAOTest<T> {
 
 	private DataManager dataManager;
 	private GenericDAO<T> genericDAO;
@@ -26,7 +26,7 @@ public abstract class GenericDAOTest<T extends DataObject> {
 		
 		dataManager = new DataManager();
 		for (int i = dataManager.getObjectList(classT.getName()).size() - 1; i >= 0 ;i--) {
-			DataObject obj = dataManager.getObjectList(classT.getName()).get(i);
+			Object obj = dataManager.getObjectList(classT.getName()).get(i);
 			dataManager.deleteObject(obj, classT.getName());
 		}
 
@@ -54,27 +54,32 @@ public abstract class GenericDAOTest<T extends DataObject> {
 		assertEquals(null,genericObj);
 		
 		genericObj = genericDAO.create();
-		genericObj.setName("name");
-		genericDAO.update(genericObj);
-		T genericObj2 = genericDAO.getByName("name");
-				
-		assertEquals(genericObj,genericObj2);
 		
-		genericObj = genericDAO.getByName("name2");
+		if (genericObj instanceof DataObject) {
 		
-		assertEquals(null,genericObj);
+			DataObject datacObj = (DataObject) genericObj;
+			datacObj.setName("name");
+			
+			genericDAO.update(genericObj);
+			T genericObj2 = genericDAO.getByName("name");
+					
+			assertEquals(genericObj,genericObj2);
+			
+			genericObj = genericDAO.getByName("name2");
+			
+			assertEquals(null,genericObj);
+		}
 	}
 
 	@Test
 	public void testUpdate() {
 
 		T genericObj = genericDAO.create();
-		genericObj.setName("name");
 		genericDAO.update(genericObj);
 		
 		assertEquals(dataManager.getObjectList(classT.getName()).size(),1);
 		
-		assertEquals(genericDAO.getList().get(0).getName(),genericObj.getName());
+		assertEquals(genericDAO.getList().get(0),genericObj);
 	}
 
 	@Test
@@ -85,7 +90,7 @@ public abstract class GenericDAOTest<T extends DataObject> {
 		T genericObj2 = genericDAO.create();
 		genericDAO.update(genericObj2);
 		
-		List<DataObject> objectList = dataManager.getObjectList(classT.getName());
+		List<Object> objectList = dataManager.getObjectList(classT.getName());
 		
 		assertEquals(objectList.size(),2);
 		assertTrue(objectList.contains(genericObj));
@@ -101,12 +106,11 @@ public abstract class GenericDAOTest<T extends DataObject> {
 	public void testGetList() {
 
 		T genericObj = genericDAO.create();
-		genericObj.setName("name");
 		genericDAO.update(genericObj);
 		
 		assertEquals(genericDAO.getList().size(),1);
 		
-		assertEquals(genericDAO.getList().get(0).getName(),genericObj.getName());
+		assertEquals(genericDAO.getList().get(0),genericObj);
 		
 	}
 

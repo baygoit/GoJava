@@ -23,7 +23,7 @@ public class DataManagerTest {
 		
 		dataManager = new DataManager();
 		for (int i = dataManager.getObjectList(CLASS_NAME).size() - 1; i >= 0 ;i--) {
-			DataObject obj = dataManager.getObjectList(CLASS_NAME).get(i);
+			Object obj = dataManager.getObjectList(CLASS_NAME).get(i);
 			dataManager.deleteObject(obj, CLASS_NAME);
 		}
 		
@@ -43,7 +43,7 @@ public class DataManagerTest {
 	@Test
 	public void testGetObjectListEmptyString() {
 		
-		List<DataObject> objectList = dataManager.getObjectList("");
+		List<Object> objectList = dataManager.getObjectList("");
 		
 		assertNotNull(objectList);
 
@@ -52,7 +52,7 @@ public class DataManagerTest {
 	@Test
 	public void testGetObjectListNullString() {
 		
-		List<DataObject> objectList = dataManager.getObjectList(null);
+		List<Object> objectList = dataManager.getObjectList(null);
 		
 		assertNotNull(objectList);
 
@@ -61,7 +61,7 @@ public class DataManagerTest {
 	@Test
 	public void testGetObjectListSomeString() {
 		
-		List<DataObject> objectList = dataManager.getObjectList(CLASS_NAME);
+		List<Object> objectList = dataManager.getObjectList(CLASS_NAME);
 		
 		assertNotNull(objectList);
 

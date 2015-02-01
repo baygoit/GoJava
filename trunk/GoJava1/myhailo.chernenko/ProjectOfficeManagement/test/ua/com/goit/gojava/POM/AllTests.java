@@ -15,9 +15,11 @@ import ua.com.goit.gojava.POM.persistence.*;
 		ProjectStageTest.class,
 		ProjectTest.class,
 		DataManagerTest.class,
-		//GenericDAOTest.class
 		ProjectDAOTest.class,
-		CostItemDAOTest.class
+		CostItemDAOTest.class,
+		PaymentDocumentTest.class,
+		BankAccountTransactionTest.class,
+		BankAccountTest.class
 	})
 public class AllTests {
 
