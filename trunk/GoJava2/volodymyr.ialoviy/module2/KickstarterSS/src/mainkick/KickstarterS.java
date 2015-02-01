@@ -4,8 +4,6 @@ import java.util.Arrays;
 
 
 public class KickstarterS {
-	private static BD bd;
-
 	private static void toCategory() throws IOException, InterruptedException{
 		while (true){
 			Output out = new OutputConsole();
@@ -46,22 +44,12 @@ public class KickstarterS {
 	}
 	
 	public static void main(String[] args) throws IOException, InterruptedException{
-		setBd(new BD());
-		
 		Quotes quote = new Quotes();
 		Output out = new OutputConsole();
 		
 		out.print(Arrays.toString(quote.getQuote()));
 		
 		toCategory();
-	}
-
-	public static BD getBd() {
-		return bd;
-	}
-
-	public static void setBd(BD bd) {
-		KickstarterS.bd = bd;
 	}
 
 }
