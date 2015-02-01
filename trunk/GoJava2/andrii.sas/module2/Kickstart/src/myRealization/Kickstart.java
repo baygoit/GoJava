@@ -22,7 +22,7 @@ public class Kickstart {
 	}
 
 	public void showChoice() {
-		choice = catchException() - 1;
+		choice = catchArrayError();
 		output.println("You chose - " + categories.readCategory(choice).getName());
 	}
 
@@ -47,6 +47,20 @@ public class Kickstart {
 		output.println("--------------------------------------------------");
 	}
 	
+	public int catchArrayError(){
+		int l = 0;
+		while(true){
+			try {
+				l = catchException() - 1;
+				categories.readCategory(l);
+				break;
+			} catch (IndexOutOfBoundsException e){
+				output.println("Error!! There are no such category - Try again:");
+			}
+		}
+		return l;
+	}
+	
 	public int catchException(){
 		int l = 0;
 		while(true){
@@ -65,15 +79,14 @@ public class Kickstart {
 				showProjects();
 			} else {
 				while (g != 0){
-					output.println("You must enter 0 \nPlease, try again");
+					output.println("Error!! You must enter 0 \nPlease, try again");
 					g = catchException();
 				}
 				showProjects();
 			}
 	}
 	
-	public void navigate() {
-		int k = catchException();
+	public void navigate(int k) {
 		if (k != 0){
 			showChosenProject(k);
 			output.println("Return - \"0\"");
@@ -92,7 +105,7 @@ public class Kickstart {
 			showProjects();
 			firstTime = false;
 		} else {
-			navigate();
+			navigate(catchException());
 		}
 		return firstTime;
 	}
