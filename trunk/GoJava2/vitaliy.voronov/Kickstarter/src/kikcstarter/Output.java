@@ -17,13 +17,14 @@ public class Output {
 		System.out.println("you chooce - " + choice);
 	}
 
-	public void printProjectEducation(ArrayList<Project> projects) {
+	public void printProject(ArrayList<Project> projects) {
 
 		int i = 0;
 		for (Project project : projects) {
 			i++;
-			System.out.println(i + ") " + project.getName() + " "
-					+ project.getNeedMoney());
+			System.out.println(i + ") " + project.getName() + "\n " + project.getDescription() + "\n We need - " 
+					+ project.getNeedMoney() + "$\n We have - " + project.getHaveMoney() + "$\n Time over - " + 
+					project.getDaysBeforeEnd() + " days");
 		}
 	}
 

@@ -21,15 +21,20 @@ public class Main {
 				out.youChoose(Category.EDUCATION.name());
 				ArrayList<Project> projectsByCategory = stor
 						.getProjectsByCategory(Category.EDUCATION);
-				out.printProjectEducation(projectsByCategory);
-				int projectId = in.scanInt();
-				System.out.println(projectsByCategory.get(projectId - 1));
+				out.printProject(projectsByCategory);
+				int projectId1 = in.scanInt();
+				System.out.println(projectsByCategory.get(projectId1 - 1));
 				break;
 			case 2:
-				out.youChoose("finance");
+				out.youChoose(Category.FINANCE.name());
+				ArrayList<Project> projectsByCategory1 = stor
+						.getProjectsByCategory(Category.FINANCE);
+				out.printProject(projectsByCategory1);
+				int projectId2 = in.scanInt();
+				System.out.println(projectsByCategory1.get(projectId2 - 1));
 				break;
 			case 3:
-				out.youChoose("games");
+				out.youChoose(Category.GAMES.name());
 				break;
 			case 4:
 				break;
