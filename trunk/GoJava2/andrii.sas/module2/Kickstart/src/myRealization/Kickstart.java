@@ -37,7 +37,7 @@ public class Kickstart {
 	}
 
 	public void showChosenProject(int choice) {
-		projectChoice = choice - 1;
+		projectChoice = choice;
 		output.println("--------------------------------------------------");
 		output.println("You chose:"
 				+ (projects.readProject(projectChoice)));
@@ -45,6 +45,23 @@ public class Kickstart {
 			output.println(s);
 		}
 		output.println("--------------------------------------------------");
+	}
+	
+	public int catchProjectError(){
+		int l = 0;
+		while(true){
+			try {
+				l = catchException() - 1;
+				if (l < 0){
+					break;
+				}
+				projects.readObject(l);
+				break;
+			} catch (IndexOutOfBoundsException e){
+				output.println("Error!! There are no such project - Try again:");
+			}
+		}
+		return l;
 	}
 	
 	public int catchArrayError(){
@@ -87,7 +104,7 @@ public class Kickstart {
 	}
 	
 	public void navigate(int k) {
-		if (k != 0){
+		if (k >= 0){
 			showChosenProject(k);
 			output.println("Return - \"0\"");
 			returnToProjects(catchException());
@@ -105,7 +122,7 @@ public class Kickstart {
 			showProjects();
 			firstTime = false;
 		} else {
-			navigate(catchException());
+			navigate(catchProjectError());
 		}
 		return firstTime;
 	}
