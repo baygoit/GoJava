@@ -1,5 +1,7 @@
 package ua.home.kickstarter;
 
+import org.json.simple.JSONObject;
+
 public class Project {
 	private String name;
 	private int goal;
@@ -11,13 +13,13 @@ public class Project {
 	private String questions;
 	private Category category;
 
-	public Project(String name, String description, int goal, int daysLeft, String history, String linksToVideo) {
-		this.name = name;
-		this.goal = goal;
-		this.daysLeft = daysLeft;
-		this.description = description;
-		this.history = history;
-		this.linksToVideo = linksToVideo;
+	public Project(JSONObject jsonObject) {
+		this.name = "" + jsonObject.get("name");
+		this.description = "" + jsonObject.get("description");
+		this.goal = Integer.parseInt("" + jsonObject.get("goal"));
+		this.daysLeft = Integer.parseInt("" + jsonObject.get("daysLeft"));
+		this.history = "" + jsonObject.get("history");
+		this.linksToVideo = "" + jsonObject.get("linksToVideo");
 		this.pledged = 0;
 		this.questions = "тут пока пусто";
 	}
