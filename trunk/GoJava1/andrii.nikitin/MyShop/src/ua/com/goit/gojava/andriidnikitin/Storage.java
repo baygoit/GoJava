@@ -2,7 +2,7 @@ package ua.com.goit.gojava.andriidnikitin;
 
 import java.util.List;
 
-public interface GoodStorage {
+public interface Storage {
 	
 	public List<Category> getCategoryList();
 	

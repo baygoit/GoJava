@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GoodStorageImpl implements GoodStorage {
+public class StorageImpl implements Storage {
 	
 	@SuppressWarnings("serial")
 	private List<Category> categoryList = new ArrayList<Category>(){{
@@ -23,16 +23,16 @@ public class GoodStorageImpl implements GoodStorage {
 		this.add(setId(new Good(5, "VOX Overdrive", categoryList.get(2), new BigDecimal(300.0))));
 	}};
 	
-	public GoodStorageImpl() {
+	public StorageImpl() {
 		
 	}
 	
-	protected GoodStorageImpl setCategoryList(List<Category> categoryList) {
+	protected StorageImpl setCategoryList(List<Category> categoryList) {
 		this.categoryList = categoryList;
 		return this;
 	}
 
-	protected GoodStorageImpl setGoodList(List<Good> goodList) {
+	protected StorageImpl setGoodList(List<Good> goodList) {
 		this.goodList = goodList;
 		return this;
 	}

@@ -12,7 +12,7 @@ public class GoodStorageImplTest {
 	public void constructorTest() {
 		final List<Category> categoryList = new ArrayList<Category>();
 		final List<Good> goodList = new ArrayList<Good>();
-		final GoodStorageImpl store = new GoodStorageImpl()
+		final StorageImpl store = new StorageImpl()
 												.setCategoryList(categoryList)
 												.setGoodList(goodList);
 		assertEquals(categoryList, store.getCategoryList());
@@ -22,13 +22,13 @@ public class GoodStorageImplTest {
 	
 	@Test
 	public void getCategoryListTest() {
-		final GoodStorageImpl store = new GoodStorageImpl(); 
+		final StorageImpl store = new StorageImpl(); 
 		assertNotNull(store.getCategoryList());
 	}
 						
 	@Test
 	public void getGoodListTest() {
-		final GoodStorageImpl store = new GoodStorageImpl(); 
+		final StorageImpl store = new StorageImpl(); 
 		assertNotNull(store.getGoodList());
 		
 		List<Good> emptyGoodList = new ArrayList<Good>();
