@@ -12,15 +12,31 @@ public class Categories {
 		categories.add(category);
 	}
 	
+	public boolean isLastCategory() {
+		return i == categories.size();
+	}
+	
+	public void writeLastCategory(Category category) {
+		categoriesList += i + " - " + category.getName();
+	}
+	
+	public void writeCategories(Category category) {
+		categoriesList += i + " - " + category.getName() + ", ";
+	}
+	
+	public void concatCategories(Category category) {
+		if (isLastCategory()) {
+			writeLastCategory(category);
+		} else {
+			writeCategories(category);
+			i++;
+		}
+	}
+	
 	public String getCategories() {
 		categoriesList = "";
 		for (Category category : categories) {
-			if (i == categories.size()) {
-				categoriesList += i + " - " + category.getName();
-			} else {
-				categoriesList += i + " - " + category.getName() + ", ";
-				i++;
-			}
+			concatCategories(category);
 		}
 		i = 1;
 		return categoriesList;

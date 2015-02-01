@@ -1,6 +1,6 @@
 package myRealization;
 
-import java.util.Random;
+import java.util.*;
 
 public class Kickstart {
 	private int choice;
@@ -22,7 +22,7 @@ public class Kickstart {
 	}
 
 	public void showChoice() {
-		choice = input.readChoice() - 1;
+		choice = catchException() - 1;
 		output.println("You chose - " + categories.readCategory(choice).getName());
 	}
 
@@ -46,29 +46,61 @@ public class Kickstart {
 		}
 		output.println("--------------------------------------------------");
 	}
+	
+	public int catchException(){
+		int l = 0;
+		while(true){
+			try {
+				l = input.readChoice();
+				break;
+			} catch (Exception e){
+				output.println("Error!! You must enter numbers! - Try again:");
+			}
+		}
+		return l;
+	}
 
-	public void buildMenu(){
-		boolean firstTime = true;
-		while (true){
-			if (firstTime){
+	public void returnToProjects(int g) {
+			if (g == 0){
+				showProjects();
+			} else {
+				while (g != 0){
+					output.println("You must enter 0 \nPlease, try again");
+					g = catchException();
+				}
+				showProjects();
+			}
+	}
+	
+	public void navigate() {
+		int k = catchException();
+		if (k != 0){
+			showChosenProject(k);
+			output.println("Return - \"0\"");
+			returnToProjects(catchException());
+		} else {
+			showList();
+			showChoice();
+			showProjects();
+		}
+	}
+	
+	public boolean selectMenu(boolean firstTime) {
+		if (firstTime){
 			showList();
 			showChoice();
 			showProjects();
 			firstTime = false;
-			} else {
-				int k = input.readChoice();
-				if (k != 0){
-				showChosenProject(k);
-					output.println("If you want to return press \"0\"");
-					if (input.readChoice() == 0){
-						showProjects();
-					}
-				} else {
-					showList();
-					showChoice();
-					showProjects();
-				}
-			}
+		} else {
+			navigate();
+		}
+		return firstTime;
+	}
+	
+	public void buildMenu(){
+		boolean firstTime = true;
+		while (true){
+			firstTime = selectMenu(firstTime);
 		}
 	}
 
