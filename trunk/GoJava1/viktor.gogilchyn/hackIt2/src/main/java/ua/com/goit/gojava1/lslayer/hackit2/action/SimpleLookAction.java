@@ -6,6 +6,10 @@ import ua.com.goit.gojava1.lslayer.hackit2.gear.Gear;
 
 public class SimpleLookAction extends AbstractAction {
 
+    public SimpleLookAction() {
+        super("look");
+    }
+
     @Override
     public ActionResult execute(ParameterObject po) {
         if (po.target == null) {

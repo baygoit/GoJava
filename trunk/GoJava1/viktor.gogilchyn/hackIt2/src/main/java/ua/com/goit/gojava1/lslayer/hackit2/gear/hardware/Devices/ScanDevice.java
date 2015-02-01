@@ -7,5 +7,4 @@ public class ScanDevice extends AbstractHardware implements Hardware {
     public ScanDevice (String name) {
         super(name);
     }
-
 }

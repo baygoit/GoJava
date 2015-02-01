@@ -26,8 +26,8 @@ public abstract class AbstractHardware extends AbstractUtility implements Hardwa
         }
         return result;
     }
-    @Override
-    public String toString() {
+
+    public String display() {
         return super.getName() + listParameters();
     }
     

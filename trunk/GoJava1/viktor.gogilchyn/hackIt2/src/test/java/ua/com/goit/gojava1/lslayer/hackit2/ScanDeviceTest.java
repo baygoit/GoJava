@@ -24,9 +24,9 @@ public class ScanDeviceTest {
         ScanDevice scanner = new ScanDevice("Vizor3000");
         scanner.addPurpose("scan", 100);
         String eol = System.getProperty("line.separator");
-        assertEquals("Vizor3000", scanner.toString());
+        assertEquals("Vizor3000", scanner.display());
         scanner.addParameter("cpu", 100);
-        assertEquals("Vizor3000"+ eol +"cpu: 100", scanner.toString());
+        assertEquals("Vizor3000"+ eol +"cpu: 100", scanner.display());
     }
     @Test
     public void testUseOfDeviceWrongWay() {
@@ -40,12 +40,12 @@ public class ScanDeviceTest {
         //Use section
         ActionResult result = action.execute(po);
         assertFalse(result.isSuccess());
-        assertEquals("You can't scan with your eyes, try using tools.", result.getResultMessage());
+        assertEquals("A tool needed to scan", result.getResultMessage());
 
         po.tool = scanner;
         result = action.execute(po);
         assertFalse(result.isSuccess());
-        assertEquals("You scanned, but recevied no result. Try scan something!", result.getResultMessage());
+        assertEquals("A target needed to scan", result.getResultMessage());
         
     }
     @Test
@@ -56,7 +56,7 @@ public class ScanDeviceTest {
         Gear scanner = new ScanDevice("ScanMaster22000").addPurpose("scan", 100);
         Action action = new ScanAction();
         Gear target = new ScanDevice("WTF");
-        Gear unscannableTarget = new ScanDevice("You shouldn't see my name").addPurpose("scan", 10000);
+        Gear unscannableTarget = new ScanDevice("You can't see my name").addPurpose("scan", 10000);
         Gear scannerWithotScanPurpose = new ScanDevice("ScrewMaster").addPurpose(null, 0); //Test null branch.
         po.actor = actor;
         po.tool = scanner;
@@ -75,6 +75,6 @@ public class ScanDeviceTest {
         po.tool = scannerWithotScanPurpose;
         result = action.execute(po);
         assertFalse(result.isSuccess());
-        assertEquals("You tried to scan with " + scannerWithotScanPurpose.getName() + " but it can't do it. Use proper tool", result.getResultMessage());
+        assertEquals("Your " + scannerWithotScanPurpose.getName() + " can't scan", result.getResultMessage());
     }
 }

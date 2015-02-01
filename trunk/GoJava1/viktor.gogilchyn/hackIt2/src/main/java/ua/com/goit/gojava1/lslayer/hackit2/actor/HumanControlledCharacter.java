@@ -6,9 +6,4 @@ public class HumanControlledCharacter extends AbstractCharacter implements Human
         super(name);
     }
 
-    @Override
-    public String getName() {
-        return super.name;
-    }
-
 }

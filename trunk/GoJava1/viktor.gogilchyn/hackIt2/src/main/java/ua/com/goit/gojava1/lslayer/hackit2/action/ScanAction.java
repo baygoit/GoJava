@@ -1,6 +1,5 @@
 package ua.com.goit.gojava1.lslayer.hackit2.action;
 
-import ua.com.goit.gojava1.lslayer.hackit2.actor.Actor;
 import ua.com.goit.gojava1.lslayer.hackit2.dto.ActionResult;
 import ua.com.goit.gojava1.lslayer.hackit2.dto.ParameterObject;
 import ua.com.goit.gojava1.lslayer.hackit2.gear.Gear;
@@ -8,7 +7,7 @@ import ua.com.goit.gojava1.lslayer.hackit2.gear.Gear;
 public class ScanAction extends AbstractAction implements Action {
 
     public ScanAction() {
-        super.commandToInvoke = "scan";
+        super("scan");
     }
 
     @Override
@@ -20,18 +19,10 @@ public class ScanAction extends AbstractAction implements Action {
          * 4. Formatting ResultMesage
          * 5. Making changes (if necessary) to possession and control lists. 
          */
-        if (po.tool == null) {
-            return new ActionResult(false, "You can't scan with your eyes, try using tools.");
+        if (super.checkParameters(true, true, true, po) != null) {
+            return new ActionResult(false, checkParameters(true, true, true, po));
         }
-        if (po.target == null) {
-            return new ActionResult(false, "You scanned, but recevied no result. Try scan something!");
-        }
-        if (((Gear) po.tool).getPurposeValue(this.getCommand()) == 0) {
-            return new ActionResult(false, "You tried to scan with " + ((Gear) po.tool).getName() + " but it can't do it. Use proper tool");
-        }
-        int bonus = ((Actor) po.actor).getSkillValue(this.getCommand()) + ((Gear) po.tool).getPurposeValue(this.getCommand());
-        int antibonus = ((Gear) po.target).getPurposeValue(this.getCommand());
-        boolean succeed = bonus - antibonus > 0;
+        boolean succeed = super.checkSuccess(po);
         ActionResult result = new ActionResult(succeed, 
                 succeed ? "You successfully scanned "+ ((Gear) po.target).getName() +". Got new information" :
                           "Unsuccesful scan. You got no new information"

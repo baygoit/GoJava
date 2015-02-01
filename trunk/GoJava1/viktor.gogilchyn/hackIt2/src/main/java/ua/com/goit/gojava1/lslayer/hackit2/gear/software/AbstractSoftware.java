@@ -15,4 +15,10 @@ public class AbstractSoftware extends AbstractUtility implements Software {
     public int getVersion() {
         return this.version;
     }
+
+    @Override
+    public String display() {
+        // TODO Auto-generated method stub
+        return this.getName() + " v. " + this.getVersion();
+    }
 }

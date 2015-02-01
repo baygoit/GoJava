@@ -47,4 +47,12 @@ public class AbstractCharaterTest {
                 "Facs: 1" + eol +
                 "Packs: 1" + eol, actor.getAllSkills());
     }
+    
+    @Test
+    public void testAttributes() {
+        Actor actor = new HumanControlledCharacter("UserName");
+        actor.setAttribute("CCN", "1234 5678 6543 2345");
+        assertEquals("1234 5678 6543 2345", actor.getAttribute("CCN"));
+    }
+    
 }

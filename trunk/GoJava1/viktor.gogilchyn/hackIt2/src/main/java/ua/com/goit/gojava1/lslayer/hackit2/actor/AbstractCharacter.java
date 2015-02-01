@@ -1,13 +1,47 @@
 package ua.com.goit.gojava1.lslayer.hackit2.actor;
 
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public abstract class AbstractCharacter implements Actor{
+public abstract class AbstractCharacter implements Actor {
+
+    protected String name;
+
+    private Map<String, Integer> skills = new LinkedHashMap<String, Integer>();
+    @Override
+    public Map<String, String> getAttributes() {
+        return atrributes;
+    }
+
+    private Map<String, String> atrributes = new HashMap<String, String>();
+    // private List<Gear> possesionsList;
+    // private List<Gear> ControlList;
+    
 
     @Override
-    public int getSkillValue(String skillName) {
-        return skills.get(skillName) != null ? skills.get(skillName) : 0;
+    public String getAttribute(String what) { //Right now I don't need null in result.  
+        return atrributes.get(what) != null ? atrributes.get(what) : "";
+    }
+
+    @Override
+    public String display() {
+        String result = "";
+        result += this.getName();
+        return result;
+    }
+    @Override
+    public void setAttribute(String what, String value) {
+        this.atrributes.put(what, value);
+    }
+
+    public AbstractCharacter(String name) {
+        this.name = name;
+    }
+
+    public void addSkill(String skillName) {
+        if (getSkillValue(skillName) == 0 && skillName != null)
+            this.skills.put(skillName, 1);
     }
     
     @Override
@@ -17,17 +51,6 @@ public abstract class AbstractCharacter implements Actor{
         }
     }
 
-    protected String name;
-    private Map<String, Integer> skills = new LinkedHashMap<String, Integer>();
-//  private List<Gear> possesionsList;
-//  private List<Gear> ControlList;
-    public AbstractCharacter (String name) {
-        this.name = name;
-    }
-    public void addSkill(String skillName) {
-        if (getSkillValue(skillName) == 0 && skillName != null)  
-            this.skills.put(skillName, 1);
-    }
     @Override
     public String getAllSkills() {
         String eol = System.getProperty("line.separator");
@@ -37,7 +60,15 @@ public abstract class AbstractCharacter implements Actor{
         }
         return returnValue;
     }
-    
- 
+
+    @Override
+    public String getName() {
+        return this.name;
+    }
+
+    @Override
+    public int getSkillValue(String skillName) {
+        return skills.get(skillName) != null ? skills.get(skillName) : 0;
+    }
 
 }

@@ -40,5 +40,7 @@ public class ScanActionTest {
         
         ActionResult result = scan.execute(this.po);
         assertNotNull(result);
+        
+        
     }
 }

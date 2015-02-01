@@ -5,7 +5,8 @@ import java.util.LinkedList;
 public class ActionResult { //May be it will be initialized using constructor. 
                             //It's "parameter Object" and have no sense without data 
     private boolean success;
-    private String ResultMessage;
+    private String succesMessage;
+    private String failMessage;
     private LinkedList<ParameterObject> changes = new LinkedList<ParameterObject>();
     
     public void addChange(ParameterObject what) {
@@ -17,13 +18,17 @@ public class ActionResult { //May be it will be initialized using constructor.
     }
 
     public String getResultMessage() { 
-        return ResultMessage;
+        return this.success ? this.succesMessage : failMessage;
     }
     
     public ActionResult(boolean success, String resultMessage) {
         super();
         this.success = success;
-        ResultMessage = resultMessage;
+        if (success) { 
+            succesMessage = resultMessage;
+        } else {
+            failMessage = resultMessage;
+        }
     }
 
     public boolean isSuccess() {
