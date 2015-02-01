@@ -1,27 +1,64 @@
-package ua.com.goit.gojava.andriidnikitin;
+package ua.com.goit.gojava.andriidnikitin.service;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StorageImpl implements Storage {
+import ua.com.goit.gojava.andriidnikitin.model.Category;
+import ua.com.goit.gojava.andriidnikitin.model.Good;
+
+public class StorageImpl extends StorageAbstract {
 	
 	@SuppressWarnings("serial")
 	private List<Category> categoryList = new ArrayList<Category>(){{
-		this.add(setId(new Category("Guitars")));
-		this.add(setId(new Category("Synths")));
-		this.add(setId(new Category("Other")));		
+		this.add(setId(new Category()
+					.setName("Guitars")));
+		this.add(setId(new Category()
+					.setName("Synths")));
+		this.add(setId(new Category()
+					.setName("Other")));		
 	}};
 	
 	@SuppressWarnings("serial")
 	private List<Good> goodList = new ArrayList<Good>() {{
-		this.add(setId(new Good(0, "Fender Strat", categoryList.get(0), new BigDecimal(1000.0))));
-		this.add(setId(new Good(1, "Fender Tele", categoryList.get(0), new BigDecimal(1200.0))));
-		this.add(setId(new Good(2, "Gibson SG", categoryList.get(0), new BigDecimal(1337.0))));
-		this.add(setId(new Good(3, "Fender Rhodes", categoryList.get(1), new BigDecimal(3000.0))));
-		this.add(setId(new Good(4, "Korg MS-20", categoryList.get(1), new BigDecimal(2000.0))));
-		this.add(setId(new Good(5, "VOX Overdrive", categoryList.get(2), new BigDecimal(300.0))));
-	}};
+		Good tempGood;
+		tempGood = new Good()	
+				.setName("Fender Strat")
+				.setCategory(categoryList.get(0))
+				.setPrice(new BigDecimal(1000.0));
+		this.add(setId(tempGood));
+		
+		tempGood = new Good()	
+				.setName("Fender Tele")
+				.setCategory(categoryList.get(0))
+				.setPrice(new BigDecimal(1200.0));
+		this.add(setId(tempGood));
+		
+		tempGood = new Good()	
+				.setName("Gibson SG")
+				.setCategory(categoryList.get(0))
+				.setPrice(new BigDecimal(1337.0));
+		this.add(setId(tempGood));
+
+		tempGood = new Good()	
+				.setName("Fender Rhodes")
+				.setCategory(categoryList.get(1))
+				.setPrice(new BigDecimal(3000.0));
+		this.add(setId(tempGood));
+		
+
+		tempGood = new Good()	
+				.setName("Korg MS-20")
+				.setCategory(categoryList.get(1))
+				.setPrice(new BigDecimal(2500.0));
+		this.add(setId(tempGood));
+
+		tempGood = new Good()	
+				.setName("Marshall Drive")
+				.setCategory(categoryList.get(2))
+				.setPrice(new BigDecimal(300.0));
+		this.add(setId(tempGood));
+		}};
 	
 	public StorageImpl() {
 		
@@ -37,6 +74,7 @@ public class StorageImpl implements Storage {
 		return this;
 	}
 	
+	@Override
 	protected List<Good> getGoodList() {
 		return goodList != null ? goodList : new ArrayList<Good>();		
 	}	

@@ -1,31 +1,34 @@
-package ua.com.goit.gojava.andriidnikitin;
+package ua.com.goit.gojava.andriidnikitin.model;
 
 import java.math.BigDecimal;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Good {
 	
+	@XmlAttribute
 	private Integer id;	
 
+	@XmlAttribute
 	private String name;
 	
+	//@XmlIDREF
+	@XmlAttribute
 	private Category category;	
 	
+	@XmlAttribute
 	private BigDecimal price;
 	
-	protected Good(Integer id, String name, Category category, BigDecimal price) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.category = category;
-		this.price = price;
-	}
-
 	public BigDecimal getPrice() {
 		return price;
 	}
 
-	public void setPrice(BigDecimal price) {
+	public Good setPrice(BigDecimal price) {
 		this.price = price;
+		return this;
 	}
 
 	public Good() {

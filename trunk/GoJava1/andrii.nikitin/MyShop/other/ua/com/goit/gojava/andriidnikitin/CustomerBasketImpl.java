@@ -3,6 +3,8 @@ package ua.com.goit.gojava.andriidnikitin;
 import java.math.BigDecimal;
 import java.util.Map;
 
+import ua.com.goit.gojava.andriidnikitin.model.Good;
+
 public class CustomerBasketImpl implements CustomerBasket {
 	
 	private Order order;

@@ -1,4 +1,4 @@
-package ua.com.goit.gojava.andriidnikitin;
+package ua.com.goit.gojava.andriidnikitin.service;
 /*
 import java.io.PrintStream;
 import java.util.List;

@@ -1,16 +1,20 @@
-package ua.com.goit.gojava.andriidnikitin;
+package ua.com.goit.gojava.andriidnikitin.model;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Category {
-	private String name;
 	
+	@XmlAttribute
 	private Integer id;
+	
+	@XmlAttribute
+	private String name;
 	
 	public Category() {
 	}
-
-	protected Category(String name) {
-		this.name = name;
-	}	
 
 	public String getName() {
 		return name;

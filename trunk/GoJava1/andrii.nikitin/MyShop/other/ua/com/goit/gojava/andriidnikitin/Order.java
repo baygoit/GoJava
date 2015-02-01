@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.Map;
 
+import ua.com.goit.gojava.andriidnikitin.model.Good;
+
 public class Order {
 	
 	private Client client;
