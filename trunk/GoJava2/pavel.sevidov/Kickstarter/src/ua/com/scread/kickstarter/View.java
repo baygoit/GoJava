@@ -17,6 +17,7 @@ public class View {
 	public void showCategoies(Categories categories) {
 		System.out.println("\nChoose category: ");
 		System.out.println(Arrays.toString(categories.getStringCategories()));
+		showExit();
 	}
 
 	public void showCategory(Category category) {
@@ -33,6 +34,7 @@ public class View {
         for (int i = 0; i < projects.size(); i++) {
         	System.out.print(String.valueOf(i+1) + " - " + projects.get(i).getName() + "; ");
         }
+        showExit();
         System.out.println();
 	}
 	
@@ -47,6 +49,10 @@ public class View {
         System.out.println("Need collect " + project.getAmount() + " UAH");	
 	}
 
+	private void showExit() {
+		System.out.println("[0 - back]");
+	}
+	
 	public void showFullProject(Project project) {
 		showLine();
 		showProject(project);
@@ -58,6 +64,7 @@ public class View {
 		System.out.println(faq.getQuestion());
 		System.out.println("\n" + faq.getAnswer());
 		showLine();
+		showExit();
 	}
 	
 	
