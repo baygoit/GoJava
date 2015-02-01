@@ -6,10 +6,13 @@ public class Project {
 	private int needMoney;
 	private int haveMoney;
 	private int daysBeforeEnd;
+	private String projectHistory;
+	private String linkToDemoVideo;
+	private String quastionAnswer;
 	private Category category;
-	
+
 	public Project(String name, String description, Category category, int needMoney,
-			int haveMoney, int daysBeforeEnd) {
+			int haveMoney, int daysBeforeEnd, String projectHistory, String linkToDemoVideo, String quastionAnswer) {
 	
 		this.name = name;
 		this.description = description;
@@ -17,6 +20,9 @@ public class Project {
 		this.needMoney = needMoney;
 		this.haveMoney = haveMoney;
 		this.daysBeforeEnd = daysBeforeEnd;
+		this.projectHistory = projectHistory;
+		this.linkToDemoVideo = linkToDemoVideo;
+		this.quastionAnswer = quastionAnswer;
 	}
 	
 	
@@ -39,6 +45,20 @@ public class Project {
 
 	public Category getCategory() {
 		return category;
+	}
+
+	public String getProjectHistory() {
+		return projectHistory;
+	}
+
+
+	public String getLinkToDemoVideo() {
+		return linkToDemoVideo;
+	}
+
+
+	public String getQuastionAnswer() {
+		return quastionAnswer;
 	}
 
 

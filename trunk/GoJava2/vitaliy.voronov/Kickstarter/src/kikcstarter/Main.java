@@ -19,24 +19,26 @@ public class Main {
 				break;
 			case 1:
 				out.youChoose(Category.EDUCATION.name());
-				ArrayList<Project> projectsByCategory = stor
+				ArrayList<Project> projectsByCategory1 = stor
 						.getProjectsByCategory(Category.EDUCATION);
-				out.printProject(projectsByCategory);
+				out.printProject(projectsByCategory1);
 				int projectId1 = in.scanInt();
-				System.out.println(projectsByCategory.get(projectId1 - 1));
+				out.printSelectProject(projectsByCategory1);
+				System.out.println(projectsByCategory1.get(projectId1 - 1));
 				break;
 			case 2:
 				out.youChoose(Category.FINANCE.name());
-				ArrayList<Project> projectsByCategory1 = stor
+				ArrayList<Project> projectsByCategory2 = stor
 						.getProjectsByCategory(Category.FINANCE);
-				out.printProject(projectsByCategory1);
+				out.printProject(projectsByCategory2);
 				int projectId2 = in.scanInt();
-				System.out.println(projectsByCategory1.get(projectId2 - 1));
+				System.out.println(projectsByCategory2.get(projectId2 - 1));
 				break;
 			case 3:
 				out.youChoose(Category.GAMES.name());
-				break;
-			case 4:
+				ArrayList<Project> projectsByCategory3 = stor
+						.getProjectsByCategory(Category.GAMES);
+				out.printProject(projectsByCategory3);
 				break;
 			}
 			System.out.println("==========================");
