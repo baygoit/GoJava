@@ -3,21 +3,20 @@ import java.io.IOException;
 
 public class KickstarterS {
 	private static void toCategory() throws IOException, InterruptedException{
+		Output out = new OutputConsole();
+		Check check = new Check();
+		Categories categories = new Categories();
+		Category category = new Category();
+		Project project = new Project();
+		Projects projects = new Projects();
+		projects.writeAllCatecories();
+		int chosenCategory;
+		int chosenProject;
+		int choiceToProject;
 		while (true){
-			Output out = new OutputConsole();
-			Check check = new Check();
-			Categories categories = new Categories();
-			Category category = new Category();
-			Project project = new Project();
-			Projects projects = new Projects();
-			projects.writeAllCatecories();
-			int chosenCategory;
-			int chosenProject;
-			int choiceToProject;
-			
 			categories.showAllCatecories();
 			out.print("Choice Category Number: ");
-			chosenCategory = check.checkNumber();
+			chosenCategory = check.checkNumber(categories.kickContainCategory(), true);
 			if (chosenCategory == 777){
 				Thread.sleep(10000);
 				continue;
@@ -27,13 +26,14 @@ public class KickstarterS {
 			while (true){
 				category.showAllProjectInCategory(chosenCategory - 1);
 				out.print("Choice Project Number or 0 for exit to Category: ");
-				chosenProject = check.checkNumber();
+				chosenProject = check.checkNumber(Categories.listCatecories.get(chosenCategory - 1).projectsThatContain, false);
 				if (chosenProject == 0){
 					break;
 				}
 				project.showProjectFull(chosenProject - 1);
 				out.print("Choice 0 for exit to Project: ");
-				choiceToProject = check.checkNumber();
+				int[] zero = {0};
+				choiceToProject = check.checkNumber(zero, false);
 				if (choiceToProject == 0){
 					continue;
 				}

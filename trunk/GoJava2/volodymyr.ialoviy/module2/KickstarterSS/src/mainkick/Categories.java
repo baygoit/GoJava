@@ -36,4 +36,13 @@ public class Categories {
 		}
 	}
 	
+	public int[] kickContainCategory(){
+		int[] kickContainCategories = new int[counterCategory];
+		for (int i = 0; i < kickContainCategories.length; i++){
+			kickContainCategories[i] = listCatecories.get(i).categoryID;
+		}
+		return kickContainCategories;
+	}
+	
+	
 }

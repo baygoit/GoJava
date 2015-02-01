@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 
 public class Check {
 
-	public int checkNumber() throws IOException{
+	public int checkNumber(int[] border, boolean yes) throws IOException{
 		Output out = new OutputConsole();
 		Inputs choice = new InputsConsole();
 		int breakCounter = 0;
@@ -18,7 +18,12 @@ public class Check {
 				continue;
 			}
 			choiceNumber = Integer.valueOf(chosen);
-			if (!rangeOfNumbers(choiceNumber, 0, 3)){
+			if (choiceNumber == 0 && yes){
+				out.print("This number does not exist, please try again");
+				breakCounter++;
+				continue;
+			}
+			if (!rangeOfNumbers(choiceNumber, border)){
 				out.print("This number does not exist, please try again");
 				breakCounter++;
 				continue;
@@ -32,6 +37,20 @@ public class Check {
 		return choiceNumber;
 	}
 	
+	private boolean rangeOfNumbers(int number, int[] border){
+		boolean f = false;
+		for (int i = 0; i < border.length; i++){
+			if (border[i] == number){
+				f = true;
+				break;
+			}
+		}
+		if (number == 0){
+			f = true;
+		}
+		return f;
+    }
+	
 	private int bannedFor10Minutes() {
 		// TODO
 		int choiceNumber = 777;
@@ -41,13 +60,5 @@ public class Check {
 	private boolean isNumber(String string){  
         return Pattern.compile("^[0-9]{1,3}$").matcher(string).matches();  
     }
-	
-	private boolean rangeOfNumbers(int number, int lower, int top){
-		boolean f = false;
-		if (number >= lower && number <= top){
-			f = true;
-		}
-		return f;
-    }
-	
+
 }
