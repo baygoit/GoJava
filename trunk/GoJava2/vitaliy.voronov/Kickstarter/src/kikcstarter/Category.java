@@ -1,5 +1,5 @@
 package kikcstarter;
 
-public interface Category {
-	public String name();
+enum Category {
+	EDUCATION, FINANCE, GAMES;
 }
