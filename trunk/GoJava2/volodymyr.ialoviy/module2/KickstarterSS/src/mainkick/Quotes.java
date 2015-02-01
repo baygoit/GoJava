@@ -1,12 +1,13 @@
 package mainkick;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 
 public class Quotes {
 	private String[] quote;
-	public static Map<Integer, String[]> quoteBD;
+	public static ArrayList<String[]> quoteBD;
 	{
 	    try {
 	    	ReaderBD reader = new ReaderBD();
@@ -17,10 +18,10 @@ public class Quotes {
 	    }
 	}
 	
-	public String[] getQuote() throws FileNotFoundException{
-		Map<Integer, String[]> linesAsArray = quoteBD;
+	public String getQuote() throws FileNotFoundException{
+		ArrayList<String[]> linesAsArray = quoteBD;
 		quote = linesAsArray.get((int) (Math.random() * (linesAsArray.size() - 1) + 0.5));
-		return quote;
+		return Arrays.toString(quote);
 	}
 	
 	public void setQuote(){

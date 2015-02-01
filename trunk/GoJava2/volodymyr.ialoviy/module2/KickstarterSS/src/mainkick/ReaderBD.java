@@ -4,23 +4,19 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-
+import java.util.ArrayList;
 
 public class ReaderBD {
 	
-	public HashMap<Integer, String[]> read(String fileName) throws FileNotFoundException {
+	public ArrayList<String[]> read(String fileName) throws FileNotFoundException {
 	    exists(fileName);
-	    Map<Integer, String[]> hashmap = new HashMap<Integer, String[]>();
+	    ArrayList<String[]> list = new ArrayList<String[]>();
 	    try {
 	        BufferedReader in = new BufferedReader(new FileReader(fileName));
 	        try {
 	            String line;
-	            Integer i = 0;
 	            while ((line = in.readLine()) != null) {
-	            	hashmap.put(i, line.split("\\[\\]"));
-	            	i++;
+	            	list.add(line.split("\\[\\]"));
 	            }
 	        } finally {
 	            in.close();
@@ -28,7 +24,7 @@ public class ReaderBD {
 	    } catch(IOException e) {
 	        throw new RuntimeException(e);
 	    }
-		return (HashMap<Integer, String[]>) hashmap;
+		return list;
 	}
 	
 	private void exists(String fileName) throws FileNotFoundException {

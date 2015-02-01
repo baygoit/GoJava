@@ -1,7 +1,5 @@
 package mainkick;
 import java.io.IOException;
-import java.util.Arrays;
-
 
 public class KickstarterS {
 	private static void toCategory() throws IOException, InterruptedException{
@@ -47,7 +45,7 @@ public class KickstarterS {
 		Quotes quote = new Quotes();
 		Output out = new OutputConsole();
 		
-		out.print(Arrays.toString(quote.getQuote()));
+		out.print(quote.getQuote());
 		
 		toCategory();
 	}

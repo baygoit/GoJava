@@ -2,11 +2,10 @@ package mainkick;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Map;
 
 
 public class Projects {
-	public static Map<Integer, String[]> projectBD;
+	public static ArrayList<String[]> projectBD;
 	{
 	    try {
 	    	ReaderBD reader = new ReaderBD();
@@ -20,7 +19,7 @@ public class Projects {
 	
 	public void writeAllCatecories() throws FileNotFoundException{
 		int i = 0;
-		for (String[] value : projectBD.values()) {
+		for (String[] value : projectBD) {
 			listProject.add(new Project());
 			listProject.get(i).projectID = Integer.valueOf(value[0]);
 			listProject.get(i).projectName = value[1];

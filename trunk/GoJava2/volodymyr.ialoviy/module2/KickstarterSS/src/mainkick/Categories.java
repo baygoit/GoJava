@@ -3,10 +3,9 @@ package mainkick;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Map;
 
 public class Categories {
-	private Map<Integer, String[]> categoryBD;
+	private ArrayList<String[]> categoryBD;
 	{
 	    try {
 	    	ReaderBD reader = new ReaderBD();
@@ -23,7 +22,7 @@ public class Categories {
 	public void showAllCatecories() throws FileNotFoundException{
 		Output out = new OutputConsole();
 		int i = 0;
-		for (String[] value : categoryBD.values()) {
+		for (String[] value : categoryBD) {
 			listCatecories.add(new Category());
 			listCatecories.get(i).categoryID = Integer.valueOf(value[0]);
 			listCatecories.get(i).categoryName = value[1];
