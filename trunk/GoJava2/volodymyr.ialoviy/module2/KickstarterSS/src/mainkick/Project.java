@@ -14,8 +14,8 @@ public class Project{
 	public int counterProject;
 	Output out = new OutputConsole();
 	
-	public void showProjectFull(int i) throws FileNotFoundException{
-		out.print("projectID = " + Projects.listProject.get(i).projectID
+	public String showProjectFull(int i) throws FileNotFoundException{
+		String s = "projectID = " + Projects.listProject.get(i).projectID
 					+ "\n projectName: " + Projects.listProject.get(i).projectName
 					+ "\n shortDescription: " + Projects.listProject.get(i).shortDescription
 					+ "\n fullDescription: " + Projects.listProject.get(i).fullDescription
@@ -23,7 +23,8 @@ public class Project{
 					+ "\n link: " + Projects.listProject.get(i).link
 					+ "\n howMuchNeeded = " + Projects.listProject.get(i).howMuchNeeded
 					+ "\n howMuchCollected = " + Projects.listProject.get(i).howMuchCollected
-					+ "\n howMuchRemaining = " + Projects.listProject.get(i).howMuchRemaining);
+					+ "\n howMuchRemaining = " + Projects.listProject.get(i).howMuchRemaining;
+		return s;
 	}
 
 }

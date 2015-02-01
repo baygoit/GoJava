@@ -14,7 +14,7 @@ public class KickstarterS {
 		int chosenProject;
 		int choiceToProject;
 		while (true){
-			categories.showAllCatecories();
+			out.print(categories.showAllCatecories());
 			out.print("Choice Category Number: ");
 			chosenCategory = check.checkNumber(categories.kickContainCategory(), true);
 			if (chosenCategory == 777){
@@ -24,13 +24,13 @@ public class KickstarterS {
 			out.print("Your chosen category: " + Categories.listCatecories.get(chosenCategory - 1).getCategoryName() + ", containing the following projects: ");
 			
 			while (true){
-				category.showAllProjectInCategory(chosenCategory - 1);
+				out.print(category.showAllProjectInCategory(chosenCategory - 1));
 				out.print("Choice Project Number or 0 for exit to Category: ");
 				chosenProject = check.checkNumber(Categories.listCatecories.get(chosenCategory - 1).projectsThatContain, false);
 				if (chosenProject == 0){
 					break;
 				}
-				project.showProjectFull(chosenProject - 1);
+				out.print(project.showProjectFull(chosenProject - 1));
 				out.print("Choice 0 for exit to Project: ");
 				int[] zero = {0};
 				choiceToProject = check.checkNumber(zero, false);

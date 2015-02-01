@@ -19,9 +19,9 @@ public class Categories {
 	public int counterCategory = categoryBD.size();
 	public static ArrayList<Category> listCatecories = new ArrayList<Category>();
 	
-	public void showAllCatecories() throws FileNotFoundException{
-		Output out = new OutputConsole();
+	public String showAllCatecories() throws FileNotFoundException{
 		int i = 0;
+		String s = "";
 		for (String[] value : categoryBD) {
 			listCatecories.add(new Category());
 			listCatecories.get(i).categoryID = Integer.valueOf(value[0]);
@@ -31,9 +31,10 @@ public class Categories {
 			for (int j = 0; j < string.length; j++){
 				listCatecories.get(i).projectsThatContain[j] = Integer.valueOf(string[j]);
 			}
-		    out.print(listCatecories.get(i).categoryID + " " + listCatecories.get(i).categoryName);
+		    s += listCatecories.get(i).categoryID + " " + listCatecories.get(i).categoryName + "\n";
 		    i++;
 		}
+		return s.substring(0, s.length() - 1);
 	}
 	
 	public int[] kickContainCategory(){

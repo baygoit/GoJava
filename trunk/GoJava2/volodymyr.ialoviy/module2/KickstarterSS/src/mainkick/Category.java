@@ -7,19 +7,22 @@ public class Category{
 	public int[] projectsThatContain;
 	Output out = new OutputConsole();
 	
-	public void showAllProjectInCategory(int i) throws FileNotFoundException{
+	public String showAllProjectInCategory(int i) throws FileNotFoundException{
+		String s = "";
 		for (int j : Categories.listCatecories.get(i).projectsThatContain){
-			showProjectInShort(j);
+			s += showProjectInShort(j) + "\n";
 		}
+		return s.substring(0, s.length() - 1);
 	}
 	
-	public void showProjectInShort(int i) throws FileNotFoundException{
+	public String showProjectInShort(int i) throws FileNotFoundException{
 		i -= 1;
-		out.print(Projects.listProject.get(i).projectID
+		String s = Projects.listProject.get(i).projectID
 				+ ", " + Projects.listProject.get(i).projectName
 				+ ", " + Projects.listProject.get(i).shortDescription
 				+ ", " + Projects.listProject.get(i).howMuchNeeded
-				+ ", " + Projects.listProject.get(i).howMuchRemaining);
+				+ ", " + Projects.listProject.get(i).howMuchRemaining;
+		return s;		
 	}
 	
 	public String getCategoryName() {

@@ -10,8 +10,4 @@ public class InputsConsole implements Inputs{
 		String choice = reader.readLine();
 		return choice;
 	}
-	
-	
-	
-
 }
