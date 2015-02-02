@@ -23,8 +23,7 @@ public class Main {
 						.getProjectsByCategory(Category.EDUCATION);
 				out.printProject(projectsByCategory1);
 				int projectId1 = in.scanInt();
-				out.printSelectProject(projectsByCategory1);
-				System.out.println(projectsByCategory1.get(projectId1 - 1));
+				out.printSelectProject(projectsByCategory1.get(projectId1 - 1));
 				break;
 			case 2:
 				out.youChoose(Category.FINANCE.name());
@@ -32,13 +31,15 @@ public class Main {
 						.getProjectsByCategory(Category.FINANCE);
 				out.printProject(projectsByCategory2);
 				int projectId2 = in.scanInt();
-				System.out.println(projectsByCategory2.get(projectId2 - 1));
+				out.printSelectProject(projectsByCategory2.get(projectId2 - 1));
 				break;
 			case 3:
 				out.youChoose(Category.GAMES.name());
 				ArrayList<Project> projectsByCategory3 = stor
 						.getProjectsByCategory(Category.GAMES);
 				out.printProject(projectsByCategory3);
+				int projectId3 = in.scanInt();
+				out.printSelectProject(projectsByCategory3.get(projectId3 - 1));
 				break;
 			}
 			System.out.println("==========================");
