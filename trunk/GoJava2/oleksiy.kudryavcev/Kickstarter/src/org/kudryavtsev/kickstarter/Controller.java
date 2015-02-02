@@ -25,22 +25,31 @@ public class Controller {
         while (true) {
             view.showCategories(categoriesList);
             int numberOfCategory = input.getAnswer();
-            if ((numberOfCategory == 0) || (numberOfCategory > categoriesList.size()))
+            if (checkNumberOfCategory(categoriesList, numberOfCategory))
                 break;
             processingProjectsList(categoriesList, numberOfCategory);
         }
+    }
+
+    private boolean checkNumberOfCategory(List<Category> categoriesList, int numberOfCategory) {
+        return checkProjectOption(numberOfCategory) || (numberOfCategory > categoriesList.size());
     }
 
     private void processingProjectsList(List<Category> categoriesList, int numberOfCategory) {
         while (true) {
             view.showProjects(categoriesList.get(numberOfCategory - 1).getProjectsList());
             int numberOfProject = input.getAnswer();
-            if ((numberOfProject == 0)
-                    || (numberOfProject > categoriesList.get(numberOfCategory - 1)
-                            .getProjectsList().size()))
+            if (checkNumberOfProject(categoriesList, numberOfCategory, numberOfProject))
                 break;
             processingProject(categoriesList, numberOfCategory, numberOfProject);
         }
+    }
+
+    private boolean checkNumberOfProject(List<Category> categoriesList, int numberOfCategory,
+            int numberOfProject) {
+        return checkProjectOption(numberOfProject)
+                || (numberOfProject > categoriesList.get(numberOfCategory - 1).getProjectsList()
+                        .size());
     }
 
     private void processingProject(List<Category> categoriesList, int numberOfCategory,
@@ -49,11 +58,14 @@ public class Controller {
             view.showProject(categoriesList.get(numberOfCategory - 1).getProjectsList()
                     .get(numberOfProject - 1));
             int projectOption = input.getAnswer();
-            if (projectOption == 0) {
+            if (checkProjectOption(projectOption)) {
                 break;
-            } else {
-                view.show("Selected option: ");
             }
+            view.show("Selected option: ");
         }
+    }
+
+    private boolean checkProjectOption(int projectOption) {
+        return projectOption == 0;
     }
 }
