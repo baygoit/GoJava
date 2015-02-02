@@ -4,29 +4,19 @@ import java.io.IOException;
 import java.util.regex.Pattern;
 
 public class Check {
-
+	Inputs choice = new InputsConsole();
+	int breakCounter;
+	int choiceNumber;
+	
 	public int checkNumber(int[] border, boolean yes) throws IOException{
-		Inputs choice = new InputsConsole();
-		int breakCounter = 0;
-		int choiceNumber = 0;
+		breakCounter = 0;
+		choiceNumber = 0;
 		for (int i = 0; i < 3; i++){
-			String chosen = choice.enter();
-			if (!isNumber(chosen)){
-				KickstarterS.printer("It is not a number, please try again");
-				breakCounter++;
-				continue;
-			}
+			String chosen = string();
+			if (number(chosen)){continue;}
 			choiceNumber = Integer.valueOf(chosen);
-			if (choiceNumber == 0 && yes){
-				KickstarterS.printer("This number does not exist, please try again");
-				breakCounter++;
-				continue;
-			}
-			if (!rangeOfNumbers(choiceNumber, border)){
-				KickstarterS.printer("This number does not exist, please try again");
-				breakCounter++;
-				continue;
-			}
+			if (numberZero(choiceNumber, yes)){continue;}
+			if (numberBorder(choiceNumber, border)){continue;}
 			break;
 		}
 		if (breakCounter == 3){
@@ -34,6 +24,40 @@ public class Check {
 			choiceNumber = bannedFor10Minutes();
 		}
 		return choiceNumber;
+	}
+	
+	private String string() throws IOException{
+		return choice.enter();
+	}
+	
+	private Boolean numberBorder(int choiceNumber, int[] border){
+		boolean f = false;
+		if (!rangeOfNumbers(choiceNumber, border)){
+			KickstarterS.printer("This number does not exist, please try again");
+			breakCounter++;
+			f = true;
+		}
+		return f;
+	}
+	
+	private Boolean numberZero(int choiceNumber, Boolean yes){
+		boolean f = false;
+		if (choiceNumber == 0 && yes){
+			KickstarterS.printer("This number does not exist, please try again");
+			breakCounter++;
+			f = true;
+		}
+		return f;
+	}
+	
+	private Boolean number(String chosen){
+		boolean f = false;
+		if (!isNumber(chosen)){
+			KickstarterS.printer("It is not a number, please try again");
+			breakCounter++;
+			f = true;
+		}
+		return f;
 	}
 	
 	private boolean rangeOfNumbers(int number, int[] border){

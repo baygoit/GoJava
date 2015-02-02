@@ -12,7 +12,7 @@
   </interface>  
   <class id="2" language="java" name="mainkick.Quotes" project="KickstarterSS" 
     file="/KickstarterSS/src/mainkick/Quotes.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="361" y="232"/>    
+    <position height="-1" width="-1" x="380" y="267"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
