@@ -42,7 +42,7 @@ public class ProjectManager {
     }
 
     public void displayProjects(int categoryNumber) {
-        projectStorage.displayAll(categoryNumber);
+        projectStorage.getAll(categoryNumber);
     }
 
     public void displaySpecificProject(int categoryNumber, int projectNumber) {

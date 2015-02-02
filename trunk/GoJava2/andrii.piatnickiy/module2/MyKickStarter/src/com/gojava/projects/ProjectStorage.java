@@ -16,65 +16,50 @@ public class ProjectStorage {
                 questionsAndAnswers, categoryId));
     }
 
-    public void displayAll(int categoryNumber) {
+    public void getAll(int categoryNumber) {
         int i = 1;
-        for (Project project : this.projectStorageList) {
+        for (Project project : projectStorageList) {
             if (project.getCategoryId() == categoryNumber) {
-                out.output(i, ") ");
+                out.print(out.output(i, ") "));
                 previewProject(project, out);
-                out.output("");
-                ;
+                System.out.println();
                 i++;
             }
         }
     }
 
-//    public void displaySpecific(int categoryNumber, int projectNumber) {
-//        int i = 1;
-//        for (Project project : projectStorageList) {
-//            if (project.getCategoryId() == categoryNumber) {
-//                if (i == projectNumber) {
-//                    displayAllProjectFields(project);
-//                    System.out.println();
-//                }
-//                i++;
-//            }
-//        }
-//    }
-    public Project getSpecificProject(int categoryNumber, int projectNumber) {
+    // public Project getSpecificProject(int categoryNumber, int projectNumber)
+    // {
+    // int i = 1;
+    // for (Project project : projectStorageList) {
+    // if (project.getCategoryId() == categoryNumber) {
+    // if (i == projectNumber) {
+    // return project;
+    // }
+    // i++;
+    // }
+    // }
+    // return null;
+    // }
+    public void getSpecificProject(int categoryNumber, int projectNumber) {
         int i = 1;
         for (Project project : projectStorageList) {
             if (project.getCategoryId() == categoryNumber) {
                 if (i == projectNumber) {
-                    return project;
+                    allProjectFields(project);
                 }
                 i++;
             }
         }
-        return null;
     }
 
     private void previewProject(Project project, Out out) {
-
         out.printProjectPreview(project);
-        // out.print(out.output("Project Name: ", project.getName()));
-        // out.print(out.output("Description: ", project.getDescription()));
-        // out.print(out.output("Need Sum: ", project.getNeedSum()));
-        // out.print(out.output("Current Sum: ", project.getCurrentSum()));
-        // out.print(out.output("Days Left: ", project.getDaysLeft()));
-        // System.out.println("Project Name: " + project.getName());
-        // System.out.println("Description: " + project.getDescription());
-        // System.out.println("Need Sum: " + project.getNeedSum());
-        // System.out.println("Current Sum: " + project.getCurrentSum());
-        // System.out.println("Days Left: " + project.getDaysLeft());
     }
 
-    private void displayAllProjectFields(Project project) {
-        previewProject(project, out);
-        System.out.println("ProjectHistory: " + project.getProjectHistory());
-        System.out.println("LinkOnvideo: " + project.getLinkOnvideo());
-        System.out.println("Questions and answers: "
-                + project.getQuestionsAndAnswers());
+    private void allProjectFields(Project project) {
+        out.printProjectPreview(project);
+        out.printAllProjectFields(project);
     }
 
     public void setOut(Out out) {
