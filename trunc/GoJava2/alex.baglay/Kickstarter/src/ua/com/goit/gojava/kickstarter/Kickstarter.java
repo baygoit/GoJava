@@ -1,6 +1,7 @@
 package ua.com.goit.gojava.kickstarter;
 
 import java.util.Arrays;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Kickstarter {
@@ -14,7 +15,7 @@ public class Kickstarter {
 	}
 
 	public void run() {		
-		QuoteGenerator generator = new QuoteGenerator();
+		QuoteGenerator generator = new QuoteGenerator(new Random()); // тут тоже надо вставить но уже настоящий Random
 		System.out.println(generator.nextQuote());
 		
 		while (true) {
