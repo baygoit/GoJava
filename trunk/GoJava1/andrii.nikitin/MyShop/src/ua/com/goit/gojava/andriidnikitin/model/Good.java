@@ -5,6 +5,11 @@ import java.math.BigDecimal;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlIDREF;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+import ua.com.goit.gojava.andriidnikitin.service.BigDecimalAdapter;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Good {
@@ -15,10 +20,11 @@ public class Good {
 	@XmlAttribute
 	private String name;
 	
-	//@XmlIDREF
+	@XmlIDREF
 	@XmlAttribute
 	private Category category;	
 	
+	@XmlJavaTypeAdapter(BigDecimalAdapter.class)
 	@XmlAttribute
 	private BigDecimal price;
 	
@@ -61,10 +67,8 @@ public class Good {
 		this.category = category;
 		return this;
 	}
-
-	@Override
-	public String toString() {
-		return "Good [id=" + id + ", name=" + name + ", category=" + category
-				+ "]";
-	}	
+	
+	public String printInfo(){
+		return "[" + id + "]  " + name + " {" +  category.getName() + "}; " + price;
+	}
 }

@@ -1,12 +1,14 @@
 package ua.com.goit.gojava.andriidnikitin.service;
 
+import java.util.List;
+
 import ua.com.goit.gojava.andriidnikitin.model.Category;
 import ua.com.goit.gojava.andriidnikitin.model.Good;
 
 public interface Storable {
+
+	public List<Category> getCategoryList();
 	
-	public void save (Category category) ;
-	
-	public void save (Good good) ;
+	public List<Good> getGoodList(Category category) ;
 	
 }	

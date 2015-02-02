@@ -1,37 +1,37 @@
 package ua.com.goit.gojava.andriidnikitin.service;
-/*
+
+import java.io.File;
 import java.io.PrintStream;
 import java.util.List;
-*/
-public class Main {/*
-	public static void main(String[] args){		
-		GoodStorageImpl myStore = new GoodStorageImpl();
-		System.out.println("Categories:");
-		List<Category> categoryList = myStore.getCategoryList();
-		printListWithNumeration(myStore.getCategoryList(), System.out);
-		System.out.println("Goods in 3 category:");		
-		printCategory(myStore, categoryList.get(2), System.out);
-		System.out.println("Goods in 2 category:");
-		printCategory(myStore,  categoryList.get(1), System.out);
-		System.out.println("Goods in 1 category:");
-		printCategory(myStore, categoryList.get(0), System.out);
+
+import javax.xml.bind.JAXBException;
+
+import ua.com.goit.gojava.andriidnikitin.model.Category;
+import ua.com.goit.gojava.andriidnikitin.model.Good;
+import ua.com.goit.gojava.andriidnikitin.model.Warehouse;
+public class Main {
+	public static void main(String[] args) throws JAXBException {
+		DataBuilder instance = new DataBuilder();
+		Warehouse warehouse = new Warehouse();
+		warehouse.init();
+		instance.marshall(warehouse, new File("resources/DataFile.xml"));
+		warehouse = instance.unmarshall(new File("resources/DataFile.xml"));
+		printWarehouse(warehouse, System.out);		
+		System.out.println("Done");
 	}
 	
-	private static <T> void printListWithNumeration (List<T> list, 
-			PrintStream outStream){
-		if (list == null) return; 
-		for (int i = 0; i < list.size(); i++)
-			outStream.println(i + 1 + " - " + list.get(i));
-		outStream.println();
-	}
-	
-	private static void printCategory(GoodStorageImpl myStore, 
-			Category category, PrintStream stream){ 
-		try {
-			printListWithNumeration(myStore.getGoodList(category), stream);			
+	private static void printWarehouse(Warehouse warehouse, PrintStream stream) {
+		StorageImpl store = new StorageImpl();
+		store.setCategoryList(warehouse.getCategoryList());
+		store.setGoodList(warehouse.getGoodList());
+		List<Category> list = store.getCategoryList();
+		for (int i = 0; i < list.size(); i++){
+			stream.println(list.get(i).printInfo());
+			List<Good> goodList = store.getGoodList(list.get(i));
+			for (int i1 = 0; i1 < goodList.size(); i1++){
+				stream.println("  " + goodList.get(i1).printInfo());
+			}
 		}
-		catch (NullPointerException exception){
-			stream.println("Not found!");
-		}	
-	}*/	
+		
+	}
 }

@@ -3,13 +3,15 @@ package ua.com.goit.gojava.andriidnikitin.model;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlID;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Category {
-	
+
 	@XmlAttribute
 	private Integer id;
 	
+	@XmlID
 	@XmlAttribute
 	private String name;
 	
@@ -32,12 +34,9 @@ public class Category {
 	public Category setId(Integer id) {
 		this.id = id;
 		return this;
+	}	
+	
+	public String printInfo(){
+		return "[" + id + "]  " + name ;
 	}
-
-	@Override
-	public String toString() {
-		return "Category [name=" + name + "]";
-	}
-
-		
 }

@@ -14,4 +14,11 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>resources/DataFile.xml</name>
+			<type>1</type>
+			<locationURI>PROJECT_LOC/resources/DataFile.xml</locationURI>
+		</link>
+	</linkedResources>
 </projectDescription>

@@ -7,7 +7,8 @@ import java.util.List;
 import ua.com.goit.gojava.andriidnikitin.model.Category;
 import ua.com.goit.gojava.andriidnikitin.model.Good;
 
-public class StorageImpl extends StorageAbstract {
+public class StorageImpl extends StorageAbstract 
+						 implements Modifiable {
 	
 	@SuppressWarnings("serial")
 	private List<Category> categoryList = new ArrayList<Category>(){{

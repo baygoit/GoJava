@@ -6,7 +6,7 @@ import java.util.List;
 import ua.com.goit.gojava.andriidnikitin.model.Category;
 import ua.com.goit.gojava.andriidnikitin.model.Good;
 
-public abstract class StorageAbstract implements Storable, Navigable {
+public abstract class StorageAbstract implements Storable {
 	
 	protected abstract List<Good> getGoodList();
 	
