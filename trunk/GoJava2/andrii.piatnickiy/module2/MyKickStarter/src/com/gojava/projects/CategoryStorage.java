@@ -1,6 +1,7 @@
 package com.gojava.projects;
 
 import java.util.ArrayList;
+import com.gojava.input.*;
 
 public class CategoryStorage {
     private ArrayList<Category> categoryStorageList = new ArrayList<Category>();
@@ -11,6 +12,8 @@ public class CategoryStorage {
 
     public void display() {
         for (Category projectCategory : categoryStorageList) {
+//            output(projectCategory.toString());
+            
             System.out.println(projectCategory.toString());
         }
     }
