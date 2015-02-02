@@ -45,5 +45,13 @@ public class Categories {
 		return kickContainCategories;
 	}
 	
+	public String showAllProjectInCategory(int i) throws FileNotFoundException{
+		String s = "";
+		Category category = new Category();
+		for (int j : listCatecories.get(i).projectsThatContain){
+			s += category.showProjectInShort(j) + "\n";
+		}
+		return s.substring(0, s.length() - 1);
+	}
 	
 }

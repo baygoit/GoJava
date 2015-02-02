@@ -6,7 +6,6 @@ public class KickstarterS {
 	private static void toCategory() throws IOException, InterruptedException{
 		Check check = new Check();
 		Categories categories = new Categories();
-		Category category = new Category();
 		Project project = new Project();
 		Projects projects = new Projects();
 		projects.writeAllCatecories();
@@ -24,7 +23,7 @@ public class KickstarterS {
 			printer("Your chosen category: " + Categories.listCatecories.get(chosenCategory - 1).getCategoryName() + ", containing the following projects: ");
 			
 			while (true){
-				printer(category.showAllProjectInCategory(chosenCategory - 1));
+				printer(categories.showAllProjectInCategory(chosenCategory - 1));
 				printer("Choice Project Number or 0 for exit to Category: ");
 				chosenProject = check.checkNumber(Categories.listCatecories.get(chosenCategory - 1).projectsThatContain, false);
 				if (chosenProject == 0){
