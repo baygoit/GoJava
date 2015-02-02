@@ -12,7 +12,7 @@ public class Projects {
 	}
 
 	public Project[] getProjects(Category category) {
-		Project[] result = new Project[100];
+		Project[] result = new Project[100]; // TODO чето тут такое оно какое-то все страшное :) подумать над этим
 		int found = 0;
 		for (int index = 0; index < count; index ++) {
 			Project project = projects[index];
@@ -26,12 +26,8 @@ public class Projects {
 		return result2;
 	}
 
-	// надо в хранилище реализовать этот метод - выдача проекта по индексу
-	// подглянем как у нас это реализовано в категориях, потому как я уже забыл :) 
-	// всю программу в голове держать не стоит - всегда можно подглядеть и сделать "по аналогии"
-	// обычно вы будете на незнакомом проекте делать именно так
 	public Project get(int index) {
-		return projects[index]; // по аналогии, теперь вернемся на уровень выше  
+		return projects[index];   
 	}
 
 }
