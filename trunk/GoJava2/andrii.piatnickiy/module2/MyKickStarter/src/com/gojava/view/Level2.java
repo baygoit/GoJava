@@ -14,7 +14,7 @@ public class Level2 implements Level {
 
     public void displayMySelf(int categoryNumber) {
         //TODO
-//        out.printProjectPreview(project);manager.displayProjects(categoryNumber);
+//        out.printProjectPreview(project);
         manager.displayProjects(categoryNumber);
     }
 
