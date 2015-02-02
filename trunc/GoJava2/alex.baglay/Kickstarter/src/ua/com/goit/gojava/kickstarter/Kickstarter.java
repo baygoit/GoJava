@@ -90,16 +90,18 @@ public class Kickstarter {
 
 	private void askCategory() {
 		System.out.println("Выберите категорию:");
+		// для начала тут выводится список
 		System.out.println(Arrays.toString(categories.getCategories()));
 	}
 
-	private Category chooseCategory(int categoryIndex) {
-		if (categoryIndex < 0 || categories.size() <= categoryIndex) {
-			System.out.println("Неверный индекс меню " + categoryIndex);
+	private Category chooseCategory(int menuIndex) {
+		if (menuIndex <= 0 || categories.size() < menuIndex) {
+			System.out.println("Неверный индекс меню " + menuIndex);
 			return null; // не рекомендуется так делать, потому что потенциальный NPE у клиента, но что поделать, пока так - оставим TODO
 		}
 		
-		Category category = categories.get(categoryIndex);
+		// тут надо привести либо везде к одному виду, либо разделять - на вьюхе от 1 до N а в моделе от 0 до N-1 TODO подумать наж этим
+		Category category = categories.get(menuIndex - 1); 
 		System.out.println("Вы выбрали категорию: " + category.getName());
 		System.out.println("--------------------------------------");
 		return category;
