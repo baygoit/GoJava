@@ -57,7 +57,7 @@ public class Kickstarter {
 				// где наш метод?
 				
 				// предложение выбрать фильм
-				askProject();
+				askProject(foundProjects);
 	
 				int projectIndex = selectMenu(); 
 				// найти проект по индексу
@@ -92,10 +92,13 @@ public class Kickstarter {
 		}
 	}
 
-	private void askProject() {
+	private void askProject(Project[] foundProjects) {
 		// по аналогии
 		// предлагаем выбрать проект
-		System.out.println("Выберите проект");
+		int from = 0;
+		int to = foundProjects.length - 1;
+		System.out.println("Выберите проект: [" + from + "..." + to + "]" ); // я хочу (эстетика) чтобы тут вывелось все возможные варианты
+		
 	}
 
 	private void printProjectDetails(Project project) {
@@ -148,7 +151,6 @@ public class Kickstarter {
 
 	private void askCategory() {
 		// предлагаем выбрать категорию
-		System.out.println();
 		System.out.println("Выберите категорию:");
 		System.out.println(Arrays.toString(categories.getCategories()));
 	}
