@@ -8,7 +8,7 @@ import org.junit.Test;
 
 public class CategoriesTest {
 
-	@Test // тест на получения списка категорий если есть пару категорий
+	@Test 
 	public void shouldCalegoriesList_whenAddCategories() {
 		// given
 		Categories list = new Categories();
@@ -23,7 +23,7 @@ public class CategoriesTest {
 				Arrays.toString(categories));
 	}
 	
-	@Test // тест на то, что мы получаем пустой список, если категорий нет
+	@Test 
 	public void shouldCalegoriesList_whenNoCategories() {
 		// given
 		Categories list = new Categories();
@@ -36,7 +36,7 @@ public class CategoriesTest {
 				Arrays.toString(categories));
 	}
 	
-	@Test // тест на проверку того что мы получаем нужные категории по индексу
+	@Test 
 	public void shouldGetCategoryByIndex() {
 		// given
 		Categories list = new Categories();
@@ -52,7 +52,7 @@ public class CategoriesTest {
 		assertSame(category2, list.get(1));
 	}
 	
-	@Test // тест на размер списка категорий если там ничего нет а потом добавили
+	@Test 
 	public void shouldGetCalegoriesListSize_whenAddCategories() {
 		// given
 		Categories list = new Categories();
