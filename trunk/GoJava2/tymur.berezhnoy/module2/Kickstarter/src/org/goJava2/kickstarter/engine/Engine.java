@@ -1,65 +1,63 @@
 package org.goJava2.kickstarter.engine;
-import java.util.ArrayList;
 
-import org.goJava2.kickstarter.controller.Controller;
-import org.goJava2.kickstarter.model.GeneralStorage;
-import org.goJava2.kickstarter.model.Quote;
-import org.goJava2.kickstarter.model.QuoteStorage;
+import org.goJava2.kickstarter.controller.CategoryController;
+import org.goJava2.kickstarter.controller.ProjectController;
+import org.goJava2.kickstarter.controller.QuoteController;
+import org.goJava2.kickstarter.factory.StorageFactory;
 import org.goJava2.kickstarter.view.Scann;
 import org.goJava2.kickstarter.view.View;
 
 public class Engine {
 	
-	private QuoteStorage quoteStorage;
-	private GeneralStorage generalStorage;
-	private View view;
-	private Controller controller;
+	private	View view;
 	private Scann scann;
 	
 	public Engine() {
-		quoteStorage = new QuoteStorage(new ArrayList<Quote>());
-		generalStorage = new GeneralStorage();
-		view = new View();
-		controller = new Controller(quoteStorage, generalStorage, view);
+		view = new View(new QuoteController(), new CategoryController(), new ProjectController());
 		scann = new Scann();
 	}
 	
-	public void start() {
-		controller.displayQuote();
-		controller.displayCategories();
-		int input;
-		
-		while(true) {
-			System.out.print("[0 - exit; 1 - * - select category]\n> ");
-			input = scann.choice();
-			if(input > 0 && input <= generalStorage.getCategories().size()) {
-				controller.selectCategory(input);
-				while(true) {
-					System.out.print("[0 - to categories; 1 - * - select project]\n> ");
-					input = scann.choice();
-					if(input > 0) {
-						try {
-						controller.selectProject(input);
-						} catch(IndexOutOfBoundsException e) {
-							System.out.println("- There are no project at number: " + input);
-						}
-						while(true) {
-							System.out.print("[0 - to projects;]\n> ");
-							input = scann.choice();
-							if(input == 0) {
-								controller.displaySpecificProjects();
-								break;
-							}
-						}
-					} else if(input == 0) {
-						controller.displayCategories();
-						break;
-					}
-				}
-			} else if(input == 0) {
-				System.out.println("- App closed!");
-				break;
-			}
+	public void consoleLevel1() {
+		System.out.print("[0 - exit; 1 - * - selec category;]\n> ");
+		int input = scann.choice();
+		if(input > 0 && input <= StorageFactory.getCategoryStorage().getContent().size()) {
+			view.displaySpecificCategory(input);
+			view.displayProjects();
+			consoleLevel2();
+			consoleLevel1();
+		} else if(input == 0) {
+			System.out.print("- App closed");
+			return;
+		} else {
+			consoleLevel1();
 		}
+	}
+	
+	public void consoleLevel2() {
+		System.out.print("[0 - to categories; 1 - * - select project;]\n> ");
+		int input = scann.choice();
+		
+		if(input > 0) {
+			view.displaySpecificProject(input);
+			consoleLevel3();
+			consoleLevel2();
+		} else if (input == 0) {
+			view.displayCategories();
+		}
+	}
+	
+	public void consoleLevel3() {
+		System.out.print("[0 - to projects;]\n> "); 
+		if(scann.choice() == 0) {
+			view.displayProjects();
+		} else {
+			consoleLevel3();
+		}
+	}
+	
+	public void start() {
+		view.displayHead();
+		view.displayCategories();	
+		consoleLevel1();
 	}
 }

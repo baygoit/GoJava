@@ -1,4 +1,4 @@
-package org.goJava2.kickstarter.model;
+package org.goJava2.kickstarter.content;
 
 public class Quote {
 	
@@ -11,7 +11,7 @@ public class Quote {
 		this.author = author;
 	}
 
-	public String getContent() {
+	public String getQuoteContent() {
 		return new String("\"" + content + "\"" + " " + copyrightSymbol + " " + author);
 	}
 }

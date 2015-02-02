@@ -1,4 +1,4 @@
-package org.goJava2.kickstarter.model;
+package org.goJava2.kickstarter.content;
 
 public class Category {
 	

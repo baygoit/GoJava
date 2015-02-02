@@ -1,11 +1,19 @@
 package org.goJava2.kickstarter.model;
+import java.util.ArrayList;
 import java.util.List;
 
-public class QuoteStorage {
+import org.goJava2.kickstarter.behavior.StorageBehavior;
+import org.goJava2.kickstarter.content.Quote;
+
+public class QuoteStorage implements StorageBehavior<Integer> {
+	
 	private List<Quote> listOfQuotes;
 	
-	public QuoteStorage(List<Quote> listOfQuotes) {
-		this.listOfQuotes = listOfQuotes;
+	/**
+	 * The constructor for Hard-coded quotes.
+	 */
+	public QuoteStorage() {
+		listOfQuotes = new ArrayList<Quote>();
 		listOfQuotes.add(new Quote("Sometimes when you innovate, you make mistakes."
 				+ "\n It is best to admit them quickly, and get on with\n improving your other innovations.", "Steve Jobs"));
 		listOfQuotes.add(new Quote("The common question that gets asked in business is, 'why?'."
@@ -15,12 +23,26 @@ public class QuoteStorage {
 		listOfQuotes.add(new Quote("When you're curious, you find lots of interesting things to do.", "Walt Disney"));
 	}
 	
-	public void addQuoteToStorage(Quote quote) {
-		listOfQuotes.add(quote);
+	/**
+	 * The constructor for custom quotes.
+	 * @param listOfQuotes
+	 */
+	public QuoteStorage(List<Quote> listOfQuotes) {
+		this.listOfQuotes = listOfQuotes;
 	}
 	
 	public Quote getRandomQuote() {
 		int i = (int)(Math.random() * listOfQuotes.size());
+		return listOfQuotes.get(i);
+	}
+	
+	@Override
+	public List<Quote> getContent() {
+		return listOfQuotes;
+	}
+	
+	@Override
+	public Quote getSpecificContent(Integer i) {
 		return listOfQuotes.get(i);
 	}
 }
