@@ -28,9 +28,6 @@ public class Controller {
             if ((numberOfCategory == 0) || (numberOfCategory > categoriesList.size()))
                 break;
             processingProjectsList(categoriesList, numberOfCategory);
-            if (numberOfCategory == 0) {
-                break;
-            }
         }
     }
 
@@ -43,9 +40,6 @@ public class Controller {
                             .getProjectsList().size()))
                 break;
             processingProject(categoriesList, numberOfCategory, numberOfProject);
-            if (numberOfProject == 0) {
-                break;
-            }
         }
     }
 
@@ -55,10 +49,10 @@ public class Controller {
             view.showProject(categoriesList.get(numberOfCategory - 1).getProjectsList()
                     .get(numberOfProject - 1));
             int projectOption = input.getAnswer();
-            if (projectOption != 0) {
-                view.show("Selected option: ");
-            } else if (projectOption == 0) {
+            if (projectOption == 0) {
                 break;
+            } else {
+                view.show("Selected option: ");
             }
         }
     }
