@@ -14,8 +14,12 @@ public class OutputPreparer {
 
 	public List<String> stringProjectOutput(Category category) {
 		stringProjects = new ArrayList<String>();
-		List<Project> foundProjects = projects.getProjects(category);
+		stringProjects.add("");
+		stringProjects.add("Выберите проект:");
+		stringProjects.add("------------------------------------");
+		List<Project> foundProjects = projects.getProjects(category);	
 		for (Project project : foundProjects) {
+			
 			stringProjects.add("Название проекта:           " + project.getName());
 			stringProjects.add("Описание проекта:           " + project.getDescription());
 			stringProjects.add("Необходимая сумма:          " + project.getGoal() + "$");
@@ -23,6 +27,8 @@ public class OutputPreparer {
 			stringProjects.add("До окончания сбора средств: " + project.getDaysLeft() + " дней");
 			stringProjects.add("------------------------------------");
 		}
+		stringProjects.add("Введите 0 для выхода");
+		stringProjects.add("");
 		return stringProjects;
 	}
 
@@ -40,6 +46,8 @@ public class OutputPreparer {
 		stringFullProject.add("Линки на видео с демо       " + project.getLinksToVideo());
 		stringFullProject.add("Вопросы/ответы:             " + project.getQuestions());
 		stringFullProject.add("------------------------------------");
+		stringFullProject.add("Введите 0 для выхода");
+		stringFullProject.add("");
 		return stringFullProject;
 	}
 }

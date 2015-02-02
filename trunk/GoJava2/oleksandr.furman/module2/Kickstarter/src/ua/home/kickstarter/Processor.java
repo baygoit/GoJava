@@ -45,15 +45,9 @@ public class Processor {
 	}
 
 	public void projectsPrint() {
-		inOut.output("");
-		inOut.output("Выберите проект:");
-		inOut.output("------------------------------------");
 		for (String stringProjects : outputPreparer.stringProjectOutput(category)) {
 			inOut.output(stringProjects);
 		}
-
-		inOut.output("Введите 0 для выхода");
-		inOut.output("");
 
 		int projectIndex = inOut.nextIntIndex();
 		if (projectIndex == 0) {
@@ -63,8 +57,6 @@ public class Processor {
 		for (String stringFullProject : outputPreparer.stringFullProjectOutput(projectIndex, category)) {
 			inOut.output(stringFullProject);
 		}
-		inOut.output("Введите 0 для выхода");
-		inOut.output("");
 		if (inOut.nextIntIndex() == 0) {
 			projectsPrint();
 		}
