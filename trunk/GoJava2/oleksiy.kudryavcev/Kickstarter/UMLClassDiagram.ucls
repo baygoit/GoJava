@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <class-diagram version="1.1.8" icons="true" automaticImage="PNG" always-add-relationships="true" generalizations="true" 
   realizations="true" associations="true" dependencies="true" nesting-relationships="true">  
-  <class id="1" language="java" name="org.kudryavtsev.kickstarter.Input" project="Kickstarter" 
-    file="/Kickstarter/src/org/kudryavtsev/kickstarter/Input.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="1" language="java" name="org.kudryavtsev.kickstarter.inout.Input" project="Kickstarter" 
+    file="/Kickstarter/src/org/kudryavtsev/kickstarter/inout/Input.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="84" y="79"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -10,8 +10,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="2" language="java" name="org.kudryavtsev.kickstarter.Project" project="Kickstarter" 
-    file="/Kickstarter/src/org/kudryavtsev/kickstarter/Project.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="2" language="java" name="org.kudryavtsev.kickstarter.data.Project" project="Kickstarter" 
+    file="/Kickstarter/src/org/kudryavtsev/kickstarter/data/Project.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="880" y="418"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -37,8 +37,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="5" language="java" name="org.kudryavtsev.kickstarter.Category" project="Kickstarter" 
-    file="/Kickstarter/src/org/kudryavtsev/kickstarter/Category.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="5" language="java" name="org.kudryavtsev.kickstarter.data.Category" project="Kickstarter" 
+    file="/Kickstarter/src/org/kudryavtsev/kickstarter/data/Category.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="445" y="488"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -46,8 +46,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <interface id="6" language="java" name="org.kudryavtsev.kickstarter.Out" project="Kickstarter" 
-    file="/Kickstarter/src/org/kudryavtsev/kickstarter/Out.java" binary="false" corner="BOTTOM_RIGHT">    
+  <interface id="6" language="java" name="org.kudryavtsev.kickstarter.inout.Out" project="Kickstarter" 
+    file="/Kickstarter/src/org/kudryavtsev/kickstarter/inout/Out.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1239" y="367"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -55,8 +55,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <class id="7" language="java" name="org.kudryavtsev.kickstarter.Model" project="Kickstarter" 
-    file="/Kickstarter/src/org/kudryavtsev/kickstarter/Model.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="7" language="java" name="org.kudryavtsev.kickstarter.data.Model" project="Kickstarter" 
+    file="/Kickstarter/src/org/kudryavtsev/kickstarter/data/Model.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="462" y="238"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -64,8 +64,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="8" language="java" name="org.kudryavtsev.kickstarter.View" project="Kickstarter" 
-    file="/Kickstarter/src/org/kudryavtsev/kickstarter/View.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="8" language="java" name="org.kudryavtsev.kickstarter.inout.View" project="Kickstarter" 
+    file="/Kickstarter/src/org/kudryavtsev/kickstarter/inout/View.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1173" y="608"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -73,8 +73,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="9" language="java" name="org.kudryavtsev.kickstarter.OutArrayList" project="Kickstarter" 
-    file="/Kickstarter/src/org/kudryavtsev/kickstarter/OutArrayList.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="9" language="java" name="org.kudryavtsev.kickstarter.inout.OutArrayList" project="Kickstarter" 
+    file="/Kickstarter/src/org/kudryavtsev/kickstarter/inout/OutArrayList.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1235" y="-22"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -91,8 +91,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="11" language="java" name="org.kudryavtsev.kickstarter.OutConsole" project="Kickstarter" 
-    file="/Kickstarter/src/org/kudryavtsev/kickstarter/OutConsole.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="11" language="java" name="org.kudryavtsev.kickstarter.inout.OutConsole" project="Kickstarter" 
+    file="/Kickstarter/src/org/kudryavtsev/kickstarter/inout/OutConsole.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1149" y="130"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -100,8 +100,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <interface id="12" language="java" name="org.kudryavtsev.kickstarter.In" project="Kickstarter" 
-    file="/Kickstarter/src/org/kudryavtsev/kickstarter/In.java" binary="false" corner="BOTTOM_RIGHT">    
+  <interface id="12" language="java" name="org.kudryavtsev.kickstarter.inout.In" project="Kickstarter" 
+    file="/Kickstarter/src/org/kudryavtsev/kickstarter/inout/In.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="292" y="-43"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -109,8 +109,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <class id="13" language="java" name="org.kudryavtsev.kickstarter.InConsole" project="Kickstarter" 
-    file="/Kickstarter/src/org/kudryavtsev/kickstarter/InConsole.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="13" language="java" name="org.kudryavtsev.kickstarter.inout.InConsole" project="Kickstarter" 
+    file="/Kickstarter/src/org/kudryavtsev/kickstarter/inout/InConsole.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="718" y="-32"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      

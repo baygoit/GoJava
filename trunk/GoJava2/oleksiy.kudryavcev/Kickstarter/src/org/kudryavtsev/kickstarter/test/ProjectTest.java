@@ -3,7 +3,7 @@ package org.kudryavtsev.kickstarter.test;
 import static org.junit.Assert.*;
 
 import org.junit.Test;
-import org.kudryavtsev.kickstarter.Project;
+import org.kudryavtsev.kickstarter.data.Project;
 
 public class ProjectTest {
 

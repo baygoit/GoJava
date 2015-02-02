@@ -1,6 +1,9 @@
-package org.kudryavtsev.kickstarter;
+package org.kudryavtsev.kickstarter.inout;
 
 import java.util.List;
+
+import org.kudryavtsev.kickstarter.data.Category;
+import org.kudryavtsev.kickstarter.data.Project;
 
 public class View {
     private String greeting;

@@ -1,4 +1,4 @@
-package org.kudryavtsev.kickstarter;
+package org.kudryavtsev.kickstarter.inout;
 
 public interface Out {
 

@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
-import org.kudryavtsev.kickstarter.Category;
-import org.kudryavtsev.kickstarter.Project;
+import org.kudryavtsev.kickstarter.data.Category;
+import org.kudryavtsev.kickstarter.data.Project;
 
 public class CategoryTest {
 

@@ -1,4 +1,4 @@
-package org.kudryavtsev.kickstarter;
+package org.kudryavtsev.kickstarter.data;
 
 import java.util.ArrayList;
 import java.util.List;

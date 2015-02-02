@@ -1,4 +1,4 @@
-package org.kudryavtsev.kickstarter;
+package org.kudryavtsev.kickstarter.data;
 
 public class Project {
     private String name;

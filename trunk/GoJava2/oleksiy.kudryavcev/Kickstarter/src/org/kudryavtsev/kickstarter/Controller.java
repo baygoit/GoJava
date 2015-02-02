@@ -2,6 +2,11 @@ package org.kudryavtsev.kickstarter;
 
 import java.util.List;
 
+import org.kudryavtsev.kickstarter.data.Category;
+import org.kudryavtsev.kickstarter.data.Model;
+import org.kudryavtsev.kickstarter.inout.Input;
+import org.kudryavtsev.kickstarter.inout.View;
+
 public class Controller {
     private Model model;
     private View view;

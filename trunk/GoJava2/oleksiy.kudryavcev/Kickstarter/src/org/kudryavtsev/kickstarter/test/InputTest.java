@@ -3,7 +3,8 @@ package org.kudryavtsev.kickstarter.test;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
-import org.kudryavtsev.kickstarter.Input;
+import org.kudryavtsev.kickstarter.inout.Input;
+
 import static org.mockito.Mockito.*;
 
 public class InputTest {
