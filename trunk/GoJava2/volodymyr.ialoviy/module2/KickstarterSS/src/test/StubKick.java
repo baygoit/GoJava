@@ -9,7 +9,7 @@ import mainkick.OutputConsole;
 import mainkick.Projects;
 import mainkick.Quotes;
 
-public class MockKick {
+public class StubKick {
 	public static void toCategory() throws IOException, InterruptedException{
 		Check check = new Check();
 		Categories categories = new Categories();

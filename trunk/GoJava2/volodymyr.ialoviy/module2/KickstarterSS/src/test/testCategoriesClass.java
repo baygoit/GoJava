@@ -19,7 +19,6 @@ public class testCategoriesClass {
 		categories.kickContainCategory();
 		categories.projectsContain(0);
 		categories.showCatecoryName(0);
-//		categories.showAllProjectInCategory(2);
 	} catch (FileNotFoundException e) {
 		e.printStackTrace();
 	}}
