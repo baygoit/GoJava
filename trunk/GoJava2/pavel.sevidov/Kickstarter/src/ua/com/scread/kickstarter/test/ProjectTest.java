@@ -56,6 +56,6 @@ public class ProjectTest {
 	@Test
 	public void shouldBeDetails_whenGetDetails() {
 		assertEquals(details ,project.getDetails());
-	}
+	} // this is test
 
 }
