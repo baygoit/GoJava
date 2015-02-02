@@ -24,7 +24,13 @@ public class Kickstarter {
 			// теперь программа стала компактнее и не обязательно больше держать эти отступы, они не нужны
 			askCategory();
 			int categoryIndex = selectMenu(); // автоматический рефакторинг лучше ручного. меньше вероятности сделать ошибку.
-			Category category = chooseCategory(categoryIndex); 
+			Category category = chooseCategory(categoryIndex);
+			// вот почему не рекомендуется возвращать null потому что можно забыть его проверить. В этом случае лучше пользоваться 
+			// exception но так как пока мы его не рассматривали то поиграется с null
+			if (category == null) {
+				continue; // вот вам и вот :) NPE и я не знаю из за чего. Я ввел -1 и все ок, а 3 поломалось...
+			}
+			
 			// получаю список проектов
 			Project[] foundProjects = projects.getProjects(category);
 			printProjects(foundProjects);
@@ -57,7 +63,9 @@ public class Kickstarter {
 				// найти проект по индексу
 				// тут projectIndex - индекс в меню (отфильтрованный список), а не в общем хранилище
 				// приходится переделывать а как иначе?
-				// TODO если индекс выбран неправильно - тут ошибка! - проверим?
+				// если индекс выбран неправильно - тут ошибка! - проверим? пофиксили! теперь я вот что думаю, если 
+				// есть такая ошибка с проектами, значит она есть везде, где есть запрос числа - с категориями тоже. Пофиксим и там? да!
+				
 				// вот тут надо делать проверку, если индекс не тот - выходим! вернее вывод ошибки и новый запрос 
 				if (projectIndex < 0 || foundProjects.length <= projectIndex) {
 					System.out.println("Неверный индекс меню " + projectIndex);
@@ -146,7 +154,14 @@ public class Kickstarter {
 	}
 
 	private Category chooseCategory(int categoryIndex) {
-		// получаю выбранную категорию <- но я бы повыделял все это в отдельные методы по аналогии - так будет лучше
+		// получаю выбранную категорию 
+		
+		// тут сложнее :) но мы справились! Проверим?
+		if (categoryIndex < 0 || categories.size() <= categoryIndex) {
+			System.out.println("Неверный индекс меню " + categoryIndex);
+			return null; // не рекомендуется так делать, потому что потенциальный NPE у клиента, но что поделать, пока так - оставим TODO
+		}
+		
 		Category category = categories.get(categoryIndex);
 		System.out.println("Вы выбрали категорию: " + category.getName());
 		System.out.println("--------------------------------------");

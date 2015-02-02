@@ -2,7 +2,7 @@ package ua.com.goit.gojava.kickstarter;
 
 public class Categories {
 
-	private Category[] categories = new Category[10];
+	private Category[] categories = new Category[10]; // ах вот оно откуда!! я захардкодил...
 	private int count = 0;
 	
 	public void add(Category category) {
@@ -28,6 +28,12 @@ public class Categories {
 		// только что сделал автоматический рефакторинг, чтобы не искать все места где надо заменить. 
 		//меньше руками делаешь - меньше ошибок 
 		return categories[index];  
+	}
+
+	// так как мы инкапсулирорвали массив, то надо дать клиенту то, что он просит, а он просит количество категорий
+	public int size() {
+		// простите туплю :) счетчик уже есть
+		return count;
 	}
 
 }
