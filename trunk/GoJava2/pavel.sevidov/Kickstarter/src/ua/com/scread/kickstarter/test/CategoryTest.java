@@ -10,9 +10,8 @@ public class CategoryTest {
 
 	@Test
 	public void shouldBeName_whenInputName() {
-		String expected = "Vasya";
 		Category category = new Category("Vasya");
-		assertEquals(expected, category.getName());
+		assertEquals("Vasya", category.getName());
 	}
 
 	
