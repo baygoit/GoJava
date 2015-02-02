@@ -48,6 +48,11 @@ public class KickstarterRunner {
 		
 		Kickstarter application = new Kickstarter(categories, projects);
 		
+		// как классно менять объект уже после того как приложение стартовало :) Посмотрим, появится ли результат в детальном описании проекта?
+		project1.setHistory("История этого проекта корнями уходит в ....");
+		project2.setHistory("Мы только начали и потому особо нечего рассказывать.\n"
+				+ "Продолжение следует!");
+		
 		application.run();
 	}
 
