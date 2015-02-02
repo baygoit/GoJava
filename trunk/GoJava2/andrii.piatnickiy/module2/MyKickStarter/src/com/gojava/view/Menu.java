@@ -30,6 +30,7 @@ public class Menu {
         level1.displayMySelf(currentLevelPosition);
     }
 
+    
     public void nextLevel(int nubberForNextLevel) {
         beyondLevel(nubberForNextLevel);
     }
