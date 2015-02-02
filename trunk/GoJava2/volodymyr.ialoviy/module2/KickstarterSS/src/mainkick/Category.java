@@ -5,7 +5,6 @@ public class Category{
 	public int categoryID;
 	public String categoryName;
 	public int[] projectsThatContain;
-	Output out = new OutputConsole();
 	
 	public String showAllProjectInCategory(int i) throws FileNotFoundException{
 		String s = "";

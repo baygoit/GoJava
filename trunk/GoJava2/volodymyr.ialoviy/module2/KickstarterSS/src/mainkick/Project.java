@@ -12,7 +12,6 @@ public class Project{
 	public int howMuchCollected;
 	public int howMuchRemaining;
 	public int counterProject;
-	Output out = new OutputConsole();
 	
 	public String showProjectFull(int i) throws FileNotFoundException{
 		String s = "projectID = " + Projects.listProject.get(i).projectID
