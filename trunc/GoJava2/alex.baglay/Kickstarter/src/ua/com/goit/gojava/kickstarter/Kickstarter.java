@@ -26,24 +26,28 @@ public class Kickstarter {
 			}
 			
 			Project[] foundProjects = projects.getProjects(category);
-			printProjects(foundProjects);
-			
-			while (true) { 
-				askProject(foundProjects);
-	
-				int projectMenuIndex = selectMenu(); 
-				Project project = chooseProject(projectMenuIndex, foundProjects);
-				if (project == null) {
-					continue;
-				}
-				
-				chooseProject(project); 													
-				printProjectDetails(project);
-				
-				// ну и пока не перешли к следующей категории можно предложить пользователю снова выбрать другой проект,
-				// то есть надо зациклить вот так
-				// да цикл бесконечный, потому мы тут поставим TODO и разберемся что делать дальше (это уже следующая история)
+			printProjects(foundProjects);			
+			projectMenu(foundProjects);
+		}
+	}
+
+	// и я бы цикл выделил
+	private void projectMenu(Project[] foundProjects) {
+		while (true) { // вот отсюда нам надо выйти если пользователь ввел 0
+			askProject(foundProjects);
+
+			int projectMenuIndex = selectMenu(); 
+			if (projectMenuIndex == 0) {
+				break; // Всегда без лишних локальныз переменных живется легче!
 			}
+			
+			Project project = chooseProject(projectMenuIndex, foundProjects);
+			if (project == null) {
+				continue;
+			}
+			
+			chooseProject(project); 													
+			printProjectDetails(project);
 		}
 	}
 
@@ -59,7 +63,7 @@ public class Kickstarter {
 	private void askProject(Project[] foundProjects) {
 		int from = 1;
 		int to = foundProjects.length;
-		System.out.println("Выберите проект: [" + from + "..." + to + "]" ); 
+		System.out.println("Выберите проект: [" + from + "..." + to + "] или 0 для выхода" ); 
 	}
 
 	private void printProjectDetails(Project project) {
