@@ -35,10 +35,10 @@ public class Division{
 			e.printStackTrace();
 		}
 		tab++;
-		firstOutPut(getNumbersFromString(input));
+		getNumbersFromString(input);
 	}
 	
-	public static List<Integer> getNumbersFromString(String source){
+	public static void getNumbersFromString(String source){
 		
 		
 		List<String> tempList = Arrays.asList(source.split("/"));
@@ -48,16 +48,12 @@ public class Division{
 			numbersFromString.add(x);
 
 		}
-		return numbersFromString;
-	}
-	
-	public static void firstOutPut(List<Integer> numbers){
 		
-		divider = numbers.get(0);
-		dividen = numbers.get(1);
-		
-		System.out.println(divider + " | " + dividen);
-		
+		divider = numbersFromString.get(0);
+		dividen = numbersFromString.get(1);
+
+		writeIn(divider + " | " + dividen, tab);
+		System.out.println(quotient);
 		divide(divider, dividen);
 	}
 	
@@ -78,12 +74,15 @@ public class Division{
 			nextValue++;
 		}
 		
+		
+		
 		if(tempRemainder != 0){
 			
 			fractionDivide();
             
 		}
 
+		
 		if (quotient.charAt(0) == '0') {
             int counter = 0;
             int i = 0;
@@ -98,8 +97,6 @@ public class Division{
 		}
 		
 		
-		System.out.println("   | " + quotient);
-		
 		for(StringBuilder value: visualize){
 			
 			System.out.println(value);
@@ -109,7 +106,7 @@ public class Division{
 	
 	public static void fractionDivide(){
 		
-
+		
 		StringBuilder fractionPartResult = new StringBuilder(100);
 		List<Integer> fractionRemainder = new ArrayList<Integer>(100);
 		int indexPeriodRepeat;
@@ -138,6 +135,7 @@ public class Division{
 		}
 		quotient.append(".");
         quotient.append(fractionPartResult);
+
 	}
 	
 	public static int getIndexPeriodRepeat(List<Integer> remainder) {
