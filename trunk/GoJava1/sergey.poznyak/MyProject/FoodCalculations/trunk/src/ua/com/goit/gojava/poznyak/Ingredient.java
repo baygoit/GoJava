@@ -10,26 +10,15 @@ package ua.com.goit.gojava.poznyak;
  */
 public class Ingredient {
 	
-	private Dish dish;
-	
 	private Foodstuff foodstuff;
 	
 	private Integer weight;
 	
 	public Ingredient() {}
 
-	protected Ingredient(Dish dish, Foodstuff foodstuff, int weight) {
-		this.dish = dish;
+	protected Ingredient(Foodstuff foodstuff, int weight) {
 		this.foodstuff = foodstuff;
 		this.weight = weight;
-	}
-
-	public Dish getDish() {
-		return dish;
-	}
-
-	public void setDish(Dish dish) {
-		this.dish = dish;
 	}
 
 	public Foodstuff getFoodstuff() {

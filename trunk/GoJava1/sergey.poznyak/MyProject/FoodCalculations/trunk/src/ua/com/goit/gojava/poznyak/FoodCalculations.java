@@ -32,8 +32,7 @@ public class FoodCalculations {
 		input.close();
 		System.out.println("Ingredients (for 1 person):");
 		try {
-			displayIngredients(ListServiceHardcodedData
-					           .getIngredientList(dishes.get(index - 1)));
+			displayIngredients(dishes.get(index - 1).getIngredients());
 		} catch(IndexOutOfBoundsException e) {
 			System.out.println("No such dish");
 		}

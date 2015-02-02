@@ -1,5 +1,8 @@
 package ua.com.goit.gojava.poznyak;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * The Dish bean.
  * 
@@ -13,14 +16,16 @@ public class Dish {
 	private Integer id;
 	
 	private String name;
+	
+	private List<Ingredient> ingredients;
 
 	public Dish() {}
 	
-	protected Dish(int dishId, String dishName) {
-		id = dishId;
-		name = dishName;
+	protected Dish(int id, String name) {
+		this.id = id;
+		this.name = name;
 	}
-	
+
 	public int getId() {
 		return id;
 	}
@@ -35,6 +40,14 @@ public class Dish {
 	
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	public List<Ingredient> getIngredients() {
+		return ingredients;
+	}
+
+	public void setIngredients(List<Ingredient> dishIngredients) {
+		this.ingredients = dishIngredients;
 	}
 
 	@Override

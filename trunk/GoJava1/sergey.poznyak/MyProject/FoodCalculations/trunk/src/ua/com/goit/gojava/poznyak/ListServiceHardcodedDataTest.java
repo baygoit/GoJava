@@ -1,10 +1,7 @@
 package ua.com.goit.gojava.poznyak;
 
 import static org.junit.Assert.*;
-
 import java.util.List;
-
-import org.junit.Before;
 import org.junit.Test;
 
 /**
@@ -24,11 +21,10 @@ public class ListServiceHardcodedDataTest {
 	}
 
 	@Test
-	public void testGetIngredientList() {
-		List<Dish> dishList = ListServiceHardcodedData.getDishList();
-		assertNotNull(ListServiceHardcodedData.getIngredientList(null));
-		assertNotNull(ListServiceHardcodedData.getIngredientList(new Dish()));
-		assertNotNull(ListServiceHardcodedData.getIngredientList(dishList.get(4)));
+	public void testGetFoodstuffList() {
+		List<Foodstuff> foodstuffList = ListServiceHardcodedData.getFoodstuffList();
+		assertNotNull(foodstuffList);
+		assertEquals("buckwheat", foodstuffList.get(0).toString());
 	}
 
 }

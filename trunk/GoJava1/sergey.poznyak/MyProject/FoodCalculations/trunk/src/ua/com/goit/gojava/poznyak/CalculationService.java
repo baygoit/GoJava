@@ -29,7 +29,7 @@ public class CalculationService {
 		List<Ingredient> ingredientList = new ArrayList<Ingredient>();
 		int currentWeight = 0;
 		for (Dish dish : dishList) {
-			ingredientList.addAll(ListServiceHardcodedData.getIngredientList(dish));
+			ingredientList.addAll(dish.getIngredients());
 		}
 		for (Foodstuff foodstuff : foodstuffList) {
 			for (Ingredient ingred : ingredientList) {
@@ -37,7 +37,7 @@ public class CalculationService {
 					currentWeight += ingred.getWeight();
 				}
 			}
-			if (currentWeight > 0.0) {
+			if (currentWeight > 0) {
 				result.put(foodstuff, currentWeight);
 			}
 			currentWeight = 0;
