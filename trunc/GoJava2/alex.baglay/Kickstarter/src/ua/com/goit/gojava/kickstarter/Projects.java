@@ -6,13 +6,11 @@ public class Projects {
 	private Project[] projects = new Project[100];
 	private int count = 0;
 	
-	// потестили
 	public void add(Project project) {
 		projects[count] = project;
 		count++;
 	}
 
-	// потестили
 	public Project[] getProjects(Category category) {
 		Project[] result = new Project[100]; // TODO чето тут такое оно какое-то все страшное :) подумать над этим
 		int found = 0;
@@ -28,7 +26,6 @@ public class Projects {
 		return result2;
 	}
 
-	// остался этот
 	public Project get(int index) {
 		return projects[index];   
 	}
