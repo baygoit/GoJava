@@ -1,27 +1,23 @@
 Users can register in the System.
 User has login, password, name, email, contact phone 
 
-There are 2 types of Users in system: Employee(E), Manager(M).
 
-(E) mark himself in Calendar as free for work or not working.
-(E) can set value of hours free for work per day as default
-and specify another value for each day.
-If value of hours is zero - (E) doesn't work in this day.
+Employee(E)
+(E) mark himself as able for work or not able(day-off). 
+Until (E) set a status of a day in his schedule,  (M) can't take him for a Project.
+(E) has a set of skills.
+
+Manager(M)
+(M) have list of Projects for which he need to find (E)
+(M) can add and remove (E) to the project
+(M) can search (E) for a project
 
 
-(M) chooses a period of dates and see all free (E)s.
-(M) can  make Request(R) for (E). 
-(R) consists of (E)'s id, list of dates and optional a number of hours for each date. 
+Project
+(P) has skills set, start and end date
 
-If (E) is requested he is marked as requested until (E) accept Request. 
-After accepting (E) is marked as busy for full day or several hours per day during date interva.
-If (E) is busy (M) can see who made him busy.
 
-(M) has Tasks with needed (E)'s skills
-(E) has skills list, default, hours per day.
-(T) has skills list.
-(R) has start and end dates, and optional parameters (skills, minimun hours per day). 
-(S) Schedule -
+
 
  
 
