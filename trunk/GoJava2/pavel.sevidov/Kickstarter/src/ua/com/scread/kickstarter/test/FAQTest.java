@@ -18,4 +18,5 @@ public class FAQTest {
 	public void shouldBeAnswer_whenGetAnswer() {
 		assertEquals("answer", faq.getAnswer());
 	}
+
 }

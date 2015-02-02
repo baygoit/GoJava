@@ -20,4 +20,9 @@ public class DetailsTest {
 	public void shouldBeVideo_whenGetVideo() {
 		assertEquals("video", details.getVideo());
 	}
+	
+	@Test
+	public void shouldBeFAQ_whenGetFAQ() {
+		assertEquals(faq, details.getFAQ());
+	}
 }
