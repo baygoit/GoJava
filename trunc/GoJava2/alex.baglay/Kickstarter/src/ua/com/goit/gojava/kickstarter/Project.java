@@ -9,14 +9,17 @@ public class Project {
 	private String description;
 	private int exist;
 	private String history;
+	private String demoVideo;
 
-	public Project(String name, int amount, int days, String description) {
+	public Project(String name, int amount, int days, String demoVideo, String description) {
 		this.name = name;
 		this.amount = amount;
 		this.days = days;
 		this.description = description;
 		this.exist = 0;
+		this.demoVideo = demoVideo; 
 		this.history = null;
+		// посмотреть как пойдет дальше, если что устанавливать через конструктор а то как демо проекта без видео?
 	}
 
 	public void setCategory(Category category) {
@@ -50,11 +53,12 @@ public class Project {
 	public int getDays() {
 		return days;
 	}
+	
+	public void setDemoVideo(String demoVideo) {
+		this.demoVideo = demoVideo;
+	}
 
 	public String getHistory() {
-		// пока я захардкоджу тут какое-то бла бла бла, чтобы просмотреть как оно работает впринципе
-		// текст рыба, обычно его используют для заполнения контента
-		// недоделано потому ставлю TODO
 		// так, интересно, что хочет заказчик говоря - хистори? :)
 		// наверное историю проплат, ответов на вопросы - такая себе лента событий. Ну да ладно, сейчас это 
 		// ничем не отличается от дескрипшена, единственное что это необязательно для проекта поле - его можно заполнять потом
@@ -67,8 +71,9 @@ public class Project {
 	}
 
 	public String getDemoVideo() {
-		// недоделано потому ставлю TODO
-		return "http://youtube.com/tg67f347fg";
+		// Наверное тут надо сделать тоже через сеттер, или через конструктор? 
+		// это необходимое свойство или опциональное? Надо спрашиватть заказчика :) 
+		return demoVideo;
 	}
 
 	public String getQuestionAnswers() {

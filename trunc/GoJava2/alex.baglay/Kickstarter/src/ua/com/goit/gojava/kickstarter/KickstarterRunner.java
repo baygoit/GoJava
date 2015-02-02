@@ -34,9 +34,11 @@ public class KickstarterRunner {
 		categories.add(category3);
 		
 		Project project1 = new Project("Фильм \"Как выучить java\"", 100000, 15, 
+				"http://youtube.com/tg67f347fg",
 				"Фильм о том, что учить Java очень даже просто и интересно");
 		
-		Project project2 = new Project("Фильм \"GoJava\"", 2345, 10, 
+		Project project2 = new Project("Фильм \"GoJava\"", 2345, 10,
+				"http://youtube.com/fh4iy990", // решил что без этого никак!
 				"Фильм о том, как проходит тренинг по Java в GoIT");
 	
 		project1.setCategory(category2);
