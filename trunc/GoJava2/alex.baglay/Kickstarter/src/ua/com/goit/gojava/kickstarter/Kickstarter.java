@@ -19,29 +19,28 @@ public class Kickstarter {
 		
 		while (true) {
 			askCategory();
-			int menuIndex = selectMenu(); 
-			Category category = chooseCategory(menuIndex);
+			int menu = selectMenu(); 
+			Category category = chooseCategory(menu);
 			if (category == null) {
 				continue; 
 			}
 			
-			Project[] foundProjects = projects.getProjects(category);
-			printProjects(foundProjects);			
-			projectMenu(foundProjects);
+			Project[] found = projects.getProjects(category);
+			printProjects(found);			
+			projectMenu(found);
 		}
 	}
 
-	// и я бы цикл выделил
-	private void projectMenu(Project[] foundProjects) {
-		while (true) { // вот отсюда нам надо выйти если пользователь ввел 0
-			askProject(foundProjects);
+	private void projectMenu(Project[] found) {
+		while (true) { 
+			askProject(found);
 
-			int projectMenuIndex = selectMenu(); 
-			if (projectMenuIndex == 0) {
-				break; // Всегда без лишних локальныз переменных живется легче!
+			int menu = selectMenu(); 
+			if (menu == 0) {
+				break; 
 			}
 			
-			Project project = chooseProject(projectMenuIndex, foundProjects);
+			Project project = chooseProject(menu, found);
 			if (project == null) {
 				continue;
 			}
@@ -51,21 +50,20 @@ public class Kickstarter {
 		}
 	}
 
-	// и вообще я бы это безобразие выделил в отдельный метод
-	private Project chooseProject(int projectMenuIndex, Project[] foundProjects) {
-		if (projectMenuIndex <= 0 || foundProjects.length < projectMenuIndex) {
-			System.out.println("Неверный индекс меню " + projectMenuIndex);
+	private Project chooseProject(int menu, Project[] found) {
+		if (menu <= 0 || found.length < menu) {
+			System.out.println("Неверный индекс меню " + menu);
 			return null;  
 		}
-		return foundProjects[projectMenuIndex - 1];
+		return found[menu - 1];
 	}
 
-	private void askProject(Project[] foundProjects) {
-		if (foundProjects.length == 0) {
+	private void askProject(Project[] found) {
+		if (found.length == 0) {
 			System.out.println("Проектов в категории нет. Нажмите 0 - для выхода.");
 		} else {
 			int from = 1;
-			int to = foundProjects.length;
+			int to = found.length;
 			System.out.println("Выберите проект: [" + from + "..." + to + "] или 0 для выхода" );
 		}
 	}
@@ -88,9 +86,9 @@ public class Kickstarter {
 		System.out.println("--------------------------------------");
 	}
 
-	private void printProjects(Project[] foundProjects) {
-		for (int index = 0; index < foundProjects.length; index++) {
-			Project project = foundProjects[index];
+	private void printProjects(Project[] found) {
+		for (int index = 0; index < found.length; index++) {
+			Project project = found[index];
 			System.out.print((index + 1) + " - "); // еще тут :)
 			printProject(project); 			
 		}
@@ -110,14 +108,14 @@ public class Kickstarter {
 		System.out.println(Arrays.toString(categories.getCategories()));
 	}
 
-	private Category chooseCategory(int menuIndex) {
-		if (menuIndex <= 0 || categories.size() < menuIndex) {
-			System.out.println("Неверный индекс меню " + menuIndex);
+	private Category chooseCategory(int menu) {
+		if (menu <= 0 || categories.size() < menu) {
+			System.out.println("Неверный индекс меню " + menu);
 			return null; // не рекомендуется так делать, потому что потенциальный NPE у клиента, но что поделать, пока так - оставим TODO
 		}
 		
 		// тут надо привести либо везде к одному виду, либо разделять - на вьюхе от 1 до N а в моделе от 0 до N-1 TODO подумать наж этим
-		Category category = categories.get(menuIndex - 1); 
+		Category category = categories.get(menu - 1); 
 		System.out.println("Вы выбрали категорию: " + category.getName());
 		System.out.println("--------------------------------------");
 		return category;
