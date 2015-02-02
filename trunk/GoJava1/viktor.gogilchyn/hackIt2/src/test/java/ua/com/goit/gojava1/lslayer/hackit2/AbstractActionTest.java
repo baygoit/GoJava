@@ -1,19 +1,48 @@
 package ua.com.goit.gojava1.lslayer.hackit2;
 
+import static org.junit.Assert.*;
+
 import org.junit.Test;
 
 import ua.com.goit.gojava1.lslayer.hackit2.action.Action;
-import ua.com.goit.gojava1.lslayer.hackit2.action.InformationAction;
-import ua.com.goit.gojava1.lslayer.hackit2.action.ScanAction;
+import ua.com.goit.gojava1.lslayer.hackit2.action.InfoAction;
 import ua.com.goit.gojava1.lslayer.hackit2.actor.Actor;
 import ua.com.goit.gojava1.lslayer.hackit2.actor.HumanControlledCharacter;
+import ua.com.goit.gojava1.lslayer.hackit2.dto.ActionResult;
+import ua.com.goit.gojava1.lslayer.hackit2.dto.ParameterObject;
+import ua.com.goit.gojava1.lslayer.hackit2.gear.Gear;
+import ua.com.goit.gojava1.lslayer.hackit2.gear.hardware.Devices.InfoDevice;
+import ua.com.goit.gojava1.lslayer.hackit2.gear.hardware.Devices.ScanDevice;
 
 public class AbstractActionTest {
+    private ParameterObject po = new ParameterObject();
+    private Actor actor = new HumanControlledCharacter("MegaPihar");
+    private InfoDevice tool = new InfoDevice("Tool");
+    private Gear target =  new ScanDevice("Target"); 
+
     @Test
     public void testGetInfo() {
-        Action action = new InformationAction();
-        Actor actor = new HumanControlledCharacter("UserName");
+        String eol = System.getProperty("line.separator");
+        Action action = new InfoAction();
         actor.setAttribute("CCN", "1234 5678 6543 2345");
+
+        po.actor = actor;
+        po.targetActor = actor;
+        ActionResult result = action.execute(po);
+        assertFalse(result.isSuccess());
+        assertEquals("A tool needed to info", result.getResultMessage());
+
+        po.value = 100; //100% chance to get info
+        po.tool = tool;
+        result = action.execute(po);
+        assertTrue(result.isSuccess());
+        assertEquals("CCN: 1234 5678 6543 2345" + eol, result.getResultMessage());
+
+        po.value = 1; //1% chance to get info. Very rare chance to fail test
+        //TODO Make an mechanism to test chanced methods
+        result = action.execute(po);
+        assertTrue(result.isSuccess());
+        assertEquals("CCN: ?????" + eol, result.getResultMessage());
         
     }
 }

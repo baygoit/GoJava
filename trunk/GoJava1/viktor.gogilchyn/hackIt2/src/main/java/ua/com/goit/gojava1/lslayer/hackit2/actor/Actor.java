@@ -14,5 +14,5 @@ public interface Actor {
     public Map<String, String> getAttributes();
     //UI part
     public String getAllSkills();
-    public String display();
+    public String getStringForOutput();
 }

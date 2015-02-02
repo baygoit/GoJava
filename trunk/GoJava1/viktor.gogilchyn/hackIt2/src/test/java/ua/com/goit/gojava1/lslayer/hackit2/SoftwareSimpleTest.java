@@ -15,7 +15,7 @@ public class SoftwareSimpleTest {
         assertNotNull(soft);
         assertEquals(programName, soft.getName());
         assertEquals(1, soft.getVersion());
-        assertEquals("Advansed Scanner v. 1", soft.display());
+        assertEquals("Advansed Scanner v. 1", soft.getStringForOutput());
     }
 
 }

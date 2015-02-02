@@ -23,7 +23,7 @@ public final class GameSession { //Singleton. There is only one game per app. Mu
         String eol = System.getProperty("line.separator");
         String result = "Stuff list:";
         for (Gear element : stuff) {
-            result += eol + element.display();
+            result += eol + element.getStringForOutput();
         }
         return result;
     }

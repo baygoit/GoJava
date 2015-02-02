@@ -11,6 +11,7 @@ import ua.com.goit.gojava1.lslayer.hackit2.actor.HumanControlledCharacter;
 import ua.com.goit.gojava1.lslayer.hackit2.dto.ActionResult;
 import ua.com.goit.gojava1.lslayer.hackit2.dto.ParameterObject;
 import ua.com.goit.gojava1.lslayer.hackit2.gear.Gear;
+import ua.com.goit.gojava1.lslayer.hackit2.gear.hardware.Devices.BombDevice;
 import ua.com.goit.gojava1.lslayer.hackit2.gear.hardware.Devices.ScanDevice;
 
 public class ScanDeviceTest {
@@ -24,9 +25,9 @@ public class ScanDeviceTest {
         ScanDevice scanner = new ScanDevice("Vizor3000");
         scanner.addPurpose("scan", 100);
         String eol = System.getProperty("line.separator");
-        assertEquals("Vizor3000", scanner.display());
+        assertEquals("Vizor3000", scanner.getStringForOutput());
         scanner.addParameter("cpu", 100);
-        assertEquals("Vizor3000"+ eol +"cpu: 100", scanner.display());
+        assertEquals("Vizor3000"+ eol +"cpu: 100", scanner.getStringForOutput());
     }
     @Test
     public void testUseOfDeviceWrongWay() {
@@ -36,9 +37,13 @@ public class ScanDeviceTest {
         actor.addSkill("scan");
         Gear scanner = new ScanDevice("ScanMaster22000").addPurpose("scan", 100);
         Action action = new ScanAction();
-        po.actor = actor;
         //Use section
         ActionResult result = action.execute(po);
+        assertFalse(result.isSuccess());
+        assertEquals("A person needed to scan", result.getResultMessage());
+
+        po.actor = actor;
+        result = action.execute(po);
         assertFalse(result.isSuccess());
         assertEquals("A tool needed to scan", result.getResultMessage());
 
@@ -57,21 +62,21 @@ public class ScanDeviceTest {
         Action action = new ScanAction();
         Gear target = new ScanDevice("WTF");
         Gear unscannableTarget = new ScanDevice("You can't see my name").addPurpose("scan", 10000);
-        Gear scannerWithotScanPurpose = new ScanDevice("ScrewMaster").addPurpose(null, 0); //Test null branch.
+        Gear scannerWithotScanPurpose = new BombDevice("BombMaster").addPurpose(null, 0); //Test null branch.
         po.actor = actor;
         po.tool = scanner;
-        po.target = target;
+        po.targetGear = target;
 
         ActionResult result = action.execute(po);
         assertTrue(result.isSuccess());
         assertEquals("You successfully scanned "+ target.getName()+". Got new information", result.getResultMessage());
       
-        po.target = unscannableTarget;
+        po.targetGear = unscannableTarget;
         result = action.execute(po);
         assertFalse(result.isSuccess());
         assertEquals("Unsuccesful scan. You got no new information", result.getResultMessage());
         
-        po.target = target;
+        po.targetGear = target;
         po.tool = scannerWithotScanPurpose;
         result = action.execute(po);
         assertFalse(result.isSuccess());

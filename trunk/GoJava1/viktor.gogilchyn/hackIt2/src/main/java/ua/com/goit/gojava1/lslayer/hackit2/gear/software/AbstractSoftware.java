@@ -17,8 +17,7 @@ public class AbstractSoftware extends AbstractUtility implements Software {
     }
 
     @Override
-    public String display() {
-        // TODO Auto-generated method stub
+    public String getStringForOutput() {
         return this.getName() + " v. " + this.getVersion();
     }
 }

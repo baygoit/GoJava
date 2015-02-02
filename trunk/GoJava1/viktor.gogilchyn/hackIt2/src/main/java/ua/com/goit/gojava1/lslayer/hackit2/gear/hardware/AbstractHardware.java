@@ -6,9 +6,9 @@ import java.util.Map;
 import ua.com.goit.gojava1.lslayer.hackit2.gear.AbstractUtility;
 
 public abstract class AbstractHardware extends AbstractUtility implements Hardware {
+
     public AbstractHardware(String name) {
         super(name);
-        // TODO Auto-generated constructor stub
     }
     private Map<String, Integer> parameters = new LinkedHashMap<String, Integer>();
 
@@ -27,7 +27,7 @@ public abstract class AbstractHardware extends AbstractUtility implements Hardwa
         return result;
     }
 
-    public String display() {
+    public String getStringForOutput() {
         return super.getName() + listParameters();
     }
     

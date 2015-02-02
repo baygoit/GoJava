@@ -2,7 +2,6 @@ package ua.com.goit.gojava1.lslayer.hackit2.action;
 
 import ua.com.goit.gojava1.lslayer.hackit2.dto.ActionResult;
 import ua.com.goit.gojava1.lslayer.hackit2.dto.ParameterObject;
-import ua.com.goit.gojava1.lslayer.hackit2.gear.Gear;
 
 public class ScanAction extends AbstractAction implements Action {
 
@@ -24,13 +23,13 @@ public class ScanAction extends AbstractAction implements Action {
         }
         boolean succeed = super.checkSuccess(po);
         ActionResult result = new ActionResult(succeed, 
-                succeed ? "You successfully scanned "+ ((Gear) po.target).getName() +". Got new information" :
+                succeed ? "You successfully scanned "+ po.targetGear.getName() +". Got new information" :
                           "Unsuccesful scan. You got no new information"
                 );
         ParameterObject change = new ParameterObject();
         change.action = "addknowledge";
         change.actor = po.actor;
-        change.target = po.target;
+        change.targetGear = po.targetGear;
         result.addChange(change);
         return result;
     }

@@ -27,7 +27,7 @@ public class ScanActionTest {
         this.tool.addPurpose("scan", 100);
         po.actor = this.actor;
         po.tool = this.tool;
-        po.target = this.target;
+        po.targetGear = this.target;
     }
     
     @Test

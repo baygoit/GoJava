@@ -46,6 +46,10 @@ public class AbstractCharaterTest {
         assertEquals("Cracs: 1" + eol +
                 "Facs: 1" + eol +
                 "Packs: 1" + eol, actor.getAllSkills());
+        assertEquals("Username" + eol +
+                     "Cracs: 1" + eol +
+                     "Facs: 1" + eol +
+                     "Packs: 1" + eol, actor.getStringForOutput());
     }
     
     @Test
@@ -53,6 +57,8 @@ public class AbstractCharaterTest {
         Actor actor = new HumanControlledCharacter("UserName");
         actor.setAttribute("CCN", "1234 5678 6543 2345");
         assertEquals("1234 5678 6543 2345", actor.getAttribute("CCN"));
+        assertEquals(1, actor.getAttributes().size());
+        assertEquals("",actor.getAttribute("None"));
     }
     
 }

@@ -6,7 +6,7 @@ import java.util.Map;
 
 public abstract class AbstractCharacter implements Actor {
 
-    protected String name;
+    private String name;
 
     private Map<String, Integer> skills = new LinkedHashMap<String, Integer>();
     @Override
@@ -25,9 +25,11 @@ public abstract class AbstractCharacter implements Actor {
     }
 
     @Override
-    public String display() {
+    public String getStringForOutput() {
+        String eol = System.getProperty("line.separator");
         String result = "";
-        result += this.getName();
+        result += this.getName() + eol;
+        result += this.getAllSkills();
         return result;
     }
     @Override
