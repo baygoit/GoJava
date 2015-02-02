@@ -7,12 +7,16 @@ import org.junit.Test;
 public class QuotationsTest {
 
 	@Test
-	public void test() {
-
-		Quotations quotations = new Quotations();
-		int  quoteNumber = 1;
-		String actual = quotations.nextQuote(quoteNumber);
-		String expected = "Я не хочу создавать что-то для того, чтобы мне платили. Я хочу, чтобы мне платили за то, что я что-то создаю. (c) Леонард Коэн";
+	public void testRandomQuote() {
+		
+		boolean actual = true;
+		boolean expected = true;
+		String randomQuote = new Quotations().randomQuote();
+		String randomQuote1 = new Quotations().randomQuote();
+		String randomQuote2 = new Quotations().randomQuote();
+		if(randomQuote.equals(randomQuote1) && randomQuote.equals(randomQuote2)){
+			actual = false;
+		}
 		assertEquals(actual, expected);
 	}
 }
