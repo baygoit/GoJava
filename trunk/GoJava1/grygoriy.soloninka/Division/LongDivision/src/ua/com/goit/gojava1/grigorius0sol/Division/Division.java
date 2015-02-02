@@ -36,6 +36,11 @@ public class Division{
 		}
 		tab++;
 		getNumbersFromString(input);
+		
+		for(StringBuilder value: visualize){
+			
+			System.out.println(value);
+		}
 	}
 	
 	public static void getNumbersFromString(String source){
@@ -53,7 +58,7 @@ public class Division{
 		dividen = numbersFromString.get(1);
 
 		writeIn(divider + " | " + dividen, tab);
-		System.out.println(quotient);
+		
 		divide(divider, dividen);
 	}
 	
@@ -82,7 +87,6 @@ public class Division{
             
 		}
 
-		
 		if (quotient.charAt(0) == '0') {
             int counter = 0;
             int i = 0;
@@ -96,11 +100,7 @@ public class Division{
             quotient.delete(0, counter);
 		}
 		
-		
-		for(StringBuilder value: visualize){
-			
-			System.out.println(value);
-		}
+		visualize.add(1,new StringBuilder("    | " + quotient));
 	}
 	
 	
