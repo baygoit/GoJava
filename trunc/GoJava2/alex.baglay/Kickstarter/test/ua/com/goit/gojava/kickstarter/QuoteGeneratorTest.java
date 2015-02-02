@@ -11,29 +11,23 @@ import org.junit.Test;
 
 public class QuoteGeneratorTest {
 
-	// мы занаследовались от рендома
 	class FakeRandom extends Random {
 		private List<Integer> numbers;
 
-		// инитим его своими числами
 		public FakeRandom(Integer... numbers) {
-			this.numbers = new LinkedList(Arrays.asList(numbers)); // ошибка потому что Arrays.asList создает такой лист из которого потом 
-			// нельзя будет удалять :) немодифицируемый
+			this.numbers = new LinkedList(Arrays.asList(numbers));  
 		}
 		
-		// переопределили в нем метод получения следующего числа
 		@Override
-		public int nextInt(int i) { // не тот метод переопределили
-			return numbers.remove(0); // где берем из списка как из стека, удаляя верхий элемент
+		public int nextInt(int i) { 
+			return numbers.remove(0);
 		}
 	}
 	
 	@Test
 	public void shouldGenerateNewQUote() {
 		// given
-		// Все, теперь у нас сколько не хзапускай - FakeRandom будет всегда возвращать вначале 0 а потом 1, и значит тест будет всегда проходить
 		QuoteGenerator generator = new QuoteGenerator(new FakeRandom(0, 1)); 
-		// ничего не поменялось - мы просто вынесли "за скобки" класса зависимость new Random()
 		
 		// when 
 		String quote = generator.nextQuote();

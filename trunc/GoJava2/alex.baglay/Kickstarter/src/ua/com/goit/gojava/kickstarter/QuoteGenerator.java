@@ -2,7 +2,6 @@ package ua.com.goit.gojava.kickstarter;
 
 import java.util.Random;
 
-// начнем с простого - потестим этот класс
 public class QuoteGenerator {
 	private Random random;
 
@@ -18,7 +17,7 @@ public class QuoteGenerator {
 					"Все будет хорошо! (с) Саня",
 					"Сделай это! (с) Саня",
 				};
-		int index = random.nextInt(strings.length);  // Все потому что тут рендом, потому мы его выделим
+		int index = random.nextInt(strings.length);  
 		String string = strings[index];
 		return string;
 	}

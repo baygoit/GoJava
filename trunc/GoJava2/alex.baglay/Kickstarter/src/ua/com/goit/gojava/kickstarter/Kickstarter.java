@@ -15,7 +15,7 @@ public class Kickstarter {
 	}
 
 	public void run() {		
-		QuoteGenerator generator = new QuoteGenerator(new Random()); // тут тоже надо вставить но уже настоящий Random
+		QuoteGenerator generator = new QuoteGenerator(new Random()); 
 		System.out.println(generator.nextQuote());
 		
 		while (true) {
