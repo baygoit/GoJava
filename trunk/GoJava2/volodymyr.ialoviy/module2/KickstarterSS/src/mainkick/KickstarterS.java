@@ -6,7 +6,6 @@ public class KickstarterS {
 	private static void toCategory() throws IOException, InterruptedException{
 		Check check = new Check();
 		Categories categories = new Categories();
-		Project project = new Project();
 		Projects projects = new Projects();
 		projects.writeAllCatecories();
 		int chosenCategory;
@@ -29,7 +28,7 @@ public class KickstarterS {
 				if (chosenProject == 0){
 					break;
 				}
-				printer(project.showProjectFull(chosenProject - 1));
+				printer(projects.showProjectFull(chosenProject - 1));
 				printer("Choice 0 for exit to Project: ");
 				int[] zero = {0};
 				choiceToProject = check.checkNumber(zero, false);

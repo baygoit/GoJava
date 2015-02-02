@@ -33,4 +33,17 @@ public class Projects {
 		    i++;
 		}
 	}
+	
+	public String showProjectFull(int i) throws FileNotFoundException{
+		String s = "projectID = " + listProject.get(i).projectID
+					+ "\n projectName: " + listProject.get(i).projectName
+					+ "\n shortDescription: " + listProject.get(i).shortDescription
+					+ "\n fullDescription: " + listProject.get(i).fullDescription
+					+ "\n foto: " + listProject.get(i).foto
+					+ "\n link: " + listProject.get(i).link
+					+ "\n howMuchNeeded = " + listProject.get(i).howMuchNeeded
+					+ "\n howMuchCollected = " + listProject.get(i).howMuchCollected
+					+ "\n howMuchRemaining = " + listProject.get(i).howMuchRemaining;
+		return s;
+	}
 }
