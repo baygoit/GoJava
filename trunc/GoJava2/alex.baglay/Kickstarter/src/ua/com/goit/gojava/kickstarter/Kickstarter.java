@@ -19,8 +19,8 @@ public class Kickstarter {
 		
 		while (true) {
 			askCategory();
-			int categoryIndex = selectMenu(); 
-			Category category = chooseCategory(categoryIndex);
+			int menuIndex = selectMenu(); 
+			Category category = chooseCategory(menuIndex);
 			if (category == null) {
 				continue; 
 			}
@@ -31,12 +31,11 @@ public class Kickstarter {
 			while (true) { 
 				askProject(foundProjects);
 	
-				int projectIndex = selectMenu(); 
-				if (projectIndex < 0 || foundProjects.length <= projectIndex) {
-					System.out.println("Неверный индекс меню " + projectIndex);
-					continue; 
+				int projectMenuIndex = selectMenu(); 
+				Project project = chooseProject(projectMenuIndex, foundProjects);
+				if (project == null) {
+					continue;
 				}
-				Project project = foundProjects[projectIndex];
 				
 				chooseProject(project); 													
 				printProjectDetails(project);
@@ -48,9 +47,18 @@ public class Kickstarter {
 		}
 	}
 
+	// и вообще я бы это безобразие выделил в отдельный метод
+	private Project chooseProject(int projectMenuIndex, Project[] foundProjects) {
+		if (projectMenuIndex <= 0 || foundProjects.length < projectMenuIndex) {
+			System.out.println("Неверный индекс меню " + projectMenuIndex);
+			return null;  
+		}
+		return foundProjects[projectMenuIndex - 1];
+	}
+
 	private void askProject(Project[] foundProjects) {
-		int from = 0;
-		int to = foundProjects.length - 1;
+		int from = 1;
+		int to = foundProjects.length;
 		System.out.println("Выберите проект: [" + from + "..." + to + "]" ); 
 	}
 
@@ -75,7 +83,7 @@ public class Kickstarter {
 	private void printProjects(Project[] foundProjects) {
 		for (int index = 0; index < foundProjects.length; index++) {
 			Project project = foundProjects[index];
-			System.out.print(index + " - "); 
+			System.out.print((index + 1) + " - "); // еще тут :)
 			printProject(project); 			
 		}
 	}
