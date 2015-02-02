@@ -3,6 +3,8 @@ package ua.home.kickstarter;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -10,45 +12,44 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 public class DataManager {
+	private Categories categories;
+	private Projects projects;
+	private List<Project> project;
 
-	public void dataInputToobjects() {
+	public void storage() {
 		JSONParser parser = new JSONParser();
 		try {
-			JSONArray a = (JSONArray) parser.parse(new FileReader("d:\\ss12.json"));
+			JSONArray a = (JSONArray) parser.parse(new FileReader("d:\\Projects.json"));
 
-			Category category1 = new Category("Games");
-			Category category2 = new Category("Technology");
-			Category category3 = new Category("Design");
+			categories = new Categories();
 
-			Categories categories = new Categories();
+			categories.add(new Category("Games"));
+			categories.add(new Category("Technology"));
+			categories.add(new Category("Design"));
+			
+			project = new ArrayList<Project>();
+			for (int i = 0; i < a.size(); i++) {
+				project.add(new Project((JSONObject) a.get(i)));
+			}
+//			project.get(0).setCategory(categories.getCategories().get(1));
+//			project.get(1).setCategory(categories.getCategories().get(1));
+//			project.get(2).setCategory(categories.getCategories().get(1));
+//			project.get(3).setCategory(categories.getCategories().get(2));
+//			project.get(4).setCategory(categories.getCategories().get(2));
+//			project.get(5).setCategory(categories.getCategories().get(2));
 
-			categories.add(category1);
-			categories.add(category2);
-			categories.add(category3);
-
-			Project project1 = new Project((JSONObject) a.get(0));
-			Project project2 = new Project((JSONObject) a.get(1));
-			Project project3 = new Project((JSONObject) a.get(2));
-			Project project4 = new Project((JSONObject) a.get(3));
-			Project project5 = new Project((JSONObject) a.get(4));
-			Project project6 = new Project((JSONObject) a.get(5));
-			project1.setCategory(category1);
-			project2.setCategory(category1);
-			project3.setCategory(category1);
-			project4.setCategory(category2);
-			project5.setCategory(category2);
-			project6.setCategory(category2);
-
-			Projects projects = new Projects();
-			projects.add(project1);
-			projects.add(project2);
-			projects.add(project3);
-			projects.add(project4);
-			projects.add(project5);
-			projects.add(project6);
-
-			Processor processor = new Processor(categories, projects);
-			processor.run();
+			for (int i = 0; i < a.size(); i++) {
+				if(i < 3){
+				project.get(i).setCategory(categories.getCategories().get(1));
+				}else if (i >= 3) {
+				project.get(i).setCategory(categories.getCategories().get(2));	
+				}
+			}
+			
+			projects = new Projects();
+			for (int i = 0; i < a.size(); i++) {
+				projects.add(project.get(i));
+			}
 
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -57,5 +58,13 @@ public class DataManager {
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public Categories getCategories() {
+		return categories;
+	}
+
+	public Projects getProjects() {
+		return projects;
 	}
 }
