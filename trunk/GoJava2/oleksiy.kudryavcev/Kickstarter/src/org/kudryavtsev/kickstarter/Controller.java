@@ -5,52 +5,61 @@ import java.util.List;
 public class Controller {
     private Model model;
     private View view;
-    private Input scan;
+    private Input input;
 
-    public Controller(Model model, View view, Input scan) {
+    public Controller(Model model, View view, Input input) {
         this.model = model;
         this.view = view;
-        this.scan = scan;
+        this.input = input;
     }
 
     public void start() {
         model.init();
         view.showGreeting();
-        List<Project> projectsList = model.getProjectsList();
         List<Category> categoriesList = model.getCategoriesList();
+        processingCategoriesList(categoriesList);
+        input.close();
+    }
 
-        boolean exitFromApplication = false;
-        while (!exitFromApplication) {
+    private void processingCategoriesList(List<Category> categoriesList) {
+        while (true) {
             view.showCategories(categoriesList);
-            int numberOfCategory = scan.getAnswer();
+            int numberOfCategory = input.getAnswer();
             if ((numberOfCategory == 0) || (numberOfCategory > categoriesList.size()))
                 break;
-            boolean exitFromCategories = false;
-            while (!exitFromCategories) {
-                view.showProjects(categoriesList.get(numberOfCategory - 1).getProjectsList());
-                int numberOfProject = scan.getAnswer();
-                if ((numberOfProject == 0) || (numberOfProject > categoriesList.get(numberOfCategory - 1).getProjectsList().size()))
-                    break;
-                boolean exitFromProject = false;
-                while (!exitFromProject) {
-                    view.showProject(categoriesList.get(numberOfCategory - 1).getProjectsList()
-                            .get(numberOfProject - 1));
-                    view.showProjectMenu();
-                    int projectOption = scan.getAnswer();
-                    if (projectOption != 0) {
-                        System.out.println("Selected option: ");
-                    } else
-                        System.out.println("Exiting from project");
-                    exitFromProject = true;
-                }
-                if (numberOfProject == 0) {
-                    break;
-                }
-            }
+            processingProjectsList(categoriesList, numberOfCategory);
             if (numberOfCategory == 0) {
                 break;
             }
         }
-        scan.close();
+    }
+
+    private void processingProjectsList(List<Category> categoriesList, int numberOfCategory) {
+        while (true) {
+            view.showProjects(categoriesList.get(numberOfCategory - 1).getProjectsList());
+            int numberOfProject = input.getAnswer();
+            if ((numberOfProject == 0)
+                    || (numberOfProject > categoriesList.get(numberOfCategory - 1)
+                            .getProjectsList().size()))
+                break;
+            processingProject(categoriesList, numberOfCategory, numberOfProject);
+            if (numberOfProject == 0) {
+                break;
+            }
+        }
+    }
+
+    private void processingProject(List<Category> categoriesList, int numberOfCategory,
+            int numberOfProject) {
+        while (true) {
+            view.showProject(categoriesList.get(numberOfCategory - 1).getProjectsList()
+                    .get(numberOfProject - 1));
+            int projectOption = input.getAnswer();
+            if (projectOption != 0) {
+                view.show("Selected option: ");
+            } else if (projectOption == 0) {
+                break;
+            }
+        }
     }
 }

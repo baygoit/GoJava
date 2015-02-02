@@ -12,7 +12,7 @@ public class View {
     }
 
     public void showGreeting() {
-        out.output(greeting);
+        show(greeting);
     }
 
     public void showProjects(List<Project> projectslist) {
@@ -21,6 +21,7 @@ public class View {
             out.output("(" + counter + ") " + project);
             counter++;
         }
+        showChoice();
     }
 
     public void showCategories(List<Category> list, int i) {
@@ -33,12 +34,12 @@ public class View {
             out.output("(" + counter + ") " + category);
             counter++;
         }
-        // List<Object> list = categoryList;
-        // showList(list);
+        showChoice();
     }
 
     public void showProject(Project project) {
         out.output(project.toStringFull());
+        showChoice();
     }
 
     public void showProjectMenu() {
@@ -51,5 +52,12 @@ public class View {
             out.output("(" + counter + ") " + element);
             counter++;
         }
+    }
+    public void showChoice(){
+        out.output("You choice (0 - exit):");
+    }
+    
+    public void show(String string){
+        out.output(string);
     }
 }
