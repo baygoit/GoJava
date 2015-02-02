@@ -3,8 +3,8 @@ package ua.home.kickstarter;
 import java.util.Scanner;
 
 public class InOut {
-	public int input() {
-		Scanner scanner = new Scanner(System.in);
+	Scanner scanner = new Scanner(System.in);
+	public int nextIntIndex() {
 		return scanner.nextInt();
 	}
 	public void output(String s) {
