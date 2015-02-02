@@ -19,12 +19,12 @@ public class KickstarterS {
 				Thread.sleep(10000);
 				continue;
 			}
-			printer("Your chosen category: " + Categories.listCatecories.get(chosenCategory - 1).getCategoryName() + ", containing the following projects: ");
+			printer("Your chosen category: " + categories.showCatecoryName(chosenCategory - 1) + ", containing the following projects: ");
 			
 			while (true){
 				printer(categories.showAllProjectInCategory(chosenCategory - 1));
 				printer("Choice Project Number or 0 for exit to Category: ");
-				chosenProject = check.checkNumber(Categories.listCatecories.get(chosenCategory - 1).projectsThatContain, false);
+				chosenProject = check.checkNumber(categories.projectsContain(chosenCategory - 1), false);
 				if (chosenProject == 0){
 					break;
 				}

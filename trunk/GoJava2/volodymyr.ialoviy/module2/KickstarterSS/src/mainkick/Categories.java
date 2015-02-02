@@ -16,8 +16,8 @@ public class Categories {
 	    }
 	}
 
-	public int counterCategory = categoryBD.size();
-	public static ArrayList<Category> listCatecories = new ArrayList<Category>();
+	private int counterCategory = categoryBD.size();
+	private ArrayList<Category> listCatecories = new ArrayList<Category>();
 	
 	public String showAllCatecories() throws FileNotFoundException{
 		int i = 0;
@@ -35,6 +35,16 @@ public class Categories {
 		    i++;
 		}
 		return s.substring(0, s.length() - 1);
+	}
+	
+	public String showCatecoryName(int categoryId){
+		String name = listCatecories.get(categoryId).categoryName;
+		return name;
+	}
+	
+	public int[] projectsContain(int categoryId){
+		int[] contain = listCatecories.get(categoryId).projectsThatContain;
+		return contain;
 	}
 	
 	public int[] kickContainCategory(){
