@@ -1,11 +1,12 @@
 package ua.com.goit.gojava.m__jane;
 
 import javax.xml.bind.JAXBException;
+
 import ua.com.goit.gojava.m__jane.model.Profile;
-import ua.com.goit.gojava.m__jane.model.Question;
 import ua.com.goit.gojava.m__jane.model.QuestionCategory;
-import ua.com.goit.gojava.m__jane.service.DataBuilder;
+import ua.com.goit.gojava.m__jane.model.question.Question;
 import ua.com.goit.gojava.m__jane.service.ProfileService;
+import ua.com.goit.gojava.m__jane.service.impl.ProfileServiceImpl;
 
 public class MainClass {
 
@@ -13,8 +14,7 @@ public class MainClass {
 	public static void main(String[] args) throws JAXBException{
 
 		
-		ProfileService profileService = DataBuilder.getInstance()
-				.getProfileService();
+		ProfileService profileService =  new ProfileServiceImpl();
 
 		for (Profile profile : profileService.getProfileList()) {
 

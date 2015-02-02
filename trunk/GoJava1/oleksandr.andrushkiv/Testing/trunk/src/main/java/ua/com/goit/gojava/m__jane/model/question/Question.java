@@ -1,8 +1,11 @@
-package ua.com.goit.gojava.m__jane.model;
+package ua.com.goit.gojava.m__jane.model.question;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
+
+import ua.com.goit.gojava.m__jane.model.QuestionCategory;
+import ua.com.goit.gojava.m__jane.model.userAnswer.UserAnswer;
 
 
 //@XmlSeeAlso({Admin.class})
@@ -10,7 +13,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 public abstract class Question {
 	
 	@XmlAttribute
-	private int id;
+	private Integer id;
 	@XmlAttribute
 	protected String content;
 	
@@ -55,6 +58,8 @@ public abstract class Question {
 		this.questionCategory = questionCategory;
 	}
 
+	public abstract UserAnswer createTemplateAnswer();
+	
 	/*
 	 * (non-Javadoc)
 	 * 

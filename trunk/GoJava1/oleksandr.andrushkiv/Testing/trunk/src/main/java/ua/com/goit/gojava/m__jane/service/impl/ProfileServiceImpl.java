@@ -1,24 +1,27 @@
 package ua.com.goit.gojava.m__jane.service.impl;
 
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
-import javax.xml.bind.annotation.XmlRootElement;
+
+
+
+
+import javax.xml.bind.JAXBException;
 
 import ua.com.goit.gojava.m__jane.model.Profile;
+import ua.com.goit.gojava.m__jane.service.DataBuilder;
 import ua.com.goit.gojava.m__jane.service.ProfileService;
 
-@XmlRootElement(name="rootElement")
-@XmlAccessorType(XmlAccessType.FIELD)
+
 public class ProfileServiceImpl implements ProfileService {
 
-	@XmlElement(name = "profile")
-	@XmlElementWrapper(name = "profiles")
 	private List<Profile> profileList;
 	
-	public ProfileServiceImpl(){
+	public ProfileServiceImpl() throws JAXBException{
+		loadProfileList();
+	}
+	
+	private void loadProfileList() throws JAXBException {
+		profileList = DataBuilder.getInstance().getDataLoader().getProfileList();
 	}
 
 	@Override

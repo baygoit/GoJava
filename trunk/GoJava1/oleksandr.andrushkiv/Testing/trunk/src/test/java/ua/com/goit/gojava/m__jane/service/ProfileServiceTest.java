@@ -3,9 +3,12 @@ package ua.com.goit.gojava.m__jane.service;
 import static org.junit.Assert.*;
 
 import java.util.List;
+
 import org.junit.BeforeClass;
 import org.junit.Test;
+
 import ua.com.goit.gojava.m__jane.model.Profile;
+import ua.com.goit.gojava.m__jane.service.impl.ProfileServiceImpl;
 
 
 public class ProfileServiceTest {
@@ -14,8 +17,7 @@ public class ProfileServiceTest {
 	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		profileService = DataBuilder.getInstance()
-				.getProfileService();
+		profileService = new ProfileServiceImpl();
 	}
 
 	@Test
