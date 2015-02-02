@@ -110,7 +110,10 @@ public class Kickstarter {
 		// + линк на видео с демо  
 		System.out.println(project.getDemoVideo()); // новое понятие
 		// + вопросы/ответы  
-		System.out.println(project.getQuestionAnswers()); // новое понятие
+		String questionAnswers = project.getQuestionAnswers();
+		if (questionAnswers != null) { // только если у нас есть что показывать - показываем! 
+			System.out.println(questionAnswers); // новое понятие
+		}
 		System.out.println("--------------------------------------"); // добавил строку разделитель
 		// вот тут у меня осталась текст-рыба
 	}

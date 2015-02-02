@@ -10,6 +10,7 @@ public class Project {
 	private int exist;
 	private String history;
 	private String demoVideo;
+	private String questionAnswers;
 
 	public Project(String name, int amount, int days, String demoVideo, String description) {
 		this.name = name;
@@ -19,7 +20,7 @@ public class Project {
 		this.exist = 0;
 		this.demoVideo = demoVideo; 
 		this.history = null;
-		// посмотреть как пойдет дальше, если что устанавливать через конструктор а то как демо проекта без видео?
+		this.questionAnswers = null;
 	}
 
 	public void setCategory(Category category) {
@@ -57,6 +58,10 @@ public class Project {
 	public void setDemoVideo(String demoVideo) {
 		this.demoVideo = demoVideo;
 	}
+	
+	public void setQuestionAnswers(String questionAnswers) {
+		this.questionAnswers = questionAnswers;
+	}
 
 	public String getHistory() {
 		// так, интересно, что хочет заказчик говоря - хистори? :)
@@ -77,9 +82,9 @@ public class Project {
 	}
 
 	public String getQuestionAnswers() {
-		// недоделано потому ставлю TODO
-		return "Q: вопрос \n" +  // \n мисвол переноса строки
-	           "A: ответ";
+		// тут надо понять как работать с вопросами и ответами, но пока ничего конкретно не указано то KISS
+		// пусть это будет поле, которое как и history будет меняться по ходу выполнения программы, как бы такое себе FAQ
+		return questionAnswers;
 	}
 
 }
