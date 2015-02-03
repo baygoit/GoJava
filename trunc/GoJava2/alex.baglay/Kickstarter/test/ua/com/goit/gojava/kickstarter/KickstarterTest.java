@@ -111,4 +111,72 @@ public class KickstarterTest {
 			", Спасибо за использование нашей программы!\n" +
 			"]", io.getMessages().toString());
 	}
+	
+	@Test // идем дальше, я бы хотел запрограммировать фейк так, чтобы зайти во внутрь категории где есть проекты
+	public void shouldMenuWithProject() {
+	    // given
+		Categories categories = new Categories();
+		Category category = new Category("category1");
+		categories.add(category);
+		
+		Projects projects = new Projects();
+		Project project1 = new Project("project1", 100, 1000, "video1", "description1");
+		projects.add(project1);
+
+		project1.setCategory(category);
+		
+		Project project2 = new Project("project2", 200, 2000, "video2", "description2");
+		projects.add(project2);
+
+		project2.setHistory("history2");
+		project2.setQuestionAnswers("QA");
+		project2.setCategory(category);
+		
+		// проинитим fake - 
+		// 1- выбрали категорию 1, 
+		// 2 - выбрали второй проект, 
+		// 0 - вышли из списка проектов, 
+		// 0 - вышли изсписка категорий, 
+		// 0 - вышли из программы 
+		FakeIO io = new FakeIO(1, 2, 0, 0, 0); 
+		Kickstarter kickstarter = new Kickstarter(categories, projects, io, new StubQuoteGenerator()); // создадим локальные переменные
+		
+		// when
+		kickstarter.run();
+
+		// then
+		assertEquals(
+			"[quote\n" +
+			", Выберите категорию (или 0 для выхода):\n" +
+			", [1 - category1]\n" +
+			", Вы выбрали категорию: category1\n" +
+			", --------------------------------------\n" +
+			", 1 - , project1\n" +
+			", description1\n" +
+			", Уже собрали 100 грн за 1000 дней\n" +
+			", Надо собрать 0 грн\n" +
+			", --------------------------------------\n" +
+			", 2 - , project2\n" +
+			", description2\n" +
+			", Уже собрали 200 грн за 2000 дней\n" +
+			", Надо собрать 0 грн\n" +
+			", --------------------------------------\n" +
+			", Выберите проект: [1...2] или 0 для выхода\n" +
+			", Вы выбрали проект: project2\n" +
+			", --------------------------------------\n" +
+			", project2\n" +
+			", description2\n" +
+			", Уже собрали 200 грн за 2000 дней\n" +
+			", Надо собрать 0 грн\n" +
+			", --------------------------------------\n" +
+			", history2\n" +
+			", video2\n" +
+			", QA\n" +
+			", --------------------------------------\n" +
+			", Выберите проект: [1...2] или 0 для выхода\n" +
+			", Выберите категорию (или 0 для выхода):\n" +
+			", [1 - category1]\n" +
+			", Спасибо за использование нашей программы!\n" +
+			"]", io.getMessages().toString());
+	}
 }
