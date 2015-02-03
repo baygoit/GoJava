@@ -142,36 +142,35 @@ public class Kickstart {
 		Category sport = new Category("Sport");
 		Category science = new Category("Science");
 		Category music = new Category("Music");
-		Project pro = new Project(music);
-		Project pro1 = new Project(sport);
-		Project pro2 = new Project(science);
-		Project proj1 = new Project(sport);
-		Project proj12 = new Project(sport);
-		projects.addProject(pro);
-		projects.addProject(pro1);
-		projects.addProject(pro2);
-		projects.addProject(proj1);
-		projects.addProject(proj12);
+		Project musicBand = new Project(music);
+		Project swimingTeam = new Project(sport);
+		Project spaceDiscovery = new Project(science);
+		Project baseballTEam = new Project(sport);
+		Project strongman = new Project(sport);
+		projects.addProject(musicBand);
+		projects.addProject(swimingTeam);
+		projects.addProject(spaceDiscovery);
+		projects.addProject(baseballTEam);
+		projects.addProject(strongman);
 		quote.printQuote();
 		cat.addCategory(sport);
 		cat.addCategory(science);
 		cat.addCategory(music);
-		pro.setProject("Band", "We want to create new music band", 15000,
+		musicBand.setProject("Band", "We want to create new music band", 15000,
 				12540, 35, "bla-bla-bla", "youtube.com",
 				"Q: Have you invested your money? A: yes");
-		pro1.setProject("Swiming team", "We need sponsor", 5000, 540, 65,
+		swimingTeam.setProject("Swiming team", "We need sponsor", 5000, 540, 65,
 				"bla-bla-bla", "youtube.com",
 				"Q: Have you invested your money? A: yes");
-		proj1.setProject("Baseball team", "We need sponsor", 1420, 450, 72,
+		baseballTEam.setProject("Baseball team", "We need sponsor", 1420, 450, 72,
 				"bla-bla-bla", "youtube.com",
 				"Q: Have you invested your money? A: yes");
-		proj12.setProject("Swiming team", "We need sponsor", 5000, 540, 65,
+		strongman.setProject("Strong man competitions", "We need money to hold our region competitions", 1000, 540, 15,
 				"bla-bla-bla", "youtube.com",
 				"Q: Have you invested your money? A: yes");
-		pro2.setProject("Space Warning", "Discover the univerce", 156540,
+		spaceDiscovery.setProject("Space Warning", "Discover the univerce", 156540,
 				125140, 42, "bla-bla-bla", "youtube.com",
 				"Q: Have you invested your money? A: yes");
 		kick.buildMenu();
-
 	}
 }
