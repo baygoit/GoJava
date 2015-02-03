@@ -23,7 +23,15 @@ public class QuoteGenerator implements Quote{
 		return quotes.get(r);
 	}
 	
+	private int generateNumber(){
+		return rand.nextInt(quotes.size());
+	}
+	
+	public String generateQuote(){
+		return getQuote(generateNumber()); 
+	}
+	
 	public void printQuote() {
-		output.println(getQuote(rand.nextInt(quotes.size())));
+		output.println(generateQuote());
 	}
 }
