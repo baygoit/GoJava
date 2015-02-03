@@ -1,33 +1,53 @@
 package ua.com.goit.gojava.andriidnikitin.service;
 
-import java.io.InputStream;
-import java.math.BigDecimal;
-import java.util.ArrayList;
+import java.io.File;
 import java.util.List;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
-import javax.xml.transform.stream.StreamSource;
+import javax.xml.bind.JAXBException;
 
 import ua.com.goit.gojava.andriidnikitin.model.Category;
 import ua.com.goit.gojava.andriidnikitin.model.Good;
 import ua.com.goit.gojava.andriidnikitin.model.Warehouse;
 
-public class StorageXML extends StorageAbstract {
+public class StorageXML {/*extends StorageAbstract {
+	
+	private Warehouse warehouse;
+	private final File fileStorage = new File("Hello,World!");
+	
+	public StorageXML() {
+		//init();
+	}
+	
+	public void init() {//TODO: set as private
+		try {
+			warehouse = DataBuilder.unmarshall(fileStorage);
+		} catch (JAXBException e) {
+			e.printStackTrace();
+		}	
+	}
+	
+	public void saveChanges() throws JAXBException{
+		DataBuilder.marshall(warehouse, fileStorage);
+	}
 
 	@Override
 	public List<Category> getCategoryList() {
-		// TODO Auto-generated method stub
-		return null;
+		return warehouse.getCategoryList();
 	}
 
 	@Override
-	public List<Good> getGoodList() {
+	public void save(Category category) {
+		warehouse.getCategoryList().add(category);		
+	}
+
+	@Override
+	public void save(Good good) {
+		warehouse.getGoodList().add(good);
+	}
+
+	@Override
+	public List<Good> getGoodList(Category category) {
 		// TODO Auto-generated method stub
 		return null;
-	}
+	}*/
 }

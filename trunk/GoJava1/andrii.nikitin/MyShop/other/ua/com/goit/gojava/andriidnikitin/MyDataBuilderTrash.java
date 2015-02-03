@@ -95,7 +95,7 @@ public class MyDataBuilderTrash {
  		  }
 	}
 
-	public void unmarshallExample() {
+	public void unmarshallExample() {/*
 	    try {
 	        JAXBContext context = 
 	           JAXBContext.newInstance(Warehouse.class);
@@ -128,6 +128,6 @@ public class MyDataBuilderTrash {
 		    } catch (JAXBException exception) {
 		        Logger.getLogger(MyDataBuilderTrash.class.getName()).
 		          log(Level.SEVERE, "marshallExample threw JAXBException", exception);
-		    }
+		    }*/
 		}
 }

@@ -1,6 +1,7 @@
 package ua.com.goit.gojava.andriidnikitin.service;
 
 import java.io.File;
+import java.util.ArrayList;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -13,42 +14,33 @@ import ua.com.goit.gojava.andriidnikitin.model.Warehouse;
 
 
 public class DataBuilder {
-
-        private static DataBuilder instance;
-        //private static final File FILE = new File("resources/DataFile.xml");
-        DataBuilder() {
+        	
+        private static final JAXBContext JAXB_CONTEXT;
+        
+        static {
+        	try {
+        		//ArrayList<Good> list = new ArrayList<Good>(); TODO - delete
+        		JAXB_CONTEXT = JAXBContext.newInstance(						
+    					Category.class
+    					, Good.class
+    					, Warehouse.class
+    					//, list.getClass() TODO - delete
+    					);
+        	} catch (JAXBException exception){
+        		throw new RuntimeException("Failed create JAXBContext. " + exception.getMessage(), exception);
+        	}
         }
-
-       /* public static synchronized DataBuilder getInstance() throws JAXBException {
-                if (instance == null) {
-                        instance = new DataBuilder();
-                        JAXBContext jaxbContext = JAXBContext.newInstance(new Class[] {Warehouse.class});
-                        Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-                        warehouse= (Warehouse) jaxbUnmarshaller.unmarshal(FILE);                     
-                }
-                return instance;
-        }
-        */
+        	
         public static Warehouse unmarshall(File file) throws JAXBException{
-        	file = new File("resources/DataFile.xml");
-        	instance = new DataBuilder();
-            JAXBContext jaxbContext = JAXBContext.newInstance(						
-					Category.class
-					, Good.class
-					, Warehouse.class);
-            Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+        	file = new File("resources/DataFile.xml");//TODO - delete
+            Unmarshaller jaxbUnmarshaller = JAXB_CONTEXT.createUnmarshaller();
             Warehouse warehouse = (Warehouse) jaxbUnmarshaller.unmarshal(file); 
             return warehouse; 
         }
         
         public static void marshall(Warehouse warehouse, File file) throws JAXBException{
-        	file = new File("resources/DataFile.xml");
-        	instance = new DataBuilder();
-            JAXBContext jaxbContext = JAXBContext.newInstance(						
-					Category.class
-					, Good.class
-					, Warehouse.class);
-            Marshaller marshaller = jaxbContext.createMarshaller();
+        	file = new File("resources/DataFile.xml");//TODO - delete
+            Marshaller marshaller = JAXB_CONTEXT.createMarshaller();
             marshaller.marshal(warehouse, file);
         }                
 }

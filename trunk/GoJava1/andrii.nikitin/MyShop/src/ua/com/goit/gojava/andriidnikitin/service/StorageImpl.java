@@ -7,62 +7,13 @@ import java.util.List;
 import ua.com.goit.gojava.andriidnikitin.model.Category;
 import ua.com.goit.gojava.andriidnikitin.model.Good;
 
-public class StorageImpl extends StorageAbstract 
-						 implements Modifiable {
-	
-	@SuppressWarnings("serial")
-	private List<Category> categoryList = new ArrayList<Category>(){{
-		this.add(setId(new Category()
-					.setName("Guitars")));
-		this.add(setId(new Category()
-					.setName("Synths")));
-		this.add(setId(new Category()
-					.setName("Other")));		
-	}};
-	
-	@SuppressWarnings("serial")
-	private List<Good> goodList = new ArrayList<Good>() {{
-		Good tempGood;
-		tempGood = new Good()	
-				.setName("Fender Strat")
-				.setCategory(categoryList.get(0))
-				.setPrice(new BigDecimal(1000.0));
-		this.add(setId(tempGood));
-		
-		tempGood = new Good()	
-				.setName("Fender Tele")
-				.setCategory(categoryList.get(0))
-				.setPrice(new BigDecimal(1200.0));
-		this.add(setId(tempGood));
-		
-		tempGood = new Good()	
-				.setName("Gibson SG")
-				.setCategory(categoryList.get(0))
-				.setPrice(new BigDecimal(1337.0));
-		this.add(setId(tempGood));
+public class StorageImpl extends StorageAbstract {
 
-		tempGood = new Good()	
-				.setName("Fender Rhodes")
-				.setCategory(categoryList.get(1))
-				.setPrice(new BigDecimal(3000.0));
-		this.add(setId(tempGood));
-		
-
-		tempGood = new Good()	
-				.setName("Korg MS-20")
-				.setCategory(categoryList.get(1))
-				.setPrice(new BigDecimal(2500.0));
-		this.add(setId(tempGood));
-
-		tempGood = new Good()	
-				.setName("Marshall Drive")
-				.setCategory(categoryList.get(2))
-				.setPrice(new BigDecimal(300.0));
-		this.add(setId(tempGood));
-		}};
+	private List<Category> categoryList;
+	private List<Good> goodList;
 	
 	public StorageImpl() {
-		
+		init();
 	}
 	
 	protected StorageImpl setCategoryList(List<Category> categoryList) {
@@ -75,7 +26,6 @@ public class StorageImpl extends StorageAbstract
 		return this;
 	}
 	
-	@Override
 	protected List<Good> getGoodList() {
 		return goodList != null ? goodList : new ArrayList<Good>();		
 	}	
@@ -149,5 +99,57 @@ public class StorageImpl extends StorageAbstract
 		result = prime * result + category.getId();
 		result = prime * result + good.getName().hashCode();
 		return good.setId(result);
+	}
+	
+	@SuppressWarnings("serial")
+	private void init() {
+		categoryList = new ArrayList<Category>(){{
+			this.add(setId(new Category()
+						.setName("Guitars")));
+			this.add(setId(new Category()
+						.setName("Synths")));
+			this.add(setId(new Category()
+						.setName("Other")));		
+		}};
+		
+		goodList = new ArrayList<Good>() {{
+			Good tempGood;
+			tempGood = new Good()	
+					.setName("Fender Strat")
+					.setCategory(categoryList.get(0))
+					.setPrice(new BigDecimal(1000.0));
+			this.add(setId(tempGood));
+			
+			tempGood = new Good()	
+					.setName("Fender Tele")
+					.setCategory(categoryList.get(0))
+					.setPrice(new BigDecimal(1200.0));
+			this.add(setId(tempGood));
+			
+			tempGood = new Good()	
+					.setName("Gibson SG")
+					.setCategory(categoryList.get(0))
+					.setPrice(new BigDecimal(1337.0));
+			this.add(setId(tempGood));
+
+			tempGood = new Good()	
+					.setName("Fender Rhodes")
+					.setCategory(categoryList.get(1))
+					.setPrice(new BigDecimal(3000.0));
+			this.add(setId(tempGood));
+			
+
+			tempGood = new Good()	
+					.setName("Korg MS-20")
+					.setCategory(categoryList.get(1))
+					.setPrice(new BigDecimal(2500.0));
+			this.add(setId(tempGood));
+
+			tempGood = new Good()	
+					.setName("Marshall Drive")
+					.setCategory(categoryList.get(2))
+					.setPrice(new BigDecimal(300.0));
+			this.add(setId(tempGood));
+			}};
 	}
 }

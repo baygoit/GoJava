@@ -14,9 +14,9 @@ import javax.xml.bind.annotation.XmlType;
 
 @XmlType(propOrder = { "goodMap" },name = "warehouse")
 @XmlRootElement
-public class Warehouse {	
+public class OldWarehouse {	
 	
-	public Warehouse() {
+	public OldWarehouse() {
 	}
 
 	private List<Category> categoryList;

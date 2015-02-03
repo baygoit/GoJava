@@ -20,7 +20,7 @@ public class Main {
 		System.out.println("Done");
 	}
 	
-	private static void printWarehouse(Warehouse warehouse, PrintStream stream) {
+	private static void printWarehouse(Warehouse warehouse, PrintStream stream) {/*
 		StorageImpl store = new StorageImpl();
 		store.setCategoryList(warehouse.getCategoryList());
 		store.setGoodList(warehouse.getGoodList());
@@ -31,7 +31,18 @@ public class Main {
 			for (int i1 = 0; i1 < goodList.size(); i1++){
 				stream.println("  " + goodList.get(i1).printInfo());
 			}
-		}
+		}*/
 		
+		
+		/*StorageXML store = new StorageXML();
+		List<Category> list = store.getCategoryList();
+		for (int i = 0; i < list.size(); i++){
+			stream.println(list.get(i).printInfo());
+		}	
+		store.init();
+		List<Category> list2 = store.getCategoryList();
+		for (int i = 0; i < list.size(); i++){
+			stream.println(list.get(i).printInfo());
+		}	*/
 	}
 }
