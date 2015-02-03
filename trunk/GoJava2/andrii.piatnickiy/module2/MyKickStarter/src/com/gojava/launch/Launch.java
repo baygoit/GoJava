@@ -1,7 +1,7 @@
 package com.gojava.launch;
 
-import com.gojava.input.Out;
-import com.gojava.input.Scan;
+import com.gojava.inputOutput.Out;
+import com.gojava.inputOutput.Scan;
 import com.gojava.quote.Quote;
 import com.gojava.view.Menu;
 
