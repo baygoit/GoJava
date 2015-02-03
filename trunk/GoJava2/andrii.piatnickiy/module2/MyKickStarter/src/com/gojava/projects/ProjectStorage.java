@@ -2,7 +2,7 @@ package com.gojava.projects;
 
 import java.util.ArrayList;
 
-import com.gojava.input.Out;
+import com.gojava.inputOutput.Out;
 
 public class ProjectStorage {
     Out out;
@@ -62,7 +62,7 @@ public class ProjectStorage {
 
     private void allProjectFields(Project project) {
         out.print(out.printProjectPreview(project));
-        out.print(out.printAllProjectFields(project));
+        out.print(out.printAdditionalProjectFields(project));
     }
 
     public void setOut(Out out) {

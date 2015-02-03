@@ -1,6 +1,6 @@
 package com.gojava.projects;
 
-import com.gojava.input.Out;
+import com.gojava.inputOutput.Out;
 
 public class ProjectManager {
     CategoryStorage categoryStorage;

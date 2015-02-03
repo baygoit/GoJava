@@ -2,7 +2,7 @@ package com.gojava.projects;
 
 import java.util.ArrayList;
 
-import com.gojava.input.*;
+import com.gojava.inputOutput.*;
 
 public class CategoryStorage {
     Out out;

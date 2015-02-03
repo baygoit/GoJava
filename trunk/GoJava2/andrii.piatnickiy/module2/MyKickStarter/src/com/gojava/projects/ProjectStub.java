@@ -1,6 +1,6 @@
 package com.gojava.projects;
 
-public class Project implements IProject{
+public class ProjectStub  implements IProject{
     private String name;
     private String description;
     private int needSum;
@@ -11,17 +11,16 @@ public class Project implements IProject{
     private String questionsAndAnswers;
     private int categoryId;
     
-    public Project(String name, String description, int needSum,
-            int currentSum, int daysLeft, String projectHistory, String linkOnvideo, String questionsAndAnswers, int categoryId) {
-        this.name = name;
-        this.description = description;
-        this.needSum = needSum;
-        this.currentSum = currentSum;
-        this.daysLeft = daysLeft;
-        this.projectHistory = projectHistory;
-        this.linkOnvideo = linkOnvideo;
-        this.questionsAndAnswers = questionsAndAnswers;
-        this.categoryId = categoryId;
+    public ProjectStub() {
+        this.name = "stubName";
+        this.description = "stubDescription";
+        this.needSum = 1;
+        this.currentSum = 2;
+        this.daysLeft = 3;
+        this.projectHistory = "stubProjectHistory";
+        this.linkOnvideo = "stublinkOnvideo";
+        this.questionsAndAnswers = "stubQuestionsAndAnswers";
+        this.categoryId = 0;
     }
     
     public String getName() {
