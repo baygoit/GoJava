@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import com.gojava.inputOutput.Out;
+import com.gojava.projects.CategoryStub;
 import com.gojava.projects.ProjectStub;
 
 public class TestOut {
@@ -40,9 +41,15 @@ public class TestOut {
     }
     
     @Test
-    public void shoultReturnString_WhenInputProjectFields(){
+    public void shoultReturnString_WhenCallProjectFields(){
         String actual = out.printAdditionalProjectFields(new ProjectStub());
         assertTrue(actual.equals("ProjectHistory: stubProjectHistory" + "\n" + "LinkOnvideo: stublinkOnvideo" + "\n" + "Questions and answers: stubQuestionsAndAnswers" + "\n"));
+    }
+    
+    @Test
+    public void shoultReturnString_WhenCallPrintCategory(){
+        String actual = out.printCategory(new CategoryStub());
+        assertEquals("0) stubName", actual);
     }
     
 }
