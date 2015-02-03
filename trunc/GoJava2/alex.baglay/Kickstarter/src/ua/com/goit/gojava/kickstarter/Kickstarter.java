@@ -22,12 +22,18 @@ public class Kickstarter {
 
 	private Categories categories;
 	private Projects projects;
-	private ConsoleIO io; 
+	// Теперь можем тут указать абстрактный тип (интерфейс) заместь класса
+	private IO io; 
 
-	public Kickstarter(Categories categories, Projects projects) {
+	// а зависимость передадим в конструктор, но как абстракный тип
+	public Kickstarter(Categories categories, Projects projects, IO io) {
 		this.categories = categories;
 		this.projects = projects;
-		this.io = new ConsoleIO(); // Все просто, теперь мы прользуемся объектом, типа принтер (название не очень) 
+		// но у нас все равно осталась зависимость в классе от внешнего другого класса
+		// вот тут в конструкторе мы инстанциируем этот консолль IO для работы. 
+		// предлагаю вынести, как мы это делали с QuoteGeterator и Random
+		// но перед тем введем новое абстрактное понятие (интерфейс)
+		this.io = io; // Все просто, теперь мы прользуемся объектом, типа принтер (название не очень) 
 		// а не своими специализированными методами. 
 		// Я бы еще подумал над названием. Printer это половина класса. Там еще Reader. Может сделать IO?  
 	}
