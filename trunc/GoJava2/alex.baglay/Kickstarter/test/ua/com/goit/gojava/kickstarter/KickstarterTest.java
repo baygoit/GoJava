@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Random;
 
 import org.junit.Test;
+import static org.mockito.Mockito.*; // если написать вот так то можно уменьшить кода
+import org.mockito.cglib.beans.BeanCopier.Generator;
 
 public class KickstarterTest {
 
@@ -178,5 +180,47 @@ public class KickstarterTest {
 			", [1 - category1]\n" +
 			", Спасибо за использование нашей программы!\n" +
 			"]", io.getMessages().toString());
+	}
+	
+	// последнее что хотелось бы показать в этом видео - что такое mock. Это самый умный из тестовых объектов
+	// его не надо реализовывать как стаб или фейк, его можно запрограммировать с помощью специального api 
+	// мы будем использовать Mockito библиотеку для этих целей. Велосипеды изобретать интересно, но мы не будем
+	@Test
+	public void mockTest() {
+		// возьмем наш тест и посмотрим как он изменится
+		 // given
+		Categories categories = new Categories();
+		categories.add(new Category("category1"));
+		categories.add(new Category("category2"));
+		
+		Projects projects = new Projects();
+		
+		
+		IO io = mock(IO.class);
+		QuoteGenerator generator = mock(QuoteGenerator.class);
+		
+		Kickstarter kickstarter = new Kickstarter(categories, projects, io, generator); 
+		
+		// when
+		when(generator.nextQuote()).thenReturn("quote");
+		// проинитим fake - выбрали категорию 1, вышли изсписка категорий, вышли из программы
+		// аналог FakeIO io = new FakeIO(1, 0, 0);  
+		when(io.read()).thenReturn(1, 0, 0);
+		
+		kickstarter.run();
+
+		// then
+		// и теперь самое интересное. 
+		// правда классно читается? 
+		verify(io).print("quote\n");
+		verify(io).print("Вы выбрали категорию: category1\n");
+		verify(io, times(2)).print("[1 - category1, 2 - category2]\n");
+		verify(io, times(2)).print("Выберите категорию (или 0 для выхода):\n");
+		verify(io).print("Проектов в категории нет. Нажмите 0 - для выхода.\n");
+		verify(io).print("Спасибо за использование нашей программы!\n");
+		// тут важно понимать, что порядок не имеет значения
+		// важен сам факт что было
+		// если порядок важен, тогда надо вызывать InOrder - гуглите Mockito
+		// http://www.slideshare.net/nunafig/mockito-12079903 преза
 	}
 }
