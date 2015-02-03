@@ -57,12 +57,12 @@ public class ProjectStorage {
     }
 
     private void previewProject(Project project, Out out) {
-        out.printProjectPreview(project);
+        out.print(out.printProjectPreview(project));
     }
 
     private void allProjectFields(Project project) {
-        out.printProjectPreview(project);
-        out.printAllProjectFields(project);
+        out.print(out.printProjectPreview(project));
+        out.print(out.printAllProjectFields(project));
     }
 
     public void setOut(Out out) {

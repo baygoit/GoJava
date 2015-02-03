@@ -1,5 +1,6 @@
 package com.gojava.launch;
 
+import com.gojava.input.Out;
 import com.gojava.input.Scan;
 import com.gojava.quote.Quote;
 import com.gojava.view.Menu;
@@ -7,9 +8,10 @@ import com.gojava.view.Menu;
 public class Launch {
 
     public static void main(String[] args) {
+        Out out = new Out();
         Scan scan = new Scan();
         Quote quote = new Quote();
-        quote.displayQuote();
+        out.print(quote.getQuote());
 
         Menu menu = new Menu();
         while (true) {

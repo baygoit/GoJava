@@ -22,10 +22,14 @@ public class Out {
     }
 
     public void print(String string) {
-        System.out.print(string);
+        System.out.println(string);
+    }
+    
+    public void printSb(Object object) {
+        System.out.println(object);
     }
 
-    public void printProjectPreview(Project project) {
+    public String printProjectPreview(Project project) {
         StringBuffer sb = new StringBuffer();
         sb.append("Project Name: ").append(project.getName()).append("\n");
         sb.append("Description: ").append(project.getDescription())
@@ -33,11 +37,21 @@ public class Out {
         sb.append("Need Sum: ").append(project.getNeedSum()).append("\n");
         sb.append("Current Sum: ").append(project.getCurrentSum()).append("\n");
         sb.append("Days Left: ").append(project.getDaysLeft()).append("\n");
-        System.out.print(sb.toString());
+        return sb.toString();
 
     }
 
-    public void printAllProjectFields(Project project) {
+//    public void printAllProjectFields(Project project) {
+//        StringBuffer sb = new StringBuffer();
+//        sb.append("ProjectHistory: ").append(project.getProjectHistory())
+//        .append("\n");
+//        sb.append("LinkOnvideo: ").append(project.getLinkOnvideo())
+//        .append("\n");
+//        sb.append("Questions and answers: ")
+//        .append(project.getQuestionsAndAnswers()).append("\n");
+//        System.out.println(sb.toString());
+//    }
+    public String printAllProjectFields(Project project) {
         StringBuffer sb = new StringBuffer();
         sb.append("ProjectHistory: ").append(project.getProjectHistory())
         .append("\n");
@@ -45,7 +59,7 @@ public class Out {
         .append("\n");
         sb.append("Questions and answers: ")
         .append(project.getQuestionsAndAnswers()).append("\n");
-        System.out.println(sb.toString());
+        return sb.toString();
     }
     
     public void printCategory(Category category) {

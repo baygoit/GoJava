@@ -1,10 +1,10 @@
 package com.gojava.quote;
 
 public class Quote {
-    private String desc = "This is motivating creativity quote!!";
+    private String quote = "This is motivating creativity quote!!";
 
-    public void displayQuote() {
-        System.out.println(desc);
+    public String getQuote() {
+        return quote;
     }
 
 }
