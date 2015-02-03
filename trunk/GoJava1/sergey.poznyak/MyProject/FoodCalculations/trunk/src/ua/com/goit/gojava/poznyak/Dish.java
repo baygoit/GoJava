@@ -1,6 +1,5 @@
 package ua.com.goit.gojava.poznyak;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**

@@ -6,11 +6,12 @@ import java.util.Map;
 
 import org.junit.Test;
 
-public class CalculationServiceTest {
+public class UserMenuTest {
 
 	@Test
 	public void testCalculateWeights() {
-		Map<Foodstuff, Integer> listWeights = CalculationService.calculateWeights();
+		UserMenu menu = new UserMenu(7, ListServiceHardcodedData.getDishList());
+		Map<Foodstuff, Integer> listWeights = menu.calculateWeights();
 		assertNotNull(listWeights);
 		assertEquals(3, listWeights.size());
 	}

@@ -5,6 +5,7 @@
  */
 package ua.com.goit.gojava.poznyak;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -36,8 +37,12 @@ public class FoodCalculations {
 		} catch(IndexOutOfBoundsException e) {
 			System.out.println("No such dish");
 		}
-		System.out.println("\n" + "Ingredients for the list of dishes:");
-		System.out.println(CalculationService.calculateWeights());
+		List<Dish> dishMenu = new ArrayList<Dish>();
+		dishMenu.add(dishes.get(1));
+		dishMenu.add(dishes.get(1));
+		dishMenu.add(dishes.get(1));
+		UserMenu menu = new UserMenu(7, dishMenu);
+		System.out.println(menu);
 	}
 	
 	/**
