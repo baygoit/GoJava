@@ -1,4 +1,4 @@
-package ua.com.scread.kickstarter.test;
+package ua.com.scread.kickstarter;
 
 import static org.junit.Assert.assertEquals;
 

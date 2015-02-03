@@ -1,4 +1,4 @@
-package ua.com.scread.kickstarter.test;
+package ua.com.scread.kickstarter;
 
 import static org.junit.Assert.assertEquals;
 
@@ -56,6 +56,6 @@ public class ProjectTest {
 	@Test
 	public void shouldBeDetails_whenGetDetails() {
 		assertEquals(details ,project.getDetails());
-	} // this is test
+	} // this is test 
 
 }

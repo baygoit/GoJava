@@ -4,6 +4,12 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class QuoteGenerator {
+	private Random random;
+	
+	public QuoteGenerator(Random random) {
+		this.random = random;
+	}
+	
 	public String getQuote() {
 		ArrayList<String> quotes = new ArrayList<String>();
 		quotes.add("Set your goal lower than you think you need (c) Kickstart");
@@ -13,7 +19,7 @@ public class QuoteGenerator {
 		quotes.add("Thank contributors as they donate (c) Kickstart");
 		quotes.add("Promote your project everywhere (c) Kickstart");
 		
-		int index = new Random().nextInt(quotes.size());
+		int index = random.nextInt(quotes.size());
 		
 		return quotes.get(index);
 	}

@@ -2,6 +2,7 @@ package ua.com.scread.kickstarter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Random;
 
 public class View {
 
@@ -10,7 +11,7 @@ public class View {
 	}
 	
 	public void greed() {
-		QuoteGenerator quote = new QuoteGenerator();
+		QuoteGenerator quote = new QuoteGenerator(new Random());
 		System.out.println(quote.getQuote());
 	}
 
