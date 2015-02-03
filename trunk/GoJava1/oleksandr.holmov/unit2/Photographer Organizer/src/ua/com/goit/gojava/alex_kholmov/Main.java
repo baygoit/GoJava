@@ -14,7 +14,7 @@ public class Main {
      */
     public static void main(String[] args) {
         // TODO Auto-generated method stub
-        FotoStudio myStudio = new FotoStudio("some studio", "333 street, room 12", "+38093 666 78 89");
+        FotoStudio myStudio = new FotoStudio("some studio", "333 street, room 12", "+38093 666 78 89", 2);
         myStudio.setReserveDate(2015, 2, 14, 14, 50);
         myStudio.setReserveTime(3);
         myStudio.printInfo();

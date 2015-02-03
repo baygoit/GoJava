@@ -12,12 +12,13 @@ import java.util.GregorianCalendar;
  *
  */
 public class FotoStudio extends Contacts {
-    public FotoStudio(String name, String address, String phone) {
-        super(name, address, phone);
-    }
-
     private Calendar reserveDate;
     private int reserveTime;
+    
+    public FotoStudio(String name, String address, String phone, int reservTime) {
+        super(name, address, phone);
+        this.reserveTime = reservTime;
+    }
 
     int getReserveTime() {
         return reserveTime;
