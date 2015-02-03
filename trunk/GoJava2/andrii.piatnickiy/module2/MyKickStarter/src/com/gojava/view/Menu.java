@@ -36,31 +36,36 @@ public class Menu {
     }
 
     private void beyondLevel(int nubberForNextLevel) {
+        Level level;
         if ((nubberForNextLevel == 0 && currentLevelPosition == 1) || (nubberForNextLevel > 0 && currentLevelPosition == 3)) {
             System.out.println("not allowed to go below this level");
         }else{
             if (nubberForNextLevel == 0) {
                 currentLevelPosition--;
                 if (currentLevelPosition == 2) {
-                    displayCurrentLevel(categoryPosition);
+                    level = getCurrentLevel(categoryPosition);
+                    level.displayMySelf(categoryPosition);
                 } else {
-                    displayCurrentLevel(nubberForNextLevel);
+                    level = getCurrentLevel(nubberForNextLevel);
+                    level.displayMySelf(nubberForNextLevel);
                 }
             } else {
                 currentLevelPosition++;
                 if (currentLevelPosition == 2) {
                     categoryPosition = nubberForNextLevel;
                 }
-                displayCurrentLevel(nubberForNextLevel);
-            }
-        }
-    }
-
-    private void displayCurrentLevel(int nubberForNextLevel) {
-        for (Level level : levelsList) {
-            if (currentLevelPosition == level.getPosition()) {
+                level = getCurrentLevel(nubberForNextLevel);
                 level.displayMySelf(nubberForNextLevel);
             }
+        } 
+    }
+
+    private Level getCurrentLevel(int nubberForNextLevel) {
+        for (Level level : levelsList) {
+            if (currentLevelPosition == level.getPosition()) {
+                return level;
+            }
         }
+    return null;
     }
 }
