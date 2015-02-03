@@ -1,6 +1,7 @@
 package org.example.anagram;
 
 import java.util.Scanner;
+import org.apache.commons.lang3.StringUtils;
 
 public class Anagram {
 
@@ -10,18 +11,7 @@ public class Anagram {
         scan.close();
     }
 
-    public static String reverseString(String string) {
-        String[] words = string.split(" ");
-        StringBuilder result = new StringBuilder("");
-        for (int i = 0; i < words.length; i++) {
-            StringBuilder word = new StringBuilder("");
-            word.append(words[i]).reverse();
-            if (i == (words.length - 1)) {
-                result.append(word);
-            } else {
-                result.append(word).append(" ");
-            }
-        }
-        return result.toString();
+    public static String reverseString(String sentence) {
+        return StringUtils.reverseDelimited(StringUtils.reverse(sentence), ' ');
     }
 }
