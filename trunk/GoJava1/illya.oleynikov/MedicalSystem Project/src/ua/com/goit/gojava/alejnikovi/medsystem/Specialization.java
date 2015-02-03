@@ -1,5 +1,8 @@
 package ua.com.goit.gojava.alejnikovi.medsystem;
 
+import java.util.ArrayList;
+import java.util.List;
+
 class Specialization {
 	
 	private String name;
@@ -8,17 +11,18 @@ class Specialization {
 		this.name = name;
 	}
 
-	public String getName() {
+	String getName() {
 		return name;
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
-	
-	@Override
-	public String toString() {
-		return this.name;
+	List<Doctor> getDoctorsBySpec (){
+		List<Doctor> doctorsWithSpec = new ArrayList<Doctor>();
+		for(Doctor doctor: MedicalSystem.getDoctors()){
+			if(doctor.getSpecialization().equals(this)){
+				doctorsWithSpec.add(doctor);
+			}
+		}
+		return doctorsWithSpec;
 	}
 
 }

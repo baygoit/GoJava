@@ -4,13 +4,17 @@ import static org.junit.Assert.*;
 
 import java.util.List;
 
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class MedicalSystemTest {
 	
 	List<Doctor> testDocList = MedicalSystem.getDoctors();
 	
-
+	@BeforeClass
+	public static void setList(){
+		MedicalSystem.specializations.add(new Specialization("Шаман"));
+	}		
 	
 	@Test
 	public void testAddSpecialisation() {
@@ -41,10 +45,20 @@ public class MedicalSystemTest {
 	}
 	
 	@Test
-	public void testAddDoctor() {
-		Doctor doctor = new Doctor(null, null, null);
-		MedicalSystem.addDoctor(doctor);
+	public void testCreateDoctor() {
+		Specialization specialization = MedicalSystem.getSpecializationByIndex(0);
+		Clinic clinic = new Clinic("Тесовая Клиника", "Тестовый адресс");
+		MedicalSystem.createDoctor("Тест", "Тестов", specialization, clinic);
 		assertEquals(1, MedicalSystem.doctors.size());
 	}
+	
+	@Test
+	public void testCreateClinic() {
+		MedicalSystem.createClinic("Тест", "ул. Тестовая");
+		assertEquals(1, MedicalSystem.clinics.size());
+	}
+	
+	
+	
 
 }

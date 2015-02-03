@@ -8,14 +8,14 @@ public class DoctorTest {
 
 	@Test
 	public void smokeTest() {
-		assertNotNull(new Doctor(null, null, null));
+		assertNotNull(new Doctor(null, null, null, null));
 	}
 	
 	@Test
-	public void testToString() {
+	public void testAllToString() {
 		Specialization specialization = new Specialization("знахарь");
-		Doctor doctor = new Doctor("Примерный", "Пример", specialization);
-		assertEquals("Примерный Пример, знахарь", doctor.toString());
+		Doctor doctor = new Doctor("Примерный", "Пример", specialization, new Clinic (null, null));
+		assertEquals("Примерный Пример, знахарь", doctor.allToString());
 	}
 
 }

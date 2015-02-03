@@ -7,10 +7,13 @@ public class MedicalSystem {
 	
 	static List<Specialization> specializations = new ArrayList<Specialization>();
 	static List<Doctor> doctors = new ArrayList<Doctor>();
+	static List<Clinic> clinics = new ArrayList<Clinic>();
 	
-	private MedicalSystem() {}	
-	    
-    static List<Doctor> getDoctors() {
+	static List<Specialization> getSpecializations() {
+		return specializations;
+	}
+	
+	static List<Doctor> getDoctors() {
 		return doctors;
 	}
 
@@ -36,6 +39,24 @@ public class MedicalSystem {
     		specializations.add(new Specialization(specializationName));
     	} 
     }
+
+	static void createDoctor(String firstName, String secondName, Specialization spec, Clinic clinic){
+		Doctor doctor = new Doctor(firstName, secondName, spec, clinic);
+	    addDoctor(doctor);
+	}
+
+	static void createClinic(String name, String address) {
+		Clinic clinic = new Clinic(name, address);
+		addClinic(clinic);		
+	}
+
+	static void addClinic(Clinic clinic) {
+		clinics.add(clinic);		
+	}
+
+	static List<Clinic> getClinics() {
+		return clinics;
+	}
     
 
 }

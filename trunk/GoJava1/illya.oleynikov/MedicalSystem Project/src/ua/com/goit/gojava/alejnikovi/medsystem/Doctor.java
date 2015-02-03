@@ -5,11 +5,13 @@ class Doctor {
 	private String firstName;
 	private String secondName;
 	private Specialization specialization;
+	private Clinic clinic;
 
-	Doctor (String firstName, String secondName, Specialization specialization){
+	Doctor (String firstName, String secondName, Specialization specialization, Clinic clinic){
 		this.firstName = firstName;
 		this.secondName = secondName;
 		this.specialization = specialization;
+		this.clinic = clinic;
 	}  
   
 	Specialization getSpecialization() {
@@ -20,13 +22,16 @@ class Doctor {
 		return firstName;
 	}
 	
-	String getSecondName() {
+	/*String getSecondName() {
 		return secondName;
-	}
+	}*/
 	
-	@Override
-	public String toString() {
-		return this.firstName + " " + this.secondName + ", " + this.specialization.toString();
+	public String allToString() {
+		return firstName + " " + secondName + ", " + specialization.getName();
+	}
+
+	public Clinic getClinic() {
+		return clinic;
 	}
 
 }
