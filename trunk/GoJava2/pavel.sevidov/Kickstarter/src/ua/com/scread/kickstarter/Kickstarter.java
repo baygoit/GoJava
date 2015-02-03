@@ -4,6 +4,6 @@ public class Kickstarter {
 	
 	public static void main(String[] args) {
 		@SuppressWarnings("unused")
-		KickstarterRunner mvc = new KickstarterRunner(new Model(), new ConsoleIO());
+		KickstarterRunner kickstarter = new KickstarterRunner(new Model(), new ConsoleIO());
 	}
 }
