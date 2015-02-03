@@ -2,20 +2,21 @@ package ua.com.scread.kickstarter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Random;
 
 public class Controller {
 	private Model model;
     private IO io;
+    private QuoteGenerator quote;
 
-    public Controller(Model model, IO io) {
+    public Controller(Model model, IO io, QuoteGenerator quote) {
         this.model = model;
         this.io = io;
+        this.quote = quote;
     }
     
     public void start() {
         model.init();
-        greed();
+        greed(quote);
         
         Categories categories = model.getCategories();
         
@@ -40,9 +41,9 @@ public class Controller {
         			showFullProject(project); 
         			int projectOption = io.read();
         			if (projectOption != 0) {
-        				System.out.println("Selected option: ");
+        				println("Selected option: ");
         			} else
-        				System.out.println("Exiting from project");
+        				println("Exiting from project");
         			exitProjects = true;
         		}
         		if (answer == 0) 
@@ -51,6 +52,7 @@ public class Controller {
         		break;
         	}  
         }
+        io.print("Thanks for using my program!");
     }
     
     private void println() {
@@ -61,14 +63,13 @@ public class Controller {
 		io.print(message + "\n");
 	}
 	
-	public void greed() {
-		QuoteGenerator quote = new QuoteGenerator(new Random());
+	public void greed(QuoteGenerator quote) {
 		println(quote.getQuote());
 	}
 
 	public void showCategoies(Categories categories) {
-		println("\nChoose category: ");
-		println(Arrays.toString(categories.getStringCategories()));
+		io.print("\nChoose category: ");
+		io.print(Arrays.toString(categories.getStringCategories()));
 		showExit();
 	}
 
@@ -102,7 +103,7 @@ public class Controller {
 	}
 
 	private void showExit() {
-		println("or [0 - back]");
+		println(" or [0 - back]");
 	}
 	
 	public void showFullProject(Project project) {

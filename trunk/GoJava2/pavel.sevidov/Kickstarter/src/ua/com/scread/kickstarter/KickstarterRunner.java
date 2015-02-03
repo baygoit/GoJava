@@ -5,12 +5,14 @@ public class KickstarterRunner {
 	private Controller controller;
 	private IO io;
     
-    public KickstarterRunner(Model model, IO io) {
+    public KickstarterRunner(Model model, IO io, QuoteGenerator quote) {
     	this.model = model;
     	this.io = io;
-    	this.controller = new Controller(model, io);
-    	
-    	controller.start();
+    	this.controller = new Controller(model, io, quote);
+    }
+    
+    public void run() {
+        controller.start();
     }
  
 }

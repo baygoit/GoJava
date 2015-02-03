@@ -11,6 +11,11 @@ public class Model {
 		projects = new Projects();
 	}
 	
+	public Model(Categories categories, Projects projects) {
+	    this.categories = categories;
+	    this.projects = projects;
+	}
+	
 	public void init() {
 		Category category1 = new Category("Sport");
 		Category category2 = new Category("Science");
