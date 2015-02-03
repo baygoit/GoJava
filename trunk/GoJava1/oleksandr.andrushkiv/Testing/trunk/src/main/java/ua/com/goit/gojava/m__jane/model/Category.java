@@ -9,37 +9,37 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlElements;
 
-import ua.com.goit.gojava.m__jane.model.question.ClosedQuestion;
-import ua.com.goit.gojava.m__jane.model.question.OpenQuestion;
+import ua.com.goit.gojava.m__jane.model.question.MultipleQuestion;
+import ua.com.goit.gojava.m__jane.model.question.SimpleQuestion;
 import ua.com.goit.gojava.m__jane.model.question.Question;
 
 @XmlAccessorType(XmlAccessType.FIELD)
-public class QuestionCategory {
+public class Category {
 	
 	@XmlAttribute
-	private int id;
+	private Integer id;
 	@XmlAttribute
 	private String name;
 	
-	@XmlElements(value = {@XmlElement(name = "question", type=OpenQuestion.class),@XmlElement(name = "question", type=ClosedQuestion.class)})	
+	@XmlElements(value = {@XmlElement(name = "question", type=SimpleQuestion.class),@XmlElement(name = "question", type=MultipleQuestion.class)})	
 	@XmlElementWrapper(name = "questions")
 	private List<Question> QuestionList;
 
 	private Profile profile;
 
-	public QuestionCategory() {
+	public Category() {
 	}
 	
-	public QuestionCategory(int id, String name) {
+	public Category(Integer id, String name) {
 		this.id = id;
 		this.name = name;
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

@@ -14,27 +14,27 @@ import javax.xml.bind.annotation.XmlElementWrapper;
 public class Profile {
 	
 	@XmlAttribute
-	private int id;
+	private Integer id;
 	@XmlAttribute
 	private String name;
 	
 	@XmlElement(name = "questionCategory")
 	@XmlElementWrapper(name = "questionCategories")
-	private List<QuestionCategory> QuestionCategoryList;
+	private List<Category> QuestionCategoryList;
 
 	public Profile() {
 	}	
 
-	public Profile(int id, String name) {
+	public Profile(Integer id, String name) {
 		this.id = id;
 		this.name = name;
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -46,11 +46,11 @@ public class Profile {
 		this.name = name;
 	}
 
-	public List<QuestionCategory> getQuestionCategoryList() {
+	public List<Category> getQuestionCategoryList() {
 		return QuestionCategoryList;
 	}
 
-	public void setQuestionCategoryList(List<QuestionCategory> questionCategoryList) {
+	public void setQuestionCategoryList(List<Category> questionCategoryList) {
 		QuestionCategoryList = questionCategoryList;
 	}
 

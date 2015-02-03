@@ -2,7 +2,7 @@ package ua.com.goit.gojava.m__jane.model.question;
 
 
 
-public class VariantAnwer {
+public class PredefinedAnswer {
 
 	private Integer id;
 

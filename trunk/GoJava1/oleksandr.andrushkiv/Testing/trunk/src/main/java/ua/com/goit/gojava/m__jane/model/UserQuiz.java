@@ -2,11 +2,8 @@ package ua.com.goit.gojava.m__jane.model;
 
 import java.util.Date;
 import java.util.List;
+import ua.com.goit.gojava.m__jane.model.answer.Answer;
 
-import ua.com.goit.gojava.m__jane.model.question.Question;
-import ua.com.goit.gojava.m__jane.model.userAnswer.StatusUserAnswer;
-import ua.com.goit.gojava.m__jane.model.userAnswer.UserAnswer;
-import ua.com.goit.gojava.m__jane.service.QuestionService;
 
 public class UserQuiz {
 
@@ -14,19 +11,24 @@ public class UserQuiz {
 	//private Integer closedQuestionResult;
 		
 	private Date testingDate;
-	private List<UserAnswer> answerList;
-	private QuestionService questionService;
+	private List<Answer> answerList;
+	//private QuestionService questionService;
 	
-		
-	public void loadAnswers(List<QuestionCategory> categories) {
+	private User user;
+	
+	
+	/*
+	 * move to questionService UserQuizServiceImpl
+	public void loadAnswers(List<Category> categories) {
 		
 		for (Question question: questionService.getQuestionList(categories)) {
-			UserAnswer userAnswer = question.createTemplateAnswer();
-			userAnswer.setStatusUserAnswer(StatusUserAnswer.NEW);
-			answerList.add(userAnswer);
+			Answer answer = question.createTemplateAnswer();
+			answer.setStatusUserAnswer(StatusAnswer.NEW);
+			answerList.add(answer);
 		}
 		
 	}
+	*/
 	
 	/*-------setters/getters---------*/
 	
@@ -36,11 +38,18 @@ public class UserQuiz {
 	public void setTestingDate(Date testingDate) {
 		this.testingDate = testingDate;
 	}
-	public List<UserAnswer> getAnswerList() {
+	public List<Answer> getAnswerList() {
 		return answerList;
 	}
-	public void setAnswerList(List<UserAnswer> answerList) {
+	public void setAnswerList(List<Answer> answerList) {
 		this.answerList = answerList;
 	}
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
+		
 		
 }

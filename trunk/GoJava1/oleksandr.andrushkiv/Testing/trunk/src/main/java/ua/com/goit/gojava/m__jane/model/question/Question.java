@@ -3,9 +3,7 @@ package ua.com.goit.gojava.m__jane.model.question;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
-
-import ua.com.goit.gojava.m__jane.model.QuestionCategory;
-import ua.com.goit.gojava.m__jane.model.userAnswer.UserAnswer;
+import ua.com.goit.gojava.m__jane.model.answer.Answer;
 
 
 //@XmlSeeAlso({Admin.class})
@@ -17,7 +15,7 @@ public abstract class Question {
 	@XmlAttribute
 	protected String content;
 	
-	private QuestionCategory questionCategory;
+	//private Category category;
 	
 	//private Profile profile;
 	/**
@@ -29,12 +27,12 @@ public abstract class Question {
 	public Question() {
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -49,16 +47,7 @@ public abstract class Question {
 	}
 
 
-	public QuestionCategory getQuestionCategory() {
-		return questionCategory;
-	}
-
-
-	public void setQuestionCategory(QuestionCategory questionCategory) {
-		this.questionCategory = questionCategory;
-	}
-
-	public abstract UserAnswer createTemplateAnswer();
+	public abstract Answer createTemplateAnswer();
 	
 	/*
 	 * (non-Javadoc)
@@ -69,7 +58,7 @@ public abstract class Question {
 	public String toString() {
 		return new StringBuilder().append("Question [id=").append(id)
 				.append(", content=").append(content)
-				.append(", questionCategory=").append(questionCategory.getName())
+				//.append(", questionCategory=").append(category.getName())
 				//.append(", profile=").append(profile.getName())
 				//.append(", openQuestion=").append(openQuestion)
 				.append("]").toString();
