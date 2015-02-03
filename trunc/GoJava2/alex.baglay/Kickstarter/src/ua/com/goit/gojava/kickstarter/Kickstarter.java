@@ -4,23 +4,41 @@ import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
 
+
+// Сейчас самое интересное - как потестить вот это чудо, которое зависит от купы других 
+// классов, которые нам тестировать особо не хочется - например ввод и вывод из консоли
+// генератор цитат
+// для начала займемся выделением из класса логики, которая отвечает за ввод и вывод из консоли
+// дело в том, что это нам откровенно мешает. Мы не можем протестировать ввод/вывод в консоль
+// кроме того нам этого не надо делать. Нам надо проверить что информация дошла до System.out.print
+// и пришла из Scanner. А то что они отработали правильно - нам проверять не надо. Джаву уже оттестили и перетестили 
+// 1000000 других программистов. Нам интересно что в нашем кикстартере не так - его и протестируем, но перед тем выделим зависимость
+// Эта штука, которую мы проделали с QuoteGenerator и его Random, а так же сейчас будем проделывать с КИкстартером и логикой работы
+// с консолью называется Inversion of Control (IoC) и делаем мы это следую принципу - Dependency Inversion Principle (DIP)
+// одному из глоавных принципов SOLID OOP. Его суть - пусть все зависит от абстракций (интерфейсы и абстрактные классы), но не от 
+// конкретных деталей - вызовы new SomeClass() во внутренностях других классов. Как было у нас с new Random() в QuoteGenerator
+// поехали! Сейчас надо сделать шаг 1. - собрать все вызовы System.out.print в отдельный метод. 
 public class Kickstarter {
 
 	private Categories categories;
-	private Projects projects; 
+	private Projects projects;
+	private ConsoleIO io; 
 
 	public Kickstarter(Categories categories, Projects projects) {
 		this.categories = categories;
 		this.projects = projects;
+		this.io = new ConsoleIO(); // Все просто, теперь мы прользуемся объектом, типа принтер (название не очень) 
+		// а не своими специализированными методами. 
+		// Я бы еще подумал над названием. Printer это половина класса. Там еще Reader. Может сделать IO?  
 	}
 
 	public void run() {		
 		QuoteGenerator generator = new QuoteGenerator(new Random()); 
-		System.out.println(generator.nextQuote());
+		println(generator.nextQuote());
 		
 		while (true) {
 			askCategory();
-			int menu = selectMenu(); 
+			int menu = io.read(); 
 			Category category = chooseCategory(menu);
 			if (category == null) {
 				continue; 
@@ -36,7 +54,7 @@ public class Kickstarter {
 		while (true) { 
 			askProject(found);
 
-			int menu = selectMenu(); 
+			int menu = io.read(); 
 			if (menu == 0) {
 				break; 
 			}
@@ -53,77 +71,79 @@ public class Kickstarter {
 
 	private Project chooseProject(int menu, Project[] found) {
 		if (menu <= 0 || found.length < menu) {
-			System.out.println("Неверный индекс меню " + menu);
+			println("Неверный индекс меню " + menu);
 			return null;  
 		}
 		return found[menu - 1];
 	}
 
+	// вот он наш метод, теперь надо заменить на вызов print все, что мы в коде используем напрямую
+	private void println(String message) {
+		io.print(message + "\n");
+	}
+	
 	private void askProject(Project[] found) {
 		if (found.length == 0) {
-			System.out.println("Проектов в категории нет. Нажмите 0 - для выхода.");
+			println("Проектов в категории нет. Нажмите 0 - для выхода.");
 		} else {
 			int from = 1;
 			int to = found.length;
-			System.out.println("Выберите проект: [" + from + "..." + to + "] или 0 для выхода" );
+			println("Выберите проект: [" + from + "..." + to + "] или 0 для выхода" );
 		}
 	}
 
 	private void printProjectDetails(Project project) {
 		printProject(project);
 		
-		System.out.println(project.getHistory()); 
-		System.out.println(project.getDemoVideo()); 
+		println(project.getHistory()); 
+		println(project.getDemoVideo()); 
 		
 		String questionAnswers = project.getQuestionAnswers();
 		if (questionAnswers != null) {  
-			System.out.println(questionAnswers); 
+			println(questionAnswers); 
 		}
-		System.out.println("--------------------------------------"); 
+		println("--------------------------------------"); 
 	}
 
 	private void chooseProject(Project project) {
-		System.out.println("Вы выбрали проект: " + project.getName());
-		System.out.println("--------------------------------------");
+		println("Вы выбрали проект: " + project.getName());
+		println("--------------------------------------");
 	}
 
 	private void printProjects(Project[] found) {
 		for (int index = 0; index < found.length; index++) {
 			Project project = found[index];
-			System.out.print((index + 1) + " - "); // еще тут :)
+			io.print((index + 1) + " - "); // тут у нас печать без переноса строки 
 			printProject(project); 			
 		}
 	}
 
 	private void printProject(Project project) {
-		System.out.println(project.getName());
-		System.out.println(project.getDescription()); 
-		System.out.println("Уже собрали " + project.getAmount() + " грн за " + project.getDays() + " дней"); 
-		System.out.println("Надо собрать " + project.getExist() + " грн");
-		System.out.println("--------------------------------------");
+		println(project.getName());
+		println(project.getDescription()); 
+		println("Уже собрали " + project.getAmount() + " грн за " + project.getDays() + " дней"); 
+		println("Надо собрать " + project.getExist() + " грн");
+		println("--------------------------------------");
 	}
 
 	private void askCategory() {
-		System.out.println("Выберите категорию:");
+		println("Выберите категорию:");
 		// для начала тут выводится список
-		System.out.println(Arrays.toString(categories.getCategories()));
+		println(Arrays.toString(categories.getCategories()));
 	}
 
 	private Category chooseCategory(int menu) {
 		if (menu <= 0 || categories.size() < menu) {
-			System.out.println("Неверный индекс меню " + menu);
+			println("Неверный индекс меню " + menu);
 			return null; // не рекомендуется так делать, потому что потенциальный NPE у клиента, но что поделать, пока так - оставим TODO
 		}
 		
 		// тут надо привести либо везде к одному виду, либо разделять - на вьюхе от 1 до N а в моделе от 0 до N-1 TODO подумать наж этим
 		Category category = categories.get(menu - 1); 
-		System.out.println("Вы выбрали категорию: " + category.getName());
-		System.out.println("--------------------------------------");
+		println("Вы выбрали категорию: " + category.getName());
+		println("--------------------------------------");
 		return category;
 	}
 
-	private int selectMenu() {
-		Scanner scanner = new Scanner(System.in);
-		return scanner.nextInt();
-	}
+	// вынесли кнутренний класс в отдельный внешний
 }
