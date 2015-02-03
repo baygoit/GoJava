@@ -2,19 +2,25 @@ package ua.com.scread.kickstarter;
 
 import java.util.Scanner;
 
-public class Scan {
+public class ConsoleIO implements IO {
+
 	private Scanner scanner;
 	
-	public Scan() {
+	public ConsoleIO() {
 		scanner = new Scanner(System.in);
 	}
 	
-	public int getAnswer() {
+	@Override
+	public int read() {
 		return scanner.nextInt();
 	}
 	
 	protected void finalize() throws Throwable {
 		scanner.close();
 	}
-
+	
+	@Override
+	public void print(String message) {
+		System.out.print(message);
+	}
 }
