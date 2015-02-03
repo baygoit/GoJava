@@ -15,7 +15,6 @@ public class Controller {
     }
     
     public void start() {
-        model.init();
         greed(quote);
         
         Categories categories = model.getCategories();
