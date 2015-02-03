@@ -1,5 +1,7 @@
 package ua.com.goit.gojava.kickstarter;
 
+import java.util.Random;
+
 public class KickstarterRunner {
 
 	public static void main(String[] arguments) {		
@@ -33,7 +35,9 @@ public class KickstarterRunner {
 		// при условии что у нас был бы реализован EmailIO мы заставили бы кикстартер слать нам письма, вместо работы через консоль
 		// это и называется полиморфизм. Воспользуемся им в тестах, чтобы протестировать кокстартер. 
 		// Но перед тем проверим как все работает вручную и закоммитимся 
-		Kickstarter application = new Kickstarter(categories, projects, null); // тут чтобы компилятор не ругался
+		Kickstarter application = new Kickstarter(categories, projects, 
+				null, // тут чтобы компилятор не ругался
+				new QuoteGenerator(new Random())); 
 		
 		project1.setHistory("История этого проекта корнями уходит в ....");
 		project2.setHistory("Мы только начали и потому особо нечего рассказывать.\n"

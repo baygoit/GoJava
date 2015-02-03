@@ -24,9 +24,10 @@ public class Kickstarter {
 	private Projects projects;
 	// Теперь можем тут указать абстрактный тип (интерфейс) заместь класса
 	private IO io; 
+	private QuoteGenerator generator; 
 
 	// а зависимость передадим в конструктор, но как абстракный тип
-	public Kickstarter(Categories categories, Projects projects, IO io) {
+	public Kickstarter(Categories categories, Projects projects, IO io, QuoteGenerator generator) {
 		this.categories = categories;
 		this.projects = projects;
 		// но у нас все равно осталась зависимость в классе от внешнего другого класса
@@ -36,10 +37,10 @@ public class Kickstarter {
 		this.io = io; // Все просто, теперь мы прользуемся объектом, типа принтер (название не очень) 
 		// а не своими специализированными методами. 
 		// Я бы еще подумал над названием. Printer это половина класса. Там еще Reader. Может сделать IO?  
+		this.generator = generator;
 	}
 
 	public void run() {		
-		QuoteGenerator generator = new QuoteGenerator(new Random()); 
 		println(generator.nextQuote());
 		
 		while (true) {
@@ -58,6 +59,7 @@ public class Kickstarter {
 			printProjects(found);			
 			projectMenu(found);
 		}
+		println("Спасибо за использование нашей программы!");
 	}
 
 	private void projectMenu(Project[] found) {
