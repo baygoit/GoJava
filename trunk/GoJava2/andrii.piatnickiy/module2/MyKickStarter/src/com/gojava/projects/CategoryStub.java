@@ -1,9 +1,9 @@
 package com.gojava.projects;
 
-public class Category implements ICategory{
-    public Category(String name, int categoryId) {
-        this.name = name;
-        this.categoryId = categoryId;
+public class CategoryStub implements ICategory{
+    public CategoryStub() {
+        this.name = "stubName";
+        this.categoryId = 0;
     }
 
     private String name;

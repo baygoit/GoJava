@@ -15,9 +15,9 @@ public class CategoryStorage {
         categoryStorageList.add(new Category(name, categoryId));
     }
     
-    public void display() {
+    public void display() { 
         for (Category category : categoryStorageList) {
-            out.printCategory(category);
+            out.print(out.printCategory(category));
         }
     }
     
