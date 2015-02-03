@@ -9,26 +9,26 @@ public class AnagramTest {
 
     @Test
     public void shouldReturnEmptyString_whenInsertEmptyString() {
-        assertEquals("", anagram.makeAnagram(""));
+        assertEquals("", anagram.reverseString(""));
     }
 
     @Test
     public void shouldReturnOneSymbol_whenInsertOneSymbol() {
-        assertEquals("x", anagram.makeAnagram("x"));
+        assertEquals("x", anagram.reverseString("x"));
     }
 
     @Test
     public void shouldReturnReversed_whenInsertWord() {
-        assertEquals("yx", anagram.makeAnagram("xy"));
+        assertEquals("yx", anagram.reverseString("xy"));
     }
 
     @Test
     public void shouldReturnReversedWithSpace_whenInsertWordsWithSpace() {
-        assertEquals("yx vz", anagram.makeAnagram("xy zv"));
+        assertEquals("yx vz", anagram.reverseString("xy zv"));
     }
     
     @Test
     public void shouldReturnReversedWithSpace2_whenInsertWordsWithSpace2() {
-        assertEquals("yx z", anagram.makeAnagram("xy z"));
+        assertEquals("yx z", anagram.reverseString("xy z"));
     }    
 }
