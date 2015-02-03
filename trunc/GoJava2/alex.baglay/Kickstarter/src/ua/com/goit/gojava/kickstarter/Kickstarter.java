@@ -4,39 +4,17 @@ import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
 
-
-// Сейчас самое интересное - как потестить вот это чудо, которое зависит от купы других 
-// классов, которые нам тестировать особо не хочется - например ввод и вывод из консоли
-// генератор цитат
-// для начала займемся выделением из класса логики, которая отвечает за ввод и вывод из консоли
-// дело в том, что это нам откровенно мешает. Мы не можем протестировать ввод/вывод в консоль
-// кроме того нам этого не надо делать. Нам надо проверить что информация дошла до System.out.print
-// и пришла из Scanner. А то что они отработали правильно - нам проверять не надо. Джаву уже оттестили и перетестили 
-// 1000000 других программистов. Нам интересно что в нашем кикстартере не так - его и протестируем, но перед тем выделим зависимость
-// Эта штука, которую мы проделали с QuoteGenerator и его Random, а так же сейчас будем проделывать с КИкстартером и логикой работы
-// с консолью называется Inversion of Control (IoC) и делаем мы это следую принципу - Dependency Inversion Principle (DIP)
-// одному из глоавных принципов SOLID OOP. Его суть - пусть все зависит от абстракций (интерфейсы и абстрактные классы), но не от 
-// конкретных деталей - вызовы new SomeClass() во внутренностях других классов. Как было у нас с new Random() в QuoteGenerator
-// поехали! Сейчас надо сделать шаг 1. - собрать все вызовы System.out.print в отдельный метод. 
 public class Kickstarter {
 
 	private Categories categories;
 	private Projects projects;
-	// Теперь можем тут указать абстрактный тип (интерфейс) заместь класса
 	private IO io; 
 	private QuoteGenerator generator; 
 
-	// а зависимость передадим в конструктор, но как абстракный тип
 	public Kickstarter(Categories categories, Projects projects, IO io, QuoteGenerator generator) {
 		this.categories = categories;
 		this.projects = projects;
-		// но у нас все равно осталась зависимость в классе от внешнего другого класса
-		// вот тут в конструкторе мы инстанциируем этот консолль IO для работы. 
-		// предлагаю вынести, как мы это делали с QuoteGeterator и Random
-		// но перед тем введем новое абстрактное понятие (интерфейс)
-		this.io = io; // Все просто, теперь мы прользуемся объектом, типа принтер (название не очень) 
-		// а не своими специализированными методами. 
-		// Я бы еще подумал над названием. Printer это половина класса. Там еще Reader. Может сделать IO?  
+		this.io = io;  
 		this.generator = generator;
 	}
 
@@ -46,7 +24,7 @@ public class Kickstarter {
 		while (true) {
 			askCategory();
 			int menu = io.read();
-			if (menu == 0) { // по аналогии
+			if (menu == 0) { 
 				break; 
 			}
 			
@@ -89,7 +67,6 @@ public class Kickstarter {
 		return found[menu - 1];
 	}
 
-	// вот он наш метод, теперь надо заменить на вызов print все, что мы в коде используем напрямую
 	private void println(String message) {
 		io.print(message + "\n");
 	}
@@ -125,7 +102,7 @@ public class Kickstarter {
 	private void printProjects(Project[] found) {
 		for (int index = 0; index < found.length; index++) {
 			Project project = found[index];
-			io.print((index + 1) + " - "); // тут у нас печать без переноса строки 
+			io.print((index + 1) + " - ");  
 			printProject(project); 			
 		}
 	}
@@ -140,22 +117,19 @@ public class Kickstarter {
 
 	private void askCategory() {
 		println("Выберите категорию (или 0 для выхода):");
-		// для начала тут выводится список
 		println(Arrays.toString(categories.getCategories()));
 	}
 
 	private Category chooseCategory(int menu) {
 		if (menu <= 0 || categories.size() < menu) {
 			println("Неверный индекс меню " + menu);
-			return null; // не рекомендуется так делать, потому что потенциальный NPE у клиента, но что поделать, пока так - оставим TODO
+			return null; // TODO не рекомендуется так делать, потому что потенциальный NPE у клиента 
 		}
 		
-		// тут надо привести либо везде к одному виду, либо разделять - на вьюхе от 1 до N а в моделе от 0 до N-1 TODO подумать наж этим
+		// TODO тут надо привести либо везде к одному виду, либо разделять - на вьюхе от 1 до N а в моделе от 0 до N-1 
 		Category category = categories.get(menu - 1); 
 		println("Вы выбрали категорию: " + category.getName());
 		println("--------------------------------------");
 		return category;
 	}
-
-	// вынесли кнутренний класс в отдельный внешний
 }

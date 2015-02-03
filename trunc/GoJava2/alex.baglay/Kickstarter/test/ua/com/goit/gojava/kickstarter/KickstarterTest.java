@@ -8,20 +8,16 @@ import java.util.List;
 import java.util.Random;
 
 import org.junit.Test;
-import static org.mockito.Mockito.*; // если написать вот так то можно уменьшить кода
-import org.mockito.cglib.beans.BeanCopier.Generator;
+import static org.mockito.Mockito.*;
 
 public class KickstarterTest {
 
-	@Test // теперь самое интересное. Как протестировать кикстартер без ее зависимости от ConsoleIO.
-	// представим, что у нас вообще нет класcа ConsoleIO, толоько интерфейс...\
-	// я даже удалил :) чтобы небыло соблазна заюзать ConsoleIO. Что делать? Ну работаем как обычно
+	@Test 
 	public void stub_and_dummy() {
-	    // проинитим их чем можем
+		// given
 		Categories categories = new Categories();
 		Projects projects = new Projects();
-		IO io = new IO() { // это так называемый анонимный класс. КОгда мы прямо в теле метода реализовываем интерфейс и его методы
-			
+		IO io = new IO() { 
 			@Override
 			public int read() {
 				return 0;
@@ -32,56 +28,43 @@ public class KickstarterTest {
 				// do nothing
 			}
 		};
-		Kickstarter kickstarter = new Kickstarter(categories, projects, io, new StubQuoteGenerator()); // создадим локальные переменные
-		// то, что мы сейчас сделали с кикстартером - мы забили в него DummyObjects - что нибудь лишь бы заработал сам кикстартер
-		// если бы мы могли то забили бы туда null - и это тоже можно было бы считать DummyObject.
-		// DummyObjects используется тогда, когда нам пофиг, что передать - лишь бы пройти внутреннюю валидацию в методе (конструктроре)
+		Kickstarter kickstarter = new Kickstarter(categories, projects, io, new StubQuoteGenerator()); 
 		
 		kickstarter.run();
-		// тест завис, что не удивительно, поскольку у нас программа с бесконечным циклом. 
-		// а сделаем ка в списке категорий возможность выйти из программы, чтобы было как выходить из кода
-		// готово, теперь тест должен будет завершиться потому что наш IO всегда возвращает 0, ведет себя как Stub - реализация с 
-		// захардкодженными значениями внутри
 	}
 
 	class FakeIO implements IO {
-
-		private List<String> messages = new LinkedList<String>(); // теперь это осталось показать клиентам после работы с фейком
-		private List<Integer> input = new LinkedList<Integer>(); // а это надо проинитить перед стартом работы - через конструктор
+		private List<String> messages = new LinkedList<String>(); 
+		private List<Integer> input = new LinkedList<Integer>(); 
 
 		public FakeIO(Integer... input) {
-			this.input = new LinkedList<Integer>(Arrays.asList(input)); // мы жеж помним, что Arrays.asList( возвращает 
-			// немодифицируемый список и потом мы с него не сожем удалить ничего? Потому мы перекладываем в реальный LinkedList
+			this.input = new LinkedList<Integer>(Arrays.asList(input));  
 		}
 		
 		@Override
 		public int read() {
-			return input.remove(0); // теперь надо читать сообщения, а откуда?
-			// тут за каждым вызовом кикстартера метода рид, значение будет браться первое из input (удаляясь)
+			return input.remove(0); 
 		}
 
 		@Override
 		public void print(String message) {
-			messages.add(message); // Все сообщения сохраняются
+			messages.add(message); 
 		}
 
 		public List<String> getMessages() {
 			return messages;
 		}
-		
 	}
 	
 	class StubQuoteGenerator extends QuoteGenerator {
-
 		public StubQuoteGenerator() {
 			super(new Random());
 		}
 		
 		@Override
 		public String nextQuote() {
-			return "quote"; // вот теперь это стаб, а то сделал фейк полноценный в прошлый раз
+			return "quote"; 
 		}
-		
 	}
 	
 	@Test 
@@ -91,16 +74,13 @@ public class KickstarterTest {
 		categories.add(new Category("category1"));
 		categories.add(new Category("category2"));
 		Projects projects = new Projects();
-		FakeIO io = new FakeIO(1, 0, 0); // проинитим fake - выбрали категорию 1, вышли изсписка категорий, вышли из программы 
-		Kickstarter kickstarter = new Kickstarter(categories, projects, io, new StubQuoteGenerator()); // создадим локальные переменные
+		FakeIO io = new FakeIO(1, 0, 0);  
+		Kickstarter kickstarter = new Kickstarter(categories, projects, io, new StubQuoteGenerator()); 
 		
 		// when
 		kickstarter.run();
 
 		// then
-		// и теперь самое интересное. посмотрим, что фейк насохранял
-		// штука первая - у нас нет категорий - готово!
-		// штука вторая - У нас рендомный генератор цитат мешает - выделим QoteGenerator за пределы класса кикстартер
 		assertEquals(
 			"[quote\n" + 
 			", Выберите категорию (или 0 для выхода):\n" +
@@ -114,7 +94,7 @@ public class KickstarterTest {
 			"]", io.getMessages().toString());
 	}
 	
-	@Test // идем дальше, я бы хотел запрограммировать фейк так, чтобы зайти во внутрь категории где есть проекты
+	@Test 
 	public void shouldMenuWithProject() {
 	    // given
 		Categories categories = new Categories();
@@ -141,7 +121,7 @@ public class KickstarterTest {
 		// 0 - вышли изсписка категорий, 
 		// 0 - вышли из программы 
 		FakeIO io = new FakeIO(1, 2, 0, 0, 0); 
-		Kickstarter kickstarter = new Kickstarter(categories, projects, io, new StubQuoteGenerator()); // создадим локальные переменные
+		Kickstarter kickstarter = new Kickstarter(categories, projects, io, new StubQuoteGenerator()); 
 		
 		// when
 		kickstarter.run();
@@ -182,19 +162,16 @@ public class KickstarterTest {
 			"]", io.getMessages().toString());
 	}
 	
-	// последнее что хотелось бы показать в этом видео - что такое mock. Это самый умный из тестовых объектов
-	// его не надо реализовывать как стаб или фейк, его можно запрограммировать с помощью специального api 
-	// мы будем использовать Mockito библиотеку для этих целей. Велосипеды изобретать интересно, но мы не будем
 	@Test
+	// гуглите Mockito
+	// http://www.slideshare.net/nunafig/mockito-12079903 
 	public void mockTest() {
-		// возьмем наш тест и посмотрим как он изменится
-		 // given
+  	    // given
 		Categories categories = new Categories();
 		categories.add(new Category("category1"));
 		categories.add(new Category("category2"));
 		
 		Projects projects = new Projects();
-		
 		
 		IO io = mock(IO.class);
 		QuoteGenerator generator = mock(QuoteGenerator.class);
@@ -210,17 +187,11 @@ public class KickstarterTest {
 		kickstarter.run();
 
 		// then
-		// и теперь самое интересное. 
-		// правда классно читается? 
 		verify(io).print("quote\n");
 		verify(io).print("Вы выбрали категорию: category1\n");
 		verify(io, times(2)).print("[1 - category1, 2 - category2]\n");
 		verify(io, times(2)).print("Выберите категорию (или 0 для выхода):\n");
 		verify(io).print("Проектов в категории нет. Нажмите 0 - для выхода.\n");
 		verify(io).print("Спасибо за использование нашей программы!\n");
-		// тут важно понимать, что порядок не имеет значения
-		// важен сам факт что было
-		// если порядок важен, тогда надо вызывать InOrder - гуглите Mockito
-		// http://www.slideshare.net/nunafig/mockito-12079903 преза
 	}
 }

@@ -18,7 +18,6 @@ public class QuoteGenerator {
 					"Сделай это! (с) Саня",
 				};
 		int index = random.nextInt(strings.length);  
-		String string = strings[index];
-		return string;
+		return strings[index];
 	}
 }
