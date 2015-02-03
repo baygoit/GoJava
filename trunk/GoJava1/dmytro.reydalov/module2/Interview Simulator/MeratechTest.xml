@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<questions>
+	<question id = "1" line = "Что такое Java?">
+			<answer id = "a" line = "Язык программирования веб-браузера." isRight = "false"></answer>
+			<answer id = "b" line = "Язык программирования." isRight = "true"></answer>
+			<answer id = "c" line = "Исполняющая среда (платформа)." isRight = "false"></answer>
+			<answer id = "d" line = "Язык программирования и исполняющая среда." isRight = "true"></answer>
+	</question>
+	
+	<question id = "2" line = "Зачем нужнен байткод?">
+			<answer id = "a" line = "Для уменьшения размера программы." isRight = "false"></answer>
+			<answer id = "b" line = "Для обеспечения задач переносимости." isRight = "true"></answer>
+			<answer id = "c" line = "Для сокрытия кода." isRight = "false"></answer>
+	</question>
+	
+	<question id = "3" line = "Укажите целочисленные типы данных (несколько вариантов)">
+			<answer id = "a" line = "long." isRight = "true"></answer>
+			<answer id = "b" line = "double." isRight = "false"></answer>
+			<answer id = "c" line = "int." isRight = "true"></answer>
+			<answer id = "d" line = "float." isRight = "false"></answer>
+			<answer id = "e" line = "byte." isRight = "true"></answer>
+			<answer id = "f" line = "short." isRight = "true"></answer>
+			<answer id = "g" line = "char." isRight = "true"></answer>
+	</question>
+	
+	                                                                                                

@@ -2,7 +2,7 @@ package ua.com.goit.gojava2.solo307.interview;
 
 public class Answer {
 	
-	int id;
+	char id;
 	private String text;
 	boolean isCorrect;
 	
@@ -12,17 +12,17 @@ public class Answer {
 		id = 0;
 	}
 	
-	public Answer(int id, String text, boolean isCorrect){
+	public Answer(char id, String text, boolean isCorrect){
 		this.text = text;
 		this.isCorrect = isCorrect;
 		this.id = id;
 	}
 	
-	public int getId() {
+	public char getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(char id) {
 		this.id = id;
 	}
 	
@@ -33,7 +33,7 @@ public class Answer {
 	public void setText(String text) {
 		this.text = text;
 	}
-	
+
 	public boolean isAnswerCorrect() {
 		return isCorrect;
 	}

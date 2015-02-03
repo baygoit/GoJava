@@ -14,19 +14,4 @@ public class TestInterview {
 		interview = new Interview();
 	}
 
-	@Test
-	public void testIsPassed() {
-		boolean expected = true;
-		int myNumber = 4;
-		boolean actual = interview.isPassed(myNumber);
-		assertEquals(expected, actual);
-	}
-
-	@Test
-	public void testIsPassedFalse() {
-		boolean expected = false;
-		int myNumber = 2;
-		boolean actual = interview.isPassed(myNumber);
-		assertEquals(expected, actual);
-	}
 }

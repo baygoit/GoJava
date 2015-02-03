@@ -41,12 +41,7 @@ public class XMLParser {
 						Node a = answers.item(j);
 						if(a.getNodeType() == Node.ELEMENT_NODE){
 							Element answer = (Element) a;
-							int answerId = 0;
-							try{
-								answerId = Integer.parseInt(answer.getAttribute("id"));
-							} catch(NumberFormatException e){
-								e.printStackTrace();
-							}
+							char answerId = answer.getAttribute("id").charAt(0);
 							String answerLine = answer.getAttribute("line");
 							boolean isRight = false;
 							if(answer.getAttribute("isRight").equals("true")) isRight = true;
