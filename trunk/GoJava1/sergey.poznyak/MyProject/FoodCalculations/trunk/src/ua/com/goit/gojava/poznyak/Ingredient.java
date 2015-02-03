@@ -5,7 +5,7 @@ package ua.com.goit.gojava.poznyak;
  * 
  * This class implements the ingredient image
  * 
- * @version 0.04 28 Jan 2015
+ * @version 0.05 03 Feb 2015
  * @author Sergey Poznyak
  */
 public class Ingredient {
@@ -16,7 +16,7 @@ public class Ingredient {
 	
 	public Ingredient() {}
 
-	protected Ingredient(Foodstuff foodstuff, int weight) {
+	protected Ingredient(Foodstuff foodstuff, Integer weight) {
 		this.foodstuff = foodstuff;
 		this.weight = weight;
 	}
@@ -29,11 +29,11 @@ public class Ingredient {
 		this.foodstuff = foodstuff;
 	}
 
-	public double getWeight() {
+	public Integer getWeight() {
 		return weight;
 	}
 
-	public void setWeight(int weight) {
+	public void setWeight(Integer weight) {
 		this.weight = weight;
 	}
 

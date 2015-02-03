@@ -7,7 +7,7 @@ import java.util.List;
  * 
  * This bean implements the dish image.
  * 
- * @version 0.04 28 Jan 2015
+ * @version 0.05 03 Feb 2015
  * @author Sergey Poznyak
  */
 public class Dish {
@@ -20,16 +20,16 @@ public class Dish {
 
 	public Dish() {}
 	
-	protected Dish(int id, String name) {
+	protected Dish(Integer id, String name) {
 		this.id = id;
 		this.name = name;
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	

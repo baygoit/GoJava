@@ -7,7 +7,7 @@ import org.junit.Test;
 /**
  * This class tests ListServiceHardcodedData class.
  * 
- * @version 0.04 28 Jan 2015
+ * @version 0.05 03 Feb 2015
  * @author Sergey Poznyak
  */
 public class ListServiceHardcodedDataTest {

@@ -10,7 +10,7 @@ import java.util.Map;
  * which calculates weights of foodstuff
  * for the list of dishes.
  * 
- * @version 0.04 28 Jan 2015
+ * @version 0.05 03 Feb 2015
  * @author Sergey Poznyak
  */
 public class UserMenu {
@@ -23,7 +23,7 @@ public class UserMenu {
 		dishList = new ArrayList<Dish>();
 	}
 	
-	protected UserMenu(int peopleNum, List<Dish> dishList) {
+	protected UserMenu(Integer peopleNum, List<Dish> dishList) {
 		this.peopleNum = peopleNum;
 		this.dishList = dishList;
 	}
@@ -32,7 +32,7 @@ public class UserMenu {
 		return peopleNum;
 	}
 
-	public void setPeopleNum(int peopleNum) {
+	public void setPeopleNum(Integer peopleNum) {
 		this.peopleNum = peopleNum;
 	}
 	
@@ -45,7 +45,9 @@ public class UserMenu {
 	}
 	
 	public void addDsih(Dish dish) {
-		dishList.add(dish);
+		if (dish != null) {
+			dishList.add(dish);
+		}
 	}
 	
 	public Map<Foodstuff, Integer> calculateWeights() {
