@@ -43,10 +43,10 @@ public class Menu {
             if (nubberForNextLevel == 0) {
                 currentLevelPosition--;
                 if (currentLevelPosition == 2) {
-                    level = getCurrentLevel(categoryPosition);
+                    level = getCurrentLevel();
                     level.displayMySelf(categoryPosition);
                 } else {
-                    level = getCurrentLevel(nubberForNextLevel);
+                    level = getCurrentLevel();
                     level.displayMySelf(nubberForNextLevel);
                 }
             } else {
@@ -54,13 +54,13 @@ public class Menu {
                 if (currentLevelPosition == 2) {
                     categoryPosition = nubberForNextLevel;
                 }
-                level = getCurrentLevel(nubberForNextLevel);
+                level = getCurrentLevel();
                 level.displayMySelf(nubberForNextLevel);
             }
         } 
     }
 
-    private Level getCurrentLevel(int nubberForNextLevel) {
+    public Level getCurrentLevel() {
         for (Level level : levelsList) {
             if (currentLevelPosition == level.getPosition()) {
                 return level;
