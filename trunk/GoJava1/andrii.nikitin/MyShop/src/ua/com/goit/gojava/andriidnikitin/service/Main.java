@@ -10,7 +10,12 @@ import ua.com.goit.gojava.andriidnikitin.model.Category;
 import ua.com.goit.gojava.andriidnikitin.model.Good;
 import ua.com.goit.gojava.andriidnikitin.model.Warehouse;
 public class Main {
-	public static void main(String[] args) throws JAXBException {
+
+	public static void main(String[] args) {
+		
+	}
+	
+	/*
 		DataBuilder instance = new DataBuilder();
 		Warehouse warehouse = new Warehouse();
 		warehouse.init();
@@ -31,10 +36,10 @@ public class Main {
 			for (int i1 = 0; i1 < goodList.size(); i1++){
 				stream.println("  " + goodList.get(i1).printInfo());
 			}
-		}*/
+		}
 		
 		
-		/*StorageXML store = new StorageXML();
+		StorageXML store = new StorageXML();
 		List<Category> list = store.getCategoryList();
 		for (int i = 0; i < list.size(); i++){
 			stream.println(list.get(i).printInfo());
@@ -43,6 +48,8 @@ public class Main {
 		List<Category> list2 = store.getCategoryList();
 		for (int i = 0; i < list.size(); i++){
 			stream.println(list.get(i).printInfo());
-		}	*/
+		}	
 	}
+*/
+	
 }
