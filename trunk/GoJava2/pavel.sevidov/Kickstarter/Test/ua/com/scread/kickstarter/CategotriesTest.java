@@ -3,6 +3,8 @@ package ua.com.scread.kickstarter;
 import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import org.junit.Test;
 
@@ -22,16 +24,21 @@ public class CategotriesTest {
 	@Test
 	public void shouldReturnCategories_whenReturningCategories() {
 		categories.add(category);
-		Categories categoriesActual = new Categories();
+		List<Category> categoriesActual = new ArrayList<Category>();
 		categoriesActual.add(category);
-		assertEquals(categories.getCategories(), categoriesActual.getCategories());
+		assertEquals(categories.getCategories(), categoriesActual);
+	}
+	
+	@Test
+	public void sholudReturnEmpty_whenEmptyCategories() {
+		assertEquals(new ArrayList<Category>(), categories.getCategories());
 	}
 	
 	@Test
 	public void shouldReturnStringCategories_whenReturnCategories() {
 		categories.add(category);
-		String[] categoriesString = {"1 - Vasya"};
-		assertEquals(categories.getStringCategories(), categoriesString);
+		String categoriesString = "[1 - Vasya]";
+		assertEquals(Arrays.toString(categories.getStringCategories()), categoriesString);
 	}
 
 }

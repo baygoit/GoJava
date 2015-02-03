@@ -26,6 +26,11 @@ public class ProjectsTest {
 	}
 	
 	@Test
+	public void sholudReturnEmpty_whenEmptyProjects() {
+		assertEquals(new ArrayList<Category>(), projects.getProjects());
+	}
+	
+	@Test
 	public void shouldBeProject_whenGetProjectByCategory() {
 		Category category = new Category("Vasya");
 		project.setCategory(category);

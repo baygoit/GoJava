@@ -1,15 +1,16 @@
 package ua.com.scread.kickstarter;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Projects {
-	private ArrayList<Project> projects;
+	private List<Project> projects;
 	
 	public Projects() {
 		projects = new ArrayList<Project>();
 	}
 
-	public ArrayList<Project> getProjects() {
+	public List<Project> getProjects() {
 		return projects;
 	}
 	

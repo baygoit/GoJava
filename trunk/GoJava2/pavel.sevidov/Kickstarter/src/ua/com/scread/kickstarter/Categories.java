@@ -1,10 +1,11 @@
 package ua.com.scread.kickstarter;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Categories {
 
-	private ArrayList<Category> categories;
+	private List<Category> categories;
 
 	public Categories() {
 		categories = new ArrayList<Category>();
@@ -23,7 +24,7 @@ public class Categories {
 		return result;
 	}
 	
-	public ArrayList<Category> getCategories() {
+	public List<Category> getCategories() {
 		return categories;
 	}
 
