@@ -13,12 +13,9 @@ public class Out {
     }
 
     public String output(String string, int i) {
-        return string + i;
+        return string + Integer.toString(i);
     }
 
-    // public Category output(Category category) {
-    // return category;
-    // }
 
     public String output(int i, String string) {
         return i + string;
@@ -43,12 +40,18 @@ public class Out {
     public void printAllProjectFields(Project project) {
         StringBuffer sb = new StringBuffer();
         sb.append("ProjectHistory: ").append(project.getProjectHistory())
-                .append("\n");
+        .append("\n");
         sb.append("LinkOnvideo: ").append(project.getLinkOnvideo())
-                .append("\n");
+        .append("\n");
         sb.append("Questions and answers: ")
-                .append(project.getQuestionsAndAnswers()).append("\n");
+        .append(project.getQuestionsAndAnswers()).append("\n");
         System.out.println(sb.toString());
+    }
+    
+    public void printCategory(Category category) {
+        StringBuffer sb = new StringBuffer();
+        sb.append(category.toString());
+        System.out.println(sb);
     }
 
 }

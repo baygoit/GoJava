@@ -12,6 +12,7 @@ public class ProjectManager {
         projectStorage = new ProjectStorage();
         out = new Out();
         projectStorage.setOut(out);
+        categoryStorage.setOut(out);
         initCategories();
         initProjects();
     }
