@@ -6,7 +6,6 @@ import org.junit.Test;
 
 import ua.com.goit.gojava1.lslayer.hackit2.action.Action;
 import ua.com.goit.gojava1.lslayer.hackit2.action.SimpleExplosionAction;
-import ua.com.goit.gojava1.lslayer.hackit2.actor.Actor;
 import ua.com.goit.gojava1.lslayer.hackit2.actor.HumanControlledCharacter;
 import ua.com.goit.gojava1.lslayer.hackit2.dto.ActionResult;
 import ua.com.goit.gojava1.lslayer.hackit2.dto.ParameterObject;

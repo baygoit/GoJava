@@ -33,6 +33,6 @@ public class UserAccountTest {
         UserAccount account = UserAccount.createAccount("mylogin", "mypassword");
         UserAccount.createCharacterInAccount(account, "MegaPihar2000");
         Actor actor = account.getActor();
-        assertNotNull(actor.getAllSkills());
+        assertNotNull(actor.getSkills());
     }
 }

@@ -10,21 +10,18 @@ import ua.com.goit.gojava1.lslayer.hackit2.actor.Actor;
 import ua.com.goit.gojava1.lslayer.hackit2.actor.HumanControlledCharacter;
 import ua.com.goit.gojava1.lslayer.hackit2.dto.ActionResult;
 import ua.com.goit.gojava1.lslayer.hackit2.dto.ParameterObject;
-import ua.com.goit.gojava1.lslayer.hackit2.gear.Gear;
 import ua.com.goit.gojava1.lslayer.hackit2.gear.hardware.Devices.InfoDevice;
-import ua.com.goit.gojava1.lslayer.hackit2.gear.hardware.Devices.ScanDevice;
 
 public class AbstractActionTest {
     private ParameterObject po = new ParameterObject();
     private Actor actor = new HumanControlledCharacter("MegaPihar");
     private InfoDevice tool = new InfoDevice("Tool");
-    private Gear target =  new ScanDevice("Target"); 
 
     @Test
     public void testGetInfo() {
         String eol = System.getProperty("line.separator");
         Action action = new InfoAction();
-        actor.setAttribute("CCN", "1234 5678 6543 2345");
+        actor.addAttribute("CCN", "1234 5678 6543 2345");
 
         po.actor = actor;
         po.targetActor = actor;

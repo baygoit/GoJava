@@ -19,22 +19,22 @@ public class AbstractCharaterTest {
     public void testSkillValueFromActor() {
         Actor actor = new HumanControlledCharacter("Test name");
         actor.addSkill("test");
-        assertEquals(actor.getSkillValue("test"), 1);
-        assertFalse(actor.getSkillValue("test_skill") >= 1); //Absent skill value is 0;
+        assertEquals(actor.getSkill("test"), 1);
+        assertFalse(actor.getSkill("test_skill") >= 1); //Absent skill value is 0;
         actor.addSkill("test"); //Additional adding don't modify anything;
-        assertEquals(actor.getSkillValue("test"), 1);
+        assertEquals(actor.getSkill("test"), 1);
         actor.addSkill(null);
-        assertEquals(0, actor.getSkillValue(null)); //null should be handled
+        assertEquals(0, actor.getSkill(null)); //null should be handled
     }
     @Test
     public void testSkillEvolve() {
         Actor actor = new HumanControlledCharacter("Test name");
         actor.addSkill("test");
-        actor.evolveSkill("test");
-        actor.evolveSkill(null); //Null handle
-        assertEquals(actor.getSkillValue("test"), 2); //Existing skill evolve
-        actor.evolveSkill("test_skill");
-        assertEquals(actor.getSkillValue("test_skill"), 0); //Absent skill evolve
+        actor.incSkill("test", 1);
+        actor.incSkill(null, 1); //Null handle
+        assertEquals(actor.getSkill("test"), 2); //Existing skill evolve
+        actor.incSkill("test_skill", 1);
+        assertEquals(actor.getSkill("test_skill"), 0); //Absent skill evolve
     }
     @Test
     public void testAllSkillsString() {
@@ -43,19 +43,16 @@ public class AbstractCharaterTest {
         actor.addSkill("Cracs");
         actor.addSkill("Facs");
         actor.addSkill("Packs");
-        assertEquals("Cracs: 1" + eol +
-                "Facs: 1" + eol +
-                "Packs: 1" + eol, actor.getAllSkills());
+        assertEquals("{Cracs=1, Facs=1, Packs=1}", actor.getSkills().toString());
         assertEquals("Username" + eol +
-                     "Cracs: 1" + eol +
-                     "Facs: 1" + eol +
-                     "Packs: 1" + eol, actor.getStringForOutput());
+                     "{Cracs=1, Facs=1, Packs=1}", actor.getStringForOutput());
+        assertEquals("Actor [name=Username, skills={Cracs=1, Facs=1, Packs=1}]", actor.toString());
     }
     
     @Test
     public void testAttributes() {
         Actor actor = new HumanControlledCharacter("UserName");
-        actor.setAttribute("CCN", "1234 5678 6543 2345");
+        actor.addAttribute("CCN", "1234 5678 6543 2345");
         assertEquals("1234 5678 6543 2345", actor.getAttribute("CCN"));
         assertEquals(1, actor.getAttributes().size());
         assertEquals("",actor.getAttribute("None"));

@@ -37,7 +37,7 @@ public abstract class AbstractAction implements Action {
     protected boolean checkSuccess(ParameterObject arg) {
         int bonus = 0;
         if (arg.actor != null) {  
-            bonus += arg.actor.getSkillValue(commandToInvoke);
+            bonus += arg.actor.getSkill(commandToInvoke);
         }
         if (arg.tool != null) {
             bonus += arg.tool.getPurposeValue(commandToInvoke); 
@@ -47,7 +47,7 @@ public abstract class AbstractAction implements Action {
             antibonus += arg.targetGear.getPurposeValue(commandToInvoke);
         }
         if (arg.targetActor != null) {
-            antibonus += arg.targetActor.getSkillValue(commandToInvoke); 
+            antibonus += arg.targetActor.getSkill(commandToInvoke); 
         }
         return bonus >= antibonus;
     }
