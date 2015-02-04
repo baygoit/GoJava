@@ -35,21 +35,21 @@ public class View {
 		path = "~ CATEGORIES/";
 		System.out.println("\n" + path + "\n№ Name");
 		int i = 1;
-		for(Category category: categoryController.passContentToView()) {
+		for(Category category: categoryController.getContent()) {
 			System.out.println(i + ". " + category.getName());
 			i++;
 		}
 	}
 	
 	public void displaySpecificCategory(int i) {
-		category = categoryController.passSpecificContentToView(i);
+		category = categoryController.getSpecificContent(i - 1);
 		path += category.getName().toUpperCase() + "/";
 		System.out.println(path);
 	}
 	
 	public void displayProjects() {
 		int i = 1;
-		for(Project project: projectController.passSpecificContentToView(category)) {
+		for(Project project: projectController.getSpecificContent(category)) {
 			System.out.println(i + ") " + project.getName() + "\n" + project.getShortInfo());
 			i++;
 		}

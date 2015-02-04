@@ -25,13 +25,25 @@ public class Project {
 		return name;
 	}
 	
+	// It's example of optimization.
 	public String getShortInfo() {
-		return new String("Description: " + description + " \nRequired amount: " + requiredAmount + symbolDollar
-						  + "\nTotal: " + total + symbolDollar + " \nDays left: " + days);
+		StringBuilder buffer = new StringBuilder();
+		buffer.append("Description: ").append(description)
+			.append("\nRequired amount: ").append(requiredAmount).append(symbolDollar)
+			.append("\nTotal: ").append(total).append(symbolDollar)
+			.append("\nDays left: ").append(days);
+		return buffer.toString();
 	}
 	
+	// It's example of optimization.
 	public String getFullInfo() {
-		return new String("Description: " + description + " \nRequired amount: " + requiredAmount + symbolDollar
-				  + "\nTotal: " + total + symbolDollar + " \nDays left: " + days + "\nHistory: " + story + "\nLink to video: " + link);
+		StringBuilder buffer = new StringBuilder();
+		buffer.append("Description: ").append(description)
+			.append("\nRequired amount: ").append(requiredAmount).append(symbolDollar)
+			.append("\nTotal: ").append(total).append(symbolDollar)
+			.append("\nDays left: ").append(days)
+			.append("\nStory: ").append(story)
+			.append("\nLink to video: ").append(link);
+		return buffer.toString();
 	}
 }

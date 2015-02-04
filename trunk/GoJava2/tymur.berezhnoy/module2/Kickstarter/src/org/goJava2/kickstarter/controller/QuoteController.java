@@ -16,12 +16,12 @@ public class QuoteController implements ControllerBehavior<Integer> {
 	}
 	
 	@Override
-	public List<Quote> passContentToView() {
+	public List<Quote> getContent() {
 		return quoteStorage.getContent();
 	}
 	
 	@Override
-	public Quote passSpecificContentToView(Integer i) {
+	public Quote getSpecificContent(Integer i) {
 		return quoteStorage.getSpecificContent(i);	
 	}
 	

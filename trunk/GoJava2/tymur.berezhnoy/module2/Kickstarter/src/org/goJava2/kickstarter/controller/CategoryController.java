@@ -16,12 +16,12 @@ public class CategoryController implements ControllerBehavior<Integer> {
 	}
 	
 	@Override
-	public List<Category> passContentToView() {
+	public List<Category> getContent() {
 		return categoryStorage.getContent();
 	}
 	
 	@Override
-	public Category passSpecificContentToView(Integer t) {
-		return categoryStorage.getSpecificContent(t - 1);
+	public Category getSpecificContent(Integer t) {
+		return categoryStorage.getSpecificContent(t);
 	}
 }

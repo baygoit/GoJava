@@ -18,12 +18,12 @@ public class ProjectController implements ControllerBehavior<Category> {
 	}
 	
 	@Override
-	public Map<Category, List<Project>> passContentToView() {
+	public Map<Category, List<Project>> getContent() {
 		return projectStorage.getContent();
 	}
 	
 	@Override
-	public List<Project> passSpecificContentToView(Category t) {
+	public List<Project> getSpecificContent(Category t) {
 		return projectStorage.getSpecificContent(t);
 	}
 }
