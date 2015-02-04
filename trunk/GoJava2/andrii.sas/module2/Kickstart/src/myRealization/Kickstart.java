@@ -21,8 +21,8 @@ public class Kickstart {
 		output.println(categories.getCategories() + "\nWhat are you interested in? Pleace, make your choice:");
 	}
 
-	public void showChoice() {
-		choice = catchArrayError();
+	public void showChoice(int choice) {
+		this.choice = choice;
 		output.println("You chose - " + categories.readCategory(choice).getName());
 	}
 
@@ -52,7 +52,7 @@ public class Kickstart {
 		while(true){
 			try {
 				l = catchException() - 1;
-				if (l < 0){
+				if (l == -1){
 					break;
 				}
 				projects.readObject(l);
@@ -69,6 +69,9 @@ public class Kickstart {
 		while(true){
 			try {
 				l = catchException() - 1;
+				if (l == -1){
+					break;
+				}
 				categories.readCategory(l);
 				break;
 			} catch (IndexOutOfBoundsException e){
@@ -83,6 +86,7 @@ public class Kickstart {
 		while(true){
 			try {
 				l = input.readChoice();
+				
 				break;
 			} catch (Exception e){
 				output.println("Error!! You must enter numbers! - Try again:");
@@ -94,6 +98,7 @@ public class Kickstart {
 	public void returnToProjects(int g) {
 			if (g == 0){
 				showProjects();
+				
 			} else {
 				while (g != 0){
 					output.println("Error!! You must enter 0 \nPlease, try again");
@@ -104,34 +109,28 @@ public class Kickstart {
 	}
 	
 	public void navigate(int k) {
-		if (k >= 0){
+		while (k >= 0){
 			showChosenProject(k);
 			output.println("Return - \"0\"");
 			returnToProjects(catchException());
-		} else {
-			showList();
-			showChoice();
-			showProjects();
+			k = catchProjectError();
 		}
-	}
-	
-	public boolean selectMenu(boolean firstTime) {
-		if (firstTime){
-			showList();
-			showChoice();
-			showProjects();
-			firstTime = false;
-		} else {
-			navigate(catchProjectError());
-		}
-		return firstTime;
 	}
 	
 	public void buildMenu(){
-		boolean firstTime = true;
 		while (true){
-			firstTime = selectMenu(firstTime);
+				showList();
+				int intForExit = catchArrayError();
+				if (intForExit < 0){
+					break;
+				} else {
+					showChoice(intForExit);
+				}
+				
+				showProjects();
+				navigate(catchProjectError());
 		}
+		output.println("Thanks for using our program, Goodbye!");
 	}
 
 	public static void main(String[] args) {
