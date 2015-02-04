@@ -12,6 +12,10 @@ public class Output {
 		System.out
 				.println("Select a category: \n 0- MAIN MANU \n 1- EDUCATION \n 2- FINANCE \n 3- GAMES");
 	}
+	
+	public void printZero(){
+		System.out.println("0) MAIN MANU");
+	}
 
 	public void youChoose(String choice) {
 		System.out.println("you chooce - " + choice);
