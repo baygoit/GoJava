@@ -14,21 +14,22 @@ public class OutputPreparer {
 
 	public List<String> stringProjectOutput(Category category) {
 		stringProjects = new ArrayList<String>();
+		int from = 1;
+		int to = projects.getProjects(category).size();
 		stringProjects.add("");
-		stringProjects.add("Выберите проект:");
+		stringProjects.add("Выберите проект: [" + from + "..." + to + "] или 0 для выхода");
 		stringProjects.add("------------------------------------");
-		List<Project> foundProjects = projects.getProjects(category);	
+		List<Project> foundProjects = projects.getProjects(category);
+		int count = 1;
 		for (Project project : foundProjects) {
-			
-			stringProjects.add("Название проекта:           " + project.getName());
+			stringProjects.add("Название проекта:           " + count + " - " + project.getName());
 			stringProjects.add("Описание проекта:           " + project.getDescription());
 			stringProjects.add("Необходимая сумма:          " + project.getGoal() + "$");
 			stringProjects.add("Собранная сумма:            " + project.getPledged() + "$");
 			stringProjects.add("До окончания сбора средств: " + project.getDaysLeft() + " дней");
 			stringProjects.add("------------------------------------");
+			count++;
 		}
-		stringProjects.add("Введите 0 для выхода");
-		stringProjects.add("");
 		return stringProjects;
 	}
 

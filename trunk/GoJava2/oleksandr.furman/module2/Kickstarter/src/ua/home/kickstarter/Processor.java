@@ -7,7 +7,7 @@ public class Processor {
 	private DataManager dataManager;
 	private Categories categories;
 	private Projects projects;
-	private InOut inOut;
+	private ConsoleInOut inOut;
 	private OutputPreparer outputPreparer;
 	private Category category;
 
@@ -16,7 +16,7 @@ public class Processor {
 		dataManager.storage();
 		categories = dataManager.getCategories();
 		projects = dataManager.getProjects();
-		inOut = new InOut();
+		inOut = new ConsoleInOut();
 		Quotations quotations = new Quotations();
 		inOut.output(quotations.randomQuote());
 		outputPreparer = new OutputPreparer(projects);
@@ -32,7 +32,7 @@ public class Processor {
 			}
 
 			int categoryIndex = inOut.nextIntIndex();
-			category = categories.getName(categoryIndex);
+			category = categories.getCategories().get(categoryIndex);
 			inOut.output("Вы выбрали категорию " + category.getName());
 			projectsPrint();
 		} catch (IndexOutOfBoundsException e) {

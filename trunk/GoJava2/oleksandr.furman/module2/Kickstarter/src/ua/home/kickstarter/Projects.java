@@ -6,11 +6,10 @@ import java.util.List;
 import java.util.Map;
 
 public class Projects {
-
 	private Map<Category, List<Project>> projects = new HashMap<Category, List<Project>>();
-	
+
 	public void add(Project project) {
-		
+
 		if (projects.containsKey(project.getCategory())) {
 			projects.get(project.getCategory()).add(project);
 		} else {

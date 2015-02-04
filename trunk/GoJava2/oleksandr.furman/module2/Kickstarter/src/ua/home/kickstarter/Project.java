@@ -10,7 +10,7 @@ public class Project {
 	private String description;
 	private String history;
 	private String linksToVideo;
-	private String questions;
+	private String questionAnswers;
 	private Category category;
 
 	public Project(JSONObject jsonObject) {
@@ -18,14 +18,22 @@ public class Project {
 		this.description = "" + jsonObject.get("description");
 		this.goal = Integer.parseInt("" + jsonObject.get("goal"));
 		this.daysLeft = Integer.parseInt("" + jsonObject.get("daysLeft"));
-		this.history = "" + jsonObject.get("history");
+		this.history = null;
 		this.linksToVideo = "" + jsonObject.get("linksToVideo");
 		this.pledged = 0;
-		this.questions = "тут пока пусто";
+		this.questionAnswers = null;
 	}
 
 	public void setCategory(Category category) {
 		this.category = category;
+	}
+
+	public void setHistory(String history) {
+		this.history = history;
+	}
+
+	public void setQuestionAnswers(String questionAnswers) {
+		this.questionAnswers = questionAnswers;
 	}
 
 	public Category getCategory() {
@@ -61,7 +69,7 @@ public class Project {
 	}
 
 	public String getQuestions() {
-		return questions;
+		return questionAnswers;
 	}
 
 }

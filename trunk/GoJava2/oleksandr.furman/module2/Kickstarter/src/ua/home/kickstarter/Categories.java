@@ -16,8 +16,4 @@ public class Categories {
 	public Map<Integer, Category> getCategories() {
 		return categories;
 	}
-
-	public Category getName(int index) {
-		return categories.get(index);
-	}
 }

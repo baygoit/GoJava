@@ -26,30 +26,26 @@ public class DataManager {
 			categories.add(new Category("Games"));
 			categories.add(new Category("Technology"));
 			categories.add(new Category("Design"));
-			
+
 			project = new ArrayList<Project>();
 			for (int i = 0; i < a.size(); i++) {
 				project.add(new Project((JSONObject) a.get(i)));
 			}
-//			project.get(0).setCategory(categories.getCategories().get(1));
-//			project.get(1).setCategory(categories.getCategories().get(1));
-//			project.get(2).setCategory(categories.getCategories().get(1));
-//			project.get(3).setCategory(categories.getCategories().get(2));
-//			project.get(4).setCategory(categories.getCategories().get(2));
-//			project.get(5).setCategory(categories.getCategories().get(2));
+			project.get(0).setCategory(categories.getCategories().get(1));
+			project.get(1).setCategory(categories.getCategories().get(1));
+			project.get(2).setCategory(categories.getCategories().get(1));
+			project.get(3).setCategory(categories.getCategories().get(2));
+			project.get(4).setCategory(categories.getCategories().get(2));
+			project.get(5).setCategory(categories.getCategories().get(2));
 
-			for (int i = 0; i < a.size(); i++) {
-				if(i < 3){
-				project.get(i).setCategory(categories.getCategories().get(1));
-				}else if (i >= 3) {
-				project.get(i).setCategory(categories.getCategories().get(2));	
-				}
-			}
-			
 			projects = new Projects();
 			for (int i = 0; i < a.size(); i++) {
 				projects.add(project.get(i));
 			}
+			project.get(0).setHistory("История проекта...");
+			project.get(1).setHistory("История проекта №2");
+
+			project.get(0).setQuestionAnswers("Q: вопрос? А: ответ!");
 
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
