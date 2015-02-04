@@ -4,7 +4,7 @@ import java.io.IOException;
 public class KickstarterS {
 
 	private static void toCategory() throws IOException, InterruptedException{
-		Check check = new Check();
+		Check check = new Check(new InputsConsole());
 		Categories categories = new Categories();
 		Projects projects = new Projects();
 		projects.writeAllCatecories();

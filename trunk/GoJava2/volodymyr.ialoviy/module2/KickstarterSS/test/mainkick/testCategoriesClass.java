@@ -1,16 +1,10 @@
-package test;
+package mainkick;
 
 import static org.junit.Assert.*;
-
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Arrays;
-
 import org.junit.Test;
-
-import mainkick.Categories;
-import mainkick.Projects;
-import mainkick.ReaderBD;
 
 public class testCategoriesClass {
 	Categories categories = new Categories();

@@ -1,8 +1,7 @@
-package test;
+package mainkick;
 
 import static org.junit.Assert.*;
 import java.io.FileNotFoundException;
-import mainkick.Quotes;
 import org.junit.Test;
 
 public class QuoteIsNotEmpty {

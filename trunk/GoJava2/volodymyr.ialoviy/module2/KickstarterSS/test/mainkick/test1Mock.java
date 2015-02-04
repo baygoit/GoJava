@@ -1,9 +1,8 @@
-package test;
+package mainkick;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import java.io.FileNotFoundException;
-import mainkick.Categories;
 import org.junit.Test;
 
 public class test1Mock {

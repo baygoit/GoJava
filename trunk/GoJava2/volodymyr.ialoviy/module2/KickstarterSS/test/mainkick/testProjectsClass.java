@@ -1,8 +1,7 @@
-package test;
+package mainkick;
 
 import static org.junit.Assert.assertTrue;
 import java.io.FileNotFoundException;
-import mainkick.Projects;
 import org.junit.Test;
 
 public class testProjectsClass {
@@ -23,6 +22,4 @@ public class testProjectsClass {
 				+ " howMuchCollected = 10\n"
 				+ " howMuchRemaining = 990"));
     }
-	
-	
 }

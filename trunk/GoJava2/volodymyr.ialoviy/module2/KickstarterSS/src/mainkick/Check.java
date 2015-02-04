@@ -4,15 +4,18 @@ import java.io.IOException;
 import java.util.regex.Pattern;
 
 public class Check {
-	Inputs choice = new InputsConsole();
 	int breakCounter;
 	int choiceNumber;
-	
+	public InputsConsole choice;
+	public Check(InputsConsole choice){
+		this.choice = choice;
+	}
+
 	public int checkNumber(int[] border, boolean yes) throws IOException{
 		breakCounter = 0;
 		choiceNumber = 0;
 		for (int i = 0; i < 3; i++){
-			String chosen = string();
+			String chosen = choice.enter();
 			if (number(chosen)){continue;}
 			choiceNumber = Integer.valueOf(chosen);
 			if (numberZero(choiceNumber, yes)){continue;}
@@ -24,10 +27,6 @@ public class Check {
 			choiceNumber = bannedFor10Minutes();
 		}
 		return choiceNumber;
-	}
-	
-	private String string() throws IOException{
-		return choice.enter();
 	}
 	
 	private Boolean numberBorder(int choiceNumber, int[] border){
