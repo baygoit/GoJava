@@ -24,6 +24,10 @@ public class Categories {
 		return result;
 	}
 	
+	public int size() {
+	    return categories.size();
+	}
+	
 	public List<Category> getCategories() {
 		return categories;
 	}

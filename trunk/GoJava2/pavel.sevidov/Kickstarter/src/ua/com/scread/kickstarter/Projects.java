@@ -28,6 +28,10 @@ public class Projects {
 	public void add(Project project) {
 		projects.add(project);		
 	}
+	
+	public int size() {
+	    return projects.size();
+	}
 
     @Override
     public int hashCode() {

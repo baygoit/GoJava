@@ -1,6 +1,5 @@
 package ua.com.scread.kickstarter;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -13,45 +12,62 @@ public class Controller {
         this.model = model;
         this.io = io;
         this.quote = quote;
-    }
+    }    
     
     public void start() {
-        greed(quote);
-        
+        greed(quote);      
         Categories categories = model.getCategories();
-        boolean exitApp = false;
-        while(!exitApp) {
-        	showCategoies(categories);	
-        	int numberOfCategory = io.read();
-        	if ((numberOfCategory == 0) || (numberOfCategory > categories.getCategories().size()))
-        		break;
-        	Category category = categories.getCategory(numberOfCategory-1);
-        	boolean exitCategories = false;
-        	while (!exitCategories) {
-        		showCategory(category);
-        		List<Project> projects = model.getProjects(category);
-        		showProjects(projects);
-        		int answer = io.read();
-        		if ((answer == 0) || (answer > projects.size()))
-        			break;
-        		Project project = projects.get(answer-1);
-        		boolean exitProjects = false;
-        		while (!exitProjects) {
-        			showFullProject(project); 
-        			int projectOption = io.read();
-        			if (projectOption != 0) {
-        				println("Selected option: ");
-        			} else
-        				println("Exiting from project");
-        			exitProjects = true;
-        		}
-        		if (answer == 0) 
-        			break;
-        	if (numberOfCategory == 0)
-        		break;
-        	}  
-        }
+       	handlingCategories(categories);
         io.print("Thanks for using my program!");
+    }
+    
+    private void handlingCategories(Categories categories) {
+        while (true) {
+            showCategoies(categories);  
+            int answer = io.read();
+            if (checkCategoriesNumber(categories, answer))
+                break;
+            Category category = categories.getCategory(answer-1);
+            showCategory(category);
+            handlingProjects(category);
+        }
+    }
+    
+    private void handlingProjects(Category category) {
+        while (true) {
+            List<Project> projects = model.getProjects(category);
+            showProjects(projects);
+            int answer = io.read();
+            if(checkProjectsNumber(projects, answer))
+                break;
+            handlingFullProject(projects.get(answer-1));
+        }
+    }
+
+    private void handlingFullProject(Project project) {
+        while (true) {
+          showFullProject(project); 
+          int projectOption = io.read();
+          if (projectOption != 0) {
+              println("Selected option: ");
+          } else
+              println("Exiting from project");
+          if (isZero(projectOption))
+              break;
+      }
+        
+    }
+
+    private boolean checkCategoriesNumber(Categories categories, int answer) {
+        return (isZero(answer) || (answer > categories.size()) || (answer < 0));
+    }
+    
+    private boolean checkProjectsNumber(List<Project> projects, int answer) {
+        return (isZero(answer) || (answer > projects.size()) || (answer < 0));
+    }
+
+    private boolean isZero(int answer) {
+        return answer == 0;
     }
     
     private void println() {
@@ -118,5 +134,6 @@ public class Controller {
 		showLine();
 		showExit();
 	}
+	
 
 }
