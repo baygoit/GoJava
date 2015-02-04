@@ -1,14 +1,5 @@
 package ua.com.goit.gojava.andriidnikitin.service;
 
-import java.io.File;
-import java.io.PrintStream;
-import java.util.List;
-
-import javax.xml.bind.JAXBException;
-
-import ua.com.goit.gojava.andriidnikitin.model.Category;
-import ua.com.goit.gojava.andriidnikitin.model.Good;
-import ua.com.goit.gojava.andriidnikitin.model.Warehouse;
 public class Main {
 
 	public static void main(String[] args) {
