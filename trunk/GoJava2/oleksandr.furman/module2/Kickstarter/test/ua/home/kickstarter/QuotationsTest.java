@@ -10,7 +10,6 @@ public class QuotationsTest {
 	public void testRandomQuote() {
 
 		boolean actual = true;
-		boolean expected = true;
 		String randomQuote = new Quotations().randomQuote();
 		String randomQuote1 = new Quotations().randomQuote();
 		String randomQuote2 = new Quotations().randomQuote();
@@ -21,6 +20,6 @@ public class QuotationsTest {
 		if (randomQuote.length() < 1) {
 			actual = false;
 		}
-		assertEquals(actual, expected);
+		assertTrue(actual);
 	}
 }
