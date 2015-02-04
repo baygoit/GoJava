@@ -2,27 +2,34 @@ package ua.com.goit.gojava.andriidnikitin.service;
 
 import static org.junit.Assert.*;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.xml.bind.JAXBException;
 
 import org.junit.Test;
 
 import ua.com.goit.gojava.andriidnikitin.model.Category;
 import ua.com.goit.gojava.andriidnikitin.model.Good;
 import ua.com.goit.gojava.andriidnikitin.service.StorageImpl;
+import ua.com.goit.gojava.andriidnikitin.service.StorageXml;
 
-public class GoodStorageImplTest {
+public class StorageXMLTest {
 	
 	@Test
-	public void constructorTest() {
-		final List<Category> categoryList = new ArrayList<Category>();
-		final List<Good> goodList = new ArrayList<Good>();
-		final StorageImpl store = new StorageImpl()
-												.setCategoryList(categoryList)
-												.setGoodList(goodList);
-		assertEquals(categoryList, store.getCategoryList());
-		assertEquals(goodList, store.getGoodList());
-		
+	public void modifiancTest() throws JAXBException {
+		final StorageXml store = new StorageXml();
+		assertNotNull(store);	
+		Good good = StorageImpl.setId(
+				new Good()	
+					.setName("TEST")
+					.setCategory(store.getCategoryList().get(1))
+					.setPrice(new BigDecimal(45.990778))
+		);
+		store.save(good);
+		store.saveChanges();
+		assertTrue(store.getGoodList(good.getCategory()).contains(good));
 	}
 	
 	@Test

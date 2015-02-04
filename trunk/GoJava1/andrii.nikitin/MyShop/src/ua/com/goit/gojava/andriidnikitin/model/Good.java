@@ -8,7 +8,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
-import ua.com.goit.gojava.andriidnikitin.service.BigDecimalAdapter;
+import ua.com.goit.gojava.andriidnikitin.service.util.BigDecimalAdapter;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Good {

@@ -82,7 +82,7 @@ public class StorageImpl extends StorageAbstract {
 		
 	}
 	
-	private Category setId (Category category) {
+	public static Category setId (Category category) {
 		if (category == null) {
 			return null;
 		}
@@ -92,7 +92,7 @@ public class StorageImpl extends StorageAbstract {
 		return category.setId(result);
 	}
 	
-	private Good setId(Good good) {
+	public static Good setId(Good good) {
 		final int prime = 31;
 		int result = 1;
 		Category category = good.getCategory();

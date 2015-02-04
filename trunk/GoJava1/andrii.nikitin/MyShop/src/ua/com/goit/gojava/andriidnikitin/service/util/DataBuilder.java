@@ -1,7 +1,6 @@
-package ua.com.goit.gojava.andriidnikitin.service;
+package ua.com.goit.gojava.andriidnikitin.service.util;
 
 import java.io.File;
-import java.util.ArrayList;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -19,12 +18,10 @@ public class DataBuilder {
         
         static {
         	try {
-        		//ArrayList<Good> list = new ArrayList<Good>(); TODO - delete
         		JAXB_CONTEXT = JAXBContext.newInstance(						
     					Category.class
     					, Good.class
     					, Warehouse.class
-    					//, list.getClass() TODO - delete
     					);
         	} catch (JAXBException exception){
         		throw new RuntimeException("Failed create JAXBContext. " + exception.getMessage(), exception);
@@ -32,14 +29,12 @@ public class DataBuilder {
         }
         	
         public static Warehouse unmarshall(File file) throws JAXBException{
-        	file = new File("resources/DataFile.xml");//TODO - delete
             Unmarshaller jaxbUnmarshaller = JAXB_CONTEXT.createUnmarshaller();
             Warehouse warehouse = (Warehouse) jaxbUnmarshaller.unmarshal(file); 
             return warehouse; 
         }
         
         public static void marshall(Warehouse warehouse, File file) throws JAXBException{
-        	file = new File("resources/DataFile.xml");//TODO - delete
             Marshaller marshaller = JAXB_CONTEXT.createMarshaller();
             marshaller.marshal(warehouse, file);
         }                

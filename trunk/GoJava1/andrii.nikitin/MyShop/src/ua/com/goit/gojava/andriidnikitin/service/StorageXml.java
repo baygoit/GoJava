@@ -12,6 +12,7 @@ import ua.com.goit.gojava.andriidnikitin.model.Category;
 import ua.com.goit.gojava.andriidnikitin.model.Good;
 import ua.com.goit.gojava.andriidnikitin.model.GoodCollection;
 import ua.com.goit.gojava.andriidnikitin.model.Warehouse;
+import ua.com.goit.gojava.andriidnikitin.service.util.DataBuilder;
 
 public class StorageXml extends StorageAbstract {
 	

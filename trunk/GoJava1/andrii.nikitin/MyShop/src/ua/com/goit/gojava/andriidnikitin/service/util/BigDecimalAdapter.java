@@ -1,4 +1,4 @@
-package ua.com.goit.gojava.andriidnikitin.service;
+package ua.com.goit.gojava.andriidnikitin.service.util;
 
 import java.math.BigDecimal;
 
