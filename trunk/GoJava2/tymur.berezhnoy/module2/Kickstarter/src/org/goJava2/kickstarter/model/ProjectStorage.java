@@ -38,29 +38,30 @@ public class ProjectStorage implements StorageBehavior<Category> {
 		projectsDance = new ArrayList<Project>();
 		projectsGames = new ArrayList<Project>();
 		
-		projectsArt.add(new Project("NY artists", "Some description.", 10000, 200, 25));
-		projectsArt.add(new Project("The observatory", "Little observatory.", 2000, 100, 17));
-		projectsArt.add(new Project("The sing for hope pianos", "The pianos who play in the streat.", 15000, 5000, 30));
+		projectsArt.add(new Project("NY artists", "Some description.", 10000, 200, 25, "There'll be history", "http://www.nyart.com"));
+		projectsArt.add(new Project("The observatory", "Little observatory.", 2000, 100, 17, "There'll be history", "http://www.observatory.com"));
+		projectsArt.add(new Project("The sing for hope pianos", "The pianos who play in the streat.", 15000, 5000, 30, "There'll be history", "http://www.pianos.com"));
 		
-		projectsComics.add(new Project("Super Man", "Comic about a man having super powers.", 50000, 1000, 15));
-		projectsComics.add(new Project("Hulk", "Comics on the green hero named Hulk.", 20000, 100, 50));
-		projectsComics.add(new Project("Spider man", "Little - little spider man.", 4000, 200, 40));
+		projectsComics.add(new Project("Super Man", "Comic about a man having super powers.", 50000, 1000, 15, "There'll be history", "http://www.superman.com"));
+		projectsComics.add(new Project("Hulk", "Comics on the green hero named Hulk.", 20000, 100, 50, "There'll be history", "http://www.hulk.com"));
+		projectsComics.add(new Project("Spider man", "Little - little spider man.", 4000, 200, 40, "There'll be history", "http://www.spiderman.com"));
 		
-		projectsDance.add(new Project("Dance & Fly", "You can dance, you can fly, we belive in you!", 5000, 1000, 15));
+		projectsDance.add(new Project("Dance & Fly", "You can dance, you can fly, we belive in you!", 5000, 1000, 15, "There'll be history", "http://www.df.com"));
 		
-		projectsGames.add(new Project("Tiny Epic Galaxies", "Develop your empire and colonize planets to create the most powerful galaxy!", 100000, 30000, 50));
-		projectsGames.add(new Project("Shadowrun: Hong Kong", "A Shadowrun cyberpunk cRPG set in 2056's Magically Awakened Hong Kong by the developers of Shadowrun Returns & Dragonfall.", 30000, 2000, 33));
-		projectsGames.add(new Project("Starr Mazer", "A retro-sexy Point-and-Click Adventure Shoot 'em Up in SPACE!", 50000, 3000, 20));
+		projectsGames.add(new Project("Tiny Epic Galaxies", "Develop your empire and colonize planets to create the most powerful galaxy!", 100000, 30000, 50, "There'll be history", "http://www.galaxies.com"));
+		projectsGames.add(new Project("Shadowrun: Hong Kong", "A Shadowrun cyberpunk cRPG set in 2056's Magically Awakened Hong Kong by the developers of Shadowrun Returns & Dragonfall.", 30000, 2000, 33, "There'll be history", "http://www.shadowrun.com"));
+		projectsGames.add(new Project("Starr Mazer", "A retro-sexy Point-and-Click Adventure Shoot 'em Up in SPACE!", 50000, 3000, 20, "There'll be history", "http://www.starr mazer.com"));
 		
 		putProjectsToMap();
 	}
 	
 	private void putProjectsToMap() {
 		map = new HashMap<Category, List<Project>>();
-		map.put(StorageFactory.getCategoryStorage().getSpecificContent(0), projectsArt);
-		map.put(StorageFactory.getCategoryStorage().getSpecificContent(1), projectsComics);
-		map.put(StorageFactory.getCategoryStorage().getSpecificContent(2), projectsDance);
-		map.put(StorageFactory.getCategoryStorage().getSpecificContent(3), projectsGames);	
+		CategoryStorage categoryStorage = new StorageFactory().getCategoryStorage();
+		map.put(categoryStorage.getSpecificContent(0), projectsArt);
+		map.put(categoryStorage.getSpecificContent(1), projectsComics);
+		map.put(categoryStorage.getSpecificContent(2), projectsDance);
+		map.put(categoryStorage.getSpecificContent(3), projectsGames);	
 	}
 	
 	@Override

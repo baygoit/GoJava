@@ -31,6 +31,10 @@ public class QuoteStorage implements StorageBehavior<Integer> {
 		this.listOfQuotes = listOfQuotes;
 	}
 	
+	public QuoteStorage(String s) {
+		
+	}
+	
 	public Quote getRandomQuote() {
 		int i = (int)(Math.random() * listOfQuotes.size());
 		return listOfQuotes.get(i);

@@ -2,7 +2,7 @@ package org.goJava2.kickstarter.view;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class Scann {
+public class InOut {
 	
 	public int choice() {
 		boolean inputRight = false;

@@ -4,23 +4,25 @@ import org.goJava2.kickstarter.controller.CategoryController;
 import org.goJava2.kickstarter.controller.ProjectController;
 import org.goJava2.kickstarter.controller.QuoteController;
 import org.goJava2.kickstarter.factory.StorageFactory;
-import org.goJava2.kickstarter.view.Scann;
+import org.goJava2.kickstarter.model.CategoryStorage;
+import org.goJava2.kickstarter.view.InOut;
 import org.goJava2.kickstarter.view.View;
 
 public class Engine {
 	
 	private	View view;
-	private Scann scann;
+	private InOut scann;
 	
 	public Engine() {
 		view = new View(new QuoteController(), new CategoryController(), new ProjectController());
-		scann = new Scann();
+		scann = new InOut();
 	}
 	
 	public void consoleLevel1() {
 		System.out.print("[0 - exit; 1 - * - selec category;]\n> ");
 		int input = scann.choice();
-		if(input > 0 && input <= StorageFactory.getCategoryStorage().getContent().size()) {
+		CategoryStorage storage = new StorageFactory().getCategoryStorage();
+		if(input > 0 && input <= storage.getContent().size()) {
 			view.displaySpecificCategory(input);
 			view.displayProjects();
 			consoleLevel2();

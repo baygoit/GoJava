@@ -10,21 +10,21 @@ public class StorageFactory {
 	private static CategoryStorage categoryStorage;
 	private static ProjectStorage projectStorage;
 	
-	public static QuoteStorage getQuoteStorage() {
+	public QuoteStorage getQuoteStorage() {
 		if(quoteStorage == null) {
 			quoteStorage = new QuoteStorage();
 		}
 		return quoteStorage;
 	}
 	
-	public static CategoryStorage getCategoryStorage() {
+	public CategoryStorage getCategoryStorage() {
 		if(categoryStorage == null) {
 			categoryStorage = new CategoryStorage();
 		}
 		return categoryStorage;
 	}
 	
-	public static ProjectStorage getProjectStorage() {
+	public ProjectStorage getProjectStorage() {
 		if(projectStorage == null) {
 			projectStorage = new ProjectStorage();
 		}

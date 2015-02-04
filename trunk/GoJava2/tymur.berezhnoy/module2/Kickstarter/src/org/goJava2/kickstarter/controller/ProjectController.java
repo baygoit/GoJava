@@ -7,16 +7,23 @@ import org.goJava2.kickstarter.behavior.ControllerBehavior;
 import org.goJava2.kickstarter.content.Category;
 import org.goJava2.kickstarter.content.Project;
 import org.goJava2.kickstarter.factory.StorageFactory;
+import org.goJava2.kickstarter.model.ProjectStorage;
 
 public class ProjectController implements ControllerBehavior<Category> {
 	
+	private ProjectStorage projectStorage;
+	
+	public ProjectController() {
+		projectStorage = new StorageFactory().getProjectStorage();
+	}
+	
 	@Override
 	public Map<Category, List<Project>> passContentToView() {
-		return StorageFactory.getProjectStorage().getContent();
+		return projectStorage.getContent();
 	}
 	
 	@Override
 	public List<Project> passSpecificContentToView(Category t) {
-		return StorageFactory.getProjectStorage().getSpecificContent(t);
+		return projectStorage.getSpecificContent(t);
 	}
 }

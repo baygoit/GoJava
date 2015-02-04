@@ -8,6 +8,7 @@ import org.goJava2.kickstarter.controller.CategoryController;
 import org.goJava2.kickstarter.controller.ProjectController;
 import org.goJava2.kickstarter.controller.QuoteController;
 import org.goJava2.kickstarter.factory.StorageFactory;
+import org.goJava2.kickstarter.model.ProjectStorage;
 
 public class View {
 	
@@ -49,20 +50,20 @@ public class View {
 	public void displayProjects() {
 		int i = 1;
 		for(Project project: projectController.passSpecificContentToView(category)) {
-			System.out.println(i + ") " + project.getName() + "\n" + project.toString());
+			System.out.println(i + ") " + project.getName() + "\n" + project.getShortInfo());
 			i++;
 		}
 	}
 	
 	public void displaySpecificProject(int i) {
 		String newPath = path;
-		
-		List<Project> projects = StorageFactory.getProjectStorage().getSpecificContent(category);
+		ProjectStorage projectStorage = new StorageFactory().getProjectStorage();
+		List<Project> projects = projectStorage.getSpecificContent(category);
 		if(i > projects.size()) {
 			System.out.println("- There are no projet at number: " + i);
 			return;
 		}
 		newPath += projects.get(i - 1).getName().toUpperCase() + "/";
-		System.out.println(newPath + "\nName: " + projects.get(i - 1).getName() + "\n" + projects.get(i - 1).toString());
+		System.out.println(newPath + "\nName: " + projects.get(i - 1).getName() + "\n" + projects.get(i - 1).getFullInfo());
 	}
 }
