@@ -2,6 +2,7 @@ package ua.com.scread.kickstarter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class Controller {
 	private Model model;
@@ -18,7 +19,6 @@ public class Controller {
         greed(quote);
         
         Categories categories = model.getCategories();
-        
         boolean exitApp = false;
         while(!exitApp) {
         	showCategoies(categories);	
@@ -29,7 +29,7 @@ public class Controller {
         	boolean exitCategories = false;
         	while (!exitCategories) {
         		showCategory(category);
-        		ArrayList<Project> projects = model.getProjects(category);
+        		List<Project> projects = model.getProjects(category);
         		showProjects(projects);
         		int answer = io.read();
         		if ((answer == 0) || (answer > projects.size()))
@@ -76,7 +76,7 @@ public class Controller {
 		println("You choosed: " + category.getName());
 	}
 	
-	public void showProjects(ArrayList<Project> projects) {
+	public void showProjects(List<Project> projects) {
 		
         for (Project project : projects) {
         	showProject(project);  

@@ -1,6 +1,6 @@
 package ua.com.scread.kickstarter;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class Model {
 	private Categories categories;
@@ -54,7 +54,7 @@ public class Model {
 		return categories;
 	}
 	
-	public ArrayList<Project> getProjects(Category category) {
+	public List<Project> getProjects(Category category) {
 		return projects.getProjects(category);
 	}
 	
