@@ -43,11 +43,11 @@ public class XMLParser {
 							Element answer = (Element) a;
 							char answerId = answer.getAttribute("id").charAt(0);
 							String answerLine = answer.getAttribute("line");
-							boolean isRight = false;
-							if(answer.getAttribute("isRight").equals("true")) isRight = true;
-							else if(answer.getAttribute("isRight").equals("false")) isRight = false;
+							boolean isCorrect = false;
+							if(answer.getAttribute("isCorrect").equals("true")) isCorrect = true;
+							else if(answer.getAttribute("isCorrect").equals("false")) isCorrect = false;
 							else System.out.println("wrong isRight value in XML");
-							answerList.add(new Answer(answerId, answerLine, isRight));
+							answerList.add(new Answer(answerId, answerLine, isCorrect));
 						}
 					}
 					writeData(questionLine, answerList, questionId);	

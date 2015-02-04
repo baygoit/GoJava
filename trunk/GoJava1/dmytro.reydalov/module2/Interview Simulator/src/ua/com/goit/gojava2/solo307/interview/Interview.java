@@ -8,7 +8,7 @@ public class Interview {
 	private int correctAnswers = 0;
 	private int partiallyCorrectAnswers = 0;
 	private int incorrectAnswers = 0;
-	private List <Question> questions = readFromXml();
+	private List <Question> questions = readFromXml("MeratechTest.xml");
 	
 	public Interview(){
 		
@@ -58,8 +58,8 @@ public class Interview {
 		incorrectAnswers++;
 	}
 	
-	public List<Question> readFromXml(){
-		XMLParser parser = new XMLParser("Questions.xml");
+	public List<Question> readFromXml(String path){
+		XMLParser parser = new XMLParser(path);
 		return parser.questions;
 	}
 	
@@ -70,14 +70,21 @@ public class Interview {
 	
 	public void printQuestionsAndCorrectAnswers(){
 		for(Question question: questions){
-			System.out.println(question.getText());
+			System.out.println("\n" + question.getId() +". " + question.getText());
 			question.printCorrectAnswers();
 		}
 	}
 	
+	public void printQuestionAndAllAnswers(){
+		for(Question question: questions){
+			System.out.println(question.getId() +". " + question.getText() + "\n");
+			question.printAswers();
+		}
+	}	
+	
 	public void printQuestionAndAllAnswers(Question question){
-			System.out.println(question.getText() + "\n");
-			question.printAswers(question);
+			System.out.println(question.getId() +". " + question.getText() + "\n");
+			question.printAswers();
 	}
 	
 	public void printIncorrectAnswers(){

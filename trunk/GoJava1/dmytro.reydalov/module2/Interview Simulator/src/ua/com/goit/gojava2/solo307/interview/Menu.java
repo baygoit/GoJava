@@ -12,8 +12,9 @@ public class Menu {
 	final int START = 2;
 	
 	public Menu(){
-		options.add("\n" + "1. Показать список вопросов и ответов");
-		options.add("2. Начать собеседование");
+		options.add("\n" + "1. Показать список вопросов и правильных ответов");
+		options.add("2. Показать список вопросов и всех ответов");
+		options.add("3. Начать тест");
 		options.add("9. Выход");
 	}
 	
@@ -33,7 +34,7 @@ public class Menu {
 	 
 	public int readInt(){
 		final int NULL = 0;
-		System.out.println("\n" + "Пожалуйста, выберите пункт.");
+		System.out.println("\n" + "Пожалуйста, введите число.");
 		try{
 			return new Integer(new Scanner(System.in).nextInt());
 		} catch(InputMismatchException e){

@@ -12,6 +12,10 @@ public class Question {
 	private String text;
 	private List <Answer> answers = new ArrayList <Answer>();
 	private List <Answer> incorrectAnswers = new ArrayList <Answer>();
+	private List <Character> answeredIds = new ArrayList <Character>();
+	private List <Answer> choosenAnswers = new ArrayList <Answer>();
+	private List <Answer> correctAnswers = new ArrayList <Answer>();
+	private List <Answer> answeredWrong = new ArrayList<Answer>();
 		
 	public Question(){
 		this.text = "there is a question must be here...";
@@ -56,14 +60,46 @@ public class Question {
 	public void setIncorrectAnswers(List<Answer> wrongAnswers) {
 		this.incorrectAnswers = wrongAnswers;
 	}
+	
+	public List<Character> getAnsweredIds() {
+		return answeredIds;
+	}
+
+	public void setAnsweredIds(List<Character> answeredIds) {
+		this.answeredIds = answeredIds;
+	}
+
+	public List<Answer> getChoosenAnswers() {
+		return choosenAnswers;
+	}
+
+	public void setChoosenAnswers(List<Answer> choosenAnswers) {
+		this.choosenAnswers = choosenAnswers;
+	}
+
+	public List<Answer> getCorrectAnswers() {
+		return correctAnswers;
+	}
+
+	public void setCorrectAnswers(List<Answer> correctAnswers) {
+		this.correctAnswers = correctAnswers;
+	}
+
+	public List<Answer> getAnsweredWrong() {
+		return answeredWrong;
+	}
+
+	public void setAnsweredWrong(List<Answer> answeredWrong) {
+		this.answeredWrong = answeredWrong;
+	}
 
 	public void printCorrectAnswers(){
 		for(Answer answer: answers){
-			if(answer.isCorrect)System.out.println("\n" + answer.getText());
+			if(answer.isCorrect)System.out.println(answer.getText());
 		}
 	}
 	
-	public void printAswers(Question question){
+	public void printAswers(){
 		for(Answer answer: answers){
 			answer.printIdAndAnswer();
 		}
