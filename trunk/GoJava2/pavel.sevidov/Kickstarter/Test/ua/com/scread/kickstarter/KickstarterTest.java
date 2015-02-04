@@ -45,7 +45,6 @@ public class KickstarterTest {
         verify(io, times(2)).print("\nChoose category: ");
         verify(io, times(2)).print("[1 - category1, 2 - category2]");
         verify(io).print("You choosed: category1\n");
-        verify(io).print("Thanks for using my program!"); 
     }
 	
 	@Test
@@ -89,6 +88,32 @@ public class KickstarterTest {
         kickstarter.run();
         
         verify(io).print("Thanks for using my program!");
+    }
+	
+	@Test
+    public void shouldProjectDetails_whenChoosedProject() {
+        Categories categories = new Categories();
+        Category category1 = new Category("category1");
+        categories.add(category1);
+        
+        Projects projects = new Projects();
+        Project project = new Project("Project", "Description", 10, 10, 
+                new Details("Some history", "Video link", new FAQ("Question", "Answer")));
+        project.setCategory(category1);
+        projects.add(project);
+      
+        Model model = new Model(categories, projects);
+        IO io = mock(IO.class);
+        QuoteGenerator quote = mock(QuoteGenerator.class);
+        when(quote.getQuote()).thenReturn("quote");
+        when(io.read()).thenReturn(1, 1, 0, 0, 0);
+        
+        KickstarterRunner kickstarter = new KickstarterRunner(model, io, quote);
+        
+        kickstarter.run();
+        
+        verify(io).print("History: Some history\n");
+        verify(io).print("\nFrequently Asked Questions: \n");
     }
 	 
 }
