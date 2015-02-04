@@ -14,8 +14,8 @@ public class Projects {
 		return projects;
 	}
 	
-	public ArrayList<Project> getProjects(Category category) {
-		ArrayList<Project> result = new ArrayList<Project>();
+	public List<Project> getProjects(Category category) {
+		List<Project> result = new ArrayList<Project>();
         for (int index = 0; index < projects.size(); index ++) {
                 Project project = projects.get(index);
                 if (project.getCategory().equals(category)) {
