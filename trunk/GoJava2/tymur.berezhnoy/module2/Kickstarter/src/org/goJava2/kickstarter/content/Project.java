@@ -37,13 +37,13 @@ public class Project {
 	
 	// It's example of optimization.
 	public String getFullInfo() {
-		StringBuilder buffer = new StringBuilder();
-		buffer.append("Description: ").append(description)
+		StringBuilder builder = new StringBuilder();
+		builder.append("Description: ").append(description)
 			.append("\nRequired amount: ").append(requiredAmount).append(symbolDollar)
 			.append("\nTotal: ").append(total).append(symbolDollar)
 			.append("\nDays left: ").append(days)
 			.append("\nStory: ").append(story)
 			.append("\nLink to video: ").append(link);
-		return buffer.toString();
+		return builder.toString();
 	}
 }

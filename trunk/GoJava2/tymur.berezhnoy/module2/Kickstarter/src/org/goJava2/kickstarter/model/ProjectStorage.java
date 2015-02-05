@@ -11,7 +11,7 @@ import org.goJava2.kickstarter.content.Project;
 import org.goJava2.kickstarter.factory.StorageFactory;
 
 public class ProjectStorage implements StorageBehavior<Category> {
-
+	
 	private List<Project> projectsArt;
     private List<Project> projectsComics;
     private List<Project> projectsDance;
@@ -49,7 +49,8 @@ public class ProjectStorage implements StorageBehavior<Category> {
 		projectsDance.add(new Project("Dance & Fly", "You can dance, you can fly, we belive in you!", 5000, 1000, 15, "There'll be history", "http://www.df.com"));
 		
 		projectsGames.add(new Project("Tiny Epic Galaxies", "Develop your empire and colonize planets to create the most powerful galaxy!", 100000, 30000, 50, "There'll be history", "http://www.galaxies.com"));
-		projectsGames.add(new Project("Shadowrun: Hong Kong", "A Shadowrun cyberpunk cRPG set in 2056's Magically Awakened Hong Kong by the developers of Shadowrun Returns & Dragonfall.", 30000, 2000, 33, "There'll be history", "http://www.shadowrun.com"));
+		projectsGames.add(new Project("Shadowrun: Hong Kong", "A Shadowrun cyberpunk cRPG set in 2056's Magically Awakened Hong Kong by the developers of Shadowrun Returns & Dragonfall.",
+										30000, 2000, 33, "There'll be history", "http://www.shadowrun.com"));
 		projectsGames.add(new Project("Starr Mazer", "A retro-sexy Point-and-Click Adventure Shoot 'em Up in SPACE!", 50000, 3000, 20, "There'll be history", "http://www.starr mazer.com"));
 		
 		putProjectsToMap();

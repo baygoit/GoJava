@@ -10,8 +10,11 @@ public class Quote {
 		this.content = content;
 		this.author = author;
 	}
-
+	
 	public String getQuoteContent() {
-		return new String("\"" + content + "\"" + " " + copyrightSymbol + " " + author);
+		StringBuilder builder = new StringBuilder();
+		builder.append("\"").append(content).append("\"")
+			.append(copyrightSymbol).append(" ").append(author);
+		return builder.toString(); 
 	}
 }
