@@ -25,7 +25,7 @@ public class Kickstarter {
 	// Перехожу на описание проекта, где вижу что инфа о количестве пожертвований поменялась
 	// опять же будем ее декомпозировать на части потому как все сразу реализовать будет сложно
 	// Какие части тут есть?
-	// TODO меню конкретного проекта - этого у меня еще нету. Сейчас проверим. Да сейчас выбирая проект я могу посмотреть его описание 
+	// DONE меню конкретного проекта - этого у меня еще нету. Сейчас проверим. Да сейчас выбирая проект я могу посмотреть его описание 
 	// и сразу же выбрать следуюший. Выберите проект: [1...2] или 0 для выхода . Можно сделать для начала так, чтобы у проекта было свое 
 	// меню с одним единственным пунктом - выход.
 	// TODO дальше можно добавить еще один пункт. Оплата, захоя в который программа запросит 
@@ -35,76 +35,110 @@ public class Kickstarter {
 	public void run() {		
 		println(generator.nextQuote());
 		
-		categoryMenu();
+		categoryMenu().run();
 		println("Спасибо за использование нашей программы!");
 	}
 
 	// это у нас меню категорий.
-	private void categoryMenu() {
-		while (true) { // цикл
-			askCategories();  // просим выбрать что-то
-			int menu = io.read(); // читаем номер меню
-			if (menu == 0) {  // если 0 - выходим
-				break; 
+	private Menu categoryMenu() {
+		// создаем меню категорий, передаем в него нашего io для работы с вводом выводом 
+		return new Menu(io) {
+			// этот метод вызовется тогда когда мы выберем какой-то пункт меню (не 0)
+			@Override
+			// на вход приейдет выбранный объект
+			Menu nextMenu(Object selected) {
+				// мы знаем что это категория потому переопределим его
+				Category category = (Category)selected;
+								
+				// сделаем то что должны
+				Project[] found = projects.getProjects(category); // печатаем детали по выбору
+				printProjects(found);	
+				
+				// и покажем меню проектов категории
+				return projectsMenu(found); 
 			}
-			
-			Category category = chooseCategory(menu); // иначе выбираем
-			if (category == null) { // если нет ничего, начинаем с начала 
-				continue; 
+
+			// А этот метод у нас вызовется сразу после того как пользователь введет циферку
+			@Override
+			Object choose(int menu) {
+				// тут мы выбираем категорию
+				return chooseCategory(menu); // выбираем
 			}
-			
-			Project[] found = projects.getProjects(category); // печатаем детали по выбору
-			printProjects(found);			
-			projectsMenu(found); // переходим в подменю, в котором
-		}
+
+			@Override
+			// А этот пункт меню вызовется, когда мы тольтко только зайдем в меню в самом начале
+			void ask() {
+				askCategories();  // просим выбрать что-то
+			}
+		};
 	}
 
 	// это меню проекты
-	private void projectsMenu(Project[] found) {
-		while (true) {  // тот же цикл
-			askProjects(found); // просим выбрать что-то
+	// так же и тут
+	private Menu projectsMenu(final Project[] found) {
+		// создаем меню и передаем ему ввод-вывод
+		return new Menu(io) {
+			// вызовется, когда мы выберем что-то в этом меню
+			@Override
+			Menu nextMenu(Object selected) {
+				// Мы точно знаем что тут будет проект
+				Project project = (Project)selected;
+				
+				chooseProject(project); // печатаем детали по выбору 													
+				printProjectDetails(project);
+				// возвращаем конкретное меню проекта
+				return projectMenu(project); 
+			}
 
-			int menu = io.read(); // читаем номер меню
-			if (menu == 0) { // Если ноль то выходим из меню
-				break; 
+			// тут делаем выбор
+			@Override
+			Object choose(int menu) {
+				return chooseProject(menu, found); // иначе выбираем
 			}
-			
-			Project project = chooseProject(menu, found); // иначе выбираем
-			if (project == null) { // если не то выбрали то в начало
-				continue;
+
+			// тут печатаем заголовок меню
+			@Override
+			void ask() {
+				askProjects(found); // просим выбрать что-то
 			}
-			
-			chooseProject(project); // печатаем детали по выбору 													
-			printProjectDetails(project);
-			// ну по аналогии получается что тут добавим
-			projectMenu(project); // заходим в подменю
-		}
+		};
 	}
 	// это все общий алгоритм работы меню, и он уже требует чтобы его выделили, потому как уже в третий раз прийдется его дублировать
 	// вопрос в том, как это сделать так, чтобы при этом в кикстартере осталась конкретика что делается в каждом меню, а 
 	// в класс Меню ушла абстрактная часть. Разберемся позже TODO. А сейчас пока что сделаем копипастом 
-
+    // Я бы сейчас занялся выносом логики меню. Хороший такой себе реакториг получится!
+	
 	// пока это все у нас какого-то такого себе процедурного стиля и чем дальше в лес, 
 	// тем больше в Кикстартере ответственности за логику работы программы вместе с логикой хождения по меню. 
 	// думаю вскоре надо будет выделить класс Меню из Кикстартаера, поскольку я уже вижу его внутренности. 
 	// посмотри сам(а)
-	private void projectMenu(Project project) {
-		while (true) {  // тот же цикл
-			askProject(project); // просим выбрать что-то
-
-			int menu = io.read(); // читаем номер меню
-			if (menu == 0) { // Если ноль то выходим из меню
-				break; 
-			}
-			
-			// TODO тут логика работы с разными выборами меню
-			if (menu == 1) {
-				println("Спасибо, что хотите помочь проекту!");
-				// как по мне готово! Теперь осталось покрыть это все дело тестами
-				// скорее всего старые тесты поломаются, но ничего!
+	// и так же тут
+	private Menu projectMenu(final Project project) {
+		return new Menu(io) {
+			// выбрали меню и обрабатываем его
+			@Override
+			Menu nextMenu(Object selected) {
+				Integer menu = (Integer)selected;
 				
+				if (menu == 1) {
+					println("Спасибо, что хотите помочь проекту!");
+				}
+				
+				return null;  // тут надо обработать null в базовом классе
 			}
-		}
+
+			// выбираем циферкой
+			@Override
+			Object choose(int menu) {
+				return menu;
+			}
+
+			// заголовок меню
+			@Override
+			void ask() {
+				askProject(project); // просим выбрать что-то	
+			}
+		};
 	}
 
 	private void askProject(Project project) {
