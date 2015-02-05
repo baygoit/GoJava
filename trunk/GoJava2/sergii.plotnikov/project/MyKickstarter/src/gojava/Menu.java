@@ -19,5 +19,28 @@ public class Menu {
 		}
 	}
 	
+	public String stringInputCheck(IO io){
+		String input = io.stringInput();
+		if (input.equals("")){
+			io.out("Wrong input!!!\nType again!");
+			return stringInputCheck(io);
+		}else if(input.equals("0")){
+			return "0";
+		}else{
+			return input;
+		}
+	}
+
+	public String cardInputCheck(IO io) {
+		String input = io.stringInput();
+		if (input.equals("")||input.length()<16){
+			io.out("Wrong card number!!!\nType again!");
+			return cardInputCheck(io);
+		}else if(input.equals("0")){
+			return "0";
+		}else{
+			return input;
+		}
+	}
 	
 }

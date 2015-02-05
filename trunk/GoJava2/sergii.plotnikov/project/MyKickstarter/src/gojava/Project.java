@@ -1,13 +1,14 @@
 package gojava;
 
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
+
 
 public class Project {
 	
 	private Description descr = new Description();
 	private FAQ myFaq = new FAQ();
 	private List <Payment> payments = new LinkedList<Payment>();
+	private List <Reward> rewards = new LinkedList <Reward>();
 	
 	int positions=2;
 	
@@ -20,6 +21,7 @@ public class Project {
 		projectValue=10000;
 		recievedMoney=0;
 		daysLeft=7;	
+		fillRewards();
 	}
 	
 	public String getTitle(){ return descr.getTitle();}
@@ -49,6 +51,19 @@ public class Project {
 		return result;
 	}
 	
+	public String showRewards(){
+		String result="";
+		int num = 1;
+		for(int i = 0; i < rewards.size(); i++){
+			result+=num + " - " + getReward(i).getAmount() + "$, " + 
+					getReward(i).getRewardDescr() + "\n";
+			num++;
+		}
+		result+=num + " - Another amount\n0 - Go back\n";
+		
+		return result;
+	}
+	
 	public void addQuestion(String q){
 		myFaq.addQuestion(q);
 	}
@@ -58,6 +73,17 @@ public class Project {
 		payments.add(p);		
 	}
 	
-	
+	public void fillRewards(){
+		rewards.add(new Reward(1, "thanks!"));
+		rewards.add(new Reward(5, "thank you!"));
+		rewards.add(new Reward(10, "THANK YOU!"));
+	}
 
+	public Reward getReward(int i){
+		return rewards.get(i);
+	}
+	
+	public int getRewardsLength() {
+		return rewards.size();
+	}	
 }
