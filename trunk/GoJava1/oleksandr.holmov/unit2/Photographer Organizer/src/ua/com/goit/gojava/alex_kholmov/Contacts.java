@@ -7,7 +7,7 @@ package ua.com.goit.gojava.alex_kholmov;
  * @author SASH
  *
  */
-public class Contacts {
+public class Contacts implements ShowInfo{
     private String name;
     private String address;
     private String phone;
@@ -37,9 +37,9 @@ public class Contacts {
         this.phone = phone;
     }
 
-    void printInfo() {
-        System.out.println("Name: " + name);
-        System.out.println("Address: " + address);
-        System.out.println("Phone: " + phone);
+    public void displayInfo() {
+        System.out.println("Имя или наименование: " + name);
+        System.out.println("Адрес: " + address);
+        System.out.println("Телефон: " + phone);
     }
 }

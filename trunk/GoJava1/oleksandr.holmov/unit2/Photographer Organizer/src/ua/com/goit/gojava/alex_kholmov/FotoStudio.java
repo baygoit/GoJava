@@ -4,6 +4,7 @@
 package ua.com.goit.gojava.alex_kholmov;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -11,30 +12,46 @@ import java.util.GregorianCalendar;
  * @author SASH
  *
  */
-public class FotoStudio extends Contacts {
-    private Calendar reserveDate;
-    private int reserveTime;
+public class FotoStudio implements ShowInfo{
+    private Contacts contacts;
+    private String additionalInfo;
+    ArrayList<Reserve> reservs = new ArrayList<Reserve>();
+
+    public FotoStudio(Contacts contacts, String additionalInfo) {
+        // TODO Auto-generated constructor stub
+        this.contacts = contacts;
+        this.additionalInfo = additionalInfo;
+    }
     
-    public FotoStudio(String name, String address, String phone, int reservTime) {
-        super(name, address, phone);
-        this.reserveTime = reservTime;
+    void addReserv(Reserve reserv) {
+        reservs.add(reserv);
+    }
+    
+    void removeReserv(Reserve reserv) {
+        reservs.remove(reserv);
     }
 
-    int getReserveTime() {
-        return reserveTime;
+    Contacts getContacts() {
+        return contacts;
     }
-    void setReserveTime(int reserveTime) {
-        this.reserveTime = reserveTime;
+
+    void setContacts(Contacts contacts) {
+        this.contacts = contacts;
+    }
+
+    String getAdditionalInfo() {
+        return additionalInfo;
+    }
+
+    void setAdditionalInfo(String additionalInfo) {
+        this.additionalInfo = additionalInfo;
     }
     
-    void displayReserveDateTime() {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy hh:mm");
-        System.out.println(dateFormat.format(reserveDate.getTime()));
-        System.out.println("Time to work in studio " + reserveTime + " hours");
-    }
-    
-    void setReserveDate(int year, int month, int date, int hourOfDay, int minute) {
-        reserveDate = new GregorianCalendar();
-        reserveDate.set(year, Calendar.MONTH, date, hourOfDay, minute);
+    public void displayInfo() {
+        contacts.displayInfo();
+        System.out.println(additionalInfo);
+        for (Reserve reserve : reservs) {
+            reserve.displayInfo();
+        }
     }
 }

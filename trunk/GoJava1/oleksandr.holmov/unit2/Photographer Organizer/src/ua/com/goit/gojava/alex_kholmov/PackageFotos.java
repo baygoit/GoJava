@@ -7,16 +7,17 @@ package ua.com.goit.gojava.alex_kholmov;
  * @author SASH
  *
  */
-public class PackageFotos {
+public class PackageFotos implements ShowInfo{
     private String describePackage;
     private int amountFotos;
     private int timeEditingFoto; //minutes
-    private int timeReserve;     //percents
+    private int percentReserve;  //percents
 
-    public PackageFotos(int amountFotos, int timeEditingFoto, int timeReserve) {
+    public PackageFotos(String describePackage, int amountFotos, int timeEditingFoto, int percentReserve) {
+        this.describePackage = describePackage;
         this.amountFotos = amountFotos;
         this.timeEditingFoto = timeEditingFoto;
-        this.timeReserve = timeReserve;
+        this.percentReserve = percentReserve;
     }
     
     
@@ -28,7 +29,7 @@ public class PackageFotos {
         result = prime * result
                 + ((describePackage == null) ? 0 : describePackage.hashCode());
         result = prime * result + timeEditingFoto;
-        result = prime * result + timeReserve;
+        result = prime * result + percentReserve;
         return result;
     }
 
@@ -50,7 +51,7 @@ public class PackageFotos {
             return false;
         if (timeEditingFoto != other.timeEditingFoto)
             return false;
-        if (timeReserve != other.timeReserve)
+        if (percentReserve != other.percentReserve)
             return false;
         return true;
     }
@@ -82,16 +83,19 @@ public class PackageFotos {
     }
     
     int getTimeReserve() {
-        return timeReserve;
+        return percentReserve;
     }
     
     void setTimeReserve(int timeReserve) {
-        this.timeReserve = timeReserve;
+        this.percentReserve = timeReserve;
     }
-    //return in hours
-    public int timeEditingAllFotos() {
-        int allTime = timeEditingFoto * amountFotos;
-        int editAllFotos = allTime + ((allTime * timeReserve) / 100);
-        return editAllFotos / 60;
+
+    @Override
+    public void displayInfo() {
+        // TODO Auto-generated method stub
+        System.out.println("Описание пакета фотографий: " + describePackage);
+        System.out.println("Количество фотографий в пакете: " + amountFotos);
+        System.out.println("Время на редактирование одной фотографии: " + timeEditingFoto);
+        System.out.println("Резерв времени на редактирование всего пакета в %: " + percentReserve);
     }
 }

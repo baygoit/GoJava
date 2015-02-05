@@ -8,5 +8,5 @@ package ua.com.goit.gojava.alex_kholmov;
  *
  */
 interface ShowInfo {
-    public void printInfo(Object o);
+    public void displayInfo();
 }

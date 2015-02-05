@@ -75,7 +75,5 @@ public class Order {
         System.out.println("Дата окончания работ по договору: " + dateFormat.format(deadline.getTime()));
         System.out.println("Дата начала работы: " + dateFormat.format(startWork.getTime()));
         System.out.println("Посчитанная дата окончания работы: " + dateFormat.format(endWork.getTime()));
-        customer.printInfo();
-        fotoStudio.printInfo();
     }
 }
