@@ -39,83 +39,55 @@ public class Kickstarter {
 		println("Спасибо за использование нашей программы!");
 	}
 
-	// это у нас меню категорий.
 	private Menu categoryMenu() {
-		// создаем меню категорий, передаем в него нашего io для работы с вводом выводом 
 		return new Menu(io) {
-			// этот метод вызовется тогда когда мы выберем какой-то пункт меню (не 0)
 			@Override
-			// на вход приейдет выбранный объект
 			Menu nextMenu(Object selected) {
-				// мы знаем что это категория потому переопределим его
 				Category category = (Category)selected;
 								
-				// сделаем то что должны
-				Project[] found = projects.getProjects(category); // печатаем детали по выбору
+				Project[] found = projects.getProjects(category); 
 				printProjects(found);	
 				
-				// и покажем меню проектов категории
 				return projectsMenu(found); 
 			}
 
-			// А этот метод у нас вызовется сразу после того как пользователь введет циферку
 			@Override
 			Object choose(int menu) {
-				// тут мы выбираем категорию
-				return chooseCategory(menu); // выбираем
+				return chooseCategory(menu); 
 			}
 
 			@Override
-			// А этот пункт меню вызовется, когда мы тольтко только зайдем в меню в самом начале
 			void ask() {
-				askCategories();  // просим выбрать что-то
+				askCategories();  
 			}
 		};
 	}
 
-	// это меню проекты
-	// так же и тут
 	private Menu projectsMenu(final Project[] found) {
-		// создаем меню и передаем ему ввод-вывод
 		return new Menu(io) {
-			// вызовется, когда мы выберем что-то в этом меню
 			@Override
 			Menu nextMenu(Object selected) {
-				// Мы точно знаем что тут будет проект
 				Project project = (Project)selected;
 				
-				chooseProject(project); // печатаем детали по выбору 													
+				chooseProject(project); 													
 				printProjectDetails(project);
-				// возвращаем конкретное меню проекта
 				return projectMenu(project); 
 			}
 
-			// тут делаем выбор
 			@Override
 			Object choose(int menu) {
-				return chooseProject(menu, found); // иначе выбираем
+				return chooseProject(menu, found); 
 			}
 
-			// тут печатаем заголовок меню
 			@Override
 			void ask() {
-				askProjects(found); // просим выбрать что-то
+				askProjects(found); 
 			}
 		};
 	}
-	// это все общий алгоритм работы меню, и он уже требует чтобы его выделили, потому как уже в третий раз прийдется его дублировать
-	// вопрос в том, как это сделать так, чтобы при этом в кикстартере осталась конкретика что делается в каждом меню, а 
-	// в класс Меню ушла абстрактная часть. Разберемся позже TODO. А сейчас пока что сделаем копипастом 
-    // Я бы сейчас занялся выносом логики меню. Хороший такой себе реакториг получится!
 	
-	// пока это все у нас какого-то такого себе процедурного стиля и чем дальше в лес, 
-	// тем больше в Кикстартере ответственности за логику работы программы вместе с логикой хождения по меню. 
-	// думаю вскоре надо будет выделить класс Меню из Кикстартаера, поскольку я уже вижу его внутренности. 
-	// посмотри сам(а)
-	// и так же тут
 	private Menu projectMenu(final Project project) {
 		return new Menu(io) {
-			// выбрали меню и обрабатываем его
 			@Override
 			Menu nextMenu(Object selected) {
 				Integer menu = (Integer)selected;
@@ -124,25 +96,22 @@ public class Kickstarter {
 					println("Спасибо, что хотите помочь проекту!");
 				}
 				
-				return null;  // тут надо обработать null в базовом классе
+				return null; 
 			}
 
-			// выбираем циферкой
 			@Override
 			Object choose(int menu) {
 				return menu;
 			}
 
-			// заголовок меню
 			@Override
 			void ask() {
-				askProject(project); // просим выбрать что-то	
+				askProject(project); 	
 			}
 		};
 	}
 
 	private void askProject(Project project) {
-		// а нет, у нас жеж уже нельзя использовать консоль напрямую. Теперь для печати мы пользуемся 
 		println("Выберите что хотите сделать с проектом: \n"
 				+ "[0 - выйти к списку проектов, 1 - инвестировать в проект]");
 	}

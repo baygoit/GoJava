@@ -200,14 +200,10 @@ public class KickstarterTest {
 		verify(io, times(2)).print("Выберите что хотите сделать с проектом: \n"
 				+ "[0 - выйти к списку проектов, 1 - инвестировать в проект]\n");
 		verify(io).print("Спасибо, что хотите помочь проекту!\n");
-		// иногда ошибешься в один символ и не поймешь в чем дело. Моки удобная штука, но в суппорте потом тесты сложнее держать
-		// в тонусе. Если моков слишком много может случиться mock hell
 	}
 	
 	@Test
-	// гуглите Mockito
-	// http://www.slideshare.net/nunafig/mockito-12079903 
-	public void mockTest() {
+	public void shouldSelectCtegoryWithoutProjects() {
   	    // given
 		Categories categories = new Categories();
 		categories.add(new Category("category1"));
