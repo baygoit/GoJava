@@ -5,14 +5,14 @@ import ua.com.goit.gojava.m__jane.model.question.Question;
 public abstract class Answer {
 	
 	private Question question;
-	private StatusAnswer statusAnswer;
+	private AnswerStatus answerStatus;
 
-	public StatusAnswer getStatusUserAnswer() {
-		return statusAnswer;
+	public AnswerStatus getStatusUserAnswer() {
+		return answerStatus;
 	}
 
-	public void setStatusUserAnswer(StatusAnswer statusAnswer) {
-		this.statusAnswer = statusAnswer;
+	public void setStatusUserAnswer(AnswerStatus answerStatus) {
+		this.answerStatus = answerStatus;
 	}
 
 	public Question getQuestion() {

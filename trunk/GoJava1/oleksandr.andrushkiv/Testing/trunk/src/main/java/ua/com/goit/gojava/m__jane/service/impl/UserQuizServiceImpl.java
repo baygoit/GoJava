@@ -6,7 +6,7 @@ import ua.com.goit.gojava.m__jane.model.Quiz;
 import ua.com.goit.gojava.m__jane.model.User;
 import ua.com.goit.gojava.m__jane.model.UserQuiz;
 import ua.com.goit.gojava.m__jane.model.answer.Answer;
-import ua.com.goit.gojava.m__jane.model.answer.StatusAnswer;
+import ua.com.goit.gojava.m__jane.model.answer.AnswerStatus;
 import ua.com.goit.gojava.m__jane.model.question.Question;
 import ua.com.goit.gojava.m__jane.service.QuestionService;
 import ua.com.goit.gojava.m__jane.service.UserQuizService;
@@ -32,7 +32,7 @@ public class UserQuizServiceImpl implements UserQuizService {
 		List<Answer> answerList = new ArrayList<>();		
 		for (Question question : questionService.getQuestionList(quiz.getCategoryList())) {
 			Answer answer = question.createTemplateAnswer();
-			answer.setStatusUserAnswer(StatusAnswer.NEW);
+			answer.setStatusUserAnswer(AnswerStatus.NEW);
 			answerList.add(answer);
 		}
 		

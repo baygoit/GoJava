@@ -10,7 +10,7 @@ public class UserQuiz {
 	//private Integer openQuestionResult;
 	//private Integer closedQuestionResult;
 		
-	private Date testingDate;
+	private Date date;
 	private List<Answer> answerList;
 	//private QuestionService questionService;
 	
@@ -32,14 +32,15 @@ public class UserQuiz {
 	
 	/*-------setters/getters---------*/
 	
-	public Date getTestingDate() {
-		return testingDate;
-	}
-	public void setTestingDate(Date testingDate) {
-		this.testingDate = testingDate;
-	}
+	
 	public List<Answer> getAnswerList() {
 		return answerList;
+	}
+	public Date getDate() {
+		return date;
+	}
+	public void setDate(Date date) {
+		this.date = date;
 	}
 	public void setAnswerList(List<Answer> answerList) {
 		this.answerList = answerList;
