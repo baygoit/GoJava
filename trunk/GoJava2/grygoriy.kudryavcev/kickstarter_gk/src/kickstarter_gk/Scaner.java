@@ -4,11 +4,8 @@ import java.util.Scanner;
 
 
 public class Scaner {
-    private Scanner scanner;
+    private Scanner scanner = new Scanner(System.in);
     
-    public Scaner() {
-    	scanner = new Scanner(System.in);
-    	    }
     
     public int Input () {
       return scanner.nextInt();

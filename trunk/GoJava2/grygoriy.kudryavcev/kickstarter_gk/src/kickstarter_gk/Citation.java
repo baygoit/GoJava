@@ -17,7 +17,7 @@ public class Citation {
 		 		 		 
 		 String cit =  allCitations.get(rnd);
 		 
-		  return cit;
+		 return cit;
 	 }
 	
 }
