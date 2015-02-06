@@ -10,11 +10,14 @@ public class KickstarterFakeIOTest {
 	public void mockTest() {
         // given
             Categories categories = new Categories();
+            
+            
             categories.fillCategories();
            
             IO io = mock(IO.class);
+            InputCheck check = new InputCheck(io);
            
-            Kickstarter kickstarter = new Kickstarter(categories, io);
+            Kickstarter kickstarter = new Kickstarter(categories, io, check);
            
             
             when(io.input()).thenReturn(1, 1, 0, 0, 2,0,5,0);

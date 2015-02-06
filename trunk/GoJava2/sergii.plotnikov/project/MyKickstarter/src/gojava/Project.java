@@ -2,31 +2,43 @@ package gojava;
 
 import java.util.*;
 
-
 public class Project {
-	
-	private Description descr = new Description();
-	private FAQ myFaq = new FAQ();
-	private List <Payment> payments = new LinkedList<Payment>();
-	private List <Reward> rewards = new LinkedList <Reward>();
-	
-	int positions=2;
+	private Description descr;
+	private Map <Integer, Object> positions;
 	
 	private int projectValue;
 	private int recievedMoney;
 	private int daysLeft;
 		
 	public Project(String title){ 
+		descr = new Description();
+		positions = new HashMap<Integer, Object>();
 		descr.initTitle(title);
 		projectValue=10000;
 		recievedMoney=0;
 		daysLeft=7;	
-		fillRewards();
+		positions.put(0, new FAQ());
+		positions.put(1, new Payments());
 	}
 	
 	public String getTitle(){ return descr.getTitle();}
+	public String getShortDescr() { return descr.getShortDescr();}
 
-	public String getShortDescr() {	return descr.getShortDescr();}
+	public int getPositionsLength() { return positions.size();}
+
+	public FAQ getFaq(){ return (FAQ) positions.get(0);}
+	public void addQuestion(String q){ getFaq().addQuestion(q);}
+	
+	public Payments getPayments(){ return (Payments) positions.get(1);}
+	
+	public int getRewardsLength() { return getPayments().getRewardsLength();}
+	public int getRewardPrice(int i) { return getPayments().getReward(i).getAmount();}
+	public String showRewards() { return getPayments().showRewards();}
+	
+	public void makePayment(Payment p, int amount) {
+		recievedMoney+=amount;
+		getPayments().makePayment(p);
+	}	
 	
 	public String shortProjectDescr(){
 		String result=getTitle()+"\n";
@@ -45,45 +57,9 @@ public class Project {
 		result+=descr.getProjectStory()+"\n";
 		result+=descr.getLink()+"\n";
 		result+="--------------------------"+"\n";
-		result+=myFaq.showFAQ();
+		result+=getFaq().showFAQ();
 		result+="1 - Ask question\n2 - Invest\n0 - Go back\n";
 		
 		return result;
 	}
-	
-	public String showRewards(){
-		String result="";
-		int num = 1;
-		for(int i = 0; i < rewards.size(); i++){
-			result+=num + " - " + getReward(i).getAmount() + "$, " + 
-					getReward(i).getRewardDescr() + "\n";
-			num++;
-		}
-		result+=num + " - Another amount\n0 - Go back\n";
-		
-		return result;
-	}
-	
-	public void addQuestion(String q){
-		myFaq.addQuestion(q);
-	}
-
-	public void makePayment(Payment p, int amount) {
-		recievedMoney+=amount;
-		payments.add(p);		
-	}
-	
-	public void fillRewards(){
-		rewards.add(new Reward(1, "thanks!"));
-		rewards.add(new Reward(5, "thank you!"));
-		rewards.add(new Reward(10, "THANK YOU!"));
-	}
-
-	public Reward getReward(int i){
-		return rewards.get(i);
-	}
-	
-	public int getRewardsLength() {
-		return rewards.size();
-	}	
 }

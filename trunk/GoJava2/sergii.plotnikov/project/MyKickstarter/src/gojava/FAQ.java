@@ -1,11 +1,11 @@
 package gojava;
 import java.util.ArrayList;
 
-
 public class FAQ {
-	private ArrayList<Questions> faq = new ArrayList<Questions>();
+	private ArrayList<Questions> faq;
 	
 	public FAQ(){
+		faq = new ArrayList<Questions>();
 		for(int i = 0; i<3; i++){
 			Questions q = new Questions();
 			faq.add(q);
@@ -23,14 +23,7 @@ public class FAQ {
 		return result;
 	}
 	
-	public void addQuestion(String q){
-		Questions question = new Questions(q);
-		faq.add(question);
-	}
+	public void addQuestion(String q){ faq.add(new Questions(q));}
 	
-	public Questions getQuestion(int i){
-		return faq.get(i);
-	}
-	
-	
+	public Questions getQuestion(int i){ return faq.get(i);}
 }

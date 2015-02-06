@@ -4,12 +4,13 @@ public class Kickstarter {
 
 	private Categories categories;
 	private IO io;
-	private Menu menu;
+	private InputCheck check;
 	
-	public Kickstarter(Categories categories, IO io){
+	public Kickstarter(Categories categories, IO io, InputCheck check){
 		this.categories=categories;
 		this.io=io;
-		menu = new Menu(io);
+		this.check=check;
+		
 	}
 
 	public void run() {
@@ -21,42 +22,66 @@ public class Kickstarter {
 	}
 	
 	public void categoriesMenu() {
-		while(true){
-			io.out("Choose a category:\n" + categories.showCategories());
-						
-			int choice=menu.menuInputCheck(categories.getLength());
-			if(choice==0){break;}
+		Menu menu = new Menu(check){
+								
+			@Override
+			public Object getObject(int choice) {
+				return categories.getCategory(choice - 1);
+			}
 			
-			Category tempCategory = categories.getCategory(choice - 1);
-			
-			categoryMenu(tempCategory);
-			
-		}
+			@Override
+			public void nextSubmenu(Object object, int choice) {
+				categoryMenu((Category) object);
+			}
+
+			@Override
+			public void showPositions() {
+				io.out("Choose a category:\n" + categories.showCategories());
+			}
+		};
+		menu.run(categories.getLength());
 	}
 
 	public void categoryMenu(Category tempCategory) {
-		while(true){
-			io.out(tempCategory.showProjects());
+		Menu menu = new Menu(check){
 			
-			int choice = menu.menuInputCheck(tempCategory.getLength());
-			if(choice==0){break;}
+			@Override
+			public Object getObject(int choice) {
+				return tempCategory.getProject(choice-1);
+			}
 			
-			Project tempProject = tempCategory.getProject(choice-1);
-			
-			projectMenu(tempProject);
-			
-		}
+			@Override
+			public void nextSubmenu(Object object, int choice) {
+				projectMenu((Project) object);
+			}
+
+			@Override
+			public void showPositions() {
+				io.out(tempCategory.showProjects());
+			}
+		};
+		menu.run(tempCategory.getLength());
 	}
 
 	public void projectMenu(Project tempProject) {
-		while(true){
-			io.out(tempProject.showProject());
+		Menu menu = new Menu(check){
 			
-			int choice = menu.menuInputCheck(tempProject.positions);
-			if(choice==0){break;}
-			
-			inProjectMenu(tempProject, choice);
-		}
+			@Override
+			public Object getObject(int choice) {
+				return tempProject;
+			}
+
+			@Override
+			public void nextSubmenu(Object object, int choice) {
+				inProjectMenu((Project)object, choice);
+			}
+
+			@Override
+			public void showPositions() {
+				io.out(tempProject.showProject());
+			}
+		};
+		menu.run(tempProject.getPositionsLength());
 	}
 
 	public void inProjectMenu(Project tempProject, int choice){
@@ -64,7 +89,7 @@ public class Kickstarter {
 			switch(choice){
 			case 1:
 				io.out("Type your question:\n0 - Go back");
-				String question = menu.stringInputCheck();
+				String question = check.stringInputCheck();
 				if(question=="0"){
 					break;
 				}else{
@@ -73,21 +98,21 @@ public class Kickstarter {
 				break;
 			case 2:
 				io.out("You'll get next rewards:\n" + tempProject.showRewards());
-				choice = menu.menuInputCheck(tempProject.getRewardsLength()+1);
+				choice = check.menuInputCheck(tempProject.getRewardsLength()+1);
 				if(choice==0){break;}
 				
 				int amount=0;
 				if(choice<tempProject.getRewardsLength()){
-					amount=tempProject.getReward(choice-1).getAmount();
+					amount=tempProject.getRewardPrice(choice-1);
 				}
 				
 				io.out("Type your name:");
-				String name = menu.stringInputCheck();
+				String name = check.stringInputCheck();
 				if(name=="0"){
 					break;
 				}
 				io.out("Type your card number:");
-				String card = menu.cardInputCheck();
+				String card = check.cardInputCheck();
 				if(card=="0"){
 					break;
 				}
