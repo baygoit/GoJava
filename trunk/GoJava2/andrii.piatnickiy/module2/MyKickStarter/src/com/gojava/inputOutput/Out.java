@@ -25,10 +25,6 @@ public class Out {
         System.out.println(string);
     }
 
-    public void printSb(Object object) {
-        System.out.println(object);
-    }
-
     public String printProjectPreview(IProject project) {
         StringBuffer sb = new StringBuffer();
         sb.append("Project Name: ").append(project.getName()).append("\n");

@@ -1,6 +1,6 @@
 package com.gojava.view;
 
-import com.gojava.input.Out;
+import com.gojava.inputOutput.Out;
 import com.gojava.projects.ProjectManager;
 
 public class Level2 implements Level {

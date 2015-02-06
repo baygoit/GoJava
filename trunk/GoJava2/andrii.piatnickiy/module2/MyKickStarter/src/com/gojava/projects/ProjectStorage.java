@@ -27,8 +27,8 @@ public class ProjectStorage {
             }
         }
     }
-    
-    //TODO refactoring like code below
+
+    // TODO refactoring like code below
     // public Project getSpecificProject(int categoryNumber, int projectNumber)
     // {
     // int i = 1;
@@ -42,8 +42,7 @@ public class ProjectStorage {
     // }
     // return null;
     // }
-    
-    
+
     public void getSpecificProject(int categoryNumber, int projectNumber) {
         int i = 1;
         for (Project project : projectStorageList) {
