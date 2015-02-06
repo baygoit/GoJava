@@ -31,8 +31,17 @@ public class UserAccountTest {
     @Test
     public void testNewbornCharacterSkillList() {
         UserAccount account = UserAccount.createAccount("mylogin", "mypassword");
-        UserAccount.createCharacterInAccount(account, "MegaPihar2000");
+        try {
+            UserAccount.createCharacterInAccount(account, "MegaPihar2000");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         Actor actor = account.getActor();
         assertNotNull(actor.getSkills());
+    }
+    @Test(expected=HackitWrongParameterException.class)
+    public void testException() throws Exception {
+        UserAccount account = UserAccount.createAccount("mylogin", "mypassword");
+        account.setCharacter(null);
     }
 }

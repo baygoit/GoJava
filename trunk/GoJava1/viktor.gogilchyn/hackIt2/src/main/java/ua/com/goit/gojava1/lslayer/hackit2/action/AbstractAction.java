@@ -36,19 +36,19 @@ public abstract class AbstractAction implements Action {
 
     protected boolean checkSuccess(ParameterObject arg) {
         int bonus = 0;
-        if (arg.actor != null) {  
+        try {
             bonus += arg.actor.getSkill(commandToInvoke);
-        }
-        if (arg.tool != null) {
-            bonus += arg.tool.getPurposeValue(commandToInvoke); 
-        }
+        } catch (Exception e) {}; 
+        try {
+            bonus += arg.tool.getPurposeValue(commandToInvoke);
+        } catch (Exception e) {}
         int antibonus = 0;
-        if (arg.targetGear != null ) {
+        try {
             antibonus += arg.targetGear.getPurposeValue(commandToInvoke);
-        }
-        if (arg.targetActor != null) {
-            antibonus += arg.targetActor.getSkill(commandToInvoke); 
-        }
+        } catch (Exception e) {}
+        try {
+            antibonus += arg.targetActor.getSkill(commandToInvoke);
+        } catch (Exception e) {}
         return bonus >= antibonus;
     }
 

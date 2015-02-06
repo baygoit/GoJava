@@ -20,8 +20,12 @@ public class UserAccount {
         this.password = password;
     }
 
-    private void setCharacter(Actor character) {
-        this.character = character;
+    void setCharacter(Actor character) throws Exception {
+        if (character != null) { 
+            this.character = character;
+        } else {
+            throw new HackitWrongParameterException("Where is actor?");
+        }
     }
 
     public Actor getActor() {
@@ -50,7 +54,7 @@ public class UserAccount {
         return account;
     }
     
-    public static UserAccount createCharacterInAccount(UserAccount account, String characterName) {
+    public static UserAccount createCharacterInAccount(UserAccount account, String characterName) throws Exception {
         account.setCharacter(new HumanControlledCharacter(characterName)); //Here will be Factory creation. But for now - mock-up.
         account.character.addSkill("scan");   //
         account.character.addSkill("develop");// Three default skills added to newborn hero
