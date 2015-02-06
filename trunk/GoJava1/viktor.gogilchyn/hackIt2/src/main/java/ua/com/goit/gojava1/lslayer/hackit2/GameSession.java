@@ -15,7 +15,8 @@ public final class GameSession { //Singleton. There is only one game per app. Mu
     public static GameSession getInstance() {
         return instance;
     }
-    public void addStuff(Gear item) {
+    public void addStuff(Gear item) throws Exception {
+        if (item == null) throw new HackitWrongParameterException("You can't add null as an item");
         this.stuff.add(item);
     }
     
