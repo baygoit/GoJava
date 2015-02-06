@@ -15,11 +15,11 @@ import ua.com.goit.gojava1.lslayer.hackit2.gear.hardware.Devices.InfoDevice;
 public class AbstractActionTest {
     private ParameterObject po = new ParameterObject();
     private Actor actor = new HumanControlledCharacter("MegaPihar");
-    private InfoDevice tool = new InfoDevice("Tool");
 
     @Test
-    public void testGetInfo() {
+    public void testGetInfo() throws Exception {
         String eol = System.getProperty("line.separator");
+        InfoDevice tool = new InfoDevice("Tool");
         Action action = new InfoAction();
         actor.addAttribute("CCN", "1234 5678 6543 2345");
 

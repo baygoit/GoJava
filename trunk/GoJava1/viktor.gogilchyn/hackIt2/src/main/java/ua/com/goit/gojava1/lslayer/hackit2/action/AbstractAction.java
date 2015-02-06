@@ -3,11 +3,16 @@ package ua.com.goit.gojava1.lslayer.hackit2.action;
 import java.util.Map.Entry;
 import java.util.Random;
 
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
+
 import ua.com.goit.gojava1.lslayer.hackit2.actor.Actor;
 import ua.com.goit.gojava1.lslayer.hackit2.dto.ParameterObject;
 
 public abstract class AbstractAction implements Action {
+    static Logger log = Logger.getLogger(AbstractAction.class);
     protected String commandToInvoke;
+    protected int timeNeededToInvokeAction;
 
     protected AbstractAction(String command) {
         this.commandToInvoke = command;
@@ -27,6 +32,8 @@ public abstract class AbstractAction implements Action {
             return "A tool needed to " + commandToInvoke;
         }
         if (target && (arg.targetGear == null && arg.targetActor == null)) {
+            PropertyConfigurator.configure("log4j.properties");
+            log.debug(arg);
             return "A target needed to " + commandToInvoke;
         }
         if (tool && arg.tool.getPurposeValue(this.getCommand()) == 0) {
@@ -46,7 +53,7 @@ public abstract class AbstractAction implements Action {
     }
 
     protected String getInfo(Actor target, int percent) {
-        if (target == null) return null; 
+//        if (target == null) return null; All checks is made before here 
         final int MAX_PERCENT = 100;
         String eol = System.getProperty("line.separator");
         String result = "";

@@ -17,10 +17,10 @@ import ua.com.goit.gojava1.lslayer.hackit2.gear.hardware.Devices.ScanDevice;
 public class InfoActionTest {
     private ParameterObject po = new ParameterObject();
     private Actor actor = new HumanControlledCharacter("MegaPihar");
-    private InfoDevice tool = new InfoDevice("Tool");
-    private Gear target =  new ScanDevice("Target"); 
     @Test
-    public void testInfoAction() {
+    public void testInfoAction() throws Exception {
+        InfoDevice tool = new InfoDevice("Tool");
+        Gear target =  new ScanDevice("Target"); 
         po.actor = actor;
         Action action = new InfoAction();
         ActionResult result = action.execute(po);

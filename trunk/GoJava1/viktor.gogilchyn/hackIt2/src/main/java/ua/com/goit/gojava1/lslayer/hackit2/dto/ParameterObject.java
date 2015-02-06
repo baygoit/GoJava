@@ -10,4 +10,10 @@ public class ParameterObject { //Used to pass a lot of parameters to Action
     public Actor targetActor;
     public int value;
     public String action; //MS-style. Reserved for future use. 
+    @Override
+    public String toString() {
+        return "ParameterObject [actor=" + actor + ", tool=" + tool
+                + ", targetGear=" + targetGear + ", targetActor=" + targetActor
+                + ", value=" + value + ", action=" + action + "]";
+    }
 }

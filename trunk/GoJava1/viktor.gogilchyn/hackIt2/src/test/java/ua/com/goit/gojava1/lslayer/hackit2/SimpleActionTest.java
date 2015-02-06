@@ -20,7 +20,7 @@ public class SimpleActionTest {
         assertNotNull(action);
     }
     @Test
-    public void testSimpleAction() {
+    public void testSimpleAction() throws Exception {
         ParameterObject po = new ParameterObject();
         Actor actor = new HumanControlledCharacter("Test name");
         Action action = new SimpleLookAction();

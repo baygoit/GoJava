@@ -16,21 +16,25 @@ import ua.com.goit.gojava1.lslayer.hackit2.gear.hardware.Devices.ScanDevice;
 
 public class ScanDeviceTest {
     @Test
-    public void testCreation() {
+    public void testCreation() throws Exception {
         ScanDevice scanner = new ScanDevice("Vizor3000");
         assertEquals("Vizor3000", scanner.getName());
     }
     @Test
-    public void testViewOfScanner() {
+    public void testViewOfScanner() throws Exception {
         ScanDevice scanner = new ScanDevice("Vizor3000");
-        scanner.addPurpose("scan", 100);
+        try {
+            scanner.addPurpose("scan", 100);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         String eol = System.getProperty("line.separator");
         assertEquals("Vizor3000", scanner.getStringForOutput());
         scanner.addParameter("cpu", 100);
         assertEquals("Vizor3000"+ eol +"cpu: 100", scanner.getStringForOutput());
     }
     @Test
-    public void testUseOfDeviceWrongWay() {
+    public void testUseOfDeviceWrongWay() throws Exception {
         //Init section
         ParameterObject po = new ParameterObject();
         Actor actor = new HumanControlledCharacter("MegaPihar");
@@ -54,7 +58,7 @@ public class ScanDeviceTest {
         
     }
     @Test
-    public void testUseOfDeviceRightWay() {
+    public void testUseOfDeviceRightWay() throws Exception {
         ParameterObject po = new ParameterObject();
         Actor actor = new HumanControlledCharacter("MegaPihar");
         actor.addSkill("scan");
@@ -62,7 +66,13 @@ public class ScanDeviceTest {
         Action action = new ScanAction();
         Gear target = new ScanDevice("WTF");
         Gear unscannableTarget = new ScanDevice("You can't see my name").addPurpose("scan", 10000);
-        Gear scannerWithotScanPurpose = new BombDevice("BombMaster").addPurpose(null, 0); //Test null branch.
+        try {
+            @SuppressWarnings("unused")
+            Gear failedCreation = new BombDevice("BombMaster").addPurpose(null, 0);
+        } catch (Exception e) {
+            assertEquals("No null purpose allowed", e.getMessage());
+        }
+        Gear scannerWithotScanPurpose = new BombDevice("BombMaster");
         po.actor = actor;
         po.tool = scanner;
         po.targetGear = target;

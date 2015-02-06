@@ -7,7 +7,7 @@ import ua.com.goit.gojava1.lslayer.hackit2.gear.AbstractUtility;
 
 public abstract class AbstractHardware extends AbstractUtility implements Hardware {
 
-    public AbstractHardware(String name) {
+    public AbstractHardware(String name) throws Exception  {
         super(name);
     }
     private Map<String, Integer> parameters = new LinkedHashMap<String, Integer>();

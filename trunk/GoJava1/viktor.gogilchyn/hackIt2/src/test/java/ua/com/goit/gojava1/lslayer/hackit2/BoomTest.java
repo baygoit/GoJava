@@ -15,7 +15,7 @@ import ua.com.goit.gojava1.lslayer.hackit2.gear.hardware.Devices.ScanDevice;
 
 public class BoomTest {
     @Test
-    public void testGoodBoom() {
+    public void testGoodBoom() throws Exception {
         Action boom = new SimpleExplosionAction();
         Gear bomb = new BombDevice("C4");
         assertEquals(1, bomb.getPurposeValue("explode"));
