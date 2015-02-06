@@ -31,7 +31,7 @@ public class UserAccount {
     public Actor getActor() {
         return this.character;
     }
-    public static UserAccount login(String login, String password) {
+    public static UserAccount login(String login, String password) throws Exception {
         /* TODO
          * Here comes description-code. 
          * When persistent will be allowed by pro100fox,
@@ -47,7 +47,9 @@ public class UserAccount {
         return this.loginName.equals(login) && this.password.equals(password);
     }
     
-    public static UserAccount createAccount(String login, String password) {
+    public static UserAccount createAccount(String login, String password) throws Exception {
+        if (login == null || password == null) 
+            throw new HackitWrongParameterException("No null fields accepted");
         UserAccount account = new UserAccount();
         account.setLoginName(login);
         account.setPassword(password);
@@ -55,6 +57,7 @@ public class UserAccount {
     }
     
     public static UserAccount createCharacterInAccount(UserAccount account, String characterName) throws Exception {
+        if (account == null) throw new HackitWrongParameterException("Need a place for newborn character");
         account.setCharacter(new HumanControlledCharacter(characterName)); //Here will be Factory creation. But for now - mock-up.
         account.character.addSkill("scan");   //
         account.character.addSkill("develop");// Three default skills added to newborn hero

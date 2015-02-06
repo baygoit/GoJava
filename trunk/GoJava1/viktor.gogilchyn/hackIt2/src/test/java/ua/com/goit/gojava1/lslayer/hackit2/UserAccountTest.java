@@ -13,7 +13,7 @@ public class UserAccountTest {
     }
     
     @Test
-    public void testAccountCreation() {
+    public void testAccountCreation() throws Exception {
         UserAccount account = UserAccount.createAccount("mylogin", "mypassword");
         assertNotNull(account);
         UserAccount account2 = UserAccount.login("mylogin", "mypassword");
@@ -21,7 +21,7 @@ public class UserAccountTest {
     }
    
     @Test
-    public void testCredentials() {
+    public void testCredentials() throws Exception {
         UserAccount account = UserAccount.createAccount("mylogin", "mypassword");
         assertTrue(account.checkLogin("mylogin", "mypassword"));
         assertFalse(account.checkLogin("mylogin", "myWrongpassword"));
@@ -29,7 +29,7 @@ public class UserAccountTest {
         assertFalse(account.checkLogin("myWronglogin", "myWrongpassword"));
     }
     @Test
-    public void testNewbornCharacterSkillList() {
+    public void testNewbornCharacterSkillList() throws Exception {
         UserAccount account = UserAccount.createAccount("mylogin", "mypassword");
         try {
             UserAccount.createCharacterInAccount(account, "MegaPihar2000");
@@ -40,8 +40,41 @@ public class UserAccountTest {
         assertNotNull(actor.getSkills());
     }
     @Test(expected=HackitWrongParameterException.class)
-    public void testException() throws Exception {
+    public void testExceptionOnSettingCharacter() throws Exception {
         UserAccount account = UserAccount.createAccount("mylogin", "mypassword");
         account.setCharacter(null);
+    }
+
+    @Test
+    public void testExceptionAccountCreation() {
+        try {
+            @SuppressWarnings("unused")
+            UserAccount account = UserAccount.createAccount(null, "mypassword");
+        } catch (Exception e) {
+            assertEquals("No null fields accepted", e.getMessage());
+        }
+        
+        try {
+            @SuppressWarnings("unused")
+            UserAccount account = UserAccount.createAccount(null, null);
+        } catch (Exception e) {
+            assertEquals("No null fields accepted", e.getMessage());
+        }
+
+        try {
+            @SuppressWarnings("unused")
+            UserAccount account = UserAccount.createAccount("myaccount", null);
+        } catch (Exception e) {
+            assertEquals("No null fields accepted", e.getMessage());
+        }
+}
+
+    @Test
+    public void testException() throws Exception {
+        try {
+            UserAccount.createCharacterInAccount(null, "Homeless");
+        } catch (Exception e) {
+            assertEquals("Need a place for newborn character", e.getMessage());
+        }
     }
 }

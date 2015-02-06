@@ -17,8 +17,9 @@ public abstract class AbstractAction implements Action {
         return this.commandToInvoke;
     }
 
+    //TODO Rewrite. I don't like such "gvozdyami pribity" method 
     protected String checkParameters(boolean actor, boolean tool,
-            boolean target, ParameterObject arg) {
+            boolean target, ParameterObject arg) { 
         if (actor && arg.actor == null) {
             return "A person needed to " + commandToInvoke;
         }
@@ -36,19 +37,11 @@ public abstract class AbstractAction implements Action {
 
     protected boolean checkSuccess(ParameterObject arg) {
         int bonus = 0;
-        try {
-            bonus += arg.actor.getSkill(commandToInvoke);
-        } catch (Exception e) {}; 
-        try {
-            bonus += arg.tool.getPurposeValue(commandToInvoke);
-        } catch (Exception e) {}
+            bonus += arg.actor == null ? 0: arg.actor.getSkill(commandToInvoke);
+            bonus += arg.tool == null ? 0: arg.tool.getPurposeValue(commandToInvoke);
         int antibonus = 0;
-        try {
-            antibonus += arg.targetGear.getPurposeValue(commandToInvoke);
-        } catch (Exception e) {}
-        try {
-            antibonus += arg.targetActor.getSkill(commandToInvoke);
-        } catch (Exception e) {}
+            antibonus += arg.targetGear == null ? 0: arg.targetGear.getPurposeValue(commandToInvoke);
+            antibonus += arg.targetActor == null ? 0: arg.targetActor.getSkill(commandToInvoke);
         return bonus >= antibonus;
     }
 
