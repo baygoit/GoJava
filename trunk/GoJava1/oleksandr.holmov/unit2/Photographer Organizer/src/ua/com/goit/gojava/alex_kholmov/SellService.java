@@ -10,7 +10,6 @@ import java.util.ArrayList;
  *
  */
 public class SellService implements ShowInfo{
-    //ArrayList<PackageFotos> packagesFotos = new ArrayList<PackageFotos>();
     private ListOfFotoPackages listOfFotoPackages;
     private String describe;
     private int price;

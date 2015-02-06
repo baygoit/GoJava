@@ -13,7 +13,6 @@ public class WorkWithFotos {
     static int TIME_WORKING_IN_DAY = 4; //hours
     private int amountDays;
     private ListOfFotoPackages listOfFotoPackages;
-    //ArrayList<PackageFotos> allFotos = new ArrayList<PackageFotos>();
 
     static int getTIME_WORKING_IN_DAY() {
         return TIME_WORKING_IN_DAY;
