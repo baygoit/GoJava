@@ -1,11 +1,9 @@
 package freetime;
 
-import java.text.ParseException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 import java.util.SortedSet;
 
 public class Employee {
@@ -42,41 +40,28 @@ public class Employee {
         } else {
             return false;
         }
-        
+
     }
 
-    public boolean isPeriodHasFreeDay(Date start, Date end)
-            throws ParseException {
+    public boolean isPeriodHasFreeDay(Date start, Date end) {
 
-        Date date = start;
-        end = DateUtil.addDays(end, 1);
-
-        while (date.before(end)) {
-
-            if (isDayFree(date)) {
-                return true;
-            }
-
-            date = DateUtil.addDays(date, 1);
-        }
-
-        return false;
+        return (0 < getCountFreeDays(start, end)) ? true : false;
     }
 
     public void markDayFree(Date date) {
 
-//        freeDates.add(date);
-//        if (busyDates.contains(date)) {
-//            busyDates.remove(date);
-//        }
+        //freeDates.add(date);
+        // if (busyDates.contains(date)) {
+        // busyDates.remove(date);
+        // }
     }
 
     public void markDayBusy(SortedSet<Date> dates) {
 
-//        busyDates.add(dates);
-//        if (freeDates.contains(dates)) {
-//            freeDates.remove(dates);
-//        }
+        // busyDates.add(dates);
+        // if (freeDates.contains(dates)) {
+        // freeDates.remove(dates);
+        // }
     }
 
     public void addSkill(String newSkill) {
@@ -109,6 +94,24 @@ public class Employee {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public int getCountFreeDays(Date start, Date end) {
+        
+        Date date = start;
+        end = DateUtil.addDays(end, 1);
+
+        int freeDays = 0;
+        while (date.before(end)) {
+
+            if (isDayFree(date)) {
+                freeDays += 1;
+            }
+
+            date = DateUtil.addDays(date, 1);
+        }
+
+        return freeDays;
     }
 
 }
