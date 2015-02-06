@@ -7,7 +7,7 @@ public class Main {
 		ConsoleIO io = new ConsoleIO();
 		categories.fillCategories();
 		
-		Kickstarter kickstarter = new Kickstarter(categories, io, new Menu());
+		Kickstarter kickstarter = new Kickstarter(categories, io);
 		
 		kickstarter.run();
 	}

@@ -4,8 +4,6 @@ import static org.junit.Assert.*;
 
 import org.junit.*;
 
-import gojava.*;
-
 public class UnitTestKickstarter {
 	ConsoleIO io = new ConsoleIO();
 	Categories categories = new Categories();
@@ -55,4 +53,6 @@ public class UnitTestKickstarter {
 				"1 - Ask question\n2 - Invest\n0 - Go back\n", 
 				categories.getCategory(0).getProject(0).showProject());
 	}	
+	
+	
 }

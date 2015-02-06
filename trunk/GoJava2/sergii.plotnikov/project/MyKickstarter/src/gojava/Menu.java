@@ -3,27 +3,41 @@ package gojava;
 import java.util.InputMismatchException;
 
 public class Menu {
+	private IO io;
+	
+	public Menu(IO io){
+		this.io=io;
+	}
+	
+//	public void run(){
+//		io.out(tempProject.showProject());
+//		
+//		int choice = menuInputCheck(int length);
+//		if(choice==0){break;}
+//		
+//		inProjectMenu(tempProject, choice);
+//	}
 
-	public int menuInputCheck(IO io, int length){
+	public int menuInputCheck(int length){
 		try{
 			int choice=io.input();
 			if (choice<0||choice>length){
 				io.out("Wrong input!!!\nChoose again!");
-				return menuInputCheck(io, length);
+				return menuInputCheck(length);
 			}else{
 				return choice;
 			}
 		} catch(InputMismatchException ex){
 			io.out("Wrong input!!!\nChoose again!");
-			return menuInputCheck(io, length);
+			return menuInputCheck(length);
 		}
 	}
 	
-	public String stringInputCheck(IO io){
+	public String stringInputCheck(){
 		String input = io.stringInput();
 		if (input.equals("")){
 			io.out("Wrong input!!!\nType again!");
-			return stringInputCheck(io);
+			return stringInputCheck();
 		}else if(input.equals("0")){
 			return "0";
 		}else{
@@ -31,13 +45,13 @@ public class Menu {
 		}
 	}
 
-	public String cardInputCheck(IO io) {
+	public String cardInputCheck() {
 		String input = io.stringInput();
-		if (input.equals("")||input.length()<16){
-			io.out("Wrong card number!!!\nType again!");
-			return cardInputCheck(io);
-		}else if(input.equals("0")){
+		if(input.equals("0")){
 			return "0";
+		}else if (input.equals("")||input.length()<16){
+			io.out("Wrong card number!!!\nType again!");
+			return cardInputCheck();
 		}else{
 			return input;
 		}

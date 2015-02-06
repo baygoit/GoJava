@@ -1,14 +1,7 @@
 package gojava;
 
-import static org.junit.Assert.*;
-
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
-
 import org.junit.Test;
 
-import org.junit.Test;
 import static org.mockito.Mockito.*;
 
 public class KickstarterFakeIOTest {
@@ -21,7 +14,7 @@ public class KickstarterFakeIOTest {
            
             IO io = mock(IO.class);
            
-            Kickstarter kickstarter = new Kickstarter(categories, io, new Menu());
+            Kickstarter kickstarter = new Kickstarter(categories, io);
            
             
             when(io.input()).thenReturn(1, 1, 0, 0, 2,0,5,0);
