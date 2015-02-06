@@ -14,14 +14,15 @@ public class Check {
 	}
 
 	public int checkNumber(int[] border, boolean yes) throws IOException{
+		int magicStop = 3;
 		breakCounter = 0;
 		choiceNumber = 0;
-		for (int i = 0; i < 3; i++){
+		for (int i = 0; i < magicStop; i++){
 			String chosen = choice.enter();
-			if (number(chosen)){continue;}
+			if (checkNumber(chosen)){continue;}
 			choiceNumber = Integer.valueOf(chosen);
-			if (numberZero(choiceNumber, yes)){continue;}
-			if (numberBorder(choiceNumber, border)){continue;}
+			if (checkZero(choiceNumber, yes)){continue;}
+			if (checkBorder(choiceNumber, border)){continue;}
 			break;
 		}
 		if (breakCounter == 3){
@@ -31,9 +32,9 @@ public class Check {
 		return choiceNumber;
 	}
 	
-	private Boolean numberBorder(int choiceNumber, int[] border){
+	private Boolean checkBorder(int choiceNumber, int[] border){
 		boolean f = false;
-		if (!rangeOfNumbers(choiceNumber, border)){
+		if (!checkRangeOfNumbers(choiceNumber, border)){
 			out.print("This number does not exist, please try again");
 			breakCounter++;
 			f = true;
@@ -41,7 +42,7 @@ public class Check {
 		return f;
 	}
 	
-	private Boolean numberZero(int choiceNumber, Boolean yes){
+	private Boolean checkZero(int choiceNumber, Boolean yes){
 		boolean f = false;
 		if (choiceNumber == 0 && yes){
 			out.print("This number does not exist, please try again");
@@ -51,9 +52,9 @@ public class Check {
 		return f;
 	}
 	
-	private Boolean number(String chosen){
+	private Boolean checkNumber(String chosen){
 		boolean f = false;
-		if (!isNumber(chosen)){
+		if (!checkIsNumber(chosen)){
 			out.print("It is not a number, please try again");
 			breakCounter++;
 			f = true;
@@ -61,7 +62,7 @@ public class Check {
 		return f;
 	}
 	
-	private boolean rangeOfNumbers(int number, int[] border){
+	private boolean checkRangeOfNumbers(int number, int[] border){
 		boolean f = false;
 		for (int i = 0; i < border.length; i++){
 			if (border[i] == number){
@@ -81,7 +82,7 @@ public class Check {
 		return choiceNumber;
 	}
 
-	private boolean isNumber(String string){  
+	private boolean checkIsNumber(String string){  
         return Pattern.compile("^[-0-9]{1,3}$").matcher(string).matches();  
     }
 

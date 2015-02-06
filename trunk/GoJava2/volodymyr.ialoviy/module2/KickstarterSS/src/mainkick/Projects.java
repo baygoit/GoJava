@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class Projects {
 	static ArrayList<Project> listProject = new ArrayList<Project>();
+	static int counterProject;
 	
 	public String writeAllProjects() throws FileNotFoundException{
 		String s = "";
@@ -13,11 +14,10 @@ public class Projects {
 		Project project = new Project();
 		for (String[] value : projectBD) {
 			listProject.add(new Project());
-			
 			s += project.readProject(listProject, value, i);
-			
 		    i++;
 		}
+		counterProject = listProject.size();
 		return s;
 	}
 	

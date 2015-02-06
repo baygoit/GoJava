@@ -7,7 +7,6 @@ import java.io.InputStreamReader;
 public class InputsConsole implements Inputs{
 	public String enter() throws IOException{
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-		String choice = reader.readLine();
-		return choice;
+		return reader.readLine();
 	}
 }

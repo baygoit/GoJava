@@ -4,16 +4,15 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 public class Project{
-	public int projectID;
-	public String projectName;
-	public String shortDescription;
-	public String fullDescription;
-	public String foto;
-	public String link;
-	public int howMuchNeeded;
-	public int howMuchCollected;
-	public int howMuchRemaining;
-	public int counterProject;
+	private int projectID;
+	private String projectName;
+	private String shortDescription;
+	private String fullDescription;
+	private String foto;
+	private String link;
+	private int howMuchNeeded;
+	private int howMuchCollected;
+	private int howMuchRemaining;
 	
 	public String readProject(ArrayList<Project> listProject, String[] value, int i) throws FileNotFoundException{
 		listProject.get(i).projectID = Integer.valueOf(value[0]);
