@@ -28,13 +28,13 @@ public class DataBuilder {
         	}
         }
         	
-        public static Warehouse unmarshall(File file) throws JAXBException{
+        public static Warehouse unmarshallWarehouse(File file) throws JAXBException{
             Unmarshaller jaxbUnmarshaller = JAXB_CONTEXT.createUnmarshaller();
             Warehouse warehouse = (Warehouse) jaxbUnmarshaller.unmarshal(file); 
             return warehouse; 
         }
         
-        public static void marshall(Warehouse warehouse, File file) throws JAXBException{
+        public static void marshallWarehouse(Warehouse warehouse, File file) throws JAXBException{
             Marshaller marshaller = JAXB_CONTEXT.createMarshaller();
             marshaller.marshal(warehouse, file);
         }                

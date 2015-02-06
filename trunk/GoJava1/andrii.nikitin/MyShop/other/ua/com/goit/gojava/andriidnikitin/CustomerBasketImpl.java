@@ -4,8 +4,29 @@ import java.math.BigDecimal;
 import java.util.Map;
 
 import ua.com.goit.gojava.andriidnikitin.model.Good;
+import ua.com.goit.gojava.andriidnikitin.model.Basket;
+import ua.com.goit.gojava.andriidnikitin.model.Order;
+import ua.com.goit.gojava.andriidnikitin.service.ChooseGoods;
 
-public class CustomerBasketImpl implements CustomerBasket {
+public class CustomerBasketImpl implements ChooseGoods {
+
+	@Override
+	public void add(Good good, int quantity) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void delete(Good good) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public BigDecimal total() {
+		// TODO Auto-generated method stub
+		return null;
+	}/*
 	
 	private Order order;
 	
@@ -51,6 +72,19 @@ public class CustomerBasketImpl implements CustomerBasket {
 
 	@Override
 	public BigDecimal total() {
+		return null;
+	}*/
+
+	
+	@Override
+	public void cancelChoice() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Order confirmChoice() {
+		// TODO Auto-generated method stub
 		return null;
 	}
 

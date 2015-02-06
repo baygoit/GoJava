@@ -17,7 +17,7 @@ import ua.com.goit.gojava.andriidnikitin.service.util.DataBuilder;
 public class StorageXml extends StorageAbstract {
 	
 	private Warehouse warehouse;
-	private final File fileStorage = new File("Hello,World!");
+	private final File fileStorage = new File("resources/DataFile.xml");
 	
 	public StorageXml() {
 		init();
@@ -25,14 +25,14 @@ public class StorageXml extends StorageAbstract {
 	
 	private void init() {
 		try {
-			warehouse = DataBuilder.unmarshall(fileStorage);
+			warehouse = DataBuilder.unmarshallWarehouse(fileStorage);
 		} catch (JAXBException e) {
 			e.printStackTrace();
 		}	
 	}
 	
 	public void saveChanges() throws JAXBException{
-		DataBuilder.marshall(warehouse, fileStorage);
+		DataBuilder.marshallWarehouse(warehouse, fileStorage);
 		init();
 	}
 
