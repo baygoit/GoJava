@@ -1,26 +1,16 @@
 package mainkick;
 
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class Categories {
-	private ArrayList<String[]> categoryBD;
-	{
-	    try {
-	    	ReaderBD reader = new ReaderBD();
-	    	categoryBD = reader.read("Categories.properties");
-	    }
-	    catch (IOException e) {
-	       throw new RuntimeException(e);
-	    }
-	}
-
-	private int counterCategory = categoryBD.size();
 	private ArrayList<Category> listCatecories = new ArrayList<Category>();
+	private int counterCategory;
 	
-	public String showAllCatecories() throws FileNotFoundException{
-		int i = 0;
+	public String readAllCatecories() throws FileNotFoundException{
+		ReaderBD reader = new ReaderBD();
+		ArrayList<String[]> categoryBD = reader.read("Categories.properties");
+    	int i = 0;
 		String s = "";
 		for (String[] value : categoryBD) {
 			listCatecories.add(new Category());
@@ -34,6 +24,7 @@ public class Categories {
 		    s += listCatecories.get(i).categoryID + " " + listCatecories.get(i).categoryName + "\n";
 		    i++;
 		}
+		counterCategory = listCatecories.size();
 		return s.substring(0, s.length() - 1);
 	}
 	
@@ -55,11 +46,11 @@ public class Categories {
 		return kickContainCategories;
 	}
 	
-	public String showAllProjectInCategory(int i) throws FileNotFoundException{
+	public String showAllProjectInCategory(int i, Projects projects) throws FileNotFoundException{
 		String s = "";
-		Category category = new Category();
+//		Projects projects = new Projects();
 		for (int j : listCatecories.get(i).projectsThatContain){
-			s += category.showProjectInShort(j) + "\n";
+			s += projects.showProjectInShort(j) + "\n";
 		}
 		return s.substring(0, s.length() - 1);
 	}

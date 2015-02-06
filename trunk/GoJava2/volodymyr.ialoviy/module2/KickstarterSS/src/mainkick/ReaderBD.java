@@ -22,7 +22,7 @@ public class ReaderBD {
 	            in.close();
 	        }
 	    } catch(IOException e) {
-	        throw new RuntimeException(e);
+	        throw new FileNotFoundException();
 	    }
 		return list;
 	}

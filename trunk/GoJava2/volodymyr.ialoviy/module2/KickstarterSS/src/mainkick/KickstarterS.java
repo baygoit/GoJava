@@ -12,7 +12,7 @@ public class KickstarterS {
 		int chosenProject;
 		int choiceToProject;
 		while (true){
-			printer(categories.showAllCatecories());
+			printer(categories.readAllCatecories());
 			printer("Choice Category Number: ");
 			chosenCategory = check.checkNumber(categories.kickContainCategory(), true);
 			if (chosenCategory == 777){
@@ -22,7 +22,7 @@ public class KickstarterS {
 			printer("Your chosen category: " + categories.showCatecoryName(chosenCategory - 1) + ", containing the following projects: ");
 			
 			while (true){
-				printer(categories.showAllProjectInCategory(chosenCategory - 1));
+				printer(categories.showAllProjectInCategory(chosenCategory - 1, projects));
 				printer("Choice Project Number or 0 for exit to Category: ");
 				chosenProject = check.checkNumber(categories.projectsContain(chosenCategory - 1), false);
 				if (chosenProject == 0){

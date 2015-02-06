@@ -1,23 +1,13 @@
 package mainkick;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.ArrayList;
 
-
 public class Projects {
-	public static ArrayList<String[]> projectBD;
-	{
-	    try {
-	    	ReaderBD reader = new ReaderBD();
-	    	projectBD = reader.read("Projects.properties");
-	    }
-	    catch (IOException e) {
-	       throw new RuntimeException(e);
-	    }
-	}
-	public static ArrayList<Project> listProject = new ArrayList<Project>();
+	private ArrayList<Project> listProject = new ArrayList<Project>();
 	
 	public void writeAllCatecories() throws FileNotFoundException{
+		ReaderBD reader = new ReaderBD();
+		ArrayList<String[]> projectBD = reader.read("Projects.properties");
 		int i = 0;
 		for (String[] value : projectBD) {
 			listProject.add(new Project());
@@ -32,6 +22,16 @@ public class Projects {
 			listProject.get(i).howMuchRemaining = Integer.valueOf(value[8]);
 		    i++;
 		}
+	}
+	
+	public String showProjectInShort(int i) throws FileNotFoundException{
+		i -= 1;
+		String s = listProject.get(i).projectID
+				+ ", " + listProject.get(i).projectName
+				+ ", " + listProject.get(i).shortDescription
+				+ ", " + listProject.get(i).howMuchNeeded
+				+ ", " + listProject.get(i).howMuchRemaining;
+		return s;		
 	}
 	
 	public String showProjectFull(int i) throws FileNotFoundException{

@@ -9,7 +9,7 @@ import org.junit.Test;
 public class testCategoriesClass {
 	Categories categories = new Categories();
 	{try {
-		categories.showAllCatecories();
+		categories.readAllCatecories();
 		categories.kickContainCategory();
 		categories.projectsContain(0);
 		categories.showCatecoryName(0);
@@ -19,7 +19,7 @@ public class testCategoriesClass {
 	
 	@Test
     public void shouldAllCatecories_whenNotAllCatecories() throws IOException, InterruptedException{
-		String s = categories.showAllCatecories();
+		String s = categories.readAllCatecories();
 		assertTrue(s.equals("1 Category-1\n2 Category-2\n3 Category-3"));
     }
 	
@@ -47,7 +47,7 @@ public class testCategoriesClass {
     public void shouldAllProjectInCategory_whenNotAllProjectInCategory() throws IOException, InterruptedException{
 		Projects projects = new Projects();
 		projects.writeAllCatecories();
-		String s = categories.showAllProjectInCategory(0);
+		String s = categories.showAllProjectInCategory(0, projects);
 		assertTrue(s.equals("1, Progect-1, shortDescription-1, 1000, 990\n"
 				+ "3, Progect-3, shortDescription-3, 1000, 990\n"
 				+ "4, Progect-4, shortDescription-4, 1000, 990"));
