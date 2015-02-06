@@ -12,8 +12,8 @@ public class test1Mock {
 	@Test
     public void simpleMocking2() throws FileNotFoundException{
 		Category category = mock(Category.class);
-		Projects projects = new Projects();
-		category.showAllProjectInCategory(2, projects);
-		verify(category).showAllProjectInCategory(2, projects);
+		Project project = new Project();
+		category.showAllProjectInCategory(2, project);
+		verify(category).showAllProjectInCategory(2, project);
 	}
 }
