@@ -1,5 +1,8 @@
 package ua.com.goit.gojava2.solo307.interview;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 public class Main {
@@ -14,6 +17,9 @@ public class Main {
 			case 1: interview.printQuestionsAndCorrectAnswers();break; 
 			case 2: interview.printQuestionAndAllAnswers(); break;
 			case 3: 
+				SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy hh:mm:ss");
+				Calendar start = new GregorianCalendar(); 
+				System.out.println("Тест был начат в: " + format.format(start.getTime()));
 				List <Question> questions = interview.shuffle(interview.getQuestions());
 				for(Question question: questions){
 					final int CORRECT_ANSWERS = question.countCorrectAnswers();
@@ -35,6 +41,10 @@ public class Main {
 				}
 				interview.printResults();
 				interview.printIncorrectAnswers();
+				Calendar stop = new GregorianCalendar();
+				System.out.println("Тест был закончен: " + format.format(stop.getTime()));
+				long duration = stop.getTimeInMillis() - start.getTimeInMillis();
+				System.out.println("Длительность теста в секундах: " + (duration/1000));
 				break;
 			}
 		}

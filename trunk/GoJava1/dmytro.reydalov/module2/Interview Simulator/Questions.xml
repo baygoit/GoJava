@@ -1,32 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <questions>
-	<question id = "1" line = "Какие Вы знаете принципы Обьектно - ориентированного программирования?">
-			<answer id = "a" line = "Процедурность, инкапсуляция, полиморфизм." isRight = "false"></answer>
-			<answer id = "b" line = "Инкапсуляция, полиморфизм, наследование." isRight = "true"></answer>
-			<answer id = "c" line = "Полиморфизм, абстракция, наследование, инкапсуляция." isRight = "true"></answer>
-			<answer id = "d" line = "Обьектность, ориентированность, программированность." isRight = "false"></answer>
+	<question id = "d" line = "Какие Вы знаете принципы Обьектно - ориентированного программирования?">
+			<answer line = "Процедурность, инкапсуляция, полиморфизм." isCorrect = "false"></answer>
+			<answer line = "Инкапсуляция, полиморфизм, наследование." isCorrect = "true"></answer>
+			<answer line = "Полиморфизм, абстракция, наследование, инкапсуляция." isCorrect = "true"></answer>
+			<answer line = "Обьектность, ориентированность, программированность." isCorrect = "false"></answer>
 	</question>
 	
 	<question id = "2" line = "Что такое инкапсуляция?">
-			<answer id = "a" line = "Использование специальных капсул для программистов, чтоб лучше думать." isRight = "false"></answer>
-			<answer id = "b" line = "Возможность избежать дублирования кода в программе." isRight = "false"></answer>
-			<answer id = "c" line = "Механизм, используемый для защиты полей обьекта от попытки их изменения извне." isRight = "true"></answer>
-			<answer id = "d" line = "Процесс создания графической оболочки." isRight = "false"></answer>
+			<answer line = "Использование специальных капсул для программистов, чтоб лучше думать." isCorrect = "false"></answer>
+			<answer line = "Возможность избежать дублирования кода в программе." isCorrect = "false"></answer>
+			<answer line = "Механизм, используемый для защиты полей обьекта от попытки их изменения извне." isCorrect = "true"></answer>
+			<answer line = "Процесс создания графической оболочки." isCorrect = "false"></answer>
 	</question>
 	
 	<question id = "3" line = "Что такое наследование?">
-			<answer id = "a" line = "Возможность импортировать код с других языков программирования." isRight = "false"></answer>
-			<answer id = "b" line = "Технология следования различным указателям." isRight = "false"></answer>
-			<answer id = "c" line = "Инструмент для создания программных интерфейсов." isRight = "false"></answer>
-			<answer id = "d" line = "Способность классом расширить уже существующий класс." isRight = "true"></answer>
+			<answer line = "Возможность импортировать код с других языков программирования." isCorrect = "false"></answer>
+			<answer line = "Технология следования различным указателям." isCorrect = "false"></answer>
+			<answer line = "Инструмент для создания программных интерфейсов." isCorrect = "false"></answer>
+			<answer line = "Способность классом расширить уже существующий класс." isCorrect = "true"></answer>
 	</question>
 	
 	<question id = "4" line = "Что такое полиморфизм?">
-			<answer id = "a" line = "Способность обращаться ко всем подклассам расширенного класса одинаково, но при этом каждый будет вести себя по своему." isRight = "true"></answer>
-			<answer id = "b" line = "Элемент полимонального морфизма." isRight = "false"></answer>
-			<answer id = "c" line = "Инструмент для оформления различных строк." isRight = "false"></answer>
-			<answer id = "d" line = "Шаблон проэктрования." isRight = "false"></answer>
+			<answer line = "Способность обращаться ко всем подклассам расширенного класса одинаково, но при этом каждый будет вести себя по своему." isCorrect = "true"></answer>
+			<answer line = "Элемент полимонального морфизма." isCorrect = "false"></answer>
+			<answer line = "Инструмент для оформления различных строк." isCorrect = "false"></answer>
+			<answer line = "Шаблон проэктрования." isCorrect = "false"></answer>
 	</question>
 
 </questions>

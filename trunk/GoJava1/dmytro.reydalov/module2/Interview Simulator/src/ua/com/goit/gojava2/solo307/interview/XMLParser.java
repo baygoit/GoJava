@@ -2,6 +2,7 @@ package ua.com.goit.gojava2.solo307.interview;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -18,7 +19,7 @@ public class XMLParser {
 	
 	List <Question> questions = new ArrayList<Question>();
 	
-	public XMLParser(String path){
+	public XMLParser(String path) throws InterviewSimulatorNotNumberException{
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		try{
 			DocumentBuilder builder = factory.newDocumentBuilder();
@@ -32,25 +33,27 @@ public class XMLParser {
 					try{
 						questionId = Integer.parseInt(question.getAttribute("id"));
 					} catch(NumberFormatException e){
-						e.printStackTrace();
+						System.out.println(e.getMessage());
 					}
-					String questionLine = question.getAttribute("line");
+					String questionText = question.getAttribute("line");
 					NodeList answers = question.getChildNodes();
 					List <Answer> answerList = new ArrayList<Answer>();
+					final char EMPTY = '0';
 					for(int j = 0; j < answers.getLength(); j++){
 						Node a = answers.item(j);
 						if(a.getNodeType() == Node.ELEMENT_NODE){
 							Element answer = (Element) a;
-							char answerId = answer.getAttribute("id").charAt(0);
-							String answerLine = answer.getAttribute("line");
+							String answerText = answer.getAttribute("line");
 							boolean isCorrect = false;
 							if(answer.getAttribute("isCorrect").equals("true")) isCorrect = true;
 							else if(answer.getAttribute("isCorrect").equals("false")) isCorrect = false;
-							else System.out.println("wrong isRight value in XML");
-							answerList.add(new Answer(answerId, answerLine, isCorrect));
+							else System.out.println("wrong isCorrect value in XML");
+							answerList.add(new Answer(EMPTY, answerText, isCorrect));
 						}
 					}
-					writeData(questionLine, answerList, questionId);	
+					if(hasIdWithNull())throw new InterviewSimulatorNotNumberException();
+					Collections.shuffle(answerList);
+					writeData(questionText, answerList, questionId);	
 				}
 			}
 		} catch(ParserConfigurationException e){
@@ -62,8 +65,15 @@ public class XMLParser {
 		}
 	}
 	
-	public void writeData(String questionLine, List<Answer> answers, int questionId){
-		questions.add(new Question(questionLine, answers, questionId));
+	public boolean hasIdWithNull(){
+		for(Question answer: questions){
+			if(answer.getId() == 0)return true;
+		}
+		return false;
+	}
+	
+	public void writeData(String questionLine, List<Answer> answerList, int questionId){
+		questions.add(new Question(questionLine, answerList, questionId));
 	}
 }	
 

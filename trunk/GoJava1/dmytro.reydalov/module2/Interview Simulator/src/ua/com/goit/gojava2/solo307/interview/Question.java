@@ -21,9 +21,10 @@ public class Question {
 		this.text = "there is a question must be here...";
 	}
 	
-	public Question(String text, List <Answer> answers, int id){
+	public Question(String text, List <Answer> answersWithNoId, int id){
 		this.text = text;
-		for(Answer answer: answers){
+		List <Answer> answersWhithId = generateRandomId(answersWithNoId);
+		for(Answer answer: answersWhithId){
 			this.answers.add(answer);
 		}
 		this.id = id;
@@ -111,6 +112,21 @@ public class Question {
 			if(answer.isCorrect)counter++;
 		}
 		return counter;
+	}
+	
+	public List<Answer> generateRandomId(List <Answer> answersWithNoId) {
+		final char EMPTY = '0';
+		char [] identificators = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'};
+		int counter = 0;
+		List <Answer> answersWithId = new ArrayList <Answer>();
+		for(Answer answer: answersWithNoId){
+			if(answer.getId() == EMPTY){
+				answer.setId(identificators[counter]);
+				answersWithId.add(answer);
+				counter++;
+			}
+		}
+		return answersWithId;
 	}
 	
 	public List <Character> readAnswer(){

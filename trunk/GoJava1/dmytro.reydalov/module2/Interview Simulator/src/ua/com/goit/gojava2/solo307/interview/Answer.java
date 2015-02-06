@@ -15,6 +15,7 @@ public class Answer {
 	public Answer(char id, String text, boolean isCorrect){
 		this.text = text;
 		this.isCorrect = isCorrect;
+		
 		this.id = id;
 	}
 	
@@ -41,9 +42,8 @@ public class Answer {
 	public void setAnswerCorrect(boolean isCorrect) {
 		this.isCorrect = isCorrect;
 	}
-
+	
 	public void printIdAndAnswer(){
 		System.out.println(id + ". " + text + "\n");
 	}
-	
 }

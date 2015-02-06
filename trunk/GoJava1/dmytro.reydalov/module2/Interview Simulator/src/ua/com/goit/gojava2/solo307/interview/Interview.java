@@ -1,17 +1,21 @@
 package ua.com.goit.gojava2.solo307.interview;
 
 import java.util.Collections;
+
 import java.util.List;
 
 public class Interview {
 	
-	private int correctAnswers = 0;
-	private int partiallyCorrectAnswers = 0;
-	private int incorrectAnswers = 0;
-	private List <Question> questions = readFromXml("MeratechTest.xml");
+	private int correctAnswers;
+	private int partiallyCorrectAnswers;
+	private int incorrectAnswers;
+	private List <Question> questions;
 	
 	public Interview(){
-		
+		correctAnswers = 0;
+		partiallyCorrectAnswers = 0;
+		incorrectAnswers = 0;
+		questions = readFromXml();
 	}
 	
 	public List<Question> getQuestions() {
@@ -45,7 +49,7 @@ public class Interview {
 	public void setIncorrectAnswers(int wrongAnswers) {
 		this.incorrectAnswers = wrongAnswers;
 	}
-
+	
 	public void addCorrectAnswers(){
 		correctAnswers++;
 	}
@@ -58,8 +62,13 @@ public class Interview {
 		incorrectAnswers++;
 	}
 	
-	public List<Question> readFromXml(String path){
-		XMLParser parser = new XMLParser(path);
+	public List<Question> readFromXml(){
+		XMLParser parser = null;
+		try{
+			 parser = new XMLParser("MeratechTest.xml");
+		}catch(InterviewSimulatorNotNumberException e){
+			System.out.println(e.getText());
+		}
 		return parser.questions;
 	}
 	
