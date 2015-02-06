@@ -1,18 +1,22 @@
 package mainkick;
 
 import static org.junit.Assert.*;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Arrays;
+
 import org.junit.Test;
 
 public class testCategoriesClass {
 	Categories categories = new Categories();
+	Category category = new Category();
+
 	{try {
 		categories.readAllCatecories();
-		categories.kickContainCategory();
-		categories.projectsContain(0);
-		categories.showCatecoryName(0);
+		category.kickContainCategory();
+		category.projectsContain(0);
+		category.showCatecoryName(0);
 	} catch (FileNotFoundException e) {
 		e.printStackTrace();
 	}}
@@ -25,21 +29,21 @@ public class testCategoriesClass {
 	
 	@Test
     public void shouldKickContainCategory_whenNotKickContainCategory() throws IOException, InterruptedException{
-		int[] i = categories.kickContainCategory();
+		int[] i = category.kickContainCategory();
 		int[] j = {1, 2, 3};
 		assertTrue(Arrays.equals(i, j));
     }
 	
 	@Test
     public void shouldProjectsContain_whenProjectsContain() throws IOException, InterruptedException{
-		int[] i = categories.projectsContain(0);
+		int[] i = category.projectsContain(0);
 		int[] j = {1, 3, 4};
 		assertTrue(Arrays.equals(i, j));
     }
 	
 	@Test
     public void shouldFirstCatecoryName_whenNotFirstCatecoryName() throws IOException, InterruptedException{
-		String s = categories.showCatecoryName(0);
+		String s = category.showCatecoryName(0);
 		assertTrue(s.equals("Category-1"));
     }
 	
@@ -47,7 +51,7 @@ public class testCategoriesClass {
     public void shouldAllProjectInCategory_whenNotAllProjectInCategory() throws IOException, InterruptedException{
 		Projects projects = new Projects();
 		projects.writeAllCatecories();
-		String s = categories.showAllProjectInCategory(0, projects);
+		String s = category.showAllProjectInCategory(0, projects);
 		assertTrue(s.equals("1, Progect-1, shortDescription-1, 1000, 990\n"
 				+ "3, Progect-3, shortDescription-3, 1000, 990\n"
 				+ "4, Progect-4, shortDescription-4, 1000, 990"));
