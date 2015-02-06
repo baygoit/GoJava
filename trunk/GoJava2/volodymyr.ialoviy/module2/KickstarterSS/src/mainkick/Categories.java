@@ -15,7 +15,7 @@ public class Categories {
 		Category category = new Category();
 		for (String[] value : categoryBD) {
 			listCatecories.add(new Category());
-		    s += category.readCatecory(categoryBD, listCatecories, i, value);
+		    s += category.readCatecory(listCatecories, i, value);
 		    i++;
 		}
 		counterCategory = listCatecories.size();

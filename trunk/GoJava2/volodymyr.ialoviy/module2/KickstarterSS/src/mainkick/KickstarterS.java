@@ -13,7 +13,7 @@ public class KickstarterS {
 		Category category = new Category();
 		Project project = new Project();
 		Projects projects = new Projects();
-		projects.writeAllCatecories();
+		projects.writeAllProjects();
 		while (true){
 			printer(categories.readAllCatecories());
 			printer("Choice Category Number: ");

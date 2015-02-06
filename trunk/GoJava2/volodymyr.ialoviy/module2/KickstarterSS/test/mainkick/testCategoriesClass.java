@@ -50,7 +50,7 @@ public class testCategoriesClass {
 	@Test
     public void shouldAllProjectInCategory_whenNotAllProjectInCategory() throws IOException, InterruptedException{
 		Projects projects = new Projects();
-		projects.writeAllCatecories();
+		projects.writeAllProjects();
 		Project project = new Project();
 		String s = category.showAllProjectInCategory(0, project);
 		assertTrue(s.equals("1, Progect-1, shortDescription-1, 1000, 990\n"

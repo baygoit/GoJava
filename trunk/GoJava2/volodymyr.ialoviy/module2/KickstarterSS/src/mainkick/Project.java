@@ -1,6 +1,7 @@
 package mainkick;
 
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 
 public class Project{
 	public int projectID;
@@ -13,6 +14,20 @@ public class Project{
 	public int howMuchCollected;
 	public int howMuchRemaining;
 	public int counterProject;
+	
+	public String readProject(ArrayList<Project> listProject, String[] value, int i) throws FileNotFoundException{
+		listProject.get(i).projectID = Integer.valueOf(value[0]);
+		listProject.get(i).projectName = value[1];
+		listProject.get(i).shortDescription = value[2];
+		listProject.get(i).fullDescription = value[3];
+		listProject.get(i).foto = value[4];
+		listProject.get(i).link = value[5];
+		listProject.get(i).howMuchNeeded = Integer.valueOf(value[6]);
+		listProject.get(i).howMuchCollected = Integer.valueOf(value[7]);
+		listProject.get(i).howMuchRemaining = Integer.valueOf(value[8]);
+
+		return projectID + " " + projectName +  " " + shortDescription + " " + fullDescription + " " + foto + " " + link + " " + howMuchNeeded + " " +  howMuchCollected + " " + howMuchRemaining + "\n";
+	}
 	
 	public String showProjectInShort(int i) throws FileNotFoundException{
 		i -= 1;

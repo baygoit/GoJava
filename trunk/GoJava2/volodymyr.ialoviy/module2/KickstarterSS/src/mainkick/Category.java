@@ -8,7 +8,7 @@ public class Category{
 	private String categoryName;
 	private int[] projects;
 
-	public String readCatecory(ArrayList<String[]> categoryBD, ArrayList<Category> listCatecories, int i, String[] value) throws FileNotFoundException{
+	public String readCatecory(ArrayList<Category> listCatecories, int i, String[] value) throws FileNotFoundException{
 		listCatecories.get(i).categoryID = Integer.valueOf(value[0]);
 		listCatecories.get(i).categoryName = value[1];
 		String[] string = value[2].split(",");

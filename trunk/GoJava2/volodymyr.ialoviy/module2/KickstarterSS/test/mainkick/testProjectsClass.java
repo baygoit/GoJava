@@ -9,7 +9,7 @@ public class testProjectsClass {
 	@Test
     public void should1_when() throws FileNotFoundException{
 		Projects projects = new Projects();
-		projects.writeAllCatecories();
+		projects.writeAllProjects();
 		Project project = new Project();
 		String s = project.showProjectFull(2);
 		assertTrue(s.equals("projectID = 3\n"
