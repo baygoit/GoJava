@@ -1,7 +1,6 @@
 package org.goJava2.anagram;
 
 import static org.junit.Assert.*;
-
 import org.goJava2.anagram.Anagram;
 import org.junit.Test;
 
@@ -10,52 +9,51 @@ public class AnagramTest {
 	private Anagram anagram = new Anagram();
 	
 	public void test(String expected, String actual) {
-		actual = anagram.getReversedSent(actual);
-		assertEquals(expected, actual);
+		assertEquals(expected, anagram.getReversedSent(actual));
 	}
 	
 	@Test
-	public void shouldBe_Empty_WhenParamIs_Empty() {
+	public void shouldBe_empty_whenParamIs_empty() {
 		test("", "");
 	}
 	
 	@Test
-	public void shouldBe_Space_WhenParamIs_Space() {
+	public void shouldBe_space_whenParamIs_space() {
 		test(" ", " ");
 	}
 	
 	@Test
-	public void shouldBe_OneSymbol_WhenParamIs_OneSymbol() {
+	public void shouldBe_oneSymbol_whenParamIs_oneSymbol() {
 		test("x", "x");
 	}
 	
 	@Test
-	public void souldBe_Reversed_WhenPramIs_XY() {
+	public void souldBe_reversed_whenPramIs_xy() {
 		test("yx", "xy");
 	}
 	
 	@Test
-	public void shouldBe_Reversed_WhenParamIs_BySpace() {
+	public void shouldBe_reversed_whenParamIs_bySpace() {
 		test("yx yx", "xy xy");
 	}
 	
 	@Test
-	public void souldBe_SamePlace_WhenParamIs_Symbol() {
+	public void souldBe_samePlace_whenParamIs_symbol() {
 		test("xy!", "yx!");
 	}
 	
 	@Test
-	public void shouldBe_Reversed_WhenParamIs_longSent() {
+	public void shouldBe_reversed_whenParamIs_longSent() {
 		test("olleH dlrow! woH era uoy?", "Hello world! How are you?");
 	}
 	
 	@Test
-	public void shouldBe_SamePosition_WhenParamIs_SpecificSymbol() {
+	public void shouldBe_samePosition_whenParamIs_specificSymbol() {
 		test(anagram.getDelimiters(), anagram.getDelimiters());
 	}
 	
 	@Test
-	public void exceptionsTest() {
+	public void shouldBe_empty_whenParamIs_null() {
 		assertEquals("", anagram.getReversedSent(null));
 	}
 }
