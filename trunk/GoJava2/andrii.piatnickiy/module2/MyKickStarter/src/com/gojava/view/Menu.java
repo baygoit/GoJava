@@ -21,36 +21,26 @@ public class Menu {
         this.level2 = new Level2(projectStorage);
         this.level3 = new Level3(projectStorage);
         level3.setMenu(this);
-        levelsList.add(level1);
-        levelsList.add(level2);
-        levelsList.add(level3);
-        currentLevelPosition = 1;
+        add(level1);
+        add(level2);
+        add(level3);
         initMenu();
     }
 
-    public void initMenu() {
-        level1.displayMySelf(currentLevelPosition);
-    }
-
-    
     public void nextLevel(int nubberForNextLevel) {
-        beyondLevel(nubberForNextLevel);
-    }
 
-    private void beyondLevel(int nubberForNextLevel) {
-        Level level;
-        if ((nubberForNextLevel == 0 && currentLevelPosition == 1) || (nubberForNextLevel > 0 && currentLevelPosition == 3)) {
+        if ((nubberForNextLevel == 0 && currentLevelPosition == 1)
+                || (nubberForNextLevel > 0 && currentLevelPosition == 3)) {
             System.out.println("not allowed to go below this level");
-        }else{
+        } else {
+            Level level;
             if (nubberForNextLevel == 0) {
                 currentLevelPosition--;
                 if (currentLevelPosition == 2) {
-                    level = getCurrentLevel();
-                    level.displayMySelf(categoryPosition);
-                } else {
-                    level = getCurrentLevel();
-                    level.displayMySelf(nubberForNextLevel);
+                    nubberForNextLevel = categoryPosition;
                 }
+                level = getCurrentLevel();
+                level.displayMySelf(nubberForNextLevel);
             } else {
                 currentLevelPosition++;
                 if (currentLevelPosition == 2) {
@@ -59,7 +49,16 @@ public class Menu {
                 level = getCurrentLevel();
                 level.displayMySelf(nubberForNextLevel);
             }
-        } 
+        }
+    }
+
+    private void add(Level level) {
+        levelsList.add(level);
+    }
+
+    public void initMenu() {
+        currentLevelPosition = 1;
+        level1.displayMySelf(currentLevelPosition);
     }
 
     public Level getCurrentLevel() {
@@ -68,6 +67,6 @@ public class Menu {
                 return level;
             }
         }
-    return null;
+        return null;
     }
 }
