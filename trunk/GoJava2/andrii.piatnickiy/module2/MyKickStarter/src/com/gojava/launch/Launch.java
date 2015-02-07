@@ -19,19 +19,16 @@ public class Launch {
 
         projectStorage.setOut(out);
         categoryStorage.setOut(out);
-       
-        
 
         Scan scan = new Scan();
         Quote quote = new Quote();
         out.print(quote.getQuote());
-        
+
         Menu menu = new Menu(categoryStorage, projectStorage);
         while (true) {
             menu.nextLevel(scan.inputInt());
         }
-        
-        
+
     }
 
     private static void initProjects(ProjectStorage projectStorage) {

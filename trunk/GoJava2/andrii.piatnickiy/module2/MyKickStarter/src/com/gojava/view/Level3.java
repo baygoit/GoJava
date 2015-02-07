@@ -1,11 +1,9 @@
 package com.gojava.view;
 
-import com.gojava.projects.ProjectManager;
 import com.gojava.projects.ProjectStorage;
 
 public class Level3 implements Level {
     private Menu menu;
-    private ProjectManager manager;
     private int position = 3;
     private ProjectStorage projectStorage;
 
@@ -18,7 +16,7 @@ public class Level3 implements Level {
         projectStorage.getSpecificProject(menu.categoryPosition,
                 nubberForNextLevel);
     }
-    
+
     public void setMenu(Menu menu) {
         this.menu = menu;
     }

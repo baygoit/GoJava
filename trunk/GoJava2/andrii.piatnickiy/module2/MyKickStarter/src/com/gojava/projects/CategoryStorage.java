@@ -17,18 +17,10 @@ public class CategoryStorage {
         categoryStorageList.add(new Category(name, categoryId));
     }
 
-    // TODO перенести вывод в manager
     public void display() {
         for (Category category : categoryStorageList) {
             out.print(out.printCategory(category));
         }
-    }
-
-    public Category get() {
-        for (Category category : categoryStorageList){
-            return category;
-        }
-        return null;
     }
 
 }
