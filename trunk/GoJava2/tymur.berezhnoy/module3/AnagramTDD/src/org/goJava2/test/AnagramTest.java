@@ -1,6 +1,6 @@
 package org.goJava2.test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import org.goJava2.anagram.Anagram;
 import org.junit.Test;
@@ -47,5 +47,15 @@ public class AnagramTest {
 	@Test
 	public void shouldBe_Reversed_WhenParamIs_longSent() {
 		test("olleH dlrow! woH era uoy?", "Hello world! How are you?");
+	}
+	
+	@Test
+	public void shouldBe_SamePosition_WhenParamIs_SpecificSymbol() {
+		test(anagram.getNewDelimiters(), anagram.getNewDelimiters());
+	}
+	
+	@Test
+	public void exceptionsTest() {
+		assertEquals("", anagram.getReversedSent(null));
 	}
 }

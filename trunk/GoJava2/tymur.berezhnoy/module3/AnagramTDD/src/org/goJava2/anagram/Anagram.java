@@ -4,6 +4,20 @@ import java.util.StringTokenizer;
 
 public class Anagram {
 	
+	private String delimiters;
+	
+	public Anagram() {
+		delimiters = " ,.!?@#$%^&*()-_=+<>/\';:[]{}|~`\"";
+	}
+	
+	public String getNewDelimiters() {
+		return delimiters;
+	}
+	
+	public void setDelimiters(String delimiters) {
+		this.delimiters = delimiters;
+	}
+		
 	public void startProcessing() {
 		
 		System.out.println("----- Enter a sentence and get reversed version of it. "
@@ -19,14 +33,15 @@ public class Anagram {
 	private String enterSent() {
 		System.out.print("\nEnter a sentence: ");
 		return new Scanner(System.in).nextLine();
-	}	
+	}
 	
 	public String getReversedSent(String sentence) {
-		String delimiters = " ,.!?@#$%^&*()-_=+<>/\';:[]{}|~`\""; // The symbols will not revers.
-		StringTokenizer token = new StringTokenizer(sentence, delimiters, true);
-		
 		String resultString = "";
-	
+		if(sentence == null) {
+			return resultString;
+		}
+		
+		StringTokenizer token = new StringTokenizer(sentence, getNewDelimiters(), true);
 		while (token.hasMoreTokens()){
 			resultString += new StringBuffer(token.nextToken()).reverse();
 		}
