@@ -4,8 +4,8 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 public class Categories {
-	static ArrayList<Category> listCatecories = new ArrayList<Category>();
-	static int counterCategory;
+	private ArrayList<Category> listCatecories = new ArrayList<Category>();
+	private int counterCategory;
 	
 	public String readAllCatecories() throws FileNotFoundException{
 		ReaderBD reader = new ReaderBD();
@@ -14,12 +14,28 @@ public class Categories {
 		String s = "";
 		Category category = new Category();
 		for (String[] value : categoryBD) {
-			listCatecories.add(new Category());
-		    s += category.readCatecory(listCatecories, i, value);
+			getListCatecories().add(new Category());
+		    s += category.readCatecory(getListCatecories(), i, value);
 		    i++;
 		}
-		counterCategory = listCatecories.size();
+		setCounterCategory(getListCatecories().size());
 		return s.substring(0, s.length() - 1);
+	}
+
+	public int getCounterCategory() {
+		return counterCategory;
+	}
+
+	public void setCounterCategory(int counterCategory) {
+		this.counterCategory = counterCategory;
+	}
+
+	public ArrayList<Category> getListCatecories() {
+		return listCatecories;
+	}
+
+	public void setListCatecories(ArrayList<Category> listCatecories) {
+		this.listCatecories = listCatecories;
 	}
 
 }

@@ -28,26 +28,26 @@ public class Project{
 		return projectID + " " + projectName +  " " + shortDescription + " " + fullDescription + " " + foto + " " + link + " " + howMuchNeeded + " " +  howMuchCollected + " " + howMuchRemaining + "\n";
 	}
 	
-	public String showProjectInShort(int i) throws FileNotFoundException{
+	public String showProjectInShort(int i, Projects projects) throws FileNotFoundException{
 		i -= 1;
-		String s = Projects.listProject.get(i).projectID
-				+ ", " + Projects.listProject.get(i).projectName
-				+ ", " + Projects.listProject.get(i).shortDescription
-				+ ", " + Projects.listProject.get(i).howMuchNeeded
-				+ ", " + Projects.listProject.get(i).howMuchRemaining;
+		String s = projects.getListProject().get(i).projectID
+				+ ", " + projects.getListProject().get(i).projectName
+				+ ", " + projects.getListProject().get(i).shortDescription
+				+ ", " + projects.getListProject().get(i).howMuchNeeded
+				+ ", " + projects.getListProject().get(i).howMuchRemaining;
 		return s;		
 	}
 	
-	public String showProjectFull(int i) throws FileNotFoundException{
-		String s = "projectID = " + Projects.listProject.get(i).projectID
-					+ "\n projectName: " + Projects.listProject.get(i).projectName
-					+ "\n shortDescription: " + Projects.listProject.get(i).shortDescription
-					+ "\n fullDescription: " + Projects.listProject.get(i).fullDescription
-					+ "\n foto: " + Projects.listProject.get(i).foto
-					+ "\n link: " + Projects.listProject.get(i).link
-					+ "\n howMuchNeeded = " + Projects.listProject.get(i).howMuchNeeded
-					+ "\n howMuchCollected = " + Projects.listProject.get(i).howMuchCollected
-					+ "\n howMuchRemaining = " + Projects.listProject.get(i).howMuchRemaining;
+	public String showProjectFull(int i, ArrayList<Project> listProject) throws FileNotFoundException{
+		String s = "projectID = " + listProject.get(i).projectID
+					+ "\n projectName: " + listProject.get(i).projectName
+					+ "\n shortDescription: " + listProject.get(i).shortDescription
+					+ "\n fullDescription: " + listProject.get(i).fullDescription
+					+ "\n foto: " + listProject.get(i).foto
+					+ "\n link: " + listProject.get(i).link
+					+ "\n howMuchNeeded = " + listProject.get(i).howMuchNeeded
+					+ "\n howMuchCollected = " + listProject.get(i).howMuchCollected
+					+ "\n howMuchRemaining = " + listProject.get(i).howMuchRemaining;
 		return s;
 	}
 	

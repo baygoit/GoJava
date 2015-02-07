@@ -3,8 +3,8 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 public class Projects {
-	static ArrayList<Project> listProject = new ArrayList<Project>();
-	static int counterProject;
+	private ArrayList<Project> listProject = new ArrayList<Project>();
+	private int counterProject;
 	
 	public String writeAllProjects() throws FileNotFoundException{
 		String s = "";
@@ -13,12 +13,28 @@ public class Projects {
 		int i = 0;
 		Project project = new Project();
 		for (String[] value : projectBD) {
-			listProject.add(new Project());
-			s += project.readProject(listProject, value, i);
+			getListProject().add(new Project());
+			s += project.readProject(getListProject(), value, i);
 		    i++;
 		}
-		counterProject = listProject.size();
+		setCounterProject(getListProject().size());
 		return s;
+	}
+
+	public ArrayList<Project> getListProject() {
+		return listProject;
+	}
+
+	public void setListProject(ArrayList<Project> listProject) {
+		this.listProject = listProject;
+	}
+
+	public int getCounterProject() {
+		return counterProject;
+	}
+
+	public void setCounterProject(int counterProject) {
+		this.counterProject = counterProject;
 	}
 	
 }

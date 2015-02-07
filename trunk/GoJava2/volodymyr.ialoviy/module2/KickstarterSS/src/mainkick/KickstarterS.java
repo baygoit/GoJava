@@ -17,21 +17,21 @@ public class KickstarterS {
 		while (true){
 			printer(categories.readAllCatecories());
 			printer("Choice Category Number: ");
-			chosenCategory = check.checkNumber(category.kickContainCategory(), true);
+			chosenCategory = check.checkNumber(category.kickContainCategory(categories), true);
 			if (chosenCategory == magic){
 				Thread.sleep(10000);
 				continue;
 			}
-			printer("Your chosen category: " + category.showCatecoryName(chosenCategory - 1) + ", containing the following projects: ");
+			printer("Your chosen category: " + category.showCatecoryName(chosenCategory - 1, categories) + ", containing the following projects: ");
 			
 			while (true){
-				printer(category.showAllProjectInCategory(chosenCategory - 1, project));
+				printer(category.showAllProjectInCategory(chosenCategory - 1, project, projects, categories));
 				printer("Choice Project Number or 0 for exit to Category: ");
-				chosenProject = check.checkNumber(category.projectsContain(chosenCategory - 1), false);
+				chosenProject = check.checkNumber(category.projectsContain(chosenCategory - 1, categories), false);
 				if (chosenProject == 0){
 					break;
 				}
-				printer(project.showProjectFull(chosenProject - 1));
+				printer(project.showProjectFull(chosenProject - 1, projects.getListProject()));
 				printer("Choice 0 for exit to Project: ");
 				int[] zero = {0};
 				choiceToProject = check.checkNumber(zero, false);

@@ -14,9 +14,9 @@ public class testCategoriesClass {
 
 	{try {
 		categories.readAllCatecories();
-		category.kickContainCategory();
-		category.projectsContain(0);
-		category.showCatecoryName(0);
+		category.kickContainCategory(categories);
+		category.projectsContain(0, categories);
+		category.showCatecoryName(0, categories);
 	} catch (FileNotFoundException e) {
 		e.printStackTrace();
 	}}
@@ -29,21 +29,21 @@ public class testCategoriesClass {
 	
 	@Test
     public void shouldKickContainCategory_whenNotKickContainCategory() throws IOException, InterruptedException{
-		int[] i = category.kickContainCategory();
+		int[] i = category.kickContainCategory(categories);
 		int[] j = {1, 2, 3};
 		assertTrue(Arrays.equals(i, j));
     }
 	
 	@Test
     public void shouldProjectsContain_whenProjectsContain() throws IOException, InterruptedException{
-		int[] i = category.projectsContain(0);
+		int[] i = category.projectsContain(0, categories);
 		int[] j = {1, 3, 4};
 		assertTrue(Arrays.equals(i, j));
     }
 	
 	@Test
     public void shouldFirstCatecoryName_whenNotFirstCatecoryName() throws IOException, InterruptedException{
-		String s = category.showCatecoryName(0);
+		String s = category.showCatecoryName(0, categories);
 		assertTrue(s.equals("Category-1"));
     }
 	
@@ -52,7 +52,7 @@ public class testCategoriesClass {
 		Projects projects = new Projects();
 		projects.writeAllProjects();
 		Project project = new Project();
-		String s = category.showAllProjectInCategory(0, project);
+		String s = category.showAllProjectInCategory(0, project, projects, categories);
 		assertTrue(s.equals("1, Progect-1, shortDescription-1, 1000, 990\n"
 				+ "3, Progect-3, shortDescription-3, 1000, 990\n"
 				+ "4, Progect-4, shortDescription-4, 1000, 990"));

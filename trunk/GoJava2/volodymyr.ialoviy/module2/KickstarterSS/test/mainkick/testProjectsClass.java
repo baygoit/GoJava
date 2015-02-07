@@ -11,7 +11,7 @@ public class testProjectsClass {
 		Projects projects = new Projects();
 		projects.writeAllProjects();
 		Project project = new Project();
-		String s = project.showProjectFull(2);
+		String s = project.showProjectFull(2, projects.getListProject());
 		assertTrue(s.equals("projectID = 3\n"
 				+ " projectName: Progect-3\n"
 				+ " shortDescription: shortDescription-3\n"
