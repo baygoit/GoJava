@@ -13,11 +13,10 @@ public class QuoteTest {
 			return 0;
 		}
 	}
-	QuoteGenerator quote = new QuoteGenerator(new ConsoleOutput(), new FakeRandom());
+	QuoteGenerator quote = new QuoteGenerator(new FakeRandom());
 	
 	@Test
 	public void shouldReturnQuote_whenItSended(){
-		quote.printQuote();
 		assertEquals("If you don't know where you're going, you will probably end up somewhere else. (c) Laurence J. Peter", quote.generateQuote());
 	}
 }
