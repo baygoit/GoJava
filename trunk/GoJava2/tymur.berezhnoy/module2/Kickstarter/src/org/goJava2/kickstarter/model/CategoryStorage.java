@@ -38,4 +38,9 @@ public class CategoryStorage implements StorageBehavior<Integer> {
 	public Category getSpecificContent(Integer i) {
 		return categories.get(i);
 	}
+	
+	@Override
+	public void addContent(Object o) {
+		categories.add((Category) o);
+	}
 }

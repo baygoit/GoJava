@@ -45,4 +45,9 @@ public class QuoteStorage implements StorageBehavior<Integer> {
 	public Quote getSpecificContent(Integer i) {
 		return listOfQuotes.get(i);
 	}
+	
+	@Override
+	public void addContent(Object o) {
+		listOfQuotes.add((Quote) o);
+	}
 }

@@ -74,4 +74,9 @@ public class ProjectStorage implements StorageBehavior<Category> {
 	public List<Project> getSpecificContent(Category category) {
 		return map.get(category);
 	}
+	
+	@Override
+	public void addContent(Object o) {
+		// TODO	
+	}
 }
