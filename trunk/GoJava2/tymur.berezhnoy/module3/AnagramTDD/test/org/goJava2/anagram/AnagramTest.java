@@ -51,7 +51,7 @@ public class AnagramTest {
 	
 	@Test
 	public void shouldBe_SamePosition_WhenParamIs_SpecificSymbol() {
-		test(anagram.getNewDelimiters(), anagram.getNewDelimiters());
+		test(anagram.getDelimiters(), anagram.getDelimiters());
 	}
 	
 	@Test

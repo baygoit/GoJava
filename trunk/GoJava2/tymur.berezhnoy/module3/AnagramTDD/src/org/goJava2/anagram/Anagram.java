@@ -10,11 +10,11 @@ public class Anagram {
 		delimiters = " ,.!?@#$%^&*()-_=+<>/\';:[]{}|~`\"";
 	}
 	
-	public String getNewDelimiters() {
+	public String getDelimiters() {
 		return delimiters;
 	}
 	
-	public void setDelimiters(String delimiters) {
+	public void setNewDelimiters(String delimiters) {
 		this.delimiters = delimiters;
 	}
 		
@@ -41,7 +41,7 @@ public class Anagram {
 			return resultString;
 		}
 		
-		StringTokenizer token = new StringTokenizer(sentence, getNewDelimiters(), true);
+		StringTokenizer token = new StringTokenizer(sentence, getDelimiters(), true);
 		while (token.hasMoreTokens()){
 			resultString += new StringBuffer(token.nextToken()).reverse();
 		}
