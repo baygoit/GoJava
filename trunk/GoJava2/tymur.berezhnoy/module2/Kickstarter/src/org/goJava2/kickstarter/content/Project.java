@@ -10,13 +10,16 @@ public class Project {
 	private int requiredAmount;
 	private int total;
 	private int days;
+	private int backers;
 	
-	public Project(String name, String description, int requiredAmount, int total, int days, String story, String link) {
+	public Project(String name, String description, int requiredAmount, 
+			int total, int days, int backers, String story, String link) {
 		this.name = name;
 		this.description = description;
 		this.requiredAmount = requiredAmount;
 		this.total = total;
 		this.days = days;
+		this.backers = backers;
 		this.story = story;
 		this.link = link;
 	}
@@ -42,6 +45,7 @@ public class Project {
 			.append("\nRequired amount: ").append(requiredAmount).append(symbolDollar)
 			.append("\nTotal: ").append(total).append(symbolDollar)
 			.append("\nDays left: ").append(days)
+			.append("\nBackers: ").append(backers)
 			.append("\nStory: ").append(story)
 			.append("\nLink to video: ").append(link);
 		return builder.toString();
