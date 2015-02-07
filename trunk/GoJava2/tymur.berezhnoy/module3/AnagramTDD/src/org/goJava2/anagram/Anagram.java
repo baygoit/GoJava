@@ -16,7 +16,7 @@ public class Anagram {
 		System.out.println("**** The App closed ****");
 	}
 	
-	public String enterSent() {
+	private String enterSent() {
 		System.out.print("\nEnter a sentence: ");
 		return new Scanner(System.in).nextLine();
 	}	
