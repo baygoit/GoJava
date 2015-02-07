@@ -1,7 +1,6 @@
 package org.goJava2.test;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 
 import org.goJava2.anagram.Anagram;
 import org.junit.Test;
@@ -10,28 +9,43 @@ public class AnagramTest {
 	
 	private Anagram anagram = new Anagram();
 	
-	public void test(String descript, String expected, String actual) {
+	public void test(String expected, String actual) {
 		actual = anagram.getReversedSent(actual);
-		assertEquals(descript, expected, actual);
-	}
-	
-	@Test(expected = NullPointerException.class)
-	public void testExeptions() {		
-		test("should be NPE", null, null);
+		assertEquals(expected, actual);
 	}
 	
 	@Test
-	public void shouldGetReveresedSentence() {
-		test("Return: empty, when param is empty", "", "");
-		test("Return: a, when param is: a", "a", "a");
-		test("Return: yx, when param is xy", "yx", "xy");
-		test("Return: yx!, when param is xy!", "yx!", "xy!");
-		test("Return: yx zx, when param is xy xz", "yx zx", "xy xz");
-		test("Return: yx! ax@, when param is xy! xa@", "yx! ax@", "xy! xa@");
+	public void shouldBe_Empty_WhenParamIs_Empty() {
+		test("", "");
 	}
 	
 	@Test
-	public void shouldNotBeNull() {
-		assertNotNull(anagram.enterSent());
+	public void shouldBe_Space_WhenParamIs_Space() {
+		test(" ", " ");
+	}
+	
+	@Test
+	public void shouldBe_OneSymbol_WhenParamIs_OneSymbol() {
+		test("x", "x");
+	}
+	
+	@Test
+	public void souldBe_Reversed_WhenPramIs_XY() {
+		test("yx", "xy");
+	}
+	
+	@Test
+	public void shouldBe_Reversed_WhenParamIs_BySpace() {
+		test("yx yx", "xy xy");
+	}
+	
+	@Test
+	public void souldBe_SamePlace_WhenParamIs_Symbol() {
+		test("xy!", "yx!");
+	}
+	
+	@Test
+	public void shouldBe_Reversed_WhenParamIs_longSent() {
+		test("olleH dlrow! woH era uoy?", "Hello world! How are you?");
 	}
 }
