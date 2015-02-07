@@ -1,19 +1,21 @@
 package com.gojava.view;
 
 import com.gojava.projects.ProjectManager;
+import com.gojava.projects.ProjectStorage;
 
 public class Level3 implements Level {
     private Menu menu;
     private ProjectManager manager;
     private int position = 3;
+    private ProjectStorage projectStorage;
 
-    public Level3(ProjectManager manager) {
-        this.manager = manager;
+    public Level3(ProjectStorage projectStorage) {
+        this.projectStorage = projectStorage;
     }
 
     @Override
     public void displayMySelf(int nubberForNextLevel) {
-        manager.displaySpecificProject(menu.categoryPosition,
+        projectStorage.getSpecificProject(menu.categoryPosition,
                 nubberForNextLevel);
     }
     

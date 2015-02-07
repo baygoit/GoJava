@@ -2,7 +2,9 @@ package com.gojava.view;
 
 import java.util.ArrayList;
 
+import com.gojava.projects.CategoryStorage;
 import com.gojava.projects.ProjectManager;
+import com.gojava.projects.ProjectStorage;
 
 public class Menu {
     ProjectManager manager = new ProjectManager();
@@ -14,10 +16,10 @@ public class Menu {
 
     private ArrayList<Level> levelsList = new ArrayList<>();
 
-    public Menu() {
-        this.level1 = new Level1(manager);
-        this.level2 = new Level2(manager);
-        this.level3 = new Level3(manager);
+    public Menu(CategoryStorage categoryStorage, ProjectStorage projectStorage) {
+        this.level1 = new Level1(categoryStorage);
+        this.level2 = new Level2(projectStorage);
+        this.level3 = new Level3(projectStorage);
         level3.setMenu(this);
         levelsList.add(level1);
         levelsList.add(level2);

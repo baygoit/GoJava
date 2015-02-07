@@ -13,8 +13,8 @@ public class ProjectManager {
         out = new Out();
         projectStorage.setOut(out);
         categoryStorage.setOut(out);
-        initCategories();
-        initProjects();
+//        initCategories();
+//        initProjects();
     }
 
     private void initCategories() {
