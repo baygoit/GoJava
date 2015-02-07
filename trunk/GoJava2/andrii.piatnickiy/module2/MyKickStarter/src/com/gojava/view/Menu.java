@@ -3,16 +3,14 @@ package com.gojava.view;
 import java.util.ArrayList;
 
 import com.gojava.projects.CategoryStorage;
-import com.gojava.projects.ProjectManager;
 import com.gojava.projects.ProjectStorage;
 
 public class Menu {
-    ProjectManager manager = new ProjectManager();
     private int currentLevelPosition;
     private Level1 level1;
     private Level2 level2;
     private Level3 level3;
-    int categoryPosition;
+    int categoryPosition; 
 
     private ArrayList<Level> levelsList = new ArrayList<>();
 
@@ -39,16 +37,14 @@ public class Menu {
                 if (currentLevelPosition == 2) {
                     nubberForNextLevel = categoryPosition;
                 }
-                level = getCurrentLevel();
-                level.displayMySelf(nubberForNextLevel);
             } else {
                 currentLevelPosition++;
                 if (currentLevelPosition == 2) {
                     categoryPosition = nubberForNextLevel;
                 }
-                level = getCurrentLevel();
-                level.displayMySelf(nubberForNextLevel);
             }
+            level = getCurrentLevel();
+            level.displayMySelf(nubberForNextLevel);
         }
     }
 
