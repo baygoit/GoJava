@@ -12,6 +12,7 @@ import java.util.Random;
 import javax.media.jai.remote.JAIRMIDescriptor;
 
 import org.goJava2.kickstarter.content.Quote;
+import org.goJava2.kickstarter.view.InOut;
 import org.junit.Test;
 
 public class QuoteStorageTest {
