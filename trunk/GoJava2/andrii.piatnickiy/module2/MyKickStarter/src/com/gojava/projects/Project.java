@@ -1,6 +1,6 @@
 package com.gojava.projects;
 
-public class Project implements IProject{
+public class Project{
     private String name;
     private String description;
     private int needSum;

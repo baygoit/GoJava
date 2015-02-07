@@ -1,12 +1,11 @@
 package com.gojava.inputOutput;
 
 import com.gojava.projects.Category;
-import com.gojava.projects.ICategory;
-import com.gojava.projects.IProject;
+import com.gojava.projects.Project;
 
 public class Out {
     public String output(String in) {
-        return in;
+        return in; 
     }
 
     public String output(String string, String string2) {
@@ -25,7 +24,7 @@ public class Out {
         System.out.println(string);
     }
 
-    public String printProjectPreview(IProject project) {
+    public String printProjectPreview(Project project) {
         StringBuffer sb = new StringBuffer();
         sb.append("Project Name: ").append(project.getName()).append("\n");
         sb.append("Description: ").append(project.getDescription())
@@ -34,10 +33,9 @@ public class Out {
         sb.append("Current Sum: ").append(project.getCurrentSum()).append("\n");
         sb.append("Days Left: ").append(project.getDaysLeft()).append("\n");
         return sb.toString();
-
     }
 
-    public String printAdditionalProjectFields(IProject project) {
+    public String printAdditionalProjectFields(Project project) {
         StringBuffer sb = new StringBuffer();
         sb.append("ProjectHistory: ").append(project.getProjectHistory())
                 .append("\n");
@@ -48,7 +46,7 @@ public class Out {
         return sb.toString();
     }
 
-    public String printCategory(ICategory category) {
+    public String printCategory(Category category) {
         StringBuffer sb = new StringBuffer();
         sb.append(category.toString());
         return sb.toString();

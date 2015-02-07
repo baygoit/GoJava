@@ -1,6 +1,6 @@
 package com.gojava.projects;
 
-public class Category implements ICategory{
+public class Category{
     public Category(String name, int categoryId) {
         this.name = name;
         this.categoryId = categoryId;
