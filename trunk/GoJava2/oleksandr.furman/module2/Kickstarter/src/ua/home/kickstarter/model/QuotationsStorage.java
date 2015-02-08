@@ -23,10 +23,11 @@ public class QuotationsStorage {
 	private void jsonQuotationsToList() {
 		JSONParser parser = new JSONParser();
 		try {
-			JSONArray jsonArray = (JSONArray) parser.parse(new FileReader("d:\\Quotations.json"));
+			JSONArray jsonQuotationsArray = (JSONArray) parser.parse(new FileReader("d:\\Quotations.json"));
 			quotationsList = new ArrayList<Quote>();
-			for (int i = 0; i < jsonArray.size(); i++) {
-				quotationsList.add(new Quote((JSONObject) jsonArray.get(i)));
+			for (Object jsonQuotationsObject : jsonQuotationsArray) {
+				JSONObject jsonQuotations = (JSONObject) jsonQuotationsObject;
+				quotationsList.add(new Quote("" + jsonQuotations.get("quote")));
 			}
 		} catch (IOException e) {
 			e.printStackTrace();

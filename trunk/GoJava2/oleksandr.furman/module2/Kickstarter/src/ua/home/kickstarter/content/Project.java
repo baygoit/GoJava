@@ -1,7 +1,5 @@
 package ua.home.kickstarter.content;
 
-import org.json.simple.JSONObject;
-
 public class Project {
 	private final char dollarSymbol = 36;
 	private String name;
@@ -14,13 +12,13 @@ public class Project {
 	private String questionAnswers;
 	private Category category;
 
-	public Project(JSONObject jsonObject) {
-		this.name = "" + jsonObject.get("name");
-		this.description = "" + jsonObject.get("description");
-		this.goal = Integer.parseInt("" + jsonObject.get("goal"));
-		this.daysLeft = Integer.parseInt("" + jsonObject.get("daysLeft"));
+	public Project(String name, String description, int goal, int daysLeft, String linksToVideo) {
+		this.name = name;
+		this.description = description;
+		this.goal = goal;
+		this.daysLeft = daysLeft;
 		this.history = null;
-		this.linksToVideo = "" + jsonObject.get("linksToVideo");
+		this.linksToVideo = linksToVideo;
 		this.pledged = 0;
 		this.questionAnswers = null;
 	}
@@ -44,13 +42,13 @@ public class Project {
 	public String getName() {
 		return name;
 	}
-	 
+
 	public String getShortInfo() {
 		StringBuilder shortInfo = new StringBuilder();
-		shortInfo.append(" - ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓").append("\nНазвание проекта: ").append(name).append("\nОписание проекта: ").append(description)
-				.append("\nНеобходимая сумма: ").append(goal).append(dollarSymbol).append("\nСобранная сумма: ")
-				.append(pledged).append(dollarSymbol).append("\nДо окончания сбора средств: ").append(daysLeft)
-				.append(" дней");
+		shortInfo.append(" - ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓").append("\nНазвание проекта: ").append(name)
+				.append("\nОписание проекта: ").append(description).append("\nНеобходимая сумма: ").append(goal)
+				.append(dollarSymbol).append("\nСобранная сумма: ").append(pledged).append(dollarSymbol)
+				.append("\nДо окончания сбора средств: ").append(daysLeft).append(" дней");
 		return shortInfo.toString();
 	}
 
