@@ -10,8 +10,11 @@ public class QuoteTest {
 	
 	@Test
 	public void shouldBeCorrectAddCopyrightSymbol() {
-		quote = new Quote("New quote", "Donald Trump");
+		String quoteContent = "New quote";
+		String author = "Donald Trump";
 		char copyrightSymbol = 169;
-		assertEquals("\"New quote\"" + copyrightSymbol + " Donald Trump", quote.getQuoteContent());
+		quote = new Quote(quoteContent, author);
+		assertEquals("\"" + quoteContent + "\"" + copyrightSymbol + " " + author,
+					quote.getQuoteContent());
 	}
 }
