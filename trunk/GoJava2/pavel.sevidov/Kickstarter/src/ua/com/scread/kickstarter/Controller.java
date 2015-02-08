@@ -16,58 +16,78 @@ public class Controller {
     
     public void start() {
         greed(quote);      
-        Categories categories = model.getCategories();
-       	handlingCategories(categories);
+       	categoryMenu().run();
         io.print("Thanks for using my program!");
     }
     
-    private void handlingCategories(Categories categories) {
-        while (true) {
-            showCategoies(categories);  
-            int answer = io.read();
-            if (checkCategoriesNumber(categories, answer))
-                break;
-            Category category = categories.getCategory(answer-1);
-            showCategory(category);
-            handlingProjects(category);
-        }
+    private Menu categoryMenu() {
+        return new Menu(io) {
+            
+            @Override
+            Menu nextMenu(Object selected) {
+                Category category = (Category)selected;             
+                showCategory(category);
+                return projectsMenu(category); 
+            }
+            
+            @Override
+            Object choose(int menuItem) {
+                Categories categories = model.getCategories();
+                return categories.getCategory(menuItem - 1);
+            }
+            
+            @Override
+            void ask() {
+                showCategoies();                 
+            }
+        };
     }
     
-    private void handlingProjects(Category category) {
-        while (true) {
+    private Menu projectsMenu(final Category category) {
+        return new Menu(io) {
             List<Project> projects = model.getProjects(category);
-            showProjects(projects);
-            int answer = io.read();
-            if(checkProjectsNumber(projects, answer))
-                break;
-            handlingFullProject(projects.get(answer-1));
-        }
+            
+            @Override
+            Menu nextMenu(Object selected) {
+                Project project = (Project)selected;
+                return projectMenu(project);
+            }
+            
+            @Override
+            Object choose(int menuItem) {
+                return projects.get(menuItem - 1);
+            }
+            
+            @Override
+            void ask() {
+                showProjects(projects);            
+            }
+        };
     }
 
-    private void handlingFullProject(Project project) {
-        while (true) {
-          showFullProject(project); 
-          int projectOption = io.read();
-          if (projectOption != 0) {
-              println("Selected option: ");
-          } else
-              println("Exiting from project");
-          if (isZero(projectOption))
-              break;
-      }
-        
-    }
-
-    private boolean checkCategoriesNumber(Categories categories, int answer) {
-        return (isZero(answer) || (answer > categories.size()) || (answer < 0));
-    }
-    
-    private boolean checkProjectsNumber(List<Project> projects, int answer) {
-        return (isZero(answer) || (answer > projects.size()) || (answer < 0));
-    }
-
-    private boolean isZero(int answer) {
-        return answer == 0;
+    private Menu projectMenu(final Project project) {
+        return new Menu(io) {
+            
+            @Override
+            Menu nextMenu(Object selected) {
+                Integer menu = (Integer)selected;
+                
+                if (menu == 1) {
+                        println("Спасибо, что хотите помочь проекту!");
+                }
+                return null;
+            }
+            
+            @Override
+            Object choose(int menuItem) {
+                return menuItem;
+            }
+            
+            @Override
+            void ask() {
+                showFullProject(project);                 
+            }
+        };        
     }
     
     private void println() {
@@ -82,9 +102,9 @@ public class Controller {
 		println(quote.getQuote());
 	}
 
-	public void showCategoies(Categories categories) {
+	public void showCategoies() {
 		io.print("\nChoose category: ");
-		io.print(Arrays.toString(categories.getStringCategories()));
+		io.print(Arrays.toString(model.getCategories().getStringCategories()));
 		showExit();
 	}
 
