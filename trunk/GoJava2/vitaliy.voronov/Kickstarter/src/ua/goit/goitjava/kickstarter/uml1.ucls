@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <class-diagram version="1.1.8" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
   associations="true" dependencies="true" nesting-relationships="true">  
-  <class id="1" language="java" name="ua.goit.goitjava.kikcstarter.Output" project="Kickstarter" 
-    file="/Kickstarter/src/ua/goit/goitjava/kikcstarter/Output.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="1" language="java" name="ua.goit.goitjava.kickstarter.Output" project="Kickstarter" 
+    file="/Kickstarter/src/ua/goit/goitjava/kickstarter/Output.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="153" width="158" x="182" y="33"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -10,8 +10,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="2" language="java" name="ua.goit.goitjava.kikcstarter.Storage" project="Kickstarter" 
-    file="/Kickstarter/src/ua/goit/goitjava/kikcstarter/Storage.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="2" language="java" name="ua.goit.goitjava.kickstarter.Storage" project="Kickstarter" 
+    file="/Kickstarter/src/ua/goit/goitjava/kickstarter/Storage.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="153" width="237" x="251" y="226"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -19,8 +19,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <enumeration id="3" language="java" name="ua.goit.goitjava.kikcstarter.Category" project="Kickstarter" 
-    file="/Kickstarter/src/ua/goit/goitjava/kikcstarter/Category.java" binary="false" corner="BOTTOM_RIGHT">    
+  <enumeration id="3" language="java" name="ua.goit.goitjava.kickstarter.Category" project="Kickstarter" 
+    file="/Kickstarter/src/ua/goit/goitjava/kickstarter/Category.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="135" width="133" x="468" y="720"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -28,8 +28,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </enumeration>  
-  <class id="4" language="java" name="ua.goit.goitjava.kikcstarter.Quote" project="Kickstarter" 
-    file="/Kickstarter/src/ua/goit/goitjava/kikcstarter/Quote.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="4" language="java" name="ua.goit.goitjava.kickstarter.Quote" project="Kickstarter" 
+    file="/Kickstarter/src/ua/goit/goitjava/kickstarter/Quote.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="117" width="116" x="74" y="226"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -37,8 +37,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="5" language="java" name="ua.goit.goitjava.kikcstarter.Input" project="Kickstarter" 
-    file="/Kickstarter/src/ua/goit/goitjava/kikcstarter/Input.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="5" language="java" name="ua.goit.goitjava.kickstarter.Input" project="Kickstarter" 
+    file="/Kickstarter/src/ua/goit/goitjava/kickstarter/Input.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="99" width="87" x="380" y="33"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -55,8 +55,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="7" language="java" name="ua.goit.goitjava.kikcstarter.Main" project="Kickstarter" 
-    file="/Kickstarter/src/ua/goit/goitjava/kikcstarter/Main.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="7" language="java" name="ua.goit.goitjava.kickstarter.Main" project="Kickstarter" 
+    file="/Kickstarter/src/ua/goit/goitjava/kickstarter/Main.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="99" width="113" x="488" y="-106"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      

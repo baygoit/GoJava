@@ -1,15 +1,10 @@
-package kikcstarter;
+package ua.goit.goitjava.kickstarter;
 
 import java.util.ArrayList;
 
 public class Storage {
-	ArrayList<Project> projectsEducation = new ArrayList<>();
-	ArrayList<Project> projectsAccountant = new ArrayList<>();
-	ArrayList<Project> projects = new ArrayList<>();
-
-	public ArrayList<Project> getProjectsEducation() {
-		return projectsEducation;
-	}
+	
+	private ArrayList<Project> projects = new ArrayList<>();
 	
 	public ArrayList<Project> getProjectsByCategory(Category category) {
 		ArrayList<Project> projectsByCategory = new ArrayList<Project>();
@@ -23,11 +18,6 @@ public class Storage {
 		}
 		return projectsByCategory;
 	}
-
-	public ArrayList<Project> getProjectsAccountant() {
-		return projectsAccountant;
-	}
-
 	
 	public Storage() {
 		initProjects();
@@ -55,6 +45,10 @@ public class Storage {
 		projects.add(companyAccountant);
 		
 
+	}
+	
+	public int getSize(){
+		return projects.size();
 	}
 
 }

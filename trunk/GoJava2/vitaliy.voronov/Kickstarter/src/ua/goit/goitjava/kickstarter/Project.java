@@ -1,4 +1,4 @@
-package ua.goit.goitjava.kikcstarter;
+package ua.goit.goitjava.kickstarter;
 
 public class Project {
 	private String name;
@@ -70,6 +70,10 @@ public class Project {
 		return name;
 	}
 	
+	public String smallProject(){
+		String smallProject = name + description + needMoney + haveMoney + daysBeforeEnd;
+		return smallProject;
+	}
 	
 	
 	

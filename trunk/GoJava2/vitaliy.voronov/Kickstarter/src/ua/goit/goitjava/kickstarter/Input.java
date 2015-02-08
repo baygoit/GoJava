@@ -1,4 +1,4 @@
-package kikcstarter;
+package ua.goit.goitjava.kickstarter;
 
 import java.util.Scanner;
 

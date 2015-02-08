@@ -1,4 +1,4 @@
-package kikcstarter;
+package ua.goit.goitjava.kickstarter;
 
 import java.util.ArrayList;
 
@@ -22,7 +22,7 @@ public class Output {
 	}
 
 	public void printProject(ArrayList<Project> projects) {
-
+		
 		int i = 0;
 		for (Project project : projects) {
 			i++;
@@ -37,6 +37,11 @@ public class Output {
 					project2.getDaysBeforeEnd() + " days" + project2.getProjectHistory() + "\n " + project2.getLinkToDemoVideo() + 
 					"\n " + project2.getQuastionAnswer());
 		
+	}
+	
+	public void print(ArrayList<Project> projects){
+		
+		System.out.println(projects);
 	}
 
 	/*

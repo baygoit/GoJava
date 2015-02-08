@@ -1,4 +1,4 @@
-package kikcstarter;
+package ua.goit.goitjava.kickstarter;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -22,6 +22,7 @@ public class Main {
 				ArrayList<Project> projectsByCategory1 = stor
 						.getProjectsByCategory(Category.EDUCATION);
 				out.printProject(projectsByCategory1);
+				//out.print(projectsByCategory1);
 				out.printZero();
 				int projectId1 = in.scanInt();
 				if(projectId1 == 0){
