@@ -1,18 +1,11 @@
 package org.goJava2.kickstarter.model;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Random;
-
-import javax.media.jai.remote.JAIRMIDescriptor;
 
 import org.goJava2.kickstarter.content.Quote;
-import org.goJava2.kickstarter.view.InOut;
 import org.junit.Test;
 
 public class QuoteStorageTest {
