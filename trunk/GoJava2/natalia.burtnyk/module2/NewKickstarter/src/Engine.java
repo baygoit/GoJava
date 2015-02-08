@@ -9,6 +9,7 @@ public class Engine {
 		System.out.println(" Welcome to Kickstarter" + "\n"
 				+ "  *** *** *** *** *** " + "\n" + dataStorage.getRundomQuote()
 				+ "\n" + "  *** *** *** *** *** ");
+		
 		int i = 1;
 		for (Сategory сategory : dataStorage.getCategoriesList()) {
 			System.out.println(i + ". " + сategory.getName());
@@ -19,7 +20,14 @@ public class Engine {
 	}
 	
 	public void choise(int i) {
+		Сategory сategory = dataStorage.getCategoriesList().get(i - 1);
 		System.out.print("Your choise: " + i + ". "
-				+ dataStorage.getCategoriesList().get(i - 1).getName());
+				+ сategory.getName() + "\n");
+		
+		for (Project p: dataStorage.getSpecificProject(сategory)){
+			System.out.println(p.getName());
+		}
+		
 	}
+		
 }

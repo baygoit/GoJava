@@ -1,5 +1,7 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class DataStorage {
 	private List<String> quotes;
@@ -9,10 +11,13 @@ public class DataStorage {
 	private List<Project> projectsMusic;
 	private List<Project> projectsEducation;
 	
+	private Map<Сategory, List<Project>> map;
+	
 	public DataStorage() {
 		initQuotes();
 		initCategories();
 		initProjects();
+		initMap();
 	}
 	
 	private void initQuotes() {
@@ -39,20 +44,26 @@ public class DataStorage {
 		projectsMusic = new ArrayList<Project>();
 		projectsEducation = new ArrayList<Project>();
 		
-		projectsFood.add(new Project("Green Pea Cookie", "We want to produce green cookies",
+		projectsFood.add(new Project("1.Green Pea Cookie", "We want to produce green cookies",
 				8000, 3654, 17));
-		projectsFood.add(new Project("House wine", "We make delicious homemade wine",
+		projectsFood.add(new Project("2.House wine", "We make delicious homemade wine",
 				14000, 9006, 20));
-		projectsFood.add(new Project("CookBook", "We have collected recipes 2000 and we want "
+		projectsFood.add(new Project("3.CookBook", "We have collected recipes 2000 and we want "
 				+ "to release a book",12000, 2700, 28));
 		
-		projectsMusic.add(new Project("Musical Instruments", "Help for beginners",
+		projectsMusic.add(new Project("1.Musical Instruments", "Help for beginners",
 				25000, 12908, 48));
-		projectsEducation.add(new Project("English Speaking Club Online", "Сommunication with "
+		projectsEducation.add(new Project("1.English Speaking Club Online", "Сommunication with "
 				+ "native speakers via internet", 30000, 20124, 9));
-		projectsEducation.add(new Project("Martial Arts", "Study of martial arts", 48000, 5798, 56));	
+		projectsEducation.add(new Project("2.Martial Arts", "Study of martial arts", 48000, 5798, 56));
 	}
 	
+	public void initMap() {
+		  map = new HashMap<Сategory, List<Project>>();
+		  map.put(categories.get(0), projectsFood);
+		  map.put(categories.get(1), projectsMusic);
+		  map.put(categories.get(2), projectsEducation);
+	}
 	
 	public List<Сategory> getCategoriesList() {
 		return categories;
@@ -62,4 +73,8 @@ public class DataStorage {
 	   int i = (int)(Math.random() * quotes.size());
 	   return quotes.get(i);
 	}
+   
+   public List<Project> getSpecificProject(Сategory сategory) {
+	   return map.get(сategory);
+   }
 }
