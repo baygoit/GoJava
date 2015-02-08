@@ -12,7 +12,7 @@ import ua.com.goit.gojava1.lslayer.hackit2.actor.HumanControlledCharacter;
 import ua.com.goit.gojava1.lslayer.hackit2.dto.ActionResult;
 import ua.com.goit.gojava1.lslayer.hackit2.dto.ParameterObject;
 import ua.com.goit.gojava1.lslayer.hackit2.gear.Gear;
-import ua.com.goit.gojava1.lslayer.hackit2.gear.hardware.Devices.ScanDevice;
+import ua.com.goit.gojava1.lslayer.hackit2.gear.hardware.devices.ScanDevice;
 
 public class ScanActionTest {
     private Action scan;

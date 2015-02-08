@@ -5,63 +5,27 @@ import ua.com.goit.gojava1.lslayer.hackit2.actor.HumanControlledCharacter;
 
 
 public class UserAccount {
-    private String loginName;
-    private String password;
-    private Actor character;
-    private UserAccount() {
+    
+    private UserAccount() { //Just couple of static methods to maintain UserAccountData
         
     }
     
-    private void setLoginName(String loginName) {
-        this.loginName = loginName;
-    }
-
-    private void setPassword(String password) {
-        this.password = password;
-    }
-
-    void setCharacter(Actor character) throws Exception {
-        if (character != null) { 
-            this.character = character;
-        } else {
-            throw new HackitWrongParameterException("Where is actor?");
-        }
-    }
-
-    public Actor getActor() {
-        return this.character;
-    }
-    public static UserAccount login(String login, String password) throws Exception {
-        /* TODO
-         * Here comes description-code. 
-         * When persistent will be allowed by pro100fox,
-         * I should check whether there is an account 
-         * with given credentials in database, and I will return it. 
-         * For now, new account is created and returned;
-         */
-        
-        return UserAccount.createAccount(login, password);
-    }
-    
-    public boolean checkLogin(String login, String password) { 
-        return this.loginName.equals(login) && this.password.equals(password);
-    }
-    
-    public static UserAccount createAccount(String login, String password) throws Exception {
+    public static UserAccountData createAccount(String login, String password) throws Exception {
         if (login == null || password == null) 
             throw new HackitWrongParameterException("No null fields accepted");
-        UserAccount account = new UserAccount();
+        UserAccountData account = new UserAccountData();
         account.setLoginName(login);
         account.setPassword(password);
         return account;
     }
     
-    public static UserAccount createCharacterInAccount(UserAccount account, String characterName) throws Exception {
+    public static UserAccountData createCharacterInAccount(UserAccountData account, String characterName) throws Exception {
         if (account == null) throw new HackitWrongParameterException("Need a place for newborn character");
-        account.setCharacter(new HumanControlledCharacter(characterName)); //Here will be Factory creation. But for now - mock-up.
-        account.character.addSkill("scan");   //
-        account.character.addSkill("develop");// Three default skills added to newborn hero
-        account.character.addSkill("hack");   //
+        Actor character =  new HumanControlledCharacter(characterName);
+        character.addSkill("scan");   //
+        character.addSkill("develop");// Three default skills added to newborn hero
+        character.addSkill("hack");   //
+        account.setCharacter(character);
         return account;
     }
 }

@@ -4,6 +4,10 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import ua.com.goit.gojava1.lslayer.hackit2.action.Action;
+import ua.com.goit.gojava1.lslayer.hackit2.dto.ActionResult;
+import ua.com.goit.gojava1.lslayer.hackit2.dto.ParameterObject;
+
 public abstract class AbstractCharacter implements Actor {
 
     private String name;
@@ -19,6 +23,13 @@ public abstract class AbstractCharacter implements Actor {
     // private List<Gear> possesionsList;
     // private List<Gear> ControlList;
     
+
+    @Override
+    public ActionResult act(Action whatToDo, ParameterObject po) {
+        po.actor = this;
+        return whatToDo.execute(po);
+    }
+
 
     @Override
     public String getAttribute(String what) { //Right now I don't need null in result.  

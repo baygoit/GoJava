@@ -10,7 +10,7 @@ import ua.com.goit.gojava1.lslayer.hackit2.actor.Actor;
 import ua.com.goit.gojava1.lslayer.hackit2.actor.HumanControlledCharacter;
 import ua.com.goit.gojava1.lslayer.hackit2.dto.ActionResult;
 import ua.com.goit.gojava1.lslayer.hackit2.dto.ParameterObject;
-import ua.com.goit.gojava1.lslayer.hackit2.gear.hardware.Devices.InfoDevice;
+import ua.com.goit.gojava1.lslayer.hackit2.gear.hardware.devices.InfoDevice;
 
 public class AbstractActionTest {
     private ParameterObject po = new ParameterObject();

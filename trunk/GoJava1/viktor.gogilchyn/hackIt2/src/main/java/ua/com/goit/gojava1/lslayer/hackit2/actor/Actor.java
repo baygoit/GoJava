@@ -2,6 +2,10 @@ package ua.com.goit.gojava1.lslayer.hackit2.actor;
 
 import java.util.Map;
 
+import ua.com.goit.gojava1.lslayer.hackit2.action.Action;
+import ua.com.goit.gojava1.lslayer.hackit2.dto.ActionResult;
+import ua.com.goit.gojava1.lslayer.hackit2.dto.ParameterObject;
+
 public interface Actor {
 
     //Accessors part
@@ -16,4 +20,7 @@ public interface Actor {
     public Map<String, Integer> getSkills();
     public Map<String, String> getAttributes();
     public String getStringForOutput();
+    
+    //Game part
+    public ActionResult act(Action whatToDo, ParameterObject po);
 }

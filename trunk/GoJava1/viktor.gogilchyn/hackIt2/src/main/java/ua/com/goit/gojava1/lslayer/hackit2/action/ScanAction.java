@@ -27,7 +27,6 @@ public class ScanAction extends AbstractAction implements Action {
                           "Unsuccesful scan. You got no new information"
                 );
         ParameterObject change = new ParameterObject();
-        change.action = "addknowledge";
         change.actor = po.actor;
         change.targetGear = po.targetGear;
         result.addChange(change);
