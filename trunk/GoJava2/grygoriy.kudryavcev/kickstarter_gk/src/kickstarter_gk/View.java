@@ -13,17 +13,6 @@ public class View {
 	     viewPrint.outhere(StartCitation.outCitation());   
 		  }
 	
-
-	 
-	 
-//	 public void showProjects(List<Project> projectslist) {
-//	        int counter = 1;
-//	        for (Object project : projectslist) {
-//	            out.output("(" + counter + ") " + project);
-//	            counter++;
-//	        }
-//	    }
-//
 	    public void showCategories(ArrayList<Category> list, int i) {
 	        viewPrint.outhere("You entered: " + list.get(i - 1));
 	    }
@@ -46,14 +35,5 @@ public class View {
 	    public void showProjectMenu() {
 	        viewPrint.outhere("Select option: (not implemented, just '0' to exit)");
 	    }
-//
-//	    public void showList(List<Object> list) {
-//	        int counter = 1;
-//	        for (Object element : list) {
-//	            out.output("(" + counter + ") " + element);
-//	            counter++;
-//	        }
-//	    }
-//	
-	
+
 }

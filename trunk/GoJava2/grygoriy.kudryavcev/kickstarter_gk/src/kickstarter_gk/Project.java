@@ -65,7 +65,7 @@ public class Project {
 	}
 	
 	public String outLong(){
-//		return outLong() + "Description project" + description + "History:" + history + "Video:" + linkVideo + "FAQ:" +FAQ;
+
 		return outShort() + "Description project" + description + "History:" + history + "Video:" + linkVideo + "FAQ:" +FAQ;
 		
 	}

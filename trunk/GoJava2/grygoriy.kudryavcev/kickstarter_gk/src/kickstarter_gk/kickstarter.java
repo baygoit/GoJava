@@ -12,28 +12,6 @@ public class kickstarter {
 		
 		
 		
-//		// инициализируем список категорий;
-//		Categories Categories = new Categories();
-//		Categories.initCategory ();
-//		
-//		
-//		
-//		// Выводим цитату при старте.
-//
-//		Citation StartCitation = new Citation ();
-//		Console here = new Console();
-//		here.outhere(StartCitation.outCitation());
-//				
-//		 	 
-//		 }
-//		
-//		
-//	public void ShowCategories (){
-//	
-//		Category category = Categories.getCategories(2);
-//		here.outhere(category.NameCategory);
-		
-		
 		
 	};
 	
