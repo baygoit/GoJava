@@ -5,16 +5,15 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 
 public class FileWorker {
 
 	public static void write(String fileName, String text) {
+		try {
 	    File file = new File(fileName);
-	 
-	    try {
 	        if(!file.exists()){
 	            file.createNewFile();
 	        }
@@ -26,22 +25,22 @@ public class FileWorker {
 	        } finally {
 	            out.close();
 	        }
-	    } catch(IOException e) {
-	        throw new RuntimeException(e);
-	    }
+		}   catch(IOException e){
+			e.printStackTrace();
+			throw new RuntimeException();
+		}
 	}
 	
-	public static String read(String fileName) throws FileNotFoundException {
-	    StringBuilder sb = new StringBuilder();
+	public static List<String> read(String fileName) throws FileNotFoundException {
+		List<String> result = new LinkedList<String>();
 	    exists(fileName);
 	    File file = new File(fileName);
 	    try {
 	        BufferedReader in = new BufferedReader(new FileReader(file.getAbsoluteFile()));
 	        try {
-	            String s;
-	            while ((s = in.readLine()) != null) {
-	                sb.append(s);
-	                sb.append("\n");
+	            String string;
+	            while ((string = in.readLine()) != null) {
+	                result.add(string);
 	            }
 	        } finally {
 	            in.close();
@@ -49,16 +48,16 @@ public class FileWorker {
 	    } catch(IOException e) {
 	        throw new RuntimeException(e);
 	    }
-	    return sb.toString();
+	    return result;
 	}
 	
 		public static void update(String nameFile, String newText) throws FileNotFoundException {
 	    exists(nameFile);
 	    StringBuilder sb = new StringBuilder();
-	    String oldFile = read(nameFile);
+	    List<String> oldFile = read(nameFile);
 	    sb.append(oldFile);
 	    sb.append(newText);
-	    write(nameFile, sb.toString());
+		write(nameFile, sb.toString());
 	}
 	
 	public static void delete(String nameFile) throws FileNotFoundException {

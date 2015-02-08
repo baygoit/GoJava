@@ -1,6 +1,7 @@
 package ua.com.goit.gojava.andriidnikitin.service.util;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,16 +14,21 @@ public class FlatDataBuilder {
 	}
 
 
-	public List<String> getCSVElements(String string) {
-		List<String> list = new ArrayList<String>();
-		if (string == null) {
+	public List<ArrayList<String>> getCSVElementsFromFile() throws FileNotFoundException {
+		List<String> list = read();
+		List<ArrayList<String>> result = new ArrayList<ArrayList<String>>();
+		if (list == null) {
 			return null;
 		}
-		String[] array = string.split(",");
-		for (String word: array){
-			list.add(word);
+		for (String string:list){
+			ArrayList<String> sublist = new ArrayList<String>();
+			String[] array = string.split(",");
+			for (String word: array){
+				sublist.add(word);
+			}
+			result.add(sublist);
 		}
-		return list;
+		return result;
 	}
 	
 	public String makeCSVElement(String[] elements) {
@@ -30,14 +36,24 @@ public class FlatDataBuilder {
 		for (String element: elements) {
 			result.append(element).append(',');
 		}
-		return result.toString();
+		String returnString = result.toString();
+		return returnString.subSequence(0, returnString.length() - 2).toString();
+	}
+	
+	public void writeRecordsToCSV(List<String[]> list) {
+		StringBuilder result = new StringBuilder();
+		for (String[] array:list) {
+			result.append(makeCSVElement(array));
+			result.append('\n');
+		}
+		write(result.toString());
 	}
 	
 	public synchronized void write(String text) {
 		FileWorker.write(filepath, text);
 	}
 	
-	public synchronized String read() throws FileNotFoundException {
+	public synchronized List<String> read() throws FileNotFoundException {
 	   return FileWorker.read(filepath);
 	}
 	

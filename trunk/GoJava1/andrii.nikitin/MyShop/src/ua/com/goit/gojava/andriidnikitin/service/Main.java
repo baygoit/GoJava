@@ -1,18 +1,26 @@
 package ua.com.goit.gojava.andriidnikitin.service;
 
-import java.io.FileNotFoundException;
 import java.util.List;
 
+import ua.com.goit.gojava.andriidnikitin.model.Category;
 import ua.com.goit.gojava.andriidnikitin.model.Good;
+import ua.com.goit.gojava.andriidnikitin.service.util.ShopException;
 
 public class Main {
 
-	public static void main(String[] args) throws FileNotFoundException {
-		
+	public static void main(String[] args) throws ShopException  {
+		/*
 		StorageFlat store = new StorageFlat();
 		List<Good> goods = store.getGoodList();
 		for (Good good: goods){
 			System.out.println(good.printInfo());
+		}*/
+		StorageXmlNew store = new StorageXmlNew();
+		for(Category category: store.getCategoryList()){
+			for(Good good : store.getGoodList(category)){
+				System.out.println(good);
+			}
+			System.out.println();
 		}
 	}
 	

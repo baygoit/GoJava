@@ -8,6 +8,7 @@ import java.util.List;
 import ua.com.goit.gojava.andriidnikitin.model.Category;
 import ua.com.goit.gojava.andriidnikitin.model.Good;
 import ua.com.goit.gojava.andriidnikitin.service.util.FlatDataBuilder;
+import ua.com.goit.gojava.andriidnikitin.service.util.ShopException;
 
 public class StorageFlat extends StorageAbstract{
 	private List<Category> categoryList;
@@ -17,9 +18,8 @@ public class StorageFlat extends StorageAbstract{
 			+ this.hashCode() + ".csv");
 	FlatDataBuilder generator = new FlatDataBuilder("resources/sample.csv"); 
 	
-	public StorageFlat() throws FileNotFoundException{
+	public StorageFlat() throws ShopException{
 		generator = new FlatDataBuilder(filepath); 
-		generate();
 		init();
 		for (Good good: getGoodList()){
 			if (!categoryList.contains(good.getCategory())){
@@ -28,26 +28,28 @@ public class StorageFlat extends StorageAbstract{
 		}
 	}
 	
-	private void init() {
+	private void init() throws ShopException {
 		categoryList = new ArrayList<Category>();
 		goodList = new ArrayList<Good>();
-		 FlatDataBuilder initor = new FlatDataBuilder("resources/sample.csv"); 
-		 while (true) {
-			 try {
-				 goodList.add(readGood(initor.getCSVElements(initor.read())));
-			 } catch (FileNotFoundException e){
-				 break;
-			 }
-		 }
+		FlatDataBuilder initor = new FlatDataBuilder("resources/sample.csv");
+		try {
+			List<ArrayList<String>> readList = initor.getCSVElementsFromFile();
+			for(ArrayList<String> sublist: readList) {
+				goodList.add(readGood(sublist));
+			}
+		} catch (FileNotFoundException e) {
+			throw new ShopException("Resource file not found.");
+		}
 	}
 	
-	public void generate() throws FileNotFoundException {
+	private void generate() throws ShopException{
 		StorageImpl store = new StorageImpl();
 		FlatDataBuilder generator = new FlatDataBuilder("resources/sample.csv"); 
-		generator.write("");
-		for (Good good : store.getGoodList()){
-			generator.append(generator.makeCSVElement(writeGood(good)));
+		List<String[]> list = new ArrayList<String[]>();
+		for (Good good: store.getGoodList()){
+			list.add(writeGood(good));
 		}
+		generator.writeRecordsToCSV(list);
 	}
 	
 	protected StorageFlat setCategoryList(List<Category> categoryList) {
