@@ -14,47 +14,32 @@ public class Main {
 			out.menu();
 			Input in = new Input();
 
+			Category category = null;
 			switch (in.scanInt()) {
 			case 0:
 				break;
 			case 1:
-				out.youChoose(Category.EDUCATION.name());
-				ArrayList<Project> projectsByCategory1 = stor
-						.getProjectsByCategory(Category.EDUCATION);
-				out.printProject(projectsByCategory1);
-				//out.print(projectsByCategory1);
-				out.printZero();
-				int projectId1 = in.scanInt();
-				if(projectId1 == 0){
-					break;
-				}
-				out.printSelectProject(projectsByCategory1.get(projectId1 - 1));
+				category = Category.EDUCATION;
 				break;
 			case 2:
-				out.youChoose(Category.FINANCE.name());
-				ArrayList<Project> projectsByCategory2 = stor
-						.getProjectsByCategory(Category.FINANCE);
-				out.printProject(projectsByCategory2);
-				out.printZero();
-				int projectId2 = in.scanInt();
-				if(projectId2 == 0){
-					break;
-				}
-				out.printSelectProject(projectsByCategory2.get(projectId2 - 1));
+				category = Category.FINANCE;
 				break;
 			case 3:
-				out.youChoose(Category.GAMES.name());
-				ArrayList<Project> projectsByCategory3 = stor
-						.getProjectsByCategory(Category.GAMES);
-				out.printProject(projectsByCategory3);
-				out.printZero();
-				int projectId3 = in.scanInt();
-				if(projectId3 == 0){
-					break;
-				}
-				out.printSelectProject(projectsByCategory3.get(projectId3 - 1));
+				category = Category.GAMES;
 				break;
 			}
+			
+			out.youChoose(category.name());
+			ArrayList<Project> projectsByCategory = stor
+					.getProjectsByCategory(category);
+			out.printProject(projectsByCategory);
+			//out.print(projectsByCategory1);
+			out.printZero();
+			int projectId1 = in.scanInt();
+			if(projectId1 == 0){
+				break;
+			}
+			out.printSelectProject(projectsByCategory.get(projectId1 - 1));
 			System.out.println("==========================");
 		}
 
