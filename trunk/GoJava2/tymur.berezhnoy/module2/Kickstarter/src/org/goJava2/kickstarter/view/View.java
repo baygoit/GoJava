@@ -28,7 +28,7 @@ public class View {
 	}
 	
 	public void displayHead() {
-		System.out.println("\t" + title + "\n" + quoteController.passRandomQuoteToView().getQuoteContent());
+		System.out.println("\t" + title + "\n" + quoteController.getRandomQuote().getQuoteContent());
 	}
 	
 	public void displayCategories() {

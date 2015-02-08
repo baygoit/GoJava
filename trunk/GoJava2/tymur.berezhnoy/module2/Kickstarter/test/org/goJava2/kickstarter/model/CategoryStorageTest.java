@@ -32,4 +32,14 @@ public class CategoryStorageTest {
 		assertTrue("Expected that new created category is at storage.",
 					categoryStorage.getContent().contains(quote));
 	}
+	
+	@Test(expected = NullPointerException.class)
+	public void shouldBeNPE_whenParamIs_null() {
+		categoryStorage.getSpecificContent(null);
+	}
+	
+	@Test(expected = IndexOutOfBoundsException.class)
+	public void shouldBeAIOoBE_whenParamLessThanSize() {
+		categoryStorage.getSpecificContent(123213);
+	}
 }

@@ -25,7 +25,7 @@ public class QuoteController implements ControllerBehavior<Integer> {
 		return quoteStorage.getSpecificContent(i);	
 	}
 	
-	public Quote passRandomQuoteToView() {
+	public Quote getRandomQuote() {
 		return quoteStorage.getRandomQuote();
 	}
 }

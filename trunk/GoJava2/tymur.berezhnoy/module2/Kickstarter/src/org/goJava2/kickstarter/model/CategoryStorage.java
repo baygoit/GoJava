@@ -35,7 +35,7 @@ public class CategoryStorage implements StorageBehavior<Integer> {
 	}
 	
 	@Override
-	public Category getSpecificContent(Integer i) {
+	public Category getSpecificContent(Integer i) {		
 		return categories.get(i);
 	}
 	
