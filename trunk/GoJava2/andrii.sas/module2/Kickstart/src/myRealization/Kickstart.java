@@ -108,15 +108,11 @@ public class Kickstart {
 	}
 	
 	public void returnToProjects(int g) {
-		if (g == 0){
-			showProjects();
-		} else {
-			while (g != 0){
-				output.println("Error!! You must enter 0 \nPlease, try again");
-				g = catchException();
-			}
-			showProjects();
+		while (g != 0){
+			output.println("Error!! You must enter 0 \nPlease, try again");
+			g = catchException();
 		}
+		showProjects();
 	}
 	
 	public void navigate(int k) {
