@@ -22,7 +22,6 @@ public class KickstarterRunner {
 		projects.addProject(spaceDiscovery);
 		projects.addProject(baseballTEam);
 		projects.addProject(strongman);
-		kick.printQuote();
 		cat.addCategory(sport);
 		cat.addCategory(science);
 		cat.addCategory(music);

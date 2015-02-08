@@ -129,6 +129,7 @@ public class Kickstart {
 	}
 	
 	public void buildMenu(){
+		printQuote();
 		while (true){
 			showList();
 			int intForExit = catchArrayError();
