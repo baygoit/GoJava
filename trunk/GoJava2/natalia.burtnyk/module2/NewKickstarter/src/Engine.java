@@ -1,13 +1,13 @@
 public class Engine {
 	private DataStorage dataStorage;
+	
 	public Engine() {
 		this.dataStorage = new DataStorage();
 	}
 	
 	public void run() {
-		Quote quote = new Quote();
 		System.out.println(" Welcome to Kickstarter" + "\n"
-				+ "  *** *** *** *** *** " + "\n" + quote.getRundomQuote()
+				+ "  *** *** *** *** *** " + "\n" + dataStorage.getRundomQuote()
 				+ "\n" + "  *** *** *** *** *** ");
 		int i = 1;
 		for (Сategory сategory : dataStorage.getCategoriesList()) {

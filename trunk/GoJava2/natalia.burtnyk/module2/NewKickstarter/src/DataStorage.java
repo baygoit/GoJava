@@ -9,6 +9,12 @@ public class DataStorage {
 	private List<Project> projectsMusic;
 	private List<Project> projectsEducation;
 	
+	public DataStorage() {
+		initQuotes();
+		initCategories();
+		initProjects();
+	}
+	
 	private void initQuotes() {
 		quotes = new ArrayList<String>();
 		quotes.add("\"Lost time is never found again.\"");
