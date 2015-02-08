@@ -12,6 +12,10 @@ public class Basket {
 	private Integer id;
 	private Date date;
 	
+	public Basket() {
+		order = new HashMap<Good, Integer>(); 
+	}
+	
 	public Map<Good, Integer> getOrder() {
 		return order;
 	}

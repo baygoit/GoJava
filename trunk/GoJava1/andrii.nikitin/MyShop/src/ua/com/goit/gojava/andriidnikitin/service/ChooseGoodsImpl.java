@@ -10,7 +10,7 @@ import ua.com.goit.gojava.andriidnikitin.model.Order;
 
 public class ChooseGoodsImpl implements ChooseGoods  {
 	
-	private Basket basket = new Basket();
+	protected Basket basket = new Basket();
 	
 	@Override
 	public void add(Good good, int quantity) {
@@ -49,7 +49,7 @@ public class ChooseGoodsImpl implements ChooseGoods  {
 		for (Entry<Good, Integer> entry: order.entrySet()) {
 			BigDecimal price = entry.getKey().getPrice();
 			Integer quantity = entry.getValue();
-			result.add(price.multiply(new BigDecimal(quantity.toString())));
+			result = result.add(price.multiply(new BigDecimal(quantity)));
 		}
 		return result;
 	}

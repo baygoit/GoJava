@@ -12,7 +12,7 @@ import ua.com.goit.gojava.andriidnikitin.model.Good;
 import ua.com.goit.gojava.andriidnikitin.model.Warehouse;
 
 
-public class DataBuilder {
+public class XmlDataBuilder {
         	
         private static final JAXBContext JAXB_CONTEXT;
         

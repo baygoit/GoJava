@@ -1,9 +1,19 @@
 package ua.com.goit.gojava.andriidnikitin.service;
 
+import java.io.FileNotFoundException;
+import java.util.List;
+
+import ua.com.goit.gojava.andriidnikitin.model.Good;
+
 public class Main {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws FileNotFoundException {
 		
+		StorageFlat store = new StorageFlat();
+		List<Good> goods = store.getGoodList();
+		for (Good good: goods){
+			System.out.println(good.printInfo());
+		}
 	}
 	
 	/*

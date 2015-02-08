@@ -12,7 +12,7 @@ import ua.com.goit.gojava.andriidnikitin.model.Category;
 import ua.com.goit.gojava.andriidnikitin.model.Good;
 import ua.com.goit.gojava.andriidnikitin.model.GoodCollection;
 import ua.com.goit.gojava.andriidnikitin.model.Warehouse;
-import ua.com.goit.gojava.andriidnikitin.service.util.DataBuilder;
+import ua.com.goit.gojava.andriidnikitin.service.util.XmlDataBuilder;
 
 public class StorageXml extends StorageAbstract {
 	
@@ -25,14 +25,14 @@ public class StorageXml extends StorageAbstract {
 	
 	private void init() {
 		try {
-			warehouse = DataBuilder.unmarshallWarehouse(fileStorage);
+			warehouse = XmlDataBuilder.unmarshallWarehouse(fileStorage);
 		} catch (JAXBException e) {
 			e.printStackTrace();
 		}	
 	}
 	
 	public void saveChanges() throws JAXBException{
-		DataBuilder.marshallWarehouse(warehouse, fileStorage);
+		XmlDataBuilder.marshallWarehouse(warehouse, fileStorage);
 		init();
 	}
 
