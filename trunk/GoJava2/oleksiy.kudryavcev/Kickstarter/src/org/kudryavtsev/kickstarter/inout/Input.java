@@ -1,7 +1,5 @@
 package org.kudryavtsev.kickstarter.inout;
 
-import java.util.Scanner;
-
 public class Input {
     private In in;
     

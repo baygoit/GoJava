@@ -17,7 +17,7 @@ public class Controller {
         this.view = view;
         this.input = input;
     }
-
+ 
     public void start() {
         model.init();
         view.showGreeting();

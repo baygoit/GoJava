@@ -48,7 +48,7 @@
   </class>  
   <interface id="6" language="java" name="org.kudryavtsev.kickstarter.inout.Out" project="Kickstarter" 
     file="/Kickstarter/src/org/kudryavtsev/kickstarter/inout/Out.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1239" y="367"/>    
+    <position height="-1" width="-1" x="1263" y="367"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      

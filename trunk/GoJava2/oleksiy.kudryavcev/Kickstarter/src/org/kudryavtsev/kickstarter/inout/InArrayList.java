@@ -21,5 +21,4 @@ public class InArrayList implements In {
     @Override
     public void close() {
     }
-
 }

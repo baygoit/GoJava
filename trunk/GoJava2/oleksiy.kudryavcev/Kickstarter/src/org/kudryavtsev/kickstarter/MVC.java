@@ -17,8 +17,8 @@ public class MVC {
         
         Model model = new Model();
         View view = new View(whereToOut);
-        Input scan = new Input(whereToIn);
-        Controller controller = new Controller(model, view, scan);
+        Input input = new Input(whereToIn);
+        Controller controller = new Controller(model, view, input);
 
         controller.start();
     }
