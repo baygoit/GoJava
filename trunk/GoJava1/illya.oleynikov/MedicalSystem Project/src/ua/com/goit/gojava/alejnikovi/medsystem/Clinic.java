@@ -17,7 +17,7 @@ class Clinic {
 		return doctor;
 	}
 
-	List<Doctor> getDoctorsByClinic() {
+	List<Doctor> getDoctors() {
 		List<Doctor> doctorsInClinic = new ArrayList<Doctor>();
 		for(Doctor doctor: MedicalSystem.getDoctors()){
 			if(doctor.getClinic().equals(this)){

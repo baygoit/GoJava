@@ -16,6 +16,7 @@ public class SpecializationTest {
 	public static void setDocList(){
 		testSpecs.add(new Specialization("Знахарь"));
 		testSpecs.add(new Specialization("Стоматолог"));
+		testDocList.clear();
 		testDocList.add(new Doctor("Иван", "Иванов", testSpecs.get(0), null));
 		testDocList.add(new Doctor("Петр", "Петров",testSpecs.get(0), null));
 		testDocList.add(new Doctor("Спиридон", "Спиридонов", testSpecs.get(1), null));
@@ -30,9 +31,10 @@ public class SpecializationTest {
 	
 	@Test
 	public void testGetDoctorsBySpec() {
-		List<Doctor> docsWithSpec = testSpecs.get(0).getDoctorsBySpec();
+		List<Doctor> docsWithSpec = testSpecs.get(0).getDoctors();
 		String docNames = docsWithSpec.get(0).getFirstName() + ", " + docsWithSpec.get(1).getFirstName();
 		assertEquals("Иван, Петр", docNames);
+		System.out.println();
 	}
 
 

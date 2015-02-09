@@ -37,7 +37,7 @@ public class ClinicTest {
 	
 	@Test
 	public void testGetDoctorsByClinic() {
-		List<Doctor> docsWithSpec = testClinics.get(0).getDoctorsByClinic();
+		List<Doctor> docsWithSpec = testClinics.get(0).getDoctors();
 		String docNames = docsWithSpec.get(0).getFirstName() + ", " + docsWithSpec.get(1).getFirstName();
 		assertEquals("Док1, Док3", docNames);
 	}

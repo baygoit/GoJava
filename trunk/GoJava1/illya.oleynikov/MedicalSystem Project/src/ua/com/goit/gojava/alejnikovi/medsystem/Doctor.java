@@ -1,5 +1,6 @@
 package ua.com.goit.gojava.alejnikovi.medsystem;
 
+
 class Doctor {
 
 	private String firstName;

@@ -15,7 +15,7 @@ class Specialization {
 		return name;
 	}
 
-	List<Doctor> getDoctorsBySpec (){
+	List<Doctor> getDoctors (){
 		List<Doctor> doctorsWithSpec = new ArrayList<Doctor>();
 		for(Doctor doctor: MedicalSystem.getDoctors()){
 			if(doctor.getSpecialization().equals(this)){
@@ -24,5 +24,6 @@ class Specialization {
 		}
 		return doctorsWithSpec;
 	}
+	
 
 }
