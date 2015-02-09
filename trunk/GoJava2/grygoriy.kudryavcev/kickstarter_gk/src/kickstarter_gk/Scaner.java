@@ -11,7 +11,7 @@ public class Scaner {
       return scanner.nextInt();
        }
     
-    protected void finalize() throws Throwable {
+    protected void finalize()  {
     	scanner.close();
     }
     

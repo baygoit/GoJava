@@ -22,18 +22,34 @@ public class View {
 	        for (Object category : categoryList) {
 	        	viewPrint.outhere("(" + counter + ") " + category);
 	        	counter++;
+	        	
 	        }
+	        showSelect();
 
     }
 
 	    public void showProject(Project project) {
 	    	viewPrint.outhere(project.outLong());
-	    
 	    }
 	    
-//
+
 	    public void showProjectMenu() {
 	        viewPrint.outhere("Select option: (not implemented, just '0' to exit)");
 	    }
+	    
+	    public void showSelect(){
+	    	viewPrint.outhere("Please, enter number to select, or 0 to exit");
+	    }
+
+		public void showProjectsInCategory(ArrayList<Project> projectsInCategory) {
+			int projectSize = projectsInCategory.size();
+			int i = 1;
+				for (Project p : projectsInCategory){
+            		viewPrint.outhere("("+i+")" + p.outLong());
+//					showProject(p);
+					i++;
+            	}
+				showSelect();
+		}
 
 }

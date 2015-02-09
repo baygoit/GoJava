@@ -8,7 +8,8 @@ public class ModelViewControler {
 		    Model model = new Model();
 	        View view = new View();
 	        Scaner scaner = new Scaner();
-	        Controler controler = new Controler(model, view, scaner);
+	        Menu menu = new Menu();
+	        Controler controler = new Controler(model, view, scaner, menu);
 
 	        controler.start();
 	    }

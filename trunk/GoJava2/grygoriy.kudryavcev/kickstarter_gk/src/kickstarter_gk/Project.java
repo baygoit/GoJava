@@ -61,12 +61,12 @@ public class Project {
 	}
 	
 	public String outShort(){
-		return name + "," + desc + ", total" + total + ", donated" + donated + ", days to start" + days;
+		return name + ", " + desc + ", total:" + total + ", donated: " + donated + ", days to start: " + days;
 	}
 	
 	public String outLong(){
 
-		return outShort() + "Description project" + description + "History:" + history + "Video:" + linkVideo + "FAQ:" +FAQ;
+		return outShort() + " Description project: " + description + " History: " + history + " Video: " + linkVideo + " FAQ: " +FAQ;
 		
 	}
 	

@@ -49,19 +49,13 @@ public class Model {
 		Category cat = category;
 
 		for (i = 0; i < allProjects.size(); i++){
-
 			Category tmpcat = allProjects.get(i).getCategory(); 
-
 			if (cat.equals(tmpcat)) {
 				projectInCategory.add(allProjects.get(i));
 			}
-
 		}
-		
 		return projectInCategory;
 	}
 	
-	
-
 	
 }
