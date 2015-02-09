@@ -11,17 +11,19 @@ import ua.home.kickstarter.controller.QuotationsController;
 import ua.home.kickstarter.model.ProjectStorage;
 
 public class Display {
-	private Category category;
 
 	private QuotationsController quotations;
-	private CategoriesController categories;
+	private CategoriesController categoriesController;
 	private ProjectsController projects;
 	private ConsoleOutput consoleOutput;
+	private ProjectStorage projectStorage;
 
-	public Display(QuotationsController quotations, CategoriesController categories, ProjectsController projects) {
-		consoleOutput = new ConsoleOutput();
+	public Display(QuotationsController quotations, CategoriesController categoriesController,
+			ProjectsController projects, ConsoleOutput consoleOutput) {
+		this.projectStorage = new ProjectStorage();
+		this.consoleOutput = consoleOutput;
 		this.quotations = quotations;
-		this.categories = categories;
+		this.categoriesController = categoriesController;
 		this.projects = projects;
 	}
 
@@ -31,19 +33,19 @@ public class Display {
 
 	public void displayCategories() {
 		consoleOutput.output("Выберите категорию :");
-		for (Map.Entry<Integer, Category> pair : categories.passContentToView().entrySet()) {
+		for (Map.Entry<Integer, Category> pair : categoriesController.passContentToView().entrySet()) {
 			consoleOutput.output(pair.getKey() + " - " + pair.getValue().getName());
 		}
-		consoleOutput.output("[Выберите категорию от 1 до " + categories.passContentToView().size()
+		consoleOutput.output("[Выберите категорию от 1 до " + categoriesController.passContentToView().size()
 				+ " или нажмите 0 для выхода из программы]\n ");
 	}
 
-	public void displaySelectedCategoryName(int i) {
-		category = categories.passSpecificContentToView(i);
+	public void displaySelectedCategoryName(Category category) {
+
 		consoleOutput.output("Вы выбрали категорию " + category.getName());
 	}
 
-	public void displayProjects() {
+	public void displayProjects(Category category) {
 
 		int projectNumber = 1;
 		for (Project project : projects.passSpecificContentToView(category)) {
@@ -54,13 +56,9 @@ public class Display {
 				+ " или нажмите 0 для возврата к выбору категорий]\n ");
 	}
 
-	public void displaySpecificProject(int i) throws IndexOutOfBoundsException{
-		ProjectStorage projectStorage = new ProjectStorage();
+	public void displaySpecificProject(int i, Category category) throws IndexOutOfBoundsException {
+
 		List<Project> projects = projectStorage.getSpecificContent(category);
-//		if (i > projects.size()) {
-//			consoleOutput.output("Проект под номером " + i + " отстствует в системе, повторите ввод. \n");
-//			return;
-//		}
 
 		consoleOutput.output(projects.get(i - 1).getFullInfo());
 		consoleOutput.output("0 - возврат в категорию " + category.getName());
