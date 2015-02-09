@@ -31,7 +31,7 @@ public class MultipleQuestion extends Question {
 
 	@Override
 	public String toString() {
-		return "ClosedQuestion [getContent()=" + getContent() + "]";
+		return "MultipleQuestion [getId() = " + getId() + ", getContent()=" + getContent() + "]";
 	}
 
 	//@Override

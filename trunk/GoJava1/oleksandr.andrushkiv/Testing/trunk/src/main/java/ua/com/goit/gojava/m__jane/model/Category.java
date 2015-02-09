@@ -11,6 +11,7 @@ import javax.xml.bind.annotation.XmlElements;
 import javax.xml.bind.annotation.XmlID;
 import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import ua.com.goit.gojava.m__jane.model.question.MultipleQuestion;
 import ua.com.goit.gojava.m__jane.model.question.SimpleQuestion;
@@ -21,7 +22,8 @@ public class Category {
 	
 	@XmlID
 	@XmlAttribute
-	private String id;
+	@XmlJavaTypeAdapter(IDAdapter.class)
+	private Integer id;
 	
 	@XmlAttribute
 	private String name;
@@ -34,16 +36,16 @@ public class Category {
 	public Category() {
 	}
 	
-	public Category(String id, String name) {
+	public Category(Integer id, String name) {
 		this.id = id;
 		this.name = name;
 	}
 
-	public String getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

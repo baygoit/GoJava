@@ -5,7 +5,9 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlID;
 import javax.xml.bind.annotation.XmlSeeAlso;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
+import ua.com.goit.gojava.m__jane.model.IDAdapter;
 import ua.com.goit.gojava.m__jane.model.answer.Answer;
 
 
@@ -15,7 +17,8 @@ public abstract class Question {
 	
 	@XmlID
 	@XmlAttribute
-	private String id;
+	@XmlJavaTypeAdapter(IDAdapter.class)
+	private Integer id;
 	
 	@XmlAttribute
 	protected String content;
@@ -23,12 +26,12 @@ public abstract class Question {
 	public Question() {
 	}
 
-	public String getId() {
+	public Integer getId() {
 		return id;
 	}
 
 
-	public void setId(String id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

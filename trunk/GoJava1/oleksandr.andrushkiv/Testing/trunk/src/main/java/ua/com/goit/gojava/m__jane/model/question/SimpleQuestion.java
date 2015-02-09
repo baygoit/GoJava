@@ -26,7 +26,7 @@ public class SimpleQuestion extends Question {
 
 	@Override
 	public String toString() {
-		return "OpenQuestion [getContent()=" + getContent() + "]";
+		return "SimpleQuestion [getId() = " + getId() + ", getContent()=" + getContent() + "]";
 	}
 
 	//@Override
