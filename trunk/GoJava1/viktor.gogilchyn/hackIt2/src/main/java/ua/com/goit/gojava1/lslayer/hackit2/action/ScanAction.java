@@ -1,7 +1,7 @@
 package ua.com.goit.gojava1.lslayer.hackit2.action;
 
+import ua.com.goit.gojava1.lslayer.hackit2.HackitWrongParameterException;
 import ua.com.goit.gojava1.lslayer.hackit2.dto.ActionResult;
-import ua.com.goit.gojava1.lslayer.hackit2.dto.ParameterObject;
 
 public class ScanAction extends AbstractAction implements Action {
 
@@ -10,7 +10,7 @@ public class ScanAction extends AbstractAction implements Action {
     }
 
     @Override
-    public ActionResult execute() {
+    public ActionResult execute() throws HackitWrongParameterException {
         /* Every action works in this way:
          * 1. Gather skill bonuses from actor and tool.
          * 2. Gather anti-skill bonuses from target
@@ -18,19 +18,15 @@ public class ScanAction extends AbstractAction implements Action {
          * 4. Formatting ResultMesage
          * 5. Making changes (if necessary) to possession and control lists. 
          */
-        ParameterObject po = this.getParameters();
-        if (super.checkParameters(true, true, true, po) != null) {
-            return new ActionResult(false, checkParameters(true, true, true, po));
-        }
-        boolean succeed = super.checkSuccess(po);
+        if (this.getParameters().actor == null) throw new HackitWrongParameterException(this.commandToInvoke + " action. Actor needed");
+        if (this.getParameters().tool == null) throw new HackitWrongParameterException(this.commandToInvoke + " action. Tool needed");
+        if (this.getParameters().targetGear == null) throw new HackitWrongParameterException(this.commandToInvoke + " action. TargetGear needed");
+        
+        boolean succeed = super.checkSuccess();
         ActionResult result = new ActionResult(succeed, 
-                succeed ? "You successfully scanned "+ po.targetGear.getName() +". Got new information" :
+                succeed ? "You successfully scanned "+ this.getParameters().targetGear.getName() +". Got new information" :
                           "Unsuccesful scan. You got no new information"
                 );
-        ParameterObject change = new ParameterObject();
-        change.actor = po.actor;
-        change.targetGear = po.targetGear;
-        result.addChange(change);
-        return result;
+        return result; //TODO: Hardcoded result
     }
 }

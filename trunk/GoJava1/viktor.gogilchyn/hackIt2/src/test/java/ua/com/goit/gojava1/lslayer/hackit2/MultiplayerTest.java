@@ -10,7 +10,7 @@ import ua.com.goit.gojava1.lslayer.hackit2.action.ScanAction;
 import ua.com.goit.gojava1.lslayer.hackit2.actor.Actor;
 import ua.com.goit.gojava1.lslayer.hackit2.actor.HumanControlledCharacter;
 import ua.com.goit.gojava1.lslayer.hackit2.dto.ActionResult;
-import ua.com.goit.gojava1.lslayer.hackit2.dto.ParameterObject;
+import ua.com.goit.gojava1.lslayer.hackit2.dto.ActionParameters;
 import ua.com.goit.gojava1.lslayer.hackit2.gear.hardware.devices.BombDevice;
 import ua.com.goit.gojava1.lslayer.hackit2.gear.hardware.devices.InfoDevice;
 import ua.com.goit.gojava1.lslayer.hackit2.gear.hardware.devices.ScanDevice;
@@ -19,14 +19,14 @@ public class MultiplayerTest {
     @Test
     public void testMultiplay() {
         GameSession session = GameSession.getInstance();
-        ParameterObject infoPo = new ParameterObject();
-        ParameterObject scanPo = new ParameterObject();
+        ActionParameters infoPo = new ActionParameters();
+        ActionParameters scanPo = new ActionParameters();
         Actor gamerWantedToInfo = new HumanControlledCharacter("Gamer1");
         Actor gamerWantedToScan = new HumanControlledCharacter("Gamer2");
         Action infoAction = new InfoAction();
         Action scanAction = new ScanAction();
         try {
-            infoPo.targetGear = new BombDevice("TargetName");
+            infoPo.targetActor = new HumanControlledCharacter("MegaPihar");
             scanPo.targetGear = new BombDevice("TargetName");
             scanPo.tool = new ScanDevice("Scanner");
             infoPo.tool = new InfoDevice("Informator");
@@ -37,13 +37,18 @@ public class MultiplayerTest {
             infoAction.setParameters(infoPo);
             session.addAction(gamerWantedToInfo, infoAction);
         } catch (HackitWrongParameterException e) {
-            e.printStackTrace();
+            fail("No exceptions expected");
         }
-        session.goTick();
+        try {
+            session.goTick();
+        } catch (HackitWrongParameterException e) {
+            fail("No exceptions expected");
+        }
         ActionResult res2 = session.getResult(gamerWantedToScan);
         assertEquals("You successfully scanned TargetName. Got new information", res2.getResultMessage());
         ActionResult res1 = session.getResult(gamerWantedToInfo);
-        assertEquals("TargetName", res1.getResultMessage());
+        //Target actor has no attributes, so info action result should be empty
+        assertEquals("", res1.getResultMessage());
     }
 
 }

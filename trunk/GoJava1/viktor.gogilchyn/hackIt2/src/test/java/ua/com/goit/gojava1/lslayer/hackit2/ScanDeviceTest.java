@@ -9,7 +9,7 @@ import ua.com.goit.gojava1.lslayer.hackit2.action.ScanAction;
 import ua.com.goit.gojava1.lslayer.hackit2.actor.Actor;
 import ua.com.goit.gojava1.lslayer.hackit2.actor.HumanControlledCharacter;
 import ua.com.goit.gojava1.lslayer.hackit2.dto.ActionResult;
-import ua.com.goit.gojava1.lslayer.hackit2.dto.ParameterObject;
+import ua.com.goit.gojava1.lslayer.hackit2.dto.ActionParameters;
 import ua.com.goit.gojava1.lslayer.hackit2.gear.Gear;
 import ua.com.goit.gojava1.lslayer.hackit2.gear.hardware.devices.BombDevice;
 import ua.com.goit.gojava1.lslayer.hackit2.gear.hardware.devices.ScanDevice;
@@ -34,35 +34,47 @@ public class ScanDeviceTest {
         assertEquals("Vizor3000"+ eol +"cpu: 100", scanner.getStringForOutput());
     }
     @Test
-    public void testUseOfDeviceWrongWay() throws Exception {
+    public void testUseOfDeviceWrongWay() {
         //Init section
-        ParameterObject po = new ParameterObject();
+        ActionParameters po = new ActionParameters();
         Actor actor = new HumanControlledCharacter("MegaPihar");
         actor.addSkill("scan");
-        Gear scanner = new ScanDevice("ScanMaster22000").addPurpose("scan", 100);
+        Gear scanner = null;
+        try {
+            scanner = new ScanDevice("ScanMaster22000").addPurpose("scan", 100);
+        } catch (HackitWrongParameterException e) {
+            fail("unexpected exception");
+        }
         Action action = new ScanAction();
         //Use section
         action.setParameters(po);
-        ActionResult result = action.execute();
-        assertFalse(result.isSuccess());
-        assertEquals("A person needed to scan", result.getResultMessage());
+        ActionResult result = null;
+        try {
+            result = action.execute();
+        } catch (HackitWrongParameterException e) {
+            assertEquals("scan action. Actor needed", e.getMessage());
+        }
 
         po.actor = actor;
         action.setParameters(po);
-        result = action.execute();
-        assertFalse(result.isSuccess());
-        assertEquals("A tool needed to scan", result.getResultMessage());
+        try {
+            result = action.execute();
+        } catch (HackitWrongParameterException e) {
+            assertEquals("scan action. Tool needed", e.getMessage());
+        }
 
         po.tool = scanner;
         action.setParameters(po);
-        result = action.execute();
-        assertFalse(result.isSuccess());
-        assertEquals("A target needed to scan", result.getResultMessage());
+        try {
+            result = action.execute();
+        } catch (HackitWrongParameterException e) {
+            assertEquals("scan action. TargetGear needed", e.getMessage());
+        }
         
     }
     @Test
     public void testUseOfDeviceRightWay() throws Exception {
-        ParameterObject po = new ParameterObject();
+        ActionParameters po = new ActionParameters();
         Actor actor = new HumanControlledCharacter("MegaPihar");
         actor.addSkill("scan");
         Gear scanner = new ScanDevice("ScanMaster22000").addPurpose("scan", 100);
@@ -96,6 +108,6 @@ public class ScanDeviceTest {
         action.setParameters(po);
         result = action.execute();
         assertFalse(result.isSuccess());
-        assertEquals("Your " + scannerWithotScanPurpose.getName() + " can't scan", result.getResultMessage());
+        assertEquals("Unsuccesful scan. You got no new information", result.getResultMessage());
     }
 }

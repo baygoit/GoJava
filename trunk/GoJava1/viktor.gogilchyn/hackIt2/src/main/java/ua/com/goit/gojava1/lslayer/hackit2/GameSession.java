@@ -24,21 +24,24 @@ public final class GameSession { // Singleton. There is only one game per app.
 
     }
 
-    
     public ActionResult getResult(Actor a) {
         return resultsQueue.get(a);
     }
 
-
     public void addAction(Actor whoActs, Action whatToDo)
-            throws HackitWrongParameterException { // This method called from above
+            throws HackitWrongParameterException { // This method called from
+                                                   // above
+
         if (whoActs == null)
             throw new HackitWrongParameterException("Nobody can't act!");
+
         if (whatToDo == null)
             throw new HackitWrongParameterException("No action provided!");
+
         Map<Actor, Action> currentElement;
         currentElement = new LinkedHashMap<Actor, Action>();
         currentElement.put(whoActs, whatToDo);
+
         actionQueue.add(currentElement);
     }
 
@@ -71,14 +74,18 @@ public final class GameSession { // Singleton. There is only one game per app.
         return result;
     }
 
-    public void goTick() {
+    public void goTick() throws HackitWrongParameterException {
         // Going through all actors, find their actions, and run each of them
         for (Actor currentActor : this.gamers) {
             for (Map<Actor, Action> currentAction : actionQueue) {
-                if (currentAction.get(currentActor) != null) {
-                    resultsQueue.put(currentActor, currentActor.act(
-                            currentAction.get(currentActor)));
-                }
+                if (currentAction.get(currentActor) != null)
+                    try {
+                        resultsQueue.put(currentActor, currentActor
+                                .act(currentAction.get(currentActor)));
+                    } catch (HackitWrongParameterException e) {
+                        throw new HackitWrongParameterException(e.getMessage(),
+                                e); // TODO Implement exception pass
+                    }
             }
         }
     }

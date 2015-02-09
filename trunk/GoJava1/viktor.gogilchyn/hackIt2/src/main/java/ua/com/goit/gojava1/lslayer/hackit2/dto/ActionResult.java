@@ -7,13 +7,13 @@ public class ActionResult { //May be it will be initialized using constructor.
     private boolean success;
     private String succesMessage;
     private String failMessage;
-    private LinkedList<ParameterObject> changes = new LinkedList<ParameterObject>();
+    private LinkedList<ActionParameters> changes = new LinkedList<ActionParameters>();
     
-    public void addChange(ParameterObject what) {
+    public void addChange(ActionParameters what) {
         if (what != null) changes.add(what);
     }
     
-    public ParameterObject getNextChange() {
+    public ActionParameters getNextChange() {
         return changes.pollLast(); //Return PO or null;
     }
 
@@ -29,6 +29,10 @@ public class ActionResult { //May be it will be initialized using constructor.
         } else {
             failMessage = resultMessage;
         }
+    }
+
+    public ActionResult() {
+        // TODO Auto-generated constructor stub
     }
 
     public boolean isSuccess() {

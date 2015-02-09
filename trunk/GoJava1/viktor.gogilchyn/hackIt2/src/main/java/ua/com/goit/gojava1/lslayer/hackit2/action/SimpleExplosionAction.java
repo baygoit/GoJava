@@ -1,7 +1,7 @@
 package ua.com.goit.gojava1.lslayer.hackit2.action;
 
+import ua.com.goit.gojava1.lslayer.hackit2.HackitWrongParameterException;
 import ua.com.goit.gojava1.lslayer.hackit2.dto.ActionResult;
-import ua.com.goit.gojava1.lslayer.hackit2.dto.ParameterObject;
 
 public class SimpleExplosionAction extends AbstractAction implements Action {
 
@@ -10,15 +10,21 @@ public class SimpleExplosionAction extends AbstractAction implements Action {
     }
 
     @Override
-    public ActionResult execute() {
-        ParameterObject po = this.getParameters();
-        if (super.checkParameters(false, true, true, po) != null) {
-            return new ActionResult(false, checkParameters(false, true, true, po));
+    public ActionResult execute() throws HackitWrongParameterException {
+        if (this.getParameters().targetActor == null && 
+            this.getParameters().targetGear == null) {
+
+            throw new HackitWrongParameterException(this.commandToInvoke + " action. Target nedded");
+        
         }
-        if (po.targetGear != null) { //If targetActor and targetGear both set, priority is to Gear.
-            return new ActionResult(super.checkSuccess(po), po.targetGear.getName() + " exploded!");
-        } 
-        return new ActionResult(super.checkSuccess(po), po.targetActor.getName() + " exploded!");
+        if (this.getParameters().tool == null) throw new HackitWrongParameterException(this.commandToInvoke + " action. Tool needed");
+        String target = (this.getParameters().targetActor == null) ? 
+                this.getParameters().targetGear.getName() : 
+                this.getParameters().targetActor.getName();
+        String resultMessage = (super.checkSuccess()) ? 
+                target + " exploded!" : 
+                target + " stay alive!";
+        return new ActionResult(super.checkSuccess(), resultMessage);
     }
 
 }

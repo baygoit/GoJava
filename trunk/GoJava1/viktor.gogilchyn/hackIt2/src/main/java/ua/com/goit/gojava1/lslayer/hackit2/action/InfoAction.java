@@ -1,5 +1,6 @@
 package ua.com.goit.gojava1.lslayer.hackit2.action;
 
+import ua.com.goit.gojava1.lslayer.hackit2.HackitWrongParameterException;
 import ua.com.goit.gojava1.lslayer.hackit2.dto.ActionResult;
 
 public class InfoAction extends AbstractAction implements Action {
@@ -9,17 +10,12 @@ public class InfoAction extends AbstractAction implements Action {
     }
 
     @Override
-    public ActionResult execute() {
-        if (super.checkParameters(true, true, true, getParameters()) != null) {
-            return new ActionResult(false,
-                    checkParameters(true, true, true, getParameters()));
-        }
-        if (this.getParameters().targetActor != null) {
-            return new ActionResult(super.checkSuccess(getParameters()), super.getInfo(
-                    this.getParameters().targetActor, this.getParameters().value));
-        }
-        return new ActionResult(super.checkSuccess(this.getParameters()), this.getParameters().targetGear.getName());
-
+    public ActionResult execute() throws HackitWrongParameterException {
+        if (this.getParameters().actor == null) throw new HackitWrongParameterException(this.commandToInvoke + " action. Actor needed");
+        if (this.getParameters().targetActor == null) throw new HackitWrongParameterException(this.commandToInvoke + " action. TargetActor nedded");
+        if (this.getParameters().tool == null) throw new HackitWrongParameterException(this.commandToInvoke + " action. Tool needed");
+        return new ActionResult(super.checkSuccess(), super.getInfo());
+//        return new ActionResult(super.checkSuccess(), this.getParameters().targetActor.getName()); //TODO: Hardcoded result
     }
 
 }

@@ -9,14 +9,13 @@ import ua.com.goit.gojava1.lslayer.hackit2.action.Action;
 import ua.com.goit.gojava1.lslayer.hackit2.action.ScanAction;
 import ua.com.goit.gojava1.lslayer.hackit2.actor.Actor;
 import ua.com.goit.gojava1.lslayer.hackit2.actor.HumanControlledCharacter;
-import ua.com.goit.gojava1.lslayer.hackit2.dto.ActionResult;
-import ua.com.goit.gojava1.lslayer.hackit2.dto.ParameterObject;
+import ua.com.goit.gojava1.lslayer.hackit2.dto.ActionParameters;
 import ua.com.goit.gojava1.lslayer.hackit2.gear.Gear;
 import ua.com.goit.gojava1.lslayer.hackit2.gear.hardware.devices.ScanDevice;
 
 public class ScanActionTest {
     private Action scan;
-    private ParameterObject po = new ParameterObject();
+    private ActionParameters po = new ActionParameters();
     private Actor actor = new HumanControlledCharacter("MegaPihar");
     private ScanDevice tool;
     private Gear target; 
@@ -45,9 +44,11 @@ public class ScanActionTest {
     @Test
     public void testScanActionResult() {
         scan.setParameters(this.po);
-        ActionResult result = scan.execute();
-        assertNotNull(result);
-        
-        
+        try {
+            assertNotNull(scan.execute());
+        } catch (HackitWrongParameterException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 }

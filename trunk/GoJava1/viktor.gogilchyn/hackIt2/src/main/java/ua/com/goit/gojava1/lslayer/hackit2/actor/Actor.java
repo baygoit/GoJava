@@ -2,6 +2,7 @@ package ua.com.goit.gojava1.lslayer.hackit2.actor;
 
 import java.util.Map;
 
+import ua.com.goit.gojava1.lslayer.hackit2.HackitWrongParameterException;
 import ua.com.goit.gojava1.lslayer.hackit2.action.Action;
 import ua.com.goit.gojava1.lslayer.hackit2.dto.ActionResult;
 
@@ -21,5 +22,5 @@ public interface Actor {
     public String getStringForOutput();
     
     //Game part
-    public ActionResult act(Action whatToDo);
+    public ActionResult act(Action whatToDo) throws HackitWrongParameterException;
 }

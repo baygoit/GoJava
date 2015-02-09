@@ -9,7 +9,7 @@ import ua.com.goit.gojava1.lslayer.hackit2.action.SimpleLookAction;
 import ua.com.goit.gojava1.lslayer.hackit2.actor.Actor;
 import ua.com.goit.gojava1.lslayer.hackit2.actor.HumanControlledCharacter;
 import ua.com.goit.gojava1.lslayer.hackit2.dto.ActionResult;
-import ua.com.goit.gojava1.lslayer.hackit2.dto.ParameterObject;
+import ua.com.goit.gojava1.lslayer.hackit2.dto.ActionParameters;
 import ua.com.goit.gojava1.lslayer.hackit2.gear.Gear;
 import ua.com.goit.gojava1.lslayer.hackit2.gear.hardware.devices.ScanDevice;
 
@@ -20,19 +20,31 @@ public class SimpleActionTest {
         assertNotNull(action);
     }
     @Test
-    public void testSimpleAction() throws Exception {
-        ParameterObject po = new ParameterObject();
+    public void testSimpleAction() {
+        ActionParameters po = new ActionParameters();
         Actor actor = new HumanControlledCharacter("Test name");
         Action action = new SimpleLookAction();
-        Gear target = new ScanDevice("ScanMaster");
+        Gear target = null;
+        ActionResult result = null;
+        try {
+            target = new ScanDevice("ScanMaster");
+        } catch (HackitWrongParameterException e) {
+            fail("unexpected exception");
+        }
         action.setParameters(po);
-        ActionResult result = action.execute();
-        assertFalse(result.isSuccess());
-        assertEquals("A person needed to look", result.getResultMessage());
+        try {
+            result = action.execute();
+        } catch (HackitWrongParameterException e) {
+            assertEquals("look action. Target nedded", e.getMessage());
+        }
         po.actor = actor;
         po.targetGear = target;
         action.setParameters(po);
-        result = action.execute();
+        try {
+            result = action.execute();
+        } catch (HackitWrongParameterException e) {
+            fail("unexpected exception");
+        }
         assertTrue(result.isSuccess());
         assertEquals("You examined " + target.getName() + ". Looks simple, yeah?", result.getResultMessage());
     }

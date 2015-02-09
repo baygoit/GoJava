@@ -1,7 +1,7 @@
 package ua.com.goit.gojava1.lslayer.hackit2.action;
 
+import ua.com.goit.gojava1.lslayer.hackit2.HackitWrongParameterException;
 import ua.com.goit.gojava1.lslayer.hackit2.dto.ActionResult;
-import ua.com.goit.gojava1.lslayer.hackit2.dto.ParameterObject;
 
 public class SimpleLookAction extends AbstractAction {
 
@@ -10,12 +10,17 @@ public class SimpleLookAction extends AbstractAction {
     }
 
     @Override
-    public ActionResult execute() {
-        ParameterObject po = this.getParameters();
-        if (super.checkParameters(true, false, true, po) != null) {
-            return new ActionResult(false, super.checkParameters(true, false, false, po));
-        }
-        return new ActionResult(true, "You examined "+ po.targetGear.getName() + ". Looks simple, yeah?");
+    public ActionResult execute() throws HackitWrongParameterException {
+        if (this.getParameters().targetActor == null && 
+                this.getParameters().targetGear == null) {
+
+                throw new HackitWrongParameterException(this.commandToInvoke + " action. Target nedded");
+            
+            }
+        String target = (this.getParameters().targetActor == null) ? 
+                this.getParameters().targetGear.getName() : 
+                this.getParameters().targetActor.getName();
+        return new ActionResult(true, "You examined "+ target + ". Looks simple, yeah?");
     }
 
 }

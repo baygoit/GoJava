@@ -4,9 +4,10 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import ua.com.goit.gojava1.lslayer.hackit2.HackitWrongParameterException;
 import ua.com.goit.gojava1.lslayer.hackit2.action.Action;
 import ua.com.goit.gojava1.lslayer.hackit2.dto.ActionResult;
-import ua.com.goit.gojava1.lslayer.hackit2.dto.ParameterObject;
+import ua.com.goit.gojava1.lslayer.hackit2.dto.ActionParameters;
 
 public abstract class AbstractCharacter implements Actor {
 
@@ -25,8 +26,8 @@ public abstract class AbstractCharacter implements Actor {
     
 
     @Override
-    public ActionResult act(Action whatToDo) {
-        ParameterObject po = whatToDo.getParameters();
+    public ActionResult act(Action whatToDo) throws HackitWrongParameterException {
+        ActionParameters po = whatToDo.getParameters();
         po.actor = this;
         whatToDo.setParameters(po);
         return whatToDo.execute();

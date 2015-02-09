@@ -4,16 +4,15 @@ import java.util.Map.Entry;
 import java.util.Random;
 
 import org.apache.log4j.Logger;
-import org.apache.log4j.PropertyConfigurator;
-
+import ua.com.goit.gojava1.lslayer.hackit2.HackitWrongParameterException;
 import ua.com.goit.gojava1.lslayer.hackit2.actor.Actor;
-import ua.com.goit.gojava1.lslayer.hackit2.dto.ParameterObject;
+import ua.com.goit.gojava1.lslayer.hackit2.dto.ActionParameters;
 
 public abstract class AbstractAction implements Action {
     static Logger log = Logger.getLogger(AbstractAction.class);
     protected String commandToInvoke;
     protected int timeNeededToInvokeAction;
-    private ParameterObject po = new ParameterObject();
+    private ActionParameters parameters = new ActionParameters();
 
     protected AbstractAction(String command) {
         this.commandToInvoke = command;
@@ -23,39 +22,32 @@ public abstract class AbstractAction implements Action {
         return this.commandToInvoke;
     }
 
-    //TODO Rewrite. I don't like such "gvozdyami pribity" method 
-    protected String checkParameters(boolean actor, boolean tool,
-            boolean target, ParameterObject arg) { 
-        if (actor && arg.actor == null) {
-            return "A person needed to " + commandToInvoke;
+    protected int getSuccessChance () throws HackitWrongParameterException {
+    int bonus = 0;
+        bonus += parameters.actor == null ? 0: parameters.actor.getSkill(commandToInvoke);
+        bonus += parameters.tool == null ? 0: parameters.tool.getPurposeValue(commandToInvoke);
+    int antibonus = 0;
+        antibonus += parameters.targetGear == null ? 0: parameters.targetGear.getPurposeValue(commandToInvoke);
+        antibonus += parameters.targetActor == null ? 0: parameters.targetActor.getSkill(commandToInvoke);
+        
+        return bonus - antibonus;
+    }
+    
+
+    protected boolean checkSuccess() {
+        try {
+            return (this.getSuccessChance() > 0);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        if (tool && arg.tool == null) {
-            return "A tool needed to " + commandToInvoke;
-        }
-        if (target && (arg.targetGear == null && arg.targetActor == null)) {
-            PropertyConfigurator.configure("log4j.properties");
-            log.debug(arg);
-            return "A target needed to " + commandToInvoke;
-        }
-        if (tool && arg.tool.getPurposeValue(this.getCommand()) == 0) {
-            return "Your " + arg.tool.getName() + " can't " + commandToInvoke;
-        }
-        return null;
+        return false;
     }
 
-    protected boolean checkSuccess(ParameterObject arg) {
-        int bonus = 0;
-            bonus += arg.actor == null ? 0: arg.actor.getSkill(commandToInvoke);
-            bonus += arg.tool == null ? 0: arg.tool.getPurposeValue(commandToInvoke);
-        int antibonus = 0;
-            antibonus += arg.targetGear == null ? 0: arg.targetGear.getPurposeValue(commandToInvoke);
-            antibonus += arg.targetActor == null ? 0: arg.targetActor.getSkill(commandToInvoke);
-        return bonus >= antibonus;
-    }
-
-    protected String getInfo(Actor target, int percent) {
+    protected String getInfo() {
 //        if (target == null) return null; All checks is made before here 
         final int MAX_PERCENT = 100;
+        Actor target = this.parameters.targetActor;
+        int percent = this.parameters.value;
         String eol = System.getProperty("line.separator");
         String result = "";
         String unknown = "?????";
@@ -73,11 +65,11 @@ public abstract class AbstractAction implements Action {
         return result;
     }
 
-    public ParameterObject getParameters() {
-        return po;
+    public ActionParameters getParameters() {
+        return parameters;
     }
 
-    public void setParameters(ParameterObject po) {
-        this.po = po;
+    public void setParameters(ActionParameters po) {
+        this.parameters = po;
     }
 }
