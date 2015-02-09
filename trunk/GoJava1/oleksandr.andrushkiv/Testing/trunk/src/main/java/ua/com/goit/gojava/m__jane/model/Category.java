@@ -10,6 +10,7 @@ import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlElements;
 import javax.xml.bind.annotation.XmlID;
 import javax.xml.bind.annotation.XmlIDREF;
+import javax.xml.bind.annotation.XmlTransient;
 
 import ua.com.goit.gojava.m__jane.model.question.MultipleQuestion;
 import ua.com.goit.gojava.m__jane.model.question.SimpleQuestion;
@@ -18,32 +19,31 @@ import ua.com.goit.gojava.m__jane.model.question.Question;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Category {
 	
-	@XmlAttribute
-	private Integer id;
 	@XmlID
+	@XmlAttribute
+	private String id;
+	
 	@XmlAttribute
 	private String name;
 	
 	@XmlIDREF
-	//@XmlElements(value = {@XmlElement(name = "questionMu", type=MultipleQuestion.class), @XmlElement(name = "questionSi", type=SimpleQuestion.class)})	
-	@XmlElements(value = {@XmlElement(name = "questionMu", type=MultipleQuestion.class)})
-	//@XmlElements(value = {@XmlElement(name = "questionSi", type=SimpleQuestion.class)})
+	@XmlElement(name = "question")
 	@XmlElementWrapper(name = "questions")
 	private List<Question> questionList;
 
 	public Category() {
 	}
 	
-	public Category(Integer id, String name) {
+	public Category(String id, String name) {
 		this.id = id;
 		this.name = name;
 	}
 
-	public Integer getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 

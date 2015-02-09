@@ -13,21 +13,22 @@ import ua.com.goit.gojava.m__jane.model.answer.Answer;
 @XmlAccessorType(XmlAccessType.FIELD)
 public abstract class Question {
 	
-	@XmlAttribute
-	private Integer id;
 	@XmlID
+	@XmlAttribute
+	private String id;
+	
 	@XmlAttribute
 	protected String content;
 	
 	public Question() {
 	}
 
-	public Integer getId() {
+	public String getId() {
 		return id;
 	}
 
 
-	public void setId(Integer id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 

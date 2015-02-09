@@ -19,8 +19,10 @@ import ua.com.goit.gojava.m__jane.model.question.SimpleQuestion;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class DataLoader {
 	
-	//@XmlElements(value = {@XmlElement(name = "questionMu", type=MultipleQuestion.class), @XmlElement(name = "questionSi", type=SimpleQuestion.class)})	
-	@XmlElements(value = {@XmlElement(name = "questionMu", type=MultipleQuestion.class)})
+	@XmlElements({
+		@XmlElement(name = "questionMu", type=MultipleQuestion.class)
+		, @XmlElement(name = "questionSi", type=SimpleQuestion.class)})	
+	//@XmlElements(value = {@XmlElement(name = "questionMu", type=MultipleQuestion.class)})
 	//@XmlElements(value = {@XmlElement(name = "questionSi", type=SimpleQuestion.class)})
 	@XmlElementWrapper(name = "questions")
 	private List<Question> questionList;
@@ -65,6 +67,12 @@ public class DataLoader {
 		return questionList;
 	}
 
+	public List<Category> getCategoryList() {
+		if (categoryList == null) {
+			categoryList = new ArrayList<Category>();
+		}
+		return categoryList;
+	}
 	
 
 }

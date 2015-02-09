@@ -38,8 +38,18 @@ public class MainClass {
 					}
 				}
 			}
+			
+
 
 			System.out.println("\n");
+		}
+		
+		for (Category category : dataLoader.getCategoryList()) {
+			System.out.println(category);
+		}
+		
+		for (Question question : dataLoader.getQuestionList()) {
+			System.out.println(question);
 		}
 
 		/*ProfileService profileService =  new ProfileServiceImpl();

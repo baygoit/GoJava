@@ -69,26 +69,26 @@
  
 <!-- test -->
 <questions>
-	<questionMu id="6"
+	<questionMu id="10001"
 		content="Споживач має право на обмін товару належної якості протягом:" />
-	<questionSi id="1"
+	<questionSi id="10002"
 		content="Як має поводитись продавець у торговому залі, якщо Покупець змушений чекати?" />
 </questions>
 
-<questionCategories>
-	<questionCategory id="1" name="Торгові питання для продавця">
+ <questionCategories>
+	<questionCategory id="11001" name="Торгові питання для продавця">
 		<questions>			
-			<questionSi>Як має поводитись продавець у торговому залі, якщо Покупець змушений чекати?</questionSi>
-			<questionMu>Споживач має право на обмін товару належної якості протягом:</questionMu>				
+			<question>10001</question>
+			<question>10002</question>				
 		</questions>
 	</questionCategory>
 	
-	<questionCategory id="2" name="Торгові питання для старшого продавця">
+	<questionCategory id="11002" name="Торгові питання для старшого продавця">
 	</questionCategory>
 
-	<questionCategory id="3" name="Законодавство">
+	<questionCategory id="11003" name="Законодавство">
 	</questionCategory>
-</questionCategories>
+</questionCategories> 
 
 <!-- <questionCategories>
 	<questionCategory id="1" name="Торгові питання для продавця">
@@ -123,7 +123,7 @@
 </questionCategories> -->
 
 
-<quizzes>
+<!-- <quizzes>
 	<quiz id="1" name="Пакет №1 для продавця">
 		<questionCategories>
 			<questionCategory>Торгові питання для продавця</questionCategory>
@@ -190,7 +190,7 @@
 			<profile>Керівник відділу</profile>
 		</profiles>
 	</user>
-</users>
+</users> -->
 
 
 
