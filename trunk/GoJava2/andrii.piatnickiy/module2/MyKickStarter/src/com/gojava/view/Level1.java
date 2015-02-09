@@ -1,15 +1,15 @@
 package com.gojava.view;
 
-import com.gojava.inputOutput.Out;
+import com.gojava.inputOutput.ConsoleIO;
 import com.gojava.projects.CategoryStorage;
 
 public class Level1 implements Level {
-    Out out;
+    ConsoleIO out;
     CategoryStorage categoryStorage;
     private int position = 1;
 
 
-    public Level1(CategoryStorage categoryStorage, Out out) {
+    public Level1(CategoryStorage categoryStorage, ConsoleIO out) {
         this.categoryStorage = categoryStorage;
         this.out = out;
     }

@@ -2,12 +2,12 @@ package com.gojava.view;
 
 import java.util.ArrayList;
 
-import com.gojava.inputOutput.Out;
+import com.gojava.inputOutput.ConsoleIO;
 import com.gojava.projects.CategoryStorage;
 import com.gojava.projects.ProjectStorage;
 
 public class Menu {
-    Out out = new Out();
+    ConsoleIO out = new ConsoleIO();
     private int currentLevelPosition;
     private Level1 level1;
     private Level2 level2;
@@ -28,10 +28,9 @@ public class Menu {
     }
 
     public void nextLevel(int nubberForNextLevel) {
-
         if ((nubberForNextLevel == 0 && currentLevelPosition == 1)
                 || (nubberForNextLevel > 0 && currentLevelPosition == 3)) {
-            System.out.println("not allowed to go below this level");
+            out.print("not allowed to go below this level");
         } else {
             Level level;
             if (nubberForNextLevel == 0) {
@@ -50,7 +49,7 @@ public class Menu {
         }
     }
 
-    private void add(Level level) {
+    public void add(Level level) {
         levelsList.add(level);
     }
 
@@ -60,11 +59,12 @@ public class Menu {
     }
 
     public Level getCurrentLevel() {
+        Level result = null;
         for (Level level : levelsList) {
             if (currentLevelPosition == level.getPosition()) {
-                return level;
+                result = level;
             }
         }
-        return null;
+        return result;
     }
 }
