@@ -52,7 +52,7 @@ public class Kickstart {
 		output.println("--------------------------------------------------");
 	}
 	
-	public int catchException(){
+	public int checkForEnteringLetters(){
 		int l = 0;
 		while(true){
 			try {
@@ -65,8 +65,8 @@ public class Kickstart {
 		return l;
 	}
 	
-	public int catchArrayError(){
-		MenuPart erow = new MenuPart() {
+	public int checkForNotExistingCategory(){
+		MenuPart part = new MenuPart() {
 			
 			@Override
 			void typeError() {
@@ -75,7 +75,7 @@ public class Kickstart {
 			
 			@Override
 			int inputNumber() {
-				return catchException();
+				return checkForEnteringLetters();
 			}
 			
 			@Override
@@ -83,11 +83,11 @@ public class Kickstart {
 				return  categories.readCategory(l);
 			}
 		};
-		return erow.tryToRemind();
+		return part.checkForCorrectInput();
 	}
 
-	public int catchProjectError(){
-		MenuPart erow = new MenuPart() {
+	public int checkForNotExistingProject(){
+		MenuPart part = new MenuPart() {
 			
 			@Override
 			void typeError() {
@@ -96,7 +96,7 @@ public class Kickstart {
 			
 			@Override
 			int inputNumber() {
-				return catchException();
+				return checkForEnteringLetters();
 			}
 			
 			@Override
@@ -104,13 +104,13 @@ public class Kickstart {
 				return  projects.readObject(l);
 			}
 		};
-		return erow.tryToRemind();
+		return part.checkForCorrectInput();
 	}
 	
 	public void returnToProjects(int g) {
 		while (g != 0){
 			output.println("Error!! You must enter 0 \nPlease, try again");
-			g = catchException();
+			g = checkForEnteringLetters();
 		}
 		showProjects();
 	}
@@ -119,8 +119,8 @@ public class Kickstart {
 		while (k >= 0){
 			showChosenProject(k);
 			output.println("Return - \"0\"");
-			returnToProjects(catchException());
-			k = catchProjectError();
+			returnToProjects(checkForEnteringLetters());
+			k = checkForNotExistingProject();
 		}
 	}
 	
@@ -128,14 +128,14 @@ public class Kickstart {
 		printQuote();
 		while (true){
 			showList();
-			int intForExit = catchArrayError();
+			int intForExit = checkForNotExistingCategory();
 			if (intForExit < 0){
 				break;
 			} else {
 				showChoice(intForExit);
 			}
 			showProjects();
-			navigate(catchProjectError());
+			navigate(checkForNotExistingProject());
 		}
 		output.println("Thanks for using our program, Goodbye!");
 	}

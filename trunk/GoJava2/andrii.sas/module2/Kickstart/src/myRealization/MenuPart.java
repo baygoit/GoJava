@@ -2,7 +2,7 @@ package myRealization;
 
 public abstract class MenuPart {
 	
-	public int tryToRemind(){
+	public int checkForCorrectInput(){
 		int l = 0;
 		while(true){
 			try {
