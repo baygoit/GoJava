@@ -17,13 +17,20 @@ public class CategoryStorage {
         categoryStorageList.add(new Category(name, categoryId));
     }
 
+    // TODO Удалить
     public void display() {
         for (Category category : categoryStorageList) {
-            out.print(out.printCategory(category));
+            out.print(getCategoryToString(category));
+            // out.print(out.printCategory(category));
         }
     }
-    
-    public Category getCategory(int index){
+
+    public String getCategoryToString(Category category) {
+        return category.toString();
+
+    }
+
+    public Category getCategory(int index) {
         return categoryStorageList.get(index);
     }
 
