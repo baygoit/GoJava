@@ -10,7 +10,7 @@ public class ScanAction extends AbstractAction implements Action {
     }
 
     @Override
-    public ActionResult execute(ParameterObject po) {
+    public ActionResult execute() {
         /* Every action works in this way:
          * 1. Gather skill bonuses from actor and tool.
          * 2. Gather anti-skill bonuses from target
@@ -18,6 +18,7 @@ public class ScanAction extends AbstractAction implements Action {
          * 4. Formatting ResultMesage
          * 5. Making changes (if necessary) to possession and control lists. 
          */
+        ParameterObject po = this.getParameters();
         if (super.checkParameters(true, true, true, po) != null) {
             return new ActionResult(false, checkParameters(true, true, true, po));
         }

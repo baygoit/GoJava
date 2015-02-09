@@ -42,17 +42,20 @@ public class ScanDeviceTest {
         Gear scanner = new ScanDevice("ScanMaster22000").addPurpose("scan", 100);
         Action action = new ScanAction();
         //Use section
-        ActionResult result = action.execute(po);
+        action.setParameters(po);
+        ActionResult result = action.execute();
         assertFalse(result.isSuccess());
         assertEquals("A person needed to scan", result.getResultMessage());
 
         po.actor = actor;
-        result = action.execute(po);
+        action.setParameters(po);
+        result = action.execute();
         assertFalse(result.isSuccess());
         assertEquals("A tool needed to scan", result.getResultMessage());
 
         po.tool = scanner;
-        result = action.execute(po);
+        action.setParameters(po);
+        result = action.execute();
         assertFalse(result.isSuccess());
         assertEquals("A target needed to scan", result.getResultMessage());
         
@@ -77,18 +80,21 @@ public class ScanDeviceTest {
         po.tool = scanner;
         po.targetGear = target;
 
-        ActionResult result = action.execute(po);
+        action.setParameters(po);
+        ActionResult result = action.execute();
         assertTrue(result.isSuccess());
         assertEquals("You successfully scanned "+ target.getName()+". Got new information", result.getResultMessage());
       
         po.targetGear = unscannableTarget;
-        result = action.execute(po);
+        action.setParameters(po);
+        result = action.execute();
         assertFalse(result.isSuccess());
         assertEquals("Unsuccesful scan. You got no new information", result.getResultMessage());
         
         po.targetGear = target;
         po.tool = scannerWithotScanPurpose;
-        result = action.execute(po);
+        action.setParameters(po);
+        result = action.execute();
         assertFalse(result.isSuccess());
         assertEquals("Your " + scannerWithotScanPurpose.getName() + " can't scan", result.getResultMessage());
     }

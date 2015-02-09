@@ -13,6 +13,7 @@ public abstract class AbstractAction implements Action {
     static Logger log = Logger.getLogger(AbstractAction.class);
     protected String commandToInvoke;
     protected int timeNeededToInvokeAction;
+    private ParameterObject po = new ParameterObject();
 
     protected AbstractAction(String command) {
         this.commandToInvoke = command;
@@ -70,5 +71,13 @@ public abstract class AbstractAction implements Action {
             result += eol;
         }
         return result;
+    }
+
+    public ParameterObject getParameters() {
+        return po;
+    }
+
+    public void setParameters(ParameterObject po) {
+        this.po = po;
     }
 }

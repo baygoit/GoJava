@@ -25,19 +25,22 @@ public class AbstractActionTest {
 
         po.actor = actor;
         po.targetActor = actor;
-        ActionResult result = action.execute(po);
+        action.setParameters(po);
+        ActionResult result = action.execute();
         assertFalse(result.isSuccess());
         assertEquals("A tool needed to info", result.getResultMessage());
 
         po.value = 100; //100% chance to get info
         po.tool = tool;
-        result = action.execute(po);
+        action.setParameters(po);
+        result = action.execute();
         assertTrue(result.isSuccess());
         assertEquals("CCN: 1234 5678 6543 2345" + eol, result.getResultMessage());
 
         po.value = 1; //1% chance to get info. Very rare chance to fail test
         //TODO Make an mechanism to test chanced methods
-        result = action.execute(po);
+        action.setParameters(po);
+        result = action.execute();
         assertTrue(result.isSuccess());
         assertEquals("CCN: ?????" + eol, result.getResultMessage());
         

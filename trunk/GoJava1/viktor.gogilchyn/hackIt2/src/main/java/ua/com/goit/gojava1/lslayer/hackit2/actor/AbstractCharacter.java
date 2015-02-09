@@ -25,9 +25,11 @@ public abstract class AbstractCharacter implements Actor {
     
 
     @Override
-    public ActionResult act(Action whatToDo, ParameterObject po) {
+    public ActionResult act(Action whatToDo) {
+        ParameterObject po = whatToDo.getParameters();
         po.actor = this;
-        return whatToDo.execute(po);
+        whatToDo.setParameters(po);
+        return whatToDo.execute();
     }
 
 

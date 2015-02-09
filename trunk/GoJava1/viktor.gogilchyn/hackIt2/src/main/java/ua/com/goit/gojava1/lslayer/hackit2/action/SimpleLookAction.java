@@ -10,7 +10,8 @@ public class SimpleLookAction extends AbstractAction {
     }
 
     @Override
-    public ActionResult execute(ParameterObject po) {
+    public ActionResult execute() {
+        ParameterObject po = this.getParameters();
         if (super.checkParameters(true, false, true, po) != null) {
             return new ActionResult(false, super.checkParameters(true, false, false, po));
         }

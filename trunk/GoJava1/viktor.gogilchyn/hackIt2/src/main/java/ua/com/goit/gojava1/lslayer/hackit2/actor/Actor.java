@@ -4,7 +4,6 @@ import java.util.Map;
 
 import ua.com.goit.gojava1.lslayer.hackit2.action.Action;
 import ua.com.goit.gojava1.lslayer.hackit2.dto.ActionResult;
-import ua.com.goit.gojava1.lslayer.hackit2.dto.ParameterObject;
 
 public interface Actor {
 
@@ -22,5 +21,5 @@ public interface Actor {
     public String getStringForOutput();
     
     //Game part
-    public ActionResult act(Action whatToDo, ParameterObject po);
+    public ActionResult act(Action whatToDo);
 }

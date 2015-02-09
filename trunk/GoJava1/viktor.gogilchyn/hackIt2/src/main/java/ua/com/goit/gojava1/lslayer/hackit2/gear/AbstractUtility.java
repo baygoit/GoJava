@@ -18,7 +18,7 @@ public abstract class AbstractUtility implements Gear {
         return name;
     }
 
-    public Gear addPurpose(String purpose, int value) throws Exception {
+    public Gear addPurpose(String purpose, int value) throws HackitWrongParameterException {
         if (purpose == null) throw new HackitWrongParameterException ("No null purpose allowed");
             this.purpose.put(purpose, value);
         return this;

@@ -22,16 +22,19 @@ public class BoomTest {
         ParameterObject arg = new ParameterObject();
 
         arg.tool = bomb;
-        ActionResult result = boom.execute(arg);
+        boom.setParameters(arg);
+        ActionResult result = boom.execute();
         assertFalse(result.isSuccess());
         assertEquals("A target needed to explode", result.getResultMessage());
         arg.targetGear = new ScanDevice("ScanMaster");
-        result = boom.execute(arg);
+        boom.setParameters(arg);
+        result = boom.execute();
         assertTrue(result.isSuccess());
         assertEquals("ScanMaster exploded!", result.getResultMessage());
         arg.targetActor = new HumanControlledCharacter("DeadMen");
         arg.targetGear = null;
-        result = boom.execute(arg);
+        boom.setParameters(arg);
+        result = boom.execute();
         assertTrue(result.isSuccess());
         assertEquals("DeadMen exploded!", result.getResultMessage());
     }

@@ -23,13 +23,15 @@ public class InfoActionTest {
         Gear target =  new ScanDevice("Target"); 
         po.actor = actor;
         Action action = new InfoAction();
-        ActionResult result = action.execute(po);
+        action.setParameters(po);
+        ActionResult result = action.execute();
         assertFalse(result.isSuccess());
         assertEquals("A tool needed to info", result.getResultMessage());
 
         po.tool = tool;
         po.targetGear = target;
-        result = action.execute(po);
+        action.setParameters(po);
+        result = action.execute();
         assertTrue(result.isSuccess());
         assertEquals(target.getName(), result.getResultMessage());
         

@@ -10,7 +10,8 @@ public class SimpleExplosionAction extends AbstractAction implements Action {
     }
 
     @Override
-    public ActionResult execute(ParameterObject po) {
+    public ActionResult execute() {
+        ParameterObject po = this.getParameters();
         if (super.checkParameters(false, true, true, po) != null) {
             return new ActionResult(false, checkParameters(false, true, true, po));
         }

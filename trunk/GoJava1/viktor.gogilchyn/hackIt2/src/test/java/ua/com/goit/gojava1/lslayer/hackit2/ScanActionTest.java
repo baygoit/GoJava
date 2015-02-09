@@ -44,8 +44,8 @@ public class ScanActionTest {
     
     @Test
     public void testScanActionResult() {
-        
-        ActionResult result = scan.execute(this.po);
+        scan.setParameters(this.po);
+        ActionResult result = scan.execute();
         assertNotNull(result);
         
         

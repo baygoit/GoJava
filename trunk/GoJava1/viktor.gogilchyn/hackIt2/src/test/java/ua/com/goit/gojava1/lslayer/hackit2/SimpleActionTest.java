@@ -25,12 +25,14 @@ public class SimpleActionTest {
         Actor actor = new HumanControlledCharacter("Test name");
         Action action = new SimpleLookAction();
         Gear target = new ScanDevice("ScanMaster");
-        ActionResult result = action.execute(po);
+        action.setParameters(po);
+        ActionResult result = action.execute();
         assertFalse(result.isSuccess());
         assertEquals("A person needed to look", result.getResultMessage());
         po.actor = actor;
         po.targetGear = target;
-        result = action.execute(po);
+        action.setParameters(po);
+        result = action.execute();
         assertTrue(result.isSuccess());
         assertEquals("You examined " + target.getName() + ". Looks simple, yeah?", result.getResultMessage());
     }

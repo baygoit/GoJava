@@ -24,8 +24,14 @@ public final class GameSession { // Singleton. There is only one game per app.
 
     }
 
+    
+    public ActionResult getResult(Actor a) {
+        return resultsQueue.get(a);
+    }
+
+
     public void addAction(Actor whoActs, Action whatToDo)
-            throws HackitWrongParameterException { // This is set from above
+            throws HackitWrongParameterException { // This method called from above
         if (whoActs == null)
             throw new HackitWrongParameterException("Nobody can't act!");
         if (whatToDo == null)
@@ -71,7 +77,7 @@ public final class GameSession { // Singleton. There is only one game per app.
             for (Map<Actor, Action> currentAction : actionQueue) {
                 if (currentAction.get(currentActor) != null) {
                     resultsQueue.put(currentActor, currentActor.act(
-                            currentAction.get(currentActor), null));
+                            currentAction.get(currentActor)));
                 }
             }
         }
