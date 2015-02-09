@@ -1,6 +1,6 @@
 package com.gojava.launch;
 
-import com.gojava.inputOutput.Out;
+import com.gojava.inputOutput.ConsoleIO;
 import com.gojava.inputOutput.Scan;
 import com.gojava.projects.CategoryStorage;
 import com.gojava.projects.ProjectStorage;
@@ -10,7 +10,7 @@ import com.gojava.view.Menu;
 public class Launch {
 
     public static void main(String[] args) {
-        Out out = new Out();
+        ConsoleIO consoleIO = new ConsoleIO();
         CategoryStorage categoryStorage = new CategoryStorage();
         ProjectStorage projectStorage = new ProjectStorage();
 
@@ -19,7 +19,7 @@ public class Launch {
         
         Scan scan = new Scan();
         Quote quote = new Quote();
-        out.print(quote.getQuote());
+        consoleIO.print(quote.getQuote());
 
         Menu menu = new Menu(categoryStorage, projectStorage);
         while (true) {
