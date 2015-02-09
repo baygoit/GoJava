@@ -2,30 +2,32 @@ package org.goJava2.kickstarter.model;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+
 import org.goJava2.kickstarter.content.Category;
 import org.goJava2.kickstarter.content.Quote;
 import org.junit.Test;
 
 public class CategoryStorageTest {
 
-	private CategoryStorage categoryStorage = new CategoryStorage(); 
+	private CategoryStorage categoryStorage; 
 	
 	@Test
-	public void shouldListSizeNot0_whenNewQuoteStorage() {
+	public void shouldListSizeNot0_whenNewCategoryStorage() {
 		categoryStorage = new CategoryStorage();
 		assertFalse("Expected that constructor for Hard-coded categories init at least 1 quote.",
 					categoryStorage.getContent().size() == 0);
 	}
 	
 	@Test
-	public void shouldListNotBeNull() {
+	public void shouldListIsNotNull_whenNewCategoryStorage() {
 		categoryStorage = new CategoryStorage();
 		assertFalse("Expected that list is not null.",
 					categoryStorage.getContent() == null);
 	}
 	
 	@Test
-	public void shouldListContainsNewQuote_whenAddNewQuote() {
+	public void shouldListContainsNewCategory_whenAddNewCategory() {
 		categoryStorage = new CategoryStorage();
 		Category quote = new Category("New category");
 		categoryStorage.addContent(quote);
@@ -33,13 +35,17 @@ public class CategoryStorageTest {
 					categoryStorage.getContent().contains(quote));
 	}
 	
-	@Test(expected = NullPointerException.class)
-	public void shouldBeNPE_whenParamIs_null() {
-		categoryStorage.getSpecificContent(null);
+	@Test
+	public void shouldListIsNotNull_whenNewCustomCategoryStorage() {
+		categoryStorage = new CategoryStorage(new ArrayList<Category>());
+		assertFalse("Expexted than list is not null when custom constructor",
+					categoryStorage.getContent() == null);
 	}
 	
-	@Test(expected = IndexOutOfBoundsException.class)
-	public void shouldBeAIOoBE_whenParamLessThanSize() {
-		categoryStorage.getSpecificContent(123213);
+	@Test
+	public void shouldCategoryIsNotNull_whenGetSpecificCategory() {
+		categoryStorage = new CategoryStorage();
+		assertFalse("Expected that category is not null",
+					categoryStorage.getSpecificContent(0) == null);
 	}
 }

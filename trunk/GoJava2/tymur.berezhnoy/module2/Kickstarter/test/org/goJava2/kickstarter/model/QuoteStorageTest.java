@@ -7,6 +7,7 @@ import static org.junit.Assert.assertTrue;
 import java.util.ArrayList;
 
 import org.goJava2.kickstarter.content.Quote;
+import org.junit.Before;
 import org.junit.Test;
 
 public class QuoteStorageTest {
@@ -14,21 +15,21 @@ public class QuoteStorageTest {
 	private QuoteStorage quoteStorage;
 	
 	@Test
-	public void shouldQuoteNotNull_WhenRandomQuote() {
+	public void shouldQuoteIsNotNull_whenRandomQuote() {
 		quoteStorage = new QuoteStorage();
 		assertNotNull("Proof of return! RandomQuote should return any quote(not null).",
 					  quoteStorage.getRandomQuote());
 	}
 	
 	@Test
-	public void shouldListSizeNot0_whenNewQuoteStorage() {
+	public void shouldListSizeIsNot0_whenNewQuoteStorage() {
 		quoteStorage = new QuoteStorage();
-		assertFalse("Expected that constructor for Hard-coded quotes init at least 1 quote.",
+		assertFalse("Expected that constructor is for Hard-coded quotes init at least 1 quote.",
 					quoteStorage.getContent().size() == 0);
 	}
 	
 	@Test
-	public void shouldListNotBeNull_whenNewQuoteStorage() {
+	public void shouldListIsNotNull_whenNewQuoteStorage() {
 		quoteStorage = new QuoteStorage();
 		assertFalse("Expected that list is not null.",
 					quoteStorage.getContent() == null);
@@ -50,5 +51,13 @@ public class QuoteStorageTest {
 		quoteStorage = new QuoteStorage(new ArrayList<Quote>());
 		assertFalse("Expected that list is not null.",
 					quoteStorage.getContent() == null);
+	}
+	
+	@Test
+	public void shouldQuoteIsNotNull_whenGetSpecificConten() {
+		quoteStorage = new QuoteStorage();
+		
+		assertFalse("Expected that qute is not null",
+					quoteStorage.getSpecificContent(0) == null);
 	}
 }
