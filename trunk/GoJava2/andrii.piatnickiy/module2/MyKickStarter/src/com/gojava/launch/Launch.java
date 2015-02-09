@@ -16,9 +16,7 @@ public class Launch {
 
         initCategories(categoryStorage);
         initProjects(projectStorage);
-
-        projectStorage.setOut(out);
-
+        
         Scan scan = new Scan();
         Quote quote = new Quote();
         out.print(quote.getQuote());

@@ -16,8 +16,8 @@ public class Level3 implements Level {
 
     @Override
     public void displayMySelf(int nubberForNextLevel) {
-        projectStorage.getSpecificProject(menu.categoryPosition,
-                nubberForNextLevel);
+       out.print(projectStorage.getSpecificProject(menu.categoryPosition,
+               nubberForNextLevel));
     }
 
     public void setMenu(Menu menu) {

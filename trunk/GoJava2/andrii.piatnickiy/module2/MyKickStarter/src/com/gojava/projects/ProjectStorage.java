@@ -2,10 +2,7 @@ package com.gojava.projects;
 
 import java.util.ArrayList;
 
-import com.gojava.inputOutput.Out;
-
 public class ProjectStorage {
-    Out out;
     ArrayList<Project> projectStorageList = new ArrayList<Project>();
 
     public void add(String name, String description, int needSum,
@@ -17,18 +14,35 @@ public class ProjectStorage {
     }
 
     public String getAll(int categoryNumber) {
-        StringBuffer buffer = new StringBuffer();
+        StringBuffer sb = new StringBuffer();
         int i = 1;
         for (Project project : projectStorageList) {
             if (project.getCategoryId() == categoryNumber) {
-                buffer.append(i).append(") ");
-                buffer.append(projectPreviewToString(project)).append("\n");
+                sb.append(i).append(") ");
+                sb.append(projectPreviewToString(project)).append("\n");
                 i++;
             }
         }
-        return buffer.toString();
+        return sb.toString();
     }
 
+    public String getSpecificProject(int categoryNumber, int projectNumber) {
+        StringBuffer sb = new StringBuffer();
+        int i = 1;
+        for (Project project : projectStorageList) {
+            if (project.getCategoryId() == categoryNumber) {
+                if (i == projectNumber) {
+                    sb.append(allProjectFields(project)).append("\n");
+                }
+                i++;
+            }
+        }
+        return sb.toString();
+    }
+
+    private String allProjectFields(Project project) {
+        return projectPreviewToString(project) + getAdditionalProjectFields(project);
+    }
 
     public String projectPreviewToString(Project project) {
         StringBuffer sb = new StringBuffer();
@@ -41,35 +55,22 @@ public class ProjectStorage {
         return sb.toString();
     }
 
-    private void previewProject(Project project, Out out) {
-        out.print(projectPreviewToString(project));
+    public String getAdditionalProjectFields(Project project) {
+        StringBuffer sb = new StringBuffer();
+        sb.append("ProjectHistory: ").append(project.getProjectHistory())
+                .append("\n");
+        sb.append("LinkOnvideo: ").append(project.getLinkOnvideo())
+                .append("\n");
+        sb.append("Questions and answers: ")
+                .append(project.getQuestionsAndAnswers()).append("\n");
+        return sb.toString();
     }
 
-    public void getSpecificProject(int categoryNumber, int projectNumber) {
-        int i = 1;
-        for (Project project : projectStorageList) {
-            if (project.getCategoryId() == categoryNumber) {
-                if (i == projectNumber) {
-                    allProjectFields(project);
-                }
-                i++;
-            }
-        }
-    }
-
-    private void allProjectFields(Project project) {
-        out.print(out.printProjectPreview(project));
-        out.print(out.printAdditionalProjectFields(project));
-    }
-
-    public void setOut(Out out) {
-        this.out = out;
-    }
 
     public Project getProject(int index) {
         return projectStorageList.get(index);
     }
-    
+
     // TODO refactoring like code below
     // public Project getSpecificProject(int categoryNumber, int projectNumber)
     // {
