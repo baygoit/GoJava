@@ -28,6 +28,10 @@ public class ProjectStorage {
         }
     }
 
+    public Project getProject(int index){
+        return projectStorageList.get(index);
+    }
+    
     // TODO refactoring like code below
     // public Project getSpecificProject(int categoryNumber, int projectNumber)
     // {
