@@ -53,9 +53,9 @@ public class testCategoriesClass {
 		projects.writeAllProjects();
 		Project project = new Project();
 		String s = category.showAllProjectInCategory(0, project, projects, categories);
-		assertTrue(s.equals("1, Progect-1, shortDescription-1, 1000, 990\n"
-				+ "3, Progect-3, shortDescription-3, 1000, 990\n"
-				+ "4, Progect-4, shortDescription-4, 1000, 990"));
+		assertTrue(s.equals("1, Progect-1, shortDescription-1, 1000, 10\n"
+				+ "3, Progect-3, shortDescription-3, 1000, 10\n"
+				+ "4, Progect-4, shortDescription-4, 1000, 10"));
     }
 	
 	@Test(expected = FileNotFoundException.class)

@@ -45,10 +45,10 @@ public class TestCheckClass {
 		
 		int rezult = check.checkNumber(new int[] {1,4,6}, true);
 		
-		assertEquals("This number does not exist, please try again", check.out.getMessages().get(0).toString());
-		assertEquals("It is not a number, please try again", check.out.getMessages().get(1).toString());
-		assertEquals("This number does not exist, please try again", check.out.getMessages().get(2).toString());
-		assertEquals("You have used three attempts, try ten minutes", check.out.getMessages().get(3).toString());
+		assertEquals("This number does not exist, please try again", check.getOut().getMessages().get(0).toString());
+		assertEquals("It is not a number, please try again", check.getOut().getMessages().get(1).toString());
+		assertEquals("This number does not exist, please try again", check.getOut().getMessages().get(2).toString());
+		assertEquals("You have used three attempts, try ten minutes", check.getOut().getMessages().get(3).toString());
 		assertEquals(rezult, 777);
 	}
 	
@@ -57,7 +57,7 @@ public class TestCheckClass {
 		Check check  = new Check(new FakeInputsConsole("5", "i", "88", "4"), new FakeOutputConsole());
 		
 		check.checkNumber(new int[] {1,4,6}, true);
-		check.out.getMessages().get(4);
+		check.getOut().getMessages().get(4);
 	}
 	
 	@Test
@@ -82,7 +82,7 @@ public class TestCheckClass {
 		Check check  = new Check(new FakeInputsConsole("е", "1"), new FakeOutputConsole());
 		
 		int rezult = check.checkNumber(new int[] {1,4,6}, true);
-		assertEquals("It is not a number, please try again", check.out.getMessages().get(0).toString());
+		assertEquals("It is not a number, please try again", check.getOut().getMessages().get(0).toString());
 		assertTrue(1 == rezult);
 		assertEquals(rezult, 1);
     }
@@ -100,7 +100,7 @@ public class TestCheckClass {
 		
 		int rezult = check.checkNumber(new int[] {1,4,6}, true);
 		
-		assertEquals("This number does not exist, please try again", check.out.getMessages().get(0).toString());
+		assertEquals("This number does not exist, please try again", check.getOut().getMessages().get(0).toString());
 		assertTrue(6 == rezult);
 		assertEquals(rezult, 6);
     }
@@ -127,7 +127,7 @@ public class TestCheckClass {
 		Check check  = new Check(new FakeInputsConsole("0", "1"), new FakeOutputConsole());
 		
 		int rezult = check.checkNumber(new int[] {1,4,6}, true);
-		assertEquals("This number does not exist, please try again", check.out.getMessages().get(0).toString());
+		assertEquals("This number does not exist, please try again", check.getOut().getMessages().get(0).toString());
 		assertTrue(1 == rezult);
 		assertEquals(rezult, 1);
     }

@@ -1,6 +1,7 @@
 package mainkick;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Project{
@@ -14,6 +15,15 @@ public class Project{
 	private int howMuchCollected;
 	private int howMuchRemaining;
 	
+	private ArrayList<String> faq = new ArrayList<String>();
+	
+	
+	public void setFAQ() throws IOException{
+		InputsConsole question = new InputsConsole();
+		String message = question.enter();
+		faq.add(message);
+	}
+	
 	public String readProject(ArrayList<Project> listProject, String[] value, int i) throws FileNotFoundException{
 		listProject.get(i).projectID = Integer.valueOf(value[0]);
 		listProject.get(i).projectName = value[1];
@@ -24,7 +34,6 @@ public class Project{
 		listProject.get(i).howMuchNeeded = Integer.valueOf(value[6]);
 		listProject.get(i).howMuchCollected = Integer.valueOf(value[7]);
 		listProject.get(i).howMuchRemaining = Integer.valueOf(value[8]);
-
 		return projectID + " " + projectName +  " " + shortDescription + " " + fullDescription + " " + foto + " " + link + " " + howMuchNeeded + " " +  howMuchCollected + " " + howMuchRemaining + "\n";
 	}
 	
@@ -34,7 +43,7 @@ public class Project{
 				+ ", " + projects.getListProject().get(i).projectName
 				+ ", " + projects.getListProject().get(i).shortDescription
 				+ ", " + projects.getListProject().get(i).howMuchNeeded
-				+ ", " + projects.getListProject().get(i).howMuchRemaining;
+				+ ", " + projects.getListProject().get(i).howMuchCollected;
 		return s;		
 	}
 	
@@ -49,6 +58,19 @@ public class Project{
 					+ "\n howMuchCollected = " + listProject.get(i).howMuchCollected
 					+ "\n howMuchRemaining = " + listProject.get(i).howMuchRemaining;
 		return s;
+	}
+	
+	public void setDonation(ArrayList<Project> listProject, int amount, int chosenProject){
+		listProject.get(chosenProject).howMuchCollected += amount;
+		listProject.get(chosenProject).howMuchRemaining -= amount;
+	}
+
+	public ArrayList<String> getFaq() {
+		return faq;
+	}
+
+	public void setFaq(ArrayList<String> faq) {
+		this.faq = faq;
 	}
 	
 }

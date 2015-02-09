@@ -1,5 +1,6 @@
 package mainkick;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class KickstarterS {
 	public KickstarterS() throws IOException, InterruptedException{
@@ -33,10 +34,35 @@ public class KickstarterS {
 					break;
 				}
 				printer(project.showProjectFull(chosenProject - 1, projects.getListProject()));
-				printer("Choice 0 for exit to Project: ");
-				int[] zero = {0};
+				printer("Have a question? If the info above doesn't help, you can ask the project creator directly - Choice 555");
+				printer("Choice 0 for exit to Project list.\nChoice 888 to invest in the project.\nChoice 999 to ask a question: ");
+				int[] zero = {0, 888, 999};
 				choiceToProject = check.checkNumber(zero, false);
 				if (choiceToProject == 0){
+					continue;
+				}
+				if (choiceToProject == 888){
+					printer("1 - 1$ = OUR UNDYING LOVE");
+					printer("2 - 10$ = HEY… NICE SHIRT");
+					printer("3 - 40$ = KICKSTARTER EXCLUSIVE");
+					printer("Enter your name:");
+					printer(check.checkName());
+					printer("Enter your credit card number:");
+					check.checkCard();
+					printer("Enter the amount of donations:");
+					int amount = check.checkAmount();
+					project.setDonation(projects.getListProject(), amount, chosenProject - 1);
+					printer(project.showProjectFull(chosenProject - 1, projects.getListProject()));
+					continue;
+				}
+				if (choiceToProject == 999){
+					printer("Choice 999");
+					printer("Enter your question:");
+					printer(Integer.toString(project.getFaq().size()));
+					project.setFAQ();
+					project.setFAQ();
+					printFaq(project.getFaq());
+					printer(Integer.toString(project.getFaq().size()));
 					continue;
 				}
 			}
@@ -47,5 +73,10 @@ public class KickstarterS {
 		Output out = new OutputConsole();
 		out.print(string);
 	}
-
+	
+	private void printFaq(ArrayList<String> faq) {
+        for(int i = 0; i < faq.size(); i++){
+        	printer(faq.get(i));
+        }
+	}
 }
