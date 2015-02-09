@@ -3,9 +3,6 @@ package ua.com.goit.gojava.m__jane.model.question;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlID;
-import javax.xml.bind.annotation.XmlRootElement;
-
 import ua.com.goit.gojava.m__jane.model.answer.Answer;
 import ua.com.goit.gojava.m__jane.model.answer.SimpleAnswer;
 
@@ -26,7 +23,13 @@ public class SimpleQuestion extends Question {
 
 	@Override
 	public String toString() {
-		return "SimpleQuestion [getId() = " + getId() + ", getContent()=" + getContent() + "]";
+
+		return new StringBuilder()	
+				.append("SimpleQuestion [")
+				.append(", getId()=").append(getId())
+				.append(", getContent()=").append(getContent())
+				.append(", standartAnswer=").append(standartAnswer)
+				.append("]").toString();
 	}
 
 	//@Override

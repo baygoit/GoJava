@@ -7,15 +7,11 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
-import javax.xml.bind.annotation.XmlElements;
 import javax.xml.bind.annotation.XmlID;
 import javax.xml.bind.annotation.XmlIDREF;
-import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-
-import ua.com.goit.gojava.m__jane.model.question.MultipleQuestion;
-import ua.com.goit.gojava.m__jane.model.question.SimpleQuestion;
 import ua.com.goit.gojava.m__jane.model.question.Question;
+import ua.com.goit.gojava.m__jane.util.IDAdapter;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Category {
@@ -71,7 +67,7 @@ public class Category {
 		return new StringBuilder()
 				.append("QuestionCategory [id=").append(id)
 				.append(", name=").append(name)
-				.append(", questionList=").append(questionList)
+				//.append(", questionList=").append(questionList)
 				.append("]")
 				.toString();
 		

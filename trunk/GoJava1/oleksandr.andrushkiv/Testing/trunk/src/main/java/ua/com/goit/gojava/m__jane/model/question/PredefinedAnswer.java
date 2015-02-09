@@ -28,5 +28,11 @@ public class PredefinedAnswer {
 	public void setContent(String content) {
 		this.content = content;
 	}
+
+	@Override
+	public String toString() {
+		return "PredefinedAnswer [id=" + id + ", content=" + content + "]";
+	}
+	
 	
 }

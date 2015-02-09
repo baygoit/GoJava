@@ -4,12 +4,8 @@ import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
-import javax.xml.bind.annotation.XmlID;
-import javax.xml.bind.annotation.XmlRootElement;
-
 import ua.com.goit.gojava.m__jane.model.answer.Answer;
 import ua.com.goit.gojava.m__jane.model.answer.MultipleAnswer;
 
@@ -17,8 +13,8 @@ import ua.com.goit.gojava.m__jane.model.answer.MultipleAnswer;
 public class MultipleQuestion extends Question {
 	
 	
-	//@XmlElement(name = "predefinedAnswer")
-	//@XmlElementWrapper(name = "predefinedAnswers")
+	@XmlElement(name = "predefinedAnswer")
+	@XmlElementWrapper(name = "predefinedAnswers")
 	private List<PredefinedAnswer> predefinedAnwerList;
 	
 	public List<PredefinedAnswer> getPredefinedAnwerList() {
@@ -31,7 +27,7 @@ public class MultipleQuestion extends Question {
 
 	@Override
 	public String toString() {
-		return "MultipleQuestion [getId() = " + getId() + ", getContent()=" + getContent() + "]";
+		return "MultipleQuestion [getId() = " + getId() + ", getContent()=" + getContent() + ", predefinedAnwerList=" + predefinedAnwerList+"]";
 	}
 
 	//@Override

@@ -7,8 +7,8 @@ import javax.xml.bind.annotation.XmlID;
 import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
-import ua.com.goit.gojava.m__jane.model.IDAdapter;
 import ua.com.goit.gojava.m__jane.model.answer.Answer;
+import ua.com.goit.gojava.m__jane.util.IDAdapter;
 
 
 @XmlSeeAlso({MultipleQuestion.class, SimpleQuestion.class})
@@ -48,18 +48,4 @@ public abstract class Question {
 
 	public abstract Answer createTemplateAnswer();
 	
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		return new StringBuilder().append("Question [id=").append(id)
-				.append(", content=").append(content)
-				//.append(", questionCategory=").append(category.getName())
-				//.append(", profile=").append(profile.getName())
-				//.append(", openQuestion=").append(openQuestion)
-				.append("]").toString();
-	}
 }

@@ -9,13 +9,18 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlID;
 import javax.xml.bind.annotation.XmlIDREF;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+import ua.com.goit.gojava.m__jane.util.IDAdapter;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Quiz {
 	
-	@XmlAttribute	
-	private Integer id;
 	@XmlID
+	@XmlAttribute
+	@XmlJavaTypeAdapter(IDAdapter.class)	
+	private Integer id;
+
 	@XmlAttribute
 	private String name;
 	

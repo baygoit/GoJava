@@ -5,11 +5,13 @@ import java.util.List;
 
 
 
+
+
 import javax.xml.bind.JAXBException;
 
 import ua.com.goit.gojava.m__jane.model.Profile;
-import ua.com.goit.gojava.m__jane.service.DataBuilder;
 import ua.com.goit.gojava.m__jane.service.ProfileService;
+import ua.com.goit.gojava.m__jane.util.DataBuilder;
 
 
 public class ProfileServiceImpl implements ProfileService {

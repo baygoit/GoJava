@@ -1,4 +1,4 @@
-package ua.com.goit.gojava.m__jane.service;
+package ua.com.goit.gojava.m__jane.util;
 
 import java.io.File;
 
@@ -7,7 +7,6 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
 import ua.com.goit.gojava.m__jane.model.Category;
-import ua.com.goit.gojava.m__jane.model.DataLoader;
 import ua.com.goit.gojava.m__jane.model.question.MultipleQuestion;
 import ua.com.goit.gojava.m__jane.model.question.Question;
 import ua.com.goit.gojava.m__jane.model.question.SimpleQuestion;

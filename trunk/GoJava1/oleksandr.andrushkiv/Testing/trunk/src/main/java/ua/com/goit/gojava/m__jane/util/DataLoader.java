@@ -1,4 +1,4 @@
-package ua.com.goit.gojava.m__jane.model;
+package ua.com.goit.gojava.m__jane.util;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,9 +8,12 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlElements;
-import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import ua.com.goit.gojava.m__jane.model.Category;
+import ua.com.goit.gojava.m__jane.model.Profile;
+import ua.com.goit.gojava.m__jane.model.Quiz;
+import ua.com.goit.gojava.m__jane.model.User;
 import ua.com.goit.gojava.m__jane.model.question.MultipleQuestion;
 import ua.com.goit.gojava.m__jane.model.question.Question;
 import ua.com.goit.gojava.m__jane.model.question.SimpleQuestion;
@@ -20,10 +23,9 @@ import ua.com.goit.gojava.m__jane.model.question.SimpleQuestion;
 public class DataLoader {
 	
 	@XmlElements({
-		@XmlElement(name = "questionMu", type=MultipleQuestion.class)
-		, @XmlElement(name = "questionSi", type=SimpleQuestion.class)})	
-	//@XmlElements(value = {@XmlElement(name = "questionMu", type=MultipleQuestion.class)})
-	//@XmlElements(value = {@XmlElement(name = "questionSi", type=SimpleQuestion.class)})
+		@XmlElement(name = "questionMu", type=MultipleQuestion.class), 
+		@XmlElement(name = "questionSi", type=SimpleQuestion.class)
+		})	
 	@XmlElementWrapper(name = "questions")
 	private List<Question> questionList;
 	

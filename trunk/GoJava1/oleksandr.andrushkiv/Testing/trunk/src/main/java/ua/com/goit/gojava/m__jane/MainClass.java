@@ -2,15 +2,13 @@ package ua.com.goit.gojava.m__jane;
 
 import javax.xml.bind.JAXBException;
 
-import ua.com.goit.gojava.m__jane.model.DataLoader;
 import ua.com.goit.gojava.m__jane.model.Profile;
 import ua.com.goit.gojava.m__jane.model.Category;
 import ua.com.goit.gojava.m__jane.model.Quiz;
 import ua.com.goit.gojava.m__jane.model.User;
 import ua.com.goit.gojava.m__jane.model.question.Question;
-import ua.com.goit.gojava.m__jane.service.DataBuilder;
-import ua.com.goit.gojava.m__jane.service.ProfileService;
-import ua.com.goit.gojava.m__jane.service.impl.ProfileServiceImpl;
+import ua.com.goit.gojava.m__jane.util.DataBuilder;
+import ua.com.goit.gojava.m__jane.util.DataLoader;
 
 public class MainClass {
 
@@ -30,20 +28,19 @@ public class MainClass {
 					System.out.println("		Quiz=" + quiz);
 
 					for (Category category : quiz.getCategoryList()) {
-						System.out.println("		Category=" + category);
+						System.out.println("			Category=" + category);
 
-						/*for (Question question : category.getQuestionList()) {
-							System.out.println("		question=" + question);
-						}*/
+						for (Question question : category.getQuestionList()) {
+							System.out.println("				question=" + question);
+						}
 					}
 				}
 			}
 			
-
-
 			System.out.println("\n");
 		}
 		
+		/*
 		for (Category category : dataLoader.getCategoryList()) {
 			System.out.println(category);
 		}
@@ -51,7 +48,7 @@ public class MainClass {
 		for (Question question : dataLoader.getQuestionList()) {
 			System.out.println(question);
 		}
-
+*/
 		/*ProfileService profileService =  new ProfileServiceImpl();
 
 		for (Profile profile : profileService.getProfileList()) {

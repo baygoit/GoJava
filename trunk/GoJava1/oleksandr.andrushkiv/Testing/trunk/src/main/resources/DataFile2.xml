@@ -2,15 +2,13 @@
 
 <rootElement>
 
-
-
-<!-- <questions111>
-	<question id="1"
+<questions>
+	<questionSi id="1"
 		content="Як має поводитись продавець у торговому залі, якщо Покупець змушений чекати?"
 		standartAnswer="Запропонувати оглянути асортимент, каталоги. Вибачитись за незручність." />
 		
-продавець
-	<question id="2"
+<!-- продавець -->
+	<questionMu id="2"
 		content="Яким є завдання продавця на етапі «Презентація товару»?">
 		<predefinedAnswers>
 			<predefinedAnswer id="21"
@@ -19,9 +17,9 @@
 			<predefinedAnswer id="23" content="Виявити себе" />
 			<predefinedAnswer id="24" content="якась невірна відповідь" />
 		</predefinedAnswers>
-	</question>
+	</questionMu>
 	
-	<question id="3" content="Назвіть основні етапи продажу:">
+	<questionMu id="3" content="Назвіть основні етапи продажу:">
 	<predefinedAnswers>
 		<predefinedAnswer id="31" content="Зустріч покупця;" />
 		<predefinedAnswer id="32" content="Виявлення потреби;" />
@@ -31,10 +29,10 @@
 		<predefinedAnswer id="36" content="Завершення обслуговування покупця;" />
 		<predefinedAnswer id="37" content="якась невірна відповідь;" />
 	</predefinedAnswers>
-	</question>
+	</questionMu>
 	
-старший продавець	
-	<question id="4" content="Що не можна робити на етапі «Відповіді на заперечення»?">
+<!-- старший продавець -->	
+	<questionMu id="4" content="Що не можна робити на етапі «Відповіді на заперечення»?">
 	<predefinedAnswers>
 		<predefinedAnswer id="41" content="сперечатись чи дискутувати з Покупцем;" />
 		<predefinedAnswer id="42" content="залишати заперечення Покупця без відповіді;" />
@@ -42,9 +40,9 @@
 		<predefinedAnswer id="44" content="якась невірна відповідь1;" />
 		<predefinedAnswer id="45" content="якась невірна відповідь2;" />
 	</predefinedAnswers>
-	</question>
+	</questionMu>
 	
-	<question id="5" content="Яким є завдання продавця на етапі «Завершення обслуговування»?">
+	<questionMu id="5" content="Яким є завдання продавця на етапі «Завершення обслуговування»?">
 	<predefinedAnswers>
 		<predefinedAnswer id="51" content="якась невірна відповідь1;" />
 		<predefinedAnswer id="52" content="якась невірна відповідь2;" />
@@ -52,214 +50,109 @@
 		<predefinedAnswer id="54" content="Зацікавити покупця акціями та новинками;" />
 		<predefinedAnswer id="55" content="Створити мотив до нових покупок;" />
 	</predefinedAnswers>
-	</question>
+	</questionMu>
 	
-Законодавство	
-	<question id="6" content="Споживач має право на обмін товару належної якості протягом:">
+<!-- Законодавство	 -->
+	<questionMu id="6" content="Споживач має право на обмін товару належної якості протягом:">
 	<predefinedAnswers>
 		<predefinedAnswer id="61" content="7 днів;" />
 		<predefinedAnswer id="62" content="2 місяці;" />
 		<predefinedAnswer id="63" content="14 днів, не враховуючи дня купівлі, якщо триваліший строк не оголошений продавцем;" />
 		<predefinedAnswer id="64" content="1 рік;" />
 	</predefinedAnswers>
-	</question>
-</questions111>
- -->
- 
- 
-<!-- test -->
-<questions>
-	<questionMu id="10001"
-		content="Споживач має право на обмін товару належної якості протягом:" />
-	<questionSi id="10002"
-		content="Як має поводитись продавець у торговому залі, якщо Покупець змушений чекати?" />
+	</questionMu>
 </questions>
-
- <questionCategories>
-	<questionCategory id="11001" name="Торгові питання для продавця">
-		<questions>			
-			<question>10001</question>
-			<question>10002</question>				
+ 
+<questionCategories>
+	<questionCategory id="101" name="Торгові питання для продавця">
+		<questions>
+			<question>1</question>
+			<question>2</question>
+			<question>3</question>		
 		</questions>
 	</questionCategory>
 	
-	<questionCategory id="11002" name="Торгові питання для старшого продавця">
+	<questionCategory id="102" name="Торгові питання для старшого продавця">
+		<questions>
+			<question>4</question>
+			<question>5</question>				
+		</questions>		
 	</questionCategory>
 
-	<questionCategory id="11003" name="Законодавство">
-	</questionCategory>
-</questionCategories> 
-
-<!-- <questionCategories>
-	<questionCategory id="1" name="Торгові питання для продавця">
+	<questionCategory id="103" name="Законодавство">
 		<questions>
-			<question>Як має поводитись продавець у торговому залі, якщо Покупець змушений чекати?</question>
-			<question>Яким є завдання продавця на етапі «Презентація товару»?</question>
-			<question>Назвіть основні етапи продажу:</question>		
-		</questions>
-		<questions>
-			<questionMu>Споживач має право на обмін товару належної якості протягом:</questionMu>
-			<questionSi>Як має поводитись продавець у торговому залі, якщо Покупець змушений чекати?</questionSi>				
-		</questions>
-	</questionCategory>
-	
-	<questionCategory id="2" name="Торгові питання для старшого продавця">
-		<questions>
-			<question>Що не можна робити на етапі «Відповіді на заперечення»?</question>
-			<question>Яким є завдання продавця на етапі «Завершення обслуговування»?</question>				
-		</questions>
-		<questions>
-			<questionMu>Споживач має право на обмін товару належної якості протягом:</questionMu>
-			<questionSi>Як має поводитись продавець у торговому залі, якщо Покупець змушений чекати?</questionSi>				
-		</questions>
-	</questionCategory>
-
-	<questionCategory id="3" name="Законодавство">
-		<questions>
-			<questionMu>Споживач має право на обмін товару належної якості протягом:</questionMu>
-			<questionSi>Як має поводитись продавець у торговому залі, якщо Покупець змушений чекати?</questionSi>				
+			<question>6</question>							
 		</questions>	
 	</questionCategory>
-</questionCategories> -->
+</questionCategories>
 
-
-<!-- <quizzes>
-	<quiz id="1" name="Пакет №1 для продавця">
+<quizzes>
+	<quiz id="1001" name="Пакет №1 для продавця">
 		<questionCategories>
-			<questionCategory>Торгові питання для продавця</questionCategory>
+			<questionCategory>101</questionCategory>
 		</questionCategories>
 	</quiz>
-	<quiz id="2" name="Пакет №2 для продавця">
+	<quiz id="1002" name="Пакет №2 для продавця">
 		<questionCategories>
-			<questionCategory>Торгові питання для продавця</questionCategory>
-			<questionCategory>Законодавство</questionCategory>
+			<questionCategory>101</questionCategory>
+			<questionCategory>103</questionCategory>
 		</questionCategories>
 	</quiz>
-	<quiz id="3" name="Пакет №1 для старшого продавця">
+	<quiz id="1003" name="Пакет №1 для старшого продавця">
 		<questionCategories>
-			<questionCategory>Торгові питання для старшого продавця
+			<questionCategory>102
 			</questionCategory>
 
 		</questionCategories>
 	</quiz>
-	<quiz id="4" name="Пакет №2 для старшого продавця">
+	<quiz id="1004" name="Пакет №2 для старшого продавця">
 		<questionCategories>
 
-			<questionCategory>Торгові питання для старшого продавця
+			<questionCategory>102
 			</questionCategory>
-			<questionCategory>Законодавство</questionCategory>
+			<questionCategory>103</questionCategory>
 		</questionCategories>
 	</quiz>
-	<quiz id="5" name="Пакет для керівника відділу">
+	<quiz id="1005" name="Пакет для керівника відділу">
 		<questionCategories>
-			<questionCategory>Законодавство</questionCategory>
+			<questionCategory>103</questionCategory>
 		</questionCategories>
 	</quiz>
 </quizzes>
 
 <profiles>
-	<profile id="1" name="Продавець">
+	<profile id="10001" name="Продавець">
 		<quizzes>
-			<quiz>Пакет №1 для продавця</quiz>
-			<quiz>Пакет №2 для продавця</quiz>
+			<quiz>1001</quiz>
+			<quiz>1002</quiz>
 		</quizzes>
 	</profile>
-	<profile id="2" name="Старший продавець">
+	<profile id="10002" name="Старший продавець">
 		<quizzes>
-			<quiz>Пакет №1 для старшого продавця</quiz>
-			<quiz>Пакет №2 для старшого продавця</quiz>
+			<quiz>1003</quiz>
+			<quiz>1004</quiz>
 		</quizzes>
 	</profile>
-	<profile id="3" name="Керівник відділу">
+	<profile id="10003" name="Керівник відділу">
 		<quizzes>
-			<quiz>Пакет №1 для продавця</quiz>
+			<quiz>1005</quiz>
 		</quizzes>
 	</profile>
 </profiles>
 
 <users>
-	<user id="1" name="user1">
+	<user id="100001" name="user1">
 		<profiles>
-			<profile>Продавець</profile>
-			<profile>Старший продавець</profile>
+			<profile>10001</profile>
+			<profile>10002</profile>
 		</profiles>
 	</user>
 
-	<user id="2" name="user2">
+	<user id="100002" name="user2">
 		<profiles>
-			<profile>Керівник відділу</profile>
+			<profile>10003</profile>
 		</profiles>
 	</user>
-</users> -->
-
-
-
-	<!-- <profiles>
-		<profile id="1" name="Продавець" quiz="quizN">
-			<questionCategories>
-				<questionCategory id="1" name="Торгові питання">
-					<questions>
-						<question id="1"
-							content="Як має поводитись продавець у торговому залі, якщо Покупець змушений чекати?" />
-						<question id="2"
-							content="Яким є завдання продавця на етапі «Презентація товару»?" />
-					</questions>
-				</questionCategory>
-
-				<questionCategory id="2" name="Законодавство">
-					<questions>
-						<question id="1" content="Продавець - Законодавство - question1" />
-						<question id="2" content="Продавець - Законодавство - question2" />
-					</questions>
-				</questionCategory>
-
-			</questionCategories>
-		</profile>
-
-		<profile id="2" name="Старший продавець">
-			<questionCategories>
-				<questionCategory id="1" name="Торгові питання">
-					<questions>
-						<question id="1"
-							content="Як має поводитись продавець у торговому залі, якщо Покупець змушений чекати?" />
-						<question id="2"
-							content="Яким є завдання продавця на етапі «Презентація товару»?" />
-					</questions>
-				</questionCategory>
-
-				<questionCategory id="2" name="Законодавство">
-					<questions>
-						<question id="1"
-							content="Старший продавець - Законодавство - question1" />
-						<question id="2"
-							content="Старший продавець - Законодавство - question2" />
-						<question id="3"
-							content="Старший продавець - Законодавство - question3" />
-					</questions>
-				</questionCategory>
-
-			</questionCategories>
-		</profile>
-
-		<profile id="3" name="Босс">
-			<questionCategories>
-				<questionCategory id="1" name="Торгові питання">
-					<questions>
-						<question id="1"
-							content="Як має поводитись продавець у торговому залі, якщо Покупець змушений чекати?" />
-						<question id="2"
-							content="Яким є завдання продавця на етапі «Презентація товару»?" />
-					</questions>
-				</questionCategory>
-				<questionCategory id="2" name="Законодавство">
-					<questions>
-						<question id="1" content="Босс продавець - Законодавство - question1" />
-					</questions>
-				</questionCategory>
-			</questionCategories>
-		</profile>
-
-	</profiles>
- -->
+</users>
 
 </rootElement>
