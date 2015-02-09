@@ -3,27 +3,22 @@ package ua.com.goit.gojava.m__jane.model.question;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlID;
+import javax.xml.bind.annotation.XmlSeeAlso;
+
 import ua.com.goit.gojava.m__jane.model.answer.Answer;
 
 
-//@XmlSeeAlso({Admin.class})
+@XmlSeeAlso({MultipleQuestion.class, SimpleQuestion.class})
 @XmlAccessorType(XmlAccessType.FIELD)
 public abstract class Question {
 	
 	@XmlAttribute
 	private Integer id;
+	@XmlID
 	@XmlAttribute
 	protected String content;
 	
-	//private Category category;
-	
-	//private Profile profile;
-	/**
-	 * if openQuestion==false then question has many variants of
-	 * answers(a,b,c.... ), else only one (text the expected response)
-	 */
-	//private boolean openQuestion;
-
 	public Question() {
 	}
 

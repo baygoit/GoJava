@@ -2,10 +2,26 @@ package ua.com.goit.gojava.m__jane.model;
 
 import java.util.List;
 
-public class Quiz {
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlID;
+import javax.xml.bind.annotation.XmlIDREF;
 
+@XmlAccessorType(XmlAccessType.FIELD)
+public class Quiz {
+	
+	@XmlAttribute	
 	private Integer id;
+	@XmlID
+	@XmlAttribute
 	private String name;
+	
+	@XmlIDREF
+	@XmlElement(name = "questionCategory")
+	@XmlElementWrapper(name = "questionCategories")
 	private List<Category> categoryList;
 	
 	//params for counting whole set questions for UserQuiz
@@ -43,5 +59,11 @@ public class Quiz {
 	public void setAmountQuestions(Integer amountQuestions) {
 		this.amountQuestions = amountQuestions;
 	}
+
+	@Override
+	public String toString() {
+		return "Quiz [id=" + id + ", name=" + name + "]";
+	}
+	
 	
 }

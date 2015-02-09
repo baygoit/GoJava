@@ -12,7 +12,7 @@ public class DataBuilder {
 
 	private static DataBuilder instance;
 	private static DataLoader dataLoader;
-	private static final File FILE = new File("src/main/resources/DataFile.xml");
+	private static final File FILE = new File("src/main/resources/DataFile2.xml");
 	
 	private DataBuilder() {
 	}

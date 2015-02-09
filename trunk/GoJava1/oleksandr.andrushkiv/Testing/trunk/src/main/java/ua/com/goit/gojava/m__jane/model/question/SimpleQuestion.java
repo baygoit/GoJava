@@ -2,6 +2,9 @@ package ua.com.goit.gojava.m__jane.model.question;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlID;
+import javax.xml.bind.annotation.XmlRootElement;
 
 import ua.com.goit.gojava.m__jane.model.answer.Answer;
 import ua.com.goit.gojava.m__jane.model.answer.SimpleAnswer;
@@ -10,8 +13,8 @@ import ua.com.goit.gojava.m__jane.model.answer.SimpleAnswer;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class SimpleQuestion extends Question {
 
+	@XmlAttribute
 	private String standartAnswer;
-
 
 	public String getStandartAnswer() {
 		return standartAnswer;
@@ -26,7 +29,7 @@ public class SimpleQuestion extends Question {
 		return "OpenQuestion [getContent()=" + getContent() + "]";
 	}
 
-	@Override
+	//@Override
 	public Answer createTemplateAnswer() {
 		Answer answer = new SimpleAnswer();
 		answer.setQuestion(this);

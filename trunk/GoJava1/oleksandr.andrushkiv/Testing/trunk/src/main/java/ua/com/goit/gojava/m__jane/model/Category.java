@@ -8,6 +8,8 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlElements;
+import javax.xml.bind.annotation.XmlID;
+import javax.xml.bind.annotation.XmlIDREF;
 
 import ua.com.goit.gojava.m__jane.model.question.MultipleQuestion;
 import ua.com.goit.gojava.m__jane.model.question.SimpleQuestion;
@@ -18,14 +20,16 @@ public class Category {
 	
 	@XmlAttribute
 	private Integer id;
+	@XmlID
 	@XmlAttribute
 	private String name;
 	
-	@XmlElements(value = {@XmlElement(name = "question", type=SimpleQuestion.class),@XmlElement(name = "question", type=MultipleQuestion.class)})	
+	@XmlIDREF
+	//@XmlElements(value = {@XmlElement(name = "questionMu", type=MultipleQuestion.class), @XmlElement(name = "questionSi", type=SimpleQuestion.class)})	
+	@XmlElements(value = {@XmlElement(name = "questionMu", type=MultipleQuestion.class)})
+	//@XmlElements(value = {@XmlElement(name = "questionSi", type=SimpleQuestion.class)})
 	@XmlElementWrapper(name = "questions")
-	private List<Question> QuestionList;
-
-	private Profile profile;
+	private List<Question> questionList;
 
 	public Category() {
 	}
@@ -50,21 +54,13 @@ public class Category {
 	public void setName(String name) {
 		this.name = name;
 	}
-
+	
 	public List<Question> getQuestionList() {
-		return QuestionList;
+		return questionList;
 	}
 
 	public void setQuestionList(List<Question> questionList) {
-		QuestionList = questionList;
-	}
-
-	public Profile getProfile() {
-		return profile;
-	}
-
-	public void setProfile(Profile profile) {
-		this.profile = profile;
+		this.questionList = questionList;
 	}
 
 	@Override
@@ -73,8 +69,8 @@ public class Category {
 		return new StringBuilder()
 				.append("QuestionCategory [id=").append(id)
 				.append(", name=").append(name)
-				.append(", QuestionList=").append(QuestionList)
-				.append(", profile=").append(profile).append("]")
+				.append(", questionList=").append(questionList)
+				.append("]")
 				.toString();
 		
 	}

@@ -1,11 +1,16 @@
 package ua.com.goit.gojava.m__jane.model.question;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
 
 
+@XmlAccessorType(XmlAccessType.FIELD)
 public class PredefinedAnswer {
 
+	@XmlAttribute
 	private Integer id;
-
+	@XmlAttribute
 	private String content;
 
 	public Integer getId() {

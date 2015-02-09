@@ -8,6 +8,8 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlID;
+import javax.xml.bind.annotation.XmlIDREF;
 
 
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -15,13 +17,15 @@ public class Profile {
 	
 	@XmlAttribute
 	private Integer id;
+	@XmlID
 	@XmlAttribute
 	private String name;
 	
-	@XmlElement(name = "questionCategory")
-	@XmlElementWrapper(name = "questionCategories")
-	private List<Category> QuestionCategoryList;
-
+	@XmlIDREF
+	@XmlElement(name = "quiz")
+	@XmlElementWrapper(name = "quizzes")
+	private List<Quiz> quizList;
+	
 	public Profile() {
 	}	
 
@@ -46,19 +50,17 @@ public class Profile {
 		this.name = name;
 	}
 
-	public List<Category> getQuestionCategoryList() {
-		return QuestionCategoryList;
+	public List<Quiz> getQuizList() {
+		return quizList;
 	}
 
-	public void setQuestionCategoryList(List<Category> questionCategoryList) {
-		QuestionCategoryList = questionCategoryList;
+	public void setQuizList(List<Quiz> quizList) {
+		this.quizList = quizList;
 	}
 
 	@Override
 	public String toString() {
-		return "Profile [id=" + id + ", "
-				+ "name=" + name 
-				+ ", QuestionCategories="	+ QuestionCategoryList + "]";
+		return "Profile [id=" + id + ", name=" + name + "]";
 	}
 
 	@Override
