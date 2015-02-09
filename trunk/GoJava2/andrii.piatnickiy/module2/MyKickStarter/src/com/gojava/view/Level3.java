@@ -1,15 +1,15 @@
 package com.gojava.view;
 
-import com.gojava.inputOutput.ConsoleIO;
+import com.gojava.inputOutput.IO;
 import com.gojava.projects.ProjectStorage;
 
 public class Level3 implements Level {
     private Menu menu;
     private int position = 3;
     private ProjectStorage projectStorage;
-    private ConsoleIO out;
+    private IO out;
 
-    public Level3(ProjectStorage projectStorage, ConsoleIO out) {
+    public Level3(ProjectStorage projectStorage, IO out) {
         this.projectStorage = projectStorage;
         this.out = out;
     }

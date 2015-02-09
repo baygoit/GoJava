@@ -10,7 +10,6 @@ import com.gojava.view.Menu;
 public class Launch {
 
     public static void main(String[] args) {
-        ConsoleIO consoleIO = new ConsoleIO();
         CategoryStorage categoryStorage = new CategoryStorage();
         ProjectStorage projectStorage = new ProjectStorage();
 
@@ -18,12 +17,12 @@ public class Launch {
         initProjects(projectStorage);
         
         Scan scan = new Scan();
-        Quote quote = new Quote();
-        consoleIO.print(quote.getQuote());
+        Quote quote = new Quote(new ConsoleIO());
+        quote.consoleIO.print(quote.getQuote());
 
-        Menu menu = new Menu(categoryStorage, projectStorage);
+        Menu menu = new Menu(categoryStorage, projectStorage, new ConsoleIO());
         while (true) {
-            menu.nextLevel(scan.inputInt());
+            menu.nextLevel(menu.consoleIO.inputInt());
         }
 
     }

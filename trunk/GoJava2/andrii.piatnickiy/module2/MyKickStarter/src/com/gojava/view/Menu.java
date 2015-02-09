@@ -3,20 +3,24 @@ package com.gojava.view;
 import java.util.ArrayList;
 
 import com.gojava.inputOutput.ConsoleIO;
+import com.gojava.inputOutput.IO;
 import com.gojava.projects.CategoryStorage;
 import com.gojava.projects.ProjectStorage;
 
 public class Menu {
-    ConsoleIO out = new ConsoleIO();
+    IO out = new ConsoleIO();
     private int currentLevelPosition;
     private Level1 level1;
     private Level2 level2;
     private Level3 level3;
     int categoryPosition; 
-
+    public ConsoleIO consoleIO;
+    
     private ArrayList<Level> levelsList = new ArrayList<>();
 
-    public Menu(CategoryStorage categoryStorage, ProjectStorage projectStorage) {
+
+    public Menu(CategoryStorage categoryStorage, ProjectStorage projectStorage, ConsoleIO consoleIO) {
+        this.consoleIO = consoleIO;
         this.level1 = new Level1(categoryStorage, out);
         this.level2 = new Level2(projectStorage, out);
         this.level3 = new Level3(projectStorage, out);
