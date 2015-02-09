@@ -9,7 +9,7 @@ public class TestCategoryStorage {
     CategoryStorage categoryStorage = new CategoryStorage();
     
     @Test
-    public void test1(){
+    public void shouldCategoriestList_WhenAddCategoriesList(){
         categoryStorage.add("name1", 1);
         Category category = categoryStorage.getCategory(0);
         assertEquals("1) name1", category.toString());
