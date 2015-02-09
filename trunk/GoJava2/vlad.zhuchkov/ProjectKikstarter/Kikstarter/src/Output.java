@@ -1,3 +1,6 @@
 public interface Output {
-	public void print(String s);
+
+	void print(String string);
+
 }
+

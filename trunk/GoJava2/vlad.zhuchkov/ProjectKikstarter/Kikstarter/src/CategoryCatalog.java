@@ -1,26 +1,24 @@
-import java.util.ArrayList;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 public class CategoryCatalog {
-	private ArrayList<Category> categoryCatalog = new ArrayList<>();
+	private Set<Category> categoryCatalog = new LinkedHashSet<>();
 	
 	public void addCategory(String name) {
 		categoryCatalog.add(new Category(name));
 	}
 
-	public ArrayList<Category> getCatalogList() {
-		return categoryCatalog;
+	public Category[] getCatalogList() {
+		return categoryCatalog.toArray(new Category[size()]);
 	}
 
 	public Category getCategory(int i) {
-		Input reader = new Reader(new Printer());
-		while (i >= categoryCatalog.size()||i<0) {
-				System.out.println("Illigal category number. Try again");
-				i = reader.readInt()-1;
-				} 
-		return categoryCatalog.get(i);
+		Category[] categoryCatalog = getCatalogList();
+		return categoryCatalog[i];
 	}
 
 	public int size() {
 		return categoryCatalog.size();
 	}
+	
 }

@@ -1,6 +1,11 @@
 public interface Input {
+
+	String read();
+
 	
 
-	public int readInt();
+	
+
+	
 
 }

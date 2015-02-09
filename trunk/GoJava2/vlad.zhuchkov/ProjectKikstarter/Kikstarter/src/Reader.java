@@ -1,24 +1,17 @@
-import java.util.Scanner;
 
-public class Reader implements Input {
-	Printer printer;
 
-	public Reader(Printer pr){
-	this.printer = 	pr;
+public class Reader  {
+	private Input consolReader;
+	
+	public Reader(Input reader){
+	this.consolReader = reader;
 	}
-	private Scanner sc = new Scanner(System.in);
-	@Override
+	
 	public int readInt() {
-		int input = 0;
-		try {
-			input = Integer.valueOf(sc.nextLine());
-		} catch (NumberFormatException e) {
-			printer.print("invalid input. Only integer");
-			input = readInt();
-		}
-		
-		return input;
+		return Integer.valueOf(consolReader.read());
 	}
+	
+	
 	
 	
 }
