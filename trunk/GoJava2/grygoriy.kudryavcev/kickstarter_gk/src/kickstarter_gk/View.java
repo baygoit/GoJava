@@ -7,6 +7,10 @@ public class View {
 	private Citation StartCitation = new Citation();
 	private Console viewPrint = new Console();
 
+	private int level;
+	private int position;
+	private Model model;
+	
 	// Показываем цитату
 	
 	 public void showCitation() {
@@ -50,6 +54,27 @@ public class View {
 					i++;
             	}
 				showSelect();
+		}
+		
+		public void showLevelMenu (int level, int position, Model model) {
+			this.level = level;
+			this.position = position;
+			this.model = model;
+			
+			
+			if (level == 0 && position == 0){
+						
+				ArrayList<Category> categoriesList = model.CategoryList();
+				 int counter = 1;
+			        for (Object category : categoriesList) {
+			        	viewPrint.outhere("(" + counter + ") " + category);
+			        	counter++;
+			        	
+			        }
+			        showSelect();
+								
+			}
+			
 		}
 
 }

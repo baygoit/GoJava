@@ -40,7 +40,10 @@ public class Controler {
 	        boolean exitFromApplication = false;
 	        while (!exitFromApplication) {
 	     
-	        	menu.getLevelMenu(0, categoriesList, 0);
+	        	
+	        	view.showLevelMenu(0, 0, model);
+	        	// TODO логику!!!
+	        	
 	        
 	    }
 	      
