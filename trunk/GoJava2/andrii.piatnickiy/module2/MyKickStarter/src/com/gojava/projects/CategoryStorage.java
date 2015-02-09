@@ -22,5 +22,9 @@ public class CategoryStorage {
             out.print(out.printCategory(category));
         }
     }
+    
+    public Category getCategory(int index){
+        return categoryStorageList.get(index);
+    }
 
 }
