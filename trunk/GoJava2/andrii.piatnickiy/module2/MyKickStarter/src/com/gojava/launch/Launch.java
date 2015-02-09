@@ -1,7 +1,6 @@
 package com.gojava.launch;
 
 import com.gojava.inputOutput.ConsoleIO;
-import com.gojava.inputOutput.Scan;
 import com.gojava.projects.CategoryStorage;
 import com.gojava.projects.ProjectStorage;
 import com.gojava.quote.Quote;
@@ -16,7 +15,6 @@ public class Launch {
         initCategories(categoryStorage);
         initProjects(projectStorage);
         
-        Scan scan = new Scan();
         Quote quote = new Quote(new ConsoleIO());
         quote.iO.print(quote.getQuote());
 
