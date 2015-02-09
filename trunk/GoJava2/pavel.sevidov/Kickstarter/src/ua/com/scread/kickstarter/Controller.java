@@ -1,5 +1,6 @@
 package ua.com.scread.kickstarter;
 
+import java.awt.MenuItem;
 import java.util.Arrays;
 import java.util.List;
 
@@ -7,6 +8,13 @@ public class Controller {
 	private Model model;
     private IO io;
     private QuoteGenerator quote;
+    
+//    UserStory VI
+//    Как гость я хочу инвестировать в понравившийся мне проект, чтобы поддержать его
+//    Сценарий: Находясь в конкретном проекте -> Вижу меню с вариантами, что могу сделать, 
+//    один из пунктов - проинвестировать в проект -> Выбираю его -> Вижу вопрос от пеймент 
+//    системы о вводе имени и номера карточки и суммы -> Ввожу их ->
+//    Перехожу на описание проекта, где вижу что инфа о количестве пожертвований поменялась
 
     public Controller(Model model, IO io, QuoteGenerator quote) {
         this.model = model;
@@ -70,12 +78,12 @@ public class Controller {
             
             @Override
             Menu nextMenu(Object selected) {
-                Integer menu = (Integer)selected;
-                
-                if (menu == 1) {
-                        println("Спасибо, что хотите помочь проекту!");
+                Integer menuItem = (Integer)selected;
+                if (menuItem == 1) {
+                    return paymentMenu(project);                     
+                } else {
+                    return null;                    
                 }
-                return null;
             }
             
             @Override
@@ -90,6 +98,38 @@ public class Controller {
         };        
     }
     
+    private Menu paymentMenu(final Project project) {
+        return new Menu(io) {
+            
+            @Override
+            Menu nextMenu(Object selected) {
+                Integer amount = (Integer)selected;
+                project.addMoney(amount);
+                showThanks();
+                return null;
+            }
+            
+            @Override
+            Object choose(int menuItem) {
+                return menuItem;
+            }
+            
+            @Override
+            void ask() {
+                io.print("Enter donate amount: ");
+            }
+        };
+    }
+
+    private void showPayment() {
+        io.print("[1 - Donate]");
+        showExit();
+    }
+    
+    private void showThanks() {
+        println("Thank you for your donation!");
+    }
+
     private void println() {
     	io.print("\n");
 	}
@@ -152,7 +192,7 @@ public class Controller {
 		println(faq.getQuestion());
 		println("\n" + faq.getAnswer());
 		showLine();
-		showExit();
+		showPayment();
 	}
 	
 

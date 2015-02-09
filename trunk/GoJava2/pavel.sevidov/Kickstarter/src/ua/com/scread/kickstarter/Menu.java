@@ -20,8 +20,11 @@ public abstract class Menu {
                 continue;
             
             Menu subMenu = nextMenu(selected);
-            if ( subMenu != null)
-                subMenu.run();
+            if ( subMenu != null) {
+                subMenu.run();                
+            } else {
+                break;
+            }
         }
     }
 

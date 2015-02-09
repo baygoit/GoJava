@@ -41,6 +41,10 @@ public class Project {
 	public Category getCategory() {
 		return category;
 	}
+	
+	public void addMoney(double amount) {
+	    collected += amount;
+	}
 
 	public void setCategory(Category category) {
 		this.category = category;
