@@ -30,10 +30,17 @@ public class TestProjectStorage {
         assertEquals("1) Project Name: name\nDescription: desc\nNeed Sum: 1\nCurrent Sum: 1\nDays Left: 1\n\n", actual);
     }  
     @Test
-    public void shouldAdditionalFields_WhengetAdditionalProjectFields() {
+    public void shouldAdditionalFields_WhenGetAdditionalProjectFields() {
         projectStorage.add("name", "desc", 1, 1, 1, "categoryId",
                 "linkOnvideo", "questionsAndAnswers", 1);
         String actual = projectStorage.getAdditionalProjectFields(projectStorage.getProject(0));
         assertEquals("ProjectHistory: categoryId\nLinkOnvideo: linkOnvideo\nQuestions and answers: questionsAndAnswers\n", actual);
+    }  
+    @Test
+    public void shouldGetSpecificProject_WhenGetSpecificProject() {
+        projectStorage.add("name", "desc", 1, 1, 1, "categoryId",
+                "linkOnvideo", "questionsAndAnswers", 1);
+        String actual = projectStorage.getSpecificProject(1, 1);
+        assertEquals("Project Name: name\nDescription: desc\nNeed Sum: 1\nCurrent Sum: 1\nDays Left: 1\nProjectHistory: categoryId\nLinkOnvideo: linkOnvideo\nQuestions and answers: questionsAndAnswers\n\n", actual);
     }  
 }
