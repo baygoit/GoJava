@@ -1,16 +1,17 @@
 package ua.home.kickstarter.model;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 
 import ua.home.kickstarter.content.Category;
 import ua.home.kickstarter.content.Project;
@@ -32,20 +33,17 @@ public class ProjectStorage {
 	}
 
 	private void jsonProjectsToList() {
-		JSONParser parser = new JSONParser();
 		try {
-			JSONArray jsonProjectsArray = (JSONArray) parser.parse(new FileReader("d:\\Projects.json"));
+			BufferedReader br = new BufferedReader(new FileReader("d:\\Projects.json"));
+			JsonParser parser = new JsonParser();
+			JsonArray jArrayProjects = parser.parse(br).getAsJsonArray();
+			Gson gson = new Gson();
 			projectList = new ArrayList<Project>();
-
-			for (Object jsonProjectsObject : jsonProjectsArray) {
-				JSONObject jsonProjects = (JSONObject) jsonProjectsObject;
-				projectList.add(new Project("" + jsonProjects.get("name"), "" + jsonProjects.get("description"),
-						Integer.parseInt("" + jsonProjects.get("goal")), Integer.parseInt(""
-								+ jsonProjects.get("daysLeft")), "" + jsonProjects.get("linksToVideo")));
+			for (JsonElement obj : jArrayProjects) {
+				Project project = gson.fromJson(obj, Project.class);
+				projectList.add(project);
 			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (ParseException e) {
+		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
 	}

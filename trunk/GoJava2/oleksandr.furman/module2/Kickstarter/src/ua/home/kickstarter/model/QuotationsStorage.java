@@ -1,15 +1,16 @@
 package ua.home.kickstarter.model;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 
 import ua.home.kickstarter.content.Quote;
 
@@ -21,17 +22,17 @@ public class QuotationsStorage {
 	}
 
 	private void jsonQuotationsToList() {
-		JSONParser parser = new JSONParser();
 		try {
-			JSONArray jsonQuotationsArray = (JSONArray) parser.parse(new FileReader("d:\\Quotations.json"));
+			BufferedReader br = new BufferedReader(new FileReader("d:\\Quotations.json"));
+			JsonParser parser = new JsonParser();
+			JsonArray jArrayQuotations = parser.parse(br).getAsJsonArray();
+			Gson gson = new Gson();
 			quotationsList = new ArrayList<Quote>();
-			for (Object jsonQuotationsObject : jsonQuotationsArray) {
-				JSONObject jsonQuotations = (JSONObject) jsonQuotationsObject;
-				quotationsList.add(new Quote("" + jsonQuotations.get("quote")));
+			for (JsonElement obj : jArrayQuotations) {
+				Quote quote = gson.fromJson(obj, Quote.class);
+				quotationsList.add(quote);
 			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (ParseException e) {
+		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
 	}
