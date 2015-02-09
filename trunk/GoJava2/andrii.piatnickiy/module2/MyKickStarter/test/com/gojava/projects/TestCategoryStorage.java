@@ -21,6 +21,6 @@ public class TestCategoryStorage {
       categoryStorage.add("name1", 1);
       categoryStorage.add("name2", 2);
       categoryStorage.add("name3", 3);
-      assertEquals("1) name1", categoryStorage.getCategoryToString(categoryStorage.getCategory(0)));
+      assertEquals("1) name1" + "\n" + "2) name2" + "\n" + "3) name3" + "\n", categoryStorage.getCategoryToString());
   }
 }

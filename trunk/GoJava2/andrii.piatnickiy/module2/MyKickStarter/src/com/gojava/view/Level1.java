@@ -1,8 +1,10 @@
 package com.gojava.view;
 
+import com.gojava.inputOutput.Out;
 import com.gojava.projects.CategoryStorage;
 
 public class Level1 implements Level {
+    Out out = new Out();
     CategoryStorage categoryStorage;
     private int position = 1;
 
@@ -11,7 +13,7 @@ public class Level1 implements Level {
     }
 
     public void displayMySelf(int currentPosition) {
-        categoryStorage.display();
+        out.print(categoryStorage.getCategoryToString());
     }
 
     @Override

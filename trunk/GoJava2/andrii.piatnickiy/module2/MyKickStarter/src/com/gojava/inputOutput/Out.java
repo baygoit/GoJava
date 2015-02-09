@@ -1,6 +1,4 @@
 package com.gojava.inputOutput;
-
-import com.gojava.projects.Category;
 import com.gojava.projects.Project;
 
 public class Out {
@@ -45,12 +43,12 @@ public class Out {
                 .append(project.getQuestionsAndAnswers()).append("\n");
         return sb.toString();
     }
-
-    public String printCategory(Category category) {
-        StringBuffer sb = new StringBuffer();
-        sb.append(category.toString());
-        return sb.toString();
-    }
+ 
+//    public String printCategory(Category category) {
+//        StringBuffer sb = new StringBuffer();
+//        sb.append(category.toString());
+//        return sb.toString();
+//    }
 
 
 }
