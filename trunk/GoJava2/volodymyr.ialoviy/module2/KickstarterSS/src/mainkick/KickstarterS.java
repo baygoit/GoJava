@@ -2,8 +2,9 @@ package mainkick;
 import java.io.IOException;
 
 public class KickstarterS {
-
-	private static void toCategory() throws IOException, InterruptedException{
+	public KickstarterS() throws IOException, InterruptedException{
+		Quotes quote = new Quotes();
+		printer(quote.getQuote());
 		int chosenCategory;
 		int chosenProject;
 		int choiceToProject;
@@ -42,15 +43,7 @@ public class KickstarterS {
 		}
 	}
 	
-	public static void main(String[] args) throws IOException, InterruptedException{
-		Quotes quote = new Quotes();
-		
-		printer(quote.getQuote());
-		
-		toCategory();
-	}
-	
-	public static void printer(String string){
+	private void printer(String string){
 		Output out = new OutputConsole();
 		out.print(string);
 	}
