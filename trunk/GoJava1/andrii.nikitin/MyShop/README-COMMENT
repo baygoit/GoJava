@@ -1,3 +1,53 @@
+
+
+09.02.2015 09:30
+
+Address class:
+
+	country: почему бы не сделать как enum?
+	https://uk.wikipedia.org/wiki/ISO_3166-1
+	
+Basket class:
+
+	private HashMap<Good,Integer> order;
+	я бы делал список объектов
+		class ? {
+			private Good;
+			private integer total;
+		}
+		причина - могут быть комментарии.
+		к тому же такая структура потом красиво проматить релейшины в entity beans.
+		
+		о структуре private HashMap<Good,Integer> order;
+		если будешь оставлять ее, то я бы оставлял только такие методы:
+			private HashMap<Good,Integer> order;
+			public Map<Good, Integer> getOrder() {
+				if(order==null){order = new Hashmap<>()};
+				return order;
+			}
+		и в конструкторе не инициализировал бы.
+		
+NewWarehouse сlass:
+
+	меня смущает содержимое метода getGoodMap
+	
+Order сlass:
+
+	addressOfDelivery - я бы назвал deliveryAddress. dateOfDelivery and typeOfDelivery  -аналогично
+	
+TypeOfDelivery сlass
+	
+	я бы переименовал бы в DeliveryType,
+	
+StatusOfOrder class
+	
+	я бы переименовал бы в OrderStatus	
+		
+		
+				
+=======================
+
+
 27.01.2015
 
 На текуший момент опишу только свое видинее интерфейса:
