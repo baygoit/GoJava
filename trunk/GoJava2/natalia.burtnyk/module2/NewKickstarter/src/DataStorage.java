@@ -50,7 +50,6 @@ public class DataStorage {
 				14000, 9006, 20));
 		projectsFood.add(new Project("3.CookBook", "We have collected recipes 2000 and we want "
 				+ "to release a book",12000, 2700, 28));
-		
 		projectsMusic.add(new Project("1.Musical Instruments", "Help for beginners",
 				25000, 12908, 48));
 		projectsEducation.add(new Project("1.English Speaking Club Online", "Сommunication with "
