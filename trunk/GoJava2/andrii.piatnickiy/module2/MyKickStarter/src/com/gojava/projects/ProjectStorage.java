@@ -16,19 +16,57 @@ public class ProjectStorage {
                 questionsAndAnswers, categoryId));
     }
 
-    public void getAll(int categoryNumber) {
+    public String getAll(int categoryNumber) {
+        StringBuffer buffer = new StringBuffer();
         int i = 1;
         for (Project project : projectStorageList) {
             if (project.getCategoryId() == categoryNumber) {
-                out.print(out.output(i, ") "));
-                previewProject(project, out);
-                System.out.println();
+                buffer.append(i).append(") ");
+                buffer.append(projectPreviewToString(project)).append("\n");
+                i++;
+            }
+        }
+        return buffer.toString();
+    }
+
+
+    public String projectPreviewToString(Project project) {
+        StringBuffer sb = new StringBuffer();
+        sb.append("Project Name: ").append(project.getName()).append("\n");
+        sb.append("Description: ").append(project.getDescription())
+                .append("\n");
+        sb.append("Need Sum: ").append(project.getNeedSum()).append("\n");
+        sb.append("Current Sum: ").append(project.getCurrentSum()).append("\n");
+        sb.append("Days Left: ").append(project.getDaysLeft()).append("\n");
+        return sb.toString();
+    }
+
+    private void previewProject(Project project, Out out) {
+        out.print(projectPreviewToString(project));
+    }
+
+    public void getSpecificProject(int categoryNumber, int projectNumber) {
+        int i = 1;
+        for (Project project : projectStorageList) {
+            if (project.getCategoryId() == categoryNumber) {
+                if (i == projectNumber) {
+                    allProjectFields(project);
+                }
                 i++;
             }
         }
     }
 
-    public Project getProject(int index){
+    private void allProjectFields(Project project) {
+        out.print(out.printProjectPreview(project));
+        out.print(out.printAdditionalProjectFields(project));
+    }
+
+    public void setOut(Out out) {
+        this.out = out;
+    }
+
+    public Project getProject(int index) {
         return projectStorageList.get(index);
     }
     
@@ -46,29 +84,4 @@ public class ProjectStorage {
     // }
     // return null;
     // }
-
-    public void getSpecificProject(int categoryNumber, int projectNumber) {
-        int i = 1;
-        for (Project project : projectStorageList) {
-            if (project.getCategoryId() == categoryNumber) {
-                if (i == projectNumber) {
-                    allProjectFields(project);
-                }
-                i++;
-            }
-        }
-    }
-
-    private void previewProject(Project project, Out out) {
-        out.print(out.printProjectPreview(project));
-    }
-
-    private void allProjectFields(Project project) {
-        out.print(out.printProjectPreview(project));
-        out.print(out.printAdditionalProjectFields(project));
-    }
-
-    public void setOut(Out out) {
-        this.out = out;
-    }
 }

@@ -4,12 +4,14 @@ import com.gojava.inputOutput.Out;
 import com.gojava.projects.CategoryStorage;
 
 public class Level1 implements Level {
-    Out out = new Out();
+    Out out;
     CategoryStorage categoryStorage;
     private int position = 1;
 
-    public Level1(CategoryStorage categoryStorage) {
+
+    public Level1(CategoryStorage categoryStorage, Out out) {
         this.categoryStorage = categoryStorage;
+        this.out = out;
     }
 
     public void displayMySelf(int currentPosition) {
