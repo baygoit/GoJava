@@ -1,7 +1,8 @@
 package org.goJava2.kickstarter.model;
 
+import static org.mockito.Mockito.*;
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 
@@ -13,8 +14,13 @@ public class QuoteStorageTest {
 	private QuoteStorage quoteStorage;
 	
 	@Test
-	public void shouldRandomQuote() {
-		// TODO
+	public void shouldQuoteNotNull_WhenRandomQuote() {
+		quoteStorage = mock(QuoteStorage.class);
+		
+		Quote quote = quoteStorage.getRandomQuote();
+		assertNull("Proof of return! RandomQuote should renurn any quote.", quote);
+		
+		verify(quoteStorage).getRandomQuote();
 	}
 	
 	@Test
