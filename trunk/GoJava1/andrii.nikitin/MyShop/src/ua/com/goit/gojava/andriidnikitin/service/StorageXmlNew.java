@@ -10,11 +10,8 @@ import javax.xml.bind.JAXBException;
 
 import ua.com.goit.gojava.andriidnikitin.model.Category;
 import ua.com.goit.gojava.andriidnikitin.model.Good;
-import ua.com.goit.gojava.andriidnikitin.model.GoodCollection;
 import ua.com.goit.gojava.andriidnikitin.model.NewWarehouse;
-import ua.com.goit.gojava.andriidnikitin.model.Warehouse;
 import ua.com.goit.gojava.andriidnikitin.service.util.NewXmlDataBuilder;
-import ua.com.goit.gojava.andriidnikitin.service.util.XmlDataBuilder;
 
 public class StorageXmlNew extends StorageAbstract {
 	

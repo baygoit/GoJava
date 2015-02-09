@@ -42,6 +42,7 @@ public class StorageFlat extends StorageAbstract{
 		}
 	}
 	
+	@SuppressWarnings("unused")
 	private void generate() throws ShopException{
 		StorageImpl store = new StorageImpl();
 		FlatDataBuilder generator = new FlatDataBuilder("resources/sample.csv"); 

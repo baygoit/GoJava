@@ -1,10 +1,8 @@
 package ua.com.goit.gojava.andriidnikitin.model;
 
-import java.math.BigDecimal;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Map.Entry;
 
 public class Basket {
 	
