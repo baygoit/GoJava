@@ -14,13 +14,13 @@ public class Menu {
     private Level2 level2;
     private Level3 level3;
     int categoryPosition; 
-    public ConsoleIO consoleIO;
+    public IO iO;
     
     private ArrayList<Level> levelsList = new ArrayList<>();
 
 
-    public Menu(CategoryStorage categoryStorage, ProjectStorage projectStorage, ConsoleIO consoleIO) {
-        this.consoleIO = consoleIO;
+    public Menu(CategoryStorage categoryStorage, ProjectStorage projectStorage, IO iO) {
+        this.iO = iO;
         this.level1 = new Level1(categoryStorage, out);
         this.level2 = new Level2(projectStorage, out);
         this.level3 = new Level3(projectStorage, out);

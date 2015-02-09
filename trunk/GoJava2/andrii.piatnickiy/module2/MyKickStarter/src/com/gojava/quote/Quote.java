@@ -3,10 +3,10 @@ package com.gojava.quote;
 import com.gojava.inputOutput.IO;
 
 public class Quote {
-    public IO consoleIO;
+    public IO iO;
     
-    public Quote(IO consoleIO) {
-        this.consoleIO = consoleIO;
+    public Quote(IO iO) {
+        this.iO = iO;
     }
 
     private String quote = "This is motivating creativity quote!!";

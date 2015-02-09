@@ -18,11 +18,11 @@ public class Launch {
         
         Scan scan = new Scan();
         Quote quote = new Quote(new ConsoleIO());
-        quote.consoleIO.print(quote.getQuote());
+        quote.iO.print(quote.getQuote());
 
         Menu menu = new Menu(categoryStorage, projectStorage, new ConsoleIO());
         while (true) {
-            menu.nextLevel(menu.consoleIO.inputInt());
+            menu.nextLevel(menu.iO.inputInt());
         }
 
     }
