@@ -1,11 +1,10 @@
-package ua.com.goit.gojava.andriidnikitin.service;
+package ua.com.goit.gojava.andriidnikitin;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-import ua.com.goit.gojava.andriidnikitin.model.Category;
-import ua.com.goit.gojava.andriidnikitin.model.Good;
+import ua.com.goit.gojava.andriidnikitin.service.StorageAbstract;
 
 public class StorageImpl extends StorageAbstract {
 

@@ -10,9 +10,6 @@ import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.adapters.XmlAdapter;
 
-import ua.com.goit.gojava.andriidnikitin.model.Category;
-import ua.com.goit.gojava.andriidnikitin.model.Good;
-
 public class MapOfGoodAdapter extends XmlAdapter<String, Map<Category, ArrayList<Good>>> {
 
 	XmlAdapter <String, Map<Category,GoodCollection>> localAdapter;

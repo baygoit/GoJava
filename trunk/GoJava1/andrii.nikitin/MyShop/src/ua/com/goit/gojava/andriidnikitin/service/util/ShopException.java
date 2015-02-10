@@ -9,6 +9,7 @@ public class ShopException extends Exception {
 	}
 
 	public ShopException() {
+		super();
 	}
 
 }

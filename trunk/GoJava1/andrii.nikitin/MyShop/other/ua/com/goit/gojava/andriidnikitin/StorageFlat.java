@@ -1,13 +1,11 @@
-package ua.com.goit.gojava.andriidnikitin.service;
+package ua.com.goit.gojava.andriidnikitin;
 
 import java.io.FileNotFoundException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-import ua.com.goit.gojava.andriidnikitin.model.Category;
-import ua.com.goit.gojava.andriidnikitin.model.Good;
-import ua.com.goit.gojava.andriidnikitin.service.util.FlatDataBuilder;
+import ua.com.goit.gojava.andriidnikitin.service.StorageAbstract;
 import ua.com.goit.gojava.andriidnikitin.service.util.ShopException;
 
 public class StorageFlat extends StorageAbstract{

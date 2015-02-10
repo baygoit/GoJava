@@ -1,4 +1,4 @@
-package ua.com.goit.gojava.andriidnikitin.service;
+package ua.com.goit.gojava.andriidnikitin;
 
 import static org.junit.Assert.*;
 
@@ -6,10 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
-
-import ua.com.goit.gojava.andriidnikitin.model.Category;
-import ua.com.goit.gojava.andriidnikitin.model.Good;
-import ua.com.goit.gojava.andriidnikitin.service.StorageImpl;
 
 public class StorageImplTest {
 	

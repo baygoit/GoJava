@@ -3,6 +3,8 @@ package ua.com.goit.gojava.andriidnikitin.model;
 import java.util.Date;
 import java.util.List;
 
+import ua.com.goit.gojava.andriidnikitin.Order;
+
 public class Client {
 	
 	private Integer id;

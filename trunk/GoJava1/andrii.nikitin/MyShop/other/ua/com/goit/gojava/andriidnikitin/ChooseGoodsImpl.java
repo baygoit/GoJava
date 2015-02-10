@@ -1,12 +1,10 @@
-package ua.com.goit.gojava.andriidnikitin.service;
+package ua.com.goit.gojava.andriidnikitin;
 
 import java.math.BigDecimal;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import ua.com.goit.gojava.andriidnikitin.model.Basket;
-import ua.com.goit.gojava.andriidnikitin.model.Good;
-import ua.com.goit.gojava.andriidnikitin.model.Order;
+import ua.com.goit.gojava.andriidnikitin.service.ChooseGoods;
 
 public class ChooseGoodsImpl implements ChooseGoods  {
 	

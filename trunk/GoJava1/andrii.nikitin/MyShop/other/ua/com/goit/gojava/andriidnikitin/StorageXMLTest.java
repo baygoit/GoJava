@@ -1,4 +1,4 @@
-package ua.com.goit.gojava.andriidnikitin.service;
+package ua.com.goit.gojava.andriidnikitin;
 
 import static org.junit.Assert.*;
 
@@ -10,16 +10,11 @@ import javax.xml.bind.JAXBException;
 
 import org.junit.Test;
 
-import ua.com.goit.gojava.andriidnikitin.model.Category;
-import ua.com.goit.gojava.andriidnikitin.model.Good;
-import ua.com.goit.gojava.andriidnikitin.service.StorageImpl;
-import ua.com.goit.gojava.andriidnikitin.service.StorageXml;
-
 public class StorageXMLTest {
 	
 	@Test
 	public void modifiancTest() throws JAXBException {
-		final StorageXml store = new StorageXml();
+		final StorageXmlOld store = new StorageXmlOld();
 		assertNotNull(store);	
 		Good good = StorageImpl.setId(
 				new Good()	

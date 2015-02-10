@@ -1,5 +1,5 @@
 package ua.com.goit.gojava.andriidnikitin.model;
 
-public enum StatusOfOrder {
+public enum OrderStatus {
 
 }

@@ -1,4 +1,4 @@
-package ua.com.goit.gojava.andriidnikitin.model;
+package ua.com.goit.gojava.andriidnikitin;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -11,7 +11,7 @@ import javax.xml.bind.annotation.XmlType;
 
 @XmlType(propOrder = { "goodMap" },name = "warehouse")
 @XmlRootElement
-public class Warehouse {	
+public class WarehouseOld {	
 	
 	private Map<Category, GoodCollection> goodMap;
 

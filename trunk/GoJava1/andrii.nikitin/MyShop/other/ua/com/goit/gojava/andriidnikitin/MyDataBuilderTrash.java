@@ -55,21 +55,18 @@ import java.util.logging.Logger;
 
 
 
+
+
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
-
-import ua.com.goit.gojava.andriidnikitin.model.Category;
-import ua.com.goit.gojava.andriidnikitin.model.Good;
-import ua.com.goit.gojava.andriidnikitin.model.Warehouse;
-import ua.com.goit.gojava.andriidnikitin.service.StorageXml;
  
 public class MyDataBuilderTrash {
-	private Warehouse warehouse;
-	public Warehouse createJavaObjectExample1() {
-		if (warehouse== null){
-			warehouse = new Warehouse();
+	private WarehouseOld warehouseOld;
+	public WarehouseOld createJavaObjectExample1() {
+		if (warehouseOld== null){
+			warehouseOld = new WarehouseOld();
 		/*try {
 			store.init();
 		} catch (ParseException exception) {
@@ -79,13 +76,13 @@ public class MyDataBuilderTrash {
 		return store;
 		}*/
 		}
-		return warehouse;
+		return warehouseOld;
 	}
 		
  
  	public void marshallExample() {
  		try {
- 		   JAXBContext context = JAXBContext.newInstance(Warehouse.class);
+ 		   JAXBContext context = JAXBContext.newInstance(WarehouseOld.class);
  		   Marshaller marshaller = context.createMarshaller();
  		   marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
  		   marshaller.marshal(createJavaObjectExample1(), System.out);

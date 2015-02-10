@@ -7,10 +7,6 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
-import ua.com.goit.gojava.andriidnikitin.model.Category;
-import ua.com.goit.gojava.andriidnikitin.model.Good;
-import ua.com.goit.gojava.andriidnikitin.model.Warehouse;
-
 
 public class NewDataBuilder {
         	
@@ -21,21 +17,21 @@ public class NewDataBuilder {
         		JAXB_CONTEXT = JAXBContext.newInstance(						
     					Category.class
     					, Good.class
-    					, Warehouse.class
+    					, WarehouseOld.class
     					);
         	} catch (JAXBException exception){
         		throw new RuntimeException("Failed create JAXBContext. " + exception.getMessage(), exception);
         	}
         }
         	
-        public static Warehouse unmarshall(File file) throws JAXBException{
+        public static WarehouseOld unmarshall(File file) throws JAXBException{
             Unmarshaller jaxbUnmarshaller = JAXB_CONTEXT.createUnmarshaller();
-            Warehouse warehouse = (Warehouse) jaxbUnmarshaller.unmarshal(file); 
-            return warehouse; 
+            WarehouseOld warehouseOld = (WarehouseOld) jaxbUnmarshaller.unmarshal(file); 
+            return warehouseOld; 
         }
         
-        public static void marshall(Warehouse warehouse, File file) throws JAXBException{
+        public static void marshall(WarehouseOld warehouseOld, File file) throws JAXBException{
             Marshaller marshaller = JAXB_CONTEXT.createMarshaller();
-            marshaller.marshal(warehouse, file);
+            marshaller.marshal(warehouseOld, file);
         }                
 }

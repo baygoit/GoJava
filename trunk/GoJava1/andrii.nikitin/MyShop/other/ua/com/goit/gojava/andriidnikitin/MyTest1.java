@@ -1,4 +1,4 @@
-package ua.com.goit.gojava.andriidnikitin.service;
+package ua.com.goit.gojava.andriidnikitin;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -11,13 +11,6 @@ import java.util.List;
 import javax.xml.bind.JAXBException;
 
 import org.junit.Test;
-
-import ua.com.goit.gojava.andriidnikitin.model.Basket;
-import ua.com.goit.gojava.andriidnikitin.model.Category;
-import ua.com.goit.gojava.andriidnikitin.model.Good;
-import ua.com.goit.gojava.andriidnikitin.service.ChooseGoodsImpl;
-import ua.com.goit.gojava.andriidnikitin.service.StorageImpl;
-import ua.com.goit.gojava.andriidnikitin.service.StorageXml;
 
 public class MyTest1 {
 
@@ -79,9 +72,9 @@ public class MyTest1 {
 		assertEquals(emptyGoodList, store.getGoodList(category));
 	}
 	
-	@Test
+	/*@Test
 	public void modifiancTest() throws JAXBException {
-		final StorageXml store = new StorageXml();
+		final StorageXmlOld store = new StorageXmlOld();
 		assertNotNull(store);	
 		Good good = StorageImpl.setId(
 				new Good()	
@@ -92,7 +85,7 @@ public class MyTest1 {
 		store.save(good);
 		store.saveChanges();
 		assertTrue(store.getGoodList(good.getCategory()).contains(good));
-	}
+	}*/
 	
 	@Test
 	public void getCategoryListTest() {

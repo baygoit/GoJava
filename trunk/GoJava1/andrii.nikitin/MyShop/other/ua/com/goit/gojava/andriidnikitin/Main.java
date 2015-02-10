@@ -1,12 +1,14 @@
-package ua.com.goit.gojava.andriidnikitin.service;
+package ua.com.goit.gojava.andriidnikitin;
 
-import ua.com.goit.gojava.andriidnikitin.model.Category;
-import ua.com.goit.gojava.andriidnikitin.model.Good;
 import ua.com.goit.gojava.andriidnikitin.service.util.ShopException;
 
 public class Main {
 
 	public static void main(String[] args) throws ShopException  {
+		
+		
+		
+		
 		/*
 		StorageFlat store = new StorageFlat();
 		List<Good> goods = store.getGoodList();

@@ -1,4 +1,4 @@
-package ua.com.goit.gojava.andriidnikitin.service;
+package ua.com.goit.gojava.andriidnikitin;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -6,11 +6,11 @@ import static org.junit.Assert.assertTrue;
 import java.math.BigDecimal;
 
 
-import org.junit.Test;
 
-import ua.com.goit.gojava.andriidnikitin.model.Basket;
-import ua.com.goit.gojava.andriidnikitin.model.Category;
-import ua.com.goit.gojava.andriidnikitin.model.Good;
+
+
+
+import org.junit.Test;
 
 public class ChooseGoodImplTest {
 	

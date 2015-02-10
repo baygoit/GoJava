@@ -1,7 +1,7 @@
 package ua.com.goit.gojava.andriidnikitin.service;
 
-import ua.com.goit.gojava.andriidnikitin.model.Category;
-import ua.com.goit.gojava.andriidnikitin.model.Good;
+import ua.com.goit.gojava.andriidnikitin.Category;
+import ua.com.goit.gojava.andriidnikitin.Good;
 
 public interface Modifiable {
 	

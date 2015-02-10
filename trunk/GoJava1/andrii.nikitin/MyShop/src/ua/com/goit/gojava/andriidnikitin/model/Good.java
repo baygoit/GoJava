@@ -1,73 +1,103 @@
 package ua.com.goit.gojava.andriidnikitin.model;
 
 import java.math.BigDecimal;
+import java.util.List;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlIDREF;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-
-import ua.com.goit.gojava.andriidnikitin.service.util.BigDecimalAdapter;
-
-@XmlAccessorType(XmlAccessType.FIELD)
 public class Good {
 	
-	@XmlAttribute
-	private Integer id;	
-
-	@XmlAttribute
+	private Integer id;
+	
 	private String name;
 	
-	@XmlIDREF
-	@XmlAttribute
-	private Category category;	
+	private GoodType type;
 	
-	@XmlJavaTypeAdapter(BigDecimalAdapter.class)
-	@XmlAttribute
 	private BigDecimal price;
 	
+	private List<Attribute> description;
+	
+	
+
+	public Integer getId() {
+		return id;
+	}
+
+
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+
+
+	public String getName() {
+		return name;
+	}
+
+
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+
+
+	public GoodType getType() {
+		return type;
+	}
+
+
+
+	public void setType(GoodType type) {
+		this.type = type;
+	}
+
+
+
 	public BigDecimal getPrice() {
 		return price;
 	}
 
-	public Good setPrice(BigDecimal price) {
+
+
+	public void setPrice(BigDecimal price) {
 		this.price = price;
-		return this;
 	}
 
-	public Good() {
-	}	
-	
-	public Integer getId() {
-		return id;
+
+
+	public List<Attribute> getDescription() {
+		return description;
 	}
-	
-	public Good setId(Integer id) {
-		this.id = id;
-		return this;
+
+
+
+	public void setDescription(List<Attribute> description) {
+		this.description = description;
 	}
-	
-	public String getName() {
-		return name;
-	}
-	
-	public Good setName(String name) {
-		this.name = name;
-		return this;
-	}
-	
-	
-	public Category getCategory() {
-		return category;
-	}
-	
-	public Good setCategory(Category category) {
-		this.category = category;
-		return this;
-	}
-	
-	public String printInfo(){
-		return "[" + id + "]  " + name + " {" +  category.getName() + "}; " + price;
+
+	private class Attribute {
+		
+		private String name;
+		
+		private String value;
+
+		public String getName() {
+			return name;
+		}
+
+		public void setName(String name) {
+			this.name = name;
+		}
+
+		public String getValue() {
+			return value;
+		}
+
+		public void setValue(String value) {
+			this.value = value;
+		}
+		
+		
 	}
 }
+

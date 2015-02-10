@@ -1,4 +1,4 @@
-package ua.com.goit.gojava.andriidnikitin.service.util;
+package ua.com.goit.gojava.andriidnikitin;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;

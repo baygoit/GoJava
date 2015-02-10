@@ -1,69 +1,39 @@
 package ua.com.goit.gojava.andriidnikitin.model;
 
-import java.util.Date;
+import java.util.List;
 
 public class Order {
 	
-	Integer id;
+	private Client client;
 	
-	Basket basket;
+	private OrderStatus status;
 	
-	Address addressOfDelivery;
-	
-	Date dateOfDelivery;
-	
-	TypeOfDelivery typeOfDelivery;
-	
-	Client client;
-	
-	StatusOfOrder status;
-	
-	String details;
-	
-	public String getDetails() {
-		return details;
-	}
-	public void setDetails(String details) {
-		this.details = details;
-	}
-	public void setStatus(StatusOfOrder status) {
-		this.status = status;
-	}
-	public Integer getId() {
-		return id;
-	}
-	public void setId(Integer id) {
-		this.id = id;
-	}
-	public Basket getBasket() {
-		return basket;
-	}
-	public void setBasket(Basket basket) {
-		this.basket = basket;
-	}
-	public Address getAddressOfDelivery() {
-		return addressOfDelivery;
-	}
-	public void setAddressOfDelivery(Address addressOfDelivery) {
-		this.addressOfDelivery = addressOfDelivery;
-	}
-	public Date getDateOfDelivery() {
-		return dateOfDelivery;
-	}
-	public void setDateOfDelivery(Date dateOfDelivery) {
-		this.dateOfDelivery = dateOfDelivery;
-	}
-	public TypeOfDelivery getTypeOfDelivery() {
-		return typeOfDelivery;
-	}
-	public void setTypeOfDelivery(TypeOfDelivery typeOfDelivery) {
-		this.typeOfDelivery = typeOfDelivery;
-	}
+	private List<OrderGood> goods;
+
 	public Client getClient() {
 		return client;
 	}
+
 	public void setClient(Client client) {
 		this.client = client;
 	}
+
+	public OrderStatus getStatus() {
+		return status;
+	}
+
+	public void setStatus(OrderStatus status) {
+		this.status = status;
+	}
+
+	public List<OrderGood> getGoods() {
+		return goods;
+	}
+
+	public void setGoods(List<OrderGood> goods) {
+		this.goods = goods;
+	}
+	
+	
 
 }

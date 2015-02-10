@@ -1,41 +1,39 @@
 package ua.com.goit.gojava.andriidnikitin.model;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
 public class Basket {
 	
-	private HashMap<Good,Integer> order;
 	private Integer id;
-	private Date date;
 	
-	public Basket() {
-		order = new HashMap<Good, Integer>(); 
-	}
+	private List<BasketGood> goods;
 	
-	public Map<Good, Integer> getOrder() {
-		return order;
-	}
-	
-	public void setOrder(HashMap<Good, Integer> order) {
-		this.order = order;
-	}
-	
+	private Client client;
+
 	public Integer getId() {
 		return id;
 	}
-	
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	
-	public Date getDate() {
-		return date;
+
+	public List<BasketGood> getGoods() {
+		return goods;
 	}
-	
-	public void setDate(Date date) {
-		this.date = date;
+
+	public void setGoods(List<BasketGood> goods) {
+		this.goods = goods;
 	}
+
+	public Client getClient() {
+		return client;
+	}
+
+	public void setClient(Client client) {
+		this.client = client;
+	}
+
+	
 
 }

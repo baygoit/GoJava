@@ -1,4 +1,4 @@
-package ua.com.goit.gojava.andriidnikitin.model;
+package ua.com.goit.gojava.andriidnikitin;
 
 import java.util.ArrayList;
 import java.util.List;

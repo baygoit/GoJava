@@ -1,4 +1,4 @@
-package ua.com.goit.gojava.andriidnikitin.service;
+package ua.com.goit.gojava.andriidnikitin;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -8,14 +8,11 @@ import java.util.Set;
 
 import javax.xml.bind.JAXBException;
 
-import ua.com.goit.gojava.andriidnikitin.model.Category;
-import ua.com.goit.gojava.andriidnikitin.model.Good;
-import ua.com.goit.gojava.andriidnikitin.model.NewWarehouse;
-import ua.com.goit.gojava.andriidnikitin.service.util.NewXmlDataBuilder;
+import ua.com.goit.gojava.andriidnikitin.service.StorageAbstract;
 
 public class StorageXmlNew extends StorageAbstract {
 	
-	private NewWarehouse warehouse;
+	private WarehouseNew warehouse;
 	private final File fileStorage = new File("resources/DataFile.xml");
 	
 	public StorageXmlNew() {
@@ -24,14 +21,14 @@ public class StorageXmlNew extends StorageAbstract {
 	
 	private void init() {
 		try {
-			warehouse = NewXmlDataBuilder.unmarshallWarehouse(fileStorage);
+			warehouse = XmlDataBuilderNew.unmarshallWarehouse(fileStorage);
 		} catch (JAXBException e) {
 			e.printStackTrace();
 		}	
 	}
 	
 	public void saveChanges() throws JAXBException{
-		NewXmlDataBuilder.marshallWarehouse(warehouse, fileStorage);
+		XmlDataBuilderNew.marshallWarehouse(warehouse, fileStorage);
 		init();
 	}
 
