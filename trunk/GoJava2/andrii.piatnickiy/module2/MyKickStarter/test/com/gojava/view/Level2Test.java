@@ -17,7 +17,14 @@ public class Level2Test {
     public void shouldGetOneProjects_WhenDisplayMySelf() {
         Level2 level2 = new Level2(projectStorage);
         projectStorage.add("test1", "description1", 1, 1, 1, "projectHistory1", "linkOnvideo1", "questionsAndAnswers1", 1);
-        String actual = level2.displayMySelf(0);
-        assertEquals("", actual);
+        String actual = level2.displayMySelf(1);
+        assertEquals("1) Project Name: test1\nDescription: description1\nNeed Sum: 1\nCurrent Sum: 1\nDays Left: 1\n\n", actual);
     }
+//    @Test
+//    public void shouldGetAllProjects_WhenDisplayMySelf() {
+//        Level2 level2 = new Level2(projectStorage);
+//        projectStorage.add("test1", "description1", 1, 1, 1, "projectHistory1", "linkOnvideo1", "questionsAndAnswers1", 1);
+//        String actual = level2.displayMySelf(0);
+//        assertEquals("", actual);
+//    }
 }
