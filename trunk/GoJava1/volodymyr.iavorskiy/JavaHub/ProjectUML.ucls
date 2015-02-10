@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <class-diagram version="1.1.8" icons="true" automaticImage="JPEG" always-add-relationships="false" 
   generalizations="true" realizations="true" associations="true" dependencies="false" nesting-relationships="true">  
-  <class id="1" language="java" name="goit.iavorskyi.Rating" project="JavaHub" 
-    file="/JavaHub/src.java/goit/iavorskyi/Rating.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="1" language="java" name="goit.iavorskyi.learningUnit.Rating" project="JavaHub" 
+    file="/JavaHub/src.java/goit/iavorskyi/learningUnit/Rating.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="565" y="467"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -10,8 +10,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="2" language="java" name="goit.iavorskyi.Streamer" project="JavaHub" 
-    file="/JavaHub/src.java/goit/iavorskyi/Streamer.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="2" language="java" name="goit.iavorskyi.io.Streamer" project="JavaHub" 
+    file="/JavaHub/src.java/goit/iavorskyi/io/Streamer.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="370" y="130"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -28,8 +28,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="4" language="java" name="goit.iavorskyi.LearningUnit" project="JavaHub" 
-    file="/JavaHub/src.java/goit/iavorskyi/LearningUnit.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="4" language="java" name="goit.iavorskyi.learningUnit.LearningUnit" project="JavaHub" 
+    file="/JavaHub/src.java/goit/iavorskyi/learningUnit/LearningUnit.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="764" y="202"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -37,8 +37,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="5" language="java" name="goit.iavorskyi.Comment" project="JavaHub" 
-    file="/JavaHub/src.java/goit/iavorskyi/Comment.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="5" language="java" name="goit.iavorskyi.learningUnit.Comment" project="JavaHub" 
+    file="/JavaHub/src.java/goit/iavorskyi/learningUnit/Comment.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="766" y="458"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -48,18 +48,26 @@
   </class>  
   <association id="6">    
     <end type="SOURCE" refId="4" navigable="false">      
-      <attribute id="7" name="rating"/>      
-      <multiplicity id="8" minimum="0" maximum="1"/>    
+      <attribute id="7" name="comments">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="8" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
-    <end type="TARGET" refId="1" navigable="true"/>    
+    <end type="TARGET" refId="5" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="9">    
     <end type="SOURCE" refId="4" navigable="false">      
-      <attribute id="10" name="comments"/>      
-      <multiplicity id="11" minimum="0" maximum="2147483647"/>    
+      <attribute id="10" name="rating">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="11" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
-    <end type="TARGET" refId="5" navigable="true"/>    
+    <end type="TARGET" refId="1" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
