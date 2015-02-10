@@ -75,4 +75,8 @@ public class Project {
 		return questionAnswers;
 	}
 
+	public void donate(int amount) { 
+		this.amount -= amount;
+	}
+
 }

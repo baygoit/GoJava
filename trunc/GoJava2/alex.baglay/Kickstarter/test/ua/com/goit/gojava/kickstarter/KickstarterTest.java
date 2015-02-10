@@ -210,6 +210,8 @@ public class KickstarterTest {
 	public void shouldIncomeAmountToProject_whenDonate() {
   	    // given
 		int TOTAL = 100; // вот это число должно поменяться
+		int DONATE = 25;
+		int STILL_NEEDED = 75;
 
 		Category category = new Category("category1");
 		categories.add(category);
@@ -227,7 +229,7 @@ public class KickstarterTest {
 		// ввели номер карточки
 		// ввели сумму донйшена
 		// 000 вышли из всех меню 
-		when(io.read()).thenReturn("1", "1", "1", "Саша", "239587623875", "25", "0", "0", "0");
+		when(io.read()).thenReturn("1", "1", "1", "Саша", "239587623875", "" + DONATE, "0", "0", "0");
 		
 		kickstarter.run();
 
@@ -249,6 +251,12 @@ public class KickstarterTest {
 		
 		// вот тут получается так называемый мок хелл :) когда система выводит не то, что ожидали, а в чем дело разобраться
 		// без дебаггера сложно... Потому моками не стоит злоупотреблять
+		
+		// что осталось - так это проверить что деньги занеслись на счет проекта
+		// как? спросим проект напрямую...
+		
+		assertEquals(STILL_NEEDED, project.getAmount());
+		// закодим это
 	}
 
 	// это наши тестовые методы, нет ничего страшного что тут в тесте появляется код 
