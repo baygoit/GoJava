@@ -12,14 +12,13 @@ public class TestPrinter {
 	public void init(){
 		catalog = new CategoryCatalog();
 		catalog.addCategory("games");
-		out = mock( ConsolePrinter.class);
+		out = mock( Output.class);
 		printer = new Printer(out);
 	}
 	@Test
 	public void expectCatalogName_WhenGiveCatalog(){
-		doThrow(new IllegalArgumentException()).when(out).print(anyString());
-		doNothing().when(out).print("1)games");
 		printer.showCategoryCatalog(catalog);
+		verify(out).print(contains("1)games"));
 	}
 	
 
