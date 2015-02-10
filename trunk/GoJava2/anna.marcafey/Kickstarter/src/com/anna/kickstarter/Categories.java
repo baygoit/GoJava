@@ -13,10 +13,6 @@ public class Categories {
 	public void add(Category category) {
 		categories.add(category);		
 	}
-
-//	public List<Category> getCategories() {
-//		return categories;
-//	}
 	
 	public String[] getCategories() {
         String[] result = new String[categories.size()];
