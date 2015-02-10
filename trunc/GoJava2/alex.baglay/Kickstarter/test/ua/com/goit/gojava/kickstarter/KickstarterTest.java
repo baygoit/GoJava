@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Random;
 
 import org.junit.Test;
+import org.mockito.ArgumentCaptor;
+
 import static org.mockito.Mockito.*;
 
 public class KickstarterTest {
@@ -231,5 +233,68 @@ public class KickstarterTest {
 		verify(io, times(2)).print("Выберите категорию (или 0 для выхода):\n");
 		verify(io).print("Проектов в категории нет. Нажмите 0 - для выхода.\n");
 		verify(io).print("Спасибо за использование нашей программы!\n");
+	}
+	
+	// я опять скопипастил, что не очень хорошо так как порождает дублирование. 
+	// если такео случается часто, пора реакторить
+	// а данном случае я пишу интеграционные тесты на сложный объект кикстартер, который внутри себя содержит меню
+	// Вместо того чтобы писать юнит тесты на одельный пункт меню.
+	// плюс в том, что так тестируется все в связке
+	// TODO минус в том, что я постояннро должен заходить вовнутрь меню, где хочу потестить делая лишние движения 
+	// потому я поставлю туду и потом подумаю над этим
+	@Test
+	public void shouldIncomeAmountToProject_whenDonate() {
+  	    // given
+		int TOTAL = 100; // вот это число должно поменяться
+
+		Categories categories = new Categories();
+		Category category = new Category("category1");
+		categories.add(category);
+		
+		Projects projects = new Projects();
+		Project project = new Project("project1", TOTAL, 1000, "video1", "description1");
+		projects.add(project);
+		project.setCategory(category);
+
+		IO io = mock(IO.class);
+		QuoteGenerator generator = mock(QuoteGenerator.class);
+		
+		Kickstarter kickstarter = new Kickstarter(categories, projects, io, generator); 
+		
+		// when
+		when(generator.nextQuote()).thenReturn("quote");
+		// проинитим мок
+		// 1 выбрали категорию
+		// 1 выбрали проект
+		// 1 выбрали оплату
+		// ввели имя
+		// ввели номер карточки
+		// ввели сумму донйшена
+		// 000 вышли из всех меню 
+		when(io.read()).thenReturn("1", "1", "1", "Саша", "239587623875", "25", "0", "0", "0");
+		
+		kickstarter.run();
+
+		// then	
+		// это просто надо запомнить :) магия Мокито
+		ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);;
+		verify(io, times(34)).print(captor.capture());
+		// так получаем список того, что печатали в принтере
+		List<String> values = captor.getAllValues();
+		
+		// а тут проверяем было ли то что мы хотели
+		assertTrue(values.contains("Выберите что хотите сделать с проектом: \n"
+				+ "[0 - выйти к списку проектов, 1 - инвестировать в проект]\n"));
+		assertTrue(values.contains("Спасибо, что хотите помочь проекту!\n"));
+		assertTrue(values.contains("Введите имя:\n"));
+		assertTrue(values.contains("Введите номер вашей карточки:\n"));
+		assertTrue(values.contains("Введите размер суммы:\n"));                     // Мелкая гадость! \n забыл
+		assertTrue(values.toString(), values.contains("Спасибо Саша Ваши деньги в размере 25 успешно зачислились на счет проекта!\n"));
+		
+		// сразу же переделаю все тесты под новую архитектуру после коммита, чтобы было все в однмо стиле.
+		// нет ничего хуже когда от класса к классу видно как вы эволюционировали :) 
+		
+		// вот тут получается так называемый мок хелл :) когда система выводит не то, что ожидали, а в чем дело разобраться
+		// без дебаггера сложно... Потому моками не стоит злоупотреблять
 	}
 }
