@@ -8,7 +8,7 @@ import com.gojava.projects.CategoryStorage;
 import com.gojava.projects.ProjectStorage;
 
 public class TestMenu {
-    Menu menu = new Menu(new CategoryStorage(), new ProjectStorage());
+    Menu menu = new Menu(new CategoryStorage(), new ProjectStorage(), null);
     @Test
     public void should(){
         int currentLevelPosition = 1;

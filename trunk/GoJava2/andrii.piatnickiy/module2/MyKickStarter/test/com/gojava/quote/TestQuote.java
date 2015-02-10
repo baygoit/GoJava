@@ -7,7 +7,7 @@ import org.junit.Test;
 import com.gojava.quote.Quote;
 
 public class TestQuote {
-    Quote quote = new Quote();
+    Quote quote = new Quote(null);
     @Test
     public void shoultReturnString_WhenInputString(){
         String actual = quote.getQuote();
