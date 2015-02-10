@@ -10,16 +10,14 @@ import java.util.ArrayList;
  *
  */
 public class SellService implements ShowInfo{
-    private ListOfFotoPackages listOfFotoPackages;
     private String describe;
     private int price;
     private int serviceTime; //hours
 
-    public SellService(String describe, ListOfFotoPackages listOfFotoPackages, int price, int serviceTime) {
+    public SellService(String describe, int price, int serviceTime) {
         this.describe = describe;
         this.price = price;
         this.serviceTime = serviceTime;
-        this.listOfFotoPackages = listOfFotoPackages;
     }
     
     String getDescribe() {
@@ -46,7 +44,6 @@ public class SellService implements ShowInfo{
         // TODO Auto-generated method stub
         System.out.println("Описание заказанного пакета услуг: " + describe);
         System.out.println("Описание фотографий в услуге:");
-        listOfFotoPackages.displayInfo();
         System.out.println("Цена пакета: " + price);
         System.out.println("Время: " + serviceTime);
     }

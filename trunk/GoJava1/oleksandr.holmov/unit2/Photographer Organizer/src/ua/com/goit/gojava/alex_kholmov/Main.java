@@ -3,6 +3,10 @@
  */
 package ua.com.goit.gojava.alex_kholmov;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
 /**
  * @author SASH
  *
@@ -14,18 +18,38 @@ public class Main {
      */
     public static void main(String[] args) {
         // TODO Auto-generated method stub
-        Reserve my1res = new Reserve(3);
-        Reserve my2res = new Reserve(4);
-        my2res.setReserveDate(2015, 1, 12, 12, 40);
-        Contacts contactsCustomer = new Contacts("Customer", "123, some street", "+345 777 90 90");
-        Contacts contactsStudio = new Contacts("Studio", "345 some street, 23", "+456 555 77 66");
-        Customer myCustomer = new Customer(contactsCustomer, "some add info");
-        FotoStudio myFotoStudio = new FotoStudio(contactsStudio, "some info for stodio");
-        myFotoStudio.addReserv(my1res);
-        myFotoStudio.addReserv(my2res);
-        myFotoStudio.displayInfo();
-        myFotoStudio.removeReserv(my2res);
-        myFotoStudio.displayInfo();
+      PackageFotos pFotos1 = new PackageFotos("stantard", 250, 15, 10);
+      PackageFotos pFotos2 = new PackageFotos("redact", 40, 35, 15);
+      WorkWithFotos workWithFotos = new WorkWithFotos();
+      workWithFotos.addPackage(pFotos1);
+      workWithFotos.addPackage(pFotos2);
+      System.out.println("time to edit all fotos in package: " + workWithFotos.timeEditingFotosInPackage() + " hours");
+      
+      Schedule schedule = new Schedule();
+      schedule.setWorkWithFotos(workWithFotos);
+      schedule.setDeadline(2015, 2, 4);
+      schedule.setStartWork(2015, 1, 13);
+      schedule.calcEndWork();
+      schedule.isOutOfDeadline();
+      schedule.displayInfo();
+//        SimpleDateFormat dateFormat = new SimpleDateFormat("EEEE");
+//        Calendar cal = Calendar.getInstance();
+//        cal.set(2015, 1, 14);
+//        System.out.println("Date: " + dateFormat.format(cal.getTime()));
+//        System.out.println("Day: " + cal.get(Calendar.DAY_OF_WEEK));
+        
+//        Reserve my1res = new Reserve(3);
+//        Reserve my2res = new Reserve(4);
+//        my2res.setReserveDate(2015, 1, 12, 12, 40);
+//        Contacts contactsCustomer = new Contacts("Customer", "123, some street", "+345 777 90 90");
+//        Contacts contactsStudio = new Contacts("Studio", "345 some street, 23", "+456 555 77 66");
+//        Customer myCustomer = new Customer(contactsCustomer, "some add info");
+//        FotoStudio myFotoStudio = new FotoStudio(contactsStudio, "some info for stodio");
+//        myFotoStudio.addReserv(my1res);
+//        myFotoStudio.addReserv(my2res);
+//        myFotoStudio.displayInfo();
+//        myFotoStudio.removeReserv(my2res);
+//        myFotoStudio.displayInfo();
         //myCustomer.displayInfo();
         //my1res.displayReserveDateTime();
 //        PackageFotos pFotos1 = new PackageFotos(200, 10, 10);

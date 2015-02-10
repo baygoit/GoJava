@@ -14,8 +14,14 @@ import java.util.GregorianCalendar;
  *
  */
 public class Schedule implements ShowInfo{
-    private final String MSG_1 = "ƒата окончани€ работы выходит за пределы даты, указанной в договоре";
-    private final String MSG_2 = "»сход€ из выбранной дневной нагрузки,\nрекомендуетс€ установить дату начала работ\nне позднее: ";
+    //private final String MSG_1 = "ƒата окончани€ работы выходит за пределы даты, указанной в договоре";
+    //private final String MSG_2 = "»сход€ из выбранной дневной нагрузки,\nрекомендуетс€ установить дату начала работ\nне позднее: ";
+    
+    static int TIME_WORKING_IN_WORK_DAY = 3; //hours
+    static int TIME_WORKING_IN_DAY_OFF = 6; //hours
+    
+    private int amountDays = 0;
+    private WorkWithFotos workWithFotos;
     
     Calendar deadline;
     Calendar startWork;
@@ -23,39 +29,65 @@ public class Schedule implements ShowInfo{
     
     private SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
     
+    WorkWithFotos getWorkWithFotos() {
+        return workWithFotos;
+    }
+
+    void setWorkWithFotos(WorkWithFotos workWithFotos) {
+        this.workWithFotos = workWithFotos;
+    }
+
+    int getAmountDays() {
+        return amountDays;
+    }
+
+    // set amount days manually
+    void setAmountDays(int amountDays) {
+        this.amountDays = amountDays;
+    }
+    
     void setDeadline(int year, int month, int date) {
-        deadline = new GregorianCalendar();
+        deadline = Calendar.getInstance(); 
         deadline.set(year, Calendar.MONTH, date);
     }
     
     void setStartWork(int year, int month, int date) {
-        startWork = new GregorianCalendar();
+        startWork = Calendar.getInstance(); 
         startWork.set(year, Calendar.MONTH, date);
     }
     
-    void calcEndWork(int amountDays) {
+    void calcEndWork() {
         String startWorkDate = dateFormat.format(startWork.getTime());
+        int workHours = workWithFotos.timeEditingFotosInPackage();
+        boolean condition;
         try {
             Date dateParse = dateFormat.parse(startWorkDate);
-            endWork = new GregorianCalendar();
+            endWork = Calendar.getInstance(); 
             endWork.setTime(dateParse);
-            endWork.add(Calendar.DAY_OF_MONTH, amountDays);
+            int i = 1;
+            while (workHours >= 0) {
+                condition = endWork.get(Calendar.DAY_OF_WEEK) == 1 || endWork.get(Calendar.DAY_OF_WEEK) == 7;
+                workHours = condition ? workHours - TIME_WORKING_IN_DAY_OFF : workHours - TIME_WORKING_IN_WORK_DAY;
+                endWork.add(Calendar.DAY_OF_MONTH, i);
+                amountDays++;
+            }
         } catch (ParseException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
     
-    void checkWorkDays() {  
+    boolean isOutOfDeadline() {  
         if (endWork.after(deadline)) {
-            System.out.println(MSG_1);
             int i = 1;
             while (endWork.after(deadline)) {
                 endWork.add(Calendar.DAY_OF_MONTH, -i);
                 startWork.add(Calendar.DAY_OF_MONTH, -i);
                 i++;
             }
-            System.out.println(MSG_2 + dateFormat.format(startWork.getTime()));
+            return true;
+        } else {
+            return false;
         }
     }
     
