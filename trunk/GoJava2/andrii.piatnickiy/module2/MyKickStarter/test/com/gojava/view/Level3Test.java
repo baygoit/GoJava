@@ -11,13 +11,12 @@ public class Level3Test {
 
     ProjectStorage projectStorage = new ProjectStorage();
 
-    // @Test
-    // public void shouldGetNoProjects_WhenDisplayMySelf() {
-    //
-    // Level3 level3 = new Level3(projectStorage);
-    // String actual = level3.displayMySelf(1);
-    // assertEquals("", actual);
-    // }
+     @Test
+     public void shouldGetNoProjects_WhenDisplayMySelf() {
+     Level3 level3 = new Level3(projectStorage);
+     String actual = level3.displayMySelf(1, 1);
+     assertEquals("", actual);
+     }
 
     @Test
     public void shouldGetOneProjects_WhenDisplayMySelf() {
