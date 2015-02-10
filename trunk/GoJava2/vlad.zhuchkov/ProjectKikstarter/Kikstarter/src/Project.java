@@ -51,6 +51,9 @@ public class Project {
 	public ProjectParameters getParameters() {
 		return param;
 	}
+	public void increaseAmount(int amount){
+		param.addAlreadyCollected(amount);
+	}
 
 	public String getName() {
 		return name;

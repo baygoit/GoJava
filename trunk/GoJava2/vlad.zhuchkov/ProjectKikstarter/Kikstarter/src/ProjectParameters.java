@@ -8,6 +8,7 @@ public class ProjectParameters {
 		this.cost = cost;
 
 	}
+	
 
 	public int getDays() {
 		return daysLeft;
