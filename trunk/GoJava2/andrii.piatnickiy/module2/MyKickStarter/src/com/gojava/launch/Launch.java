@@ -9,18 +9,19 @@ import com.gojava.view.Menu;
 public class Launch {
 
     public static void main(String[] args) {
+        ConsoleIO consoleIO = new  ConsoleIO();
         CategoryStorage categoryStorage = new CategoryStorage();
         ProjectStorage projectStorage = new ProjectStorage();
 
         initCategories(categoryStorage);
         initProjects(projectStorage);
         
-        Quote quote = new Quote(new ConsoleIO());
-        quote.iO.print(quote.getQuote());
+        Quote quote = new Quote(consoleIO);
+        quote.consoleIO.print(quote.getQuote());
 
-        Menu menu = new Menu(categoryStorage, projectStorage, new ConsoleIO());
+        Menu menu = new Menu(categoryStorage, projectStorage, consoleIO);
         while (true) {
-            menu.nextLevel(menu.iO.inputInt());
+            menu.nextLevel(menu.consoleIO.inputInt());
         }
 
     }

@@ -8,22 +8,22 @@ import com.gojava.projects.CategoryStorage;
 import com.gojava.projects.ProjectStorage;
 
 public class Menu {
-    IO out = new ConsoleIO();
+    public ConsoleIO consoleIO = new ConsoleIO();
     private int currentLevelPosition;
     private Level1 level1;
     private Level2 level2;
     private Level3 level3;
-    int categoryPosition; 
-    public IO iO;
+    public int categoryPosition = 1; 
+
     
     private ArrayList<Level> levelsList = new ArrayList<>();
 
 
-    public Menu(CategoryStorage categoryStorage, ProjectStorage projectStorage, IO iO) {
-        this.iO = iO;
-        this.level1 = new Level1(categoryStorage, out);
-        this.level2 = new Level2(projectStorage, out);
-        this.level3 = new Level3(projectStorage, out);
+    public Menu(CategoryStorage categoryStorage, ProjectStorage projectStorage, ConsoleIO consoleIO) {
+        this.consoleIO = consoleIO;
+        this.level1 = new Level1(categoryStorage);
+        this.level2 = new Level2(projectStorage);
+        this.level3 = new Level3(projectStorage);
         level3.setMenu(this);
         add(level1);
         add(level2);
@@ -34,7 +34,7 @@ public class Menu {
     public void nextLevel(int nubberForNextLevel) {
         if ((nubberForNextLevel == 0 && currentLevelPosition == 1)
                 || (nubberForNextLevel > 0 && currentLevelPosition == 3)) {
-            out.print("not allowed to go below this level");
+            consoleIO.print("not allowed to go below this level");
         } else {
             Level level; 
             if (nubberForNextLevel == 0) {
@@ -49,7 +49,7 @@ public class Menu {
                 }
             }
             level = getCurrentLevel();
-            out.print(level.displayMySelf(nubberForNextLevel));
+            consoleIO.print(level.displayMySelf(nubberForNextLevel));
         }
     }
 
@@ -59,7 +59,7 @@ public class Menu {
 
     public void initMenu() {
         currentLevelPosition = 1;
-        out.print(level1.displayMySelf(currentLevelPosition));
+        consoleIO.print(level1.displayMySelf(currentLevelPosition));
     }
 
     public Level getCurrentLevel() {

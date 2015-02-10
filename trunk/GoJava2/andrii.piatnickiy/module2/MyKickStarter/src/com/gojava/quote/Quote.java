@@ -1,12 +1,12 @@
 package com.gojava.quote;
 
-import com.gojava.inputOutput.IO;
+import com.gojava.inputOutput.ConsoleIO;
 
 public class Quote {
-    public IO iO;
+    public ConsoleIO consoleIO;
     
-    public Quote(IO iO) {
-        this.iO = iO;
+    public Quote(ConsoleIO consoleIO) {
+        this.consoleIO = consoleIO;
     }
 
     private String quote = "This is motivating creativity quote!!";
