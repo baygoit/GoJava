@@ -1,6 +1,7 @@
 package ua.com.goit.gojava2.solo307.interview;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Scanner;
@@ -10,10 +11,10 @@ public class Question {
 	
 	private int id;
 	private String text;
-	private List <Answer> answers = new ArrayList <Answer>();
-	private List <Answer> incorrectAnswers = new ArrayList <Answer>();
 	private List <Character> answeredIds = new ArrayList <Character>();
+	private List <Answer> answers = new ArrayList <Answer>();
 	private List <Answer> choosenAnswers = new ArrayList <Answer>();
+	private List <Answer> incorrectAnswers = new ArrayList <Answer>();
 	private List <Answer> correctAnswers = new ArrayList <Answer>();
 	private List <Answer> answeredWrong = new ArrayList<Answer>();
 		
@@ -23,10 +24,7 @@ public class Question {
 	
 	public Question(String text, List <Answer> answersWithNoId, int id){
 		this.text = text;
-		List <Answer> answersWhithId = generateRandomId(answersWithNoId);
-		for(Answer answer: answersWhithId){
-			this.answers.add(answer);
-		}
+		this.answers = generateRandomId(answersWithNoId);
 		this.id = id;
 	}
 	
@@ -94,37 +92,14 @@ public class Question {
 		this.answeredWrong = answeredWrong;
 	}
 
-	public void printCorrectAnswers(){
-		for(Answer answer: answers){
-			if(answer.isCorrect)System.out.println(answer.getText());
-		}
-	}
-	
-	public void printAswers(){
-		for(Answer answer: answers){
-			answer.printIdAndAnswer();
-		}
-	}
-	
-	public int countCorrectAnswers(){
-		int counter = 0;
-		for(Answer answer: answers){
-			if(answer.isCorrect)counter++;
-		}
-		return counter;
-	}
-	
 	public List<Answer> generateRandomId(List <Answer> answersWithNoId) {
-		final char EMPTY = '0';
-		char [] identificators = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'};
-		int counter = 0;
+		List <Character> identificators = Arrays.asList('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j');
 		List <Answer> answersWithId = new ArrayList <Answer>();
+		int counter = 0;
 		for(Answer answer: answersWithNoId){
-			if(answer.getId() == EMPTY){
-				answer.setId(identificators[counter]);
-				answersWithId.add(answer);
-				counter++;
-			}
+			answer.setId(identificators.get(counter));
+			answersWithId.add(answer);
+			counter++;
 		}
 		return answersWithId;
 	}
@@ -138,6 +113,39 @@ public class Question {
 		}
 		List <Character> answers = new ArrayList<Character>(characters);
 		return answers;
+	}
+	
+	public void printAswers(){
+		for(Answer answer: answers){
+			answer.printIdAndAnswer();
+		}
+	}
+	
+	public void printCorrectAnswers(){
+		for(Answer answer: answers){
+			if(answer.isCorrect)System.out.println(answer.getText());
+		}
+	}
+	
+	public void printIncorrectAnswers(Question question) {
+		for(Answer answer: incorrectAnswers){
+			System.out.println("\n" + question.getText());
+			System.out.println(answer.getText());
+		}
+	}
+	
+	public void addIncorrectAnswers(List <Answer> answeredWrong){
+		for(Answer answer: answeredWrong){
+			incorrectAnswers.add(answer);
+		}
+	}
+	
+	public int countCorrectAnswers(){
+		int counter = 0;
+		for(Answer answer: answers){
+			if(answer.isCorrect)counter++;
+		}
+		return counter;
 	}
 			
 	public boolean isIdExists(char variant){
@@ -159,19 +167,6 @@ public class Question {
 		return choosenAnswers;
 	}
 	
-	public void addWrongAnswers(List <Answer> answeredWrong){
-		for(Answer answer: answeredWrong){
-			incorrectAnswers.add(answer);
-		}
-	}
-
-	public void printWrongAnswers(Question question) {
-		for(Answer answer: incorrectAnswers){
-			System.out.println("\n" + question.getText());
-			System.out.println(answer.getText());
-		}
-	}
-
 	public List <Answer> findCorrectAnswers(List <Answer> choosenAnswers) {
 		List <Answer> correctAnswers = new ArrayList<Answer>();
 		for(int i = 0; i < choosenAnswers.size(); i++){
@@ -182,7 +177,7 @@ public class Question {
 		return correctAnswers;
 	}
 	
-	public List <Answer> findWrongAnswers(List <Answer> choosenAnswers) {
+	public List <Answer> findIncorrectAnswers(List <Answer> choosenAnswers) {
 		List <Answer> wrongAnswers = new ArrayList<Answer>();
 		for(int i = 0; i < choosenAnswers.size(); i++){
 			if(!choosenAnswers.get(i).isCorrect){

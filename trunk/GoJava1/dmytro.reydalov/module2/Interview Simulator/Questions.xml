@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <questions>
-	<question id = "d" line = "Какие Вы знаете принципы Обьектно - ориентированного программирования?">
+	<question id = "1" line = "Какие Вы знаете принципы Обьектно - ориентированного программирования?">
 			<answer line = "Процедурность, инкапсуляция, полиморфизм." isCorrect = "false"></answer>
 			<answer line = "Инкапсуляция, полиморфизм, наследование." isCorrect = "true"></answer>
 			<answer line = "Полиморфизм, абстракция, наследование, инкапсуляция." isCorrect = "true"></answer>

@@ -9,7 +9,8 @@ public class Menu {
 	private ArrayList <String> options = new ArrayList<String>();
 	final int EXIT = 9;
 	final int SHOW_QUESTIONS = 1;
-	final int START = 2;
+	final int SHOW_ALL = 2; 
+	final int START = 3;
 	
 	public Menu(){
 		options.add("\n" + "1. Показать список вопросов и правильных ответов");
@@ -33,11 +34,11 @@ public class Menu {
 	}
 	 
 	public int readInt(){
-		final int NULL = 0;
 		System.out.println("\n" + "Пожалуйста, введите число.");
 		try{
 			return new Integer(new Scanner(System.in).nextInt());
 		} catch(InputMismatchException e){
+			final int NULL = 0;
 			return NULL;
 		}
 	}

@@ -1,5 +1,6 @@
 package ua.com.goit.gojava2.solo307.interview;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -19,11 +20,16 @@ public class XMLParser {
 	
 	List <Question> questions = new ArrayList<Question>();
 	
-	public XMLParser(String path) throws InterviewSimulatorNotNumberException{
+	public XMLParser(String path) throws InterviewSimulatorException{
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		try{
 			DocumentBuilder builder = factory.newDocumentBuilder();
-			Document document = builder.parse(path);
+			Document document = null;
+			try{
+				document = builder.parse(path);
+			} catch(FileNotFoundException e){
+				throw new InterviewSimulatorException("File" + path + "was not found");
+			}
 			NodeList questions = document.getElementsByTagName("question");
 			for(int i = 0; i < questions.getLength(); i++){
 				Node q = questions.item(i);
@@ -51,7 +57,7 @@ public class XMLParser {
 							answerList.add(new Answer(EMPTY, answerText, isCorrect));
 						}
 					}
-					if(hasIdWithNull())throw new InterviewSimulatorNotNumberException();
+					if(hasIdWithNull())throw new InterviewSimulatorException();
 					Collections.shuffle(answerList);
 					writeData(questionText, answerList, questionId);	
 				}

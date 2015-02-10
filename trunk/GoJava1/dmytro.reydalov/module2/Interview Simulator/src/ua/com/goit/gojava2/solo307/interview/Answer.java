@@ -12,10 +12,15 @@ public class Answer {
 		id = 0;
 	}
 	
+	@Override
+	public String toString() {
+		return "Answer [id=" + id + ", text=" + text + ", isCorrect="
+				+ isCorrect + "]";
+	}
+
 	public Answer(char id, String text, boolean isCorrect){
 		this.text = text;
 		this.isCorrect = isCorrect;
-		
 		this.id = id;
 	}
 	
