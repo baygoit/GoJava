@@ -70,14 +70,11 @@ public class KickstarterS {
 		if (name.equals(Integer.toString(magic))){sleep(Integer.parseInt(name));switcher();}
 		printer("Enter your credit card number:");
 		long cardNumber = check.checkCard();
-		printer(Long.toString(cardNumber));
 		if ((int)cardNumber == magic){sleep((int)cardNumber);switcher();}
-		
 		printer("Enter the amount of donations:");
 		if (chosenPay == 0){
 			chosenPay = check.checkAmount();
-			int amount = check.checkNumber(intSwitch);
-			if (sleep(amount)){switcher();}
+			if (sleep(chosenPay)){switcher();}
 		}
 		project.setDonation(projects.getListProject(), chosenPay, chosenProject - 1);
 		menu = menuProject;

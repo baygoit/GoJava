@@ -116,7 +116,7 @@ public class TestCheckClass {
     public void shouldZero_whenNotZero() throws IOException, InterruptedException{
 		Check check  = new Check(new FakeInputsConsole("0", "1"), new FakeOutputConsole());
 		
-		int rezult = check.checkNumber(new int[] {1,4,6});
+		int rezult = check.checkNumber(new int[] {0,1,4,6});
 		
 		assertTrue(0 == rezult);
 		assertEquals(rezult, 0);
