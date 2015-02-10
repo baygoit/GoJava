@@ -36,9 +36,10 @@ public class Menu {
     }
     
     public String nextLevel(int nubberForNextLevel) {
+        String result;
         if ((nubberForNextLevel == 0 && currentLevelPosition == 1)
                 || (nubberForNextLevel > 0 && currentLevelPosition == 3)) {
-            return "not allowed to go below this level";
+            result = "not allowed to go below this level";
         } else {
             Level level; 
             if (nubberForNextLevel == 0) {
@@ -53,8 +54,9 @@ public class Menu {
                 }
             }
             level = getCurrentLevel();
-            return level.displayMySelf(nubberForNextLevel);
+            result = level.displayMySelf(nubberForNextLevel);
         }
+        return result;
     }
 
     public void add(Level level) {
