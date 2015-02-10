@@ -23,4 +23,14 @@ public class Level1Test {
         String actual = level1.displayMySelf(0);
         assertEquals("1) name1\n", actual);
     }
+    @Test
+    
+    public void shouldGetAllCategoryToString_WhenDisplayMySelf(){
+        categoryStorage.add("name1", 1);
+        categoryStorage.add("name1", 1);
+        categoryStorage.add("name1", 1);
+        Level1 level1 = new Level1(categoryStorage);
+        String actual = level1.displayMySelf(0);
+        assertEquals("1) name1\n1) name1\n1) name1\n", actual);
+    }
 }
