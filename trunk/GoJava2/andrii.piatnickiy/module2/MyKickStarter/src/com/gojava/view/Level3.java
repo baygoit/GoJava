@@ -16,11 +16,11 @@ public class Level3 implements Level {
         return projectStorage.getSpecificProject(menu.categoryPosition,
                 nubberForNextLevel);
     }
-//    @Override
-//    public String displayMySelf(int nubberForNextLevel, int categoryPosition) {
-//       return projectStorage.getSpecificProject(menu.categoryPosition,
-//               nubberForNextLevel);
-//    }
+//TODO переделать. так не должно быть
+    public String displayMySelf(int nubberForNextLevel, int categoryPosition) {
+       return projectStorage.getSpecificProject(categoryPosition,
+               nubberForNextLevel);
+    }
 
     public void setMenu(Menu menu) {
         this.menu = menu;

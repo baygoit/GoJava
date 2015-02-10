@@ -8,7 +8,7 @@ public class Level2 implements Level {
 
     public Level2(ProjectStorage projectStorage) {
         this.projectStorage = projectStorage;
-     }
+    }
 
     public String displayMySelf(int categoryNumber) {
         return projectStorage.getAll(categoryNumber);
