@@ -3,70 +3,109 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class KickstarterS {
-	public KickstarterS() throws IOException, InterruptedException{
+	private int chosenCategory;
+	private int chosenProject;
+	private int magic = 777;
+	private int menu = 0;
+	private int menuCategories = 222;
+	private int menuProjects = 333;
+	private int menuProject = 444;
+	private int menuPayment = 555;
+	private int menuQuestion = 666;
+	Check check = new Check(new InputsConsole(), new OutputConsole());
+	Categories categories = new Categories();
+	Category category = new Category();
+	Projects projects = new Projects();
+	Project project = new Project();
+	
+	public void kickstarter() throws IOException, InterruptedException{
 		Quotes quote = new Quotes();
 		printer(quote.getQuote());
-		int chosenCategory;
-		int chosenProject;
-		int choiceToProject;
-		int magic = 777;
-		Check check = new Check(new InputsConsole(), new OutputConsole());
-		Categories categories = new Categories();
-		Category category = new Category();
-		Project project = new Project();
-		Projects projects = new Projects();
 		projects.writeAllProjects();
-		while (true){
-			printer(categories.readAllCatecories());
-			printer("Choice Category Number: ");
-			chosenCategory = check.checkNumber(category.kickContainCategory(categories), true);
-			if (chosenCategory == magic){
-				Thread.sleep(10000);
-				continue;
-			}
-			printer("Your chosen category: " + category.showCatecoryName(chosenCategory - 1, categories) + ", containing the following projects: ");
+		menu = menuCategories;
+		switcher();
+	}
+		
+	private void categories() throws InterruptedException, IOException{
+		printer(categories.readAllCatecories());
+		printer("Choice Category Number: ");
+		chosenCategory = check.checkNumber(category.kickContainCategory(categories));
+		if (sleep(chosenCategory)){switcher();};
+		printer("Your chosen category: " + category.showCatecoryName(chosenCategory - 1, categories) + ", containing the following projects: ");
+		menu = menuProjects;
+		switcher();
+	}
+
+	private void projects() throws IOException, InterruptedException{
+		int[] intSwitch = {menuCategories};
+		printer(category.showAllProjectInCategory(chosenCategory - 1, project, projects, categories));
+		printer("Choice Project Number or " + menuCategories + " for exit to Category: ");
+		chosenProject = check.checkNumber(concatArray(category.projectsContain(chosenCategory - 1, categories), intSwitch));
+		if (sleep(chosenProject)){switcher();};
+		if (compare(intSwitch, chosenProject)) {menu = menuCategories; switcher();}
+		menu = menuProject;
+		switcher();
+	}
+
+	private void project() throws IOException, InterruptedException{
+		int[] intSwitch = {menuProjects, menuPayment, menuQuestion};
+		printer(project.showProjectFull(chosenProject - 1, projects.getListProject()));
+		if (project.getFaq().size() != 0){printFaq(project.getFaq());}
+		printer("Choice " + menuProjects + " for exit to Project list.\nChoice " + menuPayment + " to invest in the project:");
+		printer("Have a question? If the info above doesn't help, you can ask the project creator directly - Choice " + menuQuestion + ":");
+		int choiceTo = check.checkNumber(intSwitch);
+		if (sleep(choiceTo)){switcher();};
+		if (compare(intSwitch, choiceTo)) {menu = choiceTo; switcher();}
+	}
 			
-			while (true){
-				printer(category.showAllProjectInCategory(chosenCategory - 1, project, projects, categories));
-				printer("Choice Project Number or 0 for exit to Category: ");
-				chosenProject = check.checkNumber(category.projectsContain(chosenCategory - 1, categories), false);
-				if (chosenProject == 0){
-					break;
-				}
-				printer(project.showProjectFull(chosenProject - 1, projects.getListProject()));
-				printer("Have a question? If the info above doesn't help, you can ask the project creator directly - Choice 555");
-				printer("Choice 0 for exit to Project list.\nChoice 888 to invest in the project.\nChoice 999 to ask a question: ");
-				int[] zero = {0, 888, 999};
-				choiceToProject = check.checkNumber(zero, false);
-				if (choiceToProject == 0){
-					continue;
-				}
-				if (choiceToProject == 888){
-					printer("1 - 1$ = OUR UNDYING LOVE");
-					printer("2 - 10$ = HEY… NICE SHIRT");
-					printer("3 - 40$ = KICKSTARTER EXCLUSIVE");
-					printer("Enter your name:");
-					printer(check.checkName());
-					printer("Enter your credit card number:");
-					check.checkCard();
-					printer("Enter the amount of donations:");
-					int amount = check.checkAmount();
-					project.setDonation(projects.getListProject(), amount, chosenProject - 1);
-					printer(project.showProjectFull(chosenProject - 1, projects.getListProject()));
-					continue;
-				}
-				if (choiceToProject == 999){
-					printer("Choice 999");
-					printer("Enter your question:");
-					printer(Integer.toString(project.getFaq().size()));
-					project.setFAQ();
-					project.setFAQ();
-					printFaq(project.getFaq());
-					printer(Integer.toString(project.getFaq().size()));
-					continue;
-				}
-			}
+	private void payment() throws IOException, InterruptedException{
+		int[] intSwitch = {0, 1, 2, 3};
+		printer("0 - No thanks, I just want to help the project.");
+		printer("1 - 1$ = OUR UNDYING LOVE");
+		printer("2 - 10$ = HEY… NICE SHIRT");
+		printer("3 - 40$ = KICKSTARTER EXCLUSIVE");
+		int chosenPay = check.checkNumber(intSwitch);
+		if (sleep(chosenPay)){switcher();};
+		printer("Enter your name:");
+		printer(check.checkName());//TODO
+		printer("Enter your credit card number:");
+		check.checkCard();
+		int cardNumber = check.checkNumber(intSwitch);
+		if (sleep(cardNumber)){switcher();};
+		printer("Enter the amount of donations:");
+		if (chosenPay == 0){
+			chosenPay = check.checkAmount();
+			int amount = check.checkNumber(intSwitch);
+			if (sleep(amount)){switcher();};}
+		project.setDonation(projects.getListProject(), chosenPay, chosenProject - 1);
+		menu = menuProject;
+		switcher();
+	}
+	
+	private void question() throws IOException, InterruptedException{
+		printer("Enter your question:");
+		project.setFAQ();
+		menu = menuProject;
+		switcher();
+	}
+
+	private void switcher() throws InterruptedException, IOException{
+		switch(menu){
+			case 222: categories(); break;
+			case 333: projects(); break;
+			case 444: project(); break;
+			case 555: payment(); break;
+			case 666: question(); break;
 		}
+	}
+	
+	private Boolean sleep(int m) throws InterruptedException, IOException{
+		Boolean b = false;
+		if (m == magic){
+			Thread.sleep(10000);
+			b = true;
+		}
+		return b;
 	}
 	
 	private void printer(String string){
@@ -78,5 +117,26 @@ public class KickstarterS {
         for(int i = 0; i < faq.size(); i++){
         	printer(faq.get(i));
         }
+	}
+	
+	private Boolean compare(int[] a, int b) {
+		Boolean c = false;
+		for (int i = 0 ; i < a.length; i++){
+			if (a[i] == b){
+				c = true;
+				break;}
+		}
+		return c;
+	}
+	
+	private int[] concatArray(int[] a, int[] b) {
+		if (a == null)
+			return b;
+		if (b == null)
+			return a;
+		int[] r = new int[a.length + b.length];
+		System.arraycopy(a, 0, r, 0, a.length);
+		System.arraycopy(b, 0, r, a.length, b.length);
+		return r;
 	}
 }

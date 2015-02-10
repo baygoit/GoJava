@@ -14,14 +14,13 @@ public class Check {
 		this.setOut(out);
 	}
 
-	public int checkNumber(int[] border, boolean yes) throws IOException{
+	public int checkNumber(int[] border) throws IOException{
 		breakCounter = 0;
 		choiceNumber = 0;
 		for (int i = 0; i < magicStop; i++){
 			String chosen = choice.enter();
 			if (checkNumber(chosen)){continue;}
 			choiceNumber = Integer.valueOf(chosen);
-			if (checkZero(choiceNumber, yes)){continue;}
 			if (checkBorder(choiceNumber, border)){continue;}
 			break;
 		}
@@ -92,16 +91,6 @@ public class Check {
 	private Boolean checkBorder(int choiceNumber, int[] border){
 		boolean f = false;
 		if (!checkRangeOfNumbers(choiceNumber, border)){
-			getOut().print("This number does not exist, please try again");
-			breakCounter++;
-			f = true;
-		}
-		return f;
-	}
-	
-	private Boolean checkZero(int choiceNumber, Boolean yes){
-		boolean f = false;
-		if (choiceNumber == 0 && yes){
 			getOut().print("This number does not exist, please try again");
 			breakCounter++;
 			f = true;
