@@ -8,7 +8,7 @@ import ua.com.goit.gojava.andriidnikitin.Order;
 import ua.com.goit.gojava.andriidnikitin.model.Client;
 import ua.com.goit.gojava.andriidnikitin.model.OrderStatus;
 
-public interface HandleOrders {
+public interface HandleOrder {
 	
 	public void addOrder(Basket basket, Client client, Order order);
 	public void sortOrders(OrderStatus status);//returns Iterator?
