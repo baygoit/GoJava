@@ -17,7 +17,6 @@ public class TestCategoryStorage {
     
   @Test
   public void shouldDisplayAllCatgories_WhendCallgetCategoriesToString(){
-      StringBuffer sb = new StringBuffer();
       categoryStorage.add("name1", 1);
       categoryStorage.add("name2", 2);
       categoryStorage.add("name3", 3);
