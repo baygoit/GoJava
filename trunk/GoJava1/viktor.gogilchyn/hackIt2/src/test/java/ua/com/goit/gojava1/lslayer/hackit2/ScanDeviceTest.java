@@ -16,12 +16,13 @@ import ua.com.goit.gojava1.lslayer.hackit2.gear.hardware.devices.ScanDevice;
 
 public class ScanDeviceTest {
     @Test
-    public void testCreation() throws Exception {
+    public void testCreation() throws HackitWrongParameterException {
         ScanDevice scanner = new ScanDevice("Vizor3000");
         assertEquals("Vizor3000", scanner.getName());
+        assertEquals("AbstractUtility [name=Vizor3000, purpose={scan=1}]", scanner.toString());
     }
     @Test
-    public void testViewOfScanner() throws Exception {
+    public void testViewOfScanner() throws HackitWrongParameterException {
         ScanDevice scanner = new ScanDevice("Vizor3000");
         try {
             scanner.addPurpose("scan", 100);
@@ -48,6 +49,7 @@ public class ScanDeviceTest {
         Action action = new ScanAction();
         //Use section
         action.setParameters(po);
+        @SuppressWarnings("unused")
         ActionResult result = null;
         try {
             result = action.execute();
@@ -73,7 +75,7 @@ public class ScanDeviceTest {
         
     }
     @Test
-    public void testUseOfDeviceRightWay() throws Exception {
+    public void testUseOfDeviceRightWay() throws HackitWrongParameterException {
         ActionParameters po = new ActionParameters();
         Actor actor = new HumanControlledCharacter("MegaPihar");
         actor.addSkill("scan");

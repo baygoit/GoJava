@@ -31,7 +31,7 @@ public class AbstractActionTest {
         po.actor = actor;
         po.targetActor = actor;
         action.setParameters(po);
-        ActionResult result = null;
+        ActionResult result = new ActionResult();
         try {
             result = action.execute();
         } catch (HackitWrongParameterException e) {

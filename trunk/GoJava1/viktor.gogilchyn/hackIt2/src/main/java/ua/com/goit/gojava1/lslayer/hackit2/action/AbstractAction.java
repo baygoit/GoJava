@@ -4,7 +4,6 @@ import java.util.Map.Entry;
 import java.util.Random;
 
 import org.apache.log4j.Logger;
-import ua.com.goit.gojava1.lslayer.hackit2.HackitWrongParameterException;
 import ua.com.goit.gojava1.lslayer.hackit2.actor.Actor;
 import ua.com.goit.gojava1.lslayer.hackit2.dto.ActionParameters;
 
@@ -22,29 +21,28 @@ public abstract class AbstractAction implements Action {
         return this.commandToInvoke;
     }
 
-    protected int getSuccessChance () throws HackitWrongParameterException {
-    int bonus = 0;
-        bonus += parameters.actor == null ? 0: parameters.actor.getSkill(commandToInvoke);
-        bonus += parameters.tool == null ? 0: parameters.tool.getPurposeValue(commandToInvoke);
-    int antibonus = 0;
-        antibonus += parameters.targetGear == null ? 0: parameters.targetGear.getPurposeValue(commandToInvoke);
-        antibonus += parameters.targetActor == null ? 0: parameters.targetActor.getSkill(commandToInvoke);
-        
+    protected int getSuccessChance() {
+        int bonus = 0;
+        bonus += parameters.actor == null ? 0 : 
+            parameters.actor.getSkill(this.getCommand());
+        bonus += parameters.tool == null ? 0 : 
+            parameters.tool.getPurposeValue(this.getCommand());
+
+        int antibonus = 0;
+        antibonus += parameters.targetGear == null ? 0 : 
+            parameters.targetGear.getPurposeValue(this.getCommand());
+        antibonus += parameters.targetActor == null ? 0 : 
+            parameters.targetActor.getSkill(this.getCommand());
+
         return bonus - antibonus;
     }
-    
 
     protected boolean checkSuccess() {
-        try {
-            return (this.getSuccessChance() > 0);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return false;
+        return (this.getSuccessChance() > 0);
     }
 
     protected String getInfo() {
-//        if (target == null) return null; All checks is made before here 
+        // if (target == null) return null; All checks is made before here
         final int MAX_PERCENT = 100;
         Actor target = this.parameters.targetActor;
         int percent = this.parameters.value;
@@ -72,4 +70,12 @@ public abstract class AbstractAction implements Action {
     public void setParameters(ActionParameters po) {
         this.parameters = po;
     }
+
+    @Override
+    public String toString() {
+        return "AbstractAction [commandToInvoke=" + commandToInvoke
+                + ", timeNeededToInvokeAction=" + timeNeededToInvokeAction
+                + ", parameters=" + parameters + "]";
+    }
+
 }

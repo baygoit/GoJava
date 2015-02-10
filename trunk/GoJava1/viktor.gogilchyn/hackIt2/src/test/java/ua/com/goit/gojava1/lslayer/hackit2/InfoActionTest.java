@@ -16,12 +16,13 @@ import ua.com.goit.gojava1.lslayer.hackit2.gear.hardware.devices.ScanDevice;
 
 public class InfoActionTest {
     private ActionParameters parameters = new ActionParameters();
-    private ActionResult result = new ActionResult();
     @Test
     public void testInfoAction()  {
         Actor actor = null; 
         Gear tool = null;
+        @SuppressWarnings("unused")
         Gear target = null;
+        ActionResult result = null;
         //Init section
         try {
             actor = new HumanControlledCharacter("MegaPihar");
@@ -36,7 +37,7 @@ public class InfoActionTest {
         
         //Usage section
         try {
-            ActionResult result = action.execute();
+            result = action.execute();
         } catch (HackitWrongParameterException e) {
             assertEquals("info action. TargetActor nedded", e.getMessage());
         }
@@ -45,7 +46,7 @@ public class InfoActionTest {
         parameters.targetActor =  actor;
         action.setParameters(parameters);
         try {
-            ActionResult result = action.execute();
+            result = action.execute();
         } catch (HackitWrongParameterException e) {
             assertEquals("info action. Tool needed", e.getMessage());
         }

@@ -39,6 +39,7 @@ public class ScanActionTest {
     @Test
     public void testScanActionCreation() {
         assertNotNull(scan);
+        assertEquals("AbstractAction [commandToInvoke=scan, timeNeededToInvokeAction=0, parameters=ActionParamters [actor=null, tool=null, targetGear=null, targetActor=null, value=0]]", scan.toString());
     }
     
     @Test

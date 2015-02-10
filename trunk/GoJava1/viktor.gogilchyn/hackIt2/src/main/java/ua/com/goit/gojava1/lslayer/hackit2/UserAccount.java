@@ -4,13 +4,9 @@ import ua.com.goit.gojava1.lslayer.hackit2.actor.Actor;
 import ua.com.goit.gojava1.lslayer.hackit2.actor.HumanControlledCharacter;
 
 
-public class UserAccount {
+public final class UserAccount { //Just couple of static methods to maintain UserAccountData
     
-    private UserAccount() { //Just couple of static methods to maintain UserAccountData
-        
-    }
-    
-    public static UserAccountData createAccount(String login, String password) throws Exception {
+    public static UserAccountData createAccount(String login, String password) throws HackitWrongParameterException {
         if (login == null || password == null) 
             throw new HackitWrongParameterException("No null fields accepted");
         UserAccountData account = new UserAccountData();
@@ -19,7 +15,7 @@ public class UserAccount {
         return account;
     }
     
-    public static UserAccountData createCharacterInAccount(UserAccountData account, String characterName) throws Exception {
+    public static UserAccountData createCharacterInAccount(UserAccountData account, String characterName) throws HackitWrongParameterException {
         if (account == null) throw new HackitWrongParameterException("Need a place for newborn character");
         Actor character =  new HumanControlledCharacter(characterName);
         character.addSkill("scan");   //

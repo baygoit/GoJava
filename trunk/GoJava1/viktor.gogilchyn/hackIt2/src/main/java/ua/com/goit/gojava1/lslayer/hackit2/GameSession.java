@@ -75,8 +75,8 @@ public final class GameSession { // Singleton. There is only one game per app.
     }
 
     public void goTick() throws HackitWrongParameterException {
-        // Going through all actors, find their actions, and run each of them
-        for (Actor currentActor : this.gamers) {
+        // Going through all actors, find their actions, and run each
+        for (Actor currentActor : this.getGamers()) {
             for (Map<Actor, Action> currentAction : actionQueue) {
                 if (currentAction.get(currentActor) != null)
                     try {
@@ -84,7 +84,7 @@ public final class GameSession { // Singleton. There is only one game per app.
                                 .act(currentAction.get(currentActor)));
                     } catch (HackitWrongParameterException e) {
                         throw new HackitWrongParameterException(e.getMessage(),
-                                e); // TODO Implement exception pass
+                                e);
                     }
             }
         }
