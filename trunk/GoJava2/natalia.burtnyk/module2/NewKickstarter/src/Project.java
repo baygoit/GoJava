@@ -33,4 +33,10 @@ public class Project {
 	public int getDays() {
 		return days;
 	}
+
+	public String allInformation() {
+		return name + "\n" + "Description: " + description + "\n"
+					+ "Required Amount: " + requiredAmount + "\n" + "Total: "
+					+ total + "\n" + "Days: " + days;
+	}
 }

@@ -44,17 +44,17 @@ public class DataStorage {
 		projectsMusic = new ArrayList<Project>();
 		projectsEducation = new ArrayList<Project>();
 		
-		projectsFood.add(new Project("1.Green Pea Cookie", "We want to produce green cookies",
-				8000, 3654, 17));
-		projectsFood.add(new Project("2.House wine", "We make delicious homemade wine",
+		projectsFood.add(new Project("1.Green Pea Cookie. ", "We want to produce green cookies. ",
+				 + 8000, 3654, 17));
+		projectsFood.add(new Project("2.House wine. ", "We make delicious homemade wine. ",
 				14000, 9006, 20));
-		projectsFood.add(new Project("3.CookBook", "We have collected recipes 2000 and we want "
-				+ "to release a book",12000, 2700, 28));
-		projectsMusic.add(new Project("1.Musical Instruments", "Help for beginners",
+		projectsFood.add(new Project("3.CookBook. ", "We have collected recipes 2000 and we want"
+				+ "to release a book. ",12000, 2700, 28));
+		projectsMusic.add(new Project("1.Musical Instruments. ", "Help for beginners. ",
 				25000, 12908, 48));
-		projectsEducation.add(new Project("1.English Speaking Club Online", "Сommunication with "
-				+ "native speakers via internet", 30000, 20124, 9));
-		projectsEducation.add(new Project("2.Martial Arts", "Study of martial arts", 48000, 5798, 56));
+		projectsEducation.add(new Project("1.English Speaking Club Online. ", "Сommunication with "
+				+ "native speakers via internet. ", 30000, 20124, 9));
+		projectsEducation.add(new Project("2.Martial Arts. ", "Study of martial arts. ", 48000, 5798, 56));
 	}
 	
 	public void initMap() {
