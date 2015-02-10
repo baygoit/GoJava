@@ -41,9 +41,9 @@ public class Level2Test {
                 actual);
     }
 
-    public void shouldNull_WhenDisplayMySelf() {
-        Level2 level2 = new Level2(projectStorage);
-        String actual = level2.displayMySelf(1, 1);
-        assertNull(actual);
-    }
+//    public void shouldNull_WhenDisplayMySelf() {
+//        Level2 level2 = new Level2(projectStorage);
+//        String actual = level2.displayMySelf(1, 1);
+//        assertNull(actual);
+//    }
 }

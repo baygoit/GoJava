@@ -34,10 +34,10 @@ public class Level1Test {
         assertEquals("1) name1\n1) name1\n1) name1\n", actual);
     }
     
-    @Test
-    public void shouldNull_WhenDisplayMySelf(){
-        Level1 level1 = new Level1(categoryStorage);
-        String actual = level1.displayMySelf(0, 1);
-        assertNull(actual);
-    }
+//    @Test
+//    public void shouldNull_WhenDisplayMySelf(){
+//        Level1 level1 = new Level1(categoryStorage);
+//        String actual = level1.displayMySelf(0, 1);
+//        assertNull(actual);
+//    }
 }
