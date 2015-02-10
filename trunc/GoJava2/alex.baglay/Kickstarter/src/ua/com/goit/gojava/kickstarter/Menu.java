@@ -11,7 +11,7 @@ public abstract class Menu {
 		while (true) { 
 			ask();
 			
-			int menu = io.read(); 
+			int menu = Integer.parseInt(io.read()); // переобразуем строку в число
 			if (menu == 0) {  
 				break; 
 			}

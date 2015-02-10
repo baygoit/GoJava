@@ -19,8 +19,8 @@ public class KickstarterTest {
 		Projects projects = new Projects();
 		IO io = new IO() { 
 			@Override
-			public int read() {
-				return 0;
+			public String read() {
+				return "0";
 			}
 			
 			@Override
@@ -35,14 +35,14 @@ public class KickstarterTest {
 
 	class FakeIO implements IO {
 		private List<String> messages = new LinkedList<String>(); 
-		private List<Integer> input = new LinkedList<Integer>(); 
+		private List<String> input = new LinkedList<String>(); 
 
-		public FakeIO(Integer... input) {
-			this.input = new LinkedList<Integer>(Arrays.asList(input));  
+		public FakeIO(String... input) { // делаем везде string
+			this.input = new LinkedList<String>(Arrays.asList(input));  
 		}
 		
 		@Override
-		public int read() {
+		public String read() {
 			return input.remove(0); 
 		}
 
@@ -74,7 +74,7 @@ public class KickstarterTest {
 		categories.add(new Category("category1"));
 		categories.add(new Category("category2"));
 		Projects projects = new Projects();
-		FakeIO io = new FakeIO(1, 0, 0);  
+		FakeIO io = new FakeIO("1", "0", "0");  
 		Kickstarter kickstarter = new Kickstarter(categories, projects, io, new StubQuoteGenerator()); 
 		
 		// when
@@ -121,7 +121,7 @@ public class KickstarterTest {
 		// 0 - вышли из списка проектов, 
 		// 0 - вышли изсписка категорий, 
 		// 0 - вышли из программы 
-		FakeIO io = new FakeIO(1, 2, 0, 0, 0, 0); 
+		FakeIO io = new FakeIO("1", "2", "0", "0", "0", "0"); 
 		Kickstarter kickstarter = new Kickstarter(categories, projects, io, new StubQuoteGenerator()); 
 		
 		// when
@@ -192,7 +192,7 @@ public class KickstarterTest {
 		// 0 вышли из проекта
 		// 0 вышли из проектов
 		// 0 вышли из категорий (программы)		
-		when(io.read()).thenReturn(1, 1, 1, 0, 0, 0);
+		when(io.read()).thenReturn("1", "1", "1", "0", "0", "0");
 		
 		kickstarter.run();
 
@@ -220,7 +220,7 @@ public class KickstarterTest {
 		when(generator.nextQuote()).thenReturn("quote");
 		// проинитим fake - выбрали категорию 1, вышли изсписка категорий, вышли из программы
 		// аналог FakeIO io = new FakeIO(1, 0, 0);  
-		when(io.read()).thenReturn(1, 0, 0);
+		when(io.read()).thenReturn("1", "0", "0");
 		
 		kickstarter.run();
 
