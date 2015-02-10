@@ -25,19 +25,19 @@ public class MedicalSystem {
 		return specializations.get(specIndex);
 	}
 
-    static boolean isSpecialisationUnique(String specializationName){
+    static boolean isSpecialisationUnique(String specializationName) throws MedicalSystemException{
 		for (Specialization spec: specializations){
 			if (spec.getName().equals(specializationName)){
-				return false;		
-			}			
+				throw new MedicalSystemException("Specialisation not unique");		
+			} 
 		}
 		return true;
 	}
    
-    static void addSpecialisation (String specializationName){
+    static void addSpecialisation (String specializationName) throws MedicalSystemException {
     	if (isSpecialisationUnique(specializationName)){
-    		specializations.add(new Specialization(specializationName));
-    	} 
+			specializations.add(new Specialization(specializationName));
+    	}
     }
 
 	static void createDoctor(String firstName, String secondName, Specialization spec, Clinic clinic){
