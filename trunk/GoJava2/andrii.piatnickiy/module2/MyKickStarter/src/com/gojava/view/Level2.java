@@ -13,8 +13,8 @@ public class Level2 implements Level {
         this.out = out;
     }
 
-    public void displayMySelf(int categoryNumber) {
-        out.print(projectStorage.getAll(categoryNumber));
+    public String displayMySelf(int categoryNumber) {
+        return projectStorage.getAll(categoryNumber);
     }
 
     @Override

@@ -14,8 +14,8 @@ public class Level1 implements Level {
         this.out = out;
     }
 
-    public void displayMySelf(int currentPosition) {
-        out.print(categoryStorage.getCategoryToString());
+    public String displayMySelf(int currentPosition) {
+        return categoryStorage.getCategoryToString();
     }
 
     @Override

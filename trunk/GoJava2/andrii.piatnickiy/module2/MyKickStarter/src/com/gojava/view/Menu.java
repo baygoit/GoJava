@@ -36,7 +36,7 @@ public class Menu {
                 || (nubberForNextLevel > 0 && currentLevelPosition == 3)) {
             out.print("not allowed to go below this level");
         } else {
-            Level level;
+            Level level; 
             if (nubberForNextLevel == 0) {
                 currentLevelPosition--;
                 if (currentLevelPosition == 2) {
@@ -49,7 +49,7 @@ public class Menu {
                 }
             }
             level = getCurrentLevel();
-            level.displayMySelf(nubberForNextLevel);
+            out.print(level.displayMySelf(nubberForNextLevel));
         }
     }
 
@@ -59,7 +59,7 @@ public class Menu {
 
     public void initMenu() {
         currentLevelPosition = 1;
-        level1.displayMySelf(currentLevelPosition);
+        out.print(level1.displayMySelf(currentLevelPosition));
     }
 
     public Level getCurrentLevel() {
