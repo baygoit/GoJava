@@ -2,8 +2,8 @@ package ua.com.goit.gojava.andriidnikitin.service;
 
 import java.math.BigDecimal;
 
-import ua.com.goit.gojava.andriidnikitin.Good;
-import ua.com.goit.gojava.andriidnikitin.Order;
+import ua.com.goit.gojava.andriidnikitin.model.Good;
+import ua.com.goit.gojava.andriidnikitin.model.Order;
 
 public interface ChooseGoods {
 
