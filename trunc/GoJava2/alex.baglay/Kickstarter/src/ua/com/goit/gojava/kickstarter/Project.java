@@ -10,7 +10,7 @@ public class Project {
 	private int exist;
 	private String history;
 	private String demoVideo;
-	private String questionAnswers;
+	private String questionAnswers; // причем тут все сразу
 
 	public Project(String name, int amount, int days, String demoVideo, String description) {
 		this.name = name;
@@ -59,8 +59,12 @@ public class Project {
 		this.demoVideo = demoVideo;
 	}
 	
-	public void setQuestionAnswers(String questionAnswers) {
-		this.questionAnswers = questionAnswers;
+	public void addQuestionAnswer(String questionAnswers) {
+		if (this.questionAnswers == null) { // если там ничего нет, то надо добавить
+			this.questionAnswers = questionAnswers;
+		} else {
+			this.questionAnswers += '\n' + questionAnswers; // думаю пока для начала хватит
+		}
 	}
 
 	public String getHistory() {

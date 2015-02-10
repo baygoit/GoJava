@@ -88,4 +88,34 @@ public class ProjectsTest {
 		assertSame(project2, list.get(1));
 	}
 	
+	@Test
+	// напишем юнит тест на эту функциональность
+	public void shouldAddQuestion_whenAskIt() {
+		// given
+		Project project = new Project("name", 100, 10, "video", "description");	
+		assertEquals(null, project.getQuestionAnswers());
+		
+		// when
+		project.addQuestionAnswer("question");
+		
+		// then
+		assertEquals("question", project.getQuestionAnswers());
+		
+	}
+	
+	@Test
+	// напишем юнит тест на эту функциональность
+	public void shouldAddSecondQuestion_whenAskIt() {
+		// given
+		Project project = new Project("name", 100, 10, "video", "description");	
+		project.addQuestionAnswer("question");
+		
+		// when
+		project.addQuestionAnswer("answer answer"); // проблема не тут
+		
+		// then
+		assertEquals("question\nanswer answer", project.getQuestionAnswers());
+		
+	}
+	
 }

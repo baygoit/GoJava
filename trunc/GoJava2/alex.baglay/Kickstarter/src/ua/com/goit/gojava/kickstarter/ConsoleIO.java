@@ -6,7 +6,8 @@ public class ConsoleIO implements IO {
 	@Override
 	public String read() {
 		Scanner scanner = new Scanner(System.in);
-		return scanner.next(); 
+		return scanner.nextLine(); // Я читал одно слово, а надо было всю строку
+		// юнит тесты не гарантируют что все в связке будет работать, потому проверяй ручками
 	}
 
 	@Override

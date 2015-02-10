@@ -86,7 +86,7 @@ public class KickstarterTest {
 		projects.add(project2);
 
 		project2.setHistory("history2");
-		project2.setQuestionAnswers("QA");
+		project2.addQuestionAnswer("QA");
 		project2.setCategory(category);
 		
 		// when
@@ -279,6 +279,8 @@ public class KickstarterTest {
 			
 		assertEquals("А когда собираетесь выпустить фильм?", project.getQuestionAnswers());
 	} // вот и все :) 
-	// пока коммитим и 
+	// пока коммитим 
+	// Чего не хватает, так это добавления нескольких вопросов... у нас там логика только для одного вопроса
+	
 	
 }

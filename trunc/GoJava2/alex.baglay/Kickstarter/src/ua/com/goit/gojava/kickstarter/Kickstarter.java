@@ -100,7 +100,7 @@ public class Kickstarter {
 					
 					println("Спасибо за ваш вопрос, вскоре Автора с вами свяжутся");
 					
-					project.setQuestionAnswers(qustion);
+					project.addQuestionAnswer(qustion);
 				}
 				
 				return null; 
