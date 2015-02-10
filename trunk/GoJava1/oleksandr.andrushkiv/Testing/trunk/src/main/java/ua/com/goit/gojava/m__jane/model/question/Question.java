@@ -8,7 +8,7 @@ import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import ua.com.goit.gojava.m__jane.model.answer.Answer;
-import ua.com.goit.gojava.m__jane.util.IDAdapter;
+import ua.com.goit.gojava.m__jane.utils.IDAdapter;
 
 
 @XmlSeeAlso({MultipleQuestion.class, SimpleQuestion.class})

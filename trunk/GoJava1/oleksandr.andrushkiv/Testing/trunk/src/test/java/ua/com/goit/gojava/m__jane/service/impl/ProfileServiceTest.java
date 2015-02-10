@@ -1,4 +1,4 @@
-package ua.com.goit.gojava.m__jane.service;
+package ua.com.goit.gojava.m__jane.service.impl;
 
 import static org.junit.Assert.*;
 
@@ -7,7 +7,7 @@ import java.util.List;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import ua.com.goit.gojava.m__jane.model.Profile;
+import ua.com.goit.gojava.m__jane.service.ProfileService;
 import ua.com.goit.gojava.m__jane.service.impl.ProfileServiceImpl;
 
 
@@ -39,7 +39,10 @@ public class ProfileServiceTest {
 
 	@Test
 	public void testGetProfile() {
-		assertEquals(new Profile(1,"Продавець"), profileService.getProfile(1));
+				
+		assertEquals(Integer.valueOf(10001), profileService.getProfile(10001).getId());
+		assertEquals("Продавець", profileService.getProfile(10001).getName());
+		assertEquals(2, profileService.getProfile(10001).getQuizList().size());
 	}
 
 }

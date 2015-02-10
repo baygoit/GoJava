@@ -1,4 +1,4 @@
-package ua.com.goit.gojava.m__jane.util;
+package ua.com.goit.gojava.m__jane.utils;
 
 import javax.xml.bind.annotation.adapters.XmlAdapter;
 

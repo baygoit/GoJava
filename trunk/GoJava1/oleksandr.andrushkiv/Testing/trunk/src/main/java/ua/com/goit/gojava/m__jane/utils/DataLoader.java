@@ -1,4 +1,4 @@
-package ua.com.goit.gojava.m__jane.util;
+package ua.com.goit.gojava.m__jane.utils;
 
 import java.util.ArrayList;
 import java.util.List;

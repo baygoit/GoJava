@@ -10,8 +10,9 @@ import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlID;
 import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
 import ua.com.goit.gojava.m__jane.model.question.Question;
-import ua.com.goit.gojava.m__jane.util.IDAdapter;
+import ua.com.goit.gojava.m__jane.utils.IDAdapter;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Category {

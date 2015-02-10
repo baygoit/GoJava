@@ -18,7 +18,7 @@ public class UserQuizServiceImpl implements UserQuizService {
 	//private ProfileService profileService;
 
 	
-	private UserQuizServiceImpl() {
+	public UserQuizServiceImpl() {
 
 		this.questionService = new QuestionServiceImpl();
 		//this.profileService = new ProfileServiceImpl();

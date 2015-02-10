@@ -7,8 +7,8 @@ import ua.com.goit.gojava.m__jane.model.Category;
 import ua.com.goit.gojava.m__jane.model.Quiz;
 import ua.com.goit.gojava.m__jane.model.User;
 import ua.com.goit.gojava.m__jane.model.question.Question;
-import ua.com.goit.gojava.m__jane.util.DataBuilder;
-import ua.com.goit.gojava.m__jane.util.DataLoader;
+import ua.com.goit.gojava.m__jane.utils.DataBuilder;
+import ua.com.goit.gojava.m__jane.utils.DataLoader;
 
 public class MainClass {
 
