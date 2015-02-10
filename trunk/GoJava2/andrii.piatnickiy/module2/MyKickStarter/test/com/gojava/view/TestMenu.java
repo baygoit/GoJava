@@ -13,7 +13,7 @@ public class TestMenu {
     public void should(){
         int currentLevelPosition = 1;
         Level actual = menu.getCurrentLevel();
-        Level1 level1 = new Level1(null, null);
+        Level1 level1 = new Level1(null);
         assertTrue(level1.getPosition() == actual.getPosition());;
     }
 }
