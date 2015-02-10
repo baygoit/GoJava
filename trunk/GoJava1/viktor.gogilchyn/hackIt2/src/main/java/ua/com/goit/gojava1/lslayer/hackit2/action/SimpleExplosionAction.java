@@ -11,19 +11,21 @@ public class SimpleExplosionAction extends AbstractAction implements Action {
 
     @Override
     public ActionResult execute() throws HackitWrongParameterException {
-        if (this.getParameters().targetActor == null && 
-            this.getParameters().targetGear == null) {
+        if (this.getParameters().tool == null)
+            throw new HackitWrongParameterException(this.commandToInvoke
+                    + " action. Tool needed");
+        if (this.getParameters().targetActor == null
+                && this.getParameters().targetGear == null) {
 
-            throw new HackitWrongParameterException(this.commandToInvoke + " action. Target nedded");
-        
+            throw new HackitWrongParameterException(this.commandToInvoke
+                    + " action. Target needed");
+
         }
-        if (this.getParameters().tool == null) throw new HackitWrongParameterException(this.commandToInvoke + " action. Tool needed");
-        String target = (this.getParameters().targetActor == null) ? 
-                this.getParameters().targetGear.getName() : 
-                this.getParameters().targetActor.getName();
-        String resultMessage = (super.checkSuccess()) ? 
-                target + " exploded!" : 
-                target + " stay alive!";
+        String target = (this.getParameters().targetActor == null) ? this
+                .getParameters().targetGear.getName()
+                : this.getParameters().targetActor.getName();
+        String resultMessage = (super.checkSuccess()) ? target + " exploded!"
+                : target + " stay alive!";
         return new ActionResult(super.checkSuccess(), resultMessage);
     }
 

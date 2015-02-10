@@ -1,63 +1,65 @@
 package ua.com.goit.gojava1.lslayer.hackit2;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import ua.com.goit.gojava1.lslayer.hackit2.action.Action;
 import ua.com.goit.gojava1.lslayer.hackit2.action.SimpleExplosionAction;
+import ua.com.goit.gojava1.lslayer.hackit2.actor.Actor;
 import ua.com.goit.gojava1.lslayer.hackit2.actor.HumanControlledCharacter;
-import ua.com.goit.gojava1.lslayer.hackit2.dto.ActionResult;
 import ua.com.goit.gojava1.lslayer.hackit2.dto.ActionParameters;
+import ua.com.goit.gojava1.lslayer.hackit2.dto.ActionResult;
 import ua.com.goit.gojava1.lslayer.hackit2.gear.Gear;
 import ua.com.goit.gojava1.lslayer.hackit2.gear.hardware.devices.BombDevice;
 import ua.com.goit.gojava1.lslayer.hackit2.gear.hardware.devices.ScanDevice;
 
 public class BoomTest {
+    ActionParameters arg = null;
+    ActionResult result = null;
+    Actor targetActor = null;
+    Action boom = null;
+    Gear bomb = null;
+    Gear unbreakable = null;
+    Gear breakable = null;
+
+    @Before
+    public void init() throws HackitWrongParameterException {
+        result = new ActionResult();
+        boom = new SimpleExplosionAction();
+        arg = new ActionParameters();
+        targetActor = new HumanControlledCharacter("DeadMen");
+        bomb = null;
+        breakable = new ScanDevice("ScanMaster");
+        try {
+            unbreakable = new BombDevice("Concrete").addPurpose("explode",
+                    10000);
+        } catch (HackitWrongParameterException e) {
+            fail(e.getMessage());
+        }
+    }
+
     @Test
-    public void testGoodBoom() {
-        ActionResult result = null;
-        Action boom = new SimpleExplosionAction();
-        Gear bomb = null;
+    public void testBombCreation() {
         try {
             bomb = new BombDevice("C4");
         } catch (HackitWrongParameterException e) {
-            fail("Exception unexpected");
+            fail(e.getMessage());
         }
         assertEquals(1, bomb.getPurposeValue("explode"));
-        ActionParameters arg = new ActionParameters();
+    }
 
-        arg.tool = bomb;
-        boom.setParameters(arg);
+    @Test
+    public void testBadExplosion() throws HackitWrongParameterException {
+        bomb = new BombDevice("C4");
         try {
             result = boom.execute();
         } catch (HackitWrongParameterException e) {
-            assertEquals("explode action. Target nedded", e.getMessage());
+            assertEquals("explode action. Tool needed", e.getMessage());
         }
-        try {
-            arg.targetGear = new ScanDevice("ScanMaster");
-        } catch (HackitWrongParameterException e) {
-            fail("unexpected exception");
-        }
-        boom.setParameters(arg);
-        try {
-            result = boom.execute();
-        } catch (HackitWrongParameterException e) {
-            fail("unexpected exception");
-        }
-        assertTrue(result.isSuccess());
-        assertEquals("ScanMaster exploded!", result.getResultMessage());
-        arg.targetActor = new HumanControlledCharacter("DeadMen");
-        arg.targetGear = null;
-        boom.setParameters(arg);
-        try {
-            result = boom.execute();
-        } catch (HackitWrongParameterException e) {
-            // TODO Auto-generated catch block
-            fail("unexpected exception");
-        }
-        assertTrue(result.isSuccess());
-        assertEquals("DeadMen exploded!", result.getResultMessage());
+
     }
 
 }
