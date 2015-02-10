@@ -36,7 +36,7 @@ public class Project {
 
 	public String allInformation() {
 		return name + "\n" + "Description: " + description + "\n"
-					+ "Required Amount: " + requiredAmount + "\n" + "Total: "
-					+ total + "\n" + "Days: " + days;
+			+ "Required Amount: " + requiredAmount + "\n" + "Total: "
+			+ total + "\n" + "Days: " + days;
 	}
 }

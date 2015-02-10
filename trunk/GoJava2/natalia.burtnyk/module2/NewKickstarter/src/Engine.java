@@ -23,11 +23,11 @@ public class Engine {
 	public void choise(int i) {
 		Сategory сategory = dataStorage.getCategoriesList().get(i - 1);
 		System.out.print("\n" + "Your choise: " + i + ". " + сategory.getName()
-						+ "\n" + "---- Here are the projects ----" + "\n");
+				+ "\n" + "---- Here are the projects ----" + "\n");
 
 		for (Project p : dataStorage.getSpecificProject(сategory)) {
 			System.out.println(p.allInformation() + "\n"
-						+ "----------------------------" + "\n");
+				+ "----------------------------" + "\n");
 		}
 
 	}
