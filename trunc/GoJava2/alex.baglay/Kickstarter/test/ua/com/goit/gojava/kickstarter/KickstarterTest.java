@@ -131,7 +131,7 @@ public class KickstarterTest {
 			", QA\n" +
 			", --------------------------------------\n" +
 			", Выберите что хотите сделать с проектом: \n" +
-			"[0 - выйти к списку проектов, 1 - инвестировать в проект]\n" +
+			"[0 - выйти к списку проектов, 1 - инвестировать в проект, 2 - задать вопрос Авторам]\n" +
 			", Выберите проект: [1...2] или 0 для выхода\n" +
 			", Выберите категорию (или 0 для выхода):\n" +
 			", [1 - category1]\n" +
@@ -165,7 +165,7 @@ public class KickstarterTest {
 		List<String> values = assertPrinted(io, 34);
 		
 		assertPrinted(values, "Выберите что хотите сделать с проектом: \n"
-				+ "[0 - выйти к списку проектов, 1 - инвестировать в проект]\n");
+				+ "[0 - выйти к списку проектов, 1 - инвестировать в проект, 2 - задать вопрос Авторам]\n");
 		assertPrinted(values, "Спасибо, что хотите помочь проекту!\n");
 	}
 	
@@ -222,7 +222,7 @@ public class KickstarterTest {
 		List<String> values = assertPrinted(io, 34);
 		
 		assertPrinted(values, "Выберите что хотите сделать с проектом: \n"
-				+ "[0 - выйти к списку проектов, 1 - инвестировать в проект]\n");
+				+ "[0 - выйти к списку проектов, 1 - инвестировать в проект, 2 - задать вопрос Авторам]\n");
 		assertPrinted(values, "Спасибо, что хотите помочь проекту!\n");
 		assertPrinted(values, "Введите имя:\n");
 		assertPrinted(values, "Введите номер вашей карточки:\n");
@@ -242,4 +242,43 @@ public class KickstarterTest {
 		verify(io, times(times)).print(captor.capture());
 		return captor.getAllValues();
 	}
+	
+	/* Следующая история
+	 * Как гость я хочу задать вопрос авторам по существующему проекту
+		Сценарий: Находясь в конкретном проекте -> Вижу меню с вариантами, что могу сделать, один из пунктов - задать вопрос ->
+		Выбираю его -> Вижу запрос на ввод вопроса -> Ввожу вопрос, отправляю -> Вижу описание проекта с моим вопросом
+	 *  */
+	// напишем тест, зайдем теперь со стороны TDD :)
+	@Test
+	public void shouldMyQuestionOnProject_whenAddItOnProjectMenu() {
+  	    // given
+		Category category = new Category("category1");
+		categories.add(category);
+		
+		Project project = new Project("project1", 100, 1000, "video1", "description1");
+		projects.add(project);
+		project.setCategory(category);
+
+		// when
+		// 1 выбрали категорию
+		// 1 выбрали проект
+		// 2 выбрали задать вопрос
+		// ввели вопрос
+		// 000 вышли из всех меню 
+		when(io.read()).thenReturn("1", "1", "2", "А когда собираетесь выпустить фильм?", "0", "0", "0");
+		
+		kickstarter.run();
+
+		// then	
+		List<String> values = assertPrinted(io, 30);
+		
+		assertPrinted(values, "Выберите что хотите сделать с проектом: \n"
+				+ "[0 - выйти к списку проектов, 1 - инвестировать в проект, 2 - задать вопрос Авторам]\n");
+		assertPrinted(values, "Введите ваш вопрос:\n");
+		assertPrinted(values, "Спасибо за ваш вопрос, вскоре Автора с вами свяжутся\n");
+			
+		assertEquals("А когда собираетесь выпустить фильм?", project.getQuestionAnswers());
+	} // вот и все :) 
+	// пока коммитим и 
+	
 }

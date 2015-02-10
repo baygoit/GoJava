@@ -93,6 +93,14 @@ public class Kickstarter {
 					println("--------------------------------------"); // TODO устранить это дублирование
 					
 					project.donate(amount); // тут нет защиты от дурака, а вдруг кто-то введет отрицательное значение? TODO
+				} else if (menu == 2) {
+					println("Введите ваш вопрос:");
+					
+					String qustion = io.read();
+					
+					println("Спасибо за ваш вопрос, вскоре Автора с вами свяжутся");
+					
+					project.setQuestionAnswers(qustion);
 				}
 				
 				return null; 
@@ -112,7 +120,7 @@ public class Kickstarter {
 
 	private void askProject(Project project) {
 		println("Выберите что хотите сделать с проектом: \n"
-				+ "[0 - выйти к списку проектов, 1 - инвестировать в проект]");
+				+ "[0 - выйти к списку проектов, 1 - инвестировать в проект, 2 - задать вопрос Авторам]");
 	}
 
 	private Project chooseProject(int menu, Project[] found) {
