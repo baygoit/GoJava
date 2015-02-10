@@ -16,6 +16,7 @@ public class Kickstarter {
 		this.projects = projects;
 		this.io = io;  
 		this.generator = generator;
+		// тут только поля проставляются...
 	}
 
 	// следующая история, которую надо реализовать - 
@@ -36,7 +37,7 @@ public class Kickstarter {
 	// последовательно имя, номер карточки и сумму, а после ввода возвращаться обратно в меню проекта
 	// TODO дальше можно сделать чтобы сумма списывалась из проекта как оплаченная. И на этом вроде как все. 
 	// Пока мне видятся такие етапы.
-	public void run() {		
+	public void run() {	// А вот тут уже пошла работать программа	
 		println(generator.nextQuote());
 		
 		categoryMenu().run();
