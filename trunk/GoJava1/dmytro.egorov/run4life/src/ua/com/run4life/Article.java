@@ -2,12 +2,12 @@ package ua.com.run4life;
 
 import java.util.Date;
 
-public class Articles {
+public class Article {
 	private String name;
 	private Date date;
 	private String content;
 	
-	public Articles(String name, Date date, String description){
+	public Article(String name, Date date, String description){
 		this.name = name;
 		this.date = date;
 		this.content = description;

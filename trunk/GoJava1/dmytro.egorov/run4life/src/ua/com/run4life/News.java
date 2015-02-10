@@ -4,22 +4,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class News {
-	private List<Articles> articles = new ArrayList<Articles>();
-	private List<Events> events = new ArrayList<Events>();
+	private List<Article> articles = new ArrayList<Article>();
+	private List<Event> events = new ArrayList<Event>();
 	
-	public void addNews(Articles article){
+	public void addNews(Article article){
 		this.articles.add(article);
 	}
 
-	public List<Articles> getArticle() {
+	public List<Article> getArticle() {
 		return articles;
 	}
 
-	public List<Events> getEvents() {
+	public List<Event> getEvents() {
 		return events;
 	}
 
-	public void addEvents(Events event) {
+	public void addEvents(Event event) {
 		this.events.add(event);
 	}
 

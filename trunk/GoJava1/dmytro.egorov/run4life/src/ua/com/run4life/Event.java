@@ -2,12 +2,12 @@ package ua.com.run4life;
 
 import java.util.Date;
 
-public class Events {
+public class Event {
 	private String name;
 	private Date date;
 	private String content;
 	
-	public Events(String name, Date date, String description){
+	public Event(String name, Date date, String description){
 		this.name = name;
 		this.date = date;
 		this.content = description;

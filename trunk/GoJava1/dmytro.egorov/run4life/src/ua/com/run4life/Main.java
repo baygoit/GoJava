@@ -26,8 +26,8 @@ public class Main {
 		menu.addMenu(itemMenu2);
 		menu.addMenu(itemMenu3);
 		
-		Articles article1 = new Articles("Новость1",Date.valueOf("2015-02-02"),"Описание");
-		Articles article2 = new Articles("Новость2",Date.valueOf("2015-02-03"),"Описание");
+		Article article1 = new Article("Новость1",Date.valueOf("2015-02-02"),"Описание");
+		Article article2 = new Article("Новость2",Date.valueOf("2015-02-03"),"Описание");
 		News news = new News();
 		news.addNews(article1);
 		news.addNews(article2);
@@ -39,7 +39,7 @@ public class Main {
 
 		System.out.println("Выберите пункт меню");
 		List<ItemMenu> itemsMenu = menu.getMenu();
-		List<Articles> articles = news.getArticle();
+		List<Article> articles = news.getArticle();
 		for (ItemMenu item : itemsMenu) {
 			System.out.print(item.getNameMenu() + " ");
 		}
@@ -53,7 +53,7 @@ public class Main {
 					if(news==null){
 					System.out.println("Новостей нет");}
 					else{
-					 for(Articles article: articles){
+					 for(Article article: articles){
 						 System.out.print(article.getName() + " ");
 					 }
 					}
@@ -81,7 +81,7 @@ public class Main {
 				}
 			}
 		}
-		if (found==false){
+		if (!found){
 			System.out.println("Такого пункта нет");
 		}
 	}
