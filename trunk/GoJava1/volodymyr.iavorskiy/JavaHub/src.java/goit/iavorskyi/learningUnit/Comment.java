@@ -2,9 +2,9 @@ package goit.iavorskyi.learningUnit;
 
 public class Comment {
 
-	private String author = "";
-	private String comment = "";
-	private int id = 0;
+	private String author;
+	private String comment;
+	private int id;
 	
 	public Comment() {
 		

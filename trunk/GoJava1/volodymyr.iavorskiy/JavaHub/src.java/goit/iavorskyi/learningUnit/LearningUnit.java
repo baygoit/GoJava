@@ -5,10 +5,10 @@ import java.util.List;
 
 public class LearningUnit {
 
-	private String author = "";
+	private String author;
 	private List<Comment> comments = new LinkedList<Comment>();
 	private List<Rating> rates = new LinkedList<Rating>();
-	private boolean isApproved = false;
+	private boolean isApproved;
 
 	public LearningUnit() {
 

@@ -2,8 +2,8 @@ package goit.iavorskyi.learningUnit;
 
 public class Rating {
 
-	private String author = "";
-	private int rating = 0;
+	private String author;
+	private int rating;
 	
 	public Rating() {
 		
