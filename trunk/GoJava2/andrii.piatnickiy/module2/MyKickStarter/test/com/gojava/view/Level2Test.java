@@ -40,4 +40,10 @@ public class Level2Test {
                 "1) Project Name: test1\nDescription: description1\nNeed Sum: 1\nCurrent Sum: 1\nDays Left: 1\n\n2) Project Name: test1\nDescription: description1\nNeed Sum: 1\nCurrent Sum: 1\nDays Left: 1\n\n3) Project Name: test1\nDescription: description1\nNeed Sum: 1\nCurrent Sum: 1\nDays Left: 1\n\n",
                 actual);
     }
+
+    public void shouldNull_WhenDisplayMySelf() {
+        Level2 level2 = new Level2(projectStorage);
+        String actual = level2.displayMySelf(1, 1);
+        assertNull(actual);
+    }
 }
