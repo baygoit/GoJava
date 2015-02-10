@@ -21,8 +21,8 @@ public class KickstarterTest {
 	private Projects projects;
 	private Kickstarter kickstarter;
 
-	@Before // это будет запускаться каждый раз перед каждым тестом, вынесем сюда всю общую логику
-	public void setup() { // потому мы тут можем все проинитить-связать, а в тестах уже наполнить данными
+	@Before 
+	public void setup() { 
 		generator = mock(QuoteGenerator.class);
 		when(generator.nextQuote()).thenReturn("quote");
 		
@@ -31,8 +31,7 @@ public class KickstarterTest {
 		categories = new Categories();
 		projects = new Projects();
 		
-		kickstarter = new Kickstarter(categories, projects, io, generator); // эта строчка тоже дублируется везде
-		// Все сработало потому как кикстартер в конструкторе не начинает работу, ему еще надо запуститься методом run 
+		kickstarter = new Kickstarter(categories, projects, io, generator); 
 	}
 	
 	@Test 
@@ -91,10 +90,9 @@ public class KickstarterTest {
 		project2.setCategory(category);
 		
 		// when
-		// проинитим мок - 
 		// 1- выбрали категорию 1, 
 		// 2 - выбрали второй проект, 
-		// 0 - вышли из проекта - это нам надо добавить, раньше такого небыло
+		// 0 - вышли из проекта 
 		// 0 - вышли из списка проектов, 
 		// 0 - вышли изсписка категорий, 
 		// 0 - вышли из программы 
@@ -141,7 +139,6 @@ public class KickstarterTest {
 			"]", values.toString());
 	}
 	
-	// тест исправил, но мне хотелось бы проверить еще вход в меню оплаты, для этого напишу отдельный тест
 	@Test
 	public void shouldPrintProjectMenu_whenSelectIt() {
   	    // given
@@ -154,7 +151,6 @@ public class KickstarterTest {
 		
 		// when
 		when(generator.nextQuote()).thenReturn("quote");
-		// проинитим мок
 		// 1 выбрали категорию
 		// 1 выбрали проект
 		// 1 выбрали оплату
@@ -166,7 +162,6 @@ public class KickstarterTest {
 		kickstarter.run();
 
 		// then
-		// и тут 
 		List<String> values = assertPrinted(io, 34);
 		
 		assertPrinted(values, "Выберите что хотите сделать с проектом: \n"
@@ -181,14 +176,12 @@ public class KickstarterTest {
 		categories.add(new Category("category2"));
 		
 		// when
-		// выбрали категорию 1, вышли изсписка категорий, вышли из программы
-		// аналог FakeIO io = new FakeIO(1, 0, 0);  
+		// выбрали категорию 1, вышли из списка категорий, вышли из программы
 		when(io.read()).thenReturn("1", "0", "0");
 		
 		kickstarter.run();
 
 		// then
-		// то же сделаем тут
 		List<String> values = assertPrinted(io, 9);
 		
 		assertPrinted(values, "quote\n");
@@ -199,17 +192,10 @@ public class KickstarterTest {
 		assertPrinted(values, "Спасибо за использование нашей программы!\n");
 	}
 	
-	// я опять скопипастил, что не очень хорошо так как порождает дублирование. 
-	// если такео случается часто, пора реакторить
-	// а данном случае я пишу интеграционные тесты на сложный объект кикстартер, который внутри себя содержит меню
-	// Вместо того чтобы писать юнит тесты на одельный пункт меню.
-	// плюс в том, что так тестируется все в связке
-	// TODO минус в том, что я постояннро должен заходить вовнутрь меню, где хочу потестить делая лишние движения 
-	// потому я поставлю туду и потом подумаю над этим
 	@Test
 	public void shouldIncomeAmountToProject_whenDonate() {
   	    // given
-		int TOTAL = 100; // вот это число должно поменяться
+		int TOTAL = 100;
 		int DONATE = 25;
 		int STILL_NEEDED = 75;
 
@@ -221,7 +207,6 @@ public class KickstarterTest {
 		project.setCategory(category);
 
 		// when
-		// проинитим мок
 		// 1 выбрали категорию
 		// 1 выбрали проект
 		// 1 выбрали оплату
@@ -236,43 +221,25 @@ public class KickstarterTest {
 		// then	
 		List<String> values = assertPrinted(io, 34);
 		
-		// а тут проверяем было ли то что мы хотели
-		// этот метод так же можно упростить
 		assertPrinted(values, "Выберите что хотите сделать с проектом: \n"
 				+ "[0 - выйти к списку проектов, 1 - инвестировать в проект]\n");
 		assertPrinted(values, "Спасибо, что хотите помочь проекту!\n");
 		assertPrinted(values, "Введите имя:\n");
 		assertPrinted(values, "Введите номер вашей карточки:\n");
-		assertPrinted(values, "Введите размер суммы:\n");                     // Мелкая гадость! \n забыл
+		assertPrinted(values, "Введите размер суммы:\n");                    
 		assertPrinted(values, "Спасибо Саша Ваши деньги в размере 25 успешно зачислились на счет проекта!\n");
-		
-		// сразу же переделаю все тесты под новую архитектуру после коммита, чтобы было все в однмо стиле.
-		// нет ничего хуже когда от класса к классу видно как вы эволюционировали :) 
-		
-		// вот тут получается так называемый мок хелл :) когда система выводит не то, что ожидали, а в чем дело разобраться
-		// без дебаггера сложно... Потому моками не стоит злоупотреблять
-		
-		// что осталось - так это проверить что деньги занеслись на счет проекта
-		// как? спросим проект напрямую...
-		
+			
 		assertEquals(STILL_NEEDED, project.getAmount());
-		// закодим это
 	}
 
-	// это наши тестовые методы, нет ничего страшного что тут в тесте появляется код 
-	// главное чтобы тесты оставались читабельными...
 	private void assertPrinted(List<String> values, String expected) {
-		assertTrue("Actual data: \n" + values.toString() + "\n\n doesn't contain: \n" + expected, // сообщение что напечатается в случае фейла
-				values.contains(expected)); // а тут проверка
+		assertTrue("Actual data: \n" + values.toString() + "\n\n doesn't contain: \n" + expected,
+				values.contains(expected)); 
 	}
 
 	private List<String> assertPrinted(IO io, int times) {
-		// это просто надо запомнить :) магия Мокито
-		// эту магию я предлагаю вынести в метод, чтобы от греха подальше 
 		ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);;
 		verify(io, times(times)).print(captor.capture());
-		// так получаем список того, что печатали в принтере
-		List<String> values = captor.getAllValues();
-		return values;
+		return captor.getAllValues();
 	}
 }

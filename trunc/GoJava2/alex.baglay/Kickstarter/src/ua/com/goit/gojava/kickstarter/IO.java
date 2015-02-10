@@ -2,7 +2,7 @@ package ua.com.goit.gojava.kickstarter;
 
 public interface IO {
 
-	String read(); // ладно сделаем String
+	String read(); 
 	
 	void print(String message);
 
