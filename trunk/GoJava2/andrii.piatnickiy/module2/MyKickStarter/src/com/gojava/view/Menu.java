@@ -8,19 +8,19 @@ import com.gojava.projects.CategoryStorage;
 import com.gojava.projects.ProjectStorage;
 
 public class Menu {
-    public ConsoleIO consoleIO = new ConsoleIO();
+    public IO out = new ConsoleIO();
     private int currentLevelPosition;
     private Level1 level1;
     private Level2 level2;
     private Level3 level3;
-    public int categoryPosition = 1; 
-
+    int categoryPosition; 
+    public IO iO;
     
     private ArrayList<Level> levelsList = new ArrayList<>();
 
 
-    public Menu(CategoryStorage categoryStorage, ProjectStorage projectStorage, ConsoleIO consoleIO) {
-        this.consoleIO = consoleIO;
+    public Menu(CategoryStorage categoryStorage, ProjectStorage projectStorage, IO iO) {
+        this.iO = iO;
         this.level1 = new Level1(categoryStorage);
         this.level2 = new Level2(projectStorage);
         this.level3 = new Level3(projectStorage);
@@ -31,10 +31,14 @@ public class Menu {
         initMenu();
     }
 
-    public void nextLevel(int nubberForNextLevel) {
+    public void printNextLevel(int nubberForNextLevel){
+        System.out.println(nextLevel(nubberForNextLevel));
+    }
+    
+    public String nextLevel(int nubberForNextLevel) {
         if ((nubberForNextLevel == 0 && currentLevelPosition == 1)
                 || (nubberForNextLevel > 0 && currentLevelPosition == 3)) {
-            consoleIO.print("not allowed to go below this level");
+            return "not allowed to go below this level";
         } else {
             Level level; 
             if (nubberForNextLevel == 0) {
@@ -49,7 +53,7 @@ public class Menu {
                 }
             }
             level = getCurrentLevel();
-            consoleIO.print(level.displayMySelf(nubberForNextLevel));
+            return level.displayMySelf(nubberForNextLevel);
         }
     }
 
@@ -59,7 +63,7 @@ public class Menu {
 
     public void initMenu() {
         currentLevelPosition = 1;
-        consoleIO.print(level1.displayMySelf(currentLevelPosition));
+        out.print(level1.displayMySelf(currentLevelPosition));
     }
 
     public Level getCurrentLevel() {

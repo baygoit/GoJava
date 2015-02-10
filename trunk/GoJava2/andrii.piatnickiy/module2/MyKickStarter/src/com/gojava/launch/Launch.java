@@ -21,7 +21,7 @@ public class Launch {
 
         Menu menu = new Menu(categoryStorage, projectStorage, consoleIO);
         while (true) {
-            menu.nextLevel(menu.consoleIO.inputInt());
+            menu.printNextLevel(menu.out.inputInt());
         }
 
     }
