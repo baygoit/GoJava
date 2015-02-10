@@ -6,12 +6,12 @@ public class KickstarterS {
 	private int chosenCategory;
 	private int chosenProject;
 	private int magic = 777;
-	private int menu = 0;
 	private int menuCategories = 222;
 	private int menuProjects = 333;
 	private int menuProject = 444;
 	private int menuPayment = 555;
 	private int menuQuestion = 666;
+	private int menu = menuCategories;
 	Check check = new Check(new InputsConsole(), new OutputConsole());
 	Categories categories = new Categories();
 	Category category = new Category();
@@ -22,7 +22,6 @@ public class KickstarterS {
 		Quotes quote = new Quotes();
 		printer(quote.getQuote());
 		projects.writeAllProjects();
-		menu = menuCategories;
 		switcher();
 	}
 		
@@ -67,16 +66,19 @@ public class KickstarterS {
 		int chosenPay = check.checkNumber(intSwitch);
 		if (sleep(chosenPay)){switcher();};
 		printer("Enter your name:");
-		printer(check.checkName());//TODO
+		String name = check.checkName();
+		if (name.equals(Integer.toString(magic))){sleep(Integer.parseInt(name));switcher();}
 		printer("Enter your credit card number:");
-		check.checkCard();
-		int cardNumber = check.checkNumber(intSwitch);
-		if (sleep(cardNumber)){switcher();};
+		long cardNumber = check.checkCard();
+		printer(Long.toString(cardNumber));
+		if ((int)cardNumber == magic){sleep((int)cardNumber);switcher();}
+		
 		printer("Enter the amount of donations:");
 		if (chosenPay == 0){
 			chosenPay = check.checkAmount();
 			int amount = check.checkNumber(intSwitch);
-			if (sleep(amount)){switcher();};}
+			if (sleep(amount)){switcher();}
+		}
 		project.setDonation(projects.getListProject(), chosenPay, chosenProject - 1);
 		menu = menuProject;
 		switcher();
@@ -115,7 +117,7 @@ public class KickstarterS {
 	
 	private void printFaq(ArrayList<String> faq) {
         for(int i = 0; i < faq.size(); i++){
-        	printer(faq.get(i));
+        	printer("question " + i + " - " + faq.get(i));
         }
 	}
 	

@@ -19,7 +19,7 @@ public class Check {
 		choiceNumber = 0;
 		for (int i = 0; i < magicStop; i++){
 			String chosen = choice.enter();
-			if (checkNumber(chosen)){continue;}
+			if (checkNumbers(chosen)){continue;}
 			choiceNumber = Integer.valueOf(chosen);
 			if (checkBorder(choiceNumber, border)){continue;}
 			break;
@@ -38,16 +38,17 @@ public class Check {
 			chosen = choice.enter();
 			if (!checkIsName(chosen)){
 				getOut().print("The name must be from two to twenty letters, please try again");
+				breakCounter++;
 				continue;
 				}
 			break;
 		}
 		if (breakCounter == magicStop){
 			getOut().print("You have used three attempts, try ten minutes");
-			choiceNumber = bannedFor10Minutes();
+			chosen = Integer.toString(bannedFor10Minutes());
+			return chosen;
 		}
-		String name = chosen;
-		return name;
+		return chosen;
 	}
 	
 	public long checkCard() throws IOException{
@@ -57,6 +58,7 @@ public class Check {
 			String chosen = choice.enter();
 			if (!checkIsCard(chosen)){
 				getOut().print("Card number card must bіt 16 numeric characters, please try again");
+				breakCounter++;
 				continue;
 				}
 			cardNumber = Long.valueOf(chosen);
@@ -65,6 +67,7 @@ public class Check {
 		if (breakCounter == magicStop){
 			getOut().print("You have used three attempts, try ten minutes");
 			choiceNumber = bannedFor10Minutes();
+			return choiceNumber;
 		}
 		return cardNumber;
 	}
@@ -76,6 +79,7 @@ public class Check {
 			String chosen = choice.enter();
 			if (!checkAmount(chosen)){
 				getOut().print("Amount must by number, please try again");
+				breakCounter++;
 				continue;
 				}
 			amount = Integer.valueOf(chosen);
@@ -98,7 +102,7 @@ public class Check {
 		return f;
 	}
 	
-	private Boolean checkNumber(String chosen){
+	private Boolean checkNumbers(String chosen){
 		boolean f = false;
 		if (!checkIsNumber(chosen)){
 			getOut().print("It is not a number, please try again");
@@ -115,9 +119,6 @@ public class Check {
 				f = true;
 				break;
 			}
-		}
-		if (number == 0){
-			f = true;
 		}
 		return f;
     }
