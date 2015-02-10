@@ -1,6 +1,5 @@
 package ua.com.scread.kickstarter;
 
-import java.awt.MenuItem;
 import java.util.Arrays;
 import java.util.List;
 
@@ -9,12 +8,12 @@ public class Controller {
     private IO io;
     private QuoteGenerator quote;
     
-//    UserStory VI
-//    Как гость я хочу инвестировать в понравившийся мне проект, чтобы поддержать его
-//    Сценарий: Находясь в конкретном проекте -> Вижу меню с вариантами, что могу сделать, 
-//    один из пунктов - проинвестировать в проект -> Выбираю его -> Вижу вопрос от пеймент 
-//    системы о вводе имени и номера карточки и суммы -> Ввожу их ->
-//    Перехожу на описание проекта, где вижу что инфа о количестве пожертвований поменялась
+//    UserStory VIII
+//    Как гость я хочу понимать, что я получу за свои инвестиции от проекта
+//    Сценарий: На страничке пеймента я вижу варианты оплаты (1 - 1,2-10, 3 - 40)
+//    с описанием что я получу за это, я могу выбрать один из них или как раньше перечислить 
+//    любую сумму, какую хочу. Автор проекта сам задает эту дополнительную информацию.
+//    Не забываем про меню "0 - назад". В любом месте системы я могу вернуться на предыдущий скрин. 
 
     public Controller(Model model, IO io, QuoteGenerator quote) {
         this.model = model;
@@ -81,8 +80,10 @@ public class Controller {
                 Integer menuItem = (Integer)selected;
                 if (menuItem == 1) {
                     return paymentMenu(project);                     
+                } else if(menuItem == 2) {
+                    return faqMenu(project);                    
                 } else {
-                    return null;                    
+                    return null;
                 }
             }
             
@@ -98,14 +99,60 @@ public class Controller {
         };        
     }
     
+    protected Menu faqMenu(final Project project) {
+        return new Menu(io) {
+            
+            @Override
+            Menu nextMenu(Object selected) {
+                String question = (String)selected;
+                FAQ faq = new FAQ(question, "");
+                project.addFAQ(faq);
+                return null;
+            }
+            
+            @Override
+            Object choose(int menuItem) {
+                return menuItem;
+            }
+            
+            Object choose(String menuItem) {
+                return menuItem;
+            }
+            
+            @Override
+            void ask() {
+                io.print("Enter your question: ");
+            }
+            
+            @Override
+            public void run() {
+                while (true) {
+                    ask(); 
+                    
+                    String menuItem = io.readString();
+                    if (menuItem == "0")
+                        break;
+                    
+                    Object selected = choose(menuItem);
+                    if (selected == null)
+                        continue;
+                    
+                    Menu subMenu = nextMenu(selected);
+                    if ( subMenu != null) {
+                        subMenu.run();                
+                    } else {
+                        break;
+                    }
+                }
+            }
+        };
+    }
+
     private Menu paymentMenu(final Project project) {
         return new Menu(io) {
             
             @Override
             Menu nextMenu(Object selected) {
-                Integer amount = (Integer)selected;
-                project.addMoney(amount);
-                showThanks();
                 return null;
             }
             
@@ -116,15 +163,24 @@ public class Controller {
             
             @Override
             void ask() {
+            }
+
+            @Override
+            public void run() {
+                io.print("Enter name: ");
+                String name = io.readString();
+                io.print("Enter card number");
+                int cardNumber = io.read();
                 io.print("Enter donate amount: ");
+                int amount = io.read();
+                project.addMoney(amount);
+                showThanks();
             }
         };
     }
+    
+    
 
-    private void showPayment() {
-        io.print("[1 - Donate]");
-        showExit();
-    }
     
     private void showThanks() {
         println("Thank you for your donation!");
@@ -184,16 +240,22 @@ public class Controller {
 	public void showFullProject(Project project) {
 		showLine();
 		showProject(project);
-		Details details = project.getDetails();
-		FAQ faq = details.getFAQ();
+		AdditionalInfo details = project.getDetails();
+		FAQs faqs = details.getFAQs();
 		println("History: " + details.getHistory());
 		println("Video link: " + details.getVideo());
 		println("\nFrequently Asked Questions: ");
-		println(faq.getQuestion());
-		println("\n" + faq.getAnswer());
+		for (FAQ faq: faqs.getFAQs()) {
+		    println(faq.getQuestion());
+	        println("\n" + faq.getAnswer());
+		}
 		showLine();
-		showPayment();
+		showMenu();
 	}
 	
+	private void showMenu() {
+	    io.print("[1 - Donate] or [2 - Ask question]");
+	    showExit();
+	}
 
 }

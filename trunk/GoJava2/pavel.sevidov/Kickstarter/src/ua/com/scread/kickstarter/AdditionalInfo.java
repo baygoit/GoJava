@@ -1,14 +1,14 @@
 package ua.com.scread.kickstarter;
 
-public class Details {
+public class AdditionalInfo {
 	private String history;
 	private String video;
-	private FAQ faq;
+	private FAQs faqs;
 
-	public Details(String history, String video, FAQ faq) {
+	public AdditionalInfo(String history, String video, FAQs faqs) {
 		this.history = history;
 		this.video = video;
-		this.faq = faq;
+		this.faqs = faqs;
 	}
 	
 	public String getHistory() {
@@ -19,15 +19,19 @@ public class Details {
 		return video;
 	}
 	
-	public FAQ getFAQ() {
-		return faq;
+	public FAQs getFAQs() {
+		return faqs;
+	}
+	
+	public void addFAQ(FAQ faq) {
+	    faqs.add(faq);
 	}
 
     @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((faq == null) ? 0 : faq.hashCode());
+        result = prime * result + ((faqs == null) ? 0 : faqs.hashCode());
         result = prime * result + ((history == null) ? 0 : history.hashCode());
         result = prime * result + ((video == null) ? 0 : video.hashCode());
         return result;
@@ -41,11 +45,11 @@ public class Details {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        Details other = (Details) obj;
-        if (faq == null) {
-            if (other.faq != null)
+        AdditionalInfo other = (AdditionalInfo) obj;
+        if (faqs == null) {
+            if (other.faqs != null)
                 return false;
-        } else if (!faq.equals(other.faq))
+        } else if (!faqs.equals(other.faqs))
             return false;
         if (history == null) {
             if (other.history != null)

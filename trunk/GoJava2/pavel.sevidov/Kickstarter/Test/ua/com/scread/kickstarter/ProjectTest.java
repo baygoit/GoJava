@@ -5,13 +5,13 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 import ua.com.scread.kickstarter.Category;
-import ua.com.scread.kickstarter.Details;
+import ua.com.scread.kickstarter.AdditionalInfo;
 import ua.com.scread.kickstarter.FAQ;
 import ua.com.scread.kickstarter.Project;
 
 public class ProjectTest {
-	FAQ faq = new FAQ("question", "answer");
-	Details details = new Details("History", "video", faq);
+	FAQs faq = new FAQs(new FAQ("question", "answer"));
+	AdditionalInfo details = new AdditionalInfo("History", "video", faq);
 	Project project = new Project("Project", "Description", 1, 1, details);
 
 	

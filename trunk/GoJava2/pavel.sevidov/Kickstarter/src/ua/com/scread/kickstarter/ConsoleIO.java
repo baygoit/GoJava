@@ -23,4 +23,9 @@ public class ConsoleIO implements IO {
 	public void print(String message) {
 		System.out.print(message);
 	}
+	
+	@Override
+	public String readString() {
+	    return scanner.next();
+	}
 }

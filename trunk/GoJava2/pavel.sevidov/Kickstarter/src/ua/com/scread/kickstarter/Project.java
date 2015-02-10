@@ -7,9 +7,10 @@ public class Project {
 	private double amount;
 	private int days;
 	private Category category;
-	private Details details;
+	private AdditionalInfo details;
+	private DonationBonuses donationBonuses;
 
-	public Project(String name, String description, double amount, int days, Details delails) {
+	public Project(String name, String description, double amount, int days, AdditionalInfo delails) {
 		this.name = name;
 		this.description = description;
 		this.amount = amount;
@@ -50,8 +51,12 @@ public class Project {
 		this.category = category;
 	}
 	
-	public Details getDetails() {
+	public AdditionalInfo getDetails() {
 		return details;
+	}
+	
+	public void addFAQ(FAQ faq) {
+	    details.addFAQ(faq);
 	}
 
     @Override

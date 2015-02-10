@@ -25,14 +25,14 @@ public class Model {
 		categories.add(category2);
 		categories.add(category3);
 		
-		Details delails2 = new Details("History of project", "https://www.youtube.com/watch?v=y4_I1DG_x7w", 
-				new FAQ("Can I ship my Oculus Rift Development Kit 2 using a company/concierge service?",
+		AdditionalInfo delails2 = new AdditionalInfo("History of project", "https://www.youtube.com/watch?v=y4_I1DG_x7w", 
+				new FAQs(new FAQ("Can I ship my Oculus Rift Development Kit 2 using a company/concierge service?",
 						"We do not allow the use of freight forwarding companies or concierge services \nfor "
 						+ "Oculus Rift Development Kit purchases due to payment processing and fraud prevention." 
 						+ "\nWe also require the information of each customer to identify the owner to provide "
-						+ "\ntechnical support and product replacement."));
+						+ "\ntechnical support and product replacement.")));
 		
-		Details delails1 = new Details("History of project", "Video", new FAQ("Question?", "Answer"));
+		AdditionalInfo delails1 = new AdditionalInfo("History of project", "Video", new FAQs(new FAQ("Question?", "Answer")));
 
 
         

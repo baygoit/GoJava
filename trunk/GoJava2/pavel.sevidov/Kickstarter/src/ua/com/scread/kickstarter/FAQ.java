@@ -6,7 +6,11 @@ public class FAQ {
 
 	public FAQ(String question, String answer) {
 		this.question = question;
-		this.answer = answer;
+		if (answer == "") {
+		    this.answer = "There is no answer yet.";
+		} else {
+		    this.answer = answer;		    
+		}
 	}
 	
 	public String getQuestion() {
@@ -15,6 +19,10 @@ public class FAQ {
 	
 	public String getAnswer() {
 		return answer;
+	}
+	
+	public void setAnswer(String answer) {
+	    this.answer = answer;
 	}
 
     @Override
