@@ -4,35 +4,33 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import com.gojava.inputOutput.ConsoleIO;
+import com.gojava.projects.CategoryStorage;
 import com.gojava.projects.ProjectStorage;
-import com.gojava.view.Level3;
 
 public class Level3Test {
-
+    
     ProjectStorage projectStorage = new ProjectStorage();
-
-     @Test
-     public void shouldGetNoProjects_WhenDisplayMySelf() {
-     Level3 level3 = new Level3(projectStorage);
-     String actual = level3.displayMySelf(1, 1);
-     assertEquals("", actual);
-     }
+    CategoryStorage categoryStorage =  new CategoryStorage();
+    Menu menu = new Menu(categoryStorage, projectStorage, new ConsoleIO());
 
      @Test
      public void shouldGetOneProjects_WhenDisplayMySelf() {
-         Level3 level3 = new Level3(projectStorage);
+         menu.setCategoryPosition(1);
          projectStorage.add("test1", "description1", 1, 1, 1, "projectHistory1",
                  "linkOnvideo1", "questionsAndAnswers1", 1);
-         String actual = level3.displayMySelf(1, 1);
+         String actual = menu.level3.displayMySelf(1);
          assertEquals(
                  "Project Name: test1\nDescription: description1\nNeed Sum: 1\nCurrent Sum: 1\nDays Left: 1\nProjectHistory: projectHistory1\nLinkOnvideo: linkOnvideo1\nQuestions and answers: questionsAndAnswers1\n\n",
                  actual);
      }
-//    @Test
-//    public void shouldNull_WhenDisplayMySelf() {
-//        Level3 level3 = new Level3(projectStorage);
-//        String actual = level3.displayMySelf(1);
-//        assertNull(actual);
-//               
-//    }
+     
+//   @Test
+//   public void shouldGetNoProjects_WhenDisplayMySelf() {
+//   Level3 level3 = new Level3(projectStorage);
+//   String actual = level3.displayMySelf(1, 1);
+//   assertEquals("", actual);
+//   }
+     
+     
 }

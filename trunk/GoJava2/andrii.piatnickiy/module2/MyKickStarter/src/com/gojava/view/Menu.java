@@ -9,32 +9,18 @@ import com.gojava.projects.ProjectStorage;
 
 public class Menu {
     public IO out = new ConsoleIO();
-    
-    int categoryPosition; 
-    public int getCategoryPosition() {
-        return categoryPosition;
-    }
-
-    public void setCategoryPosition(int categoryPosition) {
-        this.categoryPosition = categoryPosition;
-    }
-    
+    public int categoryPosition;
     private int currentLevelPosition;
-    public void setCurrentLevelPosition(int currentLevelPosition) {
-        this.currentLevelPosition = currentLevelPosition;
-    }
-
     private Level1 level1;
     private Level2 level2;
-    private Level3 level3;
-    
+    Level3 level3;
 
     public IO iO;
-    
+
     private ArrayList<Level> levelsList = new ArrayList<>();
 
-
-    public Menu(CategoryStorage categoryStorage, ProjectStorage projectStorage, IO iO) {
+    public Menu(CategoryStorage categoryStorage, ProjectStorage projectStorage,
+            IO iO) {
         this.iO = iO;
         this.level1 = new Level1(categoryStorage);
         this.level2 = new Level2(projectStorage);
@@ -46,18 +32,17 @@ public class Menu {
         initMenu();
     }
 
-    public void printNextLevel(int nubberForNextLevel){
+    public void printNextLevel(int nubberForNextLevel) {
         System.out.println(nextLevel(nubberForNextLevel));
     }
-    
+
     public String nextLevel(int nubberForNextLevel) {
         String result;
         if ((nubberForNextLevel == 0 && currentLevelPosition == 1)
                 || (nubberForNextLevel > 0 && currentLevelPosition == 3)) {
-            System.out.println(111);
             result = "not allowed to go below this level";
         } else {
-            Level level; 
+            Level level;
             if (nubberForNextLevel == 0) {
                 currentLevelPosition--;
                 if (currentLevelPosition == 2) {
@@ -92,5 +77,17 @@ public class Menu {
             }
         }
         return result;
+    }
+    
+    public int getCategoryPosition() {
+        return categoryPosition;
+    }
+
+    public void setCategoryPosition(int categoryPosition) {
+        this.categoryPosition = categoryPosition;
+    }
+    
+    public void setCurrentLevelPosition(int currentLevelPosition) {
+        this.currentLevelPosition = currentLevelPosition;
     }
 }
