@@ -41,7 +41,8 @@ public class Menu {
         if ((nubberForNextLevel == 0 && currentLevelPosition == 1)
                 || (nubberForNextLevel > 0 && currentLevelPosition == 3)) {
             result = "not allowed to go below this level";
-        } else {
+        } 
+        else { 
             Level level;
             if (nubberForNextLevel == 0) {
                 currentLevelPosition--;

@@ -4,7 +4,6 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import com.gojava.inputOutput.ConsoleIO;
 import com.gojava.projects.CategoryStorage;
 import com.gojava.projects.ProjectStorage;
 
@@ -81,5 +80,15 @@ public class TestMenu {
         menu.setCurrentLevelPosition(2);
         String actual = menu.nextLevel(0);
         assertEquals("1) Sport\n2) Car\n3) Devices\n", actual);
+    }
+    
+    @Test
+    public void shouldLevelUp_WhenType0FromLevel3ToLevel2() {
+        initCategories();
+        initProjects(projectStorage);
+        menu.setCurrentLevelPosition(3);
+        menu.setCategoryPosition(1);
+        String actual = menu.nextLevel(0);
+        assertEquals("1) Project Name: Bicycle\nDescription: Bicycle description\nNeed Sum: 10000\nCurrent Sum: 100\nDays Left: 10\n\n", actual);
     }
 }
