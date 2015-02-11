@@ -8,6 +8,7 @@ import java.util.Map;
 
 import ua.com.goit.gojava1.lslayer.hackit2.action.Action;
 import ua.com.goit.gojava1.lslayer.hackit2.actor.Actor;
+import ua.com.goit.gojava1.lslayer.hackit2.actor.HumanControlledCharacter;
 import ua.com.goit.gojava1.lslayer.hackit2.dto.ActionResult;
 import ua.com.goit.gojava1.lslayer.hackit2.gear.Gear;
 
@@ -49,6 +50,12 @@ public final class GameSession { // Singleton. There is only one game per app.
         if (gamer == null)
             throw new HackitWrongParameterException("Where is actor?");
         this.gamers.add(gamer);
+    }
+
+    public void addHumanGamer(String name) { // TODO delete
+        // Somewhen all existing gamers will be loaded from db.
+        // But now I need some data to show on face
+        this.gamers.add(new HumanControlledCharacter(name));
     }
 
     public List<Actor> getGamers() {
