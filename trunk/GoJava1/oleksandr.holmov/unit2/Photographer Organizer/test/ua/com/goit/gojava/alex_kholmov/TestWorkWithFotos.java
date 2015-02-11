@@ -53,12 +53,20 @@ public class TestWorkWithFotos {
 
     /**
      * Test method for {@link ua.com.goit.gojava.alex_kholmov.WorkWithFotos#timeEditingFotosInPackage()}.
+     * @throws Exception 
      */
     @Test
-    public void testTimeEditingFotosInPackage() {
+    public void testTimeEditingFotosInPackage() throws Exception {
         //fail("Not yet implemented"); // TODO
         int res = workWithFotos.timeEditingFotosInPackage();
         assertEquals("Error", 102, res);
+    }
+    
+    @Test(expected = Exception.class)
+    public void testException() throws Exception {
+        workWithFotos.removePackage(pFotos1);
+        workWithFotos.removePackage(pFotos2);
+        workWithFotos.timeEditingFotosInPackage();
     }
 
 }
