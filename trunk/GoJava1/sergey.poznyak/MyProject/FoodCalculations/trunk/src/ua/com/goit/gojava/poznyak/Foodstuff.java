@@ -3,9 +3,9 @@ package ua.com.goit.gojava.poznyak;
 /**
  * The Foodstuff bean.
  * 
- * This class implements the foodstuff image.
+ * This bean implements the foodstuff image.
  * 
- * @version 0.05 03 Feb 2015
+ * @version 0.1 11 Feb 2015
  * @author Sergey Poznyak
  */
 public class Foodstuff {
@@ -24,11 +24,6 @@ public class Foodstuff {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	@Override
-	public String toString() {
-		return name;
 	}
 
 }

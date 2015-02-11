@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * This class implements the listing service.
  * 
- * @version 0.05 03 Feb 2015
+ * @version 0.1 11 Feb 2015
  * @author Sergey Poznyak
  */
 public class ListServiceHardcodedData {

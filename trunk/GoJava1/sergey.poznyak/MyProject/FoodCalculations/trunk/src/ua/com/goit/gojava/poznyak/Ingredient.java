@@ -3,9 +3,9 @@ package ua.com.goit.gojava.poznyak;
 /**
  * The Ingredient bean.
  * 
- * This class implements the ingredient image
+ * This bean implements the ingredient image.
  * 
- * @version 0.05 03 Feb 2015
+ * @version 0.1 11 Feb 2015
  * @author Sergey Poznyak
  */
 public class Ingredient {
@@ -35,11 +35,6 @@ public class Ingredient {
 
 	public void setWeight(Integer weight) {
 		this.weight = weight;
-	}
-
-	@Override
-	public String toString() {
-		return weight.toString();
 	}
 	
 }

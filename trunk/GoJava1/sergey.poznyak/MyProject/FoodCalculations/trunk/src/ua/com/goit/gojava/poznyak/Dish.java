@@ -7,7 +7,7 @@ import java.util.List;
  * 
  * This bean implements the dish image.
  * 
- * @version 0.05 03 Feb 2015
+ * @version 0.1 11 Feb 2015
  * @author Sergey Poznyak
  */
 public class Dish {
@@ -49,9 +49,4 @@ public class Dish {
 		this.ingredients = dishIngredients;
 	}
 
-	@Override
-	public String toString() {
-		return id + ". " + name;
-	}
-	
 }
