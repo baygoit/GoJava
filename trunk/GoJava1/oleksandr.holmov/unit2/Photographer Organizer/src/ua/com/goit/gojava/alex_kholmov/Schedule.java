@@ -14,9 +14,6 @@ import java.util.GregorianCalendar;
  *
  */
 public class Schedule implements ShowInfo{
-    //private final String MSG_1 = "ƒата окончани€ работы выходит за пределы даты, указанной в договоре";
-    //private final String MSG_2 = "»сход€ из выбранной дневной нагрузки,\nрекомендуетс€ установить дату начала работ\nне позднее: ";
-    
     static int TIME_WORKING_IN_WORK_DAY = 3; //hours
     static int TIME_WORKING_IN_DAY_OFF = 6; //hours
     
@@ -56,7 +53,7 @@ public class Schedule implements ShowInfo{
         startWork.set(year, Calendar.MONTH, date);
     }
     
-    void calcEndWork() {
+    void calcEndWork() throws Exception {
         String startWorkDate = dateFormat.format(startWork.getTime());
         int workHours = workWithFotos.timeEditingFotosInPackage();
         boolean condition;

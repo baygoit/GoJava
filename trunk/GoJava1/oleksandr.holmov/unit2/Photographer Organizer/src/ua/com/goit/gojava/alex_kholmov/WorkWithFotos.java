@@ -21,14 +21,18 @@ public class WorkWithFotos {
     }
     
     //return in hours
-    int timeEditingFotosInPackage() {
-        int hoursToEditAllPhotos = 0;
-        for (PackageFotos pFotos : allFotos) {
-            int allTime = pFotos.getTimeEditingFoto() * pFotos.getAmountFotos();
-            int editAllFotos = allTime
-                    + ((allTime * pFotos.getTimeReserve()) / 100);
-            hoursToEditAllPhotos += editAllFotos / 60;
+    int timeEditingFotosInPackage() throws Exception {
+        if (allFotos.isEmpty()) {
+            throw new Exception("¬ы не добавили ни одного пакета дл€ обработки!");
+        } else {
+            int hoursToEditAllPhotos = 0;
+            for (PackageFotos pFotos : allFotos) {
+                int allTime = pFotos.getTimeEditingFoto() * pFotos.getAmountFotos();
+                int editAllFotos = allTime
+                        + ((allTime * pFotos.getTimeReserve()) / 100);
+                hoursToEditAllPhotos += editAllFotos / 60;
+            }
+            return hoursToEditAllPhotos;
         }
-        return hoursToEditAllPhotos;
     }
 }

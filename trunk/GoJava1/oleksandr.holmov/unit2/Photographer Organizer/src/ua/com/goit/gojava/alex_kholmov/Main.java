@@ -15,8 +15,9 @@ public class Main {
 
     /**
      * @param args
+     * @throws Exception 
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         // TODO Auto-generated method stub
       PackageFotos pFotos1 = new PackageFotos("stantard", 250, 15, 10);
       PackageFotos pFotos2 = new PackageFotos("redact", 40, 35, 15);
@@ -30,7 +31,8 @@ public class Main {
       schedule.setDeadline(2015, 2, 4);
       schedule.setStartWork(2015, 1, 13);
       schedule.calcEndWork();
-      schedule.isOutOfDeadline();
+      System.out.println("days to edit: " + schedule.getAmountDays());
+      //schedule.isOutOfDeadline();
       schedule.displayInfo();
 //        SimpleDateFormat dateFormat = new SimpleDateFormat("EEEE");
 //        Calendar cal = Calendar.getInstance();
