@@ -29,7 +29,7 @@ public class KickstarterS {
 		printer(categories.readAllCatecories());
 		printer("Choice Category Number: ");
 		chosenCategory = check.checkNumber(category.kickContainCategory(categories));
-		if (sleep(chosenCategory)){switcher();};
+		if (sleep(chosenCategory)){switcher();}
 		printer("Your chosen category: " + category.showCatecoryName(chosenCategory - 1, categories) + ", containing the following projects: ");
 		menu = menuProjects;
 		switcher();
@@ -40,7 +40,7 @@ public class KickstarterS {
 		printer(category.showAllProjectInCategory(chosenCategory - 1, project, projects, categories));
 		printer("Choice Project Number or " + menuCategories + " for exit to Category: ");
 		chosenProject = check.checkNumber(concatArray(category.projectsContain(chosenCategory - 1, categories), intSwitch));
-		if (sleep(chosenProject)){switcher();};
+		if (sleep(chosenProject)){switcher();}
 		if (compare(intSwitch, chosenProject)) {menu = menuCategories; switcher();}
 		menu = menuProject;
 		switcher();
@@ -53,18 +53,18 @@ public class KickstarterS {
 		printer("Choice " + menuProjects + " for exit to Project list.\nChoice " + menuPayment + " to invest in the project:");
 		printer("Have a question? If the info above doesn't help, you can ask the project creator directly - Choice " + menuQuestion + ":");
 		int choiceTo = check.checkNumber(intSwitch);
-		if (sleep(choiceTo)){switcher();};
+		if (sleep(choiceTo)){switcher();}
 		if (compare(intSwitch, choiceTo)) {menu = choiceTo; switcher();}
 	}
 			
 	private void payment() throws IOException, InterruptedException{
 		int[] intSwitch = {0, 1, 2, 3};
-		printer("0 - No thanks, I just want to help the project.");
-		printer("1 - 1$ = OUR UNDYING LOVE");
-		printer("2 - 10$ = HEY… NICE SHIRT");
-		printer("3 - 40$ = KICKSTARTER EXCLUSIVE");
+		printer("0 - No thanks, I just want to help the project."
+				+ "1 - 1$ = OUR UNDYING LOVE"
+				+ "2 - 10$ = HEY… NICE SHIRT"
+				+ "3 - 40$ = KICKSTARTER EXCLUSIVE");
 		int chosenPay = check.checkNumber(intSwitch);
-		if (sleep(chosenPay)){switcher();};
+		if (sleep(chosenPay)){switcher();}
 		printer("Enter your name:");
 		String name = check.checkName();
 		if (name.equals(Integer.toString(magic))){sleep(Integer.parseInt(name));switcher();}
