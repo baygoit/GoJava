@@ -26,6 +26,7 @@ public class KickstarterS {
 		Quotes quote = new Quotes();
 		printer(quote.getQuote());
 		projects.writeAllProjects();
+		categories.readAllCatecories();
 		categories();
 	}
 		
@@ -84,6 +85,7 @@ public class KickstarterS {
 			if (sleep(chosenPay)){switcher();}
 		}
 		
+		
 		project.setDonation(projects.getListProject(), chosenPay, chosenProject - 1);
 		
 		menu = menuProject;
@@ -109,22 +111,23 @@ public class KickstarterS {
 	}
 	
 	private void printCategories() throws FileNotFoundException {
-		printer(categories.readAllCatecories());
+		printer(categories.showAllCatecories());
 		printer("Choice Category Number: ");		
 	}
 
 	private void askCategory() throws IOException {
-		chosenCategory = check.checkNumber(category.kickContainCategory(categories));
+		chosenCategory = check.checkNumber(categories.kickContainCategory()) - 1;
 	}
 	
 	private void printProjects() throws FileNotFoundException {
-		printer("Your chosen category: " + category.showCatecoryName(chosenCategory - 1, categories) + ", containing the following projects: ");		//TODO
-		printer(category.showAllProjectInCategory(chosenCategory - 1, project, projects, categories));													//TODO
-		printer("Choice Project Number or " + menuCategories + " for exit to Category: ");		
+		printer("Your chosen category: " + category.showCatecoryName(chosenCategory, categories) + ", containing the following projects: ");		//TODO
+		printer(category.showAllProjectInCategory(chosenCategory, projects, categories));															//TODO project поменял на projects
+//		printer(category.showAllProjectInCategory(chosenCategory - 1, project, projects, categories));
+		printer("Choice Project Number or " + menuCategories + " for exit to Category: ");
 	}
 
 	private void askProject(int[] intSwitch) throws IOException {
-		chosenProject = check.checkNumber(concatArray(category.projectsContain(chosenCategory - 1, categories), intSwitch));							//TODO
+		chosenProject = check.checkNumber(concatArray(category.projectsContain(chosenCategory, categories), intSwitch));							//TODO
 	}
 	
 	private void askAfterProject(int[] intSwitch) throws IOException {
@@ -132,7 +135,7 @@ public class KickstarterS {
 	}
 
 	private void printProject() throws FileNotFoundException {
-		printer(project.showProjectFull(chosenProject - 1, projects.getListProject()));
+		printer(projects.showProjectFull(chosenProject - 1));//TODO project поменял на projects
 		if (project.getFaq().size() != 0){printFaq(project.getFaq());}
 		printer("Choice " + menuProjects + " for exit to Project list.\nChoice " + menuPayment + " to invest in the project:"
 				+ "Have a question? If the info above doesn't help, you can ask the project creator directly - Choice " + menuQuestion + ":");

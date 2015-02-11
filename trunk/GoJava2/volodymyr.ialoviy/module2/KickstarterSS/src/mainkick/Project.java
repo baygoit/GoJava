@@ -14,14 +14,11 @@ public class Project{
 	private int howMuchNeeded;
 	private int howMuchCollected;
 	private int howMuchRemaining;
-	
 	private ArrayList<String> faq = new ArrayList<String>();
-	
-	
+
 	public void setFAQ() throws IOException{
 		InputsConsole question = new InputsConsole();
-		String message = question.enter();
-		faq.add(message);
+		faq.add(question.enter());
 	}
 	
 	public String readProject(ArrayList<Project> listProject, String[] value, int i) throws FileNotFoundException{
@@ -37,30 +34,30 @@ public class Project{
 		return projectID + " " + projectName +  " " + shortDescription + " " + fullDescription + " " + foto + " " + link + " " + howMuchNeeded + " " +  howMuchCollected + " " + howMuchRemaining + "\n";
 	}
 	
-	public String showProjectInShort(int i, Projects projects) throws FileNotFoundException{
-		i -= 1;
-		String s = projects.getListProject().get(i).projectID
-				+ ", " + projects.getListProject().get(i).projectName
-				+ ", " + projects.getListProject().get(i).shortDescription
-				+ ", " + projects.getListProject().get(i).howMuchNeeded
-				+ ", " + projects.getListProject().get(i).howMuchCollected;
-		return s;		
-	}
+//	public String showProjectInShort(int i, Projects projects) throws FileNotFoundException{
+//		i -= 1;
+//		String s = projects.getListProject().get(i).projectID
+//				+ ", " + projects.getListProject().get(i).projectName
+//				+ ", " + projects.getListProject().get(i).shortDescription
+//				+ ", " + projects.getListProject().get(i).howMuchNeeded
+//				+ ", " + projects.getListProject().get(i).howMuchCollected;
+//		return s;		
+//	}
+//	
+//	public String showProjectFull(int i, ArrayList<Project> listProject) throws FileNotFoundException{
+//		String s = "projectID = " + listProject.get(i).projectID
+//					+ "\n projectName: " + listProject.get(i).projectName
+//					+ "\n shortDescription: " + listProject.get(i).shortDescription
+//					+ "\n fullDescription: " + listProject.get(i).fullDescription
+//					+ "\n foto: " + listProject.get(i).foto
+//					+ "\n link: " + listProject.get(i).link
+//					+ "\n howMuchNeeded = " + listProject.get(i).howMuchNeeded
+//					+ "\n howMuchCollected = " + listProject.get(i).howMuchCollected
+//					+ "\n howMuchRemaining = " + listProject.get(i).howMuchRemaining;
+//		return s;
+//	}
 	
-	public String showProjectFull(int i, ArrayList<Project> listProject) throws FileNotFoundException{
-		String s = "projectID = " + listProject.get(i).projectID
-					+ "\n projectName: " + listProject.get(i).projectName
-					+ "\n shortDescription: " + listProject.get(i).shortDescription
-					+ "\n fullDescription: " + listProject.get(i).fullDescription
-					+ "\n foto: " + listProject.get(i).foto
-					+ "\n link: " + listProject.get(i).link
-					+ "\n howMuchNeeded = " + listProject.get(i).howMuchNeeded
-					+ "\n howMuchCollected = " + listProject.get(i).howMuchCollected
-					+ "\n howMuchRemaining = " + listProject.get(i).howMuchRemaining;
-		return s;
-	}
-	
-	public void setDonation(ArrayList<Project> listProject, int amount, int chosenProject){
+	public void setDonation(ArrayList<Project> listProject, int amount, int chosenProject){//TODO убрать листПроджект
 		listProject.get(chosenProject).howMuchCollected += amount;
 		listProject.get(chosenProject).howMuchRemaining -= amount;
 	}

@@ -6,14 +6,17 @@ public class Projects {
 	private ArrayList<Project> listProject = new ArrayList<Project>();
 	private int counterProject;
 	
+	Project project = new Project();
+	ReaderBD reader = new ReaderBD();
+	ArrayList<String[]> projectBD;
+	
+	
 	public String writeAllProjects() throws FileNotFoundException{
 		String s = "";
-		ReaderBD reader = new ReaderBD();
-		ArrayList<String[]> projectBD = reader.read("Projects.properties");
 		int i = 0;
-		Project project = new Project();
+		projectBD = reader.read("Projects.properties");
 		for (String[] value : projectBD) {
-			getListProject().add(new Project());
+			getListProject().add(project);
 			s += project.readProject(getListProject(), value, i);
 		    i++;
 		}
@@ -21,6 +24,30 @@ public class Projects {
 		return s;
 	}
 
+	public String showProjectFull(int numberProject) throws FileNotFoundException{
+		String s = "projectID = " + projectBD.get(numberProject)[0]
+					+ "\n projectName: " + projectBD.get(numberProject)[1]
+					+ "\n shortDescription: " + projectBD.get(numberProject)[2]
+					+ "\n fullDescription: " + projectBD.get(numberProject)[3]
+					+ "\n foto: " + projectBD.get(numberProject)[4]
+					+ "\n link: " + projectBD.get(numberProject)[5]
+					+ "\n howMuchNeeded = " + projectBD.get(numberProject)[6]
+					+ "\n howMuchCollected = " + projectBD.get(numberProject)[7]
+					+ "\n howMuchRemaining = " + projectBD.get(numberProject)[8];
+		return s;
+	}
+	
+	public String showProjectInShort(int i) throws FileNotFoundException{
+		i -= 1;
+		String s = projectBD.get(i)[0]
+				+ ", " + projectBD.get(i)[1]
+				+ ", " + projectBD.get(i)[2]
+				+ ", " + projectBD.get(i)[6]
+				+ ", " + projectBD.get(i)[7];
+		return s;		
+	}
+
+	
 	public ArrayList<Project> getListProject() {
 		return listProject;
 	}
