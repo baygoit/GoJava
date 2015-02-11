@@ -9,7 +9,8 @@ import com.gojava.projects.ProjectStorage;
 
 public class Menu {
     public IO out = new ConsoleIO();
-    public int categoryPosition;
+    public int currentCategory;
+    public int currentProject;
     private int currentLevelPosition;
     private Level1 level1;
     private Level2 level2;
@@ -20,15 +21,15 @@ public class Menu {
 
     private ArrayList<Level> levelsList = new ArrayList<>();
 
-
     public Menu(CategoryStorage categoryStorage, ProjectStorage projectStorage,
             IO iO) {
         this.iO = iO;
         this.level1 = new Level1(categoryStorage);
         this.level2 = new Level2(projectStorage);
         this.level3 = new Level3(projectStorage);
-        this.level4 = new Level4();
+        this.level4 = new Level4(projectStorage);
         level3.setMenu(this);
+        level4.setMenu(this);
         add(level1);
         add(level2);
         add(level3);
@@ -45,18 +46,25 @@ public class Menu {
         if ((nubberForNextLevel == 0 && currentLevelPosition == 1)
                 || (nubberForNextLevel > 0 && currentLevelPosition == 4)) {
             result = "not allowed to go below this level";
-        } 
-        else { 
+        } else {
             Level level;
+            //TODO refactoring
             if (nubberForNextLevel == 0) {
                 currentLevelPosition--;
                 if (currentLevelPosition == 2) {
-                    nubberForNextLevel = categoryPosition;
+                    nubberForNextLevel = currentCategory;
+                }
+                if (currentLevelPosition == 3) {
+                    nubberForNextLevel = currentProject;
                 }
             } else {
                 currentLevelPosition++;
+              //TODO refactoring
                 if (currentLevelPosition == 2) {
-                    categoryPosition = nubberForNextLevel;
+                    currentCategory = nubberForNextLevel;
+                }
+                if (currentLevelPosition == 3) {
+                    currentProject = nubberForNextLevel;
                 }
             }
             level = getCurrentLevel();
@@ -70,7 +78,8 @@ public class Menu {
     }
 
     public void initMenu() {
-        setCurrentLevelPosition(1);;
+        setCurrentLevelPosition(1);
+        ;
         out.print(level1.displayMySelf(currentLevelPosition));
     }
 
@@ -83,15 +92,15 @@ public class Menu {
         }
         return result;
     }
-    
+
     public int getCategoryPosition() {
-        return categoryPosition;
+        return currentCategory;
     }
 
     public void setCategoryPosition(int categoryPosition) {
-        this.categoryPosition = categoryPosition;
+        this.currentCategory = categoryPosition;
     }
-    
+
     public void setCurrentLevelPosition(int currentLevelPosition) {
         this.currentLevelPosition = currentLevelPosition;
     }
