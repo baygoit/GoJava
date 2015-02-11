@@ -1,7 +1,6 @@
 package ua.home.kickstarter.view;
 
 import java.util.List;
-import java.util.Map;
 
 import ua.home.kickstarter.content.Category;
 import ua.home.kickstarter.content.Project;
@@ -29,12 +28,10 @@ public class Display {
 	}
 
 	public void displayCategories() {
-		consoleOutput.output("Выберите категорию :");
-		for (Map.Entry<Integer, Category> pair : categoriesController.passContentToView().entrySet()) {
-			consoleOutput.output(pair.getKey() + " - " + pair.getValue().getName());
-		}
-		consoleOutput.output("[Выберите категорию от 1 до " + categoriesController.passContentToView().size()
-				+ " или нажмите 0 для выхода из программы]\n ");
+		StringBuilder displayCategories = new StringBuilder();
+		displayCategories.append("Выберите категорию :\n").append(categoriesController.passContentToView()).append("[Выберите категорию от 1 до ")
+		.append(categoriesController.passCategoriesSizeToView()).append(" или нажмите 0 для выхода из программы]\n ");
+		consoleOutput.output(displayCategories.toString());			
 	}
 
 	public void displaySelectedCategoryName(Category category) {
