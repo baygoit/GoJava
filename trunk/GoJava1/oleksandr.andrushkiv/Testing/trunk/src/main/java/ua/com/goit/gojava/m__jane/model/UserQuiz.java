@@ -1,8 +1,11 @@
 package ua.com.goit.gojava.m__jane.model;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
 import ua.com.goit.gojava.m__jane.model.answer.Answer;
+import ua.com.goit.gojava.m__jane.model.question.Question;
 
 
 public class UserQuiz {
@@ -15,6 +18,23 @@ public class UserQuiz {
 	//private QuestionService questionService;
 	
 	private User user;
+	
+	
+	public List<Question> getQuestionList(){
+		List<Question> arrayList = new ArrayList<>();		
+		for (Answer answer : answerList) {
+			arrayList.add(answer.getQuestion());
+		}
+		return arrayList;
+	}
+	
+	//TODO think how count result of UserQuiz
+	//and improve this method
+	public void checkUserQuiz() {
+		for (Answer answer : answerList) {
+			answer.checkAnswer();
+		}
+	}
 	
 	
 	/*
