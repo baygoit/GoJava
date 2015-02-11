@@ -1,10 +1,8 @@
 package ua.com.goit.gojava.andriidnikitin.service;
 
 import java.util.Date;
-import java.util.List;
 
-import ua.com.goit.gojava.andriidnikitin.model.Client;
-import ua.com.goit.gojava.andriidnikitin.model.OrderStatus;
+import ua.com.goit.gojava.andriidnikitin.model.util.OrderStatus;
 
 public interface HandleOrder {
 	

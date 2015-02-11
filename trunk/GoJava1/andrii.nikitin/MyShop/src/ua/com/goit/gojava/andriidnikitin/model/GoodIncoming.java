@@ -1,6 +1,16 @@
 package ua.com.goit.gojava.andriidnikitin.model;
 
+import java.math.BigDecimal;
+
 public class GoodIncoming {
+	
+	private Integer id;
+	
+	private Good good;
+	
+	private Integer amount;
+	
+	private BigDecimal price;
 	
 	public Integer getId() {
 		return id;
@@ -20,8 +30,13 @@ public class GoodIncoming {
 	public void setAmount(Integer amount) {
 		this.amount = amount;
 	}
-	private Integer id;
-	private Good good;
-	private Integer amount;
+	
+	public BigDecimal getPrice() {
+		return price;
+	}
+
+	public void setPrice(BigDecimal price) {
+		this.price = price;
+	}	
 
 }

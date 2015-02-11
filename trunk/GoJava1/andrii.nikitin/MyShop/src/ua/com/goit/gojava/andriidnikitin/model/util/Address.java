@@ -1,10 +1,10 @@
-package ua.com.goit.gojava.andriidnikitin.model;
+package ua.com.goit.gojava.andriidnikitin.model.util;
 
 public class Address {
 	
 	private Integer postalCode;
 	
-	private String country;
+	private Country country;
 	
 	private String city;
 	
@@ -20,11 +20,11 @@ public class Address {
 		this.postalCode = postalCode;
 	}
 
-	public String getCountry() {
+	public Country getCountry() {
 		return country;
 	}
 
-	public void setCountry(String country) {
+	public void setCountry(Country country) {
 		this.country = country;
 	}
 

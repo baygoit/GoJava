@@ -2,6 +2,8 @@ package ua.com.goit.gojava.andriidnikitin.model;
 
 import java.util.List;
 
+import ua.com.goit.gojava.andriidnikitin.model.util.OrderStatus;
+
 public class Order {
 	
 	private Client client;
