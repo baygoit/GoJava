@@ -8,27 +8,24 @@ import ua.home.kickstarter.content.Project;
 import ua.home.kickstarter.controller.CategoriesController;
 import ua.home.kickstarter.controller.ProjectsController;
 import ua.home.kickstarter.controller.QuotationsController;
-import ua.home.kickstarter.model.ProjectStorage;
 
 public class Display {
 
-	private QuotationsController quotations;
+	private QuotationsController quotationsController;
 	private CategoriesController categoriesController;
-	private ProjectsController projects;
+	private ProjectsController projectsController;
 	private ConsoleOutput consoleOutput;
-	private ProjectStorage projectStorage;
 
 	public Display(QuotationsController quotations, CategoriesController categoriesController,
 			ProjectsController projects, ConsoleOutput consoleOutput) {
-		this.projectStorage = new ProjectStorage();
 		this.consoleOutput = consoleOutput;
-		this.quotations = quotations;
+		this.quotationsController = quotations;
 		this.categoriesController = categoriesController;
-		this.projects = projects;
+		this.projectsController = projects;
 	}
 
 	public void displayQuote() {
-		consoleOutput.output(quotations.passRandomQuoteToView().getQuote());
+		consoleOutput.output(quotationsController.passRandomQuoteToView().getQuote());
 	}
 
 	public void displayCategories() {
@@ -41,25 +38,23 @@ public class Display {
 	}
 
 	public void displaySelectedCategoryName(Category category) {
-
 		consoleOutput.output("Вы выбрали категорию " + category.getName());
 	}
 
 	public void displayProjects(Category category) {
 
 		int projectNumber = 1;
-		for (Project project : projects.passSpecificContentToView(category)) {
+		for (Project project : projectsController.passSpecificContentToView(category)) {
 			consoleOutput.output(projectNumber + project.getShortInfo());
 			projectNumber++;
 		}
-		consoleOutput.output("[Выберите проект от 1 до " + projects.passSpecificContentToView(category).size()
+		consoleOutput.output("[Выберите проект от 1 до "
+				+ projectsController.passSpecificContentToView(category).size()
 				+ " или нажмите 0 для возврата к выбору категорий]\n ");
 	}
 
 	public void displaySpecificProject(int i, Category category) throws IndexOutOfBoundsException {
-
-		List<Project> projects = projectStorage.getSpecificContent(category);
-
+		List<Project> projects = projectsController.passSpecificContentToView(category);
 		consoleOutput.output(projects.get(i - 1).getFullInfo());
 		consoleOutput.output("0 - возврат в категорию " + category.getName());
 	}
