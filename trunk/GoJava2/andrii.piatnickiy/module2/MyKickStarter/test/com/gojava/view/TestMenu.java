@@ -45,7 +45,7 @@ public class TestMenu {
 
     @Test
     public void shoulNotAlLowed_WhenTryGoDownOutOfMenu() {
-        menu.setCurrentLevelPosition(3);
+        menu.setCurrentLevelPosition(4);
         String actual = menu.nextLevel(1);
         assertEquals("not allowed to go below this level", actual);
     }

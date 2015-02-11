@@ -14,10 +14,12 @@ public class Menu {
     private Level1 level1;
     private Level2 level2;
     Level3 level3;
+    private Level4 level4;
 
     public IO iO;
 
     private ArrayList<Level> levelsList = new ArrayList<>();
+
 
     public Menu(CategoryStorage categoryStorage, ProjectStorage projectStorage,
             IO iO) {
@@ -25,10 +27,12 @@ public class Menu {
         this.level1 = new Level1(categoryStorage);
         this.level2 = new Level2(projectStorage);
         this.level3 = new Level3(projectStorage);
+        this.level4 = new Level4();
         level3.setMenu(this);
         add(level1);
         add(level2);
         add(level3);
+        add(level4);
         initMenu();
     }
 
@@ -39,7 +43,7 @@ public class Menu {
     public String nextLevel(int nubberForNextLevel) {
         String result;
         if ((nubberForNextLevel == 0 && currentLevelPosition == 1)
-                || (nubberForNextLevel > 0 && currentLevelPosition == 3)) {
+                || (nubberForNextLevel > 0 && currentLevelPosition == 4)) {
             result = "not allowed to go below this level";
         } 
         else { 
