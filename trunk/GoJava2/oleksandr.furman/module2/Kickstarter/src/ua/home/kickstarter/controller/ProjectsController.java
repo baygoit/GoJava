@@ -13,12 +13,21 @@ private ProjectStorage projectStorage;
 	public ProjectsController() {
 		projectStorage = new ProjectStorage();
 	}
-	
+	 
 	public Map<Category, List<Project>> passContentToView() {
 		return projectStorage.getContent();
 	}
 	
-	public List<Project> passSpecificContentToView(Category category) {
+	public String passSpecificContentToView(Category category) {
 		return projectStorage.getSpecificContent(category);
 	}
+	
+	public String passSpecificProjectToView(int index, Category category) {
+		return projectStorage.getSpecificProjects(index, category);
+	}
+
+	public int passSpecificCategorySize(Category category) {
+		return projectStorage.projectsInSpecificCategorySize(category);
+	}
 }
+ 

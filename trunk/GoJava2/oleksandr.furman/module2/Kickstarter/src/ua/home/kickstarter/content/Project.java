@@ -11,7 +11,7 @@ public class Project {
 	private String linksToVideo;
 	private String questionAnswers;
 	private Category category;
-
+ 
 	public Project(String name, String description, int goal, int daysLeft, String linksToVideo) {
 		this.name = name;
 		this.description = description;

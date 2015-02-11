@@ -41,5 +41,4 @@ public class QuotationsStorage {
 		int i = new Random().nextInt(quotationsList.size());
 		return quotationsList.get(i);
 	}
-
 }

@@ -20,7 +20,6 @@ import ua.home.kickstarter.factory.StorageFactory;
 public class ProjectStorage {
 
 	private List<Project> projectList;
-
 	private Map<Category, List<Project>> projects;
 	CategoryStorage categoryStorage = new StorageFactory().getCategoryStorage();
 
@@ -33,19 +32,24 @@ public class ProjectStorage {
 	}
 
 	private void jsonProjectsToList() {
+		Gson gson = new Gson();
+		projectList = new ArrayList<Project>();
+		for (JsonElement obj : readJsonFromHardDrive()) {
+			Project project = gson.fromJson(obj, Project.class);
+			projectList.add(project);
+		}
+	}
+
+	private JsonArray readJsonFromHardDrive() {
+		JsonArray jArrayProjects = null;
 		try {
 			BufferedReader br = new BufferedReader(new FileReader("d:\\Projects.json"));
 			JsonParser parser = new JsonParser();
-			JsonArray jArrayProjects = parser.parse(br).getAsJsonArray();
-			Gson gson = new Gson();
-			projectList = new ArrayList<Project>();
-			for (JsonElement obj : jArrayProjects) {
-				Project project = gson.fromJson(obj, Project.class);
-				projectList.add(project);
-			}
+			jArrayProjects = parser.parse(br).getAsJsonArray();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
+		return jArrayProjects;
 	}
 
 	private void setProjectsCategories() {
@@ -84,7 +88,21 @@ public class ProjectStorage {
 		return projects;
 	}
 
-	public List<Project> getSpecificContent(Category category) {
-		return projects.get(category);
+	public String getSpecificContent(Category category) {
+		int projectNumber = 1;
+		StringBuilder projectsContent = new StringBuilder();
+		for (Project project : projects.get(category)) {
+			projectsContent.append(projectNumber).append(project.getShortInfo()).append("\n");
+			projectNumber++;
+		}
+		return projectsContent.toString();
+	}
+
+	public String getSpecificProjects(int index, Category category) {
+		return projects.get(category).get(index - 1).getFullInfo();
+	}
+
+	public int projectsInSpecificCategorySize(Category category) {
+		return projects.get(category).size();
 	}
 }
