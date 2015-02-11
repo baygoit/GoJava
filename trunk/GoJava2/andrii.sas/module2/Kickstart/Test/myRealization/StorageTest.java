@@ -1,6 +1,9 @@
 package myRealization;
 
+import java.util.Random;
+
 import org.junit.Test;
+
 import static org.mockito.Mockito.*;
 
 public class StorageTest {
@@ -10,17 +13,18 @@ public class StorageTest {
 		//given
 		Output out = mock(Output.class);
 		Input in = mock(Input.class);
-		Quote quote = mock(Quote.class);
+		Random rand = mock(Random.class);
+		Quote quote = new QuoteGenerator(rand);
 		Storage storage = new Storage(out, in, quote);
 		
 		//when
 		
-		when(quote.generateQuote()).thenReturn("quote");
+		when(rand.nextInt()).thenReturn(0);
 		when(in.readChoice()).thenReturn(2, 1, 1, 0, 2, 0, 4, 0);
 		storage.initiate();
 		
 		//then
-		verify(out).println("quote");
+		verify(out).println("If you don't know where you're going, you will probably end up somewhere else. (c) Laurence J. Peter");
 		verify(out, times(2)).println("1 - Sport, 2 - Science, 3 - Music\nWhat are you interested in? Pleace, make your choice:");
 		verify(out).println("You chose - Science");
 		verify(out, times(2)).println("1) Name - Space Warning, Description - Discover the univerce, Money we need - 156540, Money we have - 125140, Days left - 42");

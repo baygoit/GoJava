@@ -1,13 +1,12 @@
 package myRealization;
 
 public class Kickstart {
-	private int choice;
-	private int projectChoice; 
 	private Output output;
 	private Input input;
 	private Categories categories;
 	private Projects projects;
 	private Quote quote;
+	private Category category;
 	 
 	public Kickstart(Output output, Input input, Categories categories, Projects projects, Quote quote) {
 		this.output = output;
@@ -27,13 +26,16 @@ public class Kickstart {
 	}
 
 	public void showChoice(int choice) {
-		this.choice = choice;
-		output.println("You chose - " + categories.readCategory(choice).getName());
+		category = categories.readCategory(choice);
+		output.println("You chose - " + category.getName());
+	}
+	
+	public void receiveProjectsByCategory() {
+		projects.chooseProjects(category);
 	}
 
 	public void showProjects() {
 		int j = 1;
-		projects.chooseProjects(categories.readCategory(choice));
 		for (String project : projects.writeProjects()){
 			output.println(j + ")" + project);
 			j++;
@@ -41,8 +43,7 @@ public class Kickstart {
 		output.println("If you want to return press \"0\"");
 	}
 
-	public void showChosenProject(int choice) {
-		projectChoice = choice;
+	public void showChosenProject(int projectChoice) {
 		output.println("--------------------------------------------------");
 		output.println("You chose:"
 				+ (projects.readProject(projectChoice)));
@@ -52,91 +53,84 @@ public class Kickstart {
 		output.println("--------------------------------------------------");
 	}
 	
-	public int checkForEnteringLetters(){
-		int l = 0;
-		while(true){
-			try {
-				l = input.readChoice();
-				break;
-			} catch (Exception e){
-				output.println("Error!! You must enter numbers! - Try again:");
-			}
-		}
-		return l;
-	}
-	
-	public int checkForNotExistingCategory(){
-		MenuPart part = new MenuPart() {
+	public void buildMenu(){
+		printQuote();
+		Menu menu = new Menu(input, output) {
 			
 			@Override
-			void typeError() {
+			public void displayItems() {
+				showList();
+			}
+			
+			@Override
+			public void displayError() {
 				output.println("Error!! There are no such category - Try again:");
 			}
-			
+
 			@Override
-			int inputNumber() {
-				return checkForEnteringLetters();
+			public void displaySelectedItems() {
+				showChoice(getCheckedValue());
+				receiveProjectsByCategory();
 			}
-			
+
 			@Override
-			Object getObject(int l) {
-				return  categories.readCategory(l);
+			public void toNextLevel() {
+				goToProjectsMenu();
 			}
 		};
-		return part.checkForCorrectInput();
+		menu.run(categories.getLenth());
+		output.println("Thanks for using our program, Goodbye!");
 	}
-
-	public int checkForNotExistingProject(){
-		MenuPart part = new MenuPart() {
+	
+	public void goToProjectsMenu(){
+		Menu menu = new Menu(input, output) {
 			
 			@Override
-			void typeError() {
+			public void displayItems() {
+				showProjects();
+			}
+			
+			@Override
+			public void displayError() {
 				output.println("Error!! There are no such project - Try again:");
 			}
 			
 			@Override
-			int inputNumber() {
-				return checkForEnteringLetters();
+			public void displaySelectedItems() {
+				showChosenProject(getCheckedValue());
 			}
 			
 			@Override
-			Object getObject(int l) {
-				return  projects.readObject(l);
+			public void toNextLevel() {
+				goToProjecDetails();
 			}
 		};
-		return part.checkForCorrectInput();
+		menu.run(projects.getLenth());
 	}
-	
-	public void returnToProjects(int g) {
-		while (g != 0){
-			output.println("Error!! You must enter 0 \nPlease, try again");
-			g = checkForEnteringLetters();
-		}
-		showProjects();
-	}
-	
-	public void navigate(int k) {
-		while (k >= 0){
-			showChosenProject(k);
-			output.println("Return - \"0\"");
-			returnToProjects(checkForEnteringLetters());
-			k = checkForNotExistingProject();
-		}
-	}
-	
-	public void buildMenu(){
-		printQuote();
-		while (true){
-			showList();
-			int intForExit = checkForNotExistingCategory();
-			if (intForExit < 0){
-				break;
-			} else {
-				showChoice(intForExit);
+
+	public void goToProjecDetails(){
+		Menu menu = new Menu(input, output) {
+			
+			@Override
+			public void displayItems() {
+				output.println("Return - \"0\"");
 			}
-			showProjects();
-			navigate(checkForNotExistingProject());
-		}
-		output.println("Thanks for using our program, Goodbye!");
+			
+			@Override
+			public void displayError() {
+				output.println("Error!! You must enter 0 \nPlease, try again");
+			}
+			
+			@Override
+			public void displaySelectedItems() {
+				//TODO
+			}
+			
+			@Override
+			public void toNextLevel() {
+				//TODO
+			}
+		};
+		menu.run(0);
 	}
 }

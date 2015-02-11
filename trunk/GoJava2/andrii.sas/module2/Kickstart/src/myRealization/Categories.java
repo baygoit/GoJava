@@ -13,7 +13,7 @@ public class Categories {
 	}
 	
 	public boolean isLastCategory() {
-		return i == categories.size();
+		return i == getLenth();
 	}
 	
 	public void writeLastCategory(Category category) {
@@ -46,5 +46,8 @@ public class Categories {
 		return categories.get(index);
 	}
 	
+	public int getLenth(){
+		return categories.size();
+	}
 	
 }

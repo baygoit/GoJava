@@ -55,4 +55,7 @@ public class Projects {
 		return categoryProjects.get(index);
 	}
 	
+	public int getLenth(){
+		return categoryProjects.size();
+	}
 }
