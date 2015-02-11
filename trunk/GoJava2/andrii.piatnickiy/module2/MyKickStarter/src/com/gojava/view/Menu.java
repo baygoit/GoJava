@@ -33,7 +33,7 @@ public class Menu {
     }
 
     public void printNextLevel(int nubberForNextLevel) {
-        System.out.println(nextLevel(nubberForNextLevel));
+        out.print(nextLevel(nubberForNextLevel));
     }
 
     public String nextLevel(int nubberForNextLevel) {
@@ -65,7 +65,7 @@ public class Menu {
     }
 
     public void initMenu() {
-        currentLevelPosition = 1;
+        setCurrentLevelPosition(1);;
         out.print(level1.displayMySelf(currentLevelPosition));
     }
 
