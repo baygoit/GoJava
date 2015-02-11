@@ -16,6 +16,7 @@ public class KickstarterS {
 	private int choiceTo;
 	private int chosenPay;
 	Check check = new Check(new InputsConsole(), new OutputConsole());
+	Output out = new OutputConsole();
 	Categories categories = new Categories();
 	Category category = new Category();
 	Projects projects = new Projects();
@@ -117,13 +118,13 @@ public class KickstarterS {
 	}
 	
 	private void printProjects() throws FileNotFoundException {
-		printer("Your chosen category: " + category.showCatecoryName(chosenCategory - 1, categories) + ", containing the following projects: ");
-		printer(category.showAllProjectInCategory(chosenCategory - 1, project, projects, categories));
+		printer("Your chosen category: " + category.showCatecoryName(chosenCategory - 1, categories) + ", containing the following projects: ");		//TODO
+		printer(category.showAllProjectInCategory(chosenCategory - 1, project, projects, categories));													//TODO
 		printer("Choice Project Number or " + menuCategories + " for exit to Category: ");		
 	}
 
 	private void askProject(int[] intSwitch) throws IOException {
-		chosenProject = check.checkNumber(concatArray(category.projectsContain(chosenCategory - 1, categories), intSwitch));
+		chosenProject = check.checkNumber(concatArray(category.projectsContain(chosenCategory - 1, categories), intSwitch));							//TODO
 	}
 	
 	private void askAfterProject(int[] intSwitch) throws IOException {
@@ -166,7 +167,6 @@ public class KickstarterS {
 	}
 	
 	private void printer(String string){
-		Output out = new OutputConsole();
 		out.print(string);
 	}
 	

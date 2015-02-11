@@ -13,6 +13,9 @@ public class Menu {
 	
 	Check check = new Check(new InputsConsole(), new OutputConsole());
 	
+	private int menu;
+	private int chosen;
+	
 	private void menu(){
 		selectionBorder();
 		
@@ -38,7 +41,6 @@ public class Menu {
 	
 	private void ask() {
 //		askProject(intSwitch);
-		
 	}
 	
 	private void condition() {
