@@ -1,4 +1,5 @@
 package mainkick;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -12,6 +13,8 @@ public class KickstarterS {
 	private int menuPayment = 555;
 	private int menuQuestion = 666;
 	private int menu = menuCategories;
+	private int choiceTo;
+	private int chosenPay;
 	Check check = new Check(new InputsConsole(), new OutputConsole());
 	Categories categories = new Categories();
 	Category category = new Category();
@@ -22,49 +25,52 @@ public class KickstarterS {
 		Quotes quote = new Quotes();
 		printer(quote.getQuote());
 		projects.writeAllProjects();
-		switcher();
+		categories();
 	}
 		
 	private void categories() throws InterruptedException, IOException{
-		printer(categories.readAllCatecories());
-		printer("Choice Category Number: ");
-		chosenCategory = check.checkNumber(category.kickContainCategory(categories));
+		printCategories();
+		askCategory();
+		
 		if (sleep(chosenCategory)){switcher();}
-		printer("Your chosen category: " + category.showCatecoryName(chosenCategory - 1, categories) + ", containing the following projects: ");
+		
 		menu = menuProjects;
 		switcher();
 	}
 
 	private void projects() throws IOException, InterruptedException{
 		int[] intSwitch = {menuCategories};
-		printer(category.showAllProjectInCategory(chosenCategory - 1, project, projects, categories));
-		printer("Choice Project Number or " + menuCategories + " for exit to Category: ");
-		chosenProject = check.checkNumber(concatArray(category.projectsContain(chosenCategory - 1, categories), intSwitch));
+		
+		printProjects();
+		askProject(intSwitch);
+		
 		if (sleep(chosenProject)){switcher();}
+		
 		if (compare(intSwitch, chosenProject)) {menu = menuCategories; switcher();}
+		
 		menu = menuProject;
 		switcher();
 	}
 
 	private void project() throws IOException, InterruptedException{
 		int[] intSwitch = {menuProjects, menuPayment, menuQuestion};
-		printer(project.showProjectFull(chosenProject - 1, projects.getListProject()));
-		if (project.getFaq().size() != 0){printFaq(project.getFaq());}
-		printer("Choice " + menuProjects + " for exit to Project list.\nChoice " + menuPayment + " to invest in the project:");
-		printer("Have a question? If the info above doesn't help, you can ask the project creator directly - Choice " + menuQuestion + ":");
-		int choiceTo = check.checkNumber(intSwitch);
+		
+		printProject();
+		askAfterProject(intSwitch);
+		
 		if (sleep(choiceTo)){switcher();}
+		
 		if (compare(intSwitch, choiceTo)) {menu = choiceTo; switcher();}
 	}
-			
+	
 	private void payment() throws IOException, InterruptedException{
 		int[] intSwitch = {0, 1, 2, 3};
-		printer("0 - No thanks, I just want to help the project."
-				+ "1 - 1$ = OUR UNDYING LOVE"
-				+ "2 - 10$ = HEY… NICE SHIRT"
-				+ "3 - 40$ = KICKSTARTER EXCLUSIVE");
-		int chosenPay = check.checkNumber(intSwitch);
+		
+		printChoicePayment();
+		askHowMuchPay(intSwitch);
+
 		if (sleep(chosenPay)){switcher();}
+		
 		printer("Enter your name:");
 		String name = check.checkName();
 		if (name.equals(Integer.toString(magic))){sleep(Integer.parseInt(name));switcher();}
@@ -76,14 +82,17 @@ public class KickstarterS {
 			chosenPay = check.checkAmount();
 			if (sleep(chosenPay)){switcher();}
 		}
+		
 		project.setDonation(projects.getListProject(), chosenPay, chosenProject - 1);
+		
 		menu = menuProject;
 		switcher();
 	}
 	
 	private void question() throws IOException, InterruptedException{
-		printer("Enter your question:");
-		project.setFAQ();
+		printQuestion();
+		askQuestion();
+
 		menu = menuProject;
 		switcher();
 	}
@@ -96,6 +105,55 @@ public class KickstarterS {
 			case 555: payment(); break;
 			case 666: question(); break;
 		}
+	}
+	
+	private void printCategories() throws FileNotFoundException {
+		printer(categories.readAllCatecories());
+		printer("Choice Category Number: ");		
+	}
+
+	private void askCategory() throws IOException {
+		chosenCategory = check.checkNumber(category.kickContainCategory(categories));
+	}
+	
+	private void printProjects() throws FileNotFoundException {
+		printer("Your chosen category: " + category.showCatecoryName(chosenCategory - 1, categories) + ", containing the following projects: ");
+		printer(category.showAllProjectInCategory(chosenCategory - 1, project, projects, categories));
+		printer("Choice Project Number or " + menuCategories + " for exit to Category: ");		
+	}
+
+	private void askProject(int[] intSwitch) throws IOException {
+		chosenProject = check.checkNumber(concatArray(category.projectsContain(chosenCategory - 1, categories), intSwitch));
+	}
+	
+	private void askAfterProject(int[] intSwitch) throws IOException {
+		choiceTo = check.checkNumber(intSwitch);		
+	}
+
+	private void printProject() throws FileNotFoundException {
+		printer(project.showProjectFull(chosenProject - 1, projects.getListProject()));
+		if (project.getFaq().size() != 0){printFaq(project.getFaq());}
+		printer("Choice " + menuProjects + " for exit to Project list.\nChoice " + menuPayment + " to invest in the project:"
+				+ "Have a question? If the info above doesn't help, you can ask the project creator directly - Choice " + menuQuestion + ":");
+	}
+	
+	private void askHowMuchPay(int[] intSwitch) throws IOException {
+		chosenPay = check.checkNumber(intSwitch);		
+	}
+
+	private void printChoicePayment() {
+		printer("0 - No thanks, I just want to help the project."
+				+ "1 - 1$ = OUR UNDYING LOVE"
+				+ "2 - 10$ = HEY… NICE SHIRT"
+				+ "3 - 40$ = KICKSTARTER EXCLUSIVE");		
+	}
+	
+	private void askQuestion() throws IOException {
+		project.setFAQ();		
+	}
+
+	private void printQuestion() {
+		printer("Enter your question:");		
 	}
 	
 	private Boolean sleep(int m) throws InterruptedException, IOException{
