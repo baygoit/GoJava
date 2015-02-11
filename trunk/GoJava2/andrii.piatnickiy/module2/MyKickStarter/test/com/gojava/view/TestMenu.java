@@ -62,14 +62,14 @@ public class TestMenu {
     }
 
     @Test
-    public void shoulGetStringFromCurrentLevel_FromLevel2ToLevel3() {
+    public void shoulGetStringFromCurrentLevel_DownFromLevel2ToLevel3() {
         initCategories();
         initProjects(projectStorage);
         menu.setCurrentLevelPosition(2);
         menu.setCategoryPosition(1);
         String actual = menu.nextLevel(1);
         assertEquals(
-                "Project Name: Bicycle\nDescription: Bicycle description\nNeed Sum: 10000\nCurrent Sum: 100\nDays Left: 10\nProjectHistory: History\nLinkOnvideo: Link on video\nQuestions and answers: Questions and answers\n\n",
+                "Project Name: Bicycle\nDescription: Bicycle description\nNeed Sum: 10000\nCurrent Sum: 100\nDays Left: 10\nProjectHistory: History\nLinkOnvideo: Link on video\nQuestions and answers: Questions and answers\n\n1) Invest in the project",
                 actual);
     }
 
