@@ -19,6 +19,9 @@ public class Menu {
 
     public IO iO;
 
+    ClientInteraction clientInteraction = new ClientInteraction();
+    
+    
     private ArrayList<Level> levelsList = new ArrayList<>();
 
     public Menu(CategoryStorage categoryStorage, ProjectStorage projectStorage,
