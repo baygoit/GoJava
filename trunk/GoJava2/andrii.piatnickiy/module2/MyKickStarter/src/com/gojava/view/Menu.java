@@ -14,7 +14,7 @@ public class Menu {
     private Level1 level1;
     private Level2 level2;
     Level3 level3;
-    private Level4 level4;
+    Level4 level4;
 
     public IO iO;
 
