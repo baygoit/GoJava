@@ -69,7 +69,17 @@ public class TestMenu {
         menu.setCurrentLevelPosition(2);
         menu.setCategoryPosition(1);
         String actual = menu.nextLevel(1);
-        assertEquals("Project Name: Bicycle\nDescription: Bicycle description\nNeed Sum: 10000\nCurrent Sum: 100\nDays Left: 10\nProjectHistory: History\nLinkOnvideo: Link on video\nQuestions and answers: Questions and answers\n\n",
+        assertEquals(
+                "Project Name: Bicycle\nDescription: Bicycle description\nNeed Sum: 10000\nCurrent Sum: 100\nDays Left: 10\nProjectHistory: History\nLinkOnvideo: Link on video\nQuestions and answers: Questions and answers\n\n",
                 actual);
+    }
+
+    @Test
+    public void shouldLevelUp_WhenType0() {
+        initCategories();
+        initProjects(projectStorage);
+        menu.setCurrentLevelPosition(2);
+        String actual = menu.nextLevel(0);
+        assertEquals("1) Sport\n2) Car\n3) Devices\n", actual);
     }
 }
