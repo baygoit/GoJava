@@ -1,7 +1,6 @@
 package ua.com.goit.gojava1.lslayer.hackit2;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -60,6 +59,47 @@ public class BoomTest {
             assertEquals("explode action. Tool needed", e.getMessage());
         }
 
+        arg.tool = bomb;
+        boom.setParameters(arg);
+        try {
+            result = boom.execute();
+        } catch (HackitWrongParameterException e) {
+            assertEquals("explode action. Target needed", e.getMessage());
+        }
+
+        
+        arg.targetActor = targetActor;
+        boom.setParameters(arg);
+        try {
+            result = boom.execute();
+        } catch (HackitWrongParameterException e) {
+            fail(e.getMessage());
+        }
+        assertTrue(result.isSuccess());
+        assertEquals("DeadMen exploded!", result.getResultMessage());
+
+        
+        arg.targetActor = null;
+        arg.targetGear = breakable;
+        boom.setParameters(arg);
+        try {
+            result = boom.execute();
+        } catch (HackitWrongParameterException e) {
+            fail(e.getMessage());
+        }
+        assertTrue(result.isSuccess());
+        assertEquals("ScanMaster exploded!", result.getResultMessage());
+        
+        arg.targetGear = unbreakable;
+        boom.setParameters(arg);
+        try {
+            result = boom.execute();
+        } catch (HackitWrongParameterException e) {
+            fail(e.getMessage());
+        }
+        assertFalse(result.isSuccess());
+        assertEquals("Concrete stay alive!", result.getResultMessage());
+        
     }
 
 }

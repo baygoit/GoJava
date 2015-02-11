@@ -4,6 +4,8 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import ua.com.goit.gojava1.lslayer.hackit2.action.SimpleLookAction;
+import ua.com.goit.gojava1.lslayer.hackit2.actor.HumanControlledCharacter;
 import ua.com.goit.gojava1.lslayer.hackit2.gear.hardware.devices.ScanDevice;
 
 public class GameSessionTest {
@@ -32,8 +34,34 @@ public class GameSessionTest {
     }
     
     @Test(expected=HackitWrongParameterException.class)
-    public void testGameSessionException() throws Exception {
+    public void testGameSessionWrongStuffException() throws Exception {
         GameSession session = GameSession.getInstance();
         session.addStuff(null);
+    }
+    
+    @Test
+    public void testGameSessionWrongActionException() {
+        GameSession session = GameSession.getInstance();
+        try {
+            session.addAction(null, new SimpleLookAction());
+        } catch (HackitWrongParameterException e) {
+            assertEquals("Nobody can't act!", e.getMessage());
+        }
+
+        try {
+            session.addAction(new HumanControlledCharacter("MeMe"), null);
+        } catch (HackitWrongParameterException e) {
+            assertEquals("No action provided!", e.getMessage());
+        }
+    }
+    
+    @Test
+    public void testWrongActorAddition() {
+        GameSession session = GameSession.getInstance();
+        try {
+            session.addGamer(null);
+        } catch (HackitWrongParameterException e) {
+            assertEquals("Where is actor?", e.getMessage());
+        }
     }
 }

@@ -49,6 +49,24 @@ public class MultiplayerTest {
         ActionResult res1 = session.getResult(gamerWantedToInfo);
         //Target actor has no attributes, so info action result should be empty
         assertEquals("", res1.getResultMessage());
+        
+        //Testing exception during tick
+        scanPo.tool = null;
+        scanAction.setParameters(scanPo);
+        try {
+            session.addAction(gamerWantedToScan, scanAction);
+        } catch (HackitWrongParameterException e) {
+            fail(e.getMessage());
+        }
+        try {
+            session.goTick();
+        } catch (HackitWrongParameterException e) {
+            assertEquals("scan action. Tool needed", e.getMessage());
+        }
+    }
+    
+    @Test
+    public void testExceptionDuringMultiplay() {
     }
 
 }
