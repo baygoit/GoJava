@@ -15,19 +15,16 @@ public class Menu {
 	
 	private void menu(){
 		selectionBorder();
+		
 		print();
 		
-//		ask();
-		choice = check.parameter;
+		ask();
 		
-//		condition();
-		if (sleep(choice)){switcher();}
+		if (sleep(chosenProject)){switcher();}
 		
+		condition();
 		
-		print2();
-		
-//		transition();
-		menu = menuProjects;
+		menu = menuProject;
 		switcher();
 	}
 	
@@ -36,31 +33,18 @@ public class Menu {
 	}
 
 	private void print() {
-//		printer(categories.readAllCatecories());
-//		printer("Choice Category Number: ");
-		
+//		printProjects();
 	}
 	
 	private void ask() {
-//		chosenCategory = check.checkNumber(category.kickContainCategory(categories));
+//		askProject(intSwitch);
 		
 	}
 	
 	private void condition() {
-//		if (sleep(chosenCategory)){switcher();};
+//		if (compare(intSwitch, chosenProject)) {menu = menuCategories; switcher();}
 		
 	}
-	
-	private void print2() {
-//		printer("Your chosen category: " + category.showCatecoryName(chosenCategory - 1, categories) + ", containing the following projects: ");
-		
-	}
-	
-	private void transition() {
-//		menu = menuProjects;
-//		switcher();		
-	}
-
 	
 	private void switcher() throws InterruptedException, IOException{
 //		switch(menu){
