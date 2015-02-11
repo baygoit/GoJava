@@ -13,13 +13,7 @@ public class Level3Test {
     ProjectStorage projectStorage = new ProjectStorage();
     CategoryStorage categoryStorage =  new CategoryStorage();
     Menu menu = new Menu(categoryStorage, projectStorage, new ConsoleIO());
-    
-    @Test
-    public void shouldGetNoProjects_WhenDisplayMySelf() {
-    String actual = menu.level3.displayMySelf(1);
-    assertEquals("", actual);
-    }
-    
+
      @Test
      public void shouldGetOneProjects_WhenDisplayMySelf() {
          menu.setCategoryPosition(1);
@@ -31,7 +25,11 @@ public class Level3Test {
                  actual);
      }
      
-
+   @Test
+   public void shouldGetNoProjects_WhenDisplayMySelf() {
+   String actual = menu.level3.displayMySelf(1);
+   assertEquals("", actual);
+   }
      
      
 }
