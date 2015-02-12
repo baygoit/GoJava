@@ -23,8 +23,8 @@ public class InvestInteraction implements Interactionable {
     }
 
     public void displayInteractionSet() {
-        // name();
-        // bankAccoun();
+         name();
+         bankAccoun();
         displayAmmountType();
         choseAmmount();
     }
