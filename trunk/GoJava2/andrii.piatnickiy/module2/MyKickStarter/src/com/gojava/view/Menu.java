@@ -19,10 +19,11 @@ public class Menu {
 
     public IO iO;
 
-    ClientInteraction clientInteraction = new ClientInteraction();
+    
     
     
     private ArrayList<Level> levelsList = new ArrayList<>();
+    public ClientInteraction clientInteraction;
 
     public Menu(CategoryStorage categoryStorage, ProjectStorage projectStorage,
             IO iO) {
@@ -38,8 +39,11 @@ public class Menu {
         add(level3);
         add(level4);
         initMenu();
+        this.clientInteraction = new ClientInteraction(this, projectStorage);
     }
 
+    
+    
     public void printNextLevel(int nubberForNextLevel) {
         out.print(nextLevel(nubberForNextLevel));
     }

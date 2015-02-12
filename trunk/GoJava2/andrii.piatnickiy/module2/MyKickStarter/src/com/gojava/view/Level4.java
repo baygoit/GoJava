@@ -5,13 +5,13 @@ import java.util.Scanner;
 import com.gojava.projects.Project;
 import com.gojava.projects.ProjectStorage;
 
-public class Level4 implements Level{
-    private int position = 4;
+public class Level4 implements Level {
     Menu menu;
     private ProjectStorage projectStorage;
+    private int position = 4;
 
     public Level4(ProjectStorage projectStorage) {
-       this.projectStorage = projectStorage;
+        this.projectStorage = projectStorage;
     }
 
     public void setMenu(Menu menu) {
@@ -20,9 +20,10 @@ public class Level4 implements Level{
 
     @Override
     public String displayMySelf(int categoryNumber) {
-        name();
-        bankAccoun();
-        ammount();
+        menu.clientInteraction.interactions.get(categoryNumber - 1).displaySet();
+//        name();
+//        bankAccoun();
+//        ammount();
         return "";
     }
 
@@ -31,8 +32,9 @@ public class Level4 implements Level{
         System.out.println(ammountMessage);
         Scanner scanner2 = new Scanner(System.in);
         int sum = scanner2.nextInt();
-        Project project = projectStorage.getSpecificProject(menu.currentCategory, menu.currentProject);
-        project.setCurrentSum(sum +  project.getCurrentSum());
+        Project project = projectStorage.getSpecificProject(
+                menu.currentCategory, menu.currentProject);
+        project.setCurrentSum(sum + project.getCurrentSum());
     }
 
     private void bankAccoun() {
