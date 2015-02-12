@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 public class DataStorage {
+	
 	private List<String> quotes;
 	private List<Сategory> categories;
 	
@@ -45,16 +46,22 @@ public class DataStorage {
 		projectsEducation = new ArrayList<Project>();
 		
 		projectsFood.add(new Project("1.Green Pea Cookie. ", "We want to produce green cookies. ",
-				 + 8000, 3654, 17));
+				"Coming soon... ","http:GPC.rom.new", 8000, 3654, 17));
 		projectsFood.add(new Project("2.House wine. ", "We make delicious homemade wine. ",
-				14000, 9006, 20));
+				"Coming soon... ", "http:HW.est.new",14000, 9006, 20));
 		projectsFood.add(new Project("3.CookBook. ", "We have collected recipes 2000 and we want"
-				+ "to release a book. ",12000, 2700, 28));
+				 + " to release a book. ","Coming soon. . ", "http:CB.gri.new",12000, 2700, 28));
 		projectsMusic.add(new Project("1.Musical Instruments. ", "Help for beginners. ",
-				25000, 12908, 48));
+				"Coming soon...  ","http:MI.beg.new ",25000, 12908, 48));
 		projectsEducation.add(new Project("1.English Speaking Club Online. ", "Сommunication with "
-				+ "native speakers via internet. ", 30000, 20124, 9));
-		projectsEducation.add(new Project("2.Martial Arts. ", "Study of martial arts. ", 48000, 5798, 56));
+				+ "native speakers via internet. ", "Coming soon. .  ", "http:ESCO.com.new", 30000, 20124, 9));
+		projectsEducation.add(new Project("2.Martial Arts. ", "Study of martial arts. ",
+				"Coming soon...  ", "http:MA.st.new", 48000, 5798, 56));
+	}
+	
+	public String getRundomQuote() {
+		int i = (int)(Math.random() * quotes.size());
+		return quotes.get(i);
 	}
 	
 	public void initMap() {
@@ -68,11 +75,6 @@ public class DataStorage {
 		return categories;
 	}
 
-   public String getRundomQuote() {
-	   int i = (int)(Math.random() * quotes.size());
-	   return quotes.get(i);
-	}
-   
    public List<Project> getSpecificProject(Сategory сategory) {
 	   return map.get(сategory);
    }

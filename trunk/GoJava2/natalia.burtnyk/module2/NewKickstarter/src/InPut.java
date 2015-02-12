@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class InPut {
 	
-	public int scan() {
+	public int readInput() {
 		return new Scanner(System.in).nextInt();
 	}  
 }
