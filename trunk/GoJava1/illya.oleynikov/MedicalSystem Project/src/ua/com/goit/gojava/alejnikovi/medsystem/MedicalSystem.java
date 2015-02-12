@@ -1,5 +1,10 @@
 package ua.com.goit.gojava.alejnikovi.medsystem;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,8 +13,31 @@ public class MedicalSystem {
 	static List<Specialization> specializations = new ArrayList<Specialization>();
 	static List<Doctor> doctors = new ArrayList<Doctor>();
 	static List<Clinic> clinics = new ArrayList<Clinic>();
+	static final String PATH = "C:\\workspace\\MedicalSystem Project\\";
 	
-	static List<Specialization> getSpecializations() {
+	static List<String> readFromFile(String fileName) throws IOException{
+		String  thisLine = null;
+		List<String> list = new ArrayList<String>();
+		BufferedReader br = new BufferedReader(new FileReader(PATH + fileName));
+        while ((thisLine = br.readLine()) != null) {
+        	list.add(thisLine);
+        }
+        br.close();
+        return list;
+				
+	}
+	
+	static void readSpecializationsFromFile() throws IOException, MedicalSystemException {
+		List<String> list = readFromFile("specializations.csv");
+		for(String specialisation:list){
+			addSpecialisation(specialisation);
+		}
+	}
+
+	
+	public static List<Specialization> getSpecializations() throws IOException, MedicalSystemException {
+		specializations.clear();
+		readSpecializationsFromFile();
 		return specializations;
 	}
 	
@@ -28,13 +56,13 @@ public class MedicalSystem {
     static boolean isSpecialisationUnique(String specializationName) throws MedicalSystemException{
 		for (Specialization spec: specializations){
 			if (spec.getName().equals(specializationName)){
-				throw new MedicalSystemException("Specialisation not unique");		
+				throw new MedicalSystemException("Specialisation not unique");
 			} 
 		}
 		return true;
 	}
    
-    static void addSpecialisation (String specializationName) throws MedicalSystemException {
+    public static void addSpecialisation (String specializationName) throws MedicalSystemException {
     	if (isSpecialisationUnique(specializationName)){
 			specializations.add(new Specialization(specializationName));
     	}

@@ -2,6 +2,7 @@ package ua.com.goit.gojava.alejnikovi.medsystem;
 
 import static org.junit.Assert.*;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.junit.BeforeClass;
@@ -10,12 +11,11 @@ import org.junit.Test;
 public class SpecializationTest {
 	
 	static List<Doctor> testDocList = MedicalSystem.getDoctors();
-	static List<Specialization> testSpecs = MedicalSystem.getSpecializations();
+	static List<Specialization> testSpecs;
 
 	@BeforeClass
-	public static void setDocList(){
-		testSpecs.add(new Specialization("Знахарь"));
-		testSpecs.add(new Specialization("Стоматолог"));
+	public static void setDocList() throws IOException, MedicalSystemException{
+		testSpecs = MedicalSystem.getSpecializations();
 		testDocList.clear();
 		testDocList.add(new Doctor("Иван", "Иванов", testSpecs.get(0), null));
 		testDocList.add(new Doctor("Петр", "Петров",testSpecs.get(0), null));

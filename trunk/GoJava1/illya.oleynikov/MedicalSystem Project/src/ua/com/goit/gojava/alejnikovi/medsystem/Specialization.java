@@ -3,15 +3,15 @@ package ua.com.goit.gojava.alejnikovi.medsystem;
 import java.util.ArrayList;
 import java.util.List;
 
-class Specialization {
+public class Specialization {
 	
 	private String name;
 		
-	Specialization (String name){
+	public Specialization (String name){
 		this.name = name;
 	}
 
-	String getName() {
+	public String getName() {
 		return name;
 	}
 

@@ -1,5 +1,8 @@
 package ua.com.goit.gojava.alejnikovi.medsystem;
 
+import java.util.Date;
+import java.util.List;
+
 
 class Doctor {
 
@@ -7,6 +10,7 @@ class Doctor {
 	private String secondName;
 	private Specialization specialization;
 	private Clinic clinic;
+	private List<WorkDay> schedule;
 
 	Doctor (String firstName, String secondName, Specialization specialization, Clinic clinic){
 		this.firstName = firstName;
@@ -14,6 +18,10 @@ class Doctor {
 		this.specialization = specialization;
 		this.clinic = clinic;
 	}  
+	
+	void addWorkDay(Date startHour, Date endHour){
+		schedule.add(new WorkDay(startHour, endHour));
+	}
   
 	Specialization getSpecialization() {
 		return specialization;
