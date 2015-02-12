@@ -17,17 +17,11 @@ public class Menu {
     Level3 level3;
     Level4 level4;
 
-    public IO iO;
-
-    
-    
-    
     private ArrayList<Level> levelsList = new ArrayList<>();
     public ClientInteraction clientInteraction;
 
     public Menu(CategoryStorage categoryStorage, ProjectStorage projectStorage,
             IO iO) {
-        this.iO = iO;
         this.level1 = new Level1(categoryStorage);
         this.level2 = new Level2(projectStorage);
         this.level3 = new Level3(projectStorage);
@@ -42,8 +36,6 @@ public class Menu {
         this.clientInteraction = new ClientInteraction(this, projectStorage);
     }
 
-    
-    
     public void printNextLevel(int nubberForNextLevel) {
         out.print(nextLevel(nubberForNextLevel));
     }
@@ -55,7 +47,7 @@ public class Menu {
             result = "not allowed to go below this level";
         } else {
             Level level;
-            //TODO refactoring
+            // TODO refactoring
             if (nubberForNextLevel == 0) {
                 currentLevelPosition--;
                 if (currentLevelPosition == 2) {
@@ -66,7 +58,7 @@ public class Menu {
                 }
             } else {
                 currentLevelPosition++;
-              //TODO refactoring
+                // TODO refactoring
                 if (currentLevelPosition == 2) {
                     currentCategory = nubberForNextLevel;
                 }
