@@ -10,6 +10,7 @@ public class InvestInteraction implements Interactionable {
     ProjectStorage projectStorage;
     public InvestInteraction(Menu menu, ProjectStorage projectStorage) {
         this.menu = menu;
+        this.projectStorage = projectStorage; 
         
     }
 
@@ -18,9 +19,7 @@ public class InvestInteraction implements Interactionable {
     public String description() {
         return "Invest in the project";
     }
-    
-    @Override
-    public void displaySet() {
+    public void displayInteractinSet() {
         name();
         bankAccoun();
         ammount();

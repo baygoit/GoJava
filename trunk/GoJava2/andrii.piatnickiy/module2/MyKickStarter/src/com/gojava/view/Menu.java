@@ -31,7 +31,7 @@ public class Menu {
         this.level1 = new Level1(categoryStorage);
         this.level2 = new Level2(projectStorage);
         this.level3 = new Level3(projectStorage);
-        this.level4 = new Level4(projectStorage);
+        this.level4 = new Level4();
         level3.setMenu(this);
         level4.setMenu(this);
         add(level1);
