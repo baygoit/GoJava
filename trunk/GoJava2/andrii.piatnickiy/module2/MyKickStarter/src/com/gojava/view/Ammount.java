@@ -9,6 +9,14 @@ public class Ammount {
     Menu menu;
     ProjectStorage projectStorage;
     String description;
+    int sum;
+
+    public Ammount(int sum, Menu menu, ProjectStorage projectStorage) {
+        this.menu = menu;
+        this.projectStorage = projectStorage;
+        this.sum = sum;
+        setDescription();
+    }
 
     public String getDescription() {
         return description;
@@ -21,23 +29,6 @@ public class Ammount {
             description = Integer.toString(sum);
         }
 
-    }
-
-    int sum;
-
-    public int getSum() {
-        return sum;
-    }
-
-    public void setSum(int sum) {
-        this.sum = sum;
-    }
-
-    public Ammount(int sum, Menu menu, ProjectStorage projectStorage) {
-        this.menu = menu;
-        this.projectStorage = projectStorage;
-        this.sum = sum;
-        setDescription();
     }
 
     public void setProjectSum(int sum, int choose) {

@@ -3,7 +3,6 @@ package com.gojava.view;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import com.gojava.projects.Project;
 import com.gojava.projects.ProjectStorage;
 
 public class InvestInteraction implements Interactionable {
@@ -14,19 +13,6 @@ public class InvestInteraction implements Interactionable {
         this.menu = menu;
         this.projectStorage = projectStorage;
         initAmmounts();
-
-    }
-
-    @Override
-    public String description() {
-        return "Invest in the project";
-    }
-
-    public void displayInteractionSet() {
-         name();
-         bankAccoun();
-        displayAmmountType();
-        choseAmmount();
     }
 
     ArrayList<Ammount> ammounts = new ArrayList<>();
@@ -38,8 +24,19 @@ public class InvestInteraction implements Interactionable {
         ammounts.add(new Ammount(40, menu, projectStorage));
     }
 
-    private void displayAmmountType() {
+    @Override
+    public String description() {
+        return "Invest in the project";
+    }
 
+    public void displayInteractionSet() {
+        name();
+        bankAccoun();
+        displayAmmountType();
+        choseAmmount();
+    }
+
+    private void displayAmmountType() {
         String ammountMessage = "";
         if (!ammounts.isEmpty()) {
             System.out
@@ -62,8 +59,8 @@ public class InvestInteraction implements Interactionable {
     private void bankAccoun() {
         String bankAccountMessage = "Please, enter your bank account";
         System.out.println(bankAccountMessage);
-        Scanner scanner1 = new Scanner(System.in);
-        scanner1.nextInt();
+        Scanner scanner = new Scanner(System.in);
+        scanner.nextInt();
     }
 
     private void name() {
