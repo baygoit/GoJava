@@ -20,7 +20,7 @@ public class QuestionInteraction implements Interactionable{
     }
 
     @Override
-    public void displayInteractinSet() {
+    public void displayInteractionSet() {
         question();
     }
     

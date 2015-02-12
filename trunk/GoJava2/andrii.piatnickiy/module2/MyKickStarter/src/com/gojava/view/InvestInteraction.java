@@ -19,7 +19,7 @@ public class InvestInteraction implements Interactionable {
     public String description() {
         return "Invest in the project";
     }
-    public void displayInteractinSet() {
+    public void displayInteractionSet() {
         name();
         bankAccoun();
         ammount();

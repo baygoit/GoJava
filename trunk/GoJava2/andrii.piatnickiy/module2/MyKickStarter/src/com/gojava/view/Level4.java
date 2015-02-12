@@ -11,7 +11,7 @@ public class Level4 implements Level {
 
     @Override
     public String displayMySelf(int categoryNumber) {
-        menu.clientInteraction.interactions.get(categoryNumber - 1).displayInteractinSet();
+        menu.clientInteraction.interactions.get(categoryNumber - 1).displayInteractionSet();
         return "";
     }
 
