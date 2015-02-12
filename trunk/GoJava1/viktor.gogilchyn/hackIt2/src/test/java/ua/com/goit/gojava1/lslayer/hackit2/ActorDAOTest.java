@@ -2,6 +2,9 @@ package ua.com.goit.gojava1.lslayer.hackit2;
 
 import static org.junit.Assert.*;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -54,7 +57,7 @@ public class ActorDAOTest {
         
         // Testing unexisted actor load
         try {
-            Actor actor = new ActorDAO(null).load("Unexisted");
+            Actor actor = new ActorDAO(null).fromFile("Unexisted");
         } catch (Exception e) {
             assertEquals("Such actor not found!", e.getMessage());
             assertEquals(HackitIOException.class, e.getClass());
@@ -63,7 +66,7 @@ public class ActorDAOTest {
         
         // Testing wrong file format
         try {
-            Actor actor = new ActorDAO(null).load("Testname2");
+            Actor actor = new ActorDAO(null).fromFile("Testname2");
         } catch (Exception e) {
             assertEquals("Wrong file format", e.getMessage());
             assertEquals(HackitIOException.class, e.getClass());
@@ -76,13 +79,21 @@ public class ActorDAOTest {
     public void testDAOLoad() {
         ActorDAO dao = new ActorDAO(null);
         try {
-            Actor actor = dao.load("Testname3");
+            Actor actor = dao.fromFile("Suleyman");
             assertNotNull(actor);
             assertEquals("Val123", actor.getAttribute("attribute2"));
             assertEquals(78, actor.getSkill("B78"));
         } catch (Exception e) {
             fail(e.getMessage());
         }
+    }
+    
+    @Test
+    public void testLoadAll() {
+        ActorDAO dao = new ActorDAO(null);
+        List<Actor> list = new LinkedList<Actor>();
+        list = dao.loadAll();
+        assertEquals(2, list.size());
     }
 
 }

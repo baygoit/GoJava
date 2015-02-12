@@ -6,6 +6,8 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 import ua.com.goit.gojava1.lslayer.hackit2.HackitIOException;
@@ -15,14 +17,34 @@ import ua.com.goit.gojava1.lslayer.hackit2.actor.HumanControlledCharacter;
 
 public class ActorDAO {
     private Actor actor = null;
+    private static final String SAVE_DIR = "c:\\workspace\\Hackit2\\saved\\";
+    private static final String FILE_EXT = ".sav";
+    private static final String SKILL_PREFIX = "Skill: ";
+    private static final String ATTRIBUTE_PREFIX = "Attribute: ";
+    private static final String DELIMITER = "/";
+    
 
     public ActorDAO(Actor actor) {
         this.actor = actor;
     }
+    
+    public List<Actor> loadAll() {
+        List<Actor> resultList = new LinkedList<Actor>();
+        File folder = new File(SAVE_DIR);
+        File[] listOfFiles = folder.listFiles();
+            for (File currentFile : listOfFiles) {
+                if (currentFile.isFile() && currentFile.getName().endsWith(FILE_EXT)) {
+                    try {
+                    resultList.add(this.fromFile(currentFile.getName().substring(0, currentFile.getName().length() - FILE_EXT.length())));
+                    } catch (Exception e) {}
+                }
+            }
+        return resultList;
+    }
 
-    public Actor load(String actorName) throws HackitIOException,
+    public Actor fromFile(String actorName) throws HackitIOException,
             HackitWrongParameterException, IOException {
-        File file = new File(actorName);
+        File file = new File(SAVE_DIR + actorName + FILE_EXT);
         Actor actor = new HumanControlledCharacter(actorName);
         BufferedReader actorReader = null;
 
@@ -37,19 +59,19 @@ public class ActorDAO {
         }
         String line;
         while ((line = actorReader.readLine()) != null) {
-            if (line.contains("Skill:")) {
-                String name = line.substring(7).split("/")[0];
-                // It's a kind of Magic!
-                // See save() method to know why 7
-                int value = Integer.parseInt(line.substring(7).split("/")[1]);
+            if (line.startsWith(SKILL_PREFIX)) {
+                String currentLine = line.substring(SKILL_PREFIX.length());
+                String name = currentLine.split(DELIMITER)[0];
+                int value = Integer.parseInt(currentLine.split(DELIMITER)[1]);
                 actor.addSkill(name);
                 if (value > 1)
                     actor.incSkill(name, value - 1);
             }
-            if (line.contains("Attribute:")) {
-                String name = line.substring(11).split("/")[0];
+            if (line.startsWith(ATTRIBUTE_PREFIX)) {
+                String currentLine = line.substring(ATTRIBUTE_PREFIX.length());
+                String name = currentLine.split("/")[0];
                 // See save() method to know why 11
-                String value = line.substring(11).split("/")[1];
+                String value = currentLine.split(DELIMITER)[1];
                 actor.addAttribute(name, value);
             }
         }
@@ -60,19 +82,19 @@ public class ActorDAO {
 
     public void save() throws HackitIOException {
         String eol = System.getProperty("line.separator");
-        File file = new File(actor.getName());
+        File file = new File(actor.getName() + FILE_EXT);
         FileWriter out = null;
         try {
             out = new FileWriter(file);
             out.write(actor.getName());
             for (Map.Entry<String, Integer> entry : actor.getSkills()
                     .entrySet()) {
-                out.write(eol + "Skill: " + entry.getKey() + "/"
+                out.write(eol + SKILL_PREFIX + entry.getKey() + "/"
                         + entry.getValue());
             }
             for (Map.Entry<String, String> entry : actor.getAttributes()
                     .entrySet()) {
-                out.write(eol + "Attribute: " + entry.getKey() + "/"
+                out.write(eol + ATTRIBUTE_PREFIX + entry.getKey() + "/"
                         + entry.getValue());
             }
             out.close();

@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import ua.com.goit.gojava1.lslayer.hackit2.GameSession;
+
 /**
  * Servlet implementation class WebAccessor
  */
@@ -28,11 +30,11 @@ public class WebAccessor extends HttpServlet {
     protected void doGet(HttpServletRequest request,
             HttpServletResponse response) throws ServletException, IOException {
         // TODO Auto-generated method stub
-        GameSession session = GameSession.getInstance();
-        session.addHumanGamer("First one");
-        session.addHumanGamer("Second two");
-        request.setAttribute("gamers", session.getGamers());
-        request.getRequestDispatcher("index.jsp").forward(request, response);
+        GameSession gameSession = GameSession.getInstance();
+//        gameSession.addHumanGamer("First one");
+//        gameSession.addHumanGamer("Second two");
+        request.setAttribute("gamers", gameSession.getGamers());
+        request.getRequestDispatcher("/index.jsp").forward(request, response);
         // Map<String, String[]> parameterMap = request.getParameterMap();
         // response.setContentType("text/html");
         // response.setCharacterEncoding("utf-8");

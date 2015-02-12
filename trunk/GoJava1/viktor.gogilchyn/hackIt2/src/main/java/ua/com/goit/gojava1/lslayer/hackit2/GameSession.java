@@ -8,21 +8,22 @@ import java.util.Map;
 
 import ua.com.goit.gojava1.lslayer.hackit2.action.Action;
 import ua.com.goit.gojava1.lslayer.hackit2.actor.Actor;
-import ua.com.goit.gojava1.lslayer.hackit2.actor.HumanControlledCharacter;
+import ua.com.goit.gojava1.lslayer.hackit2.dao.ActorDAO;
 import ua.com.goit.gojava1.lslayer.hackit2.dto.ActionResult;
 import ua.com.goit.gojava1.lslayer.hackit2.gear.Gear;
 
 public final class GameSession { // Singleton. There is only one game per app.
                                  // Multithreading ignored for a while
 
-    private static GameSession instance = new GameSession();
+    private static GameSession instance;
     private List<Actor> gamers = new ArrayList<Actor>();
     private LinkedList<Map<Actor, Action>> actionQueue = new LinkedList<Map<Actor, Action>>();
     private Map<Actor, ActionResult> resultsQueue = new LinkedHashMap<Actor, ActionResult>();
     private List<Gear> stuff = new ArrayList<Gear>();
 
     private GameSession() {
-
+        ActorDAO dao = new ActorDAO(null);
+        gamers = dao.loadAll();
     }
 
     public ActionResult getResult(Actor a) {
@@ -52,17 +53,13 @@ public final class GameSession { // Singleton. There is only one game per app.
         this.gamers.add(gamer);
     }
 
-    public void addHumanGamer(String name) { // TODO delete
-        // Somewhen all existing gamers will be loaded from db.
-        // But now I need some data to show on face
-        this.gamers.add(new HumanControlledCharacter(name));
-    }
 
     public List<Actor> getGamers() {
         return gamers;
     }
 
-    public static GameSession getInstance() {
+    public static GameSession getInstance()  {
+        if (instance == null) instance = new GameSession();
         return instance;
     }
 
