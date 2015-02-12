@@ -42,7 +42,7 @@ public class ConsoleView {
 	}
 	
 	public void displayCurrentProject(int i){
-		System.out.print(projects.get(i - 1).allInfo() + "\n"
+		System.out.print("\n" + projects.get(i - 1).allInfo() + "\n"
 				+ "----------------------------" + "\n");
 	}		
 }
