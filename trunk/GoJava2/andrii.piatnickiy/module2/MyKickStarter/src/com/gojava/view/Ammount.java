@@ -1,5 +1,7 @@
 package com.gojava.view;
 
+import java.util.Scanner;
+
 import com.gojava.projects.Project;
 import com.gojava.projects.ProjectStorage;
 
@@ -37,10 +39,17 @@ public class Ammount {
         this.sum = sum;
         setDescription();
     }
-    
-    public void setProjectSum(int sum){
+
+    public void setProjectSum(int sum, int choose) {
+        if (choose == 0) {
+            String ammountMessage = "Please, enter your ammount";
+            System.out.println(ammountMessage);
+            Scanner scanner = new Scanner(System.in);
+            sum = scanner.nextInt();
+        }
         Project project = projectStorage.getSpecificProject(
                 menu.currentCategory, menu.currentProject);
         project.setCurrentSum(sum + project.getCurrentSum());
     }
+
 }

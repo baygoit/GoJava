@@ -13,6 +13,7 @@ public class InvestInteraction implements Interactionable {
     public InvestInteraction(Menu menu, ProjectStorage projectStorage) {
         this.menu = menu;
         this.projectStorage = projectStorage;
+        initAmmounts();
 
     }
 
@@ -26,7 +27,6 @@ public class InvestInteraction implements Interactionable {
         // bankAccoun();
         displayAmmountType();
         choseAmmount();
-        // ammount();
     }
 
     ArrayList<Ammount> ammounts = new ArrayList<>();
@@ -34,12 +34,12 @@ public class InvestInteraction implements Interactionable {
     private void initAmmounts() {
         ammounts.add(new Ammount(0, menu, projectStorage));
         ammounts.add(new Ammount(1, menu, projectStorage));
-        ammounts.add(new Ammount(10, menu, projectStorage)); 
+        ammounts.add(new Ammount(10, menu, projectStorage));
         ammounts.add(new Ammount(40, menu, projectStorage));
     }
 
     private void displayAmmountType() {
-        initAmmounts();
+
         String ammountMessage = "";
         if (!ammounts.isEmpty()) {
             System.out
@@ -49,25 +49,14 @@ public class InvestInteraction implements Interactionable {
             }
         }
         System.out.println(ammountMessage);
+        ammountMessage = "";
     }
 
     private void choseAmmount() {
         Scanner scanner = new Scanner(System.in);
         int choose = scanner.nextInt();
         Ammount ammount = ammounts.get(choose);
-        ammount.setProjectSum(ammount.sum);
-        
-        
-    }
-
-    private void ownAmmount() {
-        String ammountMessage = "Please, enter your ammount";
-        System.out.println(ammountMessage);
-        Scanner scanner = new Scanner(System.in);
-        int sum = scanner.nextInt();
-        Project project = projectStorage.getSpecificProject(
-                menu.currentCategory, menu.currentProject);
-        project.setCurrentSum(sum + project.getCurrentSum());
+        ammount.setProjectSum(ammount.sum, choose);
     }
 
     private void bankAccoun() {
