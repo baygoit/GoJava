@@ -4,7 +4,7 @@ import static org.junit.Assert.assertTrue;
 import java.io.FileNotFoundException;
 import org.junit.Test;
 
-public class testProjectsClass {
+public class TestProjectsClass {
 
 	@Test
     public void should1_when() throws FileNotFoundException{

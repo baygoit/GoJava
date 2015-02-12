@@ -8,7 +8,7 @@ import java.util.Arrays;
 
 import org.junit.Test;
 
-public class testCategoriesClass {
+public class TestCategoriesClass {
 	Categories categories = new Categories();
 	Category category = new Category();
 

@@ -7,7 +7,7 @@ import java.io.FileNotFoundException;
 
 import org.junit.Test;
 
-public class test1Mock {
+public class Test1Mock {
 	
 	@Test
     public void simpleMocking2() throws FileNotFoundException{
