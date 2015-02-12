@@ -36,16 +36,18 @@ public class Menu {
         this.clientInteraction = new ClientInteraction(this, projectStorage);
     }
 
-    public void printNextLevel(int nubberForNextLevel) {
+    public void printNextLevel(int nubberForNextLevel) throws Exception {
         out.print(nextLevel(nubberForNextLevel));
     }
 
-    public String nextLevel(int nubberForNextLevel) {
-        String result;
-        if ((nubberForNextLevel == 0 && currentLevelPosition == 1)
-                || (nubberForNextLevel > 0 && currentLevelPosition == 4)) {
-            result = "not allowed to go below this level";
-        } else {
+    public String nextLevel(int nubberForNextLevel) throws Exception {
+        String result = "";
+        try {
+            if ((nubberForNextLevel == 0 && currentLevelPosition == 1)
+                    || (nubberForNextLevel > 0 && currentLevelPosition == 4)) {
+                Error e = new Error("not allowed to go below this level");
+                throw e;
+            }
             Level level;
             // TODO refactoring
             if (nubberForNextLevel == 0) {
@@ -68,7 +70,10 @@ public class Menu {
             }
             level = getCurrentLevel();
             result = level.displayMySelf(nubberForNextLevel);
+        } catch (Error e) {
+            System.err.println("not allowed to go below this level");
         }
+
         return result;
     }
 

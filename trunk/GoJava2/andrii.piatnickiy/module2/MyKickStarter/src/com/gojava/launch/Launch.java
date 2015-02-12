@@ -8,7 +8,7 @@ import com.gojava.view.Menu;
 
 public class Launch {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         ConsoleIO consoleIO = new  ConsoleIO();
         CategoryStorage categoryStorage = new CategoryStorage();
         ProjectStorage projectStorage = new ProjectStorage();
