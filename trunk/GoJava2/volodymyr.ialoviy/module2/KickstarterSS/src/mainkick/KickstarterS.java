@@ -15,12 +15,34 @@ public class KickstarterS {
 	private int menu = menuCategories;
 	private int choiceTo;
 	private int chosenPay;
-	Check check = new Check(new InputsConsole(), new OutputConsole());
-	Output out = new OutputConsole();
-	Categories categories = new Categories();
-	Category category = new Category();
-	Projects projects = new Projects();
-	Project project = new Project();
+	private int exit = 999;
+	
+	private Check check;
+	private Output out;
+	private Categories categories;
+	private Category category;
+	private Projects projects;
+	private Project project;
+	
+	public KickstarterS(Check check, Output out, Categories categories, Category category, Projects projects, Project project) {
+		this.check = check;
+		this.setOut(out);
+	
+        this.categories = categories;
+        this.category = category;
+        this.projects = projects;
+        this.project = project;
+	}
+	
+	public OutputConsole getOut() {
+		return (OutputConsole) out;
+	}
+
+	public void setOut(Output out2) {
+		this.out = out2;
+	}
+	
+	
 	
 	public void kickstarter() throws IOException, InterruptedException{
 		Quotes quote = new Quotes();
@@ -55,7 +77,7 @@ public class KickstarterS {
 	}
 
 	private void project() throws IOException, InterruptedException{
-		int[] intSwitch = {menuProjects, menuPayment, menuQuestion};
+		int[] intSwitch = {menuProjects, menuPayment, menuQuestion, exit};
 		
 		printProject();
 		askAfterProject(intSwitch);
@@ -107,6 +129,7 @@ public class KickstarterS {
 			case 444: project(); break;
 			case 555: payment(); break;
 			case 666: question(); break;
+			case 999: System.exit(0); break;
 		}
 	}
 	

@@ -10,7 +10,6 @@ public class TestProjectsClass {
     public void should1_when() throws FileNotFoundException{
 		Projects projects = new Projects();
 		projects.writeAllProjects();
-//		Project project = new Project();
 		String s = projects.showProjectFull(2);
 		assertTrue(s.equals("projectID = 3\n"
 				+ " projectName: Progect-3\n"
