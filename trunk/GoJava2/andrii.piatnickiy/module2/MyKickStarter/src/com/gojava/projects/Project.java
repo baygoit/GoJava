@@ -5,10 +5,18 @@ public class Project {
     private String description;
     private int needSum;
     private int currentSum;
+    public void setCurrentSum(int currentSum) {
+        this.currentSum = currentSum;
+    }
+
     private int daysLeft;
     private String projectHistory;
     private String linkOnvideo;
     private String questionsAndAnswers;
+    public void setQuestionsAndAnswers(String questionsAndAnswers) {
+        this.questionsAndAnswers = questionsAndAnswers;
+    }
+
     private int categoryId;
 
     public Project(String name, String description, int needSum,

@@ -13,7 +13,7 @@ public class ProjectStorage {
                 questionsAndAnswers, categoryId));
     }
 
-    public String getAll(int categoryNumber) {
+    public String getAllToString(int categoryNumber) {
         StringBuffer sb = new StringBuffer();
         int i = 1;
         for (Project project : projectStorageList) {
