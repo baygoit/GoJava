@@ -11,7 +11,7 @@ public class Level2 implements Level {
     }
 
     public String displayMySelf(int categoryNumber) {
-        return projectStorage.getAll(categoryNumber);
+        return projectStorage.getAllToString(categoryNumber);
     }
 
     @Override
