@@ -21,12 +21,12 @@ public class TestProjectStorage {
 //    }
     
     @Test
-    public void shouldAllProgects_WhenGetAll() {
+    public void shouldAllProgects_WhenGetAllToString() {
         projectStorage.add("name", "desc", 1, 1, 1, "categoryId",
                 "linkOnvideo", "questionsAndAnswers", 1);
         projectStorage.add("name2", "desc2", 2, 2, 2, "categoryId2",
                 "linkOnvideo2", "questionsAndAnswers2", 2);
-        String actual = projectStorage.getAll(1);
+        String actual = projectStorage.getAllToString(1);
         assertEquals("1) Project Name: name\nDescription: desc\nNeed Sum: 1\nCurrent Sum: 1\nDays Left: 1\n\n", actual);
     }  
     @Test
@@ -37,10 +37,18 @@ public class TestProjectStorage {
         assertEquals("ProjectHistory: categoryId\nLinkOnvideo: linkOnvideo\nQuestions and answers: questionsAndAnswers\n", actual);
     }  
     @Test
-    public void shouldGetSpecificProject_WhenGetSpecificProject() {
+    public void shouldGetSpecificProject_WhenGetSpecificProjectToString() {
         projectStorage.add("name", "desc", 1, 1, 1, "categoryId",
                 "linkOnvideo", "questionsAndAnswers", 1);
-        String actual = projectStorage.getSpecificProject(1, 1);
+        String actual = projectStorage.getSpecificProjectToString(1, 1);
         assertEquals("Project Name: name\nDescription: desc\nNeed Sum: 1\nCurrent Sum: 1\nDays Left: 1\nProjectHistory: categoryId\nLinkOnvideo: linkOnvideo\nQuestions and answers: questionsAndAnswers\n\n", actual);
+    }  
+    
+    @Test
+    public void shouldGetProgect_WhenGetSpecificProject() {
+        projectStorage.add("name", "desc", 1, 1, 1, "categoryId",
+                "linkOnvideo", "questionsAndAnswers", 1);
+        Project actual = projectStorage.getSpecificProject(1, 1);
+        assertEquals(projectStorage.getProject(0), actual);
     }  
 }
