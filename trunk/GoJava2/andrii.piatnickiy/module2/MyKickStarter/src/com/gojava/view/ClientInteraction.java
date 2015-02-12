@@ -11,7 +11,7 @@ public class ClientInteraction {
         this.menu = menu;
         this.projectStorage = projectStorage;
         interactions.add(new InvestInteraction(menu, projectStorage));
-        interactions.add(new QuestionInteraction());
+        interactions.add(new QuestionInteraction(menu, projectStorage));
     }
 
     ArrayList<Interactionable> interactions = new ArrayList<>();
