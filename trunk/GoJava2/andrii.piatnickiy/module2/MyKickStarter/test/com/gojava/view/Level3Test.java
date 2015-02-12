@@ -21,7 +21,7 @@ public class Level3Test {
                 "linkOnvideo1", "questionsAndAnswers1", 1);
         String actual = menu.level3.displayMySelf(1);
         assertEquals(
-                "Project Name: test1\nDescription: description1\nNeed Sum: 1\nCurrent Sum: 1\nDays Left: 1\nProjectHistory: projectHistory1\nLinkOnvideo: linkOnvideo1\nQuestions and answers: questionsAndAnswers1\n\n1) Invest in the project",
+                "Project Name: test1\nDescription: description1\nNeed Sum: 1\nCurrent Sum: 1\nDays Left: 1\nProjectHistory: projectHistory1\nLinkOnvideo: linkOnvideo1\nQuestions and answers: questionsAndAnswers1\n\n1) Invest in the project\n2) Ask a question\n",
                 actual);
     }
 
@@ -31,10 +31,10 @@ public class Level3Test {
         assertEquals("", actual);
     }
 
-    @Test
-    public void shouldReturnChooseToInvest_WhenCallChooseToInvest() {
-        String actual = menu.level3.askInvest();
-        assertEquals("1) Invest in the project", actual);
-    }
+//    @Test
+//    public void shouldReturnChooseToInvest_WhenCallChooseToInvest() {
+//        String actual = menu.level3.askInvest();
+//        assertEquals("1) Invest in the project", actual);
+//    }
 
 }

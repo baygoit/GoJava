@@ -69,7 +69,7 @@ public class TestMenu {
         menu.setCategoryPosition(1);
         String actual = menu.nextLevel(1);
         assertEquals(
-                "Project Name: Bicycle\nDescription: Bicycle description\nNeed Sum: 10000\nCurrent Sum: 100\nDays Left: 10\nProjectHistory: History\nLinkOnvideo: Link on video\nQuestions and answers: Questions and answers\n\n1) Invest in the project",
+                "Project Name: Bicycle\nDescription: Bicycle description\nNeed Sum: 10000\nCurrent Sum: 100\nDays Left: 10\nProjectHistory: History\nLinkOnvideo: Link on video\nQuestions and answers: Questions and answers\n\n1) Invest in the project\n2) Ask a question\n",
                 actual);
     }
 
