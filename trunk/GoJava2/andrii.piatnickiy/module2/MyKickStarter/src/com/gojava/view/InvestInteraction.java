@@ -24,36 +24,47 @@ public class InvestInteraction implements Interactionable {
     public void displayInteractionSet() {
         // name();
         // bankAccoun();
-        chooseAmmountType();
+        displayAmmountType();
+        choseAmmount();
         // ammount();
     }
 
     ArrayList<Ammount> ammounts = new ArrayList<>();
 
     private void initAmmounts() {
-        ammounts.add(new Ammount("Own payment method"));
-        ammounts.add(new Ammount("1"));
-        ammounts.add(new Ammount("10"));
-        ammounts.add(new Ammount("40"));
+        ammounts.add(new Ammount(0, menu, projectStorage));
+        ammounts.add(new Ammount(1, menu, projectStorage));
+        ammounts.add(new Ammount(10, menu, projectStorage)); 
+        ammounts.add(new Ammount(40, menu, projectStorage));
     }
 
-    private void chooseAmmountType(){
-        initAmmounts(); 
+    private void displayAmmountType() {
+        initAmmounts();
         String ammountMessage = "";
-        if(!ammounts.isEmpty()){
-            System.out.println("You can choose automatic or your own payment method");
-            for(int i = 0; i < ammounts.size(); i++){
-                ammountMessage += i + ") "+ ammounts.get(i).description + "\n";
+        if (!ammounts.isEmpty()) {
+            System.out
+                    .println("You can choose automatic or your own payment method");
+            for (int i = 0; i < ammounts.size(); i++) {
+                ammountMessage += i + ") " + ammounts.get(i).description + "\n";
             }
         }
         System.out.println(ammountMessage);
     }
 
-    private void ammount() {
+    private void choseAmmount() {
+        Scanner scanner = new Scanner(System.in);
+        int choose = scanner.nextInt();
+        Ammount ammount = ammounts.get(choose);
+        ammount.setProjectSum(ammount.sum);
+        
+        
+    }
+
+    private void ownAmmount() {
         String ammountMessage = "Please, enter your ammount";
         System.out.println(ammountMessage);
-        Scanner scanner2 = new Scanner(System.in);
-        int sum = scanner2.nextInt();
+        Scanner scanner = new Scanner(System.in);
+        int sum = scanner.nextInt();
         Project project = projectStorage.getSpecificProject(
                 menu.currentCategory, menu.currentProject);
         project.setCurrentSum(sum + project.getCurrentSum());
