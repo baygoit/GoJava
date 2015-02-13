@@ -2,7 +2,6 @@ package mainkick;
 
 import static org.junit.Assert.*;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -20,7 +19,7 @@ public class TestCheckClass {
 		}
 
 		@Override
-		public String enter() throws IOException{
+		public String enter(){
 			return strings.remove(0);
 		}
 	}
@@ -40,7 +39,7 @@ public class TestCheckClass {
 	}
 	
 	@Test
-    public void shouldSendReport_whenNotSendReport() throws IOException, InterruptedException{
+    public void shouldSendReport_whenNotSendReport(){
 		Check check  = new Check(new FakeInputsConsole("5", "i", "88", "4"), new FakeOutputConsole());
 		
 		int rezult = check.checkNumber(new int[] {1,4,6});
@@ -53,7 +52,7 @@ public class TestCheckClass {
 	}
 	
 	@Test (expected = IndexOutOfBoundsException.class)
-    public void shouldMethodStop_whenMethodDontStop() throws IOException, InterruptedException{
+    public void shouldMethodStop_whenMethodDontStop(){
 		Check check  = new Check(new FakeInputsConsole("5", "i", "88", "4"), new FakeOutputConsole());
 		
 		check.checkNumber(new int[] {1,4,6});
@@ -61,7 +60,7 @@ public class TestCheckClass {
 	}
 	
 	@Test
-    public void shouldFallWithinTheBoundaries_whenIsRankedWithinTheBoundaries() throws IOException, InterruptedException{
+    public void shouldFallWithinTheBoundaries_whenIsRankedWithinTheBoundaries(){
 		Check check  = new Check(new FakeInputsConsole("1", "4", "6"), new FakeOutputConsole());
 		
 		int rezult = check.checkNumber(new int[] {1,4,6});
@@ -78,7 +77,7 @@ public class TestCheckClass {
     }
 	
 	@Test
-    public void shouldSendReportNotNumber_whenNotSendReport() throws IOException, InterruptedException{
+    public void shouldSendReportNotNumber_whenNotSendReport(){
 		Check check  = new Check(new FakeInputsConsole("е", "1"), new FakeOutputConsole());
 		
 		int rezult = check.checkNumber(new int[] {1,4,6});
@@ -88,14 +87,14 @@ public class TestCheckClass {
     }
 	
 	@Test (expected = IndexOutOfBoundsException.class)
-    public void shouldIOOBE_whenNotIOOBE() throws IOException, InterruptedException{
+    public void shouldIOOBE_whenNotIOOBE(){
 		Check check  = new Check(new FakeInputsConsole("е"), new FakeOutputConsole());
 		
 		check.checkNumber(new int[] {1,4,6});
     }	
 
 	@Test
-    public void shouldSendReportNumberNumberDoesNotExist_whenNotSendReport() throws IOException, InterruptedException{
+    public void shouldSendReportNumberNumberDoesNotExist_whenNotSendReport(){
 		Check check  = new Check(new FakeInputsConsole("-1", "6"), new FakeOutputConsole());
 		
 		int rezult = check.checkNumber(new int[] {1,4,6});
@@ -106,14 +105,14 @@ public class TestCheckClass {
     }
 	
 	@Test (expected = IndexOutOfBoundsException.class)
-    public void shouldExpectedIOOBE_whenNotIOOBE() throws IOException, InterruptedException{
+    public void shouldExpectedIOOBE_whenNotIOOBE(){
 		Check check  = new Check(new FakeInputsConsole("-1"), new FakeOutputConsole());
 		
 		check.checkNumber(new int[] {1,4,6});
     }
 	
 	@Test
-    public void shouldZero_whenNotZero() throws IOException, InterruptedException{
+    public void shouldZero_whenNotZero(){
 		Check check  = new Check(new FakeInputsConsole("0", "1"), new FakeOutputConsole());
 		
 		int rezult = check.checkNumber(new int[] {0,1,4,6});
@@ -123,7 +122,7 @@ public class TestCheckClass {
     }
 
 	@Test
-    public void shouldZero_whenNotZero2() throws IOException, InterruptedException{
+    public void shouldZero_whenNotZero2(){
 		Check check  = new Check(new FakeInputsConsole("2", "1"), new FakeOutputConsole());
 		
 		int rezult = check.checkNumber(new int[] {0,1,4,6});

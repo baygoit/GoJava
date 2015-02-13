@@ -1,6 +1,4 @@
 package mainkick;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class KickstarterS {
@@ -44,7 +42,7 @@ public class KickstarterS {
 	
 	
 	
-	public void kickstarter() throws IOException, InterruptedException{
+	public void kickstarter(){
 		Quotes quote = new Quotes();
 		printer(quote.getQuote());
 		projects.writeAllProjects();
@@ -52,7 +50,7 @@ public class KickstarterS {
 		categories();
 	}
 		
-	private void categories() throws InterruptedException, IOException{
+	private void categories(){
 		printCategories();
 		askCategory();
 		
@@ -62,7 +60,7 @@ public class KickstarterS {
 		switcher();
 	}
 
-	private void projects() throws IOException, InterruptedException{
+	private void projects(){
 		int[] intSwitch = {menuCategories};
 		
 		printProjects();
@@ -76,7 +74,7 @@ public class KickstarterS {
 		switcher();
 	}
 
-	private void project() throws IOException, InterruptedException{
+	private void project(){
 		int[] intSwitch = {menuProjects, menuPayment, menuQuestion, exit};
 		
 		printProject();
@@ -87,7 +85,7 @@ public class KickstarterS {
 		if (compare(intSwitch, choiceTo)) {menu = choiceTo; switcher();}
 	}
 	
-	private void payment() throws IOException, InterruptedException{
+	private void payment(){
 		int[] intSwitch = {0, 1, 2, 3};
 		
 		printChoicePayment();
@@ -114,7 +112,7 @@ public class KickstarterS {
 		switcher();
 	}
 	
-	private void question() throws IOException, InterruptedException{
+	private void question(){
 		printQuestion();
 		askQuestion();
 
@@ -122,7 +120,7 @@ public class KickstarterS {
 		switcher();
 	}
 
-	private void switcher() throws InterruptedException, IOException{
+	private void switcher(){
 		switch(menu){
 			case 222: categories(); break;
 			case 333: projects(); break;
@@ -133,38 +131,38 @@ public class KickstarterS {
 		}
 	}
 	
-	private void printCategories() throws FileNotFoundException {
+	private void printCategories(){
 		printer(categories.showAllCatecories());
 		printer("Choice Category Number: ");		
 	}
 
-	private void askCategory() throws IOException {
+	private void askCategory(){
 		chosenCategory = check.checkNumber(categories.kickContainCategory()) - 1;
 	}
 	
-	private void printProjects() throws FileNotFoundException {
+	private void printProjects(){
 		printer("Your chosen category: " + category.showCatecoryName(chosenCategory, categories) + ", containing the following projects: ");		//TODO
 		printer(category.showAllProjectInCategory(chosenCategory, projects, categories));															//TODO project поменял на projects
 //		printer(category.showAllProjectInCategory(chosenCategory - 1, project, projects, categories));
 		printer("Choice Project Number or " + menuCategories + " for exit to Category: ");
 	}
 
-	private void askProject(int[] intSwitch) throws IOException {
+	private void askProject(int[] intSwitch){
 		chosenProject = check.checkNumber(concatArray(category.projectsContain(chosenCategory, categories), intSwitch));							//TODO
 	}
 	
-	private void askAfterProject(int[] intSwitch) throws IOException {
+	private void askAfterProject(int[] intSwitch){
 		choiceTo = check.checkNumber(intSwitch);		
 	}
 
-	private void printProject() throws FileNotFoundException {
+	private void printProject(){
 		printer(projects.showProjectFull(chosenProject - 1));//TODO project поменял на projects
 		if (project.getFaq().size() != 0){printFaq(project.getFaq());}
 		printer("Choice " + menuProjects + " for exit to Project list.\nChoice " + menuPayment + " to invest in the project:"
 				+ "Have a question? If the info above doesn't help, you can ask the project creator directly - Choice " + menuQuestion + ":");
 	}
 	
-	private void askHowMuchPay(int[] intSwitch) throws IOException {
+	private void askHowMuchPay(int[] intSwitch){
 		chosenPay = check.checkNumber(intSwitch);		
 	}
 
@@ -175,7 +173,7 @@ public class KickstarterS {
 				+ "3 - 40$ = KICKSTARTER EXCLUSIVE");		
 	}
 	
-	private void askQuestion() throws IOException {
+	private void askQuestion(){
 		project.setFAQ();		
 	}
 
@@ -183,10 +181,15 @@ public class KickstarterS {
 		printer("Enter your question:");		
 	}
 	
-	private Boolean sleep(int m) throws InterruptedException, IOException{
+	private Boolean sleep(int m){
 		Boolean b = false;
 		if (m == magic){
-			Thread.sleep(10000);
+			try {
+				Thread.sleep(10000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			b = true;
 		}
 		return b;

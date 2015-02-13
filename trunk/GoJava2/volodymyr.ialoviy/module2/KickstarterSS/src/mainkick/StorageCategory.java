@@ -1,13 +1,12 @@
 package mainkick;
 
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 public class StorageCategory {
 	private ArrayList<Category> listCatecories = new ArrayList<Category>();
 	private ArrayList<String[]> categoryBD;
 	
-	public void readAllCatecories() throws FileNotFoundException{
+	public void readAllCatecories(){
 		categoryBD = readBDCatecories();
     	int i = 0;
 		for (String[] value : categoryBD) {
@@ -25,7 +24,7 @@ public class StorageCategory {
 		return listCatecories.get(i).getCategoryID() + " " + listCatecories.get(i).getCategoryName() + "\n";
 	}
 	
-	private ArrayList<String[]> readBDCatecories() throws FileNotFoundException{
+	private ArrayList<String[]> readBDCatecories(){
 		ReaderBD reader = new ReaderBD();
 		return reader.read("Categories.properties");
 	}

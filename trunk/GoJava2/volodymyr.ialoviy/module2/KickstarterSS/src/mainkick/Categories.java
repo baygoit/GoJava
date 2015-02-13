@@ -1,6 +1,5 @@
 package mainkick;
 
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 public class Categories {
@@ -8,7 +7,7 @@ public class Categories {
 	private int counterCategory;
 	private ArrayList<String[]> categoryBD;
 	
-	public void readAllCatecories() throws FileNotFoundException{
+	public void readAllCatecories(){
 		categoryBD = readBDCatecories();
     	int i = 0;
 		for (String[] value : categoryBD) {
@@ -20,7 +19,7 @@ public class Categories {
 		setCounterCategory(getListCatecories().size());
 	}
 	
-	public String showAllCatecories() throws FileNotFoundException{
+	public String showAllCatecories(){
 		String s = "";
 		for (Category value : listCatecories) {
 			s += value.getCategoryID() + " " + value.getCategoryName() + "\n";
@@ -35,7 +34,7 @@ public class Categories {
 		return listCatecories.get(i).getCategoryID() + " " + listCatecories.get(i).getCategoryName() + "\n";
 	}
 	
-	private ArrayList<String[]> readBDCatecories() throws FileNotFoundException{
+	private ArrayList<String[]> readBDCatecories(){
 		ReaderBD reader = new ReaderBD();
 		return reader.read("Categories.properties");
 	}
@@ -57,7 +56,7 @@ public class Categories {
 		return kickContainCategories;
 	}
 	
-	public ArrayList<String[]> getCategoryBD() throws FileNotFoundException{
+	public ArrayList<String[]> getCategoryBD(){
 		return categoryBD;
 	}
 	

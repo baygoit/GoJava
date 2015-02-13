@@ -1,9 +1,7 @@
 package mainkick;
 
-import java.io.IOException;
-
 public class Mainkick {
-    public static void main(String[] args) throws IOException, InterruptedException {
+    public static void main(String[] args){
     	Check check = new Check(new InputsConsole(), new OutputConsole());
     	Output out = new OutputConsole();
     	Categories categories = new Categories();

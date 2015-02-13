@@ -1,6 +1,5 @@
 package mainkick;
 
-import java.io.IOException;
 import java.util.regex.Pattern;
 
 public class Check {
@@ -14,7 +13,7 @@ public class Check {
 		this.setOut(out);
 	}
 
-	public int checkNumber(int[] border) throws IOException{
+	public int checkNumber(int[] border){
 		breakCounter = 0;
 		choiceNumber = 0;
 		for (int i = 0; i < magicStop; i++){
@@ -31,7 +30,7 @@ public class Check {
 		return choiceNumber;
 	}
 	
-	public String checkName() throws IOException{
+	public String checkName(){
 		breakCounter = 0;
 		String chosen = null;
 		for (int i = 0; i < magicStop; i++){
@@ -51,7 +50,7 @@ public class Check {
 		return chosen;
 	}
 	
-	public long checkCard() throws IOException{
+	public long checkCard(){
 		breakCounter = 0;
 		long cardNumber = 0;
 		for (int i = 0; i < magicStop; i++){
@@ -72,7 +71,7 @@ public class Check {
 		return cardNumber;
 	}
 	
-	public int checkAmount() throws IOException{
+	public int checkAmount(){
 		breakCounter = 0;
 		int amount = 0;
 		for (int i = 0; i < magicStop; i++){

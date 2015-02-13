@@ -1,7 +1,5 @@
 package mainkick;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class Project{
@@ -16,12 +14,12 @@ public class Project{
 	private int howMuchRemaining;
 	private ArrayList<String> faq = new ArrayList<String>();
 
-	public void setFAQ() throws IOException{
+	public void setFAQ(){
 		InputsConsole question = new InputsConsole();
 		faq.add(question.enter());
 	}
 	
-	public String readProject(ArrayList<Project> listProject, String[] value, int i) throws FileNotFoundException{
+	public String readProject(ArrayList<Project> listProject, String[] value, int i){
 		listProject.get(i).projectID = Integer.valueOf(value[0]);
 		listProject.get(i).projectName = value[1];
 		listProject.get(i).shortDescription = value[2];
@@ -34,7 +32,7 @@ public class Project{
 		return projectID + " " + projectName +  " " + shortDescription + " " + fullDescription + " " + foto + " " + link + " " + howMuchNeeded + " " +  howMuchCollected + " " + howMuchRemaining + "\n";
 	}
 	
-//	public String showProjectInShort(int i, Projects projects) throws FileNotFoundException{
+//	public String showProjectInShort(int i, Projects projects){
 //		i -= 1;
 //		String s = projects.getListProject().get(i).projectID
 //				+ ", " + projects.getListProject().get(i).projectName
@@ -44,7 +42,7 @@ public class Project{
 //		return s;		
 //	}
 //	
-//	public String showProjectFull(int i, ArrayList<Project> listProject) throws FileNotFoundException{
+//	public String showProjectFull(int i, ArrayList<Project> listProject){
 //		String s = "projectID = " + listProject.get(i).projectID
 //					+ "\n projectName: " + listProject.get(i).projectName
 //					+ "\n shortDescription: " + listProject.get(i).shortDescription

@@ -2,7 +2,6 @@ package mainkick;
 
 import static org.junit.Assert.assertEquals;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -19,7 +18,7 @@ public class TestKickstarterS {
 		}
 
 		@Override
-		public String enter() throws IOException{
+		public String enter(){
 			return strings.remove(0);
 		}
 	}
@@ -39,7 +38,7 @@ public class TestKickstarterS {
 	}
 	
 	@Test//(expected = IndexOutOfBoundsException.class)//FileNotFoundException
-    public void testKickstarterS1() throws IOException, InterruptedException{
+    public void testKickstarterS1(){
 
 		Check check = new Check(new FakeInputsConsole("1", "1", "333"), new FakeOutputConsole());
     	Output out = new FakeOutputConsole();

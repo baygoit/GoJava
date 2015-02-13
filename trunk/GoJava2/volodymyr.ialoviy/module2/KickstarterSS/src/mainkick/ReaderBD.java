@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class ReaderBD {
 	
-	public ArrayList<String[]> read(String fileName) throws FileNotFoundException {
+	public ArrayList<String[]> read(String fileName){
 	    exists(fileName);
 	    ArrayList<String[]> list = new ArrayList<String[]>();
 	    try {
@@ -22,15 +22,25 @@ public class ReaderBD {
 	            in.close();
 	        }
 	    } catch(IOException e) {
-	        throw new FileNotFoundException();
+	        try {
+				throw new FileNotFoundException("Ми не змогли прочитать файл");
+			} catch (FileNotFoundException e1) {
+				// TODO
+				e1.printStackTrace();
+			}
 	    }
 		return list;
 	}
 	
-	private void exists(String fileName) throws FileNotFoundException {
+	private void exists(String fileName){
 	    File file = new File(fileName);
 	    if (!file.exists()){
-	        throw new FileNotFoundException(file.getName());
+	        try {
+				throw new FileNotFoundException(file.getName());
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 	    }
 	}
 	

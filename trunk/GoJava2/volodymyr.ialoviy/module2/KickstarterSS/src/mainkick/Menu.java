@@ -48,7 +48,7 @@ public class Menu {
 		
 	}
 	
-	private void switcher() throws InterruptedException, IOException{
+	private void switcher(){
 //		switch(menu){
 //			case 222: categories(); break;
 //			case 333: projects(); break;
@@ -58,10 +58,15 @@ public class Menu {
 //		}
 	}
 	
-	private Boolean sleep(int m) throws InterruptedException, IOException{
+	private Boolean sleep(int m){
 		Boolean b = false;
 		if (m == 777){					//TODO
-			Thread.sleep(10000);
+			try {
+				Thread.sleep(10000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			b = true;
 		}
 		return b;

@@ -5,8 +5,14 @@ import java.io.InputStreamReader;
 
 
 public class InputsConsole implements Inputs{
-	public String enter() throws IOException{
+	public String enter(){
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-		return reader.readLine();
+		try {
+			return reader.readLine();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 }

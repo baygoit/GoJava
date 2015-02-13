@@ -1,6 +1,5 @@
 package mainkick;
 
-import java.io.FileNotFoundException;
 
 public class Category{
 	private int categoryID;
@@ -17,7 +16,7 @@ public class Category{
 		return contain;
 	}
 	
-	public String showAllProjectInCategory(int i, Projects projects, Categories categories) throws FileNotFoundException{
+	public String showAllProjectInCategory(int i, Projects projects, Categories categories){
 		String s = "";
 		for (int j : categories.getListCatecories().get(i).getProjectsIn()){
 			s += projects.showProjectInShort(j) + "\n";				//TODO project поменял на projects

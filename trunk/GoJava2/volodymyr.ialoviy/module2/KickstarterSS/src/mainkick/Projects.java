@@ -1,5 +1,5 @@
 package mainkick;
-import java.io.FileNotFoundException;
+
 import java.util.ArrayList;
 
 public class Projects {
@@ -11,7 +11,7 @@ public class Projects {
 	ArrayList<String[]> projectBD;
 	
 	
-	public String writeAllProjects() throws FileNotFoundException{
+	public String writeAllProjects(){
 		String s = "";
 		int i = 0;
 		projectBD = reader.read("Projects.properties");
@@ -24,7 +24,7 @@ public class Projects {
 		return s;
 	}
 
-	public String showProjectFull(int numberProject) throws FileNotFoundException{
+	public String showProjectFull(int numberProject){
 		String s = "projectID = " + projectBD.get(numberProject)[0]
 					+ "\n projectName: " + projectBD.get(numberProject)[1]
 					+ "\n shortDescription: " + projectBD.get(numberProject)[2]
@@ -37,7 +37,7 @@ public class Projects {
 		return s;
 	}
 	
-	public String showProjectInShort(int i) throws FileNotFoundException{
+	public String showProjectInShort(int i){
 		i -= 1;
 		String s = projectBD.get(i)[0]
 				+ ", " + projectBD.get(i)[1]

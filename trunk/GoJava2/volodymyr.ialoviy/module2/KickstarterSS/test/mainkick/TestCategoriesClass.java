@@ -11,15 +11,12 @@ import org.junit.Test;
 public class TestCategoriesClass {
 	Categories categories = new Categories();
 	Category category = new Category();
-
-	{try {
+	{
 		categories.readAllCatecories();
 		categories.kickContainCategory();
 		category.projectsContain(0, categories);
 		category.showCatecoryName(0, categories);
-	} catch (FileNotFoundException e) {
-		e.printStackTrace();
-	}}
+	}
 	
 	@Test
     public void shouldAllCatecories_whenNotAllCatecories() throws IOException, InterruptedException{
