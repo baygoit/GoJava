@@ -5,17 +5,12 @@ public class Answer {
 	char id;
 	private String text;
 	boolean isCorrect;
+	boolean isChecked;
 	
 	public Answer(){
 		text =  "there is an answer must be here...";
 		isCorrect = false;
 		id = 0;
-	}
-	
-	@Override
-	public String toString() {
-		return "Answer [id=" + id + ", text=" + text + ", isCorrect="
-				+ isCorrect + "]";
 	}
 
 	public Answer(char id, String text, boolean isCorrect){
@@ -48,7 +43,15 @@ public class Answer {
 		this.isCorrect = isCorrect;
 	}
 	
-	public void printIdAndAnswer(){
-		System.out.println(id + ". " + text + "\n");
+	public boolean isChecked() {
+		return isChecked;
+	}
+
+	public void setChecked(boolean isChecked) {
+		this.isChecked = isChecked;
+	}
+
+	public String getIdAndAnswer(){
+		return new String(id + ". " + text + "\n");
 	}
 }

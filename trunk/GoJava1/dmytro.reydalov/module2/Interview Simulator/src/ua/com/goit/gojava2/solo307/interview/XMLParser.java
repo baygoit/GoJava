@@ -24,12 +24,12 @@ public class XMLParser {
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		try{
 			DocumentBuilder builder = factory.newDocumentBuilder();
-			Document document = null;
-			try{
-				document = builder.parse(path);
-			} catch(FileNotFoundException e){
-				throw new InterviewSimulatorException("File" + path + "was not found");
-			}
+			Document document = builder.parse(path);
+//			try{
+				;
+//			} catch(FileNotFoundException e){
+//				throw new InterviewSimulatorException("File " + path + " was not found");
+//			}
 			NodeList questions = document.getElementsByTagName("question");
 			for(int i = 0; i < questions.getLength(); i++){
 				Node q = questions.item(i);

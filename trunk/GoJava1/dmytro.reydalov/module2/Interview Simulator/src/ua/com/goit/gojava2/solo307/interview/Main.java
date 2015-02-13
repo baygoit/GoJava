@@ -1,16 +1,19 @@
 package ua.com.goit.gojava2.solo307.interview;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
+import java.util.Scanner;
 
 public class Main {
-	public static void main(String[] args) {
+	public static void main(String[] args){
+		System.out.println("Напишите ваше имя");
+		String name = new String(new Scanner(System.in).nextLine());
 		Interview interview = new Interview();
-		final String NAME = "Questions";
-		final String PATH = "Questions.xml";
-		interview.addCategory(PATH, NAME);
-		final String NAME2 = "Questions1";
-		final String PATH2 = "MeratechTest.xml";
-		interview.addCategory(PATH2, NAME2);
+		File file = new File("Questions.xml.");
+		interview.addCategory("Questions", file.getAbsolutePath());
+		File file2 = new File("MeratechTest.xml.");
+		interview.addCategory("Questions1", file2.getAbsolutePath());
 		interview.composeCategory(interview.getCategories());
 		Menu menu = new Menu();
 		int option = 0;
@@ -19,7 +22,11 @@ public class Main {
 			option = menu.readInt();
 			switch (option){
 			case 1: interview.getCurrentCategory().printQuestionsAndCorrectAnswers();break; 
-			case 2: interview.getCurrentCategory().printQuestionAndAllAnswers(); break;
+			case 2: 
+				List<String> questionsAndAllAnswers = interview.getCurrentCategory().getQuestionsAndAllAnswers();
+				for(String string: questionsAndAllAnswers){
+					System.out.println(string);
+				} break;
 			case 3: 
 				interview.timecounter = new TimeCounter();
 				List <Question> questions = interview.getCurrentCategory().shuffle(interview.getCurrentCategory().getQuestions());
@@ -42,14 +49,19 @@ public class Main {
 					}
 				}
 				long seconds = interview.timecounter.calculateSeconds(interview.timecounter.elapsedTime());
+				String time = "";
 				try {
-					String time = interview.timecounter.formatIntoMMSS(seconds);
+					time = interview.timecounter.formatIntoMMSS(seconds);
 					System.out.println("Время " + time);
 				} catch (InterviewSimulatorException e) {
 					e.getMessage();
 				}
-				interview.printResults();
-				interview.getCurrentCategory().printIncorrectAnswers();
+				List<String> results = interview.getResults();
+				interview.printList(results);
+				List<String> incorrectAnswers = interview.getCurrentCategory().printIncorrectAnswers();
+				System.out.println("\nНеправильные ответы: ");
+				interview.printList(incorrectAnswers);
+				interview.writeToFile(name, time, results, incorrectAnswers);
 				break;
 			}
 		}

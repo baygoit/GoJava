@@ -10,10 +10,14 @@ public class Category {
 	private List <Question> questions = new ArrayList<Question>();
 
 	public Category(){
-		this.name = "Current Category";
+		this.name = "There must be a Category name here...";
 	}
 	
-	public Category(String path, String name) {
+	public Category(String name){
+		this.name = name;
+	}
+	
+	public Category(String name, String path) throws InterviewSimulatorException {
 		this.name = name;
 		questions = readData(path);
 	}
@@ -34,13 +38,14 @@ public class Category {
 		this.questions = questions;
 	}
 	
-	public List<Question> readData(String path) {
-		XMLParser parser = null;
-		try {
-			parser = new XMLParser(path);
-		} catch (InterviewSimulatorException e) {
-			e.getMessage();
+	public void addQuestions(List<Question> questions) {
+		for(Question question: questions){
+			this.questions.add(new Question(question.getText(), question.getAnswers(), question.getId()));
 		}
+	}
+	
+	public List<Question> readData(String path) throws InterviewSimulatorException {
+		XMLParser parser = new XMLParser(path);
 		return parser.questions;
 	}
 	
@@ -56,11 +61,15 @@ public class Category {
 		}
 	}
 	
-	public void printQuestionAndAllAnswers(){
+	public List<String> getQuestionsAndAllAnswers(){
+		List <String> questionsAndAllAnswers = new ArrayList<String>();
 		for(Question question: questions){
-			System.out.println(question.getId() +". " + question.getText() + "\n");
-			question.printAswers();
+			questionsAndAllAnswers.add(question.getId() +". " + question.getText() + "\n");
+			for(Answer answer: question.getAnswers()){
+				questionsAndAllAnswers.add(answer.getIdAndAnswer());
+			}
 		}
+		return questionsAndAllAnswers;
 	}	
 	
 	public void printQuestionAndAllAnswers(Question question){
@@ -68,17 +77,14 @@ public class Category {
 		question.printAswers();
 	}
 
-	public void printIncorrectAnswers(){
-		System.out.println("\nНеправильные ответы: ");
+	public List<String> printIncorrectAnswers(){
+		List <String> questionsAndAllAnswers = new ArrayList<String>();
 		for(Question question: questions){
-			question.printIncorrectAnswers(question);
+			questionsAndAllAnswers.addAll(question.printIncorrectAnswers());
 		}
+		return questionsAndAllAnswers;
 	}
 
-	public void addQuestions(List<Question> questions) {
-		for(Question question: questions){
-			this.questions.add(new Question(question.getText(), question.getAnswers(), question.getId()));
-		}
-	}
+	
 	
 }

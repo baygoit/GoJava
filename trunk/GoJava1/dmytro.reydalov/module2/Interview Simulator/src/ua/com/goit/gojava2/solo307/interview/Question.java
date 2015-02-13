@@ -117,7 +117,7 @@ public class Question {
 	
 	public void printAswers(){
 		for(Answer answer: answers){
-			answer.printIdAndAnswer();
+			System.out.println(answer.getIdAndAnswer());
 		}
 	}
 	
@@ -127,11 +127,13 @@ public class Question {
 		}
 	}
 	
-	public void printIncorrectAnswers(Question question) {
+	public List<String> printIncorrectAnswers() {
+		List<String> incorrect= new ArrayList<String>();
 		for(Answer answer: incorrectAnswers){
-			System.out.println("\n" + question.getText());
-			System.out.println(answer.getText());
+			incorrect.add(new String("\n" + this.getText()));
+			incorrect.add(new String(answer.getText()));
 		}
+		return incorrect;
 	}
 	
 	public void addIncorrectAnswers(List <Answer> answeredWrong){
