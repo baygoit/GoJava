@@ -1,18 +1,10 @@
 package ua.home.kickstarter.model;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParser;
-
 import ua.home.kickstarter.content.Quote;
+import utils.KickstarterJsonReader;
 
 public class QuotationsStorage {
 	private List<Quote> quotationsList;
@@ -21,20 +13,10 @@ public class QuotationsStorage {
 		jsonQuotationsToList();
 	}
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	private void jsonQuotationsToList() {
-		try {
-			BufferedReader br = new BufferedReader(new FileReader("d:\\Quotations.json"));
-			JsonParser parser = new JsonParser();
-			JsonArray jArrayQuotations = parser.parse(br).getAsJsonArray();
-			Gson gson = new Gson();
-			quotationsList = new ArrayList<Quote>();
-			for (JsonElement obj : jArrayQuotations) {
-				Quote quote = gson.fromJson(obj, Quote.class);
-				quotationsList.add(quote);
-			}
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
+		KickstarterJsonReader jsonReader = new KickstarterJsonReader();
+		quotationsList = jsonReader.getList(Quote.class, "d:\\Quotations.json");
 	}
 
 	public Quote getRandomQuote() {
