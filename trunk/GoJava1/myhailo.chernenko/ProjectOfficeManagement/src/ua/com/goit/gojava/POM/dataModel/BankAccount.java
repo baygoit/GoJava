@@ -1,9 +1,11 @@
 package ua.com.goit.gojava.POM.dataModel;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+//import java.util.ArrayList;
+import java.util.Currency;
+//import java.util.List;
 //import ua.com.goit.gojava.POM.persistence.DataManager;
+
 
 
 import ua.com.goit.gojava.POM.persistence.DataObject;
@@ -14,7 +16,8 @@ public class BankAccount implements DataObject , Serializable {
 	private long id = 0;
 	private String name = "";
 	private String bankName = "";
-	private List<BankAccountTransaction> transactions = new ArrayList<BankAccountTransaction>();
+	private Currency currency;
+	//private List<CashFlowStatementEntry> transactions = new ArrayList<CashFlowStatementEntry>();
 	
 	public long getId() {
 		
@@ -52,15 +55,15 @@ public class BankAccount implements DataObject , Serializable {
 		
 	}
 	
-	public List<BankAccountTransaction> getTransactions() {
+	/*public List<CashFlowStatementEntry> getTransactions() {
 		
 		return transactions;
 		
 	}
 	
-	public BankAccountTransaction addTransaction() {
+	public CashFlowStatementEntry addTransaction() {
 		
-		BankAccountTransaction transaction = new BankAccountTransaction();
+		CashFlowStatementEntry transaction = new CashFlowStatementEntry();
 		transactions.add(transaction);
 		return transaction;
 		
@@ -76,10 +79,10 @@ public class BankAccount implements DataObject , Serializable {
 		
 	}
 	
-	public long getTotal() {
+	public Money getTotal() {
 
 		long result = 0;
-		for (BankAccountTransaction transaction:getTransactions()) {
+		for (CashFlowStatementEntry transaction:getTransactions()) {
 			
 			result += transaction.getSum();
 			
@@ -87,6 +90,15 @@ public class BankAccount implements DataObject , Serializable {
 		
 		return result;
 		
+	}
+	*/
+	
+	public Currency getCurrency() {
+		return currency;
+	}
+
+	public void setCurrency(Currency currency) {
+		this.currency = currency;
 	}
 
 }

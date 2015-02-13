@@ -137,10 +137,10 @@ public class PaymentDocument implements FinanceDocument, Serializable {
 		
 		if (bankAccount != null) {
 			
-			BankAccountTransaction newTransaction = bankAccount.addTransaction();
+			/*CashFlowStatementEntry newTransaction = bankAccount.addTransaction();
 			newTransaction.setDate(date);
 			newTransaction.setDoc(this);
-			newTransaction.setSum(sum);
+			newTransaction.setSum(sum);*/
 			
 		}
 		
@@ -162,7 +162,7 @@ public class PaymentDocument implements FinanceDocument, Serializable {
 		
 		if (bankAccount != null) {
 			
-			bankAccount.deleteDocTransaction(this);
+			//bankAccount.deleteDocTransaction(this);
 
 		}
 		

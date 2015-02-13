@@ -1,16 +1,16 @@
 package ua.com.goit.gojava.POM.dataModel;
 
 import java.io.Serializable;
-import java.util.Calendar;
 import java.util.Date;
 
-public class BankAccountTransaction implements Serializable {
+public class CashFlowStatementEntry implements Serializable {
 
 	private static final long serialVersionUID = 4386873221423578793L;
-	private long id = 0;
-	private Date date = Calendar.getInstance().getTime();
-	private String description = "";
-	private long sum = 0;
+	private long id;
+	private Date date;
+	private BankAccount bankAccount;
+	private String description;
+	private Money sum;
 	private FinanceDocument doc;
 	
 	public long getId() {
@@ -49,13 +49,13 @@ public class BankAccountTransaction implements Serializable {
 		
 	}
 	
-	public long getSum() {
+	public Money getSum() {
 		
 		return sum;
 		
 	}
 	
-	public void setSum(long sum) {
+	public void setSum(Money sum) {
 		
 		this.sum = sum;
 		
@@ -70,6 +70,18 @@ public class BankAccountTransaction implements Serializable {
 	public void setDoc(FinanceDocument doc) {
 		
 		this.doc = doc;
+		
+	}
+
+	public BankAccount getBankAccount() {
+		
+		return bankAccount;
+		
+	}
+
+	public void setBankAccount(BankAccount bankAccount) {
+		
+		this.bankAccount = bankAccount;
 		
 	}
 	

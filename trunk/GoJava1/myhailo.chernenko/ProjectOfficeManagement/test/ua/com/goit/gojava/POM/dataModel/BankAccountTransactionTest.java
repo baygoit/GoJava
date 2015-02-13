@@ -19,7 +19,7 @@ public class BankAccountTransactionTest {
 	@Test
 	public void testCreation() {
 
-		BankAccountTransaction bankAccountTransaction = new BankAccountTransaction();
+		CashFlowStatementEntry bankAccountTransaction = new CashFlowStatementEntry();
 		assertNotNull(bankAccountTransaction);
 		
 	}

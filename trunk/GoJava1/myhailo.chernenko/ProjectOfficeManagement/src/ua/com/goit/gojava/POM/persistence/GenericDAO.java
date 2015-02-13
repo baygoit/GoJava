@@ -16,7 +16,7 @@ public class GenericDAO<T> {
 		
 	}
 
-	public T getNewT() {
+	public T getNewClassInstance() {
 		
 		T newInstance = null;
 		try {
@@ -29,7 +29,7 @@ public class GenericDAO<T> {
 
 	public T create() {
 
-		T newGenericObj = getNewT();
+		T newGenericObj = getNewClassInstance();
 		dataManager.saveObject(newGenericObj, classT.getName());
 		return newGenericObj;
 
@@ -48,7 +48,7 @@ public class GenericDAO<T> {
 
 		return findedGenericObj;
 	}
-
+	
 	public void update(T obj) {
 		
 		dataManager.saveObject(obj, classT.getName());

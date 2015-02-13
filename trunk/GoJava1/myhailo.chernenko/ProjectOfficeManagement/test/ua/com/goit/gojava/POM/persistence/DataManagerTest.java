@@ -159,4 +159,20 @@ public class DataManagerTest {
 
 	}
 	
+	@Test
+	public void testSaveData() {
+		
+		/*DataManager dataManager = new DataManager();
+		GenericDAO<CostItem> genericDAO = new GenericDAO<CostItem>(CostItem.class, dataManager);
+		CostItem newCostItem = genericDAO.create();
+		newCostItem.setName("newCostItem 1");
+		newCostItem = genericDAO.create();
+		newCostItem.setName("CostItem 2");
+		newCostItem = genericDAO.create();
+		newCostItem.setName("Profit item ");
+		
+		dataManager.saveData();*/
+
+	}
+	
 }
