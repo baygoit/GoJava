@@ -22,7 +22,7 @@ public final class GameSession { // Singleton. There is only one game per app.
     private List<Gear> stuff = new ArrayList<Gear>();
 
     private GameSession() {
-        ActorDAO dao = new ActorDAO(null);
+        ActorDAO dao = new ActorDAO(false);
         gamers = dao.loadAll();
     }
 

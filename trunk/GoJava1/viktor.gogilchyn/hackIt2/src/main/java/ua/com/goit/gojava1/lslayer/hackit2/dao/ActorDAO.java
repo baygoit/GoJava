@@ -16,35 +16,71 @@ import ua.com.goit.gojava1.lslayer.hackit2.actor.Actor;
 import ua.com.goit.gojava1.lslayer.hackit2.actor.HumanControlledCharacter;
 
 public class ActorDAO {
-    private Actor actor = null;
-    private static final String SAVE_DIR = "c:\\workspace\\Hackit2\\saved\\";
+    private boolean isUnix = false;
+    private static final String WIN_SAVE_DIR = "c:\\workspace\\Hackit2\\saved\\";
+    private static final String UNIX_SAVE_DIR = "/usr/share/hackit2/";
     private static final String FILE_EXT = ".sav";
     private static final String SKILL_PREFIX = "Skill: ";
     private static final String ATTRIBUTE_PREFIX = "Attribute: ";
     private static final String DELIMITER = "/";
-    
 
-    public ActorDAO(Actor actor) {
-        this.actor = actor;
+    public ActorDAO() {
+
     }
-    
+
+    public ActorDAO(boolean isUnix) {
+        this.isUnix = isUnix;
+    }
+
     public List<Actor> loadAll() {
         List<Actor> resultList = new LinkedList<Actor>();
-        File folder = new File(SAVE_DIR);
-        File[] listOfFiles = folder.listFiles();
+        File folder = new File(WIN_SAVE_DIR);
+        File[] listOfFiles = folder.listFiles(); // Now hindy-os-check will stay
+        if (listOfFiles != null) {
             for (File currentFile : listOfFiles) {
-                if (currentFile.isFile() && currentFile.getName().endsWith(FILE_EXT)) {
+                if (currentFile.isFile()
+                        && currentFile.getName().endsWith(FILE_EXT)) {
                     try {
-                    resultList.add(this.fromFile(currentFile.getName().substring(0, currentFile.getName().length() - FILE_EXT.length())));
-                    } catch (Exception e) {}
+                        resultList.add(this.fromFile(currentFile.getName()
+                                .substring(
+                                        0,
+                                        currentFile.getName().length()
+                                                - FILE_EXT.length())));
+                    } catch (Exception e) {
+                    }
                 }
             }
+        }
+        File folderUnix = new File(UNIX_SAVE_DIR);
+        File[] listOfFilesUnix = folderUnix.listFiles();
+        if (listOfFilesUnix != null) {
+            for (File currentFile : listOfFilesUnix) {
+                if (currentFile.isFile()
+                        && currentFile.getName().endsWith(FILE_EXT)) {
+                    try {
+                        resultList.add(this.fromFile(currentFile.getName()
+                                .substring(
+                                        0,
+                                        currentFile.getName().length()
+                                                - FILE_EXT.length())));
+                    } catch (Exception e) {
+                    }
+                }
+            }
+        }
         return resultList;
     }
 
     public Actor fromFile(String actorName) throws HackitIOException,
             HackitWrongParameterException, IOException {
-        File file = new File(SAVE_DIR + actorName + FILE_EXT);
+        File file = new File(WIN_SAVE_DIR + actorName + FILE_EXT);
+        if (!file.exists()) {
+            file = new File(UNIX_SAVE_DIR + actorName + FILE_EXT);
+            if (!file.exists()) {
+                throw new HackitIOException("Such actor not found!-1"
+                        + file.getCanonicalPath());
+            }
+        }
         Actor actor = new HumanControlledCharacter(actorName);
         BufferedReader actorReader = null;
 
@@ -80,9 +116,10 @@ public class ActorDAO {
 
     }
 
-    public void save() throws HackitIOException {
+    public void save(Actor actor) throws HackitIOException, IOException {
         String eol = System.getProperty("line.separator");
-        File file = new File(actor.getName() + FILE_EXT);
+        File file = new File((this.isUnix ? UNIX_SAVE_DIR : WIN_SAVE_DIR)
+                + actor.getName() + FILE_EXT);
         FileWriter out = null;
         try {
             out = new FileWriter(file);
@@ -99,7 +136,7 @@ public class ActorDAO {
             }
             out.close();
         } catch (Exception e) {
-            throw new HackitIOException("Something in io", e);
+            throw new HackitIOException("Something in io" + file.getCanonicalPath()+file.getName(), e);
         }
     }
 

@@ -30,10 +30,10 @@ public class ActorDAOTest {
 
     @Test
     public void testDAOSave() {
-        ActorDAO dao = new ActorDAO(actor);
+        ActorDAO dao = new ActorDAO();
         try {
-            dao.save();
-        } catch (HackitIOException e) {
+            dao.save(actor);
+        } catch (Exception e) {
             fail(e.getMessage());
         }
 
@@ -42,11 +42,11 @@ public class ActorDAOTest {
     @Test
     public void testDAOSaveException() {
         Actor wrongActor = new HumanControlledCharacter(".\\;\\WrongName");
-        ActorDAO dao = new ActorDAO(wrongActor);
+        ActorDAO dao = new ActorDAO();
         try {
-            dao.save();
-        } catch (HackitIOException e) {
-            assertEquals("Something in io", e.getMessage());
+            dao.save(wrongActor);
+        } catch (Exception e) {
+            assertTrue(e.getMessage().startsWith("Something in io"));
         }
 
     }
@@ -57,16 +57,16 @@ public class ActorDAOTest {
         
         // Testing unexisted actor load
         try {
-            Actor actor = new ActorDAO(null).fromFile("Unexisted");
+            Actor actor = new ActorDAO(false).fromFile("Unexisted");
         } catch (Exception e) {
-            assertEquals("Such actor not found!", e.getMessage());
+            assertTrue(e.getMessage().startsWith("Such actor not found!"));
             assertEquals(HackitIOException.class, e.getClass());
         }
         
         
         // Testing wrong file format
         try {
-            Actor actor = new ActorDAO(null).fromFile("Testname2");
+            Actor actor = new ActorDAO(false).fromFile("Testname2");
         } catch (Exception e) {
             assertEquals("Wrong file format", e.getMessage());
             assertEquals(HackitIOException.class, e.getClass());
@@ -77,7 +77,7 @@ public class ActorDAOTest {
 
     @Test
     public void testDAOLoad() {
-        ActorDAO dao = new ActorDAO(null);
+        ActorDAO dao = new ActorDAO(false);
         try {
             Actor actor = dao.fromFile("Suleyman");
             assertNotNull(actor);
@@ -90,10 +90,10 @@ public class ActorDAOTest {
     
     @Test
     public void testLoadAll() {
-        ActorDAO dao = new ActorDAO(null);
+        ActorDAO dao = new ActorDAO(false);
         List<Actor> list = new LinkedList<Actor>();
         list = dao.loadAll();
-        assertEquals(2, list.size());
+        assertTrue(list.size() > 1);
     }
 
 }

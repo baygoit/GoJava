@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app id="WebApp_ID" version="3.0"
+ xmlns="http://java.sun.com/xml/ns/javaee"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+ <display-name>HackIt2</display-name>
+ <servlet>
+  <display-name>PathInformer</display-name>
+  <servlet-name>PathInformer</servlet-name>
+  <servlet-class>ua.com.goit.gojava1.lslayer.hackit2.PathInformer</servlet-class>
+ </servlet>
+ <servlet>
+  <servlet-name>ActorMaintaner</servlet-name>
+  <servlet-class>ua.com.goit.gojava1.lslayer.hackit2.ActorMaintainer</servlet-class>
+ </servlet>
+ <servlet-mapping>
+  <servlet-name>PathInformer</servlet-name>
+  <url-pattern>/informer/*</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+  <servlet-name>ActorMaintaner</servlet-name>
+  <url-pattern>/actors/*</url-pattern>
+ </servlet-mapping>
+</web-app>

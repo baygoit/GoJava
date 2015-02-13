@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<link href="css/style.css" rel="stylesheet" type="text/css">
+<link href="style.css" rel="stylesheet" type="text/css">
 <title>Actor list</title>
 </head>
 <body>
@@ -36,5 +36,9 @@ while(iter.hasNext()) { %>
     </div>
 <%}%>
 </div>
+<a href="actors/add">Create</a>
+<a href="actors/view">Read</a>
+<a href="actors/update">Update</a>
+<a href="actors/delete">Delete</a>
 </body>
 </html>
