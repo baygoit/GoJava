@@ -43,12 +43,15 @@ public class Menu {
     public String nextLevel(int nubberForNextLevel) throws Exception {
         String result = "";
         try {
-            if ((nubberForNextLevel == 0 && currentLevelPosition == 1)
-                    || (nubberForNextLevel > 0 && currentLevelPosition == 4)) {
-                throw new MenuUpException(nubberForNextLevel);
+            if (nubberForNextLevel == 0 && currentLevelPosition == 1){
+                MenuUpException menuUpException =  new MenuUpException(nubberForNextLevel);
+                throw menuUpException;
+            }else if (nubberForNextLevel > 0 && currentLevelPosition == 4){
+                MenuDownException menuDownException = new MenuDownException(nubberForNextLevel);
+                throw menuDownException;   
             }
             Level level;
-            // TODO refactoring
+            // TODO refactoring 
             if (nubberForNextLevel == 0) {
                 currentLevelPosition--;
                 if (currentLevelPosition == 2) {
@@ -69,8 +72,10 @@ public class Menu {
             }
             level = getCurrentLevel();
             result = level.displayMySelf(nubberForNextLevel);
-        } catch (Exception e) {
-            System.err.println(e);
+        } catch (MenuUpException menuUpException) {
+            System.err.println(menuUpException);
+        } catch (MenuDownException menuDownException) {
+            System.err.println(menuDownException);
         }
 
         return result;
