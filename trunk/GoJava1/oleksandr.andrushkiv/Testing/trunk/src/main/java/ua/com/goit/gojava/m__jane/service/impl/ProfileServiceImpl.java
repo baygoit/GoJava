@@ -1,15 +1,8 @@
 package ua.com.goit.gojava.m__jane.service.impl;
 
 import java.util.List;
-
-
-
-
-
-
-
 import javax.xml.bind.JAXBException;
-
+import ua.com.goit.gojava.m__jane.exceptions.TestingServiceException;
 import ua.com.goit.gojava.m__jane.model.Profile;
 import ua.com.goit.gojava.m__jane.service.ProfileService;
 import ua.com.goit.gojava.m__jane.utils.DataBuilder;
@@ -19,12 +12,17 @@ public class ProfileServiceImpl implements ProfileService {
 
 	private List<Profile> profileList;
 	
-	public ProfileServiceImpl() throws JAXBException{
+	public ProfileServiceImpl() throws TestingServiceException{
 		loadProfileList();
 	}
 	
-	private void loadProfileList() throws JAXBException {
-		profileList = DataBuilder.getInstance().getDataLoader().getProfileList();
+	private void loadProfileList() throws TestingServiceException {
+		
+		try {
+			profileList = DataBuilder.getInstance().getDataLoader().getProfileList();
+		} catch (JAXBException e) {
+			throw new TestingServiceException("Can't load data!");
+		}
 	}
 
 	@Override

@@ -17,7 +17,7 @@ public class DataBuilder {
 	private static DataBuilder instance;
 	private static DataLoader dataLoader;
 	private static final File FILE = new File("src/main/resources/DataFile2.xml");
-	
+	//D:\Java\eclipse\src\main\resources\DataFile2.xml (Системе не удается найти указанный путь)]
 	private DataBuilder() {
 	}
 
