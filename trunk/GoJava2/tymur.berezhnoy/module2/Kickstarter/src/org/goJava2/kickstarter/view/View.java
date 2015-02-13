@@ -21,7 +21,8 @@ public class View {
 	private final String title = "*** Super kickstarter ***";
 	private String path;
 	
-	public View(QuoteController quoteController, CategoryController categoryController, ProjectController projectController) {
+	public View(QuoteController quoteController, CategoryController categoryController,
+				ProjectController projectController) {
 		this.quoteController = quoteController;
 		this.categoryController = categoryController;
 		this.projectController = projectController;
@@ -33,10 +34,10 @@ public class View {
 	
 	public void displayCategories() {
 		path = "~ CATEGORIES/";
-		System.out.println("\n" + path + "\n№ Name");
+		System.out.println("\n" + path + "\nID Name");
 		int i = 1;
 		for(Category category: categoryController.getContent()) {
-			System.out.println(i + ". " + category.getName());
+			System.out.println(i + ") " + category.getName());
 			i++;
 		}
 	}
@@ -50,7 +51,8 @@ public class View {
 	public void displayProjects() {
 		int i = 1;
 		for(Project project: projectController.getSpecificContent(category)) {
-			System.out.println(i + ") " + project.getName() + "\n" + project.getShortInfo());
+			System.out.println(i + ") " + project.getName() + "\n" + project.getShortInfo()
+							+ "\n-------------------------");
 			i++;
 		}
 	}

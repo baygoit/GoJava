@@ -88,4 +88,57 @@ public class ProjectStorage implements StorageBehavior<Category> {
 	public void addContent(Object o) {
 		// TODO	
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((map == null) ? 0 : map.hashCode());
+		result = prime * result
+				+ ((projectsArt == null) ? 0 : projectsArt.hashCode());
+		result = prime * result
+				+ ((projectsComics == null) ? 0 : projectsComics.hashCode());
+		result = prime * result
+				+ ((projectsDance == null) ? 0 : projectsDance.hashCode());
+		result = prime * result
+				+ ((projectsGames == null) ? 0 : projectsGames.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ProjectStorage other = (ProjectStorage) obj;
+		if (map == null) {
+			if (other.map != null)
+				return false;
+		} else if (!map.equals(other.map))
+			return false;
+		if (projectsArt == null) {
+			if (other.projectsArt != null)
+				return false;
+		} else if (!projectsArt.equals(other.projectsArt))
+			return false;
+		if (projectsComics == null) {
+			if (other.projectsComics != null)
+				return false;
+		} else if (!projectsComics.equals(other.projectsComics))
+			return false;
+		if (projectsDance == null) {
+			if (other.projectsDance != null)
+				return false;
+		} else if (!projectsDance.equals(other.projectsDance))
+			return false;
+		if (projectsGames == null) {
+			if (other.projectsGames != null)
+				return false;
+		} else if (!projectsGames.equals(other.projectsGames))
+			return false;
+		return true;
+	}
 }

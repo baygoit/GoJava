@@ -50,4 +50,30 @@ public class QuoteStorage implements StorageBehavior<Integer> {
 	public void addContent(Object o) {
 		listOfQuotes.add((Quote) o);
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((listOfQuotes == null) ? 0 : listOfQuotes.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		QuoteStorage other = (QuoteStorage) obj;
+		if (listOfQuotes == null) {
+			if (other.listOfQuotes != null)
+				return false;
+		} else if (!listOfQuotes.equals(other.listOfQuotes))
+			return false;
+		return true;
+	}
 }
