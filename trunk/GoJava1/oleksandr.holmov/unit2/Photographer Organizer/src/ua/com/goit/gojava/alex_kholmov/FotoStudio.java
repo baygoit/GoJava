@@ -16,11 +16,17 @@ public class FotoStudio implements ShowInfo{
     private Contacts contacts;
     private String additionalInfo;
     ArrayList<Reserve> reservs = new ArrayList<Reserve>();
+    private static int studioId;
 
     public FotoStudio(Contacts contacts, String additionalInfo) {
         // TODO Auto-generated constructor stub
         this.contacts = contacts;
         this.additionalInfo = additionalInfo;
+        studioId++;
+    }
+
+    static int getId() {
+        return studioId;
     }
     
     void addReserv(Reserve reserv) {

@@ -18,6 +18,7 @@ public class Order {
     private FotoStudio fotoStudio;
     private SellService service;
     private Schedule schedule;
+    private static int orderId;
 
     public Order(Customer customer, FotoStudio fotoStudio, SellService service, Schedule schedule) {
         // TODO Auto-generated constructor stub
@@ -25,6 +26,11 @@ public class Order {
         this.fotoStudio = fotoStudio;
         this.service = service;
         this.schedule = schedule;
+        orderId++;
+    }
+
+    static int getId() {
+        return orderId;
     }
     
     void setCustomer(Customer customer) {

@@ -21,19 +21,22 @@ public class Main {
         // TODO Auto-generated method stub
       PackageFotos pFotos1 = new PackageFotos("stantard", 250, 15, 10);
       PackageFotos pFotos2 = new PackageFotos("redact", 40, 35, 15);
+      SaveObjectToFile saveObjectToFile = new SaveObjectToFile();
+      saveObjectToFile.saveObject(pFotos1, "package1.out");
+      saveObjectToFile.saveObject(pFotos2, "package2.out");
       WorkWithFotos workWithFotos = new WorkWithFotos();
       workWithFotos.addPackage(pFotos1);
       workWithFotos.addPackage(pFotos2);
       System.out.println("time to edit all fotos in package: " + workWithFotos.timeEditingFotosInPackage() + " hours");
       
-      Schedule schedule = new Schedule();
-      schedule.setWorkWithFotos(workWithFotos);
-      schedule.setDeadline(2015, 2, 4);
-      schedule.setStartWork(2015, 1, 13);
-      schedule.calcEndWork();
-      System.out.println("days to edit: " + schedule.getAmountDays());
+//      Schedule schedule = new Schedule();
+//      schedule.setWorkWithFotos(workWithFotos);
+//      schedule.setDeadline(2015, 2, 4);
+//      schedule.setStartWork(2015, 1, 13);
+//      schedule.calcEndWork();
+//      System.out.println("days to edit: " + schedule.getAmountDays());
       //schedule.isOutOfDeadline();
-      schedule.displayInfo();
+      //schedule.displayInfo();
 //        SimpleDateFormat dateFormat = new SimpleDateFormat("EEEE");
 //        Calendar cal = Calendar.getInstance();
 //        cal.set(2015, 1, 14);

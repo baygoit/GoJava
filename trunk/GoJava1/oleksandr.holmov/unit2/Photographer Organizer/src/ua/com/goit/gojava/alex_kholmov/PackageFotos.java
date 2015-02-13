@@ -3,11 +3,13 @@
  */
 package ua.com.goit.gojava.alex_kholmov;
 
+import java.io.Serializable;
+
 /**
  * @author SASH
  *
  */
-public class PackageFotos implements ShowInfo{
+public class PackageFotos implements ShowInfo, Serializable{
     private String describePackage;
     private int amountFotos;
     private int timeEditingFoto; //minutes
