@@ -9,7 +9,8 @@ import ua.com.scread.kickstarter.FAQ;
 
 public class AdditionalInfoTest {
 	FAQs faq = new FAQs(new FAQ("question", "answer"));
-	AdditionalInfo additionalInfo = new AdditionalInfo("history", "video", faq);
+	Bonuses bonuses = new Bonuses(new Bonus(50, "Description"));
+	AdditionalInfo additionalInfo = new AdditionalInfo("history", "video", bonuses, faq);
 	
 	@Test
 	public void shouldBeHistory_whenGetHistory() {

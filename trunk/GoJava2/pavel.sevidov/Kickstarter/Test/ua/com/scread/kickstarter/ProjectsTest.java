@@ -15,7 +15,8 @@ import ua.com.scread.kickstarter.Projects;
 
 public class ProjectsTest {
 	FAQs faq = new FAQs(new FAQ("question", "answer"));
-	AdditionalInfo details = new AdditionalInfo("History", "video", faq);
+	Bonuses bonuses = new Bonuses(new Bonus(50, "Description"));
+	AdditionalInfo details = new AdditionalInfo("History", "video", bonuses, faq);
 	Project project = new Project("Project", "Description", 1, 1, details);
 	Projects projects = new Projects();
 	

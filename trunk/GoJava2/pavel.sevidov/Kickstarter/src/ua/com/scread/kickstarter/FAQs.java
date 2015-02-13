@@ -12,7 +12,7 @@ public class FAQs {
     }
     
     public FAQs(FAQ faq) {
-        faqs = new ArrayList<FAQ>();
+        this.faqs = new ArrayList<FAQ>();
         faqs.add(faq);
     }
     

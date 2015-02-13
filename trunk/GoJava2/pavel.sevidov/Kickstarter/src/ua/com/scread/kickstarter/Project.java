@@ -8,7 +8,6 @@ public class Project {
 	private int days;
 	private Category category;
 	private AdditionalInfo details;
-	private DonationBonuses donationBonuses;
 
 	public Project(String name, String description, double amount, int days, AdditionalInfo delails) {
 		this.name = name;
@@ -59,7 +58,15 @@ public class Project {
 	    details.addFAQ(faq);
 	}
 
-    @Override
+	public Bonus getBonus(int index) {
+	    return details.getBonus(index);
+	}
+	
+	public Bonuses getBonuses() {
+	    return details.getBonuses();
+	}
+
+	@Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
@@ -117,4 +124,6 @@ public class Project {
             return false;
         return true;
     }
+
+
 }

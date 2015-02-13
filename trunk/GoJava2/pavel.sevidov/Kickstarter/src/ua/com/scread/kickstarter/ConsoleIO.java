@@ -26,6 +26,11 @@ public class ConsoleIO implements IO {
 	
 	@Override
 	public String readString() {
-	    return scanner.next();
+	    return scanner.nextLine();
+	}
+	
+	@Override
+	public long readLong() {
+	    return scanner.nextLong();
 	}
 }

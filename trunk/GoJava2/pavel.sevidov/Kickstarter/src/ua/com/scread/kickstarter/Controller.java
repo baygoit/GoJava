@@ -80,10 +80,8 @@ public class Controller {
                 Integer menuItem = (Integer)selected;
                 if (menuItem == 1) {
                     return paymentMenu(project);                     
-                } else if(menuItem == 2) {
-                    return faqMenu(project);                    
                 } else {
-                    return null;
+                    return faqMenu(project);
                 }
             }
             
@@ -100,52 +98,32 @@ public class Controller {
     }
     
     protected Menu faqMenu(final Project project) {
-        return new Menu(io) {
+        return new Menu(io) {  // TODO придумать как изменить эту конструкцию
             
             @Override
             Menu nextMenu(Object selected) {
-                String question = (String)selected;
-                FAQ faq = new FAQ(question, "");
-                project.addFAQ(faq);
                 return null;
             }
             
             @Override
             Object choose(int menuItem) {
-                return menuItem;
-            }
-            
-            Object choose(String menuItem) {
-                return menuItem;
+                return null;
             }
             
             @Override
-            void ask() {
-                io.print("Enter your question: ");
+            void ask() {   
             }
             
             @Override
             public void run() {
-                while (true) {
-                    ask(); 
-                    
-                    String menuItem = io.readString();
-                    if (menuItem == "0")
-                        break;
-                    
-                    Object selected = choose(menuItem);
-                    if (selected == null)
-                        continue;
-                    
-                    Menu subMenu = nextMenu(selected);
-                    if ( subMenu != null) {
-                        subMenu.run();                
-                    } else {
-                        break;
-                    }
-                }
+                io.print("Enter your question: ");
+                io.readString(); // почему?
+                String question = io.readString();;
+                FAQ faq = new FAQ(question, "");
+                project.addFAQ(faq);
             }
         };
+        
     }
 
     private Menu paymentMenu(final Project project) {
@@ -153,35 +131,69 @@ public class Controller {
             
             @Override
             Menu nextMenu(Object selected) {
+                if (selected.toString() != "") { // TODO придумать лучшее решение
+                    Bonus bonus = (Bonus)selected;
+                    donateWithBonus(project, bonus);
+                }
                 return null;
             }
             
             @Override
             Object choose(int menuItem) {
-                return menuItem;
+                if(menuItem <= project.getBonuses().size()){
+                    return project.getBonus(menuItem - 1);                    
+                } else {
+                    return donateWithoutBonus(project);
+                }
             }
             
             @Override
             void ask() {
-            }
-
-            @Override
-            public void run() {
-                io.print("Enter name: ");
-                String name = io.readString();
-                io.print("Enter card number");
-                int cardNumber = io.read();
-                io.print("Enter donate amount: ");
-                int amount = io.read();
-                project.addMoney(amount);
-                showThanks();
+                showBonuses(project);
             }
         };
+        
     }
     
+    private Object donateWithBonus(Project project, Bonus bonus) {            
+        pymentCardInfo();
+        project.addMoney(bonus.getAmount());
+        showThanks();
+        return null;
+    }
+    
+    private String donateWithoutBonus(Project project) {
+        pymentCardInfo();
+        io.print("Enter donate amount: ");
+        int amount = io.read();
+        project.addMoney(amount);
+        showThanks();
+        return "";
+    }
+
+    private void pymentCardInfo() {
+        io.print("Enter name: ");
+        io.readString();  // почему?
+        @SuppressWarnings("unused")
+        String name = io.readString();
+        io.print("Enter card number: ");
+        @SuppressWarnings("unused")
+        long cardNumber = io.readLong();
+    }
     
 
     
+    protected void showBonuses(Project project) {
+        Bonuses bonuses = project.getBonuses();
+        for(int index = 0; index < bonuses.size(); index++) {
+            Bonus bonus = bonuses.getBonus(index);
+            println((index + 1) + " - " + bonus.getAmount() + ": " + bonus.getDescription());
+        }
+        println(bonuses.size() + 1 + " - " + "Other amount");
+        showExit();
+        
+    }
+
     private void showThanks() {
         println("Thank you for your donation!");
     }

@@ -56,8 +56,10 @@ public class KickstarterTest {
         categories.add(category2);
         
         Projects projects = new Projects();
+        Bonuses bonuses = new Bonuses(new Bonus(50, "Description"));
+        FAQs faqs = new FAQs(new FAQ("Question", "Answer"));
         Project project = new Project("Project", "Description", 10, 10, 
-                new AdditionalInfo("Some history", "Video link", new FAQs(new FAQ("Question", "Answer"))));
+                new AdditionalInfo("Some history", "Video link", bonuses, faqs));
         project.setCategory(category1);
         projects.add(project);
       
@@ -97,8 +99,10 @@ public class KickstarterTest {
         categories.add(category1);
         
         Projects projects = new Projects();
+        Bonuses bonuses = new Bonuses(new Bonus(50, "Description"));
+        FAQs faqs = new FAQs(new FAQ("Question", "Answer"));
         Project project = new Project("Project", "Description", 10, 10, 
-                new AdditionalInfo("Some history", "Video link", new FAQs(new FAQ("Question", "Answer"))));
+                new AdditionalInfo("Some history", "Video link", bonuses, faqs));
         project.setCategory(category1);
         projects.add(project);
       
@@ -123,8 +127,9 @@ public class KickstarterTest {
         IO io = mock(IO.class);
         QuoteGenerator quote = mock(QuoteGenerator.class);
         when(quote.getQuote()).thenReturn("quote");
-        when(io.read()).thenReturn(3, 1, 1, 0, 100500, 0, 0, 0);
+        when(io.read()).thenReturn(3, 1, 1, 2, 100500, 0, 0, 0);
         when(io.readString()).thenReturn("Name");
+        when(io.readLong()).thenReturn((long) 1234567890);
         KickstarterRunner kickstarter = new KickstarterRunner(model, io, quote);
         
         kickstarter.run();

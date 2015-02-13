@@ -4,11 +4,13 @@ public class AdditionalInfo {
 	private String history;
 	private String video;
 	private FAQs faqs;
+	private Bonuses bonuses;
 
-	public AdditionalInfo(String history, String video, FAQs faqs) {
+	public AdditionalInfo(String history, String video, Bonuses bonuses, FAQs faqs) {
 		this.history = history;
 		this.video = video;
 		this.faqs = faqs;
+		this.bonuses = bonuses;
 	}
 	
 	public String getHistory() {
@@ -26,11 +28,24 @@ public class AdditionalInfo {
 	public void addFAQ(FAQ faq) {
 	    faqs.add(faq);
 	}
+	
+	public void addBonus(Bonus bonus) {
+	    bonuses.add(bonus);
+	}
 
+	public Bonuses getBonuses() {
+	    return bonuses;
+	}
+	
+	public Bonus getBonus(int index) {
+	    return bonuses.getBonus(index);
+	}
+	
     @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
+        result = prime * result + ((bonuses == null) ? 0 : bonuses.hashCode());
         result = prime * result + ((faqs == null) ? 0 : faqs.hashCode());
         result = prime * result + ((history == null) ? 0 : history.hashCode());
         result = prime * result + ((video == null) ? 0 : video.hashCode());
@@ -46,6 +61,11 @@ public class AdditionalInfo {
         if (getClass() != obj.getClass())
             return false;
         AdditionalInfo other = (AdditionalInfo) obj;
+        if (bonuses == null) {
+            if (other.bonuses != null)
+                return false;
+        } else if (!bonuses.equals(other.bonuses))
+            return false;
         if (faqs == null) {
             if (other.faqs != null)
                 return false;
@@ -63,5 +83,6 @@ public class AdditionalInfo {
             return false;
         return true;
     }
+
 
 }
