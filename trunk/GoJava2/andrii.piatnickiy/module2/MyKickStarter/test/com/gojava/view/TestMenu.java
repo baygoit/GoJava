@@ -35,23 +35,23 @@ public class TestMenu {
         Level1 level1 = new Level1(null);
         assertTrue(level1.getPosition() == actual.getPosition());
     }
-
+//
     @Test
-    public void shoulNotAlLowed_WhenTryGoUpOutOfMenu() {
+    public void shoulNotAlLowed_WhenTryGoUpOutOfMenu() throws Exception {
         menu.setCurrentLevelPosition(1);
         String actual = menu.nextLevel(0);
-        assertEquals("not allowed to go below this level", actual);
+        assertEquals("", actual);
     }
 
     @Test
-    public void shoulNotAlLowed_WhenTryGoDownOutOfMenu() {
+    public void shoulNotAlLowed_WhenTryGoDownOutOfMenu() throws Exception {
         menu.setCurrentLevelPosition(4);
         String actual = menu.nextLevel(1);
-        assertEquals("not allowed to go below this level", actual);
+        assertEquals("", actual);
     }
 
     @Test
-    public void shoulGetStringFromCurrentLevel_FromLevel1ToLevel2() {
+    public void shoulGetStringFromCurrentLevel_FromLevel1ToLevel2() throws Exception {
         initCategories();
         initProjects(projectStorage);
         menu.setCurrentLevelPosition(1);
@@ -62,7 +62,7 @@ public class TestMenu {
     }
 
     @Test
-    public void shoulGetStringFromCurrentLevel_DownFromLevel2ToLevel3() {
+    public void shoulGetStringFromCurrentLevel_DownFromLevel2ToLevel3() throws Exception {
         initCategories();
         initProjects(projectStorage);
         menu.setCurrentLevelPosition(2);
@@ -74,7 +74,7 @@ public class TestMenu {
     }
 
     @Test
-    public void shouldLevelUp_WhenType0() {
+    public void shouldLevelUp_WhenType0() throws Exception {
         initCategories();
         initProjects(projectStorage);
         menu.setCurrentLevelPosition(2);
@@ -83,7 +83,7 @@ public class TestMenu {
     }
     
     @Test
-    public void shouldLevelUp_WhenType0FromLevel3ToLevel2() {
+    public void shouldLevelUp_WhenType0FromLevel3ToLevel2() throws Exception {
         initCategories();
         initProjects(projectStorage);
         menu.setCurrentLevelPosition(3);

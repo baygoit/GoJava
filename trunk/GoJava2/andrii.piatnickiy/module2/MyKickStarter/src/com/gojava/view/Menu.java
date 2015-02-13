@@ -45,8 +45,7 @@ public class Menu {
         try {
             if ((nubberForNextLevel == 0 && currentLevelPosition == 1)
                     || (nubberForNextLevel > 0 && currentLevelPosition == 4)) {
-                Error e = new Error("not allowed to go below this level");
-                throw e;
+                throw new MenuUpException(nubberForNextLevel);
             }
             Level level;
             // TODO refactoring
@@ -60,7 +59,7 @@ public class Menu {
                 }
             } else {
                 currentLevelPosition++;
-                // TODO refactoring
+                // TODO refactoring 
                 if (currentLevelPosition == 2) {
                     currentCategory = nubberForNextLevel;
                 }
@@ -70,8 +69,8 @@ public class Menu {
             }
             level = getCurrentLevel();
             result = level.displayMySelf(nubberForNextLevel);
-        } catch (Error e) {
-            System.err.println("not allowed to go below this level");
+        } catch (Exception e) {
+            System.err.println(e);
         }
 
         return result;
