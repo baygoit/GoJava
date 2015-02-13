@@ -23,7 +23,7 @@ public class Display {
 	public void displayQuote() {
 		consoleOutput.output(quotationsController.passRandomQuoteToView().getQuote());
 	}
- 
+
 	public void displayCategories() {
 		StringBuilder displayCategories = new StringBuilder();
 		displayCategories.append("Выберите категорию :\n").append(categoriesController.passContentToView())
@@ -33,7 +33,7 @@ public class Display {
 	}
 
 	public void displaySelectedCategoryName(Category category) {
-		consoleOutput.output("Вы выбрали категорию " + category.getName());
+		consoleOutput.output(new StringBuilder().append("Вы выбрали категорию ").append(category.getName()).toString());
 	}
 
 	public void displayProjects(Category category) {
@@ -47,7 +47,8 @@ public class Display {
 	public void displaySpecificProject(int i, Category category) throws IndexOutOfBoundsException {
 		StringBuilder displaySpecificProject = new StringBuilder();
 		displaySpecificProject.append(projectsController.passSpecificProjectToView(i, category))
-				.append("\n0 - возврат в категорию ").append(category.getName());
+				.append("\n0 - возврат в категорию ").append(category.getName())
+				.append(", 1 - проинвестировать в проект");
 		consoleOutput.output(displaySpecificProject.toString());
 	}
 }

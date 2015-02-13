@@ -6,6 +6,25 @@ public class ConsoleInput {
 	Scanner scanner = new Scanner(System.in);
 
 	public int nextIntIndex() {
-		return scanner.nextInt();
+		boolean inputMismatch = true;
+		int index = -1;
+		while (inputMismatch) {
+			if (scanner.hasNextInt())
+				index = scanner.nextInt();
+			else {
+				System.out.print("Введен некорректный символ, допустим ввод цифр от 0-9. Повторите ввод.\n");
+				scanner.next();
+				continue;
+			}
+			inputMismatch = false;
+		}
+		return index;
+	}
+
+	public String nextString() {
+
+		String string = scanner.next();
+
+		return string;
 	}
 }

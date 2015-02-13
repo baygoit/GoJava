@@ -4,6 +4,7 @@ import ua.home.kickstarter.content.Category;
 import ua.home.kickstarter.controller.CategoriesController;
 import ua.home.kickstarter.controller.ProjectsController;
 import ua.home.kickstarter.controller.QuotationsController;
+import ua.home.kickstarter.model.PaymentsStorage;
 import ua.home.kickstarter.view.ConsoleInput;
 import ua.home.kickstarter.view.ConsoleOutput;
 import ua.home.kickstarter.view.Display;
@@ -29,10 +30,14 @@ public class Kickstarter {
 
 	public void menuLevel0() {
 		int input = consoleInput.nextIntIndex();
+
 		if (input > 0 && input <= projectsController.passContentToView().size()) {
 			category = categoriesController.passSpecificContentToView(input);
 			display.displaySelectedCategoryName(category);
 			menuLevel1();
+		} else if (input == 0) {
+			System.out.print("Спасибо за использование нашей программы!");
+			return;
 		} else {
 			System.out.print("Категория под номером " + input + " отстствует в системе, повторите ввод. \n");
 			menuLevel0();
@@ -45,12 +50,12 @@ public class Kickstarter {
 	}
 
 	public void menuLevel2() {
-		int input = 0;
+		int input = -1;
 		try {
 			input = consoleInput.nextIntIndex();
 			if (input > 0) {
 				display.displaySpecificProject(input, category);
-				menuLevel3();
+				menuLevel3(input);
 			} else if (input == 0) {
 				display.displayCategories();
 				menuLevel0();
@@ -61,11 +66,26 @@ public class Kickstarter {
 		}
 	}
 
-	public void menuLevel3() {
-		if (consoleInput.nextIntIndex() == 0) {
+	public void menuLevel3(int i) {
+		PaymentsStorage paymentsStorage = new PaymentsStorage();
+		int input = consoleInput.nextIntIndex();
+		if (input == 0) {
 			menuLevel1();
+		} else if (input == 1) {
+			System.out.print("Введите Ваше имя: ");
+			String name = consoleInput.nextString();
+			System.out.print("Введите номер карты: ");
+			String cardNumber = consoleInput.nextString();
+			System.out.print("Введите сумму платежа: ");
+			int amount = consoleInput.nextIntIndex();
+			paymentsStorage
+					.addNewPayment(name, cardNumber, amount, projectsController.passSpecificProject(i, category));
+			projectsController.passSpecificProject(i, category).addPayment(amount);
+			projectsController.save();
+			display.displaySpecificProject(i, category);
+			menuLevel3(i);
 		} else {
-			menuLevel3();
+			menuLevel3(i);
 		}
 	}
 }

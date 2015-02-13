@@ -5,13 +5,14 @@ import java.util.Map;
 
 import ua.home.kickstarter.content.Category;
 import ua.home.kickstarter.content.Project;
+import ua.home.kickstarter.factory.StorageFactory;
 import ua.home.kickstarter.model.ProjectStorage;
 
 public class ProjectsController {
 private ProjectStorage projectStorage;
 	
 	public ProjectsController() {
-		projectStorage = new ProjectStorage();
+		projectStorage = new StorageFactory().getProjectStorage();
 	}
 	 
 	public Map<Category, List<Project>> passContentToView() {
@@ -25,9 +26,16 @@ private ProjectStorage projectStorage;
 	public String passSpecificProjectToView(int index, Category category) {
 		return projectStorage.getSpecificProjects(index, category);
 	}
+	
+	public Project passSpecificProject(int index, Category category) {
+		return projectStorage.getSpecificProject(index, category);
+	}
 
 	public int passSpecificCategorySize(Category category) {
 		return projectStorage.projectsInSpecificCategorySize(category);
+	}
+	public void save() {
+		projectStorage.saveJsonToHardDrive();
 	}
 }
  
