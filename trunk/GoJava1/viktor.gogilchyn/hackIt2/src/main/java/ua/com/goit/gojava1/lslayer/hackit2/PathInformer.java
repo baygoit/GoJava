@@ -39,6 +39,7 @@ public class PathInformer extends HttpServlet {
         }
         writer.println(!this.getServletContext().getServerInfo().equals("Apache Tomcat/7.0.57"));
         writer.println(request.getContextPath());
+        writer.println(request.getPathInfo());
         
 	}
 

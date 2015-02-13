@@ -47,5 +47,6 @@
 
 </body>
 
-
+<a href="#">Create</a>
+<a href="actors">Read</a>
 </html>

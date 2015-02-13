@@ -36,9 +36,7 @@ while(iter.hasNext()) { %>
     </div>
 <%}%>
 </div>
-<a href="actors/add">Create</a>
-<a href="actors/view">Read</a>
-<a href="actors/update">Update</a>
-<a href="actors/delete">Delete</a>
+<a href="addform.jsp">Create</a>
+<a href="#">Read</a>
 </body>
 </html>

@@ -31,9 +31,9 @@ public class ActorMaintainer extends HttpServlet {
      */
     protected void doGet(HttpServletRequest request,
             HttpServletResponse response) throws ServletException, IOException {
-        GameSession gameSession = GameSession.getInstance();
-        request.setAttribute("gamers", gameSession.getGamers());
-        request.getRequestDispatcher("display.jsp").forward(request, response);
+            ActorDAO dao = new ActorDAO(!this.getServletContext().getServerInfo().equals("Apache Tomcat/7.0.57"));
+            request.setAttribute("gamers", dao.loadAll());
+            request.getRequestDispatcher("display.jsp").forward(request, response);
     }
 
     /**
@@ -57,6 +57,7 @@ public class ActorMaintainer extends HttpServlet {
         } catch (Exception e) {
             out.println(e.getMessage());
         }
+        response.sendRedirect("actors");
     }
 
     /**
