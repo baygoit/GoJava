@@ -6,7 +6,7 @@ public class Storage {
 	private Kickstart kick;
 	
 	public Storage(Output output, Input input, Quote quote){
-		categories = new Categories();
+		categories = new InFileCategories("categories.txt");
 		projects = new Projects();
 		kick = new Kickstart(output, input, categories, projects, quote);
 	}

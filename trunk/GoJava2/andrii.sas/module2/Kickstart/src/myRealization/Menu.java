@@ -30,7 +30,6 @@ public abstract class Menu {
 	}
 	
 	public void run (int size){
-		output.println("" + size);
 		while (true){
 			displayItems();
 			int enteredValue = checkForEnteringLetters();

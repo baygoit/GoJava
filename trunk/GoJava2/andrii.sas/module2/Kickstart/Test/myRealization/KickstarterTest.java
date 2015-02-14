@@ -27,7 +27,7 @@ public class KickstarterTest {
 			}
 		};
 		
-		Categories categories = new Categories();
+		Categories categories = new InnerMemoryCategories();
 		Projects projects = new Projects();
 		Quote Quote = new Quote() {
 			
@@ -82,7 +82,7 @@ public class KickstarterTest {
 		//given
 		FakeOutput out = new FakeOutput();
 		Input in = new FakeInput(1, 0, 0);			
-		Categories categories = new Categories();
+		Categories categories = new InnerMemoryCategories();
 		Projects projects = new Projects();
 		Quote Quote = new StubQuote();
 		Category category1 = new Category("category1");
@@ -112,7 +112,7 @@ public class KickstarterTest {
 		//given
 		FakeOutput out = new FakeOutput();
 		Input in = new FakeInput(1, 1, 0, 0, 0);			
-		Categories categories = new Categories();
+		Categories categories = new InnerMemoryCategories();
 		Projects projects = new Projects();
 		Quote Quote = new StubQuote();
 		Category category1 = new Category("category1");
@@ -155,7 +155,7 @@ public class KickstarterTest {
 		//given
 		FakeOutput out = new FakeOutput();
 		Input in = new FakeInput(1, 1, 1, 0, 3, 0, 3, 0);			
-		Categories categories = new Categories();
+		Categories categories = new InnerMemoryCategories();
 		Projects projects = new Projects();
 		Quote Quote = new StubQuote();
 		Category category1 = new Category("category1");
@@ -202,7 +202,7 @@ public class KickstarterTest {
 		//given
 		Output out = mock(Output.class);
 		Input in = mock(Input.class);
-		Categories categories = new Categories();
+		Categories categories = new InnerMemoryCategories();
 		Projects projects = new Projects();
 		Quote quote = mock(Quote.class);
 		Category category1 = new Category("category1");

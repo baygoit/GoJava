@@ -2,15 +2,24 @@ package myRealization;
 
 import static org.junit.Assert.*;
 
+import org.junit.Before;
 import org.junit.Test;
 
-public class CategoriesTest {
+public abstract class CategoriesTest {
 	
+	private Categories list;
+
+	@Before
+	public void start(){
+		list = getList();
+	}
+	
+	
+	abstract Categories getList();
+
+
 	@Test
 	public void shouldMakeList_whenCategoryAdded(){
-		//given
-		Categories list = new Categories();
-		
 		//when
 		Category category1 = new Category("Category1");
 		Category category2 = new Category("Category2");
@@ -23,9 +32,6 @@ public class CategoriesTest {
 	
 	@Test
 	public void shouldReturnEmptyString_whenNoOneCategories(){
-		//given
-		Categories list = new Categories();
-		
 		//when
 		String categories = list.getCategories();
 		
@@ -33,12 +39,25 @@ public class CategoriesTest {
 		assertEquals("", categories);
 	}
 
-
+	@Test
+	public void shouldBeEmptyArray_whenNoOneCategoryInIt(){
+		//then
+		assertEquals(0, list.getLenth());
+	}
+	
+	@Test
+	public void shouldGetArraysLenth_whenItHasCategories(){
+		//given
+		Category category1 = new Category("Category1");
+		Category category2 = new Category("Category2");
+		list.addCategory(category1);
+		list.addCategory(category2);
+		//then
+		assertEquals(2, list.getLenth());
+	}
+	
 	@Test
 	public void shouldGetCategoryByIndex_whenItAdded(){
-		//given
-		Categories list = new Categories();
-		
 		//when
 		Category category1 = new Category("Category1");
 		Category category2 = new Category("Category2");
@@ -46,7 +65,8 @@ public class CategoriesTest {
 		list.addCategory(category2);
 		
 		//then
-		assertSame(category1, list.readCategory(0));
-		assertSame(category2, list.readCategory(1));
+		assertEquals(category1, list.readCategory(0));
+		assertEquals(category2, list.readCategory(1));
 	}
+
 }
