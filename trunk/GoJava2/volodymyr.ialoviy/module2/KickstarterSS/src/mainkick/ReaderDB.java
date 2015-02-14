@@ -6,7 +6,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class ReaderBD {
+public class ReaderDB {
 	
 	public ArrayList<String[]> read(String fileName){
 	    exists(fileName);

@@ -40,7 +40,7 @@ public class TestCheckClass {
 	
 	@Test
     public void shouldSendReport_whenNotSendReport(){
-		Check check  = new Check(new FakeInputsConsole("5", "i", "88", "4"), new FakeOutputConsole());
+		InputChecker check  = new InputChecker(new FakeInputsConsole("5", "i", "88", "4"), new FakeOutputConsole());
 		
 		int rezult = check.checkNumber(new int[] {1,4,6});
 		
@@ -53,7 +53,7 @@ public class TestCheckClass {
 	
 	@Test (expected = IndexOutOfBoundsException.class)
     public void shouldMethodStop_whenMethodDontStop(){
-		Check check  = new Check(new FakeInputsConsole("5", "i", "88", "4"), new FakeOutputConsole());
+		InputChecker check  = new InputChecker(new FakeInputsConsole("5", "i", "88", "4"), new FakeOutputConsole());
 		
 		check.checkNumber(new int[] {1,4,6});
 		check.getOut().getMessages().get(4);
@@ -61,7 +61,7 @@ public class TestCheckClass {
 	
 	@Test
     public void shouldFallWithinTheBoundaries_whenIsRankedWithinTheBoundaries(){
-		Check check  = new Check(new FakeInputsConsole("1", "4", "6"), new FakeOutputConsole());
+		InputChecker check  = new InputChecker(new FakeInputsConsole("1", "4", "6"), new FakeOutputConsole());
 		
 		int rezult = check.checkNumber(new int[] {1,4,6});
 		assertTrue(1 == rezult);
@@ -78,7 +78,7 @@ public class TestCheckClass {
 	
 	@Test
     public void shouldSendReportNotNumber_whenNotSendReport(){
-		Check check  = new Check(new FakeInputsConsole("е", "1"), new FakeOutputConsole());
+		InputChecker check  = new InputChecker(new FakeInputsConsole("е", "1"), new FakeOutputConsole());
 		
 		int rezult = check.checkNumber(new int[] {1,4,6});
 		assertEquals("It is not a number, please try again", check.getOut().getMessages().get(0).toString());
@@ -88,14 +88,14 @@ public class TestCheckClass {
 	
 	@Test (expected = IndexOutOfBoundsException.class)
     public void shouldIOOBE_whenNotIOOBE(){
-		Check check  = new Check(new FakeInputsConsole("е"), new FakeOutputConsole());
+		InputChecker check  = new InputChecker(new FakeInputsConsole("е"), new FakeOutputConsole());
 		
 		check.checkNumber(new int[] {1,4,6});
     }	
 
 	@Test
     public void shouldSendReportNumberNumberDoesNotExist_whenNotSendReport(){
-		Check check  = new Check(new FakeInputsConsole("-1", "6"), new FakeOutputConsole());
+		InputChecker check  = new InputChecker(new FakeInputsConsole("-1", "6"), new FakeOutputConsole());
 		
 		int rezult = check.checkNumber(new int[] {1,4,6});
 		
@@ -106,14 +106,14 @@ public class TestCheckClass {
 	
 	@Test (expected = IndexOutOfBoundsException.class)
     public void shouldExpectedIOOBE_whenNotIOOBE(){
-		Check check  = new Check(new FakeInputsConsole("-1"), new FakeOutputConsole());
+		InputChecker check  = new InputChecker(new FakeInputsConsole("-1"), new FakeOutputConsole());
 		
 		check.checkNumber(new int[] {1,4,6});
     }
 	
 	@Test
     public void shouldZero_whenNotZero(){
-		Check check  = new Check(new FakeInputsConsole("0", "1"), new FakeOutputConsole());
+		InputChecker check  = new InputChecker(new FakeInputsConsole("0", "1"), new FakeOutputConsole());
 		
 		int rezult = check.checkNumber(new int[] {0,1,4,6});
 		
@@ -123,7 +123,7 @@ public class TestCheckClass {
 
 	@Test
     public void shouldZero_whenNotZero2(){
-		Check check  = new Check(new FakeInputsConsole("2", "1"), new FakeOutputConsole());
+		InputChecker check  = new InputChecker(new FakeInputsConsole("2", "1"), new FakeOutputConsole());
 		
 		int rezult = check.checkNumber(new int[] {0,1,4,6});
 		assertEquals("This number does not exist, please try again", check.getOut().getMessages().get(0).toString());

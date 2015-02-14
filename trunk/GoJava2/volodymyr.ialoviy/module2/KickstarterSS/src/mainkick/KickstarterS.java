@@ -1,9 +1,9 @@
 package mainkick;
-import java.util.ArrayList;
+
 
 public class KickstarterS {
-	private int chosenCategory;
-	private int chosenProject;
+	private int chosenCategoryId;//TODO DELETE
+	private int chosenProject;//TODO DELETE
 	private int magic = 777;
 	private int menuCategories = 222;
 	private int menuProjects = 333;
@@ -11,27 +11,22 @@ public class KickstarterS {
 	private int menuPayment = 555;
 	private int menuQuestion = 666;
 	private int menu = menuCategories;
-	private int choiceTo;
-	private int chosenPay;
+	private int choiceTo;//TODO DELETE
+	private int chosenPay;//TODO DELETE
 	private int exit = 999;
-	
-	private Check check;
+
+	private InputChecker check;
 	private Output out;
 	private Categories categories;
-	private Category category;
 	private Projects projects;
-	private Project project;
-	
-	public KickstarterS(Check check, Output out, Categories categories, Category category, Projects projects, Project project) {
+
+	public KickstarterS(InputChecker check, Output out, Categories categories, Projects projects) {
 		this.check = check;
 		this.setOut(out);
-	
-        this.categories = categories;
-        this.category = category;
-        this.projects = projects;
-        this.project = project;
+		this.categories = categories;
+		this.projects = projects;
 	}
-	
+
 	public OutputConsole getOut() {
 		return (OutputConsole) out;
 	}
@@ -39,151 +34,192 @@ public class KickstarterS {
 	public void setOut(Output out2) {
 		this.out = out2;
 	}
-	
-	
-	
-	public void kickstarter(){
+
+	public void kickstarter() {
 		Quotes quote = new Quotes();
 		printer(quote.getQuote());
+		
+		categories.writeAllCatecories();
 		projects.writeAllProjects();
-		categories.readAllCatecories();
+
 		categories();
 	}
-		
-	private void categories(){
-		printCategories();
+
+	private void categories() {
+		showAllCategories();
 		askCategory();
-		
-		if (sleep(chosenCategory)){switcher();}
-		
+
+		if (sleepIfMagic(chosenCategoryId)) {
+			switchMenu();
+		}
+
 		menu = menuProjects;
-		switcher();
+		switchMenu();
 	}
 
-	private void projects(){
-		int[] intSwitch = {menuCategories};
-		
-		printProjects();
+	private void projects() {
+		int[] intSwitch = { menuCategories };
+
+		printProjectsInCategory();
 		askProject(intSwitch);
-		
-		if (sleep(chosenProject)){switcher();}
-		
-		if (compare(intSwitch, chosenProject)) {menu = menuCategories; switcher();}
-		
+
+		if (sleepIfMagic(chosenProject)) {
+			switchMenu();
+		}
+
+		if (addArrayElement(intSwitch, chosenProject)) {
+			menu = menuCategories;
+			switchMenu();
+		}
+
 		menu = menuProject;
-		switcher();
+		switchMenu();
 	}
 
-	private void project(){
-		int[] intSwitch = {menuProjects, menuPayment, menuQuestion, exit};
-		
+	private void project() {
+		int[] intSwitch = { menuProjects, menuPayment, menuQuestion, exit };
+
 		printProject();
 		askAfterProject(intSwitch);
-		
-		if (sleep(choiceTo)){switcher();}
-		
-		if (compare(intSwitch, choiceTo)) {menu = choiceTo; switcher();}
+
+		if (sleepIfMagic(choiceTo)) {
+			switchMenu();
+		}
+
+		if (addArrayElement(intSwitch, choiceTo)) {
+			menu = choiceTo;
+			switchMenu();
+		}
 	}
-	
-	private void payment(){
-		int[] intSwitch = {0, 1, 2, 3};
-		
+
+	private void payment() {
+		int[] intSwitch = { 0, 1, 2, 3 };
+
 		printChoicePayment();
 		askHowMuchPay(intSwitch);
 
-		if (sleep(chosenPay)){switcher();}
-		
+		if (sleepIfMagic(chosenPay)) {
+			switchMenu();
+		}
+
 		printer("Enter your name:");
 		String name = check.checkName();
-		if (name.equals(Integer.toString(magic))){sleep(Integer.parseInt(name));switcher();}
+		if (name.equals(Integer.toString(magic))) {
+			sleepIfMagic(Integer.parseInt(name));
+			switchMenu();
+		}
 		printer("Enter your credit card number:");
 		long cardNumber = check.checkCard();
-		if ((int)cardNumber == magic){sleep((int)cardNumber);switcher();}
-		printer("Enter the amount of donations:");
-		if (chosenPay == 0){
-			chosenPay = check.checkAmount();
-			if (sleep(chosenPay)){switcher();}
+		if ((int) cardNumber == magic) {
+			sleepIfMagic((int) cardNumber);
+			switchMenu();
 		}
-		
-		
-		project.setDonation(projects.getListProject(), chosenPay, chosenProject - 1);
-		
+		printer("Enter the amount of donations:");
+		if (chosenPay == 0) {
+			chosenPay = check.checkAmount();
+			if (sleepIfMagic(chosenPay)) {
+				switchMenu();
+			}
+		}
+
+		projects.setDonation(chosenProject - 1, chosenPay);
+
 		menu = menuProject;
-		switcher();
+		switchMenu();
 	}
-	
-	private void question(){
-		printQuestion();
+
+	private void question() {
+		printAskQuestion();
 		askQuestion();
 
 		menu = menuProject;
-		switcher();
+		switchMenu();
 	}
 
-	private void switcher(){
-		switch(menu){
-			case 222: categories(); break;
-			case 333: projects(); break;
-			case 444: project(); break;
-			case 555: payment(); break;
-			case 666: question(); break;
-			case 999: System.exit(0); break;
+	private void switchMenu() {
+		switch (menu) {
+		case 222:
+			categories();
+			break;
+		case 333:
+			projects();
+			break;
+		case 444:
+			project();
+			break;
+		case 555:
+			payment();
+			break;
+		case 666:
+			question();
+			break;
+		case 999:
+			System.exit(0);
+			break;
 		}
 	}
-	
-	private void printCategories(){
-		printer(categories.showAllCatecories());
-		printer("Choice Category Number: ");		
+
+	private void showAllCategories() {
+		printer(categories.getStringAllCatecories());
+		printer("Choice Category Number: ");
 	}
 
-	private void askCategory(){
-		chosenCategory = check.checkNumber(categories.kickContainCategory()) - 1;
-	}
-	
-	private void printProjects(){
-		printer("Your chosen category: " + category.showCatecoryName(chosenCategory, categories) + ", containing the following projects: ");		//TODO
-		printer(category.showAllProjectInCategory(chosenCategory, projects, categories));															//TODO project поменял на projects
-//		printer(category.showAllProjectInCategory(chosenCategory - 1, project, projects, categories));
-		printer("Choice Project Number or " + menuCategories + " for exit to Category: ");
+	private void askCategory() {
+		chosenCategoryId = check.checkNumber(categories.getKickCategories()) - 1;
 	}
 
-	private void askProject(int[] intSwitch){
-		chosenProject = check.checkNumber(concatArray(category.projectsContain(chosenCategory, categories), intSwitch));							//TODO
-	}
-	
-	private void askAfterProject(int[] intSwitch){
-		choiceTo = check.checkNumber(intSwitch);		
+	private void askProject(int[] allowedVariants) {
+		chosenProject = check.checkNumber(concatArray(
+				categories.projectsContain(chosenCategoryId),
+				allowedVariants)); // TODO
 	}
 
-	private void printProject(){
-		printer(projects.showProjectFull(chosenProject - 1));//TODO project поменял на projects
-		if (project.getFaq().size() != 0){printFaq(project.getFaq());}
-		printer("Choice " + menuProjects + " for exit to Project list.\nChoice " + menuPayment + " to invest in the project:"
-				+ "Have a question? If the info above doesn't help, you can ask the project creator directly - Choice " + menuQuestion + ":");
+	private void askAfterProject(int[] intSwitch) {
+		choiceTo = check.checkNumber(intSwitch);
+	}
+
+	private void askHowMuchPay(int[] intSwitch) {
+		chosenPay = check.checkNumber(intSwitch);
 	}
 	
-	private void askHowMuchPay(int[] intSwitch){
-		chosenPay = check.checkNumber(intSwitch);		
+	private void askQuestion() {
+		projects.addFAQ(chosenProject - 1);
+	}
+	
+	private void printProjectsInCategory() {
+		printer("Your chosen category: "
+				+ categories.showCatecoryName(chosenCategoryId)
+				+ ", containing the following projects: ");
+		printer(categories.showAllProjectInCategory(chosenCategoryId, projects));
+		printer("Choice Project Number or " + menuCategories
+				+ " for exit to Category: ");
+	}
+	
+	private void printProject() {
+		printer(projects.showProjectFull(chosenProject - 1));
+		printer("Choice "
+				+ menuProjects
+				+ " for exit to Project list.\nChoice "
+				+ menuPayment
+				+ " to invest in the project:"
+				+ "Have a question? If the info above doesn't help, you can ask the project creator directly - Choice "
+				+ menuQuestion + ":");
 	}
 
 	private void printChoicePayment() {
-		printer("0 - No thanks, I just want to help the project."
-				+ "1 - 1$ = OUR UNDYING LOVE"
-				+ "2 - 10$ = HEY… NICE SHIRT"
-				+ "3 - 40$ = KICKSTARTER EXCLUSIVE");		
-	}
-	
-	private void askQuestion(){
-		project.setFAQ();		
+		printer("\"0\" - No thanks, I just want to help the project."
+				+ " \"1\" - 1$ = OUR UNDYING LOVE"
+				+ " \"2\" - 10$ = HEY… NICE SHIRT"
+				+ " \"3\" - 40$ = KICKSTARTER EXCLUSIVE");
 	}
 
-	private void printQuestion() {
-		printer("Enter your question:");		
+	private void printAskQuestion() {
+		printer("Enter your question:");
 	}
-	
-	private Boolean sleep(int m){
+
+	private Boolean sleepIfMagic(int m) {
 		Boolean b = false;
-		if (m == magic){
+		if (m == magic) {
 			try {
 				Thread.sleep(10000);
 			} catch (InterruptedException e) {
@@ -194,27 +230,22 @@ public class KickstarterS {
 		}
 		return b;
 	}
-	
-	private void printer(String string){
+
+	private void printer(String string) {
 		out.print(string);
 	}
-	
-	private void printFaq(ArrayList<String> faq) {
-        for(int i = 0; i < faq.size(); i++){
-        	printer("question " + i + " - " + faq.get(i));
-        }
-	}
-	
-	private Boolean compare(int[] a, int b) {
+
+	private Boolean addArrayElement(int[] a, int b) {
 		Boolean c = false;
-		for (int i = 0 ; i < a.length; i++){
-			if (a[i] == b){
+		for (int i = 0; i < a.length; i++) {
+			if (a[i] == b) {
 				c = true;
-				break;}
+				break;
+			}
 		}
 		return c;
 	}
-	
+
 	private int[] concatArray(int[] a, int[] b) {
 		if (a == null)
 			return b;

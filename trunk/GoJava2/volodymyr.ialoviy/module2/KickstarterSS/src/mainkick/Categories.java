@@ -3,23 +3,36 @@ package mainkick;
 import java.util.ArrayList;
 
 public class Categories {
+	private static final String CATEGORIES_FILE = "Categories.properties";
 	private ArrayList<Category> listCatecories = new ArrayList<Category>();
 	private int counterCategory;
-	private ArrayList<String[]> categoryBD;
+
 	
-	public void readAllCatecories(){
-		categoryBD = readBDCatecories();
-    	int i = 0;
+	public void writeAllCatecories(){
+		ArrayList<String[]> categoryBD = readDBCatecories();
+    	int id = 0;
 		for (String[] value : categoryBD) {
-			Category category = new Category();
-			getListCatecories().add(category);
-		    writeCatecoryInListCategory(i, value);
-		    i++;
+			getListCatecories().add(new Category());
+		    updateCategory(id, value);
+		    id++;
 		}
 		setCounterCategory(getListCatecories().size());
 	}
 	
-	public String showAllCatecories(){
+	private String updateCategory(int id, String[] value){
+		Category category = listCatecories.get(id);
+		category.setCategoryID(Integer.valueOf(value[0]));
+		category.setCategoryName(value[1]);
+		category.setProjectsIn(getProjectFromCategory(value[2]));
+		return category.getCategoryID() + " " + category.getCategoryName() + "\n";
+	}
+	
+	private ArrayList<String[]> readDBCatecories(){
+		ReaderDB reader = new ReaderDB();
+		return reader.read(CATEGORIES_FILE);
+	}
+	
+	public String getStringAllCatecories(){
 		String s = "";
 		for (Category value : listCatecories) {
 			s += value.getCategoryID() + " " + value.getCategoryName() + "\n";
@@ -27,28 +40,30 @@ public class Categories {
 		return s.substring(0, s.length() - 1);
 	}
 	
-	private String writeCatecoryInListCategory(int i, String[] value){
-		listCatecories.get(i).setCategoryID(Integer.valueOf(value[0]));
-		listCatecories.get(i).setCategoryName(value[1]);
-		listCatecories.get(i).setProjectsIn(getProjectIn(value[2]));
-		return listCatecories.get(i).getCategoryID() + " " + listCatecories.get(i).getCategoryName() + "\n";
-	}
-	
-	private ArrayList<String[]> readBDCatecories(){
-		ReaderBD reader = new ReaderBD();
-		return reader.read("Categories.properties");
-	}
-	
-	private int[] getProjectIn(String value) {
-		String[] string = value.split(",");
-		int[] projectsIn = new int[string.length];
-		for (int j = 0; j < string.length; j++){
-			projectsIn[j] = Integer.valueOf(string[j]);
+	public String showAllProjectInCategory(int categoryId, Projects projects){
+		String s = "";
+		Category category = getListCatecories().get(categoryId);
+		for (int j : category.getProjects()){
+			s += projects.showProjectInShort(j - 1) + "\n";
 		}
-		return projectsIn;
+		return s.substring(0, s.length() - 1);
 	}
 	
-	public int[] kickContainCategory(){
+	public String showCatecoryName(int categoryId){
+		Category category = getListCatecories().get(categoryId);
+		return category.getCategoryName();
+	}
+	
+	private int[] getProjectFromCategory(String value) {
+		String[] string = value.split(",");
+		int[] projects = new int[string.length];
+		for (int j = 0; j < string.length; j++){
+			projects[j] = Integer.valueOf(string[j]);
+		}
+		return projects;
+	}
+	
+	public int[] getKickCategories(){
 		int[] kickContainCategories = new int[getCounterCategory()];
 		for (int i = 0; i < kickContainCategories.length; i++){
 			kickContainCategories[i] = getListCatecories().get(i).getCategoryID();
@@ -56,8 +71,9 @@ public class Categories {
 		return kickContainCategories;
 	}
 	
-	public ArrayList<String[]> getCategoryBD(){
-		return categoryBD;
+	public int[] projectsContain(int categoryId){
+		Category category = getListCatecories().get(categoryId);
+		return category.getProjects();
 	}
 	
 	public int getCounterCategory() {

@@ -7,7 +7,7 @@ public class Quotes {
 	private String[] quote;
 	public static ArrayList<String[]> quoteBD;
 	{
-	    ReaderBD reader = new ReaderBD();
+	    ReaderDB reader = new ReaderDB();
 		quoteBD = reader.read("Quotes.properties");
 	}
 	

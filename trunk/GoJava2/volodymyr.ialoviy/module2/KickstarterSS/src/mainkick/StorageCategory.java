@@ -25,7 +25,7 @@ public class StorageCategory {
 	}
 	
 	private ArrayList<String[]> readBDCatecories(){
-		ReaderBD reader = new ReaderBD();
+		ReaderDB reader = new ReaderDB();
 		return reader.read("Categories.properties");
 	}
 	

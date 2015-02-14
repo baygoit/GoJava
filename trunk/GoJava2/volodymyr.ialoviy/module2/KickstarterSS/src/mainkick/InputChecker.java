@@ -2,13 +2,13 @@ package mainkick;
 
 import java.util.regex.Pattern;
 
-public class Check {
+public class InputChecker {
 	private int breakCounter;
 	private int choiceNumber;
 	private int magicStop = 3;
 	private InputsConsole choice;
 	private OutputConsole out;
-	public Check(InputsConsole choice, OutputConsole out){
+	public InputChecker(InputsConsole choice, OutputConsole out){
 		this.choice = choice;
 		this.setOut(out);
 	}

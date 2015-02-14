@@ -12,60 +12,89 @@ public class Project{
 	private int howMuchNeeded;
 	private int howMuchCollected;
 	private int howMuchRemaining;
-	private ArrayList<String> faq = new ArrayList<String>();
+	private ArrayList<String> faq;
+	
+	public int getProjectID() {
+		return projectID;
+	}
 
-	public void setFAQ(){
-		InputsConsole question = new InputsConsole();
-		faq.add(question.enter());
+	public void setProjectID(int projectID) {
+		this.projectID = projectID;
 	}
 	
-	public String readProject(ArrayList<Project> listProject, String[] value, int i){
-		listProject.get(i).projectID = Integer.valueOf(value[0]);
-		listProject.get(i).projectName = value[1];
-		listProject.get(i).shortDescription = value[2];
-		listProject.get(i).fullDescription = value[3];
-		listProject.get(i).foto = value[4];
-		listProject.get(i).link = value[5];
-		listProject.get(i).howMuchNeeded = Integer.valueOf(value[6]);
-		listProject.get(i).howMuchCollected = Integer.valueOf(value[7]);
-		listProject.get(i).howMuchRemaining = Integer.valueOf(value[8]);
-		return projectID + " " + projectName +  " " + shortDescription + " " + fullDescription + " " + foto + " " + link + " " + howMuchNeeded + " " +  howMuchCollected + " " + howMuchRemaining + "\n";
+	public String getProjectName() {
+		return projectName;
+	}
+
+	public void setProjectName(String projectName) {
+		this.projectName = projectName;
 	}
 	
-//	public String showProjectInShort(int i, Projects projects){
-//		i -= 1;
-//		String s = projects.getListProject().get(i).projectID
-//				+ ", " + projects.getListProject().get(i).projectName
-//				+ ", " + projects.getListProject().get(i).shortDescription
-//				+ ", " + projects.getListProject().get(i).howMuchNeeded
-//				+ ", " + projects.getListProject().get(i).howMuchCollected;
-//		return s;		
-//	}
-//	
-//	public String showProjectFull(int i, ArrayList<Project> listProject){
-//		String s = "projectID = " + listProject.get(i).projectID
-//					+ "\n projectName: " + listProject.get(i).projectName
-//					+ "\n shortDescription: " + listProject.get(i).shortDescription
-//					+ "\n fullDescription: " + listProject.get(i).fullDescription
-//					+ "\n foto: " + listProject.get(i).foto
-//					+ "\n link: " + listProject.get(i).link
-//					+ "\n howMuchNeeded = " + listProject.get(i).howMuchNeeded
-//					+ "\n howMuchCollected = " + listProject.get(i).howMuchCollected
-//					+ "\n howMuchRemaining = " + listProject.get(i).howMuchRemaining;
-//		return s;
-//	}
+	public String getShortDescription() {
+		return shortDescription;
+	}
+
+	public void setShortDescription(String shortDescription) {
+		this.shortDescription = shortDescription;
+	}
+
+	public String getFullDescription() {
+		return fullDescription;
+	}
+
+	public void setFullDescription(String fullDescription) {
+		this.fullDescription = fullDescription;
+	}
+
+	public String getFoto() {
+		return foto;
+	}
+
+	public void setFoto(String foto) {
+		this.foto = foto;
+	}
+
+	public String getLink() {
+		return link;
+	}
+
+	public void setLink(String link) {
+		this.link = link;
+	}	
 	
-	public void setDonation(ArrayList<Project> listProject, int amount, int chosenProject){//TODO убрать листПроджект
-		listProject.get(chosenProject).howMuchCollected += amount;
-		listProject.get(chosenProject).howMuchRemaining -= amount;
+	public int getHowMuchNeeded() {
+		return howMuchNeeded;
+	}
+
+	public void setHowMuchNeeded(int howMuchNeeded) {
+		this.howMuchNeeded = howMuchNeeded;
+	}
+	
+	public int getHowMuchCollected() {
+		return howMuchCollected;
+	}
+
+	public void setHowMuchCollected(int howMuchCollected) {
+		this.howMuchCollected = howMuchCollected;
+	}
+
+	public int getHowMuchRemaining() {
+		return howMuchRemaining;
+	}
+
+	public void setHowMuchRemaining(int howMuchRemaining) {
+		this.howMuchRemaining = howMuchRemaining;
 	}
 
 	public ArrayList<String> getFaq() {
 		return faq;
 	}
-
-	public void setFaq(ArrayList<String> faq) {
-		this.faq = faq;
-	}
 	
+	public void setFaq(ArrayList<String> question) {
+		this.faq = question;
+	}
+
+	public void addFaq(String question) {//TODO = PROJECTS
+		this.faq.add(question);
+	}
 }

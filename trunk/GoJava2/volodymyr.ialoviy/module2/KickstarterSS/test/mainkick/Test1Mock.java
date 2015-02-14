@@ -11,10 +11,9 @@ public class Test1Mock {
 	
 	@Test
     public void simpleMocking2() throws FileNotFoundException{
-		Category category = mock(Category.class);
+		Categories categories = mock(Categories.class);
 		Projects projects = new Projects();
-		Categories categories = new Categories();
-		category.showAllProjectInCategory(2, projects, categories);					//TODO project поменял на projects
-		verify(category).showAllProjectInCategory(2, projects, categories);			//TODO project поменял на projects
+		categories.showAllProjectInCategory(2, projects);
+		verify(categories).showAllProjectInCategory(2, projects);
 	}
 }

@@ -3,50 +3,85 @@ package mainkick;
 import java.util.ArrayList;
 
 public class Projects {
+	private static final String PROJECTS_FILE = "Projects.properties";
 	private ArrayList<Project> listProject = new ArrayList<Project>();
 	private int counterProject;
-	
-	Project project = new Project();
-	ReaderBD reader = new ReaderBD();
-	ArrayList<String[]> projectBD;
-	
-	
-	public String writeAllProjects(){
-		String s = "";
+
+	public void writeAllProjects(){
+		ArrayList<String[]> projectBD = new ArrayList<String[]>();
+		ReaderDB reader = new ReaderDB();
+		projectBD = reader.read(PROJECTS_FILE);
 		int i = 0;
-		projectBD = reader.read("Projects.properties");
 		for (String[] value : projectBD) {
-			getListProject().add(project);
-			s += project.readProject(getListProject(), value, i);
+			getListProject().add(new Project());
+			updateProject(value, i);
 		    i++;
 		}
 		setCounterProject(getListProject().size());
-		return s;
+	}
+
+	public void updateProject(String[] value, int i){
+		Project project = listProject.get(i);
+		project.setProjectID(Integer.valueOf(value[0]));
+		project.setProjectName(value[1]);
+		project.setShortDescription(value[2]);
+		project.setFullDescription(value[3]);
+		project.setFoto(value[4]);
+		project.setLink(value[5]);
+		project.setHowMuchNeeded(Integer.valueOf(value[6]));
+		project.setHowMuchCollected(Integer.valueOf(value[7]));
+		project.setHowMuchRemaining(Integer.valueOf(value[8]));
+		project.setFaq(getProjectFromCategory(value[9]));
+	}
+	
+	private ArrayList<String> getProjectFromCategory(String value) {
+		String[] string = value.split(",");
+		ArrayList<String> faq = new ArrayList<String>();
+		for (int j = 0; j < string.length; j++){
+			faq.add(string[j]);
+		}
+		return faq;
 	}
 
 	public String showProjectFull(int numberProject){
-		String s = "projectID = " + projectBD.get(numberProject)[0]
-					+ "\n projectName: " + projectBD.get(numberProject)[1]
-					+ "\n shortDescription: " + projectBD.get(numberProject)[2]
-					+ "\n fullDescription: " + projectBD.get(numberProject)[3]
-					+ "\n foto: " + projectBD.get(numberProject)[4]
-					+ "\n link: " + projectBD.get(numberProject)[5]
-					+ "\n howMuchNeeded = " + projectBD.get(numberProject)[6]
-					+ "\n howMuchCollected = " + projectBD.get(numberProject)[7]
-					+ "\n howMuchRemaining = " + projectBD.get(numberProject)[8];
-		return s;
+		Project project = listProject.get(numberProject);
+		return "projectID = " + project.getProjectID() + "\n"
+						+ "projectName: " + project.getProjectName() +  "\n"
+						+ "shortDescription: " + project.getShortDescription() + "\n"
+						+ "fullDescription: " + project.getFullDescription() + "\n"
+						+ "foto: " + project.getFoto() + "\n"
+						+ "link: " + project.getLink() + "\n"
+						+ "howMuchNeeded = " + project.getHowMuchNeeded() + "\n"
+						+ "howMuchCollected = " + project.getHowMuchCollected() + "\n"
+						+ "howMuchRemaining = " + project.getHowMuchRemaining() + "\n"
+						+ "faq = " + project.getFaq();
 	}
 	
-	public String showProjectInShort(int i){
-		i -= 1;
-		String s = projectBD.get(i)[0]
-				+ ", " + projectBD.get(i)[1]
-				+ ", " + projectBD.get(i)[2]
-				+ ", " + projectBD.get(i)[6]
-				+ ", " + projectBD.get(i)[7];
-		return s;		
+	public String showProjectInShort(int projectID){
+		Project project = listProject.get(projectID);
+		return project.getProjectID()
+				+ ", " + project.getProjectName()
+				+ ", " + project.getShortDescription()
+				+ ", " + project.getHowMuchNeeded()
+				+ ", " + project.getHowMuchCollected();
 	}
 
+	public void setDonation(int chosenProject, int amount){
+		Project project = listProject.get(chosenProject);
+		project.setHowMuchCollected(project.getHowMuchCollected() + amount);
+		project.setHowMuchRemaining(project.getHowMuchRemaining() - amount);
+	}
+	
+	public void addFAQ(int projectID){
+		InputsConsole question = new InputsConsole();
+		Project project = listProject.get(projectID);
+		project.addFaq(question.enter());
+	}
+	
+	public ArrayList<String> getFaq() {
+		Project project = new Project();
+		return project.getFaq();
+	}
 	
 	public ArrayList<Project> getListProject() {
 		return listProject;
