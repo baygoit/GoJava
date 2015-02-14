@@ -15,13 +15,13 @@ public class KickstarterS {
 	private int chosenPay;//TODO DELETE
 	private int exit = 999;
 
-	private InputChecker check;
+	private InputsConsole in;
 	private Output out;
 	private Categories categories;
 	private Projects projects;
 
-	public KickstarterS(InputChecker check, Output out, Categories categories, Projects projects) {
-		this.check = check;
+	public KickstarterS(Inputs in, Output out, Categories categories, Projects projects) {
+		this.in = (InputsConsole) in;
 		this.setOut(out);
 		this.categories = categories;
 		this.projects = projects;
@@ -103,20 +103,20 @@ public class KickstarterS {
 		}
 
 		printer("Enter your name:");
-		String name = check.checkName();
+		String name = InputChecker.checkName(in.enter());
 		if (name.equals(Integer.toString(magic))) {
 			sleepIfMagic(Integer.parseInt(name));
 			switchMenu();
 		}
 		printer("Enter your credit card number:");
-		long cardNumber = check.checkCard();
+		long cardNumber = InputChecker.checkCard(in.enter());
 		if ((int) cardNumber == magic) {
 			sleepIfMagic((int) cardNumber);
 			switchMenu();
 		}
 		printer("Enter the amount of donations:");
 		if (chosenPay == 0) {
-			chosenPay = check.checkAmount();
+			chosenPay = InputChecker.checkAmount(in.enter());
 			if (sleepIfMagic(chosenPay)) {
 				switchMenu();
 			}
@@ -165,21 +165,21 @@ public class KickstarterS {
 	}
 
 	private void askCategory() {
-		chosenCategoryId = InputChecker.checkNumber(categories.getKickCategories()) - 1;
+		chosenCategoryId = InputChecker.checkNumber(categories.getKickCategories(), in.enter()) - 1;
 	}
 
 	private void askProject(int[] allowedVariants) {
 		chosenProject = InputChecker.checkNumber(concatArray(
 				categories.projectsContain(chosenCategoryId),
-				allowedVariants)); // TODO
+				allowedVariants), in.enter()); // TODO
 	}
 
 	private void askAfterProject(int[] intSwitch) {
-		choiceTo = InputChecker.checkNumber(intSwitch);
+		choiceTo = InputChecker.checkNumber(intSwitch, in.enter());
 	}
 
 	private void askHowMuchPay(int[] intSwitch) {
-		chosenPay = InputChecker.checkNumber(intSwitch);
+		chosenPay = InputChecker.checkNumber(intSwitch, in.enter());
 	}
 	
 	private void askQuestion() {

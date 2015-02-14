@@ -10,20 +10,7 @@ import java.util.List;
 import org.junit.Test;
 
 public class TestCheckClass {
-	
-	class FakeInputsConsole extends InputsConsole{
-		private List<String> strings;
-		
-		public FakeInputsConsole(String... strings){
-			this.strings = new ArrayList<String>(Arrays.asList(strings));
-		}
 
-		@Override
-		public String enter(){
-			return strings.remove(0);
-		}
-	}
-	
 	class FakeOutputConsole extends OutputConsole{
 		private List<String> messages = new LinkedList<String>(); 
 
@@ -40,47 +27,47 @@ public class TestCheckClass {
 	
 	@Test
     public void shouldSendReport_whenNotSendReport(){
-		InputChecker check  = new InputChecker(new FakeInputsConsole("5", "i", "88", "4"), new FakeOutputConsole());
+//		InputChecker check  = new InputChecker(new FakeOutputConsole());
+
+		int rezult = InputChecker.checkNumber(new int[] {1,4,6}, "5");//, "i", "88", "4"
 		
-		int rezult = check.checkNumber(new int[] {1,4,6});
-		
-		assertEquals("This number does not exist, please try again", check.getOut().getMessages().get(0).toString());
-		assertEquals("It is not a number, please try again", check.getOut().getMessages().get(1).toString());
-		assertEquals("This number does not exist, please try again", check.getOut().getMessages().get(2).toString());
-		assertEquals("You have used three attempts, try ten minutes", check.getOut().getMessages().get(3).toString());
+		assertEquals("This number does not exist, please try again", InputChecker.getOut().getMessages().get(0).toString());
+		assertEquals("It is not a number, please try again", InputChecker.getOut().getMessages().get(1).toString());
+		assertEquals("This number does not exist, please try again", InputChecker.getOut().getMessages().get(2).toString());
+		assertEquals("You have used three attempts, try ten minutes", InputChecker.getOut().getMessages().get(3).toString());
 		assertEquals(rezult, 777);
 	}
 	
 	@Test (expected = IndexOutOfBoundsException.class)
     public void shouldMethodStop_whenMethodDontStop(){
-		InputChecker check  = new InputChecker(new FakeInputsConsole("5", "i", "88", "4"), new FakeOutputConsole());
+		InputChecker check  = new InputChecker(new FakeOutputConsole());
 		
-		check.checkNumber(new int[] {1,4,6});
-		check.getOut().getMessages().get(4);
+		InputChecker.checkNumber(new int[] {1,4,6}, "5");//, "i", "88", "4"
+		InputChecker.getOut().getMessages().get(4);
 	}
 	
 	@Test
     public void shouldFallWithinTheBoundaries_whenIsRankedWithinTheBoundaries(){
-		InputChecker check  = new InputChecker(new FakeInputsConsole("1", "4", "6"), new FakeOutputConsole());
+		InputChecker check  = new InputChecker(new FakeOutputConsole());
 		
-		int rezult = check.checkNumber(new int[] {1,4,6});
+		int rezult = InputChecker.checkNumber(new int[] {1,4,6}, "1");
 		assertTrue(1 == rezult);
 		assertEquals(rezult, 1);
 		
-		rezult = check.checkNumber(new int[] {1,4,6});
+		rezult = InputChecker.checkNumber(new int[] {1,4,6}, "4");
 		assertTrue(4 == rezult);
 		assertEquals(rezult, 4);
 		
-		rezult = check.checkNumber(new int[] {1,4,6});
+		rezult = InputChecker.checkNumber(new int[] {1,4,6}, "6");
 		assertTrue(6 == rezult);
 		assertEquals(rezult, 6);
     }
 	
 	@Test
     public void shouldSendReportNotNumber_whenNotSendReport(){
-		InputChecker check  = new InputChecker(new FakeInputsConsole("е", "1"), new FakeOutputConsole());
+		InputChecker check  = new InputChecker(new FakeOutputConsole());
 		
-		int rezult = check.checkNumber(new int[] {1,4,6});
+		int rezult = InputChecker.checkNumber(new int[] {1,4,6}, "е");//, "1"
 		assertEquals("It is not a number, please try again", check.getOut().getMessages().get(0).toString());
 		assertTrue(1 == rezult);
 		assertEquals(rezult, 1);
@@ -88,34 +75,34 @@ public class TestCheckClass {
 	
 	@Test (expected = IndexOutOfBoundsException.class)
     public void shouldIOOBE_whenNotIOOBE(){
-		InputChecker check  = new InputChecker(new FakeInputsConsole("е"), new FakeOutputConsole());
+		InputChecker check  = new InputChecker(new FakeOutputConsole());
 		
-		check.checkNumber(new int[] {1,4,6});
+		InputChecker.checkNumber(new int[] {1,4,6}, "е");
     }	
 
 	@Test
     public void shouldSendReportNumberNumberDoesNotExist_whenNotSendReport(){
-		InputChecker check  = new InputChecker(new FakeInputsConsole("-1", "6"), new FakeOutputConsole());
+		InputChecker check  = new InputChecker(new FakeOutputConsole());
 		
-		int rezult = check.checkNumber(new int[] {1,4,6});
+		int rezult = check.checkNumber(new int[] {1,4,6}, "-1");//, "6"
 		
-		assertEquals("This number does not exist, please try again", check.getOut().getMessages().get(0).toString());
+		assertEquals("This number does not exist, please try again", InputChecker.getOut().getMessages().get(0).toString());
 		assertTrue(6 == rezult);
 		assertEquals(rezult, 6);
     }
 	
 	@Test (expected = IndexOutOfBoundsException.class)
     public void shouldExpectedIOOBE_whenNotIOOBE(){
-		InputChecker check  = new InputChecker(new FakeInputsConsole("-1"), new FakeOutputConsole());
+		InputChecker check  = new InputChecker(new FakeOutputConsole());
 		
-		check.checkNumber(new int[] {1,4,6});
+		InputChecker.checkNumber(new int[] {1,4,6}, "-1");
     }
 	
 	@Test
     public void shouldZero_whenNotZero(){
-		InputChecker check  = new InputChecker(new FakeInputsConsole("0", "1"), new FakeOutputConsole());
+		InputChecker check  = new InputChecker(new FakeOutputConsole());
 		
-		int rezult = check.checkNumber(new int[] {0,1,4,6});
+		int rezult = InputChecker.checkNumber(new int[] {0,1,4,6}, "0");//, "1"
 		
 		assertTrue(0 == rezult);
 		assertEquals(rezult, 0);
@@ -123,10 +110,10 @@ public class TestCheckClass {
 
 	@Test
     public void shouldZero_whenNotZero2(){
-		InputChecker check  = new InputChecker(new FakeInputsConsole("2", "1"), new FakeOutputConsole());
+		InputChecker check  = new InputChecker(new FakeOutputConsole());
 		
-		int rezult = check.checkNumber(new int[] {0,1,4,6});
-		assertEquals("This number does not exist, please try again", check.getOut().getMessages().get(0).toString());
+		int rezult = InputChecker.checkNumber(new int[] {0,1,4,6}, "2");//, "1"
+		assertEquals("This number does not exist, please try again", InputChecker.getOut().getMessages().get(0).toString());
 		assertTrue(1 == rezult);
 		assertEquals(rezult, 1);
     }

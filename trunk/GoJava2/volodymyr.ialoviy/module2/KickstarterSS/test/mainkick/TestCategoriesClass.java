@@ -2,8 +2,6 @@ package mainkick;
 
 import static org.junit.Assert.*;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.Arrays;
 
 import org.junit.Test;

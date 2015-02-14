@@ -4,98 +4,127 @@ import java.util.regex.Pattern;
 
 public class InputChecker {
 	private static int breakCounter;
-	private static int choiceNumber;
 	private static int magicStop = 3;
-	private static InputsConsole choice;
-	private static OutputConsole out;
-	public InputChecker(InputsConsole choice, OutputConsole out){
-		InputChecker.choice = choice;
-		this.setOut(out);
-	}
-
-	public static int checkNumber(int[] border){
+	
+	private static OutputConsole out = new OutputConsole();
+	
+	public static int checkNumber(int[] border, String string){
 		breakCounter = 0;
-		choiceNumber = 0;
+		int choiceNumber = 0;
 		for (int i = 0; i < magicStop; i++){
-			String chosen = choice.enter();
-			if (checkNumbers(chosen)){continue;}
-			choiceNumber = Integer.valueOf(chosen);
-			if (checkBorder(choiceNumber, border)){continue;}
+			if (isNull(string)){
+				breakCounter++;
+				continue;
+			}
+			if (checkNumbers(string)){
+				breakCounter++;
+				continue;
+				}
+			choiceNumber = Integer.valueOf(string);
+			if (checkBorder(choiceNumber, border)){
+				breakCounter++;
+				continue;
+				}
 			break;
 		}
 		if (breakCounter == magicStop){
-			getOut().print("You have used three attempts, try ten minutes");
+			out.print("You have used three attempts, try ten minutes");
 			choiceNumber = bannedFor10Minutes();
 		}
 		return choiceNumber;
 	}
 
-	public String checkName(){
+	public static String checkName(String string){
 		breakCounter = 0;
-		String chosen = null;
 		for (int i = 0; i < magicStop; i++){
-			chosen = choice.enter();
-			if (!checkIsName(chosen)){
-				getOut().print("The name must be from two to twenty letters, please try again");
+			if (isNull(string)){
+				breakCounter++;
+				continue;
+			}
+			if (!checkIsName(string)){
+				out.print("The name must be from two to twenty letters, please try again");
 				breakCounter++;
 				continue;
 				}
 			break;
 		}
 		if (breakCounter == magicStop){
-			getOut().print("You have used three attempts, try ten minutes");
-			chosen = Integer.toString(bannedFor10Minutes());
-			return chosen;
+			out.print("You have used three attempts, try ten minutes");
+			string = Integer.toString(bannedFor10Minutes());
+			return string;
 		}
-		return chosen;
+		return string;
 	}
-	
-	public long checkCard(){
+
+	public static long checkCard(String string){
 		breakCounter = 0;
 		long cardNumber = 0;
 		for (int i = 0; i < magicStop; i++){
-			String chosen = choice.enter();
-			if (!checkIsCard(chosen)){
-				getOut().print("Card number card must bіt 16 numeric characters, please try again");
+			if (isNull(string)){
+				breakCounter++;
+				continue;
+			}
+			if (checkNumbers(string)){
 				breakCounter++;
 				continue;
 				}
-			cardNumber = Long.valueOf(chosen);
+			if (!checkIsCard(string)){
+				out.print("Card number card must bіt 16 numeric characters, please try again");
+				breakCounter++;
+				continue;
+				}
+			cardNumber = Long.valueOf(string);
 			break;
 		}
 		if (breakCounter == magicStop){
-			getOut().print("You have used three attempts, try ten minutes");
-			choiceNumber = bannedFor10Minutes();
-			return choiceNumber;
+			out.print("You have used three attempts, try ten minutes");
+			cardNumber = bannedFor10Minutes();
+			return cardNumber;
 		}
 		return cardNumber;
 	}
 	
-	public int checkAmount(){
+	public static int checkAmount(String string){
 		breakCounter = 0;
 		int amount = 0;
 		for (int i = 0; i < magicStop; i++){
-			String chosen = choice.enter();
-			if (!checkAmount(chosen)){
-				getOut().print("Amount must by number, please try again");
+			if (isNull(string)){
+				breakCounter++;
+				continue;
+			}
+			if (checkNumbers(string)){
 				breakCounter++;
 				continue;
 				}
-			amount = Integer.valueOf(chosen);
+			if (!checkAmounter(string)){
+				out.print("Amount must by number, please try again");
+				breakCounter++;
+				continue;
+				}
+			amount = Integer.valueOf(string);
 			break;
 		}
 		if (breakCounter == magicStop){
-			getOut().print("You have used three attempts, try ten minutes");
-			choiceNumber = bannedFor10Minutes();
+			out.print("You have used three attempts, try ten minutes");
+			amount = bannedFor10Minutes();
+			return amount;
 		}
 		return amount;
+	}
+	
+	private static boolean isNull(String chosen) {
+		boolean b = false;
+		if (chosen.length() == 0 || chosen == null || chosen.isEmpty()){
+			out.print("You do not enter");
+			b = true;
+		}
+		return b;
 	}
 	
 	private static Boolean checkBorder(int choiceNumber, int[] border){
 		boolean f = false;
 		if (!checkRangeOfNumbers(choiceNumber, border)){
-			getOut().print("This number does not exist, please try again");
-			breakCounter++;
+			out.print("This number does not exist, please try again");
 			f = true;
 		}
 		return f;
@@ -104,8 +133,7 @@ public class InputChecker {
 	private static Boolean checkNumbers(String chosen){
 		boolean f = false;
 		if (!checkIsNumber(chosen)){
-			getOut().print("It is not a number, please try again");
-			breakCounter++;
+			out.print("It is not a number, please try again");
 			f = true;
 		}
 		return f;
@@ -128,27 +156,19 @@ public class InputChecker {
 		return choiceNumber;
 	}
 
-	private static boolean checkIsNumber(String string){  
+	private static boolean checkIsNumber(String string){//TODO СДЕЛАТЬ один метод
         return Pattern.compile("^[-0-9]{1,3}$").matcher(string).matches();  
     }
 
-	private boolean checkIsName(String string){  
+	private static boolean checkIsName(String string){  
         return Pattern.compile("^[A-Za-z]{2,20}$").matcher(string).matches();  
     }
 
-	private boolean checkIsCard(String string){  
+	private static boolean checkIsCard(String string){  
         return Pattern.compile("^[0-9]{16}$").matcher(string).matches();  
     }
 	
-	private boolean checkAmount(String string){  
+	private static boolean checkAmounter(String string){  
         return Pattern.compile("^[0-9]{1,10}$").matcher(string).matches();  
     }
-
-	public static OutputConsole getOut() {
-		return out;
-	}
-
-	public void setOut(OutputConsole out) {
-		InputChecker.out = out;
-	}
 }

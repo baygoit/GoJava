@@ -73,7 +73,7 @@ public class Projects {
 	}
 	
 	public void addFAQ(int projectID){
-		InputsConsole question = new InputsConsole();
+		InputsConsole question = new InputsConsole();//TODO УБРАТЬ InputsConsole
 		Project project = listProject.get(projectID);
 		project.addFaq(question.enter());
 	}
