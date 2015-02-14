@@ -1,11 +1,11 @@
 package org.goJava2.kickstarter.model;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 
 import org.goJava2.kickstarter.content.Category;
-import org.goJava2.kickstarter.content.Quote;
 import org.junit.Test;
 
 public class CategoryStorageTest {
@@ -37,7 +37,7 @@ public class CategoryStorageTest {
 	
 	@Test
 	public void shouldListIsNotNull_whenNewCustomCategoryStorage() {
-		categoryStorage = new CategoryStorage(new ArrayList<Category>());
+		categoryStorage = new CategoryStorage(new HashSet<Category>());
 		assertFalse("Expexted than list is not null when custom constructor",
 					categoryStorage.getContent() == null);
 	}
