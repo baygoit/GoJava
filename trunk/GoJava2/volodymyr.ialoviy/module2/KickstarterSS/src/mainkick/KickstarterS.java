@@ -4,7 +4,6 @@ package mainkick;
 public class KickstarterS {
 	private int chosenCategoryId;//TODO DELETE
 	private int chosenProject;//TODO DELETE
-	private int magic = 777;
 	private int menuCategories = 222;
 	private int menuProjects = 333;
 	private int menuProject = 444;
@@ -49,10 +48,6 @@ public class KickstarterS {
 		showAllCategories();
 		askCategory();
 
-		if (sleepIfMagic(chosenCategoryId)) {
-			switchMenu();
-		}
-
 		menu = menuProjects;
 		switchMenu();
 	}
@@ -62,10 +57,6 @@ public class KickstarterS {
 
 		printProjectsInCategory();
 		askProject(intSwitch);
-
-		if (sleepIfMagic(chosenProject)) {
-			switchMenu();
-		}
 
 		if (addArrayElement(intSwitch, chosenProject)) {
 			menu = menuCategories;
@@ -82,10 +73,6 @@ public class KickstarterS {
 		printProject();
 		askAfterProject(intSwitch);
 
-		if (sleepIfMagic(choiceTo)) {
-			switchMenu();
-		}
-
 		if (addArrayElement(intSwitch, choiceTo)) {
 			menu = choiceTo;
 			switchMenu();
@@ -98,35 +85,26 @@ public class KickstarterS {
 		printChoicePayment();
 		askHowMuchPay(intSwitch);
 
-		if (sleepIfMagic(chosenPay)) {
-			switchMenu();
-		}
-
 		printer("Enter your name:");
 		String name = InputChecker.checkName(in.enter());
-		if (name.equals(Integer.toString(magic))) {
-			sleepIfMagic(Integer.parseInt(name));
-			switchMenu();
-		}
+
 		printer("Enter your credit card number:");
 		long cardNumber = InputChecker.checkCard(in.enter());
-		if ((int) cardNumber == magic) {
-			sleepIfMagic((int) cardNumber);
-			switchMenu();
-		}
+
 		printer("Enter the amount of donations:");
 		if (chosenPay == 0) {
 			chosenPay = InputChecker.checkAmount(in.enter());
-			if (sleepIfMagic(chosenPay)) {
-				switchMenu();
-			}
 		}
 
 		projects.setDonation(chosenProject - 1, chosenPay);
-
+		
+		printThank(name, chosenPay, cardNumber);
+		
 		menu = menuProject;
 		switchMenu();
 	}
+
+
 
 	private void question() {
 		printAskQuestion();
@@ -163,7 +141,9 @@ public class KickstarterS {
 		printer(categories.getStringAllCatecories());
 		printer("Choice Category Number: ");
 	}
-
+	
+	int loop = 0;
+	
 	private void askCategory() {
 		chosenCategoryId = InputChecker.checkNumber(categories.getKickCategories(), in.enter()) - 1;
 	}
@@ -216,19 +196,9 @@ public class KickstarterS {
 	private void printAskQuestion() {
 		printer("Enter your question:");
 	}
-
-	private Boolean sleepIfMagic(int m) {
-		Boolean b = false;
-		if (m == magic) {
-			try {
-				Thread.sleep(10000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			b = true;
-		}
-		return b;
+	
+	private void printThank(String name, int chosenPay, long cardNumber) {
+		printer("Thank you " + name + " for your generous (" + chosenPay + ") contribution. We record your card number (" + cardNumber);
 	}
 
 	private void printer(String string) {

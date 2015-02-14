@@ -6,31 +6,42 @@ public class InputChecker {
 	private static int breakCounter;
 	private static int magicStop = 3;
 	
-	private static OutputConsole out = new OutputConsole();
+	private static Output out = new OutputConsole();
+	private static Inputs in = new InputsConsole();
 	
 	public static int checkNumber(int[] border, String string){
+		out.print(string);
 		breakCounter = 0;
 		int choiceNumber = 0;
 		for (int i = 0; i < magicStop; i++){
 			if (isNull(string)){
 				breakCounter++;
+				if (stop()){
+					checkNumber(border, in.enter());
+				}
+				string = in.enter();
 				continue;
 			}
 			if (checkNumbers(string)){
 				breakCounter++;
+				if (stop()){
+					checkNumber(border, in.enter());
+				}
+				string = in.enter();
 				continue;
 				}
 			choiceNumber = Integer.valueOf(string);
 			if (checkBorder(choiceNumber, border)){
 				breakCounter++;
+				if (stop()){
+					checkNumber(border, in.enter());
+				}
+				string = in.enter();
 				continue;
 				}
 			break;
 		}
-		if (breakCounter == magicStop){
-			out.print("You have used three attempts, try ten minutes");
-			choiceNumber = bannedFor10Minutes();
-		}
+		out.print(Integer.toString(choiceNumber));
 		return choiceNumber;
 	}
 
@@ -39,19 +50,21 @@ public class InputChecker {
 		for (int i = 0; i < magicStop; i++){
 			if (isNull(string)){
 				breakCounter++;
+				if (stop()){
+					checkName(in.enter());
+				}
+				string = in.enter();
 				continue;
 			}
 			if (!checkIsName(string)){
-				out.print("The name must be from two to twenty letters, please try again");
 				breakCounter++;
+				if (stop()){
+					checkName(in.enter());
+				}
+				string = in.enter();
 				continue;
 				}
 			break;
-		}
-		if (breakCounter == magicStop){
-			out.print("You have used three attempts, try ten minutes");
-			string = Integer.toString(bannedFor10Minutes());
-			return string;
 		}
 		return string;
 	}
@@ -62,24 +75,30 @@ public class InputChecker {
 		for (int i = 0; i < magicStop; i++){
 			if (isNull(string)){
 				breakCounter++;
+				if (stop()){
+					checkName(in.enter());
+				}
+				string = in.enter();
 				continue;
 			}
 			if (checkNumbers(string)){
 				breakCounter++;
+				if (stop()){
+					checkName(in.enter());
+				}
+				string = in.enter();
 				continue;
 				}
 			if (!checkIsCard(string)){
-				out.print("Card number card must bіt 16 numeric characters, please try again");
 				breakCounter++;
+				if (stop()){
+					checkName(in.enter());
+				}
+				string = in.enter();
 				continue;
 				}
 			cardNumber = Long.valueOf(string);
 			break;
-		}
-		if (breakCounter == magicStop){
-			out.print("You have used three attempts, try ten minutes");
-			cardNumber = bannedFor10Minutes();
-			return cardNumber;
 		}
 		return cardNumber;
 	}
@@ -90,26 +109,43 @@ public class InputChecker {
 		for (int i = 0; i < magicStop; i++){
 			if (isNull(string)){
 				breakCounter++;
+				if (stop()){
+					checkName(in.enter());
+				}
+				string = in.enter();
 				continue;
 			}
 			if (checkNumbers(string)){
 				breakCounter++;
+				if (stop()){
+					checkName(in.enter());
+				}
+				string = in.enter();
 				continue;
 				}
 			if (!checkAmounter(string)){
-				out.print("Amount must by number, please try again");
+				
 				breakCounter++;
+				if (stop()){
+					checkName(in.enter());
+				}
+				string = in.enter();
 				continue;
 				}
 			amount = Integer.valueOf(string);
 			break;
 		}
+		return amount;
+	}
+	
+	private static Boolean stop() {
+		Boolean b = false;
 		if (breakCounter == magicStop){
 			out.print("You have used three attempts, try ten minutes");
-			amount = bannedFor10Minutes();
-			return amount;
+			bannedFor10Minutes();
+			b = true;
 		}
-		return amount;
+		return b;
 	}
 	
 	private static boolean isNull(String chosen) {
@@ -150,25 +186,31 @@ public class InputChecker {
 		return f;
     }
 	
-	private static int bannedFor10Minutes() {
-		// TODO
-		int choiceNumber = 777;
-		return choiceNumber;
+	private static void bannedFor10Minutes() {
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	private static boolean checkIsNumber(String string){//TODO СДЕЛАТЬ один метод
         return Pattern.compile("^[-0-9]{1,3}$").matcher(string).matches();  
     }
 
-	private static boolean checkIsName(String string){  
+	private static boolean checkIsName(String string){
+		out.print("The name must be from two to twenty letters, please try again");
         return Pattern.compile("^[A-Za-z]{2,20}$").matcher(string).matches();  
     }
 
-	private static boolean checkIsCard(String string){  
+	private static boolean checkIsCard(String string){
+		out.print("Card number card must bіt 16 numeric characters, please try again");
         return Pattern.compile("^[0-9]{16}$").matcher(string).matches();  
     }
 	
-	private static boolean checkAmounter(String string){  
+	private static boolean checkAmounter(String string){
+		out.print("Amount must by number, please try again");
         return Pattern.compile("^[0-9]{1,10}$").matcher(string).matches();  
     }
 }
