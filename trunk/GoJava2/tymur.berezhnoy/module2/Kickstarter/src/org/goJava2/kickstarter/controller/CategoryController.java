@@ -1,6 +1,6 @@
 package org.goJava2.kickstarter.controller;
 
-import java.util.List;
+import java.util.Set;
 
 import org.goJava2.kickstarter.behavior.ControllerBehavior;
 import org.goJava2.kickstarter.content.Category;
@@ -16,7 +16,7 @@ public class CategoryController implements ControllerBehavior<Integer> {
 	}
 	
 	@Override
-	public List<Category> getContent() {
+	public Set<Category> getContent() {
 		return categoryStorage.getContent();
 	}
 	

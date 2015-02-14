@@ -1,20 +1,20 @@
 package org.goJava2.kickstarter.model;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.goJava2.kickstarter.behavior.StorageBehavior;
 import org.goJava2.kickstarter.content.Category;
 
 public class CategoryStorage implements StorageBehavior<Integer> {
 
-	private List<Category> categories;
+	private Set<Category> categories;
 	
 	/**
 	 * The constructor for Hard-coded categories.
 	 */
 	public CategoryStorage() {
-		categories = new ArrayList<Category>();
+		categories = new HashSet<Category>();
 		categories.add(new Category("Art"));
 		categories.add(new Category("Comics"));
 		categories.add(new Category("Dance"));
@@ -25,18 +25,19 @@ public class CategoryStorage implements StorageBehavior<Integer> {
 	 * The constructor for custom categories.
 	 * @param categories
 	 */
-	public CategoryStorage(List<Category> categories) {
+	public CategoryStorage(Set<Category> categories) {
 		this.categories = categories;
 	}
 	
 	@Override
-	public List<Category> getContent() {
+	public Set<Category> getContent() {
 		return categories;
 	}
 	
 	@Override
-	public Category getSpecificContent(Integer i) {		
-		return categories.get(i);
+	public Category getSpecificContent(Integer i) {			
+		Category cat = (Category) categories.toArray()[i];
+		return cat; 
 	}
 	
 	@Override
