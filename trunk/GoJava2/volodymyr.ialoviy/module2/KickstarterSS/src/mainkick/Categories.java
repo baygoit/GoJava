@@ -6,7 +6,6 @@ public class Categories {
 	private static final String CATEGORIES_FILE = "Categories.properties";
 	private ArrayList<Category> listCatecories = new ArrayList<Category>();
 	private int counterCategory;
-
 	
 	public void writeAllCatecories(){
 		ArrayList<String[]> categoryBD = readDBCatecories();

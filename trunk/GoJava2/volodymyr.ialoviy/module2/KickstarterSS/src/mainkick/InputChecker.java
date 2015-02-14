@@ -3,17 +3,17 @@ package mainkick;
 import java.util.regex.Pattern;
 
 public class InputChecker {
-	private int breakCounter;
-	private int choiceNumber;
-	private int magicStop = 3;
-	private InputsConsole choice;
-	private OutputConsole out;
+	private static int breakCounter;
+	private static int choiceNumber;
+	private static int magicStop = 3;
+	private static InputsConsole choice;
+	private static OutputConsole out;
 	public InputChecker(InputsConsole choice, OutputConsole out){
-		this.choice = choice;
+		InputChecker.choice = choice;
 		this.setOut(out);
 	}
 
-	public int checkNumber(int[] border){
+	public static int checkNumber(int[] border){
 		breakCounter = 0;
 		choiceNumber = 0;
 		for (int i = 0; i < magicStop; i++){
@@ -29,7 +29,7 @@ public class InputChecker {
 		}
 		return choiceNumber;
 	}
-	
+
 	public String checkName(){
 		breakCounter = 0;
 		String chosen = null;
@@ -91,7 +91,7 @@ public class InputChecker {
 		return amount;
 	}
 	
-	private Boolean checkBorder(int choiceNumber, int[] border){
+	private static Boolean checkBorder(int choiceNumber, int[] border){
 		boolean f = false;
 		if (!checkRangeOfNumbers(choiceNumber, border)){
 			getOut().print("This number does not exist, please try again");
@@ -101,7 +101,7 @@ public class InputChecker {
 		return f;
 	}
 	
-	private Boolean checkNumbers(String chosen){
+	private static Boolean checkNumbers(String chosen){
 		boolean f = false;
 		if (!checkIsNumber(chosen)){
 			getOut().print("It is not a number, please try again");
@@ -111,7 +111,7 @@ public class InputChecker {
 		return f;
 	}
 	
-	private boolean checkRangeOfNumbers(int number, int[] border){
+	private static boolean checkRangeOfNumbers(int number, int[] border){
 		boolean f = false;
 		for (int i = 0; i < border.length; i++){
 			if (border[i] == number){
@@ -122,13 +122,13 @@ public class InputChecker {
 		return f;
     }
 	
-	private int bannedFor10Minutes() {
+	private static int bannedFor10Minutes() {
 		// TODO
 		int choiceNumber = 777;
 		return choiceNumber;
 	}
 
-	private boolean checkIsNumber(String string){  
+	private static boolean checkIsNumber(String string){  
         return Pattern.compile("^[-0-9]{1,3}$").matcher(string).matches();  
     }
 
@@ -144,11 +144,11 @@ public class InputChecker {
         return Pattern.compile("^[0-9]{1,10}$").matcher(string).matches();  
     }
 
-	public OutputConsole getOut() {
+	public static OutputConsole getOut() {
 		return out;
 	}
 
 	public void setOut(OutputConsole out) {
-		this.out = out;
+		InputChecker.out = out;
 	}
 }

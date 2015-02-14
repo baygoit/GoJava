@@ -94,7 +94,7 @@ public class Project{
 		this.faq = question;
 	}
 
-	public void addFaq(String question) {//TODO = PROJECTS
+	public void addFaq(String question) {
 		this.faq.add(question);
 	}
 }

@@ -165,21 +165,21 @@ public class KickstarterS {
 	}
 
 	private void askCategory() {
-		chosenCategoryId = check.checkNumber(categories.getKickCategories()) - 1;
+		chosenCategoryId = InputChecker.checkNumber(categories.getKickCategories()) - 1;
 	}
 
 	private void askProject(int[] allowedVariants) {
-		chosenProject = check.checkNumber(concatArray(
+		chosenProject = InputChecker.checkNumber(concatArray(
 				categories.projectsContain(chosenCategoryId),
 				allowedVariants)); // TODO
 	}
 
 	private void askAfterProject(int[] intSwitch) {
-		choiceTo = check.checkNumber(intSwitch);
+		choiceTo = InputChecker.checkNumber(intSwitch);
 	}
 
 	private void askHowMuchPay(int[] intSwitch) {
-		chosenPay = check.checkNumber(intSwitch);
+		chosenPay = InputChecker.checkNumber(intSwitch);
 	}
 	
 	private void askQuestion() {
