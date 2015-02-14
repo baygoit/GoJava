@@ -10,7 +10,7 @@ import org.goJava2.kickstarter.controller.QuoteController;
 import org.goJava2.kickstarter.factory.StorageFactory;
 import org.goJava2.kickstarter.model.ProjectStorage;
 
-public class View {
+public class ConsoleView {
 	
 	private Category category;
 	
@@ -21,7 +21,7 @@ public class View {
 	private final String title = "*** Super kickstarter ***";
 	private String path;
 	
-	public View(QuoteController quoteController, CategoryController categoryController,
+	public ConsoleView(QuoteController quoteController, CategoryController categoryController,
 				ProjectController projectController) {
 		this.quoteController = quoteController;
 		this.categoryController = categoryController;

@@ -6,15 +6,15 @@ import org.goJava2.kickstarter.controller.QuoteController;
 import org.goJava2.kickstarter.factory.StorageFactory;
 import org.goJava2.kickstarter.model.CategoryStorage;
 import org.goJava2.kickstarter.view.InOut;
-import org.goJava2.kickstarter.view.View;
+import org.goJava2.kickstarter.view.ConsoleView;
 
 public class Engine {
 	
-	private	View view;
+	private	ConsoleView view;
 	private InOut scann;
 	
 	public Engine() {
-		view = new View(new QuoteController(), new CategoryController(), new ProjectController());
+		view = new ConsoleView(new QuoteController(), new CategoryController(), new ProjectController());
 		scann = new InOut();
 	}
 	
