@@ -28,6 +28,10 @@ public class Project {
 		return name;
 	}
 	
+	public void addToTotal(int amount) {
+		total += amount;
+	}
+	
 	// It's example of optimization.
 	public String getShortInfo() {
 		StringBuilder buffer = new StringBuilder();
