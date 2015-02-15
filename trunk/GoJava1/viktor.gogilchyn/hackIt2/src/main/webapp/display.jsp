@@ -9,17 +9,17 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<link href="style.css" rel="stylesheet" type="text/css">
+<link href="css/bootstrap.min.css" rel="stylesheet">
 <title>Actor list</title>
 </head>
 <body>
-<div class = "gamers_container">
+<div class="container">
 <%Iterator<Actor> iter = gamersList.iterator();
 while(iter.hasNext()) { %>
     <div class="one_gamer_container">
     <%Actor element = iter.next();%>
     <div class="gamer_name_container">
-    <%out.print("Name: " + element.getName()); %>
+    <h1><%out.print("Name: " + element.getName()); %></h1>
     <div class="gamer_skills_container">
         <%for (Map.Entry<String, Integer> entry : element.getSkills().entrySet()) {%>
             <div class="one_skill_container">
@@ -38,5 +38,7 @@ while(iter.hasNext()) { %>
 </div>
 <a href="addform.jsp">Create</a>
 <a href="#">Read</a>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
 </body>
 </html>

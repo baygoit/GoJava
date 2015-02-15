@@ -1,6 +1,5 @@
 package ua.com.goit.gojava1.lslayer.hackit2;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
@@ -15,13 +14,12 @@ import ua.com.goit.gojava1.lslayer.hackit2.gear.Gear;
 
 public final class GameSession { // Singleton. There is only one game per app.
                                  // Multithreading ignored for a while
-    
+
     private static GameSession instance;
     private List<Actor> gamers = new ArrayList<Actor>();
     private LinkedList<Map<Actor, Action>> actionQueue = new LinkedList<Map<Actor, Action>>();
     private Map<Actor, ActionResult> resultsQueue = new LinkedHashMap<Actor, ActionResult>();
     private List<Gear> stuff = new ArrayList<Gear>();
-    
 
     private GameSession() {
         ActorDAO dao = new ActorDAO(false);
@@ -55,13 +53,13 @@ public final class GameSession { // Singleton. There is only one game per app.
         this.gamers.add(gamer);
     }
 
-
     public List<Actor> getGamers() {
         return gamers;
     }
 
-    public static GameSession getInstance()  {
-        if (instance == null) instance = new GameSession();
+    public static GameSession getInstance() {
+        if (instance == null)
+            instance = new GameSession();
         return instance;
     }
 
