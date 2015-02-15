@@ -22,8 +22,8 @@ public class KickstarterTest {
 		Input in = new Input() {
 			
 			@Override
-			public int readChoice() {
-				return 0;
+			public String readChoice() {
+				return "0";
 			}
 		};
 		
@@ -64,8 +64,8 @@ public class KickstarterTest {
 		}
 		
 		@Override
-		public int readChoice() {
-			return choices.remove(0);
+		public String readChoice() {
+			return String.valueOf(choices.remove(0));
 		}
 	}
 	
@@ -107,49 +107,7 @@ public class KickstarterTest {
 		              "]", storage);
 	}
 	
-	@Test
-	public void shouldShowProject_whenItChosen(){
-		//given
-		FakeOutput out = new FakeOutput();
-		Input in = new FakeInput(1, 1, 0, 0, 0);			
-		Categories categories = new InnerMemoryCategories();
-		Projects projects = new Projects();
-		Quote Quote = new StubQuote();
-		Category category1 = new Category("category1");
-		Category category2 = new Category("category2");
-		categories.addCategory(category1);
-		categories.addCategory(category2);
-		Project project1 = new Project(category1);
-		project1.setProject("name1", "description1", 1000, 200, 10, "history1", "videoLink1", "questions");
-		projects.addProject(project1);
-		Kickstart kickstart = new Kickstart(out, in, categories, projects, Quote);
-		
-		//when
-		kickstart.buildMenu();
-		String storage = out.getList().toString();
-		
-		//then
-		assertEquals("[quote\n" +
-					", 1 - category1, 2 - category2\n" +
-					"What are you interested in? Pleace, make your choice:\n" +
-					", You chose - category1\n" +
-					", 1) Name - name1, Description - description1, Money we need - 1000, Money we have - 200, Days left - 10\n" +
-					", If you want to return press \"0\"\n" +
-					", --------------------------------------------------\n" +
-					", You chose: Name - name1, Description - description1, Money we need - 1000, Money we have - 200, Days left - 10\n" +
-					", history1\n" +
-					", videoLink1\n" +
-					", questions\n" +
-					", --------------------------------------------------\n" +
-					", Return - \"0\"\n" +
-					", 1) Name - name1, Description - description1, Money we need - 1000, Money we have - 200, Days left - 10\n" +
-					", If you want to return press \"0\"\n" +
-					", 1 - category1, 2 - category2\n" +
-					"What are you interested in? Pleace, make your choice:\n" +
-					", Thanks for using our program, Goodbye!\n" +
-					"]", storage);
-	}
-	
+
 	@Test
 	public void shouldDisplayError_whenNotExistingItemIsSelected(){
 		//given
@@ -184,9 +142,9 @@ public class KickstarterTest {
 					", videoLink1\n" +
 					", questions\n" +
 					", --------------------------------------------------\n" +
-					", Return - \"0\"\n" +
-					", Error!! You must enter 0 \n" +
-					"Please, try again\n" +
+					", 1 - invest to project (Return - 0)\n" +
+					", Thanks for choosing our project\n" +
+					", 1 - invest to project (Return - 0)\n" +
 					", 1) Name - name1, Description - description1, Money we need - 1000, Money we have - 200, Days left - 10\n" +
 					", If you want to return press \"0\"\n" +
 					", Error!! There are no such project - Try again:\n" +
@@ -216,7 +174,7 @@ public class KickstarterTest {
 		
 		//when
 		when(quote.generateQuote()).thenReturn("quote");
-		when(in.readChoice()).thenReturn(1, 1, 1, 0, 3, 0, 3, 0);
+		when(in.readChoice()).thenReturn("1", "1", "1", "0", "3", "0", "3", "0");
 		kickstart.buildMenu();
 		//then
 		verify(out).println("quote");
@@ -230,10 +188,34 @@ public class KickstarterTest {
 		verify(out).println("history1");
 		verify(out).println("videoLink1");
 		verify(out).println("questions");
-		verify(out).println("Return - \"0\"");
 		verify(out).println("Error!! There are no such project - Try again:");
-		verify(out).println("Error!! You must enter 0 \nPlease, try again");
 		verify(out).println("Error!! There are no such category - Try again:");
+		
+	}
+	@Test
+	public void shouldShowItemsInSelectedProjectMenuLevel(){
+		//given
+		Output out = mock(Output.class);
+		Input in = mock(Input.class);
+		Categories categories = new InnerMemoryCategories();
+		Projects projects = new Projects();
+		Quote quote = mock(Quote.class);
+		Category category1 = new Category("category1");
+		categories.addCategory(category1);
+		Project project1 = new Project(category1);
+		project1.setProject("name1", "description1", 1000, 200, 10, "history1", "videoLink1", "questions");
+		projects.addProject(project1);
+		Kickstart kickstart = new Kickstart(out, in, categories, projects, quote);
+		
+		//when
+		when(quote.generateQuote()).thenReturn("quote");
+		when(in.readChoice()).thenReturn("1", "1", "1", "0", "0", "0");
+		kickstart.buildMenu();
+		//then
+		verify(out).println("quote");
+		verify(out, times(2)).println("1 - invest to project (Return - 0)");
+		verify(out).println("Thanks for choosing our project");
+		
 		
 	}
 	

@@ -1,5 +1,5 @@
 package myRealization;
 
 public interface Input {
-	public int readChoice();
+	public String readChoice();
 }

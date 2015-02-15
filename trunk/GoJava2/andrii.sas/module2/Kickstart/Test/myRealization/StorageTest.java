@@ -20,7 +20,7 @@ public class StorageTest {
 		//when
 		
 		when(rand.nextInt()).thenReturn(0);
-		when(in.readChoice()).thenReturn(2, 1, 1, 0, 2, 0, 4, 0);
+		when(in.readChoice()).thenReturn("2", "1", "1", "0", "2", "0", "4", "0");
 		storage.initiate();
 		
 		//then
@@ -35,8 +35,8 @@ public class StorageTest {
 		verify(out).println("youtube.com");
 		verify(out).println("Q: Have you invested your money? A: yes");
 		verify(out, times(2)).println("--------------------------------------------------");
-		verify(out).println("Return - \"0\"");
-		verify(out).println("Error!! You must enter 0 \nPlease, try again");
+//		verify(out).println(");
+//		verify(out).println("Error!! You must enter 0 \nPlease, try again");
 		verify(out).println("Error!! There are no such project - Try again:");
 		verify(out).println("Error!! There are no such category - Try again:");
 	}

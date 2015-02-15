@@ -16,11 +16,11 @@ public class Projects {
 	public void chooseProjects(Category category) {
 		categoryProjects.clear();
 		for (Project project : projects) {
-			if (project.getCategory() == category) {
+			if (project.getCategory().equals(category) ) {
 				categoryProjects.add(project);
 			}
 		}
-	}
+	} 
 	
 	public ArrayList<String> writeProjects(){
 		projectData.clear();

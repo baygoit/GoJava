@@ -11,7 +11,7 @@ public class Storage {
 		kick = new Kickstart(output, input, categories, projects, quote);
 	}
 	public void initiate(){
-		Category sport = new Category("Sport");
+		Category sport = new Category("Sport"); 
 		Category science = new Category("Science");
 		Category music = new Category("Music");
 		categories.addCategory(sport);

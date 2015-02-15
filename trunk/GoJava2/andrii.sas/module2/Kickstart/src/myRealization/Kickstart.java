@@ -113,24 +113,29 @@ public class Kickstart {
 			
 			@Override
 			public void displayItems() {
-				output.println("Return - \"0\"");
+				output.println("1 - invest to project (Return - 0)");
 			}
 			
 			@Override
 			public void displayError() {
 				output.println("Error!! You must enter 0 \nPlease, try again");
+				
 			}
 			
 			@Override
 			public void displaySelectedItems() {
 				//TODO
+				if (getCheckedValue() == 0){
+					output.println("Thanks for choosing our project");
+				}
 			}
 			
 			@Override
 			public void toNextLevel() {
 				//TODO
+				
 			}
 		};
-		menu.run(0);
+		menu.run(1);
 	}
 }

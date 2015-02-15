@@ -16,7 +16,7 @@ public abstract class Menu {
 		int l = 0;
 		while(true){
 			try {
-				l = input.readChoice();
+				l = Integer.parseInt(input.readChoice());
 				break;
 			} catch (Exception e){
 				output.println("Error!! You must enter numbers! - Try again:");

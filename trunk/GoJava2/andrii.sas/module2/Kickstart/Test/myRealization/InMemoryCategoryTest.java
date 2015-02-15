@@ -8,12 +8,11 @@ public class InMemoryCategoryTest extends CategoriesTest{
 
 	@Override
 	Categories getList() {
-		return new InFileCategories("categories.txt");
+		return new InFileCategories("categories-test.txt");
 	}
-	
+		
 	@After
 	public void cleanFile(){
-		new File("categories.txt").delete();
+		new File("categories-test.txt").delete();
 	}
-	
 }

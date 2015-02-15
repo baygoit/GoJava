@@ -17,12 +17,51 @@ public class InFileCategories implements Categories {
 		file = createFileIfNeeded(fileName);
 	}
 	
+	interface LogicDifference {
+		Object doLogicalDifference(BufferedReader br);
+	}
+	
+	class SameLogic {
+		private BufferedReader in = null;
+		private LogicDifference logicDifference;
+		
+		public SameLogic(LogicDifference shortcut){
+			this.logicDifference = shortcut;
+		}
+		
+		public Object doLogic(){
+			try {
+				in = new BufferedReader(new FileReader(file));
+				return logicDifference.doLogicalDifference(in);
+			} catch (FileNotFoundException e) {
+				throw new RuntimeException("Can't read file", e);
+			} 
+			finally {
+				if (in != null){
+					try {
+						in.close();
+					} catch (IOException e) {
+						throw new RuntimeException("Can't close file", e);
+					}
+				}
+			}
+		}
+		
+		public String read(){
+			try {
+				return in.readLine();
+			} catch (IOException e) {
+				throw new RuntimeException("Something wrong with file reading");
+			}
+		}
+	}
+	
 	@Override
 	public void addCategory(Category category) {
 		BufferedWriter out = null;
 		try {
 			out = new BufferedWriter(new FileWriter(file, firstTime < 1 ? false : true));
-			out.write(category.getName() + "\n");
+			out.write(category.getName() + "\r\n");
 			firstTime++;
 		} catch (FileNotFoundException e) {
 			throw new RuntimeException("Can't write file", e);
@@ -42,35 +81,62 @@ public class InFileCategories implements Categories {
 
 	@Override
 	public String getCategories() {
-		BufferedReader in = null;
-		try {
-			String result = "";
-			in = new BufferedReader(new FileReader(file));
-			int index = 1;
-			String line = in.readLine();
-			while (line != null){
-				result += index + " - " + line;
-				line = in.readLine();
-				if (line != null){
-					result += ", ";
-				}
-				index++;
-			}
-			return result;
-		} catch (FileNotFoundException e) {
-			throw new RuntimeException("Can't read file", e);
-		} catch (IOException e) {
-			throw new RuntimeException("Something wrong with file reading");
-		}
-		finally {
-			if (in != null){
+		class RealizationOfLogicDifference implements LogicDifference {
+			@Override
+			public Object doLogicalDifference(BufferedReader br) {
+				String result = "";
+				int index = 1;
+				String line;
 				try {
-					in.close();
-				} catch (IOException e) {
-					throw new RuntimeException("Can't close file", e);
-				}
+					line = br.readLine();
+					while (line != null){
+						result += index + " - " + line;
+						line = br.readLine();
+							if (line != null){
+								result += ", ";
+							}
+						index++;
+						}
+					}
+					catch (IOException e) {
+						throw new RuntimeException("Something wrong with file reading");
+					}
+					return result;
 			}
+			
 		}
+		LogicDifference shortcut = new RealizationOfLogicDifference();
+		SameLogic someLogic = new SameLogic(shortcut);
+		return (String) someLogic.doLogic();
+//		BufferedReader in = null;
+//		try {
+//			String result = "";
+//			in = new BufferedReader(new FileReader(file));
+//			int index = 1;
+//			String line = in.readLine();
+//			while (line != null){
+//				result += index + " - " + line;
+//				line = in.readLine();
+//				if (line != null){
+//					result += ", ";
+//				}
+//				index++;
+//			}
+//			return result;
+//		} catch (FileNotFoundException e) {
+//			throw new RuntimeException("Can't read file", e);
+//		} catch (IOException e) {
+//			throw new RuntimeException("Something wrong with file reading");
+//		}
+//		finally {
+//			if (in != null){
+//				try {
+//					in.close();
+//				} catch (IOException e) {
+//					throw new RuntimeException("Can't close file", e);
+//				}
+//			}
+//		}
 	}
 
 	@Override

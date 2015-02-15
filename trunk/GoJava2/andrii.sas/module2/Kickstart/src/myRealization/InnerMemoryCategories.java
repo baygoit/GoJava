@@ -8,7 +8,7 @@ public class InnerMemoryCategories implements Categories {
 	private int i = 1;
 	private String categoriesList;
 	
-	@Override
+	@Override 
 	public void addCategory(Category category){
 		categories.add(category);
 	}
