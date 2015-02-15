@@ -43,6 +43,10 @@ public class Project {
 		return moneyNeed;
 	}
 	
+	public void increaseMoneyHas(int moneyHas) {
+		this.moneyHas += moneyHas;
+	}
+	
 	public int getMoneyHas(){
 		return moneyHas;
 	}
@@ -61,5 +65,9 @@ public class Project {
 	
 	public String getQuestion(){
 		return questions;
+	}
+	
+	public void addClientQuestion(String question){
+		questions += "\nQ: " + question;
 	}
 }

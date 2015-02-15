@@ -7,6 +7,8 @@ public class Kickstart {
 	private Projects projects;
 	private Quote quote;
 	private Category category;
+	private int projectChoice;
+	private Project project;
 	 
 	public Kickstart(Output output, Input input, Categories categories, Projects projects, Quote quote) {
 		this.output = output;
@@ -17,17 +19,21 @@ public class Kickstart {
 		
 	}
 	
+	public void println(String message){
+		output.println(message);
+	}
+	
 	public void printQuote() {
-		output.println(quote.generateQuote());
+		println(quote.generateQuote());
 	}
 
 	public void showList() {
-		output.println(categories.getCategories() + "\nWhat are you interested in? Pleace, make your choice:");
+		 println(categories.getCategories() + "\nWhat are you interested in? Pleace, make your choice:");
 	}
 
 	public void showChoice(int choice) {
 		category = categories.readCategory(choice);
-		output.println("You chose - " + category.getName());
+		println("You chose - " + category.getName());
 	}
 	
 	public void receiveProjectsByCategory() {
@@ -37,20 +43,22 @@ public class Kickstart {
 	public void showProjects() {
 		int j = 1;
 		for (String project : projects.writeProjects()){
-			output.println(j + ")" + project);
+			println(j + ")" + project);
 			j++;
 		}
-		output.println("If you want to return press \"0\"");
+		println("If you want to return press \"0\"");
 	}
 
 	public void showChosenProject(int projectChoice) {
-		output.println("--------------------------------------------------");
-		output.println("You chose:"
-				+ (projects.readProject(projectChoice)));
-		for (String s : projects.giveAllInfo(projects.readObject(projectChoice))){
-			output.println(s);
+		this.projectChoice = projectChoice;
+		project = projects.readObject(projectChoice);
+		println("--------------------------------------------------");
+		println("You chose:"
+				+ (projects.writeProject(project)));
+		for (String s : projects.giveAllInfo(project)){
+			println(s);
 		}
-		output.println("--------------------------------------------------");
+		println("--------------------------------------------------");
 	}
 	
 	public void buildMenu(){
@@ -64,7 +72,7 @@ public class Kickstart {
 			
 			@Override
 			public void displayError() {
-				output.println("Error!! There are no such category - Try again:");
+				println("Error!! There are no such category - Try again:");
 			}
 
 			@Override
@@ -79,7 +87,7 @@ public class Kickstart {
 			}
 		};
 		menu.run(categories.getLenth());
-		output.println("Thanks for using our program, Goodbye!");
+		println("Thanks for using our program, Goodbye!");
 	}
 	
 	public void goToProjectsMenu(){
@@ -92,7 +100,7 @@ public class Kickstart {
 			
 			@Override
 			public void displayError() {
-				output.println("Error!! There are no such project - Try again:");
+				println("Error!! There are no such project - Try again:");
 			}
 			
 			@Override
@@ -113,12 +121,12 @@ public class Kickstart {
 			
 			@Override
 			public void displayItems() {
-				output.println("1 - invest to project (Return - 0)");
+				println("1 - invest to project, 2 - ask question (Return - 0)");
 			}
 			
 			@Override
 			public void displayError() {
-				output.println("Error!! You must enter 0 \nPlease, try again");
+				println("Error!! There are no such menu item, try again:");
 				
 			}
 			
@@ -126,8 +134,22 @@ public class Kickstart {
 			public void displaySelectedItems() {
 				//TODO
 				if (getCheckedValue() == 0){
-					output.println("Thanks for choosing our project");
+					println("Thanks for choosing our project");
+					println("Please enter your name:");
+					String name = input.readChoice();
+					println("Please enter number of your credit card:");
+					String card = input.readChoice();
+					println("Please enter the sum, which you want to invest:");
+					int money = checkForEnteringLetters();
+					println("Thank you " + name + " for investing " + money + "$ in our project!");
+					project.increaseMoneyHas(money);
+				} else if (getCheckedValue() == 1){
+					println("Ask your question, please:");
+					String question = input.readChoice();
+					println("Your question is: " + question);
+					project.addClientQuestion(question);
 				}
+				showChosenProject(projectChoice);
 			}
 			
 			@Override
@@ -136,6 +158,6 @@ public class Kickstart {
 				
 			}
 		};
-		menu.run(1);
+		menu.run(2); //TODO delete magic number
 	}
 }

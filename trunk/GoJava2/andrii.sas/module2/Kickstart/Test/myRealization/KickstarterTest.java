@@ -2,120 +2,70 @@ package myRealization;
 
 import static org.junit.Assert.*;
 
-import java.util.Arrays;
-import java.util.LinkedList;
 import java.util.List;
 
+import org.junit.Before;
 import org.junit.Test;
+import org.mockito.ArgumentCaptor;
+
 import static org.mockito.Mockito.*;
 
 public class KickstarterTest {
+	
+	private Output out;
+	private Input in;
+	private Categories categories;
+	private Projects projects;
+	private Quote quote;
+	private Kickstart kickstart;
+
+	@Before
+	public void setup(){
+		out = mock(Output.class);
+		in = mock(Input.class);
+		categories = new InnerMemoryCategories();
+		projects = new Projects();
+		quote = mock(Quote.class);
+		kickstart = new Kickstart(out, in, categories, projects, quote);
+	}
+	
 	@Test
-	public void dummy_stub(){
-		Output out = new Output() {
-			
-			@Override
-			public void println(String s) {
-				//nothing
-			}
-		};
-		Input in = new Input() {
-			
-			@Override
-			public String readChoice() {
-				return "0";
-			}
-		};
-		
-		Categories categories = new InnerMemoryCategories();
-		Projects projects = new Projects();
-		Quote Quote = new Quote() {
-			
-			@Override
-			public String generateQuote() {
-				return "";
-			}
-		};
-		Kickstart kickstart = new Kickstart(out, in, categories, projects, Quote);
+	public void shouldExitFromProgramm(){
+		//when
+		when(in.readChoice()).thenReturn("0");
 		kickstart.buildMenu();
 	}
 	
-	class FakeOutput implements Output{
-		
-		private List<String> list = new LinkedList<>();
-		
-		public List<String> getList() {
-			return list;
-		}
-
-		@Override
-		public void println(String s) {
-			
-			list.add(s + "\n");
-		}
-
-		
-	}
-	
-	class FakeInput implements Input{
-		private List<Integer> choices;
-		public FakeInput(Integer... choices) {
-			this.choices = new LinkedList<>(Arrays.asList(choices));
-		}
-		
-		@Override
-		public String readChoice() {
-			return String.valueOf(choices.remove(0));
-		}
-	}
-	
-	class StubQuote implements Quote {
-		
-		@Override
-		public String generateQuote() {
-			return "quote";
-		}
-	}
-	
 	@Test
-	public void fake(){
+	public void sholdPrintChosenCategory(){
 		//given
-		FakeOutput out = new FakeOutput();
-		Input in = new FakeInput(1, 0, 0);			
-		Categories categories = new InnerMemoryCategories();
-		Projects projects = new Projects();
-		Quote Quote = new StubQuote();
 		Category category1 = new Category("category1");
 		Category category2 = new Category("category2");
 		categories.addCategory(category1);
 		categories.addCategory(category2);
-		Kickstart kickstart = new Kickstart(out, in, categories, projects, Quote);
 			
 		//when
+		when(quote.generateQuote()).thenReturn("quote");
+		when(in.readChoice()).thenReturn("1", "0", "0");
 		kickstart.buildMenu();
-		String storage = out.getList().toString();
+		List<String> values = assertOut(out, 6);
 			
 		//then
-		assertEquals("[quote\n" +
+		assertEquals("[quote" +
 		              ", 1 - category1, 2 - category2\n" +
-		              "What are you interested in? Pleace, make your choice:\n" +
-		              ", You chose - category1\n" +
-		              ", If you want to return press \"0\"\n" +
+		              "What are you interested in? Pleace, make your choice:" +
+		              ", You chose - category1" +
+		              ", If you want to return press \"0\"" +
 		              ", 1 - category1, 2 - category2\n" +
-		              "What are you interested in? Pleace, make your choice:\n" +
-		              ", Thanks for using our program, Goodbye!\n" +
-		              "]", storage);
+		              "What are you interested in? Pleace, make your choice:" +
+		              ", Thanks for using our program, Goodbye!" +
+		              "]", values.toString());
 	}
 	
 
 	@Test
 	public void shouldDisplayError_whenNotExistingItemIsSelected(){
 		//given
-		FakeOutput out = new FakeOutput();
-		Input in = new FakeInput(1, 1, 1, 0, 3, 0, 3, 0);			
-		Categories categories = new InnerMemoryCategories();
-		Projects projects = new Projects();
-		Quote Quote = new StubQuote();
 		Category category1 = new Category("category1");
 		Category category2 = new Category("category2");
 		categories.addCategory(category1);
@@ -123,100 +73,160 @@ public class KickstarterTest {
 		Project project1 = new Project(category1);
 		project1.setProject("name1", "description1", 1000, 200, 10, "history1", "videoLink1", "questions");
 		projects.addProject(project1);
-		Kickstart kickstart = new Kickstart(out, in, categories, projects, Quote);
 		
 		//when
+		when(in.readChoice()).thenReturn("1", "1", "4", "0", "3", "0", "3", "0");
+		when(quote.generateQuote()).thenReturn("quote");
 		kickstart.buildMenu();
-		String storage = out.getList().toString();
+		List<String> values = assertOut(out, 19);
+		//then
+		assertEquals("[quote" +
+					", 1 - category1, 2 - category2\n" +
+					"What are you interested in? Pleace, make your choice:" +
+					", You chose - category1" +
+					", 1) Name - name1, Description - description1, Money we need - 1000, Money we have - 200, Days left - 10" +
+					", If you want to return press \"0\"" +
+					", --------------------------------------------------" +
+					", You chose: Name - name1, Description - description1, Money we need - 1000, Money we have - 200, Days left - 10" +
+					", history1" +
+					", videoLink1" +
+					", questions" +
+					", --------------------------------------------------" +
+					", 1 - invest to project, 2 - ask question (Return - 0)" +
+					", Error!! There are no such menu item, try again:" +
+					", 1) Name - name1, Description - description1, Money we need - 1000, Money we have - 200, Days left - 10" +
+					", If you want to return press \"0\"" +
+					", Error!! There are no such project - Try again:" +
+					", 1 - category1, 2 - category2\n" +
+					"What are you interested in? Pleace, make your choice:" +
+					", Error!! There are no such category - Try again:" +
+					", Thanks for using our program, Goodbye!" +
+					"]", values.toString());
+	}
+	
+
+	@Test
+	public void shouldCheckMenuOfSelectedProject_whenIncorrectItemChosen(){
+		//given
+		Category category1 = new Category("category1");
+		Category category2 = new Category("category2");
+		categories.addCategory(category1);
+		categories.addCategory(category2);
+		Project project1 = new Project(category1);
+		project1.setProject("name1", "description1", 1000, 200, 10, "history1", "videoLink1", "questions");
+		projects.addProject(project1);
+		
+		//when
+		when(quote.generateQuote()).thenReturn("quote");
+		when(in.readChoice()).thenReturn("1", "1", "4", "0", "3", "0", "3", "0");
+		kickstart.buildMenu();
+		List<String> values = assertOut(out, 19);
+		//then
+		assertOut(values, "quote");
+		assertOut(values, "1 - category1, 2 - category2\nWhat are you interested in? Pleace, make your choice:");
+		assertOut(values, "1) Name - name1, Description - description1, Money we need - 1000, Money we have - 200, Days left - 10");
+		assertOut(values, "Thanks for using our program, Goodbye!");
+		assertOut(values, "--------------------------------------------------");
+		assertOut(values, "You chose: Name - name1, Description - description1, Money we need - 1000, Money we have - 200, Days left - 10");
+		assertOut(values, "If you want to return press \"0\"");
+		assertOut(values, "You chose - category1");
+		assertOut(values, "history1");
+		assertOut(values, "videoLink1");
+		assertOut(values, "questions");
+		assertOut(values, "Error!! There are no such project - Try again:");
+		assertOut(values, "Error!! There are no such category - Try again:");
+		
+	}
+	@Test
+	public void shouldDisplayProjectInvestmentFields_whenSelectedInvestToProject(){
+		//given
+		Category category1 = new Category("category1");
+		categories.addCategory(category1);
+		Project project1 = new Project(category1);
+		project1.setProject("name1", "description1", 1000, 200, 10, "history1", "videoLink1", "questions");
+		projects.addProject(project1);
+		
+		//when
+		when(quote.generateQuote()).thenReturn("quote");
+		when(in.readChoice()).thenReturn("1", "1", "1", "Gais", "123445", "100", "0", "0", "0");
+		kickstart.buildMenu();
 		
 		//then
-		assertEquals("[quote\n" +
-					", 1 - category1, 2 - category2\n" +
-					"What are you interested in? Pleace, make your choice:\n" +
-					", You chose - category1\n" +
-					", 1) Name - name1, Description - description1, Money we need - 1000, Money we have - 200, Days left - 10\n" +
-					", If you want to return press \"0\"\n" +
-					", --------------------------------------------------\n" +
-					", You chose: Name - name1, Description - description1, Money we need - 1000, Money we have - 200, Days left - 10\n" +
-					", history1\n" +
-					", videoLink1\n" +
-					", questions\n" +
-					", --------------------------------------------------\n" +
-					", 1 - invest to project (Return - 0)\n" +
-					", Thanks for choosing our project\n" +
-					", 1 - invest to project (Return - 0)\n" +
-					", 1) Name - name1, Description - description1, Money we need - 1000, Money we have - 200, Days left - 10\n" +
-					", If you want to return press \"0\"\n" +
-					", Error!! There are no such project - Try again:\n" +
-					", 1 - category1, 2 - category2\n" +
-					"What are you interested in? Pleace, make your choice:\n" +
-					", Error!! There are no such category - Try again:\n" +
-					", Thanks for using our program, Goodbye!\n" +
-					"]", storage);
+		List<String> values = assertOut(out, 28);
+		assertOut(values, "1 - invest to project, 2 - ask question (Return - 0)");
+		assertOut(values, "Please enter your name:");
+		assertOut(values, "Please enter number of your credit card:");
+		assertOut(values, "Please enter the sum, which you want to invest:");
+		assertOut(values, "Thank you Gais for investing 100$ in our project!");
+	}
+    
+	@Test
+	public void shouldAddInvestedMoney(){
+		//given
+		Category category1 = new Category("category1");
+		categories.addCategory(category1);
+		Project project1 = new Project(category1);
+		project1.setProject("name1", "description1", 1000, 200, 10, "history1", "videoLink1", "questions");
+		projects.addProject(project1);
+		
+		//when
+		when(quote.generateQuote()).thenReturn("quote");
+		when(in.readChoice()).thenReturn("1", "1", "1", "Gais", "123445", "100", "0", "0", "0");
+		kickstart.buildMenu();
+		
+		//then
+//		List<String> values = assertOut(out, 22);
+		assertEquals(300, project1.getMoneyHas());
 	}
 	
 	@Test
-	public void mockTest(){
+	public void shouldDisplayQuestionField_whenSelectedInvestAskQuestion(){
 		//given
-		Output out = mock(Output.class);
-		Input in = mock(Input.class);
-		Categories categories = new InnerMemoryCategories();
-		Projects projects = new Projects();
-		Quote quote = mock(Quote.class);
 		Category category1 = new Category("category1");
-		Category category2 = new Category("category2");
 		categories.addCategory(category1);
-		categories.addCategory(category2);
 		Project project1 = new Project(category1);
 		project1.setProject("name1", "description1", 1000, 200, 10, "history1", "videoLink1", "questions");
 		projects.addProject(project1);
-		Kickstart kickstart = new Kickstart(out, in, categories, projects, quote);
 		
 		//when
 		when(quote.generateQuote()).thenReturn("quote");
-		when(in.readChoice()).thenReturn("1", "1", "1", "0", "3", "0", "3", "0");
+		when(in.readChoice()).thenReturn("1", "1", "2", "How are you?", "0", "0", "0");
 		kickstart.buildMenu();
-		//then
-		verify(out).println("quote");
-		verify(out, times(2)).println("1 - category1, 2 - category2\nWhat are you interested in? Pleace, make your choice:");
-		verify(out, times(2)).println("1) Name - name1, Description - description1, Money we need - 1000, Money we have - 200, Days left - 10");
-		verify(out).println("Thanks for using our program, Goodbye!");
-		verify(out, times(2)).println("--------------------------------------------------");
-		verify(out).println("You chose: Name - name1, Description - description1, Money we need - 1000, Money we have - 200, Days left - 10");
-		verify(out, times(2)).println("If you want to return press \"0\"");
-		verify(out).println("You chose - category1");
-		verify(out).println("history1");
-		verify(out).println("videoLink1");
-		verify(out).println("questions");
-		verify(out).println("Error!! There are no such project - Try again:");
-		verify(out).println("Error!! There are no such category - Try again:");
 		
+		//then
+		List<String> values = assertOut(out, 25);
+		assertOut(values, "1 - invest to project, 2 - ask question (Return - 0)");
+		assertOut(values, "Ask your question, please:");
+		assertOut(values, "Your question is: How are you?");
 	}
+	
 	@Test
-	public void shouldShowItemsInSelectedProjectMenuLevel(){
+	public void shouldAddNewQuestionFromUser(){
 		//given
-		Output out = mock(Output.class);
-		Input in = mock(Input.class);
-		Categories categories = new InnerMemoryCategories();
-		Projects projects = new Projects();
-		Quote quote = mock(Quote.class);
 		Category category1 = new Category("category1");
 		categories.addCategory(category1);
 		Project project1 = new Project(category1);
 		project1.setProject("name1", "description1", 1000, 200, 10, "history1", "videoLink1", "questions");
 		projects.addProject(project1);
-		Kickstart kickstart = new Kickstart(out, in, categories, projects, quote);
 		
 		//when
 		when(quote.generateQuote()).thenReturn("quote");
-		when(in.readChoice()).thenReturn("1", "1", "1", "0", "0", "0");
+		when(in.readChoice()).thenReturn("1", "1", "2", "How are you?", "0", "0", "0");
 		kickstart.buildMenu();
+		
 		//then
-		verify(out).println("quote");
-		verify(out, times(2)).println("1 - invest to project (Return - 0)");
-		verify(out).println("Thanks for choosing our project");
-		
-		
+		assertEquals("questions\nQ: How are you?", project1.getQuestion());
+	}
+
+	public void assertOut(List<String> values, String message) {
+		assertTrue(values.contains(message));
+	}
+	
+	public List<String> assertOut(Output out, int times) {
+		ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
+		verify(out, times(times)).println(captor.capture());
+		List<String> values = captor.getAllValues();
+		return values;
 	}
 	
 }
