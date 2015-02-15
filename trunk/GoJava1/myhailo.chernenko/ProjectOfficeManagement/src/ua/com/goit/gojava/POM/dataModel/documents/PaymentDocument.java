@@ -1,10 +1,18 @@
-package ua.com.goit.gojava.POM.dataModel;
+package ua.com.goit.gojava.POM.dataModel.documents;
 
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
 
-public class PaymentDocument implements FinanceDocument, Serializable {
+import ua.com.goit.gojava.POM.dataModel.cashSubsystem.BankAccount;
+import ua.com.goit.gojava.POM.dataModel.common.FinancialDocument;
+import ua.com.goit.gojava.POM.dataModel.profitCostSubsystem.CostItem;
+import ua.com.goit.gojava.POM.dataModel.profitCostSubsystem.CostItemTransaction;
+import ua.com.goit.gojava.POM.dataModel.profitCostSubsystem.Project;
+import ua.com.goit.gojava.POM.dataModel.profitCostSubsystem.ProjectFinResultTransaction;
+import ua.com.goit.gojava.POM.dataModel.profitCostSubsystem.ProjectStage;
+
+public class PaymentDocument implements FinancialDocument, Serializable {
 
 	private static final long serialVersionUID = 2985654176742038375L;
 	private long id = 0;

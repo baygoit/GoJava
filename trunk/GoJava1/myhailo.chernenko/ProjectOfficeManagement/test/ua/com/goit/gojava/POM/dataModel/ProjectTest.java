@@ -7,6 +7,10 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+import ua.com.goit.gojava.POM.dataModel.profitCostSubsystem.Project;
+import ua.com.goit.gojava.POM.dataModel.profitCostSubsystem.ProjectFinResultTransaction;
+import ua.com.goit.gojava.POM.dataModel.profitCostSubsystem.ProjectStage;
+
 public class ProjectTest {
 
 	private Project project;

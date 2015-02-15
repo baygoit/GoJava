@@ -6,6 +6,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import ua.com.goit.gojava.POM.dataModel.common.FinancialEntry;
+
 public class BankAccountTransactionTest {
 
 	@Before
@@ -19,9 +21,9 @@ public class BankAccountTransactionTest {
 	@Test
 	public void testCreation() {
 
-		CashFlowStatementEntry bankAccountTransaction = new CashFlowStatementEntry();
+		/*FinancialEntry bankAccountTransaction = new FinancialEntry();
 		assertNotNull(bankAccountTransaction);
-		
+		*/
 	}
 
 

@@ -1,8 +1,10 @@
-package ua.com.goit.gojava.POM.dataModel;
+package ua.com.goit.gojava.POM.dataModel.profitCostSubsystem;
 
 import java.util.Calendar;
 import java.util.Date;
 import java.io.Serializable;
+
+import ua.com.goit.gojava.POM.dataModel.common.FinancialDocument;
 
 public class ProjectFinResultTransaction implements Serializable {
 	
@@ -12,7 +14,7 @@ public class ProjectFinResultTransaction implements Serializable {
 	private CostItem costItem;
 	private String description = "";
 	private long sum = 0;
-	private FinanceDocument doc;
+	private FinancialDocument doc;
 	
 	public long getId() {
 		return id;
@@ -44,10 +46,10 @@ public class ProjectFinResultTransaction implements Serializable {
 	public void setSum(long sum) {
 		this.sum = sum;
 	}
-	public FinanceDocument getDoc() {
+	public FinancialDocument getDoc() {
 		return doc;
 	}
-	public void setDoc(FinanceDocument doc) {
+	public void setDoc(FinancialDocument doc) {
 		this.doc = doc;
 	}
 	

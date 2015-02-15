@@ -13,6 +13,8 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import ua.com.goit.gojava.POM.persistence.abstraction.DAOFactory;
+
 public class DataManager implements DAOFactory{
 
 	private static final String DATA_FILE = "C:\\workspace\\ProjectOfficeManagement.dat";

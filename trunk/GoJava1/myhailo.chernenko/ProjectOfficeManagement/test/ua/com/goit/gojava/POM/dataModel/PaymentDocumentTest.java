@@ -6,6 +6,12 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import ua.com.goit.gojava.POM.dataModel.cashSubsystem.BankAccount;
+import ua.com.goit.gojava.POM.dataModel.documents.PaymentDocument;
+import ua.com.goit.gojava.POM.dataModel.profitCostSubsystem.CostItem;
+import ua.com.goit.gojava.POM.dataModel.profitCostSubsystem.Project;
+import ua.com.goit.gojava.POM.dataModel.profitCostSubsystem.ProjectStage;
+
 public class PaymentDocumentTest {
 
 	private PaymentDocument paymentDoc;

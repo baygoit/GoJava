@@ -1,4 +1,4 @@
-package ua.com.goit.gojava.POM.dataModel;
+package ua.com.goit.gojava.POM.dataModel.profitCostSubsystem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,7 +6,14 @@ import java.io.Serializable;
 //import ua.com.goit.gojava.POM.persistence.DataManager;
 
 
-import ua.com.goit.gojava.POM.persistence.DataObject;
+
+
+
+
+
+
+import ua.com.goit.gojava.POM.dataModel.documents.FinancialProjectPlan;
+import ua.com.goit.gojava.POM.persistence.abstraction.DataObject;
 
 public class Project implements DataObject, Serializable {
 	

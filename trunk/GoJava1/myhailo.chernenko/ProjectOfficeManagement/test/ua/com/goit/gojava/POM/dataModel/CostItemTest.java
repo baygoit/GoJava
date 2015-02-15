@@ -8,6 +8,10 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import ua.com.goit.gojava.POM.dataModel.common.FinancialDocument;
+import ua.com.goit.gojava.POM.dataModel.profitCostSubsystem.CostItem;
+import ua.com.goit.gojava.POM.dataModel.profitCostSubsystem.CostItemTransaction;
+
 public class CostItemTest {
 
 	private CostItem costItem;
@@ -64,8 +68,8 @@ public class CostItemTest {
 	@Test
 	public void testDeleteDocTransaction() {
 
-		FinanceDocument financeDocument1 = new FinanceDocument() {};
-		FinanceDocument financeDocument2 = new FinanceDocument() {};
+		FinancialDocument financeDocument1 = new FinancialDocument() {};
+		FinancialDocument financeDocument2 = new FinancialDocument() {};
 		
 		CostItemTransaction addedTransaction = costItem.addTransaction();
 		addedTransaction.setDoc(financeDocument1);

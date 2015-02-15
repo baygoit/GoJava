@@ -1,4 +1,4 @@
-package ua.com.goit.gojava.POM.dataModel;
+package ua.com.goit.gojava.POM.dataModel.documents;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -6,7 +6,10 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-public class FinancialProjectPlan  implements FinanceDocument, Serializable {
+import ua.com.goit.gojava.POM.dataModel.common.FinancialDocument;
+import ua.com.goit.gojava.POM.dataModel.profitCostSubsystem.ProjectFinResultTransaction;
+
+public class FinancialProjectPlan  implements FinancialDocument, Serializable {
 
 	private static final long serialVersionUID = 9135248402300294193L;
 	private long id = 0;

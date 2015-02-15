@@ -1,4 +1,4 @@
-package ua.com.goit.gojava.POM.persistence;
+package ua.com.goit.gojava.POM.persistence.abstraction;
 
 import java.util.List;
 
@@ -30,12 +30,23 @@ public class GenericDAO<T> {
 	public T create() {
 
 		T newGenericObj = getNewClassInstance();
+		if(newGenericObj instanceof DataObject){
+		
+			List<T> objectsList = getList();
+			long newID = 1;
+			if(objectsList.size() != 0) {
+				T lastElement = objectsList.get(objectsList.size()-1);
+				newID = (lastElement == null) ? 1 : ((DataObject) lastElement).getId()+1;
+			}
+			((DataObject) newGenericObj).setId(newID);
+
+		}
 		dataManager.saveObject(newGenericObj, classT.getName());
 		return newGenericObj;
 
 	}
 
-	public T getByName(String name) {
+	/*public T getByName(String name) {
 
 		T findedGenericObj = null;
 		List<T> list = getList();
@@ -47,7 +58,7 @@ public class GenericDAO<T> {
 		}
 
 		return findedGenericObj;
-	}
+	}*/
 	
 	public void update(T obj) {
 		
@@ -68,5 +79,19 @@ public class GenericDAO<T> {
 		List<T> result =  (List<T>)objectList;
 		
 		return result;
+	}
+
+	public T getByID(long id) {
+		
+		T findedGenericObj = null;
+		List<T> list = getList();
+		for(T genericObj : list) {
+			if((genericObj instanceof DataObject)
+					&&(((DataObject)genericObj).getId() == id )	){
+				findedGenericObj = genericObj;
+			}
+		}
+
+		return findedGenericObj;
 	}
 }

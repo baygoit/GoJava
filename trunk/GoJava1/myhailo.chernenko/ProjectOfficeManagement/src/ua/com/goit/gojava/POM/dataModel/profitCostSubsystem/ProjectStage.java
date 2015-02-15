@@ -1,10 +1,11 @@
-package ua.com.goit.gojava.POM.dataModel;
+package ua.com.goit.gojava.POM.dataModel.profitCostSubsystem;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import ua.com.goit.gojava.POM.persistence.DataObject;
+import ua.com.goit.gojava.POM.dataModel.common.FinancialDocument;
+import ua.com.goit.gojava.POM.persistence.abstraction.DataObject;
 
 public class ProjectStage  implements DataObject , Serializable {
 
@@ -50,7 +51,7 @@ public class ProjectStage  implements DataObject , Serializable {
 		
 	}
 
-	public void deleteTransactionByDoc(FinanceDocument doc) {
+	public void deleteTransactionByDoc(FinancialDocument doc) {
 		
 		for (int i = transactions.size() - 1; i >= 0 ; i--) {
 			if (transactions.get(i).getDoc() == doc) {

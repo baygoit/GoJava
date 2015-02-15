@@ -8,6 +8,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import ua.com.goit.gojava.POM.dataModel.cashSubsystem.BankAccount;
+
 public class BankAccountTest {
 
 	private BankAccount bankAccount;

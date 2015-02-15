@@ -4,7 +4,9 @@ import java.util.Currency;
 import java.util.Date;
 import java.util.List;
 
-import ua.com.goit.gojava.POM.dataModel.ExchangeRate;
+import ua.com.goit.gojava.POM.dataModel.common.ExchangeRate;
+import ua.com.goit.gojava.POM.persistence.abstraction.DAOFactory;
+import ua.com.goit.gojava.POM.persistence.abstraction.GenericDAO;
 
 public class ExchangeRateDAO extends GenericDAO<ExchangeRate> {
 

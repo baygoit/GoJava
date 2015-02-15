@@ -1,4 +1,4 @@
-package ua.com.goit.gojava.POM.dataModel;
+package ua.com.goit.gojava.POM.dataModel.common;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -6,26 +6,10 @@ import java.util.Currency;
 
 public class Money {
 	
+	private int scaleLength = 2;
 	private RoundingMode roundingMode = RoundingMode.HALF_UP;
 	private BigDecimal value;
 	private Currency currency;
-	
-	/*public Money(BigDecimal value, Currency currency) {
-		
-		this.value = value;
-		this.currency = currency;
-		SetScale();
-		
-	}
-	
-	public Money(Long value, Currency currency) {
-		
-		this.value = new BigDecimal(value);
-		this.currency = currency;
-		SetScale();
-		
-	}
-	*/
 	
 	public Money(Double value, Currency currency) {
 		
@@ -37,7 +21,7 @@ public class Money {
 	
 	private void SetScale() {
 		
-		this.value.setScale(2, roundingMode);
+		this.value.setScale(scaleLength, roundingMode);
 		
 	}
 	
@@ -71,7 +55,8 @@ public class Money {
 			
 		}else{
 			
-			if((currentRate.getFromCurrency() == money.getCurrency())
+			if( currentRate != null
+					&&(currentRate.getFromCurrency() == money.getCurrency())
 					&&(currentRate.getToCurrency() == this.getCurrency())) {
 				
 				BigDecimal reCalculatedValue = money.getValue();
@@ -87,6 +72,13 @@ public class Money {
 			
 		}
 		
+	}
+
+	@Override
+	public String toString() {
+
+		return ""+getValue()+" "+getCurrency().getDisplayName();
+
 	}
 
 }

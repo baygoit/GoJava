@@ -1,17 +1,17 @@
-package ua.com.goit.gojava.POM.dataModel;
+package ua.com.goit.gojava.POM.dataModel.common;
 
 import java.io.Serializable;
 import java.util.Date;
 
-public class CashFlowStatementEntry implements Serializable {
+public abstract class FinancialEntry implements Serializable {
 
 	private static final long serialVersionUID = 4386873221423578793L;
 	private long id;
 	private Date date;
-	private BankAccount bankAccount;
+	private FinancialCharacteristic characteristic;
 	private String description;
 	private Money sum;
-	private FinanceDocument doc;
+	private FinancialDocument doc;
 	
 	public long getId() {
 		
@@ -61,27 +61,27 @@ public class CashFlowStatementEntry implements Serializable {
 		
 	}
 	
-	public FinanceDocument getDoc() {
+	public FinancialDocument getDoc() {
 		
 		return doc;
 		
 	}
 	
-	public void setDoc(FinanceDocument doc) {
+	public void setDoc(FinancialDocument doc) {
 		
 		this.doc = doc;
 		
 	}
 
-	public BankAccount getBankAccount() {
+	public FinancialCharacteristic getCharacteristic() {
 		
-		return bankAccount;
+		return characteristic;
 		
 	}
 
-	public void setBankAccount(BankAccount bankAccount) {
+	public void setCharacteristic(FinancialCharacteristic characteristic) {
 		
-		this.bankAccount = bankAccount;
+		this.characteristic = characteristic;
 		
 	}
 	

@@ -1,4 +1,4 @@
-package ua.com.goit.gojava.POM.persistence;
+package ua.com.goit.gojava.POM.persistence.abstraction;
 
 import java.util.List;
 

@@ -11,7 +11,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import ua.com.goit.gojava.POM.dataModel.CostItem;
+import ua.com.goit.gojava.POM.dataModel.profitCostSubsystem.CostItem;
 
 public class DataManagerTest {
 	
@@ -156,22 +156,6 @@ public class DataManagerTest {
 		dataManager.readData();
 		
 		assertEquals(dataManager.getObjectList(CLASS_NAME).size(), 1);
-
-	}
-	
-	@Test
-	public void testSaveData() {
-		
-		/*DataManager dataManager = new DataManager();
-		GenericDAO<CostItem> genericDAO = new GenericDAO<CostItem>(CostItem.class, dataManager);
-		CostItem newCostItem = genericDAO.create();
-		newCostItem.setName("newCostItem 1");
-		newCostItem = genericDAO.create();
-		newCostItem.setName("CostItem 2");
-		newCostItem = genericDAO.create();
-		newCostItem.setName("Profit item ");
-		
-		dataManager.saveData();*/
 
 	}
 	
