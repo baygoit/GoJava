@@ -85,13 +85,13 @@ public class KickstarterS {
 		printChoicePayment();
 		askHowMuchPay(intSwitch);
 
-		printer("Enter your name:");
+		printName();
 		String name = InputChecker.checkName(in.enter());
 
-		printer("Enter your credit card number:");
+		printCard();
 		long cardNumber = InputChecker.checkCard(in.enter());
 
-		printer("Enter the amount of donations:");
+		printAmount();
 		if (chosenPay == 0) {
 			chosenPay = InputChecker.checkAmount(in.enter());
 		}
@@ -103,8 +103,6 @@ public class KickstarterS {
 		menu = menuProject;
 		switchMenu();
 	}
-
-
 
 	private void question() {
 		printAskQuestion();
@@ -142,16 +140,13 @@ public class KickstarterS {
 		printer("Choice Category Number: ");
 	}
 	
-	int loop = 0;
-	
 	private void askCategory() {
 		chosenCategoryId = InputChecker.checkNumber(categories.getKickCategories(), in.enter()) - 1;
 	}
 
 	private void askProject(int[] allowedVariants) {
-		chosenProject = InputChecker.checkNumber(concatArray(
-				categories.projectsContain(chosenCategoryId),
-				allowedVariants), in.enter()); // TODO
+		int[] concatProjectsAndVariants = concatArray(categories.projectsContain(chosenCategoryId), allowedVariants);
+		chosenProject = InputChecker.checkNumber(concatProjectsAndVariants, in.enter());
 	}
 
 	private void askAfterProject(int[] intSwitch) {
@@ -191,6 +186,18 @@ public class KickstarterS {
 				+ " \"1\" - 1$ = OUR UNDYING LOVE"
 				+ " \"2\" - 10$ = HEY… NICE SHIRT"
 				+ " \"3\" - 40$ = KICKSTARTER EXCLUSIVE");
+	}
+	
+	private void printAmount() {
+		printer("Enter the amount of donations:");
+	}
+
+	private void printCard() {
+		printer("Enter your credit card number:");
+	}
+
+	private void printName() {
+		printer("Enter your name:");
 	}
 
 	private void printAskQuestion() {

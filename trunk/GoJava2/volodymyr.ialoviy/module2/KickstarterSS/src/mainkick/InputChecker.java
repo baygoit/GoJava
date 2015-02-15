@@ -5,19 +5,21 @@ import java.util.regex.Pattern;
 public class InputChecker {
 	private static int breakCounter;
 	private static int magicStop = 3;
-	
+	private static int choiceNumber;
+	private static long cardNumber;
+	private static int amount;
 	private static Output out = new OutputConsole();
 	private static Inputs in = new InputsConsole();
 	
 	public static int checkNumber(int[] border, String string){
-		out.print(string);
 		breakCounter = 0;
-		int choiceNumber = 0;
+		choiceNumber = 0;
 		for (int i = 0; i < magicStop; i++){
 			if (isNull(string)){
 				breakCounter++;
 				if (stop()){
 					checkNumber(border, in.enter());
+					break;
 				}
 				string = in.enter();
 				continue;
@@ -26,6 +28,7 @@ public class InputChecker {
 				breakCounter++;
 				if (stop()){
 					checkNumber(border, in.enter());
+					break;
 				}
 				string = in.enter();
 				continue;
@@ -35,13 +38,14 @@ public class InputChecker {
 				breakCounter++;
 				if (stop()){
 					checkNumber(border, in.enter());
+					break;
 				}
 				string = in.enter();
 				continue;
 				}
 			break;
 		}
-		out.print(Integer.toString(choiceNumber));
+
 		return choiceNumber;
 	}
 
@@ -52,6 +56,7 @@ public class InputChecker {
 				breakCounter++;
 				if (stop()){
 					checkName(in.enter());
+					break;
 				}
 				string = in.enter();
 				continue;
@@ -60,6 +65,7 @@ public class InputChecker {
 				breakCounter++;
 				if (stop()){
 					checkName(in.enter());
+					break;
 				}
 				string = in.enter();
 				continue;
@@ -71,12 +77,13 @@ public class InputChecker {
 
 	public static long checkCard(String string){
 		breakCounter = 0;
-		long cardNumber = 0;
+		cardNumber = 0;
 		for (int i = 0; i < magicStop; i++){
 			if (isNull(string)){
 				breakCounter++;
 				if (stop()){
 					checkName(in.enter());
+					break;
 				}
 				string = in.enter();
 				continue;
@@ -85,6 +92,7 @@ public class InputChecker {
 				breakCounter++;
 				if (stop()){
 					checkName(in.enter());
+					break;
 				}
 				string = in.enter();
 				continue;
@@ -93,6 +101,7 @@ public class InputChecker {
 				breakCounter++;
 				if (stop()){
 					checkName(in.enter());
+					break;
 				}
 				string = in.enter();
 				continue;
@@ -105,12 +114,13 @@ public class InputChecker {
 	
 	public static int checkAmount(String string){
 		breakCounter = 0;
-		int amount = 0;
+		amount = 0;
 		for (int i = 0; i < magicStop; i++){
 			if (isNull(string)){
 				breakCounter++;
 				if (stop()){
 					checkName(in.enter());
+					break;
 				}
 				string = in.enter();
 				continue;
@@ -119,6 +129,7 @@ public class InputChecker {
 				breakCounter++;
 				if (stop()){
 					checkName(in.enter());
+					break;
 				}
 				string = in.enter();
 				continue;
@@ -128,6 +139,7 @@ public class InputChecker {
 				breakCounter++;
 				if (stop()){
 					checkName(in.enter());
+					break;
 				}
 				string = in.enter();
 				continue;
@@ -195,7 +207,7 @@ public class InputChecker {
 		}
 	}
 
-	private static boolean checkIsNumber(String string){//TODO СДЕЛАТЬ один метод
+	private static boolean checkIsNumber(String string){//TODO make one method
         return Pattern.compile("^[-0-9]{1,3}$").matcher(string).matches();  
     }
 
