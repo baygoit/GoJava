@@ -32,13 +32,14 @@ public class CategoryTest {
     }
 
     @Test
-    public void shouldReturnProjectToString_whenSetProjectsList() {
+    public void shouldReturnProjectList_whenSetProjectsList() {
         List<Project> projectsList = new ArrayList<Project>();
-        projectsList.add(new Project("TestProject", "TestDescption", 100, 100, 100));
+        Project newProject = new Project("TestProject", "TestDescption", 100, 100, 100);
+        projectsList.add(newProject);
+        projectsList.add(newProject);
         Category category = new Category();
         category.setProjectsList(projectsList);
-        assertEquals("TestProject; TestDescption; funded: 100; pledged: 100; days to go: 100",
-                category.getProjectsList().get(0).toString());
+        assertEquals(projectsList, category.getProjectsList());
     }
 
 }
