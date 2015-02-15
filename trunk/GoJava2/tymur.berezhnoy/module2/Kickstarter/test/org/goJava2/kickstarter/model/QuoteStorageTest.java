@@ -14,31 +14,31 @@ public class QuoteStorageTest {
 	
 	private QuoteStorage quoteStorage;
 	
+	@Before
+	public void createQuoteStorage() {
+		quoteStorage = new QuoteStorage();		
+	}
+	
 	@Test
 	public void shouldQuoteIsNotNull_whenRandomQuote() {
-		quoteStorage = new QuoteStorage();
 		assertNotNull("Proof of return! RandomQuote should return any quote(not null).",
 					  quoteStorage.getRandomQuote());
 	}
 	
 	@Test
 	public void shouldListSizeIsNot0_whenNewQuoteStorage() {
-		quoteStorage = new QuoteStorage();
 		assertFalse("Expected that constructor is for Hard-coded quotes init at least 1 quote.",
 					quoteStorage.getContent().size() == 0);
 	}
 	
 	@Test
 	public void shouldListIsNotNull_whenNewQuoteStorage() {
-		quoteStorage = new QuoteStorage();
 		assertFalse("Expected that list is not null.",
 					quoteStorage.getContent() == null);
 	}
 	
 	@Test
 	public void shouldListContainsNewQuote_whenAddNewQuote() {
-		quoteStorage = new QuoteStorage();
-		
 		Quote quote = new Quote("New quote", "author");
 		quoteStorage.addContent(quote);
 		
@@ -48,15 +48,12 @@ public class QuoteStorageTest {
 	
 	@Test
 	public void listShouldNotBeNull_whenNewCustomQuoteStorage() {
-		quoteStorage = new QuoteStorage(new ArrayList<Quote>());
 		assertFalse("Expected that list is not null.",
 					quoteStorage.getContent() == null);
 	}
 	
 	@Test
 	public void shouldQuoteIsNotNull_whenGetSpecificConten() {
-		quoteStorage = new QuoteStorage();
-		
 		assertFalse("Expected that qute is not null",
 					quoteStorage.getSpecificContent(0) == null);
 	}
