@@ -1,4 +1,4 @@
-package ua.com.goit.gojava.andriidnikitin.model.DAO;
+package ua.com.goit.gojava.andriidnikitin.model.util;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,5 +32,6 @@ public class GoodDAO implements IDAO<Good> {
 		List<Good> result = new ArrayList<Good>(list);
 		return result;
 	}
-
+	
+	
 }

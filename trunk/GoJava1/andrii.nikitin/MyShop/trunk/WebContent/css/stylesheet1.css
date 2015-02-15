@@ -1,0 +1,20 @@
+body {
+margin: 0px;
+background: #98FB98
+}
+
+.type_list_container {
+float:left;
+margin: 10px;
+padding: 10px;
+border: RGB(25, 125, 25) 2px ridge;
+background: #3CB371
+}
+
+.instrument {
+float:left;
+margin: 10px;
+padding: 10px;
+border: RGB(25, 125, 25) 2px ridge;
+background: #eeaa33
+}

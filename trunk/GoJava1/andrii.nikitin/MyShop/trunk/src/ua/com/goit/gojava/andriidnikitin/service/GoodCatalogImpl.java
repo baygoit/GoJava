@@ -1,12 +1,16 @@
 package ua.com.goit.gojava.andriidnikitin.service;
 
+import java.io.FileNotFoundException;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
 import ua.com.goit.gojava.andriidnikitin.model.Good;
 import ua.com.goit.gojava.andriidnikitin.model.GoodType;
-import ua.com.goit.gojava.andriidnikitin.model.DAO.GoodDAO;
-import ua.com.goit.gojava.andriidnikitin.model.DAO.GoodTypeDAO;
+import ua.com.goit.gojava.andriidnikitin.model.util.GoodDAO;
+import ua.com.goit.gojava.andriidnikitin.model.util.GoodTypeDAO;
+import ua.com.goit.gojava.andriidnikitin.service.util.DataBuilderPlain;
+import ua.com.goit.gojava.andriidnikitin.service.util.ShopException;
 
 public class GoodCatalogImpl implements GoodCatalog{
 	
@@ -26,7 +30,7 @@ public class GoodCatalogImpl implements GoodCatalog{
 		List<GoodType> list = types.getAll();
 		List<GoodType> result = new ArrayList<GoodType>();
 		for (GoodType type: list){
-			if (type.equals(parent)) {
+			if (type.getParent().getId().equals(parent.getId())) {
 				result.add(type);
 			}
 		}
@@ -38,7 +42,7 @@ public class GoodCatalogImpl implements GoodCatalog{
 	public List<Good> getGoodsInType(Good good) {
 		List<Good> result = new ArrayList<Good>();
 		for (Good good1: goods.getAll()) {
-			if (good.getType().equals(good1.getType())) {
+			if (good.getType().getId().equals(good1.getType().getId())) {
 				result.add(good1);
 				}
 		}
@@ -50,6 +54,42 @@ public class GoodCatalogImpl implements GoodCatalog{
 		
 		return getGoodTypes(GoodType.ROOT);
 	}
-
+	
+	public void initFromFile(String path) throws ShopException {
+		if (path == null) {
+			throw new ShopException("Illegal filepath.");
+		}
+		List<ArrayList<String>> contents;
+		try {
+			contents = new DataBuilderPlain(path).getCSVElementsFromFile();
+		} catch (FileNotFoundException e) {
+			throw new ShopException("Source file not found.");
+		}
+		for (ArrayList<String> row: contents) {
+			goods.getAll().add(readGood(row));
+		}
+	}
+	
+	private Good readGood(List<String> CSVStrings) {
+		Good good = new Good();
+		good.setId(new Integer(CSVStrings.get(0)));
+		good.setName(CSVStrings.get(1));
+		GoodType type = new GoodType();
+		type.setId(new Integer(CSVStrings.get(2)));
+		type.setName(CSVStrings.get(3));
+		good.setType(type);
+		good.setPrice(new BigDecimal(CSVStrings.get(4)));
+		return good;
+	}
+	
+	/*private String[] writeGood(Good good){
+		String[] result = new String[5];
+		result[0] = good.getId().toString();
+		result[1] = good.getName();
+		result[2] = good.getType().getId().toString();
+		result[3] = good.getType().getName();
+		result[4] = good.getPrice().toPlainString();
+		return result;
+	}*/
 
 }

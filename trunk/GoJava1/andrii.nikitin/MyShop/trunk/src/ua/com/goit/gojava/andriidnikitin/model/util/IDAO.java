@@ -1,4 +1,4 @@
-package ua.com.goit.gojava.andriidnikitin.model.DAO;
+package ua.com.goit.gojava.andriidnikitin.model.util;
 
 import java.util.List;
 
