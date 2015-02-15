@@ -49,13 +49,6 @@ public class View {
         out.output("Select option: (not implemented, just '0' to exit)");
     }
 
-    public void showList(List<Object> list) {
-        int counter = 1;
-        for (Object element : list) {
-            out.output("(" + counter + ") " + element);
-            counter++;
-        }
-    }
     public void showChoice(){
         out.output("You choice (0 - exit):");
     }

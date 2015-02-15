@@ -25,10 +25,6 @@ public class Model {
         categoriesList.get(2).getProjectsList().add(new Project("Makeblock", "Makeblock is an aluminum extrusion based construct platform that can be used to build robots", 186000, 30000, 2));
     }
 
-    public List<Project> getProjectsList() {
-        return projectsList;
-    }
-
     public List<Category> getCategoriesList() {
         return categoriesList;
     }
