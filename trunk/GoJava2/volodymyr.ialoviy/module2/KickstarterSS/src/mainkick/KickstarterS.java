@@ -53,12 +53,12 @@ public class KickstarterS {
 	}
 
 	private void projects() {
-		int[] intSwitch = { menuCategories };
+		int[] optionVariant = { menuCategories };
 
 		printProjectsInCategory();
-		askProject(intSwitch);
+		askProject(optionVariant);
 
-		if (addArrayElement(intSwitch, chosenProject)) {
+		if (elementInArray(optionVariant, chosenProject)) {
 			menu = menuCategories;
 			switchMenu();
 		}
@@ -68,30 +68,30 @@ public class KickstarterS {
 	}
 
 	private void project() {
-		int[] intSwitch = { menuProjects, menuPayment, menuQuestion, exit };
+		int[] optionVariant = { menuProjects, menuPayment, menuQuestion, exit };
 
 		printProject();
-		askAfterProject(intSwitch);
+		askAfterProject(optionVariant);
 
-		if (addArrayElement(intSwitch, choiceTo)) {
+		if (elementInArray(optionVariant, choiceTo)) {
 			menu = choiceTo;
 			switchMenu();
 		}
 	}
 
 	private void payment() {
-		int[] intSwitch = { 0, 1, 2, 3 };
+		int[] optionVariant = { 0, 1, 2, 3 };
 
 		printChoicePayment();
-		askHowMuchPay(intSwitch);
+		askHowMuchPay(optionVariant);
 
-		printName();
+		printAskName();
 		String name = InputChecker.checkName(in.enter());
 
-		printCard();
+		printAskCard();
 		long cardNumber = InputChecker.checkCard(in.enter());
 
-		printAmount();
+		printAskAmount();
 		if (chosenPay == 0) {
 			chosenPay = InputChecker.checkAmount(in.enter());
 		}
@@ -188,15 +188,15 @@ public class KickstarterS {
 				+ " \"3\" - 40$ = KICKSTARTER EXCLUSIVE");
 	}
 	
-	private void printAmount() {
+	private void printAskAmount() {
 		printer("Enter the amount of donations:");
 	}
 
-	private void printCard() {
+	private void printAskCard() {
 		printer("Enter your credit card number:");
 	}
 
-	private void printName() {
+	private void printAskName() {
 		printer("Enter your name:");
 	}
 
@@ -212,7 +212,7 @@ public class KickstarterS {
 		out.print(string);
 	}
 
-	private Boolean addArrayElement(int[] a, int b) {
+	private Boolean elementInArray(int[] a, int b) {
 		Boolean c = false;
 		for (int i = 0; i < a.length; i++) {
 			if (a[i] == b) {

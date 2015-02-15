@@ -45,7 +45,6 @@ public class InputChecker {
 				}
 			break;
 		}
-
 		return choiceNumber;
 	}
 
@@ -61,7 +60,7 @@ public class InputChecker {
 				string = in.enter();
 				continue;
 			}
-			if (!checkIsName(string)){
+			if (checkIsName(string)){
 				breakCounter++;
 				if (stop()){
 					checkName(in.enter());
@@ -88,16 +87,7 @@ public class InputChecker {
 				string = in.enter();
 				continue;
 			}
-			if (checkNumbers(string)){
-				breakCounter++;
-				if (stop()){
-					checkName(in.enter());
-					break;
-				}
-				string = in.enter();
-				continue;
-				}
-			if (!checkIsCard(string)){
+			if (checkIsCard(string)){
 				breakCounter++;
 				if (stop()){
 					checkName(in.enter());
@@ -134,8 +124,7 @@ public class InputChecker {
 				string = in.enter();
 				continue;
 				}
-			if (!checkAmounter(string)){
-				
+			if (checkAmounter(string)){
 				breakCounter++;
 				if (stop()){
 					checkName(in.enter());
@@ -180,7 +169,7 @@ public class InputChecker {
 	
 	private static Boolean checkNumbers(String chosen){
 		boolean f = false;
-		if (!checkIsNumber(chosen)){
+		if (!pattern(chosen, "^[-0-9]{1,3}$")){
 			out.print("It is not a number, please try again");
 			f = true;
 		}
@@ -206,23 +195,41 @@ public class InputChecker {
 			e.printStackTrace();
 		}
 	}
-
-	private static boolean checkIsNumber(String string){//TODO make one method
-        return Pattern.compile("^[-0-9]{1,3}$").matcher(string).matches();  
-    }
-
+	
 	private static boolean checkIsName(String string){
-		out.print("The name must be from two to twenty letters, please try again");
-        return Pattern.compile("^[A-Za-z]{2,20}$").matcher(string).matches();  
+		boolean b = true;
+		if (pattern(string, "^[A-Za-z]{2,20}$")){
+			b = false;
+		}
+		else{
+			out.print("The name must be from two to twenty letters, please try again");
+		}
+		return b;
     }
 
 	private static boolean checkIsCard(String string){
-		out.print("Card number card must bіt 16 numeric characters, please try again");
-        return Pattern.compile("^[0-9]{16}$").matcher(string).matches();  
+		boolean b = true;
+		if (pattern(string, "^[0-9]{16}$")){
+			b = false;
+		}
+		else{
+			out.print("Card number card must bіt 16 numeric characters, please try again");
+		}
+		return b;
     }
 	
 	private static boolean checkAmounter(String string){
-		out.print("Amount must by number, please try again");
-        return Pattern.compile("^[0-9]{1,10}$").matcher(string).matches();  
+		boolean b = true;
+		if (pattern(string, "^[0-9]{1,10}$")){
+			b = false;
+		}
+		else{
+			out.print("Amount must by number, please try again");
+		}
+		return b;
+    }
+	
+	private static boolean pattern(String string, String pattern){
+        return Pattern.compile(pattern).matcher(string).matches();  
     }
 }
