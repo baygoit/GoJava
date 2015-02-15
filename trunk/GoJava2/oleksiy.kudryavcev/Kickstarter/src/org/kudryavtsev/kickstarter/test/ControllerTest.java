@@ -1,6 +1,7 @@
 package org.kudryavtsev.kickstarter.test;
 
-import static org.junit.Assert.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 
 import org.junit.Test;
 import org.kudryavtsev.kickstarter.Controller;
@@ -11,14 +12,13 @@ import org.kudryavtsev.kickstarter.inout.OutArrayList;
 import org.kudryavtsev.kickstarter.inout.View;
 
 public class ControllerTest {
-    Model model = new Model();
-    View view = new View(new OutArrayList());
-    Input input = new Input(new InArrayList());
-    Controller controller = new Controller(model, view, input);
+    Controller controller = new Controller(new Model(), new View(new OutArrayList()), new Input(
+            new InArrayList()));
+    Controller mockedController = mock(Controller.class);
 
     @Test
     public void testControllerStart() {
-        controller.start();
+        mockedController.start();
+        verify(mockedController).start();
     }
-
 }

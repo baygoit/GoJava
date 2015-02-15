@@ -25,6 +25,12 @@ public class CategoryTest {
         categoryCheck(expected, category);
     }
 
+    @Test
+    public void shouldBeCorrectHashCode_whenHashCodeDefaultnCategory() {
+        Category category = new Category();
+        assertEquals(-1535908079, category.hashCode());
+    }
+    
     private void categoryCheck(String expected, Category category) {
         String actual;
         actual = category.toString();
