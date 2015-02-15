@@ -7,6 +7,7 @@ public class Project {
 	private String description;
 	private String story;
 	private String link;
+	
 	private int requiredAmount;
 	private int total;
 	private int days;
@@ -30,6 +31,10 @@ public class Project {
 	
 	public void addToTotal(int amount) {
 		total += amount;
+	}
+	
+	public void addToBackers(int backer) {
+		backers += backer;
 	}
 	
 	// It's example of optimization.

@@ -130,8 +130,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="15" language="java" name="org.goJava2.kickstarter.view.InOut" project="Kickstarter" 
-    file="/Kickstarter/src/org/goJava2/kickstarter/view/InOut.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="15" language="java" name="org.goJava2.kickstarter.view.ConsoleInput" project="Kickstarter" 
+    file="/Kickstarter/src/org/goJava2/kickstarter/view/ConsoleInput.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="724" y="1406"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      

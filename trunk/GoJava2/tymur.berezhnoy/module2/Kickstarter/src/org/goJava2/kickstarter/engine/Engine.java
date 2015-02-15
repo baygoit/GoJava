@@ -5,17 +5,17 @@ import org.goJava2.kickstarter.controller.ProjectController;
 import org.goJava2.kickstarter.controller.QuoteController;
 import org.goJava2.kickstarter.factory.StorageFactory;
 import org.goJava2.kickstarter.model.CategoryStorage;
-import org.goJava2.kickstarter.view.InOut;
+import org.goJava2.kickstarter.view.ConsoleInput;
 import org.goJava2.kickstarter.view.ConsoleView;
 
 public class Engine {
 	
 	private	ConsoleView view;
-	private InOut scann;
+	private ConsoleInput scann;
 	
 	public Engine() {
 		view = new ConsoleView(new QuoteController(), new CategoryController(), new ProjectController());
-		scann = new InOut();
+		scann = new ConsoleInput();
 	}
 	
 	public void consoleLevel1() {

@@ -4,8 +4,6 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
-import java.util.ArrayList;
-
 import org.goJava2.kickstarter.content.Quote;
 import org.junit.Before;
 import org.junit.Test;
