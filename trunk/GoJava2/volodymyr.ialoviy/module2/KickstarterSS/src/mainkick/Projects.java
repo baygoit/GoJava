@@ -72,10 +72,9 @@ public class Projects {
 		project.setHowMuchRemaining(project.getHowMuchRemaining() - amount);
 	}
 	
-	public void addFAQ(int projectID){
-		InputsConsole question = new InputsConsole();//TODO УБРАТЬ InputsConsole
+	public void addFAQ(int projectID, String question){
 		Project project = listProject.get(projectID);
-		project.addFaq(question.enter());
+		project.addFaq(question);
 	}
 	
 	public ArrayList<String> getFaq() {
