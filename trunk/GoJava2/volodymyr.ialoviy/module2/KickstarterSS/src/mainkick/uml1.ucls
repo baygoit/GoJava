@@ -30,7 +30,7 @@
   </class>  
   <class id="4" language="java" name="model.Category" project="KickstarterSS" 
     file="/KickstarterSS/src/model/Category.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="609" y="1222"/>    
+    <position height="-1" width="-1" x="603" y="1303"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -39,7 +39,7 @@
   </class>  
   <class id="5" language="java" name="model.Categories" project="KickstarterSS" 
     file="/KickstarterSS/src/model/Categories.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="603" y="873"/>    
+    <position height="-1" width="-1" x="618" y="952"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -66,7 +66,7 @@
   </class>  
   <class id="8" language="java" name="util.InputChecker" project="KickstarterSS" 
     file="/KickstarterSS/src/util/InputChecker.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1055" y="246"/>    
+    <position height="-1" width="-1" x="1045" y="255"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -93,7 +93,7 @@
   </interface>  
   <class id="11" language="java" name="view.OutputConsole" project="KickstarterSS" 
     file="/KickstarterSS/src/view/OutputConsole.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="364" y="34"/>    
+    <position height="-1" width="-1" x="363" y="15"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -130,10 +130,10 @@
   <association id="15">    
     <end type="SOURCE" refId="5" navigable="false">      
       <attribute id="16" name="listCatecories">        
-        <position height="0" width="0" x="0" y="0"/>      
+        <position height="0" width="0" x="-6" y="81"/>      
       </attribute>      
       <multiplicity id="17" minimum="0" maximum="2147483647">        
-        <position height="0" width="0" x="0" y="0"/>      
+        <position height="0" width="0" x="-6" y="81"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="4" navigable="true"/>    
@@ -150,10 +150,10 @@
   <association id="20">    
     <end type="SOURCE" refId="7" navigable="false">      
       <attribute id="21" name="categories">        
-        <position height="0" width="0" x="0" y="0"/>      
+        <position height="0" width="0" x="15" y="79"/>      
       </attribute>      
       <multiplicity id="22" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
+        <position height="0" width="0" x="15" y="79"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="5" navigable="true"/>    
