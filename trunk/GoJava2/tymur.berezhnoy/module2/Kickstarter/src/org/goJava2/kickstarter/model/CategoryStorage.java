@@ -1,6 +1,5 @@
 package org.goJava2.kickstarter.model;
 
-import java.util.LinkedHashSet;
 import java.util.Set;
 
 import org.goJava2.kickstarter.behavior.StorageBehavior;
@@ -10,16 +9,16 @@ public class CategoryStorage implements StorageBehavior<Integer> {
 
 	private Set<Category> categories;
 	
-	/**
-	 * The constructor for Hard-coded categories.
-	 */
-	public CategoryStorage() {
-		categories = new LinkedHashSet<Category>();
-		categories.add(new Category("Art"));
-		categories.add(new Category("Comics"));
-		categories.add(new Category("Dance"));
-		categories.add(new Category("Games"));
-	}
+//	/**
+//	 * The constructor for Hard-coded categories.
+//	 */
+//	public CategoryStorage() {
+//		categories = new LinkedHashSet<Category>();
+//		categories.add(new Category("Art"));
+//		categories.add(new Category("Comics"));
+//		categories.add(new Category("Dance"));
+//		categories.add(new Category("Games"));
+//	}
 	
 	/**
 	 * The constructor for custom categories.

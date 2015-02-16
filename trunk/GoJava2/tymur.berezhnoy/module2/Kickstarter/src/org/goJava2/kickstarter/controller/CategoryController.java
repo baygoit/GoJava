@@ -3,25 +3,24 @@ package org.goJava2.kickstarter.controller;
 import java.util.Set;
 
 import org.goJava2.kickstarter.behavior.ControllerBehavior;
+import org.goJava2.kickstarter.behavior.StorageBehavior;
 import org.goJava2.kickstarter.content.Category;
-import org.goJava2.kickstarter.factory.StorageFactory;
-import org.goJava2.kickstarter.model.CategoryStorage;
 
 public class CategoryController implements ControllerBehavior<Integer> {
 	
-	private CategoryStorage categoryStorage;
+	private StorageBehavior<Integer> categoryStorage;
 	
-	public CategoryController() {
-		categoryStorage = new StorageFactory().getCategoryStorage();
+	public CategoryController(StorageBehavior<Integer> storage) {
+		categoryStorage = storage;
 	}
 	
 	@Override
 	public Set<Category> getContent() {
-		return categoryStorage.getContent();
+		return (Set<Category>) categoryStorage.getContent();
 	}
 	
 	@Override
 	public Category getSpecificContent(Integer t) {
-		return categoryStorage.getSpecificContent(t);
+		return (Category) categoryStorage.getSpecificContent(t);
 	}
 }

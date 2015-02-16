@@ -8,7 +8,6 @@ import java.util.Map;
 import org.goJava2.kickstarter.behavior.StorageBehavior;
 import org.goJava2.kickstarter.content.Category;
 import org.goJava2.kickstarter.content.Project;
-import org.goJava2.kickstarter.factory.StorageFactory;
 
 public class ProjectStorage implements StorageBehavior<Category> {
 	
@@ -32,7 +31,7 @@ public class ProjectStorage implements StorageBehavior<Category> {
 	/**
 	 * The constructor for Hard-coded projects.
 	 */
-	public ProjectStorage() {
+	public ProjectStorage(StorageBehavior<Integer> storage) {
 		projectsArt = new ArrayList<Project>();
 		projectsComics = new ArrayList<Project>();
 		projectsDance = new ArrayList<Project>();
@@ -62,16 +61,15 @@ public class ProjectStorage implements StorageBehavior<Category> {
 		projectsGames.add(new Project("Starr Mazer", "A retro-sexy Point-and-Click Adventure "
 					+ "Shoot 'em Up in SPACE!", 50000, 3000, 20, 6, "There'll be history", 
 					"http://www.starr mazer.com"));
-		putProjectsToMap();
+		putProjectsToMap(storage);
 	}
 	
-	private void putProjectsToMap() {
+	private void putProjectsToMap(StorageBehavior<Integer> storage) {
 		map = new HashMap<Category, List<Project>>();
-		CategoryStorage categoryStorage = new StorageFactory().getCategoryStorage();
-		map.put(categoryStorage.getSpecificContent(0), projectsArt);
-		map.put(categoryStorage.getSpecificContent(1), projectsComics);
-		map.put(categoryStorage.getSpecificContent(2), projectsDance);
-		map.put(categoryStorage.getSpecificContent(3), projectsGames);	
+		map.put((Category) storage.getSpecificContent(0), projectsArt);
+		map.put((Category) storage.getSpecificContent(1), projectsComics);
+		map.put((Category) storage.getSpecificContent(2), projectsDance);
+		map.put((Category) storage.getSpecificContent(3), projectsGames);	
 	}
 	
 	@Override
