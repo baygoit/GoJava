@@ -14,6 +14,7 @@ import ua.home.kickstarter.content.Category;
 import ua.home.kickstarter.controller.CategoriesController;
 import ua.home.kickstarter.controller.ProjectsController;
 import ua.home.kickstarter.controller.QuotationsController;
+import ua.home.kickstarter.model.ProjectStorage;
 import static org.mockito.Mockito.*;
 
 public class DisplayTestMoc {
@@ -24,19 +25,22 @@ public class DisplayTestMoc {
 	private Display display;
 	private Map<Integer, Category> categories;
 	private Map<Category, List<Project>> projects;
+	private ProjectStorage projectStorage;
 
 	@Before
 	public void initialize() {
 		categoriesController = mock(CategoriesController.class);
 		quotationsController = mock(QuotationsController.class);
-		projectsController = mock(ProjectsController.class);
+		projectsController = mock(ProjectsController.class); 
+		projectStorage = mock(ProjectStorage.class);
+		projectsController = new ProjectsController(projectStorage);
 		consoleOutput = mock(ConsoleOutput.class);
 		display = new Display(quotationsController, categoriesController, projectsController, consoleOutput);
 	}
 
 	@Test
 	public void ShouldDisplayQuote() {
-
+ 
 		Quote quote = new Quote("someQuote");
 
 		// when
@@ -73,7 +77,7 @@ public class DisplayTestMoc {
 		for (Map.Entry<Integer, Category> pair : categories.entrySet()) {
 			categoriesContent.append(pair.getKey()).append(" - ").append(pair.getValue().getName()).append("\n");
 		}
-
+ 
 		when(categoriesController.passContentToView()).thenReturn(categoriesContent.toString());
 		when(categoriesController.passCategoriesSizeToView()).thenReturn(categories.size());
 		display.displayCategories();
@@ -93,6 +97,8 @@ public class DisplayTestMoc {
 
 		when(projectsController.passSpecificContentToView(categories.get(1))).thenReturn(projectsContent.toString());
 
+		//when(projectsController.passSpecificContentToView(categories.get(1))).thenReturn(projectsContent.toString());
+		when(projectStorage.getSpecificProjects(1, categories.get(1))).thenReturn(projectsContent.toString());
 		display.displayProjects(categories.get(1));
 
 		verify(consoleOutput).output(
@@ -116,7 +122,7 @@ public class DisplayTestMoc {
 		for (Project project : projects.get(categories.get(1))) {
 			projectsContent.append(projectNumber).append(project.getShortInfo()).append("\n");
 			projectNumber++;
-		}
+		} 
 
 		when(projectsController.passSpecificProjectToView(2, categories.get(1))).thenReturn(
 				projects.get(categories.get(1)).get(1).getFullInfo());
