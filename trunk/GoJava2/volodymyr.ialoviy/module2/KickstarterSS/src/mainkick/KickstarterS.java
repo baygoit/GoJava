@@ -14,24 +14,24 @@ public class KickstarterS {
 	private int chosenCategoryID;//TODO DELETE
 	private int chosenProject;//TODO DELETE
 
-	private InputsConsole in;
-	private Output out;
+    private InputsConsole in;
+    private OutputConsole out;
 	private Categories categories;
 	private Projects projects;
 
-	public KickstarterS(Inputs in, Output out, Categories categories, Projects projects) {
-		this.in = (InputsConsole) in;
+	public KickstarterS(InputsConsole in, OutputConsole out, Categories categories, Projects projects) {
+		this.in = in;
 		this.setOut(out);
 		this.categories = categories;
 		this.projects = projects;
 	}
 
-	public OutputConsole getOut() {
-		return (OutputConsole) out;
-	}
+    public OutputConsole getOut() {
+        return out;
+    }
 
-	public void setOut(Output out2) {
-		this.out = out2;
+	public void setOut(OutputConsole out) {
+	        this.out = out;
 	}
 
 	public void kickstarter() {
@@ -40,21 +40,20 @@ public class KickstarterS {
 		
 		categories.writeAllCatecories();
 		projects.writeAllProjects();
-
+		
 		categories();
 	}
 
 	private void categories() {
 		showAllCategories();
 		askCategory();
-
+		
 		menu = menuProjects;
 		switchMenu();
 	}
 
 	private void projects() {
 		int[] optionVariant = { menuCategories };
-
 		printProjectsInCategory();
 		askProject(optionVariant);
 
@@ -73,6 +72,10 @@ public class KickstarterS {
 		printProject();
 		askAfterProject(optionVariant);
 
+		if (exit == choiceTo){
+			return;
+		}
+		
 		if (elementInArray(optionVariant, choiceTo)) {
 			menu = choiceTo;
 			switchMenu();
