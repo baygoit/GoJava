@@ -7,14 +7,22 @@ public class Output {
 		Quote quote = new Quote();
 		System.out.println(quote.getLaoTzu());
 	}
+	
+	public void printMenu(Categories cats1){
+		int x = 1;
+		for(Category c: cats1.getCategory()){
+			System.out.println(x + "-" + c.getName());
+			x++;
+		}
+	}
 
-	public void menu() {
+	/*public void menu() {
 		System.out
 				.println("Select a category: \n 0- MAIN MANU \n 1- EDUCATION \n 2- FINANCE \n 3- GAMES");
-	}
+	}*/
 	
 	public void printZero(){
-		System.out.println("0) MAIN MANU");
+		System.out.println("0) Back one step");
 	}
 
 	public void youChoose(String choice) {

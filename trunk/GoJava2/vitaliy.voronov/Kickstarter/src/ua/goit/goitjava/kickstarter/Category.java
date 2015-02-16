@@ -1,5 +1,17 @@
 package ua.goit.goitjava.kickstarter;
 
-enum Category {
-	EDUCATION, FINANCE, GAMES;
+public class Category {
+	private String name;
+
+	public Category(String name) {
+		this.name = name;
+	}
+
+	public String getName() {
+		return name;
+	}
+	
+	
+	
+	
 }

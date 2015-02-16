@@ -1,5 +1,7 @@
 package ua.goit.goitjava.kickstarter;
 
+import java.util.ArrayList;
+
 public class Project {
 	private String name;
 	private String description;
@@ -10,6 +12,7 @@ public class Project {
 	private String linkToDemoVideo;
 	private String quastionAnswer;
 	private Category category;
+	private ArrayList<FAQ> faq;
 
 	public Project(String name, String description, Category category, int needMoney,
 			int haveMoney, int daysBeforeEnd, String projectHistory, String linkToDemoVideo, String quastionAnswer) {
@@ -42,7 +45,6 @@ public class Project {
 		return daysBeforeEnd;
 	}
 
-
 	public Category getCategory() {
 		return category;
 	}
@@ -73,6 +75,10 @@ public class Project {
 	public String smallProject(){
 		String smallProject = name + description + needMoney + haveMoney + daysBeforeEnd;
 		return smallProject;
+	}
+	
+	public void addMoney(int addMoney){
+		this.haveMoney = addMoney;
 	}
 	
 	

@@ -19,16 +19,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <enumeration id="3" language="java" name="ua.goit.goitjava.kickstarter.Category" project="Kickstarter" 
-    file="/Kickstarter/src/ua/goit/goitjava/kickstarter/Category.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="135" width="133" x="468" y="720"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </enumeration>  
-  <class id="4" language="java" name="ua.goit.goitjava.kickstarter.Quote" project="Kickstarter" 
+  <class id="3" language="java" name="ua.goit.goitjava.kickstarter.Quote" project="Kickstarter" 
     file="/Kickstarter/src/ua/goit/goitjava/kickstarter/Quote.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="117" width="116" x="74" y="226"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -37,7 +28,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="5" language="java" name="ua.goit.goitjava.kickstarter.Input" project="Kickstarter" 
+  <class id="4" language="java" name="ua.goit.goitjava.kickstarter.Input" project="Kickstarter" 
     file="/Kickstarter/src/ua/goit/goitjava/kickstarter/Input.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="99" width="87" x="380" y="33"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -46,16 +37,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="6" language="java" name="kikcstarter.Project" project="Kickstarter" 
-    file="/Kickstarter/src/kikcstarter/Project.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="261" width="214" x="233" y="419"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="7" language="java" name="ua.goit.goitjava.kickstarter.Main" project="Kickstarter" 
+  <class id="5" language="java" name="ua.goit.goitjava.kickstarter.Main" project="Kickstarter" 
     file="/Kickstarter/src/ua/goit/goitjava/kickstarter/Main.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="99" width="113" x="488" y="-106"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -64,51 +46,10 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <association id="8">    
-    <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="9" name="projectsEducation">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="10" minimum="0" maximum="2147483647">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="6" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="11">    
-    <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="12" name="projectsAccountant">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="13" minimum="0" maximum="2147483647">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="6" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <dependency id="14">    
-    <bendpoint x="477" y="419"/>    
-    <end type="SOURCE" refId="2"/>    
+  <dependency id="6">    
+    <end type="SOURCE" refId="1"/>    
     <end type="TARGET" refId="3"/>  
   </dependency>  
-  <dependency id="15">    
-    <end type="SOURCE" refId="1"/>    
-    <end type="TARGET" refId="4"/>  
-  </dependency>  
-  <association id="16">    
-    <end type="SOURCE" refId="6" navigable="false">      
-      <attribute id="17" name="category">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="18" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="3" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
     sort-features="false" accessors="true" visibility="true">    
     <attributes public="true" package="true" protected="true" private="true" static="true"/>    
