@@ -1,6 +1,7 @@
 package ua.goit.goitjava.kickstarter;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Output {
 	public void printQuote() {
@@ -42,9 +43,17 @@ public class Output {
 	public void printSelectProject(Project project2) {
 			System.out.println(project2.getName() + "\n " + project2.getDescription() + "\n We need - " 
 					+ project2.getNeedMoney() + "$\n We have - " + project2.getHaveMoney() + "$\n Time over - " + 
-					project2.getDaysBeforeEnd() + " days" + project2.getProjectHistory() + "\n " + project2.getLinkToDemoVideo() + 
-					"\n " + project2.getQuastionAnswer());
+					project2.getDaysBeforeEnd() + " days" + project2.getProjectHistory() + "\n " + project2.getLinkToDemoVideo()/* + 
+					"\n " + project2.getFaq()*/);
+			printFAQ(project2);
 		
+	}
+	
+	public void printFAQ(Project project2){
+		for(FAQ faq: project2.getFaq()){
+			System.out.println(faq.getQuastion());
+			System.out.println(faq.getAnswer());
+		}
 	}
 	
 	public void print(ArrayList<Project> projects){

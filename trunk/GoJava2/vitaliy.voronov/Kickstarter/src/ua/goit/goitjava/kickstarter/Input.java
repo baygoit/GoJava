@@ -7,5 +7,10 @@ public class Input {
 		Scanner scan = new Scanner(System.in);
 		return scan.nextInt();
 	}
+	
+	public String scanLine(){
+		Scanner scan = new Scanner(System.in);
+		return scan.nextLine();
+	}
 
 }

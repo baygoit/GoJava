@@ -10,25 +10,24 @@ public class Project {
 	private int daysBeforeEnd;
 	private String projectHistory;
 	private String linkToDemoVideo;
-	private String quastionAnswer;
+	//private String quastionAnswer;
 	private Category category;
-	private ArrayList<FAQ> faq;
-
-	public Project(String name, String description, Category category, int needMoney,
-			int haveMoney, int daysBeforeEnd, String projectHistory, String linkToDemoVideo, String quastionAnswer) {
+	private ArrayList<FAQ> faq = new ArrayList<FAQ>();
 	
+	
+	
+	public Project(String name, String description, Category category, int needMoney,
+			int haveMoney, int daysBeforeEnd, String projectHistory,
+			String linkToDemoVideo) {
 		this.name = name;
 		this.description = description;
-		this.category = category;
 		this.needMoney = needMoney;
 		this.haveMoney = haveMoney;
 		this.daysBeforeEnd = daysBeforeEnd;
 		this.projectHistory = projectHistory;
 		this.linkToDemoVideo = linkToDemoVideo;
-		this.quastionAnswer = quastionAnswer;
+		this.category = category;
 	}
-	
-	
 	public String getName() {
 		return name;
 	}
@@ -58,12 +57,6 @@ public class Project {
 		return linkToDemoVideo;
 	}
 
-
-	public String getQuastionAnswer() {
-		return quastionAnswer;
-	}
-
-
 	public void setCategory(Category category) {
 		this.category = category;
 	}
@@ -78,8 +71,18 @@ public class Project {
 	}
 	
 	public void addMoney(int addMoney){
-		this.haveMoney = addMoney;
+		this.haveMoney += addMoney;
 	}
+	
+	public ArrayList<FAQ> getFaq() {
+		return faq;
+	}
+	
+	public void addFAQ(FAQ faq){
+		this.faq.add(faq);
+		
+	}
+	
 	
 	
 	
