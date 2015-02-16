@@ -5,6 +5,9 @@ import static org.mockito.Mockito.verify;
 
 import java.io.FileNotFoundException;
 
+import model.Categories;
+import model.Projects;
+
 import org.junit.Test;
 
 public class Test1Mock {

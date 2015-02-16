@@ -1,4 +1,4 @@
-package mainkick;
+package view;
 
 import java.util.LinkedList;
 import java.util.List;

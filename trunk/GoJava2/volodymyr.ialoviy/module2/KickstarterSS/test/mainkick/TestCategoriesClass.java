@@ -4,6 +4,10 @@ import static org.junit.Assert.*;
 
 import java.util.Arrays;
 
+import model.Categories;
+import model.Projects;
+import model.ReaderDB;
+
 import org.junit.Test;
 
 public class TestCategoriesClass {

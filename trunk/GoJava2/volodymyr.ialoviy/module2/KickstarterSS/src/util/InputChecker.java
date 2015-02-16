@@ -1,4 +1,4 @@
-package mainkick;
+package util;
 
 import java.util.regex.Pattern;
 

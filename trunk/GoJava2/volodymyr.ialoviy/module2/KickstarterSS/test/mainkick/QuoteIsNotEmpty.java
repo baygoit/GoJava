@@ -1,7 +1,11 @@
 package mainkick;
 
 import static org.junit.Assert.*;
+
 import java.io.FileNotFoundException;
+
+import model.Quotes;
+
 import org.junit.Test;
 
 public class QuoteIsNotEmpty {

@@ -1,6 +1,8 @@
 package mainkick;
 
 import static org.junit.Assert.assertTrue;
+import model.Projects;
+
 import org.junit.Test;
 
 public class TestProjectsClass {

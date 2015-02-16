@@ -1,4 +1,4 @@
-package mainkick;
+package model;
 
 
 public class Category{

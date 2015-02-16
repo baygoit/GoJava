@@ -1,4 +1,9 @@
-package mainkick;
+package presenter;
+
+import model.Categories;
+import model.Projects;
+import view.InputsConsole;
+import view.OutputConsole;
 
 public class KickstarterMain {
     public static void main(String[] args){

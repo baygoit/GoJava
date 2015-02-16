@@ -1,4 +1,4 @@
-package mainkick;
+package view;
 
 
 public interface Inputs {

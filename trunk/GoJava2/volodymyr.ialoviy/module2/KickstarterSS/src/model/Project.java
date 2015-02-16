@@ -1,4 +1,4 @@
-package mainkick;
+package model;
 
 import java.util.ArrayList;
 

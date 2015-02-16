@@ -1,4 +1,11 @@
-package mainkick;
+package presenter;
+
+import model.Categories;
+import model.Projects;
+import model.Quotes;
+import util.InputChecker;
+import view.InputsConsole;
+import view.OutputConsole;
 
 
 public class KickstarterS {

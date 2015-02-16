@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <class-diagram version="1.1.8" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
   associations="true" dependencies="false" nesting-relationships="true">  
-  <class id="1" language="java" name="mainkick.Quotes" project="KickstarterSS" 
-    file="/KickstarterSS/src/mainkick/Quotes.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="1" language="java" name="model.Quotes" project="KickstarterSS" file="/KickstarterSS/src/model/Quotes.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="346" y="769"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -10,8 +10,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="2" language="java" name="mainkick.InputsConsole" project="KickstarterSS" 
-    file="/KickstarterSS/src/mainkick/InputsConsole.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="2" language="java" name="view.InputsConsole" project="KickstarterSS" 
+    file="/KickstarterSS/src/view/InputsConsole.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="363" y="282"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -19,8 +19,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="3" language="java" name="mainkick.Project" project="KickstarterSS" 
-    file="/KickstarterSS/src/mainkick/Project.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="3" language="java" name="model.Project" project="KickstarterSS" 
+    file="/KickstarterSS/src/model/Project.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="957" y="1426"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -28,8 +28,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="4" language="java" name="mainkick.Category" project="KickstarterSS" 
-    file="/KickstarterSS/src/mainkick/Category.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="4" language="java" name="model.Category" project="KickstarterSS" 
+    file="/KickstarterSS/src/model/Category.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="609" y="1222"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -37,8 +37,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="5" language="java" name="mainkick.Categories" project="KickstarterSS" 
-    file="/KickstarterSS/src/mainkick/Categories.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="5" language="java" name="model.Categories" project="KickstarterSS" 
+    file="/KickstarterSS/src/model/Categories.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="603" y="873"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -46,8 +46,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <interface id="6" language="java" name="mainkick.Inputs" project="KickstarterSS" 
-    file="/KickstarterSS/src/mainkick/Inputs.java" binary="false" corner="BOTTOM_RIGHT">    
+  <interface id="6" language="java" name="view.Inputs" project="KickstarterSS" 
+    file="/KickstarterSS/src/view/Inputs.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="363" y="413"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -55,8 +55,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <class id="7" language="java" name="mainkick.KickstarterS" project="KickstarterSS" 
-    file="/KickstarterSS/src/mainkick/KickstarterS.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="7" language="java" name="presenter.KickstarterS" project="KickstarterSS" 
+    file="/KickstarterSS/src/presenter/KickstarterS.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="687" y="253"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -64,8 +64,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="8" language="java" name="mainkick.InputChecker" project="KickstarterSS" 
-    file="/KickstarterSS/src/mainkick/InputChecker.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="8" language="java" name="util.InputChecker" project="KickstarterSS" 
+    file="/KickstarterSS/src/util/InputChecker.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1055" y="246"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -73,8 +73,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="9" language="java" name="mainkick.KickstarterMain" project="KickstarterSS" 
-    file="/KickstarterSS/src/mainkick/KickstarterMain.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="9" language="java" name="presenter.KickstarterMain" project="KickstarterSS" 
+    file="/KickstarterSS/src/presenter/KickstarterMain.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1023" y="-85"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -82,8 +82,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <interface id="10" language="java" name="mainkick.Output" project="KickstarterSS" 
-    file="/KickstarterSS/src/mainkick/Output.java" binary="false" corner="BOTTOM_RIGHT">    
+  <interface id="10" language="java" name="view.Output" project="KickstarterSS" 
+    file="/KickstarterSS/src/view/Output.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="361" y="163"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -91,8 +91,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <class id="11" language="java" name="mainkick.OutputConsole" project="KickstarterSS" 
-    file="/KickstarterSS/src/mainkick/OutputConsole.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="11" language="java" name="view.OutputConsole" project="KickstarterSS" 
+    file="/KickstarterSS/src/view/OutputConsole.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="364" y="34"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -100,8 +100,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="12" language="java" name="mainkick.Projects" project="KickstarterSS" 
-    file="/KickstarterSS/src/mainkick/Projects.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="12" language="java" name="model.Projects" project="KickstarterSS" 
+    file="/KickstarterSS/src/model/Projects.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="959" y="869"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -109,8 +109,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="13" language="java" name="mainkick.ReaderDB" project="KickstarterSS" 
-    file="/KickstarterSS/src/mainkick/ReaderDB.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="13" language="java" name="model.ReaderDB" project="KickstarterSS" 
+    file="/KickstarterSS/src/model/ReaderDB.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="342" y="999"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      

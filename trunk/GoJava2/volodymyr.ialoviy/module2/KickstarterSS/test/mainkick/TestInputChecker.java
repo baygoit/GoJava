@@ -2,8 +2,9 @@ package mainkick;
 
 import static org.junit.Assert.*;
 
-
 import org.junit.Test;
+
+import util.InputChecker;
 
 public class TestInputChecker {
 

@@ -7,7 +7,14 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
+import model.Categories;
+import model.Projects;
+
 import org.junit.Test;
+
+import presenter.KickstarterS;
+import view.InputsConsole;
+import view.OutputConsole;
 
 public class TestKickstarterS {
 	class FakeInputsConsole extends InputsConsole{
