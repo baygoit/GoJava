@@ -12,16 +12,19 @@ public class Engine {
 	
 	private	ConsoleView view;
 	private ConsoleInput scann;
+	private StorageFactory storageFactory;
 	
 	public Engine() {
-		view = new ConsoleView(new QuoteController(), new CategoryController(), new ProjectController());
+		storageFactory = new StorageFactory();
+		view = new ConsoleView(new QuoteController(), new CategoryController(storageFactory.getCategoryStorageCustom()),
+							new ProjectController());
 		scann = new ConsoleInput();
 	}
 	
 	public void consoleLevel1() {
 		System.out.print("[0 - exit; 1 - * - selec category;]\n> ");
 		int input = scann.choice();
-		CategoryStorage storage = new StorageFactory().getCategoryStorage();
+		CategoryStorage storage = storageFactory.getCategoryStorageCustom();
 		if(input > 0 && input <= storage.getContent().size()) {
 			view.displaySpecificCategory(input);
 			view.displayProjects();
