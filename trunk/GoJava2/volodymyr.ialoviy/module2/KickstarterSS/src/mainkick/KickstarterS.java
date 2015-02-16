@@ -96,14 +96,15 @@ public class KickstarterS {
 		long cardNumber = 0;
 		inCardNumber(cardNumber);
 
-		printAskAmount();
+		
 		if (chosenPay == 0) {
+			printAskAmount();
 			inAmount();
 		}
 
 		projects.setDonation(chosenProject - 1, chosenPay);
 		
-		printThank(name, chosenPay, cardNumber);
+		printThank(name, chosenPay);
 		
 		menu = menuProject;
 		switchMenu();
@@ -274,8 +275,8 @@ public class KickstarterS {
 		printer("Enter your question:");
 	}
 	
-	private void printThank(String name, int chosenPay, long cardNumber) {
-		printer("Thank you " + name + " for your generous (" + chosenPay + ") contribution. We record your card number (" + cardNumber);
+	private void printThank(String name, int chosenPay) {
+		printer("Thank you " + name + " for your generous (" + chosenPay + ") contribution.");
 	}
 
 	private void printer(String string) {

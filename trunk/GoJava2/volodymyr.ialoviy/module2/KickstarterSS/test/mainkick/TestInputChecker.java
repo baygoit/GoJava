@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-public class TestCheckClass {
+public class TestInputChecker {
 
 	@Test
     public void sendEmptyStringNumber_whenRezultFalse(){

@@ -1,6 +1,6 @@
 package mainkick;
 
-public class Mainkick {
+public class KickstarterMain {
     public static void main(String[] args){
     	InputsConsole in = new InputsConsole();
     	OutputConsole out = new OutputConsole();
