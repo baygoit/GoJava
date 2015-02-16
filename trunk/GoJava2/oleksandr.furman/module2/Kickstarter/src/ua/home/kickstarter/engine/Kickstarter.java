@@ -4,7 +4,7 @@ import ua.home.kickstarter.content.Category;
 import ua.home.kickstarter.controller.CategoriesController;
 import ua.home.kickstarter.controller.ProjectsController;
 import ua.home.kickstarter.controller.QuotationsController;
-import ua.home.kickstarter.model.PaymentsStorage;
+import ua.home.kickstarter.factory.StorageFactory;
 import ua.home.kickstarter.view.ConsoleInput;
 import ua.home.kickstarter.view.ConsoleOutput;
 import ua.home.kickstarter.view.Display;
@@ -18,7 +18,7 @@ public class Kickstarter {
 
 	public Kickstarter() {
 		display = new Display(new QuotationsController(), categoriesController = new CategoriesController(),
-				projectsController = new ProjectsController(), new ConsoleOutput());
+				projectsController = new ProjectsController(new StorageFactory().getProjectStorage()), new ConsoleOutput());
 		consoleInput = new ConsoleInput();
 	}
 
@@ -67,7 +67,6 @@ public class Kickstarter {
 	}
 
 	public void menuLevel3(int i) {
-		PaymentsStorage paymentsStorage = new PaymentsStorage();
 		int input = consoleInput.nextIntIndex();
 		if (input == 0) {
 			menuLevel1();
@@ -75,11 +74,10 @@ public class Kickstarter {
 			System.out.print("Введите Ваше имя: ");
 			String name = consoleInput.nextString();
 			System.out.print("Введите номер карты: ");
-			String cardNumber = consoleInput.nextString();
+			String cardNumber = consoleInput.nextString(); 
 			System.out.print("Введите сумму платежа: ");
 			int amount = consoleInput.nextIntIndex();
-			paymentsStorage
-					.addNewPayment(name, cardNumber, amount, projectsController.passSpecificProject(i, category));
+
 			projectsController.passSpecificProject(i, category).addPayment(amount);
 			projectsController.save();
 			display.displaySpecificProject(i, category);

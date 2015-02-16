@@ -5,28 +5,27 @@ import java.util.Map;
 
 import ua.home.kickstarter.content.Category;
 import ua.home.kickstarter.content.Project;
-import ua.home.kickstarter.factory.StorageFactory;
 import ua.home.kickstarter.model.ProjectStorage;
 
 public class ProjectsController {
-private ProjectStorage projectStorage;
-	
-	public ProjectsController() {
-		projectStorage = new StorageFactory().getProjectStorage();
+	private ProjectStorage projectStorage;
+
+	public ProjectsController(ProjectStorage projectStorage) {
+		this.projectStorage = projectStorage;
 	}
-	 
+ 
 	public Map<Category, List<Project>> passContentToView() {
 		return projectStorage.getContent();
 	}
-	
+
 	public String passSpecificContentToView(Category category) {
 		return projectStorage.getSpecificContent(category);
 	}
-	
+
 	public String passSpecificProjectToView(int index, Category category) {
 		return projectStorage.getSpecificProjects(index, category);
 	}
-	
+
 	public Project passSpecificProject(int index, Category category) {
 		return projectStorage.getSpecificProject(index, category);
 	}
@@ -34,8 +33,8 @@ private ProjectStorage projectStorage;
 	public int passSpecificCategorySize(Category category) {
 		return projectStorage.projectsInSpecificCategorySize(category);
 	}
+
 	public void save() {
 		projectStorage.saveJsonToHardDrive();
 	}
 }
- 

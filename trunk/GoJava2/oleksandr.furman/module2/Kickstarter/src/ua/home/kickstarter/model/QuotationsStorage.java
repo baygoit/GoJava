@@ -16,7 +16,7 @@ public class QuotationsStorage {
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	private void jsonQuotationsToList() {
 		KickstarterJsonReader jsonReader = new KickstarterJsonReader();
-		quotationsList = jsonReader.getList(Quote.class, "d:\\Quotations.json");
+		quotationsList = jsonReader.getList(Quote.class, "Quotations.json");
 	}
 
 	public Quote getRandomQuote() {

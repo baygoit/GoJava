@@ -10,7 +10,7 @@ public class CategoriesController {
 
 	public CategoriesController() {
 		categoryStorage = new StorageFactory().getCategoryStorage();
-	}
+	} 
 
 	public String passContentToView() {
 		return categoryStorage.getContent();
@@ -21,6 +21,6 @@ public class CategoriesController {
 	}
 	
 	public int passCategoriesSizeToView() {
-		return categoryStorage.getSize();
+		return categoryStorage.size();
 	}
 }

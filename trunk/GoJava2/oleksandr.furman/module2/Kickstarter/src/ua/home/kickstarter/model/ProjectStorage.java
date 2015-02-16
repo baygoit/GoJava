@@ -14,13 +14,17 @@ import utils.KickstarterJsonWriter;
 public class ProjectStorage {
 
 	private List<Project> projectList;
-	private Map<Category, List<Project>> projects;
+	private Map<Category, List<Project>> sortedByCategoryProjects;
 	private CategoryStorage categoryStorage = new StorageFactory().getCategoryStorage();
 
 	public ProjectStorage() {
+		init();
+	}
+
+	private void init() {
 		jsonProjectsToList();
 		setProjectsCategories();
-		putProjectsToMap();
+		sortedByCategoryProjects = putProjectsToMap(projectList);
 		setProjectsHistory();
 		setProjectsQuestionAnswers();
 	}
@@ -28,16 +32,15 @@ public class ProjectStorage {
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	private void jsonProjectsToList() {
 		KickstarterJsonReader jsonReader = new KickstarterJsonReader();
-		projectList = jsonReader.getList(Project.class, "d:\\file.json");
+		projectList = jsonReader.getList(Project.class, "Projects.json");
 	}
 
 	public void saveJsonToHardDrive() {
 		KickstarterJsonWriter kickstarterJsonWriter = new KickstarterJsonWriter();
-		kickstarterJsonWriter.saveJsonToHardDrive(projectList, "d:\\file.json");
+		kickstarterJsonWriter.saveJsonToHardDrive(projectList, "Projects.json");
 	}
 
-	private void setProjectsCategories() {
-		projects = new HashMap<Category, List<Project>>();
+	public void setProjectsCategories() {
 		projectList.get(0).setCategory(categoryStorage.getSpecificContent(1));
 		projectList.get(1).setCategory(categoryStorage.getSpecificContent(1));
 		projectList.get(2).setCategory(categoryStorage.getSpecificContent(1));
@@ -46,7 +49,8 @@ public class ProjectStorage {
 		projectList.get(5).setCategory(categoryStorage.getSpecificContent(2));
 	}
 
-	private void putProjectsToMap() {
+	public Map<Category, List<Project>> putProjectsToMap(List<Project> projectList) {
+		Map<Category, List<Project>> projects = new HashMap<Category, List<Project>>();
 		for (int i = 0; i < projectList.size(); i++) {
 			if (projects.containsKey(projectList.get(i).getCategory())) {
 				projects.get(projectList.get(i).getCategory()).add(projectList.get(i));
@@ -56,41 +60,42 @@ public class ProjectStorage {
 				projects.put(projectList.get(i).getCategory(), projectsList);
 			}
 		}
+		return projects;
 	}
 
-	private void setProjectsHistory() {
+	public void setProjectsHistory() {
 		projectList.get(0).setHistory("История проекта...");
 		projectList.get(1).setHistory("История проекта №2");
 	}
 
-	private void setProjectsQuestionAnswers() {
+	public void setProjectsQuestionAnswers() {
 		projectList.get(0).setQuestionAnswers("Q: вопрос? А: ответ! 1 ");
 		projectList.get(1).setQuestionAnswers("Q: вопрос? А: ответ! 2");
 	}
 
 	public Map<Category, List<Project>> getContent() {
-		return projects;
+		return sortedByCategoryProjects;
 	}
 
 	public String getSpecificContent(Category category) {
 		int projectNumber = 1;
 		StringBuilder projectsContent = new StringBuilder();
-		for (Project project : projects.get(category)) {
+		for (Project project : sortedByCategoryProjects.get(category)) {
 			projectsContent.append(projectNumber).append(project.getShortInfo()).append("\n");
 			projectNumber++;
 		}
 		return projectsContent.toString();
 	}
-
+ 
 	public String getSpecificProjects(int index, Category category) {
-		return projects.get(category).get(index - 1).getFullInfo();
+		return sortedByCategoryProjects.get(category).get(index - 1).getFullInfo();
 	}
-
+ 
 	public Project getSpecificProject(int index, Category category) {
-		return projects.get(category).get(index - 1);
+		return sortedByCategoryProjects.get(category).get(index - 1);
 	}
 
 	public int projectsInSpecificCategorySize(Category category) {
-		return projects.get(category).size();
+		return sortedByCategoryProjects.get(category).size();
 	}
 }

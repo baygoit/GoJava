@@ -19,6 +19,6 @@ public class KickstarterJsonWriter {
 			writer.close();
 		} catch (IOException e) {
 			e.printStackTrace();
-		}
+		} 
 	}
 }
