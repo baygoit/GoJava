@@ -41,22 +41,28 @@ public class LearningUnitTest {
 
 	@Test
 	public void testDeleteComment() {
+		assertEquals(2, lu.getComments().size());
 		assertTrue(lu.deleteComment(2));
+		assertEquals(1, lu.getComments().size());
 	}
 
 	@Test
 	public void testDeleteRate() {
+		assertEquals(2, lu.getRating().size());
 		assertTrue(lu.deleteRate("Vanya"));
+		assertEquals(1, lu.getRating().size());
 	}
 
 	@Test
-	public void testDeleteAllRates() {
+	public void testDeleteAllComments() {
+		assertNotEquals(0, lu.getComments().size());
 		lu.deleteAllComments();
 		assertEquals(0, lu.getComments().size());
 	}
 
 	@Test
-	public void testDeleteAllComments() {
+	public void testDeleteAllRates() {
+		assertNotEquals(0, lu.getRating().size());
 		lu.deleteAllRates();
 		assertEquals(0, lu.getRating().size());
 	}

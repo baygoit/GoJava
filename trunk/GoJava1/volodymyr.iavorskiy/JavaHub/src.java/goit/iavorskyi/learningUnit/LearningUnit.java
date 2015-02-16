@@ -1,19 +1,27 @@
 package goit.iavorskyi.learningUnit;
 
+import goit.iavorskyi.io.Streamer;
+
 import java.util.LinkedList;
 import java.util.List;
 
 public class LearningUnit {
 
 	private String author;
+	private String article;
 	private List<Comment> comments = new LinkedList<Comment>();
 	private List<Rating> rates = new LinkedList<Rating>();
 	private boolean isApproved;
-
+	
 	public LearningUnit() {
 
 	}
 
+	public void saveOnDisk() {
+		String stringToWrite = author + "@" + article;
+		Streamer.write(stringToWrite);
+	}
+	
 	public int calculatePopularity() {
 		return rates.size() + comments.size();
 	}
@@ -68,6 +76,14 @@ public class LearningUnit {
 
 	public void setIsApproved(boolean isApproved) {
 		this.isApproved = isApproved;
+	}
+
+	public String getArticle() {
+		return article;
+	}
+
+	public void setArticle(String article) {
+		this.article = article;
 	}
 
 }

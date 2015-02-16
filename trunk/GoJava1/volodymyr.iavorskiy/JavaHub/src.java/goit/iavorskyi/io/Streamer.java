@@ -7,7 +7,9 @@ import java.io.FileWriter;
 
 public class Streamer {
 
-	public String read(String fileToRead) {
+	private static String fileToWriteIn = "d:\\Articles.txt";
+	
+	public static String read(String fileToRead) {
 		String result = "";
 		try (BufferedReader br = new BufferedReader(new FileReader(fileToRead))) {
 			StringBuilder sb = new StringBuilder();
@@ -26,9 +28,11 @@ public class Streamer {
 		return result;
 	}
 	
-	public void write(String stringToWrite, String fileToWrite) {
-		try (BufferedWriter bw = new BufferedWriter(new FileWriter(fileToWrite))) {
+	public static void write(String stringToWrite) {
+		try {
+			BufferedWriter bw = new BufferedWriter(new FileWriter(fileToWriteIn));
 			bw.write(stringToWrite);
+			bw.close();
 		}
 		catch (Exception e) {
 			 e.printStackTrace();

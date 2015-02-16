@@ -1,0 +1,4 @@
+@CHARSET "UTF-8";
+body {background-color: linen;}
+div.main {width: 1000px; display: block; text-align: center; margin: auto;}
+.mainMenu {list-style-type: none; display: inline-block;}
