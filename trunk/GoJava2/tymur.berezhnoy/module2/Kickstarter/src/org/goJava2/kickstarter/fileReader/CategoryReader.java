@@ -1,4 +1,4 @@
-package org.goJava2.kickstarter.model;
+package org.goJava2.kickstarter.fileReader;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -9,7 +9,7 @@ import java.util.Set;
 
 import org.goJava2.kickstarter.content.Category;
 
-public class ReadCategoryFromDB {
+public class CategoryReader {
 	
 	private String fileName = "DataBase/Categories.mdb";
 	
@@ -31,7 +31,7 @@ public class ReadCategoryFromDB {
 		} catch (FileNotFoundException e) {
 			System.out.println("There are no file");
 		} catch (IOException e) {
-			System.out.println("There are something wrong!");
+			System.out.println("There is something wrong!");
 		} finally {
 			if(reader != null) {
 				try {

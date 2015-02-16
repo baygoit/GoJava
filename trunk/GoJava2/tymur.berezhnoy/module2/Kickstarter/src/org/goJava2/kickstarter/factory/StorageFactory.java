@@ -1,9 +1,9 @@
 package org.goJava2.kickstarter.factory;
 
+import org.goJava2.kickstarter.fileReader.CategoryReader;
 import org.goJava2.kickstarter.model.CategoryStorage;
 import org.goJava2.kickstarter.model.ProjectStorage;
 import org.goJava2.kickstarter.model.QuoteStorage;
-import org.goJava2.kickstarter.model.ReadCategoryFromDB;
 
 public class StorageFactory {
 	
@@ -34,7 +34,7 @@ public class StorageFactory {
 	
 	public CategoryStorage getCategoryStorageCustom() {
 		if(categoryStorage == null) {
-			categoryStorage = new CategoryStorage(new ReadCategoryFromDB().getCategoryFromFile());
+			categoryStorage = new CategoryStorage(new CategoryReader().getCategoryFromFile());
 		}
 		return categoryStorage;
 	}
