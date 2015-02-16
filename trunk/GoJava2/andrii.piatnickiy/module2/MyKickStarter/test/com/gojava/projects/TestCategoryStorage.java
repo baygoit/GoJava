@@ -23,12 +23,14 @@ public abstract class TestCategoryStorage {
         Category category = categoryStorage.getCategory(0);
         assertEquals("1) name1", category.toString());
     }
+
     
     @Test
     public void shouldDisplayAllCatgories_WhendCallgetCategoriesToString(){
       categoryStorage.add("name1", 1);
       categoryStorage.add("name2", 2);
       categoryStorage.add("name3", 3);
-      assertEquals("1) name1" + "\n" + "2) name2" + "\n" + "3) name3" + "\n", categoryStorage.getCategoryToString());
+      categoryStorage.add("name4", 4);
+      assertEquals("1) name1" + "\n" + "2) name2" + "\n" + "3) name3" + "\n" + "4) name4" + "\n" , categoryStorage.getCategoryToString());
     }
 }

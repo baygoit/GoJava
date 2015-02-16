@@ -2,6 +2,8 @@ package com.gojava.launch;
 
 import com.gojava.inputOutput.ConsoleIO;
 import com.gojava.projects.CategoryStorage;
+import com.gojava.projects.FileCategoryStorage;
+import com.gojava.projects.InMemoryCategoryStorage;
 import com.gojava.projects.ProjectStorage;
 import com.gojava.quote.Quote;
 import com.gojava.view.Menu;
@@ -10,7 +12,7 @@ public class Launch {
 
     public static void main(String[] args) throws Exception {
         ConsoleIO consoleIO = new  ConsoleIO();
-        CategoryStorage categoryStorage = new CategoryStorage();
+        CategoryStorage categoryStorage = new FileCategoryStorage("categories.txt");
         ProjectStorage projectStorage = new ProjectStorage();
 
         initCategories(categoryStorage);

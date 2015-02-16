@@ -2,7 +2,7 @@ package com.gojava.projects;
 
 import java.util.ArrayList;
 
-public class InMemoryCategoryStorage {
+public class InMemoryCategoryStorage implements CategoryStorage{
     private ArrayList<Category> categoryStorageList = new ArrayList<Category>();
 
     public void add(String name, int categoryId) {

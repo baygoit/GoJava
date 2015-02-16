@@ -1,79 +1,148 @@
 package com.gojava.projects;
 
-import java.io.BufferedInputStream;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.Reader;
 
 public class FileCategoryStorage implements CategoryStorage {
+    File file;
+    BufferedReader in = null;
+    BufferedWriter out = null;
+
+    public FileCategoryStorage(String fileName) {
+        file = createFileIfNeed(fileName);
+    }
 
     @Override
     public void add(String name, int categoryId) {
-        // TODO Auto-generated method stub
+        try {
+            initOut();
+            try {
+                out.append(String.valueOf(categoryId) + ";" + name + "\n");
+            } catch (IOException e) {
+                throw new RuntimeException("Не могу записать строку!", e);
+            }
 
+        } finally {
+            if (out != null) {
+                try {
+                    out.close();
+                } catch (IOException e) {
+                    throw new RuntimeException("Не можем закрыть файл!", e);
+                }
+            }
+        }
+    }
+
+    private void initOut() {
+        try {
+            out = new BufferedWriter(new FileWriter(file, true));
+        } catch (IOException e) {
+            throw new RuntimeException("Не могу записать в файл!", e);
+        }
     }
 
     @Override
     public String getCategoryToString() {
-        File file = new File("categories.txt");
+        String result = "";
+        initIn();
+        try {
+            try {
+                String read = "";
+                while (read != null) {
+                    read = in.readLine();
+                    if (read == null) {
+                        result += "";
+                    } else {
+                        result += read + "\n";
+                    }
+                }
+            } catch (IOException e) {
+                throw new RuntimeException("Не могу прочитать строку!", e);
+            }
+            return result;
+        } finally {
+            if (in != null) {
+                try {
+                    in.close();
+                } catch (IOException e) {
+                    throw new RuntimeException("Не можем закрыть файл!", e);
+                }
+            }
+        }
+    }
+
+    @Override
+    public Category getCategory(int index) {
+        initIn();
+        Category category = null;
+        try {
+            try {
+                int counter = 0;
+                String read = "";
+                try {
+                    read = in.readLine();
+                } catch (NullPointerException e) {
+                    throw new RuntimeException("Тут null!!!", e);
+                }
+                String result = "";
+                while (read != null) {
+                    if (counter == index) {
+                        result = read;
+                        String[] tmp = result.split(";");
+                        int id = Integer.parseInt(tmp[0]);
+                        String name = tmp[1];
+                        category = new Category(name, id);
+                        return category;
+                    }
+                    counter++;
+                }
+            } catch (IOException e) {
+                throw new RuntimeException("Не можем прочитать файл!", e);
+            }
+
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        } finally {
+            if (in != null) {
+                try {
+                    in.close();
+                } catch (IOException e) {
+                    throw new RuntimeException("Не можем закрыть файл!", e);
+                }
+            }
+        }
+        return category;
+    }
+
+    private File createFileIfNeed(String filename) {
+        File file = new File(filename);
         if (!file.exists()) {
             try {
                 file.createNewFile();
             } catch (IOException e) {
-                System.out.println("Не смогли создать файл контейнер!");
+                throw new RuntimeException("Не смогли создать файл контейнер!",
+                        e);
             }
         }
-        
-        BufferedReader in = null;
-        String result = "";
+        return file;
+    }
+
+    private void initIn() {
         try {
             in = new BufferedReader(new FileReader(file));
-            try {
-                String firsrRead = "";
-                while(firsrRead != null){
-                    firsrRead = in.readLine();
-                    if(firsrRead == null){
-                        result += "";
-                    }else{
-                        result += firsrRead + "\n";
-                    }
-                }
-            } catch (IOException e) {
-                System.out.println("Не могу прочитать строку!");
-            }
-            return result;
         } catch (FileNotFoundException e) {
             // TODO Auto-generated catch block
             try {
                 file.createNewFile();
             } catch (IOException e1) {
                 // TODO Auto-generated catch block
-                System.out.println("Не нашли файл!");
-                ;
-            }
-        } finally {
-            if (in != null) {
-                try {
-                    in.close();
-                } catch (IOException e) {
-                    System.out.println("Не можем закрыть файл!");
-                }
+                throw new RuntimeException("Не смогли создать файл!", e);
             }
         }
-        return result;
-
-
     }
-
-    @Override
-    public Category getCategory(int index) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
 }
