@@ -16,13 +16,18 @@ public class DataBuilder {
 
 	private static DataBuilder instance;
 	private static DataLoader dataLoader;
-	private static final File FILE = new File("src/main/resources/DataFile2.xml");
+	private static File FILE = new File("src/main/resources/DataFile2.xml");
+	//гдето надо чето подстроить чтоб tomcat собирал правильный путь к файлу...сейчас вот такой: 
 	//D:\Java\eclipse\src\main\resources\DataFile2.xml (Системе не удается найти указанный путь)]
+
 	private DataBuilder() {
 	}
 
 	public static synchronized DataBuilder getInstance() throws JAXBException {
 		if (instance == null) {
+			
+			if (!FILE.exists()) FILE = new File("D:/Java/eclipse/workspace/testing/src/main/resources/DataFile2.xml");
+			
 			instance = new DataBuilder();
 			JAXBContext jaxbContext = JAXBContext.newInstance(new Class[] {DataLoader.class, Category.class, Question.class, SimpleQuestion.class, MultipleQuestion.class});
 			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
