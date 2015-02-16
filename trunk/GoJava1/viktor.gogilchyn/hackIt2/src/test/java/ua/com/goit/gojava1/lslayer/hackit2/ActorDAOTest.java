@@ -59,7 +59,7 @@ public class ActorDAOTest {
         try {
             Actor actor = new ActorDAO(false).fromFile("Unexisted");
         } catch (Exception e) {
-            assertTrue(e.getMessage().startsWith("Such actor not found!"));
+            assertTrue(e.getMessage().startsWith("Such actor not found"));
             assertEquals(HackitIOException.class, e.getClass());
         }
         
