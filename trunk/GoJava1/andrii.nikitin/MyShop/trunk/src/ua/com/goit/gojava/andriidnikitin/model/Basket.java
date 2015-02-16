@@ -6,7 +6,7 @@ public class Basket {
 	
 	private Integer id;
 	
-	private List<BasketGood> goods;
+	private List<BasketEntry> goods;
 	
 	private Client client;
 
@@ -18,11 +18,11 @@ public class Basket {
 		this.id = id;
 	}
 
-	public List<BasketGood> getGoods() {
+	public List<BasketEntry> getGoods() {
 		return goods;
 	}
 
-	public void setGoods(List<BasketGood> goods) {
+	public void setGoods(List<BasketEntry> goods) {
 		this.goods = goods;
 	}
 

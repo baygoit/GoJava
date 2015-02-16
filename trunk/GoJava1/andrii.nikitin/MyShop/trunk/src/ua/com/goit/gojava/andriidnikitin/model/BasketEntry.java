@@ -1,6 +1,6 @@
 package ua.com.goit.gojava.andriidnikitin.model;
 
-public class BasketGood {
+public class BasketEntry {
 
 	private Basket basket;
 	

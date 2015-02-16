@@ -12,6 +12,7 @@ import ua.com.goit.gojava.andriidnikitin.service.GoodCatalogImpl;
 
 public class WebAccessTest {
 	
+	
 	@Test
 	public void getGoodTypesFromRootTest() {
 		Object o = new GoodCatalogImpl().getGoodTypesFromRoot();

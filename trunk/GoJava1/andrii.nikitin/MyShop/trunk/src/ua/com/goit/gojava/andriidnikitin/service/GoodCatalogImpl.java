@@ -1,14 +1,11 @@
 package ua.com.goit.gojava.andriidnikitin.service;
 
 import java.io.FileNotFoundException;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
 import ua.com.goit.gojava.andriidnikitin.model.Good;
 import ua.com.goit.gojava.andriidnikitin.model.GoodType;
-import ua.com.goit.gojava.andriidnikitin.model.util.GoodDAO;
-import ua.com.goit.gojava.andriidnikitin.model.util.GoodTypeDAO;
 import ua.com.goit.gojava.andriidnikitin.service.util.DataBuilderPlain;
 import ua.com.goit.gojava.andriidnikitin.service.util.ShopException;
 
@@ -50,9 +47,8 @@ public class GoodCatalogImpl implements GoodCatalog{
 	}
 
 	@Override
-	public List<GoodType> getGoodTypesFromRoot() {
-		
-		return getGoodTypes(GoodType.ROOT);
+	public List<GoodType> getGoodTypesFromRoot() {		
+		return getGoodTypes(null);
 	}
 	
 	public void initFromFile(String path) throws ShopException {
@@ -78,7 +74,7 @@ public class GoodCatalogImpl implements GoodCatalog{
 		type.setId(new Integer(CSVStrings.get(2)));
 		type.setName(CSVStrings.get(3));
 		good.setType(type);
-		good.setPrice(new BigDecimal(CSVStrings.get(4)));
+		//good.setPrice(new BigDecimal(CSVStrings.get(4)));
 		return good;
 	}
 	

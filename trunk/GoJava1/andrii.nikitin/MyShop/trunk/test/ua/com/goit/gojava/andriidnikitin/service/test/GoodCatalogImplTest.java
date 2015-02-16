@@ -17,7 +17,6 @@ public class GoodCatalogImplTest {
 		GoodCatalogImpl catalog = new GoodCatalogImpl();
 		List<GoodType> list = catalog.getGoodTypesFromRoot();
 		assertNotNull(list);
-		System.out.println(list.size());
 		
 	}
 

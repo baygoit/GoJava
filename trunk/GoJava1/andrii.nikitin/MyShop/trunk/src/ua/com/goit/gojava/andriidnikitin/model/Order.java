@@ -5,7 +5,7 @@ import java.util.List;
 
 import ua.com.goit.gojava.andriidnikitin.model.util.OrderStatus;
 
-public class Order implements Comparable<Order> {
+public class Order {
 	
 	private Client client;
 	
@@ -13,7 +13,7 @@ public class Order implements Comparable<Order> {
 	
 	private Boolean handled;	 
 	
-	private List<OrderGood> goods;
+	private List<OrderEntry> goods;
 	
 	private Date date;	
 
@@ -33,11 +33,11 @@ public class Order implements Comparable<Order> {
 		this.status = status;
 	}
 
-	public List<OrderGood> getGoods() {
+	public List<OrderEntry> getGoods() {
 		return goods;
 	}
 
-	public void setGoods(List<OrderGood> goods) {
+	public void setGoods(List<OrderEntry> goods) {
 		this.goods = goods;
 	}
 
@@ -47,11 +47,6 @@ public class Order implements Comparable<Order> {
 
 	public void setHandled(Boolean handled) {
 		this.handled = handled;
-	}
-
-	@Override
-	public int compareTo(Order arg0) {		
-		return getDate().compareTo(arg0.getDate());	
 	}
 
 	public Date getDate() {

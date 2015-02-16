@@ -1,6 +1,6 @@
 package ua.com.goit.gojava.andriidnikitin.model;
 
-public class OrderGood {
+public class OrderEntry {
 
 	private Order order;
 	   

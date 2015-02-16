@@ -1,6 +1,5 @@
 package ua.com.goit.gojava.andriidnikitin.model;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 import ua.com.goit.gojava.andriidnikitin.model.util.Attribute;
@@ -13,16 +12,6 @@ public class Good {
 	
 	private GoodType type;
 	
-	private BigDecimal price;	
-	
-	public BigDecimal getPrice() {
-		return price;
-	}
-
-	public void setPrice(BigDecimal price) {
-		this.price = price;
-	}
-
 	private List<Attribute> description;	
 
 	public Integer getId() {

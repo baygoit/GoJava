@@ -2,14 +2,6 @@ package ua.com.goit.gojava.andriidnikitin.model;
 
 public class GoodType {
 	
-	static {
-		GoodType type = new GoodType();	
-		type.setParent(type);
-		type.setName("ROOT");
-		type.setId(0);
-		ROOT = type;
-	}
-	
 	private Integer id;
 	private String name;
 	private GoodType parent;
@@ -36,7 +28,4 @@ public class GoodType {
 	public void setParent(GoodType parent) {
 		this.parent = parent;
 	}
-	
-	public static final GoodType ROOT;
-
 }

@@ -1,4 +1,4 @@
-package ua.com.goit.gojava.andriidnikitin.model.util;
+package ua.com.goit.gojava.andriidnikitin.service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,19 +53,26 @@ public class GoodTypeDAO implements IDAO<GoodType> {
 		
 		type.setId(1);
 		type.setName("Guitars");
-		type.setParent(GoodType.ROOT);
+		type.setParent(null);
 		list.add(type);
+		GoodType guitars = type;
 		
 		type = new GoodType();			
 		type.setId(2);
 		type.setName("Keys");
-		type.setParent(GoodType.ROOT);
+		type.setParent(null);
 		list.add(type);
 		
 		type = new GoodType();
 		type.setId(3);
 		type.setName("Amplifiers");
-		type.setParent(GoodType.ROOT);
+		type.setParent(null);
+		list.add(type);
+		
+		type = new GoodType();
+		type.setId(4);
+		type.setName("Bass guitars");
+		type.setParent(guitars);
 		list.add(type);
 	}
 	
