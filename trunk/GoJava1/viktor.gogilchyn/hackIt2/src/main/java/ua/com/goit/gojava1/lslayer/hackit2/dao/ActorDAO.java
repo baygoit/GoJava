@@ -77,7 +77,7 @@ public class ActorDAO {
         if (!file.exists()) {
             file = new File(UNIX_SAVE_DIR + actorName + FILE_EXT);
             if (!file.exists()) {
-                throw new HackitIOException("Such actor not found!-1"
+                throw new HackitIOException("Such actor not found in win/nix block"
                         + file.getCanonicalPath());
             }
         }
@@ -138,6 +138,23 @@ public class ActorDAO {
         } catch (Exception e) {
             throw new HackitIOException("Something in io" + file.getCanonicalPath()+file.getName(), e);
         }
+    }
+
+    public void delete(Actor gamer) throws HackitIOException {
+        File file = new File(WIN_SAVE_DIR + gamer.getName() + FILE_EXT);
+        if (!file.exists()) {
+            file = new File(UNIX_SAVE_DIR + gamer.getName() + FILE_EXT);
+            if (!file.exists()) {
+                try {
+                    throw new HackitIOException("Such actor not found! in delete"
+                            + file.getCanonicalPath());
+                } catch (IOException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
+        }
+        file.delete();
     }
 
 }

@@ -16,6 +16,13 @@ public abstract class AbstractCharacter implements Actor {
     private Map<String, String>  atrributes = new HashMap<String, String>();
     
     @Override
+    public void setName(String name) {
+        this.name = name;
+        
+    }
+
+
+    @Override
     public Map<String, String> getAttributes() {
         return atrributes;
     }

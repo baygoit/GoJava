@@ -1,11 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="ISO-8859-1"%>
-<%@ page import="java.util.List" %>
-<%@ page import="java.util.Map" %>
-<%@ page import="java.util.Iterator" %>
-<%@ page import="ua.com.goit.gojava1.lslayer.hackit2.actor.Actor" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<%List<Actor> gamersList =(List<Actor>)request.getAttribute("gamers"); %>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -13,32 +10,20 @@
 <title>Actor list</title>
 </head>
 <body>
-<div class="container">
-<%Iterator<Actor> iter = gamersList.iterator();
-while(iter.hasNext()) { %>
-    <div class="one_gamer_container">
-    <%Actor element = iter.next();%>
-    <div class="gamer_name_container">
-    <h1><%out.print("Name: " + element.getName()); %></h1>
-    <div class="gamer_skills_container">
-        <%for (Map.Entry<String, Integer> entry : element.getSkills().entrySet()) {%>
-            <div class="one_skill_container">
-            <span class="gamer_skills_name">
-            <%out.print(entry.getKey());%>
-            </span>
-            <span class="gamer_skills_value">
-            <%out.print(entry.getValue());%>
-            </span>
-            </div>
-        <%}%>
-    </div>
-    </div>
-    </div>
-<%}%>
-</div>
-<a href="addform.jsp">Create</a>
-<a href="#">Read</a>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+<form name = "deleteform" action="actors" method="post">
+    <ul class = "gamers_list">
+    <c:forEach items="${requestScope.gamers}" var="gamerItem">
+        <li class = "gamers_list_names_list">
+            <input name="${gamerItem.getName()}" type="checkbox" unchecked>
+            <c:out value="${gamerItem.getName()}"/>
+        </li>
+        <c:forEach items="${gamerItem.getSkills()}" var="skillItem">
+            <li class = gamers_list_skill_list><c:out value="${skillItem.key}"/></li>
+        </c:forEach>
+    </c:forEach>
+    </ul>
+    <input type="hidden" name = "delete" value="yes">
+    <input type="submit" value="Delete selected">
+</form>    
 </body>
 </html>

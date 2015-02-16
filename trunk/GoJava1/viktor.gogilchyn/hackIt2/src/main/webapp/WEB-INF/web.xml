@@ -14,10 +14,13 @@
  </servlet>
  <servlet-mapping>
   <servlet-name>PathInformer</servlet-name>
-  <url-pattern>/informer/*</url-pattern>
+  <url-pattern>/informer</url-pattern>
  </servlet-mapping>
  <servlet-mapping>
   <servlet-name>ActorMaintaner</servlet-name>
-  <url-pattern>/actors/*</url-pattern>
+  <url-pattern>/actors</url-pattern>
  </servlet-mapping>
+ <welcome-file-list>
+  <welcome-file>/addform.jsp</welcome-file>
+ </welcome-file-list>
 </web-app>

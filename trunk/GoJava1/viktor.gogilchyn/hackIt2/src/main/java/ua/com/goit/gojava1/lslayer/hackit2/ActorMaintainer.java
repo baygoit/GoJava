@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+
+import ua.com.goit.gojava1.lslayer.hackit2.actor.Actor;
 import ua.com.goit.gojava1.lslayer.hackit2.actor.ActorFactory;
 import ua.com.goit.gojava1.lslayer.hackit2.dao.ActorDAO;
 
@@ -31,7 +33,21 @@ public class ActorMaintainer extends HttpServlet {
      */
     protected void doGet(HttpServletRequest request,
             HttpServletResponse response) throws ServletException, IOException {
+            
             ActorDAO dao = new ActorDAO(!this.getServletContext().getServerInfo().equals("Apache Tomcat/7.0.57"));
+            String deleteParameter = request.getParameter("delete");
+            if (deleteParameter != null && deleteParameter.equals("yes"))
+            for (Actor gamer : dao.loadAll()) {
+                String deleteParameterString = request.getParameter(gamer.getName()); 
+                if (deleteParameterString != null && deleteParameterString.equals("on")) {
+                    try {
+                        dao.delete(gamer);
+                    } catch (HackitIOException e) {
+                        //I need to do something here
+                        //But not now
+                    }
+                }
+            }
             request.setAttribute("gamers", dao.loadAll());
             request.getRequestDispatcher("display.jsp").forward(request, response);
     }
@@ -73,7 +89,7 @@ public class ActorMaintainer extends HttpServlet {
      */
     protected void doDelete(HttpServletRequest request,
             HttpServletResponse response) throws ServletException, IOException {
-        // TODO Auto-generated method stub
+        
     }
 
 }
