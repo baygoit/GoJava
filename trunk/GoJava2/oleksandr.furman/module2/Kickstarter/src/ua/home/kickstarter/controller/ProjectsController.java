@@ -13,24 +13,24 @@ public class ProjectsController {
 	public ProjectsController(ProjectStorage projectStorage) {
 		this.projectStorage = projectStorage;
 	}
- 
-	public Map<Category, List<Project>> passContentToView() {
+
+	public Map<Category, List<Project>> getContentToView() {
 		return projectStorage.getContent();
 	}
 
-	public String passSpecificContentToView(Category category) {
+	public String getSpecificContentToView(Category category) {
 		return projectStorage.getSpecificContent(category);
 	}
 
-	public String passSpecificProjectToView(int index, Category category) {
+	public String getSpecificProjectToView(int index, Category category) {
 		return projectStorage.getSpecificProjects(index, category);
 	}
 
-	public Project passSpecificProject(int index, Category category) {
+	public Project getSpecificProject(int index, Category category) {
 		return projectStorage.getSpecificProject(index, category);
 	}
 
-	public int passSpecificCategorySize(Category category) {
+	public int getSpecificCategorySize(Category category) {
 		return projectStorage.projectsInSpecificCategorySize(category);
 	}
 

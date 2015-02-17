@@ -23,8 +23,6 @@ public class ConsoleInput {
 
 	public String nextString() {
 
-		String string = scanner.next();
-
-		return string;
+		return scanner.next();
 	}
 }

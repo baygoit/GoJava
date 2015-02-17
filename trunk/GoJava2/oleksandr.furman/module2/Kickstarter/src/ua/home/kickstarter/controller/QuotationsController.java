@@ -10,7 +10,7 @@ public class QuotationsController {
 		quotationsStorage = new QuotationsStorage();
 	}
 
-	public Quote passRandomQuoteToView() {
+	public Quote getRandomQuoteToView() {
 		return quotationsStorage.getRandomQuote();
 	}
 

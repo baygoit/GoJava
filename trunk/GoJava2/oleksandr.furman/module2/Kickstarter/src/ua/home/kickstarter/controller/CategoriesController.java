@@ -1,7 +1,6 @@
 package ua.home.kickstarter.controller;
 
 import ua.home.kickstarter.content.Category;
-import ua.home.kickstarter.factory.StorageFactory;
 import ua.home.kickstarter.model.CategoryStorage;
 
 public class CategoriesController {
@@ -9,18 +8,18 @@ public class CategoriesController {
 	private CategoryStorage categoryStorage;
 
 	public CategoriesController() {
-		categoryStorage = new StorageFactory().getCategoryStorage();
+		categoryStorage = new CategoryStorage();
 	} 
 
-	public String passContentToView() {
+	public String getContentToView() {
 		return categoryStorage.getContent();
 	}
 
-	public Category passSpecificContentToView(Integer i) {
+	public Category getSpecificContentToView(Integer i) {
 		return categoryStorage.getSpecificContent(i);
 	}
 	
-	public int passCategoriesSizeToView() {
+	public int getCategoriesSizeToView() {
 		return categoryStorage.size();
 	}
 }

@@ -7,7 +7,6 @@ import java.util.Map;
 
 import ua.home.kickstarter.content.Category;
 import ua.home.kickstarter.content.Project;
-import ua.home.kickstarter.factory.StorageFactory;
 import utils.KickstarterJsonReader;
 import utils.KickstarterJsonWriter;
 
@@ -15,7 +14,6 @@ public class ProjectStorage {
 
 	private List<Project> projectList;
 	private Map<Category, List<Project>> sortedByCategoryProjects;
-	private CategoryStorage categoryStorage = new StorageFactory().getCategoryStorage();
 
 	public ProjectStorage() {
 		init();
@@ -23,7 +21,6 @@ public class ProjectStorage {
 
 	private void init() {
 		jsonProjectsToList();
-		setProjectsCategories();
 		sortedByCategoryProjects = putProjectsToMap(projectList);
 		setProjectsHistory();
 		setProjectsQuestionAnswers();
@@ -38,15 +35,6 @@ public class ProjectStorage {
 	public void saveJsonToHardDrive() {
 		KickstarterJsonWriter kickstarterJsonWriter = new KickstarterJsonWriter();
 		kickstarterJsonWriter.saveJsonToHardDrive(projectList, "Projects.json");
-	}
-
-	public void setProjectsCategories() {
-		projectList.get(0).setCategory(categoryStorage.getSpecificContent(1));
-		projectList.get(1).setCategory(categoryStorage.getSpecificContent(1));
-		projectList.get(2).setCategory(categoryStorage.getSpecificContent(1));
-		projectList.get(3).setCategory(categoryStorage.getSpecificContent(2));
-		projectList.get(4).setCategory(categoryStorage.getSpecificContent(2));
-		projectList.get(5).setCategory(categoryStorage.getSpecificContent(2));
 	}
 
 	public Map<Category, List<Project>> putProjectsToMap(List<Project> projectList) {
@@ -86,11 +74,11 @@ public class ProjectStorage {
 		}
 		return projectsContent.toString();
 	}
- 
+
 	public String getSpecificProjects(int index, Category category) {
 		return sortedByCategoryProjects.get(category).get(index - 1).getFullInfo();
 	}
- 
+
 	public Project getSpecificProject(int index, Category category) {
 		return sortedByCategoryProjects.get(category).get(index - 1);
 	}

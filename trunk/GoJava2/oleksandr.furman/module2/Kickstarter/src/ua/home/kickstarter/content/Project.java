@@ -1,7 +1,5 @@
 package ua.home.kickstarter.content;
 
-import java.util.List;
-
 public class Project {
 	private final char dollarSymbol = 36;
 	private String name;
@@ -13,9 +11,8 @@ public class Project {
 	private String linksToVideo;
 	private String questionAnswers;
 	private Category category;
-	private List<Payment> payment;
 
-	public Project(String name, String description, int goal, int daysLeft, String linksToVideo) {
+	public Project(String name, String description, int goal, int daysLeft, String linksToVideo, Category category) {
 		this.name = name;
 		this.description = description;
 		this.goal = goal;
@@ -24,8 +21,9 @@ public class Project {
 		this.linksToVideo = linksToVideo;
 		this.pledged = 0;
 		this.questionAnswers = null;
+		this.category = category;
 	}
-
+ 
 	public void setCategory(Category category) {
 		this.category = category;
 	}
@@ -44,14 +42,6 @@ public class Project {
 
 	public String getName() {
 		return name;
-	}
-
-	public List<Payment> getPayment() {
-		return payment;
-	}
-
-	public void setPayment(List<Payment> paymentsList) {
-		this.payment = paymentsList;
 	}
 
 	public void addPayment(int i) {
@@ -74,5 +64,4 @@ public class Project {
 				.append(questionAnswers);
 		return fullInfo.toString();
 	}
-
 }
