@@ -20,9 +20,9 @@ public class JsonReaderAndWriterTest {
 	@Before
 	public void setUp() {
 		pr1 = new ArrayList<Project>();
-		pr1.add(new Project("FakeName1", "Fakedescription1", 34534, 34, "linksToVideo1"));
-		pr1.add(new Project("FakeName2", "Fakedescription1", 23123, 345, "linksToVideo1"));
-		pr1.add(new Project("FakeName3", "Fakedescription1", 34534, 67, "linksToVideo1"));
+		pr1.add(new Project("FakeName1", "Fakedescription1", 34534, 34, "linksToVideo1", null));
+		pr1.add(new Project("FakeName2", "Fakedescription1", 23123, 345, "linksToVideo1", null));
+		pr1.add(new Project("FakeName3", "Fakedescription1", 34534, 67, "linksToVideo1", null));
 
 		kickstarterJsonWriter = new KickstarterJsonWriter();
 

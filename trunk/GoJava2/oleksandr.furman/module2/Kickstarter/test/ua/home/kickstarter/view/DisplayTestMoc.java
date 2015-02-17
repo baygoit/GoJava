@@ -44,7 +44,7 @@ public class DisplayTestMoc {
 		Quote quote = new Quote("someQuote");
 
 		// when
-		when(quotationsController.passRandomQuoteToView()).thenReturn(quote);
+		when(quotationsController.getRandomQuoteToView()).thenReturn(quote);
 
 		display.displayQuote();
 		verify(consoleOutput).output("someQuote");
@@ -53,17 +53,20 @@ public class DisplayTestMoc {
 	@Before
 	public void setUp() {
 		categories = new HashMap<Integer, Category>();
-		categories.put(1, new Category("FakeGames"));
-		categories.put(2, new Category("FakeTechnology"));
-		categories.put(3, new Category("FakeDesign"));
+		Category category1 = new Category("FakeGames");
+		categories.put(1, category1);
+		Category category2 = new Category("FakeTechnology");
+		categories.put(2, category2);
+		Category category3 = new Category("FakeDesign");
+		categories.put(3, category3);
 		List<Project> pr1 = new ArrayList<Project>();
-		pr1.add(new Project("FakeName1", "Fakedescription1", 34534, 34, "linksToVideo1"));
-		pr1.add(new Project("FakeName2", "Fakedescription1", 23123, 345, "linksToVideo1"));
-		pr1.add(new Project("FakeName3", "Fakedescription1", 34534, 67, "linksToVideo1"));
+		pr1.add(new Project("FakeName1", "Fakedescription1", 34534, 34, "linksToVideo1", null));
+		pr1.add(new Project("FakeName2", "Fakedescription1", 23123, 345, "linksToVideo1", null));
+		pr1.add(new Project("FakeName3", "Fakedescription1", 34534, 67, "linksToVideo1", null));
 		List<Project> pr2 = new ArrayList<Project>();
-		pr2.add(new Project("FakeName4", "Fakedescription1", 6765, 78, "linksToVideo1"));
-		pr2.add(new Project("FakeName5", "Fakedescription1", 345, 345, "linksToVideo1"));
-		pr2.add(new Project("FakeName6", "Fakedescription1", 7645, 676, "linksToVideo1"));
+		pr2.add(new Project("FakeName4", "Fakedescription1", 6765, 78, "linksToVideo1", null));
+		pr2.add(new Project("FakeName5", "Fakedescription1", 345, 345, "linksToVideo1", null));
+		pr2.add(new Project("FakeName6", "Fakedescription1", 7645, 676, "linksToVideo1", null));
 
 		projects = new HashMap<Category, List<Project>>();
 		projects.put(categories.get(1), pr1);
@@ -78,8 +81,8 @@ public class DisplayTestMoc {
 			categoriesContent.append(pair.getKey()).append(" - ").append(pair.getValue().getName()).append("\n");
 		}
  
-		when(categoriesController.passContentToView()).thenReturn(categoriesContent.toString());
-		when(categoriesController.passCategoriesSizeToView()).thenReturn(categories.size());
+		when(categoriesController.getContentToView()).thenReturn(categoriesContent.toString());
+		when(categoriesController.getCategoriesSizeToView()).thenReturn(categories.size());
 		display.displayCategories();
 		verify(consoleOutput)
 				.output("Выберите категорию :\n1 - FakeGames\n2 - FakeTechnology\n3 - FakeDesign\n[Выберите категорию от 1 до 3 или нажмите 0 для выхода из программы]\n ");
@@ -95,7 +98,7 @@ public class DisplayTestMoc {
 			projectNumber++;
 		}
 
-		when(projectsController.passSpecificContentToView(categories.get(1))).thenReturn(projectsContent.toString());
+		when(projectsController.getSpecificContentToView(categories.get(1))).thenReturn(projectsContent.toString());
 
 		//when(projectsController.passSpecificContentToView(categories.get(1))).thenReturn(projectsContent.toString());
 		when(projectStorage.getSpecificProjects(1, categories.get(1))).thenReturn(projectsContent.toString());
@@ -124,7 +127,7 @@ public class DisplayTestMoc {
 			projectNumber++;
 		} 
 
-		when(projectsController.passSpecificProjectToView(2, categories.get(1))).thenReturn(
+		when(projectsController.getSpecificProjectToView(2, categories.get(1))).thenReturn(
 				projects.get(categories.get(1)).get(1).getFullInfo());
 
 		display.displaySpecificProject(2, categories.get(1));
