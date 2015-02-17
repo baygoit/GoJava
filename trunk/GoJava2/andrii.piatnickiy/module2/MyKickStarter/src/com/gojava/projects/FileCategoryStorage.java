@@ -1,6 +1,5 @@
 package com.gojava.projects;
 
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -17,11 +16,14 @@ public class FileCategoryStorage implements CategoryStorage {
     public ArrayList<Category> categoriesList = new ArrayList<Category>();
 
     public FileCategoryStorage(String fileName) {
-        file = createFileIfNeed(fileName);
-        if(file.length() != 0){
+        file = new File(fileName);
+        if (file.length() != 0) {
+            System.out.println(file.length());
             file.delete();
-            createFileIfNeed(fileName);
+
         }
+        file = createFileIfNeed(fileName);
+
         getCategoriesFromFileToList();
     }
 
@@ -53,7 +55,6 @@ public class FileCategoryStorage implements CategoryStorage {
             sb.append(category.toString()).append("\n");
         }
         return sb.toString();
-
     }
 
     @Override
@@ -68,10 +69,12 @@ public class FileCategoryStorage implements CategoryStorage {
             try {
                 String read;
                 read = in.readLine();
+                // TODO Null!!! Why??
                 while (read != null) {
                     category = parseLineToCategory(read);
                     categoriesList.add(category);
                     read = in.readLine();
+
                 }
 
             } catch (IOException e) {
@@ -109,8 +112,7 @@ public class FileCategoryStorage implements CategoryStorage {
         }
     }
 
-    private File createFileIfNeed(String filename) {
-        File file = new File(filename);
+    private File createFileIfNeed(String fileName) {
         if (!file.exists()) {
             try {
                 file.createNewFile();
@@ -126,11 +128,9 @@ public class FileCategoryStorage implements CategoryStorage {
         try {
             in = new BufferedReader(new FileReader(file));
         } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
             try {
                 file.createNewFile();
             } catch (IOException e1) {
-                // TODO Auto-generated catch block
                 throw new RuntimeException("Не смогли создать файл!", e);
             }
         }

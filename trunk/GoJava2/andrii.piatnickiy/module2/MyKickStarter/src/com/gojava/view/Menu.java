@@ -87,7 +87,6 @@ public class Menu {
 
     public void initMenu() {
         setCurrentLevelPosition(1);
-        ;
         out.print(level1.displayMySelf(currentLevelPosition));
     }
 

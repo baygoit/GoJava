@@ -1,10 +1,10 @@
 package com.gojava.launch;
 
-import java.io.File;
 
 import com.gojava.inputOutput.ConsoleIO;
 import com.gojava.projects.CategoryStorage;
 import com.gojava.projects.FileCategoryStorage;
+import com.gojava.projects.InFileProjectStorage;
 import com.gojava.projects.InMemoryCategoryStorage;
 import com.gojava.projects.InMemoryProjectStorage;
 import com.gojava.projects.ProjectStorage;
@@ -16,13 +16,18 @@ public class Launch {
     public static void main(String[] args) throws Exception {
         ConsoleIO consoleIO = new  ConsoleIO();
 
+
         CategoryStorage categoryStorage = new FileCategoryStorage("categories.txt");
+//        CategoryStorage categoryStorage = new InMemoryCategoryStorage();
         
-        ProjectStorage projectStorage = new InMemoryProjectStorage();
+        ProjectStorage projectStorage = new InFileProjectStorage("projects.txt");
+//        ProjectStorage projectStorage = new InMemoryProjectStorage();
 
         
         initCategories(categoryStorage);
+        ((FileCategoryStorage) categoryStorage).getCategoriesFromFileToList();
         initProjects(projectStorage);
+        ((InFileProjectStorage) projectStorage).getProjectsFromFileToList();
         Quote quote = new Quote(consoleIO);
         quote.consoleIO.print(quote.getQuote());
 

@@ -10,19 +10,19 @@ public class TestInFileProjectStorage extends TestProjectStorage {
     ArrayList<Project> resultList;
     InFileProjectStorage inFileProjectStorage;
 
-     @Before
-     public void setListCategories(){
-     resultList = inFileProjectStorage.getProjectsFromFileToList();
-     }
+    @Before
+    public void setListCategories() {
+        resultList = inFileProjectStorage.getProjectsFromFileToList();
+    }
+
     @Override
     ProjectStorage getProjectStorage() {
         inFileProjectStorage = new InFileProjectStorage("testProjects.txt");
-         return inFileProjectStorage;
-//        return new InFileProjectStorage("testProjects.txt");
+        return inFileProjectStorage;
     }
 
-     @After
-     public void cleanUp(){
-     inFileProjectStorage.file.delete();
-     }
+    @After
+    public void cleanUp() {
+        inFileProjectStorage.file.delete();
+    }
 }
