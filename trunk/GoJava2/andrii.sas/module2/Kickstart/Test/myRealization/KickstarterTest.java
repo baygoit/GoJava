@@ -148,12 +148,13 @@ public class KickstarterTest {
 		
 		//when
 		when(quote.generateQuote()).thenReturn("quote");
-		when(in.readChoice()).thenReturn("1", "1", "1", "Gais", "123445", "100", "0", "0", "0");
+		when(in.readChoice()).thenReturn("1", "1", "1", "4", "Gais", "123445", "100", "0", "0", "0");
 		kickstart.buildMenu();
 		
 		//then
-		List<String> values = assertOut(out, 28);
+		List<String> values = assertOut(out, 32);
 		assertOut(values, "1 - invest to project, 2 - ask question (Return - 0)");
+		assertOut(values, "1 - 1$ (We will give you a pen as a gift!)");
 		assertOut(values, "Please enter your name:");
 		assertOut(values, "Please enter number of your credit card:");
 		assertOut(values, "Please enter the sum, which you want to invest:");
@@ -171,7 +172,7 @@ public class KickstarterTest {
 		
 		//when
 		when(quote.generateQuote()).thenReturn("quote");
-		when(in.readChoice()).thenReturn("1", "1", "1", "Gais", "123445", "100", "0", "0", "0");
+		when(in.readChoice()).thenReturn("1", "1", "1", "4", "Gais", "123445", "100", "0", "0", "0");
 		kickstart.buildMenu();
 		
 		//then

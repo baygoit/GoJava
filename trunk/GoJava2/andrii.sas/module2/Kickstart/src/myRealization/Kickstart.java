@@ -1,5 +1,10 @@
 package myRealization;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+
 public class Kickstart {
 	private Output output;
 	private Input input;
@@ -132,17 +137,31 @@ public class Kickstart {
 			
 			@Override
 			public void displaySelectedItems() {
-				//TODO
 				if (getCheckedValue() == 0){
 					println("Thanks for choosing our project");
-					println("Please enter your name:");
-					String name = input.readChoice();
-					println("Please enter number of your credit card:");
-					String card = input.readChoice();
-					println("Please enter the sum, which you want to invest:");
-					int money = checkForEnteringLetters();
-					println("Thank you " + name + " for investing " + money + "$ in our project!");
-					project.increaseMoneyHas(money);
+					int menuItem = 1;
+					List<Integer> keys = new ArrayList<>();
+					for (Entry<Integer, String> entry : project.getPayments().entrySet()){
+						keys.add(entry.getKey());
+						println(menuItem + " - " + entry.getKey() + "$, Your bonus is - " + entry.getValue());
+						menuItem++;
+					}
+					println(menuItem + " - your sum to invest");
+					int payment = checkForEnteringLetters();
+					String card;
+						
+					if (payment == menuItem){
+						println("Please enter your name:");
+						String name = input.readChoice();
+						println("Please enter number of your credit card:");
+						card = input.readChoice();
+						println("Please enter the sum, which you want to invest:");
+						int money = checkForEnteringLetters();
+						println("Thank you " + name + " for investing " + money + "$ in our project!");
+						project.increaseMoneyHas(money);
+					} else if (payment > 0 && payment <= keys.size()) {
+						project.increaseMoneyHas(keys.get(payment - 1));
+					}
 				} else if (getCheckedValue() == 1){
 					println("Ask your question, please:");
 					String question = input.readChoice();
@@ -155,7 +174,6 @@ public class Kickstart {
 			@Override
 			public void toNextLevel() {
 				//TODO
-				
 			}
 		};
 		menu.run(2); //TODO delete magic number

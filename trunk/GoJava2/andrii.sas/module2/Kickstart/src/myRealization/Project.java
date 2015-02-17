@@ -1,5 +1,8 @@
 package myRealization;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Project {
 	private String nameOfProject;
 	private String description;
@@ -10,6 +13,13 @@ public class Project {
 	private String history;
 	private String videoLink;
 	private String questions;
+	private int FIRST_SUM = 1;
+	private int SECOND_SUM = 10;
+	private int THIRD_SUM = 40;
+	private Map<Integer, String> payments = new HashMap<>();
+	private String bonus1$;
+	private String bonus10$;
+	private String bonus40$; 
 	
 	public Project(Category category){
 		this.category = category;
@@ -70,4 +80,28 @@ public class Project {
 	public void addClientQuestion(String question){
 		questions += "\nQ: " + question;
 	}
+	
+	public void setBonuses(String bonus1$, String bonus10$, String bonus40$){
+		this.bonus1$ = bonus1$;
+		this.bonus10$ = bonus10$;
+		this.bonus40$ = bonus40$;
+	}
+	
+	public void putPayments(){
+		payments.put(FIRST_SUM, informForNoBonuses(bonus1$));
+		payments.put(SECOND_SUM, informForNoBonuses(bonus10$));
+		payments.put(THIRD_SUM, informForNoBonuses(bonus40$));
+	}
+
+	public String informForNoBonuses(String bonus) {
+		return bonus != null ? bonus : "nothing=(";
+	}
+	
+	public Map<Integer, String> getPayments(){
+		putPayments();
+		return payments;
+	}
+	
+	
+	
 }
