@@ -66,6 +66,7 @@ public class Kickstarter {
 		}
 	}
 
+	@SuppressWarnings("unused")
 	public void menuLevel3(int i) {
 		int input = consoleInput.nextIntIndex();
 		if (input == 0) {
