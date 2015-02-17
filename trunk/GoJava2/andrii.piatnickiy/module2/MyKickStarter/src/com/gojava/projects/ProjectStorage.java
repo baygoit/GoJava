@@ -1,5 +1,7 @@
 package com.gojava.projects;
 
+import java.util.ArrayList;
+
 public interface ProjectStorage {
 
     abstract void add(String name, String description, int needSum,
@@ -19,5 +21,7 @@ public interface ProjectStorage {
 
     Project getSpecificProject(int categoryNumber,
             int projectNumber);
+
+    abstract ArrayList<Project> getList();
 
 }

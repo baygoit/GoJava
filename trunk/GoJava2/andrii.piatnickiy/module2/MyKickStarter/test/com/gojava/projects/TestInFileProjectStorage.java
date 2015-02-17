@@ -21,8 +21,8 @@ public class TestInFileProjectStorage extends TestProjectStorage {
 //        return new InFileProjectStorage("testProjects.txt");
     }
 
-//     @After
-//     public void cleanUp(){
-//     inFileProjectStorage.file.delete();
-//     }
+     @After
+     public void cleanUp(){
+     inFileProjectStorage.file.delete();
+     }
 }

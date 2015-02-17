@@ -96,4 +96,10 @@ public class InMemoryProjectStorage implements ProjectStorage {
         }
         return null;
     }
+
+
+    @Override
+    public ArrayList<Project> getList() {
+        return projectStorageList;
+    }
 }
