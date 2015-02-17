@@ -9,7 +9,7 @@ public class HeavyLoadTest {
 
     @Test
     public void shouldWork_whenHeavyLoad() {
-        Categories categories = new Categories();
+        Categories categories = new InMemoryCategories();
         Projects projects = new Projects();
 //        for (int i = 0; i < 1000000; i++) {
 //            Category category = new Category("category" + i);

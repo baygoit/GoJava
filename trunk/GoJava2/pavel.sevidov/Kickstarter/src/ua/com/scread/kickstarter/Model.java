@@ -7,7 +7,7 @@ public class Model {
 	private Projects projects;
 	
 	public Model() {
-		categories = new Categories();
+		categories = new InMemoryCategories();
 		projects = new Projects();
 	}
 	

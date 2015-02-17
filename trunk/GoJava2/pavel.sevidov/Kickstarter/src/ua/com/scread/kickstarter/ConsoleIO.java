@@ -15,9 +15,6 @@ public class ConsoleIO implements IO {
 		return scanner.nextInt();
 	}
 	
-	protected void finalize() throws Throwable {
-		scanner.close();
-	}
 	
 	@Override
 	public void print(String message) {
@@ -32,5 +29,9 @@ public class ConsoleIO implements IO {
 	@Override
 	public long readLong() {
 	    return scanner.nextLong();
+	}
+	
+	protected void finalize() {
+	    scanner.close();
 	}
 }

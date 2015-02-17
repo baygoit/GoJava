@@ -24,7 +24,7 @@ public class KickstarterTest {
 	
 	@Test
     public void shouldBeCategories_whenStartApplication() {
-	    Categories categories = new Categories();
+	    Categories categories = new InMemoryCategories();
 	    Category category1 = new Category("category1");
         Category category2 = new Category("category2");
         categories.add(category1);
@@ -48,7 +48,7 @@ public class KickstarterTest {
 	
 	@Test
     public void shouldBeProjects_whenChoosedCategory() {
-        Categories categories = new Categories();
+        Categories categories = new InMemoryCategories();
         Category category1 = new Category("category1");
         Category category2 = new Category("category2");
         categories.add(category1);
@@ -89,7 +89,7 @@ public class KickstarterTest {
 	
 	@Test
     public void shouldProjectDetails_whenChoosedProject() {
-        Categories categories = new Categories();
+        Categories categories = new InMemoryCategories();
         Category category1 = new Category("category1");
         categories.add(category1);
         

@@ -8,12 +8,15 @@ import java.util.List;
 
 import org.junit.Test;
 
-import ua.com.scread.kickstarter.Categories;
+import ua.com.scread.kickstarter.InMemoryCategories;
 import ua.com.scread.kickstarter.Category;
 
-public class CategotriesTest {
-	Categories categories = new Categories();
+public abstract class CategotriesTest {
+    
+	Categories categories = getCategories();
 	Category category = new Category("Vasya");
+
+    abstract Categories getCategories();
 	
 	@Test
 	public void shouldBeAddedCategoty_whenAddCategory() {
@@ -26,12 +29,21 @@ public class CategotriesTest {
 		categories.add(category);
 		List<Category> categoriesActual = new ArrayList<Category>();
 		categoriesActual.add(category);
-		assertEquals(categories.getCategories(), categoriesActual);
+		assertEquals(categoriesActual, categories.getCategories());
 	}
 	
 	@Test
 	public void sholudReturnEmpty_whenEmptyCategories() {
 		assertEquals(new ArrayList<Category>(), categories.getCategories());
+	}
+	
+	@Test
+	public void shouldReturnSize_whenGetSize() {
+	    assertEquals(0, categories.size());
+	    
+	    categories.add(category);
+	    
+	    assertEquals(1, categories.size());
 	}
 	
 	@Test
