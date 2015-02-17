@@ -2,7 +2,9 @@ package ua.home.kickstarter.model;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.junit.Test;
@@ -30,16 +32,16 @@ public class CategoryStorageTest {
     public void shouldBeCategory_whenGetCategory() {
         Category category = new Category("FakeCategory");
         categoryStorage.add(category);
-        assertEquals(categoryStorage.getSpecificContent(4), category);
+        assertEquals(categoryStorage.getSpecificContent(3), category);
     }
     
     @Test
     public void shouldReturnAddedCategories_whenGetCategories() {
-        Map<Integer, Category> categories = new HashMap<Integer, Category>();
-        categories.put(1, new Category("Games"));
-        categories.put(2, new Category("Technology"));
-        categories.put(3, new Category("Design"));
-        Map<Integer, Category> categories2 = categoryStorage.getCategories();
+        List<Category> categories = new ArrayList<Category>();
+        categories.add(new Category("Games"));
+        categories.add(new Category("Technology"));
+        categories.add(new Category("Design"));
+        List<Category> categories2 = categoryStorage.getCategories();
         for(int key = 1; key < categories.size(); key++) {    
             assertEquals(categories2.get(key).getName(), 
                     categories.get(key).getName());
