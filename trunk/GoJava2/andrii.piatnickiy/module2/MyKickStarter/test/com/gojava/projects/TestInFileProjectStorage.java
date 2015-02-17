@@ -1,10 +1,28 @@
 package com.gojava.projects;
 
-public class TestInFileProjectStorage extends TestProjectStorage{
+import java.util.ArrayList;
 
+import org.junit.After;
+import org.junit.Before;
+
+public class TestInFileProjectStorage extends TestProjectStorage {
+
+    ArrayList<Project> resultList;
+    InFileProjectStorage inFileProjectStorage;
+
+     @Before
+     public void setListCategories(){
+     resultList = inFileProjectStorage.getProjectsFromFileToList();
+     }
     @Override
     ProjectStorage getProjectStorage() {
-        return new InFileProjectStorage("testProgects.txt");
+        inFileProjectStorage = new InFileProjectStorage("testProjects.txt");
+         return inFileProjectStorage;
+//        return new InFileProjectStorage("testProjects.txt");
     }
 
+//     @After
+//     public void cleanUp(){
+//     inFileProjectStorage.file.delete();
+//     }
 }

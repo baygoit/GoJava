@@ -35,13 +35,13 @@ public abstract class TestProjectStorage {
 //        String actual = projectStorage.getAllToString(1);
 //        assertEquals("1) Project Name: name\nDescription: desc\nNeed Sum: 1\nCurrent Sum: 1\nDays Left: 1\n\n", actual);
 //    }  
-//    @Test
-//    public void shouldAdditionalFields_WhenGetAdditionalProjectFields() {
-//        projectStorage.add("name", "desc", 1, 1, 1, "categoryId",
-//                "linkOnvideo", "questionsAndAnswers", 1);
-//        String actual = projectStorage.getAdditionalProjectFields(projectStorage.getProject(0));
-//        assertEquals("ProjectHistory: categoryId\nLinkOnvideo: linkOnvideo\nQuestions and answers: questionsAndAnswers\n", actual);
-//    }  
+    @Test
+    public void shouldAdditionalFields_WhenGetAdditionalProjectFields() {
+        projectStorage.add("name", "desc", 1, 1, 1, "projectHistory",
+                "linkOnvideo", "questionsAndAnswers", 1);
+        String actual = projectStorage.getAdditionalProjectFields(projectStorage.getProject(0));
+        assertEquals("ProjectHistory: projectHistory\nLinkOnvideo: linkOnvideo\nQuestions and answers: questionsAndAnswers\n", actual);
+    }  
 //    @Test
 //    public void shouldGetSpecificProject_WhenGetSpecificProjectToString() {
 //        projectStorage.add("name", "desc", 1, 1, 1, "categoryId",
