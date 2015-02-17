@@ -31,6 +31,11 @@ public class test {
 		Assert("cba, zyx?!", "abc, xyz?!");
 	}
 	
+	@Test
+	public void shouldChangeToUpperFirstLetter_whenStringIsSent() {
+		Assert("Cba, zyx?!", "Abc, xyz?!");
+	}
+	
 	public void Assert(String expected, String toSend){
 		Anagram anagram = new Anagram();
 		assertEquals(expected, anagram.run(toSend));
