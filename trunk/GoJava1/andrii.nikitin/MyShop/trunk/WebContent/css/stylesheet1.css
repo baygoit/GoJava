@@ -3,11 +3,11 @@ margin: 0px;
 background: #98FB98
 }
 
-.type_list_container {
+.type-list-container {
 float:left;
 margin: 10px;
 padding: 10px;
-border: RGB(25, 125, 25) 2px ridge;
+border: RGB(25, 125, 25) 32px ridge;
 background: #3CB371
 }
 

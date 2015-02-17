@@ -9,8 +9,8 @@ public interface GoodCatalog {
 	
 	public List<GoodType> getGoodTypes(GoodType parent);
 	
-	public List<Good> getGoodsInType (Good good);
-	
 	public List<GoodType> getGoodTypesFromRoot();
+
+	public List<Good> getGoodsInType(GoodType type);
 	
 }	

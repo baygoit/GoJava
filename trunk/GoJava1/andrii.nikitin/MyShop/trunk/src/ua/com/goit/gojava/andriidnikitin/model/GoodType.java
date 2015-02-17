@@ -28,4 +28,5 @@ public class GoodType {
 	public void setParent(GoodType parent) {
 		this.parent = parent;
 	}
+	
 }

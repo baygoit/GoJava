@@ -10,12 +10,13 @@ import ua.com.goit.gojava.andriidnikitin.model.GoodType;
 import ua.com.goit.gojava.andriidnikitin.service.GoodCatalogImpl;
 
 
-public class WebAccessTest {
+public class ListPrinterTest {
 	
 	
 	@Test
 	public void getGoodTypesFromRootTest() {
-		Object o = new GoodCatalogImpl().getGoodTypesFromRoot();
+		Object o = GoodCatalogImpl.getInstance().getGoodTypesFromRoot();
+		@SuppressWarnings("unchecked")
 		List<GoodType> list = (List<GoodType>) o;
 		try{
 			for (GoodType type: list) {

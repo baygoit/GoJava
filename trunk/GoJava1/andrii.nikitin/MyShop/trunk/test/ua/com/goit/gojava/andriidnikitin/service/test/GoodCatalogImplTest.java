@@ -14,7 +14,7 @@ public class GoodCatalogImplTest {
 	
 	@Test
 	public void getGoodTypesFromRootTest() {
-		GoodCatalogImpl catalog = new GoodCatalogImpl();
+		GoodCatalogImpl catalog = GoodCatalogImpl.getInstance();
 		List<GoodType> list = catalog.getGoodTypesFromRoot();
 		assertNotNull(list);
 		

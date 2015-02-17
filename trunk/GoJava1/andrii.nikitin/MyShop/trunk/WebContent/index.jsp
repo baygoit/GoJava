@@ -18,35 +18,21 @@
 	
 	<body>
 	
-	<div class="jcode">
-	<!--%if (request == null) out.print("requested is null"); %-->
-	<!--%!Enumeration<String> collection; %-->
-	<!--% collection = request.getAttributeNames(); %-->
-	<!--%out.print(collection.nextElement()); %-->
-	<!--%if (listTypes == null) out.print("list is null"); %-->
-	<!--%if (listTypes!= null) out.print(listTypes.get(0)); %-->
-	<%List<GoodType> list = new GoodCatalogImpl().getGoodTypesFromRoot(); %>
-	
-	<div class = "type_list_container">
-		<ul>
-			<%for (GoodType type: list) { %>
-			<li>			
-				     <span>
-				     	<% String name = type.getName(); %>
-				  	 	<% out.print(name); %>
-				  	 </span> 
-			  	 
-			</li>			
-			<%}%>
-		</ul>
-		</div>	
-		
-	</div>	
-	
+	<!-- 
 	<div class="frame1">
 		<iframe name="frame1"></iframe>
-		<a href="form.jsp" target="frame1" >Open some content</a>
+		<a href="form.jsp" target="frame1">Open some content</a>
 	</div>
+	 -->
+	
+	<div class="type-list-container">
+		<iframe name=category-frame height="100" width="400"> </iframe>
+	</div>	
+	
+	
+	<form name="form1" action="print-categories" method="get" target="category-frame">
+			<input type="submit" value="showUnits">
+		</form>
 		
 	</body>
 </html>

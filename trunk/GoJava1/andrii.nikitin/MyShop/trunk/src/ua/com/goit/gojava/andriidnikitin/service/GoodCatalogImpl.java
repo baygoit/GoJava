@@ -15,20 +15,38 @@ public class GoodCatalogImpl implements GoodCatalog{
 	
 	private GoodTypeDAO types;
 	
-	public GoodCatalogImpl() {
-		goods = new GoodDAO();
-		types = new GoodTypeDAO();
+	private static final GoodCatalogImpl instance;
+	
+	public static GoodCatalogImpl getInstance() {
+		return instance;
 	}
 	
+	static {
+		instance = new GoodCatalogImpl();
+	}
+	
+	private GoodCatalogImpl() {
+		goods = new GoodDAO();
+		types = new GoodTypeDAO();
+	}	
 
 	@Override
 	public List<GoodType> getGoodTypes(GoodType parent) {
 
 		List<GoodType> list = types.getAll();
 		List<GoodType> result = new ArrayList<GoodType>();
-		for (GoodType type: list){
-			if (type.getParent().getId().equals(parent.getId())) {
-				result.add(type);
+		if (parent == null) {
+			for (GoodType type: list){
+				if (type.getParent() == null) {
+						result.add(type);
+				}
+			}	
+		}	
+		else {	
+			for (GoodType type: list){
+				if (type.getParent().getId().equals(parent.getId())) {
+					result.add(type);
+				}
 			}
 		}
 		return result;
@@ -36,10 +54,10 @@ public class GoodCatalogImpl implements GoodCatalog{
 	}
 
 	@Override
-	public List<Good> getGoodsInType(Good good) {
+	public List<Good> getGoodsInType(GoodType type) {
 		List<Good> result = new ArrayList<Good>();
 		for (Good good1: goods.getAll()) {
-			if (good.getType().getId().equals(good1.getType().getId())) {
+			if (type.getId().equals(good1.getType().getId())) {
 				result.add(good1);
 				}
 		}
@@ -74,7 +92,6 @@ public class GoodCatalogImpl implements GoodCatalog{
 		type.setId(new Integer(CSVStrings.get(2)));
 		type.setName(CSVStrings.get(3));
 		good.setType(type);
-		//good.setPrice(new BigDecimal(CSVStrings.get(4)));
 		return good;
 	}
 	
@@ -87,5 +104,5 @@ public class GoodCatalogImpl implements GoodCatalog{
 		result[4] = good.getPrice().toPlainString();
 		return result;
 	}*/
-
+	
 }
