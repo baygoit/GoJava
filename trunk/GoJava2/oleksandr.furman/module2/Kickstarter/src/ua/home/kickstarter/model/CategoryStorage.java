@@ -1,18 +1,16 @@
 package ua.home.kickstarter.model;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 import ua.home.kickstarter.content.Category;
 
 public class CategoryStorage {
 
-	private Map<Integer, Category> categories;
-	private int keyCounter;
+	private List<Category> categories;
 
 	public CategoryStorage() {
-		categories = new HashMap<Integer, Category>();
-		keyCounter = 1;
+		categories = new ArrayList<Category>();
 		init();
 	}
 
@@ -22,7 +20,7 @@ public class CategoryStorage {
 		add(new Category("Design"));
 	}
  
-	public Map<Integer, Category> getCategories() {
+	public List<Category> getCategories() {
 		return categories;
 	}
 
@@ -31,15 +29,14 @@ public class CategoryStorage {
 	}
 
 	public void add(Category category) {
-		categories.put(keyCounter, category);
-		keyCounter++;
+		categories.add(category);
 	}
-
+	
 	public String getContent() {
 		StringBuilder categoriesContent = new StringBuilder();
-		for (Map.Entry<Integer, Category> pair : categories.entrySet()) {
-			categoriesContent.append(pair.getKey()).append(" - ")
-					.append(pair.getValue().getName()).append("\n");
+		for (int i = 0; i < categories.size(); i++) {
+			categoriesContent.append(i+1).append(" - ")
+					.append(categories.get(i).getName()).append("\n");
 		}
 		return categoriesContent.toString();
 	}
