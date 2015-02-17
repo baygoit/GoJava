@@ -42,11 +42,15 @@ public class View {
 
     public void showProject(Project project) {
         out.output(project.toStringFull());
+        showProjectMenu();
         showChoice();
     }
 
     public void showProjectMenu() {
-        out.output("Select option: (not implemented, just '0' to exit)");
+        out.output("Select option: \n"
+                + "(1) - to invest\n"
+                + "(2) - to add question\n"
+                + "(0) to exit)");
     }
 
     public void showChoice(){

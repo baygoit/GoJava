@@ -17,7 +17,7 @@ public class Controller {
         this.view = view;
         this.input = input;
     }
- 
+
     public void start() {
         model.init();
         view.showGreeting();
@@ -37,7 +37,7 @@ public class Controller {
     }
 
     private boolean checkNumberOfCategory(List<Category> categoriesList, int numberOfCategory) {
-        return checkProjectOption(numberOfCategory) || (numberOfCategory > categoriesList.size());
+        return checkProjectOption(numberOfCategory) == 0 || (numberOfCategory > categoriesList.size());
     }
 
     private void processingProjectsList(List<Category> categoriesList, int numberOfCategory) {
@@ -52,7 +52,7 @@ public class Controller {
 
     private boolean checkNumberOfProject(List<Category> categoriesList, int numberOfCategory,
             int numberOfProject) {
-        return checkProjectOption(numberOfProject)
+        return checkProjectOption(numberOfProject) == 0
                 || (numberOfProject > categoriesList.get(numberOfCategory - 1).getProjectsList()
                         .size());
     }
@@ -63,16 +63,35 @@ public class Controller {
             view.showProject(categoriesList.get(numberOfCategory - 1).getProjectsList()
                     .get(numberOfProject - 1));
             int projectOption = input.getAnswer();
-            if (checkProjectOption(projectOption)) {
+            if (checkProjectOption(projectOption) == 0) {
                 break;
             }
-            view.show("Selected option: ");
+            processingProjectOptions(categoriesList, numberOfCategory, numberOfProject,
+                    projectOption);
         }
     }
 
-    private boolean checkProjectOption(int projectOption) {
-        
-        
-        return projectOption == 0;
+    private int checkProjectOption(int projectOption) {
+        if (projectOption > 2 || projectOption < 1)
+            return 0;
+        else
+            return projectOption;
     }
+
+    private void processingProjectOptions(List<Category> categoriesList, int numberOfCategory,
+            int numberOfProject, int projectOption) {
+        if (projectOption == 1)
+            processingAddInvestment(categoriesList, numberOfCategory, numberOfProject);
+        else
+            processingAddQuestin(categoriesList, numberOfCategory, numberOfProject);
+    }
+
+    private void processingAddQuestin(List<Category> categoriesList, int numberOfCategory,
+            int numberOfProject) {
+    }
+
+    private void processingAddInvestment(List<Category> categoriesList, int numberOfCategory,
+            int numberOfProject) {
+    }
+
 }
