@@ -12,9 +12,9 @@ public class Project {
 	private String description;
 	private String history;
     private String linkVideo;
-    private String FAQ;
+   
 	
-//    ("Project1 name", "Start smthg", 50000, 128, category, "Project info")
+
     
 	public Project(String name, String desc, double total, int days, Category category) {
     donated = 0;
@@ -44,6 +44,13 @@ public class Project {
 		return donated;	
 	}
 	
+	public double setDonated(float donated) {
+		
+		this.donated += donated;;
+		
+		return donated;	
+	}
+	
 	public int getDays() {
 		return days;
 	}
@@ -66,7 +73,7 @@ public class Project {
 	
 	public String outLong(){
 
-		return outShort() + " Description project: " + description + " History: " + history + " Video: " + linkVideo + " FAQ: " +FAQ;
+		return outShort() + " Description project: " + description + " History: " + history + " Video: " + linkVideo;
 		
 	}
 	

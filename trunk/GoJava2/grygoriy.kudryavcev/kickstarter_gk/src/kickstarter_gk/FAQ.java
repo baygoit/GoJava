@@ -1,22 +1,30 @@
 package kickstarter_gk;
 
 public class FAQ {
-	private String qst;
-	private String answr;
+	private String question;
+	private String answer;
+	private Project project; 
 	
-	public FAQ (String qst, String answr) {
-		this.qst = qst;
-		this.answr = answr;
+	public FAQ (String question, String answer, Project project) {
+		this.question = question;
+		this.answer = answer;
+		this.project = project;
 	}
 	
 	
 	public String getQuestion () {
-		return qst;
+		return question;
 	}
 	
 	public String getAnswer () {
-		return answr;
+		return answer;
 	}
+	
+	public Project getProject () {
+		return project;
+	}
+	
+	
 }
 
 

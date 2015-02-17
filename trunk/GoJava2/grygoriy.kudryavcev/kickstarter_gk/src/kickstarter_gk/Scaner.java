@@ -8,8 +8,21 @@ public class Scaner {
     
     
     public int Input () {
-      return scanner.nextInt();
+    	int in =  scanner.nextInt();
+    	scanner.nextLine();
+    	return in;
        }
+    
+    public float InputFloat () {
+    	
+    	return scanner.nextFloat();
+        
+         }
+    
+    public String InputString () {
+           return scanner.nextLine();
+         }
+      
     
     protected void finalize()  {
     	scanner.close();
