@@ -50,11 +50,11 @@ public abstract class TestProjectStorage {
 //        assertEquals("Project Name: name\nDescription: desc\nNeed Sum: 1\nCurrent Sum: 1\nDays Left: 1\nProjectHistory: categoryId\nLinkOnvideo: linkOnvideo\nQuestions and answers: questionsAndAnswers\n\n", actual);
 //    }  
 //    
-//    @Test
-//    public void shouldGetProgect_WhenGetSpecificProject() {
-//        projectStorage.add("name", "desc", 1, 1, 1, "categoryId",
-//                "linkOnvideo", "questionsAndAnswers", 1);
-//        Project actual = projectStorage.getSpecificProject(1, 1);
-//        assertEquals(projectStorage.getProject(0), actual);
-//    }  
+    @Test
+    public void shouldGetProgect_WhenGetSpecificProject() {
+        projectStorage.add("name", "desc", 1, 1, 1, "categoryId",
+                "linkOnvideo", "questionsAndAnswers", 1);
+        Project actual = projectStorage.getSpecificProject(1, 1);
+        assertEquals(projectStorage.getProject(0), actual);
+    }  
 }
