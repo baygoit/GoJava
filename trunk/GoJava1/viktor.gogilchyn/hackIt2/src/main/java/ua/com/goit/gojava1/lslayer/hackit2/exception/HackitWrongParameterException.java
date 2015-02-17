@@ -1,4 +1,4 @@
-package ua.com.goit.gojava1.lslayer.hackit2;
+package ua.com.goit.gojava1.lslayer.hackit2.exception;
 
 public class HackitWrongParameterException extends Exception {
 

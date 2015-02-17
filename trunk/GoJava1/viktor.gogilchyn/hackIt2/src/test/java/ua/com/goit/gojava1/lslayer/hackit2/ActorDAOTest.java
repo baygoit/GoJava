@@ -11,6 +11,7 @@ import org.junit.Test;
 import ua.com.goit.gojava1.lslayer.hackit2.actor.Actor;
 import ua.com.goit.gojava1.lslayer.hackit2.actor.HumanControlledCharacter;
 import ua.com.goit.gojava1.lslayer.hackit2.dao.ActorDAO;
+import ua.com.goit.gojava1.lslayer.hackit2.exception.HackitIOException;
 
 public class ActorDAOTest {
     public static Actor actor = null;

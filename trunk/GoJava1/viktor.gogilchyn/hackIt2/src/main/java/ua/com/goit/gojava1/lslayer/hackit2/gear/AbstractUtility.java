@@ -3,7 +3,7 @@ package ua.com.goit.gojava1.lslayer.hackit2.gear;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import ua.com.goit.gojava1.lslayer.hackit2.HackitWrongParameterException;
+import ua.com.goit.gojava1.lslayer.hackit2.exception.HackitWrongParameterException;
 
 public abstract class AbstractUtility implements Gear {
     private String name;

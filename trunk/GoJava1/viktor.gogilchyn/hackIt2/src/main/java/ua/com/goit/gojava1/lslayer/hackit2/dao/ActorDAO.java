@@ -10,10 +10,10 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import ua.com.goit.gojava1.lslayer.hackit2.HackitIOException;
-import ua.com.goit.gojava1.lslayer.hackit2.HackitWrongParameterException;
 import ua.com.goit.gojava1.lslayer.hackit2.actor.Actor;
 import ua.com.goit.gojava1.lslayer.hackit2.actor.HumanControlledCharacter;
+import ua.com.goit.gojava1.lslayer.hackit2.exception.HackitIOException;
+import ua.com.goit.gojava1.lslayer.hackit2.exception.HackitWrongParameterException;
 
 public class ActorDAO {
     private boolean isUnix = false;

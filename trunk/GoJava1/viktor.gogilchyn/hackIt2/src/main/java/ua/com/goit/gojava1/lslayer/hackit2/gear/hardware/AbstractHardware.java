@@ -3,7 +3,7 @@ package ua.com.goit.gojava1.lslayer.hackit2.gear.hardware;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import ua.com.goit.gojava1.lslayer.hackit2.HackitWrongParameterException;
+import ua.com.goit.gojava1.lslayer.hackit2.exception.HackitWrongParameterException;
 import ua.com.goit.gojava1.lslayer.hackit2.gear.AbstractUtility;
 
 public abstract class AbstractHardware extends AbstractUtility implements Hardware {

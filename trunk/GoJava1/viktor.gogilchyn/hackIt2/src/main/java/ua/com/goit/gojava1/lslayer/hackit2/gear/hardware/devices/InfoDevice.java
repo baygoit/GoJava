@@ -1,6 +1,6 @@
 package ua.com.goit.gojava1.lslayer.hackit2.gear.hardware.devices;
 
-import ua.com.goit.gojava1.lslayer.hackit2.HackitWrongParameterException;
+import ua.com.goit.gojava1.lslayer.hackit2.exception.HackitWrongParameterException;
 import ua.com.goit.gojava1.lslayer.hackit2.gear.Gear;
 import ua.com.goit.gojava1.lslayer.hackit2.gear.hardware.AbstractHardware;
 

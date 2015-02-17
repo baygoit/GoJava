@@ -10,6 +10,7 @@ import ua.com.goit.gojava1.lslayer.hackit2.action.Action;
 import ua.com.goit.gojava1.lslayer.hackit2.actor.Actor;
 import ua.com.goit.gojava1.lslayer.hackit2.dao.ActorDAO;
 import ua.com.goit.gojava1.lslayer.hackit2.dto.ActionResult;
+import ua.com.goit.gojava1.lslayer.hackit2.exception.HackitWrongParameterException;
 import ua.com.goit.gojava1.lslayer.hackit2.gear.Gear;
 
 public final class GameSession { // Singleton. There is only one game per app.

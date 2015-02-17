@@ -10,7 +10,7 @@
  </servlet>
  <servlet>
   <servlet-name>ActorMaintaner</servlet-name>
-  <servlet-class>ua.com.goit.gojava1.lslayer.hackit2.ActorMaintainer</servlet-class>
+  <servlet-class>ua.com.goit.gojava1.lslayer.hackit2.ui.ActorMaintainer</servlet-class>
  </servlet>
  <servlet-mapping>
   <servlet-name>PathInformer</servlet-name>

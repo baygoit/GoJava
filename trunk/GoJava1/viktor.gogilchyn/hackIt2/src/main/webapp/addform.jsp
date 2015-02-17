@@ -5,7 +5,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="css/bootstrap.css" rel="stylesheet" type="text/css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script
+ src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <title>Add hero</title>
 <script type="text/javascript">
@@ -24,46 +25,41 @@ function validateName()
     }
     return returnValue;
 }
-</script> 
+</script>
 </head>
 <body>
 <body>
  <div class="container">
- <div class="center-block col-md-6">
-<form class="form-signin" action="actors" method="post">
-<fieldset>
-
-<!-- Form Name -->
-<legend>Add an actor</legend>
-
-<!-- Text input-->
-<div class="control-group">
-  <label class="control-label" for="name"><b>Name</b></label>
-  <div class="controls">
-    <input id="name" name="name" type="text" placeholder="Joe" class="input-large">
-    <p class="help-block">Name can contain only alphanumeric charachters.</p>
+  <div class="center-block col-md-6">
+   <form class="form-signin" action="actors" method="post">
+    <div class="control-group">
+     <label class="control-label" for="name"><b>Name</b></label>
+     <div class="controls">
+      <input id="name" name="name" type="text" value="Joe"
+       class="input-large">
+      <p class="help-block">Name can contain only alphanumeric
+       charachters.</p>
+     </div>
+    </div>
+    <div class="control-group">
+     <label class="control-label" for="skills">Skills</label>
+     <div class="controls">
+      <input id="skills" name="skills" type="text"
+       value="scan;develop" class="input-large">
+      <p class="help-block">Enter desired skills, delimitered by
+       semicolon.</p>
+     </div>
+    </div>
+    <div class="control-group">
+     <label class="control-label" for="submit"></label>
+     <div class="controls">
+      <input type="hidden" name="create" value="yes"/>
+      <input type="submit" id="submit" name="submit"
+       class="btn btn-sm btn-primary btn-block" value="Send" />
+     </div>
+    </div>
+   </form>
   </div>
-</div>
-
-<!-- Text input-->
-<div class="control-group">
-  <label class="control-label" for="skills">Skills</label>
-  <div class="controls">
-    <input id="skills" name="skills" type="text" placeholder="scan;develop" class="input-large">
-    <p class="help-block">Enter desired skills, delimitered by semicolon.</p>
-  </div>
-</div>
-
-<!-- Button -->
-<div class="control-group">
-  <label class="control-label" for="submit"></label>
-  <div class="controls">
-    <input type="submit" id="submit" name="submit" class="btn btn-sm btn-primary btn-block" value="Send"/>
-  </div>
-</div>
-
-</fieldset>
-</form>
- </div> </div>
+ </div>
 </body>
 </html>

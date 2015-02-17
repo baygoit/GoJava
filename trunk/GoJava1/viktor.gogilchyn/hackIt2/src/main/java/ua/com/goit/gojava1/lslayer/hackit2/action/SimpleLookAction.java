@@ -1,7 +1,7 @@
 package ua.com.goit.gojava1.lslayer.hackit2.action;
 
-import ua.com.goit.gojava1.lslayer.hackit2.HackitWrongParameterException;
 import ua.com.goit.gojava1.lslayer.hackit2.dto.ActionResult;
+import ua.com.goit.gojava1.lslayer.hackit2.exception.HackitWrongParameterException;
 
 public class SimpleLookAction extends AbstractAction {
 
