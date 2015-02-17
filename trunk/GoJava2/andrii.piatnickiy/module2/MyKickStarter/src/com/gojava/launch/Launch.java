@@ -17,7 +17,6 @@ public class Launch {
 
         initCategories(categoryStorage);
         initProjects(projectStorage);
-        
         Quote quote = new Quote(consoleIO);
         quote.consoleIO.print(quote.getQuote());
 

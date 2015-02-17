@@ -1,5 +1,6 @@
 package com.gojava.projects;
 
+import java.awt.List;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -7,14 +8,17 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class FileCategoryStorage implements CategoryStorage {
     File file;
     BufferedReader in = null;
     BufferedWriter out = null;
+    public ArrayList<Category> categoriesList = new ArrayList<Category>();
 
     public FileCategoryStorage(String fileName) {
         file = createFileIfNeed(fileName);
+        getCategoriesFromFileToList();
     }
 
     @Override
@@ -38,85 +42,67 @@ public class FileCategoryStorage implements CategoryStorage {
         }
     }
 
+    @Override
+    public String getCategoryToString() {
+        StringBuffer sb = new StringBuffer();
+        for (Category category : categoriesList) {
+            sb.append(category.toString()).append("\n");
+        }
+        return sb.toString();
+
+    }
+
+    @Override
+    public Category getCategory(int index) {
+        return categoriesList.get(index);
+    }
+
+    public ArrayList<Category> getCategoriesFromFileToList() {
+        initIn();
+        Category category;
+        try {
+            try {
+                String read;
+                read = in.readLine();
+                while (read != null) {
+                    category = parseLineToCategory(read);
+                    categoriesList.add(category);
+                    read = in.readLine();
+                }
+
+            } catch (IOException e) {
+                throw new RuntimeException("Не могу прочитать строку!", e);
+            }
+
+        } finally {
+            if (in != null) {
+                try {
+                    in.close();
+                } catch (IOException e) {
+                    throw new RuntimeException("Не можем закрыть файл!", e);
+                }
+            }
+        }
+        return categoriesList;
+    }
+
+    private Category parseLineToCategory(String read) {
+        Category category;
+        String result;
+        result = read;
+        String[] tmp = result.split(";");
+        int id = Integer.parseInt(tmp[0]);
+        String name = tmp[1];
+        category = new Category(name, id);
+        return category;
+    }
+
     private void initOut() {
         try {
             out = new BufferedWriter(new FileWriter(file, true));
         } catch (IOException e) {
             throw new RuntimeException("Не могу записать в файл!", e);
         }
-    }
-
-    @Override
-    public String getCategoryToString() {
-        String result = "";
-        initIn();
-        try {
-            try {
-                String read = "";
-                while (read != null) {
-                    read = in.readLine();
-                    if (read == null) {
-                        result += "";
-                    } else {
-                        result += read + "\n";
-                    }
-                }
-            } catch (IOException e) {
-                throw new RuntimeException("Не могу прочитать строку!", e);
-            }
-            return result;
-        } finally {
-            if (in != null) {
-                try {
-                    in.close();
-                } catch (IOException e) {
-                    throw new RuntimeException("Не можем закрыть файл!", e);
-                }
-            }
-        }
-    }
-
-    @Override
-    public Category getCategory(int index) {
-        initIn();
-        Category category = null;
-        try {
-            try {
-                int counter = 0;
-                String read = "";
-                try {
-                    read = in.readLine();
-                } catch (NullPointerException e) {
-                    throw new RuntimeException("Тут null!!!", e);
-                }
-                String result = "";
-                while (read != null) {
-                    if (counter == index) {
-                        result = read;
-                        String[] tmp = result.split(";");
-                        int id = Integer.parseInt(tmp[0]);
-                        String name = tmp[1];
-                        category = new Category(name, id);
-                        return category;
-                    }
-                    counter++;
-                }
-            } catch (IOException e) {
-                throw new RuntimeException("Не можем прочитать файл!", e);
-            }
-
-        } catch (NumberFormatException e) {
-            e.printStackTrace();
-        } finally {
-            if (in != null) {
-                try {
-                    in.close();
-                } catch (IOException e) {
-                    throw new RuntimeException("Не можем закрыть файл!", e);
-                }
-            }
-        }
-        return category;
     }
 
     private File createFileIfNeed(String filename) {
@@ -144,5 +130,10 @@ public class FileCategoryStorage implements CategoryStorage {
                 throw new RuntimeException("Не смогли создать файл!", e);
             }
         }
+    }
+
+    @Override
+    public ArrayList<Category> getList() {
+        return categoriesList;
     }
 }

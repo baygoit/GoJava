@@ -23,4 +23,10 @@ public class InMemoryCategoryStorage implements CategoryStorage{
         return categoryStorageList.get(index);
     }
 
+
+    @Override
+    public ArrayList<Category> getList() {
+        return categoryStorageList;
+    }
+
 }
