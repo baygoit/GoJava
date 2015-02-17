@@ -18,10 +18,18 @@ public class test {
 	
 	@Test
 	public void shouldReturnAnagram_whenStringIsSent() {
-		Assert("cba zyx", "abc xyz");
+		Assert("cba zyx gfe", "abc xyz efg");
 	}
 	
+	@Test
+	public void shouldLeaveCommas_whenStringIsSent() {
+		Assert("cba, zyx", "abc, xyz");
+	}
 	
+	@Test
+	public void shouldLeaveSpecialSigns_whenStringIsSent() {
+		Assert("cba, zyx?!", "abc, xyz?!");
+	}
 	
 	public void Assert(String expected, String toSend){
 		Anagram anagram = new Anagram();
