@@ -1,6 +1,6 @@
 package com.gojava.projects;
 
-import java.awt.List;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -18,6 +18,10 @@ public class FileCategoryStorage implements CategoryStorage {
 
     public FileCategoryStorage(String fileName) {
         file = createFileIfNeed(fileName);
+        if(file.length() != 0){
+            file.delete();
+            createFileIfNeed(fileName);
+        }
         getCategoriesFromFileToList();
     }
 
