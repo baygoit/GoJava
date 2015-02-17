@@ -8,9 +8,24 @@ public class test {
 
 	@Test
 	public void shouldReturnSymbol_whenSymbolIsSent() {
+		Assert("x", "x");
+	}
+	
+	@Test
+	public void shouldReturnReversedLine_whenStringIsSent() {
+		Assert("zyx", "xyz");
+	}
+	
+	@Test
+	public void shouldReturnAnagram_whenStringIsSent() {
+		Assert("cba zyx", "abc xyz");
+	}
+	
+	
+	
+	public void Assert(String expected, String toSend){
 		Anagram anagram = new Anagram();
-				
-		assertEquals("x", anagram.run("x"));
+		assertEquals(expected, anagram.run(toSend));
 	}
 
 }
