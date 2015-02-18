@@ -30,8 +30,8 @@
 	</div>	
 	
 	<form name="form1" action="print-categories" method="get" target="category-frame">
-			<input type="submit" value="showUnits">
+			<input type="submit" value="show categories">
 	</form>
-	
+
 	</body>
 </html>

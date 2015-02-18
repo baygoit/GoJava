@@ -30,7 +30,9 @@ public class CategoryPrinter extends HttpServlet {
 	   	List<GoodType> list = catalog.getGoodTypesFromRoot();
 	   	for (GoodType type: list) { //TODO: redo - returns XML with data; JS builds table  	
 	   		String name =  type.getName();
-	   		out.println("    <li><a href=\"/url?param=\"" + name + "\">" + name + "</a></li>\n");	
+	   		out.println("    <li><a href=\"construct.html\"" + name + "\">" + name);
+	   		//out.println("<input type=\"hidden\" action>");
+	   		out.println("</a></li>\n");
 	   	}   
 	   	out.println("</ul>\n");  
     	out.println("</table>\n");
