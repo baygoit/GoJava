@@ -20,7 +20,11 @@
   <servlet-name>ActorMaintaner</servlet-name>
   <url-pattern>/actors</url-pattern>
  </servlet-mapping>
+ <servlet-mapping>
+  <servlet-name>PathInformer</servlet-name>
+  <url-pattern>/actors/edit</url-pattern>
+ </servlet-mapping>
  <welcome-file-list>
-  <welcome-file>/actors</welcome-file>
+  <welcome-file>index.jsp</welcome-file>
  </welcome-file-list>
 </web-app>

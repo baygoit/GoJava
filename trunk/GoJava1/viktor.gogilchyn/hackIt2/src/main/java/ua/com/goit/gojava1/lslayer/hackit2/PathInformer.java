@@ -27,27 +27,29 @@ public class PathInformer extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	    PrintWriter writer = response.getWriter();
-	    response.setContentType("text/plain");
-	    writer.println("HelloWorld");
-	    File f = new File(".");
-	    writer.println(f.isDirectory());
-        File[] listOfFiles = f.listFiles();
-        for (File element : listOfFiles) {
-            if (element.getName() != null)
-            writer.println(element.getCanonicalPath());
-        }
-        writer.println(!this.getServletContext().getServerInfo().equals("Apache Tomcat/7.0.57"));
-        writer.println(request.getContextPath());
-        writer.println(request.getPathInfo());
-        
+	    doPost(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+        PrintWriter writer = response.getWriter();
+        response.setContentType("text/plain");
+        writer.println("HelloWorld");
+//        File f = new File(".");
+//        writer.println(f.isDirectory());
+//        File[] listOfFiles = f.listFiles();
+//        for (File element : listOfFiles) {
+//            if (element.getName() != null)
+//            writer.println(element.getCanonicalPath());
+//        }
+        writer.println(System.getProperty("os.name").toLowerCase());
+        writer.println(!this.getServletContext().getServerInfo().equals("Apache Tomcat/7.0.57"));
+        writer.println(request.getContextPath());
+        writer.println(request.getPathInfo());
+        writer.println(request.getRequestURI());
+        
 	}
 
 }

@@ -33,11 +33,10 @@ public class ActorMaintainer extends HttpServlet {
      */
     protected void doGet(HttpServletRequest request,
             HttpServletResponse response) throws ServletException, IOException {
-
-        ActorDAO dao = new ActorDAO(!this.getServletContext().getServerInfo()
-                .equals("Apache Tomcat/7.0.57"));
+        boolean isWindows = System.getProperty("os.name").toLowerCase().contains("win");
+        ActorDAO dao = new ActorDAO(!isWindows);
         request.setAttribute("gamers", dao.loadAll());
-        request.getRequestDispatcher("display.jsp").forward(request, response);
+        request.getRequestDispatcher("view.jsp").forward(request, response);
     }
 
     /**
@@ -48,8 +47,8 @@ public class ActorMaintainer extends HttpServlet {
             HttpServletResponse response) throws ServletException, IOException {
         String deleteParameter = request.getParameter("delete");
         String createParameter = request.getParameter("create");
-        ActorDAO dao = new ActorDAO(!this.getServletContext().getServerInfo()
-                .equals("Apache Tomcat/7.0.57"));
+        boolean isWindows = System.getProperty("os.name").toLowerCase().contains("win");
+        ActorDAO dao = new ActorDAO(!isWindows);
         if (deleteParameter != null && deleteParameter.equals("yes"))
             for (Actor gamer : dao.loadAll()) {
                 String deleteParameterString = request.getParameter(gamer
