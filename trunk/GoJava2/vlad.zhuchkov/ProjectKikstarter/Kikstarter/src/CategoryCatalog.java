@@ -1,24 +1,13 @@
-import java.util.LinkedHashSet;
-import java.util.Set;
+import java.util.List;
 
-public class CategoryCatalog {
-	private Set<Category> categoryCatalog = new LinkedHashSet<>();
-	
-	public void addCategory(String name) {
-		categoryCatalog.add(new Category(name));
-	}
+public interface CategoryCatalog {
 
-	public Category[] getCatalogList() {
-		return categoryCatalog.toArray(new Category[size()]);
-	}
+	public abstract void addCategory(String name);
 
-	public Category getCategory(int i) {
-		Category[] categoryCatalog = getCatalogList();
-		return categoryCatalog[i];
-	}
+	public abstract List<String> getCatalog();
 
-	public int size() {
-		return categoryCatalog.size();
-	}
-	
+	public abstract Category getCategory(int i);
+
+	public abstract int size();
+
 }

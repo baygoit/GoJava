@@ -1,4 +1,6 @@
-public class Link {
+import java.io.Serializable;
+
+public class Link implements Serializable {
 	private String url;
 
 	public String getUrl() {

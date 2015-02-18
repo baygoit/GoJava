@@ -1,4 +1,6 @@
-public class ProjectParameters {
+import java.io.Serializable;
+
+public class ProjectParameters implements Serializable {
 	private int cost;
 	private int alreadyCollected;
 	private int daysLeft;
@@ -36,7 +38,7 @@ public class ProjectParameters {
 
 	}
 
-	public class DetailedParameters {
+	public class DetailedParameters implements Serializable {
 		private String history;
 		private Link demo;
 		private Link faq;

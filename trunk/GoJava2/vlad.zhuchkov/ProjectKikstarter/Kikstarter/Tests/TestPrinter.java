@@ -10,7 +10,7 @@ public class TestPrinter {
 	CategoryCatalog catalog;
 	@Before
 	public void init(){
-		catalog = new CategoryCatalog();
+		catalog = new InMemoryCategoryCatalog();
 		catalog.addCategory("games");
 		out = mock( Output.class);
 		printer = new Printer(out);

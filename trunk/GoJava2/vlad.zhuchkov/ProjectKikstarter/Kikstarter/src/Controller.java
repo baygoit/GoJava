@@ -4,7 +4,7 @@ public class Controller {
 	private Reader reader;
 
 	public Controller(Output out, Input in) {
-		this.catalog = new CategoryCatalog();
+		this.catalog = new InFileCategoryCatalog();
 		catalog.addCategory("games");
 		catalog.addCategory("movies");
 		catalog.addCategory("books");
@@ -53,12 +53,24 @@ public class Controller {
 			Menu nextMenu(Object selected) {
 				Project project = (Project)selected;
 				printer.showProjectInfo(project);
+				printer.print("pres eny unmber to proceed");
+				reader.readInt();
 				return null;
 			}
-
+			
 			@Override
-			Object choose(int menu) {
-				return category.getProject(menu);
+			Object choose(int menu) {	
+				Project project = null;
+				try{
+					if (menu == -1)
+						return null;
+				project = category.getProject(menu);
+				}catch(IlligalInputException e){
+					ask(); 
+					menu = reader.readInt();
+                     Object selected = choose(menu-1);
+				}
+				return project;
 			}
 
 			@Override

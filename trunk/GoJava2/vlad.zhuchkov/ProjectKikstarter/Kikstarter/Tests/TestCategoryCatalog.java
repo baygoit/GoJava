@@ -9,9 +9,9 @@ public class TestCategoryCatalog {
 	private CategoryCatalog catalog;
 	@Before
 	public void init(){
-		this.catalog = new CategoryCatalog();
+		this.catalog = new InMemoryCategoryCatalog();
 		catalog.addCategory("games");
-		this.cat = new Category("games"); 
+		this.cat = new InMemoryCategory("games"); 
 	}
 	@Test
 	public void expectCategory_WhenInputCategoryIndex(){
@@ -25,7 +25,7 @@ public class TestCategoryCatalog {
 	public void expectProject_WhenInputProjectIndex(){
 		assertEquals("game 1",cat.getProject(0).getName());
 	}
-	@Test(expected = IndexOutOfBoundsException.class)
+	@Test(expected = IlligalInputException.class)
 	public void expectException_WhenCategoryIndexOutOfBounds(){
 		cat.getProject(-1);
 	}

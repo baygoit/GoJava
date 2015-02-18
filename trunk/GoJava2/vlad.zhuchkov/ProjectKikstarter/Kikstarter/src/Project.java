@@ -1,6 +1,7 @@
+import java.io.Serializable;
 import java.util.Random;
 
-public class Project {
+public class Project implements Serializable {
 	private final int MAX_PROJECT_COST = 1_000_000;
 	private String name;
 	private String description;

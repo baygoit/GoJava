@@ -1,5 +1,5 @@
-import java.util.ArrayList;
-
+import java.util.List;
+//TODO Deal with that. implement SRP 
 public class Printer {
 	Output out;
 
@@ -8,21 +8,21 @@ public class Printer {
 	}
 
 	public void showCategoryCatalog(CategoryCatalog catalog) {
-		Category[] list = catalog.getCatalogList();
+		List<String> list = catalog.getCatalog();
 		int i = 1;
-		for (Category t : list)
-			out.print((i++) + ")" + t.getName());
+		for (String t : list)
+			out.print((i++) + ")" + t);
 
 	}
 
 	public void showCategoryName(CategoryCatalog catalog, int num) {
-		Category[] list = catalog.getCatalogList();
-		out.print(list[num].getName());
+		List<String> list = catalog.getCatalog();
+		out.print(list.get(num));
 	}
 
 	public void showProjects(Category category) {
-		ArrayList<Project> Projects = category.getProjectCatalog();
-		for (int i = 0; i < Projects.size(); i++) {
+		
+		for (int i = 0; i < category.size(); i++) {
 			showProjectPreviev(category.getProject(i));
 		}
 	}
