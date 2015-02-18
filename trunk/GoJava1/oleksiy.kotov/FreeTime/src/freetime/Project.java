@@ -15,23 +15,29 @@ public class Project {
     private Date start;
     private Date end;
     private Manager manager;
-    private List<Task> tasks;
+    private Set<Task> tasks;
     
-    public Project(String codename, Date start, Date end, Manager manager) {
-        this();
-        this.codename = codename;
-        this.start = start;
-        this.end = end;
-        this.manager = manager;
-        
-    }
-
-    Project(){
-        this.codename = "noname";
+    Project(Manager manager){
+        this.codename = "N/A";
+        this.description = "N/A";
         this.start = new Date();
         this.end = new Date();
+        this.manager = manager;
+        this.tasks = new HashSet<Task>();
     }
     
+    public void addTask(Task task) {
+        tasks.add(task);
+    }
+
+    public void removeTask(Task task) {
+        tasks.remove(task);
+    }
+    
+    public void changeDeadline(Date newDeadline) {
+        //TODO - check all tasks. If some of them out of new deadline 
+        // throw exception
+    }
 //    public void addEmployee(Employee employee, SortedSet<Date> dates) {
 //        
 //        if (employee == null) {

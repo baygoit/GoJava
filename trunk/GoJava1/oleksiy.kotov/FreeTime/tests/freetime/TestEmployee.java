@@ -11,17 +11,37 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class TestEmployee {
-    Employee testEmployee;
     
+    Employee testEmployee0;
+    Employee testEmployee1;
+    Employee testEmployee2;
+    Employee testEmployee3;
+    HashSet<String> skills;
+    Date freeDay1;
+    Date freeDay2;
+    Date busyDay1;
+    Date busyDay2;
+    Date notMarkedDay;
+
     @BeforeClass
     public static void onceExecutedBeforeAll() {
-        //System.out.println("@BeforeClass: onceExecutedBeforeAll");
+        // System.out.println("@BeforeClass: onceExecutedBeforeAll");
     }
 
     @Before
     public void executedBeforeEach() {
-         testEmployee = new Employee("Sergiy", "sergiy", "", "sergiy@gmail.com",
-                "***");
+        testEmployee0 = new Employee(0, "Employee Zero", "");
+        testEmployee1 = new Employee(1, "Employee One", "java,uml,swing,agile");
+        testEmployee2 = new Employee(2, "Employee Two", "java,agile");
+        testEmployee3 = new Employee(3, "Employee Three", "java,uml");
+        skills = new HashSet<String>();
+        skills.add("java");
+        
+        freeDay1 = new Date(2015, 02, 16);
+        freeDay2 = new Date(2015, 02, 17);
+        busyDay1 = new Date(2015, 02, 21);
+        busyDay2 = new Date(2015, 02, 22);
+        notMarkedDay = new Date(2015, 02, 19);
     }
 
     @Test
@@ -31,76 +51,63 @@ public class TestEmployee {
 
     @Test
     public void testEmployee() {
-        //Employee employee = new Employee();
-        assertNotNull(testEmployee);
+        assertNotNull(testEmployee0);
     }
 
     @Test
     public void testHasSkill() {
-        HashSet<String> skills = new HashSet<String>();
-        skills.add("uml");
-        skills.add("junit");
-        testEmployee.setSkills(skills);
-        assertTrue(testEmployee.hasSkill("UML"));
-        assertTrue(testEmployee.hasSkill("junit"));
-        assertFalse(testEmployee.hasSkill("spring"));
+        
+        assertFalse(testEmployee0.hasSkill("UML"));
+        assertTrue(testEmployee1.hasSkill("java"));
+        assertTrue(testEmployee2.hasSkill("Agile"));
     }
 
-    @SuppressWarnings("deprecation")
     @Test
     public void testIsDayFree() {
-        testEmployee.markDayFree(new Date());
-        assertTrue(testEmployee.isDayFree(new Date()));
-        assertFalse(testEmployee.isDayFree(new Date(2015,01,01)));
+        //testEmployee0.
+        assertFalse(testEmployee0.isDayFree(new Date()));
+        // assertFalse(testEmployee.isDayFree(new Date(2015,01,01)));
     }
-
-    @SuppressWarnings("deprecation")
-    @Test
-    public void testIsPeriodHasFreeDay() {
-        testEmployee.markDayFree(new Date(2015,01,01));
-        Date start = new Date(2015,01,01);
-        Date end = new Date(2015,01,02);
-        try {
-            assertTrue(testEmployee.isPeriodHasFreeDay(start, end));
-        } catch (ParseException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-    }
-
-    @SuppressWarnings("deprecation")
+    
     @Test
     public void testMarkDayBusy() {
-        testEmployee.markDayBusy(new Date());
-        testEmployee.markDayFree(new Date());
-        assertTrue(testEmployee.isDayFree(new Date()));
-        assertFalse(testEmployee.isDayFree(new Date(2015,01,01)));
+        // testEmployee.markDayBusy(new Date());
+        // testEmployee.markDayFree(new Date());
+        // assertTrue(testEmployee.isDayFree(new Date()));
+        assertFalse(testEmployee0.isDayFree(new Date(2015, 01, 01)));
     }
 
+    @Test
+    public void testGetCountOfFreeDays() {
+     
+        testEmployee0.markDayFree(freeDay1);
+        testEmployee0.markDayFree(freeDay2);
+        testEmployee0.markDayFree(notMarkedDay);
+        assertTrue(2 == testEmployee0.getCountFreeDays(freeDay1, freeDay2));
+        assertTrue(1 == testEmployee0.getCountFreeDays(freeDay2, freeDay2));
+        assertTrue(3 == testEmployee0.getCountFreeDays(freeDay1, busyDay2));
+    }
+
+    @Test
+    public void testIsPeriodHasFreeDay() {
+        testEmployee0.markDayFree(freeDay1);
+        testEmployee0.markDayFree(freeDay2);
+       assertTrue(testEmployee0.isPeriodHasFreeDay(freeDay1,busyDay2));
+    }
 
 
     @Test
     public void testAddSkill() {
-        testEmployee.addSkill("UML");
-        testEmployee.addSkill("JUnit");
-        assertTrue(testEmployee.hasSkill("uml"));
-        assertTrue(testEmployee.hasSkill("junit"));
-        assertFalse(testEmployee.hasSkill("spring"));
+        testEmployee0.addSkill("JUnit");
+        assertTrue(testEmployee0.hasSkill("junit"));
+        assertFalse(testEmployee0.hasSkill("struts"));
     }
 
     @Test
     public void testRemoveSkill() {
-        HashSet<String> skills = new HashSet<String>();
-        skills.add("uml");
-        skills.add("junit");
-        skills.add("spring");
-        testEmployee.setSkills(skills);
-        testEmployee.removeSkill("spring");
-        testEmployee.removeSkill("UML");
-        assertFalse(testEmployee.hasSkill("UML"));
-        assertTrue(testEmployee.hasSkill("junit"));
-        assertFalse(testEmployee.hasSkill("spring"));
+        assertTrue(testEmployee1.hasSkill("UML"));
+        testEmployee1.removeSkill("UML");
+        assertFalse(testEmployee1.hasSkill("UML"));
     }
-
 
 }
