@@ -10,10 +10,10 @@ public class Main {
 		System.out.println("Напишите ваше имя");
 		String name = new String(new Scanner(System.in).nextLine());
 		Interview interview = new Interview();
-		File file = new File("Questions.xml.");
+		File file = new File("Questions.xml");
 		interview.addCategory("Questions", file.getAbsolutePath());
-		File file2 = new File("MeratechTest.xml.");
-		interview.addCategory("Questions1", file2.getAbsolutePath());
+//		File file2 = new File("MeratechTest.xml.");
+//		interview.addCategory("Questions1", file2.getAbsolutePath());
 		interview.composeCategory(interview.getCategories());
 		Menu menu = new Menu();
 		int option = 0;
@@ -21,7 +21,7 @@ public class Main {
 			menu.printMenu();
 			option = menu.readInt();
 			switch (option){
-			case 1: interview.getCurrentCategory().printQuestionsAndCorrectAnswers();break; 
+			case 1: interview.getCurrentCategory().getQuestionsAndCorrectAnswers();break; 
 			case 2: 
 				List<String> questionsAndAllAnswers = interview.getCurrentCategory().getQuestionsAndAllAnswers();
 				for(String string: questionsAndAllAnswers){
@@ -61,8 +61,9 @@ public class Main {
 				List<String> incorrectAnswers = interview.getCurrentCategory().printIncorrectAnswers();
 				System.out.println("\nНеправильные ответы: ");
 				interview.printList(incorrectAnswers);
-				interview.writeToFile(name, time, results, incorrectAnswers);
+				IO.writeToFile(name, time, results, incorrectAnswers);
 				break;
+			case 4: interview.printList(IO.readFile(name));
 			}
 		}
 	}

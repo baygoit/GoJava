@@ -54,11 +54,17 @@ public class Category {
 		return questions;
 	}
 	
-	public void printQuestionsAndCorrectAnswers(){
+	public List<String> getQuestionsAndCorrectAnswers(){
+		List <String> questionsAndCorrectAnswers = new ArrayList<String>();
 		for(Question question: questions){
-			System.out.println("\n" + question.getId() +". " + question.getText());
-			question.printCorrectAnswers();
+			questionsAndCorrectAnswers.add(new String("\n" + question.getId() +". " + question.getText()));
+			for(Answer answer: question.getAnswers()){
+				if(answer.isCorrect){
+					questionsAndCorrectAnswers.add(answer.getIdAndAnswer());
+				}
+			}
 		}
+		return questionsAndCorrectAnswers;
 	}
 	
 	public List<String> getQuestionsAndAllAnswers(){

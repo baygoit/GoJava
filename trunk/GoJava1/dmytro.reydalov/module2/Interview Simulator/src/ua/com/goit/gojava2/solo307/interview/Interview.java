@@ -1,8 +1,12 @@
 package ua.com.goit.gojava2.solo307.interview;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -67,7 +71,7 @@ public class Interview {
 		try {
 			categories.add(new Category(name, path));
 		} catch (InterviewSimulatorException e) {
-			// TODO Auto-generated catch block
+			e.getMessage();
 			e.printStackTrace();
 		}
 	}
@@ -103,25 +107,5 @@ public class Interview {
 			System.out.println(line);
 		}
 	}
-
-	public void writeToFile(String name, String time, List<String> results,
-			List<String> incorrectAnswers) {
-		File file = new File(name);
-		FileWriter fileWriter;
-		try {
-			fileWriter = new FileWriter(file);
-			fileWriter.write(name + "\n");
-			fileWriter.write(time + "\n");
-			for(String line: results){
-				fileWriter.write(line + "\n");
-			}
-			for(String line: incorrectAnswers){
-				fileWriter.write(line + "\n");
-			}
-			fileWriter.flush();
-			fileWriter.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
 }
+
