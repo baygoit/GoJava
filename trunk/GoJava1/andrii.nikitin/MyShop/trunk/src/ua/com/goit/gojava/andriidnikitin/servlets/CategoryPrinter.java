@@ -22,20 +22,17 @@ public class CategoryPrinter extends HttpServlet {
 
     protected void doGet(HttpServletRequest request,
             HttpServletResponse response) throws ServletException, IOException {
-    	PrintWriter out = response.getWriter();
-    	out.println("<table>");
-    	out.println("<ul>");
+    	PrintWriter out = response.getWriter();   
+    	out.println("<head><link href=\"css/navbar.css\" rel=\"stylesheet\" type=\"text/css\"/></head>");
+    	out.println("<table>\n");
+    	out.println("<ul id=\"navbar\">\n");
 	   	GoodCatalogImpl catalog = GoodCatalogImpl.getInstance();
 	   	List<GoodType> list = catalog.getGoodTypesFromRoot();
 	   	for (GoodType type: list) { //TODO: redo - returns XML with data; JS builds table  	
-	   		out.println("<li>\n");
 	   		String name =  type.getName();
-	   		out.println("<form action=\"print-goods\" method=\"post\" target=\"category-frame\">");
-	   		out.println("<input type=\"submit\" value=\"" + name + "\" ></input>\n");	
-	   		out.println("</form>");
-	   		out.println("</li>\n");
+	   		out.println("    <li><a href=\"/url?param=\"" + name + "\">" + name + "</a></li>\n");	
 	   	}   
-	   	out.println("</ul>\n"); 
-    	out.println("</table>\n"); 	
+	   	out.println("</ul>\n");  
+    	out.println("</table>\n");
      }
  }

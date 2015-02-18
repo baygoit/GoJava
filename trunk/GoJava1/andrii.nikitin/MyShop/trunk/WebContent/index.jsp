@@ -12,8 +12,8 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-		<link href="css/stylesheet1.css" rel="stylesheet" type="text/css"/>
-		<title>Categories of goods</title>
+		<link href="css/stylesheet1.css" rel="stylesheet" type="text/css"/>		
+		<title>Catalog of goods</title>
 	</head>
 	
 	<body>
@@ -26,13 +26,12 @@
 	 -->
 	
 	<div class="type-list-container">
-		<iframe name=category-frame height="100" width="400"> </iframe>
+		<iframe name=category-frame height="1000" width="400"> </iframe>
 	</div>	
-	
 	
 	<form name="form1" action="print-categories" method="get" target="category-frame">
 			<input type="submit" value="showUnits">
-		</form>
-		
+	</form>
+	
 	</body>
 </html>
