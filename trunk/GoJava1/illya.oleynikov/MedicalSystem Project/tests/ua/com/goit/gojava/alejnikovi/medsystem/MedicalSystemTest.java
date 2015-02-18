@@ -2,6 +2,8 @@ package ua.com.goit.gojava.alejnikovi.medsystem;
 
 import static org.junit.Assert.*;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.BeforeClass;
@@ -44,15 +46,14 @@ public class MedicalSystemTest {
 		assertEquals(true, result);
 	}
 	
-	/*@Test (expected=MedicalSystemException.class)
-	public void testIsSpecialisationNotUnique() {
-		try {
-			MedicalSystem.addSpecialisation("Стоматолог");
-			MedicalSystem.addSpecialisation("Стоматолог");
-		} catch (MedicalSystemException e) {
-			System.out.println(e);
-		}
-	}*/
+	@Test
+	public void testWriteToFile() throws IOException {
+		List<String> listFromFile = new ArrayList<String>();
+		MedicalSystem.writeToFile("test.csv", "Новая");
+		listFromFile = MedicalSystem.readFromFile("test.csv");
+
+		assertEquals("Новая", listFromFile.get(listFromFile.size()-1));
+	}
 	
 	@Test
 	public void testCreateDoctor() {

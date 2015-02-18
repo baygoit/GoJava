@@ -8,15 +8,21 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Index</title>
 </head>
 <body>
-
-<%List<Specialization> list = MedicalSystem.getSpecializations();%>
-
-<%for (Specialization spec: list) {%>
-    <%=spec.getName() + ", "%>
-<%} %>
-
+    <b>Список всех специализаций:</b><br>
+    <table border="1">
+        <%List<Specialization> list = MedicalSystem.getSpecializations();
+          for (Specialization spec: list) {%>
+           <%="<tr><td>" + spec.getName() + "</td></tr>"%>
+        <%} %>
+    </table>
+    <p>
+    <form action="CreateNew" method="GET">
+        <input id="specialization" name="specialization" type="text">
+        <input type="submit" value="Submit">
+    </form>
+    </p>
 </body>
 </html>

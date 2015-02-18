@@ -1,10 +1,11 @@
 package ua.com.goit.gojava.alejnikovi.medsystem;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,14 +18,13 @@ public class MedicalSystem {
 	
 	static List<String> readFromFile(String fileName) throws IOException{
 		String  thisLine = null;
-		List<String> list = new ArrayList<String>();
+		List<String> listFromFile = new ArrayList<String>();
 		BufferedReader br = new BufferedReader(new FileReader(PATH + fileName));
         while ((thisLine = br.readLine()) != null) {
-        	list.add(thisLine);
+        	listFromFile.add(thisLine);
         }
         br.close();
-        return list;
-				
+        return listFromFile;				
 	}
 	
 	static void readSpecializationsFromFile() throws IOException, MedicalSystemException {
@@ -33,7 +33,19 @@ public class MedicalSystem {
 			addSpecialisation(specialisation);
 		}
 	}
-
+	
+	static void writeToFile(String fileName, String value) throws IOException{
+		BufferedWriter bw = new BufferedWriter(new FileWriter(PATH + fileName, true));
+		bw.write('\n');
+		bw.write(value);
+		bw.close();
+	}
+	
+	public static void writeSpecializationToFile(String specialisation) throws IOException, MedicalSystemException{
+		if(isSpecialisationUnique(specialisation)){
+			writeToFile("specializations.csv", specialisation);
+		}		
+	}
 	
 	public static List<Specialization> getSpecializations() throws IOException, MedicalSystemException {
 		specializations.clear();
