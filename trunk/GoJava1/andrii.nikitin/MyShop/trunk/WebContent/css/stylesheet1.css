@@ -1,0 +1,26 @@
+body {
+	margin: 0px;
+	background: #778899
+}
+
+.type-list-container {
+	float: left;
+	border: #778899 0px ridge;
+	background: #778899;
+	filter: alpha(opacity = 50);
+	frameborder: "1";
+	marginheight
+	="0";
+	marginwidth
+	="0";
+	scrolling
+	="auto"
+}
+
+.instrument {
+	float: left;
+	margin: 10px;
+	padding: 10px;
+	border: #778899 2px ridge;
+	background: #778899
+}
