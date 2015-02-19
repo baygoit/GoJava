@@ -6,7 +6,7 @@ public interface Categories {
 
 	public abstract void writeAllCatecories();
 
-	public abstract String getStringAllCatecories();
+	public abstract String showAllCatecoriesInKickstarter();
 
 	public abstract String showAllProjectInCategory(int categoryId,	Projects projects);
 

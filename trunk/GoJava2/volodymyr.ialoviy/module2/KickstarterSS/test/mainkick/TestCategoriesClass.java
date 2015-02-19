@@ -23,7 +23,7 @@ public class TestCategoriesClass {
 	
 	@Test
     public void shouldAllCatecories_whenNotAllCatecories(){
-		String s = categories.getStringAllCatecories();
+		String s = categories.showAllCatecoriesInKickstarter();
 		assertTrue(s.equals("1 Category-1\n2 Category-2\n3 Category-3"));
     }
 	

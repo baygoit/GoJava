@@ -150,7 +150,7 @@ public class KickstarterS {
 	}
 
 	private void showAllCategories() {
-		printer(categories.getStringAllCatecories());
+		printer(categories.showAllCatecoriesInKickstarter());
 		printer("Choice Category Number: ");
 	}
 

@@ -21,7 +21,7 @@ public class CategoriesFromFile implements Categories {
 	}
 	
 	@Override
-	public String getStringAllCatecories(){
+	public String showAllCatecoriesInKickstarter(){
 		String s = "";
 		for (Category value : listCatecories) {
 			s += value.getCategoryID() + " " + value.getCategoryName() + "\n";
