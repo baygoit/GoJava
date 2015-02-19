@@ -5,13 +5,14 @@ import static org.junit.Assert.*;
 import java.util.Arrays;
 
 import model.Categories;
+import model.CategoriesFromFile;
 import model.Projects;
 import model.ReaderDB;
 
 import org.junit.Test;
 
 public class TestCategoriesClass {
-	Categories categories = new Categories();
+	Categories categories = new CategoriesFromFile();
 	{
 		categories.writeAllCatecories();
 		categories.getKickCategories();

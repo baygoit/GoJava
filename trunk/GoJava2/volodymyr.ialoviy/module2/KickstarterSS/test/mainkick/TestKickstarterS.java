@@ -8,6 +8,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import model.Categories;
+import model.CategoriesFromFile;
 import model.Projects;
 
 import org.junit.Test;
@@ -43,7 +44,7 @@ public class TestKickstarterS {
 	            return messages;
 	    }
 	}
-	Categories categories = new Categories();
+	Categories categories = new CategoriesFromFile();
 	Projects projects = new Projects();
 
 	@Test
