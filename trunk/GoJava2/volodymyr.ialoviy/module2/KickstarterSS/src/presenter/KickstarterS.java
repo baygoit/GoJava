@@ -3,6 +3,7 @@ package presenter;
 import model.Categories;
 import model.Projects;
 import model.Quotes;
+import model.QuotesFromFile;
 import util.InputChecker;
 import view.Inputs;
 import view.Output;
@@ -42,7 +43,7 @@ public class KickstarterS {
 	}
 
 	public void kickstarter() {
-		Quotes quote = new Quotes();
+		Quotes quote = new QuotesFromFile();
 		printer(quote.getQuote());
 		
 		categories.writeAllCatecories();
