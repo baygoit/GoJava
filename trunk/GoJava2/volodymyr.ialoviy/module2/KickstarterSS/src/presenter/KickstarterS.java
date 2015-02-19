@@ -157,7 +157,7 @@ public class KickstarterS {
 	private void askCategory() {
 		String choice = in.enter();
 		if (InputChecker.checkNumber(categories.getKickCategories(), choice)){
-			chosenCategoryID = Integer.valueOf(choice) - 1;
+			chosenCategoryID = Integer.valueOf(choice);//TODO DELETE - 1
 		}
 		else {
 			printBug();
@@ -166,7 +166,7 @@ public class KickstarterS {
 	}
 
 	private void askProject(int[] allowedVariants) {
-		int[] concatProjectsAndVariants = concatArray(categories.projectsContain(chosenCategoryID), allowedVariants);
+		int[] concatProjectsAndVariants = concatArray(categories.projectsThatAreContainedInTheCategory(chosenCategoryID), allowedVariants);
 		String choice = in.enter();
 		if (InputChecker.checkNumber(concatProjectsAndVariants, choice)){
 			chosenProject = Integer.valueOf(choice);

@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 import java.util.Arrays;
 
 import model.Categories;
-import model.CategoriesFromFile;
+import model.CategoriesFromDB;
 import model.Projects;
 import model.ProjectsFromFile;
 import model.ReaderDB;
@@ -13,11 +13,11 @@ import model.ReaderDB;
 import org.junit.Test;
 
 public class TestCategoriesClass {
-	Categories categories = new CategoriesFromFile();
+	Categories categories = new CategoriesFromDB();
 	{
 		categories.writeAllCatecories();
 		categories.getKickCategories();
-		categories.projectsContain(0);
+		categories.projectsThatAreContainedInTheCategory(0);
 		categories.showCatecoryName(0);
 	}
 	
@@ -36,7 +36,7 @@ public class TestCategoriesClass {
 	
 	@Test
     public void shouldProjectsContain_whenProjectsContain(){
-		int[] i = categories.projectsContain(0);
+		int[] i = categories.projectsThatAreContainedInTheCategory(0);
 		int[] j = {1, 3, 4};
 		assertTrue(Arrays.equals(i, j));
     }

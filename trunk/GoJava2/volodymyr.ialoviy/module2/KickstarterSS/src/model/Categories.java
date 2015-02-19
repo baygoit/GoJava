@@ -14,7 +14,7 @@ public interface Categories {
 
 	public abstract int[] getKickCategories();
 
-	public abstract int[] projectsContain(int categoryId);
+	public abstract int[] projectsThatAreContainedInTheCategory(int categoryId);
 
 	public abstract int getCounterCategory();
 

@@ -55,7 +55,7 @@ public class CategoriesFromFile implements Categories {
 	}
 	
 	@Override
-	public int[] projectsContain(int categoryId){
+	public int[] projectsThatAreContainedInTheCategory(int categoryId){
 		Category category = getListCatecories().get(categoryId);
 		return category.getProjects();
 	}

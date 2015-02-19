@@ -19,16 +19,12 @@ public class CategoriesFromDB implements Categories{
 
 	public static void main(String[] args) {
 		CategoriesFromDB cat = new CategoriesFromDB();
-		System.out.println(cat.showAllCatecoriesInKickstarter());
-		
 		Projects projects = new ProjectsFromFile();
-		
+		System.out.println(cat.showAllCatecoriesInKickstarter());
 		System.out.println(cat.showAllProjectInCategory(1, projects));
-		
 		System.out.println(cat.showCatecoryName(2));
-		
 		System.out.println(Arrays.toString(cat.getKickCategories()));
-		
+		System.out.println(Arrays.toString(cat.projectsThatAreContainedInTheCategory(1)));
 	}
 	
 	@Override
@@ -46,8 +42,8 @@ public class CategoriesFromDB implements Categories{
             statement = connection.createStatement();
             ResultSet result = statement.executeQuery("SELECT * FROM categories");
             while (result.next()) {
-                s += "Номер категории #" + result.getInt("id_category")
-                        + "\t" + result.getString("name_category") + "\n";
+                s += result.getInt("id_category")
+                        + " " + result.getString("name_category") + "\n";
             }
         } catch (Exception ex) {
             Logger.getLogger(JDBCType.class.getName()).log(Level.SEVERE, null, ex);
@@ -74,8 +70,12 @@ public class CategoriesFromDB implements Categories{
             statement = connection.createStatement();
             ResultSet result = statement.executeQuery("SELECT * FROM projects WHERE id_category =" + categoryId);
             while (result.next()) {
-                s += "Номер проекта #" + result.getInt("id_project")
-                        + "\t" + result.getString("name_project") + "\n";
+                s += result.getInt("id_project")
+					+ ", " + result.getString("name_project")
+					+ ", " + result.getString("short_description_project")
+					+ ", " + result.getString("how_much_needed_project")
+					+ ", " + result.getString("how_much_collected_project")
+					+ "\n";
             }
         } catch (Exception ex) {
             Logger.getLogger(JDBCType.class.getName()).log(Level.SEVERE, null, ex);
@@ -153,14 +153,40 @@ public class CategoriesFromDB implements Categories{
 	}
 
 	@Override
-	public int[] projectsContain(int categoryId) {
-		// TODO Auto-generated method stub
-		return null;
+	public int[] projectsThatAreContainedInTheCategory(int categoryId) {
+		Connection connection = null;
+		ArrayList<Integer> array = new ArrayList<Integer>();
+        try {
+            Class.forName("org.postgresql.Driver");
+            connection = DriverManager.getConnection(JDBC_POSTGRESQL_PATH, NAME_DB, PASS_DB);
+            Statement statement = null;
+            statement = connection.createStatement();
+            ResultSet result = statement.executeQuery("SELECT * FROM projects WHERE id_category =" + categoryId);
+            while (result.next()) {
+            	array.add(result.getInt("id_project"));
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(JDBCType.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(JDBCType.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        int[] a = new int[array.size()];
+        int j = 0;
+        for (Integer i : array){
+        	a[j] = i;
+        	j++;
+        }
+		return a;
 	}
 
 	@Override
 	public int getCounterCategory() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
