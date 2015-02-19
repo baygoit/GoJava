@@ -13,8 +13,8 @@ import org.junit.Test;
  *
  */
 public class TestWorkWithFotos {
-    private PackageFotos pFotos1 = new PackageFotos("pack1", 250, 15, 10);
-    private PackageFotos pFotos2 = new PackageFotos("pack2", 45, 40, 15);
+    private PackageFotos pFotos1 = new PackageFotos("pack1", 250, 15, 10, 1);
+    private PackageFotos pFotos2 = new PackageFotos("pack2", 45, 40, 15, 2);
     
     private WorkWithFotos workWithFotos = new WorkWithFotos();
     
@@ -34,7 +34,7 @@ public class TestWorkWithFotos {
         for (PackageFotos pf : workWithFotos.allFotos) {
             count++;
         }
-        assertEquals("Error", 2, count);
+        assertEquals("Error in adding package", 2, count);
     }
     
     /**
@@ -48,7 +48,7 @@ public class TestWorkWithFotos {
         for (PackageFotos pf : workWithFotos.allFotos) {
             count++;
         }
-        assertEquals("Error", 1, count);
+        assertEquals("Error in removing package", 1, count);
     }
 
     /**
@@ -59,7 +59,7 @@ public class TestWorkWithFotos {
     public void testTimeEditingFotosInPackage() throws Exception {
         //fail("Not yet implemented"); // TODO
         int res = workWithFotos.timeEditingFotosInPackage();
-        assertEquals("Error", 102, res);
+        assertEquals("Error in editing time", 102, res);
     }
     
     @Test(expected = Exception.class)
