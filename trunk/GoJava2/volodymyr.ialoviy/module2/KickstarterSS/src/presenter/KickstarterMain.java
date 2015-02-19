@@ -3,6 +3,7 @@ package presenter;
 import model.Categories;
 import model.CategoriesFromFile;
 import model.Projects;
+import model.ProjectsFromFile;
 import view.Inputs;
 import view.InputsConsole;
 import view.Output;
@@ -13,7 +14,7 @@ public class KickstarterMain {
     	Inputs in = new InputsConsole();
     	Output out = new OutputConsole();
     	Categories categories = new CategoriesFromFile();
-    	Projects projects = new Projects();
+    	Projects projects = new ProjectsFromFile();
 
     	KickstarterS run = new KickstarterS(in, out, categories, projects);
     	run.kickstarter();

@@ -7,6 +7,7 @@ import java.util.Arrays;
 import model.Categories;
 import model.CategoriesFromFile;
 import model.Projects;
+import model.ProjectsFromFile;
 import model.ReaderDB;
 
 import org.junit.Test;
@@ -48,7 +49,7 @@ public class TestCategoriesClass {
 	
 	@Test
     public void shouldAllProjectInCategory_whenNotAllProjectInCategory(){
-		Projects projects = new Projects();
+		Projects projects = new ProjectsFromFile();
 		projects.writeAllProjects();
 		String s = categories.showAllProjectInCategory(0, projects);
 		assertTrue(s.equals("1, Progect-1, shortDescription-1, 1000, 10\n"

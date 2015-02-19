@@ -10,6 +10,7 @@ import java.util.List;
 import model.Categories;
 import model.CategoriesFromFile;
 import model.Projects;
+import model.ProjectsFromFile;
 
 import org.junit.Test;
 
@@ -45,7 +46,7 @@ public class TestKickstarterS {
 	    }
 	}
 	Categories categories = new CategoriesFromFile();
-	Projects projects = new Projects();
+	Projects projects = new ProjectsFromFile();
 
 	@Test
     public void testKickstarterS(){

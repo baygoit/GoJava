@@ -2,6 +2,7 @@ package mainkick;
 
 import static org.junit.Assert.assertTrue;
 import model.Projects;
+import model.ProjectsFromFile;
 
 import org.junit.Test;
 
@@ -9,7 +10,7 @@ public class TestProjectsClass {
 
 	@Test
     public void should1_when(){
-		Projects projects = new Projects();
+		Projects projects = new ProjectsFromFile();
 		projects.writeAllProjects();
 		String s = projects.showProjectFull(2);
 		assertTrue(s.equals("projectID = 3\n"		
