@@ -12,6 +12,7 @@ public class OutputConsole implements Output{
 		System.out.println(messages);
 	}
 	
+	@Override
     public List<String> getMessages() {
         return messages;
     }

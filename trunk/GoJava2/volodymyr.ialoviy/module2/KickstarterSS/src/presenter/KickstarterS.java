@@ -4,8 +4,8 @@ import model.Categories;
 import model.Projects;
 import model.Quotes;
 import util.InputChecker;
-import view.InputsConsole;
-import view.OutputConsole;
+import view.Inputs;
+import view.Output;
 
 
 public class KickstarterS {
@@ -21,23 +21,23 @@ public class KickstarterS {
 	private int chosenCategoryID;//TODO DELETE
 	private int chosenProject;//TODO DELETE
 
-    private InputsConsole in;
-    private OutputConsole out;
+    private Inputs in;
+    private Output out;
 	private Categories categories;
 	private Projects projects;
 
-	public KickstarterS(InputsConsole in, OutputConsole out, Categories categories, Projects projects) {
+	public KickstarterS(Inputs in, Output out, Categories categories, Projects projects) {
 		this.in = in;
 		this.setOut(out);
 		this.categories = categories;
 		this.projects = projects;
 	}
 
-    public OutputConsole getOut() {
+    public Output getOut() {
         return out;
     }
 
-	public void setOut(OutputConsole out) {
+	public void setOut(Output out) {
 	        this.out = out;
 	}
 
