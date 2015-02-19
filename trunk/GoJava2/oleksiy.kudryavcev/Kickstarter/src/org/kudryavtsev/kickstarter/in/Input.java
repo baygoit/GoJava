@@ -1,4 +1,4 @@
-package org.kudryavtsev.kickstarter.inout;
+package org.kudryavtsev.kickstarter.in;
 
 public class Input {
     private In in;

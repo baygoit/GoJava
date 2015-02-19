@@ -6,10 +6,10 @@ import static org.mockito.Mockito.verify;
 import org.junit.Test;
 import org.kudryavtsev.kickstarter.Controller;
 import org.kudryavtsev.kickstarter.data.Model;
-import org.kudryavtsev.kickstarter.inout.InArrayList;
-import org.kudryavtsev.kickstarter.inout.Input;
-import org.kudryavtsev.kickstarter.inout.OutArrayList;
-import org.kudryavtsev.kickstarter.inout.View;
+import org.kudryavtsev.kickstarter.in.InArrayList;
+import org.kudryavtsev.kickstarter.in.Input;
+import org.kudryavtsev.kickstarter.out.OutArrayList;
+import org.kudryavtsev.kickstarter.out.View;
 
 public class ControllerTest {
     Controller controller = new Controller(new Model(), new View(new OutArrayList()), new Input(

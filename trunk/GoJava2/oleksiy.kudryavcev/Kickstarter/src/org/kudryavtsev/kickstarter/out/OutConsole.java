@@ -1,4 +1,5 @@
-package org.kudryavtsev.kickstarter.inout;
+package org.kudryavtsev.kickstarter.out;
+
 
 
 public class OutConsole implements Out {

@@ -1,4 +1,4 @@
-package org.kudryavtsev.kickstarter.inout;
+package org.kudryavtsev.kickstarter.out;
 
 import java.util.List;
 

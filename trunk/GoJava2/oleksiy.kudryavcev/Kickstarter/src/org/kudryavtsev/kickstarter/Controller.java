@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.kudryavtsev.kickstarter.data.Category;
 import org.kudryavtsev.kickstarter.data.Model;
-import org.kudryavtsev.kickstarter.inout.Input;
-import org.kudryavtsev.kickstarter.inout.View;
+import org.kudryavtsev.kickstarter.in.Input;
+import org.kudryavtsev.kickstarter.out.View;
 
 public class Controller {
     private Model model;
