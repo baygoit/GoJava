@@ -12,21 +12,25 @@ import java.util.GregorianCalendar;
  * @author SASH
  *
  */
-public class FotoStudio implements ShowInfo{
+public class FotoStudio {
     private Contacts contacts;
     private String additionalInfo;
     ArrayList<Reserve> reservs = new ArrayList<Reserve>();
     private static int studioId;
 
-    public FotoStudio(Contacts contacts, String additionalInfo) {
-        // TODO Auto-generated constructor stub
-        this.contacts = contacts;
-        this.additionalInfo = additionalInfo;
-        studioId++;
+//    public FotoStudio(Contacts contacts, String additionalInfo) {
+//        // TODO Auto-generated constructor stub
+//        this.contacts = contacts;
+//        this.additionalInfo = additionalInfo;
+//        studioId++;
+//    }
+
+    static int getStudioId() {
+        return studioId;
     }
 
-    static int getId() {
-        return studioId;
+    static void setStudioId(int studioId) {
+        FotoStudio.studioId = studioId;
     }
     
     void addReserv(Reserve reserv) {
@@ -52,12 +56,5 @@ public class FotoStudio implements ShowInfo{
     void setAdditionalInfo(String additionalInfo) {
         this.additionalInfo = additionalInfo;
     }
-    
-    public void displayInfo() {
-        contacts.displayInfo();
-        System.out.println(additionalInfo);
-        for (Reserve reserve : reservs) {
-            reserve.displayInfo();
-        }
-    }
+
 }

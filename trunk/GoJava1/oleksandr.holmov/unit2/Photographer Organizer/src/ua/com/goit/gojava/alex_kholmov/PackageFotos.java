@@ -9,19 +9,24 @@ import java.io.Serializable;
  * @author SASH
  *
  */
-public class PackageFotos implements ShowInfo, Serializable{
+public class PackageFotos implements Serializable{
     private String describePackage;
     private int amountFotos;
-    private int timeEditingFoto; //minutes
-    private int percentReserve;  //percents
+    private int timeEditingOneFoto; //minutes
+    private int percentReserve;     //percents
+    private static int packageId;
 
-    public PackageFotos(String describePackage, int amountFotos, int timeEditingFoto, int percentReserve) {
-        this.describePackage = describePackage;
-        this.amountFotos = amountFotos;
-        this.timeEditingFoto = timeEditingFoto;
-        this.percentReserve = percentReserve;
+    public PackageFotos() {
+        // TODO Auto-generated constructor stub
     }
     
+    public PackageFotos(String describePackage, int amountFotos, int timeEditingFoto, int percentReserve, int packageId) {
+        this.describePackage = describePackage;
+        this.amountFotos = amountFotos;
+        this.timeEditingOneFoto = timeEditingFoto;
+        this.percentReserve = percentReserve;
+        this.packageId = packageId;
+    }
     
     @Override
     public int hashCode() {
@@ -30,7 +35,7 @@ public class PackageFotos implements ShowInfo, Serializable{
         result = prime * result + amountFotos;
         result = prime * result
                 + ((describePackage == null) ? 0 : describePackage.hashCode());
-        result = prime * result + timeEditingFoto;
+        result = prime * result + timeEditingOneFoto;
         result = prime * result + percentReserve;
         return result;
     }
@@ -51,14 +56,22 @@ public class PackageFotos implements ShowInfo, Serializable{
                 return false;
         } else if (!describePackage.equals(other.describePackage))
             return false;
-        if (timeEditingFoto != other.timeEditingFoto)
+        if (timeEditingOneFoto != other.timeEditingOneFoto)
             return false;
         if (percentReserve != other.percentReserve)
             return false;
         return true;
     }
 
+    
 
+    static int getPackageId() {
+        return packageId;
+    }
+
+    static void setPackageId(int packageId) {
+        PackageFotos.packageId = packageId;
+    }
 
     String getDescribePackage() {
         return describePackage;
@@ -77,27 +90,25 @@ public class PackageFotos implements ShowInfo, Serializable{
     }
     
     int getTimeEditingFoto() {
-        return timeEditingFoto;
+        return timeEditingOneFoto;
     }
     
     void setTimeEditingFoto(int timeEditingFoto) {
-        this.timeEditingFoto = timeEditingFoto;
+        this.timeEditingOneFoto = timeEditingFoto;
     }
     
-    int getTimeReserve() {
+    int getPercentReserve() {
         return percentReserve;
     }
-    
-    void setTimeReserve(int timeReserve) {
-        this.percentReserve = timeReserve;
+
+    void setPercentReserve(int percentReserve) {
+        this.percentReserve = percentReserve;
     }
 
-    @Override
-    public void displayInfo() {
-        // TODO Auto-generated method stub
-        System.out.println("Описание пакета фотографий: " + describePackage);
-        System.out.println("Количество фотографий в пакете: " + amountFotos);
-        System.out.println("Время на редактирование одной фотографии: " + timeEditingFoto);
-        System.out.println("Резерв времени на редактирование всего пакета в %: " + percentReserve);
+    //return time in minutes
+    int timeEditAllFoto() {
+        int allTime = amountFotos * timeEditingOneFoto;
+        return allTime + ((allTime * percentReserve) / 100);
     }
+
 }

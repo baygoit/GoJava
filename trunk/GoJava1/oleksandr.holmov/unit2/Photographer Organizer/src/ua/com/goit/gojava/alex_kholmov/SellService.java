@@ -9,7 +9,7 @@ import java.util.ArrayList;
  * @author SASH
  *
  */
-public class SellService implements ShowInfo{
+public class SellService {
     private String describe;
     private int price;
     private int serviceTime; //hours
@@ -37,15 +37,6 @@ public class SellService implements ShowInfo{
     }
     void setServiceTime(int serviceTime) {
         this.serviceTime = serviceTime;
-    }
-
-    @Override
-    public void displayInfo() {
-        // TODO Auto-generated method stub
-        System.out.println("Описание заказанного пакета услуг: " + describe);
-        System.out.println("Описание фотографий в услуге:");
-        System.out.println("Цена пакета: " + price);
-        System.out.println("Время: " + serviceTime);
     }
     
 }

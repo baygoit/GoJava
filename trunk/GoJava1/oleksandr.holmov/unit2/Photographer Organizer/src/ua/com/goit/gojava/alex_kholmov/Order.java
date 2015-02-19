@@ -20,19 +20,23 @@ public class Order {
     private Schedule schedule;
     private static int orderId;
 
-    public Order(Customer customer, FotoStudio fotoStudio, SellService service, Schedule schedule) {
-        // TODO Auto-generated constructor stub
-        this.customer = customer;
-        this.fotoStudio = fotoStudio;
-        this.service = service;
-        this.schedule = schedule;
-        orderId++;
-    }
+//    public Order(Customer customer, FotoStudio fotoStudio, SellService service, Schedule schedule) {
+//        // TODO Auto-generated constructor stub
+//        this.customer = customer;
+//        this.fotoStudio = fotoStudio;
+//        this.service = service;
+//        this.schedule = schedule;
+//        orderId++;
+//    }
 
     static int getId() {
         return orderId;
     }
     
+    static void setOrderId(int orderId) {
+        Order.orderId = orderId;
+    }
+
     void setCustomer(Customer customer) {
         this.customer = customer;
     }

@@ -23,14 +23,11 @@ public class WorkWithFotos {
     //return in hours
     int timeEditingFotosInPackage() throws Exception {
         if (allFotos.isEmpty()) {
-            throw new Exception("¬ы не добавили ни одного пакета дл€ обработки!");
+            throw new Exception("You shoud add at least one package!");
         } else {
             int hoursToEditAllPhotos = 0;
             for (PackageFotos pFotos : allFotos) {
-                int allTime = pFotos.getTimeEditingFoto() * pFotos.getAmountFotos();
-                int editAllFotos = allTime
-                        + ((allTime * pFotos.getTimeReserve()) / 100);
-                hoursToEditAllPhotos += editAllFotos / 60;
+                hoursToEditAllPhotos += pFotos.timeEditAllFoto() / 60;
             }
             return hoursToEditAllPhotos;
         }

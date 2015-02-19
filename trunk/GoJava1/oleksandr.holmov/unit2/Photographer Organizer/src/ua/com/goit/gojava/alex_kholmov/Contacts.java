@@ -7,16 +7,16 @@ package ua.com.goit.gojava.alex_kholmov;
  * @author SASH
  *
  */
-public class Contacts implements ShowInfo{
+public class Contacts {
     private String name;
     private String address;
     private String phone;
 
-    public Contacts(String name, String address, String phone) {
-        this.name = name;
-        this.address = address;
-        this.phone = phone;
-    }
+//    public Contacts(String name, String address, String phone) {
+//        this.name = name;
+//        this.address = address;
+//        this.phone = phone;
+//    }
     
     String getName() {
         return name;
@@ -37,9 +37,4 @@ public class Contacts implements ShowInfo{
         this.phone = phone;
     }
 
-    public void displayInfo() {
-        System.out.println("Имя или наименование: " + name);
-        System.out.println("Адрес: " + address);
-        System.out.println("Телефон: " + phone);
-    }
 }

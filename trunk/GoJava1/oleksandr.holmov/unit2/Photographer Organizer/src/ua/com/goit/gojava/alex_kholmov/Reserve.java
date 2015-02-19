@@ -3,24 +3,22 @@
  */
 package ua.com.goit.gojava.alex_kholmov;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 
 /**
  * @author SASH
  *
  */
-public class Reserve implements ShowInfo{
-    private Calendar reserveDate;
+public class Reserve {
+    private Date reserveDate;
     private int reserveTime;
-
-    public Reserve(int reserveTime) {
-        //create reserve studio with current date and time
-        Calendar reserveDate = new GregorianCalendar();
-        this.reserveDate = reserveDate;
-        this.reserveTime = reserveTime;
-    }
+    static String PATTERN = "dd.MM.yyyy HH:mm";
+    
+    private SimpleDateFormat dateFormat = new SimpleDateFormat(PATTERN);
     
     @Override
     public int hashCode() {
@@ -59,18 +57,17 @@ public class Reserve implements ShowInfo{
         this.reserveTime = reserveTime;
     }
 
-    Calendar getReserveDate() {
-        return reserveDate;
+    String getReserveDate() {
+        return dateFormat.format(reserveDate);
     }
     
-    void setReserveDate(int year, int month, int date, int hourOfDay, int minute) {
-        reserveDate = new GregorianCalendar();
-        reserveDate.set(year, Calendar.MONTH, date, hourOfDay, minute);
+    void setReserveDate(String date) {
+        try {
+            reserveDate = dateFormat.parse(date);
+        } catch (ParseException e) {
+            // TODO: handle exception
+            System.err.print(e.getMessage());
+        }
     }
     
-    public void displayInfo() {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy hh:mm");
-        System.out.println("Студия зарезарвирована на " + dateFormat.format(reserveDate.getTime()));
-        System.out.println("Время работы в студии " + reserveTime + " часов");
-    }
 }

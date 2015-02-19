@@ -13,9 +13,10 @@ import java.util.GregorianCalendar;
  * @author SASH
  *
  */
-public class Schedule implements ShowInfo{
+public class Schedule {
     static int TIME_WORKING_IN_WORK_DAY = 3; //hours
     static int TIME_WORKING_IN_DAY_OFF = 6; //hours
+    static String PATTERN = "dd.MM.yyyy";
     
     private int amountDays = 0;
     private WorkWithFotos workWithFotos;
@@ -24,7 +25,7 @@ public class Schedule implements ShowInfo{
     Calendar startWork;
     Calendar endWork;
     
-    private SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+    private SimpleDateFormat dateFormat = new SimpleDateFormat(PATTERN);
     
     WorkWithFotos getWorkWithFotos() {
         return workWithFotos;
@@ -43,14 +44,26 @@ public class Schedule implements ShowInfo{
         this.amountDays = amountDays;
     }
     
-    void setDeadline(int year, int month, int date) {
-        deadline = Calendar.getInstance(); 
-        deadline.set(year, Calendar.MONTH, date);
+    void setDeadline(String date) {
+        try {
+            Date dateParse = dateFormat.parse(date);
+            deadline = Calendar.getInstance();
+            deadline.setTime(dateParse);
+        } catch (ParseException e) {
+            // TODO: handle exception
+            System.err.print(e.getMessage());
+        }
     }
     
-    void setStartWork(int year, int month, int date) {
-        startWork = Calendar.getInstance(); 
-        startWork.set(year, Calendar.MONTH, date);
+    void setStartWork(String date) {
+        try {
+            Date dateParse = dateFormat.parse(date);
+            startWork = Calendar.getInstance();
+            startWork.setTime(dateParse);
+        } catch (ParseException e) {
+            // TODO: handle exception
+            System.err.print(e.getMessage());
+        }
     }
     
     void calcEndWork() throws Exception {
@@ -70,7 +83,7 @@ public class Schedule implements ShowInfo{
             }
         } catch (ParseException e) {
             // TODO Auto-generated catch block
-            e.printStackTrace();
+            System.err.print(e.getMessage());
         }
     }
     
@@ -87,10 +100,5 @@ public class Schedule implements ShowInfo{
             return false;
         }
     }
-    
-    public void displayInfo() {
-        System.out.println("Дата окончания работ по договору: " + dateFormat.format(deadline.getTime()));
-        System.out.println("Дата начала работы: " + dateFormat.format(startWork.getTime()));
-        System.out.println("Посчитанная дата окончания работы: " + dateFormat.format(endWork.getTime()));
-    }
+
 }
