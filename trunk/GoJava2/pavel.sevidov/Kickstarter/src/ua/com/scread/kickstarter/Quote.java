@@ -1,12 +1,12 @@
-package ua.com.scread.kickstarter;
+package ua.com.scread.kickstarter.data;
 
 import java.util.ArrayList;
 import java.util.Random;
 
-public class QuoteGenerator {
+public class Quote {
 	private Random random;
 	
-	public QuoteGenerator(Random random) {
+	public Quote(Random random) {
 		this.random = random;
 	}
 	
