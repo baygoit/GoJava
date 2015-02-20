@@ -1,14 +1,26 @@
-package ua.com.scread.kickstarter;
+package ua.com.scread.kickstarter.controller;
 
 import java.util.Arrays;
 import java.util.List;
 
+import ua.com.scread.kickstarter.data.AdditionalInfo;
+import ua.com.scread.kickstarter.data.Bonus;
+import ua.com.scread.kickstarter.data.Category;
+import ua.com.scread.kickstarter.data.FAQ;
+import ua.com.scread.kickstarter.data.Project;
+import ua.com.scread.kickstarter.data.Quote;
+import ua.com.scread.kickstarter.io.IO;
+import ua.com.scread.kickstarter.model.Model;
+import ua.com.scread.kickstarter.storage.Bonuses;
+import ua.com.scread.kickstarter.storage.Categories;
+import ua.com.scread.kickstarter.storage.FAQs;
+
 public class Controller {
 	private Model model;
     private IO io;
-    private QuoteGenerator quote;
+    private Quote quote;
 
-    public Controller(Model model, IO io, QuoteGenerator quote) {
+    public Controller(Model model, IO io, Quote quote) {
         this.model = model;
         this.io = io;
         this.quote = quote;
@@ -22,6 +34,7 @@ public class Controller {
     
     private Menu categoryMenu() {
         return new Menu(io) {
+            Categories categories = model.getCategories();
             
             @Override
             Menu nextMenu(Object selected) {
@@ -32,13 +45,12 @@ public class Controller {
             
             @Override
             Object choose(int menuItem) {
-                Categories categories = model.getCategories();
-                return categories.getCategory(menuItem - 1);
+                return categories.get(menuItem - 1);
             }
             
             @Override
             void ask() {
-                showCategoies();                 
+                showCategories(categories);                 
             }
         };
     }
@@ -124,7 +136,7 @@ public class Controller {
             
             @Override
             Menu nextMenu(Object selected) {
-                if (selected.toString() != "") { // TODO придумать лучшее решение
+                if ("".equals(selected)) { // TODO придумать лучшее решение
                     Bonus bonus = (Bonus)selected;
                     donateWithBonus(project, bonus);
                 }
@@ -199,18 +211,20 @@ public class Controller {
 		io.print(message + "\n");
 	}
 	
-	public void greed(QuoteGenerator quote) {
+	public void greed(Quote quote) {
 		println(quote.getQuote());
-	}
-
-	public void showCategoies() {
-		io.print("\nChoose category: ");
-		io.print(Arrays.toString(model.getCategories().getStringCategories()));
-		showExit();
 	}
 
 	public void showCategory(Category category) {
 		println("You choosed: " + category.getName());
+	}
+	
+	public void showCategories(Categories categories) {
+	    io.print("\nChoose category: ");
+	    for(int i = 0; i < categories.size(); i++) {
+	        io.print("[" + String.valueOf(i+1) + " - " + categories.get(i).getName() + "] ");
+	    }
+	    showExit();
 	}
 	
 	public void showProjects(List<Project> projects) {

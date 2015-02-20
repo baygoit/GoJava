@@ -1,20 +1,30 @@
-package ua.com.scread.kickstarter;
+package ua.com.scread.kickstarter.data;
 
 public class Category {
-	private String name;
+    private String name;
+    private int index;
 
-	public Category(String name) {
-		this.name = name;
-	}
+    public Category(String name) {
+        this.name = name;
+    }
+    
+    public Category(int index, String name) {
+        this(name);
+        this.index = index;
+    }
 
-	public String getName() {
-		return name;
-	}
-	
-	@Override
-	public String toString() {
+    public String getName() {
+        return name;
+    }
+    
+    @Override
+    public String toString() {
         return name + "\n";
-	}
+    }
+
+    public int getIndex() {
+        return index;
+    }
 
     @Override
     public int hashCode() {
@@ -26,18 +36,30 @@ public class Category {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
+        if (this == obj) {
+            return true;            
+        }
+        
+        if (obj == null) {
+            return false;            
+        }
+        
+        if (getClass() != obj.getClass()) {
+            return false;            
+        }
+        
         Category other = (Category) obj;
+        
         if (name == null) {
-            if (other.name != null)
-                return false;
-        } else if (!name.equals(other.name))
-            return false;
+            if (other.name != null) {
+                return false;                
+            }
+        } else if (!name.equals(other.name)) {
+            return false;            
+        }
+        
         return true;
     }
+    
+    
 }
