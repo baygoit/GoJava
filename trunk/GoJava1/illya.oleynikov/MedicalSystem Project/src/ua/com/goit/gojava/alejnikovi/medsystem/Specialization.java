@@ -3,7 +3,7 @@ package ua.com.goit.gojava.alejnikovi.medsystem;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Specialization {
+public class Specialization implements FIleWorkable{
 	
 	private String name;
 		
@@ -23,6 +23,18 @@ public class Specialization {
 			}
 		}
 		return doctorsWithSpec;
+	}
+	
+	@Override
+	public String markupForFile() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	@Override
+	public Specialization createObjFromFile() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 
