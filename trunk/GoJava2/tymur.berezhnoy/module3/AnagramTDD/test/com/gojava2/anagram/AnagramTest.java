@@ -12,7 +12,7 @@ public class AnagramTest {
 	private Anagram anagram;
 	
 	@Before
-	public void createAnagram() {
+	public void setUp() {
 		anagram = new Anagram();
 	}
 	
@@ -57,7 +57,8 @@ public class AnagramTest {
 	
 	@Test
 	public void shouldBe_samePosition_whenParamIs_specificSymbol() {
-		test(anagram.getDelimiters(), anagram.getDelimiters());
+		anagram.setNewDelimiters("^&*");
+		test("ab^&*", "ba^&*");
 	}
 	
 	@Test

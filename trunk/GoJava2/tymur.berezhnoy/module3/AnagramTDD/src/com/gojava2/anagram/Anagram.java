@@ -39,13 +39,13 @@ public class Anagram {
 		String resultString = "";
 		if(sentence == null) {
 			return resultString;
-		}
-		
+		} else {
 		StringTokenizer token = new StringTokenizer(sentence, getDelimiters(), true);
 		while (token.hasMoreTokens()){
 			resultString += new StringBuffer(token.nextToken()).reverse();
 		}
 		return resultString;
+		}
 	}
 	
 	public static void main(String[] args) {
