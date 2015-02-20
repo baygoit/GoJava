@@ -3,7 +3,7 @@ package presenter;
 import model.Categories;
 import model.Projects;
 import model.Quotes;
-import model.QuotesFromFile;
+import model.QuotesFromDB;
 import util.InputChecker;
 import view.Inputs;
 import view.Output;
@@ -43,11 +43,8 @@ public class KickstarterS {
 	}
 
 	public void kickstarter() {
-		Quotes quote = new QuotesFromFile();
+		Quotes quote = new QuotesFromDB();
 		printer(quote.getQuote());
-		
-		categories.writeAllCatecories();
-		projects.writeAllProjects();
 		
 		categories();
 	}
@@ -110,7 +107,7 @@ public class KickstarterS {
 			inAmount();
 		}
 
-		projects.setDonation(chosenProject - 1, chosenPay);
+		projects.setDonation(chosenProject, chosenPay);
 		
 		printThank(name, chosenPay);
 		

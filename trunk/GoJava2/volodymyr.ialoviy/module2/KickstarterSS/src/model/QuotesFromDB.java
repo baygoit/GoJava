@@ -33,7 +33,6 @@ public class QuotesFromDB implements Quotes{
             int countQuote = 0;
             ResultSet result1 = statement.executeQuery("SELECT COUNT(*) FROM quotes;");
             while (result1.next()) {
-            	System.out.println(result1.getInt("count"));
                 countQuote = result1.getInt("count");
             }
             
