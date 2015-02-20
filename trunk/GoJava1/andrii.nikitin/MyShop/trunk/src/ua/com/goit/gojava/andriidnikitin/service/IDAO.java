@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface IDAO<T> {
 	
-	public void create(T arg);
+	public boolean create(T arg);
 	
 	public void update (T arg);
 	

@@ -29,4 +29,6 @@ public class GoodType {
 		this.parent = parent;
 	}
 	
+	
+	
 }

@@ -42,7 +42,7 @@ public class GoodSuppliesImpl implements GoodSupplies {
 			throw new ShopException("Storage not found");
 		}
 		else {
-			return 1;
+			return 1;//TODO - get data from Supplies 
 		}
 	}
 

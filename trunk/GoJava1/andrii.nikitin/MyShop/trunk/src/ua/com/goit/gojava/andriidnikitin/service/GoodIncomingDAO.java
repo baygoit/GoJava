@@ -10,8 +10,8 @@ public class GoodIncomingDAO implements IDAO<GoodIncoming> {
 	List<GoodIncoming> list;
 
 	@Override
-	public void create(GoodIncoming arg) {
-		list.add(arg);
+	public boolean create(GoodIncoming arg) {
+		return list.add(arg);
 		
 	}
 

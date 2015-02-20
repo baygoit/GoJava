@@ -13,4 +13,13 @@ public interface GoodCatalog {
 
 	public List<Good> getGoodsInType(GoodType type);
 	
+	public List<GoodType> getChildren(GoodType parent);
+	
+	public Boolean hasChildren(GoodType parent);
+	
+	public Boolean isRoot(GoodType type);
+	
+	public List<Good> getAllGoods();//TODO - replace
+
+	public boolean addGood(Good element);
 }	

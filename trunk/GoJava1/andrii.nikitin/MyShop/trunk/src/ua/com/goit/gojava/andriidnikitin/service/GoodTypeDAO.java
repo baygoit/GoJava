@@ -17,10 +17,8 @@ public class GoodTypeDAO implements IDAO<GoodType> {
 	}
 
 	@Override
-	public void create(GoodType arg) {
-		
-		list.add(arg);
-
+	public boolean create(GoodType arg) {		
+		return list.add(arg);
 	}
 
 	@Override

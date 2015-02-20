@@ -94,6 +94,36 @@ public class GoodCatalogImpl implements GoodCatalog{
 		good.setType(type);
 		return good;
 	}
+
+	@Override
+	public List<GoodType> getChildren(GoodType parent) {
+		List<GoodType> result = new ArrayList<GoodType>();
+		for (GoodType type: types.getAll()){
+			if (typesAreEqual(parent, type.getParent())){
+				result.add(type);
+			}
+		}
+		return result;
+	}
+
+	@Override
+	public Boolean hasChildren(GoodType parent) {
+		if (parent == null) {
+			return (!types.getAll().isEmpty());
+		}
+		List<GoodType> typeList = types.getAll();
+		for (GoodType type: typeList) {
+			if (typesAreEqual(parent, type.getParent())) {
+				return true;
+			}
+		}
+			return false;
+	}
+
+	@Override
+	public Boolean isRoot(GoodType type) {
+		return (type.getParent() == null);
+	}
 	
 	/*private String[] writeGood(Good good){
 		String[] result = new String[5];
@@ -105,4 +135,44 @@ public class GoodCatalogImpl implements GoodCatalog{
 		return result;
 	}*/
 	
+	private Boolean typesAreEqual(GoodType arg0, GoodType arg1) {
+		try{
+		return arg0.getId().equals(arg1.getId());
+		} catch (NullPointerException ex){
+			return (arg0==arg1);
+		}
+	}
+	
+	private GoodType getTypeByName(String name){
+		GoodType type = null;
+		for (GoodType tempType: types.getAll() ) {
+			String tempName = tempType.getName();
+			System.out.println(name+ tempName);
+			if (tempName.equals(name)) {
+				return tempType;
+			}
+		}
+		return type;
+		
+	}
+
+	@Override
+	public List<Good> getAllGoods() {
+		return goods.getAll();
+	}
+
+	@Override
+	public boolean addGood(Good element) {
+		return goods.create(element);
+		
+	}	
+	
+	public Good factoryGood(String name, String typeName) {
+		Good result = new Good();
+		result.setName(name);
+		GoodType type = getTypeByName(typeName);
+		result.setType(type);
+		return result ;
+		
+	}
 }

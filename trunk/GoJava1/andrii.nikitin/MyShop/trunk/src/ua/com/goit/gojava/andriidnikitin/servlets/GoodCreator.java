@@ -2,8 +2,13 @@ package ua.com.goit.gojava.andriidnikitin.servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -11,44 +16,59 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import ua.com.goit.gojava.andriidnikitin.model.Good;
-import ua.com.goit.gojava.andriidnikitin.model.GoodType;
 import ua.com.goit.gojava.andriidnikitin.service.GoodCatalog;
 import ua.com.goit.gojava.andriidnikitin.service.GoodCatalogImpl;
 
-public class CategoryPrinter extends HttpServlet {
+public class GoodCreator extends HttpServlet {
 	
     private static final long serialVersionUID = 1L;
-    public CategoryPrinter() {
+    public GoodCreator() {
         super();
         // TODO Auto-generated constructor stub
     }
 
     protected void doGet(HttpServletRequest request,
-            HttpServletResponse response) throws ServletException, IOException {
+            HttpServletResponse response) throws ServletException, IOException {/*
     	PrintWriter out = response.getWriter();   
-    	printCategories(null, out, GoodCatalogImpl.getInstance(), request);
+    	printCategories(null, out, GoodCatalogImpl.getInstance(), request);*/
      }
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     		throws ServletException, IOException {
     	PrintWriter out = response.getWriter();   
-    	Enumeration<String> paramNames = request.getParameterNames(); 
-    	if (paramNames.hasMoreElements()){    		
-    		Integer id = Integer.parseInt(paramNames.nextElement());
-    		GoodCatalog catalog = GoodCatalogImpl.getInstance();
-    	   	List<GoodType> list = catalog.getGoodTypesFromRoot();
-    	   	GoodType calledType = null;
-    	   	for (GoodType type: list) {
-    	   		if (id.equals(type.getId())) {
-    	   			calledType = type;
-    	   		}
-    	   	}
-    	   	printCategories(calledType, out, catalog, request);	
+    	Map<String, String[]> map = request.getParameterMap();   
+    	if (!map.isEmpty()) {   
+    		List<String> names = new ArrayList<String>();
+	    	Set<Entry<String, String[]>> set = map.entrySet();
+	    	for (Entry<String, String[]> attribute: set){
+	    		String[] array = attribute.getValue();
+	    		names.add(array[0]);
+	    	}    	
+    		GoodCatalogImpl catalog = GoodCatalogImpl.getInstance(); 
+    	   	addGood(catalog.factoryGood(names.get(0), names.get(1)), out, catalog, request);	
+    	}
+    	else {
+    		out.println("<p> no parameters recieved </p>");
     	}
     	   	
     } 
-    private void printCategories(GoodType root, PrintWriter out, GoodCatalog catalog,
+    private void addGood(Good element, PrintWriter out, GoodCatalog catalog,
     		HttpServletRequest request){
+    	if (element.getType() == null) {
+    		out.println("<p> fail to add - such type does not exist! </p>");
+    	}
+    	else {
+    		if (!catalog.addGood(element)) {
+        		out.println("<p> fail to add </p>");
+        	}
+        	
+        	else {
+        		out.println("<p> done </p>");
+        	}  
+    	}
+    	  	
+    	
+    	/*
     	if (catalog.hasChildren(root)){
 	    	//out.println("<head><link href=\"css/navbar.css\" rel=\"stylesheet\" type=\"text/css\"/></head>");
 	    	out.println("<table>\n<form action=\"" + request.getContextPath() + "/print-categories\"" + 
@@ -73,7 +93,7 @@ public class CategoryPrinter extends HttpServlet {
     		out.println("<input type=\"submit\">");
     	   	out.println("</ul></table>");
     		
-    	}
+    	}*/
     }	
    
  }

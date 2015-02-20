@@ -8,32 +8,36 @@
 </head>
 
 <body>
+	<h2> Welcome!</h2>
+	
+	<div> 
+			<table id="topside" border="3">
+				<tr>
+					<td><a href="pages/welcome.html" target="main-frame"> Home </a></td>
+					<td><a href="pages/content.html" target="main-frame"> Catalog </a></td>
+					<td><a href="pages/construct.html" target="main-frame"> About </a></td>
+				</tr>
+			</table>
+	</div>			
 
-	<table id="topside" border="3">
-		<tr>
-			<td><a href="welcome.html" target="main-frame"> Home </a></td>
-			<td><a href="content.html" target="main-frame"> Catalog </a></td>
-			<td><a href="construct.html" target="main-frame"> About </a></td>
-		</tr>
-	</table>
-
-	<p>
-	<div>
-		<iframe name="main-frame" height="400" width="400"> </iframe>
+	<div> 
+		<p>
+			<iframe name="main-frame" height="400" width="400"> </iframe>
+		</p>
 	</div>
-	</p>
-
-	<p>
+	
 	<table>
 		<tr>
-			<td><a href="construct.html" target="main-frame"> Contacts </a>
+			<td><a href="pages/construct.html" target="main-frame"> Contacts </a>
 			</td>
-			<td><a href="construct.html" target="main-frame"> Gallery </a></td>
-			<td><a href="construct.html" target="main-frame"> Unicorns </a>
+			<td><a href="pages/construct.html" target="main-frame"> Gallery </a>
+			</td>
+			<td><a href="pages/unicorns_page.html" target="main-frame"> Unicorns </a>
+			</td>
+			<td><a href="editor_page.jsp"> Editing </a>
 			</td>
 		</tr>
 	</table>
-	</p>
 
 </body>
 </html>
