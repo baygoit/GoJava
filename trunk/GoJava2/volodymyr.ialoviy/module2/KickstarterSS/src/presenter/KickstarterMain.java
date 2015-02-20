@@ -4,7 +4,6 @@ import model.Categories;
 import model.CategoriesFromDB;
 import model.Projects;
 import model.ProjectsFromDB;
-//import model.ProjectsFromFile;
 import view.Inputs;
 import view.InputsConsole;
 import view.Output;

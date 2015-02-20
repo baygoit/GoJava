@@ -4,17 +4,22 @@ import java.util.Arrays;
 
 
 public class QuotesFromFile implements Quotes {
+	private static final String QUOTES_PROPERTIES = "Quotes.properties";
 	private String[] quote;
-	public static ArrayList<String[]> quoteBD;
-	{
-	    ReaderDB reader = new ReaderDB();
-		quoteBD = reader.read("Quotes.properties");
-	}
+	private ArrayList<String[]> quoteBD;
 	
 	@Override
 	public String getQuote(){
+		ReaderDB reader = new ReaderDB();
+		quoteBD = reader.read(QUOTES_PROPERTIES);
 		ArrayList<String[]> linesAsArray = quoteBD;
-		quote = linesAsArray.get((int) (Math.random() * (linesAsArray.size() - 1) + 0.5));
+		int countQuote = linesAsArray.size() - 1;
+		quote = linesAsArray.get(random(countQuote));
 		return Arrays.toString(quote);
+	}
+
+	@Override
+	public int random(int countQuote) {
+		return (int) (Math.random() * countQuote + 0.5);
 	}
 }

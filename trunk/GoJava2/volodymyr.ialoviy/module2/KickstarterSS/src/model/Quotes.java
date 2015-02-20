@@ -2,6 +2,8 @@ package model;
 
 public interface Quotes {
 
-	public abstract String getQuote();
+	String getQuote();
+	
+	int random(int countQuote);
 
 }

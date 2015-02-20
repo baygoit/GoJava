@@ -4,24 +4,24 @@ import java.util.ArrayList;
 
 public interface Categories {
 
-	public abstract void writeAllCatecories();
+	void writeAllCatecories();
 
-	public abstract String showAllCatecoriesInKickstarter();
+	String showAllCatecoriesInKickstarter();
 
-	public abstract String showAllProjectInCategory(int categoryId,	Projects projects);
+	String showAllProjectInCategory(int categoryId,	Projects projects);
 
-	public abstract String showCatecoryName(int categoryId);
+	String showCatecoryName(int categoryId);
 
-	public abstract int[] getKickCategories();
+	int[] getKickCategories();
 
-	public abstract int[] projectsThatAreContainedInTheCategory(int categoryId);
+	int[] projectsThatAreContainedInTheCategory(int categoryId);
 
-	public abstract int getCounterCategory();
+	int getCounterCategory();
 
-	public abstract void setCounterCategory(int counterCategory);
+	void setCounterCategory(int counterCategory);
 
-	public abstract ArrayList<Category> getListCatecories();
+	ArrayList<Category> getListCatecories();
 
-	public abstract void setListCatecories(ArrayList<Category> listCatecories);
+	void setListCatecories(ArrayList<Category> listCatecories);
 
 }
