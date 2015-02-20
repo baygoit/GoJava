@@ -1,4 +1,6 @@
-package ua.com.scread.kickstarter;
+package ua.com.scread.kickstarter.controller;
+
+import ua.com.scread.kickstarter.io.IO;
 
 public abstract class Menu {
     private IO io;
@@ -6,8 +8,7 @@ public abstract class Menu {
     public Menu(IO io) {
         this.io = io;
     }
-    // уйти от зависимости меню от IO. Выделить метод abstract read(), который нужно  
-    // переопределять для конкретного считывания.
+    
     public void run() {
         while (true) {
             ask(); 

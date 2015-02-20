@@ -1,16 +1,15 @@
-package ua.com.scread.kickstarter;
+package ua.com.scread.kickstarter.main;
+
+import ua.com.scread.kickstarter.controller.Controller;
+import ua.com.scread.kickstarter.data.Quote;
+import ua.com.scread.kickstarter.io.IO;
+import ua.com.scread.kickstarter.model.Model;
 
 public class KickstarterRunner {
-	@SuppressWarnings("unused")
-    private Model model;
-	private Controller controller;
-	@SuppressWarnings("unused")
-    private IO io;
+    private Controller controller;
     
-    public KickstarterRunner(Model model, IO io, QuoteGenerator quote) {
-    	this.model = model;
-    	this.io = io;
-    	this.controller = new Controller(model, io, quote);
+    public KickstarterRunner(Model model, IO io, Quote quote) {
+        this.controller = new Controller(model, io, quote);
     }
     
     public void run() {
