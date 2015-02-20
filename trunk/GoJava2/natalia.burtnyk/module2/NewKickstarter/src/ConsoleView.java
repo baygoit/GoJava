@@ -6,7 +6,7 @@ public class ConsoleView {
 	private Сategory сategory;
 	private StorageController controller;
 	
-	private String greating = " Welcome to Kickstarter";
+	private String greating =" Welcome to Kickstarter";
 	
 	public ConsoleView() {
 		controller = new StorageController();
@@ -37,12 +37,16 @@ public class ConsoleView {
 		projects = controller.getSpecificProjects(сategory);
 		for (Project project: projects) {
 			System.out.print(project.shortInfo() + "\n"
-					+ "----------------------------" + "\n");
+					+ "----------------------------------" + "\n");
 		}
 	}
 	
-	public void displayCurrentProject(int i){
+	public void displayCurrentProject(int i) {
+		if(i > 0 && i <= projects.size()) {
 		System.out.print("\n" + projects.get(i - 1).allInfo() + "\n"
-				+ "----------------------------" + "\n");
+				+ "--------------------------------" + "\n");
+		} else {
+			System.out.println("Incorrect number. Please try again.");
+		}
 	}		
 }

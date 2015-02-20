@@ -23,22 +23,22 @@ public class Project {
 	public String shortInfo() {
 		StringBuilder stringBuilder = new StringBuilder();
 			stringBuilder.append(name).append("\n")
-						 .append("Description: ").append(description)
-						 .append("\n").append("Required Amount: ").append(requiredAmount).append("$")
-						 .append("\n").append("Total: ").append(total).append("$")
-						 .append("\n").append("Days: ").append( days);
+						 .append("Description:        ").append(description)
+						 .append("\n").append("Required Amount:    ").append(requiredAmount).append("$")
+						 .append("\n").append("Total:              ").append(total).append("$")
+						 .append("\n").append("Days:               ").append( days);
 		return stringBuilder.toString();
 	}
 	
 	public String allInfo() {
 		StringBuilder stringBuilder = new StringBuilder();
 			stringBuilder.append(name).append("\n")
-						 .append("Description: ").append(description)
-						 .append("\n").append("Required Amount: ").append(requiredAmount).append("$")
-						 .append("\n").append("Total: ").append(total).append("$")
-						 .append("\n").append("Days: ").append( days)
-						 .append("\n").append("History: ").append(history)
-						 .append("\n").append("URL: ").append(url);
+						 .append("Description:        ").append(description)
+						 .append("\n").append("Required Amount:    ").append(requiredAmount).append("$")
+						 .append("\n").append("Total:              ").append(total).append("$")
+						 .append("\n").append("Days:               ").append( days)
+						 .append("\n").append("History:            ").append(history)
+						 .append("\n").append("URL:                ").append(url);
 		return stringBuilder.toString();
 	}
 }
