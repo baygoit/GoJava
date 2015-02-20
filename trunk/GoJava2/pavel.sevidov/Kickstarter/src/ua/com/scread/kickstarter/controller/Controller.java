@@ -1,6 +1,5 @@
 package ua.com.scread.kickstarter.controller;
 
-import java.util.Arrays;
 import java.util.List;
 
 import ua.com.scread.kickstarter.data.AdditionalInfo;
@@ -136,7 +135,7 @@ public class Controller {
             
             @Override
             Menu nextMenu(Object selected) {
-                if ("".equals(selected)) { // TODO придумать лучшее решение
+                if (!"".equals(selected)) { // TODO придумать лучшее решение
                     Bonus bonus = (Bonus)selected;
                     donateWithBonus(project, bonus);
                 }
