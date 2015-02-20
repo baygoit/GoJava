@@ -1,8 +1,8 @@
 package ua.home.kickstarter.content;
 
 public class Project {
-	private final char dollarSymbol = 36;
 	private String name;
+	private int id;
 	private int goal;
 	private int pledged;
 	private int daysLeft;
@@ -10,22 +10,19 @@ public class Project {
 	private String history;
 	private String linksToVideo;
 	private String questionAnswers;
-	private Category category;
 
-	public Project(String name, String description, int goal, int daysLeft, String linksToVideo, Category category) {
+	public Project(String name, String description, int goal, int daysLeft, String linksToVideo) {
 		this.name = name;
-		this.description = description;
 		this.goal = goal;
+		this.pledged = 0;
 		this.daysLeft = daysLeft;
+		this.description = description;
 		this.history = null;
 		this.linksToVideo = linksToVideo;
-		this.pledged = 0;
 		this.questionAnswers = null;
-		this.category = category;
 	}
- 
-	public void setCategory(Category category) {
-		this.category = category;
+
+	public Project() {
 	}
 
 	public void setHistory(String history) {
@@ -33,11 +30,15 @@ public class Project {
 	}
 
 	public void setQuestionAnswers(String questionAnswers) {
-		this.questionAnswers = questionAnswers;
+		if (this.questionAnswers == null) {
+			this.questionAnswers = questionAnswers;
+		} else {
+			this.questionAnswers += '\n' + questionAnswers;
+		}
 	}
 
-	public Category getCategory() {
-		return category;
+	public int getPledged() {
+		return pledged;
 	}
 
 	public String getName() {
@@ -48,20 +49,59 @@ public class Project {
 		this.pledged += i;
 	}
 
-	public String getShortInfo() {
-		StringBuilder shortInfo = new StringBuilder();
-		shortInfo.append(" - ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓").append("\nНазвание проекта: ").append(name)
-				.append("\nОписание проекта: ").append(description).append("\nНеобходимая сумма: ").append(goal)
-				.append(dollarSymbol).append("\nУже собрали: ").append(pledged).append(dollarSymbol)
-				.append("\nДо окончания сбора средств: ").append(daysLeft).append(" дней");
-		return shortInfo.toString();
+	public int getGoal() {
+		return goal;
 	}
 
-	public String getFullInfo() {
-		StringBuilder fullInfo = new StringBuilder();
-		fullInfo.append(getShortInfo()).append("\nИстория проекта: ").append(history)
-				.append("\nЛинки на видео с демо: ").append(linksToVideo).append("\nВопросы/ответы: ")
-				.append(questionAnswers);
-		return fullInfo.toString();
+	public void setGoal(int goal) {
+		this.goal = goal;
+	}
+
+	public int getDaysLeft() {
+		return daysLeft;
+	}
+
+	public void setDaysLeft(int daysLeft) {
+		this.daysLeft = daysLeft;
+	}
+
+	public void setPledged(int pledged) {
+		this.pledged = pledged;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getLinksToVideo() {
+		return linksToVideo;
+	}
+
+	public void setLinksToVideo(String linksToVideo) {
+		this.linksToVideo = linksToVideo;
+	}
+
+	public String getHistory() {
+		return history;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getQuestionAnswers() {
+		return questionAnswers;
 	}
 }

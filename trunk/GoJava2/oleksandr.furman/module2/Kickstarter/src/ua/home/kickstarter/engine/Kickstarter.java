@@ -1,16 +1,14 @@
 package ua.home.kickstarter.engine;
 
-import ua.home.kickstarter.content.Category;
+import ua.home.kickstarter.content.Project;
 import ua.home.kickstarter.controller.CategoriesController;
 import ua.home.kickstarter.controller.ProjectsController;
 import ua.home.kickstarter.controller.QuotationsController;
-import ua.home.kickstarter.model.ProjectStorage;
 import ua.home.kickstarter.view.ConsoleInput;
 import ua.home.kickstarter.view.ConsoleOutput;
 import ua.home.kickstarter.view.Display;
 
 public class Kickstarter {
-	private Category category;
 	private Display display;
 	private ConsoleInput consoleInput;
 	private ProjectsController projectsController;
@@ -18,7 +16,7 @@ public class Kickstarter {
 
 	public Kickstarter() {
 		display = new Display(new QuotationsController(), categoriesController = new CategoriesController(),
-				projectsController = new ProjectsController(new ProjectStorage()), new ConsoleOutput());
+				projectsController = new ProjectsController(), new ConsoleOutput());
 		consoleInput = new ConsoleInput();
 	}
 
@@ -30,11 +28,9 @@ public class Kickstarter {
 
 	public void menuLevel0() {
 		int input = consoleInput.nextIntIndex();
-
-		if (input > 0 && input <= projectsController.getContentToView().size()) {
-			category = categoriesController.getSpecificContentToView(input-1);
-			display.displaySelectedCategoryName(category);
-			menuLevel1();
+		if (input > 0 && input <= categoriesController.getCategoriesSizeToView()) {
+			display.displaySelectedCategoryName(categoriesController.getDBCategoriesToView().get(input - 1).getName());
+			menuLevel1(input);
 		} else if (input == 0) {
 			System.out.print("Спасибо за использование нашей программы!");
 			return;
@@ -44,47 +40,47 @@ public class Kickstarter {
 		}
 	}
 
-	public void menuLevel1() {
-		display.displayProjects(category);
-		menuLevel2();
+	public void menuLevel1(int categoryId) {
+		display.displayProjects(categoryId);
+		menuLevel2(categoryId);
 	}
 
-	public void menuLevel2() {
+	public void menuLevel2(int categoryId) {
 		int input = -1;
 		try {
 			input = consoleInput.nextIntIndex();
 			if (input > 0) {
-				display.displaySpecificProject(input, category);
-				menuLevel3(input);
+				display.displaySpecificProject(categoryId, input);
+				menuLevel3(categoryId, input);
 			} else if (input == 0) {
 				display.displayCategories();
 				menuLevel0();
 			}
 		} catch (IndexOutOfBoundsException e) {
 			System.out.print("Проект под номером " + input + " отстствует в системе, повторите ввод. \n");
-			menuLevel2();
+			menuLevel2(categoryId);
 		}
 	}
 
-	@SuppressWarnings("unused")
-	public void menuLevel3(int i) {
+	public void menuLevel3(int categoryId, int index) {
 		int input = consoleInput.nextIntIndex();
 		if (input == 0) {
-			menuLevel1();
+			menuLevel1(categoryId);
 		} else if (input == 1) {
 			System.out.print("Введите Ваше имя: ");
-			String name = consoleInput.nextString();
+			consoleInput.nextString();
 			System.out.print("Введите номер карты: ");
-			String cardNumber = consoleInput.nextString(); 
+			consoleInput.nextString();
 			System.out.print("Введите сумму платежа: ");
 			int amount = consoleInput.nextIntIndex();
+			Project project = projectsController.getSpecificProjectFromDB(categoryId, index);
+			project.addPayment(amount);
+			projectsController.updateProjectPledged(project.getId(), "pledged", project.getPledged());
 
-			projectsController.getSpecificProject(i, category).addPayment(amount);
-			projectsController.save();
-			display.displaySpecificProject(i, category);
-			menuLevel3(i);
+			display.displaySpecificProject(categoryId, input);
+			menuLevel3(categoryId, input);
 		} else {
-			menuLevel3(i);
+			menuLevel3(categoryId, input);
 		}
 	}
 }

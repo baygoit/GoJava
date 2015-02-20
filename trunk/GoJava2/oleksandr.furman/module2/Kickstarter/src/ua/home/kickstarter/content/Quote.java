@@ -7,6 +7,13 @@ public class Quote {
 		this.quote = quote;
 	}
 
+	public void setQuote(String quote) {
+		this.quote = quote;
+	}
+
+	public Quote() {
+	}
+
 	public String getQuote() {
 		return quote;
 	}
