@@ -28,8 +28,8 @@ public class Kickstarter {
 
 	public void menuLevel0() {
 		int input = consoleInput.nextIntIndex();
-		if (input > 0 && input <= categoriesController.getCategoriesSizeToView()) {
-			display.displaySelectedCategoryName(categoriesController.getDBCategoriesToView().get(input - 1).getName());
+		if (input > 0 && input <= categoriesController.getCategoriesSize()) {
+			display.displaySelectedCategoryName(categoriesController.getCategoriesFromDB().get(input - 1).getName());
 			menuLevel1(input);
 		} else if (input == 0) {
 			System.out.print("Спасибо за использование нашей программы!");

@@ -10,16 +10,16 @@ import ua.home.kickstarter.model.ProjectsDao;
 
 public class ProjectsController {
 	private DaoFactory daoFactory;
-	private ProjectsDao projectsDao;
 
 	public ProjectsController() {
 		daoFactory = new DaoFactory();
 	}
 
-	public int getSpecificCategorySize(int index) {
+	public int getSpecificCategorySize(int categoryId) {
 		int size = -1;
-		try {
-			size = (int) projectsDao.projectSizeByCategoryId(index);
+		try (Connection con = daoFactory.getConnection()) {
+			ProjectsDao projectsDao = daoFactory.getProjectsDao(con);
+			size = (int) projectsDao.projectSizeByCategoryId(categoryId);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

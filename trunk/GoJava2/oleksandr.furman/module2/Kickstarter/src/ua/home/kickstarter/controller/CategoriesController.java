@@ -15,7 +15,7 @@ public class CategoriesController {
 		daoFactory = new DaoFactory();
 	}
 
-	public int getCategoriesSizeToView() {
+	public int getCategoriesSize() {
 		int size = -1;
 		try(Connection con = daoFactory.getConnection()) {
 			CategoriesDao categoriesDao = daoFactory.getCategoriesDao(con);
@@ -26,7 +26,7 @@ public class CategoriesController {
 		return size;
 	}
 
-	public List<Category> getDBCategoriesToView() {
+	public List<Category> getCategoriesFromDB() {
 		List<Category> list = null;
 		try (Connection con = daoFactory.getConnection()){
 			CategoriesDao categoriesDao = daoFactory.getCategoriesDao(con);
@@ -37,9 +37,9 @@ public class CategoriesController {
 		return list;
 	}
 
-	public String getContent() {
+	public String getCategoriesContent() {
 		StringBuilder categoriesContent = new StringBuilder();
-		for (Category category : getDBCategoriesToView()) {
+		for (Category category : getCategoriesFromDB()) {
 			categoriesContent.append(category.getId()).append(" - ").append(category.getName()).append("\n");
 		}
 		return categoriesContent.toString();

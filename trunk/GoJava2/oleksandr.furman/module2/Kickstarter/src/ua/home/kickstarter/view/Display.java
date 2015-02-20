@@ -25,8 +25,8 @@ public class Display {
 
 	public void displayCategories() {
 		StringBuilder displayCategories = new StringBuilder();
-		displayCategories.append("Выберите категорию :\n").append(categoriesController.getContent())
-				.append("[Выберите категорию от 1 до *").append(" или нажмите 0 для выхода из программы]\n ");
+		displayCategories.append("Выберите категорию :\n").append(categoriesController.getCategoriesContent())
+				.append("[Выберите категорию от 1 до ").append(categoriesController.getCategoriesSize()).append(" или нажмите 0 для выхода из программы]\n ");
 		consoleOutput.output(displayCategories.toString());
 	}
 
@@ -37,7 +37,7 @@ public class Display {
 	public void displayProjects(int categoryId) {
 		StringBuilder displayProjects = new StringBuilder();
 		displayProjects.append(projectsController.getContent(categoryId)).append(
-				"[Выберите проект от 1 до * или нажмите 0 для возврата к выбору категорий]\n");
+				"[Выберите проект от 1 до ").append(projectsController.getSpecificCategorySize(categoryId)).append(" или нажмите 0 для возврата к выбору категорий]\n");
 		consoleOutput.output(displayProjects.toString());
 	}
 
