@@ -5,12 +5,21 @@ import static org.mockito.Mockito.when;
 
 import org.junit.Test;
 
+import ua.com.scread.kickstarter.data.Quote;
+import ua.com.scread.kickstarter.io.IO;
+import ua.com.scread.kickstarter.main.KickstarterRunner;
+import ua.com.scread.kickstarter.model.Model;
+import ua.com.scread.kickstarter.storage.Categories;
+import ua.com.scread.kickstarter.storage.InMemoryCategories;
+import ua.com.scread.kickstarter.storage.InMemoryProjects;
+import ua.com.scread.kickstarter.storage.Projects;
+
 public class HeavyLoadTest {
 
     @Test
     public void shouldWork_whenHeavyLoad() {
         Categories categories = new InMemoryCategories();
-        Projects projects = new Projects();
+        Projects projects = new InMemoryProjects();
 //        for (int i = 0; i < 1000000; i++) {
 //            Category category = new Category("category" + i);
 //            Project project = new Project("Project" + i, "Description" + i, i, i, 
@@ -25,7 +34,7 @@ public class HeavyLoadTest {
         
         Model model = new Model(categories, projects);
         IO io = mock(IO.class);
-        QuoteGenerator quote = mock(QuoteGenerator.class);
+        Quote quote = mock(Quote.class);
         when(io.read()).thenReturn(0);
         
         KickstarterRunner kickstarter = new KickstarterRunner(model, io, quote);

@@ -4,6 +4,9 @@ import java.io.File;
 
 import org.junit.After;
 
+import ua.com.scread.kickstarter.storage.Categories;
+import ua.com.scread.kickstarter.storage.InFileCategories;
+
 public class InFileCategoriesTest extends CategotriesTest {
 
     @Override

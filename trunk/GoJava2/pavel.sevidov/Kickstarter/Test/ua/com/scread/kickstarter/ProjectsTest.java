@@ -6,19 +6,24 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 
-import ua.com.scread.kickstarter.Category;
-import ua.com.scread.kickstarter.AdditionalInfo;
-import ua.com.scread.kickstarter.FAQ;
-import ua.com.scread.kickstarter.Project;
-import ua.com.scread.kickstarter.Projects;
+import ua.com.scread.kickstarter.data.AdditionalInfo;
+import ua.com.scread.kickstarter.data.Bonus;
+import ua.com.scread.kickstarter.data.Category;
+import ua.com.scread.kickstarter.data.FAQ;
+import ua.com.scread.kickstarter.data.Project;
+import ua.com.scread.kickstarter.storage.Bonuses;
+import ua.com.scread.kickstarter.storage.FAQs;
+import ua.com.scread.kickstarter.storage.Projects;
 
 
-public class ProjectsTest {
+public abstract class ProjectsTest {
 	FAQs faq = new FAQs(new FAQ("question", "answer"));
 	Bonuses bonuses = new Bonuses(new Bonus(50, "Description"));
 	AdditionalInfo details = new AdditionalInfo("History", "video", bonuses, faq);
 	Project project = new Project("Project", "Description", 1, 1, details);
-	Projects projects = new Projects();
+	Projects projects = setUp();
+	
+	abstract Projects setUp();
 	
 	@Test
 	public void shouldAddProject_whenAddedProject() {
@@ -40,5 +45,14 @@ public class ProjectsTest {
 		projects.add(project);
 		assertEquals(expected, projects.getProjects(category));
 	}
+	
+	@Test
+    public void shouldReturnSize_whenGetSize() {
+        assertEquals(0, projects.size());
+        
+        projects.add(project);
+        
+        assertEquals(1, projects.size());
+    }
 
 }

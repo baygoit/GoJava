@@ -9,6 +9,8 @@ import java.util.Random;
 
 import org.junit.Test;
 
+import ua.com.scread.kickstarter.data.Quote;
+
 public class QuoteGeneratorTest {
 
 	public class FakeRandom extends Random {
@@ -26,7 +28,7 @@ public class QuoteGeneratorTest {
 	
 	@Test
 	public void shouldBeQuote_whenGetQuote() {
-		QuoteGenerator quoteGenerator = new QuoteGenerator(new FakeRandom(1, 2, 3, 4));
+		Quote quoteGenerator = new Quote(new FakeRandom(1, 2, 3, 4));
 		
 		String quote = quoteGenerator.getQuote();
 		

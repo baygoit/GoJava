@@ -8,20 +8,21 @@ import java.util.List;
 
 import org.junit.Test;
 
-import ua.com.scread.kickstarter.InMemoryCategories;
-import ua.com.scread.kickstarter.Category;
+import ua.com.scread.kickstarter.data.Category;
+import ua.com.scread.kickstarter.storage.Categories;
+import ua.com.scread.kickstarter.storage.InMemoryCategories;
 
 public abstract class CategotriesTest {
     
 	Categories categories = getCategories();
-	Category category = new Category("Vasya");
+	Category category = new Category(3, "Vasya");
 
     abstract Categories getCategories();
 	
 	@Test
 	public void shouldBeAddedCategoty_whenAddCategory() {
 		categories.add(category);
-		assertEquals(categories.getCategory(0), category);
+		assertEquals(categories.get(0), category);
 	}
 	
 	@Test
@@ -45,12 +46,4 @@ public abstract class CategotriesTest {
 	    
 	    assertEquals(1, categories.size());
 	}
-	
-	@Test
-	public void shouldReturnStringCategories_whenReturnCategories() {
-		categories.add(category);
-		String categoriesString = "[1 - Vasya]";
-		assertEquals(Arrays.toString(categories.getStringCategories()), categoriesString);
-	}
-
 }

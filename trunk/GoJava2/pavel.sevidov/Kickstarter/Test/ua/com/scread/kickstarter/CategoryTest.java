@@ -4,7 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import ua.com.scread.kickstarter.Category;
+import ua.com.scread.kickstarter.data.Category;
 
 public class CategoryTest {
 

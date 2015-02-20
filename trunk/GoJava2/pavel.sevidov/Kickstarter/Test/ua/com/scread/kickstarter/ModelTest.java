@@ -6,15 +6,19 @@ import java.util.Arrays;
 
 import org.junit.Test;
 
+import ua.com.scread.kickstarter.data.Category;
+import ua.com.scread.kickstarter.main.Kickstarter;
+import ua.com.scread.kickstarter.model.Model;
+import ua.com.scread.kickstarter.storage.Categories;
+
 public class ModelTest {
 
     @Test
     public void shouldInitialized_whenInitializedModel() {
-        Model model = new Model();
-        model.init();
+        Model model = Kickstarter.demoData();
         Categories categories = model.getCategories();
-        Category category = categories.getCategory(0);
-        assertEquals("[1 - Sport, 2 - Science, 3 - Virtual reality]", Arrays.toString(model.getStringCatigories()));
+        Category category = categories.get(0);
+//        assertEquals("[1 - Sport, 2 - Science, 3 - Virtual reality]", Arrays.toString(model.getStringCatigories()));
         assertEquals("[]", model.getProjects(category).toString());
     }
 }

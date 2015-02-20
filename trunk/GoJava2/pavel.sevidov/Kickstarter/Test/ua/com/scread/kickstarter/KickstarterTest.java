@@ -4,10 +4,27 @@ import static org.mockito.Mockito.*;
 
 import org.junit.Test;
 
+import ua.com.scread.kickstarter.data.AdditionalInfo;
+import ua.com.scread.kickstarter.data.Bonus;
+import ua.com.scread.kickstarter.data.Category;
+import ua.com.scread.kickstarter.data.FAQ;
+import ua.com.scread.kickstarter.data.Project;
+import ua.com.scread.kickstarter.data.Quote;
+import ua.com.scread.kickstarter.io.IO;
+import ua.com.scread.kickstarter.main.Kickstarter;
+import ua.com.scread.kickstarter.main.KickstarterRunner;
+import ua.com.scread.kickstarter.model.Model;
+import ua.com.scread.kickstarter.storage.Bonuses;
+import ua.com.scread.kickstarter.storage.Categories;
+import ua.com.scread.kickstarter.storage.FAQs;
+import ua.com.scread.kickstarter.storage.InMemoryCategories;
+import ua.com.scread.kickstarter.storage.InMemoryProjects;
+import ua.com.scread.kickstarter.storage.Projects;
+
 public class KickstarterTest {
 		
     IO io = mock(IO.class);
-    QuoteGenerator quote = mock(QuoteGenerator.class);
+    Quote quote = mock(Quote.class);
 
     @Test
 	public void shouldBeQuote_whenStartApplication() {
@@ -30,7 +47,7 @@ public class KickstarterTest {
         categories.add(category1);
         categories.add(category2);
         
-        Projects projects = new Projects();
+        Projects projects = new InMemoryProjects();
   
         Model model = new Model(categories, projects);
         when(quote.getQuote()).thenReturn("quote");
@@ -42,7 +59,7 @@ public class KickstarterTest {
         
         verify(io).print("quote\n");
         verify(io, times(2)).print("\nChoose category: ");
-        verify(io, times(2)).print("[1 - category1, 2 - category2]");
+        verify(io, times(2)).print("[1 - category1] ");
         verify(io).print("You choosed: category1\n");
     }
 	
@@ -54,7 +71,7 @@ public class KickstarterTest {
         categories.add(category1);
         categories.add(category2);
         
-        Projects projects = new Projects();
+        Projects projects = new InMemoryProjects();
         Bonuses bonuses = new Bonuses(new Bonus(50, "Description"));
         FAQs faqs = new FAQs(new FAQ("Question", "Answer"));
         Project project = new Project("Project", "Description", 10, 10, 
@@ -93,7 +110,7 @@ public class KickstarterTest {
         Category category1 = new Category("category1");
         categories.add(category1);
         
-        Projects projects = new Projects();
+        Projects projects = new InMemoryProjects();
         Bonuses bonuses = new Bonuses(new Bonus(50, "Description"));
         FAQs faqs = new FAQs(new FAQ("Question", "Answer"));
         Project project = new Project("Project", "Description", 10, 10, 
@@ -115,10 +132,9 @@ public class KickstarterTest {
 	
 	@Test
 	public void shouldAddDonation_whenAddedDonation() {
-	    Model model = new Model();
-	    model.init();
+	    Model model = Kickstarter.demoData();
         IO io = mock(IO.class);
-        QuoteGenerator quote = mock(QuoteGenerator.class);
+        Quote quote = mock(Quote.class);
         when(io.read()).thenReturn(3, 1, 1, 2, 100500, 0, 0, 0);
         when(io.readString()).thenReturn("Name");
         when(io.readLong()).thenReturn((long) 1234567890);
@@ -132,8 +148,7 @@ public class KickstarterTest {
 	
 	@Test
 	public void shouldAddDonation_whenChoosedBonus() {
-	    Model model = new Model();
-        model.init();
+	    Model model = Kickstarter.demoData();
         when(io.read()).thenReturn(3, 1, 1, 1, 0, 0, 0);
         when(io.readString()).thenReturn("Name");
         when(io.readLong()).thenReturn((long) 1234567890);
@@ -147,8 +162,7 @@ public class KickstarterTest {
 	
 	@Test
 	public void shouldAddFAQ_whenAddedFAQ() {
-	    Model model = new Model();
-        model.init();
+	    Model model = Kickstarter.demoData();
         when(io.read()).thenReturn(3, 1, 2, 0, 0, 0);
         when(io.readString()).thenReturn("Asked question?");
         KickstarterRunner kickstarter = new KickstarterRunner(model, io, quote);

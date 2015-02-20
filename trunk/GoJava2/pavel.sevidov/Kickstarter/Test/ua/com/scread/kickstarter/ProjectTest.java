@@ -4,10 +4,13 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import ua.com.scread.kickstarter.Category;
-import ua.com.scread.kickstarter.AdditionalInfo;
-import ua.com.scread.kickstarter.FAQ;
-import ua.com.scread.kickstarter.Project;
+import ua.com.scread.kickstarter.data.AdditionalInfo;
+import ua.com.scread.kickstarter.data.Bonus;
+import ua.com.scread.kickstarter.data.Category;
+import ua.com.scread.kickstarter.data.FAQ;
+import ua.com.scread.kickstarter.data.Project;
+import ua.com.scread.kickstarter.storage.Bonuses;
+import ua.com.scread.kickstarter.storage.FAQs;
 
 public class ProjectTest {
 	FAQs faq = new FAQs(new FAQ("question", "answer"));

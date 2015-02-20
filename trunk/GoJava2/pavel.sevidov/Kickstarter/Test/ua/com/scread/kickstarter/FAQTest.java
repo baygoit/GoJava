@@ -4,7 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import ua.com.scread.kickstarter.FAQ;
+import ua.com.scread.kickstarter.data.FAQ;
 
 public class FAQTest {
 	FAQ faq = new FAQ("question", "answer");
