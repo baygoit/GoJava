@@ -18,7 +18,7 @@ public class Interview {
 	private List <Category> categories = new ArrayList <Category>();
 	private Category currentCategory = new Category();
 
-	TimeCounter timecounter;
+	public TimeCounter timecounter;
 	
 	public Interview(){ 
 		correctAnswers = 0;
@@ -76,10 +76,12 @@ public class Interview {
 		}
 	}
 	
-	public void composeCategory(List<Category> categories){
+	public Category getComposedCategory(){
+		Category composed = new Category();
 		for(Category category: categories){
-			currentCategory.addQuestions(category.getQuestions());
+			composed.addQuestions(category.getQuestions());
 		}
+		return composed;
 	}
 	
 	public void addCorrectAnswers(){

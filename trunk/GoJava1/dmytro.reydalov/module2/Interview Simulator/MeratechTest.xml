@@ -1,276 +1,276 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <questions>
-	<question id = "1" line = "Что такое Java?">
-			<answer id = "a" line = "Язык программирования веб-браузера." isCorrect = "false"></answer>
-			<answer id = "b" line = "Язык программирования." isCorrect = "true"></answer>
-			<answer id = "c" line = "Исполняющая среда (платформа)." isCorrect = "false"></answer>
-			<answer id = "d" line = "Язык программирования и исполняющая среда." isCorrect = "true"></answer>
+	<question line = "Что такое Java?">
+			<answer line = "Язык программирования веб-браузера." isCorrect = "false"></answer>
+			<answer line = "Язык программирования." isCorrect = "true"></answer>
+			<answer line = "Исполняющая среда (платформа)." isCorrect = "false"></answer>
+			<answer line = "Язык программирования и исполняющая среда." isCorrect = "true"></answer>
 	</question>
 	
-	<question id = "2" line = "Зачем нужнен байткод?">
-			<answer id = "a" line = "Для уменьшения размера программы." isCorrect = "false"></answer>
-			<answer id = "b" line = "Для обеспечения задач переносимости." isCorrect = "true"></answer>
-			<answer id = "c" line = "Для сокрытия кода." isCorrect = "false"></answer>
+	<question line = "Зачем нужнен байткод?">
+			<answer line = "Для уменьшения размера программы." isCorrect = "false"></answer>
+			<answer line = "Для обеспечения задач переносимости." isCorrect = "true"></answer>
+			<answer line = "Для сокрытия кода." isCorrect = "false"></answer>
 	</question>
 	
-	<question id = "3" line = "Укажите целочисленные типы данных (несколько вариантов).">
-			<answer id = "a" line = "long." isCorrect = "true"></answer>
-			<answer id = "b" line = "double." isCorrect = "false"></answer>
-			<answer id = "c" line = "int." isCorrect = "true"></answer>
-			<answer id = "d" line = "float." isCorrect = "false"></answer>
-			<answer id = "e" line = "byte." isCorrect = "true"></answer>
-			<answer id = "f" line = "short." isCorrect = "true"></answer>
-			<answer id = "g" line = "char." isCorrect = "true"></answer>
+	<question line = "Укажите целочисленные типы данных (несколько вариантов).">
+			<answer line = "long." isCorrect = "true"></answer>
+			<answer line = "double." isCorrect = "false"></answer>
+			<answer line = "int." isCorrect = "true"></answer>
+			<answer line = "float." isCorrect = "false"></answer>
+			<answer line = "byte." isCorrect = "true"></answer>
+			<answer line = "short." isCorrect = "true"></answer>
+			<answer line = "char." isCorrect = "true"></answer>
 	</question>
 	
-	<question id = "4" line = "Какие из нижеперечисленных переменных являются строковыми? (несколько вариантов).">
-			<answer id = "a" line = "s1 = 0x45;" isCorrect = "false"></answer>
-			<answer id = "b" line = "s2 = ”123”;" isCorrect = "true"></answer>
-			<answer id = "c" line = "s3 = 345L;" isCorrect = "false"></answer>
-			<answer id = "d" line = "s4 = true;" isCorrect = "false"></answer>
-			<answer id = "e" line = "s5 = new String(new char[]{'1','0'});" isCorrect = "true"></answer>
-			<answer id = "f" line = "s6 = ”124”.toCharArray();" isCorrect = "false"></answer>
+	<question line = "Какие из нижеперечисленных переменных являются строковыми? (несколько вариантов).">
+			<answer line = "s1 = 0x45;" isCorrect = "false"></answer>
+			<answer line = "s2 = ”123”;" isCorrect = "true"></answer>
+			<answer line = "s3 = 345L;" isCorrect = "false"></answer>
+			<answer line = "s4 = true;" isCorrect = "false"></answer>
+			<answer line = "s5 = new String(new char[]{'1','0'});" isCorrect = "true"></answer>
+			<answer line = "s6 = ”124”.toCharArray();" isCorrect = "false"></answer>
 	</question>
 	
-	<question id = "5" line = "Укажите где используется пост-инкремент?">
-			<answer id = "a" line = "x = x+1;" isCorrect = "false"></answer>
-			<answer id = "b" line = "x = x+y++;" isCorrect = "true"></answer>
-			<answer id = "c" line = "x = x+y;" isCorrect = "false"></answer>
-			<answer id = "d" line = "++y;" isCorrect = "false"></answer>
+	<question line = "Укажите где используется пост-инкремент?">
+			<answer line = "x = x+1;" isCorrect = "false"></answer>
+			<answer line = "x = x+y++;" isCorrect = "true"></answer>
+			<answer line = "x = x+y;" isCorrect = "false"></answer>
+			<answer line = "++y;" isCorrect = "false"></answer>
 	</question>
 	
-	<question id = "6" line = "Каков будет результат вывода на экран?
+	<question line = "Каков будет результат вывода на экран?
 							   byte b = 127;
 							   b += 1;
 							   System.out.println(b);">
-			<answer id = "a" line = "128." isCorrect = "false"></answer>
-			<answer id = "b" line = "-128." isCorrect = "true"></answer>
-			<answer id = "c" line = "0." isCorrect = "false"></answer>
-			<answer id = "d" line = "Исключительная ситуация IndexOutOfBoundsException" isCorrect = "false"></answer>
+			<answer line = "128." isCorrect = "false"></answer>
+			<answer line = "-128." isCorrect = "true"></answer>
+			<answer line = "0." isCorrect = "false"></answer>
+			<answer line = "Исключительная ситуация IndexOutOfBoundsException" isCorrect = "false"></answer>
 	</question>
 	
-	<question id = "7" line = "Какой тип (класс) используется в Java для представления финансовых величин?">
-			<answer id = "a" line = "Int." isCorrect = "false"></answer>
-			<answer id = "b" line = "BigDecimal." isCorrect = "true"></answer>
-			<answer id = "c" line = "Double." isCorrect = "false"></answer>
-			<answer id = "d" line = "BigInteger." isCorrect = "false"></answer>
-			<answer id = "e" line = "Float." isCorrect = "false"></answer>
+	<question line = "Какой тип (класс) используется в Java для представления финансовых величин?">
+			<answer line = "Int." isCorrect = "false"></answer>
+			<answer line = "BigDecimal." isCorrect = "true"></answer>
+			<answer line = "Double." isCorrect = "false"></answer>
+			<answer line = "BigInteger." isCorrect = "false"></answer>
+			<answer line = "Float." isCorrect = "false"></answer>
 	</question>
 	
-	<question id = "8" line = "Укажите какой из способов сравнения на равенство вещественых чисел а и b (double) является корректным?">
-			<answer id = "a" line = "If (a == b) {..}" isCorrect = "false"></answer>
-			<answer id = "b" line = "If (math.abs(a-b) &lt; epsilon) {..}" isCorrect = "true"></answer>
-			<answer id = "c" line = "If (!(a != b)) {..}" isCorrect = "false"></answer>
+	<question line = "Укажите какой из способов сравнения на равенство вещественых чисел а и b (double) является корректным?">
+			<answer line = "If (a == b) {..}" isCorrect = "false"></answer>
+			<answer line = "If (math.abs(a-b) &lt; epsilon) {..}" isCorrect = "true"></answer>
+			<answer line = "If (!(a != b)) {..}" isCorrect = "false"></answer>
 	</question>
 	
-	<question id = "9" line = "В чём основная разница между String и StringBuilder в Java?">
-			<answer id = "a" line = "StringBuilder – более новая версия String." isCorrect = "false"></answer>
-			<answer id = "b" line = "String эффективен на конкатенациях." isCorrect = "false"></answer>
-			<answer id = "c" line = "String Builder эффективен на конкатенациях." isCorrect = "true"></answer>
-			<answer id = "d" line = "String Builder синхронизирован." isCorrect = "false"></answer>
+	<question line = "В чём основная разница между String и StringBuilder в Java?">
+			<answer line = "StringBuilder – более новая версия String." isCorrect = "false"></answer>
+			<answer line = "String эффективен на конкатенациях." isCorrect = "false"></answer>
+			<answer line = "String Builder эффективен на конкатенациях." isCorrect = "true"></answer>
+			<answer line = "String Builder синхронизирован." isCorrect = "false"></answer>
 	</question>
 	
-	<question id = "10" line = "Укажите корректный способ сравнения двух строк на равенство.">
-			<answer id = "a" line = "S1.compareTo(S2) == 0;" isCorrect = "false"></answer>
-			<answer id = "b" line = "S1 == S2;" isCorrect = "false"></answer>
-			<answer id = "c" line = "S1.equals(S2);" isCorrect = "true"></answer>
+	<question line = "Укажите корректный способ сравнения двух строк на равенство.">
+			<answer line = "S1.compareTo(S2) == 0;" isCorrect = "false"></answer>
+			<answer line = "S1 == S2;" isCorrect = "false"></answer>
+			<answer line = "S1.equals(S2);" isCorrect = "true"></answer>
 	</question>
 	
-	<question id = "11" line = "Укажите коректный способ объявления массивов? (несколько вариантов).">
-			<answer id = "a" line = "Int [] a;" isCorrect = "true"></answer>
-			<answer id = "b" line = "Int a [];" isCorrect = "true"></answer>
-			<answer id = "c" line = "Int [1..2] a;" isCorrect = "false"></answer>
-			<answer id = "d" line = "Int [][] a;" isCorrect = "true"></answer>
-			<answer id = "e" line = "Int [10][10] a;" isCorrect = "false"></answer>
+	<question line = "Укажите коректный способ объявления массивов? (несколько вариантов).">
+			<answer line = "Int [] a;" isCorrect = "true"></answer>
+			<answer line = "Int a [];" isCorrect = "true"></answer>
+			<answer line = "Int [1..2] a;" isCorrect = "false"></answer>
+			<answer line = "Int [][] a;" isCorrect = "true"></answer>
+			<answer line = "Int [10][10] a;" isCorrect = "false"></answer>
 	</question>
 	
-	<question id = "12" line = "Что такое Object в Java? ">
-			<answer id = "a" line = "Object – то же самое что и Class." isCorrect = "false"></answer>
-			<answer id = "b" line = "Базовый класс для всех классов." isCorrect = "true"></answer>
-			<answer id = "c" line = "Обёртка (wrapper) для всех классов." isCorrect = "false"></answer>
-			<answer id = "d" line = "Прототип для всех объектов." isCorrect = "false"></answer>
+	<question line = "Что такое Object в Java? ">
+			<answer line = "Object – то же самое что и Class." isCorrect = "false"></answer>
+			<answer line = "Базовый класс для всех классов." isCorrect = "true"></answer>
+			<answer line = "Обёртка (wrapper) для всех классов." isCorrect = "false"></answer>
+			<answer line = "Прототип для всех объектов." isCorrect = "false"></answer>
 	</question>
 	
-	<question id = "13" line = "Какая разница между ссылкой и объектом в Java?">
-			<answer id = "a" line = "Ссылка это результат присвоения объекта другому объекту." isCorrect = "false"></answer>
-			<answer id = "b" line = "Это одно и то-же." isCorrect = "false"></answer>
-			<answer id = "c" line = "Ccылок в Java нет." isCorrect = "false"></answer>
-			<answer id = "d" line = "Ссылка - это адрес в памяти, где находится объект." isCorrect = "true"></answer>
+	<question line = "Какая разница между ссылкой и объектом в Java?">
+			<answer line = "Ссылка это результат присвоения объекта другому объекту." isCorrect = "false"></answer>
+			<answer line = "Это одно и то-же." isCorrect = "false"></answer>
+			<answer line = "Ccылок в Java нет." isCorrect = "false"></answer>
+			<answer line = "Ссылка - это адрес в памяти, где находится объект." isCorrect = "true"></answer>
 	</question>
 	
-	<question id = "14" line = "Зачем нужны методы equals() и compareTo() в Object?">
-			<answer id = "a" line = "Для совместимости со старыми версиями JDK." isCorrect = "false"></answer>
-			<answer id = "b" line = "Для того чтобы сравнивать строки (String)." isCorrect = "false"></answer>
-			<answer id = "c" line = "Для поддержки сортировок и поисков." isCorrect = "true"></answer>
-			<answer id = "d" line = "Для удаления дубликатов из памяти." isCorrect = "false"></answer>
+	<question line = "Зачем нужны методы equals() и compareTo() в Object?">
+			<answer line = "Для совместимости со старыми версиями JDK." isCorrect = "false"></answer>
+			<answer line = "Для того чтобы сравнивать строки (String)." isCorrect = "false"></answer>
+			<answer line = "Для поддержки сортировок и поисков." isCorrect = "true"></answer>
+			<answer line = "Для удаления дубликатов из памяти." isCorrect = "false"></answer>
 	</question>
 	
-	<question id = "15" line = "Зачем нужен метода toString?">
-			<answer id = "a" line = "Для сериализации." isCorrect = "false"></answer>
-			<answer id = "b" line = "Для просмотра состояния объекта." isCorrect = "true"></answer>
-			<answer id = "c" line = "Для autoboxing." isCorrect = "false"></answer>
+	<question line = "Зачем нужен метода toString?">
+			<answer line = "Для сериализации." isCorrect = "false"></answer>
+			<answer line = "Для просмотра состояния объекта." isCorrect = "true"></answer>
+			<answer line = "Для autoboxing." isCorrect = "false"></answer>
 	</question>
 	
-	<question id = "16" line = "Для чего нужен метод hashCode() в Object?">
-			<answer id = "a" line = "Для сборки мусора." isCorrect = "false"></answer>
-			<answer id = "b" line = "Для поддержки объекта в коллекциях." isCorrect = "true"></answer>
-			<answer id = "c" line = "Для вычисления электронной цифровой подписи объекта." isCorrect = "false"></answer>
+	<question line = "Для чего нужен метод hashCode() в Object?">
+			<answer line = "Для сборки мусора." isCorrect = "false"></answer>
+			<answer line = "Для поддержки объекта в коллекциях." isCorrect = "true"></answer>
+			<answer line = "Для вычисления электронной цифровой подписи объекта." isCorrect = "false"></answer>
 	</question>
 	
-	<question id = "17" line = "Какое из выражений является конструктором с параметром?">
-			<answer id = "a" line = "public Cat(String catName);" isCorrect = "true"></answer>
-			<answer id = "b" line = "public void Cat(String catName);" isCorrect = "false"></answer>
-			<answer id = "c" line = "public String getCat(String catName);" isCorrect = "false"></answer>
-			<answer id = "d" line = "public static Cat createCatInstance();" isCorrect = "false"></answer>
+	<question line = "Какое из выражений является конструктором с параметром?">
+			<answer line = "public Cat(String catName);" isCorrect = "true"></answer>
+			<answer line = "public void Cat(String catName);" isCorrect = "false"></answer>
+			<answer line = "public String getCat(String catName);" isCorrect = "false"></answer>
+			<answer line = "public static Cat createCatInstance();" isCorrect = "false"></answer>
 	</question>
 	
-	<question id = "18" line = "Какие два блока кода из трех являются эквивалентными по смыслу? (выберите несколько).">
-			<answer id = "a" line = "for(int i = 0; i &lt; n; i++){ doSomething(); }" isCorrect = "true"></answer>
-			<answer id = "b" line = "int i = 0; while(i &lt; n){ doSomething(); i++; }" isCorrect = "true"></answer>
-			<answer id = "c" line = "int i = 0; do { doSomething(); i++; } while(i &lt; n);" isCorrect = "true"></answer>
+	<question line = "Какие два блока кода из трех являются эквивалентными по смыслу? (выберите несколько).">
+			<answer line = "for(int i = 0; i &lt; n; i++){ doSomething(); }" isCorrect = "true"></answer>
+			<answer line = "int i = 0; while(i &lt; n){ doSomething(); i++; }" isCorrect = "true"></answer>
+			<answer line = "int i = 0; do { doSomething(); i++; } while(i &lt; n);" isCorrect = "true"></answer>
 	</question>
 	
-	<question id = "19" line = "Что такое пакет (package) в Java ?">
-			<answer id = "a" line = "Это кусочек информации в сетевом протоколе." isCorrect = "false"></answer>
-			<answer id = "b" line = "Это jar-файл." isCorrect = "false"></answer>
-			<answer id = "c" line = "Это исходный java-файл." isCorrect = "false"></answer>
-			<answer id = "d" line = "Это набор классов объединённых по смыслу." isCorrect = "true"></answer>
+	<question line = "Что такое пакет (package) в Java ?">
+			<answer line = "Это кусочек информации в сетевом протоколе." isCorrect = "false"></answer>
+			<answer line = "Это jar-файл." isCorrect = "false"></answer>
+			<answer line = "Это исходный java-файл." isCorrect = "false"></answer>
+			<answer line = "Это набор классов объединённых по смыслу." isCorrect = "true"></answer>
 	</question>
 	
-	<question id = "20" line = "Как реализованна перегрузка операций в Java?">
-			<answer id = "a" line = "Через перегрузку методов." isCorrect = "false"></answer>
-			<answer id = "b" line = "Через аннотации." isCorrect = "false"></answer>
-			<answer id = "c" line = "В Java нет перегрузки операций." isCorrect = "true"></answer>
+	<question line = "Как реализованна перегрузка операций в Java?">
+			<answer line = "Через перегрузку методов." isCorrect = "false"></answer>
+			<answer line = "Через аннотации." isCorrect = "false"></answer>
+			<answer line = "В Java нет перегрузки операций." isCorrect = "true"></answer>
 	</question>
 	
-	<question id = "21" line = "Что из нижеперечисленного является операций сдвига (shift) ?">
-			<answer id = "a" line = "x *= 2;" isCorrect = "false"></answer>
-			<answer id = "b" line = "x >>= 1" isCorrect = "true"></answer>
-			<answer id = "c" line = "x /= 2;" isCorrect = "false"></answer>
+	<question line = "Что из нижеперечисленного является операций сдвига (shift) ?">
+			<answer line = "x *= 2;" isCorrect = "false"></answer>
+			<answer line = "x >>= 1" isCorrect = "true"></answer>
+			<answer line = "x /= 2;" isCorrect = "false"></answer>
 	</question>
 	
-	<question id = "22" line = "Что из нижеперечисленного является тернарной операцией?">
-			<answer id = "a" line = "X &lt;&lt;&lt; 1" isCorrect = "false"></answer>
-			<answer id = "b" line = "X = a?x:y;" isCorrect = "true"></answer>
-			<answer id = "c" line = "X = (y*y*y);" isCorrect = "false"></answer>
+	<question line = "Что из нижеперечисленного является тернарной операцией?">
+			<answer line = "X &lt;&lt;&lt; 1" isCorrect = "false"></answer>
+			<answer line = "X = a?x:y;" isCorrect = "true"></answer>
+			<answer line = "X = (y*y*y);" isCorrect = "false"></answer>
 	</question>
 	
-	<question id = "23" line = "Какой из интерфейсов коллекций не позволяет дублировать элементы?">
-			<answer id = "a" line = "Set." isCorrect = "true"></answer>
-			<answer id = "b" line = "List." isCorrect = "false"></answer>
-			<answer id = "c" line = "Queue." isCorrect = "false"></answer>
-			<answer id = "d" line = "Deck." isCorrect = "false"></answer>
+	<question line = "Какой из интерфейсов коллекций не позволяет дублировать элементы?">
+			<answer line = "Set." isCorrect = "true"></answer>
+			<answer line = "List." isCorrect = "false"></answer>
+			<answer line = "Queue." isCorrect = "false"></answer>
+			<answer line = "Deck." isCorrect = "false"></answer>
 	</question>
 	
-	<question id = "24" line = "Какой из интерфейсов коллекций поддерживает FIFO (First-In-First-Out)? (несколько вариантов).">
-			<answer id = "a" line = "Set." isCorrect = "false"></answer>
-			<answer id = "b" line = "List." isCorrect = "false"></answer>
-			<answer id = "c" line = "Queue." isCorrect = "true"></answer>
-			<answer id = "d" line = "Deck." isCorrect = "false"></answer>
+	<question line = "Какой из интерфейсов коллекций поддерживает FIFO (First-In-First-Out)? (несколько вариантов).">
+			<answer line = "Set." isCorrect = "false"></answer>
+			<answer line = "List." isCorrect = "false"></answer>
+			<answer line = "Queue." isCorrect = "true"></answer>
+			<answer line = "Deck." isCorrect = "false"></answer>
 	</question>
 	
-	<question id = "25" line = "Шаблон (Generic) это:">
-			<answer id = "a" line = "Способ проектирования приложения." isCorrect = "false"></answer>
-			<answer id = "b" line = "Базовый класс." isCorrect = "false"></answer>
-			<answer id = "c" line = "Параметр-тип." isCorrect = "true"></answer>
-			<answer id = "d" line = "Вложенный класс." isCorrect = "false"></answer>
+	<question line = "Шаблон (Generic) это:">
+			<answer line = "Способ проектирования приложения." isCorrect = "false"></answer>
+			<answer line = "Базовый класс." isCorrect = "false"></answer>
+			<answer line = "Параметр-тип." isCorrect = "true"></answer>
+			<answer line = "Вложенный класс." isCorrect = "false"></answer>
 	</question>
 	
-	<question id = "26" line = "Операторы break и continue педназначены для:">
-			<answer id = "a" line = "Остановки и возобновления потока выполненния." isCorrect = "false"></answer>
-			<answer id = "b" line = "Управления выходом из цикла for и блока switch." isCorrect = "true"></answer>
-			<answer id = "c" line = "Остановки JVM." isCorrect = "false"></answer>
+	<question line = "Операторы break и continue педназначены для:">
+			<answer line = "Остановки и возобновления потока выполненния." isCorrect = "false"></answer>
+			<answer line = "Управления выходом из цикла for и блока switch." isCorrect = "true"></answer>
+			<answer line = "Остановки JVM." isCorrect = "false"></answer>
 	</question>
 	
-	<question id = "27" line = "Что из нижеперечисленного является наследованием классов в Java?">
-			<answer id = "a" line = "Class Cat extends Animal{}" isCorrect = "true"></answer>
-			<answer id = "b" line = "Class Cat implements Animal{}" isCorrect = "false"></answer>
-			<answer id = "c" line = "Abstract class CAT{}" isCorrect = "false"></answer>
-			<answer id = "d" line = "Final class CAT{}" isCorrect = "false"></answer>
+	<question line = "Что из нижеперечисленного является наследованием классов в Java?">
+			<answer line = "Class Cat extends Animal{}" isCorrect = "true"></answer>
+			<answer line = "Class Cat implements Animal{}" isCorrect = "false"></answer>
+			<answer line = "Abstract class CAT{}" isCorrect = "false"></answer>
+			<answer line = "Final class CAT{}" isCorrect = "false"></answer>
 	</question>
 	
-	<question id = "28" line = "Зачем нужны getters и setters?">
-			<answer id = "a" line = "Для доступа с скрытым свойствам." isCorrect = "true"></answer>
-			<answer id = "b" line = "Для удобства интерфейса." isCorrect = "false"></answer>
-			<answer id = "c" line = "Для реализации дополнительных действий при установке или чтению свойств." isCorrect = "true"></answer>
+	<question line = "Зачем нужны getters и setters?">
+			<answer line = "Для доступа с скрытым свойствам." isCorrect = "true"></answer>
+			<answer line = "Для удобства интерфейса." isCorrect = "false"></answer>
+			<answer line = "Для реализации дополнительных действий при установке или чтению свойств." isCorrect = "true"></answer>
 	</question>
 	
-	<question id = "29" line = "Что делает метод finalize?">
-			<answer id = "a" line = "Останавливает поток." isCorrect = "false"></answer>
-			<answer id = "b" line = "Является обработчиком события по удалению объекта из памяти." isCorrect = "true"></answer>
-			<answer id = "c" line = "Выключает сборщик мусора." isCorrect = "false"></answer>
-			<answer id = "d" line = "Аварийно завершает работу процесса." isCorrect = "false"></answer>
+	<question line = "Что делает метод finalize?">
+			<answer line = "Останавливает поток." isCorrect = "false"></answer>
+			<answer line = "Является обработчиком события по удалению объекта из памяти." isCorrect = "true"></answer>
+			<answer line = "Выключает сборщик мусора." isCorrect = "false"></answer>
+			<answer line = "Аварийно завершает работу процесса." isCorrect = "false"></answer>
 	</question>
 	
-	<question id = "30" line = "Как принудительно удалить объект из памяти?">
-			<answer id = "a" line = "Присвоить ссылке null и вызвать System.gc();" isCorrect = "true"></answer>
-			<answer id = "b" line = "Вызвать метод finalize в объекте." isCorrect = "false"></answer>
-			<answer id = "c" line = "Никак. Объекты в Java удалить из памяти невозможно." isCorrect = "true"></answer>
+	<question line = "Как принудительно удалить объект из памяти?">
+			<answer line = "Присвоить ссылке null и вызвать System.gc();" isCorrect = "true"></answer>
+			<answer line = "Вызвать метод finalize в объекте." isCorrect = "false"></answer>
+			<answer line = "Никак. Объекты в Java удалить из памяти невозможно." isCorrect = "true"></answer>
 	</question>
 	
-	<question id = "31" line = "Какое из полей класса объявлено в пределах пакета (package access)?">
-			<answer id = "a" line = "private int a1;" isCorrect = "false"></answer>
-			<answer id = "b" line = "protected int a2;" isCorrect = "false"></answer>
-			<answer id = "c" line = "public int a3;" isCorrect = "false"></answer>
-			<answer id = "d" line = "int a4;" isCorrect = "true"></answer>
+	<question line = "Какое из полей класса объявлено в пределах пакета (package access)?">
+			<answer line = "private int a1;" isCorrect = "false"></answer>
+			<answer line = "protected int a2;" isCorrect = "false"></answer>
+			<answer line = "public int a3;" isCorrect = "false"></answer>
+			<answer line = "int a4;" isCorrect = "true"></answer>
 	</question>
 	
-		<question id = "32" line = "Какое из полей класса объявлено доступным только для потомков данного класса?">
-			<answer id = "a" line = "private int a1;" isCorrect = "false"></answer>
-			<answer id = "b" line = "protected int a2;" isCorrect = "true"></answer>
-			<answer id = "c" line = "public int a3;" isCorrect = "false"></answer>
-			<answer id = "d" line = "int a4;" isCorrect = "false"></answer>
+	<question line = "Какое из полей класса объявлено доступным только для потомков данного класса?">
+			<answer line = "private int a1;" isCorrect = "false"></answer>
+			<answer line = "protected int a2;" isCorrect = "true"></answer>
+			<answer line = "public int a3;" isCorrect = "false"></answer>
+			<answer line = "int a4;" isCorrect = "false"></answer>
 	</question>
 	
-	<question id = "33" line = "Укажите корректный способ определения длины массива myarray.">
-			<answer id = "a" line = "myarray.size();" isCorrect = "false"></answer>
-			<answer id = "b" line = "myarray.length;" isCorrect = "true"></answer>
-			<answer id = "c" line = "myarray.length();" isCorrect = "false"></answer>
-			<answer id = "d" line = "myarray.capacity();" isCorrect = "false"></answer>
+	<question line = "Укажите корректный способ определения длины массива myarray.">
+			<answer line = "myarray.size();" isCorrect = "false"></answer>
+			<answer line = "myarray.length;" isCorrect = "true"></answer>
+			<answer line = "myarray.length();" isCorrect = "false"></answer>
+			<answer line = "myarray.capacity();" isCorrect = "false"></answer>
 	</question>
 	
-	<question id = "34" line = "Коллекции (Collections) это:">
-			<answer id = "a" line = "API и интерфейсы для работы множеством объектов." isCorrect = "true"></answer>
-			<answer id = "b" line = "Массивы." isCorrect = "false"></answer>
-			<answer id = "c" line = "Строки из слов разделённых запятыми." isCorrect = "false"></answer>
-			<answer id = "d" line = "То что убирает Garbage collector." isCorrect = "false"></answer>
+	<question line = "Коллекции (Collections) это:">
+			<answer line = "API и интерфейсы для работы множеством объектов." isCorrect = "true"></answer>
+			<answer line = "Массивы." isCorrect = "false"></answer>
+			<answer line = "Строки из слов разделённых запятыми." isCorrect = "false"></answer>
+			<answer line = "То что убирает Garbage collector." isCorrect = "false"></answer>
 	</question>
 	
-	<question id = "35" line = "Основное отличие Vector от List в том что:">
-			<answer id = "a" line = "Вектор морально устарел." isCorrect = "true"></answer>
-			<answer id = "b" line = "Методы вектора синхронизированы (synchronized)." isCorrect = "true"></answer>
-			<answer id = "c" line = "Вектор это шаблон а List – шаблон интерфейса." isCorrect = "false"></answer>
+	<question line = "Основное отличие Vector от List в том что:">
+			<answer line = "Вектор морально устарел." isCorrect = "true"></answer>
+			<answer line = "Методы вектора синхронизированы (synchronized)." isCorrect = "true"></answer>
+			<answer line = "Вектор это шаблон а List – шаблон интерфейса." isCorrect = "false"></answer>
 	</question>
 	
-	<question id = "36" line = "TreeMap предназначен для:">
-			<answer id = "a" line = "Хранения пар ключ-значение в сортированном порядке." isCorrect = "true"></answer>
-			<answer id = "b" line = "Быстрого поиска с постоянным временем доступа к элементам." isCorrect = "false"></answer>
-			<answer id = "c" line = "Хранения географических карт." isCorrect = "false"></answer>
+	<question line = "TreeMap предназначен для:">
+			<answer line = "Хранения пар ключ-значение в сортированном порядке." isCorrect = "true"></answer>
+			<answer line = "Быстрого поиска с постоянным временем доступа к элементам." isCorrect = "false"></answer>
+			<answer line = "Хранения географических карт." isCorrect = "false"></answer>
 	</question>
 	
-	<question id = "37" line = "Корректно-ли следующее выражение?
+	<question line = "Корректно-ли следующее выражение?
 								List &lt;float> myList = new ArrayList &lt;float>();">
-			<answer id = "a" line = "Да." isCorrect = "false"></answer>
-			<answer id = "b" line = "Нет." isCorrect = "true"></answer>
+			<answer line = "Да." isCorrect = "false"></answer>
+			<answer line = "Нет." isCorrect = "true"></answer>
 	</question>
 	
-	<question id = "38" line = "Замыкание (Closure) это:">                                                                                      ">
-			<answer id = "a" line = "Ошибка в программе. Исключительная ситуация." isCorrect = "false"></answer>
-			<answer id = "b" line = "Вызываемый объект который сохраняет информацию о контексте где он был создан." isCorrect = "true"></answer>
-			<answer id = "c" line = "Абстрактный класс который отделён от основного кода." isCorrect = "false"></answer>
+	<question line = "Замыкание (Closure) это:">                                                                                      ">
+			<answer line = "Ошибка в программе. Исключительная ситуация." isCorrect = "false"></answer>
+			<answer line = "Вызываемый объект который сохраняет информацию о контексте где он был создан." isCorrect = "true"></answer>
+			<answer line = "Абстрактный класс который отделён от основного кода." isCorrect = "false"></answer>
 	</question>
 	
-	<question id = "39" line = "Множественное наследование классов в Java:">
-			<answer id = "a" line = "Привествуется." isCorrect = "false"></answer>
-			<answer id = "b" line = "Не рекомендуется." isCorrect = "false"></answer>
-			<answer id = "c" line = "Не существует." isCorrect = "true"></answer>
+	<question line = "Множественное наследование классов в Java:">
+			<answer line = "Привествуется." isCorrect = "false"></answer>
+			<answer line = "Не рекомендуется." isCorrect = "false"></answer>
+			<answer line = "Не существует." isCorrect = "true"></answer>
 	</question>
 	
-	<question id = "40" line = "Какие способы создания вычислительных потоков существуют в Java? (выберите несколько вариантов).">
-			<answer id = "a" line = "Наследованием от InputStream." isCorrect = "false"></answer>
-			<answer id = "b" line = "Наследованием от Thread." isCorrect = "true"></answer>
-			<answer id = "c" line = "Реализацией интерфейса Runnable и использованием Thread." isCorrect = "true"></answer>
-			<answer id = "d" line = "Использованием ProcessBuilder." isCorrect = "false"></answer>
+	<question line = "Какие способы создания вычислительных потоков существуют в Java? (выберите несколько вариантов).">
+			<answer line = "Наследованием от InputStream." isCorrect = "false"></answer>
+			<answer line = "Наследованием от Thread." isCorrect = "true"></answer>
+			<answer line = "Реализацией интерфейса Runnable и использованием Thread." isCorrect = "true"></answer>
+			<answer line = "Использованием ProcessBuilder." isCorrect = "false"></answer>
 	</question>	   
 </questions>                                                                                             

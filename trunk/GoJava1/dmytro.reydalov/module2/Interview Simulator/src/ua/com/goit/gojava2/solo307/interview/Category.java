@@ -49,18 +49,17 @@ public class Category {
 		return parser.questions;
 	}
 	
-	public List<Question> shuffle(List <Question> questions){
+	public void shuffle(){
 		Collections.shuffle(questions);
-		return questions;
 	}
 	
 	public List<String> getQuestionsAndCorrectAnswers(){
 		List <String> questionsAndCorrectAnswers = new ArrayList<String>();
 		for(Question question: questions){
-			questionsAndCorrectAnswers.add(new String("\n" + question.getId() +". " + question.getText()));
+			questionsAndCorrectAnswers.add(new String(question.getText()));
 			for(Answer answer: question.getAnswers()){
 				if(answer.isCorrect){
-					questionsAndCorrectAnswers.add(answer.getIdAndAnswer());
+					questionsAndCorrectAnswers.add(answer.getText());
 				}
 			}
 		}
@@ -70,18 +69,13 @@ public class Category {
 	public List<String> getQuestionsAndAllAnswers(){
 		List <String> questionsAndAllAnswers = new ArrayList<String>();
 		for(Question question: questions){
-			questionsAndAllAnswers.add(question.getId() +". " + question.getText() + "\n");
+			questionsAndAllAnswers.add(question.getText() + "\n");
 			for(Answer answer: question.getAnswers()){
-				questionsAndAllAnswers.add(answer.getIdAndAnswer());
+				questionsAndAllAnswers.add(answer.getText());
 			}
 		}
 		return questionsAndAllAnswers;
 	}	
-	
-	public void printQuestionAndAllAnswers(Question question){
-		System.out.println(question.getId() +". " + question.getText() + "\n");
-		question.printAswers();
-	}
 
 	public List<String> printIncorrectAnswers(){
 		List <String> questionsAndAllAnswers = new ArrayList<String>();
@@ -90,6 +84,38 @@ public class Category {
 		}
 		return questionsAndAllAnswers;
 	}
+
+	public List<Integer> parseIds(String[] answers){
+		List<Integer> ids = new ArrayList<Integer>();
+		for(String answerId: answers){
+			int id = Integer.parseInt(answerId);
+			ids.add(new Integer(id));
+		}
+		return ids;
+	}
+	
+	public int countCorrectAnswers(List<Integer> answerIds) {
+		int correctAnswers = 0;
+		for(Integer answerId: answerIds){
+			if(isAnswerCorrect(answerId))correctAnswers++;
+		}
+		return correctAnswers;
+	}
+	
+	public boolean isAnswerCorrect(int id){
+		for(Question question: questions){
+			for(Answer answer: question.getAnswers()){
+				if(answer.isCorrect){
+					if(answer.getId() == id){
+						return true;
+					}
+				}
+			}
+		}
+		return false;
+	}
+	
+	
 
 	
 	

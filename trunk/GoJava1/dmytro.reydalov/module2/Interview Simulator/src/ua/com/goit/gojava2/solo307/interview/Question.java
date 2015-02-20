@@ -22,9 +22,9 @@ public class Question {
 		this.text = "there is a question must be here...";
 	}
 	
-	public Question(String text, List <Answer> answersWithNoId, int id){
+	public Question(String text, List <Answer> answers, int id){
 		this.text = text;
-		this.answers = generateRandomId(answersWithNoId);
+		this.answers = answers;
 		this.id = id;
 	}
 	
@@ -90,18 +90,6 @@ public class Question {
 
 	public void setAnsweredWrong(List<Answer> answeredWrong) {
 		this.answeredWrong = answeredWrong;
-	}
-
-	public List<Answer> generateRandomId(List <Answer> answersWithNoId) {
-		List <Character> identificators = Arrays.asList('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j');
-		List <Answer> answersWithId = new ArrayList <Answer>();
-		int counter = 0;
-		for(Answer answer: answersWithNoId){
-			answer.setId(identificators.get(counter));
-			answersWithId.add(answer);
-			counter++;
-		}
-		return answersWithId;
 	}
 	
 	public List <Character> readAnswer(){

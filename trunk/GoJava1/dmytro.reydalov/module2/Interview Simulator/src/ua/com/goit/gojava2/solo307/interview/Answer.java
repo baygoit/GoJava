@@ -2,7 +2,7 @@ package ua.com.goit.gojava2.solo307.interview;
 
 public class Answer {
 	
-	char id;
+	int id;
 	private String text;
 	boolean isCorrect;
 	boolean isChecked;
@@ -13,13 +13,13 @@ public class Answer {
 		id = 0;
 	}
 
-	public Answer(char id, String text, boolean isCorrect){
+	public Answer(int id, String text, boolean isCorrect){
 		this.text = text;
 		this.isCorrect = isCorrect;
 		this.id = id;
 	}
 	
-	public char getId() {
+	public int getId() {
 		return id;
 	}
 

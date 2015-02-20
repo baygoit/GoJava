@@ -1,6 +1,5 @@
 package ua.com.goit.gojava2.solo307.interview;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -18,33 +17,47 @@ import org.xml.sax.SAXException;
 
 public class XMLParser {
 	
+	private int questionId = 0;
+	private int answerId = 0;
 	List <Question> questions = new ArrayList<Question>();
 	
+	public int getQuestionId() {
+		return questionId;
+	}
+
+	public void setQuestionId(int questionId) {
+		this.questionId = questionId;
+	}
+
+	public int getAnswerId() {
+		return answerId;
+	}
+
+	public void setAnswerId(int answerId) {
+		this.answerId = answerId;
+	}
+
+	public List<Question> getQuestions() {
+		return questions;
+	}
+
+	public void setQuestions(List<Question> questions) {
+		this.questions = questions;
+	}
+
 	public XMLParser(String path) throws InterviewSimulatorException{
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		try{
 			DocumentBuilder builder = factory.newDocumentBuilder();
 			Document document = builder.parse(path);
-//			try{
-				;
-//			} catch(FileNotFoundException e){
-//				throw new InterviewSimulatorException("File " + path + " was not found");
-//			}
 			NodeList questions = document.getElementsByTagName("question");
 			for(int i = 0; i < questions.getLength(); i++){
 				Node q = questions.item(i);
 				if(q.getNodeType() == Node.ELEMENT_NODE){
 					Element question = (Element) q;
-					int questionId = 0;
-					try{
-						questionId = Integer.parseInt(question.getAttribute("id"));
-					} catch(NumberFormatException e){
-						System.out.println(e.getMessage());
-					}
 					String questionText = question.getAttribute("line");
 					NodeList answers = question.getChildNodes();
 					List <Answer> answerList = new ArrayList<Answer>();
-					final char EMPTY = '0';
 					for(int j = 0; j < answers.getLength(); j++){
 						Node a = answers.item(j);
 						if(a.getNodeType() == Node.ELEMENT_NODE){
@@ -54,12 +67,14 @@ public class XMLParser {
 							if(answer.getAttribute("isCorrect").equals("true")) isCorrect = true;
 							else if(answer.getAttribute("isCorrect").equals("false")) isCorrect = false;
 							else System.out.println("wrong isCorrect value in XML");
-							answerList.add(new Answer(EMPTY, answerText, isCorrect));
+							int aId = answerId;
+							answerList.add(new Answer(aId, answerText, isCorrect));
+							answerId++;
 						}
 					}
-					if(hasIdWithNull())throw new InterviewSimulatorException();
-					Collections.shuffle(answerList);
-					writeData(questionText, answerList, questionId);	
+					int qId = questionId;
+					writeData(questionText, answerList, qId);
+					questionId++;
 				}
 			}
 		} catch(ParserConfigurationException e){
@@ -71,16 +86,10 @@ public class XMLParser {
 		}
 	}
 	
-	public boolean hasIdWithNull(){
-		for(Question answer: questions){
-			if(answer.getId() == 0)return true;
-		}
-		return false;
-	}
-	
 	public void writeData(String questionLine, List<Answer> answerList, int questionId){
 		questions.add(new Question(questionLine, answerList, questionId));
 	}
+	
 }	
 
 
