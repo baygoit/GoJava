@@ -5,5 +5,5 @@ public interface Gear {
     //TODO owner. Every thing should be owned by someone.
     public int getPurposeValue(String commandToInvoke);
     public String getStringForOutput();
-
+    void setName(String name);
 }

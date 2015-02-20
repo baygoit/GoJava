@@ -1,6 +1,5 @@
 package ua.com.goit.gojava1.lslayer.hackit2;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -13,13 +12,15 @@ import javax.servlet.http.HttpServletResponse;
  * Servlet implementation class PathInformer
  */
 public class PathInformer extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
+//    private static org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(PathInformer.class);
        
     /**
      * @see HttpServlet#HttpServlet()
      */
     public PathInformer() {
         super();
+//        logger.debug("PathInformer created");
         // TODO Auto-generated constructor stub
     }
 
@@ -37,13 +38,6 @@ public class PathInformer extends HttpServlet {
         PrintWriter writer = response.getWriter();
         response.setContentType("text/plain");
         writer.println("HelloWorld");
-//        File f = new File(".");
-//        writer.println(f.isDirectory());
-//        File[] listOfFiles = f.listFiles();
-//        for (File element : listOfFiles) {
-//            if (element.getName() != null)
-//            writer.println(element.getCanonicalPath());
-//        }
         writer.println(System.getProperty("os.name").toLowerCase());
         writer.println(!this.getServletContext().getServerInfo().equals("Apache Tomcat/7.0.57"));
         writer.println(request.getContextPath());

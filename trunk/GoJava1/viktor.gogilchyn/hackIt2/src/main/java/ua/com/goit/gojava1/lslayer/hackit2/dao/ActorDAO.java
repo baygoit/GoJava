@@ -12,82 +12,47 @@ import java.util.Map;
 
 import ua.com.goit.gojava1.lslayer.hackit2.actor.Actor;
 import ua.com.goit.gojava1.lslayer.hackit2.actor.HumanControlledCharacter;
+import ua.com.goit.gojava1.lslayer.hackit2.exception.HackitEcxeptionForUI;
 import ua.com.goit.gojava1.lslayer.hackit2.exception.HackitIOException;
-import ua.com.goit.gojava1.lslayer.hackit2.exception.HackitWrongParameterException;
 
-public class ActorDAO {
-    private boolean isUnix = false;
-    private static final String WIN_SAVE_DIR = "c:\\workspace\\Hackit2\\saved\\";
-    private static final String UNIX_SAVE_DIR = "/usr/share/hackit2/";
-    private static final String FILE_EXT = ".sav";
-    private static final String SKILL_PREFIX = "Skill: ";
-    private static final String ATTRIBUTE_PREFIX = "Attribute: ";
-    private static final String DELIMITER = "/";
+public class ActorDAO extends AbstractDAO {
 
     public ActorDAO() {
 
     }
 
-    public ActorDAO(boolean isUnix) {
-        this.isUnix = isUnix;
-    }
-
-    public List<Actor> loadAll() {
+    public List<Actor> loadAll() throws HackitEcxeptionForUI {
         List<Actor> resultList = new LinkedList<Actor>();
-        File folder = new File(WIN_SAVE_DIR);
-        File[] listOfFiles = folder.listFiles(); // Now hindy-os-check will stay
-        if (listOfFiles != null) {
-            for (File currentFile : listOfFiles) {
-                if (currentFile.isFile()
-                        && currentFile.getName().endsWith(FILE_EXT)) {
-                    try {
-                        resultList.add(this.fromFile(currentFile.getName()
-                                .substring(
-                                        0,
-                                        currentFile.getName().length()
-                                                - FILE_EXT.length())));
-                    } catch (Exception e) {
-                    }
-                }
-            }
-        }
-        File folderUnix = new File(UNIX_SAVE_DIR);
-        File[] listOfFilesUnix = folderUnix.listFiles();
-        if (listOfFilesUnix != null) {
-            for (File currentFile : listOfFilesUnix) {
-                if (currentFile.isFile()
-                        && currentFile.getName().endsWith(FILE_EXT)) {
-                    try {
-                        resultList.add(this.fromFile(currentFile.getName()
-                                .substring(
-                                        0,
-                                        currentFile.getName().length()
-                                                - FILE_EXT.length())));
-                    } catch (Exception e) {
-                    }
+        File folder = new File(getSavePath());
+        File[] listOfFiles = folder.listFiles();
+        if (listOfFiles == null)
+            return null;
+        for (File currentFile : listOfFiles) {
+            if (currentFile.isFile()
+                && currentFile.getName().endsWith(FILE_EXT)) {
+                try {
+                    resultList.add(this.fromFile(getActorNameFromFile(currentFile)));
+                } catch (Exception e) {
+                    // TODO Find out exception throw and continue execution
+                    // throw new HackitEcxeptionForUI(e.getMessage());
                 }
             }
         }
         return resultList;
     }
 
-    public Actor fromFile(String actorName) throws HackitIOException,
-            HackitWrongParameterException, IOException {
-        File file = new File(WIN_SAVE_DIR + actorName + FILE_EXT);
+    public Actor fromFile(String actorName) throws HackitIOException, IOException {
+        File file = new File(getSavePath() + actorName + FILE_EXT);
         if (!file.exists()) {
-            file = new File(UNIX_SAVE_DIR + actorName + FILE_EXT);
-            if (!file.exists()) {
-                throw new HackitIOException("Such actor not found in win/nix block"
-                        + file.getCanonicalPath());
-            }
+            throw new HackitIOException("Such actor not found in win/nix block"
+                                        + file.getCanonicalPath());
         }
         Actor actor = new HumanControlledCharacter(actorName);
         BufferedReader actorReader = null;
-
         try {
             actorReader = new BufferedReader(new FileReader(file));
         } catch (FileNotFoundException e) {
-            throw new HackitIOException("Such actor not found!", e);
+            throw new HackitIOException("File read error!", e);
         }
         if (!actorReader.readLine().equals(actorName)) {
             actorReader.close();
@@ -106,7 +71,6 @@ public class ActorDAO {
             if (line.startsWith(ATTRIBUTE_PREFIX)) {
                 String currentLine = line.substring(ATTRIBUTE_PREFIX.length());
                 String name = currentLine.split("/")[0];
-                // See save() method to know why 11
                 String value = currentLine.split(DELIMITER)[1];
                 actor.addAttribute(name, value);
             }
@@ -118,43 +82,36 @@ public class ActorDAO {
 
     public void save(Actor actor) throws HackitIOException, IOException {
         String eol = System.getProperty("line.separator");
-        File file = new File((this.isUnix ? UNIX_SAVE_DIR : WIN_SAVE_DIR)
-                + actor.getName() + FILE_EXT);
+        File file = new File((getSavePath()) + actor.getName() + FILE_EXT);
         FileWriter out = null;
         try {
             out = new FileWriter(file);
             out.write(actor.getName());
             for (Map.Entry<String, Integer> entry : actor.getSkills()
-                    .entrySet()) {
+                                                         .entrySet()) {
                 out.write(eol + SKILL_PREFIX + entry.getKey() + "/"
-                        + entry.getValue());
+                          + entry.getValue());
             }
             for (Map.Entry<String, String> entry : actor.getAttributes()
-                    .entrySet()) {
+                                                        .entrySet()) {
                 out.write(eol + ATTRIBUTE_PREFIX + entry.getKey() + "/"
-                        + entry.getValue());
+                          + entry.getValue());
             }
             out.close();
         } catch (Exception e) {
-            throw new HackitIOException("Something in io" + file.getCanonicalPath()+file.getName(), e);
+            throw new HackitIOException("Something in io" + file.getCanonicalPath() + file.getName(), e);
         }
     }
 
     public void delete(Actor gamer) throws HackitIOException {
-        File file = new File(WIN_SAVE_DIR + gamer.getName() + FILE_EXT);
-        if (!file.exists()) {
-            file = new File(UNIX_SAVE_DIR + gamer.getName() + FILE_EXT);
-            if (!file.exists()) {
-                try {
-                    throw new HackitIOException("Such actor not found! in delete"
-                            + file.getCanonicalPath());
-                } catch (IOException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
+        File file = new File((getSavePath()) + gamer.getName() + FILE_EXT);
+        if (file.exists()) {
+            try {
+                file.delete();
+            } catch (Exception e) {
+                throw new HackitIOException("Such actor not found! in delete");
             }
         }
-        file.delete();
     }
 
 }

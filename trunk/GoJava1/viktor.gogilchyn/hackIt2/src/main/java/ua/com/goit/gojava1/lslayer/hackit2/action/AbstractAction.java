@@ -3,12 +3,10 @@ package ua.com.goit.gojava1.lslayer.hackit2.action;
 import java.util.Map.Entry;
 import java.util.Random;
 
-import org.apache.log4j.Logger;
 import ua.com.goit.gojava1.lslayer.hackit2.actor.Actor;
 import ua.com.goit.gojava1.lslayer.hackit2.dto.ActionParameters;
 
 public abstract class AbstractAction implements Action {
-    static Logger log = Logger.getLogger(AbstractAction.class);
     protected String commandToInvoke;
     protected int timeNeededToInvokeAction;
     private ActionParameters parameters = new ActionParameters();

@@ -1,5 +1,6 @@
 package ua.com.goit.gojava1.lslayer.hackit2.actor;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -9,8 +10,10 @@ import ua.com.goit.gojava1.lslayer.hackit2.dto.ActionResult;
 import ua.com.goit.gojava1.lslayer.hackit2.dto.ActionParameters;
 import ua.com.goit.gojava1.lslayer.hackit2.exception.HackitWrongParameterException;
 
-public abstract class AbstractCharacter implements Actor {
+public abstract class AbstractCharacter implements Actor, Serializable {
 
+    private static final long serialVersionUID = -2511742480639362123L;
+    private long id;
     private String name;
     private Map<String, Integer> skills = new LinkedHashMap<String, Integer>();
     private Map<String, String>  atrributes = new HashMap<String, String>();
@@ -60,6 +63,15 @@ public abstract class AbstractCharacter implements Actor {
     @Override
     public void addAttribute(String what, String value) {
         this.atrributes.put(what, value);
+    }
+
+    public long getId() {
+        return id;
+    }
+
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     

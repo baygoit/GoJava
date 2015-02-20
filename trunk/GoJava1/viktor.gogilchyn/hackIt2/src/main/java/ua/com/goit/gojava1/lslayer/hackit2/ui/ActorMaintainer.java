@@ -1,7 +1,7 @@
 package ua.com.goit.gojava1.lslayer.hackit2.ui;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import ua.com.goit.gojava1.lslayer.hackit2.actor.Actor;
 import ua.com.goit.gojava1.lslayer.hackit2.actor.ActorFactory;
 import ua.com.goit.gojava1.lslayer.hackit2.dao.ActorDAO;
+import ua.com.goit.gojava1.lslayer.hackit2.exception.HackitEcxeptionForUI;
 import ua.com.goit.gojava1.lslayer.hackit2.exception.HackitIOException;
 
 /**
@@ -32,10 +33,14 @@ public class ActorMaintainer extends HttpServlet {
      *      response)
      */
     protected void doGet(HttpServletRequest request,
-            HttpServletResponse response) throws ServletException, IOException {
-        boolean isWindows = System.getProperty("os.name").toLowerCase().contains("win");
-        ActorDAO dao = new ActorDAO(!isWindows);
-        request.setAttribute("gamers", dao.loadAll());
+                         HttpServletResponse response) throws ServletException, IOException {
+        ActorDAO dao = new ActorDAO();
+        
+        try {
+            request.setAttribute("gamers", dao.loadAll());
+        } catch (HackitEcxeptionForUI e) {
+            request.setAttribute("error", e.getMessage());
+        }
         request.getRequestDispatcher("view.jsp").forward(request, response);
     }
 
@@ -44,30 +49,32 @@ public class ActorMaintainer extends HttpServlet {
      *      response)
      */
     protected void doPost(HttpServletRequest request,
-            HttpServletResponse response) throws ServletException, IOException {
+                          HttpServletResponse response) throws ServletException, IOException {
         String deleteParameter = request.getParameter("delete");
         String createParameter = request.getParameter("create");
-        boolean isWindows = System.getProperty("os.name").toLowerCase().contains("win");
-        ActorDAO dao = new ActorDAO(!isWindows);
+        String editParameter = request.getParameter("edit");
+        ActorDAO dao = new ActorDAO();
         if (deleteParameter != null && deleteParameter.equals("yes"))
-            for (Actor gamer : dao.loadAll()) {
-                String deleteParameterString = request.getParameter(gamer
-                        .getName());
-                if (deleteParameterString != null
+            try {
+                for (Actor gamer : dao.loadAll()) {
+                    String deleteParameterString = request.getParameter(gamer
+                                                                             .getName());
+                    if (deleteParameterString != null
                         && deleteParameterString.equals("on")) {
-                    try {
-                        dao.delete(gamer);
-                    } catch (HackitIOException e) {
-                        // I need to do something here
-                        // But not now
+                        try {
+                            dao.delete(gamer);
+                        } catch (HackitIOException e) {
+                            request.setAttribute("error", e.getMessage());
+                        }
                     }
                 }
+            } catch (HackitEcxeptionForUI e) {
+                request.setAttribute("error", e.getMessage());
             }
         if (createParameter != null && createParameter.equals("yes")) {
             String skills[] = null;
             ActorFactory actorFactory = new ActorFactory();
             String name = null;
-            PrintWriter out = response.getWriter();
             name = request.getParameter("name");
             actorFactory.setActorName(name);
             if (request.getParameter("skills") != null) {
@@ -76,21 +83,39 @@ public class ActorMaintainer extends HttpServlet {
             actorFactory.addSkillsArray(skills);
             try {
                 dao.save(actorFactory.createActor());
-            } catch (HackitIOException e) {
-                out.print(e.getMessage());
+            } catch (Exception e) {
+                request.setAttribute("error", e.getMessage());
             }
 
         }
+        if (editParameter != null && editParameter.equals("yes")) {
+            Actor editedGamer = null;
+            String nameForEdit = request.getParameter("name_for_edit");
+            try {
+                editedGamer = dao.fromFile(nameForEdit);
+                request.setAttribute("edit_name", editedGamer.getName());
+                StringBuilder builder = new StringBuilder();
+                Map<String, Integer> skills = editedGamer.getSkills();
+                for (Map.Entry<String, Integer> entry : skills.entrySet()) {
+                    builder.append(entry.getKey());
+                    builder.append(";");
+                }
+                request.setAttribute("edit_skills", builder.toString());
+            } catch (HackitIOException e) {
+                request.setAttribute("error", e.getMessage());
+            }
+        }
         response.setContentType("text/plain");
         response.setCharacterEncoding("UTF-8");
-        response.sendRedirect("actors");
+        this.doGet(request, response);
+        // request.getRequestDispatcher("actors").forward(request, response);
     }
 
     /**
      * @see HttpServlet#doPut(HttpServletRequest, HttpServletResponse)
      */
     protected void doPut(HttpServletRequest request,
-            HttpServletResponse response) throws ServletException, IOException {
+                         HttpServletResponse response) throws ServletException, IOException {
         // TODO Auto-generated method stub
     }
 
@@ -98,7 +123,7 @@ public class ActorMaintainer extends HttpServlet {
      * @see HttpServlet#doDelete(HttpServletRequest, HttpServletResponse)
      */
     protected void doDelete(HttpServletRequest request,
-            HttpServletResponse response) throws ServletException, IOException {
+                            HttpServletResponse response) throws ServletException, IOException {
 
     }
 

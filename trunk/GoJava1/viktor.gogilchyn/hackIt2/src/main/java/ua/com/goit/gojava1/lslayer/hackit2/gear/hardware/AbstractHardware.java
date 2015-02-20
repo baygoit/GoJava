@@ -7,10 +7,13 @@ import ua.com.goit.gojava1.lslayer.hackit2.exception.HackitWrongParameterExcepti
 import ua.com.goit.gojava1.lslayer.hackit2.gear.AbstractUtility;
 
 public abstract class AbstractHardware extends AbstractUtility implements Hardware {
+    
+    protected Components type;
 
     public AbstractHardware(String name) throws HackitWrongParameterException  {
         super(name);
     }
+    
     private Map<String, Integer> parameters = new LinkedHashMap<String, Integer>();
 
     
@@ -19,6 +22,20 @@ public abstract class AbstractHardware extends AbstractUtility implements Hardwa
         return this;
     }
     
+    
+    @Override
+    public Map<String, Integer> getParameters() {
+        return this.parameters;
+    }
+
+
+    @Override
+    public void setParameters(Map<String, Integer> parameters) {
+        this.parameters.clear();
+        this.parameters.putAll(parameters);
+    }
+
+
     public String listParameters() {
         String result = "";
         String eol = System.getProperty("line.separator");
