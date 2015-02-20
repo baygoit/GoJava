@@ -237,7 +237,7 @@ public class KickstarterS {
 	}
 	
 	private void askQuestion() {
-		projects.addFAQ(chosenProject - 1, in.enter());
+		projects.addFAQ(chosenProject, in.enter());
 	}
 	
 	private void printProjectsInCategory() {
@@ -250,7 +250,7 @@ public class KickstarterS {
 	}
 	
 	private void printProject() {
-		printer(projects.showProjectFull(chosenProject - 1));
+		printer(projects.showProjectFull(chosenProject));
 		printer("Choice "
 				+ menuProjects
 				+ " for exit to Project list.\nChoice "

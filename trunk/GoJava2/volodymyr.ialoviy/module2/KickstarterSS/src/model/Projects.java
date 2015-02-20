@@ -4,26 +4,26 @@ import java.util.ArrayList;
 
 public interface Projects {
 
-	public abstract void writeAllProjects();
+	void writeAllProjects();
 
-	public abstract void updateProject(String[] value, int i);
+	void updateProject(String[] value, int i);
 
-	public abstract String showProjectFull(int numberProject);
+	String showProjectFull(int numberProject);
 
-	public abstract String showProjectInShort(int projectID);
+	String showProjectInShort(int projectID);
 
-	public abstract void setDonation(int chosenProject, int amount);
+	void setDonation(int chosenProject, int amount);
 
-	public abstract void addFAQ(int projectID, String question);
+	void addFAQ(int projectID, String question);
 
-	public abstract ArrayList<String> getFaq();
+	ArrayList<String> getFaq(int projectID);
 
-	public abstract ArrayList<Project> getListProject();
+	ArrayList<Project> getListProject();
 
-	public abstract void setListProject(ArrayList<Project> listProject);
+	void setListProject(ArrayList<Project> listProject);
 
-	public abstract int getCounterProject();
+	int getCounterProject();
 
-	public abstract void setCounterProject(int counterProject);
+	void setCounterProject(int counterProject);
 
 }

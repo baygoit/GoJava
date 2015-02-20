@@ -2,9 +2,9 @@ package presenter;
 
 import model.Categories;
 import model.CategoriesFromDB;
-//import model.CategoriesFromFile;
 import model.Projects;
-import model.ProjectsFromFile;
+import model.ProjectsFromDB;
+//import model.ProjectsFromFile;
 import view.Inputs;
 import view.InputsConsole;
 import view.Output;
@@ -15,7 +15,7 @@ public class KickstarterMain {
     	Inputs in = new InputsConsole();
     	Output out = new OutputConsole();
     	Categories categories = new CategoriesFromDB();
-    	Projects projects = new ProjectsFromFile();
+    	Projects projects = new ProjectsFromDB();
 
     	KickstarterS run = new KickstarterS(in, out, categories, projects);
     	run.kickstarter();

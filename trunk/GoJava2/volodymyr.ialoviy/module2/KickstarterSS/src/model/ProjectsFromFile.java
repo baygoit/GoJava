@@ -75,7 +75,7 @@ public class ProjectsFromFile implements Projects {
 	}
 	
 	@Override
-	public ArrayList<String> getFaq() {
+	public ArrayList<String> getFaq(int projectID) {//TODO USE int projectID
 		Project project = new Project();
 		return project.getFaq();
 	}
