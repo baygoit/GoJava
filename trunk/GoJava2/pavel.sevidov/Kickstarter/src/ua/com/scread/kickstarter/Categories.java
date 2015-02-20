@@ -1,17 +1,16 @@
-package ua.com.scread.kickstarter;
+package ua.com.scread.kickstarter.storage;
 
 import java.util.List;
 
+import ua.com.scread.kickstarter.data.Category;
+
 public interface Categories {
 
-    abstract void add(Category category);
+    void add(Category category);
 
-    abstract int size();
+    int size();
 
-    abstract List<Category> getCategories();
+    List<Category> getCategories();
 
-    abstract Category getCategory(int index);
-    
-    abstract String[] getStringCategories();
-
+    Category get(int index);
 }
