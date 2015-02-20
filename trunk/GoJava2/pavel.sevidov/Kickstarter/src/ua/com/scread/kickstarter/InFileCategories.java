@@ -1,4 +1,4 @@
-package ua.com.scread.kickstarter;
+package ua.com.scread.kickstarter.storage;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -7,6 +7,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import ua.com.scread.kickstarter.data.Category;
 
 public class InFileCategories implements Categories {
     BufferedWriter out;
@@ -69,7 +71,6 @@ public class InFileCategories implements Categories {
 
     @Override
     public List<Category> getCategories() {
-        int counter = 0;
         BufferedReader in = null;
         String line = "";
         List<Category> result = new ArrayList<Category>();
@@ -80,7 +81,6 @@ public class InFileCategories implements Categories {
                 if (line != null) {
                     result.add(new Category(line));                    
                 }
-                counter++;
             } while(line != null);
                 
         } catch (IOException e) {
@@ -98,7 +98,7 @@ public class InFileCategories implements Categories {
     }
 
     @Override
-    public Category getCategory(int index) {
+    public Category get(int index) {
         int counter = 0;
         BufferedReader in = null;
         String line = "";
@@ -126,16 +126,4 @@ public class InFileCategories implements Categories {
         }
         return result;
     }
-
-    @Override
-    public String[] getStringCategories() {
-        List<Category> categories = new ArrayList<Category>();
-        categories.addAll(getCategories());
-        String[] result = new String[categories.size()];
-        for (int i = 0; i < categories.size(); i++) {
-            result[i] = String.valueOf(i+1) + " - " + categories.get(i).getName();
-        }
-        return result;
-    }
-
 }

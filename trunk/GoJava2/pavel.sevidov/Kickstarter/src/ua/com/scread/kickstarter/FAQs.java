@@ -1,20 +1,22 @@
-package ua.com.scread.kickstarter;
+package ua.com.scread.kickstarter.storage;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import ua.com.scread.kickstarter.data.FAQ;
+
 public class FAQs {
-    List<FAQ> faqs;
+    private List<FAQ> faqs = new ArrayList<FAQ>();
     
     public FAQs(List<FAQ> faqs) {
-        faqs = new ArrayList<FAQ>();
         this.faqs.addAll(faqs);
     }
     
     public FAQs(FAQ faq) {
-        this.faqs = new ArrayList<FAQ>();
         faqs.add(faq);
     }
+    
+    public FAQs() { }
     
     public void add(FAQ faq) {
         faqs.add(faq);
