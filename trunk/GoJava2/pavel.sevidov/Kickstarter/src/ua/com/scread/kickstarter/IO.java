@@ -1,13 +1,13 @@
-package ua.com.scread.kickstarter;
+package ua.com.scread.kickstarter.io;
 
 public interface IO {
 
-	public abstract int read();
-	
-	public abstract String readString();
-	
-	public abstract long readLong();
+    int read();
+    
+    String readString();
+    
+    long readLong();
 
-	public abstract void print(String message);
+    void print(String message);
 
 }
