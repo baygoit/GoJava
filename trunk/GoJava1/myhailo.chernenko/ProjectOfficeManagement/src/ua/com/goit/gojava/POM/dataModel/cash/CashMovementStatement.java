@@ -1,4 +1,4 @@
-package ua.com.goit.gojava.POM.dataModel.cashSubsystem;
+package ua.com.goit.gojava.POM.dataModel.cash;
 
 import ua.com.goit.gojava.POM.dataModel.common.FinancialStatement;
 

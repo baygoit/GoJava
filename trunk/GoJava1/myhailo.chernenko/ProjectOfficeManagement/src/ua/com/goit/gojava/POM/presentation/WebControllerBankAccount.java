@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import ua.com.goit.gojava.POM.dataModel.cashSubsystem.BankAccount;
+import ua.com.goit.gojava.POM.dataModel.cash.BankAccount;
 import ua.com.goit.gojava.POM.persistence.DataManager;
 import ua.com.goit.gojava.POM.persistence.LazyDataManager;
 import ua.com.goit.gojava.POM.persistence.abstraction.GenericDAO;

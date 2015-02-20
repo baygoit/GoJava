@@ -1,21 +1,19 @@
 package ua.com.goit.gojava.POM.presentation;
 
 import java.io.IOException;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Currency;
-import java.util.Date;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import ua.com.goit.gojava.POM.dataModel.cashSubsystem.BankAccount;
-import ua.com.goit.gojava.POM.dataModel.cashSubsystem.CashMovementEntry;
-import ua.com.goit.gojava.POM.dataModel.cashSubsystem.CashMovementStatement;
+import ua.com.goit.gojava.POM.dataModel.POMDataModelException;
+import ua.com.goit.gojava.POM.dataModel.cash.BankAccount;
+import ua.com.goit.gojava.POM.dataModel.cash.CashMovementEntry;
+import ua.com.goit.gojava.POM.dataModel.cash.CashMovementStatement;
 import ua.com.goit.gojava.POM.dataModel.common.Money;
 import ua.com.goit.gojava.POM.persistence.DataManager;
 import ua.com.goit.gojava.POM.persistence.LazyDataManager;
@@ -53,7 +51,12 @@ public class WebControllerCashMovement extends HttpServlet {
 			newEntry.setDescription(description);
 			//newEntry.setCharacteristic(characteristic);
 			//newEntry.setDoc(doc);
-			newEntry.setSum(new Money(Double.parseDouble(sum), currency));;
+			try {
+				newEntry.setSum(new Money(Double.parseDouble(sum), currency));
+			} catch (NumberFormatException | POMDataModelException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			};
 				
 			LazyDataManager.getInstance().saveData();
 			

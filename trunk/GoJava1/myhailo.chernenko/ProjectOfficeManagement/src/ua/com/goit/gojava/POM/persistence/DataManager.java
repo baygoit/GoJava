@@ -16,18 +16,25 @@ import java.util.logging.Logger;
 import ua.com.goit.gojava.POM.persistence.abstraction.DAOFactory;
 
 public class DataManager implements DAOFactory{
-
-	private static final String DATA_FILE = "C:\\workspace\\ProjectOfficeManagement.dat";
+	
+	private String dataFile = "";
 	
 	// for DB imitation:
 	private Map<String, List<Object>> objectsMap = new HashMap<String, List<Object>>(); 
 	
 	public DataManager() {
 		
+		initialize();
 		readData();
 		
 	}
 	
+	private void initialize() {
+
+		dataFile = "C:\\workspace\\ProjectOfficeManagement.dat";
+		
+	}
+
 	public void readData() {
 		
 		this.objectsMap = new HashMap<String, List<Object>>();
@@ -36,7 +43,7 @@ public class DataManager implements DAOFactory{
 		ObjectInputStream ois;
 		try {
 			
-			fis = new FileInputStream(DATA_FILE);
+			fis = new FileInputStream(dataFile);
 			ois = new ObjectInputStream(fis);
 			Object obj = ois.readObject();
 			
@@ -66,7 +73,7 @@ public class DataManager implements DAOFactory{
 		ObjectOutputStream oos;
 		try {
 			
-			fos = new FileOutputStream(DATA_FILE);
+			fos = new FileOutputStream(dataFile);
 			oos = new ObjectOutputStream(fos);
 			oos.writeObject(objectsMap);
 			oos.close();

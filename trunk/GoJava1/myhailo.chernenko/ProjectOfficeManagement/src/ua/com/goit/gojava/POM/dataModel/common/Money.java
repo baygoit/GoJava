@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Currency;
 
+import ua.com.goit.gojava.POM.dataModel.POMDataModelException;
+
 public class Money {
 	
 	private int scaleLength = 2;
@@ -11,11 +13,24 @@ public class Money {
 	private BigDecimal value;
 	private Currency currency;
 	
-	public Money(Double value, Currency currency) {
-		
-		this.value = new BigDecimal(value);
+	public Money(Currency currency) {
+
+		this.value = new BigDecimal(0.0);
 		this.currency = currency;
 		SetScale();
+	
+	}
+
+	public Money(Double value, Currency currency) throws POMDataModelException {
+		
+		this(currency);
+		
+		try {
+			this.value = new BigDecimal(value);
+		} catch (NumberFormatException e) {
+			throw new POMDataModelException("Wrong amount of Money", e);
+		}
+
 		
 	}
 	
@@ -47,7 +62,7 @@ public class Money {
 		
 	}
 	
-	public void add(Money money, ExchangeRate currentRate) {
+	public void add(Money money, ExchangeRate currentRate) throws POMDataModelException {
 		
 		if(this.getCurrency() == money.getCurrency()){
 			
@@ -67,7 +82,8 @@ public class Money {
 						
 			}else{
 				
-				// Exception
+				throw new POMDataModelException("Can't add 2 Money in different currencies - rate is wrong or not found"); 
+				
 			}
 			
 		}

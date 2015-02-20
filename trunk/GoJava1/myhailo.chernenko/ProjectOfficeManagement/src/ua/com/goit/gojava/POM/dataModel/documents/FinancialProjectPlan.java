@@ -7,7 +7,7 @@ import java.util.Date;
 import java.util.List;
 
 import ua.com.goit.gojava.POM.dataModel.common.FinancialDocument;
-import ua.com.goit.gojava.POM.dataModel.profitCostSubsystem.ProjectFinResultTransaction;
+import ua.com.goit.gojava.POM.dataModel.profitcost.ProjectFinResultTransaction;
 
 public class FinancialProjectPlan  implements FinancialDocument, Serializable {
 

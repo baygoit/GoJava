@@ -10,18 +10,36 @@ import java.util.List;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
-import ua.com.goit.gojava.POM.dataModel.profitCostSubsystem.CostItem;
+import static org.mockito.Mockito.*;
 
+import org.mockito.*;
+import org.mockito.runners.MockitoJUnitRunner;
+
+import ua.com.goit.gojava.POM.dataModel.profitcost.CostItem;
+
+@RunWith(MockitoJUnitRunner.class)
 public class DataManagerTest {
 	
+	private static final String TEST_DATA_FILE = "C:\\workspace\\ProjectOfficeManagementTEST.dat";
 	private static final String CLASS_NAME = "CostItem";
 	private DataManager dataManager;
-
+	
 	@Before
 	public void setUp() throws Exception {
 		
-		dataManager = new DataManager();
+		dataManager = spy(new DataManager() {
+			
+			@SuppressWarnings("unused")
+			private String dataFile = "";
+			@SuppressWarnings("unused")
+			private void initialize() {
+				dataFile = TEST_DATA_FILE;
+			}
+			
+		});
+		
 		for (int i = dataManager.getObjectList(CLASS_NAME).size() - 1; i >= 0 ;i--) {
 			Object obj = dataManager.getObjectList(CLASS_NAME).get(i);
 			dataManager.deleteObject(obj, CLASS_NAME);
@@ -37,7 +55,21 @@ public class DataManagerTest {
 	public void testCreationAndReadData() {
 		
 		assertNotNull(dataManager);
-
+		
+		@SuppressWarnings("unchecked")
+		List<Object> mockedList = mock(List.class);
+		mockedList.add("once");
+		mockedList.add("once");
+		when(mockedList.size()).thenReturn(100);
+		
+		when(dataManager.getObjectList(CLASS_NAME)).thenReturn(mockedList);
+		 
+		verify(dataManager).getObjectList(CLASS_NAME);
+		
+		assertEquals(dataManager.getObjectList(CLASS_NAME).size(), 100);
+		
+		verify(mockedList, times(2)).add("once");
+		
 	}
 	
 	@Test
@@ -128,7 +160,7 @@ public class DataManagerTest {
 				ObjectOutputStream oos;
 				try {
 					
-					fos = new FileOutputStream("C:\\workspace\\ProjectOfficeManagement.dat");
+					fos = new FileOutputStream(TEST_DATA_FILE);
 					oos = new ObjectOutputStream(fos);
 					oos.writeObject(null);
 					oos.close();

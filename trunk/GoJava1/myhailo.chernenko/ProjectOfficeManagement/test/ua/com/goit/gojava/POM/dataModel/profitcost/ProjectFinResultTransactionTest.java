@@ -1,4 +1,4 @@
-package ua.com.goit.gojava.POM.dataModel;
+package ua.com.goit.gojava.POM.dataModel.profitcost;
 
 import static org.junit.Assert.*;
 
@@ -6,7 +6,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import ua.com.goit.gojava.POM.dataModel.profitCostSubsystem.ProjectFinResultTransaction;
+import ua.com.goit.gojava.POM.dataModel.profitcost.ProjectFinResultTransaction;
 
 public class ProjectFinResultTransactionTest {
 

@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	import="ua.com.goit.gojava.POM.dataModel.common.*,
-			ua.com.goit.gojava.POM.dataModel.profitCostSubsystem.*,
+	import="ua.com.goit.gojava.POM.dataModel.common.*,ua.com.goit.gojava.POM.dataModel.profitcost.*,
 			ua.com.goit.gojava.POM.persistence.*,
 			ua.com.goit.gojava.POM.persistence.abstraction.*,
 			ua.com.goit.gojava.POM.presentation.*" 

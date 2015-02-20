@@ -1,4 +1,4 @@
-package ua.com.goit.gojava.POM.dataModel;
+package ua.com.goit.gojava.POM.dataModel.profitcost;
 
 import static org.junit.Assert.*;
 
@@ -6,9 +6,9 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import ua.com.goit.gojava.POM.dataModel.common.FinancialEntry;
+import ua.com.goit.gojava.POM.dataModel.profitcost.CostItemTransaction;
 
-public class BankAccountTransactionTest {
+public class CostItemTransactionTest {
 
 	@Before
 	public void setUp() throws Exception {
@@ -21,9 +21,9 @@ public class BankAccountTransactionTest {
 	@Test
 	public void testCreation() {
 
-		/*FinancialEntry bankAccountTransaction = new FinancialEntry();
-		assertNotNull(bankAccountTransaction);
-		*/
+		CostItemTransaction costItemTransaction = new CostItemTransaction();
+		assertNotNull(costItemTransaction);
+		
 	}
 
 

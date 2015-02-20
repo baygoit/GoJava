@@ -1,4 +1,4 @@
-package ua.com.goit.gojava.POM.dataModel;
+package ua.com.goit.gojava.POM.dataModel.cash;
 
 import static org.junit.Assert.*;
 
@@ -8,7 +8,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import ua.com.goit.gojava.POM.dataModel.cashSubsystem.BankAccount;
+import ua.com.goit.gojava.POM.dataModel.cash.BankAccount;
 
 public class BankAccountTest {
 

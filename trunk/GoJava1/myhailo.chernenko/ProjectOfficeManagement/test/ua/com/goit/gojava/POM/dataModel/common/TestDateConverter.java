@@ -1,4 +1,4 @@
-package ua.com.goit.gojava.POM.dataModel;
+package ua.com.goit.gojava.POM.dataModel.common;
 
 import static org.junit.Assert.*;
 

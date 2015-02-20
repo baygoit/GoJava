@@ -1,4 +1,4 @@
-package ua.com.goit.gojava.POM.dataModel.profitCostSubsystem;
+package ua.com.goit.gojava.POM.dataModel.profitcost;
 
 import java.io.Serializable;
 import java.util.ArrayList;

@@ -4,13 +4,13 @@ import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
 
-import ua.com.goit.gojava.POM.dataModel.cashSubsystem.BankAccount;
+import ua.com.goit.gojava.POM.dataModel.cash.BankAccount;
 import ua.com.goit.gojava.POM.dataModel.common.FinancialDocument;
-import ua.com.goit.gojava.POM.dataModel.profitCostSubsystem.CostItem;
-import ua.com.goit.gojava.POM.dataModel.profitCostSubsystem.CostItemTransaction;
-import ua.com.goit.gojava.POM.dataModel.profitCostSubsystem.Project;
-import ua.com.goit.gojava.POM.dataModel.profitCostSubsystem.ProjectFinResultTransaction;
-import ua.com.goit.gojava.POM.dataModel.profitCostSubsystem.ProjectStage;
+import ua.com.goit.gojava.POM.dataModel.profitcost.CostItem;
+import ua.com.goit.gojava.POM.dataModel.profitcost.CostItemTransaction;
+import ua.com.goit.gojava.POM.dataModel.profitcost.Project;
+import ua.com.goit.gojava.POM.dataModel.profitcost.ProjectFinResultTransaction;
+import ua.com.goit.gojava.POM.dataModel.profitcost.ProjectStage;
 
 public class PaymentDocument implements FinancialDocument, Serializable {
 

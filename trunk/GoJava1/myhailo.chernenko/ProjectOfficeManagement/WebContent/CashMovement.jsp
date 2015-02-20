@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	import="ua.com.goit.gojava.POM.dataModel.common.*,
-			ua.com.goit.gojava.POM.dataModel.cashSubsystem.*,
+	import="ua.com.goit.gojava.POM.dataModel.common.*,ua.com.goit.gojava.POM.dataModel.cash.*,
 			ua.com.goit.gojava.POM.persistence.*,
 			ua.com.goit.gojava.POM.persistence.abstraction.*,
 			ua.com.goit.gojava.POM.presentation.*,
@@ -57,7 +56,7 @@
 	   		    		out.println("<tr>");
 	   		    				out.println("<td></td>");
 	   		    				out.println("<td><input name=\"date\" value =\"\"  pattern=\"[0-9]{4}.[0-9]{1,2}.[0-9]{1,2}\" ></td>");
-	   		    				out.println("<td><input name=\"sum\" value =\"\"></td>");
+	   		    				out.println("<td><input name=\"sum\" value =\"0\"  pattern=\"\\d+(,\\d{2})?\" ></td>");
 	   		    				out.println("<td><input name=\"characteristic\" value =\"\"></td>");
 	   		    				out.println("<td><input name=\"description\" value =\"\"></td>");
 	   		    				out.println("<td><input name=\"doc\" value =\"\"></td>");

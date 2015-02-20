@@ -1,8 +1,9 @@
-package ua.com.goit.gojava.POM.dataModel.cashSubsystem;
+package ua.com.goit.gojava.POM.dataModel.cash;
 
 import java.io.Serializable;
 import java.util.Currency;
 
+import ua.com.goit.gojava.POM.dataModel.POMDataModelException;
 import ua.com.goit.gojava.POM.dataModel.common.Money;
 import ua.com.goit.gojava.POM.persistence.abstraction.DataObject;
 
@@ -78,7 +79,13 @@ public class BankAccount implements DataObject , Serializable {
 	
 	public Money GetTotal() {
 		
-		return getFactTransactions().getTotal(null, getCurrency());
+		Money total;
+		try {
+			total = getFactTransactions().getTotal(null, getCurrency());
+		} catch (POMDataModelException e) {
+			total = new Money(getCurrency()); 
+		}
+		return total;
 		
 	}
 	
