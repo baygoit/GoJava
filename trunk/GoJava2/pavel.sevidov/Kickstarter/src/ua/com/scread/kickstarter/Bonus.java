@@ -1,4 +1,4 @@
-package ua.com.scread.kickstarter;
+package ua.com.scread.kickstarter.data;
 
 public class Bonus {
     private double amount;
@@ -15,6 +15,11 @@ public class Bonus {
     
     public String getDescription() {
         return description;
+    }
+    
+    @Override
+    public String toString() {
+        return amount + ";" + description + ";";
     }
     
 }
