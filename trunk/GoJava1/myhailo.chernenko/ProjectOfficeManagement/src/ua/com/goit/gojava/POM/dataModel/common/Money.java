@@ -15,10 +15,9 @@ public class Money {
 	
 	public Money(Currency currency) {
 
-		this.value = new BigDecimal(0.0);
+		this.value = getDecimal(0.0);
 		this.currency = currency;
-		SetScale();
-	
+		
 	}
 
 	public Money(Double value, Currency currency) throws POMDataModelException {
@@ -26,19 +25,26 @@ public class Money {
 		this(currency);
 		
 		try {
-			this.value = new BigDecimal(value);
-		} catch (NumberFormatException e) {
+			this.value = getDecimal(value);
+		} catch (NumberFormatException | NullPointerException e) {
 			throw new POMDataModelException("Wrong amount of Money", e);
 		}
 
 		
 	}
 	
-	private void SetScale() {
+	private BigDecimal getDecimal(Double value) {
 		
-		this.value.setScale(scaleLength, roundingMode);
+		return new BigDecimal(value).setScale(scaleLength,roundingMode);
 		
 	}
+	
+	private BigDecimal getDecimal(long value) {
+		
+		return new BigDecimal(value).setScale(scaleLength,roundingMode);
+		
+	}
+	
 	
 	public BigDecimal getValue() {
 		
@@ -52,13 +58,13 @@ public class Money {
 
 	public void divide(Long divisor) {
 		
-		this.value.divide(new BigDecimal(divisor));
+		this.value = this.value.divide(getDecimal(divisor), scaleLength, roundingMode);
 		
 	}
 	
 	public void multiply(Long multiplicand) {
 		
-		this.value.multiply(new BigDecimal(multiplicand));
+		this.value = this.value.multiply(getDecimal(multiplicand));
 		
 	}
 	
@@ -75,10 +81,15 @@ public class Money {
 					&&(currentRate.getToCurrency() == this.getCurrency())) {
 				
 				BigDecimal reCalculatedValue = money.getValue();
-				reCalculatedValue.divide(new BigDecimal(currentRate.getRate()));
-				reCalculatedValue.multiply(new BigDecimal(currentRate.getMultiplicity()));
+				try {
+					reCalculatedValue = reCalculatedValue.divide(getDecimal(currentRate.getRate()));
+				} catch (ArithmeticException e) {
+					throw new POMDataModelException("Wrong divisor ("+currentRate.getRate()+")",e);
+				}
+				
+				reCalculatedValue = reCalculatedValue.multiply(getDecimal(currentRate.getMultiplicity()));
 
-				this.value = this.value.add(reCalculatedValue);
+				this.value = this.value.add(reCalculatedValue.setScale(scaleLength, roundingMode));
 						
 			}else{
 				

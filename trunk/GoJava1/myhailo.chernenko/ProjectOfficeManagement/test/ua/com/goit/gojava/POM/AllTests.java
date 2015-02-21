@@ -21,6 +21,7 @@ import ua.com.goit.gojava.POM.persistence.*;
 		BankAccountTransactionTest.class,
 
 		TestDateConverter.class,
+		TestMoney.class,
 
 		PaymentDocumentTest.class,
 		

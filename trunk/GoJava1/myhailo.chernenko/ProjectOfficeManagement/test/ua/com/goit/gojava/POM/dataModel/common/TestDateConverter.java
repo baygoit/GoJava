@@ -43,6 +43,13 @@ public class TestDateConverter {
 	}
 	
 	@Test
+	public void testFor100PercentCoverage() throws ParseException {
+
+		assertNotNull(new DateConvertor());
+
+	}
+	
+	@Test
 	public void testYear() throws ParseException {
 
 		assertEquals(dateYear, DateConvertor.roundDate(date, Calendar.YEAR));

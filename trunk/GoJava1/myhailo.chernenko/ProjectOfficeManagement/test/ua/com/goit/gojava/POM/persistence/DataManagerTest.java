@@ -14,7 +14,6 @@ import org.junit.runner.RunWith;
 
 import static org.mockito.Mockito.*;
 
-import org.mockito.*;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import ua.com.goit.gojava.POM.dataModel.profitcost.CostItem;
