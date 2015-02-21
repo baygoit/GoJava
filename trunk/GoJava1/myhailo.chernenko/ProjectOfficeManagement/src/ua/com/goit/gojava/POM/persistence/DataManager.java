@@ -29,7 +29,7 @@ public class DataManager implements DAOFactory{
 		
 	}
 	
-	private void initialize() {
+	public void initialize() {
 
 		dataFile = "C:\\workspace\\ProjectOfficeManagement.dat";
 		

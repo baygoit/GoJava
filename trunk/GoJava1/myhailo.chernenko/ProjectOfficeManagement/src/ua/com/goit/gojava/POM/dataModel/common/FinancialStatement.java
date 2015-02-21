@@ -27,6 +27,11 @@ public abstract class FinancialStatement<T extends FinancialEntry> implements Se
 	
 	public abstract FinancialStatement<T> getNewInstanse();
 	
+	public DataManager getDataManager() {
+		
+		return LazyDataManager.getInstance();
+	}
+	
 	public T getNewEntryInstance() {
 		
 		T entry = null;
@@ -97,7 +102,7 @@ public abstract class FinancialStatement<T extends FinancialEntry> implements Se
 				
 				Money currentSum = entry.getSum();
 				
-				ExchangeRate currentRate = (new ExchangeRateDAO(LazyDataManager.getInstance()).getLastOnDate(
+				ExchangeRate currentRate = (new ExchangeRateDAO(getDataManager()).getLastOnDate(
 						entry.getDate(), currentSum.getCurrency(), currency));
 				
 				result.add(currentSum, currentRate);
@@ -138,7 +143,7 @@ public abstract class FinancialStatement<T extends FinancialEntry> implements Se
 			newEntry.setCharacteristic(entry.getCharacteristic());
 			Money entriesSum = newEntry.getSum();
 			
-			ExchangeRate currentRate = (new ExchangeRateDAO(LazyDataManager.getInstance()).getLastOnDate(
+			ExchangeRate currentRate = (new ExchangeRateDAO(getDataManager()).getLastOnDate(
 					entry.getDate(), currentSum.getCurrency(), entriesSum.getCurrency()));
 			
 			entriesSum.add(currentSum, currentRate);

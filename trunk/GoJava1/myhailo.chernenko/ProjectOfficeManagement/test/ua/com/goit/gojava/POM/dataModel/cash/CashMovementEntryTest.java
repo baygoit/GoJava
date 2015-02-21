@@ -6,9 +6,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import ua.com.goit.gojava.POM.dataModel.common.FinancialEntry;
-
-public class BankAccountTransactionTest {
+public class CashMovementEntryTest {
 
 	@Before
 	public void setUp() throws Exception {
@@ -21,10 +19,9 @@ public class BankAccountTransactionTest {
 	@Test
 	public void testCreation() {
 
-		/*FinancialEntry bankAccountTransaction = new FinancialEntry();
-		assertNotNull(bankAccountTransaction);
-		*/
+		CashMovementEntry cashMovementEntry = new CashMovementEntry();
+		assertNotNull(cashMovementEntry);
+		
 	}
-
 
 }

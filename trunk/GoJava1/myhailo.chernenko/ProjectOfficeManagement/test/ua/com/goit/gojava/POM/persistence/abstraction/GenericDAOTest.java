@@ -53,6 +53,7 @@ public abstract class GenericDAOTest<T> {
 	@Test
 	public void testGetByName() {
 
+		// TODO override
 		/*
 		 T genericObj = genericDAO.getByName("name");
 		 

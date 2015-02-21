@@ -11,7 +11,7 @@ import org.junit.Test;
 
 import ua.com.goit.gojava.POM.dataModel.POMDataModelException;
 
-public class TestMoney {
+public class MoneyTest {
 
 	private int scaleLength = 2;
 	private RoundingMode roundingMode = RoundingMode.HALF_UP;

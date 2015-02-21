@@ -18,10 +18,12 @@ import ua.com.goit.gojava.POM.persistence.*;
 @RunWith(Suite.class)
 @SuiteClasses({ 
 		BankAccountTest.class,
-		BankAccountTransactionTest.class,
+		CashMovementEntryTest.class,
+		CashMovementStatementTest.class,
 
-		TestDateConverter.class,
-		TestMoney.class,
+		DateConverterTest.class,
+		FinancialStatementTest.class,
+		MoneyTest.class,
 
 		PaymentDocumentTest.class,
 		

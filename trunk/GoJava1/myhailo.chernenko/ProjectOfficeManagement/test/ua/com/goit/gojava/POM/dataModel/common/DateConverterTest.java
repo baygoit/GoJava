@@ -12,7 +12,7 @@ import org.junit.Test;
 
 import ua.com.goit.gojava.POM.dataModel.common.DateConvertor;
 
-public class TestDateConverter {
+public class DateConverterTest {
 
 	
 	private SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy/HH/mm/sss/S");
