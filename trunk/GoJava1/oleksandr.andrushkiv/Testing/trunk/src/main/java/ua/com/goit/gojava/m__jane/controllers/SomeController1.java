@@ -54,14 +54,13 @@ public class SomeController1 extends HttpServlet {
 			throws ServletException, IOException {
 		
 		try {
-			int profileId = 0;
-			String parameter = request.getParameter("profileId");
-			if (parameter == null||"".equals(parameter)) {
-				throw new Exception("wrong profileId");
-			} else {
-				profileId = Integer.valueOf(parameter);
-			}
 
+			String parameter = request.getParameter("profileId");
+			if (parameter == null||"".equals(parameter)) 
+				throw new Exception("wrong profileId");
+			
+			int profileId = Integer.valueOf(parameter);
+		
 			ProfileService profileService = new ProfileServiceImpl();
 			request.setAttribute("profileList", profileService.getProfileList());
 			

@@ -14,12 +14,30 @@ public class User {
 	@XmlAttribute
 	private Integer id;
 	@XmlAttribute
-	private String name;
+	private String login;
+	@XmlAttribute
+	private String password;
 	
 	@XmlIDREF
 	@XmlElement(name = "profile")
 	@XmlElementWrapper(name = "profiles")
 	private List<Profile> profileList;
+	
+	public String getLogin() {
+		return login;
+	}
+
+	public void setLogin(String login) {
+		this.login = login;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
 	public List<Profile> getProfileList() {
 		return profileList;
@@ -31,7 +49,7 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", name=" + name + "]";
+		return "User [id=" + id + ", name=" + login + "]";
 	}
 		
 }

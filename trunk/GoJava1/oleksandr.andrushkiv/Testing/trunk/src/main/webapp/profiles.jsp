@@ -18,8 +18,8 @@
 
     <h2>Please enter the id of the profile you want to detail</h2>
     <form action="SomeController1" method="POST">
-        <label>profile's id: <input type="text" name="profileId" id="profileId" /></label><br />
-        <input type="submit" value="Submit" name="profileId" />
+        <label>profile's id: <input type="text" name="profileId" /></label><br />
+        <input type="submit" value="Submit" />
     </form>
 
 <table>

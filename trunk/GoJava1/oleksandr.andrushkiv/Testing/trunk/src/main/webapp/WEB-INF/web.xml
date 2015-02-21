@@ -19,4 +19,14 @@
     <servlet-name>SomeController1</servlet-name>
     <url-pattern>/SomeController1</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>IndexPage</display-name>
+    <servlet-name>IndexPage</servlet-name>
+    <servlet-class>ua.com.goit.gojava.m__jane.controllers.IndexPage</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>IndexPage</servlet-name>
+    <url-pattern>/indexPage</url-pattern>
+  </servlet-mapping>
 </web-app>

@@ -141,14 +141,14 @@
 </profiles>
 
 <users>
-	<user id="100001" name="user1">
+	<user id="100001" login="user1" password="1">
 		<profiles>
 			<profile>10001</profile>
 			<profile>10002</profile>
 		</profiles>
 	</user>
 
-	<user id="100002" name="user2">
+	<user id="100002" login="user2" password="2">
 		<profiles>
 			<profile>10003</profile>
 		</profiles>
