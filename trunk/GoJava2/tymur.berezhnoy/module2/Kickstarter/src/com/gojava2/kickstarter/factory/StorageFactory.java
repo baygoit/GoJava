@@ -1,9 +1,9 @@
-package org.goJava2.kickstarter.factory;
+package com.gojava2.kickstarter.factory;
 
-import org.goJava2.kickstarter.fileReader.CategoryReader;
-import org.goJava2.kickstarter.model.CategoryStorage;
-import org.goJava2.kickstarter.model.ProjectStorage;
-import org.goJava2.kickstarter.model.QuoteStorage;
+import com.gojava2.kickstarter.fileReader.CategoryReader;
+import com.gojava2.kickstarter.model.CategoryStorage;
+import com.gojava2.kickstarter.model.ProjectStorage;
+import com.gojava2.kickstarter.model.QuoteStorage;
 
 public class StorageFactory {
 	

@@ -1,10 +1,10 @@
-package org.goJava2.kickstarter.controller;
+package com.gojava2.kickstarter.controller;
 
 import java.util.Set;
 
-import org.goJava2.kickstarter.behavior.ControllerBehavior;
-import org.goJava2.kickstarter.behavior.StorageBehavior;
-import org.goJava2.kickstarter.content.Category;
+import com.gojava2.kickstarter.behavior.ControllerBehavior;
+import com.gojava2.kickstarter.behavior.StorageBehavior;
+import com.gojava2.kickstarter.content.Category;
 
 public class CategoryController implements ControllerBehavior<Integer> {
 	

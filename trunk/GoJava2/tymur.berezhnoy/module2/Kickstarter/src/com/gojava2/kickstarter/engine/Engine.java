@@ -1,12 +1,12 @@
-package org.goJava2.kickstarter.engine;
+package com.gojava2.kickstarter.engine;
 
-import org.goJava2.kickstarter.controller.CategoryController;
-import org.goJava2.kickstarter.controller.ProjectController;
-import org.goJava2.kickstarter.controller.QuoteController;
-import org.goJava2.kickstarter.factory.StorageFactory;
-import org.goJava2.kickstarter.model.CategoryStorage;
-import org.goJava2.kickstarter.view.ConsoleInput;
-import org.goJava2.kickstarter.view.ConsoleView;
+import com.gojava2.kickstarter.controller.CategoryController;
+import com.gojava2.kickstarter.controller.ProjectController;
+import com.gojava2.kickstarter.controller.QuoteController;
+import com.gojava2.kickstarter.factory.StorageFactory;
+import com.gojava2.kickstarter.model.CategoryStorage;
+import com.gojava2.kickstarter.view.ConsoleInput;
+import com.gojava2.kickstarter.view.ConsoleView;
 
 public class Engine {
 	

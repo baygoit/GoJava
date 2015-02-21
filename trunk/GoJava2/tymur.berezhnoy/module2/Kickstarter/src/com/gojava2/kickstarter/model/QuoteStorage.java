@@ -1,9 +1,9 @@
-package org.goJava2.kickstarter.model;
+package com.gojava2.kickstarter.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.goJava2.kickstarter.behavior.StorageBehavior;
-import org.goJava2.kickstarter.content.Quote;
+import com.gojava2.kickstarter.behavior.StorageBehavior;
+import com.gojava2.kickstarter.content.Quote;
 
 public class QuoteStorage implements StorageBehavior<Integer> {
 	

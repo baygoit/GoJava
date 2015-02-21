@@ -1,4 +1,4 @@
-package org.goJava2.kickstarter.behavior;
+package com.gojava2.kickstarter.behavior;
 
 public interface ControllerBehavior<T> {
 	Object getContent();

@@ -1,13 +1,13 @@
-package org.goJava2.kickstarter.model;
+package com.gojava2.kickstarter.model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.goJava2.kickstarter.behavior.StorageBehavior;
-import org.goJava2.kickstarter.content.Category;
-import org.goJava2.kickstarter.content.Project;
+import com.gojava2.kickstarter.behavior.StorageBehavior;
+import com.gojava2.kickstarter.content.Category;
+import com.gojava2.kickstarter.content.Project;
 
 public class ProjectStorage implements StorageBehavior<Category> {
 	

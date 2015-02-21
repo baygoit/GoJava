@@ -1,4 +1,4 @@
-package org.goJava2.kickstarter.content;
+package com.gojava2.kickstarter.content;
 
 public class Quote {
 	

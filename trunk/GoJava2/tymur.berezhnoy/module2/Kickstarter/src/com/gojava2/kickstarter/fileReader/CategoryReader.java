@@ -1,4 +1,4 @@
-package org.goJava2.kickstarter.fileReader;
+package com.gojava2.kickstarter.fileReader;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-import org.goJava2.kickstarter.content.Category;
+import com.gojava2.kickstarter.content.Category;
 
 public class CategoryReader {
 	

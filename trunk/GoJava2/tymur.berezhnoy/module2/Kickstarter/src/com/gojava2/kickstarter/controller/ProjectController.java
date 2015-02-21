@@ -1,13 +1,13 @@
-package org.goJava2.kickstarter.controller;
+package com.gojava2.kickstarter.controller;
 
 import java.util.List;
 import java.util.Map;
 
-import org.goJava2.kickstarter.behavior.ControllerBehavior;
-import org.goJava2.kickstarter.content.Category;
-import org.goJava2.kickstarter.content.Project;
-import org.goJava2.kickstarter.factory.StorageFactory;
-import org.goJava2.kickstarter.model.ProjectStorage;
+import com.gojava2.kickstarter.behavior.ControllerBehavior;
+import com.gojava2.kickstarter.content.Category;
+import com.gojava2.kickstarter.content.Project;
+import com.gojava2.kickstarter.factory.StorageFactory;
+import com.gojava2.kickstarter.model.ProjectStorage;
 
 public class ProjectController implements ControllerBehavior<Category> {
 	

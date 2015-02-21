@@ -1,11 +1,11 @@
-package org.goJava2.kickstarter.controller;
+package com.gojava2.kickstarter.controller;
 
 import java.util.List;
 
-import org.goJava2.kickstarter.behavior.ControllerBehavior;
-import org.goJava2.kickstarter.content.Quote;
-import org.goJava2.kickstarter.factory.StorageFactory;
-import org.goJava2.kickstarter.model.QuoteStorage;
+import com.gojava2.kickstarter.behavior.ControllerBehavior;
+import com.gojava2.kickstarter.content.Quote;
+import com.gojava2.kickstarter.factory.StorageFactory;
+import com.gojava2.kickstarter.model.QuoteStorage;
 
 public class QuoteController implements ControllerBehavior<Integer> {
 	

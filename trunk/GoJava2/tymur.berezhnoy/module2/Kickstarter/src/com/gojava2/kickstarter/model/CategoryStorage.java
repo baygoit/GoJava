@@ -1,9 +1,9 @@
-package org.goJava2.kickstarter.model;
+package com.gojava2.kickstarter.model;
 
 import java.util.Set;
 
-import org.goJava2.kickstarter.behavior.StorageBehavior;
-import org.goJava2.kickstarter.content.Category;
+import com.gojava2.kickstarter.behavior.StorageBehavior;
+import com.gojava2.kickstarter.content.Category;
 
 public class CategoryStorage implements StorageBehavior<Integer> {
 

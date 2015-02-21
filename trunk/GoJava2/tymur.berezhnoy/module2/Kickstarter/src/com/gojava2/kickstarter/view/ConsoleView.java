@@ -1,14 +1,14 @@
-package org.goJava2.kickstarter.view;
+package com.gojava2.kickstarter.view;
 
 import java.util.List;
 
-import org.goJava2.kickstarter.content.Category;
-import org.goJava2.kickstarter.content.Project;
-import org.goJava2.kickstarter.controller.CategoryController;
-import org.goJava2.kickstarter.controller.ProjectController;
-import org.goJava2.kickstarter.controller.QuoteController;
-import org.goJava2.kickstarter.factory.StorageFactory;
-import org.goJava2.kickstarter.model.ProjectStorage;
+import com.gojava2.kickstarter.content.Category;
+import com.gojava2.kickstarter.content.Project;
+import com.gojava2.kickstarter.controller.CategoryController;
+import com.gojava2.kickstarter.controller.ProjectController;
+import com.gojava2.kickstarter.controller.QuoteController;
+import com.gojava2.kickstarter.factory.StorageFactory;
+import com.gojava2.kickstarter.model.ProjectStorage;
 
 public class ConsoleView {
 	

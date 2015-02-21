@@ -1,6 +1,6 @@
-package org.goJava2.kickstarter.main;
+package com.gojava2.kickstarter.main;
 
-import org.goJava2.kickstarter.engine.Engine;
+import com.gojava2.kickstarter.engine.Engine;
 
 public class Kickstarter {
 
