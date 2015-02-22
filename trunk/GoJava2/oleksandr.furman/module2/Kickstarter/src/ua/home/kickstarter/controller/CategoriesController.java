@@ -25,7 +25,7 @@ public class CategoriesController {
 		}
 		return size;
 	}
-
+ 
 	public List<Category> getCategoriesFromDB() {
 		List<Category> list = null;
 		try (Connection con = daoFactory.getConnection()){

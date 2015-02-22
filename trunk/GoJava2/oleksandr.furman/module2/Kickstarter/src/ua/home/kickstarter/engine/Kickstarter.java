@@ -13,12 +13,17 @@ public class Kickstarter {
 	private ConsoleInput consoleInput;
 	private ProjectsController projectsController;
 	private CategoriesController categoriesController;
+	private ConsoleOutput consoleOutput;
 	private Project project;
 
-	public Kickstarter() {
-		display = new Display(new QuotationsController(), categoriesController = new CategoriesController(),
-				projectsController = new ProjectsController(), new ConsoleOutput());
-		consoleInput = new ConsoleInput();
+	public Kickstarter(QuotationsController quotationsController, CategoriesController categoriesController,
+			ProjectsController projectsController, ConsoleOutput consoleOutput, ConsoleInput consoleInput,
+			Display display) {
+		this.categoriesController = categoriesController;
+		this.projectsController = projectsController;
+		this.consoleOutput = consoleOutput;
+		this.consoleInput = consoleInput;
+		this.display = display;
 	}
 
 	public void run() {
@@ -33,10 +38,10 @@ public class Kickstarter {
 			display.displaySelectedCategoryName(categoriesController.getCategoriesFromDB().get(input - 1).getName());
 			menuLevel1(input);
 		} else if (input == 0) {
-			System.out.print("Спасибо за использование нашей программы!");
+			consoleOutput.output("Спасибо за использование нашей программы!");
 			return;
 		} else {
-			System.out.print("Категория под номером " + input + " отстствует в системе, повторите ввод. \n");
+			consoleOutput.output("Категория под номером " + input + " отстствует в системе, повторите ввод. \n");
 			menuLevel0();
 		}
 	}
@@ -51,7 +56,7 @@ public class Kickstarter {
 		try {
 			input = consoleInput.nextIntIndex();
 			if (input > 0) {
-				project = projectsController.getProjectsFromDB(categoryId).get(input-1);
+				project = projectsController.getProjectsFromDB(categoryId).get(input - 1);
 				display.displaySpecificProject(categoryId, project.getId());
 				menuLevel3(categoryId, input);
 			} else if (input == 0) {
@@ -59,7 +64,7 @@ public class Kickstarter {
 				menuLevel0();
 			}
 		} catch (IndexOutOfBoundsException e) {
-			System.out.print("Проект под номером " + input + " отстствует в системе, повторите ввод. \n");
+			consoleOutput.output("Проект под номером " + input + " отстствует в системе, повторите ввод. \n");
 			menuLevel2(categoryId);
 		}
 	}
@@ -69,11 +74,11 @@ public class Kickstarter {
 		if (input == 0) {
 			menuLevel1(categoryId);
 		} else if (input == 1) {
-			System.out.print("Введите Ваше имя: ");
+			consoleOutput.output("Введите Ваше имя: ");
 			consoleInput.nextString();
-			System.out.print("Введите номер карты: ");
+			consoleOutput.output("Введите номер карты: ");
 			consoleInput.nextString();
-			System.out.print("Введите сумму платежа: ");
+			consoleOutput.output("Введите сумму платежа: ");
 			int amount = consoleInput.nextIntIndex();
 
 			project.addPayment(amount);

@@ -30,7 +30,7 @@ public class QuotationsController {
 		int i = new Random().nextInt(getQuotationsSize());
 		return getSpecificQuoteFromDB(i + 1);
 	}
-
+ 
 	public String getQuoteContent(Quote quote) {
 		StringBuilder quoteContent = new StringBuilder();
 		quoteContent.append(quote.getQuote());

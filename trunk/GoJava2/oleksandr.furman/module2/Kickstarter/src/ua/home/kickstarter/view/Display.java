@@ -11,13 +11,13 @@ public class Display {
 	private ProjectsController projectsController;
 	private ConsoleOutput consoleOutput;
 
-	public Display(QuotationsController quotations, CategoriesController categoriesController,
-			ProjectsController projects, ConsoleOutput consoleOutput) {
+	public Display(QuotationsController quotationsController, CategoriesController categoriesController,
+			ProjectsController projectsController, ConsoleOutput consoleOutput) {
 		this.consoleOutput = consoleOutput;
-		this.quotationsController = quotations;
+		this.quotationsController = quotationsController;
 		this.categoriesController = categoriesController;
-		this.projectsController = projects;
-	}
+		this.projectsController = projectsController;
+	} 
 
 	public void displayQuote() {
 		consoleOutput.output(quotationsController.getQuoteContent(quotationsController.getRandomQuote()));
@@ -28,7 +28,7 @@ public class Display {
 		displayCategories.append("Выберите категорию :\n").append(categoriesController.getCategoriesContent(categoriesController.getCategoriesFromDB()))
 				.append("[Выберите категорию от 1 до ").append(categoriesController.getCategoriesSize()).append(" или нажмите 0 для выхода из программы]\n ");
 		consoleOutput.output(displayCategories.toString());
-	}
+	} 
 
 	public void displaySelectedCategoryName(String categoryName) {
 		consoleOutput.output(new StringBuilder().append("Вы выбрали категорию ").append(categoryName).toString());
