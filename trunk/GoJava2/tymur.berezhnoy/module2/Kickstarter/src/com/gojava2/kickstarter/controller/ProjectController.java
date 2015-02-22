@@ -24,6 +24,6 @@ public class ProjectController implements ControllerBehavior<Category> {
 	
 	@Override
 	public List<Project> getSpecificContent(Category t) {
-		return projectStorage.getSpecificContent(t);
+		return projectStorage.getContent().get(t);
 	}
 }

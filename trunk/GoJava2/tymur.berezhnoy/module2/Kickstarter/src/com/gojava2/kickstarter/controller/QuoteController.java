@@ -22,11 +22,11 @@ public class QuoteController implements ControllerBehavior<Integer> {
 	
 	@Override
 	public Quote getSpecificContent(Integer i) {
-		return (Quote) quoteStorage.getSpecificContent(i);	
+		return quoteStorage.getContent().get(i);	
 	}
 	
 	public Quote getRandomQuote() {
 		int randomInex = (int)(Math.random() * quoteStorage.getContent().size());
-		return quoteStorage.getSpecificContent(randomInex);
+		return quoteStorage.getContent().get((randomInex));
 	}
 }

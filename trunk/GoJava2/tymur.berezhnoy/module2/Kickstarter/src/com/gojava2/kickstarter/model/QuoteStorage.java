@@ -37,11 +37,6 @@ public class QuoteStorage implements StorageBehavior<Integer> {
 	}
 	
 	@Override
-	public Quote getSpecificContent(Integer i) {
-		return listOfQuotes.get(i);
-	}
-	
-	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;

@@ -8,7 +8,7 @@ import java.util.Map;
 import com.gojava2.kickstarter.behavior.StorageBehavior;
 import com.gojava2.kickstarter.content.Category;
 import com.gojava2.kickstarter.content.Project;
-import com.gojava2.kickstarter.factory.StorageFactory;
+import com.gojava2.kickstarter.controller.CategoryController;
 
 public class ProjectStorage implements StorageBehavior<Category> {
 	
@@ -67,20 +67,15 @@ public class ProjectStorage implements StorageBehavior<Category> {
 	
 	private void putProjectsToMap() {
 		map = new HashMap<Category, List<Project>>();
-		CategoryStorage storage = new StorageFactory().getCategoryStorage();
-		map.put(storage.getSpecificContent(0), projectsArt);
-		map.put(storage.getSpecificContent(1), projectsComics);
-		map.put(storage.getSpecificContent(2), projectsDance);
-		map.put(storage.getSpecificContent(3), projectsGames);	
+		CategoryController c = new CategoryController();
+		map.put(c.getSpecificContent(0), projectsArt);
+		map.put(c.getSpecificContent(1), projectsComics);
+		map.put(c.getSpecificContent(2), projectsDance);
+		map.put(c.getSpecificContent(3), projectsGames);	
 	}
 	
 	@Override
 	public Map<Category, List<Project>> getContent() {
 		return map;
-	}
-	
-	@Override
-	public List<Project> getSpecificContent(Category category) {
-		return map.get(category);
 	}
 }

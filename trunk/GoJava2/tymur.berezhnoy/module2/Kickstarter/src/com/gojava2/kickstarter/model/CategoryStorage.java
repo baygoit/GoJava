@@ -33,10 +33,4 @@ public class CategoryStorage implements StorageBehavior<Integer> {
 	public Set<Category> getContent() {
 		return categories;
 	}
-	
-	@Override
-	public Category getSpecificContent(Integer i) {
-		Category cat = (Category) categories.toArray()[i];
-		return cat;
-	}
 }

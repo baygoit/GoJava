@@ -9,24 +9,22 @@ import com.gojava2.kickstarter.view.ConsoleView;
 
 public class Engine {
 	
-	private	ConsoleView view;
-	private ConsoleInput scann;
-	private StorageFactory storageFactory;
+	private	ConsoleView xonConsoleView;
+	private ConsoleInput consoleInput;
 	
 	public Engine() {
-		storageFactory = new StorageFactory();
-		view = new ConsoleView(new QuoteController(), new CategoryController(),
+		xonConsoleView = new ConsoleView(new QuoteController(), new CategoryController(),
 							new ProjectController());
-		scann = new ConsoleInput();
+		consoleInput = new ConsoleInput();
 	}
 	
 	public void consoleLevel1() {
 		System.out.print("[0 - exit; 1 - * - selec category;]\n> ");
-		int input = scann.choice();
-		int amountCategory = storageFactory.getCategoryStorage().getContent().size();
+		int input = consoleInput.choice();
+		int amountCategory = new StorageFactory().getCategoryStorage().getContent().size();
 		if(input > 0 && input <= amountCategory) {
-			view.setCategoryPath(input);
-			view.displayProjects();
+			xonConsoleView.setCategoryPath(input);
+			xonConsoleView.displayProjects();
 			consoleLevel2();
 			consoleLevel1();
 		} else if(input == 0) {
@@ -39,29 +37,29 @@ public class Engine {
 	
 	public void consoleLevel2() {
 		System.out.print("[0 - to categories; 1 - * - select project;]\n> ");
-		int input = scann.choice();
+		int input = consoleInput.choice();
 		
 		if(input > 0) {
-			view.displaySpecificProject(input);
+			xonConsoleView.displaySpecificProject(input);
 			consoleLevel3();
 			consoleLevel2();
 		} else if (input == 0) {
-			view.displayCategories();
+			xonConsoleView.displayCategories();
 		}
 	}
 	
 	public void consoleLevel3() {
 		System.out.print("[0 - to projects;]\n> "); 
-		if(scann.choice() == 0) {
-			view.displayProjects();
+		if(consoleInput.choice() == 0) {
+			xonConsoleView.displayProjects();
 		} else {
 			consoleLevel3();
 		}
 	}
 	
 	public void start() {
-		view.displayHead();
-		view.displayCategories();	
+		xonConsoleView.displayHead();
+		xonConsoleView.displayCategories();	
 		consoleLevel1();
 	}
 }

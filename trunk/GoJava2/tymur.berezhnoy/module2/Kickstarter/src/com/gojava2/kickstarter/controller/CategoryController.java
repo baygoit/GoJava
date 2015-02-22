@@ -21,7 +21,8 @@ public class CategoryController implements ControllerBehavior<Integer> {
 	}
 	
 	@Override
-	public Category getSpecificContent(Integer t) {
-		return (Category) categoryStorage.getSpecificContent(t);
+	public Category getSpecificContent(Integer i) {
+		Category cat = (Category) categoryStorage.getContent().toArray()[i];
+		return cat;
 	}
 }
