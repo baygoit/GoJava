@@ -25,7 +25,7 @@ public class CategoriesControllerTest {
 		category2.setId(2);
 		list.add(category1);
 		list.add(category2);
-    }
+    } 
 	@Test 
     public void shouldReturnCategoriesInString_whenCallGetCategoriesContent() {
 		String expected = "1 - TestCategory1\n2 - TestCategory2\n";
