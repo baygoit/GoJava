@@ -25,6 +25,7 @@ public class CategoriesFromDB implements Categories{
 		System.out.println(cat.showCatecoryName(2));
 		System.out.println(Arrays.toString(cat.getKickCategories()));
 		System.out.println(Arrays.toString(cat.projectsThatAreContainedInTheCategory(1)));
+		
 	}
 	
 	@Override
