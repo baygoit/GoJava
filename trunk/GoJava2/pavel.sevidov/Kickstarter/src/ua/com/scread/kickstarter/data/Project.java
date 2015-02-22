@@ -19,6 +19,17 @@ public class Project {
 		this.details = delails;
 		collected = 0;
 	}
+	
+	public Project(String name, String description, double collected, double amount, 
+								int days, AdditionalInfo delails) {
+		this.name = name;
+		this.description = description;
+		this.collected = collected;
+		this.amount = amount;
+		this.days = days;
+		this.details = delails;
+		
+	}
 
 	public String getName() {
 		return name;
@@ -53,25 +64,25 @@ public class Project {
 	}
 	
 	public AdditionalInfo getDetails() {
-		return details;
+		return this.details;
 	}
 	
 	public void addFAQ(FAQ faq) {
-	    details.addFAQ(faq);
+	    this.details.addFAQ(faq);
 	}
 
 	public Bonus getBonus(int index) {
-	    return details.getBonus(index);
+	    return this.details.getBonus(index);
 	}
 	
 	public Bonuses getBonuses() {
-	    return details.getBonuses();
+	    return this.details.getBonuses();
 	}
 
     @Override
     public String toString() {
         return name + ";" + description + ";" + collected + ";" + amount + ";" 
-                    + days + ";" + details.toString() + "\n";
+                    + days + ";" + this.details.toString() + "\n";
     }
 
     @Override

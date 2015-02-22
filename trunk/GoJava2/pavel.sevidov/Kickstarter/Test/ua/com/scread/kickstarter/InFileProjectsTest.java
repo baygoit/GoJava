@@ -16,7 +16,6 @@ public class InFileProjectsTest extends ProjectsTest {
     
     @After
     public void cleanUp() {
-        new File("test-projects.txt").delete();
+        new File("projects-test.txt").delete();
     }
-
 }

@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import ua.com.scread.kickstarter.data.AdditionalInfo;
+import ua.com.scread.kickstarter.data.Bonus;
 import ua.com.scread.kickstarter.data.Category;
 import ua.com.scread.kickstarter.data.FAQ;
 import ua.com.scread.kickstarter.data.Project;
@@ -29,7 +31,6 @@ public class InFileProjects implements Projects {
 
     @Override
     public List<Project> getProjects() {
-        int counter = 0;
         BufferedReader in = null;
         String line = "";
         List<Project> result = new ArrayList<Project>();
@@ -39,14 +40,26 @@ public class InFileProjects implements Projects {
                 line = in.readLine();
                 if (line != null) {
                     String[] splitted = line.split(";:");
-                    String[] faqString = splitted[2].split(";");
+                    String[] faqLine = splitted[2].split(";");
                     FAQs faqs = new FAQs();
-                    for(int i = 0; i < faqString.length; i += 2) {
-                        faqs.add(new FAQ(faqString[i], faqString[i + 1]));
+                    for(int i = 0; i < faqLine.length - 1; i += 2) {
+                        faqs.add(new FAQ(faqLine[i], faqLine[i + 1]));
                     }
-                    //result.add(new Project(line));                    
+                    String[] bonusesLine = splitted[1].split(";");
+                    Bonuses bonuses = new Bonuses();
+                    for(int i = 0; i < bonusesLine.length - 1; i += 2) {
+                    	bonuses.add(new Bonus(Double.parseDouble(bonusesLine[i]), bonusesLine[i + 1]));
+                    }
+                    String[] progectLine = splitted[0].split(";");
+                    String name = progectLine[0];
+                    String description = progectLine[1];
+                    Double collected = Double.parseDouble(progectLine[2]);
+                    Double amount = Double.parseDouble(progectLine[3]);
+                    Integer days = Integer.parseInt(progectLine[4]);
+                    String history = progectLine[5];
+                    String video = progectLine[6];
+                    result.add(new Project(name, description, collected, amount, days, new AdditionalInfo(history, video, bonuses, faqs)));                    
                 }
-                counter++;
             } while(line != null);
                 
         } catch (IOException e) {

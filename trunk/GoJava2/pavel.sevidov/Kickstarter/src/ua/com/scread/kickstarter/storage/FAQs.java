@@ -25,4 +25,13 @@ public class FAQs {
     public List<FAQ> getFAQs() { 
         return faqs;
     }
+    
+    @Override
+    public String toString() {
+    	String result = "";
+    	for(FAQ faq: faqs) {
+    		result += faq.toString();
+    	}
+    	return result;
+    }
 }
