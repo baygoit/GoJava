@@ -15,27 +15,18 @@ import ua.com.scread.kickstarter.data.FAQ;
 import ua.com.scread.kickstarter.data.Project;
 
 public class InFileProjects implements Projects {
-    BufferedWriter out;
+    
     private String fileName;
     
     public InFileProjects(String fileName) {
         this.fileName = fileName;
-        try {
-            
-            out = new BufferedWriter(new FileWriter(fileName));
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
     }
 
     @Override
     public List<Project> getProjects() {
-        BufferedReader in = null;
         String line = "";
         List<Project> result = new ArrayList<Project>();
-        try {
-            in = new BufferedReader(new FileReader(fileName));
+        try (BufferedReader in = new BufferedReader(new FileReader(fileName))){
             do {
                 line = in.readLine();
                 if (line != null) {
@@ -70,15 +61,7 @@ public class InFileProjects implements Projects {
                 
         } catch (IOException e) {
             // TODO не смог найти файл или прочитать строку
-        } finally {
-            if (in != null) {
-                try {
-                    in.close();
-                } catch (IOException e1) {
-                    // TODO не закрыли стрим
-                }
-            }
-        }
+        } 
         return result;
     }
 
@@ -97,29 +80,19 @@ public class InFileProjects implements Projects {
 
     @Override
     public void add(Project project) {
-        try {
+        try (BufferedWriter out = new BufferedWriter(new FileWriter(fileName))) {
             out.write(project.toString());
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
-        } finally {
-            if (out != null) {
-                try {
-                    out.close();
-                } catch (IOException e1) {
-                    // TODO не закрыли стрим
-                }
-            }
-        }
+        } 
     }
 
     @Override
     public int size() {
         int counter = -1;
-        BufferedReader in = null;
         String line = "";
-        try {
-            in = new BufferedReader(new FileReader(fileName));
+        try (BufferedReader in = new BufferedReader(new FileReader(fileName))){
             do {
                 counter++;
                 line = in.readLine();
@@ -127,14 +100,6 @@ public class InFileProjects implements Projects {
                 
         } catch (IOException e) {
             // TODO не смог найти файл или прочитать строку
-        } finally {
-            if (in != null) {
-                try {
-                    in.close();
-                } catch (IOException e1) {
-                    // TODO не закрыли стрим
-                }
-            }
         }
         return counter;
     }
