@@ -1,4 +1,4 @@
-package ua.com.goit.gojava.kickstarter.tests;
+package ua.com.goit.gojava.kickstarter;
 import org.junit.Before;
 import org.junit.Test;
 

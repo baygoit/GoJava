@@ -7,11 +7,7 @@ public class Controller {
 	private Reader reader;
 
 	public Controller(Output out, Input in) {
-		this.catalog = new InFileCategoryCatalog();
-		catalog.addCategory("games");
-		catalog.addCategory("movies");
-		catalog.addCategory("books");
-		catalog.addCategory("programs");
+		this.catalog = new InDBCatalog();
 		this.printer = new Printer(out);
 		this.reader = new Reader(in);
 	}

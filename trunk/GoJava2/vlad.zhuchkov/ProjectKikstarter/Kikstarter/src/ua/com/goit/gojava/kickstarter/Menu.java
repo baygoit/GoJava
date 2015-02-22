@@ -18,7 +18,7 @@ public abstract class Menu {
                                 break;
                         }
                        
-                        Object selected = choose(menu-1);
+                        Object selected = choose(menu);
                         if (selected == null) {  
                                 continue;
                         }
