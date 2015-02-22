@@ -26,13 +26,17 @@ public class QuotationsController {
 		return quote;
 	}
 
-	public String getRandomQuoteToView() {
-		StringBuilder quote = new StringBuilder();
+	public Quote getRandomQuote() {
 		int i = new Random().nextInt(getQuotationsSize());
-		quote.append(getSpecificQuoteFromDB(i + 1).getQuote());
-		return quote.toString();
+		return getSpecificQuoteFromDB(i + 1);
 	}
 
+	public String getQuoteContent(Quote quote) {
+		StringBuilder quoteContent = new StringBuilder();
+		quoteContent.append(quote.getQuote());
+		return quoteContent.toString();
+	}
+	
 	public int getQuotationsSize() {
 		int size = -1;
 		try (Connection con = daoFactory.getConnection()) {

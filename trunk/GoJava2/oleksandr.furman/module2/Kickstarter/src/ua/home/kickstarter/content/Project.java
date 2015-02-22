@@ -11,17 +11,6 @@ public class Project {
 	private String linksToVideo;
 	private String questionAnswers;
 
-	public Project(String name, String description, int goal, int daysLeft, String linksToVideo) {
-		this.name = name;
-		this.goal = goal;
-		this.pledged = 0;
-		this.daysLeft = daysLeft;
-		this.description = description;
-		this.history = null;
-		this.linksToVideo = linksToVideo;
-		this.questionAnswers = null;
-	}
-
 	public Project() {
 	}
 

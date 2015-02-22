@@ -37,9 +37,9 @@ public class CategoriesController {
 		return list;
 	}
 
-	public String getCategoriesContent() {
+	public String getCategoriesContent(List<Category> list) {
 		StringBuilder categoriesContent = new StringBuilder();
-		for (Category category : getCategoriesFromDB()) {
+		for (Category category : list) {
 			categoriesContent.append(category.getId()).append(" - ").append(category.getName()).append("\n");
 		}
 		return categoriesContent.toString();

@@ -57,19 +57,19 @@ public class ProjectsController {
 		}
 	}
 
-	public String getContent(int categoryId) {
+	public String getProjectsContent(List<Project> list) {
 		StringBuilder projectsContent = new StringBuilder();
 		int temporaryCounter = 1;
-		for (Project project : getProjectsFromDB(categoryId)) {
+		for (Project project : list) {
 			projectsContent.append(temporaryCounter).append(getShortInfo(project));
 			temporaryCounter++;
 		}
 		return projectsContent.toString();
 	}
 
-	public String getSpecificProject(int categoryId, int projectIndex) {
+	public String getSpecificProjectContent(Project project) {
 		StringBuilder projectsContent = new StringBuilder();
-		projectsContent.append(getFullInfo(getSpecificProjectFromDB(categoryId, projectIndex)));
+		projectsContent.append(getFullInfo(project));
 		return projectsContent.toString();
 	}
 
