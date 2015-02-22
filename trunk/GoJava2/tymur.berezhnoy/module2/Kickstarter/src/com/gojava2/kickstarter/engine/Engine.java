@@ -25,7 +25,7 @@ public class Engine {
 		int input = scann.choice();
 		int amountCategory = storageFactory.getCategoryStorage().getContent().size();
 		if(input > 0 && input <= amountCategory) {
-			view.displaySpecificCategory(input);
+			view.setCategoryPath(input);
 			view.displayProjects();
 			consoleLevel2();
 			consoleLevel1();

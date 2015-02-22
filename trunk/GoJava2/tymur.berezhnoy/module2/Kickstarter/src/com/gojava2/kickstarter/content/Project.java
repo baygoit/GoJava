@@ -25,7 +25,75 @@ public class Project {
 		this.story = story;
 		this.link = link;
 	}
-	
+		
+	public String getName() {
+		return name;
+	}
+
+	public void setNewName(String name) {
+		this.name = name;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setNewDescription(String description) {
+		this.description = description;
+	}
+
+	public String getStory() {
+		return story;
+	}
+
+	public void setNewStory(String story) {
+		this.story = story;
+	}
+
+	public String getLink() {
+		return link;
+	}
+
+	public void setNewLink(String link) {
+		this.link = link;
+	}
+
+	public int getRequiredAmount() {
+		return requiredAmount;
+	}
+
+	public void setNewRequiredAmount(int requiredAmount) {
+		this.requiredAmount = requiredAmount;
+	}
+
+	public int getTotal() {
+		return total;
+	}
+
+	public void setNewTotal(int total) {
+		this.total = total;
+	}
+
+	public int getDays() {
+		return days;
+	}
+
+	public void setNewDays(int days) {
+		this.days = days;
+	}
+
+	public int getBackers() {
+		return backers;
+	}
+
+	public void setNewBackers(int backers) {
+		this.backers = backers;
+	}
+
+	public char getSymbolDollar() {
+		return symbolDollar;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -69,41 +137,4 @@ public class Project {
 			return false;
 		return true;
 	}
-
-	public String getName() {
-		return name;
-	}
-	
-	public void addToTotal(int amount) {
-		total += amount;
-	}
-	
-	public void addToBackers(int backer) {
-		backers += backer;
-	}
-	
-	// It's example of optimization.
-	public String getShortInfo() {
-		StringBuilder buffer = new StringBuilder();
-		buffer.append("Description: ").append(description)
-			.append("\nRequired amount: ").append(requiredAmount).append(symbolDollar)
-			.append("\nTotal: ").append(total).append(symbolDollar)
-			.append("\nDays left: ").append(days);
-		return buffer.toString();
-	}
-	
-	// It's example of optimization.
-	public String getFullInfo() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("Description: ").append(description)
-			.append("\nRequired amount: ").append(requiredAmount).append(symbolDollar)
-			.append("\nTotal: ").append(total).append(symbolDollar)
-			.append("\nDays left: ").append(days)
-			.append("\nBackers: ").append(backers)
-			.append("\nStory: ").append(story)
-			.append("\nLink to video: ").append(link);
-		return builder.toString();
-	}
-	
-	
 }
