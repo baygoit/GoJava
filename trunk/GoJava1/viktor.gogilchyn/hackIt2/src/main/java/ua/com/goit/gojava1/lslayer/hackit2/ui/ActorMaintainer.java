@@ -25,7 +25,7 @@ public class ActorMaintainer extends HttpServlet {
      */
     public ActorMaintainer() {
         super();
-        // TODO Auto-generated constructor stub
+
     }
 
     /**
@@ -33,9 +33,9 @@ public class ActorMaintainer extends HttpServlet {
      *      response)
      */
     protected void doGet(HttpServletRequest request,
-                         HttpServletResponse response) throws ServletException, IOException {
+            HttpServletResponse response) throws ServletException, IOException {
         ActorDAO dao = new ActorDAO();
-        
+
         try {
             request.setAttribute("gamers", dao.loadAll());
         } catch (HackitEcxeptionForUI e) {
@@ -49,7 +49,7 @@ public class ActorMaintainer extends HttpServlet {
      *      response)
      */
     protected void doPost(HttpServletRequest request,
-                          HttpServletResponse response) throws ServletException, IOException {
+            HttpServletResponse response) throws ServletException, IOException {
         String deleteParameter = request.getParameter("delete");
         String createParameter = request.getParameter("create");
         String editParameter = request.getParameter("edit");
@@ -58,9 +58,9 @@ public class ActorMaintainer extends HttpServlet {
             try {
                 for (Actor gamer : dao.loadAll()) {
                     String deleteParameterString = request.getParameter(gamer
-                                                                             .getName());
+                            .getName());
                     if (deleteParameterString != null
-                        && deleteParameterString.equals("on")) {
+                            && deleteParameterString.equals("on")) {
                         try {
                             dao.delete(gamer);
                         } catch (HackitIOException e) {
@@ -110,21 +110,4 @@ public class ActorMaintainer extends HttpServlet {
         this.doGet(request, response);
         // request.getRequestDispatcher("actors").forward(request, response);
     }
-
-    /**
-     * @see HttpServlet#doPut(HttpServletRequest, HttpServletResponse)
-     */
-    protected void doPut(HttpServletRequest request,
-                         HttpServletResponse response) throws ServletException, IOException {
-        // TODO Auto-generated method stub
-    }
-
-    /**
-     * @see HttpServlet#doDelete(HttpServletRequest, HttpServletResponse)
-     */
-    protected void doDelete(HttpServletRequest request,
-                            HttpServletResponse response) throws ServletException, IOException {
-
-    }
-
 }

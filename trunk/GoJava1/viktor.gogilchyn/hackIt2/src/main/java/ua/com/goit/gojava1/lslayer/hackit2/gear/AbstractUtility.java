@@ -9,11 +9,11 @@ public abstract class AbstractUtility implements Gear {
     private String name;
     private Map<String, Integer> purpose = new LinkedHashMap<String, Integer>();
 
-    public AbstractUtility(String name) {
-        this.name = name;
+    public AbstractUtility() {
     }
 
-    public Gear addPurpose(String purpose, int value) throws HackitWrongParameterException {
+    public Gear addPurpose(String purpose, int value)
+            throws HackitWrongParameterException {
         if (purpose == null) {
             throw new HackitWrongParameterException("No null purpose allowed");
         }
@@ -28,7 +28,8 @@ public abstract class AbstractUtility implements Gear {
 
     @Override
     public int getPurposeValue(String commandToInvoke) {
-        return this.purpose.get(commandToInvoke) != null ? this.purpose.get(commandToInvoke) : 0;
+        return this.purpose.get(commandToInvoke) != null ? this.purpose
+                .get(commandToInvoke) : 0;
     }
 
     @Override
@@ -38,7 +39,8 @@ public abstract class AbstractUtility implements Gear {
 
     @Override
     public String toString() {
-        return "AbstractUtility [name=" + this.name + ", purpose=" + this.purpose + "]";
+        return "AbstractUtility [name=" + this.name + ", purpose="
+                + this.purpose + "]";
     }
 
 }
