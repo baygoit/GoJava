@@ -17,15 +17,16 @@ public class QuoteController implements ControllerBehavior<Integer> {
 	
 	@Override
 	public List<Quote> getContent() {
-		return quoteStorage.getContent();
+		return (List<Quote>) quoteStorage.getContent();
 	}
 	
 	@Override
 	public Quote getSpecificContent(Integer i) {
-		return quoteStorage.getSpecificContent(i);	
+		return (Quote) quoteStorage.getSpecificContent(i);	
 	}
 	
 	public Quote getRandomQuote() {
-		return quoteStorage.getRandomQuote();
+		int randomInex = (int)(Math.random() * quoteStorage.getContent().size());
+		return quoteStorage.getSpecificContent(randomInex);
 	}
 }

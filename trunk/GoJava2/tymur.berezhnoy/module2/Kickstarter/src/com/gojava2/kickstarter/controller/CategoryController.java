@@ -3,15 +3,16 @@ package com.gojava2.kickstarter.controller;
 import java.util.Set;
 
 import com.gojava2.kickstarter.behavior.ControllerBehavior;
-import com.gojava2.kickstarter.behavior.StorageBehavior;
 import com.gojava2.kickstarter.content.Category;
+import com.gojava2.kickstarter.factory.StorageFactory;
+import com.gojava2.kickstarter.model.CategoryStorage;
 
 public class CategoryController implements ControllerBehavior<Integer> {
 	
-	private StorageBehavior<Integer> categoryStorage;
+	private CategoryStorage categoryStorage;
 	
-	public CategoryController(StorageBehavior<Integer> storage) {
-		categoryStorage = storage;
+	public CategoryController() {
+		categoryStorage = new StorageFactory().getCategoryStorage();
 	}
 	
 	@Override

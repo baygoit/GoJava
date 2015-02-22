@@ -1,6 +1,5 @@
 package com.gojava2.kickstarter.factory;
 
-import com.gojava2.kickstarter.fileReader.CategoryReader;
 import com.gojava2.kickstarter.model.CategoryStorage;
 import com.gojava2.kickstarter.model.ProjectStorage;
 import com.gojava2.kickstarter.model.QuoteStorage;
@@ -18,24 +17,17 @@ public class StorageFactory {
 		return quoteStorage;
 	}
 	
-//	public CategoryStorage getCategoryStorage() {
-//		if(categoryStorage == null) {
-//			categoryStorage = new CategoryStorage();
-//		}
-//		return categoryStorage;
-//	}
+	public CategoryStorage getCategoryStorage() {
+		if(categoryStorage == null) {
+			categoryStorage = new CategoryStorage();
+		}
+		return categoryStorage;
+	}
 	
 	public ProjectStorage getProjectStorage() {
 		if(projectStorage == null) {
-			projectStorage = new ProjectStorage(getCategoryStorageCustom());
+			projectStorage = new ProjectStorage();
 		}
 		return projectStorage;
-	}
-	
-	public CategoryStorage getCategoryStorageCustom() {
-		if(categoryStorage == null) {
-			categoryStorage = new CategoryStorage(new CategoryReader().getCategoryFromFile());
-		}
-		return categoryStorage;
 	}
 }

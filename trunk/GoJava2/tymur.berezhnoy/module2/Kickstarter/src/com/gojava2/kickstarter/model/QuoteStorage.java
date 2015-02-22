@@ -31,11 +31,6 @@ public class QuoteStorage implements StorageBehavior<Integer> {
 		this.listOfQuotes = listOfQuotes;
 	}
 	
-	public Quote getRandomQuote() {
-		int i = (int)(Math.random() * listOfQuotes.size());
-		return listOfQuotes.get(i);
-	}
-	
 	@Override
 	public List<Quote> getContent() {
 		return listOfQuotes;
@@ -46,11 +41,6 @@ public class QuoteStorage implements StorageBehavior<Integer> {
 		return listOfQuotes.get(i);
 	}
 	
-	@Override
-	public void addContent(Object o) {
-		listOfQuotes.add((Quote) o);
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
