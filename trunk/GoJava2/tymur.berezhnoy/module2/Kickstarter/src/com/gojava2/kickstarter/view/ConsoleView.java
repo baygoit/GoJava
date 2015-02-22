@@ -8,14 +8,14 @@ import com.gojava2.kickstarter.controller.QuoteController;
 import static java.lang.System.out;
 
 public class ConsoleView {
-	
+		
 	private Category category;
 	
 	private QuoteController quoteController;
 	private CategoryController categoryController;
 	private ProjectController projectController;
 	
-	private final String title = "*** Super kickstarter ***";
+	private static final String TITLE = "*** Super kickstarter ***";
 	private String path;
 	
 	public ConsoleView(QuoteController quoteController, CategoryController categoryController,
@@ -26,7 +26,7 @@ public class ConsoleView {
 	}
 	
 	public void displayHead() {
-		out.println("\t" + title + "\n" + quoteController.getRandomQuote().getQuoteContent());
+		out.println("\t" + TITLE + "\n" + quoteController.getRandomQuote().getQuoteContent());
 	}
 	
 	public void displayCategories() {

@@ -3,10 +3,9 @@ package com.gojava2.kickstarter.model;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-import com.gojava2.kickstarter.behavior.StorageBehavior;
 import com.gojava2.kickstarter.content.Category;
 
-public class CategoryStorage implements StorageBehavior<Integer> {
+public class CategoryStorage implements Storage<Integer> {
 
 	private Set<Category> categories;
 	

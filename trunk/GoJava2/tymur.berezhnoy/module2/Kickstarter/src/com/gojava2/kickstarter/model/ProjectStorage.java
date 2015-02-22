@@ -5,12 +5,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.gojava2.kickstarter.behavior.StorageBehavior;
 import com.gojava2.kickstarter.content.Category;
 import com.gojava2.kickstarter.content.Project;
 import com.gojava2.kickstarter.controller.CategoryController;
 
-public class ProjectStorage implements StorageBehavior<Category> {
+public class ProjectStorage implements Storage<Category> {
 	
 	private List<Project> projectsArt;
     private List<Project> projectsComics;

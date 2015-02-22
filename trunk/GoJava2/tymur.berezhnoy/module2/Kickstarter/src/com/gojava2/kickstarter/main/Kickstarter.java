@@ -1,11 +1,11 @@
 package com.gojava2.kickstarter.main;
 
-import com.gojava2.kickstarter.engine.Engine;
+import com.gojava2.kickstarter.engine.KickstarterEngine;
 
 public class Kickstarter {
 
 	public static void main(String[] args) {
-		Engine engine = new Engine();
+		KickstarterEngine engine = new KickstarterEngine();
 		engine.start();
 	}
 }

@@ -2,12 +2,11 @@ package com.gojava2.kickstarter.controller;
 
 import java.util.List;
 
-import com.gojava2.kickstarter.behavior.ControllerBehavior;
 import com.gojava2.kickstarter.content.Quote;
 import com.gojava2.kickstarter.factory.StorageFactory;
 import com.gojava2.kickstarter.model.QuoteStorage;
 
-public class QuoteController implements ControllerBehavior<Integer> {
+public class QuoteController implements Controller<Integer> {
 	
 	private QuoteStorage quoteStorage;
 	

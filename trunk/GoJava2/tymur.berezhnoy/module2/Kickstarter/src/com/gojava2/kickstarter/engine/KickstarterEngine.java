@@ -7,13 +7,13 @@ import com.gojava2.kickstarter.factory.StorageFactory;
 import com.gojava2.kickstarter.view.ConsoleInput;
 import com.gojava2.kickstarter.view.ConsoleView;
 
-public class Engine {
+public class KickstarterEngine {
 	
-	private	ConsoleView xonConsoleView;
+	private	ConsoleView conConsoleView;
 	private ConsoleInput consoleInput;
 	
-	public Engine() {
-		xonConsoleView = new ConsoleView(new QuoteController(), new CategoryController(),
+	public KickstarterEngine() {
+		conConsoleView = new ConsoleView(new QuoteController(), new CategoryController(),
 							new ProjectController());
 		consoleInput = new ConsoleInput();
 	}
@@ -23,8 +23,8 @@ public class Engine {
 		int input = consoleInput.choice();
 		int amountCategory = new StorageFactory().getCategoryStorage().getContent().size();
 		if(input > 0 && input <= amountCategory) {
-			xonConsoleView.setCategoryPath(input);
-			xonConsoleView.displayProjects();
+			conConsoleView.setCategoryPath(input);
+			conConsoleView.displayProjects();
 			consoleLevel2();
 			consoleLevel1();
 		} else if(input == 0) {
@@ -40,26 +40,26 @@ public class Engine {
 		int input = consoleInput.choice();
 		
 		if(input > 0) {
-			xonConsoleView.displaySpecificProject(input);
+			conConsoleView.displaySpecificProject(input);
 			consoleLevel3();
 			consoleLevel2();
 		} else if (input == 0) {
-			xonConsoleView.displayCategories();
+			conConsoleView.displayCategories();
 		}
 	}
 	
 	public void consoleLevel3() {
 		System.out.print("[0 - to projects;]\n> "); 
 		if(consoleInput.choice() == 0) {
-			xonConsoleView.displayProjects();
+			conConsoleView.displayProjects();
 		} else {
 			consoleLevel3();
 		}
 	}
 	
 	public void start() {
-		xonConsoleView.displayHead();
-		xonConsoleView.displayCategories();	
+		conConsoleView.displayHead();
+		conConsoleView.displayCategories();	
 		consoleLevel1();
 	}
 }

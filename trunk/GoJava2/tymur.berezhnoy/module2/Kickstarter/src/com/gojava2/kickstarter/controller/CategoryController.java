@@ -1,13 +1,12 @@
 package com.gojava2.kickstarter.controller;
 
-import java.util.Set;
+import java.util.LinkedHashSet;
 
-import com.gojava2.kickstarter.behavior.ControllerBehavior;
 import com.gojava2.kickstarter.content.Category;
 import com.gojava2.kickstarter.factory.StorageFactory;
 import com.gojava2.kickstarter.model.CategoryStorage;
 
-public class CategoryController implements ControllerBehavior<Integer> {
+public class CategoryController implements Controller<Integer> {
 	
 	private CategoryStorage categoryStorage;
 	
@@ -16,8 +15,8 @@ public class CategoryController implements ControllerBehavior<Integer> {
 	}
 	
 	@Override
-	public Set<Category> getContent() {
-		return (Set<Category>) categoryStorage.getContent();
+	public LinkedHashSet<Category> getContent() {
+		return (LinkedHashSet<Category>) categoryStorage.getContent();
 	}
 	
 	@Override
