@@ -1,3 +1,6 @@
+package ua.com.goit.gojava.kickstarter;
+
+
 
 public class ConsolePrinter implements Output {
 

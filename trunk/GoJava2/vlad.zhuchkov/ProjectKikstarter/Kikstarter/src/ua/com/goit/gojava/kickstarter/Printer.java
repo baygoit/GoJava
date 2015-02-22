@@ -1,3 +1,6 @@
+package ua.com.goit.gojava.kickstarter;
+
+
 import java.util.List;
 //TODO Deal with that. implement SRP 
 public class Printer {

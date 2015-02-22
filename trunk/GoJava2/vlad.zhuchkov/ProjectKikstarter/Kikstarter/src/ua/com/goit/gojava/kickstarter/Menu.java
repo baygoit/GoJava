@@ -1,3 +1,6 @@
+package ua.com.goit.gojava.kickstarter;
+
+
 
 public abstract class Menu {
         private Reader reader;

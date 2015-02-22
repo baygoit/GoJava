@@ -1,3 +1,6 @@
+package ua.com.goit.gojava.kickstarter;
+
+
 import java.io.Serializable;
 
 public class Link implements Serializable {

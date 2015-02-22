@@ -1,7 +1,14 @@
+package ua.com.goit.gojava.kickstarter.tests;
 import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import ua.com.goit.gojava.kickstarter.Category;
+import ua.com.goit.gojava.kickstarter.CategoryCatalog;
+import ua.com.goit.gojava.kickstarter.IlligalInputException;
+import ua.com.goit.gojava.kickstarter.InMemoryCategory;
+import ua.com.goit.gojava.kickstarter.InMemoryCategoryCatalog;
 
 
 public class TestCategoryCatalog {

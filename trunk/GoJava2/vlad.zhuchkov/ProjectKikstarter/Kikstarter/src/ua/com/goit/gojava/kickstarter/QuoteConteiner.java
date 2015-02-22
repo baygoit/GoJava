@@ -1,3 +1,6 @@
+package ua.com.goit.gojava.kickstarter;
+
+
 import java.util.ArrayList;
 import java.util.Random;
 

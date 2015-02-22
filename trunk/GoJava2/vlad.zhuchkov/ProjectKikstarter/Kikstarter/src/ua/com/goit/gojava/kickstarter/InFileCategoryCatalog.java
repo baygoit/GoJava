@@ -1,3 +1,6 @@
+package ua.com.goit.gojava.kickstarter;
+
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -10,63 +13,47 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Random;
 import java.util.Set;
 
-public class InFileCategory implements Category, Serializable {
-	private String name;
-	private File fileProjects = new File(name+" projects");
-	private Set<File> projects = new LinkedHashSet<>();
-	private transient PrintWriter fileWriter;
-	private transient BufferedReader readFile;
+public class InFileCategoryCatalog implements CategoryCatalog {
+	int size;
+	private File fileCatalog = new File("Catalog.txt");
+	private Set<File> catalog = new LinkedHashSet<>();
+	private PrintWriter fileWriter;
+	private BufferedReader readFile;
 
-	public InFileCategory(String name) {
-		this.name = name;
-		try {
-			fileWriter = new PrintWriter(new BufferedWriter(new FileWriter(
-					fileProjects)));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		StringBuffer sb = new StringBuffer(this.name);
-		sb.deleteCharAt(name.length() - 1);
-		Random rand = new Random();
-		for (int i = 0; i < rand.nextInt(10) + 1; i++) {
-			String projectName = sb.toString() + " " + (i + 1);
-			Project project = new Project(projectName,i+1);
-			fileWriter.println(projectName);
-			File file = new File(projectName);
-			projects.add(file);
-			ObjectOutputStream os;
+	public InFileCategoryCatalog() {
+		fileCatalog.delete();
+	}
+
+	@Override
+	public void addCategory(String name) {
+		if (!catalog.contains(new File(name))) {
 			try {
-				os = new ObjectOutputStream(new FileOutputStream(file));
-				os.writeObject(project);
+				fileWriter = new PrintWriter(new BufferedWriter(new FileWriter(
+						fileCatalog, true)));
+				fileWriter.println(name);
+				fileWriter.close();
+				size++;
+				File file = new File(name);
+				ObjectOutputStream os = new ObjectOutputStream(
+						new FileOutputStream(file));
+				os.writeObject(new InFileCategory(name));
+				catalog.add(file);
 				os.close();
-			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
 	}
 
 	@Override
-	public String getName() {
-		return name;
-	}
-
-	@Override
-	public List<String> getProjectCatalog() {
+	public List<String> getCatalog() {
 		try {
-			readFile = new BufferedReader(new FileReader(
-					fileProjects));
+			readFile = new BufferedReader(new FileReader(fileCatalog));
 			try {
 				List<String> list = new ArrayList<>();
 				String tmpRead = readFile.readLine();
@@ -93,10 +80,8 @@ public class InFileCategory implements Category, Serializable {
 	}
 
 	@Override
-	public Project getProject(int index) {
-		if (index>=size())
-			throw new IlligalInputException(); 
-		File[] array = projects.toArray(new File[projects.size()]);
+	public Category getCategory(int index) {
+		File[] array = catalog.toArray(new File[catalog.size()]);
 		File file = array[index];
 		ObjectInputStream is = null;
 		try {
@@ -108,11 +93,11 @@ public class InFileCategory implements Category, Serializable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		Project project = null;
+		Category category = null;
 		try {
-			project = (Project)is.readObject();
+			category = (Category) is.readObject();
 			is.close();
-			return project;
+			return category;
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -120,14 +105,12 @@ public class InFileCategory implements Category, Serializable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return project;
-		
+		return category;
 	}
 
 	@Override
 	public int size() {
-		
-		return projects.size();
+		return size;
 	}
 
 }

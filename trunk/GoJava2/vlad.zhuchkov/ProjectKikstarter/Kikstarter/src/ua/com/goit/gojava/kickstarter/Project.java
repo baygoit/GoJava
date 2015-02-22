@@ -1,3 +1,6 @@
+package ua.com.goit.gojava.kickstarter;
+
+
 import java.io.Serializable;
 import java.util.Random;
 
