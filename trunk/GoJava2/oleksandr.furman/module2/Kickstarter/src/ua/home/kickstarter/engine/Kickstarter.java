@@ -13,6 +13,7 @@ public class Kickstarter {
 	private ConsoleInput consoleInput;
 	private ProjectsController projectsController;
 	private CategoriesController categoriesController;
+	private Project project;
 
 	public Kickstarter() {
 		display = new Display(new QuotationsController(), categoriesController = new CategoriesController(),
@@ -50,7 +51,8 @@ public class Kickstarter {
 		try {
 			input = consoleInput.nextIntIndex();
 			if (input > 0) {
-				display.displaySpecificProject(categoryId, input);
+				project = projectsController.getProjectsFromDB(categoryId).get(input-1);
+				display.displaySpecificProject(categoryId, project.getId());
 				menuLevel3(categoryId, input);
 			} else if (input == 0) {
 				display.displayCategories();
@@ -73,14 +75,14 @@ public class Kickstarter {
 			consoleInput.nextString();
 			System.out.print("Введите сумму платежа: ");
 			int amount = consoleInput.nextIntIndex();
-			Project project = projectsController.getSpecificProjectFromDB(categoryId, index);
-			project.addPayment(amount);
-			projectsController.updateProjectPledged(project.getId(), "pledged", project.getPledged());
 
-			display.displaySpecificProject(categoryId, input);
-			menuLevel3(categoryId, input);
+			project.addPayment(amount);
+			projectsController.updateProject(project.getId(), "pledged", project.getPledged());
+
+			display.displaySpecificProject(categoryId, project.getId());
+			menuLevel3(categoryId, index);
 		} else {
-			menuLevel3(categoryId, input);
+			menuLevel3(categoryId, index);
 		}
 	}
 }

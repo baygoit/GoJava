@@ -13,7 +13,7 @@ public class ProjectsDao {
 	private final Connection connection;
 
 	public List<Project> getProjectsByCategoryId(int categoryId) throws SQLException {
-		String sql = "SELECT * FROM projects WHERE category_id = ?";
+		String sql = "SELECT * FROM projects WHERE category_id = ? ORDER BY id";
 		PreparedStatement stm = connection.prepareStatement(sql);
 		stm.setInt(1, categoryId);
 		ResultSet rs = stm.executeQuery();
@@ -26,7 +26,7 @@ public class ProjectsDao {
 			project.setGoal(rs.getInt("goal"));
 			project.setDaysLeft(rs.getInt("days_left"));
 			project.setPledged(rs.getInt("pledged"));
-			list.add(0, project);
+			list.add(project);
 		}
 		return list;
 	}

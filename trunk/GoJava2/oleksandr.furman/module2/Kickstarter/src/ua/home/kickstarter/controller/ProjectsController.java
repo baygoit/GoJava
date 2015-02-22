@@ -48,7 +48,7 @@ public class ProjectsController {
 		return project;
 	}
 
-	public void updateProjectPledged(int projectId, String columnName, int amount) {
+	public void updateProject(int projectId, String columnName, int amount) {
 		try (Connection con = daoFactory.getConnection()) {
 			ProjectsDao projectsDao = daoFactory.getProjectsDao(con);
 			projectsDao.updateProject(projectId, columnName, amount);
