@@ -29,7 +29,7 @@ public class InFileProjects implements Projects {
         try (BufferedReader in = new BufferedReader(new FileReader(fileName))){
             do {
                 line = in.readLine();
-                if (line != null) {
+                if (line != null) { // TODO make refactor
                     String[] splitted = line.split(";:");
                     String[] faqLine = splitted[2].split(";");
                     FAQs faqs = new FAQs();
@@ -49,7 +49,8 @@ public class InFileProjects implements Projects {
                     Integer days = Integer.parseInt(progectLine[4]);
                     String history = progectLine[6];
                     String video = progectLine[7];
-                    Project project = new Project(name, description, collected, amount, days, new AdditionalInfo(history, video, bonuses, faqs));
+                    AdditionalInfo details = new AdditionalInfo(history, video, bonuses, faqs);
+                    Project project = new Project(name, description, collected, amount, days, details);
                     if (progectLine[5] != "NO_CATEGORY") {
                     	project.setCategory(new Category(progectLine[5]));                    	
                     } else {
@@ -60,7 +61,8 @@ public class InFileProjects implements Projects {
             } while(line != null);
                 
         } catch (IOException e) {
-            // TODO не смог найти файл или прочитать строку
+//            throw new RuntimeException("Something happent while getting Projects!", e);
+        	// TODO problems while file is empty
         } 
         return result;
     }
@@ -73,6 +75,8 @@ public class InFileProjects implements Projects {
                 Project project = projects.get(index);
                 if (project.getCategory().equals(category)) {
                         result.add(project);
+                } else {
+                	// do nothing
                 }
         }
         return result;
@@ -83,23 +87,27 @@ public class InFileProjects implements Projects {
         try (BufferedWriter out = new BufferedWriter(new FileWriter(fileName))) {
             out.write(project.toString());
         } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            throw new RuntimeException("Something happent while adding Project!", e);
         } 
     }
 
     @Override
     public int size() {
-        int counter = -1;
+        int counter = 0;
         String line = "";
         try (BufferedReader in = new BufferedReader(new FileReader(fileName))){
             do {
-                counter++;
-                line = in.readLine();
+            	line = in.readLine();
+            	if (line != null) {
+            		counter++;            		
+            	} else { 
+            		// do nothing
+            	}
             } while(line != null);
                 
         } catch (IOException e) {
-            // TODO не смог найти файл или прочитать строку
+            //throw new RuntimeException("Something happent while calculating Projects size!", e);
+        	// TODO problems while file is empty
         }
         return counter;
     }

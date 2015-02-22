@@ -22,23 +22,27 @@ public class InFileCategories implements Categories {
         try (BufferedWriter out = new BufferedWriter(new FileWriter(fileName))){
             out.write(category.toString());
         } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+        	throw new RuntimeException("Something happent while adding new Category!", e);
         }
     }
 
     @Override
     public int size() {
-        int counter = -1;
+        int counter = 0;
         String line = "";
         try (BufferedReader in = new BufferedReader(new FileReader(fileName))){
             do {
-                counter++;
-                line = in.readLine();
+            	line = in.readLine();
+            	if (line != null) {
+            		counter++;            		
+            	} else {
+            		// do nothing
+            	}
             } while(line != null);
                 
         } catch (IOException e) {
-            // TODO не смог найти файл или прочитать строку
+        	//throw new RuntimeException("Something happent while calculating size!", e);
+        	// TODO problems while file is empty
         }
         return counter;
     }
@@ -56,7 +60,8 @@ public class InFileCategories implements Categories {
             } while(line != null);
                 
         } catch (IOException e) {
-            // TODO не смог найти файл или прочитать строку
+        	//throw new RuntimeException("Something happent while getting all Categories!", e);
+        	// TODO problems while file is empty
         }
         return result;
     }
@@ -76,7 +81,7 @@ public class InFileCategories implements Categories {
             } while(line != null);
                 
         } catch (IOException e) {
-            // TODO не смог найти файл или прочитать строку
+        	throw new RuntimeException("Something happent while getting Category by index!", e);
         }
         return result;
     }
