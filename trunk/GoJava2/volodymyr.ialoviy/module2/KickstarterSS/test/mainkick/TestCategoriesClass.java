@@ -24,7 +24,7 @@ public class TestCategoriesClass {
 	@Test
     public void shouldAllCatecories_whenNotAllCatecories(){
 		String s = categories.showAllCatecoriesInKickstarter();
-		assertTrue(s.equals("1 Category-1\n2 Category-2\n3 Category-3"));
+		assertTrue(s.equals("1 name1\n2 name2\n3 name3"));
     }
 	
 	@Test
@@ -38,23 +38,23 @@ public class TestCategoriesClass {
     public void shouldProjectsContain_whenProjectsContain(){
 		int[] i = categories.projectsThatAreContainedInTheCategory(0);
 		int[] j = {1, 3, 4};
-		assertTrue(Arrays.equals(i, j));
+		assertEquals(i, j);
     }
 	
 	@Test
     public void shouldFirstCatecoryName_whenNotFirstCatecoryName(){
-		String s = categories.showCatecoryName(0);
-		assertTrue(s.equals("Category-1"));
+		String s = categories.showCatecoryName(1);
+		assertTrue(s.equals("name1"));
     }
 	
 	@Test
     public void shouldAllProjectInCategory_whenNotAllProjectInCategory(){
 		Projects projects = new ProjectsFromFile();
 		projects.writeAllProjects();
-		String s = categories.showAllProjectInCategory(0, projects);
-		assertTrue(s.equals("1, Progect-1, shortDescription-1, 1000, 10\n"
-				+ "3, Progect-3, shortDescription-3, 1000, 10\n"
-				+ "4, Progect-4, shortDescription-4, 1000, 10"));
+		String s = categories.showAllProjectInCategory(1, projects);
+		assertEquals(s, "1, name1, short description1, 1000, 10\n"
+				+ "3, name3, short description3, 1000, 10\n"
+				+ "4, name4, short description4, 1000, 10");
     }
 	
 	@Test//(expected = FileNotFoundException.class)

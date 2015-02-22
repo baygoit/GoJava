@@ -1,8 +1,8 @@
 package mainkick;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 import model.Projects;
-import model.ProjectsFromFile;
+import model.ProjectsFromDB;
 
 import org.junit.Test;
 
@@ -10,18 +10,17 @@ public class TestProjectsClass {
 
 	@Test
     public void should1_when(){
-		Projects projects = new ProjectsFromFile();
-		projects.writeAllProjects();
-		String s = projects.showProjectFull(2);
-		assertTrue(s.equals("projectID = 3\n"		
-				+ "projectName: Progect-3\n"
-				+ "shortDescription: shortDescription-3\n"
-				+ "fullDescription: fullDescription-3\n"
-				+ "foto: foto-3\n"
-				+ "link: Link\n"
-				+ "howMuchNeeded = 1000\n"
-				+ "howMuchCollected = 10\n"
-				+ "howMuchRemaining = 990\n"
-				+ "faq = [ ]"));
+		Projects projects = new ProjectsFromDB();
+		String s = projects.showProjectFull(3);
+		assertEquals(s, "projectID = 3\n"		
+				+ "project name: name3\n"
+				+ "short description: short description3\n"
+				+ "full description: full description3\n"
+				+ "foto: foto3\n"
+				+ "link: link3\n"
+				+ "how much needed = 1000\n"
+				+ "how much collected = 10\n"
+				+ "how much remaining = 990\n"
+				+ "faq = ");
     }
 }

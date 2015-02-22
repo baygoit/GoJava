@@ -1,12 +1,13 @@
 package presenter;
 
+import view.View;
 import model.Categories;
 import model.Projects;
 import model.Quotes;
 import model.QuotesFromDB;
 import util.InputChecker;
 import view.Inputs;
-import view.Output;
+//import view.Output;
 
 
 public class KickstarterS {
@@ -23,34 +24,37 @@ public class KickstarterS {
 	private int chosenProject;//TODO DELETE
 
     private Inputs in;
-    private Output out;
+//    private Output out;
 	private Categories categories;
 	private Projects projects;
+	
+	private View view;
 
-	public KickstarterS(Inputs in, Output out, Categories categories, Projects projects) {
+	public KickstarterS(Inputs in, Categories categories, Projects projects, View view) {
 		this.in = in;
-		this.setOut(out);
+//		this.setOut(out);
 		this.categories = categories;
 		this.projects = projects;
+		this.view = view;
 	}
 
-    public Output getOut() {
-        return out;
-    }
-
-	public void setOut(Output out) {
-	        this.out = out;
-	}
+//    public Output getOut() {
+//        return out;
+//    }
+//
+//	public void setOut(Output out) {
+//	        this.out = out;
+//	}
 
 	public void kickstarter() {
 		Quotes quote = new QuotesFromDB();
-		printer(quote.getQuote());
+		view.printQuote(quote.getQuote());
 		
 		categories();
 	}
 
 	private void categories() {
-		showAllCategories();
+		view.showAllCategories(categories.showAllCatecoriesInKickstarter());
 		askCategory();
 		
 		menu = menuProjects;
@@ -59,7 +63,7 @@ public class KickstarterS {
 
 	private void projects() {
 		int[] optionVariant = { menuCategories };
-		printProjectsInCategory();
+		view.printProjectsInCategory(categories.showCatecoryName(chosenCategoryID), categories.showAllProjectInCategory(chosenCategoryID, projects), menuCategories);
 		askProject(optionVariant);
 
 		if (elementInArray(optionVariant, chosenProject)) {
@@ -74,7 +78,7 @@ public class KickstarterS {
 	private void project() {
 		int[] optionVariant = { menuProjects, menuPayment, menuQuestion, exit };
 
-		printProject();
+		view.printProject(projects.showProjectFull(chosenProject), menuProjects, menuPayment, menuQuestion);
 		askAfterProject(optionVariant);
 
 		if (exit == choiceTo){
@@ -90,33 +94,33 @@ public class KickstarterS {
 	private void payment() {
 		int[] optionVariant = { 0, 1, 2, 3 };
 
-		printChoicePayment();
+		view.printChoicePayment();
 		askHowMuchPay(optionVariant);
 
-		printAskName();
+		view.printAskName();
 		String name = "";
 		askName(name);
 
-		printAskCard();
+		view.printAskCard();
 		long cardNumber = 0;
 		inCardNumber(cardNumber);
 
 		
 		if (chosenPay == 0) {
-			printAskAmount();
+			view.printAskAmount();
 			inAmount();
 		}
 
 		projects.setDonation(chosenProject, chosenPay);
 		
-		printThank(name, chosenPay);
+		view.printThank(name, chosenPay);
 		
 		menu = menuProject;
 		switchMenu();
 	}
 
 	private void question() {
-		printAskQuestion();
+		view.printAskQuestion();
 		askQuestion();
 
 		menu = menuProject;
@@ -146,10 +150,7 @@ public class KickstarterS {
 		}
 	}
 
-	private void showAllCategories() {
-		printer(categories.showAllCatecoriesInKickstarter());
-		printer("Choice Category Number: ");
-	}
+
 
 	private void askCategory() {
 		String choice = in.enter();
@@ -157,7 +158,7 @@ public class KickstarterS {
 			chosenCategoryID = Integer.valueOf(choice);//TODO DELETE - 1
 		}
 		else {
-			printBug();
+			view.printBug();
 			askCategory();
 		}
 	}
@@ -169,7 +170,7 @@ public class KickstarterS {
 			chosenProject = Integer.valueOf(choice);
 		}
 		else {
-			printBug();
+			view.printBug();
 			askProject(allowedVariants);
 		}
 	}
@@ -180,7 +181,7 @@ public class KickstarterS {
 			choiceTo = Integer.valueOf(choice);
 		}
 		else {
-			printBug();
+			view.printBug();
 			askAfterProject(intSwitch);
 		}
 	}
@@ -191,7 +192,7 @@ public class KickstarterS {
 			chosenPay = Integer.valueOf(choice);
 		}
 		else {
-			printBug();
+			view.printBug();
 			askHowMuchPay(intSwitch);
 		}
 	}
@@ -202,7 +203,7 @@ public class KickstarterS {
 			chosenPay = Integer.valueOf(choice);
 		}
 		else {
-			printBug();
+			view.printBug();
 			inAmount();
 		}
 	}
@@ -213,7 +214,7 @@ public class KickstarterS {
 			cardNumber = Long.valueOf(choice);
 		}
 		else {
-			printBug();
+			view.printBug();
 			inCardNumber(cardNumber);
 		}
 	}
@@ -224,70 +225,15 @@ public class KickstarterS {
 			name = choice;
 		}
 		else {			
-			printBug();
+			view.printBug();
 			askName(name);
 		}
-	}
-	
-	private void printBug() {
-		out.print("You have entered an incorrect value or a null value, check the value you entered and try again");		
 	}
 	
 	private void askQuestion() {
 		projects.addFAQ(chosenProject, in.enter());
 	}
 	
-	private void printProjectsInCategory() {
-		printer("Your chosen category: "
-				+ categories.showCatecoryName(chosenCategoryID)
-				+ ", containing the following projects: ");
-		printer(categories.showAllProjectInCategory(chosenCategoryID, projects));
-		printer("Choice Project Number or " + menuCategories
-				+ " for exit to Category: ");
-	}
-	
-	private void printProject() {
-		printer(projects.showProjectFull(chosenProject));
-		printer("Choice "
-				+ menuProjects
-				+ " for exit to Project list.\nChoice "
-				+ menuPayment
-				+ " to invest in the project:"
-				+ "Have a question? If the info above doesn't help, you can ask the project creator directly - Choice "
-				+ menuQuestion + ":");
-	}
-
-	private void printChoicePayment() {
-		printer("\"0\" - No thanks, I just want to help the project."
-				+ " \"1\" - 1$ = OUR UNDYING LOVE"
-				+ " \"2\" - 10$ = HEY… NICE SHIRT"
-				+ " \"3\" - 40$ = KICKSTARTER EXCLUSIVE");
-	}
-	
-	private void printAskAmount() {
-		printer("Enter the amount of donations:");
-	}
-
-	private void printAskCard() {
-		printer("Enter your credit card number:");
-	}
-
-	private void printAskName() {
-		printer("Enter your name:");
-	}
-
-	private void printAskQuestion() {
-		printer("Enter your question:");
-	}
-	
-	private void printThank(String name, int chosenPay) {
-		printer("Thank you " + name + " for your generous (" + chosenPay + ") contribution.");
-	}
-
-	private void printer(String string) {
-		out.print(string);
-	}
-
 	private Boolean elementInArray(int[] a, int b) {
 		Boolean c = false;
 		for (int i = 0; i < a.length; i++) {
