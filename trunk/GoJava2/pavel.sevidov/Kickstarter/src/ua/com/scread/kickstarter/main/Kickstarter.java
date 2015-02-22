@@ -12,6 +12,7 @@ import ua.com.scread.kickstarter.io.ConsoleIO;
 import ua.com.scread.kickstarter.model.Model;
 import ua.com.scread.kickstarter.storage.Bonuses;
 import ua.com.scread.kickstarter.storage.Categories;
+import ua.com.scread.kickstarter.storage.CategoriesDAO;
 import ua.com.scread.kickstarter.storage.FAQs;
 import ua.com.scread.kickstarter.storage.InMemoryCategories;
 import ua.com.scread.kickstarter.storage.InMemoryProjects;

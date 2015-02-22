@@ -1,23 +1,26 @@
 package ua.com.scread.kickstarter;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
+import ua.com.scread.kickstarter.data.Category;
 import ua.com.scread.kickstarter.storage.Categories;
 import ua.com.scread.kickstarter.storage.CategoriesDAO;
 
-public class CategoriesDAOTest extends CategotriesTest {
+public class CategoriesDAOTest {
 
-    @Override
-    Categories getCategories() {
-        return new CategoriesDAO();
-    }
+	Categories categories = new CategoriesDAO();
+	Category category = new Category("Sport");
     
-    @Override
     @Test
     public void shouldReturnSize_whenGetSize() {
         assertTrue(categories.size() >= 0);
     }
-
+    
+    @Test
+	public void shouldGetCategory_whenAskCategoryByIndex() {
+		assertEquals(categories.get(0), category);
+	}
 }

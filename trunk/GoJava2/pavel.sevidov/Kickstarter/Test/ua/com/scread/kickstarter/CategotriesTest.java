@@ -15,7 +15,7 @@ import ua.com.scread.kickstarter.storage.InMemoryCategories;
 public abstract class CategotriesTest {
     
 	Categories categories = getCategories();
-	Category category = new Category(3, "Vasya");
+	Category category = new Category("Vasya");
 
     abstract Categories getCategories();
 	
