@@ -8,7 +8,7 @@ public class Project {
 	private double collected;
 	private double amount;
 	private int days;
-	private Category category;
+	private Category category = null;
 	private AdditionalInfo details;
 
 	public Project(String name, String description, double amount, int days, AdditionalInfo delails) {
@@ -81,8 +81,14 @@ public class Project {
 
     @Override
     public String toString() {
+    	String categoryString = "";
+    	if (category != null) {
+    		categoryString = category.getName();
+    	} else {
+    		categoryString = "NO_CATEGORY";
+    	}
         return name + ";" + description + ";" + collected + ";" + amount + ";" 
-                    + days + ";" + this.details.toString() + "\n";
+                    + days + ";" + categoryString + ";" + this.details.toString() + "\n";
     }
 
     @Override

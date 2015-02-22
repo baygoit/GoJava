@@ -56,9 +56,15 @@ public class InFileProjects implements Projects {
                     Double collected = Double.parseDouble(progectLine[2]);
                     Double amount = Double.parseDouble(progectLine[3]);
                     Integer days = Integer.parseInt(progectLine[4]);
-                    String history = progectLine[5];
-                    String video = progectLine[6];
-                    result.add(new Project(name, description, collected, amount, days, new AdditionalInfo(history, video, bonuses, faqs)));                    
+                    String history = progectLine[6];
+                    String video = progectLine[7];
+                    Project project = new Project(name, description, collected, amount, days, new AdditionalInfo(history, video, bonuses, faqs));
+                    if (progectLine[5] != "NO_CATEGORY") {
+                    	project.setCategory(new Category(progectLine[5]));                    	
+                    } else {
+                    	// do nothing
+                    }
+                    result.add(project);                    
                 }
             } while(line != null);
                 
@@ -78,8 +84,15 @@ public class InFileProjects implements Projects {
 
     @Override
     public List<Project> getProjects(Category category) {
-        // TODO Auto-generated method stub
-        return null;
+    	List<Project> projects = getProjects();
+    	List<Project> result = new ArrayList<Project>();
+        for (int index = 0; index < projects.size(); index ++) {
+                Project project = projects.get(index);
+                if (project.getCategory().equals(category)) {
+                        result.add(project);
+                }
+        }
+        return result;
     }
 
     @Override
