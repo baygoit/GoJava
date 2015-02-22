@@ -33,7 +33,7 @@ public class CategoriesFromDB implements Categories{
 
 	@Override
 	public String showAllCatecoriesInKickstarter() {
-		String s = "";
+		StringBuilder s = new StringBuilder();
 		Connection connection = null;
         try {
             Class.forName("org.postgresql.Driver");
@@ -42,8 +42,10 @@ public class CategoriesFromDB implements Categories{
             statement = connection.createStatement();
             ResultSet result = statement.executeQuery("SELECT * FROM categories");
             while (result.next()) {
-                s += result.getInt("id_category")
-                        + " " + result.getString("name_category") + "\n";
+                s.append(result.getInt("id_category"))
+                		.append(" ")
+                		.append(result.getString("name_category"))
+                		.append("\n").toString();
             }
         } catch (Exception ex) {
             Logger.getLogger(JDBCType.class.getName()).log(Level.SEVERE, null, ex);
@@ -61,7 +63,7 @@ public class CategoriesFromDB implements Categories{
 
 	@Override
 	public String showAllProjectInCategory(int categoryId, Projects projects) {
-		String s = "";
+		StringBuilder s = new StringBuilder();
 		Connection connection = null;
         try {
             Class.forName("org.postgresql.Driver");
@@ -70,12 +72,12 @@ public class CategoriesFromDB implements Categories{
             statement = connection.createStatement();
             ResultSet result = statement.executeQuery("SELECT * FROM projects WHERE id_category =" + categoryId + "ORDER BY id_project");
             while (result.next()) {
-                s += result.getInt("id_project")
-					+ ", " + result.getString("name_project")
-					+ ", " + result.getString("short_description_project")
-					+ ", " + result.getString("how_much_needed_project")
-					+ ", " + result.getString("how_much_collected_project")
-					+ "\n";
+                s.append(result.getInt("id_project"))
+                	.append(", ").append(result.getString("name_project"))
+					.append(", ").append(result.getString("short_description_project"))
+					.append(", ").append(result.getString("how_much_needed_project"))
+					.append(", ").append(result.getString("how_much_collected_project"))
+					.append("\n").toString();
             }
         } catch (Exception ex) {
             Logger.getLogger(JDBCType.class.getName()).log(Level.SEVERE, null, ex);
@@ -93,7 +95,7 @@ public class CategoriesFromDB implements Categories{
 
 	@Override
 	public String showCatecoryName(int categoryId) {
-		String s = "";
+		StringBuilder s = new StringBuilder();
 		Connection connection = null;
         try {
             Class.forName("org.postgresql.Driver");
@@ -102,7 +104,7 @@ public class CategoriesFromDB implements Categories{
             statement = connection.createStatement();
             ResultSet result = statement.executeQuery("SELECT * FROM categories WHERE id_category =" + categoryId);
             while (result.next()) {
-                s += result.getString("name_category");
+                s.append(result.getString("name_category")).toString();
             }
         } catch (Exception ex) {
             Logger.getLogger(JDBCType.class.getName()).log(Level.SEVERE, null, ex);
@@ -115,7 +117,7 @@ public class CategoriesFromDB implements Categories{
                 }
             }
         }
-		return s;
+		return s.toString();
 	}
 
 

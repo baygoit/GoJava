@@ -24,7 +24,6 @@ public class KickstarterS {
 	private int chosenProject;//TODO DELETE
 
     private Inputs in;
-//    private Output out;
 	private Categories categories;
 	private Projects projects;
 	
@@ -32,19 +31,10 @@ public class KickstarterS {
 
 	public KickstarterS(Inputs in, Categories categories, Projects projects, View view) {
 		this.in = in;
-//		this.setOut(out);
 		this.categories = categories;
 		this.projects = projects;
 		this.view = view;
 	}
-
-//    public Output getOut() {
-//        return out;
-//    }
-//
-//	public void setOut(Output out) {
-//	        this.out = out;
-//	}
 
 	public void kickstarter() {
 		Quotes quote = new QuotesFromDB();

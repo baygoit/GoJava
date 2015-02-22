@@ -22,19 +22,19 @@ public class CategoriesFromFile implements Categories {
 	
 	@Override
 	public String showAllCatecoriesInKickstarter(){
-		String s = "";
+		StringBuilder s = new StringBuilder();
 		for (Category value : listCatecories) {
-			s += value.getCategoryID() + " " + value.getCategoryName() + "\n";
+			s.append(value.getCategoryID()).append(" ").append(value.getCategoryName()).append("\n").toString();
 			}
 		return s.substring(0, s.length() - 1);
 	}
 	
 	@Override
 	public String showAllProjectInCategory(int categoryId, Projects projects){
-		String s = "";
+		StringBuilder s = new StringBuilder();
 		Category category = getListCatecories().get(categoryId);
 		for (int j : category.getProjects()){
-			s += projects.showProjectInShort(j - 1) + "\n";
+			s.append(projects.showProjectInShort(j - 1)).append("\n").toString();
 		}
 		return s.substring(0, s.length() - 1);
 	}

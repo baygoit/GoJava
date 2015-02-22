@@ -16,7 +16,6 @@ public class KickstarterMain {
     	Output out = new OutputConsole();
     	Categories categories = new CategoriesFromDB();
     	Projects projects = new ProjectsFromDB();
-
     	View view = new View(out);
     	
     	KickstarterS run = new KickstarterS(in, categories, projects, view);

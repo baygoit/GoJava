@@ -39,26 +39,26 @@ public class ProjectsFromFile implements Projects {
 	@Override
 	public String showProjectFull(int numberProject){
 		Project project = listProject.get(numberProject);
-		return "projectID = " + project.getProjectID() + "\n"
-						+ "projectName: " + project.getProjectName() +  "\n"
-						+ "shortDescription: " + project.getShortDescription() + "\n"
-						+ "fullDescription: " + project.getFullDescription() + "\n"
-						+ "foto: " + project.getFoto() + "\n"
-						+ "link: " + project.getLink() + "\n"
-						+ "howMuchNeeded = " + project.getHowMuchNeeded() + "\n"
-						+ "howMuchCollected = " + project.getHowMuchCollected() + "\n"
-						+ "howMuchRemaining = " + project.getHowMuchRemaining() + "\n"
-						+ "faq = " + project.getFaq();
+		return new StringBuilder().append("projectID = ").append(project.getProjectID()).append("\n")
+						.append("projectName: ").append(project.getProjectName()).append("\n")
+						.append("shortDescription: ").append(project.getShortDescription()).append("\n")
+						.append("fullDescription: ").append(project.getFullDescription()).append("\n")
+						.append("foto: ").append(project.getFoto()).append("\n")
+						.append("link: ").append(project.getLink()).append("\n")
+						.append("howMuchNeeded = ").append(project.getHowMuchNeeded()).append("\n")
+						.append("howMuchCollected = ").append(project.getHowMuchCollected()).append("\n")
+						.append("howMuchRemaining = ").append(project.getHowMuchRemaining()).append("\n")
+						.append("faq = ").append(project.getFaq()).toString();
 	}
 	
 	@Override
 	public String showProjectInShort(int projectID){
 		Project project = listProject.get(projectID);
-		return project.getProjectID()
-				+ ", " + project.getProjectName()
-				+ ", " + project.getShortDescription()
-				+ ", " + project.getHowMuchNeeded()
-				+ ", " + project.getHowMuchCollected();
+		return new StringBuilder().append(project.getProjectID())
+				.append(", ").append(project.getProjectName())
+				.append(", ").append(project.getShortDescription())
+				.append(", ").append(project.getHowMuchNeeded())
+				.append(", ").append(project.getHowMuchCollected()).toString();
 	}
 
 	@Override

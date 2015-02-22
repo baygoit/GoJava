@@ -23,7 +23,7 @@ public class QuotesFromDB implements Quotes{
 	
 	@Override
 	public String getQuote() {
-		String s = "";
+		StringBuilder s = new StringBuilder();
 		Connection connection = null;
         try {
             Class.forName("org.postgresql.Driver");
@@ -40,7 +40,7 @@ public class QuotesFromDB implements Quotes{
             
             ResultSet result = statement.executeQuery("SELECT * FROM quotes WHERE id_quote =" + random);
             while (result.next()) {
-                s += result.getString("quote");
+                s.append(result.getString("quote")).toString();
             }
         } catch (Exception ex) {
             Logger.getLogger(JDBCType.class.getName()).log(Level.SEVERE, null, ex);
@@ -53,7 +53,7 @@ public class QuotesFromDB implements Quotes{
                 }
             }
         }
-		return s;
+		return s.toString();
 	}
 
 	@Override

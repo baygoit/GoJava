@@ -32,7 +32,7 @@ public class ProjectsFromDB implements Projects{
 	
 	@Override
 	public String showProjectFull(int projectID) {
-		String s = "";
+		StringBuilder s = new StringBuilder();
 		Connection connection = null;
         try {
             Class.forName("org.postgresql.Driver");
@@ -41,16 +41,16 @@ public class ProjectsFromDB implements Projects{
             statement = connection.createStatement();
             ResultSet result = statement.executeQuery("SELECT * FROM projects WHERE id_project =" + projectID);
             while (result.next()) {
-	            s += "projectID = " + result.getString("id_project") + "\n"
-						+ "project name: " + result.getString("name_project") +  "\n"
-						+ "short description: " + result.getString("short_description_project") + "\n"
-						+ "full description: " + result.getString("full_description_project") + "\n"
-						+ "foto: " + result.getString("foto_project") + "\n"
-						+ "link: " + result.getString("link_project") + "\n"
-						+ "how much needed = " + result.getString("how_much_needed_project") + "\n"
-						+ "how much collected = " + result.getString("how_much_collected_project") + "\n"
-						+ "how much remaining = " + result.getString("how_much_remaining_project") + "\n"
-						+ "faq = " + arrayListToString(getFaq(projectID));
+	            s.append("projectID = ").append(result.getString("id_project")).append("\n")
+					.append("project name: ").append(result.getString("name_project")).append("\n")
+					.append("short description: ").append(result.getString("short_description_project")).append("\n")
+					.append("full description: " ).append(result.getString("full_description_project")).append("\n")
+					.append("foto: ").append(result.getString("foto_project")).append("\n")
+					.append("link: ").append(result.getString("link_project")).append("\n")
+					.append("how much needed = ").append(result.getString("how_much_needed_project")).append("\n")
+					.append("how much collected = ").append(result.getString("how_much_collected_project")).append("\n")
+					.append("how much remaining = ").append(result.getString("how_much_remaining_project")).append("\n")
+					.append("faq = ").append(arrayListToString(getFaq(projectID))).toString();
             }
         } catch (Exception ex) {
             Logger.getLogger(JDBCType.class.getName()).log(Level.SEVERE, null, ex);
@@ -63,12 +63,12 @@ public class ProjectsFromDB implements Projects{
                 }
             }
         }
-		return s;
+		return s.toString();
 	}
 	
 	@Override
 	public String showProjectInShort(int projectID) {
-		String s = "";
+		StringBuilder s = new StringBuilder();
 		Connection connection = null;
         try {
             Class.forName("org.postgresql.Driver");
@@ -79,11 +79,11 @@ public class ProjectsFromDB implements Projects{
             		+ "how_much_needed_project, how_much_collected_project "
             		+ "FROM projects WHERE id_project =" + projectID);
             while (result.next()) {
-	            s += result.getString("id_project")
-						+ " " + result.getString("name_project")
-						+ ", " + result.getString("short_description_project")
-						+ ", " + result.getString("how_much_needed_project")
-						+ ", " + result.getString("how_much_collected_project");
+	            s.append(result.getString("id_project"))
+						.append(" ").append(result.getString("name_project"))
+						.append(", ").append(result.getString("short_description_project"))
+						.append(", ").append(result.getString("how_much_needed_project"))
+						.append(", ").append(result.getString("how_much_collected_project")).toString();
             }
         } catch (Exception ex) {
             Logger.getLogger(JDBCType.class.getName()).log(Level.SEVERE, null, ex);
@@ -96,7 +96,7 @@ public class ProjectsFromDB implements Projects{
                 }
             }
         }
-		return s;
+		return s.toString();
 	}
 
 	@Override
@@ -175,15 +175,15 @@ public class ProjectsFromDB implements Projects{
 	}
 
 	private String arrayListToString(ArrayList<String> array) {
-		String string = "";
+		StringBuilder string = new StringBuilder();
 		if(!array.isEmpty()){
 			
 			for (String s : array){
-			    string += s + ";\n";
+			    string.append(s).append(";\n").toString();
 			}
 			return string.substring(0, string.length() - 1);
 		}
-		return string;
+		return string.toString();
 	}
 	
 	@Override
