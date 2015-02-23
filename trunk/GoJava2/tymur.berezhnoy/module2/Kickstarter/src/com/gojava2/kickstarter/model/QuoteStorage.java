@@ -25,9 +25,4 @@ public class QuoteStorage {
 		int randomInex = (int)(Math.random() * listOfQuotes.size());
         return listOfQuotes.get((randomInex));
 	}
-	
-	public static void main(String[] args) {
-		QuoteStorage s = new QuoteStorage();
-		System.out.println(s.getRandomQuote().getContent());
-	}
 }
