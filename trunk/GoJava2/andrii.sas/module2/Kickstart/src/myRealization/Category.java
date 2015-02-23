@@ -2,9 +2,21 @@ package myRealization;
 
 public class Category {
 	private String name;
+	private int id;
 
+	@Deprecated
 	public Category(String name) {
 		this.name = name;
+	}
+
+	public Category(int id, String name) {
+		this(name);
+		this.id = id;
+	}
+
+	@Override
+	public String toString() {
+		return "Category name= " + name + ", id= " + id;
 	}
 
 	public String getName(){

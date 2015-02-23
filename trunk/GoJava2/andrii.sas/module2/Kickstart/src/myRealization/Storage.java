@@ -6,7 +6,7 @@ public class Storage {
 	private Kickstart kick;
 	
 	public Storage(Output output, Input input, Quote quote){
-		categories = new InFileCategories("categories.txt");
+		categories = new CategoriesDAO("kickstarter_db");
 		projects = new Projects();
 		kick = new Kickstart(output, input, categories, projects, quote);
 	}
