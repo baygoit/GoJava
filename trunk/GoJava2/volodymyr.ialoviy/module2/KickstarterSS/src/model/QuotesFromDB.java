@@ -1,58 +1,30 @@
 package model;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.JDBCType;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class QuotesFromDB implements Quotes{
-
-	private static final String PASS_DB = "7575";//TODO delete duplicate with ATHER CLASS
-	private static final String NAME_DB = "postgres";
-	private static final String JDBC_POSTGRESQL_PATH = "jdbc:postgresql://127.0.0.1:5432/kickstarter";
-	
-	public static void main(String[] args) {
-		QuotesFromDB quotes = new QuotesFromDB();
-
-		System.out.println(quotes.getQuote());
-	}
 	
 	@Override
 	public String getQuote() {
 		StringBuilder s = new StringBuilder();
-		Connection connection = null;
-        try {
-            Class.forName("org.postgresql.Driver");
-            connection = DriverManager.getConnection(JDBC_POSTGRESQL_PATH, NAME_DB, PASS_DB);
-            Statement statement = null;
-            statement = connection.createStatement();
-            int countQuote = 0;
-            ResultSet result1 = statement.executeQuery("SELECT COUNT(*) FROM quotes;");
-            while (result1.next()) {
-                countQuote = result1.getInt("count");
-            }
-            
-            int random = random(countQuote);
-            
-            ResultSet result = statement.executeQuery("SELECT * FROM quotes WHERE id_quote =" + random);
-            while (result.next()) {
-                s.append(result.getString("quote")).toString();
-            }
-        } catch (Exception ex) {
-            Logger.getLogger(JDBCType.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            if (connection != null) {
-                try {
-                    connection.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(JDBCType.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        }
+		TemlateForMethodWithDB temp = new TemlateForMethodWithDB(){
+			@Override
+			void logic(Statement statement) throws SQLException {
+				 int countQuote = 0;
+				 ResultSet result1 = statement.executeQuery("SELECT COUNT(*) FROM quotes;");
+				 while (result1.next()) {
+					 countQuote = result1.getInt("count");
+				 }
+				 int random = random(countQuote);
+				 ResultSet result = statement.executeQuery("SELECT * FROM quotes WHERE id_quote =" + random);
+				 while (result.next()) {
+					 s.append(result.getString("quote")).toString();
+				 }
+			}
+		};
+        temp.templateWorkWithDB();
 		return s.toString();
 	}
 
