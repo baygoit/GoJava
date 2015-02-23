@@ -60,7 +60,7 @@ public class Kickstarter {
 		try {
 			input = consoleInput.nextIntIndex();
 			if (input > 0) {
-				project = getSpecificProjectFromDB(categoryId, input);
+				project = getSpecificProject(categoryId, input);
 				display.displaySpecificProject(project);
 				menuLevel3(categoryId, input);
 			} else if (input == 0) {
@@ -83,7 +83,7 @@ public class Kickstarter {
 			consoleInput.nextString();
 			consoleOutput.output("Введите сумму платежа: ");
 			int amount = consoleInput.nextIntIndex();
-			project = getSpecificProjectFromDB(categoryId, index);
+			project = getSpecificProject(categoryId, index);
 			project.addPayment(amount);
 			updateProject(project.getId(), "pledged", project.getPledged());
 			display.displaySpecificProject(project);
@@ -137,7 +137,7 @@ public class Kickstarter {
 		return list;
 	}
 
-	public Project getSpecificProjectFromDB(int categoryId, int projectIndex) {
+	public Project getSpecificProject(int categoryId, int projectIndex) {
 		Project project = null;
 		try (Connection con = daoFactory.getConnection()) {
 			ProjectsDao projectsDao = daoFactory.getProjectsDao(con);
