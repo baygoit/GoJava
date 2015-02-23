@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Random;
 
 import ua.home.kickstarter.content.Quote;
 
@@ -11,15 +12,17 @@ public class QuotationsDao {
 
 	private Connection connection;
 
-	public Quote getQuoteById(int quoteId) throws SQLException {
+	public Quote getSpecificQuoteFromDB(Random random) throws SQLException {
+		int index = random.nextInt((int) size());
 		Quote quote = new Quote();
 		String sql = "SELECT * FROM quotations WHERE id = ?";
 		PreparedStatement stm = connection.prepareStatement(sql);
-		stm.setInt(1, quoteId);
+		stm.setInt(1, index);
 		ResultSet rs = stm.executeQuery();
 		while (rs.next()) {
 			quote.setQuote(rs.getString("quote"));
 		}
+		
 		return quote;
 	}
 	public QuotationsDao(Connection connection) {
@@ -35,5 +38,4 @@ public class QuotationsDao {
 		}
 		return count;
 	}
-
 }

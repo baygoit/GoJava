@@ -1,9 +1,17 @@
 package ua.home.kickstarter.engine;
 
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.Random;
+
+import ua.home.kickstarter.content.Category;
 import ua.home.kickstarter.content.Project;
-import ua.home.kickstarter.controller.CategoriesController;
+import ua.home.kickstarter.content.Quote;
 import ua.home.kickstarter.controller.ProjectsController;
-import ua.home.kickstarter.controller.QuotationsController;
+import ua.home.kickstarter.factory.DaoFactory;
+import ua.home.kickstarter.model.CategoriesDao;
+import ua.home.kickstarter.model.QuotationsDao;
 import ua.home.kickstarter.view.ConsoleInput;
 import ua.home.kickstarter.view.ConsoleOutput;
 import ua.home.kickstarter.view.Display;
@@ -12,30 +20,30 @@ public class Kickstarter {
 	private Display display;
 	private ConsoleInput consoleInput;
 	private ProjectsController projectsController;
-	private CategoriesController categoriesController;
 	private ConsoleOutput consoleOutput;
 	private Project project;
+	private DaoFactory daoFactory;
 
-	public Kickstarter(QuotationsController quotationsController, CategoriesController categoriesController,
-			ProjectsController projectsController, ConsoleOutput consoleOutput, ConsoleInput consoleInput,
+	public Kickstarter(ProjectsController projectsController, ConsoleOutput consoleOutput, ConsoleInput consoleInput,
 			Display display) {
-		this.categoriesController = categoriesController;
+
 		this.projectsController = projectsController;
 		this.consoleOutput = consoleOutput;
 		this.consoleInput = consoleInput;
 		this.display = display;
+		daoFactory = new DaoFactory();
 	}
 
 	public void run() {
-		display.displayQuote();
-		display.displayCategories();
+		display.displayQuote(getRandomQuote());
+		display.displayCategories(getCategoriesFromDB());
 		menuLevel0();
 	}
 
 	public void menuLevel0() {
 		int input = consoleInput.nextIntIndex();
-		if (input > 0 && input <= categoriesController.getCategoriesSize()) {
-			display.displaySelectedCategoryName(categoriesController.getCategoriesFromDB().get(input - 1).getName());
+		if (input > 0 && input <= getCategoriesSize()) {
+			display.displaySelectedCategoryName(getCategoriesFromDB().get(input - 1).getName());
 			menuLevel1(input);
 		} else if (input == 0) {
 			consoleOutput.output("Спасибо за использование нашей программы!");
@@ -60,7 +68,7 @@ public class Kickstarter {
 				display.displaySpecificProject(categoryId, project.getId());
 				menuLevel3(categoryId, input);
 			} else if (input == 0) {
-				display.displayCategories();
+				display.displayCategories(getCategoriesFromDB());
 				menuLevel0();
 			}
 		} catch (IndexOutOfBoundsException e) {
@@ -89,5 +97,38 @@ public class Kickstarter {
 		} else {
 			menuLevel3(categoryId, index);
 		}
+	}
+
+	public List<Category> getCategoriesFromDB() {
+		List<Category> list = null;
+		try (Connection con = daoFactory.getConnection()) {
+			CategoriesDao categoriesDao = daoFactory.getCategoriesDao(con);
+			list = categoriesDao.getAll();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+	public int getCategoriesSize() {
+		int size = -1;
+		try (Connection con = daoFactory.getConnection()) {
+			CategoriesDao categoriesDao = daoFactory.getCategoriesDao(con);
+			size = (int) categoriesDao.size();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return size;
+	}
+
+	public Quote getRandomQuote() {
+		Quote quote = null;
+		try (Connection con = daoFactory.getConnection()) {
+			QuotationsDao quotationsDao = daoFactory.getQuotationsDao(con);
+			quote = quotationsDao.getSpecificQuoteFromDB(new Random());
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return quote;
 	}
 }
