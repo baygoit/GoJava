@@ -1,13 +1,14 @@
-package org.goJava2.kickstarter.model;
+package com.gojava2.kickstarter.model;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.util.HashSet;
 
-import org.goJava2.kickstarter.content.Category;
 import org.junit.Before;
 import org.junit.Test;
+
+import com.gojava2.kickstarter.model.Category;
 
 public class CategoryStorageTest {
 

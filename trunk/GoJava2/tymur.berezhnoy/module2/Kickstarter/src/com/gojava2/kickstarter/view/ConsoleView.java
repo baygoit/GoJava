@@ -1,91 +1,85 @@
 package com.gojava2.kickstarter.view;
 
-import com.gojava2.kickstarter.content.Category;
-import com.gojava2.kickstarter.content.Project;
-import com.gojava2.kickstarter.controller.CategoryController;
-import com.gojava2.kickstarter.controller.ProjectController;
-import com.gojava2.kickstarter.controller.QuoteController;
 import static java.lang.System.out;
 
+import java.util.List;
+import java.util.Set;
+
+import com.gojava2.kickstarter.model.Category;
+import com.gojava2.kickstarter.model.Project;
+import com.gojava2.kickstarter.model.Quote;
+
 public class ConsoleView {
+
+	private final String TITLE = "*** Super kickstarter ***";
+
+	public void displayTitle() {
+		out.println("\t" + TITLE);
+	}
+	
+	public void display(Quote quote) {
+		StringBuilder stringBuilder = new StringBuilder();
 		
-	private Category category;
-	
-	private QuoteController quoteController;
-	private CategoryController categoryController;
-	private ProjectController projectController;
-	
-	private static final String TITLE = "*** Super kickstarter ***";
-	private String path;
-	
-	public ConsoleView(QuoteController quoteController, CategoryController categoryController,
-				ProjectController projectController) {
-		this.quoteController = quoteController;
-		this.categoryController = categoryController;
-		this.projectController = projectController;
+		stringBuilder.append("\"").append(quote.getContent()).append("\"")
+					 .append(quote.getCopyrightSymbol()).append(" ").append(quote.getAuthor());
+		out.println(stringBuilder);
 	}
 	
-	public void displayHead() {
-		out.println("\t" + TITLE + "\n" + quoteController.getRandomQuote().getQuoteContent());
-	}
-	
-	public void displayCategories() {
-		path = "~ CATEGORIES/";
-		out.println("\n" + path + "\n------------------------------------\nID Name");
+	public void display(Set<Category> categories) {
+		out.println("\n" + "------------------------------------\nID Name");
+		
 		int i = 1;
-		for(Category category: categoryController.getContent()) {
+		for (Category category : categories) {
 			out.println(i + ") " + category.getName());
 			i++;
 		}
 		out.println("------------------------------------");
 	}
 	
-	public void setCategoryPath(int i) { //TODO Name and logic
-		category = categoryController.getSpecificContent(i - 1);
-		path += category.getName().toUpperCase() + "/";
-	}
-	
-	public void displayProjects() {
-		int projectNumb = 1;
+	public void display(List<Project> projects) {
 		StringBuilder shortInfo;
-		
-		out.println(path + "\n------------------------------------");
-		for(Project project: projectController.getSpecificContent(category)) {
+
+		for (int i = 0; i < projects.size(); i++) {
 			shortInfo = new StringBuilder();
-			shortInfo.append(projectNumb).append(") ").append(project.getName())
-					 .append("\nDescription: ").append(project.getDescription())
-					 .append("\nRequired amount: ").append(project.getRequiredAmount()).append(project.getSymbolDollar())
-					 .append("\nTotal: ").append(project.getTotal()).append(project.getSymbolDollar())
-					 .append("\nDays left: ").append(project.getDays());
+			shortInfo.append(i + 1).append(") ").append(projects.get(i).getName())
+					 .append("\nDescription: ").append(projects.get(i).getDescription())
+					 .append("\nRequired amount: ").append(projects.get(i).getRequiredAmount()).append(projects.get(i).getSymbolDollar())
+					 .append("\nTotal: ").append(projects.get(i).getTotal()).append(projects.get(i).getSymbolDollar())
+					 .append("\nDays left: ").append(projects.get(i).getDays());
 			out.println(shortInfo + "\n------------------------------------");
-			projectNumb++;
 		}
 	}
 	
-	public void displaySpecificProject(int i) {
-		String newPath = path;
+	public void display(Project project) {
 		
-		int size = projectController.getSpecificContent(category).size();
-		if(i > size) {
-			out.println("- There are no projet at number: " + i);
-			return;
-		} else {
-			Project project = projectController.getSpecificContent(category).get(i - 1);
-			StringBuilder fullInfo = new StringBuilder();
-			
-			out.print(newPath += project.getName().toUpperCase() + "/"
-						+ "\n------------------------------------");
-			
-			fullInfo.append("\nName: ").append(project.getName())
-					.append("\nDescription: ").append(project.getDescription())
-					.append("\nRequired amount: ").append(project.getRequiredAmount()).append(project.getSymbolDollar())
-					.append("\nTotal: ").append(project.getTotal()).append(project.getSymbolDollar())
-					.append("\nDays left: ").append(project.getDays())
-					.append("\nBackers: ").append(project.getBackers())
-					.append("\nStory: ").append(project.getStory())
-					.append("\nLink to video: ").append(project.getLink());
-			
-				out.println(fullInfo + "\n------------------------------------");
+		StringBuilder fullInfo = new StringBuilder();
+		out.print("\n------------------------------------");
+		
+		fullInfo.append("\nName: ").append(project.getName())
+				.append("\nDescription: ").append(project.getDescription())
+				.append("\nRequired amount: ").append(project.getRequiredAmount()).append(project.getSymbolDollar())
+				.append("\nTotal: ").append(project.getTotal()).append(project.getSymbolDollar())
+				.append("\nDays left: ").append(project.getDays())
+				.append("\nBackers: ").append(project.getBackers())
+				.append("\nStory: ").append(project.getStory())
+				.append("\nLink to video: ").append(project.getLink());
+		
+		out.println(fullInfo + "\n------------------------------------");
+	}
+	
+	public void display(int level) {
+		switch(level) {
+			case 1: 
+				System.out.print("[0 - exit; 1 - * - selec category;]\n> ");
+				break;
+			case 2:
+				System.out.print("[0 - to categories; 1 - * - selec project;]\n> ");
+				break;
+			case 3: 
+				System.out.print("[0 - to projects;]\n> ");
+				break;
+			default :
+				break;
 		}
 	}
 }

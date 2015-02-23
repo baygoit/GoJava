@@ -1,12 +1,13 @@
-package org.goJava2.kickstarter.model;
+package com.gojava2.kickstarter.model;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
-import org.goJava2.kickstarter.content.Quote;
 import org.junit.Before;
 import org.junit.Test;
+
+import com.gojava2.kickstarter.model.Quote;
 
 public class QuoteStorageTest {
 	

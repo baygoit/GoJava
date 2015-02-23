@@ -5,11 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.gojava2.kickstarter.content.Category;
-import com.gojava2.kickstarter.content.Project;
-import com.gojava2.kickstarter.controller.CategoryController;
-
-public class ProjectStorage implements Storage<Category> {
+public class ProjectStorage {
 	
 	private List<Project> projectsArt;
     private List<Project> projectsComics;
@@ -17,20 +13,7 @@ public class ProjectStorage implements Storage<Category> {
     private List<Project> projectsGames;
 	
 	private Map<Category, List<Project>> map;
-	
-	/**
-	 * The constructor for custom projects.
-	 * @param projects
-	 * @param map
-	 */
-	public ProjectStorage(List<Project> projects, Map<Category, List<Project>> map) {
-		projectsArt = projects;
-		this.map = map;
-	}
-	
-	/**
-	 * The constructor for Hard-coded projects.
-	 */
+
 	public ProjectStorage() {
 		projectsArt = new ArrayList<Project>();
 		projectsComics = new ArrayList<Project>();
@@ -66,15 +49,18 @@ public class ProjectStorage implements Storage<Category> {
 	
 	private void putProjectsToMap() {
 		map = new HashMap<Category, List<Project>>();
-		CategoryController c = new CategoryController();
-		map.put(c.getSpecificContent(0), projectsArt);
-		map.put(c.getSpecificContent(1), projectsComics);
-		map.put(c.getSpecificContent(2), projectsDance);
-		map.put(c.getSpecificContent(3), projectsGames);	
+		CategoryStorage categoryStorage = new CategoryStorage();
+		map.put((Category) categoryStorage.getContent().toArray()[0], projectsArt);
+		map.put((Category) categoryStorage.getContent().toArray()[1], projectsComics);
+		map.put((Category) categoryStorage.getContent().toArray()[2], projectsDance);
+		map.put((Category) categoryStorage.getContent().toArray()[3], projectsGames);	
 	}
 	
-	@Override
 	public Map<Category, List<Project>> getContent() {
 		return map;
+	}
+	
+	public List<Project> getSpecificProjects(Category category) {
+		return map.get(category);
 	}
 }

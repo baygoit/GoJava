@@ -2,15 +2,10 @@ package com.gojava2.kickstarter.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.gojava2.kickstarter.content.Quote;
-
-public class QuoteStorage implements Storage<Integer> {
+public class QuoteStorage {
 	
 	private List<Quote> listOfQuotes;
-	
-	/**
-	 * The constructor for Hard-coded quotes.
-	 */
+
 	public QuoteStorage() {
 		listOfQuotes = new ArrayList<Quote>();
 		listOfQuotes.add(new Quote("Sometimes when you innovate, you make mistakes."
@@ -22,42 +17,17 @@ public class QuoteStorage implements Storage<Integer> {
 		listOfQuotes.add(new Quote("When you're curious, you find lots of interesting things to do.", "Walt Disney"));
 	}
 	
-	/**
-	 * The constructor for custom quotes.
-	 * @param listOfQuotes
-	 */
-	public QuoteStorage(List<Quote> listOfQuotes) {
-		this.listOfQuotes = listOfQuotes;
-	}
-	
-	@Override
 	public List<Quote> getContent() {
 		return listOfQuotes;
 	}
 	
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result
-				+ ((listOfQuotes == null) ? 0 : listOfQuotes.hashCode());
-		return result;
+	public Quote getRandomQuote() {
+		int randomInex = (int)(Math.random() * listOfQuotes.size());
+        return listOfQuotes.get((randomInex));
 	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		QuoteStorage other = (QuoteStorage) obj;
-		if (listOfQuotes == null) {
-			if (other.listOfQuotes != null)
-				return false;
-		} else if (!listOfQuotes.equals(other.listOfQuotes))
-			return false;
-		return true;
+	
+	public static void main(String[] args) {
+		QuoteStorage s = new QuoteStorage();
+		System.out.println(s.getRandomQuote().getContent());
 	}
 }
