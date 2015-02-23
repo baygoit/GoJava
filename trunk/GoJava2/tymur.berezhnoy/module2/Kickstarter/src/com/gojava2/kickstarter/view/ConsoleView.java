@@ -18,11 +18,11 @@ public class ConsoleView {
 	}
 	
 	public void display(Quote quote) {
-		StringBuilder stringBuilder = new StringBuilder();
+		StringBuilder result = new StringBuilder();
 		
-		stringBuilder.append("\"").append(quote.getContent()).append("\"")
+		result.append("\"").append(quote.getContent()).append("\"")
 					 .append(quote.getCopyrightSymbol()).append(" ").append(quote.getAuthor());
-		out.println(stringBuilder);
+		out.println(result);
 	}
 	
 	public void display(Set<Category> categories) {
@@ -37,25 +37,25 @@ public class ConsoleView {
 	}
 	
 	public void display(List<Project> projects) {
-		StringBuilder shortInfo;
+		StringBuilder result;
 
 		for (int i = 0; i < projects.size(); i++) {
-			shortInfo = new StringBuilder();
-			shortInfo.append(i + 1).append(") ").append(projects.get(i).getName())
+			result = new StringBuilder();
+			result.append(i + 1).append(") ").append(projects.get(i).getName())
 					 .append("\nDescription: ").append(projects.get(i).getDescription())
 					 .append("\nRequired amount: ").append(projects.get(i).getRequiredAmount()).append(projects.get(i).getSymbolDollar())
 					 .append("\nTotal: ").append(projects.get(i).getTotal()).append(projects.get(i).getSymbolDollar())
 					 .append("\nDays left: ").append(projects.get(i).getDays());
-			out.println(shortInfo + "\n------------------------------------");
+			out.println(result + "\n------------------------------------");
 		}
 	}
 	
 	public void display(Project project) {
 		
-		StringBuilder fullInfo = new StringBuilder();
+		StringBuilder result = new StringBuilder();
 		out.print("\n------------------------------------");
 		
-		fullInfo.append("\nName: ").append(project.getName())
+		result.append("\nName: ").append(project.getName())
 				.append("\nDescription: ").append(project.getDescription())
 				.append("\nRequired amount: ").append(project.getRequiredAmount()).append(project.getSymbolDollar())
 				.append("\nTotal: ").append(project.getTotal()).append(project.getSymbolDollar())
@@ -64,19 +64,19 @@ public class ConsoleView {
 				.append("\nStory: ").append(project.getStory())
 				.append("\nLink to video: ").append(project.getLink());
 		
-		out.println(fullInfo + "\n------------------------------------");
+		out.println(result + "\n------------------------------------");
 	}
 	
 	public void display(int level) {
 		switch(level) {
 			case 1: 
-				System.out.print("[0 - exit; 1 - * - selec category;]\n> ");
+				out.print("[0 - exit; 1 - * - selec category;]\n> ");
 				break;
 			case 2:
-				System.out.print("[0 - to categories; 1 - * - selec project;]\n> ");
+				out.print("[0 - to categories; 1 - * - selec project;]\n> ");
 				break;
 			case 3: 
-				System.out.print("[0 - to projects;]\n> ");
+				out.print("[0 - to projects;]\n> ");
 				break;
 			default :
 				break;
