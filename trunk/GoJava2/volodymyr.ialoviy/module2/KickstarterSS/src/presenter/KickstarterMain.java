@@ -18,7 +18,7 @@ public class KickstarterMain {
     	Projects projects = new ProjectsFromDB();
     	View view = new View(out);
     	
-    	KickstarterS run = new KickstarterS(in, categories, projects, view);
+    	Presenter run = new Presenter(in, categories, projects, view);
     	run.kickstarter();
     }
 }

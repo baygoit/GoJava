@@ -10,7 +10,7 @@ import view.Inputs;
 //import view.Output;
 
 
-public class KickstarterS {
+public class Presenter {
 	private int menuCategories = 222;
 	private int menuProjects = 333;
 	private int menuProject = 444;
@@ -29,7 +29,7 @@ public class KickstarterS {
 	
 	private View view;
 
-	public KickstarterS(Inputs in, Categories categories, Projects projects, View view) {
+	public Presenter(Inputs in, Categories categories, Projects projects, View view) {
 		this.in = in;
 		this.categories = categories;
 		this.projects = projects;

@@ -14,12 +14,12 @@ import model.ProjectsFromDB;
 
 import org.junit.Test;
 
-import presenter.KickstarterS;
+import presenter.Presenter;
 import view.InputsConsole;
 import view.OutputConsole;
 import view.View;
 
-public class TestKickstarterS {
+public class TestPresenter {
 	class FakeInputsConsole extends InputsConsole{
 		private List<String> strings;
 		
@@ -55,7 +55,7 @@ public class TestKickstarterS {
     public void testKickstarterS(){
 		FakeInputsConsole fake = new FakeInputsConsole("1", "0", "0", "-3", "po", "1", "333", "5", "3", "555", "0", "p", "popo", "1", "1111222233334444", "14", "999");
 
-		KickstarterS kickstarter = new KickstarterS(fake, categories, projects, view);
+		Presenter kickstarter = new Presenter(fake, categories, projects, view);
 
 		kickstarter.kickstarter();
 
@@ -92,7 +92,7 @@ public class TestKickstarterS {
 	@Test
     public void testAddQuestion(){
 		FakeInputsConsole fake = new FakeInputsConsole("1", "1", "666", "ytyt rtrt", "999");
-		KickstarterS kickstarter = new KickstarterS(fake, categories, projects, view);
+		Presenter kickstarter = new Presenter(fake, categories, projects, view);
 
 		kickstarter.kickstarter();
 		
@@ -107,7 +107,7 @@ public class TestKickstarterS {
 	@Test
     public void testPayment(){
 		FakeInputsConsole fake = new FakeInputsConsole("1", "1", "555", "0", "name", "1111222233334444", "54", "555", "1", "name", "1111222233334444", "555", "2", "name", "1111222233334444", "555", "3", "name", "1111222233334444", "999");
-		KickstarterS kickstarter = new KickstarterS(fake, categories, projects, view);
+		Presenter kickstarter = new Presenter(fake, categories, projects, view);
 
 		kickstarter.kickstarter();
 		
@@ -144,7 +144,7 @@ public class TestKickstarterS {
 	@Test
     public void testBug(){
 		FakeInputsConsole fake = new FakeInputsConsole("0", "1", "1", "2", "555", "0", "name", "1111222233334444", "op", "-3", "2", "8", "999");
-		KickstarterS kickstarter = new KickstarterS(fake, categories, projects, view);
+		Presenter kickstarter = new Presenter(fake, categories, projects, view);
 
 		kickstarter.kickstarter();
 		
