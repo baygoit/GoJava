@@ -16,6 +16,7 @@ public class AnagramTest {
 	
 	private void testSentence(String expected, String actual) {
 		assertEquals(expected, anagram.getReversedSentence(actual));
+
 	}
 	
 	@Test
@@ -35,12 +36,12 @@ public class AnagramTest {
 	}
 	
 	@Test
-	public void should_yx_whenXY() {
+	public void should_yx_when_xy() {
 		testSentence("yx", "xy");
 	}
 	
 	@Test
-	public void should_symbolReversed_when_symbolBySpace() {
+	public void should_symbolsBySpace_when_symbolsBySpace() {
 		testSentence("x y", "x y");
 	}
 	
@@ -62,5 +63,10 @@ public class AnagramTest {
 	@Test
 	public void should_yxAnySpecialSymbol_when_xyAnySecialSymbol() {
 		testSentence("yx^#&^%", "xy^#&^%");
+	}
+	
+	@Test
+	public void should_reversedSentence_when_sentenceWitAnySpecialSymbols() {
+		testSentence("A rehtom hsaw swodniw, srood dna roolf!", "A mother wash windows, doors and floor!");
 	}
 }
