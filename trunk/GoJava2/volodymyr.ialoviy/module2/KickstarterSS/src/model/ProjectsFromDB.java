@@ -32,37 +32,26 @@ public class ProjectsFromDB implements Projects{
 	@Override
 	public String showProjectFull(int projectID) {
 		StringBuilder s = new StringBuilder();
-		Connection connection = null;
-        try {
-            Class.forName("org.postgresql.Driver");
-            connection = DriverManager.getConnection(JDBC_POSTGRESQL_PATH, NAME_DB, PASS_DB);
-            Statement statement = null;
-            statement = connection.createStatement();
-            ResultSet result = statement.executeQuery("SELECT * FROM projects WHERE id_project =" + projectID);
-            while (result.next()) {
-	            s.append("project ID = ").append(result.getString("id_project")).append("\n")
-					.append("project name: ").append(result.getString("name_project")).append("\n")
-					.append("short description: ").append(result.getString("short_description_project")).append("\n")
-					.append("full description: " ).append(result.getString("full_description_project")).append("\n")
-					.append("foto: ").append(result.getString("foto_project")).append("\n")
-					.append("link: ").append(result.getString("link_project")).append("\n")
-					.append("how much needed = ").append(result.getString("how_much_needed_project")).append("\n")
-					.append("how much collected = ").append(result.getString("how_much_collected_project")).append("\n")
-					.append("how much remaining = ").append(result.getString("how_much_remaining_project")).append("\n")
-					.append("days to go = ").append(Integer.toString(PeriodBetweenDates.periodJoda(result.getString("date_close_project")))).append("\n")
-					.append("faq = ").append(arrayListToString(getFaq(projectID))).toString();
-            }
-        } catch (Exception ex) {
-            Logger.getLogger(JDBCType.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            if (connection != null) {
-                try {
-                    connection.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(JDBCType.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        }
+		TemlateForMethodWithDB temp = new TemlateForMethodWithDB(){
+			@Override
+			void logic(Statement statement) throws SQLException {
+	            ResultSet result = statement.executeQuery("SELECT * FROM projects WHERE id_project =" + projectID);
+	            while (result.next()) {
+		            s.append("project ID = ").append(result.getString("id_project")).append("\n")
+						.append("project name: ").append(result.getString("name_project")).append("\n")
+						.append("short description: ").append(result.getString("short_description_project")).append("\n")
+						.append("full description: " ).append(result.getString("full_description_project")).append("\n")
+						.append("foto: ").append(result.getString("foto_project")).append("\n")
+						.append("link: ").append(result.getString("link_project")).append("\n")
+						.append("how much needed = ").append(result.getString("how_much_needed_project")).append("\n")
+						.append("how much collected = ").append(result.getString("how_much_collected_project")).append("\n")
+						.append("how much remaining = ").append(result.getString("how_much_remaining_project")).append("\n")
+						.append("days to go = ").append(Integer.toString(PeriodBetweenDates.periodJoda(result.getString("date_close_project")))).append("\n")
+						.append("faq = ").append(arrayListToString(getFaq(projectID))).toString();
+	            }
+			}
+		};
+        temp.templateWorkWithDB();
 		return s.toString();
 	}
 	

@@ -4,21 +4,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class CategoriesFromDB implements Categories{
 
-	public static void main(String[] args) {
-		CategoriesFromDB cat = new CategoriesFromDB();
-		Projects projects = new ProjectsFromFile();
-		System.out.println(cat.showAllCatecoriesInKickstarter());
-		System.out.println(cat.showAllProjectInCategory(1, projects));
-		System.out.println(cat.showCatecoryName(2));
-		System.out.println(Arrays.toString(cat.getKickCategories()));
-		System.out.println(Arrays.toString(cat.projectsThatAreContainedInTheCategory(1)));
-		
-	}
-	
 	@Override
 	public String showAllCatecoriesInKickstarter() {
 		StringBuilder s = new StringBuilder();

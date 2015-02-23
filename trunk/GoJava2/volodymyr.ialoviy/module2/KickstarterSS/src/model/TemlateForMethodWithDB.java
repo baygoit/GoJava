@@ -10,7 +10,7 @@ import java.util.logging.Logger;
 
 abstract class TemlateForMethodWithDB {
 
-	private static final String PASS_DB = "7575";//TODO delete duplicate with ATHER CLASS
+	private static final String PASS_DB = "7575";
 	private static final String NAME_DB = "postgres";
 	private static final String JDBC_POSTGRESQL_PATH = "jdbc:postgresql://127.0.0.1:5432/kickstarter";
 	
@@ -38,16 +38,5 @@ abstract class TemlateForMethodWithDB {
 	}
 
 	abstract void logic(Statement statement) throws SQLException;
-	
-//	abstract Object logic(Statement statement) throws SQLException {
-//		StringBuilder s = new StringBuilder();
-//		ResultSet result = statement.executeQuery("SELECT * FROM categories");
-//		while (result.next()) {
-//		    s.append(result.getInt("id_category"))
-//		    		.append(" ")
-//		    		.append(result.getString("name_category"))
-//		    		.append("\n").toString();
-//		}
-//		return s.substring(0, s.length() - 1);
-//	}
+
 }
