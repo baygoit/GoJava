@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import util.PeriodBetweenDates;
+
 public class ProjectsFromDB implements Projects{
 	
 	private static final String PASS_DB = "7575";//TODO delete duplicate with ATHER CLASS
@@ -18,16 +20,13 @@ public class ProjectsFromDB implements Projects{
 	
 	public static void main(String[] args) {
 		ProjectsFromDB proj = new ProjectsFromDB();
-		System.out.println(proj.showProjectFull(2));
+		System.out.println(proj.showProjectFull(3));
 
 		System.out.println(proj.showProjectInShort(5));
 				
 		proj.setDonation(1, 4);
 		
 		proj.addFAQ(1, "question1");
-		proj.addFAQ(2, "question2");
-		proj.addFAQ(1, "question3");
-		
 	}
 	
 	@Override
@@ -41,7 +40,7 @@ public class ProjectsFromDB implements Projects{
             statement = connection.createStatement();
             ResultSet result = statement.executeQuery("SELECT * FROM projects WHERE id_project =" + projectID);
             while (result.next()) {
-	            s.append("projectID = ").append(result.getString("id_project")).append("\n")
+	            s.append("project ID = ").append(result.getString("id_project")).append("\n")
 					.append("project name: ").append(result.getString("name_project")).append("\n")
 					.append("short description: ").append(result.getString("short_description_project")).append("\n")
 					.append("full description: " ).append(result.getString("full_description_project")).append("\n")
@@ -50,6 +49,7 @@ public class ProjectsFromDB implements Projects{
 					.append("how much needed = ").append(result.getString("how_much_needed_project")).append("\n")
 					.append("how much collected = ").append(result.getString("how_much_collected_project")).append("\n")
 					.append("how much remaining = ").append(result.getString("how_much_remaining_project")).append("\n")
+					.append("days to go = ").append(Integer.toString(PeriodBetweenDates.periodJoda(result.getString("date_close_project")))).append("\n")
 					.append("faq = ").append(arrayListToString(getFaq(projectID))).toString();
             }
         } catch (Exception ex) {

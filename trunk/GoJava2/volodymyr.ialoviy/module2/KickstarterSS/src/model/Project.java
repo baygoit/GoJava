@@ -13,6 +13,7 @@ public class Project{
 	private int howMuchCollected;
 	private int howMuchRemaining;
 	private ArrayList<String> faq;
+	private int daysLeft;
 	
 	public int getProjectID() {
 		return projectID;
@@ -96,5 +97,13 @@ public class Project{
 
 	public void addFaq(String question) {
 		this.faq.add(question);
+	}
+
+	public int getDaysLeft() {
+		return daysLeft;
+	}
+
+	public void setDaysLeft(int daysLeft) {
+		this.daysLeft = daysLeft;
 	}
 }

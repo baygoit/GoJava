@@ -1,4 +1,4 @@
-package model;
+package util;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -6,40 +6,23 @@ import java.util.Calendar;
 import java.util.Date;
 import org.joda.time.DateTime;
 import org.joda.time.Days;
-import org.joda.time.Period;
-import org.joda.time.PeriodType;
-import org.joda.time.format.PeriodFormat;
 
 public class PeriodBetweenDates {
-    public static void main(String[] args) {
-    	System.out.println(period("2015-02-25"));
-    	periodJoda("2015-02-25");
-    }
     
-	public static void periodJoda(String dateString){
+	public static int periodJoda(String dateString){
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		int days = 0;
 		try {
 			Date  endDate = format.parse(dateString);
-
 	    	DateTime start = new DateTime(new Date());
 	    	DateTime end = new DateTime(endDate);
-			
 	
 			Days d = Days.daysBetween(start, end);
-			int days = d.getDays();
-			
-			System.out.println("days = " + days);
-			
-			Period p = new Period(start, end, PeriodType.yearMonthDay());
-			
-			String sdsd = "" + p;
-			
-			System.out.println(PeriodFormat.getDefault().print(p));
-		
+			days = d.getDays();
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return days;
 	}
     
 	public static int period(String date){
