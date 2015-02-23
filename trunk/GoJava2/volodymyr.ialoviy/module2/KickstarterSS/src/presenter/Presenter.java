@@ -145,7 +145,7 @@ public class Presenter {
 	private void askCategory() {
 		String choice = in.enter();
 		if (InputChecker.checkNumber(categories.getKickCategories(), choice)){
-			chosenCategoryID = Integer.valueOf(choice);//TODO DELETE - 1
+			chosenCategoryID = Integer.valueOf(choice);
 		}
 		else {
 			view.printBug();
