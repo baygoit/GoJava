@@ -32,7 +32,7 @@ public class CategoriesFromFile implements Categories {
 	@Override
 	public String showAllProjectInCategory(int categoryId, Projects projects){
 		StringBuilder s = new StringBuilder();
-		Category category = getListCatecories().get(categoryId);
+		Category category = getListCatecories().get(categoryId - 1);
 		for (int j : category.getProjects()){
 			s.append(projects.showProjectInShort(j - 1)).append("\n").toString();
 		}
@@ -41,7 +41,7 @@ public class CategoriesFromFile implements Categories {
 	
 	@Override
 	public String showCatecoryName(int categoryId){
-		Category category = getListCatecories().get(categoryId);
+		Category category = getListCatecories().get(categoryId - 1);
 		return category.getCategoryName();
 	}
 	
@@ -56,7 +56,7 @@ public class CategoriesFromFile implements Categories {
 	
 	@Override
 	public int[] projectsThatAreContainedInTheCategory(int categoryId){
-		Category category = getListCatecories().get(categoryId);
+		Category category = getListCatecories().get(categoryId - 1);
 		return category.getProjects();
 	}
 	

@@ -39,7 +39,7 @@ public class KickstarterS {
 	public void kickstarter() {
 		Quotes quote = new QuotesFromDB();
 		view.printQuote(quote.getQuote());
-		
+        
 		categories();
 	}
 
@@ -53,7 +53,7 @@ public class KickstarterS {
 
 	private void projects() {
 		int[] optionVariant = { menuCategories };
-		view.printProjectsInCategory(categories.showCatecoryName(chosenCategoryID), categories.showAllProjectInCategory(chosenCategoryID, projects), menuCategories);
+		view.printProjectsInCategory(categories.showCatecoryName(chosenCategoryID), categories.showAllProjectInCategory(chosenCategoryID, projects), menuCategories);//TODO 3 METHOD
 		askProject(optionVariant);
 
 		if (elementInArray(optionVariant, chosenProject)) {

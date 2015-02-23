@@ -38,7 +38,7 @@ public class ProjectsFromFile implements Projects {
 	
 	@Override
 	public String showProjectFull(int numberProject){
-		Project project = listProject.get(numberProject);
+		Project project = listProject.get(numberProject - 1);
 		return new StringBuilder().append("projectID = ").append(project.getProjectID()).append("\n")
 						.append("projectName: ").append(project.getProjectName()).append("\n")
 						.append("shortDescription: ").append(project.getShortDescription()).append("\n")
