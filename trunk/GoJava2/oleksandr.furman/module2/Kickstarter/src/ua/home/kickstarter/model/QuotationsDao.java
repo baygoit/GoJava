@@ -17,7 +17,7 @@ public class QuotationsDao {
 		Quote quote = new Quote();
 		String sql = "SELECT * FROM quotations WHERE id = ?";
 		PreparedStatement stm = connection.prepareStatement(sql);
-		stm.setInt(1, index);
+		stm.setInt(1, index+1);
 		ResultSet rs = stm.executeQuery();
 		while (rs.next()) {
 			quote.setQuote(rs.getString("quote"));
