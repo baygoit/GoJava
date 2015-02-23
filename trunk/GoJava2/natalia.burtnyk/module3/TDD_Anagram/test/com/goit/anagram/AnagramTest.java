@@ -1,0 +1,66 @@
+package com.goit.anagram;
+
+import static org.junit.Assert.*;
+
+import org.junit.Before;
+import org.junit.Test;
+
+public class AnagramTest {
+	
+	private Anagram anagram;
+	
+	@Before
+	public void setUp() {
+		anagram = new Anagram();
+	}
+	
+	private void testSentence(String expected, String actual) {
+		assertEquals(expected, anagram.getReversedSentence(actual));
+	}
+	
+	@Test
+	public void should_empty_whenEmpty() {
+		testSentence("", "");
+	}
+	
+	@Test
+	public void should_space_whenSpace() {
+		testSentence(" ", " ");
+	}
+
+	
+	@Test
+	public void should_symbol_whenSymbol() {
+		testSentence("w", "w");
+	}
+	
+	@Test
+	public void should_yx_whenXY() {
+		testSentence("yx", "xy");
+	}
+	
+	@Test
+	public void should_symbolReversed_when_symbolBySpace() {
+		testSentence("x y", "x y");
+	}
+	
+	@Test
+	public void should_yx_wz_when_zw_xy() {
+		testSentence("wz yx", "zw xy");
+	}
+	
+	@Test
+	public void should_reversedWord_when_word() {
+		testSentence("elppa", "apple");	
+	}
+	
+	@Test
+	public void should_reversedWordCombination_when_wordCombination() {
+		testSentence("der elppa", "red apple");
+	}
+	
+	@Test
+	public void should_yxAnySpecialSymbol_when_xyAnySecialSymbol() {
+		testSentence("yx^#&^%", "xy^#&^%");
+	}
+}
