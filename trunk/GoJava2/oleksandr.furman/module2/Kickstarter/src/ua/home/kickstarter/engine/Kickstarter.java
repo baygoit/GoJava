@@ -23,21 +23,20 @@ public class Kickstarter {
 	private Project project;
 	private DaoFactory daoFactory;
 
-	public Kickstarter(ConsoleOutput consoleOutput, ConsoleInput consoleInput, Display display) {
-
+	public Kickstarter(ConsoleOutput consoleOutput, ConsoleInput consoleInput, Display display, DaoFactory daoFactory) {
 		this.consoleOutput = consoleOutput;
 		this.consoleInput = consoleInput;
 		this.display = display;
-		daoFactory = new DaoFactory();
+		this.daoFactory = daoFactory;
 	}
 
 	public void run() {
 		display.displayQuote(getRandomQuote());
-		display.displayCategories(getCategories());
 		menuLevel0();
 	}
 
 	public void menuLevel0() {
+		display.displayCategories(getCategories());
 		int input = consoleInput.nextIntIndex();
 		if (input > 0 && input <= getCategoriesSize()) {
 			display.displaySelectedCategoryName(getCategories().get(input - 1).getName());
@@ -61,12 +60,10 @@ public class Kickstarter {
 		try {
 			input = consoleInput.nextIntIndex();
 			if (input > 0) {
-
-				project = getProjects(categoryId).get(input - 1);
-				display.displaySpecificProject(getProjects(categoryId).get(input - 1));
+				project = getSpecificProjectFromDB(categoryId, input);
+				display.displaySpecificProject(project);
 				menuLevel3(categoryId, input);
 			} else if (input == 0) {
-				display.displayCategories(getCategories());
 				menuLevel0();
 			}
 		} catch (IndexOutOfBoundsException e) {
@@ -86,11 +83,10 @@ public class Kickstarter {
 			consoleInput.nextString();
 			consoleOutput.output("Введите сумму платежа: ");
 			int amount = consoleInput.nextIntIndex();
-			project = getProjects(categoryId).get(index - 1);
+			project = getSpecificProjectFromDB(categoryId, index);
 			project.addPayment(amount);
 			updateProject(project.getId(), "pledged", project.getPledged());
-
-			display.displaySpecificProject(getProjects(categoryId).get(index - 1));
+			display.displaySpecificProject(project);
 			menuLevel3(categoryId, index);
 		} else {
 			menuLevel3(categoryId, index);
@@ -139,6 +135,17 @@ public class Kickstarter {
 			e.printStackTrace();
 		}
 		return list;
+	}
+
+	public Project getSpecificProjectFromDB(int categoryId, int projectIndex) {
+		Project project = null;
+		try (Connection con = daoFactory.getConnection()) {
+			ProjectsDao projectsDao = daoFactory.getProjectsDao(con);
+			project = projectsDao.getProjectsByIdAndCategoryId(categoryId, projectIndex);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return project;
 	}
 
 	public void updateProject(int projectId, String columnName, int amount) {
