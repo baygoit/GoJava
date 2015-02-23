@@ -1,9 +1,12 @@
-package ua.com.goit.gojava.kickstarter;
+package ua.com.goit.gojava.kickstarter.in_memory_storage;
 
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
+import ua.com.goit.gojava.kickstarter.Category;
+import ua.com.goit.gojava.kickstarter.exceptions.IlligalInputException;
 
 public class InMemoryCategory implements Category {
 	
@@ -13,7 +16,7 @@ public class InMemoryCategory implements Category {
 	}
 
 	private String name;
-	private List<Project> projectCatalog = new ArrayList<>();
+	private List<InMemoryProject> projectCatalog = new ArrayList<>();
 
 	public InMemoryCategory(String name) {
 		this.name=name;
@@ -21,7 +24,7 @@ public class InMemoryCategory implements Category {
 		sb.deleteCharAt(name.length() - 1);
 		Random rand = new Random();
 		for (int i = 0; i < rand.nextInt(10) + 1; i++) {
-			Project project = new Project(sb.toString() + " " + (i + 1), i + 1);
+			InMemoryProject project = new InMemoryProject(sb.toString() + " " + (i + 1), i + 1);
 			projectCatalog.add(project);
 		}
 

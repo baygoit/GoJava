@@ -5,6 +5,10 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 
+import ua.com.goit.gojava.kickstarter.exceptions.IlligalInputException;
+import ua.com.goit.gojava.kickstarter.in_memory_storage.InMemoryCategory;
+import ua.com.goit.gojava.kickstarter.in_memory_storage.InMemoryCategoryCatalog;
+
 public class TestCategoryCatalog {
 	private Category cat;
 	private CategoryCatalog catalog;
@@ -18,7 +22,7 @@ public class TestCategoryCatalog {
 	public void expectCategory_WhenInputCategoryIndex(){
 		assertEquals(cat,catalog.getCategory(0));
 	}
-	@Test(expected = IndexOutOfBoundsException.class)
+	@Test(expected = IlligalInputException.class)
 	public void expectException_WhenCatalogIndexOutOfBounds(){
 		catalog.getCategory(-1);
 	}

@@ -1,5 +1,16 @@
 package ua.com.goit.gojava.kickstarter;
 
+import ua.com.goit.gojava.kickstarter.exceptions.IlligalInputException;
+import ua.com.goit.gojava.kickstarter.in_database_storage.InDBCatalog;
+import ua.com.goit.gojava.kickstarter.in_memory_storage.Project;
+import ua.com.goit.gojava.kickstarter.in_memory_storage.QuoteConteiner;
+import ua.com.goit.gojava.kickstarter.input_output.ConsolePrinter;
+import ua.com.goit.gojava.kickstarter.input_output.ConsoleReader;
+import ua.com.goit.gojava.kickstarter.input_output.Input;
+import ua.com.goit.gojava.kickstarter.input_output.Output;
+import ua.com.goit.gojava.kickstarter.input_output.Printer;
+import ua.com.goit.gojava.kickstarter.input_output.Reader;
+
 
 public class Controller {
 	private CategoryCatalog catalog;
@@ -40,7 +51,7 @@ public class Controller {
 			@Override
 			void ask() {
 				printer.showCategoryCatalog(catalog);
-				printer.print("select category (1-" + catalog.size() + " only)");
+				printer.print("select category (1-" + catalog.size() + " only) or 0 to exit");
 				
 			}
 		};
@@ -52,7 +63,7 @@ public class Controller {
 			Menu nextMenu(Object selected) {
 				Project project = (Project)selected;
 				printer.showProjectInfo(project);
-				printer.print("pres eny unmber to proceed");
+				printer.print("input eny unmber to return");
 				reader.readInt();
 				return null;
 			}
@@ -63,11 +74,11 @@ public class Controller {
 				try{
 					if (menu == -1)
 						return null;
-				project = category.getProject(menu);
+				project = category.getProject(menu-1);
 				}catch(IlligalInputException e){
 					ask(); 
 					menu = reader.readInt();
-                     Object selected = choose(menu-1);
+                     Object selected = choose(menu);
 				}
 				return project;
 			}

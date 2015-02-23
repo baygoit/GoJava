@@ -1,4 +1,4 @@
-package ua.com.goit.gojava.kickstarter;
+package ua.com.goit.gojava.kickstarter.in_memory_storage;
 
 
 import java.util.ArrayList;

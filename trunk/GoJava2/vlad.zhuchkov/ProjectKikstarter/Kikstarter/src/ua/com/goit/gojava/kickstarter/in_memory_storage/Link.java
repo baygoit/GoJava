@@ -1,4 +1,4 @@
-package ua.com.goit.gojava.kickstarter;
+package ua.com.goit.gojava.kickstarter.in_memory_storage;
 
 
 import java.io.Serializable;
@@ -10,8 +10,8 @@ public class Link implements Serializable {
 		return url;
 	}
 
-	public Link() {
-		url = "www.google.com";
+	public Link(String name) {
+		url = name;
 	}
 
 }

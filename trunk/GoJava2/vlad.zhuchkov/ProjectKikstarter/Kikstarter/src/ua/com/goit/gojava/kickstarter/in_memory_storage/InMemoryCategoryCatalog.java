@@ -1,10 +1,13 @@
-package ua.com.goit.gojava.kickstarter;
+package ua.com.goit.gojava.kickstarter.in_memory_storage;
 
 
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
+
+import ua.com.goit.gojava.kickstarter.Category;
+import ua.com.goit.gojava.kickstarter.CategoryCatalog;
 
 public class InMemoryCategoryCatalog implements CategoryCatalog{
 	private Set<Category> categoryCatalog = new LinkedHashSet<>();

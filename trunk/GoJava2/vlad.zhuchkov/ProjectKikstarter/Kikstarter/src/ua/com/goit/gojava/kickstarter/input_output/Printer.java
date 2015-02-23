@@ -1,8 +1,13 @@
-package ua.com.goit.gojava.kickstarter;
+package ua.com.goit.gojava.kickstarter.input_output;
 
 
 import java.util.List;
-//TODO Deal with that. implement SRP 
+
+import ua.com.goit.gojava.kickstarter.Category;
+import ua.com.goit.gojava.kickstarter.CategoryCatalog;
+import ua.com.goit.gojava.kickstarter.in_memory_storage.Project;
+import ua.com.goit.gojava.kickstarter.in_memory_storage.ProjectParameters;
+
 public class Printer {
 	Output out;
 

@@ -1,4 +1,4 @@
-package ua.com.goit.gojava.kickstarter;
+package ua.com.goit.gojava.kickstarter.in_file_storage;
 
 
 import java.io.BufferedReader;
@@ -19,6 +19,11 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
+
+import ua.com.goit.gojava.kickstarter.Category;
+import ua.com.goit.gojava.kickstarter.exceptions.IlligalInputException;
+import ua.com.goit.gojava.kickstarter.in_memory_storage.InMemoryProject;
+import ua.com.goit.gojava.kickstarter.in_memory_storage.Project;
 
 public class InFileCategory implements Category, Serializable {
 	private String name;
@@ -41,7 +46,7 @@ public class InFileCategory implements Category, Serializable {
 		Random rand = new Random();
 		for (int i = 0; i < rand.nextInt(10) + 1; i++) {
 			String projectName = sb.toString() + " " + (i + 1);
-			Project project = new Project(projectName,i+1);
+			Project project = new InMemoryProject(projectName,i+1);
 			fileWriter.println(projectName);
 			File file = new File(projectName);
 			projects.add(file);

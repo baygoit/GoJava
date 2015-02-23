@@ -1,16 +1,16 @@
-package ua.com.goit.gojava.kickstarter;
+package ua.com.goit.gojava.kickstarter.in_memory_storage;
 
 
 import java.io.Serializable;
 import java.util.Random;
 
-public class Project implements Serializable {
+public class InMemoryProject implements Serializable, Project {
 	private final int MAX_PROJECT_COST = 1_000_000;
 	private String name;
 	private String description;
 	private ProjectParameters param;
 
-	public Project(String name, int num) {
+	public InMemoryProject(String name, int num) {
 		param = new ProjectParameters();
 		Random rand = new Random();
 		this.name = name;
@@ -38,7 +38,7 @@ public class Project implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Project other = (Project) obj;
+		InMemoryProject other = (InMemoryProject) obj;
 		if (description == null) {
 			if (other.description != null)
 				return false;
@@ -52,17 +52,21 @@ public class Project implements Serializable {
 		return true;
 	}
 
+	@Override
 	public ProjectParameters getParameters() {
 		return param;
 	}
+	@Override
 	public void increaseAmount(int amount){
 		param.addAlreadyCollected(amount);
 	}
 
+	@Override
 	public String getName() {
 		return name;
 	}
 
+	@Override
 	public String getDescription() {
 		return description;
 	}

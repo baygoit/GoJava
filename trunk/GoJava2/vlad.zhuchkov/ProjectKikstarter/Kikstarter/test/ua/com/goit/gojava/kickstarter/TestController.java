@@ -3,8 +3,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import ua.com.goit.gojava.kickstarter.Controller;
-import ua.com.goit.gojava.kickstarter.Input;
-import ua.com.goit.gojava.kickstarter.Output;
+import ua.com.goit.gojava.kickstarter.input_output.Input;
+import ua.com.goit.gojava.kickstarter.input_output.Output;
 import static org.mockito.Mockito.*;
 
 public class TestController {

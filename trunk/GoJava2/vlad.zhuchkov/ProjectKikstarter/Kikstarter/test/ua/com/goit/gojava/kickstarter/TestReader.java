@@ -1,8 +1,8 @@
 package ua.com.goit.gojava.kickstarter;
 import org.junit.Test;
 
-import ua.com.goit.gojava.kickstarter.Input;
-import ua.com.goit.gojava.kickstarter.Reader;
+import ua.com.goit.gojava.kickstarter.input_output.Input;
+import ua.com.goit.gojava.kickstarter.input_output.Reader;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 public class TestReader  {

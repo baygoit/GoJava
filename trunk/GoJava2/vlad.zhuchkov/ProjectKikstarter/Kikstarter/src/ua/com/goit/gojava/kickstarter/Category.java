@@ -3,14 +3,17 @@ package ua.com.goit.gojava.kickstarter;
 
 import java.util.List;
 
+import ua.com.goit.gojava.kickstarter.exceptions.IlligalInputException;
+import ua.com.goit.gojava.kickstarter.in_memory_storage.Project;
+
 public interface Category {
 
-	public abstract String getName();
+	String getName();
 
-	public abstract List<String> getProjectCatalog();
+	List<String> getProjectCatalog();
 
-	public abstract Project getProject(int i) throws IlligalInputException;
+	Project getProject(int i) throws IlligalInputException;
 
-	public abstract int size();
+	int size();
 
 }
