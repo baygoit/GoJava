@@ -1,25 +1,30 @@
-package gojava;
+package gojava.InMemory;
 
-public class Description {
+import gojava.Interface.Description;
+
+public class InMemoryDescription implements Description{
 	private String title;
 	private String shortDescr;
 	private String projectStory;
 	private String link;
 	
-	public Description(){
+	public InMemoryDescription(String title){
+		this.title=title;
 		shortDescr = "this is a short description";
 		projectStory = "this is a very interesting project story";
 		link = "www.link.com";
 	}
 	
-	public void initTitle(String title){this.title=title;}
-
+	@Override
 	public String getTitle() {return title;}
 	
+	@Override
 	public String getShortDescr() {	return shortDescr;}
 		
+	@Override
 	public String getProjectStory() { return projectStory;}
 	
+	@Override
 	public String getLink() { return link;}
 
 }

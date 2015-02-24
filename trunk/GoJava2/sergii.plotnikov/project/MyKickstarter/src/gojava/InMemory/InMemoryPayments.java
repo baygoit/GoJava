@@ -1,21 +1,27 @@
-package gojava;
+package gojava.InMemory;
+
+import gojava.Payment;
+import gojava.Reward;
+import gojava.Interface.Payments;
 
 import java.util.LinkedList;
 import java.util.List;
 
-public class Payments {
+public class InMemoryPayments implements Payments {
 
 	private List <Payment> payments;
 	private List <Reward> rewards;
 	
-	public Payments(){
+	public InMemoryPayments(){
 		payments = new LinkedList<Payment>();
 		rewards = new LinkedList <Reward>();
 		fillRewards();
 	}
 	
+	@Override
 	public void makePayment(Payment p) { payments.add(p);}
 	
+	@Override
 	public String showRewards(){
 		String result="";
 		int num = 1;
@@ -37,5 +43,6 @@ public class Payments {
 
 	public Reward getReward(int i){	return rewards.get(i);}
 	
+	@Override
 	public int getRewardsLength() {	return rewards.size();}
 }

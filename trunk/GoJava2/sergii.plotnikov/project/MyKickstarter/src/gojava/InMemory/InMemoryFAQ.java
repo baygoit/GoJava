@@ -1,10 +1,13 @@
-package gojava;
+package gojava.InMemory;
+import gojava.Questions;
+import gojava.Interface.FAQ;
+
 import java.util.ArrayList;
 
-public class FAQ {
+public class InMemoryFAQ implements FAQ {
 	private ArrayList<Questions> faq;
 	
-	public FAQ(){
+	public InMemoryFAQ(){
 		faq = new ArrayList<Questions>();
 		for(int i = 0; i<3; i++){
 			Questions q = new Questions();
@@ -12,6 +15,7 @@ public class FAQ {
 		}
 	}
 	
+	@Override
 	public String showFAQ() {
 		String result ="";
 		for(int i = 0; i<faq.size(); i++){
@@ -23,6 +27,7 @@ public class FAQ {
 		return result;
 	}
 	
+	@Override
 	public void addQuestion(String q){ faq.add(new Questions(q));}
 	
 	public Questions getQuestion(int i){ return faq.get(i);}

@@ -1,4 +1,4 @@
-package gojava;
+package gojava.Interface;
 
 public interface IO {
 	public int input();

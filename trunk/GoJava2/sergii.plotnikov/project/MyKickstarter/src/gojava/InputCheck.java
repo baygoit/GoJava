@@ -1,5 +1,7 @@
 package gojava;
 
+import gojava.Interface.IO;
+
 import java.util.InputMismatchException;
 
 public class InputCheck {
@@ -23,26 +25,14 @@ public class InputCheck {
 			return menuInputCheck(length);
 		}
 	}
-	
-	public String stringInputCheck(){
-		String input = io.stringInput();
-		if (input.equals("")){
-			io.out("Wrong input!!!\nType again!");
-			return stringInputCheck();
-		}else if(input.equals("0")){
-			return "0";
-		}else{
-			return input;
-		}
-	}
 
-	public String cardInputCheck() {
+	public String stringInputCheck() {
 		String input = io.stringInput();
 		if(input.equals("0")){
 			return "0";
-		}else if (input.equals("")||input.length()<16){
-			io.out("Wrong card number!!!\nType again!");
-			return cardInputCheck();
+		}else if (input.equals("")){
+			io.out("Wrong input!!!\nType again!");
+			return stringInputCheck();
 		}else{
 			return input;
 		}

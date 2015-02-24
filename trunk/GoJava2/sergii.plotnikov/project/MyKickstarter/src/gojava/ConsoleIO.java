@@ -1,5 +1,7 @@
 package gojava;
 
+import gojava.Interface.IO;
+
 import java.util.Scanner;
 
 public class ConsoleIO implements IO{

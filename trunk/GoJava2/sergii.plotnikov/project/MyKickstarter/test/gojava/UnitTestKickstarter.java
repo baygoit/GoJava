@@ -1,57 +1,60 @@
  package gojava;
 
 import static org.junit.Assert.*;
+import gojava.InMemory.InMemoryCategories;
+import gojava.InMemory.InMemoryProject;
 
 import org.junit.*;
 
 public class UnitTestKickstarter {
 	ConsoleIO io = new ConsoleIO();
-	Categories categories = new Categories();
+	InMemoryCategories inMemoryCategories = new InMemoryCategories();
 	
 	@Test
 	public void shouldShowCategories_whenFilled(){
-		categories.fillCategories();		
-		assertEquals("1 - Sports\n2 - Music\n3 - Games\n0 - Go back\n", 
-				categories.showCategories());
+		inMemoryCategories.fillCategories();		
+		assertEquals("1 - Games\n2 - Music\n3 - Sports\n0 - Go back\n", 
+				inMemoryCategories.showCategories());
 	}
 	
 	@Test
 	public void shouldShowProjects_whenCategoryIsChosen() {
-		categories.fillCategories();		
+		inMemoryCategories.fillCategories();		
 		assertEquals("You have chosen Category Sports\n"+
 					"Choose a project:\n"+
-						"1 - Football\n"+
+						"1 - Basketball\n"+
 						"this is a short description\n"+
 						"Money needed: 10000; Money collected: 0\n"+
 						"Days left: 7\n"+
 						"--------------------------\n"+
-						"2 - Basketball\n"+
+						"2 - Football\n"+
 						"this is a short description\n"+
 						"Money needed: 10000; Money collected: 0\n"+
 						"Days left: 7\n"+
 						"--------------------------\n"+
 						"0 - Go back\n", 
-						categories.getCategory(0).showProjects());
+						inMemoryCategories.getCategory(2).showProjects());
 	}
 	
 	@Test
 	public void shouldShowProject_whenProjectIsChosen(){
-		categories.fillCategories();		
+		inMemoryCategories.fillCategories();		
+		InMemoryProject project=(InMemoryProject) inMemoryCategories.getCategory(2).getProject(1);
 		assertEquals("Football\n"+
 				"this is a short description\n"+
 				"Money needed: 10000; Money collected: 0\n"+
 				"Days left: 7\n"+
 				"this is a very interesting project story\n"+
 				"www.link.com\n"+
+				"Q: this is a question\n"+
+				"A: this is an answer\n"+
+				"Q: this is a question\n"+
+				"A: this is an answer\n"+
+				"Q: this is a question\n"+
+				"A: this is an answer\n"+
 				"--------------------------\n"+
-				"Q: this is a question\n"+
-				"A: this is an answer\n"+
-				"Q: this is a question\n"+
-				"A: this is an answer\n"+
-				"Q: this is a question\n"+
-				"A: this is an answer\n"+
 				"1 - Ask question\n2 - Invest\n0 - Go back\n", 
-				categories.getCategory(0).getProject(0).showProject());
+				project.showProject());
 	}	
 	
 	
