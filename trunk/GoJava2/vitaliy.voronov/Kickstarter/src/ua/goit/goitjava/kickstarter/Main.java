@@ -11,9 +11,9 @@ public class Main {
 		out.printQuote();
 		//out.menu();
 		
-		Category cat1 = new Category("Education");
-		Category cat2 = new Category("Finance");
-		Category cat3 = new Category("Game");
+		Category cat1 = new Category("Education",1);
+		Category cat2 = new Category("Finance",2);
+		Category cat3 = new Category("Game",3);
 		
 		
 		Categories cats1 = new Categories();

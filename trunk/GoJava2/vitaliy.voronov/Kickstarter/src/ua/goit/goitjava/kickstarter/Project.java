@@ -44,6 +44,30 @@ public class Project {
 		return daysBeforeEnd;
 	}
 
+	public void setName(String name) {
+		this.name = name;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	public void setNeedMoney(int needMoney) {
+		this.needMoney = needMoney;
+	}
+	public void setHaveMoney(int haveMoney) {
+		this.haveMoney = haveMoney;
+	}
+	public void setDaysBeforeEnd(int daysBeforeEnd) {
+		this.daysBeforeEnd = daysBeforeEnd;
+	}
+	public void setProjectHistory(String projectHistory) {
+		this.projectHistory = projectHistory;
+	}
+	public void setLinkToDemoVideo(String linkToDemoVideo) {
+		this.linkToDemoVideo = linkToDemoVideo;
+	}
+	public void setFaq(ArrayList<FAQ> faq) {
+		this.faq = faq;
+	}
 	public Category getCategory() {
 		return category;
 	}

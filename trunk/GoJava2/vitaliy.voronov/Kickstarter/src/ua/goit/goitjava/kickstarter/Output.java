@@ -2,6 +2,7 @@ package ua.goit.goitjava.kickstarter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class Output {
 	public void printQuote() {
@@ -16,6 +17,12 @@ public class Output {
 			x++;
 		}
 	}
+	
+	/*public void printArrayCategories(ArrayList<Category> list){
+		for (Category cat : list) {
+			System.out.println(cat.getId() + cat.getName());
+		}
+	}*/
 
 	/*public void menu() {
 		System.out
@@ -30,16 +37,24 @@ public class Output {
 		System.out.println("you chooce - " + choice);
 	}
 
-	public void printProject(ArrayList<Project> projects) {
+	public void printProject(List<Project> list) {
 		
 		int i = 0;
-		for (Project project : projects) {
+		for (Project project : list) {
 			i++;
 			System.out.println(i + ") " + project.getName() + "\n " + project.getDescription() + "\n We need - " 
 					+ project.getNeedMoney() + "$\n We have - " + project.getHaveMoney() + "$\n Time over - " + 
 					project.getDaysBeforeEnd() + " days");
 		}
 	}
+	
+	public void printProjectByCategoryFromDB(Project project){
+		System.out.println(") " + project.getName() + "\n " + project.getDescription() + "\n We need - " 
+				+ project.getNeedMoney() + "$\n We have - " + project.getHaveMoney() + "$\n Time over - " + 
+				project.getDaysBeforeEnd() + " days");
+		//TODO 
+	}
+	
 	public void printSelectProject(Project project2) {
 			System.out.println(project2.getName() + "\n " + project2.getDescription() + "\n We need - " 
 					+ project2.getNeedMoney() + "$\n We have - " + project2.getHaveMoney() + "$\n Time over - " + 
@@ -56,9 +71,19 @@ public class Output {
 		}
 	}
 	
-	public void print(ArrayList<Project> projects){
+	/*public void print(ArrayList<Project> projects){
 		
 		System.out.println(projects);
+	}
+	*/
+	public void printAllCategories(List<Category> list) {
+		for (Category cat : list) {
+			System.out.println(cat.getId() + cat.getName());
+		}
+	}
+	
+	public void printSelectCategory(Category category){
+		System.out.println(category.getName());
 	}
 
 	/*
