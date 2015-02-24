@@ -1,3 +1,4 @@
+package com.kickstarter.model;
 public class Сategory {
 	
     private String name;

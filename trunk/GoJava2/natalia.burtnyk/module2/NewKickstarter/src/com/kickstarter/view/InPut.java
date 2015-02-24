@@ -1,3 +1,4 @@
+package com.kickstarter.view;
 import java.util.Scanner;
 
 public class InPut {
