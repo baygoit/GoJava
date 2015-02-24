@@ -1,6 +1,5 @@
 package com.gojava2.kickstarter.controller;
 
-import com.gojava2.kickstarter.model.Category;
 import com.gojava2.kickstarter.model.CategoryStorageInVM;
 import com.gojava2.kickstarter.model.ProjectStorageInVM;
 import com.gojava2.kickstarter.model.Quote;
@@ -24,16 +23,6 @@ public class Kickstarter {
 		quoteStorage.addQuote(new Quote("If there is anything that a man can do well,\n I say let him do it. Give him a chance.", "Abraham Lincoln"));
 		quoteStorage.addQuote(new Quote("Great leaders, like Steve Jobs or Jeff Bezos, also focused on the long term.", "Reed Hastings"));
 		quoteStorage.addQuote(new Quote("When you're curious, you find lots of interesting things to do.", "Walt Disney"));
-		
-		Category category1 = new Category("Art");
-		Category category2 = new Category("Comics");
-		Category category3 = new Category("Dance");
-		Category category4 = new Category("Games");
-		
-		categoryStorage.addCategory(category1);
-		categoryStorage.addCategory(category2);
-		categoryStorage.addCategory(category3);
-		categoryStorage.addCategory(category4);
 		
 		KickstarterController engine = new KickstarterController(quoteStorage, categoryStorage,
 																new ProjectStorageInVM(), new ConsoleView());

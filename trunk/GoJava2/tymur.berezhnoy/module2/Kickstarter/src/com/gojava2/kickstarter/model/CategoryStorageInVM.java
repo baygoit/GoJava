@@ -9,6 +9,10 @@ public class CategoryStorageInVM {
 	
 	public CategoryStorageInVM() {
 		categories = new LinkedHashSet<Category>();
+		categories.add(new Category("Art"));
+		categories.add(new Category("Games"));
+		categories.add(new Category("Comics"));
+		categories.add(new Category("Dance"));
 	}
 	
 	public Set<Category> getCategories() {
