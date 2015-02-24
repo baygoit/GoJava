@@ -67,7 +67,7 @@ public class ConsoleView {
 		out.println(result + "\n------------------------------------");
 	}
 	
-	public void display(int level) {
+	public void displaySelectOption(int level) {
 		switch(level) {
 			case 1: 
 				out.print("[0 - exit; 1 - * - selec category;]\n> ");

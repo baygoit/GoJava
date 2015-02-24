@@ -3,40 +3,39 @@ package com.gojava2.kickstarter.controller;
 import java.util.List;
 
 import com.gojava2.kickstarter.model.Category;
-import com.gojava2.kickstarter.model.CategoryStorage;
+import com.gojava2.kickstarter.model.CategoryStorageInVM;
 import com.gojava2.kickstarter.model.Project;
-import com.gojava2.kickstarter.model.ProjectStorage;
-import com.gojava2.kickstarter.model.QuoteStorage;
+import com.gojava2.kickstarter.model.ProjectStorageInVM;
+import com.gojava2.kickstarter.model.QuoteStorageInVM;
 import com.gojava2.kickstarter.view.ConsoleInput;
 import com.gojava2.kickstarter.view.ConsoleView;
 
 public class KickstarterController {
 	
-	private List<Project> projects;
-	
-	private QuoteStorage quoteStorage;
-	private CategoryStorage categoryStorage;
-	private ProjectStorage projectStorage;
+	private QuoteStorageInVM quoteStorage;
+	private CategoryStorageInVM categoryStorage;
+	private ProjectStorageInVM projectStorage;
 	
 	private	ConsoleView consoleView;
+	private ConsoleInput consoleInput;
 	
-	private ConsoleInput consoleInput = new ConsoleInput();
-	public KickstarterController(QuoteStorage quoteStorage, CategoryStorage categoryStorage,
-								ProjectStorage projectStorage, ConsoleView consoleView) {
+	public KickstarterController(QuoteStorageInVM quoteStorage, CategoryStorageInVM categoryStorage,
+								ProjectStorageInVM projectStorage, ConsoleView consoleView) {
 		this.quoteStorage = quoteStorage;
 		this.categoryStorage = categoryStorage;
 		this.projectStorage = projectStorage;
-		this.consoleView = consoleView; 
+		this.consoleView = consoleView;
+		consoleInput = new ConsoleInput();
 	}
 	
 	public void selectCategory() {
-		consoleView.display(1);
+		consoleView.displaySelectOption(1);
 		int input = consoleInput.choice();
-		int amountCategory = categoryStorage.getContent().size();
+		int amountCategory = categoryStorage.getCategories().size();
 		if(input > 0 && input <= amountCategory) {
-			projects = projectStorage.getSpecificProjects((Category) categoryStorage.getContent().toArray()[input - 1]);
+			List<Project> projects = projectStorage.getSpecificProjects((Category) categoryStorage.getCategories().toArray()[input - 1]);
 			consoleView.display(projects);
-			selectProject();
+			selectProject(projects);
 			selectCategory();
 		} else if(input == 0) {
 			System.out.print("- App closed");
@@ -46,25 +45,25 @@ public class KickstarterController {
 		}
 	}
 	
-	public void selectProject() {
-		consoleView.display(2);
+	public void selectProject(List<Project> projects) {
+		consoleView.displaySelectOption(2);
 		int input = consoleInput.choice();
 		
 		if(input > 0) {
 			consoleView.display(projects.get(input - 1));
-			backToProjects();
-			selectProject();
+			backToProjects(projects);
+			selectProject(projects);
 		} else if (input == 0) {
-			consoleView.display(categoryStorage.getContent());
+			consoleView.display(categoryStorage.getCategories());
 		}
 	}
 	
-	public void backToProjects() {
-		consoleView.display(3); 
+	public void backToProjects(List<Project> projects) {
+		consoleView.displaySelectOption(3); 
 		if(consoleInput.choice() == 0) {
 			consoleView.display(projects);
 		} else {
-			backToProjects();
+			backToProjects(projects);
 		}
 	}
 	
@@ -72,7 +71,7 @@ public class KickstarterController {
 		consoleView.displayTitle();
 		consoleView.display(quoteStorage.getRandomQuote());
 		
-		consoleView.display(categoryStorage.getContent());
+		consoleView.display(categoryStorage.getCategories());
 		
 		selectCategory();
 	}

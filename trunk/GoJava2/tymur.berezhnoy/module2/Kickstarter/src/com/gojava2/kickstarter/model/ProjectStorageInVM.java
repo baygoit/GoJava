@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ProjectStorage {
+public class ProjectStorageInVM {
 	
 	private List<Project> projectsArt;
     private List<Project> projectsComics;
@@ -14,7 +14,7 @@ public class ProjectStorage {
 	
 	private Map<Category, List<Project>> map;
 
-	public ProjectStorage() {
+	public ProjectStorageInVM() {
 		projectsArt = new ArrayList<Project>();
 		projectsComics = new ArrayList<Project>();
 		projectsDance = new ArrayList<Project>();
@@ -49,11 +49,11 @@ public class ProjectStorage {
 	
 	private void putProjectsToMap() {
 		map = new HashMap<Category, List<Project>>();
-		CategoryStorage categoryStorage = new CategoryStorage();
-		map.put((Category) categoryStorage.getContent().toArray()[0], projectsArt);
-		map.put((Category) categoryStorage.getContent().toArray()[1], projectsComics);
-		map.put((Category) categoryStorage.getContent().toArray()[2], projectsDance);
-		map.put((Category) categoryStorage.getContent().toArray()[3], projectsGames);	
+		CategoryStorageInVM categoryStorage = new CategoryStorageInVM();
+		map.put((Category) categoryStorage.getCategories().toArray()[0], projectsArt);
+		map.put((Category) categoryStorage.getCategories().toArray()[1], projectsComics);
+		map.put((Category) categoryStorage.getCategories().toArray()[2], projectsDance);
+		map.put((Category) categoryStorage.getCategories().toArray()[3], projectsGames);	
 	}
 	
 	public Map<Category, List<Project>> getContent() {

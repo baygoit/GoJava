@@ -3,11 +3,11 @@ package com.gojava2.kickstarter.model;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-public class CategoryStorage {
+public class CategoryStorageInVM {
 
 	private Set<Category> categories;
 	
-	public CategoryStorage() {
+	public CategoryStorageInVM() {
 		categories = new LinkedHashSet<Category>();
 		categories.add(new Category("Art"));
 		categories.add(new Category("Comics"));
@@ -15,7 +15,7 @@ public class CategoryStorage {
 		categories.add(new Category("Games"));
 	}
 	
-	public Set<Category> getContent() {
+	public Set<Category> getCategories() {
 		return categories;
 	}
 }
