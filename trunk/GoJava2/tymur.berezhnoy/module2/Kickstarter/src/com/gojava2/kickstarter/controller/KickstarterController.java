@@ -16,7 +16,7 @@ public class KickstarterController {
 	private CategoryStorageInVM categoryStorage;
 	private ProjectStorageInVM projectStorage;
 	
-	private	ConsoleView consoleView;
+	private	ConsoleView view;
 	private ConsoleInput consoleInput;
 	
 	public KickstarterController(QuoteStorageInVM quoteStorage, CategoryStorageInVM categoryStorage,
@@ -24,17 +24,17 @@ public class KickstarterController {
 		this.quoteStorage = quoteStorage;
 		this.categoryStorage = categoryStorage;
 		this.projectStorage = projectStorage;
-		this.consoleView = consoleView;
+		this.view = consoleView;
 		consoleInput = new ConsoleInput();
 	}
 	
 	public void selectCategory() {
-		consoleView.displaySelectOption(1);
+		view.displaySelectOption(1);
 		int input = consoleInput.choice();
 		int amountCategory = categoryStorage.getCategories().size();
 		if(input > 0 && input <= amountCategory) {
 			List<Project> projects = projectStorage.getSpecificProjects((Category) categoryStorage.getCategories().toArray()[input - 1]);
-			consoleView.display(projects);
+			view.display(projects);
 			selectProject(projects);
 			selectCategory();
 		} else if(input == 0) {
@@ -46,32 +46,31 @@ public class KickstarterController {
 	}
 	
 	public void selectProject(List<Project> projects) {
-		consoleView.displaySelectOption(2);
+		view.displaySelectOption(2);
 		int input = consoleInput.choice();
 		
 		if(input > 0) {
-			consoleView.display(projects.get(input - 1));
+			view.display(projects.get(input - 1));
 			backToProjects(projects);
 			selectProject(projects);
 		} else if (input == 0) {
-			consoleView.display(categoryStorage.getCategories());
+			view.display(categoryStorage.getCategories());
 		}
 	}
 	
 	public void backToProjects(List<Project> projects) {
-		consoleView.displaySelectOption(3); 
+		view.displaySelectOption(3); 
 		if(consoleInput.choice() == 0) {
-			consoleView.display(projects);
+			view.display(projects);
 		} else {
 			backToProjects(projects);
 		}
 	}
 	
 	public void run() {
-		consoleView.displayTitle();
-		consoleView.display(quoteStorage.getRandomQuote());
-		
-		consoleView.display(categoryStorage.getCategories());
+		view.displayTitle();
+		view.display(quoteStorage.getRandomQuote());
+		view.display(categoryStorage.getCategories());
 		
 		selectCategory();
 	}

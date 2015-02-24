@@ -1,7 +1,5 @@
 package com.gojava2.kickstarter.view;
 
-import static java.lang.System.out;
-
 import java.util.List;
 import java.util.Set;
 
@@ -14,7 +12,7 @@ public class ConsoleView {
 	private final String TITLE = "*** Super kickstarter ***";
 
 	public void displayTitle() {
-		out.println("\t" + TITLE);
+		System.out.println("\t" + TITLE);
 	}
 	
 	public void display(Quote quote) {
@@ -22,18 +20,18 @@ public class ConsoleView {
 		
 		result.append("\"").append(quote.getContent()).append("\"")
 					 .append(quote.getCopyrightSymbol()).append(" ").append(quote.getAuthor());
-		out.println(result);
+		System.out.println(result);
 	}
 	
 	public void display(Set<Category> categories) {
-		out.println("\n" + "------------------------------------\nID Name");
+		System.out.println("\n" + "------------------------------------\nID Name");
 		
 		int i = 1;
 		for (Category category : categories) {
-			out.println(i + ") " + category.getName());
+			System.out.println(i + ") " + category.getName());
 			i++;
 		}
-		out.println("------------------------------------");
+		System.out.println("------------------------------------");
 	}
 	
 	public void display(List<Project> projects) {
@@ -46,14 +44,14 @@ public class ConsoleView {
 					 .append("\nRequired amount: ").append(projects.get(i).getRequiredAmount()).append(projects.get(i).getSymbolDollar())
 					 .append("\nTotal: ").append(projects.get(i).getTotal()).append(projects.get(i).getSymbolDollar())
 					 .append("\nDays left: ").append(projects.get(i).getDays());
-			out.println(result + "\n------------------------------------");
+			System.out.println(result + "\n------------------------------------");
 		}
 	}
 	
 	public void display(Project project) {
 		
 		StringBuilder result = new StringBuilder();
-		out.print("\n------------------------------------");
+		System.out.print("\n------------------------------------");
 		
 		result.append("\nName: ").append(project.getName())
 				.append("\nDescription: ").append(project.getDescription())
@@ -64,19 +62,19 @@ public class ConsoleView {
 				.append("\nStory: ").append(project.getStory())
 				.append("\nLink to video: ").append(project.getLink());
 		
-		out.println(result + "\n------------------------------------");
+		System.out.println(result + "\n------------------------------------");
 	}
 	
 	public void displaySelectOption(int level) {
 		switch(level) {
 			case 1: 
-				out.print("[0 - exit; 1 - * - selec category;]\n> ");
+				System.out.print("[0 - exit; 1 - * - selec category;]\n> ");
 				break;
 			case 2:
-				out.print("[0 - to categories; 1 - * - selec project;]\n> ");
+				System.out.print("[0 - to categories; 1 - * - selec project;]\n> ");
 				break;
 			case 3: 
-				out.print("[0 - to projects;]\n> ");
+				System.out.print("[0 - to projects;]\n> ");
 				break;
 			default :
 				break;
