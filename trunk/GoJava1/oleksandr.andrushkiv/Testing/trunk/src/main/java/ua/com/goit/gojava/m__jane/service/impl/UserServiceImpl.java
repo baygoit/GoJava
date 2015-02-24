@@ -1,10 +1,14 @@
 package ua.com.goit.gojava.m__jane.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.xml.bind.JAXBException;
 
 import ua.com.goit.gojava.m__jane.exceptions.TestingServiceException;
+import ua.com.goit.gojava.m__jane.model.Profile;
+import ua.com.goit.gojava.m__jane.model.Quiz;
 import ua.com.goit.gojava.m__jane.model.User;
 import ua.com.goit.gojava.m__jane.service.UserService;
 import ua.com.goit.gojava.m__jane.utils.DataBuilder;
@@ -36,6 +40,16 @@ public class UserServiceImpl implements UserService {
 		}
 		
 		return null;
+	}
+
+	@Override
+	public Map<Profile, List<Quiz>> getUserDetailsMap(User user) {
+		Map<Profile, List<Quiz>> userDetails = new HashMap<>();
+		for (Profile profile : user.getProfileList()) {
+			userDetails.put(profile, profile.getQuizList());					
+		}
+				
+		return userDetails;
 	}
 
 }

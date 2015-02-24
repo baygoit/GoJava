@@ -29,4 +29,14 @@
     <servlet-name>IndexPage</servlet-name>
     <url-pattern>/indexPage</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Quizer</display-name>
+    <servlet-name>Quizer</servlet-name>
+    <servlet-class>ua.com.goit.gojava.m__jane.controllers.Quizer</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Quizer</servlet-name>
+    <url-pattern>/Quizer</url-pattern>
+  </servlet-mapping>
 </web-app>

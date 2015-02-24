@@ -33,22 +33,22 @@ function validate() {
 		<table>
 			<tr>
 				<td><label for="loginId">Login: </label></td>
-				<td><input type="text" name="login" id="loginId" size="25"/><span style="color:red" id="loginf"></span></td>
+				<td><input type="text" name="login" id="loginId" size="25" value="user1"/><span style="color:red" id="loginf"></span></td>
 			</tr>
 
 			<tr>
 				<td><label for="passwordId">Password: </label></td>
-				<td><input type="password" name="password" id="passwordId" size="25"/><span style="color:red" id="passwordf"></span></td>
+				<td><input type="password" name="password" id="passwordId" size="25" value="1"/><span style="color:red" id="passwordf"></span></td>
 			</tr>
 
 		</table>
 		<input type="submit" value="enter">
 	</form>
 
-<%-- <c:set var="msg" value="(String)request.getAttribute("UserNotFound")"/>
-<c:if test="${msg != null}">
-   <c:out value="${msg}"/>
-</c:if> --%>
+	<br />
+	<div style="color: red">
+		<c:out value="${requestScope.userNotFound}" />
+	</div>
 
 </body>
 </html>

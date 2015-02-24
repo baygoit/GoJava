@@ -29,11 +29,10 @@ public class IndexPage extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+
 		try {
 			UserService userService = new UserServiceImpl();
-			
-			
+						
 			String paramLogin = request.getParameter("login");
 			String paramPassw = request.getParameter("password");
 
@@ -43,18 +42,17 @@ public class IndexPage extends HttpServlet {
 			
 			
 			User user = userService.checkUser(paramLogin, paramPassw);
-			if (user==null) {
-				request.setAttribute("UserNotFound", "User not found! Enter again correctly!");
-				getServletContext().getRequestDispatcher("/index.jsp").forward(
+			if (user!=null) {
+				
+				request.setAttribute("userDetailsMap", userService.getUserDetailsMap(user));
+				getServletContext().getRequestDispatcher("/userQuizzes.jsp").forward(
 						request, response);
 			}else {
-				
+				request.setAttribute("userNotFound", "User not found! Enter again correctly!");
+				getServletContext().getRequestDispatcher("/index.jsp").forward(
+						request, response);
 			}
 		
-			//request.setAttribute("quizList", profile.getQuizList());
-			
-//			getServletContext().getRequestDispatcher("/profiles.jsp").forward(
-//					request, response);
 
 		} catch (TestingServiceException e) {
 			request.setAttribute("errorDiscription", e.getMessage());
