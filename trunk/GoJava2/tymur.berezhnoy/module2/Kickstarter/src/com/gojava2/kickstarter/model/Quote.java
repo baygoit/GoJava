@@ -5,7 +5,7 @@ public class Quote {
 	private String author;
 	private String content;
 	
-	private final char copyrightSymbol = 169;
+	private final char COPIRIGHT_SYMBOL = 169;
 	
 	public Quote(String content, String author) {
 		this.content = content;
@@ -29,6 +29,6 @@ public class Quote {
 	}
 
 	public char getCopyrightSymbol() {
-		return copyrightSymbol;
+		return COPIRIGHT_SYMBOL;
 	}
 }

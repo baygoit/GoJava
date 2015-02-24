@@ -30,7 +30,7 @@ public class Project {
 		return name;
 	}
 
-	public void setNewName(String name) {
+	public void setName(String name) {
 		this.name = name;
 	}
 
@@ -38,7 +38,7 @@ public class Project {
 		return description;
 	}
 
-	public void setNewDescription(String description) {
+	public void setDescription(String description) {
 		this.description = description;
 	}
 
@@ -46,7 +46,7 @@ public class Project {
 		return story;
 	}
 
-	public void setNewStory(String story) {
+	public void setStory(String story) {
 		this.story = story;
 	}
 
@@ -54,7 +54,7 @@ public class Project {
 		return link;
 	}
 
-	public void setNewLink(String link) {
+	public void setLink(String link) {
 		this.link = link;
 	}
 
@@ -62,7 +62,7 @@ public class Project {
 		return requiredAmount;
 	}
 
-	public void setNewRequiredAmount(int requiredAmount) {
+	public void setRequiredAmount(int requiredAmount) {
 		this.requiredAmount = requiredAmount;
 	}
 
@@ -70,7 +70,7 @@ public class Project {
 		return total;
 	}
 
-	public void setNewTotal(int total) {
+	public void setTotal(int total) {
 		this.total = total;
 	}
 
@@ -78,7 +78,7 @@ public class Project {
 		return days;
 	}
 
-	public void setNewDays(int days) {
+	public void setDays(int days) {
 		this.days = days;
 	}
 
@@ -86,7 +86,7 @@ public class Project {
 		return backers;
 	}
 
-	public void setNewBackers(int backers) {
+	public void setBackers(int backers) {
 		this.backers = backers;
 	}
 

@@ -9,13 +9,13 @@ public class CategoryStorageInVM {
 	
 	public CategoryStorageInVM() {
 		categories = new LinkedHashSet<Category>();
-		categories.add(new Category("Art"));
-		categories.add(new Category("Comics"));
-		categories.add(new Category("Dance"));
-		categories.add(new Category("Games"));
 	}
 	
 	public Set<Category> getCategories() {
 		return categories;
+	}
+	
+	public void addCategory(Category category) {
+		categories.add(category);
 	}
 }

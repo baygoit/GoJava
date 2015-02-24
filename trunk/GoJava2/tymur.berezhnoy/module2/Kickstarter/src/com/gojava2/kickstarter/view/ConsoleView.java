@@ -36,7 +36,6 @@ public class ConsoleView {
 	
 	public void display(List<Project> projects) {
 		StringBuilder result;
-
 		for (int i = 0; i < projects.size(); i++) {
 			result = new StringBuilder();
 			result.append(i + 1).append(") ").append(projects.get(i).getName())
@@ -49,10 +48,8 @@ public class ConsoleView {
 	}
 	
 	public void display(Project project) {
-		
 		StringBuilder result = new StringBuilder();
 		System.out.print("\n------------------------------------");
-		
 		result.append("\nName: ").append(project.getName())
 				.append("\nDescription: ").append(project.getDescription())
 				.append("\nRequired amount: ").append(project.getRequiredAmount()).append(project.getSymbolDollar())
