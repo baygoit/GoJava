@@ -11,11 +11,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/Controller")
-public class Controller extends HttpServlet {
+@WebServlet("/Creator")
+public class Creator extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	public Controller() {
+	public Creator() {
 		super();
 	}
 
@@ -35,7 +35,7 @@ public class Controller extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			
-			Streamer.write(request.getParameter("author") + " + " +	request.getParameter("text"));
+			Streamer.write(request.getParameter("author") + " " + request.getParameter("text"));
 			response.setContentType("text/html;charset=UTF-8");
 			PrintWriter out = response.getWriter();
 			out.println(request.getParameter("author") + " + "	+ request.getParameter("text"));

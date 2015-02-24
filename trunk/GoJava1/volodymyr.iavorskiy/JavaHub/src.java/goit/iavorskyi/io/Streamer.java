@@ -7,7 +7,8 @@ import java.io.FileWriter;
 
 public class Streamer {
 
-	private static String fileToWriteIn = "d:\\Articles.txt";
+	
+	private static String fileToWriteIn = "d:\\Article.txt";
 	
 	public static String read(String fileToRead) {
 		String result = "";

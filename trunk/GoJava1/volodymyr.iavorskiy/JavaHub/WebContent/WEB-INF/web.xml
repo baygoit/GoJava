@@ -9,15 +9,20 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
-  
-   <servlet>
-        <servlet-name>Controller</servlet-name>
-        <servlet-class>goit.iavorskyi.controller.Controller</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>Controller</servlet-name>
-        <url-pattern>/test</url-pattern>
-    </servlet-mapping>
-    
+  <servlet>
+    <servlet-name>Creator</servlet-name>
+    <servlet-class>goit.iavorskyi.controller.Creator</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Creator</servlet-name>
+    <url-pattern>/creator</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>Updater</servlet-name>
+    <servlet-class>goit.iavorskyi.controller.Updater</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Updater</servlet-name>
+    <url-pattern>/updater</url-pattern>
+  </servlet-mapping>
 </web-app>
