@@ -5,6 +5,5 @@ public class LocalCatalog extends AbstractCatalog {
     public LocalCatalog() {
         super();
     }
-    
 
 }

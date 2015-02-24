@@ -10,6 +10,14 @@ import ua.com.goit.gojava1.lslayer.hackit2.gear.hardware.Hardware;
 public abstract class AbstractCatalog implements Catalog {
 
 
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("Catalog [numberOfRegisteredClients=").append(numberOfRegisteredClients).append(", name=").append(name).append(", nodes=")
+               .append(nodes).append(", clients=").append(clients).append("]");
+        return builder.toString();
+    }
+
     private int numberOfRegisteredClients;
     private String name;
     private Set<Catalog> nodes = new HashSet<Catalog>();
