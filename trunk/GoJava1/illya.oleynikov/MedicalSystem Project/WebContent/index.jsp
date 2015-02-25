@@ -18,7 +18,7 @@
     </table>
     <p>
     <form action="CreateNew" method="GET">
-        <input id="specialization" name="specialization" type="text">
+        <input name="specialization" type="text">
         <input type="submit" value="Submit">
     </form>
     </p>

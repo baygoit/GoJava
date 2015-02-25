@@ -11,5 +11,8 @@
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/javax.servlet.jsp.jstl-1.2.1.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/javax.servlet.jsp.jstl-api-1.2.1.jar"/>
+	<classpathentry kind="lib" path="C:/Java/tomcat/webapps/examples/WEB-INF/lib/jstl.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
