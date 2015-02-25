@@ -2,10 +2,8 @@ package ua.com.sas.controller;
 
 import java.util.Random;
 
-import ua.com.sas.model.QuoteGenerator;
-import ua.com.sas.model.Storage;
-import ua.com.sas.view.ConsoleInput;
-import ua.com.sas.view.ConsoleOutput;
+import ua.com.sas.model.*;
+import ua.com.sas.view.*;
 
 public class KickstarterRunner {
 	

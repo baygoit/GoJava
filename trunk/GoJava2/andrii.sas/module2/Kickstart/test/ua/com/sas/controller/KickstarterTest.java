@@ -8,15 +8,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 
-import ua.com.sas.model.Categories;
-import ua.com.sas.model.Category;
-import ua.com.sas.model.InnerMemoryCategories;
-import ua.com.sas.model.InnerMemoryProjects;
-import ua.com.sas.model.Project;
-import ua.com.sas.model.Projects;
-import ua.com.sas.model.Quote;
-import ua.com.sas.view.Input;
-import ua.com.sas.view.Output;
+import ua.com.sas.model.*;
+import ua.com.sas.view.*;
 import static org.mockito.Mockito.*;
 
 public class KickstarterTest {
@@ -27,6 +20,8 @@ public class KickstarterTest {
 	private Projects projects;
 	private Quote quote;
 	private Kickstart kickstart;
+	private View view;
+	
 
 	@Before
 	public void setup(){
@@ -34,8 +29,9 @@ public class KickstarterTest {
 		in = mock(Input.class);
 		categories = new InnerMemoryCategories();
 		projects = new InnerMemoryProjects();
+		view = new View(out);
 		quote = mock(Quote.class);
-		kickstart = new Kickstart(out, in, categories, projects, quote);
+		kickstart = new Kickstart(view, in, categories, projects, quote);
 	}
 	
 	@Test

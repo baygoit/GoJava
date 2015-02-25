@@ -2,19 +2,14 @@ package ua.com.sas.controller;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Map.Entry;
 
-import ua.com.sas.model.Categories;
-import ua.com.sas.model.Category;
-import ua.com.sas.model.Project;
-import ua.com.sas.model.Projects;
-import ua.com.sas.model.Quote;
-import ua.com.sas.view.Input;
-import ua.com.sas.view.Output;
+import ua.com.sas.model.*;
+import ua.com.sas.view.*;
 
 public class Kickstart {
-	private Output output;
+	private Output output = new ConsoleOutput();//TODO delete this ConsoleOutput
+	private View view;
 	private Input input;
 	private Categories categories;
 	private Projects projects;
@@ -23,8 +18,8 @@ public class Kickstart {
 	private int projectChoice;
 	private Project project;
 	 
-	public Kickstart(Output output, Input input, Categories categories, Projects projects, Quote quote) {
-		this.output = output;
+	public Kickstart(View view, Input input, Categories categories, Projects projects, Quote quote) {
+		this.view = view;
 		this.input = input;
 		this.categories = categories;
 		this.projects = projects;
@@ -36,51 +31,26 @@ public class Kickstart {
 		output.println(message);
 	}
 	
-	public void printQuote() {
-		println(quote.generateQuote());
-	}
-
-	public void showList() {
-		 println(categories.getCategories() + "\nWhat are you interested in? Pleace, make your choice:");
-	}
-
-	public void showChoice(int choice) {
+	public void initSelectedCategory(int choice) {
 		category = categories.readCategory(choice);
-		println("You chose - " + category.getName());
 	}
-	
+
 	public void receiveProjectsByCategory() {
 		projects.chooseProjects(category);
 	}
 
-	public void showProjects() {
-		int j = 1;
-		for (String project : projects.writeProjects()){
-			println(j + ")" + project);
-			j++;
-		}
-		println("If you want to return press \"0\"");
-	}
-
-	public void showChosenProject(int projectChoice) {
+	public void initObjectOfSelectedProject(int projectChoice) {
 		this.projectChoice = projectChoice;
 		project = projects.readObject(projectChoice);
-		println("--------------------------------------------------");
-		println("You chose:"
-				+ (projects.writeProject(project)));
-		for (String s : projects.giveAllInfo(project)){
-			println(s);
-		}
-		println("--------------------------------------------------");
 	}
-	
+
 	public void buildMenu(){
-		printQuote();
+		view.printQuote(quote);
 		Menu menu = new Menu(input, output) {
 			
 			@Override
 			public void displayItems() {
-				showList();
+				view.showList(categories);
 			}
 			
 			@Override
@@ -90,7 +60,8 @@ public class Kickstart {
 
 			@Override
 			public void displaySelectedItems() {
-				showChoice(getCheckedValue());
+				initSelectedCategory(getCheckedValue());
+				view.showChosenCategory(category);
 				receiveProjectsByCategory();
 			}
 
@@ -108,7 +79,7 @@ public class Kickstart {
 			
 			@Override
 			public void displayItems() {
-				showProjects();
+				view.showProjects(projects);
 			}
 			
 			@Override
@@ -118,7 +89,8 @@ public class Kickstart {
 			
 			@Override
 			public void displaySelectedItems() {
-				showChosenProject(getCheckedValue());
+				initObjectOfSelectedProject(getCheckedValue());
+				view.printChosenProject(projects, project);
 			}
 			
 			@Override
@@ -140,7 +112,6 @@ public class Kickstart {
 			@Override
 			public void displayError() {
 				println("Error!! There are no such menu item, try again:");
-				
 			}
 			
 			@Override
@@ -176,7 +147,7 @@ public class Kickstart {
 					println("Your question is: " + question);
 					project.addClientQuestion(question);
 				}
-				showChosenProject(projectChoice);
+				initObjectOfSelectedProject(projectChoice);
 			}
 			
 			@Override

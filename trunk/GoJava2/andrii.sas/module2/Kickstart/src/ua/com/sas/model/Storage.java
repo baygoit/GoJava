@@ -1,18 +1,20 @@
 package ua.com.sas.model;
 
 import ua.com.sas.controller.Kickstart;
-import ua.com.sas.view.Input;
-import ua.com.sas.view.Output;
+import ua.com.sas.view.*;
 
 public class Storage {
 	private Categories categories;
 	private Projects projects;
-	private Kickstart kick;
+	private Kickstart kickstart;
+	private View view;
+	
 	
 	public Storage(Output output, Input input, Quote quote){
 		categories = new InFileCategories("categories.txt");
 		projects = new InnerMemoryProjects();
-		kick = new Kickstart(output, input, categories, projects, quote);
+		view = new View(output);
+		kickstart = new Kickstart(view, input, categories, projects, quote);
 	}
 	public void initiate(){
 		Category sport = new Category("Sport"); 
@@ -46,6 +48,6 @@ public class Storage {
 		spaceDiscovery.setProject("Space Warning", "Discover the univerce", 156540,
 				125140, 42, "bla-bla-bla", "youtube.com",
 				"Q: Have you invested your money? A: yes");
-		kick.buildMenu();
+		kickstart.buildMenu();
 	}
 }
