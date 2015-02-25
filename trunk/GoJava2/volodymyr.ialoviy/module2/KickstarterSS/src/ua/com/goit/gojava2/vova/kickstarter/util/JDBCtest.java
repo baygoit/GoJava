@@ -38,58 +38,58 @@ public class JDBCtest {
                         + "\t" + result1.getString("name_project"));
             }
             // Вставить запись
-//            statement.executeUpdate(
-//                    "INSERT INTO users(username) values('name')");
+            statement.executeUpdate(
+                    "INSERT INTO users(username) values('name')");
             //Обновить запись
-//            statement.executeUpdate(
-//                    "UPDATE users SET username = 'admin' where id_project = 1");
+            statement.executeUpdate(
+                    "UPDATE users SET username = 'admin' where id_project = 1");
             
             
 
             //2.PreparedStatement: предварительно компилирует запросы, 
             //которые могут содержать входные параметры
-//            PreparedStatement preparedStatement = null;
+            PreparedStatement preparedStatement = null;
             // ? - место вставки нашего значеня
-//            preparedStatement = connection.prepareStatement(
-//                    "SELECT * FROM users where id > ? and id < ?");
+            preparedStatement = connection.prepareStatement(
+                    "SELECT * FROM users where id > ? and id < ?");
             //Устанавливаем в нужную позицию значения определённого типа
-//            preparedStatement.setInt(1, 2);
-//            preparedStatement.setInt(2, 10);
+            preparedStatement.setInt(1, 2);
+            preparedStatement.setInt(2, 10);
             //выполняем запрос
-//            ResultSet result2 = preparedStatement.executeQuery();
+            ResultSet result2 = preparedStatement.executeQuery();
             
-//            System.out.println("Выводим PreparedStatement");
-//            while (result2.next()) {
-//                System.out.println("Номер в выборке #" + result2.getRow()
-//                        + "\t Номер в базе #" + result2.getInt("id")
-//                        + "\t" + result2.getString("username"));
-//            }
-//            
-//            preparedStatement = connection.prepareStatement(
-//                    "INSERT INTO users(username) values(?)");
-//            preparedStatement.setString(1, "user_name");
+            System.out.println("Выводим PreparedStatement");
+            while (result2.next()) {
+                System.out.println("Номер в выборке #" + result2.getRow()
+                        + "\t Номер в базе #" + result2.getInt("id")
+                        + "\t" + result2.getString("username"));
+            }
+            
+            preparedStatement = connection.prepareStatement(
+                    "INSERT INTO users(username) values(?)");
+            preparedStatement.setString(1, "user_name");
             //метод принимает значение без параметров
             //темже способом можно сделать и UPDATE
-//            preparedStatement.executeUpdate();
+            preparedStatement.executeUpdate();
             
             
 
             //3.CallableStatement: используется для вызова хранимых функций,
             // которые могут содержать входные и выходные параметры
-//            CallableStatement callableStatement = null;
+            CallableStatement callableStatement = null;
             //Вызываем функцию myFunc (хранится в БД)
-//            callableStatement = connection.prepareCall(
-//                    " { call myfunc(?,?) } ");
+            callableStatement = connection.prepareCall(
+                    " { call myfunc(?,?) } ");
             //Задаём входные параметры
-//            callableStatement.setString(1, "Dima");
-//            callableStatement.setString(2, "Alex");
+            callableStatement.setString(1, "Dima");
+            callableStatement.setString(2, "Alex");
             //Выполняем запрос
-//            ResultSet result3 = callableStatement.executeQuery();
+            ResultSet result3 = callableStatement.executeQuery();
             //Если CallableStatement возвращает несколько объектов ResultSet,
             //то нужно выводить данные в цикле с помощью метода next
             //у меня функция возвращает один объект
-//            result3.next();
-//            System.out.println(result3.getString("MESSAGE"));
+            result3.next();
+            System.out.println(result3.getString("MESSAGE"));
             //если функция вставляет или обновляет, то используется метод executeUpdate()
 
         } catch (Exception ex) {

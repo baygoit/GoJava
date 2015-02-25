@@ -15,26 +15,31 @@ public class ConnectToDB {
 	
 	public static Statement statement;
 	
-	public void templateWorkWithDB() {
+	public static void getConnection(){
 		Connection connection = null;
         try {
             Class.forName("org.postgresql.Driver");
             connection = DriverManager.getConnection(JDBC_POSTGRESQL_PATH, NAME_DB, PASS_DB);
 
             statement = connection.createStatement();
+        
+            
+		} catch (Exception ex) {
+	        Logger.getLogger(JDBCType.class.getName()).log(Level.SEVERE, null, ex);
+	    } finally {
+	        if (connection != null) {
+	            try {
+	                connection.close();
+	            } catch (SQLException ex) {
+	                Logger.getLogger(JDBCType.class.getName()).log(Level.SEVERE, null, ex);
+	            }
+	        }
+	    }
 
-            //logic(statement);
-
-        } catch (Exception ex) {
-            Logger.getLogger(JDBCType.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            if (connection != null) {
-                try {
-                    connection.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(JDBCType.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        }
+		
+	}
+	
+	public void templateWorkWithDB() {
+        //logic(statement);
 	}
 }
