@@ -157,7 +157,7 @@ public class KickstarterTest {
 		kickstart.buildMenu();
 		
 		//then
-		List<String> values = assertOut(out, 32);
+		List<String> values = assertOut(out, 22);
 		assertOut(values, "1 - invest to project, 2 - ask question (Return - 0)");
 		assertOut(values, "1 - 1$ (We will give you a pen as a gift!)");
 		assertOut(values, "Please enter your name:");
@@ -181,7 +181,6 @@ public class KickstarterTest {
 		kickstart.buildMenu();
 		
 		//then
-//		List<String> values = assertOut(out, 22);
 		assertEquals(300, project1.getMoneyHas());
 	}
 	

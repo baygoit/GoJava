@@ -2,12 +2,12 @@ package ua.com.sas.model;
 
 public interface Categories {
 
-	public abstract void addCategory(Category category);
+	void addCategory(Category category);
 
-	public abstract String getCategories();
+	String getCategories();
 
-	public abstract Category readCategory(int index);
+	Category readCategory(int index);
 
-	public abstract int getLenth();
+	int getLenth();
 
 }
