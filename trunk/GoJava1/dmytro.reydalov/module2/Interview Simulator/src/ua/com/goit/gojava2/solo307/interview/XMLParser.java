@@ -1,8 +1,8 @@
 package ua.com.goit.gojava2.solo307.interview;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -16,40 +16,15 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 public class XMLParser {
-	
-	private int questionId = 0;
-	private int answerId = 0;
-	List <Question> questions = new ArrayList<Question>();
-	
-	public int getQuestionId() {
-		return questionId;
-	}
 
-	public void setQuestionId(int questionId) {
-		this.questionId = questionId;
-	}
+	private IdGenerator idGenerator = new IdGenerator();
 
-	public int getAnswerId() {
-		return answerId;
-	}
-
-	public void setAnswerId(int answerId) {
-		this.answerId = answerId;
-	}
-
-	public List<Question> getQuestions() {
-		return questions;
-	}
-
-	public void setQuestions(List<Question> questions) {
-		this.questions = questions;
-	}
-
-	public XMLParser(String path) throws InterviewSimulatorException{
+	public List<Question> parse(File file) throws InterviewSimulatorException{
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+		List <Question> questionsList = new ArrayList<Question>();
 		try{
 			DocumentBuilder builder = factory.newDocumentBuilder();
-			Document document = builder.parse(path);
+			Document document = builder.parse(file.getAbsolutePath());
 			NodeList questions = document.getElementsByTagName("question");
 			for(int i = 0; i < questions.getLength(); i++){
 				Node q = questions.item(i);
@@ -67,14 +42,14 @@ public class XMLParser {
 							if(answer.getAttribute("isCorrect").equals("true")) isCorrect = true;
 							else if(answer.getAttribute("isCorrect").equals("false")) isCorrect = false;
 							else System.out.println("wrong isCorrect value in XML");
-							int aId = answerId;
+							int aId = idGenerator.getAnswerId();
 							answerList.add(new Answer(aId, answerText, isCorrect));
-							answerId++;
+							idGenerator.addAsnwerId();
 						}
 					}
-					int qId = questionId;
-					writeData(questionText, answerList, qId);
-					questionId++;
+					int qId = idGenerator.getQuestionId();
+					questionsList.add(new Question(questionText, answerList, qId));
+					idGenerator.addQuestionId();
 				}
 			}
 		} catch(ParserConfigurationException e){
@@ -84,12 +59,8 @@ public class XMLParser {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		return questionsList;
 	}
-	
-	public void writeData(String questionLine, List<Answer> answerList, int questionId){
-		questions.add(new Question(questionLine, answerList, questionId));
-	}
-	
 }	
 
 

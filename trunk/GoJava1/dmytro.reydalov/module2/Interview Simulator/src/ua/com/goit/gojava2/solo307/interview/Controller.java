@@ -4,9 +4,9 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.ServletException;
-import javax.servlet.ServletOutputStream;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -18,20 +18,20 @@ public class Controller extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
-		PrintWriter out = response.getWriter();
-		response.setContentType("text/html");
-		response.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html;charset=utf-8");
 		String [] answers = request.getParameterValues("answer");
 		Interview interview = new Interview();
-		File file = new File("Questions.xml.");
-		interview.addCategory("Questions", file.getAbsolutePath());
-		File file2 = new File("MeratechTest.xml.");
-		interview.addCategory("Questions1", file2.getAbsolutePath());
+		File file = new File("Questions.xml");
+		interview.createCategory(file);
+		File file2 = new File("MeratechTest.xml");
+		interview.createCategory(file2);
 		Category composed = interview.getComposedCategory();
-		List<Integer> answerIds = composed.parseIds(answers);
-		int correctAnswers = composed.countCorrectAnswers(answerIds);
-		out.println("Anwered correct: " + correctAnswers);
+		Set <Integer> answerIds = composed.parseIds(answers);
+		Set <Question> reconstructed = composed.getQuestionsById(answerIds);
+		List <Mark> marks = composed.getMarks(reconstructed, answerIds);
+		List <String> statistics = composed.getStatistics();
+		IO.writeToFile("Dmitro", statistics);
+	    request.setAttribute("stat", marks);
+	    request.getRequestDispatcher("stats.jsp").forward(request,response);
 	}
-
-	
 }

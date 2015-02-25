@@ -10,6 +10,7 @@
 	<body>
  		<a href="Questions and all Answers.jsp">Посмотреть список вопросов и всех ответов</a> <br>
  		<a href="Questions and correct Answers.jsp">Посмотреть список вопросов и правильных ответов</a> <br>
- 		<a href="Interview.jsp">Начать собеседование</a> <br>
+ 		<a href="compose.jsp">Выбрать темы для собеседования</a> <br>
+ 		<a href="Interview.jsp">Начать произовльное собеседование</a> <br>
 	</body>
 </html>

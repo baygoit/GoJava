@@ -12,10 +12,10 @@ import java.util.List;
 
 public class IO {
 	
-	public static void writeToFile(String name, String time, List<String> results,
-			List<String> incorrectAnswers){
-		File file = new File(name);
+	public static void writeToFile(String name, List<String> results){
+		File file = new File("d://Sklad/Data/eclipse/workspace/Interview Simulator/" + name);
 		if(!file.exists()){
+			System.out.println("Creating the file with name: " + file.getAbsolutePath());
 			try {
 				file.createNewFile();
 			} catch (IOException e) {
@@ -23,13 +23,9 @@ public class IO {
 			}
 		}
 		try{
-			PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(name, true))); 
+			PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("d://Sklad/Data/eclipse/workspace/Interview Simulator/" + name, true))); 
 			out.println("Name: " + name);
-			out.println("Time: " + time);
 			for(String line: results){
-				out.println(line);
-			}
-			for(String line: incorrectAnswers){
 				out.println(line);
 			}
 			out.close();

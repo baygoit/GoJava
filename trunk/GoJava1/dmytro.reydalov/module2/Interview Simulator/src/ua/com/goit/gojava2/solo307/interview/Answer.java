@@ -54,4 +54,18 @@ public class Answer {
 	public String getIdAndAnswer(){
 		return new String(id + ". " + text + "\n");
 	}
+
+	public boolean hasNextId(int answeredId) {
+		if(this.id == answeredId){
+			return true;
+		}
+		return false;
+	}
+
+	public boolean isCorrectId() {
+		if(isAnswerCorrect())return true;
+		else{
+			return false;
+		}
+	}
 }

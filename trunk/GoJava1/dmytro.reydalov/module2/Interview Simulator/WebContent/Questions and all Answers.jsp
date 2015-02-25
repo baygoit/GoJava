@@ -9,15 +9,15 @@
 
 <html>
 	<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>List of Questions and all answers</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>List of Questions and all answers</title>
 	</head>
 	<body>
-		<%Interview interview = new Interview();
-		File file = new File("Questions.xml.");
-		interview.addCategory("Questions", file.getAbsolutePath());
-		File file2 = new File("MeratechTest.xml.");
-		interview.addCategory("Questions1", file2.getAbsolutePath());
+		<% Interview interview = new Interview();
+		File file = new File("Questions.xml");
+		interview.createCategory(file);
+		File file2 = new File("MeratechTest.xml");
+		interview.createCategory(file2);
 		Category composed = interview.getComposedCategory();
 		List<String> myList = composed.getQuestionsAndAllAnswers();
 		for(String string: myList){%>

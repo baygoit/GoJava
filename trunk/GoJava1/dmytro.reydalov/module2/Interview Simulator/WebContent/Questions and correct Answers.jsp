@@ -13,16 +13,16 @@
 		<title>Questions and correct Answers</title>
 	</head>
 	<body>
-		<%	Interview interview = new Interview();
-			File file = new File("Questions.xml.");
-			interview.addCategory("Questions", file.getAbsolutePath());
-			File file2 = new File("MeratechTest.xml.");
-			interview.addCategory("Questions1", file2.getAbsolutePath());
-			Category composed = interview.getComposedCategory();
-			List<String> myList = composed.getQuestionsAndCorrectAnswers();
-			for(String string: myList){%>
-				<p>	<%= string%>
-			<%} %>
+		<% Interview interview = new Interview();
+		File file = new File("Questions.xml");
+		interview.createCategory(file);
+		File file2 = new File("MeratechTest.xml");
+		interview.createCategory(file2);
+		Category composed = interview.getComposedCategory();
+		List<String> myList = composed.getQuestionsAndCorrectAnswers();
+		for(String string: myList){%>
+			<p>	<%= string%>
+		<%} %>
 		<br><br>
 		<a href="index.jsp">Вернуться на главную</a> <br>
 	</body>
