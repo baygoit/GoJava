@@ -11,6 +11,11 @@
 		<enabled>true</enabled>
 	</servlet>	
 	<servlet>
+		<servlet-name>catalog-viewer</servlet-name>
+		<servlet-class>ua.com.goit.gojava.andriidnikitin.servlets.CatalogViewer</servlet-class>
+		<enabled>true</enabled>
+	</servlet>	
+	<servlet>
 		<servlet-name>good-creator</servlet-name>
 		<servlet-class>ua.com.goit.gojava.andriidnikitin.servlets.GoodCreator</servlet-class>
 		<enabled>true</enabled>
@@ -22,5 +27,9 @@
 	<servlet-mapping>
 		<servlet-name>good-creator</servlet-name>
 		<url-pattern>/add-good</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>catalog-viewer</servlet-name>
+		<url-pattern>/view-catalog</url-pattern>
 	</servlet-mapping>
 </web-app>

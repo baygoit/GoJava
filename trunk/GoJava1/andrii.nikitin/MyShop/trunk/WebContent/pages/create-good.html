@@ -3,21 +3,45 @@
 <head>
 <meta charset="UTF-8">
 <title>Create</title>
+<script type="text/javascript">
+	function validate(form){		
+		var elems = document.getElementsByName(form).elements;
+		document.getElementById('loginfo').innerHTML="click-click";
+		if (!elems.Name.value) {
+			document.getElementById('loginfo').innerHTML="*enter this field please";
+		}
+		var category = document.getElementsByName(Category);
+		if (!elems.Category.value) {
+			document.getElementById('loginfo').innerHTML="*enter this field please";
+		}
+		else {
+			document.getElementById('loginfo').innerHTML="azaza";
+			}
+	}
+</script>
 </head>
 <body>
 	<h2> Create </h2>
-
-	<form action="../add-good" method="post" target="result-of-creation" >	
-		<fieldset>
-			<legend> Creating new good </legend>
-		
+	
+	<form target="frame-categories" action="view-catalog" method="post" name="get-list-form">		
+		<input type="submit" value="view categories">
+	</form>
+	
+	<form target="result-of-creation"  action="../add-good" method="post" name="input-form">	
+		<fieldset name="set-of-inputs-adding">
+			 <legend> Creating new good </legend>		
 			 <input type="text" value="Name" name="Name"> 
 			 <input type="text" value="Category" name="Category"> 
-			 <input type="submit" value="create">	
+			 <input type="submit" value="create" onclick="validate('input-form')">	
+			 <p id="loginfo"></p>
 		 </fieldset>	
 	</form>
 	
 	<iframe name="result-of-creation"> 
 	</iframe>
+	
+	
+	<iframe name="frame-categories">	
+	</iframe> 
 </body>
 </html>

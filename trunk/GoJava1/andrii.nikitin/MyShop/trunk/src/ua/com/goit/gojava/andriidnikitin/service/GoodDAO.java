@@ -42,7 +42,8 @@ public class GoodDAO implements IDAO<Good> {
 private void init() {
 	
 		GoodTypeDAO dao = new GoodTypeDAO();
-		GoodType type = dao.getAll().get(0);
+		GoodType type = dao.getAll().get(4);
+		System.out.println(type.getName());
 		List<Attribute> description = new ArrayList<Attribute>();
 		
 		Good good = new Good();

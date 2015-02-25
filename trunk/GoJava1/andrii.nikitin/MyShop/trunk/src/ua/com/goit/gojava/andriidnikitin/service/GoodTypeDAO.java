@@ -72,6 +72,12 @@ public class GoodTypeDAO implements IDAO<GoodType> {
 		type.setName("Bass guitars");
 		type.setParent(guitars);
 		list.add(type);
+		
+		type = new GoodType();
+		type.setId(5);
+		type.setName("Electro guitars");
+		type.setParent(guitars);
+		list.add(type);
 	}
 	
 }

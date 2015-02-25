@@ -15,7 +15,7 @@
 		<tr>
 			<td><a href="pages/create-good.html" target="edit-frame"> Create </a></td>
 			<td><a href="pages/construct.html"  target="edit-frame"> Retrieve </a></td>
-			<td><a href="pages/updateform.html"  target="edit-frame"> Update </a></td>
+			<td><a href="update-good.jsp"  target="edit-frame"> Update </a></td>
 			<td><a href="pages/construct.html"  target="edit-frame"> Delete </a></td>
 			<td><a href="pages/descriptions.html"  target="edit-frame"> Descriptions </a></td>
 		</tr>

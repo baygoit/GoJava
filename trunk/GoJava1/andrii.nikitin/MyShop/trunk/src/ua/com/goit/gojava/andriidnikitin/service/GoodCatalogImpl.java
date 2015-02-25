@@ -57,7 +57,7 @@ public class GoodCatalogImpl implements GoodCatalog{
 	public List<Good> getGoodsInType(GoodType type) {
 		List<Good> result = new ArrayList<Good>();
 		for (Good good1: goods.getAll()) {
-			if (type.getId().equals(good1.getType().getId())) {
+			if (typesAreEqual(type, good1.getType())) {
 				result.add(good1);
 				}
 		}
@@ -120,9 +120,17 @@ public class GoodCatalogImpl implements GoodCatalog{
 			return false;
 	}
 
+	/**
+	 * Returns true if parameter exists in catalog and his parent is null.  
+	 * 	 */
 	@Override
 	public Boolean isRoot(GoodType type) {
-		return (type.getParent() == null);
+		List<GoodType> listOfTypes = types.getAll();
+		if (listOfTypes.contains(type)){
+			return (type.getParent() == null);
+		}
+		return false;
+		
 	}
 	
 	/*private String[] writeGood(Good good){
@@ -147,7 +155,6 @@ public class GoodCatalogImpl implements GoodCatalog{
 		GoodType type = null;
 		for (GoodType tempType: types.getAll() ) {
 			String tempName = tempType.getName();
-			System.out.println(name+ tempName);
 			if (tempName.equals(name)) {
 				return tempType;
 			}
@@ -174,5 +181,16 @@ public class GoodCatalogImpl implements GoodCatalog{
 		result.setType(type);
 		return result ;
 		
+	}
+	
+	public List<GoodType> getLeaves(){
+		List<GoodType> result = new ArrayList<GoodType>();
+		List<GoodType> typeList = types.getAll();
+		for (GoodType type: typeList){
+			if (!hasChildren(type)) {
+				result.add(type);
+			}
+		}
+		return result ; 
 	}
 }

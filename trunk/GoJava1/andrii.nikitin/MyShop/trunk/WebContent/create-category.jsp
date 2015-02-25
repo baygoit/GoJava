@@ -4,11 +4,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <link href="css/stylesheet1.css" rel="stylesheet" type="text/css" />
-<script > <!--src="js/scripts.js"-->
-	function init(address, frame){		
-		top.frames[frame].location.href = 'pages/' + address;
+<!-- script >	function init(){		
+		document.getElementsByName("form").innerHTML = ""; 
 	}
-</script>
+</script-->
 <title>MyShop</title>
 </head>
 <body onload="init('welcome.html', 'main-frame')">
