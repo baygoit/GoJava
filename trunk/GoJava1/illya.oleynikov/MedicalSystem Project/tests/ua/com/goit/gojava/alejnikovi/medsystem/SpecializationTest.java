@@ -36,6 +36,14 @@ public class SpecializationTest {
 		assertEquals("Иван, Петр", docNames);
 		System.out.println();
 	}
+	
+	/*@Test
+	public void testMarkupForFile() {
+		Specialization specialization = new Specialization("Test");
+		
+		assertEquals("Иван, Петр", docNames);
+	}*/
+
 
 
 }

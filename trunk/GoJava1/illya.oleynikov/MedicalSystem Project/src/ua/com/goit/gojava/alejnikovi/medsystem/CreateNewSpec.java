@@ -28,8 +28,9 @@ public class CreateNewSpec extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String newSpecialization = request.getParameter("specialization");
 			try {
-				MedicalSystem.writeSpecializationToFile(newSpecialization);
-			} catch (MedicalSystemException e) {
+				Specialization.createNewSpecialisation(newSpecialization);
+				
+			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
