@@ -47,8 +47,6 @@ public class KickstarterMain {
 			view.printQuote(quote.getQuote());
 			
 	    	run.kickstarter();
-	    	
-	    	System.out.println("one minute");
     	
         } catch (Exception ex) {
 	        Logger.getLogger(JDBCType.class.getName()).log(Level.SEVERE, null, ex);
@@ -62,7 +60,7 @@ public class KickstarterMain {
 	        }
 	    }
         
-        System.out.println("done");
+        System.out.println("done, i closed");
         
     }
 }

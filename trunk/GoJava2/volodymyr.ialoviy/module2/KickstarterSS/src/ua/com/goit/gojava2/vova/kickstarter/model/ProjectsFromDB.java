@@ -32,9 +32,9 @@ public class ProjectsFromDB implements Projects{
 					.append("how much needed = ").append(result.getString("how_much_needed_project")).append("\n")
 					.append("how much collected = ").append(result.getString("how_much_collected_project")).append("\n")
 					.append("how much remaining = ").append(result.getString("how_much_remaining_project")).append("\n")
-					.append("days to go = ").append(Integer.toString(PeriodBetweenDates.periodJoda(result.getString("date_close_project")))).append("\n")
-					.append("faq = ").append(arrayListToString(getFaq(projectID))).toString();
-            }
+					.append("days to go = ").append(Integer.toString(PeriodBetweenDates.periodJoda(result.getString("date_close_project")))).append("\n");
+			}
+			s.append("faq = ").append(arrayListToString(getFaq(projectID))).toString();
 		} catch (SQLException e) {
 			System.err.println( e.getClass().getName()+": +"+ e.getMessage() );
 		}

@@ -79,4 +79,8 @@ public class View {
 	public void printBug() {
 		printer("You have entered an incorrect value or a null value, check the value you entered and try again");		
 	}
+
+	public void printClose() {
+		printer("Thank you for your choice our Kickstarter. One minute, i will close so soon");
+	}
 }

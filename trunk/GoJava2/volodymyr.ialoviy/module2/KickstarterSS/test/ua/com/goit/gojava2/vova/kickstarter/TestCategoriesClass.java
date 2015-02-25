@@ -2,6 +2,7 @@ package ua.com.goit.gojava2.vova.kickstarter;
 
 import static org.junit.Assert.*;
 
+import java.sql.Statement;
 import java.util.Arrays;
 
 import org.junit.Test;
@@ -13,7 +14,8 @@ import ua.com.goit.gojava2.vova.kickstarter.model.ProjectsFromFile;
 import ua.com.goit.gojava2.vova.kickstarter.model.ReaderDB;
 
 public class TestCategoriesClass {
-	Categories categories = new CategoriesFromDB();
+	Statement statement;// TODO
+	Categories categories = new CategoriesFromDB(statement);
 	{
 		categories.writeAllCatecories();
 		categories.getKickCategories();

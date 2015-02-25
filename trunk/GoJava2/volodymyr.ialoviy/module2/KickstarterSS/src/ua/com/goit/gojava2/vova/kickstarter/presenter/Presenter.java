@@ -32,8 +32,9 @@ public class Presenter {
 		this.view = view;
 	}
 
-	public void kickstarter(){
+	public void kickstarter(){//TODO DELETE or add Quotes
 		categories();
+		view.printClose();
 	}
 
 	private void categories() {
