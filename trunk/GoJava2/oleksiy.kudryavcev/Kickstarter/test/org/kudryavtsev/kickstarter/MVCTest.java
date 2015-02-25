@@ -1,4 +1,4 @@
-package org.kudryavtsev.kickstarter.test;
+package test;
 
 import org.junit.Test;
 import org.kudryavtsev.kickstarter.MVC;

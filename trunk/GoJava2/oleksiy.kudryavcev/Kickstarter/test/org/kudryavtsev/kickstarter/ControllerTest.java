@@ -1,4 +1,4 @@
-package org.kudryavtsev.kickstarter.test;
+package test;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
