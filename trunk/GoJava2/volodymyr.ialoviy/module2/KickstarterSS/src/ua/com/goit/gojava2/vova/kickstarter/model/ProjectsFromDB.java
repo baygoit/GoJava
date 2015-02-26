@@ -111,36 +111,4 @@ public class ProjectsFromDB implements Projects{
 		}
 		return string.toString();
 	}
-	
-	@Override
-	public ArrayList<Project> getListProject() {
-		// do nothing
-		return null;// TODO DELETE null (NPE)
-	}
-	
-	@Override
-	public int getCounterProject() {
-		// do nothing
-		return 0;// TODO DELETE 0 (NPE)
-	}
-
-	@Override
-	public void setListProject(ArrayList<Project> listProject) {
-		// do nothing
-	}
-
-	@Override
-	public void setCounterProject(int counterProject) {
-		// do nothing		
-	}
-	
-	@Override
-	public void writeAllProjects() {
-		// do nothing
-	}
-
-	@Override
-	public void updateProject(String[] value, int i) {
-		// do nothing
-	}
 }

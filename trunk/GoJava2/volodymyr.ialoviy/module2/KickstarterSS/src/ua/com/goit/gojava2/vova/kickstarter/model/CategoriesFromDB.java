@@ -33,7 +33,7 @@ public class CategoriesFromDB implements Categories{
 	}
 
 	@Override
-	public String showAllProjectInCategory(int categoryId, Projects projects) {
+	public String showAllProjectInCategory(int categoryId) {
 		StringBuilder s = new StringBuilder();
 
 		ResultSet result;
@@ -115,32 +115,5 @@ public class CategoriesFromDB implements Categories{
         	j++;
         }
 		return a;
-	}
-
-	@Override
-	public int getCounterCategory() {
-		// do nothing
-		return 0; //TODO DELETE null (NPE)
-	}
-	
-	@Override
-	public ArrayList<Category> getListCatecories() {
-		// do nothing
-		return null; //TODO DELETE null (NPE)
-	}
-	
-	@Override
-	public void writeAllCatecories() {
-		// do nothing
-	}
-
-	@Override
-	public void setCounterCategory(int counterCategory) {
-		// do nothing
-	}
-
-	@Override
-	public void setListCatecories(ArrayList<Category> listCatecories) {
-		// do nothing
 	}
 }

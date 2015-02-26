@@ -28,8 +28,7 @@ public class KickstarterMain {
 	private static final String JDBC_POSTGRESQL_PATH = "jdbc:postgresql://127.0.0.1:5432/kickstarter";
 	
     public static void main(String[] args){
-    	
-    	
+
     	Connection connection = null;
     	try {
             Class.forName("org.postgresql.Driver");

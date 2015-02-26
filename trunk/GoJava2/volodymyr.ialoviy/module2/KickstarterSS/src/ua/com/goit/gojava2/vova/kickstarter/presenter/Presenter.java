@@ -47,7 +47,7 @@ public class Presenter {
 
 	private void projects() {
 		int[] optionVariant = { menuCategories };
-		view.printProjectsInCategory(categories.showCatecoryName(chosenCategoryID), categories.showAllProjectInCategory(chosenCategoryID, projects), menuCategories);//TODO 3 METHOD
+		view.printProjectsInCategory(categories.showCatecoryName(chosenCategoryID), categories.showAllProjectInCategory(chosenCategoryID), menuCategories);//TODO 3 METHOD
 		askProject(optionVariant);
 
 		if (elementInArray(optionVariant, chosenProject)) {
@@ -133,8 +133,6 @@ public class Presenter {
 			break;
 		}
 	}
-
-
 
 	private void askCategory() {
 		String choice = in.enter();
