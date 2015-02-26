@@ -1,4 +1,4 @@
-package ua.goit.goitjava.kickstarter;
+package ua.goit.goitjava.kickstarter.DB;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -7,7 +7,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CategoriesDB {
+import ua.goit.goitjava.kickstarter.Category;
+
+public class CategoriesDAO {
 	public List<Category> getAllCategories(){
 		Connection c = null;
 		Statement st = null;
@@ -38,7 +40,7 @@ public class CategoriesDB {
 		return arr;
 	}
 	
-	public Category getSelectCategories(int id){
+	public Category getSelectCategory(int id){
 		Connection c = null;
 		Statement st = null;
 		Category cat = null;
