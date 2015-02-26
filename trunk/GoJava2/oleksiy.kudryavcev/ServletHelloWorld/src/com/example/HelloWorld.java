@@ -2,6 +2,7 @@ package com.example;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Date;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServlet;
@@ -25,6 +26,7 @@ public class HelloWorld extends HttpServlet {
         out.println("<html>\n");
         out.println("<body bgcolor=\"#adfde6\">\n");
         out.println("<h1>" + message + "</h1>");
+        out.println("<h2>Time on server: " + new Date() + " </h2>");
         out.println("</body></html>");
     }
 
