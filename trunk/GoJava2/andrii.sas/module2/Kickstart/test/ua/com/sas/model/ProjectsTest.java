@@ -1,18 +1,31 @@
 package ua.com.sas.model;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
 
+import org.junit.Before;
 import org.junit.Test;
 
-public class ProjectsTest {
+public abstract class ProjectsTest {
+	
+	private Projects projects;
+	private Category category1;
+	private Project project1;
+	private Category category2;
+
+	@Before
+	public void start(){
+		projects = getProjects();
+		category1 = new Category("category1");
+		category2 = new Category("category2");
+		project1 = new Project(category1);
+	}
+	
+	abstract Projects getProjects();
+	
 	@Test
 	public void shouldGetProjectByIndex(){
-		//given
-		Projects projects = new InnerMemoryProjects();
-		
 		//when
-		Category category1 = new Category("category1");
-		Project project1 = new Project(category1);
 		projects.addProject(project1);
 		projects.chooseProjects(category1);
 		
@@ -22,12 +35,7 @@ public class ProjectsTest {
 
 	@Test
 	public void shouldGiveShortInfoOfProject(){
-		//given
-		Projects projects = new InnerMemoryProjects();
-		
 		//when
-		Category category1 = new Category("category1");
-		Project project1 = new Project(category1);
 		project1.setProject("project1", "Some dscr", 100, 31, 2, "some history", "video", "FAQ");
 		
 		//then
@@ -37,12 +45,7 @@ public class ProjectsTest {
 	
 	@Test
 	public void shouldMakeArrayOfData_whenProjectInitialized(){
-		//given
-		Projects projects = new InnerMemoryProjects();
-		
 		//when
-		Category category1 = new Category("category1");
-		Project project1 = new Project(category1);
 		project1.setProject("project1", "Some dscr", 100, 31, 2, "some history", "video", "FAQ");
 		projects.addProject(project1);
 		projects.chooseProjects(category1);
@@ -53,13 +56,7 @@ public class ProjectsTest {
 	
 	@Test
 	public void shouldSelectOneProject_whenTwoProjectsWithDifferentCategoriesInitialized(){
-		//given
-		Projects projects = new InnerMemoryProjects();
-		
 		//when
-		Category category1 = new Category("category1");
-		Category category2 = new Category("category2");
-		Project project1 = new Project(category1);
 		Project project2 = new Project(category2);
 		project1.setProject("project1", "Some dscr", 100, 31, 2, "some history", "video", "FAQ");
 		project2.setProject("project2", "Some dscr2", 100, 31, 2, "some history2", "video2", "FAQ2");
@@ -75,13 +72,7 @@ public class ProjectsTest {
 	
 	@Test
 	public void shouldReturnEmptyList_whenSelectedCategoryWithNoProjectsInIt(){
-		//given
-		Projects projects = new InnerMemoryProjects();
-		
 		//when
-		Category category1 = new Category("category1");
-		Category category2 = new Category("category2");
-		Project project1 = new Project(category1);
 		Project project2 = new Project(category1);
 		project1.setProject("project1", "Some dscr", 100, 31, 2, "some history", "video", "FAQ");
 		project2.setProject("project2", "Some dscr2", 100, 31, 2, "some history2", "video2", "FAQ2");
@@ -95,13 +86,7 @@ public class ProjectsTest {
 	
 	@Test
 	public void shouldBeArrayWithThreeElements(){
-		//given
-		Projects projects = new InnerMemoryProjects();
-		
 		//when
-		Category category1 = new Category("category1");
-		Category category2 = new Category("category2");
-		Project project1 = new Project(category1);
 		Project project2 = new Project(category2);
 		project1.setProject("project1", "Some dscr", 100, 31, 2, "some history", "video", "FAQ");
 		project2.setProject("project2", "Some dscr2", 100, 31, 2, "some history2", "video2", "FAQ2");

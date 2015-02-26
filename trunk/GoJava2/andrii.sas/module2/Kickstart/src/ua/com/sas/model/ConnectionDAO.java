@@ -8,8 +8,18 @@ public class ConnectionDAO {
 	
 	private Connection connection;
 	private boolean end = false;
-
-	public void setConnection(String nameOfDB, String login, String password){
+	private String nameOfDB;
+	private String login;
+	private String password;
+	
+	public ConnectionDAO(String nameOfDB, String login, String password) {
+		this.nameOfDB = nameOfDB;
+		this.login = login;
+		this.password = password;
+		setConnection();
+	}
+	
+	private void setConnection(){
 		try {
 			Class.forName("org.postgresql.Driver");
 			connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/" + nameOfDB, login, password);
@@ -32,7 +42,7 @@ public class ConnectionDAO {
 		return connection;
 	}
 	
-	public void setEnd(boolean end){
+	public void closeConnection(boolean end){
 		this.end = end;
 	}
 }

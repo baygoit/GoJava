@@ -11,7 +11,6 @@ import org.postgresql.Driver;
 
 public class ProjectsDAO implements Projects{
 	
-	private String nameOfDB;
 	private Connection connection;
 
 //	public ProjectsDAO(String nameOfDB) {
@@ -149,12 +148,11 @@ public class ProjectsDAO implements Projects{
 	}
 	
 	public static void main(String[] args){
-		ConnectionDAO dbConnect = new ConnectionDAO();
-		dbConnect.setConnection("kickstarter_db", "postgres", "gfhfien17");
+		ConnectionDAO dbConnect = new ConnectionDAO("kickstarter_db", "postgres", "gfhfien17");
 		Connection connection = dbConnect.getConnection();
 		Projects projects = new ProjectsDAO(connection);
 		System.out.println(projects.getLenth());
-		dbConnect.setEnd(true);
+		dbConnect.closeConnection(true);
 		System.out.println(projects.readObject(1));
 	}
 }
