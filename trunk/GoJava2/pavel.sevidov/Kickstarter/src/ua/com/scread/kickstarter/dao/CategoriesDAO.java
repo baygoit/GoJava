@@ -1,4 +1,4 @@
-package ua.com.scread.kickstarter.storage;
+package ua.com.scread.kickstarter.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ua.com.scread.kickstarter.data.Category;
+import ua.com.scread.kickstarter.storage.Categories;
 
 public class CategoriesDAO implements Categories {
 

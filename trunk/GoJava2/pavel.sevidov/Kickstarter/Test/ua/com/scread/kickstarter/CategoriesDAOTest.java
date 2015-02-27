@@ -5,9 +5,9 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
+import ua.com.scread.kickstarter.dao.CategoriesDAO;
 import ua.com.scread.kickstarter.data.Category;
 import ua.com.scread.kickstarter.storage.Categories;
-import ua.com.scread.kickstarter.storage.CategoriesDAO;
 
 public class CategoriesDAOTest {
 

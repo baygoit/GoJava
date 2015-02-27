@@ -1,3 +1,4 @@
+package ua.com.scread.kickstarter.dao;
 //package ua.com.scread.kickstarter.storage;
 //
 //import java.sql.Connection;
