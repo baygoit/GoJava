@@ -1,10 +1,7 @@
 package com.gojava2.kickstarter.controller;
 
-import java.util.List;
-
 import com.gojava2.kickstarter.model.Category;
 import com.gojava2.kickstarter.model.CategoryStorageInVM;
-import com.gojava2.kickstarter.model.Project;
 import com.gojava2.kickstarter.model.ProjectStorageInVM;
 import com.gojava2.kickstarter.model.QuoteStorageInVM;
 import com.gojava2.kickstarter.view.ConsoleInput;
@@ -33,9 +30,9 @@ public class KickstarterController {
 		int input = consoleInput.choice();
 		int amountCategory = categoryStorage.getCategories().size();
 		if(input > 0 && input <= amountCategory) {
-			List<Project> projects = projectStorage.getSpecificProjects((Category) categoryStorage.getCategories().toArray()[input - 1]);
-			view.display(projects);
-			selectProject(projects);
+			Category category = categoryStorage.getCategory(input);
+			view.display(projectStorage.getSpecificProjects(category));
+			selectProject(category);
 			selectCategory();
 		} else if(input == 0) {
 			System.out.print("- App closed");
@@ -45,25 +42,25 @@ public class KickstarterController {
 		}
 	}
 	
-	public void selectProject(List<Project> projects) {
+	public void selectProject(Category category) {
 		view.displaySelectOption(2);
 		int input = consoleInput.choice();
 		
 		if(input > 0) {
-			view.display(projects.get(input - 1));
-			backToProjects(projects);
-			selectProject(projects);
+			view.display(projectStorage.getSpecificProject(category,input));
+			backToProjects(category);
+			selectProject(category);
 		} else if (input == 0) {
 			view.display(categoryStorage.getCategories());
 		}
 	}
 	
-	public void backToProjects(List<Project> projects) {
+	public void backToProjects(Category category) {
 		view.displaySelectOption(3); 
 		if(consoleInput.choice() == 0) {
-			view.display(projects);
+			view.display(projectStorage.getSpecificProjects(category));
 		} else {
-			backToProjects(projects);
+			backToProjects(category);
 		}
 	}
 	

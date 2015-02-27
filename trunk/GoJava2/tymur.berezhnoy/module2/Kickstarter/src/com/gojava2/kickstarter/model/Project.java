@@ -2,6 +2,7 @@ package com.gojava2.kickstarter.model;
 
 public class Project {
 	
+	private Category category;
 	private final char symbolDollar = 36;
 	
 	private String name;
@@ -92,6 +93,14 @@ public class Project {
 
 	public char getSymbolDollar() {
 		return symbolDollar;
+	}
+	
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+	
+	public Category getCategory() {
+		return category;
 	}
 
 	@Override
