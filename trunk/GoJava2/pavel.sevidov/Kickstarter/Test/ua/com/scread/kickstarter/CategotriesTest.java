@@ -3,14 +3,12 @@ package ua.com.scread.kickstarter;
 import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import org.junit.Test;
 
 import ua.com.scread.kickstarter.data.Category;
 import ua.com.scread.kickstarter.storage.Categories;
-import ua.com.scread.kickstarter.storage.InMemoryCategories;
 
 public abstract class CategotriesTest {
     
