@@ -3,6 +3,9 @@ package ua.com.sas.model;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -32,46 +35,27 @@ public abstract class ProjectsTest {
 		//then
 		assertSame(project1, projects.readObject(0));
 	}
+	
 
 	@Test
-	public void shouldGiveShortInfoOfProject(){
-		//when
-		project1.setProject("project1", "Some dscr", 100, 31, 2, "some history", "video", "FAQ");
-		
-		//then
-		assertEquals(" Name - project1, Description - Some dscr, Money we need - 100, Money we have - 31, Days left - 2",
-				projects.writeProject(project1));
-	}
-	
-	@Test
-	public void shouldMakeArrayOfData_whenProjectInitialized(){
-		//when
-		project1.setProject("project1", "Some dscr", 100, 31, 2, "some history", "video", "FAQ");
-		projects.addProject(project1);
-		projects.chooseProjects(category1);
-		
-		//then
-		assertEquals(1, projects.writeProjects().size());
-	}
-	
-	@Test
-	public void shouldSelectOneProject_whenTwoProjectsWithDifferentCategoriesInitialized(){
-		//when
+	public void shouldReturnListOfSelectedCategoryProjects_whenTwoProjectsWithDifferentCategoriesInitialized(){
+		//given
+		List<Project> chosenProjects = new ArrayList<Project>();
 		Project project2 = new Project(category2);
+		
+		//when
 		project1.setProject("project1", "Some dscr", 100, 31, 2, "some history", "video", "FAQ");
 		project2.setProject("project2", "Some dscr2", 100, 31, 2, "some history2", "video2", "FAQ2");
 		projects.addProject(project1);
 		projects.addProject(project2);
-		projects.chooseProjects(category2);
-		String testedProject = projects.writeProject(project2);
+		chosenProjects.add(project2);
 		
 		//then
-		assertEquals(1, projects.writeProjects().size());
-		assertEquals(testedProject, projects.readProject(0));
+		assertEquals(chosenProjects, projects.chooseProjects(category2));
 	}
 	
 	@Test
-	public void shouldReturnEmptyList_whenSelectedCategoryWithNoProjectsInIt(){
+	public void shouldBeEmpty_whenSelectedCategoryWithNoProjectsInIt(){
 		//when
 		Project project2 = new Project(category1);
 		project1.setProject("project1", "Some dscr", 100, 31, 2, "some history", "video", "FAQ");
@@ -81,24 +65,21 @@ public abstract class ProjectsTest {
 		projects.chooseProjects(category2);
 		
 		//then
-		assertEquals(0, projects.writeProjects().size());
+		assertEquals(0, projects.getLenth());
 	}
 	
 	@Test
-	public void shouldBeArrayWithThreeElements(){
+	public void shouldHaveTwoElements_whenSelectedCategoryWithTwoProjectsInIt(){
 		//when
-		Project project2 = new Project(category2);
+		Project project2 = new Project(category1);
 		project1.setProject("project1", "Some dscr", 100, 31, 2, "some history", "video", "FAQ");
 		project2.setProject("project2", "Some dscr2", 100, 31, 2, "some history2", "video2", "FAQ2");
 		projects.addProject(project1);
 		projects.addProject(project2);
+		projects.chooseProjects(category1);
 		
 		//then
-		assertEquals(3, projects.giveAllInfo(project1).size());
-		assertEquals(3, projects.giveAllInfo(project2).size());
-		assertEquals("[some history, video, FAQ]", projects.giveAllInfo(project1).toString());
-		assertEquals("[some history2, video2, FAQ2]", projects.giveAllInfo(project2).toString());
+		assertEquals(2, projects.getLenth());
 	}
-	
 	
 }

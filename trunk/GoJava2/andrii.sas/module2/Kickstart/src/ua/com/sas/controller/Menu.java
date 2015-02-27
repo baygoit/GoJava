@@ -1,18 +1,17 @@
 package ua.com.sas.controller;
 
-import ua.com.sas.view.Input;
-import ua.com.sas.view.Output;
+import ua.com.sas.view.*;
 
 public abstract class Menu {
 	
 	private Input input;
-	private Output output;
+	private View view;
 	private int checkedValue;
 
 
-	public Menu(Input input, Output output){
+	public Menu(Input input, View view){
 		this.input = input;
-		this.output = output;
+		this.view = view;
 	}
 	
 	public int checkForEnteringLetters(){
@@ -22,7 +21,7 @@ public abstract class Menu {
 				l = Integer.parseInt(input.readChoice());
 				break;
 			} catch (Exception e){
-				output.println("Error!! You must enter numbers! - Try again:");
+				view.println("Error!! You must enter numbers! - Try again:");
 			}
 		}
 		return l;

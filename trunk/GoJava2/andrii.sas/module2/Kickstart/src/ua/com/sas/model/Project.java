@@ -99,8 +99,8 @@ public class Project {
 	
 	public void putPayments(){
 		payments.put(FIRST_SUM, informForNoBonuses(bonus1$));
-		payments.put(SECOND_SUM, informForNoBonuses(bonus10$));
 		payments.put(THIRD_SUM, informForNoBonuses(bonus40$));
+		payments.put(SECOND_SUM, informForNoBonuses(bonus10$));
 	}
 
 	public String informForNoBonuses(String bonus) {

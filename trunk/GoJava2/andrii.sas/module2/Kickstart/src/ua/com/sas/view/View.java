@@ -1,10 +1,11 @@
 package ua.com.sas.view;
 
 
+import java.util.List;
+
 import ua.com.sas.model.Categories;
 import ua.com.sas.model.Category;
 import ua.com.sas.model.Project;
-import ua.com.sas.model.Projects;
 import ua.com.sas.model.Quote;
 
 public class View {
@@ -31,26 +32,51 @@ public class View {
 		println("You chose - " + category.getName());
 	}
 	
-	public void showProjects(Projects projects) {
+	public void printChosenProject(Project project) {
+		printHorizontalLine();
+		println("You chose:"
+				+ (writeProject(project)));
+		giveAllInfo(project);
+		printHorizontalLine();
+	}
+	
+	public String writeProject(Project project) {
+		return " Name - " + project.getProjectName() + ", Description - "
+				+ project.getDescription() + ", Money we need - "
+				+ project.getMoneyNeed() + ", Money we have - "
+				+ project.getMoneyHas() + ", Days left - "
+				+ project.getDaysLeft();
+	}
+	
+	public void showProjects(List<Project> projects) {
 		int j = 1;
-		for (String project : projects.writeProjects()){
-			println(j + ")" + project);
+		for (Project project : projects) {
+			println(j + ")" + writeProject(project));
 			j++;
 		}
 		println("If you want to return press \"0\"");
 	}
 	
-	public void printChosenProject(Projects projects, Project project) {
-		printHorizontalLine();
-		println("You chose:"
-				+ (projects.writeProject(project)));
-		for (String s : projects.giveAllInfo(project)){
-			println(s);
-		}
-		printHorizontalLine();
+	public void giveAllInfo(Project project) {
+		println(project.getHistory());
+		println(project.getVideoLink());
+		println(project.getQuestion());
 	}
 
 	public void printHorizontalLine() {
 		println("--------------------------------------------------");
 	}
+	
+	public void categoryChoiceError(){
+		println("Error!! There are no such category - Try again:");
+	}
+	
+	public void endMessage(){
+		println("Thanks for using our program, Goodbye!");
+	}
+	
+	public void projectChoiseError(){
+		println("Error!! There are no such project - Try again:");
+	}
+	
 }
