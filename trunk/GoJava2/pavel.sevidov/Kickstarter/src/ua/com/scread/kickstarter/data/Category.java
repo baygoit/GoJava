@@ -2,7 +2,7 @@ package ua.com.scread.kickstarter.data;
 
 public class Category {
 	private String name;
-    private int index;
+    private int id;
 
 	public Category(String name) {
 		this.name = name;
@@ -10,10 +10,14 @@ public class Category {
 	
 	public Category(int index, String name) {
 	    this(name);
-        this.index = index;
+        this.id = index;
 	}
 
-	public String getName() {
+	public Category(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
 		return name;
 	}
 	
@@ -22,8 +26,8 @@ public class Category {
         return name + "\n";
 	}
 
-    public int getIndex() {
-        return index;
+    public int getId() {
+        return id;
     }
 
     @Override

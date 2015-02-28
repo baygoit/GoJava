@@ -3,7 +3,8 @@ package ua.com.scread.kickstarter.data;
 import ua.com.scread.kickstarter.storage.Bonuses;
 
 public class Project {
-	private String name;
+	private int id;
+    private String name;
 	private String description;
 	private double collected;
 	private double amount;
@@ -31,7 +32,13 @@ public class Project {
 		
 	}
 
-	public String getName() {
+	public Project(int id, String name, String description) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+    }
+
+    public String getName() {
 		return name;
 	}
 
@@ -124,5 +131,9 @@ public class Project {
         }
         
         return true;
+    }
+
+    public int getId() {
+        return id;
     }
 }
