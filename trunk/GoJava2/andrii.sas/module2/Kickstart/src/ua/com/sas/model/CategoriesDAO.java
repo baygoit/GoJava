@@ -1,7 +1,6 @@
 package ua.com.sas.model;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -9,145 +8,75 @@ import java.sql.Statement;
 public class CategoriesDAO implements Categories {
 
 	private Connection connection;
-	private String nameOfDB;
 	
-	public CategoriesDAO(String nameOfDB) {
-		this.nameOfDB = nameOfDB;
+	public CategoriesDAO(ConnectionDAO connectionDAO) {
+		connection = connectionDAO.getConnection();
 	}
 	
 	@Override
 	public void addCategory(Category category) {
 		try {
-			Class.forName("org.postgresql.Driver");
-			try {
-				connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/" + nameOfDB, "postgres", "gfhfien17");
-				Statement statement = connection.createStatement();
-				statement.setQueryTimeout(30);
-				statement.execute("insert into categories (name) values (\'" + category.getName() + "\')");
-			} catch (SQLException e) {
-				throw new RuntimeException("Connection Failed! Check output console", e);
-			}
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Problems with JDBC driver!!!", e);
-		} finally {
-			try {
-				connection.close();
-			} catch (SQLException e) {
-				throw new RuntimeException("Can't close connection");
-			}
+			Statement statement = connection.createStatement();
+			statement.setQueryTimeout(30);
+			statement.execute("insert into categories (name) values (\'" + category.getName() + "\')");
+		} catch (SQLException e) {
+			throw new RuntimeException("Connection Failed! Check output console", e);
 		}
 	}
-
 	@Override
 	public String getCategories() {
 		try {
-			Class.forName("org.postgresql.Driver");
-			try {
-				connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/" + nameOfDB, "postgres", "gfhfien17");
-				Statement statement = connection.createStatement();
-				statement.setQueryTimeout(30);
-				ResultSet rs = statement.executeQuery("select * from categories");
-				String result = "";
-				int index = 1;
-				while (rs.next()){
-					String lastPart = getLenth() == index ? "" : ", ";
-					result += index + " - " + rs.getString("name") + lastPart;
-					index++;
-				}
-				return result;
-			} catch (SQLException e) {
-				throw new RuntimeException("Connection Failed! Check output console", e);
+			Statement statement = connection.createStatement();
+			statement.setQueryTimeout(30);
+			ResultSet rs = statement.executeQuery("select * from categories");
+			String result = "";
+			int index = 1;
+			while (rs.next()){
+				String lastPart = getLenth() == index ? "" : ", ";
+				result += index + " - " + rs.getString("name") + lastPart;
+				index++;
 			}
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Problems with JDBC driver!!!", e);
-		} finally {
-			try {
-				connection.close();
-			} catch (SQLException e) {
-				throw new RuntimeException("Can't close connection");
-			}
+			return result;
+		} catch (SQLException e) {
+			throw new RuntimeException("Connection Failed! Check output console", e);
 		}
 	}
 	
 	@Override
 	public Category readCategory(int index) {
 		try {
-			Class.forName("org.postgresql.Driver");
-			try {
-				Category category = null;
-				connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/" + nameOfDB, "postgres", "gfhfien17");
-				Statement statement = connection.createStatement();
-				statement.setQueryTimeout(30);
-				ResultSet rs = statement.executeQuery("select * from categories");
-				int i = 0;
-				while (rs.next()) {
-					if (index == i){
-						category = new Category(rs.getInt("id"), rs.getString("name"));
-					}
-					i++;
+			Category category = null;
+			Statement statement = connection.createStatement();
+			statement.setQueryTimeout(30);
+			ResultSet rs = statement.executeQuery("select * from categories");
+			int i = 0;
+			while (rs.next()) {
+				if (index == i){
+					category = new Category(rs.getInt("id"), rs.getString("name"));
 				}
-				return category;
-			} catch (SQLException e) {
-				throw new RuntimeException("Connection Failed! Check output console", e);
+				i++;
 			}
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Problems with JDBC driver!!!", e);
-		} finally {
-			try {
-				connection.close();
-			} catch (SQLException e) {
-				throw new RuntimeException("Can't close connection");
-			}
+			return category;
+		} catch (SQLException e) {
+			throw new RuntimeException("Connection Failed! Check output console", e);
 		}
 	}
 
 	@Override
 	public int getLenth() {
 		try {
-			Class.forName("org.postgresql.Driver");
-			try {
-				int size = 0;
-				connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/" + nameOfDB, "postgres", "gfhfien17");
-				Statement statement = connection.createStatement();
-				statement.setQueryTimeout(30);
-				ResultSet rs = statement.executeQuery("select count(*) from categories");
-				while (rs.next()) {
-					size = rs.getInt(1);
-				}
-				return size;
-			} catch (SQLException e) {
-				throw new RuntimeException("Connection Failed! Check output console", e);
+			int size = 0;
+			Statement statement = connection.createStatement();
+			statement.setQueryTimeout(30);
+			ResultSet rs = statement.executeQuery("select count(*) from categories");
+			while (rs.next()) {
+				size = rs.getInt(1);
 			}
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Problems with JDBC driver!!!", e);
-		} finally {
-			try {
-				connection.close();
-			} catch (SQLException e) {
-				throw new RuntimeException("Can't close connection");
-			}
+			return size;
+		} catch (SQLException e) {
+			throw new RuntimeException(
+					"Connection Failed! Check output console", e);
 		}
 	}
-	
-	public void deleteData() {
-		try {
-			Class.forName("org.postgresql.Driver");
-			try {
-				connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/" + nameOfDB, "postgres", "gfhfien17");
-				Statement statement = connection.createStatement();
-				statement.setQueryTimeout(30);
-				statement.executeUpdate("delete from categories");
-			} catch (SQLException e) {
-				throw new RuntimeException("Connection Failed! Check output console", e);
-			}
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Problems with JDBC driver!!!", e);
-		} finally {
-			try {
-				connection.close();
-			} catch (SQLException e) {
-				throw new RuntimeException("Can't close connection");
-			}
-		}
-	}
+
 }

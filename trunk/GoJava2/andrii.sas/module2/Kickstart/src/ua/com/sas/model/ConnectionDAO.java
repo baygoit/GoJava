@@ -7,7 +7,6 @@ import java.sql.SQLException;
 public class ConnectionDAO {
 	
 	private Connection connection;
-	private boolean end = false;
 	private String nameOfDB;
 	private String login;
 	private String password;
@@ -27,14 +26,14 @@ public class ConnectionDAO {
 			throw new RuntimeException("Smth wrong with driver, reinstall it", e);
 		} catch (SQLException e) {
 			throw new RuntimeException("Connection failed, check your connection parameters", e);
-		} finally {
-			try {
-				if(end){
-					connection.close();
-				}
-			} catch (SQLException e) {
-				throw new RuntimeException("Can't close connection", e);
-			}
+		}
+	}
+
+	public void closeConnection() {
+		try {
+			connection.close();
+		} catch (SQLException e) {
+			throw new RuntimeException("Can't close connection", e);
 		}
 	}
 	
@@ -42,7 +41,4 @@ public class ConnectionDAO {
 		return connection;
 	}
 	
-	public void closeConnection(boolean end){
-		this.end = end;
-	}
 }

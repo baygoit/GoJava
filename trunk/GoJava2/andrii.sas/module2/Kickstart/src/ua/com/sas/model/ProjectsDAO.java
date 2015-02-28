@@ -4,14 +4,14 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProjectsDAO implements Projects{
-	
 	private Connection connection;
 
-	public ProjectsDAO(Connection connection){
-		this.connection = connection;
+	public ProjectsDAO(ConnectionDAO connectionDAO){
+		connection = connectionDAO.getConnection();
 	}
 
 	@Override
@@ -30,7 +30,7 @@ public class ProjectsDAO implements Projects{
 		Project project = null;
 			while (rs.next()){
 				if (i == index){
-					project = new Project(new Category(rs.getInt("category_id"), rs.getString("name")));
+					project = new Project(new Category(rs.getInt("category_id")));
 					project.setProject(rs.getString("name"), rs.getString("description"), rs.getInt("money_need"), rs.getInt("money_has"),
 							rs.getInt("days_left"), rs.getString("history"), rs.getString("video_link"), rs.getString("question"));
 				}
@@ -57,19 +57,24 @@ public class ProjectsDAO implements Projects{
 			throw new RuntimeException("Connection failed, check your connection parameters", e);
 		}
 	}
-	
-	public static void main(String[] args){
-		ConnectionDAO dbConnect = new ConnectionDAO("kickstarter_db", "postgres", "gfhfien17");
-		Connection connection = dbConnect.getConnection();
-		Projects projects = new ProjectsDAO(connection);
-		System.out.println(projects.getLenth());
-		dbConnect.closeConnection(true);
-		System.out.println(projects.readObject(1));
-	}
 
 	@Override
 	public List<Project> chooseProjects(Category category) {
-		// TODO Auto-generated method stub
-		return null;
+		try {
+			Project project;
+			List<Project> categoryProjects = new ArrayList<Project>();
+			Statement statement = connection.createStatement();
+			statement.setQueryTimeout(30);
+			ResultSet rs = statement.executeQuery("SELECT * FROM projects INNER JOIN categories ON category_id = categories.id WHERE categories.id = " + category.getId());
+			while (rs.next()){
+				project = new Project(category);
+				project.setProject(rs.getString("name"), rs.getString("description"), rs.getInt("money_need"), rs.getInt("money_has"),
+						rs.getInt("days_left"), rs.getString("history"), rs.getString("video_link"), rs.getString("question"));
+				categoryProjects.add(project);
+			}
+			return categoryProjects;
+		} catch (SQLException e) {
+			throw new RuntimeException("Connection failed, check your connection parameters", e);
+		}
 	}
 }

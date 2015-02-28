@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Project {
+	private int id;
+	private int categoryId;
 	private String nameOfProject;
 	private String description;
 	private int moneyNeed;
@@ -40,8 +42,15 @@ public class Project {
 		this.videoLink = videoLink;
 		this.questions = questions;
 	}
-	
 
+	public int getCategoryId() {
+		return categoryId;
+	}
+	
+	public void setCategoryId(int categoryId) {
+		this.categoryId = categoryId;
+	}
+	
 	@Override
 	public String toString() {
 		return "Project [nameOfProject=" + nameOfProject + ", description="
@@ -50,6 +59,11 @@ public class Project {
 				+ category + ", history=" + history + ", videoLink="
 				+ videoLink + ", questions=" + questions + "]";
 	}
+	
+	public int getId(){
+		return id;
+	}
+
 
 	public String getProjectName(){
 		return nameOfProject;
@@ -110,6 +124,35 @@ public class Project {
 	public Map<Integer, String> getPayments(){
 		putPayments();
 		return payments;
+	}
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + id;
+		result = prime * result
+				+ ((nameOfProject == null) ? 0 : nameOfProject.hashCode());
+		return result;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Project other = (Project) obj;
+		if (id != other.id)
+			return false;
+		if (nameOfProject == null) {
+			if (other.nameOfProject != null)
+				return false;
+		} else if (!nameOfProject.equals(other.nameOfProject))
+			return false;
+		return true;
 	}
 	
 }

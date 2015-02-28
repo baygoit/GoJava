@@ -23,7 +23,6 @@ public class StorageTest {
 		Storage storage = new Storage(out, in, quote);
 		
 		//when
-		
 		when(rand.nextInt()).thenReturn(0);
 		when(in.readChoice()).thenReturn("51", "2", "51", "1", "0", "0", "0");
 		storage.initiate();

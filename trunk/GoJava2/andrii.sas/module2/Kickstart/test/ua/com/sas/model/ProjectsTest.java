@@ -19,8 +19,8 @@ public abstract class ProjectsTest {
 	@Before
 	public void start(){
 		projects = getProjects();
-		category1 = new Category("category1");
-		category2 = new Category("category2");
+		category1 = new Category(1, "category1");
+		category2 = new Category(2, "category2");
 		project1 = new Project(category1);
 	}
 	
