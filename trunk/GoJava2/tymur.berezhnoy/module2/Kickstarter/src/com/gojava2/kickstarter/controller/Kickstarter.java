@@ -26,13 +26,13 @@ public class Kickstarter {
 		quoteStorage.addQuote(new Quote("When you're curious, you find lots of interesting things to do.", "Walt Disney"));
 		
 		Category category1 = new Category("Art");
-		categoryStorage.addCategory(category1);
-		
 		Category category2 = new Category("Comics");
-		categoryStorage.addCategory(category2);
-		
 		Category category3 = new Category("Dance");
+		
+		categoryStorage.addCategory(category1);
+		categoryStorage.addCategory(category2);
 		categoryStorage.addCategory(category3);
+		
 		
 		Category category4 = new Category("Gamse");
 		categoryStorage.addCategory(category4);

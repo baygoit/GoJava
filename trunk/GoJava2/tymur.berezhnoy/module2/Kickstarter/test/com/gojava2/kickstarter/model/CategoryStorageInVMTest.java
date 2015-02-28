@@ -23,7 +23,7 @@ public class CategoryStorageInVMTest {
 		storageInVM.addCategory(category);
 		
 		// then
-		assertTrue("Expected, that collections contains new added category", 
+		assertTrue("Expected, that collection contains new added category", 
 					storageInVM.getCategories().contains(category));
 	}
 	
@@ -32,9 +32,11 @@ public class CategoryStorageInVMTest {
 		// given
 		
 		// when
+		int expectedSize = 0;
 		
 		// then
-		assertEquals(0, storageInVM.getCategories().size());
+		assertEquals("Expected, that collection size is 0 when no categories",
+					expectedSize, storageInVM.getCategories().size());
 	}
 	
 	@Test
