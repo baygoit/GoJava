@@ -82,7 +82,6 @@ public class Schedule {
                 amountDays++;
             }
         } catch (ParseException e) {
-            // TODO Auto-generated catch block
             System.err.print(e.getMessage());
         }
     }

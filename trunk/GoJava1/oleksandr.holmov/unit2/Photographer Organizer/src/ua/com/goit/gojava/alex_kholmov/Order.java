@@ -3,11 +3,6 @@
  */
 package ua.com.goit.gojava.alex_kholmov;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
 
 /**
  * @author SASH
@@ -16,25 +11,23 @@ import java.util.GregorianCalendar;
 public class Order {
     private Customer customer;
     private FotoStudio fotoStudio;
-    private SellService service;
+    private Photography service;
     private Schedule schedule;
-    private static int orderId;
+    private int orderId;
 
-//    public Order(Customer customer, FotoStudio fotoStudio, SellService service, Schedule schedule) {
-//        // TODO Auto-generated constructor stub
-//        this.customer = customer;
-//        this.fotoStudio = fotoStudio;
-//        this.service = service;
-//        this.schedule = schedule;
-//        orderId++;
-//    }
+    public Order(Customer customer, FotoStudio fotoStudio, Photography service, Schedule schedule) {
+        this.customer = customer;
+        this.fotoStudio = fotoStudio;
+        this.service = service;
+        this.schedule = schedule;
+    }
 
-    static int getId() {
+    int getId() {
         return orderId;
     }
     
-    static void setOrderId(int orderId) {
-        Order.orderId = orderId;
+    void setOrderId(int orderId) {
+        this.orderId = orderId;
     }
 
     void setCustomer(Customer customer) {
@@ -45,7 +38,7 @@ public class Order {
         this.fotoStudio = fotoStudio;
     }
     
-    void setService(SellService service) {
+    void setService(Photography service) {
         this.service = service;
     }
 

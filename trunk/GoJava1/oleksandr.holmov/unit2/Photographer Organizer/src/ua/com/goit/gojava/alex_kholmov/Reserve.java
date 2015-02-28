@@ -65,7 +65,6 @@ public class Reserve {
         try {
             reserveDate = dateFormat.parse(date);
         } catch (ParseException e) {
-            // TODO: handle exception
             System.err.print(e.getMessage());
         }
     }

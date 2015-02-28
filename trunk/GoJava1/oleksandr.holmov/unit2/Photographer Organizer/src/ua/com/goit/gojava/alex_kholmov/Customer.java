@@ -8,31 +8,29 @@ package ua.com.goit.gojava.alex_kholmov;
  *
  */
 public class Customer {
-    private Contacts contacts;
+    private Contact contact;
     private String additionalInfo;
-    private static int customerId;
+    private int customerId;
 
-//    public Customer(Contacts contacts, String additionalInfo) {
-//        // TODO Auto-generated constructor stub
-//        this.contacts = contacts;
-//        this.additionalInfo = additionalInfo;
-//        customerId++;
-//    }
+    public Customer(Contact contact, String additionalInfo) {
+        this.contact = contact;
+        this.additionalInfo = additionalInfo;
+    }
 
-    static int getCustomerId() {
+    int getCustomerId() {
         return customerId;
     }
 
-    static void setCustomerId(int customerId) {
-        Customer.customerId = customerId;
+    void setCustomerId(int customerId) {
+        this.customerId = customerId;
     }
 
-    Contacts getContacts() {
-        return contacts;
+    Contact getContacts() {
+        return contact;
     }
     
-    void setContacts(Contacts contacts) {
-        this.contacts = contacts;
+    void setContacts(Contact contact) {
+        this.contact = contact;
     }
     
     String getAdditionalInfo() {

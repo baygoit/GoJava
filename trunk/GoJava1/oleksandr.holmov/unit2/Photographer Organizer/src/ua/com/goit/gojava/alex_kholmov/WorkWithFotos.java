@@ -4,13 +4,14 @@
 package ua.com.goit.gojava.alex_kholmov;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author SASH
  *
  */
 public class WorkWithFotos {
-    ArrayList<PackageFotos> allFotos = new ArrayList<PackageFotos>();
+    List<PackageFotos> allFotos = new ArrayList<PackageFotos>();
 
     void addPackage(PackageFotos pFotos) {
         allFotos.add(pFotos);
@@ -27,7 +28,7 @@ public class WorkWithFotos {
         } else {
             int hoursToEditAllPhotos = 0;
             for (PackageFotos pFotos : allFotos) {
-                hoursToEditAllPhotos += pFotos.timeEditAllFoto() / 60;
+                hoursToEditAllPhotos += pFotos.timeEditAllFotos() / 60;
             }
             return hoursToEditAllPhotos;
         }

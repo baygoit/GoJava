@@ -10,22 +10,21 @@ import java.io.Serializable;
  *
  */
 public class PackageFotos implements Serializable{
-    private String describePackage;
+    private String packageDescription;
     private int amountFotos;
-    private int timeEditingOneFoto; //minutes
-    private int percentReserve;     //percents
-    private static int packageId;
+    private int timeEditingOneFoto;     //minutes
+    private int percentReserveTime;     //percents
+    private int packageId;
 
     public PackageFotos() {
-        // TODO Auto-generated constructor stub
+
     }
     
-    public PackageFotos(String describePackage, int amountFotos, int timeEditingFoto, int percentReserve, int packageId) {
-        this.describePackage = describePackage;
+    public PackageFotos(String packageDescription, int amountFotos, int timeEditingOneFoto, int percentReserveTime, int packageId) {
+        this.packageDescription = packageDescription;
         this.amountFotos = amountFotos;
-        this.timeEditingOneFoto = timeEditingFoto;
-        this.percentReserve = percentReserve;
-        this.packageId = packageId;
+        this.timeEditingOneFoto = timeEditingOneFoto;
+        this.percentReserveTime = percentReserveTime;
     }
     
     @Override
@@ -34,9 +33,9 @@ public class PackageFotos implements Serializable{
         int result = 1;
         result = prime * result + amountFotos;
         result = prime * result
-                + ((describePackage == null) ? 0 : describePackage.hashCode());
+                + ((packageDescription == null) ? 0 : packageDescription.hashCode());
         result = prime * result + timeEditingOneFoto;
-        result = prime * result + percentReserve;
+        result = prime * result + percentReserveTime;
         return result;
     }
 
@@ -51,34 +50,34 @@ public class PackageFotos implements Serializable{
         PackageFotos other = (PackageFotos) obj;
         if (amountFotos != other.amountFotos)
             return false;
-        if (describePackage == null) {
-            if (other.describePackage != null)
+        if (packageDescription == null) {
+            if (other.packageDescription != null)
                 return false;
-        } else if (!describePackage.equals(other.describePackage))
+        } else if (!packageDescription.equals(other.packageDescription))
             return false;
         if (timeEditingOneFoto != other.timeEditingOneFoto)
             return false;
-        if (percentReserve != other.percentReserve)
+        if (percentReserveTime != other.percentReserveTime)
             return false;
         return true;
     }
 
     
 
-    static int getPackageId() {
+    int getPackageId() {
         return packageId;
     }
 
-    static void setPackageId(int packageId) {
-        PackageFotos.packageId = packageId;
+    void setPackageId(int packageId) {
+        this.packageId = packageId;
     }
 
     String getDescribePackage() {
-        return describePackage;
+        return packageDescription;
     }
 
-    void setDescribePackage(String describePackage) {
-        this.describePackage = describePackage;
+    void setDescribePackage(String packageDescription) {
+        this.packageDescription = packageDescription;
     }
 
     int getAmountFotos() {
@@ -93,22 +92,22 @@ public class PackageFotos implements Serializable{
         return timeEditingOneFoto;
     }
     
-    void setTimeEditingFoto(int timeEditingFoto) {
-        this.timeEditingOneFoto = timeEditingFoto;
+    void setTimeEditingFoto(int timeEditingOneFoto) {
+        this.timeEditingOneFoto = timeEditingOneFoto;
     }
     
     int getPercentReserve() {
-        return percentReserve;
+        return percentReserveTime;
     }
 
-    void setPercentReserve(int percentReserve) {
-        this.percentReserve = percentReserve;
+    void setPercentReserve(int percentReserveTime) {
+        this.percentReserveTime = percentReserveTime;
     }
 
     //return time in minutes
-    int timeEditAllFoto() {
+    int timeEditAllFotos() {
         int allTime = amountFotos * timeEditingOneFoto;
-        return allTime + ((allTime * percentReserve) / 100);
+        return allTime + ((allTime * percentReserveTime) / 100);
     }
 
 }

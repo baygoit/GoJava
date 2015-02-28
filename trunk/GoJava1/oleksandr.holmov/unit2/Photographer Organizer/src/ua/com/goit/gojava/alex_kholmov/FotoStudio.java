@@ -3,34 +3,30 @@
  */
 package ua.com.goit.gojava.alex_kholmov;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
+import java.util.List;
 
 /**
  * @author SASH
  *
  */
 public class FotoStudio {
-    private Contacts contacts;
+    private Contact contact;
     private String additionalInfo;
-    ArrayList<Reserve> reservs = new ArrayList<Reserve>();
-    private static int studioId;
+    private int studioId;
+    List<Reserve> reservs = new ArrayList<Reserve>();
 
-//    public FotoStudio(Contacts contacts, String additionalInfo) {
-//        // TODO Auto-generated constructor stub
-//        this.contacts = contacts;
-//        this.additionalInfo = additionalInfo;
-//        studioId++;
-//    }
+    public FotoStudio(Contact contact, String additionalInfo) {
+        this.contact = contact;
+        this.additionalInfo = additionalInfo;
+    }
 
-    static int getStudioId() {
+    int getStudioId() {
         return studioId;
     }
 
-    static void setStudioId(int studioId) {
-        FotoStudio.studioId = studioId;
+    void setStudioId(int studioId) {
+        this.studioId = studioId;
     }
     
     void addReserv(Reserve reserv) {
@@ -41,12 +37,12 @@ public class FotoStudio {
         reservs.remove(reserv);
     }
 
-    Contacts getContacts() {
-        return contacts;
+    Contact getContacts() {
+        return contact;
     }
 
-    void setContacts(Contacts contacts) {
-        this.contacts = contacts;
+    void setContacts(Contact contact) {
+        this.contact = contact;
     }
 
     String getAdditionalInfo() {

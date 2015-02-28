@@ -7,16 +7,16 @@ package ua.com.goit.gojava.alex_kholmov;
  * @author SASH
  *
  */
-public class Contacts {
+public class Contact {
     private String name;
     private String address;
     private String phone;
-
-//    public Contacts(String name, String address, String phone) {
-//        this.name = name;
-//        this.address = address;
-//        this.phone = phone;
-//    }
+    
+    public Contact(String name, String address, String phone) {
+        this.name = name;
+        this.address = address;
+        this.phone = phone;
+    }
     
     String getName() {
         return name;
