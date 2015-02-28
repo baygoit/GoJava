@@ -32,10 +32,14 @@ public class Project {
 		
 	}
 
-	public Project(int id, String name, String description) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
+    public Project(int id, String name, String description, double collected,
+            double amount, int days, String history, String video) {
+                this.id = id;
+                this.name = name;
+                this.collected = collected;
+                this.amount = amount;
+                name = description;
+                details = new AdditionalInfo(history, video);
     }
 
     public String getName() {

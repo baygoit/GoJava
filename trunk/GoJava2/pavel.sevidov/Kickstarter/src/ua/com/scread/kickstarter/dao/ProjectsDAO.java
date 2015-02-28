@@ -25,10 +25,17 @@ public class ProjectsDAO implements Projects {
     public void add(Project project) {
         try {
             PreparedStatement statement = connection.prepareStatement(
-                    "insert into projects (name, description, id_cat) values (?, ?, ?)");
+                    "insert into projects "
+                    + "(name, description, id_cat, collected, amount, days, history, video) "
+                    + "values (?, ?, ?, ?, ?, ?, ?)");
             statement.setString(2, project.getName());
             statement.setString(3, project.getDescription());
             statement.setInt(4, project.getCategory().getId());
+            statement.setDouble(5, project.getCollected());
+            statement.setDouble(6, project.getAmount());
+            statement.setInt(7, project.getDays());
+            statement.setString(8, project.getDetails().getHistory());
+            statement.setString(9, project.getDetails().getVideo());
             statement.execute();
         } catch (SQLException e) {
             throw new RuntimeException("Something happend while adding new project", e);
@@ -45,8 +52,13 @@ public class ProjectsDAO implements Projects {
                     "select * from projects where id_cat = " + category.getId());
             while (rs.next()) {
                 Project project = new Project(rs.getInt("id_prj"), 
-                        rs.getString("name"), 
-                        rs.getString("description"));
+                                            rs.getString("name"), 
+                                            rs.getString("description"),
+                                            rs.getDouble("collected"),
+                                            rs.getDouble("amount"),
+                                            rs.getInt("days"),
+                                            rs.getString("history"),
+                                            rs.getString("video"));
                 project.setCategory(category);
                 result.add(project);
             }   
@@ -68,13 +80,23 @@ public class ProjectsDAO implements Projects {
                             + "c.name as category_name, "
                             + "p.name as project_name, "
                             + "description, "
-                            + "p.id_prj as project_id "
+                            + "p.id_prj as project_id, "
+                            + "collected, "
+                            + "amount, "
+                            + "days, "
+                            + "history, "
+                            + "video "
                             + " from projects p, categories c where p.id_cat = c.id_cat and p.id_prj = " + index);
             
             if (rs.next()) {
                 Project project = new Project(rs.getInt("project_id"), 
-                        rs.getString("project_name"), 
-                        rs.getString("description"));
+                                            rs.getString("project_name"), 
+                                            rs.getString("description"),
+                                            rs.getDouble("collected"),
+                                            rs.getDouble("amount"),
+                                            rs.getInt("days"),
+                                            rs.getString("history"),
+                                            rs.getString("video"));
                 
                 Category category = new Category(rs.getInt("category_id"), rs.getString("category_name"));
                 

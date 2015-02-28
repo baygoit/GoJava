@@ -16,7 +16,12 @@ public class AdditionalInfo {
 		this.bonuses = bonuses;
 	}
 	
-	public String getHistory() {
+	public AdditionalInfo(String history, String video) {
+        this.history = history;
+        this.video = video;
+    }
+
+    public String getHistory() {
 		return history;
 	}
 	
