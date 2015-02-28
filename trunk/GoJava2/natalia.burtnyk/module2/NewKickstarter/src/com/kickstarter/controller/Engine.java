@@ -25,9 +25,9 @@ public class Engine {
 		if(input > 0 && input <= dataStorage.getCategoriesList().size()) {
 			Сategory category = dataStorage.getCategoriesList().get(input - 1);
 			consoleView.displaySelectedCategory(category);
-//			List<Project> projects = dataStorage.getSpecificProject(category);
-//			consoleView.displayProjectsOfCategory(projects);	
-//			consolePart_2(projects);
+			List<Project> projects = dataStorage.getSpecificProjects(category);
+			consoleView.displayProjectsOfCategory(projects);	
+			consolePart_2(projects);
 		    consolePart_1();
 		} else {
 			System.out.println("Incorrect number. Please try again.");

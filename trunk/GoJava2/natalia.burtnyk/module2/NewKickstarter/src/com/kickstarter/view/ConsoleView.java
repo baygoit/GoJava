@@ -34,7 +34,8 @@ public class ConsoleView {
 		
 		for (int i = 0; i < projects.size(); i++) {
 			stringResult = new StringBuilder();
-			stringResult.append(projects.get(i).getName()).append("\n")
+			stringResult.append(i + 1).append(". ")
+					.append(projects.get(i).getName()).append("\n")
 					.append("Description:        ").append(projects.get(i).getDescription())
 					.append("\n").append("Required Amount:    ").append(projects.get(i).getRequiredAmount()).append("$")
 					.append("\n").append("Total:              ").append(projects.get(i).getTotal()).append("$")

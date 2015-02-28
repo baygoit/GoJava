@@ -1,8 +1,6 @@
 package com.kickstarter.model;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class DataStorage {
 	
@@ -38,6 +36,12 @@ public class DataStorage {
 	}
 
    public List<Project> getSpecificProjects(Сategory сategory) {
-	   return null;
+	   List<Project> result = new ArrayList<Project>();
+	   for(Project p: projects) {
+		   if(p.getСategory().equals(сategory)) {
+			   result.add(p);
+		   }  
+	   }
+	   return result;
    }
 }
