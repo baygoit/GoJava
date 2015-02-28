@@ -1,6 +1,5 @@
 package ua.com.goit.gojava.kickstarter.in_file_storage;
 
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -18,8 +17,8 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
-import ua.com.goit.gojava.kickstarter.Category;
-import ua.com.goit.gojava.kickstarter.CategoryCatalog;
+import ua.com.goit.gojava.kickstarter.data.Category;
+import ua.com.goit.gojava.kickstarter.data.CategoryCatalog;
 
 public class InFileCategoryCatalog implements CategoryCatalog {
 	int size;

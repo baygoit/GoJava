@@ -1,12 +1,12 @@
-package ua.com.goit.gojava.kickstarter.input_output;
-
+package ua.com.goit.gojava.kickstarter.output;
 
 import java.util.List;
 
-import ua.com.goit.gojava.kickstarter.Category;
-import ua.com.goit.gojava.kickstarter.CategoryCatalog;
-import ua.com.goit.gojava.kickstarter.in_memory_storage.Project;
-import ua.com.goit.gojava.kickstarter.in_memory_storage.ProjectParameters;
+import ua.com.goit.gojava.kickstarter.data.Category;
+import ua.com.goit.gojava.kickstarter.data.CategoryCatalog;
+import ua.com.goit.gojava.kickstarter.data.Parameters;
+import ua.com.goit.gojava.kickstarter.data.Project;
+import ua.com.goit.gojava.kickstarter.data.Status;
 
 public class Printer {
 	Output out;
@@ -29,7 +29,7 @@ public class Printer {
 	}
 
 	public void showProjects(Category category) {
-		
+
 		for (int i = 0; i < category.size(); i++) {
 			showProjectPreviev(category.getProject(i));
 		}
@@ -43,26 +43,23 @@ public class Printer {
 	private void showProjectPreviev(Project project) {
 		out.print(project.getName());
 		out.print(project.getDescription());
-		ProjectParameters param = project.getParameters();
+		Status param = project.getStatus();
 		out.print("Need to collect " + param.getCost() + "$");
-		
+
 		out.print("Already Collected " + param.getAlreadyCollected() + "$");
 		out.print("Days left " + param.getDays());
 	}
 
 	private void showProjectDetailedInfo(Project project) {
-		ProjectParameters.DetailedParameters param = project.getParameters()
-				.getDetailedParameters();
-		out.print(param.getHisory());
-		out.print("Link on demo video: " + param.getDemoLink());
-		out.print("FAQ: " + param.getFaqLink());
+		Parameters status = project.getParameters();
+		out.print(status.getHisory());
+		out.print("Link on demo video: " + status.getDemoLink());
+		out.print("FAQ: " + status.getFaqLink());
 	}
 
 	public void print(String s) {
 		out.print(s);
-		
-	}
 
-	
+	}
 
 }

@@ -1,10 +1,8 @@
-package ua.com.goit.gojava.kickstarter;
-
+package ua.com.goit.gojava.kickstarter.data;
 
 import java.util.List;
 
 import ua.com.goit.gojava.kickstarter.exceptions.IlligalInputException;
-import ua.com.goit.gojava.kickstarter.in_memory_storage.Project;
 
 public interface Category {
 

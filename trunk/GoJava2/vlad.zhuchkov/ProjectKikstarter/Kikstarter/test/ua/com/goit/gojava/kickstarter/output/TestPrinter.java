@@ -1,12 +1,12 @@
-package ua.com.goit.gojava.kickstarter;
+package ua.com.goit.gojava.kickstarter.output;
 import org.junit.Before;
 import org.junit.Test;
 
-import ua.com.goit.gojava.kickstarter.CategoryCatalog;
+import ua.com.goit.gojava.kickstarter.data.CategoryCatalog;
 import ua.com.goit.gojava.kickstarter.in_memory_storage.InMemoryCategoryCatalog;
-import ua.com.goit.gojava.kickstarter.input_output.Output;
-import ua.com.goit.gojava.kickstarter.input_output.Printer;
-import ua.com.goit.gojava.kickstarter.input_output.Reader;
+import ua.com.goit.gojava.kickstarter.input.Reader;
+import ua.com.goit.gojava.kickstarter.output.Output;
+import ua.com.goit.gojava.kickstarter.output.Printer;
 import static org.mockito.Mockito.*;
 
 public class TestPrinter {

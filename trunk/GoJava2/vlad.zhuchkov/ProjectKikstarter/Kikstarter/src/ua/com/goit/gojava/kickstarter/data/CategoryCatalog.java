@@ -1,5 +1,4 @@
-package ua.com.goit.gojava.kickstarter;
-
+package ua.com.goit.gojava.kickstarter.data;
 
 import java.util.List;
 
@@ -9,7 +8,7 @@ public interface CategoryCatalog {
 
 	List<String> getCatalog();
 
-	Category getCategory(int i);
+	Category getCategory(int id);
 
 	int size();
 

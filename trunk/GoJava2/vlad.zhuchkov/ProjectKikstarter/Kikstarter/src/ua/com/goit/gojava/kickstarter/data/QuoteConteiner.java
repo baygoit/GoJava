@@ -1,5 +1,4 @@
-package ua.com.goit.gojava.kickstarter.in_memory_storage;
-
+package ua.com.goit.gojava.kickstarter.data;
 
 import java.util.ArrayList;
 import java.util.Random;
