@@ -11,23 +11,23 @@ public class Engine {
 
 	private InPut inPut;
 	private ConsoleView consoleView;
-	private DataStorage storage;
+	private DataStorage dataStorage;
 	
-	public Engine() {
-		consoleView = new ConsoleView();
-		inPut = new InPut();
-		storage = new DataStorage();
+	public Engine(ConsoleView consoleView, DataStorage dataStorage, InPut inPut) {
+		this.consoleView = consoleView;
+		this.inPut = inPut;
+		this.dataStorage = dataStorage;
 	}
 
 	public void consolePart_1() {
 		System.out.print("\n" + "Please select category: ");
 		int input = inPut.readInput();
-		if(input > 0 && input <= storage.getCategoriesList().size()) {
-			Сategory category = storage.getCategoriesList().get(input - 1);
+		if(input > 0 && input <= dataStorage.getCategoriesList().size()) {
+			Сategory category = dataStorage.getCategoriesList().get(input - 1);
 			consoleView.displaySelectedCategory(category);
-			List<Project> projects = storage.getSpecificProject(category);
-			consoleView.displayProjectsOfCategory(projects);	
-			consolePart_2(projects);
+//			List<Project> projects = dataStorage.getSpecificProject(category);
+//			consoleView.displayProjectsOfCategory(projects);	
+//			consolePart_2(projects);
 		    consolePart_1();
 		} else {
 			System.out.println("Incorrect number. Please try again.");
@@ -43,7 +43,7 @@ public class Engine {
 			consolePart_3(projects);
 			consolePart_2(projects);
 		} else if (input == 0) {
-			consoleView.displayListCategories(storage.getCategoriesList());
+			consoleView.displayListCategories(dataStorage.getCategoriesList());
 		} else {
 			System.out.println("Incorrect number. Please try again.");
 			consolePart_2(projects);
@@ -62,8 +62,8 @@ public class Engine {
 
 	public void run() {
 		consoleView.displayWelcome();
-		consoleView.displayQuote(storage.getRundomQuote());
-		consoleView.displayListCategories(storage.getCategoriesList());
+		consoleView.displayQuote(dataStorage.getRundomQuote());
+		consoleView.displayListCategories(dataStorage.getCategoriesList());
 		consolePart_1();
 	}
 }

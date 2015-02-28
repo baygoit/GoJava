@@ -1,10 +1,12 @@
 package com.kickstarter.model;
 public class Project {
 	
+	private Сategory сategory;
 	private String name;
 	private String history;
 	private String url;
 	private String description;
+	
 	private int requiredAmount;
 	private int total;
 	private int days;
@@ -19,6 +21,14 @@ public class Project {
 		this.total = total;
 		this.days = days;
 		
+	}
+	
+	public void setСategory(Сategory сategory) {
+		this.сategory = сategory;
+	}
+	
+	public Сategory getСategory() {
+		return сategory;
 	}
 		
 	public String getName() {
