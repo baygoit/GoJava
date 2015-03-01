@@ -1,8 +1,13 @@
-package ua.goit.goitjava.kickstarter;
+package ua.goit.goitjava.kickstarterInMemory;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import ua.goit.goitjava.kickstarter.Category;
+import ua.goit.goitjava.kickstarter.FAQ;
+import ua.goit.goitjava.kickstarter.Project;
+import ua.goit.goitjava.kickstarter.Quote;
 
 public class Output {
 	public void printQuote() {

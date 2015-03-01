@@ -1,7 +1,11 @@
-package ua.goit.goitjava.kickstarter;
+package ua.goit.goitjava.kickstarterInMemory;
 
 //import java.lang.reflect.Array;
 import java.util.ArrayList;
+
+import ua.goit.goitjava.kickstarter.Category;
+import ua.goit.goitjava.kickstarter.FAQ;
+import ua.goit.goitjava.kickstarter.Project;
 
 public class Main {
 

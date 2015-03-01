@@ -1,6 +1,8 @@
-package ua.goit.goitjava.kickstarter;
+package ua.goit.goitjava.kickstarterInMemory;
 
 import java.util.ArrayList;
+
+import ua.goit.goitjava.kickstarter.Category;
 
 public class Categories {
 	

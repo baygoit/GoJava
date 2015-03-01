@@ -1,4 +1,4 @@
-package ua.goit.goitjava.kickstarter;
+package ua.goit.goitjava.kickstarterInMemory;
 
 import java.util.Scanner;
 

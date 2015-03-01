@@ -56,7 +56,7 @@ public class ProjectDAO {
 
 	}
 
-	public Project getProjectByID(int id) {
+	/*public Project getProjectByID(int id) {
 		Connection c = null;
 		Statement st = null;
 		Project proj = null;
@@ -98,7 +98,7 @@ public class ProjectDAO {
 		}
 		return proj;
 
-	}
+	}*/
 
 	public void createProject(Project project) {
 		Connection c = null;
