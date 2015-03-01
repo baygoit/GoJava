@@ -2,18 +2,11 @@ package ua.com.goit.gojava2.vova.kickstarter.model;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 
 import ua.com.goit.gojava2.vova.kickstarter.util.PeriodBetweenDates;
 
 public class ProjectsFromDB implements Projects{
-	
-	private Statement statement;
-	
-	public ProjectsFromDB(Statement statement){
-		this.statement = statement;
-	}
 	
 	@Override
 	public String showProjectFull(int projectID) {
@@ -21,7 +14,7 @@ public class ProjectsFromDB implements Projects{
 
 		ResultSet result;
 		try {
-			result = statement.executeQuery("SELECT * FROM projects WHERE id_project =" + projectID);
+			result = ConnectToDB.statement.executeQuery("SELECT * FROM projects WHERE id_project =" + projectID);
 			while (result.next()) {
 	            s.append("project ID = ").append(result.getString("id_project")).append("\n")
 					.append("project name: ").append(result.getString("name_project")).append("\n")
@@ -48,7 +41,7 @@ public class ProjectsFromDB implements Projects{
 
 		ResultSet result;
 		try {
-			result = statement.executeQuery("SELECT id_project, name_project, short_description_project, "
+			result = ConnectToDB.statement.executeQuery("SELECT id_project, name_project, short_description_project, "
 	            		+ "how_much_needed_project, how_much_collected_project "
 	            		+ "FROM projects WHERE id_project =" + projectID);
 	            while (result.next()) {
@@ -68,7 +61,7 @@ public class ProjectsFromDB implements Projects{
 	@Override
 	public void setDonation(int chosenProject, int amount) {
 		try {
-			statement.execute("UPDATE projects SET how_much_collected_project=how_much_collected_project+" + amount
+			ConnectToDB.statement.execute("UPDATE projects SET how_much_collected_project=how_much_collected_project+" + amount
 			    	+ ", how_much_remaining_project=how_much_remaining_project-" + amount
 			    	+ "WHERE id_project=" + chosenProject + ";");
 		} catch (SQLException e) {
@@ -79,7 +72,7 @@ public class ProjectsFromDB implements Projects{
 	@Override
 	public void addFAQ(int projectID, String question) {
 		try {
-			 statement.execute("INSERT INTO faq(id_project, question)VALUES (" + projectID + ", '" + question + "');");
+			ConnectToDB.statement.execute("INSERT INTO faq(id_project, question)VALUES (" + projectID + ", '" + question + "');");
 		} catch (SQLException e) {
 			System.err.println( e.getClass().getName()+": "+ e.getMessage() );
 		}
@@ -91,7 +84,7 @@ public class ProjectsFromDB implements Projects{
 		
 		ResultSet result;
 		try {
-			result = statement.executeQuery("SELECT * FROM faq WHERE id_project =" + projectID);
+			result = ConnectToDB.statement.executeQuery("SELECT * FROM faq WHERE id_project =" + projectID);
 	            while (result.next()) {
 		            s.add(result.getString("question"));
 	            }

@@ -2,15 +2,9 @@ package ua.com.goit.gojava2.vova.kickstarter.model;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 
 public class CategoriesFromDB implements Categories{
-
-	Statement statement;
-	public CategoriesFromDB(Statement statement){
-		this.statement = statement;
-	}
 	
 	@Override
 	public String showAllCatecoriesInKickstarter() {
@@ -18,7 +12,7 @@ public class CategoriesFromDB implements Categories{
 
 		ResultSet result;
 		try {
-			result = statement.executeQuery("SELECT * FROM categories");
+			result = ConnectToDB.statement.executeQuery("SELECT * FROM categories");
 			while (result.next()) {
 			    s.append(result.getInt("id_category"))
 			    		.append(" ")
@@ -38,7 +32,7 @@ public class CategoriesFromDB implements Categories{
 
 		ResultSet result;
 		try {
-			result = statement.executeQuery("SELECT * FROM projects WHERE id_category =" + categoryId + "ORDER BY id_project");
+			result = ConnectToDB.statement.executeQuery("SELECT * FROM projects WHERE id_category =" + categoryId + "ORDER BY id_project");
             while (result.next()) {
                 s.append(result.getInt("id_project"))
                 	.append(", ").append(result.getString("name_project"))
@@ -60,7 +54,7 @@ public class CategoriesFromDB implements Categories{
 
 		ResultSet result;
 		try {
-			result = statement.executeQuery("SELECT * FROM categories WHERE id_category =" + categoryId);
+			result = ConnectToDB.statement.executeQuery("SELECT * FROM categories WHERE id_category =" + categoryId);
             while (result.next()) {
                 s.append(result.getString("name_category")).toString();
             }
@@ -77,7 +71,7 @@ public class CategoriesFromDB implements Categories{
 
 		ResultSet result;
 		try {
-			result = statement.executeQuery("SELECT * FROM categories");
+			result = ConnectToDB.statement.executeQuery("SELECT * FROM categories");
             while (result.next()) {
             	array.add(result.getInt("id_category"));
             }
@@ -100,7 +94,7 @@ public class CategoriesFromDB implements Categories{
 
 		ResultSet result;
 		try {
-			result = statement.executeQuery("SELECT id_category, id_project FROM projects WHERE id_category =" + categoryId + "ORDER BY id_project");
+			result = ConnectToDB.statement.executeQuery("SELECT id_category, id_project FROM projects WHERE id_category =" + categoryId + "ORDER BY id_project");
             while (result.next()) {
             	array.add(result.getInt("id_project"));
             }
