@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Currency;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -43,7 +44,11 @@ public class WebControllerCashMovement extends HttpServlet {
 			CashMovementEntry newEntry = statement.addEntry();
 			
 			try {
-				newEntry.setDate((new SimpleDateFormat("yyyy.MM.dd")).parse(date));
+				
+				String pattern = (date.length() == 10) ? "yyyy.MM.dd" : "yyyy.MM.dd HH:mm:ss";
+				SimpleDateFormat dateFormatter = new SimpleDateFormat(pattern);
+				newEntry.setDate(dateFormatter.parse(date));
+				
 			} catch (ParseException e) {
 				// TODO Auto-generated catch block
 			}
@@ -62,13 +67,10 @@ public class WebControllerCashMovement extends HttpServlet {
 			
 		} else if (req.getParameter("DellCurrent")!=null) {
 		
-			/*long id = Long.parseLong(req.getParameter("DellCurrent"));
+			long id = Long.parseLong(req.getParameter("DellCurrent"));
+			statement.deleteEntryById(id);
+			LazyDataManager.getInstance().saveData();
 			
-			DataManager dataManager = LazyDataManager.getInstance();
-			GenericDAO<BankAccount> genericDAO = new GenericDAO<BankAccount>(BankAccount.class, dataManager);
-			genericDAO.delete(genericDAO.getByID(id));
-			
-			dataManager.saveData();*/
 		}
 		
 		resp.sendRedirect(req.getHeader("referer"));

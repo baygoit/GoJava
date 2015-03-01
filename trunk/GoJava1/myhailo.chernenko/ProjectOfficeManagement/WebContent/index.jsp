@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	import="ua.com.goit.gojava.POM.dataModel.*,ua.com.goit.gojava.POM.persistence.*,ua.com.goit.gojava.POM.presentation.*" 
+	import="ua.com.goit.gojava.POM.dataModel.*,
+			ua.com.goit.gojava.POM.persistence.*,
+			ua.com.goit.gojava.POM.presentation.*" 
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -10,7 +12,9 @@
 <body>
 
 	<p><a href="CashSubsystem.jsp">Учет денежных средств</a></p>
-	<p><a href="CostItems.jsp">Статьи затрат</a></p>	
-
+	<!--
+		<p><a href="CostItems.jsp">Статьи затрат</a></p>
+		 -->	
+	 
 </body>
 </html>

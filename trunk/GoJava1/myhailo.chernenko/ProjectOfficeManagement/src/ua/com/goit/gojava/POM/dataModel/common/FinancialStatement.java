@@ -2,6 +2,7 @@ package ua.com.goit.gojava.POM.dataModel.common;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Currency;
 import java.util.Date;
 import java.util.HashMap;
@@ -16,7 +17,11 @@ public abstract class FinancialStatement<T extends FinancialEntry> implements Se
 	
 	private Class<T> classT;
 	private static final long serialVersionUID = 1799899656753465204L;
-	//private long id = 0;
+	private long id = 0;
+	private String description = "";
+	private Integer roundingMode = Calendar.MILLISECOND;
+	private Date fromDate;
+	private Date tillDate;
 	private List<T> financialEntries = new ArrayList<T>();
 	
 	public FinancialStatement(Class<T> classT) {
@@ -86,6 +91,16 @@ public abstract class FinancialStatement<T extends FinancialEntry> implements Se
 		
 		for (int i = financialEntries.size() - 1; i >= 0 ; i--) {
 			if (financialEntries.get(i).getDoc() == doc) {
+				financialEntries.remove(i);
+			}
+		}
+		
+	}
+	
+	public void deleteEntryById(long id) {
+		
+		for (int i = financialEntries.size() - 1; i >= 0 ; i--) {
+			if (financialEntries.get(i).getId() == id) {
 				financialEntries.remove(i);
 			}
 		}

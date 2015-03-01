@@ -1,28 +1,36 @@
 package ua.com.goit.gojava.POM.dataModel.common;
 
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class DateConvertor {
 	
-	public static Date roundDate(Date date, int roundindMode) {
+	private static Map<Integer, String> roundModeMap = new LinkedHashMap<Integer, String>();
+	static {
 		
-		List<Integer> roundingModes = Arrays.asList(Calendar.MILLISECOND, 
-													Calendar.SECOND,
-													Calendar.MINUTE,
-													Calendar.HOUR_OF_DAY,
-													//Calendar.DAY_OF_WEEK_IN_MONTH,
-													Calendar.DAY_OF_MONTH,
-													Calendar.MONTH,
-													Calendar.YEAR
-												);
+		roundModeMap.put(Calendar.MILLISECOND, "Millisecond");
+		roundModeMap.put(Calendar.SECOND, "Second");
+		roundModeMap.put(Calendar.MINUTE, "Minute");
+		roundModeMap.put(Calendar.HOUR_OF_DAY, "Hour");
+		roundModeMap.put(Calendar.DAY_OF_MONTH, "Day");
+		roundModeMap.put(Calendar.MONTH, "Month");
+		roundModeMap.put(Calendar.YEAR, "Year");
+		
+	}
+	
+	public static Map<Integer, String> getSupportedRoundModes() {
+		
+		return roundModeMap;
+	}
+	
+	public static Date roundDate(Date date, int roundindMode) {
 		
 		Calendar cal = Calendar.getInstance();
         cal.setTime(date);
         
-        for(Integer currentMode: roundingModes) { 
+        for(Integer currentMode: roundModeMap.keySet()) { 
         
         	if(currentMode > roundindMode) {
         		
