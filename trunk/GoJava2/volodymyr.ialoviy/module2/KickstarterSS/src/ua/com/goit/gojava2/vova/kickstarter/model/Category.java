@@ -2,9 +2,16 @@ package ua.com.goit.gojava2.vova.kickstarter.model;
 
 
 public class Category{
+	
 	private int categoryID;
 	private String categoryName;
 	private int[] projects;
+	
+	public Category(int categoryID, String categoryName, int[] projects) {
+		this.categoryID = categoryID;
+		this.categoryName = categoryName;
+		this.projects = projects;
+	}
 
 	public int getCategoryID() {
 		return categoryID;

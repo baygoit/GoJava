@@ -1,4 +1,4 @@
-package ua.com.goit.gojava2.vova.kickstarter.model;
+package ua.com.goit.gojava2.vova.kickstarter.util;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

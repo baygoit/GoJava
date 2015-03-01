@@ -3,6 +3,8 @@ package ua.com.goit.gojava2.vova.kickstarter.model;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import ua.com.goit.gojava2.vova.kickstarter.util.ConnectToDB;
+
 public class QuotesFromDB implements Quotes{
 	
 	@Override

@@ -3,9 +3,9 @@ package ua.com.goit.gojava2.vova.kickstarter.presenter;
 
 import ua.com.goit.gojava2.vova.kickstarter.model.Categories;
 import ua.com.goit.gojava2.vova.kickstarter.model.CategoriesFromDB;
-import ua.com.goit.gojava2.vova.kickstarter.model.ConnectToDB;
 import ua.com.goit.gojava2.vova.kickstarter.model.Projects;
 import ua.com.goit.gojava2.vova.kickstarter.model.ProjectsFromDB;
+import ua.com.goit.gojava2.vova.kickstarter.util.ConnectToDB;
 import ua.com.goit.gojava2.vova.kickstarter.view.InputsConsole;
 import ua.com.goit.gojava2.vova.kickstarter.view.OutputConsole;
 import ua.com.goit.gojava2.vova.kickstarter.view.View;

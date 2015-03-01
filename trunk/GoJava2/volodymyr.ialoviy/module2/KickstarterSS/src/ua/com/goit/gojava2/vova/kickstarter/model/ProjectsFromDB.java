@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import ua.com.goit.gojava2.vova.kickstarter.util.ConnectToDB;
 import ua.com.goit.gojava2.vova.kickstarter.util.PeriodBetweenDates;
 
 public class ProjectsFromDB implements Projects{

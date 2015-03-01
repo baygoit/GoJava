@@ -4,6 +4,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import ua.com.goit.gojava2.vova.kickstarter.util.ConnectToDB;
+
 public class CategoriesFromDB implements Categories{
 	
 	@Override
