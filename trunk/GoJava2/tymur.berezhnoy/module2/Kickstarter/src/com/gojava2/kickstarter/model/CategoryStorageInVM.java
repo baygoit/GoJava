@@ -21,4 +21,8 @@ public class CategoryStorageInVM {
 	public void addCategory(Category category) {
 		categories.add(category);
 	}
+	
+	public int getSize() {
+		return categories.size();
+	}
 }

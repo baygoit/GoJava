@@ -28,10 +28,10 @@ public class KickstarterController {
 	public void selectCategory() {
 		view.displaySelectOption(1);
 		int input = consoleInput.choice();
-		int amountCategory = categoryStorage.getCategories().size();
+		int amountCategory = categoryStorage.getSize();
 		if(input > 0 && input <= amountCategory) {
 			Category category = categoryStorage.getCategory(input);
-			view.display(projectStorage.getSpecificProjects(category));
+			view.display(projectStorage.getProjectsOfCategory(category));
 			selectProject(category);
 			selectCategory();
 		} else if(input == 0) {
@@ -46,19 +46,21 @@ public class KickstarterController {
 		view.displaySelectOption(2);
 		int input = consoleInput.choice();
 		
-		if(input > 0) {
-			view.display(projectStorage.getSpecificProject(category,input));
+		if(input > 0 && input <= projectStorage.getSize()) {
+			view.display(projectStorage.getProject(input));
 			backToProjects(category);
 			selectProject(category);
 		} else if (input == 0) {
 			view.display(categoryStorage.getCategories());
+		} else if (input > projectStorage.getSize()) {
+			selectProject(category);
 		}
 	}
 	
 	public void backToProjects(Category category) {
 		view.displaySelectOption(3); 
 		if(consoleInput.choice() == 0) {
-			view.display(projectStorage.getSpecificProjects(category));
+			view.display(projectStorage.getProjectsOfCategory(category));
 		} else {
 			backToProjects(category);
 		}

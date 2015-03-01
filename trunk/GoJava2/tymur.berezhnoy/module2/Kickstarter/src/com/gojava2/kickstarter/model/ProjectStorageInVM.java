@@ -6,6 +6,7 @@ import java.util.List;
 public class ProjectStorageInVM {
 	
 	private List<Project> projects;
+	private List<Project> projectsOfCategory;
 	
 	public ProjectStorageInVM() {
 		projects = new ArrayList<Project>();
@@ -15,17 +16,21 @@ public class ProjectStorageInVM {
 		projects.add(project);
 	}
 	
-	public Project getSpecificProject(Category category, int i){
-		return getSpecificProjects(category).get(i - 1);
+	public Project getProject(int i){
+		return projectsOfCategory.get(i - 1);
 	}
 	
-	public List<Project> getSpecificProjects(Category category) {
-		List<Project> result = new ArrayList<Project>();
+	public List<Project> getProjectsOfCategory(Category category) {
+		projectsOfCategory = new ArrayList<Project>();
 		for(Project project: projects) {
 			if(project.getCategory().equals(category)) {
-				result.add(project);
+				projectsOfCategory.add(project);
 			}
 		}
-		return result;
+		return projectsOfCategory;
+	}
+	
+	public int getSize() {
+		return projectsOfCategory.size();
 	}
 }

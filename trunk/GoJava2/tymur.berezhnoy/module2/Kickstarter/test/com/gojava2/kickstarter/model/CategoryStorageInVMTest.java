@@ -36,7 +36,7 @@ public class CategoryStorageInVMTest {
 		
 		// then
 		assertEquals("Expected, that collection size is 0 when no categories",
-					expectedSize, storageInVM.getCategories().size());
+					expectedSize, storageInVM.getSize());
 	}
 	
 	@Test

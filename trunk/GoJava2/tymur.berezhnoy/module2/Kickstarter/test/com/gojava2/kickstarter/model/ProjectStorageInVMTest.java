@@ -17,11 +17,11 @@ public class ProjectStorageInVMTest {
 	}
 
 	@Test
-	public void shouldCollectionSizeIs0_whenNoProjects() {
+	public void shouldCollectionSize0_whenNoProjects() {
 		// given
 		
 		// when
-		List<Project> result = storageInVM.getSpecificProjects(new Category("Art"));
+		List<Project> result = storageInVM.getProjectsOfCategory(new Category("Art"));
 		int expectedSize = 0;
 		
 		// then
@@ -43,7 +43,7 @@ public class ProjectStorageInVMTest {
 		storageInVM.addProject(project2);
 		
 		// when
-		List<Project> result = storageInVM.getSpecificProjects(new Category("Dance"));
+		List<Project> result = storageInVM.getProjectsOfCategory(new Category("Dance"));
 		int expectedSize = 0;
 		
 		// then
@@ -70,7 +70,7 @@ public class ProjectStorageInVMTest {
 		storageInVM.addProject(project3);
 		
 		// when
-		List<Project> result = storageInVM.getSpecificProjects(category2);
+		List<Project> result = storageInVM.getProjectsOfCategory(category2);
 		int expectedSize = 2;
 		
 		// then
@@ -90,7 +90,8 @@ public class ProjectStorageInVMTest {
 		storageInVM.addProject(project);
 		
 		// when
-		Project result = storageInVM.getSpecificProject(category, 1);
+		List<Project> list = storageInVM.getProjectsOfCategory(category);
+		Project result = storageInVM.getProject(1);
 		
 		// then
 		assertSame(project, result);
