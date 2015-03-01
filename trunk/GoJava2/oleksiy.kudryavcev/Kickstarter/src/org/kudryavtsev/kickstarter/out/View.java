@@ -1,5 +1,6 @@
 package org.kudryavtsev.kickstarter.out;
 
+import java.util.Iterator;
 import java.util.List;
 
 import org.kudryavtsev.kickstarter.data.Category;
@@ -18,30 +19,38 @@ public class View {
         show(greeting);
     }
 
-    public void showProjects(List<Project> projectslist) {
+    public void showProjects(Iterator<Project> projects) {
+        showElements(projects);
+    }
+    
+    public void showElements(Iterator objects) {
         int counter = 1;
-        for (Object project : projectslist) {
-            out.output("(" + counter + ") " + project);
+        while (objects.hasNext()) {
+            Object o = objects.next();
+            out.output(menuIndex(counter) + o.toString());
             counter++;
         }
         showChoice();
+    }
+
+    private String menuIndex(int counter) {
+        return "(" + counter + ") ";
     }
 
     public void showCategories(List<Category> list, int i) {
         out.output("You entered: " + list.get(i - 1));
     }
 
-    public void showCategories(List<Category> categoryList) {
-        int counter = 1;
-        for (Object category : categoryList) {
-            out.output("(" + counter + ") " + category);
-            counter++;
-        }
-        showChoice();
+    public void showCategories(Iterator<Category> categories) {
+        showElements(categories);   
     }
 
     public void showProject(Project project) {
         out.output(project.toStringFull());
+//        out.output(String.format("%s; %s; %s", 
+//                project.getName(), 
+//                project.getDescription(), 
+//                project.getStatus()));
         showProjectMenu();
         showChoice();
     }

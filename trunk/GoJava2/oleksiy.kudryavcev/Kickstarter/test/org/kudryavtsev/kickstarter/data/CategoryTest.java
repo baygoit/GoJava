@@ -45,7 +45,7 @@ public class CategoryTest {
         projectsList.add(newProject);
         Category category = new Category();
         category.setProjectsList(projectsList);
-        assertEquals(projectsList, category.getProjectsList());
+        assertEquals(projectsList, category.getProjects());
     }
 
 }

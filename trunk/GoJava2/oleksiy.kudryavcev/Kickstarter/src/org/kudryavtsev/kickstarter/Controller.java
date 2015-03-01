@@ -1,97 +1,99 @@
 package org.kudryavtsev.kickstarter;
 
-import java.util.List;
-
-import org.kudryavtsev.kickstarter.data.Category;
 import org.kudryavtsev.kickstarter.data.Model;
-import org.kudryavtsev.kickstarter.in.Input;
+import org.kudryavtsev.kickstarter.in.In;
 import org.kudryavtsev.kickstarter.out.View;
 
 public class Controller {
     private Model model;
     private View view;
-    private Input input;
+    private In input;
 
-    public Controller(Model model, View view, Input input) {
+    public Controller(Model model, View view, In input) {
         this.model = model;
         this.view = view;
         this.input = input;
     }
 
     public void start() {
-        model.init();
         view.showGreeting();
-        List<Category> categoriesList = model.getCategoriesList();
-        processingCategoriesList(categoriesList);
+        categoriesList();
         input.close();
     }
 
-    private void processingCategoriesList(List<Category> categoriesList) {
+    private void categoriesList() {
         while (true) {
-            view.showCategories(categoriesList);
-            int numberOfCategory = input.getAnswer();
-            if (checkNumberOfCategory(categoriesList, numberOfCategory))
-                break;
-            processingProjectsList(categoriesList, numberOfCategory);
+            view.showCategories(model.getCategories());
+
+            int category = getNumber();
+            if (checkNumberOfCategory(category)){
+                break;}
+            projectsList(category);
         }
     }
 
-    private boolean checkNumberOfCategory(List<Category> categoriesList, int numberOfCategory) {
-        return checkProjectOption(numberOfCategory) == 0 || (numberOfCategory > categoriesList.size());
-    }
-
-    private void processingProjectsList(List<Category> categoriesList, int numberOfCategory) {
-        while (true) {
-            view.showProjects(categoriesList.get(numberOfCategory - 1).getProjectsList());
-            int numberOfProject = input.getAnswer();
-            if (checkNumberOfProject(categoriesList, numberOfCategory, numberOfProject))
-                break;
-            processingProject(categoriesList, numberOfCategory, numberOfProject);
+    private int getNumber() {
+        int result = input.input();
+        if (result == 0) {
+            return 0;
         }
+        return result - 1;
     }
 
-    private boolean checkNumberOfProject(List<Category> categoriesList, int numberOfCategory,
-            int numberOfProject) {
-        return checkProjectOption(numberOfProject) == 0
-                || (numberOfProject > categoriesList.get(numberOfCategory - 1).getProjectsList()
-                        .size());
+    private boolean checkNumberOfCategory(int category) {
+        return checkProject(category) == 0 || (category > model.categoriesCount());
     }
 
-    private void processingProject(List<Category> categoriesList, int numberOfCategory,
-            int numberOfProject) {
+    private void projectsList(int category) {
         while (true) {
-            view.showProject(categoriesList.get(numberOfCategory - 1).getProjectsList()
-                    .get(numberOfProject - 1));
-            int projectOption = input.getAnswer();
-            if (checkProjectOption(projectOption) == 0) {
+            view.showProjects(model.getCategoryProjects(category).iterator());
+            int project = getNumber();
+            if (checkNumberOfProject(category, project)) {
                 break;
             }
-            processingProjectOptions(categoriesList, numberOfCategory, numberOfProject,
-                    projectOption);
+            project(category, project);
         }
     }
 
-    private int checkProjectOption(int projectOption) {
+    private boolean checkNumberOfProject(int category, int project) {
+        if (checkProject(project) == 0) {
+            return true;
+        }
+
+        return project > model.getCategoryProjects(category).size();
+    }
+
+    private void project(int category, int project) {
+        while (true) {
+            view.showProject(model.getCategoryProjects(category).get(project));
+            int projectOption = getNumber();
+            if (checkProject(projectOption) == 0) {
+                break;
+            }
+            projectOptions(category, project, projectOption);
+        }
+    }
+
+    private int checkProject(int projectOption) {
         if (projectOption > 2 || projectOption < 1)
             return 0;
-        else
+        else {
             return projectOption;
+        }
     }
 
-    private void processingProjectOptions(List<Category> categoriesList, int numberOfCategory,
-            int numberOfProject, int projectOption) {
-        if (projectOption == 1)
-            processingAddInvestment(categoriesList, numberOfCategory, numberOfProject);
-        else
-            processingAddQuestin(categoriesList, numberOfCategory, numberOfProject);
+    private void projectOptions(int category, int project, int projectOption) {
+        if (projectOption == 1) {
+            addInvestment(category, project);
+        } else {
+            addQuestin(category, project);
+        }
     }
 
-    private void processingAddQuestin(List<Category> categoriesList, int numberOfCategory,
-            int numberOfProject) {
+    private void addQuestin(int category, int project) {
     }
 
-    private void processingAddInvestment(List<Category> categoriesList, int numberOfCategory,
-            int numberOfProject) {
+    private void addInvestment(int category, int project) {
     }
 
 }
