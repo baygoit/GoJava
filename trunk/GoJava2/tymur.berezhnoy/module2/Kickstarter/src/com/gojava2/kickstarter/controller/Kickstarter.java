@@ -1,5 +1,7 @@
 package com.gojava2.kickstarter.controller;
 
+import java.util.Random;
+
 import com.gojava2.kickstarter.model.Category;
 import com.gojava2.kickstarter.model.CategoryStorageInVM;
 import com.gojava2.kickstarter.model.Project;
@@ -11,7 +13,7 @@ import com.gojava2.kickstarter.view.ConsoleView;
 public class Kickstarter {
 
 	public static void main(String[] args) {
-		QuoteStorageInVM quoteStorage = new QuoteStorageInVM();
+		QuoteStorageInVM quoteStorage = new QuoteStorageInVM(new Random());
 		CategoryStorageInVM categoryStorage = new CategoryStorageInVM();
 		ProjectStorageInVM projectStorageInVM = new ProjectStorageInVM();
 		
