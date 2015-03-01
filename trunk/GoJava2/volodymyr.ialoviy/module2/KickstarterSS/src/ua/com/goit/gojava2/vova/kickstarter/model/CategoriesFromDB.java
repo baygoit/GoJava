@@ -3,29 +3,40 @@ package ua.com.goit.gojava2.vova.kickstarter.model;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import ua.com.goit.gojava2.vova.kickstarter.util.ConnectToDB;
 
 public class CategoriesFromDB implements Categories{
 	
+	private List<Category> categories = new ArrayList<Category>();
+	
 	@Override
-	public String showAllCatecoriesInKickstarter() {
-		StringBuilder s = new StringBuilder();
+	public List<Category> getCategories() {
+		return categories;
+	}
+
+	@Override
+	public void showAllCatecoriesInKickstarter() {
+//		StringBuilder s = new StringBuilder();
 
 		ResultSet result;
 		try {
 			result = ConnectToDB.statement.executeQuery("SELECT * FROM categories");
 			while (result.next()) {
-			    s.append(result.getInt("id_category"))
-			    		.append(" ")
-			    		.append(result.getString("name_category"))
-			    		.append("\n").toString();
+//			    s.append(result.getInt("id_category"))
+//			    		.append(" ")
+//			    		.append(result.getString("name_category"))
+//			    		.append("\n").toString();
+			    
+			    
+			    categories.add(new Category(result.getInt("id_category"), result.getString("name_category")));
 			}
 		} catch (SQLException e) {
 			System.err.println( e.getClass().getName()+": "+ e.getMessage() );
 		}
 
-		return s.substring(0, s.length() - 1);
+//		return s.substring(0, s.length() - 1);
 	}
 
 	@Override

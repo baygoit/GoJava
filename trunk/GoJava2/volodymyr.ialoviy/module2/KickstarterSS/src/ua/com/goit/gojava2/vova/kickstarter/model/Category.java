@@ -5,12 +5,10 @@ public class Category{
 	
 	private int categoryID;
 	private String categoryName;
-	private int[] projects;
 	
-	public Category(int categoryID, String categoryName, int[] projects) {
+	public Category(int categoryID, String categoryName) {
 		this.categoryID = categoryID;
 		this.categoryName = categoryName;
-		this.projects = projects;
 	}
 
 	public int getCategoryID() {
@@ -27,13 +25,5 @@ public class Category{
 
 	public void setCategoryName(String categoryName) {
 		this.categoryName = categoryName;
-	}
-
-	public int[] getProjects() {
-		return projects;
-	}
-
-	public void setProjectsIn(int[] projectsIn) {
-		this.projects = projectsIn;
 	}
 }

@@ -1,9 +1,11 @@
 package ua.com.goit.gojava2.vova.kickstarter.model;
 
+import java.util.List;
+
 
 public interface Categories {
 
-	String showAllCatecoriesInKickstarter();
+	void showAllCatecoriesInKickstarter();
 
 	String showAllProjectInCategory(int categoryId);
 
@@ -12,4 +14,6 @@ public interface Categories {
 	int[] getKickCategories();
 
 	int[] projectsThatAreContainedInTheCategory(int categoryId);
+
+	List<Category> getCategories();
 }

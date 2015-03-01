@@ -1,5 +1,9 @@
 package ua.com.goit.gojava2.vova.kickstarter.view;
 
+import java.util.List;
+
+import ua.com.goit.gojava2.vova.kickstarter.model.Category;
+
 
 public class View {
 	private Output out;
@@ -20,8 +24,10 @@ public class View {
 		printer(quote);		
 	}
 	
-	public void showAllCategories(String string) {
-		printer(string);
+	public void showAllCategories(List<Category> list) {
+		for (Category category : list){
+			printer(Integer.toOctalString(category.getCategoryID()) + " " + category.getCategoryName());
+		}
 		printer("Choice Category Number: ");
 	}
 	

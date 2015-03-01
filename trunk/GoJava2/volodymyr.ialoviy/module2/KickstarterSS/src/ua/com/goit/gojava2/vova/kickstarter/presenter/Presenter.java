@@ -38,7 +38,8 @@ public class Presenter {
 	}
 
 	private void categories() {
-		view.showAllCategories(categories.showAllCatecoriesInKickstarter());
+		categories.showAllCatecoriesInKickstarter();
+		view.showAllCategories(categories.getCategories());
 		askCategory();
 		
 		menu = menuStatus.getMenuProjects();
