@@ -2,9 +2,10 @@ package com.gojava2.kickstarter.view;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class ConsoleInput {
+public class ConsoleInput implements InPut {
 	
-	public int choice() {
+	@Override
+	public int read() {
 		boolean inputRight = false;
 		int choice = 0;
 		do {

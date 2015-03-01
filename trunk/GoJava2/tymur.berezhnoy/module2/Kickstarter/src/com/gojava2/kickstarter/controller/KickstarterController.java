@@ -4,8 +4,8 @@ import com.gojava2.kickstarter.model.Category;
 import com.gojava2.kickstarter.model.CategoryStorageInVM;
 import com.gojava2.kickstarter.model.ProjectStorageInVM;
 import com.gojava2.kickstarter.model.QuoteStorageInVM;
-import com.gojava2.kickstarter.view.ConsoleInput;
 import com.gojava2.kickstarter.view.ConsoleView;
+import com.gojava2.kickstarter.view.InPut;
 
 public class KickstarterController {
 	
@@ -14,20 +14,21 @@ public class KickstarterController {
 	private ProjectStorageInVM projectStorage;
 	
 	private	ConsoleView view;
-	private ConsoleInput consoleInput;
+	private InPut in;
 	
 	public KickstarterController(QuoteStorageInVM quoteStorage, CategoryStorageInVM categoryStorage,
-								ProjectStorageInVM projectStorage, ConsoleView consoleView) {
+								ProjectStorageInVM projectStorage, ConsoleView consoleView, 
+								InPut in) {
 		this.quoteStorage = quoteStorage;
 		this.categoryStorage = categoryStorage;
 		this.projectStorage = projectStorage;
 		this.view = consoleView;
-		consoleInput = new ConsoleInput();
+		this.in = in;
 	}
 	
 	public void selectCategory() {
 		view.displaySelectOption(1);
-		int input = consoleInput.choice();
+		int input = in.read();
 		int amountCategory = categoryStorage.getSize();
 		if(input > 0 && input <= amountCategory) {
 			Category category = categoryStorage.getCategory(input);
@@ -44,7 +45,7 @@ public class KickstarterController {
 	
 	public void selectProject(Category category) {
 		view.displaySelectOption(2);
-		int input = consoleInput.choice();
+		int input = in.read();
 		
 		if(input > 0 && input <= projectStorage.getSize()) {
 			view.display(projectStorage.getProject(input));
@@ -59,7 +60,7 @@ public class KickstarterController {
 	
 	public void backToProjects(Category category) {
 		view.displaySelectOption(3); 
-		if(consoleInput.choice() == 0) {
+		if(in.read() == 0) {
 			view.display(projectStorage.getProjectsOfCategory(category));
 		} else {
 			backToProjects(category);

@@ -8,6 +8,7 @@ import com.gojava2.kickstarter.model.Project;
 import com.gojava2.kickstarter.model.ProjectStorageInVM;
 import com.gojava2.kickstarter.model.Quote;
 import com.gojava2.kickstarter.model.QuoteStorageInVM;
+import com.gojava2.kickstarter.view.ConsoleInput;
 import com.gojava2.kickstarter.view.ConsoleView;
 
 public class Kickstarter {
@@ -89,8 +90,9 @@ public class Kickstarter {
 		projectStorageInVM.addProject(project9);
 		projectStorageInVM.addProject(project10);
 		
-		KickstarterController engine = new KickstarterController(quoteStorage, categoryStorage,
-																projectStorageInVM, new ConsoleView());
-		engine.run();
+		KickstarterController app = new KickstarterController(quoteStorage, categoryStorage,
+																projectStorageInVM, new ConsoleView(),
+																new ConsoleInput());
+		app.run();
 	}
 }
