@@ -27,7 +27,7 @@ public class ConsoleView {
 	public void displaySelectedCategory(Сategory category) {
 		System.out.println("Your choise: " + category.getName());
 	}
-	
+
 	public void displayProjectsOfCategory(List<Project> projects) {		
 		System.out.println("\n---- Here are the projects ----");
 		StringBuilder stringResult;
@@ -48,13 +48,12 @@ public class ConsoleView {
 	public void displayCurrentProject(Project project) {
 		StringBuilder stringResult = new StringBuilder();
 		stringResult.append(project.getName()).append("\n")
-					 .append("Description:        ").append(project.getDescription())
-					 .append("\n").append("Required Amount:    ").append(project.getRequiredAmount()).append("$")
-					 .append("\n").append("Total:              ").append(project.getTotal()).append("$")
-					 .append("\n").append("Days:               ").append(project.getDays())
-					 .append("\n").append("History:            ").append(project.getHistory())
-					 .append("\n").append("URL:                ").append(project.getUrl());
-	
+					.append("Description:        ").append(project.getDescription())
+					.append("\n").append("Required Amount:    ").append(project.getRequiredAmount()).append("$")
+					.append("\n").append("Total:              ").append(project.getTotal()).append("$")
+					.append("\n").append("Days:               ").append(project.getDays())
+					.append("\n").append("History:            ").append(project.getHistory())
+					.append("\n").append("URL:                ").append(project.getUrl());
 		System.out.print("\n"+ stringResult + "\n"
 				+ "--------------------------------" + "\n");
 	}		

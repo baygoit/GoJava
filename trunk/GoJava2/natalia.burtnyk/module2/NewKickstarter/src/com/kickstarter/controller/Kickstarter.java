@@ -1,6 +1,8 @@
-package com.kickstarter.model;
+package com.kickstarter.controller;
 
-import com.kickstarter.controller.Engine;
+import com.kickstarter.model.DataStorage;
+import com.kickstarter.model.Project;
+import com.kickstarter.model.Сategory;
 import com.kickstarter.view.ConsoleView;
 import com.kickstarter.view.InPut;
 
@@ -29,9 +31,9 @@ public class Kickstarter {
     	dataStorage.addQuote(quote7);
     	dataStorage.addQuote(quote8);
     	
-    	Сategory food = new Сategory("Food");
-    	Сategory music = new Сategory("Music");
-    	Сategory education = new Сategory("Education");
+    	Сategory food = new Сategory("FOOD");
+    	Сategory music = new Сategory("MUSIC");
+    	Сategory education = new Сategory("EDUCATION");
 
     	dataStorage.addCategory(food);
     	dataStorage.addCategory(music);
@@ -64,7 +66,7 @@ public class Kickstarter {
     	dataStorage.addProject(project5);
     	dataStorage.addProject(project6);
     
-        Engine engine = new Engine(consoleView, dataStorage, inPut);
+        KickstarterEngine engine = new KickstarterEngine(consoleView, dataStorage, inPut);
         engine.run();
     }
 }
