@@ -10,13 +10,8 @@ import ua.com.goit.gojava2.vova.kickstarter.view.View;
 
 
 public class Presenter {
-	private int menuCategories = 222;
-	private int menuProjects = 333;
-	private int menuProject = 444;
-	private int menuPayment = 555;
-	private int menuQuestion = 666;
-	private int exit = 999;
-	private int menu = menuCategories;
+	private MenuStatus menuStatus = new MenuStatus();
+	private int menu = menuStatus.getMenuCategories();
 	private int choiceTo;//TODO DELETE
 	private int chosenPay;//TODO DELETE
 	private int chosenCategoryID;//TODO DELETE
@@ -46,31 +41,31 @@ public class Presenter {
 		view.showAllCategories(categories.showAllCatecoriesInKickstarter());
 		askCategory();
 		
-		menu = menuProjects;
+		menu = menuStatus.getMenuProjects();
 		switchMenu();
 	}
 
 	private void projects() {
-		int[] optionVariant = { menuCategories };
-		view.printProjectsInCategory(categories.showCatecoryName(chosenCategoryID), categories.showAllProjectInCategory(chosenCategoryID), menuCategories);//TODO 3 METHOD
+		int[] optionVariant = { menuStatus.getMenuCategories() };
+		view.printProjectsInCategory(categories.showCatecoryName(chosenCategoryID), categories.showAllProjectInCategory(chosenCategoryID), menuStatus.getMenuCategories());//TODO 3 METHOD
 		askProject(optionVariant);
 
 		if (elementInArray(optionVariant, chosenProject)) {
-			menu = menuCategories;
+			menu = menuStatus.getMenuCategories();
 			switchMenu();
 		}
 
-		menu = menuProject;
+		menu = menuStatus.getMenuProject();
 		switchMenu();
 	}
 
 	private void project() {
-		int[] optionVariant = { menuProjects, menuPayment, menuQuestion, exit };
+		int[] optionVariant = { menuStatus.getMenuProjects(), menuStatus.getMenuPayment(), menuStatus.getMenuQuestion(), menuStatus.getExit() };
 
-		view.printProject(projects.showProjectFull(chosenProject), menuProjects, menuPayment, menuQuestion);
+		view.printProject(projects.showProjectFull(chosenProject), menuStatus.getMenuProjects(), menuStatus.getMenuPayment(), menuStatus.getMenuQuestion());
 		askAfterProject(optionVariant);
 
-		if (exit == choiceTo){
+		if (menuStatus.getExit() == choiceTo){
 			return;
 		}
 		
@@ -104,7 +99,7 @@ public class Presenter {
 		
 		view.printThank(name, chosenPay);
 		
-		menu = menuProject;
+		menu = menuStatus.getMenuProject();
 		switchMenu();
 	}
 
@@ -112,7 +107,7 @@ public class Presenter {
 		view.printAskQuestion();
 		askQuestion();
 
-		menu = menuProject;
+		menu = menuStatus.getMenuProject();
 		switchMenu();
 	}
 

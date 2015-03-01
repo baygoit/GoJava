@@ -13,8 +13,8 @@ public class ConnectToDB {
 	private static final String PASS_DB = "7575";
 	private static final String NAME_DB = "postgres";
 	private static final String JDBC_POSTGRESQL_PATH = "jdbc:postgresql://127.0.0.1:5432/kickstarter";
-	public static Statement statement;
 	private static Connection connection = null;
+	public static Statement statement;
 	
     public static void createStatement(){
     	Connection connection = null;

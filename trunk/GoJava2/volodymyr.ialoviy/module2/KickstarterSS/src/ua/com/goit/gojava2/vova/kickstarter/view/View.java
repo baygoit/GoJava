@@ -2,21 +2,17 @@ package ua.com.goit.gojava2.vova.kickstarter.view;
 
 
 public class View {
-	private Output out = new OutputConsole();
+	private Output out;
 	
 	public View(Output out){
-		this.setOut(out);
+		this.out = out;
 	}
 
 	public Output getOut() {
 		return out;
 	}
 
-	public void setOut(Output out) {
-      this.out = out;
-	}	
-	
-	public void printer(String string) {// private
+	public void printer(String string) {
 		out.print(string);
 	}
 	
