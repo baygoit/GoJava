@@ -5,9 +5,9 @@ import java.util.List;
 
 public interface Categories {
 
-	void showAllCatecoriesInKickstarter();
-
-	String showAllProjectInCategory(int categoryId);
+	void setCatecories();
+	
+	List<Category> getCategories();
 
 	String showCatecoryName(int categoryId);
 
@@ -15,5 +15,5 @@ public interface Categories {
 
 	int[] projectsThatAreContainedInTheCategory(int categoryId);
 
-	List<Category> getCategories();
+	List<Project> getProjects();
 }

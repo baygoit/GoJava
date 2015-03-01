@@ -3,6 +3,19 @@ package ua.com.goit.gojava2.vova.kickstarter.model;
 import java.util.ArrayList;
 
 public class Project{
+	
+	private int projectID;
+	private String projectName;
+	private String shortDescription;
+	private String fullDescription;
+	private String foto;
+	private String link;
+	private int howMuchNeeded;
+	private int howMuchCollected;
+	private int howMuchRemaining;
+	private ArrayList<String> faq;
+	private int daysLeft;
+
 	public Project(int projectID, String projectName, String shortDescription,
 			String fullDescription, String foto, String link,
 			int howMuchNeeded, int howMuchCollected, int howMuchRemaining,
@@ -20,22 +33,10 @@ public class Project{
 		this.daysLeft = daysLeft;
 	}
 
-	private int projectID;
-	private String projectName;
-	private String shortDescription;
-	private String fullDescription;
-	private String foto;
-	private String link;
-	private int howMuchNeeded;
-	private int howMuchCollected;
-	private int howMuchRemaining;
-	private ArrayList<String> faq;
-	private int daysLeft;
-	
 	public int getProjectID() {
 		return projectID;
 	}
-
+	
 	public void setProjectID(int projectID) {
 		this.projectID = projectID;
 	}

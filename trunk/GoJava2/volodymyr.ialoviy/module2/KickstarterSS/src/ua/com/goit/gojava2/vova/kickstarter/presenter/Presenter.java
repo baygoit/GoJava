@@ -32,13 +32,14 @@ public class Presenter {
 	public void kickstarter(){
     	Quotes quote = new QuotesFromDB();
 		view.printQuote(quote.getQuote());
+		categories.setCatecories();
+		projects.setProjects();
 		
 		categories();
 		view.printClose();
 	}
 
 	private void categories() {
-		categories.showAllCatecoriesInKickstarter();
 		view.showAllCategories(categories.getCategories());
 		askCategory();
 		
@@ -48,7 +49,9 @@ public class Presenter {
 
 	private void projects() {
 		int[] optionVariant = { menuStatus.getMenuCategories() };
-		view.printProjectsInCategory(categories.showCatecoryName(chosenCategoryID), categories.showAllProjectInCategory(chosenCategoryID), menuStatus.getMenuCategories());//TODO 3 METHOD
+
+		printProjectsInCategory(chosenCategoryID, menuStatus.getMenuCategories());
+
 		askProject(optionVariant);
 
 		if (elementInArray(optionVariant, chosenProject)) {
@@ -63,7 +66,9 @@ public class Presenter {
 	private void project() {
 		int[] optionVariant = { menuStatus.getMenuProjects(), menuStatus.getMenuPayment(), menuStatus.getMenuQuestion(), menuStatus.getExit() };
 
-		view.printProject(projects.showProjectFull(chosenProject), menuStatus.getMenuProjects(), menuStatus.getMenuPayment(), menuStatus.getMenuQuestion());
+		view.printProject(projects.getProjects().get(chosenProject - 1)); 
+				
+		view.printChoiceProjectOrPaymentOrQuestion(menuStatus.getMenuProjects(), menuStatus.getMenuPayment(), menuStatus.getMenuQuestion());
 		askAfterProject(optionVariant);
 
 		if (menuStatus.getExit() == choiceTo){
@@ -144,6 +149,12 @@ public class Presenter {
 			view.printBug();
 			askCategory();
 		}
+	}
+	
+	private void printProjectsInCategory(int chosenCategoryID, int menuCategories) {
+		view.printYourChosenCategory(categories.showCatecoryName(chosenCategoryID));
+		view.printShortProgect(projects.getProjects(), categories.projectsThatAreContainedInTheCategory(chosenCategoryID));
+		view.printChoiceProjectNumber(menuCategories);
 	}
 
 	private void askProject(int[] allowedVariants) {

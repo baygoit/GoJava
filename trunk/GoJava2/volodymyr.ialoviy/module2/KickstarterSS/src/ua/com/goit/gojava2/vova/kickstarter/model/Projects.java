@@ -1,11 +1,12 @@
 package ua.com.goit.gojava2.vova.kickstarter.model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public interface Projects {
 
-	String showProjectFull(int numberProject);
-
+	List<Project> getProjects();
+	
 	String showProjectInShort(int projectID);
 
 	void setDonation(int chosenProject, int amount);
@@ -13,5 +14,7 @@ public interface Projects {
 	void addFAQ(int projectID, String question);
 
 	ArrayList<String> getFaq(int projectID);
+
+	void setProjects();
 
 }

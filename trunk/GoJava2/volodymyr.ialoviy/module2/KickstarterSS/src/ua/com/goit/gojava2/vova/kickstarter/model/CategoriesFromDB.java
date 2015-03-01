@@ -8,57 +8,51 @@ import java.util.List;
 import ua.com.goit.gojava2.vova.kickstarter.util.ConnectToDB;
 
 public class CategoriesFromDB implements Categories{
-	
-	private List<Category> categories = new ArrayList<Category>();
+
+	private List<Category> categories;
+	private List<Project> projects;
 	
 	@Override
-	public List<Category> getCategories() {
-		return categories;
-	}
-
-	@Override
-	public void showAllCatecoriesInKickstarter() {
-//		StringBuilder s = new StringBuilder();
-
+	public void setCatecories() {
+		categories = new ArrayList<Category>();
 		ResultSet result;
 		try {
 			result = ConnectToDB.statement.executeQuery("SELECT * FROM categories");
 			while (result.next()) {
-//			    s.append(result.getInt("id_category"))
-//			    		.append(" ")
-//			    		.append(result.getString("name_category"))
-//			    		.append("\n").toString();
-			    
-			    
 			    categories.add(new Category(result.getInt("id_category"), result.getString("name_category")));
 			}
 		} catch (SQLException e) {
 			System.err.println( e.getClass().getName()+": "+ e.getMessage() );
 		}
-
-//		return s.substring(0, s.length() - 1);
 	}
 
 	@Override
-	public String showAllProjectInCategory(int categoryId) {
-		StringBuilder s = new StringBuilder();
+	public List<Category> getCategories() {
+		return categories;
+	}
 
-		ResultSet result;
-		try {
-			result = ConnectToDB.statement.executeQuery("SELECT * FROM projects WHERE id_category =" + categoryId + "ORDER BY id_project");
-            while (result.next()) {
-                s.append(result.getInt("id_project"))
-                	.append(", ").append(result.getString("name_project"))
-					.append(", ").append(result.getString("short_description_project"))
-					.append(", ").append(result.getString("how_much_needed_project"))
-					.append(", ").append(result.getString("how_much_collected_project"))
-					.append("\n").toString();
-            }
-		} catch (SQLException e) {
-			System.err.println( e.getClass().getName()+": "+ e.getMessage() );
-		}
-		
-		return s.substring(0, s.length() - 1);
+//	@Override
+//	public void setShortProject(int categoryId) {
+//		
+//		
+//		
+//		projects = new ArrayList<Project>();
+//		ResultSet result;
+//		try {
+//			result = ConnectToDB.statement.executeQuery("SELECT * FROM projects WHERE id_category =" + categoryId + "ORDER BY id_project");
+//            while (result.next()) {
+//                projects.add(new Project(result.getInt("id_project"), result.getString("name_project"), 
+//                		result.getString("short_description_project"), result.getInt("how_much_needed_project"),
+//                		result.getInt("how_much_collected_project")));
+//            }
+//		} catch (SQLException e) {
+//			System.err.println( e.getClass().getName()+": "+ e.getMessage() );
+//		}
+//	}
+
+	@Override
+	public List<Project> getProjects() {
+		return projects;
 	}
 
 	@Override

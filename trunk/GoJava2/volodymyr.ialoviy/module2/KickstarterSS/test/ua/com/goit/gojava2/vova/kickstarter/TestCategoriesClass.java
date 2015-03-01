@@ -25,7 +25,7 @@ public class TestCategoriesClass {
 	
 	@Test
     public void shouldAllCatecories_whenNotAllCatecories(){
-		String s = categories.showAllCatecoriesInKickstarter();
+		String s = categories.setCatecories();
 		assertTrue(s.equals("1 name1\n2 name2\n3 name3"));
     }
 	

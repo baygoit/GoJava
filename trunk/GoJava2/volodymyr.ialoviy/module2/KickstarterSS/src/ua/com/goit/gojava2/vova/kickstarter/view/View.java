@@ -3,7 +3,7 @@ package ua.com.goit.gojava2.vova.kickstarter.view;
 import java.util.List;
 
 import ua.com.goit.gojava2.vova.kickstarter.model.Category;
-
+import ua.com.goit.gojava2.vova.kickstarter.model.Project;
 
 public class View {
 	private Output out;
@@ -24,24 +24,47 @@ public class View {
 		printer(quote);		
 	}
 	
-	public void showAllCategories(List<Category> list) {
-		for (Category category : list){
+	public void showAllCategories(List<Category> Category) {
+		for (Category category : Category){
 			printer(Integer.toOctalString(category.getCategoryID()) + " " + category.getCategoryName());
 		}
 		printer("Choice Category Number: ");
 	}
 	
-	public void printProjectsInCategory(String categories, String projects, int menuCategories) {
+	public void printYourChosenCategory(String categories) {
 		printer("Your chosen category: "
 				+ categories
 				+ ", containing the following projects: ");
-		printer(projects);
+	}
+	
+	public void printShortProgect(List<Project> projects, int[] array){
+		for (int i : array){
+			Project project = projects.get(i - 1);
+			printer(project.getProjectID() + " " +  project.getProjectName() + " " + project.getShortDescription() + " " + 
+						project.getHowMuchNeeded() + " " + project.getHowMuchCollected());
+		}
+	}
+	
+	public void printChoiceProjectNumber(int menuCategories){
 		printer("Choice Project Number or " + menuCategories
 				+ " for exit to Category: ");
 	}
 	
-	public void printProject(String project, int menuProjects, int menuPayment, int menuQuestion) {
-		printer(project);
+	public void printProject(Project project) {
+		printer("project ID = " + project.getProjectID() + "\n"
+					+ "project name: " + project.getProjectName() + "\n"
+					+ "short description: " + project.getShortDescription() + "\n"
+					+ "full description: " + project.getFullDescription() + "\n"
+					+ "foto: " + project.getFoto() + "\n"
+					+ "link: " + project.getLink() + "\n"
+					+ "how much needed = " + project.getHowMuchNeeded() + "\n"
+					+ "how much collected = " + project.getHowMuchCollected() + "\n"
+					+ "how much remaining = " + project.getHowMuchRemaining() + "\n"
+					+ "faq = " + project.getFaq() + "\n"
+					+ "days to go = " + Integer.toString(project.getDaysLeft()));
+	}
+	
+	public void printChoiceProjectOrPaymentOrQuestion(int menuProjects, int menuPayment, int menuQuestion){
 		printer("Choice "
 				+ menuProjects
 				+ " for exit to Project list.\nChoice "
