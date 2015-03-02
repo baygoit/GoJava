@@ -88,5 +88,4 @@ public class DataStorageTest {
 		//then
 		assertSame(i, projectResult2);	
 	}
-	
 }
