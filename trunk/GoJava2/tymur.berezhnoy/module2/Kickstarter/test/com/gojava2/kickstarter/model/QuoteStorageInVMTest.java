@@ -31,22 +31,22 @@ public class QuoteStorageInVMTest {
 		
 		// when
 		Quote quote1 = new Quote("quote1", "author1");
-		storageInVM.addQuote(quote1);
+		storageInVM.add(quote1);
 		Quote resultQuote1 = storageInVM.getRandomQuote();
 		StringBuilder quoteBuilder1 = new StringBuilder();
 		quoteBuilder1.append(resultQuote1.getContent()).append(resultQuote1.getCopyrightSymbol()).append(resultQuote1.getAuthor());
 		
 		// then
-		assertEquals("quote1©author1", quoteBuilder1.toString());
+		assertEquals("quote1Â©author1", quoteBuilder1.toString());
 		
 		// when 
 		Quote quote2 = new Quote("quote2", "author2");
-		storageInVM.addQuote(quote2);
+		storageInVM.add(quote2);
 		Quote resultQuote2 = storageInVM.getRandomQuote();
 		StringBuilder quoteBuilder2 = new StringBuilder();
 		quoteBuilder2.append(resultQuote2.getContent()).append(resultQuote2.getCopyrightSymbol()).append(resultQuote2.getAuthor());
 		
 		// then
-		assertEquals("quote2©author2", quoteBuilder2.toString());
+		assertEquals("quote2Â©author2", quoteBuilder2.toString());
 	} 
 }

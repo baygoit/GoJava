@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class QuoteStorageInVM {
+public class QuoteStorageInVM implements QuoteStorage {
 	
 	private List<Quote> quotations;
 	private Random random;
@@ -13,10 +13,12 @@ public class QuoteStorageInVM {
 		this.random = random;
 	}
 	
-	public void addQuote(Quote quote) {
+	@Override
+	public void add(Quote quote) {
 		quotations.add(quote);
 	}
 	
+	@Override
 	public Quote getRandomQuote() {
 		int randomInex = random.nextInt(quotations.size());
         return quotations.get((randomInex));

@@ -5,20 +5,21 @@ import java.util.InputMismatchException;
 import com.gojava2.kickstarter.model.Category;
 import com.gojava2.kickstarter.model.CategoryStorageInVM;
 import com.gojava2.kickstarter.model.ProjectStorageInVM;
+import com.gojava2.kickstarter.model.QuoteStorage;
 import com.gojava2.kickstarter.model.QuoteStorageInVM;
 import com.gojava2.kickstarter.view.ConsoleView;
 import com.gojava2.kickstarter.view.InPut;
 
 public class KickstarterController {
 	
-	private QuoteStorageInVM quoteStorage;
+	private QuoteStorage quoteStorage;
 	private CategoryStorageInVM categoryStorage;
 	private ProjectStorageInVM projectStorage;
 	
 	private	ConsoleView view;
 	private InPut in;
 	
-	public KickstarterController(QuoteStorageInVM quoteStorage, CategoryStorageInVM categoryStorage,
+	public KickstarterController(QuoteStorage quoteStorage, CategoryStorageInVM categoryStorage,
 								ProjectStorageInVM projectStorage, ConsoleView consoleView, 
 								InPut in) {
 		this.quoteStorage = quoteStorage;
