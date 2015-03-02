@@ -9,6 +9,7 @@ public class ActorFactory {
     private static final String[] DEFAULT_SKILLS = { "scan", "develop", "info" };
 
     private String actorName = null;
+    private long id;
     private Set<String> skills = new HashSet<String>(); // Hash is for unique
                                                         // skills;
 
@@ -23,6 +24,7 @@ public class ActorFactory {
         return this;
     }
 
+   
     public void addSkillsArray(String[] skills) {
         if (skills != null) {
             for (String skill : skills) {
@@ -66,5 +68,14 @@ public class ActorFactory {
     public void setActorName(String actorName) {
         this.actorName = actorName;
     }
+    
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
 
 }
