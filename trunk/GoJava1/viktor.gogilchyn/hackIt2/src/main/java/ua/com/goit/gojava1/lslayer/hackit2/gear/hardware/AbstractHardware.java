@@ -4,9 +4,9 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import ua.com.goit.gojava1.lslayer.hackit2.exception.HackitWrongParameterException;
-import ua.com.goit.gojava1.lslayer.hackit2.gear.AbstractUtility;
+import ua.com.goit.gojava1.lslayer.hackit2.gear.AbstractGear;
 
-public abstract class AbstractHardware extends AbstractUtility implements
+public abstract class AbstractHardware extends AbstractGear implements
         Hardware {
 
     public AbstractHardware() throws HackitWrongParameterException {

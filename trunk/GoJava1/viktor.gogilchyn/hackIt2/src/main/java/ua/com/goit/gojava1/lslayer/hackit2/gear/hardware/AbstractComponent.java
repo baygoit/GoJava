@@ -16,11 +16,9 @@ public class AbstractComponent extends AbstractHardware implements Component {
         super();
     }
 
-    public Component assemble(Component component) {
+    public void assemble(Component component) {
         if (this.getSlots().contains(component.getPlaceholder())) {
-
         }
-        return null;
     }
 
     public List<Component> getInstalledComponents() {

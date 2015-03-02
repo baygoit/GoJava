@@ -5,11 +5,11 @@ import java.util.Map;
 
 import ua.com.goit.gojava1.lslayer.hackit2.exception.HackitWrongParameterException;
 
-public abstract class AbstractUtility implements Gear {
+public abstract class AbstractGear implements Gear {
     private String name;
     private Map<String, Integer> purpose = new LinkedHashMap<String, Integer>();
 
-    public AbstractUtility() {
+    public AbstractGear() {
     }
 
     public Gear addPurpose(String purpose, int value)

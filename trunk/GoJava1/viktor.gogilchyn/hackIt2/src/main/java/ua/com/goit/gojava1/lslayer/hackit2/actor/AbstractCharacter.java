@@ -24,7 +24,6 @@ public abstract class AbstractCharacter implements Actor, Serializable {
         
     }
 
-
     @Override
     public Map<String, String> getAttributes() {
         return atrributes;
@@ -65,11 +64,12 @@ public abstract class AbstractCharacter implements Actor, Serializable {
         this.atrributes.put(what, value);
     }
 
+    @Override
     public long getId() {
         return id;
     }
 
-
+    @Override
     public void setId(long id) {
         this.id = id;
     }

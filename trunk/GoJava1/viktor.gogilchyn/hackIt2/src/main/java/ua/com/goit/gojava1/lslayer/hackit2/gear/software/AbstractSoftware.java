@@ -1,8 +1,8 @@
 package ua.com.goit.gojava1.lslayer.hackit2.gear.software;
 
-import ua.com.goit.gojava1.lslayer.hackit2.gear.AbstractUtility;
+import ua.com.goit.gojava1.lslayer.hackit2.gear.AbstractGear;
 
-public class AbstractSoftware extends AbstractUtility implements Software {
+public class AbstractSoftware extends AbstractGear implements Software {
     public AbstractSoftware() {
         super();
         this.version = 1;

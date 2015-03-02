@@ -18,6 +18,8 @@ public interface Actor {
     //UI part
     public String getName();
     public void   setName(String name);
+    public void   setId(long id);
+    public long   getId();
     public Map<String, Integer> getSkills();
     public Map<String, String> getAttributes();
     public String getStringForOutput();
