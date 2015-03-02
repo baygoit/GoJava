@@ -9,7 +9,6 @@ public class Interview {
 	private List <Category> categories = new ArrayList <Category>();
 	List <File> fileNames = new ArrayList<File>();
 	public XMLParser parser = new XMLParser();
-	public TimeCounter timecounter;
 	
 	public Interview(){ 
 

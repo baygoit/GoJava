@@ -1,16 +1,32 @@
-<%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-
-<html>
+<!DOCTYPE html>
+<html>	
 	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<title>Home Page</title>
+	<script>
+	    function checkForAlphanumeric(inputtxt){   
+	    	var letters = /^[0-9a-zA-Z]+$/;  
+	    	if(inputtxt.value.match(letters)){  
+				return true;  
+	    	}else{  
+	    		alert('Please input alphanumeric characters only');  
+	    		return false;  
+	    	}  
+	    }  
+	</script>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<title>Welcome to Interview Simulator</title>
 	</head>
-	<body>
- 		<a href="Questions and all Answers.jsp">Посмотреть список вопросов и всех ответов</a> <br>
- 		<a href="Questions and correct Answers.jsp">Посмотреть список вопросов и правильных ответов</a> <br>
- 		<a href="compose.jsp">Выбрать темы для собеседования</a> <br>
- 		<a href="Interview.jsp">Начать произовльное собеседование</a> <br>
+		<body bgcolor="Azure">
+			<center>
+			<p><img src ="IMG/welcome.png" width="320" height="240"></p>
+			<form name="form" action="Hostes" onsubmit="return checkForAlphanumeric(document.form.fname)" 
+				method="post">
+				<table border = "0">
+				<tr>
+					<td> name: </td> <td> <input type="text" name="fname" />
+					<input type = "submit" value = "Submit" /> </td>
+				</tr>
+			</table>
+			</form>
+		</center>
 	</body>
 </html>

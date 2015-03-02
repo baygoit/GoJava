@@ -8,8 +8,9 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>Statistics page</title>
 	</head>
-	<body>
+	<body bgcolor="Azure">
 	<%List<Mark> marks = (List<Mark>)request.getAttribute("stat");
+	String time = (String)request.getAttribute("time");
 	int correct = 0;
 	int halfCorrect = 0;
 	int incorrect = 0;
@@ -21,6 +22,7 @@
 	<p> Правильных ответов: <%= correct %></p>
 	<p> Частично правильных ответов: <%= halfCorrect %></p>
 	<p> Неправильных ответов: <%= incorrect %></p>
+	<p> Время <%= time%></p>
 	<p> Неправильно отвечено </p>
 		<%
 			for(Mark mark: marks){
@@ -29,6 +31,6 @@
 	  		<p><%= stat%> </p>
 	  		<%} %>
 	  	<%} %>
-		<a href="index.jsp">Вернуться на главную</a> <br>
+		<a href="menu.jsp">Вернуться на главную</a> <br>
 	</body>
 </html>

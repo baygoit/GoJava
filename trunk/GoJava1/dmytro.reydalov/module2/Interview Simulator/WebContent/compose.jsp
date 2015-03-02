@@ -7,7 +7,7 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>Compose your categories</title>
-	</head>
+	</head bgcolor="Azure" >
 	<body>
 		<p> Compose your categories </p>
 		<%  Interview interview = new Interview();
@@ -21,6 +21,6 @@
 		<% } %>
 		<p><input type="submit" value="Submit"></p>
 		</form>
-		<a href="index.jsp">Вернуться на главную</a> <br>	
+		<a href="menu.jsp">Вернуться на главную</a> <br>	
 	</body>
 	</html>

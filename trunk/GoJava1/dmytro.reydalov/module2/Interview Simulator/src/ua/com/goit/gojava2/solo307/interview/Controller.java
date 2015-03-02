@@ -2,7 +2,6 @@ package ua.com.goit.gojava2.solo307.interview;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 import java.util.Set;
 
@@ -29,9 +28,21 @@ public class Controller extends HttpServlet {
 		Set <Integer> answerIds = composed.parseIds(answers);
 		Set <Question> reconstructed = composed.getQuestionsById(answerIds);
 		List <Mark> marks = composed.getMarks(reconstructed, answerIds);
+		request.setAttribute("stat", marks);
+		long startTime = IO.readStartTime();
+		long endTime = TimeCounter.getTime();
+		long difference = TimeCounter.elapsedTime(startTime, endTime);
+		long seconds = TimeCounter.calculateSeconds(difference);
+		String time = "";
+		try {
+			time = TimeCounter.formatIntoMMSS(seconds);
+			request.setAttribute("time", time);
+		} catch (InterviewSimulatorException e) {
+			e.getMessage();
+		}
 		List <String> statistics = composed.getStatistics();
+		statistics.add(new String("test duration: " + time));
 		IO.writeToFile("Dmitro", statistics);
-	    request.setAttribute("stat", marks);
 	    request.getRequestDispatcher("stats.jsp").forward(request,response);
 	}
 }

@@ -12,7 +12,7 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>List of Questions and all answers</title>
 	</head>
-	<body>
+	<body bgcolor="Azure">
 		<% Interview interview = new Interview();
 		File file = new File("Questions.xml");
 		interview.createCategory(file);
@@ -24,6 +24,6 @@
 			<p>	<%= string%>
 		<%} %>
 		<br><br>
-		<a href="index.jsp">Вернуться на главную</a> <br>
+		<a href="menu.jsp">Вернуться на главную</a> <br>
 	</body>
 </html>

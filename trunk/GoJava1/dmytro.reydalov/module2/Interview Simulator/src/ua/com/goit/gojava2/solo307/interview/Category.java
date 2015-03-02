@@ -107,7 +107,6 @@ public class Category {
 		statistics.add(new String("Правильных ответов: " + correct));
 		statistics.add(new String("Частично правильных ответов: " + halfCorrect));
 		statistics.add(new String("Неправильных ответов: " + incorrect)); 
-		System.out.println(statistics);
 		return statistics;
 	}
 }

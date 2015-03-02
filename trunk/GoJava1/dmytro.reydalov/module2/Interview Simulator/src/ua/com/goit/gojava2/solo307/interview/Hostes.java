@@ -9,23 +9,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * Servlet implementation class Composer
- */
-@WebServlet("/Composer")
-public class Composer extends HttpServlet {
+@WebServlet("/Hostes")
+public class Hostes extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    public Composer() {
+
+    public Hostes() {
         super();
     }
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html;charset=utf-8");
-		String [] categories = request.getParameterValues("category");
-		long start = TimeCounter.getTime();
-		IO.writeTime(start);
-		request.setAttribute("category", categories);
-	    request.getRequestDispatcher("interview.jsp").forward(request,response);
+		String [] name = request.getParameterValues("fname");
+		request.setAttribute("name", name);
+	    request.getRequestDispatcher("firstMenu.jsp").forward(request,response);
 	}
+
 }
