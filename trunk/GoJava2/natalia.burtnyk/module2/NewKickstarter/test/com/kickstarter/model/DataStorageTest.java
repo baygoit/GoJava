@@ -65,18 +65,28 @@ public class DataStorageTest {
 	}
 	
 	@Test
-	public void shouldistContainsCategory_whenAddCategory() {
+	public void shouldTwoProjects_whenAddTwoProjects() {
 		// when
 		Сategory category = new Сategory("Music");
 		Project project = new Project("Food","description","history","url",12,23,4);
+		Project project2 = new Project("Asasas","description","history","url",45,67,900);
+		
 		project.setСategory(category);
+		project2.setСategory(category);
+		
 		storage.addProject(project);
+		storage.addProject(project2);
 		
-		List<Project> projects = storage.getSpecificProjects(category);
+		storage.getSpecificProjects(category);
 		Project projectResult = storage.getProject(1);
-		
 		// then
 		assertSame(project, projectResult);
+		
+		//when
+		int i = 2;
+		int projectResult2 = storage.getSizeProjectsOfCategory();
+		//then
+		assertSame(i, projectResult2);	
 	}
 	
 }
