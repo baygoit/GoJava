@@ -77,4 +77,16 @@ public class ConsoleView {
 				break;
 		}
 	}
+	
+	public void inputMismatchMessage() {
+		System.out.println("--- Wrong! Don't use symbols! Try again ---");
+	}
+	
+	public void noExistCategoryMessage(int number) {
+		System.out.println("--- There are no category at number: " + number + ". Try again ---");
+	}
+	
+	public void noExistProjectMessage(int number) {
+		System.out.println("--- There are no project at number: " + number + ". Try again ---");
+	}
 }
