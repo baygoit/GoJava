@@ -110,4 +110,27 @@ public class ProjectsDAO implements Projects {
             throw new RuntimeException("Something happend while getting project by id", e);
         }
     }
+    
+    public void update(int id, Project project) {
+        try {
+            PreparedStatement statement = connection.prepareStatement(
+                    "update projects set"
+                    + "name = ?, description = ?, id_cat = ?, collected = ?, amount = ?, "
+                    + "days = ?, history = ?, video = ? "
+                    + "where id_prj = " + id);
+            statement.setString(1, project.getName());
+            statement.setString(2, project.getDescription());
+            statement.setInt(3, project.getCategory().getId());
+            statement.setDouble(4, project.getCollected());
+            statement.setDouble(5, project.getAmount());
+            statement.setInt(6, project.getDays());
+            statement.setString(7, project.getDetails().getHistory());
+            statement.setString(8, project.getDetails().getVideo());
+            statement.execute();
+        } catch (SQLException e) {
+            throw new RuntimeException("Something happend while adding new project", e);
+        }
+    }
 }
+
+

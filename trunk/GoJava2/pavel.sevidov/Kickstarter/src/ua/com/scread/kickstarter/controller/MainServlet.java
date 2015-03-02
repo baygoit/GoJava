@@ -55,6 +55,15 @@ public class MainServlet extends HttpServlet {
             req.setAttribute("project", project);
             
             req.getRequestDispatcher("project.jsp").forward(req, resp);
+        } else if (action.equals("/payment")) {
+            int projectId = Integer.valueOf(req.getParameter("id"));
+            
+            ProjectsDAO projectsDAO = new ProjectsDAO(connection);
+            Project project = projectsDAO.get(projectId);
+            
+            req.setAttribute("payment", project);
+            
+            req.getRequestDispatcher("payment.jsp").forward(req, resp);
         }
     }
 

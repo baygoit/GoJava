@@ -1,20 +1,19 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-		<meta charset="utf-8">
-		<title>Kickstarter <c:out value="${project.name}"/></title>
-		<meta name="generator" content="Bootply" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-		<link href="./css/bootstrap.min.css" rel="stylesheet">
-		<link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
-		<!--[if lt IE 9]>
-			<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <title>Kickstarter payment</title>
+  <meta name="generator" content="Bootply" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
+  <!--[if lt IE 9]>
+  <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
-		<link href="./css/styles.css" rel="stylesheet">
-	</head>
-	<body>
+  <link href="css/styleforaddnew.css" rel="stylesheet">
+</head>
+<body>
 <header class="navbar navbar-bright navbar-fixed-top" role="banner">
   <div class="container">
     <div class="navbar-header">
@@ -65,18 +64,16 @@
           <p class="lead"></p>
         </h1>
       </div>
-      <div class="col-md-5 sasha-logo">
-              </div>
     </div> 
-  </div><!-- /cont -->
+  </div>
   
   <div class="container">
     <div class="row">
       <div class="col-md-12">
       </div>
     </div> 
-  </div><!-- /cont -->
-  
+  </div>
+
 </div>
 
 
@@ -94,41 +91,30 @@
           <div class="row">    
             <br>
             <div class="col-md-2 col-sm-3 text-center">
-              <img alt="" src="http://m.eet.com/media/1176482/2203520-kickstarter_badge_funded.png" style="width:150px;height:150px" class="img-rounded">
             </div>
             <div class="col-md-10 col-sm-9">
-              <h3><c:out value="${project.name}"/></h3>
-              <div class="row">
-                <div class="col-xs-9">
-                  <p><c:out value="${project.description}"/></p>
-                  <p>Collected already <c:out value="${project.collected}"/> of <c:out value="${project.amount}"/></p>
-				  <p>Left days: <c:out value="${project.days}"/></p>
-				  <p>History: <c:out value="${project.details.history}"/></p>
-<iframe width="560" height="315" src="${project.details.video}" frameborder="0" allowfullscreen></iframe>
-                <div class="col-xs-3"></div>
+              <div class="col-xs-9">
+                <h3>Donate</h3>
+                <hr>
+
+                <input type="text" class="form-control" placeholder="Title">
+                <hr>              
               </div>
-              <br><br>
             </div>
           </div>
+          <div class="col-xs-9">
+        
           
-          
-          <!--/stories-->
-          
-        <br>
-          
+            <a href="/" class="btn btn-success pull-right btnNext">Donate<i class="glyphicon glyphicon-plus"></i></a></div>
         </div>
-          <hr>
-          <a href="/servlets/payment?id=${project.id}" class="btn btn-success pull-right btnNext">Dotane <i class="glyphicon glyphicon-plus"></i></a>
       </div>
                                                                                        
 	                                                
                                                       
-   	</div><!--/col-12-->
+    </div>
   </div>
 </div>
-                                                
-                                                                                
-<!-- <hr> -->
+
 
 <div class="container" id="footer">
   <div class="row">
@@ -136,32 +122,26 @@
       
       <h1>Follow Us</h1>
       <div class="btn-group">
-       <a class="btn btn-twitter btn-lg" href="#"><i class="icon-twitter icon-large"></i> Twitter</a>
-	   <a class="btn btn-facebook btn-lg" href="#"><i class="icon-facebook icon-large"></i> Facebook</a>
-	   <a class="btn btn-google-plus btn-lg" href="#"><i class="icon-google-plus icon-large"></i> Google+</a>
+        <a class="btn btn-twitter btn-lg" href="#"><i class="icon-twitter icon-large"></i> Twitter</a>
+        <a class="btn btn-facebook btn-lg" href="#"><i class="icon-facebook icon-large"></i> Facebook</a>
+        <a class="btn btn-google-plus btn-lg" href="#"><i class="icon-google-plus icon-large"></i> Google+</a>
       </div>
       
     </div>
   </div>
 </div>
-</div>
+
 </body>
-
-<!-- <hr> -->
-
-<!-- <hr> -->
-
 <footer>
   <div class="container">
-    <div class="row">
       <div class="col-sm-6">
-          <h3 class="pull-center foot">&copy; Deuces Inc. 2014. All Rights Reserved.</a></p>      
+        <h3 class="pull-center foot">&copy; Deuces Inc. 2014. All Rights Reserved.</a></p>
       </div>
     </div>
   </div>
 </footer>
-	<!-- script references -->
-		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
-		<script src="js/bootstrap.min.js"></script>
-	</body>
+<!-- script references -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+</body>
 </html>

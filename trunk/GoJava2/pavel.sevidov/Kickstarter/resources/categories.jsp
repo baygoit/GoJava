@@ -115,10 +115,6 @@
           
           <!--/stories-->
           
-          
-          <a href="/" class="btn btn-success pull-right btnNext">Add new <i class="glyphicon glyphicon-plus"></i></a>
-        
-          
         </div>
       </div>
                                                                                        
