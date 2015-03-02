@@ -1,7 +1,6 @@
 package ua.com.sas.model;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertSame;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,16 +14,24 @@ public abstract class ProjectsTest {
 	private Category category1;
 	private Project project1;
 	private Category category2;
+	private Categories categories;
 
 	@Before
 	public void start(){
 		projects = getProjects();
-		category1 = new Category(1, "category1");
-		category2 = new Category(2, "category2");
+		categories = getCategories();
+		categories.addCategory(new Category("category1"));
+		categories.addCategory(new Category("category2"));
+		category1 = categories.readCategory(0);
+		category2 = categories.readCategory(1);
 		project1 = new Project(category1);
+		project1.setProject("project1", "Some dscr", 100, 31, 2, "some history", "video", "FAQ");
+		project1.setCategoryId(category1.getId());
 	}
 	
 	abstract Projects getProjects();
+	
+	abstract Categories getCategories();
 	
 	@Test
 	public void shouldGetProjectByIndex(){
@@ -33,7 +40,7 @@ public abstract class ProjectsTest {
 		projects.chooseProjects(category1);
 		
 		//then
-		assertSame(project1, projects.readObject(0));
+		assertEquals(project1, projects.readObject(0));
 	}
 	
 
@@ -42,9 +49,9 @@ public abstract class ProjectsTest {
 		//given
 		List<Project> chosenProjects = new ArrayList<Project>();
 		Project project2 = new Project(category2);
+		project2.setCategoryId(category2.getId());
 		
 		//when
-		project1.setProject("project1", "Some dscr", 100, 31, 2, "some history", "video", "FAQ");
 		project2.setProject("project2", "Some dscr2", 100, 31, 2, "some history2", "video2", "FAQ2");
 		projects.addProject(project1);
 		projects.addProject(project2);
@@ -58,7 +65,7 @@ public abstract class ProjectsTest {
 	public void shouldBeEmpty_whenSelectedCategoryWithNoProjectsInIt(){
 		//when
 		Project project2 = new Project(category1);
-		project1.setProject("project1", "Some dscr", 100, 31, 2, "some history", "video", "FAQ");
+		project2.setCategoryId(category1.getId());
 		project2.setProject("project2", "Some dscr2", 100, 31, 2, "some history2", "video2", "FAQ2");
 		projects.addProject(project1);
 		projects.addProject(project2);
@@ -71,15 +78,15 @@ public abstract class ProjectsTest {
 	@Test
 	public void shouldHaveTwoElements_whenSelectedCategoryWithTwoProjectsInIt(){
 		//when
-		Project project2 = new Project(category1);
-		project1.setProject("project1", "Some dscr", 100, 31, 2, "some history", "video", "FAQ");
+		Project project2 = new Project(category2);
+		project2.setCategoryId(category2.getId());
 		project2.setProject("project2", "Some dscr2", 100, 31, 2, "some history2", "video2", "FAQ2");
 		projects.addProject(project1);
 		projects.addProject(project2);
-		projects.chooseProjects(category1);
+		projects.chooseProjects(category2);
 		
 		//then
-		assertEquals(2, projects.getLenth());
+		assertEquals(1, projects.getLenth());
 	}
 	
 }

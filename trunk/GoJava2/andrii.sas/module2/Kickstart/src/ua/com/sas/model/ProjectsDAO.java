@@ -9,6 +9,7 @@ import java.util.List;
 
 public class ProjectsDAO implements Projects{
 	private Connection connection;
+	private List<Project> categoryProjects = new ArrayList<Project>();
 
 	public ProjectsDAO(ConnectionDAO connectionDAO){
 		connection = connectionDAO.getConnection();
@@ -16,7 +17,17 @@ public class ProjectsDAO implements Projects{
 
 	@Override
 	public void addProject(Project project) {
-		// TODO This is not need for now
+		try {
+			Statement statement = connection.createStatement();
+			statement.setQueryTimeout(30);
+			statement.execute("INSERT INTO projects (category_id, name, description, money_need, money_has, days_left, history,"
+					+ "video_link, question) VALUES (\'" + project.getCategoryId() + "\'," + "\'" + project.getProjectName() + "\',"
+					+ "\'" + project.getDescription() + "\'," + "\'" + project.getMoneyNeed()
+					+ "\',"	+ "\'" + project.getMoneyHas() + "\'," + "\'" + project.getDaysLeft() + "\'," + "\'" + project.getHistory() 
+					+ "\',"	+ "\'" + project.getVideoLink() + "\'," + "\'" + project.getQuestion() + "\'" + ")");
+		} catch (SQLException e) {
+			throw new RuntimeException("Connection Failed! Check output console", e);
+		}
 	}
 
 	@Override
@@ -24,13 +35,14 @@ public class ProjectsDAO implements Projects{
 		Statement statement;
 		try {
 			statement = connection.createStatement();
-		statement.setQueryTimeout(30);
-		ResultSet rs = statement.executeQuery("select * from projects");
-		int i = 0;
-		Project project = null;
+			statement.setQueryTimeout(30);
+			ResultSet rs = statement.executeQuery("SELECT projects.name AS pname, categories.name AS cname, projects.id as pid, "
+					+ "* FROM projects INNER JOIN categories ON projects.category_id = categories.id");
+			int i = 0;
+			Project project = null;
 			while (rs.next()){
 				if (i == index){
-					project = new Project(new Category(rs.getInt("category_id")));
+					project = new Project(new Category(rs.getInt("category_id"), rs.getString("cname")));
 					project.setProject(rs.getString("name"), rs.getString("description"), rs.getInt("money_need"), rs.getInt("money_has"),
 							rs.getInt("days_left"), rs.getString("history"), rs.getString("video_link"), rs.getString("question"));
 				}
@@ -44,33 +56,21 @@ public class ProjectsDAO implements Projects{
 
 	@Override
 	public int getLenth() {
-		try {
-			Statement statement = connection.createStatement();
-			statement.setQueryTimeout(30);
-			ResultSet rs = statement.executeQuery("select count(*) from projects");
-			int size = 0;
-			while (rs.next()){
-				size = rs.getInt(1);
-			}
-			return size;
-		} catch (SQLException e) {
-			throw new RuntimeException("Connection failed, check your connection parameters", e);
-		}
+		return categoryProjects.size();
 	}
 
 	@Override
 	public List<Project> chooseProjects(Category category) {
 		try {
 			Project project;
-			List<Project> categoryProjects = new ArrayList<Project>();
 			Statement statement = connection.createStatement();
 			statement.setQueryTimeout(30);
 			ResultSet rs = statement.executeQuery("SELECT * FROM projects INNER JOIN categories ON category_id = categories.id WHERE categories.id = " + category.getId());
 			while (rs.next()){
-				project = new Project(category);
-				project.setProject(rs.getString("name"), rs.getString("description"), rs.getInt("money_need"), rs.getInt("money_has"),
-						rs.getInt("days_left"), rs.getString("history"), rs.getString("video_link"), rs.getString("question"));
-				categoryProjects.add(project);
+					project = new Project(category);
+					project.setProject(rs.getString("name"), rs.getString("description"), rs.getInt("money_need"), rs.getInt("money_has"),
+							rs.getInt("days_left"), rs.getString("history"), rs.getString("video_link"), rs.getString("question"));
+					categoryProjects.add(project);
 			}
 			return categoryProjects;
 		} catch (SQLException e) {

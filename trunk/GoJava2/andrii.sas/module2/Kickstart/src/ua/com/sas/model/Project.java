@@ -57,7 +57,7 @@ public class Project {
 				+ description + ", moneyNeed=" + moneyNeed + ", moneyHas="
 				+ moneyHas + ", daysLeft=" + daysLeft + ", category="
 				+ category + ", history=" + history + ", videoLink="
-				+ videoLink + ", questions=" + questions + "]";
+				+ videoLink + ", questions=" + questions + ", id=" + id + "]";
 	}
 	
 	public int getId(){

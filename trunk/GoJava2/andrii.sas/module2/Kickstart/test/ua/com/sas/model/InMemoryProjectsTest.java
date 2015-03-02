@@ -7,4 +7,9 @@ public class InMemoryProjectsTest extends ProjectsTest{
 		return new InnerMemoryProjects();
 	}
 
+	@Override
+	Categories getCategories() {
+		return new InnerMemoryCategories();
+	}
+
 }
