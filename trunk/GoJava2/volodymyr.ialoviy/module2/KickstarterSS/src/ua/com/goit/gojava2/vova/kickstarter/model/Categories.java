@@ -12,8 +12,4 @@ public interface Categories {
 	String showCatecoryName(int categoryId);
 
 	int[] getKickCategories();
-
-	int[] projectsThatAreContainedInTheCategory(int categoryId);
-
-	List<Project> getProjects();
 }

@@ -49,7 +49,6 @@ public class Presenter {
 
 	private void projects() {
 		int[] optionVariant = { menuStatus.getMenuCategories() };
-
 		printProjectsInCategory(chosenCategoryID, menuStatus.getMenuCategories());
 
 		askProject(optionVariant);
@@ -153,12 +152,12 @@ public class Presenter {
 	
 	private void printProjectsInCategory(int chosenCategoryID, int menuCategories) {
 		view.printYourChosenCategory(categories.showCatecoryName(chosenCategoryID));
-		view.printShortProgect(projects.getProjects(), categories.projectsThatAreContainedInTheCategory(chosenCategoryID));
+		view.printShortProgect(projects.getProjects(), projects.projectsThatAreContainedInTheCategory(chosenCategoryID));
 		view.printChoiceProjectNumber(menuCategories);
 	}
 
 	private void askProject(int[] allowedVariants) {
-		int[] concatProjectsAndVariants = concatArray(categories.projectsThatAreContainedInTheCategory(chosenCategoryID), allowedVariants);
+		int[] concatProjectsAndVariants = concatArray(projects.projectsThatAreContainedInTheCategory(chosenCategoryID), allowedVariants);
 		String choice = in.enter();
 		if (InputChecker.checkNumber(concatProjectsAndVariants, choice)){
 			chosenProject = Integer.valueOf(choice);

@@ -26,6 +26,7 @@ public class ProjectsFromDB implements Projects{
 			result = ConnectToDB.statement.executeQuery("SELECT * FROM projects ORDER BY id_project");
 			while (result.next()) {
 				projects.add(new Project(result.getInt("id_project"), 
+										result.getInt("id_category"),
 										result.getString("name_project"),
 										result.getString("short_description_project"),
 										result.getString("full_description_project"),
@@ -41,29 +42,6 @@ public class ProjectsFromDB implements Projects{
 		}
 	}
 	
-	@Override
-	public String showProjectInShort(int projectID) {
-		StringBuilder s = new StringBuilder();
-
-		ResultSet result;
-		try {
-			result = ConnectToDB.statement.executeQuery("SELECT id_project, name_project, short_description_project, "
-	            		+ "how_much_needed_project, how_much_collected_project "
-	            		+ "FROM projects WHERE id_project =" + projectID);
-	            while (result.next()) {
-		            s.append(result.getString("id_project"))
-							.append(" ").append(result.getString("name_project"))
-							.append(", ").append(result.getString("short_description_project"))
-							.append(", ").append(result.getString("how_much_needed_project"))
-							.append(", ").append(result.getString("how_much_collected_project")).toString();
-	            }
-		} catch (SQLException e) {
-			System.err.println( e.getClass().getName()+": "+ e.getMessage() );
-		}
-		
-		return s.toString();
-	}
-
 	@Override
 	public void setDonation(int chosenProject, int amount) {
 		try {
@@ -100,16 +78,22 @@ public class ProjectsFromDB implements Projects{
 		return s;
 	}
 
+	@Override
+	public int[] projectsThatAreContainedInTheCategory(int categoryId) {
+		ArrayList<Integer> array = new ArrayList<Integer>();
+		List<Project> projects = getProjects();
+		for (Project project : projects){
+			if (project.getCategoryID() == categoryId){
+				array.add(project.getProjectID());
+			}
+		}
 
-
-//	private String arrayListToString(ArrayList<String> array) {
-//		StringBuilder string = new StringBuilder();
-//		if(!array.isEmpty()){
-//			for (String s : array){
-//			    string.append(s).append(";\n").toString();
-//			}
-//			return string.substring(0, string.length() - 1);
-//		}
-//		return string.toString();
-//	}
+        int[] a = new int[array.size()];//TODO DELETE, INT[] = lIST or relocate to util
+        int j = 0;
+        for (Integer i : array){
+        	a[j] = i;
+        	j++;
+        }
+		return a;
+	}
 }

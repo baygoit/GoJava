@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class Project{
 	
 	private int projectID;
+	private int categoryID;
 	private String projectName;
 	private String shortDescription;
 	private String fullDescription;
@@ -16,11 +17,12 @@ public class Project{
 	private ArrayList<String> faq;
 	private int daysLeft;
 
-	public Project(int projectID, String projectName, String shortDescription,
+	public Project(int projectID, int categoryID, String projectName, String shortDescription,
 			String fullDescription, String foto, String link,
 			int howMuchNeeded, int howMuchCollected, int howMuchRemaining,
 			ArrayList<String> faq, int daysLeft) {
 		this.projectID = projectID;
+		this.categoryID = categoryID;
 		this.projectName = projectName;
 		this.shortDescription = shortDescription;
 		this.fullDescription = fullDescription;
@@ -123,5 +125,13 @@ public class Project{
 
 	public void setDaysLeft(int daysLeft) {
 		this.daysLeft = daysLeft;
+	}
+
+	public int getCategoryID() {
+		return categoryID;
+	}
+
+	public void setCategoryID(int categoryID) {
+		this.categoryID = categoryID;
 	}
 }

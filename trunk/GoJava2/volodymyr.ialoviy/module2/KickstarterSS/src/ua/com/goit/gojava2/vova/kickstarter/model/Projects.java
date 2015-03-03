@@ -6,8 +6,6 @@ import java.util.List;
 public interface Projects {
 
 	List<Project> getProjects();
-	
-	String showProjectInShort(int projectID);
 
 	void setDonation(int chosenProject, int amount);
 
@@ -16,5 +14,7 @@ public interface Projects {
 	ArrayList<String> getFaq(int projectID);
 
 	void setProjects();
+	
+	int[] projectsThatAreContainedInTheCategory(int categoryId);
 
 }
