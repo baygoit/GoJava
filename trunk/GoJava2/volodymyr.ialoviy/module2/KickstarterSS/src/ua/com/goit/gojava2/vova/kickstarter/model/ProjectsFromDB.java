@@ -22,7 +22,7 @@ public class ProjectsFromDB implements Projects{
 		projects = new ArrayList<Project>();
 		ResultSet result;
 		try {
-			ArrayList<String> faq = getFaq(projects.size());
+			
 			result = ConnectToDB.statement.executeQuery("SELECT * FROM projects ORDER BY id_project");
 			while (result.next()) {
 				projects.add(new Project(result.getInt("id_project"), 
@@ -35,8 +35,15 @@ public class ProjectsFromDB implements Projects{
 										result.getInt("how_much_needed_project"),
 										result.getInt("how_much_collected_project"),
 										result.getInt("how_much_remaining_project"),
-										faq, PeriodBetweenDates.periodJoda(result.getString("date_close_project"))));
+										null, PeriodBetweenDates.periodJoda(result.getString("date_close_project"))));
 			}
+			
+			
+			for (Project project: projects){
+				project.setFaq(getFaq(project.getProjectID()));
+				
+			}
+			
 		} catch (SQLException e) {
 			System.err.println( e.getClass().getName()+": +++"+ e.getMessage() );
 		}
@@ -51,6 +58,10 @@ public class ProjectsFromDB implements Projects{
 		} catch (SQLException e) {
 			System.err.println( e.getClass().getName()+": "+ e.getMessage() );
 		}
+
+		Project project = getProjects().get(chosenProject - 1);// TODO relocate method or setProjects();
+		project.setHowMuchCollected(project.getHowMuchCollected() + amount);
+		project.setHowMuchRemaining(project.getHowMuchRemaining() - amount);
 	}
 
 	@Override
@@ -60,6 +71,7 @@ public class ProjectsFromDB implements Projects{
 		} catch (SQLException e) {
 			System.err.println( e.getClass().getName()+": "+ e.getMessage() );
 		}
+		setProjects();// TODO or not rewrite all
 	}
 
 	@Override

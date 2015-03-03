@@ -65,7 +65,7 @@ public class Presenter {
 	private void project() {
 		int[] optionVariant = { menuStatus.getMenuProjects(), menuStatus.getMenuPayment(), menuStatus.getMenuQuestion(), menuStatus.getExit() };
 
-		view.printProject(projects.getProjects().get(chosenProject - 1)); 
+		view.printProject(projects.getProjects().get(chosenProject - 1));
 				
 		view.printChoiceProjectOrPaymentOrQuestion(menuStatus.getMenuProjects(), menuStatus.getMenuPayment(), menuStatus.getMenuQuestion());
 		askAfterProject(optionVariant);
