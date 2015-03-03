@@ -6,7 +6,7 @@ import java.util.List;
 import ua.com.goit.gojava1.lslayer.hackit2.exception.HackitIOException;
 import ua.com.goit.gojava1.lslayer.hackit2.gear.hardware.Hardware;
 
-public class DeviceDAO extends AbstractDAO {
+public class DeviceDAO extends AbstractFileDAO {
 
     public void save(Hardware item) throws HackitIOException, IOException {
     }

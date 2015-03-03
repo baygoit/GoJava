@@ -2,7 +2,7 @@ package ua.com.goit.gojava1.lslayer.hackit2.dao;
 
 import java.io.File;
 
-public abstract class AbstractDAO {
+public abstract class AbstractFileDAO {
     protected static final String WIN_SAVE_DIR = "c:\\workspace\\Hackit2\\saved\\";
     protected static final String UNIX_SAVE_DIR = "/usr/share/hackit2/";
     protected static final String FILE_EXT = ".sav";

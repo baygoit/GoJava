@@ -8,7 +8,7 @@ import java.util.Map;
 
 import ua.com.goit.gojava1.lslayer.hackit2.action.Action;
 import ua.com.goit.gojava1.lslayer.hackit2.actor.Actor;
-import ua.com.goit.gojava1.lslayer.hackit2.dao.ActorDAO;
+import ua.com.goit.gojava1.lslayer.hackit2.dao.ActorFileDAO;
 import ua.com.goit.gojava1.lslayer.hackit2.dto.ActionResult;
 import ua.com.goit.gojava1.lslayer.hackit2.exception.HackitEcxeptionForUI;
 import ua.com.goit.gojava1.lslayer.hackit2.exception.HackitWrongParameterException;
@@ -30,7 +30,7 @@ public final class GameSession { // Singleton. There is only one game per app.
     private List<Gear> stuff = new ArrayList<Gear>();
 
     private GameSession() {
-        ActorDAO dao = new ActorDAO();
+        ActorFileDAO dao = new ActorFileDAO();
         try {
             this.gamers = dao.loadAll();
         } catch (HackitEcxeptionForUI e) {

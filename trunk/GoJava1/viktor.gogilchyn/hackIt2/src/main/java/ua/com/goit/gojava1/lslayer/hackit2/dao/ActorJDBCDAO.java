@@ -5,13 +5,15 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 import ua.com.goit.gojava1.lslayer.hackit2.actor.Actor;
 import ua.com.goit.gojava1.lslayer.hackit2.actor.HumanControlledCharacter;
 import ua.com.goit.gojava1.lslayer.hackit2.exception.HackitIOException;
 
-public class DAOConnectionManager {
+public class ActorJDBCDAO {
     
     public Actor load(long newId) throws HackitIOException {
         Connection connection = null;
@@ -144,4 +146,28 @@ public class DAOConnectionManager {
         long newId = this.save(whom);
         return this.load(newId);
     }
+    
+    public List<Actor> loadAll() throws HackitIOException {
+        List<Actor> returnValue = new LinkedList<Actor>();
+        Connection connection = null;
+        PreparedStatement loadAllActors = null;
+        String loadAllActorsSQL = "SELECT id FROM actors;";
+        try {
+            Class.forName("org.postgresql.Driver");
+            connection = DriverManager.getConnection(
+                                                     "jdbc:postgresql://lslayer.tk:5432/goit", "goit", "goit");
+            loadAllActors = connection.prepareStatement(loadAllActorsSQL);
+            ResultSet result = loadAllActors.executeQuery();
+            while (result.next()) {
+                returnValue.add(this.load(result.getLong(1)));
+            }
+        } catch (Exception e) {
+            throw new HackitIOException("Error while loading actor", e);
+        }
+        return null;
+
+
+    }
+    
+    
 }

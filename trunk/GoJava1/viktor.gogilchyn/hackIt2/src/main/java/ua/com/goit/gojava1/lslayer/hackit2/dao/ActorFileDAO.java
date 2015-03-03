@@ -15,9 +15,9 @@ import ua.com.goit.gojava1.lslayer.hackit2.actor.HumanControlledCharacter;
 import ua.com.goit.gojava1.lslayer.hackit2.exception.HackitEcxeptionForUI;
 import ua.com.goit.gojava1.lslayer.hackit2.exception.HackitIOException;
 
-public class ActorDAO extends AbstractDAO {
+public class ActorFileDAO extends AbstractFileDAO {
 
-    public ActorDAO() {
+    public ActorFileDAO() {
 
     }
 

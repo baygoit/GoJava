@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import ua.com.goit.gojava1.lslayer.hackit2.actor.Actor;
 import ua.com.goit.gojava1.lslayer.hackit2.actor.ActorFactory;
-import ua.com.goit.gojava1.lslayer.hackit2.dao.ActorDAO;
+import ua.com.goit.gojava1.lslayer.hackit2.dao.ActorFileDAO;
 import ua.com.goit.gojava1.lslayer.hackit2.exception.HackitEcxeptionForUI;
 import ua.com.goit.gojava1.lslayer.hackit2.exception.HackitIOException;
 
@@ -34,7 +34,7 @@ public class ActorMaintainer extends HttpServlet {
      */
     protected void doGet(HttpServletRequest request,
             HttpServletResponse response) throws ServletException, IOException {
-        ActorDAO dao = new ActorDAO();
+        ActorFileDAO dao = new ActorFileDAO();
 
         try {
             request.setAttribute("gamers", dao.loadAll());
@@ -53,7 +53,7 @@ public class ActorMaintainer extends HttpServlet {
         String deleteParameter = request.getParameter("delete");
         String createParameter = request.getParameter("create");
         String editParameter = request.getParameter("edit");
-        ActorDAO dao = new ActorDAO();
+        ActorFileDAO dao = new ActorFileDAO();
         if (deleteParameter != null && deleteParameter.equals("yes"))
             try {
                 for (Actor gamer : dao.loadAll()) {
