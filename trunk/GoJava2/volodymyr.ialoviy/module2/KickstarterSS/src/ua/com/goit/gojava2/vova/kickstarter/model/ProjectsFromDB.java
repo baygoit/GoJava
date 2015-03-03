@@ -37,15 +37,17 @@ public class ProjectsFromDB implements Projects{
 										result.getInt("how_much_remaining_project"),
 										null, PeriodBetweenDates.periodJoda(result.getString("date_close_project"))));
 			}
-			
-			
-			for (Project project: projects){
-				project.setFaq(getFaq(project.getProjectID()));
-				
-			}
+
+			writeFaq();
 			
 		} catch (SQLException e) {
 			System.err.println( e.getClass().getName()+": +++"+ e.getMessage() );
+		}
+	}
+
+	private void writeFaq() {
+		for (Project project: projects){
+			project.setFaq(getFaq(project.getProjectID()));
 		}
 	}
 	
@@ -71,7 +73,7 @@ public class ProjectsFromDB implements Projects{
 		} catch (SQLException e) {
 			System.err.println( e.getClass().getName()+": "+ e.getMessage() );
 		}
-		setProjects();// TODO or not rewrite all
+		writeFaq();
 	}
 
 	@Override
