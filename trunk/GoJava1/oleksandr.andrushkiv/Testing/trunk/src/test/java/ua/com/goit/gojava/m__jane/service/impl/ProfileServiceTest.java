@@ -8,8 +8,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import ua.com.goit.gojava.m__jane.service.ProfileService;
-import ua.com.goit.gojava.m__jane.service.impl.ProfileServiceImpl;
-
 
 public class ProfileServiceTest {
 
@@ -17,7 +15,7 @@ public class ProfileServiceTest {
 	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		profileService = new ProfileServiceImpl();
+		profileService = new ProfileServiceImplXML();
 	}
 
 	@Test

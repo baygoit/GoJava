@@ -9,19 +9,22 @@ import javax.servlet.http.HttpServletResponse;
 
 import ua.com.goit.gojava.m__jane.exceptions.TestingServiceException;
 import ua.com.goit.gojava.m__jane.model.User;
+import ua.com.goit.gojava.m__jane.model.question.SimpleQuestion;
+import ua.com.goit.gojava.m__jane.service.QuestionService;
 import ua.com.goit.gojava.m__jane.service.UserService;
 import ua.com.goit.gojava.m__jane.service.impl.UserServiceImplXML;
+import ua.com.goit.gojava.m__jane.service.implDB.QuestionServiceImplDB;
 
 /**
- * Servlet implementation class IndexPage
+ * Servlet implementation class SimpleQuestion
  */
-public class IndexPage extends HttpServlet {
+public class SimpleQuestionController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public IndexPage() {
+    public SimpleQuestionController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,29 +33,32 @@ public class IndexPage extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		
 		try {
-			UserService userService = new UserServiceImplXML();
+			
+			QuestionService questionService = new QuestionServiceImplDB();
 						
-			String paramLogin = request.getParameter("login");
-			String paramPassw = request.getParameter("password");
+			String content = request.getParameter("question");
+			String standartAnswer = request.getParameter("standartAnswer");
+			
+System.out.println(content);
+System.out.println(standartAnswer);
+			
+			if (content == null || "".equals(content)
+					|| standartAnswer == null || "".equals(standartAnswer))				
+				throw new Exception("fields empty");
+			
 
-			if (paramLogin == null || "".equals(paramLogin)
-					|| paramPassw == null || "".equals(paramPassw))				
-				throw new Exception("wrong login/password");
+			SimpleQuestion question = new SimpleQuestion();
+			question.setContent(content);
+			question.setStandartAnswer(standartAnswer);
+			questionService.saveQuestion(question);
 			
-			
-			User user = userService.checkUser(paramLogin, paramPassw);
-			if (user!=null) {
+		
 				
-				request.setAttribute("userDetailsMap", userService.getUserDetailsMap(user));
-				getServletContext().getRequestDispatcher("/userQuizzes.jsp").forward(
+				request.setAttribute("questionList", questionService.getQuestionList());
+				getServletContext().getRequestDispatcher("/questionPage.jsp").forward(
 						request, response);
-			}else {
-				request.setAttribute("userNotFound", "User not found! Enter again correctly!");
-				getServletContext().getRequestDispatcher("/index.jsp").forward(
-						request, response);
-			}
 		
 
 		} catch (TestingServiceException e) {

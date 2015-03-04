@@ -1,6 +1,5 @@
 package ua.com.goit.gojava.m__jane.service.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import ua.com.goit.gojava.m__jane.model.Category;
@@ -11,15 +10,8 @@ public class QuestionServiceImpl implements QuestionService {
 
 	
 	@Override
-	public List<Question> getQuestionList(List<Category> categoryList) {
-		// TODO add some logic for getting questions
-		//now just all questions from categories
-		//maybe there needs some additional object for the logic params(or quiz) 
-		List<Question> questionList = new ArrayList<Question>();
-		
-		for (Category category : categoryList) {
-			questionList.addAll(category.getQuestionList());
-		}			
-		return questionList;
+	public List<Question> getQuestionList(List<Category> questionCategoryList) {
+		// TODO some logic for getting questions
+		return null;
 	}
 }

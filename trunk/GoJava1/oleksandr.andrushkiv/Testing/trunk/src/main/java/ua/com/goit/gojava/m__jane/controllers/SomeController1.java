@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import ua.com.goit.gojava.m__jane.exceptions.TestingServiceException;
 import ua.com.goit.gojava.m__jane.model.Profile;
 import ua.com.goit.gojava.m__jane.service.ProfileService;
-import ua.com.goit.gojava.m__jane.service.impl.ProfileServiceImpl;
+import ua.com.goit.gojava.m__jane.service.impl.ProfileServiceImplXML;
 
 /**
  * Servlet implementation class SomeController1
@@ -33,7 +33,7 @@ public class SomeController1 extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 			
 		try {
-			ProfileService profileService = new ProfileServiceImpl();
+			ProfileService profileService = new ProfileServiceImplXML();
 			List<Profile> profileList = profileService.getProfileList();
 			request.setAttribute("profileList", profileList);
 			getServletContext().getRequestDispatcher("/profiles.jsp").forward(request, response);
@@ -61,7 +61,7 @@ public class SomeController1 extends HttpServlet {
 			
 			int profileId = Integer.valueOf(parameter);
 		
-			ProfileService profileService = new ProfileServiceImpl();
+			ProfileService profileService = new ProfileServiceImplXML();
 			request.setAttribute("profileList", profileService.getProfileList());
 			
 			Profile profile = profileService.getProfile(profileId);

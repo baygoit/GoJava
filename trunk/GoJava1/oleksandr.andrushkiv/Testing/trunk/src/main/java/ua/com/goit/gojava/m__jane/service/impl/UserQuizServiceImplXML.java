@@ -11,16 +11,16 @@ import ua.com.goit.gojava.m__jane.model.question.Question;
 import ua.com.goit.gojava.m__jane.service.QuestionService;
 import ua.com.goit.gojava.m__jane.service.UserQuizService;
 
-public class UserQuizServiceImpl implements UserQuizService {
+public class UserQuizServiceImplXML implements UserQuizService {
 
 	private QuestionService questionService;	
 	//while hasn't DB
 	//private ProfileService profileService;
 
 	
-	private UserQuizServiceImpl() {
+	public UserQuizServiceImplXML() {
 
-		this.questionService = new QuestionServiceImpl();
+		this.questionService = new QuestionServiceImplXML();
 		//this.profileService = new ProfileServiceImpl();
 	}
 

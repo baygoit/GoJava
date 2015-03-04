@@ -39,4 +39,20 @@
     <servlet-name>Quizer</servlet-name>
     <url-pattern>/Quizer</url-pattern>
   </servlet-mapping>
+  <resource-ref>
+    <description>DB Connection</description>
+    <res-ref-name>jdbc/testingDB</res-ref-name>
+    <res-type>javax.sql.DataSource</res-type>
+    <res-auth>Container</res-auth>
+  </resource-ref>
+  <servlet>
+    <description></description>
+    <display-name>SimpleQuestionController</display-name>
+    <servlet-name>SimpleQuestionController</servlet-name>
+    <servlet-class>ua.com.goit.gojava.m__jane.controllers.SimpleQuestionController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SimpleQuestionController</servlet-name>
+    <url-pattern>/SimpleQuestionController</url-pattern>
+  </servlet-mapping>
 </web-app>

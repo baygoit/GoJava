@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script type="text/javascript">
 function validate() {
-	
+/* 
 	//Считаем значения из полей name и email в переменные x и y
 	   var x=document.forms[0]["login"].value;
 	   var y=document.forms[0]["password"].value;
@@ -21,48 +21,45 @@ function validate() {
 	      document.getElementById("passwordf").innerHTML="*данное поле обязательно для заполнения";
 	      return false;
 	   }
-	
+ */
 }
 </script>
-<title>index page</title>
+<title>Questions page</title>
 </head>
 <body>
 
-	<form method="post" action="indexPage" onsubmit="return validate()">
+	<form method="post" action="SimpleQuestionController" >
 
 		<table>
+		
 			<tr>
-				<td><label for="loginId">Login: </label></td>
-				<td><input type="text" name="login" id="loginId" size="25" value="user1"/><span style="color:red" id="loginf"></span></td>
+				<td><label for="loginId">Question </label></td>
+				<td><label for="loginId">Standart answer </label></td>
+				<td><label for="loginId"> </label></td>
+			
 			</tr>
-
+			
 			<tr>
-				<td><label for="passwordId">Password: </label></td>
-				<td><input type="password" name="password" id="passwordId" size="25" value="1"/><span style="color:red" id="passwordf"></span></td>
+				<td><input type="text" name="question" id="loginId" size="40" value="content"/><span style="color:red" id="loginf"></span></td>
+				<td><input type="text" name="standartAnswer" id="loginId" size="40" value="standartAnswer"/><span style="color:red" id="loginf"></span></td>
+				<td><input type="submit" value="enter"></td>
 			</tr>
+			
+		
+ 
 
-		</table>
-		<input type="submit" value="enter">
+	</table>
+
+		
 	</form>
+	
+<br />	
+	<c:forEach items="${questionList}" var="profile">
+    <tr>
+      <td><c:out value="${question}" /></td>
+    </tr>
+  </c:forEach>
 
-	<br />
-	<div style="color: red">
-		<c:out value="${requestScope.userNotFound}" />
-	</div>
-
-
-<!-- setertA -->
-<form action="SomeController2" method="POST">
-        <label>profile's id: <input type="text" name="profileId" /></label><br />
-        <input type="submit" value="Submit" />
-    </form>
-    
-    <%
-String errorDiscription = (String)request.getAttribute("errorDiscription");
-
-%>	
-
-error: <%=errorDiscription%>
 
 
 </body>

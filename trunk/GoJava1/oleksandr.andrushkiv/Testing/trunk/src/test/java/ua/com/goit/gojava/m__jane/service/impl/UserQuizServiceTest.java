@@ -15,6 +15,7 @@ import ua.com.goit.gojava.m__jane.model.UserQuiz;
 import ua.com.goit.gojava.m__jane.model.answer.Answer;
 import ua.com.goit.gojava.m__jane.model.question.Question;
 import ua.com.goit.gojava.m__jane.service.UserQuizService;
+import ua.com.goit.gojava.m__jane.service.impl.UserQuizServiceImplXML;
 
 public class UserQuizServiceTest {
 
@@ -22,7 +23,7 @@ public class UserQuizServiceTest {
 	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		userQuizService = new UserQuizServiceImpl();
+		userQuizService = new UserQuizServiceImplXML();
 	}
 
 	@Test

@@ -13,11 +13,11 @@ import ua.com.goit.gojava.m__jane.model.User;
 import ua.com.goit.gojava.m__jane.service.UserService;
 import ua.com.goit.gojava.m__jane.utils.DataBuilder;
 
-public class UserServiceImpl implements UserService {
+public class UserServiceImplXML implements UserService {
 
 	private List<User> userList;
 
-	public UserServiceImpl() throws TestingServiceException {
+	public UserServiceImplXML() throws TestingServiceException {
 		loadProfileList();
 	}
 
@@ -26,7 +26,7 @@ public class UserServiceImpl implements UserService {
 		try {
 			userList = DataBuilder.getInstance().getDataLoader().getUserList();
 		} catch (JAXBException e) {
-			throw new TestingServiceException("Can't load data!");
+			throw new TestingServiceException("Can't load data from xml file!");
 		}
 	}
 

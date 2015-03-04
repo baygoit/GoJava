@@ -12,7 +12,7 @@ import ua.com.goit.gojava.m__jane.model.Category;
 import ua.com.goit.gojava.m__jane.model.answer.Answer;
 import ua.com.goit.gojava.m__jane.model.question.Question;
 import ua.com.goit.gojava.m__jane.service.QuestionService;
-import ua.com.goit.gojava.m__jane.service.impl.QuestionServiceImpl;
+import ua.com.goit.gojava.m__jane.service.impl.QuestionServiceImplXML;
 
 public class QuestionServiceTest {
 
@@ -21,7 +21,7 @@ public class QuestionServiceTest {
 
 	@BeforeClass
 	public static void setUpBeforeClass() {
-		questionService = new QuestionServiceImpl();
+		questionService = new QuestionServiceImplXML();
 		//dataLoader = DataBuilder.getInstance().getDataLoader();
 	}
 

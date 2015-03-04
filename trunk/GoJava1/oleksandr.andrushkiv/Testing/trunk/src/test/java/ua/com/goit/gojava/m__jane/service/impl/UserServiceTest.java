@@ -7,6 +7,7 @@ import org.junit.Test;
 
 import ua.com.goit.gojava.m__jane.model.User;
 import ua.com.goit.gojava.m__jane.service.UserService;
+import ua.com.goit.gojava.m__jane.service.impl.UserServiceImplXML;
 
 public class UserServiceTest {
 
@@ -14,7 +15,7 @@ public class UserServiceTest {
 	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		userService = new UserServiceImpl();	
+		userService = new UserServiceImplXML();	
 	}
 
 	@Test
