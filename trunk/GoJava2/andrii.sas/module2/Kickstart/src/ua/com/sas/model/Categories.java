@@ -1,10 +1,12 @@
 package ua.com.sas.model;
 
+import java.util.List;
+
 public interface Categories {
 
 	void addCategory(Category category);
 
-	String getCategories();
+	List<Category> getCategories();
 
 	Category readCategory(int index);
 

@@ -2,6 +2,9 @@ package ua.com.sas.model;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -18,23 +21,19 @@ public abstract class CategoriesTest {
 
 	@Test
 	public void shouldMakeList_whenCategoryAdded() {
+		//given
+		List<Category> categories = new ArrayList<Category>();
+
 		// when
 		Category category1 = new Category("Category1");
 		Category category2 = new Category("Category2");
 		list.addCategory(category1);
 		list.addCategory(category2);
+		categories.add(category1);
+		categories.add(category2);
 
 		// then
-		assertEquals("1 - Category1, 2 - Category2", list.getCategories());
-	}
-
-	@Test
-	public void shouldReturnEmptyString_whenNoOneCategories() {
-		// when
-		String categories = list.getCategories();
-
-		// then
-		assertEquals("", categories);
+		assertEquals(categories, list.getCategories());
 	}
 
 	@Test

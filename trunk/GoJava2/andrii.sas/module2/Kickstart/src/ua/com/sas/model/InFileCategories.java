@@ -7,37 +7,38 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class InFileCategories implements Categories {
-	
+
 	private File file;
 	private int firstTime = 0;
 
-	public InFileCategories(String fileName){
+	public InFileCategories(String fileName) {
 		file = createFileIfNeeded(fileName);
 	}
-	
+
 	interface LogicDifference {
-		Object doLogicalDifference(BufferedReader br);
+		void doLogicalDifference(BufferedReader br);
 	}
-	
+
 	class SameLogic {
 		private BufferedReader in = null;
 		private LogicDifference logicDifference;
-		
-		public SameLogic(LogicDifference shortcut){
+
+		public SameLogic(LogicDifference shortcut) {
 			this.logicDifference = shortcut;
 		}
-		
-		public Object doLogic(){
+
+		public void doLogic() {
 			try {
 				in = new BufferedReader(new FileReader(file));
-				return logicDifference.doLogicalDifference(in);
+				logicDifference.doLogicalDifference(in);
 			} catch (FileNotFoundException e) {
 				throw new RuntimeException("Can't read file", e);
-			} 
-			finally {
-				if (in != null){
+			} finally {
+				if (in != null) {
 					try {
 						in.close();
 					} catch (IOException e) {
@@ -46,16 +47,8 @@ public class InFileCategories implements Categories {
 				}
 			}
 		}
-		
-		public String read(){
-			try {
-				return in.readLine();
-			} catch (IOException e) {
-				throw new RuntimeException("Something wrong with file reading");
-			}
-		}
 	}
-	
+
 	@Override
 	public void addCategory(Category category) {
 		BufferedWriter out = null;
@@ -67,9 +60,8 @@ public class InFileCategories implements Categories {
 			throw new RuntimeException("Can't write file", e);
 		} catch (IOException e) {
 			throw new RuntimeException("Something wrong with file writing");
-		}
-		finally {
-			if (out != null){
+		} finally {
+			if (out != null) {
 				try {
 					out.close();
 				} catch (IOException e) {
@@ -80,63 +72,27 @@ public class InFileCategories implements Categories {
 	}
 
 	@Override
-	public String getCategories() {
+	public List<Category> getCategories() {
+		final List<Category> categories = new ArrayList<Category>();
 		class RealizationOfLogicDifference implements LogicDifference {
 			@Override
-			public Object doLogicalDifference(BufferedReader br) {
-				String result = "";
-				int index = 1;
+			public void doLogicalDifference(BufferedReader br) {
 				String line;
 				try {
 					line = br.readLine();
-					while (line != null){
-						result += index + " - " + line;
+					while (line != null) {
+						categories.add(new Category(line));
 						line = br.readLine();
-							if (line != null){
-								result += ", ";
-							}
-						index++;
-						}
 					}
-					catch (IOException e) {
-						throw new RuntimeException("Something wrong with file reading");
-					}
-					return result;
+				} catch (IOException e) {
+					throw new RuntimeException("Something wrong with file reading");
+				}
 			}
-			
+
 		}
 		LogicDifference shortcut = new RealizationOfLogicDifference();
-		SameLogic someLogic = new SameLogic(shortcut);
-		return (String) someLogic.doLogic();
-//		BufferedReader in = null;
-//		try {
-//			String result = "";
-//			in = new BufferedReader(new FileReader(file));
-//			int index = 1;
-//			String line = in.readLine();
-//			while (line != null){
-//				result += index + " - " + line;
-//				line = in.readLine();
-//				if (line != null){
-//					result += ", ";
-//				}
-//				index++;
-//			}
-//			return result;
-//		} catch (FileNotFoundException e) {
-//			throw new RuntimeException("Can't read file", e);
-//		} catch (IOException e) {
-//			throw new RuntimeException("Something wrong with file reading");
-//		}
-//		finally {
-//			if (in != null){
-//				try {
-//					in.close();
-//				} catch (IOException e) {
-//					throw new RuntimeException("Can't close file", e);
-//				}
-//			}
-//		}
+		new SameLogic(shortcut).doLogic();
+		return categories;
 	}
 
 	@Override
@@ -146,8 +102,9 @@ public class InFileCategories implements Categories {
 			in = new BufferedReader(new FileReader(file));
 			int current = 0;
 			String line = in.readLine();
-			while (line != null){
-				if (current == index) break;
+			while (line != null) {
+				if (current == index)
+					break;
 				line = in.readLine();
 				current++;
 			}
@@ -156,9 +113,8 @@ public class InFileCategories implements Categories {
 			throw new RuntimeException("Can't read file", e);
 		} catch (IOException e) {
 			throw new RuntimeException("Something wrong with file reading");
-		}
-		finally {
-			if (in != null){
+		} finally {
+			if (in != null) {
 				try {
 					in.close();
 				} catch (IOException e) {
@@ -175,7 +131,7 @@ public class InFileCategories implements Categories {
 			in = new BufferedReader(new FileReader(file));
 			int count = 0;
 			String line = in.readLine();
-			while (line != null){
+			while (line != null) {
 				line = in.readLine();
 				count++;
 			}
@@ -184,9 +140,8 @@ public class InFileCategories implements Categories {
 			throw new RuntimeException("Can't read file", e);
 		} catch (IOException e) {
 			throw new RuntimeException("Something wrong with file reading");
-		}
-		finally {
-			if (in != null){
+		} finally {
+			if (in != null) {
 				try {
 					in.close();
 				} catch (IOException e) {
@@ -198,7 +153,7 @@ public class InFileCategories implements Categories {
 
 	public File createFileIfNeeded(String fileName) {
 		File file = new File(fileName);
-		if (!file.exists()){
+		if (!file.exists()) {
 			try {
 				file.createNewFile();
 			} catch (IOException e) {
@@ -207,5 +162,5 @@ public class InFileCategories implements Categories {
 		}
 		return file;
 	}
-	
+
 }

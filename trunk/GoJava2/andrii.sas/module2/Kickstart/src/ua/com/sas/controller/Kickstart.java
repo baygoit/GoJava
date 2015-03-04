@@ -114,7 +114,7 @@ public class Kickstart {
 				if (getCheckedValue() == 0){
 					view.println("Thanks for choosing our project");
 					int menuItem = 1;
-					List<Integer> keys = new ArrayList<>();
+					List<Integer> keys = new ArrayList<Integer>();
 					for (Entry<Integer, String> entry : project.getPayments().entrySet()){
 						keys.add(entry.getKey());
 						view.println(menuItem + " - " + entry.getKey() + "$, Your bonus is - " + entry.getValue());

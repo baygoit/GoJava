@@ -25,7 +25,13 @@ public class View {
 	}
 	
 	public void showList(Categories categories) {
-		 println(categories.getCategories() + "\nWhat are you interested in? Pleace, make your choice:");
+		String categoriesList = "";
+		int index = 1;
+		for (Category category : categories.getCategories()){
+			categoriesList += index + " - " + category.getName() + ((index == categories.getLenth())? "" : ", ");
+			index++;
+		}
+		println(categoriesList + "\nWhat are you interested in? Pleace, make your choice:");
 	}
 	
 	public void showChosenCategory(Category category) {

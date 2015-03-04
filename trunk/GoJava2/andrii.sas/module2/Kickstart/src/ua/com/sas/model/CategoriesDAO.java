@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CategoriesDAO implements Categories {
 
@@ -24,19 +26,16 @@ public class CategoriesDAO implements Categories {
 		}
 	}
 	@Override
-	public String getCategories() {
+	public List<Category> getCategories() {
 		try {
+			List<Category> categories = new ArrayList<Category>();
 			Statement statement = connection.createStatement();
 			statement.setQueryTimeout(30);
-			ResultSet rs = statement.executeQuery("select * from categories");
-			String result = "";
-			int index = 1;
+			ResultSet rs = statement.executeQuery("SELECT * FROM categories");
 			while (rs.next()){
-				String lastPart = getLenth() == index ? "" : ", ";
-				result += index + " - " + rs.getString("name") + lastPart;
-				index++;
+				categories.add(new Category(rs.getInt(1), rs.getString(2)));
 			}
-			return result;
+			return categories;
 		} catch (SQLException e) {
 			throw new RuntimeException("Connection Failed! Check output console", e);
 		}

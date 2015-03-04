@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class InnerMemoryProjects implements Projects {
-	private List<Project> projects = new ArrayList<>();
-	private List<Project> categoryProjects = new ArrayList<>();
+	private List<Project> projects = new ArrayList<Project>();
+	private List<Project> categoryProjects = new ArrayList<Project>();
 
 	@Override
 	public void addProject(Project project) {

@@ -62,6 +62,7 @@ public class ProjectsDAO implements Projects{
 	@Override
 	public List<Project> chooseProjects(Category category) {
 		try {
+			categoryProjects.clear();
 			Project project;
 			Statement statement = connection.createStatement();
 			statement.setQueryTimeout(30);

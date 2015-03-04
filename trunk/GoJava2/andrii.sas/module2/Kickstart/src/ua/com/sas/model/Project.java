@@ -1,9 +1,9 @@
 package ua.com.sas.model;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class Project {
+public class Project { //too much parameters, need to create new classes
 	private int id;
 	private int categoryId;
 	private String nameOfProject;
@@ -18,7 +18,7 @@ public class Project {
 	private int FIRST_SUM = 1;
 	private int SECOND_SUM = 10;
 	private int THIRD_SUM = 40;
-	private Map<Integer, String> payments = new HashMap<>();
+	private Map<Integer, String> payments = new LinkedHashMap<Integer, String>();
 	private String bonus1$;
 	private String bonus10$;
 	private String bonus40$; 
@@ -113,8 +113,8 @@ public class Project {
 	
 	public void putPayments(){
 		payments.put(FIRST_SUM, informForNoBonuses(bonus1$));
-		payments.put(THIRD_SUM, informForNoBonuses(bonus40$));
 		payments.put(SECOND_SUM, informForNoBonuses(bonus10$));
+		payments.put(THIRD_SUM, informForNoBonuses(bonus40$));
 	}
 
 	public String informForNoBonuses(String bonus) {
