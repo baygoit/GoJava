@@ -9,6 +9,6 @@ public interface CategoryStorage {
     String getCategoryToString();
 
     Category getCategory(int index);
-
+ // TODO remade to List
     ArrayList<Category> getList();
 }
