@@ -18,7 +18,6 @@ public class InFileProjectStorage implements ProjectStorage {
     public InFileProjectStorage(String fileName) {
         file = new File(fileName);
         if (file.length() != 0) {
-            System.out.println(file.length());
             file.delete();
 
         }

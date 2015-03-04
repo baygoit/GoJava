@@ -18,7 +18,6 @@ public class InFileCategoryStorage implements CategoryStorage {
     public InFileCategoryStorage(String fileName) {
         file = new File(fileName);
         if (file.length() != 0) {
-            System.out.println(file.length());
             file.delete();
 
         }
