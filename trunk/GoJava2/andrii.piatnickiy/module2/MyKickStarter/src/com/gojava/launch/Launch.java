@@ -3,7 +3,7 @@ package com.gojava.launch;
 
 import com.gojava.inputOutput.ConsoleIO;
 import com.gojava.projects.CategoryStorage;
-import com.gojava.projects.FileCategoryStorage;
+import com.gojava.projects.InFileCategoryStorage;
 import com.gojava.projects.InFileProjectStorage;
 import com.gojava.projects.InMemoryCategoryStorage;
 import com.gojava.projects.InMemoryProjectStorage;
@@ -17,7 +17,7 @@ public class Launch {
         ConsoleIO consoleIO = new  ConsoleIO();
 
 
-        CategoryStorage categoryStorage = new FileCategoryStorage("categories.txt");
+        CategoryStorage categoryStorage = new InFileCategoryStorage("categories.txt");
 //        CategoryStorage categoryStorage = new InMemoryCategoryStorage();
         
         ProjectStorage projectStorage = new InFileProjectStorage("projects.txt");
@@ -25,8 +25,10 @@ public class Launch {
 
         
         initCategories(categoryStorage);
-        ((FileCategoryStorage) categoryStorage).getCategoriesFromFileToList();
+        //TODO remade cast
+        ((InFileCategoryStorage) categoryStorage).getCategoriesFromFileToList();
         initProjects(projectStorage);
+      //TODO remade cast
         ((InFileProjectStorage) projectStorage).getProjectsFromFileToList();
         Quote quote = new Quote(consoleIO);
         quote.consoleIO.print(quote.getQuote());
