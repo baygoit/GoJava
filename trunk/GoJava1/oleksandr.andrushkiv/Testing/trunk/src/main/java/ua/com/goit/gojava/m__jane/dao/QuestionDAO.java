@@ -11,4 +11,10 @@ public interface QuestionDAO {
 
 	List<Question> getQuestionList();
 
+	void deleteQuestion(Integer id);
+
+	SimpleQuestion getSimpleQuestion(Integer id);
+
+	void updateSimpleQuestion(SimpleQuestion question);
+
 }

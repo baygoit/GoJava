@@ -5,6 +5,7 @@ import java.util.List;
 
 import ua.com.goit.gojava.m__jane.model.Category;
 import ua.com.goit.gojava.m__jane.model.question.Question;
+import ua.com.goit.gojava.m__jane.model.question.SimpleQuestion;
 import ua.com.goit.gojava.m__jane.service.QuestionService;
 
 public class QuestionServiceImplXML implements QuestionService {
@@ -31,6 +32,24 @@ public class QuestionServiceImplXML implements QuestionService {
 
 	@Override
 	public void saveQuestion(Question question) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteQuestion(Integer id) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public SimpleQuestion getQuestion(Integer id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void updateQuestion(SimpleQuestion question) {
 		// TODO Auto-generated method stub
 		
 	}

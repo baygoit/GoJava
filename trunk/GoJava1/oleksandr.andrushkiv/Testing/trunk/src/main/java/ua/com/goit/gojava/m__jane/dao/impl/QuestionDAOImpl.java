@@ -53,10 +53,6 @@ public class QuestionDAOImpl implements QuestionDAO {
 			Statement st = connection.createStatement();
 			ResultSet rs = st.executeQuery(sql);
 			
-	
-			//PreparedStatement st = connection.prepareStatement(sql);	    	  		   		
-	    	//ResultSet rs = st.executeQuery();
-	    	
 	    	while (rs.next()) {
 	    		SimpleQuestion simpleQuestion = new SimpleQuestion();
 	    		simpleQuestion.setId(rs.getInt("id"));
@@ -65,10 +61,6 @@ public class QuestionDAOImpl implements QuestionDAO {
 	    		list.add(simpleQuestion);
 			}
 	    	
-	    	rs.close();
-	    	st.close();
-	    	connection.close();
-	    	
 		} catch (SQLException e) {
 			e.printStackTrace();
 			//throw new TestingRuntimeException("Can't read question from DB!");
@@ -76,6 +68,76 @@ public class QuestionDAOImpl implements QuestionDAO {
 		}
 		
 		return list;
+	}
+
+
+	@Override
+	public void deleteQuestion(Integer id) {
+		
+		try(Connection connection = dbConnectionSystem.getConnection();){
+
+			String sql = "Delete from simple_question where id=?";
+	    			
+			PreparedStatement st = connection.prepareStatement(sql);	    	  		   		
+	    	st.setInt(1, id);
+	    	st.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			//throw new TestingRuntimeException("Can't delete question from DB!");
+			//TODO write to log
+		}
+	}
+
+
+	@Override
+	public SimpleQuestion getSimpleQuestion(Integer id) {
+		
+		try(Connection connection = dbConnectionSystem.getConnection();){
+
+			String sql = "Select id,content,standart_answer from simple_question where id=?";
+	    			
+			PreparedStatement st = connection.prepareStatement(sql);	    	  		   		
+	    	st.setInt(1, id);
+	    	ResultSet rs = st.executeQuery();
+	    	
+	    	while (rs.next()) {
+	    		SimpleQuestion simpleQuestion = new SimpleQuestion();
+	    		simpleQuestion.setId(rs.getInt("id"));
+	    		simpleQuestion.setContent(rs.getString("content") );
+	    		simpleQuestion.setStandartAnswer(rs.getString("standart_answer"));
+	    		return simpleQuestion;
+			}
+	    	
+	    	
+		} catch (SQLException e) {
+			e.printStackTrace();
+			//throw new TestingRuntimeException("Can't get question from DB!");
+			//TODO write to log
+		}
+		return null;
+	}
+
+
+	@Override
+	public void updateSimpleQuestion(SimpleQuestion question) {
+		
+		try(Connection connection = dbConnectionSystem.getConnection();){
+			
+			String sql = "Update simple_question Set content=?,standart_answer=? where id=?";
+			PreparedStatement st = connection.prepareStatement(sql);	    	  		   		
+	    	st.setString(1, question.getContent());
+	    	st.setString(2, question.getStandartAnswer());
+	    	st.setInt(3, question.getId());
+	    	st.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			//throw new TestingRuntimeException("Can't update question to DB!");
+			//TODO write to log
+		}
+		
+		
 	}
 
 }

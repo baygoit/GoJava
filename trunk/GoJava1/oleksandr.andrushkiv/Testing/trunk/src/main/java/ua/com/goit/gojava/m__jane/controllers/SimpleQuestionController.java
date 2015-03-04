@@ -32,30 +32,81 @@ public class SimpleQuestionController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+//		System.out.println("delete " + request.getParameter("delete"));
+//		System.out.println("enter " + request.getParameter("create"));
+//		System.out.println("question_id " + request.getParameter("question_id"));
+		//System.out.println(content);
+		//System.out.println(standartAnswer);
+		
+	
+								
 		try {
 			
 			QuestionService questionService = new QuestionServiceImplDB();
-						
-			String content = request.getParameter("question");
-			String standartAnswer = request.getParameter("standartAnswer");
 			
-System.out.println(content);
-System.out.println(standartAnswer);
 			
-			if (content == null || "".equals(content)
-					|| standartAnswer == null || "".equals(standartAnswer))				
-				throw new Exception("fields empty");
-			
+			//update on questionPage.jsp
+			if(request.getParameter("updateOne")!= null) {
 
-			SimpleQuestion question = new SimpleQuestion();
-			question.setContent(content);
-			question.setStandartAnswer(standartAnswer);
-			questionService.saveQuestion(question);
-			
-		
+				String question_id = request.getParameter("question_id");				
+				if (question_id == null || "".equals(question_id)) throw new Exception("question_id is empty!");
 				
-				request.setAttribute("questionList", questionService.getQuestionList());
-				getServletContext().getRequestDispatcher("/questionPage.jsp").forward(
+				SimpleQuestion question = questionService.getQuestion(Integer.valueOf(question_id));
+				if (question == null) throw new Exception("dont found question in DB with id= " + question_id);
+				
+				request.setAttribute("question", question);
+				getServletContext().getRequestDispatcher("/questionUpdatePage.jsp").forward(
+							request, response);
+				return;
+			}
+			
+			//update on questionUpdatePage.jsp
+			if(request.getParameter("update")!= null) {
+
+				String question_id = request.getParameter("question_id");
+				String content = request.getParameter("question");
+				String standartAnswer = request.getParameter("standartAnswer");
+				
+				if (question_id == null || "".equals(question_id)
+						|| content == null || "".equals(content)
+						|| standartAnswer == null || "".equals(standartAnswer))				
+					throw new Exception("update fields are empty!");
+				
+				SimpleQuestion question = new SimpleQuestion();
+				question.setId(Integer.valueOf(question_id));
+				question.setContent(content);
+				question.setStandartAnswer(standartAnswer);
+				questionService.updateQuestion(question);							
+
+			}
+			
+			
+			if (request.getParameter("create")!= null) {
+				String content = request.getParameter("question");
+				String standartAnswer = request.getParameter("standartAnswer");
+				
+				if (content == null || "".equals(content)
+						|| standartAnswer == null || "".equals(standartAnswer))				
+					throw new Exception("fields are empty!");
+				
+				SimpleQuestion question = new SimpleQuestion();
+				question.setContent(content);
+				question.setStandartAnswer(standartAnswer);
+				questionService.saveQuestion(question);
+															
+				
+			} else if(request.getParameter("delete")!= null) {
+
+				String question_id = request.getParameter("question_id");				
+				if (question_id == null || "".equals(question_id)) throw new Exception("question_id is empty!");
+				
+				questionService.deleteQuestion(Integer.valueOf(question_id));
+			}
+			
+						
+			////			
+			request.setAttribute("questionList", questionService.getQuestionList());
+			getServletContext().getRequestDispatcher("/questionPage.jsp").forward(
 						request, response);
 		
 

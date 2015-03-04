@@ -40,6 +40,25 @@ public class QuestionServiceImplDB implements QuestionService {
 		
 	}
 	
+	@Override
+	public void deleteQuestion(Integer id) {
+		
+		//TODO divide SimpleQuestion and MultipleQuestion		
+		questionDAO.deleteQuestion(id);
+		
+	}
+
+	@Override
+	public SimpleQuestion getQuestion(Integer id) {
+		//TODO divide SimpleQuestion and MultipleQuestion		
+		return questionDAO.getSimpleQuestion(id);
+	}
+
+	@Override
+	public void updateQuestion(SimpleQuestion question) {
+		//TODO divide SimpleQuestion and MultipleQuestion		
+		questionDAO.updateSimpleQuestion(question);		
+	}
 	
 	/*getters/setters*/
 	

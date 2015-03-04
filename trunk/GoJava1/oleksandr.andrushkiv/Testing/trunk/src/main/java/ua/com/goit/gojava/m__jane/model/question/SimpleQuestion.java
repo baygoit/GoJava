@@ -26,8 +26,8 @@ public class SimpleQuestion extends Question {
 
 		return new StringBuilder()	
 				.append("SimpleQuestion [")
-				.append(", getId()=").append(getId())
-				.append(", getContent()=").append(getContent())
+				.append("id=").append(getId())
+				.append(", content=").append(getContent())
 				.append(", standartAnswer=").append(standartAnswer)
 				.append("]").toString();
 	}

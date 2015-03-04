@@ -24,14 +24,14 @@ function validate() {
  */
 }
 </script>
-<title>Questions page</title>
+<title>Questions update page</title>
 </head>
 <body>
 
 	<form method="post" action="SimpleQuestionController" >
 
 		<table>
-		
+				
 			<tr>
 				<td><label for="loginId">Question </label></td>
 				<td><label for="loginId">Standart answer </label></td>
@@ -40,25 +40,18 @@ function validate() {
 			</tr>
 			
 			<tr>
-				<td><input type="text" name="question" id="loginId" size="40" /><span style="color:red" id="loginf"></span></td>
-				<td><input type="text" name="standartAnswer" id="loginId" size="40" /><span style="color:red" id="loginf"></span></td>
-				<td><input type="submit" name="create" value="enter"></td>
+				<input type="hidden" name="question_id" value="${question.id}">
+				<td><input type="text" name="question" id="loginId" size="40" value="${question.content}"/><span style="color:red" id="loginf"></span></td>
+				<td><input type="text" name="standartAnswer" id="loginId" size="40" value="${question.standartAnswer}"/><span style="color:red" id="loginf"></span></td>
+				<td><input type="submit" name="update" value="update"></td>
 			</tr>
 			
+		
+ 
+
 	</table>
 
-			
-<table>
-	<c:forEach items="${questionList}" var="question">
-    <tr>
-    <form method="post" action="SimpleQuestionController" >
-      <td><c:out value="${question}" /></td> <input type="hidden" name="question_id" value="${question.id}"> 
-      <td><input type="submit" name="delete" value="delete"></td>
-      <td><input type="submit" name="updateOne" value="update"></td> 
-     </form>
-    </tr>
-  </c:forEach>
-</table>
+
 </form>
 
 </body>
