@@ -11,11 +11,8 @@
 	</head>
 	<body bgcolor="Azure">
 	<%	Interview interview = new Interview();
-		String [] categories = (String[])request.getAttribute("category");
-		for(String category: categories){
-			File file = new File(category);
-			interview.createCategory(file);	
-		}
+		String [] names = (String[])request.getAttribute("category");
+		interview.createCategories(names);
 		Category composed = interview.getComposedCategory();
 		List<Question> questions = composed.getQuestions();
 		for(Question question: questions){ %>

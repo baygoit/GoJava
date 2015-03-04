@@ -11,10 +11,7 @@
 	<body>
 		<p> Compose your categories </p>
 		<%  Interview interview = new Interview();
-		File file = new File("Questions.xml");
-		interview.createCategory(file);
-		File file2 = new File("MeratechTest.xml");
-		interview.createCategory(file2);
+		interview.createCategories();
 		for(Category category: interview.getCategories()){%>
 		<form action="Composer" method="Post">	
 		<p><input type="checkbox" name="category" value="<%= category.getName()%>"> <%= " " + category.getName()%></p>

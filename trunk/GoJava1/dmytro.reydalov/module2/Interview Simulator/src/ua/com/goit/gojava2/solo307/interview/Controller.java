@@ -1,6 +1,5 @@
 package ua.com.goit.gojava2.solo307.interview;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.Set;
@@ -20,10 +19,11 @@ public class Controller extends HttpServlet {
 		response.setContentType("text/html;charset=utf-8");
 		String [] answers = request.getParameterValues("answer");
 		Interview interview = new Interview();
-		File file = new File("Questions.xml");
-		interview.createCategory(file);
-		File file2 = new File("MeratechTest.xml");
-		interview.createCategory(file2);
+		try {
+			interview.createCategories();
+		} catch (InterviewSimulatorException e) {
+			e.getMessage();
+		}
 		Category composed = interview.getComposedCategory();
 		Set <Integer> answerIds = composed.parseIds(answers);
 		Set <Question> reconstructed = composed.getQuestionsById(answerIds);

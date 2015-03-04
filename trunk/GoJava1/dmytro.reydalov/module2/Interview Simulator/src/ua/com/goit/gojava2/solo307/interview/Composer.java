@@ -15,17 +15,19 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/Composer")
 public class Composer extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    public Composer() {
-        super();
-    }
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public Composer() {
+		super();
+	}
+
+	protected void doPost(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html;charset=utf-8");
-		String [] categories = request.getParameterValues("category");
+		String[] categories = request.getParameterValues("category");
 		long start = TimeCounter.getTime();
 		IO.writeTime(start);
 		request.setAttribute("category", categories);
-	    request.getRequestDispatcher("interview.jsp").forward(request,response);
+		request.getRequestDispatcher("interview.jsp")
+				.forward(request, response);
 	}
 }

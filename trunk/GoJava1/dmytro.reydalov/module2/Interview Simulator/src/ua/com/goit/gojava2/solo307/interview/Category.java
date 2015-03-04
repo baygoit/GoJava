@@ -7,16 +7,33 @@ import java.util.Set;
 
 public class Category {
 	
+	private int id;
 	private String name;
 	private List <Question> questions = new ArrayList<Question>();
 	
-	public Category(String name, List<Question> questions){
+	public Category(int id, String name, List<Question> questions){
+		this.id = id;
 		this.name = name;
 		this.questions = questions;
 	}
 	
-	public Category(String name){
+	public Category(String name, int id){
 		this.name = name;
+		this.id = id;
+	}
+
+	@Override
+	public String toString() {
+		return "Category [id=" + id + ", name=" + name + ", questions="
+				+ questions + "]";
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getName() {
@@ -35,26 +52,17 @@ public class Category {
 		this.questions = questions;
 	}
 	
+	public void addQuestion(Question question){
+		questions.add(question);
+	}
+	
 	public void addQuestions(List<Question> questions) {
 		for(Question question: questions){
-			this.questions.add(new Question(question.getText(), question.getAnswers(), question.getId()));
+			this.questions.add(new Question(question.getText(), question.getAnswers(), question.getId(), question.getCategoryId()));
 		}
 	}
 	
-	public List<String> getQuestionsAndCorrectAnswers(){
-		List <String> questionsAndCorrectAnswers = new ArrayList<String>();
-		for(Question question: questions){
-			questionsAndCorrectAnswers.add(new String(question.getId() + ". " + question.getText()));
-			for(Answer answer: question.getAnswers()){
-				if(answer.isCorrect){
-					questionsAndCorrectAnswers.add(answer.getId() + ". " + answer.getText());
-				}
-			}
-		}
-		return questionsAndCorrectAnswers;
-	}
-	
-	public List<String> getQuestionsAndAllAnswers(){
+	public List<String> getQuestionsAndAnswers(){
 		List <String> questionsAndAllAnswers = new ArrayList<String>();
 		for(Question question: questions){
 			questionsAndAllAnswers.add(question.getId() + ". " + question.getText() + "\n");
