@@ -28,7 +28,7 @@ public class QuestionServiceImplDB implements QuestionService {
 	@Override
 	public List<Question> getQuestionList() {
 		// TODO Auto-generated method stub
-		return null;
+		return questionDAO.getQuestionList();
 	}
 
 	@Override

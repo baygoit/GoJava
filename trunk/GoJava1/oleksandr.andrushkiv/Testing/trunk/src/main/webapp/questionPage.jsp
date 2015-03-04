@@ -54,9 +54,9 @@ function validate() {
 	</form>
 	
 <br />	
-	<c:forEach items="${questionList}" var="profile">
+	<c:forEach items="${questionList}" var="question">
     <tr>
-      <td><c:out value="${question}" /></td>
+      <td><c:out value="${question}" /></td><br />
     </tr>
   </c:forEach>
 
