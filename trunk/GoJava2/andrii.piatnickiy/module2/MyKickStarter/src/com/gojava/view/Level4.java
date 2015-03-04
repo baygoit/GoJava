@@ -1,7 +1,7 @@
 package com.gojava.view;
 
 public class Level4 implements Level {
-    Menu menu;
+    private Menu menu;
     private int position = 4;
 
 
