@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import com.gojava.inputOutput.ConsoleIO;
 import com.gojava.projects.CategoryStorage;
-import com.gojava.projects.FileCategoryStorage;
+import com.gojava.projects.InFileCategoryStorage;
 import com.gojava.projects.InMemoryProjectStorage;
 import com.gojava.projects.ProjectStorage;
 

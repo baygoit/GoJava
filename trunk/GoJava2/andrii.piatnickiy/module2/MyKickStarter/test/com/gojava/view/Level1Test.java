@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import com.gojava.projects.CategoryStorage;
-import com.gojava.projects.FileCategoryStorage;
+import com.gojava.projects.InFileCategoryStorage;
 
 public class Level1Test {
 //    CategoryStorage categoryStorage = new FileCategoryStorage("categoriesTest.txt");

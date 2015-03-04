@@ -11,7 +11,7 @@ import org.junit.Test;
 
 public class TestInFileCategryStorage extends TestCategoryStorage{
     ArrayList<Category> resultList;
-    FileCategoryStorage categoryStorage = new FileCategoryStorage("categoriesTest.txt");
+    InFileCategoryStorage categoryStorage = new InFileCategoryStorage("categoriesTest.txt");
     
     @Before
     public void setListCategories(){

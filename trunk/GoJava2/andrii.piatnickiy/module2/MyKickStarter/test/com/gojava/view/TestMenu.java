@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import com.gojava.projects.CategoryStorage;
-import com.gojava.projects.FileCategoryStorage;
+import com.gojava.projects.InFileCategoryStorage;
 import com.gojava.projects.InFileProjectStorage;
 import com.gojava.projects.InMemoryProjectStorage;
 import com.gojava.projects.ProjectStorage;
