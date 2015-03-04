@@ -14,8 +14,8 @@ public class Menu {
     private int currentLevelPosition;
     private Level1 level1;
     private Level2 level2;
-    Level3 level3;
-    Level4 level4;
+    private Level3 level3;
+    private Level4 level4;
 
     private ArrayList<Level> levelsList = new ArrayList<>();
     public ClientInteraction clientInteraction;
@@ -81,16 +81,16 @@ public class Menu {
         return result;
     }
 
-    public void add(Level level) {
+    private void add(Level level) {
         levelsList.add(level);
     }
 
-    public void initMenu() {
+    private void initMenu() {
         setCurrentLevelPosition(1);
         out.print(level1.displayMySelf(currentLevelPosition));
     }
 
-    public Level getCurrentLevel() {
+    private Level getCurrentLevel() {
         Level result = null;
         for (Level level : levelsList) {
             if (currentLevelPosition == level.getPosition()) {
