@@ -10,10 +10,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class InFileCategoryStorage implements CategoryStorage {
-    File file;
-    BufferedReader in = null;
-    BufferedWriter out = null;
-    public ArrayList<Category> categoriesList = new ArrayList<Category>();
+    private File file;
+    private BufferedReader in = null;
+    private BufferedWriter out = null;
+    private ArrayList<Category> categoriesList = new ArrayList<Category>();
 
     public InFileCategoryStorage(String fileName) {
         file = new File(fileName);
@@ -62,6 +62,7 @@ public class InFileCategoryStorage implements CategoryStorage {
         return categoriesList.get(index);
     }
 
+    // TODO избавится от кеширования. сделать напрямую чтение из файла.
     public ArrayList<Category> getCategoriesFromFileToList() {
         initIn();
         Category category;
@@ -74,13 +75,10 @@ public class InFileCategoryStorage implements CategoryStorage {
                     category = parseLineToCategory(read);
                     categoriesList.add(category);
                     read = in.readLine();
-
                 }
-
             } catch (IOException e) {
                 throw new RuntimeException("Не могу прочитать строку!", e);
             }
-
         } finally {
             if (in != null) {
                 try {
@@ -94,13 +92,11 @@ public class InFileCategoryStorage implements CategoryStorage {
     }
 
     private Category parseLineToCategory(String read) {
-        Category category;
-        String result;
-        result = read;
+        String result = read;
         String[] tmp = result.split(";");
         int id = Integer.parseInt(tmp[0]);
         String name = tmp[1];
-        category = new Category(name, id);
+        Category category = new Category(name, id);
         return category;
     }
 
