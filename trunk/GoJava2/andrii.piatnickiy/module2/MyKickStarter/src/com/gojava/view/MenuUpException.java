@@ -8,8 +8,6 @@ public class MenuUpException extends Exception {
         this.detail = detail;
     }
 
-
-
     @Override
     public String toString() {
         return "You type " + detail
