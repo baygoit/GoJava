@@ -4,8 +4,8 @@ public class MenuUpException extends Exception {
 
     private int detail;
 
-    public MenuUpException(int a) {
-        detail = a;
+    public MenuUpException(int detail) {
+        this.detail = detail;
     }
 
 

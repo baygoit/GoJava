@@ -3,11 +3,9 @@ package com.gojava.view;
 public class MenuDownException extends Exception {
     private int detail;
 
-    public MenuDownException(int a) {
-        detail = a;
+    public MenuDownException(int detail) {
+        this.detail = detail;
     }
-
-
 
     @Override
     public String toString() {
