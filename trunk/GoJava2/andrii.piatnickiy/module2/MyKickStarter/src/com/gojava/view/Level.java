@@ -1,6 +1,6 @@
 package com.gojava.view;
 
 public interface Level {
-    public String displayMySelf(int currentPosition);
-    public int getPosition();
+    String displayMySelf(int currentPosition);
+    int getPosition();
 }
