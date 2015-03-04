@@ -6,8 +6,8 @@ import com.gojava.projects.Project;
 import com.gojava.projects.ProjectStorage;
 
 public class Ammount {
-    Menu menu;
-    ProjectStorage projectStorage;
+    private Menu menu;
+    private ProjectStorage projectStorage;
     String description;
     int sum;
 
