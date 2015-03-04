@@ -4,14 +4,13 @@ import java.util.ArrayList;
 
 public interface ProjectStorage {
 
-    abstract void add(String name, String description, int needSum,
-            int currentSum, int daysLeft, String projectHistory,
-            String linkOnvideo, String questionsAndAnswers, int categoryId);
+    void add(String name, String description, int needSum, int currentSum,
+            int daysLeft, String projectHistory, String linkOnvideo,
+            String questionsAndAnswers, int categoryId);
 
     String getAllToString(int categoryNumber);
 
-    String getSpecificProjectToString(int categoryNumber,
-            int projectNumber);
+    String getSpecificProjectToString(int categoryNumber, int projectNumber);
 
     String getprojectPreviewToString(Project project);
 
@@ -19,9 +18,8 @@ public interface ProjectStorage {
 
     Project getProject(int index);
 
-    Project getSpecificProject(int categoryNumber,
-            int projectNumber);
+    Project getSpecificProject(int categoryNumber, int projectNumber);
 
-    abstract ArrayList<Project> getList();
+    ArrayList<Project> getList();
 
 }
