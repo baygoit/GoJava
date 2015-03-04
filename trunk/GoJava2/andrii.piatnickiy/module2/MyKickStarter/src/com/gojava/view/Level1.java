@@ -3,7 +3,7 @@ package com.gojava.view;
 import com.gojava.projects.CategoryStorage;
 
 public class Level1 implements Level {
-    CategoryStorage categoryStorage;
+    private CategoryStorage categoryStorage;
     private int position = 1;
 
     public Level1(CategoryStorage categoryStorage) {
