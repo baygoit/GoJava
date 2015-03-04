@@ -20,22 +20,14 @@ public class Creator extends HttpServlet {
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		try {
-			response.setContentType("text/html;charset=UTF-8");
-			PrintWriter out = response.getWriter();
-			out.println("This is post");
-		} catch (Exception e) {
-			e.printStackTrace();
-			response.setContentType("text/html;charset=UTF-8");
-			response.sendRedirect("");
-		}
-
+	
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			
 			Streamer.write(request.getParameter("author") + " " + request.getParameter("text"));
+			
 			response.setContentType("text/html;charset=UTF-8");
 			PrintWriter out = response.getWriter();
 			out.println(request.getParameter("author") + " + "	+ request.getParameter("text"));
