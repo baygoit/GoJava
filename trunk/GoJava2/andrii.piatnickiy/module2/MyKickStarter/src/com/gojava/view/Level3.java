@@ -13,16 +13,19 @@ public class Level3 implements Level {
 
     @Override
     public String displayMySelf(int nubberForNextLevel) {
-        String result;
+        String result = "";
         String specificProject = projectStorage.getSpecificProjectToString(
                 menu.getCategoryPosition(), nubberForNextLevel);
         if (!specificProject.equals("")) {
             result = specificProject;
             for (int i = 0; i < menu.clientInteraction.interactions.size(); i++) {
-                result += i + 1 + ") " + menu.clientInteraction.interactions.get(i).description() + "\n";
+                result += i
+                        + 1
+                        + ") "
+                        + menu.clientInteraction.interactions.get(i)
+                                .description() + "\n";
             }
         } else {
-            result = "";
         }
         return result;
     }
