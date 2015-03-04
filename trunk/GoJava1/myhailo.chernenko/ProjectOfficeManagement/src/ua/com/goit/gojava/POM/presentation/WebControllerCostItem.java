@@ -9,8 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import ua.com.goit.gojava.POM.dataModel.profitcost.CostItem;
-import ua.com.goit.gojava.POM.persistence.DataManager;
-import ua.com.goit.gojava.POM.persistence.abstraction.GenericDAO;
+import ua.com.goit.gojava.POM.persistence.fileDB.DAOFactory;
+import ua.com.goit.gojava.POM.persistence.fileDB.DataManager;
+import ua.com.goit.gojava.POM.persistence.fileDB.GenericDAO;
 
 @WebServlet(urlPatterns = {"/CostItemWebController"})
 public class WebControllerCostItem extends HttpServlet {
@@ -24,7 +25,7 @@ public class WebControllerCostItem extends HttpServlet {
 		String param = req.getParameter("costItem");
 		
 		if (!param.isEmpty()) {
-			DataManager dataManager = new DataManager();
+			DAOFactory dataManager = new DataManager();
 			GenericDAO<CostItem> genericDAO = new GenericDAO<CostItem>(CostItem.class, dataManager);
 			CostItem newCostItem = genericDAO.create();
 			newCostItem.setName(param);

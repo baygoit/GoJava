@@ -1,6 +1,8 @@
-package ua.com.goit.gojava.POM.persistence.abstraction;
+package ua.com.goit.gojava.POM.persistence.fileDB;
 
 import java.util.List;
+
+import ua.com.goit.gojava.POM.persistence.abstraction.DataObject;
 
 //import ua.com.goit.gojava.POM.dataModel.*;
 

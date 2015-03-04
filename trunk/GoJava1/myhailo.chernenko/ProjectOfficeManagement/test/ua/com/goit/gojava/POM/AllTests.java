@@ -9,11 +9,12 @@ import org.junit.runners.Suite.SuiteClasses;
 
 
 
+
 import ua.com.goit.gojava.POM.dataModel.cash.*;
 import ua.com.goit.gojava.POM.dataModel.common.*;
 import ua.com.goit.gojava.POM.dataModel.documents.*;
 import ua.com.goit.gojava.POM.dataModel.profitcost.*;
-import ua.com.goit.gojava.POM.persistence.*;
+import ua.com.goit.gojava.POM.persistence.fileDB.*;
 
 @RunWith(Suite.class)
 @SuiteClasses({ 

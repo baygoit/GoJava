@@ -16,9 +16,10 @@ import ua.com.goit.gojava.POM.dataModel.cash.BankAccount;
 import ua.com.goit.gojava.POM.dataModel.cash.CashMovementEntry;
 import ua.com.goit.gojava.POM.dataModel.cash.CashMovementStatement;
 import ua.com.goit.gojava.POM.dataModel.common.Money;
-import ua.com.goit.gojava.POM.persistence.DataManager;
-import ua.com.goit.gojava.POM.persistence.LazyDataManager;
-import ua.com.goit.gojava.POM.persistence.abstraction.GenericDAO;
+import ua.com.goit.gojava.POM.persistence.fileDB.DAOFactory;
+import ua.com.goit.gojava.POM.persistence.fileDB.DataManager;
+import ua.com.goit.gojava.POM.persistence.fileDB.GenericDAO;
+import ua.com.goit.gojava.POM.persistence.fileDB.LazyDataManager;
 
 @WebServlet(urlPatterns = {"/CashMovementWebController"})
 public class WebControllerCashMovement extends HttpServlet {
@@ -84,7 +85,7 @@ public class WebControllerCashMovement extends HttpServlet {
 		
 			long id = Long.parseLong(req.getParameter("id"));
 			
-			DataManager dataManager = LazyDataManager.getInstance();
+			DAOFactory dataManager = LazyDataManager.getInstance();
 			GenericDAO<BankAccount> genericDAO = new GenericDAO<BankAccount>(BankAccount.class, dataManager);
 			BankAccount bankAccount = genericDAO.getByID(id);
 			req.getSession().setAttribute("BankAccount", bankAccount);

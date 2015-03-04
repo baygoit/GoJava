@@ -19,6 +19,12 @@ body {
   
 }
 
+  	/* table style */
+.errorTable {
+  border:1px solid black;
+  background-color: red;
+}
+
     /* header row */
 .tableHeader {
   background-color: #2062B8;

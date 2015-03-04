@@ -10,6 +10,7 @@ public class ExchangeRate {
 	private Currency toCurrency;
 	private long multiplicity;
 	private long rate;
+	private long id;
 	
 	public Date getDate() {
 		return date;
@@ -40,6 +41,12 @@ public class ExchangeRate {
 	}
 	public void setRate(long rate) {
 		this.rate = rate;
+	}
+	public void setId(long id) {
+		this.id = id;	
+	}
+	public long getId() {
+		return id;
 	}
 
 }

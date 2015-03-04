@@ -10,9 +10,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import ua.com.goit.gojava.POM.dataModel.cash.BankAccount;
-import ua.com.goit.gojava.POM.persistence.DataManager;
-import ua.com.goit.gojava.POM.persistence.LazyDataManager;
-import ua.com.goit.gojava.POM.persistence.abstraction.GenericDAO;
+import ua.com.goit.gojava.POM.persistence.fileDB.DAOFactory;
+import ua.com.goit.gojava.POM.persistence.fileDB.DataManager;
+import ua.com.goit.gojava.POM.persistence.fileDB.GenericDAO;
+import ua.com.goit.gojava.POM.persistence.fileDB.LazyDataManager;
 
 @WebServlet(urlPatterns = {"/BankAccountWebController"})
 public class WebControllerBankAccount extends HttpServlet {
@@ -31,7 +32,7 @@ public class WebControllerBankAccount extends HttpServlet {
 			String bankName = req.getParameter("bankName");
 			String currencyCode = req.getParameter("currency");
 			
-			DataManager dataManager = LazyDataManager.getInstance();
+			DAOFactory dataManager = LazyDataManager.getInstance();
 			GenericDAO<BankAccount> genericDAO = new GenericDAO<BankAccount>(BankAccount.class, dataManager);
 			BankAccount newBankAccount= genericDAO.create();
 			newBankAccount.setName(name);
@@ -44,7 +45,7 @@ public class WebControllerBankAccount extends HttpServlet {
 		
 			long id = Long.parseLong(req.getParameter("DellCurrent"));
 			
-			DataManager dataManager = LazyDataManager.getInstance();
+			DAOFactory dataManager = LazyDataManager.getInstance();
 			GenericDAO<BankAccount> genericDAO = new GenericDAO<BankAccount>(BankAccount.class, dataManager);
 			genericDAO.delete(genericDAO.getByID(id));
 			

@@ -2,6 +2,7 @@
 	import="ua.com.goit.gojava.POM.dataModel.common.*,ua.com.goit.gojava.POM.dataModel.cash.*,
 			ua.com.goit.gojava.POM.persistence.*,
 			ua.com.goit.gojava.POM.persistence.abstraction.*,
+			ua.com.goit.gojava.POM.persistence.fileDB.*,
 			ua.com.goit.gojava.POM.presentation.*,
 			java.util.Currency"
 			

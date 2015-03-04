@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	import="ua.com.goit.gojava.POM.dataModel.common.*,ua.com.goit.gojava.POM.dataModel.profitcost.*,
 			ua.com.goit.gojava.POM.persistence.*,
+			ua.com.goit.gojava.POM.persistence.fileDB.*,
 			ua.com.goit.gojava.POM.persistence.abstraction.*,
 			ua.com.goit.gojava.POM.presentation.*" 
     pageEncoding="ISO-8859-1"%>
@@ -14,7 +15,7 @@
 	<br><b>Current cost item list</b></br>
 		
     <% 
-   		DataManager dataManager = new DataManager();
+    	DAOFactory dataManager = new DataManager();
 		GenericDAO<CostItem> genericDAO = new GenericDAO<CostItem>(CostItem.class, dataManager);
 		for(CostItem costItem: genericDAO.getList()) {
 			out.println("<br>"+costItem.getName()+"</br>");	

@@ -174,7 +174,10 @@ public class FinancialStatementTest {
 		} catch (POMDataModelException e) {
 			
 		}
-		
+
+		// TODO rewrite 
+		/*
+
 		Date date = Calendar.getInstance().getTime();
 		
 		ExchangeRate currencyRate = new ExchangeRateDAO(statement.getDataManager()).create();
@@ -192,9 +195,11 @@ public class FinancialStatementTest {
 		} catch (POMDataModelException e) {
 			fail("Here must not be exception...");
 		}
-		
+	*/	
 	}
 
+	// TODO debatable functional
+	/*
 	@Test
 	public void testGetRolledUp() {
 
@@ -309,6 +314,6 @@ public class FinancialStatementTest {
 		//assertEquals(difference.getEntries().get(1).getSum().getValue(), getDecimal(0.02));
 		
 	}
-
+	*/
 }
 

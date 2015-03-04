@@ -1,4 +1,4 @@
-package ua.com.goit.gojava.POM.persistence.abstraction;
+package ua.com.goit.gojava.POM.persistence.fileDB;
 
 import static org.junit.Assert.*;
 
@@ -8,9 +8,9 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import ua.com.goit.gojava.POM.persistence.DataManager;
 import ua.com.goit.gojava.POM.persistence.abstraction.DataObject;
-import ua.com.goit.gojava.POM.persistence.abstraction.GenericDAO;
+import ua.com.goit.gojava.POM.persistence.fileDB.DataManager;
+import ua.com.goit.gojava.POM.persistence.fileDB.GenericDAO;
 
 
 public abstract class GenericDAOTest<T> {

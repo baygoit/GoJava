@@ -9,11 +9,8 @@
 </head>
 <body>
 
-	<p><a href="CashSubsystem.jsp">Учет денежных средств</a></p>
-	<p><a href="ExchangeRates.jsp">Курсы валют</a></p>
-	<!--
-		<p><a href="CostItems.jsp">Статьи затрат</a></p>
-		 -->	
+	<h1>Что-то пошло не так... </h1>
+	<h2>Сервер сообщил об ошибке: ${param.message}</h2>
 	 
 </body>
 </html>

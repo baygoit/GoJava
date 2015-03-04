@@ -2,26 +2,28 @@ package ua.com.goit.gojava.POM.dataModel.common;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Calendar;
+//import java.util.Calendar;
 import java.util.Currency;
-import java.util.Date;
-import java.util.HashMap;
+//import java.util.Date;
+//import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+//import java.util.Map;
+
+
+
+
 
 import ua.com.goit.gojava.POM.dataModel.POMDataModelException;
 import ua.com.goit.gojava.POM.dataModel.POMDataModelRuntimeException;
-import ua.com.goit.gojava.POM.persistence.*;
+import ua.com.goit.gojava.POM.persistence.ExchangeRateDAO;
+import ua.com.goit.gojava.POM.persistence.abstraction.*;
+import ua.com.goit.gojava.POM.persistence.fileDB.DAOFactory;
+import ua.com.goit.gojava.POM.persistence.fileDB.LazyDataManager;
 
 public abstract class FinancialStatement<T extends FinancialEntry> implements Serializable {
 	
 	private Class<T> classT;
 	private static final long serialVersionUID = 1799899656753465204L;
-	private long id = 0;
-	private String description = "";
-	private Integer roundingMode = Calendar.MILLISECOND;
-	private Date fromDate;
-	private Date tillDate;
 	private List<T> financialEntries = new ArrayList<T>();
 	
 	public FinancialStatement(Class<T> classT) {
@@ -32,7 +34,7 @@ public abstract class FinancialStatement<T extends FinancialEntry> implements Se
 	
 	public abstract FinancialStatement<T> getNewInstanse();
 	
-	public DataManager getDataManager() {
+	public DAOFactory getDataManager() {
 		
 		return LazyDataManager.getInstance();
 	}
@@ -50,20 +52,6 @@ public abstract class FinancialStatement<T extends FinancialEntry> implements Se
 		return entry;
 	}
 
-	/*
-	public long getId() {
-		
-		return id;
-		
-	}
-	
-	public void setId(long id) {
-		
-		this.id = id;
-		
-	}
-	*/
-	
 	public List<T> getEntries() {
 		
 		return financialEntries;
@@ -117,8 +105,10 @@ public abstract class FinancialStatement<T extends FinancialEntry> implements Se
 				
 				Money currentSum = entry.getSum();
 				
-				ExchangeRate currentRate = (new ExchangeRateDAO(getDataManager()).getLastOnDate(
-						entry.getDate(), currentSum.getCurrency(), currency));
+				ExchangeRate currentRate = null;
+						// TODO rewrite
+						//= (new ExchangeRateDAO(getDataManager()).getLastOnDate(
+						//entry.getDate(), currentSum.getCurrency(), currency));
 				
 				result.add(currentSum, currentRate);
 				
@@ -130,6 +120,8 @@ public abstract class FinancialStatement<T extends FinancialEntry> implements Se
 		
 	}
 	
+	// TODO think about this methods.. 
+	/*
 	public FinancialStatement<T> getRolledUp(int roundindMode) throws POMDataModelException {
 		
 		FinancialStatement<T> result = getNewInstanse();
@@ -205,5 +197,7 @@ public abstract class FinancialStatement<T extends FinancialEntry> implements Se
 		return result.getRolledUp(roundindMode);
 		
 	}
+	
+	*/
 
 }

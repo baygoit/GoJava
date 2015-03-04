@@ -1,14 +1,15 @@
-package ua.com.goit.gojava.POM.persistence;
+package ua.com.goit.gojava.POM.persistence.fileDB;
+
 
 public class LazyDataManager {
 
-	private static DataManager dataManager;
+	private static DAOFactory dataManager;
 	
 	private LazyDataManager(){
 
 	}
 
-	public static DataManager getInstance(){
+	public static DAOFactory getInstance(){
 		
 	    if (dataManager == null) {
 	    	

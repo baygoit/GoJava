@@ -1,4 +1,4 @@
-package ua.com.goit.gojava.POM.persistence;
+package ua.com.goit.gojava.POM.persistence.fileDB;
 
 import static org.junit.Assert.*;
 
@@ -17,6 +17,7 @@ import static org.mockito.Mockito.*;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import ua.com.goit.gojava.POM.dataModel.profitcost.CostItem;
+import ua.com.goit.gojava.POM.persistence.fileDB.DataManager;
 
 @RunWith(MockitoJUnitRunner.class)
 public class DataManagerTest {

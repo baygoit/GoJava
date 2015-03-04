@@ -1,8 +1,7 @@
-package ua.com.goit.gojava.POM.persistence;
+package ua.com.goit.gojava.POM.persistence.fileDB;
 
 
 import ua.com.goit.gojava.POM.dataModel.profitcost.CostItem;
-import ua.com.goit.gojava.POM.persistence.abstraction.GenericDAOTest;
 
 public class CostItemDAOTest extends GenericDAOTest<CostItem> {
 
