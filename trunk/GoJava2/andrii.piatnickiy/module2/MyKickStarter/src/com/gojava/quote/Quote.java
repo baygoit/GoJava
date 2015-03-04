@@ -3,6 +3,7 @@ package com.gojava.quote;
 import com.gojava.inputOutput.ConsoleIO;
 
 public class Quote {
+    //TODO переделать ConsoleIO
     public ConsoleIO consoleIO;
     
     public Quote(ConsoleIO consoleIO) {
