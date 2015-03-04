@@ -1,4 +1,4 @@
-package ua.com.goit.gojava.m__jane.service.impl;
+package ua.com.goit.gojava.m__jane.service.implXML;
 
 import static org.junit.Assert.*;
 
@@ -7,7 +7,7 @@ import org.junit.Test;
 
 import ua.com.goit.gojava.m__jane.model.User;
 import ua.com.goit.gojava.m__jane.service.UserService;
-import ua.com.goit.gojava.m__jane.service.impl.UserServiceImplXML;
+import ua.com.goit.gojava.m__jane.service.implXML.UserServiceImplXML;
 
 public class UserServiceXMLTest {
 

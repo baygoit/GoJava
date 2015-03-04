@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import ua.com.goit.gojava.m__jane.exceptions.TestingServiceException;
 import ua.com.goit.gojava.m__jane.model.Profile;
 import ua.com.goit.gojava.m__jane.service.ProfileService;
-import ua.com.goit.gojava.m__jane.service.impl.ProfileServiceImplXML;
+import ua.com.goit.gojava.m__jane.service.implXML.ProfileServiceImplXML;
 
 /**
  * Servlet implementation class SomeController1

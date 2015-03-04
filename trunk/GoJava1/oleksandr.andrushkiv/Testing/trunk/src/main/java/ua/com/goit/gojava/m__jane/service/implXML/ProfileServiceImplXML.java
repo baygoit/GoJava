@@ -1,4 +1,4 @@
-package ua.com.goit.gojava.m__jane.service.impl;
+package ua.com.goit.gojava.m__jane.service.implXML;
 
 import java.util.List;
 import javax.xml.bind.JAXBException;

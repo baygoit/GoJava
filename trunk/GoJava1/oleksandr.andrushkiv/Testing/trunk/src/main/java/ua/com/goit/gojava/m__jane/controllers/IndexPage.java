@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import ua.com.goit.gojava.m__jane.exceptions.TestingServiceException;
 import ua.com.goit.gojava.m__jane.model.User;
 import ua.com.goit.gojava.m__jane.service.UserService;
-import ua.com.goit.gojava.m__jane.service.impl.UserServiceImplXML;
+import ua.com.goit.gojava.m__jane.service.implXML.UserServiceImplXML;
 
 /**
  * Servlet implementation class IndexPage

@@ -1,4 +1,4 @@
-package ua.com.goit.gojava.m__jane.service.impl;
+package ua.com.goit.gojava.m__jane.service.implXML;
 
 import static org.junit.Assert.*;
 
@@ -8,7 +8,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import ua.com.goit.gojava.m__jane.service.ProfileService;
-import ua.com.goit.gojava.m__jane.service.impl.ProfileServiceImplXML;
+import ua.com.goit.gojava.m__jane.service.implXML.ProfileServiceImplXML;
 
 public class ProfileServiceXMLTest {
 

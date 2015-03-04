@@ -1,4 +1,4 @@
-package ua.com.goit.gojava.m__jane.service.impl;
+package ua.com.goit.gojava.m__jane.service.implXML;
 
 import static org.junit.Assert.*;
 
@@ -12,7 +12,7 @@ import ua.com.goit.gojava.m__jane.model.Category;
 import ua.com.goit.gojava.m__jane.model.answer.Answer;
 import ua.com.goit.gojava.m__jane.model.question.Question;
 import ua.com.goit.gojava.m__jane.service.QuestionService;
-import ua.com.goit.gojava.m__jane.service.impl.QuestionServiceImplXML;
+import ua.com.goit.gojava.m__jane.service.implXML.QuestionServiceImplXML;
 
 public class QuestionServiceXMLTest {
 
