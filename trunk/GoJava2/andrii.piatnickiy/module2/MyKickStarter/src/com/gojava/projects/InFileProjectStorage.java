@@ -10,10 +10,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class InFileProjectStorage implements ProjectStorage {
-    File file;
-    BufferedReader in = null;
-    BufferedWriter out = null;
-    public ArrayList<Project> projectList = new ArrayList<Project>();
+    private File file;
+    private BufferedReader in = null;
+    private BufferedWriter out = null;
+    private ArrayList<Project> projectList = new ArrayList<Project>();
 
     public InFileProjectStorage(String fileName) {
         file = new File(fileName);
