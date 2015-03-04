@@ -1,5 +1,8 @@
 package ua.com.goit.gojava1.lslayer.hackit2;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import org.junit.Test;
 
 import ua.com.goit.gojava1.lslayer.hackit2.actor.Actor;
@@ -31,6 +34,18 @@ public class DBTest {
         } catch (HackitIOException e) {
             e.printStackTrace();
         }
+    }
+    
+    @Test
+    public void testLoadAll() {
+        List<Actor> actorlist = new LinkedList<Actor>();
+        ActorJDBCDAO manager = new ActorJDBCDAO();
+        try {
+            actorlist = manager.loadAll();
+        } catch (HackitIOException e) {
+            e.printStackTrace();
+        }
+        System.out.println(actorlist);
     }
 
 }

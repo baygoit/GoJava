@@ -1,17 +1,14 @@
 package ua.com.goit.gojava1.lslayer.hackit2.ui;
 
 import java.io.IOException;
-import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import ua.com.goit.gojava1.lslayer.hackit2.actor.Actor;
 import ua.com.goit.gojava1.lslayer.hackit2.actor.ActorFactory;
-import ua.com.goit.gojava1.lslayer.hackit2.dao.ActorFileDAO;
-import ua.com.goit.gojava1.lslayer.hackit2.exception.HackitEcxeptionForUI;
+import ua.com.goit.gojava1.lslayer.hackit2.dao.ActorJDBCDAO;
 import ua.com.goit.gojava1.lslayer.hackit2.exception.HackitIOException;
 
 /**
@@ -33,15 +30,27 @@ public class ActorMaintainer extends HttpServlet {
      *      response)
      */
     protected void doGet(HttpServletRequest request,
-            HttpServletResponse response) throws ServletException, IOException {
-        ActorFileDAO dao = new ActorFileDAO();
-
-        try {
-            request.setAttribute("gamers", dao.loadAll());
-        } catch (HackitEcxeptionForUI e) {
-            request.setAttribute("error", e.getMessage());
+                         HttpServletResponse response) throws ServletException, IOException {
+        ActorJDBCDAO dao = new ActorJDBCDAO();
+        String idParameter = request.getParameter("view_id");
+        if (idParameter != null) {
+            try {
+                long detailsId = Long.parseLong(idParameter);
+                request.setAttribute("details", dao.load(detailsId));
+            } catch (NumberFormatException e) {
+                request.setAttribute("error", "Id should be number");
+            } catch (HackitIOException e) {
+                request.setAttribute("error", e.getMessage());
+            }
+            request.getRequestDispatcher("details.jsp").forward(request, response);
+        } else {
+            try {
+                request.setAttribute("gamers", dao.loadAll());
+            } catch (HackitIOException e) {
+                request.setAttribute("error", e.getMessage());
+            }
+            request.getRequestDispatcher("view.jsp").forward(request, response);
         }
-        request.getRequestDispatcher("view.jsp").forward(request, response);
     }
 
     /**
@@ -49,26 +58,23 @@ public class ActorMaintainer extends HttpServlet {
      *      response)
      */
     protected void doPost(HttpServletRequest request,
-            HttpServletResponse response) throws ServletException, IOException {
+                          HttpServletResponse response) throws ServletException, IOException {
         String deleteParameter = request.getParameter("delete");
         String createParameter = request.getParameter("create");
-        String editParameter = request.getParameter("edit");
-        ActorFileDAO dao = new ActorFileDAO();
-        if (deleteParameter != null && deleteParameter.equals("yes"))
+        String idParameter = request.getParameter("delete_id");
+        long id = -1;
+        if (idParameter != null) {
             try {
-                for (Actor gamer : dao.loadAll()) {
-                    String deleteParameterString = request.getParameter(gamer
-                            .getName());
-                    if (deleteParameterString != null
-                            && deleteParameterString.equals("on")) {
-                        try {
-                            dao.delete(gamer);
-                        } catch (HackitIOException e) {
-                            request.setAttribute("error", e.getMessage());
-                        }
-                    }
-                }
-            } catch (HackitEcxeptionForUI e) {
+                id = Long.parseLong(idParameter);
+            } catch (NumberFormatException e) {
+                request.setAttribute("error", e.getMessage());
+            }
+        }
+        ActorJDBCDAO dao = new ActorJDBCDAO();
+        if (deleteParameter != null && deleteParameter.equals("yes") && id > 0)
+            try {
+                dao.delete(id);
+            } catch (HackitIOException e) {
                 request.setAttribute("error", e.getMessage());
             }
         if (createParameter != null && createParameter.equals("yes")) {
@@ -84,24 +90,6 @@ public class ActorMaintainer extends HttpServlet {
             try {
                 dao.save(actorFactory.createActor());
             } catch (Exception e) {
-                request.setAttribute("error", e.getMessage());
-            }
-
-        }
-        if (editParameter != null && editParameter.equals("yes")) {
-            Actor editedGamer = null;
-            String nameForEdit = request.getParameter("name_for_edit");
-            try {
-                editedGamer = dao.fromFile(nameForEdit);
-                request.setAttribute("edit_name", editedGamer.getName());
-                StringBuilder builder = new StringBuilder();
-                Map<String, Integer> skills = editedGamer.getSkills();
-                for (Map.Entry<String, Integer> entry : skills.entrySet()) {
-                    builder.append(entry.getKey());
-                    builder.append(";");
-                }
-                request.setAttribute("edit_skills", builder.toString());
-            } catch (HackitIOException e) {
                 request.setAttribute("error", e.getMessage());
             }
         }

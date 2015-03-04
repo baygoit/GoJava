@@ -32,33 +32,31 @@
   </div>
   <c:forEach items="${requestScope.gamers}" var="gamerItem">
    <hr></hr>
-   <div class="user_container">
-    <div class="user_name">
-     <h3>
-      <c:out value="${gamerItem.getName()}" />
-     </h3>
-    </div>
-    <div class="user_skills">
-     <ul>
-      <c:forEach items="${gamerItem.getSkills()}" var="skillItem">
-       <li><c:out value="${skillItem.key}" /></li>
-      </c:forEach>
-     </ul>
-
-    </div>
-    <div class="user_buttons">
-     <form method="post" action="actors" class="inline-form">
-      <input type="hidden" name="delete" value="yes" /> <input
-       type="hidden" name="${gamerItem.getName()}" value="on" /> <input
-       type="submit" class="delete_button" value="Delete" />
-     </form>
-     <form method="post" action="actors" class="inline-form">
-      <input type="hidden" name="edit" value="yes" /> <input
-       type="hidden" name="name_for_edit" value="${gamerItem.getName()}" />
-      <input type="submit" class="edit_button" value="Edit" />
-     </form>
-    </div>
-   </div>
+      <div class="single_user_container">
+          <span class="user_name">
+            <c:out value="${gamerItem.getName()}"/>
+          </span>
+          <span class="detailed_user">
+           <form method="get" action="actors" class="inline-form">
+            <input type="hidden" name="view_id" value="${gamerItem.getId()}"/> 
+            <input type="submit" class="details_button" value="Details" />
+           </form>
+          </span>
+          <span class="edit_user">
+           <form method="post" action="actors" class="inline-form">
+            <input type="hidden" name="edit" value="yes" /> 
+            <input type="hidden" name="edit_id" value="${gamerItem.getId()}"/> 
+            <input type="submit" class="edit_button" value="Edit" />
+           </form>
+          </span>
+          <span class="delete_user">
+           <form method="post" action="actors" class="inline-form">
+            <input type="hidden" name="delete" value="yes" /> 
+            <input type="hidden" name="delete_id" value="${gamerItem.getId()}"/> 
+            <input type="submit" class="delete_button" value="Delete" />
+           </form>
+          </span>
+      </div>
   </c:forEach>
  </div>
 

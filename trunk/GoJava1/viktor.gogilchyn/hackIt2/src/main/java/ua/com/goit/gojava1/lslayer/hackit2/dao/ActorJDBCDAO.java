@@ -163,8 +163,14 @@ public class ActorJDBCDAO {
             }
         } catch (Exception e) {
             throw new HackitIOException("Error while loading actor", e);
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                throw new HackitIOException("Error while loading actor", e);
+            }
         }
-        return null;
+        return returnValue;
 
 
     }
