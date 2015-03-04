@@ -4,11 +4,11 @@ import java.util.ArrayList;
 
 public interface CategoryStorage {
 
-    public void add(String name, int categoryId);
+    void add(String name, int categoryId);
 
-    public String getCategoryToString();
+    String getCategoryToString();
 
-    public Category getCategory(int index);
+    Category getCategory(int index);
 
     ArrayList<Category> getList();
 }
