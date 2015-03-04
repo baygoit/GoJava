@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import com.gojava.projects.ProjectStorage;
 
 public class ClientInteraction {
-    Menu menu;
-    ProjectStorage projectStorage;
+    private Menu menu;
+    private ProjectStorage projectStorage;
     public ClientInteraction(Menu menu, ProjectStorage projectStorage) {
         this.menu = menu;
         this.projectStorage = projectStorage;
