@@ -8,8 +8,9 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import ua.com.goit.gojava.m__jane.service.ProfileService;
+import ua.com.goit.gojava.m__jane.service.impl.ProfileServiceImplXML;
 
-public class ProfileServiceTest {
+public class ProfileServiceXMLTest {
 
 	private static ProfileService profileService;
 	

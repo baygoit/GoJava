@@ -17,7 +17,7 @@ import ua.com.goit.gojava.m__jane.model.question.Question;
 import ua.com.goit.gojava.m__jane.service.UserQuizService;
 import ua.com.goit.gojava.m__jane.service.impl.UserQuizServiceImplXML;
 
-public class UserQuizServiceTest {
+public class UserQuizServiceXMLTest {
 
 	private static UserQuizService userQuizService;
 	

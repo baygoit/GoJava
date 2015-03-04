@@ -9,7 +9,7 @@ import ua.com.goit.gojava.m__jane.model.User;
 import ua.com.goit.gojava.m__jane.service.UserService;
 import ua.com.goit.gojava.m__jane.service.impl.UserServiceImplXML;
 
-public class UserServiceTest {
+public class UserServiceXMLTest {
 
 	public static UserService userService;
 	

@@ -14,7 +14,7 @@ import ua.com.goit.gojava.m__jane.model.question.Question;
 import ua.com.goit.gojava.m__jane.service.QuestionService;
 import ua.com.goit.gojava.m__jane.service.impl.QuestionServiceImplXML;
 
-public class QuestionServiceTest {
+public class QuestionServiceXMLTest {
 
 	private static QuestionService questionService;
 	//private static DataLoader dataLoader;

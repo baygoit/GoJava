@@ -8,12 +8,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import ua.com.goit.gojava.m__jane.exceptions.TestingServiceException;
-import ua.com.goit.gojava.m__jane.model.User;
 import ua.com.goit.gojava.m__jane.model.question.SimpleQuestion;
 import ua.com.goit.gojava.m__jane.service.QuestionService;
-import ua.com.goit.gojava.m__jane.service.UserService;
-import ua.com.goit.gojava.m__jane.service.impl.UserServiceImplXML;
 import ua.com.goit.gojava.m__jane.service.implDB.QuestionServiceImplDB;
+
 
 /**
  * Servlet implementation class SimpleQuestion
