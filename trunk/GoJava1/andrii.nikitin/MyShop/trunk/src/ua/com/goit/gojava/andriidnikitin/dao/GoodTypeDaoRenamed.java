@@ -1,15 +1,16 @@
-package ua.com.goit.gojava.andriidnikitin.service;
+package ua.com.goit.gojava.andriidnikitin.dao;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import ua.com.goit.gojava.andriidnikitin.model.GoodType;
+import ua.com.goit.gojava.andriidnikitin.service.IDAO;
 
-public class GoodTypeDAO implements IDAO<GoodType> {
+public class GoodTypeDaoRenamed implements IDAO<GoodType> {
 	
 	List<GoodType> list;
 	
-	public GoodTypeDAO() {
+	public GoodTypeDaoRenamed() {
 		
 		list = new ArrayList<GoodType>();		
 		init();
@@ -79,5 +80,32 @@ public class GoodTypeDAO implements IDAO<GoodType> {
 		type.setParent(guitars);
 		list.add(type);
 	}
+
+	public boolean deleteGoodType(GoodType goodType) {		
+		if (!list.contains(goodType)) {
+			return false;
+		}
+		list.remove(goodType);
+		return true;
+	}
+
+	public String create(String name, GoodType type) {
+		GoodType newType = new GoodType();
+		newType.setName(name);
+		newType.setParent(type);
+		newType.setId(generateID(newType));
+		list.add(newType);
+		return "Successfully created.";
+	}
+
+	private Integer generateID(GoodType newType) {
+		return newType.hashCode();
+	}
+
+	public GoodType read(Integer typeId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 	
 }

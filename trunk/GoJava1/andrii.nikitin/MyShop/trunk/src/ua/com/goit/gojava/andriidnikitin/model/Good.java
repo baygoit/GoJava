@@ -2,6 +2,9 @@ package ua.com.goit.gojava.andriidnikitin.model;
 
 import java.util.List;
 
+import ua.com.goit.gojava.andriidnikitin.dao.GoodDao;
+import ua.com.goit.gojava.andriidnikitin.dao.MyShopDAOException;
+import ua.com.goit.gojava.andriidnikitin.dao.PostgresqlGoodTypeDao;
 import ua.com.goit.gojava.andriidnikitin.model.util.Attribute;
 
 public class Good {
@@ -45,6 +48,21 @@ public class Good {
 
 	public void setDescription(List<Attribute> description) {
 		this.description = description;
+	}
+
+	public static Good factory(Integer goodId, String nameOfGood, Integer typeId,
+			Integer descriptionId) {
+		Good good = new Good();
+		good.setId(goodId);
+		good.setName(nameOfGood);
+		PostgresqlGoodTypeDao dao = PostgresqlGoodTypeDao.getInstance();
+		try {
+			GoodType type = dao.read(typeId);
+		} catch (MyShopDAOException e) {
+			good.setType(null);
+		}
+		// description is not implemented 
+		return good ;
 	}
 
 }

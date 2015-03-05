@@ -4,17 +4,22 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <link href="css/stylesheet1.css" rel="stylesheet" type="text/css" />
-<title>Catalog of goods</title>
+<title>Edit</title>
 </head>
-<body>
-	<h2>Press button to see categories</h2>
-	<div>
-		<form name="form1" action="../print-categories" method="get"
-			target="category-frame">
-			<input type="submit" value="show categories">
-		</form>
 
-		<iframe name="category-frame"> </iframe>
-	</div>
+<body>
+
+	<h2> Editing </h2>
+
+	<table id="topside_edit" border="0">
+		<tr>
+			<td><a href="create_in_catalog.jsp"> Create </a></td>
+			<td><a href="update_catalog.jsp" > Edit </a></td>
+		</tr>
+	</table>
+	<p>
+		<a href="index.html">Back</a>
+	</p>
+	
 </body>
 </html>

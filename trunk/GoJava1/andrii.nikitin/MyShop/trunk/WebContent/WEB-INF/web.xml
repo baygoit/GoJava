@@ -6,30 +6,30 @@
 	<description>This application allows to buy goods and control the shop's activity.</description>
 	<display-name>MyShop</display-name>
 	<servlet>
-		<servlet-name>category-printer</servlet-name>
-		<servlet-class>ua.com.goit.gojava.andriidnikitin.servlets.CategoryPrinter</servlet-class>
+		<servlet-name>catalog-servlet</servlet-name>
+		<servlet-class>ua.com.goit.gojava.andriidnikitin.servlets.CatalogServlet</servlet-class>
 		<enabled>true</enabled>
 	</servlet>	
 	<servlet>
-		<servlet-name>catalog-viewer</servlet-name>
-		<servlet-class>ua.com.goit.gojava.andriidnikitin.servlets.CatalogViewer</servlet-class>
+		<servlet-name>good-servlet</servlet-name>
+		<servlet-class>ua.com.goit.gojava.andriidnikitin.servlets.GoodServlet</servlet-class>
 		<enabled>true</enabled>
 	</servlet>	
 	<servlet>
-		<servlet-name>good-creator</servlet-name>
-		<servlet-class>ua.com.goit.gojava.andriidnikitin.servlets.GoodCreator</servlet-class>
+		<servlet-name>goodtype-servlet</servlet-name>
+		<servlet-class>ua.com.goit.gojava.andriidnikitin.servlets.GoodTypeServlet</servlet-class>
 		<enabled>true</enabled>
 	</servlet>	
 	<servlet-mapping>
-		<servlet-name>category-printer</servlet-name>
-		<url-pattern>/print-categories</url-pattern>
-	</servlet-mapping>
+		<servlet-name>catalog-servlet</servlet-name>
+		<url-pattern>/show-catalog</url-pattern>
+	</servlet-mapping>	
 	<servlet-mapping>
-		<servlet-name>good-creator</servlet-name>
-		<url-pattern>/add-good</url-pattern>
-	</servlet-mapping>
+		<servlet-name>good-servlet</servlet-name>
+		<url-pattern>/act-good</url-pattern>
+	</servlet-mapping>	
 	<servlet-mapping>
-		<servlet-name>catalog-viewer</servlet-name>
-		<url-pattern>/view-catalog</url-pattern>
-	</servlet-mapping>
+		<servlet-name>goodtype-servlet</servlet-name>
+		<url-pattern>/act-type</url-pattern>
+	</servlet-mapping>	
 </web-app>

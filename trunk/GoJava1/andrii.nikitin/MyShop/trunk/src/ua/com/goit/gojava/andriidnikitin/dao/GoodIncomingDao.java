@@ -1,11 +1,12 @@
-package ua.com.goit.gojava.andriidnikitin.service;
+package ua.com.goit.gojava.andriidnikitin.dao;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import ua.com.goit.gojava.andriidnikitin.model.GoodIncoming;
+import ua.com.goit.gojava.andriidnikitin.service.IDAO;
 
-public class GoodIncomingDAO implements IDAO<GoodIncoming> {
+public class GoodIncomingDao implements IDAO<GoodIncoming> {
 	
 	List<GoodIncoming> list;
 
