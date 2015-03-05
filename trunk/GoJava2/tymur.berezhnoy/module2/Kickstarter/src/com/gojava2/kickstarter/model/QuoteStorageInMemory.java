@@ -3,12 +3,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class QuoteStorageInVM implements QuoteStorage {
+public class QuoteStorageInMemory implements QuoteStorage {
 	
 	private List<Quote> quotations;
 	private Random random;
 	
-	public QuoteStorageInVM(Random random) {
+	public QuoteStorageInMemory(Random random) {
 		quotations = new ArrayList<Quote>();
 		this.random = random;
 	}

@@ -9,7 +9,7 @@ import java.util.Random;
 
 import org.junit.Test;
 
-public class QuoteStorageInVMTest {
+public class QuoteStorageInMemoryTest {
 
 	class FakeRandom extends Random {
 		private List<Integer> numbers;
@@ -27,26 +27,26 @@ public class QuoteStorageInVMTest {
 	@Test
 	public void shouldGenerateNewQUote() {
 		// given
-		QuoteStorageInVM storageInVM = new QuoteStorageInVM(new FakeRandom(0, 1)); 
+		QuoteStorageInMemory storage = new QuoteStorageInMemory(new FakeRandom(0, 1)); 
 		
 		// when
 		Quote quote1 = new Quote("quote1", "author1");
-		storageInVM.add(quote1);
-		Quote resultQuote1 = storageInVM.getRandomQuote();
+		storage.add(quote1);
+		Quote resultQuote1 = storage.getRandomQuote();
 		StringBuilder quoteBuilder1 = new StringBuilder();
 		quoteBuilder1.append(resultQuote1.getContent()).append(resultQuote1.getCopyrightSymbol()).append(resultQuote1.getAuthor());
 		
 		// then
-		assertEquals("quote1Â©author1", quoteBuilder1.toString());
+		assertEquals("quote1©author1", quoteBuilder1.toString());
 		
 		// when 
 		Quote quote2 = new Quote("quote2", "author2");
-		storageInVM.add(quote2);
-		Quote resultQuote2 = storageInVM.getRandomQuote();
+		storage.add(quote2);
+		Quote resultQuote2 = storage.getRandomQuote();
 		StringBuilder quoteBuilder2 = new StringBuilder();
 		quoteBuilder2.append(resultQuote2.getContent()).append(resultQuote2.getCopyrightSymbol()).append(resultQuote2.getAuthor());
 		
 		// then
-		assertEquals("quote2Â©author2", quoteBuilder2.toString());
+		assertEquals("quote2©author2", quoteBuilder2.toString());
 	} 
 }

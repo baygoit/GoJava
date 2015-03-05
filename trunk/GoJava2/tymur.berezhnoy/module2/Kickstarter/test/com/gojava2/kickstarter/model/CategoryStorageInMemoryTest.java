@@ -5,26 +5,26 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-public class CategoryStorageInVMTest {
+public class CategoryStorageInMemoryTest {
 
-	private CategoryStorageInVM storageInVM;
+	private CategoryStorageInMemory storage;
 	
 	@Before
 	public void setUp() {
-		storageInVM = new CategoryStorageInVM();
+		storage = new CategoryStorageInMemory();
 	}
 	
 	@Test
 	public void shouldContainsCategory_whenAddCategories() {
 		// given
+		Category category = new Category("Art");
 		
 		// when
-		Category category = new Category("Art");
-		storageInVM.addCategory(category);
+		storage.addCategory(category);
 		
 		// then
 		assertTrue("Expected, that collection contains new added category", 
-					storageInVM.getCategories().contains(category));
+					storage.getCategories().contains(category));
 	}
 	
 	@Test
@@ -36,22 +36,21 @@ public class CategoryStorageInVMTest {
 		
 		// then
 		assertEquals("Expected, that collection size is 0 when no categories",
-					expectedSize, storageInVM.getSize());
+					expectedSize, storage.getSize());
 	}
 	
 	@Test
 	public void shouldGetCorrectCategory_whenGetByNumberOfCategoryInConsole() {
 		// given
-		
-		// when
 		Category category1 = new Category("Art");
 		Category category2 = new Category("Dance");
 		
-		storageInVM.addCategory(category1);
-		storageInVM.addCategory(category2);
+		// when		
+		storage.addCategory(category1);
+		storage.addCategory(category2);
 		
 		// then
-		assertSame(category1, storageInVM.getCategory(1));
-		assertSame(category2, storageInVM.getCategory(2));
+		assertSame(category1, storage.getCategory(1));
+		assertSame(category2, storage.getCategory(2));
 	}
 }

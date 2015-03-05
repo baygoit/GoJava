@@ -3,20 +3,20 @@ package com.gojava2.kickstarter.controller;
 import java.util.Random;
 
 import com.gojava2.kickstarter.model.Category;
-import com.gojava2.kickstarter.model.CategoryStorageInVM;
+import com.gojava2.kickstarter.model.CategoryStorageInMemory;
 import com.gojava2.kickstarter.model.Project;
-import com.gojava2.kickstarter.model.ProjectStorageInVM;
+import com.gojava2.kickstarter.model.ProjectStorageInMemory;
 import com.gojava2.kickstarter.model.Quote;
-import com.gojava2.kickstarter.model.QuoteStorageInVM;
+import com.gojava2.kickstarter.model.QuoteStorageInMemory;
 import com.gojava2.kickstarter.view.ConsoleInput;
 import com.gojava2.kickstarter.view.ConsoleView;
 
 public class Kickstarter {
 
 	public static void main(String[] args) {
-		QuoteStorageInVM quoteStorage = new QuoteStorageInVM(new Random());
-		CategoryStorageInVM categoryStorage = new CategoryStorageInVM();
-		ProjectStorageInVM projectStorageInVM = new ProjectStorageInVM();
+		QuoteStorageInMemory quoteStorage = new QuoteStorageInMemory(new Random());
+		CategoryStorageInMemory categoryStorage = new CategoryStorageInMemory();
+		ProjectStorageInMemory projectStorageInVM = new ProjectStorageInMemory();
 		
 		quoteStorage.add(new Quote("Sometimes when you innovate, you make mistakes."
 				+ "\n It is best to admit them quickly, and get on with\n improving your other innovations.", "Steve Jobs"));
@@ -31,14 +31,13 @@ public class Kickstarter {
 		Category category1 = new Category("Art");
 		Category category2 = new Category("Comics");
 		Category category3 = new Category("Dance");
+		Category category4 = new Category("Gamse");
 		
 		categoryStorage.addCategory(category1);
 		categoryStorage.addCategory(category2);
 		categoryStorage.addCategory(category3);
-		
-		
-		Category category4 = new Category("Gamse");
 		categoryStorage.addCategory(category4);
+				
 		
 		Project project1 = new Project("NY artists", "Some description.", 10000, 200, 25, 1,
 				"There'll be history", "http://www.nyart.com");

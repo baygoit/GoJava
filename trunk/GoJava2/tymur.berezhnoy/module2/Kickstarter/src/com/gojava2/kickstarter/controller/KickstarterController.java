@@ -3,24 +3,23 @@ package com.gojava2.kickstarter.controller;
 import java.util.InputMismatchException;
 
 import com.gojava2.kickstarter.model.Category;
-import com.gojava2.kickstarter.model.CategoryStorageInVM;
-import com.gojava2.kickstarter.model.ProjectStorageInVM;
+import com.gojava2.kickstarter.model.CategoryStorageInMemory;
+import com.gojava2.kickstarter.model.ProjectStorageInMemory;
 import com.gojava2.kickstarter.model.QuoteStorage;
-import com.gojava2.kickstarter.model.QuoteStorageInVM;
 import com.gojava2.kickstarter.view.ConsoleView;
 import com.gojava2.kickstarter.view.InPut;
 
 public class KickstarterController {
 	
 	private QuoteStorage quoteStorage;
-	private CategoryStorageInVM categoryStorage;
-	private ProjectStorageInVM projectStorage;
+	private CategoryStorageInMemory categoryStorage;
+	private ProjectStorageInMemory projectStorage;
 	
 	private	ConsoleView view;
 	private InPut in;
 	
-	public KickstarterController(QuoteStorage quoteStorage, CategoryStorageInVM categoryStorage,
-								ProjectStorageInVM projectStorage, ConsoleView consoleView, 
+	public KickstarterController(QuoteStorage quoteStorage, CategoryStorageInMemory categoryStorage,
+								ProjectStorageInMemory projectStorage, ConsoleView consoleView, 
 								InPut in) {
 		this.quoteStorage = quoteStorage;
 		this.categoryStorage = categoryStorage;
@@ -37,7 +36,7 @@ public class KickstarterController {
 			int amountCategory = categoryStorage.getSize();
 			if(input > 0 && input <= amountCategory) {
 				Category category = categoryStorage.getCategory(input);
-				view.display(projectStorage.getProjectsOfCategory(category));
+				view.display(projectStorage.getProjects(category));
 				menuLevelTwo(category);
 				menuLevelOne();
 			} else if(input == 0) {
@@ -60,7 +59,7 @@ public class KickstarterController {
 			int input = in.read();
 			
 			if(input > 0 && input <= projectStorage.getSize()) {
-				view.display(projectStorage.getProject(input));
+				view.display(projectStorage.getProject(category, input));
 				menuLevelThree(category);
 				menuLevelTwo(category);
 			} else if (input == 0) {
@@ -81,7 +80,7 @@ public class KickstarterController {
 		try {
 			int input = in.read();
 			if(input == 0) {
-				view.display(projectStorage.getProjectsOfCategory(category));
+				view.display(projectStorage.getProjects(category));
 			} else {
 				menuLevelThree(category);
 			}			

@@ -7,25 +7,25 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-public class ProjectStorageInVMTest {
+public class ProjectStorageInMemoryTest {
 
-	private ProjectStorageInVM storageInVM;
+	private ProjectStorageInMemory storage;
 	
 	@Before
 	public void setUp() {
-		storageInVM = new ProjectStorageInVM();
+		storage = new ProjectStorageInMemory();
 	}
 
 	@Test
-	public void shouldCollectionSize0_whenNoProjects() {
+	public void shouldCollectionSizeZero_whenNoProjects() {
 		// given
 		
 		// when
-		List<Project> result = storageInVM.getProjectsOfCategory(new Category("Art"));
 		int expectedSize = 0;
+		int actualSize = storage.getSize();
 		
 		// then
-		assertEquals(expectedSize, result.size());
+		assertEquals(expectedSize, actualSize);
 	}
 	
 	@Test
@@ -39,11 +39,11 @@ public class ProjectStorageInVMTest {
 		Project project2 = new Project("p2", "d2", 1, 1, 1, 1, "s2", "l2");
 		project2.setCategory(category1);
 		
-		storageInVM.addProject(project1);
-		storageInVM.addProject(project2);
-		
+		storage.addProject(project1);
+		storage.addProject(project2);
+				
 		// when
-		List<Project> result = storageInVM.getProjectsOfCategory(new Category("Dance"));
+		List<Project> result = storage.getProjects(new Category("Dance"));
 		int expectedSize = 0;
 		
 		// then
@@ -65,12 +65,12 @@ public class ProjectStorageInVMTest {
 		Project project3 = new Project("p3", "d3", 1, 1, 1, 1, "s3", "l3");
 		project3.setCategory(category2);
 		
-		storageInVM.addProject(project1);
-		storageInVM.addProject(project2);
-		storageInVM.addProject(project3);
+		storage.addProject(project1);
+		storage.addProject(project2);
+		storage.addProject(project3);
 		
 		// when
-		List<Project> result = storageInVM.getProjectsOfCategory(category2);
+		List<Project> result = storage.getProjects(category2);
 		int expectedSize = 2;
 		
 		// then
@@ -87,11 +87,11 @@ public class ProjectStorageInVMTest {
 		Project project = new Project("p", "d", 1, 1, 1, 1, "s", "l");
 		
 		project.setCategory(category);
-		storageInVM.addProject(project);
+		storage.addProject(project);
 		
 		// when
-		List<Project> list = storageInVM.getProjectsOfCategory(category);
-		Project result = storageInVM.getProject(1);
+		List<Project> list = storage.getProjects(category);
+		Project result = storage.getProject(category, 1);
 		
 		// then
 		assertSame(project, result);

@@ -2,11 +2,11 @@ package com.gojava2.kickstarter.model;
 
 import java.util.LinkedHashSet;
 
-public class CategoryStorageInVM {
+public class CategoryStorageInMemory {
 
 	private LinkedHashSet<Category> categories;
 	
-	public CategoryStorageInVM() {
+	public CategoryStorageInMemory() {
 		categories = new LinkedHashSet<Category>();
 	}
 	
