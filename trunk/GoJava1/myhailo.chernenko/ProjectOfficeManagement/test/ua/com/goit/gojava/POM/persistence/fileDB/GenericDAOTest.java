@@ -8,7 +8,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import ua.com.goit.gojava.POM.persistence.abstraction.DataObject;
+//import ua.com.goit.gojava.POM.persistence.abstraction.DataObject;
 import ua.com.goit.gojava.POM.persistence.fileDB.DataManager;
 import ua.com.goit.gojava.POM.persistence.fileDB.GenericDAO;
 

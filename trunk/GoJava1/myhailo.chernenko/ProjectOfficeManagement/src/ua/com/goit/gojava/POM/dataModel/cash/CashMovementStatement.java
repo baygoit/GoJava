@@ -1,10 +1,10 @@
 package ua.com.goit.gojava.POM.dataModel.cash;
 
-import ua.com.goit.gojava.POM.dataModel.common.FinancialStatement;
+//import ua.com.goit.gojava.POM.dataModel.common.FinancialStatement;
 
-public class CashMovementStatement extends FinancialStatement<CashMovementEntry> {
+public class CashMovementStatement {//extends FinancialStatement<CashMovementEntry> {
 
-	private static final long serialVersionUID = -5581050414446781357L;
+	/*private static final long serialVersionUID = -5581050414446781357L;
 
 	public CashMovementStatement() {
 		
@@ -17,6 +17,6 @@ public class CashMovementStatement extends FinancialStatement<CashMovementEntry>
 		
 		return new CashMovementStatement();
 		
-	}
+	}*/
 
 }

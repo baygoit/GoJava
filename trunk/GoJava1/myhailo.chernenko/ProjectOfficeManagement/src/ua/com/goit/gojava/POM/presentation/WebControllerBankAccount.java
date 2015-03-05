@@ -9,11 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import ua.com.goit.gojava.POM.dataModel.POMDataModelException;
 import ua.com.goit.gojava.POM.dataModel.cash.BankAccount;
-import ua.com.goit.gojava.POM.persistence.fileDB.DAOFactory;
-import ua.com.goit.gojava.POM.persistence.fileDB.DataManager;
-import ua.com.goit.gojava.POM.persistence.fileDB.GenericDAO;
-import ua.com.goit.gojava.POM.persistence.fileDB.LazyDataManager;
+import ua.com.goit.gojava.POM.persistence.postgresDB.BankAccountDAO;
 
 @WebServlet(urlPatterns = {"/BankAccountWebController"})
 public class WebControllerBankAccount extends HttpServlet {
@@ -26,34 +24,130 @@ public class WebControllerBankAccount extends HttpServlet {
 
 		req.setCharacterEncoding("UTF-8");
 		
-		if (req.getParameter("AddNew")!=null) {
-		
-			String name = req.getParameter("name");
-			String bankName = req.getParameter("bankName");
-			String currencyCode = req.getParameter("currency");
+		if (req.getParameter("AddNew") != null) {
 			
-			DAOFactory dataManager = LazyDataManager.getInstance();
-			GenericDAO<BankAccount> genericDAO = new GenericDAO<BankAccount>(BankAccount.class, dataManager);
-			BankAccount newBankAccount= genericDAO.create();
-			newBankAccount.setName(name);
-			newBankAccount.setBankName(bankName);
-			newBankAccount.setCurrency(Currency.getInstance(currencyCode));
-				
-			dataManager.saveData();
+			createBankAccount(req);
 			
 		} else if (req.getParameter("DellCurrent")!=null) {
 		
-			long id = Long.parseLong(req.getParameter("DellCurrent"));
+			deleteBankAccount(req);
 			
-			DAOFactory dataManager = LazyDataManager.getInstance();
-			GenericDAO<BankAccount> genericDAO = new GenericDAO<BankAccount>(BankAccount.class, dataManager);
-			genericDAO.delete(genericDAO.getByID(id));
+		} else if (req.getParameter("EditCurrent")!=null) {
 			
-			dataManager.saveData();
+			loadBankAccountForEdit(req);
+		
+		} else if (req.getParameter("Edit")!=null) {
+			
+			updateBankAccount(req);
+			
+		} else if (req.getParameter("UndoEdit")!=null) {
+			
+			req.getSession(false).setAttribute("currentAccountForEdit", null);
+		
 		}
 		
 		resp.sendRedirect(req.getHeader("referer"));
+
 	}
 
+	private void loadBankAccountForEdit(HttpServletRequest req) {
+		
+		BankAccountDAO bankAccountDAO = new BankAccountDAO();
+		try {
+			
+			long id = Long.parseLong(req.getParameter("EditCurrent"));
+			BankAccount bankAccount = bankAccountDAO.retrieveById(id);
+			req.getSession(false).setAttribute("currentAccountForEdit", bankAccount);
+			
+		} catch (POMDataModelException | NumberFormatException e) {
+
+			req.getSession(false).setAttribute("errorMessage", "Can not load Bank Account for edit: "+e.getMessage());
+			return;	
+		}
+		
+	}
+
+	private void deleteBankAccount(HttpServletRequest req) {
+		
+		BankAccountDAO bankAccountDAO = new BankAccountDAO();
+		try {
+			
+			long id = Long.parseLong(req.getParameter("DellCurrent"));
+
+			bankAccountDAO.delete(bankAccountDAO.retrieveById(id));
+			
+		} catch (POMDataModelException | NumberFormatException e) {
+
+			req.getSession(false).setAttribute("errorMessage", "Can not delete Bank Account: "+e.getMessage());
+			return;	
+		}
+		
+	}
+
+	private void createBankAccount(HttpServletRequest req) {
+		
+		String nameString = req.getParameter("name");
+		String bankNameString = req.getParameter("bankName");
+		String currencyCode = req.getParameter("currency");
+		
+		BankAccount bankAccount= new BankAccount();
+		
+		try {
+			
+			bankAccount.setName(nameString);
+			bankAccount.setBankName(bankNameString);
+			
+			if(!currencyCode.isEmpty()) {
+				bankAccount.setCurrency(Currency.getInstance(currencyCode));
+			}
+			
+		} catch (IllegalArgumentException e)   {
+
+			req.getSession(false).setAttribute("errorMessage", "Could not create new Bank Account: "+e.getMessage());
+			return;
+			
+		}
+		
+		BankAccountDAO bankAccountDAO = new BankAccountDAO();
+		try {
+			
+			bankAccountDAO.create(bankAccount);
+			
+		} catch (POMDataModelException e) {
+
+			req.getSession(false).setAttribute("errorMessage", "Can not save new Bank Account: "+e.getMessage());
+			return;	
+		}
+	}
 	
+	private void updateBankAccount(HttpServletRequest req) {
+		
+		String nameString = req.getParameter("name");
+		String bankNameString = req.getParameter("bankName");
+		String currencyCode = req.getParameter("currency");
+		
+		BankAccount bankAccount = (BankAccount) req.getSession(false).getAttribute("currentAccountForEdit");
+		
+		try {
+			
+			bankAccount.setName(nameString);
+			bankAccount.setBankName(bankNameString);
+			
+			if(!currencyCode.isEmpty()) {
+				bankAccount.setCurrency(Currency.getInstance(currencyCode));
+			}
+			
+			BankAccountDAO bankAccountDAO = new BankAccountDAO();
+			bankAccountDAO.update(bankAccount);
+			
+		} catch (POMDataModelException | NumberFormatException e)   {
+
+			req.getSession(false).setAttribute("errorMessage", "Could not update Bank Account: "+e.getMessage());
+			return;
+			
+		}
+		
+		req.getSession(false).setAttribute("currentAccountForEdit", null);
+		
+	}
 }

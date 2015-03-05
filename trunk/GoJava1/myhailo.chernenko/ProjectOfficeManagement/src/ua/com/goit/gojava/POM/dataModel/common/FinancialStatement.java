@@ -3,7 +3,7 @@ package ua.com.goit.gojava.POM.dataModel.common;
 import java.io.Serializable;
 import java.util.ArrayList;
 //import java.util.Calendar;
-import java.util.Currency;
+//import java.util.Currency;
 //import java.util.Date;
 //import java.util.HashMap;
 import java.util.List;
@@ -13,12 +13,13 @@ import java.util.List;
 
 
 
+
 import ua.com.goit.gojava.POM.dataModel.POMDataModelException;
 import ua.com.goit.gojava.POM.dataModel.POMDataModelRuntimeException;
-import ua.com.goit.gojava.POM.persistence.ExchangeRateDAO;
 import ua.com.goit.gojava.POM.persistence.abstraction.*;
 import ua.com.goit.gojava.POM.persistence.fileDB.DAOFactory;
 import ua.com.goit.gojava.POM.persistence.fileDB.LazyDataManager;
+import ua.com.goit.gojava.POM.persistence.postgresDB.ExchangeRateDAO;
 
 public abstract class FinancialStatement<T extends FinancialEntry> implements Serializable {
 	
@@ -75,7 +76,7 @@ public abstract class FinancialStatement<T extends FinancialEntry> implements Se
 		
 	}
 	
-	public void deleteDocEntries(FinancialDocument doc) {
+	/*public void deleteDocEntries(FinancialDocument doc) {
 		
 		for (int i = financialEntries.size() - 1; i >= 0 ; i--) {
 			if (financialEntries.get(i).getDoc() == doc) {
@@ -83,7 +84,7 @@ public abstract class FinancialStatement<T extends FinancialEntry> implements Se
 			}
 		}
 		
-	}
+	}*/
 	
 	public void deleteEntryById(long id) {
 		
@@ -95,7 +96,7 @@ public abstract class FinancialStatement<T extends FinancialEntry> implements Se
 		
 	}
 	
-	public Money getTotal(FinancialCharacteristic characteristic, Currency currency) throws POMDataModelException {
+	/*public Money getTotal(FinancialCharacteristic characteristic, Currency currency) throws POMDataModelException {
 
 		Money result = new Money(currency);
 		
@@ -118,7 +119,7 @@ public abstract class FinancialStatement<T extends FinancialEntry> implements Se
 		
 		return result;
 		
-	}
+	}*/
 	
 	// TODO think about this methods.. 
 	/*

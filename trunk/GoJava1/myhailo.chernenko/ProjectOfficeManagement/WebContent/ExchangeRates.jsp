@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	import="ua.com.goit.gojava.POM.dataModel.common.*,
-			ua.com.goit.gojava.POM.persistence.*,
+			ua.com.goit.gojava.POM.persistence.postgresDB.*,
 			java.text.SimpleDateFormat,
 			java.util.Currency"
 			
@@ -14,23 +14,23 @@
 	
 	function validateData(obj){
 		
-		if (obj.name == "AddNew" ) {
+		if ((obj.name == "AddNew")||(obj.name == "Edit") ) {
 			
-			var date = this.ExchangeRateRow.date.value;
+			var date = this.ExchangeRatesTable.date.value;
 			var isDate = /[0-9]{4,4}-[0-9]{1,2}-[0-9]{1,2}/;
 		    if (date == null || date == "" || !isDate.test(date) ) {
 		        alert("You must fill date field by the template 'yyyy-mm-dd'!");
 		        return false;
 		    }
 			
-		    var rate = this.ExchangeRateRow.rate.value;
+		    var rate = this.ExchangeRatesTable.rate.value;
 			//var isSum = /[0-9]{0,10}[.]{0,1}[0-9]{0,2}/;
 		    if (isNaN(rate)) {
 		        alert("You must fill Rate field!");
 		        return false;
 		    }
 		    
-		    var multiplicity = this.ExchangeRateRow.multiplicity.value;
+		    var multiplicity = this.ExchangeRatesTable.multiplicity.value;
 			//var isSum = /[0-9]{0,10}[.]{0,1}[0-9]{0,2}/;
 		    if (isNaN(multiplicity)) {
 		        alert("You must fill Multiplicity field!");
@@ -50,7 +50,7 @@
 		
 		<div class="pageHeader">Курсы валют</div>
 		
-		<form name="ExchangeRateRow"
+		<form name="ExchangeRatesTable"
 	    	action="ExchangeRateWebController"
 	    	method=POST>
 

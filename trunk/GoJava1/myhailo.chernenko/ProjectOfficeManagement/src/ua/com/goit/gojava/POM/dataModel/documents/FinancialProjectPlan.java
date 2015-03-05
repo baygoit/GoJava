@@ -1,17 +1,17 @@
 package ua.com.goit.gojava.POM.dataModel.documents;
 
-import java.io.Serializable;
+//import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import ua.com.goit.gojava.POM.dataModel.common.FinancialDocument;
+//import ua.com.goit.gojava.POM.dataModel.common.FinancialDocument;
 import ua.com.goit.gojava.POM.dataModel.profitcost.ProjectFinResultTransaction;
 
-public class FinancialProjectPlan  implements FinancialDocument, Serializable {
+public class FinancialProjectPlan  {//implements FinancialDocument, Serializable {
 
-	private static final long serialVersionUID = 9135248402300294193L;
+	//private static final long serialVersionUID = 9135248402300294193L;
 	private long id = 0;
 	private Date date = Calendar.getInstance().getTime();
 	private String description = "";

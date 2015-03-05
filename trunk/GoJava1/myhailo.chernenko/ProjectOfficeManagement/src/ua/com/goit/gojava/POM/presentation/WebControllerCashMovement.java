@@ -42,7 +42,7 @@ public class WebControllerCashMovement extends HttpServlet {
 			String doc = req.getParameter("doc");
 			Currency currency = ((BankAccount) req.getSession().getAttribute("BankAccount")).getCurrency();
 			
-			CashMovementEntry newEntry = statement.addEntry();
+			CashMovementEntry newEntry = null;//statement.addEntry();
 			
 			try {
 				
@@ -69,7 +69,7 @@ public class WebControllerCashMovement extends HttpServlet {
 		} else if (req.getParameter("DellCurrent")!=null) {
 		
 			long id = Long.parseLong(req.getParameter("DellCurrent"));
-			statement.deleteEntryById(id);
+			//statement.deleteEntryById(id);
 			LazyDataManager.getInstance().saveData();
 			
 		}
@@ -92,18 +92,18 @@ public class WebControllerCashMovement extends HttpServlet {
 			
 			if(req.getParameter("act").equals("p")) { 
 			
-				CashMovementStatement statement = bankAccount.getPlannedTransactions();
+				/*CashMovementStatement statement = bankAccount.getPlannedTransactions();
 				
 				req.getSession().setAttribute("CashMovementStatement", statement);
 				req.getSession().setAttribute("CashMovementStatementHolder", statement);
-				
+				*/
 			} else if(req.getParameter("act").equals("f")) { 
 			
-				CashMovementStatement statement = bankAccount.getFactTransactions();
+				/*CashMovementStatement statement = bankAccount.getFactTransactions();
 				
 				req.getSession().setAttribute("CashMovementStatement", statement);
 				req.getSession().setAttribute("CashMovementStatementHolder", statement);
-				
+				*/
 			}
 			
 		}

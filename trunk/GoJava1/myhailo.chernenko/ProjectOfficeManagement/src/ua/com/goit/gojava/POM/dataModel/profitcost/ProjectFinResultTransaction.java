@@ -2,19 +2,19 @@ package ua.com.goit.gojava.POM.dataModel.profitcost;
 
 import java.util.Calendar;
 import java.util.Date;
-import java.io.Serializable;
+//import java.io.Serializable;
 
-import ua.com.goit.gojava.POM.dataModel.common.FinancialDocument;
+//import ua.com.goit.gojava.POM.dataModel.common.FinancialDocument;
 
-public class ProjectFinResultTransaction implements Serializable {
+public class ProjectFinResultTransaction {//implements Serializable {
 	
-	private static final long serialVersionUID = 2510846589492989967L;
+	//private static final long serialVersionUID = 2510846589492989967L;
 	private long id = 0;
 	private Date date = Calendar.getInstance().getTime();
 	private CostItem costItem;
 	private String description = "";
 	private long sum = 0;
-	private FinancialDocument doc;
+	//private FinancialDocument doc;
 	
 	public long getId() {
 		return id;
@@ -46,11 +46,11 @@ public class ProjectFinResultTransaction implements Serializable {
 	public void setSum(long sum) {
 		this.sum = sum;
 	}
-	public FinancialDocument getDoc() {
+	/*public FinancialDocument getDoc() {
 		return doc;
 	}
 	public void setDoc(FinancialDocument doc) {
 		this.doc = doc;
-	}
+	}*/
 	
 }

@@ -9,7 +9,7 @@
 </head>
 <body>
 
-	<p><a href="CashSubsystem.jsp">Учет денежных средств</a></p>
+	<p><a href="BankAccounts.jsp">Банковские счета</a></p>
 	<p><a href="ExchangeRates.jsp">Курсы валют</a></p>
 	<!--
 		<p><a href="CostItems.jsp">Статьи затрат</a></p>

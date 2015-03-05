@@ -1,20 +1,20 @@
 package ua.com.goit.gojava.POM.dataModel.documents;
 
-import java.io.Serializable;
+//import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
 
 import ua.com.goit.gojava.POM.dataModel.cash.BankAccount;
-import ua.com.goit.gojava.POM.dataModel.common.FinancialDocument;
+//import ua.com.goit.gojava.POM.dataModel.common.FinancialDocument;
 import ua.com.goit.gojava.POM.dataModel.profitcost.CostItem;
 import ua.com.goit.gojava.POM.dataModel.profitcost.CostItemTransaction;
 import ua.com.goit.gojava.POM.dataModel.profitcost.Project;
 import ua.com.goit.gojava.POM.dataModel.profitcost.ProjectFinResultTransaction;
 import ua.com.goit.gojava.POM.dataModel.profitcost.ProjectStage;
 
-public class PaymentDocument implements FinancialDocument, Serializable {
+public class PaymentDocument {// implements FinancialDocument, Serializable {
 
-	private static final long serialVersionUID = 2985654176742038375L;
+	//private static final long serialVersionUID = 2985654176742038375L;
 	private long id = 0;
 	private String number = "";
 	private Date date = Calendar.getInstance().getTime();
@@ -129,7 +129,7 @@ public class PaymentDocument implements FinancialDocument, Serializable {
 			ProjectFinResultTransaction newTransaction = project.addTransaction(projectStage);
 			newTransaction.setDate(date);
 			newTransaction.setCostItem(costItem);
-			newTransaction.setDoc(this);
+			//newTransaction.setDoc(this);
 			newTransaction.setSum(sum);
 			
 		}
@@ -138,7 +138,7 @@ public class PaymentDocument implements FinancialDocument, Serializable {
 			
 			CostItemTransaction newTransaction = costItem.addTransaction();
 			newTransaction.setDate(date);
-			newTransaction.setDoc(this);
+			//newTransaction.setDoc(this);
 			newTransaction.setSum(sum);
 			
 		}
@@ -158,13 +158,13 @@ public class PaymentDocument implements FinancialDocument, Serializable {
 		
 		if ((project != null)&&(projectStage != null)) {
 			
-			projectStage.deleteTransactionByDoc(this);
+			//projectStage.deleteTransactionByDoc(this);
 
 		}
 		
 		if (costItem != null) {
 			
-			costItem.deleteDocTransaction(this);
+			//costItem.deleteDocTransaction(this);
 
 		}
 		

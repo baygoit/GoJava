@@ -1,4 +1,4 @@
-package ua.com.goit.gojava.POM.persistence;
+package ua.com.goit.gojava.POM.persistence.postgresDB;
 
 import java.sql.*;
 

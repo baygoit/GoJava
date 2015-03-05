@@ -1,4 +1,4 @@
-package ua.com.goit.gojava.POM.persistence;
+package ua.com.goit.gojava.POM.persistence.postgresDB;
 
 import static org.junit.Assert.*;
 
@@ -12,15 +12,16 @@ import org.junit.Test;
 
 import ua.com.goit.gojava.POM.dataModel.POMDataModelException;
 import ua.com.goit.gojava.POM.dataModel.common.ExchangeRate;
+import ua.com.goit.gojava.POM.persistence.postgresDB.ExchangeRateDAO;
 
 public class ExchangeRateDAOTest {
-
+	
 	@Before
 	public void setUp() throws Exception {
 	}
 
 	@Test
-	public void testCreateAndRetrieveAll() {
+	public void testCreateAndRetrieveAllAndDelete() {
 
 		ExchangeRateDAO exchangeRateDAO = new ExchangeRateDAO();
 		ExchangeRate exchangeRate = null;
@@ -38,12 +39,31 @@ public class ExchangeRateDAOTest {
 			fail("Fail to create ExchangeRate: "+e.getMessage());
 		}
 		
-		//long lastId = 0;
-		if(allRates.size() != 0 ){
-			allRates.get(allRates.size()-1).getId();
+		long size = allRates.size();
+		
+		try {
+			allRates = exchangeRateDAO.retrieveAll();
+		} catch (POMDataModelException e) {
+			fail("Fail to retrieve all ExchangeRates: "+e.getMessage());
+		}
+		assertNotNull(exchangeRate.getId());
+		assertEquals(size+1, allRates.size());
+		
+		try {
+			
+			exchangeRateDAO.delete(exchangeRate);
+			
+		} catch (POMDataModelException e) {
+			fail("Fail to delete ExchangeRate: "+e.getMessage());
 		}
 		
-		assertNotNull(exchangeRate.getId());
+		try {
+			allRates = exchangeRateDAO.retrieveAll();
+		} catch (POMDataModelException e) {
+			fail("Fail to retrieve all ExchangeRates: "+e.getMessage());
+		}
+		
+		assertEquals(size, allRates.size());
 		
 	}
 	
@@ -122,38 +142,4 @@ public class ExchangeRateDAOTest {
 		
 	}
 	
-	//@Test
-	public void testDelete() {
-
-		ExchangeRateDAO exchangeRateDAO = new ExchangeRateDAO();
-		List<ExchangeRate> allRates = null;
-		
-		try {
-			allRates = exchangeRateDAO.retrieveAll();
-		} catch (POMDataModelException e) {
-			fail("Fail to retrieve all ExchangeRates: "+e.getMessage());
-		}
-		
-		try {
-			
-			for(int i = allRates.size()-1; i >= 0; i-- ) {
-		
-				ExchangeRate exchangeRate = allRates.get(i);
-				exchangeRateDAO.delete(exchangeRate);
-			}
-			
-		} catch (POMDataModelException e) {
-			fail("Fail to delete ExchangeRate: "+e.getMessage());
-		}
-		
-		try {
-			allRates = exchangeRateDAO.retrieveAll();
-		} catch (POMDataModelException e) {
-			fail("Fail to retrieve all ExchangeRates: "+e.getMessage());
-		}
-		
-		assertEquals(allRates.size(),0);
-		
-	}
-
 }

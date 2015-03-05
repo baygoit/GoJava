@@ -8,10 +8,10 @@ public abstract class FinancialEntry implements Serializable {
 	private static final long serialVersionUID = 4386873221423578793L;
 	private long id;
 	private Date date;
-	private FinancialCharacteristic characteristic;
+	//private FinancialCharacteristic characteristic;
 	private String description;
 	private Money sum;
-	private FinancialDocument doc;
+	//private FinancialDocument doc;
 	
 	public long getId() {
 		
@@ -61,7 +61,7 @@ public abstract class FinancialEntry implements Serializable {
 		
 	}
 	
-	public FinancialDocument getDoc() {
+	/*public FinancialDocument getDoc() {
 		
 		return doc;
 		
@@ -83,6 +83,6 @@ public abstract class FinancialEntry implements Serializable {
 		
 		this.characteristic = characteristic;
 		
-	}
+	}*/
 	
 }

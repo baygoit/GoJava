@@ -13,12 +13,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import ua.com.goit.gojava.POM.dataModel.POMDataModelException;
 import ua.com.goit.gojava.POM.dataModel.common.ExchangeRate;
-import ua.com.goit.gojava.POM.persistence.ExchangeRateDAO;
+import ua.com.goit.gojava.POM.persistence.postgresDB.ExchangeRateDAO;
 
 @WebServlet(urlPatterns = {"/ExchangeRateWebController"})
 public class WebControllerExchangeRate extends HttpServlet {
 
-	
 	private static final long serialVersionUID = 877563483782135575L;
 
 	@Override
@@ -115,7 +114,7 @@ public class WebControllerExchangeRate extends HttpServlet {
 			newRate.setMultiplicity(Long.parseLong(multiplicityString));
 			
 			
-		} catch (ParseException | NumberFormatException e)   {
+		} catch (ParseException | IllegalArgumentException e)   {
 
 			//req.setAttribute("errorMessage", "Could not create new Exchange Rate: "+e.getMessage());
 			req.getSession(false).setAttribute("errorMessage", "Could not create new Exchange Rate: "+e.getMessage());

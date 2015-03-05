@@ -13,9 +13,9 @@ import java.io.Serializable;
 
 
 import ua.com.goit.gojava.POM.dataModel.documents.FinancialProjectPlan;
-import ua.com.goit.gojava.POM.persistence.abstraction.DataObject;
+//import ua.com.goit.gojava.POM.persistence.abstraction.DataObject;
 
-public class Project implements DataObject, Serializable {
+public class Project {//implements DataObject, Serializable {
 	
 	private static final long serialVersionUID = 3538434347597125924L;
 	private long id = 0;

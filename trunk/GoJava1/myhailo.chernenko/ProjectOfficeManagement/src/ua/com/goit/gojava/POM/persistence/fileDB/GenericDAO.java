@@ -2,7 +2,7 @@ package ua.com.goit.gojava.POM.persistence.fileDB;
 
 import java.util.List;
 
-import ua.com.goit.gojava.POM.persistence.abstraction.DataObject;
+//import ua.com.goit.gojava.POM.persistence.abstraction.DataObject;
 
 //import ua.com.goit.gojava.POM.dataModel.*;
 
@@ -32,7 +32,7 @@ public class GenericDAO<T> {
 	public T create() {
 
 		T newGenericObj = getNewClassInstance();
-		if(newGenericObj instanceof DataObject){
+		/*if(newGenericObj instanceof DataObject){
 		
 			List<T> objectsList = getList();
 			long newID = 1;
@@ -42,7 +42,7 @@ public class GenericDAO<T> {
 			}
 			((DataObject) newGenericObj).setId(newID);
 
-		}
+		}*/
 		dataManager.saveObject(newGenericObj, classT.getName());
 		return newGenericObj;
 
@@ -86,13 +86,13 @@ public class GenericDAO<T> {
 	public T getByID(long id) {
 		
 		T findedGenericObj = null;
-		List<T> list = getList();
+		/*List<T> list = getList();
 		for(T genericObj : list) {
 			if((genericObj instanceof DataObject)
 					&&(((DataObject)genericObj).getId() == id )	){
 				findedGenericObj = genericObj;
 			}
-		}
+		}*/
 
 		return findedGenericObj;
 	}

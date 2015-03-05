@@ -1,4 +1,4 @@
-package ua.com.goit.gojava.POM.persistence;
+package ua.com.goit.gojava.POM.persistence.postgresDB;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -17,8 +17,22 @@ import ua.com.goit.gojava.POM.dataModel.common.ExchangeRate;
 
 public class ExchangeRateDAO {
 
+	private static final String CLASS_TABLE = "exchange_rates"; 
+
+	private Connection getDBConnection() {
+		
+		return DBDataManager.getConnection();
+		
+	}
 	
-	private ExchangeRate getExchangeRateFromRS(ResultSet rs) throws SQLException {
+	private void closeDBConnections(ResultSet rs, Statement statement, Connection connection) {
+		
+		DBDataManager.CloseConnections(rs, statement, connection);
+		
+	}
+
+	
+	private ExchangeRate getObjectFromRS(ResultSet rs) throws SQLException {
 		
 		ExchangeRate exchangeRate = new ExchangeRate();
 		
@@ -49,9 +63,9 @@ public class ExchangeRateDAO {
 
 		ResultSet rs = null;
 		Statement statement = null; 	
-		Connection connection = DBDataManager.getConnection();
+		Connection connection = getDBConnection();
 		
-		String insertTableSQL = "INSERT INTO exchange_rates"
+		String insertTableSQL = "INSERT INTO "+CLASS_TABLE
 								+ " DEFAULT VALUES"
 								+ "	RETURNING ID "
 								;
@@ -71,11 +85,11 @@ public class ExchangeRateDAO {
 			
 		} catch (SQLException | NullPointerException e) {
  
-			throw new POMDataModelException("Could not create new Exchage Rate", e);
+			throw new POMDataModelException("Could not create new Exchage Rate: "+e.getMessage(), e);
  
 		} finally {
  
-			DBDataManager.CloseConnections(rs, statement, connection);
+			closeDBConnections(rs, statement, connection);
  
 		}
 		
@@ -87,9 +101,9 @@ public class ExchangeRateDAO {
 
 		ResultSet rs = null;
 		PreparedStatement statement = null; 	
-		Connection connection = DBDataManager.getConnection();
+		Connection connection = getDBConnection();
 		
-		String insertTableSQL = "INSERT INTO exchange_rates ("
+		String insertTableSQL = "INSERT INTO "+CLASS_TABLE+" ("
 										+ " 	 date "
 										+ " 	,from_currency "
 										+ " 	,to_currency "
@@ -122,7 +136,7 @@ public class ExchangeRateDAO {
  
 		} finally {
  
-			DBDataManager.CloseConnections(rs, statement, connection);
+			closeDBConnections(rs, statement, connection);
  
 		}
 		
@@ -136,9 +150,9 @@ public class ExchangeRateDAO {
 		
 		ResultSet rs = null;
 		Statement statement = null; 	
-		Connection connection = DBDataManager.getConnection();
+		Connection connection = getDBConnection();
 		
-		String selectTableSQL = "SELECT * FROM exchange_rates"
+		String selectTableSQL = "SELECT * FROM "+CLASS_TABLE
 							   +" ORDER BY ID"
 								;
 		
@@ -149,7 +163,7 @@ public class ExchangeRateDAO {
 			 
 			while (rs.next()) {
 				
-				ExchangeRate exchangeRate = getExchangeRateFromRS(rs);
+				ExchangeRate exchangeRate = getObjectFromRS(rs);
 				
 				resultList.add(exchangeRate);
 				
@@ -157,11 +171,11 @@ public class ExchangeRateDAO {
 			
 		} catch (SQLException e) {
  
-			throw new POMDataModelException("Could not retrieve all Exchage Rate", e);
+			throw new POMDataModelException("Could not retrieve all Exchage Rates: "+e.getMessage(), e);
  
 		} finally {
  
-			DBDataManager.CloseConnections(rs, statement, connection);
+			closeDBConnections(rs, statement, connection);
  
 		}
 		
@@ -175,9 +189,9 @@ public class ExchangeRateDAO {
 		
 		ResultSet rs = null;
 		PreparedStatement statement = null; 	
-		Connection connection = DBDataManager.getConnection();
+		Connection connection = getDBConnection();
 		
-		String selectTableSQL = " SELECT * FROM exchange_rates "
+		String selectTableSQL = " SELECT * FROM "+CLASS_TABLE
 							  + " WHERE ID = ? "
 								;
 		
@@ -189,7 +203,7 @@ public class ExchangeRateDAO {
 			 
 			if (rs.next()) {
 				
-				result = getExchangeRateFromRS(rs);
+				result = getObjectFromRS(rs);
 				
 			}
 			
@@ -199,7 +213,7 @@ public class ExchangeRateDAO {
  
 		} finally {
  
-			DBDataManager.CloseConnections(rs, statement, connection);
+			closeDBConnections(rs, statement, connection);
  
 		}
 		
@@ -211,9 +225,9 @@ public class ExchangeRateDAO {
 
 		ResultSet rs = null;
 		PreparedStatement statement = null;
-		Connection connection = DBDataManager.getConnection();
+		Connection connection = getDBConnection();
 		
-		String updateTableSQL = "UPDATE exchange_rates"
+		String updateTableSQL = "UPDATE "+CLASS_TABLE
 								+ " SET "
 								+ " 	 date = ?"
 								+ " 	,from_currency = ?"
@@ -243,7 +257,7 @@ public class ExchangeRateDAO {
  
 		} finally {
  
-			DBDataManager.CloseConnections(rs, statement, connection);
+			closeDBConnections(rs, statement, connection);
  
 		}
 	
@@ -253,9 +267,9 @@ public class ExchangeRateDAO {
 
 		ResultSet rs = null;
 		PreparedStatement statement = null;
-		Connection connection = DBDataManager.getConnection();
+		Connection connection = getDBConnection();
 		
-		String updateTableSQL = "DELETE FROM exchange_rates "
+		String updateTableSQL = "DELETE FROM "+CLASS_TABLE
 								+ "	WHERE ID = ? "
 								;
 		
@@ -274,12 +288,12 @@ public class ExchangeRateDAO {
  
 		} finally {
  
-			DBDataManager.CloseConnections(rs, statement, connection);
+			closeDBConnections(rs, statement, connection);
  
 		}
 	
 	}
-	
+
 	public ExchangeRate getLastOnDate(Date date, Currency fromCurrency, Currency toCurrency) {
 
 		// TODO rewrite it
