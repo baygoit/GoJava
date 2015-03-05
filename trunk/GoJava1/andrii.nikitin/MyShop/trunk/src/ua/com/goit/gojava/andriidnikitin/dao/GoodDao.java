@@ -1,13 +1,11 @@
 package ua.com.goit.gojava.andriidnikitin.dao;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import ua.com.goit.gojava.andriidnikitin.model.Good;
 import ua.com.goit.gojava.andriidnikitin.model.GoodType;
 import ua.com.goit.gojava.andriidnikitin.model.util.Attribute;
-import ua.com.goit.gojava.andriidnikitin.service.IDAO;
 
 public class GoodDao implements GenericDao<Good> {
 	

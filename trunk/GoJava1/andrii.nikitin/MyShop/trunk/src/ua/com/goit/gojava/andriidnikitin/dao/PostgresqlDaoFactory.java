@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import ua.com.goit.gojava.andriidnikitin.model.Good;
 import ua.com.goit.gojava.andriidnikitin.model.GoodType;
 
-public class PostgresqlDaoFactory implements CatalogDaoFactory{
+public class PostgresqlDaoFactory<T> implements CatalogDaoFactory<T>{
 
 	    private String user = "postgres";
 	    private String password = "mypass";
@@ -19,18 +19,18 @@ public class PostgresqlDaoFactory implements CatalogDaoFactory{
 	    }
 
 	    @Override
-	    public GenericDao getGoodDao(Connection connection) {
+	    public GenericDao<Good> getGoodDao(Connection connection) {
 	        return new PostgresqlGoodDao(connection);
 	    }
 
 	    @Override
-	    public GenericDao getGoodTypeDao(Connection connection) {
+	    public GenericDao<GoodType> getGoodTypeDao(Connection connection) {
 	    	return new PostgresqlGoodTypeDao(connection);
 	    }
 
 	    public PostgresqlDaoFactory() {
 	        try {
-	            Class.forName(driver);//Регистрируем драйвер
+	            Class.forName(driver);
 	        } catch (ClassNotFoundException e) {
 	            e.printStackTrace();
 	        }

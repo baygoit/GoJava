@@ -6,9 +6,9 @@ import java.sql.SQLException;
 import ua.com.goit.gojava.andriidnikitin.model.Good;
 import ua.com.goit.gojava.andriidnikitin.model.GoodType;
 
-public interface CatalogDaoFactory {
+public interface CatalogDaoFactory<T> {
     public Connection getConnection() throws SQLException;
-    public GenericDao getGoodDao(Connection connection);
-    public GenericDao getGoodTypeDao(Connection connection);
+    public GenericDao<Good> getGoodDao(Connection connection);
+    public GenericDao<GoodType> getGoodTypeDao(Connection connection);
 }
 

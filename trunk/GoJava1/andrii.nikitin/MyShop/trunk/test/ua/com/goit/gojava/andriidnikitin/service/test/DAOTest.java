@@ -10,18 +10,14 @@ import org.junit.Test;
 import ua.com.goit.gojava.andriidnikitin.dao.CatalogDaoFactory;
 import ua.com.goit.gojava.andriidnikitin.dao.GenericDao;
 import ua.com.goit.gojava.andriidnikitin.dao.PostgresqlDaoFactory;
-import ua.com.goit.gojava.andriidnikitin.model.Good;
 import ua.com.goit.gojava.andriidnikitin.model.GoodType;
-import ua.com.goit.gojava.andriidnikitin.service.GoodCatalogImpl;
-import ua.com.goit.gojava.andriidnikitin.service.GoodSuppliesImpl;
-import ua.com.goit.gojava.andriidnikitin.service.util.ShopException;
 
 
 public class DAOTest {
 	
 	@Test
 	public void testGetAll() throws Exception {
-	    CatalogDaoFactory daoFactory = new PostgresqlDaoFactory();
+	    CatalogDaoFactory<GoodType> daoFactory = new PostgresqlDaoFactory<GoodType>();
 	    List<GoodType> list;
 	    GenericDao<GoodType> dao;
 	    try (Connection connection = daoFactory.getConnection()) {

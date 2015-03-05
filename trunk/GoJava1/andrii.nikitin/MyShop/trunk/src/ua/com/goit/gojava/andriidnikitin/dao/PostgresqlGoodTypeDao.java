@@ -13,9 +13,9 @@ public class PostgresqlGoodTypeDao implements GenericDao<GoodType> {
 	
 	private final Connection connection;
 	
-	//TODO - delete!
+	//TODO - connect with data source
 	static public PostgresqlGoodTypeDao getInstance(){
-		CatalogDaoFactory daoFactory = new PostgresqlDaoFactory();
+		CatalogDaoFactory<GoodType> daoFactory = new PostgresqlDaoFactory<GoodType>();
 		try {
 			Connection connection = daoFactory.getConnection();
 			return new PostgresqlGoodTypeDao(connection);
