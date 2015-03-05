@@ -60,6 +60,10 @@ public class Project { //too much parameters, need to create new classes
 				+ videoLink + ", questions=" + questions + ", id=" + id + "]";
 	}
 	
+	public void setId(int id) {
+		this.id = id;
+	}
+	
 	public int getId(){
 		return id;
 	}

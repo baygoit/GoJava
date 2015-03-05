@@ -4,12 +4,12 @@ import java.util.List;
 
 public interface Projects {
 
-	void addProject(Project project);
+	void add(Project project);
 
-	List<Project> chooseProjects(Category category);
+	List<Project> getProjects(Category category);
 
-	Project readObject(int index);
+	Project get(int id);
 
-	int getLenth();
+	int size();
 
 }

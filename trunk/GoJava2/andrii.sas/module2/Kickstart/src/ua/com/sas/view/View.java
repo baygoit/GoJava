@@ -28,7 +28,7 @@ public class View {
 		String categoriesList = "";
 		int index = 1;
 		for (Category category : categories.getCategories()){
-			categoriesList += index + " - " + category.getName() + ((index == categories.getLenth())? "" : ", ");
+			categoriesList += index + " - " + category.getName() + ((index == categories.size())? "" : ", ");
 			index++;
 		}
 		println(categoriesList + "\nWhat are you interested in? Pleace, make your choice:");

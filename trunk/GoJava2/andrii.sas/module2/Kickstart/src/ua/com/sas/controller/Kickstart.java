@@ -27,16 +27,16 @@ public class Kickstart {
 	}
 	
 	public void initSelectedCategory(int choice) {
-		category = categories.readCategory(choice);
+		category = categories.get(choice);
 	}
 
 	public void receiveProjectsByCategory() {
-		projects.chooseProjects(category);
+		projects.getProjects(category);
 	}
 
 	public void initObjectOfSelectedProject(int projectChoice) {
 		this.projectChoice = projectChoice;
-		project = projects.readObject(projectChoice);
+		project = projects.get(projectChoice);
 	}
 
 	public void buildMenu(){
@@ -65,7 +65,7 @@ public class Kickstart {
 				goToProjectsMenu();
 			}
 		};
-		menu.run(categories.getLenth());
+		menu.run(categories.size());
 		view.endMessage();
 	}
 	
@@ -74,7 +74,7 @@ public class Kickstart {
 			
 			@Override
 			public void displayItems() {
-				view.showProjects(projects.chooseProjects(category));
+				view.showProjects(projects.getProjects(category));
 			}
 			
 			@Override
@@ -93,7 +93,7 @@ public class Kickstart {
 				goToProjecDetails();
 			}
 		};
-		menu.run(projects.getLenth());
+		menu.run(projects.size());
 	}
 
 	public void goToProjecDetails(){

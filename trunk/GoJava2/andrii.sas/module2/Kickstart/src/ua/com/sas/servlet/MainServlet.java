@@ -27,7 +27,7 @@ public class MainServlet extends HttpServlet {
 			String categoryName = req.getParameter("category");
 			
 			ProjectsDAO projectsDAO = new ProjectsDAO(connectionDAO);	
-			List<Project> projects = projectsDAO.chooseProjects(new Category(categoryName));
+			List<Project> projects = projectsDAO.getProjects(new Category(categoryName));
 			
 			req.setAttribute("projects", projects);
 			
@@ -36,7 +36,7 @@ public class MainServlet extends HttpServlet {
 			int projectId = Integer.valueOf(req.getParameter("project"));
 			
 			ProjectsDAO projectsDAO = new ProjectsDAO(connectionDAO);	
-			Project project = projectsDAO.readObject(1);
+			Project project = projectsDAO.get(1);
 			
 			req.setAttribute("project", project);
 			

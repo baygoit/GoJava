@@ -25,10 +25,11 @@ public class KickstarterTest {
 
 	@Before
 	public void setup(){
+		ConnectionDAO connectionDAO = new ConnectionDAO("kickstarter_db_test", "postgres", "gfhfien17");
 		out = mock(Output.class);
 		in = mock(Input.class);
-		categories = new InnerMemoryCategories();
-		projects = new InnerMemoryProjects();
+		categories = new CategoriesDAO(connectionDAO);
+		projects = new ProjectsDAO(connectionDAO);
 		view = new View(out);
 		quote = mock(Quote.class);
 		kickstart = new Kickstart(view, in, categories, projects, quote);
@@ -46,8 +47,8 @@ public class KickstarterTest {
 		//given
 		Category category1 = new Category("category1");
 		Category category2 = new Category("category2");
-		categories.addCategory(category1);
-		categories.addCategory(category2);
+		categories.add(category1);
+		categories.add(category2);
 			
 		//when
 		when(quote.generateQuote()).thenReturn("quote");
@@ -73,11 +74,11 @@ public class KickstarterTest {
 		//given
 		Category category1 = new Category("category1");
 		Category category2 = new Category("category2");
-		categories.addCategory(category1);
-		categories.addCategory(category2);
+		categories.add(category1);
+		categories.add(category2);
 		Project project1 = new Project(category1);
 		project1.setProject("name1", "description1", 1000, 200, 10, "history1", "videoLink1", "questions");
-		projects.addProject(project1);
+		projects.add(project1);
 		
 		//when
 		when(in.readChoice()).thenReturn("1", "1", "4", "0", "3", "0", "3", "0");
@@ -115,11 +116,11 @@ public class KickstarterTest {
 		//given
 		Category category1 = new Category("category1");
 		Category category2 = new Category("category2");
-		categories.addCategory(category1);
-		categories.addCategory(category2);
+		categories.add(category1);
+		categories.add(category2);
 		Project project1 = new Project(category1);
 		project1.setProject("name1", "description1", 1000, 200, 10, "history1", "videoLink1", "questions");
-		projects.addProject(project1);
+		projects.add(project1);
 		
 		//when
 		when(quote.generateQuote()).thenReturn("quote");
@@ -146,10 +147,10 @@ public class KickstarterTest {
 	public void shouldDisplayProjectInvestmentFields_whenSelectedInvestToProject(){
 		//given
 		Category category1 = new Category("category1");
-		categories.addCategory(category1);
+		categories.add(category1);
 		Project project1 = new Project(category1);
 		project1.setProject("name1", "description1", 1000, 200, 10, "history1", "videoLink1", "questions");
-		projects.addProject(project1);
+		projects.add(project1);
 		
 		//when
 		when(quote.generateQuote()).thenReturn("quote");
@@ -169,10 +170,10 @@ public class KickstarterTest {
 	public void shouldAddInvestedMoney(){
 		//given
 		Category category1 = new Category("category1");
-		categories.addCategory(category1);
+		categories.add(category1);
 		Project project1 = new Project(category1);
 		project1.setProject("name1", "description1", 1000, 200, 10, "history1", "videoLink1", "questions");
-		projects.addProject(project1);
+		projects.add(project1);
 		
 		//when
 		when(quote.generateQuote()).thenReturn("quote");
@@ -187,10 +188,10 @@ public class KickstarterTest {
 	public void shouldDisplayQuestionField_whenSelectedInvestAskQuestion(){
 		//given
 		Category category1 = new Category("category1");
-		categories.addCategory(category1);
+		categories.add(category1);
 		Project project1 = new Project(category1);
 		project1.setProject("name1", "description1", 1000, 200, 10, "history1", "videoLink1", "questions");
-		projects.addProject(project1);
+		projects.add(project1);
 		
 		//when
 		when(quote.generateQuote()).thenReturn("quote");
@@ -208,10 +209,10 @@ public class KickstarterTest {
 	public void shouldAddNewQuestionFromUser(){
 		//given
 		Category category1 = new Category("category1");
-		categories.addCategory(category1);
+		categories.add(category1);
 		Project project1 = new Project(category1);
 		project1.setProject("name1", "description1", 1000, 200, 10, "history1", "videoLink1", "questions");
-		projects.addProject(project1);
+		projects.add(project1);
 		
 		//when
 		when(quote.generateQuote()).thenReturn("quote");

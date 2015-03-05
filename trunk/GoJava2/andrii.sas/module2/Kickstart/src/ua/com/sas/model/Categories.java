@@ -4,12 +4,12 @@ import java.util.List;
 
 public interface Categories {
 
-	void addCategory(Category category);
-
+	void add(Category category);
+	
 	List<Category> getCategories();
+	
+	Category get(int id);
 
-	Category readCategory(int index);
-
-	int getLenth();
+	int size();
 
 }

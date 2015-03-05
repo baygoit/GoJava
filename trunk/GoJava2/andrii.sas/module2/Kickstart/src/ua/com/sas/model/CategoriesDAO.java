@@ -16,21 +16,24 @@ public class CategoriesDAO implements Categories {
 	}
 	
 	@Override
-	public void addCategory(Category category) {
+	public void add(Category category) {
 		try {
 			Statement statement = connection.createStatement();
-			statement.setQueryTimeout(30);
-			statement.execute("insert into categories (name) values (\'" + category.getName() + "\')");
+			statement.execute("INSERT INTO categories (name) VALUES (\'" + category.getName() + "\')");
+			ResultSet rs = statement.executeQuery("SELECT * FROM categories WHERE name = \'" + category.getName() + "\'");
+			while (rs.next()){
+				category.setId(rs.getInt(1));
+			}
 		} catch (SQLException e) {
 			throw new RuntimeException("Connection Failed! Check output console", e);
 		}
 	}
+
 	@Override
 	public List<Category> getCategories() {
 		try {
 			List<Category> categories = new ArrayList<Category>();
 			Statement statement = connection.createStatement();
-			statement.setQueryTimeout(30);
 			ResultSet rs = statement.executeQuery("SELECT * FROM categories");
 			while (rs.next()){
 				categories.add(new Category(rs.getInt(1), rs.getString(2)));
@@ -42,18 +45,13 @@ public class CategoriesDAO implements Categories {
 	}
 	
 	@Override
-	public Category readCategory(int index) {
+	public Category get(int id) {
 		try {
 			Category category = null;
 			Statement statement = connection.createStatement();
-			statement.setQueryTimeout(30);
-			ResultSet rs = statement.executeQuery("select * from categories");
-			int i = 0;
+			ResultSet rs = statement.executeQuery("SELECT * FROM categories WHERE id = " + id);
 			while (rs.next()) {
-				if (index == i){
-					category = new Category(rs.getInt("id"), rs.getString("name"));
-				}
-				i++;
+				category = new Category(rs.getInt(1), rs.getString(2));
 			}
 			return category;
 		} catch (SQLException e) {
@@ -62,11 +60,10 @@ public class CategoriesDAO implements Categories {
 	}
 
 	@Override
-	public int getLenth() {
+	public int size() {
 		try {
 			int size = 0;
 			Statement statement = connection.createStatement();
-			statement.setQueryTimeout(30);
 			ResultSet rs = statement.executeQuery("select count(*) from categories");
 			while (rs.next()) {
 				size = rs.getInt(1);

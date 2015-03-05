@@ -27,8 +27,8 @@ public abstract class CategoriesTest {
 		// when
 		Category category1 = new Category("Category1");
 		Category category2 = new Category("Category2");
-		list.addCategory(category1);
-		list.addCategory(category2);
+		list.add(category1);
+		list.add(category2);
 		categories.add(category1);
 		categories.add(category2);
 
@@ -39,7 +39,7 @@ public abstract class CategoriesTest {
 	@Test
 	public void shouldBeEmptyArray_whenNoOneCategoryInIt() {
 		// then
-		assertEquals(0, list.getLenth());
+		assertEquals(0, list.size());
 	}
 
 	@Test
@@ -47,23 +47,23 @@ public abstract class CategoriesTest {
 		// given
 		Category category1 = new Category("Category1");
 		Category category2 = new Category("Category2");
-		list.addCategory(category1);
-		list.addCategory(category2);
+		list.add(category1);
+		list.add(category2);
 		// then
-		assertEquals(2, list.getLenth());
+		assertEquals(2, list.size());
 	}
 
 	@Test
 	public void shouldGetCategoryByIndex_whenItAdded() {
 		// when
-		Category category1 = new Category("Category1");
+		Category category1 = new Category("category1");
 		Category category2 = new Category("Category2");
-		list.addCategory(category1);
-		list.addCategory(category2);
+		list.add(category1);
+		list.add(category2);
 
 		// then
-		assertEquals(category1, list.readCategory(0));
-		assertEquals(category2, list.readCategory(1));
+		assertEquals(category1, list.get(category1.getId()));
+		assertEquals(category2, list.get(category2.getId()));
 	}
 
 }

@@ -20,13 +20,14 @@ public abstract class ProjectsTest {
 	public void start(){
 		projects = getProjects();
 		categories = getCategories();
-		categories.addCategory(new Category("category1"));
-		categories.addCategory(new Category("category2"));
-		category1 = categories.readCategory(0);
-		category2 = categories.readCategory(1);
+		category1 = new Category("category1");
+		categories.add(category1);
+		category2 = new Category("category2");
+		categories.add(category2);
 		project1 = new Project(category1);
 		project1.setProject("project1", "Some dscr", 100, 31, 2, "some history", "video", "FAQ");
 		project1.setCategoryId(category1.getId());
+		
 	}
 	
 	abstract Projects getProjects();
@@ -34,13 +35,13 @@ public abstract class ProjectsTest {
 	abstract Categories getCategories();
 	
 	@Test
-	public void shouldGetProjectByIndex(){
+	public void shouldGetProjectById(){
 		//when
-		projects.addProject(project1);
-		projects.chooseProjects(category1);
+		projects.add(project1);
+		Project project3 = projects.get(project1.getId());
 		
 		//then
-		assertEquals(project1, projects.readObject(0));
+		assertEquals(project1, project3);
 	}
 	
 
@@ -53,12 +54,12 @@ public abstract class ProjectsTest {
 		
 		//when
 		project2.setProject("project2", "Some dscr2", 100, 31, 2, "some history2", "video2", "FAQ2");
-		projects.addProject(project1);
-		projects.addProject(project2);
+		projects.add(project1);
+		projects.add(project2);
 		chosenProjects.add(project2);
 		
 		//then
-		assertEquals(chosenProjects, projects.chooseProjects(category2));
+		assertEquals(chosenProjects, projects.getProjects(category2));
 	}
 	
 	@Test
@@ -67,12 +68,12 @@ public abstract class ProjectsTest {
 		Project project2 = new Project(category1);
 		project2.setCategoryId(category1.getId());
 		project2.setProject("project2", "Some dscr2", 100, 31, 2, "some history2", "video2", "FAQ2");
-		projects.addProject(project1);
-		projects.addProject(project2);
-		projects.chooseProjects(category2);
+		projects.add(project1);
+		projects.add(project2);
+		projects.getProjects(category2);
 		
 		//then
-		assertEquals(0, projects.getLenth());
+		assertEquals(0, projects.size());
 	}
 	
 	@Test
@@ -81,12 +82,12 @@ public abstract class ProjectsTest {
 		Project project2 = new Project(category2);
 		project2.setCategoryId(category2.getId());
 		project2.setProject("project2", "Some dscr2", 100, 31, 2, "some history2", "video2", "FAQ2");
-		projects.addProject(project1);
-		projects.addProject(project2);
-		projects.chooseProjects(category2);
+		projects.add(project1);
+		projects.add(project2);
+		projects.getProjects(category2);
 		
 		//then
-		assertEquals(1, projects.getLenth());
+		assertEquals(1, projects.size());
 	}
 	
 }
