@@ -1,7 +1,9 @@
 package com.kickstarter.controller;
 
-import com.kickstarter.model.DataStorage;
+import com.kickstarter.model.CategoryStorage;
+import com.kickstarter.model.QuoteStorage;
 import com.kickstarter.model.Project;
+import com.kickstarter.model.ProjectStorage;
 import com.kickstarter.model.Сategory;
 import com.kickstarter.view.ConsoleView;
 import com.kickstarter.view.InPut;
@@ -9,8 +11,10 @@ import com.kickstarter.view.InPut;
 public class Kickstarter {
 
     public static void main(String[] args) {
-    	DataStorage dataStorage = new DataStorage();
+    	QuoteStorage dataStorage = new QuoteStorage();
     	ConsoleView consoleView = new ConsoleView();
+    	CategoryStorage categories = new CategoryStorage();
+    	ProjectStorage projects = new ProjectStorage();
     	InPut inPut = new InPut();
     	
     	String quote1 = "\"Lost time is never found again.\"";
@@ -35,9 +39,9 @@ public class Kickstarter {
     	Сategory music = new Сategory("MUSIC");
     	Сategory education = new Сategory("EDUCATION");
 
-    	dataStorage.addCategory(food);
-    	dataStorage.addCategory(music);
-    	dataStorage.addCategory(education);
+    	categories.addCategory(food);
+    	categories.addCategory(music);
+    	categories.addCategory(education);
     	
     	Project project1 = new Project("Green Pea Cookie. ", "We want to produce green cookies. ",
     				"Coming soon... ","http:gps.rom.new", 8000, 3654, 17);
@@ -59,14 +63,14 @@ public class Kickstarter {
     	project5.setСategory(education);
     	project6.setСategory(education);
     	
-    	dataStorage.addProject(project1);
-    	dataStorage.addProject(project2);
-    	dataStorage.addProject(project3);
-    	dataStorage.addProject(project4);
-    	dataStorage.addProject(project5);
-    	dataStorage.addProject(project6);
+    	projects.addProject(project1);
+    	projects.addProject(project2);
+    	projects.addProject(project3);
+    	projects.addProject(project4);
+    	projects.addProject(project5);
+    	projects.addProject(project6);
     
-        KickstarterEngine engine = new KickstarterEngine(consoleView, dataStorage, inPut);
+        KickstarterEngine engine = new KickstarterEngine(consoleView, dataStorage, inPut, categories, projects);
         engine.run();
     }
 }

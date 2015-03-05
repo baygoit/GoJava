@@ -11,62 +11,55 @@ import org.junit.Test;
 
 public class DataStorageTest {
 	
-	private DataStorage storage;
+	private QuoteStorage quoteStorage;
+	private CategoryStorage categoryStorage;
+	private ProjectStorage projectStorage;
 	
 	@Before
 	public void setUp() {
-		storage = new DataStorage();
+		quoteStorage = new QuoteStorage();
+		categoryStorage = new CategoryStorage();
+		projectStorage = new ProjectStorage ();
 	}
 	
 	@Test
 	public void shouldListContainsCategory_whenAddCategory() {
-		// when
 		Сategory category = new Сategory("Food");
-		storage.addCategory(category);
-		// then
-		assertTrue(storage.getCategoriesList().contains(category));
+		categoryStorage.addCategory(category);
+		assertTrue(categoryStorage.getCategoriesList().contains(category));
 	}
 	
 	@Test
 	public void shouldSize0_whenNoCategory() {
-		// when
 		int size = 0;
-		// then
-		assertEquals(size, storage.getSizeCategories());
+		assertEquals(size, categoryStorage.getSizeCategories());
 	}
 	
 	@Test
 	public void shouldGetCategoryByIndexPlus1() {
 		Сategory category1 = new Сategory("Sport");
-		// when
-		storage.addCategory(category1);
-		// then
-		assertSame(category1, storage.getSpecificCategory(1));
+		categoryStorage.addCategory(category1);
+		assertSame(category1, categoryStorage.getSpecificCategory(1));
 	}	
 	
 	@Test
 	public void shouldSizeTwo_whenCategorytwo() {
-		// when
 		int size = 2;
-		storage.addCategory(new Сategory("Music"));
-		storage.addCategory(new Сategory("Sport"));		
-		// then
-		assertEquals(size, storage.getSizeCategories());
+		categoryStorage.addCategory(new Сategory("Music"));
+		categoryStorage.addCategory(new Сategory("Sport"));		
+		assertEquals(size, categoryStorage.getSizeCategories());
 	}
 	
 	@Test
 	public void shouldEmptyProjectsList_whenNoProjects() {
 		Сategory category1 = new Сategory("Sport");
-		storage.addCategory(category1);
-		// when
+		categoryStorage.addCategory(category1);
 		int size = 0;
-		// then
-		assertEquals(size, storage.getSpecificProjects(category1).size());
+		assertEquals(size, projectStorage.getSpecificProjects(category1).size());
 	}
 	
 	@Test
 	public void shouldTwoProjects_whenAddTwoProjects() {
-		// when
 		Сategory category = new Сategory("Music");
 		Project project = new Project("Food","description","history","url",12,23,4);
 		Project project2 = new Project("Asasas","description","history","url",45,67,900);
@@ -74,18 +67,17 @@ public class DataStorageTest {
 		project.setСategory(category);
 		project2.setСategory(category);
 		
-		storage.addProject(project);
-		storage.addProject(project2);
+		projectStorage.addProject(project);
+		projectStorage.addProject(project2);
 		
-		storage.getSpecificProjects(category);
-		Project projectResult = storage.getProject(1);
-		// then
+		projectStorage.getSpecificProjects(category);
+		Project projectResult = projectStorage.getProject(1);
+		
 		assertSame(project, projectResult);
 		
-		//when
 		int i = 2;
-		int projectResult2 = storage.getSizeProjectsOfCategory();
-		//then
+		int projectResult2 = projectStorage.getSizeProjectsOfCategory();
+		
 		assertSame(i, projectResult2);	
 	}
 }
