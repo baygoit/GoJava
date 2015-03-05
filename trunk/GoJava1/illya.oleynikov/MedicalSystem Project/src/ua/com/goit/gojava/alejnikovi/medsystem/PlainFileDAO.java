@@ -10,11 +10,11 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-class FileWorker {
+class PlainFileDAO {
 	
 	private static final String PATH = "C:\\workspace\\MedicalSystem Project\\";
 
-	public FileWorker() {
+	public PlainFileDAO() {
 		// TODO Auto-generated constructor stub
 	}
 	

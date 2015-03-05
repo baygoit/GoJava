@@ -24,24 +24,24 @@ public class FileWorkerTest {
 	
 	@Before
 	public void clearFile() throws IOException {
-		FileWorker.clearFile(fileName);
+		PlainFileDAO.clearFile(fileName);
 	}
 	
 	@Test
 	public void testWriteToFile() throws IOException {
-		FileWorker.writeToFile(fileName, "test value to write");
-		List<String> valuesFromFile = FileWorker.readFromFile(fileName);
+		PlainFileDAO.writeToFile(fileName, "test value to write");
+		List<String> valuesFromFile = PlainFileDAO.readFromFile(fileName);
 		assertEquals("test value to write",valuesFromFile.get(0));
 	}
 
 	@Test
 	public void testUpdateFile() throws IOException {
-		FileWorker.writeToFile(fileName, listToWrite);
+		PlainFileDAO.writeToFile(fileName, listToWrite);
 		Specialization testSpec = new Specialization(); 
 		testSpec = (Specialization)listToWrite.get(0);
 		testSpec.setName("New specialisation");
-		FileWorker.updateFile(fileName, listToWrite);
-		List<String> valuesFromFile = FileWorker.readFromFile(fileName);
+		PlainFileDAO.updateFile(fileName, listToWrite);
+		List<String> valuesFromFile = PlainFileDAO.readFromFile(fileName);
 		assertEquals("New specialisation",valuesFromFile.get(0));
 	}
 

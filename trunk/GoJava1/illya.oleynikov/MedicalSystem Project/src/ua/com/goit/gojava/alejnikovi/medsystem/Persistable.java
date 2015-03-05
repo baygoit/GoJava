@@ -5,6 +5,6 @@ import java.io.Serializable;
 interface Persistable extends Serializable {
 	
 	public String markupForFile();
-	public Object createObjFromFile();
+	public Object createObjFromFile(String string);
 
 }

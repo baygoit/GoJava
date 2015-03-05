@@ -5,19 +5,23 @@ import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Specialization implements Persistable{
 	
 	private static Set<Specialization> specializations = new LinkedHashSet<Specialization>();
 	private static final String FILENAME = "specializations.csv";
+	private static AtomicInteger nextId = new AtomicInteger();
 	
 	private String name;
+	private int id;
 	
 	public Specialization() {
 
 	}
 		
 	public Specialization (String name){
+		this.id = nextId.incrementAndGet();
 		this.name = name;
 	}
 
@@ -27,6 +31,10 @@ public class Specialization implements Persistable{
 	
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public int getId() {
+		return id;
 	}
 
 	List<Doctor> getDoctors (){
@@ -40,7 +48,7 @@ public class Specialization implements Persistable{
 	}
 	
 	private void writeToFile() throws IOException{
-		FileWorker.writeToFile(FILENAME, this.markupForFile());
+		PlainFileDAO.writeToFile(FILENAME, this.markupForFile());
 	}
 	
 	public static void createNewSpecialisation(String name) throws IOException{
@@ -50,7 +58,7 @@ public class Specialization implements Persistable{
 	}
 	
 	static void readSpecializationsFromFile() throws IOException, MedicalSystemException {
-		List<String> list = FileWorker.readFromFile(FILENAME);
+		List<String> list = PlainFileDAO.readFromFile(FILENAME);
 		for(String specialisation:list){
 			specializations.add(new Specialization(specialisation));
 		}
@@ -62,16 +70,20 @@ public class Specialization implements Persistable{
 		return specializations;
 	}
 	
+	public static void deleteSpecialisation(String name) throws IOException{
+		
+	}
+	
 	@Override
 	public String markupForFile() {
 		String fileString = new String();
-		fileString = this.getName();
+		fileString = this.id + ", " + this.getName();
 		return fileString;
 	}
 	
 	@Override
-	public Specialization createObjFromFile() {
-		// TODO Auto-generated method stub
+	public Specialization createObjFromFile(String string) {
+		
 		return null;
 	}
 
@@ -99,7 +111,5 @@ public class Specialization implements Persistable{
 			return false;
 		return true;
 	}
-
-
 
 }

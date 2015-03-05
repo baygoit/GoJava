@@ -1,5 +1,5 @@
-<%@page import="ua.com.goit.gojava.alejnikovi.medsystem.Specialization"%>
-<%@page import="java.util.Set"%>
+<%@page import="ua.com.goit.gojava.alejnikovi.medsystem.*"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -11,19 +11,24 @@
 <body>
     <b>Список всех специализаций:</b><br>
     <table border="1">
-        <%Set <Specialization> set = Specialization.getSpecializations();
-          for (Specialization spec: set) {%>
-           <%="<tr><td>" + spec.getName() + "</td></tr>"%>
+        <%
+         	SpecializationsDAO db = new SpecializationsDAO();
+                 List <String> specs = db.getAll();
+                   for (String spec: specs) {
+         %>
+           <%="<tr><td>" + spec + "</td>"+
+                   "<td><input type='submit' value='Delete'></td></tr>"%>
         <%} %>
     </table>
     <p>
-    <form action="CreateNew" method="GET">
-        <input name="specialization" type="text">
+    <form action="CreateNew" method="POST">
+        <input name="createSpecialization" type="text">
         <input type="submit" value="Submit">
     </form>
     </p>
     <p>
     <a href="UpdateList.jsp">Изменить список</a>
     </p>
+    
 </body>
 </html>
