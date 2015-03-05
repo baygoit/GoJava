@@ -98,7 +98,7 @@
 			    			<td><input name="name" value ="" ></td>
 			    			<td><input name="bankName" value ="" ></td>
 			    			<td><select name="currency" >
-							  	<option disabled>Выберите валюту</option>
+							  	<option disabled selected value="">Выберите валюту</option>
 			   						<%
 				   						for(Currency currency: Currency.getAvailableCurrencies()) {
 											out.println("<option>"+currency.getCurrencyCode()+"</option>");

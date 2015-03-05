@@ -1,5 +1,6 @@
 package ua.com.goit.gojava.POM.dataModel.cash;
 
+import java.util.Currency;
 import java.util.Date;
 
 import ua.com.goit.gojava.POM.dataModel.common.Money;
@@ -8,7 +9,6 @@ public class CashMovementEntry {
 
 	private long id;
 	private Date date;
-	private String description;
 	private BankAccount bankAccount;
 	private Money sum;
 	
@@ -36,18 +36,6 @@ public class CashMovementEntry {
 		
 	}
 	
-	public String getDescription() {
-		
-		return description;
-		
-	}
-	
-	public void setDescription(String description) {
-		
-		this.description = description;
-		
-	}
-	
 	public Money getSum() {
 		
 		return sum;
@@ -57,6 +45,28 @@ public class CashMovementEntry {
 	public void setSum(Money sum) {
 		
 		this.sum = sum;
+		
+	}
+
+	public BankAccount getBankAccount() {
+		
+		return bankAccount;
+		
+	}
+
+	public void setBankAccount(BankAccount bankAccount) {
+		
+		this.bankAccount = bankAccount;
+		
+	}
+	
+	public Currency getCurrency() {
+		
+		Currency currency = null;
+		if(bankAccount != null) {
+			currency = bankAccount.getCurrency();
+		}
+		return currency;
 		
 	}
 

@@ -5,17 +5,20 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Currency;
+import java.util.Date;
 import java.util.List;
 
 import ua.com.goit.gojava.POM.dataModel.POMDataModelException;
-import ua.com.goit.gojava.POM.dataModel.cash.BankAccount;
+import ua.com.goit.gojava.POM.dataModel.cash.CashMovementEntry;
+import ua.com.goit.gojava.POM.dataModel.common.Money;
 
 
-public class BankAccountDAO {
+public class CashMovementDAO {
 	
-	private static final String CLASS_TABLE = "bank_account"; 
+	private static final String CLASS_TABLE = "cash_movement"; 
 
 	private Connection getDBConnection() {
 		
@@ -30,23 +33,36 @@ public class BankAccountDAO {
 	}
 
 	
-	private BankAccount getObjectFromRS(ResultSet rs) throws SQLException {
+	private CashMovementEntry getObjectFromRS(ResultSet rs) throws SQLException, POMDataModelException {
 		
-		BankAccount bankAccount = new BankAccount();
+		CashMovementEntry cashMovementEntry = new CashMovementEntry();
 		
-		bankAccount.setId(rs.getLong("ID"));
+		cashMovementEntry.setId(rs.getLong("ID"));
+		
+		Date date = null;
+		Timestamp timestamp = rs.getTimestamp("date");
+		if(timestamp != null) {
+			date = new Date(timestamp.getTime());
+		}
+		cashMovementEntry.setDate(date);
+		
+		BankAccountDAO bankAccountDAO = new BankAccountDAO();
+		long accountId= rs.getLong("bank_account_id");
+		cashMovementEntry.setBankAccount(bankAccountDAO.retrieveById(accountId));;
+		
+		Currency currency = null;
 		String currencyCode = rs.getString("currency");
 			if(currencyCode != null) {
-				bankAccount.setCurrency(Currency.getInstance(currencyCode));
+				currency = Currency.getInstance(currencyCode);
 			}
-		bankAccount.setName(rs.getString("name"));
-		bankAccount.setBankName(rs.getString("bank_name"));
+
+		cashMovementEntry.setSum(new Money(rs.getDouble("sum"), currency));;
 		
-		return bankAccount;
+		return cashMovementEntry;
 		
 	}
 
-	public BankAccount create() throws POMDataModelException {
+	public CashMovementEntry create() throws POMDataModelException {
 
 		ResultSet rs = null;
 		Statement statement = null; 	
@@ -57,7 +73,7 @@ public class BankAccountDAO {
 								+ "	RETURNING ID "
 								;
 		
-		BankAccount bankAccount = new BankAccount();
+		CashMovementEntry cashMovementEntry = new CashMovementEntry();
 		
 		try {
 
@@ -66,13 +82,13 @@ public class BankAccountDAO {
 			 
 			if (rs.next()) {
 				
-				bankAccount.setId(rs.getLong("ID"));
+				cashMovementEntry.setId(rs.getLong("ID"));
  				
 			}
 			
 		} catch (SQLException | NullPointerException e) {
  
-			throw new POMDataModelException("Could not create new Bank Account: "+e.getMessage(), e);
+			throw new POMDataModelException("Could not create new Cash Movement Entry: "+e.getMessage(), e);
  
 		} finally {
  
@@ -80,40 +96,45 @@ public class BankAccountDAO {
  
 		}
 		
-		return bankAccount;
+		return cashMovementEntry;
 	
 	}
 	
-	public BankAccount create(BankAccount bankAccount) throws POMDataModelException {
+	public CashMovementEntry create(CashMovementEntry cashMovementEntry) throws POMDataModelException {
 
 		ResultSet rs = null;
 		PreparedStatement statement = null; 	
 		Connection connection = getDBConnection();
 		
 		String insertTableSQL = "INSERT INTO "+CLASS_TABLE+" ("
-										+ " 	 name "
-										+ " 	,bank_name "
+										+ " 	 date "
+										+ " 	,bank_account_id "
+										+ " 	,sum "
 										+ " 	,currency "
 										+ "	   ) "
-										+ " VALUES (?,?,?) "
+										+ " VALUES (?,?,?,?) "
 										+ "	RETURNING ID "
 														;
 		
 		try {
 
+			java.sql.Timestamp sqlTime = new java.sql.Timestamp(cashMovementEntry.getDate().getTime());
+			Money sum = cashMovementEntry.getSum();
+			
 			statement = connection.prepareStatement(insertTableSQL);
-			statement.setString(1, bankAccount.getName());
-			statement.setString(2, bankAccount.getBankName());
-			statement.setString(3, bankAccount.getCurrency().getCurrencyCode());
+			statement.setTimestamp(1, sqlTime);
+			statement.setLong(2, cashMovementEntry.getBankAccount().getId());
+			statement.setDouble(3, sum.getValue().doubleValue());
+			statement.setString(4, sum.getCurrency().getCurrencyCode());
 			
 			rs = statement.executeQuery();
 			if (rs.next()) {
-				bankAccount.setId(rs.getLong("ID"));
+				cashMovementEntry.setId(rs.getLong("ID"));
  			}
 			
 		} catch (SQLException | NullPointerException e) {
  
-			throw new POMDataModelException("Could not create new Bank Account: "+e.getMessage() , e);
+			throw new POMDataModelException("Could not create new Cash Movement Entry: "+e.getMessage() , e);
  
 		} finally {
  
@@ -121,13 +142,13 @@ public class BankAccountDAO {
  
 		}
 		
-		return bankAccount;
+		return cashMovementEntry;
 	
 	}
 	
-	public List<BankAccount> retrieveAll() throws POMDataModelException {
+	public List<CashMovementEntry> retrieveAll() throws POMDataModelException {
 
-		List<BankAccount> resultList = new ArrayList<BankAccount>();
+		List<CashMovementEntry> resultList = new ArrayList<CashMovementEntry>();
 		
 		ResultSet rs = null;
 		Statement statement = null; 	
@@ -144,15 +165,15 @@ public class BankAccountDAO {
 			 
 			while (rs.next()) {
 				
-				BankAccount bankAccount = getObjectFromRS(rs);
+				CashMovementEntry cashMovementEntry = getObjectFromRS(rs);
 				
-				resultList.add(bankAccount);
+				resultList.add(cashMovementEntry);
 				
 			}
 			
 		} catch (SQLException e) {
  
-			throw new POMDataModelException("Could not retrieve all Bank Accounts: "+e.getMessage(), e);
+			throw new POMDataModelException("Could not retrieve all Cash Movement Entries: "+e.getMessage(), e);
  
 		} finally {
  
@@ -164,9 +185,9 @@ public class BankAccountDAO {
 	
 	}
 	
-	public BankAccount retrieveById(Long id) throws POMDataModelException {
+	public CashMovementEntry retrieveById(Long id) throws POMDataModelException {
 
-		BankAccount result = new BankAccount();
+		CashMovementEntry result = new CashMovementEntry();
 		
 		ResultSet rs = null;
 		PreparedStatement statement = null; 	
@@ -190,7 +211,7 @@ public class BankAccountDAO {
 			
 		} catch (SQLException e) {
  
-			throw new POMDataModelException("Could not retrieve Bank Account by ID: "+e.getMessage() , e);
+			throw new POMDataModelException("Could not retrieve Cash Movement Entry by ID: "+e.getMessage() , e);
  
 		} finally {
  
@@ -202,7 +223,7 @@ public class BankAccountDAO {
 	
 	}
 
-	public void update(BankAccount bankAccount) throws POMDataModelException {
+	public void update(CashMovementEntry cashMovementEntry) throws POMDataModelException {
 
 		ResultSet rs = null;
 		PreparedStatement statement = null;
@@ -210,25 +231,31 @@ public class BankAccountDAO {
 		
 		String updateTableSQL = "UPDATE "+CLASS_TABLE
 								+ " SET "
-								+ " 	 name = ? "
-								+ " 	,bank_name = ? "
+								+ " 	 date = ? "
+								+ " 	,bank_account_id = ? "
+								+ " 	,sum = ? "
 								+ " 	,currency = ? "
 								+ "	WHERE ID = ? "
 								;
 		
 		try {
 
+			java.sql.Timestamp sqlTime = new java.sql.Timestamp(cashMovementEntry.getDate().getTime());
+			Money sum = cashMovementEntry.getSum();
+			
 			statement = connection.prepareStatement(updateTableSQL);
-			statement.setString(1, bankAccount.getName());
-			statement.setString(2, bankAccount.getBankName());
-			statement.setString(3, bankAccount.getCurrency().getCurrencyCode());
-			statement.setLong(4,  bankAccount.getId());
+			statement.setTimestamp(1, sqlTime);
+			statement.setLong(2, cashMovementEntry.getBankAccount().getId());
+			statement.setDouble(3, sum.getValue().doubleValue());
+			statement.setString(4, sum.getCurrency().getCurrencyCode());
+			
+			statement.setLong(5,  cashMovementEntry.getId());
 			
 			statement.execute();
 				
 		} catch (SQLException | NullPointerException e) {
  
-			throw new POMDataModelException("Could not update Bank Account: "+e.getMessage(), e);
+			throw new POMDataModelException("Could not update Cash Movement Entry: "+e.getMessage(), e);
  
 		} finally {
  
@@ -238,7 +265,7 @@ public class BankAccountDAO {
 	
 	}
 	
-	public void delete(BankAccount bankAccount) throws POMDataModelException {
+	public void delete(CashMovementEntry cashMovementEntry) throws POMDataModelException {
 
 		ResultSet rs = null;
 		PreparedStatement statement = null;
@@ -251,15 +278,15 @@ public class BankAccountDAO {
 		try {
 
 			statement = connection.prepareStatement(updateTableSQL);
-			statement.setLong(1,  bankAccount.getId());
+			statement.setLong(1,  cashMovementEntry.getId());
 			
 			statement.execute();
 			
-			bankAccount = null;
+			cashMovementEntry = null;
 				
 		} catch (SQLException e) {
  
-			throw new POMDataModelException("Could not delete Bank Account: "+e.getMessage(), e);
+			throw new POMDataModelException("Could not delete Cash Movement Entry: "+e.getMessage(), e);
  
 		} finally {
  

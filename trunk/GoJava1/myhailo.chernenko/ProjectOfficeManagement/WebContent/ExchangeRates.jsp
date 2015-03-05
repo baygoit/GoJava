@@ -133,7 +133,7 @@
 				   			<td></td>
 			    			<td><input name="date" value ="" ></td>
 			    			<td><select name="fromCurrency" >
-							  	<option disabled>Выберите валюту</option>
+							  	<option disabled selected value="">Выберите валюту</option>
 			   						<%
 				   						for(Currency currency: Currency.getAvailableCurrencies()) {
 											out.println("<option>"+currency.getCurrencyCode()+"</option>");
