@@ -38,7 +38,8 @@ public class Project {
                 this.name = name;
                 this.collected = collected;
                 this.amount = amount;
-                name = description;
+                this.description = description;
+                this.days = days;
                 details = new AdditionalInfo(history, video);
     }
 

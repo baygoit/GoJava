@@ -28,14 +28,14 @@ public class ProjectsDAO implements Projects {
                     "insert into projects "
                     + "(name, description, id_cat, collected, amount, days, history, video) "
                     + "values (?, ?, ?, ?, ?, ?, ?)");
-            statement.setString(2, project.getName());
-            statement.setString(3, project.getDescription());
-            statement.setInt(4, project.getCategory().getId());
-            statement.setDouble(5, project.getCollected());
-            statement.setDouble(6, project.getAmount());
-            statement.setInt(7, project.getDays());
-            statement.setString(8, project.getDetails().getHistory());
-            statement.setString(9, project.getDetails().getVideo());
+            statement.setString(1, project.getName());
+            statement.setString(2, project.getDescription());
+            statement.setInt(3, project.getCategory().getId());
+            statement.setDouble(4, project.getCollected());
+            statement.setDouble(5, project.getAmount());
+            statement.setInt(6, project.getDays());
+            statement.setString(7, project.getDetails().getHistory());
+            statement.setString(8, project.getDetails().getVideo());
             statement.execute();
         } catch (SQLException e) {
             throw new RuntimeException("Something happend while adding new project", e);
@@ -75,23 +75,23 @@ public class ProjectsDAO implements Projects {
             Statement statement = connection.createStatement(); 
 
             ResultSet rs = statement.executeQuery(
-                            "select "
+                            "SELECT "
                             + "c.id_cat as category_id, "
                             + "c.name as category_name, "
                             + "p.name as project_name, "
-                            + "description, "
+                            + "p.description as project_description, "
                             + "p.id_prj as project_id, "
-                            + "collected, "
-                            + "amount, "
-                            + "days, "
-                            + "history, "
-                            + "video "
-                            + " from projects p, categories c where p.id_cat = c.id_cat and p.id_prj = " + index);
+                            + "p.collected, "
+                            + "p.amount, "
+                            + "p.days, "
+                            + "p.history, "
+                            + "p.video "
+                            + " FROM projects p, categories c WHERE p.id_cat = c.id_cat AND p.id_prj = " + index);
             
             if (rs.next()) {
                 Project project = new Project(rs.getInt("project_id"), 
                                             rs.getString("project_name"), 
-                                            rs.getString("description"),
+                                            rs.getString("project_description"),
                                             rs.getDouble("collected"),
                                             rs.getDouble("amount"),
                                             rs.getInt("days"),

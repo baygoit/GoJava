@@ -97,7 +97,9 @@
                 <h3>Donate</h3>
                 <hr>
                 <input type="text" class="form-control" name="name" placeholder="Name">
+                <hr>
                 <input type="text" class="form-control" name="card" placeholder="Card number">
+                <hr>
                 <input type="text" class="form-control" name="amount" placeholder="Amount">
                 <hr>              
               </div>
@@ -106,7 +108,7 @@
           <div class="col-xs-9">
         
           
-            <a href="/servlets/categories?money=?" class="btn btn-success pull-right btnNext">Donate<i class="glyphicon glyphicon-plus"></i></a></div>
+            <a href="/project?id=${payment.id}" class="btn btn-success pull-right btnNext">Donate<i class="glyphicon glyphicon-plus"></i></a></div>
         </div>
       </div>
                                                                                        
