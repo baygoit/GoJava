@@ -16,7 +16,11 @@ public class AnagramTest {
 	
 	private void testSentence(String expected, String actual) {
 		assertEquals(expected, anagram.getReversedSentence(actual));
-
+	}
+	
+	@Test
+	public void should_empty_whenNull() {
+		testSentence("", null);
 	}
 	
 	@Test
@@ -48,16 +52,6 @@ public class AnagramTest {
 	@Test
 	public void should_yx_wz_when_zw_xy() {
 		testSentence("wz yx", "zw xy");
-	}
-	
-	@Test
-	public void should_reversedWord_when_word() {
-		testSentence("elppa", "apple");	
-	}
-	
-	@Test
-	public void should_reversedWordCombination_when_wordCombination() {
-		testSentence("der elppa", "red apple");
 	}
 	
 	@Test
