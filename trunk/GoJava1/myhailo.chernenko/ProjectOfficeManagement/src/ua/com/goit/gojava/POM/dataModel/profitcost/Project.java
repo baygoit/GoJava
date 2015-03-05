@@ -12,8 +12,8 @@ import java.io.Serializable;
 
 
 
-import ua.com.goit.gojava.POM.dataModel.documents.FinancialProjectPlan;
-//import ua.com.goit.gojava.POM.persistence.abstraction.DataObject;
+
+import ua.com.goit.gojava.POM.dataModel.temporaryUnusedClases.FinancialProjectPlan;
 
 public class Project {//implements DataObject, Serializable {
 	

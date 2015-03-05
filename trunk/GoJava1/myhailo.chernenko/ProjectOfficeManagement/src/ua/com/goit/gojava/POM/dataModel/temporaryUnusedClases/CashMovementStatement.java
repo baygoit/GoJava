@@ -1,4 +1,4 @@
-package ua.com.goit.gojava.POM.dataModel.cash;
+package ua.com.goit.gojava.POM.dataModel.temporaryUnusedClases;
 
 //import ua.com.goit.gojava.POM.dataModel.common.FinancialStatement;
 

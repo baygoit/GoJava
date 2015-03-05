@@ -15,6 +15,8 @@ import org.junit.Test;
 
 import ua.com.goit.gojava.POM.dataModel.POMDataModelException;
 import ua.com.goit.gojava.POM.dataModel.POMDataModelRuntimeException;
+import ua.com.goit.gojava.POM.dataModel.temporaryUnusedClases.FinancialEntry;
+import ua.com.goit.gojava.POM.dataModel.temporaryUnusedClases.FinancialStatement;
 import ua.com.goit.gojava.POM.persistence.postgresDB.ExchangeRateDAO;
 
 public class FinancialStatementTest {

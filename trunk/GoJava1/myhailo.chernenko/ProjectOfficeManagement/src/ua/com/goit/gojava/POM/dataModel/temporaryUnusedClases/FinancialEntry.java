@@ -1,7 +1,9 @@
-package ua.com.goit.gojava.POM.dataModel.common;
+package ua.com.goit.gojava.POM.dataModel.temporaryUnusedClases;
 
 import java.io.Serializable;
 import java.util.Date;
+
+import ua.com.goit.gojava.POM.dataModel.common.Money;
 
 public abstract class FinancialEntry implements Serializable {
 

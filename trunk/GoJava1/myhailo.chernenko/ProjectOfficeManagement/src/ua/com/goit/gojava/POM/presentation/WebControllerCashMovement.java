@@ -28,7 +28,11 @@ public class WebControllerCashMovement extends HttpServlet {
 
 		req.setCharacterEncoding("UTF-8");
 		
-		if (req.getParameter("AddNew") != null) {
+		if (req.getParameter("bankAccountFilter") != null) {
+			
+			setBankAccountFilter(req);
+			
+		} else if (req.getParameter("AddNew") != null) {
 			
 			createCashMovementEntry(req);
 			
@@ -52,6 +56,25 @@ public class WebControllerCashMovement extends HttpServlet {
 		
 		resp.sendRedirect(req.getHeader("referer"));
 		
+	}
+
+	private void setBankAccountFilter(HttpServletRequest req) {
+		
+		BankAccount bankAccount = null;
+		
+		if(!req.getParameter("bankAccountFilter").isEmpty()) {
+		
+			BankAccountDAO bankAccountDAO = new BankAccountDAO();
+			long id = Long.parseLong(req.getParameter("bankAccountFilter"));
+			try {
+				bankAccount = bankAccountDAO.retrieveById(id);
+			} catch (POMDataModelException e) {
+				req.getSession(false).setAttribute("errorMessage", "Can not retrieve Bank Account for filter: "+e.getMessage());
+				return;	
+			}
+		}
+		
+		req.getSession(false).setAttribute("bankAccountFilterValue", bankAccount );
 	}
 
 	private void loadCashMovementEntryForEdit(HttpServletRequest req) {

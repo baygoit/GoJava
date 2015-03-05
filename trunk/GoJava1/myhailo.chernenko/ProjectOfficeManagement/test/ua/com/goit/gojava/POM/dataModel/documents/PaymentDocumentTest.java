@@ -7,10 +7,10 @@ import org.junit.Before;
 import org.junit.Test;
 
 import ua.com.goit.gojava.POM.dataModel.cash.BankAccount;
-import ua.com.goit.gojava.POM.dataModel.documents.PaymentDocument;
 import ua.com.goit.gojava.POM.dataModel.profitcost.CostItem;
 import ua.com.goit.gojava.POM.dataModel.profitcost.Project;
 import ua.com.goit.gojava.POM.dataModel.profitcost.ProjectStage;
+import ua.com.goit.gojava.POM.dataModel.temporaryUnusedClases.PaymentDocument;
 
 public class PaymentDocumentTest {
 

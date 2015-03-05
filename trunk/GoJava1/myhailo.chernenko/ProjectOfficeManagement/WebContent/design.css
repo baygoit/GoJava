@@ -13,6 +13,16 @@ body {
   
 }
 
+    /* filter on header */
+.filter {
+  padding: 2px;
+  text-align: left;
+  font-size:  12pt;
+  padding-left: 15px;
+  padding-bottom: 10px;
+  
+}
+
   	/* table style */
 .table {
   border:1px solid black;

@@ -24,30 +24,58 @@ public class WebControllerBankAccount extends HttpServlet {
 
 		req.setCharacterEncoding("UTF-8");
 		
-		if (req.getParameter("AddNew") != null) {
+		if (req.getParameter("OpenCashMovement") != null) {
+			
+			setBankAccountFilter(req);
+			resp.sendRedirect("CashMovement.jsp");
+			
+		} else if (req.getParameter("AddNew") != null) {
 			
 			createBankAccount(req);
+			resp.sendRedirect(req.getHeader("referer"));
 			
 		} else if (req.getParameter("DellCurrent")!=null) {
 		
 			deleteBankAccount(req);
+			resp.sendRedirect(req.getHeader("referer"));
 			
 		} else if (req.getParameter("EditCurrent")!=null) {
 			
 			loadBankAccountForEdit(req);
-		
+			resp.sendRedirect(req.getHeader("referer"));
+			
 		} else if (req.getParameter("Edit")!=null) {
 			
 			updateBankAccount(req);
-			
+			resp.sendRedirect(req.getHeader("referer"));
+				
 		} else if (req.getParameter("UndoEdit")!=null) {
 			
 			req.getSession(false).setAttribute("currentAccountForEdit", null);
+			resp.sendRedirect(req.getHeader("referer"));
 		
 		}
 		
-		resp.sendRedirect(req.getHeader("referer"));
 
+	}
+
+	private void setBankAccountFilter(HttpServletRequest req) {
+		
+		BankAccount bankAccount = null;
+		
+		if(!req.getParameter("OpenCashMovement").isEmpty()) {
+		
+			BankAccountDAO bankAccountDAO = new BankAccountDAO();
+			long id = Long.parseLong(req.getParameter("OpenCashMovement"));
+			try {
+				bankAccount = bankAccountDAO.retrieveById(id);
+			} catch (POMDataModelException e) {
+				req.getSession(false).setAttribute("errorMessage", "Can not retrieve Bank Account for filter: "+e.getMessage());
+				return;	
+			}
+		}
+		
+		req.getSession(false).setAttribute("bankAccountFilterValue", bankAccount );
 	}
 
 	private void loadBankAccountForEdit(HttpServletRequest req) {

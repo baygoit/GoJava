@@ -1,4 +1,4 @@
-package ua.com.goit.gojava.POM.dataModel.common;
+package ua.com.goit.gojava.POM.dataModel.temporaryUnusedClases;
 
 import java.io.Serializable;
 import java.util.ArrayList;

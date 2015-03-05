@@ -60,6 +60,30 @@
 		
 		<div class="pageHeader">Записи о движении денег</div>
 		
+		<form name="CashMovementFilter"
+	    	action="CashMovementWebController"
+	    	method=POST>
+	    
+			<div class="filter">
+				фильтр по банковскому счету: 
+				<select name="bankAccountFilter" onchange="this.form.submit()" >
+			  		<%
+			  			
+			  			Object baFilter = (BankAccount) request.getSession(false).getAttribute("bankAccountFilterValue");
+			  			out.println("<option "+( (baFilter == null)? "selected":"" )+" value=\"\" > Отображать все </option>");		
+					
+			  			BankAccountDAO bankAccountDAO = new BankAccountDAO();
+						for(BankAccount bankAccount: bankAccountDAO.retrieveAll()) {
+							out.println("<option "
+										+  ((bankAccount.equals(baFilter))? "selected":"")
+										+" value =\""+bankAccount.getId() +"\">"
+										+  bankAccount.getName()+"</option>");
+						};
+					%>
+				</select>
+			</div>
+		</form>
+		
 		<form name="CashMovementTable"
 	    	action="CashMovementWebController"
 	    	method=POST>
@@ -82,7 +106,14 @@
 	    			<th>Сумма</th>
 	    		</tr>
 	    		<c:if test="${pageScope.cashMovementDAO != null}" >
-		   			<c:set var="cashMovementEntries" scope="page" value = "${cashMovementDAO.retrieveAll()}" />
+		   			<c:choose>
+		   				<c:when test="${sessionScope.bankAccountFilterValue != null}" >
+			    			<c:set var="cashMovementEntries" scope="page" value = "${cashMovementDAO.retrieveAll(bankAccountFilterValue)}" />
+			    		</c:when>
+			    		<c:otherwise>
+				   			<c:set var="cashMovementEntries" scope="page" value = "${cashMovementDAO.retrieveAll()}" />
+			    		</c:otherwise>
+		    		</c:choose>
 		   			<c:forEach var="currentEntry" items="${cashMovementEntries}">
 		   				<tr class="tableRow">
 		   					<td>${currentEntry.getId()}</td>
@@ -113,7 +144,7 @@
 							  							${currentEntryForEdit.getBankAccount().getName()}
 							  				</option>
 			   						<%
-			   							BankAccountDAO bankAccountDAO = new BankAccountDAO();
+			   							//BankAccountDAO bankAccountDAO = new BankAccountDAO();
 				   						for(BankAccount bankAccount: bankAccountDAO.retrieveAll()) {
 											out.println("<option "
 													+" value =\""+bankAccount.getId() +"\">"
@@ -136,7 +167,7 @@
 			    			<td><select name="bankAccount" onchange="setCurrency();">
 			    				<option disabled selected value=""> Выберите счет  </option>
 							  		<%
-			   							BankAccountDAO bankAccountDAO = new BankAccountDAO();
+			   							//BankAccountDAO bankAccountDAO = new BankAccountDAO();
 				   						for(BankAccount bankAccount: bankAccountDAO.retrieveAll()) {
 											out.println("<option "
 													+" value =\""+bankAccount.getId() +"\">"

@@ -1,5 +1,6 @@
 package ua.com.goit.gojava.POM.dataModel.common;
 
+import ua.com.goit.gojava.POM.dataModel.temporaryUnusedClases.FinancialStatement;
 import ua.com.goit.gojava.POM.persistence.fileDB.DataManager;
 
 public class MyFinancialStatement extends FinancialStatement<MyFinancialEntry>{

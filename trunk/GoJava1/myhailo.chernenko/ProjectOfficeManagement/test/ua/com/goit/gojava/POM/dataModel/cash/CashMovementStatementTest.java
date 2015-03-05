@@ -6,6 +6,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import ua.com.goit.gojava.POM.dataModel.temporaryUnusedClases.CashMovementStatement;
+
 public class CashMovementStatementTest {
 
 	@Before

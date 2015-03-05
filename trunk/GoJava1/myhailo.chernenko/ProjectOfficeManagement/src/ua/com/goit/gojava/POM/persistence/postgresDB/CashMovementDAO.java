@@ -12,6 +12,7 @@ import java.util.Date;
 import java.util.List;
 
 import ua.com.goit.gojava.POM.dataModel.POMDataModelException;
+import ua.com.goit.gojava.POM.dataModel.cash.BankAccount;
 import ua.com.goit.gojava.POM.dataModel.cash.CashMovementEntry;
 import ua.com.goit.gojava.POM.dataModel.common.Money;
 
@@ -185,6 +186,47 @@ public class CashMovementDAO {
 	
 	}
 	
+	public List<CashMovementEntry> retrieveAll(BankAccount bankAccount) throws POMDataModelException {
+
+		List<CashMovementEntry> resultList = new ArrayList<CashMovementEntry>();
+		
+		ResultSet rs = null;
+		PreparedStatement statement = null; 	
+		Connection connection = getDBConnection();
+		
+		String selectTableSQL = "SELECT * FROM "+CLASS_TABLE
+							 + " WHERE bank_account_id = ? "
+						     + " ORDER BY ID"
+								;
+		
+		try {
+
+			statement = connection.prepareStatement(selectTableSQL);
+			statement.setLong(1, bankAccount.getId());
+			rs = statement.executeQuery();
+			 
+			while (rs.next()) {
+				
+				CashMovementEntry cashMovementEntry = getObjectFromRS(rs);
+				
+				resultList.add(cashMovementEntry);
+				
+			}
+			
+		} catch (SQLException e) {
+ 
+			throw new POMDataModelException("Could not retrieve all Cash Movement Entries: "+e.getMessage(), e);
+ 
+		} finally {
+ 
+			closeDBConnections(rs, statement, connection);
+ 
+		}
+		
+		return resultList;
+	
+	}
+	
 	public CashMovementEntry retrieveById(Long id) throws POMDataModelException {
 
 		CashMovementEntry result = new CashMovementEntry();
@@ -296,4 +338,43 @@ public class CashMovementDAO {
 	
 	}
 
+	public Money getTotalByBankAccount(BankAccount bankAccount) throws POMDataModelException {
+
+		Money result = new Money(bankAccount.getCurrency());
+		
+		ResultSet rs = null;
+		PreparedStatement statement = null; 	
+		Connection connection = getDBConnection();
+		
+		String selectTableSQL = "SELECT "
+							   + "	SUM(SUM) FROM "+CLASS_TABLE
+							   + " WHERE bank_account_id = ? "
+							  ;
+		
+		try {
+
+			statement = connection.prepareStatement(selectTableSQL);
+			statement.setLong(1, bankAccount.getId());
+			rs = statement.executeQuery();
+			 
+			if (rs.next()) {
+				
+				result = new Money(rs.getDouble("sum"), bankAccount.getCurrency());
+				
+			}
+			
+		} catch (SQLException e) {
+ 
+			throw new POMDataModelException("Could not calculate sum of Cash Movement Entries: "+e.getMessage(), e);
+ 
+		} finally {
+ 
+			closeDBConnections(rs, statement, connection);
+ 
+		}
+		
+		return result;
+	
+	}
+	
 }

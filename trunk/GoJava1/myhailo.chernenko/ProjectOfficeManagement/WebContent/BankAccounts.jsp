@@ -19,6 +19,15 @@
 		return true;
 	}
 	
+	function openCashMovement(bankId){
+		
+		this.BankAccountsTable.OpenCashMovement.value = bankId;
+		this.BankAccountsTable.submit();
+		
+		return true;
+		
+	}
+	
 	</script>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -52,6 +61,7 @@
 	    			<th>Остаток</th>
 	    		</tr>
 	    		<c:if test="${pageScope.bankAccountDAO != null}" >
+	    			<input type="hidden" name="OpenCashMovement" value="">
 		   			<c:set var="bankAccounts" scope="page" value = "${bankAccountDAO.retrieveAll()}" />
 		   			<c:forEach var="currentbankAccount" items="${bankAccounts}">
 		   				<tr class="tableRow">
@@ -59,7 +69,11 @@
 							<td>${currentbankAccount.getName()}</td>
 							<td>${currentbankAccount.getBankName()}</td>
 							<td>${currentbankAccount.getCurrency().getCurrencyCode()}</td>
-							<td class="numericColumn">${currentbankAccount.GetTotal().getValue()}</td>
+							<td class="numericColumn">
+								<a href="javascript:openCashMovement(${currentbankAccount.getId()})">
+									${currentbankAccount.GetTotal().getValue()}
+								</a>
+								</td>
 							<td>
 								<button class = "defaultButton" type="submit" name="DellCurrent" 
 										value="${currentbankAccount.getId()}">Удалить</button>
