@@ -34,7 +34,12 @@ public class MainServlet extends HttpServlet {
 			CategoriesFromDB categoriesFromDB = new CategoriesFromDB(connection);
 			List<Category> categories = categoriesFromDB.getCategories();
 			
-			resp.getOutputStream().println(categories.toString());
+			req.setAttribute("categories", categories);
+			
+			req.setAttribute("massage", "massage");
+			
+			req.getRequestDispatcher("categories.jsp").forward(req, resp);
+			
 			
 		} else if (action.startsWith("/projects")){
 			
@@ -67,11 +72,3 @@ public class MainServlet extends HttpServlet {
 
 }
 
-
-//for (Category category : categories){
-//	resp.getOutputStream().println(category.getID() + " - " + category.getName());
-//}
-
-//for (Map.Entry entry : req.getParameterMap().entrySet()){
-//System.out.println( entry.getKey().toString() + " - " + Arrays.toString((String[])entry.getValue()));
-//}
