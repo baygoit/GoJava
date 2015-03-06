@@ -1,5 +1,7 @@
 package com.kickstarter.controller;
 
+import java.util.Random;
+
 import com.kickstarter.model.CategoriesStorage;
 import com.kickstarter.model.QuotesStorage;
 import com.kickstarter.model.Project;
@@ -11,29 +13,11 @@ import com.kickstarter.view.InPut;
 public class Kickstarter {
 
     public static void main(String[] args) {
-    	QuotesStorage dataStorage = new QuotesStorage();
+    	QuotesStorage dataStorage = new QuotesStorage(new Random());
     	ConsoleView consoleView = new ConsoleView();
     	CategoriesStorage categories = new CategoriesStorage();
     	ProjectsStorage projects = new ProjectsStorage();
     	InPut inPut = new InPut();
-    	
-    	String quote1 = "\"Lost time is never found again.\"";
-    	String quote2 = "\"The future belongs to those, who believe of their dreams.\"";
-    	String quote3 = "\"If you never try you'll never know.\"";
-    	String quote4 = "\"The only way to do great work, is to love what you do.\"";
-    	String quote5 = "\"Every thing is easy, when you are crazy and nothing is easy when you are lazy.\"";
-    	String quote6 = "\"An investment in knowledge always pays the best interest.\"";
-    	String quote7 = "\"It does not matter how slowly you go so long as you do not stop.\"";
-    	String quote8 = "\"Money spent on the brain, is never spent in vain.\"";
-    	
-    	dataStorage.addQuote(quote1);
-    	dataStorage.addQuote(quote2);
-    	dataStorage.addQuote(quote3);
-    	dataStorage.addQuote(quote4);
-    	dataStorage.addQuote(quote5);
-    	dataStorage.addQuote(quote6);
-    	dataStorage.addQuote(quote7);
-    	dataStorage.addQuote(quote8);
     	
     	Сategory food = new Сategory("FOOD");
     	Сategory music = new Сategory("MUSIC");
