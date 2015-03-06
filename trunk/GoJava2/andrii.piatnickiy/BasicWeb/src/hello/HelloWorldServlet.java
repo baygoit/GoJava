@@ -23,26 +23,23 @@ public class HelloWorldServlet extends HttpServlet {
         PrintWriter pw = resp.getWriter();
         pw.println("Hello World!");
         pw.println("<br>");
-        pw.println("Hello World!");
-        pw.println("<br>");
 
         Connection connection = null;
         try {
             Class.forName("org.postgresql.Driver");
+            
             connection = DriverManager.getConnection(
-                    "jdbc:postgresql://127.0.0.1/kickstarter", "postgres",
-                    "pass");
+                    "jdbc:postgresql://127.0.0.1/kickstarter", "postgres", "pass");
         } catch (SQLException e) {
-            pw.println("Не могу подключится к базе!!!1");
-            pw.println("<br>");
+            pw.println("Could not connect to database!!!<br>");
         } catch (ClassNotFoundException e) {
-            pw.println("ClassNotFoundException" + e);
+            pw.println("ClassNotFoundException" + e  + "<br>");
         }
 
         if (connection != null) {
-            pw.println("You made it, take control your database now!");
+            pw.println("You made it, take control your database now!<br>");
         } else {
-            pw.println("Failed to make connection!");
+            pw.println("Failed to make connection!<br>");
         }
 
         java.sql.Statement statement;
