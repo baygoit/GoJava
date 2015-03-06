@@ -4,7 +4,10 @@ import java.util.Currency;
 
 import ua.com.goit.gojava.POM.dataModel.POMDataModelException;
 import ua.com.goit.gojava.POM.dataModel.common.Money;
-import ua.com.goit.gojava.POM.persistence.postgresDB.CashMovementDAO;
+import ua.com.goit.gojava.POM.services.CashMovementService;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class BankAccount {
 	
@@ -64,8 +67,13 @@ public class BankAccount {
 	public Money GetTotal() {
 		
 		Money total = new Money(getCurrency());
+		
+		@SuppressWarnings("resource")
+		ApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml");
+		CashMovementService cashMovementService = (CashMovementService) context.getBean("CashMovementService");
+		
 		try {
-			total = (new CashMovementDAO()).getTotalByBankAccount(this);
+			total = cashMovementService.getTotalByBankAccount(this);
 		} catch (POMDataModelException e) {
 			// no need to do smth?..
 		}
