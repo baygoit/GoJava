@@ -10,6 +10,11 @@ public class Category{
 		this.categoryID = categoryID;
 		this.categoryName = categoryName;
 	}
+	
+	@Override
+	public String toString() {
+		return String.format("%s - %s", categoryID, categoryName);
+	}
 
 	public int getCategoryID() {
 		return categoryID;
