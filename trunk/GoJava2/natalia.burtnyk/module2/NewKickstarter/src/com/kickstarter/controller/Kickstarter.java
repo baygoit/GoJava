@@ -1,9 +1,9 @@
 package com.kickstarter.controller;
 
-import com.kickstarter.model.CategoryStorage;
-import com.kickstarter.model.QuoteStorage;
+import com.kickstarter.model.CategoriesStorage;
+import com.kickstarter.model.QuotesStorage;
 import com.kickstarter.model.Project;
-import com.kickstarter.model.ProjectStorage;
+import com.kickstarter.model.ProjectsStorage;
 import com.kickstarter.model.Сategory;
 import com.kickstarter.view.ConsoleView;
 import com.kickstarter.view.InPut;
@@ -11,10 +11,10 @@ import com.kickstarter.view.InPut;
 public class Kickstarter {
 
     public static void main(String[] args) {
-    	QuoteStorage dataStorage = new QuoteStorage();
+    	QuotesStorage dataStorage = new QuotesStorage();
     	ConsoleView consoleView = new ConsoleView();
-    	CategoryStorage categories = new CategoryStorage();
-    	ProjectStorage projects = new ProjectStorage();
+    	CategoriesStorage categories = new CategoriesStorage();
+    	ProjectsStorage projects = new ProjectsStorage();
     	InPut inPut = new InPut();
     	
     	String quote1 = "\"Lost time is never found again.\"";

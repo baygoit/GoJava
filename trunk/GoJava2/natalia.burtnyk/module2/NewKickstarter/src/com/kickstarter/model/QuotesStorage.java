@@ -2,11 +2,11 @@ package com.kickstarter.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class QuoteStorage {
+public class QuotesStorage {
 	
 	private List<String> quotes;
 	
-	public QuoteStorage() {
+	public QuotesStorage() {
 		quotes = new ArrayList<String>();
 	}
 	

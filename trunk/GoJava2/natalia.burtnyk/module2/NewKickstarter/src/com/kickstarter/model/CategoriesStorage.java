@@ -3,10 +3,10 @@ package com.kickstarter.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CategoryStorage {
+public class CategoriesStorage {
 	private List<Сategory> categories;
 	
-	public CategoryStorage() {
+	public CategoriesStorage() {
 		categories = new ArrayList<Сategory>();
 	}
 	

@@ -3,11 +3,11 @@ package com.kickstarter.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProjectStorage {
+public class ProjectsStorage {
 	private List<Project> projects;
 	private List<Project> result;
 	
-	public ProjectStorage() {
+	public ProjectsStorage() {
 		projects = new ArrayList<Project>();
 	}
 	

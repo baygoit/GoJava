@@ -1,10 +1,10 @@
 package com.kickstarter.controller;
 import java.util.List;
 
-import com.kickstarter.model.CategoryStorage;
-import com.kickstarter.model.QuoteStorage;
+import com.kickstarter.model.CategoriesStorage;
+import com.kickstarter.model.QuotesStorage;
 import com.kickstarter.model.Project;
-import com.kickstarter.model.ProjectStorage;
+import com.kickstarter.model.ProjectsStorage;
 import com.kickstarter.model.Сategory;
 import com.kickstarter.view.ConsoleView;
 import com.kickstarter.view.InPut;
@@ -13,11 +13,11 @@ public class KickstarterEngine {
 
 	private InPut inPut;
 	private ConsoleView consoleView;
-	private QuoteStorage dataStorage;
-	private CategoryStorage categoriesStorage;
-	private ProjectStorage projectsStorage;
+	private QuotesStorage dataStorage;
+	private CategoriesStorage categoriesStorage;
+	private ProjectsStorage projectsStorage;
 	
-	public KickstarterEngine(ConsoleView consoleView, QuoteStorage dataStorage , InPut inPut, CategoryStorage categories, ProjectStorage projects) {
+	public KickstarterEngine(ConsoleView consoleView, QuotesStorage dataStorage , InPut inPut, CategoriesStorage categories, ProjectsStorage projects) {
 		this.consoleView = consoleView;
 		this.inPut = inPut;
 		this.dataStorage = dataStorage;
