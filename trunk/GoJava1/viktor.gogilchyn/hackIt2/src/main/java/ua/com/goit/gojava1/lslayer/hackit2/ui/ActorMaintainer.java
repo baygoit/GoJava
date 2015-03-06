@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 import ua.com.goit.gojava1.lslayer.hackit2.actor.ActorFactory;
 import ua.com.goit.gojava1.lslayer.hackit2.dao.ActorJDBCDAO;
 import ua.com.goit.gojava1.lslayer.hackit2.exception.HackitIOException;
@@ -31,7 +34,16 @@ public class ActorMaintainer extends HttpServlet {
      */
     protected void doGet(HttpServletRequest request,
                          HttpServletResponse response) throws ServletException, IOException {
-        ActorJDBCDAO dao = new ActorJDBCDAO();
+        @SuppressWarnings("resource")
+        ApplicationContext ctx =
+                new ClassPathXmlApplicationContext("beans.xml");
+        ActorJDBCDAO dao = null;
+        try {
+            dao = (ActorJDBCDAO) ctx.getBean("getDAO");
+        } catch (Exception e1) {
+            // TODO Auto-generated catch block
+            e1.printStackTrace();
+        }
         String idParameter = request.getParameter("view_id");
         if (idParameter != null) {
             try {
@@ -70,7 +82,12 @@ public class ActorMaintainer extends HttpServlet {
                 request.setAttribute("error", e.getMessage());
             }
         }
-        ActorJDBCDAO dao = new ActorJDBCDAO();
+        ActorJDBCDAO dao = null;
+        try {
+            dao = ActorJDBCDAO.class.newInstance();
+        } catch (InstantiationException | IllegalAccessException e1) {
+            e1.printStackTrace();
+        }
         if (deleteParameter != null && deleteParameter.equals("yes") && id > 0)
             try {
                 dao.delete(id);
@@ -81,10 +98,14 @@ public class ActorMaintainer extends HttpServlet {
             String skills[] = null;
             ActorFactory actorFactory = new ActorFactory();
             String name = null;
+            String[] attributes = null;
             name = request.getParameter("name");
             actorFactory.setActorName(name);
             if (request.getParameter("skills") != null) {
-                skills = request.getParameter("skills").split(";");
+                skills = request.getParameter("skills").split("\r\n");
+            }
+            if (request.getParameter("attributes") != null) {
+                attributes = request.getParameter("attributes").split("\r\n");
             }
             actorFactory.addSkillsArray(skills);
             try {
@@ -96,6 +117,5 @@ public class ActorMaintainer extends HttpServlet {
         response.setContentType("text/plain");
         response.setCharacterEncoding("UTF-8");
         this.doGet(request, response);
-        // request.getRequestDispatcher("actors").forward(request, response);
     }
 }

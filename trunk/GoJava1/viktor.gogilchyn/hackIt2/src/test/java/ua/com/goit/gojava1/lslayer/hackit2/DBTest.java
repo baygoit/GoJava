@@ -12,7 +12,6 @@ import ua.com.goit.gojava1.lslayer.hackit2.exception.HackitIOException;
 
 public class DBTest {
     
-    @Test
     public void testSaveActor() {
         Actor actor = new HumanControlledCharacter("Testname");
         actor.addAttribute("attribute1", "Value1");
@@ -36,7 +35,6 @@ public class DBTest {
         }
     }
     
-    @Test
     public void testLoadAll() {
         List<Actor> actorlist = new LinkedList<Actor>();
         ActorJDBCDAO manager = new ActorJDBCDAO();

@@ -10,53 +10,42 @@
 </head>
 <body>
  <div class="container">
-  <div class="user_container">
-   <form id="addform" class="form" method="post" action="actors">
-    <p>
-     <span>Name:</span> <input id="name_input" name="name"
-      class="text medium" type="text" maxlength="25"
-      value="${requestScope.edit_name != null ? requestScope.edit_name : ''}"
-      <c:if test="${requestScope.edit_name != null}">readonly</c:if> />
-    </p>
-    <p>
-     <span>Skills:</span><input name="skills" class="text medium"
-      type="text" maxlength="255"
-      value='${requestScope.edit_skills != null ? requestScope.edit_skills : ""}' />
-    </p>
-    <input type="hidden" name="create" value="yes" />
-    <p>
-     <button type="submit" class="add_button"
-      onclick="return validate();">${requestScope.edit_name != null ? "Edit" : "Add"}</button>
-    </p>
+  <div class="users_container">
+   <form name="add_form" id="add_form" action="actors" method="post">
+    <input type="hidden" name="create" value="yes" /> <label for="name">Name:</label><br />
+    <input type="text" name="name" maxlength="25" /><br /> <label
+     for="skills">Skills</label><br />
+    <textarea rows="4" cols="50" name="skills"></textarea>
+    <br /> <label for="attributes">Attributes</label><br />
+    <textarea rows="4" cols="50" name="attributes"></textarea>
+    <input type="submit" class="add_button" value="Add" />
    </form>
   </div>
+
   <c:forEach items="${requestScope.gamers}" var="gamerItem">
    <hr></hr>
-      <div class="single_user_container">
-          <span class="user_name">
-            <c:out value="${gamerItem.getName()}"/>
-          </span>
-          <span class="detailed_user">
-           <form method="get" action="actors" class="inline-form">
-            <input type="hidden" name="view_id" value="${gamerItem.getId()}"/> 
-            <input type="submit" class="details_button" value="Details" />
-           </form>
-          </span>
-          <span class="edit_user">
-           <form method="post" action="actors" class="inline-form">
-            <input type="hidden" name="edit" value="yes" /> 
-            <input type="hidden" name="edit_id" value="${gamerItem.getId()}"/> 
-            <input type="submit" class="edit_button" value="Edit" />
-           </form>
-          </span>
-          <span class="delete_user">
-           <form method="post" action="actors" class="inline-form">
-            <input type="hidden" name="delete" value="yes" /> 
-            <input type="hidden" name="delete_id" value="${gamerItem.getId()}"/> 
-            <input type="submit" class="delete_button" value="Delete" />
-           </form>
-          </span>
-      </div>
+   <div class="single_user_container">
+    <span class="user_name"> <c:out
+      value="${gamerItem.getName()}" />
+    </span> <span class="detailed_user">
+     <form method="get" action="actors" class="inline-form">
+      <input type="hidden" name="view_id" value="${gamerItem.getId()}" />
+      <input type="submit" class="details_button" value="Details" />
+     </form>
+    </span> <span class="edit_user">
+     <form method="post" action="actors" class="inline-form">
+      <input type="hidden" name="edit" value="yes" /> <input
+       type="hidden" name="edit_id" value="${gamerItem.getId()}" /> <input
+       type="submit" class="edit_button" value="Edit" />
+     </form>
+    </span> <span class="delete_user">
+     <form method="post" action="actors" class="inline-form">
+      <input type="hidden" name="delete" value="yes" /> <input
+       type="hidden" name="delete_id" value="${gamerItem.getId()}" /> <input
+       type="submit" class="delete_button" value="Delete" />
+     </form>
+    </span>
+   </div>
   </c:forEach>
  </div>
 
@@ -93,11 +82,11 @@ function validate() {
         return returnValue;
     }
 </script>
-<c:if test="${requestScope.error != null}">
-<script type="text/javascript">
+ <c:if test="${requestScope.error != null}">
+  <script type="text/javascript">
           showError("${requestScope.error}")
 </script>
-</c:if>
+ </c:if>
 
 </body>
 </html>
