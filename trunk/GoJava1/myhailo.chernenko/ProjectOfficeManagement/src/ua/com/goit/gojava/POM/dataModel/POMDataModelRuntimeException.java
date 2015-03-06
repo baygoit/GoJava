@@ -17,10 +17,11 @@ public class POMDataModelRuntimeException extends RuntimeException {
 		super(message, cause);
 	}
 
-	/*public POMDataModelRuntimeException(String message) {
+	public POMDataModelRuntimeException(String message) {
 		super(message);
 	}
-
+	
+	/*
 	public POMDataModelRuntimeException(Throwable cause) {
 		super(cause);
 	}*/

@@ -2,9 +2,10 @@ package ua.com.goit.gojava.POM.persistence.postgresDB;
 
 import java.sql.*;
 
-
-
-import java.sql.Statement;
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
 
 import ua.com.goit.gojava.POM.dataModel.POMDataModelRuntimeException;
 
@@ -18,19 +19,18 @@ public class DBDataManager {
 		}
 	}
 	
-	private static String connectionString = "jdbc:postgresql://127.0.0.1:5432/POMDataBase";
-	private static String user = "postgres";
-	private static String password = "root";
-	
 	public static Connection getConnection() {
 
 		Connection connection;
 		
 		try {
 			 
-			connection = DriverManager.getConnection(connectionString, user, password);
- 
-		} catch (SQLException e) {
+			InitialContext cxt = new InitialContext();
+			Context envContext = (Context) cxt.lookup("java:comp/env");
+            DataSource ds = (DataSource) envContext.lookup("jdbc/POMDataBase");
+			connection = ds.getConnection();
+			
+		} catch (SQLException | NamingException e) {
  
 			throw new POMDataModelRuntimeException("Could not create connection to DB: "+e.getMessage(), e);
  
