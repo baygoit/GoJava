@@ -1,16 +1,22 @@
 package ua.com.goit.gojava2.vova.kickstarter.model;
 
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import ua.com.goit.gojava2.vova.kickstarter.util.ConnectToDB;
 import ua.com.goit.gojava2.vova.kickstarter.util.PeriodBetweenDates;
 
 public class ProjectsFromDB implements Projects{
 	
 	private List<Project> projects;
+	private Connection connection;
+	
+	public ProjectsFromDB(Connection connection) {
+		this.connection = connection;
+	}
 
 	@Override
 	public List<Project> getProjects() {
@@ -22,8 +28,8 @@ public class ProjectsFromDB implements Projects{
 		projects = new ArrayList<Project>();
 		ResultSet result;
 		try {
-			
-			result = ConnectToDB.statement.executeQuery("SELECT * FROM projects ORDER BY id_project");
+			Statement statement = connection.createStatement();
+			result = statement.executeQuery("SELECT * FROM projects ORDER BY id_project");
 			while (result.next()) {
 				projects.add(new Project(result.getInt("id_project"), 
 										result.getInt("id_category"),
@@ -54,14 +60,15 @@ public class ProjectsFromDB implements Projects{
 	@Override
 	public void setDonation(int chosenProject, int amount) {
 		try {
-			ConnectToDB.statement.execute("UPDATE projects SET how_much_collected_project=how_much_collected_project+" + amount
+			Statement statement = connection.createStatement();
+			statement.execute("UPDATE projects SET how_much_collected_project=how_much_collected_project+" + amount
 			    	+ ", how_much_remaining_project=how_much_remaining_project-" + amount
 			    	+ "WHERE id_project=" + chosenProject + ";");
 		} catch (SQLException e) {
 			System.err.println( e.getClass().getName()+": "+ e.getMessage() );
 		}
 
-		Project project = getProjects().get(chosenProject - 1);// TODO relocate method or setProjects();
+		Project project = getProjects().get(chosenProject - 1);
 		project.setHowMuchCollected(project.getHowMuchCollected() + amount);
 		project.setHowMuchRemaining(project.getHowMuchRemaining() - amount);
 	}
@@ -69,7 +76,8 @@ public class ProjectsFromDB implements Projects{
 	@Override
 	public void addFAQ(int projectID, String question) {
 		try {
-			ConnectToDB.statement.execute("INSERT INTO faq(id_project, question)VALUES (" + projectID + ", '" + question + "');");
+			Statement statement = connection.createStatement();
+			statement.execute("INSERT INTO faq(id_project, question)VALUES (" + projectID + ", '" + question + "');");
 		} catch (SQLException e) {
 			System.err.println( e.getClass().getName()+": "+ e.getMessage() );
 		}
@@ -82,7 +90,8 @@ public class ProjectsFromDB implements Projects{
 		
 		ResultSet result;
 		try {
-			result = ConnectToDB.statement.executeQuery("SELECT * FROM faq WHERE id_project =" + projectID);
+			Statement statement = connection.createStatement();
+			result = statement.executeQuery("SELECT * FROM faq WHERE id_project =" + projectID);
 	            while (result.next()) {
 		            s.add(result.getString("question"));
 	            }

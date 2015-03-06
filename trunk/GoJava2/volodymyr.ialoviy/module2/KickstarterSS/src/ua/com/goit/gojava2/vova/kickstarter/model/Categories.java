@@ -5,8 +5,6 @@ import java.util.List;
 
 public interface Categories {
 
-	void setCatecories();
-	
 	List<Category> getCategories();
 
 	String showCatecoryName(int categoryId);

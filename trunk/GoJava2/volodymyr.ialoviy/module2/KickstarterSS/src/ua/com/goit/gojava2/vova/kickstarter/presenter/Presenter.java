@@ -2,8 +2,6 @@ package ua.com.goit.gojava2.vova.kickstarter.presenter;
 
 import ua.com.goit.gojava2.vova.kickstarter.model.Categories;
 import ua.com.goit.gojava2.vova.kickstarter.model.Projects;
-import ua.com.goit.gojava2.vova.kickstarter.model.Quotes;
-import ua.com.goit.gojava2.vova.kickstarter.model.QuotesFromDB;
 import ua.com.goit.gojava2.vova.kickstarter.util.InputChecker;
 import ua.com.goit.gojava2.vova.kickstarter.view.Inputs;
 import ua.com.goit.gojava2.vova.kickstarter.view.View;
@@ -30,10 +28,8 @@ public class Presenter {
 	}
 
 	public void kickstarter(){
-    	Quotes quote = new QuotesFromDB();
-		view.printQuote(quote.getQuote());
-		categories.setCatecories();
-		projects.setProjects();
+
+		projects.setProjects();//TODO DELETE
 		
 		categories();
 		view.printClose();
