@@ -10,6 +10,8 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import ua.com.goit.gojava.alejnikovi.medsystem.dao.PlainFileDAO;
+
 public class FileWorkerTest {
 	
 	private String fileName = "TestFile.csv";

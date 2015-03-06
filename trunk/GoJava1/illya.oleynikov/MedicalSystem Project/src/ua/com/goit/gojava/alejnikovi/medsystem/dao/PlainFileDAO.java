@@ -1,4 +1,4 @@
-package ua.com.goit.gojava.alejnikovi.medsystem;
+package ua.com.goit.gojava.alejnikovi.medsystem.dao;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -10,7 +10,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-class PlainFileDAO {
+import ua.com.goit.gojava.alejnikovi.medsystem.Persistable;
+
+public class PlainFileDAO {
 	
 	private static final String PATH = "C:\\workspace\\MedicalSystem Project\\";
 
@@ -18,7 +20,7 @@ class PlainFileDAO {
 		// TODO Auto-generated constructor stub
 	}
 	
-	static List<String> readFromFile(String fileName) throws IOException{
+	public static List<String> readFromFile(String fileName) throws IOException{
 		String  thisLine = null;
 		List<String> listFromFile = new ArrayList<String>();
 		BufferedReader br = new BufferedReader(new FileReader(PATH + fileName));
@@ -29,7 +31,7 @@ class PlainFileDAO {
         return listFromFile;				
 	}
 	
-	static void writeToFile(String fileName, String value) throws IOException{
+	public static void writeToFile(String fileName, String value) throws IOException{
 		createNewFile(fileName);
 		BufferedWriter bw = new BufferedWriter(new FileWriter(PATH + fileName, true));
 		bw.write(value);

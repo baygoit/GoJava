@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
+import ua.com.goit.gojava.alejnikovi.medsystem.dao.SpecializationsDAO;
+
 /**
  * Servlet implementation class CreateNew
  */
@@ -36,15 +38,30 @@ public class SpecializationsServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		
-		String newSpecialization = request.getParameter("createSpecialization");
+		String newSpecializationName = request.getParameter("createSpecialization");
 		try {
-			Specialization.createNewSpecialisation(newSpecialization);
+			SpecializationsDAO spd = new SpecializationsDAO();
+			Specialization spec = new Specialization();
+			spec.setName(newSpecializationName);
+			spd.persist(spec);
+			//Specialization.createNewSpecialisation(newSpecializationName);
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		/*int id = Integer.getInteger(request.getParameter("deleteSpecialization"));
+		try {
+			SpecializationsDAO spd = new SpecializationsDAO();
+			spd.deleteById(id);
+			//Specialization.createNewSpecialisation(newSpecializationName);
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/
+		
 	response.sendRedirect("index.jsp");
 		
 	}

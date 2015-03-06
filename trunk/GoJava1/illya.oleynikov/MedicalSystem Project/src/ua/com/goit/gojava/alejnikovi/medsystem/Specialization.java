@@ -7,22 +7,16 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class Specialization implements Persistable{
-	
-	private static Set<Specialization> specializations = new LinkedHashSet<Specialization>();
-	private static final String FILENAME = "specializations.csv";
-	private static AtomicInteger nextId = new AtomicInteger();
-	
-	private String name;
+import ua.com.goit.gojava.alejnikovi.medsystem.dao.PlainFileDAO;
+
+public class Specialization{
+
 	private int id;
+	private String name;
+	
 	
 	public Specialization() {
 
-	}
-		
-	public Specialization (String name){
-		this.id = nextId.incrementAndGet();
-		this.name = name;
 	}
 
 	public String getName() {
@@ -37,7 +31,12 @@ public class Specialization implements Persistable{
 		return id;
 	}
 
-	List<Doctor> getDoctors (){
+	public void setId(int id) {
+		this.id = id;
+	}
+		
+
+	/*List<Doctor> getDoctors (){
 		List<Doctor> doctorsWithSpec = new ArrayList<Doctor>();
 		for(Doctor doctor: MedicalSystem.getDoctors()){
 			if(doctor.getSpecialization().equals(this)){
@@ -110,6 +109,6 @@ public class Specialization implements Persistable{
 		} else if (!name.equals(other.name))
 			return false;
 		return true;
-	}
+	}*/
 
 }

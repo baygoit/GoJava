@@ -1,4 +1,5 @@
 <%@page import="ua.com.goit.gojava.alejnikovi.medsystem.*"%>
+<%@page import="ua.com.goit.gojava.alejnikovi.medsystem.dao.SpecializationsDAO"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -13,10 +14,10 @@
     <table border="1">
         <%
          	SpecializationsDAO db = new SpecializationsDAO();
-                 List <String> specs = db.getAll();
-                   for (String spec: specs) {
+                 List <Specialization> specs = db.getAll();
+                   for (Specialization spec: specs) {
          %>
-           <%="<tr><td>" + spec + "</td>"+
+           <%="<tr><td>" + spec.getName() + "</td>"+
                    "<td><input type='submit' value='Delete'></td></tr>"%>
         <%} %>
     </table>
@@ -24,6 +25,10 @@
     <form action="CreateNew" method="POST">
         <input name="createSpecialization" type="text">
         <input type="submit" value="Submit">
+    </form>
+        <form action="CreateNew" method="POST">
+        <input name="deleteSpecialization" type="text">
+        <input type="submit" value="Delete">
     </form>
     </p>
     <p>
