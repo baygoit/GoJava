@@ -9,7 +9,7 @@ import org.junit.Test;
 
 public class ProjectStorageInMemoryTest {
 
-	private ProjectStorageInMemory storage;
+	private ProjectStorage storage;
 	
 	@Before
 	public void setUp() {

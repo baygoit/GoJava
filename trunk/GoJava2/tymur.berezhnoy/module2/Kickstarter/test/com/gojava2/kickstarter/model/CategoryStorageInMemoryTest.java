@@ -7,7 +7,7 @@ import org.junit.Test;
 
 public class CategoryStorageInMemoryTest {
 
-	private CategoryStorageInMemory storage;
+	private CategoryStorage storage;
 	
 	@Before
 	public void setUp() {
