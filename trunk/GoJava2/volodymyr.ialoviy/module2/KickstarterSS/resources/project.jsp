@@ -2,11 +2,9 @@
 
 <html>
 <head>
-<title>Kickstarter</title>
+<title>Kickstarter project</title>
 </head>
 	<body>
-
-
 
 		<p>project name: <c:out value="${project.projectName}"/></p>
 		<p>short description: <c:out value="${project.shortDescription}"/></p>
@@ -18,8 +16,6 @@
 		<p>how much remaining = <c:out value="${project.howMuchRemaining}"/></p>
 		<p>faq = <c:out value="${project.faq}"/></p>
 		<p>days to go = <c:out value="${project.daysLeft}"/></p>
-
-
 
 		<p>If you want return to <a href="/sample/projects?category=${project.categoryID}">projects</a></p>
 		

@@ -2,7 +2,7 @@
 
 <html>
 <head>
-<title>Kickstarter</title>
+<title>Kickstarter projects</title>
 </head>
 	<body>
 
