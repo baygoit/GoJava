@@ -34,6 +34,23 @@ public class Project{
 		this.faq = faq;
 		this.daysLeft = daysLeft;
 	}
+	
+	@Override
+	public String toString() {
+		return String.format("%s \n%s \n%s \n%s \n%s \n%s \n%s \n%s \n%s \n%s \n%s \n%s",
+				projectID,
+				categoryID,
+				projectName,
+				shortDescription,
+				fullDescription,
+				foto,
+				link,
+				howMuchNeeded,
+				howMuchCollected,
+				howMuchRemaining,
+				faq,
+				daysLeft);
+	}
 
 	public int getProjectID() {
 		return projectID;

@@ -37,10 +37,7 @@ public class MainServlet extends HttpServlet {
 			List<Category> categories = categoriesFromDB.getCategories();
 			
 			req.setAttribute("categories", categories);
-			
 			req.getRequestDispatcher("categories.jsp").forward(req, resp);
-			
-			
 		} else if (action.startsWith("/projects")){
 			int categoryID = Integer.valueOf(req.getParameter("category"));
 			
@@ -48,10 +45,17 @@ public class MainServlet extends HttpServlet {
 			List<Project> projects = projectsFromDB.getProgectsForCategory(categoryID);
 			
 			req.setAttribute("projects", projects);
-			
 			req.getRequestDispatcher("projects.jsp").forward(req, resp);
-			
+		} else if (action.startsWith("/project")){
+		int projectID = Integer.valueOf(req.getParameter("project"));
+		
+		ProjectsFromDB projectsFromDB = new ProjectsFromDB(connection);
+		Project project = projectsFromDB.getProgect(projectID);
+
+		req.setAttribute("project", project);
+		req.getRequestDispatcher("project.jsp").forward(req, resp);
 		}
+		
 	}
 
 	private String getAction(HttpServletRequest req) {

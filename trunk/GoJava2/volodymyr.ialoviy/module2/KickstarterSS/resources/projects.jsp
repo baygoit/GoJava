@@ -7,8 +7,10 @@
 	<body>
 
 		<c:forEach items="${projects}" var="project">
-		   <a href="/sample/project?project${project.projectID}"><c:out value="${project.projectName}"/></a><p>
+		   <p><a href="/sample/project?project=${project.projectID}"><c:out value="${project.projectName}"/></a></p>
 		</c:forEach>
+		
+		<p>If you want return to <a href="/sample/categories">categories</a></p>
 	
 	</body>
 </html>
