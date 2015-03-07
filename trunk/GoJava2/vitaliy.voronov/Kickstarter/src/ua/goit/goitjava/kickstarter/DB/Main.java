@@ -1,5 +1,7 @@
 package ua.goit.goitjava.kickstarter.DB;
 
+import ua.goit.goitjava.kickstarter.Controller.Controller;
+
 public class Main {
 public static void main(String[] args) {
 		
@@ -8,8 +10,6 @@ public static void main(String[] args) {
 		
 		while (true) {
 			control.showAllCategories();	
-			//Input in = new Input();
-			///Category category = null;
 			int x;
 			x = control.scanInt();
 			if(x == 0){

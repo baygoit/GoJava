@@ -1,4 +1,4 @@
-package ua.goit.goitjava.kickstarter;
+package ua.goit.goitjava.kickstarter.model;
 
 public class FAQ {
 	private String quastion;

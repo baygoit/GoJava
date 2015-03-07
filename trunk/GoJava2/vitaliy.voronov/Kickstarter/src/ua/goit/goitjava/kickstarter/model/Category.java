@@ -1,4 +1,4 @@
-package ua.goit.goitjava.kickstarter;
+package ua.goit.goitjava.kickstarter.model;
 
 public class Category {
 	private String name;

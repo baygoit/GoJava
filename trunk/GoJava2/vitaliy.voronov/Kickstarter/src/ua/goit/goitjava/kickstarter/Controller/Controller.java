@@ -1,8 +1,11 @@
-package ua.goit.goitjava.kickstarter.DB;
+package ua.goit.goitjava.kickstarter.Controller;
 
-import ua.goit.goitjava.kickstarter.Category;
 import ua.goit.goitjava.kickstarter.ConsoleIO;
 import ua.goit.goitjava.kickstarter.Quote;
+import ua.goit.goitjava.kickstarter.DB.CategoriesDAO;
+import ua.goit.goitjava.kickstarter.DB.ProjectDAO;
+import ua.goit.goitjava.kickstarter.model.Category;
+import ua.goit.goitjava.kickstarter.model.Project;
 
 public class Controller {
 	
@@ -31,6 +34,14 @@ public class Controller {
 			consol.print(text);
 		}
 		
+	}
+	
+	public String getCategoriesString(){
+		String categories = "";
+		for(Category list: cat.getAllCategories()){
+		categories += list.getName() + "\n";
+		}
+		return categories;
 	}
 	
 	public void showSelectProject(int num, int categoryId) {

@@ -1,9 +1,6 @@
-package ua.goit.goitjava.kickstarter.DB;
+package ua.goit.goitjava.kickstarter.model;
 
 import java.util.ArrayList;
-
-import ua.goit.goitjava.kickstarter.Category;
-import ua.goit.goitjava.kickstarter.FAQ;
 
 public class Project {
 	private String name;

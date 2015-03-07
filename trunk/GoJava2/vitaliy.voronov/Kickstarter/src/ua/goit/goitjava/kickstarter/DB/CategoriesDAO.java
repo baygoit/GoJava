@@ -7,9 +7,10 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import ua.goit.goitjava.kickstarter.Category;
+import ua.goit.goitjava.kickstarter.model.Category;
 
 public class CategoriesDAO {
+	
 	public List<Category> getAllCategories(){
 		Connection c = null;
 		Statement st = null;

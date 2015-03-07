@@ -2,6 +2,8 @@ package ua.goit.goitjava.kickstarter;
 
 import java.util.Scanner;
 
+import ua.goit.goitjava.kickstarter.model.Project;
+
 public class ConsoleIO implements IO {
 	
 	@Override
