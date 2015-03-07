@@ -35,11 +35,9 @@ public class ProjectsFromDB implements Projects{
 										result.getInt("how_much_needed_project"),
 										result.getInt("how_much_collected_project"),
 										result.getInt("how_much_remaining_project"),
-										null, PeriodBetweenDates.periodJoda(result.getString("date_close_project"))));
+										getFaq(result.getInt("id_project")),
+										PeriodBetweenDates.periodJoda(result.getString("date_close_project"))));
 			}
-
-//			writeFaq(projects);
-			
 		} catch (SQLException e) {
 			System.err.println( e.getClass().getName()+": "+ e.getMessage() );
 		}
@@ -64,22 +62,23 @@ public class ProjectsFromDB implements Projects{
 										result.getInt("how_much_needed_project"),
 										result.getInt("how_much_collected_project"),
 										result.getInt("how_much_remaining_project"),
-										null, PeriodBetweenDates.periodJoda(result.getString("date_close_project")));
+										getFaq(progectID), PeriodBetweenDates.periodJoda(result.getString("date_close_project")));
 			}
-
-//			writeFaq(project);
-			
 		} catch (SQLException e) {
 			System.err.println( e.getClass().getName()+": "+ e.getMessage() );
 		}
 		return project;
 	}
-
-//	private void writeFaq(List<Project> projects) {
-//		for (Project project: projects){
-//			project.setFaq(getFaq(project.getProjectID()));
-//		}
-//	}
+	
+	@Override
+	public void addFAQ(int projectID, String question) {
+		try {
+			Statement statement = connection.createStatement();
+			statement.execute("INSERT INTO faq(id_project, question)VALUES (" + projectID + ", '" + question + "');");
+		} catch (SQLException e) {
+			System.err.println( e.getClass().getName()+": "+ e.getMessage() );
+		}
+	}
 	
 	@Override
 	public void setDonation(int projectID, int amount) {
@@ -91,17 +90,6 @@ public class ProjectsFromDB implements Projects{
 		} catch (SQLException e) {
 			System.err.println( e.getClass().getName()+": "+ e.getMessage() );
 		}
-	}
-
-	@Override
-	public void addFAQ(int projectID, String question) {
-		try {
-			Statement statement = connection.createStatement();
-			statement.execute("INSERT INTO faq(id_project, question)VALUES (" + projectID + ", '" + question + "');");
-		} catch (SQLException e) {
-			System.err.println( e.getClass().getName()+": "+ e.getMessage() );
-		}
-//		writeFaq();
 	}
 
 	@Override
