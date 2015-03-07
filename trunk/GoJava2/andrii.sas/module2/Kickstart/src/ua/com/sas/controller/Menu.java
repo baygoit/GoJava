@@ -45,7 +45,7 @@ public abstract class Menu {
 				if (enteredValue == 0){
 					break;
 				} else {
-					checkedValue = enteredValue - 1;
+					checkedValue = enteredValue;
 					displaySelectedItems();
 				}
 				toNextLevel();

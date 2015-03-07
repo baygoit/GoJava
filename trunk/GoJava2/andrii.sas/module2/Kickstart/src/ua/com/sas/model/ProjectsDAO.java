@@ -32,7 +32,7 @@ public class ProjectsDAO implements Projects{
 			statement.setString(8, project.getVideoLink());
 			statement.setString(9, project.getQuestion());
 			statement.execute();
-			ResultSet rs = stat.executeQuery("SELECT * FROM categories WHERE name = \'" + project.getProjectName() + "\'");
+			ResultSet rs = stat.executeQuery("SELECT * FROM projects WHERE name = \'" + project.getProjectName() + "\'");
 			while (rs.next()){
 				project.setId(rs.getInt(1));
 			}
@@ -51,7 +51,7 @@ public class ProjectsDAO implements Projects{
 					+ "projects.id as pid, * FROM projects INNER JOIN categories ON projects.category_id = categories.id"
 					+ " WHERE projects.id =" + id);
 			while (rs.next()){
-				project = new Project(new Category(rs.getInt("category_id"), rs.getString("cname")));
+				project = new Project(rs.getInt("pid"), new Category(rs.getInt("category_id"), rs.getString("cname")));
 				initProject(rs, project);
 			}
 		return project;
@@ -80,9 +80,9 @@ public class ProjectsDAO implements Projects{
 			categoryProjects.clear();
 			Project project;
 			Statement statement = connection.createStatement();
-			ResultSet rs = statement.executeQuery("SELECT * FROM projects INNER JOIN categories ON category_id = categories.id WHERE categories.id = " + category.getId());
+			ResultSet rs = statement.executeQuery("SELECT projects.id as pid, * FROM projects INNER JOIN categories ON category_id = categories.id WHERE categories.id = " + category.getId());
 			while (rs.next()){
-					project = new Project(category);
+					project = new Project(rs.getInt("pid"), category);
 					initProject(rs, project);
 					categoryProjects.add(project);
 			}

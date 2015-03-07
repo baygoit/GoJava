@@ -26,6 +26,11 @@ public class Project { //too much parameters, need to create new classes
 	public Project(Category category){
 		this.category = category;
 	}
+
+	public Project(int id, Category category){
+		this.id = id;
+		this.category = category;
+	}
 	
 	public Category getCategory(){
 		return category;

@@ -111,7 +111,7 @@ public class Kickstart {
 			
 			@Override
 			public void displaySelectedItems() {
-				if (getCheckedValue() == 0){
+				if (getCheckedValue() == 1){
 					view.println("Thanks for choosing our project");
 					int menuItem = 1;
 					List<Integer> keys = new ArrayList<Integer>();
@@ -136,7 +136,7 @@ public class Kickstart {
 					} else if (payment > 0 && payment <= keys.size()) {
 						project.increaseMoneyHas(keys.get(payment - 1));
 					}
-				} else if (getCheckedValue() == 1){
+				} else if (getCheckedValue() == 2){
 					view.println("Ask your question, please:");
 					String question = input.readChoice();
 					view.println("Your question is: " + question);
