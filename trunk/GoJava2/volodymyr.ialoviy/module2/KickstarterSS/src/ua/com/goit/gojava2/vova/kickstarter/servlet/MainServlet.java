@@ -45,9 +45,11 @@ public class MainServlet extends HttpServlet {
 			int categoryID = Integer.valueOf(req.getParameter("category"));
 			
 			ProjectsFromDB projectsFromDB = new ProjectsFromDB(connection);
-//			List<Project> projects = projectsFromDB.getProjects();//getProgectForCategory
+			List<Project> projects = projectsFromDB.getProgectsForCategory(categoryID);
 			
+			req.setAttribute("projects", projects);
 			
+			req.getRequestDispatcher("projects.jsp").forward(req, resp);
 			
 		}
 	}
