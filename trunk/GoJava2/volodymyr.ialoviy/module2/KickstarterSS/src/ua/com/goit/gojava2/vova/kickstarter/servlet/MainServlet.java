@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import ua.com.goit.gojava2.vova.kickstarter.model.CategoriesFromDB;
 import ua.com.goit.gojava2.vova.kickstarter.model.Category;
+import ua.com.goit.gojava2.vova.kickstarter.model.Project;
+import ua.com.goit.gojava2.vova.kickstarter.model.ProjectsFromDB;
 
 public class MainServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -36,12 +38,16 @@ public class MainServlet extends HttpServlet {
 			
 			req.setAttribute("categories", categories);
 			
-			req.setAttribute("massage", "massage");
-			
 			req.getRequestDispatcher("categories.jsp").forward(req, resp);
 			
 			
 		} else if (action.startsWith("/projects")){
+			int categoryID = Integer.valueOf(req.getParameter("category"));
+			
+			ProjectsFromDB projectsFromDB = new ProjectsFromDB(connection);
+//			List<Project> projects = projectsFromDB.getProjects();//getProgectForCategory
+			
+			
 			
 		}
 	}

@@ -35,21 +35,4 @@ public class CategoriesFromDB implements Categories{
 		String name = category.getCategoryName();
 		return name;
 	}
-
-	@Override
-	public int[] getKickCategories() {
-		ArrayList<Integer> array = new ArrayList<Integer>();
-		List<Category> category = getCategories();
-		for (Category cat : category){
-			array.add(cat.getCategoryID());
-		}
-
-		int[] a = new int[array.size()];//TODO DELETE, INT[] = lIST
-        int j = 0;
-        for (Integer i : array){
-        	a[j] = i;
-        	j++;
-        }
-		return a;
-	}
 }

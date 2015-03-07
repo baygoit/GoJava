@@ -2,7 +2,6 @@ package ua.com.goit.gojava2.vova.kickstarter.presenter;
 
 import ua.com.goit.gojava2.vova.kickstarter.model.Categories;
 import ua.com.goit.gojava2.vova.kickstarter.model.Projects;
-import ua.com.goit.gojava2.vova.kickstarter.util.InputChecker;
 import ua.com.goit.gojava2.vova.kickstarter.view.Inputs;
 import ua.com.goit.gojava2.vova.kickstarter.view.View;
 
@@ -28,9 +27,6 @@ public class Presenter {
 	}
 
 	public void kickstarter(){
-
-		projects.setProjects();//TODO DELETE
-		
 		categories();
 		view.printClose();
 	}
@@ -61,8 +57,8 @@ public class Presenter {
 	private void project() {
 		int[] optionVariant = { menuStatus.getMenuProjects(), menuStatus.getMenuPayment(), menuStatus.getMenuQuestion(), menuStatus.getExit() };
 
-		view.printProject(projects.getProjects().get(chosenProject - 1));
-				
+		view.printProject(projects.getProgect(chosenProject));
+		
 		view.printChoiceProjectOrPaymentOrQuestion(menuStatus.getMenuProjects(), menuStatus.getMenuPayment(), menuStatus.getMenuQuestion());
 		askAfterProject(optionVariant);
 
@@ -136,91 +132,41 @@ public class Presenter {
 	}
 
 	private void askCategory() {
-		String choice = in.enter();
-		if (InputChecker.checkNumber(categories.getKickCategories(), choice)){
-			chosenCategoryID = Integer.valueOf(choice);
-		}
-		else {
-			view.printBug();
-			askCategory();
-		}
-	}
-	
-	private void printProjectsInCategory(int chosenCategoryID, int menuCategories) {
-		view.printYourChosenCategory(categories.showCatecoryName(chosenCategoryID));
-		view.printShortProgect(projects.getProjects(), projects.projectsThatAreContainedInTheCategory(chosenCategoryID));
-		view.printChoiceProjectNumber(menuCategories);
+		chosenCategoryID = Integer.valueOf(in.enter());
 	}
 
 	private void askProject(int[] allowedVariants) {
-		int[] concatProjectsAndVariants = concatArray(projects.projectsThatAreContainedInTheCategory(chosenCategoryID), allowedVariants);
-		String choice = in.enter();
-		if (InputChecker.checkNumber(concatProjectsAndVariants, choice)){
-			chosenProject = Integer.valueOf(choice);
-		}
-		else {
-			view.printBug();
-			askProject(allowedVariants);
-		}
+		chosenProject = Integer.valueOf(in.enter());
 	}
 
 	private void askAfterProject(int[] intSwitch) {
-		String choice = in.enter();
-		if (InputChecker.checkNumber(intSwitch, choice)){
-			choiceTo = Integer.valueOf(choice);
-		}
-		else {
-			view.printBug();
-			askAfterProject(intSwitch);
-		}
+		choiceTo = Integer.valueOf(in.enter());
 	}
 
 	private void askHowMuchPay(int[] intSwitch) {
-		String choice = in.enter();
-		if (InputChecker.checkNumber(intSwitch, choice)){
-			chosenPay = Integer.valueOf(choice);
-		}
-		else {
-			view.printBug();
-			askHowMuchPay(intSwitch);
-		}
+		chosenPay = Integer.valueOf(in.enter());
 	}
 	
 	private void inAmount() {
-		String choice = in.enter();
-		if (InputChecker.checkAmount(choice)){
-			chosenPay = Integer.valueOf(choice);
-		}
-		else {
-			view.printBug();
-			inAmount();
-		}
+		chosenPay = Integer.valueOf(in.enter());
 	}
 
 	private void inCardNumber(long cardNumber){
-		String choice = in.enter();
-		if (InputChecker.checkCard(choice)){
-			cardNumber = Long.valueOf(choice);
-		}
-		else {
-			view.printBug();
-			inCardNumber(cardNumber);
-		}
+		cardNumber = Long.valueOf(in.enter());
 	}
 	
 	private void askName(String name) {
-		String choice = in.enter();
-		if (InputChecker.checkName(choice)){
-			name = choice;
-		}
-		else {			
-			view.printBug();
-			askName(name);
-		}
+		name = in.enter();
 	}
 	
 	private void askQuestion() {
 		projects.addFAQ(chosenProject, in.enter());
+	}
+
+	private void printProjectsInCategory(int chosenCategoryID, int menuCategories) {
+		view.printYourChosenCategory(categories.showCatecoryName(chosenCategoryID));
+		view.printShortProgect(projects.getProgectsForCategory(chosenCategoryID));
+		view.printChoiceProjectNumber(menuCategories);
 	}
 	
 	private Boolean elementInArray(int[] a, int b) {
@@ -232,16 +178,5 @@ public class Presenter {
 			}
 		}
 		return c;
-	}
-
-	private int[] concatArray(int[] a, int[] b) {
-		if (a == null)
-			return b;
-		if (b == null)
-			return a;
-		int[] r = new int[a.length + b.length];
-		System.arraycopy(a, 0, r, 0, a.length);
-		System.arraycopy(b, 0, r, a.length, b.length);
-		return r;
 	}
 }

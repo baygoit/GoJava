@@ -37,9 +37,8 @@ public class View {
 				+ ", containing the following projects: ");
 	}
 	
-	public void printShortProgect(List<Project> projects, int[] array){
-		for (int i : array){
-			Project project = projects.get(i - 1);
+	public void printShortProgect(List<Project> projects){
+		for (Project project : projects){
 			printer(project.getProjectID() + " " +  project.getProjectName() + " " + project.getShortDescription() + " " + 
 						project.getHowMuchNeeded() + " " + project.getHowMuchCollected());
 		}
@@ -99,10 +98,6 @@ public class View {
 	
 	public void printThank(String name, int chosenPay) {
 		printer("Thank you " + name + " for your generous (" + chosenPay + ") contribution.");
-	}
-
-	public void printBug() {
-		printer("You have entered an incorrect value or a null value, check the value you entered and try again");		
 	}
 
 	public void printClose() {

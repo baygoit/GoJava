@@ -11,7 +11,6 @@ import ua.com.goit.gojava2.vova.kickstarter.util.PeriodBetweenDates;
 
 public class ProjectsFromDB implements Projects{
 	
-	private List<Project> projects;
 	private Connection connection;
 	
 	public ProjectsFromDB(Connection connection) {
@@ -19,17 +18,12 @@ public class ProjectsFromDB implements Projects{
 	}
 
 	@Override
-	public List<Project> getProjects() {
-		return projects;
-	}
-
-	@Override
-	public void setProjects() {
-		projects = new ArrayList<Project>();
+	public List<Project> getProgectsForCategory(int categoryID) {
+		List<Project> projects = new ArrayList<Project>();
 		ResultSet result;
 		try {
 			Statement statement = connection.createStatement();
-			result = statement.executeQuery("SELECT * FROM projects ORDER BY id_project");
+			result = statement.executeQuery("SELECT * FROM projects WHERE id_category=" + categoryID + "ORDER BY id_project");
 			while (result.next()) {
 				projects.add(new Project(result.getInt("id_project"), 
 										result.getInt("id_category"),
@@ -44,33 +38,59 @@ public class ProjectsFromDB implements Projects{
 										null, PeriodBetweenDates.periodJoda(result.getString("date_close_project"))));
 			}
 
-			writeFaq();
+//			writeFaq(projects);
 			
 		} catch (SQLException e) {
-			System.err.println( e.getClass().getName()+": +++"+ e.getMessage() );
+			System.err.println( e.getClass().getName()+": "+ e.getMessage() );
 		}
-	}
-
-	private void writeFaq() {
-		for (Project project: projects){
-			project.setFaq(getFaq(project.getProjectID()));
-		}
+		return projects;
 	}
 	
 	@Override
-	public void setDonation(int chosenProject, int amount) {
+	public Project getProgect(int progectID) {
+		Project project = null;
+		ResultSet result;
+		try {
+			Statement statement = connection.createStatement();
+			result = statement.executeQuery("SELECT * FROM projects WHERE id_project=" + progectID);
+			while (result.next()) {
+				project = new Project(result.getInt("id_project"), 
+										result.getInt("id_category"),
+										result.getString("name_project"),
+										result.getString("short_description_project"),
+										result.getString("full_description_project"),
+										result.getString("foto_project"),
+										result.getString("link_project"),
+										result.getInt("how_much_needed_project"),
+										result.getInt("how_much_collected_project"),
+										result.getInt("how_much_remaining_project"),
+										null, PeriodBetweenDates.periodJoda(result.getString("date_close_project")));
+			}
+
+//			writeFaq(project);
+			
+		} catch (SQLException e) {
+			System.err.println( e.getClass().getName()+": "+ e.getMessage() );
+		}
+		return project;
+	}
+
+//	private void writeFaq(List<Project> projects) {
+//		for (Project project: projects){
+//			project.setFaq(getFaq(project.getProjectID()));
+//		}
+//	}
+	
+	@Override
+	public void setDonation(int projectID, int amount) {
 		try {
 			Statement statement = connection.createStatement();
 			statement.execute("UPDATE projects SET how_much_collected_project=how_much_collected_project+" + amount
 			    	+ ", how_much_remaining_project=how_much_remaining_project-" + amount
-			    	+ "WHERE id_project=" + chosenProject + ";");
+			    	+ "WHERE id_project=" + projectID + ";");
 		} catch (SQLException e) {
 			System.err.println( e.getClass().getName()+": "+ e.getMessage() );
 		}
-
-		Project project = getProjects().get(chosenProject - 1);
-		project.setHowMuchCollected(project.getHowMuchCollected() + amount);
-		project.setHowMuchRemaining(project.getHowMuchRemaining() - amount);
 	}
 
 	@Override
@@ -81,7 +101,7 @@ public class ProjectsFromDB implements Projects{
 		} catch (SQLException e) {
 			System.err.println( e.getClass().getName()+": "+ e.getMessage() );
 		}
-		writeFaq();
+//		writeFaq();
 	}
 
 	@Override
@@ -99,24 +119,5 @@ public class ProjectsFromDB implements Projects{
 			System.err.println( e.getClass().getName()+": "+ e.getMessage() );
 		}
 		return s;
-	}
-
-	@Override
-	public int[] projectsThatAreContainedInTheCategory(int categoryId) {
-		ArrayList<Integer> array = new ArrayList<Integer>();
-		List<Project> projects = getProjects();
-		for (Project project : projects){
-			if (project.getCategoryID() == categoryId){
-				array.add(project.getProjectID());
-			}
-		}
-
-        int[] a = new int[array.size()];//TODO DELETE, INT[] = lIST or relocate to util
-        int j = 0;
-        for (Integer i : array){
-        	a[j] = i;
-        	j++;
-        }
-		return a;
 	}
 }

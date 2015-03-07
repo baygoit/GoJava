@@ -8,6 +8,4 @@ public interface Categories {
 	List<Category> getCategories();
 
 	String showCatecoryName(int categoryId);
-
-	int[] getKickCategories();
 }
