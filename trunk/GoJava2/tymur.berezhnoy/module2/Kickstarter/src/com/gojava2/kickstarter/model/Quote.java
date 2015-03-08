@@ -2,10 +2,10 @@ package com.gojava2.kickstarter.model;
 
 public class Quote {
 	
-	private String author;
 	private String content;
+	private String author;
 	
-	private final char COPIRIGHT_SYMBOL = 169;
+	transient private final char COPIRIGHT_SYMBOL = 169;
 	
 	public Quote(String content, String author) {
 		this.content = content;

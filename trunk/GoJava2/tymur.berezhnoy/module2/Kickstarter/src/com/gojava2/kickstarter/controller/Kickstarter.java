@@ -3,31 +3,22 @@ package com.gojava2.kickstarter.controller;
 import java.util.Random;
 
 import com.gojava2.kickstarter.model.Category;
+import com.gojava2.kickstarter.model.CategoryStorage;
 import com.gojava2.kickstarter.model.CategoryStorageInMemory;
 import com.gojava2.kickstarter.model.Project;
+import com.gojava2.kickstarter.model.ProjectStorage;
 import com.gojava2.kickstarter.model.ProjectStorageInMemory;
-import com.gojava2.kickstarter.model.Quote;
-import com.gojava2.kickstarter.model.QuoteStorageInMemory;
+import com.gojava2.kickstarter.model.QuoteStorage;
+import com.gojava2.kickstarter.model.QuoteStorageInFile;
 import com.gojava2.kickstarter.view.ConsoleInput;
 import com.gojava2.kickstarter.view.ConsoleView;
 
 public class Kickstarter {
 
 	public static void main(String[] args) {
-		QuoteStorageInMemory quoteStorage = new QuoteStorageInMemory(new Random());
-		CategoryStorageInMemory categoryStorage = new CategoryStorageInMemory();
-		ProjectStorageInMemory projectStorageInVM = new ProjectStorageInMemory();
-		
-		quoteStorage.add(new Quote("Sometimes when you innovate, you make mistakes."
-				+ "\n It is best to admit them quickly, and get on with\n improving your other innovations.", "Steve Jobs"));
-		quoteStorage.add(new Quote("Sometimes when you innovate, you make mistakes."
-				+ "\n It is best to admit them quickly, and get on with\n improving your other innovations.", "Steve Jobs"));
-		quoteStorage.add(new Quote("The common question that gets asked in business is, 'why?'."
-				+ "\n That's a good question, but an equally valid question is, 'why not?'", "Jeff Bezos"));
-		quoteStorage.add(new Quote("If there is anything that a man can do well,\n I say let him do it. Give him a chance.", "Abraham Lincoln"));
-		quoteStorage.add(new Quote("Great leaders, like Steve Jobs or Jeff Bezos, also focused on the long term.", "Reed Hastings"));
-		quoteStorage.add(new Quote("When you're curious, you find lots of interesting things to do.", "Walt Disney"));
-		
+		QuoteStorage quoteStorage = new QuoteStorageInFile(new Random(), "Data/Quotes.json");
+		CategoryStorage categoryStorage = new CategoryStorageInMemory();
+		ProjectStorage projectStorageInVM = new ProjectStorageInMemory();
 		Category category1 = new Category("Art");
 		Category category2 = new Category("Comics");
 		Category category3 = new Category("Dance");

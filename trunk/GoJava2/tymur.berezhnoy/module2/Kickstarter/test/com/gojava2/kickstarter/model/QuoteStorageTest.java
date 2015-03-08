@@ -36,7 +36,7 @@ public abstract class QuoteStorageTest {
 
 	
 	@Test
-	public void shouldGenerateNewQUote() {
+	public void shouldGenerateRandomQuote() {
 		// given
 		Quote quote1 = new Quote("quote1", "author1");
 		Quote quote2 = new Quote("quote2", "author2");
