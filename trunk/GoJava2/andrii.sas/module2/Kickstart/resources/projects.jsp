@@ -12,5 +12,7 @@
            <c:out value="${project.daysLeft}"></c:out><br>
            <c:out value="----------------------------------------------"></c:out><br>
         </c:forEach>
+        <br>
+        <a href="/Kickstarter/categories">Return</a>
     </body>
 </html>

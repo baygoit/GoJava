@@ -64,6 +64,7 @@ public class ProjectsDAO implements Projects{
 		try {
 			project.setProject(rs.getString("name"), rs.getString("description"), rs.getInt("money_need"), rs.getInt("money_has"),
 					rs.getInt("days_left"), rs.getString("history"), rs.getString("video_link"), rs.getString("question"));
+			project.setCategoryId(rs.getInt("category_id"));
 		} catch (SQLException e) {
 			throw new RuntimeException("Connection failed, check your connection parameters", e);
 		}

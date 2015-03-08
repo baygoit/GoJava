@@ -34,14 +34,14 @@ public class MainServlet extends HttpServlet {
 			
 			req.getRequestDispatcher("projects.jsp").forward(req, resp);
 		} else if (action.equals("/project")) {
-			int projectId = Integer.valueOf(req.getParameter("project"));
+			int projectId = Integer.valueOf(req.getParameter("id"));
 			
 			ProjectsDAO projectsDAO = new ProjectsDAO(connectionDAO);	
-			Project project = projectsDAO.get(1);
+			Project project = projectsDAO.get(projectId);
 			
 			req.setAttribute("project", project);
 			
-//			req.getRequestDispatcher("project.jsp").forward(req, resp);
+			req.getRequestDispatcher("project.jsp").forward(req, resp);
 		}		
 	}
 	
