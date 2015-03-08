@@ -6,7 +6,7 @@ import java.util.Map;
 public class Project { //too much parameters, need to create new classes
 	private int id;
 	private int categoryId;
-	private String nameOfProject;
+	private String name;
 	private String description;
 	private int moneyNeed;
 	private int moneyHas;
@@ -38,7 +38,7 @@ public class Project { //too much parameters, need to create new classes
 	
 	public void setProject(String nameOfProject, String description, int moneyNeed, int moneyHas, int daysLeft, String history, String videoLink,
 			String questions){
-		this.nameOfProject = nameOfProject;
+		this.name = nameOfProject;
 		this.description = description;
 		this.moneyNeed = moneyNeed;
 		this.moneyHas = moneyHas;
@@ -58,7 +58,7 @@ public class Project { //too much parameters, need to create new classes
 	
 	@Override
 	public String toString() {
-		return "Project [nameOfProject=" + nameOfProject + ", description="
+		return "Project [nameOfProject=" + name + ", description="
 				+ description + ", moneyNeed=" + moneyNeed + ", moneyHas="
 				+ moneyHas + ", daysLeft=" + daysLeft + ", category="
 				+ category + ", history=" + history + ", videoLink="
@@ -74,8 +74,8 @@ public class Project { //too much parameters, need to create new classes
 	}
 
 
-	public String getProjectName(){
-		return nameOfProject;
+	public String getName(){
+		return name;
 	}
 	
 	public String getDescription(){
@@ -141,7 +141,7 @@ public class Project { //too much parameters, need to create new classes
 		int result = 1;
 		result = prime * result + id;
 		result = prime * result
-				+ ((nameOfProject == null) ? 0 : nameOfProject.hashCode());
+				+ ((name == null) ? 0 : name.hashCode());
 		return result;
 	}
 	
@@ -156,10 +156,10 @@ public class Project { //too much parameters, need to create new classes
 		Project other = (Project) obj;
 		if (id != other.id)
 			return false;
-		if (nameOfProject == null) {
-			if (other.nameOfProject != null)
+		if (name == null) {
+			if (other.name != null)
 				return false;
-		} else if (!nameOfProject.equals(other.nameOfProject))
+		} else if (!name.equals(other.name))
 			return false;
 		return true;
 	}

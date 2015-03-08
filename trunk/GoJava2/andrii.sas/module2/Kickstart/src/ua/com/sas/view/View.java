@@ -47,7 +47,7 @@ public class View {
 	}
 	
 	public String writeProject(Project project) {
-		return " Name - " + project.getProjectName() + ", Description - "
+		return " Name - " + project.getName() + ", Description - "
 				+ project.getDescription() + ", Money we need - "
 				+ project.getMoneyNeed() + ", Money we have - "
 				+ project.getMoneyHas() + ", Days left - "

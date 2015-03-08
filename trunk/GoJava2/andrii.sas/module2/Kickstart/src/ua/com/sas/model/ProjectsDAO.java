@@ -23,7 +23,7 @@ public class ProjectsDAO implements Projects{
 			PreparedStatement statement = connection.prepareStatement("INSERT INTO projects (category_id, name, description, money_need,"
 					+ " money_has, days_left, history, video_link, question) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
 			statement.setInt(1, project.getCategoryId());
-			statement.setString(2, project.getProjectName());
+			statement.setString(2, project.getName());
 			statement.setString(3, project.getDescription());
 			statement.setInt(4, project.getMoneyNeed());
 			statement.setInt(5, project.getMoneyHas());
@@ -32,7 +32,7 @@ public class ProjectsDAO implements Projects{
 			statement.setString(8, project.getVideoLink());
 			statement.setString(9, project.getQuestion());
 			statement.execute();
-			ResultSet rs = stat.executeQuery("SELECT * FROM projects WHERE name = \'" + project.getProjectName() + "\'");
+			ResultSet rs = stat.executeQuery("SELECT * FROM projects WHERE name = \'" + project.getName() + "\'");
 			while (rs.next()){
 				project.setId(rs.getInt(1));
 			}
