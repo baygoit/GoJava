@@ -7,30 +7,28 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Random;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 
-public class QuoteStorageInFile implements QuoteStorage {
+public class ProjectStorageInFile implements ProjectStorage {
 
-	private int amountQuotes;
 	private String fileURL;
-	
 	private File file;
-	private Random random;
 	
-	public QuoteStorageInFile(Random random, String filePath) {
-		this.random = random;
-		this.fileURL = filePath;
+	public ProjectStorageInFile(String fileURL) {
+		this.fileURL = fileURL;
 		file = new File(fileURL);
 		checkFile();
 	}
 	
 	@Override
-	public void add(Quote quote) {
+	public void addProject(Project project) {
 		BufferedWriter writer = null;
 		BufferedReader reader = null;
 		
@@ -39,7 +37,7 @@ public class QuoteStorageInFile implements QuoteStorage {
 			Gson gson = new GsonBuilder().setPrettyPrinting().create();
 			
 			JsonArray jArray = new JsonParser().parse(reader).getAsJsonArray();
-			jArray.add(gson.toJsonTree(quote));
+			jArray.add(gson.toJsonTree(project));
 			
 			writer = new BufferedWriter(new FileWriter(file));
 			writer.write(gson.toJson(jArray));
@@ -58,11 +56,25 @@ public class QuoteStorageInFile implements QuoteStorage {
 	}
 
 	@Override
-	public Quote getRandomQuote() throws IllegalArgumentException {
-		Quote quote;
+	public Project getProject(Category category, int i) {
+		return null;
+	}
+
+	@Override
+	public List<Project> getProjects(Category category) {
+		List<Project> projects = new ArrayList<Project>();
 		Gson gson = new Gson();
-		quote = gson.fromJson(readFile().get(random.nextInt(amountQuotes)), Quote.class);
-		return quote;
+		JsonArray array = readFile();
+		for(JsonElement element: array) {
+				projects.add(gson.fromJson(element, Project.class));
+
+		}
+		return projects;
+	}
+
+	@Override
+	public int getSize() {
+		return 0;
 	}
 	
 	private JsonArray readFile() {
@@ -71,7 +83,7 @@ public class QuoteStorageInFile implements QuoteStorage {
 		try {
 			reader = new BufferedReader(new FileReader(file));
 			jsonArr = new JsonParser().parse(reader).getAsJsonArray();
-			amountQuotes = jsonArr.size();
+			
 		} catch (FileNotFoundException e) {
 		} finally {
 			if(reader != null) {

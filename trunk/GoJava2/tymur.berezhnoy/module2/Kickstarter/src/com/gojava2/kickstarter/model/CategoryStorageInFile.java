@@ -7,44 +7,51 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Random;
+import java.util.LinkedHashSet;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 
-public class QuoteStorageInFile implements QuoteStorage {
+public class CategoryStorageInFile implements CategoryStorage {
 
-	private int amountQuotes;
+	private int size;
+	
 	private String fileURL;
-	
 	private File file;
-	private Random random;
 	
-	public QuoteStorageInFile(Random random, String filePath) {
-		this.random = random;
-		this.fileURL = filePath;
+	
+	public CategoryStorageInFile(String fileURL) {
+		this.fileURL = fileURL;
 		file = new File(fileURL);
 		checkFile();
 	}
 	
 	@Override
-	public void add(Quote quote) {
+	public int getSize() {
+		readFile();
+		return size;
+	}
+
+	@Override
+	public void addCategory(Category category) {
 		BufferedWriter writer = null;
 		BufferedReader reader = null;
-		
 		try {
 			reader = new BufferedReader(new FileReader((file)));
 			Gson gson = new GsonBuilder().setPrettyPrinting().create();
 			
 			JsonArray jArray = new JsonParser().parse(reader).getAsJsonArray();
-			jArray.add(gson.toJsonTree(quote));
+			jArray.add(gson.toJsonTree(category));
 			
 			writer = new BufferedWriter(new FileWriter(file));
 			writer.write(gson.toJson(jArray));
 		} catch (FileNotFoundException e1) {
+			e1.printStackTrace();
 		} catch (IOException e2) {
+			e2.printStackTrace();
 		}  finally {
 			if(writer != null && reader != null) {
 				try {
@@ -58,26 +65,36 @@ public class QuoteStorageInFile implements QuoteStorage {
 	}
 
 	@Override
-	public Quote getRandomQuote() throws IllegalArgumentException {
-		Quote quote;
+	public Category getCategory(int i) {
+		return (Category) getCategories().toArray()[i - 1];
+	}
+
+	@Override
+	public LinkedHashSet<Category> getCategories() {
+		LinkedHashSet<Category> categories = new LinkedHashSet<Category>();
 		Gson gson = new Gson();
-		quote = gson.fromJson(readFile().get(random.nextInt(amountQuotes)), Quote.class);
-		return quote;
+		JsonArray array = readFile();
+		for(JsonElement element: array) {
+			categories.add(gson.fromJson(element, Category.class));
+		}
+		return categories;
 	}
 	
 	private JsonArray readFile() {
-		BufferedReader reader = null;
+		BufferedReader inPut = null;
 		JsonArray jsonArr = null;
 		try {
-			reader = new BufferedReader(new FileReader(file));
-			jsonArr = new JsonParser().parse(reader).getAsJsonArray();
-			amountQuotes = jsonArr.size();
+			inPut = new BufferedReader(new FileReader(file));
+			jsonArr = new JsonParser().parse(inPut).getAsJsonArray();
+			size = jsonArr.size();
 		} catch (FileNotFoundException e) {
+			e.printStackTrace();
 		} finally {
-			if(reader != null) {
+			if(inPut != null) {
 				try {
-					reader.close();
+					inPut.close();
 				} catch (IOException e) {
+					e.printStackTrace();
 				}
 			}
 		}

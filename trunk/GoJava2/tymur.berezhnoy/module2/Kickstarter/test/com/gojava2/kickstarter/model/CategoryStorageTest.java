@@ -2,17 +2,20 @@ package com.gojava2.kickstarter.model;
 
 import static org.junit.Assert.*;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-public class CategoryStorageInMemoryTest {
+public abstract class CategoryStorageTest {
 
 	private CategoryStorage storage;
 	
 	@Before
 	public void setUp() {
-		storage = new CategoryStorageInMemory();
+		storage = getStorage();
 	}
+	
+	abstract CategoryStorage getStorage();
 	
 	@Test
 	public void shouldContainsCategory_whenAddCategories() {
@@ -29,8 +32,6 @@ public class CategoryStorageInMemoryTest {
 	
 	@Test
 	public void shouldZeroSize_whenNoCategories() {
-		// given
-		
 		// when
 		int expectedSize = 0;
 		
