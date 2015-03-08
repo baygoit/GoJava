@@ -2,10 +2,12 @@ package com.kickstarter.controller;
 
 import java.util.Random;
 
+import com.kickstarter.model.Categories;
 import com.kickstarter.model.InMemoryCategories;
+import com.kickstarter.model.Projects;
 import com.kickstarter.model.QuotesStorage;
 import com.kickstarter.model.Project;
-import com.kickstarter.model.ProjectsStorage;
+import com.kickstarter.model.InMemoryProjects;
 import com.kickstarter.model.Сategory;
 import com.kickstarter.view.ConsoleView;
 import com.kickstarter.view.InPut;
@@ -15,8 +17,8 @@ public class Kickstarter {
     public static void main(String[] args) {
     	QuotesStorage quotesStorage = new QuotesStorage(new Random());
     	ConsoleView consoleView = new ConsoleView();
-    	InMemoryCategories categories = new InMemoryCategories();
-    	ProjectsStorage projects = new ProjectsStorage();
+    	Categories categories = new InMemoryCategories();
+    	Projects projects = new InMemoryProjects();
     	InPut inPut = new InPut();
     	
     	Сategory food = new Сategory("FOOD");
@@ -47,12 +49,12 @@ public class Kickstarter {
     	project5.setСategory(education);
     	project6.setСategory(education);
     	
-    	projects.addProject(project1);
-    	projects.addProject(project2);
-    	projects.addProject(project3);
-    	projects.addProject(project4);
-    	projects.addProject(project5);
-    	projects.addProject(project6);
+    	projects.add(project1);
+    	projects.add(project2);
+    	projects.add(project3);
+    	projects.add(project4);
+    	projects.add(project5);
+    	projects.add(project6);
     
         KickstarterEngine engine = new KickstarterEngine(consoleView, quotesStorage, inPut, categories, projects);
         engine.run();

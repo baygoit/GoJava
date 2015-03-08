@@ -9,41 +9,43 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-public class CategoriesStorageTest {
+public abstract class CategoriesTest {
 	
-	private CategoriesStorage categoriesStorage;
+	private Categories categories;
 
 	@Before
 	public void setUp() {
-		categoriesStorage = new CategoriesStorage();
+		categories = getCategories();
 	}
 	
+	abstract Categories getCategories();
+
 	@Test
 	public void shouldListContainsCategory_whenAddCategory() {
 		Сategory category = new Сategory("Food");
-		categoriesStorage.addCategory(category);
-		assertTrue(categoriesStorage.getCategoriesList().contains(category));
+		categories.add(category);
+		assertTrue(categories.getCategories().contains(category));
 	}
 	
 	@Test
 	public void shouldSize0_whenNoCategory() {
 		int size = 0;
-		assertEquals(size, categoriesStorage.getSizeCategories());
+		assertEquals(size, categories.size());
 	}
 	
 	@Test
 	public void shouldGetCategoryByIndexPlus1() {
 		Сategory category1 = new Сategory("Sport");
-		categoriesStorage.addCategory(category1);
-		assertSame(category1, categoriesStorage.getSpecificCategory(1));
+		categories.add(category1);
+		assertSame(category1, categories.get(1));
 	}	
 	
 	@Test
 	public void shouldSizeTwo_whenCategorytwo() {
 		int size = 2;
-		categoriesStorage.addCategory(new Сategory("Music"));
-		categoriesStorage.addCategory(new Сategory("Sport"));		
-		assertEquals(size, categoriesStorage.getSizeCategories());
+		categories.add(new Сategory("Music"));
+		categories.add(new Сategory("Sport"));		
+		assertEquals(size, categories.size());
 	}
 	
 }

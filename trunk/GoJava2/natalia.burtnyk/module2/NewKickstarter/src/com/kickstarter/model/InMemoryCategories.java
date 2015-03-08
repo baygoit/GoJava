@@ -3,7 +3,7 @@ package com.kickstarter.model;
 import java.util.LinkedList;
 import java.util.List;
 
-public class InMemoryCategories implements Categories{
+public class InMemoryCategories implements Categories {
 	
 	private List<Сategory> categories = new LinkedList<Сategory>();
 	

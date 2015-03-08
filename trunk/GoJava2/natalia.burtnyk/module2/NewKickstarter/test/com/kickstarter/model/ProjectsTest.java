@@ -2,23 +2,26 @@ package com.kickstarter.model;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
+
 import org.junit.Before;
 import org.junit.Test;
 
-public class ProgectsStorageTest {
+public abstract class ProjectsTest {
 	
-	private ProjectsStorage projectsStorage;
+	private Projects projects;
 	
 	@Before
-	public void setUp() {
-		projectsStorage = new ProjectsStorage ();
+	public  void setUp() {
+		projects = getProjects ();
 	}
+	
+	abstract Projects getProjects();
 	
 	@Test
 	public void shouldEmptyProjectsList_whenNoProjects() {
 		Сategory category1 = new Сategory("Sport");
 		int size = 0;
-		assertEquals(size, projectsStorage.getSpecificProjects(category1).size());
+		assertEquals(size, projects.getProjects(category1).size());
 	}
 	
 	@Test
@@ -30,16 +33,16 @@ public class ProgectsStorageTest {
 		project.setСategory(category);
 		project2.setСategory(category);
 		
-		projectsStorage.addProject(project);
-		projectsStorage.addProject(project2);
+		projects.add(project);
+		projects.add(project2);
 		
-		projectsStorage.getSpecificProjects(category);
-		Project projectResult = projectsStorage.getProject(1);
+		projects.getProjects(category);
+		Project projectResult = projects.get(1);
 		
 		assertSame(project, projectResult);
 		
 		int i = 2;
-		int projectResult2 = projectsStorage.getSizeProjectsOfCategory();
+		int projectResult2 = projects.getSize();
 		
 		assertSame(i, projectResult2);	
 	}
