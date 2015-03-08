@@ -2,7 +2,7 @@ package com.kickstarter.controller;
 
 import java.util.Random;
 
-import com.kickstarter.model.CategoriesStorage;
+import com.kickstarter.model.InMemoryCategories;
 import com.kickstarter.model.QuotesStorage;
 import com.kickstarter.model.Project;
 import com.kickstarter.model.ProjectsStorage;
@@ -13,9 +13,9 @@ import com.kickstarter.view.InPut;
 public class Kickstarter {
 
     public static void main(String[] args) {
-    	QuotesStorage dataStorage = new QuotesStorage(new Random());
+    	QuotesStorage quotesStorage = new QuotesStorage(new Random());
     	ConsoleView consoleView = new ConsoleView();
-    	CategoriesStorage categories = new CategoriesStorage();
+    	InMemoryCategories categories = new InMemoryCategories();
     	ProjectsStorage projects = new ProjectsStorage();
     	InPut inPut = new InPut();
     	
@@ -23,9 +23,9 @@ public class Kickstarter {
     	Сategory music = new Сategory("MUSIC");
     	Сategory education = new Сategory("EDUCATION");
 
-    	categories.addCategory(food);
-    	categories.addCategory(music);
-    	categories.addCategory(education);
+    	categories.add(food);
+    	categories.add(music);
+    	categories.add(education);
     	
     	Project project1 = new Project("Green Pea Cookie. ", "We want to produce green cookies. ",
     				"Coming soon... ","http:gps.rom.new", 8000, 3654, 17);
@@ -54,7 +54,7 @@ public class Kickstarter {
     	projects.addProject(project5);
     	projects.addProject(project6);
     
-        KickstarterEngine engine = new KickstarterEngine(consoleView, dataStorage, inPut, categories, projects);
+        KickstarterEngine engine = new KickstarterEngine(consoleView, quotesStorage, inPut, categories, projects);
         engine.run();
     }
 }

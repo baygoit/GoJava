@@ -1,7 +1,8 @@
 package com.kickstarter.controller;
 import java.util.List;
 
-import com.kickstarter.model.CategoriesStorage;
+import com.kickstarter.model.Categories;
+import com.kickstarter.model.InMemoryCategories;
 import com.kickstarter.model.QuotesStorage;
 import com.kickstarter.model.Project;
 import com.kickstarter.model.ProjectsStorage;
@@ -13,23 +14,23 @@ public class KickstarterEngine {
 
 	private InPut inPut;
 	private ConsoleView consoleView;
-	private QuotesStorage dataStorage;
-	private CategoriesStorage categoriesStorage;
+	private QuotesStorage quotesStorage;
+	private Categories categories;
 	private ProjectsStorage projectsStorage;
 	
-	public KickstarterEngine(ConsoleView consoleView, QuotesStorage dataStorage , InPut inPut, CategoriesStorage categories, ProjectsStorage projects) {
+	public KickstarterEngine(ConsoleView consoleView, QuotesStorage quotesStorage , InPut inPut, Categories categories, ProjectsStorage projects) {
 		this.consoleView = consoleView;
 		this.inPut = inPut;
-		this.dataStorage = dataStorage;
-		this.categoriesStorage = categories;
+		this.quotesStorage = quotesStorage;
+		this.categories = categories;
 		this.projectsStorage = projects;
 	}
 
 	public void consolePart_1() {
 		System.out.print("\n" + "Please select category: ");
 		int input = inPut.readInput();
-		if(input > 0 && input <= categoriesStorage.getSizeCategories()) {
-			Сategory category = categoriesStorage.getSpecificCategory(input);
+		if(input > 0 && input <= categories.size()) {
+			Сategory category = categories.get(input);
 			consoleView.displaySelectedCategory(category);
 			List<Project> projects = projectsStorage.getSpecificProjects(category);
 			consoleView.displayProjectsOfCategory(projects);	
@@ -49,7 +50,7 @@ public class KickstarterEngine {
 			consolePart_3(сategory);
 			consolePart_2(сategory);
 		} else if (input == 0) {
-			consoleView.displayListCategories(categoriesStorage.getCategoriesList());
+			consoleView.displayListCategories(categories.getCategories());
 		} else {
 			System.out.println("Incorrect number. Please try again.");
 			consolePart_2(сategory);
@@ -68,8 +69,8 @@ public class KickstarterEngine {
 
 	public void run() {
 		consoleView.displayWelcome();
-		consoleView.displayQuote(dataStorage.getRundomQuote());
-		consoleView.displayListCategories(categoriesStorage.getCategoriesList());
+		consoleView.displayQuote(quotesStorage.getRundomQuote());
+		consoleView.displayListCategories(categories.getCategories());
 		consolePart_1();
 	}
 }

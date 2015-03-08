@@ -1,5 +1,4 @@
 package com.kickstarter.model;
-import java.util.List;
 import java.util.Random;
 public class QuotesStorage {
 	
