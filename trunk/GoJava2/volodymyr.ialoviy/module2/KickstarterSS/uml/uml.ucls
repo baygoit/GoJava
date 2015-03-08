@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <class-diagram version="1.1.8" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
   associations="true" dependencies="false" nesting-relationships="true">  
-  <class id="1" language="java" name="ua.com.goit.gojava2.vova.kickstarter.model.CategoriesFromDB" project="Kickstarter" 
-    file="/Kickstarter/src/ua/com/goit/gojava2/vova/kickstarter/model/CategoriesFromDB.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
+  <class id="1" language="java" name="ua.com.goit.gojava2.vova.kickstarter.model.CategoriesFromDB" 
+    project="kickstarterMaven" 
+    file="/kickstarterMaven/src/main/java/ua/com/goit/gojava2/vova/kickstarter/model/CategoriesFromDB.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="515" y="764"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -11,8 +12,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="2" language="java" name="ua.com.goit.gojava2.vova.kickstarter.model.Category" project="Kickstarter" 
-    file="/Kickstarter/src/ua/com/goit/gojava2/vova/kickstarter/model/Category.java" binary="false" 
+  <class id="2" language="java" name="ua.com.goit.gojava2.vova.kickstarter.model.Category" project="kickstarterMaven" 
+    file="/kickstarterMaven/src/main/java/ua/com/goit/gojava2/vova/kickstarter/model/Category.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="231" y="581"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -21,8 +22,9 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <interface id="3" language="java" name="ua.com.goit.gojava2.vova.kickstarter.model.Projects" project="Kickstarter" 
-    file="/Kickstarter/src/ua/com/goit/gojava2/vova/kickstarter/model/Projects.java" binary="false" 
+  <interface id="3" language="java" name="ua.com.goit.gojava2.vova.kickstarter.model.Projects" 
+    project="kickstarterMaven" 
+    file="/kickstarterMaven/src/main/java/ua/com/goit/gojava2/vova/kickstarter/model/Projects.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="829" y="526"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -31,8 +33,9 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <interface id="4" language="java" name="ua.com.goit.gojava2.vova.kickstarter.model.Categories" project="Kickstarter" 
-    file="/Kickstarter/src/ua/com/goit/gojava2/vova/kickstarter/model/Categories.java" binary="false" 
+  <interface id="4" language="java" name="ua.com.goit.gojava2.vova.kickstarter.model.Categories" 
+    project="kickstarterMaven" 
+    file="/kickstarterMaven/src/main/java/ua/com/goit/gojava2/vova/kickstarter/model/Categories.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="527" y="519"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -41,8 +44,9 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <class id="5" language="java" name="ua.com.goit.gojava2.vova.kickstarter.model.Project" project="Kickstarter" 
-    file="/Kickstarter/src/ua/com/goit/gojava2/vova/kickstarter/model/Project.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="5" language="java" name="ua.com.goit.gojava2.vova.kickstarter.model.Project" project="kickstarterMaven" 
+    file="/kickstarterMaven/src/main/java/ua/com/goit/gojava2/vova/kickstarter/model/Project.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1115" y="799"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -50,8 +54,9 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="6" language="java" name="ua.com.goit.gojava2.vova.kickstarter.model.ProjectsFromDB" project="Kickstarter" 
-    file="/Kickstarter/src/ua/com/goit/gojava2/vova/kickstarter/model/ProjectsFromDB.java" binary="false" 
+  <class id="6" language="java" name="ua.com.goit.gojava2.vova.kickstarter.model.ProjectsFromDB" 
+    project="kickstarterMaven" 
+    file="/kickstarterMaven/src/main/java/ua/com/goit/gojava2/vova/kickstarter/model/ProjectsFromDB.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="837" y="768"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -60,8 +65,9 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <interface id="7" language="java" name="ua.com.goit.gojava2.vova.kickstarter.model.Quotes" project="Kickstarter" 
-    file="/Kickstarter/src/ua/com/goit/gojava2/vova/kickstarter/model/Quotes.java" binary="false" corner="BOTTOM_RIGHT">    
+  <interface id="7" language="java" name="ua.com.goit.gojava2.vova.kickstarter.model.Quotes" project="kickstarterMaven" 
+    file="/kickstarterMaven/src/main/java/ua/com/goit/gojava2/vova/kickstarter/model/Quotes.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1076" y="149"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -69,8 +75,9 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <class id="8" language="java" name="ua.com.goit.gojava2.vova.kickstarter.model.QuotesFromDB" project="Kickstarter" 
-    file="/Kickstarter/src/ua/com/goit/gojava2/vova/kickstarter/model/QuotesFromDB.java" binary="false" 
+  <class id="8" language="java" name="ua.com.goit.gojava2.vova.kickstarter.model.QuotesFromDB" 
+    project="kickstarterMaven" 
+    file="/kickstarterMaven/src/main/java/ua/com/goit/gojava2/vova/kickstarter/model/QuotesFromDB.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1198" y="-10"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -120,7 +127,7 @@
   <class id="13" language="java" name="ua.com.goit.gojava2.vova.kickstarter.view.OutputConsole" project="Kickstarter" 
     file="/Kickstarter/src/ua/com/goit/gojava2/vova/kickstarter/view/OutputConsole.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="196" y="36"/>    
+    <position height="-1" width="-1" x="202" y="63"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -155,17 +162,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="17" language="java" name="ua.com.goit.gojava2.vova.kickstarter.util.InputChecker" project="Kickstarter" 
-    file="/Kickstarter/src/ua/com/goit/gojava2/vova/kickstarter/util/InputChecker.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1377" y="220"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="18" language="java" name="ua.com.goit.gojava2.vova.kickstarter.util.PeriodBetweenDates" 
+  <class id="17" language="java" name="ua.com.goit.gojava2.vova.kickstarter.util.PeriodBetweenDates" 
     project="Kickstarter" file="/Kickstarter/src/ua/com/goit/gojava2/vova/kickstarter/util/PeriodBetweenDates.java" 
     binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="826" y="967"/>    
@@ -175,100 +172,66 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <association id="19">    
-    <end type="SOURCE" refId="15" navigable="false">      
-      <attribute id="20" name="out">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="21" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="12" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <realization id="22">    
-    <end type="SOURCE" refId="6"/>    
-    <end type="TARGET" refId="3"/>  
+  <realization id="18">    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="12"/>  
   </realization>  
-  <dependency id="23">    
-    <end type="SOURCE" refId="10"/>    
-    <end type="TARGET" refId="9"/>  
-  </dependency>  
-  <dependency id="24">    
-    <end type="SOURCE" refId="6"/>    
-    <end type="TARGET" refId="18"/>  
-  </dependency>  
-  <realization id="25">    
+  <realization id="19">    
     <end type="SOURCE" refId="1"/>    
     <end type="TARGET" refId="4"/>  
   </realization>  
-  <association id="26">    
+  <realization id="20">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="7"/>  
+  </realization>  
+  <association id="21">    
     <end type="SOURCE" refId="9" navigable="false">      
-      <attribute id="27" name="projects">        
+      <attribute id="22" name="view">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="28" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="3" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="29">    
-    <end type="SOURCE" refId="9" navigable="false">      
-      <attribute id="30" name="view">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="31" minimum="0" maximum="1">        
+      <multiplicity id="23" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="15" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <realization id="32">    
-    <end type="SOURCE" refId="13"/>    
-    <end type="TARGET" refId="12"/>  
-  </realization>  
-  <association id="33">    
-    <end type="SOURCE" refId="9" navigable="false">      
-      <attribute id="34" name="categories">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="35" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="4" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <realization id="36">    
-    <end type="SOURCE" refId="8"/>    
-    <end type="TARGET" refId="7"/>  
-  </realization>  
-  <dependency id="37">    
-    <bendpoint x="969" y="237"/>    
-    <bendpoint x="1121" y="240"/>    
-    <end type="SOURCE" refId="9"/>    
-    <end type="TARGET" refId="17"/>  
-  </dependency>  
-  <realization id="38">    
+  <realization id="24">    
     <end type="SOURCE" refId="14"/>    
     <end type="TARGET" refId="11"/>  
   </realization>  
-  <association id="39">    
-    <end type="SOURCE" refId="9" navigable="false">      
-      <attribute id="40" name="in">        
+  <association id="25">    
+    <end type="SOURCE" refId="15" navigable="false">      
+      <attribute id="26" name="out">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="41" minimum="0" maximum="1">        
+      <multiplicity id="27" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="12" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="28">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="3"/>  
+  </realization>  
+  <association id="29">    
+    <end type="SOURCE" refId="9" navigable="false">      
+      <attribute id="30" name="in">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="31" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="11" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
+  <dependency id="32">    
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="9"/>  
+  </dependency>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
     sort-features="false" accessors="true" visibility="true">    
     <attributes public="true" package="true" protected="true" private="true" static="true"/>    
