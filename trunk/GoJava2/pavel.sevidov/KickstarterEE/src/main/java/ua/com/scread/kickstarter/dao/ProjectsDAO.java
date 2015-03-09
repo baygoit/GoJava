@@ -117,7 +117,7 @@ public class ProjectsDAO implements Projects {
                     "update projects set"
                     + "name = ?, description = ?, id_cat = ?, collected = ?, amount = ?, "
                     + "days = ?, history = ?, video = ? "
-                    + "where id_prj = " + id);
+                    + "where id_prj = " + id);   
             statement.setString(1, project.getName());
             statement.setString(2, project.getDescription());
             statement.setInt(3, project.getCategory().getId());

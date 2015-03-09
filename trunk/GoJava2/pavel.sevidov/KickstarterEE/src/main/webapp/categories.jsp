@@ -88,6 +88,7 @@
       
       <div class="panel">
         <div class="panel-body">
+        <h2><c:out value="${quote.quote}"/></h2>
           
           
           

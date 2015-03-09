@@ -46,7 +46,7 @@
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-search"></i></a>
           <ul class="dropdown-menu" style="padding:12px;">
-            <form class="form-inline">
+            <form action="MainServlet" class="form-inline" method="post">
               <button type="submit" class="btn btn-default pull-right"><i class="glyphicon glyphicon-search"></i></button><input type="text" class="form-control pull-left" placeholder="Search">
             </form>
           </ul>

@@ -11,6 +11,7 @@ import javax.servlet.http.*;
 
 import ua.com.scread.kickstarter.dao.CategoriesDAO;
 import ua.com.scread.kickstarter.dao.ProjectsDAO;
+import ua.com.scread.kickstarter.dao.QuoteDAO;
 import ua.com.scread.kickstarter.data.Category;
 import ua.com.scread.kickstarter.data.Project;
 
@@ -31,10 +32,12 @@ public class MainServlet extends HttpServlet {
         
         if (action.startsWith("/categories")) {
             
-            CategoriesDAO categoriesDAO = new CategoriesDAO(connection);    
+            CategoriesDAO categoriesDAO = new CategoriesDAO(connection); 
+            QuoteDAO quote = new QuoteDAO(connection);
             List<Category> categories = categoriesDAO.getCategories();
             
             req.setAttribute("categories", categories);
+            req.setAttribute("quote", quote);
             
             req.getRequestDispatcher("categories.jsp").forward(req, resp);
         } else if (action.equals("/projects")) {
@@ -53,11 +56,6 @@ public class MainServlet extends HttpServlet {
             Project project = projectsDAO.get(projectId);
             
             req.setAttribute("project", project);
-            System.out.println("Name = " + project.getName());
-            System.out.println("Description = " + project.getDescription());
-            System.out.println("Collected = " + project.getCollected());
-            System.out.println("Amount = " + project.getAmount());
-            System.out.println("Days = " + project.getDays());
             
             req.getRequestDispatcher("project.jsp").forward(req, resp);
         } else if (action.equals("/payment")) {
@@ -103,7 +101,9 @@ public class MainServlet extends HttpServlet {
             int projectId = Integer.valueOf(req.getParameter("id"));
             Project project = projectsDAO.get(projectId);
             
-            project.addMoney(Double.valueOf(amount));
+            Double donate = Double.valueOf(amount);
+            System.out.println(donate);
+			project.addMoney(donate);
             projectsDAO.update(project.getId(), project);
 //            req.getRequestDispatcher("/page.jsp").forward(req, resp);
         }
