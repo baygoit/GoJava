@@ -1,4 +1,4 @@
-package ua.com.sas.model;
+package ua.com.sas.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

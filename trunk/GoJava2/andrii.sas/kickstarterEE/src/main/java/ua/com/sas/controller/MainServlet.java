@@ -1,4 +1,4 @@
-package ua.com.sas.servlet;
+package ua.com.sas.controller;
 
 import java.io.IOException;
 import java.util.List;
@@ -8,6 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import ua.com.sas.dao.CategoriesDAO;
+import ua.com.sas.dao.ConnectionDAO;
+import ua.com.sas.dao.ProjectsDAO;
 import ua.com.sas.model.*;
 
 public class MainServlet extends HttpServlet {

@@ -1,4 +1,4 @@
-package ua.com.sas.model;
+package ua.com.sas.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,6 +7,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+
+import ua.com.sas.model.Category;
+import ua.com.sas.model.Project;
+import ua.com.sas.model.Projects;
 
 public class ProjectsDAO implements Projects{
 	private Connection connection;

@@ -1,4 +1,4 @@
-package ua.com.sas.model;
+package ua.com.sas.dao;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -6,6 +6,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+
+import ua.com.sas.model.Categories;
+import ua.com.sas.model.Category;
 
 public class CategoriesDAO implements Categories {
 

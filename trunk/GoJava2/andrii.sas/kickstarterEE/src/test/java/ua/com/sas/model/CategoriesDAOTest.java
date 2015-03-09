@@ -6,6 +6,9 @@ import java.sql.Statement;
 
 import org.junit.After;
 
+import ua.com.sas.dao.CategoriesDAO;
+import ua.com.sas.dao.ConnectionDAO;
+
 public class CategoriesDAOTest extends CategoriesTest{
 
 	private ConnectionDAO connectionDAO;
