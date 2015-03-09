@@ -8,16 +8,10 @@ import java.sql.Statement;
 import javax.sql.DataSource;
 
 
-public class QuotesDAO implements Quotes{
-	
-	private DataSource dataSource;
+public class QuotesDAO extends AbstractDAO implements Quotes{
 	
 	public QuotesDAO(DataSource dataSource){
 		this.dataSource = dataSource;
-	}
-	
-	private Connection getConnection() throws SQLException {
-		return dataSource.getConnection();
 	}
 	
 	@Override
@@ -26,8 +20,8 @@ public class QuotesDAO implements Quotes{
 		int countQuote = 0;
 		ResultSet result;
 		ResultSet result1;
-		try {
-			Statement statement = getConnection().createStatement();
+		try (Connection connection = getConnection()){
+			Statement statement = connection.createStatement();
 			result1 = statement.executeQuery("SELECT COUNT(*) FROM quotes;");
 			while (result1.next()) {
 				countQuote = result1.getInt("count");

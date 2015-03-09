@@ -9,24 +9,18 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
-public class CategoriesDAO implements Categories{
-	
-	private DataSource dataSource;
+public class CategoriesDAO extends AbstractDAO implements Categories{
 	
 	public CategoriesDAO(DataSource dataSource){
 		this.dataSource = dataSource;
-	}
-	
-	private Connection getConnection() throws SQLException {
-		return dataSource.getConnection();
 	}
 	
 	@Override
 	public List<Category> getCategories() {
 		List<Category> categories = new ArrayList<Category>();
 		ResultSet result;
-		try {
-			Statement statement = getConnection().createStatement();
+		try (Connection connection = getConnection()){
+			Statement statement = connection.createStatement();
 			result = statement.executeQuery("SELECT * FROM categories ORDER BY id_category");
 			while (result.next()) {
 			    categories.add(new Category(result.getInt("id_category"), result.getString("name_category")));

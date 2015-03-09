@@ -102,7 +102,7 @@ public final class categories_jsp extends org.apache.jasper.runtime.HttpJspBase
       if (_jspx_eval_c_005fforEach_005f0 != javax.servlet.jsp.tagext.Tag.SKIP_BODY) {
         do {
           out.write("\r\n");
-          out.write("\t\t   <p><a href=\"/kickstarter/projects?category=");
+          out.write("\t\t   <p><a href=\"projects?category=");
           out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${category.categoryID}", java.lang.String.class, (PageContext)_jspx_page_context, null, false));
           out.write('"');
           out.write('>');
@@ -137,7 +137,7 @@ public final class categories_jsp extends org.apache.jasper.runtime.HttpJspBase
     org.apache.taglibs.standard.tag.rt.core.OutTag _jspx_th_c_005fout_005f0 = (org.apache.taglibs.standard.tag.rt.core.OutTag) _005fjspx_005ftagPool_005fc_005fout_0026_005fvalue_005fnobody.get(org.apache.taglibs.standard.tag.rt.core.OutTag.class);
     _jspx_th_c_005fout_005f0.setPageContext(_jspx_page_context);
     _jspx_th_c_005fout_005f0.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_c_005fforEach_005f0);
-    // /categories.jsp(10,72) name = value type = null reqTime = true required = true fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
+    // /categories.jsp(10,59) name = value type = null reqTime = true required = true fragment = false deferredValue = false expectedTypeName = null deferredMethod = false methodSignature = null
     _jspx_th_c_005fout_005f0.setValue((java.lang.Object) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${category.categoryName}", java.lang.Object.class, (PageContext)_jspx_page_context, null, false));
     int _jspx_eval_c_005fout_005f0 = _jspx_th_c_005fout_005f0.doStartTag();
     if (_jspx_th_c_005fout_005f0.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {

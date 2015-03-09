@@ -11,24 +11,18 @@ import javax.sql.DataSource;
 
 import ua.com.goit.gojava2.vova.kickstarter.util.PeriodBetweenDates;
 
-public class ProjectsDAO implements Projects{
-	
-	private DataSource dataSource;
+public class ProjectsDAO extends AbstractDAO implements Projects{
 	
 	public ProjectsDAO(DataSource dataSource){
 		this.dataSource = dataSource;
 	}
 	
-	private Connection getConnection() throws SQLException {
-		return dataSource.getConnection();
-	}
-
 	@Override
 	public List<Project> getProgectsForCategory(int categoryID) {
 		List<Project> projects = new ArrayList<Project>();
 		ResultSet result;
-		try {
-			Statement statement = getConnection().createStatement();
+		try (Connection connection = getConnection()){
+			Statement statement = connection.createStatement();
 			result = statement.executeQuery("SELECT * FROM projects WHERE id_category=" + categoryID + "ORDER BY id_project");
 			while (result.next()) {
 				projects.add(new Project(result.getInt("id_project"), 
@@ -54,8 +48,8 @@ public class ProjectsDAO implements Projects{
 	public Project getProgect(int progectID) {
 		Project project = null;
 		ResultSet result;
-		try {
-			Statement statement = getConnection().createStatement();
+		try (Connection connection = getConnection()){
+			Statement statement = connection.createStatement();
 			result = statement.executeQuery("SELECT * FROM projects WHERE id_project=" + progectID);
 			while (result.next()) {
 				project = new Project(result.getInt("id_project"), 
@@ -78,8 +72,8 @@ public class ProjectsDAO implements Projects{
 	
 	@Override
 	public void addFAQ(int projectID, String question) {
-		try {
-			Statement statement = getConnection().createStatement();
+		try (Connection connection = getConnection()){
+			Statement statement = connection.createStatement();
 			statement.execute("INSERT INTO faq(id_project, question)VALUES (" + projectID + ", '" + question + "');");
 		} catch (SQLException e) {
 			System.err.println( e.getClass().getName()+": "+ e.getMessage() );
@@ -88,8 +82,8 @@ public class ProjectsDAO implements Projects{
 	
 	@Override
 	public void setDonation(int projectID, int amount) {
-		try {
-			Statement statement = getConnection().createStatement();
+		try (Connection connection = getConnection()){
+			Statement statement = connection.createStatement();
 			statement.execute("UPDATE projects SET how_much_collected_project=how_much_collected_project+" + amount
 			    	+ ", how_much_remaining_project=how_much_remaining_project-" + amount
 			    	+ "WHERE id_project=" + projectID + ";");
@@ -103,8 +97,8 @@ public class ProjectsDAO implements Projects{
 		ArrayList<String> s = new ArrayList<String>();
 		
 		ResultSet result;
-		try {
-			Statement statement = getConnection().createStatement();
+		try (Connection connection = getConnection()){
+			Statement statement = connection.createStatement();
 			result = statement.executeQuery("SELECT * FROM faq WHERE id_project =" + projectID);
 	            while (result.next()) {
 		            s.add(result.getString("question"));

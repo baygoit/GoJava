@@ -7,7 +7,7 @@
 	<body>
 
 		<c:forEach items="${categories}" var="category">
-		   <p><a href="/kickstarter/projects?category=${category.categoryID}"><c:out value="${category.categoryName}"/></a></p>
+		   <p><a href="projects?category=${category.categoryID}"><c:out value="${category.categoryName}"/></a></p>
 		</c:forEach>
 	
 	</body>

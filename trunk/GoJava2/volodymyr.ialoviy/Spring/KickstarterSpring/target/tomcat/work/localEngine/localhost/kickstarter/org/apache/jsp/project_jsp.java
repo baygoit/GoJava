@@ -103,13 +103,13 @@ public final class project_jsp extends org.apache.jasper.runtime.HttpJspBase
         return;
       out.write("</p>\r\n");
       out.write("\r\n");
-      out.write("\t\t<p>If you want return to <a href=\"/kickstarter/projects?category=");
+      out.write("\t\t<p>If you want return to <a href=\"projects?category=");
       out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.proprietaryEvaluate("${project.categoryID}", java.lang.String.class, (PageContext)_jspx_page_context, null, false));
       out.write("\">projects</a></p>\r\n");
       out.write("\t\t\r\n");
-      out.write("\t\t<p>If you want to <a href=\"/kickstarter/donate\">invest in the project</a></p>\r\n");
+      out.write("\t\t<p>If you want to <a href=\"donate\">invest in the project</a></p>\r\n");
       out.write("\t\t\r\n");
-      out.write("\t\t<p>Have a question? If the info above doesn't help, you can <a href=\"/kickstarter/question\">ask the project creator directly</a>\r\n");
+      out.write("\t\t<p>Have a question? If the info above doesn't help, you can <a href=\"question\">ask the project creator directly</a>\r\n");
       out.write("\t\r\n");
       out.write("\t</body>\r\n");
       out.write("</html>\r\n");
