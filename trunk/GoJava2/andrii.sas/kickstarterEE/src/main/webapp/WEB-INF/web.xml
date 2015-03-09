@@ -3,7 +3,7 @@
   <display-name>Kikckstarter</display-name>
 	<context-param>
 	    <param-name>contextConfigLocation</param-name>
-	    <param-value>/WEB-INF/application-context.xml</param-value>
+	    <param-value>classpath:application-context.xml</param-value>
 	</context-param>
 	<listener>
 	   <listener-class>
@@ -12,7 +12,7 @@
 	</listener> 
   <servlet>
     <servlet-name>MainServlet</servlet-name>
-    <servlet-class>ua.com.sas.servlet.MainServlet</servlet-class>
+    <servlet-class>ua.com.sas.controller.MainServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>MainServlet</servlet-name>
