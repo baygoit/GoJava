@@ -7,10 +7,18 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.sql.DataSource;
+
 public class CategoriesDAO implements Categories{
-	private Connection connection;
-	public CategoriesDAO(Connection connection){
-		this.connection = connection;
+	
+	private DataSource dataSource;
+	
+	public CategoriesDAO(DataSource dataSource){
+		this.dataSource = dataSource;
+	}
+	
+	private Connection getConnection() throws SQLException {
+		return dataSource.getConnection();
 	}
 	
 	@Override
@@ -18,7 +26,7 @@ public class CategoriesDAO implements Categories{
 		List<Category> categories = new ArrayList<Category>();
 		ResultSet result;
 		try {
-			Statement statement = connection.createStatement();
+			Statement statement = getConnection().createStatement();
 			result = statement.executeQuery("SELECT * FROM categories ORDER BY id_category");
 			while (result.next()) {
 			    categories.add(new Category(result.getInt("id_category"), result.getString("name_category")));

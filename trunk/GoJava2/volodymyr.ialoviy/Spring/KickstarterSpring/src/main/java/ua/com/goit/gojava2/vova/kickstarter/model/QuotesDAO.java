@@ -5,13 +5,19 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import javax.sql.DataSource;
 
-public class QuotesFromDB implements Quotes{
+
+public class QuotesDAO implements Quotes{
 	
-	private Connection connection;
+	private DataSource dataSource;
 	
-	public QuotesFromDB(Connection connection) {
-		this.connection = connection;
+	public QuotesDAO(DataSource dataSource){
+		this.dataSource = dataSource;
+	}
+	
+	private Connection getConnection() throws SQLException {
+		return dataSource.getConnection();
 	}
 	
 	@Override
@@ -21,7 +27,7 @@ public class QuotesFromDB implements Quotes{
 		ResultSet result;
 		ResultSet result1;
 		try {
-			Statement statement = connection.createStatement();
+			Statement statement = getConnection().createStatement();
 			result1 = statement.executeQuery("SELECT COUNT(*) FROM quotes;");
 			while (result1.next()) {
 				countQuote = result1.getInt("count");

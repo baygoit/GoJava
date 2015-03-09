@@ -8,14 +8,14 @@ import java.sql.Connection;
 import org.junit.Test;
 
 import ua.com.goit.gojava2.vova.kickstarter.model.Quotes;
-import ua.com.goit.gojava2.vova.kickstarter.model.QuotesFromDB;
+import ua.com.goit.gojava2.vova.kickstarter.model.QuotesDAO;
 import ua.com.goit.gojava2.vova.kickstarter.presenter.ConnectToDB;
 
 public class QuoteIsNotEmpty {
 
 	ConnectToDB connectToDB = new ConnectToDB();
 	Connection connection = connectToDB.createStatement();
-	Quotes quote = new QuotesFromDB(connection);
+	Quotes quote = new QuotesDAO(connection);
 	
 	@Test
 	public void shouldLengthMoreZero_expectedLengthZero() throws FileNotFoundException {
