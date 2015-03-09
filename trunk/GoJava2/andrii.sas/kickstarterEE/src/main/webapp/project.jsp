@@ -12,6 +12,6 @@
 		<c:out value="${project.history}"></c:out><br>
 		<c:out value="${project.videoLink}"></c:out><br>
 		<c:out value="${project.question}"></c:out><br><br>
-		<a href="/Kickstarter/projects?category=${project.categoryId}">Return</a>
+		<a href="projects?category=${project.categoryId}">Return</a>
 	</body>
 </html>

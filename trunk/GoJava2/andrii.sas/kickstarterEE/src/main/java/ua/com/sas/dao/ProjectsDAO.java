@@ -8,21 +8,22 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.sql.DataSource;
+
 import ua.com.sas.model.Category;
 import ua.com.sas.model.Project;
 import ua.com.sas.model.Projects;
 
-public class ProjectsDAO implements Projects{
-	private Connection connection;
+public class ProjectsDAO extends AbstractDAO implements Projects{
 	private List<Project> categoryProjects = new ArrayList<Project>();
 
-	public ProjectsDAO(ConnectionDAO connectionDAO){
-		connection = connectionDAO.getConnection();
+	public ProjectsDAO(DataSource dataSource){
+		this.dataSource = dataSource;
 	}
 
 	@Override
 	public void add(Project project) {
-		try {
+		try (Connection connection = getConnection()) {
 			Statement stat = connection.createStatement();
 			PreparedStatement statement = connection.prepareStatement("INSERT INTO projects (category_id, name, description, money_need,"
 					+ " money_has, days_left, history, video_link, question) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
@@ -49,7 +50,7 @@ public class ProjectsDAO implements Projects{
 	public Project get(int id) {
 		Statement statement;
 		Project project = null;
-		try {
+		try (Connection connection = getConnection()) {
 			statement = connection.createStatement();
 			ResultSet rs = statement.executeQuery("SELECT projects.name AS pname, categories.name AS cname, "
 					+ "projects.id as pid, * FROM projects INNER JOIN categories ON projects.category_id = categories.id"
@@ -81,7 +82,7 @@ public class ProjectsDAO implements Projects{
 
 	@Override
 	public List<Project> getProjects(Category category) {
-		try {
+		try (Connection connection = getConnection()) {
 			categoryProjects.clear();
 			Project project;
 			Statement statement = connection.createStatement();

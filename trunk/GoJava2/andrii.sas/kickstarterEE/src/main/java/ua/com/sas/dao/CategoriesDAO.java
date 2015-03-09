@@ -7,20 +7,20 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.sql.DataSource;
+
 import ua.com.sas.model.Categories;
 import ua.com.sas.model.Category;
 
-public class CategoriesDAO implements Categories {
+public class CategoriesDAO extends AbstractDAO implements Categories {
 
-	private Connection connection;
-	
-	public CategoriesDAO(ConnectionDAO connectionDAO) {
-		connection = connectionDAO.getConnection();
+	public CategoriesDAO(DataSource dataSource) {
+		this.dataSource = dataSource;
 	}
 	
 	@Override
 	public void add(Category category) {
-		try {
+		try (Connection connection = getConnection()) {
 			Statement statement = connection.createStatement();
 			statement.execute("INSERT INTO categories (name) VALUES (\'" + category.getName() + "\')");
 			ResultSet rs = statement.executeQuery("SELECT * FROM categories WHERE name = \'" + category.getName() + "\'");
@@ -34,7 +34,7 @@ public class CategoriesDAO implements Categories {
 
 	@Override
 	public List<Category> getCategories() {
-		try {
+		try (Connection connection = getConnection()) {
 			List<Category> categories = new ArrayList<Category>();
 			Statement statement = connection.createStatement();
 			ResultSet rs = statement.executeQuery("SELECT * FROM categories");
@@ -49,7 +49,7 @@ public class CategoriesDAO implements Categories {
 	
 	@Override
 	public Category get(int id) {
-		try {
+		try (Connection connection = getConnection()) {
 			Category category = null;
 			Statement statement = connection.createStatement();
 			ResultSet rs = statement.executeQuery("SELECT * FROM categories WHERE id = " + id);
@@ -64,7 +64,7 @@ public class CategoriesDAO implements Categories {
 
 	@Override
 	public int size() {
-		try {
+		try (Connection connection = getConnection()) {
 			int size = 0;
 			Statement statement = connection.createStatement();
 			ResultSet rs = statement.executeQuery("select count(*) from categories");

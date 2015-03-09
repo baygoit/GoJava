@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+	<bean id="categoriesDAO" class="ua.com.sas.dao.CategoriesDAO">
+		<constructor-arg ref="dataSource" />
+	</bean>
+	
+	<bean id="projectsDAO" class="ua.com.sas.dao.ProjectsDAO">
+		<constructor-arg ref="dataSource" />
+	</bean>
+
+	<bean id="dataSource" class="org.apache.tomcat.jdbc.pool.DataSource">
+		<property name="driverClassName" value="org.postgresql.Driver" />
+		<property name="url" value="jdbc:postgresql://localhost:5432/kickstarter_db" />
+		<property name="username" value="postgres" />
+		<property name="password" value="gfhfien17" />
+		<property name="initialSize" value="5" />
+		<property name="maxActive" value="10" />
+		<property name="maxIdle" value="5" />
+		<property name="minIdle" value="2" />
+	</bean>
+
+</beans>
