@@ -4,7 +4,7 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-	<bean id="CategoriesDAO" class="ua.com.goit.gojava2.vova.kickstarter.model.CategoriesDAO">
+	<bean id="categoriesDAO" class="ua.com.goit.gojava2.vova.kickstarter.model.CategoriesDAO">
 		<constructor-arg ref="dataSource" />
 	</bean>
 
