@@ -16,7 +16,7 @@
 		<% Interview interview = new Interview();
 		interview.createCategories();
 		Category composed = interview.getComposedCategory();
-		List<String> myList = composed.getQuestionsAndAllAnswers();
+		List<String> myList = composed.getQuestionsAndAnswers();
 		for(String string: myList){%>
 			<p>	<%= string%>
 		<%} %>

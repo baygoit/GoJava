@@ -8,43 +8,10 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CategoryDAO {
-
-	public Connection makeConnection() throws InterviewSimulatorException {
-		try {
-			Class.forName("org.postgresql.Driver");
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-			throw new InterviewSimulatorException(
-					"init JDBC driver was failed :-(");
-		}
-		Connection conn = null;
-		try {
-			conn = DriverManager.getConnection(
-					"jdbc:postgresql://localhost:5432/interview_db",
-					"postgres", "svd555");
-		} catch (SQLException e) {
-			throw new InterviewSimulatorException(
-					"Connection to db was faild:-(");
-		}
-		return conn;
-	}
-
-	public Statement getStatement(Connection conn)
-			throws InterviewSimulatorException {
-		Statement statement = null;
-		try {
-			statement = conn.createStatement();
-		} catch (SQLException e) {
-			throw new InterviewSimulatorException(
-					"Creating statement was failed:-(");
-		}
-		return statement;
-	}
+public class CategoryDAO extends AbstractDAO {
 
 	public List<Category> getCategoriesList()
 			throws InterviewSimulatorException {
-		System.out.println("in getcat");
 		Connection connection = null;
 		try {
 			connection = makeConnection();
@@ -71,7 +38,6 @@ public class CategoryDAO {
 			while (categoriesSet.next()) {
 				categories.add(new Category(categoriesSet.getString("name")
 						.trim(), categoriesSet.getInt("id")));
-				System.out.println("category = ");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -109,7 +75,6 @@ public class CategoryDAO {
 		for (int i = 0; i < names.length; i++) {
 			try {
 				final String NAME = "'"+ names[i] + "'";
-				System.out.println(NAME);
 				categoriesSet = statement
 						.executeQuery("SELECT id, name FROM categories WHERE name LIKE " + NAME);
 			} catch (SQLException e) {
@@ -266,5 +231,4 @@ public class CategoryDAO {
 		}
 		return categories;
 	}
-
 }

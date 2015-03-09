@@ -1,7 +1,6 @@
 package ua.com.goit.gojava2.solo307.interview;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,15 +12,17 @@ import javax.servlet.http.HttpServletResponse;
 public class Hostes extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-    public Hostes() {
-        super();
-    }
+	public Hostes() {
+		super();
+	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html;charset=utf-8");
-		String [] name = request.getParameterValues("fname");
-		request.setAttribute("name", name);
-	    request.getRequestDispatcher("firstMenu.jsp").forward(request,response);
+		String name = request.getParameter("fname");
+		Interview interview = new Interview();
+		interview.persistName(name);
+		request.getRequestDispatcher("menu.jsp").forward(request, response);
 	}
 
 }

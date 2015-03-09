@@ -1,3 +1,4 @@
+<%@page import="ua.com.goit.gojava2.solo307.interview.StatisticsDTO"%>
 <%@page import="java.util.List"%>
 <%@page import="ua.com.goit.gojava2.solo307.interview.Mark"%>
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
@@ -9,28 +10,11 @@
 		<title>Statistics page</title>
 	</head>
 	<body bgcolor="Azure">
-	<%List<Mark> marks = (List<Mark>)request.getAttribute("stat");
-	String time = (String)request.getAttribute("time");
-	int correct = 0;
-	int halfCorrect = 0;
-	int incorrect = 0;
-	for(Mark mark: marks){
-		if(mark.isCorrect())correct++;
-		else if(mark.isHalfcorrect())halfCorrect++;
-		else if(mark.isIncorrect())incorrect++;
-	}%>
-	<p> Правильных ответов: <%= correct %></p>
-	<p> Частично правильных ответов: <%= halfCorrect %></p>
-	<p> Неправильных ответов: <%= incorrect %></p>
-	<p> Время <%= time%></p>
-	<p> Неправильно отвечено </p>
-		<%
-			for(Mark mark: marks){
-			for(String stat: mark.getIncorrectAnswers()){
-		%>
-	  		<p><%= stat%> </p>
-	  		<%} %>
-	  	<%} %>
-		<a href="menu.jsp">Вернуться на главную</a> <br>
+	<%StatisticsDTO stats = (StatisticsDTO)request.getAttribute("dto"); 
+	List <String> statistics = stats.getStatistics();
+	for(String stat: statistics){%>
+	<p><%= stat %></p>
+	<%} %>
+	<a href="menu.jsp">Вернуться на главную</a> <br>
 	</body>
 </html>
