@@ -6,10 +6,19 @@
     http://www.springframework.org/schema/beans/spring-beans-4.1.xsd">
 
    <bean id="CashMovementService" class="ua.com.goit.gojava.POM.services.CashMovementService">
-      <property name="cashMovementDAO" ref="cashMovementDAO"/>
+      <property name="cashMovementDAO" ref="CashMovementDAO"/>
+   </bean>
+   <bean id="BankAccountService" class="ua.com.goit.gojava.POM.services.BankAccountService">
+      <property name="bankAccountDAO" ref="BankAccountDAO"/>
    </bean>
 
-   <bean id="cashMovementDAO" class="ua.com.goit.gojava.POM.persistence.postgresDB.CashMovementDAO">
+   <bean id="CashMovementDAO" class="ua.com.goit.gojava.POM.persistence.postgresDB.CashMovementDAO">
+   </bean>
+   
+   <bean id="BankAccountDAO" class="ua.com.goit.gojava.POM.persistence.postgresDB.BankAccountDAO">
+   </bean>
+   
+   <bean id="applicationContextProvder" class="ua.com.goit.gojava.POM.services.ApplicationContextProvider">
    </bean>
 
 </beans>

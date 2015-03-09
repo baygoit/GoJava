@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	import="ua.com.goit.gojava.POM.dataModel.cash.*,
 			ua.com.goit.gojava.POM.persistence.postgresDB.*,
+			ua.com.goit.gojava.POM.services.*,
 			java.util.Currency"
 			
     pageEncoding="UTF-8"%>
@@ -35,7 +36,10 @@
 		<title>Project Office Management System</title>
 	</head>
 	<body>
-		<% pageContext.setAttribute("bankAccountDAO", new BankAccountDAO()); %>
+		<% pageContext.setAttribute("bankAccountService", ApplicationContextProvider.getApplicationContext().getBean("BankAccountService")); %>
+		<% pageContext.setAttribute("cashMovementService", ApplicationContextProvider.getApplicationContext().getBean("CashMovementService")); %>
+		
+		<jsp:useBean id="cashMovementService" class="ua.com.goit.gojava.POM.services.CashMovementService" scope="application"/>
 		
 		<div class="pageHeader">Банковские счета</div>
 		
@@ -60,9 +64,9 @@
 	    			<th>Валюта</th>
 	    			<th>Остаток</th>
 	    		</tr>
-	    		<c:if test="${pageScope.bankAccountDAO != null}" >
+	    		<c:if test="${pageScope.bankAccountService != null}" >
 	    			<input type="hidden" name="OpenCashMovement" value="">
-		   			<c:set var="bankAccounts" scope="page" value = "${bankAccountDAO.retrieveAll()}" />
+		   			<c:set var="bankAccounts" scope="page" value = "${bankAccountService.retrieveAll()}" />
 		   			<c:forEach var="currentbankAccount" items="${bankAccounts}">
 		   				<tr class="tableRow">
 		   					<td>${currentbankAccount.getId()}</td>
@@ -71,7 +75,7 @@
 							<td>${currentbankAccount.getCurrency().getCurrencyCode()}</td>
 							<td class="numericColumn">
 								<a href="javascript:openCashMovement(${currentbankAccount.getId()})">
-									${currentbankAccount.GetTotal().getValue()}
+									${cashMovementService.getTotalByBankAccount(currentbankAccount).getValue()}
 								</a>
 								</td>
 							<td>

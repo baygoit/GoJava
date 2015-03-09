@@ -2,13 +2,6 @@ package ua.com.goit.gojava.POM.dataModel.cash;
 
 import java.util.Currency;
 
-import ua.com.goit.gojava.POM.dataModel.POMDataModelException;
-import ua.com.goit.gojava.POM.dataModel.common.Money;
-import ua.com.goit.gojava.POM.services.CashMovementService;
-
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-
 public class BankAccount {
 	
 	private long id = 0;
@@ -64,22 +57,6 @@ public class BankAccount {
 		
 	}
 
-	public Money GetTotal() {
-		
-		Money total = new Money(getCurrency());
-		
-		@SuppressWarnings("resource")
-		ApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml");
-		CashMovementService cashMovementService = (CashMovementService) context.getBean("CashMovementService");
-		
-		try {
-			total = cashMovementService.getTotalByBankAccount(this);
-		} catch (POMDataModelException e) {
-			// no need to do smth?..
-		}
-		return total;
-		
-	}
 
 	/* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
