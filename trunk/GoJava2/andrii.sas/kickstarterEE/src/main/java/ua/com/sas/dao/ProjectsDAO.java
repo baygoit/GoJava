@@ -8,18 +8,15 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.sql.DataSource;
+import org.springframework.stereotype.Component;
 
 import ua.com.sas.model.Category;
 import ua.com.sas.model.Project;
 import ua.com.sas.model.Projects;
 
+@Component
 public class ProjectsDAO extends AbstractDAO implements Projects{
 	private List<Project> categoryProjects = new ArrayList<Project>();
-
-	public ProjectsDAO(DataSource dataSource){
-		this.dataSource = dataSource;
-	}
 
 	@Override
 	public void add(Project project) {

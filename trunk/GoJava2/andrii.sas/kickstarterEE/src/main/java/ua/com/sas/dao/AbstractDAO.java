@@ -5,8 +5,11 @@ import java.sql.SQLException;
 
 import javax.sql.DataSource;
 
-public class AbstractDAO {
+import org.springframework.beans.factory.annotation.Autowired;
 
+public class AbstractDAO {
+	
+	@Autowired
 	DataSource dataSource;
 
 	Connection getConnection() throws SQLException {

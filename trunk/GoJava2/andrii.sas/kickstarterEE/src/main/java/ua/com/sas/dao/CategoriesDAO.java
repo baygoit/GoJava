@@ -7,16 +7,12 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.sql.DataSource;
+import org.springframework.stereotype.Component;
 
-import ua.com.sas.model.Categories;
-import ua.com.sas.model.Category;
+import ua.com.sas.model.*;
 
+@Component
 public class CategoriesDAO extends AbstractDAO implements Categories {
-
-	public CategoriesDAO(DataSource dataSource) {
-		this.dataSource = dataSource;
-	}
 	
 	@Override
 	public void add(Category category) {

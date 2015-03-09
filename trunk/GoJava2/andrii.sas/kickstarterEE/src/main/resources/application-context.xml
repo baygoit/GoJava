@@ -1,22 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
-	http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
-
-	<bean id="categoriesDAO" class="ua.com.sas.dao.CategoriesDAO">
-		<constructor-arg ref="dataSource" />
-	</bean>
+                           http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+                           http://www.springframework.org/schema/context
+                           http://www.springframework.org/schema/context/spring-context-3.2.xsd">
 	
-	<bean id="projectsDAO" class="ua.com.sas.dao.ProjectsDAO">
-		<constructor-arg ref="dataSource" />
-	</bean>
+	<context:property-placeholder location="classpath:database.properties" />
 
-	<bean id="dataSource" class="org.apache.tomcat.jdbc.pool.DataSource">
-		<property name="driverClassName" value="org.postgresql.Driver" />
-		<property name="url" value="jdbc:postgresql://localhost:5432/kickstarter_db" />
-		<property name="username" value="postgres" />
-		<property name="password" value="gfhfien17" />
+	<context:component-scan base-package="ua.com.sas" />
+	
+	<context:annotation-config />
+
+	<bean id="dataSource" class="org.apache.tomcat.jdbc.pool.DataSource" destroy-method="close">
+		<property name="driverClassName" value="${driver}" />
+		<property name="url" value="${url}" />
+		<property name="username" value="${user}" />
+		<property name="password" value="${password}" />
 		<property name="initialSize" value="5" />
 		<property name="maxActive" value="10" />
 		<property name="maxIdle" value="5" />

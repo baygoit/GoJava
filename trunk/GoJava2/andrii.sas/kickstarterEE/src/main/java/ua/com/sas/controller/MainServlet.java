@@ -10,12 +10,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import ua.com.sas.dao.CategoriesDAO;
 import ua.com.sas.dao.ProjectsDAO;
 import ua.com.sas.model.*;
 
+@Controller
 public class MainServlet extends HttpServlet {
 
 	@Autowired
