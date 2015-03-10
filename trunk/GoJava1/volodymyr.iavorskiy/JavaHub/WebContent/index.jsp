@@ -9,8 +9,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>JavaHub</title>
-<link rel="stylesheet" type="text/css" href="Style.css">
-<script src="Validator.js"></script>
+<link rel="stylesheet" type="text/css" href="style.css">
+<script src="validator.js"></script>
 </head>
 <body>
 	<div class="main">

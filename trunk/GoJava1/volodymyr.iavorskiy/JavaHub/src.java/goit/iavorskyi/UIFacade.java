@@ -9,15 +9,6 @@ import java.util.List;
 
 public class UIFacade {
 
-	/*
-	public static void main(String[] args) {
-		ArrayList<String> myList = (ArrayList<String>) UIFacade.getArticle();
-		for (int i = 0; i < myList.size(); i++) {
-			System.out.println(myList.get(i));
-		}
-	}
-	*/
-	
 	public static void saveArticleToDatabase(String author, String header, String pathToArticle) {
 		ArticleDAO articleDAO = new ArticleDAO();
 		articleDAO.connectToDatabase();

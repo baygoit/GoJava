@@ -1,6 +1,8 @@
 package goit.iavorskyi.dao;
 
+import goit.iavorskyi.io.Streamer;
 import goit.iavorskyi.learningUnit.Article;
+
 import java.sql.Statement;
 import java.sql.DriverManager;
 import java.sql.Connection;
@@ -20,7 +22,7 @@ public class ArticleDAO {
 	private String databasePassword = "1111";
 	private String databaseUrl = "jdbc:postgresql://127.0.0.1:5432/JavaHub";
 	
-	private String sqlInsert = "INSERT INTO users (name, surname) VALUES (?, ?)";
+	private String sqlInsert = "INSERT INTO articles (author, header, linkToText) VALUES (?, ?, ?)";
 	private String sqlSelect = "SELECT * FROM users";
 	private String sqlDelete = "DELETE FROM users WHERE id = ?";
 	private List<Article> allUsers = new ArrayList<Article>();
@@ -39,12 +41,12 @@ public class ArticleDAO {
 		}
 	}
 
-	public boolean insert(String author, String header, String pathToArticle) {
+	public boolean insert(String author, String header, String linkToText) {
 		try {
 			preparedStatement = conn.prepareStatement(sqlInsert);
 			preparedStatement.setString(1, author);
 			preparedStatement.setString(2, header);
-			preparedStatement.setString(3, pathToArticle);
+			preparedStatement.setString(3, linkToText);
 			preparedStatement.execute();
 			return true;
 		} catch (SQLException e) {
@@ -91,4 +93,13 @@ public class ArticleDAO {
 			e.printStackTrace();
 		}		
 	}
+	
+	public void save(String author, String header, String text) {
+		String linkToText = null;
+		linkToText = Streamer.write(text);
+		connectToDatabase();
+		insert(author, header, linkToText);
+		closeConnection();
+	}
+	
 }

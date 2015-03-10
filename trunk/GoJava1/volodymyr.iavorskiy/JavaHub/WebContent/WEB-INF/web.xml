@@ -1,28 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
-  <display-name>qwerty</display-name>
-  <welcome-file-list>
-    <welcome-file>index.html</welcome-file>
-    <welcome-file>index.htm</welcome-file>
-    <welcome-file>index.jsp</welcome-file>
-    <welcome-file>default.html</welcome-file>
-    <welcome-file>default.htm</welcome-file>
-    <welcome-file>default.jsp</welcome-file>
-  </welcome-file-list>
-  <servlet>
-    <servlet-name>Creator</servlet-name>
-    <servlet-class>goit.iavorskyi.controller.Creator</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>Creator</servlet-name>
-    <url-pattern>/creator</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <servlet-name>Updater</servlet-name>
-    <servlet-class>goit.iavorskyi.controller.Updater</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>Updater</servlet-name>
-    <url-pattern>/updater</url-pattern>
-  </servlet-mapping>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	id="WebApp_ID" version="3.0">
+	<display-name>qwerty</display-name>
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.htm</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>default.html</welcome-file>
+		<welcome-file>default.htm</welcome-file>
+		<welcome-file>default.jsp</welcome-file>
+	</welcome-file-list>
+	<servlet>
+		<servlet-name>ArticleController</servlet-name>
+		<servlet-class>goit.iavorskyi.controller.ArticleController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ArticleController</servlet-name>
+		<url-pattern>/articlecontroller</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>Updater</servlet-name>
+		<servlet-class>goit.iavorskyi.controller.Updater</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Updater</servlet-name>
+		<url-pattern>/updater</url-pattern>
+	</servlet-mapping>
+
+	<resource-ref>
+		<description>postgreSQL Datasource example</description>
+		<res-ref-name>jdbc/postgres</res-ref-name>
+		<res-type>javax.sql.DataSource</res-type>
+		<res-auth>Container</res-auth>
+	</resource-ref>
+
 </web-app>

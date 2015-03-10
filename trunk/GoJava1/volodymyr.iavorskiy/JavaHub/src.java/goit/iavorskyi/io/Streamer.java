@@ -35,14 +35,16 @@ public class Streamer {
 		return result;
 	}
 	
-	public static void write(String stringToWrite) {
+	public static String write(String stringToWrite) {
 		try {
 			BufferedWriter bw = new BufferedWriter(new FileWriter(fileToWriteIn));
 			bw.write(stringToWrite);
 			bw.close();
+			return fileToWriteIn;
 		}
 		catch (Exception e) {
 			 e.printStackTrace();
+			 return null;
 		}
 	}
 
