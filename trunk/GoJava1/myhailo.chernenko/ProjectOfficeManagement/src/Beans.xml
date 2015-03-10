@@ -11,11 +11,18 @@
    <bean id="BankAccountService" class="ua.com.goit.gojava.POM.services.BankAccountService">
       <property name="bankAccountDAO" ref="BankAccountDAO"/>
    </bean>
+   <bean id="ExchangeRateService" class="ua.com.goit.gojava.POM.services.ExchangeRateService">
+      <property name="exchangeRateDAO" ref="ExchangeRateDAO"/>
+   </bean>
+   
 
    <bean id="CashMovementDAO" class="ua.com.goit.gojava.POM.persistence.postgresDB.CashMovementDAO">
    </bean>
    
    <bean id="BankAccountDAO" class="ua.com.goit.gojava.POM.persistence.postgresDB.BankAccountDAO">
+   </bean>
+   
+   <bean id="ExchangeRateDAO" class="ua.com.goit.gojava.POM.persistence.postgresDB.ExchangeRateDAO">
    </bean>
    
    <bean id="applicationContextProvder" class="ua.com.goit.gojava.POM.services.ApplicationContextProvider">

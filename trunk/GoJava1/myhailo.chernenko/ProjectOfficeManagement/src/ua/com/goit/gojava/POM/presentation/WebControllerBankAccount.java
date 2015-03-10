@@ -9,15 +9,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
+
 import ua.com.goit.gojava.POM.dataModel.POMDataModelException;
 import ua.com.goit.gojava.POM.dataModel.cash.BankAccount;
-import ua.com.goit.gojava.POM.persistence.postgresDB.BankAccountDAO;
+import ua.com.goit.gojava.POM.services.ApplicationContextProvider;
+import ua.com.goit.gojava.POM.services.BankAccountService;
 
 @WebServlet(urlPatterns = {"/BankAccountWebController"})
 public class WebControllerBankAccount extends HttpServlet {
 
 	private static final long serialVersionUID = 4965130230495295419L;
-
+	private static final Logger LOG=Logger.getLogger(WebControllerBankAccount.class);
+	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
@@ -65,11 +69,13 @@ public class WebControllerBankAccount extends HttpServlet {
 		
 		if(!req.getParameter("OpenCashMovement").isEmpty()) {
 		
-			BankAccountDAO bankAccountDAO = new BankAccountDAO();
+			BankAccountService bankAccountService = (BankAccountService) ApplicationContextProvider.getApplicationContext().getBean("BankAccountService");
+			
 			long id = Long.parseLong(req.getParameter("OpenCashMovement"));
 			try {
-				bankAccount = bankAccountDAO.retrieveById(id);
+				bankAccount = bankAccountService.retrieveById(id);
 			} catch (POMDataModelException e) {
+				LOG.error("Can not retrieve Bank Account for filter: "+e.getMessage(),e);
 				req.getSession(false).setAttribute("errorMessage", "Can not retrieve Bank Account for filter: "+e.getMessage());
 				return;	
 			}
@@ -80,15 +86,16 @@ public class WebControllerBankAccount extends HttpServlet {
 
 	private void loadBankAccountForEdit(HttpServletRequest req) {
 		
-		BankAccountDAO bankAccountDAO = new BankAccountDAO();
+		BankAccountService bankAccountService = (BankAccountService) ApplicationContextProvider.getApplicationContext().getBean("BankAccountService");
 		try {
 			
 			long id = Long.parseLong(req.getParameter("EditCurrent"));
-			BankAccount bankAccount = bankAccountDAO.retrieveById(id);
+			BankAccount bankAccount = bankAccountService.retrieveById(id);
 			req.getSession(false).setAttribute("currentAccountForEdit", bankAccount);
 			
 		} catch (POMDataModelException | NumberFormatException e) {
 
+			LOG.error("Can not load Bank Account for edit: "+e.getMessage(),e);
 			req.getSession(false).setAttribute("errorMessage", "Can not load Bank Account for edit: "+e.getMessage());
 			return;	
 		}
@@ -97,15 +104,16 @@ public class WebControllerBankAccount extends HttpServlet {
 
 	private void deleteBankAccount(HttpServletRequest req) {
 		
-		BankAccountDAO bankAccountDAO = new BankAccountDAO();
+		BankAccountService bankAccountService = (BankAccountService) ApplicationContextProvider.getApplicationContext().getBean("BankAccountService");
 		try {
 			
 			long id = Long.parseLong(req.getParameter("DellCurrent"));
 
-			bankAccountDAO.delete(bankAccountDAO.retrieveById(id));
+			bankAccountService.delete(bankAccountService.retrieveById(id));
 			
 		} catch (POMDataModelException | NumberFormatException e) {
 
+			LOG.error("Can not delete Bank Account: "+e.getMessage(),e);
 			req.getSession(false).setAttribute("errorMessage", "Can not delete Bank Account: "+e.getMessage());
 			return;	
 		}
@@ -131,18 +139,20 @@ public class WebControllerBankAccount extends HttpServlet {
 			
 		} catch (IllegalArgumentException e)   {
 
+			LOG.error("Could not create new Bank Account: "+e.getMessage(),e);
 			req.getSession(false).setAttribute("errorMessage", "Could not create new Bank Account: "+e.getMessage());
 			return;
 			
 		}
 		
-		BankAccountDAO bankAccountDAO = new BankAccountDAO();
+		BankAccountService bankAccountService = (BankAccountService) ApplicationContextProvider.getApplicationContext().getBean("BankAccountService");
 		try {
 			
-			bankAccountDAO.create(bankAccount);
+			bankAccountService.create(bankAccount);
 			
 		} catch (POMDataModelException e) {
 
+			LOG.error("Can not save new Bank Account: "+e.getMessage(),e);
 			req.getSession(false).setAttribute("errorMessage", "Can not save new Bank Account: "+e.getMessage());
 			return;	
 		}
@@ -165,11 +175,12 @@ public class WebControllerBankAccount extends HttpServlet {
 				bankAccount.setCurrency(Currency.getInstance(currencyCode));
 			}
 			
-			BankAccountDAO bankAccountDAO = new BankAccountDAO();
-			bankAccountDAO.update(bankAccount);
+			BankAccountService bankAccountService = (BankAccountService) ApplicationContextProvider.getApplicationContext().getBean("BankAccountService");
+			bankAccountService.update(bankAccount);
 			
 		} catch (POMDataModelException | NumberFormatException e)   {
 
+			LOG.error("Could not update Bank Account: "+e.getMessage(),e);
 			req.getSession(false).setAttribute("errorMessage", "Could not update Bank Account: "+e.getMessage());
 			return;
 			

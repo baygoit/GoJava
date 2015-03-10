@@ -10,18 +10,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
+
 import ua.com.goit.gojava.POM.dataModel.POMDataModelException;
 import ua.com.goit.gojava.POM.dataModel.cash.BankAccount;
 import ua.com.goit.gojava.POM.dataModel.cash.CashMovementEntry;
 import ua.com.goit.gojava.POM.dataModel.common.Money;
-import ua.com.goit.gojava.POM.persistence.postgresDB.BankAccountDAO;
-import ua.com.goit.gojava.POM.persistence.postgresDB.CashMovementDAO;
+import ua.com.goit.gojava.POM.services.ApplicationContextProvider;
+import ua.com.goit.gojava.POM.services.BankAccountService;
+import ua.com.goit.gojava.POM.services.CashMovementService;
 
 @WebServlet(urlPatterns = {"/CashMovementWebController"})
 public class WebControllerCashMovement extends HttpServlet {
 
 	private static final long serialVersionUID = 4965130230495295419L;
-
+	private static final Logger LOG=Logger.getLogger(WebControllerCashMovement.class);
+	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
@@ -64,11 +68,12 @@ public class WebControllerCashMovement extends HttpServlet {
 		
 		if(!req.getParameter("bankAccountFilter").isEmpty()) {
 		
-			BankAccountDAO bankAccountDAO = new BankAccountDAO();
+			BankAccountService bankAccountService = (BankAccountService) ApplicationContextProvider.getApplicationContext().getBean("BankAccountService");
 			long id = Long.parseLong(req.getParameter("bankAccountFilter"));
 			try {
-				bankAccount = bankAccountDAO.retrieveById(id);
+				bankAccount = bankAccountService.retrieveById(id);
 			} catch (POMDataModelException e) {
+				LOG.error("Can not retrieve Bank Account for filter: "+e.getMessage(),e);
 				req.getSession(false).setAttribute("errorMessage", "Can not retrieve Bank Account for filter: "+e.getMessage());
 				return;	
 			}
@@ -79,15 +84,16 @@ public class WebControllerCashMovement extends HttpServlet {
 
 	private void loadCashMovementEntryForEdit(HttpServletRequest req) {
 		
-		CashMovementDAO cashMovementDAO = new CashMovementDAO();
+		CashMovementService cashMovementService = (CashMovementService) ApplicationContextProvider.getApplicationContext().getBean("CashMovementService");
 		try {
 			
 			long id = Long.parseLong(req.getParameter("EditCurrent"));
-			CashMovementEntry cashMovementEntry = cashMovementDAO.retrieveById(id);
+			CashMovementEntry cashMovementEntry = cashMovementService.retrieveById(id);
 			req.getSession(false).setAttribute("currentEntryForEdit", cashMovementEntry);
 			
 		} catch (POMDataModelException | NumberFormatException e) {
 
+			LOG.error("Can not load Cash Movement Entry for edit: "+e.getMessage(),e);
 			req.getSession(false).setAttribute("errorMessage", "Can not load Cash Movement Entry for edit: "+e.getMessage());
 			return;	
 		}
@@ -96,15 +102,16 @@ public class WebControllerCashMovement extends HttpServlet {
 
 	private void deleteCashMovementEntry(HttpServletRequest req) {
 		
-		CashMovementDAO cashMovementDAO = new CashMovementDAO();
+		CashMovementService cashMovementService = (CashMovementService) ApplicationContextProvider.getApplicationContext().getBean("CashMovementService");
 		try {
 			
 			long id = Long.parseLong(req.getParameter("DellCurrent"));
 
-			cashMovementDAO.delete(cashMovementDAO.retrieveById(id));
+			cashMovementService.delete(cashMovementService.retrieveById(id));
 			
 		} catch (POMDataModelException | NumberFormatException e) {
 
+			LOG.error("Can not delete Cash Movement Entry: "+e.getMessage(),e);
 			req.getSession(false).setAttribute("errorMessage", "Can not delete Cash Movement Entry: "+e.getMessage());
 			return;	
 		}
@@ -125,8 +132,8 @@ public class WebControllerCashMovement extends HttpServlet {
 			SimpleDateFormat dateFormatter = new SimpleDateFormat(pattern);
 			newEntry.setDate(dateFormatter.parse(dateString));
 			
-			BankAccountDAO bankAccountDAO = new BankAccountDAO();
-			BankAccount bankAccountRef = bankAccountDAO.retrieveById(Long.parseLong(bankAccountId));
+			BankAccountService bankAccountService = (BankAccountService) ApplicationContextProvider.getApplicationContext().getBean("BankAccountService");
+			BankAccount bankAccountRef = bankAccountService.retrieveById(Long.parseLong(bankAccountId));
 			
 			newEntry.setBankAccount(bankAccountRef);
 			Money sum = new Money(Double.parseDouble(sumString),bankAccountRef.getCurrency());
@@ -134,18 +141,20 @@ public class WebControllerCashMovement extends HttpServlet {
 			
 		} catch (ParseException | IllegalArgumentException | POMDataModelException e)   {
 
+			LOG.error("Could not create new Cash Movement Entry: "+e.getMessage(),e);
 			req.getSession(false).setAttribute("errorMessage", "Could not create new Cash Movement Entry: "+e.getMessage());
 			return;
 			
 		}
 		
-		CashMovementDAO cashMovementDAO = new CashMovementDAO();
+		CashMovementService cashMovementService = (CashMovementService) ApplicationContextProvider.getApplicationContext().getBean("CashMovementService");
 		try {
 			
-			cashMovementDAO.create(newEntry);
+			cashMovementService.create(newEntry);
 			
 		} catch (POMDataModelException e) {
 
+			LOG.error("Can not save new Cash Movement Entry: "+e.getMessage(),e);
 			req.getSession(false).setAttribute("errorMessage", "Can not save new Cash Movement Entry: "+e.getMessage());
 			return;	
 		}
@@ -165,18 +174,19 @@ public class WebControllerCashMovement extends HttpServlet {
 			SimpleDateFormat dateFormatter = new SimpleDateFormat(pattern);
 			cashMovementEntry.setDate(dateFormatter.parse(dateString));
 			
-			BankAccountDAO bankAccountDAO = new BankAccountDAO();
-			BankAccount bankAccountRef = bankAccountDAO.retrieveById(Long.parseLong(bankAccountId));
+			BankAccountService bankAccountService = (BankAccountService) ApplicationContextProvider.getApplicationContext().getBean("BankAccountService");
+			BankAccount bankAccountRef = bankAccountService.retrieveById(Long.parseLong(bankAccountId));
 			
 			cashMovementEntry.setBankAccount(bankAccountRef);
 			Money sum = new Money(Double.parseDouble(sumString),bankAccountRef.getCurrency());
 			cashMovementEntry.setSum(sum );
 			
-			CashMovementDAO cashMovementDAO = new CashMovementDAO();
-			cashMovementDAO.update(cashMovementEntry);
+			CashMovementService cashMovementService = (CashMovementService) ApplicationContextProvider.getApplicationContext().getBean("CashMovementService");
+			cashMovementService.update(cashMovementEntry);
 			
 		} catch (POMDataModelException | ParseException | NumberFormatException e)   {
 
+			LOG.error("Could not update Cash Movement Entry: "+e.getMessage(),e);
 			req.getSession(false).setAttribute("errorMessage", "Could not update Cash Movement Entry: "+e.getMessage());
 			return;
 			

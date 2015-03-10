@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	import="ua.com.goit.gojava.POM.dataModel.common.*,
-			ua.com.goit.gojava.POM.persistence.postgresDB.*,
+			ua.com.goit.gojava.POM.services.*,
 			java.text.SimpleDateFormat,
 			java.util.Currency"
 			
@@ -46,7 +46,7 @@
 		<title>Project Office Management System</title>
 	</head>
 	<body>
-		<% pageContext.setAttribute("exchangeRateDAO", new ExchangeRateDAO()); %>
+		<% pageContext.setAttribute("exchangeRateService", ApplicationContextProvider.getApplicationContext().getBean("ExchangeRateService")); %>
 		
 		<div class="pageHeader">Курсы валют</div>
 		
@@ -72,8 +72,8 @@
 	    			<th>Курс</th>
 	    			<th>Кратность</th>
 	    		</tr>
-	    		<c:if test="${pageScope.exchangeRateDAO != null}" >
-		   			<c:set var="exchangeRates" scope="page" value = "${exchangeRateDAO.retrieveAll()}" />
+	    		<c:if test="${pageScope.exchangeRateService != null}" >
+		   			<c:set var="exchangeRates" scope="page" value = "${exchangeRateService.retrieveAll()}" />
 		   			<c:forEach var="currentRate" items="${exchangeRates}">
 		   				<tr class="tableRow">
 		   					<td>${currentRate.getId()}</td>
@@ -142,7 +142,7 @@
 								</select>
 							</td>
 			    			<td><select name="toCurrency" >
-							  	<option disabled>Выберите валюту</option>
+							  	<option disabled selected value="">Выберите валюту</option>
 			   						<%
 				   						for(Currency currency: Currency.getAvailableCurrencies()) {
 											out.println("<option>"+currency.getCurrencyCode()+"</option>");

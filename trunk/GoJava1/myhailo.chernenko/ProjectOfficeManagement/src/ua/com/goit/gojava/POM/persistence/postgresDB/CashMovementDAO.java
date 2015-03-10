@@ -11,6 +11,8 @@ import java.util.Currency;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
 import ua.com.goit.gojava.POM.dataModel.POMDataModelException;
 import ua.com.goit.gojava.POM.dataModel.cash.BankAccount;
 import ua.com.goit.gojava.POM.dataModel.cash.CashMovementEntry;
@@ -20,7 +22,8 @@ import ua.com.goit.gojava.POM.dataModel.common.Money;
 public class CashMovementDAO {
 	
 	private static final String CLASS_TABLE = "cash_movement"; 
-
+	private static final Logger LOG=Logger.getLogger(CashMovementDAO.class);
+	
 	private Connection getDBConnection() {
 		
 		return DBDataManager.getConnection();
@@ -89,6 +92,7 @@ public class CashMovementDAO {
 			
 		} catch (SQLException | NullPointerException e) {
  
+			LOG.error("Could not create new Cash Movement Entry: "+e.getMessage(), e);
 			throw new POMDataModelException("Could not create new Cash Movement Entry: "+e.getMessage(), e);
  
 		} finally {
@@ -135,6 +139,7 @@ public class CashMovementDAO {
 			
 		} catch (SQLException | NullPointerException e) {
  
+			LOG.error("Could not create new Cash Movement Entry: "+e.getMessage(), e);
 			throw new POMDataModelException("Could not create new Cash Movement Entry: "+e.getMessage() , e);
  
 		} finally {
@@ -174,6 +179,7 @@ public class CashMovementDAO {
 			
 		} catch (SQLException e) {
  
+			LOG.error("Could not retrieve all Cash Movement Entries: "+e.getMessage(), e);
 			throw new POMDataModelException("Could not retrieve all Cash Movement Entries: "+e.getMessage(), e);
  
 		} finally {
@@ -215,6 +221,7 @@ public class CashMovementDAO {
 			
 		} catch (SQLException e) {
  
+			LOG.error("Could not retrieve all Cash Movement Entries: "+e.getMessage(), e);
 			throw new POMDataModelException("Could not retrieve all Cash Movement Entries: "+e.getMessage(), e);
  
 		} finally {
@@ -253,6 +260,7 @@ public class CashMovementDAO {
 			
 		} catch (SQLException e) {
  
+			LOG.error("Could not retrieve Cash Movement Entry by ID: "+e.getMessage(), e);
 			throw new POMDataModelException("Could not retrieve Cash Movement Entry by ID: "+e.getMessage() , e);
  
 		} finally {
@@ -297,6 +305,7 @@ public class CashMovementDAO {
 				
 		} catch (SQLException | NullPointerException e) {
  
+			LOG.error("Could not update Cash Movement Entry: "+e.getMessage(), e);
 			throw new POMDataModelException("Could not update Cash Movement Entry: "+e.getMessage(), e);
  
 		} finally {
@@ -328,6 +337,7 @@ public class CashMovementDAO {
 				
 		} catch (SQLException e) {
  
+			LOG.error("Could not delete Cash Movement Entry: "+e.getMessage(), e);
 			throw new POMDataModelException("Could not delete Cash Movement Entry: "+e.getMessage(), e);
  
 		} finally {
@@ -365,6 +375,7 @@ public class CashMovementDAO {
 			
 		} catch (SQLException e) {
  
+			LOG.error("Could not calculate sum of Cash Movement Entries: "+e.getMessage(), e);
 			throw new POMDataModelException("Could not calculate sum of Cash Movement Entries: "+e.getMessage(), e);
  
 		} finally {

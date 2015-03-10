@@ -11,15 +11,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
+
 import ua.com.goit.gojava.POM.dataModel.POMDataModelException;
 import ua.com.goit.gojava.POM.dataModel.common.ExchangeRate;
-import ua.com.goit.gojava.POM.persistence.postgresDB.ExchangeRateDAO;
+import ua.com.goit.gojava.POM.services.ApplicationContextProvider;
+import ua.com.goit.gojava.POM.services.ExchangeRateService;
 
 @WebServlet(urlPatterns = {"/ExchangeRateWebController"})
 public class WebControllerExchangeRate extends HttpServlet {
 
 	private static final long serialVersionUID = 877563483782135575L;
-
+	private static final Logger LOG=Logger.getLogger(WebControllerExchangeRate.class);
+	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
@@ -55,15 +59,16 @@ public class WebControllerExchangeRate extends HttpServlet {
 
 	private void loadExchangeRateForEdit(HttpServletRequest req) {
 		
-		ExchangeRateDAO exchangeRateDAO = new ExchangeRateDAO();
+		ExchangeRateService exchangeRateService = (ExchangeRateService) ApplicationContextProvider.getApplicationContext().getBean("ExchangeRateService");
 		try {
 			
 			long id = Long.parseLong(req.getParameter("EditCurrent"));
-			ExchangeRate exchangeRate = exchangeRateDAO.retrieveById(id);
+			ExchangeRate exchangeRate = exchangeRateService.retrieveById(id);
 			req.getSession(false).setAttribute("currentRateForEdit", exchangeRate);
 			
 		} catch (POMDataModelException | NumberFormatException e) {
 
+			LOG.error("Can not load Exchange Rate for edit: "+e.getMessage(),e);
 			req.getSession(false).setAttribute("errorMessage", "Can not load Exchange Rate for edit: "+e.getMessage());
 			return;	
 		}
@@ -72,15 +77,16 @@ public class WebControllerExchangeRate extends HttpServlet {
 
 	private void deleteExchangeRate(HttpServletRequest req) {
 		
-		ExchangeRateDAO exchangeRateDAO = new ExchangeRateDAO();
+		ExchangeRateService exchangeRateService = (ExchangeRateService) ApplicationContextProvider.getApplicationContext().getBean("ExchangeRateService");
 		try {
 			
 			long id = Long.parseLong(req.getParameter("DellCurrent"));
 
-			exchangeRateDAO.delete(exchangeRateDAO.retrieveById(id));
+			exchangeRateService.delete(exchangeRateService.retrieveById(id));
 			
 		} catch (POMDataModelException | NumberFormatException e) {
 
+			LOG.error("Can not delete Exchange Rate: "+e.getMessage(),e);
 			req.getSession(false).setAttribute("errorMessage", "Can not delete Exchange Rate: "+e.getMessage());
 			return;	
 		}
@@ -116,20 +122,20 @@ public class WebControllerExchangeRate extends HttpServlet {
 			
 		} catch (ParseException | IllegalArgumentException e)   {
 
-			//req.setAttribute("errorMessage", "Could not create new Exchange Rate: "+e.getMessage());
+			LOG.error("Could not create new Exchange Rate: "+e.getMessage(),e);
 			req.getSession(false).setAttribute("errorMessage", "Could not create new Exchange Rate: "+e.getMessage());
 			return;
 			
 		}
 		
-		ExchangeRateDAO exchangeRateDAO = new ExchangeRateDAO();
+		ExchangeRateService exchangeRateService = (ExchangeRateService) ApplicationContextProvider.getApplicationContext().getBean("ExchangeRateService");
 		try {
 			
-			exchangeRateDAO.create(newRate);
+			exchangeRateService.create(newRate);
 			
 		} catch (POMDataModelException e) {
 
-			//req.setAttribute("errorMessage", "Can not save new Exchange Rate:  "+e.getMessage());
+			LOG.error("Can not save new Exchange Rate: "+e.getMessage(),e);
 			req.getSession(false).setAttribute("errorMessage", "Can not save new Exchange Rate: "+e.getMessage());
 			return;	
 		}
@@ -161,12 +167,12 @@ public class WebControllerExchangeRate extends HttpServlet {
 			exchangeRate.setRate(Long.parseLong(rateString));
 			exchangeRate.setMultiplicity(Long.parseLong(multiplicityString));
 			
-			ExchangeRateDAO exchangeRateDAO = new ExchangeRateDAO();
-			exchangeRateDAO.update(exchangeRate);
+			ExchangeRateService exchangeRateService = (ExchangeRateService) ApplicationContextProvider.getApplicationContext().getBean("ExchangeRateService");
+			exchangeRateService.update(exchangeRate);
 			
 		} catch (POMDataModelException | ParseException | NumberFormatException e)   {
 
-			//req.setAttribute("errorMessage", "Could not create new Exchange Rate: "+e.getMessage());
+			LOG.error("Could not update Exchange Rate: "+e.getMessage(),e);
 			req.getSession(false).setAttribute("errorMessage", "Could not update Exchange Rate: "+e.getMessage());
 			return;
 			

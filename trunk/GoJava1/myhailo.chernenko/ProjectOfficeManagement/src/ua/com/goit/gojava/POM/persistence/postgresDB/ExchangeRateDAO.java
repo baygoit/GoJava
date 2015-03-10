@@ -11,6 +11,8 @@ import java.util.Currency;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
 import ua.com.goit.gojava.POM.dataModel.POMDataModelException;
 import ua.com.goit.gojava.POM.dataModel.common.ExchangeRate;
 
@@ -18,7 +20,8 @@ import ua.com.goit.gojava.POM.dataModel.common.ExchangeRate;
 public class ExchangeRateDAO {
 
 	private static final String CLASS_TABLE = "exchange_rates"; 
-
+	private static final Logger LOG=Logger.getLogger(ExchangeRateDAO.class);
+	
 	private Connection getDBConnection() {
 		
 		return DBDataManager.getConnection();
@@ -85,6 +88,7 @@ public class ExchangeRateDAO {
 			
 		} catch (SQLException | NullPointerException e) {
  
+			LOG.error("Could not create new Exchage Rate: "+e.getMessage(), e);
 			throw new POMDataModelException("Could not create new Exchage Rate: "+e.getMessage(), e);
  
 		} finally {
@@ -132,6 +136,7 @@ public class ExchangeRateDAO {
 			
 		} catch (SQLException | NullPointerException e) {
  
+			LOG.error("Could not create new Exchage Rate: "+e.getMessage(), e);
 			throw new POMDataModelException("Could not create new Exchage Rate: "+e.getMessage() , e);
  
 		} finally {
@@ -171,6 +176,7 @@ public class ExchangeRateDAO {
 			
 		} catch (SQLException e) {
  
+			LOG.error("Could not retrieve all Exchage Rates: "+e.getMessage(), e);
 			throw new POMDataModelException("Could not retrieve all Exchage Rates: "+e.getMessage(), e);
  
 		} finally {
@@ -209,6 +215,7 @@ public class ExchangeRateDAO {
 			
 		} catch (SQLException e) {
  
+			LOG.error("Could not retrieve Exchage Rate by ID: "+e.getMessage(), e);
 			throw new POMDataModelException("Could not retrieve Exchage Rate by ID: "+e.getMessage() , e);
  
 		} finally {
@@ -253,6 +260,7 @@ public class ExchangeRateDAO {
 				
 		} catch (SQLException | NullPointerException e) {
  
+			LOG.error("Could not update Exchage Rate: "+e.getMessage(), e);
 			throw new POMDataModelException("Could not update Exchage Rate: "+e.getMessage(), e);
  
 		} finally {
@@ -284,6 +292,7 @@ public class ExchangeRateDAO {
 				
 		} catch (SQLException e) {
  
+			LOG.error("Could not delete Exchage Rate: "+e.getMessage(), e);
 			throw new POMDataModelException("Could not delete Exchage Rate: "+e.getMessage(), e);
  
 		} finally {

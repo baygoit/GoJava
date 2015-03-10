@@ -22,4 +22,28 @@ public class BankAccountService {
 		
 	}
 
+	public BankAccount retrieveById(long id) throws POMDataModelException {
+
+		return bankAccountDAO.retrieveById(id);
+		
+	}
+
+	public void delete(BankAccount bankAccount) throws POMDataModelException {
+
+		bankAccountDAO.delete(bankAccount);
+		
+	}
+
+	public void create(BankAccount bankAccount) throws POMDataModelException {
+
+		bankAccountDAO.create(bankAccount);
+		
+	}
+
+	public void update(BankAccount bankAccount) throws POMDataModelException {
+
+		bankAccountDAO.update(bankAccount);
+		
+	}
+
 }

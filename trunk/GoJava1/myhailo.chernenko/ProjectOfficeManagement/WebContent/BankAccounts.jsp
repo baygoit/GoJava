@@ -20,15 +20,6 @@
 		return true;
 	}
 	
-	function openCashMovement(bankId){
-		
-		this.BankAccountsTable.OpenCashMovement.value = bankId;
-		this.BankAccountsTable.submit();
-		
-		return true;
-		
-	}
-	
 	</script>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -38,8 +29,6 @@
 	<body>
 		<% pageContext.setAttribute("bankAccountService", ApplicationContextProvider.getApplicationContext().getBean("BankAccountService")); %>
 		<% pageContext.setAttribute("cashMovementService", ApplicationContextProvider.getApplicationContext().getBean("CashMovementService")); %>
-		
-		<jsp:useBean id="cashMovementService" class="ua.com.goit.gojava.POM.services.CashMovementService" scope="application"/>
 		
 		<div class="pageHeader">Банковские счета</div>
 		
@@ -65,7 +54,8 @@
 	    			<th>Остаток</th>
 	    		</tr>
 	    		<c:if test="${pageScope.bankAccountService != null}" >
-	    			<input type="hidden" name="OpenCashMovement" value="">
+	    			<!-- <input type="hidden" name="OpenCashMovement" value="${null}" />
+	    				 --> 
 		   			<c:set var="bankAccounts" scope="page" value = "${bankAccountService.retrieveAll()}" />
 		   			<c:forEach var="currentbankAccount" items="${bankAccounts}">
 		   				<tr class="tableRow">
@@ -74,15 +64,15 @@
 							<td>${currentbankAccount.getBankName()}</td>
 							<td>${currentbankAccount.getCurrency().getCurrencyCode()}</td>
 							<td class="numericColumn">
-								<a href="javascript:openCashMovement(${currentbankAccount.getId()})">
-									${cashMovementService.getTotalByBankAccount(currentbankAccount).getValue()}
-								</a>
-								</td>
+								${cashMovementService.getTotalByBankAccount(currentbankAccount).getValue()}
+							</td>
 							<td>
 								<button class = "defaultButton" type="submit" name="DellCurrent" 
 										value="${currentbankAccount.getId()}">Удалить</button>
 								<button class = "defaultButton" type="submit" name="EditCurrent" 
 										value="${currentbankAccount.getId()}">Редактировать</button>
+								<button class = "defaultButton" type="submit" name="OpenCashMovement" 
+										value="${currentbankAccount.getId()}">Движения</button>
 							</td>	
 						</tr>	
 		   			</c:forEach>	
@@ -105,7 +95,7 @@
 									 %>
 								</select>
 							</td>
-			    			<td class="numericColumn">${currentAccountForEdit.GetTotal().getValue()}</td>	
+			    			<td class="numericColumn">${cashMovementService.getTotalByBankAccount(currentAccountForEdit).getValue()}</td>	
 							<td>
 			    				<input class = "defaultButton" type="submit" name="Edit" value="Записать изменения">
 			    				<input class = "defaultButton" type="submit" name="UndoEdit" value="Отменить">

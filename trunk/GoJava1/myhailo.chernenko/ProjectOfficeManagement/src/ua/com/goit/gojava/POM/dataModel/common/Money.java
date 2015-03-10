@@ -3,10 +3,13 @@ package ua.com.goit.gojava.POM.dataModel.common;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Currency;
+import org.apache.log4j.Logger;
 
 import ua.com.goit.gojava.POM.dataModel.POMDataModelException;
 
 public class Money {
+	
+	private static final Logger LOG=Logger.getLogger(Money.class);
 	
 	private int scaleLength = 2;
 	private RoundingMode roundingMode = RoundingMode.HALF_UP;
@@ -27,6 +30,12 @@ public class Money {
 		try {
 			this.value = getDecimal(value);
 		} catch (NumberFormatException | NullPointerException e) {
+			
+			if(LOG.isDebugEnabled()){
+				LOG.debug("Money creation: value = "+value);
+			}
+			LOG.error("Money creation. Wrong amount of Money: value = "+value);
+			
 			throw new POMDataModelException("Wrong amount of Money", e);
 		}
 
@@ -84,6 +93,8 @@ public class Money {
 				try {
 					reCalculatedValue = reCalculatedValue.divide(getDecimal(currentRate.getRate()));
 				} catch (ArithmeticException e) {
+					
+					LOG.error("Adding money. Wrong divisor ("+currentRate.getRate()+")");
 					throw new POMDataModelException("Wrong divisor ("+currentRate.getRate()+")",e);
 				}
 				
@@ -93,6 +104,14 @@ public class Money {
 						
 			}else{
 				
+				LOG.error("Adding money. Can't add 2 Money in different currencies - rate is wrong or not found");
+				if(LOG.isDebugEnabled()){
+					LOG.debug("Adding money. 	CurrentRate = "+currentRate);
+					LOG.debug("Adding money. 	currentRate.getFromCurrency() = "+currentRate.getFromCurrency());
+					LOG.debug("Adding money. 	currentRate.getToCurrency() = "+currentRate.getToCurrency());
+					LOG.debug("Adding money. 	money.getCurrency() = "+money.getCurrency());
+					LOG.debug("Adding money. 	this.getCurrency() = "+this.getCurrency());
+				}
 				throw new POMDataModelException("Can't add 2 Money in different currencies - rate is wrong or not found"); 
 				
 			}

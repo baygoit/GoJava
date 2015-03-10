@@ -7,17 +7,20 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import org.apache.log4j.Logger;
+
 import ua.com.goit.gojava.POM.dataModel.POMDataModelRuntimeException;
 
 public class DBDataManager {
 	
-	static {
+	/*static {
 		try {
 			Class.forName("org.postgresql.Driver");
 		} catch (ClassNotFoundException e) {
 			throw new POMDataModelRuntimeException("Could not register DB driver: "+e.getMessage(), e);
 		}
-	}
+	}*/
+	private static final Logger LOG=Logger.getLogger(DBDataManager.class);
 	
 	public static Connection getConnection() {
 
@@ -32,6 +35,7 @@ public class DBDataManager {
 			
 		} catch (SQLException | NamingException e) {
  
+			LOG.error("Could not create connection to DB: "+e.getMessage(), e);
 			throw new POMDataModelRuntimeException("Could not create connection to DB: "+e.getMessage(), e);
  
 		};

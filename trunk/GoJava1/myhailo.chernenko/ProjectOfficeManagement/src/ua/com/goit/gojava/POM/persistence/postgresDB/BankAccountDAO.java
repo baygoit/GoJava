@@ -9,14 +9,16 @@ import java.util.ArrayList;
 import java.util.Currency;
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
 import ua.com.goit.gojava.POM.dataModel.POMDataModelException;
 import ua.com.goit.gojava.POM.dataModel.cash.BankAccount;
-
 
 public class BankAccountDAO {
 	
 	private static final String CLASS_TABLE = "bank_account"; 
-
+	private static final Logger LOG=Logger.getLogger(BankAccountDAO.class);
+	
 	private Connection getDBConnection() {
 		
 		return DBDataManager.getConnection();
@@ -72,6 +74,7 @@ public class BankAccountDAO {
 			
 		} catch (SQLException | NullPointerException e) {
  
+			LOG.error("Could not create new Bank Account: "+e.getMessage(), e);
 			throw new POMDataModelException("Could not create new Bank Account: "+e.getMessage(), e);
  
 		} finally {
@@ -113,6 +116,7 @@ public class BankAccountDAO {
 			
 		} catch (SQLException | NullPointerException e) {
  
+			LOG.error("Could not create new Bank Account: "+e.getMessage(), e);
 			throw new POMDataModelException("Could not create new Bank Account: "+e.getMessage() , e);
  
 		} finally {
@@ -152,6 +156,7 @@ public class BankAccountDAO {
 			
 		} catch (SQLException e) {
  
+			LOG.error("Could not retrieve all Bank Accounts: "+e.getMessage(), e);
 			throw new POMDataModelException("Could not retrieve all Bank Accounts: "+e.getMessage(), e);
  
 		} finally {
@@ -190,6 +195,7 @@ public class BankAccountDAO {
 			
 		} catch (SQLException e) {
  
+			LOG.error("Could not retrieve Bank Account by ID: "+e.getMessage(), e);
 			throw new POMDataModelException("Could not retrieve Bank Account by ID: "+e.getMessage() , e);
  
 		} finally {
@@ -228,6 +234,7 @@ public class BankAccountDAO {
 				
 		} catch (SQLException | NullPointerException e) {
  
+			LOG.error("Could not update Bank Account: "+e.getMessage(), e);
 			throw new POMDataModelException("Could not update Bank Account: "+e.getMessage(), e);
  
 		} finally {
@@ -259,6 +266,7 @@ public class BankAccountDAO {
 				
 		} catch (SQLException e) {
  
+			LOG.error("Could not delete Bank Account: "+e.getMessage(), e);
 			throw new POMDataModelException("Could not delete Bank Account: "+e.getMessage(), e);
  
 		} finally {

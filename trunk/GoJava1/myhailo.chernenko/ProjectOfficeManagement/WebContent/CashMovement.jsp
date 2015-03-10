@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	import="ua.com.goit.gojava.POM.dataModel.common.*,ua.com.goit.gojava.POM.dataModel.cash.*,
-			ua.com.goit.gojava.POM.persistence.postgresDB.*,
+			ua.com.goit.gojava.POM.services.*,
 			java.text.SimpleDateFormat,
 			java.util.Currency"
 						
@@ -14,7 +14,8 @@
 	
 	var bankAccountCurrencies = {};
 	<% 
-		for(BankAccount bankAccount: (new BankAccountDAO()).retrieveAll() ) {
+		BankAccountService bankAccountService = (BankAccountService) ApplicationContextProvider.getApplicationContext().getBean("BankAccountService");
+		for(BankAccount bankAccount: (bankAccountService).retrieveAll() ) {
 			out.println("bankAccountCurrencies['"+bankAccount.getId()
 			                +"'] = '"+bankAccount.getCurrency().getCurrencyCode()+"';") ;
 		}
@@ -55,8 +56,9 @@
 		<title>Project Office Management System</title>
 	</head>
 	<body>
-		<% pageContext.setAttribute("cashMovementDAO", new CashMovementDAO()); %>
-		<% pageContext.setAttribute("bankAccountDAO", new BankAccountDAO()); %>
+		<% pageContext.setAttribute("bankAccountService", ApplicationContextProvider.getApplicationContext().getBean("BankAccountService")); %>
+		<% pageContext.setAttribute("cashMovementService", ApplicationContextProvider.getApplicationContext().getBean("CashMovementService")); %>
+		
 		
 		<div class="pageHeader">Записи о движении денег</div>
 		
@@ -72,8 +74,7 @@
 			  			Object baFilter = (BankAccount) request.getSession(false).getAttribute("bankAccountFilterValue");
 			  			out.println("<option "+( (baFilter == null)? "selected":"" )+" value=\"\" > Отображать все </option>");		
 					
-			  			BankAccountDAO bankAccountDAO = new BankAccountDAO();
-						for(BankAccount bankAccount: bankAccountDAO.retrieveAll()) {
+			  			for(BankAccount bankAccount: bankAccountService.retrieveAll()) {
 							out.println("<option "
 										+  ((bankAccount.equals(baFilter))? "selected":"")
 										+" value =\""+bankAccount.getId() +"\">"
@@ -105,13 +106,13 @@
 	    			<th>Валюта</th>
 	    			<th>Сумма</th>
 	    		</tr>
-	    		<c:if test="${pageScope.cashMovementDAO != null}" >
+	    		<c:if test="${pageScope.cashMovementService != null}" >
 		   			<c:choose>
 		   				<c:when test="${sessionScope.bankAccountFilterValue != null}" >
-			    			<c:set var="cashMovementEntries" scope="page" value = "${cashMovementDAO.retrieveAll(bankAccountFilterValue)}" />
+			    			<c:set var="cashMovementEntries" scope="page" value = "${cashMovementService.retrieveAll(bankAccountFilterValue)}" />
 			    		</c:when>
 			    		<c:otherwise>
-				   			<c:set var="cashMovementEntries" scope="page" value = "${cashMovementDAO.retrieveAll()}" />
+				   			<c:set var="cashMovementEntries" scope="page" value = "${cashMovementService.retrieveAll()}" />
 			    		</c:otherwise>
 		    		</c:choose>
 		   			<c:forEach var="currentEntry" items="${cashMovementEntries}">
@@ -145,7 +146,7 @@
 							  				</option>
 			   						<%
 			   							//BankAccountDAO bankAccountDAO = new BankAccountDAO();
-				   						for(BankAccount bankAccount: bankAccountDAO.retrieveAll()) {
+				   						for(BankAccount bankAccount: bankAccountService.retrieveAll()) {
 											out.println("<option "
 													+" value =\""+bankAccount.getId() +"\">"
 													+  bankAccount.getName()+"</option>");
@@ -168,7 +169,7 @@
 			    				<option disabled selected value=""> Выберите счет  </option>
 							  		<%
 			   							//BankAccountDAO bankAccountDAO = new BankAccountDAO();
-				   						for(BankAccount bankAccount: bankAccountDAO.retrieveAll()) {
+				   						for(BankAccount bankAccount: bankAccountService.retrieveAll()) {
 											out.println("<option "
 													+" value =\""+bankAccount.getId() +"\">"
 													+  bankAccount.getName()+"</option>");
