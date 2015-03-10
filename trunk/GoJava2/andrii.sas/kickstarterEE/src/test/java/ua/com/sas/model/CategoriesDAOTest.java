@@ -4,25 +4,35 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import javax.sql.DataSource;
+
 import org.junit.After;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import ua.com.sas.dao.CategoriesDAO;
-import ua.com.sas.dao.ConnectionDAO;
 
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = { "classpath:test-application-context.xml" })
 public class CategoriesDAOTest extends CategoriesTest{
 
-	private ConnectionDAO connectionDAO;
+	
+	@Autowired
+	private Categories categoriesDAO;
+	
+	@Autowired
+	private DataSource dataSource;
 
 	@Override
 	Categories getList() {
-		connectionDAO = new ConnectionDAO("kickstarter_db_test", "postgres", "gfhfien17");
-		return new CategoriesDAO(connectionDAO);
+		return categoriesDAO;
 	}
 		
 	@After
 	public void cleanFile(){
-		try {
-			Connection connection = connectionDAO.getConnection();
+		try (Connection connection = dataSource.getConnection()) {
 			Statement statement = connection.createStatement();
 			statement.setQueryTimeout(30);
 			statement.executeUpdate("delete from categories");
@@ -30,7 +40,5 @@ public class CategoriesDAOTest extends CategoriesTest{
 			throw new RuntimeException(
 				"Connection Failed! Check output console", e);
 		}
-		connectionDAO.closeConnection();
 	}
-	
 }

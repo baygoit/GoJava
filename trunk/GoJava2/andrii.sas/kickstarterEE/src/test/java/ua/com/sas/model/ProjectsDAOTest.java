@@ -4,32 +4,43 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import javax.sql.DataSource;
+
 import org.junit.After;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import ua.com.sas.dao.CategoriesDAO;
-import ua.com.sas.dao.ConnectionDAO;
 import ua.com.sas.dao.ProjectsDAO;
 
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = { "classpath:test-application-context.xml" })
 public class ProjectsDAOTest extends ProjectsTest{
 
-	private ConnectionDAO connectionDAO;
-	private Connection connection;
+	@Autowired
+	private Projects projectsDAO;
+	
+	@Autowired
+	private Categories categoriesDAO;
 
+	@Autowired
+	private DataSource dataSource;
+	
 	@Override
 	Projects getProjects() {
-		connectionDAO = new ConnectionDAO("kickstarter_db_test", "postgres", "gfhfien17");
-		connection = connectionDAO.getConnection();
-		return new ProjectsDAO(connectionDAO);
+		return projectsDAO;
 	}
 	
 	@Override
 	Categories getCategories() {
-		return new CategoriesDAO(connectionDAO);
+		return categoriesDAO;
 	}
 	
 	@After
-	public void cleanFile(){
-		try {
+	public void cleanUp(){
+		try (Connection connection = dataSource.getConnection()) {
 			Statement statement = connection.createStatement();
 			statement.setQueryTimeout(30);
 			statement.executeUpdate("delete from projects");
@@ -38,7 +49,5 @@ public class ProjectsDAOTest extends ProjectsTest{
 			throw new RuntimeException(
 				"Connection Failed! Check output console", e);
 		}
-		connectionDAO.closeConnection();
 	}
-
 }
