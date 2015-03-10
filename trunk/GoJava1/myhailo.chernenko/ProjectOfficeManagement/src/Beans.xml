@@ -14,15 +14,18 @@
    <bean id="ExchangeRateService" class="ua.com.goit.gojava.POM.services.ExchangeRateService">
       <property name="exchangeRateDAO" ref="ExchangeRateDAO"/>
    </bean>
+   <bean id="CostItemService" class="ua.com.goit.gojava.POM.services.CostItemService">
+      <property name="costItemDAO" ref="CostItemDAO"/>
+   </bean>
    
 
    <bean id="CashMovementDAO" class="ua.com.goit.gojava.POM.persistence.postgresDB.CashMovementDAO">
    </bean>
-   
    <bean id="BankAccountDAO" class="ua.com.goit.gojava.POM.persistence.postgresDB.BankAccountDAO">
    </bean>
-   
    <bean id="ExchangeRateDAO" class="ua.com.goit.gojava.POM.persistence.postgresDB.ExchangeRateDAO">
+   </bean>
+   <bean id="CostItemDAO" class="ua.com.goit.gojava.POM.persistence.postgresDB.CostItemDAO">
    </bean>
    
    <bean id="applicationContextProvder" class="ua.com.goit.gojava.POM.services.ApplicationContextProvider">

@@ -30,6 +30,12 @@ public class CashMovementService {
 		
 	}
 	
+	public List<CashMovementEntry> retrieveAll(BankAccount bankAccount) throws POMDataModelException {
+
+		return cashMovementDAO.retrieveAll(bankAccount);
+		
+	}
+	
 	public CashMovementEntry retrieveById(long id) throws POMDataModelException {
 
 		return cashMovementDAO.retrieveById(id);

@@ -12,9 +12,7 @@
 	<p><a href="BankAccounts.jsp">Банковские счета</a></p>
 	<p><a href="CashMovement.jsp">Записи о движении денег</a></p>
 	<p><a href="ExchangeRates.jsp">Курсы валют</a></p>
-	<!--
-		<p><a href="CostItems.jsp">Статьи затрат</a></p>
-		 -->	
+	<p><a href="CostItems.jsp">Статьи затрат</a></p>	
 	 
 </body>
 </html>

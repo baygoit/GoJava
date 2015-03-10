@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	import="ua.com.goit.gojava.POM.dataModel.cash.*,
-			ua.com.goit.gojava.POM.persistence.postgresDB.*,
 			ua.com.goit.gojava.POM.services.*,
 			java.util.Currency"
 			

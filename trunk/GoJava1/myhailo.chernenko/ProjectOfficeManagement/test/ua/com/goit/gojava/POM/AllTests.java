@@ -32,7 +32,6 @@ import ua.com.goit.gojava.POM.persistence.postgresDB.ExchangeRateDAOTest;
 		PaymentDocumentTest.class,
 		
 		CostItemTest.class, 
-		CostItemTransactionTest.class,
 		ProjectFinResultTransactionTest.class, 
 		ProjectStageTest.class,
 		ProjectTest.class,

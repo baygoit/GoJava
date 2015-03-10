@@ -7,7 +7,6 @@ import java.util.Date;
 import ua.com.goit.gojava.POM.dataModel.cash.BankAccount;
 //import ua.com.goit.gojava.POM.dataModel.common.FinancialDocument;
 import ua.com.goit.gojava.POM.dataModel.profitcost.CostItem;
-import ua.com.goit.gojava.POM.dataModel.profitcost.CostItemTransaction;
 import ua.com.goit.gojava.POM.dataModel.profitcost.Project;
 import ua.com.goit.gojava.POM.dataModel.profitcost.ProjectFinResultTransaction;
 import ua.com.goit.gojava.POM.dataModel.profitcost.ProjectStage;
@@ -136,11 +135,11 @@ public class PaymentDocument {// implements FinancialDocument, Serializable {
 		
 		if (costItem != null) {
 			
-			CostItemTransaction newTransaction = costItem.addTransaction();
+			/*CostItemTransaction newTransaction = costItem.addTransaction();
 			newTransaction.setDate(date);
 			//newTransaction.setDoc(this);
 			newTransaction.setSum(sum);
-			
+			*/
 		}
 		
 		if (bankAccount != null) {
