@@ -9,26 +9,12 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import org.apache.log4j.Logger;
-import org.apache.log4j.LogManager;
-
 import ua.com.goit.gojava1.lslayer.hackit2.actor.Actor;
 import ua.com.goit.gojava1.lslayer.hackit2.actor.HumanControlledCharacter;
 import ua.com.goit.gojava1.lslayer.hackit2.exception.HackitIOException;
 
 public class ActorJDBCDAO {
 
-    public ActorJDBCDAO() {
-//              ApplicationContext ctx =
-//              new ClassPathXmlApplicationContext("beans.xml");
-////        ctx.register(DataSourceProvider.class);
-////        ctx.refresh();
-//              DataSourceProvider provider = (DataSourceProvider) ctx.getBean("getDataSource"); 
-//        this.ds = provider.getDataSource();
-    }
-
-    private static final Logger logger = LogManager.getLogger(ActorJDBCDAO.class);
-    
     @Autowired
     DataSourceProvider ds;
 
@@ -42,15 +28,6 @@ public class ActorJDBCDAO {
         PreparedStatement loadSkills = null;
         PreparedStatement loadAttributes = null;
         try {
-            // Class.forName("org.postgresql.Driver");
-            // connection = DriverManager.getConnection(
-            // "jdbc:postgresql://lslayer.tk:5432/goit", "goit", "goit");
-//            AnnotationConfigApplicationContext ctx =
-//                                                     new AnnotationConfigApplicationContext();
-//            ctx.register(DataSourceProvider.class);
-//            ctx.refresh();
-//            DataSource ds = (DataSource) ctx.getBean(DataSourceProvider.class).getDataSource();
-//
             connection = ds.getDataSource().getConnection();
             connection.setAutoCommit(false);
             loadActor = connection.prepareStatement(loadSQL);
@@ -94,16 +71,7 @@ public class ActorJDBCDAO {
         Connection connection = null;
         PreparedStatement deleteActor = null;
         String deleteActorSQL = "DELETE FROM actors WHERE actors.id = ?;";
-//        logger.error("EROOR");
         try {
-            // Class.forName("org.postgresql.Driver");
-            // connection = DriverManager.getConnection(
-            // "jdbc:postgresql://lslayer.tk:5432/goit", "goit", "goit");
-//            AnnotationConfigApplicationContext ctx =
-//                                                     new AnnotationConfigApplicationContext();
-//            ctx.register(DataSourceProvider.class);
-//            ctx.refresh();
-//            DataSource ds = (DataSource) ctx.getBean(DataSourceProvider.class).getDataSource();
             connection = ds.getDataSource().getConnection();
             connection.setAutoCommit(false);
             deleteActor = connection.prepareStatement(deleteActorSQL);
@@ -111,13 +79,11 @@ public class ActorJDBCDAO {
             deleteActor.executeUpdate();
             connection.commit();
         } catch (Exception e) {
-//            logger.warn("Error", e);
             throw new HackitIOException("Error while deleting actor", e);
         } finally {
             try {
                 connection.close();
             } catch (Exception e) {
-//                logger.warn("Error", e);
                 throw new HackitIOException("Error while deleting actor", e);
             }
         }
@@ -133,14 +99,6 @@ public class ActorJDBCDAO {
         PreparedStatement saveAttributes = null;
         String atributeSQL = "INSERT INTO attributes (owner, name, value) VALUES (?, ?, ?);";
         try {
-            // Class.forName("org.postgresql.Driver");
-            // connection = DriverManager.getConnection(
-            // "jdbc:postgresql://lslayer.tk:5432/goit", "goit", "goit");
-//            AnnotationConfigApplicationContext ctx =
-//                                                     new AnnotationConfigApplicationContext();
-//            ctx.register(DataSourceProvider.class);
-//            ctx.refresh();
-//            DataSource ds = (DataSource) ctx.getBean(DataSourceProvider.class).getDataSource();
             connection = ds.getDataSource().getConnection();
             connection.setAutoCommit(false);
             saveActor = connection.prepareStatement(actorSQL);
@@ -195,14 +153,6 @@ public class ActorJDBCDAO {
         PreparedStatement loadAllActors = null;
         String loadAllActorsSQL = "SELECT id FROM actors;";
         try {
-            // Class.forName("org.postgresql.Driver");
-            // connection = DriverManager.getConnection(
-            // "jdbc:postgresql://lslayer.tk:5432/goit", "goit", "goit");
-//            AnnotationConfigApplicationContext ctx =
-//                                                     new AnnotationConfigApplicationContext();
-//            ctx.register(DataSourceProvider.class);
-//            ctx.refresh();
-//            DataSource ds = (DataSource) ctx.getBean(DataSourceProvider.class).getDataSource();
             connection = ds.getDataSource().getConnection();
             loadAllActors = connection.prepareStatement(loadAllActorsSQL);
             ResultSet result = loadAllActors.executeQuery();
@@ -210,13 +160,11 @@ public class ActorJDBCDAO {
                 returnValue.add(this.load(result.getLong(1)));
             }
         } catch (Exception e) {
-//            logger.warn("Error", e);
             throw new HackitIOException("Error while loading actor", e);
         } finally {
             try {
                 connection.close();
             } catch (Exception e) {
-//                logger.warn("Error", e);
                throw new HackitIOException("Error while loading actor", e);
             }
         }

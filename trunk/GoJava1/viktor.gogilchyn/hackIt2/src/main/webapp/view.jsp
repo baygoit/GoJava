@@ -27,24 +27,24 @@
    <div class="single_user_container">
     <span class="user_name"> <c:out
       value="${gamerItem.getName()}" />
-    </span> <span class="detailed_user">
+    </span> <div class="detailed_user">
      <form method="get" action="actors" class="inline-form">
       <input type="hidden" name="view_id" value="${gamerItem.getId()}" />
       <input type="submit" class="details_button" value="Details" />
      </form>
-    </span> <span class="edit_user">
+    </div> <div class="edit_user">
      <form method="post" action="actors" class="inline-form">
       <input type="hidden" name="edit" value="yes" /> <input
        type="hidden" name="edit_id" value="${gamerItem.getId()}" /> <input
        type="submit" class="edit_button" value="Edit" />
      </form>
-    </span> <span class="delete_user">
+    </div> <div class="delete_user">
      <form method="post" action="actors" class="inline-form">
       <input type="hidden" name="delete" value="yes" /> <input
        type="hidden" name="delete_id" value="${gamerItem.getId()}" /> <input
        type="submit" class="delete_button" value="Delete" />
      </form>
-    </span>
+    </div>
    </div>
   </c:forEach>
  </div>

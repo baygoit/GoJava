@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -19,6 +21,7 @@ import ua.com.goit.gojava1.lslayer.hackit2.exception.HackitIOException;
  */
 public class ActorMaintainer extends HttpServlet {
     private static final long serialVersionUID = 1L;
+    private static final Logger logger = LogManager.getLogger(ActorMaintainer.class);
 
     /**
      * @see HttpServlet#HttpServlet()
@@ -34,6 +37,7 @@ public class ActorMaintainer extends HttpServlet {
      */
     protected void doGet(HttpServletRequest request,
                          HttpServletResponse response) throws ServletException, IOException {
+        logger.info("GET received");
         @SuppressWarnings("resource")
         ApplicationContext ctx =
                 new ClassPathXmlApplicationContext("beans.xml");
@@ -41,24 +45,29 @@ public class ActorMaintainer extends HttpServlet {
         try {
             dao = (ActorJDBCDAO) ctx.getBean("getDAO");
         } catch (Exception e1) {
-            // TODO Auto-generated catch block
+            logger.error("Spring didn't privided DAO", e1);
             e1.printStackTrace();
         }
         String idParameter = request.getParameter("view_id");
         if (idParameter != null) {
             try {
+                logger.info("ID recived: " + idParameter);
                 long detailsId = Long.parseLong(idParameter);
                 request.setAttribute("details", dao.load(detailsId));
             } catch (NumberFormatException e) {
+                logger.warn("Non numeric ID" + idParameter);
                 request.setAttribute("error", "Id should be number");
             } catch (HackitIOException e) {
+                logger.error("Loading failed", e);
                 request.setAttribute("error", e.getMessage());
             }
             request.getRequestDispatcher("details.jsp").forward(request, response);
         } else {
             try {
+                logger.info("Trying to load all actors");
                 request.setAttribute("gamers", dao.loadAll());
             } catch (HackitIOException e) {
+                logger.error("Loading failed", e);
                 request.setAttribute("error", e.getMessage());
             }
             request.getRequestDispatcher("view.jsp").forward(request, response);
@@ -82,10 +91,13 @@ public class ActorMaintainer extends HttpServlet {
                 request.setAttribute("error", e.getMessage());
             }
         }
+        @SuppressWarnings("resource")
+        ApplicationContext ctx =
+                new ClassPathXmlApplicationContext("beans.xml");
         ActorJDBCDAO dao = null;
         try {
-            dao = ActorJDBCDAO.class.newInstance();
-        } catch (InstantiationException | IllegalAccessException e1) {
+            dao = (ActorJDBCDAO) ctx.getBean("getDAO");
+        } catch (Exception e1) {
             e1.printStackTrace();
         }
         if (deleteParameter != null && deleteParameter.equals("yes") && id > 0)

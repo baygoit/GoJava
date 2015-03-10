@@ -5,16 +5,20 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import ua.com.goit.gojava1.lslayer.hackit2.Position;
+import ua.com.goit.gojava1.lslayer.hackit2.Positionable;
 import ua.com.goit.gojava1.lslayer.hackit2.action.Action;
 import ua.com.goit.gojava1.lslayer.hackit2.dto.ActionResult;
 import ua.com.goit.gojava1.lslayer.hackit2.dto.ActionParameters;
 import ua.com.goit.gojava1.lslayer.hackit2.exception.HackitWrongParameterException;
 
-public abstract class AbstractCharacter implements Actor, Serializable {
+public abstract class AbstractCharacter implements Actor, Serializable, Positionable {
 
+    
     private static final long serialVersionUID = -2511742480639362123L;
     private long id;
     private String name;
+    private Position position;
     private Map<String, Integer> skills = new LinkedHashMap<String, Integer>();
     private Map<String, String>  atrributes = new HashMap<String, String>();
     
@@ -22,6 +26,24 @@ public abstract class AbstractCharacter implements Actor, Serializable {
     public void setName(String name) {
         this.name = name;
         
+    }
+    
+    @Override
+    public Position getPosition() {
+        return position;
+    }
+
+
+    @Override
+    public void setPosition(Position where) {
+        this.position = where;
+        
+    }
+
+
+    @Override
+    public void moveTo(Position position) {
+        this.position = position;
     }
 
     @Override
