@@ -8,4 +8,9 @@ public class HumanControlledCharacter extends AbstractCharacter implements Human
         super(name);
     }
 
+    public HumanControlledCharacter() {
+        
+    }
+    
+
 }

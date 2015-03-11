@@ -1,80 +1,75 @@
 package ua.com.goit.gojava1.lslayer.hackit2.actor;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
+import javax.sql.DataSource;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
+
+import ua.com.goit.gojava1.lslayer.hackit2.Position;
 import ua.com.goit.gojava1.lslayer.hackit2.exception.HackitWrongParameterException;
 
+@ComponentScan
 public class ActorFactory {
+    
+    @Autowired
+    DataSource ds;
+    
     private static final String[] DEFAULT_SKILLS = { "scan", "develop", "info" };
-
+    private HumanControlledCharacter actor = new HumanControlledCharacter();
     private String actorName = null;
     private long id;
-    private Set<String> skills = new HashSet<String>(); // Hash is for unique
-                                                        // skills;
+    private Position position;
+    private Map<String, Integer> skills = new LinkedHashMap<String, Integer>();
+    private Map<String, String>  atrributes = new HashMap<String, String>();
 
-    // Newborn hero can't have evolved skills.
-    public ActorFactory addSkill(String skill)
+    public ActorFactory addSkill(String skill, int value)
             throws HackitWrongParameterException {
         if (skill != null) {
-            this.skills.add(skill);
+            this.skills.put(skill, value);
         } else {
             throw new HackitWrongParameterException("Skill can't be null");
         }
         return this;
     }
-
    
-    public void addSkillsArray(String[] skills) {
-        if (skills != null) {
-            for (String skill : skills) {
-                this.skills.add(skill);
-            }
-        }
+    public void setPosition(Position position) {
+        this.position = position;
     }
 
-    // Every newborn hero should have default skills
-    public Actor createActor() {
-        Actor newbornHero = this.createDefaultActor(this.actorName);
-        for (String skill : this.skills) {
-            newbornHero.addSkill(skill);
-        }
-        return newbornHero;
+    public void setSkills(Map<String, Integer> skills) {
+        this.skills = skills;
     }
 
-    private Actor createActorWithSkills(String actorName, String[] skills) {
-        Actor actor = this.createEmptyActor(actorName);
-        if ((actor != null) && (skills != null)) {
-            for (String skill : skills) {
-                actor.addSkill(skill);
-            }
-            return actor;
-        }
-        return null;
-    }
-
-    private Actor createDefaultActor(String actorName) {
-        return this.createActorWithSkills(actorName,
-                ActorFactory.DEFAULT_SKILLS);
-    }
-
-    private Actor createEmptyActor(String actorName) {
-        if (actorName != null) {
-            return new HumanControlledCharacter(actorName);
-        }
-        return null;
+    public void setAtrributes(Map<String, String> atrributes) {
+        this.atrributes = atrributes;
     }
 
     public void setActorName(String actorName) {
         this.actorName = actorName;
     }
     
-    public long getId() {
-        return id;
-    }
-
     public void setId(long id) {
         this.id = id;
+    }
+
+    public Actor createActor() {
+        this.actor.setName(actorName);
+        this.actorName = null;
+        this.actor.setSkills(skills);
+        this.skills = null;
+        this.actor.setAtrributes(atrributes);
+        this.atrributes = null;
+        this.actor.setPosition(position);
+        this.position = null;
+        return this.actor;
+    }
+
+    public void addSkillsArray(String[] skills) {
+        
     }
 
 

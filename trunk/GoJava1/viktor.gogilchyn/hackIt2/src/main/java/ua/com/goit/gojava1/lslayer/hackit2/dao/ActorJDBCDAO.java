@@ -8,15 +8,23 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
 
 import ua.com.goit.gojava1.lslayer.hackit2.actor.Actor;
 import ua.com.goit.gojava1.lslayer.hackit2.actor.HumanControlledCharacter;
 import ua.com.goit.gojava1.lslayer.hackit2.exception.HackitIOException;
 
+@ComponentScan
 public class ActorJDBCDAO {
 
     @Autowired
     DataSourceProvider ds;
+    
+    public Actor loadFake(int number) {
+        Connection connection = null;
+        Actor returnValue = null;
+        return returnValue;
+    }
 
     public Actor load(long newId) throws HackitIOException {
         Connection connection = null;
@@ -130,13 +138,13 @@ public class ActorJDBCDAO {
             return returnValue;
 
         } catch (Exception e) {
-            throw new HackitIOException("Error while loading actor", e);
+            throw new HackitIOException("Error while saving actor", e);
         } finally {
             try {
                 connection.rollback();
                 connection.close();
             } catch (Exception e) {
-                throw new HackitIOException("Error while loading actor", e);
+                throw new HackitIOException("Error while saving actor", e);
             }
         }
     }
@@ -156,6 +164,34 @@ public class ActorJDBCDAO {
             connection = ds.getDataSource().getConnection();
             loadAllActors = connection.prepareStatement(loadAllActorsSQL);
             ResultSet result = loadAllActors.executeQuery();
+            while (result.next()) {
+                returnValue.add(this.load(result.getLong(1)));
+            }
+        } catch (Exception e) {
+            throw new HackitIOException("Error while loading actor", e);
+        } finally {
+            try {
+                connection.close();
+            } catch (Exception e) {
+               throw new HackitIOException("Error while loading actor", e);
+            }
+        }
+        return returnValue;
+
+    }
+
+    
+    public List<Actor> load(int howMany, int offset) throws HackitIOException {
+        List<Actor> returnValue = new LinkedList<Actor>();
+        Connection connection = null;
+        PreparedStatement loadFewActors = null;
+        String loadFewActorsSQL = "SELECT id FROM actors LIMIT ? OFFSET ?;";
+        try {
+            connection = ds.getDataSource().getConnection();
+            loadFewActors = connection.prepareStatement(loadFewActorsSQL);
+            loadFewActors.setInt(1, howMany);
+            loadFewActors.setInt(2, offset);
+            ResultSet result = loadFewActors.executeQuery();
             while (result.next()) {
                 returnValue.add(this.load(result.getLong(1)));
             }

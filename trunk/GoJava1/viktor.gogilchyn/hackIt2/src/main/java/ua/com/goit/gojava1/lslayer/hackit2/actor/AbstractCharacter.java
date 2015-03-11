@@ -22,6 +22,24 @@ public abstract class AbstractCharacter implements Actor, Serializable, Position
     private Map<String, Integer> skills = new LinkedHashMap<String, Integer>();
     private Map<String, String>  atrributes = new HashMap<String, String>();
     
+    
+    
+    public AbstractCharacter() {
+        
+    }
+
+    public Map<String, String> getAtrributes() {
+        return atrributes;
+    }
+
+    public void setAtrributes(Map<String, String> atrributes) {
+        this.atrributes = atrributes;
+    }
+
+    public void setSkills(Map<String, Integer> skills) {
+        this.skills = skills;
+    }
+
     @Override
     public void setName(String name) {
         this.name = name;

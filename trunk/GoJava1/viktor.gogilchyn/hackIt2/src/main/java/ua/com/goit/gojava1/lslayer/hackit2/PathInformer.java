@@ -2,6 +2,9 @@ package ua.com.goit.gojava1.lslayer.hackit2;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Enumeration;
+import java.util.Iterator;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -43,13 +46,12 @@ public class PathInformer extends HttpServlet {
             HttpServletResponse response) throws ServletException, IOException {
         PrintWriter writer = response.getWriter();
         response.setContentType("text/plain");
-        writer.println("HelloWorld");
         writer.println(System.getProperty("os.name").toLowerCase());
         writer.println(!this.getServletContext().getServerInfo()
                 .equals("Apache Tomcat/7.0.57"));
-        writer.println(request.getContextPath());
-        writer.println(request.getPathInfo());
         writer.println(request.getRequestURI());
+        Map values = request.getParameterMap();
+        writer.println(values);
 
     }
 

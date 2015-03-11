@@ -1,6 +1,9 @@
 package ua.com.goit.gojava1.lslayer.hackit2.ui;
 
+import java.awt.List;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -107,19 +110,18 @@ public class ActorMaintainer extends HttpServlet {
                 request.setAttribute("error", e.getMessage());
             }
         if (createParameter != null && createParameter.equals("yes")) {
-            String skills[] = null;
+            java.util.List<String> skills = null;
             ActorFactory actorFactory = new ActorFactory();
             String name = null;
             String[] attributes = null;
             name = request.getParameter("name");
             actorFactory.setActorName(name);
             if (request.getParameter("skills") != null) {
-                skills = request.getParameter("skills").split("\r\n");
+                skills = Arrays.asList(request.getParameter("skills").split("\r\n"));
             }
             if (request.getParameter("attributes") != null) {
                 attributes = request.getParameter("attributes").split("\r\n");
             }
-            actorFactory.addSkillsArray(skills);
             try {
                 dao.save(actorFactory.createActor());
             } catch (Exception e) {
