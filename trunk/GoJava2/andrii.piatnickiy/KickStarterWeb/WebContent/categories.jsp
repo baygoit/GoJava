@@ -10,8 +10,6 @@
 	<h1>${myName}</h1>
 	<c:forEach var="category" items="${categories}">
 		<p>value="${category.getName()}"</p>
-		111
 	</c:forEach>
-	666
 </body>
 </html>
