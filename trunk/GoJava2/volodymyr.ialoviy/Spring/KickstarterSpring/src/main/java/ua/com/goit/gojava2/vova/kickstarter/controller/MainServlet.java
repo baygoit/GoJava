@@ -1,4 +1,4 @@
-package ua.com.goit.gojava2.vova.kickstarter.presenter;
+package ua.com.goit.gojava2.vova.kickstarter.controller;
 
 import java.io.IOException;
 import java.util.List;
@@ -18,15 +18,6 @@ import ua.com.goit.gojava2.vova.kickstarter.model.Project;
 import ua.com.goit.gojava2.vova.kickstarter.model.Projects;
 
 public class MainServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-
-	static {
-		try {
-			Class.forName("org.postgresql.Driver");
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException(e);
-		}
-	}
 	
 	@Autowired
 	private Categories categoriesDAO;
@@ -48,31 +39,33 @@ public class MainServlet extends HttpServlet {
 
 			List<Category> categories = categoriesDAO.getCategories();
 
-			req.setAttribute("categories", categories);
-			req.getRequestDispatcher("categories.jsp").forward(req, resp);
+			toJsp(req, resp, categories, "categories");
 		} else if (action.startsWith("/projects")) {
 			int categoryID = Integer.valueOf(req.getParameter("category"));
 
 			List<Project> projects = projectsDAO.getProgectsForCategory(categoryID);
 
-			req.setAttribute("projects", projects);
-			req.getRequestDispatcher("projects.jsp").forward(req, resp);
+			toJsp(req, resp, projects, "projects");
 		} else if (action.startsWith("/project")) {
 			int projectID = Integer.valueOf(req.getParameter("project"));
 
 			Project project = projectsDAO.getProgect(projectID);
 
-			req.setAttribute("project", project);
-			req.getRequestDispatcher("project.jsp").forward(req, resp);
+			toJsp(req, resp, project, "project");
 		}
 
 	}
 
+	private void toJsp(HttpServletRequest req, HttpServletResponse resp,
+			Object list, String name) throws ServletException,
+			IOException {
+		req.setAttribute(name, list);
+		req.getRequestDispatcher(name + ".jsp").forward(req, resp);
+	}
+
 	private String getAction(HttpServletRequest req) {
 		String requestURI = req.getRequestURI();
-		String action = requestURI.substring(req.getContextPath().length(),
-				requestURI.length());
-		return action;
+		return requestURI.substring(req.getContextPath().length(), requestURI.length());
 	}
 
 	@Override

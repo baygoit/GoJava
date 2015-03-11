@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+
 import org.joda.time.DateTime;
 import org.joda.time.Days;
 
@@ -11,18 +12,16 @@ public class PeriodBetweenDates {
     
 	public static int periodJoda(String dateString){
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-		int days = 0;
 		try {
-			Date  endDate = format.parse(dateString);
+			Date endDate = format.parse(dateString);
 	    	DateTime start = new DateTime(new Date());
 	    	DateTime end = new DateTime(endDate);
 	
 			Days d = Days.daysBetween(start, end);
-			days = d.getDays();
+			return d.getDays();
 		} catch (ParseException e) {
-			e.printStackTrace();
+			throw new RuntimeException("convertation date exception", e);
 		}
-		return days;
 	}
     
 	public static int period(String date){
@@ -43,7 +42,7 @@ public class PeriodBetweenDates {
 	    	}
 
 		} catch (ParseException e) {
-			e.printStackTrace();
+			throw new RuntimeException("convertation date exception", e);
 		}
 		return difference;
 	}
