@@ -23,7 +23,12 @@ public class ArticleController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			Article article = new Article();
-			article.save(request.getParameter("author"), request.getParameter("header"), request.getParameter("text"));
+			article.setAuthor(request.getParameter("author"));
+			article.setHeader(request.getParameter("header"));
+			article.setText(request.getParameter("text"));
+			article.save();
+			response.setContentType("text/html;charset=UTF-8");
+			response.sendRedirect("/JavaHub/articles.jsp");
 		} catch (Exception e) {
 			e.printStackTrace();
 			response.setContentType("text/html;charset=UTF-8");

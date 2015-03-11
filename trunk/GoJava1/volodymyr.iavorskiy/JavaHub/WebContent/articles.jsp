@@ -1,9 +1,11 @@
+<%@page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
 <%@page import="goit.iavorskyi.learningUnit.Rating"%>
 <%@page import="goit.iavorskyi.UIFacade"%>
+<%@page import="goit.iavorskyi.learningUnit.Article"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -16,10 +18,10 @@
 
 	<div class="main">
 		<div class="header">
-			<h1>Header</h1>
+			<h3>Header</h3>
 		</div>
 		<div class="body">
-			<h1>Add article:</h1>
+			<h3>Add article:</h3>
 			<br>
 			<form name="article" method="post" action="articlecontroller"
 				onsubmit="return validateForm()">
@@ -30,14 +32,23 @@
 				<br> <input type="submit" value="Submit article"><br>
 			</form>
 			<br>
-			<h1>Articles:</h1>
+			<h3>Articles:</h3>
 			<br>
 
-			
-			
+			<%
+			String allArticles = "";
+			List<Article> articles = UIFacade.getAllArticles();
+			for (int i = 0; i < articles.size(); i++) {
+				Article article = new Article();
+				article = articles.get(i);
+				allArticles += "Author: " + article.getAuthor() + "<br>" + " Header: " + article.getHeader() + "<br>" + " Text: " + article.getText() + "<br><br>";
+			}
+			%>
+			<%= allArticles %>
+
 		</div>
 		<div class="footer">
-			<h1>Footer</h1>
+			<h3>Footer</h3>
 		</div>
 	</div>
 

@@ -1,6 +1,6 @@
 package goit.iavorskyi.learningUnit;
 
-import goit.iavorskyi.dao.ArticleDAO;
+import goit.iavorskyi.DBFacade;
 
 public class Article {
 	
@@ -33,8 +33,7 @@ public class Article {
 	public void setText(String text) {
 		this.text = text;
 	}
-	public void save(String author, String header, String text) {
-		ArticleDAO articleDAO = new ArticleDAO();
-		articleDAO.save(author, header, text);
+	public void save() {
+		DBFacade.saveArticle(this);
 	}
 }
