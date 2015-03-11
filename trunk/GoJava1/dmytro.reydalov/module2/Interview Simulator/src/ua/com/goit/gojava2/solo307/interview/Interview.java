@@ -5,9 +5,9 @@ import java.util.List;
 
 public class Interview {
 
-	private InterviewDAO interviewDAO = new InterviewDAO();
+	private static InterviewDAO interviewDAO;
+	private static CategoryDAO categoryDAO;
 	private List<Category> categories = new ArrayList<Category>();
-	private CategoryDAO categoryDao = new CategoryDAO();
 
 	public List<Category> getCategories() {
 		return categories;
@@ -18,18 +18,17 @@ public class Interview {
 	}
 
 	public void createCategories() throws InterviewSimulatorException {
-		this.categories = categoryDao.getCategoriesList();
-		List<Question> questions = categoryDao.getQuestions();
-		categoryDao.fillQuestions(questions);
-		categoryDao.fillCategories(categories, questions);
+		this.categories = categoryDAO.getCategoriesList();
+		List<Question> questions = categoryDAO.getQuestions();
+		categoryDAO.fillQuestions(questions);
+		categoryDAO.fillCategories(categories, questions);
 	}
 
-	public void createCategories(String[] names)
-			throws InterviewSimulatorException {
-		this.categories = categoryDao.getCategories(names);
-		List<Question> questions = categoryDao.getQuestions();
-		categoryDao.fillQuestions(questions);
-		categoryDao.fillCategories(categories, questions);
+	public void createCategories(String[] names) throws InterviewSimulatorException {
+		this.categories = categoryDAO.getCategories(names);
+		List<Question> questions = categoryDAO.getQuestions();
+		categoryDAO.fillQuestions(questions);
+		categoryDAO.fillCategories(categories, questions);
 	}
 
 	public Category getComposedCategory() {
@@ -42,7 +41,7 @@ public class Interview {
 		return composed;
 	}
 
-	public long readStartTime() {
+	public static long readStartTime() {
 		long start = 0;
 		try {
 			start = interviewDAO.readStartTime();
@@ -52,7 +51,7 @@ public class Interview {
 		return start;
 	}
 
-	public void persistName(String name) {
+	public static void persistName(String name) {
 		try {
 			interviewDAO.writeName(name);
 		} catch (InterviewSimulatorException e) {
@@ -60,7 +59,7 @@ public class Interview {
 		}
 	}
 
-	public void persistTime(long start) {
+	public static void persistTime(long start) {
 		try {
 			interviewDAO.writeTime(start);
 		} catch (InterviewSimulatorException e) {
@@ -69,28 +68,9 @@ public class Interview {
 		}
 	}
 
-	private void persistDuration(String time) {
+	public static void persistStatistics(StatisticsDTO dto) {
 		try {
-			interviewDAO.writeDuration(time);
-		} catch (InterviewSimulatorException e) {
-			e.printStackTrace();
-		}
-	}
-
-	private void persistDate(String date) {
-		try {
-			interviewDAO.persistDate(date);
-		} catch (InterviewSimulatorException e) {
-			e.getMessage();
-			e.printStackTrace();
-		}
-	}
-
-	public void persistStatistics(StatisticsDTO dto) {
-		persistDate(dto.date);
-		persistDuration(dto.duration);
-		try {
-			interviewDAO.persistMarks(dto);
+			interviewDAO.persistStatistics(dto);
 		} catch (InterviewSimulatorException e) {
 			e.getMessage();
 			e.printStackTrace();

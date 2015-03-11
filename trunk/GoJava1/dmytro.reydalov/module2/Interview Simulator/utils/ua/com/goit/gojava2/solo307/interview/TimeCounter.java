@@ -34,11 +34,11 @@ public class TimeCounter {
 			return new String("" + remained + " seconds");
 		return new String(minutes + ":" + remained);
 	}
-	
+
 	public static String getCurrentTime() {
-	    SimpleDateFormat sdfDate = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-	    Date current = new Date();
-	    String currentDate = sdfDate.format(current);
-	    return currentDate;
+		SimpleDateFormat sdfDate = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+		Date current = new Date();
+		String currentDate = sdfDate.format(current);
+		return currentDate;
 	}
 }

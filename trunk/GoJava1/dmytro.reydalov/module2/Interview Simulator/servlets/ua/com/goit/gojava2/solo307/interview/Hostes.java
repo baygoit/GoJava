@@ -16,12 +16,11 @@ public class Hostes extends HttpServlet {
 		super();
 	}
 
-	protected void doPost(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException,
+			IOException {
 		response.setContentType("text/html;charset=utf-8");
 		String name = request.getParameter("fname");
-		Interview interview = new Interview();
-		interview.persistName(name);
+		Interview.persistName(name);
 		request.getRequestDispatcher("menu.jsp").forward(request, response);
 	}
 

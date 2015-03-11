@@ -8,7 +8,7 @@
 		<title>Menu</title>
 	</head>
 	<body bgcolor="Azure">
- 		<a href="questions and Answers.jsp">Посмотреть список вопросов и правильных ответов</a> <br>
+ 		<a href="questions and Answers.jsp">Посмотреть список вопросов и ответов</a> <br>
  		<a href="compose.jsp">Выбрать темы для собеседования</a> <br>
 	</body>
 </html>

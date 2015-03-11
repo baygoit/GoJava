@@ -13,15 +13,13 @@ import javax.servlet.http.HttpServletResponse;
 public class Composer extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	protected void doPost(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException,
+			IOException {
 		response.setContentType("text/html;charset=utf-8");
 		String[] categories = request.getParameterValues("category");
 		long start = System.currentTimeMillis();
-		Interview interview = new Interview();
-		interview.persistTime(start);
+		Interview.persistTime(start);
 		request.setAttribute("category", categories);
-		request.getRequestDispatcher("interview.jsp")
-				.forward(request, response);
+		request.getRequestDispatcher("interview.jsp").forward(request, response);
 	}
 }
