@@ -28,7 +28,7 @@ public class CategoriesDAO {
 		ResultSet resultSet = getResultSet("select * from categories");
 		try {
 			while (resultSet.next()) {
-				categories.add(new Category(resultSet.getString("name")));
+				categories.add(new Category(resultSet.getInt("category_id"), resultSet.getString("name")));
 			}
 			return categories;
 		} catch (SQLException e) {
