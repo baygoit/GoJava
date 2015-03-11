@@ -16,11 +16,19 @@ import ua.goit.goitjava.kickstarter.model.Project;
 
 public class MyServlet extends HttpServlet {
 	
+	static {
+		try {
+			Class.forName("org.postgresql.Driver");
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException(e);
+		}
+	}
+	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String action = getAction(req);
-		int categoryId = 0;
 		
+		String action = getAction(req);
+		System.out.println(action);
 		if (action.startsWith("/categories")) {
 			
 			CategoriesDAO categoriesDAO = new CategoriesDAO();	
@@ -30,7 +38,7 @@ public class MyServlet extends HttpServlet {
 			
 			req.getRequestDispatcher("categories.jsp").forward(req, resp);
 		} else if (action.equals("/projects")) {
-			categoryId = Integer.valueOf(req.getParameter("category"));
+			int categoryId = Integer.valueOf(req.getParameter("category"));
 			
 			ProjectDAO projectDAO = new ProjectDAO();	
 			List<Project> projects = projectDAO.getListProjectByCategoryId(categoryId);
@@ -42,9 +50,9 @@ public class MyServlet extends HttpServlet {
 			int projectId = Integer.valueOf(req.getParameter("project"));
 			
 			ProjectDAO projectDAO = new ProjectDAO();	
-			Project project = projectDAO.getProjectById(projectId,categoryId);
+			//Project project = projectDAO.getProjectById(projectId,categoryId);
 			
-			req.setAttribute("project", project);
+			//req.setAttribute("project", project);
 			
 			req.getRequestDispatcher("project.jsp").forward(req, resp);
 		}
@@ -60,5 +68,6 @@ public class MyServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		System.out.println(req.getParameterMap().toString());
 	}
+
 
 }

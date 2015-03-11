@@ -1,11 +1,15 @@
 package ua.goit.goitjava.kickstarter.DB;
 
+import ua.goit.goitjava.kickstarter.ConsoleIO;
 import ua.goit.goitjava.kickstarter.Controller.Controller;
 
 public class Main {
 public static void main(String[] args) {
-		
-		Controller control = new Controller();
+	CategoriesDAO cat = new CategoriesDAO();
+	ProjectDAO projDao = new ProjectDAO();
+	ConsoleIO consol = new ConsoleIO(); 
+	
+		Controller control = new Controller(cat, projDao, consol);
 		control.showQuote();
 		
 		while (true) {

@@ -9,13 +9,19 @@ import ua.goit.goitjava.kickstarter.model.Project;
 
 public class Controller {
 	
-	CategoriesDAO cat = new CategoriesDAO();
-	ProjectDAO projDao = new ProjectDAO();
-	ConsoleIO consol = new ConsoleIO(); 
+	private CategoriesDAO cat;
+	private ProjectDAO projDao;
+	private ConsoleIO consol; 
 	private Project project = null;
-	
+	/*
 	public Project getProject() {
 		return project;
+	}*/
+	
+	public Controller(CategoriesDAO cat, ProjectDAO projDao, ConsoleIO consol){
+		this.cat=cat;
+		this.projDao=projDao;
+		this.consol=consol;
 	}
 
 	public void addMoney(int money){
