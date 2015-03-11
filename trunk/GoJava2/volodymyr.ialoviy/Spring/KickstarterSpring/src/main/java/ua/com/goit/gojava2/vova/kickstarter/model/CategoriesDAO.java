@@ -6,14 +6,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.stereotype.Component;
 
-import javax.sql.DataSource;
-
+@Component
 public class CategoriesDAO extends AbstractDAO implements Categories{
-	
-	public CategoriesDAO(DataSource dataSource){
-		this.dataSource = dataSource;
-	}
 	
 	@Override
 	public List<Category> getCategories() {

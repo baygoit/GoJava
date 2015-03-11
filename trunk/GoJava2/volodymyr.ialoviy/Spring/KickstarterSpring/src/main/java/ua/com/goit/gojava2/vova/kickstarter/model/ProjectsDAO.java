@@ -6,25 +6,21 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.sql.DataSource;
+import org.springframework.stereotype.Component;
 
 import ua.com.goit.gojava2.vova.kickstarter.util.PeriodBetweenDates;
 
+@Component
 public class ProjectsDAO extends AbstractDAO implements Projects{
-	
-	public ProjectsDAO(DataSource dataSource){
-		this.dataSource = dataSource;
-	}
 	
 	@Override
 	public List<Project> getProgectsForCategory(int categoryID) {
 		List<Project> projects = new ArrayList<Project>();
 		try (Connection connection = getConnection()){
 			Statement statement = connection.createStatement();
-			ResultSet result = statement.executeQuery("SELECT * FROM projects WHERE id_category=" + categoryID + "ORDER BY id_project");
-			while (result.next()) {
-				projects.add(getProgect(result.getInt("id_project")));
+			ResultSet resultSet = statement.executeQuery("SELECT * FROM projects WHERE id_category=" + categoryID + "ORDER BY id_project");
+			while (resultSet.next()) {
+				projects.add(getProgect(resultSet.getInt("id_project")));
 			}
 		} catch (SQLException e) {
 			System.err.println( e.getClass().getName()+": "+ e.getMessage() );

@@ -4,15 +4,10 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import org.springframework.stereotype.Component;
 
-import javax.sql.DataSource;
-
-
+@Component
 public class QuotesDAO extends AbstractDAO implements Quotes{
-	
-	public QuotesDAO(DataSource dataSource){
-		this.dataSource = dataSource;
-	}
 	
 	@Override
 	public String getQuote() {

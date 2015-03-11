@@ -4,14 +4,6 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-	<bean id="categoriesDAO" class="ua.com.goit.gojava2.vova.kickstarter.model.CategoriesDAO">
-		<constructor-arg ref="dataSource" />
-	</bean>
-
-	<bean id="projectsDAO" class="ua.com.goit.gojava2.vova.kickstarter.model.ProjectsDAO">
-		<constructor-arg ref="dataSource" />
-	</bean>
-
 	<bean id="dataSource" class="org.apache.tomcat.jdbc.pool.DataSource" destroy-method="close">
 		<property name="driverClassName" value="org.postgresql.Driver" />
 		<property name="url" value="jdbc:postgresql://127.0.0.1:5432/kickstarter" />

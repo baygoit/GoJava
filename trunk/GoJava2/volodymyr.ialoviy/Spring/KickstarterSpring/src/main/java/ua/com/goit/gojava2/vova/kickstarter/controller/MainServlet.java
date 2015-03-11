@@ -67,11 +67,4 @@ public class MainServlet extends HttpServlet {
 		String requestURI = req.getRequestURI();
 		return requestURI.substring(req.getContextPath().length(), requestURI.length());
 	}
-
-	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException, IOException {
-		System.out.println(req.getParameterMap().toString());
-	}
-
 }
