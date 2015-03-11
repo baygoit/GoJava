@@ -7,12 +7,13 @@ import com.kickstarter.model.Project;
 import com.kickstarter.model.Projects;
 import com.kickstarter.model.QuotesStorage;
 import com.kickstarter.model.Сategory;
+import com.kickstarter.view.In;
 import com.kickstarter.view.View;
-import com.kickstarter.view.InPut;
+import com.kickstarter.view.InPutConsole;
 
 public class KickstarterEngine {
 
-	private InPut inPut;
+	private In inPut;
 	private View consoleView;
 	private QuotesStorage quotesStorage;
 	private Categories categoriesStorage;
@@ -20,7 +21,7 @@ public class KickstarterEngine {
 	
 
 	public KickstarterEngine(View consoleView,
-			QuotesStorage quotesStorage, InPut inPut, Categories categories,
+			QuotesStorage quotesStorage, In inPut, Categories categories,
 			Projects projectStorage) {
 		
 		this.consoleView = consoleView;

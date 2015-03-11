@@ -9,9 +9,10 @@ import com.kickstarter.model.QuotesStorage;
 import com.kickstarter.model.Project;
 import com.kickstarter.model.InMemoryProjects;
 import com.kickstarter.model.Сategory;
+import com.kickstarter.view.In;
 import com.kickstarter.view.OutConsole;
 import com.kickstarter.view.View;
-import com.kickstarter.view.InPut;
+import com.kickstarter.view.InPutConsole;
 
 public class Kickstarter {
 
@@ -20,7 +21,7 @@ public class Kickstarter {
     	View consoleView = new View(new OutConsole());
     	Categories categories = new InMemoryCategories();
     	Projects projects = new InMemoryProjects();
-    	InPut inPut = new InPut();
+    	In inPut = new InPutConsole();
     	
     	Сategory food = new Сategory("FOOD");
     	Сategory music = new Сategory("MUSIC");
