@@ -17,11 +17,21 @@
 </head>
 <body>	
 		
+			
 			<form action="act-type" method="post">
 				<span>Type ID of category you want to retrieve :</span>
-				<input type="text" name="id">
-				<input type="submit" name="action" value="retrieve"> 
+				<br/>
+				ID<input type="text" name="id">
+				<br/>
+				Name<input type="text" name="name">
+				<br/>
+				Parent ID<input type="text" name="parent">
+				<br/>
+				<input type="submit" name="action" value="update">
+				<br/> 
 			</form>	
+		
+
 
 	<a href="easyindex.html">Back</a>
 </body>

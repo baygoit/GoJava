@@ -13,15 +13,20 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <link href="css/stylesheet1.css" rel="stylesheet" type="text/css" />
 
-<title>Update</title>
+<title>Create</title>
 </head>
 <body>	
 		
 			<form action="act-type" method="post">
-				<span>Type ID of category you want to retrieve :</span>
-				<input type="text" name="id">
-				<input type="submit" name="action" value="retrieve"> 
+				<span>Type properties of type you want to create:</span>
+				<br/>
+				Name <input type="text" name="name">
+				<br/>
+				Parent ID<input type="text" name="parent">
+				<br/>
+				<input type="submit" name="action" value="create"> 
 			</form>	
+		
 
 	<a href="easyindex.html">Back</a>
 </body>

@@ -13,14 +13,17 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <link href="css/stylesheet1.css" rel="stylesheet" type="text/css" />
 
-<title>Update</title>
+<title>Retrieve</title>
 </head>
 <body>	
 		
 			<form action="act-type" method="post">
 				<span>Type ID of category you want to retrieve :</span>
-				<input type="text" name="id">
-				<input type="submit" name="action" value="retrieve"> 
+				<br/>
+				ID<input type="text" name="id">
+				<br/>
+				<input type="submit" name="action" value="retrieve">
+				<br/> 
 			</form>	
 
 	<a href="easyindex.html">Back</a>

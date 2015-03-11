@@ -1,35 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns="http://java.sun.com/xml/ns/javaee"
-	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
-	id="WebApp_ID" version="3.0">
-	<description>This application allows to buy goods and control the shop's activity.</description>
-	<display-name>MyShop</display-name>
-	<servlet>
-		<servlet-name>catalog-servlet</servlet-name>
-		<servlet-class>ua.com.goit.gojava.andriidnikitin.servlets.CatalogServlet</servlet-class>
-		<enabled>true</enabled>
-	</servlet>	
-	<servlet>
-		<servlet-name>good-servlet</servlet-name>
-		<servlet-class>ua.com.goit.gojava.andriidnikitin.servlets.GoodServlet</servlet-class>
-		<enabled>true</enabled>
-	</servlet>	
-	<servlet>
-		<servlet-name>goodtype-servlet</servlet-name>
-		<servlet-class>ua.com.goit.gojava.andriidnikitin.servlets.GoodTypeServlet</servlet-class>
-		<enabled>true</enabled>
-	</servlet>	
-	<servlet-mapping>
-		<servlet-name>catalog-servlet</servlet-name>
-		<url-pattern>/show-catalog</url-pattern>
-	</servlet-mapping>	
-	<servlet-mapping>
-		<servlet-name>good-servlet</servlet-name>
-		<url-pattern>/act-good</url-pattern>
-	</servlet-mapping>	
-	<servlet-mapping>
-		<servlet-name>goodtype-servlet</servlet-name>
-		<url-pattern>/act-type</url-pattern>
-	</servlet-mapping>	
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
+  <description>This application allows to buy goods and control the shop's activity.</description>
+  <display-name>MyShop</display-name>
+  <servlet>
+    <servlet-name>goodtype-servlet</servlet-name>
+    <servlet-class>ua.com.goit.gojava.andriidnikitin.servlets.GoodTypeServlet</servlet-class>
+    <enabled>true</enabled>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>goodtype-servlet</servlet-name>
+    <url-pattern>/act-type</url-pattern>
+  </servlet-mapping>
 </web-app>
