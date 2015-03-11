@@ -14,16 +14,13 @@ import ua.com.goit.gojava.andriidnikitin.model.GoodType;
 
 public class PostgresqlDAOFactory  implements DAOFactory {
 
-    private String user = "postgres";
-    private String password = "mypass";
-    private String url = "jdbc:postgresql://localhost:5432/shop";
-    private String driver = "org.postgresql.Driver";
+   private String driver = "org.postgresql.Driver";
     
-    public Connection getConnectionInNewWay() throws MyShopDAOException {
+    public Connection getConnection() throws MyShopDAOException {
     	Connection connection = null;
         try {
         	Context ctx = new InitialContext();
-    		DataSource dataSource = (DataSource) ctx.lookup("java:comp/env/jdbc/StudentsDS");
+    		DataSource dataSource = (DataSource) ctx.lookup("java:comp/env/jdbc/ShopDS");
 			connection = dataSource.getConnection();
 		} catch (SQLException e) {
 			throw new MyShopDAOException(e);
@@ -33,7 +30,10 @@ public class PostgresqlDAOFactory  implements DAOFactory {
         return connection;
     }
     
-    public Connection getConnection() throws MyShopDAOException {
+    public Connection getConnectionInNewWay() throws MyShopDAOException {
+    	String user = "postgres";
+    	String password = "mypass";
+    	String url = "jdbc:postgresql://localhost:5432/shop";
         try {
 			return DriverManager.getConnection(url, user, password);
 		} catch (SQLException e) {

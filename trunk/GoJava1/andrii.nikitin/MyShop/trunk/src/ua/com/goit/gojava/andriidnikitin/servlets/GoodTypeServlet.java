@@ -44,6 +44,7 @@ public class GoodTypeServlet extends HttpServlet {
 				GoodType result = catalog.getGoodTypeById(id);
 				message =  typeToString(result);
 			} catch (ShopException e) {
+				e.printStackTrace();
 				message = "fail to read record";
 			}
     	}
