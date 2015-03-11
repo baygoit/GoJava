@@ -20,36 +20,51 @@
 		<div class="header">
 			<h3>Header</h3>
 		</div>
-		<div class="body">
+		<div class="articlesbody">
 			<h3>Add article:</h3>
 			<br>
-			<form name="article" method="post" action="articlecontroller"
-				onsubmit="return validateForm()">
-				Your name:<br> <input type="text" name="author"><br>
-				Header:<br> <input type="text" name="header"><br>
-				Your article :<br>
-				<textarea rows="4" cols="50" name="text"> </textarea>
-				<br> <input type="submit" value="Submit article"><br>
-			</form>
+			<div class="addarticle">
+				<form name="article" method="post" action="articlecontroller"
+					onsubmit="return validateForm()">
+					Your name:<br> <input type="text" name="author"><br>
+					Header:<br> <input type="text" name="header"><br>
+					Your article :<br>
+					<textarea rows="4" cols="50" name="text"> </textarea>
+					<br> <input type="submit" value="Submit article"><br>
+				</form>
+			</div>
 			<br>
 			<h3>Articles:</h3>
 			<br>
+<div class="articlestable">
 
+			<table>
+				<tr>
+					<td>1</td> <td>2</td> <td>3</td>
+				</tr>
+				<tr>
+					<td>4</td> <td>5</td> <td>6</td>
+				</tr>
+				<tr>
+					<td>7</td> <td>8</td> <td>9</td>
+				</tr>
+			</table>
+</div>
 			<%
-			String allArticles = "";
-			List<Article> articles = UIFacade.getAllArticles();
-			for (int i = 0; i < articles.size(); i++) {
-				Article article = new Article();
-				article = articles.get(i);
-				allArticles += "Author: " + article.getAuthor() + "<br>" + " Header: " + article.getHeader() + "<br>" + " Text: " + article.getText() + "<br><br>";
-			}
+				String allArticles = "";
+				List<Article> articles = UIFacade.getAllArticles();
+				for (int i = 0; i < articles.size(); i++) {
+					Article article = new Article();
+					article = articles.get(i);
+					allArticles += "Author: " + article.getAuthor() + "<br>"
+							+ " Header: " + article.getHeader() + "<br>"
+							+ " Text: " + article.getText() + "<br><br>";
+				}
 			%>
-			<%= allArticles %>
+			<%=allArticles%>
 
 		</div>
-		<div class="footer">
-			<h3>Footer</h3>
-		</div>
+
 	</div>
 
 </body>
