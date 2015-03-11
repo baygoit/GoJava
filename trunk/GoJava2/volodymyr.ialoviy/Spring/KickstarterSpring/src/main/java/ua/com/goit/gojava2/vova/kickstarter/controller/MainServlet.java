@@ -1,7 +1,7 @@
 package ua.com.goit.gojava2.vova.kickstarter.controller;
 
 import java.io.IOException;
-import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -13,8 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import ua.com.goit.gojava2.vova.kickstarter.model.Categories;
-import ua.com.goit.gojava2.vova.kickstarter.model.Category;
-import ua.com.goit.gojava2.vova.kickstarter.model.Project;
 import ua.com.goit.gojava2.vova.kickstarter.model.Projects;
 
 public class MainServlet extends HttpServlet {
@@ -24,46 +22,30 @@ public class MainServlet extends HttpServlet {
 	
 	@Autowired
 	private Projects projectsDAO;
+
+	private Map<String, Action> actions;
 	
 	@Override
 	public void init(ServletConfig config) throws ServletException{
 		super.init(config);
 		SpringBeanAutowiringSupport.processInjectionBasedOnServletContext(this, config.getServletContext());
+		actions.put("categories", new CategoriesAction(categoriesDAO));
+		actions.put("projects", new ProjectsAction(projectsDAO));
+		actions.put("project", new projectAction(projectsDAO));
 	}
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)throws ServletException, IOException {
-		String action = getAction(req);
-
-		if (action.startsWith("/categories")) {
-
-			List<Category> categories = categoriesDAO.getCategories();
-
-			toJsp(req, resp, categories, "categories");
-		} else if (action.startsWith("/projects")) {
-			int categoryID = Integer.valueOf(req.getParameter("category"));
-
-			List<Project> projects = projectsDAO.getProgectsForCategory(categoryID);
-
-			toJsp(req, resp, projects, "projects");
-		} else if (action.startsWith("/project")) {
-			int projectID = Integer.valueOf(req.getParameter("project"));
-
-			Project project = projectsDAO.getProgect(projectID);
-
-			toJsp(req, resp, project, "project");
-		}
-
+		Action action = getAction(req);
+		String jsp = action.doIt(req, resp);
+		req.getRequestDispatcher(jsp).forward(req, resp);
 	}
 
-	private void toJsp(HttpServletRequest req, HttpServletResponse resp,
-			Object list, String name) throws ServletException,
-			IOException {
-		req.setAttribute(name, list);
-		req.getRequestDispatcher(name + ".jsp").forward(req, resp);
+	private Action getAction(HttpServletRequest req) {
+		return actions.get(getActionString(req));
 	}
 
-	private String getAction(HttpServletRequest req) {
+	private String getActionString(HttpServletRequest req) {
 		String requestURI = req.getRequestURI();
 		return requestURI.substring(req.getContextPath().length(), requestURI.length());
 	}
