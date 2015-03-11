@@ -25,18 +25,7 @@ public class ProjectsDAO extends AbstractDAO implements Projects{
 			Statement statement = connection.createStatement();
 			result = statement.executeQuery("SELECT * FROM projects WHERE id_category=" + categoryID + "ORDER BY id_project");
 			while (result.next()) {
-				projects.add(new Project(result.getInt("id_project"), 
-										result.getInt("id_category"),
-										result.getString("name_project"),
-										result.getString("short_description_project"),
-										result.getString("full_description_project"),
-										result.getString("foto_project"),
-										result.getString("link_project"),
-										result.getInt("how_much_needed_project"),
-										result.getInt("how_much_collected_project"),
-										result.getInt("how_much_remaining_project"),
-										getFaq(result.getInt("id_project")),
-										PeriodBetweenDates.periodJoda(result.getString("date_close_project"))));
+				projects.add(getProgect(result.getInt("id_project")));
 			}
 		} catch (SQLException e) {
 			System.err.println( e.getClass().getName()+": "+ e.getMessage() );
@@ -62,7 +51,8 @@ public class ProjectsDAO extends AbstractDAO implements Projects{
 										result.getInt("how_much_needed_project"),
 										result.getInt("how_much_collected_project"),
 										result.getInt("how_much_remaining_project"),
-										getFaq(progectID), PeriodBetweenDates.periodJoda(result.getString("date_close_project")));
+										getFaq(progectID),
+										PeriodBetweenDates.periodJoda(result.getString("date_close_project")));//TODO RELOCATE PeriodBetweenDates.periodJoda to service
 			}
 		} catch (SQLException e) {
 			System.err.println( e.getClass().getName()+": "+ e.getMessage() );
