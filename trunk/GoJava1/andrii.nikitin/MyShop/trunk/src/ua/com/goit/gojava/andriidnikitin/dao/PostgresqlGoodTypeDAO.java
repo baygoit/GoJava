@@ -20,7 +20,7 @@ public class PostgresqlGoodTypeDAO implements GenericDAO<GoodType> {
 
 	@Override
 	public Integer create(GoodType arg) throws MyShopDAOException {
-		String sql = "INSERT INTO \"GoodType\" VALUES ( ?, ?) RETURNING type_id;";
+		String sql = "INSERT INTO \"GoodType\"(name, parent_id) VALUES ( ?, ?) RETURNING type_id;";
 	    PreparedStatement stm;
 	    Integer typeId;
 		try {
@@ -48,7 +48,7 @@ public class PostgresqlGoodTypeDAO implements GenericDAO<GoodType> {
 		result.setId(temp.getId());
 		result.setName(temp.getName());
 		result.setParent(null);
-		if (parentID != null) {			
+		if ((parentID != null) && (parentID != 0)) {			
 			result.setParent(read(parentID));
 		}
 		return result;
@@ -60,7 +60,7 @@ public class PostgresqlGoodTypeDAO implements GenericDAO<GoodType> {
 	    Integer typeId = null;
 	    Integer parentId = null;
 		try {
-	        String sql = "SELECT * FROM \"GoodType\" WHERE type_id = ?;";
+	        String sql = "SELECT * FROM \"GoodType\" WHERE type_id=?;";
 	        PreparedStatement stm = connection.prepareStatement(sql);
 	        stm.setInt(1, key);
 	        ResultSet rs = stm.executeQuery();
@@ -81,8 +81,7 @@ public class PostgresqlGoodTypeDAO implements GenericDAO<GoodType> {
 				throw new MyShopDAOException(e);		
 			} 
 		}		       
-        return rec;
-		
+        return rec;		
 	}
 
 	@Override
@@ -95,14 +94,14 @@ public class PostgresqlGoodTypeDAO implements GenericDAO<GoodType> {
 			String sql;
 			PreparedStatement stm;
 			if (parentKey!= null){
-				sql = "UPDATE \"GoodType\" SET name=?, parent_id=? WHERE typ_id = ?;";	
+				sql = "UPDATE \"GoodType\" SET name=?, parent_id=? WHERE type_id = ?;";	
 			    stm = connection.prepareStatement(sql);
 			    stm.setString(1, name);
 			    stm.setInt(2, parentKey);
 			    stm.setInt(3, key);
 			}
 			else {
-				sql = "UPDATE \"GoodType\" SET name=? WHERE typ_id = ?;";		
+				sql = "UPDATE \"GoodType\" SET name=? WHERE type_id = ?;";		
 			    stm = connection.prepareStatement(sql);
 			    stm.setString(1, name);
 			    stm.setInt(2, key);	

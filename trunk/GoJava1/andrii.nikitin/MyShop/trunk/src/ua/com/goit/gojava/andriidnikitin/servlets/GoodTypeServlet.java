@@ -15,10 +15,8 @@ import ua.com.goit.gojava.andriidnikitin.service.util.ShopException;
 public class GoodTypeServlet extends HttpServlet {
 	
     private static final long serialVersionUID = 1L;
-	//private String redirectLocation;
     public GoodTypeServlet() {    	
         super();
-        // TODO Auto-generated constructor stub
     }
     
     @Override
@@ -58,6 +56,7 @@ public class GoodTypeServlet extends HttpServlet {
 				GoodType result= catalog.updateGoodType(id, name, parentId);
 				message =  typeToString(result);
 			} catch (ShopException e) {
+				e.printStackTrace();
 				message = "fail to update record";
 			} 
     		
@@ -79,7 +78,7 @@ public class GoodTypeServlet extends HttpServlet {
 			try {
 				list = catalog.getAll();
 				for (GoodType type: list){
-	    			message += typeToString(type) + "\n";
+	    			message += typeToString(type) + " <br/> ";
 	    		}
 			} catch (ShopException e) {
 				message = "fail to read all records";
