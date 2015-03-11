@@ -39,29 +39,49 @@ public class SpecializationsServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		String newSpecializationName = request.getParameter("createSpecialization");
-		try {
-			SpecializationsDAO spd = new SpecializationsDAO();
-			Specialization spec = new Specialization();
-			spec.setName(newSpecializationName);
-			spd.persist(spec);
-			//Specialization.createNewSpecialisation(newSpecializationName);
-			
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		String idToDelete = request.getParameter("deleteSpecialization");
+		String updateSpecialization = request.getParameter("updateSpecialization");
+		
+		if (newSpecializationName != null){
+			try {
+				SpecializationsDAO spd = new SpecializationsDAO();
+				Specialization spec = new Specialization();
+				spec.setName(newSpecializationName);
+				spd.persist(spec);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		
-		/*int id = Integer.getInteger(request.getParameter("deleteSpecialization"));
-		try {
-			SpecializationsDAO spd = new SpecializationsDAO();
-			spd.deleteById(id);
-			//Specialization.createNewSpecialisation(newSpecializationName);
-			
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}*/
+		if(idToDelete != null){
+			try {
+				int id = Integer.parseInt(idToDelete);
+				SpecializationsDAO spd = new SpecializationsDAO();
+				spd.deleteById(id);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		
+		if(updateSpecialization != null){
+			try {
+				String newValue = request.getParameter(updateSpecialization);
+				SpecializationsDAO spd = new SpecializationsDAO();
+				Specialization spec = new Specialization();
+				spec.setId(Integer.parseInt(updateSpecialization));
+				spec.setName(newValue);
+				spd.update(spec);
+				
+				String message = "Specialization is updated";
+				request.getSession().setAttribute("message", message);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
 	response.sendRedirect("index.jsp");
 		
 	}

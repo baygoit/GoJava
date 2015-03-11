@@ -1,4 +1,4 @@
-package ua.com.goit.gojava.alejnikovi.medsystem;
+/*package ua.com.goit.gojava.alejnikovi.medsystem;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -98,4 +98,4 @@ public class MedicalSystem {
 	}
     
 
-}
+}*/

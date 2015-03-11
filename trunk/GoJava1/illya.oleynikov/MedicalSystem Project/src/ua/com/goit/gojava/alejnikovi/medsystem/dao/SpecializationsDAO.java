@@ -40,10 +40,32 @@ public class SpecializationsDAO {
 		return result;		
 	}
 	
+	public void update(Specialization spec) throws MedicalSystemException{
+		Connection connection = null;
+		PreparedStatement statement = null;
+		String insert = "UPDATE specializations SET spec_name=? WHERE id=?;";
+		
+		try {
+			connection = ds.getConnection();
+			statement = connection.prepareStatement(insert);
+			statement.setString(1, spec.getName());
+			statement.setInt(2, spec.getId());
+			statement.executeUpdate();
+		} catch (SQLException e) {
+			throw new MedicalSystemException("SQL problem", e);
+		} finally {
+			try {
+				statement.close();
+				connection.close();
+			} catch (SQLException e) {
+				throw new MedicalSystemException("Closing connection problem");
+			}
+		}
+	}
+	
 	public void persist(Specialization spec) throws MedicalSystemException{
 		Connection connection = null;
 		PreparedStatement statement = null;
-		ResultSet resultSet = null;
 		String insert = "INSERT INTO specializations (spec_name) VALUES (?);";
 		
 		try {
@@ -55,7 +77,6 @@ public class SpecializationsDAO {
 			throw new MedicalSystemException("SQL problem", e);
 		} finally {
 			try {
-				resultSet.close();
 				statement.close();
 				connection.close();
 			} catch (SQLException e) {
@@ -97,19 +118,17 @@ public class SpecializationsDAO {
 	public void deleteById(int id) throws MedicalSystemException{
 		Connection connection = null;
 		PreparedStatement statement = null;
-		ResultSet resultSet = null;
-		String delete = "DELETE FROM specializations WHERE spec_name = ?;";
+		String delete = "DELETE FROM specializations WHERE id = ?;";
 		
 		try {
 			connection = ds.getConnection();
 			statement = connection.prepareStatement(delete);
 			statement.setInt(1, id);
-			statement.executeQuery();
+			statement.executeUpdate();
 		} catch (SQLException e) {
 			throw new MedicalSystemException("SQL problem", e);
 		} finally {
 			try {
-				resultSet.close();
 				statement.close();
 				connection.close();
 			} catch (SQLException e) {
