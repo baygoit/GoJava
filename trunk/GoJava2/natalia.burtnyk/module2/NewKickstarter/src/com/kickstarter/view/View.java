@@ -4,32 +4,53 @@ import java.util.List;
 import com.kickstarter.model.Project;
 import com.kickstarter.model.Сategory;
 
-public class ConsoleView {	
+public class View {	
+	Out whereToOut;
 	private final String GREATING= " Welcome to Kickstarter";
 	
+	public View(Out whereToOut) {
+		this.whereToOut = whereToOut;
+	}
+	
 	public void displayWelcome() {
-		System.out.println(GREATING + "\n"
-				+ "  *** *** *** *** *** ");
+		whereToOut.outPut(GREATING + "\n"
+				+ "  *** *** *** *** *** \n");
 	}
 	
 	public void displayQuote(String quote) {
-		System.out.println(quote + "\n  *** *** *** *** *** ");
+		whereToOut.outPut(quote + "\n  *** *** *** *** *** \n");
+	}
+	
+	public void select(int i) {
+		if (i == 1) {
+			whereToOut.outPut("\n" + "Please select category: ");
+		} else if (i == 2) {
+			whereToOut.outPut("\n" + "(Press \"0\" - back to categories.)"
+								+ "\n" + "Select project: ");
+		} else if (i == 3) {
+			whereToOut.outPut("Press \"0\"  - back to projects: ");
+		}
+	}
+	
+	
+	public void incorrect() {
+		whereToOut.outPut("Incorrect number. Please try again.");
 	}
 	
 	public void displayListCategories(List<Сategory> categories) {
 		int i = 1;
 		for (Сategory сategory: categories) {
-			System.out.println(i + ". " + сategory.getName());
+			whereToOut.outPut(i + ". " + сategory.getName() + "\n");
 			i++;
 		}
 	}
 	
 	public void displaySelectedCategory(Сategory category) {
-		System.out.println("Your choise: " + category.getName());
+		whereToOut.outPut("\nYour choise: " + category.getName());
 	}
 
 	public void displayProjectsOfCategory(List<Project> projects) {		
-		System.out.println("\n---- Here are the projects ----");
+		whereToOut.outPut("\n---- Here are the projects ----");
 		StringBuilder stringResult;
 		
 		for (int i = 0; i < projects.size(); i++) {
@@ -40,7 +61,7 @@ public class ConsoleView {
 					.append("\n").append("Required Amount:    ").append(projects.get(i).getRequiredAmount()).append("$")
 					.append("\n").append("Total:              ").append(projects.get(i).getTotal()).append("$")
 					.append("\n").append("Days:               ").append(projects.get(i).getDays());
-			System.out.print(stringResult + "\n"
+			whereToOut.outPut(stringResult + "\n"
 					+ "----------------------------------" + "\n");
 		}
 	}
@@ -54,7 +75,7 @@ public class ConsoleView {
 					.append("\n").append("Days:               ").append(project.getDays())
 					.append("\n").append("History:            ").append(project.getHistory())
 					.append("\n").append("URL:                ").append(project.getUrl());
-		System.out.print("\n"+ stringResult + "\n"
+		whereToOut.outPut("\n"+ stringResult + "\n"
 				+ "--------------------------------" + "\n");
 	}		
 }

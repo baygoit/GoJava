@@ -9,14 +9,15 @@ import com.kickstarter.model.QuotesStorage;
 import com.kickstarter.model.Project;
 import com.kickstarter.model.InMemoryProjects;
 import com.kickstarter.model.Сategory;
-import com.kickstarter.view.ConsoleView;
+import com.kickstarter.view.OutConsole;
+import com.kickstarter.view.View;
 import com.kickstarter.view.InPut;
 
 public class Kickstarter {
 
     public static void main(String[] args) {
     	QuotesStorage quotesStorage = new QuotesStorage(new Random());
-    	ConsoleView consoleView = new ConsoleView();
+    	View consoleView = new View(new OutConsole());
     	Categories categories = new InMemoryCategories();
     	Projects projects = new InMemoryProjects();
     	InPut inPut = new InPut();
