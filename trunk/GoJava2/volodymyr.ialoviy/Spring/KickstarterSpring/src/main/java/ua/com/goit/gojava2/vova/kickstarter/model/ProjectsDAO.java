@@ -20,10 +20,9 @@ public class ProjectsDAO extends AbstractDAO implements Projects{
 	@Override
 	public List<Project> getProgectsForCategory(int categoryID) {
 		List<Project> projects = new ArrayList<Project>();
-		ResultSet result;
 		try (Connection connection = getConnection()){
 			Statement statement = connection.createStatement();
-			result = statement.executeQuery("SELECT * FROM projects WHERE id_category=" + categoryID + "ORDER BY id_project");
+			ResultSet result = statement.executeQuery("SELECT * FROM projects WHERE id_category=" + categoryID + "ORDER BY id_project");
 			while (result.next()) {
 				projects.add(getProgect(result.getInt("id_project")));
 			}
@@ -36,10 +35,9 @@ public class ProjectsDAO extends AbstractDAO implements Projects{
 	@Override
 	public Project getProgect(int progectID) {
 		Project project = null;
-		ResultSet result;
 		try (Connection connection = getConnection()){
 			Statement statement = connection.createStatement();
-			result = statement.executeQuery("SELECT * FROM projects WHERE id_project=" + progectID);
+			ResultSet result = statement.executeQuery("SELECT * FROM projects WHERE id_project=" + progectID);
 			while (result.next()) {
 				project = new Project(result.getInt("id_project"), 
 										result.getInt("id_category"),
@@ -85,11 +83,9 @@ public class ProjectsDAO extends AbstractDAO implements Projects{
 	@Override
 	public ArrayList<String> getFaq(int projectID) {
 		ArrayList<String> s = new ArrayList<String>();
-		
-		ResultSet result;
 		try (Connection connection = getConnection()){
 			Statement statement = connection.createStatement();
-			result = statement.executeQuery("SELECT * FROM faq WHERE id_project =" + projectID);
+			ResultSet result = statement.executeQuery("SELECT * FROM faq WHERE id_project =" + projectID);
 	            while (result.next()) {
 		            s.add(result.getString("question"));
 	            }
