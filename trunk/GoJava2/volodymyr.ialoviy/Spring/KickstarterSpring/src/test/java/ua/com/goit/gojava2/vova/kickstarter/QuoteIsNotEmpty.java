@@ -9,7 +9,6 @@ import org.junit.Test;
 
 import ua.com.goit.gojava2.vova.kickstarter.model.Quotes;
 import ua.com.goit.gojava2.vova.kickstarter.model.QuotesDAO;
-import ua.com.goit.gojava2.vova.kickstarter.presenter.ConnectToDB;
 
 public class QuoteIsNotEmpty {
 
