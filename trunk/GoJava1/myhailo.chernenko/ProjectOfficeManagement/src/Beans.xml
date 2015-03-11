@@ -20,7 +20,12 @@
    <bean id="ProjectService" class="ua.com.goit.gojava.POM.services.ProjectService">
       <property name="projectDAO" ref="ProjectDAO"/>
    </bean>
-   
+   <bean id="ProjectStageService" class="ua.com.goit.gojava.POM.services.ProjectStageService">
+      <property name="projectStageDAO" ref="ProjectStageDAO"/>
+   </bean>
+   <bean id="ProjectFinResultEntryService" class="ua.com.goit.gojava.POM.services.ProjectFinResultEntryService">
+      <property name="projectFinResultEntryDAO" ref="ProjectFinResultEntryDAO"/>
+   </bean>
 
    <bean id="CashMovementDAO" class="ua.com.goit.gojava.POM.persistence.postgresDB.CashMovementDAO">
    </bean>
@@ -31,6 +36,10 @@
    <bean id="CostItemDAO" class="ua.com.goit.gojava.POM.persistence.postgresDB.CostItemDAO">
    </bean>
    <bean id="ProjectDAO" class="ua.com.goit.gojava.POM.persistence.postgresDB.ProjectDAO">
+   </bean>
+   <bean id="ProjectStageDAO" class="ua.com.goit.gojava.POM.persistence.postgresDB.ProjectStageDAO">
+   </bean>
+   <bean id="ProjectFinResultEntryDAO" class="ua.com.goit.gojava.POM.persistence.postgresDB.ProjectFinResultEntryDAO">
    </bean>
    
    <bean id="applicationContextProvder" class="ua.com.goit.gojava.POM.services.ApplicationContextProvider">

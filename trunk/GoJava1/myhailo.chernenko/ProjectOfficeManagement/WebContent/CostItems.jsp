@@ -84,7 +84,7 @@
 							  							${currentCostItemForEdit.getParent().getName()}
 							  				</option>
 			   						<%
-			   							CostItemService costItemService = (CostItemService) ApplicationContextProvider.getApplicationContext().getBean("CostItemService");
+			   							CostItemService costItemService = ApplicationContextProvider.getApplicationContext().getBean(CostItemService.class);
 				   						for(CostItem costItem: costItemService.retrieveAll()) {
 											out.println("<option value=" + costItem.getId()
 														+ ">" +costItem.getName()+"</option>");
@@ -109,8 +109,8 @@
 			    			<td><select name="parentId" >
 							  	<option disabled selected value="0"></option>
 			   						<%
-			   							CostItemService costItemService = (CostItemService) ApplicationContextProvider.getApplicationContext().getBean("CostItemService");
-				   						for(CostItem costItem: costItemService.retrieveAll()) {
+			   							CostItemService costItemService = ApplicationContextProvider.getApplicationContext().getBean(CostItemService.class);
+			   							for(CostItem costItem: costItemService.retrieveAll()) {
 											out.println("<option value=" + costItem.getId()
 														+ ">" +costItem.getName()+"</option>");
 										};

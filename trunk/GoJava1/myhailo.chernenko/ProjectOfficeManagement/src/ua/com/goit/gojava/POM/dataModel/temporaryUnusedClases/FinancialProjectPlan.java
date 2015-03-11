@@ -7,7 +7,7 @@ import java.util.Date;
 import java.util.List;
 
 //import ua.com.goit.gojava.POM.dataModel.common.FinancialDocument;
-import ua.com.goit.gojava.POM.dataModel.profitcost.ProjectFinResultTransaction;
+import ua.com.goit.gojava.POM.dataModel.profitcost.ProjectFinResultEntry;
 
 public class FinancialProjectPlan  {//implements FinancialDocument, Serializable {
 
@@ -16,7 +16,7 @@ public class FinancialProjectPlan  {//implements FinancialDocument, Serializable
 	private Date date = Calendar.getInstance().getTime();
 	private String description = "";
 	private boolean active = true;
-	private List<ProjectFinResultTransaction> plannedTransactions = new ArrayList<ProjectFinResultTransaction>();
+	private List<ProjectFinResultEntry> plannedTransactions = new ArrayList<ProjectFinResultEntry>();
 	
 	public long getId() {
 		
@@ -66,15 +66,15 @@ public class FinancialProjectPlan  {//implements FinancialDocument, Serializable
 		
 	}
 	
-	public List<ProjectFinResultTransaction> getPlannedTransactions() {
+	public List<ProjectFinResultEntry> getPlannedTransactions() {
 		
 		return plannedTransactions;
 		
 	}
 	
-	public ProjectFinResultTransaction addPlannedTransaction() {
+	public ProjectFinResultEntry addPlannedTransaction() {
 
-		ProjectFinResultTransaction transaction = new ProjectFinResultTransaction();
+		ProjectFinResultEntry transaction = new ProjectFinResultEntry();
 		plannedTransactions.add(transaction);
 		return transaction;
 		
@@ -89,11 +89,11 @@ public class FinancialProjectPlan  {//implements FinancialDocument, Serializable
 	public long getPlannedProfit() {
 
 		long result = 0;
-		for (ProjectFinResultTransaction planedTransaction:getPlannedTransactions()) {
+		/*for (ProjectFinResultEntry planedTransaction:getPlannedTransactions()) {
 			
 			result += planedTransaction.getSum();
 			
-		}
+		}*/
 		
 		return result;
 	}

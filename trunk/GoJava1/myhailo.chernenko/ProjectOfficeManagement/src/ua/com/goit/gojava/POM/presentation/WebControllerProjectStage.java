@@ -11,17 +11,17 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 
 import ua.com.goit.gojava.POM.dataModel.POMDataModelException;
-import ua.com.goit.gojava.POM.dataModel.profitcost.Project;
-import ua.com.goit.gojava.POM.dataModel.profitcost.ProjectType;
+import ua.com.goit.gojava.POM.dataModel.profitcost.ProjectStage;
 import ua.com.goit.gojava.POM.services.ApplicationContextProvider;
 import ua.com.goit.gojava.POM.services.ProjectService;
+import ua.com.goit.gojava.POM.services.ProjectStageService;
 
-@WebServlet(urlPatterns = {"/ProjectWebController"})
-public class WebControllerProject extends HttpServlet {
+@WebServlet(urlPatterns = {"/ProjectStageWebController"})
+public class WebControllerProjectStage extends HttpServlet {
 
-	private static final long serialVersionUID = -8469976402726558228L;
-	private static final Logger LOG=Logger.getLogger(WebControllerProject.class);
-	private static final String CLASS_NAME = "Project";
+	private static final long serialVersionUID = 1714188275429310709L;
+	private static final Logger LOG=Logger.getLogger(WebControllerProjectStage.class);
+	private static final String CLASS_NAME = "Project Stage";
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
@@ -31,27 +31,27 @@ public class WebControllerProject extends HttpServlet {
 		
 		if (req.getParameter("AddNew") != null) {
 			
-			createProject(req);
+			createProjectStage(req);
 			resp.sendRedirect(req.getHeader("referer"));
 			
 		} else if (req.getParameter("DellCurrent")!=null) {
 		
-			deleteProject(req);
+			deleteProjectStage(req);
 			resp.sendRedirect(req.getHeader("referer"));
 			
 		} else if (req.getParameter("EditCurrent")!=null) {
 			
-			loadProjectForEdit(req);
+			loadProjectStageForEdit(req);
 			resp.sendRedirect(req.getHeader("referer"));
 			
 		} else if (req.getParameter("Edit")!=null) {
 			
-			updateProject(req);
+			updateProjectStage(req);
 			resp.sendRedirect(req.getHeader("referer"));
 				
 		} else if (req.getParameter("UndoEdit")!=null) {
 			
-			req.getSession(false).setAttribute("currentProjectForEdit", null);
+			req.getSession(false).setAttribute("currentProjectStageForEdit", null);
 			resp.sendRedirect(req.getHeader("referer"));
 		
 		}
@@ -59,14 +59,14 @@ public class WebControllerProject extends HttpServlet {
 
 	}
 
-	private void loadProjectForEdit(HttpServletRequest req) {
+	private void loadProjectStageForEdit(HttpServletRequest req) {
 		
-		ProjectService projectService = ApplicationContextProvider.getApplicationContext().getBean(ProjectService.class);
+		ProjectStageService projectStageService = ApplicationContextProvider.getApplicationContext().getBean(ProjectStageService.class);
 		try {
 			
 			long id = Long.parseLong(req.getParameter("EditCurrent"));
-			Project project = projectService.retrieveById(id);
-			req.getSession(false).setAttribute("currentProjectForEdit", project);
+			ProjectStage projectStage = projectStageService.retrieveById(id);
+			req.getSession(false).setAttribute("currentProjectStageForEdit", projectStage);
 			
 		} catch (POMDataModelException | NumberFormatException e) {
 
@@ -77,14 +77,14 @@ public class WebControllerProject extends HttpServlet {
 		
 	}
 
-	private void deleteProject(HttpServletRequest req) {
+	private void deleteProjectStage(HttpServletRequest req) {
 		
-		ProjectService projectService = ApplicationContextProvider.getApplicationContext().getBean(ProjectService.class);
+		ProjectStageService projectStageService = ApplicationContextProvider.getApplicationContext().getBean(ProjectStageService.class);
 		try {
 			
 			long id = Long.parseLong(req.getParameter("DellCurrent"));
 
-			projectService.delete(projectService.retrieveById(id));
+			projectStageService.delete(projectStageService.retrieveById(id));
 			
 		} catch (POMDataModelException | NumberFormatException e) {
 
@@ -95,28 +95,25 @@ public class WebControllerProject extends HttpServlet {
 		
 	}
 
-	private void createProject(HttpServletRequest req) {
+	private void createProjectStage(HttpServletRequest req) {
 		
 		String nameString = req.getParameter("name");
-		String pmString = req.getParameter("pm");
+		String parentId = req.getParameter("parent");
 		String descriptionString = req.getParameter("description");
-		String activeString = req.getParameter("active");
-		String typeString = req.getParameter("type");
 		
 		ProjectService projectService = ApplicationContextProvider.getApplicationContext().getBean(ProjectService.class);
-		Project project = new Project();
+		ProjectStageService projectStageService = ApplicationContextProvider.getApplicationContext().getBean(ProjectStageService.class);
+		ProjectStage projectStage = new ProjectStage();
 		
 		try {
 			
-			project.setName(nameString);
-			project.setPm(pmString);
-			project.setDescription(descriptionString);
-			project.setActive( (activeString == "on") ? true : false );
-			if(!((typeString == null) || typeString.isEmpty())) {
-				project.setType(ProjectType.valueOf(typeString));
+			projectStage.setName(nameString);
+			projectStage.setDescription(descriptionString);
+			if(!((parentId == null) || parentId.isEmpty())) {
+				projectStage.setParent(projectService.retrieveById(Long.parseLong(parentId)));
 			}
 			
-		} catch (IllegalArgumentException e)   {
+		} catch (IllegalArgumentException | POMDataModelException e)   {
 
 			LOG.error("Could not create new "+CLASS_NAME+": "+e.getMessage(),e);
 			req.getSession(false).setAttribute("errorMessage", "Could not create new "+CLASS_NAME+": "+e.getMessage());
@@ -126,7 +123,7 @@ public class WebControllerProject extends HttpServlet {
 		
 		try {
 			
-			projectService.create(project);
+			projectStageService.create(projectStage);
 			
 		} catch (POMDataModelException e) {
 
@@ -136,28 +133,25 @@ public class WebControllerProject extends HttpServlet {
 		}
 	}
 	
-	private void updateProject(HttpServletRequest req) {
+	private void updateProjectStage(HttpServletRequest req) {
 		
 		String nameString = req.getParameter("name");
-		String pmString = req.getParameter("pm");
+		String parentId = req.getParameter("parent");
 		String descriptionString = req.getParameter("description");
-		String activeString = req.getParameter("active");
-		String typeString = req.getParameter("type");
 		
-		ProjectService projectService = ApplicationContextProvider.getApplicationContext().getBean(ProjectService.class);
-		Project project = (Project) req.getSession(false).getAttribute("currentProjectForEdit");
+		ProjectService projectService = (ProjectService) ApplicationContextProvider.getApplicationContext().getBean("ProjectService");
+		ProjectStageService projectStageService = ApplicationContextProvider.getApplicationContext().getBean(ProjectStageService.class);
+		ProjectStage projectStage = (ProjectStage) req.getSession(false).getAttribute("currentProjectStageForEdit");
 		
 		try {
 			
-			project.setName(nameString);
-			project.setPm(pmString);
-			project.setDescription(descriptionString);
-			project.setActive( (activeString.equals("on")) ? true : false );
-			if(!((typeString == null) || typeString.isEmpty())) {
-				project.setType(ProjectType.valueOf(typeString));
+			projectStage.setName(nameString);
+			projectStage.setDescription(descriptionString);
+			if(!((parentId == null) || parentId.isEmpty())) {
+				projectStage.setParent(projectService.retrieveById(Long.parseLong(parentId)));
 			}
 			
-			projectService.update(project);
+			projectStageService.update(projectStage);
 			
 		} catch (POMDataModelException | NumberFormatException e)   {
 
@@ -167,7 +161,7 @@ public class WebControllerProject extends HttpServlet {
 			
 		}
 		
-		req.getSession(false).setAttribute("currentProjectForEdit", null);
+		req.getSession(false).setAttribute("currentProjectStageForEdit", null);
 		
 	}
 }

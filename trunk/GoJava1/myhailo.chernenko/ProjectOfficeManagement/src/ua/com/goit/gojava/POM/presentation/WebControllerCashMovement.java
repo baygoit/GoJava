@@ -68,7 +68,7 @@ public class WebControllerCashMovement extends HttpServlet {
 		
 		if(!req.getParameter("bankAccountFilter").isEmpty()) {
 		
-			BankAccountService bankAccountService = (BankAccountService) ApplicationContextProvider.getApplicationContext().getBean("BankAccountService");
+			BankAccountService bankAccountService = ApplicationContextProvider.getApplicationContext().getBean(BankAccountService.class);
 			long id = Long.parseLong(req.getParameter("bankAccountFilter"));
 			try {
 				bankAccount = bankAccountService.retrieveById(id);
@@ -84,7 +84,7 @@ public class WebControllerCashMovement extends HttpServlet {
 
 	private void loadCashMovementEntryForEdit(HttpServletRequest req) {
 		
-		CashMovementService cashMovementService = (CashMovementService) ApplicationContextProvider.getApplicationContext().getBean("CashMovementService");
+		CashMovementService cashMovementService = ApplicationContextProvider.getApplicationContext().getBean(CashMovementService.class);
 		try {
 			
 			long id = Long.parseLong(req.getParameter("EditCurrent"));
@@ -102,7 +102,7 @@ public class WebControllerCashMovement extends HttpServlet {
 
 	private void deleteCashMovementEntry(HttpServletRequest req) {
 		
-		CashMovementService cashMovementService = (CashMovementService) ApplicationContextProvider.getApplicationContext().getBean("CashMovementService");
+		CashMovementService cashMovementService = ApplicationContextProvider.getApplicationContext().getBean(CashMovementService.class);
 		try {
 			
 			long id = Long.parseLong(req.getParameter("DellCurrent"));
@@ -132,7 +132,7 @@ public class WebControllerCashMovement extends HttpServlet {
 			SimpleDateFormat dateFormatter = new SimpleDateFormat(pattern);
 			newEntry.setDate(dateFormatter.parse(dateString));
 			
-			BankAccountService bankAccountService = (BankAccountService) ApplicationContextProvider.getApplicationContext().getBean("BankAccountService");
+			BankAccountService bankAccountService = ApplicationContextProvider.getApplicationContext().getBean(BankAccountService.class);
 			BankAccount bankAccountRef = bankAccountService.retrieveById(Long.parseLong(bankAccountId));
 			
 			newEntry.setBankAccount(bankAccountRef);
@@ -147,7 +147,7 @@ public class WebControllerCashMovement extends HttpServlet {
 			
 		}
 		
-		CashMovementService cashMovementService = (CashMovementService) ApplicationContextProvider.getApplicationContext().getBean("CashMovementService");
+		CashMovementService cashMovementService = ApplicationContextProvider.getApplicationContext().getBean(CashMovementService.class);
 		try {
 			
 			cashMovementService.create(newEntry);
@@ -174,14 +174,14 @@ public class WebControllerCashMovement extends HttpServlet {
 			SimpleDateFormat dateFormatter = new SimpleDateFormat(pattern);
 			cashMovementEntry.setDate(dateFormatter.parse(dateString));
 			
-			BankAccountService bankAccountService = (BankAccountService) ApplicationContextProvider.getApplicationContext().getBean("BankAccountService");
+			BankAccountService bankAccountService = ApplicationContextProvider.getApplicationContext().getBean(BankAccountService.class);
 			BankAccount bankAccountRef = bankAccountService.retrieveById(Long.parseLong(bankAccountId));
 			
 			cashMovementEntry.setBankAccount(bankAccountRef);
 			Money sum = new Money(Double.parseDouble(sumString),bankAccountRef.getCurrency());
 			cashMovementEntry.setSum(sum );
 			
-			CashMovementService cashMovementService = (CashMovementService) ApplicationContextProvider.getApplicationContext().getBean("CashMovementService");
+			CashMovementService cashMovementService = ApplicationContextProvider.getApplicationContext().getBean(CashMovementService.class);
 			cashMovementService.update(cashMovementEntry);
 			
 		} catch (POMDataModelException | ParseException | NumberFormatException e)   {

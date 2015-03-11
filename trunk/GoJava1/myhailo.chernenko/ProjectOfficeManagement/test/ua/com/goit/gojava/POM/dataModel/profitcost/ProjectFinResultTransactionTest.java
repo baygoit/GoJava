@@ -6,7 +6,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import ua.com.goit.gojava.POM.dataModel.profitcost.ProjectFinResultTransaction;
+import ua.com.goit.gojava.POM.dataModel.profitcost.ProjectFinResultEntry;
 
 public class ProjectFinResultTransactionTest {
 
@@ -21,7 +21,7 @@ public class ProjectFinResultTransactionTest {
 	@Test
 	public void testCreation() {
 
-		ProjectFinResultTransaction  projectFinResultTransaction = new  ProjectFinResultTransaction();
+		ProjectFinResultEntry  projectFinResultTransaction = new  ProjectFinResultEntry();
 		assertNotNull(projectFinResultTransaction);
 		
 	}

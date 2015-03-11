@@ -20,7 +20,7 @@ import ua.com.goit.gojava.POM.services.CostItemService;
 public class WebControllerCostItem extends HttpServlet {
 
 	private static final long serialVersionUID = 4965130230495295419L;
-private static final Logger LOG=Logger.getLogger(WebControllerBankAccount.class);
+	private static final Logger LOG=Logger.getLogger(WebControllerBankAccount.class);
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
@@ -60,7 +60,7 @@ private static final Logger LOG=Logger.getLogger(WebControllerBankAccount.class)
 
 	private void loadCostItemForEdit(HttpServletRequest req) {
 		
-		CostItemService costItemService = (CostItemService) ApplicationContextProvider.getApplicationContext().getBean("CostItemService");
+		CostItemService costItemService = ApplicationContextProvider.getApplicationContext().getBean(CostItemService.class);
 		try {
 			
 			long id = Long.parseLong(req.getParameter("EditCurrent"));
@@ -78,7 +78,7 @@ private static final Logger LOG=Logger.getLogger(WebControllerBankAccount.class)
 
 	private void deleteCostItem(HttpServletRequest req) {
 		
-		CostItemService costItemService = (CostItemService) ApplicationContextProvider.getApplicationContext().getBean("CostItemService");
+		CostItemService costItemService = ApplicationContextProvider.getApplicationContext().getBean(CostItemService.class);
 		try {
 			
 			long id = Long.parseLong(req.getParameter("DellCurrent"));
@@ -100,7 +100,7 @@ private static final Logger LOG=Logger.getLogger(WebControllerBankAccount.class)
 		String typeString = req.getParameter("type");
 		String parentId = req.getParameter("parentId");
 		
-		CostItemService costItemService = (CostItemService) ApplicationContextProvider.getApplicationContext().getBean("CostItemService");
+		CostItemService costItemService = ApplicationContextProvider.getApplicationContext().getBean(CostItemService.class);
 		CostItem costItem = new CostItem();
 		
 		try {
@@ -139,7 +139,7 @@ private static final Logger LOG=Logger.getLogger(WebControllerBankAccount.class)
 		String typeString = req.getParameter("type");
 		String parentId = req.getParameter("parentId");
 		
-		CostItemService costItemService = (CostItemService) ApplicationContextProvider.getApplicationContext().getBean("CostItemService");
+		CostItemService costItemService = ApplicationContextProvider.getApplicationContext().getBean(CostItemService.class);
 		CostItem costItem = (CostItem) req.getSession(false).getAttribute("currentCostItemForEdit");
 		
 		try {

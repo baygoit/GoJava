@@ -69,7 +69,7 @@ public class WebControllerBankAccount extends HttpServlet {
 		
 		if(!req.getParameter("OpenCashMovement").isEmpty()) {
 		
-			BankAccountService bankAccountService = (BankAccountService) ApplicationContextProvider.getApplicationContext().getBean("BankAccountService");
+			BankAccountService bankAccountService = ApplicationContextProvider.getApplicationContext().getBean(BankAccountService.class);
 			
 			long id = Long.parseLong(req.getParameter("OpenCashMovement"));
 			try {
@@ -86,7 +86,7 @@ public class WebControllerBankAccount extends HttpServlet {
 
 	private void loadBankAccountForEdit(HttpServletRequest req) {
 		
-		BankAccountService bankAccountService = (BankAccountService) ApplicationContextProvider.getApplicationContext().getBean("BankAccountService");
+		BankAccountService bankAccountService = ApplicationContextProvider.getApplicationContext().getBean(BankAccountService.class);
 		try {
 			
 			long id = Long.parseLong(req.getParameter("EditCurrent"));
@@ -104,7 +104,7 @@ public class WebControllerBankAccount extends HttpServlet {
 
 	private void deleteBankAccount(HttpServletRequest req) {
 		
-		BankAccountService bankAccountService = (BankAccountService) ApplicationContextProvider.getApplicationContext().getBean("BankAccountService");
+		BankAccountService bankAccountService = ApplicationContextProvider.getApplicationContext().getBean(BankAccountService.class);
 		try {
 			
 			long id = Long.parseLong(req.getParameter("DellCurrent"));
@@ -145,7 +145,7 @@ public class WebControllerBankAccount extends HttpServlet {
 			
 		}
 		
-		BankAccountService bankAccountService = (BankAccountService) ApplicationContextProvider.getApplicationContext().getBean("BankAccountService");
+		BankAccountService bankAccountService = ApplicationContextProvider.getApplicationContext().getBean(BankAccountService.class);
 		try {
 			
 			bankAccountService.create(bankAccount);
@@ -175,7 +175,7 @@ public class WebControllerBankAccount extends HttpServlet {
 				bankAccount.setCurrency(Currency.getInstance(currencyCode));
 			}
 			
-			BankAccountService bankAccountService = (BankAccountService) ApplicationContextProvider.getApplicationContext().getBean("BankAccountService");
+			BankAccountService bankAccountService = ApplicationContextProvider.getApplicationContext().getBean(BankAccountService.class);
 			bankAccountService.update(bankAccount);
 			
 		} catch (POMDataModelException | NumberFormatException e)   {

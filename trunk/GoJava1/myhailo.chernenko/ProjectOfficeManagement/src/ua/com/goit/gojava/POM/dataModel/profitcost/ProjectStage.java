@@ -1,19 +1,11 @@
 package ua.com.goit.gojava.POM.dataModel.profitcost;
 
-//import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+public class ProjectStage  {
 
-//import ua.com.goit.gojava.POM.dataModel.common.FinancialDocument;
-//import ua.com.goit.gojava.POM.persistence.abstraction.DataObject;
-
-public class ProjectStage  {//implements DataObject , Serializable {
-
-	//private static final long serialVersionUID = 1143600705771401105L;
 	private long id = 0;
 	private String name = "";
 	private String description = "";
-	private List<ProjectFinResultTransaction> transactions = new ArrayList<ProjectFinResultTransaction>();
+	private Project parent;
 	
 	public long getId() {
 		return id;
@@ -39,38 +31,12 @@ public class ProjectStage  {//implements DataObject , Serializable {
 		this.description = description;
 	}
 
-	public List<ProjectFinResultTransaction> getTransactions() {
-		return transactions;
-	}
-	
-	public ProjectFinResultTransaction addTransaction() {
-
-		ProjectFinResultTransaction transaction = new ProjectFinResultTransaction();
-		transactions.add(transaction);
-		return transaction;
-		
+	public Project getParent() {
+		return parent;
 	}
 
-	/*public void deleteTransactionByDoc(FinancialDocument doc) {
-		
-		for (int i = transactions.size() - 1; i >= 0 ; i--) {
-			if (transactions.get(i).getDoc() == doc) {
-				transactions.remove(i);
-			}
-		}
-		
-	}*/
-	
-	public long getProfit() {
-
-		long result = 0;
-		for (ProjectFinResultTransaction transaction:getTransactions()) {
-			
-			result += transaction.getSum();
-			
-		}
-		
-		return result;
+	public void setParent(Project parent) {
+		this.parent = parent;
 	}
 	
 }

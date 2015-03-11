@@ -6,14 +6,33 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 	<link type="text/css" rel="stylesheet" href="design.css">
 	<title>Project Office Management System</title>
+	
+	  <style>
+  		 h4, h5 {
+			   margin-left: 20px; 
+			}
+	  </style>
+  
 </head>
 <body>
 
-	<p><a href="BankAccounts.jsp">Банковские счета</a></p>
-	<p><a href="CashMovement.jsp">Записи о движении денег</a></p>
-	<p><a href="ExchangeRates.jsp">Курсы валют</a></p>
-	<p><a href="CostItems.jsp">Статьи затрат</a></p>	
-	<p><a href="Projects.jsp">Проекты</a></p>	
+  
+	<h3>Учет денег:</h3>
+	<h4><a href="BankAccounts.jsp">Банковские счета</a></h4>
+	<h4><a href="CashMovement.jsp">Записи о движении денег</a></h4>
+	<h3>Учет затрат:</h3>
+	<h4><a href="CostItems.jsp">Статьи затрат</a></h4>	
+	<h4><a href="Projects.jsp">Проекты</a></h4>	
+	<h4><a href="ProjectStages.jsp">Этапы проектов</a></h4>
+	<h4><a href="ProjectFinResultEntries.jsp">Записи о затратах проектов</a></h4>
+	<h5><a href="ExchangeRates.jsp">Курсы валют</a></h5>
+	<h3>Документы:</h3>
+	<h4>Платежные документы</h4>
+	<h4>Планы поступления денег</h4>
+	<h4>Финансовые планы проектов</h4>
+	<h3>Отчеты:</h3>
+	<h4>План-факт ДС</h4>
+	<h4>План-факт затрат</h4>
 	 
 </body>
 </html>

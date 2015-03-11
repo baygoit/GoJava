@@ -59,7 +59,7 @@ public class WebControllerExchangeRate extends HttpServlet {
 
 	private void loadExchangeRateForEdit(HttpServletRequest req) {
 		
-		ExchangeRateService exchangeRateService = (ExchangeRateService) ApplicationContextProvider.getApplicationContext().getBean("ExchangeRateService");
+		ExchangeRateService exchangeRateService = ApplicationContextProvider.getApplicationContext().getBean(ExchangeRateService.class);
 		try {
 			
 			long id = Long.parseLong(req.getParameter("EditCurrent"));
@@ -77,7 +77,7 @@ public class WebControllerExchangeRate extends HttpServlet {
 
 	private void deleteExchangeRate(HttpServletRequest req) {
 		
-		ExchangeRateService exchangeRateService = (ExchangeRateService) ApplicationContextProvider.getApplicationContext().getBean("ExchangeRateService");
+		ExchangeRateService exchangeRateService = ApplicationContextProvider.getApplicationContext().getBean(ExchangeRateService.class);
 		try {
 			
 			long id = Long.parseLong(req.getParameter("DellCurrent"));
@@ -128,7 +128,7 @@ public class WebControllerExchangeRate extends HttpServlet {
 			
 		}
 		
-		ExchangeRateService exchangeRateService = (ExchangeRateService) ApplicationContextProvider.getApplicationContext().getBean("ExchangeRateService");
+		ExchangeRateService exchangeRateService = ApplicationContextProvider.getApplicationContext().getBean(ExchangeRateService.class);
 		try {
 			
 			exchangeRateService.create(newRate);
@@ -167,7 +167,7 @@ public class WebControllerExchangeRate extends HttpServlet {
 			exchangeRate.setRate(Long.parseLong(rateString));
 			exchangeRate.setMultiplicity(Long.parseLong(multiplicityString));
 			
-			ExchangeRateService exchangeRateService = (ExchangeRateService) ApplicationContextProvider.getApplicationContext().getBean("ExchangeRateService");
+			ExchangeRateService exchangeRateService = ApplicationContextProvider.getApplicationContext().getBean(ExchangeRateService.class);
 			exchangeRateService.update(exchangeRate);
 			
 		} catch (POMDataModelException | ParseException | NumberFormatException e)   {
