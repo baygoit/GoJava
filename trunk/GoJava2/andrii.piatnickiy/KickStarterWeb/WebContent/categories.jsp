@@ -6,10 +6,10 @@
 <title>Categories</title>
 </head>
 <body>
-	<c:set var="myName" value="Alex" />
-	<h1>${myName}</h1>
 	<c:forEach var="category" items="${categories}">
-		<p>value="${category.getName()}"</p>
+		<p>
+			<a href="a">${category.getName()}</a>
+		</p>
 	</c:forEach>
 </body>
 </html>
