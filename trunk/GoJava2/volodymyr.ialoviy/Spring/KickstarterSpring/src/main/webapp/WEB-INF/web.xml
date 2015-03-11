@@ -8,7 +8,7 @@
 	
 	<context-param>
 	    <param-name>contextConfigLocation</param-name>
-	    <param-value>/WEB-INF/application-context.xml</param-value>    
+	    <param-value>classpath:application-context.xml</param-value>    
 	</context-param>
 
 	<listener>
@@ -19,7 +19,7 @@
 
 	<servlet>
 		<servlet-name>MainServlet</servlet-name>
-		<servlet-class>ua.com.goit.gojava2.vova.kickstarter.presenter.MainServlet</servlet-class>
+		<servlet-class>ua.com.goit.gojava2.vova.kickstarter.controller.MainServlet</servlet-class>
  
 	</servlet>
 	
