@@ -1,7 +1,8 @@
 package ua.com.sas.controller;
 
 import java.io.IOException;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -15,7 +16,7 @@ import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import ua.com.sas.dao.CategoriesDAO;
 import ua.com.sas.dao.ProjectsDAO;
-import ua.com.sas.model.*;
+//import ua.com.sas.model.*;
 
 @Controller
 public class MainServlet extends HttpServlet {
@@ -26,43 +27,30 @@ public class MainServlet extends HttpServlet {
 	@Autowired
 	private ProjectsDAO projectsDAO;
 	
+	Map<String, Action> actions = new HashMap<String, Action>();
+	
+	
+	
 	@Override
 	public void init(ServletConfig config) throws ServletException {
 		super.init();
 		SpringBeanAutowiringSupport.processInjectionBasedOnServletContext(this, config.getServletContext());
+		CategoriesAction categoriesAction = new CategoriesAction(categoriesDAO);
+		actions.put("/", categoriesAction);
+		actions.put("/categories", categoriesAction);
+		actions.put("/projects", new ProjectsAction(projectsDAO));
+		actions.put("/project", new ProjectAction(projectsDAO));
 	}
 	
 	@Override
 	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
-		String action = getAction(req);
-		if (action.startsWith("/categories")) {
-			List<Category> categories = categoriesDAO.getCategories();
-			
-			req.setAttribute("categories", categories);
-			
-			req.getRequestDispatcher("categories.jsp").forward(req, resp);
-			
-		} else if (action.equals("/projects")) {
-			int categoryId = Integer.valueOf(req.getParameter("category"));
-			List<Project> projects = projectsDAO.getProjects(new Category(categoryId));
-			
-			req.setAttribute("projects", projects);
-			
-			req.getRequestDispatcher("projects.jsp").forward(req, resp);
-		} else if (action.equals("/project")) {
-			int projectId = Integer.valueOf(req.getParameter("id"));
-			
-			Project project = projectsDAO.get(projectId);
-			
-			req.setAttribute("project", project);
-			
-			req.getRequestDispatcher("project.jsp").forward(req, resp);
-		}		
+		Action action = actions.get(getActionString(req));
+		String jsp = action.getJsp(req, resp);
+		req.getRequestDispatcher(jsp).forward(req, resp);
 	}
 
-	private String getAction(HttpServletRequest req) {
+	private String getActionString(HttpServletRequest req) {
 		String requestURI = req.getRequestURI();
-		String action = requestURI.substring(req.getContextPath().length(), requestURI.length());
-		return action;
+		return requestURI.substring(req.getContextPath().length(), requestURI.length());
 	}
 }
