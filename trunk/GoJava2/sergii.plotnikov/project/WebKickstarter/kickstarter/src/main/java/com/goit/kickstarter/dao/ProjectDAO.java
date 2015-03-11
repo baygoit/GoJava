@@ -1,31 +1,22 @@
 package com.goit.kickstarter.dao;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.goit.kickstarter.model.Category;
+import org.springframework.stereotype.Component;
+
 import com.goit.kickstarter.model.Project;
 
-public class ProjectDAO {	
-	private String user = "postgres";
-	private String password = "123";
-	private String url = "jdbc:postgresql://localhost:5433/kickstarterdb";
-	private String driver = "org.postgresql.Driver";
-	
-	private Connection connection;
-
-	public ProjectDAO(Connection connection) {
-		this.connection = connection;
-	}
-	
+@Component
+public class ProjectDAO extends AbstractDAO{	
+		
 	public Project getProject(int id) {
 		Project proj = null;
-		try {
+		try (Connection connection = getConnection()){
 			String query = "SELECT * FROM projects WHERE id ="+id;
 			
 			PreparedStatement stmt = connection.prepareStatement(query);
@@ -36,8 +27,6 @@ public class ProjectDAO {
 						rs.getString("description"), rs.getString("story"), rs.getString("link"), 
 						rs.getInt("value"), rs.getInt("recieved"), rs.getInt("days"));
 			}
-			
-			stmt.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -46,7 +35,7 @@ public class ProjectDAO {
 	
 	public Project getProject(String project) {
 		Project proj = null;
-		try {
+		try (Connection connection = getConnection()){
 			String query = "SELECT * FROM projects WHERE project_name =?";
 			
 			PreparedStatement stmt = connection.prepareStatement(query);
@@ -58,8 +47,6 @@ public class ProjectDAO {
 					rs.getString("description"), rs.getString("story"), rs.getString("link"), 
 					rs.getInt("value"), rs.getInt("recieved"), rs.getInt("days"));
 			}
-			
-			stmt.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -67,7 +54,7 @@ public class ProjectDAO {
 	}
 
 	public void createProject(Project project) {
-		try {
+		try (Connection connection = getConnection()){
 			String query = "INSERT into projects(project_name, value, description)"
 					+"VALUES(?, ?, ?);";
 			
@@ -77,15 +64,13 @@ public class ProjectDAO {
 			stmt.setString(3, project.getDescription());
 			
 			stmt.executeUpdate();	
-			stmt.close();
-			connection.commit();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
 
 	public void updateProject(Project project) {
-		try {
+		try (Connection connection = getConnection()){
 			String query = "UPDATE projects SET value=?, description=? "
 					+ "WHERE project_name=?";
 			
@@ -95,43 +80,27 @@ public class ProjectDAO {
 			stmt.setString(3, project.getTitle());
 			
 			stmt.executeUpdate();	
-			stmt.close();
-			connection.commit();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
 
 	public void deleteProject(String title) {
-		try {
+		try (Connection connection = getConnection()){
 			String query = "DELETE FROM projects WHERE project_name=?";
 			
 			PreparedStatement stmt = connection.prepareStatement(query);
 			stmt.setString(1, title);
 			
 			stmt.executeUpdate();	
-			stmt.close();
-			connection.commit();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
-	
-	public Connection getConnection() throws SQLException {
-		return DriverManager.getConnection(url, user, password); 
-	} 
-	
-	public ProjectDAO(){
-		try {
-			Class.forName(driver);
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-	}	
-	
+
 	public int getLength(String condition) {
 		int count=0;
-		try {			 
+		try (Connection connection = getConnection()){			 
 			String query = "SELECT * FROM projects "+condition;
 			
 			PreparedStatement stmt = connection.prepareStatement(query);
@@ -140,7 +109,6 @@ public class ProjectDAO {
 			while(rs.next()){
 				count++;
 			}
-			stmt.close();
 		} catch (SQLException e) { 
 			e.printStackTrace(); 
 		} 
@@ -149,7 +117,7 @@ public class ProjectDAO {
 	
 	public int getLength(int id) {
 		int count=0;
-		try {			 
+		try (Connection connection = getConnection()){			 
 			String query = "SELECT * FROM projects WHERE category="+id;
 			
 			PreparedStatement stmt = connection.prepareStatement(query);
@@ -158,19 +126,19 @@ public class ProjectDAO {
 			while(rs.next()){
 				count++;
 			}
-			stmt.close();
 		} catch (SQLException e) { 
 			e.printStackTrace(); 
 		} 
 		return count;
 	}
 	
-	public List<Project> getProjects(Category category) {
+	public List<Project> getProjects(int categoryId) {
 		List<Project> list = new ArrayList<Project>();
-		try {			 
-			String query = "SELECT * FROM projects WHERE category = " + category.getId();
+		try (Connection connection = getConnection()){			 
+			String query = "SELECT * FROM projects WHERE category = ?";
 			
 			PreparedStatement stmt = connection.prepareStatement(query);
+			stmt.setInt(1, categoryId);
 			
 			ResultSet rs = stmt.executeQuery();
 			while(rs.next()){
@@ -178,7 +146,6 @@ public class ProjectDAO {
 						rs.getString("description"), rs.getString("story"), rs.getString("link"), 
 						rs.getInt("value"), rs.getInt("recieved"), rs.getInt("days")));
 			}
-			stmt.close();
 		} catch (SQLException e) { 
 			e.printStackTrace(); 
 		} 

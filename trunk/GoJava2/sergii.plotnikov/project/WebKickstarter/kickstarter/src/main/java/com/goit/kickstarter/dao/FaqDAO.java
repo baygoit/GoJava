@@ -9,36 +9,38 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
-import com.goit.kickstarter.model.Category;
+import com.goit.kickstarter.model.FAQ;
 
 @Component
-public class CategoryDAO extends AbstractDAO{
+public class FaqDAO extends AbstractDAO{
 	
-	public Category getCategory(int id) {
-		Category cat = null;
+	public FAQ getQA(int id) {
+		FAQ faq = null;
 		try (Connection connection = getConnection()){
-			String query = "SELECT * FROM categories WHERE id =?";
+			String query = "SELECT * FROM categories WHERE project =?";
 			
 			PreparedStatement stmt = connection.prepareStatement(query);
 			stmt.setInt(1, id);
 			
 			ResultSet rs = stmt.executeQuery();
 			while(rs.next()){
-				cat = new Category(rs.getString("category_name"), rs.getInt("id"));
+				faq = new FAQ(rs.getString("question"), rs.getString("answer"), rs.getInt("project"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return cat;
+		return faq;
 	}
 
-	public void createCategory(Category category) {
+	public void createFaq(FAQ faq) {
 		try (Connection connection = getConnection()){
-			String query = "INSERT into categories(category_name)"
-					+"VALUES(?);";
+			String query = "INSERT into faq(question, answer, project)"
+					+"VALUES(?,?,?);";
 			
 			PreparedStatement stmt = connection.prepareStatement(query);
-			stmt.setString(1, category.getTitle());
+			stmt.setString(1, faq.getQuestion());
+			stmt.setString(2, faq.getAnswer());
+			stmt.setInt(3, faq.getProjectId());
 			
 			stmt.executeUpdate();	
 		} catch (SQLException e) {
@@ -46,13 +48,14 @@ public class CategoryDAO extends AbstractDAO{
 		}
 	}
 
-	public void updateCategory(Category category) {
+	public void updateFaq(FAQ faq) {
 		try (Connection connection = getConnection()){
-			String query = "UPDATE categories SET category_name=? "
-					+ "WHERE category_name=?";
+			String query = "UPDATE faq SET answer=? "
+					+ "WHERE project=?";
 			
 			PreparedStatement stmt = connection.prepareStatement(query);
-			stmt.setString(1, category.getTitle());
+			stmt.setString(1, faq.getAnswer());
+			stmt.setInt(2, faq.getProjectId());
 			
 			stmt.executeUpdate();	
 		} catch (SQLException e) {
@@ -60,9 +63,9 @@ public class CategoryDAO extends AbstractDAO{
 		}
 	}
 
-	public void deleteCategory(int id) {
+	public void deleteFaq(int id) {
 		try (Connection connection = getConnection()){
-			String query = "DELETE FROM categories WHERE id=?";
+			String query = "DELETE FROM faq WHERE id=?";
 			
 			PreparedStatement stmt = connection.prepareStatement(query);
 			stmt.setInt(1, id);
@@ -76,7 +79,7 @@ public class CategoryDAO extends AbstractDAO{
 	public int getLength() {
 		int count=0;
 		try (Connection connection = getConnection()){			 
-			String query = "SELECT * FROM categories";
+			String query = "SELECT * FROM faq";
 			
 			PreparedStatement stmt = connection.prepareStatement(query);
 						
@@ -90,16 +93,17 @@ public class CategoryDAO extends AbstractDAO{
 		return count;
 	}
 	
-	public List<Category> getCategories() {
-		List<Category> list = new ArrayList<Category>();
+	public List<FAQ> getFaq(int projectId) {
+		List<FAQ> list = new ArrayList<FAQ>();
 		try (Connection connection = getConnection()){			 
-			String query = "SELECT * FROM categories";
+			String query = "SELECT * FROM faq WHERE project=?";
 			
 			PreparedStatement stmt = connection.prepareStatement(query);
-						
+			stmt.setInt(1, projectId);
+			
 			ResultSet rs = stmt.executeQuery();
 			while(rs.next()){
-				list.add(new Category(rs.getString("category_name"), rs.getInt("id")));
+				list.add(new FAQ(rs.getString("question"), rs.getString("answer"), rs.getInt("project")));
 			}
 		} catch (SQLException e) { 
 			e.printStackTrace(); 

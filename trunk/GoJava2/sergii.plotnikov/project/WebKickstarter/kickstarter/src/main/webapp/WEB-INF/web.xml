@@ -5,6 +5,15 @@
     version="2.4">
 
     <display-name>Kikckstarter</display-name>
+    
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>/WEB-INF/application-context.xml</param-value>
+    </context-param>
 
     <servlet>
         <servlet-name>MainServlet</servlet-name>

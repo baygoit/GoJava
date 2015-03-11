@@ -10,7 +10,8 @@
         Days left: <c:out value="${project.days}"/></br>
         <c:out value="${project.story}"/></br>
         Link: <c:out value="${project.link}"/></br>
-        <a href="/kickstarter/faq?project=${project.id}">Ask question</a></br>
-        <a href="/kickstarter/payment?project=${project.id}">Donate</a></br>
+        <a href="faq?projectId=${project.id}&categoryId=${categoryId}">Ask question</a></br>
+        <a href="payment?project=${project.id}">Donate</a><p>
+        <a href="projects?category=${categoryId}">Go back</a>
     </body>
 </html>

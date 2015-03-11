@@ -21,6 +21,10 @@ public class Project {
 		this.collected = collected;
 		this.days = days;
 	}
+	
+	public Project(int id){
+		this.id=id;
+	}
 
 	public Project(String projectName, String descr, int price) {
 		title = projectName;

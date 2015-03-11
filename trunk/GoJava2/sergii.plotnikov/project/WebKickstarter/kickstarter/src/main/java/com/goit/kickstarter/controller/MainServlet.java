@@ -1,108 +1,80 @@
 package com.goit.kickstarter.controller;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.goit.kickstarter.model.Category;
-import com.goit.kickstarter.model.Project;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.context.support.SpringBeanAutowiringSupport;
+
 import com.goit.kickstarter.dao.CategoryDAO;
+import com.goit.kickstarter.dao.FaqDAO;
 import com.goit.kickstarter.dao.ProjectDAO;
 
+@Controller
 public class MainServlet extends HttpServlet {
+
+	@Autowired
+	private CategoryDAO categoryDao;
+
+	@Autowired
+	private ProjectDAO projectDao;
+
+	@Autowired
+	private FaqDAO faqDao;
 	
-	static {
-		try {
-			Class.forName("org.postgresql.Driver");
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException(e);
-		}
-	}
-	
+	private Map <String, Action>actions = new HashMap<String, Action>();
+
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String action = getAction(req);
-		Connection connection = getConnection(req);
-		
-		if (action.startsWith("/categories")) {
-			
-			CategoryDAO CategoryDAO = new CategoryDAO(connection);	
-			List<Category> categories = CategoryDAO.getCategories();
-			
-			req.setAttribute("categories", categories);
-			
-			req.getRequestDispatcher("categories.jsp").forward(req, resp);
-		} else if (action.equals("/projects")) {
-			int categoryId = Integer.valueOf(req.getParameter("category"));
-			CategoryDAO CategoryDAO = new CategoryDAO(connection);
-			Category choice = CategoryDAO.getCategory(categoryId);
-			
-			ProjectDAO ProjectDAO = new ProjectDAO(connection);	
-			List<Project> projects = ProjectDAO.getProjects(new Category(categoryId));
-			
-			req.setAttribute("projects", projects);
-			req.setAttribute("category", choice);
-			
-			req.getRequestDispatcher("projects.jsp").forward(req, resp);
-		} else if (action.equals("/project")) {
-			int projectId = Integer.valueOf(req.getParameter("project"));
-			
-			ProjectDAO ProjectDAO = new ProjectDAO(connection);	
-			Project project = ProjectDAO.getProject(projectId);
-			
-			req.setAttribute("project", project);
-			
-			req.getRequestDispatcher("project.jsp").forward(req, resp);
-		} else if (action.equals("/faq")) {
-			int projectId = Integer.valueOf(req.getParameter("project"));
-			
-//			ProjectDAO ProjectDAO = new ProjectDAO(connection);	
-//			Project project = ProjectDAO.getProject(projectId);
-//			
-//			req.setAttribute("project", project);
-//			
-//			req.getRequestDispatcher("project.jsp").forward(req, resp);
-		} else if (action.equals("/payment")) {
-			int projectId = Integer.valueOf(req.getParameter("project"));
-			
-//			ProjectDAO ProjectDAO = new ProjectDAO(connection);	
-//			Project project = ProjectDAO.getProject(projectId);
-//			
-//			req.setAttribute("project", project);
-//			
-//			req.getRequestDispatcher("project.jsp").forward(req, resp);
-		}
+	public void init(ServletConfig config) throws ServletException {
+		super.init(config);
+		SpringBeanAutowiringSupport.processInjectionBasedOnServletContext(this,
+				config.getServletContext());
+		CategoriesAction categoriesAction = new CategoriesAction(categoryDao);
+		actions.put("/", categoriesAction);
+		actions.put("/categories", categoriesAction);
+		actions.put("/projects", new ProjectsAction(categoryDao, projectDao));
+		actions.put("/project", new ProjectAction(projectDao));
+		actions.put("/faq", new FaqAction(faqDao));
 	}
 
-	private String getAction(HttpServletRequest req) {
-		String requestURI = req.getRequestURI(); // TODO поискать более короткий способ сделать это
-		String action = requestURI.substring(req.getContextPath().length(), requestURI.length());
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
+		
+		Action action = actions.get(getActionString(req));
+		String jsp = action.doGet(req, resp);
+		req.getRequestDispatcher(jsp).forward(req, resp);
+
+//		if (action.equals("/payment")) {
+//			projectId = Integer.valueOf(req.getParameter("project"));
+//
+//			Project project = ProjectDAO.getProject(projectId);
+//			
+//			req.setAttribute("project", project);
+//			
+//			req.getRequestDispatcher("project.jsp").forward(req, resp);
+//		}
+	}
+
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) 
+			throws ServletException, IOException {
+		Action action = actions.get(getActionString(req));
+		String jsp = action.doPost(req, resp);
+		req.getRequestDispatcher(jsp).forward(req, resp);
+	}
+	
+	private String getActionString(HttpServletRequest req) {
+		String requestURI = req.getRequestURI();
+		String action = requestURI.substring(req.getContextPath().length(),	requestURI.length());
 		return action;
 	}
-
-	private Connection getConnection(HttpServletRequest req) {
-		Connection result = (Connection)req.getSession().getAttribute("connection");
-		if (result == null) {
-			try {
-				result = DriverManager.getConnection("jdbc:postgresql://localhost:5433/kickstarterdb","postgres","123");
-			} catch (SQLException e) {
-				throw new RuntimeException(e);
-			}
-			req.getSession().setAttribute("connection", result);
-		}
-		return result;
-	}
-
-	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		System.out.println(req.getParameterMap().toString());
-	}
-    
 }
