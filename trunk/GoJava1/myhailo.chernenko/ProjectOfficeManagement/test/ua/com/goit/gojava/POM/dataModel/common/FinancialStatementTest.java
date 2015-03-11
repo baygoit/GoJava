@@ -2,33 +2,33 @@ package ua.com.goit.gojava.POM.dataModel.common;
 
 import static org.junit.Assert.*;
 
-import java.math.BigDecimal;
+/*import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Currency;
 import java.util.Date;
-
+*/
 import org.junit.Before;
 import org.junit.Test;
 
-import ua.com.goit.gojava.POM.dataModel.POMDataModelException;
+//import ua.com.goit.gojava.POM.dataModel.POMDataModelException;
 import ua.com.goit.gojava.POM.dataModel.POMDataModelRuntimeException;
 import ua.com.goit.gojava.POM.dataModel.temporaryUnusedClases.FinancialEntry;
 import ua.com.goit.gojava.POM.dataModel.temporaryUnusedClases.FinancialStatement;
-import ua.com.goit.gojava.POM.persistence.postgresDB.ExchangeRateDAO;
+//import ua.com.goit.gojava.POM.persistence.postgresDB.ExchangeRateDAO;
 
 public class FinancialStatementTest {
 
-	private int scaleLength = 2;
+	/*private int scaleLength = 2;
 	private RoundingMode roundingMode = RoundingMode.HALF_UP;
 	
 	private BigDecimal getDecimal(Double value) {
 		
 		return new BigDecimal(value).setScale(scaleLength,roundingMode);
 		
-	}
+	}*/
 	
 	@Before
 	public void setUp() throws Exception {
@@ -140,7 +140,7 @@ public class FinancialStatementTest {
 	@Test
 	public void testGetTotal() {
 
-		MyFinancialStatement statement = new MyFinancialStatement();
+		/*MyFinancialStatement statement = new MyFinancialStatement();
 		MyFinancialEntry newEntry1 = statement.addEntry();
 		MyFinancialEntry newEntry2 = statement.addEntry();
 		MyFinancialEntry newEntry3 = statement.addEntry();

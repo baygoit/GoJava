@@ -14,12 +14,12 @@ import java.util.List;
 
 
 
-import ua.com.goit.gojava.POM.dataModel.POMDataModelException;
+//import ua.com.goit.gojava.POM.dataModel.POMDataModelException;
 import ua.com.goit.gojava.POM.dataModel.POMDataModelRuntimeException;
-import ua.com.goit.gojava.POM.persistence.abstraction.*;
+//import ua.com.goit.gojava.POM.persistence.abstraction.*;
 import ua.com.goit.gojava.POM.persistence.fileDB.DAOFactory;
 import ua.com.goit.gojava.POM.persistence.fileDB.LazyDataManager;
-import ua.com.goit.gojava.POM.persistence.postgresDB.ExchangeRateDAO;
+//import ua.com.goit.gojava.POM.persistence.postgresDB.ExchangeRateDAO;
 
 public abstract class FinancialStatement<T extends FinancialEntry> implements Serializable {
 	

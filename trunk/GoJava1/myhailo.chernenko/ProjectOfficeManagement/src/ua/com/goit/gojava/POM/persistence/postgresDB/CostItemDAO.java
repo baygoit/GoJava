@@ -4,37 +4,48 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.apache.log4j.Logger;
 
 import ua.com.goit.gojava.POM.dataModel.POMDataModelException;
 import ua.com.goit.gojava.POM.dataModel.profitcost.CostItem;
 import ua.com.goit.gojava.POM.dataModel.profitcost.ProfitLostsType;
+import ua.com.goit.gojava.POM.persistence.postgresDB.abstraction.AbstractDAO;
 
-public class CostItemDAO {
+public class CostItemDAO extends AbstractDAO<CostItem> {
 	
+	private static final String CLASS_NAME = "Cost Item"; 
 	private static final String CLASS_TABLE = "cost_items"; 
-	private static final Logger LOG=Logger.getLogger(CostItemDAO.class);
+	private static final Logger LOG = Logger.getLogger(CostItemDAO.class);
 	
-	private Connection getDBConnection() {
+	@Override
+	protected String getClassName() {
 		
-		return DBDataManager.getConnection();
-		
-	}
-	
-	private void closeDBConnections(ResultSet rs, Statement statement, Connection connection) {
-		
-		DBDataManager.CloseConnections(rs, statement, connection);
-		
+		return CLASS_NAME;
 	}
 
-	
-	private CostItem getObjectFromRS(ResultSet rs) throws SQLException, POMDataModelException {
+	@Override
+	protected String getClassTable() {
+
+		return CLASS_TABLE;
+	}
+
+	@Override
+	protected Logger getLog() {
 		
-		CostItem costItem = new CostItem();
+		return LOG;	
+	}
+
+	@Override
+	protected CostItem getNewObject() {
+
+		return new CostItem();	
+	}
+
+	@Override
+	protected CostItem getObjectFromRS(ResultSet rs) throws SQLException, POMDataModelException {
+		
+		CostItem costItem = getNewObject();
 		
 		costItem.setId(rs.getLong("ID"));
 		costItem.setName(rs.getString("name"));
@@ -53,242 +64,69 @@ public class CostItemDAO {
 		
 	}
 
-	public CostItem create() throws POMDataModelException {
+	@Override
+	protected void setId(CostItem costItem, long id) {
 
-		ResultSet rs = null;
-		Statement statement = null; 	
-		Connection connection = getDBConnection();
-		
-		String insertTableSQL = "INSERT INTO "+CLASS_TABLE
-								+ " DEFAULT VALUES"
-								+ "	RETURNING ID "
-								;
-		
-		CostItem costItem = new CostItem();
-		
-		try {
-
-			statement = connection.createStatement();
-			rs = statement.executeQuery(insertTableSQL);
-			 
-			if (rs.next()) {
-				
-				costItem.setId(rs.getLong("ID"));
- 				
-			}
-			
-		} catch (SQLException | NullPointerException e) {
- 
-			LOG.error("Could not create new Cost Item: "+e.getMessage(), e);
-			throw new POMDataModelException("Could not create new Cost Item: "+e.getMessage(), e);
- 
-		} finally {
- 
-			closeDBConnections(rs, statement, connection);
- 
-		}
-		
-		return costItem;
-	
+		costItem.setId(id);	
 	}
-	
-	public CostItem create(CostItem costItem) throws POMDataModelException {
 
-		ResultSet rs = null;
-		PreparedStatement statement = null; 	
-		Connection connection = getDBConnection();
+	@Override
+	protected Long getId(CostItem costItem) {
 		
+		return costItem.getId();
+	}
+
+	@Override
+	protected PreparedStatement getCreateStatement(Connection connection, CostItem costItem)
+			throws SQLException {
+
 		String insertTableSQL = "INSERT INTO "+CLASS_TABLE+" ("
-										+ " 	 name "
-										+ " 	,type "
-										+ " 	,parent "
-										+ "	   ) "
-										+ " VALUES (?,?,?) "
-										+ "	RETURNING ID "
-														;
-		
-		try {
+				+ " 	 name "
+				+ " 	,type "
+				+ " 	,parent "
+				+ "	   ) "
+				+ " VALUES (?,?,?) "
+				+ "	RETURNING ID "
+			;
 
-			statement = connection.prepareStatement(insertTableSQL);
-			statement.setString(1, costItem.getName());
-			statement.setString(2, costItem.getType().toString());
-			long parentId = costItem.getParentId();
-			if(parentId != 0) {
-				statement.setLong(3, parentId);
-			} else {
-				statement.setNull(3, java.sql.Types.NULL);
-			}
-			
-			rs = statement.executeQuery();
-			if (rs.next()) {
-				costItem.setId(rs.getLong("ID"));
- 			}
-			
-		} catch (SQLException | NullPointerException e) {
- 
-			LOG.error("Could not create new Cost Item: "+e.getMessage(), e);
-			throw new POMDataModelException("Could not create new Cost Item: "+e.getMessage() , e);
- 
-		} finally {
- 
-			closeDBConnections(rs, statement, connection);
- 
+		PreparedStatement statement = connection.prepareStatement(insertTableSQL);
+		statement.setString(1, costItem.getName());
+		statement.setString(2, costItem.getType().toString());
+		long parentId = costItem.getParentId();
+		if(parentId != 0) {
+			statement.setLong(3, parentId);
+		} else {
+			statement.setNull(3, java.sql.Types.NULL);
 		}
 		
-		return costItem;
-	
-	}
-	
-	public List<CostItem> retrieveAll() throws POMDataModelException {
-
-		List<CostItem> resultList = new ArrayList<CostItem>();
-		
-		ResultSet rs = null;
-		Statement statement = null; 	
-		Connection connection = getDBConnection();
-		
-		String selectTableSQL = "SELECT * FROM "+CLASS_TABLE
-							   +" ORDER BY ID"
-								;
-		
-		try {
-
-			statement = connection.createStatement();
-			rs = statement.executeQuery(selectTableSQL);
-			 
-			while (rs.next()) {
-				
-				CostItem costItem = getObjectFromRS(rs);
-				
-				resultList.add(costItem);
-				
-			}
-			
-		} catch (SQLException e) {
- 
-			LOG.error("Could not retrieve all Cost Items: "+e.getMessage(), e);
-			throw new POMDataModelException("Could not retrieve all Cost Items: "+e.getMessage(), e);
- 
-		} finally {
- 
-			closeDBConnections(rs, statement, connection);
- 
-		}
-		
-		return resultList;
-	
-	}
-	
-	public CostItem retrieveById(Long id) throws POMDataModelException {
-
-		CostItem result = new CostItem();
-		
-		ResultSet rs = null;
-		PreparedStatement statement = null; 	
-		Connection connection = getDBConnection();
-		
-		String selectTableSQL = " SELECT * FROM "+CLASS_TABLE
-							  + " WHERE ID = ? "
-								;
-		
-		try {
-
-			statement = connection.prepareStatement(selectTableSQL);
-			statement.setLong(1, id);
-			rs = statement.executeQuery();
-			 
-			if (rs.next()) {
-				
-				result = getObjectFromRS(rs);
-				
-			}
-			
-		} catch (SQLException e) {
- 
-			LOG.error("Could not retrieve Cost Item by ID: "+e.getMessage(), e);
-			throw new POMDataModelException("Could not retrieve Cost Item by ID: "+e.getMessage() , e);
- 
-		} finally {
- 
-			closeDBConnections(rs, statement, connection);
- 
-		}
-		
-		return result;
-	
+		return statement;
 	}
 
-	public void update(CostItem costItem) throws POMDataModelException {
+	@Override
+	protected PreparedStatement getUpdateStatement(Connection connection, CostItem costItem)
+			throws SQLException {
 
-		ResultSet rs = null;
-		PreparedStatement statement = null;
-		Connection connection = getDBConnection();
-		
 		String updateTableSQL = "UPDATE "+CLASS_TABLE
-								+ " SET "
-								+ " 	 name = ? "
-								+ " 	,type = ? "
-								+ " 	,parent = ? "
-								+ "	WHERE ID = ? "
-								;
-		
-		try {
+				+ " SET "
+				+ " 	 name = ? "
+				+ " 	,type = ? "
+				+ " 	,parent = ? "
+				+ "	WHERE ID = ? "
+				;
 
-			statement = connection.prepareStatement(updateTableSQL);
-			statement.setString(1, costItem.getName());
-			statement.setString(2, costItem.getType().toString());
-			long parentId = costItem.getParentId();
-			if(parentId != 0) {
-				statement.setLong(3, parentId);
-			} else {
-				statement.setNull(3, java.sql.Types.NULL);
-			}statement.setLong(4,  costItem.getId());
-			
-			statement.execute();
-				
-		} catch (SQLException | NullPointerException e) {
- 
-			LOG.error("Could not update Cost Item: "+e.getMessage(), e);
-			throw new POMDataModelException("Could not update Cost Item: "+e.getMessage(), e);
- 
-		} finally {
- 
-			closeDBConnections(rs, statement, connection);
- 
-		}
-	
-	}
-	
-	public void delete(CostItem costItem) throws POMDataModelException {
-
-		ResultSet rs = null;
-		PreparedStatement statement = null;
-		Connection connection = getDBConnection();
+		PreparedStatement statement = connection.prepareStatement(updateTableSQL);
+		statement = connection.prepareStatement(updateTableSQL);
+		statement.setString(1, costItem.getName());
+		statement.setString(2, costItem.getType().toString());
+		long parentId = costItem.getParentId();
+		if(parentId != 0) {
+			statement.setLong(3, parentId);
+		} else {
+			statement.setNull(3, java.sql.Types.NULL);
+		}statement.setLong(4,  costItem.getId());
 		
-		String updateTableSQL = "DELETE FROM "+CLASS_TABLE
-								+ "	WHERE ID = ? "
-								;
+		return statement;
 		
-		try {
-
-			statement = connection.prepareStatement(updateTableSQL);
-			statement.setLong(1,  costItem.getId());
-			
-			statement.execute();
-			
-			costItem = null;
-				
-		} catch (SQLException e) {
- 
-			LOG.error("Could not delete Cost Item: "+e.getMessage(), e);
-			throw new POMDataModelException("Could not delete Cost Item: "+e.getMessage(), e);
- 
-		} finally {
- 
-			closeDBConnections(rs, statement, connection);
- 
-		}
-	
 	}
 
 }

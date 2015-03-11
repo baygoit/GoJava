@@ -2,7 +2,7 @@ package ua.com.goit.gojava.POM.dataModel.cash;
 
 import static org.junit.Assert.*;
 
-import java.util.List;
+//import java.util.List;
 
 import org.junit.After;
 import org.junit.Before;

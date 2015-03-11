@@ -20,7 +20,7 @@ public class DBDataManager {
 			throw new POMDataModelRuntimeException("Could not register DB driver: "+e.getMessage(), e);
 		}
 	}*/
-	private static final Logger LOG=Logger.getLogger(DBDataManager.class);
+	private static final Logger LOG = Logger.getLogger(DBDataManager.class);
 	
 	public static Connection getConnection() {
 
