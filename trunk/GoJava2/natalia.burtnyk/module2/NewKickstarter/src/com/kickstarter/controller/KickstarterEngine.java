@@ -38,7 +38,7 @@ public class KickstarterEngine {
 			Сategory category = categoriesStorage.get(input);
 			consoleView.displaySelectedCategory(category);
 			List<Project> projects = projectStorage.getProjects(category);
-			consoleView.displayProjectsOfCategory(projects);
+			consoleView.displayProjects(projects);
 			consolePart_2(category);
 			consolePart_1();
 		} else {
@@ -51,7 +51,7 @@ public class KickstarterEngine {
 		consoleView.select(2);
 		int input = inPut.readInput();
 		if (input > 0 && input <= projectStorage.getSize()) {
-			consoleView.displayCurrentProject(projectStorage.get(input));
+			consoleView.displayProject(projectStorage.get(input));
 			consolePart_3(сategory);
 			consolePart_2(сategory);
 		} else if (input == 0) {
@@ -66,7 +66,7 @@ public class KickstarterEngine {
 		consoleView.select(3);
 		int input = inPut.readInput();
 		if (input == 0) {
-			consoleView.displayProjectsOfCategory(projectStorage.getProjects(category));
+			consoleView.displayProjects(projectStorage.getProjects(category));
 		} else {
 			consolePart_3(category);
 		}

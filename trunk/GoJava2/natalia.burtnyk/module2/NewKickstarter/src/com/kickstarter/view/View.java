@@ -6,7 +6,7 @@ import com.kickstarter.model.Сategory;
 
 public class View {	
 	Out whereToOut;
-	private final String GREATING= " Welcome to Kickstarter";
+	private final String GREATING = " Welcome to Kickstarter";
 	
 	public View(Out whereToOut) {
 		this.whereToOut = whereToOut;
@@ -47,12 +47,12 @@ public class View {
 	
 	public void displaySelectedCategory(Сategory category) {
 		whereToOut.outPut("\nYour choise: " + category.getName());
+		whereToOut.outPut("\n---- Here are the projects ----\n");
 	}
 
-	public void displayProjectsOfCategory(List<Project> projects) {		
-		whereToOut.outPut("\n---- Here are the projects ----");
-		StringBuilder stringResult;
 		
+		public void displayProjects(List<Project> projects) {		
+		StringBuilder stringResult;
 		for (int i = 0; i < projects.size(); i++) {
 			stringResult = new StringBuilder();
 			stringResult.append(i + 1).append(". ")
@@ -66,7 +66,7 @@ public class View {
 		}
 	}
 	
-	public void displayCurrentProject(Project project) {
+	public void displayProject(Project project) {
 		StringBuilder stringResult = new StringBuilder();
 		stringResult.append(project.getName()).append("\n")
 					.append("Description:        ").append(project.getDescription())
