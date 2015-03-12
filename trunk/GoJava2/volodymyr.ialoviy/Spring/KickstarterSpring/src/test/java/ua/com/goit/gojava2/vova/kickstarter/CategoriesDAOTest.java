@@ -60,5 +60,4 @@ public class CategoriesDAOTest {
 			throw new RuntimeException("delete table categories from kickstartertest DB - smth wrong", e);
 		}
 	}
-
 }

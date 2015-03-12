@@ -37,9 +37,7 @@ public class Project{
 	
 	@Override
 	public String toString() {
-		return String.format("%s \n%s \n%s \n%s \n%s \n%s \n%s \n%s \n%s \n%s \n%s \n%s",
-				projectID,
-				categoryID,
+		return String.format("%s \n%s \n%s \n%s \n%s \n%s \n%s \n%s \n%s \n%s",
 				projectName,
 				shortDescription,
 				fullDescription,
