@@ -16,6 +16,7 @@ import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import com.goit.kickstarter.dao.CategoryDAO;
 import com.goit.kickstarter.dao.FaqDAO;
+import com.goit.kickstarter.dao.PaymentDAO;
 import com.goit.kickstarter.dao.ProjectDAO;
 
 @Controller
@@ -30,6 +31,9 @@ public class MainServlet extends HttpServlet {
 	@Autowired
 	private FaqDAO faqDao;
 	
+	@Autowired
+	private PaymentDAO paymentDao;
+	
 	private Map <String, Action>actions = new HashMap<String, Action>();
 
 	@Override
@@ -43,25 +47,15 @@ public class MainServlet extends HttpServlet {
 		actions.put("/projects", new ProjectsAction(categoryDao, projectDao));
 		actions.put("/project", new ProjectAction(projectDao));
 		actions.put("/faq", new FaqAction(faqDao));
+		actions.put("/payment", new PaymentAction(paymentDao, projectDao));
 	}
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException, IOException {
-		
+			throws ServletException, IOException {		
 		Action action = actions.get(getActionString(req));
 		String jsp = action.doGet(req, resp);
 		req.getRequestDispatcher(jsp).forward(req, resp);
-
-//		if (action.equals("/payment")) {
-//			projectId = Integer.valueOf(req.getParameter("project"));
-//
-//			Project project = ProjectDAO.getProject(projectId);
-//			
-//			req.setAttribute("project", project);
-//			
-//			req.getRequestDispatcher("project.jsp").forward(req, resp);
-//		}
 	}
 
 	@Override

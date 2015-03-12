@@ -41,10 +41,10 @@ public class ProjectDAOTest {
 	@Test
 	public void shouldCreateProject_whenDaoCreateProject() {
 		Project p = new Project("new project", "this is a description", 999);
-		int lengthBefore = projectDao.getLength("");
+		int lengthBefore = projectDao.getLength();
 		
 		projectDao.createProject(p);
-		int lengthAfter = projectDao.getLength("");
+		int lengthAfter = projectDao.getLength();
 		
 		assertEquals(lengthBefore+1, lengthAfter);
 	}
@@ -53,10 +53,10 @@ public class ProjectDAOTest {
 	public void shouldDeleteProject_whenDaoDeleteProject() {
 		Project p = new Project("new project", "this is a description", 999);
 		projectDao.createProject(p);
-		int lengthBefore = projectDao.getLength("");
+		int lengthBefore = projectDao.getLength();
 		
 		projectDao.deleteProject("new project");
-		int lengthAfter = projectDao.getLength("");
+		int lengthAfter = projectDao.getLength();
 		
 		assertEquals(lengthBefore-1, lengthAfter);
 	}	
