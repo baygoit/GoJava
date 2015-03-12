@@ -37,7 +37,7 @@ public class MainServlet extends HttpServlet {
 		actions.put("/", categoriesAction);
 		actions.put("/categories", new CategoriesAction(categoriesDAO));
 		actions.put("/projects", new ProjectsAction(projectsDAO));
-		actions.put("/project", new projectAction(projectsDAO));
+		actions.put("/project", new ProjectAction(projectsDAO));
 	}
 
 	@Override

@@ -13,7 +13,7 @@
 
 	<bean id="dataSource" class="org.apache.tomcat.jdbc.pool.DataSource" destroy-method="close">
 		<property name="driverClassName" value="org.postgresql.Driver" />
-		<property name="url" value="jdbc:postgresql://127.0.0.1:5432/kickstarter" />
+		<property name="url" value="jdbc:postgresql://127.0.0.1:5432/kickstartertest" />
 		<property name="username" value="postgres" />
 		<property name="password" value="7575" />
 		<property name="initialSize" value="5" />

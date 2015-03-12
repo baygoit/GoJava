@@ -6,11 +6,11 @@ import javax.servlet.http.HttpServletResponse;
 import ua.com.goit.gojava2.vova.kickstarter.model.Project;
 import ua.com.goit.gojava2.vova.kickstarter.model.Projects;
 
-public class projectAction implements Action {
+public class ProjectAction implements Action {
 
 	private Projects dao;
 
-	public projectAction(Projects projectsDAO) {
+	public ProjectAction(Projects projectsDAO) {
 		dao = projectsDAO;
 	}
 
