@@ -26,6 +26,6 @@
 				<br/> 
 			</form>	
 
-	<a href="easyindex.html">Back</a>
+	<a href="edit_type.html">Back</a>
 </body>
 </html>

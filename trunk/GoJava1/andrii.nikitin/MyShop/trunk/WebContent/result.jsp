@@ -17,6 +17,6 @@
 		String message = (String)session.getAttribute("message");	
 		out.println("<i>" + message + "</i>");
 			%>
-	<a href="easyindex.html">Back</a>
+	<a href="edit.html">Back</a>
 </body>
 </html>

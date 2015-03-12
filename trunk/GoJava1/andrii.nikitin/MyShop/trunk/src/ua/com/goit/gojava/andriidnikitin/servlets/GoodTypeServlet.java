@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import ua.com.goit.gojava.andriidnikitin.model.GoodType;
+import ua.com.goit.gojava.andriidnikitin.service.GoodCatalogImpl;
 import ua.com.goit.gojava.andriidnikitin.service.util.ShopException;
 
 public class GoodTypeServlet extends HttpServlet {
@@ -44,7 +45,6 @@ public class GoodTypeServlet extends HttpServlet {
 				GoodType result = catalog.getGoodTypeById(id);
 				message =  typeToString(result);
 			} catch (ShopException e) {
-				e.printStackTrace();
 				message = "fail to read record";
 			}
     	}
@@ -77,7 +77,7 @@ public class GoodTypeServlet extends HttpServlet {
     		message = new String();
     		List<GoodType> list;
 			try {
-				list = catalog.getAll();
+				list = catalog.getAllTypes();
 				for (GoodType type: list){
 	    			message += typeToString(type) + " <br/> ";
 	    		}

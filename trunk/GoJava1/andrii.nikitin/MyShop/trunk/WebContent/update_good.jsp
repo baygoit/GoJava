@@ -18,14 +18,14 @@
 <body>	
 		
 			
-			<form action="act-type" method="post">
-				<span>Type ID of category you want to retrieve :</span>
+			<form action="act-good" method="post">
+				<span>Set fields of good you want to update:</span>
 				<br/>
 				ID<input type="text" name="id">
 				<br/>
 				Name<input type="text" name="name">
 				<br/>
-				Parent ID<input type="text" name="parent">
+				type ID<input type="text" name="type">
 				<br/>
 				<input type="submit" name="action" value="update">
 				<br/> 
@@ -33,6 +33,6 @@
 		
 
 
-	<a href="easyindex.html">Back</a>
+	<a href="edit_type.html">Back</a>
 </body>
 </html>

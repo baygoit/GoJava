@@ -1,4 +1,4 @@
-package ua.com.goit.gojava.andriidnikitin.servlets;
+package ua.com.goit.gojava.andriidnikitin.service;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -8,6 +8,7 @@ import ua.com.goit.gojava.andriidnikitin.dao.DAOFactory;
 import ua.com.goit.gojava.andriidnikitin.dao.GenericDAO;
 import ua.com.goit.gojava.andriidnikitin.dao.PostgresqlDAOFactory;
 import ua.com.goit.gojava.andriidnikitin.dao.util.MyShopDAOException;
+import ua.com.goit.gojava.andriidnikitin.model.Good;
 import ua.com.goit.gojava.andriidnikitin.model.GoodType;
 import ua.com.goit.gojava.andriidnikitin.service.util.ShopException;
 
@@ -70,7 +71,7 @@ public class GoodCatalogImpl {
 		 }			
 	}
 
-	public List<GoodType> getAll() throws ShopException {
+	public List<GoodType> getAllTypes() throws ShopException {
 		DAOFactory daoFactory = new PostgresqlDAOFactory();
 		 try (Connection con = daoFactory.getConnection()) {
 		        GenericDAO<GoodType> dao = daoFactory.getGoodTypeDAO(con);
@@ -102,6 +103,31 @@ public class GoodCatalogImpl {
 		 } catch(SQLException e){
 			 throw new ShopException (e);		 
 		 }	
+	}
+
+	public Good createGood(String name, Integer typeId) throws ShopException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Good getGoodById(Integer id) throws ShopException{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Good updateGood(Integer id, String name, Integer typeId) throws ShopException{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void deleteGood(Integer id) throws ShopException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public List<Good> getAllGoods() throws ShopException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	

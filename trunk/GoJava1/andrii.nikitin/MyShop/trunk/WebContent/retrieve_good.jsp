@@ -13,21 +13,19 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <link href="css/stylesheet1.css" rel="stylesheet" type="text/css" />
 
-<title>Create</title>
+<title>Retrieve</title>
 </head>
 <body>	
 		
-			<form action="act-type" method="post">
-				<span>Type properties of type you want to create:</span>
+			<form action="act-good" method="post">
+				<span>Type ID of good you want to retrieve :</span>
 				<br/>
-				Name <input type="text" name="name">
+				ID<input type="text" name="id">
 				<br/>
-				Parent ID<input type="text" name="parent">
-				<br/>
-				<input type="submit" name="action" value="create"> 
+				<input type="submit" name="action" value="retrieve">
+				<br/> 
 			</form>	
-		
 
-	<a href="easyindex.html">Back</a>
+	<a href="edit_good.html">Back</a>
 </body>
 </html>

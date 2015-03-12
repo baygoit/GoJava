@@ -10,9 +10,18 @@
     <servlet-class>ua.com.goit.gojava.andriidnikitin.servlets.GoodTypeServlet</servlet-class>
     <enabled>true</enabled>
   </servlet>
-  <servlet-mapping>
+  <servlet>
+    <servlet-name>good-servlet</servlet-name>
+    <servlet-class>ua.com.goit.gojava.andriidnikitin.servlets.GoodServlet</servlet-class>
+    <enabled>true</enabled>
+  </servlet>
+   <servlet-mapping>
     <servlet-name>goodtype-servlet</servlet-name>
     <url-pattern>/act-type</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>good-servlet</servlet-name>
+    <url-pattern>/act-good</url-pattern>
   </servlet-mapping>
   <resource-ref>
         <description>DB Connection</description>

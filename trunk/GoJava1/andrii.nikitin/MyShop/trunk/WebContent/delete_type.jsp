@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	import="ua.com.goit.gojava.andriidnikitin.model.*,ua.com.goit.gojava.andriidnikitin.service.*,
+	import="ua.com.goit.gojava.andriidnikitin.model.*,
+			ua.com.goit.gojava.andriidnikitin.model.util.*,
 			ua.com.goit.gojava.andriidnikitin.service.*,
 			java.util.Enumeration,
 			ua.com.goit.gojava.andriidnikitin.servlets.*,
@@ -11,20 +12,19 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <link href="css/stylesheet1.css" rel="stylesheet" type="text/css" />
-<title>Create good type</title>
+
+<title>Delete</title>
 </head>
-<body>
-	<h2>Create</h2>
-	<p>Type name and parent type of Your new type</p>
-	<form action="act-type" method="post">
-		<span>Name</span>		
-		<input type="text" name="type">
-		<span>Parent type</span>
-		<input type="text" name="parent">
-		<input type="hidden" name="action" value="create">
-		<input type="submit">  
+<body>	
 		
-	</form>
-	<a href="index.html">Back</a>
+			<form action="act-type" method="post">
+				<span>Type ID of category you want to delete :</span>
+				<br/>
+				ID<input type="text" name="type">
+				<br/>
+				<input type="submit" name="action" value="delete"> 
+			</form>	
+
+	<a href="edit_type.html">Back</a>
 </body>
 </html>

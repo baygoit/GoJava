@@ -13,18 +13,15 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <link href="css/stylesheet1.css" rel="stylesheet" type="text/css" />
 
-<title>Delete</title>
+<title>Get all</title>
 </head>
 <body>	
 		
 			<form action="act-type" method="post">
-				<span>Type ID of category you want to delete :</span>
-				<br/>
-				ID<input type="text" name="type">
-				<br/>
-				<input type="submit" name="action" value="delete"> 
+				<span>Press button to get all categories</span>
+				<input type="submit" name="action" value="getall"> 
 			</form>	
 
-	<a href="easyindex.html">Back</a>
+<a href="edit_type.html">Back</a>
 </body>
 </html>
