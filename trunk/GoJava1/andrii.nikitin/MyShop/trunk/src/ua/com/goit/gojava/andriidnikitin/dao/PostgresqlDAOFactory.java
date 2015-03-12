@@ -10,6 +10,7 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import ua.com.goit.gojava.andriidnikitin.dao.util.MyShopDAOException;
+import ua.com.goit.gojava.andriidnikitin.model.Good;
 import ua.com.goit.gojava.andriidnikitin.model.GoodType;
 
 public class PostgresqlDAOFactory  implements DAOFactory {
@@ -54,4 +55,9 @@ public class PostgresqlDAOFactory  implements DAOFactory {
             e.printStackTrace();
         }
     }
+
+	@Override
+	public GenericDAO<Good> getGoodDAO(Connection connection) {
+		 return new PostgresqlGoodDAO(connection);
+	}
 }
