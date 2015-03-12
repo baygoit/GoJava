@@ -21,14 +21,10 @@ public class MainServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request,
             HttpServletResponse response) throws ServletException, IOException {
-
         String action = getAction(request);
-        response.setContentType("text/html;charset=utf-8");
-
-        PrintWriter pw = response.getWriter();
+        
         ConnectionToDB connectToDB = new ConnectionToDB();
-
-        Connection connection = connectToDB.getConnection();
+        Connection connection = connectToDB.getConnection("jdbc:postgresql://127.0.0.1/kickstarter", "postgres", "pass");
 
         // TODO refactoring to polymorph
         if (action.startsWith("/categories")) {
@@ -38,7 +34,7 @@ public class MainServlet extends HttpServlet {
             request.setAttribute("categories", categories);
             request.getRequestDispatcher("/categories.jsp").forward(request,
                     response);
-        } else if (action.startsWith("/projects")) {
+        } else if (action.startsWith("/projects")) { 
             ProjectsDAO projectsDAO = new ProjectsDAO(connection);
             int categoryId = Integer.valueOf(request.getParameter("category"));
             LinkedList<Project> projects = projectsDAO
