@@ -8,7 +8,7 @@
 <body>
 	<c:forEach var="category" items="${categories}">
 		<p>
-			<a href="/KickstarterWeb/projects?category=${category.getId()}">${category.getName()}</a>
+			<a href="/KickstarterWeb/projects?category=${category.id}">${category.name}</a>
 		</p>
 	</c:forEach>
 </body>
