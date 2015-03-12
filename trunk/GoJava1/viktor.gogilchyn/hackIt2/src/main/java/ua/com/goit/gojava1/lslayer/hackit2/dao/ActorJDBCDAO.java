@@ -7,25 +7,32 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import javax.sql.DataSource;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
 
 import ua.com.goit.gojava1.lslayer.hackit2.actor.Actor;
 import ua.com.goit.gojava1.lslayer.hackit2.actor.HumanControlledCharacter;
 import ua.com.goit.gojava1.lslayer.hackit2.exception.HackitIOException;
 
+@Configuration
 @ComponentScan
 public class ActorJDBCDAO {
 
-    @Autowired
-    DataSourceProvider ds;
-    
-    public Actor loadFake(int number) {
-        Connection connection = null;
-        Actor returnValue = null;
-        return returnValue;
+    @Bean
+    public ActorJDBCDAO getActorJDBCDAO() {
+        return this;
     }
 
+    @Autowired
+    DataSource ds;
+    
+    
+    
+    
     public Actor load(long newId) throws HackitIOException {
         Connection connection = null;
         Actor returnValue;
@@ -36,7 +43,7 @@ public class ActorJDBCDAO {
         PreparedStatement loadSkills = null;
         PreparedStatement loadAttributes = null;
         try {
-            connection = ds.getDataSource().getConnection();
+            connection = ds.getConnection();
             connection.setAutoCommit(false);
             loadActor = connection.prepareStatement(loadSQL);
             loadActor.setLong(1, newId);
@@ -45,7 +52,7 @@ public class ActorJDBCDAO {
                 returnValue = new HumanControlledCharacter(result.getString(1));
                 returnValue.setId(result.getLong(2));
             } else {
-                throw new HackitIOException("Error while loading actor");
+                throw new HackitIOException("Error while loading actor, no results");
             }
             loadSkills = connection.prepareStatement(loadSkillsSQL);
             loadSkills.setLong(1, returnValue.getId());
@@ -64,13 +71,13 @@ public class ActorJDBCDAO {
             return returnValue;
         } catch (Exception e) {
 //            logger.warn("Error", e);
-            throw new HackitIOException("Error while loading actor", e);
+            throw new HackitIOException("Error while loading actor, something with sql: " + e.getMessage(), e);
         } finally {
             try {
                 connection.close();
             } catch (Exception e) {
 //                logger.warn("Error", e);
-                throw new HackitIOException("Error while loading actor", e);
+                throw new HackitIOException("Error while loading actor: Error closing connection", e);
             }
         }
     }
@@ -80,19 +87,19 @@ public class ActorJDBCDAO {
         PreparedStatement deleteActor = null;
         String deleteActorSQL = "DELETE FROM actors WHERE actors.id = ?;";
         try {
-            connection = ds.getDataSource().getConnection();
+            connection = ds.getConnection();
             connection.setAutoCommit(false);
             deleteActor = connection.prepareStatement(deleteActorSQL);
             deleteActor.setLong(1, id);
             deleteActor.executeUpdate();
             connection.commit();
         } catch (Exception e) {
-            throw new HackitIOException("Error while deleting actor", e);
+            throw new HackitIOException("Error while deleting actor: " + e.getMessage(), e);
         } finally {
             try {
                 connection.close();
             } catch (Exception e) {
-                throw new HackitIOException("Error while deleting actor", e);
+                throw new HackitIOException("Error while deleting actor: Closing connection", e);
             }
         }
 
@@ -107,7 +114,7 @@ public class ActorJDBCDAO {
         PreparedStatement saveAttributes = null;
         String atributeSQL = "INSERT INTO attributes (owner, name, value) VALUES (?, ?, ?);";
         try {
-            connection = ds.getDataSource().getConnection();
+            connection = ds.getConnection();
             connection.setAutoCommit(false);
             saveActor = connection.prepareStatement(actorSQL);
             saveSkills = connection.prepareStatement(skillSQL);
@@ -161,19 +168,19 @@ public class ActorJDBCDAO {
         PreparedStatement loadAllActors = null;
         String loadAllActorsSQL = "SELECT id FROM actors;";
         try {
-            connection = ds.getDataSource().getConnection();
+            connection = ds.getConnection();
             loadAllActors = connection.prepareStatement(loadAllActorsSQL);
             ResultSet result = loadAllActors.executeQuery();
             while (result.next()) {
                 returnValue.add(this.load(result.getLong(1)));
             }
         } catch (Exception e) {
-            throw new HackitIOException("Error while loading actor", e);
+            throw new HackitIOException("Error while loading actor: " + e.getMessage(), e);
         } finally {
             try {
                 connection.close();
             } catch (Exception e) {
-               throw new HackitIOException("Error while loading actor", e);
+               throw new HackitIOException("Error while loading actor: " + e.getMessage(), e);
             }
         }
         return returnValue;
@@ -187,7 +194,7 @@ public class ActorJDBCDAO {
         PreparedStatement loadFewActors = null;
         String loadFewActorsSQL = "SELECT id FROM actors LIMIT ? OFFSET ?;";
         try {
-            connection = ds.getDataSource().getConnection();
+            connection = ds.getConnection();
             loadFewActors = connection.prepareStatement(loadFewActorsSQL);
             loadFewActors.setInt(1, howMany);
             loadFewActors.setInt(2, offset);

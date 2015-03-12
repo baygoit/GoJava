@@ -31,10 +31,19 @@ ALTER SEQUENCE attributes_seq OWNED BY attributes.id;
 
 CREATE TABLE positions (
 	id 		  INT NOT NULL DEFAULT NEXTVAL('positions_seq') PRIMARY KEY,
-	latitude  DECIMAL(2, 6),
-	longitude DECIMAL(2, 6)
+	latitude  DECIMAL(10, 6),
+	longitude DECIMAL(10, 6)
 );
 ALTER SEQUENCE positions_seq OWNED BY positions.id;
+
+ALTER TABLE actors 
+	OWNER TO goit;
+ALTER TABLE skills 
+	OWNER TO goit;
+ALTER TABLE attributes 
+	OWNER TO goit;
+ALTER TABLE positions 
+	OWNER TO goit;
 
 
 INSERT INTO 'actors' (actor_name) VALUES (?) RETURNING actors.id;

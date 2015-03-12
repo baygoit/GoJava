@@ -6,3 +6,7 @@
 4. Fill in database with actors. 
 5. Game face, your actor, possesions and action list.
 6. GameSession. Online list.
+
+
+   <bean id="getDataSource" 
+         class="ua.com.goit.gojava1.lslayer.hackit2.dao.DataSourceProvider" /> 

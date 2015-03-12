@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import ua.com.goit.gojava1.lslayer.hackit2.actor.ActorFactory;
@@ -42,11 +43,13 @@ public class ActorMaintainer extends HttpServlet {
                          HttpServletResponse response) throws ServletException, IOException {
         logger.info("GET received");
         @SuppressWarnings("resource")
-        ApplicationContext ctx =
-                new ClassPathXmlApplicationContext("beans.xml");
+        AnnotationConfigApplicationContext ctx =
+                new AnnotationConfigApplicationContext();
+        ctx.register(ActorJDBCDAO.class);
+        ctx.refresh();
         ActorJDBCDAO dao = null;
         try {
-            dao = (ActorJDBCDAO) ctx.getBean("getDAO");
+            dao = (ActorJDBCDAO) ctx.getBean("getActorJDBCDAO");
         } catch (Exception e1) {
             logger.error("Spring didn't privided DAO", e1);
             e1.printStackTrace();
@@ -95,8 +98,10 @@ public class ActorMaintainer extends HttpServlet {
             }
         }
         @SuppressWarnings("resource")
+//        ApplicationContext ctx =
+//                new ClassPathXmlApplicationContext("beans.xml");
         ApplicationContext ctx =
-                new ClassPathXmlApplicationContext("beans.xml");
+        new AnnotationConfigApplicationContext();
         ActorJDBCDAO dao = null;
         try {
             dao = (ActorJDBCDAO) ctx.getBean("getDAO");

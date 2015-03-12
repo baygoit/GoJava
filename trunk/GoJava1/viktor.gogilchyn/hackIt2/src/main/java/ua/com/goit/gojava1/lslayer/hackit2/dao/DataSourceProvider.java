@@ -6,11 +6,15 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+
+@Configuration
 public class DataSourceProvider {
 
+    @Bean
     public DataSource getDataSource() {
             InitialContext cxt;
             DataSource ds = null;
