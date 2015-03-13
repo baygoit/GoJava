@@ -8,14 +8,14 @@
 <body>
 	<c:forEach var="project" items="${projects}">
 		<p>
-			<a href="/KickstarterWeb/project?project=${project.getName()}">${project.getName()}</a><br>
-			${project.getDescription()}<br>
-			${project.getNeedSum()}<br>
-			${project.getCurrentSum()}<br>
-			${project.getDaysLeft()}<br>
-			${project.getProjectHistory()}<br>
-			${project.getLinkOnvideo()}<br>
-			${project.getQuestionsAndAnswers()}<br>
+			<a href="/KickstarterMaven/project?project=${project.name}">${project.name}</a><br>
+			${project.description}<br>
+			${project.needSum}<br>
+			${project.currentSum}<br>
+			${project.daysLeft}<br>
+			${project.projectHistory}<br>
+			${project.linkOnvideo}<br>
+			${project.questionsAndAnswers}<br>
 		</p>
 	</c:forEach>
 </body>
