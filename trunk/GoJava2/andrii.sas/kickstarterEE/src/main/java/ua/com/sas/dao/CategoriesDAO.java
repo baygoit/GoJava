@@ -18,8 +18,7 @@ public class CategoriesDAO extends AbstractDAO implements Categories {
 	public void add(Category category) {
 		try (Connection connection = getConnection()) {
 			Statement statement = connection.createStatement();
-			statement.execute("INSERT INTO categories (name) VALUES (\'" + category.getName() + "\')");
-			ResultSet rs = statement.executeQuery("SELECT * FROM categories WHERE name = \'" + category.getName() + "\'");
+			ResultSet rs = statement.executeQuery("INSERT INTO categories (name) VALUES (\'" + category.getName() + "\') RETURNING id");
 			while (rs.next()){
 				category.setId(rs.getInt(1));
 			}

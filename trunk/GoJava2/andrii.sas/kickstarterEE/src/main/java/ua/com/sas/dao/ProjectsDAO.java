@@ -21,9 +21,8 @@ public class ProjectsDAO extends AbstractDAO implements Projects{
 	@Override
 	public void add(Project project) {
 		try (Connection connection = getConnection()) {
-			Statement stat = connection.createStatement();
 			PreparedStatement statement = connection.prepareStatement("INSERT INTO projects (category_id, name, description, money_need,"
-					+ " money_has, days_left, history, video_link, question) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+					+ " money_has, days_left, history, video_link, question) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING id");
 			statement.setInt(1, project.getCategoryId());
 			statement.setString(2, project.getName());
 			statement.setString(3, project.getDescription());
@@ -33,8 +32,7 @@ public class ProjectsDAO extends AbstractDAO implements Projects{
 			statement.setString(7, project.getHistory());
 			statement.setString(8, project.getVideoLink());
 			statement.setString(9, project.getQuestion());
-			statement.execute();
-			ResultSet rs = stat.executeQuery("SELECT * FROM projects WHERE name = \'" + project.getName() + "\'");
+			ResultSet rs = statement.executeQuery();
 			while (rs.next()){
 				project.setId(rs.getInt(1));
 			}
