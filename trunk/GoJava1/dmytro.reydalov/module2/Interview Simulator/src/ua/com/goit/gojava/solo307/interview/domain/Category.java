@@ -1,9 +1,11 @@
-package ua.com.goit.gojava2.solo307.interview;
+package ua.com.goit.gojava.solo307.interview.domain;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import ua.com.goit.gojava.solo307.interview.utils.InterviewSimulatorException;
 
 public class Category {
 
@@ -11,7 +13,7 @@ public class Category {
 	private String name;
 	private List<Question> questions = new ArrayList<Question>();
 
-	public Category(int id, String name, List<Question> questions) {
+	public Category(int id, String name, List<Question> questions) { 
 		this.id = id;
 		this.name = name;
 		this.questions = questions;

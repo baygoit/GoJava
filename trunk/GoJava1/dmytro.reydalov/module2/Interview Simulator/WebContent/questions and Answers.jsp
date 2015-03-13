@@ -1,6 +1,6 @@
-<%@page import="ua.com.goit.gojava2.solo307.interview.InterviewSimulatorException"%>
-<%@page import="ua.com.goit.gojava2.solo307.interview.Interview"%>
-<%@page import="ua.com.goit.gojava2.solo307.interview.Category"%>
+<%@page import="ua.com.goit.gojava.solo307.interview.utils.InterviewSimulatorException"%>
+<%@page import="ua.com.goit.gojava.solo307.interview.domain.Interview"%>
+<%@page import="ua.com.goit.gojava.solo307.interview.domain.Category"%>
 <%@page import="java.io.File"%>
 <%@page import="java.util.List"%>
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>

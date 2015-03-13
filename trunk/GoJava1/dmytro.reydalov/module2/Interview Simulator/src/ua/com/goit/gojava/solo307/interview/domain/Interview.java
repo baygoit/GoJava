@@ -1,12 +1,17 @@
-package ua.com.goit.gojava2.solo307.interview;
+package ua.com.goit.gojava.solo307.interview.domain;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import ua.com.goit.gojava.solo307.interview.dao.CategoryDAO;
+import ua.com.goit.gojava.solo307.interview.dao.InterviewDAO;
+import ua.com.goit.gojava.solo307.interview.utils.InterviewSimulatorException;
+import ua.com.goit.gojava.solo307.interview.utils.StatisticsDTO;
+
 public class Interview {
 
-	private static InterviewDAO interviewDAO;
-	private static CategoryDAO categoryDAO;
+	private InterviewDAO interviewDAO = new InterviewDAO();
+	private CategoryDAO categoryDAO = new CategoryDAO();
 	private List<Category> categories = new ArrayList<Category>();
 
 	public List<Category> getCategories() {
@@ -20,14 +25,14 @@ public class Interview {
 	public void createCategories() throws InterviewSimulatorException {
 		this.categories = categoryDAO.getCategoriesList();
 		List<Question> questions = categoryDAO.getQuestions();
-		categoryDAO.fillQuestions(questions);
+		categoryDAO.attachAnswers(questions);
 		categoryDAO.fillCategories(categories, questions);
 	}
 
 	public void createCategories(String[] names) throws InterviewSimulatorException {
 		this.categories = categoryDAO.getCategories(names);
 		List<Question> questions = categoryDAO.getQuestions();
-		categoryDAO.fillQuestions(questions);
+		categoryDAO.attachAnswers(questions);
 		categoryDAO.fillCategories(categories, questions);
 	}
 
@@ -41,36 +46,40 @@ public class Interview {
 		return composed;
 	}
 
-	public static long readStartTime() {
+	public long getStartTime() {
 		long start = 0;
 		try {
-			start = interviewDAO.readStartTime();
+			start = interviewDAO.getStartTime();
 		} catch (InterviewSimulatorException e) {
 			e.printStackTrace();
 		}
 		return start;
 	}
 
-	public static void persistName(String name) {
+	public void addName(String name) {
 		try {
-			interviewDAO.writeName(name);
+			interviewDAO.addName(name);
 		} catch (InterviewSimulatorException e) {
-			System.out.println(e.getMessage());
+			e.getMessage();
+			e.printStackTrace();
+		} catch (NullPointerException e) {
+			e.getMessage();
+			e.printStackTrace();
 		}
 	}
 
-	public static void persistTime(long start) {
+	public void addTime(long start) {
 		try {
-			interviewDAO.writeTime(start);
+			interviewDAO.addStartTime(start);
 		} catch (InterviewSimulatorException e) {
 			e.getMessage();
 			e.printStackTrace();
 		}
 	}
 
-	public static void persistStatistics(StatisticsDTO dto) {
+	public void addStatistics(StatisticsDTO dto) {
 		try {
-			interviewDAO.persistStatistics(dto);
+			interviewDAO.addStatistics(dto);
 		} catch (InterviewSimulatorException e) {
 			e.getMessage();
 			e.printStackTrace();

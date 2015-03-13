@@ -1,6 +1,10 @@
-package ua.com.goit.gojava2.solo307.interview;
+package ua.com.goit.gojava.solo307.interview.utils;
 
 import java.util.Set;
+
+import ua.com.goit.gojava.solo307.interview.domain.Category;
+import ua.com.goit.gojava.solo307.interview.domain.Interview;
+import ua.com.goit.gojava.solo307.interview.domain.Question;
 
 public class Assessor {
 
@@ -21,7 +25,8 @@ public class Assessor {
 	public static StatisticsDTO getStatisticsDTO(String[] answers) {
 		Set<Question> reconstructed = getReconstructedQuestions(answers);
 		StatisticsDTO dto = new StatisticsDTO(reconstructed);
-		long start = Interview.readStartTime();
+		Interview interview = new Interview();
+		long start = interview.getStartTime();
 		String time = "";
 		try {
 			time = TimeCounter.getTime(start);

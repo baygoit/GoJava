@@ -1,4 +1,4 @@
-package ua.com.goit.gojava2.solo307.interview;
+package ua.com.goit.gojava2.solo307.interview.domain;
 
 import static org.junit.Assert.*;
 
@@ -7,6 +7,10 @@ import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import ua.com.goit.gojava.solo307.interview.domain.Answer;
+import ua.com.goit.gojava.solo307.interview.domain.Question;
+import ua.com.goit.gojava.solo307.interview.utils.InterviewSimulatorException;
 
 public class QuestionTest {
 	List<Answer> answers = new ArrayList<Answer>();

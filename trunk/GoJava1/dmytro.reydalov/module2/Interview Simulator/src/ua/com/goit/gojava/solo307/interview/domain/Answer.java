@@ -1,12 +1,12 @@
-package ua.com.goit.gojava2.solo307.interview;
+package ua.com.goit.gojava.solo307.interview.domain;
 
 public class Answer {
 
 	private int questionId;
 	int id;
 	private String text;
-	boolean isCorrect;
-	boolean isChecked;
+	private boolean isCorrect;
+	private boolean isChecked;
 
 	public Answer() {
 		text = "there is an answer must be here...";

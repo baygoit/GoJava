@@ -1,4 +1,4 @@
-package ua.com.goit.gojava2.solo307.interview;
+package ua.com.goit.gojava.solo307.interview.dao;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -8,6 +8,8 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import ua.com.goit.gojava.solo307.interview.utils.InterviewSimulatorException;
+
 public class ConnectorJDBC {
 
 	private InitialContext initialContext;
@@ -15,25 +17,26 @@ public class ConnectorJDBC {
 	public ConnectorJDBC() throws InterviewSimulatorException {
 		try {
 			initialContext = new InitialContext();
+			LoggerDAO.daoLogger.trace("Creating initial context was successfull");
 		} catch (NamingException e) {
-			e.printStackTrace();
+			LoggerDAO.daoLogger.error(e);
 			throw new InterviewSimulatorException("Somesthing went wrong with creating InitialContext");
 		}
 	}
 
 	public Connection openAccess() throws InterviewSimulatorException {
-		Context context = null;
-		DataSource dataSource = null;
 		Connection connection = null;
+		Context context = null;
 		try {
 			context = (Context) initialContext.lookup("java:comp/env");
-			dataSource = (DataSource) context.lookup("jdbc/root");
+			DataSource dataSource = (DataSource) context.lookup("jdbc/root");
 			connection = dataSource.getConnection();
+			LoggerDAO.daoLogger.trace("Getting connection from dataSource was successfull");
 		} catch (NamingException e) {
-			e.printStackTrace();
+			LoggerDAO.daoLogger.error(e);
 			throw new InterviewSimulatorException("Somesthing went wrong with lookup");
 		} catch (SQLException e) {
-			e.printStackTrace();
+			LoggerDAO.daoLogger.error(e);
 			throw new InterviewSimulatorException("Somesthing went wrong with getting connection");
 		}
 		return connection;

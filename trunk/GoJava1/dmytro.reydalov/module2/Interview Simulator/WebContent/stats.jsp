@@ -1,4 +1,4 @@
-<%@page import="ua.com.goit.gojava2.solo307.interview.StatisticsDTO"%>
+<%@page import="ua.com.goit.gojava.solo307.interview.utils.StatisticsDTO"%>
 <%@page import="java.util.List"%>
 <%@page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>

@@ -1,9 +1,13 @@
-package ua.com.goit.gojava2.solo307.interview;
+package ua.com.goit.gojava.solo307.interview.utils;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import ua.com.goit.gojava.solo307.interview.domain.Answer;
+import ua.com.goit.gojava.solo307.interview.domain.Mark;
+import ua.com.goit.gojava.solo307.interview.domain.Question;
 
 public class StatisticsDTO {
 
@@ -121,7 +125,7 @@ public class StatisticsDTO {
 			if (question.hasIncorrectAnswer())
 				dto.add(question.getText());
 			for (Answer answer : question.getMarkedAnswers()) {
-				if (!answer.isCorrect)
+				if (!answer.isAnswerCorrect())
 					dto.add(answer.getText());
 			}
 		}

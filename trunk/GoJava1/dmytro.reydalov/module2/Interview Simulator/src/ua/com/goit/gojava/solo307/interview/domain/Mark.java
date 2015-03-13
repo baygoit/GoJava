@@ -1,4 +1,4 @@
-package ua.com.goit.gojava2.solo307.interview;
+package ua.com.goit.gojava.solo307.interview.domain;
 
 public class Mark {
 

@@ -1,4 +1,4 @@
-package ua.com.goit.gojava2.solo307.interview;
+package ua.com.goit.gojava.solo307.interview.web;
 
 import java.io.IOException;
 
@@ -7,6 +7,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import ua.com.goit.gojava.solo307.interview.domain.Interview;
 
 @WebServlet("/Hostes")
 public class Hostes extends HttpServlet {
@@ -20,8 +22,8 @@ public class Hostes extends HttpServlet {
 			IOException {
 		response.setContentType("text/html;charset=utf-8");
 		String name = request.getParameter("fname");
-		Interview.persistName(name);
+		Interview interview = new Interview();
+		interview.addName(name);
 		request.getRequestDispatcher("menu.jsp").forward(request, response);
 	}
-
 }

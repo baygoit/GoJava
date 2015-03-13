@@ -1,7 +1,9 @@
-package ua.com.goit.gojava2.solo307.interview;
+package ua.com.goit.gojava.solo307.interview.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import ua.com.goit.gojava.solo307.interview.utils.InterviewSimulatorException;
 
 public class Question {
 
@@ -101,7 +103,6 @@ public class Question {
 		throw new InterviewSimulatorException("no such answer id in question");
 	}
 
-	
 	public void evaluateMark() {
 		int counter = countMarkedCorrectAnswers();
 		final int CORRECT_ANSWERS = countCorrectAnswers();
@@ -113,19 +114,19 @@ public class Question {
 			mark.setCorrect(true);
 	}
 
-	public int countMarkedCorrectAnswers(){
+	public int countMarkedCorrectAnswers() {
 		int counter = ZERO;
 		for (Answer answer : markedAnswers) {
-			if (answer.isCorrect)
+			if (answer.isAnswerCorrect())
 				counter++;
 		}
 		return counter;
 	}
-	
+
 	public int countCorrectAnswers() {
 		int counter = 0;
 		for (Answer answer : answers) {
-			if (answer.isCorrect)
+			if (answer.isAnswerCorrect())
 				counter++;
 		}
 		return counter;
@@ -133,7 +134,7 @@ public class Question {
 
 	public boolean hasIncorrectAnswer() {
 		for (Answer answer : markedAnswers) {
-			if (!answer.isCorrect)
+			if (!answer.isAnswerCorrect())
 				return true;
 		}
 		return false;
