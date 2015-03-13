@@ -25,12 +25,11 @@ public class MainServlet extends HttpServlet {
         
         ConnectionToDB connectToDB = new ConnectionToDB();
         Connection connection = connectToDB.getConnection("jdbc:postgresql://127.0.0.1/kickstarter", "postgres", "pass");
-
+        
         // TODO refactoring to polymorph
         if (action.startsWith("/categories")) {
             CategoriesDAO categoriesDAO = new CategoriesDAO(connection);
             LinkedList<Category> categories = categoriesDAO.getCategoriesList();
-
             request.setAttribute("categories", categories);
             request.getRequestDispatcher("/categories.jsp").forward(request,
                     response);
@@ -39,7 +38,6 @@ public class MainServlet extends HttpServlet {
             int categoryId = Integer.valueOf(request.getParameter("category"));
             LinkedList<Project> projects = projectsDAO
                     .getProjectsList(categoryId);
-
             request.setAttribute("projects", projects);
             request.getRequestDispatcher("/projects.jsp").forward(request,
                     response);

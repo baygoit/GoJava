@@ -30,14 +30,6 @@ public class ProjectsDAO {
         ResultSet resultSet = getResultSet("SELECT * FROM projects WHERE category_id = " + categoryId);
         try {
             while (resultSet.next()) {
-//                projects.add(new Project(resultSet.getString("name"), resultSet
-//                        .getString("description"),
-//                        resultSet.getInt("need_sum"), resultSet
-//                        .getInt("currnt_sum"), resultSet
-//                        .getInt("days_left"), resultSet
-//                        .getString("project_history"), resultSet
-//                        .getString("link_on_video"), resultSet
-//                        .getString("questions_and_answers")));
                 projects.add(new Project(resultSet.getString("name"), resultSet
                       .getString("description"), resultSet.getInt("need_sum"), resultSet
                     .getInt("current_sum"), resultSet
