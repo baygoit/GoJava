@@ -22,7 +22,7 @@
 				<br/>
 				Name <input type="text" name="name">
 				<br/>
-				Type ID<input type="text" name="parent">
+				Type ID<input type="text" name="type">
 				<br/>
 				<input type="submit" name="action" value="create"> 
 			</form>	

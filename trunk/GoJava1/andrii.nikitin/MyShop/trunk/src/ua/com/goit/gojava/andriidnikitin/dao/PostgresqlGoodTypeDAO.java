@@ -7,12 +7,17 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
 import ua.com.goit.gojava.andriidnikitin.dao.util.MyShopDAOException;
 import ua.com.goit.gojava.andriidnikitin.model.GoodType;
+import ua.com.goit.gojava.andriidnikitin.util.ErrorLogger;
 
 public class PostgresqlGoodTypeDAO implements GenericDAO<GoodType> {
 	
 	private Connection connection;
+
+	private static Logger log = Logger.getLogger("MyShop.DAO");
 
     public PostgresqlGoodTypeDAO(Connection connection) {
         this.connection = connection;
@@ -33,6 +38,8 @@ public class PostgresqlGoodTypeDAO implements GenericDAO<GoodType> {
 		    typeId = rs.getInt("type_id");	
 		    return typeId;
 		} catch (SQLException e) {
+			String errorSpot = "creating record of GoodType object in DB ";
+			ErrorLogger.logSQLException(e, errorSpot, log);
 			throw new MyShopDAOException(e);
 		}	    
 	}
@@ -77,7 +84,9 @@ public class PostgresqlGoodTypeDAO implements GenericDAO<GoodType> {
 	        rec.setName(name);
 	        rec.setParentId(parentId);	 
 		} catch (SQLException e) {
-			if ((typeId == null)  || (name == null)){		
+			if ((typeId == null)  || (name == null)){
+				String errorSpot = "retrieving record of GoodType object in DB ";
+				ErrorLogger.logSQLException(e, errorSpot, log);
 				throw new MyShopDAOException(e);		
 			} 
 		}		       
@@ -108,6 +117,9 @@ public class PostgresqlGoodTypeDAO implements GenericDAO<GoodType> {
 			}
 		    stm.executeUpdate();	
 	    } catch (SQLException e) {
+
+			String errorSpot = "updating record of GoodType object in DB ";
+			ErrorLogger.logSQLException(e, errorSpot, log);
 			throw new MyShopDAOException(e);
 		}
 
@@ -122,6 +134,8 @@ public class PostgresqlGoodTypeDAO implements GenericDAO<GoodType> {
 		    stm.setInt(1, key);
 		    stm.executeUpdate();		
 	    } catch (SQLException e) {
+			String errorSpot = "deleting record of GoodType object in DB ";
+			ErrorLogger.logSQLException(e, errorSpot, log);
 			throw new MyShopDAOException(e);
 		}
 
@@ -145,6 +159,8 @@ public class PostgresqlGoodTypeDAO implements GenericDAO<GoodType> {
 	        }
 	        return list;
         } catch (SQLException e) {
+			String errorSpot = "retrieving all records of GoodType objects in DB ";
+			ErrorLogger.logSQLException(e, errorSpot, log);
 			throw new MyShopDAOException(e);
 		}
 	}

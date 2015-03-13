@@ -6,13 +6,19 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.apache.log4j.Logger;
+
 import ua.com.goit.gojava.andriidnikitin.dao.util.MyShopDAOException;
 import ua.com.goit.gojava.andriidnikitin.model.Good;
 import ua.com.goit.gojava.andriidnikitin.model.GoodType;
+import ua.com.goit.gojava.andriidnikitin.util.ErrorLogger;
 
 public class PostgresqlGoodDAO implements GenericDAO<Good> {
 	private Connection connection;
 
+	private static Logger log = Logger.getLogger("MyShop.DAO");
+	
     public PostgresqlGoodDAO(Connection connection) {
         this.connection = connection;
     }
@@ -32,58 +38,47 @@ public class PostgresqlGoodDAO implements GenericDAO<Good> {
 		    typeId = rs.getInt("good_id");	
 		    return typeId;
 		} catch (SQLException e) {
+			String errorSpot = "creating record of Good object in DB ";
+			ErrorLogger.logSQLException(e, errorSpot, log);
 			throw new MyShopDAOException(e);
 		}	    
 	}
 
-	//TODO - finish
 	@Override
 	public Good read(Integer key) throws MyShopDAOException {
-		if (key == null){
-			return null;
-		}
-		Good result = new Good();
-		GoodTypeRecord temp = readRecord(key);
-		Integer typeID =  temp.getParentId();
-		result.setId(temp.getId());
-		result.setName(temp.getName());
-		result.setType(null);
-		if ((typeID != null) && (typeID != 0)) {			
-		//	result.setType(read(typeID));
-		}
-		return result;
+		 Good result = null;
+			String name = null;
+		    Integer goodId = null;
+		    Integer typeId = null;
+			try {
+		        String sql = "SELECT * FROM \"Good\" WHERE good_id=?;";
+		        PreparedStatement stm = connection.prepareStatement(sql);
+		        stm.setInt(1, key);
+		        ResultSet rs = stm.executeQuery();
+		        rs.next();
+		        name = rs.getString("name");
+		        goodId = rs.getInt("good_id");
+		        try { 
+		        	typeId = rs.getInt("type_id");
+		        } catch (Exception e){
+		        	typeId = null;
+		        }
+		        result = new Good();
+		        result.setId(goodId);
+		        result.setName(name);
+		        PostgresqlDAOFactory factory = PostgresqlDAOFactory.getInstance();
+		        GenericDAO<GoodType> dao = factory.getGoodTypeDAO(connection);
+		        result.setType(dao.read(typeId));	 
+			} catch (SQLException e) {
+				if ((goodId == null)  || (name == null)){	
+					String errorSpot = "reading record of Good object in DB ";
+					ErrorLogger.logSQLException(e, errorSpot, log);
+					throw new MyShopDAOException(e);		
+				} 
+			}		       
+	        return result;	
 	}
-	
-	private GoodTypeRecord readRecord(Integer key) throws MyShopDAOException {
-        GoodTypeRecord rec = null;
-		String name = null;
-	    Integer typeId = null;
-	    Integer parentId = null;
-		try {
-	        String sql = "SELECT * FROM \"Good\" WHERE good_id=?;";
-	        PreparedStatement stm = connection.prepareStatement(sql);
-	        stm.setInt(1, key);
-	        ResultSet rs = stm.executeQuery();
-	        rs.next();
-	        name = rs.getString("name");
-	        typeId = rs.getInt("good_id");
-	        try { 
-	        	parentId = rs.getInt("type_id");
-	        } catch (Exception e){
-	        	parentId = null;
-	        }
-	        rec = new GoodTypeRecord();
-	        rec.setId(typeId);
-	        rec.setName(name);
-	        rec.setParentId(parentId);	 
-		} catch (SQLException e) {
-			if ((typeId == null)  || (name == null)){		
-				throw new MyShopDAOException(e);		
-			} 
-		}		       
-        return rec;		
-	}
-
+		
 	@Override
 	public void update(Good unit) throws MyShopDAOException {
 		try {
@@ -108,6 +103,8 @@ public class PostgresqlGoodDAO implements GenericDAO<Good> {
 			}
 		    stm.executeUpdate();	
 	    } catch (SQLException e) {
+	    	String errorSpot = "updating record of Good object in DB ";
+			ErrorLogger.logSQLException(e, errorSpot, log);
 			throw new MyShopDAOException(e);
 		}
 
@@ -122,6 +119,8 @@ public class PostgresqlGoodDAO implements GenericDAO<Good> {
 		    stm.setInt(1, key);
 		    stm.executeUpdate();		
 	    } catch (SQLException e) {
+	    	String errorSpot = "deleting record of Good object in DB ";
+			ErrorLogger.logSQLException(e, errorSpot, log);
 			throw new MyShopDAOException(e);
 		}
 
@@ -144,35 +143,9 @@ public class PostgresqlGoodDAO implements GenericDAO<Good> {
 	        }
 	        return list;
         } catch (SQLException e) {
+        	String errorSpot = "retrieving all records of Good objects in DB ";
+			ErrorLogger.logSQLException(e, errorSpot, log);
 			throw new MyShopDAOException(e);
 		}
-	}
-	
-	//TODO - delete?
-	private class GoodTypeRecord{
-		private String name;
-		private Integer id;
-		private Integer parentId;
-		public String getName() {
-			return name;
-		}
-		public void setName(String name) {
-			this.name = name;
-		}
-		public Integer getId() {
-			return id;
-		}
-		public void setId(Integer id) {
-			this.id = id;
-		}
-		public Integer getParentId() {
-			return parentId;
-		}
-		public void setParentId(Integer parentId) {
-			this.parentId = parentId;
-		}
-		
-	}
-
-
+	}	
 }

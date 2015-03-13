@@ -1,9 +1,16 @@
 package ua.com.goit.gojava.andriidnikitin.servlets;
 
-import ua.com.goit.gojava.andriidnikitin.service.util.FileWorker;
+import org.apache.log4j.Logger;
+
+import ua.com.goit.gojava.andriidnikitin.util.ErrorLogger;
+
+
 
 public class MyShopGUIException {
+
+	private static Logger log = Logger.getLogger("MyShop.GUI");
+	
 	static void logException(Exception e){
-		FileWorker.write("errlog.txt", e.getMessage());
+		ErrorLogger.logException(e, log);
 	}
 }
