@@ -2,13 +2,14 @@ ua\com\goit\gojava2\vova\kickstarter\controller\MainServlet.class
 ua\com\goit\gojava2\vova\kickstarter\model\Project.class
 ua\com\goit\gojava2\vova\kickstarter\controller\ProjectsAction.class
 ua\com\goit\gojava2\vova\kickstarter\model\Categories.class
+ua\com\goit\gojava2\vova\kickstarter\controller\ProjectAction.class
+ua\com\goit\gojava2\vova\kickstarter\util\Random.class
 ua\com\goit\gojava2\vova\kickstarter\model\ProjectsDAO.class
 ua\com\goit\gojava2\vova\kickstarter\util\PeriodBetweenDates.class
 ua\com\goit\gojava2\vova\kickstarter\controller\Action.class
 ua\com\goit\gojava2\vova\kickstarter\model\QuotesDAO.class
 ua\com\goit\gojava2\vova\kickstarter\model\Quotes.class
 ua\com\goit\gojava2\vova\kickstarter\controller\CategoriesAction.class
-ua\com\goit\gojava2\vova\kickstarter\controller\projectAction.class
 ua\com\goit\gojava2\vova\kickstarter\model\CategoriesDAO.class
 ua\com\goit\gojava2\vova\kickstarter\model\Category.class
 ua\com\goit\gojava2\vova\kickstarter\model\AbstractDAO.class
