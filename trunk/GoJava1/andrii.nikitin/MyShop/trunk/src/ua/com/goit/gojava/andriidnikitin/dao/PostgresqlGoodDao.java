@@ -9,25 +9,28 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import ua.com.goit.gojava.andriidnikitin.dao.util.MyShopDAOException;
-import ua.com.goit.gojava.andriidnikitin.model.Good;
-import ua.com.goit.gojava.andriidnikitin.model.GoodType;
-import ua.com.goit.gojava.andriidnikitin.util.ErrorLogger;
+import ua.com.goit.gojava.andriidnikitin.commons.ErrorLogger;
+import ua.com.goit.gojava.andriidnikitin.dao.util.MyShopDaoException;
+import ua.com.goit.gojava.andriidnikitin.domain.model.Good;
+import ua.com.goit.gojava.andriidnikitin.domain.model.GoodType;
 
-public class PostgresqlGoodDAO implements GenericDAO<Good> {
+public class PostgresqlGoodDao implements GenericDao<Good> {
 	private Connection connection;
 
 	private static Logger log = Logger.getLogger("MyShop.DAO");
+	private static final String CLASSNAME = PostgresqlGoodDao.class.getCanonicalName();
+	private static final String GOOD_CLASSNAME = Good.class.getCanonicalName();
 	
-    public PostgresqlGoodDAO(Connection connection) {
+    public PostgresqlGoodDao(Connection connection) {
+		   log.info("Created new instance of " + CLASSNAME + " using connection " + connection.toString());
         this.connection = connection;
     }
 
 	@Override
-	public Integer create(Good arg) throws MyShopDAOException {
+	public Integer create(Good arg) throws MyShopDaoException {
 		String sql = "INSERT INTO \"Good\"(name, type_id) VALUES ( ?, ?) RETURNING good_id;";
 	    PreparedStatement stm;
-	    Integer typeId;
+	    Integer goodId;
 		try {
 			stm = connection.prepareStatement(sql);		
 		    stm.setString(1, arg.getName());
@@ -35,17 +38,19 @@ public class PostgresqlGoodDAO implements GenericDAO<Good> {
 		    stm.setInt(2, parent.getId());
 		    ResultSet rs = stm.executeQuery();
 		    rs.next();
-		    typeId = rs.getInt("good_id");	
-		    return typeId;
+		    goodId = rs.getInt("good_id");	
+		    log.info("Created new instance of " + GOOD_CLASSNAME + " by " 
+		    		+ this.toString() + " with id " + goodId);
+		    return goodId;
 		} catch (SQLException e) {
 			String errorSpot = "creating record of Good object in DB ";
 			ErrorLogger.logSQLException(e, errorSpot, log);
-			throw new MyShopDAOException(e);
+			throw new MyShopDaoException(e);
 		}	    
 	}
 
 	@Override
-	public Good read(Integer key) throws MyShopDAOException {
+	public Good read(Integer key) throws MyShopDaoException {
 		 Good result = null;
 			String name = null;
 		    Integer goodId = null;
@@ -61,38 +66,42 @@ public class PostgresqlGoodDAO implements GenericDAO<Good> {
 		        try { 
 		        	typeId = rs.getInt("type_id");
 		        } catch (Exception e){
+		        	log.warn("type of Good with id = " + key + " is null");
 		        	typeId = null;
 		        }
 		        result = new Good();
 		        result.setId(goodId);
 		        result.setName(name);
-		        PostgresqlDAOFactory factory = PostgresqlDAOFactory.getInstance();
-		        GenericDAO<GoodType> dao = factory.getGoodTypeDAO(connection);
+		        PostgresqlDaoFactory factory = PostgresqlDaoFactory.getInstance();
+		        GenericDao<GoodType> dao = factory.getGoodTypeDAO(connection);
 		        result.setType(dao.read(typeId));	 
 			} catch (SQLException e) {
 				if ((goodId == null)  || (name == null)){	
 					String errorSpot = "reading record of Good object in DB ";
 					ErrorLogger.logSQLException(e, errorSpot, log);
-					throw new MyShopDAOException(e);		
+					throw new MyShopDaoException(e);		
 				} 
-			}		       
+			}		  
+
+		    log.info("Retrieved new instance of " + GOOD_CLASSNAME + " by " 
+		    		+ this.toString() + " with id " + goodId);
 	        return result;	
 	}
 		
 	@Override
-	public void update(Good unit) throws MyShopDAOException {
+	public void update(Good unit) throws MyShopDaoException {
+		int key = unit.getId();
 		try {
-			int key = unit.getId();
 			GoodType type = unit.getType();
-			Integer parentKey = type.getId();				
+			Integer typeId = type.getId();				
 			String name = unit.getName();
 			String sql;
 			PreparedStatement stm;
-			if (parentKey!= null){
+			if (typeId!= null){
 				sql = "UPDATE \"Good\" SET name=?, type_id=? WHERE good_id = ?;";	
 			    stm = connection.prepareStatement(sql);
 			    stm.setString(1, name);
-			    stm.setInt(2, parentKey);
+			    stm.setInt(2, typeId);
 			    stm.setInt(3, key);
 			}
 			else {
@@ -105,13 +114,14 @@ public class PostgresqlGoodDAO implements GenericDAO<Good> {
 	    } catch (SQLException e) {
 	    	String errorSpot = "updating record of Good object in DB ";
 			ErrorLogger.logSQLException(e, errorSpot, log);
-			throw new MyShopDAOException(e);
+			throw new MyShopDaoException(e);
 		}
+		log.info(GOOD_CLASSNAME + " with id = " + key + " was succesfully updated");
 
 	}
 
 	@Override
-	public void delete(Good unit) throws MyShopDAOException {
+	public void delete(Good unit) throws MyShopDaoException {
 		try {
 			int key = unit.getId();
 			String sql = "DELETE FROM \"Good\" WHERE good_id = ?;";
@@ -121,13 +131,13 @@ public class PostgresqlGoodDAO implements GenericDAO<Good> {
 	    } catch (SQLException e) {
 	    	String errorSpot = "deleting record of Good object in DB ";
 			ErrorLogger.logSQLException(e, errorSpot, log);
-			throw new MyShopDAOException(e);
+			throw new MyShopDaoException(e);
 		}
 
 	}
 
 	@Override
-	public List<Good> getAll() throws MyShopDAOException {
+	public List<Good> getAll() throws MyShopDaoException {
 		try {
 	        String sql = "SELECT \"good_id\" FROM \"Good\"";
 	        PreparedStatement stm = connection.prepareStatement(sql);
@@ -145,7 +155,7 @@ public class PostgresqlGoodDAO implements GenericDAO<Good> {
         } catch (SQLException e) {
         	String errorSpot = "retrieving all records of Good objects in DB ";
 			ErrorLogger.logSQLException(e, errorSpot, log);
-			throw new MyShopDAOException(e);
+			throw new MyShopDaoException(e);
 		}
 	}	
 }

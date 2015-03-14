@@ -1,4 +1,4 @@
-package ua.com.goit.gojava.andriidnikitin.model;
+package ua.com.goit.gojava.andriidnikitin.domain.model;
 
 public class Good {
 	

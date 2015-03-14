@@ -1,4 +1,4 @@
-package ua.com.goit.gojava.andriidnikitin.service.util;
+package ua.com.goit.gojava.andriidnikitin.domain.service.util;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;

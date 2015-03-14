@@ -9,22 +9,22 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import ua.com.goit.gojava.andriidnikitin.dao.util.MyShopDAOException;
-import ua.com.goit.gojava.andriidnikitin.model.GoodType;
-import ua.com.goit.gojava.andriidnikitin.util.ErrorLogger;
+import ua.com.goit.gojava.andriidnikitin.commons.ErrorLogger;
+import ua.com.goit.gojava.andriidnikitin.dao.util.MyShopDaoException;
+import ua.com.goit.gojava.andriidnikitin.domain.model.GoodType;
 
-public class PostgresqlGoodTypeDAO implements GenericDAO<GoodType> {
+public class PostgresqlGoodTypeDao implements GenericDao<GoodType> {
 	
 	private Connection connection;
 
 	private static Logger log = Logger.getLogger("MyShop.DAO");
 
-    public PostgresqlGoodTypeDAO(Connection connection) {
+    public PostgresqlGoodTypeDao(Connection connection) {
         this.connection = connection;
     }
 
 	@Override
-	public Integer create(GoodType arg) throws MyShopDAOException {
+	public Integer create(GoodType arg) throws MyShopDaoException {
 		String sql = "INSERT INTO \"GoodType\"(name, parent_id) VALUES ( ?, ?) RETURNING type_id;";
 	    PreparedStatement stm;
 	    Integer typeId;
@@ -40,12 +40,12 @@ public class PostgresqlGoodTypeDAO implements GenericDAO<GoodType> {
 		} catch (SQLException e) {
 			String errorSpot = "creating record of GoodType object in DB ";
 			ErrorLogger.logSQLException(e, errorSpot, log);
-			throw new MyShopDAOException(e);
+			throw new MyShopDaoException(e);
 		}	    
 	}
 
 	@Override
-	public GoodType read(Integer key) throws MyShopDAOException {
+	public GoodType read(Integer key) throws MyShopDaoException {
 		if (key == null){
 			return null;
 		}
@@ -61,7 +61,7 @@ public class PostgresqlGoodTypeDAO implements GenericDAO<GoodType> {
 		return result;
 	}
 	
-	private GoodTypeRecord readRecord(Integer key) throws MyShopDAOException {
+	private GoodTypeRecord readRecord(Integer key) throws MyShopDaoException {
         GoodTypeRecord rec = null;
 		String name = null;
 	    Integer typeId = null;
@@ -87,14 +87,14 @@ public class PostgresqlGoodTypeDAO implements GenericDAO<GoodType> {
 			if ((typeId == null)  || (name == null)){
 				String errorSpot = "retrieving record of GoodType object in DB ";
 				ErrorLogger.logSQLException(e, errorSpot, log);
-				throw new MyShopDAOException(e);		
+				throw new MyShopDaoException(e);		
 			} 
 		}		       
         return rec;		
 	}
 
 	@Override
-	public void update(GoodType unit) throws MyShopDAOException {
+	public void update(GoodType unit) throws MyShopDaoException {
 		try {
 			int key = unit.getId();
 			GoodType parent = unit.getParent();
@@ -120,13 +120,13 @@ public class PostgresqlGoodTypeDAO implements GenericDAO<GoodType> {
 
 			String errorSpot = "updating record of GoodType object in DB ";
 			ErrorLogger.logSQLException(e, errorSpot, log);
-			throw new MyShopDAOException(e);
+			throw new MyShopDaoException(e);
 		}
 
 	}
 
 	@Override
-	public void delete(GoodType unit) throws MyShopDAOException {
+	public void delete(GoodType unit) throws MyShopDaoException {
 		try {
 			int key = unit.getId();
 			String sql = "DELETE FROM \"GoodType\" WHERE type_id = ?;";
@@ -136,13 +136,13 @@ public class PostgresqlGoodTypeDAO implements GenericDAO<GoodType> {
 	    } catch (SQLException e) {
 			String errorSpot = "deleting record of GoodType object in DB ";
 			ErrorLogger.logSQLException(e, errorSpot, log);
-			throw new MyShopDAOException(e);
+			throw new MyShopDaoException(e);
 		}
 
 	}
 
 	@Override
-	public List<GoodType> getAll() throws MyShopDAOException {
+	public List<GoodType> getAll() throws MyShopDaoException {
 		try {
 	        String sql = "SELECT * FROM \"GoodType\"";
 	        PreparedStatement stm = connection.prepareStatement(sql);
@@ -161,7 +161,7 @@ public class PostgresqlGoodTypeDAO implements GenericDAO<GoodType> {
         } catch (SQLException e) {
 			String errorSpot = "retrieving all records of GoodType objects in DB ";
 			ErrorLogger.logSQLException(e, errorSpot, log);
-			throw new MyShopDAOException(e);
+			throw new MyShopDaoException(e);
 		}
 	}
 	

@@ -10,30 +10,29 @@ import javax.sql.DataSource;
 
 import org.apache.log4j.Logger;
 
-import ua.com.goit.gojava.andriidnikitin.dao.util.MyShopDAOException;
-import ua.com.goit.gojava.andriidnikitin.model.Good;
-import ua.com.goit.gojava.andriidnikitin.model.GoodType;
-import ua.com.goit.gojava.andriidnikitin.util.ErrorLogger;
+import ua.com.goit.gojava.andriidnikitin.commons.ErrorLogger;
+import ua.com.goit.gojava.andriidnikitin.dao.util.MyShopDaoException;
+import ua.com.goit.gojava.andriidnikitin.domain.model.Good;
+import ua.com.goit.gojava.andriidnikitin.domain.model.GoodType;
 
-public class PostgresqlDAOFactory  implements DAOFactory {
+public class PostgresqlDaoFactory  implements DaoFactory {
 
    private String driver = "org.postgresql.Driver";
       
-   private static PostgresqlDAOFactory instance = null;
+   private static PostgresqlDaoFactory instance = null;
    
-   private static String className = PostgresqlDAOFactory.class.getCanonicalName();
+   private static final String CLASSNAME = PostgresqlDaoFactory.class.getCanonicalName();
    
    private static Logger log = Logger.getLogger("MyShop.DAO");
    
-   public static PostgresqlDAOFactory getInstance(){
+   public static PostgresqlDaoFactory getInstance(){
 	   if (instance == null) {
-		   instance = new PostgresqlDAOFactory();
-		   log.info("Created new instance of " + className);
+		   instance = new PostgresqlDaoFactory();
 	   }
 	   return instance;
    }
     
-    public Connection getConnection() throws MyShopDAOException {
+    public Connection getConnection() throws MyShopDaoException {
     	Connection connection = null;
     	String lookup = "java:comp/env/jdbc/ShopDS";
         try {
@@ -44,23 +43,24 @@ public class PostgresqlDAOFactory  implements DAOFactory {
 		} catch (SQLException e) {			
 			String errorSpot = "establishing connect to " + lookup;
 			ErrorLogger.logSQLException(e, errorSpot, log);
-			throw new MyShopDAOException(e);
+			throw new MyShopDaoException(e);
 		} catch (NamingException e) {
 			String errorSpot = "establishing connect to " + lookup;		
 			ErrorLogger.logNamingException(e, errorSpot, log);
-			throw new MyShopDAOException(e);
+			throw new MyShopDaoException(e);
 		}
         return connection;
     }
     
     @Override
-    public GenericDAO<GoodType> getGoodTypeDAO(Connection connection) {
-        return new PostgresqlGoodTypeDAO(connection);
+    public GenericDao<GoodType> getGoodTypeDAO(Connection connection) {
+        return new PostgresqlGoodTypeDao(connection);
     }
     
-    private PostgresqlDAOFactory() {
+    private PostgresqlDaoFactory() {
         try {
             Class.forName(driver);
+ 		   log.info("Created new instance of " + CLASSNAME);
         } catch (ClassNotFoundException e) {
         	String errorSpot = " loading JDBC driver " + driver;        	
         	ErrorLogger.logClassNotFoundException(e, errorSpot, log);
@@ -69,8 +69,8 @@ public class PostgresqlDAOFactory  implements DAOFactory {
     }
 
 	@Override
-	public GenericDAO<Good> getGoodDAO(Connection connection) {
-		 return new PostgresqlGoodDAO(connection);
+	public GenericDao<Good> getGoodDAO(Connection connection) {
+		 return new PostgresqlGoodDao(connection);
 	}
 	
 }
