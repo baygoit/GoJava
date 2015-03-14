@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	import="ua.com.goit.gojava.andriidnikitin.model.*,
-			ua.com.goit.gojava.andriidnikitin.model.util.*,
-			ua.com.goit.gojava.andriidnikitin.service.*,
+	import="ua.com.goit.gojava.andriidnikitin.domain.model.*,
+	ua.com.goit.gojava.andriidnikitin.domain.model.util.*,
+	ua.com.goit.gojava.andriidnikitin.domain.service.*,
 			java.util.Enumeration,
-			ua.com.goit.gojava.andriidnikitin.servlets.*,
+			ua.com.goit.gojava.andriidnikitin.ui.*,
 			java.util.List"
 				
 %>

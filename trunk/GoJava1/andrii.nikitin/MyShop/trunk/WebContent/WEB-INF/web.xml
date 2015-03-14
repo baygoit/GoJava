@@ -7,12 +7,12 @@
   <display-name>MyShop</display-name>
   <servlet>
     <servlet-name>goodtype-servlet</servlet-name>
-    <servlet-class>ua.com.goit.gojava.andriidnikitin.servlets.GoodTypeServlet</servlet-class>
+    <servlet-class>ua.com.goit.gojava.andriidnikitin.ui.GoodTypeServlet</servlet-class>
     <enabled>true</enabled>
   </servlet>
   <servlet>
     <servlet-name>good-servlet</servlet-name>
-    <servlet-class>ua.com.goit.gojava.andriidnikitin.servlets.GoodServlet</servlet-class>
+    <servlet-class>ua.com.goit.gojava.andriidnikitin.ui.GoodServlet</servlet-class>
     <enabled>true</enabled>
   </servlet>
    <servlet-mapping>

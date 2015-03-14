@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	import="ua.com.goit.gojava.andriidnikitin.model.*,ua.com.goit.gojava.andriidnikitin.service.*,
-			ua.com.goit.gojava.andriidnikitin.service.*,
-			java.util.Enumeration,
-			ua.com.goit.gojava.andriidnikitin.servlets.*,
+	import="ua.com.goit.gojava.andriidnikitin.domain.model.*,ua.com.goit.gojava.andriidnikitin.domain.service.*,ua.com.goit.gojava.andriidnikitin.domain.service.*,
+			java.util.Enumeration,ua.com.goit.gojava.andriidnikitin.ui.*,
 			java.util.List"
 				
 %>
