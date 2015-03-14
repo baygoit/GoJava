@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.springframework.stereotype.Component;
 
@@ -11,6 +13,8 @@ import ua.com.goit.gojava2.vova.kickstarter.util.Random;
 
 @Component
 public class QuotesDAO extends AbstractDAO implements Quotes{
+	
+	private static Logger log = Logger.getLogger(QuotesDAO.class.getName());
 	
 	@Override
 	public String getQuote() {
@@ -27,6 +31,7 @@ public class QuotesDAO extends AbstractDAO implements Quotes{
 			}
 		} catch (SQLException e) {
 			System.err.println( e.getClass().getName()+": "+ e.getMessage() );
+			log.log(Level.SEVERE, null, e);
 		}
 		return s.toString();
 	}
@@ -41,6 +46,7 @@ public class QuotesDAO extends AbstractDAO implements Quotes{
 			}
 		} catch (SQLException e) {
 			System.err.println( e.getClass().getName()+": "+ e.getMessage() );
+			log.log(Level.SEVERE, null, e);
 		}
 		return countQuote;
 	}

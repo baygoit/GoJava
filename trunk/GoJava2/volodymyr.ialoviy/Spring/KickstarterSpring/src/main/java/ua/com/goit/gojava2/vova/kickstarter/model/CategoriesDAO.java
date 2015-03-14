@@ -6,10 +6,14 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.springframework.stereotype.Component;
 
 @Component
 public class CategoriesDAO extends AbstractDAO implements Categories{
+	
+	private static Logger log = Logger.getLogger(CategoriesDAO.class.getName());
 	
 	@Override
 	public List<Category> getCategories() {
@@ -22,6 +26,7 @@ public class CategoriesDAO extends AbstractDAO implements Categories{
 			}
 		} catch (SQLException e) {
 			System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+			log.log(Level.SEVERE, null, e);
 		}
 		return categories;
 	}

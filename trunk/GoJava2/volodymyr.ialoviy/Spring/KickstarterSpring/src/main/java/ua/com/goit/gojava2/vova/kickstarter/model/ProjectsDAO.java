@@ -6,12 +6,17 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import org.springframework.stereotype.Component;
 
 import ua.com.goit.gojava2.vova.kickstarter.util.PeriodBetweenDates;
 
 @Component
 public class ProjectsDAO extends AbstractDAO implements Projects{
+	
+	private static Logger log = Logger.getLogger(ProjectsDAO.class.getName());
 	
 	@Override
 	public List<Project> getProgectsForCategory(int categoryID) {
@@ -24,6 +29,7 @@ public class ProjectsDAO extends AbstractDAO implements Projects{
 			}
 		} catch (SQLException e) {
 			System.err.println( e.getClass().getName()+": "+ e.getMessage() );
+			log.log(Level.SEVERE, null, e);
 		}
 		return projects;
 	}
@@ -50,6 +56,7 @@ public class ProjectsDAO extends AbstractDAO implements Projects{
 			}
 		} catch (SQLException e) {
 			System.err.println( e.getClass().getName()+": "+ e.getMessage() );
+			log.log(Level.SEVERE, null, e);
 		}
 		return project;
 	}
@@ -61,6 +68,7 @@ public class ProjectsDAO extends AbstractDAO implements Projects{
 			statement.execute("INSERT INTO faq(id_project, question) VALUES (" + projectID + ", '" + question + "');");
 		} catch (SQLException e) {
 			System.err.println( e.getClass().getName()+": "+ e.getMessage() );
+			log.log(Level.SEVERE, null, e);
 		}
 	}
 	
@@ -73,6 +81,7 @@ public class ProjectsDAO extends AbstractDAO implements Projects{
 			    	+ "WHERE id_project=" + projectID + ";");
 		} catch (SQLException e) {
 			System.err.println( e.getClass().getName()+": "+ e.getMessage() );
+			log.log(Level.SEVERE, null, e);
 		}
 	}
 
@@ -87,6 +96,7 @@ public class ProjectsDAO extends AbstractDAO implements Projects{
 	            }
 		} catch (SQLException e) {
 			System.err.println( e.getClass().getName()+": "+ e.getMessage() );
+			log.log(Level.SEVERE, null, e);
 		}
 		return s;
 	}
