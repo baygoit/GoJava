@@ -44,7 +44,7 @@ public class MainServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)throws ServletException, IOException {
 		Action action = actions.get(getActionString(req));
 		if (action == null){
-			throw new IllegalStateException("action null");
+			throw new IllegalStateException("Action null");
 		}
 		String jsp = action.doIt(req, resp);
 		req.getRequestDispatcher(jsp).forward(req, resp);
