@@ -51,7 +51,6 @@ public class QuotesDAOTaet {
 	@Test
 	public void shouldProjectInString_whenNotProjectInString() {
 		String quote = quotesDAO.getQuote();
-		System.out.println(quote);
 		assertTrue(quote.equals("quote3") || quote.equals("quote2") || quote.equals("quote1"));
 	}
 }
