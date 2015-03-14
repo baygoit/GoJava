@@ -62,13 +62,13 @@ public class ProjectsDAOTest {
 	@Test
 	public void shouldProjectInString_whenNotProjectInString() {
 		Project project = projectsDAO.getProgect(1);
-		assertTrue(project.toString().equals("name1 \nshort description1 \nfull description1 \nfoto1 \nlink1 \n1000 \n10 \n990 \n[] \n" + project.getDaysLeft()));
+		assertTrue(project.toString().equals("name1 \nshort description1 \nfull description1 \nfoto1 \nlink1 \n1000 \n10 \n990 \n[] \n" + project.getDaysLeftProject()));
 	}
 	
 	@Test
 	public void shouldListProjects_whenNotListProjects() {
 		List<Project> projects = projectsDAO.getProgectsForCategory(1);
-		assertTrue(projects.toString().equals("[name1 \nshort description1 \nfull description1 \nfoto1 \nlink1 \n1000 \n10 \n990 \n[] \n" + projects.get(0).getDaysLeft() + "]"));
+		assertTrue(projects.toString().equals("[name1 \nshort description1 \nfull description1 \nfoto1 \nlink1 \n1000 \n10 \n990 \n[] \n" + projects.get(0).getDaysLeftProject() + "]"));
 	}
 	
 	@Test
@@ -80,8 +80,8 @@ public class ProjectsDAOTest {
 	@Test
 	public void shoulSetDonation_whenNotAddDonation() {
 		projectsDAO.setDonation(2, 3);
-		assertTrue(projectsDAO.getProgect(2).getHowMuchCollected() == 13);
-		assertTrue(projectsDAO.getProgect(2).getHowMuchRemaining() == 987);
+		assertTrue(projectsDAO.getProgect(2).getHowMuchCollectedProject() == 13);
+		assertTrue(projectsDAO.getProgect(2).getHowMuchRemainingProject() == 987);
 
 	}
 	

@@ -4,11 +4,11 @@ import java.util.ArrayList;
 
 public class Project{
 	
-	private int IdProject;
-	private int IdCategory;
+	private int idProject;
+	private int idCategory;
 	private String nameProject;
 	private String shortDescriptionProject;
-	private String fullDescriptioProjectn;
+	private String fullDescriptionProject;
 	private String fotoProject;
 	private String linkProject;
 	private int howMuchNeededProjectProject;
@@ -18,14 +18,14 @@ public class Project{
 	private int daysLeftProject;
 
 	public Project(int IdProject, int IdCategory, String nameProject, String shortDescriptionProject,
-			String fullDescriptioProjectn, String fotoProject, String linkProject,
+			String fullDescriptionProject, String fotoProject, String linkProject,
 			int howMuchNeededProjectProject, int howMuchCollectedProject, int howMuchRemainingProject,
 			ArrayList<String> faqProject, int daysLeftProject) {
-		this.IdProject = IdProject;
-		this.IdCategory = IdCategory;
+		this.idProject = IdProject;
+		this.idCategory = IdCategory;
 		this.nameProject = nameProject;
 		this.shortDescriptionProject = shortDescriptionProject;
-		this.fullDescriptioProjectn = fullDescriptioProjectn;
+		this.fullDescriptionProject = fullDescriptionProject;
 		this.fotoProject = fotoProject;
 		this.linkProject = linkProject;
 		this.howMuchNeededProjectProject = howMuchNeededProjectProject;
@@ -40,7 +40,7 @@ public class Project{
 		return String.format("%s \n%s \n%s \n%s \n%s \n%s \n%s \n%s \n%s \n%s",
 				nameProject,
 				shortDescriptionProject,
-				fullDescriptioProjectn,
+				fullDescriptionProject,
 				fotoProject,
 				linkProject,
 				howMuchNeededProjectProject,
@@ -50,103 +50,103 @@ public class Project{
 				daysLeftProject);
 	}
 
-	public int getProjectID() {
-		return IdProject;
+	public int getIdProject() {
+		return idProject;
 	}
 	
-	public void setProjectID(int projectID) {
-		this.IdProject = projectID;
+	public void setIdProject(int idProject) {
+		this.idProject = idProject;
 	}
 	
-	public String getProjectName() {
+	public String getNameProject() {
 		return nameProject;
 	}
 
-	public void setProjectName(String projectName) {
-		this.nameProject = projectName;
+	public void setNameProject(String nameProject) {
+		this.nameProject = nameProject;
 	}
 	
-	public String getShortDescription() {
+	public String getShortDescriptionProject() {
 		return shortDescriptionProject;
 	}
 
-	public void setShortDescription(String shortDescription) {
-		this.shortDescriptionProject = shortDescription;
+	public void setShortDescriptionProject(String shortDescriptionProject) {
+		this.shortDescriptionProject = shortDescriptionProject;
 	}
 
-	public String getFullDescription() {
-		return fullDescriptioProjectn;
+	public String getFullDescriptionProject() {
+		return fullDescriptionProject;
 	}
 
-	public void setFullDescription(String fullDescription) {
-		this.fullDescriptioProjectn = fullDescription;
+	public void setFullDescriptioProjectn(String fullDescriptioProjectn) {
+		this.fullDescriptionProject = fullDescriptioProjectn;
 	}
 
-	public String getFoto() {
+	public String getFotoProject() {
 		return fotoProject;
 	}
 
-	public void setFoto(String foto) {
-		this.fotoProject = foto;
+	public void setFotoProject(String fotoProject) {
+		this.fotoProject = fotoProject;
 	}
 
-	public String getLink() {
+	public String getLinkProject() {
 		return linkProject;
 	}
 
-	public void setLink(String link) {
-		this.linkProject = link;
+	public void setLinkProject(String linkProject) {
+		this.linkProject = linkProject;
 	}	
 	
-	public int getHowMuchNeeded() {
+	public int getHowMuchNeededProject() {
 		return howMuchNeededProjectProject;
 	}
 
-	public void setHowMuchNeeded(int howMuchNeeded) {
-		this.howMuchNeededProjectProject = howMuchNeeded;
+	public void setHowMuchNeededProject(int howMuchNeededProject) {
+		this.howMuchNeededProjectProject = howMuchNeededProject;
 	}
 	
-	public int getHowMuchCollected() {
+	public int getHowMuchCollectedProject() {
 		return howMuchCollectedProject;
 	}
 
-	public void setHowMuchCollected(int howMuchCollected) {
-		this.howMuchCollectedProject = howMuchCollected;
+	public void setHowMuchCollectedProject(int howMuchCollectedProject) {
+		this.howMuchCollectedProject = howMuchCollectedProject;
 	}
 
-	public int getHowMuchRemaining() {
+	public int getHowMuchRemainingProject() {
 		return howMuchRemainingProject;
 	}
 
-	public void setHowMuchRemaining(int howMuchRemaining) {
-		this.howMuchRemainingProject = howMuchRemaining;
+	public void setHowMuchRemainingProject(int howMuchRemainingProject) {
+		this.howMuchRemainingProject = howMuchRemainingProject;
 	}
 
-	public ArrayList<String> getFaq() {
+	public ArrayList<String> getFaqProject() {
 		return faqProject;
 	}
 	
-	public void setFaq(ArrayList<String> question) {
-		this.faqProject = question;
+	public void setFaqProject(ArrayList<String> questionProject) {
+		this.faqProject = questionProject;
 	}
 
-	public void addFaq(String question) {
-		this.faqProject.add(question);
+	public void addFaqProject(String questionProject) {
+		this.faqProject.add(questionProject);
 	}
 
-	public int getDaysLeft() {
+	public int getDaysLeftProject() {
 		return daysLeftProject;
 	}
 
-	public void setDaysLeft(int daysLeft) {
-		this.daysLeftProject = daysLeft;
+	public void setDaysLeftProject(int daysLeftProject) {
+		this.daysLeftProject = daysLeftProject;
 	}
 
-	public int getCategoryID() {
-		return IdCategory;
+	public int getIdCategory() {
+		return idCategory;
 	}
 
-	public void setCategoryID(int categoryID) {
-		this.IdCategory = categoryID;
+	public void setIdCategory(int idCategory) {
+		this.idCategory = idCategory;
 	}
 }

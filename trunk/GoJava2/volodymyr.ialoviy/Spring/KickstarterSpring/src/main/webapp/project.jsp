@@ -17,7 +17,7 @@
 		<p>faq = <c:out value="${project.faqProject}"/></p>
 		<p>days to go = <c:out value="${project.daysLeftProject}"/></p>
 
-		<p>If you want return to <a href="projects?category=${project.IdCategory}">projects</a></p>
+		<p>If you want return to <a href="projects?category=${project.idCategory}">projects</a></p>
 		
 		<p>If you want to <a href="donate">invest in the project</a></p>
 		

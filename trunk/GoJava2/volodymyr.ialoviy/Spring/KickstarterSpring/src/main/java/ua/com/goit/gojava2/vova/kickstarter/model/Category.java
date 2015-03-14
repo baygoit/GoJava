@@ -3,25 +3,25 @@ package ua.com.goit.gojava2.vova.kickstarter.model;
 
 public class Category{
 	
-	private int IdCategory;
+	private int idCategory;
 	private String nameCategory;
 	
 	public Category(int IdCategory, String nameCategory) {
-		this.IdCategory = IdCategory;
+		this.idCategory = IdCategory;
 		this.nameCategory = nameCategory;
 	}
 	
 	@Override
 	public String toString() {
-		return String.format("%s - %s", IdCategory, nameCategory);
+		return String.format("%s - %s", idCategory, nameCategory);
 	}
 
-	public int getCategoryID() {
-		return IdCategory;
+	public int getIdCategory() {
+		return idCategory;
 	}
 
 	public void setIdCategory(int IdCategory) {
-		this.IdCategory = IdCategory;
+		this.idCategory = IdCategory;
 	}
 
 	public String getNameCategory() {
