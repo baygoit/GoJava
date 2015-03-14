@@ -10,51 +10,56 @@ public class Optional {
         int[] intArray = { 2, 3, 2, 4, 3, 7, 2, 3, 4, 4 };
 
         findByDictionary(intArray);
-        
+
         findByRadix3(intArray);
 
     }
 
     public static void findByDictionary(int[] intArray) {
-        HashMap<Integer, Integer> hash = new HashMap<>();
-        for (Integer el : intArray) {
-            Integer amount = hash.get(el);
+        HashMap<Integer, Integer> hashCountPresence = new HashMap<>();
+        for (Integer number : intArray) {
+            Integer amount = hashCountPresence.get(number);
             if (amount == null) {
-                hash.put(el, 1);
+                hashCountPresence.put(number, 1);
             } else {
-                hash.put(el, ++amount);
+                hashCountPresence.put(number, ++amount);
             }
         }
-        for (Map.Entry<Integer, Integer> h : hash.entrySet()) {
-            if (h.getValue() == 1) {
-                System.out.println("result 0: " + h.getKey());
+        for (Map.Entry<Integer, Integer> entry : hashCountPresence.entrySet()) {
+            if (entry.getValue() == 1) {
+                System.out.println("result 0: " + entry.getKey());
                 break;
             }
         }
     }
+
     public static void findByRadix3(int[] intArray) {
         String result = "0";
         final int radix = 3;
-        for (Integer el : intArray) {
-            String elRadix3 = Integer.toString(el, radix);
-            result = sumByModule3(result,elRadix3);
+        for (Integer number : intArray) {
+            String elRadix3 = Integer.toString(number, radix);
+            result = sumByModule3(result, elRadix3);
         }
         System.out.println("result 1: " + Integer.parseInt(result, radix));
     }
 
-    public static String sumByModule3(String str1,String str2) {
+    public static String sumByModule3(String number1, String number2) {
         String localResult = "";
-        int minLenght = Math.min(str1.length(), str2.length());
+        int minLenght = Math.min(number1.length(), number2.length());
         // add 0..0 to begin
-        if (minLenght < str2.length()) {
-            str1 = "000000000000000000000000000".substring(0, str2.length() - minLenght) + str1;
+        if (number1.length() == number2.length()) {
+            // do nothing
+        } else if (minLenght < number2.length()) {
+            number1 = "000000000000000000000000000000000"
+                    .substring(0,number2.length() - minLenght) + number1;
+        } else {
+            number2 = "000000000000000000000000000000000"
+                    .substring(0,number1.length() - minLenght) + number2;
         }
-        else if (minLenght < str1.length()){
-            str2 = "000000000000000000000000000".substring(0, str1.length() - minLenght) + str2;
-        }
-        // now both str have same length
-        for (int i = 0; i < str2.length(); i++) {
-            localResult += String.valueOf(((Integer.parseInt(str1.substring(i,i + 1)) + Integer.parseInt(str2.substring(i,i + 1))) % 3));
+        // now both numbers have same length
+        for (int i = 0; i < number2.length(); i++) {
+            localResult += (Integer.parseInt(number1.substring(i, i + 1)) + 
+                            Integer.parseInt(number2.substring(i, i + 1))) % 3;
         }
         return localResult;
     }

@@ -7,30 +7,40 @@ public class FindDistance {
     public static void main(String[] args) {
         
         System.out.flush();
-        System.out.println("Input string");
+        System.out.println("Input string, 'e' for end of input");
         
         Scanner sc = new Scanner(System.in);
-        String inputLine = sc.nextLine();
-        sc.close();
         
         int min1 = Integer.MAX_VALUE;
         int positionMin1 = 0;
         int min2 = Integer.MAX_VALUE;
         int positionMin2 = 0;
-        
-        String[] arrayString = inputLine.split("[ ]+");
+        int localElement;
         int currentPosition = 1;
-        for(String str:arrayString){
-            int currInt = Integer.parseInt(str);
-            if (currInt <= min1) {
+        
+        while (sc.hasNextInt()) {
+            localElement = sc.nextInt(); 
+            if (localElement <= min1) {
                 min2 = min1;
                 positionMin2 = positionMin1;
-                min1 = currInt;
+                min1 = localElement;
                 positionMin1 = currentPosition;
+            }
+            if (currentPosition == 2) {
+                if (min1 < localElement) {
+                    min2 = localElement;
+                    positionMin2 = 2;
+                } else {
+                    min2 = min1;
+                    positionMin2 = 1;
+                }
+                
             }
             currentPosition++;
         }
-        System.out.println("minimal " + min1 + " & " + min2 + " on distance " + Math.abs(positionMin2 - positionMin1));
+        sc.close();
+        Integer distance = Math.abs(positionMin2 - positionMin1);
+        System.out.printf("minimal %d & %d on distance %d",min1,min2,distance);
     }
 
 }

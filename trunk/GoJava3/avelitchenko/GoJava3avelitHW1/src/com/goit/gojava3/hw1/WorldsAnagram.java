@@ -5,24 +5,32 @@ import java.util.Scanner;
 public class WorldsAnagram {
 
     public static void main(String[] args) {
-        
+
         System.out.flush();
         System.out.println("Input string");
-        
+
         Scanner sc = new Scanner(System.in);
         String inputLine = sc.nextLine();
         sc.close();
-        
-        StringBuilder builder = new StringBuilder();
-        
-        String[] arrayString = inputLine.split("[ ]+");
-        for(String str:arrayString){
-            for(int i = 0; i < str.length(); i++){
-                builder.append(str.charAt(str.length() - i - 1));
+
+        StringBuilder builderReverse = new StringBuilder();
+        StringBuilder builderWordForReverse = new StringBuilder();
+
+        String localSymbolInWord;
+        for (int i = 0; i < inputLine.length(); i++) {
+            localSymbolInWord = inputLine.substring(i, i + 1);
+            if (" ".equals(localSymbolInWord)) {
+                if (builderWordForReverse.length() > 0) {
+                    builderReverse.append(builderWordForReverse.reverse());
+                    builderWordForReverse.setLength(0);
+                }    
+                builderReverse.append(" ");
+            } else {
+                builderWordForReverse.append(localSymbolInWord);
             }
-            builder.append(" ");
-        } 
-        System.out.println("result: " + builder.toString());
+        }
+        builderReverse.append(builderWordForReverse.reverse());
+        System.out.println("result: " + builderReverse.toString());
     }
 
 }

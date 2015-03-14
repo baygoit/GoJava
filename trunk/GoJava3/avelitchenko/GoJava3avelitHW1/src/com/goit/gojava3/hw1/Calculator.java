@@ -33,24 +33,21 @@ public class Calculator {
         Integer curNumber = 0;
         Integer curNumberAdditional = 0;
 
-        int pointNumber = limitIterations + 1;
-        int bracketNumber = limitIterations + 1;
-
         // finding first real number
         while (curNumber < secondNumber && i < firstNumberChar.length) {   
-            curNumber = curNumber * 10
-                    + Integer.parseInt("" + firstNumberChar[i]);
+            curNumber = curNumber * 10  + (firstNumberChar[i] - '0');
             i++;
         }
 
         int startNumber = i;// for output without 0
 
+        int pointNumber = limitIterations + 1;
+        int bracketNumber = limitIterations + 1;
+
         do {
             if (curNumber < secondNumber) {
-                curNumber = curNumber
-                        * 10
-                        + ((i < firstNumberChar.length) ? Integer.parseInt(""
-                                + firstNumberChar[i]) : 0);
+                curNumber = curNumber * 10
+                        + ((i < firstNumberChar.length) ? (firstNumberChar[i] - '0') : 0);
                 result[i] = 0;
                 leftPart.add(0);
                 leftPartAdditional.add(0);
