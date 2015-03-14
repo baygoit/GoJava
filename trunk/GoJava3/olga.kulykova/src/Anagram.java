@@ -16,19 +16,19 @@ public class Anagram {
     public static void main(String[] args) throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         String text = reader.readLine();
-        StringBuilder sbWord = new StringBuilder();
+        StringBuilder word = new StringBuilder();
         StringBuilder newText = new StringBuilder();
 
         for (int i = 0; i < text.length(); i++) {
             if (' ' != text.charAt(i)) {
-                sbWord.append(text.charAt(i));
+                word.append(text.charAt(i));
             } else {
-                newText.append(sbWord.reverse());
-                sbWord.delete(0, sbWord.length());
+                newText.append(word.reverse());
+                word.delete(0, word.length());
                 newText.append(" ");
             }
         }
-        newText.append(sbWord.reverse());
+        newText.append(word.reverse());
 
         System.out.println(newText);
     }
