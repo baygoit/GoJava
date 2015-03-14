@@ -58,7 +58,7 @@ public class ProjectsDAO extends AbstractDAO implements Projects{
 	public void addFAQ(int projectID, String question) {
 		try (Connection connection = getConnection()){
 			Statement statement = connection.createStatement();
-			statement.execute("INSERT INTO faq(id_project, question)VALUES (" + projectID + ", '" + question + "');");
+			statement.execute("INSERT INTO faq(id_project, question) VALUES (" + projectID + ", '" + question + "');");
 		} catch (SQLException e) {
 			System.err.println( e.getClass().getName()+": "+ e.getMessage() );
 		}
