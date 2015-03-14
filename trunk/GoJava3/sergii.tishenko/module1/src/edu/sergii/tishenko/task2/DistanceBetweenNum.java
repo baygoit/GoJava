@@ -27,6 +27,7 @@ public class DistanceBetweenNum {
 			 strInputLine = strInputLine.trim();	 
 		 }while(!strInputLine.matches(REG_EXP_CHECK));
 		
+		 in.close();
 		 
 //	    strInputLine = "1 5 23 45 34 12 45 4 38 56 2 49 100";
 		
