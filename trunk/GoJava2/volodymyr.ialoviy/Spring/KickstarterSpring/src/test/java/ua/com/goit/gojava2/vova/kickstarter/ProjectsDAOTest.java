@@ -1,22 +1,24 @@
 package ua.com.goit.gojava2.vova.kickstarter;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
 
 import javax.sql.DataSource;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import ua.com.goit.gojava2.vova.kickstarter.model.Project;
 import ua.com.goit.gojava2.vova.kickstarter.model.ProjectsDAO;
-
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:test-application-context.xml" })
@@ -30,18 +32,33 @@ public class ProjectsDAOTest {
 
 	@Test
 	public void shouldProjectInString_whenNotProjectInString() {
-		greateTable();
-
 		Project project = projectsDAO.getProgect(1);
-		
-		System.out.println(project.toString());
-		
-		assertTrue(project.toString().equals("name1 \nshort description1 \nfull description1 \nfoto1 \nlink1 \n1000 \n10 \n990 \n[] \n129"));
-
-		deleteTable();
+		assertTrue(project.toString().equals("name1 \nshort description1 \nfull description1 \nfoto1 \nlink1 \n1000 \n10 \n990 \n[] \n" + project.getDaysLeft()));
 	}
 	
-	private void greateTable(){
+	@Test
+	public void shouldListProjects_whenNotListProjects() {
+		List<Project> projects = projectsDAO.getProgectsForCategory(1);
+		assertTrue(projects.toString().equals("[name1 \nshort description1 \nfull description1 \nfoto1 \nlink1 \n1000 \n10 \n990 \n[] \n" + projects.get(0).getDaysLeft() + "]"));
+	}
+	
+	@Test
+	public void shouldAddFAQ_whenNotAddFAQ() {
+		projectsDAO.addFAQ(1, "question23");
+		assertTrue(projectsDAO.getFaq(1).toString().equals("[question23]"));
+	}
+	
+	@Test
+	public void shoulSetDonation_whenNotAddDonation() {
+		projectsDAO.setDonation(2, 3);
+
+		assertTrue(projectsDAO.getProgect(2).getHowMuchCollected() == 13);
+		assertTrue(projectsDAO.getProgect(2).getHowMuchRemaining() == 987);
+
+	}
+
+	@Before
+	public void createTable(){
 		try (Connection connection = dataSource.getConnection()) {
 			Statement statement = connection.createStatement();
 			statement.execute("CREATE TABLE categories (id_category bigserial NOT NULL, name_category text NOT NULL, description_category text, CONSTRAINT categories_pkey PRIMARY KEY (id_category)) WITH (OIDS=FALSE); ALTER TABLE categories OWNER TO postgres;");
@@ -56,7 +73,8 @@ public class ProjectsDAOTest {
 		}
 	}
 
-	private void deleteTable(){
+	@After
+	public void deleteTable(){
 		try (Connection connection = dataSource.getConnection()) {
 			Statement statement = connection.createStatement();
 			statement.execute("DROP TABLE faq");
@@ -66,4 +84,5 @@ public class ProjectsDAOTest {
 			throw new RuntimeException("delete table projects from kickstartertest DB - smth wrong", e);
 		}
 	}
+	
 }

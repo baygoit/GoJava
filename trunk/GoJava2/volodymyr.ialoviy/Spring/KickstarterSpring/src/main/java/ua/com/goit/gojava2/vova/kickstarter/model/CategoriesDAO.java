@@ -21,15 +21,8 @@ public class CategoriesDAO extends AbstractDAO implements Categories{
 			    categories.add(new Category(result.getInt("id_category"), result.getString("name_category")));
 			}
 		} catch (SQLException e) {
-			System.err.println( e.getClass().getName()+": "+ e.getMessage() );
+			System.err.println( e.getClass().getName() + ": " + e.getMessage() );
 		}
 		return categories;
-	}
-
-	@Override
-	public String showCatecoryName(int categoryId) {//TODO DELETE THIS METHOD OR REFACTOR!
-		Category category = getCategories().get(categoryId - 1);
-		String name = category.getCategoryName();
-		return name;
 	}
 }
