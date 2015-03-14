@@ -14,11 +14,20 @@ import com.ua.goit.alexkholmov.logic.Customer;
 public class CustomerContactForm {
     
     private int customerId;
-    private int contactId;
     private String name;
     private String address;
+    private String phone;
     private String info;
     private Collection<Customer> customers;
+
+    
+    public void initFromCustomer(Customer customer) {
+        this.customerId = customer.getCustomerId();
+        this.name = customer.getName();
+        this.address = customer.getAddress();
+        this.phone = customer.getPhone();
+        this.info = customer.getAdditionalInfo();
+    }
     /**
      * @return the customerId
      */
@@ -30,18 +39,6 @@ public class CustomerContactForm {
      */
     public void setCustomerId(int customerId) {
         this.customerId = customerId;
-    }
-    /**
-     * @return the contactId
-     */
-    public int getContactId() {
-        return contactId;
-    }
-    /**
-     * @param contactId the contactId to set
-     */
-    public void setContactId(int contactId) {
-        this.contactId = contactId;
     }
     /**
      * @return the name
@@ -66,6 +63,18 @@ public class CustomerContactForm {
      */
     public void setAddress(String address) {
         this.address = address;
+    }
+    /**
+     * @return the phone
+     */
+    public String getPhone() {
+        return phone;
+    }
+    /**
+     * @param phone the phone to set
+     */
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
     /**
      * @return the info

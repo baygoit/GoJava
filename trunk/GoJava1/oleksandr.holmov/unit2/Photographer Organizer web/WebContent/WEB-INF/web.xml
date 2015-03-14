@@ -2,12 +2,20 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
   <display-name>Photographer Organizer</display-name>
   <servlet>
-  	<servlet-name>MainFarmeServlet</servlet-name>
-  	<servlet-class>com.ua.goit.alexkholmov.web.MainFarmeServlet</servlet-class>
+    <servlet-name>MainFarmeServlet</servlet-name>
+    <servlet-class>com.ua.goit.alexkholmov.web.MainFarmeServlet</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>CustomerServlet</servlet-name>
+  	<servlet-class>com.ua.goit.alexkholmov.web.CustomerServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-  	<servlet-name>MainFarmeServlet</servlet-name>
-  	<url-pattern>/main</url-pattern>
+    <servlet-name>MainFarmeServlet</servlet-name>
+    <url-pattern>/main</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>CustomerServlet</servlet-name>
+  	<url-pattern>/edit</url-pattern>
   </servlet-mapping>
   <resource-ref>
     <description>DB Connection</description>

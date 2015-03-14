@@ -9,22 +9,22 @@
 </head>
 <body>
 		<form action="<c:url value="/edit"/>" method="post">
-		<input type="hidden" name="customerId" value="">
+		<input type="hidden" name="customerId" value="${customer.customerId}">
 		<table>
 			<tr>
 				<th><h3>Customer form</h3></th>
 			</tr>
 			<tr>
-				<td>Customer name:</td><td><input type="text" name="custname" value=""></td>
+				<td>Customer name:</td><td><input type="text" name="custname" value="${customer.name}"></td>
 			</tr>
 			<tr>
-				<td>Customer address:</td><td><input type="text" name="custaddress" value=""></td>
+				<td>Customer address:</td><td><input type="text" name="custaddress" value="${customer.address}"></td>
 			</tr>
 			<tr>
-				<td>Customer phone:</td><td><input type="text" name="custphone" value=""></td>
+				<td>Customer phone:</td><td><input type="text" name="custphone" value="${customer.phone}"></td>
 			</tr>
 			<tr>
-				<td>Customer info:</td><td><input type="text" name="custinfo" value=""></td>
+				<td>Customer info:</td><td><input type="text" name="custinfo" value="${customer.info}"></td>
 			</tr>
 		</table>
 		<hr align="left" width="275" color="red">

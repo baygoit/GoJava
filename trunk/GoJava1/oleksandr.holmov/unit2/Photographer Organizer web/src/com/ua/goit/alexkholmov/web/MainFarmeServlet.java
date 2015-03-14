@@ -18,6 +18,7 @@ import com.ua.goit.alexkholmov.logic.Customer;
 import com.ua.goit.alexkholmov.logic.FotoStudio;
 import com.ua.goit.alexkholmov.sqldao.PostgreSQLDaoFactory;
 import com.ua.goit.alexkholmov.webform.ContactsForm;
+import com.ua.goit.alexkholmov.webform.CustomerContactForm;
 
 /**
  * Servlet implementation class MainFarmeServlet
@@ -35,17 +36,45 @@ public class MainFarmeServlet extends HttpServlet {
     }
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String selectedParam = request.getParameter("typecontact");
         int actionAnswer = 0;
         actionAnswer = checkAction(request);
-        if (actionAnswer == 1) {
-            //page forward to set customer jsp page
+        
+        //add new customer
+        if (actionAnswer == 1 && selectedParam != null && selectedParam.equals("cust")) {
+            Customer customer = new Customer();
+            customer.setCustomerId(0);
+            CustomerContactForm customerCF = new CustomerContactForm();
+            customerCF.initFromCustomer(customer);
+            request.setAttribute("customer", customerCF);
             getServletContext().getRequestDispatcher("/CustomerPage.jsp").forward(request, response);
             return;
         }
         
+        //edit customer
+        if (actionAnswer == 2 && selectedParam != null && selectedParam.equals("cust")) {
+            DAOFactory daoFactory = new PostgreSQLDaoFactory();
+            Connection con = null;
+            Customer customer;
+            if (request.getParameter("cont_id") != null) {
+                int customerId = Integer.parseInt(request.getParameter("cont_id"));
+                try {
+                    con = daoFactory.getConnection();
+                    CustomerDao customerDao = daoFactory.getCustomerDao(con);
+                    customer = customerDao.read(customerId);
+                    CustomerContactForm customerCF = new CustomerContactForm();
+                    customerCF.initFromCustomer(customer);
+                    request.setAttribute("customer", customerCF);
+                    getServletContext().getRequestDispatcher("/CustomerPage.jsp").forward(request, response);
+                } catch (SQLException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
+        }
+        
         if (actionAnswer == 3) {
             //show list of contacts or list of studios
-            String selectedParam = request.getParameter("typecontact");
             DAOFactory daoFactory = new PostgreSQLDaoFactory();
             Connection con = null;
             if (selectedParam != null && selectedParam.equals("cust")) {
