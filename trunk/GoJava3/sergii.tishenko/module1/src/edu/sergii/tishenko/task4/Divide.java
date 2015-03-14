@@ -15,11 +15,12 @@ public class Divide {
 		final long ACCURACY = 120;
 		 
 		Map divPositionsMap =  new HashMap<Long, Integer>();
-		List<String> resList= new LinkedList<String>();
+		List<String> outputStingList= new LinkedList<String>();
 				
 		 String strInputLine; 
 		 Scanner in = new Scanner(System.in);
-
+		 
+		 // Reading console
 		 do{
 			 System.out.println("Enter expresion: (xxx../xxx..)");
 			 strInputLine = in.nextLine();
@@ -30,7 +31,7 @@ public class Divide {
 		 
 		 String[] strArr = strInputLine.split("/");
 		 
-		 
+		// Dividing
 		 long divident = Long.parseLong(strArr[0]);
 		 long divisor  = Long.parseLong(strArr[1]);
 		 long remainder = divident % divisor;
@@ -38,9 +39,9 @@ public class Divide {
 		 
 		 
 		 quotient =divident / divisor;
-		 resList.add(divident + "|" + divisor );
-		 resList.add(Long.toString(quotient * divisor) + "|");
-		 resList.add("----");
+		 outputStingList.add(divident + "|" + divisor );
+		 outputStingList.add(Long.toString(quotient * divisor) + "|");
+		 outputStingList.add("----");
 		 
 		 StringBuilder result = new StringBuilder();
 		 result.append(Long.toString(quotient));
@@ -55,20 +56,18 @@ public class Divide {
 		 while(iter < ACCURACY || remainder == 0){
 			 remainder = remainder * 10;
 			 quotient = remainder / divisor;
-			 resList.add(new String(new char[iter + 1]).replace('\0', ' ') + Long.toString(remainder));
+			 outputStingList.add(new String(new char[iter + 1]).replace('\0', ' ') + Long.toString(remainder));
 			 remainder = remainder % divisor;
 			 
 			
-			 resList.add(new String(new char[iter]).replace('\0', ' ') +  "-" + Long.toString(quotient * divisor));
-			 resList.add(new String(new char[iter + 1]).replace('\0', ' ') +  "----");
+			 outputStingList.add(new String(new char[iter]).replace('\0', ' ') +  "-" + Long.toString(quotient * divisor));
+			 outputStingList.add(new String(new char[iter + 1]).replace('\0', ' ') +  "----");
 			 
 			 
 			 if(!divPositionsMap.containsKey(remainder)){
 				 divPositionsMap.put(remainder, iter);
 			 }else {
-//				 System.out.println("stop:" + divPositionsMap.get(remainder));
-//				 System.out.println("step:" + iter);
-				 
+
 				 result.insert(resultStartLength +  ((Integer) (divPositionsMap.get(remainder))).intValue(), '(');
 				 result.append(')');
 				 break;
@@ -77,10 +76,11 @@ public class Divide {
 			 iter++;
 		 }
 		 
-		resList.set(1, resList.get(1) + result);
+		 // Add result string to 2nd row.  
+		outputStingList.set(1, outputStingList.get(1) + result);
 
 		  
-		for (Iterator iterator = resList.iterator(); iterator.hasNext();) {
+		for (Iterator iterator = outputStingList.iterator(); iterator.hasNext();) {
 			String string = (String) iterator.next();
 			System.out.println(":" + string);	
 		} 
