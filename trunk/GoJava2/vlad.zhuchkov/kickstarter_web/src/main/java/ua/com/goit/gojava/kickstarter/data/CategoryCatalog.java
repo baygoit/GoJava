@@ -2,7 +2,7 @@ package ua.com.goit.gojava.kickstarter.data;
 
 import java.util.List;
 
-import ua.com.goit.gojava.kickstarter.dao.CategoryDao;
+import ua.com.goit.gojava.kickstarter.dao.ProjectsDao;
 
 public interface CategoryCatalog {
 
@@ -10,7 +10,7 @@ public interface CategoryCatalog {
 
 	List<Category> getCatalog();
 
-	CategoryDao getCategory(int id);
+	Category getCategory(int id);
 
 	int size();
 

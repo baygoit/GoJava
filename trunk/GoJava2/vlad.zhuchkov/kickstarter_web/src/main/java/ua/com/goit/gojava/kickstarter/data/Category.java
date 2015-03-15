@@ -8,6 +8,9 @@ public class Category {
 		this.id=id;
 		this.name=name;
 	}
+	public Category(int id) {
+	this.id=id;
+	}
 	public int getId() {
 		return id;
 	}

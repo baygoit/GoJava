@@ -3,9 +3,12 @@ package ua.com.goit.gojava.kickstarter.data;
 import java.io.Serializable;
 import java.util.Date;
 
+
+
 public class Project implements Serializable {
 	private int id;
 	private String name;
+	private Category category;
 	private String description;
 	private Status status;
 	private Parameters parameters;
@@ -34,7 +37,9 @@ public class Project implements Serializable {
 	public Parameters getParameters() {
 		return parameters;
 	}
-
+	public int getId() {
+		return id;
+	}
 	@Override
 	public int hashCode() {
 		return id;
@@ -52,6 +57,10 @@ public class Project implements Serializable {
 		if (id != other.id)
 			return false;
 		return true;
+	}
+
+		public void setCategory(Category category) {
+		this.category = category;
 	}
 
 }
