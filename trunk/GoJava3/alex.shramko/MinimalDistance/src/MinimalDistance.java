@@ -6,7 +6,7 @@ public class MinimalDistance {
 		String[] arrIn = input.split(" ");
 		if (arrIn.length < 2) {
 			throw new Exception(
-					"Inrut array should contain more than 2 elements");
+					"Inrut array should contain at least 2 elements");
 		}
 		int min1 = Integer.parseInt(arrIn[0]);
 		int minPos1 = 0;
