@@ -7,21 +7,22 @@ public class GoITFirst {
 	public static int one(String[] args){
 		ArrayList<Integer> array = new ArrayList<Integer>();
 		ArrayList<Integer> sorted;
-		for (int i = 0; i < args.length; i++)
-			array.add(i, Integer.parseInt(args[i]));
+		for (String i : args)
+			array.add(Integer.parseInt(i));
 			
 		sorted = new ArrayList<Integer>(array);
 		Collections.sort(sorted);
-			int min1 = sorted.get(0);
-			int min2 = sorted.get(1);
-		//Возвращаем разницу
-		if (array.indexOf(min2)> array.indexOf(min1)){
-
-		return array.indexOf(min2) - array.indexOf(min1);
-		}
-		else { 
-			return array.indexOf(min1) - array.indexOf(min2);
+			int index1 = array.indexOf(sorted.get(0));
+			int index2 = 0;
+			
+			for (int i = 0; i < array.size(); i++){
+				if (array.get(i) == sorted.get(1) && i != index1){
+					index2 = i;
+					break;
+				}
 			}
+		//Возвращаем разницу
+		return Math.abs(index1 - index2);
 	}
 	
 	public static void main(String[] args) {
