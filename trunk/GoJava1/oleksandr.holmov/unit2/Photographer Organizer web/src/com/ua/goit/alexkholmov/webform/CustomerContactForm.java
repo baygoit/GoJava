@@ -20,7 +20,6 @@ public class CustomerContactForm {
     private String info;
     private Collection<Customer> customers;
 
-    
     public void initFromCustomer(Customer customer) {
         this.customerId = customer.getCustomerId();
         this.name = customer.getName();
@@ -28,6 +27,7 @@ public class CustomerContactForm {
         this.phone = customer.getPhone();
         this.info = customer.getAdditionalInfo();
     }
+    
     /**
      * @return the customerId
      */

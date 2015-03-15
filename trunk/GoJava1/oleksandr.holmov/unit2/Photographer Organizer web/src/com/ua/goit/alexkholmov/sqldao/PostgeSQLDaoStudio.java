@@ -40,6 +40,8 @@ public class PostgeSQLDaoStudio implements StudioDao {
         ResultSet rs = pStatement.executeQuery();
         rs.next();
         studio.setStudioId(rs.getInt("stud_id"));
+        rs.close();
+        pStatement.close();
         return studio;
     }
 
@@ -54,7 +56,14 @@ public class PostgeSQLDaoStudio implements StudioDao {
         pStatement.setInt(1, id);
         ResultSet rs = pStatement.executeQuery();
         rs.next();
-        FotoStudio studio = new FotoStudio(rs);
+        FotoStudio studio = new FotoStudio();
+        studio.setStudioId(rs.getInt("stud_id"));
+        studio.setName(rs.getString("stud_name"));
+        studio.setAddress(rs.getString("stud_address"));
+        studio.setPhone(rs.getString("stud_phone"));
+        studio.setAdditionalInfo(rs.getString("stud_info"));
+        rs.close();
+        pStatement.close();
         return studio;
     }
 
@@ -73,6 +82,7 @@ public class PostgeSQLDaoStudio implements StudioDao {
         pStatement.setString(4, studio.getAdditionalInfo());
         pStatement.setInt(5, studio.getStudioId());
         pStatement.execute();
+        pStatement.close();
     }
 
     /* (non-Javadoc)
@@ -84,6 +94,7 @@ public class PostgeSQLDaoStudio implements StudioDao {
         PreparedStatement pStatement = connection.prepareStatement(sql);
         pStatement.setInt(1, studio.getStudioId());
         pStatement.execute();
+        pStatement.close();
     }
 
     /* (non-Javadoc)
@@ -96,9 +107,16 @@ public class PostgeSQLDaoStudio implements StudioDao {
         PreparedStatement pStatement = connection.prepareStatement(sql);
         ResultSet rs = pStatement.executeQuery();
         while (rs.next()) {
-            FotoStudio studio = new FotoStudio(rs);
+            FotoStudio studio = new FotoStudio();
+            studio.setStudioId(rs.getInt("stud_id"));
+            studio.setName(rs.getString("stud_name"));
+            studio.setAddress(rs.getString("stud_address"));
+            studio.setPhone(rs.getString("stud_phone"));
+            studio.setAdditionalInfo(rs.getString("stud_info"));
             list.add(studio);
         }
+        rs.close();
+        pStatement.close();
         return list;
     }
 

@@ -23,14 +23,6 @@ public class Customer {
         // default
     }
     
-    public Customer(ResultSet rs) throws SQLException {
-        this.customerId = rs.getInt("cust_id");
-        this.name = rs.getString("cust_name");
-        this.address = rs.getString("cust_address");
-        this.phone = rs.getString("cust_phone");
-        this.additionalInfo = rs.getString("cust_info");
-    }
-
     /**
      * @return the customerId
      */

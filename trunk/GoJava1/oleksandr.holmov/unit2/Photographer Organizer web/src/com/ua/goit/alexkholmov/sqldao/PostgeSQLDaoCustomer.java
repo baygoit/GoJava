@@ -41,6 +41,8 @@ public class PostgeSQLDaoCustomer implements CustomerDao {
         ResultSet rs = pStatement.executeQuery();
         rs.next();
         customer.setCustomerId(rs.getInt("cust_id"));
+        rs.close();
+        pStatement.close();
         return customer;
     }
 
@@ -55,7 +57,14 @@ public class PostgeSQLDaoCustomer implements CustomerDao {
         pStatement.setInt(1, id);
         ResultSet rs = pStatement.executeQuery();
         rs.next();
-        Customer customer = new Customer(rs);
+        Customer customer = new Customer();
+        customer.setCustomerId(rs.getInt("cust_id"));
+        customer.setName(rs.getString("cust_name"));
+        customer.setAddress(rs.getString("cust_address"));
+        customer.setPhone(rs.getString("cust_phone"));
+        customer.setAdditionalInfo(rs.getString("cust_info"));
+        rs.close();
+        pStatement.close();
         return customer;
     }
 
@@ -74,6 +83,7 @@ public class PostgeSQLDaoCustomer implements CustomerDao {
         pStatement.setString(4, customer.getAdditionalInfo());
         pStatement.setInt(5, customer.getCustomerId());
         pStatement.execute();
+        pStatement.close();
     }
 
     /* (non-Javadoc)
@@ -85,6 +95,7 @@ public class PostgeSQLDaoCustomer implements CustomerDao {
         PreparedStatement pStatement = connection.prepareStatement(sql);
         pStatement.setInt(1, customer.getCustomerId());
         pStatement.execute();
+        pStatement.close();
     }
 
     /* (non-Javadoc)
@@ -97,9 +108,16 @@ public class PostgeSQLDaoCustomer implements CustomerDao {
         PreparedStatement pStatement = connection.prepareStatement(sql);
         ResultSet rs = pStatement.executeQuery();
         while (rs.next()) {
-            Customer customer = new Customer(rs);
+            Customer customer = new Customer();
+            customer.setCustomerId(rs.getInt("cust_id"));
+            customer.setName(rs.getString("cust_name"));
+            customer.setAddress(rs.getString("cust_address"));
+            customer.setPhone(rs.getString("cust_phone"));
+            customer.setAdditionalInfo(rs.getString("cust_info"));
             list.add(customer);
         }
+        rs.close();
+        pStatement.close();
         return list;
     }
 

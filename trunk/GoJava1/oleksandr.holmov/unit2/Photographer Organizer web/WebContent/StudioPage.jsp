@@ -8,23 +8,23 @@
 <title>Photo studio data</title>
 </head>
 <body>
-	<form action="<c:url value="/edit"/>" method="post">
-		<input type="hidden" name="studioId" value="">
+	<form action="<c:url value="/editstud"/>" method="post">
+		<input type="hidden" name="studioId" value="${studio.studioId}">
 		<table>
 			<tr>
 				<th><h3>Photo studio form</h3></th>
 			</tr>
 			<tr>
-				<td>Studio name:</td><td><input type="text" name="studname" value=""></td>
+				<td>Studio name:</td><td><input type="text" name="studname" value="${studio.name}"></td>
 			</tr>
 			<tr>
-				<td>Studio address:</td><td><input type="text" name="studaddress" value=""></td>
+				<td>Studio address:</td><td><input type="text" name="studaddress" value="${studio.address}"></td>
 			</tr>
 			<tr>
-				<td>Studio phone:</td><td><input type="text" name="studphone" value=""></td>
+				<td>Studio phone:</td><td><input type="text" name="studphone" value="${studio.phone}"></td>
 			</tr>
 			<tr>
-				<td>Studio info:</td><td><input type="text" name="studinfo" value=""></td>
+				<td>Studio info:</td><td><input type="text" name="studinfo" value="${studio.info}"></td>
 			</tr>
 			<tr>
 				<td><br></td>

@@ -23,13 +23,7 @@ public class Reserve {
     public Reserve() {
         // TODO Auto-generated constructor stub
     }
-    
-    public Reserve(ResultSet rs) throws SQLException {
-        this.reserveId = rs.getInt("res_id");
-        this.reserveDate = rs.getDate("res_date");
-        this.workTime = rs.getString("work_time");
-    }
-    
+     
     /* (non-Javadoc)
      * @see java.lang.Object#hashCode()
      */

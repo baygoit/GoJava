@@ -39,6 +39,8 @@ public class PostgeSQLDaoReserve implements ReserveDao {
         ResultSet rs = pStatement.executeQuery();
         rs.next();
         reserve.setReserveId(rs.getInt("res_id"));
+        rs.close();
+        pStatement.close();
         return reserve;
     }
 
@@ -53,7 +55,12 @@ public class PostgeSQLDaoReserve implements ReserveDao {
         pStatement.setInt(1, id);
         ResultSet rs = pStatement.executeQuery();
         rs.next();
-        Reserve reserve = new Reserve(rs);
+        Reserve reserve = new Reserve();
+        reserve.setReserveId(rs.getInt("res_id"));
+        reserve.setReserveDate(rs.getDate("res_date"));
+        reserve.setWorkTime(rs.getString("work_time"));
+        rs.close();
+        pStatement.close();
         return reserve;
     }
 
@@ -69,6 +76,7 @@ public class PostgeSQLDaoReserve implements ReserveDao {
         pStatement.setDate(1, new Date(reserve.getReserveDate().getTime()));
         pStatement.setString(2, reserve.getWorkTime());
         pStatement.execute();
+        pStatement.close();
     }
 
     /* (non-Javadoc)
@@ -80,6 +88,7 @@ public class PostgeSQLDaoReserve implements ReserveDao {
         PreparedStatement pStatement = connection.prepareStatement(sql);
         pStatement.setInt(1, reserve.getReserveId());
         pStatement.execute();
+        pStatement.close();
     }
 
     /* (non-Javadoc)

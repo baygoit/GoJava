@@ -19,6 +19,7 @@ import com.ua.goit.alexkholmov.logic.FotoStudio;
 import com.ua.goit.alexkholmov.sqldao.PostgreSQLDaoFactory;
 import com.ua.goit.alexkholmov.webform.ContactsForm;
 import com.ua.goit.alexkholmov.webform.CustomerContactForm;
+import com.ua.goit.alexkholmov.webform.StudioContactForm;
 
 /**
  * Servlet implementation class MainFarmeServlet
@@ -50,6 +51,16 @@ public class MainFarmeServlet extends HttpServlet {
             getServletContext().getRequestDispatcher("/CustomerPage.jsp").forward(request, response);
             return;
         }
+        //add new studio
+        if (actionAnswer == 1 && selectedParam != null && selectedParam.equals("stud")) {
+            FotoStudio studio = new FotoStudio();
+            studio.setStudioId(0);
+            StudioContactForm studioCF = new StudioContactForm();
+            studioCF.iniFromFotostudio(studio);
+            request.setAttribute("studio", studioCF);
+            getServletContext().getRequestDispatcher("/StudioPage.jsp").forward(request, response);
+            return;
+        }
         
         //edit customer
         if (actionAnswer == 2 && selectedParam != null && selectedParam.equals("cust")) {
@@ -66,15 +77,109 @@ public class MainFarmeServlet extends HttpServlet {
                     customerCF.initFromCustomer(customer);
                     request.setAttribute("customer", customerCF);
                     getServletContext().getRequestDispatcher("/CustomerPage.jsp").forward(request, response);
+                    return;
                 } catch (SQLException e) {
-                    // TODO Auto-generated catch block
                     e.printStackTrace();
+                } finally {
+                    if (con != null) {
+                        try {
+                            con.close();
+                        } catch (SQLException e) {
+                            e.printStackTrace();
+                        }
+                    }
                 }
             }
         }
         
-        if (actionAnswer == 3) {
-            //show list of contacts or list of studios
+        //edit studio
+        if (actionAnswer == 2 && selectedParam != null && selectedParam.equals("stud")) {
+            DAOFactory daoFactory = new PostgreSQLDaoFactory();
+            Connection con = null;
+            FotoStudio studio;
+            if (request.getParameter("cont_id") != null) {
+                int studioId =  Integer.parseInt(request.getParameter("cont_id"));
+                try {
+                    con = daoFactory.getConnection();
+                    StudioDao studioDao = daoFactory.getStudioDao(con);
+                    studio = studioDao.read(studioId);
+                    StudioContactForm studioCF = new StudioContactForm();
+                    studioCF.iniFromFotostudio(studio);
+                    request.setAttribute("studio", studioCF);
+                    getServletContext().getRequestDispatcher("/StudioPage.jsp").forward(request, response);
+                    return;                    
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                } finally {
+                    if (con != null) {
+                        try {
+                            con.close();
+                        } catch (SQLException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+            
+        }
+        
+        //delete customer
+        if (actionAnswer == 3 && selectedParam != null && selectedParam.equals("cust")) {
+            DAOFactory daoFactory = new PostgreSQLDaoFactory();
+            Connection con = null;
+            if (request.getParameter("cont_id") != null) {
+                try {
+                    Customer customer = new Customer();
+                    customer.setCustomerId(Integer.parseInt(request.getParameter("cont_id")));
+                    con = daoFactory.getConnection();
+                    CustomerDao customerDao = daoFactory.getCustomerDao(con);
+                    customerDao.delete(customer);
+                    getServletContext().getRequestDispatcher("/MainPage.jsp").forward(request, response);
+                    return;
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                } finally {
+                    if (con != null) {
+                        try {
+                            con.close();
+                        } catch (SQLException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+
+            }
+        }
+        
+        //delete studio
+        if (actionAnswer == 3 && selectedParam != null && selectedParam.equals("stud")) {
+            DAOFactory daoFactory = new PostgreSQLDaoFactory();
+            Connection con = null;
+            if (request.getParameter("cont_id") != null) {
+                try {
+                    FotoStudio studio = new FotoStudio();
+                    studio.setStudioId(Integer.parseInt(request.getParameter("cont_id")));
+                    con = daoFactory.getConnection();
+                    StudioDao studioDao = daoFactory.getStudioDao(con);
+                    studioDao.delete(studio);
+                    getServletContext().getRequestDispatcher("/MainPage.jsp").forward(request, response);
+                    return;
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                } finally {
+                    if (con != null) {
+                        try {
+                            con.close();
+                        } catch (SQLException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+        }
+        
+      //show list of contacts or list of studios
+        if (actionAnswer == 4) {
             DAOFactory daoFactory = new PostgreSQLDaoFactory();
             Connection con = null;
             if (selectedParam != null && selectedParam.equals("cust")) {
@@ -89,8 +194,15 @@ public class MainFarmeServlet extends HttpServlet {
                     request.setAttribute("form", form);
                     getServletContext().getRequestDispatcher("/MainPage.jsp").forward(request, response);
                 } catch (SQLException e) {
-                    // TODO Auto-generated catch block
                     e.printStackTrace();
+                } finally {
+                    if (con != null) {
+                        try {
+                            con.close();
+                        } catch (SQLException e) {
+                            e.printStackTrace();
+                        }
+                    }
                 }
             }
             if (selectedParam != null && selectedParam.equals("stud")) {
@@ -105,7 +217,15 @@ public class MainFarmeServlet extends HttpServlet {
                     request.setAttribute("form", form);
                     getServletContext().getRequestDispatcher("/MainPage.jsp").forward(request, response);
                 } catch (SQLException e) {
-                    // TODO: handle exception
+                    e.printStackTrace();
+                } finally {
+                    if (con != null) {
+                        try {
+                            con.close();
+                        } catch (SQLException e) {
+                            e.printStackTrace();
+                        }
+                    }
                 }
             }
         }
@@ -121,8 +241,12 @@ public class MainFarmeServlet extends HttpServlet {
             return 2;
         }
         
-        if (request.getParameter("getlist") != null) {
+        if (request.getParameter("delete") != null) {
             return 3;
+        }
+        
+        if (request.getParameter("getlist") != null) {
+            return 4;
         }
         return 0;
     }

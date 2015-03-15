@@ -6,16 +6,24 @@
     <servlet-class>com.ua.goit.alexkholmov.web.MainFarmeServlet</servlet-class>
   </servlet>
   <servlet>
-  	<servlet-name>CustomerServlet</servlet-name>
-  	<servlet-class>com.ua.goit.alexkholmov.web.CustomerServlet</servlet-class>
+    <servlet-name>CustomerServlet</servlet-name>
+    <servlet-class>com.ua.goit.alexkholmov.web.CustomerServlet</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>StudioServlet</servlet-name>
+  	<servlet-class>com.ua.goit.alexkholmov.web.StudioServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>MainFarmeServlet</servlet-name>
     <url-pattern>/main</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
-  	<servlet-name>CustomerServlet</servlet-name>
-  	<url-pattern>/edit</url-pattern>
+    <servlet-name>CustomerServlet</servlet-name>
+    <url-pattern>/editcust</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>StudioServlet</servlet-name>
+  	<url-pattern>/editstud</url-pattern>
   </servlet-mapping>
   <resource-ref>
     <description>DB Connection</description>

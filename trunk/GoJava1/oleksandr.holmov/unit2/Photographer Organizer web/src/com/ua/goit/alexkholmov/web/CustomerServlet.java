@@ -63,26 +63,42 @@ public class CustomerServlet extends HttpServlet {
 	private void insertCustomer(HttpServletRequest request) throws ServletException, ParseException {
 	    Customer customer = prepareCustomer(request);
 	    DAOFactory daoFactory = new PostgreSQLDaoFactory();
+	    Connection connection = null;
 	    try {
-            Connection connection = daoFactory.getConnection();
+            connection = daoFactory.getConnection();
             CustomerDao customerDao = daoFactory.getCustomerDao(connection);
             customerDao.create(customer);
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 	
 	private void updateCustomer(HttpServletRequest request) throws ServletException, ParseException{
         Customer customer = prepareCustomer(request);
         DAOFactory daoFactory = new PostgreSQLDaoFactory();
+        Connection connection = null;
         try {
-            Connection connection = daoFactory.getConnection();
+            connection = daoFactory.getConnection();
             CustomerDao customerDao = daoFactory.getCustomerDao(connection);
             customerDao.update(customer);
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
 	}
 	

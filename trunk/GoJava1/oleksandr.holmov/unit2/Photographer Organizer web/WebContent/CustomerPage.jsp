@@ -8,7 +8,7 @@
 <title>Customer data</title>
 </head>
 <body>
-		<form action="<c:url value="/edit"/>" method="post">
+		<form action="<c:url value="/editcust"/>" method="post">
 		<input type="hidden" name="customerId" value="${customer.customerId}">
 		<table>
 			<tr>

@@ -20,18 +20,10 @@ public class FotoStudio {
     private String address;
     private String phone;
     private String additionalInfo;
-    private List<Reserve> reservs = new ArrayList<Reserve>();
+    private ReserveList reserveList;
 
     public FotoStudio() {
 
-    }
-    
-    public FotoStudio(ResultSet rs) throws SQLException {
-        this.studioId = rs.getInt("stud_id");
-        this.name = rs.getString("stud_name");
-        this.address = rs.getString("stud_address");
-        this.phone = rs.getString("stud_phone");
-        this.additionalInfo = rs.getString("stud_info");
     }
     
     /**
@@ -105,17 +97,17 @@ public class FotoStudio {
     }
 
     /**
-     * @return the reservs
+     * @return the reserveList
      */
-    public List<Reserve> getReservs() {
-        return reservs;
+    public ReserveList getReserveList() {
+        return reserveList;
     }
 
     /**
-     * @param reservs the reservs to set
+     * @param reserveList the reserveList to set
      */
-    public void setReservs(List<Reserve> reservs) {
-        this.reservs = reservs;
+    public void setReserveList(ReserveList reserveList) {
+        this.reserveList = reserveList;
     }
     
 }
