@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<context>
-	<Resource name="jdbc/root" auth="Container" type="javax.sql.DataSource"
-		username="postgres" password="svd555" driverClassName="org.postgresql.Driver"
-		url="jdbc:postgresql://localhost:5432/interview_db" />
-</context>
