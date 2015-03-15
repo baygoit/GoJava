@@ -3,12 +3,12 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>ua.com.goit.gojava2.vova</groupId>
-	<artifactId>kickstarterMaven</artifactId>
+	<artifactId>kickstarterSpring</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 
 	<packaging>war</packaging>
-	<name>kickstarterMaven</name>
-	<description>kickstarterMaven</description>
+	<name>kickstarterSpring</name>
+	<description>kickstarterSpring</description>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -83,8 +83,8 @@
 	</dependencies>
 
 	<build>
-		<plugins>
 
+		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -92,20 +92,27 @@
 				<configuration>
 					<source>1.8</source>
 					<target>1.8</target>
+					<filteringDeploymentDescriptors>true</filteringDeploymentDescriptors>
+					<warName>kickstarterSpring-0.0.1-SNAPSHOT</warName>
+					
 				</configuration>
 			</plugin>
 
 			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>tomcat-maven-plugin</artifactId>
+				<groupId>org.wildfly.plugins</groupId>
+				<artifactId>wildfly-maven-plugin</artifactId>
+				<version>1.1.0.Alpha1</version>
 				<configuration>
-					<url>http://localhost:8080/kickstarter</url>
-					<server>Apache_Tomcat_7_x86</server>
-					<path>/kickstarter</path>
+
+					<hostname>${jboss.hostname}</hostname>
+					<port>${jboss.port}</port>
+					<username>${jboss.username}</username>
+					<password>${jboss.password}</password>
+
 				</configuration>
 			</plugin>
+
 		</plugins>
 	</build>
-
 
 </project>

@@ -8,7 +8,7 @@ public class PeriodTest {
 
 	@Test
 	public void shouldProjectInString_whenNotProjectInString() {
-		assertTrue(Integer.toString(PeriodBetweenDates.period("2019-05-01")).toString().equals("1509"));
-		assertTrue(Integer.toString(PeriodBetweenDates.periodJoda("2018-05-02")).toString().equals("1144"));
+		assertTrue(Integer.toString(PeriodBetweenDates.period("2019-05-01")).toString().equals("1508"));
+		assertTrue(Integer.toString(PeriodBetweenDates.periodJoda("2018-05-02")).toString().equals("1143"));
 	}
 }

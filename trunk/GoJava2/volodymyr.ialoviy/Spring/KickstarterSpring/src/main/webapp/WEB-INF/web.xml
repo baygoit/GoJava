@@ -20,7 +20,6 @@
 	<servlet>
 		<servlet-name>MainServlet</servlet-name>
 		<servlet-class>ua.com.goit.gojava2.vova.kickstarter.controller.MainServlet</servlet-class>
- 
 	</servlet>
 	
 	<servlet-mapping>
