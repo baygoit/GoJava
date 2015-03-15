@@ -5,7 +5,7 @@ public class POMDataModelException extends Exception {
 	private static final long serialVersionUID = -5905597476803764282L;
 
 	/*public POMDataModelException() {
-		super();
+			super();
 	}*/
 
 	public POMDataModelException(String message) {
