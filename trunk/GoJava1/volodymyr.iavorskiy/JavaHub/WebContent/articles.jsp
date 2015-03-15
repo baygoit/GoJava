@@ -38,15 +38,15 @@
 			<br>
 <div class="articlestable">
 
-			<table>
+			<table border="1">
 				<tr>
-					<td>1</td> <td>2</td> <td>3</td>
+					<td>1</td> <td>2</td> <td>3</td><td>edit</td><td>delete</td>
 				</tr>
 				<tr>
-					<td>4</td> <td>5</td> <td>6</td>
+					<td>4</td> <td>5</td> <td>6</td><td>edit</td><td>delete</td>
 				</tr>
 				<tr>
-					<td>7</td> <td>8</td> <td>9</td>
+					<td>7</td> <td>8</td> <td>9</td><td>edit</td><td>delete</td>
 				</tr>
 			</table>
 </div>
@@ -56,9 +56,7 @@
 				for (int i = 0; i < articles.size(); i++) {
 					Article article = new Article();
 					article = articles.get(i);
-					allArticles += "Author: " + article.getAuthor() + "<br>"
-							+ " Header: " + article.getHeader() + "<br>"
-							+ " Text: " + article.getText() + "<br><br>";
+					allArticles += "Author: " + article.getAuthor() + "<br>" + " Header: " + article.getHeader() + "<br>" + " Text: " + article.getText() + "<br><br>";
 				}
 			%>
 			<%=allArticles%>
