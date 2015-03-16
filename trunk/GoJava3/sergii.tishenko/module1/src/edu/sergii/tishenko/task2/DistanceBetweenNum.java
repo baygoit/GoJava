@@ -35,15 +35,15 @@ public class DistanceBetweenNum {
 		if (strArr.length < 2)
 			throw new IllegalArgumentException();
 
-		ShowDistanceByMap(strArr);
-		ShowDistanceWithoutMap(strArr);
+		showDistanceByMap(strArr);
+		showDistanceWithoutMap(strArr);
 
 	}
 	
 	
 	// Distance between number using collections/generics
 	//
-	private static void ShowDistanceByMap(String[] strArr) {
+	private static void showDistanceByMap(String[] strArr) {
 
 		Map<Integer, Integer> inputMap = new HashMap<>();
 
@@ -94,48 +94,52 @@ public class DistanceBetweenNum {
 	
 	
 	// Distance between number without using collections 
-	private static void ShowDistanceWithoutMap(String[] strArr) {
+	private static void showDistanceWithoutMap(String[] strArr) {
 	
 	//	position0, value0  - first minimum element
 	//	position1, value1  - second minimum element 
 	//  value0 <= value1		
 		int position0, value0;
 		int position1, value1;
-		int iter_value;
+		int iterValue;
+		int[] intArray = pasrseIntArray(strArr);
+		
+		
+		
 
 		
-		if (Integer.parseInt(strArr[0]) < Integer.parseInt(strArr[1])) {
+		if (intArray[0] < intArray[1]){
 
 			position0 = 0;
-			value0 = Integer.parseInt(strArr[0]);
+			value0 = intArray[0];
 
 			position1 = 1;
-			value1 = Integer.parseInt(strArr[1]);
+			value1 = intArray[1];
 		} else {
 			position0 = 1;
-			value0 = Integer.parseInt(strArr[1]);
+			value0 = intArray[1];
 
 			position1 = 0;
-			value1 = Integer.parseInt(strArr[0]);
+			value1 = intArray[0];
 		}
 
 		
-		for (int i = 2; i < strArr.length; i++) {
+		for (int i = 2; i < intArray.length; i++) {
 
-			iter_value = Integer.parseInt(strArr[i]);
+			iterValue =intArray[i];
 
-			if (iter_value < value1) {
+			if (iterValue < value1) {
 
-				if (iter_value < value0) {
+				if (iterValue < value0) {
 
 					position1 = position0;
 					value1 = value0;
 
 					position0 = i;
-					value0 = iter_value;
+					value0 = iterValue;
 				} else {
 					position1 = i;
-					value1 = iter_value;
+					value1 = iterValue;
 				}
 
 			}
@@ -146,5 +150,15 @@ public class DistanceBetweenNum {
 
 	}
 
+	private static int[] pasrseIntArray(String[] strArr) {
+		
+		int[] result = new int[strArr.length];
+
+		for (int i = 0; i < strArr.length; i++) {
+			result[i] = Integer.parseInt(strArr[i]);
+		}
+		
+		return result;
+	}
 	
 }
