@@ -17,42 +17,22 @@ public class LonelyNumber {
     final static int COUNT_OF_REPETITION = 3;
 
     public static void main(String[] args) {
-        //We have an array of integers
         int[] array = {2, 3, 2, 4, 3, 7, 2, 3, 4, 4};
-
-        //Convert to binary presentation of integers and find the max length
-        String[] binary = new String[array.length];
-        int maxLength = 0;
-        for (int i = 0; i < array.length; i++) {
-            binary[i] = Integer.toBinaryString(array[i]);
-            if (binary[i].length() > maxLength) {
-                maxLength = binary[i].length();
-            }
-        }
-
-        //Add zeros for the same length of every binary number
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < binary.length; i++) {
-            if (binary[i].length() < maxLength) {
-                sb.append(binary[i]);
-                while (sb.length() != maxLength) {
-                    sb.insert(0, "0");
-                }
-                binary[i] = sb.toString();
-                sb.delete(0, sb.length());
-            }
-        }
-
-        //Summation of significant digits and division on the count of repetition
         int sum = 0;
-        for (int i = 0; i < binary[0].length(); i++) {
-            for (String s : binary) {
-                sum += Integer.parseInt(String.valueOf(s.charAt(i)));
+        StringBuilder sb = new StringBuilder();
+
+        for (int i = 0; i < Integer.SIZE; i++) {
+            for (Integer integer : array) {
+                int mask = 1 << i;
+                int bit = integer | mask;
+                if (bit > 0) {
+                    sum = sum | bit;
+                }
             }
             if (sum % COUNT_OF_REPETITION == 0) {
-                sb.append("0");
+                sb.insert(0, 0);
             } else {
-                sb.append("1");
+                sb.insert(0, 1);
             }
             sum = 0;
         }
