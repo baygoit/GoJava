@@ -39,7 +39,6 @@ import ua.com.goit.gojava.POM.persistence.postgresDB.ExchangeRateDAOTest;
 		DataManagerTest.class,
 		ProjectDAOTest.class,
 		CostItemDAOTest.class
-		
 	})
 
 public class AllTests {
