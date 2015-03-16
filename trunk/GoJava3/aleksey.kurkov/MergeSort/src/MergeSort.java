@@ -38,12 +38,20 @@ public class MergeSort {
         if (end == start) {
             return;
         } else {
-            int middle = (start + end) / 2;
+            int middle = safeFindMiddle(start, end);
             int middlePlusOne = middle + 1;
             sort(tempArray, start, middle);
             sort(tempArray, middlePlusOne, end);
             merge(tempArray, start, middlePlusOne, end);
         }
+    }
+
+    public static final int safeFindMiddle(int a, int b) {
+        if (b > 0 ? a > Integer.MAX_VALUE - b
+                : a < Integer.MIN_VALUE - b) {
+            return a + b >>> 1;
+        }
+        return (a + b) / 2;
     }
 
     public static void merge(int[] tempArray, int cursor, int middlePlusOne, int end) {
