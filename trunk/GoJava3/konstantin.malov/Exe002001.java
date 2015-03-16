@@ -5,6 +5,8 @@
  Like [2, 3, 2, 4, 3, 7, 2, 3, 4, 4]. Please find this ‘lonely’ integer number in array.
  Test arr NUMBERS = {9, 2, 3, 2, 3, 2, 3, 4, 4, 4, 1, 1, 1, 5, 5, 5, 6, 6, 6, 11, 11, 11};
  */
+package konstantin.malov;
+
 public class Exe002001 {
     private static final int[] NUMBERS = {9, 2, 3, 2, 3, 2, 3, 4, 4, 4, 1, 1, 1, 5, 5, 5, 6, 6, 6, 11, 11, 11};
     private static  int[] countArray = new int[32];

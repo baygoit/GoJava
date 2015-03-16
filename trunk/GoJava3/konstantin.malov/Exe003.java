@@ -1,6 +1,8 @@
 /**
  * Created by kossovec on 11.03.15.
  */
+package konstantin.malov;
+
 public class Exe003{
 
     private static StringBuilder answer = new StringBuilder();

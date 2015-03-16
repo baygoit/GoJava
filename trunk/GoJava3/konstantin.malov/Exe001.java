@@ -1,3 +1,6 @@
+
+package konstantin.malov;
+
 public class Exe001 {
     public static final int[] NUMBER_ARR = { 21,1,2,7,3,5,6,7,8,8 };
     public static void main(String[] args) {

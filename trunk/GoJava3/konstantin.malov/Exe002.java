@@ -1,6 +1,8 @@
 /**
  * Created by kossovec on 11.03.15.
  */
+package konstantin.malov;
+
 public class Exe002{
     public static final String SENTENCE ="go It JAVA_3";
     public static void main(String[] args) {
