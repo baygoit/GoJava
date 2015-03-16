@@ -3,26 +3,17 @@ import java.util.Scanner;
 public class LonelyNumber {
 
 	public static int lonelyNumber(int[] array) {
-		int maxInt = array[0];
-		for (int i = 1; i < array.length; i++) {
-			if (array[i] > maxInt)
-				maxInt = array[i];
-		}
-		String maxBinaryValue = Integer.toBinaryString(maxInt);
-		int maxBinaryLength = maxBinaryValue.length();
-		int[][] binaryArray = new int[array.length][maxBinaryLength];
+		int[][] binaryArray = new int[array.length][32];
 		for (int i = 0; i < array.length; i++) {
 			String binaryValue = Integer.toBinaryString(array[i]);
 			for (int j = 0; j < binaryArray[i].length; j++) {
 				int shift = binaryArray[i].length - binaryValue.length();
-				if (j < shift)
-					binaryArray[i][j] = 0;
-				else
+				if (j > shift)
 					binaryArray[i][j] = Integer.parseInt(
 							binaryValue.substring(j - shift, j - shift + 1));
 			}
 		}
-		int[] binaryResult = new int[maxBinaryLength];
+		int[] binaryResult = new int[32];
 		for (int i = 0; i < array.length; i++) {
 			for (int j = 0; j < binaryArray[i].length; j++) {
 				binaryResult[j] += binaryArray[i][j];
@@ -36,7 +27,10 @@ public class LonelyNumber {
 			str.append(binaryResult[i]);
 		}
 		int result = Integer.parseInt(str.toString(), 2);
-		
+		/*int result = 0;
+		for (int i = 0; i < binaryResult.length; i++) {
+		   result = result | 1<< i;
+		}*/
 		return result;
 	}
 
