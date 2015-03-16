@@ -17,12 +17,12 @@ public class MinimalDistance {
         for (int i = 2; i < arrIn.length; i++) {
             int currentInt = Integer.parseInt(arrIn[i]);
             if (currentInt < Math.max(min1, min2)) {
-                if (min1 > min2) {
-                    min1 = currentInt;
-                    index1 = i;
-                } else if (min2 > min1) {
+                if (min2 > min1) {
                     min2 = currentInt;
                     index2 = i;
+                } else {
+                    min1 = currentInt;
+                    index1 = i;
                 }
                 distance = Math.abs(index2 - index1);
             } else if (currentInt == Math.max(min1, min2)) {

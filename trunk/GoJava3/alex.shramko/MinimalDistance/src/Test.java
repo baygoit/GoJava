@@ -6,6 +6,7 @@ public class Test {
     public void test() {
         try {
             assertEquals(1, MinimalDistance.calculateDistance("1 2 3"));
+            assertEquals(2, MinimalDistance.calculateDistance("2 2 3 1"));
             assertEquals(2, MinimalDistance.calculateDistance("1 2 1 2 2 1"));
             assertEquals(2, MinimalDistance.calculateDistance("1 2 2 1 2 1"));
             assertEquals(
