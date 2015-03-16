@@ -8,16 +8,10 @@ public class Anagrams {
         while (true) {
             String input = new Scanner(System.in).nextLine();
             String[] inputValue = input.split(" ");
-
             for (int i = 0; i < inputValue.length; i++) {
-                String word = inputValue[i];
-                String newWord = "";
-                for (int j =  word.length()-1; j >= 0; j--) {
-                    newWord = newWord + word.charAt(j);
-                }
-                inputValue[i] = newWord;
+                StringBuilder stringBuilder = new StringBuilder(inputValue[i]);
+                inputValue[i] = stringBuilder.reverse().toString();
             }
-
             System.out.println(Arrays.toString(inputValue));
         }
 
