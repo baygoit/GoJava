@@ -16,10 +16,11 @@ public class WorldsAnagram {
         StringBuilder builderReverse = new StringBuilder();
         StringBuilder builderWordForReverse = new StringBuilder();
 
-        String localSymbolInWord;
+        char  localSymbolInWord;
+        
         for (int i = 0; i < inputLine.length(); i++) {
-            localSymbolInWord = inputLine.substring(i, i + 1);
-            if (" ".equals(localSymbolInWord)) {
+            localSymbolInWord = inputLine.charAt(i);;
+            if (localSymbolInWord == ' ') {
                 if (builderWordForReverse.length() > 0) {
                     builderReverse.append(builderWordForReverse.reverse());
                     builderWordForReverse.setLength(0);
