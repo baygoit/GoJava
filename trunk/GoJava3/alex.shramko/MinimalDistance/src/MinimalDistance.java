@@ -1,6 +1,4 @@
-import java.util.HashSet;
 import java.util.Scanner;
-import java.util.Set;
 
 public class MinimalDistance {
 
@@ -9,41 +7,33 @@ public class MinimalDistance {
         if (arrIn.length < 2) {
             throw new RuntimeException(
                     "Inrut array should contain at least 2 elements");
-        } else if (arrIn.length == 2) return 0;
+        } else if (arrIn.length == 2)
+            return 0;
         int min1 = Integer.parseInt(arrIn[0]);
+        int index1 = 0;
         int min2 = Integer.parseInt(arrIn[1]);
+        int index2 = 1;
+        int distance = 1;
         for (int i = 2; i < arrIn.length; i++) {
             int currentInt = Integer.parseInt(arrIn[i]);
             if (currentInt < Math.max(min1, min2)) {
-                if (min1 > min2)
+                if (min1 > min2) {
                     min1 = currentInt;
-                else
+                    index1 = i;
+                } else if (min2 > min1) {
                     min2 = currentInt;
-            }
-        }
-
-        Set<Integer> pos1 = new HashSet<Integer>();
-        Set<Integer> pos2 = new HashSet<Integer>();
-
-        for (int i = 0; i < arrIn.length; i++) {
-            int currentInt = Integer.parseInt(arrIn[i]);
-            if (currentInt == min1)
-                pos1.add(i);
-            if (currentInt == min2)
-                pos2.add(i);
-        }
-
-        int minDistance = Integer.MAX_VALUE;
-        for (Integer intPos1 : pos1) {
-            for (Integer intPos2 : pos2) {
-                if (intPos1 != intPos2) {
-                    minDistance = Math.min(minDistance,
-                            Math.abs(intPos1 - intPos2));
+                    index2 = i;
                 }
+                distance = Math.abs(index2 - index1);
+            } else if (currentInt == Math.max(min1, min2)) {
+                min1 = Math.min(Math.min(min1, min2), currentInt);
+                index1 = Math.max(index1, index2);
+                min2 = currentInt;
+                index2 = i;
+                distance = Math.min(distance, index2 - index1);
             }
         }
-        int returnValue = Math.abs(minDistance);
-        return returnValue;
+        return distance;
     }
 
     public static void main(String[] args) throws Exception {
