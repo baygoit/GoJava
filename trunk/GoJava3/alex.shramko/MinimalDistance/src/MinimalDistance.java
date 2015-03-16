@@ -4,12 +4,12 @@ import java.util.Set;
 
 public class MinimalDistance {
 
-    public static int calculateDistance(String input) throws Exception {
+    public static int calculateDistance(String input) {
         String[] arrIn = input.split(" ");
         if (arrIn.length < 2) {
-            throw new Exception(
+            throw new RuntimeException(
                     "Inrut array should contain at least 2 elements");
-        }
+        } else if (arrIn.length == 2) return 0;
         int min1 = Integer.parseInt(arrIn[0]);
         int min2 = Integer.parseInt(arrIn[1]);
         for (int i = 2; i < arrIn.length; i++) {
