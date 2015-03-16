@@ -24,7 +24,7 @@
 			<h3>Add article:</h3>
 			<br>
 			<div class="addarticle">
-				<form name="article" method="post" action="articlecontroller"
+				<form name="article" method="post" action="articlecrudservlet"
 					onsubmit="return validateForm()">
 					Your name:<br> <input type="text" name="author"><br>
 					Header:<br> <input type="text" name="header"><br>

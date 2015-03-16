@@ -1,6 +1,6 @@
 package goit.iavorskyi;
 
-import goit.iavorskyi.dao.ArticleDAO;
+import goit.iavorskyi.dao.ArticleDao;
 import goit.iavorskyi.io.Streamer;
 import goit.iavorskyi.learningUnit.Article;
 
@@ -10,12 +10,12 @@ import java.util.List;
 public class UIFacade {
 
 	public static void saveArticleToDatabase(String author, String header, String pathToArticle) {
-		ArticleDAO articleDAO = new ArticleDAO();
+		ArticleDao articleDAO = new ArticleDao();
 		articleDAO.insert(author, header, pathToArticle);
 	}
 	
 	public static List<Article> getAllArticles() {
-		ArticleDAO articleDAO = new ArticleDAO();
+		ArticleDao articleDAO = new ArticleDao();
 		List<Article> result = articleDAO.selectAll();
 		return result;
 	}

@@ -3,16 +3,14 @@ package goit.iavorskyi.controller;
 import goit.iavorskyi.learningUnit.Article;
 import java.io.IOException;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/ArticleController")
-public class ArticleController extends HttpServlet {
+public class ArticleCrudServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	public ArticleController() {
+	public ArticleCrudServlet() {
 		super();
 	}
 

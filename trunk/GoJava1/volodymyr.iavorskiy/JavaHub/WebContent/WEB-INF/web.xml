@@ -13,20 +13,13 @@
 		<welcome-file>default.jsp</welcome-file>
 	</welcome-file-list>
 	<servlet>
-		<servlet-name>ArticleController</servlet-name>
-		<servlet-class>goit.iavorskyi.controller.ArticleController</servlet-class>
+		<servlet-name>ArticleCrudServlet</servlet-name>
+		<servlet-class>goit.iavorskyi.controller.ArticleCrudServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>ArticleController</servlet-name>
-		<url-pattern>/articlecontroller</url-pattern>
+		<servlet-name>ArticleCrudServlet</servlet-name>
+		<url-pattern>/articlecrudservlet</url-pattern>
 	</servlet-mapping>
-	<servlet>
-		<servlet-name>Updater</servlet-name>
-		<servlet-class>goit.iavorskyi.controller.Updater</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>Updater</servlet-name>
-		<url-pattern>/updater</url-pattern>
-	</servlet-mapping>
+	
 
 </web-app>
