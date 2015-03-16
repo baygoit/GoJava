@@ -31,9 +31,9 @@ public class Tests {
 		} catch (MyShopDaoException e) {
 			//fail(); unable to set
 		}
-		GenericDao<Good> goodDAO = factory.getGoodDAO(connection);
+		GenericDao<Good> goodDAO = factory.getGoodDao(connection);
 		assertNotNull(goodDAO);
-		GenericDao<GoodType> typeDAO = factory.getGoodTypeDAO(connection);
+		GenericDao<GoodType> typeDAO = factory.getGoodTypeDao(connection);
 		assertNotNull(typeDAO);
 	}
 	

@@ -13,6 +13,7 @@ import org.apache.log4j.Logger;
 import ua.com.goit.gojava.andriidnikitin.commons.ErrorLogger;
 import ua.com.goit.gojava.andriidnikitin.dao.util.MyShopDaoException;
 import ua.com.goit.gojava.andriidnikitin.domain.model.Good;
+import ua.com.goit.gojava.andriidnikitin.domain.model.GoodIncoming;
 import ua.com.goit.gojava.andriidnikitin.domain.model.GoodType;
 
 public class PostgresqlDaoFactory  implements DaoFactory {
@@ -53,7 +54,7 @@ public class PostgresqlDaoFactory  implements DaoFactory {
     }
     
     @Override
-    public GenericDao<GoodType> getGoodTypeDAO(Connection connection) {
+    public GenericDao<GoodType> getGoodTypeDao(Connection connection) {
         return new PostgresqlGoodTypeDao(connection);
     }
     
@@ -69,8 +70,13 @@ public class PostgresqlDaoFactory  implements DaoFactory {
     }
 
 	@Override
-	public GenericDao<Good> getGoodDAO(Connection connection) {
+	public GenericDao<Good> getGoodDao(Connection connection) {
 		 return new PostgresqlGoodDao(connection);
+	}
+
+	@Override
+	public GenericDao<GoodIncoming> getGoodIncomingDao(Connection connection) {
+		 return new PostgresqlGoodIncomingDao(connection);
 	}
 	
 }

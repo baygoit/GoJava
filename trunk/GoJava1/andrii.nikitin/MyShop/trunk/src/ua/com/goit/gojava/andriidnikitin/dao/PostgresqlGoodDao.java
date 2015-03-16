@@ -73,7 +73,7 @@ public class PostgresqlGoodDao implements GenericDao<Good> {
 		        result.setId(goodId);
 		        result.setName(name);
 		        PostgresqlDaoFactory factory = PostgresqlDaoFactory.getInstance();
-		        GenericDao<GoodType> dao = factory.getGoodTypeDAO(connection);
+		        GenericDao<GoodType> dao = factory.getGoodTypeDao(connection);
 		        result.setType(dao.read(typeId));	 
 			} catch (SQLException e) {
 				if ((goodId == null)  || (name == null)){	

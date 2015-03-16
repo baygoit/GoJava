@@ -1,4 +1,4 @@
-package ua.com.goit.gojava.andriidnikitin.ui;
+package ua.com.goit.gojava.andriidnikitin.ui.util;
 
 import org.apache.log4j.Logger;
 
