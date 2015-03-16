@@ -6,6 +6,7 @@
 		<org.springframework-version>3.2.13.RELEASE</org.springframework-version>
 		<maven.compiler.source>1.7</maven.compiler.source>
 		<maven.compiler.target>1.7</maven.compiler.target>
+		<plugin.war.name>kickstarterEE-0.0.1-SNAPSHOT</plugin.war.name>
 	</properties>
 	<groupId>ua.com.sas</groupId>
 	<artifactId>kickstarterEE</artifactId>
@@ -55,12 +56,11 @@
 			<groupId>javax.servlet</groupId>
 			<artifactId>servlet-api</artifactId>
 			<version>2.5</version>
-			<scope>provided</scope>
 		</dependency>
 		<dependency>
-			<groupId>org.apache.tomcat</groupId>
-			<artifactId>tomcat-jdbc</artifactId>
-			<version>7.0.35</version>
+			<groupId>commons-dbcp</groupId>
+			<artifactId>commons-dbcp</artifactId>
+			<version>1.4</version>
 		</dependency>
 	</dependencies>
 	<build>
@@ -74,6 +74,11 @@
 					<path>/Kickstarter</path>
 				</configuration>
 			</plugin>
+        <plugin>
+            <groupId>org.jboss.as.plugins</groupId>
+            <artifactId>jboss-as-maven-plugin</artifactId>
+            <version>7.4.Final</version>
+        </plugin>
 		</plugins>
 	</build>
 </project>
