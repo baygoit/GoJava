@@ -19,25 +19,21 @@ public class LonelyNumber {
     public static void main(String[] args) {
         int[] array = {2, 3, 2, 4, 3, 7, 2, 3, 4, 4};
         int sum = 0;
-        StringBuilder sb = new StringBuilder();
-
+        int result = 0;
         for (int i = 0; i < Integer.SIZE; i++) {
+            int mask = 1 << i;
             for (Integer integer : array) {
-                int mask = 1 << i;
-                int bit = integer | mask;
+                int bit = integer & mask;
                 if (bit > 0) {
                     sum = sum | bit;
                 }
             }
-            if (sum % COUNT_OF_REPETITION == 0) {
-                sb.insert(0, 0);
-            } else {
-                sb.insert(0, 1);
+            if(sum % COUNT_OF_REPETITION > 0) {
+                result = result | mask;
             }
             sum = 0;
         }
 
-        //Convert the lonely number from binary to decimal and output to console
-        System.out.println("The lonely number is " + Integer.parseInt(sb.toString(), 2));
+        System.out.println("The lonely number is " + result);
     }
 }
