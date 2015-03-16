@@ -7,13 +7,12 @@ import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
 @Component
 public class CategoriesDAO {
+	
 
 	@Autowired
 	public DataSource dataSource;
-
 	public void setDataSource(DataSource dataSource) {
 		this.dataSource = dataSource;
 	}
@@ -21,7 +20,7 @@ public class CategoriesDAO {
 	private LinkedList<Category> categories = new LinkedList<Category>();
 	private ResultSet resultSet;
 	private Connection connection;
-
+	
 	private ResultSet getResultSet(String sql) {
 		try {
 			connection = dataSource.getConnection();

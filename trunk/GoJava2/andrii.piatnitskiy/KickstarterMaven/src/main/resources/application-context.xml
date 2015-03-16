@@ -21,7 +21,11 @@
                 <property name="password" value="${password}" />
 		</bean>
          
-		<bean id="categoriesDAO" class="model.CategoriesDAO">
+		<bean id="AO" class="model.CategoriesDAO">
+			<property name="dataSource" ref="dataSource" />
+		</bean>
+		
+		<bean id="projectsDAO" class="model.ProjectsDAO">
 			<property name="dataSource" ref="dataSource" />
 		</bean>
 		
