@@ -17,7 +17,7 @@ public class LearningUnit {
 
 	public void saveOnDisk() {
 		String stringToWrite = author + "@" + article;
-		Streamer.write(stringToWrite);
+		FileWriterReader.writeTextToFile(stringToWrite);
 	}
 	
 	public int calculatePopularity() {

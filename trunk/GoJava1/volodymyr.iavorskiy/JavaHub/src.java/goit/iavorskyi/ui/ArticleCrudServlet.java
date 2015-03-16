@@ -1,5 +1,6 @@
 package goit.iavorskyi.ui;
 
+import goit.iavorskyi.db.ArticleDao;
 import goit.iavorskyi.domain.Article;
 
 import java.io.IOException;
@@ -23,10 +24,11 @@ public class ArticleCrudServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			Article article = new Article();
+			ArticleDao articleDao = new ArticleDao();
 			article.setAuthor(request.getParameter("author"));
 			article.setHeader(request.getParameter("header"));
 			article.setText(request.getParameter("text"));
-			article.save();
+			articleDao.saveArticle(article);
 			response.setContentType("text/html;charset=UTF-8");
 			response.sendRedirect("/JavaHub/articles.jsp");
 		} catch (Exception e) {

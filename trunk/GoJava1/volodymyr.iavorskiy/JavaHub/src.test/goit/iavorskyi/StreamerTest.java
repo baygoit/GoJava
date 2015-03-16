@@ -1,7 +1,7 @@
 package goit.iavorskyi;
 
 import static org.junit.Assert.*;
-import goit.iavorskyi.domain.Streamer;
+import goit.iavorskyi.domain.FileWriterReader;
 
 import org.junit.Test;
 
@@ -9,7 +9,7 @@ public class StreamerTest {
 
 	@Test
 	public void testWrite() {
-		Streamer.write("test string2");
+		FileWriterReader.writeTextToFile("test string2");
 	}
 
 }

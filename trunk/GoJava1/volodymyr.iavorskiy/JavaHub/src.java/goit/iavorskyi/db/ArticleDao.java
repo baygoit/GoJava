@@ -1,7 +1,7 @@
 package goit.iavorskyi.db;
 
 import goit.iavorskyi.domain.Article;
-import goit.iavorskyi.domain.Streamer;
+import goit.iavorskyi.domain.FileWriterReader;
 
 import java.sql.Statement;
 import java.sql.DriverManager;
@@ -14,18 +14,16 @@ import java.util.List;
 
 public class ArticleDao {
 
-	private Statement statement = null;
-	private PreparedStatement preparedStatement = null;
-	private ResultSet result = null;
 	private String databaseUser = "postgres";
 	private String databasePassword = "1111";
-	private String databaseUrl = "jdbc:postgresql://127.0.0.1:5432/JavaHub";
+	private String databaseUrl = "jdbc:postgresql://localhost:5432/JavaHub";
 	private String sqlInsert = "INSERT INTO articles (author, header, linkToText) VALUES (?, ?, ?)";
 	private String sqlSelect = "SELECT * FROM articles";
 	private String sqlDelete = "DELETE FROM users WHERE id = ?";
-	private List<Article> allUsers = new ArrayList<Article>();
+	private List<Article> allArticles = new ArrayList<Article>();
 
 	public boolean insert(String author, String header, String linkToText) {
+		PreparedStatement preparedStatement = null;
 		Connection conn = null;
 		try {
 			Class.forName("org.postgresql.Driver");
@@ -49,24 +47,27 @@ public class ArticleDao {
 	}
 
 	public List<Article> selectAll() {
+		Statement statement = null;
+		ResultSet result = null;
 		Connection conn = null;
 		try {
 			Class.forName("org.postgresql.Driver");
 			conn = DriverManager.getConnection(databaseUrl, databaseUser, databasePassword);
 			statement = conn.createStatement();
 			result = statement.executeQuery(sqlSelect);
-			while (result.next()) {
-				Article article = new Article();
-				article.setAuthor(result.getString(2).trim());
-				article.setHeader(result.getString(3).trim());
-				;
-				article.setText(Streamer.read(result.getString(4)));
-				allUsers.add(article);
+			if (result != null) {
+				while (result.next()) {
+					Article article = new Article();
+					article.setAuthor(result.getString("author").trim());
+					article.setHeader(result.getString("header").trim());
+					article.setText(FileWriterReader.readTextFromFile(result.getString("linktotext")));
+					allArticles.add(article);
+				}
 			}
-			return allUsers;
+			return allArticles;
 		} catch (SQLException | ClassNotFoundException e) {
 			e.printStackTrace();
-			return allUsers;
+			return allArticles;
 		} finally {
 			try {
 				result.close();
@@ -78,6 +79,7 @@ public class ArticleDao {
 	}
 
 	public void delete(int id) {
+		PreparedStatement preparedStatement = null;
 		Connection conn = null;
 		try {
 			Class.forName("org.postgresql.Driver");
@@ -94,6 +96,11 @@ public class ArticleDao {
 			} catch (SQLException e) {
 			}
 		}
+	}
+	
+	public void saveArticle(Article articleToSave) {
+		String linkToText = FileWriterReader.writeTextToFile(articleToSave.getText());
+		insert(articleToSave.getAuthor(), articleToSave.getHeader(), linkToText);
 	}
 
 	// private void connectToDatabase() {

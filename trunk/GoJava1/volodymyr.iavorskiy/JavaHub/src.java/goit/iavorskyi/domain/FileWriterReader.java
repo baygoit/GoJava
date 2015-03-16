@@ -10,14 +10,14 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-public class Streamer {
+public class FileWriterReader {
 	
 	private static DateFormat dateFormat = new SimpleDateFormat("-yyyy-MM-dd-HH-mm-ss");
 	private static Calendar cal = Calendar.getInstance();
 	private static String currentDate = dateFormat.format(cal.getTime());
 	private static String fileToWriteIn = "d:\\Article" + currentDate + ".txt";
 
-	public static String read(String fileToRead) {
+	public static String readTextFromFile(String fileToRead) {
 		
 		String result = "";
 		try (BufferedReader br = new BufferedReader(new FileReader(fileToRead))) {
@@ -42,7 +42,7 @@ public class Streamer {
 		return result;
 	}
 	
-	public static String write(String stringToWrite) {
+	public static String writeTextToFile(String stringToWrite) {
 		try {
 			BufferedWriter bw = new BufferedWriter(new FileWriter(fileToWriteIn));
 			bw.write(stringToWrite);

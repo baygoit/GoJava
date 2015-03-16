@@ -1,13 +1,11 @@
 package goit.iavorskyi.domain;
 
-import goit.iavorskyi.db.DBFacade;
-
 public class Article {
 	
-	private String author = null;
-	private String header = null;
-	private String linkToText = null;
-	private String text = null;
+	private String author;
+	private String header;
+	private String linkToText;
+	private String text;
 	
 	public String getLinkToText() {
 		return linkToText;
@@ -33,7 +31,5 @@ public class Article {
 	public void setText(String text) {
 		this.text = text;
 	}
-	public void save() {
-		DBFacade.saveArticle(this);
-	}
+	
 }
