@@ -14,7 +14,7 @@ public class Divide {
 		final String REG_EXP_CHECK ="^([0-9])+[\\/]{1}([0-9])+$";
 		final long ACCURACY = 120;
 		 
-		Map divPositionsMap =  new HashMap<Long, Integer>();
+		Map<Long, Integer> divPositionsMap =  new HashMap<Long, Integer>();
 		List<String> outputStingList= new LinkedList<String>();
 				
 		 String strInputLine; 
@@ -68,7 +68,7 @@ public class Divide {
 				 divPositionsMap.put(remainder, iter);
 			 }else {
 
-				 result.insert(resultStartLength +  ((Integer) (divPositionsMap.get(remainder))).intValue(), '(');
+				 result.insert(resultStartLength +  (divPositionsMap.get(remainder)) , '(');
 				 result.append(')');
 				 break;
 			 };
