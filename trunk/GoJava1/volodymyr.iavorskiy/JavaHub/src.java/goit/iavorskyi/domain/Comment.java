@@ -1,4 +1,4 @@
-package goit.iavorskyi.learningUnit;
+package goit.iavorskyi.domain;
 
 public class Comment {
 

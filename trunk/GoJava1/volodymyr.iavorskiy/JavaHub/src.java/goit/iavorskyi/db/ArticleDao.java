@@ -1,7 +1,7 @@
-package goit.iavorskyi.dao;
+package goit.iavorskyi.db;
 
-import goit.iavorskyi.io.Streamer;
-import goit.iavorskyi.learningUnit.Article;
+import goit.iavorskyi.domain.Article;
+import goit.iavorskyi.domain.Streamer;
 
 import java.sql.Statement;
 import java.sql.DriverManager;

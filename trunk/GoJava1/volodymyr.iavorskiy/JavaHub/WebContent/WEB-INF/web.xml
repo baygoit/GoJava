@@ -14,7 +14,7 @@
 	</welcome-file-list>
 	<servlet>
 		<servlet-name>ArticleCrudServlet</servlet-name>
-		<servlet-class>goit.iavorskyi.controller.ArticleCrudServlet</servlet-class>
+		<servlet-class>goit.iavorskyi.ui.ArticleCrudServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>ArticleCrudServlet</servlet-name>

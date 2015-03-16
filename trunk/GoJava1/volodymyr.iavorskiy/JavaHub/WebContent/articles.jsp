@@ -1,7 +1,7 @@
 <%@page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
-<%@page import="goit.iavorskyi.learningUnit.Rating"%>
-<%@page import="goit.iavorskyi.UIFacade"%>
-<%@page import="goit.iavorskyi.learningUnit.Article"%>
+<%@page import="goit.iavorskyi.domain.Rating"%>
+<%@page import="goit.iavorskyi.ui.UIFacade"%>
+<%@page import="goit.iavorskyi.domain.Article"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>

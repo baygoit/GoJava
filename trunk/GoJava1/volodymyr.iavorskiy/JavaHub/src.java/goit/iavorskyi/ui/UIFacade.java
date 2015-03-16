@@ -1,8 +1,8 @@
-package goit.iavorskyi;
+package goit.iavorskyi.ui;
 
-import goit.iavorskyi.dao.ArticleDao;
-import goit.iavorskyi.io.Streamer;
-import goit.iavorskyi.learningUnit.Article;
+import goit.iavorskyi.db.ArticleDao;
+import goit.iavorskyi.domain.Article;
+import goit.iavorskyi.domain.Streamer;
 
 import java.util.ArrayList;
 import java.util.List;

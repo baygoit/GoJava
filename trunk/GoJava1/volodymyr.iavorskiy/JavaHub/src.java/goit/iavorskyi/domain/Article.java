@@ -1,6 +1,6 @@
-package goit.iavorskyi.learningUnit;
+package goit.iavorskyi.domain;
 
-import goit.iavorskyi.DBFacade;
+import goit.iavorskyi.db.DBFacade;
 
 public class Article {
 	

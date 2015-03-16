@@ -1,4 +1,4 @@
-package goit.iavorskyi.io;
+package goit.iavorskyi.domain;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

@@ -1,7 +1,7 @@
 package goit.iavorskyi;
 
 import static org.junit.Assert.*;
-import goit.iavorskyi.io.Streamer;
+import goit.iavorskyi.domain.Streamer;
 
 import org.junit.Test;
 

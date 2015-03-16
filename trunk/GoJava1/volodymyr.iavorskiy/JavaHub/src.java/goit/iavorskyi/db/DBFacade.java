@@ -1,8 +1,7 @@
-package goit.iavorskyi;
+package goit.iavorskyi.db;
 
-import goit.iavorskyi.dao.ArticleDao;
-import goit.iavorskyi.io.Streamer;
-import goit.iavorskyi.learningUnit.Article;
+import goit.iavorskyi.domain.Article;
+import goit.iavorskyi.domain.Streamer;
 
 public class DBFacade {
 	public static void saveArticle(Article articleToSave) {

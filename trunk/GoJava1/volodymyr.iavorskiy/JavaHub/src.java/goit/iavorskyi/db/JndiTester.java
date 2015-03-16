@@ -1,4 +1,4 @@
-package goit.iavorskyi.dao;
+package goit.iavorskyi.db;
 
 import javax.naming.InitialContext;
 import javax.sql.DataSource;

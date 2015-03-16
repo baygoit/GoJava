@@ -1,7 +1,9 @@
-package goit.iavorskyi.controller;
+package goit.iavorskyi.ui;
 
-import goit.iavorskyi.learningUnit.Article;
+import goit.iavorskyi.domain.Article;
+
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;

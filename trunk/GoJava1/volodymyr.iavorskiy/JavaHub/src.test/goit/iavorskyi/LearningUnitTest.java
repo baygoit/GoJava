@@ -1,9 +1,9 @@
 package goit.iavorskyi;
 
 import static org.junit.Assert.*;
-import goit.iavorskyi.learningUnit.Comment;
-import goit.iavorskyi.learningUnit.LearningUnit;
-import goit.iavorskyi.learningUnit.Rating;
+import goit.iavorskyi.domain.Comment;
+import goit.iavorskyi.domain.LearningUnit;
+import goit.iavorskyi.domain.Rating;
 
 import org.junit.Before;
 import org.junit.Test;

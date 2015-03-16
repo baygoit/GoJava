@@ -1,6 +1,4 @@
-package goit.iavorskyi.learningUnit;
-
-import goit.iavorskyi.io.Streamer;
+package goit.iavorskyi.domain;
 
 import java.util.LinkedList;
 import java.util.List;
