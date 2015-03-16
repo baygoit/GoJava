@@ -21,7 +21,7 @@ public class Tests {
 	
 	//TODO -create *before* part where switch to test DB
 	
-	@Test
+	/*@Test
 	public void DAOSmokeTest(){
 		DaoFactory factory = PostgresqlDaoFactory.getInstance() ;
 		assertNotNull(factory);
@@ -51,5 +51,10 @@ public class Tests {
 		} catch (MyShopException e) {
 			//fail(); unable to set
 		}		
+	}*/
+	
+	@Test
+	public void SmokeTest(){
+		Good good = new Good();
 	}
 }
