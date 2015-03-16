@@ -58,8 +58,7 @@ public class Optional {
         }
         // now both numbers have same length
         for (int i = 0; i < number2.length(); i++) {
-            localResult += (Integer.parseInt(number1.substring(i, i + 1)) + 
-                            Integer.parseInt(number2.substring(i, i + 1))) % 3;
+            localResult += ((number1.charAt(i) - '0') + (number2.charAt(i) - '0')) % 3;
         }
         return localResult;
     }

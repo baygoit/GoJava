@@ -25,7 +25,7 @@ public class MergeSort {
             return;
         }
 
-        int midle = (start + finish) / 2;
+        int midle = start + (finish - start) / 2;
         mergeSort(source, destination, start, midle);
         mergeSort(source, destination, midle + 1, finish);
 
