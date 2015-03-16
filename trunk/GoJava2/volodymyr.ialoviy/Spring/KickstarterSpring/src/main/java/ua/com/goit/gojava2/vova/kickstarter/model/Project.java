@@ -2,19 +2,55 @@ package ua.com.goit.gojava2.vova.kickstarter.model;
 
 import java.util.ArrayList;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+@Entity
+@Table(name = "projects")
 public class Project{
 	
+	@Id
+	@Column(name = "idProject")
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int idProject;
+	
+	@Column(name = "idCategory")
 	private int idCategory;
+
+	@Column(name = "nameProject")
 	private String nameProject;
+	
+	@Column(name = "shortDescriptionProject")
 	private String shortDescriptionProject;
+	
+	@Column(name = "fullDescriptionProject")
 	private String fullDescriptionProject;
+	
+	@Column(name = "fotoProject")
 	private String fotoProject;
+	
+	@Column(name = "linkProject")
 	private String linkProject;
+	
+	@Column(name = "howMuchNeededProjectProject")
 	private int howMuchNeededProjectProject;
+	
+	@Column(name = "howMuchCollectedProject")
 	private int howMuchCollectedProject;
+	
+	@Column(name = "howMuchRemainingProject")
 	private int howMuchRemainingProject;
+	
 	private ArrayList<String> faqProject;
+	
+	@Column(name = "daysLeftProject")
+	@Temporal(value=TemporalType.DATE)
 	private int daysLeftProject;
 
 	public Project(int IdProject, int IdCategory, String nameProject, String shortDescriptionProject,
