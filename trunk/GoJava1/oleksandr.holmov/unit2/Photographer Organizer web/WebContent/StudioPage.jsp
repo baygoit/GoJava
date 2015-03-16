@@ -30,7 +30,7 @@
 				<td><br></td>
 			</tr>	
 			<tr>
-				<td>Reserve studio:</td><td><input type="submit" name="resevelist" value="Get list"></td>
+				<td>Reserve studio:</td><td><input type="submit" name="reservelist" value="Get list"></td>
 			</tr>
 		</table>
 

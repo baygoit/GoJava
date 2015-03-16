@@ -8,33 +8,59 @@ package com.ua.goit.alexkholmov.logic;
  *
  */
 public class Photography {
+
     private String description;
     private int price;
     private int photographyTime; //hours
-
-    public Photography(String description, int price, int photographyTime) {
-        this.description = description;
-        this.price = price;
-        this.photographyTime = photographyTime;
-    }
+    private int photographyId;
     
-    String getDescribe() {
+    /**
+     * @return the description
+     */
+    public String getDescription() {
         return description;
     }
-    void setDescribe(String description) {
+    /**
+     * @param description the description to set
+     */
+    public void setDescription(String description) {
         this.description = description;
     }
-    int getPrice() {
+    /**
+     * @return the price
+     */
+    public int getPrice() {
         return price;
     }
-    void setPrice(int price) {
+    /**
+     * @param price the price to set
+     */
+    public void setPrice(int price) {
         this.price = price;
     }
-    int getServiceTime() {
+    /**
+     * @return the photographyTime
+     */
+    public int getPhotographyTime() {
         return photographyTime;
     }
-    void setServiceTime(int photographyTime) {
+    /**
+     * @param photographyTime the photographyTime to set
+     */
+    public void setPhotographyTime(int photographyTime) {
         this.photographyTime = photographyTime;
     }
-    
+    /**
+     * @return the photographyId
+     */
+    public int getPhotographyId() {
+        return photographyId;
+    }
+    /**
+     * @param photographyId the photographyId to set
+     */
+    public void setPhotographyId(int photographyId) {
+        this.photographyId = photographyId;
+    }
+
 }

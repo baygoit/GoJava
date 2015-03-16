@@ -6,10 +6,10 @@
 <head>
 <script type="text/javascript" src="enableButtons.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Contacts data</title>
 </head>
 <body>
-	<form action="<c:url value="/main"/>" name="mainPage" method="post">
+	<form action="<c:url value="/contacts"/>" method="post">
 		<h3>List of contacts</h3>
 		<table>
 			<tr>

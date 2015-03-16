@@ -9,6 +9,6 @@
 </head>
 <body>
 	<h2>Photo organizer</h2>
-	<a href="${pageContext.request.contextPath}/main">Forward to main page</a>
+	<a href="${pageContext.request.contextPath}/ContactsPage.jsp">Forward to main page</a>
 </body>
 </html>

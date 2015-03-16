@@ -3,13 +3,13 @@
  */
 package com.ua.goit.alexkholmov.logic;
 
-import java.io.Serializable;
 
 /**
  * @author SASH
  *
  */
-public class PackageFotos implements Serializable{
+public class PackageFotos{
+    
     private String packageDescription;
     private int amountFotos;
     private int timeEditingOneFoto;     //minutes

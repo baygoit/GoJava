@@ -27,6 +27,18 @@ public class ReserveList {
     public void setStudioId(int studioId) {
         this.studioId = studioId;
     }
+    /**
+     * @return the reservs
+     */
+    public List<Reserve> getReservs() {
+        return reservs;
+    }
+    /**
+     * @param reservs the reservs to set
+     */
+    public void setReservs(List<Reserve> reservs) {
+        this.reservs = reservs;
+    }
     
     public void addReserve(Reserve reserve) {
         reservs.add(reserve);

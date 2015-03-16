@@ -21,9 +21,9 @@ public class Schedule {
     private int amountDays = 0;
     private WorkWithFotos workWithFotos;
     
-    Calendar deadline;
-    Calendar startWork;
-    Calendar endWork;
+    private Calendar deadline;
+    private Calendar startWork;
+    private Calendar endWork;
     
     private SimpleDateFormat dateFormat = new SimpleDateFormat(PATTERN);
     

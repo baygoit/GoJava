@@ -25,13 +25,13 @@ import com.ua.goit.alexkholmov.webform.StudioContactForm;
  * Servlet implementation class MainFarmeServlet
  */
 @WebServlet("/MainFarmeServlet")
-public class MainFarmeServlet extends HttpServlet {
+public class ContactsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MainFarmeServlet() {
+    public ContactsServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -41,26 +41,48 @@ public class MainFarmeServlet extends HttpServlet {
         int actionAnswer = 0;
         actionAnswer = checkAction(request);
         
-        //add new customer
-        if (actionAnswer == 1 && selectedParam != null && selectedParam.equals("cust")) {
-            Customer customer = new Customer();
-            customer.setCustomerId(0);
-            CustomerContactForm customerCF = new CustomerContactForm();
-            customerCF.initFromCustomer(customer);
-            request.setAttribute("customer", customerCF);
-            getServletContext().getRequestDispatcher("/CustomerPage.jsp").forward(request, response);
-            return;
+        if (actionAnswer == 1) {
+            if (selectedParam != null && selectedParam.equals("cust")) {
+                Customer customer = new Customer();
+                customer.setCustomerId(0);
+                CustomerContactForm customerCF = new CustomerContactForm();
+                customerCF.initFromCustomer(customer);
+                request.setAttribute("customer", customerCF);
+                getServletContext().getRequestDispatcher("/CustomerPage.jsp").forward(request, response);
+                return;                
+            }
+            
+            if (selectedParam != null && selectedParam.equals("stud")) {
+                FotoStudio studio = new FotoStudio();
+                studio.setStudioId(0);
+                StudioContactForm studioCF = new StudioContactForm();
+                studioCF.iniFromFotostudio(studio);
+                request.setAttribute("studio", studioCF);
+                getServletContext().getRequestDispatcher("/StudioPage.jsp").forward(request, response);
+                return;                
+            }
         }
-        //add new studio
-        if (actionAnswer == 1 && selectedParam != null && selectedParam.equals("stud")) {
-            FotoStudio studio = new FotoStudio();
-            studio.setStudioId(0);
-            StudioContactForm studioCF = new StudioContactForm();
-            studioCF.iniFromFotostudio(studio);
-            request.setAttribute("studio", studioCF);
-            getServletContext().getRequestDispatcher("/StudioPage.jsp").forward(request, response);
-            return;
-        }
+        
+//        //add new customer
+//        if (actionAnswer == 1 && selectedParam != null && selectedParam.equals("cust")) {
+//            Customer customer = new Customer();
+//            customer.setCustomerId(0);
+//            CustomerContactForm customerCF = new CustomerContactForm();
+//            customerCF.initFromCustomer(customer);
+//            request.setAttribute("customer", customerCF);
+//            getServletContext().getRequestDispatcher("/CustomerPage.jsp").forward(request, response);
+//            return;
+//        }
+//        //add new studio
+//        if (actionAnswer == 1 && selectedParam != null && selectedParam.equals("stud")) {
+//            FotoStudio studio = new FotoStudio();
+//            studio.setStudioId(0);
+//            StudioContactForm studioCF = new StudioContactForm();
+//            studioCF.iniFromFotostudio(studio);
+//            request.setAttribute("studio", studioCF);
+//            getServletContext().getRequestDispatcher("/StudioPage.jsp").forward(request, response);
+//            return;
+//        }
         
         //edit customer
         if (actionAnswer == 2 && selectedParam != null && selectedParam.equals("cust")) {
@@ -134,7 +156,7 @@ public class MainFarmeServlet extends HttpServlet {
                     con = daoFactory.getConnection();
                     CustomerDao customerDao = daoFactory.getCustomerDao(con);
                     customerDao.delete(customer);
-                    getServletContext().getRequestDispatcher("/MainPage.jsp").forward(request, response);
+                    getServletContext().getRequestDispatcher("/ContactsPage.jsp").forward(request, response);
                     return;
                 } catch (SQLException e) {
                     e.printStackTrace();
@@ -162,7 +184,7 @@ public class MainFarmeServlet extends HttpServlet {
                     con = daoFactory.getConnection();
                     StudioDao studioDao = daoFactory.getStudioDao(con);
                     studioDao.delete(studio);
-                    getServletContext().getRequestDispatcher("/MainPage.jsp").forward(request, response);
+                    getServletContext().getRequestDispatcher("/ContactsPage.jsp").forward(request, response);
                     return;
                 } catch (SQLException e) {
                     e.printStackTrace();
@@ -192,7 +214,7 @@ public class MainFarmeServlet extends HttpServlet {
                     form.setList(customers);
                     form.setType(Customer.TYPE);
                     request.setAttribute("form", form);
-                    getServletContext().getRequestDispatcher("/MainPage.jsp").forward(request, response);
+                    getServletContext().getRequestDispatcher("/ContactsPage.jsp").forward(request, response);
                 } catch (SQLException e) {
                     e.printStackTrace();
                 } finally {
@@ -215,7 +237,7 @@ public class MainFarmeServlet extends HttpServlet {
                     form.setList(studios);
                     form.setType(FotoStudio.TYPE);
                     request.setAttribute("form", form);
-                    getServletContext().getRequestDispatcher("/MainPage.jsp").forward(request, response);
+                    getServletContext().getRequestDispatcher("/ContactsPage.jsp").forward(request, response);
                 } catch (SQLException e) {
                     e.printStackTrace();
                 } finally {

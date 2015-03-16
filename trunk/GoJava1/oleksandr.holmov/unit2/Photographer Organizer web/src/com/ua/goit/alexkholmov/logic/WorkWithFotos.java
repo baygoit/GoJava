@@ -11,7 +11,8 @@ import java.util.List;
  *
  */
 public class WorkWithFotos {
-    List<PackageFotos> allFotos = new ArrayList<PackageFotos>();
+    
+    private List<PackageFotos> allFotos = new ArrayList<PackageFotos>();
 
     public void addPackage(PackageFotos pFotos) {
         allFotos.add(pFotos);
@@ -21,6 +22,24 @@ public class WorkWithFotos {
         allFotos.remove(pFotos);
     }
     
+    public int amountPackage() {
+        return allFotos.size();
+    }
+    
+    /**
+     * @return the allFotos
+     */
+    public List<PackageFotos> getAllFotos() {
+        return allFotos;
+    }
+
+    /**
+     * @param allFotos the allFotos to set
+     */
+    public void setAllFotos(List<PackageFotos> allFotos) {
+        this.allFotos = allFotos;
+    }
+
     //return in hours
     int timeEditingFotosInPackage() throws Exception {
         if (allFotos.isEmpty()) {
