@@ -5,7 +5,7 @@ public class Anagrams {
 	public static String changeString(String input) {
 		String[] arrStr = input.split(" ");
 
-		StringBuilder newString = new StringBuilder("");
+		StringBuilder newString = new StringBuilder();
 		
 		for (int i = 0; i < arrStr.length; i++) {
 			StringBuilder str = new StringBuilder(arrStr[i]);
