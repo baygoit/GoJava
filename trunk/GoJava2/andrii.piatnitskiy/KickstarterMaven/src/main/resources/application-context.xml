@@ -13,9 +13,16 @@
         <context:property-placeholder location="classpath:database.properties" />
         <context:component-scan base-package="com.ua.goit.gojava" />
         <context:annotation-config />
-
         
-
-
-
+         <bean id="dataSource" class="org.apache.tomcat.jdbc.pool.DataSource">
+                <property name="driverClassName" value="${driver}" />
+                <property name="url" value="${url}" />
+                <property name="username" value="${user}" />
+                <property name="password" value="${password}" />
+		</bean>
+         
+		<bean id="categoriesDAO" class="model.CategoriesDAO">
+			<property name="dataSource" ref="dataSource" />
+		</bean>
+		
 </beans>

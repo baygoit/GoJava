@@ -3,18 +3,28 @@ package model;
 import java.sql.*;
 import java.util.LinkedList;
 
+import javax.sql.DataSource;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+@Component
 public class CategoriesDAO {
-	private LinkedList<Category> categories = new LinkedList<Category>();
-	private Connection connection;
 
-	public CategoriesDAO(Connection connection) {
-		this.connection = connection;
+	@Autowired
+	public DataSource dataSource;
+
+	public void setDataSource(DataSource dataSource) {
+		this.dataSource = dataSource;
 	}
 
+	private LinkedList<Category> categories = new LinkedList<Category>();
+	private ResultSet resultSet;
+	private Connection connection;
+
 	private ResultSet getResultSet(String sql) {
-		ResultSet resultSet = null;
 		try {
+			connection = dataSource.getConnection();
 			Statement statement = connection.createStatement();
 			resultSet = statement.executeQuery(sql);
 			return resultSet;
@@ -25,10 +35,11 @@ public class CategoriesDAO {
 	}
 
 	public LinkedList<Category> getCategoriesList() {
-		ResultSet resultSet = getResultSet("select * from categories");
+		ResultSet resultSet = getResultSet("SELECT * FROM categories");
 		try {
 			while (resultSet.next()) {
-				categories.add(new Category(resultSet.getInt("category_id"), resultSet.getString("name")));
+				categories.add(new Category(resultSet.getInt("category_id"),
+						resultSet.getString("name")));
 			}
 			return categories;
 		} catch (SQLException e) {
