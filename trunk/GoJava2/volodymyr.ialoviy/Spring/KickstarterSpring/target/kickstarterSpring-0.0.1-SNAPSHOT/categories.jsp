@@ -7,7 +7,7 @@
 	<body>
 
 		<c:forEach items="${categories}" var="category">
-		   <p><a href="projects?category=${category.idCategory}"><c:out value="${category.nameCategory}"/>77</a></p>
+		   <p><a href="projects?category=${category.idCategory}"><c:out value="${category.nameCategory}"/>00</a></p>
 		</c:forEach>
 	
 	</body>

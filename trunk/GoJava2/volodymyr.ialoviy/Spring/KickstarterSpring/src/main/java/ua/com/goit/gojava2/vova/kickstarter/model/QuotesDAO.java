@@ -19,35 +19,33 @@ public class QuotesDAO extends AbstractDAO implements Quotes{
 	@Override
 	public String getQuote() {
 		StringBuilder s = new StringBuilder();
-		int random = Random.random(getCountQuote());
-		
-		System.out.println(random);
-		
-		try (Connection connection = getConnection()){
-			Statement statement = connection.createStatement();
-			ResultSet result = statement.executeQuery("SELECT * FROM quotes WHERE id_quote =" + random);
-			while (result.next()) {
-				s.append(result.getString("quote")).toString();
-			}
-		} catch (SQLException e) {
-			System.err.println( e.getClass().getName()+": "+ e.getMessage() );
-			log.log(Level.SEVERE, null, e);
-		}
+//		int random = Random.random(getCountQuote());
+//		
+//		try (Connection connection = getConnection()){
+//			Statement statement = connection.createStatement();
+//			ResultSet result = statement.executeQuery("SELECT * FROM quotes WHERE id_quote =" + random);
+//			while (result.next()) {
+//				s.append(result.getString("quote")).toString();
+//			}
+//		} catch (SQLException e) {
+//			System.err.println( e.getClass().getName()+": "+ e.getMessage() );
+//			log.log(Level.SEVERE, null, e);
+//		}
 		return s.toString();
 	}
 	
 	public int getCountQuote() {
 		int countQuote = 0;
-		try (Connection connection = getConnection()){
-			Statement statement = connection.createStatement();
-			ResultSet result = statement.executeQuery("SELECT COUNT(*) FROM quotes;");
-			while (result.next()) {
-				countQuote = result.getInt("count");
-			}
-		} catch (SQLException e) {
-			System.err.println( e.getClass().getName()+": "+ e.getMessage() );
-			log.log(Level.SEVERE, null, e);
-		}
+//		try (Connection connection = getConnection()){
+//			Statement statement = connection.createStatement();
+//			ResultSet result = statement.executeQuery("SELECT COUNT(*) FROM quotes;");
+//			while (result.next()) {
+//				countQuote = result.getInt("count");
+//			}
+//		} catch (SQLException e) {
+//			System.err.println( e.getClass().getName()+": "+ e.getMessage() );
+//			log.log(Level.SEVERE, null, e);
+//		}
 		return countQuote;
 	}
 }

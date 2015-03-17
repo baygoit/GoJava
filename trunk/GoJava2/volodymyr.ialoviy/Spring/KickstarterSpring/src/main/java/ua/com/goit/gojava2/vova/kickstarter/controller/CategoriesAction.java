@@ -5,14 +5,14 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import ua.com.goit.gojava2.vova.kickstarter.model.Categories;
+import ua.com.goit.gojava2.vova.kickstarter.model.CategoriesInt;
 import ua.com.goit.gojava2.vova.kickstarter.model.Category;
 
 public class CategoriesAction implements Action {
 
-	private Categories dao;
+	private CategoriesInt dao;
 
-	public CategoriesAction(Categories categoriesDAO) {
+	public CategoriesAction(CategoriesInt categoriesDAO) {
 		dao = categoriesDAO;
 	}
 

@@ -1,5 +1,6 @@
 C:\workspace3\KickstarterSpring\src\main\java\ua\com\goit\gojava2\vova\kickstarter\util\PeriodBetweenDates.java
 C:\workspace3\KickstarterSpring\src\main\java\ua\com\goit\gojava2\vova\kickstarter\model\CategoriesDAO.java
+C:\workspace3\KickstarterSpring\src\main\java\ua\com\goit\gojava2\vova\kickstarter\model\CategoriesInt.java
 C:\workspace3\KickstarterSpring\src\main\java\ua\com\goit\gojava2\vova\kickstarter\model\AbstractDAO.java
 C:\workspace3\KickstarterSpring\src\main\java\ua\com\goit\gojava2\vova\kickstarter\controller\ProjectAction.java
 C:\workspace3\KickstarterSpring\src\main\java\ua\com\goit\gojava2\vova\kickstarter\controller\MainServlet.java
@@ -8,7 +9,6 @@ C:\workspace3\KickstarterSpring\src\main\java\ua\com\goit\gojava2\vova\kickstart
 C:\workspace3\KickstarterSpring\src\main\java\ua\com\goit\gojava2\vova\kickstarter\util\Random.java
 C:\workspace3\KickstarterSpring\src\main\java\ua\com\goit\gojava2\vova\kickstarter\model\Projects.java
 C:\workspace3\KickstarterSpring\src\main\java\ua\com\goit\gojava2\vova\kickstarter\model\ProjectsDAO.java
-C:\workspace3\KickstarterSpring\src\main\java\ua\com\goit\gojava2\vova\kickstarter\model\Categories.java
 C:\workspace3\KickstarterSpring\src\main\java\ua\com\goit\gojava2\vova\kickstarter\model\Project.java
 C:\workspace3\KickstarterSpring\src\main\java\ua\com\goit\gojava2\vova\kickstarter\controller\ProjectsAction.java
 C:\workspace3\KickstarterSpring\src\main\java\ua\com\goit\gojava2\vova\kickstarter\model\QuotesDAO.java

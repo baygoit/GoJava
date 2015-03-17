@@ -1,7 +1,6 @@
 ua\com\goit\gojava2\vova\kickstarter\controller\MainServlet.class
 ua\com\goit\gojava2\vova\kickstarter\model\Project.class
 ua\com\goit\gojava2\vova\kickstarter\controller\ProjectsAction.class
-ua\com\goit\gojava2\vova\kickstarter\model\Categories.class
 ua\com\goit\gojava2\vova\kickstarter\controller\ProjectAction.class
 ua\com\goit\gojava2\vova\kickstarter\util\Random.class
 ua\com\goit\gojava2\vova\kickstarter\model\ProjectsDAO.class
