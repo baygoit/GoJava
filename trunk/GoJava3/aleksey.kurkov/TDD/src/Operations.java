@@ -1,5 +1,5 @@
 /**
- * Created by Алексей on 17.03.2015.
+ * Created by Aleksey Kurkov on 17.03.2015.
  */
 public class Operations {
     public static int pow(int base, int exp) {
