@@ -11,7 +11,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Categories")
+@Table(name = "categories")
 public class Category{
 	
 	@Id

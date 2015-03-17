@@ -11,20 +11,20 @@ public class CategoriesDAO extends AbstractDAO implements CategoriesInt{
 	
 //	private static Logger log = Logger.getLogger(CategoriesDAO.class.getName());
 	
-//	@Override
-//	public List<Category> getCategories() {
-//
-//        return (List<Category>) getSession().createQuery("from Categories").list();
-//    }
-	
 	@Override
 	public List<Category> getCategories() {
 
-		getSession().beginTransaction();
-	    List<Category> result = (List<Category>) getSession().createQuery("from Categories");
-	    getSession().getTransaction().commit();
-	    return result;
+        return (List<Category>) getSession().createQuery("from ua.com.goit.gojava2.vova.kickstarter.model.Category").list();
     }
+	
+//	@Override
+//	public List<Category> getCategories() {
+//
+//		getSession().beginTransaction();
+//	    List<Category> result = (List<Category>) getSession().createQuery("from ua.com.goit.gojava2.vova.kickstarter.model.Category").list();
+//	    getSession().getTransaction().commit();
+//	    return result;
+//    }
 	
 	 
 	    

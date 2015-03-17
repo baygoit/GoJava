@@ -10,5 +10,7 @@
 		   <p><a href="projects?category=${category.idCategory}"><c:out value="${category.nameCategory}"/>00</a></p>
 		</c:forEach>
 	
+	<p><a href="#"/>00</a></p>
+	
 	</body>
 </html>

@@ -16,6 +16,8 @@
 	<import resource="classpath:hibernate.cfg.xml" />
 
 	<import resource="classpath:Categories.hbm.xml" />
+	
+	
 
 	<bean id="dataSource" class="org.apache.tomcat.jdbc.pool.DataSource"
 		destroy-method="close">
@@ -40,7 +42,10 @@
 		</property>
 	</bean>
 
-	<!-- <tx:annotation-driven />
+	<!-- 
+	<import resource="classpath:persistence.xml" />
+	
+	<tx:annotation-driven />
 
 	  transaction-manager="transactionManager" <bean id="transactionManager"
 		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
