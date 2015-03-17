@@ -26,10 +26,16 @@ public class MinimalDistance {
                 }
                 distance = Math.abs(index2 - index1);
             } else if (currentInt == Math.max(min1, min2)) {
-                min1 = Math.min(Math.min(min1, min2), currentInt);
-                index1 = Math.max(index1, index2);
-                min2 = currentInt;
-                index2 = i;
+                if (min2 > min1) {
+                    index2 = i;
+                } else if (min1 > min2) {
+                    index1 = i;
+                } else {
+                    index1 = Math.max(index1, index2);
+                    min2 = currentInt;
+                    index2 = i;
+                    
+                }
                 distance = Math.min(distance, index2 - index1);
             }
         }

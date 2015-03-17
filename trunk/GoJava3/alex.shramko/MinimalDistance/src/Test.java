@@ -9,6 +9,7 @@ public class Test {
             assertEquals(2, MinimalDistance.calculateDistance("2 2 3 1"));
             assertEquals(2, MinimalDistance.calculateDistance("1 2 1 2 2 1"));
             assertEquals(2, MinimalDistance.calculateDistance("1 2 2 1 2 1"));
+            assertEquals(2, MinimalDistance.calculateDistance("2 9 3 3 3 11 15"));
             assertEquals(
                     3,
                     MinimalDistance
