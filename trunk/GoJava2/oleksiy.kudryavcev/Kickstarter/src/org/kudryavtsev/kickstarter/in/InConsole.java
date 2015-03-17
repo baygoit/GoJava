@@ -7,9 +7,10 @@ public class InConsole implements In {
 
     @Override
     public int input() {
-        System.out.println("You choice (0 - exit):");
         int answer = 0;
-        answer = scanner.nextInt();
+        if (scanner.hasNextInt()) {
+            answer = scanner.nextInt();
+        }
         return answer;
     }
 

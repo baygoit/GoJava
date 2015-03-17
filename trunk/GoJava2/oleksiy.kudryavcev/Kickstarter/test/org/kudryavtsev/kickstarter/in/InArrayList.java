@@ -1,20 +1,20 @@
 package org.kudryavtsev.kickstarter.in;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 
 public class InArrayList implements In {
     private List<Integer> list;
 
-    public InArrayList() {
-        list = new ArrayList<Integer>();
-        Collections.addAll(list, 1, 1, 0, 2, 0, 0, 2, 1, 0, 2, 0, 0, 3, 1, 0, 2, 0, 0, 0);
+    public InArrayList(Integer... menus) {
+        list = new ArrayList(Arrays.asList(menus));
     }
 
     @Override
     public int input() {
-        System.out.println(list.get(0));
         return list.remove(0);
     }
 

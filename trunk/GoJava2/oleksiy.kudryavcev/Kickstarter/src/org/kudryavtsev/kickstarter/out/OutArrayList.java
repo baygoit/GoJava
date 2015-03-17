@@ -1,6 +1,7 @@
 package org.kudryavtsev.kickstarter.out;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class OutArrayList implements Out {
     private ArrayList<String> list;
@@ -12,15 +13,17 @@ public class OutArrayList implements Out {
     @Override
     public void output(String output) {
         list.add(output);
-        printAll();
-//        list.clear();
     }
 
     public String print() {
         return list.remove(0);
     }
 
-    public void printAll() {
-        System.out.println(this.print());
+    public List<String> getAll() {
+        return list;
+    }
+
+    @Override
+    public void close() {
     }
 }

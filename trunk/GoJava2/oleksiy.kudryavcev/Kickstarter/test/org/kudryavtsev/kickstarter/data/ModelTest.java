@@ -1,4 +1,4 @@
-package test;
+package org.kudryavtsev.kickstarter.data;
 
 import static org.junit.Assert.*;
 
@@ -16,7 +16,7 @@ public class ModelTest {
 
     @Test
     public void testGetCategoriesList() {
-        model.init();
+
         assertEquals(
                 "[Sport - Sport projects, Technology - Technology projects, Science - Science projects]",
                 model.getCategoriesList().toString());
@@ -24,7 +24,6 @@ public class ModelTest {
 
     @Test
     public void testGetProjectsList() {
-        model.init();
         assertEquals(
                 "[FutureForward; FutureForward is an innovative training project; funded: 4; pledged: 200; days to go: 45, U23; Support Team Canada U23 in their quest for Gold!; funded: 5500; pledged: 5000; days to go: 5]",
                 model.getCategoriesList().get(0).getProjects().toString());

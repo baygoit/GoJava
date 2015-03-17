@@ -1,5 +1,7 @@
 package org.kudryavtsev.kickstarter;
 
+import java.io.IOException;
+
 import org.kudryavtsev.kickstarter.data.Category;
 import org.kudryavtsev.kickstarter.data.Model;
 import org.kudryavtsev.kickstarter.data.Project;
@@ -7,12 +9,21 @@ import org.kudryavtsev.kickstarter.in.In;
 import org.kudryavtsev.kickstarter.in.InConsole;
 import org.kudryavtsev.kickstarter.out.Out;
 import org.kudryavtsev.kickstarter.out.OutConsole;
+import org.kudryavtsev.kickstarter.out.OutFile;
 import org.kudryavtsev.kickstarter.out.View;
 
 public class Kickstarter {
 
     public static void main(String[] args) {
-        Out whereToOut = new OutConsole();
+
+        Out whereToOut = null;
+        try {
+            whereToOut = new OutFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // Out whereToOut = new OutConsole();
         In whereToIn = new InConsole();
 
         Model model = new Model();
@@ -21,6 +32,9 @@ public class Kickstarter {
         Controller controller = new Controller(model, view, whereToIn);
 
         controller.start();
+
+        if (whereToOut != null)
+            whereToOut.close();
     }
 
     public static void initWithDemoData(Model model) {

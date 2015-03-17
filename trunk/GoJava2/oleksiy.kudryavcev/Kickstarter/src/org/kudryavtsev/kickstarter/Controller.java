@@ -5,6 +5,7 @@ import org.kudryavtsev.kickstarter.in.In;
 import org.kudryavtsev.kickstarter.out.View;
 
 public class Controller {
+    private static final int SHIFT = 1;
     private Model model;
     private View view;
     private In input;
@@ -24,51 +25,51 @@ public class Controller {
     private void categoriesList() {
         while (true) {
             view.showCategories(model.getCategories());
-
-            int category = getNumber();
-            if (checkNumberOfCategory(category)){
-                break;}
-            projectsList(category);
+            int category = getAnswer();
+            view.show(Integer.toString(category));
+            if (correctAnswer(category, model.categoriesCount())) {
+                projectsList(category - SHIFT);
+            } else {
+                break;
+            }
         }
     }
 
-    private int getNumber() {
-        int result = input.input();
-        if (result == 0) {
-            return 0;
-        }
-        return result - 1;
+    private int getAnswer() {
+        return input.input();
     }
 
-    private boolean checkNumberOfCategory(int category) {
-        return checkProject(category) == 0 || (category > model.categoriesCount());
+    private boolean correctAnswer(int index, int count) {
+        if (index <= 0) {
+            return false;
+        }
+        if (index > count) {
+            return false;
+        }
+        return true;
     }
 
     private void projectsList(int category) {
         while (true) {
             view.showProjects(model.getCategoryProjects(category).iterator());
-            int project = getNumber();
-            if (checkNumberOfProject(category, project)) {
+            int project = getAnswer();
+            view.show(Integer.toString(project));
+            if (correctAnswer(project, model.getCategoryProjects(category).size())) {
+                project(category, project - SHIFT);
+            } else {
                 break;
             }
-            project(category, project);
         }
-    }
-
-    private boolean checkNumberOfProject(int category, int project) {
-        if (checkProject(project) == 0) {
-            return true;
-        }
-
-        return project > model.getCategoryProjects(category).size();
     }
 
     private void project(int category, int project) {
         while (true) {
             view.showProject(model.getCategoryProjects(category).get(project));
-            int projectOption = getNumber();
+            int projectOption = getAnswer();
+            view.show(Integer.toString(projectOption));
             if (checkProject(projectOption) == 0) {
                 break;
+                //TODO implement correctAnswer method
             }
             projectOptions(category, project, projectOption);
         }
@@ -91,9 +92,11 @@ public class Controller {
     }
 
     private void addQuestin(int category, int project) {
+        //TODO implement questions
     }
 
     private void addInvestment(int category, int project) {
+        //TODO implement investing
     }
 
 }

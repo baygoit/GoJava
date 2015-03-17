@@ -1,4 +1,4 @@
-package test;
+package org.kudryavtsev.kickstarter.data;
 
 import static org.junit.Assert.*;
 
@@ -18,18 +18,6 @@ public class CategoryTest {
         categoryCheck(expected, category);
     }
 
-    @Test
-    public void shouldBeDefault_whenNewDefaultnCategory() {
-        String expected = "Other - For other projects";
-        Category category = new Category();
-        categoryCheck(expected, category);
-    }
-
-    @Test
-    public void shouldBeCorrectHashCode_whenHashCodeDefaultnCategory() {
-        Category category = new Category();
-        assertEquals(-1535908079, category.hashCode());
-    }
     
     private void categoryCheck(String expected, Category category) {
         String actual;
@@ -43,7 +31,7 @@ public class CategoryTest {
         Project newProject = new Project("TestProject", "TestDescption", 100, 100, 100);
         projectsList.add(newProject);
         projectsList.add(newProject);
-        Category category = new Category();
+        Category category = new Category("one", "one desc");
         category.setProjectsList(projectsList);
         assertEquals(projectsList, category.getProjects());
     }

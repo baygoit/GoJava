@@ -27,7 +27,7 @@ public class View {
         int counter = 1;
         while (objects.hasNext()) {
             Object o = objects.next();
-            out.output(menuIndex(counter) + o.toString());
+            show(menuIndex(counter) + o.toString());
             counter++;
         }
         showChoice();
@@ -38,7 +38,7 @@ public class View {
     }
 
     public void showCategories(List<Category> list, int i) {
-        out.output("You entered: " + list.get(i - 1));
+        show("You entered: " + list.get(i - 1));
     }
 
     public void showCategories(Iterator<Category> categories) {
@@ -46,7 +46,7 @@ public class View {
     }
 
     public void showProject(Project project) {
-        out.output(project.toStringFull());
+        show(project.toStringFull());
 //        out.output(String.format("%s; %s; %s", 
 //                project.getName(), 
 //                project.getDescription(), 
@@ -56,14 +56,14 @@ public class View {
     }
 
     public void showProjectMenu() {
-        out.output("Select option: \n"
+        show("Select option: \n"
                 + "(1) - to invest\n"
                 + "(2) - to add question\n"
                 + "(0) to exit)");
     }
 
     public void showChoice(){
-        out.output("You choice (0 - exit):");
+        show("You choice (0 - exit):");
     }
     
     public void show(String string){
