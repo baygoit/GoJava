@@ -1,7 +1,7 @@
 
 public class GoITSecond {
 	public static String two(String[] args){
-		StringBuffer a = new StringBuffer("");
+		StringBuilder a = new StringBuilder("");
 		for(String word : args)
 		{
 			for(int i = word.toCharArray().length -1; i >= 0; i--)
