@@ -4,10 +4,14 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.util.List;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import ua.com.goit.gojava.kickstarter.dao.CategoriesDao;
 import ua.com.goit.gojava.kickstarter.dao.ConnectionPool;
@@ -19,12 +23,15 @@ import ua.com.goit.gojava.kickstarter.data.Project;
 
 public class MainServlet extends HttpServlet {
    
-	static {
-        try {
-            Class.forName("org.postgresql.Driver");
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
+	@Autowired
+	private CategoriesDao categoriesDao;
+	@Autowired
+	private ProjectsDao projectsDao;
+	
+	@Override
+	public void init(ServletConfig config) throws ServletException {
+		super.init(config);
+		SpringBeanAutowiringSupport.processInjectionBasedOnServletContext(this, config.getServletContext());
 	}
 
 	
@@ -32,10 +39,6 @@ public class MainServlet extends HttpServlet {
 		String requestUrl = req.getRequestURI();
 		String request = requestUrl.substring(req.getContextPath().length(), requestUrl.length());
 		
-		ConnectionPool pool = new ConnectionPool();
-		Connection connection = pool.getConnection();
-		CategoriesDao categoriesDao = new CategoriesDao(connection);
-		ProjectsDao projectsDao = new ProjectsDao (connection);
 		
 		if(request.startsWith("/categories")){
 			List<Category> categories = categoriesDao.getCatalog(); 

@@ -7,19 +7,19 @@ import java.sql.Statement;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.springframework.stereotype.Component;
+
 import ua.com.goit.gojava.kickstarter.data.Category;
 import ua.com.goit.gojava.kickstarter.data.CategoryCatalog;
 
-public class CategoriesDao implements CategoryCatalog {
-	private Connection c;
-
-	public CategoriesDao(Connection c) {
-		this.c = c;
-	}
+@Component
+public class CategoriesDao extends AbstractDao implements CategoryCatalog {
+	
 
 	@Override
 	public int size() {
-		try (Statement stmt = this.c.createStatement()) {
+		try (Connection c = getConnection()){
+		Statement stmt = c.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT COUNT(*) FROM category;");
 
 			return rs.getInt(1);
@@ -32,7 +32,9 @@ public class CategoriesDao implements CategoryCatalog {
 
 	@Override
 	public void addCategory(String name) {
-		try (Statement stmt = c.createStatement()) {
+		try (Connection c = getConnection()){
+			Statement stmt = c.createStatement();
+			
 			String sql = "INSERT INTO category (name) " + "VALUES ('" + name
 					+ "');";
 			stmt.executeUpdate(sql);
@@ -46,7 +48,9 @@ public class CategoriesDao implements CategoryCatalog {
 	public List<Category> getCatalog() {
 		List<Category> list = new LinkedList<>();
 
-		try (Statement stmt = c.createStatement()) {
+		try (Connection c = getConnection()){
+			Statement stmt = c.createStatement();
+			
 			ResultSet rs = stmt.executeQuery("SELECT * FROM category;");
 			while (rs.next()) {
 				list.add(new Category(rs.getInt("id"), rs.getString("name")));
@@ -59,7 +63,9 @@ public class CategoriesDao implements CategoryCatalog {
 
 	@Override
 	public Category getCategory(int i) {
-		try (Statement stmt = c.createStatement()) {
+		try (Connection c = getConnection()){
+			Statement stmt = c.createStatement();
+			
 
 			ResultSet rs = stmt
 					.executeQuery("select * from category where id = " + i);
