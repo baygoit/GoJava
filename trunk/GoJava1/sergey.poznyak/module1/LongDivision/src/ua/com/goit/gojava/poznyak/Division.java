@@ -7,10 +7,10 @@ import java.util.List;
  * The class which implements the long division calculations
  * and visualization
  * 
- * @version 2.0 25 Jan 2015
+ * @version 3.0 17 Mar 2015
  * @author Sergey Poznyak
  */
-public class DivisionClass {
+public class Division {
 
 	private List<StringBuilder> divisionVisualisation
 	                            = new ArrayList<StringBuilder>();
@@ -31,7 +31,7 @@ public class DivisionClass {
 
 	private int transitionalRemainder;
 
-	public DivisionClass(int dividend, int divisor) {
+	public Division(int dividend, int divisor) {
 		this.dividend = dividend;
 		this.divisor = divisor;
 	}
@@ -41,7 +41,7 @@ public class DivisionClass {
 	 * 
 	 * @throws LongDivisionException for incorrect parameters
 	 */
-	public String divide() throws LongDivisionException {
+	public synchronized String divide() throws LongDivisionException {
 		if (divisor == 0) {
 			throw new LongDivisionException("Divisor can't be equal to 0.");
 		}
@@ -94,18 +94,17 @@ public class DivisionClass {
 	/**
 	 * Calculates decimal part of the quotient.
 	 */
-	public void divideDecimals() {
+	private void divideDecimals() {
 		StringBuilder decimalResult = new StringBuilder(100);
 		ArrayList<Integer> decimalRemainders = new ArrayList<Integer>(100);
 		int indexStartRepeating;
-		calculate_decimals:
 		while (decimalRemainders.size() < 100) {
 			decimalRemainders.add(transitionalRemainder);
 			indexStartRepeating = getIndexRepeatRemainder(decimalRemainders);
 			if (indexStartRepeating != -1) {
 				decimalResult.insert(indexStartRepeating, "(");
 				decimalResult.append(")");
-				break calculate_decimals;
+				break;
 			}
 			transitionalDividend = transitionalRemainder * 10;
 			transitionalQuotient = transitionalDividend/divisor;
@@ -115,7 +114,7 @@ public class DivisionClass {
 			writeDivisionCycle(transitionalDividend, transitionalProduct,
 					           transitionalRemainder);
 			if (transitionalRemainder == 0) {
-				break calculate_decimals;
+				break;
 			}
 		}
 		quotient.append(".");
@@ -128,7 +127,7 @@ public class DivisionClass {
 	 * @param remainders is a list of decimal remainders
 	 * @return index of repeating remainder or -1 if no repeating
 	 */
-	public int getIndexRepeatRemainder(ArrayList<Integer> remainders) {
+	private int getIndexRepeatRemainder(ArrayList<Integer> remainders) {
 		for (int i = 0; i < remainders.size()-1; i++) {
 			if (remainders.get(remainders.size()
 					           - 1).equals(remainders.get(i))) {
@@ -145,7 +144,7 @@ public class DivisionClass {
 	 * @param subtrahend
 	 * @param difference
 	 */
-	public void writeDivisionCycle(int minuend,
+	private void writeDivisionCycle(int minuend,
 			                              int subtrahend, int difference) {
 		int minuendLength = ("" + minuend).length();
 		int subtrahendLength = ("" + subtrahend).length();
@@ -170,7 +169,7 @@ public class DivisionClass {
 	 * @param valueWrite
 	 * @param indentation
 	 */
-	public void writeDivisionValue(String valueWrite, int indentation) {
+	private void writeDivisionValue(String valueWrite, int indentation) {
 		divisionVisualisation.add(new StringBuilder());
 		for (int i = 0; i < indentation; i++) {
 			divisionVisualisation.get(divisionVisualisation.size()

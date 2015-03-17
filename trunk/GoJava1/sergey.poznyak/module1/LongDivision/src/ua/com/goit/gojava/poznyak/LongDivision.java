@@ -11,7 +11,7 @@ import java.util.*;
 /**
  * The main class.
  * 
- * @version 2.0 25 Jan 2015
+ * @version 3.0 17 Mar 2015
  * @author Sergey Poznyak
  */
 public class LongDivision {
@@ -31,7 +31,7 @@ public class LongDivision {
 		System.out.println("Input the divisor:");
 		divisor = inputScan.nextInt();
 		inputScan.close();
-		DivisionClass divClass = new DivisionClass(dividend, divisor);
+		Division divClass = new Division(dividend, divisor);
 		System.out.println("Division result: " + divClass.divide());
 		System.out.println("Visualization:\n" + divClass.visualize());
 	}
