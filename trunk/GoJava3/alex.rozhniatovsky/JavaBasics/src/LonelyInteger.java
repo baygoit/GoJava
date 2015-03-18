@@ -22,7 +22,7 @@ public class LonelyInteger {
                     buffer[count] += 1;
                 }
                 //bit with shift
-                numbers[i] >>=  1;
+                numbers[i] >>= 1;
                 count--;
             }
         }

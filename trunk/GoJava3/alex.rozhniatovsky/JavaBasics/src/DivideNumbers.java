@@ -3,7 +3,7 @@ import java.util.ArrayList;
 /**
  * Created by roznalex on 14.03.2015.
  */
-public class DivideNumbers {
+public class    DivideNumbers {
     private static StringBuilder resultBuilder = new StringBuilder();
     private static ArrayList<Integer> dividends = new ArrayList<Integer>();
     private static ArrayList<Integer> dividers = new ArrayList<Integer>();
@@ -12,14 +12,14 @@ public class DivideNumbers {
 
     public static void main(String[] args) {
         try {
-            divide(64, 4);
-        }catch (Exception e) {
+            divide(12, 4);
+        } catch (Exception e) {
             e.printStackTrace();
         }
         showProcess();
     }
 
-    static void divide(int a, int b) throws Exception{
+    static void divide(int a, int b) throws Exception {
         boolean afterPoint = false;
 
         if (b == 0) {
@@ -40,7 +40,7 @@ public class DivideNumbers {
                 dividends.add(a);
 
             }
-            if (a / b != 0 || afterPoint == true)  {
+            if (a / b != 0 || afterPoint == true) {
                 temp = a / b;
                 resultBuilder.append(temp);
                 count++;
@@ -51,27 +51,23 @@ public class DivideNumbers {
         }
     }
 
-    static void divideEntirely(int a, int b) throws Exception{ //not finished
+    static void divideEntirely(int a, int b) throws Exception { //not finished
         int digit = 0;
-        int nextDigit = 0;
         char[] chars;
         dividends.add(a);
         dividers.add(b);
 
         chars = Integer.toString(a).toCharArray();
-        for (int i = 0; i < chars.length - 1; i++) {
-            digit = Character.getNumericValue(chars[i]);
+        digit = Character.getNumericValue(chars[0]);
+        for (int i = 1; i < chars.length; i++) {
             if (digit > b) {
                 temp = digit / b;
                 resultBuilder.append(temp);
             }
-            digit = (digit - b * temp) * 10 + Character.getNumericValue(chars[i + 1]);
+            digit = (digit - b * temp) * 10 + Character.getNumericValue(chars[i]);
             dividends.add(digit);
             dividers.add(b * temp);
-
         }
-
-
     }
 
     static void showProcess() {
