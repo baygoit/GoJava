@@ -1,33 +1,45 @@
 public class RotatedArrays {
-    
+    static int low;
+    static int high;
+    static int middle;
+
+    static void moveUp() {
+        low = middle + 1;
+        high--;
+    }
+
+    static void moveDown() {
+        high = middle - 1;
+        low++;
+    }
+
     public static int binarySearch(int[] array, int elem) {
-        int low = 0;
-        int high = array.length - 1; 
+        low = 0;
+        high = array.length - 1;
         while (low <= high) {
-            int middle = (low + high) / 2;
+            middle = (low + high) / 2;
             if (array[middle] == elem) {
                 return middle;
             } else if (array[low] == elem) {
                 return low;
             } else if (array[high] == elem) {
                 return high;
-            } 
-            if (array[middle] > elem) {
-                if (array[low] >= elem) {
-                    low = middle + 1;
-                    high--;
-                } else {
-                    high = middle - 1;
-                    low++;
-                }
             }
-            if (array[middle] < elem) {
-                if (array[high] <= elem) {
-                    high = middle - 1;
-                    low++;
+            if (array[middle] > elem) {
+                if (array[low] > elem) {
+                    if (array[middle] < array[low]) {
+                        moveDown();
+                    } else {
+                        moveUp();
+                    }
                 } else {
-                    low = middle + 1;
-                    high--;
+                    moveDown();
+                }
+            } else if (array[middle] < elem) {
+                if (array[middle] > array[low]) {
+                    moveUp();
+                } else {
+                    moveDown();
                 }
             }
         }
