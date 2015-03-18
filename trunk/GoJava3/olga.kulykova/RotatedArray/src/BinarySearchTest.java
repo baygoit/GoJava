@@ -22,4 +22,11 @@ public class BinarySearchTest extends TestCase {
         assertEquals(expectedResult, actualResult);
     }
 
+    public void test4() {
+        int expectedResult = -1;
+        int[] array = {};
+        int actualResult = new BinarySearch().findIndex(array, 0, 0, array.length - 1);
+        assertEquals(expectedResult, actualResult);
+    }
+
 }

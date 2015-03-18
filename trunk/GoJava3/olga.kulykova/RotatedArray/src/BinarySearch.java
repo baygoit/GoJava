@@ -9,23 +9,23 @@ public class BinarySearch {
             return -1;
         }
 
-        //find middle point
+        //Find the middle point
         int midInd = minInd + ((maxInd - minInd) / 2);
 
         //Comparisons
         if (array[midInd] > key) {
-            //Check left half
+            //Check the left half
             int result = findIndex(array, key, minInd, midInd - 1);
-            //If key is not found in left half go to right half
+            //If the key is not found in the left half go to the right half
             if (result == -1) {
                  return findIndex(array, key, midInd + 1, maxInd);
             } else {
                 return findIndex(array, key, minInd, midInd - 1);
             }
         } else if (array[midInd] < key) {
-            //Check right half
+            //Check he right half
             int result = findIndex(array, key, midInd + 1, maxInd);
-            //If key is not found in right half go to left half
+            //If the key is not found in the right half go to the left half
             if (result == -1) {
                 return findIndex(array, key, minInd, midInd - 1);
             }
