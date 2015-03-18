@@ -1,8 +1,6 @@
 package ua.com.goit.gojava1.lslayer.hackit2.ui;
 
-import java.awt.List;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
 
 import javax.servlet.ServletException;
@@ -12,13 +10,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import ua.com.goit.gojava1.lslayer.hackit2.actor.ActorFactory;
-import ua.com.goit.gojava1.lslayer.hackit2.dao.ActorJDBCDAO;
-import ua.com.goit.gojava1.lslayer.hackit2.exception.HackitIOException;
+import ua.com.goit.gojava1.lslayer.hackit2.domain.GameSession;
+import ua.com.goit.gojava1.lslayer.hackit2.domain.HackitIOException;
+import ua.com.goit.gojava1.lslayer.hackit2.domain.actor.ActorFactory;
 
 /**
  * Servlet implementation class ActorMaintainer
@@ -26,12 +21,14 @@ import ua.com.goit.gojava1.lslayer.hackit2.exception.HackitIOException;
 public class ActorMaintainer extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private static final Logger logger = LogManager.getLogger(ActorMaintainer.class);
+    private GameSession session = null;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
     public ActorMaintainer() {
         super();
+        this.session = GameSession.getInstance();
 
     }
 
@@ -42,24 +39,12 @@ public class ActorMaintainer extends HttpServlet {
     protected void doGet(HttpServletRequest request,
                          HttpServletResponse response) throws ServletException, IOException {
         logger.info("GET received");
-        @SuppressWarnings("resource")
-        AnnotationConfigApplicationContext ctx =
-                new AnnotationConfigApplicationContext();
-        ctx.register(ActorJDBCDAO.class);
-        ctx.refresh();
-        ActorJDBCDAO dao = null;
-        try {
-            dao = (ActorJDBCDAO) ctx.getBean("getActorJDBCDAO");
-        } catch (Exception e1) {
-            logger.error("Spring didn't privided DAO", e1);
-            e1.printStackTrace();
-        }
         String idParameter = request.getParameter("view_id");
         if (idParameter != null) {
             try {
                 logger.info("ID recived: " + idParameter);
                 long detailsId = Long.parseLong(idParameter);
-                request.setAttribute("details", dao.load(detailsId));
+                request.setAttribute("details", session.getRegisteredActor(detailsId));
             } catch (NumberFormatException e) {
                 logger.warn("Non numeric ID" + idParameter);
                 request.setAttribute("error", "Id should be number");
@@ -71,7 +56,7 @@ public class ActorMaintainer extends HttpServlet {
         } else {
             try {
                 logger.info("Trying to load all actors");
-                request.setAttribute("gamers", dao.loadAll());
+                request.setAttribute("gamers", session.getRegisteredGamers());
             } catch (HackitIOException e) {
                 logger.error("Loading failed", e);
                 request.setAttribute("error", e.getMessage());
@@ -97,20 +82,9 @@ public class ActorMaintainer extends HttpServlet {
                 request.setAttribute("error", e.getMessage());
             }
         }
-        @SuppressWarnings("resource")
-//        ApplicationContext ctx =
-//                new ClassPathXmlApplicationContext("beans.xml");
-        ApplicationContext ctx =
-        new AnnotationConfigApplicationContext();
-        ActorJDBCDAO dao = null;
-        try {
-            dao = (ActorJDBCDAO) ctx.getBean("getDAO");
-        } catch (Exception e1) {
-            e1.printStackTrace();
-        }
         if (deleteParameter != null && deleteParameter.equals("yes") && id > 0)
             try {
-                dao.delete(id);
+                session.deleteRegisteredActor(id);
             } catch (HackitIOException e) {
                 request.setAttribute("error", e.getMessage());
             }
@@ -128,7 +102,7 @@ public class ActorMaintainer extends HttpServlet {
                 attributes = request.getParameter("attributes").split("\r\n");
             }
             try {
-                dao.save(actorFactory.createActor());
+                session.registerActor(actorFactory.createActor());
             } catch (Exception e) {
                 request.setAttribute("error", e.getMessage());
             }

@@ -5,37 +5,34 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
-import ua.com.goit.gojava1.lslayer.hackit2.actor.Actor;
-import ua.com.goit.gojava1.lslayer.hackit2.actor.HumanControlledCharacter;
-import ua.com.goit.gojava1.lslayer.hackit2.exception.HackitIOException;
+import ua.com.goit.gojava1.lslayer.hackit2.domain.HackitIOException;
+import ua.com.goit.gojava1.lslayer.hackit2.domain.actor.Actor;
+import ua.com.goit.gojava1.lslayer.hackit2.domain.actor.ActorFactory;
 
 @Configuration
-@ComponentScan
 public class ActorJDBCDAO {
+    
+    @Autowired
+    ActorFactory factory;
+
+    @Autowired
+    DataSource ds;
 
     @Bean
     public ActorJDBCDAO getActorJDBCDAO() {
         return this;
     }
 
-    @Autowired
-    DataSource ds;
-    
-    
-    
     
     public Actor load(long newId) throws HackitIOException {
         Connection connection = null;
-        Actor returnValue;
         String loadSQL = "SELECT actors.actor_name, actors.id FROM actors WHERE actors.id=?;";
         String loadSkillsSQL = "SELECT name, value FROM skills WHERE owner = ?;";
         String loadAttributesSQL = "SELECT name, value FROM attributes WHERE owner = ?;";
@@ -49,26 +46,26 @@ public class ActorJDBCDAO {
             loadActor.setLong(1, newId);
             ResultSet result = loadActor.executeQuery();
             if (result.next()) {
-                returnValue = new HumanControlledCharacter(result.getString(1));
-                returnValue.setId(result.getLong(2));
+                factory.setActorName(result.getString(1));
+                factory.setId(result.getLong(2));
             } else {
                 throw new HackitIOException("Error while loading actor, no results");
             }
             loadSkills = connection.prepareStatement(loadSkillsSQL);
-            loadSkills.setLong(1, returnValue.getId());
+            loadSkills.setLong(1, factory.getId());
             result = loadSkills.executeQuery();
             while (result.next()) {
-                returnValue.addSkill(result.getString(1));
+                factory.addSkill(result.getString(1));
                 if (result.getInt(2) > 1)
-                    returnValue.incSkill(result.getString(1), result.getInt(2));
+                    factory.incSkill(result.getString(1), result.getInt(2));
             }
             loadAttributes = connection.prepareStatement(loadAttributesSQL);
-            loadAttributes.setLong(1, returnValue.getId());
+            loadAttributes.setLong(1, factory.getId());
             result = loadAttributes.executeQuery();
             while (result.next()) {
-                returnValue.addAttribute(result.getString(1), result.getString(2));
+                factory.addAttribute(result.getString(1), result.getString(2));
             }
-            return returnValue;
+            return factory.createActor();
         } catch (Exception e) {
 //            logger.warn("Error", e);
             throw new HackitIOException("Error while loading actor, something with sql: " + e.getMessage(), e);
@@ -125,22 +122,8 @@ public class ActorJDBCDAO {
                 throw new HackitIOException("Actor insertion failed, " + actor.getName() + " not added to base");
             }
             long returnValue = generatedKeys.getLong(1);
-            for (Map.Entry<String, Integer> entry : actor.getSkills().entrySet()) {
-                saveSkills.setLong(1, returnValue);
-                saveSkills.setString(2, entry.getKey());
-                saveSkills.setInt(3, entry.getValue());
-                if (saveSkills.executeUpdate() == 0) {
-                    throw new HackitIOException("Skill insertion failed, " + actor.getName() + " not added to base");
-                }
-            }
-            for (Map.Entry<String, String> entry : actor.getAttributes().entrySet()) {
-                saveAttributes.setLong(1, returnValue);
-                saveAttributes.setString(2, entry.getKey());
-                saveAttributes.setString(3, entry.getValue());
-                if (saveAttributes.executeUpdate() == 0) {
-                    throw new HackitIOException("Attribute insertion failed, " + actor.getName() + " not added to base");
-                }
-            }
+            
+            //TODO Make save skill feature
             connection.commit();
             return returnValue;
 

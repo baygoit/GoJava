@@ -4,8 +4,8 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import ua.com.goit.gojava1.lslayer.hackit2.gear.software.Software;
-import ua.com.goit.gojava1.lslayer.hackit2.gear.software.programs.SoftScannerProgramm;
+import ua.com.goit.gojava1.lslayer.hackit2.domain.gear.SoftScannerProgramm;
+import ua.com.goit.gojava1.lslayer.hackit2.domain.gear.Software;
 
 public class SoftwareSimpleTest {
     @Test

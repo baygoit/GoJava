@@ -31,8 +31,6 @@
    <br /> <input type="submit" />
   </form>
  </div>
-
-</body>
 <script type="text/javascript">
 var sk_counter = 1;
 var sk_limit = 7;
@@ -67,4 +65,5 @@ function addAttributeEntry(){
     }
 }
 </script>
+</body>
 </html>

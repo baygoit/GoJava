@@ -4,6 +4,8 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import ua.com.goit.gojava1.lslayer.hackit2.domain.actor.Position;
+
 public class DistanceTest {
     
     @Test

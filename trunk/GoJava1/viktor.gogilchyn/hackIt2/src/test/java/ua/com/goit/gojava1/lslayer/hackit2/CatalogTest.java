@@ -3,13 +3,13 @@ package ua.com.goit.gojava1.lslayer.hackit2;
 import org.junit.Before;
 import org.junit.Test;
 
-import ua.com.goit.gojava1.lslayer.hackit2.catalogs.Catalog;
-import ua.com.goit.gojava1.lslayer.hackit2.catalogs.CatalogBuilder;
-import ua.com.goit.gojava1.lslayer.hackit2.exception.HackitWrongParameterException;
-import ua.com.goit.gojava1.lslayer.hackit2.gear.hardware.Hardware;
-import ua.com.goit.gojava1.lslayer.hackit2.gear.hardware.devices.BombDevice;
-import ua.com.goit.gojava1.lslayer.hackit2.gear.hardware.devices.InfoDevice;
-import ua.com.goit.gojava1.lslayer.hackit2.gear.hardware.devices.ScanDevice;
+import ua.com.goit.gojava1.lslayer.hackit2.domain.HackitWrongParameterException;
+import ua.com.goit.gojava1.lslayer.hackit2.domain.catalog.Catalog;
+import ua.com.goit.gojava1.lslayer.hackit2.domain.catalog.CatalogBuilder;
+import ua.com.goit.gojava1.lslayer.hackit2.domain.gear.BombDevice;
+import ua.com.goit.gojava1.lslayer.hackit2.domain.gear.Hardware;
+import ua.com.goit.gojava1.lslayer.hackit2.domain.gear.InfoDevice;
+import ua.com.goit.gojava1.lslayer.hackit2.domain.gear.ScanDevice;
 
 public class CatalogTest {
     private Catalog catalog_abc;

@@ -2,8 +2,8 @@ package ua.com.goit.gojava1.lslayer.hackit2;
 
 import org.junit.Test;
 
-import ua.com.goit.gojava1.lslayer.hackit2.actor.ActorFactory;
-import ua.com.goit.gojava1.lslayer.hackit2.exception.HackitWrongParameterException;
+import ua.com.goit.gojava1.lslayer.hackit2.domain.HackitWrongParameterException;
+import ua.com.goit.gojava1.lslayer.hackit2.domain.actor.ActorFactory;
 
 public class FactoryTest {
     @Test

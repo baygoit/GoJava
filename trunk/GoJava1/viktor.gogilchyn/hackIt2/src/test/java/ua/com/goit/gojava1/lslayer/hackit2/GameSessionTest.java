@@ -4,10 +4,11 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import ua.com.goit.gojava1.lslayer.hackit2.action.SimpleLookAction;
-import ua.com.goit.gojava1.lslayer.hackit2.actor.HumanControlledCharacter;
-import ua.com.goit.gojava1.lslayer.hackit2.exception.HackitWrongParameterException;
-import ua.com.goit.gojava1.lslayer.hackit2.gear.hardware.devices.ScanDevice;
+import ua.com.goit.gojava1.lslayer.hackit2.domain.GameSession;
+import ua.com.goit.gojava1.lslayer.hackit2.domain.HackitWrongParameterException;
+import ua.com.goit.gojava1.lslayer.hackit2.domain.action.SimpleLookAction;
+import ua.com.goit.gojava1.lslayer.hackit2.domain.actor.HumanControlledCharacter;
+import ua.com.goit.gojava1.lslayer.hackit2.domain.gear.ScanDevice;
 
 public class GameSessionTest {
 
