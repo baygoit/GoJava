@@ -29,4 +29,10 @@ public class BinarySearchTest extends TestCase {
         assertEquals(expectedResult, actualResult);
     }
 
+    public void test5() {
+        int expectedResult = -1;
+        int[] array = {4, 5, 6, 7, 8, 9, 10, 1, 2, 3};
+        int actualResult = new BinarySearch().findIndex(array, 11, 0, array.length - 1);
+        assertEquals(expectedResult, actualResult);
+    }
 }
