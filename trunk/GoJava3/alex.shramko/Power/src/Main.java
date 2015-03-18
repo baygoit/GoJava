@@ -6,9 +6,10 @@ public class Main {
         int pow = root;
         int n = 1;
         for (int i = 0; i < 32; i++) {
-            if (i > 0)
-                pow *= pow;
-            if ((n & power) == n)
+            if ((n & power) == n) {
+                
+            }
+            pow *= pow;
                 result *= pow;
             n <<= 1;
         }
