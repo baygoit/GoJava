@@ -19,4 +19,12 @@ public interface DAOFactory {
     public StudioDao getStudioDao(Connection connection);
     
     public ReserveDao getReserveDao(Connection connection);
+    
+    public PhotographyDao getPhotographyDao(Connection connection);
+    
+    public PackageFotosDao getPackageFotosDao(Connection connection);
+    
+    public ScheduleDao getScheduleDao(Connection connection);
+    
+    public OrderDao getOrderDao(Connection connection);
 }

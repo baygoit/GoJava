@@ -20,13 +20,6 @@ public class PackageFotos{
 
     }
     
-    public PackageFotos(String packageDescription, int amountFotos, int timeEditingOneFoto, int percentReserveTime, int packageId) {
-        this.packageDescription = packageDescription;
-        this.amountFotos = amountFotos;
-        this.timeEditingOneFoto = timeEditingOneFoto;
-        this.percentReserveTime = percentReserveTime;
-    }
-    
     @Override
     public int hashCode() {
         final int prime = 31;

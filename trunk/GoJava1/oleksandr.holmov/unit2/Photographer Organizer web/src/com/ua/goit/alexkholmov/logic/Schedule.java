@@ -17,15 +17,15 @@ public class Schedule {
     static int TIME_WORKING_IN_WORK_DAY = 3; //hours
     static int TIME_WORKING_IN_DAY_OFF = 6; //hours
     static String PATTERN = "dd.MM.yyyy";
-    
-    private int amountDays = 0;
-    private WorkWithFotos workWithFotos;
-    
+    private SimpleDateFormat dateFormat = new SimpleDateFormat(PATTERN);
+
     private Calendar deadline;
     private Calendar startWork;
     private Calendar endWork;
     
-    private SimpleDateFormat dateFormat = new SimpleDateFormat(PATTERN);
+    private int scheduleId;
+    private int amountDays = 0;
+    private WorkWithFotos workWithFotos;
     
     WorkWithFotos getWorkWithFotos() {
         return workWithFotos;
@@ -44,6 +44,55 @@ public class Schedule {
         this.amountDays = amountDays;
     }
     
+    /**
+     * @return the tIME_WORKING_IN_WORK_DAY
+     */
+    public static int getTIME_WORKING_IN_WORK_DAY() {
+        return TIME_WORKING_IN_WORK_DAY;
+    }
+
+    /**
+     * @param tIME_WORKING_IN_WORK_DAY the tIME_WORKING_IN_WORK_DAY to set
+     */
+    public static void setTIME_WORKING_IN_WORK_DAY(int tIME_WORKING_IN_WORK_DAY) {
+        TIME_WORKING_IN_WORK_DAY = tIME_WORKING_IN_WORK_DAY;
+    }
+
+    /**
+     * @return the tIME_WORKING_IN_DAY_OFF
+     */
+    public static int getTIME_WORKING_IN_DAY_OFF() {
+        return TIME_WORKING_IN_DAY_OFF;
+    }
+
+    /**
+     * @param tIME_WORKING_IN_DAY_OFF the tIME_WORKING_IN_DAY_OFF to set
+     */
+    public static void setTIME_WORKING_IN_DAY_OFF(int tIME_WORKING_IN_DAY_OFF) {
+        TIME_WORKING_IN_DAY_OFF = tIME_WORKING_IN_DAY_OFF;
+    }
+
+    /**
+     * @return the deadline
+     */
+    public Calendar getDeadline() {
+        return deadline;
+    }
+
+    /**
+     * @return the startWork
+     */
+    public Calendar getStartWork() {
+        return startWork;
+    }
+
+    /**
+     * @return the endWork
+     */
+    public Calendar getEndWork() {
+        return endWork;
+    }
+
     public void setDeadline(String date) {
         try {
             Date dateParse = dateFormat.parse(date);

@@ -13,7 +13,11 @@ import javax.sql.DataSource;
 
 import com.ua.goit.alexkholmov.dao.CustomerDao;
 import com.ua.goit.alexkholmov.dao.DAOFactory;
+import com.ua.goit.alexkholmov.dao.OrderDao;
+import com.ua.goit.alexkholmov.dao.PackageFotosDao;
+import com.ua.goit.alexkholmov.dao.PhotographyDao;
 import com.ua.goit.alexkholmov.dao.ReserveDao;
+import com.ua.goit.alexkholmov.dao.ScheduleDao;
 import com.ua.goit.alexkholmov.dao.StudioDao;
 
 /**
@@ -50,6 +54,30 @@ public class PostgreSQLDaoFactory implements DAOFactory{
     @Override
     public ReserveDao getReserveDao(Connection connection) {
         return new PostgeSQLDaoReserve(connection);
+    }
+
+    @Override
+    public PhotographyDao getPhotographyDao(Connection connection) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public PackageFotosDao getPackageFotosDao(Connection connection) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public ScheduleDao getScheduleDao(Connection connection) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public OrderDao getOrderDao(Connection connection) {
+        // TODO Auto-generated method stub
+        return null;
     }
     
 }
