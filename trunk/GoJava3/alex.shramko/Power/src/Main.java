@@ -7,10 +7,9 @@ public class Main {
         int n = 1;
         for (int i = 0; i < 32; i++) {
             if ((n & power) == n) {
-                
+                result *= pow;
             }
             pow *= pow;
-                result *= pow;
             n <<= 1;
         }
         
