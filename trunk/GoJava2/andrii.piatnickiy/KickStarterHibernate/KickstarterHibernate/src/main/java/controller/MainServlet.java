@@ -38,34 +38,42 @@ public class MainServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-	
-		
-		
-
+		PrintWriter printWriter = response.getWriter();
 		String action = getAction(request);
 		// TODO refactoring to polymorph with map
 		if (action.startsWith("/categories")) {
 
 			LinkedList<Category> categories = categoriesDAO.getCategoriesList();
-			PrintWriter printWriter = response.getWriter();
-			for(Category c : categories){
-				
-				printWriter.print(c.getName());
+
+			for (Category category : categories) {
+				printWriter.print("<p>");
+				printWriter
+						.print("<a href=\"/KickstarterHibernate-0.0.1-SNAPSHOT/projects?category=");
+				printWriter.print(category.getId());
+				printWriter.print("\">");
+				printWriter.print(category.getName());
+				printWriter.print("</a>");
+				printWriter.print("</p>");
 			}
-			
-			
-//			 request.setAttribute("categories", categories);
-//			request.getRequestDispatcher("/categories.jsp").forward(request,
-//					response);
+
+			// request.setAttribute("categories", categories);
+			// request.getRequestDispatcher("/categories.jsp").forward(request,
+			// response);
+		} else if (action.startsWith("/projects")) {
+			int categoryId = Integer.valueOf(request.getParameter("category"));
+			LinkedList<Project> projects = projectsDAO
+					.getProjectsList(categoryId);
+
+			for (Project project : projects) {
+				printWriter.print("<p>");
+				printWriter.print(project.getName());
+				printWriter.print("</p>");
+			}
+
+			// request.setAttribute("projects", projects);
+			// request.getRequestDispatcher("/projects.jsp").forward(request,
+			// response);
 		}
-		// else if (action.startsWith("/projects")) {
-		// int categoryId = Integer.valueOf(request.getParameter("category"));
-		// LinkedList<Project> projects = projectsDAO
-		// .getProjectsList(categoryId);
-		// request.setAttribute("projects", projects);
-		// request.getRequestDispatcher("/projects.jsp").forward(request,
-		// response);
-		// }
 
 	}
 

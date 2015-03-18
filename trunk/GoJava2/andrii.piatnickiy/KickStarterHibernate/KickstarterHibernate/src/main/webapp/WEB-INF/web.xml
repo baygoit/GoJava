@@ -14,8 +14,6 @@
 		</listener-class>
 	</listener>
 
- 
- 
 	<servlet>
 		<servlet-name>mainServlet</servlet-name>
 		<servlet-class>controller.MainServlet</servlet-class>
