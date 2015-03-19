@@ -34,7 +34,7 @@ public class RotatedArrays {
     }
    
     private static int binarySearch(int[] array, int target, int start, int finish) {
-        if (start < finish) {return -1;}
+        if (start > finish) {return -1;}
         if (target == array[start]) {return start;}
         if (target == array[finish]) {return finish;}
         if (start == finish) {
