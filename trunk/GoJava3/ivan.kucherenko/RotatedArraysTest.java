@@ -130,5 +130,12 @@ public class RotatedArraysTest {
             new int[] { 4, 5, 6, 7, 8, 9, 10, 1, 2, 3 }, 6);
     	assertEquals(expected, actual);
     }
+    @Test
+    public void test17() { 
+    	int expected = 3;
+    	int actual = RotatedArrays.binarySearch(
+            new int[] {10, 1, 2, 3, 4, 5, 6, 7, 8, 9}, 3);
+    	assertEquals(expected, actual);
+    }
 
 }

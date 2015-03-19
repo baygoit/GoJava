@@ -31,7 +31,9 @@ public class RotatedArrays {
         	return lastIndex;
         } else if (target == array[middle]){
         	return middle;
-        } else if (target <= array[middle -1] && target > array[firstIndex]){
+        } else if (target <= array[middle - 1] && target > array[firstIndex]){
+            return splitAndSearch(target, array, firstIndex, middle - 1);
+        } else if (array[firstIndex]> array[middle-1] && target < array[middle]){
             return splitAndSearch(target, array, firstIndex, middle - 1);
         } else {
             return splitAndSearch(target, array, middle + 1, lastIndex);
