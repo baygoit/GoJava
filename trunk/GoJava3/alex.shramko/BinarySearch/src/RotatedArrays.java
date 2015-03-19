@@ -36,10 +36,14 @@ public class RotatedArrays {
                     moveDown();
                 }
             } else if (array[middle] < elem) {
-                if (array[middle] > array[low]) {
+                if (array[low] > elem) {
                     moveUp();
                 } else {
-                    moveDown();
+                    if (array[middle] > array[low]) {
+                        moveUp();
+                    } else {
+                        moveDown();
+                    }
                 }
             }
         }
@@ -47,6 +51,7 @@ public class RotatedArrays {
     }
 
     public static void main(String[] args) {
+        binarySearch(new int[] { 10, 1, 2, 3, 4, 5, 6, 7, 8, 9 }, 5);
 
     }
 
