@@ -55,8 +55,7 @@ public class RotatedArraysTest {
     @Test
     public void test6() {
     	 int expected = -1;
-         int actual = RotatedArrays.binarySearch(new int[] { 4, 5, 6, 7, 1, 2, 3 },
-                 8);
+         int actual = RotatedArrays.binarySearch(new int[] { 4, 5, 6, 7, 1, 2, 3 },8);
          assertEquals(expected, actual);
     }
     @Test
@@ -132,9 +131,9 @@ public class RotatedArraysTest {
     }
     @Test
     public void test17() { 
-    	int expected = 3;
+    	int expected = 1;
     	int actual = RotatedArrays.binarySearch(
-            new int[] {10, 1, 2, 3, 4, 5, 6, 7, 8, 9}, 3);
+            new int[] {10, 1, 2, 3, 4, 5, 6, 7, 8, 9}, 1);
     	assertEquals(expected, actual);
     }
 
