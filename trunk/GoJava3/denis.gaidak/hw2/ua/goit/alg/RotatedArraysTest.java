@@ -114,21 +114,32 @@ public class RotatedArraysTest {
     }
 
     @Test
-    public void testNoneFoundTarget() {
-        int target = 11;
+    public void testRotatedArraysNoneFoundTarget() {
+        int target1 = 11;
+        int target2 = 0;
+
         int expected = -1;
         int[] array = {4, 5, 6, 7, 8, 9, 10, 1, 2, 3};
-        int actual = RotatedArrays.binarySearch(array, target);
-        Assert.assertEquals(expected, actual);
+
+        int actual1 = RotatedArrays.binarySearch(array, target1);
+        Assert.assertEquals(expected, actual1);
+        int actual2 = RotatedArrays.binarySearch(array, target2);
+        Assert.assertEquals(expected, actual2);
+
     }
 
     @Test
-    public void testNoneFoundTarget_1() {
-        int target = 0;
+    public void testNoneFoundTarget() {
+        int target1 = 11;
+        int target2 = 0;
+
         int expected = -1;
         int[] array = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-        int actual = RotatedArrays.binarySearch(array, target);
-        Assert.assertEquals(expected, actual);
+
+        int actual1 = RotatedArrays.binarySearch(array, target1);
+        Assert.assertEquals(expected, actual1);
+        int actual2 = RotatedArrays.binarySearch(array, target2);
+        Assert.assertEquals(expected, actual2);
     }
 
 

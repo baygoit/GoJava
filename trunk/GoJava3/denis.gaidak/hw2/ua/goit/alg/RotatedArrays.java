@@ -2,55 +2,29 @@ package ua.goit.alg;
 
 public class RotatedArrays {
 
-    public static int binarySearch_old(int[] array, int target) {
-
-        if (array.length == 0) {
-            return -1;
-        }
-
-        int left = 0;
-        int right = array.length;
-
-        while (left <= right) {
-            int middle = left + (right-left)/2;
-
-            if (array[middle] == target) return middle;
-
-            if (array[middle] > target) {
-                right = middle--;
-            } else {
-                left = middle++;
-            }
-        }
-
-        return -1;
-    }
-
     public static int binarySearch(int[] array, int target) {
-        if (array.length == 0) return -1;
-        return starBinarySearh(array, target, 0, array.length-1);
+        return startBinarySearch(array, target, 0, array.length - 1);
     }
 
-    private static int starBinarySearh(int[] array, int target, int left, int right) {
+    private static int startBinarySearch(int[] array, int target, int left, int right) {
+        if (array.length == 0) return -1;
         if (target == array[left]) return left;
         if (target == array[right]) return right;
         if (left >= right) return -1;
 
-        int middle = left + (right-left)/2;
-
-//        if (array[left] > array[right]) {
-//            return -10;
-//        }
+        int middle = (right+left)>>1;
+        if (array[middle] > array[right] && array[right] >= target) {
+            return startBinarySearch(array, target, middle, right);
+        }
 
         if (array[middle] == target) {
             return middle;
         } else if (array[middle] > target) {
-            return starBinarySearh(array, target, left, middle--);
+            return startBinarySearch(array, target, left+1, middle-1);
         } else {
-            return starBinarySearh(array, target, middle++, right);
+            return startBinarySearch(array, target, middle+1, right-1);
         }
 
-//        return -1;
     }
 
 }
