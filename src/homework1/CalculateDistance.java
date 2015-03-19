@@ -27,6 +27,9 @@ Output: 2
 
 Input: 2 5 8 7 2 2 3 1
 Output: 2
+
+Input: 2 5 8 7 2 2 3 1 0
+Output: 1
  */
 
 public class CalculateDistance {
@@ -46,7 +49,11 @@ public class CalculateDistance {
 
         for (int i=1;i<array.length;i++) {
             if (array[i]<min) {
-                if (secondMin>array[i]) {
+                if (secondMin<min) {
+                    secondMin = min;
+                    indexSecondMin = indexMin;
+                }
+                if (secondMin>min) {
                     secondMin = min;
                     indexSecondMin = indexMin;
                 }
