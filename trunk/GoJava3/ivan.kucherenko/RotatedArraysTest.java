@@ -16,7 +16,7 @@ import org.junit.Test;
 public class RotatedArraysTest {
 
     @Test
-    public void test1() {
+    public void testReturnFiveSmall() {
         int expected;
         int actual;
         expected = 1;
@@ -25,54 +25,54 @@ public class RotatedArraysTest {
         assertEquals(expected, actual);
         }
     @Test
-    public void test2() {
+    public void testReturnEight() {
     	int expected = 4;
     	int actual = RotatedArrays.binarySearch(
             new int[] {4, 5, 6, 7, 8, 1, 2, 3 }, 8);
     	assertEquals(expected, actual);
     	}
     @Test
-    public void test3() {
+    public void testReturnFor() {
     	int expected = 0;
     	int actual = RotatedArrays.binarySearch(
             new int[] { 4, 5, 6, 7, 8, 1, 2, 3 }, 4);
     	assertEquals(expected, actual);
     	}
     @Test
-    public void test4() {
+    public void testReturnOne() {
     	int expected = 5;
     	int actual = RotatedArrays.binarySearch(
             new int[] { 4, 5, 6, 7, 8, 1, 2, 3 }, 1);
     	assertEquals(expected, actual);
     	}
     @Test
-    public void test5() {
+    public void testReturnTwo() {
     	int expected = 6;
         int actual = RotatedArrays.binarySearch(
                 new int[] { 4, 5, 6, 7, 8, 1, 2, 3 }, 2);
         assertEquals(expected, actual);
     }
     @Test
-    public void test6() {
+    public void testIfNoHaveElement() {
     	 int expected = -1;
          int actual = RotatedArrays.binarySearch(new int[] { 4, 5, 6, 7, 1, 2, 3 },8);
          assertEquals(expected, actual);
     }
     @Test
-    public void test7() {
+    public void testSmallArray() {
     	int expected = 4;
     	int actual = RotatedArrays.binarySearch(new int[] { 4, 5, 7, 8, 2, 3 }, 2);
     	assertEquals(expected, actual);
     }
     @Test
-    public void test8() {
+    public void testFirstIndexSix() {
     	int expected = 2;
     	int actual = RotatedArrays.binarySearch(
             new int[] { 6, 7, 8, 1, 2, 3, 4, 5 }, 8);
     	assertEquals(expected, actual);
     }
     @Test
-    public void test9() {
+    public void testReturnFive() {
     	int expected = 1;
     	int actual = RotatedArrays.binarySearch(
             new int[] { 4, 5, 6, 7, 8, 9, 10, 1, 2, 3 }, 5);
@@ -86,7 +86,7 @@ public class RotatedArraysTest {
     	assertEquals(expected, actual);
     }
     @Test
-    public void test11() { 
+    public void testReturnSeven() { 
     	int expected = 3;
     	int actual = RotatedArrays.binarySearch(
             new int[] { 4, 5, 6, 7, 8, 9, 10, 1, 2, 3 }, 7);
@@ -94,7 +94,7 @@ public class RotatedArraysTest {
     }
     
     @Test
-    public void test12() { 
+    public void testTwoElementArrayReturnOne() { 
     	int expected = 1;
     	int actual = RotatedArrays.binarySearch(
             new int[] {2,1}, 1);
@@ -102,38 +102,52 @@ public class RotatedArraysTest {
     }
     
     @Test
-    public void test13() { 
+    public void testThreeElementInvertedArrayReturnTwo() { 
     	int expected = 2;
     	int actual = RotatedArrays.binarySearch(
             new int[] {3, 1, 2}, 2);
     	assertEquals(expected, actual);
     }
     @Test
-    public void test14() { 
+    public void testThreeElementArrayReturnOne() { 
     	int expected = 2;
     	int actual = RotatedArrays.binarySearch(
             new int[] {2, 3, 1}, 1);
     	assertEquals(expected, actual);
     }
     @Test
-    public void test15() { 
+    public void testThreeElementShufleArrayReturnOne() { 
     	int expected = 0;
     	int actual = RotatedArrays.binarySearch(
             new int[] {1, 2, 3}, 1);
     	assertEquals(expected, actual);
     }
     @Test
-    public void test16() { 
+    public void testReturnSix() { 
     	int expected = 2;
     	int actual = RotatedArrays.binarySearch(
             new int[] { 4, 5, 6, 7, 8, 9, 10, 1, 2, 3 }, 6);
     	assertEquals(expected, actual);
     }
     @Test
-    public void test17() { 
+    public void testReversedArrayReturnOne() { 
     	int expected = 1;
     	int actual = RotatedArrays.binarySearch(
             new int[] {10, 1, 2, 3, 4, 5, 6, 7, 8, 9}, 1);
+    	assertEquals(expected, actual);
+    }
+    @Test
+    public void testTwoElementsReversedReturnOne() { 
+    	int expected = 1;
+    	int actual = RotatedArrays.binarySearch(
+            new int[] {10, 1}, 1);
+    	assertEquals(expected, actual);
+    }
+    @Test
+    public void testTwoElementsReturnTwo() { 
+    	int expected = 0;
+    	int actual = RotatedArrays.binarySearch(
+            new int[] {1, 2}, 1);
     	assertEquals(expected, actual);
     }
 
