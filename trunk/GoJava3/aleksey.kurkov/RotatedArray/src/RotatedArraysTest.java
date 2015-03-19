@@ -80,4 +80,10 @@ public class RotatedArraysTest extends TestCase {
 
     }
 
+    public void test5() {
+        int[] array = {10, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+        int expectedResult = 1;
+        int actualResult = RotatedArrays.binaryModifiedSearch(array, 1);
+        assertEquals(expectedResult, actualResult);
+    }
 }
