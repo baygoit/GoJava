@@ -30,13 +30,13 @@ public class RotatedArrays {
         	return lastIndex;
         } else if (target == array[middle]){
         	return middle;
-        } else if (target <= array[middle -1] && target >= array[firstIndex]) {
+        } else if (target <= array[middle -1] && target > array[firstIndex]) {
             return splitAndSearch(target, array, firstIndex, middle - 1);
-        } else if (target >= array[middle+1] && target <= array[lastIndex]) {
+        } else if (target > array[middle+1] && target < array[lastIndex]) {
             return splitAndSearch(target, array, middle + 1, lastIndex);
-        } else if (target > array[firstIndex] && target <= array[middle-1]){
+        } else if (target > array[firstIndex] && target < array[middle-1]){
             return splitAndSearch(target, array, firstIndex, middle - 1);
-        } else if (target >= array[middle +1] && target >= array[firstIndex]){
+        } else if (target > array[middle +1] && target > array[firstIndex]){
         	return splitAndSearch(target, array, middle + 1, lastIndex);
         } else {
         	return splitAndSearch(target, array, middle + 1, lastIndex);
