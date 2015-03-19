@@ -1,28 +1,25 @@
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.Stack;
+
 public class Anagram {
 	public static void main(String[] args) {
-		String toPrint = "";
 		Scanner sc = new Scanner(System.in);
-		StringBuffer input = new StringBuffer(sc.nextLine());
+		String source=sc.nextLine();
+		int start = -1;
 		int end = 0;
-		int i = 0;
-		int j = 0;
 		do {
-			end = input.indexOf(" ", end + 1);
-			if(end == -1) {
-				end = input.length();
+			end = source.indexOf(" ", end + 1);
+			if (end == -1) {
+				end = source.length();
 			}
-			for (int k = i; k <= (i + end - 1) / 2; k++) {
-				char tmp = input.charAt(k);
-				input.setCharAt(k, input.charAt(end - 1 - j));
-				input.setCharAt(end - 1 - j, tmp);
-				j++;
+			for (int i = end - 1; i >= start + 1; i--) {
+				System.out.print(source.charAt(i));
 			}
-			i = end + 1;
-			j = 0;
-		}while(end != input.length());
-		System.out.println(input.toString());
+			if (end != source.length()) {
+				System.out.print(" ");
+			}
+			start = end;
+		} while (end != source.length());
 	}
 }
