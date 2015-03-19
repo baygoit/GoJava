@@ -1,6 +1,5 @@
 public class RotatedArrays {
 
-	//{4,5,6,7,8,9,10,11,1,2,3}
 	final static int FIRST_INDEX = 0;
 
     public static int binarySearch(int[] array, int target) {
@@ -8,12 +7,12 @@ public class RotatedArrays {
     		return -1;
     	}
     	int lastIndex = array.length -1;
-    	int midle = FIRST_INDEX + (lastIndex-FIRST_INDEX)/2;
-    	if (array[midle] == target){
-    		return midle;
+    	int middle = FIRST_INDEX + (lastIndex-FIRST_INDEX)/2;
+    	if (array[middle] == target){
+    		return middle;
     	}
-    	int leftSearchRes = search(array, target, FIRST_INDEX, midle -1);
-    	int rightSearchRes = search(array, target, midle+1, lastIndex); 
+    	int leftSearchRes = search(array, target, FIRST_INDEX, middle -1);
+    	int rightSearchRes = search(array, target, middle+1, lastIndex); 
     	
     	if (leftSearchRes != -1 && target == array[leftSearchRes]){
     		return leftSearchRes;
@@ -27,17 +26,17 @@ public class RotatedArrays {
     	if (firstIndex > lastIndex){
     		return -1;
     	}
-    	int midle = (firstIndex+lastIndex)/2;
-    	if (target == array[midle]) {
-    		return midle;
+    	int middle = (firstIndex+lastIndex)/2;
+    	if (target == array[middle]) {
+    		return middle;
     	} else if (target == array[firstIndex]){
     		return firstIndex;
-    	} else if (midle != 0 && target == array[midle-1]) {
-    		return midle-1;
-    	}else if (target < array[midle]){
-    		return search(array, target, firstIndex, midle-1);
-    	} else if (target > array[midle]){
-    		return search(array, target, midle+1, lastIndex);
+    	} else if (middle != 0 && target == array[middle-1]) {
+    		return middle-1;
+    	}else if (target < array[middle]){
+    		return search(array, target, firstIndex, middle-1);
+    	} else if (target > array[middle]){
+    		return search(array, target, middle+1, lastIndex);
     	} else {
     		return -1; 
     	}

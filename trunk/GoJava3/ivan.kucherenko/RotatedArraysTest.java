@@ -52,7 +52,7 @@ public class RotatedArraysTest {
 	}
 	
 	@Test
-	public void testIfMidle(){
+	public void testIfMiddle(){
 		int[] testArray = {4,5,6,7,8,9,10,11,1,2,3};
 		int actualResult = RotatedArrays.binarySearch(testArray, 1);
 		int expectedresult = 8;
