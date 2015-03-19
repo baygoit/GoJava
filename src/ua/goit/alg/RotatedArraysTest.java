@@ -1,4 +1,4 @@
-package homework2;
+package ua.goit.alg;
 
 import junit.framework.TestCase;
 

@@ -1,4 +1,4 @@
-package homework2;
+package ua.goit.alg;
 
 /**
  * Created by Alex on 19.03.2015.
