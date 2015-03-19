@@ -23,7 +23,7 @@ public class RotatedArrays {
       }
         	int middle = firstIndex + (lastIndex - firstIndex) / 2;
          
-     if (firstIndex == lastIndex && firstIndex < target){
+     if (firstIndex == lastIndex && array[firstIndex] != target){
         	return -1;
         } else if (target == array[firstIndex]){
         	return firstIndex;
