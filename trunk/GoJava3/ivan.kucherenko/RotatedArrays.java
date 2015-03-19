@@ -12,15 +12,16 @@ package ua.goit.alg;
 */
 
 public class RotatedArrays {
+	
     public static int binarySearch(int[] array, int target) {
-        return splitAndSearch(target, array, 0, array.length-1);
+        	return splitAndSearch(target, array, 0, array.length-1);
     }
   
     private static int splitAndSearch(int target, int[]array, int firstIndex, int lastIndex) {
       if (firstIndex > lastIndex){
         	return -1;
       }
-        int middle = firstIndex + (lastIndex - firstIndex) / 2;
+        	int middle = firstIndex + (lastIndex - firstIndex) / 2;
          
      if (firstIndex == lastIndex && firstIndex < target){
         	return -1;
@@ -30,16 +31,10 @@ public class RotatedArrays {
         	return lastIndex;
         } else if (target == array[middle]){
         	return middle;
-        } else if (target <= array[middle -1] && target > array[firstIndex]) {
+        } else if (target <= array[middle -1] && target > array[firstIndex]){
             return splitAndSearch(target, array, firstIndex, middle - 1);
-        } else if (target > array[middle+1] && target < array[lastIndex]) {
-            return splitAndSearch(target, array, middle + 1, lastIndex);
-        } else if (target > array[firstIndex] && target < array[middle-1]){
-            return splitAndSearch(target, array, firstIndex, middle - 1);
-        } else if (target > array[middle +1] && target > array[firstIndex]){
-        	return splitAndSearch(target, array, middle + 1, lastIndex);
         } else {
-        	return splitAndSearch(target, array, middle + 1, lastIndex);
+            return splitAndSearch(target, array, middle + 1, lastIndex);
       }
      }
     }
