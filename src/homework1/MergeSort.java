@@ -32,7 +32,7 @@ public class MergeSort {
         int[] leftArray = new int[elementsInLeftArray+1];
         int[] rightArray = new int[elementsInRightArray+1];
         for (int i=0;i<leftArray.length-1;i++) {
-            leftArray[i] = array[firstElement + i]; //!!! -1
+            leftArray[i] = array[firstElement + i];
         }
         for (int i=0;i<rightArray.length-1;i++) {
             rightArray[i] = array[partitionElement + i + 1];

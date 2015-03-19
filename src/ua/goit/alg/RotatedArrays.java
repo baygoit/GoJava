@@ -13,21 +13,25 @@ public class RotatedArrays {
     }
 
     private static int startBinarySearch(int[] array, int target, int startIndex, int endIndex) {
-        if (startIndex==endIndex) {
-            if (array[startIndex]==target) {
-                return startIndex;
-            } else {
-                return -1;
-            }
-        }
         int partitionIndex = startIndex + (endIndex-startIndex)/2;
-        if (array[partitionIndex]==target) {
-            return partitionIndex;
+        while (startIndex!=endIndex && array[partitionIndex]!=target) {
+            boolean leftCondition1 = array[startIndex] <= target && array[partitionIndex] > target;
+            boolean leftCondition2 = array[startIndex] <= target && array[startIndex] > array[partitionIndex];
+            boolean leftCondition3 =
+                    array[partitionIndex] > target &&
+                    array[partitionIndex] < array[startIndex] &&
+                    array[partitionIndex] < array[endIndex];
+            if (leftCondition1 || leftCondition2 || leftCondition3) {
+                endIndex = partitionIndex - 1;
+            } else {
+                startIndex = partitionIndex + 1;
+            }
+            partitionIndex = startIndex + (endIndex-startIndex)/2;
         }
-        if ((array[startIndex]<=target && array[partitionIndex]>target) || (array[startIndex]<=target && array[startIndex]>array[partitionIndex])) {
-            return startBinarySearch(array, target, startIndex, partitionIndex-1);
+        if (array[partitionIndex] == target) {
+            return partitionIndex;
         } else {
-            return startBinarySearch(array, target, partitionIndex+1, endIndex);
+            return -1;
         }
     }
 }
