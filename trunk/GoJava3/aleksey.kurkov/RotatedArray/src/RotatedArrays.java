@@ -8,7 +8,7 @@ public class RotatedArrays {
         int middle;
 
         // array contains 0 items
-        if (end < start) {
+        if (array.length == 0) {
             return -1;
         }
 
@@ -44,6 +44,10 @@ public class RotatedArrays {
     }
 
     public static int binaryModifiedSearch(int[] array, int target) {
+        //check if array is empty
+        if (array.length == 0) {
+            return -1;
+        }
         int start = 0;
         int end = array.length - 1;
         int middle;
@@ -58,6 +62,9 @@ public class RotatedArrays {
             }
         }
         int pivot = start;
+        if (array[pivot] == target){
+            return pivot;
+        }
 
         // search target before pivot
         int result1 = binarySearch(array, target, pivot, array.length - 1);
