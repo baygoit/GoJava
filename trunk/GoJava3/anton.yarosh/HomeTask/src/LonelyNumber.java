@@ -6,6 +6,7 @@
  *  
  */
 import java.util.Arrays;
+
 public class LonelyNumber {
 	public static void main(String[] args) {
 		int lonelyNumber = 0;
@@ -18,11 +19,11 @@ public class LonelyNumber {
 		for (int i = 0; i < m.length; i++) {
 			int j = 0;
 			int k = m[i];
-			while(k != 0) {
-				if(j >= rez.length - 1){
+			while (k != 0) {
+				if (j >= rez.length - 1) {
 
 					/*if max number from initial massive in binary format 
-					 * has more digits than rez length, length of rezwill be doubled
+					 * has more digits than rez length, length of rez will be doubled
 					 */
 					rez = Arrays.copyOf(rez, rez.length * 2);
 				}
@@ -32,10 +33,10 @@ public class LonelyNumber {
 				k = k / 2;
 				j++;
 			}
-			if(j > maxIndex) {
+			if (j > maxIndex) {
 
 				/*keep max digit index*/
-				maxIndex=j;
+				maxIndex = j;
 			}
 		}
 
@@ -45,5 +46,4 @@ public class LonelyNumber {
 		}
 		System.out.println(lonelyNumber);
 	}
-
 }
