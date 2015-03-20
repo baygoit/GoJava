@@ -8,6 +8,30 @@ import org.junit.Test;
 public class TestRotatedArrays {
 
     @Test
+    public void testOneElement() {
+        int[] array = {3};
+        int result = RotatedArrays.binarySearch(array,3);
+        int expectedresult = 0;
+        assertEquals(result, expectedresult);
+    }
+
+    @Test
+    public void testTwoElementsSorted() {
+        int[] array = {3,7};
+        int result = RotatedArrays.binarySearch(array,3);
+        int expectedresult = 0;
+        assertEquals(result, expectedresult);
+    }
+
+    @Test
+    public void testTwoElements() {
+        int[] array = {7,3};
+        int result = RotatedArrays.binarySearch(array,3);
+        int expectedresult = 1;
+        assertEquals(result, expectedresult);
+    }
+
+    @Test
     public void testPresented() {
         int[] array = {4, 5, 6, 7, 8, 9, 10, 1, 2, 3};
         int result = RotatedArrays.binarySearch(array,5);
