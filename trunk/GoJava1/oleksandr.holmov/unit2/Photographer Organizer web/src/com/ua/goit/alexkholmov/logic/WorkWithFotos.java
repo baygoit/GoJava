@@ -41,7 +41,7 @@ public class WorkWithFotos {
     }
 
     //return in hours
-    int timeEditingFotosInPackage() throws Exception {
+    public int timeEditingFotosInPackage() throws Exception {
         if (allFotos.isEmpty()) {
             throw new Exception("You shoud add at least one package!");
         } else {

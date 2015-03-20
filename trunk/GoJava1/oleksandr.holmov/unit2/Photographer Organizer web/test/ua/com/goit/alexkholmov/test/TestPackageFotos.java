@@ -13,7 +13,7 @@ import com.ua.goit.alexkholmov.logic.*;
  *
  */
 public class TestPackageFotos {
-    private PackageFotos pFotos = new PackageFotos("pack1", 250, 15, 10, 1);
+    private PackageFotos pFotos = new PackageFotos(250, 15, 10);
 
     /**
      * Test method for {@link ua.com.goit.gojava.alex_kholmov.PackageFotos#timeEditAllFotos()}.

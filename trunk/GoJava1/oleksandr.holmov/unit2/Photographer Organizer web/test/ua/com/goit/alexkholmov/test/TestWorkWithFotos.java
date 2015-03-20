@@ -13,8 +13,8 @@ import com.ua.goit.alexkholmov.logic.*;
  *
  */
 public class TestWorkWithFotos {
-    private PackageFotos pFotos1 = new PackageFotos("pack1", 250, 15, 10, 1);
-    private PackageFotos pFotos2 = new PackageFotos("pack2", 45, 40, 15, 2);
+    private PackageFotos pFotos1 = new PackageFotos(250, 15, 10);
+    private PackageFotos pFotos2 = new PackageFotos(45, 40, 15);
     
     private WorkWithFotos workWithFotos = new WorkWithFotos();
     
@@ -31,7 +31,7 @@ public class TestWorkWithFotos {
     public void testAddPackage() {
         //fail("Not yet implemented"); // TODO
         int count = 0;
-        for (PackageFotos pf : workWithFotos.allFotos) {
+        for (PackageFotos pf : workWithFotos.getAllFotos()) {
             count++;
         }
         assertEquals("Error in adding package", 2, count);
@@ -45,7 +45,7 @@ public class TestWorkWithFotos {
         //fail("Not yet implemented"); // TODO
         workWithFotos.removePackage(pFotos1);
         int count = 0;
-        for (PackageFotos pf : workWithFotos.allFotos) {
+        for (PackageFotos pf : workWithFotos.getAllFotos()) {
             count++;
         }
         assertEquals("Error in removing package", 1, count);

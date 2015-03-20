@@ -20,6 +20,12 @@ public class PackageFotos{
 
     }
     
+    public PackageFotos(int amountFotos, int timeEditingOneFoto, int percentReserveTime) {
+        this.amountFotos = amountFotos;
+        this.timeEditingOneFoto = timeEditingOneFoto;
+        this.percentReserveTime = percentReserveTime;
+    }
+    
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -54,47 +60,75 @@ public class PackageFotos{
             return false;
         return true;
     }
-
     
-
-    int getPackageId() {
-        return packageId;
-    }
-
-    void setPackageId(int packageId) {
-        this.packageId = packageId;
-    }
-
-    String getDescribePackage() {
+    /**
+     * @return the packageDescription
+     */
+    public String getPackageDescription() {
         return packageDescription;
     }
 
-    void setDescribePackage(String packageDescription) {
+    /**
+     * @param packageDescription the packageDescription to set
+     */
+    public void setPackageDescription(String packageDescription) {
         this.packageDescription = packageDescription;
     }
 
-    int getAmountFotos() {
+    /**
+     * @return the amountFotos
+     */
+    public int getAmountFotos() {
         return amountFotos;
     }
-    
-    void setAmountFotos(int amountFotos) {
+
+    /**
+     * @param amountFotos the amountFotos to set
+     */
+    public void setAmountFotos(int amountFotos) {
         this.amountFotos = amountFotos;
     }
-    
-    int getTimeEditingFoto() {
+
+    /**
+     * @return the timeEditingOneFoto
+     */
+    public int getTimeEditingOneFoto() {
         return timeEditingOneFoto;
     }
-    
-    void setTimeEditingFoto(int timeEditingOneFoto) {
+
+    /**
+     * @param timeEditingOneFoto the timeEditingOneFoto to set
+     */
+    public void setTimeEditingOneFoto(int timeEditingOneFoto) {
         this.timeEditingOneFoto = timeEditingOneFoto;
     }
-    
-    int getPercentReserve() {
+
+    /**
+     * @return the percentReserveTime
+     */
+    public int getPercentReserveTime() {
         return percentReserveTime;
     }
 
-    void setPercentReserve(int percentReserveTime) {
+    /**
+     * @param percentReserveTime the percentReserveTime to set
+     */
+    public void setPercentReserveTime(int percentReserveTime) {
         this.percentReserveTime = percentReserveTime;
+    }
+
+    /**
+     * @return the packageId
+     */
+    public int getPackageId() {
+        return packageId;
+    }
+
+    /**
+     * @param packageId the packageId to set
+     */
+    public void setPackageId(int packageId) {
+        this.packageId = packageId;
     }
 
     //return time in minutes

@@ -44,7 +44,7 @@ public class CustomerServlet extends HttpServlet {
                 // TODO: handle exception
             }
         }
-        getServletContext().getRequestDispatcher("/ContactsPage.jsp").forward(request, response);
+        getServletContext().getRequestDispatcher("/AddOrderPage.jsp").forward(request, response);
     }
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)

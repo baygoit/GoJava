@@ -26,14 +26,25 @@
 			<tr>
 				<td>Studio info:</td><td><input type="text" name="studinfo" value="${studio.info}"></td>
 			</tr>
+		</table>
+		<table>	
 			<tr>
-				<td><br></td>
-			</tr>	
-			<tr>
-				<td>Reserve studio:</td><td><input type="submit" name="reservelist" value="Get list"></td>
+				<td><input type="submit" name="ok" value="OK"></td>
+				<td><input type="submit" name="cancel" value="Cancel"></td>
+				<td><input type="reset" name="reset" value="Clear"></td>
 			</tr>
 		</table>
-
+	</form>
+	<br>
+	<hr align="left" width="300" color="red">
+	<br>
+	<form action="" name="" method="post">
+		<table>
+            <tr>
+				<td>Reserve studio:</td><td>&nbsp;</td><td><input type="submit" name="reservelist" value="Get list"></td>
+			</tr>		
+		</table>
+		<br>
 		<table>
                 <tr>
                     <th>&nbsp;</th>
@@ -57,14 +68,6 @@
                     <td><input type="submit" value="Delete" name="Delete"/></td>
                 </tr>
             </table>
-		<hr align="left" width="300" color="red">
-		<table>
-			<tr>
-				<td><input type="submit" name="ok" value="OK"></td>
-				<td><input type="submit" name="cancel" value="Cancel"></td>
-				<td><input type="reset" name="reset" value="Clear"></td>
-			</tr>
-		</table>
 	</form>
 </body>
 </html>

@@ -13,7 +13,7 @@ import com.ua.goit.alexkholmov.logic.PackageFotos;
  */
 public interface PackageFotosDao {
 
-    public PackageFotos create(PackageFotos fotos) throws SQLException;
+    public PackageFotos create(PackageFotos fotos, int orderId) throws SQLException;
     
     public PackageFotos read(int id) throws SQLException;
     
@@ -21,5 +21,5 @@ public interface PackageFotosDao {
     
     public void delete(PackageFotos fotos) throws SQLException;
     
-    public List<PackageFotos> getAll() throws SQLException;
+    public List<PackageFotos> getAll(int orderId) throws SQLException;
 }

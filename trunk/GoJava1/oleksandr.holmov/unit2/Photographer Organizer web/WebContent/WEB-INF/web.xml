@@ -10,8 +10,16 @@
     <servlet-class>com.ua.goit.alexkholmov.web.CustomerServlet</servlet-class>
   </servlet>
   <servlet>
-  	<servlet-name>StudioServlet</servlet-name>
-  	<servlet-class>com.ua.goit.alexkholmov.web.StudioServlet</servlet-class>
+    <servlet-name>StudioServlet</servlet-name>
+    <servlet-class>com.ua.goit.alexkholmov.web.StudioServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>AllocateServlet</servlet-name>
+    <servlet-class>com.ua.goit.alexkholmov.web.AllocateServlet</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>ReserveServlet</servlet-name>
+  	<servlet-class>com.ua.goit.alexkholmov.web.ReserveServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>ContactsServlet</servlet-name>
@@ -22,8 +30,16 @@
     <url-pattern>/editcust</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
-  	<servlet-name>StudioServlet</servlet-name>
-  	<url-pattern>/editstud</url-pattern>
+    <servlet-name>StudioServlet</servlet-name>
+    <url-pattern>/editstud</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>AllocateServlet</servlet-name>
+    <url-pattern>/allocate</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>ReserveServlet</servlet-name>
+  	<url-pattern>/editreserve</url-pattern>
   </servlet-mapping>
   <resource-ref>
     <description>DB Connection</description>

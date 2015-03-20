@@ -15,8 +15,8 @@ import com.ua.goit.alexkholmov.logic.*;
  *
  */
 public class TestSchedule {
-    private PackageFotos pFotos1 = new PackageFotos("pack1", 250, 15, 10, 1);
-    private PackageFotos pFotos2 = new PackageFotos("pack2", 40, 35, 15, 2);
+    private PackageFotos pFotos1 = new PackageFotos(250, 15, 10);
+    private PackageFotos pFotos2 = new PackageFotos(40, 35, 15);
     private SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
     private WorkWithFotos workWithFotos = new WorkWithFotos();
     
@@ -31,8 +31,8 @@ public class TestSchedule {
     @Before
     public void addSchedule() throws Exception {
         schedule.setWorkWithFotos(workWithFotos);
-        schedule.setDeadline("22.03.2015");
-        schedule.setStartWork("02.03.2015");
+        schedule.setDeadline(dateFormat.parse("12.03.2015"));
+        schedule.setStartWork(dateFormat.parse("23.02.2015"));
         schedule.calcEndWork();
     }
 
@@ -50,8 +50,8 @@ public class TestSchedule {
      */
     @Test
     public void testCalcEndWork() throws Exception {
-        String res = dateFormat.format(schedule.endWork.getTime());
-        assertEquals("Error date", "28.03.2015", res);
+        String res = dateFormat.format(schedule.getEndWork());
+        assertEquals("Error date", "21.03.2015", res);
     }
 
     /**

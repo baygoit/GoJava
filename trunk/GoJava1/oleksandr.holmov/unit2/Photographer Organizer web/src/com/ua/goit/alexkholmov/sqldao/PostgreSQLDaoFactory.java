@@ -58,19 +58,16 @@ public class PostgreSQLDaoFactory implements DAOFactory{
 
     @Override
     public PhotographyDao getPhotographyDao(Connection connection) {
-        // TODO Auto-generated method stub
-        return null;
+        return new PostgeSQLDaoPhotography(connection);
     }
 
     @Override
     public PackageFotosDao getPackageFotosDao(Connection connection) {
-        // TODO Auto-generated method stub
-        return null;
+        return new PostgeSQLDaoPackageFotos(connection);
     }
 
     @Override
     public ScheduleDao getScheduleDao(Connection connection) {
-        // TODO Auto-generated method stub
         return null;
     }
 

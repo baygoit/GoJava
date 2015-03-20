@@ -3,11 +3,9 @@
  */
 package com.ua.goit.alexkholmov.logic;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 
 /**
  * @author SASH
@@ -19,9 +17,9 @@ public class Schedule {
     static String PATTERN = "dd.MM.yyyy";
     private SimpleDateFormat dateFormat = new SimpleDateFormat(PATTERN);
 
-    private Calendar deadline;
-    private Calendar startWork;
-    private Calendar endWork;
+    private Date deadline;
+    private Date startWork;
+    private Date endWork;
     
     private int scheduleId;
     private int amountDays = 0;
@@ -75,74 +73,78 @@ public class Schedule {
     /**
      * @return the deadline
      */
-    public Calendar getDeadline() {
+    public Date getDeadline() {
         return deadline;
+    }
+
+    /**
+     * @param deadline the deadline to set
+     */
+    public void setDeadline(Date deadline) {
+        this.deadline = deadline;
     }
 
     /**
      * @return the startWork
      */
-    public Calendar getStartWork() {
+    public Date getStartWork() {
         return startWork;
+    }
+
+    /**
+     * @param startWork the startWork to set
+     */
+    public void setStartWork(Date startWork) {
+        this.startWork = startWork;
     }
 
     /**
      * @return the endWork
      */
-    public Calendar getEndWork() {
+    public Date getEndWork() {
         return endWork;
     }
 
-    public void setDeadline(String date) {
-        try {
-            Date dateParse = dateFormat.parse(date);
-            deadline = Calendar.getInstance();
-            deadline.setTime(dateParse);
-        } catch (ParseException e) {
-            // TODO: handle exception
-            System.err.print(e.getMessage());
-        }
-    }
-    
-    public void setStartWork(String date) {
-        try {
-            Date dateParse = dateFormat.parse(date);
-            startWork = Calendar.getInstance();
-            startWork.setTime(dateParse);
-        } catch (ParseException e) {
-            // TODO: handle exception
-            System.err.print(e.getMessage());
-        }
+    /**
+     * @param endWork the endWork to set
+     */
+    public void setEndWork(Date endWork) {
+        this.endWork = endWork;
     }
     
     public void calcEndWork() throws Exception {
-        String startWorkDate = dateFormat.format(startWork.getTime());
         int workHours = workWithFotos.timeEditingFotosInPackage();
         boolean condition;
-        try {
-            Date dateParse = dateFormat.parse(startWorkDate);
-            endWork = Calendar.getInstance(); 
-            endWork.setTime(dateParse);
-            int i = 1;
-            while (workHours >= 0) {
-                condition = endWork.get(Calendar.DAY_OF_WEEK) == 1 || endWork.get(Calendar.DAY_OF_WEEK) == 7;
-                workHours = condition ? workHours - TIME_WORKING_IN_DAY_OFF : workHours - TIME_WORKING_IN_WORK_DAY;
-                endWork.add(Calendar.DAY_OF_MONTH, i);
-                amountDays++;
-            }
-        } catch (ParseException e) {
-            System.err.print(e.getMessage());
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(startWork);
+        int i = 1;
+        while (workHours >= 0) {
+            condition = calendar.get(Calendar.DAY_OF_WEEK) == 1
+                    || calendar.get(Calendar.DAY_OF_WEEK) == 7;
+            workHours = condition ? workHours - TIME_WORKING_IN_DAY_OFF
+                    : workHours - TIME_WORKING_IN_WORK_DAY;
+            calendar.add(Calendar.DAY_OF_MONTH, i);
+            amountDays++;
         }
+        endWork = calendar.getTime();
     }
     
     public boolean isOutOfDeadline() {  
-        if (endWork.after(deadline)) {
+        Calendar calendarEW = Calendar.getInstance();
+        Calendar calendarSW = Calendar.getInstance();
+        Calendar calendarDL = Calendar.getInstance();
+        calendarEW.setTime(endWork);
+        calendarSW.setTime(startWork);
+        calendarDL.setTime(deadline);
+        if (calendarEW.after(calendarDL)) {
             int i = 1;
-            while (endWork.after(deadline)) {
-                endWork.add(Calendar.DAY_OF_MONTH, -i);
-                startWork.add(Calendar.DAY_OF_MONTH, -i);
+            while (calendarEW.after(deadline)) {
+                calendarEW.add(Calendar.DAY_OF_MONTH, -i);
+                calendarSW.add(Calendar.DAY_OF_MONTH, -i);
                 i++;
             }
+            startWork = calendarSW.getTime();
+            endWork = calendarEW.getTime();
             return true;
         } else {
             return false;

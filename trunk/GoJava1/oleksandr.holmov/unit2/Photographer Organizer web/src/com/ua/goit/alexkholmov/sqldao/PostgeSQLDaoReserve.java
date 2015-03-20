@@ -73,7 +73,7 @@ public class PostgeSQLDaoReserve implements ReserveDao {
     @Override
     public void update(Reserve reserve) throws SQLException {
         String sql = "UPDATE reserve " 
-                     + "SET res_date=?, work_time=?, stud_id=? "
+                     + "SET res_date=?, work_time=? "
                      + "WHERE res_id=?;";
         PreparedStatement pStatement = connection.prepareStatement(sql);
         pStatement.setDate(1, new Date(reserve.getReserveDate().getTime()));
@@ -99,7 +99,7 @@ public class PostgeSQLDaoReserve implements ReserveDao {
      */
     @Override
     public List<Reserve> getAll(int studioId) throws SQLException {
-        String sql = "SELECT res_id, res_date, work_time, stud_id  FROM reserve "
+        String sql = "SELECT res_id, res_date, work_time  FROM reserve "
                      + "WHERE sud_id=?;";
         List<Reserve> list = new ArrayList<Reserve>();
         PreparedStatement pStatement = connection.prepareStatement(sql);
