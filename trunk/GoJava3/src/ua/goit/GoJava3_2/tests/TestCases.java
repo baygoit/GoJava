@@ -1,4 +1,4 @@
-package ua.goit.tests;
+package ua.goit.GoJava3_2.tests;
 
 import static org.junit.Assert.*;
 
