@@ -12,9 +12,17 @@ public class TestCases {
         Shapefactory triangleFactory = new triangleFactory();
         Shape triangle = triangleFactory.getShape();
         
-        //Serializator xmlSerializator = SerializatorFactory.get
+        triangle.point1 = 1;
+        triangle.point2 = 2;
+        triangle.point3 = 3;
         
-        fail("Not yet implemented");
+        Serializer xmlSerializer = SerializerFactory.getSerializer("xml");
+        
+        String shapeStringXML = xmlSerializer.serialize();
+                
+        String expectedResult = "<triangle><point1>1</point1><point2>2</point2><point3>3</point3></triangle>";
+        
+        assertEquals(expectedResult, shapeStringXML);
     }
 
 }
