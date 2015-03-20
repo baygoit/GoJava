@@ -9,7 +9,7 @@ public class TestCases {
     @Test
     public void testSimple() {
         
-        Shapefactory triangleFactory = new triangleFactory();
+        Shapefactory triangleFactory = new TriangleFactory();
         Shape triangle = triangleFactory.getShape();
         
         triangle.point1 = 1;
