@@ -1,3 +1,5 @@
+package ua.goit.alg.v1;
+
 /**
  * Created by Aleksey Kurkov on 18.03.15.
  */
