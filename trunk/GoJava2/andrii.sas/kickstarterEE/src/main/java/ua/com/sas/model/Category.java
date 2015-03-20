@@ -1,9 +1,27 @@
 package ua.com.sas.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+
+@Entity
+@Table(name="categories")
 public class Category {
+	
+	@Column(name="name")
 	private String name;
+	
+	@Id
+	@Column(name="id")
+	@GeneratedValue
 	private int id;
 
+	public Category(){	
+	}
+	
 	public Category(String name) {
 		this.name = name;
 	}
@@ -21,13 +39,22 @@ public class Category {
 	public String toString() {
 		return "Category name= " + name + ", id= " + id;
 	}
-
+	
+	
+	public void setName(String name){
+		this.name = name;
+	}
+	
 	public String getName(){
 		return name;
 	}
 	
 	public int getId(){
 		return id;
+	}
+	
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	@Override
@@ -53,9 +80,5 @@ public class Category {
 		} else if (!name.equals(other.name))
 			return false;
 		return true;
-	}
-
-	public void setId(int id) {
-		this.id = id;
 	}
 }
