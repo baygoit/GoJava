@@ -31,9 +31,9 @@ public class RotatedArrays {
                     start = middle;
                 }
             } else if ((array[middle] < target) && (target < array[finish])) {
-                start = middle + 1;
+                start = middle;
             } else {
-                finish = middle - 1;
+                finish = middle;
             }
         }
         return -1;
