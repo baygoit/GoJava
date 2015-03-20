@@ -16,11 +16,7 @@ public class RotatedArrays {
                 return finish;
             }
             if (start == finish) {
-                if (target == array[start]) {
-                    return start;
-                } else {
-                    return -1;
-                }
+                return -1;
             }
             int middle = (start + finish) >>> 1;
             //sorted left part or right part, so if target in this sorted part lets find it 
