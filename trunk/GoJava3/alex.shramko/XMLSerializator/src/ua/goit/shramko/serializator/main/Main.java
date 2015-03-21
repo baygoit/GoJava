@@ -1,7 +1,10 @@
-package ua.goit.shramko.serializator;
+package ua.goit.shramko.serializator.main;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import ua.goit.shramko.serializator.basicObjects.Point;
+import ua.goit.shramko.serializator.basicObjects.Shape;
 
 public class Main {
 

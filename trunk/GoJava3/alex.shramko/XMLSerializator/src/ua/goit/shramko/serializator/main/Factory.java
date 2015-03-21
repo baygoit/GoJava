@@ -1,8 +1,11 @@
-package ua.goit.shramko.serializator;
+package ua.goit.shramko.serializator.main;
 
 import java.util.List;
 
+import ua.goit.shramko.serializator.basicObjects.*;
+
 public class Factory {
+  
   public static Shape createObject(String type, List<Shape> list, int radius, Point... points) {
     /*try {
       return (Shape) type.newInstance();

@@ -1,4 +1,4 @@
-package ua.goit.shramko.serializator;
+package ua.goit.shramko.serializator.reserved;
 
 public abstract class HavingID {
  
