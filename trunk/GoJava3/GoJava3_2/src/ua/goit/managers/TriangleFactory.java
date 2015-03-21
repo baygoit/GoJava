@@ -2,10 +2,10 @@ package ua.goit.managers;
 
 import ua.goit.model.*;
 
-public class TriangleFactory implements ShapeFactory {
+public class TriangleFactory implements ContainerShapesFactory {
 
     @Override
-    public Triangle getShape() {
+    public Triangle getShapeContainer() {
         return new Triangle();
     }
 
