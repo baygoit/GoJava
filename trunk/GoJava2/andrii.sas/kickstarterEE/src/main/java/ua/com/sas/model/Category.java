@@ -3,6 +3,7 @@ package ua.com.sas.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -15,8 +16,8 @@ public class Category {
 	private String name;
 	
 	@Id
-	@Column(name="id")
-	@GeneratedValue
+	@Column(name="id", columnDefinition = "serial")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
 	public Category(){	

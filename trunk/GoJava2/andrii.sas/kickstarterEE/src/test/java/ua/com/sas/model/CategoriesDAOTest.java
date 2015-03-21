@@ -34,7 +34,6 @@ public class CategoriesDAOTest extends CategoriesTest{
 	public void cleanFile(){
 		try (Connection connection = dataSource.getConnection()) {
 			Statement statement = connection.createStatement();
-			statement.setQueryTimeout(30);
 			statement.executeUpdate("delete from categories");
 		} catch (SQLException e) {
 			throw new RuntimeException(
