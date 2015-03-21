@@ -1,6 +1,6 @@
 package ua.goit.shramko.serializator.basicobjects;
 
-public class Triangle implements Shape {
+public class Triangle extends Shape {
 
   private Point a;
   private Point b;

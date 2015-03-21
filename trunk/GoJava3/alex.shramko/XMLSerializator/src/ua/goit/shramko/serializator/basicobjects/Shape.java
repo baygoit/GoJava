@@ -1,6 +1,6 @@
 package ua.goit.shramko.serializator.basicobjects;
 
-public interface Shape {
+public abstract class Shape {
   
   
 

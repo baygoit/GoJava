@@ -1,6 +1,6 @@
 package ua.goit.shramko.serializator.basicobjects;
 
-public class Circle implements Shape {
+public class Circle extends Shape {
 
   private int radius;
   private Point center;

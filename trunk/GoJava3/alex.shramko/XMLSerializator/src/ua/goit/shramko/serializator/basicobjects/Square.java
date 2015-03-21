@@ -1,6 +1,6 @@
 package ua.goit.shramko.serializator.basicobjects;
 
-public class Square implements Shape {
+public class Square extends Shape {
 
   private Point a;
   private Point b;

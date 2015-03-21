@@ -3,7 +3,7 @@ package ua.goit.shramko.serializator.basicobjects;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Group implements Shape {
+public class Group extends Shape {
 
   private List<Shape> values;
   int size;
