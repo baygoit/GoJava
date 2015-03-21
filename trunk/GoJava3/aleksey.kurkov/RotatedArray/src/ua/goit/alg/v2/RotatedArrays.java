@@ -6,12 +6,13 @@ package ua.goit.alg.v2;
 
 public class RotatedArrays {
   public static int binarySearch(int[] array, int target) {
+    int result = -1; // if result is not changed - then error
     int middle;
     int start = 0;
     int end = array.length - 1;
     // array contains 0 items
     if (array.length == 0) {
-      return -1;
+      result = -1;
     }
     // continue searching while [start,end] is not empty
     while (start < end) {
@@ -19,25 +20,32 @@ public class RotatedArrays {
       middle = midpoint(end, start);
       if (array[middle] == target) {
         // target found at index middle
-        return middle;
+        result = middle;
+        break;
       } else if ((middle - 1 > 0) && (array[middle - 1] == target)) {
         // target found at index middle - 1
-        return middle - 1;
+        result = middle - 1;
+        break;
       } else if ((middle + 1 < array.length - 1) && (array[middle + 1] == target)) {
         // target found at index middle + 1
-        return middle + 1;
+        result = middle + 1;
+        break;
       } else if (array[start] == target) {
         // target found at index start
-        return start;
+        result = start;
+        break;
       } else if (array[start + 1] == target) {
         // target found at index start + 1
-        return start + 1;
+        result = start + 1;
+        break;
       } else if (array[end] == target) {
         // target found at index end
-        return end;
+        result = end;
+        break;
       } else if (array[end - 1] == target) {
         // target found at index end - 1
-        return end - 1;
+        result = end - 1;
+        break;
       }
       // determine which subarray to search
       else if (target > array[middle]) {
@@ -47,7 +55,8 @@ public class RotatedArrays {
             start = middle;
           } else {
             // target was not found
-            return -1;
+            result = -1;
+            break;
           }
         } else {
           // change start to search upper subarray
@@ -60,7 +69,8 @@ public class RotatedArrays {
             start = middle;
           } else {
             // target was not found
-            return -1;
+            result = -1;
+            break;
           }
         } else {
           // change end to search lower subarray
@@ -68,11 +78,11 @@ public class RotatedArrays {
         }
       } else {
         // target was not found
-        return -1;
+        result = -1;
+        break;
       }
     }
-    // target was not found
-    return -1;
+    return result;
   }
 
   private static int midpoint(int start, int end) {

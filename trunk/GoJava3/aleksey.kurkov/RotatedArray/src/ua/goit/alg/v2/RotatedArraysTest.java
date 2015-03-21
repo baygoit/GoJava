@@ -2,8 +2,6 @@ package ua.goit.alg.v2;
 
 import junit.framework.TestCase;
 
-import java.util.Arrays;
-
 public class RotatedArraysTest extends TestCase {
   public void test1() {
     int[] array = {4, 5, 6, 7, 8, 9, 10, 1, 2, 3};
