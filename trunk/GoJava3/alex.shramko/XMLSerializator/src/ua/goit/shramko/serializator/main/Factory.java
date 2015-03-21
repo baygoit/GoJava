@@ -2,7 +2,7 @@ package ua.goit.shramko.serializator.main;
 
 import java.util.List;
 
-import ua.goit.shramko.serializator.basicObjects.*;
+import ua.goit.shramko.serializator.basicobjects.*;
 
 public class Factory {
   

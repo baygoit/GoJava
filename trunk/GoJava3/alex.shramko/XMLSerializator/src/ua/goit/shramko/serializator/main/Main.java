@@ -3,8 +3,8 @@ package ua.goit.shramko.serializator.main;
 import java.util.ArrayList;
 import java.util.List;
 
-import ua.goit.shramko.serializator.basicObjects.Point;
-import ua.goit.shramko.serializator.basicObjects.Shape;
+import ua.goit.shramko.serializator.basicobjects.Point;
+import ua.goit.shramko.serializator.basicobjects.Shape;
 
 public class Main {
 

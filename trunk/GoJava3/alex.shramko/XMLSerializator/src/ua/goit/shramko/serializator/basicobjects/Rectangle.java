@@ -1,4 +1,4 @@
-package ua.goit.shramko.serializator.basicObjects;
+package ua.goit.shramko.serializator.basicobjects;
 
 public class Rectangle implements Shape {
 

@@ -1,4 +1,4 @@
-package ua.goit.shramko.serializator.basicObjects;
+package ua.goit.shramko.serializator.basicobjects;
 
 import java.util.ArrayList;
 import java.util.List;
