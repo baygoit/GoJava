@@ -1,4 +1,4 @@
-package ua.goit.Serialization;
+package ua.goit.serialization;
 
 public abstract class SerializationFactory {
     

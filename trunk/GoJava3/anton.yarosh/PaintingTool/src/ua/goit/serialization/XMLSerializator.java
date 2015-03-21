@@ -1,4 +1,4 @@
-package ua.goit.Serialization;
+package ua.goit.serialization;
 import java.io.File;
 import ua.goit.graphElements.GraphElement;
 

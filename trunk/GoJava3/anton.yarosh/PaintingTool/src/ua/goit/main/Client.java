@@ -1,5 +1,5 @@
 package ua.goit.main;
-import ua.goit.Serialization.*;
+import ua.goit.serialization.*;
 
 public class Client {
 
