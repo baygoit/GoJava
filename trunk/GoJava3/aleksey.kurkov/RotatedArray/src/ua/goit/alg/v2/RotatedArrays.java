@@ -12,13 +12,9 @@ public class RotatedArrays {
       return -1;
     }
     // continue searching while [start,end] is not empty
-    while (end >= start) {
+    while (start < end) {
       // calculate the midpoint for roughly equal partition
-      if (end == start) {
-        middle = start;
-      } else {
-        middle = midpoint(end, start);
-      }
+      middle = midpoint(end, start);
       if (array[middle] == target) {
         // target found at index middle
         return middle;
