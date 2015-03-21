@@ -1,7 +1,7 @@
 package ua.goit.shramko.serializator;
 
 public abstract class HavingID {
-
+ 
   private int id;
   private static int idCounter;
   

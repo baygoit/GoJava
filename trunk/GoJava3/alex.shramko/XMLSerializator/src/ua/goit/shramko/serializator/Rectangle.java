@@ -1,34 +1,34 @@
 package ua.goit.shramko.serializator;
 
-public class Rectangle extends HavingID implements Groupable {
+public class Rectangle implements Shape {
 
-  private int height;
-  private int weight;
-
-  public int getHeight() {
-    return height;
-  }
-
-  public void setHeight(int height) {
-    this.height = height;
-  }
-
-  public int getWeight() {
-    return weight;
-  }
-
-  public void setWeight(int weight) {
-    this.weight = weight;
-  }
+  private Point a;
+  private Point b;
 
   public Rectangle() {
     super();
   }
-  
-  public Rectangle(int height, int weight) {
+
+  public Point getA() {
+    return a;
+  }
+
+  public void setA(Point a) {
+    this.a = a;
+  }
+
+  public Point getB() {
+    return b;
+  }
+
+  public void setB(Point b) {
+    this.b = b;
+  }
+
+  public Rectangle(Point a, Point b) {
     super();
-    this.height = height;
-    this.weight = weight;
+    this.a = a;
+    this.b = b;
   }
 
 }

@@ -3,21 +3,21 @@ package ua.goit.shramko.serializator;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Group extends HavingID implements Groupable {
-  
-  private List<Groupable> values;
+public class Group implements Shape {
+
+  private List<Shape> values;
   int size;
-  
-  public void add(Groupable value) {
+
+  public void add(Shape value) {
     values.add(value);
     size++;
   }
-  
-  public void add(List<Groupable> list) {
+
+  public void add(List<Shape> list) {
     values.addAll(list);
-    size+=list.size();
+    size += list.size();
   }
-  
+
   public void removeValue(int id) {
     if (size < id) {
       values.remove(id);
@@ -26,32 +26,30 @@ public class Group extends HavingID implements Groupable {
       throw new IndexOutOfBoundsException();
     }
   }
-  
-  public Groupable get(int id) {
+
+  public Shape get(int id) {
     if (size < id) {
       return values.get(id);
     } else {
       return null;
     }
   }
-  
+
   public void clear() {
     values.clear();
     size = 0;
   }
-  
+
   public Group() {
     super();
-    values = new ArrayList<Groupable>();
+    values = new ArrayList<Shape>();
     size = 0;
-    setID();
   }
-  
-  public Group(List<Groupable> list) {
+
+  public Group(List<Shape> list) {
     super();
-    values = new ArrayList<Groupable>(list);
+    values = new ArrayList<Shape>(list);
     size = list.size();
-    setID();
   }
 
 }
