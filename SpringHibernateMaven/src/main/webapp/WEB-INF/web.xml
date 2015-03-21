@@ -1,0 +1,41 @@
+<web-app version="3.0"
+         xmlns="http://java.sun.com/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"> 
+
+	<display-name>Kickstarter</display-name>
+	<description>Kickstarter description</description>
+	
+	<context-param>
+	    <param-name>contextConfigLocation</param-name>
+	    <param-value>classpath:application-context.xml</param-value>    
+	</context-param>
+
+	<listener>
+	   	<listener-class>
+	        org.springframework.web.context.ContextLoaderListener
+	   	</listener-class>
+	</listener>   
+
+	<servlet-mapping>
+		<servlet-name>AppController</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+    <servlet-name>AppController</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <init-param>
+        <param-name>contextClass</param-name>
+        <param-value>org.springframework.web.context.support.AnnotationConfigWebApplicationContext</param-value>
+    </init-param>
+    <init-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>com.websystique.springmvc.controller.AppController</param-value>
+    </init-param>
+    <load-on-startup>1</load-on-startup>
+	</servlet>
+	
+</web-app>
+
+ 
