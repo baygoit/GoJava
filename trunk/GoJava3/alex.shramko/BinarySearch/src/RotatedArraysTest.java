@@ -7,11 +7,11 @@ public class RotatedArraysTest {
     private void testCase(int[] array) {
         for (int i = 0; i < array.length; i++) {
             int expected = i;
-            int actual = RotatedArrays.binarySearch(array, array[i]);
+            int actual = new RotatedArrays().binarySearch(array, array[i]);
             assertEquals(expected, actual);
         }
         int expected = -1;
-        int actual = RotatedArrays.binarySearch(array, 99);
+        int actual = new RotatedArrays().binarySearch(array, 99);
         assertEquals(expected, actual);
     }
     
