@@ -41,9 +41,9 @@ public class TestCases {
     @Test
     public void testSimpleXML() {
         
-        Serializer xmlSerializer = SerializerFactory.getSerializer("xml");
-        
         Triangle triangle = newTestTriangle();
+
+        Serializer xmlSerializer = SerializerFactory.getSerializer("xml");
         String shapeStringXML = xmlSerializer.serialize(triangle);
                 
         String expectedResult = "<triangle><point1><x>1</x><y>1</y></point1><point2><x>2</x><y>2</y></point2><point3><x>3</x><y>3</y></point3></triangle>";
@@ -54,9 +54,9 @@ public class TestCases {
     @Test
     public void testSimpleJSON() {
         
-        Serializer jsonSerializer = SerializerFactory.getSerializer("json");
-        
         Triangle triangle = newTestTriangle();
+
+        Serializer jsonSerializer = SerializerFactory.getSerializer("json");
         String shapeStringJSON = jsonSerializer.serialize(triangle);
                 
         String expectedResult = "{point1:{x=1,y=1},point2:{x=2,y=2},point3:{x=3,y=3}}";
