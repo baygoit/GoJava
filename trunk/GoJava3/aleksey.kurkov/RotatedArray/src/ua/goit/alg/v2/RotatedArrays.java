@@ -5,8 +5,10 @@
 package ua.goit.alg.v2;
 
 public class RotatedArrays {
-  public static int binarySearch(int[] array, int target, int start, int end) {
+  public static int binarySearch(int[] array, int target) {
     int middle;
+    int start = 0;
+    int end = array.length - 1;
     // array contains 0 items
     if (array.length == 0) {
       return -1;
@@ -75,9 +77,5 @@ public class RotatedArrays {
 
   private static int midpoint(int start, int end) {
     return (start / 2 + end / 2);
-  }
-
-  public static int binaryModifiedSearch(int[] array, int target) {
-    return binarySearch(array, target, 0, array.length - 1);
   }
 }
