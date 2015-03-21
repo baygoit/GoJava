@@ -1,11 +1,11 @@
 package ua.goit.shramko.serializator.basicobjects;
 
-public class Rectangle implements Shape {
+public class Square implements Shape {
 
   private Point a;
   private Point b;
 
-  public Rectangle() {
+  public Square() {
     super();
   }
 
@@ -25,7 +25,7 @@ public class Rectangle implements Shape {
     this.b = b;
   }
 
-  public Rectangle(Point a, Point b) {
+  public Square(Point a, Point b) {
     super();
     this.a = a;
     this.b = b;

@@ -13,8 +13,8 @@ public class Factory {
       Point... points) {
     if ("Triangle".equals(type)) {
       return new Triangle(points[0], points[1], points[2]);
-    } else if ("Rectangle".equals(type)) {
-      return new Rectangle(points[0], points[1]);
+    } else if ("Square".equals(type)) {
+      return new Square(points[0], points[1]);
     } else if ("Circle".equals(type)) {
       return new Circle(radius, points[0]);
     } else if ("Group".equals(type)) {
