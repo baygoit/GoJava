@@ -1,18 +1,47 @@
 package ua.goit.serialization;
-import java.io.File;
 import ua.goit.graphElements.GraphElement;
 
+import java.io.*;
+import java.util.Scanner;
+
 public class XMLSerializator extends Serializator {
+    private StringBuffer buffer = new StringBuffer();
 
     @Override
     public StringBuffer serialize(GraphElement element) {
-	
-	return null;
+        if (element.isElement()) {
+            buffer.append("<" + element.getType() + ">" + element.getName());
+            for (GraphElement node : element) {
+                buffer.append("<" + element.getAttrName() + ">" + element.getAttr() + "</" + element.getAttrName() + ">");
+            }
+            buffer.append("</" + element.getType() + ">");
+        } else {
+            buffer.append("<" + element.getType() + ">" + element.getName());
+            for (GraphElement node : element) {
+                serialize(element);
+            }
+            buffer.append("</" + element.getType() + ">");
+        }
+	    return buffer;
     }
 
     @Override
     public void saveToFile(StringBuffer source, File file) {
-	// TODO Auto-generated method stub
+        try {
+            FileWriter fw = new FileWriter(file.getAbsoluteFile());
+            BufferedWriter bw = new BufferedWriter(fw);
+            bw.write("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>");
+            bw.write("<elements>");
+            bw.write(source.toString());
+            bw.write("</elements");
+            bw.close();
+
+        }catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+
 	
     }
 
