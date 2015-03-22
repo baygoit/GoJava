@@ -4,5 +4,11 @@
 
 package ua.goit.shapeserializer.serializers;
 
-public class XMLSquareSerializer {
+import ua.goit.shapeserializer.basicobjects.Shape;
+
+public class XMLSquareSerializer extends XMLShapeSerializer {
+  @Override
+  public String serialize(Shape circle) {
+    return null;
+  }
 }
