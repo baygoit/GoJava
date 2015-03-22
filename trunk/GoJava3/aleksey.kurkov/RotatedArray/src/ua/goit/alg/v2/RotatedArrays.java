@@ -14,78 +14,42 @@ public class RotatedArrays {
     if (array.length == 0) {
       result = -1;
     }
-    // continue searching while [start,end] is not empty
+    // continue while array search range has more than 1 item
     while (start < end) {
       // calculate the midpoint for roughly equal partition
       middle = midpoint(end, start);
       if (array[middle] == target) {
-        // target found at index middle
+        // target was found at index middle
         result = middle;
         break;
-      } else if ((middle - 1 > 0) && (array[middle - 1] == target)) {
-        // target found at index middle - 1
-        result = middle - 1;
-        break;
-      } else if ((middle + 1 < array.length - 1) && (array[middle + 1] == target)) {
-        // target found at index middle + 1
-        result = middle + 1;
-        break;
       } else if (array[start] == target) {
-        // target found at index start
+        // target was found at index start
         result = start;
         break;
-      } else if (array[start + 1] == target) {
-        // target found at index start + 1
-        result = start + 1;
-        break;
       } else if (array[end] == target) {
-        // target found at index end
+        // target was found at index end
         result = end;
         break;
-      } else if (array[end - 1] == target) {
-        // target found at index end - 1
-        result = end - 1;
-        break;
       }
-      // determine which subarray to search
-      else if (target > array[middle]) {
-        if (target > array[end - 1]) {
-          if (start != middle) {
-            // look at the left part
-            start = middle;
-          } else {
-            // target was not found
-            result = -1;
-            break;
-          }
+      // determine if array search range is sorted
+      else if (array[start] < array[middle]) {
+        if ((array[start] < target) && (target < array[middle])) {
+          end = middle - 1;
         } else {
-          // change start to search upper subarray
-          start++;
-        }
-      } else if (target < array[middle]) {
-        if (target < array[start + 1]) {
-          if (start != middle) {
-            // look at the right part
-            start = middle;
-          } else {
-            // target was not found
-            result = -1;
-            break;
-          }
-        } else {
-          // change end to search lower subarray
-          end--;
+          start = middle + 1;
         }
       } else {
-        // target was not found
-        result = -1;
-        break;
+        if ((array[middle] < target) && (target < array[end])) {
+          start = middle + 1;
+        } else {
+          end = middle - 1;
+        }
       }
     }
     return result;
   }
 
   private static int midpoint(int start, int end) {
-    return (start / 2 + end / 2);
+    return (start + (end - start) / 2);
   }
 }
