@@ -4,7 +4,17 @@ public class Circle extends Shape {
 
   private int radius;
   private Point center;
-  
+
+  public Circle() {
+    super();
+  }
+
+  public Circle(int radius, Point center) {
+    super();
+    this.radius = radius;
+    this.center = center;
+  }
+
   public Point getCenter() {
     return center;
   }
@@ -19,17 +29,6 @@ public class Circle extends Shape {
 
   public void setRadius(int radius) {
     this.radius = radius;
-  }
-
-  
-  public Circle() {
-    super();
-  }
-  
-  public Circle(int radius, Point center) {
-    super();
-    this.radius = radius;
-    this.center = center;
   }
 
 }

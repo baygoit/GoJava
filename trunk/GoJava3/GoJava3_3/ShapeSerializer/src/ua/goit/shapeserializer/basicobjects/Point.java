@@ -4,6 +4,12 @@ public final class Point {
   int x;
   int y;
 
+  public Point(int x, int y) {
+    super();
+    this.x = x;
+    this.y = y;
+  }
+
   public int getX() {
     return x;
   }
@@ -17,12 +23,6 @@ public final class Point {
   }
 
   public void setY(int y) {
-    this.y = y;
-  }
-
-  public Point(int x, int y) {
-    super();
-    this.x = x;
     this.y = y;
   }
 

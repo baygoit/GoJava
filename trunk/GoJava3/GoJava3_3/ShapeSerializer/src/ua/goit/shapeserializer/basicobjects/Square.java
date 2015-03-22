@@ -9,6 +9,12 @@ public class Square extends Shape {
     super();
   }
 
+  public Square(Point a, Point b) {
+    super();
+    this.a = a;
+    this.b = b;
+  }
+
   public Point getA() {
     return a;
   }
@@ -22,12 +28,6 @@ public class Square extends Shape {
   }
 
   public void setB(Point b) {
-    this.b = b;
-  }
-
-  public Square(Point a, Point b) {
-    super();
-    this.a = a;
     this.b = b;
   }
 

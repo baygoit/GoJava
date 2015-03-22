@@ -7,6 +7,16 @@ public class Group extends Shape {
 
   private List<Shape> values;
 
+  public Group() {
+    super();
+    values = new ArrayList<Shape>();
+  }
+
+  public Group(List<Shape> list) {
+    super();
+    values = new ArrayList<Shape>(list);
+  }
+
   public void add(Shape value) {
     values.add(value);
   }
@@ -35,19 +45,8 @@ public class Group extends Shape {
     values.clear();
   }
 
-  public Group() {
-    super();
-    values = new ArrayList<Shape>();
-  }
-
-  public Group(List<Shape> list) {
-    super();
-    values = new ArrayList<Shape>(list);
-  }
-  
   public int size() {
     return values.size();
   }
 
-  
 }
