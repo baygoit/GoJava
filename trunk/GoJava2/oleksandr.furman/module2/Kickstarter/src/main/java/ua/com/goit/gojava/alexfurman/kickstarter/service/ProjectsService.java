@@ -17,10 +17,10 @@ public class ProjectsService {
 	private ProjectRepository projectRepository;
 
 	@Autowired
-	private CategoryRepository blogRepository;
+	private CategoryRepository categoryRepository;
 
 	public List<Project> findByCategory(int id) {
-		Category category = blogRepository.findOne(id);
+		Category category = categoryRepository.findOne(id);
 		return projectRepository.findByCategory(category);
 	}
 	
