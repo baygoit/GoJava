@@ -65,4 +65,9 @@ public class Group extends GraphElement {
     public ArrayList<Point> getPoints() {
 	return null;
     }
+
+    @Override
+    public void setPoints(ArrayList<Point> pointsList) {
+		
+    }
 }
