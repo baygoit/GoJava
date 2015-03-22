@@ -15,9 +15,8 @@ public class XMLCircleSerializer extends XMLShapeSerializer {
     circleXML.append("<circle><center><point><x>");
     circleXML.append(circle.getCenter().getX() + "</x><y>");
     circleXML.append(circle.getCenter().getY());
-    circleXML.append("</y></point></center><radius><x>");
-    circleXML.append(circle.getCenter().getX() + "</x><y>");
-    circleXML.append(circle.getCenter().getY() + "<y></point></radius></circle>");
+    circleXML.append("</y></point></center><radius>");
+    circleXML.append(circle.getRadius() + "</radius></circle>");
     return circleXML.toString();
   }
 }
