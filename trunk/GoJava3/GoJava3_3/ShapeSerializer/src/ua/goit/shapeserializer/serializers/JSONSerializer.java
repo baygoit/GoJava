@@ -4,6 +4,8 @@
 
 package ua.goit.shapeserializer.serializers;
 
+import ua.goit.shapeserializer.basicobjects.Shape;
+
 public class JSONSerializer implements SerializeFor {
   @Override
   public String serialize(Shape shape) {
