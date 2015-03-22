@@ -2,7 +2,7 @@ package ua.goit.graphElements;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class Group extends GraphElement implements Iterable{
+public class Group extends GraphElement {
     ArrayList <GraphElement> al = new ArrayList <GraphElement>();
     String toReturn = "";
     public Group(String name) {
@@ -21,7 +21,7 @@ public class Group extends GraphElement implements Iterable{
 
     @Override
     public Iterator iterator() {
-	return new InnerIter();
+	return new InnerIter ();
     }
 
     private class InnerIter implements Iterator {
