@@ -6,7 +6,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.transaction.annotation.Transactional;
 
 import ua.com.goit.gojava.alexfurman.kickstarter.entity.Quote;
-
+@Transactional
 public class QuoteDAO {
 
 	private SessionFactory sessionFactory;
@@ -15,14 +15,14 @@ public class QuoteDAO {
 		this.sessionFactory = sessionFactory;
 	}
 
-	@Transactional
+	
 	public Quote getQuoteById(int id) {
 		Session session = this.sessionFactory.getCurrentSession();
 		Quote quote = (Quote) session.load(Quote.class, new Integer(id));
 		Hibernate.initialize(quote.getQuote());
 		return quote;
 	}
-	@Transactional
+
 	public Number size() {
 		Session session = this.sessionFactory.getCurrentSession();
 		Number number = (Number) session.createQuery("select count(*) from Quote").uniqueResult();
