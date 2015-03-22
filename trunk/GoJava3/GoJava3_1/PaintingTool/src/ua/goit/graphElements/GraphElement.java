@@ -1,6 +1,6 @@
 package ua.goit.graphElements;
 
-public abstract class GraphElement {
+public abstract class GraphElement implements Iterable <GraphElement> {
     protected String name;
     public GraphElement(String name) {
 	this.name = name;
