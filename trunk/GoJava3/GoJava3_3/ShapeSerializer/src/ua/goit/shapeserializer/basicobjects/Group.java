@@ -26,7 +26,7 @@ public class Group extends Shape {
   }
 
   public void removeValue(int id) {
-    if (values.size() < id) {
+    if (values.size() > id) {
       values.remove(id);
     } else {
       throw new IndexOutOfBoundsException();
@@ -34,7 +34,7 @@ public class Group extends Shape {
   }
 
   public Shape get(int id) {
-    if (values.size() < id) {
+    if (values.size() > id) {
       return values.get(id);
     } else {
       return null;
