@@ -42,6 +42,13 @@ public class Money {
 		
 	}
 	
+	public Money(Money money) {
+
+		this.value = money.getValue();
+		this.currency = money.getCurrency();
+		
+	}
+
 	private BigDecimal getDecimal(Double value) {
 		
 		return new BigDecimal(value).setScale(scaleLength,roundingMode);
@@ -74,6 +81,21 @@ public class Money {
 	public void multiply(Long multiplicand) {
 		
 		this.value = this.value.multiply(getDecimal(multiplicand));
+		
+	}
+	
+	public void add(Money sum) throws POMDataModelException {
+		
+		if(this.getCurrency() != sum.getCurrency()){
+			
+			LOG.error("Adding money. Money for adding has another currency!");
+			throw new POMDataModelException("Adding money. Money for adding has another currency!");
+			
+		} else {
+			
+			this.value = this.value.add(sum.getValue());
+			
+		}
 		
 	}
 	

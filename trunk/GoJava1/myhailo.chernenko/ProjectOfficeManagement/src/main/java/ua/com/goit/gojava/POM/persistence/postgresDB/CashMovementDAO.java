@@ -15,18 +15,35 @@ import org.apache.log4j.Logger;
 import ua.com.goit.gojava.POM.dataModel.POMDataModelException;
 import ua.com.goit.gojava.POM.dataModel.cash.BankAccount;
 import ua.com.goit.gojava.POM.dataModel.cash.CashMovementEntry;
+import ua.com.goit.gojava.POM.dataModel.common.FinancialDocument;
 import ua.com.goit.gojava.POM.dataModel.common.Money;
+import ua.com.goit.gojava.POM.persistence.FinancialDocumentDAO;
 import ua.com.goit.gojava.POM.persistence.postgresDB.abstraction.AbstractDAO;
-import ua.com.goit.gojava.POM.services.ApplicationContextProvider;
-import ua.com.goit.gojava.POM.services.BankAccountService;
-
 
 public class CashMovementDAO extends AbstractDAO<CashMovementEntry> {
 	
 	private static final String CLASS_NAME = "Cash Movement"; 
 	private static final String CLASS_TABLE = "cash_movement"; 
 	private static final Logger LOG = Logger.getLogger(CashMovementDAO.class);
+	private BankAccountDAO bankAccountDAO;
+	private FinancialDocumentDAO financialDocumentDAO;
 	
+	public BankAccountDAO getBankAccountDAO() {
+		return bankAccountDAO;
+	}
+
+	public void setBankAccountDAO(BankAccountDAO bankAccountDAO) {
+		this.bankAccountDAO = bankAccountDAO;
+	}
+
+	public FinancialDocumentDAO getFinancialDocumentDAO() {
+		return financialDocumentDAO;
+	}
+
+	public void setFinancialDocumentDAO(FinancialDocumentDAO financialDocumentDAO) {
+		this.financialDocumentDAO = financialDocumentDAO;
+	}
+
 	@Override
 	protected String getClassName() {
 		
@@ -65,9 +82,8 @@ public class CashMovementDAO extends AbstractDAO<CashMovementEntry> {
 		}
 		cashMovementEntry.setDate(date);
 		
-		BankAccountService bankAccountServise = ApplicationContextProvider.getApplicationContext().getBean(BankAccountService.class);
 		long accountId= rs.getLong("bank_account_id");
-		cashMovementEntry.setBankAccount(bankAccountServise.retrieveById(accountId));;
+		cashMovementEntry.setBankAccount(bankAccountDAO.retrieveById(accountId));
 		
 		Currency currency = null;
 		String currencyCode = rs.getString("currency");
@@ -75,7 +91,13 @@ public class CashMovementDAO extends AbstractDAO<CashMovementEntry> {
 				currency = Currency.getInstance(currencyCode);
 			}
 
-		cashMovementEntry.setSum(new Money(rs.getDouble("sum"), currency));;
+		cashMovementEntry.setSum(new Money(rs.getDouble("sum"), currency));
+		
+		String docType = rs.getString("doc_type");
+		long docId = rs.getLong("doc_id");
+		if(docId != 0) {
+			cashMovementEntry.setDoc(financialDocumentDAO.getFinancialDocument(docType, docId));	
+		}
 		
 		return cashMovementEntry;
 		
@@ -102,8 +124,10 @@ public class CashMovementDAO extends AbstractDAO<CashMovementEntry> {
 				+ " 	,bank_account_id "
 				+ " 	,sum "
 				+ " 	,currency "
+				+ " 	,doc_type "
+				+ " 	,doc_id "
 				+ "	   ) "
-				+ " VALUES (?,?,?,?) "
+				+ " VALUES (?,?,?,?,?,?) "
 				+ "	RETURNING ID "
 			;
 
@@ -116,6 +140,8 @@ public class CashMovementDAO extends AbstractDAO<CashMovementEntry> {
 		statement.setLong(2, cashMovementEntry.getBankAccount().getId());
 		statement.setDouble(3, sum.getValue().doubleValue());
 		statement.setString(4, sum.getCurrency().getCurrencyCode());
+		statement.setLong(5, cashMovementEntry.getDoc().getId());
+		statement.setString(6, cashMovementEntry.getDoc().getDocType());
 		
 		return statement;
 	}
@@ -130,6 +156,8 @@ public class CashMovementDAO extends AbstractDAO<CashMovementEntry> {
 				+ " 	,bank_account_id = ? "
 				+ " 	,sum = ? "
 				+ " 	,currency = ? "
+				+ " 	,doc_type = ? "
+				+ " 	,doc_id = ? "
 				+ "	WHERE ID = ? "
 			;
 
@@ -142,8 +170,10 @@ public class CashMovementDAO extends AbstractDAO<CashMovementEntry> {
 		statement.setLong(2, cashMovementEntry.getBankAccount().getId());
 		statement.setDouble(3, sum.getValue().doubleValue());
 		statement.setString(4, sum.getCurrency().getCurrencyCode());
+		statement.setLong(5, cashMovementEntry.getDoc().getId());
+		statement.setString(6, cashMovementEntry.getDoc().getDocType());
 		
-		statement.setLong(5,  cashMovementEntry.getId());
+		statement.setLong(7,  cashMovementEntry.getId());
 		
 		return statement;
 		
@@ -229,5 +259,36 @@ public class CashMovementDAO extends AbstractDAO<CashMovementEntry> {
 		
 		return resultList;
 	
+	}
+
+	
+	public void deleteAllByDoc(FinancialDocument doc) throws POMDataModelException {
+
+		ResultSet rs = null;
+		PreparedStatement statement = null;
+		Connection connection = getDBConnection();
+		
+		String updateTableSQL = "DELETE FROM "+getClassTable()
+								+ "	WHERE doc_id = ? AND doc_type = ? "
+								;
+		
+		try {
+
+			statement = connection.prepareStatement(updateTableSQL);
+			statement.setLong(1,  doc.getId());
+			statement.setString(2, doc.getDocType());
+			statement.execute();
+			
+		} catch (SQLException e) {
+ 
+			getLog().error("Could not delete all entries by Financial Document : "+e.getMessage(), e);
+			throw new POMDataModelException("Could not delete all entries by Financial Document : "+e.getMessage(), e);
+ 
+		} finally {
+ 
+			closeDBConnections(rs, statement, connection);
+ 
+		}
+		
 	}
 }

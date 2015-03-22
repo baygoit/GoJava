@@ -3,6 +3,7 @@ package ua.com.goit.gojava.POM.services;
 import java.util.List;
 
 import ua.com.goit.gojava.POM.dataModel.POMDataModelException;
+import ua.com.goit.gojava.POM.dataModel.common.FinancialDocument;
 import ua.com.goit.gojava.POM.dataModel.profitcost.ProjectFinResultEntry;
 import ua.com.goit.gojava.POM.persistence.postgresDB.ProjectFinResultEntryDAO;
 
@@ -43,6 +44,12 @@ public class ProjectFinResultEntryService {
 	public void update(ProjectFinResultEntry projectFinResultEntry) throws POMDataModelException {
 
 		projectFinResultEntryDAO.update(projectFinResultEntry);
+		
+	}
+	
+	public void deleteAllByDoc(FinancialDocument doc) throws POMDataModelException {
+
+		projectFinResultEntryDAO.deleteAllByDoc(doc);
 		
 	}
 

@@ -1,176 +1,129 @@
 package ua.com.goit.gojava.POM.dataModel.documents;
 
+import java.util.ArrayList;
+import java.util.Currency;
 import java.util.Date;
-import ua.com.goit.gojava.POM.dataModel.cash.BankAccount;
-import ua.com.goit.gojava.POM.dataModel.common.Money;
-//import ua.com.goit.gojava.POM.dataModel.common.FinancialDocument;
-import ua.com.goit.gojava.POM.dataModel.profitcost.CostItem;
-import ua.com.goit.gojava.POM.dataModel.profitcost.Project;
-//import ua.com.goit.gojava.POM.dataModel.profitcost.ProjectFinResultTransaction;
-import ua.com.goit.gojava.POM.dataModel.profitcost.ProjectStage;
+import java.util.List;
 
-public class PaymentDocument {
+import ua.com.goit.gojava.POM.dataModel.POMDataModelException;
+import ua.com.goit.gojava.POM.dataModel.cash.BankAccount;
+import ua.com.goit.gojava.POM.dataModel.common.FinancialDocument;
+import ua.com.goit.gojava.POM.dataModel.common.Money;
+
+public class PaymentDocument implements FinancialDocument {
 
 	private long id;
 	private Date date;
 	private BankAccount bankAccount;
 	private String description;
-	private Project project;
-	private ProjectStage projectStage;
-	private CostItem costItem;
-	private Money sum;
+	private Money docSum;
+	private boolean checked;
+	private List<PaymentDocumentDetail> paymentDocumentDetails;
 	
-	public long getId() {
-		
-		return id;
-		
+	@Override
+	public String getDocType() {	
+		return this.getClass().getName();
 	}
 	
-	public void setId(long id) {
-		
-		this.id = id;
-		
+	@Override
+	public long getId() {	
+		return id;	
 	}
 	
-	public Date getDate() {
-		
-		return date;
-		
+	public void setId(long id) {	
+		this.id = id;	
 	}
 	
-	public void setDate(Date date) {
-		
-		this.date = date;
-		
+	public Date getDate() {		
+		return date;	
 	}
 	
-	public CostItem getCostItem() {
-		
-		return costItem;
-		
+	public void setDate(Date date) {	
+		this.date = date;		
 	}
 	
-	public void setCostItem(CostItem costItem) {
-		
-		this.costItem = costItem;
-		
+	public BankAccount getBankAccount() {	
+		return bankAccount;	
 	}
 	
-	public BankAccount getBankAccount() {
-		
-		return bankAccount;
-		
+	public void setBankAccount(BankAccount bankAccount) {		
+		this.bankAccount = bankAccount;		
 	}
 	
-	public void setBankAccount(BankAccount bankAccount) {
-		
-		this.bankAccount = bankAccount;
-		
-	}
-	
-	public Project getProject() {
-		
-		return project;
-		
-	}
-	
-	public void setProject(Project project) {
-		
-		this.project = project;
-		
-	}
-	
-	public ProjectStage getProjectStage() {
-		
-		return projectStage;
-		
-	}
-	
-	public void setProjectStage(ProjectStage projectStage) {
-		
-		this.projectStage = projectStage;
-		
-	}
-	
-	public Money getSum() {
-		
-		return sum;
-		
-	}
-	
-	public void setSum(Money sum) {
-		
-		this.sum = sum;
-		
-	}
-	
-	public void generateTransactions() {
-		
-		deleteTransactions();
-		
-		if ((project != null)&&(projectStage != null)) {
-			
-			/*ProjectFinResultTransaction newTransaction = project.addTransaction(projectStage);
-			newTransaction.setDate(date);
-			newTransaction.setCostItem(costItem);
-			//newTransaction.setDoc(this);
-			newTransaction.setSum(sum);
-			*/
-		}
-		
-		if (costItem != null) {
-			
-			/*CostItemTransaction newTransaction = costItem.addTransaction();
-			newTransaction.setDate(date);
-			//newTransaction.setDoc(this);
-			newTransaction.setSum(sum);
-			*/
-		}
-		
-		if (bankAccount != null) {
-			
-			/*CashFlowStatementEntry newTransaction = bankAccount.addTransaction();
-			newTransaction.setDate(date);
-			newTransaction.setDoc(this);
-			newTransaction.setSum(sum);*/
-			
-		}
-		
-	}
-	
-	public void deleteTransactions() {
-		
-		if ((project != null)&&(projectStage != null)) {
-			
-			//projectStage.deleteTransactionByDoc(this);
-
-		}
-		
-		if (costItem != null) {
-			
-			//costItem.deleteDocTransaction(this);
-
-		}
-		
-		if (bankAccount != null) {
-			
-			//bankAccount.deleteDocTransaction(this);
-
-		}
-		
-	}
-
-	/**
-	 * @return the description
-	 */
 	public String getDescription() {
 		return description;
 	}
 
-	/**
-	 * @param description the description to set
-	 */
 	public void setDescription(String description) {
 		this.description = description;
 	}
+	
+	public Money getDocSum() {
+		return (docSum == null)? null : new Money(docSum);
+	}
+	
+	public void setDocSum(Money sum) {
+		this.docSum = new Money(sum);
+	}
+	
+	public boolean isChecked() {
+		return checked;
+	}
+
+	public void setChecked(boolean checked) {
+		this.checked = checked;
+	}
+	
+	public void addDocSum(Money sum) throws POMDataModelException {
+
+		if (this.docSum == null) {
+			setDocSum(sum);;
+		} else {
+			this.docSum.add(sum);
+		}
+
+	}
+
+	public Currency getCurrency() {
+		return (bankAccount == null)? null : bankAccount.getCurrency();
+	}
+
+	public List<PaymentDocumentDetail> getPaymentDocumentDetails() {
+		return paymentDocumentDetails;
+	}
+
+	public void setPaymentDocumentDetails(
+			List<PaymentDocumentDetail> paymentDocumentDetails) {
+		this.paymentDocumentDetails = paymentDocumentDetails;
+		
+		for(PaymentDocumentDetail detail: getPaymentDocumentDetails()){
+			detail.setDoc(this);
+		}
+	}
+
+	public PaymentDocumentDetail getPaymentDetailByRowNumber(long rowNumber) {
+		
+		PaymentDocumentDetail answer = null;
+		for(PaymentDocumentDetail detail: getPaymentDocumentDetails()){
+			if(detail.getRowNumber() == rowNumber) {
+				answer = detail;
+				break;
+			}
+		}
+		return answer;
+	}
+
+	public PaymentDocumentDetail addNewDetail() {
+
+		PaymentDocumentDetail newDocDetails = new PaymentDocumentDetail();
+		if(paymentDocumentDetails == null) {
+			paymentDocumentDetails = new ArrayList<PaymentDocumentDetail>();
+		}
+		paymentDocumentDetails.add(newDocDetails);
+		newDocDetails.setRowNumber(paymentDocumentDetails.size());
+		newDocDetails.setDoc(this);
+		
+		return newDocDetails;
+	}
+	
 }

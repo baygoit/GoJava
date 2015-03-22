@@ -11,14 +11,12 @@ import java.util.Date;
 import org.apache.log4j.Logger;
 
 import ua.com.goit.gojava.POM.dataModel.POMDataModelException;
+import ua.com.goit.gojava.POM.dataModel.common.FinancialDocument;
 import ua.com.goit.gojava.POM.dataModel.common.Money;
 import ua.com.goit.gojava.POM.dataModel.profitcost.ProfitLostsType;
 import ua.com.goit.gojava.POM.dataModel.profitcost.ProjectFinResultEntry;
+import ua.com.goit.gojava.POM.persistence.FinancialDocumentDAO;
 import ua.com.goit.gojava.POM.persistence.postgresDB.abstraction.AbstractDAO;
-import ua.com.goit.gojava.POM.services.ApplicationContextProvider;
-import ua.com.goit.gojava.POM.services.CostItemService;
-import ua.com.goit.gojava.POM.services.ProjectService;
-import ua.com.goit.gojava.POM.services.ProjectStageService;
 
 
 public class ProjectFinResultEntryDAO extends AbstractDAO<ProjectFinResultEntry> {
@@ -26,7 +24,36 @@ public class ProjectFinResultEntryDAO extends AbstractDAO<ProjectFinResultEntry>
 	private static final String CLASS_NAME = "Project FinResult Entry"; 
 	private static final String CLASS_TABLE = "project_fin_result"; 
 	private static final Logger LOG = Logger.getLogger(ProjectFinResultEntryDAO.class);
+	private CostItemDAO costItemDAO;
+	private ProjectDAO projectDAO;
+	private ProjectStageDAO projectStageDAO;
+	private FinancialDocumentDAO financialDocumentDAO;
 	
+	public CostItemDAO getCostItemDAO() {
+		return costItemDAO;
+	}
+	public void setCostItemDAO(CostItemDAO costItemDAO) {
+		this.costItemDAO = costItemDAO;
+	}
+	public ProjectDAO getProjectDAO() {
+		return projectDAO;
+	}
+	public void setProjectDAO(ProjectDAO projectDAO) {
+		this.projectDAO = projectDAO;
+	}
+	public ProjectStageDAO getProjectStageDAO() {
+		return projectStageDAO;
+	}
+	public void setProjectStageDAO(ProjectStageDAO projectStageDAO) {
+		this.projectStageDAO = projectStageDAO;
+	}
+	public FinancialDocumentDAO getFinancialDocumentDAO() {
+		return financialDocumentDAO;
+	}
+	public void setFinancialDocumentDAO(FinancialDocumentDAO financialDocumentDAO) {
+		this.financialDocumentDAO = financialDocumentDAO;
+	}
+
 	@Override
 	protected String getClassName() {
 		
@@ -65,20 +92,17 @@ public class ProjectFinResultEntryDAO extends AbstractDAO<ProjectFinResultEntry>
 		}
 		projectFinResultEntry.setDate(date);
 		
-		CostItemService costItemService = ApplicationContextProvider.getApplicationContext().getBean(CostItemService.class);
 		long costItemId= rs.getLong("cost_item_id");
 		if(costItemId != 0) {
-			projectFinResultEntry.setCostItem(costItemService.retrieveById(costItemId));;
+			projectFinResultEntry.setCostItem(costItemDAO.retrieveById(costItemId));;
 		}
-		ProjectService projectService = ApplicationContextProvider.getApplicationContext().getBean(ProjectService.class);
 		long projectId= rs.getLong("project_id");
 		if(projectId != 0) {
-			projectFinResultEntry.setProject(projectService.retrieveById(projectId));;
+			projectFinResultEntry.setProject(projectDAO.retrieveById(projectId));;
 		}
-		ProjectStageService projectStageService = ApplicationContextProvider.getApplicationContext().getBean(ProjectStageService.class);
 		long projectStageId= rs.getLong("project_stage_id");
 		if(projectStageId != 0) {
-			projectFinResultEntry.setProjectStage(projectStageService.retrieveById(projectStageId));;
+			projectFinResultEntry.setProjectStage(projectStageDAO.retrieveById(projectStageId));;
 		}
 		String typeString = rs.getString("profit_type");
 		if(typeString != null) {
@@ -91,6 +115,12 @@ public class ProjectFinResultEntryDAO extends AbstractDAO<ProjectFinResultEntry>
 			currency = Currency.getInstance(currencyCode);
 		}
 		projectFinResultEntry.setSum(new Money(rs.getDouble("sum"), currency));;
+		
+		String docType = rs.getString("doc_type");
+		long docId = rs.getLong("doc_id");
+		if(docId != 0) {
+			projectFinResultEntry.setDoc(financialDocumentDAO.getFinancialDocument(docType, docId));
+		}
 		
 		return projectFinResultEntry;
 		
@@ -120,8 +150,10 @@ public class ProjectFinResultEntryDAO extends AbstractDAO<ProjectFinResultEntry>
 				+ " 	,sum "
 				+ " 	,currency "
 				+ " 	,profit_type "
+				+ " 	,doc_type "
+				+ " 	,doc_id "
 				+ "	   ) "
-				+ " VALUES (?,?,?,?,?,?,?) "
+				+ " VALUES (?,?,?,?,?,?,?,?,?) "
 				+ "	RETURNING ID "
 			;
 
@@ -137,6 +169,8 @@ public class ProjectFinResultEntryDAO extends AbstractDAO<ProjectFinResultEntry>
 		statement.setDouble(5, sum.getValue().doubleValue());
 		statement.setString(6, sum.getCurrency().getCurrencyCode());
 		statement.setString(7, projectFinResultEntry.getType().toString());
+		statement.setLong(8, projectFinResultEntry.getDoc().getId());
+		statement.setString(9, projectFinResultEntry.getDoc().getDocType());
 		
 		return statement;
 	}
@@ -154,6 +188,8 @@ public class ProjectFinResultEntryDAO extends AbstractDAO<ProjectFinResultEntry>
 				+ " 	,sum = ? "
 				+ " 	,currency = ? "
 				+ " 	,profit_type = ? "
+				+ " 	,doc_type = ? "
+				+ " 	,doc_id = ?  "
 				+ "	WHERE ID = ? "
 			;
 
@@ -169,11 +205,43 @@ public class ProjectFinResultEntryDAO extends AbstractDAO<ProjectFinResultEntry>
 		statement.setDouble(5, sum.getValue().doubleValue());
 		statement.setString(6, sum.getCurrency().getCurrencyCode());
 		statement.setString(7, projectFinResultEntry.getType().toString());
+		statement.setLong(8, projectFinResultEntry.getDoc().getId());
+		statement.setString(9, projectFinResultEntry.getDoc().getDocType());
 		
-		statement.setLong(8,  projectFinResultEntry.getId());
+		statement.setLong(10,  projectFinResultEntry.getId());
 		
 		return statement;
 		
 	}
+	
+	public void deleteAllByDoc(FinancialDocument doc) throws POMDataModelException {
 
+		ResultSet rs = null;
+		PreparedStatement statement = null;
+		Connection connection = getDBConnection();
+		
+		String updateTableSQL = "DELETE FROM "+getClassTable()
+								+ "	WHERE doc_id = ? AND doc_type = ? "
+								;
+		
+		try {
+
+			statement = connection.prepareStatement(updateTableSQL);
+			statement.setLong(1,  doc.getId());
+			statement.setString(2, doc.getDocType());
+			statement.execute();
+			
+		} catch (SQLException e) {
+ 
+			getLog().error("Could not delete all entries by Financial Document : "+e.getMessage(), e);
+			throw new POMDataModelException("Could not delete all entries by Financial Document : "+e.getMessage(), e);
+ 
+		} finally {
+ 
+			closeDBConnections(rs, statement, connection);
+ 
+		}
+		
+	}
+	
 }

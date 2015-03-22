@@ -3,8 +3,8 @@ package ua.com.goit.gojava.POM.dataModel.profitcost;
 import java.util.Currency;
 import java.util.Date;
 
+import ua.com.goit.gojava.POM.dataModel.common.FinancialDocument;
 import ua.com.goit.gojava.POM.dataModel.common.Money;
-//import ua.com.goit.gojava.POM.dataModel.common.FinancialDocument;
 
 public class ProjectFinResultEntry {
 	
@@ -14,9 +14,8 @@ public class ProjectFinResultEntry {
 	private CostItem costItem;
 	private Project project;
 	private ProjectStage projectStage;
-	//private String description;
 	private Money sum;
-	//private FinancialDocument doc;
+	private FinancialDocument doc;
 	
 	public long getId() {
 		return id;
@@ -36,18 +35,12 @@ public class ProjectFinResultEntry {
 	public void setCostItem(CostItem costItem) {
 		this.costItem = costItem;
 	}
-	/*public String getDescription() {
-		return description;
-	}
-	public void setDescription(String description) {
-		this.description = description;
-	}
-	/*public FinancialDocument getDoc() {
+	public FinancialDocument getDoc() {
 		return doc;
 	}
 	public void setDoc(FinancialDocument doc) {
 		this.doc = doc;
-	}*/
+	}
 	public Project getProject() {
 		return project;
 	}
@@ -61,10 +54,10 @@ public class ProjectFinResultEntry {
 		this.projectStage = projectStage;
 	}
 	public Money getSum() {
-		return sum;
+		return new Money(sum);
 	}
 	public void setSum(Money sum) {
-		this.sum = sum;
+		this.sum = new Money(sum);
 	}
 	public ProfitLostsType getType() {
 		return type;
@@ -73,13 +66,7 @@ public class ProjectFinResultEntry {
 		this.type = type;
 	}
 	
-	public Currency getCurrency() {
-		
-		Currency currency = null;
-		if(sum != null) {
-			currency = sum.getCurrency();
-		}
-		return currency;
-		
+	public Currency getCurrency() {	
+		return (sum == null) ? null : sum.getCurrency();
 	}
 }

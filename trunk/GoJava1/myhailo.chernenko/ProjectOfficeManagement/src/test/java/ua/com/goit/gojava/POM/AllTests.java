@@ -12,33 +12,34 @@ import org.junit.runners.Suite.SuiteClasses;
 
 
 
-import ua.com.goit.gojava.POM.dataModel.cash.*;
+/*import ua.com.goit.gojava.POM.dataModel.cash.*;
 import ua.com.goit.gojava.POM.dataModel.common.*;
 import ua.com.goit.gojava.POM.dataModel.documents.*;
 import ua.com.goit.gojava.POM.dataModel.profitcost.*;
 import ua.com.goit.gojava.POM.persistence.fileDB.*;
 import ua.com.goit.gojava.POM.persistence.postgresDB.ExchangeRateDAOTest;
+*/
 
 @RunWith(Suite.class)
 @SuiteClasses({ 
-		BankAccountTest.class,
-		CashMovementEntryTest.class,
+		//BankAccountTest.class,
+		//CashMovementEntryTest.class,
 		
-		DateConverterTest.class,
-		FinancialStatementTest.class,
-		MoneyTest.class,
+		//DateConverterTest.class,
+		//FinancialStatementTest.class,
+		//MoneyTest.class,
 
-		PaymentDocumentTest.class,
+		//PaymentDocumentTest.class,
 		
-		CostItemTest.class, 
-		ProjectFinResultTransactionTest.class, 
-		ProjectStageTest.class,
-		ProjectTest.class,
+		//CostItemTest.class, 
+		//ProjectFinResultTransactionTest.class, 
+		//ProjectStageTest.class,
+		//ProjectTest.class,
 		
-		ExchangeRateDAOTest.class,
-		DataManagerTest.class,
-		ProjectDAOTest.class,
-		CostItemDAOTest.class
+		//ExchangeRateDAOTest.class,
+		//DataManagerTest.class,
+		//ProjectDAOTest.class,
+		//CostItemDAOTest.class
 	})
 
 public class AllTests {

@@ -5,6 +5,7 @@ import java.util.List;
 import ua.com.goit.gojava.POM.dataModel.POMDataModelException;
 import ua.com.goit.gojava.POM.dataModel.cash.BankAccount;
 import ua.com.goit.gojava.POM.dataModel.cash.CashMovementEntry;
+import ua.com.goit.gojava.POM.dataModel.common.FinancialDocument;
 import ua.com.goit.gojava.POM.dataModel.common.Money;
 import ua.com.goit.gojava.POM.persistence.postgresDB.CashMovementDAO;
 
@@ -57,6 +58,12 @@ public class CashMovementService {
 	public void update(CashMovementEntry cashMovementEntry) throws POMDataModelException {
 
 		cashMovementDAO.update(cashMovementEntry);
+		
+	}
+
+	public void deleteAllByDoc(FinancialDocument doc) throws POMDataModelException {
+
+		cashMovementDAO.deleteAllByDoc(doc);
 		
 	}
 

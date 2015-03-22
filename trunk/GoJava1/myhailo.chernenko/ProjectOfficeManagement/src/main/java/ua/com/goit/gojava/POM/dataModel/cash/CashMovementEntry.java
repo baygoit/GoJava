@@ -3,6 +3,7 @@ package ua.com.goit.gojava.POM.dataModel.cash;
 import java.util.Currency;
 import java.util.Date;
 
+import ua.com.goit.gojava.POM.dataModel.common.FinancialDocument;
 import ua.com.goit.gojava.POM.dataModel.common.Money;
 
 public class CashMovementEntry {
@@ -11,6 +12,7 @@ public class CashMovementEntry {
 	private Date date;
 	private BankAccount bankAccount;
 	private Money sum;
+	private FinancialDocument doc;
 	
 	public long getId() {
 		
@@ -70,4 +72,11 @@ public class CashMovementEntry {
 		
 	}
 
+	public void setDoc(FinancialDocument doc) {
+		this.doc = doc;
+	}
+
+	public FinancialDocument getDoc() {
+		return this.doc;
+	}
 }
