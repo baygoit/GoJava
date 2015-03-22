@@ -46,4 +46,6 @@
 		</c:forEach>
 	</tbody>
 </table>
+<div align="center" class="buttons">
 <button type="button" class="btn btn-lg btn-info" VALUE="Back" onClick="history.go(-1);return true;">Back</button>
+</div>

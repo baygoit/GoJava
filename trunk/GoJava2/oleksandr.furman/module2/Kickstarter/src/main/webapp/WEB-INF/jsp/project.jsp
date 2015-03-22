@@ -61,7 +61,7 @@
 					aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
-				<h4 class="modal-title" id="myModalLabel">Modal title</h4>
+				<h4 class="modal-title" id="myModalLabel">Invest to project</h4>
 			</div>
 			<div class="modal-body">
 				<form action="payment.html">
