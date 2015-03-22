@@ -1,4 +1,5 @@
 package ua.goit.graphElements;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -58,5 +59,10 @@ public class Group extends GraphElement {
     @Override
     public String getType() {
 	return "Group";
+    }
+
+    @Override
+    public ArrayList<Point> getPoints() {
+	return null;
     }
 }
