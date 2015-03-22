@@ -2,6 +2,8 @@ package ua.goit.alg;
 
 import junit.framework.TestCase;
 
+import java.util.Arrays;
+
 public class RotatedArrayTest extends TestCase {
     public void test1() {
         int expectedResult = 1;
@@ -65,4 +67,30 @@ public class RotatedArrayTest extends TestCase {
         int actualResult = RotatedArray.binarySearch(array, 1);
         assertEquals(expectedResult, actualResult);
     }
+
+    public void test10() {
+        int expectedResult = 1;
+        int[] array = {10, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+        int actualResult = RotatedArray.binarySearch(array, 1);
+        assertEquals(expectedResult, actualResult);
+    }
+
+    public void testAllPossible10Arrays() {
+        int[] array = new int[10];
+        for (int j = 0; j < 10; j++) {
+            for (int i = 0; i < 10; i++) {
+                array[i] = (i + j) % 10;
+            }
+            for (int i = 0; i < 10; i++) {
+                int actual = RotatedArray.binarySearch(array, i);
+                int expected = (i + j * 9) % 10;
+                if (actual != expected) {
+                    System.out.println(Arrays.toString(array));
+                    System.out.println("Value searched: " + i + ". Expected value: " + expected + ", search provided the following result: " + actual);
+                }
+                assertEquals(expected, actual);
+            }
+        }
+    }
+
 }

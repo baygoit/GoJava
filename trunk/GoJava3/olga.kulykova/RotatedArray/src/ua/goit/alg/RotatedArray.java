@@ -6,11 +6,11 @@ package ua.goit.alg;
 public class RotatedArray {
     //Iterative way of Binary Search
     public static int binarySearch(int[] array, int target) {
-        int minInd = 0;
-        int maxInd = array.length - 1;
+        int min = 0;
+        int max = array.length - 1;
 
         //If the array is empty
-        if (maxInd < minInd) {
+        if (max < min) {
             return -1;
         }
         //If the array has one element
@@ -18,20 +18,29 @@ public class RotatedArray {
             return array[0];
         }
 
-        while (maxInd >= minInd) {
+        while (max >= min) {
             //Find the middle point
-            int midInd = minInd + ((maxInd - minInd) / 2);
+            int middle = min + ((max - min) / 2);
 
             //Comparisons
-            if (minInd == maxInd && minInd == target) {
-                return minInd;
-            } else if (array[midInd] == target) {
-                return midInd;
-            } else if ((array[minInd] <= target) && (array[midInd] > target)
-                    || (array[minInd] <= target) && (array[minInd] > array[midInd])) {
-                maxInd = midInd - 1;
+            if (array[middle] == target) {
+                return middle;
+            } else if (array[min] == target) {
+                return min;
+            } else if (array[max] == target) {
+                return max;
+            } else if (array[middle] > array[min]) {
+                if (target > array[min] && target < array[middle]) {
+                    max = middle - 1;
+                } else {
+                    min = middle + 1;
+                }
             } else {
-                minInd = midInd + 1;
+                if (target > array[middle] && target < array[max]) {
+                    min = middle + 1;
+                } else {
+                    max = middle - 1;
+                }
             }
         }
         return  -1;
