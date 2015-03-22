@@ -8,9 +8,9 @@ import ua.goit.shapeserializer.basicobjects.Point;
 import ua.goit.shapeserializer.basicobjects.Shape;
 import ua.goit.shapeserializer.basicobjects.Square;
 import ua.goit.shapeserializer.basicobjects.Triangle;
-import ua.goit.shapeserializer.serializers.JSONSerializer;
-import ua.goit.shapeserializer.serializers.SerializeFor;
-import ua.goit.shapeserializer.serializers.XMLSerializer;
+import ua.goit.shapeserializer.serializers.JSONShapeSerializer;
+import ua.goit.shapeserializer.serializers.SerializerFor;
+import ua.goit.shapeserializer.serializers.XMLShapeSerializer;
 
 
 public class Factory {
@@ -30,11 +30,11 @@ public class Factory {
     }
   }
 
-  public static SerializeFor getSerializerFor(String type) {
+  public static SerializerFor getSerializerFor(String type) {
     if ("XML".equals(type)) {
-      return new JSONSerializer();
+      return new JSONShapeSerializer();
     } else if ("JSON".equals(type)) {
-      return new XMLSerializer();
+      return new XMLShapeSerializer();
     } else {
       throw new RuntimeException("Invalid class type");
     }

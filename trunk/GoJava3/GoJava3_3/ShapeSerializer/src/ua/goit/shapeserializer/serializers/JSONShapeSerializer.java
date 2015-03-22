@@ -6,7 +6,7 @@ package ua.goit.shapeserializer.serializers;
 
 import ua.goit.shapeserializer.basicobjects.Shape;
 
-public class JSONSerializer implements SerializeFor {
+public class JSONShapeSerializer implements SerializerFor {
   @Override
   public String serialize(Shape shape) {
     return null;

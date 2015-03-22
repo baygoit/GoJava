@@ -5,6 +5,6 @@ import ua.goit.shapeserializer.basicobjects.Shape;
 /**
  * Created by Aleksey Kurkov on 22.03.15.
  */
-public interface SerializeFor {
+public interface SerializerFor {
   String serialize(Shape shape);
 }
