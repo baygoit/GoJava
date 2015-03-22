@@ -14,4 +14,5 @@ public abstract class GraphElement implements Iterable <GraphElement> {
     public abstract boolean isElement();
     public abstract String getType();
     public abstract ArrayList <Point> getPoints();
+    public abstract void setPoints(ArrayList <Point> pointsList);
 }
