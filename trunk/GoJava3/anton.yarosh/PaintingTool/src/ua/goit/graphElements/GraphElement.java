@@ -7,5 +7,7 @@ public abstract class GraphElement {
     }
 
     public abstract void add(GraphElement element);
-    public abstract String getName(String toReturn);
+    public abstract String getName();
+    public abstract boolean isElement();
+    public abstract String getType();    
 }
