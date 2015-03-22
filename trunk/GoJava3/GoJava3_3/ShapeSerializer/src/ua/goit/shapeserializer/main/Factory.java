@@ -1,16 +1,11 @@
 package ua.goit.shapeserializer.main;
 
-import java.util.List;
-
-import ua.goit.shapeserializer.basicobjects.Circle;
-import ua.goit.shapeserializer.basicobjects.Group;
-import ua.goit.shapeserializer.basicobjects.Point;
-import ua.goit.shapeserializer.basicobjects.Shape;
-import ua.goit.shapeserializer.basicobjects.Square;
-import ua.goit.shapeserializer.basicobjects.Triangle;
+import ua.goit.shapeserializer.basicobjects.*;
 import ua.goit.shapeserializer.serializers.JSONShapeSerializer;
 import ua.goit.shapeserializer.serializers.SerializerFor;
 import ua.goit.shapeserializer.serializers.XMLShapeSerializer;
+
+import java.util.List;
 
 
 public class Factory {
@@ -32,9 +27,9 @@ public class Factory {
 
   public static SerializerFor getSerializerFor(String type) {
     if ("XML".equals(type)) {
-      return new JSONShapeSerializer();
-    } else if ("JSON".equals(type)) {
       return new XMLShapeSerializer();
+    } else if ("JSON".equals(type)) {
+      return new JSONShapeSerializer();
     } else {
       throw new RuntimeException("Invalid class type");
     }
