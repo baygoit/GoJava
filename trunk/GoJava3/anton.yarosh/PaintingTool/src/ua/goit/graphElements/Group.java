@@ -2,7 +2,7 @@ package ua.goit.graphElements;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class Group extends GraphElement {
+public class Group extends GraphElement implements Iterable{
     ArrayList <GraphElement> al = new ArrayList <GraphElement>();
     String toReturn = "";
     public Group(String name) {
@@ -15,16 +15,11 @@ public class Group extends GraphElement {
     }
 
     @Override
-    public String getName(String toReturn) {
-	toReturn +="I"+name;
-	for (GraphElement i: al) {
-	    toReturn += i.getName(toReturn);    
-	}
-	toReturn += "o";
-	return toReturn;
+    public String getName() {
+	return name;
     }
 
- /*   @Override
+    @Override
     public Iterator iterator() {
 	return new InnerIter();
     }
@@ -53,5 +48,15 @@ public class Group extends GraphElement {
 	public void remove() {
 	    al.remove(i);
 	}
-    }*/
+    }
+
+    @Override
+    public boolean isElement() {
+	return false;
+    }
+
+    @Override
+    public String getType() {
+	return "Group";
+    }
 }
