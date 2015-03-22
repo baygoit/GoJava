@@ -7,12 +7,12 @@
 
 <table class="table table-bordered table-hover table-striped">
 	<tbody>
-		<c:forEach items="${items}" var="item">
+		<c:forEach items="${categories}" var="category">
 			<tr>
 				<td>
 					<strong>
-					<a href="<spring:url value="/projects/${item.id}.html" />">
-						${item.name}
+					<a href="<spring:url value="/projects/${category.id}.html" />">
+						${category.name}
 					</a>
 					</strong>
 					

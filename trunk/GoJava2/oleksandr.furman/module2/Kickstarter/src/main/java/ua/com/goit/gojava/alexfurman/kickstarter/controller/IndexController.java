@@ -19,7 +19,7 @@ public class IndexController {
 
 	@RequestMapping("/index")
 	public String index(Model model) {
-		model.addAttribute("items", categoryService.getCategories());
+		model.addAttribute("categories", categoryService.getCategories());
 		model.addAttribute("quote", quoteService.getRandomQuote());
 		return "index";
 	}
