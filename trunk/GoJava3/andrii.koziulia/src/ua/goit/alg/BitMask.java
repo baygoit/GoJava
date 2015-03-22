@@ -6,7 +6,7 @@ package ua.goit.alg;
 public class BitMask {
 
     public static void main(String[] args) {
-        System.out.println(myPow(2, 5));
+        System.out.println(myPow(2, 8));
     }
 
     public static long myPow(long root, long degree) {
