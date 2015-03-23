@@ -1,8 +1,9 @@
 package ua.goit.adapter;
 
+import ua.goit.managers.Serializer;
 import ua.goit.model.Circle;
 
-public class CircleAdapterXML {
+public class CircleAdapterXML implements Serializer{
     private Circle circle;
 
     CircleAdapterXML(Circle circle) {

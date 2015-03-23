@@ -1,7 +1,8 @@
 package ua.goit.adapter;
+import ua.goit.managers.Serializer;
 import ua.goit.model.Triangle;
 
-public class TriangleAdapterXML {
+public class TriangleAdapterXML implements Serializer {
     private Triangle triangle;
 
     public TriangleAdapterXML(Triangle triangle){

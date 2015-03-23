@@ -1,8 +1,9 @@
 package ua.goit.adapter;
 
+import ua.goit.managers.Serializer;
 import ua.goit.model.Square;
 
-public class SquareAdapterXML {
+public class SquareAdapterXML implements Serializer {
     private Square square;
 
     public SquareAdapterXML(Square square) {
