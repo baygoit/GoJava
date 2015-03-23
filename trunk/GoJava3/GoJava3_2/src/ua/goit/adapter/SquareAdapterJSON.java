@@ -1,8 +1,8 @@
 package ua.goit.adapter;
 
-import ua.goit.managers.Serializer;
 import ua.goit.model.ContainerShapes;
 import ua.goit.model.Square;
+import ua.goit.serializers.Serializer;
 
 public class SquareAdapterJSON implements Serializer {
   StringBuilder result = new StringBuilder();

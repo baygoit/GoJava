@@ -1,6 +1,6 @@
 package ua.goit.adapter;
 
-import ua.goit.managers.Serializer;
+import ua.goit.serializers.Serializer;
 import ua.goit.model.Circle;
 import ua.goit.model.ContainerShapes;
 

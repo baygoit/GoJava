@@ -1,8 +1,8 @@
 package ua.goit.adapter;
 
-import ua.goit.managers.Serializer;
 import ua.goit.model.Circle;
 import ua.goit.model.ContainerShapes;
+import ua.goit.serializers.Serializer;
 
 public class CircleAdapterJSON implements Serializer {
 

@@ -1,4 +1,4 @@
-package ua.goit.managers;
+package ua.goit.serializers;
 
 import ua.goit.model.ContainerShapes;
 

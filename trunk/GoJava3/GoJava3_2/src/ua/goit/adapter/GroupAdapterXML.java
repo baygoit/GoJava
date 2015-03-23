@@ -1,7 +1,7 @@
 package ua.goit.adapter;
 
-import ua.goit.managers.*;
 import ua.goit.model.*;
+import ua.goit.serializers.*;
 
 public class GroupAdapterXML implements Serializer {
   Serializer serializer;
