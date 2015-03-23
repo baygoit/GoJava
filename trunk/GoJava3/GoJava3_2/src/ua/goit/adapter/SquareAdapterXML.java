@@ -18,7 +18,7 @@ public class SquareAdapterXML {
         xml.append("<y>" + square.getPoint1().y + "</y>");
         xml.append("</point1>");
 
-        xml.append("<point2>");
+        /*xml.append("<point2>");
         xml.append("<x>" + square.getPoint2().x +"</x>");
         xml.append("<y>" + square.getPoint2().y + "</y>");
         xml.append("</point2>");
@@ -31,7 +31,7 @@ public class SquareAdapterXML {
         xml.append("<point4>");
         xml.append("<x>" + square.getPoint4().x +"</x>");
         xml.append("<y>" + square.getPoint4().y + "</y>");
-        xml.append("</point4>");
+        xml.append("</point4>");*/
 
         xml.append("</square>");
         return xml.toString();
