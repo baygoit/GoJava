@@ -66,9 +66,15 @@ public class AppController {
 	}
 
 	@RequestMapping(value = { "/delete-{id}-category" }, method = RequestMethod.GET)
-	public String deleteEmployee(@PathVariable Integer id) {
+	public String deleteCategory(@PathVariable Integer id) {
 		categoryService.deleteCategoryById(id);
 		return "redirect:/categories";
+	}
+	
+	@RequestMapping(value = { "/delete-{id}-project" }, method = RequestMethod.GET)
+	public String deleteProject(@PathVariable Integer id) {
+		projectService.deleteProjectById(id);
+		return "redirect:/projects";
 	}
 
 }
