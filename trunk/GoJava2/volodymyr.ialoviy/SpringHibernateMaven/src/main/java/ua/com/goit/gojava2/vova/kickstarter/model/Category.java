@@ -14,20 +14,20 @@ import javax.validation.constraints.Size;
 public class Category {
 
 	@Id
-	@Column(name = "id")
+	@Column(name = "ID_CATEGORY")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private int idCategory;
 
 	@Size(min=3, max=50)
 	@Column(name = "NAME", nullable = false)
 	private String name;
 
 	public int getId() {
-		return id;
+		return idCategory;
 	}
 
 	public void setId(int id) {
-		this.id = id;
+		this.idCategory = id;
 	}
 
 	public String getName() {
@@ -47,13 +47,13 @@ public class Category {
 		if (!(obj instanceof Category))
 			return false;
 		Category other = (Category) obj;
-		if (id != other.id)
+		if (idCategory != other.idCategory)
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Employee [id=" + id + ", name=" + name + "]";
+		return "Category [id=" + idCategory + ", name=" + name + "]";
 	}
 }
