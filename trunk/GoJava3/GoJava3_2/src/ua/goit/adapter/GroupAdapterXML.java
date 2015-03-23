@@ -11,14 +11,9 @@ public class GroupAdapterXML implements Serializer {
     GroupShapes group = (GroupShapes) container;
     result.append("<group>");
     for (int i = 0; i < group.size(); i++) {
-      if (group.get(i) == null) {
-        result.append("<null></null>");
-      } else if (group.get(i).getType() == Types.GROUP) {
-        result.append(serialize(group.get(i)));
-      } else {
-        serializer = SerializerFactory.getSerializer(SerializerType.XML);
-        result.append(serializer.serialize(container));
-      }
+      ContainerShapes localContainer = group.get(i);
+      serializer = SerializerFactory.getSerializer(SerializerType.XML);
+      result.append(serializer.serialize(localContainer));
     }
     result.append("</group>");
     return result.toString();
