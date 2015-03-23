@@ -29,4 +29,13 @@ public class Projects extends AbstractDao implements ProjectDao{
 		query.setInteger("idProject", idProject);
 		query.executeUpdate();
 	}
+
+	@Override
+	public Project getProgect(Integer idProject) {
+		Query query = getSession().createQuery("from Project where idProject = :idProject");
+		query.setInteger("idProject", idProject);
+		List<Project> projects = (List<Project>) query.list();
+		Project rezult = projects.get(0);
+		return rezult;
+	}
 }

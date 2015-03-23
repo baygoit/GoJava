@@ -44,6 +44,14 @@ public class AppController {
 		model.addAttribute("category", idCategory);
 		return "projects";
 	}
+	
+	@RequestMapping(value = { "/project" }, method = RequestMethod.GET)
+	public String Project(HttpServletRequest req, ModelMap model) {
+		Integer idProject = Integer.valueOf(req.getParameter("project"));
+		Project project = projectService.getProgect(idProject);
+		model.addAttribute("project", project);
+		return "project";
+	}
 
 	@RequestMapping(value = { "/newcategory" }, method = RequestMethod.GET)
 	public String newEmployee(ModelMap model) {

@@ -31,4 +31,9 @@ public class ProjectServiceImpl implements ProjectService{
 		dao.deleteProjectById(idProject);
 	}
 
+	@Override
+	public Project getProgect(Integer idProject) {
+		return dao.getProgect(idProject);
+	}
+
 }

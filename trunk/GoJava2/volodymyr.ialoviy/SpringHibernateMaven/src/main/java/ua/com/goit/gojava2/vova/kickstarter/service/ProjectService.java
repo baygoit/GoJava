@@ -12,4 +12,6 @@ public interface ProjectService {
 	
 	void deleteProjectById(Integer idProject);
 
+	Project getProgect(Integer idProject);
+
 }
