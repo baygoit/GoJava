@@ -22,7 +22,7 @@ public class Group extends GraphElement {
 
     @Override
     public Iterator iterator() {
-	return new InnerIter();
+	return new InnerIter ();
     }
 
     private class InnerIter implements Iterator {
