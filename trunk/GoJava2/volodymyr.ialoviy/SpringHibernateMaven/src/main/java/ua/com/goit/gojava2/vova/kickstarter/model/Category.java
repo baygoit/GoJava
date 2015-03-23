@@ -25,7 +25,7 @@ public class Category {
 		return idCategory;
 	}
 
-	public void setId(int idCategory) {
+	public void setIdCategory(int idCategory) {
 		this.idCategory = idCategory;
 	}
 

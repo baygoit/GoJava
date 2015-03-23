@@ -67,13 +67,13 @@ public class AppController {
 		return "success";
 	}
 
-	@RequestMapping(value = { "/delete-{id}-category" }, method = RequestMethod.GET)
+	@RequestMapping(value = { "/delete-{idCategory}-category" }, method = RequestMethod.GET)
 	public String deleteCategory(@PathVariable Integer idCategory) {
 		categoryService.deleteCategoryById(idCategory);
 		return "redirect:/categories";
 	}
 	
-	@RequestMapping(value = { "/delete-{id}-project" }, method = RequestMethod.GET)
+	@RequestMapping(value = { "/delete-{idProject}-project" }, method = RequestMethod.GET)
 	public String deleteProject(@PathVariable Integer idProject) {
 		projectService.deleteProjectById(idProject);
 		return "redirect:/projects";
