@@ -19,7 +19,6 @@ public class Projects extends AbstractDao implements ProjectDao{
 	public List<Project> findAllProjects(Integer idCategory) {
 		Query query = getSession().createQuery("from Project where idCategory = :idCategory");
 		query.setInteger("idCategory", idCategory);
-		query.executeUpdate();
 		List<Project> rezult = (List<Project>) query.list();
 		return rezult;
 	}

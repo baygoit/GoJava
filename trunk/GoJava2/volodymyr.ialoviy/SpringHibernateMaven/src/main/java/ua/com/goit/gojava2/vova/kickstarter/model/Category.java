@@ -8,7 +8,6 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
-
 @Entity
 @Table(name="CATEGORIES")
 public class Category {
@@ -22,12 +21,12 @@ public class Category {
 	@Column(name = "NAME", nullable = false)
 	private String name;
 
-	public int getId() {
+	public int getIdCategory() {
 		return idCategory;
 	}
 
-	public void setId(int id) {
-		this.idCategory = id;
+	public void setId(int idCategory) {
+		this.idCategory = idCategory;
 	}
 
 	public String getName() {

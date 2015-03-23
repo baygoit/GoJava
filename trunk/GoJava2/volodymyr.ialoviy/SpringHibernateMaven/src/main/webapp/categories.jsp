@@ -27,7 +27,7 @@
 			<td><a href="<c:url value='/delete-${category.idCategory}-category' />">${category.idCategory}</a></td>
 			
 			
-			<td><a href="projects?category=${category.idCategory}"><c:out value="${category.nameCategory}"/></a></td>
+			<td><a href="projects?category=${category.idCategory}"><c:out value="${category.name}"/></a></td>
 			
 			
 			<td>${category.name}</td>

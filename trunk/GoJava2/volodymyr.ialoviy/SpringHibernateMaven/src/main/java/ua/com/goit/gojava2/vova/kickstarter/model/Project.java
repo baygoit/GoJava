@@ -21,10 +21,10 @@ public class Project {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "ID_PROJECT")
 	private int idProject;
 	
 	@NotNull
-	@Id
 	@Column(name = "ID_CATEGORY")
 	private String idCategory;
 
@@ -66,14 +66,15 @@ public class Project {
 	@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
 	private LocalDate dateClose;
 	
+	@Column(name = "FAQ")
 	private ArrayList<String> faq;
 	
-	public int getId() {
+	public int getIdProject() {
 		return idProject;
 	}
 
-	public void setId(int id) {
-		this.idProject = id;
+	public void setIdProject(int idProject) {
+		this.idProject = idProject;
 	}
 
 	public String getIdCategpry() {
