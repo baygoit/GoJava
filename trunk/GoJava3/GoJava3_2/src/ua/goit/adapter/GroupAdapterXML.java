@@ -16,7 +16,7 @@ public class GroupAdapterXML {
       } else if (group.get(i).getType() == Types.GROUP) {
         result.append(serialize(group.get(i)));
       } else {
-        serializer = SerializerFactory.getSerializer(SerializerType.XML);
+        serializer = SerializerFactory.getSerializer(SerializerType.JSON);
         result.append(serializer.serialize(container));
       }
     }

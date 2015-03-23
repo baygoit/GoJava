@@ -7,21 +7,21 @@ public class XMLSerializer implements Serializer {
 
   @Override
   public String serialize(ContainerShapes object) {
-    if (object instanceof GroupShapes) {
+    if (object.getType() == Types.GROUP) {
       return serialize((GroupShapes)object);
-    } else if (object instanceof Circle) {
+    } else if (object.getType() == Types.CIRCLE) {
       return serialize((Circle)object);
-    } else if (object instanceof Square) {
+    } else if (object.getType() == Types.SQUARE) {
       return serialize((Square) object);
-    } else if (object instanceof Triangle) {
+    } else if (object.getType() == Types.TRIANGLE) {
       return serialize((Triangle) object);
     }
     return null;
    }
  
   public String serialize(GroupShapes object) {
-    // TODO Auto-generated method stub
-    return null;
+    GroupAdapterXML adapter = new GroupAdapterXML();
+    return adapter.serialize(object);
   }
 
   public String serialize(Triangle object) {
@@ -30,8 +30,8 @@ public class XMLSerializer implements Serializer {
   }
 
   public String serialize(Circle object) {
-    // TODO Auto-generated method stub
-    return null;
+    CircleAdapterXML adapter = new CircleAdapterXML(object);
+    return adapter.serialize();
   }
 
   public String serialize(Square object) {
