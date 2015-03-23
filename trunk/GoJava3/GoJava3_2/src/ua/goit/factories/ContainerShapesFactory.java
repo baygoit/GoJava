@@ -1,4 +1,4 @@
-package ua.goit.managers;
+package ua.goit.factories;
 
 import ua.goit.model.*;
 

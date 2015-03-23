@@ -3,6 +3,10 @@ package ua.goit.tests;
 import static org.junit.Assert.*;
 import java.awt.Point;
 import org.junit.Test;
+import ua.goit.factories.CircleFactory;
+import ua.goit.factories.GroupShapesFactory;
+import ua.goit.factories.SquareFactory;
+import ua.goit.factories.TriangleFactory;
 import ua.goit.managers.*;
 import ua.goit.model.*;
 
