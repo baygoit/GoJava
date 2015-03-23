@@ -31,7 +31,7 @@ public abstract class SerializeClassHolder {
     }
 
    
-   public static String serialize(Shape arg) {
+   public String serialize(Shape arg) {
       
        Object clazz;
        clazz = serialMap.get(arg.getClass());
@@ -48,4 +48,13 @@ public abstract class SerializeClassHolder {
 	return shapeSerializer.serialize(arg);
     }
 
+
+
+
+public String innerSerialize(Shape arg) {
+    
+	return this.serialize(arg);
+ 
+
+}
 }

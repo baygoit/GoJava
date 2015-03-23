@@ -3,6 +3,7 @@ package ua.goit.shapeserializers;
 import ua.goit.shapeserializer.basicobjects.Circle;
 import ua.goit.shapeserializer.basicobjects.Group;
 import ua.goit.shapeserializer.basicobjects.Point;
+import ua.goit.shapeserializer.basicobjects.Shape;
 import ua.goit.shapeserializer.basicobjects.Square;
 import ua.goit.shapeserializer.basicobjects.Triangle;
 import ua.goit.shapeserializer.serializers.JSONserializers.CircleJSONSerializer;
@@ -20,5 +21,6 @@ public class SerializeJSONClassHolder extends SerializeClassHolder{
 	serialMap.put(Square.class, SquareJSONSerializer.class);
 	serialMap.put(Triangle.class, TriangleJSONSerializer.class);
     }
+    
 
 }
