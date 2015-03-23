@@ -11,7 +11,9 @@ public class XMLSerializator extends Serializator {
     public StringBuffer serialize(GraphElement element) {
         if (element.isElement()) {
             buffer.append("<" + element.getType() + ">" + element.getName());
-            /*there will be point`s adding logic*/
+            for (Point point : element.getPoints()) {
+                buffer.append("<Point>" + point + "</Point>");
+            }
             buffer.append("</" + element.getType() + ">");
         } else {
             buffer.append("<" + element.getType() + ">" + element.getName());
