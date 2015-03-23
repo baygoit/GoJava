@@ -10,6 +10,6 @@ public interface ProjectService {
 	
 	void saveProject(Project Project);
 	
-	void deleteProjectById(Integer id);
+	void deleteProjectById(Integer idProject);
 
 }

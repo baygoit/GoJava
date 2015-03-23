@@ -10,6 +10,6 @@ public interface ProjectDao {
 
 	void saveProject(Project project);
 
-	void deleteProjectById(Integer id);
+	void deleteProjectById(Integer idProject);
 
 }

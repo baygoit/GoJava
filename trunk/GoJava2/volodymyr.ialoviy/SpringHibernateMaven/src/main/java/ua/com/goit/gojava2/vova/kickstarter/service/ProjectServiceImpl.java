@@ -27,8 +27,8 @@ public class ProjectServiceImpl implements ProjectService{
 	}
 
 	@Override
-	public void deleteProjectById(Integer id) {
-		dao.deleteProjectById(id);
+	public void deleteProjectById(Integer idProject) {
+		dao.deleteProjectById(idProject);
 	}
 
 }
