@@ -1,16 +1,13 @@
 package ua.goit.adapter;
 
 import ua.goit.managers.Serializer;
+import ua.goit.model.ContainerShapes;
 import ua.goit.model.Triangle;
 
 public class TriangleAdapterXML implements Serializer {
-  private Triangle triangle;
 
-  public TriangleAdapterXML(Triangle triangle) {
-    this.triangle = triangle;
-  }
-
-  public String serialize() {
+  public String serialize(ContainerShapes object) {
+    Triangle triangle = (Triangle) object;
     StringBuilder xml = new StringBuilder();
     xml.append("<triangle>");
 

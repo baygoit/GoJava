@@ -1,18 +1,16 @@
 package ua.goit.adapter;
 
 import ua.goit.managers.Serializer;
+import ua.goit.model.ContainerShapes;
 import ua.goit.model.Triangle;
 
 public class TriangleAdapterJSON implements Serializer{
 
-  private Triangle triangle;
-
-  TriangleAdapterJSON(Triangle triangle) {
-    this.triangle = triangle;
-  }
 
   @Override
-  public String serialize() {
+  public String serialize(ContainerShapes object) {
+    Triangle triangle = (Triangle) object;
+    
     StringBuilder json = new StringBuilder();
     json.append("{triangle:");
 
@@ -34,5 +32,7 @@ public class TriangleAdapterJSON implements Serializer{
     json.append("}");
     return json.toString();
   }
+
+
 
 }
