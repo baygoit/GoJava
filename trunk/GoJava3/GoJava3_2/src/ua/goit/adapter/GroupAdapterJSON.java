@@ -4,7 +4,7 @@ import ua.goit.managers.*;
 import ua.goit.model.*;
 
 
-public class GroupAdapterJSON {
+public class GroupAdapterJSON implements Serializer {
  StringBuilder result = new StringBuilder("");
  Serializer serializer;
   public String serialize(ContainerShapes container){

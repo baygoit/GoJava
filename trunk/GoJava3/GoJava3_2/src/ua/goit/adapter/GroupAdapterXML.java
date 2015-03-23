@@ -3,7 +3,7 @@ package ua.goit.adapter;
 import ua.goit.managers.*;
 import ua.goit.model.*;
 
-public class GroupAdapterXML {
+public class GroupAdapterXML implements Serializer {
   Serializer serializer;
   StringBuilder result = new StringBuilder("");
 
