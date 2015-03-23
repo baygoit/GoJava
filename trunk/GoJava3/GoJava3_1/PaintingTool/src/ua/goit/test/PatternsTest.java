@@ -75,7 +75,7 @@ public class PatternsTest {
     public void elementAddingTest() {
 	GraphElement ge1 = new Group("Group 1");
 	GraphElement ge2 = new Group("Group 2");
-	ge1.add(ge2);
+	((Group) ge1).add(ge2);
 	Iterator group1Iter = ge1.iterator();
 	GraphElement innerGroup = (GraphElement) group1Iter.next();
 	String expectedValue = "Group 2";
