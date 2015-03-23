@@ -7,13 +7,15 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.Type;
 import org.joda.time.LocalDate;
-import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "PROJECTS")
@@ -27,7 +29,7 @@ public class Project {
 	@NotNull
 	@Column(name = "ID_CATEGORY")
 	private String idCategory;
-
+ 
 	@NotNull
 	@Size(min = 3, max = 50)
 	@Column(name = "NAME")
@@ -60,14 +62,24 @@ public class Project {
 	@Column(name = "HOW_MUCH_REMAINING")
 	private int howMuchRemaining;
 	
-	@NotNull
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
-	@Column(name = "DATE_CLOSE", nullable = false)
+	@Temporal(TemporalType.DATE)
 	@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
+	@Column(name = "DATE_CLOSE")
 	private LocalDate dateClose;
 	
 	@Column(name = "FAQ")
 	private ArrayList<String> faq;
+	
+//	@ManyToOne
+//	private Category category;
+	
+	public ArrayList<String> getFaq() {
+		return faq;
+	}
+
+	public void setFaq(ArrayList<String> faq) {
+		this.faq = faq;
+	}
 	
 	public int getIdProject() {
 		return idProject;
@@ -157,21 +169,12 @@ public class Project {
 		this.dateClose = dateClose;
 	}
 
-	public ArrayList<String> getFaq() {
-		return faq;
-	}
-
-	public void setFaq(ArrayList<String> faq) {
-		this.faq = faq;
-	}
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
 		if (obj == null)
 			return false;
-		
 		if (!(obj instanceof Project))
 			return false;
 		Project other = (Project) obj;
