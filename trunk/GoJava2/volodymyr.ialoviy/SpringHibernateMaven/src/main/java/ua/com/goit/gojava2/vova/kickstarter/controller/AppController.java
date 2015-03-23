@@ -39,9 +39,9 @@ public class AppController {
 	@RequestMapping(value = { "/projects" }, method = RequestMethod.GET)
 	public String listProjects(HttpServletRequest req, ModelMap model) {
 		int idCategory = Integer.valueOf(req.getParameter("category"));
-		
 		List<Project> projects = projectService.findAllProjects(idCategory);
 		model.addAttribute("projects", projects);
+		model.addAttribute("category", idCategory);
 		return "projects";
 	}
 
@@ -73,10 +73,10 @@ public class AppController {
 		return "redirect:/categories";
 	}
 	
-	@RequestMapping(value = { "/delete-{idProject}-project" }, method = RequestMethod.GET)
-	public String deleteProject(@PathVariable Integer idProject) {
+	@RequestMapping(value = { "/delete-{idProject}-project-{idCategory}" }, method = RequestMethod.GET)
+	public String deleteProject(@PathVariable Integer idProject, @PathVariable String idCategory) {
 		projectService.deleteProjectById(idProject);
-		return "redirect:/projects";
+		System.out.println(idCategory);
+		return "redirect:/projects?category=" + idCategory;
 	}
-
 }

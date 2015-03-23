@@ -29,5 +29,4 @@ public class Projects extends AbstractDao implements ProjectDao{
 		query.setInteger("idProject", idProject);
 		query.executeUpdate();
 	}
-
 }
