@@ -1,6 +1,6 @@
 package ua.goit.adapter;
 
-import ua.goit.model.shapes.Square;
+import ua.goit.model.Square;
 
 public class SquareAdapterXML {
     private Square square;

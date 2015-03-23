@@ -1,6 +1,5 @@
-package ua.goit.model.shapes;
+package ua.goit.model;
 
-import ua.goit.model.Shape;
 import java.awt.*;
 
 public class Square implements Shape {
@@ -8,6 +7,7 @@ public class Square implements Shape {
     private Point point2;
     private Point point3;
     private Point point4;
+    private Types type = Types.SQUARE;
 
     Square() {
 
@@ -18,6 +18,10 @@ public class Square implements Shape {
         this.point2 = point2;
         this.point3 = point3;
         this.point4 = point4;
+    }
+
+    public Types getType() {
+        return type;
     }
 
     public Point getPoint1() {

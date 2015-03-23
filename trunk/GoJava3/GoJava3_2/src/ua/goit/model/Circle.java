@@ -1,19 +1,23 @@
-package ua.goit.model.shapes;
+package ua.goit.model;
 
-import ua.goit.model.Shape;
 import java.awt.*;
 
 public class Circle implements Shape {
     private int radius;
     private Point center;
+    private Types type = Types.CIRCLE;
 
-    Circle() {
+    public Circle() {
 
     }
 
     Circle(Point center, int radius) {
         this.center = center;
         this.radius = radius;
+    }
+
+    public Types getType() {
+        return type;
     }
 
     public int getRadius() {
