@@ -5,20 +5,22 @@ import ua.goit.model.Square;
 import ua.goit.serializers.Serializer;
 
 public class SquareAdapterJSON implements Serializer {
-  StringBuilder result = new StringBuilder();
 
   @Override
   public String serialize(ContainerShapes container) {
+    StringBuilder json = new StringBuilder();
     Square square = (Square) container;
-    result.append("{square:");
+    json.append("{\"square\":{");
 
-    result.append("{point1:");
-    result.append("{x:" + square.getPoint1().x + "}");
-    result.append("{y:" + square.getPoint1().y + "}");
-    result.append("}");
+    json.append("\"point1\":{");
+    json.append("\"x\":" + square.getPoint1().x);
+    json.append(",");
+    json.append("\"y\":" + square.getPoint1().y);
+    json.append("}");
+    json.append(",");
 
-    result.append("{length:" + square.getLength() + "}");
+    json.append("\"length\":" + square.getLength());
 
-    result.append("}");
-    return result.toString();  }
+    json.append("}}");
+    return json.toString();  }
 }

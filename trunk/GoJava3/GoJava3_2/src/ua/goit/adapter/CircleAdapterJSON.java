@@ -11,16 +11,18 @@ public class CircleAdapterJSON implements Serializer {
     Circle circle = (Circle) container;
 
     StringBuilder json = new StringBuilder();
-    json.append("{circle:");
+    json.append("{\"circle\":{");
 
-    json.append("{center:");
-    json.append("{x:" + circle.getCenter().x + "}");
-    json.append("{y:" + circle.getCenter().y + "}");
+    json.append("\"center\":{");
+    json.append("\"x\":" + circle.getCenter().x);
+    json.append(",");
+    json.append("\"y\":" + circle.getCenter().y);
     json.append("}");
+    json.append(",");
 
-    json.append("{radius:" + circle.getRadius() + "}");
+    json.append("\"radius\":" + circle.getRadius());
 
-    json.append("}");
+    json.append("}}");
 
     return json.toString();
   }

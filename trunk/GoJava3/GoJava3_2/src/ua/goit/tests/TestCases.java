@@ -58,7 +58,8 @@ public class TestCases {
         String expectedResult = "{\"triangle\":{\"point1\":{\"x\":1,\"y\":1},\"point2\":{\"x\":2,\"y\":2},\"point3\":{\"x\":3,\"y\":3}}}";
         assertEquals(expectedResult, shapeStringJSON);
     }
-    @Test
+
+  @Test
     public void testGroupXML() {
         
         GroupShapes groupShapes = newTestGroup();
@@ -134,4 +135,29 @@ public class TestCases {
                 "{group:{circle:{center:{x:3}{y:-2}}{radius:3}}{rectangle:{point1:{x:3}{y:-2}}{length:6}}}}";
         assertEquals(expectedResult, shapeStringJSON);
     }
+
+  @Test
+  public void testCircleSerializationJSON() {
+
+    Circle circle = new Circle(new Point(1,2),5);
+    Serializer jsonSerializer = SerializerFactory.getSerializer(SerializerType.JSON);
+
+    String shapeStringJSON = jsonSerializer.serialize(circle);
+    String expectedResult = "{\"circle\":{\"center\":{\"x\":1,\"y\":2},\"radius\":5}}";
+    assertEquals(expectedResult, shapeStringJSON);
+
+  }
+
+  @Test
+  public void testSquareSerializationJSON() {
+
+    Square square = new Square(new Point(1,2),5);
+    Serializer jsonSerializer = SerializerFactory.getSerializer(SerializerType.JSON);
+
+    String shapeStringJSON = jsonSerializer.serialize(square);
+    String expectedResult = "{\"square\":{\"point1\":{\"x\":1,\"y\":2},\"length\":5}}";
+    assertEquals(expectedResult, shapeStringJSON);
+
+  }
+
 }
