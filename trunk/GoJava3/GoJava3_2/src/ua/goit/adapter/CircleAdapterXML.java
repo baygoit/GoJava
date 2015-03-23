@@ -1,6 +1,12 @@
 package ua.goit.adapter;
 
-public class CircleAdapterXML {
+import ua.goit.model.Circle;
 
+public class CircleAdapterXML {
+    private Circle circle;
+
+    CircleAdapterXML(Circle circle) {
+        this.circle = circle;
+    }
 
 }
