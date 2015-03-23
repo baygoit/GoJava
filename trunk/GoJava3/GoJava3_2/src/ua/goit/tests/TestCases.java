@@ -77,6 +77,17 @@ public class TestCases {
     }
 
     @Test
+    public void testMultipleGroupsXML() {
+
+    }
+
+    @Test
+    public void testMultipleGroupsJSON() {
+
+    }
+
+
+    @Test
     public void testGroupJSON() {
         
         GroupShapes groupShapes = newTestGroup();
