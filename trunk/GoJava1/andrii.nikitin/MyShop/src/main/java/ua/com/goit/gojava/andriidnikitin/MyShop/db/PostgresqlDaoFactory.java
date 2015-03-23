@@ -9,16 +9,19 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import ua.com.goit.gojava.andriidnikitin.MyShop.commons.ErrorLogger;
 import ua.com.goit.gojava.andriidnikitin.MyShop.db.util.MyShopDaoException;
 import ua.com.goit.gojava.andriidnikitin.MyShop.domain.model.Good;
 import ua.com.goit.gojava.andriidnikitin.MyShop.domain.model.GoodIncoming;
 import ua.com.goit.gojava.andriidnikitin.MyShop.domain.model.GoodType;
-
 public class PostgresqlDaoFactory  implements DaoFactory {
 
    private String driver = "org.postgresql.Driver";
+   
+   @Autowired
+   private DataSource dataSource;   
       
    private static PostgresqlDaoFactory instance = null;
    
@@ -33,12 +36,22 @@ public class PostgresqlDaoFactory  implements DaoFactory {
 	   return instance;
    }
     
-    public Connection getConnection() throws MyShopDaoException {
+    public Connection getConnection() throws MyShopDaoException {    	
+        try {
+			return dataSource.getConnection();
+		} catch (SQLException e) {
+			ErrorLogger.logSQLException(e, "getting connection ", log);
+		}
+        return null;
+    }
+    
+    @SuppressWarnings("unused")
+	private Connection getConnectionInOldWay() throws MyShopDaoException {
     	Connection connection = null;
     	String lookup = "java:comp/env/jdbc/ShopDS";
         try {
         	Context ctx = new InitialContext();    		
-        	DataSource dataSource = (DataSource) ctx.lookup(lookup);
+        	javax.sql.DataSource dataSource = (javax.sql.DataSource) ctx.lookup(lookup);
 			connection = dataSource.getConnection();
 			log.info("New connection to " + lookup + " was established");
 		} catch (SQLException e) {			

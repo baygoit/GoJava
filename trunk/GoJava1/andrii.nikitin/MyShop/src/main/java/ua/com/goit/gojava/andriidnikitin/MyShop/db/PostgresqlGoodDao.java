@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import ua.com.goit.gojava.andriidnikitin.MyShop.commons.ErrorLogger;
 import ua.com.goit.gojava.andriidnikitin.MyShop.db.util.MyShopDaoException;
@@ -16,7 +17,8 @@ import ua.com.goit.gojava.andriidnikitin.MyShop.domain.model.GoodType;
 
 public class PostgresqlGoodDao implements GenericDao<Good> {
 	private Connection connection;
-
+	@Autowired
+    private DaoFactory factory;
 	private static Logger log = Logger.getLogger("MyShop.DAO");
 	private static final String CLASSNAME = PostgresqlGoodDao.class.getCanonicalName();
 	private static final String GOOD_CLASSNAME = Good.class.getCanonicalName();
@@ -72,7 +74,6 @@ public class PostgresqlGoodDao implements GenericDao<Good> {
 		        result = new Good();
 		        result.setId(goodId);
 		        result.setName(name);
-		        PostgresqlDaoFactory factory = PostgresqlDaoFactory.getInstance();
 		        GenericDao<GoodType> dao = factory.getGoodTypeDao(connection);
 		        result.setType(dao.read(typeId));	 
 			} catch (SQLException e) {

@@ -5,19 +5,21 @@ import java.sql.SQLException;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import ua.com.goit.gojava.andriidnikitin.MyShop.commons.ErrorLogger;
 import ua.com.goit.gojava.andriidnikitin.MyShop.db.DaoFactory;
 import ua.com.goit.gojava.andriidnikitin.MyShop.db.GenericDao;
-import ua.com.goit.gojava.andriidnikitin.MyShop.db.PostgresqlDaoFactory;
 import ua.com.goit.gojava.andriidnikitin.MyShop.db.util.MyShopDaoException;
 import ua.com.goit.gojava.andriidnikitin.MyShop.domain.model.Good;
 import ua.com.goit.gojava.andriidnikitin.MyShop.domain.model.GoodType;
 import ua.com.goit.gojava.andriidnikitin.MyShop.domain.util.MyShopException;
 
 
-
 public class GoodCatalogImpl implements GoodCatalog{	
+	
+	@Autowired
+	private DaoFactory daoFactory;
 
 	private static Logger log = Logger.getLogger("MyShop.BL");
 	
@@ -31,7 +33,6 @@ public class GoodCatalogImpl implements GoodCatalog{
 	}
 
 	public GoodType createType(String name, Integer parentId) throws MyShopException {
-	    DaoFactory daoFactory = PostgresqlDaoFactory.getInstance();
 		 try (Connection con = daoFactory.getConnection()) {
 		        GenericDao<GoodType> dao = daoFactory.getGoodTypeDao(con);
 		        GoodType type = new GoodType();
@@ -52,7 +53,6 @@ public class GoodCatalogImpl implements GoodCatalog{
 	}
 
 	public GoodType getGoodTypeById(Integer id) throws MyShopException{
-	    DaoFactory daoFactory = PostgresqlDaoFactory.getInstance();
 		 try (Connection con = daoFactory.getConnection()) {
 		        GenericDao<GoodType> dao = daoFactory.getGoodTypeDao(con);
 		        GoodType type = dao.read(id);
@@ -67,7 +67,6 @@ public class GoodCatalogImpl implements GoodCatalog{
 	}
 
 	public void deleteGoodType(Integer id) throws MyShopException {
-	    DaoFactory daoFactory = PostgresqlDaoFactory.getInstance();
 		 try (Connection con = daoFactory.getConnection()) {
 		        GenericDao<GoodType> dao = daoFactory.getGoodTypeDao(con);
 		        GoodType type = dao.read(id);
@@ -82,7 +81,6 @@ public class GoodCatalogImpl implements GoodCatalog{
 	}
 
 	public List<GoodType> getAllTypes() throws MyShopException {
-	    DaoFactory daoFactory = PostgresqlDaoFactory.getInstance();
 		 try (Connection con = daoFactory.getConnection()) {
 		        GenericDao<GoodType> dao = daoFactory.getGoodTypeDao(con);
 		        List<GoodType> list = dao.getAll();
@@ -97,7 +95,6 @@ public class GoodCatalogImpl implements GoodCatalog{
 	}
 
 	public GoodType updateGoodType(Integer id, String name, Integer parentId) throws MyShopException{
-	    DaoFactory daoFactory = PostgresqlDaoFactory.getInstance();
 		 try (Connection con = daoFactory.getConnection()) {
 		        GenericDao<GoodType> dao = daoFactory.getGoodTypeDao(con);
 		        GoodType type = new GoodType();
@@ -120,7 +117,6 @@ public class GoodCatalogImpl implements GoodCatalog{
 	}
 
 	public Good createGood(String name, Integer typeId) throws MyShopException {
-		 DaoFactory daoFactory = PostgresqlDaoFactory.getInstance();
 		 try (Connection con = daoFactory.getConnection()) {
 		        GenericDao<Good> dao = daoFactory.getGoodDao(con);
 		        GenericDao<GoodType> daoType = daoFactory.getGoodTypeDao(con);
@@ -144,7 +140,6 @@ public class GoodCatalogImpl implements GoodCatalog{
 	}
 
 	public Good getGoodById(Integer id) throws MyShopException{
-		DaoFactory daoFactory = PostgresqlDaoFactory.getInstance();
 		 try (Connection con = daoFactory.getConnection()) {
 		        GenericDao<Good> dao = daoFactory.getGoodDao(con);
 		        Good good = dao.read(id);
@@ -159,7 +154,6 @@ public class GoodCatalogImpl implements GoodCatalog{
 	}
 
 	public Good updateGood(Integer id, String name, Integer typeId) throws MyShopException{
-		DaoFactory daoFactory = PostgresqlDaoFactory.getInstance();
 		 try (Connection con = daoFactory.getConnection()) {
 		        GenericDao<Good> dao = daoFactory.getGoodDao(con);
 		        GenericDao<GoodType> daoType = daoFactory.getGoodTypeDao(con);
@@ -183,7 +177,6 @@ public class GoodCatalogImpl implements GoodCatalog{
 	}
 
 	public void deleteGood(Integer id) throws MyShopException {
-		 DaoFactory daoFactory = PostgresqlDaoFactory.getInstance();
 		 try (Connection con = daoFactory.getConnection()) {
 		        GenericDao<Good> dao = daoFactory.getGoodDao(con);
 		        Good good = dao.read(id);
@@ -199,7 +192,6 @@ public class GoodCatalogImpl implements GoodCatalog{
 	}
 
 	public List<Good> getAllGoods() throws MyShopException {
-		DaoFactory daoFactory = PostgresqlDaoFactory.getInstance();
 		 try (Connection con = daoFactory.getConnection()) {
 		        GenericDao<Good> dao = daoFactory.getGoodDao(con);
 		        List<Good> list = dao.getAll();
