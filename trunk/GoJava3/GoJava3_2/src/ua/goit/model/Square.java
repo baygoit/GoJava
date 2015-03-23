@@ -8,7 +8,6 @@ public class Square implements Shape {
   private int length;
 
   public Square() {
-
   }
 
   public Square(Point point1, int length) {
