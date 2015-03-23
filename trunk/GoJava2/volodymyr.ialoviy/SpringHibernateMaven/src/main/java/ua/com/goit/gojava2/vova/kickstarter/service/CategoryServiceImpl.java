@@ -16,16 +16,19 @@ public class CategoryServiceImpl implements CategoryService{
 	@Autowired
 	private CategoryDao dao;
 	
+	@Override
 	public void saveCategory(Category category) {
 		dao.saveCategory(category);
 	}
 
+	@Override
 	public List<Category> findAllCategories() {
 		return dao.findAllCategories();
 	}
 
+	@Override
 	public void deleteCategoryById(Integer id) {
-		dao.deleteCategoriesById(id);
+		dao.deleteCategoryById(id);
 	}
 
 }

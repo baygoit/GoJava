@@ -22,7 +22,7 @@ public class Categories extends AbstractDao implements CategoryDao{
 	}
 
 	@Override
-	public void deleteCategoriesById(Integer id) {
+	public void deleteCategoryById(Integer id) {
 		Query query = getSession().createSQLQuery("delete from Categories where id = :id");
 		query.setInteger("id", id);
 		query.executeUpdate();

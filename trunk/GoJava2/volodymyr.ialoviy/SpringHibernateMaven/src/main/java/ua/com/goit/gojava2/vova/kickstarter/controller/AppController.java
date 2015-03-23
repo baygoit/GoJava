@@ -13,21 +13,34 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import ua.com.goit.gojava2.vova.kickstarter.model.Category;
+import ua.com.goit.gojava2.vova.kickstarter.model.Project;
 import ua.com.goit.gojava2.vova.kickstarter.service.CategoryService;
+import ua.com.goit.gojava2.vova.kickstarter.service.ProjectService;
 
 @Controller
 @RequestMapping("/")
 public class AppController {
 
 	@Autowired
-	CategoryService service;
+	CategoryService categoryService;
+	
+	@Autowired
+	ProjectService projectService;
 
 	@RequestMapping(value = { "/", "/categories" }, method = RequestMethod.GET)
 	public String listCategories(ModelMap model) {
 
-		List<Category> categories = service.findAllCategories();
+		List<Category> categories = categoryService.findAllCategories();
 		model.addAttribute("categories", categories);
 		return "categories";
+	}
+	
+	@RequestMapping(value = { "/projects" }, method = RequestMethod.GET)
+	public String listProjects(ModelMap model) {
+
+		List<Project> projects = projectService.findAllProjects();
+		model.addAttribute("projects", projects);
+		return "projects";
 	}
 
 	@RequestMapping(value = { "/newcategory" }, method = RequestMethod.GET)
@@ -45,7 +58,7 @@ public class AppController {
 			return "addcategory";
 		}
 
-		service.saveCategory(category);
+		categoryService.saveCategory(category);
 
 		model.addAttribute("success", "Category " + category.getName()
 				+ " registered successfully");
@@ -54,7 +67,7 @@ public class AppController {
 
 	@RequestMapping(value = { "/delete-{id}-category" }, method = RequestMethod.GET)
 	public String deleteEmployee(@PathVariable Integer id) {
-		service.deleteCategoryById(id);
+		categoryService.deleteCategoryById(id);
 		return "redirect:/categories";
 	}
 
