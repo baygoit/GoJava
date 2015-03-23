@@ -1,7 +1,9 @@
 package ua.goit.managers;
 
+import ua.goit.model.ContainerShapes;
+
 public interface Serializer {
 
-    String serialize();
+    String serialize(ContainerShapes object);
 
 }
