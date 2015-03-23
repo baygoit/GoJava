@@ -1,11 +1,8 @@
 package ua.goit.tests;
 
 import static org.junit.Assert.*;
-
 import java.awt.Point;
-
 import org.junit.Test;
-
 import ua.goit.managers.*;
 import ua.goit.model.*;
 
@@ -91,13 +88,75 @@ public class TestCases {
         assertEquals(expectedResult, shapeStringJSON);
     }
 
+    public GroupShapes bigTestGroup(){
+        Point point1 = new Point(1, 1);
+        Point point2 = new Point(2, 3);
+        Point point3 = new Point(-1, 4);
+        Point point4 = new Point(3, -2);
+
+        GroupShapes mainGroup = groupFactory.getShapeContainer();
+        Triangle triangle1 = triangleFactory.getShapeContainer(point1, point2, point3);
+        mainGroup.add(triangle1);
+
+        GroupShapes subGroup1 = groupFactory.getShapeContainer();
+        mainGroup.add(subGroup1);
+        GroupShapes subGroup2 = groupFactory.getShapeContainer();
+        mainGroup.add(subGroup2);
+
+        Triangle triangle2 = triangleFactory.getShapeContainer(point2, point3, point4);
+        Circle circle1 = circleFactory.getShapeContainer(point2, 5);
+        Square square1 = squareFactory.getShapeContainer(point3, 5);
+        subGroup1.addAll(triangle2, circle1, square1);
+
+        Circle circle2 = circleFactory.getShapeContainer(point4, 3);
+        Square square2 = squareFactory.getShapeContainer(point4, 6);
+        subGroup2.addAll(circle2, square2);
+
+        return mainGroup;
+    }
+
     @Test
     public void testMultipleGroupsXML() {
+        GroupShapes groupShapes = bigTestGroup();
+        Serializer xmlSerializer = SerializerFactory.getSerializer(SerializerType.XML);
+        String shapeStringXML = xmlSerializer.serialize(groupShapes);
 
+        String expectedResult = "<group><triangle><point1><x>1</x><y>1</y></point1><point2><x>2</x><y>3</y></point2><point3><x>-1</x><y>4</y></point3>" +
+                "</triangle><group><triangle><point1><x>2</x><y>3</y></point1><point2><x>-1</x><y>4</y></point2><point3><x>3</x><y>-2</y></point3>" +
+                "</triangle><circle><center><x>2</x><y>3</y></center><radius>5</radius></circle><square><point1><x>-1</x><y>4</y></point1><length>5</length>" +
+                "</square></group><group><circle><center><x>3</x><y>-2</y></center><radius>3</radius></circle><square>" +
+                "<point1><x>3</x><y>-2</y></point1><length>6</length></square></group></group>";
+
+        assertEquals(expectedResult, shapeStringXML);
     }
 
     @Test
     public void testMultipleGroupsJSON() {
+        GroupShapes groupShapes = bigTestGroup();
+        Serializer jsonSerializer = SerializerFactory.getSerializer(SerializerType.JSON);
+        String shapeStringJSON = jsonSerializer.serialize(groupShapes);
 
+        String expectedResult = "{group:\n" +
+                "{triangle:\n" +
+                "{point1:{x:1}{y:1}}\n" +
+                "{point2:{x:2}{y:3}}\n" +
+                "{point3:{x:-1}{y:4}}}{group:\n" +
+                "{triangle:\n" +
+                "{point1:{x:2}{y:3}}\n" +
+                "{point2:{x:-1}{y:4}}\n" +
+                "{point3:{x:3}{y:-2}}}{circle:\n" +
+                "{center:{x:2}{y:3}}\n" +
+                "{radius:5}}{rectangle:\n" +
+                "{topLeft:{x:-1}{y:4}}\n" +
+                "{width:5}\n" +
+                "{height:10}}}{group:\n" +
+                "{circle:\n" +
+                "{center:{x:3}{y:-2}}\n" +
+                "{radius:3}}{rectangle:\n" +
+                "{topLeft:{x:3}{y:-2}}\n" +
+                "{width:6}\n" +
+                "{height:2}}}}";
+
+        assertEquals(expectedResult, shapeStringJSON);
     }
 }

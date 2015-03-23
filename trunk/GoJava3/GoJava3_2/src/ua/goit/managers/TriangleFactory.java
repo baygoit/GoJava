@@ -2,6 +2,8 @@ package ua.goit.managers;
 
 import ua.goit.model.*;
 
+import java.awt.*;
+
 public class TriangleFactory implements ContainerShapesFactory {
 
   @Override
@@ -9,4 +11,7 @@ public class TriangleFactory implements ContainerShapesFactory {
     return new Triangle();
   }
 
+  public Triangle getShapeContainer(Point point1, Point point2, Point point3) {
+    return new Triangle(point1, point2, point3);
+  }
 }

@@ -11,7 +11,7 @@ public class Circle implements Shape {
 
     }
 
-    Circle(Point center, int radius) {
+    public Circle(Point center, int radius) {
         this.center = center;
         this.radius = radius;
     }
