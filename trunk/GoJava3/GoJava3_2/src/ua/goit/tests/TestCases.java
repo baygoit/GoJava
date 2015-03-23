@@ -14,24 +14,21 @@ public class TestCases {
 
 
     public Triangle newTestTriangle(){
-        TriangleFactory triangleFactory = new TriangleFactory();
-        Triangle triangle = triangleFactory.getShapeContainer();
-        
-        triangle.point1 = new Point(1,1);
-        triangle.point2 = new Point(2,2);
-        triangle.point3 = new Point(3,3);
+        Point point1 = new Point(1,1);
+        Point point2 = new Point(2,2);
+        Point point3 = new Point(3,3);
+        Triangle triangle = triangleFactory.getShapeContainer(point1, point2, point3);
         
         return triangle;
     }
     
     public GroupShapes newTestGroup(){
         GroupShapes group = groupFactory.getShapeContainer();
-        Triangle triangle = triangleFactory.getShapeContainer();
-        
-        triangle.point1 = new Point(1,1);
-        triangle.point2 = new Point(2,2);
-        triangle.point3 = new Point(3,3);
-        
+        Point point1 = new Point(1,1);
+        Point point2 = new Point(2,2);
+        Point point3 = new Point(3,3);
+
+        Triangle triangle = triangleFactory.getShapeContainer(point1, point2, point3);
         group.add(triangle);
         
         return group;
