@@ -11,7 +11,7 @@ public class CircleAdapterJSON implements Serializer {
     Circle circle = (Circle) container;
 
     StringBuilder json = new StringBuilder();
-    json.append("{rectangle:");
+    json.append("{circle:");
 
     json.append("{center:");
     json.append("{x:" + circle.getCenter().x + "}");
