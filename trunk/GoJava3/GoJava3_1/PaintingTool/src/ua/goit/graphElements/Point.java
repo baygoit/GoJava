@@ -9,7 +9,7 @@ public class Point {
 	this.y = y;
     }
 
-public String getCoordinates() {
-    return "(" + x + ", " + y + ")";
-}
+    public String getCoordinates() {
+	return "(" + x + ", " + y + ")";
+    }
 }
