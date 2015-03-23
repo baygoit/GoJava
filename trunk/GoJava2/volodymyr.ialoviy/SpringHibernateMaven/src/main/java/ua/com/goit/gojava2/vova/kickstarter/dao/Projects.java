@@ -25,7 +25,7 @@ public class Projects extends AbstractDao implements ProjectDao{
 
 	@Override
 	public void deleteProjectById(Integer idProject) {
-		Query query = getSession().createSQLQuery("delete from Projects where idProject = :idProject");
+		Query query = getSession().createSQLQuery("delete from Projects where id_project = :idProject");
 		query.setInteger("idProject", idProject);
 		query.executeUpdate();
 	}
