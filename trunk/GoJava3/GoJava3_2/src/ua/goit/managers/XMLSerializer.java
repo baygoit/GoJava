@@ -25,18 +25,18 @@ public class XMLSerializer implements Serializer {
   }
 
   public String serialize(Triangle object) {
-    TriangleAdapterXML adapter = new TriangleAdapterXML(object);
-    return adapter.serialize();
+    TriangleAdapterXML adapter = new TriangleAdapterXML();
+    return adapter.serialize(object);
   }
 
   public String serialize(Circle object) {
-    CircleAdapterXML adapter = new CircleAdapterXML(object);
-    return adapter.serialize();
+    CircleAdapterXML adapter = new CircleAdapterXML();
+    return adapter.serialize(object);
   }
 
   public String serialize(Square object) {
-    SquareAdapterXML adapter = new SquareAdapterXML(object);
-    return adapter.serialize();
+    SquareAdapterXML adapter = new SquareAdapterXML();
+    return adapter.serialize(object);
   }
 
 }

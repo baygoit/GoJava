@@ -25,18 +25,18 @@ public class JSONSerializer implements Serializer {
     }
 
     public String serialize(Triangle object) {
-      TriangleAdapterJSON adapter = new TriangleAdapterJSON(object);
-      return adapter.serialize();
+      TriangleAdapterJSON adapter = new TriangleAdapterJSON();
+      return adapter.serialize(object);
     }
 
     public String serialize(Circle object) {
-      CircleAdapterJSON adapter = new CircleAdapterJSON(object);
-      return adapter.serialize();
+      CircleAdapterJSON adapter = new CircleAdapterJSON();
+      return adapter.serialize(object);
     }
 
     public String serialize(Square object) {
-      SquareAdapterJSON adapter = new SquareAdapterJSON(object);
-      return adapter.serialize();
+      SquareAdapterJSON adapter = new SquareAdapterJSON();
+      return adapter.serialize(object);
     }
 
 
