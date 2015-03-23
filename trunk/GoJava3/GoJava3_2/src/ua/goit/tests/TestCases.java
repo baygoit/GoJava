@@ -80,7 +80,7 @@ public class TestCases {
 
     Serializer jsonSerializer = SerializerFactory.getSerializer(SerializerType.JSON);
     String shapeStringJSON = jsonSerializer.serialize(groupShapes);
-    String expectedResult = "{\"triangle\":{\"point1\":{\"x\":1,\"y\":1},\"point2\":{\"x\":2,\"y\":2},\"point3\":{\"x\":3,\"y\":3}}}";
+    String expectedResult = "{\"group\":{\"triangle\":{\"point1\":{\"x\":1,\"y\":1},\"point2\":{\"x\":2,\"y\":3},\"point3\":{\"x\":-1,\"y\":4}}}}";
     assertEquals(expectedResult, shapeStringJSON);
   }
 

@@ -5,8 +5,7 @@ import java.util.Collections;
 
 public class GroupShapes implements ContainerShapes {
   private Types type = Types.GROUP;
-
-  ArrayList<ContainerShapes> shapesList = new ArrayList<ContainerShapes>();
+  private ArrayList<ContainerShapes> shapesList = new ArrayList<ContainerShapes>();
 
   public void add(ContainerShapes containerShapes) {
     shapesList.add(containerShapes);
