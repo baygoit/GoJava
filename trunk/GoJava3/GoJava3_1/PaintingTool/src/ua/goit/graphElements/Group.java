@@ -3,7 +3,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class Group extends GraphElement {
+public class Group extends GraphElement implements GroupBehavior {
     ArrayList <GraphElement> al = new ArrayList <GraphElement>();
     String toReturn = "";
     public Group(String name) {
@@ -63,15 +63,5 @@ public class Group extends GraphElement {
     @Override
     public String getType() {
 	return "Group";
-    }
-
-    @Override
-    public ArrayList<Point> getPoints() {
-	return null;
-    }
-
-    @Override
-    public void setPoints(ArrayList<Point> pointsList) {
-
     }
 }
