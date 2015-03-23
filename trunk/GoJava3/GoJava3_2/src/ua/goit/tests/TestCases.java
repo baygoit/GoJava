@@ -77,17 +77,6 @@ public class TestCases {
     }
 
     @Test
-    public void testMultipleGroupsXML() {
-
-    }
-
-    @Test
-    public void testMultipleGroupsJSON() {
-
-    }
-
-
-    @Test
     public void testGroupJSON() {
         
         GroupShapes groupShapes = newTestGroup();
@@ -98,5 +87,15 @@ public class TestCases {
         String expectedResult = "{triangle:{point1:{x=1,y=1},point2:{x=2,y=2},point3:{x=3,y=3}}}";
         
         assertEquals(expectedResult, shapeStringJSON);
+    }
+
+    @Test
+    public void testMultipleGroupsXML() {
+
+    }
+
+    @Test
+    public void testMultipleGroupsJSON() {
+
     }
 }
