@@ -2,16 +2,14 @@ package ua.goit.adapter;
 
 import ua.goit.managers.Serializer;
 import ua.goit.model.Circle;
+import ua.goit.model.ContainerShapes;
 
 public class CircleAdapterJSON implements Serializer {
-  private Circle circle;
-
-  CircleAdapterJSON(Circle circle) {
-    this.circle = circle;
-  }
 
   @Override
-  public String serialize() {
+  public String serialize(ContainerShapes container) {
+    Circle circle = (Circle) container;
+
     StringBuilder json = new StringBuilder();
     json.append("{rectangle:");
 
