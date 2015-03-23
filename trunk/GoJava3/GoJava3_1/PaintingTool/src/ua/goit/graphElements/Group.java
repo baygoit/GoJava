@@ -29,19 +29,23 @@ public class Group extends GraphElement {
 	private GraphElement current;
 	private int i = 0;
 
-	private InnerIter() {
-	    current = al.get(i);    
-	}
-
 	@Override
 	public boolean hasNext() {
-	    return current != al.get(al.size());
+	    if (al.size() == 0) {
+		return false;
+	    }
+	    else {
+		return current != al.get(al.size() - 1);
+	    }
 	}
 
 	@Override
 	public GraphElement next() {
+	    current = al.get(i);
 	    GraphElement toReturn = current;
-	    current = al.get(++i);
+	    if (i < al.size() - 1) {
+		current = al.get(i++);
+	    }
 	    return toReturn;
 	}
 
@@ -68,6 +72,6 @@ public class Group extends GraphElement {
 
     @Override
     public void setPoints(ArrayList<Point> pointsList) {
-		
+
     }
 }
