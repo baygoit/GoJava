@@ -12,6 +12,16 @@ public class SquareAdapterJSON implements Serializer {
 
   @Override
   public String serialize() {
-    return null;
-  }
+    StringBuilder json = new StringBuilder();
+    json.append("{rectangle:");
+
+    json.append("{point1:");
+    json.append("{x:" + square.getPoint1().x + "}");
+    json.append("{y:" + square.getPoint1().y + "}");
+    json.append("}");
+
+    json.append("{length:" + square.getLength() + "}");
+
+    json.append("}");
+    return json.toString();  }
 }
