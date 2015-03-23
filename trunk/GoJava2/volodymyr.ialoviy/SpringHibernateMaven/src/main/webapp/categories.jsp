@@ -20,17 +20,12 @@
 	<h2>List of Categories</h2>	
 	<table>
 		<tr>
-			<td>ID</td><td>PROJECTS</td><td>NAME</td>
+			<td>DELETE</td><td>SHOW PROJECTS IN CATEGORY</td>
 		</tr>
 		<c:forEach items="${categories}" var="category">
 			<tr>
-			<td><a href="<c:url value='/delete-${category.idCategory}-category' />">${category.idCategory}</a></td>
-			
-			
+			<td><a href="<c:url value='/delete-${category.idCategory}-category' />">${category.name}</a></td>
 			<td><a href="projects?category=${category.idCategory}"><c:out value="${category.name}"/></a></td>
-			
-			
-			<td>${category.name}</td>
 			</tr>
 		</c:forEach>
 	</table>

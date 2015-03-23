@@ -7,7 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -70,9 +69,6 @@ public class Project {
 	@Column(name = "FAQ")
 	private ArrayList<String> faq;
 	
-//	@ManyToOne
-//	private Category category;
-	
 	public ArrayList<String> getFaq() {
 		return faq;
 	}
@@ -89,12 +85,12 @@ public class Project {
 		this.idProject = idProject;
 	}
 
-	public String getIdCategpry() {
+	public String getIdCategory() {
 		return idCategory;
 	}
 
-	public void setIdCategpry(String idCategpry) {
-		this.idCategory = idCategpry;
+	public void setIdCategory(String idCategory) {
+		this.idCategory = idCategory;
 	}
 
 	public String getName() {
@@ -185,7 +181,7 @@ public class Project {
 
 	@Override
 	public String toString() {
-		return "Category [idProject=" + idProject + ", name=" + name + ", dateClose="
+		return "Project [idProject=" + idProject + "idCategory=" + idCategory + ", name=" + name + ", dateClose="
 				+ dateClose + "]";
 	}
 
