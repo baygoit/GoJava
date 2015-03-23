@@ -55,9 +55,7 @@ public class TestCases {
 
         Serializer jsonSerializer = SerializerFactory.getSerializer(SerializerType.JSON);
         String shapeStringJSON = jsonSerializer.serialize(triangle);
-
         String expectedResult = "{\"triangle\":{\"point1\":{\"x\":1,\"y\":1},\"point2\":{\"x\":2,\"y\":2},\"point3\":{\"x\":3,\"y\":3}}}";
-        
         assertEquals(expectedResult, shapeStringJSON);
     }
     @Test
@@ -80,9 +78,7 @@ public class TestCases {
 
         Serializer jsonSerializer = SerializerFactory.getSerializer(SerializerType.JSON);
         String shapeStringJSON = jsonSerializer.serialize(groupShapes);
-                
-        String expectedResult = "{triangle:{point1:{x=1,y=1},point2:{x=2,y=2},point3:{x=3,y=3}}}";
-        
+        String expectedResult = "{\"triangle\":{\"point1\":{\"x\":1,\"y\":1},\"point2\":{\"x\":2,\"y\":2},\"point3\":{\"x\":3,\"y\":3}}}";
         assertEquals(expectedResult, shapeStringJSON);
     }
 
@@ -118,13 +114,12 @@ public class TestCases {
         GroupShapes groupShapes = bigTestGroup();
         Serializer xmlSerializer = SerializerFactory.getSerializer(SerializerType.XML);
         String shapeStringXML = xmlSerializer.serialize(groupShapes);
-
+        
         String expectedResult = "<group><triangle><point1><x>1</x><y>1</y></point1><point2><x>2</x><y>3</y></point2><point3><x>-1</x><y>4</y></point3>" +
                 "</triangle><group><triangle><point1><x>2</x><y>3</y></point1><point2><x>-1</x><y>4</y></point2><point3><x>3</x><y>-2</y></point3>" +
                 "</triangle><circle><center><x>2</x><y>3</y></center><radius>5</radius></circle><square><point1><x>-1</x><y>4</y></point1><length>5</length>" +
                 "</square></group><group><circle><center><x>3</x><y>-2</y></center><radius>3</radius></circle><square>" +
                 "<point1><x>3</x><y>-2</y></point1><length>6</length></square></group></group>";
-
         assertEquals(expectedResult, shapeStringXML);
     }
 
@@ -133,12 +128,10 @@ public class TestCases {
         GroupShapes groupShapes = bigTestGroup();
         Serializer jsonSerializer = SerializerFactory.getSerializer(SerializerType.JSON);
         String shapeStringJSON = jsonSerializer.serialize(groupShapes);
-
         String expectedResult = "{group:{triangle:{point1:{x:1}{y:1}}{point2:{x:2}{y:3}}{point3:{x:-1}{y:4}}}" +
                 "{group:{triangle:{point1:{x:2}{y:3}}{point2:{x:-1}{y:4}}{point3:{x:3}{y:-2}}}" +
                 "{circle:{center:{x:2}{y:3}}{radius:5}}{rectangle:{point1:{x:-1}{y:4}}{length:5}}}" +
                 "{group:{circle:{center:{x:3}{y:-2}}{radius:3}}{rectangle:{point1:{x:3}{y:-2}}{length:6}}}}";
-
         assertEquals(expectedResult, shapeStringJSON);
     }
 }
