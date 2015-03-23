@@ -4,7 +4,7 @@ import ua.goit.model.Triangle;
 public class TriangleAdapterXML {
     private Triangle triangle;
 
-    TriangleAdapterXML(Triangle triangle){
+    public TriangleAdapterXML(Triangle triangle){
         this.triangle = triangle;
     }
 

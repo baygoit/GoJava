@@ -5,7 +5,7 @@ import ua.goit.model.Square;
 public class SquareAdapterXML {
     private Square square;
 
-    SquareAdapterXML(Square square) {
+    public SquareAdapterXML(Square square) {
         this.square = square;
     }
 
