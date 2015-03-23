@@ -2,6 +2,7 @@ package ua.com.goit.gojava2.vova.kickstarter.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,9 +37,10 @@ public class AppController {
 	}
 	
 	@RequestMapping(value = { "/projects" }, method = RequestMethod.GET)
-	public String listProjects(ModelMap model) {
-
-		List<Project> projects = projectService.findAllProjects();
+	public String listProjects(HttpServletRequest req, ModelMap model) {
+		int idCategory = Integer.valueOf(req.getParameter("category"));
+		
+		List<Project> projects = projectService.findAllProjects(idCategory);
 		model.addAttribute("projects", projects);
 		return "projects";
 	}

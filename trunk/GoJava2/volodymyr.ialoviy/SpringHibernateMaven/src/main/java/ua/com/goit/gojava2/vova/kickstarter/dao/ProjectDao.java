@@ -6,7 +6,7 @@ import ua.com.goit.gojava2.vova.kickstarter.model.Project;
 
 public interface ProjectDao {
 
-	List<Project> findAllProjects();
+	List<Project> findAllProjects(Integer idCategory);
 
 	void saveProject(Project project);
 

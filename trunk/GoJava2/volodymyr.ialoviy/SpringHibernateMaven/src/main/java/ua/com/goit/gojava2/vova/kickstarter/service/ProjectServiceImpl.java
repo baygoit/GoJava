@@ -17,8 +17,8 @@ public class ProjectServiceImpl implements ProjectService{
 	private ProjectDao dao;
 	
 	@Override
-	public List<Project> findAllProjects() {
-		return dao.findAllProjects();
+	public List<Project> findAllProjects(Integer idCategory) {
+		return dao.findAllProjects(idCategory);
 	}
 
 	@Override
