@@ -7,6 +7,7 @@ import ua.goit.model.ContainerShapes;
 import ua.goit.model.GroupShapes;
 import ua.goit.model.Types;
 
+
 public class GroupAdapterJSON {
 	StringBuilder result = new StringBuilder("");
 	Serializer serializer;

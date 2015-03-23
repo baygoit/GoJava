@@ -11,7 +11,6 @@ public class GroupAdapterXML {
     GroupShapes group = (GroupShapes) container;
     result.append("<group>");
     for (int i = 0; i < group.size(); i++) {
-
       if (group.get(i) == null) {
         result.append("<null></null>");
       } else if (group.get(i).getType() == Types.GROUP) {
