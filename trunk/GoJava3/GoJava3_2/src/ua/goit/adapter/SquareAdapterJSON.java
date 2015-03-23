@@ -1,27 +1,24 @@
 package ua.goit.adapter;
 
 import ua.goit.managers.Serializer;
+import ua.goit.model.ContainerShapes;
 import ua.goit.model.Square;
 
 public class SquareAdapterJSON implements Serializer {
-  private Square square;
-
-  SquareAdapterJSON(Square square) {
-    this.square = square;
-  }
+  StringBuilder result = new StringBuilder();
 
   @Override
-  public String serialize() {
-    StringBuilder json = new StringBuilder();
-    json.append("{rectangle:");
+  public String serialize(ContainerShapes container) {
+    Square square = (Square) container;
+    result.append("{square:");
 
-    json.append("{point1:");
-    json.append("{x:" + square.getPoint1().x + "}");
-    json.append("{y:" + square.getPoint1().y + "}");
-    json.append("}");
+    result.append("{point1:");
+    result.append("{x:" + square.getPoint1().x + "}");
+    result.append("{y:" + square.getPoint1().y + "}");
+    result.append("}");
 
-    json.append("{length:" + square.getLength() + "}");
+    result.append("{length:" + square.getLength() + "}");
 
-    json.append("}");
-    return json.toString();  }
+    result.append("}");
+    return result.toString();  }
 }

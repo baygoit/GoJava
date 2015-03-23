@@ -1,28 +1,25 @@
 package ua.goit.adapter;
 
 import ua.goit.managers.Serializer;
+import ua.goit.model.ContainerShapes;
 import ua.goit.model.Square;
 
 public class SquareAdapterXML implements Serializer {
-  private Square square;
+  StringBuilder result = new StringBuilder();
 
-  public SquareAdapterXML(Square square) {
-    this.square = square;
-  }
+  public String serialize(ContainerShapes container) {
+    Square square = (Square) container;
+    result.append("<square>");
 
-  public String serialize() {
-    StringBuilder xml = new StringBuilder();
-    xml.append("<square>");
+    result.append("<point1>");
+    result.append("<x>" + square.getPoint1().x + "</x>");
+    result.append("<y>" + square.getPoint1().y + "</y>");
+    result.append("</point1>");
 
-    xml.append("<point1>");
-    xml.append("<x>" + square.getPoint1().x + "</x>");
-    xml.append("<y>" + square.getPoint1().y + "</y>");
-    xml.append("</point1>");
+    result.append("<length>" + square.getLength() + "</length>");
 
-    xml.append("<length>" + square.getLength() + "</length>");
-
-    xml.append("</square>");
-    return xml.toString();
+    result.append("</square>");
+    return result.toString();
   }
 
 }
