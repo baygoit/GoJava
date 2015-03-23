@@ -6,17 +6,16 @@
 </head>
 	<body>
 
-<h2>List of Projects of category # <c:out value="${project.idCategory}"/></h2>	
+<h2>List of Projects of category # <c:out value="${category}"/></h2>	
 	<table>
 		<tr>
 			<td>DELETE</td><td>SHOW PROJECT FULL</td>
 		</tr>
 		<c:forEach items="${projects}" var="project">
 			<tr>
-			<td><a href="<c:url value='/delete-${project.idProject}-project' />">${project.name}</a></td>
+			<td><a href="<c:url value='/delete-${project.idProject}-project-${project.idCategory}' />">${project.name}</a></td>
 			<td><a href="project?project=${project.idProject}"><c:out value="${project.name}"/></a></td>
 			</tr>
-			
 		</c:forEach>
 	</table>
 
