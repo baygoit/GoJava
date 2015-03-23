@@ -7,11 +7,11 @@ public class Square implements Shape {
   private Point point1;
   private int length;
 
-  Square() {
+  public Square() {
 
   }
 
-  Square(Point point1, int length) {
+  public Square(Point point1, int length) {
     this.point1 = point1;
     this.length = length;
   }

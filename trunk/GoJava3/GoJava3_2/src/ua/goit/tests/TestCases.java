@@ -10,6 +10,11 @@ import ua.goit.managers.*;
 import ua.goit.model.*;
 
 public class TestCases {
+    private static GroupShapesFactory groupFactory = new GroupShapesFactory();
+    private static TriangleFactory triangleFactory = new TriangleFactory();
+    private static CircleFactory circleFactory = new CircleFactory();
+    private static SquareFactory squareFactory = new SquareFactory();
+
 
     public Triangle newTestTriangle(){
         TriangleFactory triangleFactory = new TriangleFactory();
@@ -23,10 +28,7 @@ public class TestCases {
     }
     
     public GroupShapes newTestGroup(){
-        GroupShapesFactory groupFactory = new GroupShapesFactory();
         GroupShapes group = groupFactory.getShapeContainer();
-        
-        TriangleFactory triangleFactory = new TriangleFactory();
         Triangle triangle = triangleFactory.getShapeContainer();
         
         triangle.point1 = new Point(1,1);
