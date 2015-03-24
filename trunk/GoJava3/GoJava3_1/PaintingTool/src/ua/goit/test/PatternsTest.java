@@ -41,7 +41,7 @@ public class PatternsTest {
 
     @Test
     public void groupCreatingTest() {
-	GraphElement ge = new Group("Group 1");
+	Group ge = new GroupImpl("Group 1");
 	boolean expectedValue = true;
 	boolean actualValue = ge instanceof Group;
 	assertEquals(expectedValue, actualValue);
@@ -49,7 +49,7 @@ public class PatternsTest {
 
     @Test
     public void getGroupNameTest() {
-	GraphElement ge = new Group("Group 1");
+	Group ge = new GroupImpl("Group 1");
 	String expectedValue = "Group 1";
 	String actualValue = ge.getName();
 	assertEquals(expectedValue, actualValue);
@@ -57,31 +57,38 @@ public class PatternsTest {
 
     @Test
     public void getGroupTypeTest() {
-	GraphElement ge = new Group("Group 1");
+	Group ge = new GroupImpl("Group 1");
 	String expectedValue = "Group";
 	String actualValue = ge.getType();
 	assertEquals(expectedValue, actualValue);
     }
 
     @Test
-    public void isElementTest() {
-	GraphElement ge = new Group("Group 1");
-	boolean expectedValue = false;
-	boolean actualValue = ge.isElement();
-	assertEquals(expectedValue, actualValue);
-    }
-
-    @Test
     public void elementAddingTest() {
-	GraphElement ge1 = new Group("Group 1");
-	GraphElement ge2 = new Group("Group 2");
-	((Group) ge1).add(ge2);
-	Iterator group1Iter = ge1.iterator();
-	GraphElement innerGroup = (GraphElement) group1Iter.next();
+	Group ge1 = new GroupImpl("Group 1");
+	Group ge2 = new GroupImpl("Group 2");
+	ge1.setGroup(ge2);
+	Group innerGroup = ge1.getGroups().get(0);
 	String expectedValue = "Group 2";
 	String actualValue = innerGroup.getName();
 	assertEquals(expectedValue, actualValue);
     }
 
+    @Test
+    public void pointCreatinTest() {
+	Point point = new PointImpl(5, 6);
+	boolean expectedValue = true;
+	boolean actualValue = point instanceof Point;
+	assertEquals(expectedValue, actualValue);
+    }
 
+    @Test
+    public void gettingPointCoordinateTest() {
+	Point point = new PointImpl(5, 6);
+	String expectedValue = "(5, 6)";
+	String actualValue = point.getCoordinate();
+	assertEquals(expectedValue, actualValue);
+    }
+
+    
 }
