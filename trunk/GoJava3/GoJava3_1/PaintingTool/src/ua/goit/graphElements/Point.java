@@ -1,6 +1,6 @@
 package ua.goit.graphElements;
 
-public class Point {
+public class Point implements IPoint {
     private int x;
     private int y;
 
@@ -9,7 +9,7 @@ public class Point {
 	this.y = y;
     }
 
-    public String getCoordinates() {
+    public String getCoordinate() {
 	return "(" + x + ", " + y + ")";
     }
 }
