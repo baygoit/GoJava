@@ -8,9 +8,8 @@ import ua.goit.shapeserializer.SerializeClassHolder;
 import ua.goit.shapeserializer.SerializerFactory;
 import ua.goit.shapeserializer.basicobjects.Shape;
 import ua.goit.shapeserializer.basicobjects.Square;
-import ua.goit.shapeserializer.xml.ShapeXMLSerializer;
 
-public class SquareJSONSerializer  extends ShapeXMLSerializer{
+public class SquareJSONSerializer  extends ShapeJSONSerializer{
     @Override
     public String serialize(Shape shape) {
       StringBuilder squareXML = new StringBuilder();

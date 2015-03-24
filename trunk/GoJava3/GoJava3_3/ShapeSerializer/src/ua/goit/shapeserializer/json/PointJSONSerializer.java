@@ -2,9 +2,8 @@ package ua.goit.shapeserializer.json;
 
 import ua.goit.shapeserializer.basicobjects.Point;
 import ua.goit.shapeserializer.basicobjects.Shape;
-import ua.goit.shapeserializer.xml.ShapeXMLSerializer;
 
-public class PointJSONSerializer  extends ShapeXMLSerializer{
+public class PointJSONSerializer  extends ShapeJSONSerializer{
    
     public String serialize(Shape shape) {
 	    StringBuilder result = new StringBuilder();

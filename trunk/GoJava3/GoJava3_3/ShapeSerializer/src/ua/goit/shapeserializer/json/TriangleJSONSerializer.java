@@ -8,9 +8,8 @@ import ua.goit.shapeserializer.SerializeClassHolder;
 import ua.goit.shapeserializer.SerializerFactory;
 import ua.goit.shapeserializer.basicobjects.Shape;
 import ua.goit.shapeserializer.basicobjects.Triangle;
-import ua.goit.shapeserializer.xml.ShapeXMLSerializer;
 
-public class TriangleJSONSerializer  extends ShapeXMLSerializer{
+public class TriangleJSONSerializer  extends ShapeJSONSerializer{
     
     @Override
     public String serialize(Shape shape) {

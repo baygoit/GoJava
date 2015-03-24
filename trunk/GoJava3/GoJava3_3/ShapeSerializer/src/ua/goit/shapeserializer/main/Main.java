@@ -22,7 +22,7 @@ public class Main {
       gr2.add(gr);
  
 
-      SerializeClassHolder clHolder = SerializerFactory.getSerializerFor("xml");
+      SerializeClassHolder clHolder = SerializerFactory.getSerializerFor("json");
       Shape shape = gr2;
       String res = clHolder.serialize(shape);
       
