@@ -6,12 +6,12 @@ import java.net.URL;
  */
 public class Count {
 
-    public static void main(String[] args) throws IOException {
+    static FileReader fileReader;
+    static URL path = ClassLoader.getSystemResource("text.txt");
 
-        FileReader fileReader = null;
-        URL path = ClassLoader.getSystemResource("text.txt");
+    public static void main(String[] args) throws IOException {
         try {
-            fileReader = new FileReader(String.valueOf(path));
+            fileReader = new FileReader("text.txt");
             char[] buffer = new char[1024];
             int count = 0;
             while (fileReader.ready()){
@@ -34,7 +34,6 @@ public class Count {
 
     public static FileReader countEnter() throws Exception {
         FileReader fileReader;
-        URL path = ClassLoader.getSystemResource("text.txt");
         fileReader = new FileReader(String.valueOf(path));
         char[] buffer = new char[1024];
         int count = 0;
