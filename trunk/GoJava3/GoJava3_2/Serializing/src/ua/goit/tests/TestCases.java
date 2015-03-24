@@ -44,7 +44,8 @@ public class TestCases {
     Serializer xmlSerializer = SerializerFactory.getSerializer(SerializerType.XML);
     String shapeStringXML = xmlSerializer.serialize(triangle);
 
-    String expectedResult = "<triangle><point1><x>1</x><y>1</y></point1><point2><x>2</x><y>2</y></point2><point3><x>3</x><y>3</y></point3></triangle>";
+    String expectedResult = "<triangle><point1><x>1</x><y>1</y></point1><point2><x>2</x><y>2</y></point2>" +
+            "<point3><x>3</x><y>3</y></point3></triangle>";
 
     assertEquals(expectedResult, shapeStringXML);
   }
@@ -56,7 +57,8 @@ public class TestCases {
 
     Serializer jsonSerializer = SerializerFactory.getSerializer(SerializerType.JSON);
     String shapeStringJSON = jsonSerializer.serialize(triangle);
-    String expectedResult = "{\"type\":\"TRIANGLE\",\"point1\":{\"x\":1,\"y\":1},\"point2\":{\"x\":2,\"y\":2},\"point3\":{\"x\":3,\"y\":3}}";
+    String expectedResult = "{\"type\":\"TRIANGLE\",\"point1\":{\"x\":1,\"y\":1},\"point2\":{\"x\":2,\"y\":2}" +
+            ",\"point3\":{\"x\":3,\"y\":3}}";
     assertEquals(expectedResult, shapeStringJSON);
   }
 
@@ -68,7 +70,8 @@ public class TestCases {
     Serializer xmlSerializer = SerializerFactory.getSerializer(SerializerType.XML);
     String shapeStringXML = xmlSerializer.serialize(groupShapes);
 
-    String expectedResult = "<group><triangle><point1><x>1</x><y>1</y></point1><point2><x>2</x><y>2</y></point2><point3><x>3</x><y>3</y></point3></triangle></group>";
+    String expectedResult = "<group><triangle><point1><x>1</x><y>1</y></point1><point2><x>2</x><y>2</y></point2>" +
+            "<point3><x>3</x><y>3</y></point3></triangle></group>";
 
     assertEquals(expectedResult, shapeStringXML);
   }
@@ -80,7 +83,8 @@ public class TestCases {
 
     Serializer jsonSerializer = SerializerFactory.getSerializer(SerializerType.JSON);
     String shapeStringJSON = jsonSerializer.serialize(groupShapes);
-    String expectedResult = "{\"type\":\"GROUP\",\"shapesList\":[{\"type\":\"TRIANGLE\",\"point1\":{\"x\":1,\"y\":1},\"point2\":{\"x\":2,\"y\":2},\"point3\":{\"x\":3,\"y\":3}}]}";
+    String expectedResult = "{\"type\":\"GROUP\",\"shapesList\":[{\"type\":\"TRIANGLE\",\"point1\":" +
+            "{\"x\":1,\"y\":1},\"point2\":{\"x\":2,\"y\":2},\"point3\":{\"x\":3,\"y\":3}}]}";
     assertEquals(expectedResult, shapeStringJSON);
   }
 
