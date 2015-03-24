@@ -3,12 +3,10 @@ package ua.goit.serializers;
 import ua.goit.adapter.*;
 import ua.goit.model.Types;
 import java.util.HashMap;
+import java.util.Map;
 
-/**
- * Created by Alex on 24.03.2015.
- */
 public final class AdapterMaps {
-  private static HashMap<Types, Serializer> XMLMap = new HashMap<Types, Serializer>()
+  private static Map<Types, Serializer> XMLMap = new HashMap<Types, Serializer>()
   {{
     put(Types.GROUP, new GroupAdapterXML());
     put(Types.CIRCLE, new CircleAdapterXML());
@@ -16,7 +14,7 @@ public final class AdapterMaps {
     put(Types.SQUARE, new SquareAdapterXML());
   }};
 
-  private static HashMap<Types, Serializer> JSONMap = new HashMap<Types, Serializer>()
+  private static Map<Types, Serializer> JSONMap = new HashMap<Types, Serializer>()
   {{
     put(Types.GROUP, new GroupAdapterJSON());
     put(Types.CIRCLE, new CircleAdapterJSON());
