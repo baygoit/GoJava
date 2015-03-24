@@ -6,30 +6,34 @@ import java.util.HashMap;
 import java.util.Map;
 
 public final class AdapterMaps {
-  private static Map<Types, Serializer> XMLMap = new HashMap<Types, Serializer>()
+  private static Map<Types, Class<? extends Serializer>> XMLMap = new HashMap<Types, Class<? extends Serializer>>()
   {{
-    put(Types.GROUP, new GroupAdapterXML());
-    put(Types.CIRCLE, new CircleAdapterXML());
-    put(Types.TRIANGLE, new TriangleAdapterXML());
-    put(Types.SQUARE, new SquareAdapterXML());
+    put(Types.GROUP, GroupAdapterXML.class);
+    put(Types.CIRCLE, CircleAdapterXML.class);
+    put(Types.TRIANGLE, TriangleAdapterXML.class);
+    put(Types.SQUARE, SquareAdapterXML.class);
   }};
 
-  private static Map<Types, Serializer> JSONMap = new HashMap<Types, Serializer>()
+  private static Map<Types, Class<? extends Serializer>> JSONMap = new HashMap<Types, Class<? extends Serializer>>()
   {{
-    put(Types.GROUP, new GroupAdapterJSON());
-    put(Types.CIRCLE, new CircleAdapterJSON());
-    put(Types.TRIANGLE, new TriangleAdapterJSON());
-    put(Types.SQUARE, new SquareAdapterJSON());
+    put(Types.GROUP, GroupAdapterJSON.class);
+    put(Types.CIRCLE, CircleAdapterJSON.class);
+    put(Types.TRIANGLE, TriangleAdapterJSON.class);
+    put(Types.SQUARE, SquareAdapterJSON.class);
   }};
 
   public static Serializer getValue(Types type, SerializerType serializerType) {
-    if (serializerType==SerializerType.XML){
-      return XMLMap.get(type);
-    } else if (serializerType==SerializerType.JSON) {
-      return JSONMap.get(type);
-    } else {
-      return null;
+    try {
+      if (serializerType == SerializerType.XML) {
+        return XMLMap.get(type).newInstance();
+      } else if (serializerType == SerializerType.JSON) {
+        return JSONMap.get(type).newInstance();
+      }
+    } catch (Exception e) {
+      e.printStackTrace();
+      System.exit(1);
     }
+    return null;
   }
 }
 
