@@ -10,6 +10,11 @@ import org.junit.Test;
 import ua.goit.graphElements.*;
 import ua.goit.serialization.*;
 
+/**
+ * Test Unit for testing Factory pattern, group and point class
+ * @author Anton Yarosh
+ *
+ */
 public class PatternsTest {
 
     @Test
@@ -89,6 +94,4 @@ public class PatternsTest {
 	String actualValue = point.getCoordinate();
 	assertEquals(expectedValue, actualValue);
     }
-
-    
 }
