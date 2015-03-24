@@ -1,27 +1,52 @@
 package ua.goit.serialization;
-import ua.goit.graphElements.GraphElement;
 
-import java.io.*;
+import ua.goit.graphElements.Element;
+import ua.goit.graphElements.Group;
+import ua.goit.graphElements.Point;
+
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class XMLSerializator extends Serializator {
     private StringBuffer buffer = new StringBuffer();
 
     @Override
-    public StringBuffer serialize(GraphElement element) {
-        if (element.isElement()) {
+    public StringBuffer serialize(Element element) {
             buffer.append("<" + element.getType() + ">" + element.getName());
-            for (Point point : element.getPoints()) {
-                buffer.append("<Point>" + point + "</Point>");
+            if (element.getPoints() == null) {
+                buffer.append("<Points> </Points>");
+            }
+            else {
+                buffer.append("<Points>");
+                for (Point point : element.getPoints()) {
+                    buffer.append("<Point>" + point.getCoordinate() + "</Point>");
+                }
+                buffer.append("</Points>");
             }
             buffer.append("</" + element.getType() + ">");
-        } else {
-            buffer.append("<" + element.getType() + ">" + element.getName());
-            for (GraphElement node : element) {
+
+        return buffer;
+    }
+
+    @Override
+    public StringBuffer serialize(Group group) {
+        if (group.getGroups() != null || group.getGroups().size() <= 0 ) {
+            buffer.append("<" + group.getName() + ">");
+            for (Group inGroup : group.getGroups()) {
+                serialize(inGroup);
+            }
+            buffer.append("</" + group.getName() + ">");
+
+        }
+        if (group.getElements() != null || group.getElements().size() <= 0) {
+            for (Element element : group.getElements()) {
                 serialize(element);
             }
-            buffer.append("</" + element.getType() + ">");
         }
-	    return buffer;
+
+        return buffer;
     }
 
     @Override
@@ -39,9 +64,6 @@ public class XMLSerializator extends Serializator {
             e.printStackTrace();
         }
 
-
-
-	
     }
 
 }
