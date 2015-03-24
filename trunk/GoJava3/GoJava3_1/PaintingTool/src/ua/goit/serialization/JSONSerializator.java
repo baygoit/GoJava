@@ -22,7 +22,7 @@ public class JSONSerializator extends Serializator {
   @Override
   public StringBuffer serialize(Element element) {
 
-    tab.append(oneTab);
+    //tab.append(oneTab);
     bufAppend(tab.toString() + openBracket + enter);
     bufAppend(tab.toString() + dQ + "Name" + dQ + " : "
             + element.getName() + enter);
@@ -40,18 +40,15 @@ public class JSONSerializator extends Serializator {
       tab.delete(0, 4);
       bufAppend(tab.toString() + closeBracketS + enter);
     }
+
+    bufAppend(tab.toString() + closeBracket + enter);
     return serializeString;
   }
 
   @Override
   public StringBuffer serialize(Group group) {
 
-    if (group.getElements() != null) {
-      for (Element element : group.getElements()) {
-        serialize(element);
-      }
-    }
-    if (group.getGroups() != null) {
+    if (group.getGroups() != null || group.getGroups().size() <= 0) {
       bufAppend(tab.toString() + group.getName() + " "
               + openBracket + enter);
       tab.append(oneTab);
@@ -59,6 +56,12 @@ public class JSONSerializator extends Serializator {
         serialize(innerGroup);
       }
 
+
+      if (group.getElements() != null || group.getElements().size() <= 0) {
+        for (Element element : group.getElements()) {
+          serialize(element);
+        }
+      }
       tab.delete(0, 4);
       bufAppend(tab.toString() + closeBracket + enter);
     }
