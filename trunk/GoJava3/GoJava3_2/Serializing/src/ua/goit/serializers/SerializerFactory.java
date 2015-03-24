@@ -10,6 +10,5 @@ public class SerializerFactory {
     } else {
       return new XMLSerializer(); 
     }
-
   }
 }

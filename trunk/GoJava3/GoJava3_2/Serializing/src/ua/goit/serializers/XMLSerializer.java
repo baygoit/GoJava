@@ -1,21 +1,21 @@
 package ua.goit.serializers;
 
-import ua.goit.adapter.*;
 import ua.goit.model.*;
+import java.util.Iterator;
+import java.util.Map;
 
 public class XMLSerializer implements Serializer {
 
   @Override
   public String serialize(ContainerShapes object) {
-    if (object.getType() == Types.GROUP) {
-      return new GroupAdapterXML().serialize(object);
-    } else if (object.getType() == Types.CIRCLE) {
-      return new CircleAdapterXML().serialize(object);
-    } else if (object.getType() == Types.SQUARE) {
-      return new SquareAdapterXML().serialize(object);
-    } else if (object.getType() == Types.TRIANGLE) {
-      return new TriangleAdapterXML().serialize(object);
+    Iterator iterator = AdapterMaps.getIterator(SerializerType.XML);
+    while (iterator.hasNext()) {
+      Map.Entry pair = (Map.Entry) iterator.next();
+      if (object.getType() == pair.getKey()) {
+        Serializer serializer = (Serializer) pair.getValue();
+        return serializer.serialize(object);
+      }
     }
     return null;
-   }
+  }
 }
