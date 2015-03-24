@@ -2,5 +2,6 @@ package ua.goit.graphElements;
 
 
 public interface IPoint {
-  public String getCoordinate();
+    public void set(int x, int y);
+    public String getCoordinate();
 }
