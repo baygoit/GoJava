@@ -2,9 +2,7 @@ package ua.goit.serializers;
 
 import ua.goit.adapter.*;
 import ua.goit.model.Types;
-
 import java.util.HashMap;
-import java.util.Iterator;
 
 /**
  * Created by Alex on 24.03.2015.
@@ -26,13 +24,14 @@ public class AdapterMaps {
     put(Types.SQUARE, new SquareAdapterJSON());
   }};
 
-  public static Iterator getIterator(SerializerType type) {
-    if (type==SerializerType.XML){
-      return XMLMap.entrySet().iterator();
-    } else if (type==SerializerType.JSON) {
-      return JSONMap.entrySet().iterator();
+  public static Serializer getValue(Types type, SerializerType serializerType) {
+    if (serializerType==SerializerType.XML){
+      return XMLMap.get(type);
+    } else if (serializerType==SerializerType.JSON) {
+      return JSONMap.get(type);
     } else {
       return null;
     }
   }
 }
+
