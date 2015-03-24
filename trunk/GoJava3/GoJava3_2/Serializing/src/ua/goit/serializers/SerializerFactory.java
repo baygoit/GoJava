@@ -3,12 +3,12 @@ package ua.goit.serializers;
 public class SerializerFactory {
 
   public static Serializer getSerializer(SerializerType type) {
-    if (type==SerializerType.XML){
+    if (type == SerializerType.XML) {
       return new XMLSerializer();
-    } else if (type==SerializerType.JSON){
+    } else if (type == SerializerType.JSON) {
       return new JSONSerializer();
     } else {
-      return new XMLSerializer(); 
+      return new XMLSerializer();
     }
   }
 }

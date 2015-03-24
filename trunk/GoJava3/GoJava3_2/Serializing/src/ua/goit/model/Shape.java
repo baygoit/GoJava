@@ -1,6 +1,6 @@
 package ua.goit.model;
 
-public interface Shape extends ContainerShapes{
+public interface Shape extends ContainerShapes {
 
-	
+
 }

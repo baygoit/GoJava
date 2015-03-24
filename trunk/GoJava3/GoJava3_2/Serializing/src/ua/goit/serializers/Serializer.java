@@ -4,6 +4,6 @@ import ua.goit.model.ContainerShapes;
 
 public interface Serializer {
 
-    String serialize(ContainerShapes object);
+  String serialize(ContainerShapes object);
 
 }
