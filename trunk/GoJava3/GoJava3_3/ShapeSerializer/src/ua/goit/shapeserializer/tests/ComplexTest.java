@@ -27,7 +27,7 @@ public class ComplexTest {
     gr2.add(new Triangle(new Point(3, 32), new Point(20, 30), new Point(43, 54)));
     gr.add(new Square(new Point(20, 30), new Point(43, 54)));
     gr2.add(gr);
-    
+   
     String expectedXML = "<Group><point><x>43</x><y>54</y></point><triangle>"
         + "<point><x>0</x><y>12</y></point><point><x>20</x><y>30</y></point>"
         + "<point><x>43</x><y>54</y></point></triangle><triangle><point>"
