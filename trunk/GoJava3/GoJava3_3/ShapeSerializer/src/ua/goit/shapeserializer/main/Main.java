@@ -10,8 +10,8 @@ public class Main {
   public static void main(String[] args) {
 
 
-      Group gr = new Group();
-      Group gr2 = new Group();
+      Shape gr = new Group();
+      Shape gr2 = new Group();
       gr.add(new Circle(20, new Point(0,12)));
       gr.add(new Triangle(new Point(3,32), new Point(20,30), new Point(43,54) ));
       gr.add(new Square(new Point(20,30), new Point(43,54) ));
@@ -22,9 +22,8 @@ public class Main {
       gr2.add(gr);
  
 
-      SerializeClassHolder clHolder = SerializerFactory.getSerializerFor("json");
-      Shape shape = gr2;
-      String res = clHolder.serialize(shape);
+      SerializeClassHolder clHolder = SerializerFactory.getSerializerFor("xml");
+      String res = clHolder.serialize(gr2);
       
       System.out.println(res);
  

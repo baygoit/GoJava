@@ -1,6 +1,6 @@
 package ua.goit.shapeserializer.basicobjects;
 
-public final class Point implements Shape{
+public final class Point extends Shape{
   int x;
   int y;
 
@@ -10,18 +10,22 @@ public final class Point implements Shape{
     this.y = y;
   }
 
+  @Override
   public int getX() {
     return x;
   }
 
+  @Override
   public void setX(int x) {
     this.x = x;
   }
 
+  @Override
   public int getY() {
     return y;
   }
 
+  @Override
   public void setY(int y) {
     this.y = y;
   }
