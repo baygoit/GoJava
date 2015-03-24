@@ -4,11 +4,12 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import ua.goit.graphElements.GraphElement;
+import ua.goit.graphElements.Element;
+
+import ua.goit.graphElements.Group;
 import ua.goit.graphElements.Point;
 
 public class JSONSerializator extends Serializator {
-
   private StringBuffer serializeString = new StringBuffer();
   private StringBuffer tab = new StringBuffer();
   private String oneTab = "    ";
@@ -18,43 +19,48 @@ public class JSONSerializator extends Serializator {
   private char closeBracket = '}';
   private char openBracketS = '[';
   private char closeBracketS = ']';
+  @Override
+  public StringBuffer serialize(Element element) {
 
+    tab.append(oneTab);
+    bufAppend(tab.toString() + openBracket + enter);
+    bufAppend(tab.toString() + dQ + "Name" + dQ + " : "
+            + element.getName() + enter);
+    bufAppend(tab.toString() + dQ + "Type" + dQ + " : "
+            + element.getType() + enter);
+    bufAppend(tab.toString() + dQ + "Points" + dQ + " : ");
+    if (element.getPoints() != null) {
+      bufAppend(openBracketS + enter);
+      tab.append(oneTab);
+      for (Point point : element.getPoints()) {
+        bufAppend(tab.toString() + dQ + "Point" + dQ + " : "
+                + point.getCoordinate() + enter);
+      }
+
+      tab.delete(0, 4);
+      bufAppend(tab.toString() + closeBracketS + enter);
+    }
+    return serializeString;
+  }
 
   @Override
-  public StringBuffer serialize(GraphElement element) {
-    if (element.isElement()) {
-      tab.append(oneTab);
-      bufAppend(tab.toString() + openBracket + enter);
-      bufAppend(tab.toString() + dQ + "Name" + dQ + " : "
-              + element.getName() + enter);
-      bufAppend(tab.toString() + dQ + "Type" + dQ + " : "
-              + element.getType() + enter);
-      bufAppend(tab.toString() + dQ + "Points" + dQ + " : ");
-      if (element.getPoints() != null) {
-        bufAppend(openBracketS + enter);
-        tab.append(oneTab);
-        for (Point point : element.getPoints()) {
-          bufAppend(tab.toString() + dQ + "Point" + dQ + " : "
-                  + point.getCoordinates() + enter);
-        }
+  public StringBuffer serialize(Group group) {
 
-        tab.delete(0, 4);
-        bufAppend(tab.toString() + closeBracketS + enter);
+    if (group.getElements() != null) {
+      for (Element element : group.getElements()) {
+        serialize(element);
       }
-
-      bufAppend(tab.toString() + closeBracket + enter);
-      tab.delete(0, 4);
-    } else {
-      bufAppend(tab.toString() + element.getName() + " "
+    }
+    if (group.getGroups() != null) {
+      bufAppend(tab.toString() + group.getName() + " "
               + openBracket + enter);
       tab.append(oneTab);
-      for (GraphElement groupElement : element) {
-        serialize(groupElement);
+      for (Group innerGroup : group.getGroups()) {
+        serialize(innerGroup);
       }
 
       tab.delete(0, 4);
       bufAppend(tab.toString() + closeBracket + enter);
-
     }
 
     return serializeString;
@@ -69,7 +75,6 @@ public class JSONSerializator extends Serializator {
     } catch (IOException e) {
       e.printStackTrace();
     }
-
   }
 
   private void bufAppend(String text) {
@@ -77,3 +82,5 @@ public class JSONSerializator extends Serializator {
   }
 
 }
+
+

@@ -4,24 +4,27 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+
 import ua.goit.graphElements.Group;
+import ua.goit.graphElements.GroupImpl;
 import ua.goit.graphElements.Point;
-import ua.goit.graphElements.Triangel;
+import ua.goit.graphElements.PointImpl;
 import ua.goit.serialization.ConcreteFactory;
 import ua.goit.serialization.SerializationType;
+import ua.goit.shapes.Triangle;
 
 /**
  * Created by kossovec on 22.03.2015.
  */
 public class TestJSONSerialize {
-  private Point point1 = new Point();
-  private Point point2 = new Point();
-  private Triangel triangel1 = new Triangel("triangel1");
-  private Triangel triangel2 = new Triangel("triangel2");
-  private Triangel triangel3 = new Triangel("triangel3");
-  private Group group1 = new Group("group1");
-  private Group group2 = new Group("group2");
-  private Group group3 = new Group("group3");
+  private Point point1 = new PointImpl(1,2);
+  private Point point2 = new PointImpl(2,1);
+  private Triangle triangle1 = new Triangle("triangel1");
+  private Triangle triangle2 = new Triangle("triangel2");
+  private Triangle triangle3 = new Triangle("triangel3");
+  private Group group1 = new GroupImpl("group1");
+  private Group group2 = new GroupImpl("group2");
+  private Group group3 = new GroupImpl("group3");
   private ConcreteFactory factory = new ConcreteFactory();
   private String withoutGroup = "    {\n" +
           "    \"Name\" : triangel1\n" +
@@ -75,34 +78,28 @@ public class TestJSONSerialize {
 
   @Test
   public void testSerializeWithoutGroup() {
-    point1.set(1, 2);
-    point2.set(2, 1);
-    triangel1.addPoint(point1);
-    triangel1.addPoint(point2);
-    assertEquals(withoutGroup, factory.getSerializationFor(SerializationType.JSON).serialize(triangel1).toString());
+    triangle1.addPoint(point1);
+    triangle1.addPoint(point2);
+    assertEquals(withoutGroup, factory.getSerializationFor(SerializationType.JSON).serialize(triangle1).toString());
   }
 
   @Test
   public void testSerializeWithOneGroup() {
-    point1.set(1, 2);
-    point2.set(2, 1);
-    triangel2.addPoint(point1);
-    triangel2.addPoint(point2);
-    group1.add(triangel1);
-    group1.add(triangel2);
+    triangle1.addPoint(point1);
+    triangle2.addPoint(point2);
+    group1.setElement(triangle1);
+    group1.setElement(triangle2);
     assertEquals(oneGroup, factory.getSerializationFor(SerializationType.JSON).serialize(group1).toString());
   }
 
   @Test
   public void testSerializeWithGroupInGroup() {
-    point1.set(1, 2);
-    point2.set(2, 1);
-    triangel2.addPoint(point1);
-    triangel2.addPoint(point2);
-    group1.add(triangel1);
-    group1.add(triangel2);
-    group2.add(triangel3);
-    group2.add(group1);
+    triangle2.addPoint(point1);
+    triangle2.addPoint(point2);
+    group1.setElement(triangle1);
+    group1.setElement(triangle2);
+    group2.setElement(triangle3);
+    group2.setGroup(group1);
     assertEquals(gropeInGroup, factory.getSerializationFor(SerializationType.JSON).serialize(group2).toString());
   }
 }

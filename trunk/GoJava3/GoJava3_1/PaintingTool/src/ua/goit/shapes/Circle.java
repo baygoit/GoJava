@@ -1,12 +1,15 @@
-package ua.goit.basics.painting;
+package ua.goit.shapes;
 
-import ua.goit.basics.painting.graphElements.*;
+
+import ua.goit.graphElements.Element;
+import ua.goit.graphElements.Point;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class Circle implements IElement {
+public class Circle implements Element {
 
-    private ArrayList<Point> pointsList = new ArrayList();
+    private List<Point> pointsList = new ArrayList();
     private String name;
 
     public Circle(String name) {
@@ -24,12 +27,12 @@ public class Circle implements IElement {
     }
 
     @Override
-    public void addPoints(Point point) {
+    public void addPoint(Point point) {
         pointsList.add(point);
     }
 
     @Override
-    public ArrayList<Point> getPoints() {
+    public List<Point> getPoints() {
         return pointsList;
     }
 }

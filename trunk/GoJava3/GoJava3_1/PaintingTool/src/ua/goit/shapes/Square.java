@@ -1,34 +1,38 @@
-package ua.goit.basics.painting;
+package ua.goit.shapes;
 
-import ua.goit.basics.painting.graphElements.*;
+
+import ua.goit.graphElements.Element;
+import ua.goit.graphElements.Point;
+
 import java.util.ArrayList;
+import java.util.List;
 
-public class Square implements IElement {
+public class Square implements Element {
 
-    private ArrayList<Point> pointsList = new ArrayList();
-    private String name;
+  private List<Point> pointsList = new ArrayList();
+  private String name;
 
-    public Square(String name) {
-        this.name = name;
-    }
+  public Square(String name) {
+    this.name = name;
+  }
 
-    @Override
-    public String getName() {
-        return name;
-    }
+  @Override
+  public String getName() {
+    return name;
+  }
 
-    @Override
-    public String getType() {
-        return "Square";
-    }
+  @Override
+  public String getType() {
+    return "Square";
+  }
 
-    @Override
-    public void addPoints(Point point) {
-        pointsList.add(point);
-    }
+  @Override
+  public void addPoint(Point point) {
+    pointsList.add(point);
+  }
 
-    @Override
-    public ArrayList<Point> getPoints() {
-        return pointsList;
-    }
+  @Override
+  public List<Point> getPoints() {
+    return pointsList;
+  }
 }

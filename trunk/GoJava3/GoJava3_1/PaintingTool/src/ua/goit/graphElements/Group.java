@@ -1,6 +1,6 @@
 package ua.goit.graphElements;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Interface for group of element
@@ -8,8 +8,8 @@ import java.util.ArrayList;
  *
  */
 public interface Group {
-    public ArrayList<Element> getElements();
-    public ArrayList<Group> getGroups();
+    public List<Element> getElements();
+    public List<Group> getGroups();
     public void setElement(Element element);
     public void setGroup(Group group);
     public String getName();

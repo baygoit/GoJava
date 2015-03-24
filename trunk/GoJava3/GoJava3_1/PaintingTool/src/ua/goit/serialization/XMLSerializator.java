@@ -2,7 +2,6 @@ package ua.goit.serialization;
 import ua.goit.graphElements.GraphElement;
 
 import java.io.*;
-import java.util.Scanner;
 
 public class XMLSerializator extends Serializator {
     private StringBuffer buffer = new StringBuffer();
