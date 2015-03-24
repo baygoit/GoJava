@@ -2,7 +2,7 @@ package ua.goit.graphElements;
 
 import java.util.ArrayList;
 
-public interface IElement {
+public interface Element {
 
     public void addPoint(Point point);
     public ArrayList<Point> getPoints();
