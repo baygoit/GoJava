@@ -4,6 +4,7 @@
 
 package ua.goit.shapeserializer.json;
 
+import ua.goit.shapeserializer.Formats;
 import ua.goit.shapeserializer.SerializeClassHolder;
 import ua.goit.shapeserializer.SerializerFactory;
 import ua.goit.shapeserializer.basicobjects.Group;
@@ -20,7 +21,7 @@ public class GroupJSONSerializer extends ShapeJSONSerializer {
     StringBuilder result = new StringBuilder();
     List<Shape> shapes = groupShapes.getValues();
 
-    SerializeClassHolder classHolder = SerializerFactory.getSerializerFor("json");
+    SerializeClassHolder classHolder = SerializerFactory.getSerializerFor(Formats.JSON);
     result.append("\"Group\": \n");
     result.append("[\n");
     for (Shape shape : shapes) {

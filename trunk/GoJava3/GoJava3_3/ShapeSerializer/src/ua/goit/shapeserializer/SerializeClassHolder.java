@@ -12,28 +12,9 @@ public abstract class SerializeClassHolder {
     serialMap = new HashMap<Object, Object>();
   }
 
-  public static ShapeSerializer getSerializator(Shape arg) {
-
-    Object clazz = serialMap.get(arg.getClass());
-
-    if (clazz == null) {
-      throw new UnsupportedOperationException();
-    }
-
-    try {
-      return ((Class<? extends ShapeSerializer>) clazz).newInstance();
-
-    } catch (InstantiationException | IllegalAccessException e) {
-      e.printStackTrace();
-    }
-    return null;
-  }
-
-
   public String serialize(Shape arg) {
 
-    Object clazz;
-    clazz = serialMap.get(arg.getClass());
+    Object clazz = serialMap.get(arg.getClass());
     ShapeSerializer shapeSerializer = null;
     if (clazz == null) {
       throw new UnsupportedOperationException("Unknown serializer for " + arg.toString());
@@ -43,13 +24,10 @@ public abstract class SerializeClassHolder {
     } catch (InstantiationException | IllegalAccessException e) {
       e.printStackTrace();
     }
-    return shapeSerializer.serialize(arg);
-  }
-
-
-  public String innerSerialize(Shape arg) {
-
-    return this.serialize(arg);
-
+    if (shapeSerializer != null) {
+      return shapeSerializer.serialize(arg);
+    } else {
+      throw new NullPointerException();
+    }
   }
 }

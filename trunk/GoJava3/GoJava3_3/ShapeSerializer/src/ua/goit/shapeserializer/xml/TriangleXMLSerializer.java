@@ -4,6 +4,7 @@
 
 package ua.goit.shapeserializer.xml;
 
+import ua.goit.shapeserializer.Formats;
 import ua.goit.shapeserializer.SerializeClassHolder;
 import ua.goit.shapeserializer.SerializerFactory;
 import ua.goit.shapeserializer.basicobjects.Shape;
@@ -14,7 +15,7 @@ public class TriangleXMLSerializer extends ShapeXMLSerializer {
   public String serialize(Shape shape) {
     StringBuilder result = new StringBuilder();
     Triangle triangle = (Triangle) shape;
-    SerializeClassHolder classHolder = SerializerFactory.getSerializerFor("xml");
+    SerializeClassHolder classHolder = SerializerFactory.getSerializerFor(Formats.XML);
 
     result.append("<triangle>\n ");
     result.append(classHolder.serialize(triangle.getA()));

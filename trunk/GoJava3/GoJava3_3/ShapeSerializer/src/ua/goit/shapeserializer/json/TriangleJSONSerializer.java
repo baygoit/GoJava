@@ -4,6 +4,7 @@
 
 package ua.goit.shapeserializer.json;
 
+import ua.goit.shapeserializer.Formats;
 import ua.goit.shapeserializer.SerializeClassHolder;
 import ua.goit.shapeserializer.SerializerFactory;
 import ua.goit.shapeserializer.basicobjects.Shape;
@@ -16,7 +17,7 @@ public class TriangleJSONSerializer extends ShapeJSONSerializer {
     StringBuilder result = new StringBuilder();
     Triangle triangle = (Triangle) shape;
 
-    SerializeClassHolder classHolder = SerializerFactory.getSerializerFor("json");
+    SerializeClassHolder classHolder = SerializerFactory.getSerializerFor(Formats.JSON);
 
     result.append("\"Triangle\" : [{ ");
     result.append(classHolder.serialize(triangle.getA()));

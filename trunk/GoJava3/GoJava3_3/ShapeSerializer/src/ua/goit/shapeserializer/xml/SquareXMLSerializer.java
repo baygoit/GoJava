@@ -4,6 +4,7 @@
 
 package ua.goit.shapeserializer.xml;
 
+import ua.goit.shapeserializer.Formats;
 import ua.goit.shapeserializer.SerializeClassHolder;
 import ua.goit.shapeserializer.SerializerFactory;
 import ua.goit.shapeserializer.basicobjects.Shape;
@@ -15,7 +16,7 @@ public class SquareXMLSerializer extends ShapeXMLSerializer {
     StringBuilder squareXML = new StringBuilder();
     Square square = (Square) shape;
 
-    SerializeClassHolder classHolder = SerializerFactory.getSerializerFor("xml");
+    SerializeClassHolder classHolder = SerializerFactory.getSerializerFor(Formats.XML);
 
     squareXML.append("<square>\n");
     squareXML.append(classHolder.serialize(square.getA()));

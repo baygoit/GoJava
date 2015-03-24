@@ -4,6 +4,7 @@
 
 package ua.goit.shapeserializer.json;
 
+import ua.goit.shapeserializer.Formats;
 import ua.goit.shapeserializer.SerializeClassHolder;
 import ua.goit.shapeserializer.SerializerFactory;
 import ua.goit.shapeserializer.basicobjects.Circle;
@@ -14,7 +15,7 @@ public class CircleJSONSerializer extends ShapeJSONSerializer {
   public String serialize(Shape shape) {
     StringBuilder result = new StringBuilder();
     Circle circle = (Circle) shape;
-    SerializeClassHolder clHolder = SerializerFactory.getSerializerFor("json");
+    SerializeClassHolder clHolder = SerializerFactory.getSerializerFor(Formats.JSON);
 
     result.append("\"Circle\": {");
     result.append("\"center\": {");

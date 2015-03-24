@@ -4,6 +4,7 @@
 
 package ua.goit.shapeserializer.json;
 
+import ua.goit.shapeserializer.Formats;
 import ua.goit.shapeserializer.SerializeClassHolder;
 import ua.goit.shapeserializer.SerializerFactory;
 import ua.goit.shapeserializer.basicobjects.Shape;
@@ -15,7 +16,7 @@ public class SquareJSONSerializer extends ShapeJSONSerializer {
     StringBuilder squareXML = new StringBuilder();
     Square square = (Square) shape;
 
-    SerializeClassHolder classHolder = SerializerFactory.getSerializerFor("json");
+    SerializeClassHolder classHolder = SerializerFactory.getSerializerFor(Formats.JSON);
 
 
     squareXML.append("\"square\" : [{");

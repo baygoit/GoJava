@@ -4,6 +4,7 @@
 
 package ua.goit.shapeserializer.xml;
 
+import ua.goit.shapeserializer.Formats;
 import ua.goit.shapeserializer.SerializeClassHolder;
 import ua.goit.shapeserializer.SerializerFactory;
 import ua.goit.shapeserializer.basicobjects.Group;
@@ -19,8 +20,7 @@ public class GroupXMLSerializer extends ShapeXMLSerializer {
     StringBuilder result = new StringBuilder();
     List<Shape> shapes = groupShapes.getValues();
 
-    SerializeClassHolder classHolder = SerializerFactory.getSerializerFor("xml");
-    //  result.append(new SerializeXMLClassHolder().getSerializator(shape).serialize(circle.getCenter()));
+    SerializeClassHolder classHolder = SerializerFactory.getSerializerFor(Formats.XML);
     result.append("<Group>\n");
     for (Shape shape : shapes) {
       result.append(classHolder.serialize(shape));
