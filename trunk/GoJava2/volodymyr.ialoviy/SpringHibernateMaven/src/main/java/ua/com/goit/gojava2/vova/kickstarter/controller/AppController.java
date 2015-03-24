@@ -52,16 +52,24 @@ public class AppController {
 		model.addAttribute("project", project);
 		return "project";
 	}
+	
+	@RequestMapping(value = { "/donate" }, method = RequestMethod.GET)
+	public String donate(ModelMap model, HttpServletRequest req) {
+		Integer idproject = Integer.valueOf(req.getParameter("idproject"));
+		System.out.println(idproject);
+		model.addAttribute("idproject", idproject);
+		return "donate";
+	}
 
 	@RequestMapping(value = { "/newcategory" }, method = RequestMethod.GET)
-	public String newEmployee(ModelMap model) {
+	public String newCategory(ModelMap model) {
 		Category category = new Category();
 		model.addAttribute("category", category);
 		return "addcategory";
 	}
 
 	@RequestMapping(value = { "/newcategory" }, method = RequestMethod.POST)
-	public String saveEmployee(@Valid Category category, BindingResult result,
+	public String saveCategory(@Valid Category category, BindingResult result,
 			ModelMap model) {
 
 		if (result.hasErrors()) {
@@ -87,4 +95,5 @@ public class AppController {
 		System.out.println(idCategory);
 		return "redirect:/projects?category=" + idCategory;
 	}
+
 }

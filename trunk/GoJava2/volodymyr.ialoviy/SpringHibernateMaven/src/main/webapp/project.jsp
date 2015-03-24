@@ -18,7 +18,7 @@
 
 		<p>If you want return to <a href="projects?category=${project.idCategory}">projects</a></p>
 		
-		<p>If you want to <a href="donate">invest in the project</a></p>
+		<p>If you want to <a href="donate?idproject=${project.idProject}">invest in the project</a></p>
 		
 		<p>Have a question? If the info above doesn't help, you can <a href="question">ask the project creator directly</a>
 	
