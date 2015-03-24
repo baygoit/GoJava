@@ -12,8 +12,8 @@ public class SquareAdapterXML implements Serializer {
         result.append("<square>");
 
         result.append("<point1>");
-        result.append("<x>" + square.getPoint1().getX() + "</x>");
-        result.append("<y>" + square.getPoint1().getY() + "</y>");
+        result.append("<x>" + square.getTopLeft().getX() + "</x>");
+        result.append("<y>" + square.getTopLeft().getY() + "</y>");
         result.append("</point1>");
 
         result.append("<length>" + square.getLength() + "</length>");

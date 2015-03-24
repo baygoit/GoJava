@@ -2,14 +2,14 @@ package ua.goit.model;
 
 public class Square implements Shape {
   private Types type = Types.SQUARE;
-  private Point point1;
+  private Point topLeft;
   private int length;
 
   public Square() {
   }
 
-  public Square(Point point1, int length) {
-    this.point1 = point1;
+  public Square(Point topLeft, int length) {
+    this.topLeft = topLeft;
     this.length = length;
   }
 
@@ -17,12 +17,12 @@ public class Square implements Shape {
     return type;
   }
 
-  public Point getPoint1() {
-    return point1;
+  public Point getTopLeft() {
+    return topLeft;
   }
 
-  public void setPoint1(Point point1) {
-    this.point1 = point1;
+  public void setTopLeft(Point topLeft) {
+    this.topLeft = topLeft;
   }
 
   public int getLength() {
