@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import java.awt.Point;
 
 import org.junit.Test;
+
 import ua.goit.factories.*;
 import ua.goit.model.*;
 import ua.goit.serializers.*;
@@ -57,7 +58,7 @@ public class TestCases {
 
         Serializer jsonSerializer = SerializerFactory.getSerializer(SerializerType.JSON);
         String shapeStringJSON = jsonSerializer.serialize(triangle);
-        String expectedResult = "{\"triangle\":{\"point1\":{\"x\":1,\"y\":1},\"point2\":{\"x\":2,\"y\":2},\"point3\":{\"x\":3,\"y\":3}}}";
+        String expectedResult = "{\"type\":\"TRIANGLE\",\"point1\":{\"x\":1,\"y\":1},\"point2\":{\"x\":2,\"y\":2},\"point3\":{\"x\":3,\"y\":3}}";
         assertEquals(expectedResult, shapeStringJSON);
     }
 
@@ -81,8 +82,7 @@ public class TestCases {
 
         Serializer jsonSerializer = SerializerFactory.getSerializer(SerializerType.JSON);
         String shapeStringJSON = jsonSerializer.serialize(groupShapes);
-        String expectedResult = "{\"group\":[{\"triangle\":{\"point1\":{\"x\":1,\"y\":1},\"point2\":{\"x\":2,\"y\":2},\"point3\":{\"x\":3,\"y\":3}}}]}";
-
+        String expectedResult = "{\"type\":\"GROUP\",\"shapesList\":[{\"type\":\"TRIANGLE\",\"point1\":{\"x\":1,\"y\":1},\"point2\":{\"x\":2,\"y\":2},\"point3\":{\"x\":3,\"y\":3}}]}";
         assertEquals(expectedResult, shapeStringJSON);
     }
 
@@ -132,11 +132,10 @@ public class TestCases {
         GroupShapes groupShapes = bigTestGroup();
         Serializer jsonSerializer = SerializerFactory.getSerializer(SerializerType.JSON);
         String shapeStringJSON = jsonSerializer.serialize(groupShapes);
-        String expectedResult = "{\"group\":{\"triangle\":{\"point1\":{\"x\":1,\"y\":1},\"point2\":" +
-                "{\"x\":2,\"y\":3},\"point3\":{\"x\":-1,\"y\":4}}}{\"group\":{\"triangle\":{\"point1\":{\"x\":2,\"y\":3}" +
-                ",\"point2\":{\"x\":-1,\"y\":4},\"point3\":{\"x\":3,\"y\":-2}}}{\"circle\":{\"center\":{\"x\":2,\"y\":3},\"radius\":5}}" +
-                "{\"square\":{\"point1\":{\"x\":-1,\"y\":4},\"length\":5}}}{\"group\":{\"circle\":{\"center\":{\"x\":3,\"y\":-2},\"radius\":3}}" +
-                "{\"square\":{\"point1\":{\"x\":3,\"y\":-2},\"length\":6}}}}";
+        String expectedResult = "{\"type\":\"GROUP\",\"shapesList\":[{\"type\":\"TRIANGLE\",\"point1\":{\"x\":1,\"y\":1},\"point2\":{\"x\":2,\"y\":3},\"point3\":"+
+        "{\"x\":-1,\"y\":4}},{\"type\":\"GROUP\",\"shapesList\":[{\"type\":\"TRIANGLE\",\"point1\":{\"x\":2,\"y\":3},\"point2\":{\"x\":-1,\"y\":4},\"point3\":{\"x\":3,\"y\":-2}}"+
+         ",{\"radius\":5,\"center\":{\"x\":2,\"y\":3},\"type\":\"CIRCLE\"},{\"type\":\"SQUARE\",\"point1\":{\"x\":-1,\"y\":4},\"length\":5}]},{\"type\":\"GROUP\",\"shapesList\":"+
+        "[{\"radius\":3,\"center\":{\"x\":3,\"y\":-2},\"type\":\"CIRCLE\"},{\"type\":\"SQUARE\",\"point1\":{\"x\":3,\"y\":-2},\"length\":6}]}]}";
         assertEquals(expectedResult, shapeStringJSON);
     }
 
@@ -147,7 +146,7 @@ public class TestCases {
         Serializer jsonSerializer = SerializerFactory.getSerializer(SerializerType.JSON);
 
         String shapeStringJSON = jsonSerializer.serialize(circle);
-        String expectedResult = "{\"circle\":{\"center\":{\"x\":1,\"y\":2},\"radius\":5}}";
+        String expectedResult = "{\"radius\":5,\"center\":{\"x\":1,\"y\":2},\"type\":\"CIRCLE\"}";
         assertEquals(expectedResult, shapeStringJSON);
 
     }
@@ -159,7 +158,7 @@ public class TestCases {
         Serializer jsonSerializer = SerializerFactory.getSerializer(SerializerType.JSON);
 
         String shapeStringJSON = jsonSerializer.serialize(square);
-        String expectedResult = "{\"square\":{\"point1\":{\"x\":1,\"y\":2},\"length\":5}}";
+        String expectedResult = "{\"type\":\"SQUARE\",\"point1\":{\"x\":1,\"y\":2},\"length\":5}";
         assertEquals(expectedResult, shapeStringJSON);
 
     }
