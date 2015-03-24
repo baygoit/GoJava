@@ -13,8 +13,8 @@ public class CircleAdapterXML implements Serializer {
     xml.append("<circle>");
 
     xml.append("<center>");
-    xml.append("<x>" + circle.getCenter().x + "</x>");
-    xml.append("<y>" + circle.getCenter().y + "</y>");
+    xml.append("<x>" + circle.getCenter().getX() + "</x>");
+    xml.append("<y>" + circle.getCenter().getY() + "</y>");
     xml.append("</center>");
 
     xml.append("<radius>" + circle.getRadius() + "</radius>");

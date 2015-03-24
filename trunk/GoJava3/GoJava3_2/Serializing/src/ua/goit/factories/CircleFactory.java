@@ -2,8 +2,6 @@ package ua.goit.factories;
 
 import ua.goit.model.*;
 
-import java.awt.*;
-
 public class CircleFactory implements ContainerShapesFactory {
 
   @Override

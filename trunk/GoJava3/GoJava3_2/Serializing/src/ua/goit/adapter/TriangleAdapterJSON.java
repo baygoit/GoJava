@@ -15,23 +15,23 @@ public class TriangleAdapterJSON implements Serializer{
     json.append("{\"type\":\"TRIANGLE\",");
 
     json.append("\"point1\":{");
-    json.append("\"x\":" + triangle.getPoint1().x);
+    json.append("\"x\":" + triangle.getPoint1().getX());
     json.append(",");
-    json.append("\"y\":" + triangle.getPoint1().y);
+    json.append("\"y\":" + triangle.getPoint1().getY());
     json.append("}");
     json.append(",");
 
     json.append("\"point2\":{");
-    json.append("\"x\":" + triangle.getPoint2().x);
+    json.append("\"x\":" + triangle.getPoint2().getX());
     json.append(",");
-    json.append("\"y\":" + triangle.getPoint2().y);
+    json.append("\"y\":" + triangle.getPoint2().getY());
     json.append("}");
     json.append(",");
 
     json.append("\"point3\":{");
-    json.append("\"x\":" + triangle.getPoint3().x);
+    json.append("\"x\":" + triangle.getPoint3().getX());
     json.append(",");
-    json.append("\"y\":" + triangle.getPoint3().y);
+    json.append("\"y\":" + triangle.getPoint3().getY());
     json.append("}");
 
     json.append("}");

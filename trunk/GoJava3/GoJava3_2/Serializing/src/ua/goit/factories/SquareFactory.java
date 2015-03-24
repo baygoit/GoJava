@@ -1,8 +1,7 @@
 package ua.goit.factories;
 
+import ua.goit.model.Point;
 import ua.goit.model.Square;
-
-import java.awt.*;
 
 public class SquareFactory implements ContainerShapesFactory {
 

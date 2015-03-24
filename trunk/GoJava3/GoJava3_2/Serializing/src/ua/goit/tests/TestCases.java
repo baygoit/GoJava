@@ -2,10 +2,8 @@ package ua.goit.tests;
 
 import static org.junit.Assert.*;
 
-import java.awt.Point;
 
 import org.junit.Test;
-
 import ua.goit.factories.*;
 import ua.goit.model.*;
 import ua.goit.serializers.*;

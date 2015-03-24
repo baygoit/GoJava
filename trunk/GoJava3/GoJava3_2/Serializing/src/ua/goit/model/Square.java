@@ -1,7 +1,5 @@
 package ua.goit.model;
 
-import java.awt.*;
-
 public class Square implements Shape {
   private Types type = Types.SQUARE;
   private Point point1;

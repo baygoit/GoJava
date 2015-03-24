@@ -1,7 +1,5 @@
 package ua.goit.model;
 
-import java.awt.Point;
-
 public class Triangle implements Shape {
     private Types type = Types.TRIANGLE;
     private Point point1;

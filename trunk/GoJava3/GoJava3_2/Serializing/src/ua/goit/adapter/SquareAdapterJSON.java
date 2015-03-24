@@ -13,9 +13,9 @@ public class SquareAdapterJSON implements Serializer {
     json.append("{\"type\":\"SQUARE\"");
     json.append(",");
     json.append("\"point1\":{");
-    json.append("\"x\":" + square.getPoint1().x);
+    json.append("\"x\":" + square.getPoint1().getX());
     json.append(",");
-    json.append("\"y\":" + square.getPoint1().y);
+    json.append("\"y\":" + square.getPoint1().getY());
     json.append("}");
     json.append(",");
     json.append("\"length\":" + square.getLength());

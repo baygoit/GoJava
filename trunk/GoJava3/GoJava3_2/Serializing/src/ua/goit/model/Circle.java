@@ -1,7 +1,5 @@
 package ua.goit.model;
 
-import java.awt.*;
-
 public class Circle implements Shape {
     private int radius;
     private Point center;
