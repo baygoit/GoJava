@@ -3,16 +3,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class Group extends GraphElement implements GroupBehavior {
-    ArrayList <GraphElement> al = new ArrayList <GraphElement>();
-    String toReturn = "";
-    public Group(String name) {
-	super(name);	
-    }
+public class Group implements IGroup {
+    private ArrayList <IElement> alElement = new ArrayList <IElement>();
+    private ArrayList <IGroup> alGroup = new ArrayList <IGroup>();
+    private String toReturn = "";
+    private String name;
 
-    @Override
-    public void add(GraphElement element) {
-	al.add(element);	
+    public Group(String name) {
+	this.name = name;	
     }
 
     @Override
@@ -21,47 +19,28 @@ public class Group extends GraphElement implements GroupBehavior {
     }
 
     @Override
-    public Iterator iterator() {
-	return new InnerIter ();
-    }
-
-    private class InnerIter implements Iterator {
-	private GraphElement current;
-	private int i = 0;
-
-	@Override
-	public boolean hasNext() {
-	    if (al.size() == 0) {
-		return false;
-	    }
-	    else {
-		return current != al.get(al.size() - 1);
-	    }
-	}
-
-	@Override
-	public GraphElement next() {
-	    current = al.get(i);
-	    GraphElement toReturn = current;
-	    if (i < al.size() - 1) {
-		current = al.get(i++);
-	    }
-	    return toReturn;
-	}
-
-	@Override
-	public void remove() {
-	    al.remove(i);
-	}
-    }
-
-    @Override
-    public boolean isElement() {
-	return false;
-    }
-
-    @Override
     public String getType() {
 	return "Group";
+    }
+
+    @Override
+    public ArrayList<IElement> getElements() {
+	return alElement;
+    }
+
+    @Override
+    public ArrayList<IGroup> getGroups() {
+	return alGroup;
+    }
+
+    @Override
+    public void setElement(IElement element) {
+	alElement.add(element);
+
+    }
+
+    @Override
+    public void setGroup(IGroup group) {
+	alGroup.add(group);
     }
 }
