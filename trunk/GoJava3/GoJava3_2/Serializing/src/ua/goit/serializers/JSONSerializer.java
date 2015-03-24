@@ -8,36 +8,14 @@ public class JSONSerializer implements Serializer {
     @Override
     public String serialize(ContainerShapes object) {
       if (object.getType() == Types.GROUP) {
-        return serialize((GroupShapes)object);
+        return new GroupAdapterJSON().serialize(object);
       } else if (object.getType() == Types.CIRCLE) {
-        return serialize((Circle)object);
+        return new CircleAdapterJSON().serialize(object);
       } else if (object.getType() == Types.SQUARE) {
-        return serialize((Square) object);
+        return new SquareAdapterJSON().serialize(object);
       } else if (object.getType() == Types.TRIANGLE) {
-        return serialize((Triangle) object);
+        return new TriangleAdapterJSON().serialize(object);
       }
       return null;
      }
-   
-    public String serialize(GroupShapes object) {
-      GroupAdapterJSON adapter = new GroupAdapterJSON();
-      return adapter.serialize(object);
-    }
-
-    public String serialize(Triangle object) {
-      TriangleAdapterJSON adapter = new TriangleAdapterJSON();
-      return adapter.serialize(object);
-    }
-
-    public String serialize(Circle object) {
-      CircleAdapterJSON adapter = new CircleAdapterJSON();
-      return adapter.serialize(object);
-    }
-
-    public String serialize(Square object) {
-      SquareAdapterJSON adapter = new SquareAdapterJSON();
-      return adapter.serialize(object);
-    }
-
-
 }
