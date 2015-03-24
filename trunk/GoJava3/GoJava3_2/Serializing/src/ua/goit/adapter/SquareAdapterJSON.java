@@ -10,17 +10,15 @@ public class SquareAdapterJSON implements Serializer {
   public String serialize(ContainerShapes container) {
     StringBuilder json = new StringBuilder();
     Square square = (Square) container;
-    json.append("{\"square\":{");
-
+    json.append("{\"type\":\"SQUARE\"");
+    json.append(",");
     json.append("\"point1\":{");
     json.append("\"x\":" + square.getPoint1().x);
     json.append(",");
     json.append("\"y\":" + square.getPoint1().y);
     json.append("}");
     json.append(",");
-
     json.append("\"length\":" + square.getLength());
-
-    json.append("}}");
+    json.append("}");
     return json.toString();  }
 }

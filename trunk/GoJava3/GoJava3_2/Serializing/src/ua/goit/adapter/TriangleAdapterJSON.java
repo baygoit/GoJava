@@ -12,7 +12,7 @@ public class TriangleAdapterJSON implements Serializer{
     Triangle triangle = (Triangle) object;
     
     StringBuilder json = new StringBuilder();
-    json.append("{\"triangle\":{");
+    json.append("{\"type\":\"TRIANGLE\",");
 
     json.append("\"point1\":{");
     json.append("\"x\":" + triangle.getPoint1().x);
@@ -34,7 +34,7 @@ public class TriangleAdapterJSON implements Serializer{
     json.append("\"y\":" + triangle.getPoint3().y);
     json.append("}");
 
-    json.append("}}");
+    json.append("}");
     return json.toString();
   }
 
