@@ -32,10 +32,10 @@ public class TestFunctionality {
     Rectangle rectangle2 = new Rectangle(point4, 6, 2);
     Collections.addAll(subGroup2, circle2, rectangle2);
 
-    Combination combination = new Combination(circle1, rectangle1);
+    CombinationFigure combinationFigure = new CombinationFigure(circle1, rectangle1);
     System.out.println(mainGroup.serialize(SerializerType.XML));
     System.out.println();
-    System.out.println(combination.serialize(SerializerType.XML));
+    System.out.println(combinationFigure.serialize(SerializerType.XML));
     System.out.println();
     System.out.println(mainGroup.serialize(SerializerType.JSON));
   }
