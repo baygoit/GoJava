@@ -29,7 +29,7 @@ public class SimpleCircleTestXML {
 
   @Test
   public void test2() {
-    String expected = "<circle><center><point><x>5</x><y>50</y></point></center><radius>5</radius></circle>";
+    String expected = "<circle><center><point><x>50</x><y>50</y></point></center><radius>5</radius></circle>";
     ShapeXMLSerializer circle = new CircleXMLSerializer();
     String actual = circle.serialize(new Circle(5, new Point(50,50)));
     actual = actual.replace(" ", "");
