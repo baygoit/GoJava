@@ -13,33 +13,35 @@ package ua.goit.alg;
 
 public class RotatedArrays {
 	
+    
 	//The primary method
+    
   public static int binarySearch(int[] array, int target){
-    	
-    return dividionAndSearch(target, array, 0, array.length-1);
-  }
-  
-  private static int dividionAndSearch(int target, int[] array, int firstIndex, 
-  int lastIndex){
-    if (firstIndex > lastIndex){
+      
+    int firstIndex = 0;
+    int lastIndex = array.length -1;
+    if (firstIndex > lastIndex)
+    {
       return -1;
-     }
-     int middle = firstIndex + (lastIndex - firstIndex) / 2;
-         
-     if (firstIndex == lastIndex && array[firstIndex] != target){
-       return -1;
-     } else if (target == array[firstIndex]){
-       return firstIndex;
-     } else if (target == array[lastIndex]){
-       return lastIndex;
-     } else if (target == array[middle]){
-       return middle;
-     } else if (target <= array[middle - 1] && target > array[firstIndex]){
-       return dividionAndSearch(target, array, firstIndex, middle - 1);
-     } else if (array[firstIndex]> array[middle-1] && target < array[middle]){
-       return dividionAndSearch(target, array, firstIndex, middle - 1);
-     } else {
-       return dividionAndSearch(target, array, middle + 1, lastIndex);
+    }
+    int middle = firstIndex + (lastIndex - firstIndex) / 2;
+         while (true){
+    if (firstIndex == lastIndex && array[firstIndex] != target){
+      return -1;
+    } else if (target == array[firstIndex]){
+      return firstIndex;
+    } else if (target == array[lastIndex]){
+      return lastIndex;
+    } else if (target == array[middle]){
+      return middle;
+    } else if (target <= array[middle - 1] && target > array[firstIndex]){
+      lastIndex = middle -1;
+    } else if (array[firstIndex]> array[middle-1] && target < array[middle]){
+      lastIndex = middle -1;
+    } else {
+      firstIndex = middle + 1;
+    }
+      middle = firstIndex + (lastIndex - firstIndex) / 2;
     }
    }
   }
