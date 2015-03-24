@@ -60,10 +60,11 @@ public class AppController {
 		return "donate";
 	}
 	
-	@RequestMapping(value = { "/donate-{amount}-amount-{idProject}-project" }, method = RequestMethod.GET)
-	public String saveDonate(@PathVariable Integer amount, @PathVariable Integer idProject, ModelMap model) {
-
-		projectService.addDonate(amount, idProject);
+	@RequestMapping(value = { "/donatesuccess" }, method = RequestMethod.GET)
+	public String saveDonate(ModelMap model, HttpServletRequest req) {
+		Integer amount = Integer.valueOf(req.getParameter("amount"));
+		Integer project = Integer.valueOf(req.getParameter("project"));
+		projectService.addDonate(amount, project);
 
 		model.addAttribute("success", "Donate " + amount + " successfully");
 		return "donatesuccess";
@@ -100,7 +101,6 @@ public class AppController {
 	@RequestMapping(value = { "/delete-{idProject}-project-{idCategory}" }, method = RequestMethod.GET)
 	public String deleteProject(@PathVariable Integer idProject, @PathVariable String idCategory) {
 		projectService.deleteProjectById(idProject);
-		System.out.println(idCategory);
 		return "redirect:/projects?category=" + idCategory;
 	}
 
