@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+   "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+   "http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<constant name="struts.devMode" value="true" />
+	<constant name="struts.action.extension" value=","/>
+	<constant name="struts.action.excludePattern" value=".*WebController" />
+	 
+    <package name="default" namespace = "/" extends="struts-default">
+     
+      <action name="" 
+            class="ua.com.goit.gojava.POM.presentation.actions.Index" 
+            method="execute">
+            <result name="success">/index.jsp</result>
+            <result name="error">/errorPage.jsp</result>
+      </action>
+      <action name="BankAccountList" 
+            class="ua.com.goit.gojava.POM.presentation.actions.BankAccountList" 
+            method="execute">
+            <result name="success">/ActionForms/BankAccounts.jsp</result>
+            <result name="cashMovementRedirect" type="redirectAction">
+            		<param name="actionName">CashMovement</param>
+            	</result>
+            <result name="error">/errorPage.jsp</result>
+      </action>
+      <action name="CashMovement" 
+            class="ua.com.goit.gojava.POM.presentation.actions.CashMovement" 
+            method="execute">
+            <!-- TODO change on /ActionForms/CashMovement.jsp after refactoring -->
+            <result name="success">/CashMovement.jsp</result>
+            <result name="error">/errorPage.jsp</result>
+      </action>
+      
+    </package>
+</struts>
