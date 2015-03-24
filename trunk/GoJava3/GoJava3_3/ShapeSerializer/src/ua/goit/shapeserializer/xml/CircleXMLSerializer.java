@@ -15,13 +15,13 @@ public class CircleXMLSerializer extends ShapeXMLSerializer {
     StringBuilder result = new StringBuilder();
     Circle circle = (Circle) shape;
     SerializeClassHolder classHolder = SerializerFactory.getSerializerFor("xml");
-    
+
     result.append("<circle>\n<center>\n");
 //  result.append(new SerializeXMLClassHolder().getSerializator(shape).serialize(circle.getCenter()));
     result.append(classHolder.serialize(circle.getCenter()));
 
     result.append("</center>\n<radius>");
-    result.append(circle.getRadius());    
+    result.append(circle.getRadius());
     result.append("</radius>");
     result.append("\n</circle>\n");
     return result.toString();

@@ -8,9 +8,7 @@ import ua.goit.shapeserializer.ShapeSerializer;
 import ua.goit.shapeserializer.basicobjects.Shape;
 
 
-public class ShapeXMLSerializer implements ShapeSerializer {
+public abstract class ShapeXMLSerializer implements ShapeSerializer {
   @Override
-  public String serialize(Shape shape) {
-    return null;
-  }
+  public abstract String serialize(Shape shape);
 }

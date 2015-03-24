@@ -58,11 +58,11 @@ public class Group extends Shape {
   @Override
   public List<Shape> getValues() {
     return values;
-}
+  }
 
   @Override
   public void setValues(List<Shape> values) {
     this.values = values;
-}
+  }
 
 }

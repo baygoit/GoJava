@@ -1,6 +1,6 @@
 package ua.goit.shapeserializer.basicobjects;
 
-public final class Point extends Shape{
+public final class Point extends Shape {
   int x;
   int y;
 

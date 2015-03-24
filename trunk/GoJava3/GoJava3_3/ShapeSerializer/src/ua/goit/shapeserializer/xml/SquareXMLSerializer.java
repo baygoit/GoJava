@@ -14,9 +14,9 @@ public class SquareXMLSerializer extends ShapeXMLSerializer {
   public String serialize(Shape shape) {
     StringBuilder squareXML = new StringBuilder();
     Square square = (Square) shape;
-    
+
     SerializeClassHolder classHolder = SerializerFactory.getSerializerFor("xml");
-    
+
     squareXML.append("<square>\n");
     squareXML.append(classHolder.serialize(square.getA()));
     squareXML.append(classHolder.serialize(square.getB()));

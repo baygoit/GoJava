@@ -11,22 +11,22 @@ import ua.goit.shapeserializer.basicobjects.Shape;
 
 import java.util.List;
 
-public class GroupXMLSerializer extends ShapeXMLSerializer  {
+public class GroupXMLSerializer extends ShapeXMLSerializer {
 
-    @Override
-    public String serialize(Shape arg) {
-	Group groupShapes = (Group) arg;
-	StringBuilder result = new StringBuilder();
-	List<Shape> shapes = groupShapes.getValues();
-	
-        SerializeClassHolder classHolder = SerializerFactory.getSerializerFor("xml");
-	//  result.append(new SerializeXMLClassHolder().getSerializator(shape).serialize(circle.getCenter()));
-	result.append("<Group>\n");
-	for (Shape shape : shapes) {
-	    result.append(classHolder.serialize(shape));
-	}
-	result.append("</Group>\n");
+  @Override
+  public String serialize(Shape arg) {
+    Group groupShapes = (Group) arg;
+    StringBuilder result = new StringBuilder();
+    List<Shape> shapes = groupShapes.getValues();
 
-	return result.toString();
+    SerializeClassHolder classHolder = SerializerFactory.getSerializerFor("xml");
+    //  result.append(new SerializeXMLClassHolder().getSerializator(shape).serialize(circle.getCenter()));
+    result.append("<Group>\n");
+    for (Shape shape : shapes) {
+      result.append(classHolder.serialize(shape));
     }
+    result.append("</Group>\n");
+
+    return result.toString();
+  }
 }

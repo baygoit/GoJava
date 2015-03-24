@@ -15,7 +15,7 @@ public class TriangleXMLSerializer extends ShapeXMLSerializer {
     StringBuilder result = new StringBuilder();
     Triangle triangle = (Triangle) shape;
     SerializeClassHolder classHolder = SerializerFactory.getSerializerFor("xml");
-    
+
     result.append("<triangle>\n ");
     result.append(classHolder.serialize(triangle.getA()));
     result.append(classHolder.serialize(triangle.getB()));

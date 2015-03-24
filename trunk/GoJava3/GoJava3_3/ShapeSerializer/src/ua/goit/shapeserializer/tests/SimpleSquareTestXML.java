@@ -14,16 +14,16 @@ public class SimpleSquareTestXML {
 
   @Test
   public void test() {
-      
-      
-      Shape square = new Square(new Point(10,10),new Point(20,20));    
-    
+
+
+    Shape square = new Square(new Point(10, 10), new Point(20, 20));
+
     String expected = "<square><point><x>10</x><y>10</y></point><point><x>20</x><y>20</y></point></square>";
     SerializeClassHolder clHolder = SerializerFactory.getSerializerFor("xml");
     String actual = clHolder.serialize(square);
     actual = actual.replace(" ", "");
     actual = actual.replace("\n", "");
     assertEquals(expected, actual);
-   }
+  }
 
 }
