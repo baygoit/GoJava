@@ -9,8 +9,9 @@ public class Count {
     public static void main(String[] args) throws IOException {
 
         FileReader fileReader = null;
+        URL path = ClassLoader.getSystemResource("text.txt");
         try {
-            fileReader = new FileReader("D:\\IdeaProjects\\Read File\\text.txt");
+            fileReader = new FileReader(String.valueOf(path));
             char[] buffer = new char[1024];
             int count = 0;
             while (fileReader.ready()){
