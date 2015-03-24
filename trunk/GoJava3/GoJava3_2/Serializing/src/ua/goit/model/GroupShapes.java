@@ -2,10 +2,11 @@ package ua.goit.model;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 public class GroupShapes implements ContainerShapes {
   private Types type = Types.GROUP;
-  private ArrayList<ContainerShapes> shapesList = new ArrayList<ContainerShapes>();
+  private List<ContainerShapes> shapesList = new ArrayList<ContainerShapes>();
 
   public void add(ContainerShapes containerShapes) {
     shapesList.add(containerShapes);
