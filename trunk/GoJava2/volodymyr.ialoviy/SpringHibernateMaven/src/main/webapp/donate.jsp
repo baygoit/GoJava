@@ -20,7 +20,7 @@
 	<table border="2" bordercolor="black" cellpadding="2">
 		<tr>
 			<td>invest project</td>
-			<td><a href="donate-0-amount-${idproject}-project">any amount</a></td>
+			<td><a href="donatesuccess?amount=10000&project=${idproject}">any amount</a></td>
 			<td>thanks</td>
 		</tr>
 		<tr>
@@ -30,12 +30,12 @@
 		</tr>
 		<tr>
 			<td>invest project</td>
-			<td><a href="donate-5-amount-${idproject}-project">5 dollars</a></td>
+			<td><a href="donatesuccess?amount=5&project=${idproject}">5 dollars</a></td>
 			<td>you get 1 month software license</td>
 		</tr>
 		<tr>
 			<td>invest project</td>
-			<td><a href="donate-10-amount-${idproject}-project">10 dollars</a></td>
+			<td><a href="donatesuccess?amount=10&project=${idproject}">10 dollars</a></td>
 			<td>you get you link in our site</td>
 		</tr>
 	</table>

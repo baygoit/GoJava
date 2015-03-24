@@ -67,6 +67,7 @@ public class AppController {
 		projectService.addDonate(amount, project);
 
 		model.addAttribute("success", "Donate " + amount + " successfully");
+		model.addAttribute("project", project);
 		return "donatesuccess";
 	}
 
