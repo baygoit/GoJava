@@ -20,7 +20,9 @@ public class Main {
 
     SerializeClassHolder clHolder = SerializerFactory.getSerializerFor("xml");
     String res = clHolder.serialize(gr2);
-
+    System.out.println(res);
+    clHolder = SerializerFactory.getSerializerFor("json");
+    res = clHolder.serialize(gr2);
     System.out.println(res);
   }
 }
