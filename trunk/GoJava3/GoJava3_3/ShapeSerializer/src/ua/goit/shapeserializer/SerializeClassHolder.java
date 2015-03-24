@@ -24,7 +24,6 @@ public abstract class SerializeClassHolder {
       return ((Class<? extends ShapeSerializer>) clazz).newInstance();
 
     } catch (InstantiationException | IllegalAccessException e) {
-      // TODO Auto-generated catch block
       e.printStackTrace();
     }
     return null;
