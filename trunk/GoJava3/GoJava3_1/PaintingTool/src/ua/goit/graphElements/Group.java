@@ -2,6 +2,11 @@ package ua.goit.graphElements;
 
 import java.util.ArrayList;
 
+/**
+ * Interface for group of element
+ * @author Anton Yarosh
+ *
+ */
 public interface Group {
     public ArrayList<Element> getElements();
     public ArrayList<Group> getGroups();
