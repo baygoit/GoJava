@@ -14,4 +14,6 @@ public interface ProjectDao {
 
 	Project getProgect(Integer idProject);
 
+	void addDonate(Integer amount, Integer idProject);
+
 }

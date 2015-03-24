@@ -56,9 +56,17 @@ public class AppController {
 	@RequestMapping(value = { "/donate" }, method = RequestMethod.GET)
 	public String donate(ModelMap model, HttpServletRequest req) {
 		Integer idproject = Integer.valueOf(req.getParameter("idproject"));
-		System.out.println(idproject);
 		model.addAttribute("idproject", idproject);
 		return "donate";
+	}
+	
+	@RequestMapping(value = { "/donate-{amount}-amount-{idProject}-project" }, method = RequestMethod.GET)
+	public String saveDonate(@PathVariable Integer amount, @PathVariable Integer idProject, ModelMap model) {
+
+		projectService.addDonate(amount, idProject);
+
+		model.addAttribute("success", "Donate " + amount + " successfully");
+		return "donatesuccess";
 	}
 
 	@RequestMapping(value = { "/newcategory" }, method = RequestMethod.GET)

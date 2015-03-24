@@ -36,4 +36,9 @@ public class ProjectServiceImpl implements ProjectService{
 		return dao.getProgect(idProject);
 	}
 
+	@Override
+	public void addDonate(Integer amount, Integer idProject) {
+		dao.addDonate(amount, idProject);		
+	}
+
 }
