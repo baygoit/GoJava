@@ -7,7 +7,7 @@ import java.util.HashMap;
 /**
  * Created by Alex on 24.03.2015.
  */
-public class AdapterMaps {
+public final class AdapterMaps {
   private static HashMap<Types, Serializer> XMLMap = new HashMap<Types, Serializer>()
   {{
     put(Types.GROUP, new GroupAdapterXML());
