@@ -130,10 +130,10 @@ public class TestCases {
         Serializer jsonSerializer = SerializerFactory.getSerializer(SerializerType.JSON);
         String shapeStringJSON = jsonSerializer.serialize(groupShapes);
         String expectedResult = "{\"group\":{\"triangle\":{\"point1\":{\"x\":1,\"y\":1},\"point2\":"+
-        "{\"x\":2,\"y\":3},\"point3\":{\"x\":-1,\"y\":4},\"group\":{\"circle\":"+
-        "{\"center\":{\"x\":3,\"y\":-2},\"radius\":3},\"rectangle\":"+
-        "{\"point1\":{\"x\":3,\"y\":-2},\"length\":6}}}}}";
-        System.out.println(expectedResult);
+        "{\"x\":2,\"y\":3},\"point3\":{\"x\":-1,\"y\":4}}}{\"group\":{\"triangle\":{\"point1\":{\"x\":2,\"y\":3}"+
+        ",\"point2\":{\"x\":-1,\"y\":4},\"point3\":{\"x\":3,\"y\":-2}}}{\"circle\":{\"center\":{\"x\":2,\"y\":3},\"radius\":5}}"+
+        "{\"square\":{\"point1\":{\"x\":-1,\"y\":4},\"length\":5}}}{\"group\":{\"circle\":{\"center\":{\"x\":3,\"y\":-2},\"radius\":3}}"+
+        "{\"square\":{\"point1\":{\"x\":3,\"y\":-2},\"length\":6}}}}";
         assertEquals(expectedResult, shapeStringJSON);
     }
 }
