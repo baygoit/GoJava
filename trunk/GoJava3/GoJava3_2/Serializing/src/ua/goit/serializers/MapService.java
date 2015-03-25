@@ -27,6 +27,14 @@ public final class MapService {
     }
   };
 
+  private static Map<SerializerType, Class<? extends Serializer>> serializerTypeMap = new HashMap<SerializerType, Class<? extends Serializer>>() {
+    private static final long serialVersionUID = 484368758921456L;
+    {
+      put(SerializerType.XML, XMLSerializer.class);
+      put(SerializerType.JSON, JSONSerializer.class);
+    }
+  };
+
   public static Serializer getValue(Types type, SerializerType serializerType) {
     try {
       if (serializerType == SerializerType.XML) {
@@ -36,7 +44,15 @@ public final class MapService {
       }
     } catch (Exception e) {
       e.printStackTrace();
-      System.exit(1);
+    }
+    return null;
+  }
+
+  public static Serializer getSerializer(SerializerType type) {
+    try {
+      return serializerTypeMap.get(type).newInstance();
+    } catch (Exception e) {
+      e.printStackTrace();
     }
     return null;
   }
