@@ -6,21 +6,26 @@ import java.util.HashMap;
 import java.util.Map;
 
 public final class AdapterMaps {
-  private static Map<Types, Class<? extends Serializer>> XMLMap = new HashMap<Types, Class<? extends Serializer>>()
-  {{
-    put(Types.GROUP, GroupAdapterXML.class);
-    put(Types.CIRCLE, CircleAdapterXML.class);
-    put(Types.TRIANGLE, TriangleAdapterXML.class);
-    put(Types.SQUARE, SquareAdapterXML.class);
-  }};
+  private static Map<Types, Class<? extends Serializer>> XMLMap = new HashMap<Types, Class<? extends Serializer>>() {
+    private static final long serialVersionUID = 4843687589214561824L;
+    {
+      put(Types.GROUP, GroupAdapterXML.class);
+      put(Types.CIRCLE, CircleAdapterXML.class);
+      put(Types.TRIANGLE, TriangleAdapterXML.class);
+      put(Types.SQUARE, SquareAdapterXML.class);
+    }
+  };
 
   private static Map<Types, Class<? extends Serializer>> JSONMap = new HashMap<Types, Class<? extends Serializer>>()
-  {{
-    put(Types.GROUP, GroupAdapterJSON.class);
-    put(Types.CIRCLE, CircleAdapterJSON.class);
-    put(Types.TRIANGLE, TriangleAdapterJSON.class);
-    put(Types.SQUARE, SquareAdapterJSON.class);
-  }};
+ {
+    private static final long serialVersionUID = 1L;
+    {
+      put(Types.GROUP, GroupAdapterJSON.class);
+      put(Types.CIRCLE, CircleAdapterJSON.class);
+      put(Types.TRIANGLE, TriangleAdapterJSON.class);
+      put(Types.SQUARE, SquareAdapterJSON.class);
+    }
+  };
 
   public static Serializer getValue(Types type, SerializerType serializerType) {
     try {
