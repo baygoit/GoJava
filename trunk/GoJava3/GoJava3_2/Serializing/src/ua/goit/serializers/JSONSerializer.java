@@ -6,7 +6,7 @@ public class JSONSerializer implements Serializer {
 
   @Override
   public String serialize(ContainerShapes object) {
-    Serializer serializer = MapService.getValue(object.getType(), SerializerType.JSON);
+    Serializer serializer = MapService.getAdapter(object.getType(), SerializerType.JSON);
     return serializer.serialize(object);
   }
 }

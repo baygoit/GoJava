@@ -35,7 +35,7 @@ public final class MapService {
     }
   };
 
-  public static Serializer getValue(Types type, SerializerType serializerType) {
+  public static Serializer getAdapter(Types type, SerializerType serializerType) {
     try {
       if (serializerType == SerializerType.XML) {
         return XMLMap.get(type).newInstance();
