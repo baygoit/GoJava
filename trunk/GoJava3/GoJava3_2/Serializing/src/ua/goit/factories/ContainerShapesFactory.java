@@ -4,6 +4,6 @@ import ua.goit.model.*;
 
 public interface ContainerShapesFactory {
 
-    ContainerShapes getShapeContainer();
+  ContainerShapes getShapeContainer();
 
 }

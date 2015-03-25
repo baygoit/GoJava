@@ -6,7 +6,6 @@ import ua.goit.serializers.Serializer;
 
 public class TriangleAdapterJSON implements Serializer{
 
-
   @Override
   public String serialize(ContainerShapes object) {
     Triangle triangle = (Triangle) object;
@@ -37,7 +36,5 @@ public class TriangleAdapterJSON implements Serializer{
     json.append("}");
     return json.toString();
   }
-
-
 
 }
