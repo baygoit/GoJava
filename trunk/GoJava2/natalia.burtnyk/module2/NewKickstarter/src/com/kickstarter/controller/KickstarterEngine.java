@@ -3,9 +3,9 @@ package com.kickstarter.controller;
 import java.util.List;
 
 import com.kickstarter.model.Categories;
+import com.kickstarter.model.QuotesDao;
 import com.kickstarter.model.Project;
 import com.kickstarter.model.Projects;
-import com.kickstarter.model.QuotesStorage;
 import com.kickstarter.model.Сategory;
 import com.kickstarter.view.In;
 import com.kickstarter.view.View;
@@ -15,13 +15,13 @@ public class KickstarterEngine {
 
 	private In inPut;
 	private View consoleView;
-	private QuotesStorage quotesStorage;
+	private QuotesDao quotesStorage;
 	private Categories categoriesStorage;
 	private Projects projectStorage;
 	
 
 	public KickstarterEngine(View consoleView,
-			QuotesStorage quotesStorage, In inPut, Categories categories,
+			QuotesDao quotesStorage, In inPut, Categories categories,
 			Projects projectStorage) {
 		
 		this.consoleView = consoleView;
@@ -74,7 +74,7 @@ public class KickstarterEngine {
 
 	public void run() {
 		consoleView.displayWelcome();
-		consoleView.displayQuote(quotesStorage.getRundomQuote());
+		consoleView.displayQuote(quotesStorage.getRandomQuote());
 		consoleView.displayListCategories(categoriesStorage.getCategories());
 		consolePart_1();
 	}

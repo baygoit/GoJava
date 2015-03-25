@@ -3,9 +3,9 @@ package com.kickstarter.controller;
 import java.util.Random;
 
 import com.kickstarter.model.Categories;
-import com.kickstarter.model.InMemoryCategories;
+import com.kickstarter.model.QuotesDao;
+import com.kickstarter.model. CategoriesDao;
 import com.kickstarter.model.Projects;
-import com.kickstarter.model.QuotesStorage;
 import com.kickstarter.model.Project;
 import com.kickstarter.model.InMemoryProjects;
 import com.kickstarter.model.Сategory;
@@ -17,9 +17,9 @@ import com.kickstarter.view.InPutConsole;
 public class Kickstarter {
 
     public static void main(String[] args) {
-    	QuotesStorage quotesStorage = new QuotesStorage(new Random());
+    	QuotesDao quotesStorage = new QuotesDao();
     	View consoleView = new View(new OutConsole());
-    	Categories categories = new InMemoryCategories();
+    	Categories categories = new  CategoriesDao();
     	Projects projects = new InMemoryProjects();
     	In inPut = new InPutConsole();
     	
