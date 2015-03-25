@@ -5,7 +5,7 @@ import ua.goit.model.Types;
 import java.util.HashMap;
 import java.util.Map;
 
-public final class AdapterMaps {
+public final class MapService {
   private static Map<Types, Class<? extends Serializer>> XMLMap = new HashMap<Types, Class<? extends Serializer>>() {
     private static final long serialVersionUID = 4843687589214561824L;
     {

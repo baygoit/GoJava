@@ -6,7 +6,7 @@ public class XMLSerializer implements Serializer {
 
   @Override
   public String serialize(ContainerShapes object) {
-    Serializer serializer = AdapterMaps.getValue(object.getType(), SerializerType.XML);
+    Serializer serializer = MapService.getValue(object.getType(), SerializerType.XML);
     return serializer.serialize(object);
   }
 }
