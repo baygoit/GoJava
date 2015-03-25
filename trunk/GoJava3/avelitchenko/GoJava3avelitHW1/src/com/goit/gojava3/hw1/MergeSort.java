@@ -14,6 +14,9 @@ public class MergeSort {
 
     private static void mergeSort(int[] source, int[] destination, int start, int finish) {
         
+        if (start > finish) {
+            return;
+        }
         int length = finish - start + 1;
 
         if (length <= 2) {
