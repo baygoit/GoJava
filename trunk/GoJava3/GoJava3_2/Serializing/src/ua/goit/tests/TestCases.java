@@ -41,7 +41,7 @@ public class TestCases {
 
     Triangle triangle = newTestTriangle();
 
-    Serializer xmlSerializer = SerializerFactory.getSerializer(SerializerType.XML);
+    Serializer xmlSerializer = MapService.getSerializer(SerializerType.XML);
     String shapeStringXML = xmlSerializer.serialize(triangle);
 
     String expectedResult = "<triangle><point1><x>1</x><y>1</y></point1><point2><x>2</x><y>2</y></point2>" +
@@ -55,7 +55,7 @@ public class TestCases {
 
     Triangle triangle = newTestTriangle();
 
-    Serializer jsonSerializer = SerializerFactory.getSerializer(SerializerType.JSON);
+    Serializer jsonSerializer = MapService.getSerializer(SerializerType.JSON);
     String shapeStringJSON = jsonSerializer.serialize(triangle);
     String expectedResult = "{\"type\":\"TRIANGLE\",\"point1\":{\"x\":1,\"y\":1},\"point2\":{\"x\":2,\"y\":2}" +
             ",\"point3\":{\"x\":3,\"y\":3}}";
@@ -67,7 +67,7 @@ public class TestCases {
 
     GroupShapes groupShapes = newTestGroup();
 
-    Serializer xmlSerializer = SerializerFactory.getSerializer(SerializerType.XML);
+    Serializer xmlSerializer = MapService.getSerializer(SerializerType.XML);
     String shapeStringXML = xmlSerializer.serialize(groupShapes);
 
     String expectedResult = "<group><triangle><point1><x>1</x><y>1</y></point1><point2><x>2</x><y>2</y></point2>" +
@@ -81,7 +81,7 @@ public class TestCases {
 
     GroupShapes groupShapes = newTestGroup();
 
-    Serializer jsonSerializer = SerializerFactory.getSerializer(SerializerType.JSON);
+    Serializer jsonSerializer = MapService.getSerializer(SerializerType.JSON);
     String shapeStringJSON = jsonSerializer.serialize(groupShapes);
     String expectedResult = "{\"type\":\"GROUP\",\"shapesList\":[{\"type\":\"TRIANGLE\",\"point1\":" +
             "{\"x\":1,\"y\":1},\"point2\":{\"x\":2,\"y\":2},\"point3\":{\"x\":3,\"y\":3}}]}";
@@ -118,7 +118,7 @@ public class TestCases {
   @Test
   public void testMultipleGroupsXML() {
     GroupShapes groupShapes = bigTestGroup();
-    Serializer xmlSerializer = SerializerFactory.getSerializer(SerializerType.XML);
+    Serializer xmlSerializer = MapService.getSerializer(SerializerType.XML);
     String shapeStringXML = xmlSerializer.serialize(groupShapes);
 
     String expectedResult = "<group><triangle><point1><x>1</x><y>1</y></point1><point2><x>2</x><y>3</y></point2><point3><x>-1</x><y>4</y></point3>" +
@@ -132,7 +132,7 @@ public class TestCases {
   @Test
   public void testMultipleGroupsJSON() {
     GroupShapes groupShapes = bigTestGroup();
-    Serializer jsonSerializer = SerializerFactory.getSerializer(SerializerType.JSON);
+    Serializer jsonSerializer = MapService.getSerializer(SerializerType.JSON);
     String shapeStringJSON = jsonSerializer.serialize(groupShapes);
     String expectedResult = "{\"type\":\"GROUP\",\"shapesList\":[{\"type\":\"TRIANGLE\",\"point1\":{\"x\":1,\"y\":1},\"point2\":{\"x\":2,\"y\":3},\"point3\":" +
             "{\"x\":-1,\"y\":4}},{\"type\":\"GROUP\",\"shapesList\":[{\"type\":\"TRIANGLE\",\"point1\":{\"x\":2,\"y\":3},\"point2\":{\"x\":-1,\"y\":4},\"point3\":{\"x\":3,\"y\":-2}}" +
@@ -145,7 +145,7 @@ public class TestCases {
   public void testCircleSerializationJSON() {
 
     Circle circle = new Circle(new Point(1, 2), 5);
-    Serializer jsonSerializer = SerializerFactory.getSerializer(SerializerType.JSON);
+    Serializer jsonSerializer = MapService.getSerializer(SerializerType.JSON);
 
     String shapeStringJSON = jsonSerializer.serialize(circle);
     String expectedResult = "{\"radius\":5,\"center\":{\"x\":1,\"y\":2},\"type\":\"CIRCLE\"}";
@@ -157,7 +157,7 @@ public class TestCases {
   public void testSquareSerializationJSON() {
 
     Square square = new Square(new Point(1, 2), 5);
-    Serializer jsonSerializer = SerializerFactory.getSerializer(SerializerType.JSON);
+    Serializer jsonSerializer = MapService.getSerializer(SerializerType.JSON);
 
     String shapeStringJSON = jsonSerializer.serialize(square);
     String expectedResult = "{\"type\":\"SQUARE\",\"point1\":{\"x\":1,\"y\":2},\"length\":5}";

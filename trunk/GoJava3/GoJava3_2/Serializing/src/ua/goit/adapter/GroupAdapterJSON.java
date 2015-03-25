@@ -13,7 +13,7 @@ public class GroupAdapterJSON implements Serializer {
     GroupShapes group = (GroupShapes) container;
     for (int i = 0; i < group.size(); i++) {
       ContainerShapes localContainer = group.get(i);
-      serializer = SerializerFactory.getSerializer(SerializerType.JSON);
+      serializer = MapService.getSerializer(SerializerType.JSON);
       result.append(serializer.serialize(localContainer));
       if (i != group.size() - 1) {
         result.append(",");

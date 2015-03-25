@@ -13,7 +13,7 @@ public class GroupAdapterXML implements Serializer {
     result.append("<group>");
     for (int i = 0; i < group.size(); i++) {
       ContainerShapes localContainer = group.get(i);
-      serializer = SerializerFactory.getSerializer(SerializerType.XML);
+      serializer = MapService.getSerializer(SerializerType.XML);
       result.append(serializer.serialize(localContainer));
     }
     result.append("</group>");
