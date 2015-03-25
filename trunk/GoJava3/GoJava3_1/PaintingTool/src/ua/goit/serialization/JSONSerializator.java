@@ -21,8 +21,6 @@ public class JSONSerializator extends Serializator {
   private char closeBracketS = ']';
   @Override
   public StringBuffer serialize(Element element) {
-
-    //tab.append(oneTab);
     bufAppend(tab.toString() + openBracket + enter);
     bufAppend(tab.toString() + dQ + "Name" + dQ + " : "
             + element.getName() + enter);
