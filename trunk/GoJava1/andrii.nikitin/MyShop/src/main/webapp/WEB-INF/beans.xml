@@ -4,7 +4,11 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
 	http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
  
-	<bean id="PostgresqlDaoFactory" class="ua.com.goit.gojava.andriidnikitin.MyShop.db.PostgresqlDaoFactory">		
+	<bean id="daoFactory" class="ua.com.goit.gojava.andriidnikitin.MyShop.db.PostgresqlDaoFactory">		
 	</bean>
+	
+	<bean id="applicationContextProvider" 
+		class="ua.com.goit.gojava.andriidnikitin.MyShop.commons.MyContextLoader">
+   </bean>
 	 	
 </beans>

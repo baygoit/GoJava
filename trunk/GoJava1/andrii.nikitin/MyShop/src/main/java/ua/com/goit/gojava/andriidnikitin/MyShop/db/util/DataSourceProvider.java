@@ -26,6 +26,12 @@ public class DataSourceProvider {
         } catch (NamingException e) {
             log.error("lookuping datasource by " + CLASSNAME, e);
         }
+        if (ds==null){
+        	 log.warn("DataSource is null");
+        }    
+        else {
+        	log.info("DataSource successfully created");
+        }
         return ds;
     }
 }

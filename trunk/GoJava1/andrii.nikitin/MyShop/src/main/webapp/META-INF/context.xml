@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Context path="/MyShop">
-    <Resource 
+	<Resource 
         driverClassName="org.postgresql.Driver" 
         maxActive="12" 
         maxIdle="2" 

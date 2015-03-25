@@ -12,6 +12,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import ua.com.goit.gojava.andriidnikitin.MyShop.commons.ErrorLogger;
+import ua.com.goit.gojava.andriidnikitin.MyShop.db.util.DataSourceProvider;
 import ua.com.goit.gojava.andriidnikitin.MyShop.db.util.MyShopDaoException;
 import ua.com.goit.gojava.andriidnikitin.MyShop.domain.model.Good;
 import ua.com.goit.gojava.andriidnikitin.MyShop.domain.model.GoodIncoming;
@@ -20,8 +21,12 @@ public class PostgresqlDaoFactory  implements DaoFactory {
 
    private String driver = "org.postgresql.Driver";
    
-   @Autowired
-   private DataSource dataSource;   
+   /*
+    * @Autowired
+   private DataSource dataSource;  
+   */ 
+   //TODO - delete
+   private DataSource dataSource = DataSourceProvider.getDataSource();  
       
    private static PostgresqlDaoFactory instance = null;
    
@@ -36,7 +41,8 @@ public class PostgresqlDaoFactory  implements DaoFactory {
 	   return instance;
    }
     
-    public Connection getConnection() throws MyShopDaoException {    	
+    public Connection getConnection() throws MyShopDaoException {   
+    	log.info("datasource is null?" + dataSource==null);
         try {
 			return dataSource.getConnection();
 		} catch (SQLException e) {

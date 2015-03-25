@@ -8,6 +8,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import ua.com.goit.gojava.andriidnikitin.MyShop.commons.ErrorLogger;
+import ua.com.goit.gojava.andriidnikitin.MyShop.commons.MyContextLoader;
 import ua.com.goit.gojava.andriidnikitin.MyShop.db.DaoFactory;
 import ua.com.goit.gojava.andriidnikitin.MyShop.db.GenericDao;
 import ua.com.goit.gojava.andriidnikitin.MyShop.db.util.MyShopDaoException;
@@ -18,8 +19,8 @@ import ua.com.goit.gojava.andriidnikitin.MyShop.domain.util.MyShopException;
 
 public class GoodCatalogImpl implements GoodCatalog{	
 	
-	@Autowired
-	private DaoFactory daoFactory;
+	//@Autowired
+	private DaoFactory daoFactory =  MyContextLoader.getBean("daoFactory");
 
 	private static Logger log = Logger.getLogger("MyShop.BL");
 	
@@ -31,7 +32,7 @@ public class GoodCatalogImpl implements GoodCatalog{
 		}
 		return instance;
 	}
-
+	
 	public GoodType createType(String name, Integer parentId) throws MyShopException {
 		 try (Connection con = daoFactory.getConnection()) {
 		        GenericDao<GoodType> dao = daoFactory.getGoodTypeDao(con);
@@ -192,7 +193,26 @@ public class GoodCatalogImpl implements GoodCatalog{
 	}
 
 	public List<Good> getAllGoods() throws MyShopException {
-		 try (Connection con = daoFactory.getConnection()) {
+		Connection con=null;
+		 try {
+			 log.info("started setting a connection.");
+			 if (daoFactory == null){
+				 log.warn("daoFactory is null");
+				 try{
+				 daoFactory = MyContextLoader.getBean("daoFactory");
+				 } catch (Exception e){
+					 String error = e.getClass().toString();
+					 log.error("unable to initialize daoFactory with Spring because of " + error);
+				 }
+				 if (daoFactory == null){
+					 log.error("unable to initialize daoFactory");
+				 }
+			 }
+				con = daoFactory.getConnection();
+				log.info("connection recieved");
+				if (con==null){
+					log.error("failed to establish connection to db");
+				}
 		        GenericDao<Good> dao = daoFactory.getGoodDao(con);
 		        List<Good> list = dao.getAll();
 		        return list;
@@ -203,6 +223,16 @@ public class GoodCatalogImpl implements GoodCatalog{
 				ErrorLogger.logSQLException(e, errorSpot, log);
 			 throw new MyShopException (e);		 
 		 }	
+		 finally{
+			 try {
+				con.close();
+			} catch (Exception e) {
+				if (con==null){
+					log.error("fail to establish connection to db");
+				}
+				log.error("unable to close connection!");
+			}
+		 }
 	}
 
 	

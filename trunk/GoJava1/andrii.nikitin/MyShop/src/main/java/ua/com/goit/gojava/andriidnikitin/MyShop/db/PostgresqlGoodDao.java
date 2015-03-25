@@ -11,14 +11,15 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import ua.com.goit.gojava.andriidnikitin.MyShop.commons.ErrorLogger;
+import ua.com.goit.gojava.andriidnikitin.MyShop.commons.MyContextLoader;
 import ua.com.goit.gojava.andriidnikitin.MyShop.db.util.MyShopDaoException;
 import ua.com.goit.gojava.andriidnikitin.MyShop.domain.model.Good;
 import ua.com.goit.gojava.andriidnikitin.MyShop.domain.model.GoodType;
 
 public class PostgresqlGoodDao implements GenericDao<Good> {
 	private Connection connection;
-	@Autowired
-    private DaoFactory factory;
+	//@Autowired
+	private DaoFactory factory =  PostgresqlDaoFactory.getInstance();
 	private static Logger log = Logger.getLogger("MyShop.DAO");
 	private static final String CLASSNAME = PostgresqlGoodDao.class.getCanonicalName();
 	private static final String GOOD_CLASSNAME = Good.class.getCanonicalName();
