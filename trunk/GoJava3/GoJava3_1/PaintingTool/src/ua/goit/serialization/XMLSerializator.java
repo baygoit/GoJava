@@ -33,18 +33,17 @@ public class XMLSerializator extends Serializator {
     @Override
     public StringBuffer serialize(Group group) {
         if (group.getGroups() != null || group.getGroups().size() <= 0 ) {
-            buffer.append("<" + group.getName() + ">");
+            buffer.append("<" + group.getType() + ">" + group.getName());
             for (Group inGroup : group.getGroups()) {
                 serialize(inGroup);
             }
-            buffer.append("</" + group.getName() + ">");
-
         }
         if (group.getElements() != null || group.getElements().size() <= 0) {
             for (Element element : group.getElements()) {
                 serialize(element);
             }
         }
+        buffer.append("</" + group.getType() + ">");
 
         return buffer;
     }
@@ -54,7 +53,7 @@ public class XMLSerializator extends Serializator {
         try {
             FileWriter fw = new FileWriter(file.getAbsoluteFile());
             BufferedWriter bw = new BufferedWriter(fw);
-            bw.write("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>");
+            bw.write("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>");
             bw.write("<elements>");
             bw.write(source.toString());
             bw.write("</elements");
@@ -63,6 +62,9 @@ public class XMLSerializator extends Serializator {
         }catch (IOException e) {
             e.printStackTrace();
         }
+
+
+
 
     }
 
