@@ -54,7 +54,7 @@ public class XMLSerializator extends Serializator {
         try {
             FileWriter fw = new FileWriter(file.getAbsoluteFile());
             BufferedWriter bw = new BufferedWriter(fw);
-            bw.write("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>");
+            bw.write("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>");
             bw.write("<elements>");
             bw.write(source.toString());
             bw.write("</elements");
