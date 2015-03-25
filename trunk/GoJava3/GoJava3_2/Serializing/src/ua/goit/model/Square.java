@@ -29,7 +29,7 @@ public class Square implements Shape {
     return length;
   }
 
-  public void setlength(int length) {
+  public void setLength(int length) {
     this.length = length;
   }
 }
