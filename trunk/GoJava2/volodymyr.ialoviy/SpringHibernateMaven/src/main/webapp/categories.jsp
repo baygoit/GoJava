@@ -28,7 +28,7 @@
 			<td><a href="projects?category=${category.idCategory}"><c:out value="${category.name}"/></a></td>
 			</tr>
 		</c:forEach>
-	</table>
+	</table>zzz
 	<br/>
 	<a href="<c:url value='/newcategory' />">Add New Category</a>
 </body>

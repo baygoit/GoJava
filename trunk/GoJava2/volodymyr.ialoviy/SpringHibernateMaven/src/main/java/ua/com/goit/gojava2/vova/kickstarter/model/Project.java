@@ -4,9 +4,12 @@ import java.util.ArrayList;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -69,6 +72,18 @@ public class Project {
 	@Column(name = "FAQ")
 	private ArrayList<String> faq;
 	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "ID_CATEGORY", nullable = false, insertable = false, updatable = false)
+	private Category category;
+	
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+
 	public ArrayList<String> getFaq() {
 		return faq;
 	}
