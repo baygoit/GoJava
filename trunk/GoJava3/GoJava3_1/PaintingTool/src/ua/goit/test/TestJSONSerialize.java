@@ -26,53 +26,53 @@ public class TestJSONSerialize {
   private Group group2 = new GroupImpl("group2");
   private Group group3 = new GroupImpl("group3");
   private ConcreteFactory factory = new ConcreteFactory();
-  private String withoutGroup = "    {\n" +
-          "    \"Name\" : triangel1\n" +
-          "    \"Type\" : tiangle\n" +
-          "    \"Points\" : [\n" +
-          "        \"Point\" : (1, 2)\n" +
-          "        \"Point\" : (2, 1)\n" +
-          "    ]\n" +
-          "    }" + "\n";
+  private String withoutGroup = "{\n" +
+          "\"Name\" : \"triangel1\"\n" +
+          "\"Type\" : \"Triangle\"\n" +
+          "\"Points\" : [\n" +
+          "    \"Point\" : \"(1, 2)\"\n" +
+          "    \"Point\" : \"(2, 1)\"\n" +
+          "]\n" +
+          "}\n";
 
   private String oneGroup = "group1 {\n" +
-          "        {\n" +
-          "        \"Name\" : triangel1\n" +
-          "        \"Type\" : tiangle\n" +
-          "        \"Points\" : [\n" +
-          "        ]\n" +
-          "        }\n" +
-          "        {\n" +
-          "        \"Name\" : triangel2\n" +
-          "        \"Type\" : tiangle\n" +
-          "        \"Points\" : [\n" +
-          "            \"Point\" : (1, 2)\n" +
-          "            \"Point\" : (2, 1)\n" +
-          "        ]\n" +
-          "        }\n" +
+          "    {\n" +
+          "    \"Name\" : \"triangel1\"\n" +
+          "    \"Type\" : \"Triangle\"\n" +
+          "    \"Points\" : [\n" +
+          "        \"Point\" : \"(1, 2)\"\n" +
+          "    ]\n" +
+          "    }\n" +
+          "    {\n" +
+          "    \"Name\" : \"triangel2\"\n" +
+          "    \"Type\" : \"Triangle\"\n" +
+          "    \"Points\" : [\n" +
+          "        \"Point\" : \"(2, 1)\"\n" +
+          "    ]\n" +
+          "    }\n" +
           "}\n";
   private String gropeInGroup = "group2 {\n" +
+          "    group1 {\n" +
           "        {\n" +
-          "        \"Name\" : triangel3\n" +
-          "        \"Type\" : tiangle\n" +
+          "        \"Name\" : \"triangel1\"\n" +
+          "        \"Type\" : \"Triangle\"\n" +
           "        \"Points\" : [\n" +
           "        ]\n" +
           "        }\n" +
-          "    group1 {\n" +
-          "            {\n" +
-          "            \"Name\" : triangel1\n" +
-          "            \"Type\" : tiangle\n" +
-          "            \"Points\" : [\n" +
-          "            ]\n" +
-          "            }\n" +
-          "            {\n" +
-          "            \"Name\" : triangel2\n" +
-          "            \"Type\" : tiangle\n" +
-          "            \"Points\" : [\n" +
-          "                \"Point\" : (1, 2)\n" +
-          "                \"Point\" : (2, 1)\n" +
-          "            ]\n" +
-          "            }\n" +
+          "        {\n" +
+          "        \"Name\" : \"triangel2\"\n" +
+          "        \"Type\" : \"Triangle\"\n" +
+          "        \"Points\" : [\n" +
+          "            \"Point\" : \"(1, 2)\"\n" +
+          "            \"Point\" : \"(2, 1)\"\n" +
+          "        ]\n" +
+          "        }\n" +
+          "    }\n" +
+          "    {\n" +
+          "    \"Name\" : \"triangel3\"\n" +
+          "    \"Type\" : \"Triangle\"\n" +
+          "    \"Points\" : [\n" +
+          "    ]\n" +
           "    }\n" +
           "}\n";
 
