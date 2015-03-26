@@ -34,9 +34,7 @@ public class FileProcessor {
     brArray = initializeBrArrays();
     currentIntegers = new int[temporaryFilesCounter];
     isValues = new boolean[temporaryFilesCounter];
-    for (int i = 0; i < temporaryFilesCounter; i++) {
-      getNextInteger(i);
-    }
+    initializeValues();
 
     try {
       BufferedWriter br = new BufferedWriter(new FileWriter(file));
@@ -74,11 +72,13 @@ public class FileProcessor {
     }
     if (minIntegerPosition == -1) {
       havingValues = false;
+    } else {
+      getNextValue(minIntegerPosition);
     }
     return minInteger;
   }
 
-  public static void getNextInteger(int i) {
+  public static void getNextValue(int i) {
     try {
       BufferedReader br = brArray[i];
       StringBuilder currentString = new StringBuilder();
@@ -91,17 +91,24 @@ public class FileProcessor {
           } else if (currentString.length() != 0) {
             currentIntegers[i] = Integer.parseInt(currentString.toString());
             isValues[i] = true;
-            break;
+            return;
           }
-        } else if (currentString.length() != 0) {
-          currentIntegers[i] = Integer.parseInt(currentString.toString());
-          isValues[i] = true;
-        } else {
-          isValues[i] = false;
         }
+      }
+      if (currentString.length() != 0) {
+        currentIntegers[i] = Integer.parseInt(currentString.toString());
+        isValues[i] = true;
+      } else {
+        isValues[i] = false;
       }
     } catch (IOException e) {
       e.printStackTrace();
+    }
+  }
+
+  public static void initializeValues() {
+    for (int i = 0; i < temporaryFilesCounter; i++) {
+      getNextValue(i);
     }
   }
 
@@ -135,7 +142,7 @@ public class FileProcessor {
   }
 
   private static void closeBrs() {
-    for (int i = 0; i < currentIntegers.length; i++) {
+    for (int i = 0; i < temporaryFilesCounter; i++) {
       try {
         brArray[i].close();
       } catch (IOException e) {
@@ -148,9 +155,7 @@ public class FileProcessor {
   public static void delete(File file) throws IOException {
     if (file.isDirectory()) {
       if (file.list().length == 0) {
-        if (!file.delete()) {
-          System.out.println(file.getAbsolutePath());
-        }
+        file.delete();
       } else {
         String files[] = file.list();
         for (String temp : files) {
@@ -158,15 +163,11 @@ public class FileProcessor {
           delete(fileDelete);
         }
         if (file.list().length == 0) {
-          if (!file.delete()) {
-            System.out.println(file.getAbsolutePath());
-          }
+          file.delete();
         }
       }
     } else {
-      if (!file.delete()) {
-        System.out.println(file.getAbsolutePath());
-      }
+      file.delete();
     }
   }
 
