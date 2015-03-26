@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -40,7 +39,7 @@ public class FileProcessor {
     }
 
     try {
-      FileOutputStream fop = new FileOutputStream(file);
+      BufferedWriter br = new BufferedWriter(new FileWriter(file));
       if (!file.exists()) {
         file.createNewFile();
       }
@@ -55,11 +54,10 @@ public class FileProcessor {
           str += " ";
         }
         str += String.valueOf(nextMinInteger);
-        fop.write(str.getBytes());
-        fop.flush();
+        br.write(str);
         needSpaceSeparator = true;
       }
-      fop.close();
+      br.close();
     } catch (IOException e) {
       e.printStackTrace();
     }
