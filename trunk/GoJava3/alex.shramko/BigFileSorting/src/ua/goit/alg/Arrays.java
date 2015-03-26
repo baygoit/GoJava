@@ -5,6 +5,19 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
+/**
+ * Using for sorting numbres in text files
+ * MAX_ARRAY_SIZE - buffer size: size of the sub-array which the file will divided at
+ * executional method: 
+ *    Arrays.mergesort(File file);
+ * this method rewrite our file with new sorted data
+ *    
+ * data format of the file:
+ *    "1 2 3 .. n-1 n"
+ * 
+ * @author Александр
+ *
+ */
 public class Arrays {
 
   public static final int MAX_ARRAY_SIZE = 4;

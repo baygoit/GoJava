@@ -11,6 +11,11 @@ import org.junit.Test;
 import ua.goit.alg.Arrays;
 import ua.goit.alg.FileProcessor;
 
+/** 
+ * 
+ * @author Александр
+ *
+ */
 public class ArraysTest {
 
   @Before
