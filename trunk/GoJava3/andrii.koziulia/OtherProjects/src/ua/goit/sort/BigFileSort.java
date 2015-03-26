@@ -10,39 +10,38 @@ import java.util.List;
  */
 
 public class BigFileSort {
-  private static int tempFileCounter = 0;
-  private static ArrayList<BufferedReader> readerList = new ArrayList<BufferedReader>();
-  private static ArrayList<BufferedReader> readerListToClose = new ArrayList<BufferedReader>();
-  private static ArrayList<File> tempFiles = new ArrayList<File>();
+  private int tempFileCounter = 0;
+  private ArrayList<BufferedReader> readerList = new ArrayList<BufferedReader>();
+  private ArrayList<BufferedReader> readersToClose = new ArrayList<BufferedReader>();
+  private ArrayList<File> tempFiles = new ArrayList<File>();
 
   public static void main(String[] args) {
-    sortBigFile("D:\\JavaProjects\\GoIT\\Other Projects\\test.txt");
+    new BigFileSort().sortBigFile("D:\\JavaProjects\\GoIT\\Other Projects\\test.txt");
+    //test file: http://edx.prometheus.org.ua/c4x/KPI/Algorithms101/asset/input__10000.txt
   }
 
-  public static void sortBigFile(String filename) {
-    tempFileCounter = 0;
-    readerList.clear();
-    readerListToClose.clear();
-    tempFiles.clear();
+  public void sortBigFile(String filename) {
     try {
       readFromFile(filename);
     } catch (FileNotFoundException e) {
       System.out.println("File does not exist");
       e.printStackTrace();
+      System.exit(1);
     } catch (IOException e) {
       System.out.println("IO Exception");
       e.printStackTrace();
+      System.exit(1);
     }
   }
 
-    private static void readFromFile(String filename) throws IOException {
+    private void readFromFile(String filename) throws IOException {
       File file = new File(filename);
       File directory = file.getParentFile();
       BufferedReader reader = null;
       try {
         reader = new BufferedReader(new FileReader(file));
         int[] buffer = new int[1024];
-        int countValuesInBuffer = 0;
+        int countValuesInBuffer;
         while (reader.ready()) {
           countValuesInBuffer = 0;
           for (int i = 0; i < buffer.length; i++) {
@@ -65,7 +64,7 @@ public class BigFileSort {
         mergeToResultFile(resultFile);
       } finally {
         reader.close();
-        for (BufferedReader br : readerListToClose) {
+        for (BufferedReader br : readersToClose) {
           br.close();
         }
         for (BufferedReader br : readerList) {
@@ -77,7 +76,7 @@ public class BigFileSort {
       }
   }
 
-  private static void writeToFile(File file, int[] intArray, int numberToWrite) throws IOException {
+  private void writeToFile(File file, int[] intArray, int numberToWrite) throws IOException {
     BufferedWriter fileWriter = null;
     try {
       fileWriter = new BufferedWriter(new FileWriter(file));
@@ -90,17 +89,15 @@ public class BigFileSort {
     }
   }
 
-  private static void mergeToResultFile(File resultFile) throws IOException {
+  private void mergeToResultFile(File resultFile) throws IOException {
     BufferedWriter writer = null;
     try {
       writer = new BufferedWriter(new FileWriter(resultFile));
+      ArrayList<Integer> valuesList = new ArrayList<Integer>();
       for (File f : tempFiles) {
         BufferedReader reader = new BufferedReader(new FileReader(f));
         readerList.add(reader);
-      }
-      ArrayList<Integer> valuesList = new ArrayList<Integer>();
-      for (BufferedReader br:readerList) {
-        valuesList.add(Integer.parseInt(br.readLine()));
+        valuesList.add(Integer.parseInt(reader.readLine()));
       }
       while (!readerList.isEmpty()) {
         int minIndex = getIndexOfMinimumValue(valuesList);
@@ -111,7 +108,7 @@ public class BigFileSort {
           int nextValue = Integer.parseInt(readerList.get(minIndex).readLine());
           valuesList.add(minIndex, nextValue);
         } else {
-          readerListToClose.add(readerList.get(minIndex));
+          readersToClose.add(readerList.get(minIndex));
           readerList.remove(minIndex);
         }
       }
@@ -120,7 +117,7 @@ public class BigFileSort {
     }
   }
 
-  private static int getIndexOfMinimumValue(List<Integer> list) {
+  private int getIndexOfMinimumValue(List<Integer> list) {
     int minIndex = 0;
     int minValue = list.get(0);
     for (int i=0;i<list.size();i++) {
