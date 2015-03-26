@@ -23,9 +23,9 @@ public class Arrays {
     try {
       BufferedReader br = new BufferedReader(new FileReader(file));
       StringBuilder currentString = new StringBuilder();
-      int c;
-      while ((c = br.read()) != -1) {
-        char currentChar = (char) c;
+      int cursor = 0;
+      while ((cursor = br.read()) != -1) {
+        char currentChar = (char) cursor;
         if (Character.isDigit(currentChar)) {
           currentString.append(currentChar);
         } else {

@@ -82,27 +82,22 @@ public class FileProcessor {
     try {
       BufferedReader br = brArray[i];
       StringBuilder currentString = new StringBuilder();
-      while (true) {
-        int c = br.read();
-        if (c != -1) {
-          char currentChar = (char) c;
+      int cursor = 0;
+      while ((cursor = br.read()) != -1) {
+        if (cursor != -1) {
+          char currentChar = (char) cursor;
           if (Character.isDigit(currentChar)) {
             currentString.append(currentChar);
-          } else {
-            if (currentString.length() != 0) {
-              currentIntegers[i] = Integer.parseInt(currentString.toString());
-              isValues[i] = true;
-              break;
-            }
-          }
-        } else {
-          if (currentString.length() != 0) {
+          } else if (currentString.length() != 0) {
             currentIntegers[i] = Integer.parseInt(currentString.toString());
             isValues[i] = true;
-          } else {
-            isValues[i] = false;
+            break;
           }
-          break;
+        } else if (currentString.length() != 0) {
+          currentIntegers[i] = Integer.parseInt(currentString.toString());
+          isValues[i] = true;
+        } else {
+          isValues[i] = false;
         }
       }
     } catch (IOException e) {
