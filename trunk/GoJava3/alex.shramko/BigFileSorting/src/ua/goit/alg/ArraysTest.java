@@ -18,7 +18,7 @@ public class ArraysTest {
   @Before
   public void fileCreating() {
     try {
-      String content = "5 6 8 11 21 5 4 3 6 6 99 0";
+      String content = "5 6 8 11 21 5 4 3 6 6 99 0 98";
       File file = new File("/1.txt");
       if (!file.exists()) {
         file.createNewFile();
@@ -40,7 +40,7 @@ public class ArraysTest {
     try {
       br = new BufferedReader(new FileReader(file));
       String actual = br.readLine();
-      String expected = "0 3 4 5 5 6 6 6 8 11 21 99";
+      String expected = "0 3 4 5 5 6 6 6 8 11 21 98 99";
       assertEquals(expected, actual);
     } catch (IOException e) {
       e.printStackTrace();
