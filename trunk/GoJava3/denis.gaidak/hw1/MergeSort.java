@@ -18,15 +18,6 @@ public class MergeSort {
     }
 
         public static void mergeSort(int[] arr, int start, int end) {
-//            if (end - start == 2) {
-//                if (arr[start] > arr[end]) {
-//                    int localSwap = arr[start];
-//                    arr[start] = arr[end];
-//                    arr[end] = localSwap;
-//                    return;
-//                }
-//            }
-
             if (start < end) {
                 int middle = (start + end) / 2;
                 mergeSort(arr, start, middle);
@@ -42,8 +33,6 @@ public class MergeSort {
         int i = start;
         int firstArr = start;
         int secondArr = middle +1;
-
-//        System.out.println(Arrays.toString(arr));
 
         while (firstArr <= middle && secondArr <= end) {
             if (temp[firstArr] <= temp[secondArr]) {
@@ -61,8 +50,6 @@ public class MergeSort {
             firstArr++;
             i++;
         }
-//        System.out.println(Arrays.toString(arr));
-//        System.out.println("-------------------------");
 
     }
 
