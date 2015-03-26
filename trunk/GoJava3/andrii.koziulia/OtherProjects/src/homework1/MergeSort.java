@@ -14,14 +14,14 @@ public class MergeSort {
     }
 
     public static void mergeSort(int[] array) {
-        mergeSortStart(array, 0, array.length-1);
+        mergeSort(array, 0, array.length - 1);
     }
 
-    private static void mergeSortStart(int[] array, int firstElement, int lastElement) {
+    public static void mergeSort(int[] array, int firstElement, int lastElement) {
         if (firstElement<lastElement) {
             int partitionElement = (firstElement+lastElement)/2;
-            mergeSortStart(array, firstElement, partitionElement);
-            mergeSortStart(array, partitionElement + 1, lastElement);
+            mergeSort(array, firstElement, partitionElement);
+            mergeSort(array, partitionElement + 1, lastElement);
             mergeArrays(array, firstElement, partitionElement, lastElement);
         }
     }
