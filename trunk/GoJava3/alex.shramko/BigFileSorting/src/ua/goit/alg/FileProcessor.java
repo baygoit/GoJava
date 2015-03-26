@@ -128,7 +128,7 @@ public class FileProcessor {
   }
 
   public static void clearTemporaryDirectory() {
-    closeFisArray();
+    closeBrs();
     File directory = new File(TEMPORARY_DIRECTORY_PATH);
     if (!directory.exists()) {
       return;
@@ -141,7 +141,7 @@ public class FileProcessor {
     }
   }
 
-  private static void closeFisArray() {
+  private static void closeBrs() {
     for (int i = 0; i < currentIntegers.length; i++) {
       try {
         brArray[i].close();
@@ -186,8 +186,7 @@ public class FileProcessor {
       if (!file.exists()) {
         file.createNewFile();
       }
-      FileWriter fw = new FileWriter(file);
-      BufferedWriter bw = new BufferedWriter(fw);
+      BufferedWriter bw = new BufferedWriter(new FileWriter(file));
       bw.write(content);
       bw.close();
     } catch (IOException e) {

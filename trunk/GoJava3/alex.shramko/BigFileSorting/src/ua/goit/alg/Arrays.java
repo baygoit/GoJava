@@ -43,15 +43,13 @@ public class Arrays {
   }
 
   private static void processStringFinally(String string) {
-    int currentInt = Integer.parseInt(string.toString());
-    array[currentIndex] = currentInt;
+    array[currentIndex] = Integer.parseInt(string.toString());
     int[] currentArray = java.util.Arrays.copyOf(array, currentIndex + 1);
     processArray(currentArray);
   }
 
   private static void processString(String string) {
-    int currentInt = Integer.parseInt(string.toString());
-    array[currentIndex] = currentInt;
+    array[currentIndex] = Integer.parseInt(string.toString());
     if (currentIndex == MAX_ARRAY_SIZE - 1) {
       processArray(array);
       currentIndex = 0;
@@ -62,8 +60,7 @@ public class Arrays {
 
   public static void processArray(int[] array) {
     int[] sortedArray = MergeSort.mergeSort(array);
-    String str = arrayToString(sortedArray);
-    FileProcessor.writeTemporaryFile(str);
+    FileProcessor.writeTemporaryFile(arrayToString(sortedArray));
   }
   
   public static String arrayToString(int[] array) {
