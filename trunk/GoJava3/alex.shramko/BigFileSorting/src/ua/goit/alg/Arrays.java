@@ -1,14 +1,12 @@
 package ua.goit.alg;
 
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 
 public class Arrays {
 
-  public static final int MAX_ARRAY_SIZE = 3;
+  public static final int MAX_ARRAY_SIZE = 4;
   public static final int[] array = new int[MAX_ARRAY_SIZE];
   public static int currentIndex;
 
@@ -23,12 +21,10 @@ public class Arrays {
   public static void separateFile(File file) {
     try {
       FileInputStream fis = new FileInputStream(file);
-      char currentChar = ' ';
-      currentIndex = 0;
       StringBuilder currentString = new StringBuilder();
       int c;
       while ((c = fis.read()) != -1) {
-        currentChar = (char) c;
+        char currentChar = (char) c;
         if (Character.isDigit(currentChar)) {
           currentString.append(currentChar);
         } else {
@@ -38,18 +34,17 @@ public class Arrays {
           }
         }
       }
-      processFinallyString(currentString.toString());
+      processStringFinally(currentString.toString());
       fis.close();
     } catch (IOException e) {
       e.printStackTrace();
     }
   }
 
-  private static void processFinallyString(String string) {
+  private static void processStringFinally(String string) {
     int currentInt = Integer.parseInt(string.toString());
     array[currentIndex] = currentInt;
-    int[] currentArray;
-    currentArray = java.util.Arrays.copyOf(array, currentIndex + 1);
+    int[] currentArray = java.util.Arrays.copyOf(array, currentIndex + 1);
     processArray(currentArray);
   }
 
@@ -65,25 +60,20 @@ public class Arrays {
   }
 
   public static void processArray(int[] array) {
-    int[] sortedArray = ArrayHandler.sortArray(array);
-    FileProcessor.writeArrayIntoTemporaryFile(sortedArray);
+    int[] sortedArray = MergeSort.mergeSort(array);
+    String str = arrayToString(sortedArray);
+    FileProcessor.writeTemporaryFile(str);
   }
-
-  public static void main(String[] args) {
-    try {
-      String content = "5 6 8 11 21 5 4 3 6 6 99 0 98";
-      File file = new File("/1.txt");
-      if (!file.exists()) {
-        file.createNewFile();
+  
+  public static String arrayToString(int[] array) {
+    StringBuilder builder = new StringBuilder();
+    for (int i = 0; i < array.length; i++) {
+      if (builder.length() > 0) {
+        builder.append(" ");
       }
-      FileWriter fw = new FileWriter(file.getAbsoluteFile());
-      BufferedWriter bw = new BufferedWriter(fw);
-      bw.write(content);
-      bw.close();
-    } catch (IOException e) {
-      e.printStackTrace();
+      builder.append(array[i]);
     }
-    mergeSort(new File("/1.txt"));
+    return builder.toString();
   }
 
 }

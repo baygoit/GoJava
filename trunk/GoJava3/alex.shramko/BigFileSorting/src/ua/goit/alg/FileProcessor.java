@@ -18,11 +18,9 @@ public class FileProcessor {
   public static void createTemporaryDirectory() {
     File dir = new File(TEMPORARY_DIRECTORY_PATH);
     dir.mkdir();
-    dir = null;
   }
 
   public static void writeTemporaryFile(String str) {
-
     String temporaryFilePath = TEMPORARY_DIRECTORY_PATH + TEMPORARY_FILE_PREFIX
         + temporaryFilesCounter++ + ".txt";
     File file = new File(temporaryFilePath);
@@ -38,12 +36,6 @@ public class FileProcessor {
     } catch (IOException e) {
       e.printStackTrace();
     }
-    file = null;
-  }
-
-  public static void writeArrayIntoTemporaryFile(int[] array) {
-    String str = ArrayHandler.arrayToString(array);
-    writeTemporaryFile(str);
   }
 
   public static void mergeFiles(File file) {
@@ -79,7 +71,6 @@ public class FileProcessor {
     } catch (IOException e) {
       e.printStackTrace();
     }
-
   }
 
   public static int getNextMinInteger() {
@@ -129,7 +120,6 @@ public class FileProcessor {
     } catch (IOException e) {
       e.printStackTrace();
     }
-
   }
 
   public static FileInputStream[] initializeFisArrays() {
@@ -148,7 +138,6 @@ public class FileProcessor {
 
   public static void clearTemporaryDirectory() {
     closeFisArray();
-
     File directory = new File(TEMPORARY_DIRECTORY_PATH);
     if (!directory.exists()) {
       return;
@@ -188,7 +177,6 @@ public class FileProcessor {
           if (!file.delete()) {
             System.out.println(file.getAbsolutePath());
           }
-
         }
       }
     } else {
