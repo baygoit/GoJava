@@ -13,7 +13,7 @@ public class MergeSort {
         System.out.println(Arrays.toString(testArray));
     }
 
-    private static void mergeSort(int[] array) {
+    public static void mergeSort(int[] array) {
         mergeSortStart(array, 0, array.length-1);
     }
 
