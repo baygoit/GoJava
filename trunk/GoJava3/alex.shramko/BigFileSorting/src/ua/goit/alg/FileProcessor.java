@@ -31,7 +31,7 @@ public class FileProcessor {
 
   public static void mergeFiles(File file) {
     havingValues = true;
-    brArray = initializeFisArrays();
+    brArray = initializeBrArrays();
     currentIntegers = new int[temporaryFilesCounter];
     isValues = new boolean[temporaryFilesCounter];
     for (int i = 0; i < temporaryFilesCounter; i++) {
@@ -74,8 +74,6 @@ public class FileProcessor {
     }
     if (minIntegerPosition == -1) {
       havingValues = false;
-    } else {
-      getNextInteger(minIntegerPosition);
     }
     return minInteger;
   }
@@ -112,7 +110,7 @@ public class FileProcessor {
     }
   }
 
-  public static BufferedReader[] initializeFisArrays() {
+  public static BufferedReader[] initializeBrArrays() {
     BufferedReader[] brArray = new BufferedReader[temporaryFilesCounter];
     for (int i = 0; i < brArray.length; i++) {
       String temporaryFilePath = TEMPORARY_DIRECTORY_PATH
