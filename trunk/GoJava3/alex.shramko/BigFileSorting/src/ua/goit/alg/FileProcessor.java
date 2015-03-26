@@ -1,16 +1,19 @@
 package ua.goit.alg;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 
 public class FileProcessor {
   public static String TEMPORARY_DIRECTORY_PATH = "/goit_temp/";
   public static String TEMPORARY_FILE_PREFIX = "temp_";
   public static int temporaryFilesCounter;
-  public static FileInputStream[] fisArray;
+  public static BufferedReader[] brArray;
   public static int[] currentIntegers;
   public static boolean[] isValues;
   public static boolean havingValues;
@@ -24,23 +27,12 @@ public class FileProcessor {
     String temporaryFilePath = TEMPORARY_DIRECTORY_PATH + TEMPORARY_FILE_PREFIX
         + temporaryFilesCounter++ + ".txt";
     File file = new File(temporaryFilePath);
-    try {
-      FileOutputStream fop = new FileOutputStream(file);
-      if (!file.exists()) {
-        file.createNewFile();
-      }
-      byte[] contentInBytes = str.getBytes();
-      fop.write(contentInBytes);
-      fop.flush();
-      fop.close();
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
+    writeStringToFile(str, file);
   }
 
   public static void mergeFiles(File file) {
     havingValues = true;
-    fisArray = initializeFisArrays();
+    brArray = initializeFisArrays();
     currentIntegers = new int[temporaryFilesCounter];
     isValues = new boolean[temporaryFilesCounter];
     for (int i = 0; i < temporaryFilesCounter; i++) {
@@ -92,10 +84,10 @@ public class FileProcessor {
 
   public static void getNextInteger(int i) {
     try {
-      FileInputStream fis = fisArray[i];
+      BufferedReader br = brArray[i];
       StringBuilder currentString = new StringBuilder();
       while (true) {
-        int c = fis.read();
+        int c = br.read();
         if (c != -1) {
           char currentChar = (char) c;
           if (Character.isDigit(currentChar)) {
@@ -122,18 +114,19 @@ public class FileProcessor {
     }
   }
 
-  public static FileInputStream[] initializeFisArrays() {
-    FileInputStream[] fisArray = new FileInputStream[temporaryFilesCounter];
-    for (int i = 0; i < fisArray.length; i++) {
+  public static BufferedReader[] initializeFisArrays() {
+    BufferedReader[] brArray = new BufferedReader[temporaryFilesCounter];
+    for (int i = 0; i < brArray.length; i++) {
       String temporaryFilePath = TEMPORARY_DIRECTORY_PATH
           + TEMPORARY_FILE_PREFIX + i + ".txt";
       try {
-        fisArray[i] = new FileInputStream(new File(temporaryFilePath));
+        brArray[i] = new BufferedReader(new FileReader(new File(
+            temporaryFilePath)));
       } catch (FileNotFoundException e) {
         e.printStackTrace();
       }
     }
-    return fisArray;
+    return brArray;
   }
 
   public static void clearTemporaryDirectory() {
@@ -153,11 +146,11 @@ public class FileProcessor {
   private static void closeFisArray() {
     for (int i = 0; i < currentIntegers.length; i++) {
       try {
-        fisArray[i].close();
+        brArray[i].close();
       } catch (IOException e) {
         e.printStackTrace();
       }
-      fisArray[i] = null;
+      brArray[i] = null;
     }
   }
 
@@ -188,5 +181,33 @@ public class FileProcessor {
 
   public static void resetTemporaryFileIndex() {
     FileProcessor.temporaryFilesCounter = 0;
+  }
+
+  public static void writeStringToFile(String content, File file) {
+    try {
+      if (!file.exists()) {
+        file.createNewFile();
+      }
+      FileWriter fw = new FileWriter(file);
+      BufferedWriter bw = new BufferedWriter(fw);
+      bw.write(content);
+      bw.close();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+
+  }
+
+  public static String readStringFromFile(File file) {
+    String str = "";
+    BufferedReader br = null;
+    try {
+      br = new BufferedReader(new FileReader(file));
+      str = br.readLine();
+      br.close();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    return str;
   }
 }

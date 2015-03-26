@@ -1,7 +1,8 @@
 package ua.goit.alg;
 
+import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
+import java.io.FileReader;
 import java.io.IOException;
 
 public class Arrays {
@@ -20,10 +21,10 @@ public class Arrays {
 
   public static void separateFile(File file) {
     try {
-      FileInputStream fis = new FileInputStream(file);
+      BufferedReader br = new BufferedReader(new FileReader(file));
       StringBuilder currentString = new StringBuilder();
       int c;
-      while ((c = fis.read()) != -1) {
+      while ((c = br.read()) != -1) {
         char currentChar = (char) c;
         if (Character.isDigit(currentChar)) {
           currentString.append(currentChar);
@@ -35,7 +36,7 @@ public class Arrays {
         }
       }
       processStringFinally(currentString.toString());
-      fis.close();
+      br.close();
     } catch (IOException e) {
       e.printStackTrace();
     }
