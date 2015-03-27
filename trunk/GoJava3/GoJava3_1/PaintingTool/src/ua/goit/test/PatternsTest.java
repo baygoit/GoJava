@@ -25,15 +25,7 @@ public class PatternsTest {
 	assertEquals(expectedValue, actualValue);
     }
 
-    @Test
-    public void getGroupTypeTest() {
-	Group ge = new GroupImpl("Group 1");
-	String expectedValue = "Group";
-	String actualValue = ge.getType();
-	assertEquals(expectedValue, actualValue);
-    }
-
-    @Test
+   @Test
     public void elementAddingTest() {
 	Group ge1 = new GroupImpl("Group 1");
 	Group ge2 = new GroupImpl("Group 2");
