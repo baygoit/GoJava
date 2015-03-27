@@ -1,7 +1,4 @@
-package ua.goit.alg; /**
- * Created by Aleksey Kurkov on 3/25/15.
- */
-import java.util.Scanner;
+package ua.goit.alg;
 
 /*  array[0]...array[array.length-1]
 *   tempArray[start]...tempArray[middle] & tempArray[middlePlusOne]...tempArray[end]

@@ -3,9 +3,6 @@ package ua.goit.alg;
 import java.io.*;
 import java.util.Random;
 
-/**
- * Created by Aleksey Kurkov on 3/25/15.
- */
 public class BigFileMaker {
 
   static final int FILE_LENGTH = 1000; // ~1Mb 999999

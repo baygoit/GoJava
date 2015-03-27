@@ -1,27 +1,22 @@
 package ua.goit.alg;
 
-import junit.framework.TestCase;
+import org.junit.Test;
 
 import java.io.File;
-import java.io.IOException;
 
 import static org.junit.Assert.assertArrayEquals;
+import static ua.goit.alg.Arrays.readArrayFromFile;
+import static ua.goit.alg.Arrays.writeArrayToFile;
 
-/**
- * Created by Aleksey Kurkov on 3/26/15.
- */
-public class ArraysTest extends TestCase {
+public class ArraysTest {
 
-  public void testCreateFile() {
+  @Test
+  public void testWriteRead() {
     int[] expectedArray = new int[]{5, 4, 3, 2, 1};
-    int[] actualArray = new int[0];
-    File fileName = new File("testCreate.txt");
-    Arrays.writeArrayToFile(expectedArray, fileName);
-    try {
-      expectedArray = Arrays.readArrayFromFile(fileName);
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
+    int[] actualArray;
+    File fileName = new File("testWriteRead.txt");
+    writeArrayToFile(expectedArray, fileName);
+    actualArray = readArrayFromFile(fileName);
     assertArrayEquals(expectedArray, actualArray);
   }
 }

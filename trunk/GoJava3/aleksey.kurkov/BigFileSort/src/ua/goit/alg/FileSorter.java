@@ -1,11 +1,6 @@
 package ua.goit.alg;
 
 import java.io.*;
-import java.nio.CharBuffer;
-
-/**
- * Created by Aleksey Kurkov on 3/25/15.
- */
 
 public class FileSorter {
 
