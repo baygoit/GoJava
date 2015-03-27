@@ -14,7 +14,7 @@ public class XMLSerializator extends Serializator {
 
     @Override
     public StringBuffer serialize(Element element) {
-            buffer.append("<" + element.getType() + ">" + element.getName());
+            buffer.append("<" + element.getClass().getSimpleName() + ">" + element.getName());
             if (element.getPoints() == null) {
                 buffer.append("<Points> </Points>");
             }
@@ -25,7 +25,7 @@ public class XMLSerializator extends Serializator {
                 }
                 buffer.append("</Points>");
             }
-            buffer.append("</" + element.getType() + ">");
+            buffer.append("</" + element.getClass().getSimpleName() + ">");
 
         return buffer;
     }
@@ -33,7 +33,7 @@ public class XMLSerializator extends Serializator {
     @Override
     public StringBuffer serialize(Group group) {
         if (group.getGroups() != null || group.getGroups().size() <= 0 ) {
-            buffer.append("<" + group.getType() + ">" + group.getName());
+            buffer.append("<" + group.getClass().getSimpleName() + ">" + group.getName());
             for (Group inGroup : group.getGroups()) {
                 serialize(inGroup);
             }
@@ -43,7 +43,7 @@ public class XMLSerializator extends Serializator {
                 serialize(element);
             }
         }
-        buffer.append("</" + group.getType() + ">");
+        buffer.append("</" + group.getClass().getSimpleName() + ">");
 
         return buffer;
     }
