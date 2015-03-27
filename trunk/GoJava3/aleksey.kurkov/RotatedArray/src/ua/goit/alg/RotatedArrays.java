@@ -1,8 +1,4 @@
-/**
- * Created by Aleksey Kurkov on 20.03.15.
- */
-
-package ua.goit.alg.v2;
+package ua.goit.alg;
 
 public class RotatedArrays {
   public static int binarySearch(int[] array, int target) {

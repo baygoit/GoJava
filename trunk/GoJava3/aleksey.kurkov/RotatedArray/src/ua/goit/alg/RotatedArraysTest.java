@@ -1,4 +1,4 @@
-package ua.goit.alg.v2;
+package ua.goit.alg;
 
 import junit.framework.TestCase;
 
