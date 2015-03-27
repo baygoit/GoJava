@@ -238,4 +238,12 @@ public class RotatedArraysTest extends TestCase {
       }
     }
   }
+
+  public void testArrayWithOneElement() {
+    int target = 1;
+    int expected = 0;
+    int[] array = {1};
+    int actual = RotatedArrays.binarySearch(array, target);
+    assertEquals(expected, actual);
+  }
 }
