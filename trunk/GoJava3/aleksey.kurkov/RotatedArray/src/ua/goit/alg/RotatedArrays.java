@@ -1,15 +1,14 @@
 package ua.goit.alg;
 
 public class RotatedArrays {
+
   public static int binarySearch(int[] array, int target) {
+
     int result = -1; // if result is not changed - then error
     int middle;
     int start = 0;
     int end = array.length - 1;
-    // array contains 0 items
-    if (array.length == 0) {
-      result = -1;
-    }
+
     // continue while array search range has more than 1 item
     while (start < end) {
       // calculate the midpoint for roughly equal partition
