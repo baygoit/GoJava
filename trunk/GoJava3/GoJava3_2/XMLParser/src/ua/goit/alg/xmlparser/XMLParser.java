@@ -6,4 +6,21 @@ public class XMLParser {
     return "tag";
   }
 
+  public void onOpenTag(){
+    
+  }
+  public void onCloseTag(){
+    
+  }
+  public void onTextValue(){
+  }
+  public void onStart(){
+    
+  }
+  public void onEnd(){
+    
+  }
+  public void onError(){
+    
+  }
 }

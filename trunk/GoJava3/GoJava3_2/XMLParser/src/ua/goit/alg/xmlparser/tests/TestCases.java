@@ -13,6 +13,7 @@ public class TestCases {
     String result = parser.parse("<tag></tag>");
     String expectedResult = "tag";
     Assert.assertEquals(expectedResult, result);
+ 
   }
-  
 }
+  
