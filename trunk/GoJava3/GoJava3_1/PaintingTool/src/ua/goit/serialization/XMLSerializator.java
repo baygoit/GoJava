@@ -33,7 +33,7 @@ public class XMLSerializator extends Serializator {
     @Override
     public StringBuffer serialize(Group group) {
         if (group.getGroups() != null || group.getGroups().size() <= 0 ) {
-            buffer.append("<" + group.getClass().getSimpleName() + ">" + group.getName());
+            buffer.append("<" + group.getType() + ">" + group.getName());
             for (Group inGroup : group.getGroups()) {
                 serialize(inGroup);
             }
@@ -43,7 +43,7 @@ public class XMLSerializator extends Serializator {
                 serialize(element);
             }
         }
-        buffer.append("</" + group.getClass().getSimpleName() + ">");
+        buffer.append("</" + group.getType() + ">");
 
         return buffer;
     }
