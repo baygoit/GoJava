@@ -12,7 +12,6 @@ import java.util.List;
 public class BigFileSort {
   private int tempFileCounter = 0;
   private ArrayList<BufferedReader> readerList = new ArrayList<BufferedReader>();
-  private ArrayList<BufferedReader> readersToClose = new ArrayList<BufferedReader>();
   private ArrayList<File> tempFiles = new ArrayList<File>();
 
   public static void main(String[] args) {
@@ -64,9 +63,6 @@ public class BigFileSort {
         mergeToResultFile(resultFile);
       } finally {
         reader.close();
-        for (BufferedReader br : readersToClose) {
-          br.close();
-        }
         for (BufferedReader br : readerList) {
           br.close();
         }
@@ -108,7 +104,7 @@ public class BigFileSort {
           int nextValue = Integer.parseInt(readerList.get(minIndex).readLine());
           valuesList.add(minIndex, nextValue);
         } else {
-          readersToClose.add(readerList.get(minIndex));
+          readerList.get(minIndex).close();
           readerList.remove(minIndex);
         }
       }
