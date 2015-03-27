@@ -9,8 +9,9 @@ public class Arrays {
   }
 
   public static void writeArrayToFile(int[] array, File fileName) {
+    DataOutputStream dos = null;
     try {
-      DataOutputStream dos = new DataOutputStream(new FileOutputStream(fileName));
+      dos = new DataOutputStream(new FileOutputStream(fileName));
       for (int i = 0; i < array.length; i++) {
         dos.writeInt(array[i]);
         System.out.print(array[i] + " ");
@@ -21,14 +22,21 @@ public class Arrays {
       System.out.println("File " + fileName + " not found");
     } catch (IOException e) {
       System.out.println("\nCan't close the file " + fileName);
+    } finally {
+      try {
+        dos.close();
+      } catch (IOException e) {
+        System.out.println("\nCan't close the file " + fileName);
+      }
     }
   }
 
   public static int[] readArrayFromFile(File fileName) {
     int[] array = new int[5];
     boolean eof;
+    DataInputStream dis = null;
     try {
-      DataInputStream dis = new DataInputStream(new FileInputStream(fileName));
+      dis = new DataInputStream(new FileInputStream(fileName));
       int i = 0;
       eof = false;
       while (!eof) {
@@ -36,12 +44,16 @@ public class Arrays {
         System.out.print(array[i] + " ");
       }
       System.out.println();
-      dis.close();
     } catch (FileNotFoundException e) {
       System.out.println("File " + fileName + " not found");
     } catch (IOException e) {
       eof = true;
-      System.out.println("\nCan't close the file " + fileName);
+    } finally {
+      try {
+        dis.close();
+      } catch (IOException e) {
+        System.out.println("\nCan't close the file " + fileName);
+      }
     }
     return array;
   }
