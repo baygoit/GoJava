@@ -5,7 +5,6 @@ import java.util.Iterator;
 
 /**
  * Class for group of element
- * @author Anton Yarosh
  *
  */
 public class GroupImpl implements Group {
@@ -23,12 +22,6 @@ public class GroupImpl implements Group {
     @Override
     public String getName() {
 	return name;
-    }
-
-    /*Return type of object*/
-    @Override
-    public String getType() {
-	return "Group";
     }
 
     /*Return list of inner elements*/
