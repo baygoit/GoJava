@@ -10,7 +10,7 @@ import java.util.Random;
 
 public class ArraysTest {
 
-//  @Before
+@Before
   public void addResource() {
 
     try {
@@ -22,25 +22,24 @@ public class ArraysTest {
   }
 
   public void createTestFile() throws IOException {
-    String dir = System.getProperty("user.dir") + "\\hw4\\ua\\goit\\alg\\test\\testResource.txt";
-    System.out.println(dir);
-    File testResource = new File(dir);
+    String filePath = System.getProperty("user.dir") + "\\hw4\\ua\\goit\\alg\\test\\testResource.txt";
+    File testResource = new File(filePath);
     testResource.createNewFile();
     FileWriter fileWriter = new FileWriter(testResource);
     Random random = new Random();
-    for (int i = 0; i < 100; i++) {
-      fileWriter.write(random.nextInt(100) + "\n");
+    int count = 100;
+    for (int i = 0; i < count; i++) {
+      fileWriter.write(random.nextInt(count) + "\n");
     }
-
     fileWriter.close();
   }
 
   @Test
   public void testMergeSort() throws Exception {
-    Arrays arrays = new Arrays();
-    String dir = System.getProperty("user.dir") + "\\hw4\\ua\\goit\\alg\\test\\testResource.txt";
-    File file = new File(dir);
+    String filePath = System.getProperty("user.dir") + "\\hw4\\ua\\goit\\alg\\test\\testResource.txt";
+    File file = new File(filePath);
     Arrays.mergeSort(file);
   }
+
 
 }
