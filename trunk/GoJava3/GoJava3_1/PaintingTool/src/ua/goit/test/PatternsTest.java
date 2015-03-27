@@ -17,42 +17,7 @@ import ua.goit.serialization.*;
  */
 public class PatternsTest {
 
-    @Test
-    public void factoryCreatingTest() {
-	SerializationFactory factory = null;
-	factory = new ConcreteFactory();
-	boolean expectedValue = true;
-	boolean actualValue = factory instanceof ConcreteFactory;
-	assertEquals(expectedValue, actualValue);
-    }
-
-    @Test
-    public void xmlSerializatorCreatingTest() {
-	SerializationFactory factory = new ConcreteFactory();
-	Serializator xmlSerialization = factory.getSerializationFor(SerializationType.XML);
-	boolean expectedValue = true;
-	boolean actualValue = xmlSerialization instanceof XMLSerializator;
-	assertEquals(expectedValue, actualValue);
-    }
-
-    @Test
-    public void jsonSerializatorCreatingTest() {
-	SerializationFactory factory = new ConcreteFactory();
-	Serializator jsonSerialization = factory.getSerializationFor(SerializationType.JSON);
-	boolean expectedValue = true;
-	boolean actualValue = jsonSerialization instanceof JSONSerializator;
-	assertEquals(expectedValue, actualValue);
-    }
-
-    @Test
-    public void groupCreatingTest() {
-	Group ge = new GroupImpl("Group 1");
-	boolean expectedValue = true;
-	boolean actualValue = ge instanceof Group;
-	assertEquals(expectedValue, actualValue);
-    }
-
-    @Test
+   @Test
     public void getGroupNameTest() {
 	Group ge = new GroupImpl("Group 1");
 	String expectedValue = "Group 1";
@@ -76,14 +41,6 @@ public class PatternsTest {
 	Group innerGroup = ge1.getGroups().get(0);
 	String expectedValue = "Group 2";
 	String actualValue = innerGroup.getName();
-	assertEquals(expectedValue, actualValue);
-    }
-
-    @Test
-    public void pointCreatinTest() {
-	Point point = new PointImpl(5, 6);
-	boolean expectedValue = true;
-	boolean actualValue = point instanceof Point;
 	assertEquals(expectedValue, actualValue);
     }
 
