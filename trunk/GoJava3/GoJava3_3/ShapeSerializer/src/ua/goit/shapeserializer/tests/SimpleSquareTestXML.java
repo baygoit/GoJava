@@ -15,7 +15,6 @@ public class SimpleSquareTestXML {
   @Test
   public void test() {
 
-
     Shape square = new Square(new Point(10, 10), new Point(20, 20));
 
     String expected = "<square><point><x>10</x><y>10</y></point><point><x>20</x><y>20</y></point></square>";

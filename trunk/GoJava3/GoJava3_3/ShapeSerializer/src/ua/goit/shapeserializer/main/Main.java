@@ -1,6 +1,5 @@
 package ua.goit.shapeserializer.main;
 
-
 import ua.goit.shapeserializer.SerializeClassHolder;
 import ua.goit.shapeserializer.SerializerFactory;
 import ua.goit.shapeserializer.basicobjects.*;

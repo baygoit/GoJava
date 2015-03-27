@@ -1,7 +1,3 @@
-/**
- * Created by Aleksey Kurkov on 22.03.15.
- */
-
 package ua.goit.shapeserializer.json;
 
 import ua.goit.shapeserializer.Formats;
@@ -17,7 +13,6 @@ public class SquareJSONSerializer extends ShapeJSONSerializer {
     Square square = (Square) shape;
 
     SerializeClassHolder classHolder = SerializerFactory.getSerializerFor(Formats.JSON);
-
 
     squareXML.append("\"square\" : [{");
     squareXML.append(classHolder.serialize(square.getA()));

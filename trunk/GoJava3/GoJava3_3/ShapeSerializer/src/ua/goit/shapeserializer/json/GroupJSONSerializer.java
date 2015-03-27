@@ -1,7 +1,3 @@
-/**
- * Created by Aleksey Kurkov on 22.03.15.
- */
-
 package ua.goit.shapeserializer.json;
 
 import ua.goit.shapeserializer.Formats;
@@ -11,7 +7,6 @@ import ua.goit.shapeserializer.basicobjects.Group;
 import ua.goit.shapeserializer.basicobjects.Shape;
 
 import java.util.List;
-
 
 public class GroupJSONSerializer extends ShapeJSONSerializer {
 
