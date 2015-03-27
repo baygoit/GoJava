@@ -1,10 +1,13 @@
 package ua.com.sas.model;
 
-import javax.persistence.Column;
+import java.util.List;
+
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
@@ -12,13 +15,22 @@ import javax.persistence.Table;
 @Table(name="categories")
 public class Category {
 	
-	@Column(name="name")
 	private String name;
 	
 	@Id
-	@Column(name="id", columnDefinition = "serial")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+	
+	@OneToMany(mappedBy="category", fetch = FetchType.EAGER)
+    private List<Project> projects;
+    
+    public List<Project> getProjects() {
+    	return projects;
+    }
+
+	public void setProjects(List<Project> projects) {
+		this.projects = projects;
+	}
 
 	public Category(){	
 	}
@@ -41,7 +53,6 @@ public class Category {
 		return "Category name= " + name + ", id= " + id;
 	}
 	
-	
 	public void setName(String name){
 		this.name = name;
 	}
@@ -62,6 +73,7 @@ public class Category {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + id;
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		return result;
 	}
@@ -75,6 +87,8 @@ public class Category {
 		if (getClass() != obj.getClass())
 			return false;
 		Category other = (Category) obj;
+		if (id != other.id)
+			return false;
 		if (name == null) {
 			if (other.name != null)
 				return false;
@@ -82,4 +96,6 @@ public class Category {
 			return false;
 		return true;
 	}
+
+
 }

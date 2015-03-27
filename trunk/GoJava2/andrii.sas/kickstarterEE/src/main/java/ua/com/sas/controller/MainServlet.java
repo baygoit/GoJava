@@ -38,7 +38,7 @@ public class MainServlet extends HttpServlet {
 		CategoriesAction categoriesAction = new CategoriesAction(categoriesDAO);
 		actions.put("/", categoriesAction);
 		actions.put("/categories", categoriesAction);
-		actions.put("/projects", new ProjectsAction(projectsDAO));
+		actions.put("/projects", new ProjectsAction(categoriesDAO));
 		actions.put("/project", new ProjectAction(projectsDAO));
 	}
 	
