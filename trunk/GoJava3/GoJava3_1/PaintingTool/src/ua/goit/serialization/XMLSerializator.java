@@ -56,7 +56,7 @@ public class XMLSerializator extends Serializator {
             bw.write("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>");
             bw.write("<elements>");
             bw.write(source.toString());
-            bw.write("</elements");
+            bw.write("</elements>");
             bw.close();
 
         }catch (IOException e) {
