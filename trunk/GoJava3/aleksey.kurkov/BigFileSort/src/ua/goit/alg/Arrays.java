@@ -9,15 +9,36 @@ public class Arrays {
 
   }
 
+  public static void cutSortAndWrite(File file, int buffer) throws IOException {
+    DataInputStream disFile = new DataInputStream(new FileInputStream(file));
+    int[] array = new int[buffer];
+    int tmpFileIndex = 0;
+    String tmpFileName;
+
+    while (disFile.available() > 0){
+
+      for (int i = 0; i < array.length; i++) {
+        array[i]=disFile.readInt();
+      }
+      new MergeSort(array);
+      array = MergeSort.array;
+      tmpFileName = "A" + tmpFileIndex + ".txt";
+      File tmpFile = new File(String.valueOf(tmpFileName));
+      writeArrayToFile(array, tmpFile);
+      tmpFileIndex++;
+    }
+    disFile.close();
+  }
+
   public static void writeArrayToFile(int[] array, File fileName) {
     DataOutputStream dos = null;
     try {
       dos = new DataOutputStream(new FileOutputStream(fileName));
+
       for (int i = 0; i < array.length; i++) {
         dos.writeInt(array[i]);
         //System.out.print(array[i] + " ");
       }
-      System.out.println();
       dos.close();
     } catch (FileNotFoundException e) {
       System.out.println("File " + fileName + " not found");
@@ -40,6 +61,7 @@ public class Arrays {
     try {
       dis = new DataInputStream(new FileInputStream(fileName));
       int i = 0;
+
       while (dis.available() > 0) {
         vector.add(i, dis.readInt());
         //System.out.print(vector.get(i) + " ");
@@ -62,6 +84,7 @@ public class Arrays {
       }
     }
     int[] array = new int[vector.size()];
+
     for (int i = 0; i < array.length; i++) {
       array[i] = vector.get(i);
     }

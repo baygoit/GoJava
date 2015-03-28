@@ -13,11 +13,13 @@ public class MergeSort {
 
   public static int[] array;
 
-  public static void getArray(String[] stringArray) {
-    array = new int[stringArray.length];
-    for (int i = 0; i < stringArray.length; i++) {
-      array[i] = Integer.parseInt(stringArray[i]);
-    }
+  public MergeSort(int[] expectedArray) {
+    array = expectedArray;
+    sortArray();
+  }
+
+  public static int[] getArray() {
+    return array;
   }
 
   public static void sortArray() {
@@ -69,6 +71,7 @@ public class MergeSort {
   }
 
   public static void printSortedArray() {
+    System.out.println("Sorted array: ");
     for (int i = 0; i < array.length; i++) {
       System.out.print(array[i]);
       if (i != array.length - 1) {
@@ -78,10 +81,4 @@ public class MergeSort {
       }
     }
   }
-
-  /*public static void main(String[] args) {
-    getArray();
-    sortArray();
-    printSortedArray();
-  }*/
 }

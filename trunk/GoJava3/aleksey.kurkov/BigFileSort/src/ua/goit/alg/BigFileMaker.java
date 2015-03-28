@@ -10,6 +10,16 @@ public class BigFileMaker {
   static DataOutputStream dosBig;
   static File file = new File("BigFile.txt");
 
+  public BigFileMaker(int[] array, File fileName) throws IOException {
+    FileOutputStream fosBig = new FileOutputStream(fileName);
+    dosBig = new DataOutputStream(fosBig);
+
+    for (int i = 0; i < array.length; i++) {
+      dosBig.writeInt(array[i]);
+    }
+    dosBig.close();
+  }
+
   public static void main(String[] args) throws IOException {
 
     FileOutputStream fosBig = new FileOutputStream(file);
@@ -23,5 +33,9 @@ public class BigFileMaker {
     }
     System.out.println(file.length() + " bytes");
     dosBig.close();
+  }
+
+  public void BigFileMaker(){
+
   }
 }
