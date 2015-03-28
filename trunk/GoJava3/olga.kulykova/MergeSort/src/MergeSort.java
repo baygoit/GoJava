@@ -4,10 +4,6 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Ольга on 16.03.2015.
- */
-
 /*
 Test cases
 Input: 5 12 3 1 88 2 5 6 7 11 (through Enter)
@@ -15,8 +11,8 @@ Output: 1 2 3 5 5 6 7 11 12 88
 
  */
 public class MergeSort {
+
     public static void main(String[] args) throws IOException {
-        //Input numbers to list
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         List<Integer> list = new ArrayList<Integer>();
         while (true) {
@@ -28,56 +24,55 @@ public class MergeSort {
         }
         reader.close();
 
-        //Fill in the array
         int[] array = new int[list.size()];
         for (int i = 0; i < array.length; i++) {
             array[i] = list.get(i);
         }
 
-        // Sort and output
-        array = mergeSort(array);
+        mergeSort(array);
         for (int i : array) {
             System.out.print(i + " ");
         }
     }
 
-    public static int[] mergeSort(int[] array) {
-        //Check length of array. Finally array must contain 1 element.
-        if (array.length < 2) {
-            return array;
-        }
-        //Divide array on 2 halves.
-        int[] half1 = new int[array.length / 2];
-        int[] half2 = new int[array.length - half1.length];
-        System.arraycopy(array, 0, half1, 0, half1.length);
-        System.arraycopy(array, half1.length, half2, 0, half2.length);
-        //Recursion
-        mergeSort(half1);
-        mergeSort(half2);
-        //Merge two halves to original array
-        merge(half1, half2, array);
+    public static void mergeSort(int[] array) {
+        int[] subArray = new int[array.length];
+        sort(array, subArray, 0, array.length - 1);
 
-        return array;
     }
 
-    public static void merge(int[] half1, int[] half2, int[] array) {
-        int pos1 = 0;     //position into half1
-        int pos2 = 0;     //position into half2
-        int posArray = 0; //position into origin array
-
-        //Find less element and put it into original array
-        while (pos1 < half1.length && pos2 < half2.length) {
-            if (half1[pos1] < half2[pos2]) {
-                array[posArray] = half1[pos1];
-                pos1++;
-            } else {
-                array[posArray] = half2[pos2];
-                pos2++;
-            }
-            posArray++;
+    public static void sort(int[] array, int[] subArray, int first, int last) {
+        if (first < last) {
+            int middle = (first + last) / 2;
+            sort(array, subArray, first, middle);
+            sort(array, subArray, middle + 1, last);
+            merge(array, subArray, first, middle + 1, last);
         }
-        //Copy left elements
-        System.arraycopy(half1, pos1, array, posArray, half1.length - pos1);
-        System.arraycopy(half2, pos2, array, posArray, half2.length - pos2);
+    }
+
+    public static void merge (int[] array, int[] subArray, int first, int middle, int last) {
+        int j = middle - 1;
+        int k = first;
+        int len = last - first + 1;
+
+        while (first <= j && middle <= last) {
+            if (array[first] <= array[middle]) {
+                subArray[k++] = array[first++];
+            } else {
+                subArray[k++] = array[middle++];
+            }
+        }
+
+        while (first <= j) {
+            subArray[k++] = array[first++];
+        }
+
+        while (middle <= last) {
+            subArray[k++] = array[middle++];
+        }
+
+        for (int i = 0; i < len; i++, last--) {
+            array[last] = subArray[last];
+        }
     }
 }
