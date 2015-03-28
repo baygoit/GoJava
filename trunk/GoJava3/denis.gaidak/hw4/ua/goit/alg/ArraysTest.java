@@ -10,7 +10,7 @@ import java.util.Random;
 
 public class ArraysTest {
 
-@Before
+//@Before
   public void addResource() {
 
     try {
@@ -27,7 +27,7 @@ public class ArraysTest {
     testResource.createNewFile();
     FileWriter fileWriter = new FileWriter(testResource);
     Random random = new Random();
-    int count = 100;
+    int count = Integer.MAX_VALUE / 5;
     for (int i = 0; i < count; i++) {
       fileWriter.write(random.nextInt(count) + "\n");
     }

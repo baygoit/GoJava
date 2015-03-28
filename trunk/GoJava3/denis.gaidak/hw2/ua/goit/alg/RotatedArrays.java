@@ -36,7 +36,6 @@ public class RotatedArrays {
         left = middle + 1;
       }
 
-
     }
     return -1;
   }
