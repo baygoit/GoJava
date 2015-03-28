@@ -18,5 +18,6 @@ public class ArraysTest {
     writeArrayToFile(expectedArray, fileName);
     actualArray = readArrayFromFile(fileName);
     assertArrayEquals(expectedArray, actualArray);
+    fileName.deleteOnExit();
   }
 }
