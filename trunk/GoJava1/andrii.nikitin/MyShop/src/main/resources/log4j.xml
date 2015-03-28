@@ -10,10 +10,19 @@
 			value="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n" />
 	   </layout>
    </appender>
+   <!-- loggers for libs -->
     <logger name="org.springframework">
         <level value="WARN"/>
       	<appender-ref ref="fileAppender" />
     </logger>
+    <logger name="com.opensymphony">
+        <level value="DEBUG" />
+    </logger>
+
+    <logger name="org.apache.struts2">
+         <level value="DEBUG" />
+    </logger>
+    
    <root>
       <level value="FINE" />
       <appender-ref ref="fileAppender" />

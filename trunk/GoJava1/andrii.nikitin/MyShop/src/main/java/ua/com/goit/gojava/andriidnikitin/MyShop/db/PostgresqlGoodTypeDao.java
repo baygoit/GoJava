@@ -17,11 +17,23 @@ public class PostgresqlGoodTypeDao implements GenericDao<GoodType> {
 	
 	private Connection connection;
 
-	private static Logger log = Logger.getLogger("MyShop.DAO");
+	private Logger log;
+	
+	@SuppressWarnings("unused")
+	/**
+	*placed here in case of usage further
+	**/
+	private DaoFactory daoFactory;
 
-    public PostgresqlGoodTypeDao(Connection connection) {
-        this.connection = connection;
-    }
+	private static final String CLASSNAME = PostgresqlGoodTypeDao.class.getCanonicalName();
+			
+	public void setDaoFactory(DaoFactory daoFactory) {
+		this.daoFactory = daoFactory;
+	}
+
+	public void setLog(Logger log) {
+		this.log = log;
+	}
 
 	@Override
 	public Integer create(GoodType arg) throws MyShopDaoException {
@@ -190,4 +202,8 @@ public class PostgresqlGoodTypeDao implements GenericDao<GoodType> {
 		
 	}
 
+	public void setConnection(Connection connection) {
+		this.connection = connection;		
+	}
+	
 }

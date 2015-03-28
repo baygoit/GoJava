@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import ua.com.goit.gojava.andriidnikitin.MyShop.commons.ErrorLogger;
 import ua.com.goit.gojava.andriidnikitin.MyShop.db.util.MyShopDaoException;
@@ -17,19 +16,34 @@ import ua.com.goit.gojava.andriidnikitin.MyShop.domain.model.Good;
 import ua.com.goit.gojava.andriidnikitin.MyShop.domain.model.GoodIncoming;
 
 public class PostgresqlGoodIncomingDao implements GenericDao<GoodIncoming> {
-	private Connection connection;
-	@Autowired
-    private DaoFactory factory;
-	private static Logger log = Logger.getLogger("MyShop.DAO");
-	private static final String CLASSNAME = PostgresqlGoodIncomingDao.class.getCanonicalName();
-	private static final String GOOD_INCOME_CLASSNAME = Good.class.getCanonicalName();
 	
-    public PostgresqlGoodIncomingDao(Connection connection) {
-		   log.info("Created new instance of " + CLASSNAME + " using connection " + connection.toString());
-        this.connection = connection;
-    }
+	private Connection connection;
 
-	@Override
+	private DaoFactory daoFactory;	
+
+	private Logger log;	
+
+	private static final String CLASSNAME = PostgresqlGoodIncomingDao.class.getCanonicalName();
+	
+	private static final String GOOD_INCOME_CLASSNAME = Good.class.getCanonicalName();
+		
+	public Connection getConnection() {
+		return connection;
+	}
+
+	public void setConnection(Connection connection) {
+		this.connection = connection;
+	}
+	
+	public void setDaoFactory(DaoFactory daoFactory) {
+		this.daoFactory = daoFactory;
+	}
+	
+	public void setLog(Logger log) {
+		this.log = log;
+	}	
+
+    @Override
 	public Integer create(GoodIncoming arg) throws MyShopDaoException {
 		String sql = "INSERT INTO \"GoodIncoming\"(good_id, quantity, price) VALUES ( ?, ?, ?) RETURNING income_id;";
 	    PreparedStatement stm;
@@ -69,7 +83,7 @@ public class PostgresqlGoodIncomingDao implements GenericDao<GoodIncoming> {
 		    quantity = rs.getInt("quantity");
 		    goodId = rs.getInt("good_id");
 		    result = new GoodIncoming();
-		    GenericDao<Good> dao = factory.getGoodDao(connection);
+		    GenericDao<Good> dao = daoFactory.getGoodDao(connection);
 		    result.setGood(dao.read(goodId));
 		    result.setAmount(quantity);
 		    result.setPrice(price);
@@ -150,5 +164,5 @@ public class PostgresqlGoodIncomingDao implements GenericDao<GoodIncoming> {
 			ErrorLogger.logSQLException(e, errorSpot, log);
 			throw new MyShopDaoException(e);
 		}
-	}	
+	}
 }

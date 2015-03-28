@@ -8,27 +8,40 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import ua.com.goit.gojava.andriidnikitin.MyShop.commons.ErrorLogger;
-import ua.com.goit.gojava.andriidnikitin.MyShop.commons.MyContextLoader;
 import ua.com.goit.gojava.andriidnikitin.MyShop.db.util.MyShopDaoException;
 import ua.com.goit.gojava.andriidnikitin.MyShop.domain.model.Good;
 import ua.com.goit.gojava.andriidnikitin.MyShop.domain.model.GoodType;
 
-public class PostgresqlGoodDao implements GenericDao<Good> {
-	private Connection connection;
-	//@Autowired
-	private DaoFactory factory =  PostgresqlDaoFactory.getInstance();
-	private static Logger log = Logger.getLogger("MyShop.DAO");
-	private static final String CLASSNAME = PostgresqlGoodDao.class.getCanonicalName();
-	private static final String GOOD_CLASSNAME = Good.class.getCanonicalName();
-	
-    public PostgresqlGoodDao(Connection connection) {
-		   log.info("Created new instance of " + CLASSNAME + " using connection " + connection.toString());
-        this.connection = connection;
-    }
+public class PostgresqlGoodDao implements GenericDao<Good>, Cloneable {
 
+	private Connection connection;
+
+	private DaoFactory daoFactory;
+	
+	private Logger log;	
+
+	private static final String CLASSNAME = PostgresqlGoodDao.class.getCanonicalName();
+	
+	private static final String GOOD_CLASSNAME = Good.class.getCanonicalName();
+		
+	public Connection getConnection() {
+		return connection;
+	}
+
+	public void setConnection(Connection connection) {
+		this.connection = connection;
+	}
+	
+	public void setLog(Logger log) {
+		this.log = log;
+	}	
+
+	public void setDaoFactory(DaoFactory daoFactory) {
+		this.daoFactory = daoFactory;
+	}
+	
 	@Override
 	public Integer create(Good arg) throws MyShopDaoException {
 		String sql = "INSERT INTO \"Good\"(name, type_id) VALUES ( ?, ?) RETURNING good_id;";
@@ -75,7 +88,13 @@ public class PostgresqlGoodDao implements GenericDao<Good> {
 		        result = new Good();
 		        result.setId(goodId);
 		        result.setName(name);
-		        GenericDao<GoodType> dao = factory.getGoodTypeDao(connection);
+		        if (connection==null){
+			        log.warn("connection is null");		        	
+		        } 
+		        if (daoFactory==null){
+			        log.warn("factory is null");		        	
+		        }
+		        GenericDao<GoodType> dao = daoFactory.getGoodTypeDao(connection);
 		        result.setType(dao.read(typeId));	 
 			} catch (SQLException e) {
 				if ((goodId == null)  || (name == null)){	
@@ -159,5 +178,6 @@ public class PostgresqlGoodDao implements GenericDao<Good> {
 			ErrorLogger.logSQLException(e, errorSpot, log);
 			throw new MyShopDaoException(e);
 		}
-	}	
+	}
+		
 }

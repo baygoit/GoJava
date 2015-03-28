@@ -5,7 +5,6 @@ import java.sql.SQLException;
 import java.util.List;
 
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import ua.com.goit.gojava.andriidnikitin.MyShop.commons.ErrorLogger;
 import ua.com.goit.gojava.andriidnikitin.MyShop.commons.MyContextLoader;
@@ -16,21 +15,41 @@ import ua.com.goit.gojava.andriidnikitin.MyShop.domain.model.Good;
 import ua.com.goit.gojava.andriidnikitin.MyShop.domain.model.GoodType;
 import ua.com.goit.gojava.andriidnikitin.MyShop.domain.util.MyShopException;
 
-
 public class GoodCatalogImpl implements GoodCatalog{	
 	
-	//@Autowired
-	private DaoFactory daoFactory =  MyContextLoader.getBean("daoFactory");
+	private DaoFactory daoFactory;
 
-	private static Logger log = Logger.getLogger("MyShop.BL");
+	public void setDaoFactory(DaoFactory daoFactory) {
+		this.daoFactory = daoFactory;
+	}
+
+	private Logger log;
 	
-	private static GoodCatalogImpl instance = null;
+	public void setLog(Logger log) {
+		this.log = log;
+	}
+	
+	private String goodList;
+		
+	public void setGoodList(String goodList) {
+		this.goodList = goodList;
+	}
+
+	public String getGoodList() {
+		try {
+			StringBuilder result = new StringBuilder();
+			List<Good> list =  getAllGoods();
+			for (Good good: list){
+				result.append(good.getName()).append(" ");
+			}
+			return result.toString();
+		} catch (MyShopException e) {
+			return null;
+		}
+	}
 
 	public static GoodCatalogImpl getInstance() {
-		if (instance == null) {
-			instance = new GoodCatalogImpl();
-		}
-		return instance;
+		return  MyContextLoader.getBean("goodCatalog");
 	}
 	
 	public GoodType createType(String name, Integer parentId) throws MyShopException {
@@ -193,36 +212,18 @@ public class GoodCatalogImpl implements GoodCatalog{
 	}
 
 	public List<Good> getAllGoods() throws MyShopException {
-		Connection con=null;
-		 try {
-			 log.info("started setting a connection.");
-			 if (daoFactory == null){
-				 log.warn("daoFactory is null");
-				 try{
-				 daoFactory = MyContextLoader.getBean("daoFactory");
-				 } catch (Exception e){
-					 String error = e.getClass().toString();
-					 log.error("unable to initialize daoFactory with Spring because of " + error);
-				 }
-				 if (daoFactory == null){
-					 log.error("unable to initialize daoFactory");
-				 }
-			 }
-				con = daoFactory.getConnection();
-				log.info("connection recieved");
-				if (con==null){
-					log.error("failed to establish connection to db");
-				}
-		        GenericDao<Good> dao = daoFactory.getGoodDao(con);
-		        List<Good> list = dao.getAll();
-		        return list;
+		Connection con = null;
+		try {
+			con = daoFactory.getConnection();
+			GenericDao<Good> dao = daoFactory.getGoodDao(con);
+		    if (dao==null){
+		    	log.warn("dao is null");
+		    }
+		    List<Good> list = dao.getAll();
+		    return list;
 		 } catch(MyShopDaoException e){
 			 throw new MyShopException (e);
-		 } catch(SQLException e){
-				String errorSpot = "getting connection to DB via DAOFactory";
-				ErrorLogger.logSQLException(e, errorSpot, log);
-			 throw new MyShopException (e);		 
-		 }	
+		 } 
 		 finally{
 			 try {
 				con.close();
@@ -230,7 +231,9 @@ public class GoodCatalogImpl implements GoodCatalog{
 				if (con==null){
 					log.error("fail to establish connection to db");
 				}
-				log.error("unable to close connection!");
+				else {
+					log.error("unable to close connection!");
+				}
 			}
 		 }
 	}

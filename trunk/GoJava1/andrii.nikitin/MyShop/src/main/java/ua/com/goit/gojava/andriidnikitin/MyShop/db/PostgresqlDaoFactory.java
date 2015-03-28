@@ -9,40 +9,36 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import ua.com.goit.gojava.andriidnikitin.MyShop.commons.ErrorLogger;
-import ua.com.goit.gojava.andriidnikitin.MyShop.db.util.DataSourceProvider;
+import ua.com.goit.gojava.andriidnikitin.MyShop.commons.MyContextLoader;
 import ua.com.goit.gojava.andriidnikitin.MyShop.db.util.MyShopDaoException;
 import ua.com.goit.gojava.andriidnikitin.MyShop.domain.model.Good;
 import ua.com.goit.gojava.andriidnikitin.MyShop.domain.model.GoodIncoming;
 import ua.com.goit.gojava.andriidnikitin.MyShop.domain.model.GoodType;
+
 public class PostgresqlDaoFactory  implements DaoFactory {
 
-   private String driver = "org.postgresql.Driver";
+   private DataSource dataSource;
    
-   /*
-    * @Autowired
-   private DataSource dataSource;  
-   */ 
-   //TODO - delete
-   private DataSource dataSource = DataSourceProvider.getDataSource();  
-      
-   private static PostgresqlDaoFactory instance = null;
-   
-   private static final String CLASSNAME = PostgresqlDaoFactory.class.getCanonicalName();
-   
-   private static Logger log = Logger.getLogger("MyShop.DAO");
-   
-   public static PostgresqlDaoFactory getInstance(){
-	   if (instance == null) {
-		   instance = new PostgresqlDaoFactory();
-	   }
-	   return instance;
+   public PostgresqlDaoFactory() {   
+	   
    }
-    
+      
+   public DataSource getDataSource() {
+	   return dataSource;
+   }
+
+	public void setDataSource(DataSource dataSource) {
+		this.dataSource = dataSource;
+	}
+	      
+   private static Logger log = Logger.getLogger("MyShop.DAO");
+        
     public Connection getConnection() throws MyShopDaoException {   
-    	log.info("datasource is null?" + dataSource==null);
+    	if (dataSource == null){
+    		log.warn("DataSource is null");
+    	}    	
         try {
 			return dataSource.getConnection();
 		} catch (SQLException e) {
@@ -74,28 +70,34 @@ public class PostgresqlDaoFactory  implements DaoFactory {
     
     @Override
     public GenericDao<GoodType> getGoodTypeDao(Connection connection) {
-        return new PostgresqlGoodTypeDao(connection);
-    }
-    
-    private PostgresqlDaoFactory() {
-        try {
-            Class.forName(driver);
- 		   log.info("Created new instance of " + CLASSNAME);
-        } catch (ClassNotFoundException e) {
-        	String errorSpot = " loading JDBC driver " + driver;        	
-        	ErrorLogger.logClassNotFoundException(e, errorSpot, log);
-            e.printStackTrace();
-        }
+    	PostgresqlGoodTypeDao dao = getGoodTypeDaoInstance();
+		dao.setConnection(connection);
+		return dao;
     }
 
 	@Override
 	public GenericDao<Good> getGoodDao(Connection connection) {
-		 return new PostgresqlGoodDao(connection);
+		PostgresqlGoodDao dao = getGoodDaoInstance();
+		dao.setConnection(connection);
+		return dao;
 	}
 
 	@Override
 	public GenericDao<GoodIncoming> getGoodIncomingDao(Connection connection) {
-		 return new PostgresqlGoodIncomingDao(connection);
+		PostgresqlGoodIncomingDao dao = getGoodIncomingDaoInstance();
+		dao.setConnection(connection);
+		return dao;
+	}
+	
+	public PostgresqlGoodIncomingDao getGoodIncomingDaoInstance(){
+		return MyContextLoader.getBean(PostgresqlGoodIncomingDao.class);
+	}
+	public PostgresqlGoodTypeDao getGoodTypeDaoInstance(){
+		return MyContextLoader.getBean(PostgresqlGoodTypeDao.class);
+	}
+	public PostgresqlGoodDao getGoodDaoInstance(){
+		return MyContextLoader.getBean(PostgresqlGoodDao.class);
+		
 	}
 	
 }
