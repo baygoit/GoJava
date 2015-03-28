@@ -33,8 +33,8 @@ public class ArrayTest{
   public void mergeSortTest() {
     int[] array = {2, 1};
     int[] expected = {1, 2};
-    int[] actual = Array.mergeSort(array);
-    assertArrayEquals(expected, actual);
+    Array.mergeSort(array);
+    assertArrayEquals(expected, array);
   }
 
   @Test

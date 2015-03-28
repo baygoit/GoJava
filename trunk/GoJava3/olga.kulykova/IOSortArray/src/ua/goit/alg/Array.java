@@ -12,9 +12,8 @@ public class Array {
     try (DataInputStream dis = new DataInputStream(new FileInputStream(file))) {
       while (dis.available() > 0) {
         int[] buff = readIntArray(dis);
-        buff = mergeSort(buff);
+        mergeSort(buff);
         File tempFile = File.createTempFile("file", ".txt", new File(dirPath));
-        tempFile.deleteOnExit();
         topList.add(tempFile);
         writeIntArray(tempFile, buff);
       }
@@ -54,19 +53,17 @@ public class Array {
   }
 
   public static File manyToOne(List<File> higherList, String dirPath)
-          throws IOException{
+          throws IOException {
     List<File> lowerList = new ArrayList<>();
     if (higherList.size() % 2 == 0) {
       for (int i = 0; i < higherList.size(); i += 2) {
         File tempFile = File.createTempFile("file", ".txt", new File(dirPath));
-        tempFile.deleteOnExit();
         lowerList.add(tempFile);
         mergeTwoFiles(higherList.get(i), higherList.get(i + 1), tempFile);
       }
     } else {
       for (int i = 0; i < higherList.size() - 1; i += 2) {
         File tempFile = File.createTempFile("file", ".txt", new File(dirPath));
-        tempFile.deleteOnExit();
         lowerList.add(tempFile);
         mergeTwoFiles(higherList.get(i), higherList.get(i + 1), tempFile);
       }
@@ -170,33 +167,44 @@ public class Array {
     }
   }
 
-  public static int[] mergeSort(int[] array) {
-    if (array.length < 2) {
-      return array;
-    }
-    int[] half1 = new int[array.length / 2];
-    int[] half2 = new int[array.length - half1.length];
-    System.arraycopy(array, 0, half1, 0, half1.length);
-    System.arraycopy(array, half1.length, half2, 0, half2.length);
-    mergeSort(half1);
-    mergeSort(half2);
-    int pos1 = 0;
-    int pos2 = 0;
-    int posArray = 0;
+  public static void mergeSort(int[] array) {
+    int[] subArray = new int[array.length];
+    sort(array, subArray, 0, array.length - 1);
 
-    while (pos1 < half1.length && pos2 < half2.length) {
-      if (half1[pos1] < half2[pos2]) {
-        array[posArray] = half1[pos1];
-        pos1++;
+  }
+
+  public static void sort(int[] array, int[] subArray, int first, int last) {
+    if (first < last) {
+      int middle = (first + last) / 2;
+      sort(array, subArray, first, middle);
+      sort(array, subArray, middle + 1, last);
+      merge(array, subArray, first, middle + 1, last);
+    }
+  }
+
+  public static void merge (int[] array, int[] subArray, int first, int middle, int last) {
+    int j = middle - 1;
+    int k = first;
+    int len = last - first + 1;
+
+    while (first <= j && middle <= last) {
+      if (array[first] <= array[middle]) {
+        subArray[k++] = array[first++];
       } else {
-        array[posArray] = half2[pos2];
-        pos2++;
+        subArray[k++] = array[middle++];
       }
-      posArray++;
     }
-    System.arraycopy(half1, pos1, array, posArray, half1.length - pos1);
-    System.arraycopy(half2, pos2, array, posArray, half2.length - pos2);
 
-    return array;
+    while (first <= j) {
+      subArray[k++] = array[first++];
+    }
+
+    while (middle <= last) {
+      subArray[k++] = array[middle++];
+    }
+
+    for (int i = 0; i < len; i++, last--) {
+      array[last] = subArray[last];
+    }
   }
 }
