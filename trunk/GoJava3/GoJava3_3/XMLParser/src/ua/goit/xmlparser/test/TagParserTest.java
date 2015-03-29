@@ -38,10 +38,10 @@ public class TagParserTest {
 
   @Test
   public void parseParamTest2() {
-    String openTag = "tagname param=\"value\"";
+    String openTag = "tagname param1=\"value1\" param2=\"value2\"";
     TagParser tagParser = new TagParser();
     Tag tag = tagParser.parse(openTag);
     Map<String, String> map = tag.getParams();
-    assertEquals(1, map.size());
+    assertEquals(2, map.size());
   }
 }
