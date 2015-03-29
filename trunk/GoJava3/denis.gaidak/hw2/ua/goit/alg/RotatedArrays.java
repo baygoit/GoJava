@@ -4,31 +4,27 @@ public class RotatedArrays {
 
   public static int binarySearch(int[] array, int target) {
     if (array.length == 0) return -1;
-    return startBinarySearch(array, target);
+    return startBinarySearch(array, target, 0, array.length-1);
   }
 
-  private static int startBinarySearch(int[] array, int target) {
-    int left = 0;
-    int right = array.length - 1;
-
+  private static int startBinarySearch(int[] array, int target, int left, int right) {
     while (left <= right) {
-      if (target == array[left]) return left;
-      if (target == array[right]) return right;
+
       int middle = (right + left) >> 1;
+      int rightValue = array[right];
+      int leftValue = array[left];
+      int middleValue = array[middle];
 
-      boolean normalState = array[left] < target && array[right] > target;
+      if (target == middleValue) return middle;
+      if (target == leftValue) return left;
+      if (target == rightValue) return right;
 
-      if (array[middle] == target) {
-        return middle;
-      } else if (array[middle] > target && normalState) {
-        right = middle - 1;
-        left++;
-      } else if (array[middle] < target && normalState) {
-        right--;
-        left = middle + 1;
-      }
+      boolean normalStateMove = target < middleValue && target > leftValue && target < rightValue;
+      boolean leftStateOneMove = target > middleValue && target < leftValue && target > rightValue;
+      boolean leftStateSecondMove = target < middleValue && target < rightValue && target < leftValue && middleValue < leftValue;
+      boolean leftStateThird = target < middleValue && target > leftValue && target > rightValue;
 
-      if (array[left] > target && array[right] > target && array[middle] > target) {
+      if (normalStateMove || leftStateOneMove || leftStateSecondMove || leftStateThird) {
         right = middle - 1;
         left++;
       } else {
@@ -36,9 +32,10 @@ public class RotatedArrays {
         left = middle + 1;
       }
 
-    }
-    return -1;
   }
+
+  return-1;
+}
 
 
   private static int startBinarySearch_old(int[] array, int target, int left, int right) {

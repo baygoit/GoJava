@@ -6,6 +6,7 @@ import org.junit.Test;
 import java.util.Arrays;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 public class RotatedArraysTest {
 
@@ -83,11 +84,11 @@ public class RotatedArraysTest {
 
   @Test
   public void testRotatedArraysSimple_1() {
-    int target = 1;
+    int target = 7;
     int expected = 1;
-    int[] array = {10, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+    int[] array = {6, 7, 8, 9, 0, 1, 2, 3, 4, 5};
     int actual = RotatedArrays.binarySearch(array, target);
-    Assert.assertEquals(expected, actual);
+    assertEquals(expected, actual);
   }
 
   @Test
