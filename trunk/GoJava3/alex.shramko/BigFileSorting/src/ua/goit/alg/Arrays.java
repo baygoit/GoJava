@@ -14,13 +14,10 @@ import java.io.IOException;
  *    
  * data format of the file:
  *    "1 2 3 .. n-1 n"
- * 
- * @author Александр
- *
  */
 public class Arrays {
 
-  public static final int MAX_ARRAY_SIZE = 4;
+  public static final int MAX_ARRAY_SIZE = 1_000_000;
   public static final int[] array = new int[MAX_ARRAY_SIZE];
   public static int currentIndex;
 
@@ -85,6 +82,11 @@ public class Arrays {
       builder.append(array[i]);
     }
     return builder.toString();
+  }
+  
+  public static void main(String[] args) {
+    File file = new File("/1.txt");
+    Arrays.mergeSort(file);
   }
 
 }
