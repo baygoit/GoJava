@@ -22,14 +22,14 @@ public class RotatedArrays {
     } else if (array[high] == elem) {
       index = high;
     }
-    while (index != -1 && low < high) {
+    while (low < high) {
       middle = (low + high) >>> 1;
       if (array[middle] == elem) {
         index = middle;
         break;
       }
       if (array[middle] > elem) {
-        if (array[low] >= elem) {
+        if (array[low] > elem) {
           if (array[middle] < array[low]) {
             moveDown();
           } else {
@@ -39,7 +39,7 @@ public class RotatedArrays {
           moveDown();
         }
       } else {
-        if (array[low] >= elem) {
+        if (array[low] > elem) {
           moveUp();
         } else {
           if (array[middle] > array[low]) {
