@@ -9,7 +9,6 @@ public class RotatedArrays {
 
   private static int startBinarySearch(int[] array, int target, int left, int right) {
     while (left <= right) {
-
       int middle = (right + left) >> 1;
       int rightValue = array[right];
       int leftValue = array[left];
@@ -34,28 +33,6 @@ public class RotatedArrays {
 
     }
 
-    return -1;
-  }
-
-
-  private static int startBinarySearch_old(int[] array, int target, int left, int right) {
-//        if (array.length == 0) return -1;
-//        if (target == array[left]) return left;
-//        if (target == array[right]) return right;
-//        if (left >= right) return -1;
-//
-//        int middle = (right + left) >> 1;
-//        if (array[middle] > array[right] && array[right] >= target) {
-//            return startBinarySearch(array, target, middle, right);
-//        }
-//
-//        if (array[middle] == target) {
-//            return middle;
-//        } else if (array[middle] > target) {
-//            return startBinarySearch(array, target, left + 1, middle - 1);
-//        } else {
-//            return startBinarySearch(array, target, middle + 1, right - 1);
-//        }
     return -1;
   }
 
