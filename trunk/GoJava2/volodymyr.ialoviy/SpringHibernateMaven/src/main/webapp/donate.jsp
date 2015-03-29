@@ -20,27 +20,27 @@
 	<table border="2" bordercolor="black" cellpadding="2">
 		<tr>
 			<td>invest project</td>
-			<td><a href="donatesuccess?amount=10000&project=${idproject}">any amount</a></td>
+			<td><a href="donatesuccess?amount=10000&project=${id}">any amount</a></td>
 			<td>thanks</td>
 		</tr>
 		<tr>
 			<td>invest project</td>
-			<td><a href="donatesuccess?amount=1&project=${idproject}">1 dollar</a></td>
+			<td><a href="donatesuccess?amount=1&project=${id}">1 dollar</a></td>
 			<td>you get many thanks</td>
 		</tr>
 		<tr>
 			<td>invest project</td>
-			<td><a href="donatesuccess?amount=5&project=${idproject}">5 dollars</a></td>
+			<td><a href="donatesuccess?amount=5&project=${id}">5 dollars</a></td>
 			<td>you get 1 month software license</td>
 		</tr>
 		<tr>
 			<td>invest project</td>
-			<td><a href="donatesuccess?amount=10&project=${idproject}">10 dollars</a></td>
+			<td><a href="donatesuccess?amount=10&project=${id}">10 dollars</a></td>
 			<td>you get you link in our site</td>
 		</tr>
 	</table>
 	<br />
 	<br /> Go back to
-	<a href="<c:url value='project?project=${idproject}' />">project</a>
+	<a href="<c:url value='project?project=${id}' />">project</a>
 </body>
 </html>

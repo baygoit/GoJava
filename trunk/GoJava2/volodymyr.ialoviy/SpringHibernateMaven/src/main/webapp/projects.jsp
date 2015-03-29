@@ -13,8 +13,8 @@
 		</tr>
 		<c:forEach items="${projects}" var="project">
 			<tr>
-			<td><a href="<c:url value='/delete-${project.idProject}-project-${project.idCategory}' />">${project.name}</a></td>
-			<td><a href="project?project=${project.idProject}"><c:out value="${project.name}"/></a></td>
+			<td><a href="<c:url value='/delete-${project.id}-project-${project.id}' />">${project.name}</a></td>
+			<td><a href="project?project=${project.id}"><c:out value="${project.name}"/></a></td>
 			</tr>
 		</c:forEach>
 	</table>

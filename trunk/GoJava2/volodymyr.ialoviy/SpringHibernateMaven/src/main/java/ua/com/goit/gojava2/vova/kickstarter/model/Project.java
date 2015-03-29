@@ -27,7 +27,7 @@ public class Project implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	@ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-	@JoinColumn(name = "ID_CATEGORY", nullable = false, insertable = false, updatable = false)
+	@JoinColumn(name = "ID", nullable = false, insertable = false, updatable = false)
 	private Category category;
 	
 	
@@ -41,12 +41,8 @@ public class Project implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "ID_PROJECT")
-	private int idProject;
-	
-	@NotNull
-	@Column(name = "ID_CATEGORY")
-	private String idCategory;
+	@Column(name = "ID")
+	private int id;
  
 	@NotNull
 	@Size(min = 3, max = 50)
@@ -96,20 +92,12 @@ public class Project implements Serializable{
 		this.faq = faq;
 	}
 	
-	public int getIdProject() {
-		return idProject;
+	public int getId() {
+		return id;
 	}
 
-	public void setIdProject(int idProject) {
-		this.idProject = idProject;
-	}
-
-	public String getIdCategory() {
-		return idCategory;
-	}
-
-	public void setIdCategory(String idCategory) {
-		this.idCategory = idCategory;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getName() {
@@ -193,19 +181,14 @@ public class Project implements Serializable{
 		if (!(obj instanceof Project))
 			return false;
 		Project other = (Project) obj;
-		if (idProject != other.idProject)
+		if (id != other.id)
 			return false;
 		return true;
 	}
-	
-//	public Project(String string){
-//		
-//	}
 
 	@Override
 	public String toString() {
-		return "Project [idProject=" + idProject + "idCategory=" + idCategory + ", name=" + name + ", dateClose="
-				+ dateClose + "]";
+		return "Project [id=" + id + "name=" + name + ", dateClose=" + dateClose + "]";
 	}
 
 }

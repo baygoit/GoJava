@@ -20,18 +20,18 @@ public class Categories extends AbstractDao implements CategoryDao{
 		List<Category> result = (List<Category>) getSession().createQuery("from Category").list();
 		return result;
 	}
-
+	
 	@Override
-	public void deleteCategoryById(Integer idCategory) {
-		Query query = getSession().createSQLQuery("delete from Categories where id_category = :idCategory");//TODO DELETE hQL заменить шкюел на сессии.
-		query.setInteger("idCategory", idCategory);
+	public void deleteCategoryById(int id) {
+		Query query = getSession().createSQLQuery("delete from Categories where id = :id");//TODO DELETE hQL заменить шкюел на сессии.
+		query.setInteger("id", id);
 		query.executeUpdate();
 	}
 
 	@Override
 	public Category findCategoryById(int id) {
 		for (Category category : findAllCategories()){
-			if(category.getIdCategory() == id){
+			if(category.getId() == id){
 				return category;
 			}
 		}

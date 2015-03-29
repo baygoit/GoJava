@@ -17,8 +17,8 @@ public class ProjectServiceImpl implements ProjectService{
 	private ProjectDao dao;
 	
 	@Override
-	public List<Project> findAllProjects(Integer idCategory) {
-		return dao.findAllProjects(idCategory);
+	public List<Project> findAllProjects(int id) {
+		return dao.findAllProjects(id);
 	}
 
 	@Override
@@ -27,18 +27,18 @@ public class ProjectServiceImpl implements ProjectService{
 	}
 
 	@Override
-	public void deleteProjectById(Integer idProject) {
-		dao.deleteProjectById(idProject);
+	public void deleteProjectById(int id) {
+		dao.deleteProjectById(id);
 	}
 
 	@Override
-	public Project getProgect(Integer idProject) {
-		return dao.getProgect(idProject);
+	public Project getProgect(int id) {
+		return dao.getProgect(id);
 	}
 
 	@Override
-	public void addDonate(Integer amount, Integer idProject) {
-		dao.addDonate(amount, idProject);		
+	public void addDonate(int amount, int id) {
+		dao.addDonate(amount, id);		
 	}
 
 }

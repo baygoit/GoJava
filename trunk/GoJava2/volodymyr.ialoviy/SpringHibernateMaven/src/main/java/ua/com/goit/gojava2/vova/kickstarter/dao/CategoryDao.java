@@ -9,7 +9,7 @@ public interface CategoryDao {
 	
 	List<Category> findAllCategories();
 	
-	void deleteCategoryById(Integer idCategory);
+	void deleteCategoryById(int id);
 
 	Category findCategoryById(int id);
 

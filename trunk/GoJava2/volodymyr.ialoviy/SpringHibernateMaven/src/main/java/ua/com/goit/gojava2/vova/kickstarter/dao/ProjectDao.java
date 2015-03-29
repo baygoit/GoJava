@@ -6,14 +6,14 @@ import ua.com.goit.gojava2.vova.kickstarter.model.Project;
 
 public interface ProjectDao {
 
-	List<Project> findAllProjects(Integer idCategory);
+	List<Project> findAllProjects(int id);
 
 	void saveProject(Project project);
 
-	void deleteProjectById(Integer idProject);
+	void deleteProjectById(int id);
 
-	Project getProgect(Integer idProject);
+	Project getProgect(int id);
 
-	void addDonate(Integer amount, Integer idProject);
+	void addDonate(int amount, int id);
 
 }

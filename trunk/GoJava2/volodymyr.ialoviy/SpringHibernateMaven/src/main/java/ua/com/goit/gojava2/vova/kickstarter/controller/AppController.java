@@ -50,8 +50,7 @@ public class AppController {
 
 		List<Category> categories = categoryService.findAllCategories();
 
-		List<Project> projects = categoryService.getCategoryById(id)
-				.getProjects();
+		List<Project> projects = categoryService.getCategoryById(id).getProjects();
 		model.addAttribute("projects", projects);
 
 		model.addAttribute("categories", categories);
@@ -80,15 +79,15 @@ public class AppController {
 
 	@RequestMapping(value = "/donate", method = RequestMethod.GET)
 	public String donate(ModelMap model, HttpServletRequest req) {
-		Integer idproject = Integer.valueOf(req.getParameter("idproject"));
-		model.addAttribute("idproject", idproject);
+		int id = Integer.valueOf(req.getParameter("id"));
+		model.addAttribute("id", id);
 		return "donate";
 	}
 
 	@RequestMapping(value = "/donatesuccess", method = RequestMethod.GET)
 	public String saveDonate(ModelMap model, HttpServletRequest req) {
-		Integer amount = Integer.valueOf(req.getParameter("amount"));
-		Integer project = Integer.valueOf(req.getParameter("project"));
+		int amount = Integer.valueOf(req.getParameter("amount"));
+		int project = Integer.valueOf(req.getParameter("project"));
 		projectService.addDonate(amount, project);
 
 		model.addAttribute("success", "Donate " + amount + " successfully");

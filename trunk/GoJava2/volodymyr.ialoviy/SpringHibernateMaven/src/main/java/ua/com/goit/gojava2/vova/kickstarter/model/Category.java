@@ -15,29 +15,13 @@ import javax.validation.constraints.Size;
 import javax.persistence.GenerationType;
 
 @Entity
-@Table(name="CATEGORIES", uniqueConstraints = {@UniqueConstraint(columnNames = "ID_CATEGORY")})
+@Table(name="CATEGORIES", uniqueConstraints = {@UniqueConstraint(columnNames = "ID")})
 public class Category implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "category")
 	private List<Project> projects;
 	
-	public Category() {
-	}
-	
-	public Category(int idCategory) {
-		this.idCategory = idCategory;
-	}
-	
-	@Id
-	@Column(name = "ID_CATEGORY", unique = true, nullable = false)
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int idCategory;
-
-	@Size(min=3, max=50)
-	@Column(name = "NAME", nullable = false)
-	private String name;
-		
 	public List<Project> getProjects() {
 		return this.projects;
 	}
@@ -46,12 +30,21 @@ public class Category implements Serializable {
 		this.projects = projects;
 	}
 	
-	public int getIdCategory() {
-		return idCategory;
+	@Id
+	@Column(name = "ID", unique = true, nullable = false)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
+
+	@Size(min=3, max=50)
+	@Column(name = "NAME", nullable = false)
+	private String name;
+		
+	public int getId() {
+		return id;
 	}
 
-	public void setIdCategory(int idCategory) {
-		this.idCategory = idCategory;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getName() {
@@ -71,13 +64,13 @@ public class Category implements Serializable {
 		if (!(obj instanceof Category))
 			return false;
 		Category other = (Category) obj;
-		if (idCategory != other.idCategory)
+		if (id != other.id)
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Category [id=" + idCategory + ", name=" + name + "]";
+		return "Category [id=" + id + ", name=" + name + "]";
 	}
 }

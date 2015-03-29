@@ -10,7 +10,7 @@ public interface CategoryService {
 	
 	List<Category> findAllCategories(); 
 	
-	void deleteCategoryById(Integer idCategory);
+	void deleteCategoryById(int id);
 
 	Category getCategoryById(int id);
 }

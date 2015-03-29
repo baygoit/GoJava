@@ -27,42 +27,15 @@ tr:first-child {
 		</tr>
 		<c:forEach items="${categories}" var="category">
 			<tr>
-				<td><a href="${ctx}/categories/${category.idCategory}?delete">${category.name}(x)</a></td>
-				<td><a href="${ctx}/categories/${category.idCategory}">${category.name}</a></td>
-				<td><a href="${ctx}/projects?add">add new project</a></td>
+				<td><a href="${ctx}/categories/${category.id}?delete">${category.name}(x)</a></td>
+				<td><a href="${ctx}/categories/${category.id}">${category.name}</a></td>
+				<td><a href="${ctx}/projects?add">add new project for category # ${category.id}</a></td>
 			</tr>
 		</c:forEach>
 	</table>
 
 	<br />
 	<a href="<c:url value='/newcategory' />">add new category</a>
-	<br />
-	<br />
-
-	<table>
-		<tr>
-			<td>DELETE</td>
-			<td>SHOW PROJECT</td>
-		</tr>
-		<c:forEach items="${categories}" var="category">
-			<c:forEach items="${category.projects}" var="project">
-				<tr>
-
-					<td><a href="${ctx}/projects/${project.idProject}?delete">${project.name}(x)</a>
-					</td>
-					<td><a href="${ctx}/projects/${project.idProject}">${project.name}</a>
-					</td>
-
-
-				</tr>
-			</c:forEach>
-		</c:forEach>
-	</table>
-
-
-
-
-
-
+	
 </body>
 </html>
