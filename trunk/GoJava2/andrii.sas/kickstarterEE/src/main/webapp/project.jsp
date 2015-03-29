@@ -1,17 +1,22 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <html>
 <head>
 <title>Kickstarter</title>
 </head>
 	<body>
-		<c:out value="${project.name}"></c:out><br>
-		<c:out value="${project.description}"></c:out><br>
-		<c:out value="${project.moneyNeed}"></c:out><br>
-		<c:out value="${project.moneyHas}"></c:out><br>
-		<c:out value="${project.daysLeft}"></c:out><br>
-		<c:out value="${project.history}"></c:out><br>
-		<c:out value="${project.videoLink}"></c:out><br>
-		<c:out value="${project.question}"></c:out><br><br>
-		<a href="projects?category=${project.categoryId}">Return</a>
+		<s:property value="project.name"/><br>
+		<s:property value="project.description"/><br>
+		<s:property value="project.moneyNeed"/><br>
+		<s:property value="project.moneyHas"/><br>
+		<s:property value="project.daysLeft"/><br>
+		<s:property value="project.history"/><br>
+		<s:property value="project.videoLink"/><br>
+		<s:property value="project.question"/><br>
+		<br>
+		<s:url action='projects' var="url">
+			<s:param name="id">${project.categoryId}</s:param>
+		</s:url>
+		<s:a href="%{url}">Return</s:a>
 	</body>
 </html>

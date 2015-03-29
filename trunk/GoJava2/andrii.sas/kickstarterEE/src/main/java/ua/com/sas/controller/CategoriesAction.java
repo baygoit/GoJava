@@ -2,25 +2,38 @@ package ua.com.sas.controller;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.opensymphony.xwork2.ModelDriven;
 
 import ua.com.sas.dao.CategoriesDAO;
 import ua.com.sas.model.Category;
 
-public class CategoriesAction implements Action{
+public class CategoriesAction implements ModelDriven {
 
+	private Category category;
+
+	@Autowired
 	private CategoriesDAO categoriesDAO;
 
-	public CategoriesAction(CategoriesDAO categoriesDAO) {
-		this.categoriesDAO = categoriesDAO;
-	}
-	
+	private List<Category> categories;
+
 	@Override
-	public String getJsp(HttpServletRequest req, HttpServletResponse resp) {
-		List<Category> categories = categoriesDAO.getCategories();
-		req.setAttribute("categories", categories);
-		return "categories.jsp";
+	public Object getModel() {
+		return category;
+	}
+
+	public String getAll() throws Exception {
+		setCategories(categoriesDAO.getCategories());
+		return "success";
+	}
+
+	public List<Category> getCategories() {
+		return categories;
+	}
+
+	public void setCategories(List<Category> categories) {
+		this.categories = categories;
 	}
 
 }

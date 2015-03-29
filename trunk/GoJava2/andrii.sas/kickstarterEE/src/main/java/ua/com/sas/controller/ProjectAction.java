@@ -1,25 +1,44 @@
 package ua.com.sas.controller;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.opensymphony.xwork2.ModelDriven;
 
 import ua.com.sas.dao.ProjectsDAO;
 import ua.com.sas.model.Project;
 
-public class ProjectAction implements Action {
-
+public class ProjectAction implements ModelDriven {
+	
+	private Project project;
+	private int id;
+	
+	@Autowired
 	private ProjectsDAO projectsDAO;
 
-	public ProjectAction(ProjectsDAO projectsDAO) {
-		this.projectsDAO = projectsDAO;
+	public String current(){
+		setProject(projectsDAO.get(id));
+		return "success";
+	}
+	
+	@Override
+	public Object getModel() {
+		return getProject();
 	}
 
-	@Override
-	public String getJsp(HttpServletRequest req, HttpServletResponse resp) {
-		int id = Integer.valueOf(req.getParameter("id"));
-		Project project = projectsDAO.get(id);
-		req.setAttribute("project", project);
-		return "project.jsp";
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public Project getProject() {
+		return project;
+	}
+
+	public void setProject(Project project) {
+		this.project = project;
 	}
 
 }
