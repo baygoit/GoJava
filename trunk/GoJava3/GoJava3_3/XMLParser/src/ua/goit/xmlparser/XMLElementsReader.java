@@ -22,6 +22,10 @@ public class XMLElementsReader extends InputStreamReader{
     boolean readNext= true;
     
     actualChar = (char) super.read();
+    while(super.ready() && (actualChar =='\n' || actualChar ==' ' )){
+      actualChar = (char) super.read();
+    }
+    
     if(actualChar =='<'){
       prevChar = actualChar;
     }else{
@@ -33,6 +37,10 @@ public class XMLElementsReader extends InputStreamReader{
     
     while(super.ready() && readNext ){
       actualChar = (char) super.read();
+      if(actualChar == '\n'){
+        continue;
+      }
+      
       result.append(actualChar);
       if(actualChar =='<' ||actualChar =='>'  ){
         readNext = false;
