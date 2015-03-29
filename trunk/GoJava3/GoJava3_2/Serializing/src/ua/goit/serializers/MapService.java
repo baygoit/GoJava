@@ -6,41 +6,41 @@ import java.util.HashMap;
 import java.util.Map;
 
 public final class MapService {
-  private static Map<Types, Class<? extends Serializer>> XMLMap = new HashMap<Types, Class<? extends Serializer>>() {
+  private static Map<Types, Serializer> XMLMap = new HashMap<Types, Serializer>() {
     private static final long serialVersionUID = 4843687589214561824L;
     {
-      put(Types.GROUP, GroupAdapterXML.class);
-      put(Types.CIRCLE, CircleAdapterXML.class);
-      put(Types.TRIANGLE, TriangleAdapterXML.class);
-      put(Types.SQUARE, SquareAdapterXML.class);
+      put(Types.GROUP, new GroupAdapterXML());
+      put(Types.CIRCLE, new CircleAdapterXML());
+      put(Types.TRIANGLE, new TriangleAdapterXML());
+      put(Types.SQUARE, new SquareAdapterXML());
     }
   };
 
-  private static Map<Types, Class<? extends Serializer>> JSONMap = new HashMap<Types, Class<? extends Serializer>>()
+  private static Map<Types, Serializer> JSONMap = new HashMap<Types, Serializer>()
  {
     private static final long serialVersionUID = 1L;
     {
-      put(Types.GROUP, GroupAdapterJSON.class);
-      put(Types.CIRCLE, CircleAdapterJSON.class);
-      put(Types.TRIANGLE, TriangleAdapterJSON.class);
-      put(Types.SQUARE, SquareAdapterJSON.class);
+      put(Types.GROUP, new GroupAdapterJSON());
+      put(Types.CIRCLE, new CircleAdapterJSON());
+      put(Types.TRIANGLE, new TriangleAdapterJSON());
+      put(Types.SQUARE, new SquareAdapterJSON());
     }
   };
 
-  private static Map<SerializerType, Class<? extends Serializer>> serializerTypeMap = new HashMap<SerializerType, Class<? extends Serializer>>() {
+  private static Map<SerializerType, Serializer> serializerTypeMap = new HashMap<SerializerType, Serializer>() {
     private static final long serialVersionUID = 484368758921456L;
     {
-      put(SerializerType.XML, XMLSerializer.class);
-      put(SerializerType.JSON, JSONSerializer.class);
+      put(SerializerType.XML, new XMLSerializer());
+      put(SerializerType.JSON, new JSONSerializer());
     }
   };
 
   public static Serializer getAdapter(Types type, SerializerType serializerType) {
     try {
       if (serializerType == SerializerType.XML) {
-        return XMLMap.get(type).newInstance();
+        return XMLMap.get(type);
       } else if (serializerType == SerializerType.JSON) {
-        return JSONMap.get(type).newInstance();
+        return JSONMap.get(type);
       }
     } catch (Exception e) {
       e.printStackTrace();
@@ -50,7 +50,7 @@ public final class MapService {
 
   public static Serializer getSerializer(SerializerType type) {
     try {
-      return serializerTypeMap.get(type).newInstance();
+      return serializerTypeMap.get(type);
     } catch (Exception e) {
       e.printStackTrace();
     }
