@@ -1,7 +1,9 @@
 package ua.com.goit.gojava2.vova.kickstarter.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -21,8 +23,22 @@ import org.joda.time.LocalDate;
 
 @Entity
 @Table(name = "PROJECTS")
-public class Project {
+public class Project implements Serializable{
+	private static final long serialVersionUID = 1L;
 
+	@ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+	@JoinColumn(name = "ID_CATEGORY", nullable = false, insertable = false, updatable = false)
+	private Category category;
+	
+	
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID_PROJECT")
@@ -71,18 +87,6 @@ public class Project {
 	
 	@Column(name = "FAQ")
 	private ArrayList<String> faq;
-	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "ID_CATEGORY", nullable = false, insertable = false, updatable = false)
-	private Category category;
-	
-	public Category getCategory() {
-		return category;
-	}
-
-	public void setCategory(Category category) {
-		this.category = category;
-	}
 
 	public ArrayList<String> getFaq() {
 		return faq;
@@ -193,6 +197,10 @@ public class Project {
 			return false;
 		return true;
 	}
+	
+//	public Project(String string){
+//		
+//	}
 
 	@Override
 	public String toString() {

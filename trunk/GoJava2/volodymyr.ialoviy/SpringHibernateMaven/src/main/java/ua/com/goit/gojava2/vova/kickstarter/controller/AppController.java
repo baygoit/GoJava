@@ -1,5 +1,6 @@
 package ua.com.goit.gojava2.vova.kickstarter.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,6 +13,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import ua.com.goit.gojava2.vova.kickstarter.model.Category;
 import ua.com.goit.gojava2.vova.kickstarter.model.Project;
@@ -24,43 +26,66 @@ public class AppController {
 
 	@Autowired
 	CategoryService categoryService;
-	
+
 	@Autowired
 	ProjectService projectService;
 
-	@RequestMapping(value = { "/", "/categories" }, method = RequestMethod.GET)
+	@RequestMapping(value = "/categories", method = RequestMethod.GET)
 	public String listCategories(ModelMap model) {
-
 		List<Category> categories = categoryService.findAllCategories();
+
+		if(categories.isEmpty()) {
+			model.addAttribute("projects", new ArrayList<Project>());
+		}
+		else{
+			model.addAttribute("projects", categories.get(0).getProjects());
+		}
+
 		model.addAttribute("categories", categories);
 		return "categories";
 	}
-	
-	@RequestMapping(value = { "/projects" }, method = RequestMethod.GET)
-	public String listProjects(HttpServletRequest req, ModelMap model) {
-		int idCategory = Integer.valueOf(req.getParameter("category"));
-		List<Project> projects = projectService.findAllProjects(idCategory);
+
+	@RequestMapping(value = "/categories/{id}", method = RequestMethod.GET)
+	public String listCategoriesAndProjects(ModelMap model, @PathVariable int id) {
+
+		List<Category> categories = categoryService.findAllCategories();
+
+		List<Project> projects = categoryService.getCategoryById(id)
+				.getProjects();
 		model.addAttribute("projects", projects);
-		model.addAttribute("category", idCategory);
-		return "projects";
+
+		model.addAttribute("categories", categories);
+		return "categories";
 	}
-	
-	@RequestMapping(value = { "/project" }, method = RequestMethod.GET)
-	public String Project(HttpServletRequest req, ModelMap model) {
-		Integer idProject = Integer.valueOf(req.getParameter("project"));
-		Project project = projectService.getProgect(idProject);
+
+	@RequestMapping(value = "/categories/{id}", params = "delete", method = RequestMethod.GET)
+	public String deleteCategory(ModelMap model, @PathVariable int id) {
+		categoryService.deleteCategoryById(id);
+		return "redirect:/categories";
+	}
+
+	@RequestMapping(value = "/projects/{id}", method = RequestMethod.GET)
+	public @ResponseBody String listProjectsPost(@PathVariable int id,
+			ModelMap model) {
+		Project project = projectService.getProgect(id);
 		model.addAttribute("project", project);
 		return "project";
 	}
-	
-	@RequestMapping(value = { "/donate" }, method = RequestMethod.GET)
+
+	@RequestMapping(value = "/projects/{id}", params = "delete", method = RequestMethod.GET)
+	public String deleteProject(ModelMap model, @PathVariable int id) {
+		projectService.deleteProjectById(id);
+		return "redirect:/categories";
+	}
+
+	@RequestMapping(value = "/donate", method = RequestMethod.GET)
 	public String donate(ModelMap model, HttpServletRequest req) {
 		Integer idproject = Integer.valueOf(req.getParameter("idproject"));
 		model.addAttribute("idproject", idproject);
 		return "donate";
 	}
-	
-	@RequestMapping(value = { "/donatesuccess" }, method = RequestMethod.GET)
+
+	@RequestMapping(value = "/donatesuccess", method = RequestMethod.GET)
 	public String saveDonate(ModelMap model, HttpServletRequest req) {
 		Integer amount = Integer.valueOf(req.getParameter("amount"));
 		Integer project = Integer.valueOf(req.getParameter("project"));
@@ -71,14 +96,14 @@ public class AppController {
 		return "donatesuccess";
 	}
 
-	@RequestMapping(value = { "/newcategory" }, method = RequestMethod.GET)
+	@RequestMapping(value = "/newcategory", method = RequestMethod.GET)
 	public String newCategory(ModelMap model) {
 		Category category = new Category();
 		model.addAttribute("category", category);
 		return "addcategory";
 	}
 
-	@RequestMapping(value = { "/newcategory" }, method = RequestMethod.POST)
+	@RequestMapping(value = "/newcategory", method = RequestMethod.POST)
 	public String saveCategory(@Valid Category category, BindingResult result,
 			ModelMap model) {
 
@@ -92,17 +117,4 @@ public class AppController {
 				+ " registered successfully");
 		return "success";
 	}
-
-	@RequestMapping(value = { "/delete-{idCategory}-category" }, method = RequestMethod.GET)
-	public String deleteCategory(@PathVariable Integer idCategory) {
-		categoryService.deleteCategoryById(idCategory);
-		return "redirect:/categories";
-	}
-	
-	@RequestMapping(value = { "/delete-{idProject}-project-{idCategory}" }, method = RequestMethod.GET)
-	public String deleteProject(@PathVariable Integer idProject, @PathVariable String idCategory) {
-		projectService.deleteProjectById(idProject);
-		return "redirect:/projects?category=" + idCategory;
-	}
-
 }

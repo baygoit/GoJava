@@ -1,5 +1,6 @@
 package ua.com.goit.gojava2.vova.kickstarter.model;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -15,8 +16,12 @@ import javax.persistence.GenerationType;
 
 @Entity
 @Table(name="CATEGORIES", uniqueConstraints = {@UniqueConstraint(columnNames = "ID_CATEGORY")})
-public class Category {
+public class Category implements Serializable {
+	private static final long serialVersionUID = 1L;
 
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "category")
+	private List<Project> projects;
+	
 	public Category() {
 	}
 	
@@ -32,9 +37,6 @@ public class Category {
 	@Size(min=3, max=50)
 	@Column(name = "NAME", nullable = false)
 	private String name;
-	
-	@OneToMany(fetch = FetchType.LAZY)
-	private List<Project> projects;
 		
 	public List<Project> getProjects() {
 		return this.projects;
