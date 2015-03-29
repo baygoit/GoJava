@@ -1,0 +1,22 @@
+{
+"group1":{
+"triangel1":{
+"Name" : "triangel1",
+"Type" : "Triangle",
+"Points" : [
+    {
+    "Point" : "(1, 2)"
+    }
+]
+},
+"triangel2":{
+"Name" : "triangel2",
+"Type" : "Triangle",
+"Points" : [
+    {
+    "Point" : "(2, 1)"
+    }
+]
+}
+}
+}

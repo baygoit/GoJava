@@ -1,0 +1,14 @@
+{
+"triangel1":{
+"Name" : "triangel1",
+"Type" : "Triangle",
+"Points" : [
+    {
+    "Point" : "(1, 2)"
+    },
+    {
+    "Point" : "(2, 1)"
+    }
+]
+}
+}
