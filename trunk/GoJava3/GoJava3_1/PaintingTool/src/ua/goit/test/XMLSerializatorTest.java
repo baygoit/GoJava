@@ -11,8 +11,11 @@ import ua.goit.serialization.SerializationType;
 import ua.goit.shapes.Circle;
 import ua.goit.shapes.Triangle;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
 
 import static org.junit.Assert.assertEquals;
 
@@ -28,7 +31,23 @@ public class XMLSerializatorTest {
     private Group group2 = new GroupImpl("group2");
     private Group group3 = new GroupImpl("group3");
     private ConcreteFactory factory = new ConcreteFactory();
-    private final Map<String, String> initForMethod = new HashMap<String, String>();
+    private final Map<String, String> initActualResultForMethod = new HashMap<String, String>();
+    private final Map<String, String> initExpectedResultForMethod = new HashMap<String, String>();
+    private final static String TEST_PATH = "C:\\Users\\roznalex\\IdeaProjects\\GoJava3\\alex.rozhniatovsky\\PaintingTools\\src\\ua\\goit\\test\\";
+
+    public static String readFile(File file){
+        String result = "";
+        try {
+            Scanner in = new Scanner(file);
+            while (in.hasNext()) {
+                result += in.nextLine();
+            }
+        }catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
 
 
     @Before
@@ -43,47 +62,44 @@ public class XMLSerializatorTest {
         group3.setGroup(group2);
         group3.setElement(circle2);
 
-        initForMethod.put("testSerializeOneElement", factory.getSerializationFor(SerializationType.XML).serialize(triangle1).toString());
-        initForMethod.put("testSerializeOneGroup", factory.getSerializationFor(SerializationType.XML).serialize(group1).toString());
-        initForMethod.put("testSerializeInnerGroup", factory.getSerializationFor(SerializationType.XML).serialize(group2).toString());
-        initForMethod.put("testSerializeFewInnerGroup", factory.getSerializationFor(SerializationType.XML).serialize(group3).toString());
+        initActualResultForMethod.put("testSerializeOneElement", factory.getSerializationFor(SerializationType.XML).serialize(triangle1).toString());
+        initActualResultForMethod.put("testSerializeOneGroup", factory.getSerializationFor(SerializationType.XML).serialize(group1).toString());
+        initActualResultForMethod.put("testSerializeInnerGroup", factory.getSerializationFor(SerializationType.XML).serialize(group2).toString());
+        initActualResultForMethod.put("testSerializeFewInnerGroup", factory.getSerializationFor(SerializationType.XML).serialize(group3).toString());
+
+        initExpectedResultForMethod.put("testSerializeOneElement", readFile(new File(TEST_PATH + "testSerializeOneElement")));
+        initExpectedResultForMethod.put("testSerializeOneGroup", readFile(new File(TEST_PATH + "testSerializeOneGroup")));
+        initExpectedResultForMethod.put("testSerializeInnerGroup", readFile(new File(TEST_PATH + "testSerializeInnerGroup")));
+        initExpectedResultForMethod.put("testSerializeFewInnerGroup", readFile(new File(TEST_PATH + "testSerializeFewInnerGroup")));
 
     }
 
 
     @Test
     public void testSerializeOneElement() throws Exception {
-        String exceptedResult = "<Triangle>triangle1<Points><Point>(1, 2)</Point></Points></Triangle>";
-        String actualResult = initForMethod.get("testSerializeOneElement");
+        String exceptedResult = initExpectedResultForMethod.get("testSerializeOneElement");
+        String actualResult = initActualResultForMethod.get("testSerializeOneElement");
         assertEquals(exceptedResult, actualResult);
     }
 
     @Test
     public void testSerializeOneGroup() throws Exception {
-        String exceptedResult = "<Group>group1<Triangle>triangle1<Points><Point>(1, 2)</Point></Points></Triangle>" +
-                "<Triangle>triangle2<Points><Point>(2, 1)</Point></Points></Triangle></Group>";
-        String actualResult = initForMethod.get("testSerializeOneGroup");
+        String exceptedResult = initExpectedResultForMethod.get("testSerializeOneGroup");
+        String actualResult = initActualResultForMethod.get("testSerializeOneGroup");
         assertEquals(exceptedResult, actualResult);
     }
 
     @Test
     public void testSerializeInnerGroup() throws Exception {
-        String exceptedResult = "<Group>group2<Group>group1<Triangle>triangle1<Points>" +
-                "<Point>(1, 2)</Point></Points></Triangle><Triangle>triangle2<Points><Point>(2, 1)</Point></Points>" +
-                "</Triangle></Group><Circle>circle1<Points></Points></Circle></Group>";
-        String actualResult = initForMethod.get("testSerializeInnerGroup");
+        String exceptedResult = initExpectedResultForMethod.get("testSerializeInnerGroup");
+        String actualResult = initActualResultForMethod.get("testSerializeInnerGroup");
         assertEquals(exceptedResult, actualResult);
     }
 
     @Test
     public void testSerializeFewInnerGroup() throws Exception {
-        String exceptedResult = "<Group>group3<Group>group2<Group>group1<Triangle>triangle1<Points><Point>(1, 2)</Point></Points>" +
-                "</Triangle><Triangle>triangle2<Points><Point>(2, 1)</Point></Points></Triangle></Group>" +
-                "<Circle>circle1<Points></Points></Circle></Group><Triangle>triangle1<Points><Point>(1, 2)</Point></Points></Triangle>" +
-                "<Circle>circle2<Points></Points></Circle></Group>";
-        String actualResult = initForMethod.get("testSerializeFewInnerGroup");
+        String exceptedResult = initExpectedResultForMethod.get("testSerializeFewInnerGroup");
+        String actualResult = initActualResultForMethod.get("testSerializeFewInnerGroup");
         assertEquals(exceptedResult, actualResult);
     }
-
-
 }
