@@ -33,7 +33,7 @@ public class XMLSerializatorTest {
     private ConcreteFactory factory = new ConcreteFactory();
     private final Map<String, String> initActualResultForMethod = new HashMap<String, String>();
     private final Map<String, String> initExpectedResultForMethod = new HashMap<String, String>();
-    private final static String TEST_PATH = "C:\\Users\\roznalex\\IdeaProjects\\GoJava3\\alex.rozhniatovsky\\PaintingTools\\src\\ua\\goit\\test\\";
+    private final static String TEST_PATH = "C:\\Users\\roznalex\\IdeaProjects\\GoJava3\\GoJava3_1\\PaintingTool\\src\\ua\\goit\\test\\fixtures\\";
 
     public static String readFile(File file){
         String result = "";
