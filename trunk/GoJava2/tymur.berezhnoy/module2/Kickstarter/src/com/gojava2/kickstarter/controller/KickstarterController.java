@@ -1,5 +1,7 @@
 package com.gojava2.kickstarter.controller;
 
+import java.util.InputMismatchException;
+
 import com.gojava2.kickstarter.model.Category;
 import com.gojava2.kickstarter.model.CategoryStorage;
 import com.gojava2.kickstarter.model.ProjectStorage;
@@ -13,8 +15,8 @@ public class KickstarterController {
 	private CategoryStorage categoryStorage;
 	private ProjectStorage projectStorage;
 	
-	private InPut in;
 	private	ConsoleView view;
+	private InPut in;
 	
 	public KickstarterController(QuoteStorage quoteStorage, CategoryStorage categoryStorage,
 								ProjectStorage projectStorage, ConsoleView consoleView, 
@@ -26,73 +28,66 @@ public class KickstarterController {
 		this.in = in;
 	}
 	
-	public void levelOne() {
-		Menu menu = new Menu(in, view, 1) {
-			@Override
-			void logic(int i) {				
-				if(i > 0 && i <= categoryStorage.getSize()) {
-					Category category = categoryStorage.getCategory(i);
-					view.display(projectStorage.getProjects(category));
-					levelTwo(category);
-					recursion();
-				} else if(i == 0) {
-					System.out.print("- App closed");
-					return;
-				} else {
-					view.noExistCategoryMessage(i);
-					recursion();
-				}			
-			}
-			
-			@Override
-			void recursion() {				
-				levelOne();
-			}
-		};
-		menu.levelGo();
+	public void menuLevelOne() {
+		view.printOption(1);
+		
+		try {
+			int input = in.read();
+			int amountCategory = categoryStorage.getSize();
+			if(input > 0 && input <= amountCategory) {
+				Category category = categoryStorage.getCategory(input);
+				view.display(projectStorage.getProjects(category));
+				menuLevelTwo(category);
+				menuLevelOne();
+			} else if(input == 0) {
+				System.out.print("- App closed");
+				return;
+			} else {
+				view.noExistCategoryMessage(input);
+				menuLevelOne();
+			}			
+		} catch (InputMismatchException e) {
+			view.inputMismatchMessage();
+			menuLevelOne();
+		}
 	}
 	
-	public void levelTwo(final Category category) {
-		Menu menu = new Menu(in, view, 2) {
-			@Override
-			void logic(int i) {
-				if(i > 0 && i <= projectStorage.getSize()) {
-					view.display(projectStorage.getProject(category, i));
-					levelThree(category);
-					recursion();
-				} else if (i == 0) {
-					view.display(categoryStorage.getCategories());
-				} else if (i > projectStorage.getSize()) {
-					view.noExistProjectMessage(i);
-					recursion();
-				}							
-			}
+	public void menuLevelTwo(Category category) {
+		view.printOption(2);
+		
+		try {
+			int input = in.read();
 			
-			@Override
-			void recursion() {				
-				levelTwo(category);
-			}
-		};
-		menu.levelGo();
+			if(input > 0 && input <= projectStorage.getSize()) {
+				view.display(projectStorage.getProject(category, input));
+				menuLevelThree(category);
+				menuLevelTwo(category);
+			} else if (input == 0) {
+				view.display(categoryStorage.getCategories());
+			} else if (input > projectStorage.getSize()) {
+				view.noExistProjectMessage(input);
+				menuLevelTwo(category);
+			}			
+		} catch (InputMismatchException e) {
+			view.inputMismatchMessage();
+			menuLevelTwo(category);
+		}
 	}
 	
-	public void levelThree(final Category category) {
-		Menu menu = new Menu(in, view, 3) {
-			@Override
-			void logic(int i) {
-				if(i == 0) {
-					view.display(projectStorage.getProjects(category));
-				} else {
-					recursion();
-				}						
-			}
-			
-			@Override
-			void recursion() {				
-				levelThree(category);
-			}
-		};
-		menu.levelGo();
+	public void menuLevelThree(Category category) {
+		view.printOption(3);
+		
+		try {
+			int input = in.read();
+			if(input == 0) {
+				view.display(projectStorage.getProjects(category));
+			} else {
+				menuLevelThree(category);
+			}			
+		} catch (InputMismatchException e) {
+			view.inputMismatchMessage();
+			menuLevelThree(category);
+		}
 	}
 	
 	public void run() {
@@ -104,6 +99,6 @@ public class KickstarterController {
 		}
 		view.display(categoryStorage.getCategories());
 		
-		levelOne();
+		menuLevelOne();
 	}
 }
