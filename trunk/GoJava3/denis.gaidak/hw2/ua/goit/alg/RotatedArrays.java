@@ -4,7 +4,7 @@ public class RotatedArrays {
 
   public static int binarySearch(int[] array, int target) {
     if (array.length == 0) return -1;
-    return startBinarySearch(array, target, 0, array.length-1);
+    return startBinarySearch(array, target, 0, array.length - 1);
   }
 
   private static int startBinarySearch(int[] array, int target, int left, int right) {
@@ -19,12 +19,12 @@ public class RotatedArrays {
       if (target == leftValue) return left;
       if (target == rightValue) return right;
 
-      boolean normalStateMove = target < middleValue && target > leftValue && target < rightValue;
-      boolean leftStateOneMove = target > middleValue && target < leftValue && target > rightValue;
-      boolean leftStateSecondMove = target < middleValue && target < rightValue && target < leftValue && middleValue < leftValue;
-      boolean leftStateThird = target < middleValue && target > leftValue && target > rightValue;
+      boolean leftStateOne   = target < middleValue && middleValue > leftValue && middleValue < rightValue && target > leftValue && target < rightValue;
+      boolean leftStateFour  = target < middleValue && middleValue > leftValue && middleValue > rightValue && target > leftValue && target > rightValue;
+      boolean leftStateThree = target < middleValue && middleValue < leftValue && middleValue < rightValue && target < rightValue && target < leftValue;
+      boolean leftStateTwo   = target > middleValue && middleValue < leftValue && middleValue < rightValue && target > rightValue && target > leftValue;
 
-      if (normalStateMove || leftStateOneMove || leftStateSecondMove || leftStateThird) {
+      if (leftStateOne || leftStateTwo || leftStateThree || leftStateFour) {
         right = middle - 1;
         left++;
       } else {
@@ -32,10 +32,10 @@ public class RotatedArrays {
         left = middle + 1;
       }
 
-  }
+    }
 
-  return-1;
-}
+    return -1;
+  }
 
 
   private static int startBinarySearch_old(int[] array, int target, int left, int right) {
