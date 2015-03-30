@@ -1,17 +1,11 @@
 package ua.goit.shapeserializer.tests;
 
-import static org.junit.Assert.*;
-
 import org.junit.Test;
-
 import ua.goit.shapeserializer.SerializeClassHolder;
 import ua.goit.shapeserializer.SerializerFactory;
-import ua.goit.shapeserializer.basicobjects.Circle;
-import ua.goit.shapeserializer.basicobjects.Group;
-import ua.goit.shapeserializer.basicobjects.Point;
-import ua.goit.shapeserializer.basicobjects.Shape;
-import ua.goit.shapeserializer.basicobjects.Square;
-import ua.goit.shapeserializer.basicobjects.Triangle;
+import ua.goit.shapeserializer.basicobjects.*;
+
+import static org.junit.Assert.assertEquals;
 
 public class ComplexTest {
 
@@ -61,6 +55,5 @@ public class ComplexTest {
     actualJSON = actualJSON.replace(" ", "");
     actualJSON = actualJSON.replace("\n", "");
     assertEquals(expectedJSON, actualJSON);
- 
   }
 }
