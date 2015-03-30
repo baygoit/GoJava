@@ -98,4 +98,32 @@ public class TagParserTest {
     Tag actual = tagParser.parse(open);
     assertEquals(expected, actual);
   }
+  
+  @Test (expected=IllegalArgumentException.class)
+  public void parseParamExceptionTest() {
+    String openTag = "tagname param1= param2=\"value2\"";
+    TagParser tagParser = new TagParser();
+    Tag tag = tagParser.parse(openTag);
+    Map<String, String> map = tag.getParams();
+    assertEquals(2, map.size());
+  }
+  
+  @Test (expected=IllegalArgumentException.class)
+  public void parseParamExceptionTest2() {
+    String openTag = "tagname param1 param2=\"value2\"";
+    TagParser tagParser = new TagParser();
+    Tag tag = tagParser.parse(openTag);
+    Map<String, String> map = tag.getParams();
+    assertEquals(2, map.size());
+  }
+  
+  @Test (expected=IllegalArgumentException.class)
+  public void parseParamExceptionTest3() {
+    String openTag = "tagname param2==\"value2\"";
+    TagParser tagParser = new TagParser();
+    Tag tag = tagParser.parse(openTag);
+    Map<String, String> map = tag.getParams();
+    assertEquals(2, map.size());
+  }
+  
 }
