@@ -17,23 +17,48 @@ public class XMLParser {
   }
 
   public void onOpenTag() {
+    new Handler() {
+      @Override
+      public void handle(Tag tag) {
 
+      }
+    };
   }
 
   public void onTextValue() {
+    new Handler() {
+      @Override
+      public void handle(Tag tag) {
 
+      }
+    };
   }
 
   public void onStart() {
+    new Handler() {
+      @Override
+      public void handle(Tag tag) {
 
+      }
+    };
   }
 
   public void onEnd() {
+    new Handler() {
+      @Override
+      public void handle(Tag tag) {
 
+      }
+    };
   }
 
   public void onError() {
+    new Handler() {
+      @Override
+      public void handle(Tag tag) {
 
+      }
+    };
   }
 
 }
