@@ -3,6 +3,7 @@ package ua.goit.xmlparser;
 public class TagStack {
   private int size;
   private String[] data;
+  private boolean wasRootElement;
 
   private static final String[] EMPTY_ELEMENTDATA = {};
   private static final int DEFAULT_CAPACITY = 10;
@@ -69,7 +70,14 @@ public class TagStack {
     return copy;
   }
 
+  public boolean checkForValidRoot() {
+    return (size() == 0 && wasRootElement);
+  }
+  
   public void push(String value) {
+    if (size() == 0 && !wasRootElement) {
+      wasRootElement = true;
+    }
     ensureCapacityGrow(size + 1);
     data[size++] = value;
   }
