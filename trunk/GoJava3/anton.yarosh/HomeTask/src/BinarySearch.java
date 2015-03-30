@@ -1,8 +1,8 @@
 
 public class BinarySearch {
     public static void main(String[] args) {
-	int[] initialMass = {26, 27, 29, 8, 10, 15, 16, 17, 25};
-	System.out.println(returnIndex(initialMass, 27));
+	int[] initialMass = {26, 26, 29, 8, 10, 15, 16, 17, 25};
+	System.out.println(returnIndex(initialMass, 26));
     }
 
     public static int returnIndex(int []m, int elementToSearch) {
@@ -10,6 +10,9 @@ public class BinarySearch {
 	int endIndex = m.length-1;
 	int middleIndex = (endIndex - startIndex) / 2;
 	while (elementToSearch != m[middleIndex]&&startIndex<endIndex) {
+	    if (middleIndex == startIndex || middleIndex == endIndex) {
+		return -1;
+	    }
 	    if (elementToSearch < m[middleIndex]) {
 		if (elementToSearch >= m[startIndex]) {
 		    endIndex = middleIndex;
