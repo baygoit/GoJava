@@ -7,22 +7,41 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public class InputStream {
-  private BufferedReader inputStream = null;
+  private BufferedReader inputStreamFile = null;
+  private String inputStreamString = null;
+  private boolean isString = true;
+  private static int counter = 0;
 
   public InputStream(String inputData) throws FileNotFoundException{
-    inputStream = new BufferedReader(new FileReader(inputData));
+    inputStreamString = inputData;
+    isString = true;
   }
 
   public InputStream(File inputData) throws FileNotFoundException{
-    inputStream = new BufferedReader(new FileReader(inputData));
+    inputStreamFile = new BufferedReader(new FileReader(inputData));
+    isString = false;
   }
 
   public int read() throws IOException{
-    return inputStream.read();
+    if (isString){
+    return readString();
+    } else {
+      return inputStreamFile.read();
+    }
   }
   
   public void close() throws IOException{
-    inputStream.close();
+    inputStreamFile.close();
   }
- 
+  
+  private int readString(){
+    if (counter < inputStreamString.length()){
+      int result = inputStreamString.toCharArray()[counter];
+      counter++;
+      return result;
+    } else {
+      counter = 0;
+      return -1;
+    }
+  }
 }
