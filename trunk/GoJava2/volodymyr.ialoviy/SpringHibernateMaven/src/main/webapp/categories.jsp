@@ -25,7 +25,7 @@ h3 {color: #ff0000;}
 				<td><a href="${ctx}/categories/${category.id}?delete">${category.name}(x)</a></td>
 				<td><a href="${ctx}/categories/${category.id}">${category.name}</a></td>
 				<td><a href="${ctx}/projects/${category.id}">${category.name}</a></td>
-				<td><a href="${ctx}/projects?add">add new project for category # ${category.id}</a></td>
+				<td><a href="${ctx}/projects/${category.id}?add">add new project for category # ${category.id}</a></td>
 			</tr>
 		</c:forEach>
 	</table>

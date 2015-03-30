@@ -68,15 +68,20 @@ public class AppController {
 			return "addcategory";
 		}
 		categoryService.saveCategory(category);
-		model.addAttribute("message", "Category " + category.getName() + " registered successfully");
+		model.addAttribute("message", "Category registered successfully");
 		return "redirect:/categories";
 	}
 
 	@RequestMapping(value = "/projects/{id}", method = RequestMethod.GET)
 	public String listProjects(@PathVariable int id, ModelMap model) {
 		List<Project> projects = projectService.findAllProjects(id);
-		model.addAttribute("projects", projects);
-		return "projects";
+		if(projects.isEmpty()){
+			model.addAttribute("message", "This category does not have a project");
+			return "redirect:/categories";
+		} else {
+			model.addAttribute("projects", projects);
+			return "projects";
+		}
 	}
 	
 	@RequestMapping(value = "/projects/{id}", params = "show", method = RequestMethod.GET)
@@ -90,6 +95,27 @@ public class AppController {
 	public String deleteProject(ModelMap model, @PathVariable int id, @PathVariable int idCategory) {
 		projectService.deleteProjectById(id);
 		return "redirect:/projects/{idCategory}";
+	}
+	
+	@RequestMapping(value = "/projects/{id}", params = "add", method = RequestMethod.GET)
+	public String newProject(ModelMap model, @PathVariable int id) {
+		Project project = new Project();
+		
+		model.addAttribute("project", project);
+		model.addAttribute("id", id);
+		return "addproject";
+	}
+
+	@RequestMapping(value = "/projects/{id}", params = "add", method = RequestMethod.POST)
+	public String saveProject(@Valid Project project, BindingResult result, ModelMap model) {
+		if (result.hasErrors()) {
+			return "addproject";
+		}
+		project.setHowMuchCollected(0);
+		project.setHowMuchRemaining(0);
+		projectService.saveProject(project);
+		model.addAttribute("message", "Project registered successfully");
+		return "redirect:/projects";
 	}
 
 	@RequestMapping(value = "/donate", method = RequestMethod.GET)

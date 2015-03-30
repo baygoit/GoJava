@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Category Registration Form</title>
+<title>Category registration form</title>
 <style>.error {color: #ff0000;}</style>
 </head>
 
