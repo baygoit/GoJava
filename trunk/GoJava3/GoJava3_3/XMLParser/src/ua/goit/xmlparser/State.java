@@ -7,6 +7,8 @@ public enum State {
       TagParser tagParser = new TagParser();
       Tag tag = tagParser.parse(str);
       if (tag.getType() == TagType.OPEN) {
+        result = OPEN_TAG;
+      } else if (tag.getType() == TagType.HEADER) {
         result = HEADER_TAG;
       }
       return result;
