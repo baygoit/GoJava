@@ -3,6 +3,7 @@ package ua.com.goit.gojava2.vova.kickstarter.dao;
 import java.util.List;
 
 import org.hibernate.Query;
+import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 
 import ua.com.goit.gojava2.vova.kickstarter.model.Category;
@@ -30,12 +31,17 @@ public class Categories extends AbstractDao implements CategoryDao{
 
 	@Override
 	public Category findCategoryById(int id) {
-		for (Category category : findAllCategories()){
-			if(category.getId() == id){
-				return category;
-			}
-		}
-		throw new IllegalArgumentException("Category with this id not found");
+//		for (Category category : findAllCategories()){
+//			if(category.getId() == id){
+//				return category;
+//			}
+//		}
+//		throw new IllegalArgumentException("Category with this id not found");
+		
+		Session session = getSession();
+        Category category = (Category) session.get(Category.class, id);
+        session.close();
+        return category;
 	}
 	
 }

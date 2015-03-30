@@ -1,7 +1,6 @@
 package ua.com.goit.gojava2.vova.kickstarter.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -45,7 +44,7 @@ public class Project implements Serializable{
 	
 	@NotNull
     @Column(name = "ID_CATEGORY")
-    private String idCategory;
+    private int idCategory;
 
 	@NotNull
 	@Size(min = 3, max = 50)
@@ -79,21 +78,11 @@ public class Project implements Serializable{
 	@Column(name = "HOW_MUCH_REMAINING")
 	private int howMuchRemaining;
 	
+	@NotNull
 	@Temporal(TemporalType.DATE)
 	@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
 	@Column(name = "DATE_CLOSE")
 	private LocalDate dateClose;
-	
-	@Column(name = "FAQ")
-	private ArrayList<String> faq;
-
-	public ArrayList<String> getFaq() {
-		return faq;
-	}
-
-	public void setFaq(ArrayList<String> faq) {
-		this.faq = faq;
-	}
 	
 	public int getId() {
 		return id;
@@ -104,11 +93,11 @@ public class Project implements Serializable{
 	}
 
 	 
-	public String getIdCategory() {
+	public int getIdCategory() {
 		return idCategory;
 	}
 
-	public void setIdCategory(String idCategory) {
+	public void setIdCategory(int idCategory) {
 		this.idCategory = idCategory;
 	}
 		

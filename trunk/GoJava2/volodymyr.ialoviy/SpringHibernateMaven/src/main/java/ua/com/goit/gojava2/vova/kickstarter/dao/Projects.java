@@ -1,10 +1,10 @@
 package ua.com.goit.gojava2.vova.kickstarter.dao;
 
 import java.util.List;
-
 import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.springframework.stereotype.Repository;
-
 import ua.com.goit.gojava2.vova.kickstarter.model.Project;
 
 @Repository("projectDao")
@@ -12,7 +12,7 @@ public class Projects extends AbstractDao implements ProjectDao {
 
 	@Override
 	public void saveProject(Project project) {
-		persist(project);
+		getSession().save(project);
 	}
 
 	@Override

@@ -92,7 +92,7 @@ public class AppController {
 	}
 
 	@RequestMapping(value = "/projects/{id}/{idCategory}", params = "delete", method = RequestMethod.GET)
-	public String deleteProject(ModelMap model, @PathVariable int id, @PathVariable int idCategory) {
+	public String deleteProject(ModelMap model, @PathVariable int id) {
 		projectService.deleteProjectById(id);
 		return "redirect:/projects/{idCategory}";
 	}
@@ -100,9 +100,8 @@ public class AppController {
 	@RequestMapping(value = "/projects/{id}", params = "add", method = RequestMethod.GET)
 	public String newProject(ModelMap model, @PathVariable int id) {
 		Project project = new Project();
-		
-		model.addAttribute("project", project);
 		model.addAttribute("id", id);
+		model.addAttribute("project", project);
 		return "addproject";
 	}
 
@@ -111,8 +110,9 @@ public class AppController {
 		if (result.hasErrors()) {
 			return "addproject";
 		}
-		project.setHowMuchCollected(0);
-		project.setHowMuchRemaining(0);
+		
+//		Project project2 = new Project();
+		
 		projectService.saveProject(project);
 		model.addAttribute("message", "Project registered successfully");
 		return "redirect:/projects";
