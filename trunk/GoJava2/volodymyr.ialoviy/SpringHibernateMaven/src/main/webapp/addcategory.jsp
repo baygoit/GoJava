@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="ctx" value="${pageContext.request.contextPath}" />
 
 <html>
 <head>
@@ -10,9 +11,7 @@
 </head>
 
 <body>
-
-	<h2>Registration Form</h2>
- 
+	<h2>Registration form</h2>
 	<form:form method="POST" modelAttribute="category">
 		<table>
 			<tr>
@@ -26,7 +25,6 @@
 		</table>
 	</form:form>
 	<br/>
-	<br/>
-	Go back to <a href="<c:url value='/categories' />">List of all Categories</a>
+	<p>Go back to <a href="${ctx}/categories">List of all categories</a></p>
 </body>
 </html>

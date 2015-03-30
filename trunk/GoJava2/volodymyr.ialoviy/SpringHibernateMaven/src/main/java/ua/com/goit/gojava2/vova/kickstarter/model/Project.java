@@ -27,9 +27,8 @@ public class Project implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	@ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-	@JoinColumn(name = "ID", nullable = false, insertable = false, updatable = false)
+	@JoinColumn(name = "ID_CATEGORY", nullable = false, insertable = false, updatable = false)
 	private Category category;
-	
 	
 	public Category getCategory() {
 		return category;
@@ -43,7 +42,11 @@ public class Project implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID")
 	private int id;
- 
+	
+	@NotNull
+    @Column(name = "ID_CATEGORY")
+    private String idCategory;
+
 	@NotNull
 	@Size(min = 3, max = 50)
 	@Column(name = "NAME")
@@ -100,6 +103,15 @@ public class Project implements Serializable{
 		this.id = id;
 	}
 
+	 
+	public String getIdCategory() {
+		return idCategory;
+	}
+
+	public void setIdCategory(String idCategory) {
+		this.idCategory = idCategory;
+	}
+		
 	public String getName() {
 		return name;
 	}

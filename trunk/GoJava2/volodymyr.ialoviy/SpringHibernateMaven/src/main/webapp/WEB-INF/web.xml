@@ -31,7 +31,7 @@
     </init-param>
     <init-param>
         <param-name>contextConfigLocation</param-name>
-        <param-value>com.websystique.springmvc.controller.AppController</param-value>
+        <param-value>ua.com.goit.gojava2.vova.kickstarter.controller.AppController</param-value>
     </init-param>
     <load-on-startup>1</load-on-startup>
 	</servlet>

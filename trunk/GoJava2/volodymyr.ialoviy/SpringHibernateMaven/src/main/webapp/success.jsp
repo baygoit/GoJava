@@ -1,18 +1,13 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<c:set var="ctx" value="${pageContext.request.contextPath}" />
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Registration Confirmation Page</title>
+<title>Registration confirmation page</title>
 </head>
 <body>
-	message : ${success}
-	<br/>
-	<br/>
-	Go back to <a href="<c:url value='/categories' />">List of all Categories</a>
-	
+	<p>message : ${success}</p>
+	<p>Go back to <a href="${ctx}/categories">list of all categories</a></p>	
 </body>
-
 </html>

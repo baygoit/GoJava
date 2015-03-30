@@ -17,7 +17,7 @@ public class Projects extends AbstractDao implements ProjectDao {
 
 	@Override
 	public List<Project> findAllProjects(int id) {
-		Query query = getSession().createQuery("from Project where id = :id");
+		Query query = getSession().createQuery("from Project where idCategory = :id");
 		query.setInteger("id", id);
 		List<Project> rezult = (List<Project>) query.list();
 		return rezult;
