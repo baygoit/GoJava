@@ -2,16 +2,17 @@ package ua.goit.xmlparser;
 
 public enum State {
   START {
-    public State next(String str) {
+    public State next(Tag tag) {
       State result = INVALID_END;
-      TagParser tagParser = new TagParser();
-      Tag tag = tagParser.parse(str);
       if (tag.getType() == TagType.OPEN) {
         result = OPEN_TAG;
       } else if (tag.getType() == TagType.HEADER) {
         result = HEADER_TAG;
       }
       return result;
+    }
+    public State next(String str) {
+      return next(new TagParser().parse(str));
     }
   },
   HEADER_TAG {
