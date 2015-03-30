@@ -1,6 +1,7 @@
 package ua.goit.alg.xmlparser.parser;
 
 
+import java.io.File;
 import java.io.IOException;
 
 import ua.goit.alg.xmlparser.input.InputStream;
@@ -16,8 +17,18 @@ public class XMLParser {
   }
   
   public String parse(String string) throws IOException {
-   InputStream stream = new InputStream(string);
-   int symbol = stream.read();
+    InputStream stream = new InputStream(string);
+    return parseInputStream(stream);
+  }
+    
+  public String parse(File file) throws IOException {
+    InputStream stream = new InputStream(file);
+    return parseInputStream(stream);
+  }
+
+  public String parseInputStream(InputStream stream) throws IOException {  
+   
+    int symbol = stream.read();
    
    while (symbol !=-1){
      symbol = stream.read();
