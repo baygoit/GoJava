@@ -14,35 +14,38 @@ import org.junit.Test;
 
 public class ArraysTest {
 
-    //Reading int from file testing
-    @Test
-    public void readIntTest() throws IOException {
-	FileInputStream inputFile = new FileInputStream("test4.txt");
-	DataInputStream dis = new DataInputStream(inputFile);
-	int[] expecteds = {6, 8, 1, 0, 3, 2, 5};
-	int[] actuals = new int[expecteds.length];
-	Arrays.readInt(actuals, dis);
-	assertArrayEquals(expecteds, actuals);	
-    }
-
     //MergeSort of file testing
     @Test
     public void mergeSortTest() throws IOException {
-	int[] expecteds = {6, 8, 1, 0, 3, 2, 5};
-	int[] actuals = new int[expecteds.length];
 	File file = new File("test8.txt");
+	int[] expecteds = {2, 8, 1, 0, 3, 2, 5};
+	int[] actuals = new int[expecteds.length];
+	writeArray(expecteds, file);
+	java.util.Arrays.sort(expecteds);
+	Arrays.mergeSort(file);
+	readArray(actuals, file);
+	assertArrayEquals(expecteds, actuals);	
+    }
+
+    private void writeArray(int[] source, File file) throws IOException {
 	FileOutputStream outputFile = new FileOutputStream(file);
 	DataOutputStream dos = new DataOutputStream(outputFile);
-	for (int i : expecteds) {
+	for (int i : source) {
 	    dos.writeInt(i);
 	}
 	dos.flush();
 	dos.close();
-	Arrays.mergeSort(file);
-	java.util.Arrays.sort(expecteds);
+    }
+    
+    private void readArray(int[] actuals, File file) throws IOException {
 	FileInputStream inputFile = new FileInputStream(file);
 	DataInputStream dis = new DataInputStream(inputFile);
-	Arrays.readInt(actuals, dis);
-	assertArrayEquals(expecteds, actuals);	
+	int i = 0;
+	while (dis.available() > 0) {
+	    actuals[i] = dis.readInt();
+	    i++;
+	}
+	dis.close();
+	inputFile.close();
     }
 }
