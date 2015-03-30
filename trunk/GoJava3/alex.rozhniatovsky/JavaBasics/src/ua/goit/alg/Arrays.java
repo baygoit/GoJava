@@ -1,35 +1,19 @@
 package ua.goit.alg;
 
 import java.io.*;
-import java.util.Random;
+
+import static ua.goit.alg.FIleOperations.createFileWithNumbers;
+import static ua.goit.alg.FIleOperations.printFile;
 
 public class Arrays {
     private static final String TEMP_PATH = "C:\\Users\\roznalex\\IdeaProjects\\GoJava3\\alex.rozhniatovsky\\JavaBasics\\temp\\";
     private static final String TEMP_RES_PATH = "C:\\Users\\roznalex\\IdeaProjects\\GoJava3\\alex.rozhniatovsky\\JavaBasics\\tempRes\\";
-    private static final int BUFFER_SIZE = 2500;
-
-    public static void createFileWithNumbers(File file, int quantity) throws IOException{
-        DataOutputStream output = null;
-        try {
-            output = new DataOutputStream(new FileOutputStream(file));
-            Random number = new Random();
-            for (int i = 0; i < quantity; i++) {
-                output.writeInt(number.nextInt(9000));
-            }
-        }catch (IOException e) {
-            e.printStackTrace();
-        }
-        finally {
-            if (output != null) {
-                output.close();
-            }
-        }
-    }
+    private static final int BUFFER_SIZE = 3;
 
     private static int divideFileWithBuffer(File file, int bufferSize) throws IOException{
         DataInputStream input = null;
         DataOutputStream output = null;
-        int [] buffer = new int[bufferSize];
+        int[] buffer = new int[bufferSize];
         int countOfBuffer = 0;
         int quantityOfTempFile = 0;
         try {
@@ -44,20 +28,27 @@ public class Arrays {
                     for (int i = 0; i < bufferSize; i++) {
                         output.writeInt(buffer[i]);
                     }
-                    refresh(buffer);
+                    java.util.Arrays.fill(buffer, 0);
                     countOfBuffer = 0;
                     output.close();
                 }
             }
-        }
-        catch (FileNotFoundException e) {
+            if (countOfBuffer != bufferSize) {
+                int[] copyOfBuffer = java.util.Arrays.copyOfRange(buffer, 0, countOfBuffer);
+                java.util.Arrays.sort(copyOfBuffer);
+                output = new DataOutputStream(new FileOutputStream(new File(TEMP_PATH + quantityOfTempFile)));
+                quantityOfTempFile++;
+                for (int i = 0; i < copyOfBuffer.length; i++) {
+                    output.writeInt(copyOfBuffer[i]);
+                }
+                java.util.Arrays.fill(buffer, 0);
+                output.close();
+            }
+        } catch (FileNotFoundException e) {
             e.printStackTrace();
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
-        }
-
-        finally {
+        } finally {
             if (output != null) {
                 output.close();
             }
@@ -66,36 +57,6 @@ public class Arrays {
             }
         }
         return quantityOfTempFile;
-
-    }
-
-    public static void printFile(File file) throws IOException{
-        DataInputStream input = null;
-        try {
-            input = new DataInputStream(new FileInputStream(file));
-            while (input.available() > 0) {
-                System.out.println(" " + input.readInt());
-                }
-
-            }
-        catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        finally {
-            if (input != null) {
-                input.close();
-            }
-        }
-    }
-
-    private static void refresh(int[] buffer) {
-        for (int i = 0; i < buffer.length; i++) {
-            buffer[i] = 0;
-        }
     }
 
     private static void deleteAllTempFiles(int quantityOfTempFile ) {
@@ -123,7 +84,6 @@ public class Arrays {
                 result = new File(TEMP_RES_PATH + (i + 1));
             }
             mergeTwoFiles(first, second, result);
-
         }
         deleteAllTempFiles(quantityOfTempFile);
     }
@@ -141,7 +101,7 @@ public class Arrays {
             if (firstInput.available() > 0) {
                 first = firstInput.readInt();
             }
-            if (firstInput.available() > 0) {
+            if (secondInput.available() > 0) {
                 second = secondInput.readInt();
             }
 
@@ -163,10 +123,9 @@ public class Arrays {
                 output.writeInt(secondInput.readInt());
             }
 
-        }catch (FileNotFoundException e)  {
+        } catch (FileNotFoundException e)  {
             e.printStackTrace();
-        }
-        finally {
+        } finally {
             if (output != null) {
                 output.close();
             }
@@ -177,8 +136,6 @@ public class Arrays {
                 secondInput.close();
             }
         }
-
-
     }
 
     public static void mergeSort(File source) throws IOException{
@@ -189,12 +146,14 @@ public class Arrays {
     public static void main(String[] args) {
         try {
             File source = new File("source");
-            createFileWithNumbers(source, 30000);
-            mergeSort(source);
-            printFile(source);
+            File result = new File("result");
 
+            createFileWithNumbers(source, 7);
+            mergeSort(source);
+            printFile(result);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 }
+
