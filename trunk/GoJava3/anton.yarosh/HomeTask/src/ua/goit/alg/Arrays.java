@@ -31,7 +31,8 @@ public class Arrays {
 	    while (dis.available() != 0) {
 		bufSize = readInt(buffer, dis);
 		mergeSort(buffer, 0, bufSize - 1);
-		isAccessToTmpResult1 = switchTmpFilesAndMerge(buffer, tmpResult1, tmpResult2, source, isAccessToTmpResult1);
+		isAccessToTmpResult1 = switchTmpFilesAndMerge(buffer, tmpResult1, 
+			tmpResult2, source, isAccessToTmpResult1);
 	    }
 	    dis.close();
 	    inputFile.close();
@@ -55,7 +56,8 @@ public class Arrays {
     }
 
     // Switch input and output files
-    private static boolean switchTmpFilesAndMerge(int[] buffer, File tmpResult1, File tmpResult2, File source, boolean isAccessToTmpResult1) throws IOException {
+    private static boolean switchTmpFilesAndMerge(int[] buffer, File tmpResult1, 
+	    File tmpResult2, File source, boolean isAccessToTmpResult1) throws IOException {
 	boolean isEndOfFile = (buffer.length != bufSize);
 	if (isAccessToTmpResult1) { 
 	    if (!isEndOfFile) {
@@ -70,13 +72,13 @@ public class Arrays {
 	    } else {
 		mergeWithFile(buffer, tmpResult2, source);
 	    }
-
 	    return true;
 	}
     }
 
     //Merge buffer array with temp file
-    private static void mergeWithFile(int[] buffer, File tmpResult1, File tmpResult2) throws IOException {
+    private static void mergeWithFile(int[] buffer, File tmpResult1, 
+	    File tmpResult2) throws IOException {
 	FileInputStream inputFile = new FileInputStream(tmpResult1);
 	FileOutputStream outputFile = new FileOutputStream(tmpResult2);
 	DataInputStream dis = new DataInputStream(inputFile);
