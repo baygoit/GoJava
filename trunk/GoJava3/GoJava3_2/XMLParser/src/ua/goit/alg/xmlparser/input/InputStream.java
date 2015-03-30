@@ -1,23 +1,28 @@
 package ua.goit.alg.xmlparser.input;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 
 public class InputStream {
-  private InputStream inputStream;
+  private BufferedReader inputStream = null;
 
-  InputStream(String inputData){
-    inputStream = new InputStream(inputData);
+  public InputStream(String inputData) throws FileNotFoundException{
+    inputStream = new BufferedReader(new FileReader(inputData));
   }
 
-  InputStream(File inputData) {
-    inputStream = new InputStream(inputData);
+  public InputStream(File inputData) throws FileNotFoundException{
+    inputStream = new BufferedReader(new FileReader(inputData));
   }
 
-  public boolean hasNext(){
-    return inputStream.hasNext();
+  public int read() throws IOException{
+    return inputStream.read();
   }
-  public char nextChar(){
-    return inputStream.nextChar();
+  
+  public void close() throws IOException{
+    inputStream.close();
   }
  
 }

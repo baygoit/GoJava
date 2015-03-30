@@ -1,6 +1,8 @@
 package ua.goit.alg.xmlparser.parser;
 
 
+import java.io.IOException;
+
 import ua.goit.alg.xmlparser.input.InputStream;
 import ua.goit.alg.xmlparser.statemashines.StateMashineTag;
 public class XMLParser {
@@ -13,13 +15,16 @@ public class XMLParser {
     this.parserData = parserData;
   }
   
-  public String parse(String string) {
+  public String parse(String string) throws IOException {
    InputStream stream = new InputStream(string);
-   while (stream.hasNext()){
-      tag.next(stream.nextChar());
-   }
-    return "tag";
+   int symbol = stream.read();
+   
+   while (symbol !=-1){
+     symbol = stream.read();
+     tag.next((char)symbol);
   }
+    return "tag";
+}
   
 
   public void onOpenTag(Handler handler){
