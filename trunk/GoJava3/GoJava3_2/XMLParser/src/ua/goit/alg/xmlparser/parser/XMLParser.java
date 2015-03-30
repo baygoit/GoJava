@@ -1,4 +1,4 @@
-package ua.goit.alg.xmlparser;
+package ua.goit.alg.xmlparser.parser;
 
 public class XMLParser {
 

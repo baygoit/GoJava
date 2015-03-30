@@ -1,12 +1,12 @@
-package ua.goit.alg.xmlparser;
+package ua.goit.alg.xmlparser.statemashines;
 
-import ua.goit.alg.xmlparser.ParserData;
+import ua.goit.alg.xmlparser.parser.ParserData;
 
-public enum States {
+public enum TagStates {
   INIT {
     @Override
-    public States next(char c, ParserData parserData) {
-      States result = INVALID;
+    public TagStates next(char c, ParserData parserData) {
+      TagStates result = INVALID;
       if (c == ' ') {
         result = INIT;
       }
@@ -18,8 +18,8 @@ public enum States {
   },
   OPENTAG{
     @Override
-    public States next(char c, ParserData parserData) {
-      States result = INVALID;
+    public TagStates next(char c, ParserData parserData) {
+      TagStates result = INVALID;
       if (c == '?') {
         result = START;
       }
@@ -31,8 +31,8 @@ public enum States {
   },
   START {
     @Override
-    public States next(char c, ParserData parserData) {
-      States result = INVALID;
+    public TagStates next(char c, ParserData parserData) {
+      TagStates result = INVALID;
       if (c == '?') {
         result = INIT;
       }
@@ -44,11 +44,11 @@ public enum States {
   },
   INVALID {
     @Override
-    public States next(char c, ParserData parserData) {
-      States result = INVALID;
+    public TagStates next(char c, ParserData parserData) {
+      TagStates result = INVALID;
       return result;
     }
   };
 
-  public abstract States next(char c,  ParserData parserData);
+  public abstract TagStates next(char c,  ParserData parserData);
 }

@@ -3,9 +3,9 @@ package ua.goit.alg.xmlparser.tests;
 import org.junit.Assert;
 import org.junit.Test;
 
-import ua.goit.alg.xmlparser.XMLParser;
+import ua.goit.alg.xmlparser.parser.XMLParser;
 
-public class TestCases {
+public class TestParser {
 
   @Test
   public void testSimple(){
