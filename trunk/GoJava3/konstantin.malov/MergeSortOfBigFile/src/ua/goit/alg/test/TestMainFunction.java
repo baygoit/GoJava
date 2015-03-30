@@ -8,7 +8,7 @@ import org.junit.Test;
 
 import java.io.*;
 import java.util.Arrays;
-import static ua.goit.alg.sortBigFile.Property.*;
+import static ua.goit.alg.sortBigFile.Constants.*;
 import static org.junit.Assert.assertArrayEquals;
 
 public class TestMainFunction {

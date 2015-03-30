@@ -5,7 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 import java.io.File;
 import java.io.IOException;
-import static ua.goit.alg.sortBigFile.Property.*;
+import static ua.goit.alg.sortBigFile.Constants.*;
 import static org.junit.Assert.*;
 
 public class TestBigFile {

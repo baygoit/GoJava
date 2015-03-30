@@ -1,6 +1,8 @@
 package ua.goit.alg.sortBigFile;
 import java.io.*;
 
+import static ua.goit.alg.sortBigFile.Constants.*;
+
 public class BigFileWithIntCreation {
   private int intInFile = 12000000;// 48MB
 
@@ -18,7 +20,7 @@ public class BigFileWithIntCreation {
     BigFileWithIntCreation bigFileWithIntCreation = new BigFileWithIntCreation();
 
     try {
-      bigFileWithIntCreation.createBigFileWithInt(Property.BIG_FILE_UNIX);
+      bigFileWithIntCreation.createBigFileWithInt(BIG_FILE_UNIX);
     } catch (IOException e) {
       throw new RuntimeException("aaaaaa file error");
     }

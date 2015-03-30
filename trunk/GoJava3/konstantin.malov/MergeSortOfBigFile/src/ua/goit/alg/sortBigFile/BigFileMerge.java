@@ -4,10 +4,12 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import static ua.goit.alg.sortBigFile.Constants.*;
+
 public class BigFileMerge {
-  private byte[] firstFileBuffer = new byte[Property.BYTE_BUFFER_SIZE];
-  private byte[] secondFileBuffer = new byte[Property.BYTE_BUFFER_SIZE];
-  private int[] resultFileBuffer = new int[(Property.BYTE_BUFFER_SIZE) / 4];
+  private byte[] firstFileBuffer = new byte[BYTE_BUFFER_SIZE];
+  private byte[] secondFileBuffer = new byte[BYTE_BUFFER_SIZE];
+  private int[] resultFileBuffer = new int[(BYTE_BUFFER_SIZE) / 4];
   private DataInputStream dataFromFirstFile;
   private DataInputStream dataFromSecondFile;
   private DataOutputStream dataToResultFile;
@@ -16,12 +18,16 @@ public class BigFileMerge {
 
   public String mergeSortFile(String bigfile, String fileAfterSort) throws IOException {
     CutBigFile cutBigFile = new CutBigFile();
-    OperationWithFiles.fileCopy(merge(cutBigFile.cutBigFile(
+    FileOperations.fileCopy(merge(cutBigFile.cutBigFile(
             new File(bigfile))), fileAfterSort);
-    OperationWithFiles.dirClear(Property.PATH_TO_TEMP_DIR_UNIX);
+    FileOperations.dirClear(PATH_TO_TEMP_DIR_UNIX);
     return fileAfterSort;
   }
- //this function recursion merge all temp files
+
+  /**
+   * this function recursion merge all temp files
+   */
+
   public String merge(List<String> filesList) throws IOException {
     int filesCount = filesList.size();
     List<String> newFilesList = new ArrayList<String>();
@@ -43,11 +49,14 @@ public class BigFileMerge {
     return merge(newFilesList);
 
   }
-  // this function merge to file, save result to new temp file and return his path.
+
+  /**
+   * this function merge to file, save result to new temp file and return his path
+  */
   public String mergeFiles(File firstFile, File secondFile) throws IOException {
 
-    String fileNameForReturn = Property.PATH_TO_TEMP_DIR_UNIX + Property.TEMP_FILE_NAME +
-            firstCountNumber + "_" + secondCountNumber + Property.FILE_TYPE;
+    String fileNameForReturn = PATH_TO_TEMP_DIR_UNIX + TEMP_FILE_NAME +
+            firstCountNumber + "_" + secondCountNumber + FILE_TYPE;
     dataFromFirstFile = new DataInputStream(new FileInputStream(firstFile));
     dataFromSecondFile = new DataInputStream(new FileInputStream(secondFile));
     dataToResultFile = new DataOutputStream(new FileOutputStream(
@@ -78,7 +87,7 @@ public class BigFileMerge {
           secondBufferCount++;
         }
 
-        if (count == (Property.BYTE_BUFFER_SIZE) / 4 - 1) {
+        if (count == resultFileBuffer.length - 1) {
           writeBufferToFile(resultFileBuffer, count);
           count = 0;
         }
