@@ -110,12 +110,9 @@ public class AppController {
 		if (result.hasErrors()) {
 			return "addproject";
 		}
-		
-//		Project project2 = new Project();
-		
 		projectService.saveProject(project);
 		model.addAttribute("message", "Project registered successfully");
-		return "redirect:/projects";
+		return "redirect:/categories";
 	}
 
 	@RequestMapping(value = "/donate", method = RequestMethod.GET)
