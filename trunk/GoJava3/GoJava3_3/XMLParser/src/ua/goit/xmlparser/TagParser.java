@@ -15,9 +15,13 @@ public class TagParser {
 
     if ('?' == firstChar) {
       type = TagType.HEADER;
-      return new Tag(tag, type);
+      tag = tag.substring(1, tag.length() - 1);
+      tag = tag.trim();
+      params = parseParams(tag);
+      return new Tag(type, name, params);
     } else if ('/' == firstChar) {
       type = TagType.CLOSE;
+      tag = tag.trim();
       name = tag.substring(1);
       return new Tag(type, name);
     } else if ('/' == lastChar) {

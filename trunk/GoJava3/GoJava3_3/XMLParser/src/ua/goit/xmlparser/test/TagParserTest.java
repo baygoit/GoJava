@@ -60,7 +60,9 @@ public class TagParserTest {
   @Test
   public void parseHeaderTest() {
     String header = "? xml encoding=\"utf-8\"?";
-    Tag expected = new Tag(header, TagType.HEADER);
+    Map<String, String> params = new HashMap<String, String>();
+    params.put("encoding", "utf-8");
+    Tag expected = new Tag(TagType.HEADER, "xml", params);
     TagParser tagParser = new TagParser();
     Tag actual = tagParser.parse(header);
     assertEquals(expected, actual);

@@ -12,11 +12,6 @@ public class Tag {
   public Tag() {
   }
 
-  public Tag(String tag, TagType type) {
-    this.tag = tag;
-    this.type = type;
-  }
-
   public Tag(TagType type, String name) {
     this.type = type;
     this.name = name;
