@@ -25,6 +25,6 @@
 		</table>
 	</form:form>
 	<br/>
-	<p>Go back to <a href="${ctx}/categories">List of all categories</a></p>
+	<p>Go back to <a href="${ctx}/categories">list of all categories</a></p>
 </body>
 </html>
