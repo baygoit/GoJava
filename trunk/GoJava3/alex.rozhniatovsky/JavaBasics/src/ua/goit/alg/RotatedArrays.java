@@ -12,10 +12,12 @@ public class RotatedArrays {
         if (start > end) {
             return -1;
         }
+        
         //index has been found
         if (array[mid] == target) {
             return mid;
         }
+        
         // left part of array is sorted
         if (array[start] <= array[mid]) {
             // target in left part
