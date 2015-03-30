@@ -11,7 +11,11 @@ public class PointImpl implements Point {
     }
 
     /*Return string with point coordinate*/
-    public String getCoordinate() {
-	return "(" + x + ", " + y + ")";
+    public int getX() {
+	return x;
+    }
+    
+    public int getY() {
+	return y;
     }
 }
