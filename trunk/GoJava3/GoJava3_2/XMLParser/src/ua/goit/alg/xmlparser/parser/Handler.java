@@ -6,6 +6,6 @@ public interface Handler {
   public void onStart(ParserData parserData);
   public void onEnd(ParserData parserData);
   public void onError(ParserData parserData);
-  void onOpenTag(ParserData parserData);
+  public void onOpenTag(ParserData parserData);
 
 }
