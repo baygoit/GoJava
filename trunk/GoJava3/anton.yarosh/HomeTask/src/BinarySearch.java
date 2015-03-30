@@ -13,6 +13,7 @@ public class BinarySearch {
 	    if (middleIndex == startIndex || middleIndex == endIndex) {
 		return -1;
 	    }
+	    
 	    if (elementToSearch < m[middleIndex]) {
 		if (elementToSearch >= m[startIndex]) {
 		    endIndex = middleIndex;
