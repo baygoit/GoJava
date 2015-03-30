@@ -16,11 +16,11 @@
       	<appender-ref ref="fileAppender" />
     </logger>
     <logger name="com.opensymphony">
-        <level value="DEBUG" />
+        <level value="WARN" />
     </logger>
 
     <logger name="org.apache.struts2">
-         <level value="DEBUG" />
+         <level value="WARN" />
     </logger>
     
    <root>

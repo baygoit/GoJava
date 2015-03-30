@@ -10,13 +10,13 @@
     <package name="basicstruts2" namespace="/" extends="struts-default">
 
         <action name="struts2">
-            <result>/struts/struts.jsp</result>
+            <result>struts/struts.jsp</result>
         </action>
         
         <action name="good_getall" 
         		class="ua.com.goit.gojava.andriidnikitin.MyShop.ui.GoodAction" 
         		method="execute">
-    		<result name="success">/struts/good_getall.jsp</result>
+    		<result name="success">struts/good_getall.jsp</result>
 		</action>
 
     </package>

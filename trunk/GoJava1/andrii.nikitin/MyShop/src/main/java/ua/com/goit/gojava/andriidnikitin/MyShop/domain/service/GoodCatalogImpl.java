@@ -42,8 +42,10 @@ public class GoodCatalogImpl implements GoodCatalog{
 			for (Good good: list){
 				result.append(good.getName()).append(" ");
 			}
+			log.info(result.toString());//TODO - delete
 			return result.toString();
 		} catch (MyShopException e) {
+			System.out.println("list is null");
 			return null;
 		}
 	}

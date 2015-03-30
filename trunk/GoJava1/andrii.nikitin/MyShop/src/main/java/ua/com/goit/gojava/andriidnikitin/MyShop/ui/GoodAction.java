@@ -1,26 +1,32 @@
 package ua.com.goit.gojava.andriidnikitin.MyShop.ui;
 
-import ua.com.goit.gojava.andriidnikitin.MyShop.domain.service.GoodCatalog;
+import org.apache.log4j.Logger;
+
+import ua.com.goit.gojava.andriidnikitin.MyShop.domain.service.GoodCatalogImpl;
 import ua.com.goit.gojava.andriidnikitin.MyShop.domain.service.GoodCatalogImpl;
 
 import com.opensymphony.xwork2.ActionSupport;
 
 public class GoodAction extends ActionSupport {
 	
+	private static Logger log = Logger.getLogger("MyShop.UI");
+	
 	private static final long serialVersionUID = 1L;
 
-	private GoodCatalog catalog;
+	private GoodCatalogImpl catalog;
 	
-	public GoodCatalog getCatalog() {
+	public GoodCatalogImpl getCatalog() {
+		log.info("instance of catalog was sent");
 		return catalog;
 	}
 
-	public void setCatalog(GoodCatalog catalog) {
+	public void setCatalog(GoodCatalogImpl catalog) {
 		this.catalog = catalog;
 	}
 
 	public String execute(){
-		catalog = GoodCatalogImpl.getInstance();		
+		catalog = GoodCatalogImpl.getInstance();
+		log.info("GoodAction executed");
 		return SUCCESS;		
 	}
 	

@@ -8,6 +8,7 @@
 <title>all goods</title>
 </head>
 <body>
-    <h2><s:property value="catalog.goods" /></h2>
+	<p>all goods:</p>
+    <h2><s:property value="catalog.goodList" /></h2>
 </body>
 </html>
