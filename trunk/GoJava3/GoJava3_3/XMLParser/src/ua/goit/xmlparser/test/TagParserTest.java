@@ -125,5 +125,14 @@ public class TagParserTest {
     Map<String, String> map = tag.getParams();
     assertEquals(2, map.size());
   }
+ 
   
+  @Test
+  public void parseParamDoubleSpaceTest() {
+    String openTag = "tagname   param1=\"value1\" param2=\"value2\"";
+    TagParser tagParser = new TagParser();
+    Tag tag = tagParser.parse(openTag);
+    Map<String, String> map = tag.getParams();
+    assertEquals(2, map.size());
+  }
 }
