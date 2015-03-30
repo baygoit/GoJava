@@ -39,8 +39,12 @@ public class TagParser {
 
     for (int i = 1; i < partsOfTag.length; i++) {
       String[] partsOfParam = partsOfTag[i].split("=");
-      String value = partsOfParam[1].substring(1, partsOfParam[1].length() - 1);
-      params.put(partsOfParam[0], value);
+      if (partsOfParam.length == 2) {
+        String value = partsOfParam[1].substring(1, partsOfParam[1].length() - 1);
+        params.put(partsOfParam[0], value);
+      } else {
+        throw new IllegalArgumentException();
+      }
     }
 
     return params;
