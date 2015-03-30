@@ -25,6 +25,8 @@ public enum TagStates {
       }
       if (c == '/') {
         result = CLOSETAG;
+      } else {
+        result = ELEMENT;
       }
       return result;
     }
@@ -59,11 +61,9 @@ public enum TagStates {
     @Override
     public TagStates next(char c, ParserData parserData) {
       TagStates result = INVALID;
-      if (c == '?') {
-        result = INIT;
-      }
-      if (c == '<') {
-        result = START;
+      if (c == ' ') {
+        result = ELEMENT;
+      //TODO start atribut automat here
       }
       return result;
     }
