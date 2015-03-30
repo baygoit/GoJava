@@ -7,10 +7,12 @@
 <title>Kickstarter</title>
 <style>
 tr:first-child {font-weight: bold; background-color: #C6C9C4;}
+h3 {color: #ff0000;}
 </style>
 </head>
 <body>
 	<h2>List of categories</h2>
+	<h3><c:out value="${message}" /></h3>
 	<table>
 		<tr>
 			<td>DELETE</td>
@@ -27,6 +29,6 @@ tr:first-child {font-weight: bold; background-color: #C6C9C4;}
 			</tr>
 		</c:forEach>
 	</table>
-	<p><a href="${ctx}/newcategory">Add new category</a></p>
+	<p><a href="${ctx}/categories?add">Add new category</a></p>
 </body>
 </html>

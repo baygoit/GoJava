@@ -5,7 +5,7 @@
 <title>Kickstarter project</title>
 </head>
 	<body>
-		<p>project name: "${project.name}</p>
+		<p>project name: ${project.name}</p>
 		<p>short description: ${project.shortDescription}</p>
 		<p>full description: ${project.fullDescription}</p>
 		<p>foto: ${project.foto}</p>
@@ -15,9 +15,9 @@
 		<p>how much remaining = ${project.howMuchRemaining}</p>
 		<p>days to go = ${project.dateClose}</p>
 
-		<p>If you want return to <a href="${ctx}/projects/${project.id}">projects</a></p>
-		<p>If you want to <a href="${ctx}/donate?idproject=${project.id}">invest in the project</a></p>
-		<p>Have a question? If the info above doesn't help, you can <a href="${ctx}/question">ask the project creator directly</a>
+		<p>If you want return to <a href="${ctx}/projects/${project.idCategory}">projects</a></p>
+		<p>If you want to <a href="${ctx}/donate/${project.id}">invest in the project</a></p>
+		<p>Have a question? If the info above doesn't help, you can <a href="${ctx}/question/${project.id}">ask the project creator directly</a>
 	
 	</body>
 </html>
