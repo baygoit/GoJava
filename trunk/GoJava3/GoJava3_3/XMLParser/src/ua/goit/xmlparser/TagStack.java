@@ -65,8 +65,7 @@ public class TagStack {
 
   private static String[] copyOf(String[] original, int newLength) {
     String[] copy = new String[newLength];
-    System
-        .arraycopy(original, 0, copy, 0, Math.min(original.length, newLength));
+    System.arraycopy(original, 0, copy, 0, Math.min(original.length, newLength));
     return copy;
   }
 
@@ -84,7 +83,7 @@ public class TagStack {
     size--;
     return item;
   }
-  
+
   public String get() {
     if (size() == 0)
       return null;

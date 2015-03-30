@@ -10,6 +10,7 @@ public class TagParser {
 
 
   public Tag parse(String tag) {
+    tag = tag.trim();
     char firstChar = tag.charAt(0);
     char lastChar = tag.charAt(tag.length() - 1);
 
@@ -33,15 +34,19 @@ public class TagParser {
   }
 
   public Map<String, String> parseParams(String tag) {
+    int indexSpace = tag.indexOf(" ");
+    name = tag.substring(0, indexSpace);
+    tag = tag.substring(indexSpace + 1);
+    tag = tag.trim();
     String[] partsOfTag = tag.split(" ");
-    name = partsOfTag[0];
     Map<String , String > params = new HashMap<String, String>();
 
-    for (int i = 1; i < partsOfTag.length; i++) {
+    for (int i = 0; i < partsOfTag.length; i++) {
       String[] partsOfParam = partsOfTag[i].split("=");
       if (partsOfParam.length == 2) {
-        String value = partsOfParam[1].substring(1, partsOfParam[1].length() - 1);
-        params.put(partsOfParam[0], value);
+        String value = partsOfParam[1].trim();
+        value = value.substring(1, partsOfParam[1].length() - 1);
+        params.put(partsOfParam[0].trim(), value);
       } else {
         throw new IllegalArgumentException();
       }
