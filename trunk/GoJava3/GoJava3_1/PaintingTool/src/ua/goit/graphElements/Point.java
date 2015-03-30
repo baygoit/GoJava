@@ -7,5 +7,7 @@ package ua.goit.graphElements;
  */
 public interface Point {
 
-    public String getCoordinate();
+    public int getX();
+    public int getY();
+    
 }
