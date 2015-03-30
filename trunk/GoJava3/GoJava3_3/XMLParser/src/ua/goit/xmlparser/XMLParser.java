@@ -1,25 +1,39 @@
 package ua.goit.xmlparser;
 
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
+import java.io.*;
 
 public class XMLParser {
 
-  public void Parsre(String strArg) {
+  public void parse(String strArg) {
+    parse(new ByteArrayInputStream(strArg.getBytes()));
+  }
 
-    Parsre(new ByteArrayInputStream(strArg.getBytes()));
-  };
+  public void parse(File strArg) throws FileNotFoundException {
+    parse(new FileInputStream(strArg));
+  }
 
-  public void Parsre(File strArg) throws FileNotFoundException {
+  public void parse(InputStream iStreamReader) {
+    XMLElementsReader xmlStreamReader = new XMLElementsReader(iStreamReader);
+  }
 
-    Parsre(new FileInputStream(strArg));
-  };
+  public void onOpenTag() {
 
-  public void Parsre(InputStream iStreamReader) {
-     XMLElementsReader xmlStreamReader = new XMLElementsReader(iStreamReader) ;
-  };
+  }
+
+  public void onTextValue() {
+
+  }
+
+  public void onStart() {
+
+  }
+
+  public void onEnd() {
+
+  }
+
+  public void onError() {
+
+  }
 
 }
