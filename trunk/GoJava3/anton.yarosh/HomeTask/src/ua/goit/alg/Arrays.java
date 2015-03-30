@@ -16,48 +16,37 @@ import java.io.IOException;
  */
 public class Arrays {
     private static int bufSize = 10000;
-    private static File source;
-    private static File tmpResult1;
-    private static File tmpResult2;
-    private static File result;
-    private static boolean semaphore = false;
-    private static boolean endOfFile = false;
 
-    public static void mergeSort(File file) {
+    public static void mergeSort(File source) {
 	int[] buffer = new int[bufSize];
-	source = file;
-	tmpResult1 = new File("tmpResult1.txt");
-	tmpResult2 = new File("tmpResult2.txt");
+	File tmpResult1 = new File("tmpResult1.txt");
+	File tmpResult2 = new File("tmpResult2.txt");
+	boolean isEndOfFile = false;
+	boolean isAccessToTmpResult1 = false;
 	try {
 	    tmpResult1.createNewFile();
 	    tmpResult2.createNewFile();
-	    FileInputStream inputFile = new FileInputStream(file);
+	    FileInputStream inputFile = new FileInputStream(source);
 	    DataInputStream dis = new DataInputStream(inputFile);
 	    while (dis.available() != 0) {
-		if (semaphore) { 
-		    result = tmpResult1;
-		}
-		else {
-		    result = tmpResult2;
-		}
 		bufSize = readInt(buffer, dis);
 		mergeSort(buffer, 0, bufSize - 1);
-		mergeWithFile(buffer, result);
+		isAccessToTmpResult1 = switchTmpFilesAndMerge(buffer, tmpResult1, tmpResult2, source, isAccessToTmpResult1);
 	    }
+	    dis.close();
+	    inputFile.close();
+	} catch (Exception e) {
+	    throw new RuntimeException("Something went wrong. Please, check the file.");
+	} finally {
 	    tmpResult1.delete();
 	    tmpResult2.delete();
 	}
-	catch (Exception e) {
-	    e.printStackTrace();
-	}
-
     }
 
     //Read data from file to buffer array
-    public static int readInt(int[] buffer, DataInputStream dis) throws IOException {
+    private static int readInt(int[] buffer, DataInputStream dis) throws IOException {
 	for (int i = 0; i < buffer.length; i++) {
 	    if (dis.available() <= 0) {
-		endOfFile = true;
 		return i;
 	    }
 	    buffer[i] = dis.readInt();
@@ -65,25 +54,33 @@ public class Arrays {
 	return buffer.length;
     }
 
+    // Switch input and output files
+    private static boolean switchTmpFilesAndMerge(int[] buffer, File tmpResult1, File tmpResult2, File source, boolean isAccessToTmpResult1) throws IOException {
+	boolean isEndOfFile = (buffer.length != bufSize);
+	if (isAccessToTmpResult1) { 
+	    if (!isEndOfFile) {
+		mergeWithFile(buffer, tmpResult1, tmpResult2);
+	    } else {
+		mergeWithFile(buffer, tmpResult1, source);
+	    }
+	    return false;
+	} else {
+	    if (!isEndOfFile) {
+		mergeWithFile(buffer, tmpResult2, tmpResult1);
+	    } else {
+		mergeWithFile(buffer, tmpResult2, source);
+	    }
+
+	    return true;
+	}
+    }
+
     //Merge buffer array with temp file
-    public static void mergeWithFile(int[] buffer, File tmpResult) throws IOException {
-	FileInputStream inputFile = new FileInputStream(tmpResult);
+    private static void mergeWithFile(int[] buffer, File tmpResult1, File tmpResult2) throws IOException {
+	FileInputStream inputFile = new FileInputStream(tmpResult1);
+	FileOutputStream outputFile = new FileOutputStream(tmpResult2);
 	DataInputStream dis = new DataInputStream(inputFile);
-	if (!endOfFile) {
-	    if (semaphore) { 
-		result = tmpResult2;
-		semaphore = false;
-	    }
-	    else {
-		result = tmpResult1;
-		semaphore = true;
-	    }
-	}
-	else {
-	    result = source;
-	}
-	FileOutputStream output = new FileOutputStream(result);
-	DataOutputStream dos = new DataOutputStream(output);
+	DataOutputStream dos = new DataOutputStream(outputFile);
 	int i = 0;
 	boolean isLess = false;
 	int numFromFile = (dis.available() != 0)? dis.readInt() : 0;
@@ -91,30 +88,27 @@ public class Arrays {
 	    if (isLess) {
 		numFromFile = dis.readInt();
 	    }
+
 	    if (i != bufSize) {
 		if (dis.available() != 0 && isLess == false) {
 		    if (buffer[i] > numFromFile) {
 			dos.writeInt(numFromFile);
 			if (dis.available() != 0) {
 			    isLess = true;
-			}
-			else {
+			} else {
 			    isLess = false;
 			}
-		    }
-		    else {
+		    } else {
 			dos.writeInt(buffer[i]);
 			i++;
 			isLess = false;
 		    }
-		}
-		else {
+		} else {
 		    dos.writeInt(buffer[i]);
 		    i++;
 		    isLess = false;
 		}
-	    }
-	    else {
+	    } else {
 		dos.writeInt(numFromFile);
 		isLess = true;
 	    }
@@ -122,10 +116,12 @@ public class Arrays {
 	dos.flush();
 	dos.close();
 	dis.close();
+	outputFile.close();
+	inputFile.close();
     }
 
     //Sorting array
-    public static void mergeSort(int []m, int p, int r) {
+    private static void mergeSort(int []m, int p, int r) {
 	if (p < r) {
 	    int q = (p + r) / 2;
 	    mergeSort(m, p, q);
@@ -134,7 +130,7 @@ public class Arrays {
 	}
     }
 
-    public static void merge(int m[], int p, int q, int r) {
+    private static void merge(int m[], int p, int q, int r) {
 	int n1 = q - p + 1;
 	int n2 = r - q;
 	int left[] = new int[n1 + 1];
@@ -144,17 +140,18 @@ public class Arrays {
 	for (int i = 0; i < n1; i++) {
 	    left[i] = m[p + i];
 	}
+
 	for (int i = 0; i < n2; i++) {
 	    right[i] = m[q + i + 1];
 	}
+
 	int i = 0;
 	int j = 0;
 	for (int k = p; k <= r; k++) {
 	    if (left[i] <= right[j]) {
 		m[k] = left[i];
 		i++;
-	    }
-	    else {
+	    } else {
 		m[k] = right[j];
 		j++;
 	    }
