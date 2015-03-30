@@ -10,7 +10,7 @@ public class InputStream {
   private BufferedReader inputStreamFile = null;
   private String inputStreamString = null;
   private boolean isString = true;
-  private static int counter = 0;
+  private static int index = 0;
 
   public InputStream(String inputData) throws FileNotFoundException{
     inputStreamString = inputData;
@@ -35,12 +35,12 @@ public class InputStream {
   }
   
   private int readString(){
-    if (counter < inputStreamString.length()){
-      int result = inputStreamString.toCharArray()[counter];
-      counter++;
+    if (index < inputStreamString.length()){
+      int result = inputStreamString.toCharArray()[index];
+      index++;
       return result;
     } else {
-      counter = 0;
+      index = 0;
       return -1;
     }
   }
