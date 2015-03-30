@@ -31,24 +31,18 @@ public class MinNumber {
 		minGapIndex = minIndex;
 		minIndex = i;
 		equalIndexGap = Integer.MAX_VALUE;
-	    }
-
-	    /* Calculating and storing the equalIndexGap if find same minimum element */
-	    else if (minElement == rez[i]) {
+	    } else if (minElement == rez[i]) {                      //Calculating and storing the equalIndexGap if find same minimum element		    
 		if (Math.abs(minIndex - i) < equalIndexGap) {
 		    equalIndexGap = Math.abs(minIndex - i); 	    // Storing new gap if it less then current 
 		    minIndex = i;  			    	    // Shift minimum element index forward
-		}
-		else {
+		} else {
 		    minIndex = i;  			    	    // Shift minimum element index forward  						
 		}
-	    }
-	    else {
+	    } else {
 		if (Math.abs(minElement - rez[i]) < minGap) {       //Searching for nearest next value after minimum
 		    minGap = Math.abs(minElement - rez[i]);
 		    minGapIndex = i;
-		}
-		else if(Math.abs(minElement - rez[i]) == minGap) {  //If next value after minimum is more then one, calculating and storing nearest
+		} else if (Math.abs(minElement - rez[i]) == minGap) {  //If next value after minimum is more then one, calculating and storing nearest
 		    if (Math.abs(minIndex - minGapIndex) > Math.abs(minIndex - i)) {
 			minGapIndex = i;
 		    }
@@ -60,8 +54,7 @@ public class MinNumber {
 	if (equalIndexGap == Integer.MAX_VALUE) {
 	    finalGap = Math.abs(minIndex - minGapIndex); 
 	    System.out.println("Min element: " + rez[minIndex] + ", next closest value: " + rez[minGapIndex]);
-	}
-	else {
+	} else {
 	    finalGap = equalIndexGap;
 	    System.out.println("Minimal repeated value: " + rez[minIndex]);			
 	}
