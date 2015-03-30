@@ -5,7 +5,8 @@
 "Type" : "Triangle",
 "Points" : [
     {
-    "Point" : "(1, 2)"
+    "X" : "1",
+    "Y" : "2"
     }
 ]
 },
@@ -14,7 +15,8 @@
 "Type" : "Triangle",
 "Points" : [
     {
-    "Point" : "(2, 1)"
+    "X" : "2",
+    "Y" : "1"
     }
 ]
 }

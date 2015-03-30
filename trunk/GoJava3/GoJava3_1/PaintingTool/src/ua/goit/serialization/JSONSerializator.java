@@ -36,12 +36,10 @@ public class JSONSerializator extends Serializator {
   public StringBuffer serialize(Group group) {
     addJSONObjectName(group.getName());
     openCloseBracket(zeroTab, openBracket, enter);
-    System.out.println(isGropsNotNullAndNotEmpty(group));
     if (isGropsNotNullAndNotEmpty(group)) {
       addTab();
       int gropeQuantity = group.getGroups().size();
       for (int i = 0; i < gropeQuantity; i++) {
-
         serialize(group.getGroups().get(i));
         if (gropeQuantity - 1 != i) {
           bufAppend("," + enter);
@@ -53,7 +51,6 @@ public class JSONSerializator extends Serializator {
       } else {
         bufAppend(enter);
       }
-
     }
 
     if (isGropsElementNotNullAndNotEmpty(group)) {
@@ -63,7 +60,6 @@ public class JSONSerializator extends Serializator {
         if (elementQuantity - 1 != i) {
           bufAppend("," + enter);
         }
-
       }
 
       bufAppend(enter);
@@ -101,7 +97,8 @@ public class JSONSerializator extends Serializator {
 
     for (int i = 0; i < pointsQuantity; i++) {
       openCloseBracket(tab, openBracket, enter);
-      addAttributeLast("Point", element.getPoints().get(i).getCoordinate());
+      addAttribute("X", String.valueOf(element.getPoints().get(i).getX()));
+      addAttributeLast("Y", String.valueOf(element.getPoints().get(i).getY()));
       openCloseBracket(tab, closeBracket, "");
       if (pointsQuantity - 1 != i) {
         bufAppend("," + enter);
