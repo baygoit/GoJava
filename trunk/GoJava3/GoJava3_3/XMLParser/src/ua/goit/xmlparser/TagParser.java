@@ -8,7 +8,6 @@ public class TagParser {
   private String name;
   private Map<String, String> params;
 
-
   public Tag parse(String tag) {
     tag = tag.trim();
     char firstChar = tag.charAt(0);
