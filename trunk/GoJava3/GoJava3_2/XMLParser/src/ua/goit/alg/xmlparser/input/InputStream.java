@@ -1,16 +1,23 @@
 package ua.goit.alg.xmlparser.input;
 
+import java.io.File;
+
 public class InputStream {
-  
-  public InputStream(String inputData){
-    
+  private InputStream inputStream;
+
+  InputStream(String inputData){
+    inputStream = new InputStream(inputData);
   }
-  
+
+  InputStream(File inputData) {
+    inputStream = new InputStream(inputData);
+  }
+
   public boolean hasNext(){
-    return false;
+    return inputStream.hasNext();
   }
   public char nextChar(){
-    return 0;
+    return inputStream.nextChar();
   }
  
 }
