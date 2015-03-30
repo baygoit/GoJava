@@ -14,7 +14,7 @@ public class XMLSerializator extends Serializator {
 
     @Override
     public StringBuffer serialize(Element element) {
-            buffer.append("<" + element.getType() + ">" + element.getName());
+            buffer.append("<" + element.getClass().getSimpleName() + ">" + element.getName());
             if (element.getPoints() == null) {
                 buffer.append("<Points> </Points>");
             }
@@ -25,7 +25,7 @@ public class XMLSerializator extends Serializator {
                 }
                 buffer.append("</Points>");
             }
-            buffer.append("</" + element.getType() + ">");
+            buffer.append("</" + element.getClass().getSimpleName() + ">");
 
         return buffer;
     }
