@@ -14,18 +14,18 @@ public class XMLSerializator extends Serializator {
 
     @Override
     public StringBuffer serialize(Element element) {
-            buffer.append("<" + element.getClass().getSimpleName() + ">" + element.getName());
+            buffer.append("<" + element.getType() + ">" + element.getName());
             if (element.getPoints() == null) {
                 buffer.append("<Points> </Points>");
             }
             else {
                 buffer.append("<Points>");
                 for (Point point : element.getPoints()) {
-                    buffer.append("<Point>" + point.getCoordinate() + "</Point>");
+                    buffer.append("<Point>" + "<x>" + point.getX() + "</x>" + "<y>" + point.getY() + "</y>" + "</Point>");
                 }
                 buffer.append("</Points>");
             }
-            buffer.append("</" + element.getClass().getSimpleName() + ">");
+            buffer.append("</" + element.getType() + ">");
 
         return buffer;
     }
@@ -49,13 +49,13 @@ public class XMLSerializator extends Serializator {
     }
 
     @Override
-    public void saveToFile(StringBuffer source, File file) {
+    public void saveToFile(String source, File file) {
         try {
             FileWriter fw = new FileWriter(file.getAbsoluteFile());
             BufferedWriter bw = new BufferedWriter(fw);
             bw.write("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>");
             bw.write("<elements>");
-            bw.write(source.toString());
+            bw.write(source);
             bw.write("</elements>");
             bw.close();
 
