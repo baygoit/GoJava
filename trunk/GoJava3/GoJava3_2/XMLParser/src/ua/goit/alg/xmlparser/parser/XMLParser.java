@@ -30,7 +30,7 @@ public class XMLParser {
 
   }
 
-  public String parseInputStream(StreamReader stream) throws IOException {  
+  private String parseInputStream(StreamReader stream) throws IOException {  
     int symbol;
     do{
       symbol = stream.read();
