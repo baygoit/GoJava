@@ -1,11 +1,12 @@
 package ua.goit.alg.xmlparser.statemashines;
 
 import ua.goit.alg.xmlparser.parser.ParserData;
+import ua.goit.alg.xmlparser.parser.XMLParser;
 
 public enum TagStates {
   INIT {
     @Override
-    public TagStates next(char c, ParserData parserData) {
+    public TagStates next(char c, ParserData parserData, XMLParser xmlparser) {
       TagStates result = INVALID;
       if (c == ' ') {
         result = INIT;
@@ -18,7 +19,7 @@ public enum TagStates {
   },
   OPENTAG{
     @Override
-    public TagStates next(char c, ParserData parserData) {
+    public TagStates next(char c, ParserData parserData, XMLParser xmlparser) {
       TagStates result = INVALID;
       if (c == '?') {
         result = START;
@@ -34,7 +35,7 @@ public enum TagStates {
   },
   CLOSETAG{
     @Override
-    public TagStates next(char c, ParserData parserData) {
+    public TagStates next(char c, ParserData parserData, XMLParser xmlparser) {
       TagStates result = INVALID;
       if (c == '?') {
         result = START;
@@ -47,7 +48,7 @@ public enum TagStates {
   },
   START {
     @Override
-    public TagStates next(char c, ParserData parserData) {
+    public TagStates next(char c, ParserData parserData, XMLParser xmlparser) {
       TagStates result = INVALID;
       if (c == '?') {
         result = INIT;
@@ -60,7 +61,7 @@ public enum TagStates {
   },
   ELEMENT {
     @Override
-    public TagStates next(char c, ParserData parserData) {
+    public TagStates next(char c, ParserData parserData, XMLParser xmlparser) {
       TagStates result = INVALID;
       if (c == ' ') {
         result = ELEMENT;
@@ -79,7 +80,7 @@ public enum TagStates {
   },
   NODE {
     @Override
-    public TagStates next(char c, ParserData parserData) {
+    public TagStates next(char c, ParserData parserData, XMLParser xmlparser) {
       TagStates result = INVALID;
       if (c == '<') {
         result = OPENTAG;
@@ -91,11 +92,11 @@ public enum TagStates {
   },
   INVALID {
     @Override
-    public TagStates next(char c, ParserData parserData) {
+    public TagStates next(char c, ParserData parserData, XMLParser xmlparser) {
       TagStates result = INVALID;
       return result;
     }
   };
 
-  public abstract TagStates next(char c,  ParserData parserData);
+  public abstract TagStates next(char c,  ParserData parserData, XMLParser xmlParser);
 }

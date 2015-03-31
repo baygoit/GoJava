@@ -17,7 +17,7 @@ public class StateMashineTag {
   }
 
   public void next(char c) {
-    state = state.next(c, parserData);
+    state = state.next(c, parserData,xmlParser);
   }
 
   public void getResult() {
