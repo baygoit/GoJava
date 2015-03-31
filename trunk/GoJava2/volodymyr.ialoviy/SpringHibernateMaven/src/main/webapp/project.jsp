@@ -5,6 +5,7 @@
 <title>Kickstarter project</title>
 </head>
 	<body>
+	<h1>Project from ${project.category.name}</h1>
 	<table border="2" bordercolor="black" cellpadding="2">
 		<tr>
 			<td>NAME</td>

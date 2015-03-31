@@ -2,9 +2,13 @@ package ua.com.goit.gojava2.vova.kickstarter.dao;
 
 import java.util.List;
 
+import javax.persistence.criteria.Expression;
+
+import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import ua.com.goit.gojava2.vova.kickstarter.model.Category;
@@ -20,10 +24,8 @@ public class Projects extends AbstractDao implements ProjectDao {
 
 	@Override
 	public List<Project> findAllProjects(int id) {
-		Query query = getSession().createQuery("from Project where idCategory = :id");
-		query.setInteger("id", id);
-		List<Project> rezult = (List<Project>) query.list();
-		return rezult;
+		return (List<Project>) getSession().createCriteria(Project.class)
+				.add(Restrictions.eq("idCategory", id)).list();
 	}
 
 	@Override
