@@ -33,7 +33,7 @@ public class TestParser {
   }
 
   @Test
-  public void testAttrAndText() throws IOException{
+  public void testText() throws IOException{
     XMLParser parser = new XMLParser();
     String result = parser.parse("<start atr1=3><tag>text</tag><tag2/></start>");
     String expectedResult = "<start><tag></tag><tag2></tag2></start>";
