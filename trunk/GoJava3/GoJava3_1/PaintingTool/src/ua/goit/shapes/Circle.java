@@ -22,11 +22,6 @@ public class Circle implements Element {
     }
 
     @Override
-    public String getType() {
-        return "Circle";
-    }
-
-    @Override
     public void addPoint(Point point) {
         pointsList.add(point);
     }
