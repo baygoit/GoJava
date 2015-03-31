@@ -7,6 +7,8 @@ public class ParserData {
   String tag = "";
   HashMap<String, String> attributes = new HashMap<String, String>();
   String text = "";
+  String attributeName = "";
+  String attributeValue = "";
 
   public String getTag() {
     return tag;

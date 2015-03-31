@@ -7,7 +7,7 @@ import ua.goit.alg.xmlparser.parser.XMLParser;
 public enum TagStates {
   INIT {
     @Override
-    public TagStates next(char c, ParserData parserData, XMLParser xmlparser) {
+    public TagStates next(char c, ParserData parserData, XMLParser xmlParser) {
       TagStates result = INVALID;
       if (c == ' ') {
         result = INIT;
@@ -20,7 +20,7 @@ public enum TagStates {
   },
   OPENTAG{
     @Override
-    public TagStates next(char c, ParserData parserData, XMLParser xmlparser) {
+    public TagStates next(char c, ParserData parserData, XMLParser xmlParser) {
       TagStates result = INVALID;
       if (c == '?') {
         result = START;
@@ -36,10 +36,10 @@ public enum TagStates {
   },
   CLOSETAG{
     @Override
-    public TagStates next(char c, ParserData parserData, XMLParser xmlparser) {
+    public TagStates next(char c, ParserData parserData, XMLParser xmlParser) {
       TagStates result = CLOSETAG;
       if (c == '>') {
-        xmlparser.onCloseTag(parserData);
+        xmlParser.onCloseTag(parserData);
         result = INIT;
       } else {
         parserData.setTag(parserData.getTag() + c);
@@ -49,7 +49,7 @@ public enum TagStates {
   },
   START {
     @Override
-    public TagStates next(char c, ParserData parserData, XMLParser xmlparser) {
+    public TagStates next(char c, ParserData parserData, XMLParser xmlParser) {
       TagStates result = INVALID;
       if (c == '?') {
         result = INIT;
@@ -62,16 +62,15 @@ public enum TagStates {
   },
   ELEMENT {
     @Override
-    public TagStates next(char c, ParserData parserData, XMLParser xmlparser) {
+    public TagStates next(char c, ParserData parserData, XMLParser xmlParser) {
       TagStates result = INVALID;
       if (c == ' ') {
-        result = ELEMENT;
-      //TODO start atribut automat here
+        result = ATTRIBUTE;
       } else if (c == '>'){
-        xmlparser.onOpenTag(parserData);
+        xmlParser.onOpenTag(parserData);
         result = NODE;
       } else if (c == '/'){
-        xmlparser.onOpenTag(parserData);
+        xmlParser.onOpenTag(parserData);
         String tag = parserData.getTag();
         parserData = new ParserData();
         parserData.setTag(tag);
@@ -83,9 +82,25 @@ public enum TagStates {
       return result;
     }
   },
+  ATTRIBUTE {
+    @Override
+    public TagStates next(char c, ParserData parserData, XMLParser xmlParser) {
+      TagStates result = INVALID;
+      if (c == ' ') {
+        result = ATTRIBUTE;
+      } else if (c == '/') {
+        xmlParser.onOpenTag(parserData);
+        String tag = parserData.getTag();
+        parserData = new ParserData();
+        parserData.setTag(tag);
+        result = CLOSETAG;
+      }
+      return result;
+    }
+  },
   NODE {
     @Override
-    public TagStates next(char c, ParserData parserData, XMLParser xmlparser) {
+    public TagStates next(char c, ParserData parserData, XMLParser xmlParser) {
       TagStates result = INVALID;
       if (c == '<') {
         result = OPENTAG;
@@ -97,7 +112,7 @@ public enum TagStates {
   },
   INVALID {
     @Override
-    public TagStates next(char c, ParserData parserData, XMLParser xmlparser) {
+    public TagStates next(char c, ParserData parserData, XMLParser xmlParser) {
       TagStates result = INVALID;
       return result;
     }
