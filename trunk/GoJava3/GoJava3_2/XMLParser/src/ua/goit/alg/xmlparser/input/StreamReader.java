@@ -10,7 +10,7 @@ public class StreamReader {
   private BufferedReader inputStreamFile = null;
   private String inputStreamString = null;
   private boolean isString = true;
-  private static int index = 0;
+  private int index = 0;
 
   public StreamReader(String inputData) throws FileNotFoundException{
     inputStreamString = inputData;
