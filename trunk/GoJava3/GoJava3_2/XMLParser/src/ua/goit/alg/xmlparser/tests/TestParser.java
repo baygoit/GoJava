@@ -44,7 +44,7 @@ public class TestParser {
   public void testFull() throws IOException{
     XMLParser parser = new XMLParser();
     String result = parser.parse("<?xml doctype=1><start atr1=3 atr2 = 4><tag>text</tag><tag2/></start>");
-    String expectedResult = "<start><tag></tag>text<tag2></tag2></start>";
+    String expectedResult = "<?xml><start><tag>text</tag><tag2></tag2></start>";
     Assert.assertEquals(expectedResult, result);
   }
 
