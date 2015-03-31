@@ -1,20 +1,33 @@
-/**
- * Created by kossovec on 11.03.15.
- */
+
 public class Exe002 {
   public static final String SENTENCE = "go It JAVA_3";
+  public static char[] charsFromSentence;
 
   public static void main(String[] args) {
-    System.out.print(inverseWorlds(SENTENCE));
+    inverseWorlds(SENTENCE);
   }
 
-  public static String inverseWorlds(String sentence) {
-    String sentences[] = sentence.split("\\s+");
-    StringBuilder sentenceSb = new StringBuilder();
-    for (String sen : sentences) {
-      sentenceSb.append(new StringBuffer(sen).reverse() + " ");
+  public static void inverseWorlds(String sentence) {
+    charsFromSentence = SENTENCE.toCharArray();
+    int start = 0;
+
+    for (int i = 0; i < charsFromSentence.length; i++) {
+      if (charsFromSentence[i] == ' ') {
+        inverce(start, i - 1, charsFromSentence);
+        start = i + 1;
+
+      } else if (i == charsFromSentence.length - 1) {
+        inverce(start, i, charsFromSentence);
+        start = i + 1;
+      }
+    }
+  }
+
+  private static void inverce(int start, int end, char[] array) {
+    for (int i = end; i >= start; i--) {
+      System.out.print(array[i]);
     }
 
-    return sentenceSb.toString();
+    System.out.print(" ");
   }
 }
