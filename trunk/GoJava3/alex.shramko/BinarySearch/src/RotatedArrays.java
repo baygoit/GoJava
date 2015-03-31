@@ -1,22 +1,14 @@
 import java.util.Arrays;
 
 public class RotatedArrays {
-  int low;
-  int high;
-  int middle;
-
-  void moveUp() {
-    low = middle+1;
-  }
-
-  void moveDown() {
-    high = middle;
-  }
 
   public int binarySearch(int[] array, int elem) {
     int index = -1;
+    int low;
+    int high;
+    int middle;
     low = 0;
-    high = array.length-1;
+    high = array.length - 1;
     if (array[low] == elem) {
       index = low;
     } else if (array[high] == elem) {
@@ -28,24 +20,24 @@ public class RotatedArrays {
         index = middle;
         break;
       }
-      if (array[middle] > elem) {
-        if (array[low] > elem) {
+      if (elem < array[middle]) {
+        if (elem < array[low]) {
           if (array[middle] < array[low]) {
-            moveDown();
+            high = middle;
           } else {
-            moveUp();
+            low = middle + 1;
           }
         } else {
-          moveDown();
+          high = middle;
         }
       } else {
-        if (array[low] > elem) {
-          moveUp();
+        if (elem < array[low]) {
+          low = middle + 1;
         } else {
-          if (array[middle] > array[low]) {
-            moveUp();
+          if (array[low] < array[middle]) {
+            low = middle + 1;
           } else {
-            moveDown();
+            high = middle;
           }
         }
       }
