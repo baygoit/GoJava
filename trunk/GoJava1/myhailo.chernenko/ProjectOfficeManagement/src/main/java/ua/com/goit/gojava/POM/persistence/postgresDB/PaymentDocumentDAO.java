@@ -21,7 +21,7 @@ public class PaymentDocumentDAO extends AbstractDAO<PaymentDocument> {
 	private static final String CLASS_TABLE = "payment_document"; 
 	private static final Logger LOG = Logger.getLogger(PaymentDocumentDAO.class);
 	
-	private BankAccountDAO bankAccountDAO;
+	private ua.com.goit.gojava.POM.persistence.hibernate.BankAccountDAO bankAccountDAO;
 	
 	@Override
 	protected String getClassName() {
@@ -151,11 +151,11 @@ public class PaymentDocumentDAO extends AbstractDAO<PaymentDocument> {
 		
 	}
 
-	public BankAccountDAO getBankAccountDAO() {
+	public ua.com.goit.gojava.POM.persistence.hibernate.BankAccountDAO getBankAccountDAO() {
 		return bankAccountDAO;
 	}
 
-	public void setBankAccountDAO(BankAccountDAO bankAccountDAO) {
+	public void setBankAccountDAO(ua.com.goit.gojava.POM.persistence.hibernate.BankAccountDAO bankAccountDAO) {
 		this.bankAccountDAO = bankAccountDAO;
 	}
 

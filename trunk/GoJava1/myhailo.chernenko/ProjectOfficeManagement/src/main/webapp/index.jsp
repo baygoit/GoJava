@@ -20,7 +20,7 @@
 
   
 	<h3>Учет денег:</h3>
-	<h4><a href="<s:url action='BankAccountList'/>">Банковские счета</a><h4>
+	<h4><a href="<s:url action='BankAccountList'/>">Банковские счета</a></h4>
 	<h4><a href="CashMovement.jsp">Записи о движении денег</a></h4>
 	<h3>Учет затрат:</h3>
 	<h4><a href="CostItems.jsp">Статьи затрат</a></h4>	

@@ -17,7 +17,6 @@ import ua.com.goit.gojava.POM.dataModel.cash.BankAccount;
 import ua.com.goit.gojava.POM.dataModel.cash.CashMovementEntry;
 import ua.com.goit.gojava.POM.dataModel.common.FinancialDocument;
 import ua.com.goit.gojava.POM.dataModel.common.Money;
-import ua.com.goit.gojava.POM.persistence.FinancialDocumentDAO;
 import ua.com.goit.gojava.POM.persistence.postgresDB.abstraction.AbstractDAO;
 
 public class CashMovementDAO extends AbstractDAO<CashMovementEntry> {
@@ -25,14 +24,14 @@ public class CashMovementDAO extends AbstractDAO<CashMovementEntry> {
 	private static final String CLASS_NAME = "Cash Movement"; 
 	private static final String CLASS_TABLE = "cash_movement"; 
 	private static final Logger LOG = Logger.getLogger(CashMovementDAO.class);
-	private BankAccountDAO bankAccountDAO;
+	private ua.com.goit.gojava.POM.persistence.hibernate.BankAccountDAO bankAccountDAO;
 	private FinancialDocumentDAO financialDocumentDAO;
 	
-	public BankAccountDAO getBankAccountDAO() {
+	public ua.com.goit.gojava.POM.persistence.hibernate.BankAccountDAO getBankAccountDAO() {
 		return bankAccountDAO;
 	}
 
-	public void setBankAccountDAO(BankAccountDAO bankAccountDAO) {
+	public void setBankAccountDAO(ua.com.goit.gojava.POM.persistence.hibernate.BankAccountDAO bankAccountDAO) {
 		this.bankAccountDAO = bankAccountDAO;
 	}
 

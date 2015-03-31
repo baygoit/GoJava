@@ -15,7 +15,6 @@ import ua.com.goit.gojava.POM.dataModel.common.FinancialDocument;
 import ua.com.goit.gojava.POM.dataModel.common.Money;
 import ua.com.goit.gojava.POM.dataModel.profitcost.ProfitLostsType;
 import ua.com.goit.gojava.POM.dataModel.profitcost.ProjectFinResultEntry;
-import ua.com.goit.gojava.POM.persistence.FinancialDocumentDAO;
 import ua.com.goit.gojava.POM.persistence.postgresDB.abstraction.AbstractDAO;
 
 

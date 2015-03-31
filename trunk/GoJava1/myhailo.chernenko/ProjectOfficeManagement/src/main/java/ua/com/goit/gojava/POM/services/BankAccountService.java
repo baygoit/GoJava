@@ -4,7 +4,7 @@ import java.util.List;
 
 import ua.com.goit.gojava.POM.dataModel.POMDataModelException;
 import ua.com.goit.gojava.POM.dataModel.cash.BankAccount;
-import ua.com.goit.gojava.POM.persistence.postgresDB.BankAccountDAO;
+import ua.com.goit.gojava.POM.persistence.hibernate.BankAccountDAO;
 
 public class BankAccountService {
 	

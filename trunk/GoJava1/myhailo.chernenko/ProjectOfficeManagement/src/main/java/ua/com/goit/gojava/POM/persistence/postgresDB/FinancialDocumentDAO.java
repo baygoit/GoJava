@@ -1,10 +1,9 @@
-package ua.com.goit.gojava.POM.persistence;
+package ua.com.goit.gojava.POM.persistence.postgresDB;
 
 import org.apache.log4j.Logger;
 
 import ua.com.goit.gojava.POM.dataModel.POMDataModelException;
 import ua.com.goit.gojava.POM.dataModel.common.FinancialDocument;
-import ua.com.goit.gojava.POM.persistence.postgresDB.PaymentDocumentDAO;
 
 public class FinancialDocumentDAO {
 

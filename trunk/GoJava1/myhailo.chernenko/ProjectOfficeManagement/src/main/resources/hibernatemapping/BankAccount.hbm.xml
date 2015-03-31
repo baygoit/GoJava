@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+ "-//Hibernate/Hibernate Mapping DTD//EN"
+ "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> 
+
+<hibernate-mapping>
+   <class name="ua.com.goit.gojava.POM.dataModel.cash.BankAccount" table="bank_account">
+      <id name="id" type="long" column="id">
+         <generator class="native"/>
+      </id>
+      <property name="name" column="name" type="string"/>
+      <property name="bankName" column="bank_name" type="string"/>
+      <property name="currency" column="currency" type="currency"/>
+   </class>
+</hibernate-mapping>
