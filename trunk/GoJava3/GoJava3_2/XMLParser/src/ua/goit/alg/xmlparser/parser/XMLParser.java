@@ -41,32 +41,25 @@ public class XMLParser {
   
   public void onOpenTag(ParserData parserData2){
     //parserData2.onOpenTag(parserData);
-    result.append(parserData.getText());
     result.append("<").append(parserData.getTag()).append(">");
   }
   public void onCloseTag(ParserData parserData2){
     //handler.onCloseTag(parserData);
-    result.append(parserData.getText());
-    result.append("<").append(parserData.getTag()).append("/>");
+    result.append("</").append(parserData.getTag()).append("/>");
   }
   public void onTextValue(ParserData parserData2){
     //handler.onTextValue(parserData);
-    result.append(parserData.getText());
-    result.append("<").append(parserData.getTag()).append(">");
+    result.append("").append(parserData.getText()).append("");
   }
   
   public void onStart(ParserData parserData2){
     //handler.onStart(parserData);
-    result.append(parserData.getText());
     result.append("<").append(parserData.getTag()).append(">");
   }
   public void onEnd(ParserData parserData2){
     //handler.onEnd(parserData);
-    result.append(parserData.getText());
-    result.append("<").append(parserData.getTag()).append(">");
   }
   public void onError(ParserData parserData2){
     //handler.onError(parserData);
-    result.append("<").append(parserData.getTag()).append(">");
   }
 }

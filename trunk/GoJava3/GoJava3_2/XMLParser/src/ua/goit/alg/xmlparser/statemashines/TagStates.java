@@ -1,5 +1,6 @@
 package ua.goit.alg.xmlparser.statemashines;
 
+import ua.goit.alg.xmlparser.parser.Handler;
 import ua.goit.alg.xmlparser.parser.ParserData;
 import ua.goit.alg.xmlparser.parser.XMLParser;
 
@@ -36,12 +37,12 @@ public enum TagStates {
   CLOSETAG{
     @Override
     public TagStates next(char c, ParserData parserData, XMLParser xmlparser) {
-      TagStates result = INVALID;
-      if (c == '?') {
-        result = START;
-      }
+      TagStates result = CLOSETAG;
       if (c == '>') {
-        result = CLOSETAG;
+        xmlparser.onCloseTag(parserData);
+        result = OPENTAG;
+      } else {
+        parserData.setTag(parserData.getTag() + c);
       }
       return result;
     }
@@ -67,13 +68,17 @@ public enum TagStates {
         result = ELEMENT;
       //TODO start atribut automat here
       } else if (c == '>'){
-        parserData.setTag(parserData.getTag() + c);
+        xmlparser.onOpenTag(parserData);
         result = NODE;
       } else if (c == '/'){
+        xmlparser.onOpenTag(parserData);
         String tag = parserData.getTag();
         parserData = new ParserData();
         parserData.setTag(tag);
         result = CLOSETAG;
+      } else {
+        result = ELEMENT;
+        parserData.setTag(parserData.getTag() + c);
       }
       return result;
     }
