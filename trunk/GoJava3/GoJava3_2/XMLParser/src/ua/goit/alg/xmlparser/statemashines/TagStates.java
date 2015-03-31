@@ -137,8 +137,10 @@ public enum TagStates {
       TagStates result = INVALID;
       if (c == '<') {
         result = OPENTAG;
+        xmlParser.onTextValue(parserData);
       } else {
         parserData.setText(parserData.getText() + c);
+        result = NODE;
       }
       return result;
     }
