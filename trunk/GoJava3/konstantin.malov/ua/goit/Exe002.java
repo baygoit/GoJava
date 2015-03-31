@@ -1,31 +1,27 @@
 
 public class Exe002 {
-  public static final String SENTENCE = "go It JAVA_3";
-  public static char[] charsFromSentence;
-
   public static void main(String[] args) {
-    inverseWorlds(SENTENCE);
+    String sentence = "go It JAVA_3";
+    Exe002 exe002 = new Exe002();
+    exe002.inverseWorlds(sentence);
   }
 
-  public static void inverseWorlds(String sentence) {
-    charsFromSentence = SENTENCE.toCharArray();
+  public void inverseWorlds(String sentence) {
     int start = 0;
-
-    for (int i = 0; i < charsFromSentence.length; i++) {
-      if (charsFromSentence[i] == ' ') {
-        inverce(start, i - 1, charsFromSentence);
+    for (int i = 0; i < sentence.length(); i++) {
+      if (sentence.charAt(i) == ' ') {
+        inverse(start, i - 1, sentence);
         start = i + 1;
-
-      } else if (i == charsFromSentence.length - 1) {
-        inverce(start, i, charsFromSentence);
+      } else if (i == sentence.length() - 1) {
+        inverse(start, i, sentence);
         start = i + 1;
       }
     }
   }
 
-  private static void inverce(int start, int end, char[] array) {
+  private static void inverse(int start, int end, String sentence) {
     for (int i = end; i >= start; i--) {
-      System.out.print(array[i]);
+      System.out.print(sentence.charAt(i));
     }
 
     System.out.print(" ");
