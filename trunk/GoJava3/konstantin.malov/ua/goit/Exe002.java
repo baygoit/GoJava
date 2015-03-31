@@ -12,6 +12,7 @@ public class Exe002 {
       if (sentence.charAt(i) == ' ') {
         inverse(start, i - 1, sentence);
         start = i + 1;
+        System.out.print(" ");
       } else if (i == sentence.length() - 1) {
         inverse(start, i, sentence);
         start = i + 1;
@@ -23,7 +24,5 @@ public class Exe002 {
     for (int i = end; i >= start; i--) {
       System.out.print(sentence.charAt(i));
     }
-
-    System.out.print(" ");
   }
 }
