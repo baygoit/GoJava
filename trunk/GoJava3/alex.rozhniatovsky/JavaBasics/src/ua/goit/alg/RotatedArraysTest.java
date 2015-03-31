@@ -13,6 +13,7 @@ public class RotatedArraysTest {
 
             Assert.assertEquals(actualResult, expectedResult);
     }
+    
     @Test
     public void testBinarySearchPositive() throws Exception {
         int[] array = {4, 5, 6, 7, 8, 9, 10, 1, 2, 3};
@@ -21,6 +22,7 @@ public class RotatedArraysTest {
 
         Assert.assertEquals(actualResult, expectedResult);
     }
+    
     @Test
     public void testBinarySearchNegative() throws Exception {
         int[] array = {4, 5, 6, 7, 8 , 9, 10, -1, 2, 3};
@@ -29,6 +31,7 @@ public class RotatedArraysTest {
 
         Assert.assertEquals(actualResult, expectedResult);
     }
+    
     @Test
     public void testBinarySearchFirst() throws Exception {
         int[] array = {4, 5, 6, 7, 8, 9, 10, 0, 2, 3};
@@ -37,6 +40,7 @@ public class RotatedArraysTest {
 
         Assert.assertEquals(actualResult, expectedResult);
     }
+    
     @Test
     public void testBinarySearchLast() throws Exception {
         int[] array = {4, 5, 6, 7, 8, 9, 10, 0, 2, 3};
@@ -45,6 +49,7 @@ public class RotatedArraysTest {
 
         Assert.assertEquals(actualResult, expectedResult);
     }
+    
     @Test
     public void testBinarySearchMissing() throws Exception {
         int[] array = {4, 5, 6, 7, 8, 9, 10, 0, 2, 3};
