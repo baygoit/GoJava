@@ -22,11 +22,6 @@ public class Square implements Element {
   }
 
   @Override
-  public String getType() {
-    return "Square";
-  }
-
-  @Override
   public void addPoint(Point point) {
     pointsList.add(point);
   }
