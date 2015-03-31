@@ -70,10 +70,10 @@ public enum TagStates {
         xmlParser.onOpenTag(parserData);
         result = NODE;
       } else if (c == '/'){
-        xmlParser.onOpenTag(parserData);
         String tag = parserData.getTag();
         parserData = new ParserData();
         parserData.setTag(tag);
+        xmlParser.onOpenTag(parserData);
         result = CLOSETAG;
       } else {
         result = ELEMENT;
