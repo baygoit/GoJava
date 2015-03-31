@@ -10,13 +10,14 @@ public class XMLParser {
   
   private StringBuilder result = new StringBuilder("");
   
-  //private ParserData parserData = null;
+  private Handler openTagHandler = null;
+  private Handler closeTagHandler = null;
+  private Handler textValueHandler = null;
+  private Handler startHandler = null;
+  private Handler endHandler = null;
+  private Handler errHandler = null;
   
   private StateMashineTag tag = new StateMashineTag(this);
-  
-  public void update(ParserData parserData){
-    //this.parserData = parserData;
-  }
   
   public String parse(String string) throws IOException {
     StreamReader stream = new StreamReader(string);
@@ -29,7 +30,7 @@ public class XMLParser {
 
   }
 
-  public String parseInputStream(StreamReader stream) throws IOException {
+  public String parseInputStream(StreamReader stream) throws IOException {  
    
     int symbol;
     do{
@@ -40,30 +41,62 @@ public class XMLParser {
 }
   
   public void onOpenTag(ParserData parserData){
-    //parserData2.onOpenTag(parserData);
+    if(openTagHandler != null){
+    openTagHandler.onOpenTag(parserData);
+    }
     result.append("<").append(parserData.getTag()).append(">");
-    parserData.clear();
+    parserData.setTag("");
   }
   public void onCloseTag(ParserData parserData){
-    //handler.onCloseTag(parserData);
+    if(closeTagHandler != null){
+    closeTagHandler.onCloseTag(parserData);
+    }
     result.append("</").append(parserData.getTag()).append(">");
-    parserData.clear();
+    parserData.setTag("");
   }
   public void onTextValue(ParserData parserData){
-    //handler.onTextValue(parserData);
+    if(textValueHandler != null){
+    textValueHandler.onTextValue(parserData);
+    }
     result.append("").append(parserData.getText()).append("");
-    parserData.clear();
+    parserData.setText("");
   }
   
   public void onStart(ParserData parserData){
-    //handler.onStart(parserData);
+    if(startHandler != null) {
+    startHandler.onStart(parserData);
+    }
     result.append("<").append(parserData.getTag()).append(">");
-    parserData.clear();
+    parserData.setTag("");
   }
   public void onEnd(ParserData parserData){
-    //handler.onEnd(parserData);
+    if(endHandler != null){
+    endHandler.onEnd(parserData);
+    }
   }
   public void onError(ParserData parserData){
-    //handler.onError(parserData);
+    if(errHandler != null){
+    errHandler.onError(parserData);
+    }
+  }
+  
+  //Overload methods for callback
+  public void onOpenTag(Handler handler){
+    openTagHandler = handler;
+  }
+  public void onCloseTag(Handler handler){
+    closeTagHandler = handler;
+  }
+  public void onTextValue(Handler handler){
+    textValueHandler = handler;
+  }
+  public void onStart(Handler handler){
+    startHandler = handler;
+  }
+  public void onEnd(Handler handler){
+    endHandler = handler;
+  }
+  public void onError(Handler handler){
+    errHandler = handler;
   }
 }
