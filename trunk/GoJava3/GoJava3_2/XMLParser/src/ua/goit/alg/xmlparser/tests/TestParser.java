@@ -23,7 +23,7 @@ public class TestParser {
     String expectedResult = "<start><tag></tag><tag2></tag2></start>";
     Assert.assertEquals(expectedResult, result);
   }
-/*
+
   @Test
   public void testInnterClosingTag() throws IOException{
     XMLParser parser = new XMLParser();
@@ -47,6 +47,6 @@ public class TestParser {
     String expectedResult = "<start><tag></tag><tag2></tag2></start>";
     Assert.assertEquals(expectedResult, result);
   }
- */
+
 }
   
