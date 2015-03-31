@@ -10,12 +10,12 @@ public class XMLParser {
   
   private StringBuilder result = new StringBuilder("");
   
-  private ParserData parserData = null;
+  //private ParserData parserData = null;
   
   private StateMashineTag tag = new StateMashineTag(this);
   
   public void update(ParserData parserData){
-    this.parserData = parserData;
+    //this.parserData = parserData;
   }
   
   public String parse(String string) throws IOException {
@@ -42,19 +42,23 @@ public class XMLParser {
   public void onOpenTag(ParserData parserData){
     //parserData2.onOpenTag(parserData);
     result.append("<").append(parserData.getTag()).append(">");
+    parserData.setTag("");
   }
   public void onCloseTag(ParserData parserData){
     //handler.onCloseTag(parserData);
-    result.append("</").append(parserData.getTag()).append("/>");
+    result.append("</").append(parserData.getTag()).append(">");
+    parserData.setTag("");
   }
   public void onTextValue(ParserData parserData){
     //handler.onTextValue(parserData);
     result.append("").append(parserData.getText()).append("");
+    parserData.setText("");
   }
   
   public void onStart(ParserData parserData){
     //handler.onStart(parserData);
     result.append("<").append(parserData.getTag()).append(">");
+    parserData.setTag("");
   }
   public void onEnd(ParserData parserData){
     //handler.onEnd(parserData);

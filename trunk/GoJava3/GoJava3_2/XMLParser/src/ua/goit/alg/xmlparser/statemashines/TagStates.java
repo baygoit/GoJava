@@ -40,7 +40,7 @@ public enum TagStates {
       TagStates result = CLOSETAG;
       if (c == '>') {
         xmlparser.onCloseTag(parserData);
-        result = OPENTAG;
+        result = INIT;
       } else {
         parserData.setTag(parserData.getTag() + c);
       }

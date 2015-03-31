@@ -11,19 +11,19 @@ public class TestParser {
   @Test
   public void testSimple() throws IOException{
     XMLParser parser = new XMLParser();
-    String result = parser.parse("<start><tag></tag></start>");
-    String expectedResult = "<start><tag></tag></start>";
+    String result = parser.parse("<s><t></t></s>");
+    String expectedResult = "<s><t></t></s>";
     Assert.assertEquals(expectedResult, result);
   }
 
-/*  @Test
+  @Test
   public void testAttr() throws IOException{
     XMLParser parser = new XMLParser();
     String result = parser.parse("<start atr1=3><tag>text</tag><tag2/></start>");
     String expectedResult = "<start><tag></tag><tag2></tag2></start>";
     Assert.assertEquals(expectedResult, result);
   }
-
+/*
   @Test
   public void testFull() throws IOException{
     XMLParser parser = new XMLParser();
