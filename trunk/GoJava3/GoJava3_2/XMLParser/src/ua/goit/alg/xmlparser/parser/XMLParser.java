@@ -31,15 +31,14 @@ public class XMLParser {
 
   public String parseInputStream(InputStream stream) throws IOException {  
    
-    int symbol = stream.read();
-   while (symbol !=-1){
-     symbol = stream.read();
-     tag.next((char)symbol);
-  }
+    int symbol;
+    do{
+      symbol = stream.read();
+      tag.next((char)symbol);
+    } while (symbol !=-1);
     return result.toString();
 }
   
-
   public void onOpenTag(Handler handler){
     handler.onOpenTag(parserData);
     result.append(parserData.getText());
