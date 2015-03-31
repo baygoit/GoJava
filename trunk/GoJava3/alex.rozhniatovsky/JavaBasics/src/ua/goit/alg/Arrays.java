@@ -73,58 +73,58 @@ public class Arrays {
         File first = new File(TEMP_PATH + 0);
         File second = new File(TEMP_PATH + 1);
         File result = new File(TEMP_RES_PATH + 1);
-        mergeTwoFiles(first, second, result);
-
-        for (int i = 1; i < quantityOfTempFile - 1; i++) {
-            first = new File(TEMP_RES_PATH + i);
-            second = new File(TEMP_PATH + (i + 1));
-            if (i == quantityOfTempFile - 2) {
-                result = new File("result");
-            } else {
-                result = new File(TEMP_RES_PATH + (i + 1));
-            }
-            mergeTwoFiles(first, second, result);
+        try {
+              mergeTwoFiles(first, second, result);
+              for (int i = 1; i < quantityOfTempFile - 1; i++) {
+                  first = new File(TEMP_RES_PATH + i);
+                  second = new File(TEMP_PATH + (i + 1));
+                  if (i == quantityOfTempFile - 2) {
+                      result = new File("result");
+                  } else {
+                      result = new File(TEMP_RES_PATH + (i + 1));
+                  }
+                  mergeTwoFiles(first, second, result);
+              }
+        } catch(FileNotFoundException e) {
+              e.printstacktrace();
         }
         deleteAllTempFiles(quantityOfTempFile);
     }
 
-    private static void mergeTwoFiles(File firstFile, File secondFile, File result) throws IOException{
+    private static void mergeTwoFiles(File firstFile, File secondFile, File result) throws IOException, throws FileNotFoundException{
         DataInputStream firstInput = null;
         DataInputStream secondInput = null;
         DataOutputStream output = null;
-        try {
-            firstInput = new DataInputStream(new FileInputStream(firstFile));
-            secondInput = new DataInputStream(new FileInputStream(secondFile));
-            output = new DataOutputStream(new FileOutputStream(result));
-            int first = 0;
-            int second = 0;
-            if (firstInput.available() > 0) {
+       
+        firstInput = new DataInputStream(new FileInputStream(firstFile));
+        secondInput = new DataInputStream(new FileInputStream(secondFile));
+        output = new DataOutputStream(new FileOutputStream(result));
+        int first = 0;
+        int second = 0;
+        if (firstInput.available() > 0) {
+            first = firstInput.readInt();
+        }
+        if (secondInput.available() > 0) {
+            second = secondInput.readInt();
+        }
+
+        while (firstInput.available() > 0 && secondInput.available() > 0) {
+            if (first < second) {
+                output.writeInt(first);
                 first = firstInput.readInt();
-            }
-            if (secondInput.available() > 0) {
+            }else {
+                output.writeInt(second);
                 second = secondInput.readInt();
             }
+        }
 
-            while (firstInput.available() > 0 && secondInput.available() > 0) {
-                if (first < second) {
-                    output.writeInt(first);
-                    first = firstInput.readInt();
-                }else {
-                    output.writeInt(second);
-                    second = secondInput.readInt();
-                }
-            }
+        while (firstInput.available() > 0) {
+            output.writeInt(firstInput.readInt());
+        }
 
-            while (firstInput.available() > 0) {
-                output.writeInt(firstInput.readInt());
-            }
-
-            while (secondInput.available() > 0) {
-                output.writeInt(secondInput.readInt());
-            }
-
-        } catch (FileNotFoundException e)  {
-            e.printStackTrace();
+        while (secondInput.available() > 0) {
+            output.writeInt(secondInput.readInt());
+        }       
         } finally {
             if (output != null) {
                 output.close();
