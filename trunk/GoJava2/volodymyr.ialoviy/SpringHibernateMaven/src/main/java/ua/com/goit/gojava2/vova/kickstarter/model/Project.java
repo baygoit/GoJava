@@ -1,7 +1,5 @@
 package ua.com.goit.gojava2.vova.kickstarter.model;
 
-import java.io.Serializable;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -22,8 +20,7 @@ import org.joda.time.LocalDate;
 
 @Entity
 @Table(name = "PROJECTS")
-public class Project implements Serializable{
-	private static final long serialVersionUID = 1L;
+public class Project{
 
 	@ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
 	@JoinColumn(name = "ID_CATEGORY", nullable = false, insertable = false, updatable = false)

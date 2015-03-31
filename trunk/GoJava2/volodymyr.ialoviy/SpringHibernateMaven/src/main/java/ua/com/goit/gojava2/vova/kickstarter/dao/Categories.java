@@ -17,7 +17,8 @@ public class Categories extends AbstractDao implements CategoryDao{
 
 	@Override
 	public List<Category> findAllCategories() {
-		return (List<Category>) getSession().createCriteria(Category.class).setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
+		return (List<Category>) getSession().createCriteria(Category.class)
+				.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
 	}
 	
 	@Override

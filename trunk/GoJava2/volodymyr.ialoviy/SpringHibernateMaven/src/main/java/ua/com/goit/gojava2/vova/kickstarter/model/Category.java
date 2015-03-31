@@ -1,6 +1,5 @@
 package ua.com.goit.gojava2.vova.kickstarter.model;
 
-import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -16,8 +15,7 @@ import javax.persistence.GenerationType;
 
 @Entity
 @Table(name="CATEGORIES", uniqueConstraints = {@UniqueConstraint(columnNames = "ID")})
-public class Category implements Serializable {
-	private static final long serialVersionUID = 1L;
+public class Category {
 
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "category")
 	private List<Project> projects;
