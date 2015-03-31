@@ -26,7 +26,11 @@ public class StreamReader {
     if (isString){
     return readString();
     } else {
-      return inputStreamFile.read();
+      int i = inputStreamFile.read();
+      if (i==-1) {
+        close();
+      }
+      return i;
     }
   }
   
