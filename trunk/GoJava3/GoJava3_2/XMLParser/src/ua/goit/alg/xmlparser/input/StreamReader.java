@@ -36,7 +36,7 @@ public class StreamReader {
   
   private int readString(){
     if (index < inputStreamString.length()){
-      int result = inputStreamString.toCharArray()[index];
+      int result = inputStreamString.charAt(index); //toCharArray()[index];
       index++;
       return result;
     } else {
