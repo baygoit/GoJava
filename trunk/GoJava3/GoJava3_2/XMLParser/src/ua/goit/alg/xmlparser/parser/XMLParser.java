@@ -3,7 +3,7 @@ package ua.goit.alg.xmlparser.parser;
 
 import java.io.File;
 import java.io.IOException;
-import ua.goit.alg.xmlparser.input.InputStream;
+import ua.goit.alg.xmlparser.input.StreamReader;
 import ua.goit.alg.xmlparser.statemashines.StateMashineTag;
 
 public class XMLParser {
@@ -19,17 +19,17 @@ public class XMLParser {
   }
   
   public String parse(String string) throws IOException {
-    InputStream stream = new InputStream(string);
+    StreamReader stream = new StreamReader(string);
     return parseInputStream(stream);
   }
     
   public String parse(File file) throws IOException {
-    InputStream stream = new InputStream(file);
+    StreamReader stream = new StreamReader(file);
       return parseInputStream(stream);
 
   }
 
-  public String parseInputStream(InputStream stream) throws IOException {  
+  public String parseInputStream(StreamReader stream) throws IOException {
    
     int symbol;
     do{

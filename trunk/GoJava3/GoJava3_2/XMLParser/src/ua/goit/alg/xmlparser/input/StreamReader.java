@@ -6,18 +6,18 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class InputStream {
+public class StreamReader {
   private BufferedReader inputStreamFile = null;
   private String inputStreamString = null;
   private boolean isString = true;
   private static int index = 0;
 
-  public InputStream(String inputData) throws FileNotFoundException{
+  public StreamReader(String inputData) throws FileNotFoundException{
     inputStreamString = inputData;
     isString = true;
   }
 
-  public InputStream(File inputData) throws FileNotFoundException{
+  public StreamReader(File inputData) throws FileNotFoundException{
     inputStreamFile = new BufferedReader(new FileReader(inputData));
     isString = false;
   }
