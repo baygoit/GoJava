@@ -27,10 +27,6 @@ public class LonelyNumber {
             str.append(binaryResult[i]);
         }
         int result = Integer.parseInt(str.toString(), 2);
-        /*
-         * int result = 0; for (int i = 0; i < binaryResult.length; i++) {
-         * result = result | 1<< i; }
-         */
         return result;
     }
 
