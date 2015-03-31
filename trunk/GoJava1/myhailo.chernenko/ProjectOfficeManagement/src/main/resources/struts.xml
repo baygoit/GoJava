@@ -9,23 +9,52 @@
 	 
     <package name="default" namespace = "/" extends="struts-default">
      
+      <!-- index -->
+      
       <action name="" 
             class="ua.com.goit.gojava.POM.presentation.actions.Index" 
             method="execute">
             <result name="success">/index.jsp</result>
             <result name="error">/errorPage.jsp</result>
       </action>
+      
+      <!-- BankAccount -->
+      
       <action name="BankAccountList" 
-            class="ua.com.goit.gojava.POM.presentation.actions.BankAccountList" 
+            class="ua.com.goit.gojava.POM.presentation.actions.bankaccount.BankAccountList" 
             method="execute">
             <result name="success">/ActionForms/BankAccounts.jsp</result>
-            <result name="cashMovementRedirect" type="redirectAction">
-            		<param name="actionName">CashMovement</param>
-            	</result>
             <result name="error">/errorPage.jsp</result>
       </action>
-      <action name="CashMovement" 
-            class="ua.com.goit.gojava.POM.presentation.actions.CashMovement" 
+      <action name="BankAccountCreatorLoader" 
+            class="ua.com.goit.gojava.POM.presentation.actions.bankaccount.BankAccountCreatorLoader" 
+            method="execute">
+            <result name="success">/ActionForms/BankAccountEditor.jsp</result>
+            <result name="error">/errorPage.jsp</result>
+      </action>
+      <action name="BankAccountEditorLoader" 
+            class="ua.com.goit.gojava.POM.presentation.actions.bankaccount.BankAccountEditorLoader" 
+            method="execute">
+            <result name="success">/ActionForms/BankAccountEditor.jsp</result>
+            <result name="error">/errorPage.jsp</result>
+      </action>
+      <action name="BankAccountDeleter" 
+            class="ua.com.goit.gojava.POM.presentation.actions.bankaccount.BankAccountDeleter" 
+            method="execute">
+            <result name="success" type="redirectAction" > <param name="actionName">BankAccountList</param>  </result>
+            <result name="error">/errorPage.jsp</result>
+      </action>
+      <action name="BankAccountSaver" 
+            class="ua.com.goit.gojava.POM.presentation.actions.bankaccount.BankAccountSaver" 
+            method="execute">
+            <result name="success" type="redirectAction" > <param name="actionName">BankAccountList</param>  </result>
+            <result name="error">/errorPage.jsp</result>
+      </action>
+      
+      <!-- CashMovement -->
+      
+      <action name="CashMovementList" 
+            class="ua.com.goit.gojava.POM.presentation.actions.cashmovement.CashMovementList" 
             method="execute">
             <!-- TODO change on /ActionForms/CashMovement.jsp after refactoring -->
             <result name="success">/CashMovement.jsp</result>

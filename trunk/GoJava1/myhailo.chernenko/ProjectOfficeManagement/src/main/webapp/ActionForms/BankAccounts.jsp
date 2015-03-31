@@ -22,7 +22,7 @@
 	
 	</script>
 	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<link type="text/css" rel="stylesheet" href="design.css">
 		<title>Project Office Management System</title>
 	</head>
@@ -30,76 +30,57 @@
 		
 		<div class="pageHeader">Банковские счета</div>
 		<s:actionerror class="errorTable" />
-        <s:form name="BankAccountsTable" theme="simple"
-			action="BankAccountList">
-
-			<table class = "table">
-	    		<tr class="tableHeader">
-	    			<th>Идентификатор</th>
-	    			<th>Название</th>
-	    			<th>Банк</th>
-	    			<th>Валюта</th>
-	    			<th>Остаток</th>
-	    		</tr>
-	    		<s:iterator  value="bankAccounts" status="stat">
-	             	<tr class="tableRow">
-	   					<td><s:property value = "bankAccounts[#stat.index].getId()"/></td>
-						<td><s:property value = "bankAccounts[#stat.index].getName()"/></td>
-						<td><s:property value = "bankAccounts[#stat.index].getBankName()"/></td>
-						<td><s:property value = "bankAccounts[#stat.index].getCurrency().getCurrencyCode()"/></td>
-						<td class="numericColumn">
-							<s:property value = "cashMovementService.getTotalByBankAccount(bankAccounts[#stat.index]).getValue()"/></td>
-						<td>
-							<button class = "defaultButton" type="submit" name="DellCurrent" 
-									value= <s:property value = "bankAccounts[#stat.index].getId()"/>
+       	<table class = "table">
+    		<tr class="tableHeader">
+    			<th>Идентификатор</th>
+    			<th>Название</th>
+    			<th>Банк</th>
+    			<th>Валюта</th>
+    			<th>Остаток</th>
+    		</tr>
+    		<s:iterator  value="bankAccounts" status="stat">
+             	<tr class="tableRow">
+   					<td><s:property value = "bankAccounts[#stat.index].id"/></td>
+					<td><s:property value = "bankAccounts[#stat.index].name"/></td>
+					<td><s:property value = "bankAccounts[#stat.index].bankName"/></td>
+					<td><s:property value = "bankAccounts[#stat.index].currency.currencyCode"/></td>
+					<td class="numericColumn">
+						<s:property value = "cashMovementService.getTotalByBankAccount(bankAccounts[#stat.index]).getValue()"/></td>
+					<td>
+						<s:form name="DellCurrent" theme="simple" action="BankAccountDeleter">
+		   					<button class = "defaultButton" type="submit" name="id" 
+									value= <s:property value = "bankAccounts[#stat.index].id"/>
 									>Удалить</button>
-							<button class = "defaultButton" type="submit" name="EditCurrent" 
-									value= <s:property value = "bankAccounts[#stat.index].getId()"/>
+						</s:form>
+					</td>
+					<td>
+						<s:form name="EditCurrent" theme="simple" action="BankAccountEditorLoader">
+		   					<button class = "defaultButton" type="submit" name="id" 
+									value= <s:property value = "bankAccounts[#stat.index].id"/>
 									>Редактировать</button>
-							<button class = "defaultButton" type="submit" name="OpenCashMovement" 
-									value= <s:property value = "bankAccounts[#stat.index].getId()"/>
+						</s:form>
+					</td>
+					<td>
+						<s:form name="OpenCashMovement" theme="simple" action="CashMovementList">
+		   					<button class = "defaultButton" type="submit" name="bankAccountId" 
+									value= <s:property value = "bankAccounts[#stat.index].id"/>
 									>Открыть движения</button>
-						</td>	
-					</tr>	
-		   		</s:iterator>
-		    	<tr class="tableRow">
-		    		<s:if test="currentAccountForEdit != null">
-		    			<td><s:property value = "currentAccountForEdit.getId()"/></td>
-		    			<td><s:textfield name="name" value = "%{currentAccountForEdit.getName()}" /></td>
-		    			<td><s:textfield name="bankName" value = "%{currentAccountForEdit.getBankName()}" /></td>
-		    			<td><s:select 
-							   name="currencyCode" 
-							   headerKey="" headerValue="Укажите валюту"
-       						   list="currenciesMap"
-						       value="%{currentAccountForEdit.getCurrency().getCurrencyCode()}"/>
-						</td>
-		    			<td class="numericColumn">
-		    				<s:property value = "cashMovementService.getTotalByBankAccount(currentAccountForEdit).getValue()"/> 
-		    			</td>
-		    			<td>
-							<button class = "defaultButton" type="submit" name="Update" value="true"
-									>Записать изменения</button>
-							<button class = "defaultButton" type="submit" name="UndoEdit" value="true"
-									>Отменить</button>
-						</td>
-		    		</s:if>	
-		    		<s:else>	
-	    				<td></td>
-		    			<td><s:textfield name="name" /></td>
-		    			<td><s:textfield name="bankName" /></td>
-		    			<td><s:select 
-							   name="currencyCode" 
-							   headerKey="" headerValue="Укажите валюту"
-       						   list="currenciesMap"/>
-						</td>
-		    			<td class="numericColumn"></td>
-		    			<td>
-							<button class = "defaultButton" type="submit" name="AddNew" value="true"
-									>Создать новый</button>
-						</td>
-		    		</s:else>
-		 		</tr>
-		   </table>
-	    </s:form>
+						</s:form>
+					</td>	
+				</tr>	
+	   		</s:iterator>
+	   		<tr class="tableRow">
+   				<td> </td>
+				<td> </td>
+				<td> </td>
+				<td> </td>
+				<td> </td>
+				<td>
+					<s:form name="Create" theme="simple" action="BankAccountCreatorLoader">
+	   					<button class = "defaultButton" type="submit">Добавить</button>
+					</s:form>
+				</td>
+			</tr>		
+	   </table>
 	</body>
 </html>
