@@ -5,7 +5,7 @@ import java.util.HashMap;
 public class ParserData {
 
   String tag = "";
-  HashMap<String, String> attributes = new HashMap<>();
+  HashMap<String, String> attributes = new HashMap<String, String>();
   String text = "";
 
   public String getTag() {
