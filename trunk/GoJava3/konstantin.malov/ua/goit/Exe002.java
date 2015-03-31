@@ -15,7 +15,6 @@ public class Exe002 {
         System.out.print(" ");
       } else if (i == sentence.length() - 1) {
         inverse(start, i, sentence);
-        start = i + 1;
       }
     }
   }
