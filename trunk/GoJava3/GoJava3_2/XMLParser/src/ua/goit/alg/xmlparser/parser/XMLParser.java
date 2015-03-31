@@ -84,18 +84,23 @@ public class XMLParser {
   public void onOpenTag(Handler handler){
     openTagHandler = handler;
   }
+
   public void onCloseTag(Handler handler){
     closeTagHandler = handler;
   }
+
   public void onTextValue(Handler handler){
     textValueHandler = handler;
   }
+
   public void onStart(Handler handler){
     startHandler = handler;
   }
+
   public void onEnd(Handler handler){
     endHandler = handler;
   }
+
   public void onError(Handler handler){
     errHandler = handler;
   }
