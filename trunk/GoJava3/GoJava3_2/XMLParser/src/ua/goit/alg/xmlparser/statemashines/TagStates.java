@@ -113,11 +113,11 @@ public enum TagStates {
       if (c == ' ') {
         result = ATTRIBUTE_VALUE;
       } else if (c == '>') {
-        parserData.getAttributes().put(parserData.getAttributeName(), parserData.getAttributeValue());
+        parserData.addAttribute(parserData.getAttributeName(), parserData.getAttributeValue());
         xmlParser.onOpenTag(parserData);
         result = NODE;
       } else if (c == '/') {
-        parserData.getAttributes().put(parserData.getAttributeName(), parserData.getAttributeValue());
+        parserData.addAttribute(parserData.getAttributeName(), parserData.getAttributeValue());
         xmlParser.onOpenTag(parserData);
         String tag = parserData.getTag();
         parserData = new ParserData();
