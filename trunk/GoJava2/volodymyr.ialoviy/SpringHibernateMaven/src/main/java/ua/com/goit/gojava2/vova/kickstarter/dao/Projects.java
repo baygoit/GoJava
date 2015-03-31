@@ -1,10 +1,13 @@
 package ua.com.goit.gojava2.vova.kickstarter.dao;
 
 import java.util.List;
+
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.springframework.stereotype.Repository;
+
+import ua.com.goit.gojava2.vova.kickstarter.model.Category;
 import ua.com.goit.gojava2.vova.kickstarter.model.Project;
 
 @Repository("projectDao")
@@ -25,22 +28,17 @@ public class Projects extends AbstractDao implements ProjectDao {
 
 	@Override
 	public void deleteProjectById(int id) {
-		Query query = getSession().createSQLQuery("delete from Projects where id = :id");
-		query.setInteger("id", id);
-		query.executeUpdate();
+		Project project = (Project) getSession().load(Project.class, id);
+		getSession().delete(project);
 	}
 
 	@Override
 	public Project getProgect(int id) {
-		Query query = getSession().createQuery("from Project where id = :id");
-		query.setInteger("id", id);
-		List<Project> projects = (List<Project>) query.list();
-		Project rezult = projects.get(0);
-		return rezult;
+		return (Project) getSession().get(Project.class, id);
 	}
 
 	@Override
-	public void addDonate(int amount, int id) {
+	public void addDonate(int amount, int id) {//TODO SWITH HQL TO NOT HQL
 		Query query = getSession().createQuery("update Project set howMuchCollected = howMuchCollected + :amount, "
 						+ "howMuchRemaining = howMuchRemaining - :amount"
 						+ " where id = :id");
