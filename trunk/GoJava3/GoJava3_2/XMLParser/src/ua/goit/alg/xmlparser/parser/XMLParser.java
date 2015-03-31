@@ -47,6 +47,7 @@ public class XMLParser {
     result.append("<").append(parserData.getTag()).append(">");
     parserData.setTag("");
   }
+
   public void onCloseTag(ParserData parserData){
     if(closeTagHandler != null){
     closeTagHandler.onCloseTag(parserData);
@@ -54,6 +55,7 @@ public class XMLParser {
     result.append("</").append(parserData.getTag()).append(">");
     parserData.setTag("");
   }
+
   public void onTextValue(ParserData parserData){
     if(textValueHandler != null){
     textValueHandler.onTextValue(parserData);
@@ -69,11 +71,13 @@ public class XMLParser {
     result.append("<").append(parserData.getTag()).append(">");
     parserData.setTag("");
   }
+
   public void onEnd(ParserData parserData){
     if(endHandler != null){
     endHandler.onEnd(parserData);
     }
   }
+
   public void onError(ParserData parserData){
     if(errHandler != null){
     errHandler.onError(parserData);
