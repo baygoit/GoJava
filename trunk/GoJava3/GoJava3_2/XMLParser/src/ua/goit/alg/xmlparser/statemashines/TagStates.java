@@ -26,6 +26,7 @@ public enum TagStates {
       if (c == '/') {
         result = CLOSETAG;
       } else {
+        parserData.setTag(parserData.getTag() + c);
         result = ELEMENT;
       }
       return result;
@@ -64,6 +65,14 @@ public enum TagStates {
       if (c == ' ') {
         result = ELEMENT;
       //TODO start atribut automat here
+      } else if (c == '>'){
+        parserData.setTag(parserData.getTag() + c);
+        result = NODE;
+      } else if (c == '/'){
+        String tag = parserData.getTag();
+        parserData = new ParserData();
+        parserData.setTag(tag);
+        result = CLOSETAG;
       }
       return result;
     }
