@@ -1,1 +1,1 @@
-<Group>group2<Group>group1<Triangle>triangle1<Points><Point><x>1</x><y>2</y></Point></Points></Triangle><Triangle>triangle2<Points><Point><x>2</x><y>1</y></Point></Points></Triangle></Group><Circle>circle1<Points></Points></Circle></Group>
+<Group name="group2"><Group name="group1"><Triangle name="triangle1"><Points><Point><x>1</x><y>2</y></Point></Points></Triangle><Triangle name="triangle2"><Points><Point><x>2</x><y>1</y></Point></Points></Triangle></Group><Circle name="circle1"><Points></Points></Circle></Group>

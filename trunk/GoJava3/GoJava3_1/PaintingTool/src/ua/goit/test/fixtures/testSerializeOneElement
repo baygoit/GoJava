@@ -1,1 +1,1 @@
-<Triangle>triangle1<Points><Point><x>1</x><y>2</y></Point></Points></Triangle>
+<Triangle name="triangle1"><Points><Point><x>1</x><y>2</y></Point></Points></Triangle>
