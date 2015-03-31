@@ -21,11 +21,6 @@ public class Triangle implements Element {
   }
 
   @Override
-  public String getType() {
-    return "Triangle";
-  }
-
-  @Override
   public void addPoint(Point point) {
     pointsList.add(point);
   }
