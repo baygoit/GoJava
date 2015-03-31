@@ -43,19 +43,18 @@ public class FileManager {
     }
 
     for (String fileName : filesHistory) {
-      try{
-        
+      try {
+
         File file = new File(fileName);
-        if(file.delete()){
+        if (file.delete()) {
           System.out.println(file.getName() + " is deleted!");
-        }else{
+        } else {
           System.out.println("Delete operation is failed.");
         }
-      }catch(Exception e){
+      } catch (Exception e) {
         e.printStackTrace();
       }
     }
-
 
     for (String file : files) {
       System.out.println("result file:" + file);
@@ -98,7 +97,7 @@ public class FileManager {
           }
 
           boolean writted = false;
-          
+
           if (fileReader1.ready()) {
 
             while (fileReader1.ready()) {
@@ -130,7 +129,7 @@ public class FileManager {
             }
           }
 
-          if(!writted){
+          if (!writted) {
             if (val1 < val2) {
               fileWriter.write(Integer.toString(val1) + "\n");
               fileWriter.write(Integer.toString(val2) + "\n");

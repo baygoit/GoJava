@@ -12,15 +12,16 @@ public class App {
   static int FILE_BUFFER_SIZE = 100_000;
   public static final String DIR_NAME = "d:\\";
   public static final String FILE_NAME = "testint.txt";
-  public static final int VALUE_QUANTITY = 10_000_000;
-  
+  public static final int VALUE_QUANTITY = 1_000_000;
+
   public static void main(String[] arg) {
 
     List<String> strValues = new LinkedList<String>();
     List<Integer> intValues = new LinkedList<Integer>();
     FileManager fileManager = new FileManager();
-    
-    try (BufferedReader bfr = new BufferedReader(new FileReader(DIR_NAME + "\\" + FILE_NAME))) {
+
+    try (BufferedReader bfr = new BufferedReader(new FileReader(DIR_NAME + "\\"
+        + FILE_NAME))) {
       while (bfr.ready()) {
         int i = 0;
         strValues.clear();
@@ -32,14 +33,12 @@ public class App {
         fileManager.writeToFile(intValues);
       }
       fileManager.margeAllFiles();
-      
+
     } catch (IOException e) {
       e.printStackTrace();
     }
   }
 
-
-  
   static List<Integer> convertStrListToIntList(List<String> argList) {
 
     String strValue = "";

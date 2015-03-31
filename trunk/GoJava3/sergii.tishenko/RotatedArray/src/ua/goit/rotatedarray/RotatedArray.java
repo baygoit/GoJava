@@ -20,7 +20,7 @@ public class RotatedArray {
     while (rightBorder - leftBorder > 0) {
       pos = leftBorder + (rightBorder - leftBorder) / 2;
       firstElement = array[leftBorder];
- 
+
       if (array[pos] == target) {
         res = pos;
         break;

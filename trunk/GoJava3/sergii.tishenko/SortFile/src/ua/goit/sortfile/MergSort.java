@@ -26,7 +26,6 @@ public class MergSort {
         inParam.subList(inParam.size() / 2, inParam.size()));
   }
 
-  
   static List<Integer> SortArray(List<Integer> argList1, List<Integer> argList2) {
 
     List<Integer> resultList = new LinkedList<Integer>();
