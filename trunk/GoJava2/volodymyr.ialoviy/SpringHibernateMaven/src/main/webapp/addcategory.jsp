@@ -13,7 +13,7 @@
 <body>
 	<h2>Registration form</h2>
 	<form:form method="POST" modelAttribute="category">
-		<table>
+		<table  border="2" bordercolor="black" cellpadding="2">
 			<tr>
 				<td><label for="name">Name: </label> </td>
 				<td><form:input path="name" id="name"/></td>

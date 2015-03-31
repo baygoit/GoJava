@@ -13,7 +13,7 @@ h3 {color: #ff0000;}
 <body>
 	<h2>List of categories</h2>
 	<h3><c:out value="${message}" /></h3>
-	<table>
+	<table border="2" bordercolor="black" cellpadding="2">
 		<tr>
 			<td>DELETE</td>
 			<td>SHOW CATEGORY</td>
@@ -25,10 +25,10 @@ h3 {color: #ff0000;}
 				<td><a href="${ctx}/categories/${category.id}?delete">${category.name}(x)</a></td>
 				<td><a href="${ctx}/categories/${category.id}">${category.name}</a></td>
 				<td><a href="${ctx}/projects/${category.id}">${category.name}</a></td>
-				<td><a href="${ctx}/projects/${category.id}?add">add new project for category # ${category.id}</a></td>
+				<td><a href="${ctx}/projects/${category.id}?add">add to a project in this category</a></td>
 			</tr>
 		</c:forEach>
 	</table>
-	<p><a href="${ctx}/categories?add">Add new category</a></p>
+	<p><a href="${ctx}/categories?add"><button>Add new category</button></a></p>
 </body>
 </html>

@@ -12,7 +12,7 @@ tr:first-child {font-weight: bold; background-color: #C6C9C4;}
 </head>
 <body>
 	<h2>List of categories</h2>
-	<table>
+	<table border="2" bordercolor="black" cellpadding="2">
 		<tr>
 			<td>ID CATEGORY</td>
 			<td>NAME CATEGORY</td>

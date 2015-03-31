@@ -6,7 +6,7 @@
 </head>
 	<body>
 		<h2>List of projects of category</h2>	
-		<table>
+		<table  border="2" bordercolor="black" cellpadding="2">
 			<tr>
 				<td>DELETE</td>
 				<td>SHOW PROJECT FULL</td>
