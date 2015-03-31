@@ -9,7 +9,7 @@ public class StateMashineTag {
   
   private ParserData parserData = new ParserData();
   
-  XMLParser xmlParser;
+  private XMLParser xmlParser;
 
   public StateMashineTag(XMLParser xmlParser) {
     this.xmlParser = xmlParser;
