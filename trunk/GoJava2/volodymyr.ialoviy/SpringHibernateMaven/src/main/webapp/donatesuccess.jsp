@@ -8,6 +8,6 @@
 </head>
 <body>
 	<p>message : ${success}</p>
-	<p>Go back to <a href="${ctx}/project?project=${project}">project # ${project}</a></p>
+	<p>Go back to <a href="${ctx}/projects/${project}?show">project # ${project}</a></p>
 </body>
 </html>

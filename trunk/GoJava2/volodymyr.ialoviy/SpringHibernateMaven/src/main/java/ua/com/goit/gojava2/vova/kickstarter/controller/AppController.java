@@ -115,9 +115,8 @@ public class AppController {
 		return "redirect:/categories";
 	}
 
-	@RequestMapping(value = "/donate", method = RequestMethod.GET)
-	public String donate(ModelMap model, HttpServletRequest req) {
-		int id = Integer.valueOf(req.getParameter("id"));
+	@RequestMapping(value = "/donate/{id}", method = RequestMethod.GET)
+	public String donate(ModelMap model, @PathVariable int id) {
 		model.addAttribute("id", id);
 		return "donate";
 	}

@@ -12,12 +12,12 @@
 </head>
 
 <body>
-	<h2>Donate for project # <c:out value="${idproject}" />
+	<h2>Donate for project # <c:out value="${id}" />
 	</h2>
 	<table border="2" bordercolor="black" cellpadding="2">
 		<tr>
 			<td>invest project</td>
-			<td><a href="${ctx}/donatesuccess?amount=10000&project=${id}">any amount</a></td>
+			<td><a href="${ctx}/donatesuccess?amount=100&project=${id}">any amount</a></td>
 			<td>thanks</td>
 		</tr>
 		<tr>
@@ -37,7 +37,6 @@
 		</tr>
 	</table>
 	<br />
-	<br /> Go back to
-	<a href="${ctx}/project?project=${id}">project</a>
+	<p> Go back to	<a href="${ctx}/projects/${id}?show">project</a></p>
 </body>
 </html>
