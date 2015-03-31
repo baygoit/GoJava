@@ -10,6 +10,22 @@ public class ParserData {
   String attributeName = "";
   String attributeValue = "";
 
+  public void setAttributeName(String attributeName) {
+    this.attributeName = attributeName;
+  }
+
+  public void setAttributeValue(String attributeValue) {
+    this.attributeValue = attributeValue;
+  }
+
+  public String getAttributeValue() {
+    return attributeValue;
+  }
+
+  public String getAttributeName() {
+    return attributeName;
+  }
+
   public String getTag() {
     return tag;
   }

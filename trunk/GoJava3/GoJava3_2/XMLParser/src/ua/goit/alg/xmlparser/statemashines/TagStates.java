@@ -65,7 +65,7 @@ public enum TagStates {
     public TagStates next(char c, ParserData parserData, XMLParser xmlParser) {
       TagStates result = INVALID;
       if (c == ' ') {
-        result = ATTRIBUTE;
+        result = ATTRIBUTE_NAME;
       } else if (c == '>'){
         xmlParser.onOpenTag(parserData);
         result = NODE;
@@ -82,18 +82,43 @@ public enum TagStates {
       return result;
     }
   },
-  ATTRIBUTE {
+  ATTRIBUTE_NAME {
     @Override
     public TagStates next(char c, ParserData parserData, XMLParser xmlParser) {
       TagStates result = INVALID;
       if (c == ' ') {
-        result = ATTRIBUTE;
-      } else if (c == '/') {
+        result = ATTRIBUTE_NAME;
+      } else if (c == '/' || c == '>') {
         xmlParser.onOpenTag(parserData);
         String tag = parserData.getTag();
         parserData = new ParserData();
         parserData.setTag(tag);
         result = CLOSETAG;
+      } else if (c == '=') {
+        result = ATTRIBUTE_VALUE;
+      } else {
+        result = ATTRIBUTE_NAME;
+        parserData.setAttributeName(parserData.getAttributeName() + c);
+      }
+      return result;
+    }
+  },
+  ATTRIBUTE_VALUE {
+    @Override
+    public TagStates next(char c, ParserData parserData, XMLParser xmlParser) {
+      TagStates result = INVALID;
+      if (c == ' ') {
+        result = ATTRIBUTE_VALUE;
+      } else if (c == '/' || c == '>') {
+        parserData.getAttributes().put(parserData.getAttributeName(), parserData.getAttributeValue());
+        xmlParser.onOpenTag(parserData);
+        String tag = parserData.getTag();
+        parserData = new ParserData();
+        parserData.setTag(tag);
+        result = CLOSETAG;
+      } else {
+        result = ATTRIBUTE_VALUE;
+        parserData.setAttributeValue(parserData.getAttributeValue() + c);
       }
       return result;
     }
