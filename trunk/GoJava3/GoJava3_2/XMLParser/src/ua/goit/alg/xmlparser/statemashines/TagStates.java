@@ -85,7 +85,7 @@ public enum TagStates {
   ATTRIBUTE_NAME {
     @Override
     public TagStates next(char c, ParserData parserData, XMLParser xmlParser) {
-      TagStates result = INVALID;
+      TagStates result;
       if (c == ' ') {
         result = ATTRIBUTE_NAME;
       } else if (c == '/' || c == '>') {
@@ -106,7 +106,7 @@ public enum TagStates {
   ATTRIBUTE_VALUE {
     @Override
     public TagStates next(char c, ParserData parserData, XMLParser xmlParser) {
-      TagStates result = INVALID;
+      TagStates result;
       if (c == ' ') {
         result = ATTRIBUTE_VALUE;
       } else if (c == '/' || c == '>') {
