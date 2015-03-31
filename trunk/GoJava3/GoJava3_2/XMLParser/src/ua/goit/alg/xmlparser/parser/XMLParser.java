@@ -42,23 +42,23 @@ public class XMLParser {
   public void onOpenTag(ParserData parserData){
     //parserData2.onOpenTag(parserData);
     result.append("<").append(parserData.getTag()).append(">");
-    parserData.setTag("");
+    parserData.clear();
   }
   public void onCloseTag(ParserData parserData){
     //handler.onCloseTag(parserData);
     result.append("</").append(parserData.getTag()).append(">");
-    parserData.setTag("");
+    parserData.clear();
   }
   public void onTextValue(ParserData parserData){
     //handler.onTextValue(parserData);
     result.append("").append(parserData.getText()).append("");
-    parserData.setText("");
+    parserData.clear();
   }
   
   public void onStart(ParserData parserData){
     //handler.onStart(parserData);
     result.append("<").append(parserData.getTag()).append(">");
-    parserData.setTag("");
+    parserData.clear();
   }
   public void onEnd(ParserData parserData){
     //handler.onEnd(parserData);

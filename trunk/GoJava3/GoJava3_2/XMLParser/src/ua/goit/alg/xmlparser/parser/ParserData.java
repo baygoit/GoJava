@@ -26,4 +26,9 @@ public class ParserData {
   public void setText(String text) {
     this.text = text;
   }
+  public void clear() {
+    setTag("");
+    setText("");
+    attributes.clear();
+  }
 }
