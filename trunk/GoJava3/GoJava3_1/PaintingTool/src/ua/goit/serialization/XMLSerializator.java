@@ -12,20 +12,47 @@ import java.io.IOException;
 public class XMLSerializator extends Serializator {
     private StringBuffer buffer = new StringBuffer();
 
+    public  void openGroupTagWithAttr(Group group) {
+        buffer.append("<");
+        buffer.append(group.getType());
+        buffer.append(" name");
+        buffer.append("=\"");
+        buffer.append(group.getName());
+        buffer.append("\">");
+    }
+
+    public void openElementTagWithAttr(Element element) {
+        buffer.append("<");
+        buffer.append(element.getClass().getSimpleName());
+        buffer.append(" name");
+        buffer.append("=\"");
+        buffer.append(element.getName());
+        buffer.append("\">");
+    }
+
     @Override
     public StringBuffer serialize(Element element) {
-            buffer.append("<" + element.getClass().getSimpleName() + ">" + element.getName());
+            openElementTagWithAttr(element);
             if (element.getPoints() == null) {
                 buffer.append("<Points> </Points>");
             }
             else {
                 buffer.append("<Points>");
                 for (Point point : element.getPoints()) {
-                    buffer.append("<Point>" + "<x>" + point.getX() + "</x>" + "<y>" + point.getY() + "</y>" + "</Point>");
+                    buffer.append("<Point>");
+                    buffer.append("<x>");
+                    buffer.append(point.getX());
+                    buffer.append("</x>");
+                    buffer.append("<y>");
+                    buffer.append(point.getY());
+                    buffer.append("</y>");
+                    buffer.append("</Point>");
                 }
                 buffer.append("</Points>");
             }
-            buffer.append("</" + element.getClass().getSimpleName() + ">");
+            buffer.append("</");
+            buffer.append(element.getClass().getSimpleName());
+            buffer.append(">");
 
         return buffer;
     }
@@ -33,7 +60,7 @@ public class XMLSerializator extends Serializator {
     @Override
     public StringBuffer serialize(Group group) {
         if (group.getGroups() != null || group.getGroups().size() <= 0 ) {
-            buffer.append("<" + group.getType() + ">" + group.getName());
+            openGroupTagWithAttr(group);
             for (Group inGroup : group.getGroups()) {
                 serialize(inGroup);
             }
@@ -43,7 +70,10 @@ public class XMLSerializator extends Serializator {
                 serialize(element);
             }
         }
-        buffer.append("</" + group.getType() + ">");
+
+        buffer.append("</");
+        buffer.append(group.getType());
+        buffer.append(">");
 
         return buffer;
     }
@@ -58,11 +88,8 @@ public class XMLSerializator extends Serializator {
             bw.write(source);
             bw.write("</elements>");
             bw.close();
-
-        }catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
-
 }
