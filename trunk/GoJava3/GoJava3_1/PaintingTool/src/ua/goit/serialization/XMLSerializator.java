@@ -63,9 +63,6 @@ public class XMLSerializator extends Serializator {
             e.printStackTrace();
         }
 
-
-
-
     }
 
 }
