@@ -1,6 +1,5 @@
 package ua.goit.alg;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -10,7 +9,7 @@ public class LRUCache {
 
   private int sizeLimit;
   private Map<Integer,Integer> cacheMap = new HashMap<>();
-  private List<Integer> cacheList = new ArrayList<>();
+  private List<Integer> cacheList = new LinkedList<>();
   
   public LRUCache(int sizeLimit) {
     this.sizeLimit = sizeLimit;
