@@ -1,10 +1,8 @@
-package ua.goit.xmlparser.test;
-
-import static org.junit.Assert.*;
+package ua.goit.xmlparser;
 
 import org.junit.Test;
 
-import ua.goit.xmlparser.TagStack;
+import static org.junit.Assert.assertEquals;
 
 public class StackTest {
 

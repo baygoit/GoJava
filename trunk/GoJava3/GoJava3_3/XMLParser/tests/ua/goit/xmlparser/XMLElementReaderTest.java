@@ -1,13 +1,12 @@
-package ua.goit.xmlparser.test;
+package ua.goit.xmlparser;
 
-import static org.junit.Assert.*;
+import org.junit.Test;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 
-import org.junit.Test;
-
-import ua.goit.xmlparser.XMLElementsReader;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 public class XMLElementReaderTest {
 
