@@ -33,27 +33,11 @@
 		<div class="pageHeader">Банковские счета</div>
 		<s:actionerror class="errorTable" />
 		
-		<s:form name="paginatorPanel" theme="simple" action="BankAccountList">
-			<s:hidden name="paginator.firstResult" value="%{paginator.firstResult}" />
-			<s:hidden name="paginator.total" value="%{paginator.total}" />
-			<div> Показаны записи с <s:property value = "paginator.firstResult"/>
-					по <s:property value = "paginator.lastResult"/> 
-					(из <s:property value = "paginator.total"/>). 
-				<button class = "defaultButton" type="submit" name="previousPage" value = "true">
-					&lt&lt&lt
-				</button>
-				<button class = "defaultButton" type="submit" name="nextPage" value = "true">
-					&gt&gt&gt
-				</button>
-					Отображать по  <s:textfield  name="paginator.maxResults" 
-	    								value = "%{paginator.maxResults}"
-	    								maxlength = "2" size="2" onchange = "submit"
-		    					/>
-			 	
-			</div>
+		<s:form name="paginatorPanel" theme="simple" action= "BankAccountList" >
+			<jsp:include page="/Paginator.jsp" />
 		</s:form>
-						
-       	<table class = "table">
+		
+		<table class = "table">
     		<tr class="tableHeader">
     			<th>Идентификатор</th>
     			<th>Название</th>

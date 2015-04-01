@@ -21,9 +21,7 @@ public class BankAccountList extends ActionSupport {
 
 	private static final long serialVersionUID = 6252551373098179983L;
 	private static final Logger LOG=Logger.getLogger(BankAccountList.class);
-	private Paginator paginator;
-	private boolean previousPage;
-	private boolean nextPage;
+	private Paginator paginator = new Paginator();
 	@Inject
 	private BankAccountService bankAccountService;
 	@Inject
@@ -33,13 +31,7 @@ public class BankAccountList extends ActionSupport {
 	
 	public String execute() throws Exception {
 		
-		if (nextPage == true) {
-			paginator.hextPage();
-		} else if (previousPage == true) {
-			paginator.previousPage();
-		} else if(paginator == null) {
-			paginator = new Paginator();
-		}
+		paginator.checkAction();
 		
 		try {
 			bankAccounts = bankAccountService.retrieveAll(paginator);
@@ -73,17 +65,4 @@ public class BankAccountList extends ActionSupport {
 	public void setPaginator(Paginator paginator) {
 		this.paginator = paginator;
 	}
-	public boolean isPreviousPage() {
-		return previousPage;
-	}
-	public void setPreviousPage(boolean previousPage) {
-		this.previousPage = previousPage;
-	}
-	public boolean isNextPage() {
-		return nextPage;
-	}
-	public void setNextPage(boolean nextPage) {
-		this.nextPage = nextPage;
-	}
-	
 }
