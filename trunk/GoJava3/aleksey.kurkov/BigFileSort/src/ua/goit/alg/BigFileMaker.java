@@ -1,10 +1,12 @@
 package ua.goit.alg;
 
-import java.io.*;
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.Random;
 
 public class BigFileMaker {
-
   static final int FILE_LENGTH = 1000; // ~1Mb 999999
   static Random temp = new Random();
   static DataOutputStream dosBig;
@@ -19,15 +21,14 @@ public class BigFileMaker {
     }
     dosBig.close();
   }
-
   public static void main(String[] args) throws IOException {
-
     FileOutputStream fosBig = new FileOutputStream(file);
     dosBig = new DataOutputStream(fosBig);
 
     while (true) {
       dosBig.writeInt(temp.nextInt(20));
-      if (file.length() > FILE_LENGTH){
+
+      if (file.length() > FILE_LENGTH) {
         break;
       }
     }
@@ -35,7 +36,15 @@ public class BigFileMaker {
     dosBig.close();
   }
 
-  public void BigFileMaker(){
+  public BigFileMaker(int count, File file) throws
+          IOException {
+    FileOutputStream fosBig = new FileOutputStream(file);
+    dosBig = new DataOutputStream(fosBig);
 
+    for (int i = count; i > 0 ; i--) {
+      dosBig.writeInt(i);
+    }
+    System.out.println("Created " + file + " " + file.length() + " bytes");
+    dosBig.close();
   }
 }

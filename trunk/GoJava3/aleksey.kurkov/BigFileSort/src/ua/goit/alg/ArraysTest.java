@@ -102,4 +102,32 @@ public class ArraysTest {
     actualArray = readArrayFromFile(mergedTmpFile);
     assertArrayEquals(expectedArray, actualArray);
   }
+
+  @Test
+  public void testMergeFiles() throws IOException {
+    //create BigFile
+    File file = new File("BigFile.txt");
+    File fileSorted = new File("SortedBigFile.txt");
+    new BigFileMaker(20, file);
+    //mergeSort
+    mergeSort(file);
+    int[] expectedArray = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20};
+    int[] actualArray = readArrayFromFile(fileSorted);
+    assertArrayEquals(expectedArray, actualArray);
+  }
+
+  @Test
+  public void testMergeFiles2() throws IOException {
+    //create BigFile
+    File file = new File("BigFile.txt");
+    File fileSorted = new File("SortedBigFile.txt");
+    new BigFileMaker(21, file);
+    //mergeSort
+    mergeSort(file);
+    int[] expectedArray = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
+            20, 21};
+    int[] actualArray = readArrayFromFile(fileSorted);
+    assertArrayEquals(expectedArray, actualArray);
+  }
+
 }

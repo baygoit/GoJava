@@ -4,13 +4,18 @@ import java.io.*;
 import java.util.Vector;
 
 public class Arrays {
-
   public static final int BUFFER_SIZE = 5;
   private static int filesCount;
 
   public static void mergeSort(File file) throws IOException {
     filesCount = 0;
+    boolean evenNumberOfFiles;
     cutSortAndWrite(file, BUFFER_SIZE);
+    if (filesCount % 2 == 0) {
+      evenNumberOfFiles = true;
+    } else {
+      evenNumberOfFiles = false;
+    }
     StringBuilder tmpFileName1 = new StringBuilder(), tmpFileName2 = new StringBuilder(),
             tmpFileNameMergedFile = new StringBuilder();
 
@@ -46,10 +51,32 @@ public class Arrays {
         indexTmpFile1 = 0;
         indexTmpFile2 = 1;
         indexOfMergedFile = 0;
+        tmpFileName1.delete(1, tmpFileName1.length());
+        tmpFileName1.append(indexTmpFile1);
+        tmpFileName2.delete(1, tmpFileName2.length());
+        tmpFileName2.append(indexTmpFile2);
+        tmpFileNameMergedFile.delete(1, tmpFileNameMergedFile.length());
+        tmpFileNameMergedFile.append(indexOfMergedFile);
       }
+
       if (filesCount == 2) {
         tmpFileNameMergedFile.delete(0, tmpFileNameMergedFile.length());
         tmpFileNameMergedFile.append("SortedBigFile");
+      } else if (filesCount == 3 && !evenNumberOfFiles) {
+        tmpFileName1.delete(1, tmpFileName1.length());
+        tmpFileName1.append(indexTmpFile1);
+        tmpFileName2.delete(1, tmpFileName2.length());
+        tmpFileName2.append(indexTmpFile2);
+
+        File fileMerged = new File(tmpFileNameMergedFile + ".txt");
+        File file2 = new File(tmpFileName2 + ".txt");
+        fileMerged.renameTo(file2);
+
+        tmpFileNameMergedFile.delete(1, tmpFileNameMergedFile.length());
+        indexOfMergedFile = indexOfMergedFile - 1;
+        tmpFileNameMergedFile.append(indexOfMergedFile);
+        indexOfMergedFile = indexOfMergedFile + 1;
+        evenNumberOfFiles = true;
       } else {
         tmpFileName1.delete(1, tmpFileName1.length());
         tmpFileName1.append(indexTmpFile1);
@@ -71,57 +98,158 @@ public class Arrays {
     }
   }
 
-  private static void mergeTwoTempFiles(File file1, File file2, File fileMerged) throws IOException {
-    Vector<Integer> vector1 = new Vector<>();
-    Vector<Integer> vector2 = new Vector<>();
+  private static void mergeTwoTempFiles(File file1, File file2, File fileMerged) {
+    int value1 = 0, value2 = 0;
+    boolean readNextValue1 = true;
+    boolean readNextValue2 = true;
+    boolean endOfFile1 = false;
+    boolean endOfFile2 = false;
 
-    DataInputStream disFile1 = new DataInputStream(new FileInputStream(file1));
-    DataInputStream disFile2 = new DataInputStream(new FileInputStream(file2));
+    DataInputStream disFile1 = null;
+    try {
+      disFile1 = new DataInputStream(new FileInputStream(file1));
+    } catch (FileNotFoundException e) {
+      e.printStackTrace();
+    }
 
-    DataOutputStream dosMergedFile = new DataOutputStream(new
-            FileOutputStream(fileMerged));
+    DataInputStream disFile2 = null;
+    try {
+      disFile2 = new DataInputStream(new FileInputStream(file2));
+    } catch (FileNotFoundException e) {
+      e.printStackTrace();
+    }
 
-    while (disFile1.available() > 0) {
-      
-      for (int i = 0; i < BUFFER_SIZE && disFile1.available() > 0; i++) {
-        vector1.add(disFile1.readInt());
-      }
+    DataOutputStream dosMergedFile = null;
+    try {
+      dosMergedFile = new DataOutputStream(new
+              FileOutputStream(fileMerged));
+    } catch (FileNotFoundException e) {
+      e.printStackTrace();
+    }
 
-      for (int i = 0; i < BUFFER_SIZE && disFile2.available() > 0; i++) {
-        vector2.add(disFile2.readInt());
-      }
+    while (true) {
 
-      while (true) {
-        if (vector1.size() == 0) {
-          for (int i = 0; i < vector2.size(); i++) {
-            dosMergedFile.writeInt(vector2.get(i));
+      if (!endOfFile1 || !endOfFile2) {
+
+        if (endOfFile1) {
+          try {
+            dosMergedFile.writeInt(value2);
+          } catch (IOException e) {
+            e.printStackTrace();
           }
-          break;
-        } else if (vector2.size() == 0) {
-          for (int i = 0; i < vector1.size(); i++) {
-            dosMergedFile.writeInt(vector1.get(i));
-          }
-          break;
-        } else {
+          readNextValue2 = true;
+        }
 
-          if (vector1.get(0) == vector2.get(0)) {
-            dosMergedFile.writeInt(vector1.get(0));
-            dosMergedFile.writeInt(vector2.get(0));
-            vector1.remove(0);
-            vector2.remove(0);
-          } else if (vector1.get(0) < vector2.get(0)) {
-            dosMergedFile.writeInt(vector1.get(0));
-            vector1.remove(0);
-          } else if (vector2.get(0) < vector1.get(0)) {
-            dosMergedFile.writeInt(vector2.get(0));
-            vector2.remove(0);
+        if (endOfFile2) {
+          try {
+            dosMergedFile.writeInt(value1);
+          } catch (IOException e) {
+            e.printStackTrace();
+          }
+          readNextValue1 = true;
+        }
+
+        if (readNextValue1 != false && !endOfFile1) {
+          try {
+            value1 = disFile1.readInt();
+          } catch (EOFException e) {
+            endOfFile1 = true;
+            readNextValue1 = false;
+          } catch (IOException e) {
+            e.printStackTrace();
           }
         }
+        if (readNextValue2 != false && !endOfFile2) {
+          try {
+            value2 = disFile2.readInt();
+          } catch (EOFException e) {
+            endOfFile2 = true;
+            readNextValue2 = false;
+          } catch (IOException e) {
+            e.printStackTrace();
+          }
+        }
+
+        if (value1 == value2 && !endOfFile1 && !endOfFile2) {
+          try {
+            dosMergedFile.writeInt(value1);
+          } catch (EOFException e) {
+            endOfFile1 = true;
+          } catch (IOException e) {
+            e.printStackTrace();
+          }
+          try {
+            dosMergedFile.writeInt(value2);
+          } catch (EOFException e) {
+            endOfFile2 = true;
+          } catch (IOException e) {
+            e.printStackTrace();
+          }
+          readNextValue1 = true;
+          readNextValue2 = true;
+        } else if (value1 < value2 && !endOfFile1 && !endOfFile2) {
+          try {
+            dosMergedFile.writeInt(value1);
+          } catch (EOFException e) {
+            endOfFile1 = true;
+          } catch (IOException e) {
+            e.printStackTrace();
+          }
+          readNextValue1 = true;
+          readNextValue2 = false;
+        } else if (value2 < value1 && !endOfFile1 && !endOfFile2) {
+          try {
+            dosMergedFile.writeInt(value2);
+          } catch (EOFException e) {
+            endOfFile2 = true;
+          } catch (IOException e) {
+            e.printStackTrace();
+          }
+          readNextValue1 = false;
+          readNextValue2 = true;
+        }
+      } else if (endOfFile1 && !endOfFile2) {
+        try {
+          dosMergedFile.writeInt(value2);
+        } catch (EOFException e) {
+          endOfFile2 = true;
+        } catch (IOException e) {
+          e.printStackTrace();
+        }
+        readNextValue1 = false;
+        readNextValue2 = true;
+      } else if (!endOfFile1 && endOfFile2) {
+        try {
+          dosMergedFile.writeInt(value1);
+        } catch (EOFException e) {
+          endOfFile1 = true;
+        } catch (IOException e) {
+          e.printStackTrace();
+        }
+        readNextValue1 = true;
+        readNextValue2 = false;
+      } else if (endOfFile1 && endOfFile2) {
+        break;
       }
     }
-    disFile1.close();
-    disFile2.close();
-    dosMergedFile.close();
+
+    try {
+      disFile1.close();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    try {
+      disFile2.close();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    try {
+      dosMergedFile.close();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    file1.delete();
+    file2.delete();
   }
 
   public static void cutSortAndWrite(File file, int buffer) throws IOException {
@@ -157,11 +285,9 @@ public class Arrays {
     DataOutputStream dos = null;
     try {
       dos = new DataOutputStream(new FileOutputStream(fileName));
-
       for (int i = 0; i < array.length; i++) {
         dos.writeInt(array[i]);
       }
-      dos.close();
     } catch (FileNotFoundException e) {
       System.out.println("File " + fileName + " not found");
     } catch (IOException e) {
@@ -183,7 +309,6 @@ public class Arrays {
     try {
       dis = new DataInputStream(new FileInputStream(fileName));
       int i = 0;
-
       while (dis.available() > 0) {
         vector.add(i, dis.readInt());
         i++;
