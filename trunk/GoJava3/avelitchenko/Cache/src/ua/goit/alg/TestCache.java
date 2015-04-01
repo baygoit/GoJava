@@ -35,6 +35,6 @@ public class TestCache {
     cache.put(4,40);
     cache.put(5,50);
     cache.put(2,20);
-    assertEquals("1 3 4 5 2 ", cache.getList());
+    assertEquals("1 3 4 5 2 ", cache.getListToString());
   }
 }

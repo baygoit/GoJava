@@ -50,7 +50,7 @@ public class LRUCache {
     return cacheMap.size();
   }
 
-  public String getList() {
+  public String getListToString() {
     StringBuilder builder = new StringBuilder();
     for (Integer element : cacheList) {
       builder.append(element).append(" ");
