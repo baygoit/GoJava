@@ -15,29 +15,35 @@ import java.io.IOException;
  * Finally, when last data is read and sorted, it merge it to source file. 
  */
 public class Arrays {
-    private static int bufSize = 10000;
+    private final static int bufSize = 4;
 
     public static void mergeSort(File source) {
 	int[] buffer = new int[bufSize];
 	File tmpResult1 = new File("tmpResult1.txt");
 	File tmpResult2 = new File("tmpResult2.txt");
 	boolean isEndOfFile = false;
-	boolean isAccessToTmpResult1 = false;
+	boolean isAccessToTmpResult = false;
 	try {
 	    tmpResult1.createNewFile();
 	    tmpResult2.createNewFile();
 	    FileInputStream inputFile = new FileInputStream(source);
 	    DataInputStream dis = new DataInputStream(inputFile);
 	    while (dis.available() != 0) {
-		bufSize = readInt(buffer, dis);
-		mergeSort(buffer, 0, bufSize - 1);
-		isAccessToTmpResult1 = switchTmpFilesAndMerge(buffer, tmpResult1, 
-			tmpResult2, source, isAccessToTmpResult1);
+		buffer = readInt(buffer, dis);
+		mergeSort(buffer, 0, buffer.length - 1);
+		if (isAccessToTmpResult) {
+		    switchTmpFilesAndMerge(buffer, tmpResult1, tmpResult2, source, dis);
+		    isAccessToTmpResult = false;
+		}
+		else {
+		    switchTmpFilesAndMerge(buffer, tmpResult2, tmpResult1, source, dis);
+		    isAccessToTmpResult = true;
+		}
 	    }
 	    dis.close();
 	    inputFile.close();
 	} catch (Exception e) {
-	    throw new RuntimeException("Something went wrong. Please, check the file.");
+	    throw new RuntimeException("Something wrong with file.");
 	} finally {
 	    tmpResult1.delete();
 	    tmpResult2.delete();
@@ -45,34 +51,28 @@ public class Arrays {
     }
 
     //Read data from file to buffer array
-    private static int readInt(int[] buffer, DataInputStream dis) throws IOException {
+    private static int[] readInt(int[] buffer, DataInputStream dis) 
+	    throws IOException {
 	for (int i = 0; i < buffer.length; i++) {
 	    if (dis.available() <= 0) {
-		return i;
+		int[] newLengthBuffer = new int[i];
+		System.arraycopy(buffer, 0, newLengthBuffer, 0, i);
+		buffer = newLengthBuffer;
+		break;
 	    }
 	    buffer[i] = dis.readInt();
 	}
-	return buffer.length;
+	return buffer;
     }
 
     // Switch input and output files
-    private static boolean switchTmpFilesAndMerge(int[] buffer, File tmpResult1, 
-	    File tmpResult2, File source, boolean isAccessToTmpResult1) throws IOException {
-	boolean isEndOfFile = (buffer.length != bufSize);
-	if (isAccessToTmpResult1) { 
-	    if (!isEndOfFile) {
-		mergeWithFile(buffer, tmpResult1, tmpResult2);
-	    } else {
-		mergeWithFile(buffer, tmpResult1, source);
-	    }
-	    return false;
+    private static void switchTmpFilesAndMerge(int[] buffer, File tmpResult1, 
+	    File tmpResult2, File source, DataInputStream dis) throws IOException {
+	boolean isEndOfFile = (dis.available() == 0);
+	if (!isEndOfFile) {
+	    mergeWithFile(buffer, tmpResult1, tmpResult2);
 	} else {
-	    if (!isEndOfFile) {
-		mergeWithFile(buffer, tmpResult2, tmpResult1);
-	    } else {
-		mergeWithFile(buffer, tmpResult2, source);
-	    }
-	    return true;
+	    mergeWithFile(buffer, tmpResult1, source);
 	}
     }
 
@@ -83,36 +83,30 @@ public class Arrays {
 	FileOutputStream outputFile = new FileOutputStream(tmpResult2);
 	DataInputStream dis = new DataInputStream(inputFile);
 	DataOutputStream dos = new DataOutputStream(outputFile);
-	int i = 0;
-	boolean isLess = false;
-	int numFromFile = (dis.available() != 0)? dis.readInt() : 0;
-	while (i != bufSize || dis.available() != 0) {
-	    if (isLess) {
+	int arrayIndex = 0;
+	long intNumberQty = tmpResult1.length()/4;
+	int numFromFile = 0;
+	boolean lastNumFromFile = true;
+	while (arrayIndex != buffer.length || dis.available() != 0 
+		|| intNumberQty != 0) {
+	    if (dis.available() == 0 && intNumberQty == 0) {
+		dos.writeInt(buffer[arrayIndex]);
+		arrayIndex++;
+		continue;
+	    }
+
+	    if (dis.available() != 0 && lastNumFromFile == true) {
 		numFromFile = dis.readInt();
 	    }
 
-	    if (i != bufSize) {
-		if (dis.available() != 0 && isLess == false) {
-		    if (buffer[i] > numFromFile) {
-			dos.writeInt(numFromFile);
-			if (dis.available() != 0) {
-			    isLess = true;
-			} else {
-			    isLess = false;
-			}
-		    } else {
-			dos.writeInt(buffer[i]);
-			i++;
-			isLess = false;
-		    }
-		} else {
-		    dos.writeInt(buffer[i]);
-		    i++;
-		    isLess = false;
-		}
-	    } else {
+	    if (arrayIndex == buffer.length || buffer[arrayIndex] > numFromFile) {
 		dos.writeInt(numFromFile);
-		isLess = true;
+		intNumberQty--;
+		lastNumFromFile = true;
+	    } else {
+		dos.writeInt(buffer[arrayIndex]);
+		arrayIndex++;
+		lastNumFromFile = false;
 	    }
 	}
 	dos.flush();
