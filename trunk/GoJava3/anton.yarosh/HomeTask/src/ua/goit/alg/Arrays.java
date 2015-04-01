@@ -17,29 +17,29 @@ import java.io.IOException;
 public class Arrays {
     private final static int BUF_SIZE = 4;
 
-    public static void mergeSort(File source) throws IOException {
+    public static void mergeSort(File source) {
 	int[] buffer = new int[BUF_SIZE];
 	try {
-	    initialization(buffer, source);
-	} catch (IOException e) {
-	    throw new RuntimeException("Something wrong with file.");
+	    runMergeSort(buffer, source);
+	} catch (Exception e) {
+	    throw new RuntimeException("Something wrong with file.", e);
 	}
     }
 
     static void mergeSort(int bufSize, File source) {
 	int[] buffer = new int[bufSize];
 	try {
-	    initialization(buffer, source);
-	} catch (IOException e) {
-	    throw new RuntimeException("Something wrong with file.");
+	    runMergeSort(buffer, source);
+	} catch (Exception e) {
+	    throw new RuntimeException("Something wrong with file.", e);
 	}
     }
 
-    private static void initialization(int[] buffer, File source) throws IOException {
+    private static void runMergeSort(int[] buffer, File source) throws IOException {
 	File input1 = new File("tmpResult1.txt");
 	File input2 = new File("tmpResult2.txt");
 	boolean isEndOfFile = false;
-	boolean isAccessToTmpResult = false;
+	boolean flag = false;
 	FileInputStream inputFile = null;
 	DataInputStream dis = null;
 	try {
@@ -50,19 +50,19 @@ public class Arrays {
 	    while (dis.available() != 0) {
 		buffer = readInt(buffer, dis);
 		mergeSort(buffer, 0, buffer.length - 1);
-		if (isAccessToTmpResult) {
-		    switchTmpFilesAndMerge(buffer, input1, input2, source, dis);
-		    isAccessToTmpResult = false;
+		if (flag) {
+		    checkIfFileEndsAndMerge(buffer, input1, input2, source, dis);
+		    flag = false;
 		}
 		else {
-		    switchTmpFilesAndMerge(buffer, input2, input1, source, dis);
-		    isAccessToTmpResult = true;
+		    checkIfFileEndsAndMerge(buffer, input2, input1, source, dis);
+		    flag = true;
 		}
 	    }
 	    dis.close();
 	    inputFile.close();
 	} catch (Exception e) {
-	    throw new RuntimeException("Something wrong with file.");
+	    throw new RuntimeException("Something wrong with file.", e);
 	} finally {
 	    dis.close();
 	    inputFile.close();
@@ -85,7 +85,7 @@ public class Arrays {
     }
 
     // Switch input and output files
-    private static void switchTmpFilesAndMerge(int[] buffer, File input, 
+    private static void checkIfFileEndsAndMerge(int[] buffer, File input, 
 	    File output, File source, DataInputStream dis) throws IOException {
 	boolean isEndOfFile = (dis.available() == 0);
 	if (!isEndOfFile) {
@@ -108,7 +108,7 @@ public class Arrays {
 	    dis = new DataInputStream(inputFile);
 	    dos = new DataOutputStream(outputFile);
 	    int arrayIndex = 0;
-	    long intNumberQty = input.length()/4;
+	    long intNumberQty = input.length() / 4;
 	    int numFromFile = 0;
 	    boolean lastNumFromFile = true;
 	    while (arrayIndex != buffer.length || dis.available() != 0 
