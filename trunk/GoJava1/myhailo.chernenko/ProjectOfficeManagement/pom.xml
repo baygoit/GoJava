@@ -165,5 +165,10 @@
 	   <artifactId>hibernate-core</artifactId>
 	   <version>4.3.8.Final</version>
 	</dependency>
+	<dependency>
+		<groupId>displaytag</groupId>
+		<artifactId>displaytag</artifactId>
+		<version>1.2</version>
+	</dependency>
   </dependencies>
 </project>

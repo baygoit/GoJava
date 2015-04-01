@@ -1,12 +1,17 @@
 package ua.com.goit.gojava.POM.persistence.hibernate.abstraction;
 
 import java.util.List;
+
 import org.apache.log4j.Logger;
+import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
+import org.hibernate.ScrollMode;
 import org.hibernate.Session;
+import org.hibernate.criterion.Projections;
 
 import ua.com.goit.gojava.POM.dataModel.POMDataModelException;
 import ua.com.goit.gojava.POM.persistence.hibernate.HibernateUtil;
+import ua.com.goit.gojava.POM.services.Paginator;
 
 public abstract class AbstractDAO<T> {
 	
@@ -83,6 +88,33 @@ public abstract class AbstractDAO<T> {
 			
 			@SuppressWarnings("unchecked")
 			List<T> resultList = session.createCriteria(classT).list();
+			return resultList;	
+			
+		} catch (HibernateException e) {
+			getLog().error("Could not retrieve all "+getClassName()+"s: "+e.getMessage(), e);
+			throw new POMDataModelException("Could not retrieve all "+getClassName()+"s: "+e.getMessage(), e);
+		} finally {
+			closeSession(session);
+	 	}		
+		
+	}
+	
+	public List<T> retrieveAll(Paginator paginator) throws POMDataModelException {
+
+		Session session = getSession();
+		
+		try {
+			
+			Criteria criteria = session.createCriteria(classT);
+			Long countRows =  (Long) criteria.setProjection(Projections.rowCount()).uniqueResult();
+			paginator.setTotal(countRows.intValue());
+			
+			criteria = session.createCriteria(classT);
+			criteria.setFirstResult(paginator.getFirstResult()-1);
+			criteria.setMaxResults(paginator.getMaxResults());
+			@SuppressWarnings("unchecked")
+			List<T> resultList = criteria.list();
+			
 			return resultList;	
 			
 		} catch (HibernateException e) {

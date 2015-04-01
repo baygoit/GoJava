@@ -21,6 +21,12 @@ public class BankAccountService {
 		return bankAccountDAO.retrieveAll();
 		
 	}
+	
+	public List<BankAccount> retrieveAll(Paginator paginator) throws POMDataModelException {
+		
+		return bankAccountDAO.retrieveAll(paginator);
+		
+	}
 
 	public BankAccount retrieveById(long id) throws POMDataModelException {
 
