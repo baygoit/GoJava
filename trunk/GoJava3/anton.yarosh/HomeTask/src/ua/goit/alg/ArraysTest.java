@@ -20,19 +20,18 @@ public class ArraysTest {
 	int[] expecteds = {2, 8, 1, 0, 45, 21, 40, 60, 50};
 	writeArray(expecteds, file);
 	java.util.Arrays.sort(expecteds);
-	Arrays.mergeSort(file);
+	Arrays.mergeSort(4, file);
 	int[] actuals = readArray(expecteds.length, file);
 	assertArrayEquals(expecteds, actuals);	
     }
     
-   // MergeSort of file testing
     @Test
     public void mergeSortFileSizeLessThanDoubleBufferTest() throws IOException {
 	File file = new File("test8.txt");
 	int[] expecteds = {25, 46, 54, 38, 6, 2, 1};
 	writeArray(expecteds, file);
 	java.util.Arrays.sort(expecteds);
-	Arrays.mergeSort(file);
+	Arrays.mergeSort(4, file);
 	int[] actuals = readArray(expecteds.length, file);
 	assertArrayEquals(expecteds, actuals);	
     }
@@ -43,7 +42,18 @@ public class ArraysTest {
 	int[] expecteds = {2, 8, 1, 0, 0, 5, 3, 1};
 	writeArray(expecteds, file);
 	java.util.Arrays.sort(expecteds);
-	Arrays.mergeSort(file);
+	Arrays.mergeSort(4, file);
+	int[] actuals = readArray(expecteds.length, file);
+	assertArrayEquals(expecteds, actuals);	
+    }
+    
+    @Test
+    public void mergeSortFileSizeEqualFifteenBufferTest() throws IOException {
+	File file = new File("test9.txt");
+	int[] expecteds = {2, 8, 1, 4, 0, 5, 3, 1, 67, 1, 34, 8, 3, 124, 6};
+	writeArray(expecteds, file);
+	java.util.Arrays.sort(expecteds);
+	Arrays.mergeSort(1, file);
 	int[] actuals = readArray(expecteds.length, file);
 	assertArrayEquals(expecteds, actuals);	
     }

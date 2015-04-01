@@ -15,28 +15,47 @@ import java.io.IOException;
  * Finally, when last data is read and sorted, it merge it to source file. 
  */
 public class Arrays {
-    private final static int bufSize = 4;
+    private final static int BUF_SIZE = 4;
 
-    public static void mergeSort(File source) {
+    public static void mergeSort(File source) throws IOException {
+	int[] buffer = new int[BUF_SIZE];
+	try {
+	    initialization(buffer, source);
+	} catch (IOException e) {
+	    throw new RuntimeException("Something wrong with file.");
+	}
+    }
+
+    static void mergeSort(int bufSize, File source) {
 	int[] buffer = new int[bufSize];
-	File tmpResult1 = new File("tmpResult1.txt");
-	File tmpResult2 = new File("tmpResult2.txt");
+	try {
+	    initialization(buffer, source);
+	} catch (IOException e) {
+	    throw new RuntimeException("Something wrong with file.");
+	}
+    }
+
+    private static void initialization(int[] buffer, File source) throws IOException {
+	File input1 = new File("tmpResult1.txt");
+	File input2 = new File("tmpResult2.txt");
 	boolean isEndOfFile = false;
 	boolean isAccessToTmpResult = false;
+	FileInputStream inputFile = null;
+	DataInputStream dis = null;
 	try {
-	    tmpResult1.createNewFile();
-	    tmpResult2.createNewFile();
-	    FileInputStream inputFile = new FileInputStream(source);
-	    DataInputStream dis = new DataInputStream(inputFile);
+	    input1.createNewFile();
+	    input2.createNewFile();
+	    inputFile = new FileInputStream(source);
+	    dis = new DataInputStream(inputFile);
 	    while (dis.available() != 0) {
 		buffer = readInt(buffer, dis);
 		mergeSort(buffer, 0, buffer.length - 1);
 		if (isAccessToTmpResult) {
-		    switchTmpFilesAndMerge(buffer, tmpResult1, tmpResult2, source, dis);
+		    switchTmpFilesAndMerge(buffer, input1, input2, source, dis);
 		    isAccessToTmpResult = false;
 		}
 		else {
-		    switchTmpFilesAndMerge(buffer, tmpResult2, tmpResult1, source, dis);
+		    switchTmpFilesAndMerge(buffer, input2, input1, source, dis);
 		    isAccessToTmpResult = true;
 		}
 	    }
@@ -45,19 +64,19 @@ public class Arrays {
 	} catch (Exception e) {
 	    throw new RuntimeException("Something wrong with file.");
 	} finally {
-	    tmpResult1.delete();
-	    tmpResult2.delete();
+	    dis.close();
+	    inputFile.close();
+	    input1.delete();
+	    input2.delete();
 	}
     }
 
-    //Read data from file to buffer array
+    // Read data from file to buffer array
     private static int[] readInt(int[] buffer, DataInputStream dis) 
 	    throws IOException {
 	for (int i = 0; i < buffer.length; i++) {
 	    if (dis.available() <= 0) {
-		int[] newLengthBuffer = new int[i];
-		System.arraycopy(buffer, 0, newLengthBuffer, 0, i);
-		buffer = newLengthBuffer;
+		buffer = java.util.Arrays.copyOf(buffer, i); 
 		break;
 	    }
 	    buffer[i] = dis.readInt();
@@ -66,57 +85,67 @@ public class Arrays {
     }
 
     // Switch input and output files
-    private static void switchTmpFilesAndMerge(int[] buffer, File tmpResult1, 
-	    File tmpResult2, File source, DataInputStream dis) throws IOException {
+    private static void switchTmpFilesAndMerge(int[] buffer, File input, 
+	    File output, File source, DataInputStream dis) throws IOException {
 	boolean isEndOfFile = (dis.available() == 0);
 	if (!isEndOfFile) {
-	    mergeWithFile(buffer, tmpResult1, tmpResult2);
+	    mergeWithFile(buffer, input, output);
 	} else {
-	    mergeWithFile(buffer, tmpResult1, source);
+	    mergeWithFile(buffer, input, source);
 	}
     }
 
-    //Merge buffer array with temp file
-    private static void mergeWithFile(int[] buffer, File tmpResult1, 
-	    File tmpResult2) throws IOException {
-	FileInputStream inputFile = new FileInputStream(tmpResult1);
-	FileOutputStream outputFile = new FileOutputStream(tmpResult2);
-	DataInputStream dis = new DataInputStream(inputFile);
-	DataOutputStream dos = new DataOutputStream(outputFile);
-	int arrayIndex = 0;
-	long intNumberQty = tmpResult1.length()/4;
-	int numFromFile = 0;
-	boolean lastNumFromFile = true;
-	while (arrayIndex != buffer.length || dis.available() != 0 
-		|| intNumberQty != 0) {
-	    if (dis.available() == 0 && intNumberQty == 0) {
-		dos.writeInt(buffer[arrayIndex]);
-		arrayIndex++;
-		continue;
-	    }
+    // Merge buffer array with temp file
+    private static void mergeWithFile(int[] buffer, File input, File output) 
+	    throws IOException {
+	FileInputStream inputFile = null;
+	FileOutputStream outputFile = null;
+	DataInputStream dis = null;
+	DataOutputStream dos = null;
+	try {
+	    inputFile = new FileInputStream(input);
+	    outputFile = new FileOutputStream(output);
+	    dis = new DataInputStream(inputFile);
+	    dos = new DataOutputStream(outputFile);
+	    int arrayIndex = 0;
+	    long intNumberQty = input.length()/4;
+	    int numFromFile = 0;
+	    boolean lastNumFromFile = true;
+	    while (arrayIndex != buffer.length || dis.available() != 0 
+		    || intNumberQty != 0) {
+		if (dis.available() == 0 && intNumberQty == 0) {
+		    dos.writeInt(buffer[arrayIndex]);
+		    arrayIndex++;
+		    continue;
+		}
 
-	    if (dis.available() != 0 && lastNumFromFile == true) {
-		numFromFile = dis.readInt();
-	    }
+		if (dis.available() != 0 && lastNumFromFile == true) {
+		    numFromFile = dis.readInt();
+		}
 
-	    if (arrayIndex == buffer.length || buffer[arrayIndex] > numFromFile) {
-		dos.writeInt(numFromFile);
-		intNumberQty--;
-		lastNumFromFile = true;
-	    } else {
-		dos.writeInt(buffer[arrayIndex]);
-		arrayIndex++;
-		lastNumFromFile = false;
+		if (arrayIndex == buffer.length || buffer[arrayIndex] > numFromFile) {
+		    dos.writeInt(numFromFile);
+		    intNumberQty--;
+		    lastNumFromFile = true;
+		} else {
+		    dos.writeInt(buffer[arrayIndex]);
+		    arrayIndex++;
+		    lastNumFromFile = false;
+		}
 	    }
+	} catch (Exception e) {
+	    throw new RuntimeException("Something wrong with file.");
+	} finally {
+	    dos.flush();
+	    dos.close();
+	    dis.close();
+	    outputFile.close();
+	    inputFile.close();
 	}
-	dos.flush();
-	dos.close();
-	dis.close();
-	outputFile.close();
-	inputFile.close();
+
     }
 
-    //Sorting array
+    // Sorting array
     private static void mergeSort(int []m, int p, int r) {
 	if (p < r) {
 	    int q = (p + r) / 2;
