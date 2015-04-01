@@ -10,7 +10,6 @@ public class NodeTable {
   Map<Integer, Node> cacheTable = new HashMap<Integer, Node>();
   Node head = null;
   Node tail = null;
-
   int capacity = DEFAULT_CACHE_SIZE;
 
   public NodeTable() {
@@ -26,9 +25,9 @@ public class NodeTable {
     Node tableNode = cacheTable.get(argKey);
 
     if (tableNode == null) {
-      Node newNode = new Node(argKey, argValue);
-      addToTail(newNode);
-      cacheTable.put(argKey, newNode);
+      tableNode = new Node(argKey, argValue);
+      addToTail(tableNode);
+      cacheTable.put(argKey, tableNode);
     } else {
       tableNode.setValue(argValue);
       moveToTail(tableNode);
@@ -53,8 +52,9 @@ public class NodeTable {
   private void addToTail(Node arg) {
     if (tail == null) {
       tail = arg;
-      head = tail;
+      head = arg;
     } else {
+      arg.setPrevNode(tail);
       tail.setNextNode(arg);
       tail = arg;
     }
@@ -78,6 +78,9 @@ public class NodeTable {
       next.setPrevNode(prev);
       prev.setNextNode(next);
     }
+    
+    arg.setNextNode(null);
+    arg.setPrevNode(null);
   }
 
   private void moveToTail(Node arg) {
@@ -88,9 +91,34 @@ public class NodeTable {
   private void checkCapacity() {
 
     if (cacheTable.size() > capacity) {
-
       cacheTable.remove(head.getKey());
       removeNodeFromList(head);
     }
   }
+
+  public int getCapacity() {
+    return capacity;
+  }
+
+  public void setCapacity(int capacity) {
+    this.capacity = capacity;
+  }
+
+  public Node getHead() {
+    return head;
+  }
+
+  public void setHead(Node head) {
+    this.head = head;
+  }
+
+  public Node getTail() {
+    return tail;
+  }
+
+  public void setTail(Node tail) {
+    this.tail = tail;
+  }
+  
+  
 }
