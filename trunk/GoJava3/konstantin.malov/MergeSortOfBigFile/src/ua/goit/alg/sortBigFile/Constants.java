@@ -9,6 +9,7 @@ public class Constants {
   private Constants() {
 
   }
+
   public static final int BYTE_BUFFER_SIZE = 1024 * 512; // 512 KB
   public static final String PATH_TO_TEMP_DIR_UNIX = "/home/kossovec/temp/";
   public static final String PATH_TO_BIG_FILE = "/home/kossovec/";

@@ -1,4 +1,5 @@
 package ua.goit.alg.sortBigFile;
+
 import java.io.*;
 
 import static ua.goit.alg.sortBigFile.Constants.*;
@@ -10,7 +11,7 @@ public class BigFileWithIntCreation {
     DataOutputStream dataToFile = new DataOutputStream(
             new FileOutputStream(new File(bigFile)));
     while (intInFile > 0) {
-      int random = (int)(Math.random()*Integer.MAX_VALUE);
+      int random = (int) (Math.random() * Integer.MAX_VALUE);
       dataToFile.writeInt(random);
       intInFile--;
     }

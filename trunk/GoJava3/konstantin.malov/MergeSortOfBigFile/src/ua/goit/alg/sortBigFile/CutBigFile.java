@@ -10,25 +10,31 @@ public class CutBigFile {
   private MergeSort mergeSort = null;
   private DataOutputStream dataToTempFile = null;
   private byte[] buffer = new byte[BYTE_BUFFER_SIZE];
-  private List<String> filesAfterCut= new ArrayList<String>();
+  private List<String> filesAfterCut = new ArrayList<String>();
 
   /**
    * this function cut big file by smallest one (BYTE_BUFFER_SIZE)
    */
   public List<String> cutBigFile(File bigFile) throws IOException {
+    int[] sortedArray;
     DataInputStream dataFromFile = new DataInputStream(
             new FileInputStream(bigFile));
     int fileCount = 0;
     int bufferLength;
     while ((bufferLength = arrayFromBigFile(dataFromFile)) > 0) {
-      byte[] realBuffer = new byte[bufferLength];
-      System.arraycopy(buffer, 0, realBuffer, 0, bufferLength);
-      int[] sortedArray = sortByMergeSort(Parser.parseByteArrayToIntArray(realBuffer));
+      if (bufferLength != buffer.length) {
+        byte[] realBuffer = new byte[bufferLength];
+        System.arraycopy(buffer, 0, realBuffer, 0, bufferLength);
+        sortedArray = sortByMergeSort(Parser.parseByteArrayToIntArray(realBuffer));
+      } else {
+        sortedArray = sortByMergeSort(Parser.parseByteArrayToIntArray(buffer));
+      }
+
       filesAfterCut.add(tempFileWriter(Constants.TEMP_FILE_NAME + "0_", fileCount, sortedArray));
       fileCount++;
     }
-    dataFromFile.close();
 
+    dataFromFile.close();
     return filesAfterCut;
   }
 
@@ -43,8 +49,8 @@ public class CutBigFile {
       dataToTempFile.write(Parser.parseIntArrayToByteArray(sortedArray));
       dataToTempFile.close();
     }
-    return tempFilePath;
 
+    return tempFilePath;
   }
 
   /**
