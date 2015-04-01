@@ -3,70 +3,72 @@ package ua.goit.serialization;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+
 import ua.goit.graphElements.Element;
 import ua.goit.graphElements.Group;
 
 public class JSONSerializator extends Serializator {
   private StringBuffer tab = new StringBuffer();
   private StringBuffer zeroTab = new StringBuffer();
-  private String oneTab = "    ";
-  private String enter = "\n";
-  private char dQ = '"';
-  private char openBracket = '{';
-  private char closeBracket = '}';
-  private char openBracketS = '[';
-  private char closeBracketS = ']';
-  private StringBuffer serializeString = new StringBuffer("{" + enter + enter+ "}");
+  private static final String ONE_TAB = "    ";
+  private static final String ENTER = "\n";
+  private static final char D_Q = '"';
+  private static final char OPEN_BRACKET = '{';
+  private static final char CLOSE_BRACKET = '}';
+  private static final char OPEN_BRACKET_S = '[';
+  private static final char CLOSE_BRACKET_S = ']';
+  private StringBuffer serializeString = new StringBuffer("{" + ENTER + ENTER + "}");
 
   @Override
   public StringBuffer serialize(Element element) {
     addJSONObjectName(element.getName());
-    openCloseBracket(zeroTab, openBracket, enter);
+    openCloseBracket(zeroTab, OPEN_BRACKET, ENTER);
     addAttribute("Name", element.getName());
     addAttribute("Type", element.getClass().getSimpleName());
     addAttributeWithoutValue("Points");
     if (element.getPoints() != null) {
-      getPointsFromElement(element);
+      serializePointsFromElement(element);
     }
-    bufAppend(tab.toString() + closeBracket + "");
+
+    bufAppend(tab.toString() + CLOSE_BRACKET + "");
     return serializeString;
   }
 
   @Override
   public StringBuffer serialize(Group group) {
     addJSONObjectName(group.getName());
-    openCloseBracket(zeroTab, openBracket, enter);
-    if (isGropsNotNullAndNotEmpty(group)) {
+    openCloseBracket(zeroTab, OPEN_BRACKET, ENTER);
+    if (hasGroup(group)) {
       addTab();
-      int gropeQuantity = group.getGroups().size();
-      for (int i = 0; i < gropeQuantity; i++) {
+      int groupQuantity = group.getGroups().size();
+      for (int i = 0; i < groupQuantity; i++) {
         serialize(group.getGroups().get(i));
-        if (gropeQuantity - 1 != i) {
-          bufAppend("," + enter);
+        if (groupQuantity - 1 != i) {
+          commaAppend();
         }
       }
 
-      if (isGropsElementNotNullAndNotEmpty(group)) {
-        bufAppend("," + enter);
+      if (hasElements(group)) {
+        commaAppend();
       } else {
-        bufAppend(enter);
+        enterAppend();
       }
     }
 
-    if (isGropsElementNotNullAndNotEmpty(group)) {
+    if (hasElements(group)) {
       int elementQuantity = group.getElements().size();
       for (int i = 0; i < elementQuantity; i++) {
         serialize(group.getElements().get(i));
         if (elementQuantity - 1 != i) {
-          bufAppend("," + enter);
+          commaAppend();
         }
       }
 
-      bufAppend(enter);
+      enterAppend();
     }
 
     remTab();
-    openCloseBracket(tab, closeBracket, "");
+    openCloseBracket(tab, CLOSE_BRACKET, "");
     return serializeString;
   }
 
@@ -79,35 +81,43 @@ public class JSONSerializator extends Serializator {
     } catch (IOException e) {
       throw new RuntimeException("Some Problems with file");
     }
+  }
 
+  private void enterAppend() {
+    bufAppend(ENTER);
+  }
+
+  private void commaAppend() {
+    bufAppend("," + ENTER);
   }
 
   private void addJSONObjectName(String name) {
-    bufAppend(tab.toString() + dQ + name + dQ + ":");
+    bufAppend(tab.toString() + D_Q + name + D_Q + ":");
   }
 
   private void addAttributeWithoutValue(String attribute) {
-    bufAppend(tab.toString() + dQ + attribute + dQ + " : ");
+    bufAppend(tab.toString() + D_Q + attribute + D_Q + " : ");
   }
 
-  private void getPointsFromElement(Element element) {
-    bufAppend(openBracketS + enter);
+  private void serializePointsFromElement(Element element) {
+    bufAppend(OPEN_BRACKET_S + ENTER);
     addTab();
     int pointsQuantity = element.getPoints().size();
-
     for (int i = 0; i < pointsQuantity; i++) {
-      openCloseBracket(tab, openBracket, enter);
-      addAttribute("X", String.valueOf(element.getPoints().get(i).getX()));
-      addAttributeLast("Y", String.valueOf(element.getPoints().get(i).getY()));
-      openCloseBracket(tab, closeBracket, "");
+      int xCoordinate = element.getPoints().get(i).getX();
+      int yCoordinate = element.getPoints().get(i).getY();
+      openCloseBracket(tab, OPEN_BRACKET, ENTER);
+      addAttribute("X", String.valueOf(xCoordinate));
+      addAttributeLast("Y", String.valueOf(yCoordinate));
+      openCloseBracket(tab, CLOSE_BRACKET, "");
       if (pointsQuantity - 1 != i) {
-        bufAppend("," + enter);
+        commaAppend();
       }
     }
-    bufAppend(enter);
-    remTab();
-    openCloseBracket(tab, closeBracketS, enter);
 
+    enterAppend();
+    remTab();
+    openCloseBracket(tab, CLOSE_BRACKET_S, ENTER);
   }
 
   private void openCloseBracket(StringBuffer tab, char bracket, String enter) {
@@ -115,13 +125,13 @@ public class JSONSerializator extends Serializator {
   }
 
   private void addAttribute(String attribute, String value) {
-    bufAppend(tab.toString() + dQ + attribute + dQ + " : "
-            + dQ + value + dQ + "," + enter);
+    bufAppend(tab.toString() + D_Q + attribute + D_Q + " : "
+            + D_Q + value + D_Q + "," + ENTER);
   }
 
   private void addAttributeLast(String attribute, String value) {
-    bufAppend(tab.toString() + dQ + attribute + dQ + " : "
-            + dQ + value + dQ + enter);
+    bufAppend(tab.toString() + D_Q + attribute + D_Q + " : "
+            + D_Q + value + D_Q + ENTER);
   }
 
   private void remTab() {
@@ -129,21 +139,20 @@ public class JSONSerializator extends Serializator {
   }
 
   private void addTab() {
-    tab.append(oneTab);
+    tab.append(ONE_TAB);
   }
 
-  private boolean isGropsElementNotNullAndNotEmpty(Group group) {
+  private boolean hasElements(Group group) {
     return group.getElements() != null && group.getElements().size() > 0;
   }
 
-  private boolean isGropsNotNullAndNotEmpty(Group group) {
+  private boolean hasGroup(Group group) {
     return group.getGroups() != null && group.getGroups().size() > 0;
   }
 
   private void bufAppend(String data) {
     serializeString.insert(serializeString.length() - 2, data);
   }
-
 }
 
 
