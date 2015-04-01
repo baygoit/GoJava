@@ -57,4 +57,8 @@ public class LRUCache {
     }
     return builder.toString();
   }
+
+  public Object[] getList() {
+    return cacheList.toArray();
+  }
 }
