@@ -4,11 +4,9 @@ public class RotatedArrays {
 
   public int binarySearch(int[] array, int elem) {
     int index = -1;
-    int low;
-    int high;
+    int low = 0;
+    int high = array.length - 1;
     int middle;
-    low = 0;
-    high = array.length - 1;
     if (array[low] == elem) {
       index = low;
     } else if (array[high] == elem) {
