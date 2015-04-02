@@ -4,7 +4,7 @@ public class RotatedArray {
 
   public static int binarySearch(int[] array, int target) {
 
-    if (array.length <= 0) {
+    if (array.length == 0) {
       return -1;
     }
 
@@ -15,9 +15,8 @@ public class RotatedArray {
     int res = -1;
 
     while (leftBorder <= rightBorder) {
-      pos = leftBorder + (rightBorder - leftBorder) / 2;
-      firstElement = array[leftBorder];
 
+      firstElement = array[leftBorder];
       if (array[pos] == target) {
         res = pos;
         break;
@@ -36,9 +35,7 @@ public class RotatedArray {
         }
       }
 
-      if (array[leftBorder] == target) {
-        res = leftBorder;
-      }
+      pos = leftBorder + (rightBorder - leftBorder) / 2;
     }
     return res;
   }

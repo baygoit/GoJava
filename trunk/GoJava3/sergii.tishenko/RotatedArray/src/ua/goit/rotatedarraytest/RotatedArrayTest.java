@@ -67,10 +67,18 @@ public class RotatedArrayTest {
     assertEquals(expected, actual);
     ;
   }
-
   @Test
   public void testCase7() {
     int actual = RotatedArray.binarySearch(new int[] {}, 4);
+    int expected = -1;
+    assertEquals(expected, actual);
+    ;
+  }
+
+
+  @Test
+  public void testCase8() {
+    int actual = RotatedArray.binarySearch(new int[] {1}, 0);
     int expected = -1;
     assertEquals(expected, actual);
     ;
