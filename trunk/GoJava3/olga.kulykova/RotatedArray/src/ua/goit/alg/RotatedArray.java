@@ -5,7 +5,7 @@ public class RotatedArray {
         int min = 0;
         int max = array.length - 1;
 
-        while (min < max) {
+        while (min <= max) {
             int middle = min + ((max - min) / 2);
             boolean moreMin = target > array[min];
             boolean lessMiddle = target < array[middle];

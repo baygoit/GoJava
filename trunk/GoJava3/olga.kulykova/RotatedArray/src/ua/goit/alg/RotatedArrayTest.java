@@ -93,4 +93,10 @@ public class RotatedArrayTest extends TestCase {
         }
     }
 
+    public void testOneElementInArrayEqualsTarget() {
+        int[] array = {1};
+        int actualResult = RotatedArray.binarySearch(array, 1);
+        assertEquals(0, actualResult);
+    }
+
 }
