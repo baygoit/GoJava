@@ -1,4 +1,4 @@
-package ua.goit.cache.test;
+package ua.goit.cache;
 
 import static org.junit.Assert.assertEquals;
 

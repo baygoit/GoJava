@@ -7,16 +7,15 @@ public class NodeTable {
 
   final int DEFAULT_CACHE_SIZE = 5;
 
-  Map<Integer, Node> cacheTable = new HashMap<Integer, Node>();
-  Node head = null;
-  Node tail = null;
-  int capacity = DEFAULT_CACHE_SIZE;
+  private Map<Integer, Node> cacheTable = new HashMap<Integer, Node>();
+  private Node head = null;
+  private Node tail = null;
+  private int capacity = DEFAULT_CACHE_SIZE;
 
   public NodeTable() {
   }
 
   public NodeTable(int capacity) {
-    super();
     this.capacity = capacity;
   }
 
@@ -49,21 +48,21 @@ public class NodeTable {
 
   }
 
-  private void addToTail(Node arg) {
+  private void addToTail(Node node) {
     if (tail == null) {
-      tail = arg;
-      head = arg;
+      tail = node;
+      head = node;
     } else {
-      arg.setPrevNode(tail);
-      tail.setNextNode(arg);
-      tail = arg;
+      node.setPrevNode(tail);
+      tail.setNextNode(node);
+      tail = node;
     }
   }
 
-  private void removeNodeFromList(Node arg) {
+  private void removeNodeFromList(Node node) {
 
-    Node prev = arg.getPrevNode();
-    Node next = arg.getNextNode();
+    Node prev = node.getPrevNode();
+    Node next = node.getNextNode();
 
     if (prev == null && next == null) {
       head = null;
@@ -78,9 +77,9 @@ public class NodeTable {
       next.setPrevNode(prev);
       prev.setNextNode(next);
     }
-    
-    arg.setNextNode(null);
-    arg.setPrevNode(null);
+
+    node.setNextNode(null);
+    node.setPrevNode(null);
   }
 
   private void moveToTail(Node arg) {
@@ -88,7 +87,7 @@ public class NodeTable {
     addToTail(arg);
   }
 
-  private void checkCapacity() {
+  void checkCapacity() {
 
     if (cacheTable.size() > capacity) {
       cacheTable.remove(head.getKey());
@@ -100,25 +99,24 @@ public class NodeTable {
     return capacity;
   }
 
-  public void setCapacity(int capacity) {
+  void setCapacity(int capacity) {
     this.capacity = capacity;
   }
 
-  public Node getHead() {
+  Node getHead() {
     return head;
   }
 
-  public void setHead(Node head) {
+  void setHead(Node head) {
     this.head = head;
   }
 
-  public Node getTail() {
+  Node getTail() {
     return tail;
   }
 
-  public void setTail(Node tail) {
+  void setTail(Node tail) {
     this.tail = tail;
   }
-  
-  
+
 }

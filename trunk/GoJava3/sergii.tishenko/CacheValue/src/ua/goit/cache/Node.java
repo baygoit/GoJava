@@ -1,6 +1,6 @@
 package ua.goit.cache;
 
-public class Node {
+class Node {
   Node prevNode;
   Node nextNode;
 
@@ -8,20 +8,12 @@ public class Node {
   int key;
 
   public Node(int key, int value, Node nextNode, Node prevNode) {
-    super();
     this.prevNode = prevNode;
     this.nextNode = nextNode;
     this.value = value;
     this.key = key;
   }
 
-  public int getKey() {
-    return key;
-  }
-
-  public void setKey(int key) {
-    this.key = key;
-  }
 
   public Node(int key, int value) {
     super();
@@ -76,5 +68,15 @@ public class Node {
   public void setValue(int value) {
     this.value = value;
   }
+
+  public int getKey() {
+    return key;
+  }
+
+  public void setKey(int key) {
+    this.key = key;
+  }
+
+
 
 }
