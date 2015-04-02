@@ -19,7 +19,7 @@ public class TestMainFunction {
   private static final String RESULT_FILE = "result.txt";
 
   @BeforeClass
-  public static void init() {
+  public static void mergeSort() {
     BigFileMerge fileMerge = new BigFileMerge();
     try {
       long startTime = System.nanoTime();

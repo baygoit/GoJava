@@ -30,6 +30,7 @@ public class MergeSort {
         array[count] = buffer[left];
         left++;
       }
+
       count++;
     }
 

@@ -2,14 +2,12 @@ package ua.goit.alg.sortBigFile;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static ua.goit.alg.sortBigFile.Constants.*;
 
 public class BigFileMerge {
-  private byte[] firstFileBuffer = new byte[BYTE_BUFFER_SIZE];
-  private byte[] secondFileBuffer = new byte[BYTE_BUFFER_SIZE];
-  private int[] resultFileBuffer = new int[(BYTE_BUFFER_SIZE) / 4];
   private int firstCountNumber = 1;
   private int secondCountNumber = 0;
 
@@ -45,49 +43,49 @@ public class BigFileMerge {
 
     resetCondition();
     return merge(newFilesList);
-
   }
 
   /**
    * this function merge to file, save result to new temp file and return his path
    */
   public String mergeFiles(File firstFile, File secondFile) throws IOException {
+    byte[] firstFileBuffer = new byte[BYTE_BUFFER_SIZE];
+    byte[] secondFileBuffer = new byte[BYTE_BUFFER_SIZE];
+    int[] resultFileBuffer = new int[(BYTE_BUFFER_SIZE) / 4];
     String fileNameForReturn = PATH_TO_TEMP_DIR_UNIX + TEMP_FILE_NAME +
             firstCountNumber + "_" + secondCountNumber + FILE_TYPE;
-    DataInputStream dataFromFirstFile = new DataInputStream(new FileInputStream(firstFile));
-    DataInputStream dataFromSecondFile = new DataInputStream(new FileInputStream(secondFile));
-    DataOutputStream dataToResultFile = new DataOutputStream(new FileOutputStream(
-            new File(fileNameForReturn)));
-    int firstFileBufferLength = 0;
-    int secondFileBufferLength = 0;
+    DataInputStream dataFromFirstFile = new DataInputStream(
+            new FileInputStream(firstFile));
+    DataInputStream dataFromSecondFile = new DataInputStream(
+            new FileInputStream(secondFile));
+    DataOutputStream dataToResultFile = new DataOutputStream(
+            new FileOutputStream(new File(fileNameForReturn)));
+    int firstFileBufferIntLength = 0;
+    int secondFileBufferIntLength = 0;
     int count = 0;
-    while ((firstFileBufferLength = dataFromFirstFile.read(firstFileBuffer)) > 0
-            || (secondFileBufferLength = dataFromSecondFile.read(secondFileBuffer)) > 0) {
-      firstFileBufferLength /= 4;
-      secondFileBufferLength /= 4;
-      int firstBufferCount;
-      int secondBufferCount;
+    while ((firstFileBufferIntLength =
+            readDataFromFile(dataFromFirstFile, firstFileBuffer)) > 0 ||
+            (secondFileBufferIntLength =
+                    readDataFromFile(dataFromSecondFile, secondFileBuffer)) > 0) {
+      int firstBufferCount = 0;
+      int secondBufferCount = 0;
       int[] firstFileBufferInt = Parser.parseByteArrayToIntArray(
               firstFileBuffer);
       int[] secondFileBufferInt = Parser.parseByteArrayToIntArray(
               secondFileBuffer);
-      for (firstBufferCount = 0, secondBufferCount = 0;
-           firstBufferCount < firstFileBufferLength &&
-                   secondBufferCount < secondFileBufferLength; count++) {
+      while (firstBufferCount < firstFileBufferIntLength &&
+              secondBufferCount < secondFileBufferIntLength) {
         if (firstFileBufferInt[firstBufferCount] <
                 secondFileBufferInt[secondBufferCount]) {
-          resultFileBuffer[count] = firstFileBufferInt[firstBufferCount];
-          firstBufferCount++;
+          resultFileBuffer[count++] = firstFileBufferInt[firstBufferCount++];
         } else {
-          resultFileBuffer[count] = secondFileBufferInt[secondBufferCount];
-          secondBufferCount++;
+          resultFileBuffer[count++] = secondFileBufferInt[secondBufferCount++];
         }
 
         if (count == resultFileBuffer.length - 1) {
           writeBufferToFile(resultFileBuffer, count, dataToResultFile);
           count = 0;
         }
-
       }
 
       if (count > 0) {
@@ -95,22 +93,24 @@ public class BigFileMerge {
         count = 0;
       }
 
-      if (firstBufferCount < firstFileBufferLength) {
-        int tempArrLength = firstFileBufferLength - firstBufferCount;
-        int[] tempArray = new int[tempArrLength];
-        System.arraycopy(firstFileBufferInt, 0, tempArray, 0, tempArrLength);
+      if (firstBufferCount < firstFileBufferIntLength) {
+        int tempArrLength = firstFileBufferIntLength - firstBufferCount;
+        int[] tempArray = Arrays.copyOf(firstFileBufferInt, tempArrLength);
         writeBufferToFile(tempArray, tempArrLength, dataToResultFile);
       }
 
-      if (secondBufferCount < secondFileBufferLength) {
-        int tempArrLength = secondFileBufferLength - secondBufferCount;
-        int[] tempArray = new int[tempArrLength];
-        System.arraycopy(secondFileBufferInt, 0, tempArray, 0, tempArrLength);
+      if (secondBufferCount < secondFileBufferIntLength) {
+        int tempArrLength = secondFileBufferIntLength - secondBufferCount;
+        int[] tempArray = Arrays.copyOf(secondFileBufferInt, tempArrLength);
         writeBufferToFile(tempArray, tempArrLength, dataToResultFile);
       }
     }
 
     return fileNameForReturn;
+  }
+
+  private int readDataFromFile(DataInputStream file, byte[] buffer) throws IOException {
+    return file.read(buffer) / 4;
   }
 
   private void resetCondition() {
@@ -126,7 +126,5 @@ public class BigFileMerge {
     } else {
       dataToResultFile.write(Parser.parseIntArrayToByteArray(buffer));
     }
-
   }
 }
-
