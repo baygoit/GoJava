@@ -45,41 +45,51 @@ public class BigFileMerge {
     return merge(newFilesList);
   }
 
+  private class Buffer {
+    private byte[] buffer = new byte[BYTE_BUFFER_SIZE];
+    private DataInputStream dataFromFile;
+    private int[] intBuffer = new int[BYTE_BUFFER_SIZE / 4];
+
+    public Buffer(File file) throws FileNotFoundException {
+      dataFromFile = new DataInputStream(new FileInputStream(file));
+    }
+
+    public int readDataFromFile() throws IOException {
+      int length = dataFromFile.read(buffer) / 4;
+      intBuffer = Parser.parseByteArrayToIntArray(buffer);
+      return length;
+    }
+
+    public int[] getIntBuffer() {
+      return intBuffer;
+    }
+  }
+
   /**
    * this function merge to file, save result to new temp file and return his path
    */
   public String mergeFiles(File firstFile, File secondFile) throws IOException {
-    byte[] firstFileBuffer = new byte[BYTE_BUFFER_SIZE];
-    byte[] secondFileBuffer = new byte[BYTE_BUFFER_SIZE];
+    Buffer firstFileBuffer = new Buffer(firstFile);
+    Buffer secondFileBuffer = new Buffer(secondFile);
     int[] resultFileBuffer = new int[(BYTE_BUFFER_SIZE) / 4];
     String fileNameForReturn = PATH_TO_TEMP_DIR_UNIX + TEMP_FILE_NAME +
             firstCountNumber + "_" + secondCountNumber + FILE_TYPE;
-    DataInputStream dataFromFirstFile = new DataInputStream(
-            new FileInputStream(firstFile));
-    DataInputStream dataFromSecondFile = new DataInputStream(
-            new FileInputStream(secondFile));
     DataOutputStream dataToResultFile = new DataOutputStream(
             new FileOutputStream(new File(fileNameForReturn)));
     int firstFileBufferIntLength = 0;
     int secondFileBufferIntLength = 0;
     int count = 0;
-    while ((firstFileBufferIntLength =
-            readDataFromFile(dataFromFirstFile, firstFileBuffer)) > 0 ||
-            (secondFileBufferIntLength =
-                    readDataFromFile(dataFromSecondFile, secondFileBuffer)) > 0) {
+    while ((firstFileBufferIntLength = firstFileBuffer.readDataFromFile()) > 0 ||
+            (secondFileBufferIntLength = secondFileBuffer.readDataFromFile()) > 0) {
       int firstBufferCount = 0;
       int secondBufferCount = 0;
-      int[] firstFileBufferInt = Parser.parseByteArrayToIntArray(
-              firstFileBuffer);
-      int[] secondFileBufferInt = Parser.parseByteArrayToIntArray(
-              secondFileBuffer);
       while (firstBufferCount < firstFileBufferIntLength &&
               secondBufferCount < secondFileBufferIntLength) {
-        if (firstFileBufferInt[firstBufferCount] <
-                secondFileBufferInt[secondBufferCount]) {
-          resultFileBuffer[count++] = firstFileBufferInt[firstBufferCount++];
+        if (firstFileBuffer.getIntBuffer()[firstBufferCount] <
+                secondFileBuffer.getIntBuffer()[secondBufferCount]) {
+          resultFileBuffer[count++] = firstFileBuffer.getIntBuffer()[firstBufferCount++];
         } else {
-          resultFileBuffer[count++] = secondFileBufferInt[secondBufferCount++];
+          resultFileBuffer[count++] = firstFileBuffer.getIntBuffer()[secondBufferCount++];
         }
 
         if (count == resultFileBuffer.length - 1) {
@@ -95,22 +105,18 @@ public class BigFileMerge {
 
       if (firstBufferCount < firstFileBufferIntLength) {
         int tempArrLength = firstFileBufferIntLength - firstBufferCount;
-        int[] tempArray = Arrays.copyOf(firstFileBufferInt, tempArrLength);
+        int[] tempArray = Arrays.copyOf(firstFileBuffer.getIntBuffer(), tempArrLength);
         writeBufferToFile(tempArray, tempArrLength, dataToResultFile);
       }
 
       if (secondBufferCount < secondFileBufferIntLength) {
         int tempArrLength = secondFileBufferIntLength - secondBufferCount;
-        int[] tempArray = Arrays.copyOf(secondFileBufferInt, tempArrLength);
+        int[] tempArray = Arrays.copyOf(secondFileBuffer.getIntBuffer(), tempArrLength);
         writeBufferToFile(tempArray, tempArrLength, dataToResultFile);
       }
     }
 
     return fileNameForReturn;
-  }
-
-  private int readDataFromFile(DataInputStream file, byte[] buffer) throws IOException {
-    return file.read(buffer) / 4;
   }
 
   private void resetCondition() {
