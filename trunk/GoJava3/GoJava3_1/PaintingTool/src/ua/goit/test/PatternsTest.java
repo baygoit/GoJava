@@ -16,15 +16,6 @@ import ua.goit.serialization.*;
  *
  */
 public class PatternsTest {
-
-   @Test
-    public void getGroupNameTest() {
-	Group ge = new GroupImpl("Group 1");
-	String expectedValue = "Group 1";
-	String actualValue = ge.getName();
-	assertEquals(expectedValue, actualValue);
-    }
-
    @Test
     public void elementAddingTest() {
 	Group ge1 = new GroupImpl("Group 1");
@@ -34,13 +25,5 @@ public class PatternsTest {
 	String expectedValue = "Group 2";
 	String actualValue = innerGroup.getName();
 	assertEquals(expectedValue, actualValue);
-    }
-
-    @Test
-    public void gettingPointCoordinateTest() {
-	Point point = new PointImpl(5, 6);
-	String expectedValue = "(5, 6)";
-	String actualValue = point.getCoordinate();
-	assertEquals(expectedValue, actualValue);
-    }
+    }  
 }
