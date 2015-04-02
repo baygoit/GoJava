@@ -10,10 +10,9 @@ import java.util.Scanner;
 3) Input: 10 8 38 1 99  Output: 1 8 10 38 99 */
 
 public class MergeSort {
-  
-  public static int[] array;
 
-  public static void getArray() {
+  public static int[] getArray() {
+    int[] array;
     System.out.println("Input array: ");
     Scanner scanner = new Scanner(System.in);
     String string = scanner.nextLine();
@@ -23,34 +22,33 @@ public class MergeSort {
     for (int i = 0; i < stringArray.length; i++) {
       array[i] = Integer.parseInt(stringArray[i]);
     }
+    return array;
   }
 
-  public static void sortArray() {
+  public static int[] sortArray(int[] array) {
     int[] tempArray = new int[array.length];
-    sort(tempArray, 0, array.length - 1);
+    sort(array, tempArray, 0, array.length - 1);
+    return array;
   }
 
-  public static void sort(int[] tempArray, int start, int end) {
+  public static void sort(int[] array, int[] tempArray, int start, int end) {
     if (end == start) {
       return;
     } else {
       int middle = safeFindMiddle(start, end);
       int middlePlusOne = middle + 1;
-      sort(tempArray, start, middle);
-      sort(tempArray, middlePlusOne, end);
-      merge(tempArray, start, middlePlusOne, end);
+      sort(array, tempArray, start, middle);
+      sort(array, tempArray, middlePlusOne, end);
+      merge(array, tempArray, start, middlePlusOne, end);
     }
   }
 
-  public static final int safeFindMiddle(int a, int b) {
-    if (b > 0 ? a > Integer.MAX_VALUE - b
-            : a < Integer.MIN_VALUE - b) {
-      return a + b >>> 1;
-    }
-    return (a + b) / 2;
+  public static int safeFindMiddle(int a, int b) {
+    return a + b >>> 1;
   }
 
-  public static void merge(int[] tempArray, int cursor, int middlePlusOne, int end) {
+  public static int[] merge(int[] array, int[] tempArray, int cursor, int
+          middlePlusOne, int end) {
     int index = 0;
     int start = cursor;
     int middle = middlePlusOne - 1;
@@ -71,9 +69,10 @@ public class MergeSort {
     for (int i = 0; i < countArrayElements; i++) {
       array[cursor + i] = tempArray[i];
     }
+    return array;
   }
 
-  public static void printSortedArray() {
+  public static void printSortedArray(int[] array) {
     System.out.println("Sorted array: ");
     for (int i = 0; i < array.length; i++) {
       System.out.print(array[i]);
@@ -86,8 +85,8 @@ public class MergeSort {
   }
 
   public static void main(String[] args) {
-    getArray();
-    sortArray();
-    printSortedArray();
+    int array[] = getArray();
+    sortArray(array);
+    printSortedArray(array);
   }
 }
