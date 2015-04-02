@@ -38,8 +38,8 @@ public class Arrays {
     private static void runMergeSort(int[] buffer, File source) throws IOException {
 	File input1 = new File("tmpResult1.txt");
 	File input2 = new File("tmpResult2.txt");
+	File tmpInput;
 	boolean isEndOfFile = false;
-	boolean isInput1Input2Order = false;
 	FileInputStream inputFile = null;
 	DataInputStream dis = null;
 	try {
@@ -50,14 +50,10 @@ public class Arrays {
 	    while (dis.available() != 0) {
 		buffer = readInt(buffer, dis);
 		mergeSort(buffer, 0, buffer.length - 1);
-		if (isInput1Input2Order) {
-		    checkIfFileEndsAndMerge(buffer, input1, input2, source, dis);
-		    isInput1Input2Order = false;
-		}
-		else {
-		    checkIfFileEndsAndMerge(buffer, input2, input1, source, dis);
-		    isInput1Input2Order = true;
-		}
+		checkIfFileEndsAndMerge(buffer, input1, input2, source, dis);
+		tmpInput = input1;
+		input1 = input2;
+		input2 = tmpInput;
 	    }
 	    dis.close();
 	    inputFile.close();
@@ -88,11 +84,8 @@ public class Arrays {
     private static void checkIfFileEndsAndMerge(int[] buffer, File input, 
 	    File output, File source, DataInputStream dis) throws IOException {
 	boolean isEndOfFile = (dis.available() == 0);
-	if (!isEndOfFile) {
-	    mergeWithFile(buffer, input, output);
-	} else {
-	    mergeWithFile(buffer, input, source);
-	}
+	File writeTo =isEndOfFile ? source : output;
+	mergeWithFile(buffer, input, writeTo);	
     }
 
     // Merge buffer array with temp file
