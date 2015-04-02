@@ -10,7 +10,11 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class XMLSerializator extends Serializator {
-    private StringBuffer buffer = new StringBuffer();
+    private StringBuffer buffer = null;
+    
+  private XMLSerializator() {
+    buffer = new StringBuffer();
+  }
 
     public  void openGroupTagWithAttr(Group group) {
 	buffer.append("<");
