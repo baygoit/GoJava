@@ -29,7 +29,7 @@ public class App {
           strValues.add(bfr.readLine());
         }
         intValues = convertStrListToIntList(strValues);
-        intValues = MergSort.SortArray(intValues);
+        intValues = MergSort.sortArray(intValues);
         fileManager.writeToFile(intValues);
       }
       fileManager.margeAllFiles();

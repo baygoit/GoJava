@@ -12,7 +12,7 @@ public class MergSort {
     final List<Integer> inParam = new LinkedList<Integer>(Arrays.asList(32, -5,
         0, 7, 92, 3, 5, 65, 23, 123, 7, 9));
 
-    List<Integer> res = SortArray(inParam.subList(0, inParam.size() / 2),
+    List<Integer> res = sortArray(inParam.subList(0, inParam.size() / 2),
         inParam.subList(inParam.size() / 2, inParam.size()));
 
     System.out.println("-----------------");
@@ -20,28 +20,28 @@ public class MergSort {
 
   }
 
-  static List<Integer> SortArray(List<Integer> inParam) {
+  static List<Integer> sortArray(List<Integer> inParam) {
 
-    return SortArray(inParam.subList(0, inParam.size() / 2),
+    return sortArray(inParam.subList(0, inParam.size() / 2),
         inParam.subList(inParam.size() / 2, inParam.size()));
   }
 
-  static List<Integer> SortArray(List<Integer> argList1, List<Integer> argList2) {
+  static List<Integer> sortArray(List<Integer> listOne, List<Integer> listTwo) {
 
     List<Integer> resultList = new LinkedList<Integer>();
 
-    if (argList1.size() > 1) {
-      argList1 = SortArray(argList1.subList(0, argList1.size() / 2),
-          argList1.subList(argList1.size() / 2, argList1.size()));
+    if (listOne.size() > 1) {
+      listOne = sortArray(listOne.subList(0, listOne.size() / 2),
+          listOne.subList(listOne.size() / 2, listOne.size()));
     }
 
-    if (argList2.size() > 1) {
-      argList2 = SortArray(argList2.subList(0, argList2.size() / 2),
-          argList2.subList(argList2.size() / 2, argList2.size()));
+    if (listTwo.size() > 1) {
+      listTwo = sortArray(listTwo.subList(0, listTwo.size() / 2),
+          listTwo.subList(listTwo.size() / 2, listTwo.size()));
     }
 
-    Iterator<Integer> iter1 = argList1.iterator();
-    Iterator<Integer> iter2 = argList2.iterator();
+    Iterator<Integer> iter1 = listOne.iterator();
+    Iterator<Integer> iter2 = listTwo.iterator();
 
     int val1 = iter1.next();
     int val2 = iter2.next();
