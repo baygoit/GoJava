@@ -2,14 +2,11 @@ package ua.goit.rotatedarray;
 
 public class RotatedArray {
 
-  public static void main(String[] args) {
-    int i = RotatedArray.binarySearch(new int[] { 4, 6, 8, 3 }, 3);
-
-    System.out.println("Res=" + i);
-
-  }
-
   public static int binarySearch(int[] array, int target) {
+
+    if (array.length <= 0) {
+      return -1;
+    }
 
     int firstElement = array[0];
     int pos = array.length / 2;
@@ -17,7 +14,7 @@ public class RotatedArray {
     int rightBorder = array.length - 1;
     int res = -1;
 
-    while (rightBorder - leftBorder > 0) {
+    while (leftBorder <= rightBorder) {
       pos = leftBorder + (rightBorder - leftBorder) / 2;
       firstElement = array[leftBorder];
 
