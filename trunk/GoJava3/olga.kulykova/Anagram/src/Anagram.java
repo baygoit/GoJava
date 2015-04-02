@@ -10,16 +10,15 @@ public class Anagram {
         StringBuilder newText = new StringBuilder();
 
         for (int i = 0; i < text.length(); i++) {
-            if (' ' != text.charAt(i)) {
-                word.append(text.charAt(i));
-            } else {
+            if (' ' == text.charAt(i)) {
                 newText.append(word.reverse());
-                word.delete(0, word.length());
+                word = new StringBuilder();
                 newText.append(" ");
+            } else {
+                word.append(text.charAt(i));
             }
         }
         newText.append(word.reverse());
-
         System.out.println(newText);
     }
 }
