@@ -12,20 +12,25 @@ public class LRUCache {
   private Node last;
   
   private static class Node {
+    Integer key;
     Integer value;
     Node next;
     Node prev;
 
-    Node(Integer value) {
-        this.value = value;
+    Node(Integer key, Integer value) {
+      this.key = key;
+      this.value = value;
     }
   }
   
   private void removeFirst(){
-    if (cacheMap.size() > 1) {
-      first.next.prev = null;
-      first.next = null;
+    int size = getSize();
+    if (size > 0) {
+      cacheMap.remove(first.key);
+    }
+    if (size > 1) {
       first = first.next; 
+      first.prev = null;
     } else {
       first = null;
       last = null;
@@ -33,11 +38,12 @@ public class LRUCache {
   }
   
   private void addToEnd(Node element){
-    if (cacheMap.size() == 0) {
+    if (getSize() == 0) {
       first = element;
     } else {
       last.next = element;
       element.prev = last;
+      element.next = null;
     }
     last = element;
   }
@@ -46,12 +52,11 @@ public class LRUCache {
     if (element == last){
       return;
     }
-    if (element == null){
+    if (last == null){
       addToEnd(element);
       return;
     } else if (first == element) {
-      first.next = null;
-      first = element.next;
+      first = first.next;
       first.prev = null;
     } else {
       element.prev.next = element.next;
@@ -60,6 +65,8 @@ public class LRUCache {
       element.next = null;
     }
     last.next = element;
+    element.prev = last;
+    element.next = null;
     last = element;
   }
 
@@ -76,7 +83,7 @@ public class LRUCache {
       if (getSize() == sizeLimit){
         removeFirst();
       }
-      node = new Node(value);
+      node = new Node(key,value);
       addToEnd(node);
       cacheMap.put(key, node);
     }
@@ -99,7 +106,7 @@ public class LRUCache {
   public String getStringValue() {
     StringBuilder sb = new StringBuilder();
     for (Node i = first; i != null; i = i.next) {
-      sb.append(i.value).append(" ");
+      sb.append(i.key).append(" ");
     }
     return sb.toString();
   }
