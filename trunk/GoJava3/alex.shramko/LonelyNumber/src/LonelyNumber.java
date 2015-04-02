@@ -17,9 +17,7 @@ public class LonelyNumber {
     int result = 0;
     for (int i = 0; i < decimalCapasity; i++) {
       if (resultArray[i] % 3 != 0) {
-        result += Math.pow(2, i);
-      } else {
-        //do nothing
+        result = result | ( 1 << i );
       }
     }
     return result;
