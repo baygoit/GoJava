@@ -39,7 +39,7 @@ public class Arrays {
 	File input1 = new File("tmpResult1.txt");
 	File input2 = new File("tmpResult2.txt");
 	boolean isEndOfFile = false;
-	boolean flag = false;
+	boolean isInput1Input2Order = false;
 	FileInputStream inputFile = null;
 	DataInputStream dis = null;
 	try {
@@ -50,13 +50,13 @@ public class Arrays {
 	    while (dis.available() != 0) {
 		buffer = readInt(buffer, dis);
 		mergeSort(buffer, 0, buffer.length - 1);
-		if (flag) {
+		if (isInput1Input2Order) {
 		    checkIfFileEndsAndMerge(buffer, input1, input2, source, dis);
-		    flag = false;
+		    isInput1Input2Order = false;
 		}
 		else {
 		    checkIfFileEndsAndMerge(buffer, input2, input1, source, dis);
-		    flag = true;
+		    isInput1Input2Order = true;
 		}
 	    }
 	    dis.close();
@@ -134,7 +134,7 @@ public class Arrays {
 		}
 	    }
 	} catch (Exception e) {
-	    throw new RuntimeException("Something wrong with file.");
+	    throw new RuntimeException("Something wrong with file.", e);
 	} finally {
 	    dos.flush();
 	    dos.close();
