@@ -1,10 +1,14 @@
+import java.time.Clock;
 import java.util.*;
 
 public class DivideNumbers {
 
+
   public static void main(String[] args) {
     DivideNumbers divideNumbers = new DivideNumbers();
     divideNumbers.divideNumbers(4, 2);
+    int operator = 3;
+//    System.out.println(a / 2 == 1 ? "foo" : 2);
 
   }
 
