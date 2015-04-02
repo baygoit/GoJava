@@ -8,57 +8,101 @@ import java.util.Map;
 public class LRUCache {
 
   private int sizeLimit;
-  private Map<Integer,Integer> cacheMap = new HashMap<>();
-  private List<Integer> cacheList = new LinkedList<>();
+  private Map<Integer,Node> cacheMap = new HashMap<>();
+
+  private Node first;
+  private Node last;
   
+  private static class Node {
+    Integer value;
+    Node next;
+    Node prev;
+
+    Node(Integer value) {
+        this.value = value;
+    }
+  }
+  
+  private void removeFirst(){
+    if (cacheMap.size() > 1) {
+      first.next.prev = null;
+      first.next = null;
+      first = first.next; 
+    } else {
+      first = null;
+      last = null;
+    }
+  }
+  
+  private void addToEnd(Node element){
+    if (cacheMap.size() == 0) {
+      first = element;
+    } else {
+      last.next = element;
+      element.prev = last;
+    }
+    last = element;
+  }
+
+  private void moveElementToEnd(Node element){
+    if (element == last){
+      return;
+    }
+    if (element == null){
+      addToEnd(element);
+      return;
+    } else if (first == element) {
+      first.next = null;
+      first = element.next;
+      first.prev = null;
+    } else {
+      element.prev.next = element.next;
+      element.next.prev = element.prev;
+      element.prev = last;
+      element.next = null;
+    }
+    last.next = element;
+    last = element;
+  }
+
   public LRUCache(int sizeLimit) {
     this.sizeLimit = sizeLimit;
   }
 
   public void put(int key, int value) {
-    int index = getIndex(key);
-    if (getSize() == sizeLimit || index != -1){
-      if (index == -1){
-        int keyToRemove = cacheList.get(0);
-        cacheMap.remove(keyToRemove);
-        cacheList.remove(0);
-      } else {
-        cacheMap.remove(key);
-        cacheList.remove(index);
+    Node node = cacheMap.get(key);
+    if (node != null){
+      moveElementToEnd(node);
+      node.value = value;
+    } else {
+      if (getSize() == sizeLimit){
+        removeFirst();
       }
-    } 
-    cacheMap.put(key, value);
-    cacheList.add(key);
+      node = new Node(value);
+      addToEnd(node);
+      cacheMap.put(key, node);
+    }
   }
 
   public Integer get(int key) {
     Integer result = null;
-    int index = getIndex(key);
-    if (index != -1){
-      cacheList.remove(index);
-      cacheList.add(key);
-      result = cacheMap.get(key);
+    Node node = cacheMap.get(key);
+    if (node != null){
+      moveElementToEnd(node);
+      result = node.value;
     }
     return result;
-  }
-
-  private int getIndex(int key) {
-    return cacheList.indexOf(key);
   }
 
   public int getSize() {
     return cacheMap.size();
   }
 
-  public String getListToString() {
-    StringBuilder builder = new StringBuilder();
-    for (Integer element : cacheList) {
-      builder.append(element).append(" ");
+  public String getStringValue() {
+    StringBuilder sb = new StringBuilder();
+    for (Node i = first; i != null; i = i.next) {
+      sb.append(i.value).append(" ");
     }
-    return builder.toString();
-  }
-
-  public Object[] getList() {
-    return cacheList.toArray();
+    return sb.toString();
   }
 }

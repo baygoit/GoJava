@@ -35,7 +35,8 @@ public class TestCache {
     cache.put(4,40);
     cache.put(5,50);
     cache.put(2,20);
-    Integer[] expectedResult = {1, 3, 4, 5, 2};
-    assertArrayEquals(expectedResult, cache.getList());
+    //String expectedResult = {1, 3, 4, 5, 2};
+    String expectedResult = "10 30 40 50 20 ";
+    assertEquals(expectedResult, cache.getStringValue());
   }
 }
