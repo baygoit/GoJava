@@ -3,26 +3,26 @@ import java.util.Scanner;
 public class LonelyNumber {
 
   public static int lonelyNumber(int[] array) {
-    int[] resultArray = new int[32];
-    String result = "";
+    final int decimalCapasity = 32;
+    int[] resultArray = new int[decimalCapasity];
     for (int i : array) {
       int mask = 1;
-      for (int j = 0; j < 32; j++) {
+      for (int j = 0; j < decimalCapasity; j++) {
         if ((i & mask) == mask) {
           resultArray[j]++;
         }
         mask <<= 1;
       }
     }
-    for (int i = 0; i < 32; i++) {
-      if (resultArray[i] % 3 == 0) {
-        result += 0;
+    int result = 0;
+    for (int i = 0; i < decimalCapasity; i++) {
+      if (resultArray[i] % 3 != 0) {
+        result += Math.pow(2, i);
       } else {
-        result += 1;
+        //do nothing
       }
     }
-    result = new StringBuffer(result).reverse().toString();
-    return Integer.parseInt(result, 2);
+    return result;
   }
 
   public static void main(String[] args) {
