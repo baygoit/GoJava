@@ -9,28 +9,28 @@ import org.junit.Test;
 import java.io.*;
 import java.util.Arrays;
 import static ua.goit.alg.sortBigFile.Constants.*;
+
 import static org.junit.Assert.assertArrayEquals;
 
 public class TestMainFunction {
-
   private static long duration = 0;
-  private static final String TEST_FILE ="testFile.txt";
-  private static final String PATH_TO_TEST_FILE ="src/ua/goit/alg/test/testFiles/";
-  private static final String RESULT_FILE ="result.txt";
-   @BeforeClass
-   public static void init() {
-     BigFileMerge fileMerge = new BigFileMerge();
-     try {
-       long startTime = System.nanoTime();
-       fileMerge.mergeSortFile(BIG_FILE_UNIX, PATH_TO_BIG_FILE + RESULT_FILE_NAME);
-       long endTime = System.nanoTime();
+  private static final String TEST_FILE = "testFile.txt";
+  private static final String PATH_TO_TEST_FILE = "src/ua/goit/alg/test/testFiles/";
+  private static final String RESULT_FILE = "result.txt";
 
-       duration = (endTime - startTime)/1000000/1000;
-     } catch (IOException e) {
-       throw new RuntimeException(e.getMessage());
-     }
+  @BeforeClass
+  public static void init() {
+    BigFileMerge fileMerge = new BigFileMerge();
+    try {
+      long startTime = System.nanoTime();
+      fileMerge.mergeSortFile(BIG_FILE_UNIX, PATH_TO_BIG_FILE + RESULT_FILE_NAME);
+      long endTime = System.nanoTime();
+      duration = (((endTime - startTime) / 1000000) / 1000); // ((endTime - startTime) / 1000000(in ms)) / 1000 (in sec)
+    } catch (IOException e) {
+      throw new RuntimeException(e.getMessage());
+    }
+  }
 
-   }
   @Test
   public void testFileSizeBeforeAndAfterSort() {
     Assert.assertTrue(
@@ -45,20 +45,26 @@ public class TestMainFunction {
 
   @Test
   public void testIfFileRealSort() throws IOException {
-    String fileAfterSort;
-    int[] expecteds = {6, 8, 1, 0, 3, 2, 5, 5, 3, 12, 32, 43, 53, 12, 23, 34, 56, 67, 2, 34 , 345,2 , 234, 236, 765};
-    byte[] actuals = new byte[expecteds.length * 4];
-    DataOutputStream dataToFile = new DataOutputStream(new FileOutputStream(new File(PATH_TO_TEST_FILE + TEST_FILE)));
-    dataToFile.write(Parser.parseIntArrayToByteArray(expecteds));
-    dataToFile.close();
-
     BigFileMerge fileMerge = new BigFileMerge();
-    fileAfterSort = fileMerge.mergeSortFile(PATH_TO_TEST_FILE + TEST_FILE, RESULT_FILE);
-    DataInputStream dataFromFile = new DataInputStream( new FileInputStream(fileAfterSort));
-    Arrays.sort(expecteds);
-    dataFromFile.read(actuals);
-    assertArrayEquals(expecteds, Parser.parseByteArrayToIntArray(actuals));
+    String pathToTempFile = PATH_TO_TEST_FILE + TEST_FILE;
+    int[] expected = {6, 8, 1, 0, 3, 2, 5, 5, 3, 12, 32, 43, 53, 12, 23, 34, 56, 67, 2, 34, 345, 2, 234, 236, 765};
+    byte[] actual = new byte[expected.length * 4];
+    writeToFile(expected, pathToTempFile);
+    fileMerge.mergeSortFile(pathToTempFile, RESULT_FILE);
+    readFromFile(RESULT_FILE, actual);
+    Arrays.sort(expected);
+    assertArrayEquals(expected, Parser.parseByteArrayToIntArray(actual));
+  }
 
+  private void readFromFile(String filePath, byte[] actuals) throws IOException {
+    DataInputStream dataFromFile = new DataInputStream(new FileInputStream(filePath));
+    dataFromFile.read(actuals);
+  }
+
+  private void writeToFile(int[] intArray, String filePath) throws IOException {
+    DataOutputStream dataToFile = new DataOutputStream(new FileOutputStream(new File(filePath)));
+    dataToFile.write(Parser.parseIntArrayToByteArray(intArray));
+    dataToFile.close();
   }
 
 }
