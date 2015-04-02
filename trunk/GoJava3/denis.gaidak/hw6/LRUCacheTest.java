@@ -1,9 +1,5 @@
 
 import org.junit.Test;
-import sun.misc.*;
-
-import java.util.LinkedList;
-
 import static org.junit.Assert.assertEquals;
 
 public class LRUCacheTest {
