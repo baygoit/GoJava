@@ -8,11 +8,11 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 /**
- * cLass for sorting integer numbers array in file.
- * Algorithm: read from source file data to array with bufSize length.
+ * cLass for sorting integer numbers array in the file.
+ * Algorithm: read from source file data to array with BUF_SIZE length.
  * Sorting array with mergeSort. Writing array to temporary file.
  * Reading next data from source, sorting and merge with temporary file to second temporary file.
- * Finally, when last data is read and sorted, it merge it to source file. 
+ * Finally, when last data is read and sorted, it merge to source file. 
  */
 public class Arrays {
     private final static int BUF_SIZE = 4;
@@ -50,7 +50,9 @@ public class Arrays {
 	    while (dis.available() != 0) {
 		buffer = readInt(buffer, dis);
 		mergeSort(buffer, 0, buffer.length - 1);
-		checkIfFileEndsAndMerge(buffer, input1, input2, source, dis);
+		
+		/* On each iteration swap input and output file */
+		writeToFile(buffer, input1, input2, source, dis);
 		tmpInput = input1;
 		input1 = input2;
 		input2 = tmpInput;
@@ -67,7 +69,7 @@ public class Arrays {
 	}
     }
 
-    // Read data from file to buffer array
+    /* Read data from file to buffer array */
     private static int[] readInt(int[] buffer, DataInputStream dis) 
 	    throws IOException {
 	for (int i = 0; i < buffer.length; i++) {
@@ -80,15 +82,15 @@ public class Arrays {
 	return buffer;
     }
 
-    // Switch input and output files
-    private static void checkIfFileEndsAndMerge(int[] buffer, File input, 
+    /* Switch output files from tmp to source*/
+    private static void writeToFile(int[] buffer, File input, 
 	    File output, File source, DataInputStream dis) throws IOException {
 	boolean isEndOfFile = (dis.available() == 0);
 	File writeTo =isEndOfFile ? source : output;
 	mergeWithFile(buffer, input, writeTo);	
     }
 
-    // Merge buffer array with temp file
+    /* Merge buffer array with tmp file */
     private static void mergeWithFile(int[] buffer, File input, File output) 
 	    throws IOException {
 	FileInputStream inputFile = null;
@@ -138,7 +140,7 @@ public class Arrays {
 
     }
 
-    // Sorting array
+    /* Sorting array */
     private static void mergeSort(int []m, int p, int r) {
 	if (p < r) {
 	    int q = (p + r) / 2;
