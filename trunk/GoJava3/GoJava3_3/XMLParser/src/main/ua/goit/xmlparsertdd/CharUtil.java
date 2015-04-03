@@ -3,11 +3,13 @@ package ua.goit.xmlparsertdd;
 import java.util.HashSet;
 import java.util.Set;
 
-public class charUtil {
+public class CharUtil {
   static Set<Character> nameStartChar= new HashSet<Character>();
   static Set<Character> nameChar= new HashSet<Character>();
   
   static{
+    nameStartChar.add(':');
+    nameStartChar.add('_');
     addCharsToSet('a','z',nameStartChar );
     addCharsToSet('A','Z',nameStartChar );
     addCharsToSet(0xC0, 0xD6, nameStartChar );
@@ -22,6 +24,13 @@ public class charUtil {
     addCharsToSet(0xF900, 0xFDCF, nameStartChar );
     addCharsToSet(0xFDF0, 0xFFFD, nameStartChar );
     addCharsToSet(0x10000, 0xEFFFF, nameStartChar );
+    
+    addCharsToSet(0x10000, 0xEFFFF, nameChar );
+    nameChar.add('-');
+    nameChar.add('.');
+    nameChar.add((char)0xB7);
+    addCharsToSet('0','9',nameChar );
+    
     
   };
   static void addCharsToSet(char start,char end, Set charSet){
@@ -43,7 +52,7 @@ public class charUtil {
   }
   
   
-  private charUtil(){}
+  private CharUtil(){}
   
   static public boolean isEmptyChar(char symb){
     boolean res = false;
