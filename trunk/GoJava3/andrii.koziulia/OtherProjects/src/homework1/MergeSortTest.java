@@ -1,7 +1,13 @@
 package homework1;
 
 import org.junit.Test;
+
+import java.io.*;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Random;
+
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 
 public class MergeSortTest {
@@ -39,7 +45,65 @@ public class MergeSortTest {
   }
 
   @Test
-  public void sortBigFile() {
+  public void sortFileContainingSmallReverseArrayFrom9To0() throws IOException {
+    File tempFile = createTempFile();
+    DataOutputStream outputStream = null;
+    try {
+      outputStream = new DataOutputStream(new FileOutputStream(tempFile));
+      for (int i = 9; i >= 0; i--) {
+        outputStream.writeInt(i);
+      }
+    } finally {
+      outputStream.close();
+    }
+    File sortedFile = MergeSort.mergeSort(tempFile);
+    int[] result = new int[10];
+    int[] expected = new int[10];
+    DataInputStream inputStream = new DataInputStream(new FileInputStream(sortedFile));
+    for (int i = 0; i < 10; i++) {
+      result[i] = inputStream.readInt();
+      expected[i] = i;
+    }
+    assertArrayEquals(expected, result);
+  }
 
+  @Test
+  public void sortFileContainingShuffledValuesFrom1to10000() {
+
+  }
+
+  private static void shuffleArray(int[] array) {
+    Random rnd = new Random();
+    for (int i = array.length - 1; i > 0; i--) {
+      int index = rnd.nextInt(i + 1);
+      int a = array[index];
+      array[index] = array[i];
+      array[i] = a;
+    }
+  }
+
+  @Test
+  public void emptyFile() throws IOException {
+    FileInputStream fileInputStream = null;
+    try {
+      File tempFile = createTempFile();
+      File sortedFile = MergeSort.mergeSort(tempFile);
+      fileInputStream = new FileInputStream(sortedFile);
+      assertEquals(-1, fileInputStream.available());
+    } finally {
+      fileInputStream.close();
+    }
+  }
+
+
+  private static File createTempFile() {
+    File tempFile = null;
+    try {
+      tempFile = File.createTempFile("MergeSort_tempFile", ".tmp");
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
+    tempFile.deleteOnExit();
+    return tempFile;
   }
 }

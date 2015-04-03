@@ -2,7 +2,7 @@ package homework1;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
 
 /**
  * Created by Alex on 16.03.2015.
@@ -52,8 +52,8 @@ public class MergeSort {
     /**
      * Function is used for sorting big files by the way of dividing them into smaller portions 10 KB each. Function
      * requires inputting a file with Integers written using DataInputStream. It returns sorted file with Integers
-     * written using DataOutputStream. The result file is located in the same directory with the source file.
-     * The name of the file will be "Sorted_" + name of the source file.
+     * written using DataOutputStream. It is located in the same directory with the source file.The name of the file
+     * is "Sorted_" + name of the source file.
      * @param file
      * @return sorted file located in the same directory with the source file
      */
@@ -69,15 +69,19 @@ public class MergeSort {
 
     private static File sortBigFile(File file) throws IOException {
         ArrayList<File> tempFiles = new ArrayList<File>();
-        createTempFiles(file, tempFiles);
+        splitToTempFiles(file, tempFiles);
         File resultFile = new File(file.getParent(), "Sorted_" + file.getName());
         resultFile.createNewFile();
         mergeTempFiles(tempFiles);
-        combineTwoFiles(tempFiles.get(0), tempFiles.get(1), resultFile);
+        if (tempFiles.size()>1) {
+            combineTwoFiles(tempFiles.get(0), tempFiles.get(1), resultFile);
+        } else {
+            combineTwoFiles(tempFiles.get(0), resultFile, resultFile);
+        }
         return resultFile;
     }
 
-    private static void createTempFiles(File file, ArrayList<File> tempFiles) throws IOException {
+    private static void splitToTempFiles(File file, ArrayList<File> tempFiles) throws IOException {
         DataInputStream dataInputStream = null;
         try {
             dataInputStream = new DataInputStream(new BufferedInputStream(new FileInputStream(file)));
@@ -90,9 +94,9 @@ public class MergeSort {
                     int intValue = getIntegerFromFourBytes(buffer, i);
                     tempValues[i/4] = intValue;
                 }
-                mergeSort(tempValues, 0, valuesInBuffer/4);
+                mergeSort(tempValues, 0, valuesInBuffer / 4 - 1);
                 File tempFile = createTempFile(tempFiles);
-                writeToFile(tempFile, tempValues, valuesInBuffer/4);
+                writeToFile(tempFile, tempValues, valuesInBuffer / 4);
             }
         } finally {
             dataInputStream.close();
@@ -100,8 +104,8 @@ public class MergeSort {
     }
 
     private static int getIntegerFromFourBytes(byte[] byteArray, int startIndex) {
-        int value = ((0xFF & byteArray[startIndex]) << 24) | ((0xFF & byteArray[startIndex+1]) << 16) |
-                ((0xFF & byteArray[startIndex+2]) << 8) | (0xFF & byteArray[startIndex+3]);
+        int value = (((int)byteArray[startIndex]) << 24) + (((int)byteArray[startIndex+1]) << 16) +
+                (((int)byteArray[startIndex+2]) << 8) + ((int)byteArray[startIndex+3]);
         return value;
     }
 
@@ -122,7 +126,7 @@ public class MergeSort {
         try {
             outputStream = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(file)));
             for (int i = 0; i < numberToWrite; i++) {
-                outputStream.write(intArray[i]);
+                outputStream.writeInt(intArray[i]);
             }
         } finally {
             outputStream.close();
@@ -149,13 +153,29 @@ public class MergeSort {
             outputStream = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(resultFile)));
             byte[] firstBuffer = new byte[BYTES_IN_TEN_KILOBYTES];
             byte[] secondBuffer = new byte[BYTES_IN_TEN_KILOBYTES];
-            int elementsInFirst = firstFileInputStream.read(firstBuffer);
+            int elementsInFirst = 0;
             int firstPointer = 0;
-            int elementsInSecond = secondFileInputStream.read(secondBuffer);
+            int value1 = 0;
+            if (firstFileInputStream.available()>0) {
+                elementsInFirst = firstFileInputStream.read(firstBuffer);
+                value1 = getIntegerFromFourBytes(firstBuffer, firstPointer);
+            }
+            int elementsInSecond = 0;
             int secondPointer = 0;
-            while (firstPointer < elementsInFirst || secondPointer < elementsInSecond) {
-                int value1 = getIntegerFromFourBytes(firstBuffer, firstPointer);
-                int value2 = getIntegerFromFourBytes(secondBuffer, secondPointer);
+            int value2 = 0;
+            if (secondFileInputStream.available()>0) {
+                elementsInSecond = secondFileInputStream.read(secondBuffer);
+                value2 = getIntegerFromFourBytes(secondBuffer, secondPointer);
+            } else {
+                value2 = Integer.MAX_VALUE;
+            }
+            while (firstPointer < elementsInFirst - 1 || secondPointer < elementsInSecond - 1) {
+                if (firstPointer < elementsInFirst - 1) {
+                    value1 = getIntegerFromFourBytes(firstBuffer, firstPointer);
+                }
+                if (secondPointer < elementsInSecond - 1) {
+                    value2 = getIntegerFromFourBytes(secondBuffer, secondPointer);
+                }
                 if (value1 <= value2) {
                     outputStream.writeInt(value1);
                     firstPointer += 4;
@@ -163,11 +183,13 @@ public class MergeSort {
                     outputStream.writeInt(value2);
                     secondPointer += 4;
                 }
-                if (firstPointer == elementsInFirst && firstFileInputStream.available() > 0) {
+                if (firstPointer == elementsInFirst - 1 && firstFileInputStream.available() > 0) {
                     elementsInFirst = firstFileInputStream.read(firstBuffer);
+                    firstPointer = 0;
                 }
-                if (secondPointer == elementsInSecond && secondFileInputStream.available() > 0) {
+                if (secondPointer == elementsInSecond - 1 && secondFileInputStream.available() > 0) {
                     elementsInSecond = secondFileInputStream.read(secondBuffer);
+                    secondPointer = 0;
                 }
             }
         } finally {
