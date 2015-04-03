@@ -54,13 +54,18 @@ public class charUtil {
   } 
   static public boolean isNameChar(char ch){
     boolean res = false;
-    res = ((ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z'));
+    
+    if(nameStartChar.contains(ch)){
+      res = true;
+    }else{
+      res = nameChar.contains(ch);
+    }
     return res;
   }
   
   static public boolean isNameStartChar(char ch){
     boolean res = false;
-    res = ((ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z') || (ch >= '1' && ch <= '0')) ;
+    res = nameStartChar.contains(ch);
     return res;
   } 
 
