@@ -69,9 +69,8 @@ public class MergeSortTest {
 
 
   @Test
-  public void sortFileContainingShuffledValuesFrom0to9999999() throws IOException {
+  public void sortFileContainingShuffledValuesFrom0to999999999() throws IOException {
     int VALUES_TO_TEST = 100000000;
-    System.out.println(Integer.MAX_VALUE);
     // Test with 100 million values completes in about 3 minutes
     int[] expected = new int[VALUES_TO_TEST];
     int[] testArray = new int[VALUES_TO_TEST];
