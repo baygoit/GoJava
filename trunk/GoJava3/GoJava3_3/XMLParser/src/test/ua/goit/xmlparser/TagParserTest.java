@@ -1,9 +1,6 @@
-package test.ua.goit.xmlparser;
+package ua.goit.xmlparser;
 
 import org.junit.Test;
-import main.ua.goit.xmlparser.Tag;
-import main.ua.goit.xmlparser.TagParser;
-import main.ua.goit.xmlparser.TagType;
 
 import java.util.HashMap;
 import java.util.Map;

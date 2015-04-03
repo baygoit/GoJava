@@ -1,7 +1,7 @@
-package main.ua.goit.xmlparsertdd;
+package ua.goit.xmlparsertdd;
 
-import main.ua.goit.xmlparser.Handler;
-import main.ua.goit.xmlparser.State;
+import ua.goit.xmlparser.Handler;
+import ua.goit.xmlparser.State;
 
 import java.io.*;
 import java.util.Map;

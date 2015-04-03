@@ -1,9 +1,5 @@
-package test.ua.goit.xmlparsertdd;
+package ua.goit.xmlparsertdd;
 
-import main.ua.goit.xmlparsertdd.TagParser;
-import main.ua.goit.xmlparsertdd.TagState;
-import main.ua.goit.xmlparsertdd.TagStateMachine;
-import main.ua.goit.xmlparsertdd.TagType;
 import org.junit.Test;
 
 import static org.junit.Assert.assertSame;

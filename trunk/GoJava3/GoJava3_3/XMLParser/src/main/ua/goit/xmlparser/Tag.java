@@ -1,4 +1,4 @@
-package main.ua.goit.xmlparser;
+package ua.goit.xmlparser;
 
 import java.util.HashMap;
 import java.util.Map;

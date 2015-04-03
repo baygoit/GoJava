@@ -1,4 +1,4 @@
-package main.ua.goit.xmlparsertdd;
+package ua.goit.xmlparsertdd;
 
 public class TagStateMachine {
   TagState tagState = TagState.OPEN;

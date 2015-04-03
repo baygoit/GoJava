@@ -1,4 +1,4 @@
-package main.ua.goit.xmlparsertdd;
+package ua.goit.xmlparsertdd;
 
 public class TagParser {
   private TagType type;

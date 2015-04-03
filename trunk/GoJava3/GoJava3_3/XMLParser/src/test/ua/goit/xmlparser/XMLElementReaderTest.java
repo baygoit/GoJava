@@ -1,6 +1,5 @@
-package test.ua.goit.xmlparser;
+package ua.goit.xmlparser;
 
-import main.ua.goit.xmlparser.XMLElementsReader;
 import org.junit.Test;
 
 import java.io.ByteArrayInputStream;
