@@ -34,7 +34,7 @@ public class CharUtil {
     addCharsToSet(0x203F,0x2040, nameChar );
 
   };
-  static void addCharsToSet(char start,char end, Set charSet){
+  static void addCharsToSet(char start,char end, Set<Character> charSet){
     if (start > end){
       return;
     }
@@ -43,7 +43,7 @@ public class CharUtil {
     } 
   }
   
-  static void addCharsToSet(int start,int end, Set charSet){
+  static void addCharsToSet(int start,int end, Set<Character> charSet){
     if (start > end){
       return;
     }
@@ -55,14 +55,13 @@ public class CharUtil {
   
   private CharUtil(){}
   
-  static public boolean isEmptyChar(char symb){
+  public static boolean isEmptyChar(char symb){
     boolean res = false;
     res = (symb == ' ') || (symb == '\n')|| (symb == '\t')|| (symb == '\r');
     return res;
-      
-  
   } 
-  static public boolean isNameChar(char ch){
+
+  public static boolean isNameChar(char ch){
     boolean res = false;
     
     if(nameStartChar.contains(ch)){
@@ -73,7 +72,7 @@ public class CharUtil {
     return res;
   }
   
-  static public boolean isNameStartChar(char ch){
+  public static boolean isNameStartChar(char ch){
     boolean res = false;
     res = nameStartChar.contains(ch);
     return res;
