@@ -32,8 +32,8 @@ public class CharUtil {
     addCharsToSet('0','9',nameChar );
     addCharsToSet(0x0300, 0x036F,nameChar );
     addCharsToSet(0x203F,0x2040, nameChar );
-
   };
+
   static void addCharsToSet(char start,char end, Set<Character> charSet){
     if (start > end){
       return;
