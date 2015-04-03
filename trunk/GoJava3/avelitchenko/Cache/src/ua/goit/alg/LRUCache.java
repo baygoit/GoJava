@@ -55,7 +55,8 @@ public class LRUCache {
     if (last == null){
       addToEnd(element);
       return;
-    } else if (first == element) {
+    } 
+    if (first == element) {
       first = first.next;
       first.prev = null;
     } else {
