@@ -18,6 +18,9 @@ public class RotatedArrays {
             if (start == finish) {
                 return -1;
             }
+            if (finish - start == 1) {
+              return -1;
+            }
             int middle = (start + finish) >>> 1;
             //sorted left part or right part, so if target in this sorted part lets find it 
             if (array[start] < array[middle]) {

@@ -7,7 +7,15 @@ import org.junit.Test;
 
 public class TestRotatedArrays {
 
-    @Test
+  @Test
+  public void cornerNoNumber() {
+      int[] array = {1,3};
+      int result = RotatedArrays.binarySearch(array,2);
+      int expectedresult = -1;
+      assertEquals(result, expectedresult);
+  }
+  
+  @Test
     public void testOneElement() {
         int[] array = {3};
         int result = RotatedArrays.binarySearch(array,3);
