@@ -2,13 +2,12 @@ package ua.goit.alg;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * Created by Alex on 16.03.2015.
  */
 public class MergeSort {
-  private static final int BYTES_IN_TEN_KILOBYTES = 1048576;
+  private static final int BYTES_IN_ONE_MEGABYTE = 1048576;
 
   public static void mergeSort(int[] array) {
     mergeSort(array, 0, array.length - 1);
@@ -84,8 +83,8 @@ public class MergeSort {
     DataInputStream dataInputStream = null;
     try {
       dataInputStream = new DataInputStream(new BufferedInputStream(new FileInputStream(file)));
-      byte[] buffer = new byte[BYTES_IN_TEN_KILOBYTES];
-      int[] tempValues = new int[BYTES_IN_TEN_KILOBYTES / 4];
+      byte[] buffer = new byte[BYTES_IN_ONE_MEGABYTE];
+      int[] tempValues = new int[BYTES_IN_ONE_MEGABYTE / 4];
       int valuesInBuffer = 0;
       while (dataInputStream.available() > 0) {
         valuesInBuffer = dataInputStream.read(buffer);
@@ -155,8 +154,8 @@ public class MergeSort {
       firstFileInputStream = new DataInputStream(new BufferedInputStream(new FileInputStream(firstFile)));
       secondFileInputStream = new DataInputStream(new BufferedInputStream(new FileInputStream(secondFile)));
       outputStream = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(resultFile)));
-      byte[] firstBuffer = new byte[BYTES_IN_TEN_KILOBYTES];
-      byte[] secondBuffer = new byte[BYTES_IN_TEN_KILOBYTES];
+      byte[] firstBuffer = new byte[BYTES_IN_ONE_MEGABYTE];
+      byte[] secondBuffer = new byte[BYTES_IN_ONE_MEGABYTE];
       int elementsInFirst = 0;
       int firstPointer = 0;
       int value1 = 0;
