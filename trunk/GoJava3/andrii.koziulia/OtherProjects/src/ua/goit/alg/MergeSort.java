@@ -2,12 +2,13 @@ package ua.goit.alg;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Alex on 16.03.2015.
  */
 public class MergeSort {
-  private static final int BYTES_IN_ONE_MEGABYTE = 1048576;
+  private static final int BYTES_IN_TEN_MEGABYTES = 10485760;
 
   public static void mergeSort(int[] array) {
     mergeSort(array, 0, array.length - 1);
@@ -67,7 +68,7 @@ public class MergeSort {
   }
 
   private static File sortBigFile(File file) throws IOException {
-    ArrayList<File> tempFiles = new ArrayList<File>();
+    List<File> tempFiles = new ArrayList<File>();
     splitToTempFiles(file, tempFiles);
     File resultFile = createTempFile();
     mergeTempFiles(tempFiles);
@@ -79,12 +80,12 @@ public class MergeSort {
     return resultFile;
   }
 
-  private static void splitToTempFiles(File file, ArrayList<File> tempFiles) throws IOException {
+  private static void splitToTempFiles(File file, List<File> tempFiles) throws IOException {
     DataInputStream dataInputStream = null;
     try {
       dataInputStream = new DataInputStream(new BufferedInputStream(new FileInputStream(file)));
-      byte[] buffer = new byte[BYTES_IN_ONE_MEGABYTE];
-      int[] tempValues = new int[BYTES_IN_ONE_MEGABYTE / 4];
+      byte[] buffer = new byte[BYTES_IN_TEN_MEGABYTES];
+      int[] tempValues = new int[BYTES_IN_TEN_MEGABYTES / 4];
       int valuesInBuffer = 0;
       while (dataInputStream.available() > 0) {
         valuesInBuffer = dataInputStream.read(buffer);
@@ -102,8 +103,13 @@ public class MergeSort {
   }
 
   private static int getIntegerFromFourBytes(byte[] byteArray, int startIndex) {
-    int value = ((0xFF & byteArray[startIndex]) << 24) | ((0xFF & byteArray[startIndex + 1]) << 16) |
-            ((0xFF & byteArray[startIndex + 2]) << 8) | (0xFF & byteArray[startIndex + 3]);
+    int firstByte = (0xFF & byteArray[startIndex]) << 24;
+    int secondByte = (0xFF & byteArray[startIndex + 1]) << 16;
+    int thirdByte = (0xFF & byteArray[startIndex + 2]) << 8;
+    int fourthByte = 0xFF & byteArray[startIndex + 3];
+    /*int value = ((0xFF & byteArray[startIndex]) << 24) | ((0xFF & byteArray[startIndex + 1]) << 16) |
+            ((0xFF & byteArray[startIndex + 2]) << 8) | (0xFF & byteArray[startIndex + 3]);*/
+    int value = (firstByte | secondByte | thirdByte | fourthByte);
     return value;
   }
 
@@ -118,7 +124,7 @@ public class MergeSort {
     return tempFile;
   }
 
-  private static File createTempFile(ArrayList<File> tempFiles) {
+  private static File createTempFile(List<File> tempFiles) {
     File file = createTempFile();
     tempFiles.add(file);
     return file;
@@ -136,7 +142,7 @@ public class MergeSort {
     }
   }
 
-  private static void mergeTempFiles(ArrayList<File> tempFiles) throws IOException {
+  private static void mergeTempFiles(List<File> tempFiles) throws IOException {
     while (tempFiles.size() > 2) {
       File newTempFile = createTempFile();
       combineTwoFiles(tempFiles.get(0), tempFiles.get(1), newTempFile);
@@ -154,8 +160,8 @@ public class MergeSort {
       firstFileInputStream = new DataInputStream(new BufferedInputStream(new FileInputStream(firstFile)));
       secondFileInputStream = new DataInputStream(new BufferedInputStream(new FileInputStream(secondFile)));
       outputStream = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(resultFile)));
-      byte[] firstBuffer = new byte[BYTES_IN_ONE_MEGABYTE];
-      byte[] secondBuffer = new byte[BYTES_IN_ONE_MEGABYTE];
+      byte[] firstBuffer = new byte[BYTES_IN_TEN_MEGABYTES];
+      byte[] secondBuffer = new byte[BYTES_IN_TEN_MEGABYTES];
       int elementsInFirst = 0;
       int firstPointer = 0;
       int value1 = 0;
