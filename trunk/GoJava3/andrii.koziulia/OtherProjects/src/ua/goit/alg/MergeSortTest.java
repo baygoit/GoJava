@@ -1,11 +1,9 @@
 package ua.goit.alg;
 
 import org.junit.Test;
-
 import java.io.*;
 import java.util.Arrays;
 import java.util.Random;
-
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 

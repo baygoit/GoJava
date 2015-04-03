@@ -4,9 +4,6 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Alex on 16.03.2015.
- */
 public class MergeSort {
   private static final int BYTES_IN_TEN_MEGABYTES = 10485760;
 
