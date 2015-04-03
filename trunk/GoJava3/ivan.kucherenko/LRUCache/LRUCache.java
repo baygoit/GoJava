@@ -40,7 +40,7 @@ public class LRUCache {
     if (counter == 1){
       head = newElement;
       tail = head;
-    } else if (counter > 1){
+    } else if (counter > 1 && capacity > 1){
       if (counter > capacity){
         head = head.getNext();
         map.remove(head.getPrevious().getKey());
@@ -48,6 +48,9 @@ public class LRUCache {
       tail.setNext(newElement);
       newElement.setPrevious(tail);
       tail = newElement;
-    } 
+    } else {
+    	map.remove(head.getKey());
+    	head = newElement;
+    }
   }
 }

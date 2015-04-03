@@ -66,4 +66,22 @@ public class LRUCacheTest {
     String expectedResult = "1";
     assertEquals(cacheContents, expectedResult);
   }
+  
+  @Test
+  public void setOneNumber_Key2AndValue1() {
+    LRUCache cache = new LRUCache(1);
+    cache.set(2, 1);
+    String cacheContents = String.valueOf(cache.get(2));
+    String expectedResult = "1";
+    assertEquals(cacheContents, expectedResult);
+  }
+  
+  @Test
+  public void setOneNumber_Key3AndValue2_Get2() {
+    LRUCache cache = new LRUCache(1);
+    cache.set(3, 2);
+    String cacheContents = String.valueOf(cache.get(2));
+    String expectedResult = "-1";
+    assertEquals(cacheContents, expectedResult);
+  }
 }
