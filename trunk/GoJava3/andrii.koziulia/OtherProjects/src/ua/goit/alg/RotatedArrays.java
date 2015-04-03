@@ -15,10 +15,10 @@ public class RotatedArrays {
     private static int startBinarySearch(int[] array, int target, int startIndex, int endIndex) {
         int partitionIndex = startIndex + (endIndex - startIndex) / 2;
         while (startIndex != endIndex && array[partitionIndex] != target) {
-            boolean leftCondition1 = array[startIndex] <= target && array[partitionIndex] > target;
-            boolean leftCondition2 = array[startIndex] <= target && array[startIndex] > array[partitionIndex];
+            boolean leftCondition1 = array[startIndex] <= target && target < array[partitionIndex];
+            boolean leftCondition2 = array[startIndex] <= target && array[partitionIndex] < array[startIndex];
             boolean leftCondition3 =
-                    array[partitionIndex] > target &&
+                    target < array[partitionIndex] &&
                             array[partitionIndex] < array[startIndex] &&
                             array[partitionIndex] < array[endIndex];
             if (leftCondition1 || leftCondition2 || leftCondition3) {
