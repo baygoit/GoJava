@@ -16,7 +16,6 @@ public class ArrayTest{
     int[] expected = {2, 1};
     int[] actual = Array.readIntArray(dis);
     assertArrayEquals(expected, actual);
-
   }
 
   @Test
