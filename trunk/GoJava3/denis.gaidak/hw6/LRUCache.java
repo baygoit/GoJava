@@ -19,23 +19,21 @@ public class LRUCache {
     }
     Node node = cache.get(key);
     linkLast(node);
-    int value = node.value;
-    return value;
+    return node.value;
   }
 
   public void set(int key, int value) {
     if (cache.size() < capacity && !cache.containsKey(key)) {
       addNewNode(key, value);
+    } else if (cache.containsKey(key)) {
+      Node node = cache.get(key);
+      node.value = value;
+      unLink(node);
+      linkLast(cache.get(key));
     } else {
-      if (cache.containsKey(key)) {
-        Node node = cache.get(key);
-        unLink(node);
-        linkLast(cache.get(key));
-      } else {
-        int firstNodeKey = unLink(first);
-        cache.remove(firstNodeKey);
-        addNewNode(key, value);
-      }
+      int firstNodeKey = unLink(first);
+      cache.remove(firstNodeKey);
+      addNewNode(key, value);
     }
   }
 
@@ -48,7 +46,7 @@ public class LRUCache {
   private int unLink(Node node) {
     final Node prev = node.prev;
     final Node next = node.next;
-    final int key = node.value;
+    final int key = node.key;
 
     if (prev == null) {
       first = next;
@@ -80,7 +78,7 @@ public class LRUCache {
   }
 
   private static class Node {
-    final int value;
+    int value;
     final int key;
     Node next;
     Node prev;
