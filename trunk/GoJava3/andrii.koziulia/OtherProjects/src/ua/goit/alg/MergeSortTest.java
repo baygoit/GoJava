@@ -1,9 +1,8 @@
-package homework1;
+package ua.goit.alg;
 
 import org.junit.Test;
 
 import java.io.*;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
 
@@ -67,9 +66,42 @@ public class MergeSortTest {
     assertArrayEquals(expected, result);
   }
 
-  @Test
-  public void sortFileContainingShuffledValuesFrom1to10000() {
 
+
+  @Test
+  public void sortFileContainingShuffledValuesFrom0to9999999() throws IOException {
+    int VALUES_TO_TEST = 100000000;
+    System.out.println(Integer.MAX_VALUE);
+    // Test with 100 million values completes in about 3 minutes
+    int[] expected = new int[VALUES_TO_TEST];
+    int[] testArray = new int[VALUES_TO_TEST];
+    System.out.println("Creating arrays");
+    for (int i = 0; i < testArray.length; i++) {
+      testArray[i] = i;
+      expected[i] = i;
+    }
+    System.out.println("Starting shuffle");
+    shuffleArray(testArray);
+    File tempFile = createTempFile();
+    DataOutputStream outputStream = null;
+    try {
+      outputStream = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(tempFile)));
+      System.out.println("Writing shuffled array to temp file");
+      for (int i = 0; i < testArray.length; i++) {
+        outputStream.writeInt(testArray[i]);
+      }
+    } finally {
+      outputStream.close();
+    }
+    System.out.println("Sorting temp file");
+    File sortedFile = MergeSort.mergeSort(tempFile);
+    int[] result = new int[VALUES_TO_TEST];
+    DataInputStream inputStream = new DataInputStream(new BufferedInputStream(new FileInputStream(sortedFile)));
+    System.out.println("Reading the result");
+    for (int i = 0; i < result.length; i++) {
+      result[i] = inputStream.readInt();
+    }
+    assertArrayEquals(expected, result);
   }
 
   private static void shuffleArray(int[] array) {
@@ -89,7 +121,7 @@ public class MergeSortTest {
       File tempFile = createTempFile();
       File sortedFile = MergeSort.mergeSort(tempFile);
       fileInputStream = new FileInputStream(sortedFile);
-      assertEquals(-1, fileInputStream.available());
+      assertEquals(0, fileInputStream.available());
     } finally {
       fileInputStream.close();
     }

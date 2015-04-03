@@ -1,6 +1,6 @@
 package ua.goit.sort;
 
-import homework1.MergeSort;
+import ua.goit.alg.MergeSort;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
