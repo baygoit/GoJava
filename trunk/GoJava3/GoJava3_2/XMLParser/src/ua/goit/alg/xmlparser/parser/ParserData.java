@@ -15,8 +15,16 @@ public class ParserData {
     this.attributeName = attributeName;
   }
 
+  public void appendAttributeName(char c) {
+    attributeName += c;
+  }
+
   public void setAttributeValue(String attributeValue) {
     this.attributeValue = attributeValue;
+  }
+
+  public void appendAttributeValue(char c) {
+    attributeValue += c;
   }
 
   public String getAttributeValue() {
@@ -35,6 +43,10 @@ public class ParserData {
     this.tag = tag;
   }
 
+  public void appendTag(char c) {
+    tag += c;
+  }
+
   public Map<String, String> getAttributes() {
     return attributes;
   }
@@ -49,6 +61,10 @@ public class ParserData {
 
   public void setText(String text) {
     this.text = text;
+  }
+
+  public void appendText(char c) {
+    text += c;
   }
 
   public void clear() {
