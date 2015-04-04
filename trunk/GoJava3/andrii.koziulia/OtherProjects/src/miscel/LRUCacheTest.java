@@ -13,7 +13,7 @@ public class LRUCacheTest {
     cache.put(3, 3);
     cache.put(4, 4);
     String result = cache.toString();
-    String expected = "2:2, 3:3, 4:4, ";
+    String expected = "4:4, 3:3, 2:2, ";
     assertEquals(expected, result);
   }
 
@@ -26,7 +26,7 @@ public class LRUCacheTest {
     cache.put(4, 4);
     cache.get(2);
     String result = cache.toString();
-    String expected = "3:3, 4:4, 2:2, ";
+    String expected = "2:2, 4:4, 3:3, ";
     assertEquals(expected, result);
   }
 /*

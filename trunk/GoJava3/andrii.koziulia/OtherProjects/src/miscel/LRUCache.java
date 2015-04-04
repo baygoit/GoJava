@@ -1,7 +1,6 @@
 package miscel;
 
 import java.util.HashMap;
-import java.util.Map;
 
 public class LRUCache {
   private int capacity;
@@ -16,8 +15,9 @@ public class LRUCache {
   public int get(int key) {
     if (map.containsKey(key)) {
       increasePriority(key);
+      return map.get(key).value;
     }
-    return map.get(key).key;
+    return 0;
   }
 
   public void put(int key, int value) {
@@ -31,6 +31,10 @@ public class LRUCache {
         tail = head;
       } else {
         head.previous = newNode;
+        newNode.next = head;
+        if (head == tail) {
+          tail = newNode.next;
+        }
         head = newNode;
       }
       map.put(key, newNode);
@@ -41,19 +45,27 @@ public class LRUCache {
   }
 
   private void removeExcessiveValue() {
+    if (tail.hasPrevious()) {
+      tail = tail.previous;
+      tail.next = null;
+    }
     map.remove(tail.key);
   }
 
   private void increasePriority(int key) {
-    Node oldNode = map.get(key);
-    if (oldNode.previous != null && oldNode.next != null) {
-      oldNode.previous.next = oldNode.next;
-      oldNode.next.previous = oldNode.previous;
-    } else if (oldNode.previous != null) {
-      oldNode.previous = tail;
+    Node priorityNode = map.get(key);
+    if (priorityNode != head) {
+      if (priorityNode.previous != null && priorityNode.next != null) {
+        priorityNode.previous.next = priorityNode.next;
+        priorityNode.next.previous = priorityNode.previous;
+      } else {
+        priorityNode.previous = tail;
+        priorityNode.previous.next = null;
+      }
+      head.previous = priorityNode;
+      priorityNode.next = head;
+      head = priorityNode;
     }
-    head.previous = oldNode;
-    head = oldNode;
   }
 
   @Override
@@ -63,15 +75,15 @@ public class LRUCache {
       Node node = head;
       result.append(node.key + ":" + node.value + ", ");
       while (node.hasNext()) {
-        result.append(node.key + ":" + node.value + ", ");
         node = node.next;
+        result.append(node.key + ":" + node.value + ", ");
       }
     }
     return result.toString();
   }
 
   private class Node {
-    int key;
+    final int key;
     int value;
     Node previous;
     Node next;
@@ -83,6 +95,10 @@ public class LRUCache {
 
     public boolean hasNext() {
       return (next != null);
+    }
+
+    public boolean hasPrevious() {
+      return (previous != null);
     }
   }
 }
