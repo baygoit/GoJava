@@ -35,7 +35,7 @@ public class ParserData {
     this.tag = tag;
   }
 
-  public HashMap<String, String> getAttributes() {
+  public Map<String, String> getAttributes() {
     return attributes;
   }
 
