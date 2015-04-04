@@ -15,7 +15,7 @@ public class TestParser {
     XMLParser parser = new XMLParser.Builder().setOpenTagHandler(new Handler() {
       @Override
       public void handle(ParserData parserData) {
-        System.out.println("open handler");
+        System.out.println(parserData.getTag());
       }
     }).build();
     String result = parser.parse("<s><t></t></s>");
