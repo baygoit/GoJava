@@ -20,8 +20,7 @@ public class ProjectsDAO extends AbstractDAO implements Projects{
 	@Override
 	public Project get(int id) {
 		Session session = getSession();
-	    Project project = (Project) session.get(Project.class, id);
-	    return project;
+	    return (Project) session.get(Project.class, id);
 	}
 
 	@Override

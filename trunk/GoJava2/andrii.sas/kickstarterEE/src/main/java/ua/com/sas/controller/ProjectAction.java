@@ -2,29 +2,24 @@ package ua.com.sas.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.opensymphony.xwork2.ModelDriven;
+import com.opensymphony.xwork2.ActionSupport;
 
 import ua.com.sas.model.Project;
 import ua.com.sas.service.ProjectsService;
 
-public class ProjectAction implements ModelDriven {
+public class ProjectAction extends ActionSupport {
 	
 	private Project project;
 	private int id;
 	
 	@Autowired
-	private ProjectsService projectsService;
+	private ProjectsService service;
 
 	public String current(){
-		setProject(projectsService.getCurrent(id));
+		setProject(service.getCurrent(id));
 		return "success";
 	}
 	
-	@Override
-	public Object getModel() {
-		return getProject();
-	}
-
 	public int getId() {
 		return id;
 	}

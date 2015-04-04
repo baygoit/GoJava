@@ -4,31 +4,25 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.opensymphony.xwork2.ModelDriven;
+import com.opensymphony.xwork2.ActionSupport;
 
-import ua.com.sas.dao.CategoriesDAO;
 import ua.com.sas.model.Category;
 import ua.com.sas.model.Project;
-import ua.com.sas.service.CategoriesService;
+import ua.com.sas.service.ProjectsService;
 
-public class ProjectsAction implements ModelDriven {
+public class ProjectsAction extends ActionSupport {
 
 	private Project project;
 	private int id;
 	private List<Project> projects;
-	
+
 	@Autowired
-	private CategoriesService categoriesService;
+	private ProjectsService service;
 
 	public String findProjects() throws Exception {
-		Category category = categoriesService.getWithProjects(id);
+		Category category = service.getWithProjects(id);
 		setProjects(category.getProjects());
 		return "success";
-	}
-	
-	@Override
-	public Object getModel() {
-		return getProject();
 	}
 
 	public Project getProject() {

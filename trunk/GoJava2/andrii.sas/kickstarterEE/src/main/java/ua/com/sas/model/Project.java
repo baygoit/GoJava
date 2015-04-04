@@ -46,24 +46,16 @@ public class Project {
 	@JoinColumn(name = "category_id", nullable = false, insertable = false, updatable = false)
 	private Category category;
 
-	public Project() {
-	}
-
-	public Project(Category category) {
-		this.category = category;
-	}
-
-	public Project(int id, Category category) {
-		this.id = id;
-		this.category = category;
-	}
-	
-	public void setCategory(Category category) {
-		this.category = category;
-	}
-
 	public Category getCategory() {
 		return category;
+	}
+	
+	public int getId() {
+		return id;
+	}
+	
+	public void setId(int id) {
+		this.id = id;
 	}
 	
 	public int getCategoryId() {
@@ -73,7 +65,15 @@ public class Project {
 	public void setCategoryId(int categoryId) {
 		this.categoryId = categoryId;
 	}
-
+	
+	public String getName() {
+		return name;
+	}
+	
+	public void setName(String name) {
+		this.name = name;
+	}
+	
 	public String getQuestions() {
 		return questions;
 	}
@@ -81,94 +81,53 @@ public class Project {
 	public void setQuestions(String questions) {
 		this.questions = questions;
 	}
-
-	public void setName(String name) {
-		this.name = name;
+	
+	public String getDescription() {
+		return description;
 	}
 
 	public void setDescription(String description) {
 		this.description = description;
 	}
 
-	public void setMoneyNeed(int moneyNeed) {
-		this.moneyNeed = moneyNeed;
-	}
-
-	public void setMoneyHas(int moneyHas) {
-		this.moneyHas = moneyHas;
-	}
-
-	public void setDaysLeft(int daysLeft) {
-		this.daysLeft = daysLeft;
-	}
-
-	public void setHistory(String history) {
-		this.history = history;
-	}
-
-	public void setVideoLink(String videoLink) {
-		this.videoLink = videoLink;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
 	public int getMoneyNeed() {
 		return moneyNeed;
 	}
-
-	public void increaseMoneyHas(int moneyHas) {
-		this.moneyHas += moneyHas;
+	
+	public void setMoneyNeed(int moneyNeed) {
+		this.moneyNeed = moneyNeed;
 	}
 
 	public int getMoneyHas() {
 		return moneyHas;
 	}
+	
+	public void setMoneyHas(int moneyHas) {
+		this.moneyHas = moneyHas;
+	}
 
 	public int getDaysLeft() {
 		return daysLeft;
 	}
-
+	
+	public void setDaysLeft(int daysLeft) {
+		this.daysLeft = daysLeft;
+	}
+	
 	public String getHistory() {
 		return history;
+	}
+	
+	public void setHistory(String history) {
+		this.history = history;
 	}
 
 	public String getVideoLink() {
 		return videoLink;
 	}
-
-	public String getQuestion() {
-		return questions;
-	}
-
-	public void addClientQuestion(String question) {
-		questions += "\nQ: " + question;
-	}
-
-	public String informForNoBonuses(String bonus) {
-		return bonus != null ? bonus : "nothing=(";
-	}
 	
-	@Override
-	public String toString() {
-		return "Project [nameOfProject=" + name + ", description="
-				+ description + ", moneyNeed=" + moneyNeed + ", moneyHas="
-				+ moneyHas + ", daysLeft=" + daysLeft + ", category="
-				+ category + ", history=" + history + ", videoLink="
-				+ videoLink + ", questions=" + questions + ", id=" + id + "]";
+	public void setVideoLink(String videoLink) {
+		this.videoLink = videoLink;
 	}
 
 	@Override
