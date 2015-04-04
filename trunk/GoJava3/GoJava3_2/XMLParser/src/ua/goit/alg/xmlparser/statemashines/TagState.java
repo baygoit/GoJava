@@ -4,11 +4,11 @@ import ua.goit.alg.xmlparser.parser.Handler;
 import ua.goit.alg.xmlparser.parser.ParserData;
 import ua.goit.alg.xmlparser.parser.XMLParser;
 
-public enum TagStates {
+public enum TagState {
   INIT {
     @Override
-    public TagStates next(char c, ParserData parserData, XMLParser xmlParser) {
-      TagStates result = INVALID;
+    public TagState next(char c, ParserData parserData, XMLParser xmlParser) {
+      TagState result = INVALID;
       if (c == ' ') {
         result = INIT;
       }
@@ -20,8 +20,8 @@ public enum TagStates {
   },
   OPENTAG{
     @Override
-    public TagStates next(char c, ParserData parserData, XMLParser xmlParser) {
-      TagStates result = INVALID;
+    public TagState next(char c, ParserData parserData, XMLParser xmlParser) {
+      TagState result = INVALID;
       if (c == '?') {
         result = START;
       }
@@ -36,8 +36,8 @@ public enum TagStates {
   },
   CLOSETAG{
     @Override
-    public TagStates next(char c, ParserData parserData, XMLParser xmlParser) {
-      TagStates result = CLOSETAG;
+    public TagState next(char c, ParserData parserData, XMLParser xmlParser) {
+      TagState result = CLOSETAG;
       if (c == '>') {
         xmlParser.onCloseTag(parserData);
         result = INIT;
@@ -49,8 +49,8 @@ public enum TagStates {
   },
   START {
     @Override
-    public TagStates next(char c, ParserData parserData, XMLParser xmlParser) {
-      TagStates result = INVALID;
+    public TagState next(char c, ParserData parserData, XMLParser xmlParser) {
+      TagState result = INVALID;
       if (c == '?') {
         result = INIT;
       }
@@ -62,8 +62,8 @@ public enum TagStates {
   },
   ELEMENT {
     @Override
-    public TagStates next(char c, ParserData parserData, XMLParser xmlParser) {
-      TagStates result = INVALID;
+    public TagState next(char c, ParserData parserData, XMLParser xmlParser) {
+      TagState result = INVALID;
       if (c == ' ') {
         result = ATTRIBUTE_NAME;
       } else if (c == '>'){
@@ -84,8 +84,8 @@ public enum TagStates {
   },
   ATTRIBUTE_NAME {
     @Override
-    public TagStates next(char c, ParserData parserData, XMLParser xmlParser) {
-      TagStates result;
+    public TagState next(char c, ParserData parserData, XMLParser xmlParser) {
+      TagState result;
       if (c == ' ') {
         result = ATTRIBUTE_NAME;
       } else if (c == '>') {
@@ -108,8 +108,8 @@ public enum TagStates {
   },
   ATTRIBUTE_VALUE {
     @Override
-    public TagStates next(char c, ParserData parserData, XMLParser xmlParser) {
-      TagStates result;
+    public TagState next(char c, ParserData parserData, XMLParser xmlParser) {
+      TagState result;
       if (c == ' ') {
         result = ATTRIBUTE_VALUE;
       } else if (c == '>') {
@@ -133,8 +133,8 @@ public enum TagStates {
   },
   NODE {
     @Override
-    public TagStates next(char c, ParserData parserData, XMLParser xmlParser) {
-      TagStates result = INVALID;
+    public TagState next(char c, ParserData parserData, XMLParser xmlParser) {
+      TagState result = INVALID;
       if (c == '<') {
         result = OPENTAG;
         xmlParser.onTextValue(parserData);
@@ -147,11 +147,11 @@ public enum TagStates {
   },
   INVALID {
     @Override
-    public TagStates next(char c, ParserData parserData, XMLParser xmlParser) {
-      TagStates result = INVALID;
+    public TagState next(char c, ParserData parserData, XMLParser xmlParser) {
+      TagState result = INVALID;
       return result;
     }
   };
 
-  public abstract TagStates next(char c,  ParserData parserData, XMLParser xmlParser);
+  public abstract TagState next(char c,  ParserData parserData, XMLParser xmlParser);
 }

@@ -5,7 +5,7 @@ import ua.goit.alg.xmlparser.parser.XMLParser;
 
 public class StateMashineTag {
 
-  private TagStates state = TagStates.INIT;
+  private TagState state = TagState.INIT;
   private ParserData parserData = new ParserData();
   private XMLParser xmlParser;
 
