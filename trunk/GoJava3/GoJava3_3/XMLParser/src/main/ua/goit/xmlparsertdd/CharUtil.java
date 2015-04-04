@@ -23,9 +23,8 @@ public class CharUtil {
     addCharsToSet(0x3001,0xD7FF, nameStartChar );
     addCharsToSet(0xF900, 0xFDCF, nameStartChar );
     addCharsToSet(0xFDF0, 0xFFFD, nameStartChar );
-    addCharsToSet(0x10000, 0xEFFFF, nameStartChar );
+//    addCharsToSet(0x10000, 0xEFFFF, nameStartChar );
     
-    addCharsToSet(0x10000, 0xEFFFF, nameChar );
     nameChar.add('-');
     nameChar.add('.');
     nameChar.add((char)0xB7);
@@ -38,6 +37,7 @@ public class CharUtil {
     if (start > end){
       return;
     }
+    
     for(char ch = start; ch<= end; ch++){
       charSet.add(ch);
     } 
@@ -77,5 +77,18 @@ public class CharUtil {
     res = nameStartChar.contains(ch);
     return res;
   } 
+  
+  public static void print() {
+    int i = 0;
+    System.out.println("Statrt:");
+    for (Character ch : nameChar) {
+      System.out.print(ch + " ");
+      i++;
+      if(i % 100 == 0 )System.out.print("\n");
+      
+      
+    }
+
+  }
 
 }
