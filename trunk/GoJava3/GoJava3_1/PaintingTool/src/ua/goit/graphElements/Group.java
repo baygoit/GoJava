@@ -4,8 +4,6 @@ import java.util.List;
 
 /**
  * Interface for group of element
- * @author Anton Yarosh
- *
  */
 public interface Group {
     public List<Element> getElements();
@@ -14,5 +12,4 @@ public interface Group {
     public void setGroup(Group group);
     public String getName();
     public String getType();
-
 }
