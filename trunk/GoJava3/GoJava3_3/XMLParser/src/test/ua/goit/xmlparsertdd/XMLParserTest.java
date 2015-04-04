@@ -15,7 +15,7 @@ public class XMLParserTest {
       }
     };
     Parser parser = new XMLParser(handler);
-    parser.parse("<handle/>");
-    assertEquals("hande", myTag.getName());
+    parser.parse("<handle>");
+    assertEquals("handle", myTag.getName());
   }
 }

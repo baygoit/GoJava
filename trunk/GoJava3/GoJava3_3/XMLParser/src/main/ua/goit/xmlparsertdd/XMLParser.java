@@ -14,6 +14,11 @@ import java.util.Set;
 public class XMLParser implements Parser {
   private Map<Event, Set<Handler>> handlers;
   TagStateMachine machine = new TagStateMachine();
+  private Handler onOpenHandler;
+
+  public XMLParser(Handler handler) {
+    onOpenHandler = handler;
+  }
 
   public void startMachine(char c) {
     machine.next(c);
@@ -41,6 +46,11 @@ public class XMLParser implements Parser {
     } catch (IOException e) {
       e.printStackTrace();
     }
+  }
+
+  public void sendEventToHandler() {
+    // TODO
+    //if (Event.OPEN_TAG)
   }
 
   public void onOpenTag(Handler handler) {
