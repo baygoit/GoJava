@@ -3,6 +3,7 @@ package ua.goit.xmlparsertdd;
 import org.junit.Test;
 
 import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
 
 public class TagStateTest {
@@ -51,6 +52,6 @@ public class TagStateTest {
       machine.next(c);
     }
     Tag tag = machine.getResult();
-    assertSame("name", tag.getName());
+    assertTrue("name".equals(tag.getName()));
   }
 }
