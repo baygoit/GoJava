@@ -1,10 +1,24 @@
 package ua.goit.xmlparsertdd;
 
 public class TagStateMachine {
-  TagState tagState = TagState.OPEN;
-  public TagParser tagParser = new TagParser();
+  TagState tagState = TagState.INIT;
+  TagParser parser = new TagParser();
 
   public void next(char c) {
-    TagState.OPEN.next(c);
+    tagState.next(c, parser);
+  }
+
+  public static TagState handleOpenBracket(char c, TagState result) {
+    if (c == '<') {
+      result = TagState.OPEN;
+    }
+    return result;
+  }
+
+  public static TagState handleOpenSpace(char c, TagState result) {
+    if (c == ' ') {
+      result = TagState.OPEN;
+    }
+    return result;
   }
 }
