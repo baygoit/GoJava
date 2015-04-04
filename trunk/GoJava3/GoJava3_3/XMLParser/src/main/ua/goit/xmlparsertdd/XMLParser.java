@@ -11,7 +11,7 @@ import java.util.Map;
 import java.util.Set;
 
 
-public class XMLParser {
+public class XMLParser implements Parser {
   private Map<Event, Set<Handler>> handlers;
   TagStateMachine machine = new TagStateMachine();
 
@@ -19,17 +19,20 @@ public class XMLParser {
     machine.next(c);
   }
 
+  @Override
   public void parse(String strArg) {
     parse(new ByteArrayInputStream(strArg.getBytes()));
   }
 
+  @Override
   public void parse(File strArg) throws FileNotFoundException {
     parse(new FileInputStream(strArg));
   }
 
+  @Override
   public void parse(InputStream iStreamReader) {
 
-    try (InputStreamReader inputStreamReader = new InputStreamReader(iStreamReader)){
+    try (InputStreamReader inputStreamReader = new InputStreamReader(iStreamReader)) {
       char c;
       while (inputStreamReader.ready()) {
         c = (char) inputStreamReader.read();
