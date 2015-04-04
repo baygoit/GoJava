@@ -6,7 +6,7 @@ import java.io.IOException;
 import ua.goit.alg.xmlparser.input.StreamReader;
 import ua.goit.alg.xmlparser.statemashines.StateMashineTag;
 
-public class XMLParser {
+public class XMLParser implements Parser{
   
   private StringBuilder result = new StringBuilder("");
   

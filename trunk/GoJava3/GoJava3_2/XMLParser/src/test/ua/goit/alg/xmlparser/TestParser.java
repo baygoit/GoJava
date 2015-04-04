@@ -1,5 +1,4 @@
-package ua.goit.alg.xmlparser.tests;
-
+package test.ua.goit.alg.xmlparser;
 
 import java.io.IOException;
 import org.junit.Assert;
