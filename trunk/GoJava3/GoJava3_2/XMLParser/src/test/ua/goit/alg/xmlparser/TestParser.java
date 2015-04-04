@@ -12,12 +12,7 @@ public class TestParser {
 
   @Test
   public void onOpenHandler() throws IOException{
-    XMLParser parser = new XMLParser.Builder().setOpenTagHandler(new Handler() {
-      @Override
-      public void handle(ParserData parserData) {
-        System.out.println(parserData.getTag());
-      }
-    }).build();
+    XMLParser parser = HandlerConstructor.initParser();
     String result = parser.parse("<s><t></t></s>");
     String expectedResult = "<s><t></t></s>";
     Assert.assertEquals(expectedResult, result);
