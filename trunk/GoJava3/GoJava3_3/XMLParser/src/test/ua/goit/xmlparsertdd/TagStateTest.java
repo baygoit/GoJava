@@ -41,11 +41,13 @@ public class TagStateTest {
   @Test
   public void parseOpenTagWithName() {
     TagStateMachine machine = new TagStateMachine();
-    char[] charsForName = {'<', 'n', 'a', 'm', 'e', '>'};
-    for (char c : charsForName) {
+    String tagName = "name";
+    for (char c : tagName.toCharArray()) {
       machine.next(c);
     }
     Tag tag = machine.getResult();
     assertEquals("name", tag.getName());
   }
+
+
 }

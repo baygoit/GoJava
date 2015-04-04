@@ -2,10 +2,10 @@ package ua.goit.xmlparsertdd;
 
 public class TagStateMachine {
   static TagState tagState = TagState.INIT;
-  static TagBuilder parser = new TagBuilder();
+  static TagBuilder builder = new TagBuilder();
 
   public void next(char c) {
-    tagState = tagState.next(c, parser);
+    tagState = tagState.next(c, builder);
   }
 
   public static TagState handleOpenBracket(char c, TagState result) {
@@ -26,31 +26,31 @@ public class TagStateMachine {
 
   public static TagState handleFirstLetterForName(char c, TagState result) {
     if (CharUtil.isNameStartChar(c)) {
-      result = TagState.NAME2;
-      parser.buildName(c);
+      result = TagState.NAME_FOR_TAG;
+      builder.buildName(c);
     }
     return  result;
   }
 
   public static TagState handleLetterForName(char c, TagState result) {
     if (CharUtil.isNameChar(c)) {
-      result = TagState.NAME2;
-      parser.buildName(c);
+      result = TagState.NAME_FOR_TAG;
+      builder.buildName(c);
     }
     return result;
   }
 
   public static TagState handleCloseBracket(char c, TagState result) {
     if (c == '>') {
-      result = TagState.VALID_END;
+      result = TagState.VALID_TAG_END;
     }
     return result;
   }
 
   public Tag getResult() {
     Tag result = null;
-    if (tagState == TagState.VALID_END) {
-      result = parser.getTag();
+    if (tagState == TagState.VALID_TAG_END) {
+      result = builder.getTag();
     }
     return result;
   }
