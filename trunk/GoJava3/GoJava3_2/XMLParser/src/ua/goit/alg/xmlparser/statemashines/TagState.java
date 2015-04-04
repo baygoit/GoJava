@@ -1,6 +1,5 @@
 package ua.goit.alg.xmlparser.statemashines;
 
-import ua.goit.alg.xmlparser.parser.Handler;
 import ua.goit.alg.xmlparser.parser.ParserData;
 import ua.goit.alg.xmlparser.parser.XMLParser;
 
@@ -148,8 +147,7 @@ public enum TagState {
   INVALID {
     @Override
     public TagState next(char c, ParserData parserData, XMLParser xmlParser) {
-      TagState result = INVALID;
-      return result;
+      return INVALID;
     }
   };
 
