@@ -66,7 +66,7 @@ public class LRUCache {
         priorityNode.next.previous = priorityNode.previous;
       } else {
         tail = priorityNode.previous;
-        priorityNode.previous.next = null;
+        tail.next = null;
       }
       head.previous = priorityNode;
       priorityNode.next = head;
