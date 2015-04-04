@@ -23,6 +23,9 @@ public class Tag {
     this.params = params;
   }
 
+  public void setName(String name) {
+    this.name = name;
+  }
   public TagType getType() {
     return type;
   }
