@@ -11,7 +11,7 @@ import ua.goit.alg.xmlparser.parser.XMLParser;
 public class TestParser {
 
   @Test
-  public void onOpenHandler() throws IOException{
+  public void when2Open2Close() throws IOException{
     XMLParser parser = HandlerConstructor.initParser();
     String result = parser.parse("<s><t></t></s>");
     String expectedResult = "<s><t></t></s>";
@@ -19,40 +19,32 @@ public class TestParser {
   }
 
   @Test
-  public void testSimple() throws IOException{
-    XMLParser parser = new XMLParser.Builder().build();
-    String result = parser.parse("<s><t></t></s>");
-    String expectedResult = "<s><t></t></s>";
-    Assert.assertEquals(expectedResult, result);
-  }
-
-  @Test
-  public void testAttr() throws IOException{
-    XMLParser parser = new XMLParser.Builder().build();
+  public void whenAttr() throws IOException{
+    XMLParser parser = HandlerConstructor.initParser();
     String result = parser.parse("<start atr1=3><tag></tag><tag2></tag2></start>");
     String expectedResult = "<start><tag></tag><tag2></tag2></start>";
     Assert.assertEquals(expectedResult, result);
   }
 
   @Test
-  public void testInnterClosingTag() throws IOException{
-    XMLParser parser = new XMLParser.Builder().build();
+  public void whenClosableTag() throws IOException{
+    XMLParser parser = HandlerConstructor.initParser();
     String result = parser.parse("<start atr1=3><tag></tag><tag2/></start>");
     String expectedResult = "<start><tag></tag><tag2></tag2></start>";
     Assert.assertEquals(expectedResult, result);
   }
 
   @Test
-  public void testText() throws IOException{
-    XMLParser parser = new XMLParser.Builder().build();
+  public void whenText() throws IOException{
+    XMLParser parser = HandlerConstructor.initParser();
     String result = parser.parse("<start atr1=3><tag>text</tag><tag2/></start>");
     String expectedResult = "<start><tag>text</tag><tag2></tag2></start>";
     Assert.assertEquals(expectedResult, result);
   }
 
   @Test
-  public void testFull() throws IOException{
-    XMLParser parser = new XMLParser.Builder().build();
+  public void whenFull() throws IOException{
+    XMLParser parser = HandlerConstructor.initParser();
     String result = parser.parse("<?xml doctype=1><start atr1=3 atr2 = 4><tag>text</tag><tag2/></start>");
     String expectedResult = "<?xml><start><tag>text</tag><tag2></tag2></start>";
     Assert.assertEquals(expectedResult, result);
