@@ -7,16 +7,16 @@ import ua.goit.alg.xmlparser.input.StreamReader;
 import ua.goit.alg.xmlparser.statemashines.StateMashineTag;
 
 public class XMLParser implements Parser{
-  
+
   private StringBuilder result = new StringBuilder("");
-  
-  private final Handler openTagHandler;
-  private final Handler closeTagHandler;
-  private final Handler textValueHandler;
-  private final Handler startHandler;
-  private final Handler endHandler;
-  private final Handler errHandler;
-  
+
+  private Handler openTagHandler;
+  private Handler closeTagHandler;
+  private Handler textValueHandler;
+  private Handler startHandler;
+  private Handler endHandler;
+  private Handler errHandler;
+
   public static class Builder {
 
     private Handler openTagHandler;
@@ -25,7 +25,7 @@ public class XMLParser implements Parser{
     private Handler startHandler;
     private Handler endHandler;
     private Handler errHandler;
-    
+
     public Builder setOpenTagHandler(Handler openTagHandler) {
       this.openTagHandler = openTagHandler;
       return this;
@@ -50,10 +50,14 @@ public class XMLParser implements Parser{
       this.errHandler = errHandler;
       return this;
     }
-    
+
     public XMLParser build(){
       return new XMLParser(this);
     }
+  }
+
+  public XMLParser(){
+    
   }
   
   public XMLParser(Builder builder){
@@ -63,16 +67,16 @@ public class XMLParser implements Parser{
     startHandler = builder.startHandler;
     endHandler = builder.endHandler;
     errHandler = builder.errHandler;
-    
+
   }
-  
+
   private StateMashineTag tag = new StateMashineTag(this);
-  
+
   public String parse(String string) throws IOException {
     StreamReader stream = new StreamReader(string);
     return parseInputStream(stream);
   }
-    
+
   public String parse(File file) throws IOException {
     StreamReader stream = new StreamReader(file);
     return parseInputStream(stream);
@@ -85,11 +89,11 @@ public class XMLParser implements Parser{
       tag.next((char)symbol);
     } while (symbol !=-1);
     return result.toString();
-}
-  
+  }
+
   public void onOpenTag(ParserData parserData){
     if(openTagHandler != null){
-    openTagHandler.handle(parserData);
+      openTagHandler.handle(parserData);
     }
     result.append("<").append(parserData.getTag()).append(">");
     parserData.setTag("");
@@ -97,7 +101,7 @@ public class XMLParser implements Parser{
 
   public void onCloseTag(ParserData parserData){
     if(closeTagHandler != null){
-    closeTagHandler.handle(parserData);
+      closeTagHandler.handle(parserData);
     }
     result.append("</").append(parserData.getTag()).append(">");
     parserData.setTag("");
@@ -105,15 +109,15 @@ public class XMLParser implements Parser{
 
   public void onTextValue(ParserData parserData){
     if(textValueHandler != null){
-    textValueHandler.handle(parserData);
+      textValueHandler.handle(parserData);
     }
     result.append("").append(parserData.getText()).append("");
     parserData.setText("");
   }
-  
+
   public void onStart(ParserData parserData){
     if(startHandler != null) {
-    startHandler.handle(parserData);
+      startHandler.handle(parserData);
     }
     result.append("<").append(parserData.getTag()).append(">");
     parserData.setTag("");
@@ -121,13 +125,37 @@ public class XMLParser implements Parser{
 
   public void onEnd(ParserData parserData){
     if(endHandler != null){
-    endHandler.handle(parserData);
+      endHandler.handle(parserData);
     }
   }
 
   public void onError(ParserData parserData){
     if(errHandler != null){
-    errHandler.handle(parserData);
+      errHandler.handle(parserData);
     }
+  }
+
+  public void onOpenTag(Handler handler){
+    openTagHandler = handler;
+  }
+
+  public void onCloseTag(Handler handler){
+    closeTagHandler = handler;
+  }
+
+  public void onTextValue(Handler handler){
+    textValueHandler = handler;
+  }
+
+  public void onStart(Handler handler){
+    startHandler = handler;
+  }
+
+  public void onEnd(Handler handler){
+    endHandler = handler;
+  }
+
+  public void onError(Handler handler){
+    errHandler = handler;
   }
 }
