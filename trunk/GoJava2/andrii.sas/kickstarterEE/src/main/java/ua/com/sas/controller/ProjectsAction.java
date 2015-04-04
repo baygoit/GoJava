@@ -9,6 +9,7 @@ import com.opensymphony.xwork2.ModelDriven;
 import ua.com.sas.dao.CategoriesDAO;
 import ua.com.sas.model.Category;
 import ua.com.sas.model.Project;
+import ua.com.sas.service.CategoriesService;
 
 public class ProjectsAction implements ModelDriven {
 
@@ -17,10 +18,10 @@ public class ProjectsAction implements ModelDriven {
 	private List<Project> projects;
 	
 	@Autowired
-	private CategoriesDAO categoriesDAO;
+	private CategoriesService categoriesService;
 
 	public String findProjects() throws Exception {
-		Category category = categoriesDAO.get(id);
+		Category category = categoriesService.getWithProjects(id);
 		setProjects(category.getProjects());
 		return "success";
 	}

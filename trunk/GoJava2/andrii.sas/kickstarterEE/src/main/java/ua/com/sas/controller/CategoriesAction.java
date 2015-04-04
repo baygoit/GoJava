@@ -6,15 +6,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.opensymphony.xwork2.ModelDriven;
 
-import ua.com.sas.dao.CategoriesDAO;
 import ua.com.sas.model.Category;
+import ua.com.sas.service.CategoriesService;
 
 public class CategoriesAction implements ModelDriven {
 
 	private Category category;
 
 	@Autowired
-	private CategoriesDAO categoriesDAO;
+	private CategoriesService categoriesServise;
 
 	private List<Category> categories;
 
@@ -24,7 +24,7 @@ public class CategoriesAction implements ModelDriven {
 	}
 
 	public String getAll() throws Exception {
-		setCategories(categoriesDAO.getCategories());
+		setCategories(categoriesServise.getAll());
 		return "success";
 	}
 

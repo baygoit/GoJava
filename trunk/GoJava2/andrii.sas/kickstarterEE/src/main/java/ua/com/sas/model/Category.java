@@ -21,7 +21,7 @@ public class Category {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@OneToMany(mappedBy="category", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy="category", fetch = FetchType.LAZY)
     private List<Project> projects;
     
     public List<Project> getProjects() {

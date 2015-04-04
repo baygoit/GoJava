@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.opensymphony.xwork2.ModelDriven;
 
-import ua.com.sas.dao.ProjectsDAO;
 import ua.com.sas.model.Project;
+import ua.com.sas.service.ProjectsService;
 
 public class ProjectAction implements ModelDriven {
 	
@@ -13,10 +13,10 @@ public class ProjectAction implements ModelDriven {
 	private int id;
 	
 	@Autowired
-	private ProjectsDAO projectsDAO;
+	private ProjectsService projectsService;
 
 	public String current(){
-		setProject(projectsDAO.get(id));
+		setProject(projectsService.getCurrent(id));
 		return "success";
 	}
 	

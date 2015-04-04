@@ -10,7 +10,7 @@ public class AbstractDAO {
 	SessionFactory sessionFactory;
 
 	Session getSession(){
-		return sessionFactory.openSession();
+		return sessionFactory.getCurrentSession();
 	}
 
 }

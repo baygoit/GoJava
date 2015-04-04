@@ -3,26 +3,24 @@ package ua.com.sas.dao;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Projections;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import ua.com.sas.model.Project;
 import ua.com.sas.model.Projects;
 
-@Component
+@Repository
 public class ProjectsDAO extends AbstractDAO implements Projects{
 
 	@Override
 	public void add(Project project) {
 		Session session = getSession();
         session.save(project);
-        session.close();
 	}
 
 	@Override
 	public Project get(int id) {
 		Session session = getSession();
 	    Project project = (Project) session.get(Project.class, id);
-	    session.close();
 	    return project;
 	}
 
@@ -36,7 +34,6 @@ public class ProjectsDAO extends AbstractDAO implements Projects{
 	    size = count.intValue();
 	    criteria.setProjection(null);
 	    criteria.setResultTransformer(Criteria.ROOT_ENTITY);
-	    session.close();
 		return size;
 	}
 

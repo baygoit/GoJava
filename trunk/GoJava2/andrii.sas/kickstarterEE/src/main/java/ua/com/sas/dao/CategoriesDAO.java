@@ -6,18 +6,17 @@ import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.criterion.Projections;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import ua.com.sas.model.*;
 
-@Component
+@Repository
 public class CategoriesDAO extends AbstractDAO implements Categories {
 	
 	@Override
 	public void add(Category category) {
 		 Session session = getSession();
 	        session.save(category);
-	        session.close();
 	}
 
 	@Override
@@ -25,7 +24,6 @@ public class CategoriesDAO extends AbstractDAO implements Categories {
 		Session session = getSession();
         Query query = session.createQuery("FROM Category");
         List<Category> categories = query.list();
-        session.close();
 		return categories;
 	}
 	
@@ -33,7 +31,7 @@ public class CategoriesDAO extends AbstractDAO implements Categories {
 	public Category get(int id) {
 		Session session = getSession();
 	    Category category = (Category) session.get(Category.class, id);
-	    session.close();
+	    category.getProjects().size();
 	    return category;
 	}
 
@@ -47,7 +45,6 @@ public class CategoriesDAO extends AbstractDAO implements Categories {
 	    size = count.intValue();
 	    criteria.setProjection(null);
 	    criteria.setResultTransformer(Criteria.ROOT_ENTITY);
-	    session.close();
 		return size;
 	}
 
