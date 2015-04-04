@@ -2,6 +2,7 @@ package ua.goit.xmlparsertdd;
 
 public class TagParser {
   private TagType type;
+  private StringBuilder name;
 
   public TagType getType() {
     return type;
@@ -9,5 +10,17 @@ public class TagParser {
 
   public void setType(TagType type) {
     this.type = type;
+  }
+
+  public String getName() {
+    return name.toString();
+  }
+
+  public void buildName(char c) {
+    name.append(c);
+  }
+
+  public Tag getTag() {
+    return new Tag(type, name.toString());
   }
 }

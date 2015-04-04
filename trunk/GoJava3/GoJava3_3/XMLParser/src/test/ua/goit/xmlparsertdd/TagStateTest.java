@@ -43,4 +43,14 @@ public class TagStateTest {
     assertSame(TagState.NAME2, actual);
   }
 
+  @Test
+  public void parseOpenTagWithName() {
+    TagStateMachine machine = new TagStateMachine();
+    char[] charsForName = {'<', 'n', 'a', 'm', 'e', '>'};
+    for (char c : charsForName) {
+      machine.next(c);
+    }
+    Tag tag = machine.getResult();
+    assertSame("name", tag.getName());
+  }
 }
