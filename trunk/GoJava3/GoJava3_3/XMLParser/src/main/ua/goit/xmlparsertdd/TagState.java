@@ -4,7 +4,7 @@ enum TagState {
   INIT {
 
     @Override
-    public TagState next(char c, TagParser parser) {
+    public TagState next(char c, TagBuilder parser) {
       TagState result = INVALID_END;
       result = TagStateMachine.handleOpenBracket(c, result);
       if (result == OPEN) {
@@ -16,7 +16,7 @@ enum TagState {
   OPEN {
 
     @Override
-    public TagState next(char c, TagParser parser) {
+    public TagState next(char c, TagBuilder parser) {
       TagState result = INVALID_END;
       result = TagStateMachine.handleFirstLetterForName(c, result);
       result = TagStateMachine.handleSpace(c, result);
@@ -26,7 +26,7 @@ enum TagState {
   NAME2 {
 
     @Override
-    public TagState next(char c, TagParser parser) {
+    public TagState next(char c, TagBuilder parser) {
       TagState result = INVALID_END;
       result = TagStateMachine.handleCloseBracket(c, result);
       result = TagStateMachine.handleLetterForName(c, result);
@@ -36,18 +36,18 @@ enum TagState {
   VALID_END {
 
     @Override
-    public TagState next(char c, TagParser parser) {
+    public TagState next(char c, TagBuilder parser) {
       return VALID_END;
     }
   },
   INVALID_END {
 
     @Override
-    public TagState next(char c, TagParser parser) {
+    public TagState next(char c, TagBuilder parser) {
       return INVALID_END;
     }
   };
 
-  abstract TagState next(char c, TagParser parser);
+  abstract TagState next(char c, TagBuilder parser);
 }
 

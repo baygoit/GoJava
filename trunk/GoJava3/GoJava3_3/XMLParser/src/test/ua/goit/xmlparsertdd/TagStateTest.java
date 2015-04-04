@@ -10,14 +10,14 @@ public class TagStateTest {
   @Test
   public void givenInitState_WhenFirstCharIsBracket_ThenStateShouldBeOpen() {
     TagState state = TagState.INIT;
-    TagState actual = state.next('<', new TagParser());
+    TagState actual = state.next('<', new TagBuilder());
     assertSame(TagState.OPEN, actual);
   }
 
   @Test
   public void givenInitState_WhenFirstCharIsBracket_ThenTagTypeShouldBeOpen() {
     TagState state = TagState.INIT;
-    TagParser parser = new TagParser();
+    TagBuilder parser = new TagBuilder();
     state.next('<', parser);
     TagType actualType = parser.getType();
     assertSame(TagType.OPEN, actualType);
@@ -27,14 +27,14 @@ public class TagStateTest {
   public void givenOpenState_WhenFirstCharIsSpace_ThenStateShouldBeOpen() {
     TagState state = TagState.OPEN;
     TagStateMachine.tagState = TagState.OPEN;
-    TagState actual = state.next(' ', new TagParser());
+    TagState actual = state.next(' ', new TagBuilder());
     assertSame(TagState.OPEN, actual);
   }
 
   @Test
   public void givenOpenState_WhenFirstCharInTagNameIsDigit_ThenShouldBeInvalidEndState() {
     TagState state = TagState.OPEN;
-    TagState actual = state.next('1', new TagParser());
+    TagState actual = state.next('1', new TagBuilder());
     assertSame(TagState.INVALID_END, actual);
   }
 

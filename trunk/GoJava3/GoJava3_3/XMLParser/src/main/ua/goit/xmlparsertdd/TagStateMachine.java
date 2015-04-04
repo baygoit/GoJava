@@ -2,7 +2,7 @@ package ua.goit.xmlparsertdd;
 
 public class TagStateMachine {
   static TagState tagState = TagState.INIT;
-  static TagParser parser = new TagParser();
+  static TagBuilder parser = new TagBuilder();
 
   public void next(char c) {
     tagState = tagState.next(c, parser);
