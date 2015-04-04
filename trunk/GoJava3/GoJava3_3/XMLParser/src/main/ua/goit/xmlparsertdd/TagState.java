@@ -17,7 +17,7 @@ enum TagState {
   OPEN {
     @Override
     public TagState next(char c, TagParser parser) {
-      TagState result = OPEN;
+      TagState result = INVALID_END;
       result = TagStateMachine.handleFirstLetterForName(c, result);
       result = TagStateMachine.handleSpace(c, result);
       return result;

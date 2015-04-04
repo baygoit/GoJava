@@ -2,8 +2,8 @@ package ua.goit.xmlparsertdd;
 
 import org.junit.Test;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertTrue;
 
 
 public class TagStateTest {
@@ -26,6 +26,7 @@ public class TagStateTest {
   @Test
   public void givenOpenState_WhenFirstCharIsSpace_ThenStateShouldBeOpen() {
     TagState state = TagState.OPEN;
+    TagStateMachine.tagState = TagState.OPEN;
     TagState actual = state.next(' ', new TagParser());
     assertSame(TagState.OPEN, actual);
   }
@@ -38,13 +39,6 @@ public class TagStateTest {
   }
 
   @Test
-  public void givenOpenState_WhenCharIsFirstLetterOfName_ThenStateShouldBeName2() {
-    TagState state = TagState.OPEN;
-    TagState actual = state.next('a', new TagParser());
-    assertSame(TagState.NAME2, actual);
-  }
-
-  @Test
   public void parseOpenTagWithName() {
     TagStateMachine machine = new TagStateMachine();
     char[] charsForName = {'<', 'n', 'a', 'm', 'e', '>'};
@@ -52,6 +46,6 @@ public class TagStateTest {
       machine.next(c);
     }
     Tag tag = machine.getResult();
-    assertTrue("name".equals(tag.getName()));
+    assertEquals("name", tag.getName());
   }
 }

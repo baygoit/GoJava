@@ -1,7 +1,7 @@
 package ua.goit.xmlparsertdd;
 
 public class TagStateMachine {
-  TagState tagState = TagState.INIT;
+  static TagState tagState = TagState.INIT;
   static TagParser parser = new TagParser();
 
   public void next(char c) {
@@ -17,8 +17,8 @@ public class TagStateMachine {
 
   public static TagState handleSpace(char c, TagState result) {
     if (c == ' ') {
-      if (result == TagState.OPEN) {
-        return result;
+      if (tagState == TagState.OPEN) {
+        result = TagState.OPEN;
       }
     }
     return result;
