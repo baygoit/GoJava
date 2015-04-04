@@ -1,6 +1,7 @@
 package miscel;
 
 import java.util.HashMap;
+import java.util.NoSuchElementException;
 
 public class LRUCache {
   private int capacity;
@@ -12,12 +13,12 @@ public class LRUCache {
     this.capacity = capacity;
   }
 
-  public int get(int key) {
+  public Integer get(int key) {
     if (map.containsKey(key)) {
       increasePriority(key);
       return map.get(key).value;
     }
-    return 0;
+    return null;
   }
 
   public void put(int key, int value) {
@@ -51,6 +52,10 @@ public class LRUCache {
       tail.next = null;
     }
     map.remove(keyToRemove);
+    if (map.size() == 0) {
+      head = null;
+      tail = null;
+    }
   }
 
   private void increasePriority(int key) {
