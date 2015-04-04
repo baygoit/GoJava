@@ -3,9 +3,25 @@ package test.ua.goit.alg.xmlparser;
 import java.io.IOException;
 import org.junit.Assert;
 import org.junit.Test;
+
+import ua.goit.alg.xmlparser.parser.Handler;
+import ua.goit.alg.xmlparser.parser.ParserData;
 import ua.goit.alg.xmlparser.parser.XMLParser;
 
 public class TestParser {
+
+  @Test
+  public void onOpenHandler() throws IOException{
+    XMLParser parser = new XMLParser.Builder().setOpenTagHandler(new Handler() {
+      @Override
+      public void handle(ParserData parserData) {
+        System.out.println("open handler");
+      }
+    }).build();
+    String result = parser.parse("<s><t></t></s>");
+    String expectedResult = "<s><t></t></s>";
+    Assert.assertEquals(expectedResult, result);
+  }
 
   @Test
   public void testSimple() throws IOException{
