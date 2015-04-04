@@ -19,8 +19,16 @@ enum TagState {
     public TagState next(char c, TagParser parser) {
       TagState result = INVALID_END;
       result = TagStateMachine.handleOpenSpace(c, result);
-
+      result = TagStateMachine.handleFirstLetter(c, result);
       return result;
+    }
+  },
+
+  NAME2 {
+    @Override
+    public TagState next(char c, TagParser parser) {
+      TagState result = INVALID_END;
+      return  result;
     }
   },
 

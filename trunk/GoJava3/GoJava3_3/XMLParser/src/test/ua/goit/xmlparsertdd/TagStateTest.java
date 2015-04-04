@@ -7,13 +7,6 @@ import static org.junit.Assert.assertSame;
 
 public class TagStateTest {
   @Test
-  public void givenOpenState_WhenFirstCharInTagNameIsDigit_ThenShouldBeInvalidEndState() {
-    TagState state = TagState.OPEN;
-    TagState actual = state.next('1', new TagParser());
-    assertSame(TagState.INVALID_END, actual);
-  }
-
-  @Test
   public void givenInitState_WhenFirstCharIsBracket_ThenStateShouldBeOpen() {
     TagState state = TagState.INIT;
     TagState actual = state.next('<', new TagParser());
@@ -34,6 +27,20 @@ public class TagStateTest {
     TagState state = TagState.OPEN;
     TagState actual = state.next(' ', new TagParser());
     assertSame(TagState.OPEN, actual);
+  }
+
+  @Test
+  public void givenOpenState_WhenFirstCharInTagNameIsDigit_ThenShouldBeInvalidEndState() {
+    TagState state = TagState.OPEN;
+    TagState actual = state.next('1', new TagParser());
+    assertSame(TagState.INVALID_END, actual);
+  }
+
+  @Test
+  public void givenOpenState_WhenCharIsFirstLetterOfName_ThenStateShouldBeName2() {
+    TagState state = TagState.OPEN;
+    TagState actual = state.next('a', new TagParser());
+    assertSame(TagState.NAME2, actual);
   }
 
 }

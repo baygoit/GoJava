@@ -21,4 +21,11 @@ public class TagStateMachine {
     }
     return result;
   }
+
+  public static TagState handleFirstLetter(char c, TagState result) {
+    if (CharUtil.isNameStartChar(c)) {
+      result = TagState.NAME2;
+    }
+    return  result;
+  }
 }

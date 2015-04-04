@@ -4,8 +4,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class CharUtil {
-  static Set<Character> nameStartChar= new HashSet<Character>();
-  static Set<Character> nameChar= new HashSet<Character>();
+  static Set<Character> nameStartChar= new HashSet<>();
+  static Set<Character> nameChar= new HashSet<>();
   
   static{
     nameStartChar.add(':');
@@ -39,7 +39,6 @@ public class CharUtil {
     if (start > end){
       return;
     }
-    
     for(char ch = start; ch<= end; ch++){
       charSet.add(ch);
     } 
