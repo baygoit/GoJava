@@ -31,7 +31,9 @@ public class CharUtil {
     addCharsToSet('0','9',nameChar );
     addCharsToSet(0x0300, 0x036F,nameChar );
     addCharsToSet(0x203F,0x2040, nameChar );
-  };
+  }
+
+  private CharUtil(){}
 
   static void addCharsToSet(char start,char end, Set<Character> charSet){
     if (start > end){
@@ -51,44 +53,26 @@ public class CharUtil {
       charSet.add(ch);
     } 
   }
-  
-  
-  private CharUtil(){}
-  
+
   public static boolean isEmptyChar(char symb){
-    boolean res = false;
-    res = (symb == ' ') || (symb == '\n')|| (symb == '\t')|| (symb == '\r');
-    return res;
+    return (symb == ' ') || (symb == '\n')|| (symb == '\t')|| (symb == '\r');
   } 
 
   public static boolean isNameChar(char ch){
-    boolean res = false;
-    
-    if(nameStartChar.contains(ch)){
-      res = true;
-    }else{
-      res = nameChar.contains(ch);
-    }
-    return res;
+    return nameStartChar.contains(ch) || nameChar.contains(ch);
   }
   
   public static boolean isNameStartChar(char ch){
-    boolean res = false;
-    res = nameStartChar.contains(ch);
-    return res;
+    return nameStartChar.contains(ch);
   } 
   
   public static void print() {
     int i = 0;
-    System.out.println("Statrt:");
+    System.out.println("Start:");
     for (Character ch : nameChar) {
       System.out.print(ch + " ");
       i++;
       if(i % 100 == 0 )System.out.print("\n");
-      
-      
     }
-
   }
-
 }
