@@ -62,7 +62,7 @@ public class XMLParser implements Parser{
     textValueHandler = builder.textValueHandler;
     startHandler = builder.startHandler;
     endHandler = builder.endHandler;
-    errHandler = builder.endHandler;
+    errHandler = builder.errHandler;
     
   }
   
