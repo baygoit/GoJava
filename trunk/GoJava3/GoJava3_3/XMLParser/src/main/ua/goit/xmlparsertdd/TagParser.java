@@ -2,7 +2,7 @@ package ua.goit.xmlparsertdd;
 
 public class TagParser {
   private TagType type;
-  private StringBuilder name;
+  private StringBuilder name = new StringBuilder();
 
   public TagType getType() {
     return type;
