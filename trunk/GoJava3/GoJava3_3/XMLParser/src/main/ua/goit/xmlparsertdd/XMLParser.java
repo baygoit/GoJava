@@ -11,7 +11,7 @@ import java.util.Map;
 import java.util.Set;
 
 
-public class XMLReader {
+public class XMLParser {
   private Map<Event, Set<Handler>> handlers;
   TagStateMachine machine = new TagStateMachine();
 
