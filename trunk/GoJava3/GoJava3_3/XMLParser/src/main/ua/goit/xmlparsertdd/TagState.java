@@ -1,8 +1,8 @@
 package ua.goit.xmlparsertdd;
 
 enum TagState {
-
   INIT {
+
     @Override
     public TagState next(char c, TagParser parser) {
       TagState result = INVALID_END;
@@ -13,8 +13,8 @@ enum TagState {
       return result;
     }
   },
-
   OPEN {
+
     @Override
     public TagState next(char c, TagParser parser) {
       TagState result = INVALID_END;
@@ -23,8 +23,8 @@ enum TagState {
       return result;
     }
   },
-
   NAME2 {
+
     @Override
     public TagState next(char c, TagParser parser) {
       TagState result = INVALID_END;
@@ -33,15 +33,15 @@ enum TagState {
       return  result;
     }
   },
-
   VALID_END {
+
     @Override
     public TagState next(char c, TagParser parser) {
       return VALID_END;
     }
   },
-
   INVALID_END {
+
     @Override
     public TagState next(char c, TagParser parser) {
       return INVALID_END;
