@@ -1,11 +1,12 @@
 package ua.goit.alg.xmlparser.parser;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class ParserData {
 
   String tag = "";
-  HashMap<String, String> attributes = new HashMap<String, String>();
+  Map<String, String> attributes = new HashMap<String, String>();
   String text = "";
   String attributeName = "";
   String attributeValue = "";
