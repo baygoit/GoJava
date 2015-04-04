@@ -33,7 +33,6 @@
 		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 		<property name="packagesToScan" value="ua.com.sas.model"/>
-		<property name="configLocation" value="classpath:hibernate.cfg.xml" />
 		<property name="hibernateProperties">
 			<props>
 				<prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</prop>
