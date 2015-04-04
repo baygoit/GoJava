@@ -1,4 +1,5 @@
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Map;
 
 public class LRUCache {
@@ -18,6 +19,7 @@ public class LRUCache {
       return -1;
     }
     Node node = cache.get(key);
+    unLink(node);
     linkLast(node);
     return node.value;
   }
@@ -78,8 +80,8 @@ public class LRUCache {
   }
 
   private static class Node {
-    int value;
     final int key;
+    int value;
     Node next;
     Node prev;
 

@@ -1,8 +1,9 @@
 package ua.goit.alg;
 
 import java.io.*;
+import java.nio.ByteBuffer;
+import java.nio.channels.FileChannel;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,10 +56,17 @@ public class Arrays {
   }
 
   private static File createTempFile(int[] array, String dir) throws IOException {
-
     File tempFile = File.createTempFile("temp", ".txt", new File(dir));
-
     MergeSort.sort(array);
+
+    try(FileOutputStream out = new FileOutputStream(tempFile)) {
+      FileChannel file = out.getChannel();
+      ByteBuffer buf = file.map(FileChannel.MapMode.READ_WRITE, 0, 4 * array.length);
+      for (int i : array) {
+        buf.putInt(i);
+      }
+    }
+
     FileWriter fileWriter = new FileWriter(tempFile);
     for (int anArray : array) {
       fileWriter.write(anArray + "\n");
