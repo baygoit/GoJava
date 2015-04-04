@@ -45,11 +45,12 @@ public class LRUCache {
   }
 
   private void removeExcessiveValue() {
+    int keyToRemove = tail.key;
     if (tail.hasPrevious()) {
       tail = tail.previous;
       tail.next = null;
     }
-    map.remove(tail.key);
+    map.remove(keyToRemove);
   }
 
   private void increasePriority(int key) {
@@ -59,7 +60,7 @@ public class LRUCache {
         priorityNode.previous.next = priorityNode.next;
         priorityNode.next.previous = priorityNode.previous;
       } else {
-        priorityNode.previous = tail;
+        tail = priorityNode.previous;
         priorityNode.previous.next = null;
       }
       head.previous = priorityNode;
