@@ -16,7 +16,7 @@ public class CategoriesDAO extends AbstractDAO implements Categories {
 	@Override
 	public void add(Category category) {
 		 Session session = getSession();
-	        session.save(category);
+	     session.save(category);
 	}
 
 	@Override
@@ -33,19 +33,6 @@ public class CategoriesDAO extends AbstractDAO implements Categories {
 	    Category category = (Category) session.get(Category.class, id);
 	    category.getProjects().size();
 	    return category;
-	}
-
-	@Override
-	public int size() {
-		Session session = getSession();
-		int size = 0;
-		Criteria criteria = session.createCriteria(Category.class);
-		criteria.setProjection(Projections.rowCount());
-	    Long count = (Long) criteria.uniqueResult();
-	    size = count.intValue();
-	    criteria.setProjection(null);
-	    criteria.setResultTransformer(Criteria.ROOT_ENTITY);
-		return size;
 	}
 
 }

@@ -11,6 +11,7 @@
     		</s:url>
             <s:a href="%{urlTag}"><s:property value="name"/></s:a>
     	</s:iterator>
+    	<s:a href="createDummy">Create Dummy</s:a>
 
     </body>
 </html>

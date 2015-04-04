@@ -15,7 +15,7 @@
 		<s:property value="project.question"/><br>
 		<br>
 		<s:url action='projects' var="url">
-			<s:param name="id">${project.categoryId}</s:param>
+			<s:param name="id">${project.category.id}</s:param>
 		</s:url>
 		<s:a href="%{url}">Return</s:a>
 	</body>

@@ -16,7 +16,7 @@ public class ProjectAction extends ActionSupport {
 	private ProjectsService service;
 
 	public String current(){
-		setProject(service.getCurrent(id));
+		project = service.getCurrent(id);
 		return "success";
 	}
 	

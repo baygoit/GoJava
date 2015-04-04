@@ -21,7 +21,7 @@ public class ProjectsAction extends ActionSupport {
 
 	public String findProjects() throws Exception {
 		Category category = service.getWithProjects(id);
-		setProjects(category.getProjects());
+		projects = category.getProjects();
 		return "success";
 	}
 

@@ -18,9 +18,6 @@ public class Project {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@Column(name="category_id")
-	private int categoryId;
-
 	private String name;
 	private String description;
 
@@ -33,7 +30,6 @@ public class Project {
 	@Column(name = "days_left")
 	private int daysLeft;
 
-
 	private String history;
 	
 	@Column(name = "video_link")
@@ -43,27 +39,23 @@ public class Project {
 	private String questions;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "category_id", nullable = false, insertable = false, updatable = false)
+	@JoinColumn(name = "category_id", nullable = false, insertable = true, updatable = false)
 	private Category category;
 
 	public Category getCategory() {
 		return category;
 	}
 	
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+
 	public int getId() {
 		return id;
 	}
 	
 	public void setId(int id) {
 		this.id = id;
-	}
-	
-	public int getCategoryId() {
-		return categoryId;
-	}
-
-	public void setCategoryId(int categoryId) {
-		this.categoryId = categoryId;
 	}
 	
 	public String getName() {

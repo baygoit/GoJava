@@ -10,6 +10,10 @@
 			<action name="categories" class="ua.com.sas.controller.CategoriesAction" method="getAll">
 				<result name="success">/categories.jsp</result>
 			</action>
+
+			<action name="createDummy" class="ua.com.sas.controller.CategoriesAction" method="dummy">
+				<result name="success">/categories.jsp</result>
+			</action>
 			        
 			<action name="projects" class="ua.com.sas.controller.ProjectsAction" method="findProjects">
 				<result name="success">/projects.jsp</result>

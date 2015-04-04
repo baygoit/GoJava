@@ -6,6 +6,4 @@ public interface Projects {
 
 	Project get(int id);
 
-	int size();
-
 }

@@ -17,7 +17,12 @@ public class CategoriesAction extends ActionSupport {
 	private List<Category> categories;
 
 	public String getAll() throws Exception {
-		setCategories(service.getAll());
+		categories = service.getAll();
+		return "success";
+	}
+	
+	public String dummy() throws Exception {
+		service.createDummyCategoryWithProject();
 		return "success";
 	}
 

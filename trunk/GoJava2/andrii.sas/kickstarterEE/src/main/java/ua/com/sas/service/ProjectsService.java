@@ -13,4 +13,6 @@ public interface ProjectsService {
 	
 	Project getCurrent(int id);
 
+	void createDummyCategoryWithProject();
+
 }
