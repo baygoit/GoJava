@@ -10,12 +10,61 @@ public class XMLParser implements Parser{
   
   private StringBuilder result = new StringBuilder("");
   
-  private Handler openTagHandler = null;
-  private Handler closeTagHandler = null;
-  private Handler textValueHandler = null;
-  private Handler startHandler = null;
-  private Handler endHandler = null;
-  private Handler errHandler = null;
+  private final Handler openTagHandler;
+  private final Handler closeTagHandler;
+  private final Handler textValueHandler;
+  private final Handler startHandler;
+  private final Handler endHandler;
+  private final Handler errHandler;
+  
+  public static class Builder {
+
+    private Handler openTagHandler;
+    private Handler closeTagHandler;
+    private Handler textValueHandler;
+    private Handler startHandler;
+    private Handler endHandler;
+    private Handler errHandler;
+    
+    public Builder setOpenTagHandler(Handler openTagHandler) {
+      this.openTagHandler = openTagHandler;
+      return this;
+    }
+    public Builder setCloseTagHandler(Handler closeTagHandler) {
+      this.closeTagHandler = closeTagHandler;
+      return this;
+    }
+    public Builder setTextValueHandler(Handler textValueHandler) {
+      this.textValueHandler = textValueHandler;
+      return this;
+    }
+    public Builder setStartHandler(Handler startHandler) {
+      this.startHandler = startHandler;
+      return this;
+    }
+    public Builder setEndHandler(Handler endHandler) {
+      this.endHandler = endHandler;
+      return this;
+    }
+    public Builder setErrHandler(Handler errHandler) {
+      this.errHandler = errHandler;
+      return this;
+    }
+    
+    public XMLParser build(){
+      return new XMLParser(this);
+    }
+  }
+  
+  public XMLParser(Builder builder){
+    openTagHandler = builder.openTagHandler;
+    closeTagHandler = builder.closeTagHandler;
+    textValueHandler = builder.textValueHandler;
+    startHandler = builder.startHandler;
+    endHandler = builder.endHandler;
+    errHandler = builder.endHandler;
+    
+  }
   
   private StateMashineTag tag = new StateMashineTag(this);
   
@@ -26,8 +75,7 @@ public class XMLParser implements Parser{
     
   public String parse(File file) throws IOException {
     StreamReader stream = new StreamReader(file);
-      return parseInputStream(stream);
-
+    return parseInputStream(stream);
   }
 
   private String parseInputStream(StreamReader stream) throws IOException {  
@@ -41,7 +89,7 @@ public class XMLParser implements Parser{
   
   public void onOpenTag(ParserData parserData){
     if(openTagHandler != null){
-    openTagHandler.onOpenTag(parserData);
+    openTagHandler.handle(parserData);
     }
     result.append("<").append(parserData.getTag()).append(">");
     parserData.setTag("");
@@ -49,7 +97,7 @@ public class XMLParser implements Parser{
 
   public void onCloseTag(ParserData parserData){
     if(closeTagHandler != null){
-    closeTagHandler.onCloseTag(parserData);
+    closeTagHandler.handle(parserData);
     }
     result.append("</").append(parserData.getTag()).append(">");
     parserData.setTag("");
@@ -57,7 +105,7 @@ public class XMLParser implements Parser{
 
   public void onTextValue(ParserData parserData){
     if(textValueHandler != null){
-    textValueHandler.onTextValue(parserData);
+    textValueHandler.handle(parserData);
     }
     result.append("").append(parserData.getText()).append("");
     parserData.setText("");
@@ -65,7 +113,7 @@ public class XMLParser implements Parser{
   
   public void onStart(ParserData parserData){
     if(startHandler != null) {
-    startHandler.onStart(parserData);
+    startHandler.handle(parserData);
     }
     result.append("<").append(parserData.getTag()).append(">");
     parserData.setTag("");
@@ -73,38 +121,13 @@ public class XMLParser implements Parser{
 
   public void onEnd(ParserData parserData){
     if(endHandler != null){
-    endHandler.onEnd(parserData);
+    endHandler.handle(parserData);
     }
   }
 
   public void onError(ParserData parserData){
     if(errHandler != null){
-    errHandler.onError(parserData);
+    errHandler.handle(parserData);
     }
-  }
-  
-  //Overload methods for callback
-  public void onOpenTag(Handler handler){
-    openTagHandler = handler;
-  }
-
-  public void onCloseTag(Handler handler){
-    closeTagHandler = handler;
-  }
-
-  public void onTextValue(Handler handler){
-    textValueHandler = handler;
-  }
-
-  public void onStart(Handler handler){
-    startHandler = handler;
-  }
-
-  public void onEnd(Handler handler){
-    endHandler = handler;
-  }
-
-  public void onError(Handler handler){
-    errHandler = handler;
   }
 }
