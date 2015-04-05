@@ -63,9 +63,7 @@ public enum TagState {
       if (c == ' ') {
         result = ATTRIBUTE_NAME;
       } else if (c == '>' || c == '/') {
-        ParseService service = handleClosingTags(c, parserData, xmlParser, result);
-        parserData = service.parserData;
-        result = service.result;
+        result = handleClosingTags(c, parserData, xmlParser, result);
       } else {
         result = TAG_NAME;
         parserData.appendTag(c);
@@ -86,9 +84,7 @@ public enum TagState {
           result = ATTRIBUTE_VALUE;
         }
       } else if (c == '>' || c == '/') {
-        ParseService service = handleClosingTags(c, parserData, xmlParser, result);
-        parserData = service.parserData;
-        result = service.result;
+        result = handleClosingTags(c, parserData, xmlParser, result);
       } else {
         result = ATTRIBUTE_NAME;
         parserData.appendAttributeName(c);
@@ -101,9 +97,7 @@ public enum TagState {
     public TagState next(char c, ParserData parserData, XMLParser xmlParser) {
       TagState result = ATTRIBUTE_VALUE;
       if (c == '>' || c == '/') {
-        ParseService service = handleClosingTags(c, parserData, xmlParser, result);
-        parserData = service.parserData;
-        result = service.result;
+        result = handleClosingTags(c, parserData, xmlParser, result);
       } else {
         parserData.appendAttributeValue(c);
       }
@@ -134,7 +128,7 @@ public enum TagState {
 
   public abstract TagState next(char c, ParserData parserData, XMLParser xmlParser);
 
-  private static ParseService handleClosingTags(char c, ParserData parserData, XMLParser xmlParser, TagState result) {
+  private static TagState handleClosingTags(char c, ParserData parserData, XMLParser xmlParser, TagState result) {
     if (result == ATTRIBUTE_VALUE) {
       parserData.addAttribute(parserData.getAttributeName(), parserData.getAttributeValue());
     }
@@ -148,16 +142,6 @@ public enum TagState {
       parserData.setTag(tag);
       result = CLOSETAG;
     }
-    return new ParseService(result, parserData);
-  }
-
-  private static class ParseService {
-    public TagState result;
-    public ParserData parserData;
-
-    public ParseService(TagState result, ParserData parserData) {
-      this.result = result;
-      this.parserData = parserData;
-    }
+    return result;
   }
 }
