@@ -1,7 +1,6 @@
 package ua.goit.lrucache;
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
 public class LRUCache {
@@ -16,7 +15,7 @@ public class LRUCache {
   }
 
   public void set(int key, int value) {
-    Node node = new Node(value);
+    Node node = new Node(key,value);
     if (map.size() < capacity || map.containsKey(key)) {
       if (map.containsKey(key)) {
         Node oldNode = map.get(key);
@@ -30,20 +29,9 @@ public class LRUCache {
       }
       Node firstNode = head;
       cutNode(firstNode);
-      removeFirstNode(firstNode);
+      map.remove(firstNode.key);
       map.put(key, node);
       insertLastNode(node);
-    }
-  }
-
-  private void removeFirstNode(Node node) {
-    Iterator<Map.Entry<Integer, Node>> iterator = map.entrySet().iterator();
-    while (iterator.hasNext()){
-      Map.Entry<Integer, Node> entry = iterator.next();
-      Node value = entry.getValue();
-      if (value.equals(node)) {
-        iterator.remove();
-      }
     }
   }
 
@@ -104,10 +92,12 @@ public class LRUCache {
 
   class Node {
     private int value;
+    private int key;
     private Node next;
     private Node prev;
 
-    Node(int value) {
+    Node(int key, int value) {
+      this.key = key;
       this.value = value;
     }
   }
