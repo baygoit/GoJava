@@ -1,39 +1,43 @@
 package cache;
 
-class DLNode <Integer, V> {
+class DLNode {
     private int key;
-    private V value;
+    private int value;
 
-    public V getValue() {
+    public DLNode (int key, int value) {
+	this.key = key;
+	this.value = value;
+    }
+
+    public int getValue() {
 	return value;
     }
-    
+
     public int getKey() {
 	return key;
     }
 
-    public void setValue (int key, V value) {
+    public void setValue (int key, int value) {
 	this.key = key;
 	this.value = value;
     }
-    private DLNode<Integer, V> next;
-    private DLNode<Integer, V> prev;
+    
+    private DLNode next;
+    private DLNode prev;
 
-    public DLNode<Integer, V> getNext() {
+    public DLNode getNext() {
 	return next;
     }
-    public void setNext(DLNode<Integer, V> n) {
+    
+    public void setNext(DLNode n) {
 	next = n;
     }
-    public DLNode<Integer, V> getPrev() {
+    
+    public DLNode getPrev() {
 	return prev;
     }
-    public void setPrev(DLNode<Integer, V> n) {
+    
+    public void setPrev(DLNode n) {
 	prev=n;
-    }
-
-    public DLNode (int key, V value) {
-	this.key = key;
-	this.value = value;
     }
 }

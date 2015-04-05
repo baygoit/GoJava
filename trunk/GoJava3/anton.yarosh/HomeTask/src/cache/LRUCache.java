@@ -2,7 +2,7 @@ package cache;
 
 import java.util.HashMap;
 
-public class LRUCache<V> {
+public class LRUCache {
     private HashMap<Integer, DLNode> map = new HashMap<Integer, DLNode>();
     private DLNode head;
     private DLNode tail;
@@ -13,18 +13,18 @@ public class LRUCache<V> {
 	this.capacity = capacity;
     }
 
-    public V get(int key) {
+    public int get(int key) {
 	if (map.containsKey(key)) {
 	    DLNode lastUsed = map.get(key);
 	    removeNode(lastUsed);
 	    setNodeToTail(lastUsed);
-	    return (V) lastUsed.getValue();
+	    return lastUsed.getValue();
 	} else {
-	    return (V) new Integer(-1);
+	    return -1;
 	}
     }
 
-    public void set(int key, V value) {
+    public void set(int key, int value) {
 	if (map.containsKey(key)) {
 	    DLNode lastUsedNode = map.get(key);
 	    lastUsedNode.setValue(key, value);
