@@ -1,7 +1,6 @@
 package miscel;
 
 import java.util.HashMap;
-import java.util.NoSuchElementException;
 
 public class LRUCache {
   private int capacity;

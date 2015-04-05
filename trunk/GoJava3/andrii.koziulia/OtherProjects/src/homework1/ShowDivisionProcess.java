@@ -45,9 +45,9 @@ public class ShowDivisionProcess {
     showDivisionProcess(num1, num2);
   }
 
-  private long[] convertNumbers(String a, String b) {
-    ConvertedNumber num1 = convertValueToLong(a);
-    ConvertedNumber num2 = convertValueToLong(b);
+  private long[] convertNumbers(String string1, String string2) {
+    ConvertedNumber num1 = convertValueToLong(string1);
+    ConvertedNumber num2 = convertValueToLong(string2);
     int difference = num1.multiplier - num2.multiplier;
     if (num1.multiplier >= num2.multiplier) {
       num2.value *= Math.pow(10, Math.abs(difference));
