@@ -10,7 +10,7 @@ import ua.goit.graphElements.Group;
 /**
  * you need to create new copy per serialize operation
  */
-public class JSONSerializator extends Serializator {
+public class JSONSerializator implements Serializer {
   private StringBuilder tab = new StringBuilder();
   private StringBuilder zeroTab = new StringBuilder();
   private static final String ONE_TAB = "    ";
