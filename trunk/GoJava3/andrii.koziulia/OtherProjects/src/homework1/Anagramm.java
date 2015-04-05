@@ -12,12 +12,14 @@ public class Anagramm {
     public static void main(String[] args) throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         String expression = reader.readLine();
+        printAnagramm(expression);
+    }
+
+    public static void printAnagramm(String expression) {
         String[] array = expression.split(" ");
         for (int i=0;i<array.length;i++) {
-            array[i] = new StringBuffer(array[i]).reverse().toString();
-        }
-        for (String s:array) {
-            System.out.print(s + " ");
+            array[i] = new StringBuilder(array[i]).reverse().toString();
+            System.out.print(array[i] + " ");
         }
         System.out.println();
     }
