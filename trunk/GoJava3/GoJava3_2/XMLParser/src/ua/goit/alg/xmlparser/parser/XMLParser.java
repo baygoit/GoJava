@@ -97,16 +97,20 @@ public class XMLParser implements Parser{
 
   public void onOpenTag(ParserData parserData){
     if(openTagHandler != null){
+      //parserData.putTagInStack();
       openTagHandler.handle(parserData);
     }
-    parserData.setTag("");
+    parserData.clear();
   }
 
   public void onCloseTag(ParserData parserData){
     if(closeTagHandler != null){
       closeTagHandler.handle(parserData);
     }
-    parserData.setTag("");
+    /*if (!parserData.getStackElement().equals(parserData.getTag())) {
+      errHandler.handle(parserData);
+    }*/
+    parserData.clear();
   }
 
   public void onTextValue(ParserData parserData){
@@ -120,7 +124,7 @@ public class XMLParser implements Parser{
     if(startHandler != null) {
       startHandler.handle(parserData);
     }
-    parserData.setTag("");
+    parserData.clear();
   }
 
   public void onEnd(ParserData parserData){

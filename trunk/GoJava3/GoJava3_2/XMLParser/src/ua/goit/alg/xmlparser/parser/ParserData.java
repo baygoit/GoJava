@@ -1,9 +1,8 @@
 package ua.goit.alg.xmlparser.parser;
 
-import ua.goit.alg.xmlparser.statemashines.TagState;
-
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Stack;
 
 public class ParserData {
 
@@ -12,7 +11,16 @@ public class ParserData {
   private StringBuilder text = new StringBuilder("");
   private StringBuilder attributeName = new StringBuilder("");
   private StringBuilder attributeValue = new StringBuilder("");
+/*  private Stack<String> tagStack;
 
+  public String getStackElement() {
+    return tagStack.pop();
+  }
+
+  public void putTagInStack() {
+    tagStack.push(tag.toString());
+  }
+*/
   public void appendAttributeName(char c) {
     attributeName.append(c);
   }
