@@ -9,36 +9,41 @@ import java.io.InputStreamReader;
  */
 public class LonelyInteger {
 
-    public static void main(String[] args) throws IOException {
+    public static int findLonelyInteger() {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        String[] arrayStr = reader.readLine().split(" ");
+        String[] arrayStr = new String[0];
+        try {
+            arrayStr = reader.readLine().split(" ");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         int[] array = new int[arrayStr.length];
-        for (int i=0;i<array.length;i++) {
+        for (int i = 0; i < array.length; i++) {
             array[i] = Integer.parseInt(arrayStr[i]);
         }
-        findLonelyInteger(array);
+        return findLonelyInteger(array);
     }
 
     public static int findLonelyInteger(int[] array) {
         int[] resultArray = new int[32];
         String result = "";
-        for (int i:array) {
+        for (int i : array) {
             int mask = 1;
-            for (int j=0;j<32;j++) {
+            for (int j = 0; j < 32; j++) {
                 if ((i & mask) == mask) {
                     resultArray[j]++;
                 }
                 mask <<= 1;
             }
         }
-        for (int i=0;i<32;i++) {
-            if (resultArray[i]%3==0) {
+        for (int i = 0; i < 32; i++) {
+            if (resultArray[i] % 3 == 0) {
                 result += 0;
             } else {
                 result += 1;
             }
         }
-        result = new StringBuffer(result).reverse().toString();
+        result = new StringBuilder(result).reverse().toString();
         return Integer.parseInt(result, 2);
     }
 }

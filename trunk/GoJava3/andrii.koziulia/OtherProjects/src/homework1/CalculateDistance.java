@@ -38,7 +38,7 @@ public class CalculateDistance {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         String[] arrayStr = reader.readLine().split(" ");
         int[] array = new int[arrayStr.length];
-        for (int i=0;i<array.length;i++) {
+        for (int i = 0; i < array.length; i++) {
             array[i] = Integer.parseInt(arrayStr[i]);
         }
         int min = array[0];
@@ -47,31 +47,31 @@ public class CalculateDistance {
         int indexSecondMin = 1;
         TreeSet<Integer> set = new TreeSet<Integer>();
 
-        for (int i=1;i<array.length;i++) {
-            if (array[i]<min) {
-                if (secondMin<min) {
+        for (int i = 1; i < array.length; i++) {
+            if (array[i] < min) {
+                if (secondMin < min) {
                     secondMin = min;
                     indexSecondMin = indexMin;
                 }
-                if (secondMin>min) {
+                if (secondMin > min) {
                     secondMin = min;
                     indexSecondMin = indexMin;
                 }
                 min = array[i];
                 indexMin = i;
                 set.clear();
-            } else if (array[i]<secondMin) {
+            } else if (array[i] < secondMin) {
                 secondMin = array[i];
                 set.clear();
             }
-            if (array[i]==secondMin && array[i]==min) {
+            if (array[i] == secondMin && array[i] == min) {
                 indexSecondMin = i;
                 set.add(indexSecondMin - indexMin);
                 indexMin = i;
-            } else if (array[i]==min) {
+            } else if (array[i] == min) {
                 indexMin = i;
                 set.add(indexMin - indexSecondMin);
-            } else if (array[i]==secondMin) {
+            } else if (array[i] == secondMin) {
                 indexSecondMin = i;
                 set.add(indexSecondMin - indexMin);
             }

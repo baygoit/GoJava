@@ -17,7 +17,7 @@ public class Anagramm {
 
     public static void printAnagramm(String expression) {
         String[] array = expression.split(" ");
-        for (int i=0;i<array.length;i++) {
+        for (int i = 0; i < array.length; i++) {
             array[i] = new StringBuilder(array[i]).reverse().toString();
             System.out.print(array[i] + " ");
         }

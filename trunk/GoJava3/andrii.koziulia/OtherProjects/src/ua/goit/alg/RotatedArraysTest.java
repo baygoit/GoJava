@@ -1,12 +1,14 @@
 package ua.goit.alg;
 
 import junit.framework.TestCase;
-
+import org.junit.Test;
 import java.util.Arrays;
+import static org.junit.Assert.assertEquals;
 
-public class RotatedArraysTest extends TestCase {
+public class RotatedArraysTest {
 
-  public void testAllPossible10Arrays() {
+  @Test
+  public void allPossible10Arrays() {
     int[] array = new int[10];
     for (int j = 0; j < 10; j++) {
       for (int i = 0; i < 10; i++) {
@@ -24,14 +26,16 @@ public class RotatedArraysTest extends TestCase {
     }
   }
 
-  public void testEmptyArray() {
+  @Test
+  public void emptyArray() {
     int[] array = new int[0];
     int actual = RotatedArrays.binarySearch(array, 1);
     int expected = -1;
     assertEquals(expected, actual);
   }
 
-  public void testSingleIntegerArray() {
+  @Test
+  public void singleIntegerArray() {
     int[] array = {5};
     int actual = RotatedArrays.binarySearch(array, 5);
     int expected = 0;
@@ -41,7 +45,8 @@ public class RotatedArraysTest extends TestCase {
     assertEquals(expected, actual);
   }
 
-  public void testTwoIntegerArray() {
+  @Test
+  public void twoIntegerArray() {
     int[] array = {1, 2};
     int actual = RotatedArrays.binarySearch(array, 1);
     int expected = 0;
@@ -51,7 +56,8 @@ public class RotatedArraysTest extends TestCase {
     assertEquals(expected, actual);
   }
 
-  public void testReverseTwoIntegerArray() {
+  @Test
+  public void reverseTwoIntegerArray() {
     int[] array = {2, 1};
     int actual = RotatedArrays.binarySearch(array, 1);
     int expected = 1;
@@ -61,7 +67,8 @@ public class RotatedArraysTest extends TestCase {
     assertEquals(expected, actual);
   }
 
-  public void testNoSuchElement() {
+  @Test
+  public void noSuchElement() {
     int[] array = {7, 8, 9, 1, 2, 3, 4, 5, 6};
     int actual = RotatedArrays.binarySearch(array, 10);
     int expected = -1;
