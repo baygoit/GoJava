@@ -17,40 +17,57 @@ public class LRUCache {
   public int get(int key) {
     Node reqElement = map.get(key);
     if (reqElement != null){
-      if (!reqElement.equals(head)){
-        if (!reqElement.equals(tail)){
-          reqElement.getNext().setPrevious(reqElement.getPrevious());
-        }
-        reqElement.getPrevious().setNext(reqElement.getNext());
-        reqElement.setNext(head);
-        head.setPrevious(reqElement);
-        head = reqElement;
-      }
-      return reqElement.getValue();
+      changePriority(reqElement);
+      return reqElement.getValue();   
     }
     return -1;
   }
 
   public void set(int key, int value) {
-    map.put(key, new Node(value));
-    Node newElement = map.get(key);
-    newElement.setKey(key);
 
+    Node newElement = new Node(value);
+    newElement.setKey(key);
+    map.put(key, newElement);
     counter++;
     if (counter == 1){
-      head = newElement;
-      tail = head;
-    } else if (counter > 1 && capacity > 1){
-      if (counter > capacity){
-        head = head.getNext();
-        map.remove(head.getPrevious().getKey());
-      }
-      tail.setNext(newElement);
-      newElement.setPrevious(tail);
-      tail = newElement;
+      firstAdd(newElement);
     } else {
-    	map.remove(head.getKey());
-    	head = newElement;
+      defaultAdd(newElement);
+    } 
+  }
+
+  private void firstAdd(Node newElement){
+    head = newElement;
+    tail = head;
+  }
+
+  private void defaultAdd(Node newElement){
+    if (counter > capacity){
+      rotateHead();
+    }
+    tail.setNext(newElement);
+    newElement.setPrevious(tail);
+    tail = newElement;
+  }
+
+  private void rotateHead(){
+    head = head.getNext();
+    map.remove(head.getPrevious().getKey());
+  }
+
+  private void changePriority(Node element){
+    if (!element.equals(tail)) {
+      if(!element.equals(head)){
+        element.getNext().setPrevious(element.getPrevious());
+        element.getPrevious().setNext(element.getNext());
+        element.setPrevious(tail);
+        tail.setNext(element);
+        tail = element;
+      } else {
+        element.setPrevious(tail);
+        head = element.getNext();
+        tail = element;
+      }
     }
   }
 }
