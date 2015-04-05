@@ -9,7 +9,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class XMLSerializator extends Serializator {
+public class XMLSerializator implements Serializer {
     private StringBuilder buffer = new StringBuilder();
 
     /**
@@ -87,13 +87,13 @@ public class XMLSerializator extends Serializator {
     }
 
     @Override
-    public void saveToFile(String source, File file) {
+    public void saveToFile(StringBuilder source, File file) {
         try {
             FileWriter fw = new FileWriter(file.getAbsoluteFile());
             BufferedWriter bw = new BufferedWriter(fw);
             bw.write("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>");
             bw.write("<elements>");
-            bw.write(source);
+            bw.write(source.toString());
             bw.write("</elements>");
             bw.close();
         } catch (IOException e) {
