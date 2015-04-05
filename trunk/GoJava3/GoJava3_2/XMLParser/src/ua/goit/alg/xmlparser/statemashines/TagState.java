@@ -100,7 +100,7 @@ public enum TagState {
       TagState result = ATTRIBUTE_VALUE;
       if (c == '\"') {
         parserData.appendAttributeValue(c);
-        result = VALUE_STARTED;
+        result = ATTRIBUTE_VALUE_STARTED;
       } else if (c == '>' || c == '/') {
         result = handleClosingTags(c, parserData, xmlParser, result);
       } else {
@@ -109,18 +109,18 @@ public enum TagState {
       return result;
     }
   },
-  VALUE_STARTED {
+  ATTRIBUTE_VALUE_STARTED {
     @Override
     public TagState next(char c, ParserData parserData, XMLParser xmlParser) {
-      TagState result = VALUE_STARTED;
+      TagState result = ATTRIBUTE_VALUE_STARTED;
       parserData.appendAttributeValue(c);
       if (c == '\"') {
-        result = VALUE_END;
+        result = ATTRIBUTE_VALUE_END;
       }
       return result;
     }
   },
-  VALUE_END {
+  ATTRIBUTE_VALUE_END {
     @Override
     public TagState next(char c, ParserData parserData, XMLParser xmlParser) {
       TagState result = INVALID;
