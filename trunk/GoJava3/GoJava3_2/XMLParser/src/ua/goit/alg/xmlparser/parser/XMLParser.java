@@ -3,6 +3,8 @@ package ua.goit.alg.xmlparser.parser;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+
 import ua.goit.alg.xmlparser.input.StreamReader;
 import ua.goit.alg.xmlparser.statemashines.StateMashineTag;
 
@@ -55,7 +57,6 @@ public class XMLParser implements Parser{
   }
 
   public XMLParser(){
-    
   }
   
   public XMLParser(Builder builder){
@@ -77,6 +78,12 @@ public class XMLParser implements Parser{
 
   public String parse(File file) throws IOException {
     StreamReader stream = new StreamReader(file);
+    return parseInputStream(stream);
+  }
+
+  @Override
+  public String parse(InputStream inputStream) throws IOException {
+    StreamReader stream = new StreamReader(inputStream);
     return parseInputStream(stream);
   }
 

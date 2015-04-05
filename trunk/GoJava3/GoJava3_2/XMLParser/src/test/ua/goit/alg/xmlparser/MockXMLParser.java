@@ -2,6 +2,7 @@ package test.ua.goit.alg.xmlparser;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 
 import ua.goit.alg.xmlparser.parser.Handler;
 import ua.goit.alg.xmlparser.parser.ParserData;
@@ -56,5 +57,11 @@ public class MockXMLParser implements Parser{
       parser.parse(file);
       return result.toString();
     }
-    
- }
+
+  @Override
+  public String parse(InputStream inputStream) throws IOException {
+    parser.parse(inputStream);
+    return result.toString();
+  }
+
+}
