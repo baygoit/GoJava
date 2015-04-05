@@ -7,9 +7,12 @@ import java.io.IOException;
 import ua.goit.graphElements.Element;
 import ua.goit.graphElements.Group;
 
+/**
+ * you need to create new copy per serialize operation
+ */
 public class JSONSerializator extends Serializator {
-  private StringBuffer tab = new StringBuffer();
-  private StringBuffer zeroTab = new StringBuffer();
+  private StringBuilder tab = new StringBuilder();
+  private StringBuilder zeroTab = new StringBuilder();
   private static final String ONE_TAB = "    ";
   private static final String ENTER = "\n";
   private static final char D_Q = '"';
@@ -17,10 +20,10 @@ public class JSONSerializator extends Serializator {
   private static final char CLOSE_BRACKET = '}';
   private static final char OPEN_BRACKET_S = '[';
   private static final char CLOSE_BRACKET_S = ']';
-  private StringBuffer serializeString = new StringBuffer("{" + ENTER + ENTER + "}");
+  private StringBuilder serializeString = new StringBuilder("{" + ENTER + ENTER + "}");
 
   @Override
-  public StringBuffer serialize(Element element) {
+  public StringBuilder serialize(Element element) {
     addJSONObjectName(element.getName());
     openCloseBracket(zeroTab, OPEN_BRACKET, ENTER);
     addAttribute("Name", element.getName());
@@ -35,7 +38,7 @@ public class JSONSerializator extends Serializator {
   }
 
   @Override
-  public StringBuffer serialize(Group group) {
+  public StringBuilder serialize(Group group) {
     addJSONObjectName(group.getName());
     openCloseBracket(zeroTab, OPEN_BRACKET, ENTER);
     if (hasGroup(group)) {
@@ -73,7 +76,7 @@ public class JSONSerializator extends Serializator {
   }
 
   @Override
-  public void saveToFile(StringBuffer source, File file) {
+  public void saveToFile(StringBuilder source, File file) {
     try {
       FileWriter fileForWrite = new FileWriter(file.getAbsoluteFile());
       fileForWrite.write(source.toString());
@@ -120,7 +123,7 @@ public class JSONSerializator extends Serializator {
     openCloseBracket(tab, CLOSE_BRACKET_S, ENTER);
   }
 
-  private void openCloseBracket(StringBuffer tab, char bracket, String enter) {
+  private void openCloseBracket(StringBuilder tab, char bracket, String enter) {
     bufAppend(tab.toString() + bracket + enter);
   }
 
