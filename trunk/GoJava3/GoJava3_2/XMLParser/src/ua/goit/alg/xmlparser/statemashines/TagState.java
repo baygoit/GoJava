@@ -62,8 +62,10 @@ public enum TagState {
       TagState result = INVALID;
       if (c == ' ') {
         result = ATTRIBUTE_NAME;
-      } else if (isClosingTag(c, parserData, xmlParser, result)) {
       } else {
+        parserData = checkClosingTag(c, parserData, xmlParser, result);
+      }
+      if (result == INVALID) {
         result = TAG_NAME;
         parserData.appendTag(c);
       }
@@ -76,10 +78,12 @@ public enum TagState {
       TagState result = INVALID;
       if (c == ' ') {
         result = ATTRIBUTE_NAME;
-      } else if (isClosingTag(c, parserData, xmlParser, result)) {
       } else if (c == '=') {
         result = ATTRIBUTE_VALUE;
       } else {
+        parserData = checkClosingTag(c, parserData, xmlParser, result);
+      }
+      if (result == INVALID) {
         result = ATTRIBUTE_NAME;
         parserData.appendAttributeName(c);
       }
@@ -89,11 +93,13 @@ public enum TagState {
   ATTRIBUTE_VALUE {
     @Override
     public TagState next(char c, ParserData parserData, XMLParser xmlParser) {
-      TagState result = ATTRIBUTE_VALUE;
+      TagState result = INVALID;
       if (c == ' ') {
         result = ATTRIBUTE_VALUE;
-      } else if (isClosingTag(c, parserData, xmlParser, result)) {
       } else {
+        parserData = checkClosingTag(c, parserData, xmlParser, result);
+      }
+      if (result == INVALID){
         result = ATTRIBUTE_VALUE;
         parserData.appendAttributeValue(c);
       }
@@ -103,7 +109,7 @@ public enum TagState {
   NODE {
     @Override
     public TagState next(char c, ParserData parserData, XMLParser xmlParser) {
-      TagState result = INVALID;
+      TagState result;
       if (c == '<') {
         result = OPENTAG;
         xmlParser.onTextValue(parserData);
@@ -123,7 +129,7 @@ public enum TagState {
 
   public abstract TagState next(char c,  ParserData parserData, XMLParser xmlParser);
 
-  private static boolean isClosingTag(char c, ParserData parserData, XMLParser xmlParser, TagState result) {
+  private static ParserData checkClosingTag(char c, ParserData parserData, XMLParser xmlParser, TagState result) {
     boolean isClosingTag = false;
     if (c == '>') {
       xmlParser.onOpenTag(parserData);
@@ -140,6 +146,6 @@ public enum TagState {
     if (isClosingTag) {
       parserData.addAttribute(parserData.getAttributeName(), parserData.getAttributeValue());
     }
-    return isClosingTag;
+    return parserData;
   }
 }
