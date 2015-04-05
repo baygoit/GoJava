@@ -33,7 +33,7 @@ public class Arrays {
                     output.close();
                 }
             }
-            if (countOfBuffer != bufferSize) {
+            if (countOfBuffer != bufferSize && countOfBuffer != 0) {
                 int[] copyOfBuffer = java.util.Arrays.copyOfRange(buffer, 0, countOfBuffer);
                 java.util.Arrays.sort(copyOfBuffer);
                 output = new DataOutputStream(new FileOutputStream(new File(TEMP_PATH + quantityOfTempFile)));
@@ -60,80 +60,96 @@ public class Arrays {
     }
 
     private static void deleteAllTempFiles(int quantityOfTempFile ) {
-        for (int i = 0; i <= quantityOfTempFile; i++) {
-            new File(TEMP_PATH + i).delete();
-            if (i == 0 || (i == quantityOfTempFile)){
-                continue;
-            }
+        for (int i = 0; i <= quantityOfTempFile - 2; i++) {
             new File(TEMP_RES_PATH + i).delete();
+            new File(TEMP_PATH + i).delete();
         }
+        new File(TEMP_PATH + quantityOfTempFile).delete();
+        new File(TEMP_PATH + (quantityOfTempFile - 1)).delete();
     }
 
     private static void createFileFromTempFiles(int quantityOfTempFile) throws IOException{
-        File first = new File(TEMP_PATH + 0);
-        File second = new File(TEMP_PATH + 1);
-        File result = new File(TEMP_RES_PATH + 1);
-        mergeTwoFiles(first, second, result);
+        if (quantityOfTempFile > 2) {
+            File first = new File(TEMP_PATH + 0);
+            File second = new File(TEMP_PATH + 1);
+            File result = new File(TEMP_RES_PATH + 0);
+            mergeTwoFiles(first, second, result);
+            int mergeCount = 2;
 
-        for (int i = 1; i < quantityOfTempFile - 1; i++) {
-            first = new File(TEMP_RES_PATH + i);
-            second = new File(TEMP_PATH + (i + 1));
-            if (i == quantityOfTempFile - 2) {
-                result = new File("result");
-            } else {
-                result = new File(TEMP_RES_PATH + (i + 1));
+            for (int i = 0; i < quantityOfTempFile - 2; i++) {
+                if (i == quantityOfTempFile - 3) {
+                    first = new File(TEMP_RES_PATH + i);
+                    second = new File(TEMP_PATH + mergeCount);
+                    result = new File("result");
+                    mergeTwoFiles(first, second, result);
+                } else {
+                    first = new File(TEMP_RES_PATH + i);
+                    second = new File(TEMP_PATH + mergeCount);
+                    result = new File(TEMP_RES_PATH + (i + 1));
+                    mergeTwoFiles(first, second, result);
+                    mergeCount++;
+                }
             }
+            deleteAllTempFiles(quantityOfTempFile);
+        } else if (quantityOfTempFile == 1) {
+            File first = new File(TEMP_PATH + 0);
+            File second = new File(TEMP_PATH + 1);
+            second.createNewFile();
+            File result = new File("result");
             mergeTwoFiles(first, second, result);
         }
         deleteAllTempFiles(quantityOfTempFile);
     }
 
-    private static void mergeTwoFiles(File firstFile, File secondFile, File result) throws IOException{
+    private static void mergeTwoFiles(File firstFile, File secondFile, File result) throws IOException {
         DataInputStream firstInput = null;
         DataInputStream secondInput = null;
         DataOutputStream output = null;
-        try {
-            firstInput = new DataInputStream(new FileInputStream(firstFile));
-            secondInput = new DataInputStream(new FileInputStream(secondFile));
-            output = new DataOutputStream(new FileOutputStream(result));
-            int first = 0;
-            int second = 0;
-            if (firstInput.available() > 0) {
-                first = firstInput.readInt();
-            }
-            if (secondInput.available() > 0) {
-                second = secondInput.readInt();
-            }
+        firstInput = new DataInputStream(new FileInputStream(firstFile));
+        secondInput = new DataInputStream(new FileInputStream(secondFile));
+        output = new DataOutputStream(new FileOutputStream(result));
+        int first = 0;
+        int second = 0;
+        boolean firstFlag = false;
+        boolean secondFlag = false;
 
-            while (firstInput.available() > 0 && secondInput.available() > 0) {
+        if (firstInput.available() > 0) {
+            first = firstInput.readInt();
+        }
+        if (secondInput.available() > 0) {
+            second = secondInput.readInt();
+        }
+        while (firstInput.available() > 0 || secondInput.available() > 0) {
+            if (firstInput.available() > 0 && secondInput.available() > 0) {
                 if (first < second) {
                     output.writeInt(first);
                     first = firstInput.readInt();
-                }else {
+                } else {
                     output.writeInt(second);
                     second = secondInput.readInt();
                 }
-            }
-
-            while (firstInput.available() > 0) {
-                output.writeInt(firstInput.readInt());
-            }
-
-            while (secondInput.available() > 0) {
-                output.writeInt(secondInput.readInt());
-            }
-
-        } catch (FileNotFoundException e)  {
-            e.printStackTrace();
-        } finally {
-            if (output != null) {
-                output.close();
-            }
-            if (firstInput != null) {
-                firstInput.close();
-            }
-            if (secondInput != null) {
-                secondInput.close();
+            } else if (firstInput.available() > 0 || secondInput.available() == 0) {
+                if (!secondFlag) {
+                    output.writeInt(second);
+                    secondFlag = true;
+                } else {
+                    output.writeInt(first);
+                    first = firstInput.readInt();
+                    if (firstInput.available() == 0) {
+                        output.writeInt(first);
+                    }
+                }
+            } else {
+                if (!firstFlag) {
+                    output.writeInt(first);
+                    firstFlag = true;
+                } else {
+                    output.writeInt(second);
+                    second = secondInput.readInt();
+                    if (secondInput.available() == 0) {
+                        output.writeInt(second);
+                    }
+                }
             }
         }
     }
@@ -147,10 +163,12 @@ public class Arrays {
         try {
             File source = new File("source");
             File result = new File("result");
-
-            createFileWithNumbers(source, 7);
+            createFileWithNumbers(source, 103);
             mergeSort(source);
+            printFile(source);
             printFile(result);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
