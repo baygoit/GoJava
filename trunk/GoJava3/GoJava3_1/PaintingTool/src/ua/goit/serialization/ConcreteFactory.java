@@ -7,7 +7,7 @@ public class ConcreteFactory extends SerializationFactory{
 
     /** Return type of serializator*/
     @Override
-    public Serializator getSerializationFor(SerializationType type) {
+    public Serializer getSerializationFor(SerializationType type) {
 	switch (type) {
 	case  XML: 
 	    return new XMLSerializator();
