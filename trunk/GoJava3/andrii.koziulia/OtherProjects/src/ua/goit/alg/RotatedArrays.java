@@ -12,13 +12,7 @@ public class RotatedArrays {
   private static int startBinarySearch(int[] array, int target, int startIndex, int endIndex) {
     int partitionIndex = startIndex + (endIndex - startIndex) / 2;
     while (startIndex != endIndex && array[partitionIndex] != target) {
-      boolean inLeftArray1 = array[startIndex] <= target && target < array[partitionIndex];
-      boolean inLeftArray2 = array[startIndex] <= target && array[partitionIndex] < array[startIndex];
-      boolean inLeftArray3 =
-              target < array[partitionIndex] &&
-                      array[partitionIndex] < array[startIndex] &&
-                      array[partitionIndex] < array[endIndex];
-      if (inLeftArray1 || inLeftArray2 || inLeftArray3) {
+      if (isInLeftArray(array, target, startIndex, endIndex, partitionIndex)) {
         endIndex = partitionIndex - 1;
       } else {
         startIndex = partitionIndex + 1;
@@ -30,5 +24,17 @@ public class RotatedArrays {
     } else {
       return -1;
     }
+  }
+
+  private static boolean isInLeftArray(int[] array, int target, int startIndex, int endIndex, int partitionIndex) {
+    boolean inLeftArray1 = array[startIndex] <= target && target < array[partitionIndex];
+    boolean inLeftArray2 = array[startIndex] <= target && array[partitionIndex] < array[startIndex];
+
+    boolean condition1 = target < array[partitionIndex];
+    boolean condition2 = array[partitionIndex] < array[startIndex];
+    boolean condition3 = array[partitionIndex] < array[endIndex];
+    boolean inLeftArray3 = condition1 && condition2 && condition3;
+
+    return inLeftArray1 || inLeftArray2 || inLeftArray3;
   }
 }
