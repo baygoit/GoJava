@@ -104,10 +104,7 @@ public class MergeSort {
     int secondByte = (0xFF & byteArray[startIndex + 1]) << 16;
     int thirdByte = (0xFF & byteArray[startIndex + 2]) << 8;
     int fourthByte = 0xFF & byteArray[startIndex + 3];
-    /*int value = ((0xFF & byteArray[startIndex]) << 24) | ((0xFF & byteArray[startIndex + 1]) << 16) |
-            ((0xFF & byteArray[startIndex + 2]) << 8) | (0xFF & byteArray[startIndex + 3]);*/
-    int value = (firstByte | secondByte | thirdByte | fourthByte);
-    return value;
+    return (firstByte | secondByte | thirdByte | fourthByte);
   }
 
   private static File createTempFile() {
@@ -172,16 +169,8 @@ public class MergeSort {
         elementsInSecond = secondFileInputStream.read(secondBuffer);
       }
       while (firstPointer < elementsInFirst || secondPointer < elementsInSecond) {
-        if (firstPointer < elementsInFirst) {
-          value1 = getIntegerFromFourBytes(firstBuffer, firstPointer);
-        } else if (firstFileInputStream.available() == 0) {
-          value1 = Integer.MAX_VALUE;
-        }
-        if (secondPointer < elementsInSecond) {
-          value2 = getIntegerFromFourBytes(secondBuffer, secondPointer);
-        } else if (secondFileInputStream.available() == 0) {
-          value2 = Integer.MAX_VALUE;
-        }
+        value1 = getValue(firstFileInputStream, firstBuffer, elementsInFirst, firstPointer, value1);
+        value2 = getValue(secondFileInputStream, secondBuffer, elementsInSecond, secondPointer, value2);
         if (value1 <= value2) {
           outputStream.writeInt(value1);
           firstPointer += 4;
@@ -203,5 +192,15 @@ public class MergeSort {
       firstFileInputStream.close();
       secondFileInputStream.close();
     }
+  }
+
+  private static int getValue(DataInputStream stream, byte[] buffer, int numberOfElements, int pointer, int value)
+          throws IOException {
+    if (pointer < numberOfElements) {
+      return getIntegerFromFourBytes(buffer, pointer);
+    } else if (stream.available() == 0) {
+      return Integer.MAX_VALUE;
+    }
+    return value;
   }
 }
