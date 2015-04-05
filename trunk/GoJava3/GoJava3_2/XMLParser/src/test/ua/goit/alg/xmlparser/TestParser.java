@@ -22,7 +22,7 @@ public class TestParser {
   @Test
   public void whenAttr() throws IOException{
     Parser parser = new MockXMLParser();
-    String result = parser.parse("<start atr1=3><tag></tag><tag2></tag2></start>");
+    String result = parser.parse("<start atr1=\"3\"><tag></tag><tag2></tag2></start>");
     String expectedResult = "<start><tag></tag><tag2></tag2></start>";
     Assert.assertEquals(expectedResult, result);
   }
@@ -30,7 +30,7 @@ public class TestParser {
   @Test
   public void whenClosableTag() throws IOException{
     Parser parser = new MockXMLParser();
-    String result = parser.parse("<start atr1=3><tag></tag><tag2/></start>");
+    String result = parser.parse("<start atr1=\"3\"><tag></tag><tag2/></start>");
     String expectedResult = "<start><tag></tag><tag2></tag2></start>";
     Assert.assertEquals(expectedResult, result);
   }
@@ -38,7 +38,7 @@ public class TestParser {
   @Test
   public void whenText() throws IOException{
     Parser parser = new MockXMLParser();
-    String result = parser.parse("<start atr1=3><tag>text</tag><tag2/></start>");
+    String result = parser.parse("<start atr1=\"3\"><tag>text</tag><tag2/></start>");
     String expectedResult = "<start><tag>text</tag><tag2></tag2></start>";
     Assert.assertEquals(expectedResult, result);
   }
@@ -46,7 +46,7 @@ public class TestParser {
   @Test
   public void whenFull() throws IOException{
     Parser parser = new MockXMLParser();
-    String result = parser.parse("<?xml doctype=1><start atr1=3 atr2 = 4><tag>text</tag><tag2/></start>");
+    String result = parser.parse("<?xml doctype=\"1\"><start atr1=\"3\" atr2 = \"4\"><tag>text</tag><tag2/></start>");
     String expectedResult = "<?xml><start><tag>text</tag><tag2></tag2></start>";
     Assert.assertEquals(expectedResult, result);
   }

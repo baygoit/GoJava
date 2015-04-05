@@ -47,7 +47,7 @@ public enum TagState {
   START {
     @Override
     public TagState next(char c, ParserData parserData, XMLParser xmlParser) {
-      // mistake - to be corrected
+                              // mistake - to be corrected!!!
       TagState result = INVALID;
       if (Character.isLetter(c)) {
         parserData.appendTag(c);
@@ -96,7 +96,10 @@ public enum TagState {
     @Override
     public TagState next(char c, ParserData parserData, XMLParser xmlParser) {
       TagState result = ATTRIBUTE_VALUE;
-      if (c == '>' || c == '/') {
+      if (c == '\"') {
+        parserData.appendAttributeValue(c);
+        result = VALUE_STARTED;
+      } else if (c == '>' || c == '/') {
         result = handleClosingTags(c, parserData, xmlParser, result);
       } else {
         parserData.appendAttributeValue(c);
@@ -104,7 +107,30 @@ public enum TagState {
       return result;
     }
   },
-  NODE {
+  VALUE_STARTED {
+    @Override
+    public TagState next(char c, ParserData parserData, XMLParser xmlParser) {
+      TagState result = VALUE_STARTED;
+      parserData.appendAttributeValue(c);
+      if (c == '\"') {
+        result = VALUE_END;
+      }
+      return result;
+    }
+  },
+  VALUE_END {
+    @Override
+    public TagState next(char c, ParserData parserData, XMLParser xmlParser) {
+      TagState result = INVALID;
+      if (c == ' ') {
+        result = ATTRIBUTE_VALUE;
+      } else if (c == '>' || c == '/') {
+        result = handleClosingTags(c, parserData, xmlParser, result);
+      }
+      return result;
+    }
+  },
+  TEXT {
     @Override
     public TagState next(char c, ParserData parserData, XMLParser xmlParser) {
       TagState result;
@@ -113,7 +139,7 @@ public enum TagState {
         xmlParser.onTextValue(parserData);
       } else {
         parserData.appendText(c);
-        result = NODE;
+        result = TEXT;
       }
       return result;
     }
@@ -134,7 +160,7 @@ public enum TagState {
     }
     if (c == '>') {
       xmlParser.onOpenTag(parserData);
-      result = NODE;
+      result = TEXT;
     } else if (c == '/') {
       String tag = parserData.getTag();
       xmlParser.onOpenTag(parserData);
