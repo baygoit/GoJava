@@ -21,6 +21,7 @@ public enum TagState {
     public TagState next(char c, ParserData parserData, XMLParser xmlParser) {
       TagState result;
       if (c == '?') {
+        parserData.appendTag(c);
         result = START;
       } else if (c == '/') {
         result = CLOSETAG;
@@ -47,11 +48,12 @@ public enum TagState {
   START {
     @Override
     public TagState next(char c, ParserData parserData, XMLParser xmlParser) {
-                              // mistake - to be corrected!!!
       TagState result = INVALID;
       if (Character.isLetter(c)) {
         parserData.appendTag(c);
         result = TAG_NAME;
+      } else if (c == ' ') {
+        result = ATTRIBUTE_NAME;
       }
       return result;
     }
