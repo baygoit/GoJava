@@ -62,10 +62,9 @@ public enum TagState {
       TagState result = INVALID;
       if (c == ' ') {
         result = ATTRIBUTE_NAME;
+      } else if (c == '>' || c == '/') {
+        parserData = checkClosingTags(c, parserData, xmlParser, result);
       } else {
-        parserData = checkClosingTag(c, parserData, xmlParser, result);
-      }
-      if (result == INVALID) {
         result = TAG_NAME;
         parserData.appendTag(c);
       }
@@ -80,10 +79,9 @@ public enum TagState {
         result = ATTRIBUTE_NAME;
       } else if (c == '=') {
         result = ATTRIBUTE_VALUE;
+      } else if (c == '>' || c == '/') {
+        parserData = checkClosingTags(c, parserData, xmlParser, result);
       } else {
-        parserData = checkClosingTag(c, parserData, xmlParser, result);
-      }
-      if (result == INVALID) {
         result = ATTRIBUTE_NAME;
         parserData.appendAttributeName(c);
       }
@@ -96,10 +94,9 @@ public enum TagState {
       TagState result = INVALID;
       if (c == ' ') {
         result = ATTRIBUTE_VALUE;
+      } else if (c == '>' || c == '/') {
+        parserData = checkClosingTags(c, parserData, xmlParser, result);
       } else {
-        parserData = checkClosingTag(c, parserData, xmlParser, result);
-      }
-      if (result == INVALID){
         result = ATTRIBUTE_VALUE;
         parserData.appendAttributeValue(c);
       }
@@ -129,21 +126,18 @@ public enum TagState {
 
   public abstract TagState next(char c,  ParserData parserData, XMLParser xmlParser);
 
-  private static ParserData checkClosingTag(char c, ParserData parserData, XMLParser xmlParser, TagState result) {
-    boolean isClosingTag = false;
+  private static ParserData checkClosingTags(char c, ParserData parserData, XMLParser xmlParser, TagState result) {
     if (c == '>') {
       xmlParser.onOpenTag(parserData);
       result = NODE;
-      isClosingTag = true;
     } else if (c == '/') {
       xmlParser.onOpenTag(parserData);
       String tag = parserData.getTag();
       parserData = new ParserData();
       parserData.setTag(tag);
       result = CLOSETAG;
-      isClosingTag = true;
     }
-    if (isClosingTag) {
+    if (result == ATTRIBUTE_VALUE) {
       parserData.addAttribute(parserData.getAttributeName(), parserData.getAttributeValue());
     }
     return parserData;
