@@ -39,6 +39,7 @@ public class LRUCache {
 		size++;
 	    } else {
 		map.remove(head.getKey());
+		map.put(key, lastUsedNode);
 		removeNode(head);
 		setNodeToTail(lastUsedNode);
 	    }
