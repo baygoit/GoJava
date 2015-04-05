@@ -63,7 +63,9 @@ public enum TagState {
       if (c == ' ') {
         result = ATTRIBUTE_NAME;
       } else if (c == '>' || c == '/') {
-        parserData = checkClosingTags(c, parserData, xmlParser, result);
+        Service service = handleClosingTags(c, parserData, xmlParser, result);
+        parserData = service.parserData;
+        result = service.result;
       } else {
         result = TAG_NAME;
         parserData.appendTag(c);
@@ -80,7 +82,9 @@ public enum TagState {
       } else if (c == '=') {
         result = ATTRIBUTE_VALUE;
       } else if (c == '>' || c == '/') {
-        parserData = checkClosingTags(c, parserData, xmlParser, result);
+        Service service = handleClosingTags(c, parserData, xmlParser, result);
+        parserData = service.parserData;
+        result = service.result;
       } else {
         result = ATTRIBUTE_NAME;
         parserData.appendAttributeName(c);
@@ -91,13 +95,12 @@ public enum TagState {
   ATTRIBUTE_VALUE {
     @Override
     public TagState next(char c, ParserData parserData, XMLParser xmlParser) {
-      TagState result = INVALID;
-      if (c == ' ') {
-        result = ATTRIBUTE_VALUE;
-      } else if (c == '>' || c == '/') {
-        parserData = checkClosingTags(c, parserData, xmlParser, result);
+      TagState result = ATTRIBUTE_VALUE;
+      if (c == '>' || c == '/') {
+        Service service = handleClosingTags(c, parserData, xmlParser, result);
+        parserData = service.parserData;
+        result = service.result;
       } else {
-        result = ATTRIBUTE_VALUE;
         parserData.appendAttributeValue(c);
       }
       return result;
@@ -124,9 +127,12 @@ public enum TagState {
     }
   };
 
-  public abstract TagState next(char c,  ParserData parserData, XMLParser xmlParser);
+  public abstract TagState next(char c, ParserData parserData, XMLParser xmlParser);
 
-  private static ParserData checkClosingTags(char c, ParserData parserData, XMLParser xmlParser, TagState result) {
+  private static Service handleClosingTags(char c, ParserData parserData, XMLParser xmlParser, TagState result) {
+    if (result == ATTRIBUTE_VALUE) {
+      parserData.addAttribute(parserData.getAttributeName(), parserData.getAttributeValue());
+    }
     if (c == '>') {
       xmlParser.onOpenTag(parserData);
       result = NODE;
@@ -137,9 +143,16 @@ public enum TagState {
       parserData.setTag(tag);
       result = CLOSETAG;
     }
-    if (result == ATTRIBUTE_VALUE) {
-      parserData.addAttribute(parserData.getAttributeName(), parserData.getAttributeValue());
+    return new Service(result, parserData);
+  }
+
+  private static class Service {
+    public TagState result;
+    public ParserData parserData;
+
+    public Service(TagState result, ParserData parserData) {
+      this.result = result;
+      this.parserData = parserData;
     }
-    return parserData;
   }
 }

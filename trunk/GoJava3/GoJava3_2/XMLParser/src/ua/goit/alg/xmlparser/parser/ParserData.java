@@ -1,50 +1,44 @@
 package ua.goit.alg.xmlparser.parser;
 
+import ua.goit.alg.xmlparser.statemashines.TagState;
+
 import java.util.HashMap;
 import java.util.Map;
 
 public class ParserData {
 
-  String tag = "";
-  Map<String, String> attributes = new HashMap<String, String>();
-  String text = "";
-  String attributeName = "";
-  String attributeValue = "";
-
-  public void setAttributeName(String attributeName) {
-    this.attributeName = attributeName;
-  }
+  private StringBuilder tag = new StringBuilder("");
+  private Map<String, String> attributes = new HashMap<String, String>();
+  private StringBuilder text = new StringBuilder("");
+  private StringBuilder attributeName = new StringBuilder("");
+  private StringBuilder attributeValue = new StringBuilder("");
 
   public void appendAttributeName(char c) {
-    attributeName += c;
-  }
-
-  public void setAttributeValue(String attributeValue) {
-    this.attributeValue = attributeValue;
+    attributeName.append(c);
   }
 
   public void appendAttributeValue(char c) {
-    attributeValue += c;
+    attributeValue.append(c);
   }
 
   public String getAttributeValue() {
-    return attributeValue;
+    return attributeValue.toString();
   }
 
   public String getAttributeName() {
-    return attributeName;
+    return attributeName.toString();
   }
 
   public String getTag() {
-    return tag;
+    return tag.toString();
   }
 
   public void setTag(String tag) {
-    this.tag = tag;
+    this.tag = new StringBuilder(tag);
   }
 
   public void appendTag(char c) {
-    tag += c;
+    tag.append(c);
   }
 
   public Map<String, String> getAttributes() {
@@ -56,20 +50,22 @@ public class ParserData {
   }
 
   public String getText() {
-    return text;
+    return text.toString();
   }
 
   public void setText(String text) {
-    this.text = text;
+    this.text = new StringBuilder(text);
   }
 
   public void appendText(char c) {
-    text += c;
+    text.append(c);
   }
 
   public void clear() {
-    setTag("");
-    setText("");
+    tag.setLength(0);
+    text.setLength(0);
     attributes.clear();
+    attributeName.setLength(0);
+    attributeValue.setLength(0);
   }
 }

@@ -66,7 +66,6 @@ public class XMLParser implements Parser{
     startHandler = builder.startHandler;
     endHandler = builder.endHandler;
     errHandler = builder.errHandler;
-
   }
 
   private StateMashineTag tag = new StateMashineTag(this);
