@@ -3,10 +3,10 @@ package ua.goit.alg.xmlparser.input;
 import java.io.*;
 
 public class StreamReader {
-  private BufferedReader inputStreamFile = null;
+  private Reader inputStreamFile = null;
 
   public StreamReader(String inputData) throws FileNotFoundException {
-    inputStreamFile = new BufferedReader(new StringReader(inputData));
+    inputStreamFile = new StringReader(inputData);
   }
 
   public StreamReader(File inputData) throws FileNotFoundException {
