@@ -8,8 +8,6 @@ import ua.goit.alg.xmlparser.statemashines.StateMashineTag;
 
 public class XMLParser implements Parser{
 
-  private StringBuilder result = new StringBuilder("");
-
   private Handler openTagHandler;
   private Handler closeTagHandler;
   private Handler textValueHandler;
@@ -88,14 +86,13 @@ public class XMLParser implements Parser{
       symbol = stream.read();
       tag.next((char)symbol);
     } while (symbol !=-1);
-    return result.toString();
+    return "";//result.toString();
   }
 
   public void onOpenTag(ParserData parserData){
     if(openTagHandler != null){
       openTagHandler.handle(parserData);
     }
-    result.append("<").append(parserData.getTag()).append(">");
     parserData.setTag("");
   }
 
@@ -103,7 +100,6 @@ public class XMLParser implements Parser{
     if(closeTagHandler != null){
       closeTagHandler.handle(parserData);
     }
-    result.append("</").append(parserData.getTag()).append(">");
     parserData.setTag("");
   }
 
@@ -111,7 +107,6 @@ public class XMLParser implements Parser{
     if(textValueHandler != null){
       textValueHandler.handle(parserData);
     }
-    result.append("").append(parserData.getText()).append("");
     parserData.setText("");
   }
 
@@ -119,7 +114,6 @@ public class XMLParser implements Parser{
     if(startHandler != null) {
       startHandler.handle(parserData);
     }
-    result.append("<").append(parserData.getTag()).append(">");
     parserData.setTag("");
   }
 
