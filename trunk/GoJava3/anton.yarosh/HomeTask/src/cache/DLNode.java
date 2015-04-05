@@ -3,6 +3,8 @@ package cache;
 class DLNode {
     private int key;
     private int value;
+    private DLNode next;
+    private DLNode prev;
 
     public DLNode (int key, int value) {
 	this.key = key;
@@ -22,9 +24,6 @@ class DLNode {
 	this.value = value;
     }
     
-    private DLNode next;
-    private DLNode prev;
-
     public DLNode getNext() {
 	return next;
     }
