@@ -7,7 +7,7 @@ import ua.goit.graphElements.*;
  * Abstract class for serializer 
  */
 public interface Serializer {
-    public abstract StringBuilder serialize(Group element);
-    public abstract StringBuilder serialize(Element element);
-    public abstract void saveToFile(StringBuilder source, File file);
+   StringBuilder serialize(Group element);
+   StringBuilder serialize(Element element);
+   void saveToFile(StringBuilder source, File file);
 }
