@@ -127,6 +127,7 @@ public enum TagState {
   INVALID {
     @Override
     public TagState next(char c, ParserData parserData, XMLParser xmlParser) {
+      xmlParser.onError(parserData);
       return INVALID;
     }
   };
