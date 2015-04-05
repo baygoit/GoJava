@@ -123,7 +123,7 @@ public enum TagState {
     public TagState next(char c, ParserData parserData, XMLParser xmlParser) {
       TagState result = INVALID;
       if (c == ' ') {
-        result = ATTRIBUTE_VALUE;
+        result = ATTRIBUTE_NAME;
       } else if (c == '>' || c == '/') {
         result = handleClosingTags(c, parserData, xmlParser, result);
       }
