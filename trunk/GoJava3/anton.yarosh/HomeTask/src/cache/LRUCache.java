@@ -3,7 +3,6 @@ package cache;
 import java.util.HashMap;
 
 public class LRUCache<V> {
-
     private HashMap<Integer, DLNode> map = new HashMap<Integer, DLNode>();
     private DLNode head;
     private DLNode tail;

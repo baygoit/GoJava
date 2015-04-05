@@ -1,13 +1,13 @@
 package cache;
 
-public class DLNode <Integer, V> implements Container<V>{
+class DLNode <Integer, V> {
     private int key;
     private V value;
 
     public V getValue() {
 	return value;
     }
-
+    
     public int getKey() {
 	return key;
     }
@@ -16,7 +16,8 @@ public class DLNode <Integer, V> implements Container<V>{
 	this.key = key;
 	this.value = value;
     }
-    private DLNode<Integer, V> next, prev;
+    private DLNode<Integer, V> next;
+    private DLNode<Integer, V> prev;
 
     public DLNode<Integer, V> getNext() {
 	return next;
