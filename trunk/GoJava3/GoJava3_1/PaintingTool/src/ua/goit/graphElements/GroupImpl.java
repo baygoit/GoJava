@@ -14,6 +14,7 @@ public class GroupImpl implements Group {
 
     /** 
      * Constructor to name group
+     * 
      * @param name Group name
      */
     public GroupImpl(String name) {
@@ -22,6 +23,7 @@ public class GroupImpl implements Group {
 
     /**
      * Return group name
+     * 
      * @return group name
      */
     @Override
@@ -31,6 +33,7 @@ public class GroupImpl implements Group {
 
     /**
      * Return list of inner elements
+     * 
      * @return list of group elements
      */
     @Override
@@ -40,6 +43,7 @@ public class GroupImpl implements Group {
 
     /** 
      * Return list of inner groups
+     * 
      * @return list of inner groups
      */
     @Override
@@ -49,6 +53,7 @@ public class GroupImpl implements Group {
 
     /** 
      * Add element to group
+     * 
      * @param element single element
      */
     @Override
@@ -57,6 +62,7 @@ public class GroupImpl implements Group {
     }
 
     /** Add inner group
+     * 
      * @param group single group
      */
     @Override
@@ -66,6 +72,7 @@ public class GroupImpl implements Group {
 
     /** 
      * Return type
+     * 
      * @return type of group
      */
     @Override

@@ -6,8 +6,9 @@ public class PointImpl implements Point {
 
     /** 
      * Point constructor
-     * @param x point x coordinate
-     * @param y point y coordinate
+     * 
+     * @param x point's x coordinate
+     * @param y point's y coordinate
      */
     public PointImpl(int x, int y) {
 	this.x = x;
@@ -16,6 +17,7 @@ public class PointImpl implements Point {
 
     /** 
      * Return x coordinate
+     * 
      * @return x coordinate
      */
     public int getX() {
@@ -24,6 +26,7 @@ public class PointImpl implements Point {
 
     /**
      * Return y coordinate
+     * 
      * @return y coordinate
      */
     public int getY() {
