@@ -1,6 +1,7 @@
 package ua.goit.alg;
 
 import org.junit.Test;
+
 import java.io.*;
 import java.util.Arrays;
 import java.util.Random;
@@ -63,7 +64,6 @@ public class MergeSortTest {
     }
     assertArrayEquals(expected, result);
   }
-
 
 
   @Test

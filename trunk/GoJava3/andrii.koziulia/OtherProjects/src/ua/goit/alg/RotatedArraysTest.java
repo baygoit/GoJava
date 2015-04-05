@@ -1,6 +1,5 @@
 package ua.goit.alg;
 
-import junit.framework.TestCase;
 import org.junit.Test;
 import java.util.Arrays;
 import static org.junit.Assert.assertEquals;

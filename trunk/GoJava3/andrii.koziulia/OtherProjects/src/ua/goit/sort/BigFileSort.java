@@ -1,6 +1,7 @@
 package ua.goit.sort;
 
 import ua.goit.alg.MergeSort;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,43 +34,43 @@ public class BigFileSort {
     }
   }
 
-    private void readFromFile(String filename) throws IOException {
-      File file = new File(filename);
-      File directory = file.getParentFile();
-      BufferedReader reader = null;
-      try {
-        reader = new BufferedReader(new FileReader(file));
-        int[] buffer = new int[1024];
-        int countValuesInBuffer;
-        while (reader.ready()) {
-          countValuesInBuffer = 0;
-          for (int i = 0; i < buffer.length; i++) {
-            if (reader.ready()) {
-              buffer[i] = Integer.parseInt(reader.readLine());
-              countValuesInBuffer++;
-            } else {
-              break;
-            }
+  private void readFromFile(String filename) throws IOException {
+    File file = new File(filename);
+    File directory = file.getParentFile();
+    BufferedReader reader = null;
+    try {
+      reader = new BufferedReader(new FileReader(file));
+      int[] buffer = new int[1024];
+      int countValuesInBuffer;
+      while (reader.ready()) {
+        countValuesInBuffer = 0;
+        for (int i = 0; i < buffer.length; i++) {
+          if (reader.ready()) {
+            buffer[i] = Integer.parseInt(reader.readLine());
+            countValuesInBuffer++;
+          } else {
+            break;
           }
-          MergeSort.mergeSort(buffer, 0, countValuesInBuffer - 1);
-          tempFileCounter += 1;
-          File newTempFile = new File(directory, "tempFile_" + (tempFileCounter) + ".txt");
-          newTempFile.createNewFile();
-          tempFiles.add(newTempFile);
-          writeToFile(newTempFile, buffer, countValuesInBuffer);
         }
-        File resultFile = new File(directory, "Sorted_" + file.getName());
-        resultFile.createNewFile();
-        mergeToResultFile(resultFile);
-      } finally {
-        reader.close();
-        for (BufferedReader br : readerList) {
-          br.close();
-        }
-        for (File f : tempFiles) {
-          f.delete();
-        }
+        MergeSort.mergeSort(buffer, 0, countValuesInBuffer - 1);
+        tempFileCounter += 1;
+        File newTempFile = new File(directory, "tempFile_" + (tempFileCounter) + ".txt");
+        newTempFile.createNewFile();
+        tempFiles.add(newTempFile);
+        writeToFile(newTempFile, buffer, countValuesInBuffer);
       }
+      File resultFile = new File(directory, "Sorted_" + file.getName());
+      resultFile.createNewFile();
+      mergeToResultFile(resultFile);
+    } finally {
+      reader.close();
+      for (BufferedReader br : readerList) {
+        br.close();
+      }
+      for (File f : tempFiles) {
+        f.delete();
+      }
+    }
   }
 
   private void writeToFile(File file, int[] intArray, int numberToWrite) throws IOException {
@@ -116,8 +117,8 @@ public class BigFileSort {
   private int getIndexOfMinimumValue(List<Integer> list) {
     int minIndex = 0;
     int minValue = list.get(0);
-    for (int i=0;i<list.size();i++) {
-      if (list.get(i)<minValue) {
+    for (int i = 0; i < list.size(); i++) {
+      if (list.get(i) < minValue) {
         minValue = list.get(i);
         minIndex = i;
       }
