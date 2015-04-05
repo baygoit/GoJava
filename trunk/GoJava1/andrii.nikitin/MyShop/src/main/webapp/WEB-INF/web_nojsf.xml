@@ -4,62 +4,42 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" 
 	id="WebApp_ID" version="3.0">
   <description>This application allows to buy goods and control the shop's activity.</description>
-  <display-name>MyShop</display-name>   
-  <!-- Add Support for Spring -->
-  <listener>
-	<listener-class>
-		org.springframework.web.context.ContextLoaderListener
-	</listener-class>
-  </listener>
-  <listener>
-	<listener-class>
-		org.springframework.web.context.request.RequestContextListener
-	</listener-class>
-  </listener>
- 
-  <!-- Change to "Production" when you are ready to deploy -->
-  <context-param>
-    <param-name>javax.faces.PROJECT_STAGE</param-name>
-    <param-value>Development</param-value>
-  </context-param>
- 
-  <!-- Welcome page -->
-  <welcome-file-list>
-    <welcome-file>jsf/default.xhtml</welcome-file>
+  <display-name>MyShop</display-name>
+   <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
- 
-  <!-- JSF mapping -->
   <servlet>
-    <servlet-name>Faces Servlet</servlet-name>
-    <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
-    <load-on-startup>1</load-on-startup>
+    <servlet-name>goodtype-servlet</servlet-name>
+    <servlet-class>ua.com.goit.gojava.andriidnikitin.MyShop.ui.GoodTypeServlet</servlet-class>
+    <enabled>true</enabled>
   </servlet>
- 
-  <!-- Map these files with JSF -->
-  <servlet-mapping>
-    <servlet-name>Faces Servlet</servlet-name>
-    <url-pattern>/faces/*</url-pattern>
+  <servlet>
+    <servlet-name>good-servlet</servlet-name>
+    <servlet-class>ua.com.goit.gojava.andriidnikitin.MyShop.ui.GoodServlet</servlet-class>
+    <enabled>true</enabled>
+  </servlet>
+   <servlet-mapping>
+    <servlet-name>goodtype-servlet</servlet-name>
+    <url-pattern>/act-type</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
-    <servlet-name>Faces Servlet</servlet-name>
-    <url-pattern>*.jsf</url-pattern>
+    <servlet-name>good-servlet</servlet-name>
+    <url-pattern>/act-good</url-pattern>
   </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>Faces Servlet</servlet-name>
-    <url-pattern>*.faces</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>Faces Servlet</servlet-name>
-    <url-pattern>*.xhtml</url-pattern>
-  </servlet-mapping>
-  <!-- 
   <resource-ref>
         <description>DB Connection</description>
         <res-ref-name>jdbc/ShopDS</res-ref-name>
         <res-type>javax.sql.DataSource</res-type>
         <res-auth>Container</res-auth>
     </resource-ref>
-  -->  
+    <listener>
+     	<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+   </listener>
    <context-param>
         <param-name>contextConfigLocation</param-name>
        	<param-value>classpath:beans.xml</param-value>

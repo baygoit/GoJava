@@ -1,10 +1,54 @@
 package ua.com.goit.gojava.andriidnikitin.MyShop.domain.model;
 
-public class GoodType {
+import java.io.Serializable;
+import java.util.Set;
 
-	private Integer id;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.GenericGenerator;
+
+@Entity
+@Table(name="GOOD_TYPE")
+public class GoodType implements Serializable {
+	
+	private static final long serialVersionUID = 5672782960646928322L;
+	
+	@Id
+    @GeneratedValue(generator="increment")
+    @GenericGenerator(name="increment", strategy = "increment")
+    @Column(name="TYPE_ID")
+	private Integer id;	
+
+	@Column(name="NAME")
 	private String name;
+	
+	@ManyToOne
+	@JoinTable(name = "TYPE_ID")
 	private GoodType parent;
+	
+	@OneToMany
+	@JoinTable(name = "TYPE_ID")
+	private Set<GoodType> children;
+	
+	@OneToMany
+	@JoinTable(name = "TYPE_ID")
+	private Set<Good> goods;
+	
+	public Set<Good> getGoods() {
+		return goods;
+	}
+
+	public void setGoods(Set<Good> goods) {
+		this.goods = goods;
+	}
 
 	public Integer getId() {
 		return id;
@@ -29,6 +73,13 @@ public class GoodType {
 		this.parent = parent;
 	}
 	
+	public Set<GoodType> getChildren() {
+		return children;
+	}
+
+	public void setChildren(Set<GoodType> children) {
+		this.children = children;
+	}
 
 	@Override
 	public int hashCode() {

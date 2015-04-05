@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      >
+    <h:head>
+    	<h:outputStylesheet library="css" name="table-style.css"  />
+    </h:head>
+ 
+    <h:body>
+ 
+    	<h1>My Shop first JSF 2.0  page</h1>
+ 
+ 		<h:dataTable value="#{goodType.getAllTypes()}" var="t"
+    			styleClass="order-table"
+    			headerClass="order-table-header"
+    			rowClasses="order-table-odd-row,order-table-even-row"
+    		>
+ 
+    		<h:column>
+    			<f:facet name="header">
+    				Type ID
+    			</f:facet>
+    				#{t.typeId}
+    		</h:column>
+ 
+    		<h:column>
+    			<f:facet name="header">
+    				Name
+				</f:facet>
+    				#{t.name}
+    		</h:column>
+ 
+ 			<h:column>
+    			<f:facet name="header">
+    				Parent ID
+				</f:facet>
+    				#{t.parentId}
+    		</h:column>
+    		
+ 
+    	</h:dataTable>
+ 
+ 		<h2>Add New Type</h2>
+ 		<h:form>
+ 
+ 			<h:panelGrid columns="3">
+ 
+				Name : 
+				<h:inputText id="name" value="#{goodType.name}" 
+					size="20" required="true"
+					label="Name" >
+				</h:inputText>
+ 
+				<h:message for="name" style="color:red" />
+ 
+				Parent ID : 
+				<h:inputText id="parentId" value="#{goodType.parentId}" 
+					size="20" required="true"
+					label="parentId" >
+				</h:inputText>
+ 
+				<h:message for="address" style="color:red" />
+ 
+			</h:panelGrid>
+ 
+			<h:commandButton value="Submit" action="#{goodType.addType()}" />
+ 
+ 		</h:form>
+ 
+    </h:body>
+ 
+</html>

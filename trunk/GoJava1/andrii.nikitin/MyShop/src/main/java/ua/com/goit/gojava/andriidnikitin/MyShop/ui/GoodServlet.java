@@ -9,8 +9,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Logger;
+
+import ua.com.goit.gojava.andriidnikitin.MyShop.commons.ErrorLogger;
 import ua.com.goit.gojava.andriidnikitin.MyShop.domain.model.Good;
 import ua.com.goit.gojava.andriidnikitin.MyShop.domain.model.GoodType;
+import ua.com.goit.gojava.andriidnikitin.MyShop.domain.service.GoodCatalog;
 import ua.com.goit.gojava.andriidnikitin.MyShop.domain.service.GoodCatalogImpl;
 import ua.com.goit.gojava.andriidnikitin.MyShop.domain.util.MyShopException;
 
@@ -35,7 +39,7 @@ public class GoodServlet extends HttpServlet {
     		Good result;
     		try {
 				result = catalog.createGood(name, typeId);
-				message = "Successfuly created!" + goodToString(result);
+				message = "Successfuly created!" + goodToString(result, catalog);
 			} catch (MyShopException e) {
 				message = "fail to create record";
 			}
@@ -45,7 +49,7 @@ public class GoodServlet extends HttpServlet {
     		Integer id = Integer.parseInt((String)request.getParameter("id")); 
     		try {
 				Good result = catalog.getGoodById(id);
-				message =  goodToString(result);
+				message =   goodToString(result, catalog);
 			} catch (MyShopException e) {
 				message = "fail to read record";
 			}
@@ -57,7 +61,7 @@ public class GoodServlet extends HttpServlet {
     		String name = (String)request.getParameter("name"); 
     		try {
 				Good result= catalog.updateGood(id, name, typeId);
-				message =  goodToString(result);
+				message =  goodToString(result, catalog);
 			} catch (MyShopException e) {
 				e.printStackTrace();
 				message = "fail to update record";
@@ -81,7 +85,7 @@ public class GoodServlet extends HttpServlet {
 			try {
 				list = catalog.getAllGoods();
 				for (Good type: list){
-	    			message += goodToString(type) + " <br/> ";
+	    			message += goodToString(type, catalog) + " <br/> ";
 	    		}
 			} catch (MyShopException e) {
 				message = "fail to read all records";
@@ -92,12 +96,18 @@ public class GoodServlet extends HttpServlet {
     	response.sendRedirect("result.jsp");
     }
     
-    private String goodToString(Good arg) {
+    private String goodToString(Good arg, GoodCatalog catalog) {
     	if (arg == null){
     		return null;
     	}
-    	GoodType parent = arg.getType();
+    	GoodType parent = null;
     	String stringedType  ;
+		try {
+			parent = catalog.getGoodTypeById(arg.getType().getId());
+		} catch (MyShopException e) {
+			ErrorLogger.logException(e, Logger.getRootLogger());
+			stringedType = "cannot read";
+		}
     	if (parent == null){
     		stringedType = "null";
     	}

@@ -78,6 +78,10 @@
 		<property name="url" value="jdbc:postgresql://localhost:5432/shop" />
 		<property name="username" value="postgres" />
 		<property name="password" value="mypass" />
+	</bean> 
+	
+	<bean id="hibernateUtil"
+		class="ua.com.goit.gojava.andriidnikitin.MyShop.db.util.HibernateUtil">
 	</bean>
 	
 	<!-- BL beans -->
@@ -87,7 +91,14 @@
 		<property name="daoFactory" ref="daoFactory"/>	
 		<property name="log" ref="blLogger"/>	
    </bean>
-   
-	
+	   
+	<bean id="good" 
+		class="ua.com.goit.gojava.andriidnikitin.MyShop.domain.model.Good"/>	
+		
+	<bean id="goodType" 
+		class="ua.com.goit.gojava.andriidnikitin.MyShop.domain.model.GoodType"/>
+		
+	<bean id="goodIncoming" 
+		class="ua.com.goit.gojava.andriidnikitin.MyShop.domain.model.GoodIncoming"/>
 	 	
 </beans>

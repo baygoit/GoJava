@@ -3,7 +3,6 @@ package ua.com.goit.gojava.andriidnikitin.MyShop.ui;
 import org.apache.log4j.Logger;
 
 import ua.com.goit.gojava.andriidnikitin.MyShop.domain.service.GoodCatalogImpl;
-import ua.com.goit.gojava.andriidnikitin.MyShop.domain.service.GoodCatalogImpl;
 
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -29,6 +28,4 @@ public class GoodAction extends ActionSupport {
 		log.info("GoodAction executed");
 		return SUCCESS;		
 	}
-	
-
 }

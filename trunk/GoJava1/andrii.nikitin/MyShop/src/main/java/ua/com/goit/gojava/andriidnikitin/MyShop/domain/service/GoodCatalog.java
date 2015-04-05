@@ -29,5 +29,7 @@ public interface GoodCatalog {
 		
 		public void deleteGood(Integer id) throws MyShopException;	
 		
-		public List<Good> getAllGoods() throws MyShopException;			
+		public List<Good> getAllGoods() throws MyShopException;
+
+		public String getTypeList();			
 	}

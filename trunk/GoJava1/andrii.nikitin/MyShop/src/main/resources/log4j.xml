@@ -22,6 +22,9 @@
     <logger name="org.apache.struts2">
          <level value="WARN" />
     </logger>
+    <logger name="org.hibernate">
+    	<level value="WARN"  />
+    </logger>
     
    <root>
       <level value="FINE" />

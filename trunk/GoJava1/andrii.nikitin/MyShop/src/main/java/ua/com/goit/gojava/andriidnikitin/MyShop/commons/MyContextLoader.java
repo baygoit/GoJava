@@ -16,13 +16,16 @@ public class MyContextLoader implements ApplicationContextAware {
 			throws BeansException {
 		context = arg0;		
 	}
+	
 	public static <T> T getBean(Class<T> class1) {
 		return context.getBean(class1);	
 	}
+	
 	@SuppressWarnings("unchecked")
 	public static <T> T getBean(String string) {
 		return (T) context.getBean(string);	
 	}
+	
 	public static void logBeans(){
 		String[] names = context.getBeanDefinitionNames();
 		log.info("beans<****************");
@@ -30,6 +33,5 @@ public class MyContextLoader implements ApplicationContextAware {
 			log.info(name);
 		}
 		log.info("****************>");
-	}
+	}		
 }
-
