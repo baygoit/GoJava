@@ -3,9 +3,7 @@ package test.ua.goit.alg.xmlparser;
 import org.junit.Before;
 import org.junit.Test;
 import ua.goit.alg.xmlparser.input.StreamReader;
-
 import java.io.*;
-import java.nio.Buffer;
 
 import static org.junit.Assert.assertEquals;
 
@@ -14,7 +12,6 @@ public class TestStreamReader {
 
   @Before
   public void createTempResource() throws IOException {
-
     String path = System.getProperty("user.dir") + "\\resource\\textXMLFile.xml";
     testXMLFile = new File(path);
     testXMLFile.createNewFile();
@@ -27,7 +24,7 @@ public class TestStreamReader {
     } catch (FileNotFoundException e) {
       throw new RuntimeException(e);
     } finally {
-      if(out != null) {
+      if (out != null) {
         out.close();
       }
     }
@@ -37,54 +34,37 @@ public class TestStreamReader {
   public void testStreamReader_read_String() throws IOException {
     String xmlString = "<?xml doctype=\"1\"><start atr1=\"3\" atr2 = \"4\"><tag>text</tag><tag2/></start>";
     StreamReader stream = new StreamReader(xmlString);
-
-    String actual = "";
-    int symbol;
-    do {
-      symbol = stream.read();
-      if (symbol == -1) {
-        break;
-      }
-      actual += (char) symbol;
-    } while (true);
-
-    assertEquals(xmlString, actual);
+    String actualXML = readString_actualXML(stream);
+    assertEquals(xmlString, actualXML);
   }
 
   @Test
   public void testStreamReader_read_emptyString() throws IOException {
     String xmlString = "";
     StreamReader stream = new StreamReader(xmlString);
-
-    String actual = "";
-    int symbol;
-    do {
-      symbol = stream.read();
-      if (symbol == -1) {
-        break;
-      }
-      actual += (char) symbol;
-    } while (true);
-
-    assertEquals(xmlString, actual);
+    String actualXML = readString_actualXML(stream);
+    assertEquals(xmlString, actualXML);
   }
 
   @Test
   public void testStreamReader_read_File() throws IOException {
     String xmlString = "<?xml version=\"1.0\"?><start atr1=\"3\" atr2 = \"4\"><tag>text</tag><tag2/></start>";
     StreamReader stream = new StreamReader(testXMLFile);
+    String actualXML = readString_actualXML(stream);
+    assertEquals(xmlString, actualXML);
+  }
 
-    String actual = "";
+  private String readString_actualXML(StreamReader stream) throws IOException {
+    StringBuilder actualXML = new StringBuilder();
     int symbol;
     do {
       symbol = stream.read();
       if (symbol == -1) {
         break;
       }
-      actual += (char) symbol;
+      actualXML.append((char) symbol);
     } while (true);
-
-    assertEquals(xmlString, actual);
+    return actualXML.toString();
   }
 
 }
