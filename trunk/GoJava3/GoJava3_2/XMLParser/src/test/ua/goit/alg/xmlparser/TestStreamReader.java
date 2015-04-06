@@ -31,7 +31,6 @@ public class TestStreamReader {
         out.close();
       }
     }
-
   }
 
   @Test
