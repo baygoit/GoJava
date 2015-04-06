@@ -25,7 +25,11 @@ public class StreamReader {
     return i;
   }
 
-  public void close() throws IOException {
-    reader.close();
+  public void close() {
+    try {
+      reader.close();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
   }
 }

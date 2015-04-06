@@ -1,8 +1,10 @@
 package test.ua.goit.alg.xmlparser;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 import java.io.IOException;
+
 import org.junit.Assert;
 import org.junit.Test;
 import ua.goit.alg.xmlparser.parser.Parser;
@@ -51,10 +53,31 @@ public class TestParser {
 
   @Test
   public void whenDoubleStartTag() throws IOException {
-      Parser parser = new MockXMLParser();
+    Parser parser = new MockXMLParser();
+    try {
       String result = parser.parse("<?xml doctype=\"1\"><start atr1=\"3\" atr2 = \"4\"><?xml doctype=\"1\"><start atr1=\"3\" atr2 = \"4\"><tag>text</tag><tag2/></start>");
-      String expectedResult = "<?xml?><start>";
-      assertEquals(expectedResult, result);
+      fail();
+    } catch (RuntimeException e) {
+      String errorMessage = "invalid format error";
+      assertEquals(e.getMessage(), errorMessage);
+    } catch (Exception e) {
+      fail();
+    }
+
+  }
+
+  @Test
+  public void whenCloseTag_notEquals_OpenTag() throws IOException {
+    Parser parser = new MockXMLParser();
+    try {
+      String result = parser.parse("<s><t></o></r>");
+      fail();
+    } catch (RuntimeException e) {
+      String errorMessage = "invalid format error";
+      assertEquals(e.getMessage(), errorMessage);
+    } catch (Exception e) {
+      fail();
+    }
   }
 
 }

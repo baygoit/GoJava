@@ -16,6 +16,7 @@ public class XMLParser implements Parser {
   private Handler startHandler;
   private Handler endHandler;
   private Handler errHandler;
+  private StreamReader reader;
 
   public static class Builder {
 
@@ -61,7 +62,7 @@ public class XMLParser implements Parser {
     }
   }
 
-  private XMLParser() {
+  public XMLParser() {
   }
 
   private XMLParser(Builder builder) {
@@ -76,18 +77,18 @@ public class XMLParser implements Parser {
   private StateMashineTag tag = new StateMashineTag(this);
 
   public String parse(String string) throws IOException {
-    StreamReader reader = new StreamReader(string);
+    reader = new StreamReader(string);
     return parseReader(reader);
   }
 
   public String parse(File file) throws IOException {
-    StreamReader reader = new StreamReader(file);
+    reader = new StreamReader(file);
     return parseReader(reader);
   }
 
   @Override
   public String parse(InputStream inputStream) throws IOException {
-    StreamReader reader = new StreamReader(inputStream);
+    reader = new StreamReader(inputStream);
     return parseReader(reader);
   }
 
@@ -113,7 +114,8 @@ public class XMLParser implements Parser {
       closeTagHandler.handle(parserData);
     }
     if (!parserData.getStackElement().equals(parserData.getTag())) {
-      errHandler.handle(parserData);
+//      errHandler.handle(parserData);
+      onError(parserData);
     }
     parserData.clear();
   }
@@ -142,6 +144,8 @@ public class XMLParser implements Parser {
     if (errHandler != null) {
       errHandler.handle(parserData);
     }
+    reader.close();
+    throw new RuntimeException("invalid format error");
   }
 
   public void onOpenTag(Handler handler) {
