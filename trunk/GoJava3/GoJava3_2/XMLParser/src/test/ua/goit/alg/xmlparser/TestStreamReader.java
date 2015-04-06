@@ -40,5 +40,4 @@ public class TestStreamReader {
 
     assertEquals(xmlString, actual);
   }
-
 }
