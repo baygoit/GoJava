@@ -5,7 +5,7 @@ import java.io.*;
 public class StreamReader {
   private Reader reader = null;
 
-  public StreamReader(String inputData) throws FileNotFoundException {
+  public StreamReader(String inputData) {
     reader = new StringReader(inputData);
   }
 
