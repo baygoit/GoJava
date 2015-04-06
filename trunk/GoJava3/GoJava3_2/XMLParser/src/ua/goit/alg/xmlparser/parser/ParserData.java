@@ -11,6 +11,8 @@ public class ParserData {
   private StringBuilder text = new StringBuilder("");
   private StringBuilder attributeName = new StringBuilder("");
   private StringBuilder attributeValue = new StringBuilder("");
+  private boolean isStartTag;
+
 /*  private Stack<String> tagStack;
 
   public String getStackElement() {
@@ -75,5 +77,6 @@ public class ParserData {
     attributes.clear();
     attributeName.setLength(0);
     attributeValue.setLength(0);
+    isStartTag = false;
   }
 }
