@@ -69,12 +69,15 @@ public class TestParser {
   @Test
   public void whenCloseTag_notEquals_OpenTag() throws IOException {
     Parser parser = new MockXMLParser();
+    String result = "";
     try {
-      String result = parser.parse("<s><t></o></r>");
+      result = parser.parse("<s><t></o></r>");
       fail();
     } catch (RuntimeException e) {
       String errorMessage = "invalid format error";
+      String expected = "<s><t>";
       assertEquals(e.getMessage(), errorMessage);
+      assertEquals(expected, result);
     } catch (Exception e) {
       fail();
     }

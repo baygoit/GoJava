@@ -98,7 +98,7 @@ public class XMLParser implements Parser {
       symbol = reader.read();
       tag.next((char) symbol);
     } while (symbol != -1);
-    return "";//result.toString();
+    return "";
   }
 
   public void onOpenTag(ParserData parserData) {
@@ -114,7 +114,6 @@ public class XMLParser implements Parser {
       closeTagHandler.handle(parserData);
     }
     if (!parserData.getStackElement().equals(parserData.getTag())) {
-//      errHandler.handle(parserData);
       onError(parserData);
     }
     parserData.clear();
@@ -145,7 +144,7 @@ public class XMLParser implements Parser {
       errHandler.handle(parserData);
     }
     reader.close();
-    throw new RuntimeException("invalid format error");
+    throw new RuntimeException("Invalid format error");
   }
 
   public void onOpenTag(Handler handler) {
