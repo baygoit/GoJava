@@ -66,5 +66,4 @@ public class TestStreamReader {
     } while (true);
     return actualXML.toString();
   }
-
 }
