@@ -19,14 +19,14 @@ public class GoodTypeBean implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
-	@Autowired
+	@Autowired 
 	GoodCatalog catalog;
 
-	public String name;
+	private String name;
 	
-	public Integer goodTypeId;
+	private Integer id;
 
-	public Integer parentTypeId;
+	private Integer parentId;
 
 	private Logger log = Logger.getLogger(getClass());
 	
@@ -38,29 +38,29 @@ public class GoodTypeBean implements Serializable{
 		this.name = name;
 	}
 
-	public String getParentId() {
-		return parentTypeId==null? "" : parentTypeId.toString();
+	public String getParent() {
+		return parentId==null? "" : parentId.toString();
 	}
 
-	public void setParentId(String input) {
+	public void setParent(String input) {
 		if (input == null){ 
-			this.parentTypeId = null;	
+			this.parentId = null;	
 		}
 		else {
-			this.parentTypeId = Integer.parseInt(input);
+			this.parentId = Integer.parseInt(input);
 		}
 	}
 	
-	public String getTypeId() {
-		return goodTypeId==null? "" : goodTypeId.toString();
+	public String getId() {
+		return id==null? "" : id.toString();
 	} 
 
-	public void setTypeId(String input) {
+	public void setId(String input) {
 		if (input == null){ 
-			this.goodTypeId = null;	
+			this.id = null;	
 		}
 		else {
-			this.goodTypeId = Integer.parseInt(input);
+			this.id = Integer.parseInt(input);
 		}
 	}
 
@@ -80,7 +80,7 @@ public class GoodTypeBean implements Serializable{
 
 	public String addType(){		
 		try {
-			catalog.createType(name, parentTypeId);
+			catalog.createType(name, parentId);
 		} catch (MyShopException e) {
 			ErrorLogger.logException(e, Logger.getLogger(GoodTypeBean.class));
 		}
@@ -92,8 +92,8 @@ public class GoodTypeBean implements Serializable{
 
 	private void clearForm(){
 		setName("");
-		setParentId(null);
-		setTypeId(null);
+		setParent(null);
+		setId(null);
 	}
 
 }

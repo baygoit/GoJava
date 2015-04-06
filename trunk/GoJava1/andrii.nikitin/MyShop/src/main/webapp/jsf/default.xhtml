@@ -4,16 +4,17 @@
 <html xmlns="http://www.w3.org/1999/xhtml"   
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
+       xmlns:p="http://primefaces.org/ui"
       >
     <h:head>
-    	<h:outputStylesheet library="css" name="table-style.css"  />
+    	
     </h:head>
  
     <h:body>
  
     	<h1>My Shop first JSF 2.0  page</h1>
  
- 		<h:dataTable value="#{goodType.getAllTypes()}" var="t"
+ 		<h:dataTable value="#{goodTypeBean.getAllTypes()}" var="t"
     			styleClass="order-table"
     			headerClass="order-table-header"
     			rowClasses="order-table-odd-row,order-table-even-row"
@@ -23,21 +24,21 @@
     			<f:facet name="header">
     				Type ID
     			</f:facet>
-    				#{t.typeId}
+    				#{goodTypeBean.id}
     		</h:column>
  
     		<h:column>
     			<f:facet name="header">
     				Name
 				</f:facet>
-    				#{t.name}
+    				#{goodTypeBean.name}
     		</h:column>
  
  			<h:column>
     			<f:facet name="header">
     				Parent ID
 				</f:facet>
-    				#{t.parentId}
+    				#{goodTypeBean.parent}
     		</h:column>
     		
  
@@ -49,15 +50,16 @@
  			<h:panelGrid columns="3">
  
 				Name : 
-				<h:inputText id="name" value="#{goodType.name}" 
+				<h:inputText id="name" value="#{goodTypeBean.name}" 
 					size="20" required="true"
 					label="Name" >
+					 <f:validateRegex pattern="^[a-zA-Z]{1,}$" />
 				</h:inputText>
  
 				<h:message for="name" style="color:red" />
  
 				Parent ID : 
-				<h:inputText id="parentId" value="#{goodType.parentId}" 
+				<h:inputText id="parentId" value="#{goodTypeBean.parent}" 
 					size="20" required="true"
 					label="parentId" >
 				</h:inputText>
@@ -66,7 +68,7 @@
  
 			</h:panelGrid>
  
-			<h:commandButton value="Submit" action="#{goodType.addType()}" />
+			<h:commandButton value="Submit" action="#{goodTypeBean.addType()}" />
  
  		</h:form>
  
