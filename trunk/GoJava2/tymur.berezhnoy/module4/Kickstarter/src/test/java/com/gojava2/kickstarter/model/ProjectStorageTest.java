@@ -1,6 +1,6 @@
 package com.gojava2.kickstarter.model;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.util.List;
 
@@ -17,7 +17,7 @@ public abstract class ProjectStorageTest {
 	}
 	
 	abstract ProjectStorage getStorage();
-
+	
 	@Test
 	public void shouldCollectionSizeZero_whenNoProjects() {
 		// when
@@ -28,27 +28,27 @@ public abstract class ProjectStorageTest {
 		assertEquals(expectedSize, actualSize);
 	}
 	
-	@Test
-	public void shouldNoProjects_whenNoProjectsWithSameCategory() {
-		// given
-		Category category1 = new Category(1, "Art");
-		
-		Project project1 = new Project(1, "p1", "d1", 1, 1, 1, 1, "s1", "l1");
-		project1.setCategory(category1);
-		
-		Project project2 = new Project(2, "p2", "d2", 1, 1, 1, 1, "s2", "l2");
-		project2.setCategory(category1);
-		
-		storage.addProject(project1);
-		storage.addProject(project2);
-				
-		// when
-		List<Project> result = storage.getProjects(new Category(2, "Dance"));
-		int expectedSize = 0;
-		
-		// then
-		assertEquals(expectedSize, result.size());
-	}
+	 @Test
+     public void shouldNoProjects_whenNoProjectsWithSameCategory() {
+             // given
+             Category category1 = new Category(1, "Art");
+             
+             Project project1 = new Project(1, "p1", "d1", 1, 1, 1, 1, "s1", "l1");
+             project1.setCategory(category1);
+             
+             Project project2 = new Project(2, "p2", "d2", 1, 1, 1, 1, "s2", "l2");
+             project2.setCategory(category1);
+             
+             storage.addProject(project1);
+             storage.addProject(project2);
+                             
+             // when
+             List<Project> result = storage.getProjects(new Category(3, "Sport"));
+             int expectedSize = 0;
+             
+             // then
+             assertEquals(expectedSize, result.size());
+     }
 	
 	@Test
 	public void shouldProjects_whenProjectsWithSameCategory() {

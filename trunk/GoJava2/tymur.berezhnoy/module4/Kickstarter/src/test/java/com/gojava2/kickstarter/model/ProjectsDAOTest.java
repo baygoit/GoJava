@@ -1,64 +1,52 @@
 package com.gojava2.kickstarter.model;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import javax.sql.DataSource;
+
 import org.junit.After;
+import org.junit.Before;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.gojava2.kickstarter.dao.ProjectsDAO;
 
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = {"classpath:application-context.xml", "classpath:test-application-context.xml"})
 public class ProjectsDAOTest extends ProjectStorageTest {
-
-	private Connection connection;
 	
-	static {
-		try {
-			Class.forName("org.postgresql.Driver");
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Can't load driver", e);
-		}
-	}
+	@Autowired
+	private ProjectsDAO projectsDAO;
+	
+	@Autowired
+	private DataSource dataSource;
 	
 	@Override
 	ProjectStorage getStorage() {
-		Statement statement = null;
-		try {
-			connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/test_kickstarter",
-													"postgres", "Berezhnoi");
-			statement = connection.createStatement();
+		return projectsDAO;
+	}
+	
+	@Before
+	public void setUping() {
+		try(Statement statement = dataSource.getConnection().createStatement()) {
+			statement.execute("INSERT INTO categories (id, name) VALUES (1, 'Art'), (2, 'Dance')");
 		} catch (SQLException e) {
-			throw new RuntimeException("Can't finde driver", e);
-		} finally {
-			try {
-				statement.close();
-			} catch (SQLException e) {
-				throw new RuntimeException("Can't close statement", e);
-			}
+			throw new RuntimeException("Something wrong with driver or connection", e);
 		}
-		return new ProjectsDAO(connection);
 	}
 	
 	@After
 	public void cleanUp() {
-		Statement statement = null;
-		try {
-			statement = connection.createStatement();
+		try(Statement statement = dataSource.getConnection().createStatement()) {
 			statement.execute("DELETE FROM projects WHERE id >= 1");
+			statement.execute("DELETE FROM categories WHERE id >= 1");
 			statement.execute("ALTER SEQUENCE projects_id_seq RESTART WITH 1");
 			statement.execute("UPDATE projects SET id = nextval('projects_id_seq')");
-			statement.execute("DELETE FROM categories WHERE id >= 1");
-			statement.execute("ALTER SEQUENCE categories_id_seq RESTART WITH 1");
-			statement.execute("UPDATE categories SET id = nextval('categories_id_seq')");
 		} catch (SQLException e) {
 			throw new RuntimeException("Something wrong with driver or connection", e);
-		} finally {
-			try {
-				statement.close();
-			} catch (SQLException e) {
-				throw new RuntimeException("Can't close statement", e);
-			}
 		}
 	}
 }

@@ -8,28 +8,19 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.stereotype.Component;
+
 import com.gojava2.kickstarter.model.Category;
 import com.gojava2.kickstarter.model.Project;
 import com.gojava2.kickstarter.model.ProjectStorage;
 
-public class ProjectsDAO implements ProjectStorage {
-
-	private Connection connection;
-	
-	public ProjectsDAO(Connection connection) {
-		this.connection = connection;
-	}
+@Component
+public class ProjectsDAO extends AbstractDAO implements ProjectStorage {
 	
 	@Override
 	public void addProject(Project project) {
-		PreparedStatement statement = null;
-		try {
-			statement = connection.prepareStatement("INSERT INTO categories (name) VALUES (?)");
-			statement.setString(1, project.getCategory().getName());
-			statement.execute();
-			
-			statement = connection.prepareStatement("INSERT INTO projects (name, description, story, link, "
-													+ "requiredamount, total, days, backers, id_category) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+		try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement("INSERT INTO projects (name, description, story, link, "
+				+ "requiredamount, total, days, backers, id_category) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)")) {
 			statement.setString(1, project.getName());
 			statement.setString(2, project.getDescription());
 			statement.setString(3, project.getStory());
@@ -40,26 +31,15 @@ public class ProjectsDAO implements ProjectStorage {
 			statement.setInt(8, project.getBackers());
 			statement.setInt(9, project.getCategory().getId());
 			statement.execute();
-			
 		} catch (SQLException e) {
 			throw new RuntimeException("Can't add new project", e);
-		} finally {
-			try {
-				statement.close();
-			} catch (SQLException e) {
-				throw new RuntimeException("Can't close statement", e);
-			}
 		}
 	}
 
 	@Override
 	public Project getProject(int i) {
-		Statement statement = null;
 		Project result = null;
-		
-		try {
-			statement = connection.createStatement();
-			
+		try (Connection connection = getConnection(); Statement statement = connection.createStatement()) {			
 			ResultSet resultSet = statement.executeQuery("SELECT *, categories.id AS category_id, categories.name AS category_name "
 														+ "FROM projects INNER JOIN categories "
 														+ "ON categories.id = projects.id_category WHERE projects.id = " + i);
@@ -74,30 +54,18 @@ public class ProjectsDAO implements ProjectStorage {
 			}
 		} catch (SQLException e) {
 			throw new RuntimeException("Somthing wrong with connection or statement", e);
-		} finally {
-			try {
-				if(statement != null) {
-				statement.close();
-				}
-			} catch (SQLException e) {
-				throw new RuntimeException("Can't close statement", e);
-			}
 		}
 		return result;
 	}
 
 	@Override
 	public List<Project> getProjects(Category category) {
-		Statement statement = null;
 		List<Project> result = null;
-		Project projec = null;
-		try {
-			statement = connection.createStatement();
-			
+		try (Connection connection = getConnection(); Statement statement = connection.createStatement()) {			
 			ResultSet resultSet = statement.executeQuery("SELECT * FROM projects WHERE id_category = " + category.getId());
 			result = new ArrayList<Project>();
 			while (resultSet.next()) {
-				projec = new Project(resultSet.getInt("id"), resultSet.getString("name"), resultSet.getString("description"), 
+				Project projec = new Project(resultSet.getInt("id"), resultSet.getString("name"), resultSet.getString("description"), 
 						resultSet.getInt("requiredAmount"), resultSet.getInt("total"), 
 						resultSet.getInt("days"), resultSet.getInt("backers"),
 						resultSet.getString("story"), resultSet.getString("link"));
@@ -106,12 +74,6 @@ public class ProjectsDAO implements ProjectStorage {
 			}
 		} catch (SQLException e) {
 			throw new RuntimeException("Somthing wrong with connection or statement", e);
-		} finally {
-			try {
-				statement.close();
-			} catch (SQLException e) {
-				throw new RuntimeException("Can't close statement", e);
-			}
 		}
 		return result;
 	}
@@ -119,22 +81,14 @@ public class ProjectsDAO implements ProjectStorage {
 	@Override
 	public int getSize() {
 		int result = 0;
-		Statement statement = null;
-		try {
-			statement = connection.createStatement();
-			
-			ResultSet resultSet = statement.executeQuery("SELECT COUNT(*) AS COUNT FROM projects");
+		try (Connection connection = getConnection(); Statement statement = connection.createStatement()) {
+						
+			ResultSet resultSet = statement.executeQuery("SELECT COUNT(*) AS count FROM projects");
 			while (resultSet.next()) {
-				result = resultSet.getInt("COUNT");
+				result = resultSet.getInt("count");
 			}
 		} catch (SQLException e) {
 			throw new RuntimeException("Somthing wrong with connection or statement", e);
-		} finally {
-			try {
-				statement.close();
-			} catch (SQLException e) {
-				throw new RuntimeException("Can't close statement", e);
-			}
 		}
 		return result;
 	}

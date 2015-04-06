@@ -1,16 +1,18 @@
  package com.gojava2.kickstarter.controller;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
 import java.util.LinkedHashSet;
 import java.util.List;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import com.gojava2.kickstarter.dao.CategoriesDAO;
 import com.gojava2.kickstarter.dao.ProjectsDAO;
@@ -19,68 +21,65 @@ import com.gojava2.kickstarter.model.Category;
 import com.gojava2.kickstarter.model.Project;
 import com.gojava2.kickstarter.model.Quote;
 
+@Controller
 public class MainServlet extends HttpServlet {
+	
+	private String nameJsp;
+		
+	@Autowired
+	private QuotesDAO quotesDAO;
+	
+	@Autowired
+	private CategoriesDAO categoriesDAO;
+	
+	@Autowired
+	private ProjectsDAO projectsDAO;
 
-	static {
-		try {
-			Class.forName("org.postgresql.Driver");
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Can't load driver");
-		}
+	@Override
+	public void init(ServletConfig config) throws ServletException {
+		super.init(config);
+		SpringBeanAutowiringSupport.processInjectionBasedOnServletContext(this, config.getServletContext());
 	}
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		String action = req.getRequestURI().substring(req.getContextPath().length());
-		
-		Connection connection = getConnection(req);
 
 		if(action.equals("/categories")) {
-			QuotesDAO quoteDAO = new QuotesDAO(connection);
-			
-			Quote quote = quoteDAO.getRandomQuote();
+
+			Quote quote = quotesDAO.getRandomQuote();
 			StringBuilder builder = new StringBuilder();
 			builder.append("\"").append(quote.getContent()).append("\"")
 			.append(quote.getCopyrightSymbol()).append(quote.getAuthor());
 			
-			CategoriesDAO categoryDAO = new CategoriesDAO(connection);
-			LinkedHashSet<Category> categories = categoryDAO.getCategories();
+			LinkedHashSet<Category> categories = categoriesDAO.getCategories();
+			nameJsp = "categories";
 			
 			req.setAttribute("quote", quote);
-			req.setAttribute("categories", categories);
-			req.getRequestDispatcher("categories.jsp").forward(req, resp);
+			redirect(req, resp, categories, nameJsp);
 		} else if(action.equals("/projects")) {
 			int categoryId = Integer.valueOf(req.getParameter("categoryId"));
 			String categoryName = String.valueOf(req.getParameter("categoyName"));
 			
-			ProjectsDAO projectDAO = new ProjectsDAO(connection);
-			List<Project> projects = projectDAO.getProjects(new Category(categoryId, categoryName));
+			List<Project> projects = projectsDAO.getProjects(new Category(categoryId, categoryName));
+			nameJsp = "projects";
 			
-			req.setAttribute("projects", projects);
-			req.getRequestDispatcher("projects.jsp").forward(req, resp);
+			redirect(req, resp, projects, nameJsp);
 		} else if(action.equals("/project")) {
 			int projectId = Integer.valueOf(req.getParameter("id"));
 			
-			ProjectsDAO projectDAO = new ProjectsDAO(connection);
-			Project project = projectDAO.getProject(projectId);
+			Project project = projectsDAO.getProject(projectId);
+			nameJsp = "project";
 			
-			req.setAttribute("project", project);
-			req.getRequestDispatcher("project.jsp").forward(req, resp);
+			redirect(req, resp, project, nameJsp);
 		}
 	}
-	
-	private Connection getConnection(HttpServletRequest req) {
-		Connection result = (Connection) req.getSession().getAttribute("connection");
-		if(result == null) {
-			try {
-				result = DriverManager.getConnection("jdbc:postgresql://localhost:5432/kickstarter",
-						"postgres", "Berezhnoi");
-			} catch (SQLException e) {
-				throw new RuntimeException("Can't get connection", e);
-			}
-			req.getSession().setAttribute("connection", result);
-		}
-		return result;
+
+	private void redirect(HttpServletRequest req, HttpServletResponse resp,
+			Object content, String name)
+			throws ServletException, IOException {
+		req.setAttribute(name, content);
+		req.getRequestDispatcher(name + ".jsp").forward(req, resp);
 	}
 }
