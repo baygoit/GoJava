@@ -31,7 +31,7 @@ public class MockXMLParser implements Parser{
     }).setStartHandler(new Handler(){
       @Override
       public void handle(ParserData parserData) {
-        result.append("<").append(parserData.getTag()).append(">");
+        result.append("<").append(parserData.getTag()).append("?>");
      }
     }).setEndHandler(new Handler(){
       @Override
