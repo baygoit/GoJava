@@ -24,7 +24,7 @@ public enum TagState {
         if (parserData.isStartTagFound()) {
           result = INVALID;
         } else {
-          result = START;
+          result = TAG_NAME;
           parserData.startTagFound();
           parserData.setStartTag(true);
         }
@@ -50,19 +50,6 @@ public enum TagState {
       return result;
     }
   },
-  START {
-    @Override
-    public TagState next(char c, ParserData parserData, XMLParser xmlParser) {
-      TagState result = INVALID;
-      if (Character.isLetter(c)) {
-        parserData.appendTag(c);
-        result = TAG_NAME;
-      } else if (c == ' ') {
-        result = ATTRIBUTE_NAME;
-      }
-      return result;
-    }
-  },
   TAG_NAME {
     @Override
     public TagState next(char c, ParserData parserData, XMLParser xmlParser) {
@@ -71,6 +58,12 @@ public enum TagState {
         result = ATTRIBUTE_NAME;
       } else if (c == '>' || c == '/') {
         result = handleClosingTags(c, parserData, xmlParser, result);
+      } else if (c == '?') {
+        if (parserData.isStartTag()) {
+          result = ATTRIBUTE_VALUE_END;
+        } else {
+          result = INVALID;
+        }
       } else {
         result = TAG_NAME;
         parserData.appendTag(c);
@@ -134,7 +127,9 @@ public enum TagState {
       } else if (c == '>' || c == '/') {
         result = handleClosingTags(c, parserData, xmlParser, result);
       } else if (c == '?') {
-        if (!parserData.isStartTag()) {
+        if (parserData.isStartTag()) {
+          result = ATTRIBUTE_VALUE_END;
+        } else {
           result = INVALID;
         }
       }
