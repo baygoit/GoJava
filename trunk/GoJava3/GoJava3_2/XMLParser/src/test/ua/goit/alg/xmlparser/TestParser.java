@@ -58,7 +58,7 @@ public class TestParser {
       String result = parser.parse("<?xml doctype=\"1\"><start atr1=\"3\" atr2 = \"4\"><?xml doctype=\"1\"><start atr1=\"3\" atr2 = \"4\"><tag>text</tag><tag2/></start>");
       fail();
     } catch (RuntimeException e) {
-      String errorMessage = "invalid format error";
+      String errorMessage = "Invalid format error";
       assertEquals(e.getMessage(), errorMessage);
     } catch (Exception e) {
       fail();
@@ -69,15 +69,12 @@ public class TestParser {
   @Test
   public void whenCloseTag_notEquals_OpenTag() throws IOException {
     Parser parser = new MockXMLParser();
-    String result = "";
     try {
-      result = parser.parse("<s><t></o></r>");
+      String result = parser.parse("<s><t></o></r>");
       fail();
     } catch (RuntimeException e) {
-      String errorMessage = "invalid format error";
-      String expected = "<s><t>";
+      String errorMessage = "Invalid format error";
       assertEquals(e.getMessage(), errorMessage);
-      assertEquals(expected, result);
     } catch (Exception e) {
       fail();
     }
