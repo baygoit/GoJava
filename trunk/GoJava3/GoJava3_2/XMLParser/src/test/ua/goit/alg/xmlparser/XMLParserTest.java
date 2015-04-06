@@ -1,4 +1,4 @@
-package ua.goit.alg.test;
+package test.ua.goit.alg.xmlparser;
 
 import static org.junit.Assert.*;
 import java.io.IOException;
@@ -15,8 +15,5 @@ public class XMLParserTest {
       String expectedResult = "<?xml><start><tag>text</tag><tag2></tag2></start>";
       System.out.println(result);
       assertEquals(expectedResult, result);
-    
-   
   }
-
 }
