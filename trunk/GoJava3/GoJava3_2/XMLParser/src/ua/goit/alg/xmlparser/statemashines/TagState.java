@@ -21,7 +21,6 @@ public enum TagState {
     public TagState next(char c, ParserData parserData, XMLParser xmlParser) {
       TagState result;
       if (c == '?') {
-        parserData.appendTag(c);
         result = START;
       } else if (c == '/') {
         result = CLOSETAG;
