@@ -12,17 +12,34 @@ public class ParserData {
   private StringBuilder attributeName = new StringBuilder("");
   private StringBuilder attributeValue = new StringBuilder("");
   private boolean isStartTag;
+  private boolean startTagFound;
 
-/*  private Stack<String> tagStack;
-
-  public String getStackElement() {
-    return tagStack.pop();
+  public boolean isStartTagFound() {
+    return startTagFound;
   }
 
-  public void putTagInStack() {
-    tagStack.push(tag.toString());
+  public boolean isStartTag() {
+    return isStartTag;
   }
-*/
+
+  public void setStartTag(boolean isStartTag) {
+    this.isStartTag = isStartTag;
+  }
+
+  public void startTagFound() {
+    startTagFound = true;
+  }
+
+  /*  private Stack<String> tagStack;
+
+        public String getStackElement() {
+          return tagStack.pop();
+        }
+
+        public void putTagInStack() {
+          tagStack.push(tag.toString());
+        }
+      */
   public void appendAttributeName(char c) {
     attributeName.append(c);
   }

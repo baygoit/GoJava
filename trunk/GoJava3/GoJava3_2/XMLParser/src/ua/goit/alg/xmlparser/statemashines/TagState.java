@@ -21,7 +21,13 @@ public enum TagState {
     public TagState next(char c, ParserData parserData, XMLParser xmlParser) {
       TagState result;
       if (c == '?') {
-        result = START;
+        if (parserData.isStartTagFound()) {
+          result = INVALID;
+        } else {
+          result = START;
+          parserData.startTagFound();
+          parserData.setStartTag(true);
+        }
       } else if (c == '/') {
         result = CLOSETAG;
       } else {
@@ -127,6 +133,10 @@ public enum TagState {
         result = ATTRIBUTE_NAME;
       } else if (c == '>' || c == '/') {
         result = handleClosingTags(c, parserData, xmlParser, result);
+      } else if (c == '?') {
+        if (!parserData.isStartTag()) {
+          result = INVALID;
+        }
       }
       return result;
     }
@@ -160,8 +170,14 @@ public enum TagState {
       parserData.addAttribute(parserData.getAttributeName(), parserData.getAttributeValue());
     }
     if (c == '>') {
-      xmlParser.onOpenTag(parserData);
-      result = TEXT;
+      if (parserData.isStartTag()) {
+        xmlParser.onStart(parserData);
+        parserData.clear();
+        result = INIT;
+      } else {
+        xmlParser.onOpenTag(parserData);
+        result = TEXT;
+      }
     } else if (c == '/') {
       String tag = parserData.getTag();
       xmlParser.onOpenTag(parserData);
