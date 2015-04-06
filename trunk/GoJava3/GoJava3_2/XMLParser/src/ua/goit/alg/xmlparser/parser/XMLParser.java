@@ -72,24 +72,24 @@ public class XMLParser implements Parser{
 
   public String parse(String string) throws IOException {
     StreamReader stream = new StreamReader(string);
-    return parseInputStream(stream);
+    return parseReader(stream);
   }
 
   public String parse(File file) throws IOException {
     StreamReader stream = new StreamReader(file);
-    return parseInputStream(stream);
+    return parseReader(stream);
   }
 
   @Override
   public String parse(InputStream inputStream) throws IOException {
     StreamReader stream = new StreamReader(inputStream);
-    return parseInputStream(stream);
+    return parseReader(stream);
   }
 
-  private String parseInputStream(StreamReader stream) throws IOException {  
+  private String parseReader(StreamReader reader) throws IOException {
     int symbol;
     do{
-      symbol = stream.read();
+      symbol = reader.read();
       tag.next((char)symbol);
     } while (symbol !=-1);
     return "";//result.toString();
