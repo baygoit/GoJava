@@ -1,8 +1,6 @@
 package ua.goit.alg.xmlparser.parser;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Stack;
+import java.util.*;
 
 public class ParserData {
 
@@ -30,16 +28,17 @@ public class ParserData {
     startTagFound = true;
   }
 
-  /*  private Stack<String> tagStack;
+  private Deque<String> tagStack = new LinkedList<String>();
 
-        public String getStackElement() {
-          return tagStack.pop();
-        }
+  public String getStackElement() {
+    return tagStack.pop();
+  }
 
-        public void putTagInStack() {
-          tagStack.push(tag.toString());
-        }
-      */
+  public void putTagInStack() {
+    tagStack.push(tag.toString());
+  }
+
+
   public void appendAttributeName(char c) {
     attributeName.append(c);
   }
