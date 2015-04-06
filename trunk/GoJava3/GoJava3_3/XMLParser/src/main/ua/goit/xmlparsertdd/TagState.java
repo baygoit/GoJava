@@ -33,6 +33,14 @@ enum TagState {
       return  result;
     }
   },
+  UNCHEKED_TAG_END {
+    @Override
+    public TagState next(char c, TagBuilder parser) {
+      //TODO: make checking in stack
+      return VALID_TAG_END;
+    }
+  },
+  
   VALID_TAG_END {
 
     @Override
