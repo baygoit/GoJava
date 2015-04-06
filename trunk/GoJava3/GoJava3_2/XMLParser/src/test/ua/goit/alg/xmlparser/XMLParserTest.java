@@ -12,7 +12,7 @@ public class XMLParserTest {
   public void doubleStartTag() throws IOException {
       Parser parser = new MockXMLParser();
       String result = parser.parse("<?xml doctype=\"1\"><start atr1=\"3\" atr2 = \"4\"><?xml doctype=\"1\"><start atr1=\"3\" atr2 = \"4\"><tag>text</tag><tag2/></start>");
-      String expectedResult = "<?xml><start><tag>text</tag><tag2></tag2></start>";
+      String expectedResult = "<?xml?><start>";
       System.out.println(result);
       assertEquals(expectedResult, result);
   }
