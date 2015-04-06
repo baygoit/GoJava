@@ -9,119 +9,145 @@ public class Arrays {
 
   public static void mergeSort(File file) throws IOException {
     filesCount = 0;
-    boolean evenNumberOfFiles;
+    boolean isEvenNumberOfFiles;
     cutSortAndWrite(file, BUFFER_SIZE);
+    isEvenNumberOfFiles = checkIfNumberOfFilesIsEven();
+    StringBuilder firstTempFileName = new StringBuilder(),
+            secondTempFileName = new StringBuilder(),
+            mergedTempFileName = new StringBuilder();
+
+    int indexOfFirstTempFile = 0;
+    int indexOfSecondTempFile = 1;
+    int indexOfMergedFile = 0;
+
+    firstTempFileName.append('A');
+    firstTempFileName.append(indexOfFirstTempFile);
+
+    secondTempFileName.append('A');
+    secondTempFileName.append(indexOfSecondTempFile);
+
+    mergedTempFileName.append('B');
+    mergedTempFileName.append(indexOfMergedFile);
+
+    int filesCountForChangingIndexes = filesCount / 2;
+
+    while (filesCount > 1) {
+
+      if (filesCount == filesCountForChangingIndexes) {
+        changeLetterIndexes(firstTempFileName, secondTempFileName,
+                mergedTempFileName);
+
+        filesCountForChangingIndexes = filesCount / 2;
+        indexOfFirstTempFile = 0;
+        indexOfSecondTempFile = 1;
+        indexOfMergedFile = 0;
+
+        changeNumberIndexes(firstTempFileName, secondTempFileName,
+                mergedTempFileName, indexOfFirstTempFile,
+                indexOfSecondTempFile, indexOfMergedFile);
+      }
+
+      if (filesCount == 2) {
+        mergedTempFileName.delete(0, mergedTempFileName.length());
+        mergedTempFileName.append("SortedBigFile");
+      } else if (filesCount == 3 && !isEvenNumberOfFiles) {
+        firstTempFileName.delete(1, firstTempFileName.length());
+        firstTempFileName.append(indexOfFirstTempFile);
+        secondTempFileName.delete(1, secondTempFileName.length());
+        secondTempFileName.append(indexOfSecondTempFile);
+
+        File fileMerged = new File(mergedTempFileName + ".txt");
+        File file2 = new File(secondTempFileName + ".txt");
+        fileMerged.renameTo(file2);
+
+        mergedTempFileName.delete(1, mergedTempFileName.length());
+        indexOfMergedFile = indexOfMergedFile - 1;
+        mergedTempFileName.append(indexOfMergedFile);
+        indexOfMergedFile = indexOfMergedFile + 1;
+        isEvenNumberOfFiles = true;
+      } else {
+        changeNumberIndexes(firstTempFileName, secondTempFileName,
+                mergedTempFileName, indexOfFirstTempFile,
+                indexOfSecondTempFile, indexOfMergedFile);
+      }
+
+      File firstFile = new File(firstTempFileName + ".txt");
+      File secondFile = new File(secondTempFileName + ".txt");
+      File firstAndSecondFilesMerged = new File(mergedTempFileName + ".txt");
+
+      mergeTwoTempFiles(firstFile, secondFile, firstAndSecondFilesMerged);
+      filesCount = filesCount - 1;
+      indexOfFirstTempFile = indexOfFirstTempFile + 2;
+      indexOfSecondTempFile = indexOfSecondTempFile + 2;
+      indexOfMergedFile = indexOfMergedFile + 1;
+    }
+  }
+
+  private static void changeNumberIndexes(StringBuilder firstTempFileName,
+                                          StringBuilder secondTempFileName,
+                                          StringBuilder mergedTempFileName,
+                                          int indexOfFirstTempFile,
+                                          int indexOfSecondTempFile,
+                                          int indexOfMergedFile) {
+    firstTempFileName.delete(1, firstTempFileName.length());
+    firstTempFileName.append(indexOfFirstTempFile);
+    secondTempFileName.delete(1, secondTempFileName.length());
+    secondTempFileName.append(indexOfSecondTempFile);
+    mergedTempFileName.delete(1, mergedTempFileName.length());
+    mergedTempFileName.append(indexOfMergedFile);
+  }
+
+  private static void changeLetterIndexes(StringBuilder firstTempFileName,
+                                          StringBuilder secondTempFileName,
+                                          StringBuilder mergedTempFileName) {
+    if (firstTempFileName.charAt(0) == 'A') {
+      firstTempFileName.setCharAt(0, 'B');
+      secondTempFileName.setCharAt(0, 'B');
+      mergedTempFileName.setCharAt(0, 'A');
+    } else if (firstTempFileName.charAt(0) == 'B') {
+      firstTempFileName.setCharAt(0, 'A');
+      secondTempFileName.setCharAt(0, 'A');
+      mergedTempFileName.setCharAt(0, 'B');
+    }
+  }
+
+  private static boolean checkIfNumberOfFilesIsEven() {
+    boolean evenNumberOfFiles;
     if (filesCount % 2 == 0) {
       evenNumberOfFiles = true;
     } else {
       evenNumberOfFiles = false;
     }
-    StringBuilder tmpFileName1 = new StringBuilder(), tmpFileName2 = new StringBuilder(),
-            tmpFileNameMergedFile = new StringBuilder();
-
-    int indexTmpFile1 = 0;
-    int indexTmpFile2 = 1;
-    int indexOfMergedFile = 0;
-
-    tmpFileName1.append('A');
-    tmpFileName1.append(indexTmpFile1);
-
-    tmpFileName2.append('A');
-    tmpFileName2.append(indexTmpFile2);
-
-    tmpFileNameMergedFile.append('B');
-    tmpFileNameMergedFile.append(indexOfMergedFile);
-
-    int nextNameLevel = filesCount / 2;
-
-    while (filesCount > 1) {
-
-      if (filesCount == nextNameLevel) {
-
-        if (tmpFileName1.charAt(0) == 'A') {
-          tmpFileName1.setCharAt(0, 'B');
-          tmpFileName2.setCharAt(0, 'B');
-          tmpFileNameMergedFile.setCharAt(0, 'A');
-        } else if (tmpFileName1.charAt(0) == 'B') {
-          tmpFileName1.setCharAt(0, 'A');
-          tmpFileName2.setCharAt(0, 'A');
-          tmpFileNameMergedFile.setCharAt(0, 'B');
-        }
-        nextNameLevel = filesCount / 2;
-        indexTmpFile1 = 0;
-        indexTmpFile2 = 1;
-        indexOfMergedFile = 0;
-        tmpFileName1.delete(1, tmpFileName1.length());
-        tmpFileName1.append(indexTmpFile1);
-        tmpFileName2.delete(1, tmpFileName2.length());
-        tmpFileName2.append(indexTmpFile2);
-        tmpFileNameMergedFile.delete(1, tmpFileNameMergedFile.length());
-        tmpFileNameMergedFile.append(indexOfMergedFile);
-      }
-
-      if (filesCount == 2) {
-        tmpFileNameMergedFile.delete(0, tmpFileNameMergedFile.length());
-        tmpFileNameMergedFile.append("SortedBigFile");
-      } else if (filesCount == 3 && !evenNumberOfFiles) {
-        tmpFileName1.delete(1, tmpFileName1.length());
-        tmpFileName1.append(indexTmpFile1);
-        tmpFileName2.delete(1, tmpFileName2.length());
-        tmpFileName2.append(indexTmpFile2);
-
-        File fileMerged = new File(tmpFileNameMergedFile + ".txt");
-        File file2 = new File(tmpFileName2 + ".txt");
-        fileMerged.renameTo(file2);
-
-        tmpFileNameMergedFile.delete(1, tmpFileNameMergedFile.length());
-        indexOfMergedFile = indexOfMergedFile - 1;
-        tmpFileNameMergedFile.append(indexOfMergedFile);
-        indexOfMergedFile = indexOfMergedFile + 1;
-        evenNumberOfFiles = true;
-      } else {
-        tmpFileName1.delete(1, tmpFileName1.length());
-        tmpFileName1.append(indexTmpFile1);
-        tmpFileName2.delete(1, tmpFileName2.length());
-        tmpFileName2.append(indexTmpFile2);
-        tmpFileNameMergedFile.delete(1, tmpFileNameMergedFile.length());
-        tmpFileNameMergedFile.append(indexOfMergedFile);
-      }
-
-      File file1 = new File(tmpFileName1 + ".txt");
-      File file2 = new File(tmpFileName2 + ".txt");
-      File fileMerged = new File(tmpFileNameMergedFile + ".txt");
-
-      mergeTwoTempFiles(file1, file2, fileMerged);
-      filesCount = filesCount - 1;
-      indexTmpFile1 = indexTmpFile1 + 2;
-      indexTmpFile2 = indexTmpFile2 + 2;
-      indexOfMergedFile = indexOfMergedFile + 1;
-    }
+    return evenNumberOfFiles;
   }
 
-  private static void mergeTwoTempFiles(File file1, File file2, File fileMerged) {
-    int value1 = 0, value2 = 0;
-    boolean readNextValue1 = true;
-    boolean readNextValue2 = true;
+  private static void mergeTwoTempFiles(File firstFile, File secondFile,
+                                        File fileMerged) {
+    int intFromFirstFile = 0, intFromSecondFile = 0;
+    boolean readNextIntFromFirstFileIsAllowed = true;
+    boolean readNextIntFromSecondFileIsAllowed = true;
     boolean endOfFile1 = false;
     boolean endOfFile2 = false;
 
-    DataInputStream disFile1 = null;
+    DataInputStream inputStreamOfFirstFile = null;
     try {
-      disFile1 = new DataInputStream(new FileInputStream(file1));
+      inputStreamOfFirstFile = new DataInputStream(
+              new FileInputStream(firstFile));
     } catch (FileNotFoundException e) {
       e.printStackTrace();
     }
 
-    DataInputStream disFile2 = null;
+    DataInputStream inputStreamOfSecondFile = null;
     try {
-      disFile2 = new DataInputStream(new FileInputStream(file2));
+      inputStreamOfSecondFile = new DataInputStream(
+              new FileInputStream(secondFile));
     } catch (FileNotFoundException e) {
       e.printStackTrace();
     }
 
-    DataOutputStream dosMergedFile = null;
+    DataOutputStream outputStreamOfMergedFile = null;
     try {
-      dosMergedFile = new DataOutputStream(new
+      outputStreamOfMergedFile = new DataOutputStream(new
               FileOutputStream(fileMerged));
     } catch (FileNotFoundException e) {
       e.printStackTrace();
@@ -133,123 +159,120 @@ public class Arrays {
 
         if (endOfFile1) {
           try {
-            dosMergedFile.writeInt(value2);
+            outputStreamOfMergedFile.writeInt(intFromSecondFile);
           } catch (IOException e) {
             e.printStackTrace();
           }
-          readNextValue2 = true;
+          readNextIntFromSecondFileIsAllowed = true;
         }
 
         if (endOfFile2) {
           try {
-            dosMergedFile.writeInt(value1);
+            outputStreamOfMergedFile.writeInt(intFromFirstFile);
           } catch (IOException e) {
             e.printStackTrace();
           }
-          readNextValue1 = true;
+          readNextIntFromFirstFileIsAllowed = true;
         }
 
-        if (readNextValue1 != false && !endOfFile1) {
+        if (readNextIntFromFirstFileIsAllowed != false && !endOfFile1) {
           try {
-            value1 = disFile1.readInt();
+            intFromFirstFile = inputStreamOfFirstFile.readInt();
           } catch (EOFException e) {
             endOfFile1 = true;
-            readNextValue1 = false;
+            readNextIntFromFirstFileIsAllowed = false;
           } catch (IOException e) {
             e.printStackTrace();
           }
         }
-        if (readNextValue2 != false && !endOfFile2) {
+        if (readNextIntFromSecondFileIsAllowed != false && !endOfFile2) {
           try {
-            value2 = disFile2.readInt();
+            intFromSecondFile = inputStreamOfSecondFile.readInt();
           } catch (EOFException e) {
             endOfFile2 = true;
-            readNextValue2 = false;
+            readNextIntFromSecondFileIsAllowed = false;
           } catch (IOException e) {
             e.printStackTrace();
           }
         }
 
-        if (value1 == value2 && !endOfFile1 && !endOfFile2) {
+        if (intFromFirstFile == intFromSecondFile && !endOfFile1 && !endOfFile2) {
           try {
-            dosMergedFile.writeInt(value1);
+            outputStreamOfMergedFile.writeInt(intFromFirstFile);
           } catch (EOFException e) {
             endOfFile1 = true;
           } catch (IOException e) {
             e.printStackTrace();
           }
           try {
-            dosMergedFile.writeInt(value2);
+            outputStreamOfMergedFile.writeInt(intFromSecondFile);
           } catch (EOFException e) {
             endOfFile2 = true;
           } catch (IOException e) {
             e.printStackTrace();
           }
-          readNextValue1 = true;
-          readNextValue2 = true;
-        } else if (value1 < value2 && !endOfFile1 && !endOfFile2) {
+          readNextIntFromFirstFileIsAllowed = true;
+          readNextIntFromSecondFileIsAllowed = true;
+        } else if (intFromFirstFile < intFromSecondFile && !endOfFile1 && !endOfFile2) {
           try {
-            dosMergedFile.writeInt(value1);
+            outputStreamOfMergedFile.writeInt(intFromFirstFile);
           } catch (EOFException e) {
             endOfFile1 = true;
           } catch (IOException e) {
             e.printStackTrace();
           }
-          readNextValue1 = true;
-          readNextValue2 = false;
-        } else if (value2 < value1 && !endOfFile1 && !endOfFile2) {
+          readNextIntFromFirstFileIsAllowed = true;
+          readNextIntFromSecondFileIsAllowed = false;
+        } else if (intFromSecondFile < intFromFirstFile && !endOfFile1 && !endOfFile2) {
           try {
-            dosMergedFile.writeInt(value2);
+            outputStreamOfMergedFile.writeInt(intFromSecondFile);
           } catch (EOFException e) {
             endOfFile2 = true;
           } catch (IOException e) {
             e.printStackTrace();
           }
-          readNextValue1 = false;
-          readNextValue2 = true;
+          readNextIntFromFirstFileIsAllowed = false;
+          readNextIntFromSecondFileIsAllowed = true;
         }
       } else if (endOfFile1 && !endOfFile2) {
         try {
-          dosMergedFile.writeInt(value2);
+          outputStreamOfMergedFile.writeInt(intFromSecondFile);
         } catch (EOFException e) {
           endOfFile2 = true;
         } catch (IOException e) {
           e.printStackTrace();
         }
-        readNextValue1 = false;
-        readNextValue2 = true;
+        readNextIntFromFirstFileIsAllowed = false;
+        readNextIntFromSecondFileIsAllowed = true;
       } else if (!endOfFile1 && endOfFile2) {
         try {
-          dosMergedFile.writeInt(value1);
+          outputStreamOfMergedFile.writeInt(intFromFirstFile);
         } catch (EOFException e) {
           endOfFile1 = true;
         } catch (IOException e) {
           e.printStackTrace();
         }
-        readNextValue1 = true;
-        readNextValue2 = false;
+        readNextIntFromFirstFileIsAllowed = true;
+        readNextIntFromSecondFileIsAllowed = false;
       } else if (endOfFile1 && endOfFile2) {
         break;
       }
     }
+    closeStreams(inputStreamOfFirstFile, inputStreamOfSecondFile,
+            outputStreamOfMergedFile);
 
-    try {
-      disFile1.close();
-    } catch (IOException e) {
-      e.printStackTrace();
+    firstFile.delete();
+    secondFile.delete();
+  }
+
+  private static void closeStreams(Closeable... closable) {
+    for (int i = 0; i < closable.length; i++) {
+      try {
+        closable[i].close();
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
     }
-    try {
-      disFile2.close();
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
-    try {
-      dosMergedFile.close();
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
-    file1.delete();
-    file2.delete();
   }
 
   public static void cutSortAndWrite(File file, int buffer) throws IOException {
@@ -281,51 +304,52 @@ public class Arrays {
     disFile.close();
   }
 
-  public static void writeArrayToFile(int[] array, File fileName) {
-    DataOutputStream dos = null;
+  public static void writeArrayToFile(int[] array, File file) {
+    DataOutputStream outputStream = null;
     try {
-      dos = new DataOutputStream(new FileOutputStream(fileName));
+      outputStream = new DataOutputStream(new FileOutputStream(file));
       for (int i = 0; i < array.length; i++) {
-        dos.writeInt(array[i]);
+        outputStream.writeInt(array[i]);
       }
     } catch (FileNotFoundException e) {
-      System.out.println("File " + fileName + " not found");
+      System.out.println("File " + file + " not found");
     } catch (IOException e) {
-      System.out.println("\nCan't close the file " + fileName);
+      System.out.println("\nCan't close the file " + file);
     } finally {
       try {
-        if (dos != null) {
-          dos.close();
+        if (outputStream != null) {
+          outputStream.close();
         }
       } catch (IOException e) {
-        System.out.println("\nCan't close the file " + fileName);
+        System.out.println("\nCan't close the file " + file);
       }
     }
   }
 
-  public static int[] readArrayFromFile(File fileName) {
+  public static int[] readArrayFromFile(File file) {
     Vector<Integer> vector = new Vector<>();
-    DataInputStream dis = null;
+    DataInputStream inputStream = null;
     try {
-      dis = new DataInputStream(new FileInputStream(fileName));
+      inputStream = new DataInputStream(new FileInputStream(file));
       int i = 0;
-      while (dis.available() > 0) {
-        vector.add(i, dis.readInt());
+      boolean inputStreamIsAvailable = inputStream.available() > 0;
+      while (inputStreamIsAvailable) {
+        vector.add(i, inputStream.readInt());
         i++;
       }
     } catch (FileNotFoundException e) {
-      System.out.println("File " + fileName + " not found");
+      System.out.println("File " + file + " not found");
     } catch (EOFException e) {
-      System.out.println("\nEnd of file " + fileName);
+      System.out.println("\nEnd of file " + file);
     } catch (IOException e) {
-      System.out.println("\nCan't close the file " + fileName);
+      System.out.println("\nCan't close the file " + file);
     } finally {
       try {
-        if (dis != null) {
-          dis.close();
+        if (inputStream != null) {
+          inputStream.close();
         }
       } catch (IOException e) {
-        System.out.println("\nCan't close the file " + fileName);
+        System.out.println("\nCan't close the file " + file);
       }
     }
     int[] array = new int[vector.size()];

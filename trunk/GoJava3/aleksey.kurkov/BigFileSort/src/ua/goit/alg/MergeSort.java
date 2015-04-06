@@ -10,7 +10,6 @@ package ua.goit.alg;
 3) Input: 10 8 38 1 99  Output: 1 8 10 38 99 */
 
 public class MergeSort {
-
   public static int[] array;
 
   public MergeSort(int[] expectedArray) {
@@ -40,14 +39,11 @@ public class MergeSort {
   }
 
   public static final int safeFindMiddle(int a, int b) {
-    if (b > 0 ? a > Integer.MAX_VALUE - b
-            : a < Integer.MIN_VALUE - b) {
       return a + b >>> 1;
-    }
-    return (a + b) / 2;
   }
 
-  public static void merge(int[] tempArray, int cursor, int middlePlusOne, int end) {
+  public static void merge(int[] tempArray, int cursor, int middlePlusOne,
+                           int end) {
     int index = 0;
     int start = cursor;
     int middle = middlePlusOne - 1;
