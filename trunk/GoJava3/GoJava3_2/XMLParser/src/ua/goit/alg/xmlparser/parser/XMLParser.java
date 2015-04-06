@@ -71,19 +71,19 @@ public class XMLParser implements Parser{
   private StateMashineTag tag = new StateMashineTag(this);
 
   public String parse(String string) throws IOException {
-    StreamReader stream = new StreamReader(string);
-    return parseReader(stream);
+    StreamReader reader = new StreamReader(string);
+    return parseReader(reader);
   }
 
   public String parse(File file) throws IOException {
-    StreamReader stream = new StreamReader(file);
-    return parseReader(stream);
+    StreamReader reader = new StreamReader(file);
+    return parseReader(reader);
   }
 
   @Override
   public String parse(InputStream inputStream) throws IOException {
-    StreamReader stream = new StreamReader(inputStream);
-    return parseReader(stream);
+    StreamReader reader = new StreamReader(inputStream);
+    return parseReader(reader);
   }
 
   private String parseReader(StreamReader reader) throws IOException {
