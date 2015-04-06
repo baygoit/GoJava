@@ -50,19 +50,19 @@ public class BigFileMerge {
     private byte[] buffer = new byte[BYTE_BUFFER_SIZE];
     private DataInputStream dataFromFile;
     private int length;
-    private int bufferCount = 0;
+    private int index = 0;
     public Buffer(File file) throws FileNotFoundException {
       dataFromFile = new DataInputStream(new FileInputStream(file));
     }
 
     public int readDataFromFile() throws IOException {
       length = dataFromFile.read(buffer) / 4;
-      bufferCount = 0;
+      index = 0;
       return length;
     }
 
     public boolean hasAnyBytesLeft() {
-      return (length > bufferCount) ? true : false;
+      return (length > index);
     }
 
     public byte[] getBuffer() {
@@ -88,13 +88,13 @@ public class BigFileMerge {
               Parser.parseByteArrayToIntArray(firstFileBuffer.getBuffer());
       int[] secondFileIntBuffer =
               Parser.parseByteArrayToIntArray(secondFileBuffer.getBuffer());
-      while (firstFileBuffer.hasAnyBytesLeft()&&
+      while (firstFileBuffer.hasAnyBytesLeft() &&
               secondFileBuffer.hasAnyBytesLeft()) {
-        if (firstFileIntBuffer[firstFileBuffer.bufferCount] <
-                secondFileIntBuffer[secondFileBuffer.bufferCount]) {
-          resultFileBuffer[count++] = firstFileIntBuffer[firstFileBuffer.bufferCount++];
+        if (firstFileIntBuffer[firstFileBuffer.index] <
+                secondFileIntBuffer[secondFileBuffer.index]) {
+          resultFileBuffer[count++] = firstFileIntBuffer[firstFileBuffer.index++];
         } else {
-          resultFileBuffer[count++] = secondFileIntBuffer[secondFileBuffer.bufferCount++];
+          resultFileBuffer[count++] = secondFileIntBuffer[secondFileBuffer.index++];
         }
 
         if (count == resultFileBuffer.length - 1) {
@@ -109,13 +109,13 @@ public class BigFileMerge {
       }
 
       if (firstFileBuffer.hasAnyBytesLeft()) {
-        int tempArrLength = firstFileBuffer.length - firstFileBuffer.bufferCount;
+        int tempArrLength = firstFileBuffer.length - firstFileBuffer.index;
         int[] tempArray = Arrays.copyOf(firstFileIntBuffer, tempArrLength);
         writeBufferToFile(tempArray, tempArrLength, dataToResultFile);
       }
 
       if (secondFileBuffer.hasAnyBytesLeft()) {
-        int tempArrLength = secondFileBuffer.length - secondFileBuffer.bufferCount;
+        int tempArrLength = secondFileBuffer.length - secondFileBuffer.index;
         int[] tempArray = Arrays.copyOf(secondFileIntBuffer, tempArrLength);
         writeBufferToFile(tempArray, tempArrLength, dataToResultFile);
       }
