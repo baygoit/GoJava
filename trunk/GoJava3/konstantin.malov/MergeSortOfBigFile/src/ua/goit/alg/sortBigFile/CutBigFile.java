@@ -4,13 +4,16 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import static ua.goit.alg.sortBigFile.Constants.BYTE_BUFFER_SIZE;
 
 public class CutBigFile {
   private MergeSort mergeSort = null;
   private DataOutputStream dataToTempFile = null;
-  private byte[] buffer = new byte[BYTE_BUFFER_SIZE];
+  private byte[] buffer;
   private List<String> filesAfterCut = new ArrayList<String>();
+
+  public CutBigFile(int bufferSize) {
+    buffer = new byte[bufferSize];
+  }
 
   /**
    * this function cut big file by smallest one (BYTE_BUFFER_SIZE)

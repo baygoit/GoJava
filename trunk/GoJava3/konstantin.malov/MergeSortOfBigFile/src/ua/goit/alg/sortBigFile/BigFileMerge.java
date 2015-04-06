@@ -10,10 +10,15 @@ import static ua.goit.alg.sortBigFile.Constants.*;
 public class BigFileMerge {
   private int firstCountNumber = 1;
   private int secondCountNumber = 0;
+  private int bufferSize;
+
+  public BigFileMerge(int bufferSize) {
+    this.bufferSize = bufferSize;
+  }
 
   public String mergeSortFile(String bigfile, String fileAfterSort)
           throws IOException {
-    CutBigFile cutBigFile = new CutBigFile();
+    CutBigFile cutBigFile = new CutBigFile(bufferSize);
     FileOperations.fileCopy(merge(cutBigFile.cutBigFile(
             new File(bigfile))), fileAfterSort);
     FileOperations.dirClear(PATH_TO_TEMP_DIR_UNIX);
@@ -23,7 +28,7 @@ public class BigFileMerge {
   /**
    * this function recursion merge all temp files
    */
-  public String merge(List<String> filesList) throws IOException {
+  private String merge(List<String> filesList) throws IOException {
     int filesCount = filesList.size();
     List<String> newFilesList = new ArrayList<String>();
     if (filesCount == 1) {
@@ -47,14 +52,16 @@ public class BigFileMerge {
   }
 
   private static class Buffer {
-    private byte[] buffer = new byte[BYTE_BUFFER_SIZE];
-    private int[] bufferInt = new int[BYTE_BUFFER_SIZE / 4];
+    private byte[] buffer;
+    private int[] bufferInt;
     private DataInputStream dataFromFile;
     private int length;
     private int index = 0;
 
-    public Buffer(DataInputStream dataFromFile) throws FileNotFoundException {
+    public Buffer(DataInputStream dataFromFile, int bufferSize) throws FileNotFoundException {
       this.dataFromFile = dataFromFile;
+      buffer = new byte[bufferSize];
+      bufferInt = new int[bufferSize / 4];
     }
 
     public int readDataFromFile() throws IOException {
@@ -96,9 +103,9 @@ public class BigFileMerge {
   public String mergeFiles(File firstFile, File secondFile) throws IOException {
     DataInputStream dataFromFirsFile = new DataInputStream(new FileInputStream(firstFile));
     DataInputStream dataFromSecondFile = new DataInputStream(new FileInputStream(secondFile));
-    Buffer firstFileBuffer = new Buffer(dataFromFirsFile);
-    Buffer secondFileBuffer = new Buffer(dataFromSecondFile);
-    int[] resultFileBuffer = new int[(BYTE_BUFFER_SIZE) / 4];
+    Buffer firstFileBuffer = new Buffer(dataFromFirsFile, bufferSize);
+    Buffer secondFileBuffer = new Buffer(dataFromSecondFile, bufferSize);
+    int[] resultFileBuffer = new int[(bufferSize) / 4];
     String fileNameForReturn = PATH_TO_TEMP_DIR_UNIX + TEMP_FILE_NAME +
             firstCountNumber + "_" + secondCountNumber + FILE_TYPE;
     DataOutputStream dataToResultFile = new DataOutputStream(

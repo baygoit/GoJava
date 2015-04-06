@@ -1,10 +1,4 @@
 package ua.goit.alg.sortBigFile;
-
-import java.io.File;
-
-/**
- * Created by kossovec on 30.03.15.
- */
 public class Constants {
   private Constants() {
 
