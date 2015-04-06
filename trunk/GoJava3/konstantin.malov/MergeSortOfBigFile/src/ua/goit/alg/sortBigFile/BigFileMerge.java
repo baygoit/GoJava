@@ -151,8 +151,7 @@ public class BigFileMerge {
                                  DataOutputStream dataToResultFile)
           throws IOException {
     if (buffer.length != theLastElementWithData) {
-      int[] tempArray = new int[theLastElementWithData];
-      System.arraycopy(buffer, 0, tempArray, 0, theLastElementWithData);
+      int[] tempArray = Arrays.copyOf(buffer, theLastElementWithData);
       dataToResultFile.write(Parser.parseIntArrayToByteArray(tempArray));
     } else {
       dataToResultFile.write(Parser.parseIntArrayToByteArray(buffer));
