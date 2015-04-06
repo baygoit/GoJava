@@ -25,7 +25,7 @@ public class TestStreamReader {
       out = new PrintWriter(testXMLFile);
       out.print(xmlString);
     } catch (FileNotFoundException e) {
-      e.printStackTrace();
+      throw new RuntimeException(e);
     } finally {
       if(out != null) {
         out.close();
