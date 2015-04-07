@@ -3,14 +3,16 @@ package ua.goit.alg.test;
 import ua.goit.alg.sortBigFile.BigFileWithIntCreation;
 import org.junit.Before;
 import org.junit.Test;
+
 import java.io.File;
 import java.io.IOException;
+
 import static ua.goit.alg.sortBigFile.Constants.*;
 import static org.junit.Assert.*;
 
 public class TestBigFile {
   @Before
-   public void bigfileCreationTest() {
+  public void bigfileCreationTest() {
     BigFileWithIntCreation bigFileWithIntCreation = new BigFileWithIntCreation();
     try {
       bigFileWithIntCreation.createBigFileWithInt(BIG_FILE_UNIX);
@@ -21,7 +23,7 @@ public class TestBigFile {
 
   @Test
   public void testBigFileExist() {
-    File bigFile = new File(BIG_FILE_UNIX);;
+    File bigFile = new File(BIG_FILE_UNIX);
     assertTrue(bigFile.isFile());
   }
 

@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import java.io.*;
 import java.util.Arrays;
+
 import static ua.goit.alg.sortBigFile.Constants.*;
 
 import static org.junit.Assert.assertArrayEquals;
@@ -17,15 +18,14 @@ public class TestMainFunction {
   private static final String TEST_FILE = "testFile.txt";
   private static final String PATH_TO_TEST_FILE = "src/ua/goit/alg/test/testFiles/";
   private static final String RESULT_FILE = "result.txt";
-  private int[] expected = {12,4,13,1,2,5,12,3,4,5,453,2,423,42,34,324,234,
-          32,432,4,23,424,2342,4,24,222,24,24,23,4};
+  private int[] expected = {12, 4, 13, 1, 2, 5, 12, 3, 4, 5, 453, 2, 423, 42, 34, 324, 234,
+          32, 432, 4, 23, 424, 2342, 4, 24, 222, 24, 24, 23, 4};
 
   @BeforeClass
   public static void mergeSort() {
-    BigFileMerge fileMerge = BigFileMerge.getInstance();
     try {
       long startTime = System.nanoTime();
-      fileMerge.mergeSortFile(BIG_FILE_UNIX, PATH_TO_BIG_FILE + RESULT_FILE_NAME,
+      BigFileMerge.mergeSortFile(BIG_FILE_UNIX, PATH_TO_BIG_FILE + RESULT_FILE_NAME,
               BYTE_BUFFER_SIZE);
       long endTime = System.nanoTime();
       duration = (((endTime - startTime) / 1000000) / 1000);
@@ -47,18 +47,17 @@ public class TestMainFunction {
     Assert.assertTrue(new File(PATH_TO_BIG_FILE + RESULT_FILE_NAME).exists());
   }
 
- @Test
+  @Test
   public void testIfFileRealSort() throws IOException {
-    BigFileMerge fileMerge = BigFileMerge.getInstance();
     String pathToTempFile = PATH_TO_TEST_FILE + TEST_FILE;
     writeToFile(expected, pathToTempFile);
-    fileMerge.mergeSortFile(pathToTempFile, RESULT_FILE, 4);
+    BigFileMerge.mergeSortFile(pathToTempFile, RESULT_FILE, 4);
     Arrays.sort(expected);
     assertArrayEquals(expected, readFromFile(RESULT_FILE));
   }
 
   @Test
-  public void testIntToBiteBiteToIntConverse() {
+  public void testIntToByteByteToIntConverse() {
     assertArrayEquals(expected, Parser.parseByteArrayToIntArray(Parser.parseIntArrayToByteArray(expected)));
   }
 
