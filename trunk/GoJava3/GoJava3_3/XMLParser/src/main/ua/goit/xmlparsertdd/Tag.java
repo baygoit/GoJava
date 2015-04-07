@@ -59,4 +59,34 @@ public class Tag {
     result = 31 * result + (getParams() != null ? getParams().hashCode() : 0);
     return result;
   }
+
+  static class Builder {
+    private TagType type;
+    private StringBuilder name = new StringBuilder();
+
+    static Builder newBuilder() {
+      return new Builder();
+    }
+
+    public TagType getType() {
+      return type;
+    }
+
+    public void setType(TagType type) {
+      this.type = type;
+    }
+
+    public String getName() {
+      return name.toString();
+    }
+
+    public void buildName(char c) {
+      name.append(c);
+    }
+
+    public Tag build() {
+      return new Tag(type, name.toString());
+    }
+  }
+
 }

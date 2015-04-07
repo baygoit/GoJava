@@ -14,13 +14,7 @@ import java.util.Set;
 
 
 public class XMLParser implements Parser {
-  static Map<Event, Set<Handler>> handlers = new HashMap<>();
-  static TagStateMachine machine = new TagStateMachine();
-  private Handler onOpenHandler;
-
-  public XMLParser(Handler handler) {
-    onOpenHandler = handler;
-  }
+  private TagStateMachine machine = new TagStateMachine();
 
   @Override
   public void parse(String strArg) {
@@ -39,58 +33,70 @@ public class XMLParser implements Parser {
       char c;
       while (inputStreamReader.ready()) {
         c = (char) inputStreamReader.read();
-        machine.next(c);
+        machine.next(c, this);
       }
     } catch (IOException e) {
       e.printStackTrace();
     }
   }
 
-  public static void setEvent(Event event) {
+  public void setEvent(Event event) {
     sendEventToHandler(event);
   }
 
-  public static void sendEventToHandler(Event event) {
+  public void sendEventToHandler(Event event) {
     if (event == Event.OPEN_TAG) {
-      Set<Handler> set = handlers.get(Event.OPEN_TAG);
+      Set<Handler> set = ParserBuilder.handlers.get(Event.OPEN_TAG);
       for (Handler handler : set) {
         handler.handle(machine.getResult());
       }
     }
   }
 
-  public void onOpenTag(Handler handler) {
-    Set<Handler> set;
-    if (handlers.containsKey(Event.OPEN_TAG)) {
-      set = handlers.get(Event.OPEN_TAG);
-    } else {
-      set = new HashSet<>();
+  static class ParserBuilder {
+    static Map<Event, Set<Handler>> handlers = new HashMap<>();
+
+    public void onOpenTag(Handler handler) {
+      Set<Handler> set;
+      if (handlers.containsKey(Event.OPEN_TAG)) {
+        set = handlers.get(Event.OPEN_TAG);
+      } else {
+        set = new HashSet<>();
+      }
+      set.add(handler);
+      handlers.put(Event.OPEN_TAG, set);
     }
-    set.add(handler);
-    handlers.put(Event.OPEN_TAG, set);
-  }
 
-  public void onTextValue(Handler handler) {
-    Set<Handler> set = handlers.get(Event.TEXT_VALUE);
-    set.add(handler);
-    handlers.put(Event.TEXT_VALUE, set);
-  }
+    public void onTextValue(Handler handler) {
+      Set<Handler> set = handlers.get(Event.TEXT_VALUE);
+      set.add(handler);
+      handlers.put(Event.TEXT_VALUE, set);
+    }
 
-  public void onStart(Handler handler) {
-    Set<Handler> set = handlers.get(Event.START);
-    set.add(handler);
-    handlers.put(Event.START, set);
-  }
+    public void onStart(Handler handler) {
+      Set<Handler> set = handlers.get(Event.START);
+      set.add(handler);
+      handlers.put(Event.START, set);
+    }
 
-  public void onEnd(Handler handler) {
-    Set<Handler> set = handlers.get(Event.VALID_END);
-    set.add(handler);
-    handlers.put(Event.VALID_END, set);
-  }
+    public void onEnd(Handler handler) {
+      Set<Handler> set = handlers.get(Event.VALID_END);
+      set.add(handler);
+      handlers.put(Event.VALID_END, set);
+    }
 
-  public void onError(Handler handler) {
-    Set<Handler> set = handlers.get(Event.INVALID_END);
-    set.add(handler);
-    handlers.put(Event.INVALID_END, set);
+    public void onError(Handler handler) {
+      Set<Handler> set = handlers.get(Event.INVALID_END);
+      set.add(handler);
+      handlers.put(Event.INVALID_END, set);
+    }
+
+    public static ParserBuilder newParserBuilder() {
+      return new ParserBuilder();
+    }
+
+    public XMLParser build() {
+      return new XMLParser();
+    }
   }
 }
