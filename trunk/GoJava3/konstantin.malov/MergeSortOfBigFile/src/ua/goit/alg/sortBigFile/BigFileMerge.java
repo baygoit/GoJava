@@ -18,8 +18,10 @@ public class BigFileMerge {
                                    int bufferSize) throws IOException {
     CutBigFile cutBigFile = new CutBigFile(bufferSize);
     File bigFileNotSorted = new File(bigFile);
-    List cutFiles = cutBigFile.cutBigFile(bigFileNotSorted);
-    FileOperations.fileCopy(merge(cutFiles, 1, 0, bufferSize), fileAfterSort);
+    List<String> cutFiles = cutBigFile.cutBigFile(bigFileNotSorted);
+    int firstCountNumber = 1;
+    int secondCountNumber = 0;
+    FileOperations.fileCopy(merge(cutFiles, firstCountNumber, secondCountNumber, bufferSize), fileAfterSort);
     FileOperations.dirClear(PATH_TO_TEMP_DIR_UNIX);
   }
 
