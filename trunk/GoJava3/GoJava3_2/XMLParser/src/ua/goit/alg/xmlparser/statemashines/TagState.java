@@ -142,7 +142,9 @@ public enum TagState {
       TagState result;
       if (c == '<') {
         result = OPENTAG;
-        xmlParser.onTextValue(parserData);
+        if (!parserData.getText().isEmpty()) {
+          xmlParser.onTextValue(parserData);
+        }
       } else {
         parserData.appendText(c);
         result = TEXT;
@@ -161,7 +163,7 @@ public enum TagState {
   public abstract TagState next(char c, ParserData parserData, XMLParser xmlParser);
 
   private static TagState handleClosingTags(char c, ParserData parserData, XMLParser xmlParser, TagState result) {
-    if (result == ATTRIBUTE_VALUE) {
+    if (result == ATTRIBUTE_VALUE_END || (result == ATTRIBUTE_NAME && !parserData.getAttributes().isEmpty())) {
       parserData.addAttribute(parserData.getAttributeName(), parserData.getAttributeValue());
     }
     if (c == '>') {
