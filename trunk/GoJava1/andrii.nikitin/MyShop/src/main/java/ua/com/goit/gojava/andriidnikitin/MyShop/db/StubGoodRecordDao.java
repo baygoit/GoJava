@@ -3,6 +3,11 @@ package ua.com.goit.gojava.andriidnikitin.MyShop.db;
 import ua.com.goit.gojava.andriidnikitin.MyShop.domain.model.GoodRecord;
 
 public class StubGoodRecordDao extends StubGenericDao<GoodRecord>{
+	
+	public StubGoodRecordDao() {
+		init();
+	}
+	
 	protected Integer getId(GoodRecord object){
 		return object.getId();
 	}
@@ -13,7 +18,7 @@ public class StubGoodRecordDao extends StubGenericDao<GoodRecord>{
 	}
 
 	protected Integer generateId(GoodRecord object){
-		return object.getId();
+		return object.hashCode();
 	}	
 }
 

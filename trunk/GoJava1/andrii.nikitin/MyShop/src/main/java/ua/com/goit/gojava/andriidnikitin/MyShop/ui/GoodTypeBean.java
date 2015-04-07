@@ -3,6 +3,10 @@ package ua.com.goit.gojava.andriidnikitin.MyShop.ui;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.RequestScoped;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -15,19 +19,25 @@ import ua.com.goit.gojava.andriidnikitin.MyShop.domain.util.MyShopException;
 
 @Component
 @Scope("session")
+@ManagedBean(name = "goodTypeBean", eager = true)
+@RequestScoped
 public class GoodTypeBean implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
 	@Autowired 
-	GoodCatalog catalog;
+	@ManagedProperty(value="#{catalog}")
+	private GoodCatalog catalog;
 
+	@ManagedProperty(value="#{name}")
 	private String name;
-	
+
+	@ManagedProperty(value="#{id}")
 	private Integer id;
 
+	@ManagedProperty(value="#{parentId}")	
 	private Integer parentId;
-
+	
 	private Logger log = Logger.getLogger(getClass());
 	
 	public String getName() {
@@ -88,6 +98,50 @@ public class GoodTypeBean implements Serializable{
 		clearForm();
 
 		return "";
+	}
+	
+	public String updateType(){		
+		try {
+			String validation = validateExistance(id);
+			if (validation !=null){
+				return validation;
+			}
+			else {
+				catalog.updateGoodType(id, name, parentId);
+				clearForm();
+			}
+		} catch (MyShopException e) {
+			ErrorLogger.logException(e, Logger.getLogger(GoodTypeBean.class));
+		}
+		return "";
+	}
+	
+	public String deleteType(){	
+		try {
+			String validation = validateExistance(id);
+			if (validation !=null){
+				return validation;
+			}
+			else {
+				catalog.deleteGoodType(id);
+				clearForm();
+			}
+		} catch (MyShopException e) {
+			ErrorLogger.logException(e, Logger.getLogger(GoodTypeBean.class));
+		}
+		return "";
+	}
+	
+	private String validateExistance(Integer id){
+		try {
+			if (catalog.getGoodTypeById(id)!= null){
+				return "such type does not exist!";
+			}
+		} catch (MyShopException e) {
+			ErrorLogger.logException(e, Logger.getLogger(GoodTypeBean.class));
+		}
+		return null;
+		
 	}
 
 	private void clearForm(){

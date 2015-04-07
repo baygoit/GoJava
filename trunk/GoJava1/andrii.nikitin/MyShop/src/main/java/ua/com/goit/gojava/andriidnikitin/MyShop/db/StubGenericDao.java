@@ -45,5 +45,9 @@ public abstract class StubGenericDao <T> implements GenericDao <T> {
 		}
 		return result;
 	}
+	
+	protected void init(){
+		content = new ArrayList<T>();
+	}
 
 }

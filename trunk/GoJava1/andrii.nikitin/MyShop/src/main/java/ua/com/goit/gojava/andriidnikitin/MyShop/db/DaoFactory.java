@@ -9,5 +9,5 @@ import ua.com.goit.gojava.andriidnikitin.MyShop.domain.model.GoodType;
 public interface DaoFactory {
     public GenericDao<GoodType> getGoodTypeDao() throws MyShopDaoException;
     public GenericDao<Good> getGoodDao() throws MyShopDaoException;
-    public GenericDao<GoodRecord> getGoodIncomingDao() throws MyShopDaoException;
+    public GenericDao<GoodRecord> getGoodRecordDao() throws MyShopDaoException;
 }
