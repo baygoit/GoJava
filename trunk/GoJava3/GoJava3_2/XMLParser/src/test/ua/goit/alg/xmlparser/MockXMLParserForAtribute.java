@@ -18,14 +18,14 @@ public class MockXMLParserForAtribute implements Parser{
    XMLParser parser = new XMLParser.Builder().setOpenTagHandler(new Handler() {
       @Override
       public void handle(ParserData parserData) {
-        String tag = parserData.getTag();
-        String atribute = parserData.getAttributeName();
-        String value = parserData.getAttributeValue();
-        if (!atribute.isEmpty()){
-          result.append("<"+tag+" "+atribute+"="+value+">");
-        } else {
-          result.append("<"+tag+">");
+        result.append("<" + parserData.getTag());
+        Map<String, String> attributes = parserData.getAttributes();
+        if (!attributes.isEmpty()){
+          for (Map.Entry pair:attributes.entrySet()) {
+            result.append(" " + pair.getKey() + "=" + pair.getValue());
+          }
         }
+        result.append(">");
       }
     }).build();
 
