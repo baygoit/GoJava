@@ -93,4 +93,9 @@ public class ParserData {
     attributeValue.setLength(0);
     isStartTag = false;
   }
+
+  public void clearCurrentAttributes() {
+    attributeName.setLength(0);
+    attributeValue.setLength(0);
+  }
 }

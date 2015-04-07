@@ -126,6 +126,8 @@ public enum TagState {
       TagState result = INVALID;
       if (c == ' ') {
         result = ATTRIBUTE_NAME;
+        parserData.addAttribute(parserData.getAttributeName(), parserData.getAttributeValue());
+        parserData.clearCurrentAttributes();
       } else if (c == '>' || c == '/') {
         result = handleClosingTags(c, parserData, xmlParser, result);
       } else if (c == '?') {
