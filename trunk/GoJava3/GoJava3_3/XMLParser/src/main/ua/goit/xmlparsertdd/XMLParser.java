@@ -22,10 +22,6 @@ public class XMLParser implements Parser {
     onOpenHandler = handler;
   }
 
-  public void startMachine(char c) {
-    machine.next(c);
-  }
-
   @Override
   public void parse(String strArg) {
     parse(new ByteArrayInputStream(strArg.getBytes()));
@@ -43,7 +39,7 @@ public class XMLParser implements Parser {
       char c;
       while (inputStreamReader.ready()) {
         c = (char) inputStreamReader.read();
-        startMachine(c);
+        machine.next(c);
       }
     } catch (IOException e) {
       e.printStackTrace();
