@@ -9,7 +9,7 @@ public class RotatedArrays {
 
   private static int startBinarySearch(int[] array, int target, int left, int right) {
     while (left <= right) {
-      int middle = (right + left) >> 1;
+      int middle = (right + left) >>> 1;
       int rightValue = array[right];
       int leftValue = array[left];
       int middleValue = array[middle];
@@ -18,10 +18,10 @@ public class RotatedArrays {
       if (target == leftValue) return left;
       if (target == rightValue) return right;
 
-      boolean leftStateOne   = target < middleValue && middleValue > leftValue && middleValue < rightValue && target > leftValue && target < rightValue;
-      boolean leftStateFour  = target < middleValue && middleValue > leftValue && middleValue > rightValue && target > leftValue && target > rightValue;
-      boolean leftStateThree = target < middleValue && middleValue < leftValue && middleValue < rightValue && target < rightValue && target < leftValue;
+      boolean leftStateOne   = target < middleValue && middleValue > leftValue && middleValue < rightValue && target > leftValue && target  < rightValue;
       boolean leftStateTwo   = target > middleValue && middleValue < leftValue && middleValue < rightValue && target > rightValue && target > leftValue;
+      boolean leftStateThree = target < middleValue && middleValue < leftValue && middleValue < rightValue && target < rightValue && target < leftValue;
+      boolean leftStateFour  = target < middleValue && middleValue > leftValue && middleValue > rightValue && target > leftValue && target  > rightValue;
 
       if (leftStateOne || leftStateTwo || leftStateThree || leftStateFour) {
         right = middle - 1;
@@ -30,7 +30,6 @@ public class RotatedArrays {
         right--;
         left = middle + 1;
       }
-
     }
 
     return -1;
