@@ -141,7 +141,7 @@ public enum TagState {
         parserData.addAttribute(parserData.getAttributeName(), parserData.getAttributeValue());
         parserData.clearCurrentAttributes();
       } else if (c == '>' || c == '/') {
-        result = handleClosingTags(c, parserData, xmlParser, result);
+        result = handleClosingTags(c, parserData, xmlParser, ATTRIBUTE_VALUE_END);
       } else if (c == '?') {
         if (parserData.isStartTag()) {
           result = ATTRIBUTE_VALUE_END;
