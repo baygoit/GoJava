@@ -17,50 +17,56 @@ public class TestMainFunction {
   private static final String TEST_FILE = "testFile.txt";
   private static final String PATH_TO_TEST_FILE = "src/ua/goit/alg/test/testFiles/";
   private static final String RESULT_FILE = "result.txt";
+  private int[] expected = {12,4,13,1,2,5,12,3,4,5,453,2,423,42,34,324,234,
+          32,432,4,23,424,2342,4,24,222,24,24,23,4};
 
-//  @BeforeClass
+  @BeforeClass
   public static void mergeSort() {
-    BigFileMerge fileMerge = new BigFileMerge(1024 * 512);
+    BigFileMerge fileMerge = BigFileMerge.getInstance();
     try {
       long startTime = System.nanoTime();
-      fileMerge.mergeSortFile(BIG_FILE_UNIX, PATH_TO_BIG_FILE + RESULT_FILE_NAME);
+      fileMerge.mergeSortFile(BIG_FILE_UNIX, PATH_TO_BIG_FILE + RESULT_FILE_NAME,
+              BYTE_BUFFER_SIZE);
       long endTime = System.nanoTime();
-      duration = (((endTime - startTime) / 1000000) / 1000); // ((endTime - startTime) / 1000000(in ms)) / 1000 (in sec)
+      duration = (((endTime - startTime) / 1000000) / 1000);
+      // ((endTime - startTime) / 1000000(in ms)) / 1000 (in sec)
     } catch (IOException e) {
       throw new RuntimeException(e.getMessage());
     }
   }
 
-//  @Test
+  @Test
   public void testFileSizeBeforeAndAfterSort() {
     Assert.assertTrue(
             (new File(BIG_FILE_UNIX).length()) ==
                     new File(PATH_TO_BIG_FILE + RESULT_FILE_NAME).length());
   }
 
-//  @Test
+  @Test
   public void testSortFileExist() {
     Assert.assertTrue(new File(PATH_TO_BIG_FILE + RESULT_FILE_NAME).exists());
   }
 
-  @Test
+ @Test
   public void testIfFileRealSort() throws IOException {
-    BigFileMerge fileMerge = new BigFileMerge(8);
+    BigFileMerge fileMerge = BigFileMerge.getInstance();
     String pathToTempFile = PATH_TO_TEST_FILE + TEST_FILE;
-    int[] expected = {6, 8, 1, 0, 3, 2, 5, 5, 3, 12, 32, 43, 53, 12, 23, 34, 56, 67, 2, 34, 345, 2, 234, 236, 765};
-    byte[] actual = new byte[expected.length * 4];
     writeToFile(expected, pathToTempFile);
-    fileMerge.mergeSortFile(pathToTempFile, RESULT_FILE);
-    readFromFile(RESULT_FILE, actual);
+    fileMerge.mergeSortFile(pathToTempFile, RESULT_FILE, 4);
     Arrays.sort(expected);
-    System.out.println(Arrays.toString(expected));
-    System.out.println(Arrays.toString(Parser.parseByteArrayToIntArray(actual)));
-    assertArrayEquals(expected, Parser.parseByteArrayToIntArray(actual));
+    assertArrayEquals(expected, readFromFile(RESULT_FILE));
   }
 
-  private void readFromFile(String filePath, byte[] actuals) throws IOException {
+  @Test
+  public void testIntToBiteBiteToIntConverse() {
+    assertArrayEquals(expected, Parser.parseByteArrayToIntArray(Parser.parseIntArrayToByteArray(expected)));
+  }
+
+  private int[] readFromFile(String filePath) throws IOException {
+    byte[] actual = new byte[expected.length * 4];
     DataInputStream dataFromFile = new DataInputStream(new FileInputStream(filePath));
-    dataFromFile.read(actuals);
+    dataFromFile.read(actual);
+    return Parser.parseByteArrayToIntArray(actual);
   }
 
   private void writeToFile(int[] intArray, String filePath) throws IOException {

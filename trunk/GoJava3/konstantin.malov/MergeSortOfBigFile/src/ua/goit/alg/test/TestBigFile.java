@@ -10,14 +10,13 @@ import static org.junit.Assert.*;
 
 public class TestBigFile {
   @Before
-  private void init() {
+   public void bigfileCreationTest() {
     BigFileWithIntCreation bigFileWithIntCreation = new BigFileWithIntCreation();
     try {
       bigFileWithIntCreation.createBigFileWithInt(BIG_FILE_UNIX);
     } catch (IOException e) {
       throw new RuntimeException("aaaaaa file error");
     }
-
   }
 
   @Test
