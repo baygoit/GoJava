@@ -10,6 +10,14 @@ import ua.goit.alg.xmlparser.parser.Parser;
 public class TestParser {
 
   @Test
+  public void whenCompareInside() throws IOException {
+    Parser parser = new MockXMLParser();
+    String result = parser.parse("<s><t t=\"<1\"></t></s>");
+    String expectedResult = "<s><t></t></s>";
+    Assert.assertEquals(expectedResult, result);
+  }
+
+  @Test
   public void when2Open2Close() throws IOException {
     Parser parser = new MockXMLParser();
     String result = parser.parse("<s><t></t></s>");
