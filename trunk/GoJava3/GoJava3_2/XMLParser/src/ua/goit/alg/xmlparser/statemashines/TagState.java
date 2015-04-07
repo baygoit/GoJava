@@ -19,7 +19,7 @@ public enum TagState {
   OPENTAG{
     @Override
     public TagState next(char c, ParserData parserData, XMLParser xmlParser) {
-      TagState result;
+      TagState result = INVALID;
       if (c == '?') {
         if (parserData.isStartTagFound()) {
           result = INVALID;
@@ -30,7 +30,7 @@ public enum TagState {
         }
       } else if (c == '/') {
         result = CLOSETAG;
-      } else {
+      } else if (Character.isLetter(c)) {
         result = TAG_NAME;
         parserData.appendTag(c);
       }

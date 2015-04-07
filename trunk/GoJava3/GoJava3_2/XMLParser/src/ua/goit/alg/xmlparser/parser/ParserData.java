@@ -11,6 +11,7 @@ public class ParserData {
   private StringBuilder attributeValue = new StringBuilder("");
   private boolean isStartTag;
   private boolean startTagFound;
+  private Deque<String> tagStack = new LinkedList<String>();
 
   public boolean isStartTagFound() {
     return startTagFound;
@@ -28,8 +29,6 @@ public class ParserData {
     startTagFound = true;
   }
 
-  private Deque<String> tagStack = new LinkedList<String>();
-
   public String getStackElement() {
     return tagStack.pop();
   }
@@ -37,7 +36,6 @@ public class ParserData {
   public void putTagInStack() {
     tagStack.push(tag.toString());
   }
-
 
   public void appendAttributeName(char c) {
     attributeName.append(c);

@@ -53,7 +53,7 @@ public class TestParser {
   public void whenDoubleStartTag() throws IOException {
     Parser parser = new MockXMLParser();
     try {
-      String result = parser.parse("<?xml doctype=\"1\"><start atr1=\"3\" atr2 = \"4\"><?xml doctype=\"1\"><start atr1=\"3\" atr2 = \"4\"><tag>text</tag><tag2/></start>");
+      String result = parser.parse("<?xml doctype=\"1\"><start atr1=\"3\" atr2 = \"4\"><?xml doctype=\"1\"><tag>text</tag><tag2/></start>");
       fail();
     } catch (RuntimeException e) {
       String errorMessage = "Invalid format error";
@@ -61,7 +61,6 @@ public class TestParser {
     } catch (Exception e) {
       fail();
     }
-
   }
 
   @Test
@@ -78,5 +77,29 @@ public class TestParser {
     }
   }
 
+  @Test
+  public void attributeWithoutValue() throws IOException {
+    Parser parser = new MockXMLParser();
+    try {
+      String result = parser.parse("<start atr1 atr2 = \"4\"></start>");
+      fail();
+    } catch (RuntimeException e) {
+      String errorMessage = "Invalid format error";
+      assertEquals(e.getMessage(), errorMessage);
+    } catch (Exception e) {
+      fail();
+    }
+  }
+
+  @Test
+  public void parsingTwoStringsWithOneParser() throws IOException {
+    Parser parser = new MockXMLParser();
+    String result1 = parser.parse("<?xml doctype=\"1\"?><start atr1=\"3\" atr2 = \"4\"><tag>text</tag><tag2/></start>");
+    String expectedResult = "<?xml?><start><tag>text</tag><tag2></tag2></start>";
+    Assert.assertEquals(expectedResult, result1);
+
+    String result2 = parser.parse("<?xml doctype=\"1\"?><start atr1=\"3\" atr2 = \"4\"><tag>text</tag><tag2/></start>");
+    Assert.assertEquals(expectedResult, result2);
+  }
 }
   
