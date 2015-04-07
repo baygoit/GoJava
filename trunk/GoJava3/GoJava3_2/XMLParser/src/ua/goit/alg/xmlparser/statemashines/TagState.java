@@ -78,6 +78,8 @@ public enum TagState {
       if (c == ' ') {
         if (parserData.getAttributeName().isEmpty()) {
           result = ATTRIBUTE_NAME;
+        } else {
+          result = ATTRIBUTE_VALUE;
         }
       } else if (c == '=') {
         if (parserData.getAttributeName().isEmpty()) {
