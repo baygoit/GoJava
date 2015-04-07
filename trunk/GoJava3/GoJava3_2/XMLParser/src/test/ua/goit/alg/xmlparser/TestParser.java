@@ -101,5 +101,47 @@ public class TestParser {
     String result2 = parser.parse("<?xml doctype=\"1\"?><start atr1=\"3\" atr2 = \"4\"><tag>text</tag><tag2/></start>");
     Assert.assertEquals(expectedResult, result2);
   }
+
+  @Test
+  public void invalidCloseTag() throws IOException {
+    Parser parser = new MockXMLParser();
+    try {
+      String result = parser.parse("<s/s>");
+      fail();
+    } catch (RuntimeException e) {
+      String errorMessage = "Invalid format error";
+      assertEquals(e.getMessage(), errorMessage);
+    } catch (Exception e) {
+      fail();
+    }
+  }
+
+  @Test
+  public void invalidTagName() throws IOException {
+    Parser parser = new MockXMLParser();
+    try {
+      String result = parser.parse("<C++></C++>");
+      fail();
+    } catch (RuntimeException e) {
+      String errorMessage = "Invalid format error";
+      assertEquals(e.getMessage(), errorMessage);
+    } catch (Exception e) {
+      fail();
+    }
+  }
+
+  @Test
+  public void tagNameWithInvalidSpace() throws IOException {
+    Parser parser = new MockXMLParser();
+    try {
+      String result = parser.parse("<star t></start>");
+      fail();
+    } catch (RuntimeException e) {
+      String errorMessage = "Invalid format error";
+      assertEquals(e.getMessage(), errorMessage);
+    } catch (Exception e) {
+      fail();
+    }
+  }
 }
   
