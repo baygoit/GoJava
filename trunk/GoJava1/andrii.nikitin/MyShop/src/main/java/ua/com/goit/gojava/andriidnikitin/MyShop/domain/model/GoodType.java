@@ -7,12 +7,11 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name="GOOD_TYPE")
@@ -21,24 +20,22 @@ public class GoodType implements Serializable {
 	private static final long serialVersionUID = 5672782960646928322L;
 	
 	@Id
-    @GeneratedValue(generator="increment")
-    @GenericGenerator(name="increment", strategy = "increment")
-    @Column(name="TYPE_ID")
+    @GeneratedValue
+    @Column(columnDefinition="serial", name="type_id")
 	private Integer id;	
 
 	@Column(name="NAME")
 	private String name;
 	
 	@ManyToOne
-	@JoinTable(name = "TYPE_ID")
+	@JoinColumn(columnDefinition="integer", name="parent_id")
 	private GoodType parent;
 	
-	@OneToMany
-	@JoinTable(name = "TYPE_ID")
+	@OneToMany(mappedBy="parent")
 	private Set<GoodType> children;
 	
 	@OneToMany
-	@JoinTable(name = "TYPE_ID")
+	@JoinTable(name = "type_id")
 	private Set<Good> goods;
 	
 	public Set<Good> getGoods() {

@@ -41,14 +41,23 @@
 		<constructor-arg value="MyShop.commons"/>   
 	</bean>
 	
+	
+   <!-- TODO inject logger beans to all beans -->
+   
+   <!-- DAO beans -->	
 	<bean id="goodDao" 
-		class="ua.com.goit.gojava.andriidnikitin.MyShop.db.StubGoodDao"/>	
-		
+		class="ua.com.goit.gojava.andriidnikitin.MyShop.db.HibernateGoodDao">		
+   		<property name="sessionFactory" ref="sessionFactory" /> 
+	</bean>
 	<bean id="goodTypeDao"  
-		class="ua.com.goit.gojava.andriidnikitin.MyShop.db.StubGoodTypeDao"/>
-				
+		class="ua.com.goit.gojava.andriidnikitin.MyShop.db.HibernateGoodTypeDao">		
+   		<property name="sessionFactory" ref="sessionFactory" /> 
+	</bean>
+	
 	<bean id="goodRecordDao"  
-		class="ua.com.goit.gojava.andriidnikitin.MyShop.db.StubGoodRecordDao"/>
+		class="ua.com.goit.gojava.andriidnikitin.MyShop.db.HibernateGoodRecordDao">
+   		<property name="sessionFactory" ref="sessionFactory" /> 
+	</bean>
 	
    		
     <bean id="daoFactory" 
@@ -56,6 +65,44 @@
 		<property name="goodDao" ref="goodDao" /> 
 		<property name="goodTypeDao" ref="goodTypeDao" /> 
 		<property name="goodRecordDao" ref="goodRecordDao" /> 		
+	</bean>
+	
+		
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+	  <property name="driverClassName" value="${jdbc.driverClassName}" />
+      <property name="url" value="${jdbc.url}" />
+	  <property name="username" value="${jdbc.username}" />
+	  <property name="password" value="${jdbc.password}" />
+	  <!-- fix!  property name="pool_size" value="10"/-->
+    </bean>    
+    
+	<!--  Hibernate session factory -->
+	      <bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+		   <property name="dataSource" ref="dataSource"/>
+		   <property name="annotatedClasses">
+		     <list>
+		     		  <value>ua.com.goit.gojava.andriidnikitin.MyShop.domain.model.Good</value>
+				      <value>ua.com.goit.gojava.andriidnikitin.MyShop.domain.model.GoodType</value>
+				      <value>ua.com.goit.gojava.andriidnikitin.MyShop.domain.model.GoodRecord</value>
+			 </list>
+ 		  </property>
+	    <property name="hibernateProperties">
+	       <props>
+	         <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+	         <prop key="hibernate.show_sql">true</prop>
+	         <prop key="hibernate.hbm2ddl.auto">update</prop>
+	         <prop key="hibernate.connection.autocommit">false</prop>
+	         <prop key="hibernate.current_session_context_class">thread</prop>
+	       </props>
+	    </property>	 
+	</bean>
+   		
+   	
+	<bean 
+	   class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+	   <property name="location">
+			<value>classpath:db.properties</value>
+	   </property>
 	</bean>
 
 	<!-- BL beans -->	
