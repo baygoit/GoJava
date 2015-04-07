@@ -5,7 +5,7 @@ import java.util.*;
 public class ParserData {
 
   private StringBuilder tag = new StringBuilder("");
-  private Map<String, String> attributes = new HashMap<String, String>();
+  private Map<String, String> attributes = new LinkedHashMap<String, String>();
   private StringBuilder text = new StringBuilder("");
   private StringBuilder attributeName = new StringBuilder("");
   private StringBuilder attributeValue = new StringBuilder("");
