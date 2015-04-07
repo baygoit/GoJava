@@ -38,7 +38,7 @@
     			<f:facet name="header">
     				Parent ID
 				</f:facet>
-    				#{t.parent}
+    				#{t.parent.getId()}
     		</h:column>
     		
  
@@ -60,7 +60,7 @@
  
 				Parent ID : 
 				<h:inputText id="parentId" value="#{goodTypeBean.parent}" 
-					size="20" required="true"
+					size="20" required="false"
 					label="parentId" >
 				</h:inputText>
  

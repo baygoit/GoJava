@@ -26,7 +26,6 @@ public class GoodTypeBean implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	@Autowired 
-	@ManagedProperty(value="#{catalog}")
 	private GoodCatalog catalog;
 
 	@ManagedProperty(value="#{name}")
@@ -35,8 +34,8 @@ public class GoodTypeBean implements Serializable{
 	@ManagedProperty(value="#{id}")
 	private Integer id;
 
-	@ManagedProperty(value="#{parentId}")	
-	private Integer parentId;
+	@ManagedProperty(value="#{parent}")	
+	private Integer parent;
 	
 	private Logger log = Logger.getLogger(getClass());
 	
@@ -49,15 +48,16 @@ public class GoodTypeBean implements Serializable{
 	}
 
 	public String getParent() {
-		return parentId==null? "" : parentId.toString();
+		return parent==null? "" : parent.toString();
 	}
 
 	public void setParent(String input) {
-		if (input == null){ 
-			this.parentId = null;	
-		}
-		else {
-			this.parentId = Integer.parseInt(input);
+		this.parent = null;	
+		if (input != null){ 
+			try{
+				this.parent = Integer.parseInt(input);
+			} catch (NumberFormatException exception){				
+			}
 		}
 	}
 	
@@ -90,7 +90,7 @@ public class GoodTypeBean implements Serializable{
 
 	public String addType(){		
 		try {
-			catalog.createType(name, parentId);
+			catalog.createType(name, parent);
 		} catch (MyShopException e) {
 			ErrorLogger.logException(e, Logger.getLogger(GoodTypeBean.class));
 		}
@@ -107,7 +107,7 @@ public class GoodTypeBean implements Serializable{
 				return validation;
 			}
 			else {
-				catalog.updateGoodType(id, name, parentId);
+				catalog.updateGoodType(id, name, parent);
 				clearForm();
 			}
 		} catch (MyShopException e) {
@@ -134,7 +134,7 @@ public class GoodTypeBean implements Serializable{
 	
 	private String validateExistance(Integer id){
 		try {
-			if (catalog.getGoodTypeById(id)!= null){
+			if (catalog.getGoodTypeById(id) == null){
 				return "such type does not exist!";
 			}
 		} catch (MyShopException e) {

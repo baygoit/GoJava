@@ -5,13 +5,7 @@ import ua.com.goit.gojava.andriidnikitin.MyShop.domain.model.GoodType;
 public class StubGoodTypeDao  extends StubGenericDao<GoodType>{
 	
 	public StubGoodTypeDao() {
-		init();
-		GoodType root = new GoodType();
-		root.setName("ROOT");
-		root.setParent(null);
-		root.setId(1);
-		this.create(root);
-		
+		init();		
 	}
 	
 	protected Integer getId(GoodType object){
