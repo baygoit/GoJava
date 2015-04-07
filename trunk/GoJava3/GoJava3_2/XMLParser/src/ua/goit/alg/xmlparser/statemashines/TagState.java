@@ -79,7 +79,7 @@ public enum TagState {
         if (parserData.getAttributeName().isEmpty()) {
           result = ATTRIBUTE_NAME;
         } else {
-          result = ATTRIBUTE_VALUE;
+          result = ATTRIBUTE_NAME_ENDED;
         }
       } else if (c == '=') {
         if (parserData.getAttributeName().isEmpty()) {
@@ -92,6 +92,16 @@ public enum TagState {
       } else {
         result = ATTRIBUTE_NAME;
         parserData.appendAttributeName(c);
+      }
+      return result;
+    }
+  },
+  ATTRIBUTE_NAME_ENDED {
+    @Override
+    public TagState next(char c, ParserData parserData, XMLParser xmlParser) {
+      TagState result = INVALID;
+      if (c == '=') {
+        result = ATTRIBUTE_VALUE;
       }
       return result;
     }

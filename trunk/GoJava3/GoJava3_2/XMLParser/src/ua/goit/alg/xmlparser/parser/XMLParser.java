@@ -17,6 +17,7 @@ public class XMLParser implements Parser {
   private Handler endHandler;
   private Handler errHandler;
   private StreamReader reader;
+  private StateMashineTag tag;
 
   public static class Builder {
 
@@ -74,8 +75,6 @@ public class XMLParser implements Parser {
     errHandler = builder.errHandler;
   }
 
-  private StateMashineTag tag = new StateMashineTag(this);
-
   public String parse(String string) throws IOException {
     reader = new StreamReader(string);
     return parseReader(reader);
@@ -93,6 +92,7 @@ public class XMLParser implements Parser {
   }
 
   private String parseReader(StreamReader reader) throws IOException {
+    tag = new StateMashineTag(this);
     int symbol;
     do {
       symbol = reader.read();

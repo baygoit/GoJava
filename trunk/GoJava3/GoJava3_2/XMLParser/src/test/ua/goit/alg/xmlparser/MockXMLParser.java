@@ -48,18 +48,21 @@ public class MockXMLParser implements Parser{
 
     @Override
     public String parse(String string) throws IOException {
+      result.setLength(0);
       parser.parse(string);
       return result.toString();
     }
 
     @Override
     public String parse(File file) throws IOException {
+      result.setLength(0);
       parser.parse(file);
       return result.toString();
     }
 
   @Override
   public String parse(InputStream inputStream) throws IOException {
+    result.setLength(0);
     parser.parse(inputStream);
     return result.toString();
   }
