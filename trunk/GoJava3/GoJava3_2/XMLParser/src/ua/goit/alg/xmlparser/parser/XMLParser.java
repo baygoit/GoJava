@@ -8,7 +8,7 @@ import java.io.InputStream;
 import ua.goit.alg.xmlparser.input.StreamReader;
 import ua.goit.alg.xmlparser.statemashines.StateMashineTag;
 
-public class XMLParser implements Parser {
+public class XMLParser {
 
   private Handler openTagHandler;
   private Handler closeTagHandler;
@@ -16,8 +16,7 @@ public class XMLParser implements Parser {
   private Handler startHandler;
   private Handler endHandler;
   private Handler errHandler;
-  private StreamReader reader;
-  private StateMashineTag tag;
+  private XMLParserData xmlParserData;
 
   public static class Builder {
 
@@ -73,32 +72,11 @@ public class XMLParser implements Parser {
     startHandler = builder.startHandler;
     endHandler = builder.endHandler;
     errHandler = builder.errHandler;
+    xmlParserData = new XMLParserData(this);
   }
-
-  public String parse(String string) throws IOException {
-    reader = new StreamReader(string);
-    return parseReader(reader);
-  }
-
-  public String parse(File file) throws IOException {
-    reader = new StreamReader(file);
-    return parseReader(reader);
-  }
-
-  @Override
-  public String parse(InputStream inputStream) throws IOException {
-    reader = new StreamReader(inputStream);
-    return parseReader(reader);
-  }
-
-  private String parseReader(StreamReader reader) throws IOException {
-    tag = new StateMashineTag(this);
-    int symbol;
-    do {
-      symbol = reader.read();
-      tag.next((char) symbol);
-    } while (symbol != -1);
-    return "";
+  
+  public XMLParserData getXmlParserData(){
+    return xmlParserData;
   }
 
   public void onOpenTag(ParserData parserData) {
@@ -143,7 +121,7 @@ public class XMLParser implements Parser {
     if (errHandler != null) {
       errHandler.handle(parserData);
     }
-    reader.close();
+    xmlParserData.close();
     throw new RuntimeException("Invalid format error");
   }
 
