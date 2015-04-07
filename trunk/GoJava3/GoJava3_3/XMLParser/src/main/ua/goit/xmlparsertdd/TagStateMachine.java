@@ -6,6 +6,9 @@ public class TagStateMachine {
 
   public void next(char c) {
     tagState = tagState.next(c, builder);
+    if (tagState == TagState.VALID_TAG_END) {
+      setEvent();
+    }
   }
 
   public static TagState handleOpenBracket(char c, TagState result) {
@@ -47,10 +50,17 @@ public class TagStateMachine {
     return result;
   }
 
+  public static void setEvent() {
+    if (builder.getType() == TagType.OPEN) {
+      XMLParser.setEvent(Event.OPEN_TAG);
+    }
+  }
+
   public Tag getResult() {
     Tag result = null;
     if (tagState == TagState.VALID_TAG_END) {
       result = builder.getTag();
+      builder = new TagBuilder();
     }
     return result;
   }

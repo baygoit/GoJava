@@ -7,13 +7,15 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
 
 public class XMLParser implements Parser {
-  private Map<Event, Set<Handler>> handlers;
-  TagStateMachine machine = new TagStateMachine();
+  static Map<Event, Set<Handler>> handlers = new HashMap<>();
+  static TagStateMachine machine = new TagStateMachine();
   private Handler onOpenHandler;
 
   public XMLParser(Handler handler) {
@@ -48,13 +50,26 @@ public class XMLParser implements Parser {
     }
   }
 
-  public void sendEventToHandler() {
-    // TODO
-    //if (Event.OPEN_TAG)
+  public static void setEvent(Event event) {
+    sendEventToHandler(event);
+  }
+
+  public static void sendEventToHandler(Event event) {
+    if (event == Event.OPEN_TAG) {
+      Set<Handler> set = handlers.get(Event.OPEN_TAG);
+      for (Handler handler : set) {
+        handler.handle(machine.getResult());
+      }
+    }
   }
 
   public void onOpenTag(Handler handler) {
-    Set<Handler> set = handlers.get(Event.OPEN_TAG);
+    Set<Handler> set;
+    if (handlers.containsKey(Event.OPEN_TAG)) {
+      set = handlers.get(Event.OPEN_TAG);
+    } else {
+      set = new HashSet<>();
+    }
     set.add(handler);
     handlers.put(Event.OPEN_TAG, set);
   }
