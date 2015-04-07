@@ -13,19 +13,23 @@ public class BigFileMerge {
    * this function receive unsorted file with int, cut them on temp file,
    * sort them, and receive join sorted file.
    */
-  public static void mergeSortFile(String bigfile,
-                            String fileAfterSort,
-                            int bufferSize) throws IOException {
+  public static void mergeSortFile(String bigFile,
+                                   String fileAfterSort,
+                                   int bufferSize) throws IOException {
     CutBigFile cutBigFile = new CutBigFile(bufferSize);
-    FileOperations.fileCopy(merge(cutBigFile.cutBigFile(
-            new File(bigfile)), 1, 0, bufferSize), fileAfterSort);
+    File bigFileNotSorted = new File(bigFile);
+    List cutFiles = cutBigFile.cutBigFile(bigFileNotSorted);
+    FileOperations.fileCopy(merge(cutFiles, 1, 0, bufferSize), fileAfterSort);
     FileOperations.dirClear(PATH_TO_TEMP_DIR_UNIX);
   }
 
   /**
    * this function recursion merges all temp files
    */
-  private static String merge(List<String> filesList, int firstCountNumber, int secondCountNumber, int bufferSize) throws IOException {
+  private static String merge(List<String> filesList,
+                              int firstCountNumber,
+                              int secondCountNumber,
+                              int bufferSize) throws IOException {
     int filesCount = filesList.size();
     if (filesCount == 1) {
       return filesList.get(0);
@@ -37,12 +41,14 @@ public class BigFileMerge {
         newFilesList.add(filesList.get(i));
         secondCountNumber = 0;
         firstCountNumber++;
-        return merge(newFilesList, firstCountNumber, secondCountNumber, bufferSize);
+        return merge(newFilesList, firstCountNumber,
+                secondCountNumber, bufferSize);
       }
 
       File file = new File(filesList.get(i));
       File nextFile = new File(filesList.get(i + 1));
-      newFilesList.add(mergeFiles(file, nextFile, firstCountNumber, secondCountNumber, bufferSize));
+      newFilesList.add(mergeFiles(file, nextFile,firstCountNumber,
+              secondCountNumber,bufferSize));
       secondCountNumber++;
     }
 
@@ -59,7 +65,8 @@ public class BigFileMerge {
     private int index = 0;
     private boolean eof = false;
 
-    public Buffer(DataInputStream dataFromFile, int bufferSize) throws FileNotFoundException {
+    public Buffer(DataInputStream dataFromFile, int bufferSize)
+            throws FileNotFoundException {
       this.dataFromFile = dataFromFile;
       buffer = new byte[bufferSize];
     }
@@ -91,7 +98,8 @@ public class BigFileMerge {
       return length - index;
     }
 
-    public void writeRemainsTo(DataOutputStream dataResultFile) throws IOException {
+    public void writeRemainsTo(DataOutputStream dataResultFile)
+            throws IOException {
       int[] tempArray = new int[dataInBufferLeft()];
       System.arraycopy(getBufferInt(), index, tempArray, 0, dataInBufferLeft());
       writeBufferToFile(tempArray, tempArray.length, dataResultFile);
@@ -105,14 +113,17 @@ public class BigFileMerge {
   }
 
   /**
-   * this function merge to file, save result to new temp file and return his path
+   * this function merge to file,
+   * save result to new temp file and return his path
    */
   private static String mergeFiles(File firstFile, File secondFile,
-                            int firstCountNumber,
-                            int secondCountNumber,
-                            int bufferSize) throws IOException {
-    DataInputStream dataFromFirsFile = new DataInputStream(new FileInputStream(firstFile));
-    DataInputStream dataFromSecondFile = new DataInputStream(new FileInputStream(secondFile));
+                                   int firstCountNumber,
+                                   int secondCountNumber,
+                                   int bufferSize) throws IOException {
+    DataInputStream dataFromFirsFile =
+            new DataInputStream(new FileInputStream(firstFile));
+    DataInputStream dataFromSecondFile =
+            new DataInputStream(new FileInputStream(secondFile));
     Buffer firstFileBuffer = new Buffer(dataFromFirsFile, bufferSize);
     Buffer secondFileBuffer = new Buffer(dataFromSecondFile, bufferSize);
     int[] resultFileBuffer = new int[(bufferSize) / 4];
@@ -166,7 +177,7 @@ public class BigFileMerge {
   }
 
   private static void writeBufferToFile(int[] buffer, int theLastElementWithData,
-                                 DataOutputStream dataToResultFile)
+                                        DataOutputStream dataToResultFile)
           throws IOException {
     if (buffer.length != theLastElementWithData) {
       int[] tempArray = Arrays.copyOf(buffer, theLastElementWithData);
