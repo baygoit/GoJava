@@ -5,7 +5,7 @@ import ua.com.goit.gojava.andriidnikitin.MyShop.domain.model.Good;
 import ua.com.goit.gojava.andriidnikitin.MyShop.domain.model.GoodRecord;
 import ua.com.goit.gojava.andriidnikitin.MyShop.domain.model.GoodType;
 
-public class HibernateDaoFactory implements DaoFactory {	
+public class DaoFactoryImpl implements DaoFactory {	
 	
 	private GenericDao<Good> goodDao;
 	

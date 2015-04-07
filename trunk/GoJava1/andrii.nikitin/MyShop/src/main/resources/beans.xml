@@ -45,8 +45,10 @@
    <!-- TODO inject logger beans to all beans -->
    
    <!-- DAO beans -->	
-   
+    <!-- TODO inject hibernate daos back -->
 	
+	
+	 <!--
 	<bean id="goodDao" 
 		class="ua.com.goit.gojava.andriidnikitin.MyShop.db.HibernateGoodDao">		
    		<property name="sessionFactory" ref="sessionFactory" /> 
@@ -63,7 +65,31 @@
 	
    		
     <bean id="daoFactory" 
-		class="ua.com.goit.gojava.andriidnikitin.MyShop.db.HibernateDaoFactory">
+		class="ua.com.goit.gojava.andriidnikitin.MyShop.db.DaoFactoryImpl">
+		<property name="goodDao" ref="goodDao" /> 
+		<property name="goodTypeDao" ref="goodTypeDao" /> 
+		<property name="goodIncomingDao" ref="goodIncomingDao" /> 		
+	</bean>
+	-->
+	
+	
+	<bean id="goodDao" 
+		class="ua.com.goit.gojava.andriidnikitin.MyShop.db.StubGoodDao">		
+   		<property name="sessionFactory" ref="sessionFactory" /> 
+	</bean>
+	<bean id="goodTypeDao"  
+		class="ua.com.goit.gojava.andriidnikitin.MyShop.db.StubGoodTypeDao">		
+   		<property name="sessionFactory" ref="sessionFactory" /> 
+	</bean>
+	
+	<bean id="goodIncomingDao"  
+		class="ua.com.goit.gojava.andriidnikitin.MyShop.db.StubGoodIncomingDao">
+   		<property name="sessionFactory" ref="sessionFactory" /> 
+	</bean>
+	
+   		
+    <bean id="daoFactory" 
+		class="ua.com.goit.gojava.andriidnikitin.MyShop.db.DaoFactory">
 		<property name="goodDao" ref="goodDao" /> 
 		<property name="goodTypeDao" ref="goodTypeDao" /> 
 		<property name="goodIncomingDao" ref="goodIncomingDao" /> 		
