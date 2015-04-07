@@ -151,5 +151,13 @@ public class TestParser {
       fail();
     }
   }
+
+  @Test
+  public void atributesAndValues() throws IOException {
+    Parser parser = new MockXMLParserForAtribute();
+    String result1 = parser.parse("<start atr1=\"3\" atr2 = \"4\"><tag>text</tag><tag2/></start>");
+    String expectedResult = "<start atr1=\"3\" atr2=\"4\"><tag><tag2>";
+    assertEquals(result1, expectedResult);
+  }
 }
   
