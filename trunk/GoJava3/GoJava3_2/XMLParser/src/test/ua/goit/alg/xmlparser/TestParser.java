@@ -81,7 +81,7 @@ public class TestParser {
   public void attributeWithoutValue() throws IOException {
     Parser parser = new MockXMLParser();
     try {
-      String result = parser.parse("<start atr1 atr2 = \"4\"></start>");
+      String result = parser.parse("<start atr1 atr2=\"4\"></start>");
       fail();
     } catch (RuntimeException e) {
       String errorMessage = "Invalid format error";

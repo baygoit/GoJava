@@ -76,7 +76,9 @@ public enum TagState {
     public TagState next(char c, ParserData parserData, XMLParser xmlParser) {
       TagState result = INVALID;
       if (c == ' ') {
-        result = ATTRIBUTE_NAME;
+        if (parserData.getAttributeName().isEmpty()) {
+          result = ATTRIBUTE_NAME;
+        }
       } else if (c == '=') {
         if (parserData.getAttributeName().isEmpty()) {
           result = INVALID;
