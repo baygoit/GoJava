@@ -6,9 +6,9 @@ class DLNode {
     private DLNode next;
     private DLNode prev;
 
-    public DLNode (int key, int value) {
-	this.key = key;
-	this.value = value;
+    public DLNode (int inputKey, int inputValue) {
+	key = inputKey;
+	value = inputValue;
     }
 
     public int getValue() {
@@ -19,9 +19,9 @@ class DLNode {
 	return key;
     }
 
-    public void setValue (int key, int value) {
-	this.key = key;
-	this.value = value;
+    public void setValue(int inputKey, int inputValue) {
+	key = inputKey;
+	value = inputValue;
     }
     
     public DLNode getNext() {
@@ -37,6 +37,6 @@ class DLNode {
     }
     
     public void setPrev(DLNode n) {
-	prev=n;
+	prev = n;
     }
 }

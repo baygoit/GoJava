@@ -8,7 +8,7 @@ import org.junit.Test;
 public class LRUCacheTest {
     
     @Test
-    public void getNoElementTest() {
+    public void shouldReturnMinusOneWhenNotFoundTest() {
 	LRUCache cache = new LRUCache(5);
 	cache.set(1, 1);
 	int expected = -1;
@@ -17,7 +17,7 @@ public class LRUCacheTest {
     }
 
     @Test
-    public void getExistingElementTest() {
+    public void shouldReturnValueWhenCallGetWithKeyTest() {
 	LRUCache cacheOneElement = new LRUCache(5);
 	cacheOneElement.set(1, 1);
 	int expected = 1;
@@ -26,7 +26,7 @@ public class LRUCacheTest {
     }
 
     @Test
-    public void deletingLeastRecentlyUsedTest() {
+    public void shouldReturnMinusOneAfterLatestKeyGetTest() {
 	LRUCache cache = new LRUCache(5);
 	cache.set(1, 1);
 	cache.set(2, 2);
@@ -40,7 +40,7 @@ public class LRUCacheTest {
     }
     
     @Test
-    public void shiftValuesTest() {
+    public void shouldReturnMinusOneAfterAllKeysShiftingTest() {
 	LRUCache cache = new LRUCache(4);
 	cache.set(1, 1);
 	cache.set(2, 2);
