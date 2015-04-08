@@ -21,13 +21,13 @@ enum TagState {
       if (c == ' ') {
         result = TagState.OPEN;
       } else if (CharUtil.isNameStartChar(c)) {
-        result = TagState.NAME_FOR_TAG;
+        result = TagState.TAG_NAME;
         builder.buildName(c);
       }
       return result;
     }
   },
-  NAME_FOR_TAG {
+  TAG_NAME {
 
     @Override
     public TagState next(char c, Tag.Builder builder, TagStateMachine machine) {
@@ -35,7 +35,7 @@ enum TagState {
       if (c == '>') {
         result = TagState.VALID_TAG_END;
       }else if (CharUtil.isNameChar(c)) {
-        result = TagState.NAME_FOR_TAG;
+        result = TagState.TAG_NAME;
         builder.buildName(c);
       }
       return result;
