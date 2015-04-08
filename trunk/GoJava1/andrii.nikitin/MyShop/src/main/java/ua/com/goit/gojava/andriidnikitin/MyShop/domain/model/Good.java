@@ -6,32 +6,28 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinTable;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name="GOOD")
 public class Good {
 	
 	@Id
-    @GeneratedValue(generator="increment")
-    @GenericGenerator(name="increment", strategy = "increment")
-    @Column(name="GOOD_ID")
+    @GeneratedValue
+    @Column(columnDefinition="serial",name="good_id")
 	private Integer id;
 	
-	@Column(name="NAME")
+	@Column(name="name")
 	private String name;
 
 	@ManyToOne
-	@JoinTable(name = "TYPE_ID")
+	@JoinColumn(name = "type_id")
 	private GoodType type;
 	
-	@OneToMany
-	@JoinTable(name = "GOOD_ID")
+	@OneToMany(mappedBy="good")
 	private Set<GoodRecord> records;
 
 	public GoodType getType() {

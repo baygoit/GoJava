@@ -14,6 +14,6 @@
 				<input type="submit" name="action" value="retrieve"> 
 			</form>	
 
-	<a href="easyindex.html">Back</a>
+	<a href="index.html">Back</a>
 </body>
 </html>

@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+       xmlns:p="http://primefaces.org/ui"
+      >
+    <h:head>
+    	
+    </h:head>
+ 
+    <h:body>
+ 
+    	<h1> Supply records of different goods</h1>
+ 
+ 		<h:dataTable value="#{goodRecordBean.allRecords}" var="r"
+    			styleClass="order-table"
+    			headerClass="order-table-header"
+    			rowClasses="order-table-odd-row,order-table-even-row"
+    		>
+ 
+    		<h:column>
+    			<f:facet name="header">
+    				Good ID
+    			</f:facet>
+    				#{r.getGoodId()}
+    		</h:column>
+ 
+    		<h:column>
+    			<f:facet name="header">
+    				Name
+				</f:facet>
+    				#{g.name}
+    		</h:column>
+ 
+ 			<h:column>
+    			<f:facet name="header">
+    				ID
+				</f:facet>
+    				#{g.i}
+    		</h:column>
+    		
+ 
+    	</h:dataTable>
+ 
+ 		<h2>Add New Good</h2>
+ 		<h:form>
+ 
+ 			<h:panelGrid columns="3">
+ 
+				Name : 
+				<h:inputText id="name" value="#{goodBean.name}" 
+					size="20" required="true"
+					label="Name" >
+					 <f:validateRegex pattern="^[a-zA-Z]{1,}$" />
+				</h:inputText>
+ 
+				<h:message for="name" style="color:red" />
+ 
+				Type ID : 
+				<h:inputText id="typeId" value="#{goodBean.type}" 
+					size="20" required="false"
+					label="parentId" >
+				</h:inputText>
+ 
+				<h:message for="typeId" style="color:red" />
+ 
+			</h:panelGrid>
+ 
+			<h:commandButton value="Submit" action="#{goodBean.addGood()}" />
+ 
+ 		</h:form>
+ 		
+ 		<h2>Update Existing Good</h2>
+ 		<h:form>
+ 
+ 			<h:panelGrid columns="3">
+ 			
+ 				ID : 
+				<h:inputText id="id" value="#{goodBean.id}" 
+					size="20" required="true"
+					label="id" >
+				</h:inputText>
+ 
+				<h:message for="id" style="color:red" />
+ 
+				Name : 
+				<h:inputText id="name" value="#{goodBean.name}" 
+					size="20" required="true"
+					label="Name" >
+					 <f:validateRegex pattern="^[a-zA-Z]{1,}$" />
+				</h:inputText>
+ 
+				<h:message for="name" style="color:red" />
+ 
+				Type ID : 
+				<h:inputText id="typeId" value="#{goodBean.type}" 
+					size="20" required="true"
+					label="typeId" >
+				</h:inputText>
+ 
+				<h:message for="typeId" style="color:red" />
+ 
+			</h:panelGrid>
+ 
+			<h:commandButton value="Submit" action="#{goodBean.updateGood()}" />
+ 
+ 		</h:form>
+ 		
+ 		<h2>Delete Good</h2>
+ 		<h:form>
+ 
+ 			<h:panelGrid columns="2">
+ 				 
+				ID : 
+				<h:inputText id="id" value="#{goodBean.id}" 
+					size="20" required="true"
+					label="id" >
+				</h:inputText>
+ 
+				<h:message for="id" style="color:red" />
+ 
+			</h:panelGrid>
+ 
+			<h:commandButton value="Submit" action="#{goodBean.deleteGood()}" />
+ 
+ 		</h:form>
+
+<a href="../edit_catalog.html">Back</a>
+ 
+ 
+    </h:body>
+ 
+</html>
