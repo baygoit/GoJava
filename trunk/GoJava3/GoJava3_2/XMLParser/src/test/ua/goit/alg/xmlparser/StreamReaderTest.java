@@ -3,6 +3,7 @@ package test.ua.goit.alg.xmlparser;
 import org.junit.Before;
 import org.junit.Test;
 import ua.goit.alg.xmlparser.input.StreamReader;
+
 import java.io.*;
 
 import static org.junit.Assert.assertEquals;
@@ -34,6 +35,15 @@ public class StreamReaderTest {
   public void testStreamReader_read_String() throws IOException {
     String xmlString = "<?xml doctype=\"1\"><start atr1=\"3\" atr2 = \"4\"><tag>text</tag><tag2/></start>";
     StreamReader stream = new StreamReader(xmlString);
+    String actualXML = readString_actualXML(stream);
+    assertEquals(xmlString, actualXML);
+  }
+
+  @Test
+  public void readFromInputStreamReader() throws IOException {
+    String xmlString = "<?xml version=\"1.0\"?><start atr1=\"3\" atr2 = \"4\"><tag>text</tag><tag2/></start>";
+    InputStream reader = new FileInputStream(testXMLFile);
+    StreamReader stream = new StreamReader(reader);
     String actualXML = readString_actualXML(stream);
     assertEquals(xmlString, actualXML);
   }
