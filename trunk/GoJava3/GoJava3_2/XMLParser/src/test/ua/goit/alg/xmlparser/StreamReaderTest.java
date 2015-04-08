@@ -42,9 +42,9 @@ public class StreamReaderTest {
   @Test
   public void readFromInputStreamReader() throws IOException {
     String xmlString = "<?xml version=\"1.0\"?><start atr1=\"3\" atr2 = \"4\"><tag>text</tag><tag2/></start>";
-    InputStream reader = new FileInputStream(testXMLFile);
-    StreamReader stream = new StreamReader(reader);
-    String actualXML = readString_actualXML(stream);
+    InputStream stream = new FileInputStream(testXMLFile);
+    StreamReader reader = new StreamReader(stream);
+    String actualXML = readString_actualXML(reader);
     assertEquals(xmlString, actualXML);
   }
 
