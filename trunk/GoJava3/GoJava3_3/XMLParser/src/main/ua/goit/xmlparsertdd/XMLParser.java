@@ -15,7 +15,12 @@ import java.util.Set;
 
 public class XMLParser implements Parser {
   private TagStateMachine machine = new TagStateMachine();
+  private final Map<Event, Set<Handler>> handlers;
 
+  private XMLParser(Map<Event, Set<Handler>> handlers) {
+    this.handlers = handlers;
+  }
+  
   @Override
   public void parse(String strArg) {
     parse(new ByteArrayInputStream(strArg.getBytes()));
@@ -42,15 +47,15 @@ public class XMLParser implements Parser {
 
   public void sendEventToHandler(Event event) {
     if (event == Event.OPEN_TAG) {
-      Set<Handler> set = ParserBuilder.handlers.get(Event.OPEN_TAG);
+      Set<Handler> set = handlers.get(Event.OPEN_TAG);
       for (Handler handler : set) {
         handler.handle(machine.getResult());
       }
     }
   }
 
-  static class ParserBuilder {
-    static Map<Event, Set<Handler>> handlers = new HashMap<>();
+  public static class ParserBuilder {
+    private Map<Event, Set<Handler>> handlers = new HashMap<>();
 
     public void onOpenTag(Handler handler) {
       Set<Handler> set;
@@ -92,7 +97,7 @@ public class XMLParser implements Parser {
     }
 
     public XMLParser build() {
-      return new XMLParser();
+      return new XMLParser(handlers);
     }
   }
 }
