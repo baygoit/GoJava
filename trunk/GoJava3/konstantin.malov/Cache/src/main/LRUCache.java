@@ -51,6 +51,7 @@ public class LRUCache {
   public void clearCache() {
     cacheHolder.clear();
   }
+
   public int getCacheSize() {
     return cacheHolder.size();
   }
