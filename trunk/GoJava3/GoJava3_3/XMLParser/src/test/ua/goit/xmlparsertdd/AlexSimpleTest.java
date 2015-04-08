@@ -38,7 +38,7 @@ public class AlexSimpleTest {
     // then
     assertEquals(expected, actual);
   }
-  
+
   @Test
   public void givenOpenTag_WhenHandleSetsTypeOfTag_ThenTypeOfTheTagEqualsOPEN() {
 
@@ -60,7 +60,29 @@ public class AlexSimpleTest {
     // then
     assertEquals(expected, actual);
   }
-  
+
+  @Test
+  public void givenCloseTag_WhenHandleSetsNameOfTag_ThenNameOfTheTagEqualsNameOfTheInputTag() {
+
+    // given
+    String inputString = "</name>";
+
+    // when
+    handler = new Handler() {
+      @Override
+      public void handle(Tag tag) {
+        myTag.setName(tag.getName());
+      }
+    };
+    builder.onOpenTag(handler);
+    parser.parse(inputString);
+    String actual = myTag.getName();
+    String expected = "name";
+
+    // then
+    assertEquals(expected, actual);
+  }
+
   @Test
   public void givenCloseTag_WhenHandleSetsTypeOfTag_ThenTypeOfTheTagEqualsCLOSE() {
 
@@ -74,7 +96,7 @@ public class AlexSimpleTest {
         myTag.setType(tag.getType());
       }
     };
-    builder.onEnd(handler);
+    builder.onOpenTag(handler);
     parser.parse(inputString);
     TagType actual = myTag.getType();
     TagType expected = TagType.CLOSE;
@@ -84,5 +106,8 @@ public class AlexSimpleTest {
   }
   
   
-
+  
+  
+  
+  
 }
