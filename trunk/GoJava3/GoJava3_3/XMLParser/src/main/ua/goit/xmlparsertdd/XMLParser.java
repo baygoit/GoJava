@@ -67,6 +67,8 @@ public class XMLParser implements Parser {
         }
         set.add(handler);
         handlers.put(Event.OPEN_TAG, set);
+      } else {
+        throw new NumberFormatException();
       }
     }
 
