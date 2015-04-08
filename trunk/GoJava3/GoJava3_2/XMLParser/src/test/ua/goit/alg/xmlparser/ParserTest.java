@@ -78,15 +78,9 @@ public class ParserTest {
   @Test
   public void attributeWithoutValue() throws IOException {
     Parser parser = new ParserBuilderForFullTesting();
-    try {
-      String result = parser.parse("<start atr1 atr2=\"4\"></start>");
-      fail();
-    } catch (RuntimeException e) {
-      String errorMessage = "Invalid format error";
-      assertEquals(e.getMessage(), errorMessage);
-    } catch (Exception e) {
-      fail();
-    }
+    String expectedResult = "<?xml?><start>";
+    String result = parser.parse("<start atr1 atr2=\"4\"></start>");
+    assertEquals(expectedResult, result);
   }
 
   @Test
