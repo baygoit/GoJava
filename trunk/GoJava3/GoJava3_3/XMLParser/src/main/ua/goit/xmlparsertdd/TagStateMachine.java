@@ -13,7 +13,7 @@ public class TagStateMachine {
 
   public void setEvent(XMLParser parser) {
     if (builder.getType() == TagType.OPEN) {
-      parser.setEvent(Event.OPEN_TAG);
+      parser.sendEventToHandler(Event.OPEN_TAG);
     }
   }
 

@@ -40,10 +40,6 @@ public class XMLParser implements Parser {
     }
   }
 
-  public void setEvent(Event event) {
-    sendEventToHandler(event);
-  }
-
   public void sendEventToHandler(Event event) {
     if (event == Event.OPEN_TAG) {
       Set<Handler> set = ParserBuilder.handlers.get(Event.OPEN_TAG);
