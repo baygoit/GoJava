@@ -18,8 +18,12 @@ enum TagState {
     @Override
     public TagState next(char c, Tag.Builder builder, TagStateMachine machine) {
       TagState result = INVALID_END;
-      result = machine.handleFirstLetterForName(c, result);
-      result = machine.handleSpace(c, result);
+      if (c == ' ') {
+        result = TagState.OPEN;
+      } else if (CharUtil.isNameStartChar(c)) {
+        result = TagState.NAME_FOR_TAG;
+        builder.buildName(c);
+      }
       return result;
     }
   },
@@ -28,19 +32,23 @@ enum TagState {
     @Override
     public TagState next(char c, Tag.Builder builder, TagStateMachine machine) {
       TagState result = INVALID_END;
-      result = machine.handleCloseBracket(c, result);
-      result = machine.handleLetterForName(c, result);
-      return  result;
+      if (c == '>') {
+        result = TagState.VALID_TAG_END;
+      }else if (CharUtil.isNameChar(c)) {
+        result = TagState.NAME_FOR_TAG;
+        builder.buildName(c);
+      }
+      return result;
     }
   },
   UNCHEKED_TAG_END {
     @Override
     public TagState next(char c, Tag.Builder builder, TagStateMachine machine) {
-      //TODO: make checking in stack
+      // TODO: make checking in stack
       return VALID_TAG_END;
     }
   },
-  
+
   VALID_TAG_END {
 
     @Override
@@ -58,4 +66,3 @@ enum TagState {
 
   abstract TagState next(char c, Tag.Builder builder, TagStateMachine machine);
 }
-

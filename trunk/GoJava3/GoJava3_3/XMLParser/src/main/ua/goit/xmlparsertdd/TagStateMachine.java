@@ -11,45 +11,6 @@ public class TagStateMachine {
     }
   }
 
-  public TagState handleOpenBracket(char c, TagState result) {
-    if (c == '<') {
-      result = TagState.OPEN;
-    }
-    return result;
-  }
-
-  public TagState handleSpace(char c, TagState result) {
-    if (c == ' ') {
-      if (tagState == TagState.OPEN) {
-        result = TagState.OPEN;
-      }
-    }
-    return result;
-  }
-
-  public TagState handleFirstLetterForName(char c, TagState result) {
-    if (CharUtil.isNameStartChar(c)) {
-      result = TagState.NAME_FOR_TAG;
-      builder.buildName(c);
-    }
-    return  result;
-  }
-
-  public TagState handleLetterForName(char c, TagState result) {
-    if (CharUtil.isNameChar(c)) {
-      result = TagState.NAME_FOR_TAG;
-      builder.buildName(c);
-    }
-    return result;
-  }
-
-  public TagState handleCloseBracket(char c, TagState result) {
-    if (c == '>') {
-      result = TagState.VALID_TAG_END;
-    }
-    return result;
-  }
-
   public void setEvent(XMLParser parser) {
     if (builder.getType() == TagType.OPEN) {
       parser.setEvent(Event.OPEN_TAG);
