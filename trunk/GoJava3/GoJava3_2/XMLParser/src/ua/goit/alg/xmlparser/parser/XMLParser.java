@@ -99,8 +99,12 @@ public class XMLParser  implements Parser {
     tag = new StateMashineTag(this);
     int symbol;
     do {
-      symbol = reader.read();
-      tag.next((char) symbol);
+      try {
+        symbol = reader.read();
+        tag.next((char) symbol);
+      } catch (Exception e) {
+        return "";
+      }
     } while (symbol != -1);
     return "";
   }
