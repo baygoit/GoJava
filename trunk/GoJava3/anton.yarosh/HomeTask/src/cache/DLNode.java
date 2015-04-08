@@ -6,37 +6,37 @@ class DLNode {
     private DLNode next;
     private DLNode prev;
 
-    public DLNode (int inputKey, int inputValue) {
+    DLNode(int inputKey, int inputValue) {
 	key = inputKey;
 	value = inputValue;
     }
 
-    public int getValue() {
+    int getValue() {
 	return value;
     }
 
-    public int getKey() {
+    int getKey() {
 	return key;
     }
 
-    public void setValue(int inputKey, int inputValue) {
+    void setValue(int inputKey, int inputValue) {
 	key = inputKey;
 	value = inputValue;
     }
     
-    public DLNode getNext() {
+    DLNode getNext() {
 	return next;
     }
     
-    public void setNext(DLNode n) {
+    void setNext(DLNode n) {
 	next = n;
     }
     
-    public DLNode getPrev() {
+    DLNode getPrev() {
 	return prev;
     }
     
-    public void setPrev(DLNode n) {
+    void setPrev(DLNode n) {
 	prev = n;
     }
 }

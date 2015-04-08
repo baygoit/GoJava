@@ -6,9 +6,8 @@ public class LRUCache {
     private HashMap<Integer, DLNode> map = new HashMap<Integer, DLNode>();
     private DLNode head;
     private DLNode tail;
-    private int capacity;
-    private int size;
-
+    private final int capacity;
+  
     public LRUCache(int capacity) {      
 	this.capacity = capacity;
     }
@@ -32,11 +31,10 @@ public class LRUCache {
 	    setNodeToTail(lastUsedNode);
 	} else {
 	    DLNode lastUsedNode = new DLNode(key, value);
-	    if (size < capacity) {
+	    if (map.size() < capacity) {
 		lastUsedNode.setValue(key, value);
 		setNodeToTail(lastUsedNode);
-		map.put(key, lastUsedNode);
-		size++;
+		map.put(key, lastUsedNode);		
 	    } else {
 		map.remove(head.getKey());
 		map.put(key, lastUsedNode);
