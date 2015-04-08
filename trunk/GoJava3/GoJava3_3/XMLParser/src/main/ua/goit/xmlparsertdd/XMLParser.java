@@ -63,18 +63,7 @@ public class XMLParser implements Parser {
     private Map<Event, Set<Handler>> handlers = new HashMap<>();
 
     public void onOpenTag(Handler handler) {
-      if (handler != null) {
-        Set<Handler> set;
-        if (handlers.containsKey(Event.OPEN_TAG)) {
-          set = handlers.get(Event.OPEN_TAG);
-        } else {
-          set = new HashSet<>();
-        }
-        set.add(handler);
-        handlers.put(Event.OPEN_TAG, set);
-      } else {
-        throw new NullPointerException();
-      }
+      registerHandlerOnEvent(handler, Event.OPEN_TAG);
     }
 
     public void onTextValue(Handler handler) {
@@ -84,9 +73,7 @@ public class XMLParser implements Parser {
     }
 
     public void onStart(Handler handler) {
-      Set<Handler> set = handlers.get(Event.START);
-      set.add(handler);
-      handlers.put(Event.START, set);
+      registerHandlerOnEvent(handler, Event.START);
     }
 
     public void onEnd(Handler handler) {
@@ -102,15 +89,19 @@ public class XMLParser implements Parser {
     }
 
     public void onCloseTag(Handler handler) {
+      registerHandlerOnEvent(handler, Event.CLOSE_TAG);
+    }
+    
+    private void registerHandlerOnEvent(Handler handler, Event event) {
       if (handler != null) {
         Set<Handler> set;
-        if (handlers.containsKey(Event.CLOSE_TAG)) {
-          set = handlers.get(Event.CLOSE_TAG);
+        if (handlers.containsKey(event)) {
+          set = handlers.get(event);
         } else {
           set = new HashSet<>();
         }
         set.add(handler);
-        handlers.put(Event.CLOSE_TAG, set);
+        handlers.put(event, set);
       } else {
         throw new NullPointerException();
       }

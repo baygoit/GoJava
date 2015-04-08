@@ -12,12 +12,7 @@ public class Tag {
   public Tag() {
   }
 
-  public Tag(TagType type, String name) {
-    this.type = type;
-    this.name = name;
-  }
-
-  public Tag(TagType type, String name, Map<String, String> params) {
+  private Tag(TagType type, String name, Map<String, String> params) {
     this.type = type;
     this.name = name;
     this.params = params;
@@ -41,6 +36,10 @@ public class Tag {
 
   public Map<String, String> getParams() {
     return params;
+  }
+
+  public void setParams(Map<String, String> params) {
+    this.params = params;
   }
 
   @Override
@@ -68,6 +67,9 @@ public class Tag {
   static class Builder {
     private TagType type;
     private StringBuilder name = new StringBuilder();
+    private Map<String, String> params = new HashMap<String, String>();
+    private StringBuilder paramName = new StringBuilder();
+    private StringBuilder paramValue = new StringBuilder();
 
     static Builder newBuilder() {
       return new Builder();
@@ -88,9 +90,23 @@ public class Tag {
     public void buildName(char c) {
       name.append(c);
     }
+    
+    public void buildParamName(char c) {
+      paramName.append(c);
+    }
+    
+    public void buildParamValue(char c) {
+      paramValue.append(c);
+    }
+    
+    public void addParams() {
+      params.put(paramName.toString(), paramValue.toString());
+      paramName = new StringBuilder();
+      paramValue = new StringBuilder();
+    }
 
     public Tag build() {
-      return new Tag(type, name.toString());
+      return new Tag(type, name.toString(), params);
     }
   }
 

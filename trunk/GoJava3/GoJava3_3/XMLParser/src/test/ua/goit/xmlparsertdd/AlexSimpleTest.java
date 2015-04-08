@@ -1,12 +1,17 @@
 package ua.goit.xmlparsertdd;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
 public class AlexSimpleTest {
-  final Tag myTag = new Tag();
+  Tag myTag = new Tag();
   Handler handler;
   XMLParser.Builder builder;
   Parser parser;
@@ -105,7 +110,58 @@ public class AlexSimpleTest {
     assertEquals(expected, actual);
   }
   
+  @Test
+  public void givenHeader_WhenHandleSetsTypeOfTag_ThenTypeOfTheTagEqualsHEADER() {
+
+    // given
+    String inputString = "<? xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\" ?>";
+
+    // when
+    handler = new Handler() {
+      @Override
+      public void handle(Tag tag) {
+        myTag.setType(tag.getType());
+      }
+    };
+    builder.onCloseTag(handler);
+    parser.parse(inputString);
+    TagType actual = myTag.getType();
+    TagType expected = TagType.HEADER;
+
+    // then
+    assertEquals(expected, actual);
+  }
   
+  @Test
+  public void givenHeader_WhenHandleSetsNameOfTag_ThenNameOfTheTagEqualsNameOfTheInputTag() {
+
+    // given
+    String inputString = "<? xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\" ?>";
+    
+    Map<String, String> params = new HashMap<String, String>() {{
+      this.put("version", "1.0");
+      this.put("encoding", "UTF-8");
+      this.put("standalone", "no");
+    }};
+    
+    Tag expectedTag = new Tag();
+    expectedTag.setName("xml");
+    expectedTag.setType(TagType.HEADER);
+    expectedTag.setParams(params);    
+    
+    // when
+    handler = new Handler() {
+      @Override
+      public void handle(Tag tag) {
+        myTag = tag;
+      }
+    };
+    builder.onStart(handler);
+    parser.parse(inputString);
+    Tag actualTag = myTag;
+    // then
+    assertEquals(expectedTag, actualTag);
+  }
   
   
   
