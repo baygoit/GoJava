@@ -6,8 +6,8 @@ enum TagState {
     @Override
     public TagState next(char c, Tag.Builder builder, TagStateMachine machine) {
       TagState result = INVALID_END;
-      result = machine.handleOpenBracket(c, result);
-      if (result == OPEN) {
+      if (c == '<') {
+        result = TagState.OPEN;
         builder.setType(TagType.OPEN);
       }
       return result;
