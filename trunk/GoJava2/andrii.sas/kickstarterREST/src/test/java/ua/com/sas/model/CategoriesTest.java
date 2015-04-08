@@ -8,6 +8,8 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+import ua.com.sas.dao.Categories;
+
 public abstract class CategoriesTest {
 
 	private Categories list;

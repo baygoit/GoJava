@@ -1,6 +1,8 @@
-package ua.com.sas.model;
+package ua.com.sas.dao;
 
 import java.util.List;
+
+import ua.com.sas.model.Category;
 
 public interface Categories {
 

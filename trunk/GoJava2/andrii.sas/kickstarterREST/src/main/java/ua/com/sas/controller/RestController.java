@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import ua.com.sas.model.Category;
 import ua.com.sas.model.Project;
+import ua.com.sas.model.Quote;
 import ua.com.sas.service.ProjectsService;
 
 @Controller
@@ -21,6 +22,11 @@ public class RestController {
 	@RequestMapping (value = "/categories")
 	public @ResponseBody List<Category> getAll(){
 		return service.getAll();
+	}
+	
+	@RequestMapping (value = "/t")
+	public @ResponseBody Quote get(){
+		return service.getRandomed();
 	}
 	
 	@RequestMapping (value = "/categories/{id}")

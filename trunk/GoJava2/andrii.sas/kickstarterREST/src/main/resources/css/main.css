@@ -1,0 +1,34 @@
+body {
+	padding:	0;
+	margin:		0;
+	background:	url('images/logo.png') no-repeat top right #fafafa;
+	text-align: center;
+}
+#categories {
+	margin:		30px 0;
+}
+
+#categories a:first-child {
+	margin-left:0;	
+}
+#categories a {
+	text-decoration: none;
+	display:	inline-block;
+	background: #777;
+	font:		normal 15px/35px 'Verdana', sans-serif;
+	padding:	0 20px;
+	color: 		white;
+	border-radius:5px;
+	margin-left:20px;
+}
+
+#categories a:hover {
+	background: #999;
+}
+
+.project {
+	display:	inline-block;
+	margin-left:20px;
+	border: 	2px solid #ebebeb;
+	padding: 	15px;
+}

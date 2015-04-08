@@ -4,6 +4,7 @@ import java.util.List;
 
 import ua.com.sas.model.Category;
 import ua.com.sas.model.Project;
+import ua.com.sas.model.Quote;
 
 public interface ProjectsService {
 	
@@ -12,7 +13,7 @@ public interface ProjectsService {
 	List<Category> getAll(); 
 	
 	Project getCurrent(int id);
-
-	void createDummyCategoryWithProject();
+	
+	Quote getRandomed();
 
 }

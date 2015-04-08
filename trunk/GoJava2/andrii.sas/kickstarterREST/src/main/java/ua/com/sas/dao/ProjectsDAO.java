@@ -1,12 +1,9 @@
 package ua.com.sas.dao;
 
-import org.hibernate.Criteria;
 import org.hibernate.Session;
-import org.hibernate.criterion.Projections;
 import org.springframework.stereotype.Repository;
 
 import ua.com.sas.model.Project;
-import ua.com.sas.model.Projects;
 
 @Repository
 public class ProjectsDAO extends AbstractDAO implements Projects{
