@@ -26,6 +26,11 @@ public class Tag {
   public void setName(String name) {
     this.name = name;
   }
+  
+  public void setType(TagType type) {
+    this.type = type;
+  }
+  
   public TagType getType() {
     return type;
   }
