@@ -11,10 +11,9 @@ import ua.goit.alg.xmlparser.parser.ParserData;
 import ua.goit.alg.xmlparser.parser.XMLParser;
 
 public class ParserWithoutBuildersTest {
-  StringBuilder result = new StringBuilder();
   @Test
   public void openTagHandlerTest() throws IOException {
-    result.setLength(0);
+    final StringBuilder result = new StringBuilder();
     XMLParser parser = new XMLParser.Builder().setOpenTagHandler(new Handler() {
       @Override
       public void handle(ParserData parserData) {
@@ -29,7 +28,7 @@ public class ParserWithoutBuildersTest {
   
   @Test
   public void closeTagHandlerTest() throws IOException {
-    result.setLength(0);
+    final StringBuilder result = new StringBuilder();
     XMLParser parser = new XMLParser.Builder().setCloseTagHandler(new Handler() {
       @Override
       public void handle(ParserData parserData) {
@@ -38,29 +37,31 @@ public class ParserWithoutBuildersTest {
     }).build();
     
     parser.parse("<s><t t=\"<1\"></t></s>");
+    System.out.println(result);
     String expectedResult = "</t></s>";
     assertEquals(expectedResult, result.toString());
   }
   
     @Test
     public void textValueHandlerTest() throws IOException {
-      result.setLength(0);
+      final StringBuilder result = new StringBuilder();
       XMLParser parser = new XMLParser.Builder().setTextValueHandler(new Handler() {
         @Override
         public void handle(ParserData parserData) {
-          result.append("").append(parserData.getText()).append("");
+          result.append("").append(parserData.getText()).append(" ");
         }
       }).build();
       
-      parser.parse("<start atr1=\"3\"><tag></tag><tag2></tag2></start>");
-      String expectedResult = "</tag></tag2></start>";
+      parser.parse("<start atr1=\"3\"><tag>text1</tag><tag2>text</tag2></start>");
+      System.out.println(result);
+      String expectedResult = "text1 text ";
       assertEquals(expectedResult, result.toString());
   }
     
     
     @Test
     public void startHandlerTest() throws IOException {
-      result.setLength(0);
+      final StringBuilder result = new StringBuilder();
       XMLParser parser = new XMLParser.Builder().setStartHandler(new Handler() {
         @Override
         public void handle(ParserData parserData) {
@@ -68,15 +69,16 @@ public class ParserWithoutBuildersTest {
         }
       }).build();
       
-      parser.parse("<start atr1=\"3\"><tag></tag><tag2></tag2></start>");
-      String expectedResult = "</tag></tag2></start>";
+      parser.parse("<?xml doctype=\"1\"?><start atr1=\"3\"><tag></tag><tag2></tag2></start>");
+      String expectedResult = "<?xml?>";
       assertEquals(expectedResult, result.toString());
   }
   
     
     @Test
     public void endHandlerTest() throws IOException {
-      result.setLength(0);
+      
+      final StringBuilder result = new StringBuilder();
       XMLParser parser = new XMLParser.Builder().setEndHandler(new Handler() {
         @Override
         public void handle(ParserData parserData) {
@@ -85,15 +87,14 @@ public class ParserWithoutBuildersTest {
       }).build();
       
       parser.parse("<start atr1=\"3\"><tag></tag><tag2></tag2></start>");
-      System.out.println(result);
-      String expectedResult = "</tag></tag2></start>";
+      String expectedResult = "";
       assertEquals(expectedResult, result.toString());
   }
     
     
     @Test
     public void errHandlerTest() throws IOException {
-      result.setLength(0);
+      final StringBuilder result = new StringBuilder();
       XMLParser parser = new XMLParser.Builder().setErrHandler(new Handler() {
         @Override
         public void handle(ParserData parserData) {
