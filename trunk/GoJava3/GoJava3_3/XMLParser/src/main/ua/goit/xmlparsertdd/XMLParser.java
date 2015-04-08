@@ -68,7 +68,7 @@ public class XMLParser implements Parser {
         set.add(handler);
         handlers.put(Event.OPEN_TAG, set);
       } else {
-        throw new NumberFormatException();
+        throw new NullPointerException();
       }
     }
 
@@ -94,6 +94,21 @@ public class XMLParser implements Parser {
       Set<Handler> set = handlers.get(Event.INVALID_END);
       set.add(handler);
       handlers.put(Event.INVALID_END, set);
+    }
+
+    public void onCloseTag(Handler handler) {
+      if (handler != null) {
+        Set<Handler> set;
+        if (handlers.containsKey(Event.CLOSE_TAG)) {
+          set = handlers.get(Event.CLOSE_TAG);
+        } else {
+          set = new HashSet<>();
+        }
+        set.add(handler);
+        handlers.put(Event.CLOSE_TAG, set);
+      } else {
+        throw new NullPointerException();
+      }
     }
 
     public static Builder newParserBuilder() {
