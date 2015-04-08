@@ -1,23 +1,22 @@
 package ua.goit.xmlparsertdd;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import org.junit.Before;
 import org.junit.Test;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
 
 public class AlexSimpleTest {
-  Tag myTag = new Tag();
+  Tag myTag;
   Handler handler;
   XMLParser.Builder builder;
   Parser parser;
 
   @Before
   public void crateVariables() {
+    myTag =  new Tag();
     builder = XMLParser.Builder.newParserBuilder();
     parser = builder.build();
   }
@@ -123,7 +122,7 @@ public class AlexSimpleTest {
         myTag.setType(tag.getType());
       }
     };
-    builder.onCloseTag(handler);
+    builder.onStart(handler);
     parser.parse(inputString);
     TagType actual = myTag.getType();
     TagType expected = TagType.HEADER;
@@ -162,8 +161,4 @@ public class AlexSimpleTest {
     // then
     assertEquals(expectedTag, actualTag);
   }
-  
-  
-  
-  
 }
