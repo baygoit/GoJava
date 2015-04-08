@@ -21,6 +21,7 @@ public class LRUCacheTest {
   public void fullCache_gettingExistedValue_returnExistingValue() {
     Assert.assertEquals(cache.get(1), 1);
   }
+
   @Test
   public void fullCache_gettingNotExist_returnMinusOne() {
     Assert.assertEquals(cache.get(12), -1);
@@ -31,9 +32,16 @@ public class LRUCacheTest {
     cache.set(3,2);
     Assert.assertEquals(cache.get(3), 2);
   }
+
   @Test
   public void fullCache_setNotExistedKey_returnValueOfNewKey() {
     cache.set(18, 2);
     Assert.assertEquals(cache.get(18), 2);
+  }
+
+  @Test
+  public void fullCache_setNotExistedKeyAndTryToGetFirstAddedEntity_returnMinusOne() {
+    cache.set(18, 2);
+    Assert.assertEquals(cache.get(0), -1);
   }
 }

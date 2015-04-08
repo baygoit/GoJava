@@ -5,9 +5,9 @@ import java.util.Map;
 
 public class LRUCache {
   private int capacity;
-  private static Entity head;
-  private static Entity tail;
-  Map<Integer, Entity> cacheHolder;
+  private Entity head;
+  private Entity tail;
+  private Map<Integer, Entity> cacheHolder;
 
   public LRUCache(int capacity) {
     cacheHolder = new HashMap<Integer, Entity>();
@@ -75,17 +75,17 @@ public class LRUCache {
     head = newEntity;
   }
 
-  private class Entity {
+  private static class Entity {
     public Entity(int key, int value, Entity next) {
       this.value = value;
       this.next = next;
       this.key = key;
     }
 
-    public int key;
-    public int value;
-    public Entity next;
-    public Entity previous;
+    protected int key;
+    protected int value;
+    protected Entity next;
+    protected Entity previous;
 
     @Override
     public String toString() {
@@ -108,7 +108,10 @@ public class LRUCache {
     StringBuilder textToString = new StringBuilder();
     Entity entity = head;
     while (entity != null) {
-      textToString.append(entity.key + " " + entity.value + "\n");
+      textToString.append(entity.key).
+              append(' ').
+              append(entity.value).
+              append('\n');
       entity = entity.next;
     }
 
