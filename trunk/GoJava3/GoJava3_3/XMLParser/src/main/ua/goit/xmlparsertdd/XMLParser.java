@@ -58,14 +58,16 @@ public class XMLParser implements Parser {
     private Map<Event, Set<Handler>> handlers = new HashMap<>();
 
     public void onOpenTag(Handler handler) {
-      Set<Handler> set;
-      if (handlers.containsKey(Event.OPEN_TAG)) {
-        set = handlers.get(Event.OPEN_TAG);
-      } else {
-        set = new HashSet<>();
+      if (handler != null) {
+        Set<Handler> set;
+        if (handlers.containsKey(Event.OPEN_TAG)) {
+          set = handlers.get(Event.OPEN_TAG);
+        } else {
+          set = new HashSet<>();
+        }
+        set.add(handler);
+        handlers.put(Event.OPEN_TAG, set);
       }
-      set.add(handler);
-      handlers.put(Event.OPEN_TAG, set);
     }
 
     public void onTextValue(Handler handler) {
