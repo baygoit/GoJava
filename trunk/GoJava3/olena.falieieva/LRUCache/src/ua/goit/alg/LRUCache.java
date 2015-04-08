@@ -1,71 +1,77 @@
 package ua.goit.alg;
-import java.util.HashMap;
 
+import java.util.HashMap;
 
 public class LRUCache {
 
 	private Node head;
 	private Node tail;
-	public int capacity;
+	private final int capacity;
+	private final HashMap<Integer, Node> map;
 
-	HashMap<Integer, Node> map = new HashMap<Integer, Node>();
 
 	public LRUCache(int capacity) { 
+		map = new HashMap<Integer, Node>();
 		this.capacity = capacity;
 	}
 
-	public void put(int key, int value){
-
+	public void put(int key, int value) {
 		if (map.size() == capacity) {
 			map.remove(head.key);
 			removeHead();
 		}
 
-		Node newNode = new Node(key,value);
-		if(!map.containsKey(key)){
-			if (tail!=null){
-				appendToTail(newNode);		
-			} else {
-				head = newNode;
-				tail = head;
-			};
-
-		} else {
+		if (map.containsKey(key)) {
 			Node oldNode = map.get(key);
 			oldNode.value = value;
-			if (oldNode != tail){
+			if (oldNode != tail) {
 				addFromMiddleToTail(oldNode);
 			}
 			if (oldNode == head) {
 				removeHead();
 				appendToTail(oldNode);
 			} 
-
-			oldNode.value = value;
+		} else {
+			Node newNode = new Node(key,value);
+			if (tail != null) {
+				appendToTail(newNode);		
+			} else {
+				head = newNode;
+				tail = head;
+			}
+			map.put(key, newNode);
 		}
-		map.put(key, newNode);
 	}
 
 	public int get(int key) {
-		if(map.containsKey(key)) {
-			Node getted = map.get(key);
-			if (getted == head){
+		if (map.containsKey(key)) {
+			Node gettedNode = map.get(key);
+			if (gettedNode == head) {
 				removeHead();
-				appendToTail(getted);
+				appendToTail(gettedNode);
 			}
-			if (getted !=tail) {
-				addFromMiddleToTail(getted);
+			if (gettedNode != tail) {
+				addFromMiddleToTail(gettedNode);
 			}
-			return tail.value;
+			return gettedNode.value;
 		} else {
 			return -1;
 		}
 	}
-	
+
+	public void cleanCache() {
+		map.clear();
+	}
+
+	public int getCacheSize() {
+		return map.size();
+	}
+
 	private void removeHead() {
 		head = head.next;
 		head.prev = null; 
 	}
+
 	private void addFromMiddleToTail(Node node) {
 		Node prev = node.prev;
 		Node next = node.next;
@@ -85,16 +91,14 @@ public class LRUCache {
 
 	private static class Node {
 		int value;
-		int key;
+		final int key;
 		Node next;
 		Node prev;
-		public Node(int key,int value){
+		public Node(int key,int value) {
 			this.value = value;
 			this.key = key;
 		}
 	}
-
-	
 }
 
 
