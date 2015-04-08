@@ -37,7 +37,6 @@ public class ParserBuilderForFullTesting implements Parser{
       @Override
       public void handle(ParserData parserData) {
         result.append("").append(parserData.getText()).append("");
-        System.out.println(result);
      }
     }).setErrHandler(new Handler(){
       @Override
