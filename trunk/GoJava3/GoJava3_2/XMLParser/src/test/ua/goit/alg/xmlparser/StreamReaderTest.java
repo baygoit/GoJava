@@ -7,7 +7,7 @@ import java.io.*;
 
 import static org.junit.Assert.assertEquals;
 
-public class TestStreamReader {
+public class StreamReaderTest {
   private File testXMLFile;
 
   @Before

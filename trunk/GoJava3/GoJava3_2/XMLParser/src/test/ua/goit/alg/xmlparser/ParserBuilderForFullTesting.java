@@ -3,30 +3,47 @@ package test.ua.goit.alg.xmlparser;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.HashMap;
-import java.util.Map;
 
 import ua.goit.alg.xmlparser.parser.Handler;
 import ua.goit.alg.xmlparser.parser.ParserData;
 import ua.goit.alg.xmlparser.parser.XMLParser;
 import ua.goit.alg.xmlparser.parser.Parser;
 
-public class MockXMLParserForAtribute implements Parser{
+public class ParserBuilderForFullTesting implements Parser{
   
    private StringBuilder result = new StringBuilder("");
-   
+
    XMLParser parser = new XMLParser.Builder().setOpenTagHandler(new Handler() {
       @Override
       public void handle(ParserData parserData) {
-        result.append("<" + parserData.getTag());
-        Map<String, String> attributes = parserData.getAttributes();
-        if (!attributes.isEmpty()){
-          for (Map.Entry pair:attributes.entrySet()) {
-            result.append(" " + pair.getKey() + "=" + pair.getValue());
-          }
-        }
-        result.append(">");
+        result.append("<").append(parserData.getTag()).append(">");
       }
+    }).setCloseTagHandler(new Handler() {
+      @Override
+      public void handle(ParserData parserData) {
+        result.append("</").append(parserData.getTag()).append(">");
+      }
+    }).setTextValueHandler(new Handler(){
+      @Override
+      public void handle(ParserData parserData) {
+        result.append("").append(parserData.getText()).append("");
+     }
+    }).setStartHandler(new Handler(){
+      @Override
+      public void handle(ParserData parserData) {
+        result.append("<?").append(parserData.getTag()).append("?>");
+     }
+    }).setEndHandler(new Handler(){
+      @Override
+      public void handle(ParserData parserData) {
+        result.append("").append(parserData.getText()).append("");
+     }
+    }).setErrHandler(new Handler(){
+      @Override
+      public void handle(ParserData parserData) {
+        result.append("").append(parserData.getText()).append("");
+     }
+      
     }).build();
 
     @Override

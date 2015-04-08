@@ -149,7 +149,6 @@ public class XMLParser  implements Parser {
       errHandler.handle(parserData);
     }
     reader.close();
-    throw new RuntimeException("Invalid format error");
   }
 
   public void onOpenTag(Handler handler) {

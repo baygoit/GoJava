@@ -7,11 +7,11 @@ import org.junit.Assert;
 import org.junit.Test;
 import ua.goit.alg.xmlparser.parser.Parser;
 
-public class TestParser {
+public class ParserTest {
 
   @Test
   public void whenCompareInside() throws IOException {
-    Parser parser = new MockXMLParser();
+    Parser parser = new ParserBuilderForFullTesting();
     String result = parser.parse("<s><t t=\"<1\"></t></s>");
     String expectedResult = "<s><t></t></s>";
     Assert.assertEquals(expectedResult, result);
@@ -19,7 +19,7 @@ public class TestParser {
 
   @Test
   public void when2Open2Close() throws IOException {
-    Parser parser = new MockXMLParser();
+    Parser parser = new ParserBuilderForFullTesting();
     String result = parser.parse("<s><t></t></s>");
     String expectedResult = "<s><t></t></s>";
     Assert.assertEquals(expectedResult, result);
@@ -27,7 +27,7 @@ public class TestParser {
 
   @Test
   public void whenAttr() throws IOException {
-    Parser parser = new MockXMLParser();
+    Parser parser = new ParserBuilderForFullTesting();
     String result = parser.parse("<start atr1=\"3\"><tag></tag><tag2></tag2></start>");
     String expectedResult = "<start><tag></tag><tag2></tag2></start>";
     Assert.assertEquals(expectedResult, result);
@@ -35,7 +35,7 @@ public class TestParser {
 
   @Test
   public void whenClosableTag() throws IOException {
-    Parser parser = new MockXMLParser();
+    Parser parser = new ParserBuilderForFullTesting();
     String result = parser.parse("<start atr1=\"3\"><tag></tag><tag2/></start>");
     String expectedResult = "<start><tag></tag><tag2></tag2></start>";
     Assert.assertEquals(expectedResult, result);
@@ -43,7 +43,7 @@ public class TestParser {
 
   @Test
   public void whenText() throws IOException {
-    Parser parser = new MockXMLParser();
+    Parser parser = new ParserBuilderForFullTesting();
     String result = parser.parse("<start atr1=\"3\"><tag>text</tag><tag2/></start>");
     String expectedResult = "<start><tag>text</tag><tag2></tag2></start>";
     Assert.assertEquals(expectedResult, result);
@@ -51,7 +51,7 @@ public class TestParser {
 
   @Test
   public void whenFull() throws IOException {
-    Parser parser = new MockXMLParser();
+    Parser parser = new ParserBuilderForFullTesting();
     String result = parser.parse("<?xml doctype=\"1\"?><start atr1=\"3\" atr2 = \"4\"><tag>text</tag><tag2/></start>");
     String expectedResult = "<?xml?><start><tag>text</tag><tag2></tag2></start>";
     Assert.assertEquals(expectedResult, result);
@@ -59,7 +59,7 @@ public class TestParser {
 
   @Test
   public void whenDoubleStartTag() throws IOException {
-    Parser parser = new MockXMLParser();
+    Parser parser = new ParserBuilderForFullTesting();
     try {
       String result = parser.parse("<?xml doctype=\"1\"><start atr1=\"3\" atr2 = \"4\"><?xml doctype=\"1\"><tag>text</tag><tag2/></start>");
       fail();
@@ -73,7 +73,7 @@ public class TestParser {
 
   @Test
   public void whenCloseTag_notEquals_OpenTag() throws IOException {
-    Parser parser = new MockXMLParser();
+    Parser parser = new ParserBuilderForFullTesting();
     try {
       String result = parser.parse("<s><t></o></r>");
       fail();
@@ -87,7 +87,7 @@ public class TestParser {
 
   @Test
   public void attributeWithoutValue() throws IOException {
-    Parser parser = new MockXMLParser();
+    Parser parser = new ParserBuilderForFullTesting();
     try {
       String result = parser.parse("<start atr1 atr2=\"4\"></start>");
       fail();
@@ -101,7 +101,7 @@ public class TestParser {
 
   @Test
   public void parsingTwoStringsWithOneParser() throws IOException {
-    Parser parser = new MockXMLParser();
+    Parser parser = new ParserBuilderForFullTesting();
     String result1 = parser.parse("<?xml doctype=\"1\"?><start atr1=\"3\" atr2 = \"4\"><tag>text</tag><tag2/></start>");
     String expectedResult = "<?xml?><start><tag>text</tag><tag2></tag2></start>";
     Assert.assertEquals(expectedResult, result1);
@@ -112,7 +112,7 @@ public class TestParser {
 
   @Test
   public void invalidCloseTag() throws IOException {
-    Parser parser = new MockXMLParser();
+    Parser parser = new ParserBuilderForFullTesting();
     try {
       String result = parser.parse("<s/s>");
       fail();
@@ -126,7 +126,7 @@ public class TestParser {
 
   @Test
   public void invalidTagName() throws IOException {
-    Parser parser = new MockXMLParser();
+    Parser parser = new ParserBuilderForFullTesting();
     try {
       String result = parser.parse("<C++></C++>");
       fail();
@@ -140,7 +140,7 @@ public class TestParser {
 
   @Test
   public void tagNameWithInvalidSpace() throws IOException {
-    Parser parser = new MockXMLParser();
+    Parser parser = new ParserBuilderForFullTesting();
     try {
       String result = parser.parse("<star t></start>");
       fail();
@@ -154,7 +154,7 @@ public class TestParser {
 
   @Test
   public void atributesAndValues() throws IOException {
-    Parser parser = new MockXMLParserForAtribute();
+    Parser parser = new ParserBuilderForAtributeTesting();
     String result = parser.parse("<start atr1=\"3\" atr2 = \"4\"><tag>text</tag><tag2/></start>");
     String expectedResult = "<start atr1=\"3\" atr2=\"4\"><tag><tag2>";
     assertEquals(expectedResult, result);
