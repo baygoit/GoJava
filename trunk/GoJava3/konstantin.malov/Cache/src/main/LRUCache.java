@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LRUCache {
-  private int capacity;
+  private final int capacity;
   private Entity head;
   private Entity tail;
   private Map<Integer, Entity> cacheHolder;
@@ -32,7 +32,7 @@ public class LRUCache {
       Entity newEntity = new Entity(key, value, head);
       if (cacheHolder.size() < capacity) {
         if (head != null) {
-          addElementAndSwiftOtherDown(newEntity);
+          addElementAndSwitchOtherDown(newEntity);
         } else {
           head = newEntity;
           tail = newEntity;
@@ -41,11 +41,18 @@ public class LRUCache {
         Entity newTailEntity = tail.previous;
         delete(tail.key);
         tail = newTailEntity;
-        addElementAndSwiftOtherDown(newEntity);
+        addElementAndSwitchOtherDown(newEntity);
       }
 
       cacheHolder.put(key, newEntity);
     }
+  }
+
+  public void clearCache() {
+    cacheHolder.clear();
+  }
+  public int getCacheSize() {
+    return cacheHolder.size();
   }
 
   private void upToHead(int key) {
@@ -66,11 +73,11 @@ public class LRUCache {
       previousEntity.next = nextEntity;
       nextEntity.previous = previousEntity;
       entity.next = head;
-      addElementAndSwiftOtherDown(entity);
+      addElementAndSwitchOtherDown(entity);
     }
   }
 
-  private void addElementAndSwiftOtherDown(Entity newEntity) {
+  private void addElementAndSwitchOtherDown(Entity newEntity) {
     head.previous = newEntity;
     head = newEntity;
   }
@@ -108,13 +115,18 @@ public class LRUCache {
     StringBuilder textToString = new StringBuilder();
     Entity entity = head;
     while (entity != null) {
-      textToString.append(entity.key).
-              append(' ').
-              append(entity.value).
-              append('\n');
+      appendDataToAnswerString(textToString, entity);
       entity = entity.next;
     }
 
     return textToString.toString();
+  }
+
+  private void appendDataToAnswerString(StringBuilder textToString,
+                                        Entity entity) {
+    textToString.append(entity.key);
+    textToString.append(' ');
+    textToString.append(entity.value);
+    textToString.append('\n');
   }
 }

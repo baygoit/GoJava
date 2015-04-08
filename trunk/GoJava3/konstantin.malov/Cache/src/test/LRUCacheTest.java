@@ -7,6 +7,7 @@ import org.junit.Test;
 
 public class LRUCacheTest {
   private LRUCache cache;
+
   @Before
   public void createAndFillInCache() {
     cache = new LRUCache(5);
@@ -29,7 +30,7 @@ public class LRUCacheTest {
 
   @Test
   public void fullCache_setExistedKeyByNewValue_returnNewValue() {
-    cache.set(3,2);
+    cache.set(3, 2);
     Assert.assertEquals(cache.get(3), 2);
   }
 
@@ -40,8 +41,36 @@ public class LRUCacheTest {
   }
 
   @Test
+  public void fullCache_setOneMoreElementAndCheckCacheSize_returnCacheSize() {
+    cache.set(8, 8);
+    Assert.assertEquals(cache.getCacheSize(), 5);
+  }
+
+  @Test
   public void fullCache_setNotExistedKeyAndTryToGetFirstAddedEntity_returnMinusOne() {
     cache.set(18, 2);
     Assert.assertEquals(cache.get(0), -1);
+  }
+
+  @Test
+  public void emptyCache_setNotExistedKeyAndTryToGetIt_returnValueThatWasSetBefore() {
+    cache.clearCache();
+    cache.set(8, 8);
+    Assert.assertEquals(cache.get(8), 8);
+  }
+
+  @Test
+  public void emptyCache_setNotExistedKeyAndCheckCacheSize_returnCacheSize() {
+    cache.clearCache();
+    cache.set(8, 8);
+    Assert.assertEquals(cache.getCacheSize(), 1);
+  }
+
+  @Test
+  public void notFullCache_setNotExistedKeyAndCheckCacheSize_returnCacheSize() {
+    cache.clearCache();
+    cache.set(8, 8);
+    cache.set(10, 10);
+    Assert.assertEquals(cache.get(10), 10);
   }
 }
