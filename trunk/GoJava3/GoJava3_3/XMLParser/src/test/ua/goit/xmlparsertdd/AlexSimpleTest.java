@@ -1,9 +1,9 @@
 package ua.goit.xmlparsertdd;
 
-import static org.junit.Assert.*;
-
 import org.junit.Before;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 public class AlexSimpleTest {
   final Tag myTag = new Tag();
@@ -74,7 +74,7 @@ public class AlexSimpleTest {
         myTag.setName(tag.getName());
       }
     };
-    builder.onOpenTag(handler);
+    builder.onCloseTag(handler);
     parser.parse(inputString);
     String actual = myTag.getName();
     String expected = "name";
@@ -96,7 +96,7 @@ public class AlexSimpleTest {
         myTag.setType(tag.getType());
       }
     };
-    builder.onOpenTag(handler);
+    builder.onCloseTag(handler);
     parser.parse(inputString);
     TagType actual = myTag.getType();
     TagType expected = TagType.CLOSE;

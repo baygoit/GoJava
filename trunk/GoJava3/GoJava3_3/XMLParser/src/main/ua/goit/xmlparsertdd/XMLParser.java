@@ -51,6 +51,11 @@ public class XMLParser implements Parser {
       for (Handler handler : set) {
         handler.handle(machine.getResult());
       }
+    } else if (event == Event.CLOSE_TAG) {
+      Set<Handler> set = handlers.get(Event.CLOSE_TAG);
+      for (Handler handler : set) {
+        handler.handle(machine.getResult());
+      }
     }
   }
 

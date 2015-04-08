@@ -14,6 +14,8 @@ public class TagStateMachine {
   public void setEvent(XMLParser parser) {
     if (builder.getType() == TagType.OPEN) {
       parser.sendEventToHandler(Event.OPEN_TAG);
+    } else if (builder.getType() == TagType.CLOSE){
+      parser.sendEventToHandler(Event.CLOSE_TAG);
     }
   }
 
