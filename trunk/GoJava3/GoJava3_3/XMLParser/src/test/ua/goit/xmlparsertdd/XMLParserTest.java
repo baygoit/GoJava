@@ -14,7 +14,7 @@ public class XMLParserTest {
         myTag.setName(tag.getName());
       }
     };
-    XMLParser.ParserBuilder builder= XMLParser.ParserBuilder.newParserBuilder();
+    XMLParser.Builder builder= XMLParser.Builder.newParserBuilder();
     Parser parser = builder.build();
     builder.onOpenTag(handler);
     parser.parse("<handle>");

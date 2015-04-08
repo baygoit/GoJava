@@ -54,7 +54,7 @@ public class XMLParser implements Parser {
     }
   }
 
-  public static class ParserBuilder {
+  public static class Builder {
     private Map<Event, Set<Handler>> handlers = new HashMap<>();
 
     public void onOpenTag(Handler handler) {
@@ -92,8 +92,8 @@ public class XMLParser implements Parser {
       handlers.put(Event.INVALID_END, set);
     }
 
-    public static ParserBuilder newParserBuilder() {
-      return new ParserBuilder();
+    public static Builder newParserBuilder() {
+      return new Builder();
     }
 
     public XMLParser build() {
