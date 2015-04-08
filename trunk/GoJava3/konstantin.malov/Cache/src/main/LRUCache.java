@@ -7,7 +7,7 @@ public class LRUCache {
   private final int capacity;
   private Entity head;
   private Entity tail;
-  private Map<Integer, Entity> cacheHolder;
+  private final Map<Integer, Entity> cacheHolder;
 
   public LRUCache(int capacity) {
     cacheHolder = new HashMap<Integer, Entity>();
@@ -90,7 +90,7 @@ public class LRUCache {
       this.key = key;
     }
 
-    protected int key;
+    protected final int key;
     protected int value;
     protected Entity next;
     protected Entity previous;
