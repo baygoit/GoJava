@@ -133,7 +133,7 @@ public class Arrays {
 
   // TODO make method smaller
   private static void mergeTwoTempFiles(File firstFile, File secondFile,
-                                        File fileMerged) {
+                                        File fileMerged) throws IOException {
     int intFromFirstFile = 0, intFromSecondFile = 0;
     boolean readNextIntFromFirstFileIsAllowed = true;
     boolean readNextIntFromSecondFileIsAllowed = true;
@@ -184,8 +184,6 @@ public class Arrays {
           } catch (EOFException e) {
             endOfFile1 = true;
             readNextIntFromFirstFileIsAllowed = false;
-          } catch (IOException e) {
-            e.printStackTrace();
           }
         }
         if (readNextIntFromSecondFileIsAllowed && !endOfFile2) {
@@ -194,8 +192,6 @@ public class Arrays {
           } catch (EOFException e) {
             endOfFile2 = true;
             readNextIntFromSecondFileIsAllowed = false;
-          } catch (IOException e) {
-            e.printStackTrace();
           }
         }
 
@@ -204,15 +200,11 @@ public class Arrays {
             outputStreamOfMergedFile.writeInt(intFromFirstFile);
           } catch (EOFException e) {
             endOfFile1 = true;
-          } catch (IOException e) {
-            e.printStackTrace();//todo
           }
           try {
             outputStreamOfMergedFile.writeInt(intFromSecondFile);
           } catch (EOFException e) {
             endOfFile2 = true;
-          } catch (IOException e) {
-            e.printStackTrace(); //todo
           }
           readNextIntFromFirstFileIsAllowed = true;
           readNextIntFromSecondFileIsAllowed = true;
@@ -221,8 +213,6 @@ public class Arrays {
             outputStreamOfMergedFile.writeInt(intFromFirstFile);
           } catch (EOFException e) {
             endOfFile1 = true;
-          } catch (IOException e) {
-            e.printStackTrace();
           }
           readNextIntFromFirstFileIsAllowed = true;
           readNextIntFromSecondFileIsAllowed = false;
@@ -231,8 +221,6 @@ public class Arrays {
             outputStreamOfMergedFile.writeInt(intFromSecondFile);
           } catch (EOFException e) {
             endOfFile2 = true;
-          } catch (IOException e) {
-            e.printStackTrace();
           }
           readNextIntFromFirstFileIsAllowed = false;
           readNextIntFromSecondFileIsAllowed = true;
@@ -242,8 +230,6 @@ public class Arrays {
           outputStreamOfMergedFile.writeInt(intFromSecondFile);
         } catch (EOFException e) {
           endOfFile2 = true;
-        } catch (IOException e) {
-          e.printStackTrace();
         }
         readNextIntFromFirstFileIsAllowed = false;
         readNextIntFromSecondFileIsAllowed = true;
@@ -252,8 +238,6 @@ public class Arrays {
           outputStreamOfMergedFile.writeInt(intFromFirstFile);
         } catch (EOFException e) {
           endOfFile1 = true;
-        } catch (IOException e) {
-          e.printStackTrace();
         }
         readNextIntFromFirstFileIsAllowed = true;
         readNextIntFromSecondFileIsAllowed = false;
@@ -319,7 +303,8 @@ public class Arrays {
     disFile.close();
   }
 
-  public static void writeArrayToFile(int[] array, File file) {
+  public static void writeArrayToFile(int[] array, File file) throws
+          IOException {
     DataOutputStream outputStream = null;
     try {
       outputStream = new DataOutputStream(new FileOutputStream(file));
@@ -328,8 +313,6 @@ public class Arrays {
       }
     } catch (FileNotFoundException e) {
       System.out.println("File " + file + " not found");
-    } catch (IOException e) {
-      System.out.println("\nCan't close the file " + file);
     } finally {
       try {
         if (outputStream != null) {
@@ -354,8 +337,6 @@ public class Arrays {
       }
     } catch (FileNotFoundException e) {
       System.out.println("File " + file + " not found");
-    } catch (EOFException e) {
-      System.out.println("\nEnd of file " + file);
     } catch (IOException e) {
       System.out.println("\nCan't close the file " + file);
     } finally {

@@ -11,7 +11,7 @@ import static ua.goit.alg.Arrays.*;
 public class ArraysTest {
 
   @Test
-  public void testWriteRead() {
+  public void testWriteRead() throws IOException {
     int[] expectedArray = new int[]{5, 4, 3, 2, 1, 10, 8};
     int[] actualArray;
     File fileName = new File("testWriteRead.txt");
@@ -117,15 +117,20 @@ public class ArraysTest {
   }
 
   @Test
-  public void testMergeFiles2() throws IOException {
-    //create BigFile
+  public void
+  givenTwoFilesWith2ElementsEach_whenMergeSort_thenResultedFileShouldBeSorted() throws IOException {
+
+    //given 2 files
     File file = new File("BigFile.txt");
     File fileSorted = new File("SortedBigFile.txt");
     new BigFileMaker(21, file);
-    //mergeSort
+
+    //when mergeSort
     mergeSort(file);
-    int[] expectedArray = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
-            20, 21};
+
+    //then result
+    int[] expectedArray = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15,
+            16, 17, 18, 19, 20, 21};
     int[] actualArray = readArrayFromFile(fileSorted);
     assertArrayEquals(expectedArray, actualArray);
   }
