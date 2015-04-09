@@ -85,6 +85,8 @@ enum TagState {
         builder.buildParamName(c);
       } else if (CharUtil.isEmptyChar(c)) {
         result = TagState.END_HEADER_PARAM_NAME;
+      } else if (c == '=') {
+        result = TagState.START_HEADER_PARAM_VALUE;
       } 
       return result;
     }

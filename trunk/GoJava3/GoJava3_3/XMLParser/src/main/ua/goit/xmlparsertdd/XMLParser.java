@@ -56,6 +56,11 @@ public class XMLParser implements Parser {
       for (Handler handler : set) {
         handler.handle(machine.getResult());
       }
+    } else if (event == Event.HEADER) {
+      Set<Handler> set = handlers.get(Event.HEADER);
+      for (Handler handler : set) {
+        handler.handle(machine.getResult());
+      }
     }
   }
 
@@ -90,6 +95,10 @@ public class XMLParser implements Parser {
 
     public void onCloseTag(Handler handler) {
       registerHandlerOnEvent(handler, Event.CLOSE_TAG);
+    }
+    
+    public void onHeader(Handler handler) {
+      registerHandlerOnEvent(handler, Event.HEADER);
     }
     
     private void registerHandlerOnEvent(Handler handler, Event event) {
