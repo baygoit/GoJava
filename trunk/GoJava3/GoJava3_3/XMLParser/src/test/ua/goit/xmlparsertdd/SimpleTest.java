@@ -138,9 +138,9 @@ public class SimpleTest {
     String inputString = "<? xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\" ?>";
     
     Map<String, String> params = new HashMap<String, String>() {{
-      this.put("version", "1.0");
-      this.put("encoding", "UTF-8");
-      this.put("standalone", "no");
+      put("version", "1.0");
+      put("encoding", "UTF-8");
+      put("standalone", "no");
     }};
     
     Tag expectedTag = new Tag();
