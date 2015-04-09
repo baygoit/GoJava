@@ -1,5 +1,6 @@
 package test.ua.goit.alg.xmlparser;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import ua.goit.alg.xmlparser.input.StreamReader;
@@ -29,6 +30,11 @@ public class StreamReaderTest {
         out.close();
       }
     }
+  }
+
+  @After
+  public void deleteTestFile() {
+    testXMLFile.delete();
   }
 
   @Test
