@@ -112,9 +112,9 @@ public class XMLParser  implements Parser {
 
   public void onOpenTag(ParserData parserData) {
     if (openTagHandler != null) {
-      parserData.putTagInStack();
       openTagHandler.handle(parserData);
     }
+    parserData.putTagInStack();
     parserData.clear();
   }
 
