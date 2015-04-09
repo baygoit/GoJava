@@ -8,7 +8,7 @@ import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
 
-public class AlexSimpleTest {
+public class SimpleTest {
   Tag myTag;
   Handler handler;
   XMLParser.Builder builder;
