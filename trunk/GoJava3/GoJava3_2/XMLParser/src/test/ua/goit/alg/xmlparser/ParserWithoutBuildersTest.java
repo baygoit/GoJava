@@ -29,9 +29,7 @@ public class ParserWithoutBuildersTest {
   @Test
   public void closeTagHandlerTest() throws IOException {
     final StringBuilder result = new StringBuilder();
-    XMLParser parser = new XMLParser.Builder().setOpenTagHandler(new Handler(){
-      @Override
-      public void handle(ParserData parserData) {}}).setCloseTagHandler(new Handler() {
+    XMLParser parser = new XMLParser.Builder().setCloseTagHandler(new Handler() {
       @Override
       public void handle(ParserData parserData) {
         result.append("</").append(parserData.getTag()).append(">");
@@ -46,9 +44,7 @@ public class ParserWithoutBuildersTest {
     @Test
     public void textValueHandlerTest() throws IOException {
       final StringBuilder result = new StringBuilder();
-      XMLParser parser = new XMLParser.Builder().setOpenTagHandler(new Handler(){
-      @Override
-      public void handle(ParserData parserData) {}}).setTextValueHandler(new Handler() {
+      XMLParser parser = new XMLParser.Builder().setTextValueHandler(new Handler() {
         @Override
         public void handle(ParserData parserData) {
           result.append("").append(parserData.getText()).append(" ");
@@ -64,9 +60,7 @@ public class ParserWithoutBuildersTest {
     @Test
     public void startHandlerTest() throws IOException {
       final StringBuilder result = new StringBuilder();
-      XMLParser parser = new XMLParser.Builder().setOpenTagHandler(new Handler(){
-      @Override
-      public void handle(ParserData parserData) {}}).setStartHandler(new Handler() {
+      XMLParser parser = new XMLParser.Builder().setStartHandler(new Handler() {
         @Override
         public void handle(ParserData parserData) {
           result.append("<?").append(parserData.getTag()).append("?>");
@@ -83,9 +77,7 @@ public class ParserWithoutBuildersTest {
     public void endHandlerTest() throws IOException {
       
       final StringBuilder result = new StringBuilder();
-      XMLParser parser = new XMLParser.Builder().setOpenTagHandler(new Handler(){
-      @Override
-      public void handle(ParserData parserData) {}}).setEndHandler(new Handler() {
+      XMLParser parser = new XMLParser.Builder().setEndHandler(new Handler() {
         @Override
         public void handle(ParserData parserData) {
           result.append("").append(parserData.getText()).append("");
@@ -101,9 +93,7 @@ public class ParserWithoutBuildersTest {
     @Test
     public void errHandlerTest() throws IOException {
       final StringBuilder result = new StringBuilder();
-      XMLParser parser = new XMLParser.Builder().setOpenTagHandler(new Handler(){
-      @Override
-      public void handle(ParserData parserData) {}}).setErrHandler(new Handler() {
+      XMLParser parser = new XMLParser.Builder().setErrHandler(new Handler() {
         @Override
         public void handle(ParserData parserData) {
           result.append("").append(parserData.getText()).append("");
