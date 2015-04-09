@@ -12,7 +12,7 @@
 	    	<c:forEach items="${projects}" var="project"> 
 	  	 		<tr>
 	  	 			<td>
-	  	 				<a href="project?id=${project.id}"><c:out value="${project.name}"/></a>
+	  	 				<a href="/kickstarter/project/${project.id}"><c:out value="${project.name}"/></a>
 	  	 			</td>
 	  	 			<td>
 	  	 				<c:out value="${project.description}"/>

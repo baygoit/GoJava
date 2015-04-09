@@ -1,17 +1,21 @@
 package ua.com.goit.gojava.kickstarter.dao;
 
-import java.sql.Connection;
-import java.sql.SQLException;
-
-import javax.sql.DataSource;
-
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class AbstractDao {
 	@Autowired
-	private DataSource dataSource;
+	 private SessionFactory sessionFactory;
 	
-	Connection getConnection() throws SQLException {
-		return dataSource.getConnection();
+	
+	
+	Session getCurrentSession(){
+		try{
+			return sessionFactory.getCurrentSession();
+		}catch(HibernateException e){
+			return sessionFactory.openSession();
+		}
 	}
 }

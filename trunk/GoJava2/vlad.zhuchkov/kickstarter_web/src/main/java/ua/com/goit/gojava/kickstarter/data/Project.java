@@ -1,29 +1,101 @@
 package ua.com.goit.gojava.kickstarter.data;
 
 import java.io.Serializable;
-import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 
-
+@Entity
+@Table(name = "project")
 public class Project implements Serializable {
+	@Id
+	@Column(name = "id")
+	@GeneratedValue
 	private int id;
+	@Column(name = "name")
 	private String name;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "category_id", nullable = false)
 	private Category category;
+	@Column(name = "description")
 	private String description;
-	private Status status;
-	private Parameters parameters;
+	@Column(name = "history")
+	private String history;
+	@Column(name = "demo")
+	private String demo;
+	@Column(name = "faq")
+	private String faq;
+	@Column(name = "cost")
+	private int cost;
+	@Column(name = "collected")
+	private int collected;
+	
 
-	public Project(int id, String name, String description, int cost,
-			int collected, Date date, String history, String demo, String faq) {
-		this.id = id;
-		this.name = name;
-		this.description = description;
-		parameters = new Parameters(history, demo, faq);
-		status = new Status(cost, collected, date);
+	
+
+	
+
+	public String getHistory() {
+		return history;
 	}
 
-	public Status getStatus() {
-		return status;
+	public void setHistory(String history) {
+		this.history = history;
+	}
+
+	public String getDemo() {
+		return demo;
+	}
+
+	public void setDemo(String demo) {
+		this.demo = demo;
+	}
+
+	public String getFaq() {
+		return faq;
+	}
+
+	public void setFaq(String faq) {
+		this.faq = faq;
+	}
+
+	public int getCost() {
+		return cost;
+	}
+
+	public void setCost(int cost) {
+		this.cost = cost;
+	}
+
+	public int getCollected() {
+		return collected;
+	}
+
+	public void setCollected(int collected) {
+		this.collected = collected;
+	}
+
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public String getName() {
@@ -34,9 +106,7 @@ public class Project implements Serializable {
 		return description;
 	}
 
-	public Parameters getParameters() {
-		return parameters;
-	}
+	
 	public int getId() {
 		return id;
 	}

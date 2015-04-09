@@ -6,11 +6,11 @@ import ua.com.goit.gojava.kickstarter.dao.ProjectsDao;
 
 public interface CategoryCatalog {
 
-	void addCategory(String name);
+	void add(Category category);
 
 	List<Category> getCatalog();
 
-	Category getCategory(int id);
+	Category get(int id);
 
 	int size();
 

@@ -1,75 +1,66 @@
 package ua.com.goit.gojava.kickstarter.controller;
 
-import java.io.IOException;
-import java.sql.Connection;
 import java.util.List;
 
-import javax.servlet.ServletConfig;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.context.support.SpringBeanAutowiringSupport;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import ua.com.goit.gojava.kickstarter.dao.CategoriesDao;
-import ua.com.goit.gojava.kickstarter.dao.ConnectionPool;
 import ua.com.goit.gojava.kickstarter.dao.ProjectsDao;
 import ua.com.goit.gojava.kickstarter.data.Category;
 import ua.com.goit.gojava.kickstarter.data.Project;
 
+@Controller
+@RequestMapping("/")
+public class MainServlet {
 
-
-public class MainServlet extends HttpServlet {
-   
 	@Autowired
 	private CategoriesDao categoriesDao;
 	@Autowired
 	private ProjectsDao projectsDao;
-	
-	@Override
-	public void init(ServletConfig config) throws ServletException {
-		super.init(config);
-		SpringBeanAutowiringSupport.processInjectionBasedOnServletContext(this, config.getServletContext());
+
+	@RequestMapping(value = { "/", "/categories" }, method = RequestMethod.GET)
+	public String getCategories(ModelMap model) {
+		List<Category> categories = categoriesDao.getCatalog();
+		model.addAttribute("categories", categories);
+		return "catalog";
 	}
 
-	
-	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String requestUrl = req.getRequestURI();
-		String request = requestUrl.substring(req.getContextPath().length(), requestUrl.length());
-		
-		
-		if(request.startsWith("/categories")){
-			List<Category> categories = categoriesDao.getCatalog(); 
-		  
-		  req.setAttribute("catalog", categories);
-		  req.getRequestDispatcher("catalog.jsp").forward(req,resp); 
-		 
-		} else if (request.startsWith("/projects")) {
-			int categoryId = Integer.valueOf(req.getParameter("category"));
-			
-			List<Project> projects = projectsDao.getProjects(categoriesDao.getCategory(categoryId));
-
-			req.setAttribute("projects", projects);
-
-			req.getRequestDispatcher("/projects.jsp").forward(req, resp);
-		} else if (request.equals("/project")) {
-			int projectId = Integer.valueOf(req.getParameter("id"));
-
-			Project project = projectsDao.getProject(projectId);
-
-			req.setAttribute("project", project);
-
-			req.getRequestDispatcher("/project.jsp").forward(req, resp);
-		}
-		
+	@RequestMapping(value = "/projects/{id}", method = RequestMethod.GET)
+	public String getProjects(ModelMap model, @PathVariable int id) {
+		List<Project> projects = projectsDao.getProjects(id);
+		model.addAttribute("projects", projects);
+		return "projects";
+	}
+	@RequestMapping(value = "/project/{id}", method = RequestMethod.GET)
+	public String getProject(ModelMap model, @PathVariable int id){
+		Project project = projectsDao.get(id);
+		model.addAttribute("project", project);
+		return "project";
 	}
 
-	
-	 public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-	        System.out.println(req.getParameterMap().toString());
-	    }
-
+	// } else if (request.startsWith("/projects")) {
+	//
+	//
+	// req.setAttribute("projects", projects);
+	//
+	// req.getRequestDispatcher("/projects.jsp").forward(req, resp);
+	// } else if (request.equals("/project")) {
+	// int projectId = Integer.valueOf(req.getParameter("id"));
+	//
+	// Project project = projectsDao.get(projectId);
+	//
+	// req.setAttribute("project", project);
+	//
+	// req.getRequestDispatcher("/project.jsp").forward(req, resp);
+	// }
+	//
+	// }
 
 }

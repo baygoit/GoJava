@@ -16,11 +16,21 @@
 
 	<servlet>
 		<servlet-name>MainServlet</servlet-name>
-		<servlet-class>ua.com.goit.gojava.kickstarter.controller.MainServlet</servlet-class>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextClass</param-name>
+			<param-value>org.springframework.web.context.support.AnnotationConfigWebApplicationContext</param-value>
+		</init-param>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>ua.com.goit.gojava.kickstarter.controller.MainServlet</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>MainServlet</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
+
 
 </web-app>

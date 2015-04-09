@@ -8,8 +8,8 @@
 <title>catalog</title>
 </head>
 <body>
-	<c:forEach items="${catalog}" var="category">
-		<a href="projects?category=${category.id}"><c:out
+	<c:forEach items="${categories}" var="category">
+		<a href="projects/${category.id}"><c:out
 				value="${category.name}" /></a>
 		<p>
 	</c:forEach>

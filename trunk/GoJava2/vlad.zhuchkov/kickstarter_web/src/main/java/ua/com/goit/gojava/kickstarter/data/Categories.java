@@ -7,9 +7,9 @@ import ua.com.goit.gojava.kickstarter.exceptions.IlligalInputException;
 public interface Categories {
 
 
-	List<Project> getProjects(Category category);
+	List<Project> getProjects(int id);
 
-	Project getProject(int i) throws IlligalInputException;
+	Project get(int i) throws IlligalInputException;
 
 	int size();
 
