@@ -155,7 +155,7 @@ public class AlexSimpleTest {
         myTag = tag;
       }
     };
-    builder.onStart(handler);
+    builder.onHeader(handler);
     parser.parse(inputString);
     Tag actualTag = myTag;
     // then

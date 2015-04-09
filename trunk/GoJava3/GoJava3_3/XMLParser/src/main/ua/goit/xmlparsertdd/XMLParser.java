@@ -56,8 +56,8 @@ public class XMLParser implements Parser {
       for (Handler handler : set) {
         handler.handle(machine.getResult());
       }
-    } else if (event == Event.HEADER) {
-      Set<Handler> set = handlers.get(Event.HEADER);
+    } else if (event == Event.START) {
+      Set<Handler> set = handlers.get(Event.START);
       for (Handler handler : set) {
         handler.handle(machine.getResult());
       }
@@ -98,7 +98,7 @@ public class XMLParser implements Parser {
     }
     
     public void onHeader(Handler handler) {
-      registerHandlerOnEvent(handler, Event.HEADER);
+      registerHandlerOnEvent(handler, Event.START);
     }
     
     private void registerHandlerOnEvent(Handler handler, Event event) {

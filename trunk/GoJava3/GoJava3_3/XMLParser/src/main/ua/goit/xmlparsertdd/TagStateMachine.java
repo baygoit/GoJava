@@ -19,6 +19,7 @@ public class TagStateMachine {
     } else if (builder.getType() == TagType.HEADER) {
       parser.sendEventToHandler(Event.START);
     }
+    
   }
 
   public Tag getResult() {
