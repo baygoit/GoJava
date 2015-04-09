@@ -46,21 +46,9 @@ public class XMLParser implements Parser {
   }
 
   public void sendEventToHandler(Event event) {
-    if (event == Event.OPEN_TAG) {
-      Set<Handler> set = handlers.get(Event.OPEN_TAG);
-      for (Handler handler : set) {
-        handler.handle(machine.getResult());
-      }
-    } else if (event == Event.CLOSE_TAG) {
-      Set<Handler> set = handlers.get(Event.CLOSE_TAG);
-      for (Handler handler : set) {
-        handler.handle(machine.getResult());
-      }
-    } else if (event == Event.START) {
-      Set<Handler> set = handlers.get(Event.START);
-      for (Handler handler : set) {
-        handler.handle(machine.getResult());
-      }
+    Set<Handler> set = handlers.get(event);
+    for (Handler handler : set) {
+      handler.handle(machine.getResult());
     }
   }
 
