@@ -4,15 +4,16 @@ package ua.goit.xmlparsertdd;
 import java.util.HashMap;
 import java.util.Map;
 
-public class TagElement {
+public class TagElement implements Element {
   private TagElementType type;
   private String name;
+  private String textValue;
   private Map<String, String> params = new HashMap<String, String>();
 
-  public Element1() {
+  public TagElement() {
   }
 
-  private Element1(TagElementType type, String name, Map<String, String> params) {
+  private TagElement(TagElementType type, String name, Map<String, String> params) {
     this.type = type;
     this.name = name;
     this.params = params;
@@ -47,12 +48,12 @@ public class TagElement {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
 
-    Element1 element1 = (Element1) o;
+    TagElement TagElement = (TagElement) o;
 
-        if (getType() != element1.getType()) return false;
-    if (getName() != null ? !getName().equals(element1.getName()) : element1.getName() != null)
+        if (getType() != TagElement.getType()) return false;
+    if (getName() != null ? !getName().equals(TagElement.getName()) : TagElement.getName() != null)
       return false;
-    return !(getParams() != null ? !getParams().equals(element1.getParams()) : element1.getParams() != null);
+    return !(getParams() != null ? !getParams().equals(TagElement.getParams()) : TagElement.getParams() != null);
 
   }
 
@@ -105,9 +106,22 @@ public class TagElement {
       paramValue = new StringBuilder();
     }
 
-    public Element1 build() {
-      return new Element1(type, name.toString(), params);
+    public TagElement build() {
+      return new TagElement(type, name.toString(), params);
     }
+  }
+
+  @Override
+  public String getValue() {
+    String res;
+    if(type == TagElementType.TEXT_VALUE){
+      res = textValue;
+    }else {
+      res = name;
+    }
+    
+    return res;
+
   }
 
 }
