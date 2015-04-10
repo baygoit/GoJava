@@ -59,11 +59,10 @@ public class TagElement implements Element {
 
     TagElement TagElement = (TagElement) o;
 
-        if (getType() != TagElement.getType()) return false;
+    if (getType() != TagElement.getType()) return false;
     if (getName() != null ? !getName().equals(TagElement.getName()) : TagElement.getName() != null)
       return false;
     return !(getParams() != null ? !getParams().equals(TagElement.getParams()) : TagElement.getParams() != null);
-
   }
 
   @Override
@@ -86,16 +85,8 @@ public class TagElement implements Element {
       return new Builder();
     }
 
-    public TagElementType getType() {
-      return type;
-    }
-
     public void setType(TagElementType type) {
       this.type = type;
-    }
-
-    public String getName() {
-      return name.toString();
     }
 
     public void buildName(char c) {

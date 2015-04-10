@@ -12,7 +12,6 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-
 public class XMLParser implements Parser {
   private TagStateMachine machine = new TagStateMachine();
   private final Map<Event, Set<Handler>> handlers;
