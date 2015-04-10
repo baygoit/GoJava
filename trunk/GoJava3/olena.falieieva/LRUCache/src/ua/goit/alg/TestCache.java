@@ -41,12 +41,21 @@ public class TestCache {
     }	
 
     @Test
-    public void getFourValues_setOneValueWithNotExistedKey_getLatestUsedValue() {
-	cache.get(1);
-	cache.get(2);
-	cache.get(3);
+    public void getValues_setValues_getExistLatestValue_notDeletedFromHead() {
+	cache.set(9, 9);
 	cache.get(0);
-	cache.set(7, 7);
+	cache.set(5, 5);
+	cache.get(3);
+	cache.set(8, 8);
+	Assert.assertEquals(cache.get(4), 4);
+    }
+    @Test
+    public void getValues_setValues_getLastExistLatestValue_deletedFromHead() {
+	cache.set(9, 9);
+	cache.get(2);
+	cache.set(5, 5);
+	cache.get(3);
+	cache.set(8, 8);
 	Assert.assertEquals(cache.get(4), -1);
     }
 }
