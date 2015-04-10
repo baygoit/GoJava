@@ -46,7 +46,6 @@ enum TagState {
       return result;
     }
   },
-
   HEADER_NAME {
     @Override
     public TagState next(char c, TagElement.Builder builder) {
@@ -60,7 +59,6 @@ enum TagState {
       return result;
     }
   },
-
   END_HEADER_NAME {
     @Override
     public TagState next(char c, TagElement.Builder builder) {
@@ -76,7 +74,6 @@ enum TagState {
       return result;
     }
   },
-
   HEADER_PARAM_NAME {
     @Override
     public TagState next(char c, TagElement.Builder builder) {
@@ -92,7 +89,6 @@ enum TagState {
       return result;
     }
   },
-
   END_HEADER_PARAM_NAME {
     @Override
     public TagState next(char c, TagElement.Builder builder) {
@@ -105,7 +101,6 @@ enum TagState {
       return result;
     }
   },
-
   START_HEADER_PARAM_VALUE {
     @Override
     public TagState next(char c, TagElement.Builder builder) {
@@ -120,7 +115,6 @@ enum TagState {
       return result;
     }
   },
-
   HEADER_PARAM_VALUE_SINGLE_QUOTE {
     @Override
     public TagState next(char c, TagElement.Builder builder) {
@@ -134,7 +128,6 @@ enum TagState {
       return result;
     }
   },
-
   HEADER_PARAM_VALUE_DOUBLE_QUOTE {
     @Override
     public TagState next(char c, TagElement.Builder builder) {
@@ -148,7 +141,6 @@ enum TagState {
       return result;
     }
   },
-
   END_HEADER_PARAM_VALUE {
     @Override
     public TagState next(char c, TagElement.Builder builder) {
@@ -164,7 +156,6 @@ enum TagState {
       return result;
     }
   },
-
   END_HEADER {
     @Override
     public TagState next(char c, TagElement.Builder builder) {
@@ -178,7 +169,6 @@ enum TagState {
     }
   },
   TAG_NAME {
-
     @Override
     public TagState next(char c, TagElement.Builder builder) {
       TagState result = INVALID_END;
@@ -196,7 +186,6 @@ enum TagState {
     }
   },
   END_TAG_NAME {
-
     @Override
     public TagState next(char c, TagElement.Builder builder) {
       TagState result = INVALID_END;
@@ -214,7 +203,6 @@ enum TagState {
     }
   },
   PARAM_NAME {
-
     @Override
     public TagState next(char c, TagElement.Builder builder) {
       TagState result = INVALID_END;
@@ -229,7 +217,6 @@ enum TagState {
       return result;
     }
   },
-
   END_PARAM_NAME {
     @Override
     public TagState next(char c, TagElement.Builder builder) {
@@ -242,7 +229,6 @@ enum TagState {
       return result;
     }
   },
-
   START_PARAM_VALUE {
     @Override
     public TagState next(char c, TagElement.Builder builder) {
@@ -257,7 +243,6 @@ enum TagState {
       return result;
     }
   },
-
   PARAM_VALUE_SINGLE_QUOTE {
     @Override
     public TagState next(char c, TagElement.Builder builder) {
@@ -271,7 +256,6 @@ enum TagState {
       return result;
     }
   },
-
   PARAM_VALUE_DOUBLE_QUOTE {
     @Override
     public TagState next(char c, TagElement.Builder builder) {
@@ -285,7 +269,6 @@ enum TagState {
       return result;
     }
   },
-
   END_PARAM_VALUE {
     @Override
     public TagState next(char c, TagElement.Builder builder) {
@@ -304,7 +287,6 @@ enum TagState {
     }
   },
   SINGLE {
-
     @Override
     public TagState next(char c, TagElement.Builder builder) {
       builder.setType(TagElementType.SINGLE);
@@ -324,7 +306,6 @@ enum TagState {
       return VALID_TAG_END;
     }
   },
-
   VALID_TAG_END {
     @Override
     public TagState next(char c, TagElement.Builder builder) {
@@ -337,7 +318,6 @@ enum TagState {
     }
   },
   TEXT_VALUE {
-
     @Override
     public TagState next(char c, TagElement.Builder builder) {
       TagState result = TEXT_VALUE;
@@ -347,7 +327,6 @@ enum TagState {
       return result;
     }
   },
-
   INVALID_END {
     @Override
     public TagState next(char c, TagElement.Builder builder) {
