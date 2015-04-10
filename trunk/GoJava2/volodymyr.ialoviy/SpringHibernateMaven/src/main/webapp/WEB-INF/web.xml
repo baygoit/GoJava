@@ -17,11 +17,6 @@
 	   	</listener-class>
 	</listener>   
 
-	<servlet-mapping>
-		<servlet-name>AppController</servlet-name>
-		<url-pattern>/</url-pattern>
-	</servlet-mapping>
-	
 	<servlet>
     <servlet-name>AppController</servlet-name>
     <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
@@ -29,6 +24,7 @@
         <param-name>contextClass</param-name>
         <param-value>org.springframework.web.context.support.AnnotationConfigWebApplicationContext</param-value>
     </init-param>
+	
     <init-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>ua.com.goit.gojava2.vova.kickstarter.controller.AppController</param-value>
@@ -36,6 +32,11 @@
     <load-on-startup>1</load-on-startup>
 	</servlet>
 	
+	<servlet-mapping>
+		<servlet-name>AppController</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+
 </web-app>
 
  
