@@ -34,7 +34,7 @@ public class SimpleTest {
         myTag.setName(tag.getName());
       }
     };
-    builder.onOpenTag(handler);
+    //builder.onOpenTag(handler);
     parser.parse(inputString);
     String actual = myTag.getName();
     String expected = "name";
@@ -160,5 +160,10 @@ public class SimpleTest {
     Tag actualTag = myTag;
     // then
     assertEquals(expectedTag, actualTag);
+  }
+
+  @Test
+  public void givenValidTagWithTextValue_WhenParseWholeTag_ThenOnTextValueInvoked() {
+
   }
 }

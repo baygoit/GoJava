@@ -175,8 +175,8 @@ enum TagState {
       return result;
     }
   },
-
   TAG_NAME {
+
     @Override
     public TagState next(char c, Tag.Builder builder, TagStateMachine machine) {
       TagState result = INVALID_END;
@@ -185,6 +185,20 @@ enum TagState {
       } else if (CharUtil.isNameChar(c)) {
         result = TagState.TAG_NAME;
         builder.buildName(c);
+      }
+      return result;
+    }
+  },
+  END_TAG_NAME {
+
+    @Override
+    public TagState next(char c, Tag.Builder builder, TagStateMachine machine) {
+      TagState result = INVALID_END;
+      if (CharUtil.isNameStartChar(c)) {
+        result = TagState.HEADER_PARAM_NAME;
+        builder.buildParamName(c);
+      } else if (CharUtil.isEmptyChar(c)) {
+        result = TagState.END_HEADER_NAME;
       }
       return result;
     }
