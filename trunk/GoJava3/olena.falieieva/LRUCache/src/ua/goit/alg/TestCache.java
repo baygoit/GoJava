@@ -16,24 +16,29 @@ public class TestCache {
 	cache.set(3, 3);
 	cache.set(4, 4);
     }
+    
     @Test	
     public void getExistValue() {
 	Assert.assertEquals(cache.get(2), 2);
     }
+    
     @Test	
     public void getNotExistValue() {
 	Assert.assertEquals(cache.get(6), -1);
     }
+    
     @Test
     public void setValue_returnValue() {
 	cache.set(5, 5);
 	Assert.assertEquals(cache.get(5), 5);
     }
+    
     @Test
     public void setLatestUsedValue_returnNotExistLatestValue_deletedFromHead() {
 	cache.set(5, 5);
 	Assert.assertEquals(cache.get(0), -1);
     }
+    
     @Test
     public void setValueWithExistedKey_getValueWithExistedKey() {
 	cache.set(3, 100500);
@@ -49,6 +54,7 @@ public class TestCache {
 	cache.set(8, 8);
 	Assert.assertEquals(cache.get(4), 4);
     }
+    
     @Test
     public void getValues_setValues_getLastExistLatestValue_deletedFromHead() {
 	cache.set(9, 9);
