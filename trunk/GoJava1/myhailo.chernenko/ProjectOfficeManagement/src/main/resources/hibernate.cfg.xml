@@ -4,10 +4,18 @@
 
 <hibernate-configuration>
    <session-factory>
-   <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
-   <property name="hibernate.connection.datasource">java:/comp/env/jdbc/POMDataBase</property>
-      
-   <mapping resource="/hibernatemapping/BankAccount.hbm.xml"/>
-   
-</session-factory>
+	   <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+	   <property name="hibernate.connection.datasource">java:/comp/env/jdbc/POMDataBase</property>
+	      
+	   <mapping class="ua.com.goit.gojava.POM.dataModel.cash.BankAccount"/>
+	   <mapping class="ua.com.goit.gojava.POM.dataModel.cash.CashMovementEntry"/>
+	   <mapping class="ua.com.goit.gojava.POM.dataModel.common.ExchangeRate"/>
+	   <mapping class="ua.com.goit.gojava.POM.dataModel.common.Money"/>
+	   <mapping class="ua.com.goit.gojava.POM.dataModel.documents.PaymentDocument"/>
+	   <mapping class="ua.com.goit.gojava.POM.dataModel.documents.PaymentDocumentDetail"/>
+	   <mapping class="ua.com.goit.gojava.POM.dataModel.profitcost.CostItem"/>
+	   <mapping class="ua.com.goit.gojava.POM.dataModel.profitcost.Project"/>
+	   <mapping class="ua.com.goit.gojava.POM.dataModel.profitcost.ProjectFinResultEntry"/>
+	   <mapping class="ua.com.goit.gojava.POM.dataModel.profitcost.ProjectStage"/>
+	</session-factory>
 </hibernate-configuration>

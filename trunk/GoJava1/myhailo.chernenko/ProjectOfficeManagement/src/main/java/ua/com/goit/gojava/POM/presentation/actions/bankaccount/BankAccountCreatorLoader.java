@@ -12,9 +12,9 @@ import org.springframework.beans.factory.annotation.Configurable;
 
 import com.opensymphony.xwork2.ActionSupport;
 
-import ua.com.goit.gojava.POM.dataModel.POMDataModelException;
 import ua.com.goit.gojava.POM.dataModel.cash.BankAccount;
 import ua.com.goit.gojava.POM.services.BankAccountService;
+import ua.com.goit.gojava.POM.services.POMServicesException;
 
 @Configurable(autowire=Autowire.BY_TYPE)
 public class BankAccountCreatorLoader extends ActionSupport {
@@ -40,7 +40,7 @@ public class BankAccountCreatorLoader extends ActionSupport {
 				bankAccount.setBankName(bankAccountForCopy.getBankName());
 				bankAccount.setCurrency(bankAccountForCopy.getCurrency());
 				
-			} catch(POMDataModelException e) {
+			} catch(POMServicesException e) {
 				
 				LOG.error("Can not copy Bank Account: "+e.getMessage(),e);
 				addActionError("Can not copy Bank Account!");

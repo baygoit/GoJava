@@ -1,11 +1,25 @@
 package ua.com.goit.gojava.POM.dataModel.profitcost;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "cost_items")
 public class CostItem {
 	
+	@Id 
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long id = 0;
+	
+	@Column
 	private String name = "";
+	
+	@Column
+	@Enumerated(EnumType.STRING)
 	private ProfitLostsType type = ProfitLostsType.LOSTS;
-	private CostItem parent;
+	
+	@ManyToOne(cascade={CascadeType.ALL})
+    @JoinColumn(name="parent")
+    private CostItem parent;
 	
 	public long getId() {
 		

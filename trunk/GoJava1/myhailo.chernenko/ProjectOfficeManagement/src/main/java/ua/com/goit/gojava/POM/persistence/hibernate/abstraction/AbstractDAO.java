@@ -5,20 +5,17 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
-import org.hibernate.ScrollMode;
 import org.hibernate.Session;
 import org.hibernate.criterion.Projections;
 
-import ua.com.goit.gojava.POM.dataModel.POMDataModelException;
+import ua.com.goit.gojava.POM.persistence.POMPersistenceException;
 import ua.com.goit.gojava.POM.persistence.hibernate.HibernateUtil;
 import ua.com.goit.gojava.POM.services.Paginator;
 
 public abstract class AbstractDAO<T> {
 	
-	
 	private Class<T> classT; 
 	protected abstract String getClassName(); 
-	protected abstract String getClassTable(); 
 	protected abstract Logger getLog();
 	protected abstract T getNewObject();
 	
@@ -37,7 +34,7 @@ public abstract class AbstractDAO<T> {
         }
 	}
 
-	public T create() throws POMDataModelException {
+	public T create() throws POMPersistenceException {
 
 		T newObject = null;
 		
@@ -51,7 +48,7 @@ public abstract class AbstractDAO<T> {
             
 		} catch (HibernateException | NullPointerException e) {
 			getLog().error("Could not create new "+getClassName()+": "+e.getMessage(), e);
-			throw new POMDataModelException("Could not create new "+getClassName()+": "+e.getMessage() , e);
+			throw new POMPersistenceException("Could not create new "+getClassName()+": "+e.getMessage() , e);
 		} finally {
 			closeSession(session);
  		}
@@ -60,7 +57,7 @@ public abstract class AbstractDAO<T> {
 	
 	}
 	
-	public T create(T newObject) throws POMDataModelException {
+	public T create(T newObject) throws POMPersistenceException {
 
 		Session session = getSession();
 		
@@ -72,7 +69,7 @@ public abstract class AbstractDAO<T> {
             
 		} catch (HibernateException | NullPointerException e) {
 			getLog().error("Could not create new "+getClassName()+": "+e.getMessage(), e);
-			throw new POMDataModelException("Could not create new "+getClassName()+": "+e.getMessage() , e);
+			throw new POMPersistenceException("Could not create new "+getClassName()+": "+e.getMessage() , e);
 		} finally {
 			closeSession(session);
  		}
@@ -80,7 +77,7 @@ public abstract class AbstractDAO<T> {
 		return newObject;	
 	}
 	
-	public List<T> retrieveAll() throws POMDataModelException {
+	public List<T> retrieveAll() throws POMPersistenceException {
 
 		Session session = getSession();
 		
@@ -92,14 +89,14 @@ public abstract class AbstractDAO<T> {
 			
 		} catch (HibernateException e) {
 			getLog().error("Could not retrieve all "+getClassName()+"s: "+e.getMessage(), e);
-			throw new POMDataModelException("Could not retrieve all "+getClassName()+"s: "+e.getMessage(), e);
+			throw new POMPersistenceException("Could not retrieve all "+getClassName()+"s: "+e.getMessage(), e);
 		} finally {
 			closeSession(session);
 	 	}		
 		
 	}
 	
-	public List<T> retrieveAll(Paginator paginator) throws POMDataModelException {
+	public List<T> retrieveAll(Paginator paginator) throws POMPersistenceException {
 
 		Session session = getSession();
 		
@@ -119,14 +116,14 @@ public abstract class AbstractDAO<T> {
 			
 		} catch (HibernateException e) {
 			getLog().error("Could not retrieve all "+getClassName()+"s: "+e.getMessage(), e);
-			throw new POMDataModelException("Could not retrieve all "+getClassName()+"s: "+e.getMessage(), e);
+			throw new POMPersistenceException("Could not retrieve all "+getClassName()+"s: "+e.getMessage(), e);
 		} finally {
 			closeSession(session);
 	 	}		
 		
 	}
 	
-	public T retrieveById(Long id) throws POMDataModelException {
+	public T retrieveById(Long id) throws POMPersistenceException {
 
 		Session session = getSession();  
 		try {
@@ -137,13 +134,13 @@ public abstract class AbstractDAO<T> {
 			
 		} catch (HibernateException e) {
 			getLog().error("Could not retrieve "+getClassName()+" by ID: "+e.getMessage(), e);
-			throw new POMDataModelException("Could not retrieve "+getClassName()+" by ID: "+e.getMessage() , e);
+			throw new POMPersistenceException("Could not retrieve "+getClassName()+" by ID: "+e.getMessage() , e);
 		} finally {
 			closeSession(session);
 	    }
 	}
 
-	public void update(T tObject) throws POMDataModelException {
+	public void update(T tObject) throws POMPersistenceException {
 
 		Session session = getSession();
 		try {
@@ -154,13 +151,13 @@ public abstract class AbstractDAO<T> {
             
         } catch (HibernateException | NullPointerException e) {
 			getLog().error("Could not update "+getClassName()+": "+e.getMessage(), e);
-			throw new POMDataModelException("Could not update "+getClassName()+": "+e.getMessage(), e);
+			throw new POMPersistenceException("Could not update "+getClassName()+": "+e.getMessage(), e);
 		} finally {
 			closeSession(session);
 	    }
 	}
 	
-	public void delete(T tObject) throws POMDataModelException {
+	public void delete(T tObject) throws POMPersistenceException {
 
 		Session session = getSession();
 		try {
@@ -171,7 +168,7 @@ public abstract class AbstractDAO<T> {
             
         } catch (HibernateException | NullPointerException e) {
 			getLog().error("Could not delete "+getClassName()+": "+e.getMessage(), e);
-			throw new POMDataModelException("Could not delete "+getClassName()+": "+e.getMessage(), e);
+			throw new POMPersistenceException("Could not delete "+getClassName()+": "+e.getMessage(), e);
 		} finally {
 			closeSession(session);
 	    }

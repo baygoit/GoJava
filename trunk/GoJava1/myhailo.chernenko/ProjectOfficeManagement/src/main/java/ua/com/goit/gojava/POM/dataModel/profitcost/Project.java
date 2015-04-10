@@ -1,12 +1,36 @@
 package ua.com.goit.gojava.POM.dataModel.profitcost;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "projects")
 public class Project {
 	
+	@Id 
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long id = 0;
+	
+	@Column
 	private String name = "";
+	
+	@Column
 	private String description = "";
+	
+	@Column
+	@Enumerated(EnumType.STRING)
 	private ProjectType type = ProjectType.OUTER;
+	
+	@Column
 	private boolean active = true;
+	
+	@Column
 	private String pm = "";
 	
 	public long getId() {

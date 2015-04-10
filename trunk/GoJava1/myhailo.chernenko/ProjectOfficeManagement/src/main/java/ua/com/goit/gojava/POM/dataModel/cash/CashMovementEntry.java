@@ -3,16 +3,46 @@ package ua.com.goit.gojava.POM.dataModel.cash;
 import java.util.Currency;
 import java.util.Date;
 
+import javax.persistence.*;
+
+import org.hibernate.annotations.Any;
+import org.hibernate.annotations.AnyMetaDef;
+import org.hibernate.annotations.MetaValue;
+
 import ua.com.goit.gojava.POM.dataModel.common.FinancialDocument;
 import ua.com.goit.gojava.POM.dataModel.common.Money;
+import ua.com.goit.gojava.POM.dataModel.documents.PaymentDocument;
 
+@Entity
+@Table(name = "cash_movement")
 public class CashMovementEntry {
 
+	@Id 
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long id;
-	private Date date;
+	
+	@Column
+	@Temporal(TemporalType.TIMESTAMP)
+    private Date date;
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "bank_account_id")
 	private BankAccount bankAccount;
-	private Money sum;
-	private FinancialDocument doc;
+	
+	@Embedded
+	@AttributeOverrides( {
+	        @AttributeOverride(name="value", column = @Column(name="sum") ),
+	        @AttributeOverride(name="currency", column = @Column(name="currency") )
+	    })
+    private Money sum;
+	
+	@Any(metaColumn = @Column(name = "doc_type"))
+    @AnyMetaDef(idType = "long", metaType = "string", 
+            metaValues = { 
+            @MetaValue(targetEntity = PaymentDocument.class, value = "PaymentDocument"),
+       })
+	@JoinColumn(name="doc_id")
+    private FinancialDocument doc;
 	
 	public long getId() {
 		

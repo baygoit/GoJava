@@ -3,14 +3,38 @@ package ua.com.goit.gojava.POM.dataModel.common;
 import java.util.Currency;
 import java.util.Date;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+@Entity
+@Table(name = "exchange_rates")
 public class ExchangeRate {
 	
-	private Date date;
-	private Currency fromCurrency;
-	private Currency toCurrency;
-	private long multiplicity;
-	private long rate;
+	@Id 
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long id;
+	
+	@Column
+	@Temporal(TemporalType.TIMESTAMP)
+    private Date date;
+	
+	@Column(name = "from_currency")
+	private Currency fromCurrency;
+	
+	@Column(name = "to_currency")
+	private Currency toCurrency;
+	
+	@Column
+	private long multiplicity;
+	
+	@Column
+	private long rate;
 	
 	public Date getDate() {
 		return date;

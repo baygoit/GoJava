@@ -2,16 +2,20 @@ package ua.com.goit.gojava.POM.services;
 
 import java.util.List;
 
-import ua.com.goit.gojava.POM.dataModel.POMDataModelException;
+import org.apache.log4j.Logger;
+
 import ua.com.goit.gojava.POM.dataModel.cash.CashMovementEntry;
 import ua.com.goit.gojava.POM.dataModel.documents.PaymentDocument;
 import ua.com.goit.gojava.POM.dataModel.documents.PaymentDocumentDetail;
 import ua.com.goit.gojava.POM.dataModel.profitcost.ProjectFinResultEntry;
-import ua.com.goit.gojava.POM.persistence.postgresDB.PaymentDocumentDAO;
-import ua.com.goit.gojava.POM.persistence.postgresDB.PaymentDocumentDetailDAO;
+import ua.com.goit.gojava.POM.persistence.POMPersistenceException;
+import ua.com.goit.gojava.POM.persistence.hibernate.PaymentDocumentDAO;
+import ua.com.goit.gojava.POM.persistence.hibernate.PaymentDocumentDetailDAO;
 
 public class PaymentDocumentService {
 
+	private static final String CLASS_NAME = "Exchange Rate"; 
+	private static final Logger LOG = Logger.getLogger(ExchangeRateService.class);
 	private PaymentDocumentDAO paymentDocumentDAO;
 	private PaymentDocumentDetailDAO paymentDocumentDetailDAO;
 	private CashMovementService cashMovementService;
@@ -43,122 +47,184 @@ public class PaymentDocumentService {
 		this.projectFinResultEntryService = projectFinResultEntryService;
 	}
 	
-	public List<PaymentDocument> retrieveAll() throws POMDataModelException {
-		return paymentDocumentDAO.retrieveAll();	
-	}
-	public PaymentDocument retrieveDocById(long id) throws POMDataModelException {	
+	public List<PaymentDocument> retrieveAll() throws POMServicesException {
 		
-		PaymentDocument answer = paymentDocumentDAO.retrieveById(id);
-		answer.setPaymentDocumentDetails(paymentDocumentDetailDAO.retrieveAllByDocId(id));
-		
-		return answer;	
-	}
-	public void createDoc(PaymentDocument newDoc) throws POMDataModelException {
-		
-		paymentDocumentDAO.create(newDoc);
-		for(PaymentDocumentDetail detail:newDoc.getPaymentDocumentDetails()){
-			paymentDocumentDetailDAO.create(detail);
+		try {
+			return paymentDocumentDAO.retrieveAll();
+		} catch (POMPersistenceException e) {
+			LOG.error("Could not retrieve all "+CLASS_NAME+"s: "+e.getMessage(), e);
+			throw new POMServicesException("Could not retrieve all "+CLASS_NAME+"s",e);
 		}
 		
 	}
-	public void updateDoc(PaymentDocument doc) throws POMDataModelException {
+	public PaymentDocument retrieveDocById(long id) throws POMServicesException {	
 		
-		paymentDocumentDAO.update(doc);	
-		for(PaymentDocumentDetail detail:doc.getPaymentDocumentDetails()){
-			
-			if(detail.isMarkedForDelete()){
-				paymentDocumentDetailDAO.delete(detail);
-			} else {
-				paymentDocumentDetailDAO.update(detail);
+		try {
+			return paymentDocumentDAO.retrieveById(id);
+		} catch (POMPersistenceException e) {
+			LOG.error("Could not retrieve "+CLASS_NAME+" by ID: "+e.getMessage(), e);
+			throw new POMServicesException("Could not retrieve "+CLASS_NAME+" by ID",e);
+		}
+	}
+	public void createDoc(PaymentDocument newDoc) throws POMServicesException {
+		
+		try {
+			paymentDocumentDAO.create(newDoc);
+			for(PaymentDocumentDetail detail:newDoc.getPaymentDocumentDetails()){
+				paymentDocumentDetailDAO.create(detail);
 			}
+		} catch (POMPersistenceException e) {
+			LOG.error("Could not create "+CLASS_NAME+": "+e.getMessage(), e);
+			throw new POMServicesException("Could not create "+CLASS_NAME+"",e);
 		}
 		
 	}
-	public void deleteDoc(PaymentDocument doc) throws POMDataModelException {
+	public void updateDoc(PaymentDocument doc) throws POMServicesException {
 		
-		for(PaymentDocumentDetail docDetail: retrieveAllDetails(doc)){
-			paymentDocumentDetailDAO.delete(docDetail);
-		}
-		paymentDocumentDAO.delete(doc);	
-		
-	}
-	
-	public List<PaymentDocumentDetail> retrieveAllDetails(PaymentDocument doc) throws POMDataModelException {	
-		return paymentDocumentDetailDAO.retrieveAllByDocId(doc.getId());	
-	}
-	public PaymentDocumentDetail retrieveDocDetailById(long id) throws POMDataModelException {	
-		return paymentDocumentDetailDAO.retrieveById(id);	
-	}
-	public void createDocDetail(PaymentDocumentDetail newDocDetail) throws POMDataModelException {
-		
-		if(newDocDetail.getDoc().getId() == 0) {
-			
-			paymentDocumentDAO.create(newDocDetail.getDoc());
-			paymentDocumentDetailDAO.create(newDocDetail);
-			
-		} else {
-			
-			updateDoc(newDocDetail.getDoc());
-			paymentDocumentDetailDAO.create(newDocDetail);
-			
-		}
-		
-	}
-	public void updateDocDetail(PaymentDocumentDetail docDetail) throws POMDataModelException {
-		
-		updateDoc(docDetail.getDoc());
-		paymentDocumentDetailDAO.update(docDetail);
-		
-	}
-	public void deleteDocDetail(PaymentDocumentDetail docDetail) throws POMDataModelException {
-		
-		paymentDocumentDetailDAO.delete(docDetail);
-		
-	}
-	
-	public void generateTransactions(PaymentDocument doc) throws POMDataModelException {
-		
-		deleteTransactions(doc);
-		
-		if((doc != null) && (doc.getBankAccount() != null)) {
-			
-			CashMovementEntry newEntry = new CashMovementEntry();
-			newEntry.setDate(doc.getDate());
-			newEntry.setBankAccount(doc.getBankAccount());
-			newEntry.setSum(doc.getDocSum());
-			newEntry.setDoc(doc);
-			
-			cashMovementService.create(newEntry);
-			
-		}
-		
-		if( doc != null ) {
-			
-			for(PaymentDocumentDetail docDetail: retrieveAllDetails(doc)) {
-			
-				ProjectFinResultEntry newEntry = new ProjectFinResultEntry();
+		try {
+			paymentDocumentDAO.update(doc);	
+			for(PaymentDocumentDetail detail:doc.getPaymentDocumentDetails()){
 				
+				if(detail.isMarkedForDelete()){
+					paymentDocumentDetailDAO.delete(detail);
+				} else {
+					paymentDocumentDetailDAO.update(detail);
+				}
+			}
+		} catch (POMPersistenceException e) {
+			LOG.error("Could not update "+CLASS_NAME+": "+e.getMessage(), e);
+			throw new POMServicesException("Could not update "+CLASS_NAME+"",e);
+		}
+		
+	}
+	public void deleteDoc(PaymentDocument doc) throws POMServicesException {
+		
+		try {
+			for(PaymentDocumentDetail docDetail: retrieveAllDetails(doc)){
+				paymentDocumentDetailDAO.delete(docDetail);
+			}
+			paymentDocumentDAO.delete(doc);	
+		} catch (POMPersistenceException e) {
+			LOG.error("Could not delete "+CLASS_NAME+": "+e.getMessage(), e);
+			throw new POMServicesException("Could not delete "+CLASS_NAME+"",e);
+		}
+		
+	}
+	
+	public List<PaymentDocumentDetail> retrieveAllDetails(PaymentDocument doc) throws POMServicesException {	
+		try {
+			return paymentDocumentDetailDAO.retrieveAllByDoc(doc);
+		} catch (POMPersistenceException e) {
+			LOG.error("Could not retrieve all Details for Doc: "+e.getMessage(), e);
+			throw new POMServicesException("Could not retrieve all Details for Doc",e);
+		}
+	}
+	public PaymentDocumentDetail retrieveDocDetailById(long id) throws POMServicesException {	
+		try {
+			return paymentDocumentDetailDAO.retrieveById(id);
+		} catch (POMPersistenceException e) {
+			LOG.error("Could not retrieve Detail for Doc: "+e.getMessage(), e);
+			throw new POMServicesException("Could not retrieve Detail for Doc",e);
+		}
+	}
+	public void createDocDetail(PaymentDocumentDetail newDocDetail) throws POMServicesException {
+		
+		try {
+			if(newDocDetail.getDoc().getId() == 0) {
+			
+				paymentDocumentDAO.create(newDocDetail.getDoc());
+				paymentDocumentDetailDAO.create(newDocDetail);
+				
+			} else {
+				
+				updateDoc(newDocDetail.getDoc());
+				paymentDocumentDetailDAO.create(newDocDetail);
+				
+			}
+			
+		} catch (POMPersistenceException e) {
+			LOG.error("Could not create doc detail: "+e.getMessage(), e);
+			throw new POMServicesException("Could not create doc detail",e);
+		}
+		
+	}
+	public void updateDocDetail(PaymentDocumentDetail docDetail) throws POMServicesException {
+		
+		try {
+			updateDoc(docDetail.getDoc());
+			paymentDocumentDetailDAO.update(docDetail);
+		} catch (POMPersistenceException e) {
+			LOG.error("Could not update doc detail: "+e.getMessage(), e);
+			throw new POMServicesException("Could not update doc detail",e);
+		}
+		
+	}
+	public void deleteDocDetail(PaymentDocumentDetail docDetail) throws POMServicesException {
+		
+		try {
+			paymentDocumentDetailDAO.delete(docDetail);
+		} catch (POMPersistenceException e) {
+			LOG.error("Could not delete doc detail: "+e.getMessage(), e);
+			throw new POMServicesException("Could not delete doc detail",e);
+		}
+		
+	}
+	
+	public void generateTransactions(PaymentDocument doc) throws POMServicesException {
+		
+		try {
+			deleteTransactions(doc);
+		
+			if((doc != null) && (doc.getBankAccount() != null)) {
+				
+				CashMovementEntry newEntry = new CashMovementEntry();
 				newEntry.setDate(doc.getDate());
-				newEntry.setCostItem(docDetail.getCostItem());
-				newEntry.setProject(docDetail.getProject());
-				newEntry.setProjectStage(docDetail.getProjectStage());
-				newEntry.setSum(docDetail.getSum());
+				newEntry.setBankAccount(doc.getBankAccount());
+				newEntry.setSum(doc.getDocSum());
 				newEntry.setDoc(doc);
 				
-				projectFinResultEntryService.create(newEntry);
+				cashMovementService.create(newEntry);
 				
 			}
 			
+			if( doc != null ) {
+				
+				for(PaymentDocumentDetail docDetail: retrieveAllDetails(doc)) {
+				
+					ProjectFinResultEntry newEntry = new ProjectFinResultEntry();
+					
+					newEntry.setDate(doc.getDate());
+					newEntry.setCostItem(docDetail.getCostItem());
+					newEntry.setProject(docDetail.getProject());
+					newEntry.setProjectStage(docDetail.getProjectStage());
+					newEntry.setSum(docDetail.getSum());
+					newEntry.setDoc(doc);
+					
+					projectFinResultEntryService.create(newEntry);
+					
+				}
+				
+			}
+			
+		} catch (POMServicesException e) {
+			LOG.error("Could not generate Transactions: "+e.getMessage(), e);
+			throw new POMServicesException("Could not  generate Transactions",e);
 		}
 		
 	}	
-	public void deleteTransactions(PaymentDocument doc) throws POMDataModelException {
+	public void deleteTransactions(PaymentDocument doc) throws POMServicesException {
 	
-		cashMovementService.deleteAllByDoc(doc);
-		projectFinResultEntryService.deleteAllByDoc(doc);
+		try {
+			
+			cashMovementService.deleteAllByDoc(doc);
+			projectFinResultEntryService.deleteAllByDoc(doc);
 		
+		} catch (POMServicesException e) {
+			
+			LOG.error("Could not delete Transactions: "+e.getMessage(), e);
+			throw new POMServicesException("Could not  delete Transactions",e);
+			
+		}
 	}
 
-	
-	
 }

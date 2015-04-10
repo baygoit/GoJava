@@ -3,14 +3,18 @@ package ua.com.goit.gojava.POM.presentation.actions.bankaccount;
 import java.util.Currency;
 
 import javax.inject.Inject;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowire;
 import org.springframework.beans.factory.annotation.Configurable;
+
 import com.opensymphony.xwork2.ActionSupport;
 
 import ua.com.goit.gojava.POM.dataModel.POMDataModelException;
 import ua.com.goit.gojava.POM.dataModel.cash.BankAccount;
+import ua.com.goit.gojava.POM.persistence.POMPersistenceException;
 import ua.com.goit.gojava.POM.services.BankAccountService;
+import ua.com.goit.gojava.POM.services.POMServicesException;
 
 @Configurable(autowire=Autowire.BY_TYPE)
 public class BankAccountSaver extends ActionSupport {
@@ -41,7 +45,7 @@ public class BankAccountSaver extends ActionSupport {
 	
 	}
 	
-	private void saveObject() throws POMDataModelException {
+	private void saveObject() throws POMDataModelException, POMPersistenceException, POMServicesException {
 
 		BankAccount bankAccount;
 		if(id == 0) {

@@ -10,10 +10,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 
-import ua.com.goit.gojava.POM.dataModel.POMDataModelException;
 import ua.com.goit.gojava.POM.dataModel.profitcost.Project;
 import ua.com.goit.gojava.POM.dataModel.profitcost.ProjectType;
 import ua.com.goit.gojava.POM.services.ApplicationContextProvider;
+import ua.com.goit.gojava.POM.services.POMServicesException;
 import ua.com.goit.gojava.POM.services.ProjectService;
 
 @WebServlet(urlPatterns = {"/ProjectWebController"})
@@ -68,7 +68,7 @@ public class WebControllerProject extends HttpServlet {
 			Project project = projectService.retrieveById(id);
 			req.getSession(false).setAttribute("currentProjectForEdit", project);
 			
-		} catch (POMDataModelException | NumberFormatException e) {
+		} catch (NumberFormatException | POMServicesException e) {
 
 			LOG.error("Can not load "+CLASS_NAME+" for edit: "+e.getMessage(),e);
 			req.getSession(false).setAttribute("errorMessage", "Can not load "+CLASS_NAME+" for edit: "+e.getMessage());
@@ -86,7 +86,7 @@ public class WebControllerProject extends HttpServlet {
 
 			projectService.delete(projectService.retrieveById(id));
 			
-		} catch (POMDataModelException | NumberFormatException e) {
+		} catch (NumberFormatException | POMServicesException e) {
 
 			LOG.error("Can not delete "+CLASS_NAME+": "+e.getMessage(),e);
 			req.getSession(false).setAttribute("errorMessage", "Can not delete "+CLASS_NAME+": "+e.getMessage());
@@ -128,7 +128,7 @@ public class WebControllerProject extends HttpServlet {
 			
 			projectService.create(project);
 			
-		} catch (POMDataModelException e) {
+		} catch (POMServicesException e) {
 
 			LOG.error("Can not save new "+CLASS_NAME+": "+e.getMessage(),e);
 			req.getSession(false).setAttribute("errorMessage", "Can not save new "+CLASS_NAME+": "+e.getMessage());
@@ -159,7 +159,7 @@ public class WebControllerProject extends HttpServlet {
 			
 			projectService.update(project);
 			
-		} catch (POMDataModelException | NumberFormatException e)   {
+		} catch (NumberFormatException | POMServicesException e)   {
 
 			LOG.error("Could not update "+CLASS_NAME+": "+e.getMessage(),e);
 			req.getSession(false).setAttribute("errorMessage", "Could not update "+CLASS_NAME+": "+e.getMessage());

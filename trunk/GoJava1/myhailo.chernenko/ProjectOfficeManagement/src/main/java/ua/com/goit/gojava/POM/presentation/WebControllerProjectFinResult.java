@@ -22,6 +22,7 @@ import ua.com.goit.gojava.POM.dataModel.profitcost.ProjectFinResultEntry;
 import ua.com.goit.gojava.POM.dataModel.profitcost.ProjectStage;
 import ua.com.goit.gojava.POM.services.ApplicationContextProvider;
 import ua.com.goit.gojava.POM.services.CostItemService;
+import ua.com.goit.gojava.POM.services.POMServicesException;
 import ua.com.goit.gojava.POM.services.ProjectFinResultEntryService;
 import ua.com.goit.gojava.POM.services.ProjectService;
 import ua.com.goit.gojava.POM.services.ProjectStageService;
@@ -74,7 +75,7 @@ public class WebControllerProjectFinResult extends HttpServlet {
 			ProjectFinResultEntry projectFinResultEntry = projectFinResultEntryService.retrieveById(id);
 			req.getSession(false).setAttribute("currentEntryForEdit", projectFinResultEntry);
 			
-		} catch (POMDataModelException | NumberFormatException e) {
+		} catch (POMServicesException | NumberFormatException e) {
 
 			LOG.error("Can not load "+CLASS_NAME+" for edit: "+e.getMessage(),e);
 			req.getSession(false).setAttribute("errorMessage", "Can not load "+CLASS_NAME+" for edit: "+e.getMessage());
@@ -92,7 +93,7 @@ public class WebControllerProjectFinResult extends HttpServlet {
 
 			projectFinResultEntryService.delete(projectFinResultEntryService.retrieveById(id));
 			
-		} catch (POMDataModelException | NumberFormatException e) {
+		} catch (POMServicesException | NumberFormatException e) {
 
 			LOG.error("Can not delete "+CLASS_NAME+": "+e.getMessage(),e);
 			req.getSession(false).setAttribute("errorMessage", "Can not delete "+CLASS_NAME+": "+e.getMessage());
@@ -142,7 +143,7 @@ public class WebControllerProjectFinResult extends HttpServlet {
 			Money sum = new Money(Double.parseDouble(sumString),currency);
 			newEntry.setSum(sum) ;		
 			
-		} catch (ParseException | IllegalArgumentException | POMDataModelException e)   {
+		} catch (ParseException | IllegalArgumentException | POMDataModelException | POMServicesException e)   {
 
 			LOG.error("Could not create new "+CLASS_NAME+": "+e.getMessage(),e);
 			req.getSession(false).setAttribute("errorMessage", "Could not create new "+CLASS_NAME+": "+e.getMessage());
@@ -155,7 +156,7 @@ public class WebControllerProjectFinResult extends HttpServlet {
 			
 			projectFinResultEntryService.create(newEntry);
 			
-		} catch (POMDataModelException e) {
+		} catch (POMServicesException e) {
 
 			LOG.error("Can not save new "+CLASS_NAME+": "+e.getMessage(),e);
 			req.getSession(false).setAttribute("errorMessage", "Can not save new "+CLASS_NAME+": "+e.getMessage());
@@ -207,7 +208,7 @@ public class WebControllerProjectFinResult extends HttpServlet {
 			ProjectFinResultEntryService projectFinResultEntryService = ApplicationContextProvider.getApplicationContext().getBean(ProjectFinResultEntryService.class);
 			projectFinResultEntryService.update(projectFinResultEntry);
 			
-		} catch (POMDataModelException | ParseException | NumberFormatException e)   {
+		} catch (POMDataModelException | ParseException | NumberFormatException | POMServicesException e)   {
 
 			LOG.error("Could not update "+CLASS_NAME+": "+e.getMessage(),e);
 			req.getSession(false).setAttribute("errorMessage", "Could not update "+CLASS_NAME+": "+e.getMessage());

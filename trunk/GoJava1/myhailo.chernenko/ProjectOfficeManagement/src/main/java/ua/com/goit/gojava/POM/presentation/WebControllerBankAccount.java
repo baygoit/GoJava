@@ -16,9 +16,9 @@ import org.springframework.beans.factory.annotation.Autowire;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
-import ua.com.goit.gojava.POM.dataModel.POMDataModelException;
 import ua.com.goit.gojava.POM.dataModel.cash.BankAccount;
 import ua.com.goit.gojava.POM.services.BankAccountService;
+import ua.com.goit.gojava.POM.services.POMServicesException;
 
 @Configurable(autowire=Autowire.BY_TYPE)
 @WebServlet(urlPatterns = {"/BankAccountWebController"})
@@ -95,7 +95,7 @@ public class WebControllerBankAccount extends HttpServlet {
 			long id = Long.parseLong(req.getParameter("OpenCashMovement"));
 			try {
 				bankAccount = bankAccountService.retrieveById(id);
-			} catch (POMDataModelException e) {
+			} catch (POMServicesException e) {
 				LOG.error("Can not retrieve Bank Account for filter: "+e.getMessage(),e);
 				req.getSession(false).setAttribute("errorMessage", "Can not retrieve Bank Account for filter: "+e.getMessage());
 				return;	
@@ -114,7 +114,7 @@ public class WebControllerBankAccount extends HttpServlet {
 			BankAccount bankAccount = bankAccountService.retrieveById(id);
 			req.getSession(false).setAttribute("currentAccountForEdit", bankAccount);
 			
-		} catch (POMDataModelException | NumberFormatException e) {
+		} catch (NumberFormatException| POMServicesException e) {
 
 			LOG.error("Can not load Bank Account for edit: "+e.getMessage(),e);
 			req.getSession(false).setAttribute("errorMessage", "Can not load Bank Account for edit: "+e.getMessage());
@@ -132,7 +132,7 @@ public class WebControllerBankAccount extends HttpServlet {
 
 			bankAccountService.delete(bankAccountService.retrieveById(id));
 			
-		} catch (POMDataModelException | NumberFormatException e) {
+		} catch (NumberFormatException | POMServicesException e) {
 
 			LOG.error("Can not delete Bank Account: "+e.getMessage(),e);
 			req.getSession(false).setAttribute("errorMessage", "Can not delete Bank Account: "+e.getMessage());
@@ -171,7 +171,7 @@ public class WebControllerBankAccount extends HttpServlet {
 			
 			bankAccountService.create(bankAccount);
 			
-		} catch (POMDataModelException e) {
+		} catch (POMServicesException e) {
 
 			LOG.error("Can not save new Bank Account: "+e.getMessage(),e);
 			req.getSession(false).setAttribute("errorMessage", "Can not save new Bank Account: "+e.getMessage());
@@ -199,7 +199,7 @@ public class WebControllerBankAccount extends HttpServlet {
 			//BankAccountService bankAccountService = ApplicationContextProvider.getApplicationContext().getBean(BankAccountService.class);
 			bankAccountService.update(bankAccount);
 			
-		} catch (POMDataModelException | NumberFormatException e)   {
+		} catch (NumberFormatException | POMServicesException e)   {
 
 			LOG.error("Could not update Bank Account: "+e.getMessage(),e);
 			req.getSession(false).setAttribute("errorMessage", "Could not update Bank Account: "+e.getMessage());

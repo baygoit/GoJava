@@ -19,6 +19,7 @@ import ua.com.goit.gojava.POM.dataModel.common.Money;
 import ua.com.goit.gojava.POM.services.ApplicationContextProvider;
 import ua.com.goit.gojava.POM.services.BankAccountService;
 import ua.com.goit.gojava.POM.services.CashMovementService;
+import ua.com.goit.gojava.POM.services.POMServicesException;
 
 @WebServlet(urlPatterns = {"/CashMovementWebController"})
 public class WebControllerCashMovement extends HttpServlet {
@@ -72,7 +73,7 @@ public class WebControllerCashMovement extends HttpServlet {
 			long id = Long.parseLong(req.getParameter("bankAccountFilter"));
 			try {
 				bankAccount = bankAccountService.retrieveById(id);
-			} catch (POMDataModelException e) {
+			} catch (POMServicesException e) {
 				LOG.error("Can not retrieve Bank Account for filter: "+e.getMessage(),e);
 				req.getSession(false).setAttribute("errorMessage", "Can not retrieve Bank Account for filter: "+e.getMessage());
 				return;	
@@ -91,7 +92,7 @@ public class WebControllerCashMovement extends HttpServlet {
 			CashMovementEntry cashMovementEntry = cashMovementService.retrieveById(id);
 			req.getSession(false).setAttribute("currentEntryForEdit", cashMovementEntry);
 			
-		} catch (POMDataModelException | NumberFormatException e) {
+		} catch (POMServicesException e) {
 
 			LOG.error("Can not load Cash Movement Entry for edit: "+e.getMessage(),e);
 			req.getSession(false).setAttribute("errorMessage", "Can not load Cash Movement Entry for edit: "+e.getMessage());
@@ -109,7 +110,7 @@ public class WebControllerCashMovement extends HttpServlet {
 
 			cashMovementService.delete(cashMovementService.retrieveById(id));
 			
-		} catch (POMDataModelException | NumberFormatException e) {
+		} catch ( NumberFormatException | POMServicesException e) {
 
 			LOG.error("Can not delete Cash Movement Entry: "+e.getMessage(),e);
 			req.getSession(false).setAttribute("errorMessage", "Can not delete Cash Movement Entry: "+e.getMessage());
@@ -139,7 +140,7 @@ public class WebControllerCashMovement extends HttpServlet {
 			Money sum = new Money(Double.parseDouble(sumString),bankAccountRef.getCurrency());
 			newEntry.setSum(sum );		
 			
-		} catch (ParseException | IllegalArgumentException | POMDataModelException e)   {
+		} catch (ParseException | IllegalArgumentException | POMDataModelException | POMServicesException e)   {
 
 			LOG.error("Could not create new Cash Movement Entry: "+e.getMessage(),e);
 			req.getSession(false).setAttribute("errorMessage", "Could not create new Cash Movement Entry: "+e.getMessage());
@@ -152,7 +153,7 @@ public class WebControllerCashMovement extends HttpServlet {
 			
 			cashMovementService.create(newEntry);
 			
-		} catch (POMDataModelException e) {
+		} catch (POMServicesException e) {
 
 			LOG.error("Can not save new Cash Movement Entry: "+e.getMessage(),e);
 			req.getSession(false).setAttribute("errorMessage", "Can not save new Cash Movement Entry: "+e.getMessage());
@@ -184,7 +185,7 @@ public class WebControllerCashMovement extends HttpServlet {
 			CashMovementService cashMovementService = ApplicationContextProvider.getApplicationContext().getBean(CashMovementService.class);
 			cashMovementService.update(cashMovementEntry);
 			
-		} catch (POMDataModelException | ParseException | NumberFormatException e)   {
+		} catch (POMDataModelException | ParseException | NumberFormatException | POMServicesException e)   {
 
 			LOG.error("Could not update Cash Movement Entry: "+e.getMessage(),e);
 			req.getSession(false).setAttribute("errorMessage", "Could not update Cash Movement Entry: "+e.getMessage());

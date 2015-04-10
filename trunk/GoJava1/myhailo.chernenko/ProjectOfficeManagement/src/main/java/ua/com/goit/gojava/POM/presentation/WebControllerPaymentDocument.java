@@ -28,6 +28,7 @@ import ua.com.goit.gojava.POM.dataModel.profitcost.Project;
 import ua.com.goit.gojava.POM.dataModel.profitcost.ProjectStage;
 import ua.com.goit.gojava.POM.services.BankAccountService;
 import ua.com.goit.gojava.POM.services.CostItemService;
+import ua.com.goit.gojava.POM.services.POMServicesException;
 import ua.com.goit.gojava.POM.services.PaymentDocumentService;
 import ua.com.goit.gojava.POM.services.ProjectService;
 import ua.com.goit.gojava.POM.services.ProjectStageService;
@@ -195,7 +196,7 @@ public class WebControllerPaymentDocument extends HttpServlet {
 				
 				paymentDocument.setDescription(description);
 				
-			} catch (ParseException | NumberFormatException | POMDataModelException e) {
+			} catch (ParseException | NumberFormatException | POMServicesException e) {
 
 				LOG.error("Could not update Doc properties: "+e.getMessage(),e);
 				req.getSession(false).setAttribute("errorMessage", "Could not update Doc properties: "+e.getMessage());
@@ -216,7 +217,7 @@ public class WebControllerPaymentDocument extends HttpServlet {
 			long id = Long.parseLong(req.getParameter("EditCurrent"));
 			try {
 				paymentDocument = paymentDocumentService.retrieveDocById(id);
-			} catch (POMDataModelException e) {
+			} catch (POMServicesException e) {
 				LOG.error("Can not retrieve Payment Document: "+e.getMessage(),e);
 				req.getSession(false).setAttribute("errorMessage", "Can not retrieve Payment Document: "+e.getMessage());
 				return;	
@@ -235,7 +236,7 @@ public class WebControllerPaymentDocument extends HttpServlet {
 
 			paymentDocumentService.deleteDoc(paymentDocumentService.retrieveDocById(id));
 			
-		} catch (POMDataModelException | NumberFormatException e) {
+		} catch (POMServicesException | NumberFormatException e) {
 
 			LOG.error("Can not delete Payment Document: "+e.getMessage(),e);
 			req.getSession(false).setAttribute("errorMessage", "Can not delete Payment Document: "+e.getMessage());
@@ -331,7 +332,7 @@ public class WebControllerPaymentDocument extends HttpServlet {
 					Money sum = new Money(Double.parseDouble(sumString),currency);
 					detail.setSum(sum);
 					
-				} catch (IllegalArgumentException | POMDataModelException e)   {
+				} catch (IllegalArgumentException | POMServicesException | POMDataModelException e)   {
 
 					LOG.error("Could not change Document Details properties: "+e.getMessage(),e);
 					req.getSession(false).setAttribute("errorMessage", "Could not change Document Details properties: "+e.getMessage());
@@ -385,7 +386,7 @@ public class WebControllerPaymentDocument extends HttpServlet {
 					Money sum = new Money(Double.parseDouble(sumString),currency);
 					detail.setSum(sum);
 					
-				} catch (IllegalArgumentException | POMDataModelException e)   {
+				} catch (IllegalArgumentException | POMServicesException | POMDataModelException e)   {
 
 					LOG.error("Could not set Document Details properties: "+e.getMessage(),e);
 					req.getSession(false).setAttribute("errorMessage", "Could not set Document Details properties: "+e.getMessage());
@@ -420,7 +421,7 @@ public class WebControllerPaymentDocument extends HttpServlet {
 						paymentDocumentService.updateDoc(paymentDocument);
 					}
 					
-				} catch (POMDataModelException e)   {
+				} catch (POMServicesException e)   {
 
 					LOG.error("Could not save Document: "+e.getMessage(),e);
 					req.getSession(false).setAttribute("errorMessage", "Could not save Document:"+e.getMessage());

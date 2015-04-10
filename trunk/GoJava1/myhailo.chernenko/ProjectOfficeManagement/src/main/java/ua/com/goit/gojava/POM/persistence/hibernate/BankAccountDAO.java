@@ -8,7 +8,6 @@ import ua.com.goit.gojava.POM.persistence.hibernate.abstraction.AbstractDAO;
 public class BankAccountDAO extends AbstractDAO<BankAccount> {
 	
 	private static final String CLASS_NAME = "Bank Account"; 
-	private static final String CLASS_TABLE = "bank_account"; 
 	private static final Logger LOG = Logger.getLogger(BankAccountDAO.class);
 	
 	public BankAccountDAO() {
@@ -18,11 +17,6 @@ public class BankAccountDAO extends AbstractDAO<BankAccount> {
 	@Override
 	protected String getClassName() {		
 		return CLASS_NAME;
-	}
-
-	@Override
-	protected String getClassTable() {
-		return CLASS_TABLE;
 	}
 
 	@Override

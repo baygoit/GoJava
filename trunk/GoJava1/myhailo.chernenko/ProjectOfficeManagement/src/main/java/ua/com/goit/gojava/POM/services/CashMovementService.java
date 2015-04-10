@@ -2,15 +2,19 @@ package ua.com.goit.gojava.POM.services;
 
 import java.util.List;
 
-import ua.com.goit.gojava.POM.dataModel.POMDataModelException;
+import org.apache.log4j.Logger;
+
 import ua.com.goit.gojava.POM.dataModel.cash.BankAccount;
 import ua.com.goit.gojava.POM.dataModel.cash.CashMovementEntry;
 import ua.com.goit.gojava.POM.dataModel.common.FinancialDocument;
 import ua.com.goit.gojava.POM.dataModel.common.Money;
-import ua.com.goit.gojava.POM.persistence.postgresDB.CashMovementDAO;
+import ua.com.goit.gojava.POM.persistence.POMPersistenceException;
+import ua.com.goit.gojava.POM.persistence.hibernate.CashMovementDAO;
 
 public class CashMovementService {
 	
+	private static final String CLASS_NAME = "Cash Movement"; 
+	private static final Logger LOG = Logger.getLogger(CashMovementService.class);
 	CashMovementDAO cashMovementDAO;
 
 	public void setCashMovementDAO(CashMovementDAO cashMovementDAO) {
@@ -19,51 +23,91 @@ public class CashMovementService {
 		
 	}
 	
-	public Money getTotalByBankAccount(BankAccount bankAccount) throws POMDataModelException {
+	public Money getTotalByBankAccount(BankAccount bankAccount) throws POMServicesException {
 		
-		return cashMovementDAO.getTotalByBankAccount(bankAccount);
+		try {
+			return cashMovementDAO.getTotalByBankAccount(bankAccount);
+		} catch (POMPersistenceException e) {
+			LOG.error("Could not get total by "+CLASS_NAME+": "+e.getMessage(), e);
+			throw new POMServicesException("Could not get total by "+CLASS_NAME+"",e);
+		}
 		
 	}
 
-	public List<CashMovementEntry> retrieveAll() throws POMDataModelException {
+	public List<CashMovementEntry> retrieveAll() throws POMServicesException {
 
-		return cashMovementDAO.retrieveAll();
+		try {
+			return cashMovementDAO.retrieveAll();
+		} catch (POMPersistenceException e) {
+			LOG.error("Could not retrieve all "+CLASS_NAME+"s: "+e.getMessage(), e);
+			throw new POMServicesException("Could not retrieve all "+CLASS_NAME+"s",e);
+		}
 		
 	}
 	
-	public List<CashMovementEntry> retrieveAll(BankAccount bankAccount) throws POMDataModelException {
+	public List<CashMovementEntry> retrieveAll(BankAccount bankAccount) throws POMServicesException {
 
-		return cashMovementDAO.retrieveAll(bankAccount);
+		try {
+			return cashMovementDAO.retrieveAll(bankAccount);
+		} catch (POMPersistenceException e) {
+			LOG.error("Could not retrieve all "+CLASS_NAME+"s: "+e.getMessage(), e);
+			throw new POMServicesException("Could not retrieve all "+CLASS_NAME+"s",e);
+		}
 		
 	}
 	
-	public CashMovementEntry retrieveById(long id) throws POMDataModelException {
+	public CashMovementEntry retrieveById(long id) throws POMServicesException {
 
-		return cashMovementDAO.retrieveById(id);
+		try {
+			return cashMovementDAO.retrieveById(id);
+		} catch (POMPersistenceException e) {
+			LOG.error("Could not retrieve "+CLASS_NAME+" by id: "+e.getMessage(), e);
+			throw new POMServicesException("Could not retrieve "+CLASS_NAME+" by id",e);
+		}
 		
 	}
 
-	public void delete(CashMovementEntry cashMovementEntry) throws POMDataModelException {
+	public void delete(CashMovementEntry cashMovementEntry) throws POMServicesException {
 
-		cashMovementDAO.delete(cashMovementEntry);
+		try {
+			cashMovementDAO.delete(cashMovementEntry);
+		} catch (POMPersistenceException e) {
+			LOG.error("Could not delete "+CLASS_NAME+": "+e.getMessage(), e);
+			throw new POMServicesException("Could not delete "+CLASS_NAME+"",e);
+		}
 		
 	}
 
-	public void create(CashMovementEntry newEntry) throws POMDataModelException {
+	public void create(CashMovementEntry newEntry) throws POMServicesException {
 
-		cashMovementDAO.create(newEntry);
+		try {
+			cashMovementDAO.create(newEntry);
+		} catch (POMPersistenceException e) {
+			LOG.error("Could not create "+CLASS_NAME+": "+e.getMessage(), e);
+			throw new POMServicesException("Could not create "+CLASS_NAME+"",e);
+		}
 		
 	}
 
-	public void update(CashMovementEntry cashMovementEntry) throws POMDataModelException {
+	public void update(CashMovementEntry cashMovementEntry) throws POMServicesException {
 
-		cashMovementDAO.update(cashMovementEntry);
+		try {
+			cashMovementDAO.update(cashMovementEntry);
+		} catch (POMPersistenceException e) {
+			LOG.error("Could not update "+CLASS_NAME+": "+e.getMessage(), e);
+			throw new POMServicesException("Could not update "+CLASS_NAME+"",e);
+		}
 		
 	}
 
-	public void deleteAllByDoc(FinancialDocument doc) throws POMDataModelException {
+	public void deleteAllByDoc(FinancialDocument doc) throws POMServicesException {
 
-		cashMovementDAO.deleteAllByDoc(doc);
+		try {
+			cashMovementDAO.deleteAllByDoc(doc);
+		} catch (POMPersistenceException e) {
+			LOG.error("Could not delete all "+CLASS_NAME+"s by doc: "+e.getMessage(), e);
+			throw new POMServicesException("Could not delete all "+CLASS_NAME+"s by doc",e);
+		}
 		
 	}
 

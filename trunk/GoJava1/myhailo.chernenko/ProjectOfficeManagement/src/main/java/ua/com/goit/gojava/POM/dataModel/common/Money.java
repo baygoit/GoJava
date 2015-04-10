@@ -3,18 +3,35 @@ package ua.com.goit.gojava.POM.dataModel.common;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Currency;
+
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
+import javax.persistence.Transient;
+
 import org.apache.log4j.Logger;
 
 import ua.com.goit.gojava.POM.dataModel.POMDataModelException;
 
+@Embeddable
 public class Money {
 	
 	private static final Logger LOG=Logger.getLogger(Money.class);
 	
+	@Transient
 	private int scaleLength = 2;
+	
+	@Transient
 	private RoundingMode roundingMode = RoundingMode.HALF_UP;
+	
+	@Column
 	private BigDecimal value;
+	
+	@Column
 	private Currency currency;
+	
+	public Money() {
+
+	}
 	
 	public Money(Currency currency) {
 
@@ -23,6 +40,13 @@ public class Money {
 		
 	}
 
+	public Money(BigDecimal value, Currency currency) throws POMDataModelException {
+		
+		this(currency);
+		this.value = value;
+		
+	}
+	
 	public Money(Double value, Currency currency) throws POMDataModelException {
 		
 		this(currency);

@@ -1,11 +1,32 @@
 package ua.com.goit.gojava.POM.dataModel.profitcost;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "project_stages")
 public class ProjectStage  {
 
+	@Id 
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long id = 0;
+	
+	@Column
 	private String name = "";
+	
+	@Column
 	private String description = "";
-	private Project parent;
+	
+	@ManyToOne(cascade={CascadeType.ALL})
+    @JoinColumn(name="parent")
+    private Project parent;
 	
 	public long getId() {
 		return id;

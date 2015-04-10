@@ -5,20 +5,44 @@ import java.util.Currency;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.*;
+
 import ua.com.goit.gojava.POM.dataModel.POMDataModelException;
 import ua.com.goit.gojava.POM.dataModel.cash.BankAccount;
 import ua.com.goit.gojava.POM.dataModel.common.FinancialDocument;
 import ua.com.goit.gojava.POM.dataModel.common.Money;
 
+@Entity
+@Table(name = "payment_document")
 public class PaymentDocument implements FinancialDocument {
 
+	@Id 
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long id;
+	
+	@Column
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date date;
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "bank_account_id")
 	private BankAccount bankAccount;
+	
+	@Column
 	private String description;
-	private Money docSum;
+	
+	@Embedded
+	@AttributeOverrides( {
+	        @AttributeOverride(name="value", column = @Column(name="sum") ),
+	        @AttributeOverride(name="currency", column = @Column(name="currency") )
+	    })
+    private Money docSum;
+	
+	@Column
 	private boolean checked;
-	private List<PaymentDocumentDetail> paymentDocumentDetails;
+	
+	@OneToMany(fetch = FetchType.EAGER, mappedBy="doc")
+    private List<PaymentDocumentDetail> paymentDocumentDetails;
 	
 	@Override
 	public String getDocType() {	

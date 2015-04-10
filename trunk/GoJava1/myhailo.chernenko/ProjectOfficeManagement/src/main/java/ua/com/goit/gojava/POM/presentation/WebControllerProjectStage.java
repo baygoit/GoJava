@@ -10,9 +10,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 
-import ua.com.goit.gojava.POM.dataModel.POMDataModelException;
 import ua.com.goit.gojava.POM.dataModel.profitcost.ProjectStage;
 import ua.com.goit.gojava.POM.services.ApplicationContextProvider;
+import ua.com.goit.gojava.POM.services.POMServicesException;
 import ua.com.goit.gojava.POM.services.ProjectService;
 import ua.com.goit.gojava.POM.services.ProjectStageService;
 
@@ -68,7 +68,7 @@ public class WebControllerProjectStage extends HttpServlet {
 			ProjectStage projectStage = projectStageService.retrieveById(id);
 			req.getSession(false).setAttribute("currentProjectStageForEdit", projectStage);
 			
-		} catch (POMDataModelException | NumberFormatException e) {
+		} catch (NumberFormatException | POMServicesException e) {
 
 			LOG.error("Can not load "+CLASS_NAME+" for edit: "+e.getMessage(),e);
 			req.getSession(false).setAttribute("errorMessage", "Can not load "+CLASS_NAME+" for edit: "+e.getMessage());
@@ -86,7 +86,7 @@ public class WebControllerProjectStage extends HttpServlet {
 
 			projectStageService.delete(projectStageService.retrieveById(id));
 			
-		} catch (POMDataModelException | NumberFormatException e) {
+		} catch (NumberFormatException | POMServicesException e) {
 
 			LOG.error("Can not delete "+CLASS_NAME+": "+e.getMessage(),e);
 			req.getSession(false).setAttribute("errorMessage", "Can not delete "+CLASS_NAME+": "+e.getMessage());
@@ -113,7 +113,7 @@ public class WebControllerProjectStage extends HttpServlet {
 				projectStage.setParent(projectService.retrieveById(Long.parseLong(parentId)));
 			}
 			
-		} catch (IllegalArgumentException | POMDataModelException e)   {
+		} catch (IllegalArgumentException | POMServicesException e)   {
 
 			LOG.error("Could not create new "+CLASS_NAME+": "+e.getMessage(),e);
 			req.getSession(false).setAttribute("errorMessage", "Could not create new "+CLASS_NAME+": "+e.getMessage());
@@ -125,7 +125,7 @@ public class WebControllerProjectStage extends HttpServlet {
 			
 			projectStageService.create(projectStage);
 			
-		} catch (POMDataModelException e) {
+		} catch (POMServicesException e) {
 
 			LOG.error("Can not save new "+CLASS_NAME+": "+e.getMessage(),e);
 			req.getSession(false).setAttribute("errorMessage", "Can not save new "+CLASS_NAME+": "+e.getMessage());
@@ -153,7 +153,7 @@ public class WebControllerProjectStage extends HttpServlet {
 			
 			projectStageService.update(projectStage);
 			
-		} catch (POMDataModelException | NumberFormatException e)   {
+		} catch (NumberFormatException | POMServicesException e)   {
 
 			LOG.error("Could not update "+CLASS_NAME+": "+e.getMessage(),e);
 			req.getSession(false).setAttribute("errorMessage", "Could not update "+CLASS_NAME+": "+e.getMessage());

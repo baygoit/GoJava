@@ -43,37 +43,23 @@
    </bean>
    
 
-   <bean id="CashMovementDAO" class="ua.com.goit.gojava.POM.persistence.postgresDB.CashMovementDAO">
-   		<property name="bankAccountDAO" ref="BankAccountDAO"/>
-   		<property name="financialDocumentDAO" ref="FinancialDocumentDAO"/>
+   <bean id="CashMovementDAO" class="ua.com.goit.gojava.POM.persistence.hibernate.CashMovementDAO">
    </bean>
    <bean id="BankAccountDAO" class="ua.com.goit.gojava.POM.persistence.hibernate.BankAccountDAO">
    </bean>
-   <bean id="ExchangeRateDAO" class="ua.com.goit.gojava.POM.persistence.postgresDB.ExchangeRateDAO">
+   <bean id="ExchangeRateDAO" class="ua.com.goit.gojava.POM.persistence.hibernate.ExchangeRateDAO">
    </bean>
-   <bean id="CostItemDAO" class="ua.com.goit.gojava.POM.persistence.postgresDB.CostItemDAO">
+   <bean id="CostItemDAO" class="ua.com.goit.gojava.POM.persistence.hibernate.CostItemDAO">
    </bean>
-   <bean id="ProjectDAO" class="ua.com.goit.gojava.POM.persistence.postgresDB.ProjectDAO">
+   <bean id="ProjectDAO" class="ua.com.goit.gojava.POM.persistence.hibernate.ProjectDAO">
    </bean>
-   <bean id="ProjectStageDAO" class="ua.com.goit.gojava.POM.persistence.postgresDB.ProjectStageDAO">
+   <bean id="ProjectStageDAO" class="ua.com.goit.gojava.POM.persistence.hibernate.ProjectStageDAO">
    </bean>
-   <bean id="ProjectFinResultEntryDAO" class="ua.com.goit.gojava.POM.persistence.postgresDB.ProjectFinResultEntryDAO">
-      	<property name="costItemDAO" ref="CostItemDAO"/>
-      	<property name="projectDAO" ref="ProjectDAO"/>
-   		<property name="projectStageDAO" ref="ProjectStageDAO"/>
-   		<property name="financialDocumentDAO" ref="FinancialDocumentDAO"/>
+   <bean id="ProjectFinResultEntryDAO" class="ua.com.goit.gojava.POM.persistence.hibernate.ProjectFinResultEntryDAO">
    </bean>
-   <bean id="PaymentDocumentDetailDAO" class="ua.com.goit.gojava.POM.persistence.postgresDB.PaymentDocumentDetailDAO">
-   		<property name="projectDAO" ref="ProjectDAO"/>
-      	<property name="projectStageDAO" ref="ProjectStageDAO"/>
-       	<property name="costItemDAO" ref="CostItemDAO"/>
-   		<property name="paymentDocumentDAO" ref="PaymentDocumentDAO"/>
-    </bean>
-    <bean id="PaymentDocumentDAO" class="ua.com.goit.gojava.POM.persistence.postgresDB.PaymentDocumentDAO">
-   		<property name="bankAccountDAO" ref="BankAccountDAO"/>
+   <bean id="PaymentDocumentDetailDAO" class="ua.com.goit.gojava.POM.persistence.hibernate.PaymentDocumentDetailDAO">
    </bean>
-   <bean id="FinancialDocumentDAO" class="ua.com.goit.gojava.POM.persistence.postgresDB.FinancialDocumentDAO">
-   		<property name="paymentDocumentDAO" ref="PaymentDocumentDAO"/>
+   <bean id="PaymentDocumentDAO" class="ua.com.goit.gojava.POM.persistence.hibernate.PaymentDocumentDAO">
    </bean>
    
    <bean id="applicationContextProvder" class="ua.com.goit.gojava.POM.services.ApplicationContextProvider">

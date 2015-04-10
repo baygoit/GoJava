@@ -8,10 +8,10 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowire;
 import org.springframework.beans.factory.annotation.Configurable;
 
-import ua.com.goit.gojava.POM.dataModel.POMDataModelException;
 import ua.com.goit.gojava.POM.dataModel.cash.BankAccount;
 import ua.com.goit.gojava.POM.services.BankAccountService;
 import ua.com.goit.gojava.POM.services.CashMovementService;
+import ua.com.goit.gojava.POM.services.POMServicesException;
 import ua.com.goit.gojava.POM.services.Paginator;
 
 import com.opensymphony.xwork2.ActionSupport;
@@ -36,7 +36,7 @@ public class BankAccountList extends ActionSupport {
 		try {
 			bankAccounts = bankAccountService.retrieveAll(paginator);
 			return ActionSupport.SUCCESS;
-		} catch(POMDataModelException e) {
+		} catch(POMServicesException e) {
 			LOG.error("Can not load Bank Accounts list: "+e.getMessage(),e);
 			addActionError("Can not load Bank Accounts list!");
 			return ActionSupport.ERROR;

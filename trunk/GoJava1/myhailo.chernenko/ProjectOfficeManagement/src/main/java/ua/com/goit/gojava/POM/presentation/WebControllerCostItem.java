@@ -10,11 +10,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 
-import ua.com.goit.gojava.POM.dataModel.POMDataModelException;
 import ua.com.goit.gojava.POM.dataModel.profitcost.CostItem;
 import ua.com.goit.gojava.POM.dataModel.profitcost.ProfitLostsType;
 import ua.com.goit.gojava.POM.services.ApplicationContextProvider;
 import ua.com.goit.gojava.POM.services.CostItemService;
+import ua.com.goit.gojava.POM.services.POMServicesException;
 
 @WebServlet(urlPatterns = {"/CostItemWebController"})
 public class WebControllerCostItem extends HttpServlet {
@@ -67,7 +67,7 @@ public class WebControllerCostItem extends HttpServlet {
 			CostItem costItem = costItemService.retrieveById(id);
 			req.getSession(false).setAttribute("currentCostItemForEdit", costItem);
 			
-		} catch (POMDataModelException | NumberFormatException e) {
+		} catch (NumberFormatException | POMServicesException e) {
 
 			LOG.error("Can not load Cost Item for edit: "+e.getMessage(),e);
 			req.getSession(false).setAttribute("errorMessage", "Can not load Cost Item for edit: "+e.getMessage());
@@ -85,7 +85,7 @@ public class WebControllerCostItem extends HttpServlet {
 
 			costItemService.delete(costItemService.retrieveById(id));
 			
-		} catch (POMDataModelException | NumberFormatException e) {
+		} catch (NumberFormatException | POMServicesException e) {
 
 			LOG.error("Can not delete Cost Item: "+e.getMessage(),e);
 			req.getSession(false).setAttribute("errorMessage", "Can not delete Cost Item: "+e.getMessage());
@@ -113,7 +113,7 @@ public class WebControllerCostItem extends HttpServlet {
 				costItem.setParent(costItemService.retrieveById(Long.parseLong(parentId)));
 			}
 			
-		} catch (IllegalArgumentException | POMDataModelException e)   {
+		} catch (IllegalArgumentException | POMServicesException e)   {
 
 			LOG.error("Could not create new Cost Item: "+e.getMessage(),e);
 			req.getSession(false).setAttribute("errorMessage", "Could not create new Cost Item: "+e.getMessage());
@@ -125,7 +125,7 @@ public class WebControllerCostItem extends HttpServlet {
 			
 			costItemService.create(costItem);
 			
-		} catch (POMDataModelException e) {
+		} catch (POMServicesException e) {
 
 			LOG.error("Can not save new Cost Item: "+e.getMessage(),e);
 			req.getSession(false).setAttribute("errorMessage", "Can not save new Cost Item: "+e.getMessage());
@@ -159,7 +159,7 @@ public class WebControllerCostItem extends HttpServlet {
 			
 			costItemService.update(costItem);
 			
-		} catch (POMDataModelException | NumberFormatException e)   {
+		} catch (NumberFormatException | POMServicesException e)   {
 
 			LOG.error("Could not update Cost Item: "+e.getMessage(),e);
 			req.getSession(false).setAttribute("errorMessage", "Could not update Cost Item: "+e.getMessage());

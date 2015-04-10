@@ -2,21 +2,61 @@ package ua.com.goit.gojava.POM.dataModel.documents;
 
 import java.util.Currency;
 
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
+import javax.persistence.Column;
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
 import ua.com.goit.gojava.POM.dataModel.POMDataModelException;
 import ua.com.goit.gojava.POM.dataModel.common.Money;
 import ua.com.goit.gojava.POM.dataModel.profitcost.CostItem;
 import ua.com.goit.gojava.POM.dataModel.profitcost.Project;
 import ua.com.goit.gojava.POM.dataModel.profitcost.ProjectStage;
 
+@Entity
+@Table(name = "payment_document_details")
 public class PaymentDocumentDetail {
 
+	@Id 
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long id;
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "project_id")
 	private Project project;
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "project_stage_id")
 	private ProjectStage projectStage;
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "cost_item_id")
 	private CostItem costItem;
-	private Money sum;
+	
+	@Embedded
+	@AttributeOverrides( {
+	        @AttributeOverride(name="value", column = @Column(name="sum") ),
+	        @AttributeOverride(name="currency", column = @Column(name="currency") )
+	    })
+    private Money sum;
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "doc_id")
 	private PaymentDocument doc;
+	
+	@Transient
 	private boolean markedForDelete = false;
+	
+	@Column
 	private long rowNumber; 
 	
 	public long getId() {		
