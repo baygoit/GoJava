@@ -2,7 +2,7 @@ package ua.goit.xmlparsertdd;
 
 public class TagStateMachine {
   TagState tagState = TagState.INIT;
-  private Tag.Builder builder = Tag.Builder.newBuilder();
+  private TagElement.Builder builder = TagElement.Builder.newBuilder();
 
   public void next(char c, XMLParser parser) {
     tagState = tagState.next(c, builder, this);
@@ -12,21 +12,21 @@ public class TagStateMachine {
   }
 
   public void setEvent(XMLParser parser) {
-    if (builder.getType() == TagType.OPEN) {
+    if (builder.getType() == TagElementType.OPEN) {
       parser.sendEventToHandler(Event.OPEN_TAG);
-    } else if (builder.getType() == TagType.CLOSE) {
+    } else if (builder.getType() == TagElementType.CLOSE) {
       parser.sendEventToHandler(Event.CLOSE_TAG);
-    } else if (builder.getType() == TagType.HEADER) {
+    } else if (builder.getType() == TagElementType.HEADER) {
       parser.sendEventToHandler(Event.START);
     }
     
   }
 
-  public Tag getResult() {
-    Tag result = null;
+  public TagElement getResult() {
+    TagElement result = null;
     if (tagState == TagState.VALID_TAG_END) {
       result = builder.build();
-      builder = Tag.Builder.newBuilder();
+      builder = TagElement.Builder.newBuilder();
     }
     return result;
   }

@@ -60,9 +60,7 @@ public class XMLParser implements Parser {
     }
 
     public void onTextValue(Handler handler) {
-      Set<Handler> set = handlers.get(Event.TEXT_VALUE);
-      set.add(handler);
-      handlers.put(Event.TEXT_VALUE, set);
+      registerHandlerOnEvent(handler, Event.TEXT_VALUE);
     }
 
     public void onStart(Handler handler) {

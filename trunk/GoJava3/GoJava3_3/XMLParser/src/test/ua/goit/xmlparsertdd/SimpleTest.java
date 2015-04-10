@@ -9,14 +9,14 @@ import java.util.Map;
 import static org.junit.Assert.assertEquals;
 
 public class SimpleTest {
-  Tag myTag;
+  TagElement myTagElement;
   Handler handler;
   XMLParser.Builder builder;
   Parser parser;
 
   @Before
   public void crateVariables() {
-    myTag =  new Tag();
+    myTagElement =  new TagElement();
     builder = XMLParser.Builder.newParserBuilder();
     parser = builder.build();
   }
@@ -30,13 +30,13 @@ public class SimpleTest {
     // when
     handler = new Handler() {
       @Override
-      public void handle(Tag tag) {
-        myTag.setName(tag.getName());
+      public void handle(TagElement tagElement) {
+        myTagElement.setName(tagElement.getName());
       }
     };
     //builder.onOpenTag(handler);
     parser.parse(inputString);
-    String actual = myTag.getName();
+    String actual = myTagElement.getName();
     String expected = "name";
 
     // then
@@ -52,14 +52,14 @@ public class SimpleTest {
     // when
     handler = new Handler() {
       @Override
-      public void handle(Tag tag) {
-        myTag.setType(tag.getType());
+      public void handle(TagElement tagElement) {
+        myTagElement.setType(tagElement.getType());
       }
     };
     builder.onOpenTag(handler);
     parser.parse(inputString);
-    TagType actual = myTag.getType();
-    TagType expected = TagType.OPEN;
+    TagElementType actual = myTagElement.getType();
+    TagElementType expected = TagElementType.OPEN;
 
     // then
     assertEquals(expected, actual);
@@ -74,13 +74,13 @@ public class SimpleTest {
     // when
     handler = new Handler() {
       @Override
-      public void handle(Tag tag) {
-        myTag.setName(tag.getName());
+      public void handle(TagElement tagElement) {
+        myTagElement.setName(tagElement.getName());
       }
     };
     builder.onCloseTag(handler);
     parser.parse(inputString);
-    String actual = myTag.getName();
+    String actual = myTagElement.getName();
     String expected = "name";
 
     // then
@@ -96,14 +96,14 @@ public class SimpleTest {
     // when
     handler = new Handler() {
       @Override
-      public void handle(Tag tag) {
-        myTag.setType(tag.getType());
+      public void handle(TagElement tagElement) {
+        myTagElement.setType(tagElement.getType());
       }
     };
     builder.onCloseTag(handler);
     parser.parse(inputString);
-    TagType actual = myTag.getType();
-    TagType expected = TagType.CLOSE;
+    TagElementType actual = myTagElement.getType();
+    TagElementType expected = TagElementType.CLOSE;
 
     // then
     assertEquals(expected, actual);
@@ -118,14 +118,14 @@ public class SimpleTest {
     // when
     handler = new Handler() {
       @Override
-      public void handle(Tag tag) {
-        myTag.setType(tag.getType());
+      public void handle(TagElement tagElement) {
+        myTagElement.setType(tagElement.getType());
       }
     };
     builder.onStart(handler);
     parser.parse(inputString);
-    TagType actual = myTag.getType();
-    TagType expected = TagType.HEADER;
+    TagElementType actual = myTagElement.getType();
+    TagElementType expected = TagElementType.HEADER;
 
     // then
     assertEquals(expected, actual);
@@ -143,23 +143,23 @@ public class SimpleTest {
       put("standalone", "no");
     }};
     
-    Tag expectedTag = new Tag();
-    expectedTag.setName("xml");
-    expectedTag.setType(TagType.HEADER);
-    expectedTag.setParams(params);    
+    TagElement expectedTagElement = new TagElement();
+    expectedTagElement.setName("xml");
+    expectedTagElement.setType(TagElementType.HEADER);
+    expectedTagElement.setParams(params);
     
     // when
     handler = new Handler() {
       @Override
-      public void handle(Tag tag) {
-        myTag = tag;
+      public void handle(TagElement tagElement) {
+        myTagElement = tagElement;
       }
     };
     builder.onHeader(handler);
     parser.parse(inputString);
-    Tag actualTag = myTag;
+    TagElement actualTagElement = myTagElement;
     // then
-    assertEquals(expectedTag, actualTag);
+    assertEquals(expectedTagElement, actualTagElement);
   }
 
   @Test
@@ -170,14 +170,15 @@ public class SimpleTest {
     //when
     handler = new Handler() {
       @Override
-      public void handle(Tag tag) {
-        myTag = tag;
+      public void handle(TagElement tagElement) {
+        myTagElement = tagElement;
       }
     };
     builder.onTextValue(handler);
     parser = builder.build();
     parser.parse(inputString);
     String expected = "TextValue";
-    String actual = myTag.getName();
+    String actual = myTagElement.getName();
+    assertEquals(expected,actual);
   }
 }

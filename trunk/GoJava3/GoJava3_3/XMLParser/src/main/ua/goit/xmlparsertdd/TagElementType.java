@@ -1,5 +1,5 @@
 package ua.goit.xmlparsertdd;
 
-public enum TagType {
+public enum TagElementType {
   HEADER, OPEN, CLOSE, SINGLE, COMMENT, TEXT_VALUE
 }

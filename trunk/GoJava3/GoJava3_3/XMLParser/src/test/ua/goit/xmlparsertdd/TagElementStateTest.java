@@ -5,21 +5,21 @@ import org.junit.Test;
 import static org.junit.Assert.assertSame;
 
 
-public class TagStateTest {
+public class TagElementStateTest {
   @Test
   public void givenInitState_WhenFirstCharIsBracket_ThenStateShouldBeOpen() {
     TagState state = TagState.INIT;
-    TagState actual = state.next('<', Tag.Builder.newBuilder(), new TagStateMachine());
+    TagState actual = state.next('<', TagElement.Builder.newBuilder(), new TagStateMachine());
     assertSame(TagState.OPEN, actual);
   }
 
   @Test
   public void givenInitState_WhenFirstCharIsBracket_ThenTagTypeShouldBeOpen() {
     TagState state = TagState.INIT;
-    Tag.Builder builder = Tag.Builder.newBuilder();
+    TagElement.Builder builder = TagElement.Builder.newBuilder();
     state.next('<', builder, new TagStateMachine());
-    TagType actualType = builder.getType();
-    assertSame(TagType.OPEN, actualType);
+    TagElementType actualType = builder.getType();
+    assertSame(TagElementType.OPEN, actualType);
   }
 
   @Test
@@ -27,14 +27,14 @@ public class TagStateTest {
     TagState state = TagState.OPEN;
     TagStateMachine machine = new TagStateMachine();
     machine.tagState = TagState.OPEN;
-    TagState actual = state.next(' ', Tag.Builder.newBuilder(), machine);
+    TagState actual = state.next(' ', TagElement.Builder.newBuilder(), machine);
     assertSame(TagState.OPEN, actual);
   }
 
   @Test
   public void givenOpenState_WhenFirstCharInTagNameIsDigit_ThenShouldBeInvalidEndState() {
     TagState state = TagState.OPEN;
-    TagState actual = state.next('1', Tag.Builder.newBuilder(), new TagStateMachine());
+    TagState actual = state.next('1', TagElement.Builder.newBuilder(), new TagStateMachine());
     assertSame(TagState.INVALID_END, actual);
   }
 }

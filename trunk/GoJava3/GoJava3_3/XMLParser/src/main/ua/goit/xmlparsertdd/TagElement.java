@@ -4,15 +4,15 @@ package ua.goit.xmlparsertdd;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Tag {
-  private TagType type;
+public class TagElement {
+  private TagElementType type;
   private String name;
   private Map<String, String> params = new HashMap<String, String>();
 
-  public Tag() {
+  public Element1() {
   }
 
-  private Tag(TagType type, String name, Map<String, String> params) {
+  private Element1(TagElementType type, String name, Map<String, String> params) {
     this.type = type;
     this.name = name;
     this.params = params;
@@ -22,11 +22,11 @@ public class Tag {
     this.name = name;
   }
   
-  public void setType(TagType type) {
+  public void setType(TagElementType type) {
     this.type = type;
   }
   
-  public TagType getType() {
+  public TagElementType getType() {
     return type;
   }
 
@@ -47,12 +47,12 @@ public class Tag {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
 
-    Tag tag = (Tag) o;
+    Element1 element1 = (Element1) o;
 
-    if (getType() != tag.getType()) return false;
-    if (getName() != null ? !getName().equals(tag.getName()) : tag.getName() != null)
+        if (getType() != element1.getType()) return false;
+    if (getName() != null ? !getName().equals(element1.getName()) : element1.getName() != null)
       return false;
-    return !(getParams() != null ? !getParams().equals(tag.getParams()) : tag.getParams() != null);
+    return !(getParams() != null ? !getParams().equals(element1.getParams()) : element1.getParams() != null);
 
   }
 
@@ -65,7 +65,7 @@ public class Tag {
   }
 
   static class Builder {
-    private TagType type;
+    private TagElementType type;
     private StringBuilder name = new StringBuilder();
     private Map<String, String> params = new HashMap<String, String>();
     private StringBuilder paramName = new StringBuilder();
@@ -75,11 +75,11 @@ public class Tag {
       return new Builder();
     }
 
-    public TagType getType() {
+    public TagElementType getType() {
       return type;
     }
 
-    public void setType(TagType type) {
+    public void setType(TagElementType type) {
       this.type = type;
     }
 
@@ -105,8 +105,8 @@ public class Tag {
       paramValue = new StringBuilder();
     }
 
-    public Tag build() {
-      return new Tag(type, name.toString(), params);
+    public Element1 build() {
+      return new Element1(type, name.toString(), params);
     }
   }
 
