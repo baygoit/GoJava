@@ -178,6 +178,6 @@ public class SimpleTest {
     parser = builder.build();
     parser.parse(inputString);
     String expected = "TextValue";
-    String actual = myTag.getValue();
+    String actual = myTag.getName();
   }
 }
