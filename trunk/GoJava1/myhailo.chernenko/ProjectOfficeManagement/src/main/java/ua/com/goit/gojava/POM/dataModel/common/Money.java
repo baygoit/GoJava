@@ -169,7 +169,7 @@ public class Money {
 	@Override
 	public String toString() {
 
-		return ""+getValue()+" "+getCurrency().getDisplayName();
+		return ""+getValue()+" " + ( (getCurrency() == null) ? "" : getCurrency().getDisplayName());
 
 	}
 
