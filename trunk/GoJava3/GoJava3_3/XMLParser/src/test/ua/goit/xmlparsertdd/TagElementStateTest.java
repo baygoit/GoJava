@@ -26,7 +26,7 @@ public class TagElementStateTest {
   public void givenOpenState_WhenFirstCharIsSpace_ThenStateShouldBeOpen() {
     TagState state = TagState.OPEN;
     TagStateMachine machine = new TagStateMachine();
-    machine.tagState = TagState.OPEN;
+    machine.currentState = TagState.OPEN;
     TagState actual = state.next(' ', TagElement.Builder.newBuilder(), machine);
     assertSame(TagState.OPEN, actual);
   }

@@ -70,6 +70,8 @@ enum TagState {
         builder.buildParamName(c);
       } else if (CharUtil.isEmptyChar(c)) {
         result = TagState.END_HEADER_NAME;
+      } else if (c == '?'){
+        result = TagState.END_HEADER;
       }
       return result;
     }
@@ -215,7 +217,7 @@ enum TagState {
     @Override
     public TagState next(char c, TagElement.Builder builder, TagStateMachine machine) {
       TagState result = TEXT_VALUE;
-      builder.buildTextValue(c);
+      builder.setType(TagElementType.TEXT_VALUE);
       if (c == '<') {
         result = OPEN;
       }

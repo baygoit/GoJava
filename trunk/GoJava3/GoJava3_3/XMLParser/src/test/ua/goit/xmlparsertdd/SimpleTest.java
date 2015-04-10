@@ -18,7 +18,6 @@ public class SimpleTest {
   public void crateVariables() {
     myTagElement =  new TagElement();
     builder = XMLParser.Builder.newParserBuilder();
-    parser = builder.build();
   }
 
   @Test
@@ -34,7 +33,8 @@ public class SimpleTest {
         myTagElement.setName(tagElement.getName());
       }
     };
-    //builder.onOpenTag(handler);
+    builder.onOpenTag(handler);
+    parser = builder.build();
     parser.parse(inputString);
     String actual = myTagElement.getName();
     String expected = "name";
@@ -57,6 +57,7 @@ public class SimpleTest {
       }
     };
     builder.onOpenTag(handler);
+    parser = builder.build();
     parser.parse(inputString);
     TagElementType actual = myTagElement.getType();
     TagElementType expected = TagElementType.OPEN;
@@ -79,6 +80,7 @@ public class SimpleTest {
       }
     };
     builder.onCloseTag(handler);
+    parser = builder.build();
     parser.parse(inputString);
     String actual = myTagElement.getName();
     String expected = "name";
@@ -101,6 +103,7 @@ public class SimpleTest {
       }
     };
     builder.onCloseTag(handler);
+    parser = builder.build();
     parser.parse(inputString);
     TagElementType actual = myTagElement.getType();
     TagElementType expected = TagElementType.CLOSE;
@@ -123,6 +126,7 @@ public class SimpleTest {
       }
     };
     builder.onStart(handler);
+    parser = builder.build();
     parser.parse(inputString);
     TagElementType actual = myTagElement.getType();
     TagElementType expected = TagElementType.HEADER;
@@ -156,6 +160,7 @@ public class SimpleTest {
       }
     };
     builder.onHeader(handler);
+    parser = builder.build();
     parser.parse(inputString);
     TagElement actualTagElement = myTagElement;
     // then
@@ -178,7 +183,7 @@ public class SimpleTest {
     parser = builder.build();
     parser.parse(inputString);
     String expected = "TextValue";
-    String actual = myTagElement.getName();
+    String actual = myTagElement.getTextValue();
     assertEquals(expected,actual);
   }
 }

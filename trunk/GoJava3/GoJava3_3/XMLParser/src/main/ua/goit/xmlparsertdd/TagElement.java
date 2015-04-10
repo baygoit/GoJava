@@ -7,9 +7,10 @@ import java.util.Map;
 public class TagElement implements Element {
   private TagElementType type;
   private String name;
-  private String textValue;
-  private Map<String, String> params = new HashMap<String, String>();
 
+  private String textValue;
+
+  private Map<String, String> params = new HashMap<String, String>();
   public TagElement() {
   }
 
@@ -22,11 +23,11 @@ public class TagElement implements Element {
   public void setName(String name) {
     this.name = name;
   }
-  
+
   public void setType(TagElementType type) {
     this.type = type;
   }
-  
+
   public TagElementType getType() {
     return type;
   }
@@ -45,6 +46,10 @@ public class TagElement implements Element {
 
   public void setTextValue(String textValue) {
     this.textValue = textValue;
+  }
+
+  public String getTextValue() {
+    return textValue;
   }
 
   @Override

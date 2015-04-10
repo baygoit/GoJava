@@ -45,10 +45,11 @@ public class XMLParser implements Parser {
     }
   }
 
-  public void sendEventToHandler(Event event) {
+  public void sendEventToHandler(Event event, TagElement result) {
     Set<Handler> set = handlers.get(event);
+    if (set == null) {return;}
     for (Handler handler : set) {
-      handler.handle(machine.getResult());
+      handler.handle(result);
     }
   }
 
