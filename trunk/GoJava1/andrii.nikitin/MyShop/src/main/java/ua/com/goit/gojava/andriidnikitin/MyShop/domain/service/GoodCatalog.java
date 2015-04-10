@@ -31,5 +31,4 @@ public interface GoodCatalog {
 		
 		public List<Good> getAllGoods() throws MyShopException;
 
-		public String getTypeList();			
 	}

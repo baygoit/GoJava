@@ -5,7 +5,6 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
-import ua.com.goit.gojava.andriidnikitin.MyShop.commons.MyContextLoader;
 import ua.com.goit.gojava.andriidnikitin.MyShop.db.DaoFactory;
 import ua.com.goit.gojava.andriidnikitin.MyShop.db.GenericDao;
 import ua.com.goit.gojava.andriidnikitin.MyShop.db.util.MyShopDaoException;
@@ -26,32 +25,6 @@ public class GoodCatalogImpl implements GoodCatalog{
 	
 	public void setLog(Logger log) {
 		this.log = log;
-	}
-	
-	@SuppressWarnings("unused")
-	private String typeList;
-		
-	public void setTypeList(String argList) {
-		this.typeList = argList;
-	}
-
-	@Override
-	public String getTypeList() {
-		try {
-			StringBuilder result = new StringBuilder();
-			List<GoodType> list =  getAllTypes();
-			for (GoodType type: list){
-				result.append(type.getName()).append(" ");
-			}
-			return result.toString();
-		} catch (MyShopException e) {//TODO - remove and log as a real man
-			System.out.println("list is null");
-			return null;
-		}
-	}
-
-	public static GoodCatalogImpl getInstance() {
-		return  MyContextLoader.getBean("goodCatalog");
 	}
 	
 	public GoodType createType(String name, Integer parentId) throws MyShopException {
@@ -127,7 +100,6 @@ public class GoodCatalogImpl implements GoodCatalog{
 		        GoodType type = daoFactory.getGoodTypeDao().read(typeId);
 				good.setType(type);
 		        good.setName(name);
-		        //System.out.println(printGood(good));
 		        Integer id = dao.create(good);
 		        good.setId(id);
 		        return good;
@@ -184,17 +156,4 @@ public class GoodCatalogImpl implements GoodCatalog{
 		 }
 	}
 	
-	@SuppressWarnings("unused")
-	private String printGood(Good arg){
-		String result = arg.getName() + "  " + arg.getId() + "   " + printType(arg.getType()); 
-		return result ;
-	}
-
-	private String printType(GoodType arg) {
-		if (arg == null){
-			return "root";
-		}
-		String result = arg.getName() + "  " + arg.getId() + "   " + printType(arg.getParent()); 
-		return result ;
-	}
 }

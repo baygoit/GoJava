@@ -13,84 +13,107 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import ua.com.goit.gojava.andriidnikitin.MyShop.commons.ErrorLogger;
-import ua.com.goit.gojava.andriidnikitin.MyShop.domain.model.GoodType;
+import ua.com.goit.gojava.andriidnikitin.MyShop.domain.model.Good;
+import ua.com.goit.gojava.andriidnikitin.MyShop.domain.model.GoodRecord;
+import ua.com.goit.gojava.andriidnikitin.MyShop.domain.service.DeliveryManager;
 import ua.com.goit.gojava.andriidnikitin.MyShop.domain.service.GoodCatalog;
+import ua.com.goit.gojava.andriidnikitin.MyShop.domain.service.WarehouseManager;
 import ua.com.goit.gojava.andriidnikitin.MyShop.domain.util.MyShopException;
 
 @Component
 @Scope("session")
-@ManagedBean(name = "goodTypeBean", eager = true)
+@ManagedBean(name = "goodRecordBean", eager = true)
 @RequestScoped
 public class GoodRecordBean implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
 	@Autowired 
-	private GoodCatalog catalog;
+	private WarehouseManager warehouseManager;  
 
-	@ManagedProperty(value="#{name}")
-	private String name;
+	@Autowired 
+	private DeliveryManager deliveryManager;	
+
+	@Autowired 
+	private GoodCatalog catalog; 
+
 
 	@ManagedProperty(value="#{id}")
 	private Integer id;
 
-	@ManagedProperty(value="#{parent}")	
-	private Integer parent;
+	@ManagedProperty(value="#{good}")	
+	private Integer good;
 	
-	private Logger log = Logger.getLogger(getClass());
+	@ManagedProperty(value="#{amount}")	
+	private Integer amount;
 	
-	public String getName() {
-		return name;
+	@ManagedProperty(value="#{price}")	
+	private Integer price;
+	
+	private Logger log = Logger.getLogger(GoodRecordBean.class);
+	
+	public void setGoodCatalog(GoodCatalog catalog) {
+		this.catalog = catalog;
+	}
+	
+	public String getGood() {
+		return good==null? "" : good.toString();
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getParent() {
-		return parent==null? "" : parent.toString();
-	}
-
-	public void setParent(String input) {
-		this.parent = null;	
+	public void setGood(String input) {
+		this.good = null;	
 		if (input != null){ 
 			try{
-				this.parent = Integer.parseInt(input);
+				this.good = Integer.parseInt(input);
 			} catch (NumberFormatException exception){				
 			}
 		}
 	}
 	
+	
+	
+	public String getPrice() {
+		return getIntAttribute(price);
+	} 
+
+	public void setPrice(String input) {
+		price = setIntAttribute(input);
+	}
+	
+	public String getAmount() {
+		return getIntAttribute(amount);
+	}	
+	
+	public void setAmount(String input) {
+		amount = setIntAttribute(input);
+	}
+
 	public String getId() {
-		return id==null? "" : id.toString();
+		return getIntAttribute(id);
 	} 
 
 	public void setId(String input) {
-		if (input == null){ 
-			this.id = null;	
-		}
-		else {
-			this.id = Integer.parseInt(input);
-		}
+		id = setIntAttribute(input);
 	}
 
-	public void setGoodCatalog(GoodCatalog catalog) {
-		this.catalog = catalog;
-		log.info("an instance of GoodCatalog was recieved");
+	public void setWarehouseManager(WarehouseManager manager) {
+		this.warehouseManager = manager;
 	}
 
-	public List<GoodType> getAllTypes(){
-		try {
-			return catalog.getAllTypes();
+	public List<GoodRecord> getAllRecords(){
+		try {		
+			return warehouseManager.getAllRecords();
 		} catch (MyShopException e) {
 			ErrorLogger.logException(e, Logger.getLogger(GoodRecordBean.class));
 		}
 		return null;
 	}
 
-	public String addType(){		
+	public String addRecord(){	
 		try {
-			catalog.createType(name, parent);
+			Good goodInstance = catalog.getGoodById(good);
+			log.info(goodInstance);
+			deliveryManager.deliverGood(goodInstance, amount, price);
 		} catch (MyShopException e) {
 			ErrorLogger.logException(e, Logger.getLogger(GoodRecordBean.class));
 		}
@@ -100,54 +123,38 @@ public class GoodRecordBean implements Serializable{
 		return "";
 	}
 	
-	public String updateType(){		
-		try {
-			String validation = validateExistance(id);
-			if (validation !=null){
-				return validation;
-			}
-			else {
-				catalog.updateGoodType(id, name, parent);
-				clearForm();
-			}
-		} catch (MyShopException e) {
-			ErrorLogger.logException(e, Logger.getLogger(GoodRecordBean.class));
-		}
-		return "";
-	}
 	
-	public String deleteType(){	
-		try {
-			String validation = validateExistance(id);
-			if (validation !=null){
-				return validation;
-			}
-			else {
-				catalog.deleteGoodType(id);
-				clearForm();
-			}
-		} catch (MyShopException e) {
-			ErrorLogger.logException(e, Logger.getLogger(GoodRecordBean.class));
-		}
-		return "";
-	}
-	
+	@SuppressWarnings("unused")
 	private String validateExistance(Integer id){
 		try {
-			if (catalog.getGoodTypeById(id) == null){
-				return "such type does not exist!";
+			if (warehouseManager.getRecord(id) == null){
+				return "such record does not exist!";
 			}
 		} catch (MyShopException e) {
-			ErrorLogger.logException(e, Logger.getLogger(GoodRecordBean.class));
+			ErrorLogger.logException(e, log);
 		}
 		return null;
 		
 	}
 
 	private void clearForm(){
-		setName("");
-		setParent(null);
+		setGood(null);
 		setId(null);
+		setAmount(null);
+		setPrice(null);
+	}
+	
+	private String getIntAttribute(Integer arg){
+		return arg==null? "" : arg.toString();
+	}
+	
+	private Integer setIntAttribute(String input) {
+		if (input == null){ 
+			return null;	
+		}
+		else {
+			return Integer.parseInt(input);
+		}
 	}
 
 }

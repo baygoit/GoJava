@@ -14,7 +14,6 @@ import org.springframework.stereotype.Component;
 
 import ua.com.goit.gojava.andriidnikitin.MyShop.commons.ErrorLogger;
 import ua.com.goit.gojava.andriidnikitin.MyShop.domain.model.Good;
-import ua.com.goit.gojava.andriidnikitin.MyShop.domain.model.GoodType;
 import ua.com.goit.gojava.andriidnikitin.MyShop.domain.service.GoodCatalog;
 import ua.com.goit.gojava.andriidnikitin.MyShop.domain.util.MyShopException;
 
@@ -83,7 +82,7 @@ public class GoodBean implements Serializable{
 		try {
 			return catalog.getAllGoods();
 		} catch (MyShopException e) {
-			ErrorLogger.logException(e, Logger.getLogger(GoodBean.class));
+			ErrorLogger.logException(e,log);
 		}
 		return null;
 	}
@@ -92,7 +91,7 @@ public class GoodBean implements Serializable{
 		try {
 			catalog.createGood(name, type);
 		} catch (MyShopException e) {
-			ErrorLogger.logException(e, Logger.getLogger(GoodBean.class));
+			ErrorLogger.logException(e, log);
 		}
 
 		clearForm();
@@ -111,7 +110,7 @@ public class GoodBean implements Serializable{
 				clearForm();
 			}
 		} catch (MyShopException e) {
-			ErrorLogger.logException(e, Logger.getLogger(GoodBean.class));
+			ErrorLogger.logException(e,log);
 		}
 		return "";
 	}
@@ -127,7 +126,7 @@ public class GoodBean implements Serializable{
 				clearForm();
 			}
 		} catch (MyShopException e) {
-			ErrorLogger.logException(e, Logger.getLogger(GoodBean.class));
+			ErrorLogger.logException(e, log);
 		}
 		return "";
 	}
@@ -138,7 +137,7 @@ public class GoodBean implements Serializable{
 				return "such good does not exist!";
 			}
 		} catch (MyShopException e) {
-			ErrorLogger.logException(e, Logger.getLogger(GoodBean.class));
+			ErrorLogger.logException(e, log);
 		}
 		return null;
 		

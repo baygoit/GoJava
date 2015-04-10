@@ -21,18 +21,18 @@ public class GoodRecord {
 	@JoinColumn(name = "good_id")
 	private Good good;	
 	
+	@Column(name="amount")
+	private Integer amount;
+	
+	@Column(name="price")
+	private Integer price;
+	
 	public Good getGood() {
 		return good;
 	}
 	public void setGood(Good good) {
 		this.good = good;
 	}
-
-	@Column(name="amount")
-	private Integer amount;
-	
-	@Column(name="price")
-	private Integer price;
 	
 	public Integer getPrice() {
 		return price;
