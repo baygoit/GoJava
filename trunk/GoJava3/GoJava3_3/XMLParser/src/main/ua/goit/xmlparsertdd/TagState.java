@@ -214,9 +214,26 @@ enum TagState {
   VALID_TAG_END {
     @Override
     public TagState next(char c, TagElement.Builder builder, TagStateMachine machine) {
-      return VALID_TAG_END;
+      TagState result = TEXT_VALUE;
+      builder.buildTextValue(c);
+      if (c == '<') {
+        result = OPEN;
+      }
+      return result;
     }
   },
+  TEXT_VALUE {
+
+    @Override
+    public TagState next(char c, TagElement.Builder builder, TagStateMachine machine) {
+      TagState result = TEXT_VALUE;
+      if (c == '<') {
+        result = OPEN;
+      }
+      return result;
+    }
+  },
+
   INVALID_END {
     @Override
     public TagState next(char c, TagElement.Builder builder, TagStateMachine machine) {

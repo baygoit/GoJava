@@ -43,6 +43,10 @@ public class TagElement implements Element {
     this.params = params;
   }
 
+  public void setTextValue(String textValue) {
+    this.textValue = textValue;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
@@ -71,6 +75,7 @@ public class TagElement implements Element {
     private Map<String, String> params = new HashMap<String, String>();
     private StringBuilder paramName = new StringBuilder();
     private StringBuilder paramValue = new StringBuilder();
+    private StringBuilder textValue = new StringBuilder();
 
     static Builder newBuilder() {
       return new Builder();
@@ -99,6 +104,10 @@ public class TagElement implements Element {
     public void buildParamValue(char c) {
       paramValue.append(c);
     }
+
+    public void buildTextValue(char c) {
+      textValue.append(c);
+    }
     
     public void addParams() {
       params.put(paramName.toString(), paramValue.toString());
@@ -107,7 +116,9 @@ public class TagElement implements Element {
     }
 
     public TagElement build() {
-      return new TagElement(type, name.toString(), params);
+      TagElement result = new TagElement(type, name.toString(), params);
+      result.setTextValue(textValue.toString());
+      return result;
     }
   }
 
