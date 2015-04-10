@@ -7,7 +7,6 @@ enum TagState {
       TagState result = INVALID_END;
       if (c == '<') {
         result = OPEN;
-        builder.setType(TagElementType.OPEN);
       } else if (CharUtil.isEmptyChar(c)) {
         result = INIT;
       }
@@ -17,6 +16,7 @@ enum TagState {
   OPEN {
     @Override
     public TagState next(char c, TagElement.Builder builder, TagStateMachine machine) {
+      builder.setType(TagElementType.OPEN);
       TagState result = INVALID_END;
       if (CharUtil.isEmptyChar(c)) {
         result = OPEN;
@@ -187,6 +187,8 @@ enum TagState {
       } else if (CharUtil.isNameChar(c)) {
         result = TAG_NAME;
         builder.buildName(c);
+      } else if(CharUtil.isEmptyChar(c)) {
+        result = END_TAG_NAME;
       }
       return result;
     }
@@ -197,10 +199,100 @@ enum TagState {
     public TagState next(char c, TagElement.Builder builder, TagStateMachine machine) {
       TagState result = INVALID_END;
       if (CharUtil.isNameStartChar(c)) {
-        result = HEADER_PARAM_NAME;
+        result = PARAM_NAME;
         builder.buildParamName(c);
       } else if (CharUtil.isEmptyChar(c)) {
-        result = END_HEADER_NAME;
+        result = END_TAG_NAME;
+      } else if (c == '>') {
+        result = VALID_TAG_END;
+      }
+      return result;
+    }
+  },
+  PARAM_NAME {
+
+    @Override
+    public TagState next(char c, TagElement.Builder builder, TagStateMachine machine) {
+      TagState result = INVALID_END;
+      if (CharUtil.isNameChar(c)) {
+        result = PARAM_NAME;
+        builder.buildParamName(c);
+      } else if (CharUtil.isEmptyChar(c)) {
+        result = END_PARAM_NAME;
+      } else if (c == '=') {
+        result = START_PARAM_VALUE;
+      }
+      return result;
+    }
+  },
+
+  END_PARAM_NAME {
+    @Override
+    public TagState next(char c, TagElement.Builder builder, TagStateMachine machine) {
+      TagState result = INVALID_END;
+      if (c == '=') {
+        result = START_PARAM_VALUE;
+      } else if (CharUtil.isEmptyChar(c)) {
+        result = END_PARAM_NAME;
+      }
+      return result;
+    }
+  },
+
+  START_PARAM_VALUE {
+    @Override
+    public TagState next(char c, TagElement.Builder builder, TagStateMachine machine) {
+      TagState result = INVALID_END;
+      if (c == '\'') {
+        result = PARAM_VALUE_SINGLE_QUOTE;
+      } else if (c == '\"') {
+        result = PARAM_VALUE_DOUBLE_QUOTE;
+      } else if (CharUtil.isEmptyChar(c)) {
+        result = START_PARAM_VALUE;
+      }
+      return result;
+    }
+  },
+
+  PARAM_VALUE_SINGLE_QUOTE {
+    @Override
+    public TagState next(char c, TagElement.Builder builder, TagStateMachine machine) {
+      TagState result = PARAM_VALUE_SINGLE_QUOTE;
+      if (c == '\'') {
+        result = END_PARAM_VALUE;
+        builder.addParams();
+      } else {
+        builder.buildParamValue(c);
+      }
+      return result;
+    }
+  },
+
+  PARAM_VALUE_DOUBLE_QUOTE {
+    @Override
+    public TagState next(char c, TagElement.Builder builder, TagStateMachine machine) {
+      TagState result = PARAM_VALUE_DOUBLE_QUOTE;
+      if (c == '\"') {
+        result = END_PARAM_VALUE;
+        builder.addParams();
+      } else {
+        builder.buildParamValue(c);
+      }
+      return result;
+    }
+  },
+
+  END_PARAM_VALUE {
+    @Override
+    public TagState next(char c, TagElement.Builder builder, TagStateMachine machine) {
+      TagState result = INVALID_END;
+      if (CharUtil.isEmptyChar(c)) {
+        result = END_PARAM_VALUE;
+      } else if (CharUtil.isNameStartChar(c)) {
+        result = PARAM_NAME;
+        builder.buildParamName(c);
+      } else if (c == '>') {
+        result = VALID_TAG_END;
       }
       return result;
     }
