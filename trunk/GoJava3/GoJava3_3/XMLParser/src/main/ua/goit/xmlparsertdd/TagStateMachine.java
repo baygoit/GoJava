@@ -6,7 +6,7 @@ public class TagStateMachine {
 
   public void next(char c, XMLParser parser) {
     TagState previousState = currentState;
-    currentState = currentState.next(c, builder, this);
+    currentState = currentState.next(c, builder);
     if (currentState == TagState.VALID_TAG_END) {
       createTagElement(parser);
     } else if (currentState == TagState.TEXT_VALUE) {
@@ -33,7 +33,8 @@ public class TagStateMachine {
       parser.sendEventToHandler(Event.START, result);
     } else if (result.getType() == TagElementType.TEXT_VALUE) {
       parser.sendEventToHandler(Event.TEXT_VALUE, result);
+    } else if (result.getType() == TagElementType.SINGLE) {
+      parser.sendEventToHandler(Event.SINGLE_TAG, result);
     }
-    
   }
 }

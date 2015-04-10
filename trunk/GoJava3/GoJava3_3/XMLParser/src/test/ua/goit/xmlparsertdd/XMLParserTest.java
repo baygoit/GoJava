@@ -155,7 +155,7 @@ public class XMLParserTest {
         myTagElement = tagElement;
       }
     };
-    builder.onHeader(handler);
+    builder.onStart(handler);
     parser = builder.build();
     parser.parse(inputString);
     TagElement actualTagElement = myTagElement;
@@ -202,5 +202,23 @@ public class XMLParserTest {
     Map<String, String> params = myTagElement.getParams();
     String actual = params.get("param");
     assertEquals(expected,actual);
+  }
+
+  @Test
+  public void givenTagWithSingleTagElement_WhenParseWholeTag_ThenOnSingleTagInvokedAndCheckName() {
+    //given
+    String inputString = "<? xml ?><tagname param = \"param 'value'\"/>";
+
+    //when
+    handler = new Handler() {
+      @Override
+      public void handle(TagElement tagElement) {
+        myTagElement = tagElement;
+      }
+    };
+    builder.onSingleTag(handler);
+    parser = builder.build();
+    parser.parse(inputString);
+    assertEquals("tagname", myTagElement.getName());
   }
 }

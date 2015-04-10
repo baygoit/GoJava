@@ -84,8 +84,8 @@ public class XMLParser implements Parser {
       registerHandlerOnEvent(handler, Event.CLOSE_TAG);
     }
     
-    public void onHeader(Handler handler) {
-      registerHandlerOnEvent(handler, Event.START);
+    public void onSingleTag(Handler handler) {
+      registerHandlerOnEvent(handler, Event.SINGLE_TAG);
     }
     
     private void registerHandlerOnEvent(Handler handler, Event event) {
