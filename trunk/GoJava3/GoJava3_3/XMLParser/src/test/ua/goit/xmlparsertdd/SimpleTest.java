@@ -4,7 +4,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
 
@@ -164,6 +166,17 @@ public class SimpleTest {
 
   @Test
   public void givenValidTagWithTextValue_WhenParseWholeTag_ThenOnTextValueInvoked() {
+    //given
+    String inputString = "<? xml ?><tagname>TextValue</tagname>";
+    Set<Tag> myTags = new HashSet<Tag>();
 
+    //when
+    parser = builder.build();
+    handler = new Handler() {
+      @Override
+      public void handle(Tag tag) {
+        myTag = tag;
+      }
+    };
   }
 }
