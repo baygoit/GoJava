@@ -175,6 +175,7 @@ public class SimpleTest {
     handler = new Handler() {
       @Override
       public void handle(Tag tag) {
+        myTags.
         myTag = tag;
       }
     };
