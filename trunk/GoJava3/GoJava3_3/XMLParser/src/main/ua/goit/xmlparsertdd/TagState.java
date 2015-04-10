@@ -6,10 +6,10 @@ enum TagState {
     public TagState next(char c, TagElement.Builder builder, TagStateMachine machine) {
       TagState result = INVALID_END;
       if (c == '<') {
-        result = TagState.OPEN;
+        result = OPEN;
         builder.setType(TagElementType.OPEN);
       } else if (CharUtil.isEmptyChar(c)) {
-        result = TagState.INIT;
+        result = INIT;
       }
       return result;
     }
@@ -19,15 +19,15 @@ enum TagState {
     public TagState next(char c, TagElement.Builder builder, TagStateMachine machine) {
       TagState result = INVALID_END;
       if (CharUtil.isEmptyChar(c)) {
-        result = TagState.OPEN;
+        result = OPEN;
       } else if (c == '?') {
-        result = TagState.HEADER;
+        result = HEADER;
         builder.setType(TagElementType.HEADER);
       } else if (CharUtil.isNameStartChar(c)) {
-        result = TagState.TAG_NAME;
+        result = TAG_NAME;
         builder.buildName(c);
       } else if (c == '/') {
-        result = TagState.CLOSE;
+        result = CLOSE;
         builder.setType(TagElementType.CLOSE);
       }
       return result;
@@ -38,9 +38,9 @@ enum TagState {
     public TagState next(char c, TagElement.Builder builder, TagStateMachine machine) {
       TagState result = INVALID_END;
       if (CharUtil.isEmptyChar(c)) {
-        result = TagState.HEADER;
+        result = HEADER;
       } else if (CharUtil.isNameStartChar(c)) {
-        result = TagState.HEADER_NAME;
+        result = HEADER_NAME;
         builder.buildName(c);
       }
       return result;
@@ -52,10 +52,10 @@ enum TagState {
     public TagState next(char c, TagElement.Builder builder, TagStateMachine machine) {
       TagState result = INVALID_END;
       if (CharUtil.isNameChar(c)) {
-        result = TagState.HEADER_NAME;
+        result = HEADER_NAME;
         builder.buildName(c);
       } else if (CharUtil.isEmptyChar(c)) {
-        result = TagState.END_HEADER_NAME;
+        result = END_HEADER_NAME;
       }
       return result;
     }
@@ -66,12 +66,12 @@ enum TagState {
     public TagState next(char c, TagElement.Builder builder, TagStateMachine machine) {
       TagState result = INVALID_END;
       if (CharUtil.isNameStartChar(c)) {
-        result = TagState.HEADER_PARAM_NAME;
+        result = HEADER_PARAM_NAME;
         builder.buildParamName(c);
       } else if (CharUtil.isEmptyChar(c)) {
-        result = TagState.END_HEADER_NAME;
+        result = END_HEADER_NAME;
       } else if (c == '?'){
-        result = TagState.END_HEADER;
+        result = END_HEADER;
       }
       return result;
     }
@@ -82,12 +82,12 @@ enum TagState {
     public TagState next(char c, TagElement.Builder builder, TagStateMachine machine) {
       TagState result = INVALID_END;
       if (CharUtil.isNameChar(c)) {
-        result = TagState.HEADER_PARAM_NAME;
+        result = HEADER_PARAM_NAME;
         builder.buildParamName(c);
       } else if (CharUtil.isEmptyChar(c)) {
-        result = TagState.END_HEADER_PARAM_NAME;
+        result = END_HEADER_PARAM_NAME;
       } else if (c == '=') {
-        result = TagState.START_HEADER_PARAM_VALUE;
+        result = START_HEADER_PARAM_VALUE;
       }
       return result;
     }
@@ -98,9 +98,9 @@ enum TagState {
     public TagState next(char c, TagElement.Builder builder, TagStateMachine machine) {
       TagState result = INVALID_END;
       if (c == '=') {
-        result = TagState.START_HEADER_PARAM_VALUE;
+        result = START_HEADER_PARAM_VALUE;
       } else if (CharUtil.isEmptyChar(c)) {
-        result = TagState.END_HEADER_PARAM_NAME;
+        result = END_HEADER_PARAM_NAME;
       }
       return result;
     }
@@ -111,11 +111,11 @@ enum TagState {
     public TagState next(char c, TagElement.Builder builder, TagStateMachine machine) {
       TagState result = INVALID_END;
       if (c == '\'') {
-        result = TagState.HEADER_PARAM_VALUE_SINGLE_QUOTE;
+        result = HEADER_PARAM_VALUE_SINGLE_QUOTE;
       } else if (c == '\"') {
-        result = TagState.HEADER_PARAM_VALUE_DOUBLE_QUOTE;
+        result = HEADER_PARAM_VALUE_DOUBLE_QUOTE;
       } else if (CharUtil.isEmptyChar(c)) {
-        result = TagState.START_HEADER_PARAM_VALUE;
+        result = START_HEADER_PARAM_VALUE;
       }
       return result;
     }
@@ -126,7 +126,7 @@ enum TagState {
     public TagState next(char c, TagElement.Builder builder, TagStateMachine machine) {
       TagState result = HEADER_PARAM_VALUE_SINGLE_QUOTE;
       if (c == '\'') {
-        result = TagState.END_HEADER_PARAM_VALUE;
+        result = END_HEADER_PARAM_VALUE;
         builder.addParams();
       } else {
         builder.buildParamValue(c);
@@ -140,7 +140,7 @@ enum TagState {
     public TagState next(char c, TagElement.Builder builder, TagStateMachine machine) {
       TagState result = HEADER_PARAM_VALUE_DOUBLE_QUOTE;
       if (c == '\"') {
-        result = TagState.END_HEADER_PARAM_VALUE;
+        result = END_HEADER_PARAM_VALUE;
         builder.addParams();
       } else {
         builder.buildParamValue(c);
@@ -154,12 +154,12 @@ enum TagState {
     public TagState next(char c, TagElement.Builder builder, TagStateMachine machine) {
       TagState result = INVALID_END;
       if (CharUtil.isEmptyChar(c)) {
-        result = TagState.END_HEADER_PARAM_VALUE;
+        result = END_HEADER_PARAM_VALUE;
       } else if (CharUtil.isNameStartChar(c)) {
-        result = TagState.HEADER_PARAM_NAME;
+        result = HEADER_PARAM_NAME;
         builder.buildParamName(c);
       } else if (c == '?') {
-        result = TagState.END_HEADER;
+        result = END_HEADER;
       }
       return result;
     }
@@ -170,9 +170,9 @@ enum TagState {
     public TagState next(char c, TagElement.Builder builder, TagStateMachine machine) {
       TagState result = INVALID_END;
       if (CharUtil.isEmptyChar(c)) {
-        result = TagState.END_HEADER;
+        result = END_HEADER;
       } else if (c == '>') {
-        result = TagState.VALID_TAG_END;
+        result = VALID_TAG_END;
       }
       return result;
     }
@@ -183,9 +183,9 @@ enum TagState {
     public TagState next(char c, TagElement.Builder builder, TagStateMachine machine) {
       TagState result = INVALID_END;
       if (c == '>') {
-        result = TagState.VALID_TAG_END;
+        result = VALID_TAG_END;
       } else if (CharUtil.isNameChar(c)) {
-        result = TagState.TAG_NAME;
+        result = TAG_NAME;
         builder.buildName(c);
       }
       return result;
@@ -197,10 +197,10 @@ enum TagState {
     public TagState next(char c, TagElement.Builder builder, TagStateMachine machine) {
       TagState result = INVALID_END;
       if (CharUtil.isNameStartChar(c)) {
-        result = TagState.HEADER_PARAM_NAME;
+        result = HEADER_PARAM_NAME;
         builder.buildParamName(c);
       } else if (CharUtil.isEmptyChar(c)) {
-        result = TagState.END_HEADER_NAME;
+        result = END_HEADER_NAME;
       }
       return result;
     }
@@ -247,9 +247,9 @@ enum TagState {
     TagState next(char c, TagElement.Builder builder, TagStateMachine machine) {
       TagState result = INVALID_END;
       if (CharUtil.isEmptyChar(c)) {
-        result = TagState.CLOSE;
+        result = CLOSE;
       } else if (CharUtil.isNameStartChar(c)) {
-        result = TagState.CLOSE_NAME;
+        result = CLOSE_NAME;
         builder.buildName(c);
       }
       return result;
@@ -260,12 +260,12 @@ enum TagState {
     TagState next(char c, TagElement.Builder builder, TagStateMachine machine) {
       TagState result = INVALID_END;
       if (CharUtil.isNameChar(c)) {
-        result = TagState.CLOSE_NAME;
+        result = CLOSE_NAME;
         builder.buildName(c);
       } else if (CharUtil.isEmptyChar(c)) {
-        result = TagState.END_CLOSE_NAME;
+        result = END_CLOSE_NAME;
       } else if (c == '>') {
-        result = TagState.VALID_TAG_END;
+        result = VALID_TAG_END;
       }
       return result;
     }
@@ -275,9 +275,9 @@ enum TagState {
     TagState next(char c, TagElement.Builder builder, TagStateMachine machine) {
       TagState result = INVALID_END;
       if (CharUtil.isEmptyChar(c)) {
-        result = TagState.END_CLOSE_NAME;
+        result = END_CLOSE_NAME;
       } else if (c == '>') {
-        result = TagState.VALID_TAG_END;
+        result = VALID_TAG_END;
       }
       return result;
     }
