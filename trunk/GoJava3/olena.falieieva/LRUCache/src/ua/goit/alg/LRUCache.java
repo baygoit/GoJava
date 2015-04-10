@@ -22,14 +22,14 @@ public class LRUCache {
 		if (map.containsKey(key)) {
 			Node oldNode = map.get(key);
 			oldNode.value = value;
-			addToTail(oldNode); 
+			addToTail(oldNode);
 		} else {
 			Node newNode = new Node(key,value);
-			if (tail != null) {
-				appendToTail(newNode);		
-			} else {
+			if (tail == null) {
 				head = newNode;
-				tail = head;
+				tail = head;		
+			} else {
+				appendToTail(newNode);
 			}
 			map.put(key,newNode);
 		}

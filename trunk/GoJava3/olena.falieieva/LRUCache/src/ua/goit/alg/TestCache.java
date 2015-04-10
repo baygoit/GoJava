@@ -1,7 +1,7 @@
 package ua.goit.alg;
 
 import org.junit.*;
-
+    
 public class TestCache {
 
 	LRUCache cache  = new LRUCache(5);
@@ -37,15 +37,15 @@ public class TestCache {
 		cache.set(3, 100500);
 		Assert.assertEquals(cache.get(3), 100500);
 	}	
-		
+
 	@Test
-		public void getFourValues_setOneValueWithNotExistedKey_getLatestUsedValue() {
-		  cache.get(1);
-		  cache.get(2);
-		  cache.get(3);
-		  cache.get(0);
-		  cache.set(7, 7);
-		  Assert.assertEquals(cache.get(4), -1);
+	public void getFourValues_setOneValueWithNotExistedKey_getLatestUsedValue() {
+		cache.get(1);
+		cache.get(2);
+		cache.get(3);
+		cache.get(0);
+		cache.set(7, 7);
+		Assert.assertEquals(cache.get(4), -1);
 	}
 }
 
