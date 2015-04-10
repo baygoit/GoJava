@@ -1,6 +1,7 @@
 package ua.com.sas.controller;
 
 import java.util.List;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,9 +25,9 @@ public class RestController {
 		return service.getAll();
 	}
 	
-	@RequestMapping (value = "/t")
+	@RequestMapping (value = "/quote")
 	public @ResponseBody Quote get(){
-		return service.getRandomed();
+		return service.getRandomed(new Random());
 	}
 	
 	@RequestMapping (value = "/categories/{id}")

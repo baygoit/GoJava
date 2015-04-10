@@ -1,6 +1,7 @@
 package ua.com.sas.service;
 
 import java.util.List;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -47,8 +48,8 @@ public class ProjectsServiceImp implements ProjectsService{
 	}
 
 	@Override
-	public Quote getRandomed() {
-		int rand = (int) ((Math.random() * quotesDAO.size()) + 1);
+	public Quote getRandomed(Random random) {
+		int rand = random.nextInt(quotesDAO.size()) + 1;
 		return quotesDAO.get(rand);
 	}
 	

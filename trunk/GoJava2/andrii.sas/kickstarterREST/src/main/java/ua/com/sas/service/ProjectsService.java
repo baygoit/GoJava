@@ -1,6 +1,7 @@
 package ua.com.sas.service;
 
 import java.util.List;
+import java.util.Random;
 
 import ua.com.sas.model.Category;
 import ua.com.sas.model.Project;
@@ -14,6 +15,6 @@ public interface ProjectsService {
 	
 	Project getCurrent(int id);
 	
-	Quote getRandomed();
+	Quote getRandomed(Random random);
 
 }

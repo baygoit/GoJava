@@ -1,9 +1,25 @@
 body {
 	padding:	0;
 	margin:		0;
-	background:	url('images/logo.png') no-repeat top right #fafafa;
 	text-align: center;
+	background: #fff;
 }
+
+#navigation {
+	list-style-type: none;
+	border-bottom: 	 2px solid #777;
+	margin: 		 0;
+	padding:		 0;
+	background: 	 url('images/nav_bg.png') #f1f1f1;
+}
+
+#navigation li {
+	display:		 inline-block;
+	cursor: 		 pointer;
+	padding:		 20px;
+	
+}
+
 #categories {
 	margin:		30px 0;
 }
@@ -14,7 +30,7 @@ body {
 #categories a {
 	text-decoration: none;
 	display:	inline-block;
-	background: #777;
+	background: #00D8FF;
 	font:		normal 15px/35px 'Verdana', sans-serif;
 	padding:	0 20px;
 	color: 		white;
@@ -23,7 +39,7 @@ body {
 }
 
 #categories a:hover {
-	background: #999;
+	background: #0AA9CF;
 }
 
 .project {
