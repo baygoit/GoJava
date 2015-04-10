@@ -65,7 +65,7 @@ enum TagState {
     @Override
     public TagState next(char c, Tag.Builder builder, TagStateMachine machine) {
       TagState result = INVALID_END;
-      if (CharUtil.isNameChar(c)) {
+      if (CharUtil.isNameStartChar(c)) {
         result = TagState.HEADER_PARAM_NAME;
         builder.buildParamName(c);
       } else if (CharUtil.isEmptyChar(c)) {
