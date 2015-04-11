@@ -14,97 +14,97 @@
  
     	<h3> Editing info about types of goods, represented in shop </h3>
  
- 		<h:dataTable value="#{goodTypeBean.allTypes}" var="t"
+ 		<p:dataTable value="#{goodTypeBean.allTypes}" var="t"
     			styleClass="order-table"
     			headerClass="order-table-header"
     			rowClasses="order-table-odd-row,order-table-even-row"
     		>
  
-    		<h:column>
+    		<p:column>
     			<f:facet name="header">
     				Type ID
     			</f:facet>
     				#{t.id}
-    		</h:column>
+    		</p:column>
  
-    		<h:column>
+    		<p:column>
     			<f:facet name="header">
     				Name
 				</f:facet>
     				#{t.name}
-    		</h:column>
+    		</p:column>
  
- 			<h:column>
+ 			<p:column>
     			<f:facet name="header">
     				Parent ID
 				</f:facet>
     				#{t.parent.getId()}
-    		</h:column>
+    		</p:column>
     		
  
-    	</h:dataTable>
+    	</p:dataTable>
  
  		<h2>Add New Type</h2>
  		<h:form>
  
- 			<h:panelGrid columns="3">
+ 			<p:panelGrid columns="3">
  
 				Name : 
-				<h:inputText id="name" value="#{goodTypeBean.name}" 
+				<p:inputText id="name" value="#{goodTypeBean.name}" 
 					size="20" required="true"
 					label="Name" >
 					 <f:validateRegex pattern="^[a-zA-Z]{1,}$" />
-				</h:inputText>
+				</p:inputText>
  
-				<h:message for="name" style="color:red" />
+				<p:message for="name" style="color:red" />
  
 				Parent ID : 
-				<h:inputText id="parentId" value="#{goodTypeBean.parent}" 
+				<p:inputText id="parentId" value="#{goodTypeBean.parent}" 
 					size="20" required="false"
 					label="parentId" >
-				</h:inputText>
+				</p:inputText>
  
-				<h:message for="parentId" style="color:red" />
+				<p:message for="parentId" style="color:red" />
  
-			</h:panelGrid>
+			</p:panelGrid>
  
-			<h:commandButton value="Submit" action="#{goodTypeBean.addType()}" />
+			<p:commandButton value="Submit" action="#{goodTypeBean.addType()}" />
  
  		</h:form>
  		
  		<h2>Update Existing Type</h2>
  		<h:form>
  
- 			<h:panelGrid columns="3">
+ 			<p:panelGrid columns="3">
  			
  				ID : 
-				<h:inputText id="id" value="#{goodTypeBean.id}" 
+				<p:inputText id="id" value="#{goodTypeBean.id}" 
 					size="20" required="true"
 					label="id" >
-				</h:inputText>
+				</p:inputText>
  
-				<h:message for="id" style="color:red" />
+				<p:message for="id" style="color:red" />
  
 				Name : 
-				<h:inputText id="name" value="#{goodTypeBean.name}" 
+				<p:inputText id="name" value="#{goodTypeBean.name}" 
 					size="20" required="true"
 					label="Name" >
 					 <f:validateRegex pattern="^[a-zA-Z]{1,}$" />
-				</h:inputText>
+				</p:inputText>
  
-				<h:message for="name" style="color:red" />
+				<p:message for="name" style="color:red" />
  
 				Parent ID : 
-				<h:inputText id="parentId" value="#{goodTypeBean.parent}" 
+				<p:inputText id="parentId" value="#{goodTypeBean.parent}" 
 					size="20" required="true"
 					label="parentId" >
-				</h:inputText>
+				</p:inputText>
  
-				<h:message for="parentId" style="color:red" />
+				<p:message for="parentId" style="color:red" />
  
-			</h:panelGrid>
+			</p:panelGrid>
  
-			<h:commandButton value="Submit" action="#{goodTypeBean.updateType()}" />
+			<p:commandButton value="Submit" action="#{goodTypeBean.updateType()}" />
  
  		</h:form>
  		

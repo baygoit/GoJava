@@ -52,12 +52,10 @@
     <servlet-name>Faces Servlet</servlet-name>
     <url-pattern>*.xhtml</url-pattern>
   </servlet-mapping>  
-  <!--PRIMEFACES THEME
 	<context-param>
 		<param-name>primefaces.THEME</param-name>
-		<param-value>bluesky</param-value>
+		<param-value>bootstrap</param-value>
 	</context-param>
-	  -->
    <context-param>
         <param-name>contextConfigLocation</param-name>
        	<param-value>classpath:beans.xml</param-value>
