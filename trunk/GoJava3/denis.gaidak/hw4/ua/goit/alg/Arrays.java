@@ -10,7 +10,6 @@ import static java.util.Arrays.copyOf;
 public class Arrays {
 
   public static void mergeSort(File file) {
-
     try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file))) {
       List<File> tempFileList;
       tempFileList = divideLargeFile(bufferedReader, file.getParent());
@@ -21,7 +20,6 @@ public class Arrays {
     } catch (IOException e) {
       e.printStackTrace();
     }
-
   }
 
   private static List<File> divideLargeFile(BufferedReader bufferedReader, String dir) throws IOException {
@@ -60,27 +58,30 @@ public class Arrays {
   }
 
   private static File mergeTempFile(List<File> tempFileList) throws IOException {
-
     if (tempFileList.isEmpty()) return null;
     if (tempFileList.size() == 1) return tempFileList.get(0);
 
     List<File> files = new ArrayList<File>();
-
     while (tempFileList.size() >= 2) {
       File tempFileFirst = tempFileList.get(0);
       File tempFileSecond = tempFileList.get(1);
       File mergedFile = mergeTwoTempFile(tempFileFirst, tempFileSecond);
       tempFileList.remove(1);
       tempFileList.remove(0);
-      tempFileFirst.delete();
-      tempFileSecond.delete();
+      removeFile(tempFileFirst, tempFileSecond);
       files.add(mergedFile);
     }
 
-    if (tempFileList.size() == 1) files.add(tempFileList.get(0));
-
+    if (tempFileList.size() == 1) {
+      files.add(tempFileList.get(0));
+    }
     return mergeTempFile(files);
+  }
 
+  private static void removeFile(File... files) {
+    for (File file:files) {
+      file.delete();
+    }
   }
 
   private static File mergeTwoTempFile(File firstFile, File secondFile) throws IOException {
