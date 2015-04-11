@@ -24,21 +24,18 @@
 				<td><form:input path="question" id="question" /></td>
 				<td><form:errors path="question" cssClass="error" /></td>
 			</tr>
-
 			<tr>
 				<td><label for="idProject">Id Project: </label></td>
 				<td><form:input path="idProject" id="idProject" value="${id}" /></td>
 				<td><form:errors path="idProject" cssClass="error" /></td>
 			</tr>
-
 			<tr>
-				<td colspan="3"><input type="submit" value="Register" /></td>
+				<td colspan="3"><input type="submit" value="add question" /></td>
 			</tr>
 		</table>
 	</form:form>
-	<br />
 	<p>
-		Go back to <a href="${ctx}/projects">project</a>
+		Go back to <a href="${ctx}/projects/${id}?show">project</a>
 	</p>
 </body>
 </html>

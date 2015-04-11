@@ -4,13 +4,18 @@
 <head>
 <title>Kickstarter project</title>
 <style>
-tr:first-child {font-weight: bold; background-color: #C6C9C4;}
-h3 {color: #ff0000;}
+tr:first-child {
+	font-weight: bold;
+	background-color: #C6C9C4;
+}
+
+h3 {
+	color: #ff0000;
+}
 </style>
 </head>
 <body>
 	<h1>Project from category with name - ${project.category.name}</h1>
-	<h3><c:out value="${message}" /></h3>
 	<table border="2" bordercolor="black" cellpadding="2">
 		<tr>
 			<td>NAME</td>
@@ -52,25 +57,32 @@ h3 {color: #ff0000;}
 			<td>days to go:</td>
 			<td>${project.dateClose}</td>
 		</tr>
-
-		<c:forEach items="${questions}" var="question">
-			<tr>
-				<td>${question.question}</td>
-				<td>${question.answer}</td>
-			</tr>
-		</c:forEach>
-
 	</table>
-	<p>
-		If you want return to <a href="${ctx}/projects/${project.idCategory}">projects</a>
-	</p>
-	<p>
-		If you want to <a href="${ctx}/donate/${project.id}">invest in the
-			project</a>
-	</p>
-	<p>
-		Have a question? If the info above doesn't help, you can <a
-			href="${ctx}/question/${project.id}?add">ask the project creator
-			directly</a>
+	
+	<p>If you want return to <a href="${ctx}/projects/${project.idCategory}">projects</a></p>
+	<p>If you want to <a href="${ctx}/donate/${project.id}">invest in the project</a></p>
+
+	<h1>Questions and answers for this project with name - ${project.name}</h1>
+	<h3>
+		<c:out value="${message}" />
+	</h3>
+	<table border="2" bordercolor="black" cellpadding="2">
+		<tr>
+			<td>QUESTION</td>
+			<td>ANSWER</td>
+			<td>DELETE QUESTION</td>
+			<td>ADD ANSWER</td>
+		</tr>
+		<tr>
+			<c:forEach items="${questions}" var="question">
+				<tr>
+					<td>${question.question}</td>
+					<td>${question.answer}</td>
+					<td><a href="${ctx}/question/${question.id}/${question.idProject}?delete">delete this question</a></td>
+					<td><a href="${ctx}/question/${question.id}?addanswer">add answer to this question</a></td>
+				</tr>
+			</c:forEach>
+	</table>
+	<p>Have a question? If the info above doesn't help, you can <a href="${ctx}/question/${project.id}?add">ask the project creator directly</a></p>
 </body>
 </html>

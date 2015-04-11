@@ -133,7 +133,6 @@ public class AppController {
 		int amount = Integer.valueOf(req.getParameter("amount"));
 		int project = Integer.valueOf(req.getParameter("project"));
 		projectService.addDonate(amount, project);
-
 		model.addAttribute("success", "Donate " + amount + " successfully");
 		model.addAttribute("project", project);
 		return "donatesuccess";
@@ -153,7 +152,33 @@ public class AppController {
 			return "addquestion";
 		}
 		questionService.saveQuestion(question);
-		model.addAttribute("message", "Question registered successfully");
+		model.addAttribute("message", "Question added successfully");
 		return "redirect:/projects/" + id + "?show";
+	}
+	
+	@RequestMapping(value = "/question/{id}/{idProject}", params = "delete", method = RequestMethod.GET)
+	public String deleteQuestion(ModelMap model, @PathVariable int id) {
+		questionService.deleteQuestionById(id);
+		model.addAttribute("message", "Question deleted successfully");
+		return "redirect:/projects/{idProject}?show";
+	}
+	
+	@RequestMapping(value = "/question/{id}", params = "addanswer", method = RequestMethod.GET)
+	public String newAnswer(ModelMap model, @PathVariable int id) {
+		Question question = questionService.getQuestion(id);
+		model.addAttribute("question", question);
+		return "addanswer";
+	}
+
+	@RequestMapping(value = "/question/{id}", params = "addanswer", method = RequestMethod.POST)
+	public String saveAnswer(ModelMap model, @PathVariable int id, HttpServletRequest req) {
+		String red = "redirect:/projects/" + questionService.getQuestion(id).getIdProject() + "?show";
+		if (!(questionService.getQuestion(id).getAnswer() == null)) {
+			model.addAttribute("message", "Answer for this question already exist");
+			return red;
+		}
+		questionService.addAnswer(req.getParameter("answer"), id);
+		model.addAttribute("message", "Answer added successfully");
+		return red;
 	}
 }

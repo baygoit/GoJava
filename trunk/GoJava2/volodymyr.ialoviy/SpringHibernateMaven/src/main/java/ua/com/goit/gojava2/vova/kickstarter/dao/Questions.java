@@ -1,8 +1,11 @@
 package ua.com.goit.gojava2.vova.kickstarter.dao;
 
 import java.util.List;
+
+import org.hibernate.Query;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
+
 import ua.com.goit.gojava2.vova.kickstarter.model.Question;
 
 @Repository("questionDao")
@@ -30,4 +33,13 @@ public class Questions extends AbstractDao implements QuestionDao {
 		return (Question) getSession().get(Question.class, id);
 	}
 
+	@Override
+	public void addAnswer(String answer, int id) {
+		Query query = getSession().createQuery(
+				"update Question set answer = :answer"
+						+ " where id = :id");
+		query.setInteger("id", id);
+		query.setString("answer", answer);
+		query.executeUpdate();
+	}
 }

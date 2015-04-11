@@ -1,6 +1,7 @@
 package ua.com.goit.gojava2.vova.kickstarter.dao;
 
 import java.util.List;
+
 import ua.com.goit.gojava2.vova.kickstarter.model.Question;
 
 public interface QuestionDao {
@@ -12,5 +13,7 @@ public interface QuestionDao {
 	void deleteQuestionById(int id);
 
 	Question getQuestion(int id);
+
+	void addAnswer(String answer, int id);
 
 }

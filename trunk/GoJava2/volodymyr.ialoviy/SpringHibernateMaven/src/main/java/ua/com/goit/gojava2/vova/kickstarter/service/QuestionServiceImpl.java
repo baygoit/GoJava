@@ -36,4 +36,9 @@ public class QuestionServiceImpl implements QuestionService{
 		return dao.getQuestion(id);
 	}
 
+	@Override
+	public void addAnswer(String answer, int id) {
+		dao.addAnswer(answer, id);
+	}
+
 }
