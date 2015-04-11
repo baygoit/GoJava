@@ -1,28 +1,20 @@
 package ua.goit.alg;
 
 import java.io.*;
-import java.nio.ByteBuffer;
-import java.nio.channels.FileChannel;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
-
 import static java.nio.file.Paths.get;
 import static java.util.Arrays.copyOf;
 
 public class Arrays {
 
   public static void mergeSort(File file) {
-    int blockSize = estimateArrayMaxSize();
 
-    List<File> tempFileList = new ArrayList<>();
     try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file))) {
-      tempFileList = divideLargeFile(bufferedReader, blockSize, file.getParent());
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
+      List<File> tempFileList;
+      tempFileList = divideLargeFile(bufferedReader, file.getParent());
 
-    try {
       File sortedTempFile = mergeTempFile(tempFileList);
       Files.copy(get(sortedTempFile.getPath()), get(file.getParent() + "\\sorted_" + file.getName()));
       sortedTempFile.delete();
@@ -32,8 +24,9 @@ public class Arrays {
 
   }
 
-  private static List<File> divideLargeFile(BufferedReader bufferedReader, int blockSize, String dir) throws IOException {
+  private static List<File> divideLargeFile(BufferedReader bufferedReader, String dir) throws IOException {
     List<File> tempFileList = new ArrayList<File>();
+    int blockSize = estimateArrayMaxSize();
     int[] array = new int[blockSize];
     int count = 0;
     String line;
@@ -41,6 +34,7 @@ public class Arrays {
       array[count] = Integer.parseInt(line);
       count++;
       if (count == blockSize) {
+        MergeSort.sort(array);
         File newTempFile = createTempFile(array, dir);
         tempFileList.add(newTempFile);
         array = new int[blockSize];
@@ -55,18 +49,8 @@ public class Arrays {
     return tempFileList;
   }
 
-  private static File createTempFile(int[] array, String dir) throws IOException {
+  public static File createTempFile(int[] array, String dir) throws IOException {
     File tempFile = File.createTempFile("temp", ".txt", new File(dir));
-    MergeSort.sort(array);
-
-    try(FileOutputStream out = new FileOutputStream(tempFile)) {
-      FileChannel file = out.getChannel();
-      ByteBuffer buf = file.map(FileChannel.MapMode.READ_WRITE, 0, 4 * array.length);
-      for (int i : array) {
-        buf.putInt(i);
-      }
-    }
-
     FileWriter fileWriter = new FileWriter(tempFile);
     for (int anArray : array) {
       fileWriter.write(anArray + "\n");
