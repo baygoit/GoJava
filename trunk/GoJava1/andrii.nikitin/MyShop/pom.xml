@@ -7,7 +7,13 @@
   <version>0.0.1-SNAPSHOT</version>
   <name>MyShop</name>
   <description>My project on GoIT - e-shop </description>
-	   <repositories>
+	   <repositories>	   
+	    <repository>
+	        <id>prime-repo</id>
+	        <name>PrimeFaces Maven Repository</name>
+	        <url>http://repository.primefaces.org</url>
+	        <layout>default</layout>
+	    </repository>
 	    <repository>
 	        <id>GlassFish</id>
 	        <name>GlassFish Maven Repository</name>
@@ -70,7 +76,7 @@
 			<artifactId>jsf-impl</artifactId>
 			<version>2.1.13</version>
 		</dependency>
-        
+		   
   		<!-- junit -->
         <dependency>
                 <groupId>junit</groupId>
@@ -197,10 +203,15 @@
 	    <!-- Hibernate query library dependency end -->
 	    <!-- PrimeFaces -->
 	    <dependency>
-	<groupId>org.primefaces</groupId>
-		<artifactId>primefaces</artifactId>
-		<version>4.0</version>
-	</dependency>
+		<groupId>org.primefaces</groupId>
+			<artifactId>primefaces</artifactId>
+			<version>4.0</version>
+		</dependency>			
+		<dependency>
+	    <groupId>org.primefaces.themes</groupId>
+		    <artifactId>all-themes</artifactId>
+		    <version>1.0.10</version>
+		</dependency>    
 	    
   </dependencies>   
   <build>

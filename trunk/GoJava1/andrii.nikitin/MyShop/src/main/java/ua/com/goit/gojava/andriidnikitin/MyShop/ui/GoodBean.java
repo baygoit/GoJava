@@ -1,6 +1,7 @@
 package ua.com.goit.gojava.andriidnikitin.MyShop.ui;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
@@ -23,9 +24,9 @@ import ua.com.goit.gojava.andriidnikitin.MyShop.domain.util.MyShopException;
 @RequestScoped
 public class GoodBean implements Serializable{
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 2L;
 
-	@Autowired 
+	@Autowired 	
 	private GoodCatalog catalog;
 
 	@ManagedProperty(value="#{name}")
@@ -35,8 +36,12 @@ public class GoodBean implements Serializable{
 	private Integer id;
 
 	@ManagedProperty(value="#{type}")	
-	private Integer type;
+	private Integer type;	
+
+	@ManagedProperty(value="#{allGoods}")	
+	private List<Good> allGoods;
 	
+
 	private Logger log = Logger.getLogger(getClass());
 	
 	public String getName() {
@@ -77,14 +82,20 @@ public class GoodBean implements Serializable{
 	public void setGoodCatalog(GoodCatalog catalog) {
 		this.catalog = catalog;
 	}
-
+	
 	public List<Good> getAllGoods(){
+		System.out.println("method getallgoods from goodbean was invoked");
 		try {
-			return catalog.getAllGoods();
+			allGoods = catalog.getAllGoods();
 		} catch (MyShopException e) {
 			ErrorLogger.logException(e,log);
+			allGoods = new ArrayList<Good>();
 		}
-		return null;
+		return allGoods;
+	}	
+	
+	public void setAllGoods(List<Good> allGoods) {
+		this.allGoods = allGoods;
 	}
 
 	public String addGood(){		
