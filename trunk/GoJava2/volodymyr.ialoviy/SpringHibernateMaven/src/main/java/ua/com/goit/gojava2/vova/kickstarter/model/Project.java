@@ -1,5 +1,7 @@
 package ua.com.goit.gojava2.vova.kickstarter.model;
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -26,14 +29,9 @@ public class Project{
 	@JoinColumn(name = "ID_CATEGORY", nullable = false, insertable = false, updatable = false)
 	private Category category;
 	
-	public Category getCategory() {
-		return category;
-	}
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "project")
+	private List<Question> questions;
 
-	public void setCategory(Category category) {
-		this.category = category;
-	}
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID")
@@ -80,6 +78,22 @@ public class Project{
 	@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
 	@Column(name = "DATE_CLOSE")
 	private LocalDate dateClose;
+
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+	
+	public List<Question> getQuestions() {
+		return questions;
+	}
+
+	public void setQuestions(List<Question> questions) {
+		this.questions = questions;
+	}
 	
 	public int getId() {
 		return id;

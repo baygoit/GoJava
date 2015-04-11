@@ -15,8 +15,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import ua.com.goit.gojava2.vova.kickstarter.model.Category;
 import ua.com.goit.gojava2.vova.kickstarter.model.Project;
+import ua.com.goit.gojava2.vova.kickstarter.model.Question;
 import ua.com.goit.gojava2.vova.kickstarter.service.CategoryService;
 import ua.com.goit.gojava2.vova.kickstarter.service.ProjectService;
+import ua.com.goit.gojava2.vova.kickstarter.service.QuestionService;
 
 @Controller
 @RequestMapping("/")
@@ -27,6 +29,9 @@ public class AppController {
 
 	@Autowired
 	ProjectService projectService;
+	
+	@Autowired
+	QuestionService questionService;
 
 	@RequestMapping(value = {"/", "/categories"}, method = RequestMethod.GET)
 	public String listCategories(ModelMap model, HttpServletRequest req) {
@@ -87,6 +92,8 @@ public class AppController {
 	@RequestMapping(value = "/projects/{id}", params = "show", method = RequestMethod.GET)
 	public String showProject(@PathVariable int id, ModelMap model) {
 		Project project = projectService.getProgect(id);
+		List<Question> questions = questionService.findAllQuestions(project.getId());
+		model.addAttribute("questions", questions);
 		model.addAttribute("project", project);
 		return "project";
 	}
@@ -130,5 +137,23 @@ public class AppController {
 		model.addAttribute("success", "Donate " + amount + " successfully");
 		model.addAttribute("project", project);
 		return "donatesuccess";
+	}
+	
+	@RequestMapping(value = "/question/{id}", params = "add", method = RequestMethod.GET)
+	public String newQuestion(ModelMap model, @PathVariable int id) {
+		Question question = new Question();
+		model.addAttribute("id", id);
+		model.addAttribute("question", question);
+		return "addquestion";
+	}
+
+	@RequestMapping(value = "/question/{id}", params = "add", method = RequestMethod.POST)
+	public String saveQuestion(@Valid Question question, BindingResult result, ModelMap model, @PathVariable int id) {
+		if (result.hasErrors()) {
+			return "addquestion";
+		}
+		questionService.saveQuestion(question);
+		model.addAttribute("message", "Question registered successfully");
+		return "redirect:/projects/id";
 	}
 }

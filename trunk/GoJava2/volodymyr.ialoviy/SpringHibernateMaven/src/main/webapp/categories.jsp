@@ -11,7 +11,7 @@ h3 {color: #ff0000;}
 </style>
 </head>
 <body>
-	<h2>List of categories</h2>
+	<h2>List of categories2</h2>
 	<h3><c:out value="${message}" /></h3>
 	<table border="2" bordercolor="black" cellpadding="2">
 		<tr>

@@ -47,9 +47,17 @@
 			<td>days to go:</td>
 			<td>${project.dateClose}</td>
 		</tr>
+		
+		<c:forEach items="${questions}" var="question">
+			<tr>
+				<td>${question.question}</td>
+				<td>${question.answer}</td>
+			</tr>
+		</c:forEach>
+		
 	</table>
 	<p>If you want return to <a href="${ctx}/projects/${project.idCategory}">projects</a></p>
 	<p>If you want to <a href="${ctx}/donate/${project.id}">invest in the project</a></p>
-	<p>Have a question? If the info above doesn't help, you can <a href="${ctx}/question/${project.id}">ask the project creator directly</a>
+	<p>Have a question? If the info above doesn't help, you can <a href="${ctx}/question/${project.id}?add">ask the project creator directly</a>
 	</body>
 </html>

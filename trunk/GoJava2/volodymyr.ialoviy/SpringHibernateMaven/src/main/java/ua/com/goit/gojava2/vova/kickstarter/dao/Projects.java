@@ -1,17 +1,9 @@
 package ua.com.goit.gojava2.vova.kickstarter.dao;
 
 import java.util.List;
-
-import javax.persistence.criteria.Expression;
-
-import org.hibernate.Criteria;
 import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
-
-import ua.com.goit.gojava2.vova.kickstarter.model.Category;
 import ua.com.goit.gojava2.vova.kickstarter.model.Project;
 
 @Repository("projectDao")

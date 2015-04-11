@@ -20,14 +20,6 @@ public class Category {
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "category")
 	private List<Project> projects;
 	
-	public List<Project> getProjects() {
-		return this.projects;
-	}
- 
-	public void setProjects(List<Project> projects) {
-		this.projects = projects;
-	}
-	
 	@Id
 	@Column(name = "ID", unique = true, nullable = false)
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,6 +28,14 @@ public class Category {
 	@Size(min=3, max=50)
 	@Column(name = "NAME", nullable = false)
 	private String name;
+	
+	public List<Project> getProjects() {
+		return this.projects;
+	}
+ 
+	public void setProjects(List<Project> projects) {
+		this.projects = projects;
+	}
 		
 	public int getId() {
 		return id;
