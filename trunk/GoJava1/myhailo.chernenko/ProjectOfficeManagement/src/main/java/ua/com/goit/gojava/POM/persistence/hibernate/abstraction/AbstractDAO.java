@@ -6,6 +6,7 @@ import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
+import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Projections;
 
 import ua.com.goit.gojava.POM.persistence.POMPersistenceException;
@@ -90,6 +91,25 @@ public abstract class AbstractDAO<T> {
 		} catch (HibernateException e) {
 			getLog().error("Could not retrieve all "+getClassName()+"s: "+e.getMessage(), e);
 			throw new POMPersistenceException("Could not retrieve all "+getClassName()+"s: "+e.getMessage(), e);
+		} finally {
+			closeSession(session);
+	 	}		
+		
+	}
+	
+	public List<T> retrieve(Criterion restriction) throws POMPersistenceException {
+
+		Session session = getSession();
+		
+		try {
+			
+			@SuppressWarnings("unchecked")
+			List<T> resultList = session.createCriteria(classT).add(restriction).list();
+			return resultList;	
+			
+		} catch (HibernateException e) {
+			getLog().error("Could not find by criteria "+getClassName()+"s: "+e.getMessage(), e);
+			throw new POMPersistenceException("Could not find by criteria "+getClassName()+"s: "+e.getMessage(), e);
 		} finally {
 			closeSession(session);
 	 	}		

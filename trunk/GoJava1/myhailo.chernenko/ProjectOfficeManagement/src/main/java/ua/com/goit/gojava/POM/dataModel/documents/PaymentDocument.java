@@ -17,7 +17,7 @@ import ua.com.goit.gojava.POM.dataModel.common.Money;
 public class PaymentDocument implements FinancialDocument {
 
 	@Id 
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
 	
 	@Column

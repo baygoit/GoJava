@@ -18,7 +18,7 @@ import ua.com.goit.gojava.POM.dataModel.documents.PaymentDocument;
 public class CashMovementEntry {
 
 	@Id 
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
 	
 	@Column
@@ -34,7 +34,7 @@ public class CashMovementEntry {
 	        @AttributeOverride(name="value", column = @Column(name="sum") ),
 	        @AttributeOverride(name="currency", column = @Column(name="currency") )
 	    })
-    private Money sum;
+    private Money sum = new Money();
 	
 	@Any(metaColumn = @Column(name = "doc_type"))
     @AnyMetaDef(idType = "long", metaType = "string", 

@@ -96,6 +96,14 @@ public class Money {
 		return currency;
 	}
 
+	public void setValue(BigDecimal value) {
+		this.value = value;
+	}
+
+	public void setCurrency(Currency currency) {
+		this.currency = currency;
+	}
+
 	public void divide(Long divisor) {
 		
 		this.value = this.value.divide(getDecimal(divisor), scaleLength, roundingMode);

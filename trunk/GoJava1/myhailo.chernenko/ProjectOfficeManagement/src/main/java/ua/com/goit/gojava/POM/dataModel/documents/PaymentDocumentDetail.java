@@ -27,7 +27,7 @@ import ua.com.goit.gojava.POM.dataModel.profitcost.ProjectStage;
 public class PaymentDocumentDetail {
 
 	@Id 
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
 	
 	@ManyToOne(fetch = FetchType.EAGER)

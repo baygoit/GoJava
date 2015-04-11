@@ -7,7 +7,7 @@ import javax.persistence.*;
 public class CostItem {
 	
 	@Id 
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id = 0;
 	
 	@Column

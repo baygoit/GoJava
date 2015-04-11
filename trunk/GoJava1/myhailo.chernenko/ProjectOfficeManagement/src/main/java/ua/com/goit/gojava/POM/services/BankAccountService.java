@@ -3,6 +3,8 @@ package ua.com.goit.gojava.POM.services;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Restrictions;
 
 import ua.com.goit.gojava.POM.dataModel.cash.BankAccount;
 import ua.com.goit.gojava.POM.persistence.POMPersistenceException;
@@ -78,6 +80,18 @@ public class BankAccountService {
 		} catch (POMPersistenceException e) {
 			LOG.error("Could not update "+CLASS_NAME+": "+e.getMessage(), e);
 			throw new POMServicesException("Could not update "+CLASS_NAME+"",e);
+		}
+	}
+
+	public List<BankAccount> findByName(String query) throws POMServicesException {
+
+		try {
+			
+			Criterion restriction = Restrictions.like("name", query);
+			return bankAccountDAO.retrieve(restriction);
+		} catch (POMPersistenceException e) {
+			LOG.error("Could not find by name "+CLASS_NAME+": "+e.getMessage(), e);
+			throw new POMServicesException("Could not find by name "+CLASS_NAME+"",e);
 		}
 	}
 

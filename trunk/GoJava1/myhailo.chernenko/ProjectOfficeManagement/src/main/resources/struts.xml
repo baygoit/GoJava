@@ -8,16 +8,6 @@
 	<constant name="struts.action.excludePattern" value=".*WebController" />
     
     <package name="default" namespace = "/" extends="struts-default">
-     
-      <!-- CashMovement -->
-      
-      <action name="CashMovementList" 
-            class="ua.com.goit.gojava.POM.presentation.actions.cashmovement.CashMovementList" 
-            method="execute">
-            <!-- TODO change on /ActionForms/CashMovement.jsp after refactoring -->
-            <result name="success">/CashMovement.jsp</result>
-            <result name="error">/errorPage.jsp</result>
-      </action>
       
     </package>
 </struts>

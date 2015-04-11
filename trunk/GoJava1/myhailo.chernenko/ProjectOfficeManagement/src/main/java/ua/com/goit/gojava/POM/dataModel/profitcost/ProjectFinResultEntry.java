@@ -33,7 +33,7 @@ import ua.com.goit.gojava.POM.dataModel.documents.PaymentDocument;
 public class ProjectFinResultEntry {
 	
 	@Id 
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
 	
 	@Column
