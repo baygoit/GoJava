@@ -1,11 +1,16 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
 <html>
 <head>
 <title>Kickstarter project</title>
+<style>
+tr:first-child {font-weight: bold; background-color: #C6C9C4;}
+h3 {color: #ff0000;}
+</style>
 </head>
-	<body>
-	<h1>Project from ${project.category.name}</h1>
+<body>
+	<h1>Project from category with name - ${project.category.name}</h1>
+	<h3><c:out value="${message}" /></h3>
 	<table border="2" bordercolor="black" cellpadding="2">
 		<tr>
 			<td>NAME</td>
@@ -47,17 +52,25 @@
 			<td>days to go:</td>
 			<td>${project.dateClose}</td>
 		</tr>
-		
+
 		<c:forEach items="${questions}" var="question">
 			<tr>
 				<td>${question.question}</td>
 				<td>${question.answer}</td>
 			</tr>
 		</c:forEach>
-		
+
 	</table>
-	<p>If you want return to <a href="${ctx}/projects/${project.idCategory}">projects</a></p>
-	<p>If you want to <a href="${ctx}/donate/${project.id}">invest in the project</a></p>
-	<p>Have a question? If the info above doesn't help, you can <a href="${ctx}/question/${project.id}?add">ask the project creator directly</a>
-	</body>
+	<p>
+		If you want return to <a href="${ctx}/projects/${project.idCategory}">projects</a>
+	</p>
+	<p>
+		If you want to <a href="${ctx}/donate/${project.id}">invest in the
+			project</a>
+	</p>
+	<p>
+		Have a question? If the info above doesn't help, you can <a
+			href="${ctx}/question/${project.id}?add">ask the project creator
+			directly</a>
+</body>
 </html>

@@ -36,8 +36,7 @@ public class AppController {
 	@RequestMapping(value = {"/", "/categories"}, method = RequestMethod.GET)
 	public String listCategories(ModelMap model, HttpServletRequest req) {
 		List<Category> categories = categoryService.findAllCategories();
-		String message = req.getParameter("message");
-		model.addAttribute("message", message);
+		model.addAttribute("message", req.getParameter("message"));
 		model.addAttribute("categories", categories);
 		return "categories";
 	}
@@ -90,11 +89,12 @@ public class AppController {
 	}
 	
 	@RequestMapping(value = "/projects/{id}", params = "show", method = RequestMethod.GET)
-	public String showProject(@PathVariable int id, ModelMap model) {
+	public String showProject(@PathVariable int id, ModelMap model, HttpServletRequest req) {
 		Project project = projectService.getProgect(id);
 		List<Question> questions = questionService.findAllQuestions(project.getId());
 		model.addAttribute("questions", questions);
 		model.addAttribute("project", project);
+		model.addAttribute("message", req.getParameter("message"));
 		return "project";
 	}
 
@@ -154,6 +154,6 @@ public class AppController {
 		}
 		questionService.saveQuestion(question);
 		model.addAttribute("message", "Question registered successfully");
-		return "redirect:/projects/id";
+		return "redirect:/projects/" + id + "?show";
 	}
 }
