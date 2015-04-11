@@ -15,16 +15,24 @@
 	<h:form id = "cashMovementForm">
 		<p:messages id="messages" showDetail="true" autoUpdate="true"
 			closable="true" />
+			
+	    <p:outputLabel for="bankAccountFilter" value="Фильтр по банковскому счету: " />
+        <p:autoComplete id="bankAccountFilter" value="#{cashMovementListBean.bankAccountFilter}"
+        		dropdown="true"
+        		completeMethod="#{bankAccountAutoCompleter.completeText}" 
+	        	var="selectedBankAccount" itemValue="#{selectedBankAccount}" itemLabel="#{selectedBankAccount.name}"  
+	        	converter="bankAccountConverter" forceSelection="true"
+	        >
+	        	<p:ajax event="itemSelect" update="cashMovementForm" />
+	    </p:autoComplete>
+	    
 		<p:dataTable var="cashMovement" value="#{cashMovementListBean.cashMovements}"
 			paginator="true" rows="10" lazy="true"
 			paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
-			rowsPerPageTemplate="5,10,15">
+			rowsPerPageTemplate="1,2,5,10,15">
 			<f:facet name="header">
 				Записи о движении денег
 			</f:facet>
-			<div>
-				фильтр по банковскому счету: 
-			</div>
 			<p:column>
 				<f:facet name="header">
 					<h:outputText value="Идентификатор" />

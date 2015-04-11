@@ -37,6 +37,7 @@ public class BankAccountAutoCompleter implements Serializable{
 			FacesContext.getCurrentInstance().addMessage(null, 
 					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "Can not retrieve BankAccount List!"));
 		}
+		result.add(0, null);
 		return result;
     }
 }

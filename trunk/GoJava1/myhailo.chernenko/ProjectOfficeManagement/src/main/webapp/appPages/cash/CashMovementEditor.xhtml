@@ -12,7 +12,7 @@
 	<div class="container">
 	    <ui:include src="/appPages/topMenu.xhtml" />    
 	</div>
-	<h:form id="CashMovementForm">
+	<h:form>
 		<p:messages id="messages" showDetail="true" autoUpdate="true"
 			closable="true" />
 		<p>Запись о движении денег</p>
@@ -28,8 +28,9 @@
 	        		dropdown="true"
 	        		completeMethod="#{bankAccountAutoCompleter.completeText}" 
 		        	var="selectedBankAccount" itemValue="#{selectedBankAccount}" itemLabel="#{selectedBankAccount.name}"  
-		        	converter="bankAccountConverter" forceSelection="true">
-		        	<p:ajax event="select" update=":CashMovementForm:currency" />
+		        	converter="bankAccountConverter" forceSelection="true"
+		        >
+		        	<p:ajax event="itemSelect" update="currency" />
 		    </p:autoComplete>
 	 	
 	        <p:outputLabel for="currency" value="Валюта: " />

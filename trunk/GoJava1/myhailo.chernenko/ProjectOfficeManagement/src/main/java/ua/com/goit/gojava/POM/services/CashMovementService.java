@@ -3,6 +3,8 @@ package ua.com.goit.gojava.POM.services;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Restrictions;
 
 import ua.com.goit.gojava.POM.dataModel.cash.BankAccount;
 import ua.com.goit.gojava.POM.dataModel.cash.CashMovementEntry;
@@ -56,10 +58,11 @@ public class CashMovementService {
 		
 	}
 	
-	public List<CashMovementEntry> retrieveAll(BankAccount bankAccount) throws POMServicesException {
+	public List<CashMovementEntry> retrieveAll(BankAccount bankAccount, Paginator paginator) throws POMServicesException {
 
 		try {
-			return cashMovementDAO.retrieveAll(bankAccount);
+			Criterion restriction = Restrictions.eq("bankAccount", bankAccount);
+			return cashMovementDAO.retrieve(restriction, paginator);
 		} catch (POMPersistenceException e) {
 			LOG.error("Could not retrieve all "+CLASS_NAME+"s: "+e.getMessage(), e);
 			throw new POMServicesException("Could not retrieve all "+CLASS_NAME+"s",e);

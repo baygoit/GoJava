@@ -143,6 +143,33 @@ public abstract class AbstractDAO<T> {
 		
 	}
 	
+	public List<T> retrieve(Criterion restriction, Paginator paginator) throws POMPersistenceException {
+
+		Session session = getSession();
+		
+		try {
+			
+			Criteria criteria = session.createCriteria(classT).add(restriction);
+			Long countRows =  (Long) criteria.setProjection(Projections.rowCount()).uniqueResult();
+			paginator.setTotal(countRows.intValue());
+			
+			criteria = session.createCriteria(classT).add(restriction);
+			criteria.setFirstResult(paginator.getFirstResult()-1);
+			criteria.setMaxResults(paginator.getMaxResults());
+			@SuppressWarnings("unchecked")
+			List<T> resultList = criteria.list();
+			
+			return resultList;	
+			
+		} catch (HibernateException e) {
+			getLog().error("Could not find by criteria "+getClassName()+"s: "+e.getMessage(), e);
+			throw new POMPersistenceException("Could not find by criteria "+getClassName()+"s: "+e.getMessage(), e);
+		} finally {
+			closeSession(session);
+	 	}		
+		
+	}
+	
 	public T retrieveById(Long id) throws POMPersistenceException {
 
 		Session session = getSession();  

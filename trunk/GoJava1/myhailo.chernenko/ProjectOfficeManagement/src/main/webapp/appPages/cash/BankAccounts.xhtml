@@ -65,7 +65,8 @@
 					action="#{bankAccountEditorBean.loadBankAccountEditor(bankAccount)}"
 					value="Редактировать" />
 				<h:commandButton
-					action="#{bankAccountListBean.redirectTo('CashMovementList', bankAccount.id)}"
+					action="#{cashMovementListBean.openFilteredList(bankAccount)}"
+					
 					value="Открыть движения" />
 			</p:column>
 		</p:dataTable>

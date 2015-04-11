@@ -1,13 +1,11 @@
 package ua.com.goit.gojava.POM.persistence.hibernate;
 
 import java.math.BigDecimal;
-import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Query;
-import org.hibernate.criterion.Restrictions;
 
 import ua.com.goit.gojava.POM.dataModel.POMDataModelException;
 import ua.com.goit.gojava.POM.dataModel.cash.BankAccount;
@@ -70,29 +68,7 @@ public class CashMovementDAO extends AbstractDAO<CashMovementEntry> {
 		return result;
 	
 	}
-	
-	public List<CashMovementEntry> retrieveAll(BankAccount bankAccount) throws POMPersistenceException {
-
-		Session session = getSession();
 		
-		try {
-			
-			@SuppressWarnings("unchecked")
-			List<CashMovementEntry> resultList = session.createCriteria(CashMovementEntry.class)
-													.add(Restrictions.eq("bankAccount", bankAccount))
-													.list();
-			return resultList;	
-			
-		} catch (HibernateException e) {
-			getLog().error("Could not retrieve all "+getClassName()+"s: "+e.getMessage(), e);
-			throw new POMPersistenceException("Could not retrieve all "+getClassName()+"s: "+e.getMessage(), e);
-		} finally {
-			closeSession(session);
-	 	}
-	
-	}
-
-	
 	public void deleteAllByDoc(FinancialDocument doc) throws POMPersistenceException {
 
 		Session session = getSession();

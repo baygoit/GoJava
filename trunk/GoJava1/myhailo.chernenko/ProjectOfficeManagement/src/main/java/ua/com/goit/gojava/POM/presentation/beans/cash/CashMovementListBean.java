@@ -15,6 +15,7 @@ import org.apache.log4j.Logger;
 import org.primefaces.model.LazyDataModel;
 import org.primefaces.model.SortOrder;
 
+import ua.com.goit.gojava.POM.dataModel.cash.BankAccount;
 import ua.com.goit.gojava.POM.dataModel.cash.CashMovementEntry;
 import ua.com.goit.gojava.POM.services.ApplicationContextProvider;
 import ua.com.goit.gojava.POM.services.CashMovementService;
@@ -29,6 +30,7 @@ public class CashMovementListBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private static final Logger LOG=Logger.getLogger(CashMovementListBean.class);
 	private LazyDataModel<CashMovementEntry> cashMovements;
+	private BankAccount bankAccountFilter;
 	
 	private LazyDataModel<CashMovementEntry> initCashMovements() {
 		
@@ -48,7 +50,11 @@ public class CashMovementListBean implements Serializable {
 				paginator.setMaxResults(pageSize);
 				
 				try {
-					cashMovementList = cashMovementService.retrieveAll(paginator);
+					if(bankAccountFilter == null) {
+						cashMovementList = cashMovementService.retrieveAll(paginator);
+					} else {
+						cashMovementList = cashMovementService.retrieveAll(bankAccountFilter, paginator);
+					}
 				} catch (POMServicesException e) {
 					LOG.error("Can not retrieve Cash Movement List: " + e.getMessage(), e);
 					FacesContext.getCurrentInstance().addMessage(null, 
@@ -98,6 +104,14 @@ public class CashMovementListBean implements Serializable {
 		return cashMovements;
 	}
 	
+	public BankAccount getBankAccountFilter() {
+		return bankAccountFilter;
+	}
+
+	public void setBankAccountFilter(BankAccount bankAccountFilter) {
+		this.bankAccountFilter = bankAccountFilter;
+	}
+
 	// Temporary solution for step-by-step migration on JSF.
 	// This method redirects to non JSF pages
 	public String redirectTo(String action, long id) {
@@ -116,6 +130,11 @@ public class CashMovementListBean implements Serializable {
 		}  
 	    context.responseComplete();  
 		return action;
+	}
+	
+	public String openFilteredList(BankAccount bankAccountFilter) {
+		setBankAccountFilter(bankAccountFilter);
+		return "/appPages/cash/CashMovement.xhtml";
 	}
 	
 }
