@@ -122,22 +122,6 @@ public class AppController {
 		return "redirect:/categories";
 	}
 
-	@RequestMapping(value = "/donate/{id}", method = RequestMethod.GET)
-	public String donate(ModelMap model, @PathVariable int id) {
-		model.addAttribute("id", id);
-		return "donate";
-	}
-
-	@RequestMapping(value = "/donatesuccess", method = RequestMethod.GET)
-	public String saveDonate(ModelMap model, HttpServletRequest req) {
-		int amount = Integer.valueOf(req.getParameter("amount"));
-		int project = Integer.valueOf(req.getParameter("project"));
-		projectService.addDonate(amount, project);
-		model.addAttribute("success", "Donate " + amount + " successfully");
-		model.addAttribute("project", project);
-		return "donatesuccess";
-	}
-	
 	@RequestMapping(value = "/question/{id}", params = "add", method = RequestMethod.GET)
 	public String newQuestion(ModelMap model, @PathVariable int id) {
 		Question question = new Question();
@@ -180,5 +164,19 @@ public class AppController {
 		questionService.addAnswer(req.getParameter("answer"), id);
 		model.addAttribute("message", "Answer added successfully");
 		return red;
+	}
+	
+	@RequestMapping(value = "/donate/{id}", method = RequestMethod.GET)
+	public String donate(ModelMap model, @PathVariable int id) {
+		model.addAttribute("id", id);
+		return "donate";
+	}
+
+	@RequestMapping(value = "/adddonate/{id}/{amount}", method = RequestMethod.GET)
+	public String saveDonate(ModelMap model, @PathVariable int id, @PathVariable int amount) {
+		projectService.addDonate(amount, id);
+		model.addAttribute("success", "Donate " + amount + " successfully");
+		model.addAttribute("project", id);
+		return "donatesuccess";
 	}
 }
