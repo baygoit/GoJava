@@ -29,6 +29,8 @@ enum TagState {
       } else if (c == '/') {
         result = CLOSE;
         builder.setType(TagElementType.CLOSE);
+      } else if (c == '!') {
+        result = EXCLAM_MARK;
       }
       return result;
     }
@@ -368,6 +370,56 @@ enum TagState {
       if (CharUtil.isEmptyChar(c)) {
         result = END_CLOSE_NAME;
       } else if (c == '>') {
+        result = VALID_TAG_END;
+      }
+      return result;
+    }
+  },
+  EXCLAM_MARK {
+    @Override
+    TagState next(char c, TagElement.Builder builder) {
+      TagState result = INVALID_END;
+      if (c == '-') {
+        result = HYPHEN_BEFORE;
+      }
+      return result;
+    }
+  },
+  HYPHEN_BEFORE {
+    @Override
+    TagState next(char c, TagElement.Builder builder) {
+      TagState result = INVALID_END;
+      if (c == '-') {
+        result = COMMENT;
+      }
+      return result;
+    }
+  },
+  COMMENT {
+    @Override
+    TagState next(char c, TagElement.Builder builder) {
+      TagState result = COMMENT;
+      if (c == '-') {
+        result = FIRST_HYPHEN_AFTER;
+      }
+      return result;
+    }
+  },
+  FIRST_HYPHEN_AFTER {
+    @Override
+    TagState next(char c, TagElement.Builder builder) {
+      TagState result = COMMENT;
+      if (c == '-') {
+        result = SECOND_HYPHEN_AFTER;
+      }
+      return result;
+    }
+  },
+  SECOND_HYPHEN_AFTER {
+    @Override
+    TagState next(char c, TagElement.Builder builder) {
+      TagState result = COMMENT;
+      if (c == '>') {
         result = VALID_TAG_END;
       }
       return result;
