@@ -62,10 +62,9 @@ h3 {
 	<p>If you want return to <a href="${ctx}/projects/${project.idCategory}">projects</a></p>
 	<p>If you want to <a href="${ctx}/donate/${project.id}">invest in the project</a></p>
 
+	<h3><c:out value="${message}" /></h3>
 	<h1>Questions and answers for this project with name - ${project.name}</h1>
-	<h3>
-		<c:out value="${message}" />
-	</h3>
+	
 	<table border="2" bordercolor="black" cellpadding="2">
 		<tr>
 			<td>QUESTION</td>
