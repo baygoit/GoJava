@@ -8,9 +8,9 @@
 <title>catalog</title>
 </head>
 <body>
+	<p><c:out value="${quote.quote}" /></p>
 	<c:forEach items="${categories}" var="category">
-		<a href="projects/${category.id}"><c:out
-				value="${category.name}" /></a>
+		<a href="projects/${category.id}"><c:out value="${category.name}" /></a>
 		<p>
 	</c:forEach>
 </body>

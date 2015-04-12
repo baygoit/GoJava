@@ -16,15 +16,17 @@
 
 
 	<context:component-scan base-package="ua.com.goit.gojava.kickstarter" />
+	<context:property-placeholder location="classpath:database.properties" />
+	
 
 	<context:annotation-config />
 
 	<mvc:annotation-driven />
  <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-        <property name="driverClassName" value="org.postgresql.Driver"/>
-        <property name="url" value="jdbc:postgresql://localhost:5432/kickstarter"/>
-        <property name="username" value="postgres"/>
-        <property name="password" value="admin"/>
+        <property name="driverClassName" value="${driver}"/>
+        <property name="url" value="${url}"/>
+        <property name="username" value="${user}"/>
+        <property name="password" value="${password}"/>
     </bean>
 
 	<!-- <bean id="dataSource" class="org.postgresql.ds.PGPoolingDataSource">

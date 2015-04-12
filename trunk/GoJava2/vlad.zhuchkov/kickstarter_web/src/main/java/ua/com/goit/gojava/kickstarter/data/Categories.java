@@ -2,14 +2,15 @@ package ua.com.goit.gojava.kickstarter.data;
 
 import java.util.List;
 
-import ua.com.goit.gojava.kickstarter.exceptions.IlligalInputException;
+import ua.com.goit.gojava.kickstarter.dao.ProjectsDao;
 
 public interface Categories {
 
+	void add(Category category);
 
-	List<Project> getProjects(int id);
+	List<Category> getCatalog();
 
-	Project get(int i) throws IlligalInputException;
+	Category get(int id);
 
 	int size();
 

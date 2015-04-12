@@ -12,10 +12,10 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import ua.com.goit.gojava.kickstarter.data.Category;
-import ua.com.goit.gojava.kickstarter.data.CategoryCatalog;
+import ua.com.goit.gojava.kickstarter.data.Categories;
 
 @Repository
-public class CategoriesDao extends AbstractDao implements CategoryCatalog {
+public class CategoriesDao extends AbstractDao implements Categories {
 	
 	
 

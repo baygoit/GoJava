@@ -16,12 +16,12 @@ import org.hibernate.criterion.Projections;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
-import ua.com.goit.gojava.kickstarter.data.Categories;
+import ua.com.goit.gojava.kickstarter.data.Projects;
 import ua.com.goit.gojava.kickstarter.data.Category;
 import ua.com.goit.gojava.kickstarter.data.Project;
 
 @Repository
-public class ProjectsDao extends AbstractDao implements Categories {
+public class ProjectsDao extends AbstractDao implements Projects {
 
 	@Override
 	public List<Project> getProjects(int id) {
