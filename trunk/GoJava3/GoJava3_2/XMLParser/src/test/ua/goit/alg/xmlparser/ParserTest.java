@@ -60,7 +60,7 @@ public class ParserTest {
     @Test
     public void whenDoubleStartTag() throws IOException {
         Parser parser = new ParserBuilderForFullTesting();
-        String expectedResult = "<?xml?><start>";
+        String expectedResult = "error";
         String result = parser.parse("<?xml doctype=\"1\"><start atr1=\"3\" atr2 = \"4\"><?xml doctype=\"1\"><tag>text</tag><tag2/></start>");
         assertEquals(expectedResult, result);
     }
@@ -68,7 +68,7 @@ public class ParserTest {
     @Test
     public void whenCloseTag_notEquals_OpenTag() throws IOException {
         Parser parser = new ParserBuilderForFullTesting();
-        String expectedResult = "<s><t></o>";
+        String expectedResult = "error";
         String result = parser.parse("<s><t></o></r>");
         assertEquals(expectedResult, result);
     }
@@ -76,7 +76,7 @@ public class ParserTest {
     @Test
     public void attributeWithoutValue() throws IOException {
         Parser parser = new ParserBuilderForFullTesting();
-        String expectedResult = "<?xml?><start>";
+        String expectedResult = "error";
         String result = parser.parse("<start atr1 atr2=\"4\"></start>");
         assertEquals(expectedResult, result);
     }
@@ -96,21 +96,21 @@ public class ParserTest {
     public void invalidCloseTag() throws IOException {
         Parser parser = new ParserBuilderForFullTesting();
         String result = parser.parse("<s/s>");
-        assertEquals("", result);
+        assertEquals("error", result);
     }
 
     @Test
     public void invalidTagName() throws IOException {
         Parser parser = new ParserBuilderForFullTesting();
         String result = parser.parse("<C++></C++>");
-        assertEquals("", result);
+        assertEquals("error", result);
     }
 
     @Test
     public void tagNameWithInvalidSpace() throws IOException {
         Parser parser = new ParserBuilderForFullTesting();
         String result = parser.parse("<star t></start>");
-        assertEquals("", result);
+        assertEquals("error", result);
     }
 
     @Test
