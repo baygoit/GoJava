@@ -61,7 +61,7 @@ public class ParserTest {
     public void whenDoubleStartTag() throws IOException {
         Parser parser = new ParserBuilderForFullTesting();
         String expectedResult = "error";
-        String result = parser.parse("<?xml doctype=\"1\"><start atr1=\"3\" atr2 = \"4\"><?xml doctype=\"1\"><tag>text</tag><tag2/></start>");
+        String result = parser.parse("<?xml doctype=\"1\"?><start atr1=\"3\" atr2 = \"4\"><?xml doctype=\"1\"?><tag>text</tag><tag2/></start>");
         assertEquals(expectedResult, result);
     }
 
