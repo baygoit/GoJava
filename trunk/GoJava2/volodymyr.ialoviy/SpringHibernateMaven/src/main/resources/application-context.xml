@@ -37,13 +37,6 @@
 			</list>
 		</property>
 
-		<property name="annotatedClasses">
-			<list>
-				<value>ua.com.goit.gojava2.vova.kickstarter.model.Category</value>
-				<value>ua.com.goit.gojava2.vova.kickstarter.model.Project</value>
-			</list>
-		</property>
-
 		<property name="hibernateProperties">
 			<props>
 				<prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</prop>
@@ -71,13 +64,5 @@
 		<property name="prefix" value="/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
-
-	<!-- <bean id="templateResolver"
-		class="org.thymeleaf.templateresolver.ServletContextTemplateResolver">
-		<property name="prefix" value="/" />
-		<property name="suffix" value=".html" />
-		<property name="templateMode" value="HTML5" />
-		<property name="cacheable" value="false" />
-	</bean> -->
 
 </beans>

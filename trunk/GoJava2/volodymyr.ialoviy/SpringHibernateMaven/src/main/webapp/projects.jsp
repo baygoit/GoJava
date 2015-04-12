@@ -3,9 +3,13 @@
 <html>
 <head>
 <title>Kickstarter projects</title>
+<style>
+h3 {color: #ff0000;}
+</style>
 </head>
 	<body>
-		<h2>List of projects of category</h2>	
+		<h2>List of projects of category</h2>
+		<h3><c:out value="${message}" /></h3>
 		<table  border="2" bordercolor="black" cellpadding="2">
 			<tr>
 				<td>DELETE</td>

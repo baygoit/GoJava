@@ -12,31 +12,92 @@
 	</context-param>
 
 	<listener>
-	   	<listener-class>
-	        org.springframework.web.context.ContextLoaderListener
-	   	</listener-class>
+	   	<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>   
-
+	
 	<servlet>
-    <servlet-name>AppController</servlet-name>
-    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-    <init-param>
-        <param-name>contextClass</param-name>
-        <param-value>org.springframework.web.context.support.AnnotationConfigWebApplicationContext</param-value>
-    </init-param>
-	
-    <init-param>
-        <param-name>contextConfigLocation</param-name>
-        <param-value>ua.com.goit.gojava2.vova.kickstarter.controller.AppController</param-value>
-    </init-param>
-    <load-on-startup>1</load-on-startup>
-	</servlet>
-	
+	    <servlet-name>AppController</servlet-name>
+	    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+	    <init-param>
+	        <param-name>contextClass</param-name>
+	        <param-value>org.springframework.web.context.support.AnnotationConfigWebApplicationContext</param-value>
+	    </init-param>
+		
+	    <init-param>
+	        <param-name>contextConfigLocation</param-name>
+	        <param-value>ua.com.goit.gojava2.vova.kickstarter.controller.AppController</param-value>
+	    </init-param>
+	    <load-on-startup>1</load-on-startup>
+		</servlet>
+		
 	<servlet-mapping>
 		<servlet-name>AppController</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
+	
+	
+	<servlet>
+        <servlet-name>ProjectsController</servlet-name>
+        <servlet-class>ua.com.goit.gojava2.vova.kickstarter.controller.ProjectsController</servlet-class>
+    </servlet>
+ 
+    <servlet-mapping>
+        <servlet-name>ProjectsController</servlet-name>
+        <url-pattern>/projects</url-pattern>
+    </servlet-mapping>
+    
+	<!-- 
+	
+	<servlet>
+	    <servlet-name>ProjectsController</servlet-name>
+	    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+	    <init-param>
+	        <param-name>contextClass</param-name>
+	        <param-value>org.springframework.web.context.support.AnnotationConfigWebApplicationContext</param-value>
+	    </init-param>
+		
+	    <init-param>
+	        <param-name>contextConfigLocation</param-name>
+	        <param-value>ua.com.goit.gojava2.vova.kickstarter.controller.ProjectsController</param-value>
+	    </init-param>
+	    <load-on-startup>1</load-on-startup>
+	</servlet>
+		
+	<servlet-mapping>
+		<servlet-name>ProjectsController</servlet-name>
+		<url-pattern>/projects/</url-pattern>
+	</servlet-mapping>
+	
+	 -->
 
 </web-app>
 
+<!-- 
+
+    <servlet>
+        <servlet-name>MainServlet</servlet-name>
+        <servlet-class>myapp.servlet.MainServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SecondaryServlet</servlet-name>
+        <servlet-class>myapp.servlet.SecondaryServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AuxiliaryServlet</servlet-name>
+        <servlet-class>myapp.servlet.AuxiliaryServlet</servlet-class>
+    </servlet>
  
+    <servlet-mapping>
+        <servlet-name>MainServlet</servlet-name>
+        <url-pattern>/index.html</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SecondaryServlet</servlet-name>
+        <url-pattern>/secondary.html</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AuxiliaryServlet</servlet-name>
+        <url-pattern>/auxiliary.html</url-pattern>
+    </servlet-mapping>
+
+  -->
