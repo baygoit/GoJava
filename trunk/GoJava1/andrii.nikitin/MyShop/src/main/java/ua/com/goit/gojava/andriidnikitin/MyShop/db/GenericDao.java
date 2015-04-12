@@ -11,4 +11,5 @@ public interface GenericDao<T> {
     public void update(T unit) throws MyShopDaoException;         
     public void delete(T unit) throws MyShopDaoException;
     public List<T> getAll() throws MyShopDaoException;
+	public List<T> getFilteringByName(String query);
 }

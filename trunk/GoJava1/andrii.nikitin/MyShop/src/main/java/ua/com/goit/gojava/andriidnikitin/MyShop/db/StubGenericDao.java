@@ -49,5 +49,19 @@ public abstract class StubGenericDao <T> implements GenericDao <T> {
 	protected void init(){
 		content = new ArrayList<T>();
 	}
+	
+	public List<T> getFilteringByName(String query) {
+		List<T> all = getAll();
+		List<T> result = new ArrayList<T>();
+		for (int i = 0; i < all.size(); i++) {
+	          T good = all.get(i);
+	          if(getName(good).toLowerCase().startsWith(query)) {
+	        	  result.add(good);
+	          }
+		}      
+		return result;
+	}
+	
+	protected abstract String getName(T object);
 
 }

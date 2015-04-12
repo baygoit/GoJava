@@ -19,6 +19,12 @@ public class StubGoodRecordDao extends StubGenericDao<GoodRecord>{
 
 	protected Integer generateId(GoodRecord object){
 		return object.hashCode();
+	}
+
+	@Override
+	protected String getName(GoodRecord object) {
+		// TODO Auto-generated method stub
+		return null;
 	}	
 }
 

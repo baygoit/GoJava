@@ -13,13 +13,17 @@
     <h:body>
  
     	<h1> Editing info about goods, represented in shop </h1>
- 
- 		<p:dataTable  var="g" value="#{goodBean.allGoods}"
+    	
+		<p:separator />	
+		
+ 		<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+ 		
+ 		<p:dataTable id="goodDataTable" var="g" value="#{goodBean.allGoods}"
     			styleClass="order-table"
     			headerClass="order-table-header"
     			rowClasses="order-table-odd-row,order-table-even-row"
     			lazy="true" 
-    			rows="10"  
+    			rows="7"  
     			paginatorAlwaysVisible="false"
     		>
  
@@ -71,7 +75,7 @@
  
 			</p:panelGrid>
  
-			<p:commandButton value="Submit" action="#{goodBean.addGood}" />
+			<p:commandButton value="Submit" action="#{goodBean.addGood}" update=":goodDataTable"/>
  
  		</h:form>
  		
@@ -107,7 +111,7 @@
  
 			</p:panelGrid>
  
-			<p:commandButton value="Submit" action="#{goodBean.updateGood}" />
+			<p:commandButton value="Submit" action="#{goodBean.updateGood}" update=":goodDataTable"/>
  
  		</h:form>
  		
@@ -126,11 +130,29 @@
  
 			</p:panelGrid>
  
-			<p:commandButton value="Submit" action="#{goodBean.deleteGood}" />
+			<p:commandButton value="Submit" action="#{goodBean.deleteGood}" update=":goodDataTable"/>
  
+ 		</h:form>	
+ 		
+ 		<h:form>
+ 		
+ 		 <p:outputLabel value="Choose a good:" for="goodDropdown" />
+        
+       <p:autoComplete id="goodDropdown"
+        		value="#{goodBean.chosenGood}"        	  
+        	 	completeMethod="#{goodBean.completeGood}"
+        	 	var="good" 
+        	 	itemLabel="#{good.name}" 
+        	 	itemValue="#{good}"        	 	
+        	 	converter="#{goodConverter}"
+        	 	dropdown="true" 
+        	 	forceSelection="true"/>
+        	 	
+    <p:commandButton value="Submit" icon="ui-icon-check" />
  		</h:form>
+ 
 
-<a href="../edit_catalog.html">Back</a>
+	<a href="../edit_catalog.html">Back</a>
  
  
     </h:body>

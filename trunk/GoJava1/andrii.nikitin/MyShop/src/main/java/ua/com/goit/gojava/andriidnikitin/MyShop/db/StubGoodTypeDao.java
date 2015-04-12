@@ -19,6 +19,11 @@ public class StubGoodTypeDao  extends StubGenericDao<GoodType>{
 
 	protected Integer generateId(GoodType object){
 		return object.hashCode();
-	}	
+	}
+
+	@Override
+	protected String getName(GoodType object) {
+		return object.getName();
+	}
 }
 

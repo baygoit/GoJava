@@ -16,12 +16,12 @@ import ua.com.goit.gojava.andriidnikitin.MyShop.domain.util.MyShopException;
 public class GoodCatalogImpl implements GoodCatalog{	
 	
 	private DaoFactory daoFactory;
+	
+	private Logger log;
 
 	public void setDaoFactory(DaoFactory daoFactory) {
 		this.daoFactory = daoFactory;
 	}
-
-	private Logger log;
 	
 	public void setLog(Logger log) {
 		this.log = log;
@@ -154,6 +154,17 @@ public class GoodCatalogImpl implements GoodCatalog{
 		 } catch(MyShopDaoException e){
 			 throw new MyShopException (e);		
 		 }
+	}
+
+	@Override
+	public List<Good> getGoodsFilteringByName(String query) throws MyShopException {	
+		GenericDao<Good> dao;
+		try {
+			dao = daoFactory.getGoodDao();
+		} catch (MyShopDaoException e) {
+			throw new MyShopException(e);
+		}	
+		return dao.getFilteringByName(query);
 	}
 	
 }

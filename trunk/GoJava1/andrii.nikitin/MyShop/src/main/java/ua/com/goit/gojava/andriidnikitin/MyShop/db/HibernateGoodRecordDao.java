@@ -9,6 +9,11 @@ public class HibernateGoodRecordDao extends HibernateGenericDao<GoodRecord> {
 		return GoodRecord.class;
 	}
 
+	@Override
+	protected String getName(GoodRecord object) {
+		return null;
+	}
+
 	
 
 }

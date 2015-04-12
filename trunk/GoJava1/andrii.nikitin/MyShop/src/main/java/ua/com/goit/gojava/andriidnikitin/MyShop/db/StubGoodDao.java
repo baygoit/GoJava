@@ -3,9 +3,7 @@ package ua.com.goit.gojava.andriidnikitin.MyShop.db;
 import ua.com.goit.gojava.andriidnikitin.MyShop.domain.model.Good;
 
 public class StubGoodDao extends StubGenericDao<Good>{
-	
-	
-	
+			
 	public StubGoodDao() {
 		init();
 	}
@@ -21,6 +19,13 @@ public class StubGoodDao extends StubGenericDao<Good>{
 
 	protected Integer generateId(Good object){
 		return object.hashCode();
-	}	
+	}
+
+	@Override
+	protected String getName(Good object) {
+		return object.getName();
+	}
+	
+	
 }
 

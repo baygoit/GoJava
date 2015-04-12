@@ -1,4 +1,4 @@
-package ua.com.goit.gojava.andriidnikitin.MyShop.ui;
+package ua.com.goit.gojava.andriidnikitin.MyShop.ui.beans;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -17,15 +17,16 @@ import ua.com.goit.gojava.andriidnikitin.MyShop.commons.ErrorLogger;
 import ua.com.goit.gojava.andriidnikitin.MyShop.domain.model.Good;
 import ua.com.goit.gojava.andriidnikitin.MyShop.domain.service.GoodCatalog;
 import ua.com.goit.gojava.andriidnikitin.MyShop.domain.util.MyShopException;
+import ua.com.goit.gojava.andriidnikitin.MyShop.ui.util.PrimeFacesUtil;
 
 @Component
 @Scope("session")
-@ManagedBean(name = "goodBean", eager = true)
+@ManagedBean(name = "goodBean")
 @RequestScoped
 public class GoodBean implements Serializable{
 
 	private static final long serialVersionUID = 2L;
-
+	
 	@Autowired 	
 	private GoodCatalog catalog;
 
@@ -36,14 +37,30 @@ public class GoodBean implements Serializable{
 	private Integer id;
 
 	@ManagedProperty(value="#{type}")	
-	private Integer type;	
+	private Integer type;
+	
+	@ManagedProperty(value="#{chosenGood}")	
+	private Good chosenGood;	
 
-	@ManagedProperty(value="#{allGoods}")	
+	@ManagedProperty(value="#{allGoods}")
 	private List<Good> allGoods;
 	
-
 	private Logger log = Logger.getLogger(getClass());
+
+	private List<Good> filteredGoods;
 	
+	private String previousQuery;	
+
+	public Good getChosenGood() {
+		log.info("recieving chosen good " + chosenGood );
+		return chosenGood;
+	}
+
+	public void setChosenGood(Good chosenGood) {
+		log.info("setting chosen good with id=" + chosenGood.getId());
+		this.chosenGood = chosenGood;
+	}
+
 	public String getName() {
 		return name;
 	}
@@ -84,7 +101,6 @@ public class GoodBean implements Serializable{
 	}
 	
 	public List<Good> getAllGoods(){
-		System.out.println("method getallgoods from goodbean was invoked");
 		try {
 			allGoods = catalog.getAllGoods();
 		} catch (MyShopException e) {
@@ -94,63 +110,85 @@ public class GoodBean implements Serializable{
 		return allGoods;
 	}	
 	
-	public void setAllGoods(List<Good> allGoods) {
-		this.allGoods = allGoods;
-	}
-
-	public String addGood(){		
+	public void addGood(){	
 		try {
 			catalog.createGood(name, type);
+			PrimeFacesUtil.addMessage("Good was successfully created.");
 		} catch (MyShopException e) {
 			ErrorLogger.logException(e, log);
+			PrimeFacesUtil.addError("Fail to create good.");
 		}
-
 		clearForm();
-
-		return "";
 	}
 	
-	public String updateGood(){		
+	public void updateGood(){		
 		try {
-			String validation = validateExistance(id);
-			if (validation !=null){
-				return validation;
-			}
-			else {
+			if (validateExistance(id)){
 				catalog.updateGood(id, name, type);
-				clearForm();
+				PrimeFacesUtil.addMessage("Good was successfully updated.");
 			}
 		} catch (MyShopException e) {
+			PrimeFacesUtil.addError("Fail to update good.");
 			ErrorLogger.logException(e,log);
-		}
-		return "";
+		}						
+		clearForm();
 	}
 	
-	public String deleteGood(){	
+	public void deleteGood(){	
 		try {
-			String validation = validateExistance(id);
-			if (validation !=null){
-				return validation;
-			}
-			else {
+			if (validateExistance(id)){
 				catalog.deleteGood(id);
-				clearForm();
+				PrimeFacesUtil.addMessage("Good was successfully deleted.");
 			}
+		} catch (MyShopException e) {
+			PrimeFacesUtil.addError("Fail to delete good.");
+			ErrorLogger.logException(e, log);			
+		}				
+		clearForm();
+	}
+	
+	public List<Good> completeGood(String query){
+		Boolean useOlderResult = false;
+		if (previousQuery!= null){
+			useOlderResult = query.startsWith(previousQuery);
+		}
+		if (useOlderResult){
+      	  return filteredPreviouslyExtractedResult(query);
+		}
+		try{
+			filteredGoods = catalog.getGoodsFilteringByName(query);
 		} catch (MyShopException e) {
 			ErrorLogger.logException(e, log);
+			PrimeFacesUtil.addError("Fail to get data.");
+			filteredGoods = new ArrayList<Good>();
 		}
-		return "";
+		previousQuery = query;
+        return filteredGoods;
+	}
+
+	private List<Good> filteredPreviouslyExtractedResult(String query) {
+		List<Good> result = new ArrayList<Good>();
+		for (int i = 0; i < filteredGoods.size(); i++) {
+		     Good good = filteredGoods.get(i);
+		     if((good.getName()).toLowerCase().startsWith(query)) {
+		    	 result.add(good);
+		     }
+		}      
+	    return result;
 	}
 	
-	private String validateExistance(Integer id){
+	private Boolean validateExistance(Integer id){
 		try {
 			if (catalog.getGoodById(id) == null){
-				return "such good does not exist!";
+				PrimeFacesUtil.addWarning("Such good does not exist.");
+				return false;
 			}
 		} catch (MyShopException e) {
+			PrimeFacesUtil.addError("Fail to check good for existance.");			
 			ErrorLogger.logException(e, log);
+			return false;
 		}
-		return null;
+		return true;
 		
 	}
 

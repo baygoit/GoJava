@@ -1,11 +1,13 @@
 package ua.com.goit.gojava.andriidnikitin.MyShop.db;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.classic.Session;
+
 
 public abstract class HibernateGenericDao <T> implements GenericDao<T> {
 	
@@ -61,6 +63,18 @@ public abstract class HibernateGenericDao <T> implements GenericDao<T> {
 		session.close();
 		return result;
 	}
+
+	public List<T> getFilteringByName(String query) {
+		List<T> all = getAll();
+		List<T> result = new ArrayList<T>();
+		for (int i = 0; i < all.size(); i++) {
+	          T good = all.get(i);
+	          if(getName(good).toLowerCase().startsWith(query)) {
+	        	  result.add(good);
+	          }
+		}      
+		return result;
+	}
 	
 	
 	private Integer createInstance(T object, Session session) {
@@ -98,4 +112,6 @@ public abstract class HibernateGenericDao <T> implements GenericDao<T> {
 		transaction.commit();		
 		return list ;
 	}		
+	
+	protected abstract String getName(T object);
 }	
