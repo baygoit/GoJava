@@ -17,6 +17,16 @@ import javax.validation.constraints.Size;
 @Table(name = "DONATOR")
 public class Donator{
 
+	public Donator(){
+		
+	}
+	
+	public Donator(String name, String mail, long card){
+		this.name = name;
+		this.mail = mail;
+		this.card = card;
+	}
+	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "donator")
 	private List<Donation> donations;
 

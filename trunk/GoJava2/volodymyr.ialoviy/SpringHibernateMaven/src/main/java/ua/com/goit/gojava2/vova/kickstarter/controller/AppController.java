@@ -14,9 +14,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import ua.com.goit.gojava2.vova.kickstarter.model.Category;
+import ua.com.goit.gojava2.vova.kickstarter.model.Donator;
 import ua.com.goit.gojava2.vova.kickstarter.model.Project;
 import ua.com.goit.gojava2.vova.kickstarter.model.Question;
 import ua.com.goit.gojava2.vova.kickstarter.service.CategoryService;
+import ua.com.goit.gojava2.vova.kickstarter.service.DonatorService;
 import ua.com.goit.gojava2.vova.kickstarter.service.ProjectService;
 import ua.com.goit.gojava2.vova.kickstarter.service.QuestionService;
 
@@ -32,6 +34,9 @@ public class AppController {
 	
 	@Autowired
 	QuestionService questionService;
+	
+	@Autowired
+	DonatorService donatorService;
 
 	@RequestMapping(value = {"/", "/categories"}, method = RequestMethod.GET)
 	public String listCategories(ModelMap model, HttpServletRequest req) {
@@ -173,10 +178,23 @@ public class AppController {
 	}
 
 	@RequestMapping(value = "/adddonate/{idProject}/{amount}", method = RequestMethod.GET)
-	public String saveDonate(ModelMap model, @PathVariable int idProject, @PathVariable int amount) {
-		projectService.addDonate(amount, idProject);
-		model.addAttribute("success", "Donate " + amount + " successfully");
+	public String showDonationChoice(ModelMap model, @PathVariable int idProject, @PathVariable int amount) {
+		return "adddonate";
+	}
+	
+	@RequestMapping(value = "/adddonate/{idProject}/{amount}", method = RequestMethod.POST)
+	public String saveDonate(ModelMap model, @PathVariable int idProject, HttpServletRequest req) {
+		int amount = Integer.parseInt(req.getParameter("amount"));
+		String name = req.getParameter("name");
+		String mail = req.getParameter("mail");
+//		long card = Long.parseLong(req.getParameter("card"));
+		long card = Long.valueOf(req.getParameter("card")).longValue();
+		Donator donator = new Donator(name, mail, card);
+		donatorService.saveDonator(donator);
+		
 		model.addAttribute("idProject", idProject);
-		return "donatesuccess";
+		projectService.addDonate(amount, idProject);
+		model.addAttribute("message", "Donate " + amount + " successfully");
+		return "redirect:/projects/{idProject}?show";
 	}
 }
