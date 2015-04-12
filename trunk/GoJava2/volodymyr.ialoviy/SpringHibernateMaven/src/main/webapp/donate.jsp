@@ -17,22 +17,22 @@
 	<table border="2" bordercolor="black" cellpadding="2">
 		<tr>
 			<td>invest project</td>
-			<td><a href="${ctx}/adddonate/${id}/0">any amount</a></td>
+			<td><a href="${ctx}/donate/${id}/0?add">any amount</a></td>
 			<td>thanks</td>
 		</tr>
 		<tr>
 			<td>invest project</td>
-			<td><a href="${ctx}/adddonate/${id}/1">1 dollar</a></td>
+			<td><a href="${ctx}/donate/${id}/1?add">1 dollar</a></td>
 			<td>you get many thanks</td>
 		</tr>
 		<tr>
 			<td>invest project</td>
-			<td><a href="${ctx}/adddonate/${id}/5">5 dollars</a></td>
+			<td><a href="${ctx}/donate/${id}/5?add">5 dollars</a></td>
 			<td>you get 1 month software license</td>
 		</tr>
 		<tr>
 			<td>invest project</td>
-			<td><a href="${ctx}/adddonate/${id}/10">10 dollars</a></td>
+			<td><a href="${ctx}/donate/${id}/10?add">10 dollars</a></td>
 			<td>you get you link in our site</td>
 		</tr>
 	</table>

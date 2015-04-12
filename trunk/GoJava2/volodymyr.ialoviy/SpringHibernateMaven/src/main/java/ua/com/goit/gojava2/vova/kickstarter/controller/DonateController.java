@@ -34,12 +34,12 @@ public class DonateController {
 		return "donate";
 	}
 
-	@RequestMapping(value = "/adddonate/{idProject}/{amount}", method = RequestMethod.GET)
+	@RequestMapping(value = "/donate/{idProject}/{amount}", params = "add", method = RequestMethod.GET)
 	public String showDonationChoice(ModelMap model, @PathVariable int idProject, @PathVariable int amount) {
 		return "adddonate";
 	}
 	
-	@RequestMapping(value = "/adddonate/{idProject}/{amount}", method = RequestMethod.POST)
+	@RequestMapping(value = "/donate/{idProject}/{amount}", params = "add", method = RequestMethod.POST)
 	public String saveDonate(ModelMap model, @PathVariable int idProject, HttpServletRequest req) {
 		int amount = Integer.parseInt(req.getParameter("amount"));
 		String name = req.getParameter("name");
