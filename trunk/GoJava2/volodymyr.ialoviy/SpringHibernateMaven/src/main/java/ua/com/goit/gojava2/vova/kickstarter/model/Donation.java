@@ -16,6 +16,16 @@ import javax.validation.constraints.NotNull;
 @Table(name = "DONATION")
 public class Donation{
 	
+	public Donation(){
+		
+	}
+	
+	public Donation(int idDonator, int idProject, int amount){
+		this.idDonator = idDonator;
+		this.idProject = idProject;
+		this.amount = amount;
+	}
+	
 	@ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
 	@JoinColumn(name = "ID_DONATOR", nullable = false, insertable = false, updatable = false)
 	private Donator donator;
