@@ -172,11 +172,11 @@ public class AppController {
 		return "donate";
 	}
 
-	@RequestMapping(value = "/adddonate/{id}/{amount}", method = RequestMethod.GET)
-	public String saveDonate(ModelMap model, @PathVariable int id, @PathVariable int amount) {
-		projectService.addDonate(amount, id);
+	@RequestMapping(value = "/adddonate/{idProject}/{amount}", method = RequestMethod.GET)
+	public String saveDonate(ModelMap model, @PathVariable int idProject, @PathVariable int amount) {
+		projectService.addDonate(amount, idProject);
 		model.addAttribute("success", "Donate " + amount + " successfully");
-		model.addAttribute("project", id);
+		model.addAttribute("idProject", idProject);
 		return "donatesuccess";
 	}
 }

@@ -17,7 +17,6 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-
 import org.hibernate.annotations.Type;
 import org.joda.time.LocalDate;
 
@@ -29,9 +28,9 @@ public class Project{
 	@JoinColumn(name = "ID_CATEGORY", nullable = false, insertable = false, updatable = false)
 	private Category category;
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "project")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "project", cascade = CascadeType.REMOVE)
 	private List<Question> questions;
-
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID")
