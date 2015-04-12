@@ -14,10 +14,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import ua.com.goit.gojava2.vova.kickstarter.model.Category;
+import ua.com.goit.gojava2.vova.kickstarter.model.Donation;
 import ua.com.goit.gojava2.vova.kickstarter.model.Donator;
 import ua.com.goit.gojava2.vova.kickstarter.model.Project;
 import ua.com.goit.gojava2.vova.kickstarter.model.Question;
 import ua.com.goit.gojava2.vova.kickstarter.service.CategoryService;
+import ua.com.goit.gojava2.vova.kickstarter.service.DonationService;
 import ua.com.goit.gojava2.vova.kickstarter.service.DonatorService;
 import ua.com.goit.gojava2.vova.kickstarter.service.ProjectService;
 import ua.com.goit.gojava2.vova.kickstarter.service.QuestionService;
@@ -37,6 +39,9 @@ public class AppController {
 	
 	@Autowired
 	DonatorService donatorService;
+	
+	@Autowired
+	DonationService donationService;
 
 	@RequestMapping(value = {"/", "/categories"}, method = RequestMethod.GET)
 	public String listCategories(ModelMap model, HttpServletRequest req) {
@@ -187,10 +192,13 @@ public class AppController {
 		int amount = Integer.parseInt(req.getParameter("amount"));
 		String name = req.getParameter("name");
 		String mail = req.getParameter("mail");
-//		long card = Long.parseLong(req.getParameter("card"));
 		long card = Long.valueOf(req.getParameter("card")).longValue();
+		
 		Donator donator = new Donator(name, mail, card);
 		donatorService.saveDonator(donator);
+		
+		Donation donation = new Donation(donator.getId(), idProject, amount);
+		donationService.saveDonation(donation);
 		
 		model.addAttribute("idProject", idProject);
 		projectService.addDonate(amount, idProject);
