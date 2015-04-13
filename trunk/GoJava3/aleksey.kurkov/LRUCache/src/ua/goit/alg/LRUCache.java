@@ -25,8 +25,8 @@ public class LRUCache {
       brakeLinks(node);
       setLinks(cache.get(key));
     } else {
-      brakeLinks(head);
       cache.remove(head.getKey());
+      brakeLinks(head);
       addNodeToCache(key, value);
     }
   }

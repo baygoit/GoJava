@@ -82,7 +82,21 @@ public class LRUCacheTest {
     cache.put(4, 40);
     cache.get(1);
     cache.put(5, 50);
-    int expectedValue = -1;
+    int expectedValue = 30;
+    int actualValue = cache.get(3);
+    assertEquals(expectedValue, actualValue);
+  }
+
+  @Test
+  public void
+  LRUCache_1_put_2_1_get_2_put_3_2_get_2_get_3() {
+    LRUCache cache = new LRUCache(1);
+    cache.put(2, 1);
+    cache.get(2);
+    cache.put(3, 2);
+    cache.get(2);
+    cache.get(3);
+    int expectedValue = 2;
     int actualValue = cache.get(3);
     assertEquals(expectedValue, actualValue);
   }
