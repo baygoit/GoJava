@@ -8,6 +8,8 @@ import java.io.IOException;
 import static org.junit.Assert.assertArrayEquals;
 import static ua.goit.alg.Arrays.*;
 
+@SuppressWarnings("ResultOfMethodCallIgnored")
+
 public class ArraysTest {
 
   @Test
@@ -49,7 +51,7 @@ public class ArraysTest {
     int[] expectedArrayA2 = {8, 10, 12, 13, 14};
     File file = new File("testBigFile.txt");
     new BigFileMaker(testArray, file);
-    cutSortAndWrite(file, buffer);
+    getSortedFiles(file, buffer);
     File fileA1 = new File("A0.txt");
     int[] actualA1 = readArrayFromFile(fileA1);
     assertArrayEquals(expectedArrayA1, actualA1);
@@ -71,7 +73,7 @@ public class ArraysTest {
     int[] expectedArrayA2 = {13, 14};
     File file = new File("testBigFile.txt");
     new BigFileMaker(testArray, file);
-    cutSortAndWrite(file, buffer);
+    getSortedFiles(file, buffer);
     File fileA0 = new File("A0.txt");
     int[] actualA0 = readArrayFromFile(fileA0);
     assertArrayEquals(expectedArrayA0, actualA0);

@@ -6,18 +6,18 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Random;
 
-public class BigFileMaker {
-  static final int FILE_LENGTH = 1000; // ~1Mb 999999
-  static Random temp = new Random();
-  static DataOutputStream dosBig;
-  static File file = new File("BigFile.txt");
+class BigFileMaker {
+  private static final int FILE_LENGTH = 1000; // ~1Mb 999999
+  private static final Random temp = new Random();
+  private static DataOutputStream dosBig;
+  private static final File file = new File("BigFile.txt");
 
   public BigFileMaker(int[] array, File fileName) throws IOException {
     FileOutputStream fosBig = new FileOutputStream(fileName);
     dosBig = new DataOutputStream(fosBig);
 
-    for (int i = 0; i < array.length; i++) {
-      dosBig.writeInt(array[i]);
+    for (int anArray : array) {
+      dosBig.writeInt(anArray);
     }
     dosBig.close();
   }
@@ -44,7 +44,7 @@ public class BigFileMaker {
     for (int i = count; i > 0 ; i--) {
       dosBig.writeInt(i);
     }
-    System.out.println("Created " + file + " " + file.length() + " bytes");
+    //System.out.println("Created " + file + " " + file.length() + " bytes");
     dosBig.close();
   }
 }

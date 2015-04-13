@@ -9,7 +9,7 @@ package ua.goit.alg;
 2) Input: 3 5 7 5 3     Output: 3 3 5 5 7
 3) Input: 10 8 38 1 99  Output: 1 8 10 38 99 */
 
-public class MergeSort {
+class MergeSort {
   public static int[] array;
 
   public MergeSort(int[] expectedArray) {
@@ -21,13 +21,14 @@ public class MergeSort {
     return array;
   }
 
-  public static void sortArray() {
+  private static void sortArray() {
     int[] tempArray = new int[array.length];
     sort(tempArray, 0, array.length - 1);
   }
 
-  public static void sort(int[] tempArray, int start, int end) {
+  private static void sort(int[] tempArray, int start, int end) {
     if (end == start) {
+      //noinspection UnnecessaryReturnStatement
       return;
     } else {
       int middle = safeFindMiddle(start, end);
@@ -38,12 +39,12 @@ public class MergeSort {
     }
   }
 
-  public static final int safeFindMiddle(int a, int b) {
+  private static int safeFindMiddle(int a, int b) {
       return a + b >>> 1;
   }
 
-  public static void merge(int[] tempArray, int cursor, int middlePlusOne,
-                           int end) {
+  private static void merge(int[] tempArray, int cursor, int middlePlusOne,
+                            int end) {
     int index = 0;
     int start = cursor;
     int middle = middlePlusOne - 1;
@@ -61,9 +62,7 @@ public class MergeSort {
     while (middlePlusOne <= end) {
       tempArray[index++] = array[middlePlusOne++];
     }
-    for (int i = 0; i < countArrayElements; i++) {
-      array[cursor + i] = tempArray[i];
-    }
+    System.arraycopy(tempArray, 0, array, cursor, countArrayElements);
   }
 
   public static void printSortedArray() {
