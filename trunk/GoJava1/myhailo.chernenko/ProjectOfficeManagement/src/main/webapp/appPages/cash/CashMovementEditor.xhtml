@@ -16,6 +16,7 @@
 		<p:messages id="messages" showDetail="true" autoUpdate="true"
 			closable="true" />
 		<p>Запись о движении денег</p>
+		<h:inputHidden value="#{cashMovementEditorBean.cashMovement.id}" />
 		<h:panelGrid columns="2" cellpadding="5">
 	        <p:outputLabel for="id" value="Идентификатор: " />
 	        <p:inputText id="id" value="#{cashMovementEditorBean.cashMovement.id}" readonly = "true"/>

@@ -62,16 +62,17 @@
 					action="#{bankAccountListBean.deleteBankAccount(bankAccount)}"
 					value="Удалить" />
 				<h:commandButton
-					action="#{bankAccountEditorBean.loadBankAccountEditor(bankAccount)}"
-					value="Редактировать" />
-				<h:commandButton
+					action="/appPages/cash/BankAccountEditor.xhtml"
+					value="Редактировать">
+					    <f:setPropertyActionListener  target="#{bankAccountEditorBean.bankAccount}" value="#{bankAccount}" />
+				</h:commandButton>
+				<h:commandButton 
 					action="#{cashMovementListBean.openFilteredList(bankAccount)}"
-					
 					value="Открыть движения" />
 			</p:column>
 		</p:dataTable>
 		<h:commandButton
-					action="#{bankAccountEditorBean.loadBankAccountCreator()}"
+					action="/appPages/cash/BankAccountEditor.xhtml"
 					value="Добавить" />
 	</h:form>
 	<h:outputLink value="#{request.contextPath}/appPages/index.xhtml"> вернуться на главное меню </h:outputLink>

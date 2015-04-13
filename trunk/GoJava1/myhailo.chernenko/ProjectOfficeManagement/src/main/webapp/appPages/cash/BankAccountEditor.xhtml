@@ -3,7 +3,7 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
-
+       
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>Project Office Management System</title>
@@ -16,10 +16,11 @@
 		<p:messages id="messages" showDetail="true" autoUpdate="true"
 			closable="true" />
 		<p>Банковский счет</p>
+		<h:inputHidden value="#{bankAccountEditorBean.bankAccount.id}" />
 		<h:panelGrid columns="2" cellpadding="5">
 	        <p:outputLabel for="id" value="Идентификатор: " />
 	        <p:inputText id="id" value="#{bankAccountEditorBean.bankAccount.id}" readonly = "true"/>
-	 
+	 		
 	        <p:outputLabel for="name" value="Название: " />
 	        <p:inputText id="name" value="#{bankAccountEditorBean.bankAccount.name}"/>
 	 

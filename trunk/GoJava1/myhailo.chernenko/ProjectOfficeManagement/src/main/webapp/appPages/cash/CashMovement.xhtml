@@ -73,12 +73,14 @@
 					action="#{cashMovementListBean.deleteCashMovement(cashMovement)}"
 					value="Удалить" />
 				<h:commandButton
-					action="#{cashMovementEditorBean.loadCashMovementEditor(cashMovement)}"
-					value="Редактировать" />
+					action="/appPages/cash/CashMovementEditor.xhtml"
+					value="Редактировать">
+					    <f:setPropertyActionListener  target="#{cashMovementEditorBean.cashMovement}" value="#{cashMovement}" />
+				</h:commandButton>
 			</p:column>
 		</p:dataTable>
 		<h:commandButton
-					action="#{cashMovementEditorBean.loadCashMovementCreator()}"
+					action="/appPages/cash/CashMovementEditor.xhtml"
 					value="Добавить" />
 	</h:form>
 	<h:outputLink value="#{request.contextPath}/appPages/index.xhtml"> вернуться на главное меню </h:outputLink>

@@ -5,7 +5,7 @@ import java.util.List;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 
 import org.apache.log4j.Logger;
@@ -15,7 +15,8 @@ import ua.com.goit.gojava.POM.services.ApplicationContextProvider;
 import ua.com.goit.gojava.POM.services.BankAccountService;
 import ua.com.goit.gojava.POM.services.POMServicesException;
 
-@SessionScoped
+
+@RequestScoped
 @ManagedBean
 public class BankAccountAutoCompleter implements Serializable{
 
