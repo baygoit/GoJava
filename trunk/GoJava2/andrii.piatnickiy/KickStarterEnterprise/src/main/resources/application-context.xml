@@ -15,7 +15,7 @@ http://www.springframework.org/schema/beans ">
 
     <context:property-placeholder location="classpath:database.properties"/>
 
-    <context:component-scan base-package="ua.com.sas"/>
+    <context:component-scan base-package="ua.com.goit.gojava"/>
 
     <context:annotation-config/>
 
