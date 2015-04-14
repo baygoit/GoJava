@@ -79,16 +79,6 @@
             <artifactId>hibernate-core</artifactId>
             <version>4.2.0.Final</version>
         </dependency>
-        <dependency>
-            <groupId>org.apache.struts</groupId>
-            <artifactId>struts2-core</artifactId>
-            <version>2.1.8</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.struts</groupId>
-            <artifactId>struts2-spring-plugin</artifactId>
-            <version>2.1.8</version>
-        </dependency>
     </dependencies>
     <build>
         <plugins>
