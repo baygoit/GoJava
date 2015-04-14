@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+       xmlns:p="http://primefaces.org/ui"
+      >
+    <h:head>
+    	
+    </h:head>
+ 
+    <h:body>
+ 
+    	<h1> Supply records of different goods</h1>
+ 
+ 		<p:dataTable value="#{goodRecordBean.allRecords}" var="r" id="dataTable"
+    			styleClass="order-table"
+    			headerClass="order-table-header"
+    			rowClasses="order-table-odd-row,order-table-even-row"
+    		>
+  
+ 			<p:column>
+    			<f:facet name="header">
+    				ID
+				</f:facet>
+    				#{r.id}
+    		</p:column>
+    		
+    		<p:column>
+    			<f:facet name="header">
+    				Good 
+    			</f:facet>
+    				#{r.good.name}
+    		</p:column>
+    		
+    		<p:column>
+    			<f:facet name="header">
+    				Amount
+    			</f:facet>
+    				#{r.amount}
+    		</p:column>
+    		
+    		<p:column>
+    			<f:facet name="header">
+    				Price
+    			</f:facet>
+    				#{r.price}
+    		</p:column>
+    		
+ 
+    	</p:dataTable> 	
+    	
+    	
+    	<h2>Add New Good Record</h2>
+ 		<h:form>
+ 
+ 			<p:panelGrid columns="3">
+ 
+				Good : 
+				<p:autoComplete id="goodDropdown"
+	        		value="#{goodRecordBean.good}"        	  
+	        	 	completeMethod="#{autocompleteBean.completeGood}"
+	        	 	var="good" 
+	        	 	itemLabel="#{good.name}" 
+	        	 	itemValue="#{good}"        	 	
+	        	 	converter="#{goodConverter}"
+	        	 	dropdown="true" 
+	        	 	required="true"
+	        	 	forceSelection="true"/>
+ 
+				<p:message for="goodDropdown" style="color:red" />
+ 
+				Amount : 
+				<p:inputText id="amount" value="#{goodRecordBean.amount}" 
+					size="20" required="false"
+					label="amount" >
+				</p:inputText>
+ 
+				<p:message for="amount" style="color:red" />
+				
+				Price : 
+				<p:inputText id="price" value="#{goodRecordBean.price}" 
+					size="20" required="false"
+					label="price" >
+				</p:inputText>
+ 
+				<p:message for="price" style="color:red" />
+ 
+			</p:panelGrid>
+ 
+			<p:commandButton value="Submit" action="#{goodRecordBean.addRecord}"
+			update=":dataTable"/>
+ 
+ 		</h:form>	
+ 
+    </h:body>
+ 
+</html>

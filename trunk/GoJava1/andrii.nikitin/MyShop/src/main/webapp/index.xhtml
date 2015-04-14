@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+       xmlns:p="http://primefaces.org/ui"
+      >
+<h:head>
+<title>MyShop</title>
+</h:head>
+
+	<h:body>
+	
+	<p:layout style="min-width:400px;min-height:700px;" id="mainLayout">
+
+	<p:layoutUnit position="north" id="top">	
+		<h:form>
+			<p:menubar>
+				<p:menuitem value="Home" action="#{siteBean.openConstruct}" update=":mainLayout"/>
+				<p:menuitem value="Shop" action="#{siteBean.openConstruct}" update=":mainLayout"/>
+				<p:menuitem value="Warehouse"  action="#{siteBean.openWarehouse}" update=":mainLayout"/>
+				<p:submenu label="Catalog editing">				
+					<p:menuitem value="Edit goods" action="#{siteBean.openGoodEditor}" update=":mainLayout"/>
+					<p:menuitem value="Edit good types" action="#{siteBean.openTypeEditor}" update=":mainLayout"/>
+				</p:submenu>
+			</p:menubar>	 
+			<p:growl id="messages" showDetail="false"/>
+		</h:form>		
+	</p:layoutUnit>
+	
+    <p:layoutUnit position="west" resizable="true"  id="sidebar">
+    	<iframe id="sidebar" frameborder="0" src="#{siteBean.sidebar}" width="100%" height="100%"> 
+    	</iframe>
+    </p:layoutUnit>
+ 
+    <p:layoutUnit position="center" id="layoutCenter"> 
+    	<iframe id="content" frameborder="0" src="#{siteBean.content}" width="100%" height="100%"> 
+    	</iframe>
+    </p:layoutUnit>
+    
+</p:layout>
+</h:body>
+
+</html>
