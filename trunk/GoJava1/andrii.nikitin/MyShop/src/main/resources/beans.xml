@@ -58,13 +58,18 @@
 		class="ua.com.goit.gojava.andriidnikitin.MyShop.db.HibernateGoodRecordDao">
    		<property name="sessionFactory" ref="sessionFactory" /> 
 	</bean>
-	
+
+	<bean id="basketDao"  
+		class="ua.com.goit.gojava.andriidnikitin.MyShop.db.HibernateCustomerBasketDao">
+   		<property name="sessionFactory" ref="sessionFactory" /> 
+	</bean>
    		
     <bean id="daoFactory" 
 		class="ua.com.goit.gojava.andriidnikitin.MyShop.db.DaoFactoryImpl">
 		<property name="goodDao" ref="goodDao" /> 
 		<property name="goodTypeDao" ref="goodTypeDao" /> 
-		<property name="goodRecordDao" ref="goodRecordDao" /> 		
+		<property name="goodRecordDao" ref="goodRecordDao" /> 	
+		<property name="basketDao" ref="basketDao" /> 		
 	</bean>
 	
 		
@@ -84,6 +89,7 @@
 		     		  <value>ua.com.goit.gojava.andriidnikitin.MyShop.domain.model.Good</value>
 				      <value>ua.com.goit.gojava.andriidnikitin.MyShop.domain.model.GoodType</value>
 				      <value>ua.com.goit.gojava.andriidnikitin.MyShop.domain.model.GoodRecord</value>
+				      <value>ua.com.goit.gojava.andriidnikitin.MyShop.domain.model.CustomerBasket</value>
 			 </list>
  		  </property>
 	    <property name="hibernateProperties">
@@ -107,7 +113,7 @@
 
 	<!-- BL beans -->	
    
-	  <bean id="catalog" 
+	  <bean id="goodCatalog" 
 			class="ua.com.goit.gojava.andriidnikitin.MyShop.domain.service.GoodCatalogImpl">
 			<property name="daoFactory" ref="daoFactory"/>	
 			<property name="log" ref="blLogger"/>	
@@ -124,4 +130,11 @@
 			<property name="daoFactory" ref="daoFactory"/>	
 			<property name="log" ref="blLogger"/>	
 	  </bean>
+	  
+	  <bean id="businessServiceHandler"
+			class="ua.com.goit.gojava.andriidnikitin.MyShop.domain.service.BusinessServiceHandlerImpl">			
+			<property name="goodCatalog" ref="goodCatalog"/>	
+			<property name="warehouseManager" ref="warehouseManager"/>	
+			<property name="deliveryManager" ref="deliveryManager"/>	
+	  </bean>		
 </beans>

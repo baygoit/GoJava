@@ -30,21 +30,9 @@ public class WarehouseManagerImpl implements WarehouseManager{
 
 	@Override
 	public List<GoodRecord> getRecordsOfGood(Good good) throws MyShopException {
-		try {
-			GenericDao<GoodRecord> dao = daoFactory.getGoodRecordDao();
-			List<GoodRecord> list = dao.getAll();
-			List<GoodRecord> result = new ArrayList<GoodRecord>();
-			for (GoodRecord record: list){
-				if (record.getGood().equals(good)){
-					result.add(record);
-				}
-				return result;
-			}
-		} catch (MyShopDaoException e) {
-			log.error("error occured while getting instance of GoodRecordDao!");
-			throw new MyShopException(e);
-		}
-		return null;
+		List<GoodRecord> result = new ArrayList<GoodRecord>();
+		result.addAll(good.getRecords());
+		return result;
 	}
 
 	@Override

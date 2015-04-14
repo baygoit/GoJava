@@ -5,6 +5,7 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -29,11 +30,11 @@ public class Good implements Serializable, Cloneable {
 	@Column(name="name")
 	private String name;
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "type_id")
 	private GoodType type;
 	
-	@OneToMany(mappedBy="good")
+	@OneToMany(mappedBy="good", fetch = FetchType.EAGER)
 	private Set<GoodRecord> records;
 
 	public GoodType getType() {

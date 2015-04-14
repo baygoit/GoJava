@@ -15,7 +15,8 @@ import org.springframework.stereotype.Component;
 
 import ua.com.goit.gojava.andriidnikitin.MyShop.commons.ErrorLogger;
 import ua.com.goit.gojava.andriidnikitin.MyShop.domain.model.Good;
-import ua.com.goit.gojava.andriidnikitin.MyShop.domain.service.GoodCatalog;
+import ua.com.goit.gojava.andriidnikitin.MyShop.domain.model.GoodType;
+import ua.com.goit.gojava.andriidnikitin.MyShop.domain.service.BusinessServiceHandler;
 import ua.com.goit.gojava.andriidnikitin.MyShop.domain.util.MyShopException;
 import ua.com.goit.gojava.andriidnikitin.MyShop.ui.util.PrimeFacesUtil;
 
@@ -26,9 +27,9 @@ import ua.com.goit.gojava.andriidnikitin.MyShop.ui.util.PrimeFacesUtil;
 public class GoodBean implements Serializable{
 
 	private static final long serialVersionUID = 2L;
-	
+
 	@Autowired 	
-	private GoodCatalog catalog;
+	private BusinessServiceHandler businessService;
 
 	@ManagedProperty(value="#{name}")
 	private String name;
@@ -37,27 +38,32 @@ public class GoodBean implements Serializable{
 	private Integer id;
 
 	@ManagedProperty(value="#{type}")	
-	private Integer type;
+	private GoodType type;
 	
 	@ManagedProperty(value="#{chosenGood}")	
 	private Good chosenGood;	
+
+	@ManagedProperty(value="#{chosenType}")	
+	private GoodType chosenType;	
+
+	public GoodType getChosenType() {
+		return chosenType;
+	}
+
+	public void setChosenType(GoodType chosenType) {
+		this.chosenType = chosenType;
+	}
 
 	@ManagedProperty(value="#{allGoods}")
 	private List<Good> allGoods;
 	
 	private Logger log = Logger.getLogger(getClass());
-
-	private List<Good> filteredGoods;
 	
-	private String previousQuery;	
-
 	public Good getChosenGood() {
-		log.info("recieving chosen good " + chosenGood );
 		return chosenGood;
 	}
 
 	public void setChosenGood(Good chosenGood) {
-		log.info("setting chosen good with id=" + chosenGood.getId());
 		this.chosenGood = chosenGood;
 	}
 
@@ -70,19 +76,12 @@ public class GoodBean implements Serializable{
 	}
 
 	public String getType() {
-		return type==null? "" : type.toString();
+		if (type==null){
+			return null;
+		}
+		return type.getName();
 	}
 
-	public void setType(String input) {
-		this.type = null;	
-		if (input != null){ 
-			try{
-				this.type = Integer.parseInt(input);
-			} catch (NumberFormatException exception){				
-			}
-		}
-	}
-	
 	public String getId() {
 		return id==null? "" : id.toString();
 	} 
@@ -95,14 +94,14 @@ public class GoodBean implements Serializable{
 			this.id = Integer.parseInt(input);
 		}
 	}
-
-	public void setGoodCatalog(GoodCatalog catalog) {
-		this.catalog = catalog;
+	
+	public void setBusinessService(BusinessServiceHandler businessService) {
+		this.businessService = businessService;
 	}
 	
 	public List<Good> getAllGoods(){
 		try {
-			allGoods = catalog.getAllGoods();
+			allGoods = businessService.getAllGoods();
 		} catch (MyShopException e) {
 			ErrorLogger.logException(e,log);
 			allGoods = new ArrayList<Good>();
@@ -112,90 +111,74 @@ public class GoodBean implements Serializable{
 	
 	public void addGood(){	
 		try {
-			catalog.createGood(name, type);
+			log.info("Chosen type is " + chosenType);
+			businessService.createGood(name, chosenType.getId());
 			PrimeFacesUtil.addMessage("Good was successfully created.");
+			clearForm();
 		} catch (MyShopException e) {
 			ErrorLogger.logException(e, log);
 			PrimeFacesUtil.addError("Fail to create good.");
 		}
-		clearForm();
 	}
 	
-	public void updateGood(){		
+	public void updateGood(){
+		Integer oldId = (chosenGood==null ? null : chosenGood.getId());
 		try {
-			if (validateExistance(id)){
-				catalog.updateGood(id, name, type);
-				PrimeFacesUtil.addMessage("Good was successfully updated.");
-			}
+				if (!checkForUpdates()){
+					PrimeFacesUtil.addWarning("Nothing to update.");
+					return;
+				}
+				businessService.updateGood(oldId, name, chosenType.getId());
+				PrimeFacesUtil.addMessage("Good was successfully updated.");				
+				clearForm();
 		} catch (MyShopException e) {
 			PrimeFacesUtil.addError("Fail to update good.");
 			ErrorLogger.logException(e,log);
-		}						
-		clearForm();
+		}			
+	}
+
+	private Boolean checkForUpdates() {
+		boolean notUpdateName = false;
+		boolean notUpdateType = false;
+		
+		if (name == null){
+			name = chosenGood.getName();
+			notUpdateName = true;
+		}
+		else {
+			if (name.equals(chosenGood.getName())){
+				notUpdateName = true;						
+			}
+		}
+		
+		if (chosenType==null){
+			chosenType = chosenGood.getType();
+			notUpdateType = (chosenType!=null);
+		}
+		else{
+			notUpdateType = (chosenType.equals(chosenGood.getType()));			
+		}
+			return !(notUpdateName && notUpdateType);
 	}
 	
 	public void deleteGood(){	
+		Integer oldId = chosenGood.getId();
 		try {
-			if (validateExistance(id)){
-				catalog.deleteGood(id);
-				PrimeFacesUtil.addMessage("Good was successfully deleted.");
-			}
+				businessService.deleteGood(oldId);
+				PrimeFacesUtil.addMessage("Good was successfully deleted.");				
+				clearForm();
 		} catch (MyShopException e) {
 			PrimeFacesUtil.addError("Fail to delete good.");
 			ErrorLogger.logException(e, log);			
-		}				
-		clearForm();
+		}			
 	}
 	
-	public List<Good> completeGood(String query){
-		Boolean useOlderResult = false;
-		if (previousQuery!= null){
-			useOlderResult = query.startsWith(previousQuery);
-		}
-		if (useOlderResult){
-      	  return filteredPreviouslyExtractedResult(query);
-		}
-		try{
-			filteredGoods = catalog.getGoodsFilteringByName(query);
-		} catch (MyShopException e) {
-			ErrorLogger.logException(e, log);
-			PrimeFacesUtil.addError("Fail to get data.");
-			filteredGoods = new ArrayList<Good>();
-		}
-		previousQuery = query;
-        return filteredGoods;
-	}
-
-	private List<Good> filteredPreviouslyExtractedResult(String query) {
-		List<Good> result = new ArrayList<Good>();
-		for (int i = 0; i < filteredGoods.size(); i++) {
-		     Good good = filteredGoods.get(i);
-		     if((good.getName()).toLowerCase().startsWith(query)) {
-		    	 result.add(good);
-		     }
-		}      
-	    return result;
-	}
-	
-	private Boolean validateExistance(Integer id){
-		try {
-			if (catalog.getGoodById(id) == null){
-				PrimeFacesUtil.addWarning("Such good does not exist.");
-				return false;
-			}
-		} catch (MyShopException e) {
-			PrimeFacesUtil.addError("Fail to check good for existance.");			
-			ErrorLogger.logException(e, log);
-			return false;
-		}
-		return true;
-		
-	}
-
 	private void clearForm(){
 		setName("");
-		setType(null);
+		type = null;
 		setId(null);
+		setChosenGood(null);
+		setChosenType(null);
 	}
 
 }

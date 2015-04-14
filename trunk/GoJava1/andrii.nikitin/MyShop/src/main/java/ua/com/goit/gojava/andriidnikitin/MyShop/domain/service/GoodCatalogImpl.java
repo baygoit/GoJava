@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import ua.com.goit.gojava.andriidnikitin.MyShop.db.DaoFactory;
 import ua.com.goit.gojava.andriidnikitin.MyShop.db.GenericDao;
+import ua.com.goit.gojava.andriidnikitin.MyShop.db.GenericExtraDao;
 import ua.com.goit.gojava.andriidnikitin.MyShop.db.util.MyShopDaoException;
 import ua.com.goit.gojava.andriidnikitin.MyShop.domain.model.Good;
 import ua.com.goit.gojava.andriidnikitin.MyShop.domain.model.GoodType;
@@ -158,13 +159,41 @@ public class GoodCatalogImpl implements GoodCatalog{
 
 	@Override
 	public List<Good> getGoodsFilteringByName(String query) throws MyShopException {	
-		GenericDao<Good> dao;
+		GenericExtraDao<Good> dao;
+		List<Good> result;
 		try {
-			dao = daoFactory.getGoodDao();
+			dao = daoFactory.getGoodDaoExtended();
+			result =  dao.getFilteringByName(query);
 		} catch (MyShopDaoException e) {
 			throw new MyShopException(e);
 		}	
-		return dao.getFilteringByName(query);
+		return result;
+	}
+
+	@Override
+	public List<GoodType> getGoodTypesFilteringByName(String query)
+			throws MyShopException {
+		GenericExtraDao<GoodType> dao;
+		List<GoodType> result;
+		try {
+			dao = daoFactory.getGoodTypeExtraDao();
+			result =  dao.getFilteringByName(query);
+		} catch (MyShopDaoException e) {
+			throw new MyShopException(e);
+		}	
+		return result;
+	}
+
+	@Override
+	public List<GoodType> getGoodTypesByName(String name) throws MyShopException {
+		List<GoodType> result;
+		try {
+			GenericExtraDao<GoodType> dao = daoFactory.getGoodTypeExtraDao();
+			result =  dao.getFilteringByName(name);
+		} catch (MyShopDaoException e) {
+			throw new MyShopException(e);
+		}
+		return result;
 	}
 	
 }

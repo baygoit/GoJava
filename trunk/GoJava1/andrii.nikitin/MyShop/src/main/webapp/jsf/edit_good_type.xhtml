@@ -12,122 +12,156 @@
  
     <h:body>
  
-    	<h3> Editing info about types of goods, represented in shop </h3>
- 
- 		<p:dataTable value="#{goodTypeBean.allTypes}" var="t"
+    	<h1> Editing info about good types, represented in shop </h1>
+    	
+		<p:separator />	
+		
+ 		<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+ 		
+ 		<p:dataTable id="dataTable" var="goodType" value="#{goodTypeBean.allTypes}"
     			styleClass="order-table"
     			headerClass="order-table-header"
     			rowClasses="order-table-odd-row,order-table-even-row"
-    		>
+    			lazy="true" 
+    			rows="15"  
+    			paginatorAlwaysVisible="false">
  
     		<p:column>
     			<f:facet name="header">
-    				Type ID
+    				ID
     			</f:facet>
-    				#{t.id}
+    				#{goodType.id}
     		</p:column>
  
     		<p:column>
     			<f:facet name="header">
     				Name
 				</f:facet>
-    				#{t.name}
+    				#{goodType.name}
     		</p:column>
  
  			<p:column>
     			<f:facet name="header">
-    				Parent ID
+    				Parental type
 				</f:facet>
-    				#{t.parent.getId()}
+    				#{goodType.parent.name}
     		</p:column>
     		
  
     	</p:dataTable>
  
  		<h2>Add New Type</h2>
- 		<h:form>
+ 		<h:form  id="createGoodType">
  
  			<p:panelGrid columns="3">
  
 				Name : 
-				<p:inputText id="name" value="#{goodTypeBean.name}" 
+				<p:inputText id="nameCreate" value="#{goodTypeBean.name}" 
 					size="20" required="true"
 					label="Name" >
 					 <f:validateRegex pattern="^[a-zA-Z]{1,}$" />
 				</p:inputText>
  
-				<p:message for="name" style="color:red" />
+				<p:message for="nameCreate" style="color:red" />
  
-				Parent ID : 
-				<p:inputText id="parentId" value="#{goodTypeBean.parent}" 
-					size="20" required="false"
-					label="parentId" >
-				</p:inputText>
+				Parent : 
+				<p:autoComplete id="typeDropdown"
+	        		value="#{goodTypeBean.parent}"        	  
+	        	 	completeMethod="#{autocompleteBean.completeType}"
+	        	 	var="parent" 
+	        	 	itemLabel="#{parent.name}" 
+	        	 	itemValue="#{parent}"        	 	
+	        	 	converter="#{goodTypeConverter}"
+	        	 	dropdown="true" 
+	        	 	required="true"
+	        	 	forceSelection="true"/>
  
-				<p:message for="parentId" style="color:red" />
+				<p:message for="typeDropdown" style="color:red" />
  
 			</p:panelGrid>
  
-			<p:commandButton value="Submit" action="#{goodTypeBean.addType()}" />
+			<p:commandButton value="Submit" action="#{goodTypeBean.addType}" 
+			update=":dataTable"/>
  
  		</h:form>
  		
  		<h2>Update Existing Type</h2>
- 		<h:form>
+ 		<h:form id="updateGoodType">
  
  			<p:panelGrid columns="3">
  			
- 				ID : 
-				<p:inputText id="id" value="#{goodTypeBean.id}" 
-					size="20" required="true"
-					label="id" >
-				</p:inputText>
+ 				Modified Type : 
+				<p:autoComplete id="goodTypeDropdownUpdate"
+	        		value="#{goodTypeBean.chosenType}"        	  
+	        	 	completeMethod="#{autocompleteBean.completeType}"
+	        	 	var="goodType" 
+	        	 	itemLabel="#{goodType.name}" 
+	        	 	itemValue="#{goodType}"        	 	
+	        	 	converter="#{goodTypeConverter}"
+	        	 	dropdown="true" 
+	        	 	forceSelection="true"
+	        	 	required="true"/>
  
-				<p:message for="id" style="color:red" />
+				<p:message for="goodTypeDropdownUpdate" style="color:red" />
  
-				Name : 
-				<p:inputText id="name" value="#{goodTypeBean.name}" 
-					size="20" required="true"
+				New name : 
+				<p:inputText id="nameUpdate" value="#{goodTypeBean.name}" 
+					size="20" required="false"
 					label="Name" >
 					 <f:validateRegex pattern="^[a-zA-Z]{1,}$" />
 				</p:inputText>
  
-				<p:message for="name" style="color:red" />
+				<p:message for="nameUpdate" style="color:red" />
  
-				Parent ID : 
-				<p:inputText id="parentId" value="#{goodTypeBean.parent}" 
-					size="20" required="true"
-					label="parentId" >
-				</p:inputText>
- 
-				<p:message for="parentId" style="color:red" />
+				New parent : 
+				<p:autoComplete id="typeDropdownUpdate"
+	        		value="#{goodTypeBean.parent}"        	  
+	        	 	completeMethod="#{autocompleteBean.completeType}"
+	        	 	var="parent" 
+	        	 	itemLabel="#{parent.name}" 
+	        	 	itemValue="#{parent}"        	 	
+	        	 	converter="#{goodTypeConverter}"
+	        	 	dropdown="true" 
+	        	 	forceSelection="true"
+	        	 	required="false"/>
+        	 	
+				<p:message for="typeDropdownUpdate" style="color:red" />
  
 			</p:panelGrid>
  
-			<p:commandButton value="Submit" action="#{goodTypeBean.updateType()}" />
+			<p:commandButton value="Submit" action="#{goodTypeBean.updateType}"
+			update=":dataTable"/>
  
  		</h:form>
  		
- 		<h2>Delete Type</h2>
- 		<h:form>
+ 		<h2>Delete Good</h2>
+ 		<h:form  id="goodTypeDelete">
  
- 			<h:panelGrid columns="2">
+ 			<p:panelGrid columns="2">
  				 
-				ID : 
-				<h:inputText id="id" value="#{goodTypeBean.id}" 
-					size="20" required="true"
-					label="id" >
-				</h:inputText>
+				Target : 
+				<p:autoComplete id="goodDelete"
+	        		value="#{goodTypeBean.chosenType}"        	  
+	        	 	completeMethod="#{autocompleteBean.completeType}"
+	        	 	var="goodType" 
+	        	 	itemLabel="#{goodType.name}" 
+	        	 	itemValue="#{goodType}"        	 	
+	        	 	converter="#{goodTypeConverter}"
+	        	 	dropdown="true" 
+	        	 	forceSelection="true"
+	        	 	required="true"/>
  
-				<h:message for="id" style="color:red" />
+				<p:message for="goodTypeDelete" style="color:red" />
  
-			</h:panelGrid>
+			</p:panelGrid>
  
-			<h:commandButton value="Submit" action="#{goodTypeBean.deleteType()}" />
+			<p:commandButton value="Submit" action="#{goodTypeBean.deleteType}" 
+			update=":dataTable"/>
  
- 		</h:form>
-
-<a href="../edit_catalog.html">Back</a>
+ 		</h:form>	
+ 		
+	<a href="../edit_catalog.html">Back</a>
+ 
  
     </h:body>
  

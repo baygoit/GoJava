@@ -8,6 +8,8 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.classic.Session;
 
+import ua.com.goit.gojava.andriidnikitin.MyShop.db.util.MyShopDaoException;
+
 
 public abstract class HibernateGenericDao <T> implements GenericDao<T> {
 	
@@ -62,9 +64,9 @@ public abstract class HibernateGenericDao <T> implements GenericDao<T> {
 		List<T> result = retrieveAllInstances(session);
 		session.close();
 		return result;
-	}
-
-	public List<T> getFilteringByName(String query) {
+	}	
+	
+	public List<T> getFilteringByName(String query) throws MyShopDaoException {
 		List<T> all = getAll();
 		List<T> result = new ArrayList<T>();
 		for (int i = 0; i < all.size(); i++) {
@@ -75,7 +77,6 @@ public abstract class HibernateGenericDao <T> implements GenericDao<T> {
 		}      
 		return result;
 	}
-	
 	
 	private Integer createInstance(T object, Session session) {
 		Transaction transaction = session.beginTransaction();

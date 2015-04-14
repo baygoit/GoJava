@@ -14,7 +14,7 @@
  
     	<h1> Supply records of different goods</h1>
  
- 		<p:dataTable value="#{goodRecordBean.allRecords}" var="r"
+ 		<p:dataTable value="#{goodRecordBean.allRecords}" var="r" id="dataTable"
     			styleClass="order-table"
     			headerClass="order-table-header"
     			rowClasses="order-table-odd-row,order-table-even-row"
@@ -24,14 +24,14 @@
     			<f:facet name="header">
     				ID
 				</f:facet>
-    				#{g.id}
+    				#{r.id}
     		</p:column>
     		
     		<p:column>
     			<f:facet name="header">
-    				Good ID
+    				Good 
     			</f:facet>
-    				#{r.good.id}
+    				#{r.good.name}
     		</p:column>
     		
     		<p:column>
@@ -57,14 +57,19 @@
  
  			<p:panelGrid columns="3">
  
-				Good ID : 
-				<p:inputText id="good" value="#{goodRecordBean.good}" 
-					size="20" required="true"
-					label="good" >
-					 <f:validateRegex pattern="^[a-zA-Z]{1,}$" />
-				</p:inputText>
+				Good : 
+				<p:autoComplete id="goodDropdown"
+	        		value="#{goodRecordBean.good}"        	  
+	        	 	completeMethod="#{autocompleteBean.completeGood}"
+	        	 	var="good" 
+	        	 	itemLabel="#{good.name}" 
+	        	 	itemValue="#{good}"        	 	
+	        	 	converter="#{goodConverter}"
+	        	 	dropdown="true" 
+	        	 	required="true"
+	        	 	forceSelection="true"/>
  
-				<p:message for="good" style="color:red" />
+				<p:message for="goodDropdown" style="color:red" />
  
 				Amount : 
 				<p:inputText id="amount" value="#{goodRecordBean.amount}" 
@@ -84,7 +89,8 @@
  
 			</p:panelGrid>
  
-			<p:commandButton value="Submit" action="#{goodRecordBean.addRecord()}" />
+			<p:commandButton value="Submit" action="#{goodRecordBean.addRecord}"
+			update=":dataTable"/>
  
  		</h:form>	
 

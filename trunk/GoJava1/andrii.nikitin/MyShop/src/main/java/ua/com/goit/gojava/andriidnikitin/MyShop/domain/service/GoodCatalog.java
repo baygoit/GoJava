@@ -33,4 +33,8 @@ public interface GoodCatalog {
 
 		public List<Good> getGoodsFilteringByName(String query) throws MyShopException;
 
+		public List<GoodType> getGoodTypesFilteringByName(String query) throws MyShopException;
+		
+		public List<GoodType> getGoodTypesByName(String name) throws MyShopException;
+
 	}

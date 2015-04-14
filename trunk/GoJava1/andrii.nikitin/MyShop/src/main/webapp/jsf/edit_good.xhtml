@@ -24,8 +24,7 @@
     			rowClasses="order-table-odd-row,order-table-even-row"
     			lazy="true" 
     			rows="7"  
-    			paginatorAlwaysVisible="false"
-    		>
+    			paginatorAlwaysVisible="false">
  
     		<p:column>
     			<f:facet name="header">
@@ -43,115 +42,124 @@
  
  			<p:column>
     			<f:facet name="header">
-    				Type ID
+    				Type
 				</f:facet>
-    				#{g.type.id}
+    				#{g.type.name}
     		</p:column>
     		
  
     	</p:dataTable>
  
  		<h2>Add New Good</h2>
- 		<h:form>
+ 		<h:form  id="createGood">
  
  			<p:panelGrid columns="3">
  
 				Name : 
-				<p:inputText id="name" value="#{goodBean.name}" 
+				<p:inputText id="nameCreate" value="#{goodBean.name}" 
 					size="20" required="true"
 					label="Name" >
 					 <f:validateRegex pattern="^[a-zA-Z]{1,}$" />
 				</p:inputText>
  
-				<p:message for="name" style="color:red" />
+				<p:message for="nameCreate" style="color:red" />
  
-				Type ID : 
-				<p:inputText id="typeId" value="#{goodBean.type}" 
-					size="20" required="false"
-					label="parentId" >
-				</p:inputText>
+				Type : 
+				<p:autoComplete id="typeDropdown"
+	        		value="#{goodBean.chosenType}"        	  
+	        	 	completeMethod="#{autocompleteBean.completeType}"
+	        	 	var="goodType" 
+	        	 	itemLabel="#{goodType.name}" 
+	        	 	itemValue="#{goodType}"        	 	
+	        	 	converter="#{goodTypeConverter}"
+	        	 	dropdown="true" 
+	        	 	required="true"
+	        	 	forceSelection="true"/>
  
-				<p:message for="typeId" style="color:red" />
+				<p:message for="typeDropdown" style="color:red" />
  
 			</p:panelGrid>
  
-			<p:commandButton value="Submit" action="#{goodBean.addGood}" update=":goodDataTable"/>
+			<p:commandButton value="Submit" action="#{goodBean.addGood}" 
+			update=":goodDataTable"/>
  
  		</h:form>
  		
  		<h2>Update Existing Good</h2>
- 		<h:form>
+ 		<h:form id="updateGood">
  
  			<p:panelGrid columns="3">
  			
- 				ID : 
-				<p:inputText id="id" value="#{goodBean.id}" 
-					size="20" required="true"
-					label="id" >
-				</p:inputText>
+ 				Modified good : 
+				<p:autoComplete id="goodDropdownUpdate"
+	        		value="#{goodBean.chosenGood}"        	  
+	        	 	completeMethod="#{autocompleteBean.completeGood}"
+	        	 	var="good" 
+	        	 	itemLabel="#{good.name}" 
+	        	 	itemValue="#{good}"        	 	
+	        	 	converter="#{goodConverter}"
+	        	 	dropdown="true" 
+	        	 	forceSelection="true"
+	        	 	required="true"/>
  
-				<p:message for="id" style="color:red" />
+				<p:message for="goodDropdownUpdate" style="color:red" />
  
-				Name : 
-				<p:inputText id="name" value="#{goodBean.name}" 
-					size="20" required="true"
+				New name : 
+				<p:inputText id="nameUpdate" value="#{goodBean.name}" 
+					size="20" required="false"
 					label="Name" >
 					 <f:validateRegex pattern="^[a-zA-Z]{1,}$" />
 				</p:inputText>
  
-				<p:message for="name" style="color:red" />
+				<p:message for="nameUpdate" style="color:red" />
  
-				Type ID : 
-				<p:inputText id="typeId" value="#{goodBean.type}" 
-					size="20" required="true"
-					label="typeId" >
-				</p:inputText>
- 
-				<p:message for="typeId" style="color:red" />
+				New type : 
+				<p:autoComplete id="typeDropdownUpdate"
+	        		value="#{goodBean.chosenType}"        	  
+	        	 	completeMethod="#{autocompleteBean.completeType}"
+	        	 	var="goodType" 
+	        	 	itemLabel="#{goodType.name}" 
+	        	 	itemValue="#{goodType}"        	 	
+	        	 	converter="#{goodTypeConverter}"
+	        	 	dropdown="true" 
+	        	 	forceSelection="true"
+	        	 	required="false"/>
+        	 	
+				<p:message for="typeDropdownUpdate" style="color:red" />
  
 			</p:panelGrid>
  
-			<p:commandButton value="Submit" action="#{goodBean.updateGood}" update=":goodDataTable"/>
+			<p:commandButton value="Submit" action="#{goodBean.updateGood}"
+			update=":goodDataTable, :createGood, :deleteGood"/>
  
  		</h:form>
  		
  		<h2>Delete Good</h2>
- 		<h:form>
+ 		<h:form  id="deleteGood">
  
  			<p:panelGrid columns="2">
  				 
-				ID : 
-				<p:inputText id="id" value="#{goodBean.id}" 
-					size="20" required="true"
-					label="id" >
-				</p:inputText>
+				Target : 
+				<p:autoComplete id="goodDelete"
+	        		value="#{goodBean.chosenGood}"        	  
+	        	 	completeMethod="#{autocompleteBean.completeGood}"
+	        	 	var="good" 
+	        	 	itemLabel="#{good.name}" 
+	        	 	itemValue="#{good}"        	 	
+	        	 	converter="#{goodConverter}"
+	        	 	dropdown="true" 
+	        	 	forceSelection="true"
+	        	 	required="true"/>
  
-				<p:message for="id" style="color:red" />
+				<p:message for="goodDelete" style="color:red" />
  
 			</p:panelGrid>
  
-			<p:commandButton value="Submit" action="#{goodBean.deleteGood}" update=":goodDataTable"/>
+			<p:commandButton value="Submit" action="#{goodBean.deleteGood}" 
+			update=":goodDataTable, :createGood, :updateGood"/>
  
  		</h:form>	
  		
- 		<h:form>
- 		
- 		 <p:outputLabel value="Choose a good:" for="goodDropdown" />
-        
-       <p:autoComplete id="goodDropdown"
-        		value="#{goodBean.chosenGood}"        	  
-        	 	completeMethod="#{goodBean.completeGood}"
-        	 	var="good" 
-        	 	itemLabel="#{good.name}" 
-        	 	itemValue="#{good}"        	 	
-        	 	converter="#{goodConverter}"
-        	 	dropdown="true" 
-        	 	forceSelection="true"/>
-        	 	
-    <p:commandButton value="Submit" icon="ui-icon-check" />
- 		</h:form>
- 
-
 	<a href="../edit_catalog.html">Back</a>
  
  

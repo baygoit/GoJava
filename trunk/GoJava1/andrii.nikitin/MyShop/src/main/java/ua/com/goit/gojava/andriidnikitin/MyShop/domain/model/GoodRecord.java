@@ -2,6 +2,7 @@ package ua.com.goit.gojava.andriidnikitin.MyShop.domain.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -17,7 +18,7 @@ public class GoodRecord {
     @Column(columnDefinition="serial",name="record_id")
 	private Integer id;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "good_id")
 	private Good good;	
 	
@@ -26,6 +27,10 @@ public class GoodRecord {
 	
 	@Column(name="price")
 	private Integer price;
+
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "order_id")
+	private CustomerBasket basket;
 	
 	public Good getGood() {
 		return good;

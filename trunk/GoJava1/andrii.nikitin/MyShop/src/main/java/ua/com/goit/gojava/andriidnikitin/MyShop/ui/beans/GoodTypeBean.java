@@ -1,6 +1,7 @@
 package ua.com.goit.gojava.andriidnikitin.MyShop.ui.beans;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
@@ -14,19 +15,20 @@ import org.springframework.stereotype.Component;
 
 import ua.com.goit.gojava.andriidnikitin.MyShop.commons.ErrorLogger;
 import ua.com.goit.gojava.andriidnikitin.MyShop.domain.model.GoodType;
-import ua.com.goit.gojava.andriidnikitin.MyShop.domain.service.GoodCatalog;
+import ua.com.goit.gojava.andriidnikitin.MyShop.domain.service.BusinessServiceHandler;
 import ua.com.goit.gojava.andriidnikitin.MyShop.domain.util.MyShopException;
+import ua.com.goit.gojava.andriidnikitin.MyShop.ui.util.PrimeFacesUtil;
 
 @Component
 @Scope("session")
-@ManagedBean(name = "goodTypeBean", eager = true)
+@ManagedBean(name = "goodTypeBean")
 @RequestScoped
 public class GoodTypeBean implements Serializable{
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 2L;
 
-	@Autowired 
-	private GoodCatalog catalog;
+	@Autowired 	
+	private BusinessServiceHandler businessService;
 
 	@ManagedProperty(value="#{name}")
 	private String name;
@@ -35,10 +37,27 @@ public class GoodTypeBean implements Serializable{
 	private Integer id;
 
 	@ManagedProperty(value="#{parent}")	
-	private Integer parent;
+	private GoodType parent;
+	
+	@ManagedProperty(value="#{chosenType}")	
+	private GoodType chosenType;	
+
+	@ManagedProperty(value="#{allTypes}")
+	private List<GoodType> allTypes;
 	
 	private Logger log = Logger.getLogger(getClass());
+
 	
+	public GoodType getChosenType() {
+		log.info("sending chosen type " + chosenType );
+		return chosenType;
+	}
+
+	public void setChosenType(GoodType chosenType) {
+		log.info("recieving chosen type " + chosenType);
+		this.chosenType = chosenType;
+	}
+
 	public String getName() {
 		return name;
 	}
@@ -47,18 +66,14 @@ public class GoodTypeBean implements Serializable{
 		this.name = name;
 	}
 
-	public String getParent() {
-		return parent==null? "" : parent.toString();
+	public GoodType getParent() {
+		log.info("sending parent type " + parent);
+		return parent;
 	}
 
-	public void setParent(String input) {
-		this.parent = null;	
-		if (input != null){ 
-			try{
-				this.parent = Integer.parseInt(input);
-			} catch (NumberFormatException exception){				
-			}
-		}
+	public void setParent(GoodType type) {
+		log.info("recieving parent type " + type );
+		this.parent = type;	
 	}
 	
 	public String getId() {
@@ -73,81 +88,88 @@ public class GoodTypeBean implements Serializable{
 			this.id = Integer.parseInt(input);
 		}
 	}
-
-	public void setGoodCatalog(GoodCatalog catalog) {
-		this.catalog = catalog;
-		log.info("an instance of GoodCatalog was recieved");
+	
+	public void setBusinessService(BusinessServiceHandler businessService) {
+		this.businessService = businessService;
 	}
-
+	
 	public List<GoodType> getAllTypes(){
 		try {
-			return catalog.getAllTypes();
+			allTypes = businessService.getAllTypes();
 		} catch (MyShopException e) {
-			ErrorLogger.logException(e, Logger.getLogger(GoodTypeBean.class));
+			ErrorLogger.logException(e,log);
+			allTypes = new ArrayList<GoodType>();
 		}
-		return null;
-	}
-
-	public String addType(){		
+		log.warn("starts here");
+		for (GoodType type: allTypes){
+			log.info(type.getName());
+		}
+		log.warn("ends here");
+		return allTypes;
+	}	
+	
+	public void addType(){	
 		try {
-			catalog.createType(name, parent);
+			Integer parentId = null;
+			if (parent!=null){
+				parentId = parent.getId();
+			}
+			businessService.createType(name, parentId);
+			PrimeFacesUtil.addMessage("Type was successfully created.");
+			clearForm();
 		} catch (MyShopException e) {
-			ErrorLogger.logException(e, Logger.getLogger(GoodTypeBean.class));
+			ErrorLogger.logException(e, log);
+			PrimeFacesUtil.addError("Fail to create type.");
 		}
-
-		clearForm();
-
-		return "";
 	}
 	
-	public String updateType(){		
+	public void updateType(){		
 		try {
-			String validation = validateExistance(id);
-			if (validation !=null){
-				return validation;
-			}
-			else {
-				catalog.updateGoodType(id, name, parent);
+			if (validateExistance(chosenType.getId())){
+				Integer parentId = (parent==null? null : parent.getId());
+				businessService.updateGoodType(chosenType.getId(), name, parentId);
+				PrimeFacesUtil.addMessage("Type was successfully updated.");
 				clearForm();
 			}
 		} catch (MyShopException e) {
-			ErrorLogger.logException(e, Logger.getLogger(GoodTypeBean.class));
-		}
-		return "";
+			PrimeFacesUtil.addError("Fail to update type.");
+			ErrorLogger.logException(e,log);
+		}						
 	}
 	
-	public String deleteType(){	
+	public void deleteType(){	
 		try {
-			String validation = validateExistance(id);
-			if (validation !=null){
-				return validation;
-			}
-			else {
-				catalog.deleteGoodType(id);
+			if (validateExistance(chosenType.getId())){
+				businessService.deleteGoodType(chosenType.getId());
+				PrimeFacesUtil.addMessage("Type was successfully deleted.");
 				clearForm();
 			}
 		} catch (MyShopException e) {
-			ErrorLogger.logException(e, Logger.getLogger(GoodTypeBean.class));
-		}
-		return "";
+			PrimeFacesUtil.addError("Fail to delete type.");
+			ErrorLogger.logException(e, log);			
+		}				
 	}
 	
-	private String validateExistance(Integer id){
+	private Boolean validateExistance(Integer id){
 		try {
-			if (catalog.getGoodTypeById(id) == null){
-				return "such type does not exist!";
+			if (businessService.getGoodTypeById(id) == null){
+				PrimeFacesUtil.addWarning("Such type does not exist.");
+				return false;
 			}
 		} catch (MyShopException e) {
-			ErrorLogger.logException(e, Logger.getLogger(GoodTypeBean.class));
+			PrimeFacesUtil.addError("Fail to check type for existance.");			
+			ErrorLogger.logException(e, log);
+			return false;
 		}
-		return null;
-		
+		return true;		
 	}
 
-	private void clearForm(){
+	private void clearForm(){/*
 		setName("");
 		setParent(null);
 		setId(null);
+		setChosenType(null);
+		setParent(null);*/
 	}
 
 }

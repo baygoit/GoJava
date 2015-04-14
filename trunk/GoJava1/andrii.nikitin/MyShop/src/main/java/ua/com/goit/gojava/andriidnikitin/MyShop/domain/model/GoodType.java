@@ -5,6 +5,7 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -23,17 +24,17 @@ public class GoodType implements Serializable {
     @Column(columnDefinition="serial", name="type_id")
 	private Integer id;	
 
-	@Column(name="NAME")
+	@Column(name="NAME", unique=true)
 	private String name;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(columnDefinition="integer", name="parent_id")
 	private GoodType parent;
 	
-	@OneToMany(mappedBy="parent")
+	@OneToMany(mappedBy="parent", fetch = FetchType.EAGER)
 	private Set<GoodType> children;
 	
-	@OneToMany(mappedBy="type")
+	@OneToMany(mappedBy="type", fetch = FetchType.EAGER)
 	private Set<Good> goods;
 	
 	public Set<Good> getGoods() {

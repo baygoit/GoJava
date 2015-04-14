@@ -2,6 +2,7 @@ package ua.com.goit.gojava.andriidnikitin.MyShop.ui.util;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+
 public class PrimeFacesUtil {
 	
 	 public static void addMessage(String summary) {
@@ -23,5 +24,4 @@ public class PrimeFacesUtil {
 	        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_FATAL, summary,  "");
 	        FacesContext.getCurrentInstance().addMessage(null, message);
 	 }
-
 }

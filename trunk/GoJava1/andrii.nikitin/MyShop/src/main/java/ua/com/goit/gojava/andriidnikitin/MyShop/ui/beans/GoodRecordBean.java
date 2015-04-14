@@ -1,6 +1,7 @@
 package ua.com.goit.gojava.andriidnikitin.MyShop.ui.beans;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
@@ -15,146 +16,173 @@ import org.springframework.stereotype.Component;
 import ua.com.goit.gojava.andriidnikitin.MyShop.commons.ErrorLogger;
 import ua.com.goit.gojava.andriidnikitin.MyShop.domain.model.Good;
 import ua.com.goit.gojava.andriidnikitin.MyShop.domain.model.GoodRecord;
-import ua.com.goit.gojava.andriidnikitin.MyShop.domain.service.DeliveryManager;
-import ua.com.goit.gojava.andriidnikitin.MyShop.domain.service.GoodCatalog;
-import ua.com.goit.gojava.andriidnikitin.MyShop.domain.service.WarehouseManager;
+import ua.com.goit.gojava.andriidnikitin.MyShop.domain.service.BusinessServiceHandler;
 import ua.com.goit.gojava.andriidnikitin.MyShop.domain.util.MyShopException;
+import ua.com.goit.gojava.andriidnikitin.MyShop.ui.util.PrimeFacesUtil;
 
 @Component
 @Scope("session")
-@ManagedBean(name = "goodRecordBean", eager = true)
+@ManagedBean(name = "goodRecordBean")
 @RequestScoped
 public class GoodRecordBean implements Serializable{
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 2L;
 
-	@Autowired 
-	private WarehouseManager warehouseManager;  
+	@Autowired 	
+	private BusinessServiceHandler businessService;
 
-	@Autowired 
-	private DeliveryManager deliveryManager;	
+	@ManagedProperty(value="#{good}")
+	private Good good;
 
-	@Autowired 
-	private GoodCatalog catalog; 
+	public Good getGood() {
+		return good;
+	}
 
+	public void setGood(Good good) {
+		this.good = good;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public GoodRecord getChosenRecord() {
+		return chosenRecord;
+	}
+
+	public void setChosenRecord(GoodRecord chosenRecord) {
+		this.chosenRecord = chosenRecord;
+	}
+
+	public void setAllRecords(List<GoodRecord> allRecords) {
+		this.allRecords = allRecords;
+	}
+
+	public Logger getLog() {
+		return log;
+	}
 
 	@ManagedProperty(value="#{id}")
 	private Integer id;
 
-	@ManagedProperty(value="#{good}")	
-	private Integer good;
+	@ManagedProperty(value="#{chosenRecord}")	
+	private GoodRecord chosenRecord;
+
+	@ManagedProperty(value="#{allRecords}")
+	private List<GoodRecord> allRecords;
 	
-	@ManagedProperty(value="#{amount}")	
+	private Logger log = Logger.getLogger(getClass());
+
+	@ManagedProperty(value="#{amount}")
 	private Integer amount;
-	
-	@ManagedProperty(value="#{price}")	
+
+	public Integer getAmount() {
+		return amount;
+	}
+
+	public void setAmount(Integer quantity) {
+		this.amount = quantity;
+	}
+
+	public Integer getPrice() {
+		return price;
+	}
+
+	public void setPrice(Integer price) {
+		this.price = price;
+	}
+
+	@ManagedProperty(value="#{price}")
 	private Integer price;
 	
-	private Logger log = Logger.getLogger(GoodRecordBean.class);
-	
-	public void setGoodCatalog(GoodCatalog catalog) {
-		this.catalog = catalog;
+	public void setBusinessService(BusinessServiceHandler businessService) {
+		this.businessService = businessService;
 	}
 	
-	public String getGood() {
-		return good==null? "" : good.toString();
-	}
-
-	public void setGood(String input) {
-		this.good = null;	
-		if (input != null){ 
-			try{
-				this.good = Integer.parseInt(input);
-			} catch (NumberFormatException exception){				
-			}
+	public List<GoodRecord> getAllRecords(){
+		try {
+			allRecords = businessService.getAllRecords();
+		} catch (MyShopException e) {
+			ErrorLogger.logException(e,log);
+			allRecords = new ArrayList<GoodRecord>();
 		}
-	}
-	
-	
-	
-	public String getPrice() {
-		return getIntAttribute(price);
-	} 
-
-	public void setPrice(String input) {
-		price = setIntAttribute(input);
-	}
-	
-	public String getAmount() {
-		return getIntAttribute(amount);
+		return allRecords;
 	}	
 	
-	public void setAmount(String input) {
-		amount = setIntAttribute(input);
-	}
-
-	public String getId() {
-		return getIntAttribute(id);
-	} 
-
-	public void setId(String input) {
-		id = setIntAttribute(input);
-	}
-
-	public void setWarehouseManager(WarehouseManager manager) {
-		this.warehouseManager = manager;
-	}
-
-	public List<GoodRecord> getAllRecords(){
-		try {		
-			return warehouseManager.getAllRecords();
-		} catch (MyShopException e) {
-			ErrorLogger.logException(e, Logger.getLogger(GoodRecordBean.class));
-		}
-		return null;
-	}
-
-	public String addRecord(){	
+	public void addRecord(){	
 		try {
-			Good goodInstance = catalog.getGoodById(good);
-			log.info(goodInstance);
-			deliveryManager.deliverGood(goodInstance, amount, price);
-		} catch (MyShopException e) {
-			ErrorLogger.logException(e, Logger.getLogger(GoodRecordBean.class));
-		}
-
-		clearForm();
-
-		return "";
-	}
-	
-	
-	@SuppressWarnings("unused")
-	private String validateExistance(Integer id){
-		try {
-			if (warehouseManager.getRecord(id) == null){
-				return "such record does not exist!";
-			}
+			log.info("Chosen good is " + good);
+			businessService.deliverGood(good, amount, price);
+			PrimeFacesUtil.addMessage("Good was successfully created.");
+			clearForm();
 		} catch (MyShopException e) {
 			ErrorLogger.logException(e, log);
+			PrimeFacesUtil.addError("Fail to create good.");
 		}
-		return null;
-		
+	}
+	/*
+	public void updateGood(){	
+		Integer oldId = chosenGood.getId();
+		try {
+				if (!checkForUpdates()){
+					PrimeFacesUtil.addWarning("Nothing to update.");
+					return;
+				}
+				businessService.updateGood(oldId, name, chosenType.getId());
+				PrimeFacesUtil.addMessage("Good was successfully updated.");				
+				clearForm();
+		} catch (MyShopException e) {
+			PrimeFacesUtil.addError("Fail to update good.");
+			ErrorLogger.logException(e,log);
+		}			
 	}
 
-	private void clearForm(){
-		setGood(null);
-		setId(null);
-		setAmount(null);
-		setPrice(null);
-	}
-	
-	private String getIntAttribute(Integer arg){
-		return arg==null? "" : arg.toString();
-	}
-	
-	private Integer setIntAttribute(String input) {
-		if (input == null){ 
-			return null;	
+	private Boolean checkForUpdates() {
+		boolean notUpdateName = false;
+		boolean notUpdateType = false;
+		
+		if (name == null){
+			name = chosenGood.getName();
+			notUpdateName = true;
 		}
 		else {
-			return Integer.parseInt(input);
+			if (name.equals(chosenGood.getName())){
+				notUpdateName = true;						
+			}
 		}
+		
+		if (chosenType==null){
+			chosenType = chosenGood.getType();
+			notUpdateType = (chosenType!=null);
+		}
+		else{
+			notUpdateType = (chosenType.equals(chosenGood.getType()));			
+		}
+			return !(notUpdateName && notUpdateType);
+	}
+	
+	public void deleteGood(){	
+		Integer oldId = chosenGood.getId();
+		try {
+				businessService.deleteGood(oldId);
+				PrimeFacesUtil.addMessage("Good was successfully deleted.");				
+				clearForm();
+		} catch (MyShopException e) {
+			PrimeFacesUtil.addError("Fail to delete good.");
+			ErrorLogger.logException(e, log);			
+		}			
+	}*/
+	
+	private void clearForm(){/*
+		setName("");
+		type = null;
+		setId(null);
+		setChosenGood(null);
+		setChosenType(null);*/
 	}
 
 }
