@@ -4,6 +4,10 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 
+<f:metadata>
+    <f:viewParam name="bankAccountFilter" value="#{cashMovementListBean.bankAccountFilter}" />
+</f:metadata>
+
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>Project Office Management System</title>
@@ -16,24 +20,38 @@
 		<p:messages id="messages" showDetail="true" autoUpdate="true"
 			closable="true" />
 			
+	    <p:menubar>
+	   		<p:menuitem value="Добавить" url="/appPages/cash/CashMovementEditor.xhtml" />
+			<p:menuitem value="Редактировать" action="/appPages/cash/CashMovementEditor.xhtml?faces-redirect=true&amp;includeViewParams=true">
+				<f:setPropertyActionListener  target="#{cashMovementEditorBean.cashMovement}" 
+											   value="#{cashMovementListBean.selectedCashMovementEntry}" />
+			</p:menuitem>
+			<p:menuitem value="Удалить" 
+						action="#{cashMovementListBean.deleteCashMovement(cashMovementListBean.selectedCashMovementEntry)}" 
+						update=":cashMovementForm"/>
+		</p:menubar>
+	    
 	    <p:outputLabel for="bankAccountFilter" value="Фильтр по банковскому счету: " />
         <p:autoComplete id="bankAccountFilter" value="#{cashMovementListBean.bankAccountFilter}"
         		dropdown="true"
         		completeMethod="#{bankAccountAutoCompleter.completeText}" 
 	        	var="selectedBankAccount" itemValue="#{selectedBankAccount}" itemLabel="#{selectedBankAccount.name}"  
-	        	converter="bankAccountConverter" forceSelection="true"
+	        	forceSelection="true"
 	        >
 	        	<p:ajax event="itemSelect" update="cashMovementForm" />
 	    </p:autoComplete>
 	    
-		<p:dataTable var="cashMovement" value="#{cashMovementListBean.cashMovements}"
+		<p:dataTable  id = "cashMovementDataTable"
+			var="cashMovement" value="#{cashMovementListBean.cashMovements}"
+			selection="#{cashMovementListBean.selectedCashMovementEntry}" rowKey="#{cashMovement.id}"
 			paginator="true" rows="10" lazy="true"
 			paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
 			rowsPerPageTemplate="1,2,5,10,15">
 			<f:facet name="header">
 				Записи о движении денег
 			</f:facet>
-			<p:column>
+			<p:column selectionMode="single" style="width:16px;text-align:center"/>
+        	<p:column>
 				<f:facet name="header">
 					<h:outputText value="Идентификатор" />
 				</f:facet>
@@ -63,25 +81,7 @@
 				</f:facet>
 				<h:outputText value="#{cashMovement.sum.value}" />
 			</p:column>
-			<p:column>
-				<f:facet name="header">
-					<h:outputText value="" />
-				</f:facet>
-				<h:outputText value="" />
-				<h:commandButton
-					update=":bankAccountForm"
-					action="#{cashMovementListBean.deleteCashMovement(cashMovement)}"
-					value="Удалить" />
-				<h:commandButton
-					action="/appPages/cash/CashMovementEditor.xhtml"
-					value="Редактировать">
-					    <f:setPropertyActionListener  target="#{cashMovementEditorBean.cashMovement}" value="#{cashMovement}" />
-				</h:commandButton>
-			</p:column>
 		</p:dataTable>
-		<h:commandButton
-					action="/appPages/cash/CashMovementEditor.xhtml"
-					value="Добавить" />
 	</h:form>
 	<h:outputLink value="#{request.contextPath}/appPages/index.xhtml"> вернуться на главное меню </h:outputLink>
 </h:body>

@@ -7,7 +7,7 @@ import java.util.Map;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletResponse;
 
@@ -23,7 +23,7 @@ import ua.com.goit.gojava.POM.services.POMServicesException;
 import ua.com.goit.gojava.POM.services.Paginator;
 
 
-@SessionScoped
+@ViewScoped
 @ManagedBean
 public class CashMovementListBean implements Serializable {
 
@@ -31,6 +31,7 @@ public class CashMovementListBean implements Serializable {
 	private static final Logger LOG=Logger.getLogger(CashMovementListBean.class);
 	private LazyDataModel<CashMovementEntry> cashMovements;
 	private BankAccount bankAccountFilter;
+	private CashMovementEntry selectedCashMovementEntry;
 	
 	private LazyDataModel<CashMovementEntry> initCashMovements() {
 		
@@ -87,6 +88,12 @@ public class CashMovementListBean implements Serializable {
 
 	public void deleteCashMovement(CashMovementEntry cashMovement){
 		
+		if(cashMovement == null){
+			FacesContext.getCurrentInstance().addMessage(null, 
+					new FacesMessage(FacesMessage.SEVERITY_WARN, "Nothing is done!", "Cash Movement not selected!"));
+			return;
+		}
+		
 		CashMovementService cashMovementService = ApplicationContextProvider.getApplicationContext().getBean(CashMovementService.class);
 		try {
 			cashMovementService.delete(cashMovement);
@@ -112,6 +119,15 @@ public class CashMovementListBean implements Serializable {
 		this.bankAccountFilter = bankAccountFilter;
 	}
 
+	public CashMovementEntry getSelectedCashMovementEntry() {
+		return selectedCashMovementEntry;
+	}
+
+	public void setSelectedCashMovementEntry(
+			CashMovementEntry selectedCashMovementEntry) {
+		this.selectedCashMovementEntry = selectedCashMovementEntry;
+	}
+
 	// Temporary solution for step-by-step migration on JSF.
 	// This method redirects to non JSF pages
 	public String redirectTo(String action, long id) {
@@ -130,11 +146,6 @@ public class CashMovementListBean implements Serializable {
 		}  
 	    context.responseComplete();  
 		return action;
-	}
-	
-	public String openFilteredList(BankAccount bankAccountFilter) {
-		setBankAccountFilter(bankAccountFilter);
-		return "/appPages/cash/CashMovement.xhtml";
 	}
 	
 }

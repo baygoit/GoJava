@@ -20,7 +20,7 @@ import ua.com.goit.gojava.POM.services.POMServicesException;
 public class WebControllerCostItem extends HttpServlet {
 
 	private static final long serialVersionUID = 4965130230495295419L;
-	private static final Logger LOG=Logger.getLogger(WebControllerBankAccount.class);
+	private static final Logger LOG=Logger.getLogger(WebControllerCostItem.class);
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)

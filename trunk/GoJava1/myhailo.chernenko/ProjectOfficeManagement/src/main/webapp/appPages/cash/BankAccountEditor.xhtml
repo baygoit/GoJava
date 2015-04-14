@@ -3,6 +3,10 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
+
+<f:metadata>
+    <f:viewParam name="bankAccount" value="#{bankAccountEditorBean.bankAccount}" />
+</f:metadata>
        
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -32,7 +36,7 @@
 	        		dropdown="true"
 	        		completeMethod="#{currencyAutoCompleter.completeText}" 
 		        	var="selectedCurrency" itemValue="#{selectedCurrency}" itemLabel="#{selectedCurrency.currencyCode}"  
-		        	converter="currencyConverter" forceSelection="true"/>
+		        	forceSelection="true"/>
 	 
 	        <p:commandButton value="Сбросить" type="reset" />
 	        <p:commandButton value="Сохранить" actionListener="#{bankAccountEditorBean.save()}" />

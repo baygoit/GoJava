@@ -11,7 +11,7 @@ import javax.faces.convert.FacesConverter;
 import org.apache.log4j.Logger;
 
 
-@FacesConverter("currencyConverter")
+@FacesConverter(forClass = Currency.class)
 public class CurrencyConverter implements Converter {
 
 	private static final Logger LOG = Logger.getLogger(CurrencyConverter.class);

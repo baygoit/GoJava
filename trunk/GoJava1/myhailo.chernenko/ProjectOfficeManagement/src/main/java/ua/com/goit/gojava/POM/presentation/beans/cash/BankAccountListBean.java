@@ -7,7 +7,7 @@ import java.util.Map;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletResponse;
 
@@ -24,13 +24,14 @@ import ua.com.goit.gojava.POM.services.POMServicesException;
 import ua.com.goit.gojava.POM.services.Paginator;
 
 
-@SessionScoped
+@ViewScoped
 @ManagedBean
 public class BankAccountListBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private static final Logger LOG=Logger.getLogger(BankAccountListBean.class);
 	private LazyDataModel<BankAccount> bankAccounts;
+	private BankAccount selectedBankAccount;
 	
 	private LazyDataModel<BankAccount> initBankAccounts() {
 		
@@ -83,9 +84,19 @@ public class BankAccountListBean implements Serializable {
 
 	public void deleteBankAccount(BankAccount bankAccount){
 		
+		if(bankAccount == null){
+			FacesContext.getCurrentInstance().addMessage(null, 
+					new FacesMessage(FacesMessage.SEVERITY_WARN, "Nothing is done!", "BankAccount not selected!"));
+			return;
+		}
+		
 		BankAccountService bankAccountService = ApplicationContextProvider.getApplicationContext().getBean(BankAccountService.class);
 		try {
 			bankAccountService.delete(bankAccount);
+			bankAccounts = initBankAccounts();
+			FacesContext.getCurrentInstance().addMessage(null, 
+					new FacesMessage(FacesMessage.SEVERITY_INFO, "Complete!", "BankAccount deleted!"));
+			
 		} catch (POMServicesException e) {
 			LOG.error("Can not delete BankAccount: " + e.getMessage(), e);
 			FacesContext.getCurrentInstance().addMessage(null, 
@@ -115,6 +126,14 @@ public class BankAccountListBean implements Serializable {
 		return bankAccounts;
 	}
 	
+	public BankAccount getSelectedBankAccount() {
+		return selectedBankAccount;
+	}
+
+	public void setSelectedBankAccount(BankAccount selectedBankAccount) {
+		this.selectedBankAccount = selectedBankAccount;
+	}
+
 	// Temporary solution for step-by-step migration on JSF.
 	// This method redirects to non JSF pages
 	public String redirectTo(String action, long id) {

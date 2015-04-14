@@ -15,14 +15,33 @@
 	<h:form id = "bankAccountForm">
 		<p:messages id="messages" showDetail="true" autoUpdate="true"
 			closable="true" />
-		<p:dataTable var="bankAccount" value="#{bankAccountListBean.bankAccounts}"
+			
+		<p:menubar>
+	   		<p:menuitem value="Добавить" url="/appPages/cash/BankAccountEditor.xhtml" />
+			<p:menuitem value="Редактировать" action="/appPages/cash/BankAccountEditor.xhtml?faces-redirect=true&amp;includeViewParams=true">
+				<f:setPropertyActionListener  target="#{bankAccountEditorBean.bankAccount}" 
+											   value="#{bankAccountListBean.selectedBankAccount}" />
+			</p:menuitem>
+			<p:menuitem value="Удалить" 
+						action="#{bankAccountListBean.deleteBankAccount(bankAccountListBean.selectedBankAccount)}" 
+						update=":bankAccountForm"/>
+			<p:menuitem value="Открыть движения" action="/appPages/cash/CashMovement.xhtml?faces-redirect=true&amp;includeViewParams=true">
+				<f:setPropertyActionListener  target="#{cashMovementListBean.bankAccountFilter}" 
+											   value="#{bankAccountListBean.selectedBankAccount}" />
+			</p:menuitem>
+		</p:menubar>
+	    
+		<p:dataTable id = "bankAccountDataTable"
+			var="bankAccount" value="#{bankAccountListBean.bankAccounts}"
+			selection="#{bankAccountListBean.selectedBankAccount}" rowKey="#{bankAccount.id}"
 			paginator="true" rows="10" lazy="true"
 			paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
-			rowsPerPageTemplate="5,10,15">
+			rowsPerPageTemplate="1,2,5,10,15">
 			<f:facet name="header">
 				Банковские счета
 			</f:facet>
-			<p:column>
+			<p:column selectionMode="single" style="width:16px;text-align:center"/>
+        	<p:column>
 				<f:facet name="header">
 					<h:outputText value="Идентификатор" />
 				</f:facet>
@@ -52,28 +71,7 @@
 				</f:facet>
 				<h:outputText value="#{bankAccountListBean.getTotal(bankAccount)}" />
 			</p:column>
-			<p:column>
-				<f:facet name="header">
-					<h:outputText value="" />
-				</f:facet>
-				<h:outputText value="" />
-				<h:commandButton
-					update=":bankAccountForm"
-					action="#{bankAccountListBean.deleteBankAccount(bankAccount)}"
-					value="Удалить" />
-				<h:commandButton
-					action="/appPages/cash/BankAccountEditor.xhtml"
-					value="Редактировать">
-					    <f:setPropertyActionListener  target="#{bankAccountEditorBean.bankAccount}" value="#{bankAccount}" />
-				</h:commandButton>
-				<h:commandButton 
-					action="#{cashMovementListBean.openFilteredList(bankAccount)}"
-					value="Открыть движения" />
-			</p:column>
-		</p:dataTable>
-		<h:commandButton
-					action="/appPages/cash/BankAccountEditor.xhtml"
-					value="Добавить" />
+		</p:dataTable>		
 	</h:form>
 	<h:outputLink value="#{request.contextPath}/appPages/index.xhtml"> вернуться на главное меню </h:outputLink>
 </h:body>
