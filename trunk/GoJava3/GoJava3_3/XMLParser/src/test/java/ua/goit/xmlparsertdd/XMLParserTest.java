@@ -3,8 +3,8 @@ package ua.goit.xmlparsertdd;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.HashMap;
 import java.util.Map;
-import java.util.TreeMap;
 
 import static org.junit.Assert.assertEquals;
 
@@ -143,7 +143,8 @@ public class XMLParserTest {
 
     TagElement expectedElement = new TagElement();
     expectedElement.setName("xml");
-    Map<String, String> params = new TreeMap<>();
+    Map<String, String> params = new HashMap<>();
+
     params.put("version", "1.0");
     params.put("encoding", "UTF-8");
     params.put("standalone", "no");

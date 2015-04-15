@@ -1,14 +1,13 @@
 package ua.goit.xmlparsertdd;
 
 
+import java.util.HashMap;
 import java.util.Map;
-import java.util.TreeMap;
 
 public class TagElement implements Element {
   private TagElementType type;
   private String name;
-  private Map<String, String> params = new TreeMap<>();
-  private String value;
+  private Map<String, String> params = new HashMap<>();
 
   public TagElement() {
   }
@@ -53,9 +52,7 @@ public class TagElement implements Element {
     if (getType() != that.getType()) return false;
     if (getName() != null ? !getName().equals(that.getName()) : that.getName() != null)
       return false;
-    if (getParams() != null ? !getParams().equals(that.getParams()) : that.getParams() != null)
-      return false;
-    return !(getValue() != null ? !getValue().equals(that.getValue()) : that.getValue() != null);
+    return !(getParams() != null ? !getParams().equals(that.getParams()) : that.getParams() != null);
 
   }
 
@@ -64,14 +61,13 @@ public class TagElement implements Element {
     int result = getType() != null ? getType().hashCode() : 0;
     result = 31 * result + (getName() != null ? getName().hashCode() : 0);
     result = 31 * result + (getParams() != null ? getParams().hashCode() : 0);
-    result = 31 * result + (getValue() != null ? getValue().hashCode() : 0);
     return result;
   }
 
   static class Builder {
     private TagElementType type;
     private StringBuilder name = new StringBuilder();
-    private Map<String, String> params = new TreeMap<>();
+    private Map<String, String> params = new HashMap<>();
     private StringBuilder paramName = new StringBuilder();
     private StringBuilder paramValue = new StringBuilder();
 
@@ -108,22 +104,6 @@ public class TagElement implements Element {
 
   @Override
   public String getValue() {
-    concatValue();
-    return value;
-  }
-
-  private void concatValue() {
-    StringBuilder result = new StringBuilder();
-    result.append(name);
-    if (params.size() != 0) {
-      for (Map.Entry<String, String> entry : params.entrySet()) {
-        result.append(" ")
-                .append(entry.getKey())
-                .append("=\"")
-                .append(entry.getValue())
-                .append("\"");
-      }
-    }
-    value = result.toString();
+    return null;
   }
 }
