@@ -7,10 +7,10 @@ import java.util.Map;
 public class TagElement implements Element {
   private TagElementType type;
   private String name;
-
   private String textValue;
-
+  private String textError;
   private Map<String, String> params = new HashMap<>();
+
   public TagElement() {
   }
 
@@ -18,6 +18,14 @@ public class TagElement implements Element {
     this.type = type;
     this.name = name;
     this.params = params;
+  }
+
+  public void setTextError(String textError) {
+    this.textError = textError;
+  }
+
+  public String getTextError() {
+    return textError;
   }
 
   public void setName(String name) {
@@ -80,6 +88,11 @@ public class TagElement implements Element {
     private StringBuilder paramName = new StringBuilder();
     private StringBuilder paramValue = new StringBuilder();
     private StringBuilder textValue = new StringBuilder();
+    private String textError;
+
+    public void setTextError(String textError) {
+      this.textError = textError;
+    }
 
     static Builder newBuilder() {
       return new Builder();
@@ -114,6 +127,7 @@ public class TagElement implements Element {
     public TagElement build() {
       TagElement result = new TagElement(type, name.toString(), params);
       result.setTextValue(textValue.toString());
+      result.setTextError(textError);
       return result;
     }
   }

@@ -41,6 +41,8 @@ public class XMLParser implements Parser {
       }
     } catch (IOException e) {
       e.printStackTrace();
+    } catch (XMLSyntaxException e) {
+      e.printStackTrace();
     }
   }
 

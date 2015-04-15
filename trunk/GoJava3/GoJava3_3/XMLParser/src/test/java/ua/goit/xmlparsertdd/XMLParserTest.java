@@ -221,4 +221,22 @@ public class XMLParserTest {
     parser.parse(inputString);
     assertEquals("tagname", myTagElement.getName());
   }
+
+  @Test
+  public void givenErrorSingleTag_WhenParse_ThenOnErrorTagInvokedAndThrowException() {
+    //given
+    String inputString = "<? xml ?><tagname param = \"param 'value'\"/6>";
+
+    //when
+    handler = new Handler() {
+      @Override
+      public void handle(TagElement tagElement) {
+        myTagElement = tagElement;
+      }
+    };
+    builder.onError(handler);
+    parser = builder.build();
+    parser.parse(inputString);
+    assertEquals("XMLSyntaxException caught", myTagElement.getTextError());
+  }
 }

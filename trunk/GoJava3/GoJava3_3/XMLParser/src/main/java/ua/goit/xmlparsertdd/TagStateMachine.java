@@ -4,7 +4,7 @@ public class TagStateMachine {
   TagState currentState = TagState.INIT;
   private TagElement.Builder builder = TagElement.Builder.newBuilder();
 
-  public void next(char c, XMLParser parser) {
+  public void next(char c, XMLParser parser) throws XMLSyntaxException {
     TagState previousState = currentState;
     currentState = currentState.next(c, builder);
     if (currentState == TagState.VALID_TAG_END) {
@@ -15,6 +15,11 @@ public class TagStateMachine {
       if (previousState == TagState.TEXT_VALUE) {
         createTagElement(parser);
       }
+    } else if (currentState == TagState.INVALID_TAG_END){
+      String textError = "XMLSyntaxException caught";
+      builder.setTextError(textError);
+      createTagElement(parser);
+      throw new XMLSyntaxException();
     }
   }
 
