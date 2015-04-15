@@ -24,16 +24,15 @@ public class LRUCache {
 	    oldNode.value = value;
 	    addToTail(oldNode);
 	} else {
-	    Node newNode = new Node(key,value);
-	    
+	    Node newNode = new Node(key, value);
 	    if (tail == null) {
 		this.head = newNode;
 		this.tail = head;		
 	    } else {
 		appendToTail(newNode);
 	    }
-	    
-	    map.put(key,newNode);
+
+	    map.put(key, newNode);
 	}
     }
 
@@ -84,8 +83,8 @@ public class LRUCache {
 	final int key;
 	Node next;
 	Node prev;
-	
-	public Node(int key,int value) {
+
+	public Node(int key, int value) {
 	    this.value = value;
 	    this.key = key;
 	}
