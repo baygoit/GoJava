@@ -253,7 +253,6 @@ public class XMLParserTest {
     String inputString = "<? xml ?><tagname>Text<!--comment_text-->Value</tagname>";
 
     //when
-    myElement =  new TextElement();
     handler = new Handler() {
       @Override
       public void handle(Element element) {
