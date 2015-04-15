@@ -4,7 +4,7 @@ import java.util.Deque;
 import java.util.LinkedList;
 
 public class TagStack {
-  Deque<TagElement> tagStack = new LinkedList<TagElement>();
+  Deque<TagElement> tagStack = new LinkedList<>();
   boolean hadRootTag = false;
 
   void push(TagElement tag) throws XMLNestingException {

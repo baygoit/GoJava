@@ -28,7 +28,6 @@ public class TagStateMachine {
     TagState previousState = currentState;
     currentState = currentState.next(c, tagBuilder);
 
-    
     if (currentState == TagState.VALID_TAG_END) {
       createTagElement(parser);
     } else if (currentState == TagState.TEXT_VALUE) {
@@ -38,8 +37,7 @@ public class TagStateMachine {
       errorBuilder.setErrorMessage(textError);
       parser.sendEventToHandler(Event.INVALID_END, errorBuilder.build());
     } 
-    
-    
+
     if (previousState != currentState) {
       if (previousState == TagState.TEXT_VALUE) {
         hasNotSentTextValue = true;
@@ -51,12 +49,10 @@ public class TagStateMachine {
     if(hasNotSentTextValue && !commentStates.contains(currentState) && currentState != TagState.TEXT_VALUE){
       parser.sendEventToHandler(Event.TEXT_VALUE, textBuilder.build());
       textBuilder.resetTextValue();
-      hasNotSentTextValue = false;      
-    } 
-    
-    
+      hasNotSentTextValue = false;
+    }
+
     return currentState;
- 
   }
 
   private void createTagElement(XMLParser parser) throws XMLNestingException {
