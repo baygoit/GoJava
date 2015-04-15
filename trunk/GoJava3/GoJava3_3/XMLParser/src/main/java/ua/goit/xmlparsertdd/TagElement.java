@@ -106,4 +106,12 @@ public class TagElement implements Element {
   public String getValue() {
     return null;
   }
+
+  @Override
+  public String toString() {
+    return "TagElement [type=" + type + ", name=" + name + ", params=" + params + "]";
+  }
+  
+  
+  
 }
