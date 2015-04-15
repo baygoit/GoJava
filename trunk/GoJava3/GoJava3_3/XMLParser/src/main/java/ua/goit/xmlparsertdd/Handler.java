@@ -1,5 +1,5 @@
 package ua.goit.xmlparsertdd;
 
 public interface Handler {
-   void handle(TagElement tagElement);
+   void handle(Element element);
 }

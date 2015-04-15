@@ -1,13 +1,14 @@
 package ua.goit.xmlparsertdd;
 
 
-import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class TagElement implements Element {
   private TagElementType type;
   private String name;
-  private Map<String, String> params = new HashMap<>();
+  private Map<String, String> params = new TreeMap<>();
+  private String value;
 
   public TagElement() {
   }
@@ -47,12 +48,15 @@ public class TagElement implements Element {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
 
-    TagElement TagElement = (TagElement) o;
+    TagElement that = (TagElement) o;
 
-    if (getType() != TagElement.getType()) return false;
-    if (getName() != null ? !getName().equals(TagElement.getName()) : TagElement.getName() != null)
+    if (getType() != that.getType()) return false;
+    if (getName() != null ? !getName().equals(that.getName()) : that.getName() != null)
       return false;
-    return !(getParams() != null ? !getParams().equals(TagElement.getParams()) : TagElement.getParams() != null);
+    if (getParams() != null ? !getParams().equals(that.getParams()) : that.getParams() != null)
+      return false;
+    return !(getValue() != null ? !getValue().equals(that.getValue()) : that.getValue() != null);
+
   }
 
   @Override
@@ -60,13 +64,14 @@ public class TagElement implements Element {
     int result = getType() != null ? getType().hashCode() : 0;
     result = 31 * result + (getName() != null ? getName().hashCode() : 0);
     result = 31 * result + (getParams() != null ? getParams().hashCode() : 0);
+    result = 31 * result + (getValue() != null ? getValue().hashCode() : 0);
     return result;
   }
 
   static class Builder {
     private TagElementType type;
     private StringBuilder name = new StringBuilder();
-    private Map<String, String> params = new HashMap<>();
+    private Map<String, String> params = new TreeMap<>();
     private StringBuilder paramName = new StringBuilder();
     private StringBuilder paramValue = new StringBuilder();
 
@@ -97,23 +102,28 @@ public class TagElement implements Element {
     }
 
     public TagElement build() {
-      TagElement result = new TagElement(type, name.toString(), params);
-      return result;
+      return new TagElement(type, name.toString(), params);
     }
   }
 
   @Override
   public String getValue() {
-    StringBuilder res = new StringBuilder();
-    res.append(name).append(" ");
+    concatValue();
+    return value;
+  }
+
+  private void concatValue() {
+    StringBuilder result = new StringBuilder();
+    result.append(name);
     if (params.size() != 0) {
       for (Map.Entry<String, String> entry : params.entrySet()) {
-        res.append(entry.getKey())
+        result.append(" ")
+                .append(entry.getKey())
                 .append("=\"")
                 .append(entry.getValue())
                 .append("\"");
       }
     }
-    return res.toString();
+    value = result.toString();
   }
 }

@@ -305,7 +305,6 @@ enum TagState {
     @Override
     public TagState next(char c, TagElement.Builder builder) {
       TagState result = TEXT_VALUE;
-      builder.setType(TagElementType.TEXT_VALUE);
       if (c == '<') {
         result = OPEN;
       }
