@@ -41,8 +41,6 @@ public class TagStateMachine {
     if (previousState != currentState) {
       if (previousState == TagState.TEXT_VALUE) {
         hasNotSentTextValue = true;
-        //parser.sendEventToHandler(Event.TEXT_VALUE, textBuilder.build());
-        //textBuilder.resetTextValue();
       }
     }
     
@@ -51,7 +49,6 @@ public class TagStateMachine {
       textBuilder.resetTextValue();
       hasNotSentTextValue = false;
     }
-
     return currentState;
   }
 

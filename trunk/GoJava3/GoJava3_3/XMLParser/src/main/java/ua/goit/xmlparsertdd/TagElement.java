@@ -53,7 +53,6 @@ public class TagElement implements Element {
     if (getName() != null ? !getName().equals(that.getName()) : that.getName() != null)
       return false;
     return !(getParams() != null ? !getParams().equals(that.getParams()) : that.getParams() != null);
-
   }
 
   @Override
@@ -111,7 +110,4 @@ public class TagElement implements Element {
   public String toString() {
     return "TagElement [type=" + type + ", name=" + name + ", params=" + params + "]";
   }
-  
-  
-  
 }

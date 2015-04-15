@@ -212,10 +212,7 @@ public class XMLParserTest {
 
   @Test
   public void givenTagWithSingleTagElement_WhenParseWholeTag_ThenOnSingleTagInvokedAndCheckValue() {
-    //given
     String inputString = "<? xml ?><tagname param = \"param 'value'\"/>";
-
-    //when
     handler = new Handler() {
       @Override
       public void handle(Element element) {
@@ -230,10 +227,7 @@ public class XMLParserTest {
 
   @Test
   public void givenErrorSingleTag_WhenParse_ThenOnErrorTagInvoked() {
-    //given
     String inputString = "<? xml ?><tagname param = \"param 'value'\"/6>";
-
-    //when
     handler = new Handler() {
       @Override
       public void handle(Element element) {
@@ -249,10 +243,7 @@ public class XMLParserTest {
   
   @Test
   public void givenCommentInsideTextValue() {
-    //given
     String inputString = "<? xml ?><tagname>Text<!--comment_text-->Value</tagname>";
-
-    //when
     handler = new Handler() {
       @Override
       public void handle(Element element) {
@@ -265,6 +256,5 @@ public class XMLParserTest {
     String expected = "TextValue";
     String actual = myElement.getValue();
     assertEquals(expected,actual);
- 
   }
 }
