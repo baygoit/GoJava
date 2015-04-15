@@ -1,52 +1,72 @@
 package ua.goit.alg;
 
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 
 public class TestCache {
 
-    LRUCache cache  = new LRUCache(5);
-
-    @Before
-    public void putIntoCache() {
+    @Test
+    public void shouldReturnExistedValue() {
+	LRUCache cache  = new LRUCache(5);
 	cache.set(0, 0);
 	cache.set(1, 1);
 	cache.set(2, 2);
 	cache.set(3, 3);
 	cache.set(4, 4);
-    }
-    
-    @Test	
-    public void getExistValue() {
 	Assert.assertEquals(cache.get(2), 2);
     }
-    
+
     @Test	
-    public void getNotExistValue() {
+    public void shouldReturnMinusOneForMissingValue() {
+	LRUCache cache  = new LRUCache(5);
+	cache.set(0, 0);
+	cache.set(1, 1);
+	cache.set(2, 2);
+	cache.set(3, 3);
+	cache.set(4, 4);
 	Assert.assertEquals(cache.get(6), -1);
     }
-    
+
     @Test
-    public void setValue_returnValue() {
+    public void shouldReturnStoredValue() {
+	LRUCache cache  = new LRUCache(5);
+	cache.set(0, 0);
+	cache.set(1, 1);
+	cache.set(2, 2);
+	cache.set(3, 3);
+	cache.set(4, 4);
 	cache.set(5, 5);
 	Assert.assertEquals(cache.get(5), 5);
     }
-    
+
     @Test
-    public void setLatestUsedValue_returnNotExistLatestValue_deletedFromHead() {
+    public void shouldReturnMinusOneForMissingValue_DeletedFromHeadAfterLastSetInvokation() {
+	LRUCache cache  = new LRUCache(3);
+	cache.set(0, 0);
+	cache.set(1, 1);
+	cache.set(2, 2);
 	cache.set(5, 5);
 	Assert.assertEquals(cache.get(0), -1);
     }
-    
+
     @Test
-    public void setValueWithExistedKey_getValueWithExistedKey() {
-	cache.set(3, 100500);
-	Assert.assertEquals(cache.get(3), 100500);
+    public void shouldReturnNewValueForExistedKey() {
+	LRUCache cache  = new LRUCache(3);
+	cache.set(0, 0);
+	cache.set(1, 1);
+	cache.set(2, 2);
+	cache.set(0, 100500);
+	Assert.assertEquals(cache.get(0), 100500);
     }	
 
     @Test
-    public void getValues_setValues_getExistLatestValue_notDeletedFromHead() {
+    public void shouldReturnLRUvalue_NotDeletedFromHeadAfrerGetSetInvokations() {
+	LRUCache cache  = new LRUCache(5);
+	cache.set(0, 0);
+	cache.set(1, 1);
+	cache.set(2, 2);
+	cache.set(3, 3);
+	cache.set(4, 4);
 	cache.set(9, 9);
 	cache.get(0);
 	cache.set(5, 5);
@@ -54,9 +74,15 @@ public class TestCache {
 	cache.set(8, 8);
 	Assert.assertEquals(cache.get(4), 4);
     }
-    
+
     @Test
-    public void getValues_setValues_getLastExistLatestValue_deletedFromHead() {
+    public void shouldReturnMinusOneForMissingValue_DeletedFromHeadAfrerGetSetInvokations() {
+	LRUCache cache  = new LRUCache(5);
+	cache.set(0, 0);
+	cache.set(1, 1);
+	cache.set(2, 2);
+	cache.set(3, 3);
+	cache.set(4, 4);
 	cache.set(9, 9);
 	cache.get(2);
 	cache.set(5, 5);
