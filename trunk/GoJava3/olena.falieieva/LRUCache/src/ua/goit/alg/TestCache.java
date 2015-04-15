@@ -7,7 +7,7 @@ public class TestCache {
 
     @Test
     public void shouldReturnExistedValue() {
-	LRUCache cache  = new LRUCache(5);
+	LRUCache cache = new LRUCache(5);
 	cache.set(0, 0);
 	cache.set(1, 1);
 	cache.set(2, 2);
@@ -18,7 +18,7 @@ public class TestCache {
 
     @Test	
     public void shouldReturnMinusOneForMissingValue() {
-	LRUCache cache  = new LRUCache(5);
+	LRUCache cache = new LRUCache(5);
 	cache.set(0, 0);
 	cache.set(1, 1);
 	cache.set(2, 2);
@@ -29,7 +29,7 @@ public class TestCache {
 
     @Test
     public void shouldReturnStoredValue() {
-	LRUCache cache  = new LRUCache(5);
+	LRUCache cache = new LRUCache(5);
 	cache.set(0, 0);
 	cache.set(1, 1);
 	cache.set(2, 2);
@@ -41,7 +41,7 @@ public class TestCache {
 
     @Test
     public void shouldReturnMinusOneForMissingValue_DeletedFromHeadAfterLastSetInvokation() {
-	LRUCache cache  = new LRUCache(3);
+	LRUCache cache = new LRUCache(3);
 	cache.set(0, 0);
 	cache.set(1, 1);
 	cache.set(2, 2);
@@ -51,7 +51,7 @@ public class TestCache {
 
     @Test
     public void shouldReturnNewValueForExistedKey() {
-	LRUCache cache  = new LRUCache(3);
+	LRUCache cache = new LRUCache(3);
 	cache.set(0, 0);
 	cache.set(1, 1);
 	cache.set(2, 2);
@@ -61,7 +61,7 @@ public class TestCache {
 
     @Test
     public void shouldReturnLRUvalue_NotDeletedFromHeadAfrerGetSetInvokations() {
-	LRUCache cache  = new LRUCache(5);
+	LRUCache cache = new LRUCache(5);
 	cache.set(0, 0);
 	cache.set(1, 1);
 	cache.set(2, 2);
@@ -77,7 +77,7 @@ public class TestCache {
 
     @Test
     public void shouldReturnMinusOneForMissingValue_DeletedFromHeadAfrerGetSetInvokations() {
-	LRUCache cache  = new LRUCache(5);
+	LRUCache cache = new LRUCache(5);
 	cache.set(0, 0);
 	cache.set(1, 1);
 	cache.set(2, 2);
