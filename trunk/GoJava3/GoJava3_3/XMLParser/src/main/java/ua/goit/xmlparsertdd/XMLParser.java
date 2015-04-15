@@ -46,7 +46,7 @@ public class XMLParser implements Parser {
     }
   }
 
-  public void sendEventToHandler(Event event, TagElement result) {
+  public void sendEventToHandler(Event event, Element result) {
     Set<Handler> set = handlers.get(event);
     if (set == null) {return;}
     for (Handler handler : set) {
@@ -80,11 +80,11 @@ public class XMLParser implements Parser {
     public void onCloseTag(Handler handler) {
       registerHandlerOnEvent(handler, Event.CLOSE_TAG);
     }
-    
+
     public void onSingleTag(Handler handler) {
       registerHandlerOnEvent(handler, Event.SINGLE_TAG);
     }
-    
+
     private void registerHandlerOnEvent(Handler handler, Event event) {
       if (handler != null) {
         Set<Handler> set;

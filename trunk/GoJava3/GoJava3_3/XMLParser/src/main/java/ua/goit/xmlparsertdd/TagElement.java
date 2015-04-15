@@ -7,8 +7,6 @@ import java.util.Map;
 public class TagElement implements Element {
   private TagElementType type;
   private String name;
-  private String textValue;
-  private String textError;
   private Map<String, String> params = new HashMap<>();
 
   public TagElement() {
@@ -18,14 +16,6 @@ public class TagElement implements Element {
     this.type = type;
     this.name = name;
     this.params = params;
-  }
-
-  public void setTextError(String textError) {
-    this.textError = textError;
-  }
-
-  public String getTextError() {
-    return textError;
   }
 
   public void setName(String name) {
@@ -50,14 +40,6 @@ public class TagElement implements Element {
 
   public void setParams(Map<String, String> params) {
     this.params = params;
-  }
-
-  public void setTextValue(String textValue) {
-    this.textValue = textValue;
-  }
-
-  public String getTextValue() {
-    return textValue;
   }
 
   @Override
@@ -87,12 +69,6 @@ public class TagElement implements Element {
     private Map<String, String> params = new HashMap<>();
     private StringBuilder paramName = new StringBuilder();
     private StringBuilder paramValue = new StringBuilder();
-    private StringBuilder textValue = new StringBuilder();
-    private String textError;
-
-    public void setTextError(String textError) {
-      this.textError = textError;
-    }
 
     static Builder newBuilder() {
       return new Builder();
@@ -114,10 +90,6 @@ public class TagElement implements Element {
       paramValue.append(c);
     }
 
-    public void buildTextValue(char c) {
-      textValue.append(c);
-    }
-    
     public void addParams() {
       params.put(paramName.toString(), paramValue.toString());
       paramName = new StringBuilder();
@@ -126,20 +98,22 @@ public class TagElement implements Element {
 
     public TagElement build() {
       TagElement result = new TagElement(type, name.toString(), params);
-      result.setTextValue(textValue.toString());
-      result.setTextError(textError);
       return result;
     }
   }
 
   @Override
   public String getValue() {
-    String res;
-    if(type == TagElementType.TEXT_VALUE){
-      res = textValue;
-    }else {
-      res = name;
+    StringBuilder res = new StringBuilder();
+    res.append(name).append(" ");
+    if (params.size() != 0) {
+      for (Map.Entry<String, String> entry : params.entrySet()) {
+        res.append(entry.getKey())
+                .append("=\"")
+                .append(entry.getValue())
+                .append("\"");
+      }
     }
-    return res;
+    return res.toString();
   }
 }
