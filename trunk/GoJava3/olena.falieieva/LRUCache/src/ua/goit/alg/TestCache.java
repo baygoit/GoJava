@@ -8,45 +8,25 @@ public class TestCache {
     @Test
     public void shouldReturnExistedValue() {
 	LRUCache cache = new LRUCache(5);
-	cache.set(0, 0);
-	cache.set(1, 1);
-	cache.set(2, 2);
-	cache.set(3, 3);
-	cache.set(4, 4);
-	Assert.assertEquals(cache.get(2), 2);
+	cache.set(2, 0);
+	Assert.assertEquals(cache.get(2), 0);
     }
 
     @Test	
     public void shouldReturnMinusOneForMissingValue() {
 	LRUCache cache = new LRUCache(5);
 	cache.set(0, 0);
-	cache.set(1, 1);
-	cache.set(2, 2);
-	cache.set(3, 3);
-	cache.set(4, 4);
 	Assert.assertEquals(cache.get(6), -1);
     }
 
     @Test
-    public void shouldReturnStoredValue() {
-	LRUCache cache = new LRUCache(5);
-	cache.set(0, 0);
-	cache.set(1, 1);
-	cache.set(2, 2);
-	cache.set(3, 3);
-	cache.set(4, 4);
-	cache.set(5, 5);
-	Assert.assertEquals(cache.get(5), 5);
-    }
-
-    @Test
-    public void shouldReturnMinusOneForMissingValue_DeletedFromHeadAfterLastSetInvokation() {
+    public void shouldReturnLastStoredValue_IfNumberOfStoredValuesIncreasesCacheCapacity() {
 	LRUCache cache = new LRUCache(3);
 	cache.set(0, 0);
 	cache.set(1, 1);
-	cache.set(2, 2);
+	cache.set(4, 4);
 	cache.set(5, 5);
-	Assert.assertEquals(cache.get(0), -1);
+	Assert.assertEquals(cache.get(5), 5);
     }
 
     @Test
@@ -55,25 +35,9 @@ public class TestCache {
 	cache.set(0, 0);
 	cache.set(1, 1);
 	cache.set(2, 2);
-	cache.set(0, 100500);
-	Assert.assertEquals(cache.get(0), 100500);
+	cache.set(2, 100500);
+	Assert.assertEquals(cache.get(2), 100500);
     }	
-
-    @Test
-    public void shouldReturnLRUvalue_NotDeletedFromHeadAfrerGetSetInvokations() {
-	LRUCache cache = new LRUCache(5);
-	cache.set(0, 0);
-	cache.set(1, 1);
-	cache.set(2, 2);
-	cache.set(3, 3);
-	cache.set(4, 4);
-	cache.set(9, 9);
-	cache.get(0);
-	cache.set(5, 5);
-	cache.get(3);
-	cache.set(8, 8);
-	Assert.assertEquals(cache.get(4), 4);
-    }
 
     @Test
     public void shouldReturnMinusOneForMissingValue_DeletedFromHeadAfrerGetSetInvokations() {
