@@ -68,7 +68,7 @@ public class XMLParserTest {
   public void givenCloseTag_WhenParse_ThenValueOfTheTagEqualsValueOfTheInputTag() {
 
     // given
-    String inputString = "</name>";
+    String inputString = "<name></name>";
 
     // when
     handler = new Handler() {
