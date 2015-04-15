@@ -24,6 +24,6 @@ public class TagElementStateTest {
   public void givenOpenState_WhenFirstCharInTagNameIsDigit_ThenShouldBeInvalidEndState() {
     TagState state = TagState.OPEN;
     TagState actual = state.next('1', TagElement.Builder.newBuilder());
-    assertEquals(TagState.INVALID_END, actual);
+    assertEquals(TagState.INVALID_TAG_END, actual);
   }
 }
