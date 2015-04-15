@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Project Office Management System</title>
+</h:head>
+<h:body>
+	<div class="container">
+	    <ui:include src="/appPages/topMenu.xhtml" />    
+	</div>
+	<h:form id = "costItemForm">
+		<p:messages id="messages" showDetail="true" autoUpdate="true"
+			closable="true" />
+			
+		<p:menubar>
+	   		<p:menuitem value="Добавить" url="/appPages/profitcost/CostItemEditor.xhtml" />
+			<p:menuitem value="Редактировать" action="/appPages/profitcost/CostItemEditor.xhtml?faces-redirect=true&amp;includeViewParams=true">
+				<f:setPropertyActionListener  target="#{costItemEditorBean.costItem}" 
+											   value="#{costItemListBean.selectedCostItem}" />
+			</p:menuitem>
+			<p:menuitem value="Удалить" 
+						action="#{costItemListBean.deleteCostItem(costItemListBean.selectedCostItem)}" 
+						update=":costItemForm"/>
+		</p:menubar>
+	    
+		<p:dataTable id = "costItemDataTable"
+			var="costItem" value="#{costItemListBean.costItems}"
+			selection="#{costItemListBean.selectedCostItem}" rowKey="#{costItem.id}"
+			paginator="true" rows="10" lazy="true"
+			paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+			rowsPerPageTemplate="1,2,5,10,15">
+			<f:facet name="header">
+				Статьи затрат
+			</f:facet>
+			<p:column selectionMode="single" style="width:16px;text-align:center"/>
+        	<p:column>
+				<f:facet name="header">
+					<h:outputText value="Идентификатор" />
+				</f:facet>
+				<h:outputText value="#{costItem.id}" />
+			</p:column>
+			<p:column>
+				<f:facet name="header">
+					<h:outputText value="Название" />
+				</f:facet>
+				<h:outputText value="#{costItem.name}" />
+			</p:column>
+			<p:column>
+				<f:facet name="header">
+					<h:outputText value="Вид" />
+				</f:facet>
+				<h:outputText value="#{costItem.type}" />
+			</p:column>
+			<p:column>
+				<f:facet name="header">
+					<h:outputText value="Родитель" />
+				</f:facet>
+				<h:outputText value="#{costItem.parent.name}" />
+			</p:column>
+		</p:dataTable>		
+	</h:form>
+	<h:outputLink value="#{request.contextPath}/appPages/index.xhtml"> вернуться на главное меню </h:outputLink>
+</h:body>
+</html>

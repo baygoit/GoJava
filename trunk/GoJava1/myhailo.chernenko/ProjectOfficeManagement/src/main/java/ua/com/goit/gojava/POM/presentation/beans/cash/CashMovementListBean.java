@@ -1,6 +1,5 @@
 package ua.com.goit.gojava.POM.presentation.beans.cash;
 
-import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
@@ -9,7 +8,6 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 import org.primefaces.model.LazyDataModel;
@@ -126,26 +124,6 @@ public class CashMovementListBean implements Serializable {
 	public void setSelectedCashMovementEntry(
 			CashMovementEntry selectedCashMovementEntry) {
 		this.selectedCashMovementEntry = selectedCashMovementEntry;
-	}
-
-	// Temporary solution for step-by-step migration on JSF.
-	// This method redirects to non JSF pages
-	public String redirectTo(String action, long id) {
-		
-		FacesContext context = FacesContext.getCurrentInstance();  
-		String rootRef  = context.getExternalContext().getRequestContextPath();  
-		HttpServletResponse response  = ((HttpServletResponse)context.getExternalContext().getResponse());  
-	    try {
-	    	//throw new IOException("Can not redirect to");
-	    	String url = rootRef + "/" + action + ((id == 0)? ("") : ("?id=" + id));
-			response.sendRedirect(url);
-		} catch (IOException e) {
-			LOG.error("Can not redirect to "+action+": " + e.getMessage(), e);
-			FacesContext.getCurrentInstance().addMessage(null, 
-					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "Can not redirect to "+action+"!"));
-		}  
-	    context.responseComplete();  
-		return action;
 	}
 	
 }

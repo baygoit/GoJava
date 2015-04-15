@@ -86,7 +86,7 @@ public class BankAccountService {
 	public List<BankAccount> findByName(String query) throws POMServicesException {
 
 		try {
-			
+		
 			Criterion restriction = Restrictions.like("name", query);
 			return bankAccountDAO.retrieve(restriction);
 		} catch (POMPersistenceException e) {
