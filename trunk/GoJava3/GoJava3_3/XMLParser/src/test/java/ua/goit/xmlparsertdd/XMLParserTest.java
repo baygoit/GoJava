@@ -208,6 +208,7 @@ public class XMLParserTest {
   }
 */
 
+
   @Test
   public void givenTagWithSingleTagElement_WhenParseWholeTag_ThenOnSingleTagInvokedAndCheckValue() {
     //given
@@ -243,5 +244,27 @@ public class XMLParserTest {
     parser.parse(inputString);
     String actual = myElement.getValue();
     assertEquals("XMLSyntaxException caught", actual);
+  }
+  
+  @Test
+  public void givenCommentInsideTextValue() {
+    //given
+    String inputString = "<? xml ?><tagname>Text<!--comment_text-->Value</tagname>";
+
+    //when
+    myElement =  new TextElement();
+    handler = new Handler() {
+      @Override
+      public void handle(Element element) {
+        myElement = element;
+      }
+    };
+    builder.onTextValue(handler);
+    parser = builder.build();
+    parser.parse(inputString);
+    String expected = "TextValue";
+    String actual = myElement.getValue();
+    assertEquals(expected,actual);
+ 
   }
 }
