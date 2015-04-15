@@ -47,7 +47,7 @@ public class LRUCache {
     }
 
     private void addToTail(Node node) {
-	if (node == head) {
+	if (head != tail && node == head) {
 	    removeHead();
 	    appendToTail(node);
 	}
