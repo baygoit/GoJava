@@ -26,7 +26,7 @@ public class XMLParser implements Parser {
   }
 
   @Override
-  public void parse(File strArg) throws FileNotFoundException {
+  public void parse(File strArg) throws FileNotFoundException{
     parse(new FileInputStream(strArg));
   }
 
@@ -35,9 +35,15 @@ public class XMLParser implements Parser {
 
     try (InputStreamReader inputStreamReader = new InputStreamReader(iStreamReader)) {
       char c;
+      TagState currentState = null;
       while (inputStreamReader.ready()) {
         c = (char) inputStreamReader.read();
-        TagState currentState = machine.next(c, this);
+        
+        try {
+          currentState = machine.next(c, this);
+        } catch (XMLNestingException e) {
+          e.printStackTrace();
+        }
         if(currentState == TagState.INVALID_TAG_END) {
           return;
         }
