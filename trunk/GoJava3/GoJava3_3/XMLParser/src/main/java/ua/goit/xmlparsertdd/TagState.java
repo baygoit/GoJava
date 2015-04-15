@@ -311,6 +311,17 @@ enum TagState {
       return result;
     }
   },
+  
+  VALID_COMMENT_END {
+    @Override
+    public TagState next(char c, TagElement.Builder builder) {
+      TagState result = TEXT_VALUE;
+      if (c == '<') {
+        result = OPEN;
+      }
+      return result;
+    }
+  },
   TEXT_VALUE {
     @Override
     public TagState next(char c, TagElement.Builder builder) {
@@ -412,8 +423,11 @@ enum TagState {
     TagState next(char c, TagElement.Builder builder) {
       TagState result = COMMENT;
       if (c == '>') {
-        result = VALID_TAG_END;
+        result = VALID_COMMENT_END;
+      }else if (c == '-') {
+        result = SECOND_HYPHEN_AFTER;
       }
+      
       return result;
     }
   };
