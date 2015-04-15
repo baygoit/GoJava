@@ -10,7 +10,7 @@ public class TagElement implements Element {
 
   private String textValue;
 
-  private Map<String, String> params = new HashMap<String, String>();
+  private Map<String, String> params = new HashMap<>();
   public TagElement() {
   }
 
@@ -76,7 +76,7 @@ public class TagElement implements Element {
   static class Builder {
     private TagElementType type;
     private StringBuilder name = new StringBuilder();
-    private Map<String, String> params = new HashMap<String, String>();
+    private Map<String, String> params = new HashMap<>();
     private StringBuilder paramName = new StringBuilder();
     private StringBuilder paramValue = new StringBuilder();
     private StringBuilder textValue = new StringBuilder();
@@ -126,9 +126,6 @@ public class TagElement implements Element {
     }else {
       res = name;
     }
-    
     return res;
-
   }
-
 }

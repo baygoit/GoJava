@@ -68,15 +68,11 @@ public class XMLParser implements Parser {
     }
 
     public void onEnd(Handler handler) {
-      Set<Handler> set = handlers.get(Event.VALID_END);
-      set.add(handler);
-      handlers.put(Event.VALID_END, set);
+      registerHandlerOnEvent(handler, Event.VALID_END);
     }
 
     public void onError(Handler handler) {
-      Set<Handler> set = handlers.get(Event.INVALID_END);
-      set.add(handler);
-      handlers.put(Event.INVALID_END, set);
+      registerHandlerOnEvent(handler, Event.INVALID_END);
     }
 
     public void onCloseTag(Handler handler) {

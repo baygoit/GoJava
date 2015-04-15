@@ -23,8 +23,7 @@ public class CharUtil {
     addCharsToSet(0x3001,0xD7FF, nameStartChar );
     addCharsToSet(0xF900, 0xFDCF, nameStartChar );
     addCharsToSet(0xFDF0, 0xFFFD, nameStartChar );
-//    addCharsToSet(0x10000, 0xEFFFF, nameStartChar );
-    
+
     nameChar.add('-');
     nameChar.add('.');
     nameChar.add((char)0xB7);
@@ -63,15 +62,5 @@ public class CharUtil {
   
   public static boolean isNameStartChar(char ch){
     return nameStartChar.contains(ch);
-  } 
-  
-  public static void print() {
-    int i = 0;
-    System.out.println("Start:");
-    for (Character ch : nameChar) {
-      System.out.print(ch + " ");
-      i++;
-      if(i % 100 == 0 )System.out.print("\n");
-    }
   }
 }
