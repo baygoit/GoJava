@@ -7,8 +7,6 @@ public class TextElement implements Element {
     this.textValue = textValue;
   }
 
-  public TextElement() {}
-
   @Override
   public String getValue() {
     return textValue;

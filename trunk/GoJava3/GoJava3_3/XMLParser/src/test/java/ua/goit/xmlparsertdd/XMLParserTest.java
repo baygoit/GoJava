@@ -26,7 +26,6 @@ public class XMLParserTest {
     String inputString = "<name>";
 
     // when
-    myElement =  new TagElement();
     handler = new Handler() {
       @Override
       public void handle(Element element) {
@@ -72,7 +71,6 @@ public class XMLParserTest {
     String inputString = "</name>";
 
     // when
-    myElement =  new TagElement();
     handler = new Handler() {
       @Override
       public void handle(Element element) {
@@ -143,7 +141,6 @@ public class XMLParserTest {
     // given
     String inputString = "<? xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\" ?>";
 
-    myElement =  new TagElement();
     TagElement expectedElement = new TagElement();
     expectedElement.setName("xml");
     Map<String, String> params = new TreeMap<>();
@@ -174,7 +171,6 @@ public class XMLParserTest {
     String inputString = "<? xml ?><tagname>TextValue</tagname>";
 
     //when
-    myElement =  new TextElement();
     handler = new Handler() {
       @Override
       public void handle(Element element) {
@@ -218,7 +214,6 @@ public class XMLParserTest {
     String inputString = "<? xml ?><tagname param = \"param 'value'\"/>";
 
     //when
-    myElement =  new TagElement();
     handler = new Handler() {
       @Override
       public void handle(Element element) {
@@ -237,7 +232,6 @@ public class XMLParserTest {
     String inputString = "<? xml ?><tagname param = \"param 'value'\"/6>";
 
     //when
-    myElement =  new TagElement();
     handler = new Handler() {
       @Override
       public void handle(Element element) {
@@ -247,6 +241,7 @@ public class XMLParserTest {
     builder.onError(handler);
     parser = builder.build();
     parser.parse(inputString);
-    assertEquals("XMLSyntaxException caught", myElement.getValue());
+    String actual = myElement.getValue();
+    assertEquals("XMLSyntaxException caught", actual);
   }
 }

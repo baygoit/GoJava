@@ -6,24 +6,24 @@ public class TagStateMachine {
   private TextElement.Builder textBuilder = TextElement.Builder.newBuilder();
   private ErrorElement.Builder errorBuilder = ErrorElement.Builder.newBuilder();
 
-  public void next(char c, XMLParser parser) throws XMLSyntaxException {
+  public TagState next(char c, XMLParser parser) {
     TagState previousState = currentState;
     currentState = currentState.next(c, tagBuilder);
     if (currentState == TagState.VALID_TAG_END) {
       createTagElement(parser);
     } else if (currentState == TagState.TEXT_VALUE) {
       textBuilder.buildTextValue(c);
+    } else if (currentState == TagState.INVALID_TAG_END) {
+      String textError = "XMLSyntaxException caught";
+      errorBuilder.setErrorMessage(textError);
+      parser.sendEventToHandler(Event.INVALID_END, errorBuilder.build());
     } else if (previousState != currentState) {
       if (previousState == TagState.TEXT_VALUE) {
         parser.sendEventToHandler(Event.TEXT_VALUE, textBuilder.build());
         textBuilder.resetTextValue();
       }
-    } else if (currentState == TagState.INVALID_TAG_END) {
-      String textError = "XMLSyntaxException caught";
-      errorBuilder.setErrorMessage(textError);
-      parser.sendEventToHandler(Event.INVALID_END, errorBuilder.build());
-      throw new XMLSyntaxException();
     }
+    return currentState;
   }
 
   private void createTagElement(XMLParser parser) {

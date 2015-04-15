@@ -37,11 +37,12 @@ public class XMLParser implements Parser {
       char c;
       while (inputStreamReader.ready()) {
         c = (char) inputStreamReader.read();
-        machine.next(c, this);
+        TagState currentState = machine.next(c, this);
+        if(currentState == TagState.INVALID_TAG_END) {
+          return;
+        }
       }
     } catch (IOException e) {
-      e.printStackTrace();
-    } catch (XMLSyntaxException e) {
       e.printStackTrace();
     }
   }
