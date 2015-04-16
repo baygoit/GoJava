@@ -36,7 +36,10 @@ public class TagStateMachine {
           currentState == TagState.VALID_HEADER_END) {
         createTagElement(parser);
       }else if (currentState == TagState.INVALID_TAG_END) {
-        parser.sendEventToHandler(Event.INVALID_END, new TextElement("XML Syntax Error"));
+        textBuilder.buildTextValue("XML Syntax Error");
+        TextElement result = textBuilder.build();
+        textBuilder = TextElement.Builder.newBuilder();
+        parser.sendEventToHandler(Event.INVALID_END, result);
       } 
       
       if (previousState == TagState.TEXT_VALUE) {

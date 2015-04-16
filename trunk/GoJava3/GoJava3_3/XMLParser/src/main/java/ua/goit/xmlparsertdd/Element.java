@@ -4,18 +4,18 @@ import java.util.Map;
 
 public abstract class Element {
   String getValue() {
-    return null;
+    throw  new UnsupportedOperationException("Method getValue is unsupported");
   }
 
   String getName() {
-    return null;
+    throw  new UnsupportedOperationException("Method getValue is unsupported");
   }
 
   TagElementType getType() {
-    return null;
+    throw  new UnsupportedOperationException("Method getValue is unsupported");
   }
 
   Map<String, String> getParams() {
-    return null;
+    throw  new UnsupportedOperationException("Method getValue is unsupported");
   }
 }

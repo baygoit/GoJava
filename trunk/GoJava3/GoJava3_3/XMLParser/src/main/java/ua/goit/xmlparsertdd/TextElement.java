@@ -35,6 +35,10 @@ public class TextElement extends Element {
       textValue.append(c);
     }
 
+    public void buildTextValue(String text) {
+      textValue.append(text);
+    }
+
     public void resetTextValue() {
       textValue = new StringBuilder();
     }

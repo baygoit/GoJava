@@ -1,12 +1,12 @@
 package ua.goit.xmlparsertdd;
 
-import static org.junit.Assert.*;
+import org.junit.Test;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
 
 
 public class TagStackTest {
@@ -61,7 +61,7 @@ public class TagStackTest {
   }
   
   @Test (expected = XMLNestingException.class)
-  public void Error_on_HeaderTagAftgerSingleRoot() throws XMLNestingException {
+  public void Error_on_HeaderTagAfterSingleRoot() throws XMLNestingException {
     String  testString = "<bb/> < ?xml version=\"1.0\" \n encoding=\"UTF-8\"?> ";
     runMachine(testString);
   }
