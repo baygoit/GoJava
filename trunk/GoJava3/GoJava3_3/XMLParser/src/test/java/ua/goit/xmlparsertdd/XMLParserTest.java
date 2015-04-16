@@ -245,7 +245,7 @@ public class XMLParserTest {
     builder.onEnd(handler);
     parser = builder.build();
     parser.parse(inputString);
-    TextElement expected = new TextElement("Parsing successful");
+    TextElement expected = new TextElement("Parsing success");
 
     assertEquals(expected, myElement);
   }

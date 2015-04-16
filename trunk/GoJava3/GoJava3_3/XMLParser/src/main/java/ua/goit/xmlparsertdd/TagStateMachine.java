@@ -27,19 +27,17 @@ public class TagStateMachine {
     TagState previousState = currentState;
     currentState = currentState.next(c, tagBuilder);
 
-   if (currentState == TagState.TEXT_VALUE) {
+    if (currentState == TagState.TEXT_VALUE) {
       textBuilder.buildTextValue(c);
-    } 
+    }
 
     if (previousState != currentState) {
       if (currentState == TagState.VALID_TAG_END || 
           currentState == TagState.VALID_HEADER_END) {
         createTagElement(parser);
       }else if (currentState == TagState.INVALID_TAG_END) {
-        textBuilder.buildTextValue("XML Syntax Error");
-        TextElement result = textBuilder.build();
-        textBuilder = TextElement.Builder.newBuilder();
-        parser.sendEventToHandler(Event.INVALID_END, result);
+        String errorText = "XML Syntax Error";
+        createErrorTextElement(parser, errorText);
       } 
       
       if (previousState == TagState.TEXT_VALUE) {
@@ -49,10 +47,22 @@ public class TagStateMachine {
     
     if(hasNotSentTextValue && !commentStates.contains(currentState) && currentState != TagState.TEXT_VALUE){
       parser.sendEventToHandler(Event.TEXT_VALUE, textBuilder.build());
-      textBuilder.resetTextValue();
+      textBuilder = TextElement.Builder.newBuilder();
       hasNotSentTextValue = false;
     }
     return currentState;
+  }
+
+  public void createErrorTextElement(XMLParser parser, String errorText) {
+    TextElement.Builder errorTextBuilder = TextElement.Builder.newBuilder();
+    errorTextBuilder.buildTextValue(errorText);
+    parser.sendEventToHandler(Event.INVALID_END, errorTextBuilder.build());
+  }
+
+  public void createSuccessTextElement(XMLParser parser, String text) {
+    TextElement.Builder textBuilder = TextElement.Builder.newBuilder();
+    textBuilder.buildTextValue(text);
+    parser.sendEventToHandler(Event.VALID_END, textBuilder.build());
   }
 
   private void createTagElement(XMLParser parser) throws XMLNestingException {

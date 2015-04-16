@@ -49,12 +49,12 @@ public class XMLParser implements Parser {
       }
       if (currentState == TagState.VALID_TAG_END) {
         if (machine.isStackEmpty()) {
-          sendEventToHandler(Event.VALID_END, new TextElement("Parsing successful"));
+          machine.createSuccessTextElement(this, "Parsing success");
         } else {
-          sendEventToHandler(Event.INVALID_END, new TextElement("Some tags aren't closed"));
+          machine.createErrorTextElement(this, "Some tags aren't closed");
         }
       } else {
-        sendEventToHandler(Event.INVALID_END, new TextElement("Something wrong"));
+        machine.createErrorTextElement(this, "Incorrect XML code");
       }
     } catch (IOException e) {
         e.printStackTrace();
