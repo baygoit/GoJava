@@ -1,6 +1,6 @@
 package ua.goit.xmlparsertdd;
 
-public class ErrorElement implements Element {
+public class ErrorElement extends Element {
   String errorMessage;
 
   ErrorElement(String message){

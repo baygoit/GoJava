@@ -4,7 +4,7 @@ package ua.goit.xmlparsertdd;
 import java.util.HashMap;
 import java.util.Map;
 
-public class TagElement implements Element {
+public class TagElement extends Element {
   private TagElementType type;
   private String name;
   private Map<String, String> params = new HashMap<>();
@@ -26,14 +26,17 @@ public class TagElement implements Element {
     this.type = type;
   }
 
+  @Override
   public TagElementType getType() {
     return type;
   }
 
+  @Override
   public String getName() {
     return name;
   }
 
+  @Override
   public Map<String, String> getParams() {
     return params;
   }
@@ -99,11 +102,6 @@ public class TagElement implements Element {
     public TagElement build() {
       return new TagElement(type, name.toString(), params);
     }
-  }
-
-  @Override
-  public String getValue() {
-    return null;
   }
 
   @Override

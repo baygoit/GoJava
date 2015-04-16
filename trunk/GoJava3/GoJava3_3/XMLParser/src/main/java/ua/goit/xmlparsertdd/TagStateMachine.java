@@ -33,7 +33,7 @@ public class TagStateMachine {
     } else if (currentState == TagState.TEXT_VALUE) {
       textBuilder.buildTextValue(c);
     } else if (currentState == TagState.INVALID_TAG_END) {
-      String textError = "Error in XML Syntax";
+      String textError = "XML Syntax Error";
       errorBuilder.setErrorMessage(textError);
       parser.sendEventToHandler(Event.INVALID_END, errorBuilder.build());
     } 

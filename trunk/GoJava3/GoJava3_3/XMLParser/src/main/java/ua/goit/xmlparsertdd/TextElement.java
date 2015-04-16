@@ -1,6 +1,6 @@
 package ua.goit.xmlparsertdd;
 
-public class TextElement implements Element {
+public class TextElement extends Element {
   private String textValue;
 
   public TextElement(String textValue) {

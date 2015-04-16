@@ -20,12 +20,9 @@ public class XMLParserTest {
   }
 
   @Test
-  public void givenOpenTag_WhenParse_ThenValueOfTheTagEqualsValueOfTheInputTag() {
-
-    // given
+  public void givenOpenTag_WhenParse_ThenNameOfTheTagEqualsNameOfTheInputTag() {
     String inputString = "<name>";
 
-    // when
     handler = new Handler() {
       @Override
       public void handle(Element element) {
@@ -36,22 +33,17 @@ public class XMLParserTest {
     parser = builder.build();
     parser.parse(inputString);
 
-    // then
-    assertEquals("name", myElement.getValue());
+    assertEquals("name", myElement.getName());
   }
 
-/*  @Test
-  public void givenOpenTag_WhenHandleSetsTypeOfTag_ThenTypeOfTheTagEqualsOPEN() {
-
-    // given
+  @Test
+  public void givenOpenTag_WhenParse_ThenTypeOfTheTagEqualsOPEN() {
     String inputString = "<name>";
 
-    // when
-    myElement =  new TagElement();
     handler = new Handler() {
       @Override
-      public void handle(Element tagElement) {
-        myElement.setType(tagElement.getType());
+      public void handle(Element element) {
+        myElement = element;
       }
     };
     builder.onOpenTag(handler);
@@ -60,17 +52,13 @@ public class XMLParserTest {
     TagElementType actual = myElement.getType();
     TagElementType expected = TagElementType.OPEN;
 
-    // then
     assertEquals(expected, actual);
-  }*/
+  }
 
   @Test
-  public void givenCloseTag_WhenParse_ThenValueOfTheTagEqualsValueOfTheInputTag() {
-
-    // given
+  public void givenCloseTag_WhenParse_ThenNameOfTheTagEqualsNameOfTheInputTag() {
     String inputString = "<name></name>";
 
-    // when
     handler = new Handler() {
       @Override
       public void handle(Element element) {
@@ -81,22 +69,18 @@ public class XMLParserTest {
     parser = builder.build();
     parser.parse(inputString);
 
-    // then
-    assertEquals("name", myElement.getValue());
+    assertEquals("name", myElement.getName());
   }
 
-/*  @Test
+  @Test
   public void givenCloseTag_WhenHandleSetsTypeOfTag_ThenTypeOfTheTagEqualsCLOSE() {
 
-    // given
     String inputString = "</name>";
 
-    // when
-    myElement =  new TagElement();
     handler = new Handler() {
       @Override
-      public void handle(Element tagElement) {
-        myElement.setType(tagElement.getType());
+      public void handle(Element element) {
+        myElement = element;
       }
     };
     builder.onCloseTag(handler);
@@ -105,23 +89,17 @@ public class XMLParserTest {
     TagElementType actual = myElement.getType();
     TagElementType expected = TagElementType.CLOSE;
 
-    // then
     assertEquals(expected, actual);
-  }*/
+  }
 
-/*
   @Test
-  public void givenHeader_WhenHandleSetsTypeOfTag_ThenTypeOfTheTagEqualsHEADER() {
-
-    // given
+  public void givenHeader_WhenParse_ThenTypeOfTheTagEqualsHEADER() {
     String inputString = "<? xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\" ?>";
 
-    // when
-    myElement =  new TagElement();
     handler = new Handler() {
       @Override
-      public void handle(Element tagElement) {
-        myElement.setType(tagElement.getType());
+      public void handle(Element element) {
+        myElement = element;
       }
     };
     builder.onStart(handler);
@@ -130,27 +108,22 @@ public class XMLParserTest {
     TagElementType actual = myElement.getType();
     TagElementType expected = TagElementType.HEADER;
 
-    // then
     assertEquals(expected, actual);
   }
-*/
 
   @Test
-  public void givenHeader_WhenParseTagElement_ThenCompareExpectedAndActualTagElements() {
-
-    // given
+  public void givenHeader_WhenParse_ThenCompareExpectedAndActualTagElements() {
     String inputString = "<? xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\" ?>";
 
     TagElement expectedElement = new TagElement();
     expectedElement.setName("xml");
     Map<String, String> params = new HashMap<>();
-
     params.put("version", "1.0");
     params.put("encoding", "UTF-8");
     params.put("standalone", "no");
     expectedElement.setParams(params);
     expectedElement.setType(TagElementType.HEADER);
-    // when
+
     handler = new Handler() {
       @Override
       public void handle(Element element) {
@@ -162,16 +135,13 @@ public class XMLParserTest {
     parser.parse(inputString);
     Element actualElement = myElement;
 
-    // then
     assertEquals(expectedElement, actualElement);
   }
 
   @Test
   public void givenValidTagWithTextValue_WhenParseWholeTag_ThenOnTextValueInvoked() {
-    //given
     String inputString = "<? xml ?><tagname>TextValue</tagname>";
 
-    //when
     handler = new Handler() {
       @Override
       public void handle(Element element) {
@@ -183,20 +153,18 @@ public class XMLParserTest {
     parser.parse(inputString);
     String expected = "TextValue";
     String actual = myElement.getValue();
+
     assertEquals(expected,actual);
   }
 
-/*
   @Test
   public void givenTagWithAttributes_WhenParseWholeTag_ThenOnOpenTagInvokedAndCheckAttributes() {
-    //given
     String inputString = "<? xml ?><tagname param = \"param value\">TextValue</tagname>";
 
-    //when
     handler = new Handler() {
       @Override
-      public void handle(TagElement tagElement) {
-        myElement = tagElement;
+      public void handle(Element element) {
+        myElement = element;
       }
     };
     builder.onOpenTag(handler);
@@ -205,14 +173,15 @@ public class XMLParserTest {
     String expected = "param value";
     Map<String, String> params = myElement.getParams();
     String actual = params.get("param");
+
     assertEquals(expected,actual);
   }
-*/
 
 
   @Test
-  public void givenTagWithSingleTagElement_WhenParseWholeTag_ThenOnSingleTagInvokedAndCheckValue() {
+  public void givenTagWithSingleTagElement_WhenParseWholeTag_ThenOnSingleTagInvokedAndCheckName() {
     String inputString = "<? xml ?><tagname param = \"param 'value'\"/>";
+
     handler = new Handler() {
       @Override
       public void handle(Element element) {
@@ -222,12 +191,14 @@ public class XMLParserTest {
     builder.onSingleTag(handler);
     parser = builder.build();
     parser.parse(inputString);
-    assertEquals("tagname param=\"param 'value'\"", myElement.getValue());
+
+    assertEquals("tagname", myElement.getName());
   }
 
   @Test
   public void givenErrorSingleTag_WhenParse_ThenOnErrorTagInvoked() {
     String inputString = "<? xml ?><tagname param = \"param 'value'\"/6>";
+
     handler = new Handler() {
       @Override
       public void handle(Element element) {
@@ -238,12 +209,14 @@ public class XMLParserTest {
     parser = builder.build();
     parser.parse(inputString);
     String actual = myElement.getValue();
-    assertEquals("XMLSyntaxException caught", actual);
+
+    assertEquals("XML Syntax Error", actual);
   }
   
   @Test
   public void givenCommentInsideTextValue() {
     String inputString = "<? xml ?><tagname>Text<!--comment_text-->Value</tagname>";
+
     handler = new Handler() {
       @Override
       public void handle(Element element) {
@@ -255,6 +228,7 @@ public class XMLParserTest {
     parser.parse(inputString);
     String expected = "TextValue";
     String actual = myElement.getValue();
+
     assertEquals(expected,actual);
   }
 }
