@@ -165,7 +165,20 @@ enum TagState {
       if (CharUtil.isEmptyChar(c)) {
         result = END_HEADER;
       } else if (c == '>') {
-        result = VALID_TAG_END;
+        result = VALID_HEADER_END;
+      }
+      return result;
+    }
+  },
+  VALID_HEADER_END {
+    @Override
+    public TagState next(char c, TagElement.Builder builder) {
+      TagState result = INVALID_TAG_END;
+      
+      if (c == '<') {
+        result = OPEN;
+      }else if (CharUtil.isEmptyChar(c)) {
+        result = VALID_HEADER_END;
       }
       return result;
     }
