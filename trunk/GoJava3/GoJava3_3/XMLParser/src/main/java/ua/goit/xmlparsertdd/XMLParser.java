@@ -36,17 +36,25 @@ public class XMLParser implements Parser {
     try (InputStreamReader inputStreamReader = new InputStreamReader(iStreamReader)) {
       char c;
       TagState currentState = null;
-      while (inputStreamReader.ready()) {
-        c = (char) inputStreamReader.read();
-        
-        try {
-          currentState = machine.next(c, this);
-        } catch (XMLNestingException e) {
-          e.printStackTrace();
+      try {
+        while (inputStreamReader.ready()) {
+          c = (char) inputStreamReader.read();
+            currentState = machine.next(c, this);
+          if(currentState == TagState.INVALID_TAG_END) {
+            return;
+          }
         }
-        if(currentState == TagState.INVALID_TAG_END) {
-          return;
+      } catch (XMLNestingException e) {
+        //ignoring
+      }
+      if (currentState == TagState.VALID_TAG_END) {
+        if (machine.isStackEmpty()) {
+          sendEventToHandler(Event.VALID_END, new TextElement("Parsing successful"));
+        } else {
+          sendEventToHandler(Event.INVALID_END, new TextElement("Some tags aren't closed"));
         }
+      } else {
+        sendEventToHandler(Event.INVALID_END, new TextElement("Something wrong"));
       }
     } catch (IOException e) {
         e.printStackTrace();

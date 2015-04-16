@@ -12,6 +12,22 @@ public class TextElement extends Element {
     return textValue;
   }
 
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+
+    TextElement that = (TextElement) o;
+
+    return !(textValue != null ? !textValue.equals(that.textValue) : that.textValue != null);
+
+  }
+
+  @Override
+  public int hashCode() {
+    return textValue != null ? textValue.hashCode() : 0;
+  }
+
   static class Builder {
     private StringBuilder textValue = new StringBuilder();
 

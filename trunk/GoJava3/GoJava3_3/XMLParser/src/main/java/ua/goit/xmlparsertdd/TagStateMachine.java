@@ -20,8 +20,7 @@ public class TagStateMachine {
   TagState currentState = TagState.INIT;
   private TagElement.Builder tagBuilder = TagElement.Builder.newBuilder();
   private TextElement.Builder textBuilder = TextElement.Builder.newBuilder();
-  private ErrorElement.Builder errorBuilder = ErrorElement.Builder.newBuilder();
-  private TagStack tagStack = new TagStack(); 
+  private TagStack tagStack = new TagStack();
   private boolean hasNotSentTextValue = false;
   
   public TagState next(char c, XMLParser parser) throws XMLNestingException{
@@ -37,9 +36,7 @@ public class TagStateMachine {
           currentState == TagState.VALID_HEADER_END) {
         createTagElement(parser);
       }else if (currentState == TagState.INVALID_TAG_END) {
-        String textError = "XML Syntax Error";
-        errorBuilder.setErrorMessage(textError);
-        parser.sendEventToHandler(Event.INVALID_END, errorBuilder.build());
+        parser.sendEventToHandler(Event.INVALID_END, new TextElement("XML Syntax Error"));
       } 
       
       if (previousState == TagState.TEXT_VALUE) {
@@ -79,5 +76,9 @@ public class TagStateMachine {
       tagStack.pop();
       parser.sendEventToHandler(Event.SINGLE_TAG, result);
     }
+  }
+
+  boolean isStackEmpty() {
+    return tagStack.isStackEmpty();
   }
 }

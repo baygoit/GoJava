@@ -231,4 +231,22 @@ public class XMLParserTest {
 
     assertEquals(expected,actual);
   }
+
+  @Test
+  public void checkOnValidEndOfString() {
+    String inputString = "<? xml ?><tagname>Text<!--comment_text-->Value</tagname>";
+
+    handler = new Handler() {
+      @Override
+      public void handle(Element element) {
+        myElement = element;
+      }
+    };
+    builder.onEnd(handler);
+    parser = builder.build();
+    parser.parse(inputString);
+    TextElement expected = new TextElement("Parsing successful");
+
+    assertEquals(expected, myElement);
+  }
 }

@@ -8,6 +8,10 @@ public class TagStack {
   boolean hadRootTag = false;
   boolean hadHeaderTag = false;
 
+  boolean isStackEmpty() {
+    return tagStack.isEmpty();
+  }
+
   void push(TagElement tag) throws XMLNestingException {
 
     boolean headerAllowed = !hadRootTag && !hadHeaderTag;
