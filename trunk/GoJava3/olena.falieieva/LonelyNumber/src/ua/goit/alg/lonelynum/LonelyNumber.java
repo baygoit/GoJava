@@ -3,7 +3,6 @@ package ua.goit.alg.lonelynum;
 public class LonelyNumber {
 
     public static int search(int[] numArray) {
-
 	int[] bit = new int[32];
 
 	for (int num : numArray) {
