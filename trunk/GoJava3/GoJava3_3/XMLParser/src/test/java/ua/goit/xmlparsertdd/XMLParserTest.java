@@ -75,7 +75,7 @@ public class XMLParserTest {
   @Test
   public void givenCloseTag_WhenHandleSetsTypeOfTag_ThenTypeOfTheTagEqualsCLOSE() {
 
-    String inputString = "</name>";
+    String inputString = "<name></name>";
 
     handler = new Handler() {
       @Override
