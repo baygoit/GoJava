@@ -44,8 +44,12 @@ public class TagStateMachine {
         hasNotSentTextValue = true;
       }
     }
-    
-    if(hasNotSentTextValue && !commentStates.contains(currentState) && currentState != TagState.TEXT_VALUE){
+
+    boolean isTextValueReadyToBeSent = hasNotSentTextValue
+                                      && !commentStates.contains(currentState)
+                                      && currentState != TagState.TEXT_VALUE;
+
+    if(isTextValueReadyToBeSent){
       parser.sendEventToHandler(Event.TEXT_VALUE, textBuilder.build());
       textBuilder = TextElement.Builder.newBuilder();
       hasNotSentTextValue = false;
