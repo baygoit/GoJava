@@ -20,5 +20,6 @@
 	  	 		</tr>
 			</c:forEach>
 	  	</table>	  	
+	  	<a href="/kickstarter/deleteCategory/${id}"><c:out value="Delete"/></a>
     </body>
 </html>

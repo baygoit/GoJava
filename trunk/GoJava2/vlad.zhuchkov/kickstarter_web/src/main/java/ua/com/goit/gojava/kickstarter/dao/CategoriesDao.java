@@ -30,7 +30,6 @@ public class CategoriesDao extends AbstractDao implements Categories {
 	public void add(Category category) {
 		 Session session = getCurrentSession();
 		 session.save(category);
-
 	}
 
 	@Override
@@ -47,5 +46,9 @@ public class CategoriesDao extends AbstractDao implements Categories {
 		 Category category = (Category) session.get(Category.class, i);
 		 return category;
 	}
-
+	public void delete(int i){
+		Session session = getCurrentSession();
+		Query query = session.createQuery("Delete Category where id = "+i);
+		query.executeUpdate();
+	}
 }

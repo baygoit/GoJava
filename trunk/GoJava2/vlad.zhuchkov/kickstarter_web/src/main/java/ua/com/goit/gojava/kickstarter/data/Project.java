@@ -21,9 +21,11 @@ public class Project implements Serializable {
 	private int id;
 	@Column(name = "name")
 	private String name;
+	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "category_id", nullable = false)
 	private Category category;
+	
 	@Column(name = "description")
 	private String description;
 	@Column(name = "history")

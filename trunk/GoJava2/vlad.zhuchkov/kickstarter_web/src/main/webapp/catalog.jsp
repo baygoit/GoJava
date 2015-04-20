@@ -13,5 +13,6 @@
 		<a href="projects/${category.id}"><c:out value="${category.name}" /></a>
 		<p>
 	</c:forEach>
+	<a href="addCategory"><c:out value="Add new category"/></a>
 </body>
 </html>

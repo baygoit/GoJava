@@ -96,7 +96,7 @@
 			<version>3.1.0</version>
 		</dependency>
 
-		<dependency>
+		<!--  <dependency>
 			<groupId>org.jboss.as</groupId>
 			<artifactId>jboss-as-embedded</artifactId>
 			<version>7.1.1.Final</version>
@@ -105,7 +105,7 @@
 			<groupId>org.jboss.as</groupId>
 			<artifactId>jboss-as-jpa-hibernate4</artifactId>
 			<version>7.2.0.Final</version>
-		</dependency>
+		</dependency>-->
 		
 		<dependency>
 			<groupId>org.hibernate</groupId>
@@ -115,7 +115,7 @@
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-entitymanager</artifactId>
-			<version>4.3.1.Final</version>
+			<version>4.2.0.Final</version>
 		</dependency>
 		<dependency>
 			<groupId>org.hibernate.javax.persistence</groupId>

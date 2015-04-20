@@ -11,7 +11,7 @@ public class AbstractDao {
 	
 	
 	
-	Session getCurrentSession(){
+	protected Session getCurrentSession(){
 		try{
 			return sessionFactory.getCurrentSession();
 		}catch(HibernateException e){
