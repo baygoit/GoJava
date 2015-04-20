@@ -7,14 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import static org.junit.Assert.assertEquals;
-
 public class LongXMLStringTest {
-  Element myElement;
-  Handler handler;
-  Map<String, List> actual;
-  Map<String, List> expected;
-
+  Map<String, List<Element>> actual;
+  Map<String, List<Element>> expected;
   XMLParser.Builder builder;
   Parser parser;
 
@@ -29,12 +24,7 @@ public class LongXMLStringTest {
             "<? xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\" ?>" +
             "<tagname>Text<!--comment_text-->Value</tagname>" +
             "<tagname2>Text Value</tagname2>";
-    handler = new Handler() {
-      @Override
-      public void handle(Element element) {
-        myElement = element;
-      }
-    };
+
     builder.onStart(new Handler() {
       @Override
       public void handle(Element element) {
@@ -123,6 +113,8 @@ public class LongXMLStringTest {
     parser = builder.build();
     parser.parse(inputString);
 
-    assertEquals("tagname1", myElement.getName());
+    for (int i = 0; i < actual.size(); i++) {
+      System.out.println(actual.get(i).toString());
+    }
   }
 }
