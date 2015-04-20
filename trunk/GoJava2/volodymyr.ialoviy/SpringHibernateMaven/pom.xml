@@ -16,12 +16,6 @@
 	</properties>
 
 	<dependencies>
-		
-		<dependency>
-			<groupId>commons-dbcp</groupId>
-			<artifactId>commons-dbcp</artifactId>
-			<version>1.2.2</version>
-		</dependency>
 
 		<dependency>
 			<groupId>org.codehaus.jackson</groupId>
@@ -157,6 +151,15 @@
 					<groupId>org.apache.tomcat.maven</groupId>
 					<artifactId>tomcat7-maven-plugin</artifactId>
 					<version>2.2</version>
+				</plugin>
+
+				<plugin>
+					<groupId>com.heroku.sdk</groupId>
+					<artifactId>heroku-maven-plugin</artifactId>
+					<version>0.3.6</version>
+					<configuration>
+						<appName>kickhiber</appName>
+					</configuration>
 				</plugin>
 
 			</plugins>
