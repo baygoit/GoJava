@@ -20,12 +20,16 @@ public class TextElement extends Element {
     TextElement that = (TextElement) o;
 
     return !(textValue != null ? !textValue.equals(that.textValue) : that.textValue != null);
-
   }
 
   @Override
   public int hashCode() {
     return textValue != null ? textValue.hashCode() : 0;
+  }
+
+  @Override
+  public String toString() {
+    return textValue;
   }
 
   static class Builder {
@@ -37,10 +41,6 @@ public class TextElement extends Element {
 
     public void buildTextValue(String text) {
       textValue.append(text);
-    }
-
-    public void resetTextValue() {
-      textValue = new StringBuilder();
     }
 
     public TextElement build() {

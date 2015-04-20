@@ -324,7 +324,6 @@ enum TagState {
       return result;
     }
   },
-  
   VALID_COMMENT_END {
     @Override
     public TagState next(char c, TagElement.Builder builder) {

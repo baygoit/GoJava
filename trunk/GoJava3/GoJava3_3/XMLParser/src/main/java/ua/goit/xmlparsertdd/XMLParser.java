@@ -32,7 +32,6 @@ public class XMLParser implements Parser {
 
   @Override
   public void parse(InputStream iStreamReader) {
-
     try (InputStreamReader inputStreamReader = new InputStreamReader(iStreamReader)) {
       char c;
       TagState currentState = null;
