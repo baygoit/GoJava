@@ -1,6 +1,9 @@
-package ua.goit.xmlparsertdd;
+package ua.goit.xmlparsertdd.enums;
 
-enum TagState {
+import ua.goit.xmlparsertdd.utils.CharUtil;
+import ua.goit.xmlparsertdd.elements.TagElement;
+
+public enum TagState {
   INIT {
     @Override
     public TagState next(char c, TagElement.Builder builder) {
@@ -352,7 +355,7 @@ enum TagState {
   },
   CLOSE {
     @Override
-    TagState next(char c, TagElement.Builder builder) {
+    public TagState next(char c, TagElement.Builder builder) {
       TagState result = INVALID_TAG_END;
       if (CharUtil.isEmptyChar(c)) {
         result = CLOSE;
@@ -365,7 +368,7 @@ enum TagState {
   },
   CLOSE_NAME {
     @Override
-    TagState next(char c, TagElement.Builder builder) {
+    public TagState next(char c, TagElement.Builder builder) {
       TagState result = INVALID_TAG_END;
       if (CharUtil.isNameChar(c)) {
         result = CLOSE_NAME;
@@ -380,7 +383,7 @@ enum TagState {
   },
   END_CLOSE_NAME {
     @Override
-    TagState next(char c, TagElement.Builder builder) {
+    public TagState next(char c, TagElement.Builder builder) {
       TagState result = INVALID_TAG_END;
       if (CharUtil.isEmptyChar(c)) {
         result = END_CLOSE_NAME;
@@ -392,7 +395,7 @@ enum TagState {
   },
   EXCLAM_MARK {
     @Override
-    TagState next(char c, TagElement.Builder builder) {
+    public TagState next(char c, TagElement.Builder builder) {
       TagState result = INVALID_TAG_END;
       if (c == '-') {
         result = HYPHEN_BEFORE;
@@ -402,7 +405,7 @@ enum TagState {
   },
   HYPHEN_BEFORE {
     @Override
-    TagState next(char c, TagElement.Builder builder) {
+    public TagState next(char c, TagElement.Builder builder) {
       TagState result = INVALID_TAG_END;
       if (c == '-') {
         result = COMMENT;
@@ -412,7 +415,7 @@ enum TagState {
   },
   COMMENT {
     @Override
-    TagState next(char c, TagElement.Builder builder) {
+    public TagState next(char c, TagElement.Builder builder) {
       TagState result = COMMENT;
       if (c == '-') {
         result = FIRST_HYPHEN_AFTER;
@@ -422,7 +425,7 @@ enum TagState {
   },
   FIRST_HYPHEN_AFTER {
     @Override
-    TagState next(char c, TagElement.Builder builder) {
+    public TagState next(char c, TagElement.Builder builder) {
       TagState result = COMMENT;
       if (c == '-') {
         result = SECOND_HYPHEN_AFTER;
@@ -432,7 +435,7 @@ enum TagState {
   },
   SECOND_HYPHEN_AFTER {
     @Override
-    TagState next(char c, TagElement.Builder builder) {
+    public TagState next(char c, TagElement.Builder builder) {
       TagState result = COMMENT;
       if (c == '>') {
         result = VALID_COMMENT_END;
@@ -444,5 +447,5 @@ enum TagState {
     }
   };
 
-  abstract TagState next(char c, TagElement.Builder builder);
+  public abstract TagState next(char c, TagElement.Builder builder);
 }

@@ -1,4 +1,4 @@
-package ua.goit.xmlparsertdd;
+package ua.goit.xmlparsertdd.elements;
 
 public class TextElement extends Element {
   private String textValue;
@@ -32,7 +32,7 @@ public class TextElement extends Element {
     return textValue;
   }
 
-  static class Builder {
+  public static class Builder {
     private StringBuilder textValue = new StringBuilder();
 
     public void buildTextValue(char c) {

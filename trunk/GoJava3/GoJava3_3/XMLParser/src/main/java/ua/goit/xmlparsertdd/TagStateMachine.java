@@ -1,5 +1,11 @@
 package ua.goit.xmlparsertdd;
 
+import ua.goit.xmlparsertdd.elements.TagElement;
+import ua.goit.xmlparsertdd.elements.TextElement;
+import ua.goit.xmlparsertdd.enums.Event;
+import ua.goit.xmlparsertdd.enums.TagElementType;
+import ua.goit.xmlparsertdd.enums.TagState;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -23,7 +29,7 @@ public class TagStateMachine {
   private TagStack tagStack = new TagStack();
   private boolean hasNotSentTextValue = false;
   
-  public TagState next(char c, XMLParser parser) throws XMLNestingException{
+  public TagState next(char c, XMLParser parser) throws XMLNestingException {
     TagState previousState = currentState;
     currentState = currentState.next(c, tagBuilder);
 

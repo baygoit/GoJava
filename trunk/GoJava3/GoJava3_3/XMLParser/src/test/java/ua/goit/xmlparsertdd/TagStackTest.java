@@ -1,6 +1,7 @@
 package ua.goit.xmlparsertdd;
 
 import org.junit.Test;
+import ua.goit.xmlparsertdd.enums.TagState;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;

@@ -2,7 +2,7 @@ package ua.goit.xmlparsertdd;
 
 public class XMLNestingException extends Exception{
 
-  XMLNestingException(String msg) {
+  public XMLNestingException(String msg) {
     super(msg);
   }
   XMLNestingException( ) {

@@ -1,21 +1,23 @@
-package ua.goit.xmlparsertdd;
+package ua.goit.xmlparsertdd.elements;
+
+import ua.goit.xmlparsertdd.enums.TagElementType;
 
 import java.util.Map;
 
 public abstract class Element {
-  String getValue() {
+  public String getValue() {
     throw new UnsupportedOperationException("Method getValue is unsupported");
   }
 
-  String getName() {
+  public String getName() {
     throw new UnsupportedOperationException("Method getName is unsupported");
   }
 
-  TagElementType getType() {
+  public TagElementType getType() {
     throw new UnsupportedOperationException("Method getType is unsupported");
   }
 
-  Map<String, String> getParams() {
+  public Map<String, String> getParams() {
     throw new UnsupportedOperationException("Method getParams is unsupported");
   }
 }

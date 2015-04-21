@@ -1,5 +1,11 @@
 package ua.goit.xmlparsertdd;
 
+import ua.goit.xmlparsertdd.elements.Element;
+import ua.goit.xmlparsertdd.enums.Event;
+import ua.goit.xmlparsertdd.enums.TagState;
+import ua.goit.xmlparsertdd.interfaces.Handler;
+import ua.goit.xmlparsertdd.interfaces.Parser;
+
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;

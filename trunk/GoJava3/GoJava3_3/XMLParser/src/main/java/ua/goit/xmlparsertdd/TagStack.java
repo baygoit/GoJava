@@ -1,5 +1,8 @@
 package ua.goit.xmlparsertdd;
 
+import ua.goit.xmlparsertdd.elements.TagElement;
+import ua.goit.xmlparsertdd.enums.TagElementType;
+
 import java.util.Deque;
 import java.util.LinkedList;
 

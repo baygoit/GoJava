@@ -1,5 +1,7 @@
-package ua.goit.xmlparsertdd;
+package ua.goit.xmlparsertdd.elements;
 
+
+import ua.goit.xmlparsertdd.enums.TagElementType;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -66,14 +68,14 @@ public class TagElement extends Element {
     return result;
   }
 
-  static class Builder {
+  public static class Builder {
     private TagElementType type;
     private StringBuilder name = new StringBuilder();
     private Map<String, String> params = new HashMap<>();
     private StringBuilder paramName = new StringBuilder();
     private StringBuilder paramValue = new StringBuilder();
 
-    static Builder newBuilder() {
+    public static Builder newBuilder() {
       return new Builder();
     }
 

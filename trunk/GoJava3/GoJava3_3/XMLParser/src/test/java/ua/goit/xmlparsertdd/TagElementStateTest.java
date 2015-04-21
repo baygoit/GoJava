@@ -1,6 +1,8 @@
 package ua.goit.xmlparsertdd;
 
 import org.junit.Test;
+import ua.goit.xmlparsertdd.elements.TagElement;
+import ua.goit.xmlparsertdd.enums.TagState;
 
 import static org.junit.Assert.assertEquals;
 

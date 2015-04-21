@@ -1,4 +1,4 @@
-package ua.goit.xmlparsertdd;
+package ua.goit.xmlparsertdd.utils;
 
 import java.util.HashSet;
 import java.util.Set;
