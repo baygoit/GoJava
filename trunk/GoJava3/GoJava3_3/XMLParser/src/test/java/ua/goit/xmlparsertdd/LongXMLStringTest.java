@@ -5,9 +5,10 @@ import org.junit.Test;
 import ua.goit.xmlparsertdd.elements.Element;
 import ua.goit.xmlparsertdd.elements.TagElement;
 import ua.goit.xmlparsertdd.elements.TextElement;
-import ua.goit.xmlparsertdd.enums.TagElementType;
-import ua.goit.xmlparsertdd.interfaces.Handler;
-import ua.goit.xmlparsertdd.interfaces.Parser;
+import ua.goit.xmlparsertdd.elements.TagElementType;
+import ua.goit.xmlparsertdd.handlers.Handler;
+import ua.goit.xmlparsertdd.parsers.Parser;
+import ua.goit.xmlparsertdd.parsers.XMLParser;
 
 import java.util.ArrayList;
 import java.util.HashMap;

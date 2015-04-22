@@ -1,7 +1,8 @@
-package ua.goit.xmlparsertdd;
+package ua.goit.xmlparsertdd.statemachine;
 
 import ua.goit.xmlparsertdd.elements.TagElement;
-import ua.goit.xmlparsertdd.enums.TagElementType;
+import ua.goit.xmlparsertdd.elements.TagElementType;
+import ua.goit.xmlparsertdd.exceptions.XMLNestingException;
 
 import java.util.Deque;
 import java.util.LinkedList;

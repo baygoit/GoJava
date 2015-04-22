@@ -1,4 +1,4 @@
-package ua.goit.xmlparsertdd.enums;
+package ua.goit.xmlparsertdd.elements;
 
 public enum TagElementType {
   HEADER, OPEN, CLOSE, SINGLE

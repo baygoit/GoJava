@@ -1,7 +1,10 @@
 package ua.goit.xmlparsertdd;
 
 import org.junit.Test;
-import ua.goit.xmlparsertdd.enums.TagState;
+import ua.goit.xmlparsertdd.statemachine.TagState;
+import ua.goit.xmlparsertdd.exceptions.XMLNestingException;
+import ua.goit.xmlparsertdd.parsers.XMLParser;
+import ua.goit.xmlparsertdd.statemachine.TagStateMachine;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -12,7 +15,7 @@ import static org.junit.Assert.assertEquals;
 
 public class TagStackTest {
   
-  TagState runMachine(String testString) throws XMLNestingException{
+  TagState runMachine(String testString) throws XMLNestingException {
     XMLParser.Builder builder = XMLParser.Builder.newParserBuilder();
     XMLParser parser = builder.build();
     TagStateMachine machine = new TagStateMachine();

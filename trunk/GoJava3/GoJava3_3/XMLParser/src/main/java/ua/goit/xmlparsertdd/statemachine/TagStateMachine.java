@@ -1,10 +1,13 @@
-package ua.goit.xmlparsertdd;
+package ua.goit.xmlparsertdd.statemachine;
 
 import ua.goit.xmlparsertdd.elements.TagElement;
 import ua.goit.xmlparsertdd.elements.TextElement;
-import ua.goit.xmlparsertdd.enums.Event;
-import ua.goit.xmlparsertdd.enums.TagElementType;
-import ua.goit.xmlparsertdd.enums.TagState;
+import ua.goit.xmlparsertdd.statemachine.Event;
+import ua.goit.xmlparsertdd.elements.TagElementType;
+import ua.goit.xmlparsertdd.statemachine.TagStack;
+import ua.goit.xmlparsertdd.statemachine.TagState;
+import ua.goit.xmlparsertdd.exceptions.XMLNestingException;
+import ua.goit.xmlparsertdd.parsers.XMLParser;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -101,7 +104,7 @@ public class TagStateMachine {
     }
   }
 
-  boolean isStackEmpty() {
+  public boolean isStackEmpty() {
     return tagStack.isStackEmpty();
   }
 }

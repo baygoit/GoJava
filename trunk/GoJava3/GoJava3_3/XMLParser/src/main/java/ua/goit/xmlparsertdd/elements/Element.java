@@ -1,7 +1,5 @@
 package ua.goit.xmlparsertdd.elements;
 
-import ua.goit.xmlparsertdd.enums.TagElementType;
-
 import java.util.Map;
 
 public abstract class Element {

@@ -1,4 +1,4 @@
-package ua.goit.xmlparsertdd.interfaces;
+package ua.goit.xmlparsertdd.handlers;
 
 import ua.goit.xmlparsertdd.elements.Element;
 

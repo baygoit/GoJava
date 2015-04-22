@@ -1,4 +1,4 @@
-package ua.goit.xmlparsertdd.interfaces;
+package ua.goit.xmlparsertdd.parsers;
 
 import java.io.File;
 import java.io.FileNotFoundException;

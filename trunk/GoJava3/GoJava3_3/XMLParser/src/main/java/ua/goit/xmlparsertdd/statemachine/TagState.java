@@ -1,5 +1,6 @@
-package ua.goit.xmlparsertdd.enums;
+package ua.goit.xmlparsertdd.statemachine;
 
+import ua.goit.xmlparsertdd.elements.TagElementType;
 import ua.goit.xmlparsertdd.utils.CharUtil;
 import ua.goit.xmlparsertdd.elements.TagElement;
 

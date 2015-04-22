@@ -1,10 +1,11 @@
-package ua.goit.xmlparsertdd;
+package ua.goit.xmlparsertdd.parsers;
 
+import ua.goit.xmlparsertdd.statemachine.TagStateMachine;
+import ua.goit.xmlparsertdd.exceptions.XMLNestingException;
 import ua.goit.xmlparsertdd.elements.Element;
-import ua.goit.xmlparsertdd.enums.Event;
-import ua.goit.xmlparsertdd.enums.TagState;
-import ua.goit.xmlparsertdd.interfaces.Handler;
-import ua.goit.xmlparsertdd.interfaces.Parser;
+import ua.goit.xmlparsertdd.statemachine.Event;
+import ua.goit.xmlparsertdd.statemachine.TagState;
+import ua.goit.xmlparsertdd.handlers.Handler;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
