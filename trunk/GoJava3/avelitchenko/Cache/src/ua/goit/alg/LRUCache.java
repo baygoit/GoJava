@@ -6,7 +6,7 @@ import java.util.Map;
 public class LRUCache {
 
   private int sizeLimit;
-  private Map<Integer,Node> cacheMap = new HashMap<>();
+  private Map<Integer,Node> cacheMap = new HashMap<Integer,Node>();
 
   private Node first;
   private Node last;
