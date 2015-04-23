@@ -10,6 +10,7 @@
 			<th>Backers</th>
 			<th>Story</th>
 			<th>Link</th>
+			<th>User/Team</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -26,6 +27,11 @@
 			<td><c:out value="${project.status.backers}" /></td>
 			<td><c:out value="${project.story}" /></td>
 			<td><c:out value="${project.link}" /></td>
+			<td>
+				<a href="<spring:url value="/user/${project.user.name}.html" />">
+					${project.user.name}
+				</a>
+			</td>
 		</tr>
 	</tbody>
 </table>

@@ -22,4 +22,9 @@
 		<put-attribute name="body" value="/WEB-INF/jsp/project.jsp" />
 		<put-attribute name="current" value="project" />
 	</definition>
+	<definition name="user" extends="common">
+		<put-attribute name="title" value="Kikcstarter user" />
+		<put-attribute name="body" value="/WEB-INF/jsp/user.jsp" />
+		<put-attribute name="current" value="user" />
+	</definition>
 </tiles-definitions>

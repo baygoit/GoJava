@@ -50,13 +50,14 @@ public class Project {
 	public Project() {}
 	
 	@PersistenceConstructor
-	public Project(String name, String description, String story, String link, Category category, ProjectStatus status) {
+	public Project(String name, String description, String story, String link, Category category, ProjectStatus status, User user) {
 		this.name = name;
 		this.description = description;
 		this.story = story;
 		this.link = link;
 		this.category = category;
 		this.status = status;
+		this.user = user;
 	}
 
 	public void setId(int id) {

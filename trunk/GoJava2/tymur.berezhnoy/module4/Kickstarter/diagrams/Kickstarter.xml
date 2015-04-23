@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?><entities>
 	<entity>
+		<entity-name>com.gojava2.kickstarter.entity.Category</entity-name>
+		<entity-width>120</entity-width>
+		<entity-height>146</entity-height>
+		<entity-X-Coordinate>240</entity-X-Coordinate>
+		<entity-Y-Coordinate>60</entity-Y-Coordinate>
+		<primary-collapsed>false</primary-collapsed>
+		<relation-collapsed>false</relation-collapsed>
+		<basic-collapsed>false</basic-collapsed>
+	</entity>
+
+	<entity>
 		<entity-name>com.gojava2.kickstarter.entity.Quote</entity-name>
 		<entity-width>120</entity-width>
 		<entity-height>148</entity-height>
@@ -11,11 +22,11 @@
 	</entity>
 
 	<entity>
-		<entity-name>com.gojava2.kickstarter.entity.Category</entity-name>
+		<entity-name>com.gojava2.kickstarter.entity.ProjectStatus</entity-name>
 		<entity-width>120</entity-width>
-		<entity-height>108</entity-height>
-		<entity-X-Coordinate>240</entity-X-Coordinate>
-		<entity-Y-Coordinate>60</entity-Y-Coordinate>
+		<entity-height>168</entity-height>
+		<entity-X-Coordinate>442</entity-X-Coordinate>
+		<entity-Y-Coordinate>410</entity-Y-Coordinate>
 		<primary-collapsed>false</primary-collapsed>
 		<relation-collapsed>false</relation-collapsed>
 		<basic-collapsed>false</basic-collapsed>
@@ -33,11 +44,11 @@
 	</entity>
 
 	<entity>
-		<entity-name>com.gojava2.kickstarter.entity.ProjectStatus</entity-name>
+		<entity-name>com.gojava2.kickstarter.entity.User</entity-name>
 		<entity-width>120</entity-width>
-		<entity-height>168</entity-height>
-		<entity-X-Coordinate>442</entity-X-Coordinate>
-		<entity-Y-Coordinate>410</entity-Y-Coordinate>
+		<entity-height>186</entity-height>
+		<entity-X-Coordinate>740</entity-X-Coordinate>
+		<entity-Y-Coordinate>60</entity-Y-Coordinate>
 		<primary-collapsed>false</primary-collapsed>
 		<relation-collapsed>false</relation-collapsed>
 		<basic-collapsed>false</basic-collapsed>

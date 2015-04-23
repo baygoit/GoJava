@@ -2,6 +2,7 @@ package com.gojava2.kickstarter.entity;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,7 +20,7 @@ public class User {
 	@GeneratedValue
 	private Integer id;
 	
-	@Column(nullable = false, length = 15)
+	@Column(unique = true, nullable = false, length = 15)
 	private String name;
 	
 	@Column(nullable = false)
@@ -28,7 +29,7 @@ public class User {
 	@Column(nullable = false)
 	private String password;
 
-	@OneToMany(mappedBy = "user")
+	@OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
     private List<Project> projects;
 	
 	public User() {}

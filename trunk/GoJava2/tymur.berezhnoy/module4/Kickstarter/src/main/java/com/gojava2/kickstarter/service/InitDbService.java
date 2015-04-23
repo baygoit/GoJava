@@ -53,18 +53,19 @@ public class InitDbService {
 		Category catgeroryDance = createCategory("Dance");
 		Category catgeroryGames = createCategory("Games");
 		
-		createProject("NY artists", "Some description.", "Here will be history", "http://www.nyart.com", catgeroryArt, createStatus(50000, 10000, 40, 13));
-		createProject("The observatory", "Little observatory.", "Here will be history", "http://www.observatory.com", catgeroryArt, createStatus(25000, 4000, 60, 10));
-		createProject("The sing for hope pianos", "The pianos who play in the streat.", "Here will be history", "http://www.pianos.com", catgeroryArt, createStatus(70000, 30000, 30, 17));
-		createProject("Super Man", "Comic about a man having super powers.", "Here will be history", "http://www.superman.com", catgeroryComics, createStatus(60000, 100, 70, 1));
-		createProject("Hulk", "Comics on the green hero named Hulk.", "Here will be history", "http://www.hulk.com", catgeroryComics, createStatus(5000, 900, 25, 1));
-		createProject("Spider man", "Little - little spider man.", "Here will be history", "http://www.spiderman.com", catgeroryComics, createStatus(100000, 8000, 70, 9));
-		createProject("Dance and Fly", "You can dance, you can fly, we belive in you!", "Here will be history", "http://www.df.com", catgeroryDance, createStatus(10000, 1000, 15, 1));
-		createProject("Tiny Epic Galaxies", "Develop your empire and colonize planets to create the most powerful galaxy!", "Here will be history", "http://www.galaxies.com", catgeroryGames, createStatus(100000, 8000, 70, 9));
-		createProject("Shadowrun: Hong Kong", "A Shadowrun cyberpunk cRPG set in 2056s Magically Awakened Hong Kong by the developers of Shadowrun Returns and Dragonfall.", "Here will be history", "http://www.shadowrun.com", catgeroryGames, createStatus(100000, 8000, 70, 9));
-		createProject("Starr Mazer", "A retro-sexy Point-and-Click Adventure Shoot em Up in SPACE!", "Here will be history", "http://www.starr mazer.com", catgeroryGames, createStatus(100000, 8000, 70, 9));
+		User user = createUser("Timur", "smth", "12345");
 		
-		createUser("Timur", "smth", "12345");
+		createProject("NY artists", "Some description.", "Here will be history", "http://www.nyart.com", catgeroryArt, createStatus(50000, 10000, 40, 13), user);
+		createProject("The observatory", "Little observatory.", "Here will be history", "http://www.observatory.com", catgeroryArt, createStatus(25000, 4000, 60, 10), user);
+		createProject("The sing for hope pianos", "The pianos who play in the streat.", "Here will be history", "http://www.pianos.com", catgeroryArt, createStatus(70000, 30000, 30, 17), user);
+		createProject("Super Man", "Comic about a man having super powers.", "Here will be history", "http://www.superman.com", catgeroryComics, createStatus(60000, 100, 70, 1), user);
+		createProject("Hulk", "Comics on the green hero named Hulk.", "Here will be history", "http://www.hulk.com", catgeroryComics, createStatus(5000, 900, 25, 1), user);
+		createProject("Spider man", "Little - little spider man.", "Here will be history", "http://www.spiderman.com", catgeroryComics, createStatus(100000, 8000, 70, 9), user);
+		createProject("Dance and Fly", "You can dance, you can fly, we belive in you!", "Here will be history", "http://www.df.com", catgeroryDance, createStatus(10000, 1000, 15, 1), user);
+		createProject("Tiny Epic Galaxies", "Develop your empire and colonize planets to create the most powerful galaxy!", "Here will be history", "http://www.galaxies.com", catgeroryGames, createStatus(100000, 8000, 70, 9), user);
+		createProject("Shadowrun: Hong Kong", "A Shadowrun cyberpunk cRPG set in 2056s Magically Awakened Hong Kong by the developers of Shadowrun Returns and Dragonfall.", "Here will be history", "http://www.shadowrun.com", catgeroryGames, createStatus(100000, 8000, 70, 9), user);
+		createProject("Starr Mazer", "A retro-sexy Point-and-Click Adventure Shoot em Up in SPACE!", "Here will be history", "http://www.starr mazer.com", catgeroryGames, createStatus(100000, 8000, 70, 9), user);
+		
 	}
 	
 	private void createQuote(String content, String author) {
@@ -78,14 +79,15 @@ public class InitDbService {
 		return category;
 	}
 	
-	private void createProject(String name, String description, String story, String link, Category category, ProjectStatus status) {
-		Project project = new Project(name, description, story, link, category, status);
+	private void createProject(String name, String description, String story, String link, Category category, ProjectStatus status, User user) {
+		Project project = new Project(name, description, story, link, category, status, user);
 		projectRepository.save(project);
 	}
 	
-	private void createUser(String name, String email, String password) {
+	private User createUser(String name, String email, String password) {
 		User user = new User(name, email, password);
 		userRepository.save(user);
+		return user;
 	}
 	
 	private ProjectStatus createStatus(int requiredAmount, int total, int daysLeft, int backers) {
