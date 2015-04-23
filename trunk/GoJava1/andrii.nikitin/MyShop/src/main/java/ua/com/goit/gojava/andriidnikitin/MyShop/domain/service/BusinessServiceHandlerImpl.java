@@ -14,7 +14,20 @@ public class BusinessServiceHandlerImpl implements BusinessServiceHandler{
 	
 	private DeliveryManager deliveryManager;
 	
-	private WarehouseManager warehouseManager;
+	private WarehouseManager warehouseManager;	
+
+
+	public void setGoodCatalog(GoodCatalog goodCatalog) {
+		this.goodCatalog = goodCatalog;
+	}
+
+	public void setDeliveryManager(DeliveryManager deliveryManager) {
+		this.deliveryManager = deliveryManager;
+	}
+
+	public void setWarehouseManager(WarehouseManager warehouseManager) {
+		this.warehouseManager = warehouseManager;
+	}
 
 	@Override
 	public GoodType createType(String name, Integer parentId)
@@ -113,16 +126,14 @@ public class BusinessServiceHandlerImpl implements BusinessServiceHandler{
 		return deliveryManager.deliverGood(good, quantity, price);
 	}
 
-	public void setGoodCatalog(GoodCatalog goodCatalog) {
-		this.goodCatalog = goodCatalog;
+	@Override
+	public List<GoodType> getAllChildrenTypes() throws MyShopException {
+		return goodCatalog.getAllChildrenTypes();
 	}
 
-	public void setDeliveryManager(DeliveryManager deliveryManager) {
-		this.deliveryManager = deliveryManager;
-	}
-
-	public void setWarehouseManager(WarehouseManager warehouseManager) {
-		this.warehouseManager = warehouseManager;
+	@Override
+	public List<Good> getGoodsByType(GoodType type) throws MyShopException {
+		return goodCatalog.getGoodsByType(type);
 	}
 
 }

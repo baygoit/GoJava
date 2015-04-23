@@ -36,5 +36,9 @@ public interface GoodCatalog {
 		public List<GoodType> getGoodTypesFilteringByName(String query) throws MyShopException;
 		
 		public List<GoodType> getGoodTypesByName(String name) throws MyShopException;
+		
+		public List<GoodType> getAllChildrenTypes() throws MyShopException;
+
+		public List<Good> getGoodsByType(GoodType type) throws MyShopException;
 
 	}

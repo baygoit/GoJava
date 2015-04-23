@@ -1,5 +1,6 @@
 package ua.com.goit.gojava.andriidnikitin.MyShop.domain.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -194,6 +195,38 @@ public class GoodCatalogImpl implements GoodCatalog{
 			throw new MyShopException(e);
 		}
 		return result;
+	}
+
+	@Override
+	public List<GoodType> getAllChildrenTypes() throws MyShopException {
+		//TODO - do in a proper way with supported db opetrations
+		List<GoodType> types = getAllTypes();
+		List<GoodType> result = new ArrayList<GoodType>();
+		for (GoodType type: types){
+			int size = type.getChildren().size();
+			if (size<1){
+				result.add(type);
+			}
+		}
+		return result;
+	}
+
+	@Override
+	public List<Good> getGoodsByType(GoodType type) throws MyShopException {
+		//TODO - do in a proper way with supported db opetrations
+		List<Good> list = null;
+		try {
+			list = daoFactory.getGoodDao().getAll();
+		} catch (MyShopDaoException e) {
+			throw new MyShopException(e);
+		}
+		ArrayList<Good> result = new ArrayList<Good>();	
+		for (Good good: list){
+			if (good.getType().equals(type)){
+				result.add(good);
+			}
+		}
+		return result;		
 	}
 	
 }

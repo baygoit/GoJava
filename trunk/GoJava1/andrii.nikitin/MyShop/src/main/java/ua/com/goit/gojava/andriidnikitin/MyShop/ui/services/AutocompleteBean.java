@@ -1,4 +1,4 @@
-package ua.com.goit.gojava.andriidnikitin.MyShop.ui.beans;
+package ua.com.goit.gojava.andriidnikitin.MyShop.ui.services;
 
 import java.io.Serializable;
 import java.util.ArrayList;

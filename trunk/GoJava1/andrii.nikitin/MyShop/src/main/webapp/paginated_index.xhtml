@@ -99,7 +99,11 @@
  		<p:dataTable value="#{goodRecordBean.allRecords}" var="r" id="dataTableWarehouse"
     			styleClass="order-table"
     			headerClass="order-table-header"
-    			rowClasses="order-table-odd-row,order-table-even-row"
+    			rowClasses="order-table-odd-row,order-table-even-row"                         
+    			paginator="true"
+    			rows="5"
+                paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+    		    rowsPerPageTemplate="5,10,15"
     		>
   
  			<p:column>
@@ -190,9 +194,12 @@
     			styleClass="order-table"
     			headerClass="order-table-header"
     			rowClasses="order-table-odd-row,order-table-even-row"
-    			lazy="true" 
-    			rows="7"  
-    			paginatorAlwaysVisible="false">
+    			rows="5"
+    			lazy="true"   
+    			paginator="true"
+                paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+    		    rowsPerPageTemplate="5,10,15"
+    		    >
  
     		<p:column>
     			<f:facet name="header">
@@ -341,9 +348,12 @@
     			styleClass="order-table"
     			headerClass="order-table-header"
     			rowClasses="order-table-odd-row,order-table-even-row"
-    			lazy="true" 
-    			rows="15"  
-    			paginatorAlwaysVisible="false">
+    			lazy="true"
+    			rows="5"   			                      
+    			paginator="true"
+                paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+    		    rowsPerPageTemplate="5,10,15"
+    		    >
  
     		<p:column>
     			<f:facet name="header">

@@ -110,8 +110,14 @@ public abstract class HibernateGenericDao <T> implements GenericDao<T> {
 		Criteria criteria = session.createCriteria(getType());	
 		@SuppressWarnings("unchecked")
 		List<T> list = (List<T>) criteria.list();
+		List<T> resultList = new ArrayList<T>();
+		for (T element : list){
+			if (!resultList.contains(element)){
+				resultList.add(element);
+			}
+		}
 		transaction.commit();		
-		return list ;
+		return resultList ;
 	}		
 	
 	protected abstract String getName(T object);

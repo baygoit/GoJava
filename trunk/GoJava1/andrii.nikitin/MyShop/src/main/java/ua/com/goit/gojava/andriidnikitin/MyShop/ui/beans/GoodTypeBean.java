@@ -47,6 +47,18 @@ public class GoodTypeBean implements Serializable{
 	
 	private Logger log = Logger.getLogger(getClass());
 
+	@ManagedProperty(value="#{allChildrenTypes}")
+	private List<GoodType> allChildrenTypes;
+
+	public List<GoodType> getAllChildrenTypes(){
+		try {
+			allChildrenTypes = businessService.getAllChildrenTypes();
+		} catch (MyShopException e) {
+			ErrorLogger.logException(e, log);
+			PrimeFacesUtil.addFatalError("Something gone wrong...");
+		}
+		return allChildrenTypes;
+	}
 	
 	public GoodType getChosenType() {
 		log.info("sending chosen type " + chosenType );

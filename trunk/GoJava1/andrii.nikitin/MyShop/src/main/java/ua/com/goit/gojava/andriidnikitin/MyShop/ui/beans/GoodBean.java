@@ -7,6 +7,7 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import javax.faces.event.ActionEvent;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,7 +54,12 @@ public class GoodBean implements Serializable{
 	public void setChosenType(GoodType chosenType) {
 		this.chosenType = chosenType;
 	}
-
+	
+	public void recieveChosenTypeFromEvent(ActionEvent event) {
+		this.chosenType = (GoodType)event.getComponent().getAttributes().get("chosenType");
+		System.out.println("listened" + chosenType.getName());
+	}	
+	
 	@ManagedProperty(value="#{allGoods}")
 	private List<Good> allGoods;
 	
@@ -108,6 +114,22 @@ public class GoodBean implements Serializable{
 		}
 		return allGoods;
 	}	
+	
+	public List<Good> getGoodsByChosenType(){
+		List<Good> result = null;
+		try {
+			result =  businessService.getGoodsByType(chosenType);
+		} catch (MyShopException e) {
+			log.error(e);
+			result = new ArrayList<Good>();
+			PrimeFacesUtil.addFatalError("Something goes wrong...");
+		}
+		System.out.println("chosen type" + chosenType);
+		for (Good good: result){
+			System.out.println("-" + good.getName());
+		}
+		return result;
+	}
 	
 	public void addGood(){	
 		try {
