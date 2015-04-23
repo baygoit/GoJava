@@ -8,10 +8,14 @@ import org.springframework.stereotype.Service;
 
 import com.gojava2.kickstarter.entity.Category;
 import com.gojava2.kickstarter.entity.Project;
+import com.gojava2.kickstarter.entity.ProjectStatus;
 import com.gojava2.kickstarter.entity.Quote;
+import com.gojava2.kickstarter.entity.User;
 import com.gojava2.kickstarter.repository.CategoryRepository;
 import com.gojava2.kickstarter.repository.ProjectRepository;
+import com.gojava2.kickstarter.repository.ProjectStatusRepository;
 import com.gojava2.kickstarter.repository.QuoteRepository;
+import com.gojava2.kickstarter.repository.UserRepository;
 
 @Service
 @Transactional
@@ -25,6 +29,12 @@ public class InitDbService {
 	
 	@Autowired
 	private ProjectRepository projectRepository;
+	
+	@Autowired
+	private UserRepository userRepository;
+	
+	@Autowired
+	private ProjectStatusRepository statusRepository;
 	
 	@PostConstruct
 	public void insert() {
@@ -43,16 +53,18 @@ public class InitDbService {
 		Category catgeroryDance = createCategory("Dance");
 		Category catgeroryGames = createCategory("Games");
 		
-		createProject("NY artists", "Some description.", 10000, 200, 25, 1, "Here will be history", "http://www.nyart.com", catgeroryArt);
-		createProject("The observatory", "Little observatory.", 2000, 100, 17, 1, "Here will be history", "http://www.observatory.com", catgeroryArt);
-		createProject("The sing for hope pianos", "The pianos who play in the streat.", 15000, 5000, 4, 30, "Here will be history", "http://www.pianos.com", catgeroryArt);
-		createProject("Super Man", "Comic about a man having super powers.", 50000, 1000, 15, 5, "Here will be history", "http://www.superman.com", catgeroryComics);
-		createProject("Hulk", "Comics on the green hero named Hulk.", 20000, 100, 50, 2, "Here will be history", "http://www.hulk.com", catgeroryComics);
-		createProject("Spider man", "Little - little spider man.", 4000, 200, 40, 1, "Here will be history", "http://www.spiderman.com", catgeroryComics);
-		createProject("Dance and Fly", "You can dance, you can fly, we belive in you!", 5000, 1000, 15, 7, "Here will be history", "http://www.df.com", catgeroryDance);
-		createProject("Tiny Epic Galaxies", "Develop your empire and colonize planets to create the most powerful galaxy!", 100000, 30000, 50, 17, "Here will be history", "http://www.galaxies.com", catgeroryGames);
-		createProject("Shadowrun: Hong Kong", "A Shadowrun cyberpunk cRPG set in 2056s Magically Awakened Hong Kong by the developers of Shadowrun Returns and Dragonfall.", 30000, 2000, 33, 10, "Here will be history", "http://www.shadowrun.com", catgeroryGames);
-		createProject("Starr Mazer", "A retro-sexy Point-and-Click Adventure Shoot em Up in SPACE!", 50000, 3000, 20, 6, "Here will be history", "http://www.starr mazer.com", catgeroryGames);
+		createProject("NY artists", "Some description.", "Here will be history", "http://www.nyart.com", catgeroryArt, createStatus(50000, 10000, 40, 13));
+		createProject("The observatory", "Little observatory.", "Here will be history", "http://www.observatory.com", catgeroryArt, createStatus(25000, 4000, 60, 10));
+		createProject("The sing for hope pianos", "The pianos who play in the streat.", "Here will be history", "http://www.pianos.com", catgeroryArt, createStatus(70000, 30000, 30, 17));
+		createProject("Super Man", "Comic about a man having super powers.", "Here will be history", "http://www.superman.com", catgeroryComics, createStatus(60000, 100, 70, 1));
+		createProject("Hulk", "Comics on the green hero named Hulk.", "Here will be history", "http://www.hulk.com", catgeroryComics, createStatus(5000, 900, 25, 1));
+		createProject("Spider man", "Little - little spider man.", "Here will be history", "http://www.spiderman.com", catgeroryComics, createStatus(100000, 8000, 70, 9));
+		createProject("Dance and Fly", "You can dance, you can fly, we belive in you!", "Here will be history", "http://www.df.com", catgeroryDance, createStatus(10000, 1000, 15, 1));
+		createProject("Tiny Epic Galaxies", "Develop your empire and colonize planets to create the most powerful galaxy!", "Here will be history", "http://www.galaxies.com", catgeroryGames, createStatus(100000, 8000, 70, 9));
+		createProject("Shadowrun: Hong Kong", "A Shadowrun cyberpunk cRPG set in 2056s Magically Awakened Hong Kong by the developers of Shadowrun Returns and Dragonfall.", "Here will be history", "http://www.shadowrun.com", catgeroryGames, createStatus(100000, 8000, 70, 9));
+		createProject("Starr Mazer", "A retro-sexy Point-and-Click Adventure Shoot em Up in SPACE!", "Here will be history", "http://www.starr mazer.com", catgeroryGames, createStatus(100000, 8000, 70, 9));
+		
+		createUser("Timur", "smth", "12345");
 	}
 	
 	private void createQuote(String content, String author) {
@@ -66,9 +78,19 @@ public class InitDbService {
 		return category;
 	}
 	
-	private void createProject(String name, String description, int requiredAmount, 
-			int total, int daysLeft, int backers, String story, String link, Category category) {
-		Project project = new Project(name, description, requiredAmount, total, daysLeft, backers, story, link, category);
+	private void createProject(String name, String description, String story, String link, Category category, ProjectStatus status) {
+		Project project = new Project(name, description, story, link, category, status);
 		projectRepository.save(project);
+	}
+	
+	private void createUser(String name, String email, String password) {
+		User user = new User(name, email, password);
+		userRepository.save(user);
+	}
+	
+	private ProjectStatus createStatus(int requiredAmount, int total, int daysLeft, int backers) {
+		ProjectStatus status = new ProjectStatus(requiredAmount, total, daysLeft, backers);
+		statusRepository.save(status);
+		return status;
 	}
 }

@@ -20,10 +20,10 @@
 				</strong>
 			</td>
 			<td><c:out value="${project.description}" /></td>
-			<td><c:out value="${project.requiredAmount}" /></td>
-			<td><c:out value="${project.total}" /></td>
-			<td><c:out value="${project.daysLeft}" /></td>
-			<td><c:out value="${project.backers}" /></td>
+			<td><c:out value="${project.status.requiredAmount}" /></td>
+			<td><c:out value="${project.status.total}" /></td>
+			<td><c:out value="${project.status.daysLeft}" /></td>
+			<td><c:out value="${project.status.backers}" /></td>
 			<td><c:out value="${project.story}" /></td>
 			<td><c:out value="${project.link}" /></td>
 		</tr>

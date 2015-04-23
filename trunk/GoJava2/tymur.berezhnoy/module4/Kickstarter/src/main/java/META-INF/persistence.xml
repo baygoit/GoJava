@@ -4,5 +4,7 @@
 		<class>com.gojava2.kickstarter.entity.Quote</class>
 		<class>com.gojava2.kickstarter.entity.Category</class>
 		<class>com.gojava2.kickstarter.entity.Project</class>
+		<class>com.gojava2.kickstarter.entity.User</class>
+		<class>com.gojava2.kickstarter.entity.ProjectStatus</class>
 	</persistence-unit>
 </persistence>

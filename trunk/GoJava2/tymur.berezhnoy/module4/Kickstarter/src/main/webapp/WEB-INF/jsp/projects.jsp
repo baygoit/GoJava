@@ -21,9 +21,9 @@
 					</strong>
 				</td>
 				<td><c:out value="${project.description}" /></td>
-				<td><c:out value="${project.requiredAmount}" /></td>
-				<td><c:out value="${project.total}" /></td>
-				<td><c:out value="${project.daysLeft}" /></td>
+				<td><c:out value="${project.status.requiredAmount}" /></td>
+				<td><c:out value="${project.status.total}" /></td>
+				<td><c:out value="${project.status.daysLeft}" /></td>
 			</tr>
 		</c:forEach>
 	</tbody>

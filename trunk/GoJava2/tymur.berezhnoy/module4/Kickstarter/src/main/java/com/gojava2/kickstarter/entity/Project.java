@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -23,7 +24,6 @@ public class Project {
 	@JoinColumn(name = "category_id")
 	private Category category;
 	
-
 	@Transient
 	private final char symbolDollar = 36;
 	
@@ -39,32 +39,24 @@ public class Project {
 	@Column(length = 250)
 	private String link;
 	
-	@Column(nullable = false, name = "requaried_amount", length = 250)
-	private int requiredAmount;
+	@ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 	
-	@Column(length = 250)
-	private int total;
-	
-	@Column(nullable = false, name = "days_left", length = 250)
-	private int daysLeft;
-	
-	@Column(length = 250)
-	private int backers;
+	@OneToOne
+	@JoinColumn(name = "stus_id")
+	private ProjectStatus status;
 	
 	public Project() {}
 	
 	@PersistenceConstructor
-	public Project(String name, String description, int requiredAmount, 
-			int total, int daysLeft, int backers, String story, String link, Category category) {
+	public Project(String name, String description, String story, String link, Category category, ProjectStatus status) {
 		this.name = name;
 		this.description = description;
-		this.requiredAmount = requiredAmount;
-		this.total = total;
-		this.daysLeft = daysLeft;
-		this.backers = backers;
 		this.story = story;
 		this.link = link;
 		this.category = category;
+		this.status = status;
 	}
 
 	public void setId(int id) {
@@ -107,30 +99,6 @@ public class Project {
 		return link;
 	}
 
-	public void setRequiredAmount(int requiredAmount) {
-		this.requiredAmount = requiredAmount;
-	}
-	
-	public int getRequiredAmount() {
-		return requiredAmount;
-	}
-
-	public void setTotal(int total) {
-		this.total = total;
-	}
-	
-	public int getTotal() {
-		return total;
-	}
-
-	public void setBackers(int backers) {
-		this.backers = backers;
-	}
-	
-	public int getBackers() {
-		return backers;
-	}
-
 	public void setCategory(Category category) {
 		this.category = category;
 	}
@@ -142,12 +110,20 @@ public class Project {
 	public char getSymbolDollar() {
 		return symbolDollar;
 	}
-	
-	public int getDaysLeft() {
-		return daysLeft;
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 	
-	public void setDaysLeft(int daysLeft) {
-		this.daysLeft = daysLeft;
+	public User getUser() {
+		return user;
+	}
+
+	public void setStatus(ProjectStatus status) {
+		this.status = status;
+	}
+	
+	public ProjectStatus getStatus() {
+		return status;
 	}
 }

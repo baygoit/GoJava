@@ -3,6 +3,8 @@ package com.gojava2.kickstarter.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.gojava2.kickstarter.entity.Category;
@@ -21,7 +23,7 @@ public class ProjectService {
 
 	public List<Project> getAll(int id) {
 		Category category = categoryRepository.findOne(id);
-        return projectRepository.findByCategory(category);
+        return projectRepository.findByCategory(category, new PageRequest(0, 20, Direction.DESC, "id"));
 	}
 	
 	public Project get(int id) {
