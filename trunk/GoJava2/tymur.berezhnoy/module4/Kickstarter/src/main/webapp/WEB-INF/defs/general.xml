@@ -27,4 +27,9 @@
 		<put-attribute name="body" value="/WEB-INF/jsp/user.jsp" />
 		<put-attribute name="current" value="user" />
 	</definition>
+	<definition name="user-register" extends="common">
+		<put-attribute name="title" value="Kikcstarter registration" />
+		<put-attribute name="body" value="/WEB-INF/jsp/user-register.jsp" />
+		<put-attribute name="current" value="register" />
+	</definition>
 </tiles-definitions>
