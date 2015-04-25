@@ -3,7 +3,29 @@ body {
 }
 
 tr:first-child {font-weight: bold; background-color: #C6C9C4;}
+h1 {color: #0e7dea; text-align: center}
 h3 {color: #ff0000;}
+
+.button{
+	margin: 15px 0px;
+	border:1px solid #26759E;-webkit-box-shadow: #FEFFFF 0px 1px 3px inset;-moz-box-shadow: #FEFFFF 0px 1px 3px inset; box-shadow: #FEFFFF 0px 1px 3px inset; -webkit-border-radius: 7px; -moz-border-radius: 7px;border-radius: 7px;font-size:14px;font-family:arial, helvetica, sans-serif; padding: 8px 8px 8px 8px; text-decoration:none; display:inline-block;text-shadow: 0px 1px 0 rgba(255,255,255,0.5);font-weight:bold; color: #0F3C8A;
+	background-color: #E6E6E6; background-image: -webkit-gradient(linear, left top, left bottom, from(#E6E6E6), to(#CCCCCC));
+	background-image: -webkit-linear-gradient(top, #E6E6E6, #CCCCCC);
+	background-image: -moz-linear-gradient(top, #E6E6E6, #CCCCCC);
+	background-image: -ms-linear-gradient(top, #E6E6E6, #CCCCCC);
+	background-image: -o-linear-gradient(top, #E6E6E6, #CCCCCC);
+	background-image: linear-gradient(to bottom, #E6E6E6, #CCCCCC);filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#E6E6E6, endColorstr=#CCCCCC);
+}
+
+.button:hover{
+	border:1px solid #26759E;
+	background-color: #cdcdcd; background-image: -webkit-gradient(linear, left top, left bottom, from(#cdcdcd), to(#b3b3b3));
+	background-image: -webkit-linear-gradient(top, #cdcdcd, #b3b3b3);
+	background-image: -moz-linear-gradient(top, #cdcdcd, #b3b3b3);
+	background-image: -ms-linear-gradient(top, #cdcdcd, #b3b3b3);
+	background-image: -o-linear-gradient(top, #cdcdcd, #b3b3b3);
+	background-image: linear-gradient(to bottom, #cdcdcd, #b3b3b3);filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#cdcdcd, endColorstr=#b3b3b3);
+}
 
 .center {
 	margin:0 auto;
@@ -44,13 +66,13 @@ h3 {color: #ff0000;}
     border-collapse: collapse;
     border-spacing: 0;
 	width:800px;
-	margin:0px;padding:0px;
+	margin:0px;
+	padding:0px;
 }.CSSTableGenerator tr:last-child td:last-child {
 	-moz-border-radius-bottomright:8px;
 	-webkit-border-bottom-right-radius:8px;
 	border-bottom-right-radius:8px;
-}
-.CSSTableGenerator table tr:first-child td:first-child {
+}.CSSTableGenerator table tr:first-child td:first-child {
 	-moz-border-radius-topleft:8px;
 	-webkit-border-top-left-radius:8px;
 	border-top-left-radius:8px;
@@ -66,8 +88,8 @@ h3 {color: #ff0000;}
 }.CSSTableGenerator tr:hover td{
 	
 }
-.CSSTableGenerator tr:nth-child(odd){ background-color:#e5e5e5; }
-.CSSTableGenerator tr:nth-child(even)    { background-color:#ffffff; }.CSSTableGenerator td{
+.CSSTableGenerator tr:nth-child(odd) {background-color:#e5e5e5;}
+.CSSTableGenerator tr:nth-child(even) {background-color:#ffffff;}.CSSTableGenerator td{
 	vertical-align:middle;
 	border:1px solid #000000;
 	border-width:0px 1px 1px 0px;
@@ -85,7 +107,7 @@ h3 {color: #ff0000;}
 	border-width:0px 0px 0px 0px;
 }
 .CSSTableGenerator tr:first-child td{
-		background:-o-linear-gradient(bottom, #e5e5e5 5%, #cccccc 100%);	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #e5e5e5), color-stop(1, #cccccc) );
+	background:-o-linear-gradient(bottom, #e5e5e5 5%, #cccccc 100%);	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #e5e5e5), color-stop(1, #cccccc) );
 	background:-moz-linear-gradient( center top, #e5e5e5 5%, #cccccc 100% );
 	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr="#e5e5e5", endColorstr="#cccccc");	background: -o-linear-gradient(top,#e5e5e5,cccccc);
 
@@ -111,3 +133,4 @@ h3 {color: #ff0000;}
 .CSSTableGenerator tr:first-child td:last-child{
 	border-width:0px 0px 1px 1px;
 }
+

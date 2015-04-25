@@ -11,9 +11,8 @@
 	<div class="center" >
 	<div class="center2" >
 	
-	<h2>List of categories</h2>
+	<h1>List of categories</h1>
 	<h3><c:out value="${message}" /></h3>
-	
 	
 	<div class="CSSTableGenerator" >
 	<table>
@@ -34,7 +33,9 @@
 	</table>
 	</div>
 	
-	<p><a href="${ctx}/categories?add"><button>Add new category</button></a></p>
+	<p><a class="button" href="${ctx}/categories?add">Add new category</a></p>
+	
+	
 	
 	</div>
 	</div>
