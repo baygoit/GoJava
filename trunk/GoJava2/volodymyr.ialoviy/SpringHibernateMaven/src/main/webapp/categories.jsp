@@ -9,11 +9,22 @@
 tr:first-child {font-weight: bold; background-color: #C6C9C4;}
 h3 {color: #ff0000;}
 </style>
+<link rel="stylesheet" href="/defoult.css" type="text/css" />
+
+<style>
+   <%@include file='/defoult.css' %>
+</style>
 </head>
 <body>
+	<div class="center" >
+	<div class="center2" >
+	
 	<h2>List of categories</h2>
 	<h3><c:out value="${message}" /></h3>
-	<table border="2" bordercolor="black" cellpadding="2">
+	
+	
+	<div class="CSSTableGenerator" >
+	<table>
 		<tr>
 			<td>DELETE</td>
 			<td>SHOW CATEGORY</td>
@@ -29,6 +40,11 @@ h3 {color: #ff0000;}
 			</tr>
 		</c:forEach>
 	</table>
+	</div>
+	
 	<p><a href="${ctx}/categories?add"><button>Add new category</button></a></p>
+	
+	</div>
+	</div>
 </body>
 </html>
