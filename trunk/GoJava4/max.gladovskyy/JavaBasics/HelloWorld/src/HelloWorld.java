@@ -4,8 +4,7 @@
    Call this file Example2.java.  
 */   
 class HelloWorld {   
-	public static void main(String args[])
-			 throws java.io.IOException {
+	public static void main(String args[]) {
 			 System.out.println("Hello world");
 	}
 }
