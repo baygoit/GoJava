@@ -36,6 +36,7 @@ public class ColumnDivision {
 				j = oneDivOp(res[0],this.devizor,i);
 				this.dividend = charaArToList((""+j).toCharArray());
 				this.dividend.addAll(res[1]);
+				skipNulls();
 				if (j==0 && res[1].size()==0) break;
 				i++;
 			} else {
@@ -54,6 +55,15 @@ public class ColumnDivision {
 		division.set(1,division.get(1)+spaceGen(charaArToList(dividend.toCharArray()).size()-division.get(1).length())+" |"+getStr(divresult));
 		for(String s: division) System.out.println(s);
 		
+	}
+	
+	private void skipNulls() {
+		while (this.dividend.size()>0) {
+			if (this.dividend.get(0)=='0'){
+				this.divresult.add('0');
+				this.dividend.remove(0);
+			} else break;
+		}
 	}
 	
 	private ArrayList<Character> charaArToList (char[] c) {
@@ -82,7 +92,6 @@ public class ColumnDivision {
 				d1 = new ArrayList<Character>(dividend.subList(0, devizor.size()+1));
 				ret[0] = d1;
 				ret[1] = new ArrayList<Character>(dividend.subList(devizor.size()+1, dividend.size()));
-				if (dividend.get(0)=='0') this.divresult.add('0');
 				return ret;
 			} 
 		} 
