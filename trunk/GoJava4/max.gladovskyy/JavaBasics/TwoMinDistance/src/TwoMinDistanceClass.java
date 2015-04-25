@@ -30,10 +30,7 @@ public class TwoMinDistanceClass {
 				bpos = apos;
 				aval = list.get(i);
 				apos = i;
-				continue;
-			}
-			
-			if (list.get(i)>=aval && list.get(i)<bval) {
+			} else if (list.get(i)>=aval && list.get(i)<bval) {
 				bval = list.get(i);
 				bpos = i;
 			}
