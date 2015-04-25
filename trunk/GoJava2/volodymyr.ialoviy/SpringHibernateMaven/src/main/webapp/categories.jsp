@@ -5,15 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Kickstarter</title>
-<style>
-tr:first-child {font-weight: bold; background-color: #C6C9C4;}
-h3 {color: #ff0000;}
-</style>
-<link rel="stylesheet" href="/defoult.css" type="text/css" />
-
-<style>
-   <%@include file='/defoult.css' %>
-</style>
+<style><%@include file='/defoult.css' %></style>
 </head>
 <body>
 	<div class="center" >

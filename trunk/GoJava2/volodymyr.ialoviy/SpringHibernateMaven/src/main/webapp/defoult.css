@@ -2,6 +2,9 @@ body {
     background: url(img/2.jpg) repeat;
 }
 
+tr:first-child {font-weight: bold; background-color: #C6C9C4;}
+h3 {color: #ff0000;}
+
 .center {
 	margin:0 auto;
 	width:900px;
