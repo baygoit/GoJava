@@ -62,6 +62,7 @@ public class ColumnDivision {
 			if (this.dividend.get(0)=='0'){
 				this.divresult.add('0');
 				this.dividend.remove(0);
+				this.i++;
 			} else break;
 		}
 	}
