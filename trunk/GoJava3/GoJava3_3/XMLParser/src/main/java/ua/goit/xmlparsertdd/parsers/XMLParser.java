@@ -45,13 +45,13 @@ public class XMLParser implements Parser {
       try {
         while (inputStreamReader.ready()) {
           c = (char) inputStreamReader.read();
-            currentState = machine.next(c, this);
+          currentState = machine.next(c, this);
           if(currentState == TagState.INVALID_TAG_END) {
             return;
           }
         }
       } catch (XMLNestingException e) {
-        //ignoring
+        System.out.println("XML nesting error");
       }
       if (currentState == TagState.VALID_TAG_END) {
         if (machine.isStackEmpty()) {
@@ -126,7 +126,7 @@ public class XMLParser implements Parser {
     }
 
     public XMLParser build() {
-      return new XMLParser(handlers);
+      return new XMLParser(new HashMap<>(handlers));
     }
   }
 }

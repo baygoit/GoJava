@@ -8,7 +8,7 @@ import java.util.Deque;
 import java.util.LinkedList;
 
 public class TagStack {
-  Deque<TagElement> tagStack = new LinkedList<>();
+  protected Deque<TagElement> tagStack = new LinkedList<>();
   boolean hadRootTag = false;
   boolean hadHeaderTag = false;
 

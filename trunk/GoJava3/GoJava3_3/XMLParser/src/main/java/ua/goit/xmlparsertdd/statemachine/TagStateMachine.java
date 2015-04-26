@@ -14,7 +14,7 @@ import java.util.Set;
 
 public class TagStateMachine {
   
-  final static Set<TagState> commentStates= new HashSet<>();
+  private final static Set<TagState> commentStates = new HashSet<>();
   static{
     commentStates.add(TagState.COMMENT);
     commentStates.add(TagState.OPEN);
