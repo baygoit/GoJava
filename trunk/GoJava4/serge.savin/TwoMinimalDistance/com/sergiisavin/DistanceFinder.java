@@ -1,7 +1,7 @@
 /*
- * Сервисный клас содержит статический метод вычисляющий расстояние между двумя минимальными елементами массива
- * в случае если массив содержит больше двух минимальных елементов, вычисляется расстояние между крайними елементами в массиве
- * индексы повторяющихся елементов вычисляются, так что можно добавить другие варианты расчёта
+ * Service class. Contains a static method that calculates the distance between two minimal numbers in the array
+ * if there are more than two minimal elements the method calculates the distance between the most distant elements
+ * the indexes of all minimal elements are calculated, so that other variants of calculation can be realized later
  * 
  */
 
@@ -26,10 +26,10 @@ public class DistanceFinder {
 		
 		//some input data check
 		if (numbers == null) {
-			throw new IllegalArgumentException("параметр не должен быть null");
+			throw new IllegalArgumentException("parapeter should not be null");
 		} else if (numbers.length == 0) {
 			throw new IllegalArgumentException(
-					"параметр не должен быть массивом нулевой длинны");
+					"the length of array should not be 0");
 		} else if (numbers.length == 1) {
 			return 0;
 		}
