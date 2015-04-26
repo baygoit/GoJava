@@ -11,4 +11,9 @@
 		<put-attribute name="title" value="KickStarter" />
 		<put-attribute name="body" value="/WEB-INF/jsp/index.jsp" />
 	</definition>
+	
+	<definition name="categories" extends="common">
+        <put-attribute name="title" value="Categories" />
+        <put-attribute name="body" value="/WEB-INF/jsp/categories.jsp" />
+    </definition>
 </tiles-definitions>

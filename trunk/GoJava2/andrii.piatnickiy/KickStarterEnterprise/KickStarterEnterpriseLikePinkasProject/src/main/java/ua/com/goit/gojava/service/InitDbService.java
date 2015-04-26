@@ -23,18 +23,23 @@ public class InitDbService {
 	
 	@PostConstruct
 	public void init(){
-		Category category = new Category();
-		category.setName("Sport");
-		categoryRository.save(category);
+		Category category1 = new Category();
+		category1.setName("Sport");
+		categoryRository.save(category1);
+		
+		Category category2 = new Category();
+		category2.setName("Car");
+		categoryRository.save(category2);
+		
 		
 		Project project1 = new Project();
 		project1.setName("Bycicle");
-		project1.setCategory(category);
+		project1.setCategory(category1);
 		projectRository.save(project1);
 		
 		Project project2 = new Project();
 		project2.setName("SnowBoard");
-		project2.setCategory(category);
+		project2.setCategory(category1);
 		projectRository.save(project2);
 	}
 }
