@@ -24,8 +24,8 @@ public class ColumnDivision {
 	int n=-1,i=0,j;
 	
 	public ColumnDivision(String dividend, String devizor, int declimit) {
-		this.dividend.addAll(charaArToList(dividend.toCharArray()));
-		this.devizor.addAll(charaArToList(devizor.toCharArray()));
+		this.dividend.addAll(charArToList(dividend.toCharArray()));
+		this.devizor.addAll(charArToList(devizor.toCharArray()));
 		
 		division.add(dividend+" |"+devizor);
 		
@@ -34,13 +34,13 @@ public class ColumnDivision {
 			if (res!=null) {
 				if (i!=0) division.set(division.size()-1,spaceGen(i-1)+Integer.parseInt(getStr(res[0])));
 				j = oneDivOp(res[0],this.devizor,i);
-				this.dividend = charaArToList((""+j).toCharArray());
+				this.dividend = charArToList((""+j).toCharArray());
 				this.dividend.addAll(res[1]);
 				skipNulls();
 				if (j==0 && res[1].size()==0) break;
 				i++;
 			} else {
-				n++;
+				
 				i++;
 				this.dividend.add('0');
 				if (n==-1) this.divresult.add('0');
@@ -48,11 +48,13 @@ public class ColumnDivision {
 					this.divresult.add('.');
 					abovezero = false;
 				}
+				n++;
 			}
 
 		}
 		
-		division.set(1,division.get(1)+spaceGen(charaArToList(dividend.toCharArray()).size()-division.get(1).length())+" |"+getStr(divresult));
+		division.set(0,dividend+" |"+devizor);
+		division.set(1,division.get(1)+spaceGen(charArToList(dividend.toCharArray()).size()-division.get(1).length())+" |"+getStr(divresult));
 		for(String s: division) System.out.println(s);
 		
 	}
@@ -67,7 +69,7 @@ public class ColumnDivision {
 		}
 	}
 	
-	private ArrayList<Character> charaArToList (char[] c) {
+	private ArrayList<Character> charArToList (char[] c) {
 		ArrayList<Character> a = new ArrayList<Character>();
 		for (Character c1: c) {
 			a.add(c1);
