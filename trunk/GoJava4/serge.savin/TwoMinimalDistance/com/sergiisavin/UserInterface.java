@@ -1,8 +1,8 @@
 /*
- * Класс отвечает за пользовательский интерфейс.
- * Приглашение ввода данных
- * контроль входных данных
- * вывод подсказок и результата
+ * The class is responsible for user interface
+ * input user data
+ * input data controll
+ * show hints and results
  *  
  * 
  * 
@@ -24,42 +24,42 @@ public class UserInterface {
 		
 		do{
 			
-			System.out.print("Введите ряд чисел через один пробел (или exit для выхода из программы): ");
+			System.out.print("Input some numbers divided by one space (or 'exit' to end the programm): ");
 			inputData = scanner.nextLine();
 			  
 			
-			//приводим к одному регистру и обрубаем пробелы с концов
+			//trimming spaces on both ends and unifying register
 			inputData = inputData.trim();
 			inputData = inputData.toLowerCase();
 			
-			//сли пользователь ввёл exit - выход из программы
+			//if the user entered exit - so be it 
 			if(inputData.equals("exit")){
-				System.out.println("Пока!");
+				System.out.println("By!");
 				System.exit(0);
 			}
 			
-			//получаем массив елементов из введённой строки
+			//Getting an array of elements from the input string
 			String[] elements = inputData.split(" ");
 			
-			//пытаемся преобразовать массив елементов в массив duble
+			//trying to convert the array of strings into an array dubles
 			try{
 				numbers = getNumbers(elements);
 			}catch(NumberFormatException ex){
-				System.out.println("Некорректные входные данные...");
-				System.out.println("Введите целые или дробные числа через пробел (Например: 3 5 11.7 2e4 7): ");
+				System.out.println("Incorrect input data...");
+				System.out.println("Enter integers or doubles  (Example: 3 5 11.7 2e4 7): ");
 				continue;
 			}
 			
-			//Вычисление и вывод результата
-			System.out.println("Расстояние между двумя минимальными елементами: " + DistanceFinder.findDistance(numbers));
+			//Calculating the result
+			System.out.println("The distance between two minimal elements is: " + DistanceFinder.findDistance(numbers));
 			
-		//пока пользователь не введёт exit	
+		//until user enters exit	
 		}while(true);
 	}
 
-	//преобразуем массив строк в массив double
-	//в случае невозможности преобразования кидаем NumberFormatException
-	//возвращаем массив double
+	//converting an array of strings into an array of doubles
+	//if impossible cast NumberFormatException
+	//return an array of doubles
 	private static double[] getNumbers(String[] elements) {
 		double[] numbers = new double[elements.length];
 		for(int i = 0; i < elements.length; i++){
