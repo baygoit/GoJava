@@ -17,4 +17,9 @@ public class CategoryService {
 	public List<Category> findAll(){
 		return categoryRository.findAll();
 	}
+
+	public Category findOne(int id) {
+		// TODO Auto-generated method stub
+		return categoryRository.findOne(id);
+	}
 }

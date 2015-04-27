@@ -18,4 +18,11 @@
         <put-attribute name="body" value="/WEB-INF/jsp/categories.jsp" />
         <put-attribute name="current" value="categories" />
     </definition>
+    
+    <definition name="category" extends="common">
+        <put-attribute name="title" value="Category" />
+        <put-attribute name="body" value="/WEB-INF/jsp/category.jsp" />
+        <put-attribute name="current" value="categories" />
+    </definition>
+    
 </tiles-definitions>
