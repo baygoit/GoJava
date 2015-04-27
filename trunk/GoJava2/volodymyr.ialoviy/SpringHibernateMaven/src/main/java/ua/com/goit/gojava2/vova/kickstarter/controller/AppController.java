@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import ua.com.goit.gojava2.vova.kickstarter.model.Category;
+import ua.com.goit.gojava2.vova.kickstarter.model.Quote;
 import ua.com.goit.gojava2.vova.kickstarter.service.CategoryService;
+import ua.com.goit.gojava2.vova.kickstarter.service.QuoteService;
 
 @Controller
 @RequestMapping("/")
@@ -22,13 +24,20 @@ public class AppController {
 
 	@Autowired
 	CategoryService categoryService;
+	
+	@Autowired
+	QuoteService quoteService;
 
-	@RequestMapping(value = {"/", "/categories"}, method = RequestMethod.GET)
+	@RequestMapping(value = "/", method = RequestMethod.GET)
+	public String listCategoriesWithQuote(ModelMap model, HttpServletRequest req) {
+		Quote quote = quoteService.getQuote();
+		model.addAttribute("quote", quote);
+		return listOnlyCatgories(model, req);
+	}
+
+	@RequestMapping(value = "/categories", method = RequestMethod.GET)
 	public String listCategories(ModelMap model, HttpServletRequest req) {
-		List<Category> categories = categoryService.findAllCategories();
-		model.addAttribute("message", req.getParameter("message"));
-		model.addAttribute("categories", categories);
-		return "categories";
+		return listOnlyCatgories(model, req);
 	}
 
 	@RequestMapping(value = "/categories/{id}", method = RequestMethod.GET)
@@ -66,4 +75,10 @@ public class AppController {
 		return "redirect:/categories";
 	}
 
+	private String listOnlyCatgories(ModelMap model, HttpServletRequest req) {
+		List<Category> categories = categoryService.findAllCategories();
+		model.addAttribute("message", req.getParameter("message"));
+		model.addAttribute("categories", categories);
+		return "categories";
+	}
 }

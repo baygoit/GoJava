@@ -54,6 +54,7 @@ public class DonateController {
 		
 		model.addAttribute("idProject", idProject);
 		projectService.addDonate(amount, idProject);
+		
 		model.addAttribute("message", "Donate " + amount + " successfully");
 		return "redirect:/projects/{idProject}?show";
 	}
