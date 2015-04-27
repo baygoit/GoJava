@@ -1,4 +1,4 @@
-package go_start_4.vadya_zakusylo.java_basics;
+package go_java_4.vadya_zakusylo.java_basics;
 
 /*
  * This code initializes array of unique integer numbers and counts distances between indexes
@@ -28,10 +28,11 @@ public class DistanceBetweenIndexOfArray {
 	static void initArray() {
 		System.out.print("Enter integer values into array. ");
 		System.out.println("Enter any incorrect value to exit.");
-		Scanner inputValue = new Scanner(System.in);
-		do {
-			arrayList.add(inputValue.nextInt());
-		} while (inputValue.hasNext());
+		try (Scanner inputValue = new Scanner(System.in)) {
+			do {
+				arrayList.add(inputValue.nextInt());
+			} while (inputValue.hasNext());
+		}
 	}
 
 	private static void showDistance() {
@@ -39,7 +40,8 @@ public class DistanceBetweenIndexOfArray {
 		// and sort Integer [] array to Integer[] arraySorted
 		ArrayList<Integer> copyArrayList = new ArrayList<Integer>();
 		copyArrayList.addAll(arrayList);
-		Integer[] array = copyArrayList.toArray(new Integer[copyArrayList.size()]);
+		Integer[] array = copyArrayList.toArray(new Integer[copyArrayList
+				.size()]);
 		Integer[] arraySorted = sortBubble(array);
 		// Show distance between min values
 		int firstMinValue = copyArrayList.indexOf(arraySorted[0]);
