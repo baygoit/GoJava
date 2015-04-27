@@ -7,12 +7,16 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Donation registration form</title>
-<style>.error {color: #ff0000;}</style>
+<style><%@include file='/defoult.css' %></style>
 </head>
 
 <body>
+<div class="center" >
+<div class="center2" >
+
 	<h2>Donation form</h2>
 	 <form method="POST" >
+	 <div class="CSSTableGenerator" >
 		<table>
 		    <tr>
 		        <td><b>Your name: </b></td>
@@ -34,7 +38,11 @@
 				<td colspan="3"><input type="submit" value="donete" /></td>
 			</tr>
 		</table>
+		</div>
 	</form>
 	<p>Go back to <a href="${ctx}/projects/${idProject}?show">project # ${idProject}</a></p>
+	
+</div>
+</div>
 </body>
 </html>

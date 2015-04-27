@@ -5,14 +5,15 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Kickstarter</title>
-
-<style>
-tr:first-child {font-weight: bold; background-color: #C6C9C4;}
-</style>
+<style><%@include file='/defoult.css' %></style>
 </head>
 <body>
+<div class="center" >
+<div class="center2" >
+
 	<h2>List of categories</h2>
-	<table border="2" bordercolor="black" cellpadding="2">
+	<div class="CSSTableGenerator" >
+	<table>
 		<tr>
 			<td>ID CATEGORY</td>
 			<td>NAME CATEGORY</td>
@@ -22,7 +23,11 @@ tr:first-child {font-weight: bold; background-color: #C6C9C4;}
 				<td>${category.name}</td>
 			</tr>
 	</table>
+	</div>
 	<br />
 	<p>Return to all <a href="${ctx}/categories">categories</a></p>
+
+</div>
+</div>
 </body>
 </html>

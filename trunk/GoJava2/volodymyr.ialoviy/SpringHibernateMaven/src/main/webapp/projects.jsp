@@ -3,14 +3,16 @@
 <html>
 <head>
 <title>Kickstarter projects</title>
-<style>
-h3 {color: #ff0000;}
-</style>
+<style><%@include file='/defoult.css' %></style>
 </head>
-	<body>
+<body>
+<div class="center" >
+<div class="center2" >
+
 		<h2>List of projects of category</h2>
 		<h3><c:out value="${message}" /></h3>
-		<table  border="2" bordercolor="black" cellpadding="2">
+		<div class="CSSTableGenerator" >
+		<table>
 			<tr>
 				<td>DELETE</td>
 				<td>SHOW PROJECT FULL</td>
@@ -22,6 +24,10 @@ h3 {color: #ff0000;}
 				</tr>
 			</c:forEach>
 		</table>
+		</div>
 		<p>If you want return to <a href="${ctx}/categories">categories</a></p>
-	</body>
+
+</div>
+</div>
+</body>
 </html>

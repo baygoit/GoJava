@@ -6,15 +6,15 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Donate</title>
-<style>
-.error {color: #ff0000;}
-</style>
+<style><%@include file='/defoult.css' %></style>
 </head>
-
 <body>
-	<h2>Donate for project # <c:out value="${id}" />
-	</h2>
-	<table border="2" bordercolor="black" cellpadding="2">
+<div class="center" >
+<div class="center2" >
+
+	<h2>Donate for project # <c:out value="${id}" /></h2>
+	<div class="CSSTableGenerator" >
+	<table>
 		<tr>
 			<td>invest project</td>
 			<td><a href="${ctx}/donate/${id}/0?add">any amount</a></td>
@@ -36,7 +36,11 @@
 			<td>you get you link in our site</td>
 		</tr>
 	</table>
+	</div>
 	<br />
 	<p> Go back to	<a href="${ctx}/projects/${id}?show">project</a></p>
+
+</div>
+</div>
 </body>
 </html>

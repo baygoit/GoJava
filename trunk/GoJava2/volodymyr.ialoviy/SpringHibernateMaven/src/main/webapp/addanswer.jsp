@@ -8,17 +8,17 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Question registration form</title>
-<style>
-.error {
-	color: #ff0000;
-}
-</style>
+<style><%@include file='/defoult.css' %></style>
 </head>
 
 <body>
+<div class="center" >
+<div class="center2" >
+
 	<h2>Registration form</h2>
 	<h4>Question: ${question.question}</h4>
 	<form:form method="POST" modelAttribute="question">
+	<div class="CSSTableGenerator" >
 		<table>
 			<tr>
 				<td><label for="answer">Your answer: </label></td>
@@ -29,9 +29,13 @@
 				<td colspan="3"><input type="submit" value="add answer" /></td>
 			</tr>
 		</table>
+		</div>
 	</form:form>
 	<p>
 		Go back to <a href="${ctx}/projects/${question.idProject}?show">project</a>
 	</p>
+
+</div>
+</div>
 </body>
 </html>

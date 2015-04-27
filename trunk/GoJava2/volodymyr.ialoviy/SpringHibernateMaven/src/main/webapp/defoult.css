@@ -1,10 +1,12 @@
-body {
-    background: url(img/2.jpg) repeat;
-}
+body {background: url(img/2.jpg) repeat;}
 
 tr:first-child {font-weight: bold; background-color: #C6C9C4;}
+
 h1 {color: #0e7dea; text-align: center}
+
 h3 {color: #ff0000;}
+
+.error {color: #ff0000;}
 
 .button{
 	margin: 15px 0px;

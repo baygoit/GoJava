@@ -8,37 +8,39 @@
 <style><%@include file='/defoult.css' %></style>
 </head>
 <body>
-	<div class="center" >
-	<div class="center2" >
-	<h2><c:out value="${quote.quote}" /></h2>
+<div class="center" >
+<div class="center2" >
+	
+	<h4><c:out value="${quote.quote}" /></h4>
 	
 	<h1>List of categories</h1>
 	<h3><c:out value="${message}" /></h3>
+
+			<div class="CSSTableGenerator">
+				<table>
+					<tr>
+						<td>DELETE</td>
+						<td>SHOW CATEGORY</td>
+						<td>SHOW PROJECTS IN CATEGORY</td>
+						<td>ADD NEW PROJECT</td>
+					</tr>
+					<c:forEach items="${categories}" var="category">
+						<tr>
+							<td><a href="${ctx}/categories/${category.id}?delete">${category.name}(x)</a></td>
+							<td><a href="${ctx}/categories/${category.id}">${category.name}</a></td>
+							<td><a href="${ctx}/projects/${category.id}">${category.name}</a></td>
+							<td><a href="${ctx}/projects/${category.id}?add">add a
+									project in this category</a></td>
+						</tr>
+					</c:forEach>
+				</table>
+			</div>
+
+			<p><a class="button" href="${ctx}/categories?add">Add new category</a></p>
 	
-	<div class="CSSTableGenerator" >
-	<table>
-		<tr>
-			<td>DELETE</td>
-			<td>SHOW CATEGORY</td>
-			<td>SHOW PROJECTS IN CATEGORY</td>
-			<td>ADD NEW PROJECT</td>
-		</tr>
-		<c:forEach items="${categories}" var="category">
-			<tr>
-				<td><a href="${ctx}/categories/${category.id}?delete">${category.name}(x)</a></td>
-				<td><a href="${ctx}/categories/${category.id}">${category.name}</a></td>
-				<td><a href="${ctx}/projects/${category.id}">${category.name}</a></td>
-				<td><a href="${ctx}/projects/${category.id}?add">add a project in this category</a></td>
-			</tr>
-		</c:forEach>
-	</table>
-	</div>
-	
-	<p><a class="button" href="${ctx}/categories?add">Add new category</a></p>
 	
 	
-	
-	</div>
-	</div>
+</div>
+</div>
 </body>
 </html>

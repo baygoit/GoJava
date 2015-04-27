@@ -3,20 +3,15 @@
 <html>
 <head>
 <title>Kickstarter project</title>
-<style>
-tr:first-child {
-	font-weight: bold;
-	background-color: #C6C9C4;
-}
-
-h3 {
-	color: #ff0000;
-}
-</style>
+<style><%@include file='/defoult.css' %></style>
 </head>
 <body>
+<div class="center" >
+<div class="center2" >
+
 	<h1>Project from category with name - ${project.category.name}</h1>
-	<table border="2" bordercolor="black" cellpadding="2">
+	<div class="CSSTableGenerator" >
+	<table>
 		<tr>
 			<td>NAME</td>
 			<td>VALUE</td>
@@ -58,6 +53,7 @@ h3 {
 			<td>${project.dateClose}</td>
 		</tr>
 	</table>
+	</div>
 	
 	<p>If you want return to <a href="${ctx}/projects/${project.idCategory}">projects</a></p>
 	<p>If you want to <a href="${ctx}/donate/${project.id}">invest in the project</a></p>
@@ -65,7 +61,8 @@ h3 {
 	<h3><c:out value="${message}" /></h3>
 	<h1>Questions and answers for this project with name - ${project.name}</h1>
 	
-	<table border="2" bordercolor="black" cellpadding="2">
+	<div class="CSSTableGenerator" >
+	<table>
 		<tr>
 			<td>QUESTION</td>
 			<td>ANSWER</td>
@@ -82,6 +79,10 @@ h3 {
 				</tr>
 			</c:forEach>
 	</table>
+	</div>
 	<p>Have a question? If the info above doesn't help, you can <a href="${ctx}/question/${project.id}?add">ask the project creator directly</a></p>
+
+</div>
+</div>
 </body>
 </html>
