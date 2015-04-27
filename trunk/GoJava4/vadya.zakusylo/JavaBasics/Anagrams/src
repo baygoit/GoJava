@@ -1,6 +1,5 @@
 package go_java_4.vadya_zakusylo.java_basics;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Anagram {
@@ -12,21 +11,20 @@ public class Anagram {
 	}
 
 	private static String initList() {
-		Scanner consolText = new Scanner(System.in);
-		System.out.println("Enter the text.");
-		return consolText.nextLine();
+		try (Scanner consolText = new Scanner(System.in)) {
+			System.out.println("Enter the text.");
+			return consolText.nextLine();
+		}
 	}
 
 	private static String[] createArray(String inputText) {
 		String array = "";
 		String[] arrayText;
-		// Returns a string whose value is this string, with any leading
-		// and trailing whitespace removed.
-		inputText = inputText.trim();
 		do {
 			int indexOfSeparator = inputText.indexOf(" ");
-			array += inputText.substring(0, indexOfSeparator) + " ";
-			inputText = inputText.substring(indexOfSeparator, inputText.length()).trim();
+			array += inputText.substring(0, indexOfSeparator + 1);
+			inputText = inputText.substring(indexOfSeparator + 1,
+					inputText.length());
 		} while (inputText.contains(" "));
 		array += inputText;
 		arrayText = array.split(" ");
@@ -35,10 +33,10 @@ public class Anagram {
 
 	private static String Permutation(String[] arrayText) {
 		String outputText = "";
-		for (String text : arrayText){
-			StringBuffer sb = new StringBuffer (text);
+		for (String text : arrayText) {
+			StringBuffer sb = new StringBuffer(text);
 			sb.reverse();
-			outputText += sb +" ";
+			outputText += sb + " ";
 		}
 		return outputText;
 	}
