@@ -4,13 +4,13 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class Delenie {
+public class DivisionAlgoritm {
 	
 	private String sNumber1, sNumber2;
 	private int number1, number2;
 	private int accuracy = 6;
 	
-	public Delenie(String formula) throws NumberFormatException {
+	public DivisionAlgoritm(String formula) throws NumberFormatException {
 		String[] numbers = formula.split("/"); 
 		if (numbers.length != 2) {
 			throw new NumberFormatException();
@@ -29,7 +29,7 @@ public class Delenie {
 		try {
 			System.out.println("Input formula:");
 			String formula = reader.readLine();
-			new Delenie(formula).showResult();
+			new DivisionAlgoritm(formula).showResult();
 		} catch (NumberFormatException e) {
 			System.out.println("Incorrect formula!");
 			return;
