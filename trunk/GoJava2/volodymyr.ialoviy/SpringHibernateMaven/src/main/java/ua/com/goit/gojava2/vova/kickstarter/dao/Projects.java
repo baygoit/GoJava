@@ -32,7 +32,7 @@ public class Projects extends AbstractDao implements ProjectDao {
 	}
 
 	@Override
-	public void addDonate(int amount, int id) {//TODO SWITH HQL TO NOT HQL
+	public void addDonate(int amount, int id) {
 		Query query = getSession().createQuery("update Project set howMuchCollected = howMuchCollected + :amount, "
 						+ "howMuchRemaining = howMuchRemaining - :amount"
 						+ " where id = :id");
