@@ -10,6 +10,7 @@
 <body>
 	<div class="center" >
 	<div class="center2" >
+	<h2><c:out value="${quote.quote}" /></h2>
 	
 	<h1>List of categories</h1>
 	<h3><c:out value="${message}" /></h3>
@@ -27,7 +28,7 @@
 				<td><a href="${ctx}/categories/${category.id}?delete">${category.name}(x)</a></td>
 				<td><a href="${ctx}/categories/${category.id}">${category.name}</a></td>
 				<td><a href="${ctx}/projects/${category.id}">${category.name}</a></td>
-				<td><a href="${ctx}/projects/${category.id}?add">add to a project in this category</a></td>
+				<td><a href="${ctx}/projects/${category.id}?add">add a project in this category</a></td>
 			</tr>
 		</c:forEach>
 	</table>
