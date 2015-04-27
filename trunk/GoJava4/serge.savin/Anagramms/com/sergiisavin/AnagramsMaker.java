@@ -15,7 +15,7 @@ public class AnagramsMaker {
 	public static String makeAnagram(String inputString){
 		String anagram = null;
 		
-		String[] words = inputString.split(" ");
+		String[] words = inputString.split("\\s+");
 		
 		reverseWords(words);
 
