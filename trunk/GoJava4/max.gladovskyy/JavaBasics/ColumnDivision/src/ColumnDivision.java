@@ -44,7 +44,7 @@ public class ColumnDivision {
 				i++;
 				this.dividend.add('0');
 				if (this.divresult.size()>0 && this.divresult.get(this.divresult.size()-1)=='.') this.divresult.add('0');
-				if (n==-1) this.divresult.add('0');
+				if (i==1) this.divresult.add('0');
 				if (abovezero) {
 					this.divresult.add('.');
 					abovezero = false;
