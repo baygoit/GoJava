@@ -8,16 +8,16 @@ public class Anagrams {
 	public static void main(String[] args) throws IOException {
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 		
-		String str = reader.readLine();
-		String[] list = str.split(" ");
+		String userString = reader.readLine();
+		String[] userStringSplited = userString.split(" ");
 		
-		for (String word: list) {
-			System.out.print(anagram(word)+" ");
+		for (String word: userStringSplited) {
+			System.out.print(reverse(word)+" ");
 		}
 		
 	}
 
-	private static String anagram(String s) {
+	private static String reverse(String s) {
 		char[] wordChars = s.toCharArray();
 		char[] reversedWordChars = new char[wordChars.length];
 		
