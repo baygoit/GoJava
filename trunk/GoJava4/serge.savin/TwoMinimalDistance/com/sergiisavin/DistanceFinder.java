@@ -101,12 +101,10 @@ public class DistanceFinder {
 		int[] indexesOfRepeatedNumbers = new int[numbers.length];
 		
 		int indexOfRepeatedNumber = 0;
-		int targetIndex = 0;
 		for(int index = 0; index < numbers.length; index++){
 			if(numbers[index] == element){
-				indexesOfRepeatedNumbers[targetIndex] = index;
+				indexesOfRepeatedNumbers[indexOfRepeatedNumber] = index;
 				indexOfRepeatedNumber++;
-				targetIndex++;
 			}
 		}
 		
