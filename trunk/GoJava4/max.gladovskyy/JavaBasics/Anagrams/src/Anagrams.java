@@ -31,11 +31,11 @@ public class Anagrams {
 	}
 
 	private static String reverseWord(String word) {
-		char[] wordChars = word.toCharArray();
-		char[] result = new char[wordChars.length];
+		char[] wordLetters = word.toCharArray();
+		char[] result = new char[wordLetters.length];
 		
-		for (int i=0; i<wordChars.length; i++) {
-			result[wordChars.length-1-i] = filterNotLetters(wordChars[i]);
+		for (int i=0; i<wordLetters.length; i++) {
+			result[wordLetters.length-1-i] = filterNotLetters(wordLetters[i]);
 		}
 		return new String(result);
 	}
