@@ -16,9 +16,16 @@ public class Anagram {
 		BufferedReader reader = new BufferedReader(new InputStreamReader(
 				System.in));
 
-		System.out.println("Input words:");
-		String line = reader.readLine();
-		System.out.println(new Anagram(line).getAnagramLine());
+		while (true) {
+			System.out.println("Input words (or 'exit'):");
+			String line = reader.readLine();
+			if ("exit".equalsIgnoreCase(line)) {
+				break;
+			}
+
+			System.out.println(new Anagram(line).getAnagramLine());
+		}
+
 		reader.close();
 	}
 
