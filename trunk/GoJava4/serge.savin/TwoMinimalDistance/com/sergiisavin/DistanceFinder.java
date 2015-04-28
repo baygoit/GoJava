@@ -10,63 +10,140 @@
 package com.sergiisavin;
 
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 public class DistanceFinder {
 
-
-	public static int findDistance(double[] numbers)
-			throws IllegalArgumentException {
-		int distance = 0;
-		int[] indexes = new int[numbers.length];
+	private static DistanceFinder distanceFinder = null;
+	
+	private int numberOfRepeatedElements = 0;
+	double[] numbersCopy = null;
+	int[] indexesOfRepeatedElements = null;
+	
+	double firstNumber;
+	double secondNumber;
+	double thirdNumber;
+	
+	private DistanceFinder(){};
+	
+	//get singleton
+	public static DistanceFinder getDistanceFinder(){
+		if(distanceFinder == null){
+			distanceFinder =  new DistanceFinder();
+		}
 		
-		//clonning initial array not to corrupt it
-		double[] numbersCloned = numbers.clone();
+		return distanceFinder; 
+	}
+	
+	public int findDistance(double[] numbers) throws IllegalArgumentException {
 		
-		Arrays.sort(numbersCloned);
+		int result = 0;
 		
-		//some input data check
-		if (numbers == null) {
-			throw new IllegalArgumentException("parapeter should not be null");
-		} else if (numbers.length == 0) {
-			throw new IllegalArgumentException(
-					"the length of array should not be 0");
-		} else if (numbers.length == 1) {
+		int indexOfFirstMinimalElement = 0;
+		int indexOfSecondMinimalElement = 0;
+						
+		checkValidity(numbers);
+		
+		numbersCopy = numbers.clone();
+		Arrays.sort(numbersCopy);
+		
+		//return evident result
+		if (numbers.length == 1) {
 			return 0;
+		}else if(numbers.length == 2){
+			return 1;
 		}
 		
-		//if the first and second elements in the array are different then find their indexes and calculate distance
-		if(numbersCloned[0] != numbersCloned[1]){
-			distance = findIndex(numbers, numbersCloned[1]) - findIndex(numbers, numbersCloned[0]);
-		}else{
+		firstNumber = numbersCopy[0];
+		secondNumber = numbersCopy[1];
+		thirdNumber = numbersCopy[2];
+				
+		indexOfFirstMinimalElement = findIndex(numbers, firstNumber);
+		indexOfSecondMinimalElement = findIndexOfSecondMinimalElement(numbers, indexOfFirstMinimalElement);
+		result = Math.abs(indexOfSecondMinimalElement - indexOfFirstMinimalElement);
 			
-			//there are more than two minimal elements in the array
-			//fill an array of indexes of all minimal elements
-			int counter = 0;
-			for(int i = 0; i < numbers.length; i++){
-				if(numbers[i] == numbersCloned[0]){
-					indexes[counter] = i;
-					counter++;
-				}
+		return result;
+	}
+	
+	private int findIndexOfSecondMinimalElement(double[] numbers, int indexOfFirstMinimalElement) {
+		int result = 0;
+
+		switch(numberOfUniqueElements(firstNumber, secondNumber, thirdNumber)) {
+		case 3:
+			result =  findIndex(numbers, secondNumber);
+			break;
+		case 2:
+		case 1:
+			indexesOfRepeatedElements = getElementIndexes(secondNumber, numbers);
+			result = getIndexOfMostDistantElement(indexesOfRepeatedElements, indexOfFirstMinimalElement);
 		}
-			//by default calculate distance between the first and the last the same minimal number
-			int firstIndex = indexes[0];
-			int secondIndex = indexes[counter-1];
-			distance = secondIndex - firstIndex;
-		}
-		
-		return Math.abs(distance);
+		return result;
 	}
 
-	private static int findIndex(double[] numbers, double d) {
-		int index = 0;
+	private int getIndexOfMostDistantElement(int[] indexesOfRepeatedNumbers, int indexOfFirstMinimalElement) {
 		
-		for(int i = 0; i < numbers.length; i++ ){
-			if(numbers[i] == d){
-				index = i;
+		int distance = 0;
+		int targetIndex = 0; 
+		
+		for(int index = 0; index < numberOfRepeatedElements; index++){
+			if(Math.abs(indexesOfRepeatedNumbers[index] - indexOfFirstMinimalElement) > distance){
+				distance = Math.abs(indexesOfRepeatedNumbers[index] - indexOfFirstMinimalElement);
+				targetIndex = index;
+			}
+		}
+		
+		return indexesOfRepeatedNumbers[targetIndex];
+	}
+
+	private int[] getElementIndexes(double element, double[] numbers) {
+		
+		int[] indexesOfRepeatedNumbers = new int[numbers.length];
+		
+		int indexOfRepeatedNumber = 0;
+		
+		for(int index = 0; index < numbers.length; index++){
+			if(numbers[index] == element){
+				indexesOfRepeatedNumbers[index] = index;
+				indexOfRepeatedNumber++;
+			}
+		}
+		
+		//numberOfRepeatedElements is the class field which is saved for further use by different methods
+		numberOfRepeatedElements = indexOfRepeatedNumber;
+		return indexesOfRepeatedNumbers;
+	}
+
+	private int numberOfUniqueElements(double ... numbers) {
+
+		Set<Double> set = new HashSet<Double>();
+		
+		for(double number : numbers){
+			set.add(number);
+		}
+		
+		return set.size();
+	}
+
+	private static void checkValidity(double[] numbers) {
+		if (numbers == null) {
+			throw new IllegalArgumentException("parameter should not be null");
+		} else if (numbers.length == 0) {
+			throw new IllegalArgumentException(
+					"the length of the array should not be 0");
+		}
+	}
+
+	private static int findIndex(double[] numbers, double number) {
+		int result = 0;
+		
+		for(int index = 0; index < numbers.length; index++ ){
+			if(numbers[index] == number){
+				result = index;
 				break;
 			}
 		}
 		
-		return index;
+		return result;
 	}
 }

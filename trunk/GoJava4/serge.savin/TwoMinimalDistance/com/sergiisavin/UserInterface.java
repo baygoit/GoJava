@@ -3,45 +3,39 @@
  * input user data
  * input data controll
  * show hints and results
- *  
- * 
  * 
  */
 
 package com.sergiisavin;
 
-import java.util.Arrays;
-import java.util.IllegalFormatException;
 import java.util.Scanner;
 
 public class UserInterface {
 
+	private static final String EXIT_COMMAND = "exit";
+	
+	private static Scanner scanner = new Scanner(System.in);
+	private static String inputData = null;
+	private static double[] numbers = null;
+	
 	public static void main(String[] args){
 		
-		Scanner scanner = new Scanner(System.in);
-		String inputData = null;
-		double[] numbers = null;
-		
 		do{
+
+			System.out.print("Input some numbers divided by space (or 'exit' to end the programm): ");
 			
-			System.out.print("Input some numbers divided by one space (or 'exit' to end the programm): ");
-			inputData = scanner.nextLine();
-			  
+			//IS IT OK, OR BETTER SPECIFY WHERE THE INPUT DATA GOES LIKE: inputData = getInputData()??????? 
+			getInputData();
 			
-			//trimming spaces on both ends and unifying register
-			inputData = inputData.trim();
-			inputData = inputData.toLowerCase();
-			
-			//if the user entered exit - so be it 
-			if(inputData.equals("exit")){
+			if(inputData.equals(EXIT_COMMAND)){
 				System.out.println("By!");
 				System.exit(0);
 			}
 			
 			//Getting an array of elements from the input string
-			String[] elements = inputData.split(" ");
+			String[] elements = inputData.split("\\s+");
 			
-			//trying to convert the array of strings into an array dubles
+			//trying to convert the array of strings into an array doubles
 			try{
 				numbers = getNumbers(elements);
 			}catch(NumberFormatException ex){
@@ -50,11 +44,33 @@ public class UserInterface {
 				continue;
 			}
 			
-			//Calculating the result
-			System.out.println("The distance between two minimal elements is: " + DistanceFinder.findDistance(numbers));
+			try{
+				
+			int distance = calculateDistance(numbers);
 			
-		//until user enters exit	
+			System.out.println("The distance between two minimal elements is: " + distance);
+			
+			}catch(IllegalArgumentException ex){
+				System.out.println(ex.getMessage());
+			}
+				
 		}while(true);
+	}
+
+	private static int calculateDistance(double[] numbers) {
+		DistanceFinder distanceFinder = DistanceFinder.getDistanceFinder();
+		return distanceFinder.findDistance(numbers);
+	}
+
+	private static void getInputData() {
+		inputData = scanner.nextLine();  
+		inputData = trimAndToLowerCase(inputData);
+	}
+
+	private static String trimAndToLowerCase(String inputData) {
+		inputData = inputData.trim();
+		inputData = inputData.toLowerCase();
+		return inputData;
 	}
 
 	//converting an array of strings into an array of doubles
@@ -62,8 +78,8 @@ public class UserInterface {
 	//return an array of doubles
 	private static double[] getNumbers(String[] elements) {
 		double[] numbers = new double[elements.length];
-		for(int i = 0; i < elements.length; i++){
-			numbers[i] = Double.parseDouble(elements[i]);
+		for(int index = 0; index < elements.length; index++){
+			numbers[index] = Double.parseDouble(elements[index]);
 		}
 		return numbers;
 	}
