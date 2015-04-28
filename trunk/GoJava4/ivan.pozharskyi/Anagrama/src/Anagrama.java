@@ -8,7 +8,7 @@ public class Anagrama {
 		System.out.println("Enter words:");
 		String enteredData = readFromConsole();
 
-		String[] result = makeAnagrama(enteredData.split(" "));
+		String[] result = makeAnagrama(enteredData.split(" "));                                    
 		printResult(result);
 	}
 
