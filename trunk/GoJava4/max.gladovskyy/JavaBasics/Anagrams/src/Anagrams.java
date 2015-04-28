@@ -41,9 +41,7 @@ public class Anagrams {
 	}
 	
 	private static Character filterNotLetters (Character letter) {
-		if (Character.isLetter(letter)) {
-			 return letter;
-		} else {
+		if (!Character.isLetter(letter)) {
 			System.err.println(letter + " is not a letter symbol in your string. "
 					+ "Please enter string with only letters and spaces");
 			System.exit(0);
