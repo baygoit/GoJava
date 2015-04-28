@@ -5,23 +5,30 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class DistanceCalculator {
+	public static final String SEPARATOR = " ";
+	private String lineOfNumbers;
+
+	public DistanceCalculator(String lineOfNumbers) {
+		this.lineOfNumbers = lineOfNumbers;
+	}
 
 	public static void main(String[] args) throws IOException {
-		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+		BufferedReader reader = new BufferedReader(new InputStreamReader(
+				System.in));
+
 		try {
 			System.out.println("Input numbers:");
-			String numbers = reader.readLine();
-			System.out.println(new DistanceCalculator().getDistance(numbers));			
+			String line = reader.readLine();
+			System.out.println(new DistanceCalculator(line).getDistance());
 		} catch (NumberFormatException e) {
 			System.out.println("Incorrect numbers");
-			return;
 		} finally {
 			reader.close();
 		}
 	}
-	
-	public int getDistance(String numbers) throws NumberFormatException {
-		return getDistance(numbers.split(" "));
+
+	public int getDistance() throws NumberFormatException {
+		return getDistance(lineOfNumbers.split(" "));
 	}
 
 	public int getDistance(String[] numbers) throws NumberFormatException {
@@ -37,7 +44,7 @@ public class DistanceCalculator {
 			throw new NumberFormatException();
 		return calculateDistance(numbers);
 	}
-	
+
 	private int calculateDistance(int[] numbers) {
 		int indexOfMin1 = 0;
 		int indexOfMin2 = 1;
@@ -47,8 +54,7 @@ public class DistanceCalculator {
 					indexOfMin2 = indexOfMin1;
 				}
 				indexOfMin1 = i;
-			}
-			else if (numbers[indexOfMin2] > numbers[i]) {
+			} else if (numbers[indexOfMin2] > numbers[i]) {
 				if (numbers[indexOfMin1] > numbers[indexOfMin2]) {
 					indexOfMin1 = indexOfMin2;
 				}
@@ -56,6 +62,7 @@ public class DistanceCalculator {
 			}
 		}
 
-		return indexOfMin2 > indexOfMin1 ? indexOfMin2 - indexOfMin1 : indexOfMin1 - indexOfMin2;
+		return indexOfMin2 > indexOfMin1 ? indexOfMin2 - indexOfMin1
+				: indexOfMin1 - indexOfMin2;
 	}
 }
