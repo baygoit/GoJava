@@ -20,43 +20,66 @@ public class FinderDistances {
 	}
 
 	public void testFinder(FinderDistances finder) {
-		arrayToWork = new int[] { -8, 1, 1, 0, -9, 0 };
+		arrayToWork = new int[] { 1,2 };
 		System.out.println("input                 "
 				+ Arrays.toString(arrayToWork));
-		finder.startWorker();
+		try {
+			finder.startWorker();
+		} catch (Exception e) {
+
+			e.printStackTrace();
+		}
 		System.out.println("-----------------------------------------");
 
 		arrayToWork = new int[] { 23, 45, 34, 12, 45, 4, 38, 56, 2, 49, 100 };
 		System.out.println("input                 "
 				+ Arrays.toString(arrayToWork));
-		finder.startWorker();
+		try {
+			finder.startWorker();
+		} catch (Exception e) {
+
+			e.printStackTrace();
+		}
 		System.out.println("-----------------------------------------");
 
 		arrayToWork = new int[] { 1, 1, 2, 0, 1, 1, 4, 1 };
 		System.out.println("input                 "
 				+ Arrays.toString(arrayToWork));
-		finder.startWorker();
+		try {
+			finder.startWorker();
+		} catch (Exception e) {
+
+			e.printStackTrace();
+		}
 		System.out.println("-----------------------------------------");
 
 		arrayToWork = new int[] { 1, 1, 2, 0, 1, 0, 4, 0 };
 		System.out.println("input                 "
 				+ Arrays.toString(arrayToWork));
-		finder.startWorker();
+		try {
+			finder.startWorker();
+		} catch (Exception e) {
+
+			e.printStackTrace();
+		}
 		System.out.println("-----------------------------------------");
 	}
 
-	void validateArrayToWork() {
-
+	void validateArrayToWork() throws Exception {
+		if (sizeOfArrayToWork < 2) {
+			throw new Exception(" the length of an array invalid ");
+		}
 	}
 
-	void startWorker() {
+	void startWorker() throws Exception {
 
 		sizeOfArrayToWork = arrayToWork.length;
+		validateArrayToWork();
+
 		index = new int[sizeOfArrayToWork];
 		markers = new int[sizeOfArrayToWork];
 		sorted = new int[sizeOfArrayToWork];
 
-		validateArrayToWork();
 		makeSortedAndIndexes();
 
 		System.out.println("sorted array          " + Arrays.toString(sorted));
