@@ -6,12 +6,22 @@
 
 package com.sergiisavin;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-
 public class AnagramsMaker {
+	
+	private static AnagramsMaker anagramsMaker = null;
+	
+	private AnagramsMaker(){}
 
+	//get singleton
+	public static AnagramsMaker getAnagramsMaker(){
+		
+		if(anagramsMaker == null){
+			anagramsMaker = new AnagramsMaker();
+		}
+		
+		return anagramsMaker; 
+	}
+	
 	public static String makeAnagram(String inputString){
 		String anagram = null;
 		
@@ -27,7 +37,7 @@ public class AnagramsMaker {
 	private static String constructAnagram(String[] words) {
 		String anagram = null;
 		
-		//in our anagram will be one space between words
+		//in our anagram, there will be one space between words
 		StringBuilder sb = new StringBuilder();
 		for(String s : words){
 			sb.append(s);
@@ -41,23 +51,28 @@ public class AnagramsMaker {
 	//reverse word as char array 
 	private static void reverseWords(String[] words) {
 		
-		for(int i = 0; i < words.length; i++){
+		for(int index = 0; index < words.length; index++){
 			
-			words[i] = words[i].trim();
-			char[] wordInChars = words[i].toCharArray();
+			words[index] = words[index].trim();
+			char[] wordAsChars = words[index].toCharArray();
 			
-			int lastIndex = wordInChars.length - 1;
-			for(int j = 0; j < (wordInChars.length)/2; j++){
-				
-				char temp = wordInChars[j];
-				wordInChars[j] = wordInChars[lastIndex - j];
-				wordInChars[lastIndex - j] = temp;
-				
-			}
+			reverseWord(wordAsChars);
 			
-			words[i] = new String(wordInChars);
+			words[index] = new String(wordAsChars);
 			
 		}
 		
+	}
+
+	private static void reverseWord(char[] wordAsChars) {
+		
+		int lastIndex = wordAsChars.length - 1;
+		for(int index = 0; index < (wordAsChars.length)/2; index++){
+			
+			char temp = wordAsChars[index];
+			wordAsChars[index] = wordAsChars[lastIndex - index];
+			wordAsChars[lastIndex - index] = temp;
+			
+		}
 	}
 }

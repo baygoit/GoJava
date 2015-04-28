@@ -31,6 +31,7 @@ public class UserInterface {
 			
 			case "n":
 				System.out.println("Goodby!");
+				scanner.close();
 				System.exit(0);
 				break;
 			case "y":
