@@ -35,17 +35,20 @@ public class Anagrams {
 		char[] result = new char[wordChars.length];
 		
 		for (int i=0; i<wordChars.length; i++) {
-			
-			if (Character.isLetter(wordChars[i])) {
-				result[wordChars.length-1-i] = wordChars[i];
-			} else {
-				System.err.println(wordChars[i] + " is not a letter symbol in your string. "
-						+ "Please enter string with only letters and spaces");
-				System.exit(0);
-			}
-			
+			result[wordChars.length-1-i] = checkIsCorrect(wordChars[i]);
 		}
 		return new String(result);
+	}
+	
+	private static Character checkIsCorrect (Character letter) {
+		if (Character.isLetter(letter)) {
+			 return letter;
+		} else {
+			System.err.println(letter + " is not a letter symbol in your string. "
+					+ "Please enter string with only letters and spaces");
+			System.exit(0);
+		}
+		return letter;
 	}
 
 }
