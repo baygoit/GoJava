@@ -6,38 +6,77 @@ public class TwoMinDistanceClass {
 	
 	public static void main(String[] args) throws NumberFormatException, IOException {
 		
-		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-		List<Integer> list = new ArrayList<Integer>();
-		int aval,apos,bval,bpos;
-		String temp;
+		ArrayList<Integer> numbers = readAllNumbers();
+		int MinimalNumbersDistance = getMinimalNumbersDistance(numbers);
+		System.out.println("Distance is: "+ MinimalNumbersDistance);
+	}
+
+
+	private static int  getMinimalNumbersDistance(ArrayList<Integer> numbers) {
+		int aNumberValue = numbers.get(0);
+		int bNumberValue = numbers.get(1);
+		int aNumberPosition = 0;
+		int bNumberPosition = 1;
 		
-		System.out.println("Enter integers pressing Enter after each. When finish press Enter after blank field");
-		
-		while(true) {
-			temp = reader.readLine();
-			if (temp.equals("")) break;
-			list.add(Integer.parseInt(temp));
-		}
-		
-		aval=list.get(0);
-		bval=list.get(1);
-		apos=0;
-		bpos=1;
-		
-		for (int i=1; i<list.size(); i++) {
-			if (list.get(i)<aval) {
-				bval = aval;
-				bpos = apos;
-				aval = list.get(i);
-				apos = i;
-			} else if (list.get(i)>=aval && list.get(i)<bval) {
-				bval = list.get(i);
-				bpos = i;
+		for (int currentPosition = 1; currentPosition < numbers.size(); currentPosition++) {
+			if (numbers.get(currentPosition) < aNumberValue) {
+				bNumberValue = aNumberValue;
+				bNumberPosition = aNumberPosition;
+				aNumberValue = numbers.get(currentPosition);
+				aNumberPosition = currentPosition;
+			} else if (numbers.get(currentPosition) >= aNumberValue && numbers.get(currentPosition) < bNumberValue) {
+				bNumberValue = numbers.get(currentPosition);
+				bNumberPosition = currentPosition;
 			}
 		}
-		
-		System.out.println("Distance is: "+Math.abs(apos-bpos));
-
+		return Math.abs(aNumberPosition - bNumberPosition);
 	}
+	
+	
+	private static ArrayList<Integer> readAllNumbers() {
+		ArrayList<Integer> result = new ArrayList<Integer>();
+		while(true) {
+			String number = readConsoleOneTime();
+			if(number.equals("")) {
+				break;
+			}
+			if (!validateNumber(number)) {
+				continue;
+			}
+			result.add(Integer.parseInt(number));	
+		}
+		checkNumbersQuantity(result);
+		return result;
+	}
+
+	private static void checkNumbersQuantity(ArrayList<Integer> result) {
+		if (result.size() < 2) {
+			System.err.println("You enteret not enough numbers, minimum 2 needed.");
+		}
+		
+	}
+
+
+	private static String readConsoleOneTime() {
+		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+		System.out.println("Enter number end press enter or just press enter if you finish");
+		try {
+			return reader.readLine();
+		} catch (IOException e) {
+			System.err.println("You entered incorrect data (integer needed)");
+		}
+		return null;
+	}
+
+	private static boolean validateNumber(String number) {
+		for (Character digit: number.toCharArray()) {
+			if (!Character.isDigit(digit)) {
+				System.err.println(digit+" is not a digit. Try Again.");
+				return false;
+			}
+		}
+		return true;
+	}
+
 
 }
