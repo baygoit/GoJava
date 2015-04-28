@@ -15,7 +15,7 @@
 <div class="center" >
 <div class="center2" >
 
-	<h2>Registration form</h2>
+	<h1>Registration form</h1>
 	<h4>Question: ${question.question}</h4>
 	<form:form method="POST" modelAttribute="question">
 	<div class="CSSTableGenerator" >
@@ -32,7 +32,7 @@
 		</div>
 	</form:form>
 	<p>
-		Go back to <a href="${ctx}/projects/${question.idProject}?show">project</a>
+		Go back to <a class="button" href="${ctx}/projects/${question.idProject}?show">project</a>
 	</p>
 
 </div>

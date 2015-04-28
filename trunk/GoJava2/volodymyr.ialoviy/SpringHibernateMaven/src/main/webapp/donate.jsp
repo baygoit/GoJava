@@ -12,7 +12,7 @@
 <div class="center" >
 <div class="center2" >
 
-	<h2>Donate for project # <c:out value="${id}" /></h2>
+	<h1>Donate for project # <c:out value="${id}" /></h1>
 	<div class="CSSTableGenerator" >
 	<table>
 		<tr>
@@ -38,7 +38,7 @@
 	</table>
 	</div>
 	<br />
-	<p> Go back to	<a href="${ctx}/projects/${id}?show">project</a></p>
+	<p> Go back to	<a class="button" href="${ctx}/projects/${id}?show">project</a></p>
 
 </div>
 </div>

@@ -55,10 +55,11 @@
 	</table>
 	</div>
 	
-	<p>If you want return to <a href="${ctx}/projects/${project.idCategory}">projects</a></p>
-	<p>If you want to <a href="${ctx}/donate/${project.id}">invest in the project</a></p>
+	<p>If you want return to <a class="button" href="${ctx}/projects/${project.idCategory}">projects</a></p>
+	<p>If you want to <a class="button" href="${ctx}/donate/${project.id}">invest in the project</a></p>
 
 	<h3><c:out value="${message}" /></h3>
+	
 	<h1>Questions and answers for this project with name - ${project.name}</h1>
 	
 	<div class="CSSTableGenerator" >
@@ -80,7 +81,7 @@
 			</c:forEach>
 	</table>
 	</div>
-	<p>Have a question? If the info above doesn't help, you can <a href="${ctx}/question/${project.id}?add">ask the project creator directly</a></p>
+	<p>Have a question? If the info above doesn't help, you can <a class="button" href="${ctx}/question/${project.id}?add">ask the project creator directly</a></p>
 
 </div>
 </div>

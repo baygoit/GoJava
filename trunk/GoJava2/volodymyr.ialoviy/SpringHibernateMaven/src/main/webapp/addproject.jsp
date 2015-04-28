@@ -14,7 +14,7 @@
 <div class="center" >
 <div class="center2" >
 
-	<h2>Registration form</h2>
+	<h1>Registration form</h1>
 	<form:form method="POST" modelAttribute="project">
 	<div class="CSSTableGenerator" >
 		<table>
@@ -74,7 +74,7 @@
 		</table>
 		</div>
 	</form:form>
-	<p>Go back to <a href="${ctx}/categories">list of all categories</a></p>
+	<p>Go back to <a class="button" href="${ctx}/categories">list of all categories</a></p>
 
 </div>
 </div>

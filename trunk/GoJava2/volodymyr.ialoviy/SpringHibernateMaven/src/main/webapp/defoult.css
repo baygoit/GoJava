@@ -1,10 +1,20 @@
-body {background: url(img/2.jpg) repeat;}
-
-tr:first-child {font-weight: bold; background-color: #C6C9C4;}
+body {background: url(${ctx}/img/2.jpg) repeat;}
 
 h1 {color: #0e7dea; text-align: center}
 
 h3 {color: #ff0000;}
+
+.quote {color: #ff0000;
+	text-align: center;
+	font-size:24px;
+
+	margin: 20px auto;
+	padding: 10px;
+	width:780px;
+	box-shadow: 3px 3px 3px 3px #888888;
+	border:1px solid #000000;
+	background: white;
+}
 
 .error {color: #ff0000;}
 
@@ -100,7 +110,7 @@ h3 {color: #ff0000;}
 	font-size:12px;
 	font-family:Arial;
 	font-weight:normal;
-	color:#ff00ff;
+	color:#0000ff;
 }.CSSTableGenerator tr:last-child td{
 	border-width:0px 1px 0px 0px;
 }.CSSTableGenerator tr td:last-child{

@@ -9,9 +9,9 @@
 <div class="center" >
 <div class="center2" >
 
-		<h2>List of projects of category</h2>
-		<h3><c:out value="${message}" /></h3>
-		<div class="CSSTableGenerator" >
+	<h1>List of projects of category</h1>
+	<h3><c:out value="${message}" /></h3>
+	<div class="CSSTableGenerator" >
 		<table>
 			<tr>
 				<td>DELETE</td>
@@ -24,8 +24,9 @@
 				</tr>
 			</c:forEach>
 		</table>
-		</div>
-		<p>If you want return to <a href="${ctx}/categories">categories</a></p>
+	</div>
+		
+	<p>If you want return to <a class="button" href="${ctx}/categories">categories</a></p>
 
 </div>
 </div>

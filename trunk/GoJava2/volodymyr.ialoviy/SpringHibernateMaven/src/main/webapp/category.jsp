@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
 <html>
 <head>
@@ -11,21 +11,22 @@
 <div class="center" >
 <div class="center2" >
 
-	<h2>List of categories</h2>
+	<h1>Category</h1>
+	
 	<div class="CSSTableGenerator" >
-	<table>
-		<tr>
-			<td>ID CATEGORY</td>
-			<td>NAME CATEGORY</td>
-		</tr>
+		<table>
+			<tr>
+				<td>ID CATEGORY</td>
+				<td>NAME CATEGORY</td>
+			</tr>
 			<tr>
 				<td>${category.id}</td>
 				<td>${category.name}</td>
 			</tr>
-	</table>
+		</table>
 	</div>
-	<br />
-	<p>Return to all <a href="${ctx}/categories">categories</a></p>
+	
+	<p>Return to all <a class="button" href="${ctx}/categories">categories</a></p>
 
 </div>
 </div>

@@ -14,9 +14,9 @@
 <div class="center" >
 <div class="center2" >
 
-	<h2>Donation form</h2>
-	 <form method="POST" >
-	 <div class="CSSTableGenerator" >
+	<h1>Donation form</h1>
+	<form method="POST" >
+	<div class="CSSTableGenerator" >
 		<table>
 		    <tr>
 		        <td><b>Your name: </b></td>
@@ -40,7 +40,7 @@
 		</table>
 		</div>
 	</form>
-	<p>Go back to <a href="${ctx}/projects/${idProject}?show">project # ${idProject}</a></p>
+	<p>Go back to <a class="button" href="${ctx}/projects/${idProject}?show">project # ${idProject}</a></p>
 	
 </div>
 </div>
