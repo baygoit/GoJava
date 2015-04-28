@@ -6,30 +6,30 @@ public class FinderDistances {
 
 		int[] array;
 
-		FinderDistances arraySort = new FinderDistances();
+		FinderDistances finder = new FinderDistances();
 		try {
-			array = new int[] { 1,  };
+			array = new int[] { 1, 1, 2, 0};
 			System.out.println("input                 "
 					+ Arrays.toString(array));
-			arraySort.sort(array);
+			finder.work(array);
 			System.out.println("-----------------------------------------");
 
 			array = new int[] { 23, 45, 34, 12, 45, 4, 38, 56, 2, 49, 100 };
 			System.out.println("input                 "
 					+ Arrays.toString(array));
-			arraySort.sort(array);
+			finder.work(array);
 			System.out.println("-----------------------------------------");
 
 			array = new int[] { 1, 1, 2, 0, 1, 1, 4, 1 };
 			System.out.println("input                 "
 					+ Arrays.toString(array));
-			arraySort.sort(array);
+			finder.work(array);
 			System.out.println("-----------------------------------------");
 
 			array = new int[] { 1, 1, 2, 0, 1, 0, 4, 0 };
 			System.out.println("input                 "
 					+ Arrays.toString(array));
-			arraySort.sort(array);
+			finder.work(array);
 			System.out.println("-----------------------------------------");
 
 		} catch (Exception e) {
@@ -39,80 +39,79 @@ public class FinderDistances {
 
 	}
 
-	void arrayValidate(int[] inputArray) throws Exception {
-		int inpArrLen = inputArray.length;
-		if (inpArrLen < 2 || inpArrLen > 1000) {
-			throw new Exception(
-					"length of array should be greater than 2 and less than 1000");
+	void arrayValidate(int[] original) throws Exception {
+		int originalLen = original.length;
+		System.out.println(originalLen);
+		if (originalLen <= 0) {
+			throw new Exception("length of array should be greater than 0");
 
 		}
 
 	}
 
-	void sort(int[] inputArray) throws Exception {
+	void work(int[] pieceOfWork) throws Exception {
 
-		arrayValidate(inputArray);
-		int inpArrLen = inputArray.length;
+		arrayValidate(pieceOfWork);
+		int sizeOfPieceOfWork = pieceOfWork.length;
+		final int MARKED = 1;
+		int[] indexesOfSorted = new int[sizeOfPieceOfWork];
+		int[] markers =  new int[sizeOfPieceOfWork];
+		int[] sorted =   new int[sizeOfPieceOfWork];
+		int minimalInPieceOfWork = pieceOfWork[0];
+		int whereMinimal = 0;
 
-		int[] indexArr = new int[inpArrLen];
-		int[] markArr = new int[inpArrLen];
-		int[] sortedArr = new int[inpArrLen];
-		int minVal = inputArray[0];
-		int minInd = 0;
+		for (int whereDoIndexes = 0; whereDoIndexes < sizeOfPieceOfWork; whereDoIndexes++) {
 
-		for (int scanner = 0; scanner < inpArrLen; scanner++) {
+			boolean minFinded = false;
 
-			boolean minValCorrect = false;
+			for (int whereDoSort = 0; whereDoSort < sizeOfPieceOfWork; whereDoSort++) {
 
-			for (int inpArrInd = 0; inpArrInd < inpArrLen; inpArrInd++) {
-
-				if (markArr[inpArrInd] != 0) {
+				if (markers[whereDoSort] == MARKED) {
 					continue;
 				}
-				if (minValCorrect) {
-					if (inputArray[inpArrInd] < minVal) {
-						minVal = inputArray[inpArrInd];
-						minInd = inpArrInd;
+				if (minFinded) {
+					if (pieceOfWork[whereDoSort] < minimalInPieceOfWork) {
+						minimalInPieceOfWork = pieceOfWork[whereDoSort];
+						whereMinimal = whereDoSort;
 						continue;
 					}
 					continue;
 				}
-				minVal = inputArray[inpArrInd];
-				minValCorrect = true;
-				minInd = inpArrInd;
+				minimalInPieceOfWork = pieceOfWork[whereDoSort];
+				minFinded = true;
+				whereMinimal = whereDoSort;
 			}
-			indexArr[scanner] = minInd;
-			sortedArr[scanner] = minVal;
-			markArr[minInd] = 1;
+			indexesOfSorted[whereDoIndexes] = whereMinimal;
+			sorted[whereDoIndexes] = minimalInPieceOfWork;
+			markers[whereMinimal] = MARKED;
 		}
 
-		System.out.println("sorted array          "
-				+ Arrays.toString(sortedArr));
+		System.out.println("sorted array          " + Arrays.toString(sorted));
 		System.out
-				.println("index of sorted array " + Arrays.toString(indexArr));
+				.println("index of sorted array " + Arrays.toString(indexesOfSorted));
 
-		int prevIndex = sortedArr[0];
+		int prevIndex = sorted[0];
 		int currentIndex;
-		for (currentIndex = 1; currentIndex < inpArrLen; currentIndex++) {
-			if (sortedArr[currentIndex] != prevIndex) {
+		for (currentIndex = 1; currentIndex < sizeOfPieceOfWork; currentIndex++) {
+			if (sorted[currentIndex] != prevIndex) {
 				break;
 			}
 		}
 		if (currentIndex == 1) {
 
-			int firstValue = indexArr[0];
-			int currentPoint = sortedArr[1];
-			int minDistance = Math.abs(indexArr[0] - indexArr[1]);
+			int firstValue = indexesOfSorted[0];
+			int currentPoint = sorted[1];
+			int minDistance = Math.abs(indexesOfSorted[0] - indexesOfSorted[1]);
 			int maxDistance = minDistance;
 			int indMin = 1;
 			int indMax = 1;
 
-			for (currentIndex = 1; currentIndex < inpArrLen; currentIndex++) {
+			for (currentIndex = 1; currentIndex < sizeOfPieceOfWork; currentIndex++) {
 
-				if (sortedArr[currentIndex] != currentPoint) {
+				if (sorted[currentIndex] != currentPoint) {
 					break;
 				}
-				int currDist = Math.abs(indexArr[currentIndex] - firstValue);
+				int currDist = Math.abs(indexesOfSorted[currentIndex] - firstValue);
 
 				if (currDist < minDistance) {
 					minDistance = currDist;
@@ -125,25 +124,27 @@ public class FinderDistances {
 			}
 			currentIndex--;
 
-			System.out.println("min distance " + minDistance + " between "
-					+ inputArray[indexArr[0]] + "[" + indexArr[0] + "]"
-					+ " and " + inputArray[indexArr[indMin]] + "["
-					+ indexArr[indMin] + "]");
-			System.out.println("max distance " + maxDistance + " between "
-					+ inputArray[indexArr[0]] + "[" + indexArr[0] + "]"
-					+ " and " + inputArray[indexArr[indMax]] + "["
-					+ indexArr[indMax] + "]");
+			System.out
+					.println("min distance " + minDistance + " between "
+							+ pieceOfWork[indexesOfSorted[0]] + "[" + indexesOfSorted[0] + "]"
+							+ " and " + pieceOfWork[indexesOfSorted[indMin]] + "["
+							+ indexesOfSorted[indMin] + "]");
+			System.out
+					.println("max distance " + maxDistance + " between "
+							+ pieceOfWork[indexesOfSorted[0]] + "[" + indexesOfSorted[0] + "]"
+							+ " and " + pieceOfWork[indexesOfSorted[indMax]] + "["
+							+ indexesOfSorted[indMax] + "]");
 			return;
 		}
 
-		int minDistance = indexArr[1] - indexArr[0];
+		int minDistance = indexesOfSorted[1] - indexesOfSorted[0];
 
 		int currentMinDist = minDistance;
 
 		int minIndex = 1;
 		for (int index = 1; index < currentIndex; index++) {
 
-			currentMinDist = indexArr[index] - indexArr[index - 1];
+			currentMinDist = indexesOfSorted[index] - indexesOfSorted[index - 1];
 
 			if (currentMinDist < minDistance) {
 				minDistance = currentMinDist;
@@ -151,18 +152,19 @@ public class FinderDistances {
 			}
 		}
 
-		int maxDistance = indexArr[currentIndex - 1] - indexArr[0];
+		int maxDistance = indexesOfSorted[currentIndex - 1] - indexesOfSorted[0];
 
-		System.out.println("min distance " + minDistance + " between "
-				+ inputArray[indexArr[minIndex - 1]] + "["
-				+ indexArr[minIndex - 1] + "]" + " and "
-				+ inputArray[indexArr[minIndex]] + "[" + indexArr[minIndex]
-				+ "]");
+		System.out
+				.println("min distance " + minDistance + " between "
+						+ pieceOfWork[indexesOfSorted[minIndex - 1]] + "["
+						+ indexesOfSorted[minIndex - 1] + "]" + " and "
+						+ pieceOfWork[indexesOfSorted[minIndex]] + "["
+						+ indexesOfSorted[minIndex] + "]");
 
 		System.out.println("max distance " + maxDistance + " between "
-				+ inputArray[indexArr[0]] + "[" + indexArr[0] + "]" + " and "
-				+ inputArray[indexArr[currentIndex - 1]] + "["
-				+ indexArr[currentIndex - 1] + "]");
+				+ pieceOfWork[indexesOfSorted[0]] + "[" + indexesOfSorted[0] + "]" + " and "
+				+ pieceOfWork[indexesOfSorted[currentIndex - 1]] + "["
+				+ indexesOfSorted[currentIndex - 1] + "]");
 
 	}
 }
