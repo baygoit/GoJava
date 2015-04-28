@@ -7,8 +7,7 @@ import java.io.InputStreamReader;
 public class DistanceCalculator {
 	public static final String SEPARATOR = " ";
 	public static final int MINIMUM_ARRAY_SIZE = 2;
-	public static final int FIRST_INIT_INDEX = 0;
-	public static final int SECOND_INIT_INDEX = 0;
+	public static final int EMPTY_INDEX = -1;
 
 	private String lineOfNumbers;
 
@@ -20,30 +19,35 @@ public class DistanceCalculator {
 		BufferedReader reader = new BufferedReader(new InputStreamReader(
 				System.in));
 
-		try {
-			System.out.println("Input numbers:");
-			String line = reader.readLine();
-			System.out.println(new DistanceCalculator(line).getDistance());
-		} catch (NumberFormatException e) {
-			System.out.println("Incorrect numbers");
-		} finally {
-			reader.close();
+		while (true) {
+			try {
+				System.out.println("Input numbers (or 'exit'):");
+				String line = reader.readLine();
+				if ("exit".equalsIgnoreCase(line)) {
+					break;
+				}
+
+				System.out.println(new DistanceCalculator(line).getDistance());
+			} catch (NumberFormatException e) {
+				System.out.println("Incorrect numbers! Try again please");
+			}
 		}
+
+		reader.close();
 	}
 
 	public int getDistance() throws NumberFormatException {
-		int[] numbers = getNumbers(lineOfNumbers);
-		check(numbers);
+		int[] numbers = getNumbers();
 		return calculateDistance(numbers);
 	}
 
-	private void check(int[] numbers) throws NumberFormatException {
-		if (numbers.length < MINIMUM_ARRAY_SIZE)
+	private int[] getNumbers() throws NumberFormatException {
+		String[] numbers = lineOfNumbers.split(SEPARATOR);
+		int[] result = convert(numbers);
+		if (!check(result)) {
 			throw new NumberFormatException();
-	}
-
-	private int[] getNumbers(String numbers) throws NumberFormatException {
-		return convert(lineOfNumbers.split(SEPARATOR));
+		}
+		return result;
 	}
 
 	private int[] convert(String[] numbers) throws NumberFormatException {
@@ -54,46 +58,33 @@ public class DistanceCalculator {
 		return result;
 	}
 
-	private int calculateDistance(int[] numbers) {
-		int indexOfFirstMinimum = FIRST_INIT_INDEX;
-		int indexOfSecondMinimum = SECOND_INIT_INDEX;
-		calculateIndexsOfTwoMinimums(indexOfFirstMinimum, indexOfSecondMinimum, numbers);
-		
-		int result = indexOfSecondMinimum - indexOfFirstMinimum;
-		if (indexOfSecondMinimum < indexOfFirstMinimum) {
-			result *= -1;
+	private boolean check(int[] numbers) {
+		if (numbers.length < MINIMUM_ARRAY_SIZE) {
+			return false;
 		}
-		return result;
+		return true;
 	}
 
-	private void calculateIndexsOfTwoMinimums(int indexOfFirstMinimum,
-			int indexOfSecondMinimum, int[] numbers) {
-		for (int index = 2; index < numbers.length; index++) {
-			if (checkIndexOfMinimum(indexOfFirstMinimum, index, numbers)) {
-				setIndexOfMinimum(indexOfFirstMinimum, indexOfSecondMinimum,
-						index, numbers);
-			} else if (checkIndexOfMinimum(indexOfSecondMinimum, index, numbers)) {
-				setIndexOfMinimum(indexOfSecondMinimum, indexOfFirstMinimum,
-						index, numbers);
+	private int calculateDistance(int[] numbers) {
+		int indexOfFirstMinimum = getIndexOfMinimum(numbers, EMPTY_INDEX);
+		int indexOfSecondMinimum = getIndexOfMinimum(numbers,
+				indexOfFirstMinimum);
+
+		return Math.abs(indexOfFirstMinimum - indexOfSecondMinimum);
+	}
+
+	private int getIndexOfMinimum(int[] numbers, int exceptIndex) {
+		int result = EMPTY_INDEX;
+		for (int index = 0; index < numbers.length; index++) {
+			if (index == exceptIndex) {
+				continue;
+			}
+			if (result == EMPTY_INDEX) {
+				result = index;
+			} else if (numbers[result] > numbers[index]) {
+				result = index;
 			}
 		}
-	}
-
-	private void setIndexOfMinimum(int indexOfMinimum,
-			int indexOfAdditionalMinimum, int currentIndex, int[] numbers) {
-
-		if (numbers[indexOfAdditionalMinimum] > numbers[indexOfMinimum]) {
-			indexOfAdditionalMinimum = indexOfMinimum;
-		}
-		indexOfMinimum = currentIndex;
-	}
-
-	private boolean checkIndexOfMinimum(int indexOfMinimum, int currentIndex,
-			int[] numbers) {
-
-		if (numbers[indexOfMinimum] > numbers[currentIndex]) {
-			return true;
-		}
-		return false;
+		return result;
 	}
 }
