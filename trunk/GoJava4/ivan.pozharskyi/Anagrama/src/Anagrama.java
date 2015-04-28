@@ -2,9 +2,9 @@ import java.util.Scanner;
 import java.util.Stack;
 
 public class Anagrama {
-	private String enteredData;
+	private String lineWords;
 	public Anagrama(String enteredData){
-		this.enteredData = enteredData;
+		this.lineWords = enteredData;
 	}
 	public Anagrama(){
 		
@@ -14,11 +14,10 @@ public class Anagrama {
 
 		System.out.println("Enter words:");
 		Anagrama anagrama = new Anagrama();
-		anagrama.enteredData = anagrama.readFromConsole();
+		anagrama.lineWords = anagrama.readFromConsole();		
 		
-
-		String[] words = anagrama.enteredData.split(" ");
-		String[] result = anagrama.makeAnagrama(words);                                    
+		
+		String[] result = anagrama.makeAnagrama(anagrama.lineWords);                                    
 		anagrama.printResult(result);
 	}
 
@@ -40,28 +39,34 @@ public class Anagrama {
 		}
 	}
 
-	private String[] makeAnagrama(String[] enteredData) {
-		String[] result = enteredData;
-		for (int i = 0; i < enteredData.length; i++) {
+	public String[] makeAnagrama(String data) {
+		String [] words = splitWords(data);
+		String[] result = words;
+		for (int i = 0; i < words.length; i++) {
 
-			char[] words = enteredData[i].toCharArray();
-			char[] reverseWord = reversingWord(words);
+			char[] word = words[i].toCharArray();
+			char[] reverseWord = reversingWord(word);
 			result[i] = String.valueOf(reverseWord);
 
 		}
 		return result;
 
 	}
+	private String[] splitWords(String data){
+		String[] words = data.split(" ");
+		return words;
+		
+	}
 
-	private char[] reversingWord(char[] words) {
+	private char[] reversingWord(char[] word) {
 
 		Stack<Character> stack = new Stack<>();
-		for (int i = 0; i < words.length; i++) {
-			stack.push(words[i]);
+		for (int i = 0; i < word.length; i++) {
+			stack.push(word[i]);
 		}
 
-		char[] reverseWord = words;
-		for (int i = 0; i < words.length; i++) {
+		char[] reverseWord = word;
+		for (int i = 0; i < word.length; i++) {
 			reverseWord[i] = (char) stack.pop();
 
 		}
