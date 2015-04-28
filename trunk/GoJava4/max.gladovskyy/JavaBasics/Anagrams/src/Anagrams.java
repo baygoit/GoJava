@@ -8,23 +8,23 @@ public class Anagrams {
 	public static void main(String[] args) throws IOException {
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 		
-		String str = new String(reader.readLine());
+		String str = reader.readLine();
 		String[] list = str.split(" ");
 		
-		for (String s: list) {
-			System.out.print(anagram(s)+" ");
+		for (String word: list) {
+			System.out.print(anagram(word)+" ");
 		}
 		
 	}
 
 	private static String anagram(String s) {
-		char[] c = s.toCharArray();
-		char[] c1 = new char[c.length];
+		char[] wordChars = s.toCharArray();
+		char[] reversedWordChars = new char[wordChars.length];
 		
-		for (int i=0; i<c.length; i++) {
-			c1[c.length-1-i] = c[i];
+		for (int i=0; i<wordChars.length; i++) {
+			reversedWordChars[wordChars.length-1-i] = wordChars[i];
 		}
-		return new String(c1);
+		return new String(reversedWordChars);
 	}
 
 }
