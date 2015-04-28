@@ -20,7 +20,7 @@ public class FinderDistances {
 	}
 
 	public void testFinder(FinderDistances finder) {
-		arrayToWork = new int[] { 0, 1, 1, 0, 1, 0 };
+		arrayToWork = new int[] { -8, 1, 1, 0, -9, 0 };
 		System.out.println("input                 "
 				+ Arrays.toString(arrayToWork));
 		finder.startWorker();
@@ -47,6 +47,30 @@ public class FinderDistances {
 
 	void validateArrayToWork() {
 
+	}
+
+	void startWorker() {
+
+		sizeOfArrayToWork = arrayToWork.length;
+		index = new int[sizeOfArrayToWork];
+		markers = new int[sizeOfArrayToWork];
+		sorted = new int[sizeOfArrayToWork];
+
+		validateArrayToWork();
+		makeSortedAndIndexes();
+
+		System.out.println("sorted array          " + Arrays.toString(sorted));
+		System.out.println("index of sorted array " + Arrays.toString(index));
+
+		countDuplicates = countDuplicatesOfFirstSortedElement();
+
+		if (countDuplicates == 1) {
+			doForSecondDuplicatedElements();
+			showResult();
+			return;
+		}
+		doForFirstDuplicatedSortedElements();
+		showResult();
 	}
 
 	void makeSortedAndIndexes() {
@@ -130,44 +154,6 @@ public class FinderDistances {
 		toSecondResultOfMaxDist = index[toSecondResult];
 	}
 
-	void showResult() {
-		System.out.println("min distance " + minDistance + " between "
-				+ arrayToWork[toFirstResultOfMinDist] + "["
-				+ toFirstResultOfMinDist + "]" + " and "
-				+ arrayToWork[toSecondResultOfMinDist] + "["
-				+ toSecondResultOfMinDist + "]");
-
-		System.out.println("max distance " + maxDistance + " between "
-				+ arrayToWork[toFirstResultOfMaxDist] + "["
-				+ toFirstResultOfMaxDist + "]" + " and "
-				+ arrayToWork[toSecondResultOfMaxDist] + "["
-				+ toSecondResultOfMaxDist + "]");
-	}
-
-	void startWorker() {
-
-		sizeOfArrayToWork = arrayToWork.length;
-		index = new int[sizeOfArrayToWork];
-		markers = new int[sizeOfArrayToWork];
-		sorted = new int[sizeOfArrayToWork];
-
-		validateArrayToWork();
-		makeSortedAndIndexes();
-
-		System.out.println("sorted array          " + Arrays.toString(sorted));
-		System.out.println("index of sorted array " + Arrays.toString(index));
-
-		int countDuplicates = countDuplicatesOfFirstSortedElement();
-
-		if (countDuplicates == 1) {
-			doForSecondDuplicatedElements();
-			showResult();
-			return;
-		}
-		doForFirstDuplicatedSortedElements();
-		showResult();
-	}
-
 	void doForFirstDuplicatedSortedElements() {
 		final int POINTER_TO_FIRST_ELEMENT = 0;
 		final int POINTER_TO_SECOND_ELEMENT = 1;
@@ -190,5 +176,19 @@ public class FinderDistances {
 		maxDistance = index[countDuplicates - 1] - index[0];
 		toFirstResultOfMaxDist = index[0];
 		toSecondResultOfMaxDist = index[countDuplicates - 1];
+	}
+
+	void showResult() {
+		System.out.println("min distance " + minDistance + " between "
+				+ arrayToWork[toFirstResultOfMinDist] + "["
+				+ toFirstResultOfMinDist + "]" + " and "
+				+ arrayToWork[toSecondResultOfMinDist] + "["
+				+ toSecondResultOfMinDist + "]");
+
+		System.out.println("max distance " + maxDistance + " between "
+				+ arrayToWork[toFirstResultOfMaxDist] + "["
+				+ toFirstResultOfMaxDist + "]" + " and "
+				+ arrayToWork[toSecondResultOfMaxDist] + "["
+				+ toSecondResultOfMaxDist + "]");
 	}
 }
