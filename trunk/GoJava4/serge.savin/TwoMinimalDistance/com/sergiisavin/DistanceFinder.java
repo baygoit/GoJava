@@ -1,5 +1,5 @@
 /*
- * Service class. Contains a static method that calculates the distance between two minimal numbers in the array
+ * Service class. Singleton. Contains a method that calculates the distance between two minimal numbers in the array
  * if there are more than two minimal elements the method calculates the distance between the most distant elements
  * the indexes of all minimal elements are calculated, so that other variants of calculation can be realized later
  * 
