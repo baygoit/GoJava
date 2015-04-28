@@ -22,7 +22,7 @@ public class AnagramsMaker {
 		return anagramsMaker; 
 	}
 	
-	public static String makeAnagram(String inputString){
+	public String makeAnagram(String inputString){
 		String anagram = null;
 		
 		String[] words = inputString.split("\\s+");
@@ -34,7 +34,7 @@ public class AnagramsMaker {
 		return anagram;
 	}
 
-	private static String constructAnagram(String[] words) {
+	private String constructAnagram(String[] words) {
 		String anagram = null;
 		
 		//in our anagram, there will be one space between words
@@ -49,7 +49,7 @@ public class AnagramsMaker {
 	}
 
 	//reverse word as char array 
-	private static void reverseWords(String[] words) {
+	private void reverseWords(String[] words) {
 		
 		for(int index = 0; index < words.length; index++){
 			
@@ -64,7 +64,7 @@ public class AnagramsMaker {
 		
 	}
 
-	private static void reverseWord(char[] wordAsChars) {
+	private void reverseWord(char[] wordAsChars) {
 		
 		int lastIndex = wordAsChars.length - 1;
 		for(int index = 0; index < (wordAsChars.length)/2; index++){

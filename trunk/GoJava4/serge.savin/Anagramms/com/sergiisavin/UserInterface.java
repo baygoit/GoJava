@@ -38,7 +38,8 @@ public class UserInterface {
 				System.out.print("Enter some text: ");
 				inputData = scanner.nextLine();
 				inputData = inputData.trim();
-				System.out.println("The anagram: " + AnagramsMaker.makeAnagram(inputData));
+				AnagramsMaker anagramsMaker = AnagramsMaker.getAnagramsMaker();
+				System.out.println("The anagram: " + anagramsMaker.makeAnagram(inputData));
 				break;
 			}
 							
