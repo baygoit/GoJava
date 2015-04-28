@@ -6,7 +6,7 @@ public class Anagram {
 	public static void main(String[] args) {
 		String inputText = initList();
 		String[] arrayText = createArray(inputText);
-		String outputText = Permutation(arrayText);
+		String outputText = permutation(arrayText);
 		System.out.println(outputText);
 	}
 
@@ -31,7 +31,7 @@ public class Anagram {
 		return arrayText;
 	}
 
-	private static String Permutation(String[] arrayText) {
+	private static String permutation(String[] arrayText) {
 		String outputText = "";
 		for (String text : arrayText) {
 			StringBuffer sb = new StringBuffer(text);
