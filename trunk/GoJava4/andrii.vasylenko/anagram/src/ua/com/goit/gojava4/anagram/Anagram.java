@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 
 public class Anagram {
 	public static final String SEPARATOR = " ";
+
 	private String lineOfWords;
 
 	public Anagram(String lineOfWords) {
@@ -31,20 +32,11 @@ public class Anagram {
 
 	public String getAnagramLine() {
 		String[] words = lineOfWords.split(SEPARATOR);
-		reverse(words);
+		reverseEachOf(words);
 		return composeLine(words);
 	}
 
-	private String composeLine(String[] words) {
-		StringBuilder result = new StringBuilder();
-		for (String word : words) {
-			result.append(word);
-			result.append(SEPARATOR);
-		}
-		return result.toString().trim();
-	}
-
-	private void reverse(String[] words) {
+	private void reverseEachOf(String[] words) {
 		for (int index = 0; index < words.length; index++) {
 			String word = words[index];
 			words[index] = reverse(word);
@@ -54,6 +46,15 @@ public class Anagram {
 	private String reverse(String word) {
 		StringBuilder result = new StringBuilder(word);
 		result.reverse();
+		return result.toString();
+	}
+
+	private String composeLine(String[] words) {
+		StringBuilder result = new StringBuilder();
+		for (String word : words) {
+			result.append(word);
+			result.append(SEPARATOR);
+		}
 		return result.toString();
 	}
 }
