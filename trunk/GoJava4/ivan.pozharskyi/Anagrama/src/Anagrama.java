@@ -2,17 +2,27 @@ import java.util.Scanner;
 import java.util.Stack;
 
 public class Anagrama {
+	private String enteredData;
+	public Anagrama(String enteredData){
+		this.enteredData = enteredData;
+	}
+	public Anagrama(){
+		
+	}
 
 	public static void main(String[] args) {
 
 		System.out.println("Enter words:");
-		String enteredData = readFromConsole();
+		Anagrama anagrama = new Anagrama();
+		anagrama.enteredData = anagrama.readFromConsole();
+		
 
-		String[] result = makeAnagrama(enteredData.split(" "));                                    
-		printResult(result);
+		String[] words = anagrama.enteredData.split(" ");
+		String[] result = anagrama.makeAnagrama(words);                                    
+		anagrama.printResult(result);
 	}
 
-	private static String readFromConsole() {
+	private String readFromConsole() {
 
 		Scanner scanner;
 		scanner = new Scanner(System.in);
@@ -22,7 +32,7 @@ public class Anagrama {
 		return enteredData;
 	}
 
-	private static void printResult(String[] result) {
+	private void printResult(String[] result) {
 		
 		System.out.println("Result:");
 		for (int i = 0; i < result.length; i++) {
@@ -30,7 +40,7 @@ public class Anagrama {
 		}
 	}
 
-	private static String[] makeAnagrama(String[] enteredData) {
+	private String[] makeAnagrama(String[] enteredData) {
 		String[] result = enteredData;
 		for (int i = 0; i < enteredData.length; i++) {
 
@@ -43,7 +53,7 @@ public class Anagrama {
 
 	}
 
-	private static char[] reversingWord(char[] words) {
+	private char[] reversingWord(char[] words) {
 
 		Stack<Character> stack = new Stack<>();
 		for (int i = 0; i < words.length; i++) {
