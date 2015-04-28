@@ -25,7 +25,7 @@ public class Anagrams {
 		try {
 			return consoleReader.readLine();
 		} catch (IOException e) {
-			System.out.println("You entered incorrect data (words separated with space is needed)");
+			System.err.println("You entered incorrect data (words separated with space is needed)");
 		}
 		return null;
 	}
