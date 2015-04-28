@@ -19,12 +19,12 @@ public class Anagrams {
 
 	private static String reverse(String word) {
 		char[] wordChars = word.toCharArray();
-		char[] reversedWordChars = new char[wordChars.length];
+		char[] result = new char[wordChars.length];
 		
 		for (int i=0; i<wordChars.length; i++) {
-			reversedWordChars[wordChars.length-1-i] = wordChars[i];
+			result[wordChars.length-1-i] = wordChars[i];
 		}
-		return new String(reversedWordChars);
+		return new String(result);
 	}
 
 }
