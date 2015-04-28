@@ -12,12 +12,12 @@ public class Anagrams {
 
 	private static String reversString(String userString) {
 		String[] userStringSplited = userString.split(" ");
-		String userStringReversed = new String();
+		String result = new String();
 		
 		for (String word: userStringSplited) {
-			userStringReversed = userStringReversed + reverseWord(word) + " ";
+			result = result + reverseWord(word) + " ";
 		}
-		return userStringReversed;
+		return result;
 	}
 	
 	private static String readLine() {
@@ -35,12 +35,12 @@ public class Anagrams {
 		char[] result = new char[wordChars.length];
 		
 		for (int i=0; i<wordChars.length; i++) {
-			result[wordChars.length-1-i] = checkIsCorrect(wordChars[i]);
+			result[wordChars.length-1-i] = filterNotLetters(wordChars[i]);
 		}
 		return new String(result);
 	}
 	
-	private static Character checkIsCorrect (Character letter) {
+	private static Character filterNotLetters (Character letter) {
 		if (Character.isLetter(letter)) {
 			 return letter;
 		} else {
