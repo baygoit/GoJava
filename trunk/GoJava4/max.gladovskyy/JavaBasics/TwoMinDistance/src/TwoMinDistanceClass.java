@@ -51,7 +51,7 @@ public class TwoMinDistanceClass {
 
 	private static void checkNumbersQuantity(ArrayList<Integer> result) {
 		if (result.size() < 2) {
-			System.err.println("You enteret not enough numbers, minimum 2 needed.");
+			System.err.println("You entered not enough numbers, minimum 2 needed.");
 			System.exit(0);
 		}
 		
