@@ -23,11 +23,20 @@ public class Anagrams {
 	private static String readLine() {
 		BufferedReader consoleReader = new BufferedReader(new InputStreamReader(System.in));
 		try {
-			return consoleReader.readLine();
+			String line = consoleReader.readLine();
+			checkIfEmpty(line);
+			return line;
 		} catch (IOException e) {
 			System.err.println("You entered incorrect data (words separated with space is needed)");
 		}
 		return null;
+	}
+
+	private static void checkIfEmpty(String line) {
+		if (line.equals("")) {
+			System.err.println("Cant revert empty string");	
+			System.exit(0);
+		}
 	}
 
 	private static String reverseWord(String word) {
