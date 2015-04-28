@@ -40,7 +40,7 @@ public class Anagrams {
 			if (Character.isLetter(wordChars[i])) {
 				result[wordChars.length-1-i] = wordChars[i];
 			} else {
-				System.err.println(wordChars[i] + "is not a letter symbol in your string. "
+				System.err.println(wordChars[i] + " is not a letter symbol in your string. "
 						+ "Please enter string with only letters and spaces");
 				System.exit(0);
 			}
