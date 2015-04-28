@@ -6,62 +6,44 @@ public class FinderDistances {
 	int[] sorted;
 	int[] pieceOfWork;
 	int sizeOfPieceOfWork;
-
 	public static void main(String[] args) {
-
-		int[] array;
-
 		FinderDistances finder = new FinderDistances();
-		// try {
-		array = new int[] { 1, 1, 2, 0 };
-		System.out.println("input                 " + Arrays.toString(array));
-		finder.work(array);
+		finder.testFinder(finder);
+	}
+	public   void testFinder(FinderDistances finder) {
+		pieceOfWork = new int[] { 1, 1, 2, 0 };
+		System.out.println("input                 " + Arrays.toString(pieceOfWork));
+		finder.startWorker();
 		System.out.println("-----------------------------------------");
 
-		array = new int[] { 23, 45, 34, 12, 45, 4, 38, 56, 2, 49, 100 };
-		System.out.println("input                 " + Arrays.toString(array));
-		finder.work(array);
+		pieceOfWork = new int[] { 23, 45, 34, 12, 45, 4, 38, 56, 2, 49, 100 };
+		System.out.println("input                 " + Arrays.toString(pieceOfWork));
+		finder.startWorker();
 		System.out.println("-----------------------------------------");
 
-		array = new int[] { 1, 1, 2, 0, 1, 1, 4, 1 };
-		System.out.println("input                 " + Arrays.toString(array));
-		finder.work(array);
+		pieceOfWork = new int[] { 1, 1, 2, 0, 1, 1, 4, 1 };
+		System.out.println("input                 " + Arrays.toString(pieceOfWork));
+		finder.startWorker();
 		System.out.println("-----------------------------------------");
 
-		array = new int[] { 1, 1, 2, 0, 1, 0, 4, 0 };
-		System.out.println("input                 " + Arrays.toString(array));
-		finder.work(array);
+		pieceOfWork = new int[] { 1, 1, 2, 0, 1, 0, 4, 0 };
+		System.out.println("input                 " + Arrays.toString(pieceOfWork));
+		finder.startWorker();
 		System.out.println("-----------------------------------------");
+	}
 
-		// } catch (RuntimeException e) {
-		// System.out.println(e);
-
-		// }
+	void validateThePieceOfWork() {
 
 	}
 
-	void arrayValidate() {
-
-		System.out.println(sizeOfPieceOfWork);
-		// if (originalLen <= 0) {
-		// throw new Exception("length of array should be greater than 0");
-
-		// }
-
-	}
-
-	void doSortAndMakeIndexes() {
-		
+	void makeSortedAndIndexes() {
 		final int MARKED = 1;
 		int minimalInPieceOfWork = pieceOfWork[0];
 		int whereMinimal = 0;
 
 		for (int whereDoIndexes = 0; whereDoIndexes < sizeOfPieceOfWork; whereDoIndexes++) {
-
 			boolean minFinded = false;
-
 			for (int whereDoSort = 0; whereDoSort < sizeOfPieceOfWork; whereDoSort++) {
-
 				if (markers[whereDoSort] == MARKED) {
 					continue;
 				}
@@ -82,17 +64,15 @@ public class FinderDistances {
 			markers[whereMinimal] = MARKED;
 		}
 	}
-
-	void work(int[] pieceOfWork) {
-
-		this.pieceOfWork = pieceOfWork;
+	
+	void startWorker() {
 		sizeOfPieceOfWork = pieceOfWork.length;
 		indexesOfSorted = new int[sizeOfPieceOfWork];
 		markers = new int[sizeOfPieceOfWork];
 		sorted = new int[sizeOfPieceOfWork];
 
-		arrayValidate();
-		doSortAndMakeIndexes();
+		validateThePieceOfWork();
+		makeSortedAndIndexes();
 
 		System.out.println("sorted array          " + Arrays.toString(sorted));
 		System.out.println("index of sorted array "
