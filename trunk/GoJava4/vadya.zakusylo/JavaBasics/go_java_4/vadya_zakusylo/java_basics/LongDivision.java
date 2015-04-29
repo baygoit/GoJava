@@ -24,6 +24,10 @@ public class LongDivision {
 		System.out.println("Long division:");
 		System.out.println("\t" + firstValue + "\t|\t" + secondValue);
 		System.out.println("-\t" + wholeValue + "\t|\t" + result);
+		printLongDivision(secondValue, modulo);
+	}
+
+	private static void printLongDivision(int secondValue, int modulo) {
 		String indentation = " " + "\t";
 		for (int iteration = 0; iteration < 10; iteration++) {
 			int printModulo = countOfModulo(modulo, secondValue);
