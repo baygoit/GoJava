@@ -74,6 +74,7 @@ public class DistanceFinder {
 			result =  findIndex(numbers, secondNumber);
 			break;
 		case 2:
+			/* falls through */
 		case 1:
 			indexesOfRepeatedElements = getElementIndexes(secondNumber, numbers);
 			result = getIndexOfMostDistantElement(indexesOfRepeatedElements, indexOfFirstMinimalElement);
