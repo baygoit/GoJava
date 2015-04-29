@@ -1,4 +1,4 @@
-package swap;
+package go_java_4.vadya_zakusylo.java_basics;
 
 import java.util.Arrays;
 
@@ -6,18 +6,18 @@ public class SortBubble {
 
 	public static void main(String[] args) {
 		int[] array = { 15, 2, 20, 17, 3, 65, 42 };
-		for (int i = 0; i < array.length - 1; i++) {
-			for (int j = 0; j < array.length - 1 - i; j++) {
-				if (array[j] > array[j + 1]) {
-					swap(array, j);
+		for (int indexFirst = 0; indexFirst < array.length - 1; indexFirst++) {
+			for (int indexSecond = 0; indexSecond < array.length - 1 - indexFirst; indexSecond++) {
+				if (array[indexSecond] > array[indexSecond + 1]) {
+					swap(array, indexSecond);
 				}
 			}
 		}
 		System.out.println(Arrays.toString(array));
-		for (int i = array.length - 1; i >= 0; i--) {
-			for (int j = array.length - 1; j > array.length - 1 - i; j--) {
-				if (array[j] > array[j - 1]) {
-					swap(array, j - 1);
+		for (int indexFirst = array.length - 1; indexFirst >= 0; indexFirst--) {
+			for (int indexSecond = array.length - 1; indexSecond > array.length - 1 - indexFirst; indexSecond--) {
+				if (array[indexSecond] > array[indexSecond - 1]) {
+					swap(array, indexSecond - 1);
 				}
 			}
 		}
