@@ -3,12 +3,6 @@ package anagram;
 import java.io.IOException;
 import java.util.Scanner;
 
-/*На вход консольного приложения передается строка слов,
- * разделенных пробелами. Твоя задача сделать из слов анаграммы
- * ("задом наперед") при этом оставив порядок слов неизменными.
- * Результат вывести в консоль.
- * Пример "мама мыла раму" => "амам алым умар"*/
-
 public class ReverseAnagramMaker {
 
 	private static String inputText;
@@ -32,7 +26,6 @@ public class ReverseAnagramMaker {
 	public void setInputTextFromConsole() {
 		System.out.println("Enter some text: ");
 		Scanner scan = new Scanner(System.in);
-		scan.close();
 		inputText = scan.nextLine();
 	}
 	
