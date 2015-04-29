@@ -4,10 +4,11 @@ import java.io.InputStreamReader;
 
 public class DistanceBetween2numbers {
 
+	private static final int FIRSTINDEX = 0;
+	private static final int EMPTYINDEX = -1;
 	private static final String SEPARATOR = " ";
 	private String line;
 	private static final String EXIT = "exit";
-
 
 	public static void main(String[] args) throws IOException {
 
@@ -21,7 +22,8 @@ public class DistanceBetween2numbers {
 					break;
 				}
 				int[] numbers = getNumbers(splitLine(line));
-				findDistanceBetween2Min(numbers);
+				System.out.println("Distance between 2 min numbers:");
+				System.out.println(findDistanceBetween2Min(numbers));
 
 			} catch (NumberFormatException e) {
 				System.out.println("Wrong enterd line");
@@ -37,53 +39,58 @@ public class DistanceBetween2numbers {
 	}
 
 	private static int[] getNumbers(String[] words) {
-		int numbersLength = words.length;
-		for (int i = 0; i < words.length; i++) {
-			if (words[i].isEmpty()) {
-				numbersLength--;
-			}
-		}
+
+		int numbersLength = amountNumbers(words);
 		int[] numbers = new int[numbersLength];
-		for (int i = 0, j = 0; i < words.length || j < numbersLength; i++, j++) {
-			if (words[i].isEmpty()) {
-				j--;
+		for (int indexWord = 0, indexNumbers = 0; indexWord < words.length; indexWord++, indexNumbers++) {
+			if (words[indexWord].isEmpty()) {
+				indexNumbers--;
 			} else {
-				numbers[j] = Integer.valueOf(words[i]);
+				numbers[indexNumbers] = Integer.valueOf(words[indexWord]);
 			}
 
 		}
 		return numbers;
 	}
 
-	private static void findDistanceBetween2Min(int[] numbers) {
-		int min1 = numbers[0];
-		int min1Index = 0;
-		int min2, min2Index;
-		for (int i = 0; i < numbers.length; i++) {
-			if (numbers[i] < min1) {
-				min1 = numbers[i];
-				min1Index = i;
+	private static int amountNumbers(String[] words) {
+		int numbersLength = words.length;
+		for (int indexWord = 0; indexWord < words.length; indexWord++) {
+			if (words[indexWord].isEmpty()) {
+				numbersLength--;
 			}
-
 		}
-		if (min1Index != 0) {
-			min2Index = 0;
-			min2 = numbers[0];
-		} else {
-			min2Index = 1;
-			min2 = numbers[1];
+
+		return numbersLength;
+	}
+	private static int indexOfMinNumber(int[] numbers,int indexMinNumber){
+		int indexOfMinNumber;
+		if(indexMinNumber!=FIRSTINDEX){
+			indexOfMinNumber = FIRSTINDEX;
+		}
+		else{
+			indexOfMinNumber = FIRSTINDEX+1;
+		}
+		if(indexMinNumber == EMPTYINDEX){
+			indexOfMinNumber = FIRSTINDEX;
 		}
 		for (int i = 0; i < numbers.length; i++) {
-			if (i != min1Index) {
-				if (numbers[i] < min2) {
-					min2 = numbers[i];
-					min2Index = i;
+			if (i != indexMinNumber) {
+				if (numbers[i] <numbers[indexOfMinNumber]) {
+					numbers[indexOfMinNumber] = numbers[i];
+					indexOfMinNumber = i;
 				}
 			}
 		}
+		return indexOfMinNumber;
+				
+	}
+	private static int findDistanceBetween2Min(int[] numbers) {
 
-		System.out.println("result: " + Math.abs(min2Index - min1Index)
-				+ " MinNumber1: " + min1 + " MinNumber2: " + min2);
+		int indexMinNumber1 = indexOfMinNumber(numbers,EMPTYINDEX);
+		int indexMinNumber2 = indexOfMinNumber(numbers,indexMinNumber1);
+		return Math.abs(indexMinNumber1 - indexMinNumber2);
+	
 	}
 
 }
