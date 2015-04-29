@@ -14,7 +14,7 @@ public class Delenie {
 		out.println("To exit type '" + EXIT + "'");
 		
 		while(true){
-			out.print("Please type formula in n1/n2 where n1 and n2 are numbers");
+			out.print("Please type formula in format n1/n2 where n1 and n2 are numbers");
 			String phrase = in.nextLine();
 			
 			if (phrase.equalsIgnoreCase(EXIT))
