@@ -11,10 +11,10 @@ public class Delenie {
 		PrintStream out = System.out;
 		Scanner in = new Scanner(System.in);
 		
-		out.println("для завершеня программы введите '" + EXIT + "'");
+		out.println("To exit type '" + EXIT + "'");
 		
 		while(true){
-			out.print("Введите для деления 2 целых числа в формате 12/33:");
+			out.print("Please type formula in n1/n2 where n1 and n2 are numbers");
 			String phrase = in.nextLine();
 			
 			if (phrase.equalsIgnoreCase(EXIT))
