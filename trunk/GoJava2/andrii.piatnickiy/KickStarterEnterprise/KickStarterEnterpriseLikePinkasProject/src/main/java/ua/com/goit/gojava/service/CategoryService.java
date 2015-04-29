@@ -11,24 +11,23 @@ import org.springframework.stereotype.Service;
 
 import ua.com.goit.gojava.entity.Category;
 import ua.com.goit.gojava.entity.Project;
-import ua.com.goit.gojava.repository.CategoryRository;
-import ua.com.goit.gojava.repository.ProjectRository;
+import ua.com.goit.gojava.repository.CategoryRepository;
+import ua.com.goit.gojava.repository.ProjectRepository;
 
 @Service
 public class CategoryService {
 
 	@Autowired
-	private CategoryRository categoryRository;
+	private CategoryRepository categoryRository;
 	
 	@Autowired
-	private ProjectRository  projectRository;
+	private ProjectRepository  projectRository;
 	
 	public List<Category> findAll(){
 		return categoryRository.findAll();
 	}
 
 	public Category findOne(int id) {
-		// TODO Auto-generated method stub
 		return categoryRository.findOne(id);
 	}
 	

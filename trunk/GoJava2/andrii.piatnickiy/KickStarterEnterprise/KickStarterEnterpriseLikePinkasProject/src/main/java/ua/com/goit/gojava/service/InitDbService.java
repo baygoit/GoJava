@@ -8,21 +8,30 @@ import org.springframework.stereotype.Service;
 
 import ua.com.goit.gojava.entity.Category;
 import ua.com.goit.gojava.entity.Project;
-import ua.com.goit.gojava.repository.CategoryRository;
-import ua.com.goit.gojava.repository.ProjectRository;
+import ua.com.goit.gojava.entity.User;
+import ua.com.goit.gojava.repository.CategoryRepository;
+import ua.com.goit.gojava.repository.ProjectRepository;
+import ua.com.goit.gojava.repository.UserRepository;
 
 @Transactional
 @Service
 public class InitDbService {
 
 	@Autowired
-	private CategoryRository categoryRository;
+	private CategoryRepository categoryRository;
 	
 	@Autowired
-	private ProjectRository projectRository;
+	private ProjectRepository projectRository;
+	
+	@Autowired
+	private UserRepository userRepository;
 	
 	@PostConstruct
 	public void init(){
+		User user = new User();
+		user.setName("Admin");
+		userRepository.save(user);	
+		
 		Category category1 = new Category();
 		category1.setName("Sport");
 		categoryRository.save(category1);
