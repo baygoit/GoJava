@@ -14,8 +14,7 @@ public class Anagram {
 	}
 
 	public static void main(String[] args) throws IOException {
-		BufferedReader reader = new BufferedReader(new InputStreamReader(
-				System.in));
+		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
 		while (true) {
 			System.out.println("Input words (or 'exit'):");
