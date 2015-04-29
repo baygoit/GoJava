@@ -5,119 +5,67 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class DivisionAlgoritm {
+	public static final int ACCURACY = 6;
+	public static final int CORRECT_NUMBER_ARGUMENTS = 2;
+	public static final String DIVISION_SYMBOL = "/";
 
-	private int accuracy = 6;
 	private int dividend, divisor;
-	private String dividendWithAccuracy;
-	
+
 	public DivisionAlgoritm(String formula) throws NumberFormatException {
 		String[] numbers = split(formula);
 		dividend = convert(numbers[0]);
 		divisor = convert(numbers[1]);
-		dividendWithAccuracy = addAccuracy(numbers[0]);
 	}
 
 	public static void main(String[] args) throws IOException {
-		BufferedReader reader = new BufferedReader(new InputStreamReader(
-				System.in));
-		try {
-			System.out.println("Input formula:");
-			String formula = reader.readLine();
-			new DivisionAlgoritm(formula).showResult();
-		} catch (NumberFormatException e) {
-			System.out.println("Incorrect formula!");
-			return;
-		} finally {
-			reader.close();
+		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+
+		while (true) {
+			try {
+				System.out.println("Input formula (or 'exit'):");
+				String line = reader.readLine();
+				if ("exit".equalsIgnoreCase(line)) {
+					break;
+				}
+
+				System.out.println(new DivisionAlgoritm(line).getDivisionAnswer());
+			} catch (NumberFormatException e) {
+				System.out.println("Incorrect formula! Try again please");
+			}
 		}
+
+		reader.close();
 	}
 
-	public void showResult() {
-		StringBuilder result = new StringBuilder();
-		StringBuilder log = new StringBuilder();
-		StringBuilder spaces = new StringBuilder();
-		int currentNumber = 0;
-		
-		for (int index = 0; hasNextDigit(index); index++) {
-			getNextDigit(currentNumber, index, spaces, log);
-			calcResult(result, currentNumber, spaces, log);
-		}
-		
-		outputResult(result, log);
-	}
-	
-	
-	private boolean hasNextDigit(int index)
-	{
-		if (index >= dividendWithAccuracy.length()) {
-			return false;
-		}
-		return true;
+	public String getDivisionAnswer() {
+		Logger logger = new Logger();
+		DivisionCalculator calculator = new DivisionCalculator(dividend, divisor, ACCURACY, logger);
+		double result = calculator.calculate();
+		return composeAnswer(result, logger);
 	}
 
-	private void calcResult(StringBuilder sResult, int currentNumber, StringBuilder spaces, StringBuilder log) {
-		int localResult = currentNumber / divisor;
-		sResult.append(localResult);
-		localResult *= divisor;
-		log.append(spaces.toString() + localResult + "\n");
-		spaces.append(" ");
-		currentNumber -= localResult;
+	private String composeAnswer(double result, Logger logger) {
+		StringBuilder answer = new StringBuilder();
+		answer.append(dividend);
+		answer.append(divisor);
+		answer.append(result);
+		answer.append(logger.getLog());
+		return answer.toString();
 	}
-	
-	private int getNextDigit(int currentNumber, int index, StringBuilder spaces, StringBuilder log) {
-		if (!hasNextDigit(index)) {
-			log.append(spaces.toString() + currentNumber + "\n");
-			return currentNumber;
-		}
-		currentNumber *= 10;
-		currentNumber += Integer.parseInt(dividendWithAccuracy.substring(index,
-				index + 1));
-		
-		if (currentNumber != 0 && currentNumber / divisor < 1) {
-			getNextDigit(currentNumber, ++index, spaces, log);
-		}
-		if (spaces.length() > 0) {
-			log.append(spaces.toString() + currentNumber + "\n");
-		}
-		return currentNumber;
-	}
-	
-	private void outputResult(StringBuilder sResult, StringBuilder log) {
-		int number1 = this.dividend;
-		double localResult = Integer.parseInt(sResult.toString());
-		for (int i = 0; i < accuracy; i++) {
-			number1 /= 10;
-			localResult /= 10;
-		}
-		System.out.println(number1 + " | " + divisor);
-		//System.out.println(spaces.toString() + "  |" + localResult);
-		System.out.println(log.toString());
-	}
+
 	private String[] split(String formula) throws NumberFormatException {
-		String[] numbers = formula.split("/");
-		check(numbers);
+		String[] numbers = formula.split(DIVISION_SYMBOL);
+		if (!check(numbers)) {
+			throw new NumberFormatException();
+		}
 		return numbers;
 	}
 
-	private void check(String[] numbers) throws NumberFormatException {
-		if (numbers.length != 2) {
-			throw new NumberFormatException();
-		}
-		// try to:
-		convert(numbers[0]);
-		convert(numbers[1]);
-	}
-
-	private String addAccuracy(String number) {
-		String result = number;
-		for (int i = 0; i < accuracy; i++) {
-			this.dividendWithAccuracy += "0";
-		}
-		return result;
+	private boolean check(String[] numbers) {
+		return numbers.length == CORRECT_NUMBER_ARGUMENTS;
 	}
 
 	private int convert(String number) throws NumberFormatException {
 		return Integer.parseInt(number);
 	}
-
 }
