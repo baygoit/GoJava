@@ -11,6 +11,7 @@ public class TwoMinDistanceClass {
 		System.out.println("Distance is: "+ MinimalNumbersDistance);
 	}
 
+	private static final int MAX_INT_DIGITS_COUNT = 10;
 
 	private static int  getMinimalNumbersDistance(ArrayList<Integer> numbers) {
 		int aNumberValue = numbers.get(0);
@@ -76,12 +77,10 @@ public class TwoMinDistanceClass {
 				return false;
 			}
 		}
-		if (Long.parseLong(number) > Integer.MAX_VALUE) {
+		if (number.length() > MAX_INT_DIGITS_COUNT || Long.parseLong(number) > Integer.MAX_VALUE) {
 			System.err.println(number+" is to big. Maximim is 9 digits in number");
 			return false;
 		}
 		return true;
 	}
-
-
 }
