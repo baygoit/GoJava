@@ -4,24 +4,23 @@ import java.util.Scanner;
 
 public class Main {
 
-	private static final int ARRAY_MAX = 100;
+	private static final int MAX_INTEGER = Integer.MAX_VALUE;
+	private static final int ARRAY_MAX_LENGTH = 100;
 	private static final String EXIT = "q";
 	private static final String COUNT = "c";
 
 	public static void main(String[] args) {
 		PrintStream console = System.out;
 
-		console.println("Эта программа определяет расстояние между двумя наименьшими  положительніми числами в массиве");
-		console.println("Максимальное число введеннх єлементов в массив: "
-				+ ARRAY_MAX);
-		console.println("для завершеня программы введите '" + EXIT + "'");
-		console.println("для вычесления разницы индексов введите '" + COUNT + "'");
+		console.println("");
+		console.println("To exit the program type '" + EXIT + "'");
+		console.println("To process input  '" + COUNT + "'");
 
 		Scanner scanIn = new Scanner(System.in);
 		while (true) {
 			int i;
-			int[] arr = new int[ARRAY_MAX];			
-			for (i = 0; i < ARRAY_MAX; i++) {
+			int[] anputArray = new int[ARRAY_MAX_LENGTH];			
+			for (i = 0; i < ARRAY_MAX_LENGTH; i++) {
 				String value = scanIn.next();
 				if (value.equalsIgnoreCase(EXIT))
 					System.exit(0);
@@ -29,7 +28,7 @@ public class Main {
 					break;
 				try {
 					int element = Integer.parseInt(value);
-					arr[i] = element;
+					anputArray[i] = element;
 				} catch (NumberFormatException nfe) {
 					console.print(" ignorring ");
 					i--;
@@ -38,23 +37,23 @@ public class Main {
 					break;
 				}
 			}
-			int[] arrRange = Arrays.copyOfRange(arr, 0, i);
-			int min1 = findMinIndex(arrRange);
+			int[] finalArray = Arrays.copyOfRange(anputArray, 0, i);
+			int min1 = findMinIndex(finalArray);
 			
-			arrRange[min1] = Integer.MAX_VALUE;
-			int	min2 = findMinIndex(arrRange);
+			finalArray[min1] = MAX_INTEGER;
+			int	min2 = findMinIndex(finalArray);
 			
 			console.println("Distance between min integers = " + Math.abs(min1 - min2));
 		}
 	}
 
-	private static int findMinIndex(int[] arr) {
+	private static int findMinIndex(int[] array) {
 		int minIdex = 0;
-		int minValue = arr.length> 0 ? arr[0] : 0;
-		for(int a = 0; a< arr.length ; a++){
-			if (minValue > arr[a]) {
-				minValue = arr[a];
-				minIdex = a;
+		int minValue = array.length> 0 ? array[0] : 0;
+		for(int index = 0; index< array.length ; index++){
+			if (minValue > array[index]) {
+				minValue = array[index];
+				minIdex = index;
 			}
 		}		
 		return minIdex;		
