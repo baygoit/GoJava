@@ -66,11 +66,15 @@ public class DistanceCalculator {
 	}
 
 	private int calculateDistance(int[] numbers) {
-		int indexOfFirstMinimum = getIndexOfMinimum(numbers, EMPTY_INDEX);
+		int indexOfFirstMinimum = getIndexOfMinimum(numbers);
 		int indexOfSecondMinimum = getIndexOfMinimum(numbers,
 				indexOfFirstMinimum);
 
 		return Math.abs(indexOfFirstMinimum - indexOfSecondMinimum);
+	}
+
+	private int getIndexOfMinimum(int[] numbers) {
+		return getIndexOfMinimum(numbers, EMPTY_INDEX);
 	}
 
 	private int getIndexOfMinimum(int[] numbers, int exceptIndex) {
@@ -79,6 +83,7 @@ public class DistanceCalculator {
 			if (index == exceptIndex) {
 				continue;
 			}
+			
 			if (result == EMPTY_INDEX) {
 				result = index;
 			} else if (numbers[result] > numbers[index]) {
