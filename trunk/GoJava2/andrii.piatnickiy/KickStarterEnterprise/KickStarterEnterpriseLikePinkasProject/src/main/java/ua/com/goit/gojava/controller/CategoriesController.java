@@ -23,7 +23,6 @@ public class CategoriesController {
 	
 	@RequestMapping("/categories/{id}")
 	public String detail(Model model, @PathVariable int id){
-//		model.addAttribute("category", categoryService.findOne(id));
 		model.addAttribute("category", categoryService.findOneWithProject(id));
 		return "category";
 	}
