@@ -77,19 +77,7 @@ public class AnagrammConverter {
 		for (int index = 0; index < bufferPoint; index++) {
 			reversedBuffer[bufferPoint - 1 - index] = buffer[index];
 		}
-		buffer=reversedBuffer;
-
-	}
-
-	void printFromChars(String inputString) {
-		char[] chars = inputString.toCharArray();
-		String fromChars = new String(chars);
-		char charr = chars[0];
-		String fromChar = new String(new char[] { charr });
-
-		for (int pointer : chars) {
-			System.out.println(fromChars + fromChar);
-		}
+		buffer = reversedBuffer;
 
 	}
 }
