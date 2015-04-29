@@ -24,10 +24,10 @@ public class SortBubble {
 		System.out.println(Arrays.toString(array));
 	}
 
-	private static void swap(int[] array, int i) {
-		int k = array[i];
-		array[i] = array[i + 1];
-		array[i + 1] = k;
+	private static void swap(int[] array, int index) {
+		int temporaryIndex = array[index];
+		array[index] = array[index + 1];
+		array[index + 1] = temporaryIndex;
 	}
 
 }
