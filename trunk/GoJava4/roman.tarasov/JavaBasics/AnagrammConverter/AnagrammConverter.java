@@ -7,10 +7,10 @@ public class AnagrammConverter {
 	final int NULL_POINTER = 0;
 	
 	public static void main(String[] args) {
-		String inputString = " for test  ";
-		System.out.println(inputString);
+		String inputString = " test string ";
+		System.out.println("string to be converted: "+inputString);
 		AnagrammConverter converter = new AnagrammConverter();
-		System.out.println(converter.doAnagramm(inputString));
+		System.out.println("result                : "+converter.doAnagramm(inputString));
 	}
 	String doAnagramm(String input) {
 		String output = "";
@@ -34,6 +34,11 @@ public class AnagrammConverter {
 				}
 				buffer[bufferPoint] = extracted;
 				bufferPoint++;
+				if(bufferPoint==lenParsed){
+					reverseWord();
+					addBuffToResult();
+					break;
+				}
 				continue;
 			}
 			if (doWordFlag) {
