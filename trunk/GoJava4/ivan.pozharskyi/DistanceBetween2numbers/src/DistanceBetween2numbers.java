@@ -1,103 +1,82 @@
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class DistanceBetween2numbers {
 
-	private static Scanner scanner;
+	private static final String SEPARATOR = " ";
+	private String line;
+	private static final String EXIT = "exit";
 
-	public static void main(String[] args) {
 
-		System.out.println("Enter array of numbers");
-		scanner = new Scanner(System.in);
-		String str = scanner.nextLine();
-		if (isValid(str)) {
-			findDistanceBetween2Min(getArray(str.split(" ")));
-		} else {
-			System.out.println("Enter correct string");
-		}
-	}
+	public static void main(String[] args) throws IOException {
 
-	private static boolean isValid(String str) {
-		if (str.isEmpty()) {
-			return false;
-		} else {
-			char[] charArray = str.toCharArray();
-			for (int i = 0; i < charArray.length; i++) {
-				if ((charArray[i] != '1') && (charArray[i] != '2')
-						&& (charArray[i] != '3') && (charArray[i] != '4')
-						&& (charArray[i] != '5') && (charArray[i] != '6')
-						&& (charArray[i] != '7') && (charArray[i] != '8')
-						&& (charArray[i] != '9') && (charArray[i] != '0')
-						&& (charArray[i] != ' ')) {
-					return false;
+		BufferedReader bufferedReader = new BufferedReader(
+				new InputStreamReader(System.in));
+		while (true) {
+			try {
+				System.out.println("Enter array of numbers or exit");
+				String line = bufferedReader.readLine();
+				if (EXIT.equalsIgnoreCase(line)) {
+					break;
 				}
-			}
-			if (maxNumberCheck(str.split(" "))) {
-				return true;
-			} else
-				return false;
-		}
+				int[] numbers = getNumbers(splitLine(line));
+				findDistanceBetween2Min(numbers);
 
+			} catch (NumberFormatException e) {
+				System.out.println("Wrong enterd line");
+				System.out.println("Try again");
+			}
+
+		}
+		bufferedReader.close();
 	}
 
-	private static boolean maxNumberCheck(String[] s) {
-
-		for (int i = 0; i < s.length; i++) {
-			if (!(s[i].isEmpty())) {
-				if (s[i].length() > 10) {
-					return false;
-				} else {
-					if (Long.parseLong(s[i]) > Integer.MAX_VALUE) {
-						return false;
-					}
-				}
-
-			}
-
-		}
-		return true;
+	private static String[] splitLine(String line) {
+		return line.split(SEPARATOR);
 	}
 
-	private static int[] getArray(String[] s) {
-		int arrLength = s.length;
-		for (int i = 0; i < s.length; i++) {
-			if (s[i].isEmpty()) {
-				arrLength--;
+	private static int[] getNumbers(String[] words) {
+		int numbersLength = words.length;
+		for (int i = 0; i < words.length; i++) {
+			if (words[i].isEmpty()) {
+				numbersLength--;
 			}
 		}
-		int[] arr = new int[arrLength];
-		for (int i = 0, j = 0; i < s.length || j < arrLength; i++, j++) {
-			if (s[i].isEmpty()) {
+		int[] numbers = new int[numbersLength];
+		for (int i = 0, j = 0; i < words.length || j < numbersLength; i++, j++) {
+			if (words[i].isEmpty()) {
 				j--;
 			} else {
-				arr[j] = Integer.valueOf(s[i]);
+				numbers[j] = Integer.valueOf(words[i]);
 			}
 
 		}
-		return arr;
+		return numbers;
 	}
 
-	private static void findDistanceBetween2Min(int[] arr) {
-		int min1 = arr[0];
+	private static void findDistanceBetween2Min(int[] numbers) {
+		int min1 = numbers[0];
 		int min1Index = 0;
 		int min2, min2Index;
-		for (int i = 0; i < arr.length; i++) {
-			if (arr[i] < min1) {
-				min1 = arr[i];
+		for (int i = 0; i < numbers.length; i++) {
+			if (numbers[i] < min1) {
+				min1 = numbers[i];
 				min1Index = i;
 			}
 
 		}
 		if (min1Index != 0) {
 			min2Index = 0;
-			min2 = arr[0];
+			min2 = numbers[0];
 		} else {
 			min2Index = 1;
-			min2 = arr[1];
+			min2 = numbers[1];
 		}
-		for (int i = 0; i < arr.length; i++) {
+		for (int i = 0; i < numbers.length; i++) {
 			if (i != min1Index) {
-				if (arr[i] < min2) {
-					min2 = arr[i];
+				if (numbers[i] < min2) {
+					min2 = numbers[i];
 					min2Index = i;
 				}
 			}
