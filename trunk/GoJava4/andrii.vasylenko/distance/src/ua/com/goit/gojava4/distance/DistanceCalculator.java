@@ -16,8 +16,7 @@ public class DistanceCalculator {
 	}
 
 	public static void main(String[] args) throws IOException {
-		BufferedReader reader = new BufferedReader(new InputStreamReader(
-				System.in));
+		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
 		while (true) {
 			try {
@@ -67,8 +66,7 @@ public class DistanceCalculator {
 
 	private int calculateDistance(int[] numbers) {
 		int indexOfFirstMinimum = getIndexOfMinimum(numbers);
-		int indexOfSecondMinimum = getIndexOfMinimum(numbers,
-				indexOfFirstMinimum);
+		int indexOfSecondMinimum = getIndexOfMinimum(numbers, indexOfFirstMinimum);
 
 		return Math.abs(indexOfFirstMinimum - indexOfSecondMinimum);
 	}
@@ -83,13 +81,15 @@ public class DistanceCalculator {
 			if (index == exceptIndex) {
 				continue;
 			}
-			
-			if (result == EMPTY_INDEX) {
-				result = index;
-			} else if (numbers[result] > numbers[index]) {
-				result = index;
-			}
+			result = calculateIndexOfMinimum(result, index, numbers);
 		}
 		return result;
+	}
+
+	private int calculateIndexOfMinimum(int indexOfMinimum, int currentIndex, int[] numbers) {
+		if (indexOfMinimum == EMPTY_INDEX || numbers[indexOfMinimum] > numbers[currentIndex]) {
+			return currentIndex;
+		}
+		return indexOfMinimum;
 	}
 }
