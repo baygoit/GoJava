@@ -76,7 +76,7 @@ public class TwoMinDistanceClass {
 				return false;
 			}
 		}
-		if (number.length() > 9) {
+		if (Long.parseLong(number) > Integer.MAX_VALUE) {
 			System.err.println(number+" is to big. Maximim is 9 digits in number");
 			return false;
 		}
