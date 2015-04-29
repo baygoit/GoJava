@@ -11,7 +11,8 @@ import java.util.LinkedHashSet;
 import java.util.Scanner;
 
 public class DistanceBetweenIndexOfArray {
-	static LinkedHashSet<Integer> arrayList = new LinkedHashSet<Integer>();
+	static LinkedHashSet<Integer> linkedHashSetValues;
+	static ArrayList<Integer> arrayListValues;
 
 	public static void main(String[] args) {
 		try {
@@ -19,35 +20,44 @@ public class DistanceBetweenIndexOfArray {
 		} catch (InputMismatchException e) {
 			// NOP
 		}
-		System.out.println("\nArray of unique integer values:");
-		System.out.println(arrayList);
-		showDistance();
+		try {
+			showDistance();
+		} catch (ShortArrayException e) {
+			System.out.println("You have entered only one correct value. Try again!");
+		} catch (ArrayIndexOutOfBoundsException e) {
+			System.out.println("You don't enter any integer values. Try again.");
+		}
 
 	}
 
-	static void initArray() {
+	static void initArray() throws ShortArrayException {
 		System.out.print("Enter integer values into array. ");
 		System.out.println("Enter any incorrect value to exit.");
 		try (Scanner inputValue = new Scanner(System.in)) {
 			do {
-				arrayList.add(inputValue.nextInt());
+				linkedHashSetValues.add(inputValue.nextInt());
 			} while (inputValue.hasNext());
 		}
 	}
 
 	private static void showDistance() {
-		// Create copy of arrayList, convert copyArrayList to Integer [] array
-		// and sort Integer [] array to Integer[] arraySorted
-		ArrayList<Integer> copyArrayList = new ArrayList<Integer>();
-		copyArrayList.addAll(arrayList);
-		Integer[] array = copyArrayList.toArray(new Integer[copyArrayList
-				.size()]);
-		Integer[] arraySorted = sortBubble(array);
-		// Show distance between min values
-		int firstMinValue = copyArrayList.indexOf(arraySorted[0]);
-		int secondMinValue = copyArrayList.indexOf(arraySorted[1]);
+		Integer[] values = convertArrayLinkedHashSetToArray();
+		int firstMinValue = arrayListValues.indexOf(values[0]);
+		int secondMinValue = arrayListValues.indexOf(values[1]);
+		System.out.println("\nArray of unique integer values:");
+		System.out.println(linkedHashSetValues);
 		System.out.print("Distance between unique values - ");
 		System.out.println(Math.abs(firstMinValue - secondMinValue));
+	}
+
+	private static Integer[] convertArrayLinkedHashSetToArray() {
+		arrayListValues.addAll(linkedHashSetValues);
+		Integer[] values = linkedHashSetValues.toArray(new Integer[arrayListValues.size()]);
+		values = sortBubble(values);
+		if (values.length == 1) {
+			throw new ShortArrayException();
+		}
+		return values;
 	}
 
 	private static Integer[] sortBubble(Integer[] array) {
@@ -65,5 +75,10 @@ public class DistanceBetweenIndexOfArray {
 		int k = array[i];
 		array[i] = array[i + 1];
 		array[i + 1] = k;
+	}
+
+	private static class ShortArrayException extends ArrayIndexOutOfBoundsException {
+		private static final long serialVersionUID = 1L;
+		// NOP
 	}
 }
