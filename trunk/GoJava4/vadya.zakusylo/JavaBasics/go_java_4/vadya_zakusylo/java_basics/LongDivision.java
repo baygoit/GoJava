@@ -21,21 +21,24 @@ public class LongDivision {
 		double result = (double) firstValue / secondValue;
 		int modulo = (int) countModulo(firstValue, secondValue);
 		int wholeValue = (int) countWholeValue(firstValue, secondValue);
-		System.out.println(modulo);
 		System.out.println("Long division:");
 		System.out.println("\t" + firstValue + "\t|\t" + secondValue);
 		System.out.println("-\t" + wholeValue + "\t|\t" + result);
-		String indentation = " ";
-		for (int iteration = 0; iteration < 5; iteration++) {
-			indentation.concat("        ");
-			int printModulo = printModulo(modulo, secondValue);
-			System.out.println("\t" + indentation + printModulo);
-			System.out.print("-" + "\t" + indentation);
-			printCountWholeValue(printModulo, secondValue);
+		String indentation = " " + "\t";
+		for (int iteration = 0; iteration < 10; iteration++) {
+			int printModulo = countOfModulo(modulo, secondValue);
+			System.out.println(indentation + printModulo);
+			if (printModulo == 0) {
+				break;
+			}
+			int printWholeValue = countOfWholeValue(printModulo, secondValue);
+			System.out.println("-" + indentation + printWholeValue);
+			modulo = printModulo - printWholeValue;
+			indentation = indentation + "  ";
 		}
 	}
 
-	private static int printModulo(int modulo, int secondValue) {
+	private static int countOfModulo(int modulo, int secondValue) {
 		if ((double) modulo / secondValue > 0.1) {
 			modulo *= 10;
 		} else {
@@ -44,9 +47,9 @@ public class LongDivision {
 		return modulo;
 	}
 
-	private static void printCountWholeValue(int printModulo, int secondValue) {
+	private static int countOfWholeValue(int printModulo, int secondValue) {
 		int wholeValue = (int) countWholeValue(printModulo, secondValue);
-		System.out.println(wholeValue);
+		return wholeValue;
 
 	}
 
