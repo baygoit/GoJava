@@ -58,8 +58,7 @@ public class DistanceCalculator {
 	}
 
 	private boolean check(int[] numbers) {
-		boolean result = numbers.length >= MINIMUM_ARRAY_SIZE;
-		return result;
+		return numbers.length >= MINIMUM_ARRAY_SIZE;
 	}
 
 	private int calculateDistance(int[] numbers) {
