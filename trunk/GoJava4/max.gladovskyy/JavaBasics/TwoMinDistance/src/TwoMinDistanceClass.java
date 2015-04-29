@@ -14,23 +14,23 @@ public class TwoMinDistanceClass {
 	private static final int MAX_INT_DIGITS_COUNT = 10;
 
 	private static int  getMinimalNumbersDistance(ArrayList<Integer> numbers) {
-		int aNumberValue = numbers.get(0);
-		int bNumberValue = numbers.get(1);
-		int aNumberPosition = 0;
-		int bNumberPosition = 1;
+		int firstNumberValue = numbers.get(0);
+		int secondNumberValue = numbers.get(1);
+		int firstNumberPosition = 0;
+		int secondNumberPosition = 1;
 		
 		for (int currentPosition = 1; currentPosition < numbers.size(); currentPosition++) {
-			if (numbers.get(currentPosition) < aNumberValue) {
-				bNumberValue = aNumberValue;
-				bNumberPosition = aNumberPosition;
-				aNumberValue = numbers.get(currentPosition);
-				aNumberPosition = currentPosition;
-			} else if (numbers.get(currentPosition) >= aNumberValue && numbers.get(currentPosition) < bNumberValue) {
-				bNumberValue = numbers.get(currentPosition);
-				bNumberPosition = currentPosition;
+			if (numbers.get(currentPosition) < firstNumberValue) {
+				secondNumberValue = firstNumberValue;
+				secondNumberPosition = firstNumberPosition;
+				firstNumberValue = numbers.get(currentPosition);
+				firstNumberPosition = currentPosition;
+			} else if (numbers.get(currentPosition) >= firstNumberValue && numbers.get(currentPosition) < secondNumberValue) {
+				secondNumberValue = numbers.get(currentPosition);
+				secondNumberPosition = currentPosition;
 			}
 		}
-		return Math.abs(aNumberPosition - bNumberPosition);
+		return Math.abs(firstNumberPosition - secondNumberPosition);
 	}
 	
 	
