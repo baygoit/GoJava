@@ -56,7 +56,7 @@
 	</div>
 	
 	<p>If you want return to <a class="button" href="${ctx}/projects/${project.idCategory}">projects</a></p>
-	<p>If you want to <a class="button" href="${ctx}/donate/${project.id}">invest in the project</a></p>
+	<p>If you want to <a class="button" href="${ctx}/donate/${project.id}">invest to the project</a></p>
 
 	<h3><c:out value="${message}" /></h3>
 	
