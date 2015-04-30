@@ -1,13 +1,16 @@
 package kickstarter;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Kickstarter {
-	//Category a;
-	public void start(ArrayList<Category>listCategories) {
-		for(Category i:listCategories){
-			System.out.println(i.id+"-"+i.name);
+
+	public void start(ArrayList<Category> listCategories,
+			ArrayList<Project> listProjects) {
+		for (Category i : listCategories) {
+			System.out.println(i.id + "-" + i.name);
+		}
+		for (Project i : listProjects) {
+			System.out.println(i.id + "-" + i.name);
 		}
 	}
 
