@@ -1,86 +1,85 @@
-import java.io.*;
 import java.util.*;
 
 
 public class TwoMinDistanceClass {
 	
-	public static void main(String[] args) throws NumberFormatException, IOException {
+	public static void main(String[] args) {
 		
-		ArrayList<Integer> numbers = readAllNumbers();
+		int[] numbers = readAllNumbers();
 		int MinimalNumbersDistance = getMinimalNumbersDistance(numbers);
 		System.out.println("Distance is: "+ MinimalNumbersDistance);
 	}
 
-	private static final int MAX_INT_DIGITS_COUNT = 10;
+	final static int MIN_VALUE = 0;
+	final static int SECOND_MIN_VALUE = 1;
+	final static int MIN_POSITION = 2;
+	final static int SECOND_MIN_POSITION = 3;
+	final static int MIN_VALUES_INFO_ARRAY_SIZE = 4;
 
-	private static int  getMinimalNumbersDistance(ArrayList<Integer> numbers) {
-		int firstNumberValue = numbers.get(0);
-		int secondNumberValue = numbers.get(1);
-		int firstNumberPosition = 0;
-		int secondNumberPosition = 1;
-		
-		for (int currentPosition = 1; currentPosition < numbers.size(); currentPosition++) {
-			if (numbers.get(currentPosition) < firstNumberValue) {
-				secondNumberValue = firstNumberValue;
-				secondNumberPosition = firstNumberPosition;
-				firstNumberValue = numbers.get(currentPosition);
-				firstNumberPosition = currentPosition;
-			} else if (numbers.get(currentPosition) >= firstNumberValue && numbers.get(currentPosition) < secondNumberValue) {
-				secondNumberValue = numbers.get(currentPosition);
-				secondNumberPosition = currentPosition;
+	private static int  getMinimalNumbersDistance(int[] numbers) {
+		int[] minValuesInfo = initializeMinValuesInfo(numbers);
+		for (int currentPosition = 1; currentPosition < numbers.length; currentPosition++) {
+			if (numbers[currentPosition] <= minValuesInfo[MIN_VALUE]) {
+				shiftMinValuesInfo(numbers[currentPosition], currentPosition, minValuesInfo);
+			} else if (numbers[currentPosition] < minValuesInfo[SECOND_MIN_VALUE]) {
+				replaceSecondMinValueInfo(numbers[currentPosition], currentPosition, minValuesInfo);
 			}
 		}
-		return Math.abs(firstNumberPosition - secondNumberPosition);
+		return Math.abs(minValuesInfo[SECOND_MIN_POSITION] - minValuesInfo[MIN_POSITION]);
 	}
-	
-	
-	private static ArrayList<Integer> readAllNumbers() {
-		ArrayList<Integer> result = new ArrayList<Integer>();
-		while(true) {
-			String number = readConsoleOneTime();
-			if(number.equals("")) {
-				break;
-			}
-			if (!validateNumber(number)) {
-				continue;
-			}
-			result.add(Integer.parseInt(number));	
-		}
-		checkNumbersQuantity(result);
+
+
+	private static int[] initializeMinValuesInfo(int[] numbers) {
+		int[] result = new int[MIN_VALUES_INFO_ARRAY_SIZE];
+		result[MIN_VALUE] = numbers[0];
+		result[SECOND_MIN_VALUE] = numbers[1];
+		result[MIN_POSITION] = 0;
+		result[SECOND_MIN_POSITION] = 1;
 		return result;
 	}
 
-	private static void checkNumbersQuantity(ArrayList<Integer> result) {
-		if (result.size() < 2) {
-			System.err.println("You entered not enough numbers, minimum 2 needed.");
-			System.exit(0);
-		}
-		
+
+	private static void replaceSecondMinValueInfo(int newValue, int newPosition, int[] minValuesInfo) {
+		minValuesInfo[SECOND_MIN_VALUE] = newValue;
+		minValuesInfo[SECOND_MIN_POSITION] = newPosition;
 	}
 
 
-	private static String readConsoleOneTime() {
-		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-		System.out.println("Enter number end press enter or just press enter if you finish");
-		try {
-			return reader.readLine();
-		} catch (IOException e) {
-			System.err.println("You entered incorrect data (integer needed)");
+	private static void shiftMinValuesInfo(int newValue, int newPosition, int[] minValuesInfo) {
+		minValuesInfo[SECOND_MIN_VALUE] = minValuesInfo[MIN_VALUE];
+		minValuesInfo[SECOND_MIN_POSITION] = minValuesInfo[MIN_POSITION];
+		minValuesInfo[MIN_VALUE] = newValue;
+		minValuesInfo[MIN_POSITION] = newPosition;
+	}
+	
+	
+	private static int[] readAllNumbers() {
+		int[] result = new int[getNumbersAmount()];
+		System.out.println("Enter number end press enter or just press enter.");
+		for (int index=0; index < result.length; index++) {
+			result[index] = readNumber();	
 		}
-		return null;
+		return result;
+	}
+	
+	private static int getNumbersAmount() {
+	System.out.println("Enter amount of numbers you plan to enter.");
+	int result = readNumber();
+	if (result < 2) {
+		System.err.println("Please enter value more then 1. Try again.");
+		return getNumbersAmount();
+	}
+	return result;
 	}
 
-	private static boolean validateNumber(String number) {
-		for (Character digit: number.toCharArray()) {
-			if (!Character.isDigit(digit)) {
-				System.err.println(digit+" is not a digit. Try Again.");
-				return false;
-			}
-		}
-		if (number.length() > MAX_INT_DIGITS_COUNT || Long.parseLong(number) > Integer.MAX_VALUE) {
-			System.err.println(number+" is to big. Maximim is "+Integer.MAX_VALUE+" digits in number");
-			return false;
-		}
-		return true;
+
+	private static int readNumber() {
+	Scanner reader = new Scanner(System.in);
+	try {
+		return reader.nextInt();
+	} catch (InputMismatchException e) {
+		System.err.println("Please enter number in range from "+Integer.MIN_VALUE+" to "+Integer.MAX_VALUE+". Try again.");
+		return readNumber();
+	}
 	}
 }
