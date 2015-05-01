@@ -22,6 +22,12 @@ public class UserController {
 		return new User();
 	}
 	
+	@RequestMapping("/users")
+	public String users(Model model) {
+		model.addAttribute("users", userService.findAll());
+		return "users";
+	}
+	
 	@RequestMapping("/user/{name}")
 	public String getUser(Model model, @PathVariable String name) {
 		model.addAttribute("user", userService.getUser(name));

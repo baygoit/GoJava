@@ -32,4 +32,9 @@
 		<put-attribute name="body" value="/WEB-INF/jsp/user-register.jsp" />
 		<put-attribute name="current" value="register" />
 	</definition>
+	<definition name="users" extends="common">
+		<put-attribute name="title" value="Kikcstarter users" />
+		<put-attribute name="body" value="/WEB-INF/jsp/users.jsp" />
+		<!-- <put-attribute name="current" value="users" /> -->
+	</definition>
 </tiles-definitions>

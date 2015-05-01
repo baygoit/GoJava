@@ -1,4 +1,4 @@
-<%@ include file="../layout/taglib.jsp"%>
+<%@ include file="../layout/taglib.jsp" %>
 <strong>
 	<p>
 		The projects of user: <c:out value="${user.name}"></c:out>
