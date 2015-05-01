@@ -1,20 +1,11 @@
 package kickstarter;
 
-public class Category {
-	String name;
-	String description;
+public class User {
 	int id;
+	String name = "anonymous";
 
-	Category(int id) {
+	User(int id) {
 		setId(id);
-	}
-
-	void setDescription(String Description) {
-		this.description = Description;
-	}
-
-	String getDescription() {
-		return description;
 	}
 
 	void setName(String name) {
@@ -27,6 +18,7 @@ public class Category {
 
 	void setId(int id) {
 		this.id = id;
+
 	}
 
 	int getId() {

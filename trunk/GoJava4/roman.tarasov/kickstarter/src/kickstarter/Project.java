@@ -1,13 +1,17 @@
 package kickstarter;
 
 public class Project {
-	String name;
+	String name = "null";
 	String description;
 	String history;
 	int id;
 	int goal;
 	int money;
 	int expireDate;
+
+	Project(int id) {
+		setId(id);
+	}
 
 	void setHistory(String history) {
 		this.history = history;
