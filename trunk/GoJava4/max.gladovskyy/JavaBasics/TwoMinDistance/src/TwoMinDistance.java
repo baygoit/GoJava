@@ -1,7 +1,7 @@
 import java.util.*;
 
 
-public class TwoMinDistanceClass {
+public class TwoMinDistance {
 	
 	public static void main(String[] args) {
 		
