@@ -6,9 +6,7 @@ public class Anagrams {
 
 	public static void main(String[] args) {
 		System.out.println("Enter words divided by spaces and press enter to make anagrams");
-		Scanner reader = new Scanner(System.in);
-		String userString = reader.nextLine();
-		System.out.println(makeAnagrams(userString));
+		System.out.println(makeAnagrams(new Scanner(System.in).nextLine()));
 	}
 
 	private static String makeAnagrams(String userString) {
