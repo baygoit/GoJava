@@ -6,5 +6,6 @@
 		<class>com.gojava2.kickstarter.entity.Project</class>
 		<class>com.gojava2.kickstarter.entity.User</class>
 		<class>com.gojava2.kickstarter.entity.ProjectStatus</class>
+		<class>com.gojava2.kickstarter.entity.Role</class>
 	</persistence-unit>
 </persistence>

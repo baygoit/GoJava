@@ -1,5 +1,8 @@
 package com.gojava2.kickstarter.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.annotation.PostConstruct;
 import javax.transaction.Transactional;
 
@@ -10,11 +13,13 @@ import com.gojava2.kickstarter.entity.Category;
 import com.gojava2.kickstarter.entity.Project;
 import com.gojava2.kickstarter.entity.ProjectStatus;
 import com.gojava2.kickstarter.entity.Quote;
+import com.gojava2.kickstarter.entity.Role;
 import com.gojava2.kickstarter.entity.User;
 import com.gojava2.kickstarter.repository.CategoryRepository;
 import com.gojava2.kickstarter.repository.ProjectRepository;
 import com.gojava2.kickstarter.repository.ProjectStatusRepository;
 import com.gojava2.kickstarter.repository.QuoteRepository;
+import com.gojava2.kickstarter.repository.RoleRepository;
 import com.gojava2.kickstarter.repository.UserRepository;
 
 @Service
@@ -34,11 +39,26 @@ public class InitDbService {
 	private UserRepository userRepository;
 	
 	@Autowired
+	private RoleRepository roleRepository;
+	
+	@Autowired
 	private ProjectStatusRepository statusRepository;
 	
 	@PostConstruct
 	public void insert() {
-		User user = createUser("Timur", "smth", "12345");
+		Role roleUser = new Role("ROLE_USER");
+		roleRepository.save(roleUser);
+		
+		Role roleAdmin = new Role("ROLE_ADMIN");
+		roleRepository.save(roleAdmin);
+		
+		User userAdmin = new User("admin", "blabla@mail.ru", "admin");
+		
+		List<Role> roles = new ArrayList<Role>();
+		roles.add(roleAdmin);
+		roles.add(roleUser);
+		userAdmin.setRoles(roles);
+		userRepository.save(userAdmin);
 		
 		createQuote("Sometimes when you innovate, you make mistakes. "
 						+ "It is best to admit them quickly, and get on with improving your other innovations.", "Steve Jobs");
@@ -55,23 +75,17 @@ public class InitDbService {
 		Category catgeroryDance = createCategory("Dance");
 		Category catgeroryGames = createCategory("Games");
 		
-		createProject("NY artists", "Some description.", "Here will be history", "http://www.nyart.com", catgeroryArt, createProjectStatus(50000, 10000, 40, 13), user);
-		createProject("The observatory", "Little observatory.", "Here will be history", "http://www.observatory.com", catgeroryArt, createProjectStatus(25000, 4000, 60, 10), user);
-		createProject("The sing for hope pianos", "The pianos who play in the streat.", "Here will be history", "http://www.pianos.com", catgeroryArt, createProjectStatus(70000, 30000, 30, 17), user);
-		createProject("Super Man", "Comic about a man having super powers.", "Here will be history", "http://www.superman.com", catgeroryComics, createProjectStatus(60000, 100, 70, 1), user);
-		createProject("Hulk", "Comics on the green hero named Hulk.", "Here will be history", "http://www.hulk.com", catgeroryComics, createProjectStatus(5000, 900, 25, 1), user);
-		createProject("Spider man", "Little - little spider man.", "Here will be history", "http://www.spiderman.com", catgeroryComics, createProjectStatus(100000, 8000, 70, 9), user);
-		createProject("Dance and Fly", "You can dance, you can fly, we belive in you!", "Here will be history", "http://www.df.com", catgeroryDance, createProjectStatus(10000, 1000, 15, 1), user);
-		createProject("Tiny Epic Galaxies", "Develop your empire and colonize planets to create the most powerful galaxy!", "Here will be history", "http://www.galaxies.com", catgeroryGames, createProjectStatus(100000, 8000, 70, 9), user);
-		createProject("Shadowrun: Hong Kong", "A Shadowrun cyberpunk cRPG set in 2056s Magically Awakened Hong Kong by the developers of Shadowrun Returns and Dragonfall.", "Here will be history", "http://www.shadowrun.com", catgeroryGames, createProjectStatus(100000, 8000, 70, 9), user);
-		createProject("Starr Mazer", "A retro-sexy Point-and-Click Adventure Shoot em Up in SPACE!", "Here will be history", "http://www.starr mazer.com", catgeroryGames, createProjectStatus(100000, 8000, 70, 9), user);
+		createProject("NY artists", "Some description.", "Here will be history", "http://www.nyart.com", catgeroryArt, createProjectStatus(50000, 10000, 40, 13), userAdmin);
+		createProject("The observatory", "Little observatory.", "Here will be history", "http://www.observatory.com", catgeroryArt, createProjectStatus(25000, 4000, 60, 10), userAdmin);
+		createProject("The sing for hope pianos", "The pianos who play in the streat.", "Here will be history", "http://www.pianos.com", catgeroryArt, createProjectStatus(70000, 30000, 30, 17), userAdmin);
+		createProject("Super Man", "Comic about a man having super powers.", "Here will be history", "http://www.superman.com", catgeroryComics, createProjectStatus(60000, 100, 70, 1), userAdmin);
+		createProject("Hulk", "Comics on the green hero named Hulk.", "Here will be history", "http://www.hulk.com", catgeroryComics, createProjectStatus(5000, 900, 25, 1), userAdmin);
+		createProject("Spider man", "Little - little spider man.", "Here will be history", "http://www.spiderman.com", catgeroryComics, createProjectStatus(100000, 8000, 70, 9), userAdmin);
+		createProject("Dance and Fly", "You can dance, you can fly, we belive in you!", "Here will be history", "http://www.df.com", catgeroryDance, createProjectStatus(10000, 1000, 15, 1), userAdmin);
+		createProject("Tiny Epic Galaxies", "Develop your empire and colonize planets to create the most powerful galaxy!", "Here will be history", "http://www.galaxies.com", catgeroryGames, createProjectStatus(100000, 8000, 70, 9), userAdmin);
+		createProject("Shadowrun: Hong Kong", "A Shadowrun cyberpunk cRPG set in 2056s Magically Awakened Hong Kong by the developers of Shadowrun Returns and Dragonfall.", "Here will be history", "http://www.shadowrun.com", catgeroryGames, createProjectStatus(100000, 8000, 70, 9), userAdmin);
+		createProject("Starr Mazer", "A retro-sexy Point-and-Click Adventure Shoot em Up in SPACE!", "Here will be history", "http://www.starr mazer.com", catgeroryGames, createProjectStatus(100000, 8000, 70, 9), userAdmin);
 		
-	}
-	
-	private User createUser(String name, String email, String password) {
-		User user = new User(name, email, password);
-		userRepository.save(user);
-		return user;
 	}
 	
 	private void createQuote(String content, String author) {
