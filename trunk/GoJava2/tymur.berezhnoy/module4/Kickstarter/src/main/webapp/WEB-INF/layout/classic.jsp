@@ -41,7 +41,15 @@
 					<li class="${current == 'login' ? 'active' : ''}"><a href='<spring:url value="/login.html" />'><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
 				</security:authorize>
 				<security:authorize access="isAuthenticated()">
-					<li><a href='<spring:url value="/logout" />'><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+					<li class="dropdown">
+					<a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">My account <span class="caret"></span></a>
+               			<ul class="dropdown-menu" role="menu">
+               				<li class="${current == 'account-manage' ? 'active' : ''}"><a href='<spring:url value="/account-manage.html" />'><span class="glyphicon glyphicon-cog"></span> Manage</a></li>
+               				<li class="divider"></li>
+               				<li class="dropdown-header">Other</li>
+               				<li><a href='<spring:url value="/logout" />'><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+                		</ul>
+					</li>
 				</security:authorize>
 			</ul>
 		</div>

@@ -44,7 +44,7 @@ public class Project {
     private User user;
 	
 	@OneToOne
-	@JoinColumn(name = "stus_id")
+	@JoinColumn(name = "status_id")
 	private ProjectStatus status;
 	
 	public Project() {}

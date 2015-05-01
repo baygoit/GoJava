@@ -42,4 +42,9 @@
 		<put-attribute name="body" value="/WEB-INF/jsp/login.jsp" />
 		<put-attribute name="current" value="login" />
 	</definition>
+	<definition name="account-manage" extends="common">
+		<put-attribute name="title" value="Kikcstarter account" />
+		<put-attribute name="body" value="/WEB-INF/jsp/account-manage.jsp" />
+		<put-attribute name="current" value="account-manage" />
+	</definition>
 </tiles-definitions>
