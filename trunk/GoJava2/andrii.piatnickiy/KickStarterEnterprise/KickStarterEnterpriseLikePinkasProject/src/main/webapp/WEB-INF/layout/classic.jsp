@@ -56,6 +56,7 @@
 							href='<spring:url value="/users.html"></spring:url>'>Users</a></li>
 						<li class="${current ==  'login' ? 'active' : ''}"><a
 							href='<spring:url value="/login.html"></spring:url>'>Login</a></li>
+						<li><a href='<spring:url value="/logout"></spring:url>'>Logout</a></li>
 					</ul>
 				</div>
 				<!--/.nav-collapse -->
