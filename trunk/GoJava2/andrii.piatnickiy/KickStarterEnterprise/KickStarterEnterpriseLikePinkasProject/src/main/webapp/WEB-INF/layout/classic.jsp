@@ -7,6 +7,9 @@
 
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 
+<%@ taglib uri="http://www.springframework.org/security/tags"
+	prefix="security"%>
+
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 
@@ -54,9 +57,13 @@
 							href='<spring:url value="/register.html"></spring:url>'>Registration</a></li>
 						<li class="${current ==  'users' ? 'active' : ''}"><a
 							href='<spring:url value="/users.html"></spring:url>'>Users</a></li>
-						<li class="${current ==  'login' ? 'active' : ''}"><a
-							href='<spring:url value="/login.html"></spring:url>'>Login</a></li>
-						<li><a href='<spring:url value="/logout"></spring:url>'>Logout</a></li>
+						<security:authorize access="! isAuthenticated()">
+							<li class="${current ==  'login' ? 'active' : ''}"><a
+								href='<spring:url value="/login.html"></spring:url>'>Login</a></li>
+						</security:authorize>
+						<security:authorize access="isAuthenticated()">
+							<li><a href='<spring:url value="/logout"></spring:url>'>Logout</a></li>
+						</security:authorize>
 					</ul>
 				</div>
 				<!--/.nav-collapse -->
