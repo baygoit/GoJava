@@ -6,6 +6,7 @@
 <head>
 	
 	<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
+	<%@ taglib uri="http://tiles.apache.org/tags-tiles-extras" prefix="tilesx" %>
 	
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">	
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -26,15 +27,16 @@
 	</style>
 </head>
 <body>
+<tilesx:useAttribute name="current"/>
 <nav class="navbar navbar-inverse navbar-fixed-top">
 	<div class="container-fluid">
 		<div>
 			<ul class="nav navbar-nav navbar-left">
-				<li><a href='<spring:url value="/" />'><span class="glyphicon glyphicon-home"></span> Home</a></li>
+				<li class="${current == 'index' ? 'active' : ''}"><a href='<spring:url value="/" />'><span class="glyphicon glyphicon-home"></span> Home</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li class="${current == 'register' ? 'active' : ''}"><a href='<spring:url value="/register.html" />'><span class="glyphicon glyphicon-user"></span>Sign Up</a></li>
-				<li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+				<li class="${current == 'login' ? 'active' : ''}"><a href='<spring:url value="/login.html" />'><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
 			</ul>
 		</div>
 	</div>

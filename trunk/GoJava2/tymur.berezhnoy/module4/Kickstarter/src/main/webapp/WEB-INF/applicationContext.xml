@@ -40,4 +40,6 @@
 	
 	<jpa:repositories base-package="com.gojava2.kickstarter.repository" />
 	
+	<import resource="security.xml"/>
+	
 </beans>
