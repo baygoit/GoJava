@@ -25,26 +25,26 @@ public class ColumnDivision {
 	
 	
 	public ColumnDivision(String dividendIn, String devizorIn, int declimit) {
-		this.dividend.addAll(toList(dividendIn.toCharArray()));
-		this.devizor.addAll(toList(devizorIn.toCharArray()));
+		dividend.addAll(toList(dividendIn.toCharArray()));
+		devizor.addAll(toList(devizorIn.toCharArray()));
 		
 		divisionOutput.add(dividend+"");
 		
 		while (decimalDivisionsCounter < declimit) {
-			oneDivisionResult = takeMinDivident(this.dividend,this.devizor);
+			oneDivisionResult = takeMinDivident(dividend,devizor);
 			if (oneDivisionResult!=null) {
 				if (divisionCounter!=0) divisionOutput.set(divisionOutput.size()-1,generateSpaces(divisionCounter)+Integer.parseInt(listToString(oneDivisionResult[0])));
-				modulo = oneDivisionOperation(oneDivisionResult[0],this.devizor,divisionCounter);
-				this.dividend = toList((""+modulo).toCharArray());
-				this.dividend.addAll(oneDivisionResult[1]);
+				modulo = oneDivisionOperation(oneDivisionResult[0],devizor,divisionCounter);
+				dividend = toList((""+modulo).toCharArray());
+				dividend.addAll(oneDivisionResult[1]);
 				skipNulls();
 				if (modulo==0 && oneDivisionResult[1].size()==0) break;
 			} else {
-				this.dividend.add('0');
-				if (this.divisionResult.size()>0 && this.divisionResult.get(this.divisionResult.size()-1)=='.') this.divisionResult.add('0');
-				if (divisionCounter==1) this.divisionResult.add('0');
+				dividend.add('0');
+				if (divisionResult.size()>0 && divisionResult.get(divisionResult.size()-1)=='.') divisionResult.add('0');
+				if (divisionCounter==1) divisionResult.add('0');
 				if (isAboveZero) {
-					this.divisionResult.add('.');
+					divisionResult.add('.');
 					isAboveZero = false;
 				}
 				decimalDivisionsCounter++;
