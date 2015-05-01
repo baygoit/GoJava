@@ -1,26 +1,9 @@
 package kickstarter;
 
 public class Citation {
-	int id;
-	String text = "null";
+	String[] citation;
 
-	Citation(int id) {
-		setId(id);
-	}
-
-	void setId(int id) {
-		this.id = id;
-	}
-
-	int getId() {
-		return id;
-	}
-
-	void setText(String text) {
-		this.text = text;
-	}
-
-	String getText() {
-		return text;
+	Citation(Repository repository) {
+		this.citation = repository.citation;
 	}
 }

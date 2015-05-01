@@ -9,8 +9,8 @@ public class Project {
 	int money;
 	int expireDate;
 
-	Project(int id) {
-		setId(id);
+	Project(Repository repository) {
+		
 	}
 
 	void setHistory(String history) {
