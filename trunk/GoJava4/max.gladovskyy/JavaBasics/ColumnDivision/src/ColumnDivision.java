@@ -1,76 +1,74 @@
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 
 public class ColumnDivision {
 
 
 	public static void main(String[] args) throws NumberFormatException, IOException {
-		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-		String dividend = reader.readLine();
-		String devizor =  reader.readLine();
+		Scanner reader = new Scanner(System.in);
+		String dividend = reader.nextLine();
+		String devizor =  reader.nextLine();
 		int declimit = 5;
 		new ColumnDivision(dividend,devizor,declimit);
 	}
 	
 	ArrayList<Character> dividend = new ArrayList<Character>();
 	ArrayList<Character> devizor = new ArrayList<Character>();
-	ArrayList<Character> divresult = new ArrayList<Character>();
-	ArrayList<Character>[] res = new ArrayList[2];
-	ArrayList<String> division = new ArrayList<String>();
-	boolean abovezero = true;
-	int n=-1,i=0,j;
+	ArrayList<Character> divisionResult = new ArrayList<Character>();
+	ArrayList<Character>[] oneDivisionResult = new ArrayList[2];
+	ArrayList<String> divisionOutput = new ArrayList<String>();
+	boolean isAboveZero = true;
+	int decimalDivisionsCounter=-1,divisionCounter=0,modulo;
 	
-	public ColumnDivision(String dividend, String devizor, int declimit) {
-		this.dividend.addAll(charArToList(dividend.toCharArray()));
-		this.devizor.addAll(charArToList(devizor.toCharArray()));
+	
+	
+	public ColumnDivision(String dividendIn, String devizorIn, int declimit) {
+		this.dividend.addAll(toList(dividendIn.toCharArray()));
+		this.devizor.addAll(toList(devizorIn.toCharArray()));
 		
-		division.add(dividend+" |"+devizor);
+		divisionOutput.add(dividend+"");
 		
-		while (n < declimit) {
-			res = takeMinDiv(this.dividend,this.devizor);
-			if (res!=null) {
-				if (i!=0) division.set(division.size()-1,spaceGen(i-1)+Integer.parseInt(getStr(res[0])));
-				j = oneDivOp(res[0],this.devizor,i);
-				this.dividend = charArToList((""+j).toCharArray());
-				this.dividend.addAll(res[1]);
+		while (decimalDivisionsCounter < declimit) {
+			oneDivisionResult = takeMinDivident(this.dividend,this.devizor);
+			if (oneDivisionResult!=null) {
+				if (divisionCounter!=0) divisionOutput.set(divisionOutput.size()-1,generateSpaces(divisionCounter)+Integer.parseInt(listToString(oneDivisionResult[0])));
+				modulo = oneDivisionOperation(oneDivisionResult[0],this.devizor,divisionCounter);
+				this.dividend = toList((""+modulo).toCharArray());
+				this.dividend.addAll(oneDivisionResult[1]);
 				skipNulls();
-				if (j==0 && res[1].size()==0) break;
-				i++;
+				if (modulo==0 && oneDivisionResult[1].size()==0) break;
 			} else {
-				
-				i++;
 				this.dividend.add('0');
-				if (this.divresult.size()>0 && this.divresult.get(this.divresult.size()-1)=='.') this.divresult.add('0');
-				if (i==1) this.divresult.add('0');
-				if (abovezero) {
-					this.divresult.add('.');
-					abovezero = false;
+				if (this.divisionResult.size()>0 && this.divisionResult.get(this.divisionResult.size()-1)=='.') this.divisionResult.add('0');
+				if (divisionCounter==1) this.divisionResult.add('0');
+				if (isAboveZero) {
+					this.divisionResult.add('.');
+					isAboveZero = false;
 				}
-				n++;
+				decimalDivisionsCounter++;
 			}
-
+			divisionCounter++;
 		}
 		
-		division.set(0,dividend+" |"+devizor);
-		division.set(1,division.get(1)+spaceGen(charArToList(dividend.toCharArray()).size()-division.get(1).length())+" |"+getStr(divresult));
-		for(String s: division) System.out.println(s);
+		divisionOutput.set(0,dividendIn+" |"+devizorIn);
+		divisionOutput.set(1,divisionOutput.get(1).trim()+generateSpaces(toList(dividendIn.toCharArray()).size()-divisionOutput.get(1).trim().length())+" |"+listToString(divisionResult));
+		for(String s: divisionOutput) System.out.println(s);
 		
 	}
 	
 	private void skipNulls() {
-		while (this.dividend.size()>0) {
-			if (this.dividend.get(0)=='0'){
-				this.divresult.add('0');
-				this.dividend.remove(0);
-				this.i++;
+		while (dividend.size()>0) {
+			if (dividend.get(0)=='0'){
+				divisionResult.add('0');
+				dividend.remove(0);
 			} else break;
+			divisionCounter++;
 		}
 	}
 	
-	private ArrayList<Character> charArToList (char[] c) {
+	private ArrayList<Character> toList (char[] c) {
 		ArrayList<Character> a = new ArrayList<Character>();
 		for (Character c1: c) {
 			a.add(c1);
@@ -78,7 +76,7 @@ public class ColumnDivision {
 		return a;
 	}
 	
-	private ArrayList<Character>[] takeMinDiv (ArrayList<Character> dividend, ArrayList<Character> devizor) {
+	private ArrayList<Character>[] takeMinDivident (ArrayList<Character> dividend, ArrayList<Character> devizor) {
 		ArrayList<Character>[] ret = new ArrayList[2];
 		ArrayList<Character> d1, d2;
 		int i1,i2;
@@ -86,8 +84,8 @@ public class ColumnDivision {
 		if (dividend.size() >= devizor.size()) {
 			d1 = new ArrayList<Character>(dividend.subList(0, devizor.size()));
 			d2 = devizor;
-			i1 = Integer.parseInt(getStr(d1));
-			i2 = Integer.parseInt(getStr(d2));
+			i1 = Integer.parseInt(listToString(d1));
+			i2 = Integer.parseInt(listToString(d2));
 			if (i1 >= i2) {
 				ret[0] = d1;
 				ret[1] = new ArrayList<Character>(dividend.subList(devizor.size(), dividend.size()));
@@ -103,40 +101,40 @@ public class ColumnDivision {
 		
 	}
 	
-	private int oneDivOp (ArrayList<Character> dividend, ArrayList<Character> devizor, int spaces) {
-	int i1,i2;
-	i1 = Integer.parseInt(getStr(dividend));
-	i2 = Integer.parseInt(getStr(devizor));
-		division.add(spaceGen(spaces-1)+(i2*(i1/i2)));
-		division.add(spaceGen(spaces-1)+delimGen(dividend.size()+1));
-		division.add(spaceGen(spaces-1)+(i1%i2));
-		this.divresult.add(((i1/i2)+"").toCharArray()[0]);
-		return i1%i2;
+	private int oneDivisionOperation (ArrayList<Character> dividend, ArrayList<Character> devizor, int spaces) {
+	int dividendNumber,i2;
+	dividendNumber = Integer.parseInt(listToString(dividend));
+	i2 = Integer.parseInt(listToString(devizor));
+		divisionOutput.add(generateSpaces(divisionOutput.get(divisionOutput.size()-1).length()-(i2*(dividendNumber/i2)+"").length())+(i2*(dividendNumber/i2)));
+		divisionOutput.add(generateSpaces(spaces)+generateDelimeters(dividend.size()+1));
+		divisionOutput.add(generateSpaces(divisionOutput.get(divisionOutput.size()-2).length()-((dividendNumber%i2)+"").length())+(dividendNumber%i2));
+		divisionResult.add(((dividendNumber/i2)+"").toCharArray()[0]);
+		return dividendNumber%i2;
 	}
 	
 	
-	private String getStr (ArrayList<Character> list) {
-	    StringBuilder builder = new StringBuilder(list.size());
-	    for(Character ch: list)
+	private String listToString (ArrayList<Character> list) {
+	    StringBuilder result = new StringBuilder(list.size());
+	    for(Character character: list)
 	    {
-	        builder.append(ch);
+	        result.append(character);
 	    }
-	    return builder.toString();
+	    return result.toString();
 	}
 	
-	private String spaceGen (int j) {
-		String s = "";
-		for (int i=0; i<j; i++) {
-			s+=" ";
+	private String generateSpaces (int spacesAmount) {
+		String spaces = "";
+		for (int index=0; index < spacesAmount; index++) {
+			spaces+=" ";
 		}
-		return s;
+		return spaces;
 	}
 	
-	private String delimGen (int j) {
-		String s = "";
-		for (int i=0; i<j; i++) {
-			s+="-";
+	private String generateDelimeters (int delimetersAmount) {
+		String delimeters = "";
+		for (int index=0; index < delimetersAmount; index++) {
+			delimeters+="-";
 		}
-		return s;
+		return delimeters;
 	}
 }
