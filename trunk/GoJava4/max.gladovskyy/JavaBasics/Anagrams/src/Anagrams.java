@@ -14,7 +14,7 @@ public class Anagrams {
 	private static String makeAnagrams(String userString) {
 		String[] userStringSplited = userString.split(" ");
 		StringBuilder result = new StringBuilder();
-		Pattern nonAlphabetPattern = Pattern.compile("[^a-zA-Z]");
+		Pattern nonAlphabetPattern = Pattern.compile("[^a-zA-Zà-ÿÀ-ÿ]");
 		
 		for (String word: userStringSplited) {
 			if(nonAlphabetPattern.matcher(word).find()) {
