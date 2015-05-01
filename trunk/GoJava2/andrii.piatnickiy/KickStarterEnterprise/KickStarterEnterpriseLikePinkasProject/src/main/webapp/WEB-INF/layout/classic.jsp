@@ -54,6 +54,8 @@
 							href='<spring:url value="/register.html"></spring:url>'>Registration</a></li>
 						<li class="${current ==  'users' ? 'active' : ''}"><a
 							href='<spring:url value="/users.html"></spring:url>'>Users</a></li>
+						<li class="${current ==  'login' ? 'active' : ''}"><a
+							href='<spring:url value="/login.html"></spring:url>'>Login</a></li>
 					</ul>
 				</div>
 				<!--/.nav-collapse -->

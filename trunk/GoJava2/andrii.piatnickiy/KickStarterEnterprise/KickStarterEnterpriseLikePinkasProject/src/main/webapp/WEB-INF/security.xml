@@ -8,7 +8,7 @@
 
 	<http>
 		<intercept-url pattern="/users**" access="hasRole('ADMIN')" />
-		<form-login />
+		<form-login login-page="/login.html" />
 		<logout />
 	</http>
 

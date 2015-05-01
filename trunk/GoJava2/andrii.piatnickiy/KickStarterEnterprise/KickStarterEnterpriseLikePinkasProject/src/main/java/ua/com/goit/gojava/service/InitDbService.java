@@ -29,7 +29,8 @@ public class InitDbService {
 	@PostConstruct
 	public void init(){
 		User user = new User();
-		user.setName("Admin");
+		user.setName("admin");
+		user.setPassword("admin");
 		userRepository.save(user);	
 		
 		Category category1 = new Category();
