@@ -33,7 +33,7 @@ public class ColumnDivision {
 		while (decimalDivisionsCounter < declimit) {
 			oneDivisionResult = takeMinDivident(dividend,devizor);
 			if (oneDivisionResult!=null) {
-				if (divisionCounter!=0) divisionOutput.set(divisionOutput.size()-1,generateSpaces(divisionCounter)+Integer.parseInt(listToString(oneDivisionResult[0])));
+				if (divisionCounter!=0) divisionOutput.set(divisionOutput.size()-1,Integer.parseInt(listToString(oneDivisionResult[0]))+"");
 				modulo = oneDivisionOperation(oneDivisionResult[0],devizor,divisionCounter);
 				dividend = toList((""+modulo).toCharArray());
 				dividend.addAll(oneDivisionResult[1]);
@@ -53,7 +53,7 @@ public class ColumnDivision {
 		}
 		
 		divisionOutput.set(0,dividendIn+" |"+devizorIn);
-		divisionOutput.set(1,divisionOutput.get(1).trim()+generateSpaces(toList(dividendIn.toCharArray()).size()-divisionOutput.get(1).trim().length())+" |"+listToString(divisionResult));
+		divisionOutput.set(1,divisionOutput.get(1).trim()+" |"+listToString(divisionResult));
 		for(String s: divisionOutput) System.out.println(s);
 		
 	}
@@ -68,33 +68,32 @@ public class ColumnDivision {
 		}
 	}
 	
-	private ArrayList<Character> toList (char[] c) {
-		ArrayList<Character> a = new ArrayList<Character>();
-		for (Character c1: c) {
-			a.add(c1);
+	private ArrayList<Character> toList (char[] charArray) {
+		ArrayList<Character> result = new ArrayList<Character>();
+		for (Character oneChar: charArray) {
+			result.add(oneChar);
 		}
-		return a;
+		return result;
 	}
 	
 	private ArrayList<Character>[] takeMinDivident (ArrayList<Character> dividend, ArrayList<Character> devizor) {
-		ArrayList<Character>[] ret = new ArrayList[2];
-		ArrayList<Character> d1, d2;
-		int i1,i2;
+		ArrayList<Character>[] result = new ArrayList[2];
+		ArrayList<Character> posibleDevident;
+		int dividendNumber,devizorNumber;
 
 		if (dividend.size() >= devizor.size()) {
-			d1 = new ArrayList<Character>(dividend.subList(0, devizor.size()));
-			d2 = devizor;
-			i1 = Integer.parseInt(listToString(d1));
-			i2 = Integer.parseInt(listToString(d2));
-			if (i1 >= i2) {
-				ret[0] = d1;
-				ret[1] = new ArrayList<Character>(dividend.subList(devizor.size(), dividend.size()));
-				return ret;
+			posibleDevident = new ArrayList<Character>(dividend.subList(0, devizor.size()));
+			dividendNumber = Integer.parseInt(listToString(posibleDevident));
+			devizorNumber = Integer.parseInt(listToString(devizor));
+			if (dividendNumber >= devizorNumber) {
+				result[0] = posibleDevident;
+				result[1] = new ArrayList<Character>(dividend.subList(devizor.size(), dividend.size()));
+				return result;
 			} else if (dividend.size() > devizor.size()) {
-				d1 = new ArrayList<Character>(dividend.subList(0, devizor.size()+1));
-				ret[0] = d1;
-				ret[1] = new ArrayList<Character>(dividend.subList(devizor.size()+1, dividend.size()));
-				return ret;
+				posibleDevident = new ArrayList<Character>(dividend.subList(0, devizor.size()+1));
+				result[0] = posibleDevident;
+				result[1] = new ArrayList<Character>(dividend.subList(devizor.size()+1, dividend.size()));
+				return result;
 			} 
 		} 
 		return null;
@@ -105,9 +104,9 @@ public class ColumnDivision {
 	int dividendNumber,devizorNumber;
 	dividendNumber = Integer.parseInt(listToString(dividend));
 	devizorNumber = Integer.parseInt(listToString(devizor));
-		divisionOutput.add(generateSpaces(divisionOutput.get(divisionOutput.size()-1).length()-(devizorNumber*(dividendNumber/devizorNumber)+"").length())+(devizorNumber*(dividendNumber/devizorNumber)));
-		divisionOutput.add(generateSpaces(spaces)+generateDelimeters(dividend.size()+1));
-		divisionOutput.add(generateSpaces(divisionOutput.get(divisionOutput.size()-2).length()-((dividendNumber%devizorNumber)+"").length())+(dividendNumber%devizorNumber));
+		divisionOutput.add(devizorNumber*(dividendNumber/devizorNumber)+"");
+		divisionOutput.add(generateDelimeters(dividend.size()+1));
+		divisionOutput.add(dividendNumber%devizorNumber+"");
 		divisionResult.add(((dividendNumber/devizorNumber)+"").toCharArray()[0]);
 		return dividendNumber%devizorNumber;
 	}
