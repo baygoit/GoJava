@@ -102,14 +102,14 @@ public class ColumnDivision {
 	}
 	
 	private int oneDivisionOperation (ArrayList<Character> dividend, ArrayList<Character> devizor, int spaces) {
-	int dividendNumber,i2;
+	int dividendNumber,devizorNumber;
 	dividendNumber = Integer.parseInt(listToString(dividend));
-	i2 = Integer.parseInt(listToString(devizor));
-		divisionOutput.add(generateSpaces(divisionOutput.get(divisionOutput.size()-1).length()-(i2*(dividendNumber/i2)+"").length())+(i2*(dividendNumber/i2)));
+	devizorNumber = Integer.parseInt(listToString(devizor));
+		divisionOutput.add(generateSpaces(divisionOutput.get(divisionOutput.size()-1).length()-(devizorNumber*(dividendNumber/devizorNumber)+"").length())+(devizorNumber*(dividendNumber/devizorNumber)));
 		divisionOutput.add(generateSpaces(spaces)+generateDelimeters(dividend.size()+1));
-		divisionOutput.add(generateSpaces(divisionOutput.get(divisionOutput.size()-2).length()-((dividendNumber%i2)+"").length())+(dividendNumber%i2));
-		divisionResult.add(((dividendNumber/i2)+"").toCharArray()[0]);
-		return dividendNumber%i2;
+		divisionOutput.add(generateSpaces(divisionOutput.get(divisionOutput.size()-2).length()-((dividendNumber%devizorNumber)+"").length())+(dividendNumber%devizorNumber));
+		divisionResult.add(((dividendNumber/devizorNumber)+"").toCharArray()[0]);
+		return dividendNumber%devizorNumber;
 	}
 	
 	
