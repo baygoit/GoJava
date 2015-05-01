@@ -65,8 +65,8 @@ public class TwoMinDistanceClass {
 	private static int getNumbersAmount() {
 	System.out.println("Enter amount of numbers you plan to enter.");
 	int result = readNumber();
-	if (result < 2) {
-		System.err.println("Please enter value more then 1. Try again.");
+	if (result < 3) {
+		System.err.println("Please enter value more then 2. Try again.");
 		return getNumbersAmount();
 	}
 	return result;
