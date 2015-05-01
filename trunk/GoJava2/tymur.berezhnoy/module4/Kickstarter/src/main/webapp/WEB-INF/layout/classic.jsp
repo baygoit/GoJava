@@ -1,6 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
+<%@ include file="../layout/taglib.jsp" %>
+<%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -13,19 +12,11 @@
 	
 	<title><tiles:getAsString name="title" /></title>
 	
-	
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
-	
-	<!-- Bootstrap core CSS -->
-	<link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
-	
-	<!-- Custom styles for this template -->
-	<link href="http://getbootstrap.com/examples/sticky-footer-navbar/sticky-footer-navbar.css" rel="stylesheet">
-	
-	<!-- 
-    <link href="http://getbootstrap.com/examples/navbar-fixed-top/navbar-fixed-top.css" rel="stylesheet">
-	 -->
+	<link href="<c:url value="/favicon.ico"/>" type="image/x-icon" rel="icon" />
+	<link href="<c:url value="/resources/css/bootstrap.min.css" />" rel="stylesheet">
+	<link href="<c:url value="/resources/css/bootstrap-theme.min.css" />" rel="stylesheet">
+	<link href="<c:url value="/resources/css/sticky_footer.css" />" rel="stylesheet">
+	<!--<link href="http://getbootstrap.com/examples/navbar-fixed-top/navbar-fixed-top.css" rel="stylesheet">-->
 	 
 	<style>
 		body { 
@@ -38,8 +29,8 @@
 <nav class="navbar navbar-inverse navbar-fixed-top">
 	<div class="container-fluid">
 		<div>
-			<ul class="nav navbar-nav">
-				<li class="active"><a href='<spring:url value="/" />'>Home</a></li>
+			<ul class="nav navbar-nav navbar-left">
+				<li><a href='<spring:url value="/" />'><span class="glyphicon glyphicon-home"></span> Home</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li class="${current == 'register' ? 'active' : ''}"><a href='<spring:url value="/register.html" />'><span class="glyphicon glyphicon-user"></span>Sign Up</a></li>
@@ -53,12 +44,10 @@
 </div>
 <footer class="footer">
 	<div class="container">
-		<center>
-			<p class="text-muted"><tiles:insertAttribute name="footer" /></p>
-		</center>
+		<p align="center" class="text-muted"><tiles:insertAttribute name="footer" /></p>
 	</div>
 </footer>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
-<script src="http://getbootstrap.com/dist/js/bootstrap.min.js"></script>
+<script src="<c:url value="/resources/js/jquery.min.js" />"></script>
+<script src="<c:url value="/resources/js/bootstrap.min.js" />"></script>
 </body>
 </html>

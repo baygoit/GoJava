@@ -1,5 +1,4 @@
 <%@ include file="../layout/taglib.jsp"%>
-
 <form:form commandName="user" cssClass="form-horizontal">
 	<div class="form-group">
 		<label for="name" class="col-sm-2 control-label">User name:</label>	
