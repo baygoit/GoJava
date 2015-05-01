@@ -2,8 +2,8 @@ package kickstarter;
 
 public class Project {
 	String name = "null";
-	String description;
-	String history;
+	String description="null";
+	String history="null";
 	int id;
 	int goal;
 	int money;

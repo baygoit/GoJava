@@ -1,8 +1,8 @@
 package kickstarter;
 
 public class Category {
-	String name;
-	String description;
+	String name="null";
+	String description="null";
 	int id;
 
 	Category(int id) {

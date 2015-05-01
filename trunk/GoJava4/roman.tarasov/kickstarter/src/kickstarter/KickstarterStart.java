@@ -6,7 +6,7 @@ public class KickstarterStart {
 	static ArrayList<Category> listCategories = new ArrayList<Category>();
 	static ArrayList<Project> listProjects = new ArrayList<Project>();
 	static ArrayList<User> listUsers = new ArrayList<User>();
-	static ArrayList<Citation> listCitation = new ArrayList<Citation>();
+	static ArrayList<Citation> listCitations = new ArrayList<Citation>();
 
 	public static void main(String[] args) {
 		Kickstarter kickstarter = new Kickstarter();
@@ -14,22 +14,22 @@ public class KickstarterStart {
 
 		starter.createProjects();
 		starter.createCategories();
-		starter.createCitation();
-		starter.createUser();
+		starter.createCitations();
+		starter.createUsers();
 		kickstarter
-				.start(listCategories, listProjects, listCitation, listUsers);
+				.start(listCategories, listProjects, listCitations, listUsers);
 	}
 
-	public void createCitation() {
+	public void createCitations() {
 		String[] citation = { "null", "Do It", "Go IT", "Create It" };
 		for (int index = 0; index < citation.length; index++) {
 			Citation current = new Citation(index);
 			current.setText(citation[index]);
-			listCitation.add(current);
+			listCitations.add(current);
 		}
 	}
 
-	public void createUser() {
+	public void createUsers() {
 		String[] users = { "anonymous", "Mike", "Andy" };
 		for (int index = 0; index < users.length; index++) {
 			User current = new User(index);
