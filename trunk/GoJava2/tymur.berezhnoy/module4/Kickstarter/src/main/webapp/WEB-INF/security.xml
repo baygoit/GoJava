@@ -6,28 +6,22 @@
            http://www.springframework.org/schema/security
            http://www.springframework.org/schema/security/spring-security.xsd">
 	
-	<http>
-		<intercept-url pattern="/users**" access="ROLE_ADMIN" />
-		<intercept-url pattern="/users/**" access="ROLE_ADMIN" />
+	<http use-expressions="true">
+		<intercept-url pattern="/users**" access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/users/**" access="hasRole('ROLE_ADMIN')" />
 		<form-login login-page="/login.html" />
-		<logout />
+		<logout logout-url="/logout" />
 	</http>
 	
 	<authentication-manager>
 		<authentication-provider>
-		
-		<user-service>
-			<user name="admin" password="admin" authorities="ROLE_USER, ROLE_ADMIN" />
-		</user-service>
-		
-		<!-- <password-encoder hash="bcrypt" />
-		
+		<password-encoder hash="bcrypt" />
 			<jdbc-user-service data-source-ref="dataSource"
-				authorities-by-username-query="select user.name, role.name from user
-											   join user_role on user.id = user_role.users_id
-											   join role on user_role.roles_id = role.id
-											   where user.name = ?"
-				users-by-username-query="select name,password,enabled from user where name = ?" /> -->
+				authorities-by-username-query="select users.name, role.name from users
+											   join users_role on users.id = users_role.users_id
+											   join role on users_role.roles_id = role.id
+											   where users.name = ?"
+				users-by-username-query="select name,password,enabled from users where name = ?" />
 		</authentication-provider>
 	</authentication-manager>           
 </beans:beans>

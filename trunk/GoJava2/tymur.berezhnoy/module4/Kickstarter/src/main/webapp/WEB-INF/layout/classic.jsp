@@ -4,8 +4,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	
+
 	<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
+	<%@ taglib uri="http://www.springframework.org/security/tags" prefix="security"%>
 	<%@ taglib uri="http://tiles.apache.org/tags-tiles-extras" prefix="tilesx" %>
 	
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">	
@@ -35,8 +36,13 @@
 				<li class="${current == 'index' ? 'active' : ''}"><a href='<spring:url value="/" />'><span class="glyphicon glyphicon-home"></span> Home</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
-				<li class="${current == 'register' ? 'active' : ''}"><a href='<spring:url value="/register.html" />'><span class="glyphicon glyphicon-user"></span>Sign Up</a></li>
-				<li class="${current == 'login' ? 'active' : ''}"><a href='<spring:url value="/login.html" />'><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+				<security:authorize access="! isAuthenticated()">
+					<li class="${current == 'register' ? 'active' : ''}"><a href='<spring:url value="/register.html" />'><span class="glyphicon glyphicon-user"></span>Sign Up</a></li>
+					<li class="${current == 'login' ? 'active' : ''}"><a href='<spring:url value="/login.html" />'><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+				</security:authorize>
+				<security:authorize access="isAuthenticated()">
+					<li><a href='<spring:url value="/logout" />'><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+				</security:authorize>
 			</ul>
 		</div>
 	</div>

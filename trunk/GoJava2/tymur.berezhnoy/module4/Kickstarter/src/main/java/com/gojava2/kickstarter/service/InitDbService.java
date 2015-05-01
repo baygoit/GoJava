@@ -7,6 +7,7 @@ import javax.annotation.PostConstruct;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.gojava2.kickstarter.entity.Category;
@@ -52,7 +53,9 @@ public class InitDbService {
 		Role roleAdmin = new Role("ROLE_ADMIN");
 		roleRepository.save(roleAdmin);
 		
-		User userAdmin = new User("admin", "blabla@mail.ru", "admin");
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		User userAdmin = new User("admin", "blabla@mail.ru", encoder.encode("admin"));
+		userAdmin.setEnabled(true);
 		
 		List<Role> roles = new ArrayList<Role>();
 		roles.add(roleAdmin);

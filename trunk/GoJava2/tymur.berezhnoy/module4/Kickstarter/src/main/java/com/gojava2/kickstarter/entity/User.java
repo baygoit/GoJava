@@ -29,6 +29,8 @@ public class User {
 	
 	@Column(nullable = false)
 	private String password;
+	
+	private boolean enabled;
 
 	@OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
     private List<Project> projects;
@@ -91,5 +93,13 @@ public class User {
 	
 	public List<Role> getRoles() {
 		return roles;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
+	
+	public boolean isEnabled() {
+		return enabled;
 	}
 }
