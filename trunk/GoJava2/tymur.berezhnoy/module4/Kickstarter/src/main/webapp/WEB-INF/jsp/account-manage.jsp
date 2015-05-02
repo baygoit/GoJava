@@ -70,9 +70,7 @@
 </div>
 </form:form>
 
-<strong>
-	<h1>The projects of user: <c:out value="${user.name}" /></h1>
-</strong>
+<strong>My projects:</strong>
 <table class="table table-bordered table-hover table-striped">
 	<thead>
 		<tr>
@@ -88,6 +86,9 @@
 							${project.name}
 						</a>
 					</strong>
+				</td>
+				<td>
+					<a href='<spring:url value="/project/remove/${project.id}.html" />' class="btn btn-danger"> Remove project</a>
 				</td>
 			</tr>
 		</c:forEach>

@@ -45,6 +45,9 @@
 					<a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">My account <span class="caret"></span></a>
                			<ul class="dropdown-menu" role="menu">
                				<li class="${current == 'account-manage' ? 'active' : ''}"><a href='<spring:url value="/account-manage.html" />'><span class="glyphicon glyphicon-cog"></span> Manage</a></li>
+								<security:authorize access="hasRole('ROLE_ADMIN')">
+									<li class="${current == 'users' ? 'active' : ''}"><a href='<spring:url value="/users.html" />'><span class="glyphicon glyphicon-user"></span> Users</a></li>
+								</security:authorize>
                				<li class="divider"></li>
                				<li class="dropdown-header">Other</li>
                				<li><a href='<spring:url value="/logout" />'><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>

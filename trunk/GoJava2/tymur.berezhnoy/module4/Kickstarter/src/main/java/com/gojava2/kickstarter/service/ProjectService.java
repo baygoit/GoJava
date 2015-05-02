@@ -45,4 +45,8 @@ public class ProjectService {
 		projectStatusRepository.save(projectStatus);
 		projectRepository.save(project);
 	}
+
+	public void delet(int id) {
+		projectRepository.delete(id);
+	}
 }
