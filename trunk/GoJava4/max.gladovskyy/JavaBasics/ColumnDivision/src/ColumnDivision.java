@@ -1,5 +1,6 @@
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 
@@ -10,8 +11,8 @@ public class ColumnDivision {
 		Scanner reader = new Scanner(System.in);
 		String dividend = reader.nextLine();
 		String devizor =  reader.nextLine();
-		int declimit = 5;
-		new ColumnDivision(dividend,devizor,declimit);
+		int decimalLimit = 5;
+		new ColumnDivision(dividend,devizor,decimalLimit).printOutput();
 	}
 	
 	ArrayList<Character> dividend = new ArrayList<Character>();
@@ -19,52 +20,97 @@ public class ColumnDivision {
 	ArrayList<Character> divisionResult = new ArrayList<Character>();
 	ArrayList<Character>[] oneDivisionResult = new ArrayList[2];
 	ArrayList<String> divisionOutput = new ArrayList<String>();
-	boolean isAboveZero = true;
-	int decimalDivisionsCounter=-1,divisionCounter=0,modulo;
+	ArrayList<Integer> spacesForOutput = new ArrayList<Integer>();
+	int decimalDivisionsCounter, divisionCounter, modulo, nullCounter;
+	int DIVIDEND_FOR_ONE_OPERATION = 0;
+	int DIVIDEND_NOT_USED_DIGITS = 1;
 	
 	
 	
-	public ColumnDivision(String dividendIn, String devizorIn, int declimit) {
+	public ColumnDivision(String dividendIn, String devizorIn, int decimalLimit) {
 		dividend.addAll(toList(dividendIn.toCharArray()));
 		devizor.addAll(toList(devizorIn.toCharArray()));
 		
-		divisionOutput.add(dividend+"");
+		calculateDivision(decimalLimit);
+		formatOutput(dividendIn, devizorIn);
 		
-		while (decimalDivisionsCounter < declimit) {
+	}
+
+	private void calculateDivision(int decimalLimit) {
+		while (decimalDivisionsCounter != decimalLimit) {
 			oneDivisionResult = takeMinDivident(dividend,devizor);
 			if (oneDivisionResult!=null) {
-				if (divisionCounter!=0) divisionOutput.set(divisionOutput.size()-1,Integer.parseInt(listToString(oneDivisionResult[0]))+"");
-				modulo = oneDivisionOperation(oneDivisionResult[0],devizor,divisionCounter);
-				dividend = toList((""+modulo).toCharArray());
-				dividend.addAll(oneDivisionResult[1]);
-				skipNulls();
-				if (modulo==0 && oneDivisionResult[1].size()==0) break;
+				if (isDividendOver()) break;
+				performOneDivisionOperation();
 			} else {
-				dividend.add('0');
-				if (divisionResult.size()>0 && divisionResult.get(divisionResult.size()-1)=='.') divisionResult.add('0');
-				if (divisionCounter==1) divisionResult.add('0');
-				if (isAboveZero) {
-					divisionResult.add('.');
-					isAboveZero = false;
-				}
-				decimalDivisionsCounter++;
+				addOneMoreZeroToDividend();
 			}
 			divisionCounter++;
 		}
-		
-		divisionOutput.set(0,dividendIn+" |"+devizorIn);
-		divisionOutput.set(1,divisionOutput.get(1).trim()+" |"+listToString(divisionResult));
-		for(String s: divisionOutput) System.out.println(s);
-		
+	}
+
+	private void printOutput() {
+		int shift = 0;
+		for(int index = 0; index < divisionOutput.size(); index+=2) {
+			System.out.println(stringOfSize(shift,' ')+divisionOutput.get(index));
+			shift += spacesForOutput.get(index);
+			System.out.println(stringOfSize(shift,' ')+divisionOutput.get(index+1));
+			System.out.println(stringOfSize(shift,' ')+stringOfSize(divisionOutput.get(index).length()+2,'-'));
+			shift += spacesForOutput.get(index+1);
+		}
+	}
+
+	private void formatOutput(String dividendIn, String devizorIn) {
+		divisionOutput.remove(0);
+		int dividendLength = dividendIn.toCharArray().length;
+		int secondLineLength = divisionOutput.get(0).length();
+		if (dividendLength > secondLineLength) {
+		divisionOutput.add(0,dividendIn+" |"+devizorIn);
+		divisionOutput.set(1,divisionOutput.get(1).trim()+stringOfSize(dividendLength-secondLineLength,' ')+" |"+listToString(divisionResult));
+		} else if (dividendLength <= secondLineLength) {
+		divisionOutput.add(0,dividendIn+stringOfSize(secondLineLength-dividendLength,' ')+" |"+devizorIn);
+		divisionOutput.set(1,divisionOutput.get(1).trim()+" |"+listToString(divisionResult));	
+		}
+	}
+
+	private void addOneMoreZeroToDividend() {
+		dividend.add('0');
+		if (decimalDivisionsCounter > 0 && nullCounter > 0) divisionResult.add('0');
+		if (divisionCounter==0) {
+			divisionResult.add('0');
+			divisionResult.add('.');
+		}
+		decimalDivisionsCounter++;
+		nullCounter++;
+	}
+
+	private boolean isDividendOver() {
+		return modulo==0 && oneDivisionResult[DIVIDEND_NOT_USED_DIGITS].size()==0;
+	}
+
+	private void performOneDivisionOperation() {
+		divisionOutput.add(listToString(oneDivisionResult[DIVIDEND_FOR_ONE_OPERATION]));
+		modulo = oneDivisionOperation(oneDivisionResult[DIVIDEND_FOR_ONE_OPERATION],devizor,divisionCounter);
+		dividend = toList((""+modulo).toCharArray());
+		dividend.addAll(oneDivisionResult[DIVIDEND_NOT_USED_DIGITS]);
+		calculateSpacesForFormatting();
+		skipNulls();
 	}
 	
+	private void calculateSpacesForFormatting() {
+		spacesForOutput.add(oneDivisionResult[DIVIDEND_FOR_ONE_OPERATION].size() - divisionOutput.get(divisionOutput.size()-2).length());
+		spacesForOutput.add(oneDivisionResult[DIVIDEND_FOR_ONE_OPERATION].size() - new Integer(modulo).toString().length());
+		
+	}
+
 	private void skipNulls() {
-		while (dividend.size()>0) {
+		while (dividend.size() > 0) {
 			if (dividend.get(0)=='0'){
 				divisionResult.add('0');
 				dividend.remove(0);
 			} else break;
 			divisionCounter++;
+
 		}
 	}
 	
@@ -86,13 +132,13 @@ public class ColumnDivision {
 			dividendNumber = Integer.parseInt(listToString(posibleDevident));
 			devizorNumber = Integer.parseInt(listToString(devizor));
 			if (dividendNumber >= devizorNumber) {
-				result[0] = posibleDevident;
-				result[1] = new ArrayList<Character>(dividend.subList(devizor.size(), dividend.size()));
+				result[DIVIDEND_FOR_ONE_OPERATION] = posibleDevident;
+				result[DIVIDEND_NOT_USED_DIGITS] = new ArrayList<Character>(dividend.subList(devizor.size(), dividend.size()));
 				return result;
 			} else if (dividend.size() > devizor.size()) {
 				posibleDevident = new ArrayList<Character>(dividend.subList(0, devizor.size()+1));
-				result[0] = posibleDevident;
-				result[1] = new ArrayList<Character>(dividend.subList(devizor.size()+1, dividend.size()));
+				result[DIVIDEND_FOR_ONE_OPERATION] = posibleDevident;
+				result[DIVIDEND_NOT_USED_DIGITS] = new ArrayList<Character>(dividend.subList(devizor.size()+1, dividend.size()));
 				return result;
 			} 
 		} 
@@ -105,9 +151,8 @@ public class ColumnDivision {
 	dividendNumber = Integer.parseInt(listToString(dividend));
 	devizorNumber = Integer.parseInt(listToString(devizor));
 		divisionOutput.add(devizorNumber*(dividendNumber/devizorNumber)+"");
-		divisionOutput.add(generateDelimeters(dividend.size()+1));
-		divisionOutput.add(dividendNumber%devizorNumber+"");
 		divisionResult.add(((dividendNumber/devizorNumber)+"").toCharArray()[0]);
+		nullCounter = 0;
 		return dividendNumber%devizorNumber;
 	}
 	
@@ -121,19 +166,11 @@ public class ColumnDivision {
 	    return result.toString();
 	}
 	
-	private String generateSpaces (int spacesAmount) {
-		String spaces = "";
-		for (int index=0; index < spacesAmount; index++) {
-			spaces+=" ";
-		}
-		return spaces;
+	public static String stringOfSize(Integer size, char character)
+	{
+	    final char[] array = new char[size];
+	    Arrays.fill(array, character);
+	    return new String(array);
 	}
 	
-	private String generateDelimeters (int delimetersAmount) {
-		String delimeters = "";
-		for (int index=0; index < delimetersAmount; index++) {
-			delimeters+="-";
-		}
-		return delimeters;
-	}
 }
