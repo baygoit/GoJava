@@ -11,7 +11,7 @@ public class ColumnDivision {
 		Scanner reader = new Scanner(System.in);
 		String dividend = reader.nextLine();
 		String devizor =  reader.nextLine();
-		int decimalLimit = 5;
+		int decimalLimit = 7;
 		new ColumnDivision(dividend,devizor,decimalLimit).printOutput();
 	}
 	
@@ -40,8 +40,8 @@ public class ColumnDivision {
 		while (decimalDivisionsCounter != decimalLimit) {
 			oneDivisionResult = takeMinDivident(dividend,devizor);
 			if (oneDivisionResult!=null) {
-				if (isDividendOver()) break;
 				performOneDivisionOperation();
+				if (isDividendOver()) break;
 			} else {
 				addOneMoreZeroToDividend();
 			}
@@ -55,12 +55,16 @@ public class ColumnDivision {
 			System.out.println(stringOfSize(shift,' ')+divisionOutput.get(index));
 			shift += spacesForOutput.get(index);
 			System.out.println(stringOfSize(shift,' ')+divisionOutput.get(index+1));
-			System.out.println(stringOfSize(shift,' ')+stringOfSize(divisionOutput.get(index).length()+2,'-'));
+			System.out.println(stringOfSize(shift,' ')+stringOfSize(divisionOutput.get(index).length(),'-'));
 			shift += spacesForOutput.get(index+1);
 		}
 	}
 
 	private void formatOutput(String dividendIn, String devizorIn) {
+		if (divisionOutput.size() == 0) {
+			System.err.println("Increase decimal limit");
+			System.exit(0);
+		}
 		divisionOutput.remove(0);
 		int dividendLength = dividendIn.toCharArray().length;
 		int secondLineLength = divisionOutput.get(0).length();
@@ -78,6 +82,8 @@ public class ColumnDivision {
 		if (decimalDivisionsCounter > 0 && nullCounter > 0) divisionResult.add('0');
 		if (divisionCounter==0) {
 			divisionResult.add('0');
+		}
+		if (decimalDivisionsCounter == 0) {
 			divisionResult.add('.');
 		}
 		decimalDivisionsCounter++;
@@ -85,7 +91,7 @@ public class ColumnDivision {
 	}
 
 	private boolean isDividendOver() {
-		return modulo==0 && oneDivisionResult[DIVIDEND_NOT_USED_DIGITS].size()==0;
+		return modulo==0 && oneDivisionResult[DIVIDEND_NOT_USED_DIGITS].size() == 0;
 	}
 
 	private void performOneDivisionOperation() {
