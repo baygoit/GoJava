@@ -11,10 +11,10 @@ public class Anagrams {
 
 	private static String makeAnagrams(String userString) {
 		StringBuilder result = new StringBuilder();
-		Pattern nonAlphabetPattern = Pattern.compile("[^a-zA-Z]");
+		Pattern nonAlphabet = Pattern.compile("[^a-zA-Z]");
 		
 		for (String word: userString.split(" ")) {
-			if(nonAlphabetPattern.matcher(word).find()) {
+			if(nonAlphabet.matcher(word).find()) {
 				System.err.println("Entered words contains not alphabetic characters.");
 				System.exit(0);
 			}
