@@ -20,6 +20,8 @@
 	<link href="<c:url value="/resources/css/sticky_footer.css" />" rel="stylesheet">
 	<!--<link href="http://getbootstrap.com/examples/navbar-fixed-top/navbar-fixed-top.css" rel="stylesheet">-->
 	 
+	<script src="<c:url value="/resources/js/jquery.min.js" />"></script>
+	<script src="<c:url value="/resources/js/bootstrap.min.js" />"></script>
 	<style>
 		body { 
 			min-height: 500px;
@@ -66,7 +68,5 @@
 		<p align="center" class="text-muted"><tiles:insertAttribute name="footer" /></p>
 	</div>
 </footer>
-<script src="<c:url value="/resources/js/jquery.min.js" />"></script>
-<script src="<c:url value="/resources/js/bootstrap.min.js" />"></script>
 </body>
 </html>

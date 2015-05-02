@@ -69,7 +69,8 @@ public class UserController {
 	
 	@RequestMapping("/project/remove/{id}")
 	private String removeProject(@PathVariable int id) {
-		projectService.delet(id);
+		Project project = projectService.findOne(id);
+		projectService.delet(project);
 		return "redirect:/account-manage.html";
 	}
 	

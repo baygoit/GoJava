@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
+import org.springframework.security.access.method.P;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import com.gojava2.kickstarter.entity.Category;
@@ -22,7 +24,7 @@ public class ProjectService {
 	private ProjectRepository projectRepository;
 	
 	@Autowired
-	ProjectStatusRepository projectStatusRepository;
+	private ProjectStatusRepository projectStatusRepository;
 	
 	@Autowired
 	private CategoryRepository categoryRepository;
@@ -45,8 +47,13 @@ public class ProjectService {
 		projectStatusRepository.save(projectStatus);
 		projectRepository.save(project);
 	}
+	
+	@PreAuthorize("#project.user.name == authentication.name or hasRole('ROLE_ADMIN')")
+	public void delet(@P("project") Project project) {
+		projectRepository.delete(project);
+	}
 
-	public void delet(int id) {
-		projectRepository.delete(id);
+	public Project findOne(int id) {
+		return projectRepository.findOne(id);
 	}
 }

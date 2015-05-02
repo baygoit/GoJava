@@ -1,5 +1,7 @@
 <%@ include file="../layout/taglib.jsp" %>
 
+<script src="<c:url value="/resources/js/modal-remove.js" />"></script>
+
 <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
   New project
 </button>
@@ -88,9 +90,27 @@
 					</strong>
 				</td>
 				<td>
-					<a href='<spring:url value="/project/remove/${project.id}.html" />' class="btn btn-danger"> Remove project</a>
+					<a href='<spring:url value="/project/remove/${project.id}.html" />' class="btn btn-danger triggerRemove"> Remove project</a>
 				</td>
 			</tr>
 		</c:forEach>
 	</tbody>
 </table>
+
+<div class="modal fade" id="modalRemove" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 align="center" class="modal-title" id="myModalLabel">Remove project</h4>
+			</div>
+			<div class="modal-body">
+				Do you really want to remove the project?
+			</div>
+		<div class="modal-footer">
+			<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+			<a href="" class="btn btn-danger removeBtn">Remove</a>
+		</div>
+		</div>
+	</div>
+</div>
