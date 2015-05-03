@@ -1,10 +1,9 @@
 <%@ include file="../layout/taglib.jsp" %>
-<%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 
+	<%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>
 	<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 	<%@ taglib uri="http://www.springframework.org/security/tags" prefix="security"%>
 	<%@ taglib uri="http://tiles.apache.org/tags-tiles-extras" prefix="tilesx" %>
@@ -22,6 +21,7 @@
 	 
 	<script src="<c:url value="/resources/js/jquery.min.js" />"></script>
 	<script src="<c:url value="/resources/js/bootstrap.min.js" />"></script>
+	<script type="text/javascript" src="<c:url value="/resources/js/jquery-validation.js" />"></script>
 	<style>
 		body { 
 			min-height: 500px;

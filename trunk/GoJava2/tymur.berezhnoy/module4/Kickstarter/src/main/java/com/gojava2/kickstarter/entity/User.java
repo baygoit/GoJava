@@ -10,7 +10,10 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
+import org.hibernate.validator.constraints.Email;
 import org.springframework.data.annotation.PersistenceConstructor;
 
 @Entity
@@ -21,13 +24,17 @@ public class User {
 	@GeneratedValue
 	private Integer id;
 	
-	@Column(unique = true, nullable = false, length = 15)
+	@Size(min = 3, max = 25, message = "Name must be at from 3 to 25 characters!")
+	@NotNull(message = "Name must exist!")
+	@Column(unique = true)
 	private String name;
 	
-	@Column(nullable = false)
+	@Email
+	@NotNull(message = "Email must exist!")
 	private String email;
 	
-	@Column(nullable = false)
+	@Size(min = 5, message = "Password must be fromt 5 to 30 characters!")
+	@NotNull(message = "Password must exist!")
 	private String password;
 	
 	private boolean enabled;

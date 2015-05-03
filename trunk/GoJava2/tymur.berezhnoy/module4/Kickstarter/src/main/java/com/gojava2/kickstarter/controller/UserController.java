@@ -38,12 +38,6 @@ public class UserController {
 		return new ProjectStatus();
 	}
 
-	@RequestMapping("/users")
-	public String users(Model model) {
-		model.addAttribute("users", userService.findAll());
-		return "users";
-	}
-
 	@RequestMapping("/user/{name}")
 	public String getUser(Model model, @PathVariable String name) {
 		model.addAttribute("user", userService.getUser(name));
@@ -59,7 +53,7 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/account-manage", method = RequestMethod.POST)
-	public String addProject(@ModelAttribute("project") Project project,
+	public String addProject(@ModelAttribute("project") Project project, 
 			@ModelAttribute("projectStatus") ProjectStatus projectStatus,
 			Principal principal) {
 		String userName = principal.getName();
@@ -72,11 +66,5 @@ public class UserController {
 		Project project = projectService.findOne(id);
 		projectService.delet(project);
 		return "redirect:/account-manage.html";
-	}
-	
-	@RequestMapping("/users/remove/{id}")
-	public String removeUser(@PathVariable int id) {
-		userService.delet(id);
-		return "redirect:/users.html";
 	}
 }

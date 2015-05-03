@@ -1,7 +1,5 @@
 <%@ include file="../layout/taglib.jsp" %>
-
-<script src="<c:url value="/resources/js/modal-remove.js" />"></script>
-
+<script type="text/javascript" src="<c:url value="/resources/js/modal-remove.js" />"></script>
 <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
   New project
 </button>
@@ -72,6 +70,7 @@
 </div>
 </form:form>
 
+<br><br>
 <strong>My projects:</strong>
 <table class="table table-bordered table-hover table-striped">
 	<thead>
