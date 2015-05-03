@@ -25,7 +25,11 @@ public class Anagrams {
 			System.err.println("Entered words contains not alphabetic characters.");
 			System.exit(0);
 		}
-		result.append(new StringBuilder(word).reverse().toString() + " ");
+		result.append(reverse(word));
+	}
+
+	private static String reverse(String word) {
+		return new StringBuilder(word).reverse().toString() + " ";
 	}
 
 }
