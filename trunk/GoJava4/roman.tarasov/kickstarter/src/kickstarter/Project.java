@@ -2,15 +2,21 @@ package kickstarter;
 
 public class Project {
 	String name = "null";
-	String description="null";
-	String history="null";
+	String description = "null";
+	String history = "null";
 	int id;
 	int goal;
 	int money;
 	int expireDate;
+	Category category;
 
-	Project(Repository repository) {
-		
+	public Project(String name, Category category) {
+		this.name = name;
+		this.category = category;
+	}
+
+	Category getCategory() {
+		return category;
 	}
 
 	void setHistory(String history) {

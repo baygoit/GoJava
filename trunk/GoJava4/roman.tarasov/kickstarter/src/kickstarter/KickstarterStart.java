@@ -1,41 +1,28 @@
 package kickstarter;
 
-import java.util.ArrayList;
-
 public class KickstarterStart {
-	Repository repository;
-	Citation citations;
-	User users;
-	Category categories;
-	Project projects;
 
 	public static void main(String[] args) {
+	
+	    Kickstarter kickstarter = new Kickstarter();
+	    Category category = new Category("Social");
+	    kickstarter.add(category);
+	    Project project = new Project("Paint the fence", category);
+	    project.description="help";
+	    kickstarter.add(project);
+	  
+	    category = new Category("Technology");
+	    kickstarter.add(category);
+	    project = new Project("Create electrobike", category);
+	    project.description="high efficiency";
+	    project.history="history of bike creation";
+	    kickstarter.add(project);
+	    
+	    category = new Category("Technology");
+	    kickstarter.add(category);
+	    project = new Project("Create quadrocopter", category);
+	    kickstarter.add(project);
 
-		KickstarterStart starter = new KickstarterStart();
-		starter.createProjects();
-		starter.createCategories();
-		starter.createCitations();
-		starter.createUsers();
-	}
-
-	public void createCitations() {
-		citations = new Citation(repository);
-	}
-
-	public void createUsers() {
-		users = new User(repository);
-	}
-
-	public void createCategories() {
-		categories = new Category(repository);
-	}
-
-	public void createProjects() {
-		projects = new Project(repository);
-	}
-
-	public void start() {
-		Kickstarter kickstarter = new Kickstarter();
-		kickstarter.start(categories, projects, citations, users);
+	    kickstarter.start();
 	}
 }

@@ -5,68 +5,108 @@ import java.util.Scanner;
 
 public class Kickstarter {
 
-	Repository repository;
-	Citation citations;
-	User users;
-	Category categories;
-	Project projects;
+	Category category;
+	Project project;
+	ArrayList<Category> categories = new ArrayList<Category>();
+	ArrayList<Project> projects = new ArrayList<Project>();
+	ArrayList<Project> projectsInCategory;
 
-	int userId = 0;
-	int projectId = 0;
-	int categoryId = 0;
-	int citationId = 0;
 	Scanner scanner;
 
-	public void start(Category categories, Project projects,
-			Citation citations, User users) {
-		this.categories = categories;
-		this.projects = projects;
-		this.citations = citations;
-		this.users = users;
+	public void start() {
+
 		scanner = new Scanner(System.in);
-		newUser();
+
 		consoleCycle();
 	}
 
-	void consoleCycle() {
-		String fromConsole;
-		String category;
-		int parsed = 0;
-		while (true) {
-			fromConsole = scanner.nextLine();
-			try {
-				parsed = Integer.parseInt(fromConsole);
-				category = categories.category[parsed];
+	void printCategories() {
+		System.out.println("Categories :");
+		System.out.println("------------");
+		for (int index = 0; index < categories.size(); index++) {
+			category = categories.get(index);
+			System.out.println(index + "- " + category.name);
+		}
+		System.out.println("Choise category from list:");
+	}
 
-			} catch (NumberFormatException | IndexOutOfBoundsException e) {
-				System.err.println("wrong number");
-				continue;
+	void consoleCycle() {
+
+		while (true) {
+			printCategories();
+			try {
+				String fromConsole = scanner.nextLine();
+				category = parseStringToCategory(categories, fromConsole);
+				System.out.println("Category : " + category.name);
+				System.out.println("------------");
+				printInfoAboutProjectsInCategory(getAllProjectsInCategory(category));
+
+				fromConsole = scanner.nextLine();
+				project = parseStringToProject(projectsInCategory, fromConsole);
+				printInfoAboutProject(project);
+
+			} catch (IllegalArgumentException e) {
+				System.err.println("wrong choise");
 			}
 
-			System.out.println(category);
 		}
 	}
 
-	void newUser() {
+	void printInfoAboutProject(Project project) {
+		System.out.println("description: "+project.description);
+		System.out.println("history    : "+project.history);
+	}
 
-		boolean userIdentificated = false;
-		String fromConsole;
-		String user;
-		System.out.println("get User ID");
-		do {
-			try {
-				fromConsole = scanner.nextLine();
-				userId = Integer.parseInt(fromConsole);
-				 //user = users.user(userId);
-				userIdentificated = true;
-			} catch (NumberFormatException | IndexOutOfBoundsException e) {
-				System.err.println("wrong User ID");
-				continue;
-			}
-		} while (!userIdentificated);
-		// System.out.println("User Name: "+user.getName());
-		// System.out.println("      ID : "+userId);
+	Project parseStringToProject(ArrayList<Project> projects,
+			String stringToParse) {
+		try {
+			int parsed = Integer.parseInt(stringToParse);
+			project = projects.get(parsed);
+		} catch (NumberFormatException | IndexOutOfBoundsException e) {
+			throw new IllegalArgumentException();
+		}
+		return project;
 
 	}
 
+	Category parseStringToCategory(ArrayList<Category> categories,
+			String stringToParse) throws IllegalArgumentException {
+
+		try {
+			int parsed = Integer.parseInt(stringToParse);
+			category = categories.get(parsed);
+		} catch (NumberFormatException | IndexOutOfBoundsException e) {
+			throw new IllegalArgumentException();
+		}
+		return category;
+	}
+
+	ArrayList<Project> getAllProjectsInCategory(Category category) {
+		this.projectsInCategory = new ArrayList<Project>();
+		for (Project currentProject : projects) {
+			if (category.name.equals(currentProject.category.name)) {
+				projectsInCategory.add(currentProject);
+			}
+		}
+		return projectsInCategory;
+	}
+
+	void printInfoAboutProjectsInCategory(ArrayList<Project> projectsInCategory) {
+		Project currentProject;
+		for (int index = 0; index < projectsInCategory.size(); index++) {
+			currentProject = projectsInCategory.get(index);
+			System.out.println(index + "- " + currentProject.name
+					+ " , target amount:" + currentProject.goal
+					+ "  amount collected:" + currentProject.money
+					+ " , expire date:" + currentProject.expireDate);
+		}
+	}
+
+	public void add(Project project) {
+		projects.add(project);
+	}
+
+	public void add(Category category) {
+		categories.add(category);
+	}
 }

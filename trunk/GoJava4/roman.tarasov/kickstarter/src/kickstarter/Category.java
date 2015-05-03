@@ -1,9 +1,10 @@
 package kickstarter;
 
 public class Category {
-	String [] category;
+String name;
+	public Category(String name) {
+		this.name=name;
 
-	Category(Repository repository) {
-		this.category=repository.categories;
 	}
+
 }
