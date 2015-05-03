@@ -6,7 +6,7 @@ public class Project {
 	String history = "null";
 	int id;
 	int goal;
-	int money;
+	int pledged;
 	int expireDate;
 	Category category;
 
@@ -44,11 +44,11 @@ public class Project {
 	}
 
 	void setMoney(int money) {
-		this.money = money;
+		this.pledged = money;
 	}
 
 	int getMoney() {
-		return money;
+		return pledged;
 	}
 
 	void setName(String name) {
