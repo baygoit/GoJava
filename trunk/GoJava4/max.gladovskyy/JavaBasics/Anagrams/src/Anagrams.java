@@ -5,14 +5,13 @@ import java.util.regex.Pattern;
 public class Anagrams {
 
 	public static void main(String[] args) {
-		System.out.println("Enter words divided by spaces and press enter to make anagrams");
 		String userString = readUserString();
 		System.out.println(makeAnagrams(userString));
 	}
 
 	private static String readUserString() {
-		String userString = new Scanner(System.in).nextLine();
-		return null;
+		System.out.println("Enter words divided by spaces and press enter to make anagrams");
+		return new Scanner(System.in).nextLine();
 	}
 
 	private static String makeAnagrams(String userString) {
