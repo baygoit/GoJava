@@ -14,21 +14,17 @@ public class TwoMinDistance {
 	final static int SECOND_MIN_VALUE = 1;
 
 	private static int  getMinimalNumbersDistance(int[] numbers) {
-		int[] minValues = new int[]{MIN_VALUE, SECOND_MIN_VALUE};
+		int firstMinValue = 0;
+		int secondMinValue = 1;
 		for (int currentNumber = 1; currentNumber < numbers.length; currentNumber++) {
-			processCurrentNumber(numbers, minValues, currentNumber);
+			if (numbers[currentNumber] <= numbers[firstMinValue]) {
+				secondMinValue = firstMinValue;
+				firstMinValue = currentNumber;
+			} else if (numbers[currentNumber] < numbers[secondMinValue]) {
+				secondMinValue = currentNumber;
+			}
 		}
-		return Math.abs(minValues[MIN_VALUE] - minValues[SECOND_MIN_VALUE]);
-	}
-
-
-	private static void processCurrentNumber(int[] numbers, int[] minValues, int currentNumber) {
-		if (numbers[currentNumber] <= numbers[minValues[MIN_VALUE]]) {
-			minValues[SECOND_MIN_VALUE] = minValues[MIN_VALUE];
-			minValues[MIN_VALUE] = currentNumber;
-		} else if (numbers[currentNumber] < numbers[minValues[SECOND_MIN_VALUE]]) {
-			minValues[SECOND_MIN_VALUE] = currentNumber;
-		}
+		return Math.abs(firstMinValue - secondMinValue);
 	}
 	
 	
