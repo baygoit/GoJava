@@ -3,7 +3,6 @@ package com.gojava2.kickstarter.entity;
 import java.util.List;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -16,6 +15,8 @@ import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.Email;
 import org.springframework.data.annotation.PersistenceConstructor;
 
+import com.gojava2.kickstarter.annotation.UniqueUsername;
+
 @Entity
 @Table(name = "users")
 public class User {
@@ -26,7 +27,7 @@ public class User {
 	
 	@Size(min = 3, max = 25, message = "Name must be at from 3 to 25 characters!")
 	@NotNull(message = "Name must exist!")
-	@Column(unique = true)
+	@UniqueUsername(message = "User alredy exists")
 	private String name;
 	
 	@Email

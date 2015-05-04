@@ -1,5 +1,4 @@
 <%@ include file="../layout/taglib.jsp" %>
-
 <table class="table table-bordered table-hover table-striped">
 	<thead>
 		<tr>
