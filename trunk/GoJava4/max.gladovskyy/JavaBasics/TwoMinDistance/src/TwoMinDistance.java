@@ -10,8 +10,6 @@ public class TwoMinDistance {
 		System.out.println("Distance is: "+ MinimalNumbersDistance);
 	}
 
-	final static int MIN_VALUE = 0;
-	final static int SECOND_MIN_VALUE = 1;
 
 	private static int  getMinimalNumbersDistance(int[] numbers) {
 		int firstMinValue = 0;
