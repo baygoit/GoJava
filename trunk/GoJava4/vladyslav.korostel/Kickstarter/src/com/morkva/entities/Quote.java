@@ -36,9 +36,6 @@ public class Quote {
 
     @Override
     public String toString() {
-        return "Quote{" +
-                "value='" + value + '\'' +
-                ", author='" + author + '\'' +
-                '}';
+        return "\"" + value + "\"" + " (" + author + ")";
     }
 }

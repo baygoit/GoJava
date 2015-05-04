@@ -1,4 +1,4 @@
-package com.morkva;
+package com.morkva.logic;
 
 /**
  * Created by vladyslav on 30.04.15.

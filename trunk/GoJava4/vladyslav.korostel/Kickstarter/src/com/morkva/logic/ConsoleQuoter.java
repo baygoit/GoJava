@@ -1,4 +1,4 @@
-package com.morkva;
+package com.morkva.logic;
 
 import com.morkva.entities.Quote;
 import com.morkva.model.QuotesRepository;

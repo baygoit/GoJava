@@ -3,6 +3,8 @@ package com.morkva;
 import com.morkva.entities.Category;
 import com.morkva.entities.Project;
 import com.morkva.entities.Quote;
+import com.morkva.logic.ConsoleQuoter;
+import com.morkva.logic.Quoter;
 import com.morkva.model.*;
 import com.morkva.model.impl.CategoryRepositoryImpl;
 import com.morkva.model.impl.QuotesRepositoryImpl;
@@ -10,7 +12,7 @@ import com.morkva.model.impl.QuotesRepositoryImpl;
 import java.io.IOException;
 import java.util.Scanner;
 
-public class Main {
+public class KickstarterApp {
 
     static Category[] defaultCategories = new Category[]{
             new Category("Програмное обеспечение"),
@@ -62,67 +64,57 @@ public class Main {
 
         quoter = new ConsoleQuoter(new QuotesRepositoryImpl(defaultQuotes));
         categoryRepository = new CategoryRepositoryImpl(defaultCategories);
-
-        while (true) {
-            System.out.println("Your quote: " + quoter.quote());
-            Category[] categories = categoryRepository.getAllCategories();
-            System.out.println("Select category: ");
-            for (int i = 0; i < categories.length; i++) {
-                System.out.println(i + 1 + ": " + categories[i].getName());
-            }
+        
+        KickstarterApp app = new KickstarterApp();
+        app.showMenu();
+    }
+    public void showMenu() {
+    	Scanner scanner = new Scanner(System.in);
+    	Category[] categories = categoryRepository.getAllCategories();
+    	while (true) {
+            System.out.println(quoter.quote());
+            
+            showCategories(categories);
+            
             System.out.println();
             System.out.println("Press 0 for exit");
-
-            Scanner scanner = new Scanner(System.in);
-            int code = scanner.nextInt();
-
-            if (code == 0) {
+            System.out.println("--------------------------------------------");
+            
+            int keyCode = scanner.nextInt();
+            if (keyCode == 0) {
                 break;
             } else {
-                if (code <= categories.length) {
-                    Category currentCategory = categories[code-1];
+                if (keyCode <= categories.length) {
+                    Category currentCategory = categories[keyCode-1];
                     loop: while (true) {
-                        System.out.println("You select category: " + currentCategory.getName());
-                        System.out.println("Category projects: ");
-                        Project[] currentCategoryProjects = currentCategory.getProjects();
-                        for (int i = 0; i < currentCategoryProjects.length; i++) {
-                            System.out.print("    " + (i + 1) + ": ");
-                            System.out.println(currentCategoryProjects[i].getName());
-                            System.out.println("        Short Description: " + currentCategoryProjects[i].getShortDescr());
-                            System.out.println("        Need money: " + currentCategoryProjects[i].getNeedMoney());
-                            System.out.println("        Current money: " + currentCategoryProjects[i].getCurrentMoney());
-                            System.out.println("        Days left: " + currentCategoryProjects[i].getDaysLeft());
-                        }
+                    	
+                        showCategoryPojects(currentCategory);
+                        
                         System.out.println();
                         System.out.println("Press 0 for exit from this category");
-                        int code2 = scanner.nextInt();
-                        if (code2 == 0) {
+                        System.out.println("--------------------------------------------");
+                        
+                        keyCode = scanner.nextInt();
+                        if (keyCode == 0) {
                             break;
                         } else {
-                            if (code2 <= currentCategoryProjects.length) {
-                                Project currentProject = currentCategoryProjects[code2-1];
-                                while (true) {
-                                    System.out.println(currentProject.getName());
-                                    System.out.println("        Short Description: " + currentProject.getShortDescr());
-                                    System.out.println("        Need money: " + currentProject.getNeedMoney());
-                                    System.out.println("        Current money: " + currentProject.getCurrentMoney());
-                                    System.out.println("        Days left: " + currentProject.getDaysLeft());
-                                    System.out.println("        History: " + currentProject.getHistory());
-                                    System.out.println("        Video URL: " + currentProject.getUrlVideo());
-                                    System.out.println("        Questions And Answers: ");
-                                    for (String s : currentProject.getQuestionsAndAnswers()) {
-                                        System.out.println("            " + s);
-                                    }
-                                    System.out.println();
-                                    System.out.println("Press 0 to return back");
-                                    System.out.println("Press -1 to return to the menu");
-                                    int code3 = scanner.nextInt();
-                                    if (code3 == 0) break;
-                                    else if (code3 == -1) break loop;
-                                    else System.out.println("Wrong code!");
-                                }
+                            if (keyCode <= currentCategory.getProjects().length) {
+                            	while(true) {
+                            		
+	                                showProjectInfo(currentCategory.getProjects()[keyCode-1]);
+	                                
+	                                System.out.println();
+	                                System.out.println("Press 0 to return back");
+	                                System.out.println("Press -1 to return to the menu");
+	                                System.out.println("--------------------------------------------");
+	                                
+	                                keyCode = scanner.nextInt();
+	                                if (keyCode == 0) break;
+	                                else if (keyCode == -1) break loop;
+	                                else System.out.println("Wrong code!");
+                            	}
                             } else {
-                                System.out.println("Wrong project!");
+                                System.out.println("Project with №" + keyCode + " does not exist");
                             }
                         }
                     }
@@ -131,6 +123,40 @@ public class Main {
                 }
             }
         }
-
+    }
+    
+    public void showCategories(Category[] categories) {
+    	System.out.println("Select category: ");
+        for (int i = 0; i < categories.length; i++) {
+            System.out.println(i + 1 + ": " + categories[i].getName());
+        }
+    }
+    
+    public void showCategoryPojects(Category category) {
+    	System.out.println("Category: " + category.getName());
+        System.out.println("  Projects: ");
+        Project[] currentCategoryProjects = category.getProjects();
+        for (int i = 0; i < currentCategoryProjects.length; i++) {
+            System.out.print("  " + (i + 1) + ": ");
+            System.out.println(currentCategoryProjects[i].getName());
+            System.out.println("	Short Description: " + currentCategoryProjects[i].getShortDescr());
+            System.out.println("	Need money: " + currentCategoryProjects[i].getNeedMoney());
+            System.out.println("	Current money: " + currentCategoryProjects[i].getCurrentMoney());
+            System.out.println("	Days left: " + currentCategoryProjects[i].getDaysLeft());
+        }
+    }
+    
+    public void showProjectInfo(Project project) {
+            System.out.println(project.getName());
+            System.out.println("		Short Description: " + project.getShortDescr());
+            System.out.println("		Need money: " + project.getNeedMoney());
+            System.out.println("		Current money: " + project.getCurrentMoney());
+            System.out.println("		Days left: " + project.getDaysLeft());
+            System.out.println("		History: " + project.getHistory());
+            System.out.println("		Video URL: " + project.getUrlVideo());
+            System.out.println("		Questions And Answers: ");
+            for (String s : project.getQuestionsAndAnswers()) {
+                System.out.println("			" + s);
+            }
     }
 }
