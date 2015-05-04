@@ -12,54 +12,23 @@ public class TwoMinDistance {
 
 	final static int MIN_VALUE = 0;
 	final static int SECOND_MIN_VALUE = 1;
-	final static int MIN_POSITION = 2;
-	final static int SECOND_MIN_POSITION = 3;
-	final static int MIN_VALUES_INFO_ARRAY_SIZE = 4;
 
 	private static int  getMinimalNumbersDistance(int[] numbers) {
-		int[] minValues = getStartingMinValues(numbers);
+		int[] minValues = new int[]{MIN_VALUE, SECOND_MIN_VALUE};
 		for (int currentNumber = 1; currentNumber < numbers.length; currentNumber++) {
 			processCurrentNumber(numbers, minValues, currentNumber);
 		}
-		return getDistance(minValues);
-	}
-
-
-	private static int getDistance(int[] minValues) {
-		return Math.abs(minValues[SECOND_MIN_POSITION] - minValues[MIN_POSITION]);
+		return Math.abs(minValues[MIN_VALUE] - minValues[SECOND_MIN_VALUE]);
 	}
 
 
 	private static void processCurrentNumber(int[] numbers, int[] minValues, int currentNumber) {
-		if (numbers[currentNumber] <= minValues[MIN_VALUE]) {
-			shiftMinValues(numbers[currentNumber], currentNumber, minValues);
-		} else if (numbers[currentNumber] < minValues[SECOND_MIN_VALUE]) {
-			replaceSecondMinValue(numbers[currentNumber], currentNumber, minValues);
+		if (numbers[currentNumber] <= numbers[minValues[MIN_VALUE]]) {
+			minValues[SECOND_MIN_VALUE] = minValues[MIN_VALUE];
+			minValues[MIN_VALUE] = currentNumber;
+		} else if (numbers[currentNumber] < numbers[minValues[SECOND_MIN_VALUE]]) {
+			minValues[SECOND_MIN_VALUE] = currentNumber;
 		}
-	}
-
-
-	private static int[] getStartingMinValues(int[] numbers) {
-		int[] result = new int[MIN_VALUES_INFO_ARRAY_SIZE];
-		result[MIN_VALUE] = numbers[0];
-		result[SECOND_MIN_VALUE] = numbers[1];
-		result[MIN_POSITION] = 0;
-		result[SECOND_MIN_POSITION] = 1;
-		return result;
-	}
-
-
-	private static void replaceSecondMinValue(int newValue, int newPosition, int[] minValuesInfo) {
-		minValuesInfo[SECOND_MIN_VALUE] = newValue;
-		minValuesInfo[SECOND_MIN_POSITION] = newPosition;
-	}
-
-
-	private static void shiftMinValues(int newValue, int newPosition, int[] minValuesInfo) {
-		minValuesInfo[SECOND_MIN_VALUE] = minValuesInfo[MIN_VALUE];
-		minValuesInfo[SECOND_MIN_POSITION] = minValuesInfo[MIN_POSITION];
-		minValuesInfo[MIN_VALUE] = newValue;
-		minValuesInfo[MIN_POSITION] = newPosition;
 	}
 	
 	
