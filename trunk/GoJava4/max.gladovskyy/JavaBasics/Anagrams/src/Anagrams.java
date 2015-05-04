@@ -6,11 +6,17 @@ public class Anagrams {
 
 	public static void main(String[] args) {
 		System.out.println("Enter words divided by spaces and press enter to make anagrams");
-		System.out.println(makeAnagrams());
+		String userString = readUserString();
+		System.out.println(makeAnagrams(userString));
 	}
 
-	private static String makeAnagrams() {
+	private static String readUserString() {
 		String userString = new Scanner(System.in).nextLine();
+		return null;
+	}
+
+	private static String makeAnagrams(String userString) {
+		
 		StringBuilder result = new StringBuilder();
 		
 		for (String word: userString.split(" ")) {
