@@ -9,9 +9,10 @@ public class AnagramMaker {
 
 	public static void main(String[] args) throws IOException {
 		System.out.print("Enter words to inverse them: ");
-		//String userInput = readUserInput();
-		String userInput = STANDART_USER_INPUT;
-		System.out.println(userInput);
+		String userInput = readUserInput();
+		//String userInput = STANDART_USER_INPUT;
+		//System.out.println(userInput);
+		System.out.print("Here's your anagram:         ");
 		System.out.println(doAnagram(userInput, STANDART_SEPARATOR));
 	}
 	
