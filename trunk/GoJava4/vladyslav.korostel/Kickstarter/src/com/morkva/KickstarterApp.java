@@ -23,7 +23,8 @@ public class KickstarterApp {
     static String[] questionsAndAnswers = new String[] {
             "Question 1: Answer",
             "Question 2: Answer",
-            "Question 3: Answer"
+            "Question 3: Answer",
+            "Question 4: Answer"
     };
 
     static Project[] softwareCategoryProjects = new Project[] {
