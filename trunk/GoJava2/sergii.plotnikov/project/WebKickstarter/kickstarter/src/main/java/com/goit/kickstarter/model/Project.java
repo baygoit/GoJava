@@ -9,82 +9,7 @@ public class Project {
 	private int projectPrice;
 	private int collected;
 	private int days;
-
-	public Project(int id, String title, String description, String story,
-			String link, int projectPrice, int collected, int days) {
-		this.id = id;
-		this.title = title;
-		this.description = description;
-		this.story = story;
-		this.link=link;
-		this.projectPrice = projectPrice;
-		this.collected = collected;
-		this.days = days;
-	}
-	
-	public Project(int id){
-		this.id=id;
-	}
-	
-	public Project(int id, int money){
-		this.id=id;
-		collected+=money;
-	}
-
-	public Project(String projectName, String descr, int price) {
-		title = projectName;
-		description = descr;
-		projectPrice = price;
-	}
-
-	public String getTitle() {
-		return title;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public int getProjectPrice() {
-		return projectPrice;
-	}
-
-	public int getCollected() {
-		return collected;
-	}
-
-	public void setCollected(int collected) {
-		this.collected = collected;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((title == null) ? 0 : title.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Project other = (Project) obj;
-		if (title == null) {
-			if (other.title != null)
-				return false;
-		} else if (!title.equals(other.title))
-			return false;
-		return true;
-	}
+	private int category;
 
 	public String getStory() {
 		return story;
@@ -108,5 +33,53 @@ public class Project {
 
 	public void setDays(int days) {
 		this.days = days;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public int getProjectPrice() {
+		return projectPrice;
+	}
+
+	public void setProjectPrice(int projectPrice) {
+		this.projectPrice = projectPrice;
+	}
+
+	public int getCollected() {
+		return collected;
+	}
+
+	public void setCollected(int collected) {
+		this.collected = collected;
+	}
+
+	public int getCategory() {
+		return category;
+	}
+
+	public void setCategory(int category) {
+		this.category = category;
 	}
 }

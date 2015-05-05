@@ -1,23 +1,17 @@
 package com.goit.kickstarter.model;
 
 public class FAQ {
+	private int id;
 	private String question;
 	private String answer;
 	private int projectId;
 
-	public FAQ(String string, int id) {
-		question = string;
-		projectId=id;
-	}
-	
-	public FAQ(String question, String answer, int id) {
-		this.question = question;
-		this.answer = answer;
-		projectId=id;
+	public int getId() {
+		return id;
 	}
 
-	public String getQuestion() {
-		return question;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getAnswer() {
@@ -28,8 +22,20 @@ public class FAQ {
 		this.answer = answer;
 	}
 
+	public String getQuestion() {
+		return question;
+	}
+
+	public void setQuestion(String question) {
+		this.question = question;
+	}
+
 	public int getProjectId() {
 		return projectId;
+	}
+
+	public void setProjectId(int projectId) {
+		this.projectId = projectId;
 	}
 
 }

@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.goit.kickstarter.model">
+
+	<class name="FAQ" table="faq">
+		<id name="id" column="id">
+			<generator class="native" />
+		</id>
+		<property name="question" column="question" />
+		<property name="answer" column="answer" />
+		<property name="projectId" column="project" />
+
+	</class>
+
+	<query name="getFaqs">
+    	<![CDATA[from FAQ faq where faq.projectId = :project]]>
+	</query>
+
+</hibernate-mapping>

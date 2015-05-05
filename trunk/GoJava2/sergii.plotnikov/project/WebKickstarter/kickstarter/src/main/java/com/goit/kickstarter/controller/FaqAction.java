@@ -2,45 +2,69 @@ package com.goit.kickstarter.controller;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.goit.kickstarter.dao.FaqDAO;
 import com.goit.kickstarter.model.FAQ;
 
-public class FaqAction implements Action {
-	
+public class FaqAction {
+
+	@Autowired
 	private FaqDAO faqDao;
+
+	private List<FAQ> faqs;
+	private int id;
+	private FAQ faq;
+	private FAQ newFaq;
+	private String message;
+
+	public String execute() {
+		faqs = faqDao.getFaq(id);
+		return "success";
+	}
 	
-	public FaqAction(FaqDAO faqDao){
-		this.faqDao=faqDao;
-	}
-
-	@Override
-	public String doGet(HttpServletRequest req, HttpServletResponse resp) {
-		int projectId = Integer.valueOf(req.getParameter("projectId"));
-		int categoryId=Integer.valueOf(req.getParameter("categoryId"));
-
-		List<FAQ> faq = faqDao.getFaq(projectId);
-
-		req.setAttribute("faq", faq);
-		req.setAttribute("projectId", projectId);
-		req.setAttribute("categoryId", categoryId);
-		
-		return "faq.jsp";
-	}
-
-	@Override
-	public String doPost(HttpServletRequest req, HttpServletResponse resp) {
-		String question = req.getParameter("question");
-
-		if ("".equals(question)) {
-			req.setAttribute("error", "Type your question!");
-			return doGet(req, resp);
-		} else {
-			faqDao.createFaq(new FAQ(question, Integer.valueOf(req.getParameter("projectId"))));
-			return doGet(req, resp);
+	public String addFaq() {
+		if("".equals(newFaq.getQuestion())){
+			message = "please enter your question!";
+			faqs = faqDao.getFaq(id);
+			return "fail";
 		}
+		message="thank you for your question!";
+		newFaq.setProjectId(id);
+		faqDao.addFaq(newFaq);
+		return execute();
+	}
+
+	public List<FAQ> getFaqs() {
+		return faqs;
+	}
+
+	public void setFaqs(List<FAQ> faqs) {
+		this.faqs = faqs;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
+	public FAQ getNewFaq() {
+		return newFaq;
+	}
+
+	public void setNewFaq(FAQ newFaq) {
+		this.newFaq = newFaq;
 	}
 
 }
