@@ -5,6 +5,7 @@
 <html>
 <head>
 
+
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 
 <%@ taglib uri="http://www.springframework.org/security/tags"
@@ -22,6 +23,8 @@
 <script
 	src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 
+
+
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title><tiles:getAsString name="title" /></title>
 </head>
@@ -30,6 +33,7 @@
 		prefix="tilesx"%>
 
 	<tilesx:useAttribute name="current" />
+
 
 
 	<div class="container">
@@ -45,14 +49,16 @@
 							class="icon-bar"></span> <span class="icon-bar"></span> <span
 							class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href='<spring:url value="/"/>'>KickStarter</a>
+					<a class="navbar-brand" href='<spring:url value="/index.html"/>'>KickStarter</a>
 				</div>
 				<div id="navbar" class="navbar-collapse collapse">
 					<ul class="nav navbar-nav">
 						<li class="${current ==  'index' ? 'active' : ''}"><a
-							href='<spring:url value="/"/>'>Home</a></li>
+							href='<spring:url value="/index.html"/>'>Home</a></li>
 						<li class="${current ==  'categories' ? 'active' : ''}"><a
 							href='<spring:url value="/categories.html"></spring:url>'>Categories</a></li>
+						<li class="${current ==  'ajax' ? 'active' : ''}"><a
+							href='<spring:url value="/ajax.html"></spring:url>'>Ajax</a></li>
 						<li class="${current ==  'register' ? 'active' : ''}"><a
 							href='<spring:url value="/register.html"></spring:url>'>Registration</a></li>
 						<security:authorize access="hasRole('ROLE_ADMIN')">

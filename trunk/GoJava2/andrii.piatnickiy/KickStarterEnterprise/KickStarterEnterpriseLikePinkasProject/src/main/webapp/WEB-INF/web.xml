@@ -22,15 +22,13 @@
 
 	<servlet-mapping>
 		<servlet-name>dispatcher</servlet-name>
-		<url-pattern>*.html</url-pattern>
-		<url-pattern>*.htm</url-pattern>
-		<url-pattern>*.json</url-pattern>
-		<url-pattern>*.xml</url-pattern>
+		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 
 	<listener>
 		<listener-class>
-			org.springframework.security.web.session.HttpSessionEventPublisher</listener-class>
+			org.springframework.security.web.session.HttpSessionEventPublisher
+		</listener-class>
 	</listener>
 
 	<listener>

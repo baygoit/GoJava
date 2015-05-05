@@ -43,4 +43,10 @@
         <put-attribute name="current" value="login" />
     </definition>
     
+         <definition name="ajax" extends="common">
+        <put-attribute name="title" value="Ajax" />
+        <put-attribute name="body" value="/WEB-INF/jsp/ajax.jsp" />
+        <put-attribute name="current" value="ajax" />
+    </definition>
+    
 </tiles-definitions>
