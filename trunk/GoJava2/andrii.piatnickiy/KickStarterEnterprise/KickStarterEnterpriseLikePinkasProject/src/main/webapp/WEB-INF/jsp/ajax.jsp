@@ -11,12 +11,16 @@
 
 		$("#category").click(function() {
 			$.get("/ajaxcategory", function(data, status) {
-				alert("Data: " + data + "\nStatus: " + status);
+                alert("Category = " + data.name + "\nStatus : " + status);	
+                console.log(data);
 			});
+			
 		});
 		$("#categories").click(function() {
 			$.get("/ajaxcategories", function(data, status) {
-				alert("Data: " + data + "\nStatus: " + status);
+				for (var i = 0; i < data.length; i++){
+					alert(data[i].name);
+				}
 			});
 		});
 	});
