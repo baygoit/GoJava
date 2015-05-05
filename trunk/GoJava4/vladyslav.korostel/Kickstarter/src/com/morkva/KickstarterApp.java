@@ -15,9 +15,9 @@ import java.util.Scanner;
 public class KickstarterApp {
 
     static Category[] defaultCategories = new Category[]{
-            new Category("Програмное обеспечение"),
-            new Category("Видео"),
-            new Category("Игры")
+            new Category("Software"),
+            new Category("Video"),
+            new Category("Games")
     };
 
     static String[] questionsAndAnswers = new String[] {
@@ -54,28 +54,33 @@ public class KickstarterApp {
             new Quote("Программирование — это гонка между компьютерщиками, которые создают программы, все лучше защищенные от дурака, и природой, которая создает все лучших дураков. Пока что природа выигрывает.", "Рич Кук")
     };
 
-    static Quoter quoter;
-    static CategoryRepository categoryRepository;
+    private Quoter quoter;
+    private CategoryRepository categoryRepository;
+    private Scanner scanner;
+    
+    public KickstarterApp() {
+    	quoter = new ConsoleQuoter(new QuotesRepositoryImpl(defaultQuotes));
+        categoryRepository = new CategoryRepositoryImpl(defaultCategories);
+        scanner = new Scanner(System.in);
+	}
 
     public static void main(String[] args) throws IOException {
 
         defaultCategories[0].setProjects(softwareCategoryProjects);
         defaultCategories[1].setProjects(videoCategoryProjects);
         defaultCategories[2].setProjects(gamesCategoryProjects);
-
-        quoter = new ConsoleQuoter(new QuotesRepositoryImpl(defaultQuotes));
-        categoryRepository = new CategoryRepositoryImpl(defaultCategories);
         
         KickstarterApp app = new KickstarterApp();
         app.showMenu();
     }
+    
     public void showMenu() {
-    	Scanner scanner = new Scanner(System.in);
-    	Category[] categories = categoryRepository.getAllCategories();
+    	Category[] allCategories = categoryRepository.getAllCategories();
     	while (true) {
+    		//Show quote
             System.out.println(quoter.quote());
             
-            showCategories(categories);
+            showCategories(allCategories);
             
             System.out.println();
             System.out.println("Press 0 for exit");
@@ -85,45 +90,60 @@ public class KickstarterApp {
             if (keyCode == 0) {
                 break;
             } else {
-                if (keyCode <= categories.length) {
-                    Category currentCategory = categories[keyCode-1];
-                    loop: while (true) {
-                    	
-                        showCategoryPojects(currentCategory);
-                        
-                        System.out.println();
-                        System.out.println("Press 0 for exit from this category");
-                        System.out.println("--------------------------------------------");
-                        
-                        keyCode = scanner.nextInt();
-                        if (keyCode == 0) {
-                            break;
-                        } else {
-                            if (keyCode <= currentCategory.getProjects().length) {
-                            	while(true) {
-                            		
-	                                showProjectInfo(currentCategory.getProjects()[keyCode-1]);
-	                                
-	                                System.out.println();
-	                                System.out.println("Press 0 to return back");
-	                                System.out.println("Press -1 to return to the menu");
-	                                System.out.println("--------------------------------------------");
-	                                
-	                                keyCode = scanner.nextInt();
-	                                if (keyCode == 0) break;
-	                                else if (keyCode == -1) break loop;
-	                                else System.out.println("Wrong code!");
-                            	}
-                            } else {
-                                System.out.println("Project with №" + keyCode + " does not exist");
-                            }
-                        }
-                    }
+                if (keyCode > 0 && keyCode <= allCategories.length) {
+                	
+                	Category currentCategory = allCategories[keyCode-1];
+                	showCategoryMenu(currentCategory);
+                	
                 } else {
-                    System.out.println("Wrong number!");
+                	System.out.println("Wrong number!");
                 }
             }
         }
+    }
+    
+    public void showCategoryMenu(Category category) {
+    	
+    	Project[] projectsOfCurrentCategory = category.getProjects();
+    	
+        while (true) {
+        	
+            showProjectsOfCategory(category);
+            
+            System.out.println();
+            System.out.println("Press 0 for exit from this category");
+            System.out.println("--------------------------------------------");
+            
+            int keyCode = scanner.nextInt();
+            if (keyCode == 0) {
+                break;
+            } else {
+                if (keyCode > 0 && keyCode <= projectsOfCurrentCategory.length) {
+                	Project selectedProject = projectsOfCurrentCategory[keyCode-1];
+                	showProjectMenu(selectedProject);
+                } else {
+                	System.out.println("Project with №" + keyCode + " does not exist");
+                }
+            }
+        } //end projectsListLoop
+    }
+    
+    public void showProjectMenu(Project project) {
+    	while(true) {
+    		
+            showProjectInfo(project);
+            
+            System.out.println();
+            System.out.println("Press 0 to return back");
+            System.out.println("--------------------------------------------");
+            
+            int keyCode = scanner.nextInt();
+            if (keyCode == 0) {
+            	break;
+            } else {
+            	System.out.println("Wrong code!");
+            }
+    	} //end loop
     }
     
     public void showCategories(Category[] categories) {
@@ -133,7 +153,7 @@ public class KickstarterApp {
         }
     }
     
-    public void showCategoryPojects(Category category) {
+    public void showProjectsOfCategory(Category category) {
     	System.out.println("Category: " + category.getName());
         System.out.println("  Projects: ");
         Project[] currentCategoryProjects = category.getProjects();
@@ -149,15 +169,15 @@ public class KickstarterApp {
     
     public void showProjectInfo(Project project) {
             System.out.println(project.getName());
-            System.out.println("		Short Description: " + project.getShortDescr());
-            System.out.println("		Need money: " + project.getNeedMoney());
-            System.out.println("		Current money: " + project.getCurrentMoney());
-            System.out.println("		Days left: " + project.getDaysLeft());
-            System.out.println("		History: " + project.getHistory());
-            System.out.println("		Video URL: " + project.getUrlVideo());
-            System.out.println("		Questions And Answers: ");
+            System.out.println("	Short Description: " + project.getShortDescr());
+            System.out.println("	Need money: " + project.getNeedMoney());
+            System.out.println("	Current money: " + project.getCurrentMoney());
+            System.out.println("	Days left: " + project.getDaysLeft());
+            System.out.println("	History: " + project.getHistory());
+            System.out.println("	Video URL: " + project.getUrlVideo());
+            System.out.println("	Questions And Answers: ");
             for (String s : project.getQuestionsAndAnswers()) {
-                System.out.println("			" + s);
+                System.out.println("		" + s);
             }
     }
 }
