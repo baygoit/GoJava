@@ -1,15 +1,23 @@
 
 public class Kickstarter {
-
+	
 	public static void main(String[] args) {
-		Kickstarter kickstarter = new Kickstarter();
+		Output output = new ConsoleOut();
+		Input input = new ConsoleIn();
+		DataSource dataSource = new LocalDataSource();
+		
+		Kickstarter kickstarter = new Kickstarter(output, input, dataSource);
 		kickstarter.run();
-	}	
+	}
 	
-	private MainPage mainPage = MainPage.getMainPage();
+	private Runner runner;	
 	
+	public Kickstarter(Output output, Input input, DataSource dataSource) {
+		this.runner = new Runner(output, input, dataSource);
+	}
+
 	public void run() {
-		mainPage.print();
+		runner.run();
 	}
 
 }
