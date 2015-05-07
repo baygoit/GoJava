@@ -3,8 +3,7 @@ package kickstarter;
 public class PageLogin extends Page {
 	
 	public Page getNextPage() {
-final int ADMIN_CATEGORIES_CONTROL=1;
-final int USER_CATEGORIES_VIEW=2;
+
 		ui.display("++++++++++++++++++++++++");
 		ui.display("+       Login          +");
 		ui.display("++++++++++++++++++++++++");

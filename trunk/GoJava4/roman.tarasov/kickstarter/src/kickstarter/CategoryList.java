@@ -17,14 +17,12 @@ public class CategoryList {
 
 			categories[pointer] = categoryToList;
 		}
-
 		categories[pointer] = categoryToList;
 		pointer++;
-
 	}
 
 	void deleteCategory(Category categoryToBeDeleted) {
-
+		// TODO
 	}
 
 	void printList(UserInterface ui) {

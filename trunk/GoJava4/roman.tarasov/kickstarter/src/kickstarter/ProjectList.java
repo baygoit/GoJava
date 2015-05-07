@@ -10,11 +10,11 @@ public class ProjectList {
 			Project[] newProjects = new Project[projects.length + 10];
 			System.arraycopy(projects, 0, newProjects, 0, projects.length);
 			projects = newProjects;
-			
-			int []newDeleted=new int [projects.length + 10];
+
+			int[] newDeleted = new int[projects.length + 10];
 			System.arraycopy(deleted, 0, newDeleted, 0, projects.length);
-			 deleted=newDeleted;
-			
+			deleted = newDeleted;
+
 			projects[pointer] = projectToList;
 		}
 
@@ -24,20 +24,23 @@ public class ProjectList {
 	}
 
 	void deleteProject(Project projectToBeDeleted) {
-
+		// TODO
 	}
 
 	void printList(UserInterface ui) {
-		if(pointer==0){
+		if (pointer == 0) {
 			ui.display("ProjectList null");
 			return;
 		}
 		for (int index = 0; index < pointer; index++) {
-			ui.display(index+"- "+projects[index].name);
+
+			ui.display(index + "- " + projects[index].name);
+
 		}
 	}
+
 	public Project get(int pointer) {
-		
+
 		return projects[pointer];
 	}
 }

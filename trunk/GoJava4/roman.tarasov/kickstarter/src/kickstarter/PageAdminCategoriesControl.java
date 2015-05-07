@@ -16,6 +16,7 @@ public class PageAdminCategoriesControl extends Page {
 
 	@Override
 	public Page getNextPage() {
+		
 		ui.display("________________________");
 		ui.display("|  Categories Control  |");
 		ui.display("|______________________|");
@@ -30,7 +31,7 @@ public class PageAdminCategoriesControl extends Page {
 			if (stringFromUI.equals("e")) {
 				ui.display("exit");
 
-				return pages[0];
+				return pages[PAGE_LOGIN];
 			}
 			if (stringFromUI.equals("r")) {
 				ui.display("rename");

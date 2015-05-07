@@ -3,7 +3,7 @@ package kickstarter;
 
 public class PageUserCategoriesView extends Page {
 	CategoryList list;
-	final int PAGE_USER_PROJECTS_VIEW=3;
+	
 	PageUserCategoriesView( CategoryList list) {
 		this.list = list;
 	}
@@ -26,11 +26,11 @@ public class PageUserCategoriesView extends Page {
 			String stringFromUI = ui.inputString();
 			if (stringFromUI.equals("e")) {
 				ui.display("exit");
-				return pages[0];
+				return pages[PAGE_LOGIN];
 			}
 			try {
 				int parsed = Integer.parseInt(stringFromUI);
-				categoryToProjectsView = list.get(parsed);
+				categoryToUserProjectsView = list.get(parsed);
 				return pages[PAGE_USER_PROJECTS_VIEW];
 			} catch (NumberFormatException | IndexOutOfBoundsException e) {
 				//throw new IllegalArgumentException();
