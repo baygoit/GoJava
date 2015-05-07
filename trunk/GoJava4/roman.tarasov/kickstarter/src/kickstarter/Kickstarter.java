@@ -2,7 +2,6 @@ package kickstarter;
 
 import java.util.ArrayList;
 
-
 public class Kickstarter {
 
 	Category category;
@@ -16,17 +15,11 @@ public class Kickstarter {
 	int projectId;
 	int categoryId;
 
-
 	public void start() {
-	
-		ui=new ConsoleUI();
-	
-        dispatcher=new PageDispatcher(ui,categories,projects);
-
-        dispatcher.startDispatcher();
-	
+		ui = new ConsoleUI();
+		dispatcher = new PageDispatcher(ui, categories, projects);
+		dispatcher.startDispatcher();
 	}
-
 
 	void printInfoAboutProject(Project project) {
 		System.out.println("description: " + project.description);
@@ -42,7 +35,6 @@ public class Kickstarter {
 			throw new IllegalArgumentException();
 		}
 		return project;
-
 	}
 
 	Category parseStringToCategory(ArrayList<Category> categories,
@@ -68,11 +60,12 @@ public class Kickstarter {
 		}
 	}
 
-	void add(CategoryList listCategories){
-		this.categories=listCategories;
+	void add(CategoryList listCategories) {
+		this.categories = listCategories;
 	}
-	void add(ProjectList listProjects){
-		this.projects=listProjects;
+
+	void add(ProjectList listProjects) {
+		this.projects = listProjects;
 	}
 
 }

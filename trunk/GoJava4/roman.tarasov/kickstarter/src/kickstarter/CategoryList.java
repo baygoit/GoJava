@@ -10,11 +10,11 @@ public class CategoryList {
 			Category[] newCategories = new Category[categories.length + 10];
 			System.arraycopy(categories, 0, newCategories, 0, categories.length);
 			categories = newCategories;
-			
-			int []newDeleted=new int [categories.length + 10];
+
+			int[] newDeleted = new int[categories.length + 10];
 			System.arraycopy(deleted, 0, newDeleted, 0, categories.length);
-			 deleted=newDeleted;
-			
+			deleted = newDeleted;
+
 			categories[pointer] = categoryToList;
 		}
 
@@ -28,17 +28,17 @@ public class CategoryList {
 	}
 
 	void printList(UserInterface ui) {
-		if(pointer==0){
+		if (pointer == 0) {
 			ui.display("CategoryList null");
 			return;
 		}
 		for (int index = 0; index < pointer; index++) {
-			ui.display(index+"- "+categories[index].name);
+			ui.display(index + "- " + categories[index].name);
 		}
 	}
 
 	public Category get(int pointer) {
-		
+
 		return categories[pointer];
 	}
 

@@ -3,36 +3,33 @@ package kickstarter;
 public class PageAdminCategoriesControl extends Page {
 	CategoryList list;
 
-
-	PageAdminCategoriesControl( CategoryList list) {
+	PageAdminCategoriesControl(CategoryList list) {
 
 		this.list = list;
 
 	}
 
-
 	void printCategories() {
 		list.printList(ui);
 
 	}
-	
-@Override
-	public Page getNextPage() {
-		ui.display("////////////////////////");
-		ui.display("// Categories Control //");
-		ui.display("////////////////////////");
-		ui.display("All categories:");
 
+	@Override
+	public Page getNextPage() {
+		ui.display("________________________");
+		ui.display("|  Categories Control  |");
+		ui.display("|______________________|");
 		printCategories();
 		ui.display("------------------------");
 		ui.display("Commands:");
 
 		while (true) {
-			ui.display("r- rename  , d- delete , e- exit to Main Page");
+			ui.display("r- rename  , d- delete , e- exit to Login Page");
 			String stringFromUI = ui.inputString();
+			//TODO
 			if (stringFromUI.equals("e")) {
 				ui.display("exit");
-				
+
 				return pages[0];
 			}
 			if (stringFromUI.equals("r")) {

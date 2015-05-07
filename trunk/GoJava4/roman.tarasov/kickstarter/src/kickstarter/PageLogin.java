@@ -24,6 +24,7 @@ final int USER_CATEGORIES_VIEW=2;
 				return pages[USER_CATEGORIES_VIEW];
 				
 			}
+			ui.display("input correct login, please");
 		}
 	}
 

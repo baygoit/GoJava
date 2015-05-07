@@ -6,9 +6,11 @@ public class PageUserProjectsView extends Page {
 	public PageUserProjectsView(ProjectList projects) {
 		this.projects = projects;
 	}
-void printProjects(){
-	projects.printList(ui);
-}
+
+	void printProjects() {
+		projects.printList(ui);
+	}
+
 	@Override
 	public Page getNextPage() {
 		ui.display("________________________");
@@ -29,11 +31,11 @@ void printProjects(){
 				projectToProjectView = projects.get(parsed);
 				return pages[0];
 			} catch (NumberFormatException | IndexOutOfBoundsException e) {
-				//throw new IllegalArgumentException();
+				// throw new IllegalArgumentException();
 				ui.display("input correct command, please");
 				continue;
 			}
-	
+
 		}
 	}
 }
