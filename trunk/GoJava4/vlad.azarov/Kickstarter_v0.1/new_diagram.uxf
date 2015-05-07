@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="13.2">
+  <zoom_level>9</zoom_level>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>432</x>
+      <y>117</y>
+      <w>117</w>
+      <h>27</h>
+    </coordinates>
+    <panel_attributes>OBJECT MODEL
+bg=dark_gray</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.baselet.element.old.element.Class</type>
+    <coordinates>
+      <x>432</x>
+      <y>171</y>
+      <w>117</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>Kickstarter
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.baselet.element.old.element.Class</type>
+    <coordinates>
+      <x>612</x>
+      <y>630</y>
+      <w>117</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>QuotesStorage
+--
+fields</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.baselet.element.old.element.Class</type>
+    <coordinates>
+      <x>441</x>
+      <y>738</y>
+      <w>117</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>Project
+--
+fields</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.baselet.element.old.element.Class</type>
+    <coordinates>
+      <x>261</x>
+      <y>738</y>
+      <w>117</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>Category
+--
+fields</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.baselet.element.old.element.Class</type>
+    <coordinates>
+      <x>261</x>
+      <y>630</y>
+      <w>117</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>CategoriesStorage
+--
+fields</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.baselet.element.old.element.Relation</type>
+    <coordinates>
+      <x>288</x>
+      <y>360</y>
+      <w>197</w>
+      <h>143</h>
+    </coordinates>
+    <panel_attributes>
+</panel_attributes>
+    <additional_attributes>180;27;180;81;27;81;27;126</additional_attributes>
+  </element>
+  <element>
+    <type>com.baselet.element.old.element.Relation</type>
+    <coordinates>
+      <x>288</x>
+      <y>675</y>
+      <w>44</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>
+</panel_attributes>
+    <additional_attributes>27;63;27;27</additional_attributes>
+  </element>
+  <element>
+    <type>com.baselet.element.old.element.Relation</type>
+    <coordinates>
+      <x>351</x>
+      <y>747</y>
+      <w>107</w>
+      <h>44</h>
+    </coordinates>
+    <panel_attributes>
+</panel_attributes>
+    <additional_attributes>90;27;27;27</additional_attributes>
+  </element>
+  <element>
+    <type>com.baselet.element.old.element.Relation</type>
+    <coordinates>
+      <x>288</x>
+      <y>531</y>
+      <w>44</w>
+      <h>116</h>
+    </coordinates>
+    <panel_attributes>
+</panel_attributes>
+    <additional_attributes>27;27;27;99</additional_attributes>
+  </element>
+  <element>
+    <type>com.baselet.element.old.element.Class</type>
+    <coordinates>
+      <x>612</x>
+      <y>738</y>
+      <w>117</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>Quote
+--
+fields</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.baselet.element.old.element.Relation</type>
+    <coordinates>
+      <x>648</x>
+      <y>675</y>
+      <w>44</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>
+</panel_attributes>
+    <additional_attributes>27;27;27;63</additional_attributes>
+  </element>
+  <element>
+    <type>com.baselet.element.old.element.Text</type>
+    <coordinates>
+      <x>657</x>
+      <y>243</y>
+      <w>63</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>includes</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.baselet.element.old.element.Text</type>
+    <coordinates>
+      <x>657</x>
+      <y>279</y>
+      <w>63</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>includes</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.baselet.element.old.element.Text</type>
+    <coordinates>
+      <x>657</x>
+      <y>207</y>
+      <w>63</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>includes</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.baselet.element.old.element.Class</type>
+    <coordinates>
+      <x>234</x>
+      <y>315</y>
+      <w>117</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>Printer
+--
+fields</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.baselet.element.old.element.Class</type>
+    <coordinates>
+      <x>432</x>
+      <y>315</y>
+      <w>117</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>ConsoleMainPage
+--
+fields</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.baselet.element.old.element.Class</type>
+    <coordinates>
+      <x>441</x>
+      <y>486</y>
+      <w>117</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>ProjectsMenu
+--
+fields</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.baselet.element.old.element.Class</type>
+    <coordinates>
+      <x>261</x>
+      <y>486</y>
+      <w>117</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>CategoriesMenu
+--
+fields</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.baselet.element.old.element.Relation</type>
+    <coordinates>
+      <x>468</x>
+      <y>360</y>
+      <w>44</w>
+      <h>143</h>
+    </coordinates>
+    <panel_attributes>
+</panel_attributes>
+    <additional_attributes>27;27;27;126</additional_attributes>
+  </element>
+  <element>
+    <type>com.baselet.element.old.element.Relation</type>
+    <coordinates>
+      <x>495</x>
+      <y>360</y>
+      <w>197</w>
+      <h>287</h>
+    </coordinates>
+    <panel_attributes>
+</panel_attributes>
+    <additional_attributes>27;27;27;81;180;81;180;270</additional_attributes>
+  </element>
+  <element>
+    <type>com.baselet.element.old.element.Relation</type>
+    <coordinates>
+      <x>459</x>
+      <y>216</y>
+      <w>44</w>
+      <h>116</h>
+    </coordinates>
+    <panel_attributes>
+</panel_attributes>
+    <additional_attributes>27;27;27;99</additional_attributes>
+  </element>
+  <element>
+    <type>com.baselet.element.old.element.Relation</type>
+    <coordinates>
+      <x>468</x>
+      <y>675</y>
+      <w>44</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>
+</panel_attributes>
+    <additional_attributes>27;27;27;63</additional_attributes>
+  </element>
+  <element>
+    <type>com.baselet.element.old.element.Class</type>
+    <coordinates>
+      <x>441</x>
+      <y>630</y>
+      <w>117</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>ProjectsStorage
+--
+fields</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.baselet.element.old.element.Relation</type>
+    <coordinates>
+      <x>468</x>
+      <y>531</y>
+      <w>44</w>
+      <h>116</h>
+    </coordinates>
+    <panel_attributes>
+</panel_attributes>
+    <additional_attributes>27;27;27;99</additional_attributes>
+  </element>
+</diagram>
