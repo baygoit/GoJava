@@ -1,3 +1,12 @@
+package kickstarter;
+
+import datasource.DataSource;
+import datasource.LocalDataSource;
+import UserInterface.ConsoleIn;
+import UserInterface.ConsoleOut;
+import UserInterface.Input;
+import UserInterface.Output;
+import logic.Runner;
 
 public class Kickstarter {
 	
