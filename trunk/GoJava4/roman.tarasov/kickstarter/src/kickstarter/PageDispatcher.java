@@ -4,6 +4,7 @@ public class PageDispatcher {
 	Page adminCategoriesControl;
 	Page loginPage ;
 	Page userCategoriesView;
+	Page userProjectsView;
 	UserInterface ui;
 
 	CategoryList list;
@@ -27,7 +28,8 @@ public class PageDispatcher {
 		adminCategoriesControl=new PageAdminCategoriesControl(list);
 		loginPage =new PageLogin();
 		userCategoriesView=new PageUserCategoriesView(list);
-		
+		userProjectsView=new PageUserProjectsView();
+				
 		userCategoriesView.setPages(pages);
 		userCategoriesView.setUI(ui);
 		

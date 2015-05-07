@@ -3,6 +3,7 @@ package kickstarter;
 
 public class PageUserCategoriesView extends Page {
 	CategoryList list;
+	final int PAGE_USER_PROJECTS_VIEW=3;
 	PageUserCategoriesView( CategoryList list) {
 		this.list = list;
 	}
@@ -26,7 +27,17 @@ public class PageUserCategoriesView extends Page {
 				ui.display("exit");
 				return pages[0];
 			}
-			ui.display("input correct command, please");
+			try {
+				int parsed = Integer.parseInt(stringFromUI);
+				categoryToProjectsView = list.get(parsed);
+			} catch (NumberFormatException | IndexOutOfBoundsException e) {
+				//throw new IllegalArgumentException();
+				ui.display("input correct command, please");
+				continue;
+			}
+			ui.display(categoryToProjectsView.name);
+			
+			
 		}
 	}
 }

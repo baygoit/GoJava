@@ -37,4 +37,9 @@ public class CategoryList {
 		}
 	}
 
+	public Category get(int pointer) {
+		
+		return categories[pointer];
+	}
+
 }
