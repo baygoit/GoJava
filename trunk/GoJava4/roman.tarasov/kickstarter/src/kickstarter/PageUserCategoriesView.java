@@ -14,10 +14,11 @@ public class PageUserCategoriesView extends Page {
 	
 @Override
 	public Page getNextPage() {
-		ui.display("////////////////////////");
-		ui.display("// Categories         //");
-		ui.display("////////////////////////");
+		ui.display("=========================");
+		ui.display("|     Categories        |");
+		ui.display("=========================");
 		printCategories();
+		ui.display("------------------------");
 		ui.display("Select Category:");
 
 		while (true) {
@@ -30,12 +31,13 @@ public class PageUserCategoriesView extends Page {
 			try {
 				int parsed = Integer.parseInt(stringFromUI);
 				categoryToProjectsView = list.get(parsed);
+				return pages[PAGE_USER_PROJECTS_VIEW];
 			} catch (NumberFormatException | IndexOutOfBoundsException e) {
 				//throw new IllegalArgumentException();
 				ui.display("input correct command, please");
 				continue;
 			}
-			ui.display(categoryToProjectsView.name);
+		
 			
 			
 		}

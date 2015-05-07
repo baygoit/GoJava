@@ -36,4 +36,8 @@ public class ProjectList {
 			ui.display(index+"- "+projects[index].name);
 		}
 	}
+	public Project get(int pointer) {
+		
+		return projects[pointer];
+	}
 }

@@ -5,11 +5,13 @@ public class PageLogin extends Page {
 	public Page getNextPage() {
 final int ADMIN_CATEGORIES_CONTROL=1;
 final int USER_CATEGORIES_VIEW=2;
-		ui.display("////////////////////////");
-		ui.display("// Login              //");
-		ui.display("////////////////////////");
+		ui.display("++++++++++++++++++++++++");
+		ui.display("+       Login          +");
+		ui.display("++++++++++++++++++++++++");
 		ui.display("0- admin");
 		ui.display("1- guest");
+		ui.display("------------------------");
+		ui.display("Login: ");
 		while (true) {
 
 			String fromUI =ui.inputString();

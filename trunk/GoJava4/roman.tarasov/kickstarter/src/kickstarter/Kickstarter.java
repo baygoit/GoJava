@@ -21,7 +21,7 @@ public class Kickstarter {
 	
 		ui=new ConsoleUI();
 	
-        dispatcher=new PageDispatcher(ui,categories);
+        dispatcher=new PageDispatcher(ui,categories,projects);
 
         dispatcher.startDispatcher();
 	

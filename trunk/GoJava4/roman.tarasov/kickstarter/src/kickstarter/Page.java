@@ -5,6 +5,7 @@ public class Page implements UserInterface{
 	Page[] pages;
 	UserInterface ui;
 	Category categoryToProjectsView;
+	Project projectToProjectView;
 
 	void setUI(UserInterface ui) {
 		this.ui = ui;
