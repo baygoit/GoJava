@@ -1,6 +1,6 @@
 package kickstarter;
 
-public class LoginPage extends Page implements UserInterface{
+public class PageLogin extends Page implements UserInterface{
 	
 	public Page getNextPage() {
 final int ADMIN_CATEGORIES_CONTROL=1;

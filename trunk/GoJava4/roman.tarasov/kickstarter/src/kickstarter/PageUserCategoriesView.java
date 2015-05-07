@@ -1,9 +1,9 @@
 
 package kickstarter;
 
-public class UserCategoriesView extends Page implements UserInterface{
+public class PageUserCategoriesView extends Page {
 	CategoryList list;
-	UserCategoriesView( CategoryList list) {
+	PageUserCategoriesView( CategoryList list) {
 		this.list = list;
 	}
 

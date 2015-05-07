@@ -1,15 +1,16 @@
 package kickstarter;
 
 import java.util.ArrayList;
-import java.util.Scanner;
+
 
 public class Kickstarter {
 
 	Category category;
 	Project project;
 	CategoryList categories;
+	ProjectList projects;
 	PageDispatcher dispatcher;
-	AdminCategoriesControl adminPage;
+	PageAdminCategoriesControl adminPage;
 	UserInterface ui;
 
 	int projectId;
@@ -69,6 +70,9 @@ public class Kickstarter {
 
 	void add(CategoryList listCategories){
 		this.categories=listCategories;
+	}
+	void add(ProjectList listProjects){
+		this.projects=listProjects;
 	}
 
 }

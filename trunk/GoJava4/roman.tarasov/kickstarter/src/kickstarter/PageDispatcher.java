@@ -24,9 +24,9 @@ public class PageDispatcher {
 	public void startDispatcher(){
 		//nextPage=loginPage.getNextPage();
 		
-		adminCategoriesControl=new AdminCategoriesControl(list);
-		loginPage =new LoginPage();
-		userCategoriesView=new UserCategoriesView(list);
+		adminCategoriesControl=new PageAdminCategoriesControl(list);
+		loginPage =new PageLogin();
+		userCategoriesView=new PageUserCategoriesView(list);
 		
 		userCategoriesView.setPages(pages);
 		userCategoriesView.setUI(ui);

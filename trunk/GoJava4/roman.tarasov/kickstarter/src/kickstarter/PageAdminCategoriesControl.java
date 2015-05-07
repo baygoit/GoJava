@@ -1,10 +1,10 @@
 package kickstarter;
 
-public class AdminCategoriesControl extends Page implements UserInterface{
+public class PageAdminCategoriesControl extends Page {
 	CategoryList list;
 
 
-	AdminCategoriesControl( CategoryList list) {
+	PageAdminCategoriesControl( CategoryList list) {
 
 		this.list = list;
 
