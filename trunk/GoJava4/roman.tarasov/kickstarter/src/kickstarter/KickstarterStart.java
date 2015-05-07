@@ -25,6 +25,10 @@ public class KickstarterStart {
 		project.pledged = 25;
 		project.goal = 2000;
 		projects.addProject(project);
+		
+		project = new Project("Create quadrocopter", category);
+		projects.addProject(project);
+		
 		/*
 		 * category = new Category("Technology"); kickstarter.add(category);
 		 * project = new Project("Create quadrocopter", category);

@@ -3,9 +3,11 @@ package kickstarter;
 
 public class PageUserCategoriesView extends Page {
 	CategoryList list;
+	ProjectList projects;
 	
-	PageUserCategoriesView( CategoryList list) {
+	PageUserCategoriesView( CategoryList list,ProjectList projects) {
 		this.list = list;
+		this.projects=projects;
 	}
 
 	void printCategories() {
@@ -31,6 +33,7 @@ public class PageUserCategoriesView extends Page {
 			try {
 				int parsed = Integer.parseInt(stringFromUI);
 				categoryToUserProjectsView = list.get(parsed);
+				projects.setTargetCategory(categoryToUserProjectsView);
 				return pages[PAGE_USER_PROJECTS_VIEW];
 			} catch (NumberFormatException | IndexOutOfBoundsException e) {
 				//throw new IllegalArgumentException();

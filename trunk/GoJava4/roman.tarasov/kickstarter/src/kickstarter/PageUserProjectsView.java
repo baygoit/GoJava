@@ -24,12 +24,13 @@ public class PageUserProjectsView extends Page {
 			String stringFromUI = ui.inputString();
 			if (stringFromUI.equals("e")) {
 				ui.display("exit");
-				return pages[0];
+				return pages[PAGE_LOGIN];
 			}
+			//TODO
 			try {
 				int parsed = Integer.parseInt(stringFromUI);
 				projectToProjectView = projects.get(parsed);
-				return pages[0];
+				return pages[PAGE_LOGIN];
 			} catch (NumberFormatException | IndexOutOfBoundsException e) {
 				// throw new IllegalArgumentException();
 				ui.display("input correct command, please");

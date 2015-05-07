@@ -4,6 +4,7 @@ public class ProjectList {
 	Project[] projects = new Project[10];
 	int[] deleted = new int[10];
 	int pointer = 0;
+	Category targetCategory;
 
 	void addProject(Project projectToList) {
 		if (pointer >= projects.length) {
@@ -32,11 +33,17 @@ public class ProjectList {
 			ui.display("ProjectList null");
 			return;
 		}
+	
 		for (int index = 0; index < pointer; index++) {
+			if (targetCategory.name.equals(projects[index].category.name)) {
 
-			ui.display(index + "- " + projects[index].name);
-
+				ui.display(index + "- " + projects[index].name);
+			}
 		}
+	}
+
+	void setTargetCategory(Category target) {
+		this.targetCategory = target;
 	}
 
 	public Project get(int pointer) {
