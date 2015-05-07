@@ -19,60 +19,6 @@ public class Project {
 		return category;
 	}
 
-	void setHistory(String history) {
-		this.history = history;
-	}
 
-	String getHistory() {
-		return history;
-	}
-
-	void setDescription(String Description) {
-		this.description = Description;
-	}
-
-	String getDescription() {
-		return description;
-	}
-
-	int getExpire() {
-		return expireDate;
-	}
-
-	void setExpire(int expire) {
-		this.expireDate = expire;
-	}
-
-	void setMoney(int money) {
-		this.pledged = money;
-	}
-
-	int getMoney() {
-		return pledged;
-	}
-
-	void setName(String name) {
-		this.name = name;
-	}
-
-	String getName() {
-		return name;
-	}
-
-	void setId(int id) {
-		this.id = id;
-	}
-
-	int getId() {
-		return id;
-	}
-
-	int getGoal() {
-		return goal;
-	}
-
-	void setGoal(int goal) {
-
-	}
 
 }

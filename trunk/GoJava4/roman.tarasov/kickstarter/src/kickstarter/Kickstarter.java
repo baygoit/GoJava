@@ -7,56 +7,25 @@ public class Kickstarter {
 
 	Category category;
 	Project project;
-	ArrayList<Category> categories = null;
-	ArrayList<Project> projects = null;
-	ArrayList<Project> projectsInCategory = null;
+	CategoryList categories;
+	PageDispatcher dispatcher;
+	AdminCategoriesControl adminPage;
+	UserInterface ui;
+
 	int projectId;
 	int categoryId;
-	Scanner scanner;
 
-	Kickstarter() {
-		categories = new ArrayList<Category>();
-		projects = new ArrayList<Project>();
-	}
 
 	public void start() {
+	
+		ui=new ConsoleUI();
+	
+        dispatcher=new PageDispatcher(ui,categories);
 
-		scanner = new Scanner(System.in);
-
-		consoleCycle();
+        dispatcher.startDispatcher();
+	
 	}
 
-	void printCategories() {
-		System.out.println("Categories :");
-		System.out.println("------------");
-		for (int index = 0; index < categories.size(); index++) {
-			category = categories.get(index);
-			System.out.println(index + "- " + category.name);
-		}
-		System.out.println("Choose category from list:");
-	}
-
-	void consoleCycle() {
-
-		while (true) {
-			printCategories();
-			try {
-				String fromConsole = scanner.nextLine();
-				category = parseStringToCategory(categories, fromConsole);
-				System.out.println("Category : " + category.name);
-				System.out.println("------------");
-				printInfoAboutProjectsInCategory(getAllProjectsInCategory(category));
-
-				fromConsole = scanner.nextLine();
-				project = parseStringToProject(projectsInCategory, fromConsole);
-				printInfoAboutProject(project);
-
-			} catch (IllegalArgumentException e) {
-				System.err.println("wrong choice");
-			}
-
-		}
-	}
 
 	void printInfoAboutProject(Project project) {
 		System.out.println("description: " + project.description);
@@ -87,16 +56,6 @@ public class Kickstarter {
 		return category;
 	}
 
-	ArrayList<Project> getAllProjectsInCategory(Category category) {
-		this.projectsInCategory = new ArrayList<Project>();
-		for (Project currentProject : projects) {
-			if (category.name.equals(currentProject.category.name)) {
-				projectsInCategory.add(currentProject);
-			}
-		}
-		return projectsInCategory;
-	}
-
 	void printInfoAboutProjectsInCategory(ArrayList<Project> projectsInCategory) {
 		Project currentProject;
 		for (int index = 0; index < projectsInCategory.size(); index++) {
@@ -108,21 +67,8 @@ public class Kickstarter {
 		}
 	}
 
-	public void add(Project project) {
-		projects.add(project);
+	void add(CategoryList listCategories){
+		this.categories=listCategories;
 	}
 
-	public void add(Category category) {
-		Category currentCategory;
-
-		for (int index = 0; index < categories.size(); index++) {
-			String categoryName = category.name;
-			currentCategory = categories.get(index);
-			String current = currentCategory.name;
-			if (categoryName.equals(current)) {
-				return;
-			}
-		}
-		categories.add(category);
-	}
 }
