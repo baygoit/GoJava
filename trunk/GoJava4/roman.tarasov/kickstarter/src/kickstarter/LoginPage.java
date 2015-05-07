@@ -4,6 +4,7 @@ public class LoginPage extends Page implements UserInterface{
 	
 	public Page getNextPage() {
 final int ADMIN_CATEGORIES_CONTROL=1;
+final int USER_CATEGORIES_VIEW=2;
 		ui.display("////////////////////////");
 		ui.display("// Login              //");
 		ui.display("////////////////////////");
@@ -18,7 +19,7 @@ final int ADMIN_CATEGORIES_CONTROL=1;
 			}
 			if(fromUI.equals("1")){
 			
-				return pages[0];
+				return pages[USER_CATEGORIES_VIEW];
 				
 			}
 		}

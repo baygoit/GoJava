@@ -10,9 +10,6 @@ public class AdminCategoriesControl extends Page implements UserInterface{
 
 	}
 
-	void print(String stringToPrint) {
-
-	}
 
 	void printCategories() {
 		list.printList(ui);

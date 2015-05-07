@@ -3,12 +3,13 @@ package kickstarter;
 public class PageDispatcher {
 	Page adminCategoriesControl;
 	Page loginPage ;
+	Page userCategoriesView;
 	UserInterface ui;
-	//PageInterface pi;
+
 	CategoryList list;
-	//Page nextPage;
+
 	Page page;
-	Page[]pages=new Page[2];
+	Page[]pages=new Page[3];
 	PageDispatcher(UserInterface ui,CategoryList list){
 
 	    this.ui=ui;
@@ -24,11 +25,16 @@ public class PageDispatcher {
 		//nextPage=loginPage.getNextPage();
 		
 		adminCategoriesControl=new AdminCategoriesControl(list);
+		loginPage =new LoginPage();
+		userCategoriesView=new UserCategoriesView(list);
 		
-	    loginPage =new LoginPage();
+		userCategoriesView.setPages(pages);
+		userCategoriesView.setUI(ui);
+		
 	    
 	    pages[0]=loginPage;
 	    pages[1]=adminCategoriesControl;
+	    pages[2]=userCategoriesView;
 	    adminCategoriesControl.setPages(pages);
 	    adminCategoriesControl.setUI(ui);
 	    
