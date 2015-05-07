@@ -10,6 +10,7 @@ import com.morkva.model.impl.CategoryRepositoryImpl;
 import com.morkva.model.impl.QuotesRepositoryImpl;
 
 import java.io.IOException;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class KickstarterApp {
@@ -85,20 +86,20 @@ public class KickstarterApp {
             System.out.println();
             System.out.println("Press 0 for exit");
             System.out.println("--------------------------------------------");
-            
-            int keyCode = scanner.nextInt();
-            if (keyCode == 0) {
-                break;
-            } else {
-                if (keyCode > 0 && keyCode <= allCategories.length) {
-                	
-                	Category currentCategory = allCategories[keyCode-1];
-                	showCategoryMenu(currentCategory);
-                	
-                } else {
-                	System.out.println("Wrong number!");
-                }
-            }
+
+//            try {
+            	int keyCode = scanner.nextInt();
+	            if (keyCode == 0) {
+	                break;
+	            } else if (keyCode > 0 && keyCode <= allCategories.length) {
+	            	Category currentCategory = allCategories[keyCode-1];
+	                showCategoryMenu(currentCategory);
+	            } else {
+	            	System.out.println("Wrong number!");
+	            }
+//            } catch(InputMismatchException e) {
+//            	System.err.println("Please, enter only numbers!");
+//            }
         }
     }
     
