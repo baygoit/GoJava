@@ -1,21 +1,20 @@
 package storages;
-import entities.Quote;
+import entities.Quotes;
 
 
 public class QuotesStorage {
 	
+
+	
+	
+	
+	
+	
+	/*
+	
 	private Quote[] quotes = new Quote[10];
 	int[] deleted = new int[10];
 	int pointer = 0;
-	
-	
-	
-	Quote quote = new Quote("Inspiting quote #1","Unknow author");
-	
-	
-	
-	
-	
 	
 	public void addQuote(Quote newQuote) {
 		if (pointer >= quotes.length) {
@@ -29,6 +28,7 @@ public class QuotesStorage {
 			
 		}
 	}
+	*/
 
 
 }
