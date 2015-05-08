@@ -8,6 +8,10 @@ public class WelcomeProjectOwnerPage extends Page{
 		
 	}
 	
+	public WelcomeProjectOwnerPage(Printer printer) {
+		this.printer = printer;
+	}
+
 	@Override
 	public void constructPage(){
 		header = "\n\n/////////////////////////////////\n"+

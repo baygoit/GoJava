@@ -8,6 +8,10 @@ public class WelcomeUserPage extends Page {
 		
 	}
 	
+	public WelcomeUserPage(Printer printer) {
+		this.printer = printer;
+	}
+
 	@Override
 	public void constructPage(){
 		header = "\n\n" + kickstarter.getRandomQuote();

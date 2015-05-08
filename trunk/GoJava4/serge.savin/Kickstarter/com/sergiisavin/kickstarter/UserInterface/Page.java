@@ -7,6 +7,8 @@ public class Page {
 	protected Kickstarter kickstarter;
 	protected PageDispatcher dispatcher;
 	
+	protected Printer printer;
+	
 	protected String header;
 	protected String dataArea;
 	protected String footer;
@@ -21,6 +23,12 @@ public class Page {
 	
 	}
 	
+	
+	public Page(Printer printer) {
+		this.printer = printer;
+	}
+
+
 	public void constructPage(){
 		header = "/////////////////////////////////\n"+
 				 "//          HEADER             //\n"+
@@ -38,10 +46,10 @@ public class Page {
 	}
 	
 	public void show(){
-		System.out.print(header);
-		System.out.print(dataArea);
-		System.out.print(footer);
-		System.out.print(whereAmI);
+		printer.print(header);
+		printer.print(dataArea);
+		printer.print(footer);
+		printer.print(whereAmI);
 		getInput();
 		dispatcher.requestPage(nextPage);
 	}

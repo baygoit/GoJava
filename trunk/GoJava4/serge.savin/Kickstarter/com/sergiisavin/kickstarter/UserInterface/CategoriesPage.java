@@ -8,6 +8,10 @@ public class CategoriesPage extends Page{
 		previousPage = PageType.WELCOME_USER_PAGE;
 	}
 	
+	public CategoriesPage(Printer printer) {
+		this.printer = printer;
+	}
+
 	@Override
 	public void constructPage(){
 		header = "/////////////////////////////////\n"+

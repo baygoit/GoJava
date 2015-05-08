@@ -8,6 +8,10 @@ public class MainMenuPage extends Page{
 		
 	}
 	
+	public MainMenuPage(Printer printer) {
+		this.printer = printer;
+	}
+
 	@Override
 	public void constructPage(){
 		header = "/////////////////////////////////\n"+
