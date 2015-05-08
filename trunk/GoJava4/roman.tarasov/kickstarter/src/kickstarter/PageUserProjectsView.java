@@ -7,8 +7,8 @@ public class PageUserProjectsView extends Page {
 		this.projects = projects;
 	}
 
-	void printProjects() {
-		projects.printList(ui);
+	int[] printProjects() {
+		return projects.printList(ui);
 	}
 
 	@Override
@@ -16,7 +16,7 @@ public class PageUserProjectsView extends Page {
 		ui.display("________________________");
 		ui.display("|     Projects         |");
 		ui.display("|______________________|");
-		printProjects();
+		int[] options = printProjects();
 		ui.display("------------------------");
 		ui.display("Select Project:");
 		while (true) {
@@ -26,15 +26,21 @@ public class PageUserProjectsView extends Page {
 				ui.display("exit");
 				return pages[USER_CATEGORIES_VIEW];
 			}
-			//TODO
+			// TODO
 			try {
 				int parsed = Integer.parseInt(stringFromUI);
-				projectToProjectView = projects.get(parsed);
-				return pages[PAGE_LOGIN];
+
+				for (int index = 0; index < options.length; index++) {
+					if (parsed == options[index]) {
+
+						projectToProjectView = projects.get(index);
+						projects.setTargetCategory(categoryToUserProjectsView);
+						return pages[PAGE_LOGIN];
+					}
+				}
+				throw new IndexOutOfBoundsException();
 			} catch (NumberFormatException | IndexOutOfBoundsException e) {
-				// throw new IllegalArgumentException();
 				ui.display("input correct command, please");
-				continue;
 			}
 		}
 	}

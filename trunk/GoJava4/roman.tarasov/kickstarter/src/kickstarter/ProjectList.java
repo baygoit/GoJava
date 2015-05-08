@@ -27,18 +27,19 @@ public class ProjectList {
 		// TODO
 	}
 
-	void printList(UserInterface ui) {
+	int[] printList(UserInterface ui) {
 		if (pointer == 0) {
 			ui.display("ProjectList null");
-			return;
+			return null;
 		}
 
+
+		int[] options = new int [pointer];
 		for (int index = 0; index < pointer; index++) {
-			if (targetCategory.name.equals(projects[index].category.name)) {
-
-				ui.display(index + "- " + projects[index].name);
-			}
+			ui.display(projects[index].id + "- " + projects[index].name);
+			options[index]=projects[index].id;
 		}
+		return options;
 	}
 
 	void setTargetCategory(Category target) {

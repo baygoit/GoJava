@@ -9,14 +9,16 @@ public class KickstarterStart {
 		ProjectList projects = new ProjectList();
 		Project project;
 		Category category = new Category("Social");
-
+		category.id = 2;
 		categories.addCategory(category);
-		
-		 project = new Project("Paint the fence of the school", category);
-		  project.description = "raising money for paint";
-		  projects.addProject(project);
-		 
+
+		project = new Project("Paint the fence of the school", category);
+		project.description = "raising money for paint";
+		project.id = 8;
+		projects.addProject(project);
+
 		category = new Category("Technology");
+		category.id = 5;
 		categories.addCategory(category);
 
 		project = new Project("Create electrobike", category);
@@ -24,11 +26,13 @@ public class KickstarterStart {
 		project.history = "history of bike creation";
 		project.pledged = 25;
 		project.goal = 2000;
+		project.id = 23;
 		projects.addProject(project);
-		
+
 		project = new Project("Create quadrocopter", category);
+		project.id = 2;
 		projects.addProject(project);
-		
+
 		/*
 		 * category = new Category("Technology"); kickstarter.add(category);
 		 * project = new Project("Create quadrocopter", category);

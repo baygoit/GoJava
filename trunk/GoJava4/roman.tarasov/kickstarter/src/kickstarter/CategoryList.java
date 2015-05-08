@@ -25,14 +25,17 @@ public class CategoryList {
 		// TODO
 	}
 
-	void printList(UserInterface ui) {
+	int[] printList(UserInterface ui) {
 		if (pointer == 0) {
 			ui.display("CategoryList null");
-			return;
+			return null;
 		}
+		int[] options = new int [pointer];
 		for (int index = 0; index < pointer; index++) {
-			ui.display(index + "- " + categories[index].name);
+			ui.display(categories[index].id + "- " + categories[index].name);
+			options[index]=categories[index].id;
 		}
+		return options;
 	}
 
 	public Category get(int pointer) {
