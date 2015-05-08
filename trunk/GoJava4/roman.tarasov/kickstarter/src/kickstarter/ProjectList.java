@@ -15,10 +15,8 @@ public class ProjectList {
 			int[] newDeleted = new int[projects.length + 10];
 			System.arraycopy(deleted, 0, newDeleted, 0, projects.length);
 			deleted = newDeleted;
-
 			projects[pointer] = projectToList;
 		}
-
 		projects[pointer] = projectToList;
 		pointer++;
 	}
@@ -33,13 +31,19 @@ public class ProjectList {
 			return null;
 		}
 
-
-		int[] options = new int [pointer];
+		int[] options = new int[pointer];
+		int newPointer=0;
 		for (int index = 0; index < pointer; index++) {
-			ui.display(projects[index].id + "- " + projects[index].name);
-			options[index]=projects[index].id;
+			if (projects[index].category.id == targetCategory.id) {
+				ui.display(projects[index].id + "- " + projects[index].name);
+				options[newPointer] = projects[index].id;
+				newPointer++;
+			}
 		}
-		return options;
+		int[] newOptions=new int[newPointer];
+		System.arraycopy(options, 0, newOptions, 0, newPointer);
+		
+		return newOptions;
 	}
 
 	void setTargetCategory(Category target) {

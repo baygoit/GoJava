@@ -39,7 +39,6 @@ public class PageUserCategoriesView extends Page {
 					}
 				}
 				throw new IndexOutOfBoundsException();
-
 			} catch (NumberFormatException | IndexOutOfBoundsException e) {
 				ui.display("input correct command, please");
 			}

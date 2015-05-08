@@ -26,13 +26,10 @@ public class PageUserProjectsView extends Page {
 				ui.display("exit");
 				return pages[USER_CATEGORIES_VIEW];
 			}
-			// TODO
 			try {
 				int parsed = Integer.parseInt(stringFromUI);
-
 				for (int index = 0; index < options.length; index++) {
 					if (parsed == options[index]) {
-
 						projectToProjectView = projects.get(index);
 						projects.setTargetCategory(categoryToUserProjectsView);
 						return pages[PAGE_LOGIN];

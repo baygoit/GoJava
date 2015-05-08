@@ -25,20 +25,16 @@ public class Page implements UserInterface{
 	}
 
 	Page getNextPage() {
-		
 		return null;
-
 	}
 
 	@Override
 	public String inputString() {
-		
 		return null;
 	}
 
 	@Override
 	public void display(String stringToDisplay) {
-	
-		
+
 	}
 }

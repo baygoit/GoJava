@@ -30,7 +30,7 @@ public class KickstarterStart {
 		projects.addProject(project);
 
 		project = new Project("Create quadrocopter", category);
-		project.id = 2;
+		project.id = 4;
 		projects.addProject(project);
 
 		/*

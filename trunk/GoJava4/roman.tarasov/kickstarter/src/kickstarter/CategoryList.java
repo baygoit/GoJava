@@ -30,17 +30,15 @@ public class CategoryList {
 			ui.display("CategoryList null");
 			return null;
 		}
-		int[] options = new int [pointer];
+		int[] options = new int[pointer];
 		for (int index = 0; index < pointer; index++) {
 			ui.display(categories[index].id + "- " + categories[index].name);
-			options[index]=categories[index].id;
+			options[index] = categories[index].id;
 		}
 		return options;
 	}
 
 	public Category get(int pointer) {
-
 		return categories[pointer];
 	}
-
 }

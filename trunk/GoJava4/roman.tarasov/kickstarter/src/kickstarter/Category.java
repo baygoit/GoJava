@@ -5,7 +5,5 @@ String name;
 int id;
 	public Category(String name) {
 		this.name=name;
-		
 	}
-
 }
