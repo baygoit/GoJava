@@ -1,7 +1,7 @@
 package kickstarter;
 
-import printers.ConsolePrinter;
-import printers.Printer;
+import interfaces.ConsolePrinter;
+import interfaces.Printer;
 import storages.CategoriesStorage;
 import storages.ProjectsStorage;
 import storages.QuotesStorage;

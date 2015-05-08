@@ -1,4 +1,4 @@
-package printers;
+package interfaces;
 
 import storages.Storage;
 import data_types.Data;

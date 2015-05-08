@@ -1,4 +1,4 @@
-package printers;
+package interfaces;
 
 import java.io.InputStreamReader;
 import java.util.Scanner;

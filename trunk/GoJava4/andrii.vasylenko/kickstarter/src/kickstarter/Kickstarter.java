@@ -1,10 +1,10 @@
 package kickstarter;
 
+import interfaces.Printer;
 import data_types.Category;
 import data_types.Data;
 import data_types.Project;
 import data_types.Quote;
-import printers.Printer;
 import storages.CategoriesStorage;
 import storages.ProjectsStorage;
 import storages.QuotesStorage;
