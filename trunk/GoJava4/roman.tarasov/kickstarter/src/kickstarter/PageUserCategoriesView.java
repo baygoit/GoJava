@@ -1,20 +1,19 @@
-
 package kickstarter;
 
 public class PageUserCategoriesView extends Page {
 	CategoryList list;
 	ProjectList projects;
-	
-	PageUserCategoriesView( CategoryList list,ProjectList projects) {
+
+	PageUserCategoriesView(CategoryList list, ProjectList projects) {
 		this.list = list;
-		this.projects=projects;
+		this.projects = projects;
 	}
 
 	void printCategories() {
 		list.printList(ui);
 	}
-	
-@Override
+
+	@Override
 	public Page getNextPage() {
 		ui.display("=========================");
 		ui.display("|     Categories        |");
@@ -36,13 +35,10 @@ public class PageUserCategoriesView extends Page {
 				projects.setTargetCategory(categoryToUserProjectsView);
 				return pages[PAGE_USER_PROJECTS_VIEW];
 			} catch (NumberFormatException | IndexOutOfBoundsException e) {
-				//throw new IllegalArgumentException();
+				// throw new IllegalArgumentException();
 				ui.display("input correct command, please");
 				continue;
 			}
-		
-			
-			
 		}
 	}
 }

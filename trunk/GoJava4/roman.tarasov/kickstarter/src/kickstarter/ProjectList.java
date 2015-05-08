@@ -21,7 +21,6 @@ public class ProjectList {
 
 		projects[pointer] = projectToList;
 		pointer++;
-
 	}
 
 	void deleteProject(Project projectToBeDeleted) {
@@ -33,7 +32,7 @@ public class ProjectList {
 			ui.display("ProjectList null");
 			return;
 		}
-	
+
 		for (int index = 0; index < pointer; index++) {
 			if (targetCategory.name.equals(projects[index].category.name)) {
 
@@ -47,7 +46,6 @@ public class ProjectList {
 	}
 
 	public Project get(int pointer) {
-
 		return projects[pointer];
 	}
 }

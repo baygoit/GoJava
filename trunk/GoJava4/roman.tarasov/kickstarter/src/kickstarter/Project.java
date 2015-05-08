@@ -18,7 +18,4 @@ public class Project {
 	Category getCategory() {
 		return category;
 	}
-
-
-
 }

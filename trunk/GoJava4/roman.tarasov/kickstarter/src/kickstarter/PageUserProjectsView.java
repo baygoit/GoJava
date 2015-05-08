@@ -36,7 +36,6 @@ public class PageUserProjectsView extends Page {
 				ui.display("input correct command, please");
 				continue;
 			}
-
 		}
 	}
 }

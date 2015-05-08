@@ -1,7 +1,7 @@
 package kickstarter;
 
 public class PageLogin extends Page {
-	
+
 	public Page getNextPage() {
 
 		ui.display("++++++++++++++++++++++++");
@@ -13,20 +13,14 @@ public class PageLogin extends Page {
 		ui.display("Login: ");
 		while (true) {
 
-			String fromUI =ui.inputString();
-			if(fromUI.equals("0")){
-							
+			String fromUI = ui.inputString();
+			if (fromUI.equals("0")) {
 				return pages[ADMIN_CATEGORIES_CONTROL];
 			}
-			if(fromUI.equals("1")){
-			
+			if (fromUI.equals("1")) {
 				return pages[USER_CATEGORIES_VIEW];
-				
 			}
 			ui.display("input correct login, please");
 		}
 	}
-
-
-
 }

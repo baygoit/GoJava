@@ -32,7 +32,7 @@ public class PageDispatcher {
 
 		adminCategoriesControl = new PageAdminCategoriesControl(categories);
 		loginPage = new PageLogin();
-		userCategoriesView = new PageUserCategoriesView(categories,projects);
+		userCategoriesView = new PageUserCategoriesView(categories, projects);
 		userCategoriesView.setPages(pages);
 		userCategoriesView.setUI(ui);
 
