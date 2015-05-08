@@ -1,7 +1,7 @@
 package interfaces;
 
+import kickstarter.data_types.Data;
 import storages.Storage;
-import data_types.Data;
 
 public interface Printer {
 	public void showMessage(String message);

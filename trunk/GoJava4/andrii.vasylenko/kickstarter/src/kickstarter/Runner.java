@@ -1,13 +1,13 @@
 package kickstarter;
 
+import kickstarter.data_types.Category;
+import kickstarter.data_types.Project;
+import kickstarter.data_types.Quote;
 import interfaces.ConsolePrinter;
 import interfaces.Printer;
 import storages.CategoriesStorage;
 import storages.ProjectsStorage;
 import storages.QuotesStorage;
-import data_types.Category;
-import data_types.Project;
-import data_types.Quote;
 
 public class Runner {
 

@@ -1,4 +1,4 @@
-package data_types;
+package kickstarter.data_types;
 
 public class Category implements Data {
 	private static int count = 0;

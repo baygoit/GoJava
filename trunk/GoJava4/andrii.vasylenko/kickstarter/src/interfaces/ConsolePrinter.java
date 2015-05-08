@@ -3,8 +3,8 @@ package interfaces;
 import java.io.InputStreamReader;
 import java.util.Scanner;
 
+import kickstarter.data_types.Data;
 import storages.Storage;
-import data_types.Data;
 
 public class ConsolePrinter implements Printer {
 	public static final int NUMBER_OF_EXIT_ITEM = 0;

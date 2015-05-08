@@ -1,6 +1,6 @@
 package storages;
 
-import data_types.Data;
+import kickstarter.data_types.Data;
 
 public interface Storage<T extends Data> {
 	public T get(int index);

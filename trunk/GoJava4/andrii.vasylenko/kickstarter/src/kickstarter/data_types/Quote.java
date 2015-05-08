@@ -1,4 +1,4 @@
-package data_types;
+package kickstarter.data_types;
 
 public class Quote implements Data {
 	private String quote;

@@ -1,10 +1,10 @@
 package kickstarter;
 
+import kickstarter.data_types.Category;
+import kickstarter.data_types.Data;
+import kickstarter.data_types.Project;
+import kickstarter.data_types.Quote;
 import interfaces.Printer;
-import data_types.Category;
-import data_types.Data;
-import data_types.Project;
-import data_types.Quote;
 import storages.CategoriesStorage;
 import storages.ProjectsStorage;
 import storages.QuotesStorage;
