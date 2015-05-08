@@ -1,23 +1,23 @@
 package kickstarter;
 
-public class DetailedProjectInfo extends Page {
+public class DetailedProjectInfo  {
 	ProjectList projects;
-
-	public DetailedProjectInfo(ProjectList projects) {
+	UserInterface ui;
+	public DetailedProjectInfo( UserInterface ui) {
 		this.projects = projects;
+		this.ui=ui;
 	}
 
-	@Override
-	public Page getNextPage() {
+	void getDetailedInfo(Project project) {
 		ui.display("________________________");
 		ui.display("|Detailed project info |");
 		ui.display("|______________________|");
-		ui.display("category : " + projects.targetProject.category.name);
-		ui.display("name     : " + projects.targetProject.name);
-		ui.display("id       : " + projects.targetProject.id);
-		ui.display("goal     : " + projects.targetProject.goal);
-		ui.display("pledged  : " + projects.targetProject.pledged);
-		ui.display("expire date     : " + projects.targetProject.expireDate);
+		ui.display("category : " + project.category.name);
+		ui.display("name     : " + project.name);
+		ui.display("id       : " + project.id);
+		ui.display("goal     : " + project.goal);
+		ui.display("pledged  : " + project.pledged);
+		ui.display("expire date     : " + project.expireDate);
 
 		ui.display("------------------------");
 		while (true) {
@@ -25,9 +25,11 @@ public class DetailedProjectInfo extends Page {
 			String stringFromUI = ui.inputString();
 			if (stringFromUI.equals("e")) {
 				ui.display("exit");
-				return pages[USER_CATEGORIES_VIEW];
+				return ;
 			}
 			ui.display("input correct command, please");
 		}
 	}
+
+
 }

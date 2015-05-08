@@ -4,7 +4,6 @@ public class Kickstarter {
 
 	CategoryList categories;
 	ProjectList projects;
-	PageAdminCategoriesControl adminPage;
 	UserInterface ui;
 
 	public void start() {
