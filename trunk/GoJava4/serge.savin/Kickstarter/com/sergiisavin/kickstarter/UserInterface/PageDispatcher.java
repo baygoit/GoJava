@@ -22,36 +22,31 @@ public class PageDispatcher {
 		switch(pageType){
 		case WELCOME_USER_PAGE:
 			page = new WelcomeUserPage(printer);
-			page.injectKickcstarter(kickstarter);
-			page.injectPageDispatcher(this);
-			page.constructPage();
-			page.show();
+			startPage(page);
 			break;
 		case MAIN_MENU_PAGE:
 			page = new MainMenuPage(printer);
-			page.injectKickcstarter(kickstarter);
-			page.injectPageDispatcher(this);
-			page.constructPage();
-			page.show();
+			startPage(page);
 			break;
 		case WELCOME_PROJECT_OWNER_PAGE:
 			page = new WelcomeProjectOwnerPage(printer);
-			page.injectKickcstarter(kickstarter);
-			page.injectPageDispatcher(this);
-			page.constructPage();
-			page.show();
+			startPage(page);
 			break;
 		case CATEGORIES_PAGE:
 			page = new CategoriesPage(printer);
-			page.injectKickcstarter(kickstarter);
-			page.injectPageDispatcher(this);
-			page.constructPage();
-			page.show();
+			startPage(page);
 			break;
 			
 			default:
 				
 		}
+	}
+
+	private void startPage(Page page) {
+		page.injectKickcstarter(kickstarter);
+		page.injectPageDispatcher(this);
+		page.constructPage();
+		page.show();
 	}
 
 	public void injectPrinter(Printer printer) {
