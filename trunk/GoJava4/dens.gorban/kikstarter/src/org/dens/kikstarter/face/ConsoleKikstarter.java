@@ -34,6 +34,19 @@ public class ConsoleKikstarter {
 		String header = "Choose Project: ";
 		printer.printLine(header, false);
 		String input = scanner.read();
+		Project project;
+		try{
+			int option = parseInput(input);
+			project = projets[option];
+			printer.printLine("Description: "+project.getDescription(), false);
+			printer.printLine("Required Funds: "+project.getRequiredFunds(), false);
+			printer.printLine("Borrowed Funds: "+project.getBorrowedFunds(), false);			
+			printer.printLine("Days Left: "+project.getDaysLeft(), false);
+			
+					
+		}catch(Exception ex){
+			printer.printLine("Incorrect input: " + input, false);
+		}	
 	}
 
 	private Category proposeUserToSelectCategory() {
