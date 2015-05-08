@@ -29,7 +29,7 @@ public class QuotesStorage implements Storage<Quote> {
 
 	@Override
 	public Quote getById(int id) {
-		throw new UnsupportedOperationException();
+		return quotes.getById(id);
 	}
 
 	public Quote getRandom() throws IndexOutOfBoundsException {

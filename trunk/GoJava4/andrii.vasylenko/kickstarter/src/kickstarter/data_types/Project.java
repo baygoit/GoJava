@@ -80,5 +80,4 @@ public class Project implements Data {
 	public String getQuestionsAndAnswers() {
 		return questionsAndAnswers;
 	}
-
 }

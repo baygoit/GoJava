@@ -1,15 +1,19 @@
 package kickstarter.data_types;
 
 public class Quote implements Data {
+	private static int count = 0;
+	
+	private int id;
 	private String quote;
 
 	public Quote(String quote) {
+		this.id = ++count;
 		this.quote = quote;
 	}
 
 	@Override
 	public int getId() {
-		throw new UnsupportedOperationException();
+		return id;
 	}
 	
 	public String getQuote() {

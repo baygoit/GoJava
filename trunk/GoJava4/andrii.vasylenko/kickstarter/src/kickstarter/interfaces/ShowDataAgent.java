@@ -6,7 +6,7 @@ import kickstarter.data_types.Project;
 import kickstarter.data_types.Quote;
 import kickstarter.storages.Storage;
 
-public class DataShowAgent {
+public class ShowDataAgent {
 	public String getDescription(Data data) {
 		if (data instanceof Quote) {
 			return getDescription((Quote) data);
@@ -35,33 +35,17 @@ public class DataShowAgent {
 			}
 		}
 
-		result.append(Data.Default.EXIT.getId() + " - exit");
+		result.append(Data.Defaults.EXIT.getId() + " - exit");
 
 		return result.toString();
 	}
 
-	public String getCategoryPageHead() {
-		return "Choice Category:";
-	}
-	
-	public String getProjectPageHead() {
-		return "Choice Project:";
-	}
-	
-	public String getTheEndPageHead() {
-		return "Good Luck!";
-	}
-	
-	public String getErrorMessage() {
-		return "try again please";
-	}
-	
-	private String getDescription(Category category) {
-		return category.getId() + " - " + category.getName();
-	}
-
 	private String getDescription(Quote quote) {
 		return "Quote: " + quote.getQuote();
+	}
+
+	private String getDescription(Category category) {
+		return category.getId() + " - " + category.getName();
 	}
 
 	private String getDescription(Project project) {

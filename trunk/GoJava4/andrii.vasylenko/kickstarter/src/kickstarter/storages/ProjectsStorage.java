@@ -42,5 +42,4 @@ public class ProjectsStorage implements Storage<Project> {
 
 		return result;
 	}
-
 }

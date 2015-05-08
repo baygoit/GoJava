@@ -11,7 +11,7 @@ import kickstarter.interfaces.readers.Reader;
 import kickstarter.storages.Storage;
 
 public class UserInterface {
-	private DataShowAgent dataViewGenerator = new DataShowAgent();
+	private ShowDataAgent dataViewGenerator = new ShowDataAgent();
 	private Printer printer;
 	private Reader reader;
 	
@@ -20,24 +20,24 @@ public class UserInterface {
 		this.reader = reader;
 	}
 	
-	public void showTheEndPage() {
-		printer.showMessage(dataViewGenerator.getTheEndPageHead());
-	}
-
 	public void showQuotePage(Quote quote) {
 		printer.showMessage(dataViewGenerator.getDescription(quote));
 	}
 	
 	public Data choiceCategory(Storage<Category> storage) {
-		return choiceItem(dataViewGenerator.getCategoryPageHead(), storage);
+		return choiceItem("Choice Category:", storage);
 	}
 
 	public Data choiceProject(Storage<Project> storage) {
-		return choiceItem(dataViewGenerator.getProjectPageHead(), storage);
+		return choiceItem("Choice Project:", storage);
 	}
 
 	public void showProject(Project project) {
 		choiceItem(dataViewGenerator.getDetailedDescription(project), null);
+	}
+
+	public void showTheEndPage() {
+		printer.showMessage("Good Luck!");
 	}
 
 	private Data choiceItem(String head, Storage<? extends Data> storage) {
@@ -49,15 +49,15 @@ public class UserInterface {
 			} catch (IOException ignore) {
 			}
 			printer.showMessage("--------------------");
-			printer.showMessage(dataViewGenerator.getErrorMessage());
+			printer.showMessage("try again please");
 		}
 	}
 
 	private Data showChoiceItemDialog(String head, Storage<? extends Data> storage) throws NumberFormatException,
 			IOException {
 		int itemId = choiceItemId(head, dataViewGenerator.getItemsDescription(storage));
-		if (itemId == Data.Default.EXIT.getId()) {
-			return Data.Default.EXIT;
+		if (itemId == Data.Defaults.EXIT.getId()) {
+			return Data.Defaults.EXIT;
 		}
 		return getItemById(itemId, storage);
 	}

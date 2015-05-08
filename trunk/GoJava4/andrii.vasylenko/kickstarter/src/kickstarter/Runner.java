@@ -50,5 +50,4 @@ public class Runner {
 		Kickstarter kickstarter = new Kickstarter(userInterface, quotesStorage, categoriesStorage, projectsStorage);
 		kickstarter.run();
 	}
-
 }

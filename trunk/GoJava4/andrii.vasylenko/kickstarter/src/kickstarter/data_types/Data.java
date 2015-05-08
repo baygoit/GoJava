@@ -3,7 +3,7 @@ package kickstarter.data_types;
 public interface Data {
 	int getId();
 	
-	public enum Default implements Data {
+	public enum Defaults implements Data {
 		EXIT;
 
 		@Override
