@@ -4,7 +4,7 @@ import kickstarter.data_types.Category;
 import kickstarter.data_types.Data;
 import kickstarter.data_types.Project;
 import kickstarter.data_types.Quote;
-import interfaces.Printer;
+import kickstarter.interfaces.Printer;
 import storages.CategoriesStorage;
 import storages.ProjectsStorage;
 import storages.QuotesStorage;

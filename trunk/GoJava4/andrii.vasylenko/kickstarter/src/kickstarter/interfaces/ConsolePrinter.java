@@ -1,4 +1,4 @@
-package interfaces;
+package kickstarter.interfaces;
 
 import java.io.InputStreamReader;
 import java.util.Scanner;

@@ -1,4 +1,4 @@
-package interfaces;
+package kickstarter.interfaces;
 
 import kickstarter.data_types.Data;
 import storages.Storage;
