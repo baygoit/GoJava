@@ -5,6 +5,7 @@ import kickstarter.data_types.Project;
 import kickstarter.data_types.Quote;
 import kickstarter.interfaces.ConsolePrinter;
 import kickstarter.interfaces.Printer;
+import kickstarter.interfaces.DataViewGenerator;
 import kickstarter.storages.CategoriesStorage;
 import kickstarter.storages.ProjectsStorage;
 import kickstarter.storages.QuotesStorage;
@@ -12,7 +13,8 @@ import kickstarter.storages.QuotesStorage;
 public class Runner {
 
 	public static void main(String[] args) {
-		Printer printer = new ConsolePrinter();
+		DataViewGenerator dataViewGenerator = new DataViewGenerator();
+		Printer printer = new ConsolePrinter(dataViewGenerator);
 		
 		QuotesStorage quotesStorage = new QuotesStorage();
 		quotesStorage.add(new Quote("Don't cry because it's over, smile because it happened"));
@@ -42,7 +44,7 @@ public class Runner {
 		projectsStorage.add(project2);
 		projectsStorage.add(project3);
 		
-		Kickstarter kickstarter = new Kickstarter(printer, quotesStorage, categoriesStorage, projectsStorage);
+		Kickstarter kickstarter = new Kickstarter(dataViewGenerator, printer, quotesStorage, categoriesStorage, projectsStorage);
 		kickstarter.run();
 	}
 

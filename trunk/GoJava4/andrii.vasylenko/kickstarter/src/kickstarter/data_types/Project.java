@@ -24,44 +24,6 @@ public class Project implements Data {
 		this.category = category;
 	}
 
-	@Override
-	public int getId() {
-		return id;
-	}
-
-	@Override
-	public String toString() {
-		return id + " - " + name + ", description=" + description + ", totalAmount=" + totalAmount + ", collectAmount="
-				+ collectAmount + ", daysLeft=" + daysLeft + "]";
-	}
-
-	public String getDetailedDescription() {
-		StringBuilder result = new StringBuilder();
-
-		result.append("name=");
-		result.append(name);
-		result.append("\r\n description=");
-		result.append(description);
-		result.append("\r\n totalAmount=");
-		result.append(totalAmount);
-		result.append("\r\n collectAmount=");
-		result.append(collectAmount);
-		result.append("\r\n daysLeft=");
-		result.append(daysLeft);
-		result.append("\r\n history=");
-		result.append(history);
-		result.append("\r\n link=");
-		result.append(link);
-		result.append("\r\n questionsAndAnswers=");
-		result.append(questionsAndAnswers);
-
-		return result.toString();
-	}
-
-	public Category getCategory() {
-		return category;
-	}
-
 	public void setHistory(String history) {
 		this.history = history;
 	}
@@ -72,6 +34,51 @@ public class Project implements Data {
 
 	public void setQuestionsAndAnswers(String questionsAndAnswers) {
 		this.questionsAndAnswers = questionsAndAnswers;
+	}
+
+	@Override
+	public int getId() {
+		return id;
+	}
+
+	public Category getCategory() {
+		return category;
+	}
+
+	public static int getCount() {
+		return count;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public int getTotalAmount() {
+		return totalAmount;
+	}
+
+	public int getCollectAmount() {
+		return collectAmount;
+	}
+
+	public int getDaysLeft() {
+		return daysLeft;
+	}
+
+	public String getHistory() {
+		return history;
+	}
+
+	public String getLink() {
+		return link;
+	}
+
+	public String getQuestionsAndAnswers() {
+		return questionsAndAnswers;
 	}
 
 }

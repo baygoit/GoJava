@@ -12,8 +12,7 @@ public class Quote implements Data {
 		throw new UnsupportedOperationException();
 	}
 	
-	@Override
-	public String toString() {
-		return "Quote: " + quote;
+	public String getQuote() {
+		return quote;
 	}
 }

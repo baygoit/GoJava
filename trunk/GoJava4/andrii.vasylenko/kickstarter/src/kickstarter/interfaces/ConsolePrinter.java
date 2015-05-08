@@ -8,6 +8,13 @@ import kickstarter.storages.Storage;
 
 public class ConsolePrinter implements Printer {
 	public static final int NUMBER_OF_EXIT_ITEM = 0;
+	
+	private DataViewGenerator view;
+	
+	public ConsolePrinter(DataViewGenerator view) {
+		super();
+		this.view = view;
+	}
 
 	@Override
 	public void showMessage(String message) {
@@ -60,7 +67,7 @@ public class ConsolePrinter implements Printer {
 
 		if (storage != null) {
 			for (int i = 0; i < storage.size(); i++) {
-				result.append(storage.get(i).toString());
+				result.append(view.getDescription(storage.get(i)));
 				result.append("\r\n");
 			}
 		}

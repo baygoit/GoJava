@@ -5,19 +5,22 @@ import kickstarter.data_types.Data;
 import kickstarter.data_types.Project;
 import kickstarter.data_types.Quote;
 import kickstarter.interfaces.Printer;
+import kickstarter.interfaces.DataViewGenerator;
 import kickstarter.storages.CategoriesStorage;
 import kickstarter.storages.ProjectsStorage;
 import kickstarter.storages.QuotesStorage;
 
 public class Kickstarter {
 
+	private DataViewGenerator dataViewGenerator;
 	private Printer printer;
 	private QuotesStorage quotesStorage;
 	private CategoriesStorage categoriesStorage;
 	private ProjectsStorage projectsStorage;
 
-	public Kickstarter(Printer printer, QuotesStorage quotesStorage, CategoriesStorage categoriesStorage,
+	public Kickstarter(DataViewGenerator view, Printer printer, QuotesStorage quotesStorage, CategoriesStorage categoriesStorage,
 			ProjectsStorage projectsStorage) {
+		this.dataViewGenerator = view;
 		this.printer = printer;
 		this.quotesStorage = quotesStorage;
 		this.categoriesStorage = categoriesStorage;
@@ -35,7 +38,7 @@ public class Kickstarter {
 			return;
 		}
 		Quote randomQuote = quotesStorage.getRandom();
-		printer.showMessage(randomQuote.toString());
+		printer.showMessage(dataViewGenerator.getDescription(randomQuote));
 	}
 
 	private void choiceCategory() {
@@ -56,7 +59,7 @@ public class Kickstarter {
 				return;
 			}
 			Project project = (Project) item;
-			printer.showItem(project.getDetailedDescription());
+			printer.showItem(dataViewGenerator.getDetailedDescription(project));
 		}
 	}
 
