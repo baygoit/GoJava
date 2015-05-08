@@ -5,9 +5,9 @@ import kickstarter.data_types.Data;
 import kickstarter.data_types.Project;
 import kickstarter.data_types.Quote;
 import kickstarter.interfaces.Printer;
-import storages.CategoriesStorage;
-import storages.ProjectsStorage;
-import storages.QuotesStorage;
+import kickstarter.storages.CategoriesStorage;
+import kickstarter.storages.ProjectsStorage;
+import kickstarter.storages.QuotesStorage;
 
 public class Kickstarter {
 

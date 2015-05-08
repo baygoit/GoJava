@@ -1,4 +1,4 @@
-package storages;
+package kickstarter.storages;
 
 import kickstarter.data_types.Category;
 import kickstarter.data_types.Project;

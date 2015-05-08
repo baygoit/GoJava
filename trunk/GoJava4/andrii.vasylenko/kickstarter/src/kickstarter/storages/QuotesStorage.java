@@ -1,4 +1,4 @@
-package storages;
+package kickstarter.storages;
 
 import java.util.Random;
 
