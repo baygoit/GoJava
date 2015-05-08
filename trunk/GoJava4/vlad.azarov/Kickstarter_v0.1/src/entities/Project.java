@@ -1,6 +1,6 @@
-package v01;
+package entities;
 
-class Project {
+public class Project {
 	
 	private String name;
 	private int projectID;
@@ -10,7 +10,6 @@ class Project {
 	private String description;
 	private String link;
 	private String FAQ;
-	
 	
 	
 }

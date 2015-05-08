@@ -1,0 +1,426 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="13.2">
+  <zoom_level>9</zoom_level>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>405</x>
+      <y>0</y>
+      <w>117</w>
+      <h>27</h>
+    </coordinates>
+    <panel_attributes>OBJECT MODEL
+bg=dark_gray</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.baselet.element.old.element.Class</type>
+    <coordinates>
+      <x>405</x>
+      <y>81</y>
+      <w>117</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>Kickstarter
+bg=green
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.baselet.element.old.element.Class</type>
+    <coordinates>
+      <x>612</x>
+      <y>720</y>
+      <w>261</w>
+      <h>189</h>
+    </coordinates>
+    <panel_attributes>QuotesStorage
+--
+- quotes : Quote[1..*]
+--
++ addQuote(newQuote : Quote)
++ removeQuote(e:Quote)
++ setQuoteBody(newQuoteBody : String)
++ getQuoteBody() : String
++ setQuoteAuthor(newQuoteAuthor : String)
++ getQuoteAuthor() : String
+
+
+bg=orange</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.baselet.element.old.element.Class</type>
+    <coordinates>
+      <x>351</x>
+      <y>1107</y>
+      <w>144</w>
+      <h>144</h>
+    </coordinates>
+    <panel_attributes>+ Project
+--
+- name : String
+- projectID : int
+- brief : String
+- pledged : int
+- daysToGo : int
+- description : String
+- link : String
+- FAQ : String
+
+bg=orange</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.baselet.element.old.element.Class</type>
+    <coordinates>
+      <x>0</x>
+      <y>972</y>
+      <w>162</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>+ Category
+--
+
+- categoryName : String
+- categoryID : int 
+
+bg=orange</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.baselet.element.old.element.Class</type>
+    <coordinates>
+      <x>0</x>
+      <y>720</y>
+      <w>252</w>
+      <h>153</h>
+    </coordinates>
+    <panel_attributes>+ CategoriesStorage
+--
+- categoties : Category[1..*]
+
+--
+
++ addCategory(new Category : Category)
++ removeCategory(e : Category)
++ setCategoryName(new Name : String)
++ getCategoryName() : String
+
+
+bg=orange</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.baselet.element.old.element.Class</type>
+    <coordinates>
+      <x>612</x>
+      <y>1026</y>
+      <w>171</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>+ Quote
+--
+- quoteBody : String
+- quoteAuthor : String
+bg=orange</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.baselet.element.old.element.Text</type>
+    <coordinates>
+      <x>432</x>
+      <y>1044</y>
+      <w>90</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>Aggregation
+"has a"
+bg=orange</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.baselet.element.old.element.Text</type>
+    <coordinates>
+      <x>819</x>
+      <y>540</y>
+      <w>63</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>includes
+bg=orange</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.baselet.element.old.element.Class</type>
+    <coordinates>
+      <x>405</x>
+      <y>495</y>
+      <w>117</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>Printer
+--
+fields
+bg=orange</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.baselet.element.old.element.Class</type>
+    <coordinates>
+      <x>405</x>
+      <y>360</y>
+      <w>117</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>ConsoleMainPage
+--
+fields
+bg=orange</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.baselet.element.old.element.Relation</type>
+    <coordinates>
+      <x>432</x>
+      <y>270</y>
+      <w>44</w>
+      <h>107</h>
+    </coordinates>
+    <panel_attributes>
+</panel_attributes>
+    <additional_attributes>27;27;27;90</additional_attributes>
+  </element>
+  <element>
+    <type>com.baselet.element.old.element.Class</type>
+    <coordinates>
+      <x>333</x>
+      <y>720</y>
+      <w>216</w>
+      <h>288</h>
+    </coordinates>
+    <panel_attributes>+ ProjectsStorage
+--
+- projects : Project[1..*]
+
+--
++ addProject(newProject : Project)
++ removeProject(e:Project)
++ setName(newName:String)
++ getName() : String
++ getProjectID() : int
++ setBrief(newBrief : String)
++ getBrief() : String
++ setPledged(newPledged : int)
++ getPledged() : int
++ setDaysToGo()
++ getDaysToGo()
++ setDescription()
++ getDescription()
++ setLink()
++ getLink()
++ getFAQ()
+
+
+bg=orange</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.baselet.element.old.element.Text</type>
+    <coordinates>
+      <x>468</x>
+      <y>450</y>
+      <w>81</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>tells to print
+bg=orange</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.baselet.element.old.element.Relation</type>
+    <coordinates>
+      <x>432</x>
+      <y>405</y>
+      <w>44</w>
+      <h>107</h>
+    </coordinates>
+    <panel_attributes>
+
+bg=orange</panel_attributes>
+    <additional_attributes>27;27;27;90</additional_attributes>
+  </element>
+  <element>
+    <type>com.baselet.element.old.element.Text</type>
+    <coordinates>
+      <x>468</x>
+      <y>315</y>
+      <w>81</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>shows</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.baselet.element.old.element.Text</type>
+    <coordinates>
+      <x>549</x>
+      <y>504</y>
+      <w>54</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>prints
+bg=orange</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.baselet.element.old.element.Text</type>
+    <coordinates>
+      <x>324</x>
+      <y>504</y>
+      <w>54</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>prints
+bg=orange</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.baselet.element.old.element.Class</type>
+    <coordinates>
+      <x>405</x>
+      <y>225</y>
+      <w>117</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>Launcher
+--
+fields
+bg=orange</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.baselet.element.old.element.InteractionFrame</type>
+    <coordinates>
+      <x>1089</x>
+      <y>162</y>
+      <w>864</w>
+      <h>684</h>
+    </coordinates>
+    <panel_attributes>optional
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>1440</x>
+      <y>9</y>
+      <w>171</w>
+      <h>27</h>
+    </coordinates>
+    <panel_attributes>SEQUENCE DIAGRAM
+bg=dark_gray</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.baselet.element.old.element.SeqObjectActive</type>
+    <coordinates>
+      <x>1242</x>
+      <y>189</y>
+      <w>18</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>bg=yellow</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.baselet.element.old.element.Relation</type>
+    <coordinates>
+      <x>1224</x>
+      <y>108</y>
+      <w>36</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>lt=.</panel_attributes>
+    <additional_attributes>27;27;27;81</additional_attributes>
+  </element>
+  <element>
+    <type>com.baselet.element.old.element.Class</type>
+    <coordinates>
+      <x>1206</x>
+      <y>108</y>
+      <w>90</w>
+      <h>27</h>
+    </coordinates>
+    <panel_attributes>:Kickstarter
+bg=orange</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.baselet.element.old.element.Relation</type>
+    <coordinates>
+      <x>432</x>
+      <y>126</y>
+      <w>44</w>
+      <h>116</h>
+    </coordinates>
+    <panel_attributes>
+</panel_attributes>
+    <additional_attributes>27;27;27;99</additional_attributes>
+  </element>
+  <element>
+    <type>com.baselet.element.old.element.Relation</type>
+    <coordinates>
+      <x>387</x>
+      <y>981</y>
+      <w>44</w>
+      <h>143</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-
+m1=0..1
+m2=0..n</panel_attributes>
+    <additional_attributes>27;27;27;126</additional_attributes>
+  </element>
+  <element>
+    <type>com.baselet.element.old.element.Text</type>
+    <coordinates>
+      <x>90</x>
+      <y>909</y>
+      <w>90</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>Aggregation
+"has a"
+bg=orange</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.baselet.element.old.element.Relation</type>
+    <coordinates>
+      <x>54</x>
+      <y>846</y>
+      <w>44</w>
+      <h>143</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-
+
+m1=0..1
+m2=0..n</panel_attributes>
+    <additional_attributes>27;27;27;126</additional_attributes>
+  </element>
+  <element>
+    <type>com.baselet.element.old.element.Relation</type>
+    <coordinates>
+      <x>648</x>
+      <y>882</y>
+      <w>44</w>
+      <h>161</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-
+m1=0..1
+m2=0..n</panel_attributes>
+    <additional_attributes>27;27;27;144</additional_attributes>
+  </element>
+</diagram>

@@ -1,4 +1,4 @@
-package v01;
+package entities;
 
 public class Category {
 	

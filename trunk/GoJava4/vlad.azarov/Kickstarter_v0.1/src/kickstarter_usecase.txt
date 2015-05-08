@@ -31,6 +31,7 @@ KICKSTARTER_v01
 USE CASE Description #1
 
 Triggers
+1. The user at random choose one of the category and one of the project.
 
 Actors(Участники)
 
@@ -52,8 +53,9 @@ Goals(Цели)
 
 Not Available
 
-Steps of Execution
+1. Failed Conclusion, Extensions (Alternatives)
 
+Steps of Execution
 
 1. Пользователь запускает программу кикстартер.
 2. Программа выводит случайную мотивирующую цитату.
