@@ -1,41 +1,56 @@
 package org.dens.kikstarter.face;
 
 import java.io.PrintStream;
+import java.util.List;
 import java.util.Scanner;
 
 import org.dens.kikstarter.data.Category;
 import org.dens.kikstarter.data.CategoryProducer;
 import org.dens.kikstarter.data.CitationProducer;
+import org.dens.kikstarter.data.Project;
 
 public class ConsoleKikstarter {
 
-	PrintStream out = System.out;
-	Scanner in = new Scanner(System.in);
-	
-	CitationProducer citationProducer;
-	CategoryProducer categoryProducer;
+	private Printer printer;
+	private Reader scanner;
+	private CitationProducer citationProducer;
+	private CategoryProducer categoryProducer;
     
-	public void setCitations(CitationProducer citationProducer) {
-		this.citationProducer = citationProducer;
-	}	
-
 	public void start(){
-		out.println("Citate of the day: "+ citationProducer.next());	
+		printer.printBlock("Citate of the day ",  citationProducer.next().toString());	
 		printCategories();	
-		proposeUserToSelectCategory();
+		Category selectedCategory = proposeUserToSelectCategory();
+		proposeUserToSelectProject(selectedCategory);
 	}
 
-	private void proposeUserToSelectCategory() {
-		out.print("Choose Category: ");
-		String input = in.nextLine();
+	private void proposeUserToSelectProject(Category selectedCategory) {
+		Project[] projets = selectedCategory.getProjets();
+		printer.printHeader("Projects: ");
+		for(int index = 0; index< projets.length; index++){
+			if(projets[index] != null){
+				printer.printOption(index, projets[index].getName());
+			}
+		}
+		String header = "Choose Project: ";
+		printer.printLine(header, false);
+		String input = scanner.read();
+	}
+
+	private Category proposeUserToSelectCategory() {
+		String header = "Choose Category: ";
+		printer.printLine(header, false);
+		String input = scanner.read();
+		Category category = null;
 		try{
 			int option = parseInput(input);
-			Category category = categoryProducer.getCategories().get(option);
-			out.println( category.getName());
-			out.println( category.getDescription());
+			category = categoryProducer.getCategories().get(option);
+			printer.printHeader(category.getName());
+			printer.printLine(category.getDescription(), false);
+					
 		}catch(Exception ex){
-			out.println("Incorrect input: " + input);
+			printer.printLine("Incorrect input: " + input, false);
 		}		
+		return category;
 	}
 
 	private int parseInput(String input) {
@@ -43,13 +58,30 @@ public class ConsoleKikstarter {
 	}
 
 	private void printCategories() {
-		out.println("Categories:");
-		for(int index = 0; index < categoryProducer.getCategories().size(); index++){
-			out.println(" "+index + " - "+ categoryProducer.getCategories().get(index));
-		}		
+		String header = "Categories:";
+		List<Category> categoryList = categoryProducer.getCategories();		
+		String[] categories = new String[categoryList.size()];
+		for(int index = 0; index < categoryList.size(); index++){
+			categories[index] = categoryList.get(index).getName();
+		}
+		printer.printBlock(header, categories);
 	}
 
 	public void setCategoies(CategoryProducer categoryProducer) {
 		this.categoryProducer = categoryProducer;		
 	}
+	
+
+	public void setCitations(CitationProducer citationProducer) {
+		this.citationProducer = citationProducer;
+	}	
+		
+	public void setPrinter(Printer printer) {
+		this.printer = printer;
+	}
+	
+	public void setScanner(Reader scanner) {
+		this.scanner = scanner;
+	}
 }
+
