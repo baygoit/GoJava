@@ -3,7 +3,6 @@ package kickstarter;
 import kickstarter.data_types.Category;
 import kickstarter.data_types.Project;
 import kickstarter.data_types.Quote;
-import kickstarter.interfaces.DataViewGenerator;
 import kickstarter.interfaces.printers.ConsolePrinter;
 import kickstarter.interfaces.printers.Printer;
 import kickstarter.interfaces.readers.ConsoleReader;
@@ -17,18 +16,18 @@ public class Runner {
 	public static void main(String[] args) {
 		Printer printer = new ConsolePrinter();
 		Reader reader = new ConsoleReader();
-		
+
 		QuotesStorage quotesStorage = new QuotesStorage();
 		quotesStorage.add(new Quote("Don't cry because it's over, smile because it happened"));
 		quotesStorage.add(new Quote("Be yourself; everyone else is already taken."));
 		quotesStorage.add(new Quote("A room without books is like a body without a soul."));
-		
+
 		Category sport = new Category("Sport");
 		Category business = new Category("Business");
 		CategoriesStorage categoriesStorage = new CategoriesStorage();
 		categoriesStorage.add(sport);
 		categoriesStorage.add(business);
-		
+
 		Project project1 = new Project("velo parking", "velo parking in Kiev", 10000, 7000, 100, sport);
 		project1.setHistory("History1");
 		project1.setLink("www.project1.com");
@@ -45,7 +44,7 @@ public class Runner {
 		projectsStorage.add(project1);
 		projectsStorage.add(project2);
 		projectsStorage.add(project3);
-		
+
 		Kickstarter kickstarter = new Kickstarter(printer, reader, quotesStorage, categoriesStorage, projectsStorage);
 		kickstarter.run();
 	}
