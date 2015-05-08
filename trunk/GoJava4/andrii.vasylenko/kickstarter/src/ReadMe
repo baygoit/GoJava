@@ -1,7 +1,7 @@
 
-To Start the application in console you should: 
+To start the application in console you should: 
 
-	Run method 'main' in class 'Runner'
+	Run method 'main' of class 'Runner' in package 'kickstarter'
 
 
 
