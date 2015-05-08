@@ -40,6 +40,22 @@ public class DataViewGenerator {
 		return result.toString();
 	}
 
+	public String getCategoryPageHead() {
+		return "Choice Category:";
+	}
+	
+	public String getProjectPageHead() {
+		return "Choice Project:";
+	}
+	
+	public String getTheEndPageHead() {
+		return "Good Luck!";
+	}
+	
+	public String getErrorMessage() {
+		return "try again please";
+	}
+	
 	private String getDescription(Category category) {
 		return category.getId() + " - " + category.getName();
 	}

@@ -3,6 +3,7 @@ package kickstarter;
 import kickstarter.data_types.Category;
 import kickstarter.data_types.Project;
 import kickstarter.data_types.Quote;
+import kickstarter.interfaces.UserInterface;
 import kickstarter.interfaces.printers.ConsolePrinter;
 import kickstarter.interfaces.printers.Printer;
 import kickstarter.interfaces.readers.ConsoleReader;
@@ -16,6 +17,7 @@ public class Runner {
 	public static void main(String[] args) {
 		Printer printer = new ConsolePrinter();
 		Reader reader = new ConsoleReader();
+		UserInterface userInterface = new UserInterface(printer, reader);
 
 		QuotesStorage quotesStorage = new QuotesStorage();
 		quotesStorage.add(new Quote("Don't cry because it's over, smile because it happened"));
@@ -45,7 +47,7 @@ public class Runner {
 		projectsStorage.add(project2);
 		projectsStorage.add(project3);
 
-		Kickstarter kickstarter = new Kickstarter(printer, reader, quotesStorage, categoriesStorage, projectsStorage);
+		Kickstarter kickstarter = new Kickstarter(userInterface, quotesStorage, categoriesStorage, projectsStorage);
 		kickstarter.run();
 	}
 
