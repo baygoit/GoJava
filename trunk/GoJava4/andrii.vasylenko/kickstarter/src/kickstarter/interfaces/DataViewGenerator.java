@@ -4,6 +4,7 @@ import kickstarter.data_types.Category;
 import kickstarter.data_types.Data;
 import kickstarter.data_types.Project;
 import kickstarter.data_types.Quote;
+import kickstarter.storages.Storage;
 
 public class DataViewGenerator {
 	public String getDescription(Data data) {
@@ -18,14 +19,25 @@ public class DataViewGenerator {
 	}
 
 	public String getDetailedDescription(Data data) {
-		if (data instanceof Quote) {
-			return getDescription((Quote) data);
-		} else if (data instanceof Category) {
-			return getDescription((Category) data);
-		} else if (data instanceof Project) {
+		if (data instanceof Project) {
 			return getDetailedDescription((Project) data);
 		}
 		throw new UnsupportedOperationException();
+	}
+	
+	public String getItemsDescription(Storage<? extends Data> storage) {
+		StringBuilder result = new StringBuilder();
+
+		if (storage != null) {
+			for (int i = 0; i < storage.size(); i++) {
+				result.append(getDescription(storage.get(i)));
+				result.append("\r\n");
+			}
+		}
+
+		result.append(Data.Default.EXIT.getId() + " - exit");
+
+		return result.toString();
 	}
 
 	private String getDescription(Category category) {

@@ -1,14 +1,14 @@
 package kickstarter.data_types;
 
 public interface Data {
-	public int getId();
+	int getId();
 	
 	public enum Default implements Data {
 		EXIT;
 
 		@Override
 		public int getId() {
-			throw new UnsupportedOperationException();
+			return 0;
 		}
 	}
 }

@@ -3,13 +3,13 @@ package kickstarter.storages;
 import kickstarter.data_types.Data;
 
 public interface Storage<T extends Data> {
-	public T get(int index);
+	T get(int index);
 	
-	public T getById(int id);
+	T getById(int id);
 
-	public void add(T object);
+	void add(T object);
 
-	public int size();
+	int size();
 	
-	public boolean empty();
+	boolean empty();
 }
