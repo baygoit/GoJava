@@ -23,7 +23,7 @@ public class PageUserCategoriesView extends Page {
 		ui.display("Select Category:");
 
 		while (true) {
-			ui.display(" e- exit to Login Page");
+			ui.display(" e- exit to Login ");
 			String stringFromUI = ui.inputString();
 			if (stringFromUI.equals("e")) {
 				ui.display("exit");

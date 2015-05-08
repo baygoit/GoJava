@@ -20,11 +20,11 @@ public class PageUserProjectsView extends Page {
 		ui.display("------------------------");
 		ui.display("Select Project:");
 		while (true) {
-			ui.display(" e- exit to Login Page");
+			ui.display(" e- exit to Categories ");
 			String stringFromUI = ui.inputString();
 			if (stringFromUI.equals("e")) {
 				ui.display("exit");
-				return pages[PAGE_LOGIN];
+				return pages[USER_CATEGORIES_VIEW];
 			}
 			//TODO
 			try {
