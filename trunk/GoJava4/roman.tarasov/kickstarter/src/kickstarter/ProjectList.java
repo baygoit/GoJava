@@ -5,6 +5,7 @@ public class ProjectList {
 	int[] deleted = new int[10];
 	int pointer = 0;
 	Category targetCategory;
+	Project targetProject;
 
 	void addProject(Project projectToList) {
 		if (pointer >= projects.length) {
@@ -25,25 +26,25 @@ public class ProjectList {
 		// TODO
 	}
 
-	int[] printList(UserInterface ui) {
+	Project[] printList(UserInterface ui) {
 		if (pointer == 0) {
 			ui.display("ProjectList null");
 			return null;
 		}
 
-		int[] options = new int[pointer];
+		Project[] projectsByCategory = new Project[pointer];
 		int newPointer=0;
 		for (int index = 0; index < pointer; index++) {
 			if (projects[index].category.id == targetCategory.id) {
 				ui.display(projects[index].id + "- " + projects[index].name);
-				options[newPointer] = projects[index].id;
+				projectsByCategory[newPointer] = projects[index];
 				newPointer++;
 			}
 		}
-		int[] newOptions=new int[newPointer];
-		System.arraycopy(options, 0, newOptions, 0, newPointer);
+		Project[] sortedProjects=new Project[newPointer];
+		System.arraycopy(projectsByCategory, 0, sortedProjects, 0, newPointer);
 		
-		return newOptions;
+		return sortedProjects;
 	}
 
 	void setTargetCategory(Category target) {
@@ -52,5 +53,10 @@ public class ProjectList {
 
 	public Project get(int pointer) {
 		return projects[pointer];
+	}
+
+	public void setTargetProject(Project projectToDetailedView) {
+		this.targetProject=projectToDetailedView;
+		
 	}
 }

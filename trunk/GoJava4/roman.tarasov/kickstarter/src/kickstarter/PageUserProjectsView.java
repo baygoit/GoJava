@@ -7,7 +7,7 @@ public class PageUserProjectsView extends Page {
 		this.projects = projects;
 	}
 
-	int[] printProjects() {
+	Project[] printProjects() {
 		return projects.printList(ui);
 	}
 
@@ -16,7 +16,7 @@ public class PageUserProjectsView extends Page {
 		ui.display("________________________");
 		ui.display("|     Projects         |");
 		ui.display("|______________________|");
-		int[] options = printProjects();
+		Project[] options = printProjects();
 		ui.display("------------------------");
 		ui.display("Select Project:");
 		while (true) {
@@ -29,10 +29,10 @@ public class PageUserProjectsView extends Page {
 			try {
 				int parsed = Integer.parseInt(stringFromUI);
 				for (int index = 0; index < options.length; index++) {
-					if (parsed == options[index]) {
-						projectToProjectView = projects.get(index);
-						projects.setTargetCategory(categoryToUserProjectsView);
-						return pages[PAGE_LOGIN];
+					if (parsed == options[index].id) {
+						projectToDetailedView = options[index];
+					    projects.setTargetProject(projectToDetailedView);
+						return pages[DETAILED_PROJECT_INFO];
 					}
 				}
 				throw new IndexOutOfBoundsException();
