@@ -6,7 +6,7 @@ import kickstarter.data_types.Project;
 import kickstarter.data_types.Quote;
 import kickstarter.storages.Storage;
 
-public class DataViewGenerator {
+public class DataShowAgent {
 	public String getDescription(Data data) {
 		if (data instanceof Quote) {
 			return getDescription((Quote) data);

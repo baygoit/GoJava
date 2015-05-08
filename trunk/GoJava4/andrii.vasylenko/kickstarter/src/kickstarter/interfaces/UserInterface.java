@@ -11,7 +11,7 @@ import kickstarter.interfaces.readers.Reader;
 import kickstarter.storages.Storage;
 
 public class UserInterface {
-	private DataViewGenerator dataViewGenerator = new DataViewGenerator();
+	private DataShowAgent dataViewGenerator = new DataShowAgent();
 	private Printer printer;
 	private Reader reader;
 	
