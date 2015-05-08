@@ -1,14 +1,19 @@
 package com.morkva.entities;
 
+import com.morkva.entities.utils.ID;
+
+import java.util.Arrays;
+
 /**
  * Created by vladyslav on 02.05.15.
  */
-public class Category {
+public class Category extends Entity{
 
     private String name;
     private Project[] projects;
 
-    public Category(String name) {
+    public Category(Integer id, String name) {
+        super(id);
         this.name = name;
     }
 
@@ -26,5 +31,14 @@ public class Category {
 
     public void setProjects(Project[] projects) {
         this.projects = projects;
+    }
+
+    @Override
+    public String toString() {
+        return "Category{" +
+                "name='" + name + '\'' +
+                ", projects=" + Arrays.toString(projects) +
+                '}';
+        
     }
 }

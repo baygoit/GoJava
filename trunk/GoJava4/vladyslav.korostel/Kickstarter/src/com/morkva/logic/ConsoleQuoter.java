@@ -1,7 +1,8 @@
 package com.morkva.logic;
 
 import com.morkva.entities.Quote;
-import com.morkva.model.QuotesRepository;
+import com.morkva.model.Repository;
+import com.morkva.model.impl.QuotesRepository;
 
 import java.util.Random;
 
@@ -10,15 +11,14 @@ import java.util.Random;
  */
 public class ConsoleQuoter implements Quoter<String> {
 
-    private QuotesRepository quotesRepository;
+    private Repository<Quote> quotesRepository;
 
-    public ConsoleQuoter(QuotesRepository quotesRepository) {
+    public ConsoleQuoter(Repository<Quote> quotesRepository) {
         this.quotesRepository = quotesRepository;
     }
 
     @Override
     public String quote() {
-        Quote[] quotes = quotesRepository.getQuotes();
-        return quotes[new Random().nextInt(quotes.length)].toString();
+        return quotesRepository.getByIndex(new Random().nextInt(quotesRepository.size())).toString();
     }
 }

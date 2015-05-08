@@ -1,19 +1,17 @@
 package com.morkva.entities;
 
+import com.morkva.entities.utils.ID;
+
 /**
  * Created by vladyslav on 30.04.15.
  */
-public class Quote {
+public class Quote extends Entity{
 
     private String value;
     private String author;
 
-    public Quote() {
-        this.author = "Default author";
-        this.value = "Default value";
-    }
-
-    public Quote(String value, String author) {
+    public Quote(Integer id, String value, String author) {
+        super(id);
         this.value = value;
         this.author = author;
     }

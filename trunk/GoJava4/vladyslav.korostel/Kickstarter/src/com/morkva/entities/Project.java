@@ -1,9 +1,11 @@
 package com.morkva.entities;
 
+import com.morkva.entities.utils.ID;
+
 /**
  * Created by vladyslav on 02.05.15.
  */
-public class Project {
+public class Project extends Entity {
 
     private Category category;
     private String name;
@@ -15,17 +17,17 @@ public class Project {
     private String urlVideo;
     private String[] questionsAndAnswers;
 
-
     public Project(
+            Integer id,
             String name,
             String shortDescr,
             int needMoney,
             int currentMoney,
             int daysLeft,
             String history,
-            String urlVideo,
-            String[] questionsAndAnswers
+            String urlVideo
     ) {
+        super(id);
         this.name = name;
         this.shortDescr = shortDescr;
         this.needMoney = needMoney;
@@ -33,7 +35,6 @@ public class Project {
         this.daysLeft = daysLeft;
         this.history = history;
         this.urlVideo = urlVideo;
-        this.questionsAndAnswers = questionsAndAnswers;
     }
 
     public String getName() {
@@ -100,11 +101,4 @@ public class Project {
         this.urlVideo = urlVideo;
     }
 
-    public String[] getQuestionsAndAnswers() {
-        return questionsAndAnswers;
-    }
-
-    public void setQuestionsAndAnswers(String[] questionsAndAnswers) {
-        this.questionsAndAnswers = questionsAndAnswers;
-    }
 }

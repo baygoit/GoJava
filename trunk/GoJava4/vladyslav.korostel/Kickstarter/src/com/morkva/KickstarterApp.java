@@ -3,22 +3,20 @@ package com.morkva;
 import com.morkva.entities.Category;
 import com.morkva.entities.Project;
 import com.morkva.entities.Quote;
-import com.morkva.logic.ConsoleQuoter;
-import com.morkva.logic.Quoter;
-import com.morkva.model.*;
-import com.morkva.model.impl.CategoryRepositoryImpl;
-import com.morkva.model.impl.QuotesRepositoryImpl;
+import com.morkva.entities.utils.ID;
+import com.morkva.logic.*;
+import com.morkva.model.Repository;
+import com.morkva.model.impl.CategoryRepository;
+import com.morkva.model.impl.QuotesRepository;
 
-import java.io.IOException;
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class KickstarterApp {
 
     static Category[] defaultCategories = new Category[]{
-            new Category("Software"),
-            new Category("Video"),
-            new Category("Games")
+            new Category(1, "Software"),
+            new Category(2, "Video"),
+            new Category(3, "Games")
     };
 
     static String[] questionsAndAnswers = new String[] {
@@ -29,77 +27,73 @@ public class KickstarterApp {
     };
 
     static Project[] softwareCategoryProjects = new Project[] {
-            new Project("Instant Messenger Qip", "A very tiny instant messenger for all Platforms and IE6", 50000, 37000, 5, "History of the project", "http://youtube.com/kdjh1231", questionsAndAnswers),
-            new Project("Kickstarter", "One more kickstarter", 100, 5, 31, "History of the project", "http://youtube.com/kdjh1231", questionsAndAnswers),
-            new Project("Global IT forum", "IT forum for all planet and our solar system", 5, 2, 100, "History of the project", "http://youtube.com/kdjh1231", questionsAndAnswers)
+            new Project(1, "Instant Messenger Qip", "A very tiny instant messenger for all Platforms and IE6", 50000, 37000, 5, "History of the project", "http://youtube.com/kdjh1231"),
+            new Project(2, "Kickstarter", "One more kickstarter", 100, 5, 31, "History of the project", "http://youtube.com/kdjh1231"),
+            new Project(3, "Global IT forum", "IT forum for all planet and our solar system", 5, 2, 100, "History of the project", "http://youtube.com/kdjh1231")
     };
 
     static Project[] videoCategoryProjects = new Project[] {
-            new Project("Avengers 16", "New avengers from IT developers", 500, 0, 128, "History of the project", "http://youtube.com/kdjh1231", questionsAndAnswers),
-            new Project("Avatar 32", "New blue people from blue planet with blue scenario, not gay", 59999000, 49999000, 256, "History of the project", "http://youtube.com/kdjh1231", questionsAndAnswers),
-            new Project("Batmen 64", "Need anoter one actor for batman, not gay", 699, 3, 512, "History of the project", "http://youtube.com/kdjh1231", questionsAndAnswers),
-            new Project("Superman 1024", "History of a developer from Crypton", 600000, 4500, 1024, "History of the project", "http://youtube.com/kdjh1231", questionsAndAnswers)
+            new Project(4, "Avengers 16", "New avengers from IT developers", 500, 0, 128, "History of the project", "http://youtube.com/kdjh1231"),
+            new Project(5, "Avatar 32", "New blue people from blue planet with blue scenario, not gay", 59999000, 49999000, 256, "History of the project", "http://youtube.com/kdjh1231"),
+            new Project(6, "Batmen 64", "Need anoter one actor for batman, not gay", 699, 3, 512, "History of the project", "http://youtube.com/kdjh1231"),
+            new Project(7, "Superman 1024", "History of a developer from Crypton", 600000, 4500, 1024, "History of the project", "http://youtube.com/kdjh1231")
     };
 
     static Project[] gamesCategoryProjects = new Project[] {
-            new Project("256-bit mario", "New mario for Oculus Rift", 3000, 0, 60, "History of the project", "http://youtube.com/kdjh1231", questionsAndAnswers),
-            new Project("Quake 2.5", "Doom is too boring", 10000, 500, 31, "History of the project", "http://youtube.com/kdjh1231", questionsAndAnswers),
-            new Project("CS 3.14", "New counter strike from ukrainian developers (need money for beer)", 100, 0, 3, "History of the project", "http://youtube.com/kdjh1231", questionsAndAnswers)
+            new Project(8, "256-bit mario", "New mario for Oculus Rift", 3000, 0, 60, "History of the project", "http://youtube.com/kdjh1231"),
+            new Project(9, "Quake 2.5", "Doom is too boring", 10000, 500, 31, "History of the project", "http://youtube.com/kdjh1231"),
+            new Project(10, "CS 3.14", "New counter strike from ukrainian developers (need money for beer)", 100, 0, 3, "History of the project", "http://youtube.com/kdjh1231")
     };
 
     static Quote[] defaultQuotes = new Quote[] {
-            new Quote("Test Quote", "Test author"),
-            new Quote("«Пользователь» — слово, используемое компьютерщиками-профессионалами вместо слова «идиот».", "Дейв Барри"),
-            new Quote("Каждый дурак может написать программу, которую может понять компьютер. Хороший программист пишет программу, которую может понять человек.", "Мартин Фаулер"),
-            new Quote("Написание первых 90% программы занимает 90% времени. Оставшиеся 10% также требуют 90% времени, а окончательная шлифовка — еще 90% времени.", "Нейл Рубенкинг"),
-            new Quote("Программирование — это гонка между компьютерщиками, которые создают программы, все лучше защищенные от дурака, и природой, которая создает все лучших дураков. Пока что природа выигрывает.", "Рич Кук")
+            new Quote(1, "Test Quote", "Test author"),
+            new Quote(2, "«Пользователь» — слово, используемое компьютерщиками-профессионалами вместо слова «идиот».", "Дейв Барри"),
+            new Quote(3, "Каждый дурак может написать программу, которую может понять компьютер. Хороший программист пишет программу, которую может понять человек.", "Мартин Фаулер"),
+            new Quote(4, "Написание первых 90% программы занимает 90% времени. Оставшиеся 10% также требуют 90% времени, а окончательная шлифовка — еще 90% времени.", "Нейл Рубенкинг"),
+            new Quote(5, "Программирование — это гонка между компьютерщиками, которые создают программы, все лучше защищенные от дурака, и природой, которая создает все лучших дураков. Пока что природа выигрывает.", "Рич Кук")
     };
 
     private Quoter quoter;
-    private CategoryRepository categoryRepository;
+    private Repository<Category> categoryRepository;
+    private Repository<Quote> quoteRepository;
     private Scanner scanner;
-    
-    public KickstarterApp() {
-    	quoter = new ConsoleQuoter(new QuotesRepositoryImpl(defaultQuotes));
-        categoryRepository = new CategoryRepositoryImpl(defaultCategories);
-        scanner = new Scanner(System.in);
-	}
 
-    public static void main(String[] args) throws IOException {
+	private Printer printer;
+    
+    public KickstarterApp(Printer printer) {
+    	this.printer = printer;
+        quoteRepository = new QuotesRepository(defaultQuotes);
+        categoryRepository = new CategoryRepository(defaultCategories);
+        quoter = new ConsoleQuoter(quoteRepository);
+        scanner = new Scanner(System.in);
 
         defaultCategories[0].setProjects(softwareCategoryProjects);
         defaultCategories[1].setProjects(videoCategoryProjects);
         defaultCategories[2].setProjects(gamesCategoryProjects);
-        
-        KickstarterApp app = new KickstarterApp();
-        app.showMenu();
-    }
+	}
+
     
     public void showMenu() {
-    	Category[] allCategories = categoryRepository.getAllCategories();
-    	while (true) {
+    	int categoriesSize = categoryRepository.size();
+        while (true) {
     		//Show quote
-            System.out.println(quoter.quote());
+            println(quoter.quote());
             
-            showCategories(allCategories);
+            showCategories(categoriesSize);
             
-            System.out.println();
-            System.out.println("Press 0 for exit");
-            System.out.println("--------------------------------------------");
+            println("");
+            println("Press 0 for exit");
+            println("--------------------------------------------");
 
-//            try {
             	int keyCode = scanner.nextInt();
 	            if (keyCode == 0) {
 	                break;
-	            } else if (keyCode > 0 && keyCode <= allCategories.length) {
-	            	Category currentCategory = allCategories[keyCode-1];
+	            } else if (keyCode > 0 && keyCode <= categoriesSize) {
+	            	Category currentCategory = categoryRepository.getByIndex(keyCode-1);
 	                showCategoryMenu(currentCategory);
 	            } else {
-	            	System.out.println("Wrong number!");
+	            	println("Wrong number!");
 	            }
-//            } catch(InputMismatchException e) {
-//            	System.err.println("Please, enter only numbers!");
-//            }
         }
     }
     
@@ -111,9 +105,9 @@ public class KickstarterApp {
         	
             showProjectsOfCategory(category);
             
-            System.out.println();
-            System.out.println("Press 0 for exit from this category");
-            System.out.println("--------------------------------------------");
+            println("");
+            println("Press 0 for exit from this category");
+            println("--------------------------------------------");
             
             int keyCode = scanner.nextInt();
             if (keyCode == 0) {
@@ -123,7 +117,7 @@ public class KickstarterApp {
                 	Project selectedProject = projectsOfCurrentCategory[keyCode-1];
                 	showProjectMenu(selectedProject);
                 } else {
-                	System.out.println("Project with №" + keyCode + " does not exist");
+                	println("Project with №" + keyCode + " does not exist");
                 }
             }
         } //end projectsListLoop
@@ -134,51 +128,55 @@ public class KickstarterApp {
     		
             showProjectInfo(project);
             
-            System.out.println();
-            System.out.println("Press 0 to return back");
-            System.out.println("--------------------------------------------");
+            println("");
+            println("Press 0 to return back");
+            println("--------------------------------------------");
             
             int keyCode = scanner.nextInt();
             if (keyCode == 0) {
             	break;
             } else {
-            	System.out.println("Wrong code!");
+            	println("Wrong code!");
             }
     	} //end loop
     }
     
-    public void showCategories(Category[] categories) {
-    	System.out.println("Select category: ");
-        for (int i = 0; i < categories.length; i++) {
-            System.out.println(i + 1 + ": " + categories[i].getName());
+    public void showCategories(int size) {
+    	println("Select category: ");
+        for (int i = 0; i < size; i++) {
+            println(i + 1 + ": " + categoryRepository.getByIndex(i).getName());
         }
     }
     
     public void showProjectsOfCategory(Category category) {
-    	System.out.println("Category: " + category.getName());
-        System.out.println("  Projects: ");
+    	println("Category: " + category.getName());
+        println("  Projects: ");
         Project[] currentCategoryProjects = category.getProjects();
         for (int i = 0; i < currentCategoryProjects.length; i++) {
             System.out.print("  " + (i + 1) + ": ");
-            System.out.println(currentCategoryProjects[i].getName());
-            System.out.println("	Short Description: " + currentCategoryProjects[i].getShortDescr());
-            System.out.println("	Need money: " + currentCategoryProjects[i].getNeedMoney());
-            System.out.println("	Current money: " + currentCategoryProjects[i].getCurrentMoney());
-            System.out.println("	Days left: " + currentCategoryProjects[i].getDaysLeft());
+            println(currentCategoryProjects[i].getName());
+            println("	Short Description: " + currentCategoryProjects[i].getShortDescr());
+            println("	Need money: " + currentCategoryProjects[i].getNeedMoney());
+            println("	Current money: " + currentCategoryProjects[i].getCurrentMoney());
+            println("	Days left: " + currentCategoryProjects[i].getDaysLeft());
         }
     }
     
+    public void print(Object o) {
+    	printer.print(o);
+    }
+    
+    public void println(Object o) {
+    	print(o+"\n");
+    }
+    
     public void showProjectInfo(Project project) {
-            System.out.println(project.getName());
-            System.out.println("	Short Description: " + project.getShortDescr());
-            System.out.println("	Need money: " + project.getNeedMoney());
-            System.out.println("	Current money: " + project.getCurrentMoney());
-            System.out.println("	Days left: " + project.getDaysLeft());
-            System.out.println("	History: " + project.getHistory());
-            System.out.println("	Video URL: " + project.getUrlVideo());
-            System.out.println("	Questions And Answers: ");
-            for (String s : project.getQuestionsAndAnswers()) {
-                System.out.println("		" + s);
-            }
+            println(project.getName());
+            println("	Short Description: " + project.getShortDescr());
+            println("	Need money: " + project.getNeedMoney());
+            println("	Current money: " + project.getCurrentMoney());
+            println("	Days left: " + project.getDaysLeft());
+            println("	History: " + project.getHistory());
+            println("	Video URL: " + project.getUrlVideo());
     }
 }
