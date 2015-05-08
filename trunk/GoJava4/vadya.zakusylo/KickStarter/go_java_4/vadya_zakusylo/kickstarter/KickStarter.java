@@ -1,101 +1,103 @@
 package go_java_4.vadya_zakusylo.kickstarter;
 
+import go_java_4.vadya_zakusylo.kickstarterPrinter.Printer;
+import go_java_4.vadya_zakusylo.kickstarterRepository.ArrayCategory;
+import go_java_4.vadya_zakusylo.kickstarterRepository.Category;
+import go_java_4.vadya_zakusylo.kickstarterRepository.Content;
+import go_java_4.vadya_zakusylo.kickstarterRepository.Project;
+import go_java_4.vadya_zakusylo.kickstarterRepository.Quote;
+
 import java.util.Scanner;
 
 public class KickStarter {
-	static Repository repository = new Repository();
-	static Category category;
-	static Project project;
+	private Quote quote;
+	private Content content;
+	private Printer printer;
 
-	public static void main(String[] args) {
-		initContent();
-		KickStarter kickStarter = new KickStarter();
-		kickStarter.go();
+	public ArrayCategory arrayCategory = new ArrayCategory();
+	public Category category;
+	public Project project;
+
+	public KickStarter(Quote quote, Content content, Printer printer) {
+		this.quote = quote;
+		this.content = content;
+		this.printer = printer;
 	}
 
-	private static void initContent() {
-		category = new Category("Snowboarding");
-		repository.addCategory(category);
-		Project project = new Project("GNU Dirty Pillow BTX Snowboard", "Snowboard is a befuddling"
-				+ "mutant hybrid child of a pow board and it's forbidden love affair with a park"
-				+ "board", 400.00, 0, 30, "history", "https://www.youtube.com/watch?v=b2v2Z4AC58E");
-		category.addProject(project);
-		project = new Project("I/OS Replacement Lenses", "Photochromic Red Sensor Lens", 140, 0,
-				90, "history", "https://www.youtube.com/watch?v=rvWwBoIyS-M");
-		category.addProject(project);
-		category = new Category("Traveling");
-		repository.addCategory(category);
-		project = new Project("Primus Litech Superset", " The set consists of two pots, a lid, and"
-				+ "a separate pot gripper", 50, 0, 30, "history",
-				"https://www.youtube.com/watch?v=rV055FvDF8s");
-		category.addProject(project);
-		project = new Project("Tent VEIG PRO III", "Double entrance expedition tent adapted for"
-				+ "using in difficult weather conditions", 270, 0, 90, "history",
-				"https://www.youtube.com/watch?v=3zt7RftZPz4");
-		category.addProject(project);
-		category = new Category("Learning");
-		repository.addCategory(category);
-		project = new Project("Java: The Complete Reference (Complete Reference Series)",
-				"Book by Herbert Schildt", 50, 0, 30, "history", "");
-		category.addProject(project);
-	}
-
-	private void go() {
+	void go() {
+		content.initContent();
 		printQuote();
-		showCategory();
-		setCategory();
-		showProject();
-		setProject();
+		chooseCategory();
+		printer.println("Have a nice day!");
 	}
 
 	private void printQuote() {
-		Quote quote = new CreativeQuote();
-		System.out.println(quote.chooseQuote());
+		printer.println(quote.chooseQuote());
 	}
 
-	private void showCategory() {
-		Category[] categories = repository.getCategories();
-		System.out.println("\nChoose the category:");
-		for (int index = 0; index < categories.length; index++) {
-			System.out.print(index + 1 + ". ");
-			category = categories[index];
-			System.out.println(category.getNameCategory());
+	private void chooseCategory() {
+		while (true) {
+			Category[] categories = Content.arrayCategory.getCategories();
+			printer.println("\nChoose the category:");
+			for (int index = 0; index < categories.length; index++) {
+				category = categories[index];
+				printer.print(index + 1 + ". ");
+				printer.println(category.getNameCategory());
+			}
+			printer.println("\nInput 0 for exit");
+			int index = inputIndex(categories);
+			if (index == 0) {
+				break;
+			}
+			category = categories[index - 1];
+			printer.println("You chose " + category.getNameCategory());
+			chooseProject();
+		}
+	}
+
+	private void chooseProject() {
+		while (true) {
+			Project[] projects = category.getProjects();
+			printer.println("\nChoose the project:");
+			for (int index = 0; index < projects.length; index++) {
+				System.out.print(index + 1 + ". ");
+				project = projects[index];
+				printer.println(project.getName() + "\n\t" + project.getShortDescription()
+						+ "\n\tNeed money: " + project.getNeedMoney() + "\tCurrent money: "
+						+ project.getCurrentMoney() + "\n\tDays left: " + project.getDaysLeft());
+			}
+			printer.println("\nInput 0 for exit");
+			int index = inputIndex(projects);
+			if (index == 0) {
+				break;
+			}
+			project = projects[index - 1];
+			showProject();
 		}
 	}
 
 	private void showProject() {
-		Project[] projects = category.getProjects();
-		System.out.println("\nChoose the project:");
-		for (int index = 0; index < projects.length; index++) {
-			System.out.print(index + 1 + ". ");
-			project = projects[index];
-			System.out.println(project.getName() + "\n\t" + project.getShortDescription()
-					+ "\n\tNeed money: " + project.getNeedMoney() + "\tCurrent money: "
-					+ project.getCurrentMoney() + "\n\tDays left: " + project.getDaysLeft());
+		while (true) {
+			printer.println("You chose " + project.getName());
+			printer.println("\nInput 0 for exit");
+			@SuppressWarnings("resource")
+			int index = new Scanner(System.in).nextInt();
+			while (index != 0) {
+				printer.println("Input 0 for exit");
+				index = new Scanner(System.in).nextInt();
+			}
+			if (index == 0) {
+				break;
+			}
 		}
 	}
 
-	private void setCategory() {
-		Category[] categories = repository.getCategories();
-		int index = inputIndex(categories);
-		category = categories[index - 1];
-		System.out.println("You chose " + category.getNameCategory());
-	}
-
-	private void setProject() {
-		Project[] projects = category.getProjects();
-		int index = inputIndex(projects);
-		project = projects[index - 1];
-		System.out.println("You chose " + project.getName());
-	}
-
+	@SuppressWarnings("resource")
 	private int inputIndex(Object[] contents) {
-		@SuppressWarnings("resource")
-		Scanner scanner = new Scanner(System.in);
-		int index = scanner.nextInt();
-		while (index < 1 || index > contents.length) {
-			System.out.println("Choose one of the variants!");
-			index = scanner.nextInt();
+		int index = new Scanner(System.in).nextInt();
+		while (index < 0 || index > contents.length) {
+			printer.println("Choose one of the variants!");
+			index = new Scanner(System.in).nextInt();
 		}
 		return index;
 	}
