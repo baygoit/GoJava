@@ -8,7 +8,6 @@ public class PageDispatcher {
 	PageUserProjectsView userProjectsView;
 	DetailedProjectInfo detailedProjectInfo;
 
-
 	PageDispatcher(UserInterface ui, CategoryList categories,
 			ProjectList projects) {
 
@@ -20,12 +19,14 @@ public class PageDispatcher {
 	void cycleDispatcher() {
 		while (true) {
 			selectCategory();
-
 		}
 	}
 
 	void selectCategory() {
 		Category category = userCategoriesView.selectCategory();
+		if (category == null) {
+			System.exit(0);
+		}
 		selectProject(category);
 	}
 
@@ -45,5 +46,4 @@ public class PageDispatcher {
 		detailedProjectInfo = new DetailedProjectInfo(ui);
 		cycleDispatcher();
 	}
-
 }

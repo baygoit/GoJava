@@ -25,10 +25,10 @@ public class PageUserCategoriesView  {
 		ui.display("Select Category:");
 
 		while (true) {
-			ui.display(" e- exit to Login ");
+			ui.display(" e- exit  ");
 			String stringFromUI = ui.inputString();
 			if (stringFromUI.equals("e")) {
-				ui.display("exit");
+				ui.display("Good Bye");
 				return null;
 			}
 			try {

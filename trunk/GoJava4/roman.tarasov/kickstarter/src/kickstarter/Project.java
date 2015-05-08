@@ -14,8 +14,4 @@ public class Project {
 		this.name = name;
 		this.category = category;
 	}
-
-	Category getCategory() {
-		return category;
-	}
 }

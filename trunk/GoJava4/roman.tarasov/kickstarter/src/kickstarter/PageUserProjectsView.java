@@ -1,12 +1,12 @@
 package kickstarter;
 
-public class PageUserProjectsView  {
+public class PageUserProjectsView {
 	ProjectList projects;
 	UserInterface ui;
 
-	public PageUserProjectsView(ProjectList projects,UserInterface ui) {
+	public PageUserProjectsView(ProjectList projects, UserInterface ui) {
 		this.projects = projects;
-		this.ui=ui;
+		this.ui = ui;
 	}
 
 	Project[] printProjects() {
@@ -32,7 +32,6 @@ public class PageUserProjectsView  {
 				for (int index = 0; index < options.length; index++) {
 					if (parsed == options[index].id) {
 						Project projectToDetailedView = options[index];
-					    //projects.setTargetProject(projectToDetailedView);
 						return projectToDetailedView;
 					}
 				}
@@ -42,6 +41,5 @@ public class PageUserProjectsView  {
 			}
 		}
 	}
-
 
 }

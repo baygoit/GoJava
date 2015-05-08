@@ -4,8 +4,7 @@ public class DetailedProjectInfo  {
 	ProjectList projects;
 	UserInterface ui;
 	public DetailedProjectInfo( UserInterface ui) {
-		this.projects = projects;
-		this.ui=ui;
+			this.ui=ui;
 	}
 
 	void getDetailedInfo(Project project) {
@@ -15,6 +14,7 @@ public class DetailedProjectInfo  {
 		ui.display("category : " + project.category.name);
 		ui.display("name     : " + project.name);
 		ui.display("id       : " + project.id);
+		ui.display("description : " + project.description);
 		ui.display("goal     : " + project.goal);
 		ui.display("pledged  : " + project.pledged);
 		ui.display("expire date     : " + project.expireDate);
@@ -30,6 +30,4 @@ public class DetailedProjectInfo  {
 			ui.display("input correct command, please");
 		}
 	}
-
-
 }
