@@ -4,6 +4,7 @@ public class Category {
 	
 	private String[] categoryName;
 	private int[] categoryID;
+	Project[] projects; 
 	
 	public Category() {
 		categoryName = new String[] {
@@ -15,7 +16,6 @@ public class Category {
 	}
 	
 	
-	
 	public void showCategoryMenu() {
 		System.out.println("CATEGORIES:");
 		for(String category : categoryName) {
@@ -24,9 +24,6 @@ public class Category {
 		System.out.println();
 		System.out.println("--------------------------------------------------------------------");
 	}
-	
-	
-	
 	
 		
 }
