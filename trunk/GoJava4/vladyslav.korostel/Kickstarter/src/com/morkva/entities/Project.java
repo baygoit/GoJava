@@ -1,6 +1,6 @@
 package com.morkva.entities;
 
-import com.morkva.entities.utils.ID;
+import com.morkva.logic.Printer;
 
 /**
  * Created by vladyslav on 02.05.15.
@@ -16,9 +16,10 @@ public class Project extends Entity {
     private String history;
     private String urlVideo;
     private String[] questionsAndAnswers;
+    private Printer printer;
 
     public Project(
-            Integer id,
+            int id,
             String name,
             String shortDescr,
             int needMoney,
@@ -99,6 +100,28 @@ public class Project extends Entity {
 
     public void setUrlVideo(String urlVideo) {
         this.urlVideo = urlVideo;
+    }
+
+    public void setPrinter(Printer printer) {
+        this.printer = printer;
+    }
+
+    public void showFullInfo() {
+        printer.print(this.getName() + "\n");
+        printer.print("	Short Description: " + this.getShortDescr() + "\n");
+        printer.print("	Need money: " + this.getNeedMoney() + "\n");
+        printer.print("	Current money: " + this.getCurrentMoney() + "\n");
+        printer.print("	Days left: " + this.getDaysLeft() + "\n");
+        printer.print("	History: " + this.getHistory() + "\n");
+        printer.print("	Video URL: " + this.getUrlVideo() + "\n");
+    }
+
+    public void showShortInfo() {
+        printer.print(this.getName() + "\n");
+        printer.print("	Short Description: " + this.getShortDescr() + "\n");
+        printer.print("	Need money: " + this.getNeedMoney() + "\n");
+        printer.print("	Current money: " + this.getCurrentMoney() + "\n");
+        printer.print("	Days left: " + this.getDaysLeft() + "\n");
     }
 
 }

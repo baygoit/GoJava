@@ -1,28 +1,26 @@
 package com.morkva.entities;
 
-import com.morkva.entities.utils.ID;
-
 /**
  * Created by vladyslav on 07.05.15.
  */
-public abstract class Entity implements Comparable<ID> {
+public abstract class Entity implements Comparable<Integer> {
 
-    private ID id;
+    private int id;
 
-    public Entity(Integer id) {
-        this.id = new ID(id);
+    public Entity(int id) {
+        this.id = id;
     }
 
-    public ID getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(ID id) {
+    public void setId(int id) {
         this.id = id;
     }
 
     @Override
-    public int compareTo(ID o) {
-        return this.id.compareTo(o);
+    public int compareTo(Integer o) {
+        return (id >o)?1:(id <o)?-1:0;
     }
 }

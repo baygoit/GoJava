@@ -1,7 +1,5 @@
 package com.morkva.entities;
 
-import com.morkva.entities.utils.ID;
-
 import java.util.Arrays;
 
 /**

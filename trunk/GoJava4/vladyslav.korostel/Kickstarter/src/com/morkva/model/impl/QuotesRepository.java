@@ -1,7 +1,6 @@
 package com.morkva.model.impl;
 
 import com.morkva.entities.Quote;
-import com.morkva.entities.utils.ID;
 import com.morkva.model.Repository;
 
 import java.util.Arrays;
@@ -10,6 +9,7 @@ import java.util.Comparator;
 /**
  * Created by vladyslav on 30.04.15.
  */
+@Deprecated
 public class QuotesRepository implements Repository<Quote> {
 
     private Quote[] quotes;
@@ -25,7 +25,7 @@ public class QuotesRepository implements Repository<Quote> {
     }
 
     @Override
-    public Quote getById(ID id) {
+    public Quote getById(int id) {
         int searchResult = search(id);
         return quotes[searchResult];
     }
@@ -73,7 +73,7 @@ public class QuotesRepository implements Repository<Quote> {
         return quotes.length;
     }
 
-    private int search(ID id) {
+    private int search(int id) {
         return Arrays.binarySearch(quotes, id);
     }
 
@@ -81,9 +81,7 @@ public class QuotesRepository implements Repository<Quote> {
         Arrays.sort(quotes, new Comparator<Quote>() {
             @Override
             public int compare(Quote o1, Quote o2) {
-                ID id1 = o1.getId();
-                ID id2 = o2.getId();
-                return id1.compareTo(id2);
+                return o1.compareTo(o2.getId());
             }
         });
     }

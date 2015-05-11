@@ -1,7 +1,6 @@
 package com.morkva.model.impl;
 
 import com.morkva.entities.Category;
-import com.morkva.entities.utils.ID;
 import com.morkva.model.Repository;
 
 import java.util.Arrays;
@@ -10,6 +9,7 @@ import java.util.Comparator;
 /**
  * Created by vladyslav on 02.05.15.
  */
+@Deprecated
 public class CategoryRepository implements Repository<Category> {
 
     private Category[] categories;
@@ -25,7 +25,7 @@ public class CategoryRepository implements Repository<Category> {
     }
 
     @Override
-    public Category getById(ID id) {
+    public Category getById(int id) {
         int searchResult = search(id);
         return categories[searchResult];
     }
@@ -77,15 +77,12 @@ public class CategoryRepository implements Repository<Category> {
         Arrays.sort(categories, new Comparator<Category>() {
             @Override
             public int compare(Category o1, Category o2) {
-                ID id1 = o1.getId();
-                ID id2 = o2.getId();
-                return id1.compareTo(id2);
-//                return (id1.getValue() > id2.getValue())?1:(id1.getValue() < id2.getValue())?-1:0;
+                return o1.compareTo(o2.getId());
             }
         });
     }
 
-    private int search(ID id) {
+    private int search(int id) {
         return Arrays.binarySearch(categories, id);
     }
 }

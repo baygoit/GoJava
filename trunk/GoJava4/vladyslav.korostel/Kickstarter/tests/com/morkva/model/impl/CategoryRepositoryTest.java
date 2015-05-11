@@ -1,19 +1,19 @@
 package com.morkva.model.impl;
 
 import com.morkva.entities.Category;
-import com.morkva.entities.utils.ID;
+import com.morkva.entities.Quote;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.BufferedReader;
-
 /**
  * Created by vladyslav on 07.05.15.
  */
+@Deprecated
 public class CategoryRepositoryTest {
 
     public Category[] categories;
+    Quote[] quotes;
 
     CategoryRepository categoryRepository;
 
@@ -25,6 +25,8 @@ public class CategoryRepositoryTest {
                 new Category(1, "Name 1"),
                 new Category(4, "Name 4")
         };
+
+
         categoryRepository = new CategoryRepository(categories);
     }
 
@@ -40,16 +42,16 @@ public class CategoryRepositoryTest {
 
     @Test
     public void testGetById() throws Exception {
-        Category category = categoryRepository.getById(new ID(2));
+        Category category = categoryRepository.getById(2);
 
-        Assert.assertEquals(category.getId().getValue(), new ID(2).getValue());
+        Assert.assertEquals(category.getId(), 2);
     }
 
     @Test
     public void testAdd() throws Exception {
         Category categoryToAdd = new Category(5, "Name 5");
         categoryRepository.add(categoryToAdd);
-        Category categoryToTest = categoryRepository.getById(new ID(5));
+        Category categoryToTest = categoryRepository.getById(5);
         Assert.assertEquals(categoryToTest.getName(), "Name 5");
     }
 //

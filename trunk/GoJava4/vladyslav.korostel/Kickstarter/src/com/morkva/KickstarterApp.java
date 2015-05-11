@@ -3,11 +3,9 @@ package com.morkva;
 import com.morkva.entities.Category;
 import com.morkva.entities.Project;
 import com.morkva.entities.Quote;
-import com.morkva.entities.utils.ID;
 import com.morkva.logic.*;
 import com.morkva.model.Repository;
-import com.morkva.model.impl.CategoryRepository;
-import com.morkva.model.impl.QuotesRepository;
+import com.morkva.model.impl.RepositoryImpl;
 
 import java.util.Scanner;
 
@@ -56,16 +54,16 @@ public class KickstarterApp {
     private Quoter quoter;
     private Repository<Category> categoryRepository;
     private Repository<Quote> quoteRepository;
-    private Scanner scanner;
 
+    private Reader reader;
 	private Printer printer;
     
     public KickstarterApp(Printer printer) {
     	this.printer = printer;
-        quoteRepository = new QuotesRepository(defaultQuotes);
-        categoryRepository = new CategoryRepository(defaultCategories);
+        this.reader = new ConsoleReader(printer);
+        quoteRepository = new RepositoryImpl<>(defaultQuotes);
+        categoryRepository = new RepositoryImpl<>(defaultCategories);
         quoter = new ConsoleQuoter(quoteRepository);
-        scanner = new Scanner(System.in);
 
         defaultCategories[0].setProjects(softwareCategoryProjects);
         defaultCategories[1].setProjects(videoCategoryProjects);
@@ -85,11 +83,12 @@ public class KickstarterApp {
             println("Press 0 for exit");
             println("--------------------------------------------");
 
-            	int keyCode = scanner.nextInt();
+            	int keyCode = reader.readUserInput();
 	            if (keyCode == 0) {
 	                break;
 	            } else if (keyCode > 0 && keyCode <= categoriesSize) {
-	            	Category currentCategory = categoryRepository.getByIndex(keyCode-1);
+                    System.out.println("KEY CODE = " + keyCode);
+                    Category currentCategory = categoryRepository.getByIndex(keyCode-1);
 	                showCategoryMenu(currentCategory);
 	            } else {
 	            	println("Wrong number!");
@@ -109,7 +108,7 @@ public class KickstarterApp {
             println("Press 0 for exit from this category");
             println("--------------------------------------------");
             
-            int keyCode = scanner.nextInt();
+            int keyCode = reader.readUserInput();
             if (keyCode == 0) {
                 break;
             } else {
@@ -126,13 +125,13 @@ public class KickstarterApp {
     public void showProjectMenu(Project project) {
     	while(true) {
     		
-            showProjectInfo(project);
+            project.showFullInfo();
             
             println("");
             println("Press 0 to return back");
             println("--------------------------------------------");
             
-            int keyCode = scanner.nextInt();
+            int keyCode = reader.readUserInput();
             if (keyCode == 0) {
             	break;
             } else {
@@ -154,11 +153,8 @@ public class KickstarterApp {
         Project[] currentCategoryProjects = category.getProjects();
         for (int i = 0; i < currentCategoryProjects.length; i++) {
             System.out.print("  " + (i + 1) + ": ");
-            println(currentCategoryProjects[i].getName());
-            println("	Short Description: " + currentCategoryProjects[i].getShortDescr());
-            println("	Need money: " + currentCategoryProjects[i].getNeedMoney());
-            println("	Current money: " + currentCategoryProjects[i].getCurrentMoney());
-            println("	Days left: " + currentCategoryProjects[i].getDaysLeft());
+            currentCategoryProjects[i].setPrinter(printer);
+            currentCategoryProjects[i].showShortInfo();
         }
     }
     
@@ -167,16 +163,6 @@ public class KickstarterApp {
     }
     
     public void println(Object o) {
-    	print(o+"\n");
-    }
-    
-    public void showProjectInfo(Project project) {
-            println(project.getName());
-            println("	Short Description: " + project.getShortDescr());
-            println("	Need money: " + project.getNeedMoney());
-            println("	Current money: " + project.getCurrentMoney());
-            println("	Days left: " + project.getDaysLeft());
-            println("	History: " + project.getHistory());
-            println("	Video URL: " + project.getUrlVideo());
+    	print(o + "\n");
     }
 }
