@@ -6,12 +6,14 @@ import java.math.BigInteger;
 public class Project {
 	
 	private static final int DEFAULT_DAYS_LEFT = 365;
+	private static final int ARRAY_INCREMENT = 10;	
 	private String name;
 	private String description;
+	private String url;
 	private BigDecimal requiredFunds;
 	private BigDecimal borrowedFunds;
 	private int daysLeft;
-	
+	private Questionare[] questinaries;
 	
 	
 	public Project(String name, String description, BigDecimal requiredFunds) {
@@ -35,6 +37,28 @@ public class Project {
 	}
 	public int getDaysLeft() {
 		return daysLeft;
+	}
+	public String getUrl() {
+		return url;
+	}
+	public void setUrl(String url) {
+		this.url = url;
+	}
+	public Questionare[] getQuestinaries() {
+		return questinaries;
+	}
+	public void addQuestinary(Questionare questinaries) {
+		checkQuestionare();
+		
+	}
+	private void checkQuestionare() {
+		if (questinaries ==null){
+			questinaries = new Questionare[ARRAY_INCREMENT];
+		} 
+		else {
+			
+		}
+		
 	}
 	
 

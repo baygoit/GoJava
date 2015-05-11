@@ -20,10 +20,10 @@ public class ConsoleKikstarter {
 		printer.printBlock("Citate of the day ",  citationProducer.next().toString());	
 		printCategories();	
 		Category selectedCategory = proposeUserToSelectCategory();
-		proposeUserToSelectProject(selectedCategory);
+		selectProject(selectedCategory);
 	}
 
-	private void proposeUserToSelectProject(Category selectedCategory) {
+	private void selectProject(Category selectedCategory) {
 		Project[] projets = selectedCategory.getProjets();
 		printer.printHeader("Projects: ");
 		for(int index = 0; index< projets.length; index++){
