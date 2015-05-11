@@ -5,18 +5,16 @@ import java.util.Scanner;
 
 public class ConsoleInput implements Input {
 
-	private boolean isNumber = true;
-	private int index;
-
 	public int read() {
-		/*while (isNumber) {
-			try {
-				index = new Scanner(System.in).nextInt();
-				isNumber = false;
-			} catch (InputMismatchException e) {
-				System.out.println("Incorrect input! Try input correct number!");
-			}
-		}*/
-		return index = new Scanner(System.in).nextInt();
+		@SuppressWarnings("resource")
+		Scanner scanner = new Scanner(System.in);
+		int index;
+		try {
+			index = scanner.nextInt();
+		} catch (InputMismatchException e) {
+			System.out.println("Incorrect input! Try input correct number!");
+			index = read();
+		}
+		return index;
 	}
 }
