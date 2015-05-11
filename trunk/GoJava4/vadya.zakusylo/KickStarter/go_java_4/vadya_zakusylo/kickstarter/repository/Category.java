@@ -1,4 +1,4 @@
-package go_java_4.vadya_zakusylo.kickstarterRepository;
+package go_java_4.vadya_zakusylo.kickstarter.repository;
 
 import java.util.Arrays;
 

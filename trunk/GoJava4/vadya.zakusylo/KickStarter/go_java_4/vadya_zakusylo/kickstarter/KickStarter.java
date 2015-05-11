@@ -1,56 +1,51 @@
 package go_java_4.vadya_zakusylo.kickstarter;
 
-import go_java_4.vadya_zakusylo.kickstarterPrinter.Printer;
-import go_java_4.vadya_zakusylo.kickstarterRepository.ArrayCategory;
-import go_java_4.vadya_zakusylo.kickstarterRepository.Category;
-import go_java_4.vadya_zakusylo.kickstarterRepository.Content;
-import go_java_4.vadya_zakusylo.kickstarterRepository.Project;
-import go_java_4.vadya_zakusylo.kickstarterRepository.Quote;
-
-import java.util.Scanner;
+import go_java_4.vadya_zakusylo.kickstarter.input.Input;
+import go_java_4.vadya_zakusylo.kickstarter.output.Output;
+import go_java_4.vadya_zakusylo.kickstarter.repository.Category;
+import go_java_4.vadya_zakusylo.kickstarter.repository.Content;
+import go_java_4.vadya_zakusylo.kickstarter.repository.Project;
+import go_java_4.vadya_zakusylo.kickstarter.repository.Quote;
 
 public class KickStarter {
 	private Quote quote;
 	private Content content;
-	private Printer printer;
+	private Output output;
+	private Input input;
 
-	public ArrayCategory arrayCategory = new ArrayCategory();
-	public Category category;
-	public Project project;
+	private Category category;
+	private Project project;
 
-	public KickStarter(Quote quote, Content content, Printer printer) {
+	public KickStarter(Quote quote, Content content, Output output, Input input) {
 		this.quote = quote;
 		this.content = content;
-		this.printer = printer;
+		this.output = output;
+		this.input = input;
 	}
 
 	void go() {
-		content.initContent();
 		printQuote();
 		chooseCategory();
-		printer.println("Have a nice day!");
+		output.write("Have a nice day!");
 	}
 
 	private void printQuote() {
-		printer.println(quote.chooseQuote());
+		output.write(quote.chooseQuote());
 	}
 
 	private void chooseCategory() {
 		while (true) {
-			Category[] categories = Content.arrayCategory.getCategories();
-			printer.println("\nChoose the category:");
-			for (int index = 0; index < categories.length; index++) {
-				category = categories[index];
-				printer.print(index + 1 + ". ");
-				printer.println(category.getNameCategory());
-			}
-			printer.println("\nInput 0 for exit");
+			Category[] categories = content.arrayCategory.getCategories();
+			output.write("\nChoose the category:");
+			showCategories(categories);
+			output.write("\nInput 0 for exit");
+			output.write("\n--------------------------------------------------------------------------------");
 			int index = inputIndex(categories);
 			if (index == 0) {
 				break;
 			}
 			category = categories[index - 1];
-			printer.println("You chose " + category.getNameCategory());
+			output.write("You chose " + category.getNameCategory());
 			chooseProject();
 		}
 	}
@@ -58,33 +53,42 @@ public class KickStarter {
 	private void chooseProject() {
 		while (true) {
 			Project[] projects = category.getProjects();
-			printer.println("\nChoose the project:");
-			for (int index = 0; index < projects.length; index++) {
-				System.out.print(index + 1 + ". ");
-				project = projects[index];
-				printer.println(project.getName() + "\n\t" + project.getShortDescription()
-						+ "\n\tNeed money: " + project.getNeedMoney() + "\tCurrent money: "
-						+ project.getCurrentMoney() + "\n\tDays left: " + project.getDaysLeft());
-			}
-			printer.println("\nInput 0 for exit");
+			output.write("Choose the project:");
+			showProjects(projects);
+			output.write("\nInput 0 for exit");
+			output.write("--------------------------------------------------------------------------------");
 			int index = inputIndex(projects);
 			if (index == 0) {
 				break;
 			}
 			project = projects[index - 1];
+			output.write("You chose " + project.getFullContent());
 			showProject();
+		}
+	}
+
+	private void showCategories(Category[] categories) {
+		for (int indexCategory = 0; indexCategory < categories.length; indexCategory++) {
+			category = categories[indexCategory];
+			output.write(indexCategory + 1 + ". " + category.getNameCategory());
+		}
+	}
+
+	private void showProjects(Project[] projects) {
+		for (int indexProject = 0; indexProject < projects.length; indexProject++) {
+			project = projects[indexProject];
+			output.write(indexProject + 1 + ". " + project.getShortContent());
 		}
 	}
 
 	private void showProject() {
 		while (true) {
-			printer.println("You chose " + project.getName());
-			printer.println("\nInput 0 for exit");
-			@SuppressWarnings("resource")
-			int index = new Scanner(System.in).nextInt();
+			output.write("\nInput 0 for exit");
+			output.write("--------------------------------------------------------------------------------");
+			int index = input.read();
 			while (index != 0) {
-				printer.println("Input 0 for exit");
-				index = new Scanner(System.in).nextInt();
+				output.write("Input 0 for exit");
+				index = input.read();
 			}
 			if (index == 0) {
 				break;
@@ -92,12 +96,11 @@ public class KickStarter {
 		}
 	}
 
-	@SuppressWarnings("resource")
 	private int inputIndex(Object[] contents) {
-		int index = new Scanner(System.in).nextInt();
+		int index = input.read();
 		while (index < 0 || index > contents.length) {
-			printer.println("Choose one of the variants!");
-			index = new Scanner(System.in).nextInt();
+			output.write("Choose one of the variants!");
+			index = input.read();
 		}
 		return index;
 	}

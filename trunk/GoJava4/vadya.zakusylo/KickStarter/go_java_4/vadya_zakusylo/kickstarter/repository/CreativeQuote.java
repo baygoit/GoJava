@@ -1,7 +1,7 @@
-package go_java_4.vadya_zakusylo.kickstarterRepository;
+package go_java_4.vadya_zakusylo.kickstarter.repository;
 
 public class CreativeQuote extends Quote {
-
+	
 	void initArrayQuotes() {
 		quotes = new String[6];
 		quotes[0] = "Happiness lies in the joy of achievement and the thrill of"
@@ -13,4 +13,5 @@ public class CreativeQuote extends Quote {
 		quotes[4] = "The best way to predict the future is to invent it.\n\n\tAlan Kay";
 		quotes[5] = "You have to speak your dream out loud.\n\n\tKelly Corrigan";
 	}
+	
 }

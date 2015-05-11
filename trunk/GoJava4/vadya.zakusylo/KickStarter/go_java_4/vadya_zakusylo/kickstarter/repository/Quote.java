@@ -1,4 +1,4 @@
-package go_java_4.vadya_zakusylo.kickstarterRepository;
+package go_java_4.vadya_zakusylo.kickstarter.repository;
 
 import java.util.Random;
 
@@ -10,7 +10,7 @@ public abstract class Quote {
 		int randomIndex = chooseRandomIndex();
 		return printQuote(randomIndex);
 	}
-
+	
 	abstract void initArrayQuotes();
 
 	private int chooseRandomIndex() {

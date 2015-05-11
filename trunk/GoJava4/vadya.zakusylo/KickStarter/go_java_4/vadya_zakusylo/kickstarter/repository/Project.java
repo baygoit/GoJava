@@ -1,4 +1,4 @@
-package go_java_4.vadya_zakusylo.kickstarterRepository;
+package go_java_4.vadya_zakusylo.kickstarter.repository;
 
 public class Project {
 	private String name;
@@ -20,39 +20,24 @@ public class Project {
 		this.urlVideo = urlVideo;
 	}
 
-	public String getName() {
-		return name;
+	public String getShortContent() {
+		String shortContent = name + "\n\t" + shortDescription + "\n\tNeed money: " + needMoney
+				+ "\tCurrent money: " + currentMoney + "\n\tDays left: " + daysLeft;
+		return shortContent;
 	}
 
-	public String getShortDescription() {
-		return shortDescription;
-	}
-
-	public double getNeedMoney() {
-		return needMoney;
-	}
-
-	public double getCurrentMoney() {
-		return currentMoney;
+	public String getFullContent() {
+		String fullContent = getShortContent() + "\n\tHistory of the project: " + history
+				+ "\n\tLook video: " + urlVideo;
+		return fullContent;
 	}
 
 	public void setCurrentMoney(int currentMoney) {
 		this.currentMoney = currentMoney;
 	}
 
-	public int getDaysLeft() {
-		return daysLeft;
-	}
-
 	public void setDaysLeft(int daysLeft) {
 		this.daysLeft = daysLeft;
 	}
 
-	public String getHistory() {
-		return history;
-	}
-
-	public String getUrlVideo() {
-		return urlVideo;
-	}
 }

@@ -1,18 +1,22 @@
 package go_java_4.vadya_zakusylo.kickstarter;
 
-import go_java_4.vadya_zakusylo.kickstarterPrinter.Console;
-import go_java_4.vadya_zakusylo.kickstarterPrinter.Printer;
-import go_java_4.vadya_zakusylo.kickstarterRepository.Content;
-import go_java_4.vadya_zakusylo.kickstarterRepository.CreativeQuote;
-import go_java_4.vadya_zakusylo.kickstarterRepository.Quote;
+import go_java_4.vadya_zakusylo.kickstarter.input.ConsoleInput;
+import go_java_4.vadya_zakusylo.kickstarter.input.Input;
+import go_java_4.vadya_zakusylo.kickstarter.output.ConsoleOutput;
+import go_java_4.vadya_zakusylo.kickstarter.output.Output;
+import go_java_4.vadya_zakusylo.kickstarter.repository.Content;
+import go_java_4.vadya_zakusylo.kickstarter.repository.CreativeQuote;
+import go_java_4.vadya_zakusylo.kickstarter.repository.Quote;
 
 public class Runner {
 	private static Quote quote = new CreativeQuote();
 	private static Content content = new Content();
-	private static Printer printer = new Console();
+	private static Output output = new ConsoleOutput();
+	private static Input input = new ConsoleInput();
 
 	public static void main(String[] args) {
-		KickStarter kickStarter = new KickStarter(quote, content, printer);
+		KickStarter kickStarter = new KickStarter(quote, content, output, input);
+		content.initContent();
 		kickStarter.go();
 	}
 
