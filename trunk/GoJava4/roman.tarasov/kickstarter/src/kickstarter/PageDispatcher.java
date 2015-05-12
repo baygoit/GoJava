@@ -2,32 +2,44 @@ package kickstarter;
 
 import kickstarter.Entities.Category;
 import kickstarter.Entities.Project;
-import kickstarter.Repository.CategoryList;
-import kickstarter.Repository.ProjectList;
+import kickstarter.Entities.Quote;
+import kickstarter.Repository.Storage;
 import kickstarter.UserPages.DetailedProject;
 import kickstarter.UserPages.Categories;
 import kickstarter.UserPages.Projects;
 
 public class PageDispatcher {
 	UserInterface ui;
-	CategoryList categories;
-	ProjectList projects;
+	Storage<Category> categories;
+	Storage<Project> projects;
+
 	Categories userCategoriesView;
 	Projects userProjectsView;
 	DetailedProject detailedProjectInfo;
+	Storage<Quote> quotes;
 
-	PageDispatcher(UserInterface ui, CategoryList categories,
-			ProjectList projects) {
+	PageDispatcher(UserInterface ui, Storage<Category> categories,
+			Storage<Project> projects, Storage<Quote> quotes) {
 
 		this.ui = ui;
 		this.categories = categories;
 		this.projects = projects;
+		this.quotes = quotes;
 	}
 
 	void cycleDispatcher() {
+		
 		while (true) {
+			showRandomQuote();
 			selectCategory();
 		}
+	}
+
+	private void showRandomQuote() {
+		Quote randomQuote = quotes.getRandom();
+		ui.display("-----Quote------");
+		ui.display(randomQuote.getQuote());
+		ui.display("----------------");
 	}
 
 	void selectCategory() {
@@ -39,8 +51,12 @@ public class PageDispatcher {
 	}
 
 	void selectProject(Category category) {
-		projects.targetCategory = category;
+		
+		userProjectsView.targetCategory = category;
 		Project project = userProjectsView.selectProject();
+		if(project==null){
+			return;
+		}
 		getDetailedProject(project);
 	}
 

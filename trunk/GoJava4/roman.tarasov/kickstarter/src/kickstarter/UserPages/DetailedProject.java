@@ -2,13 +2,13 @@ package kickstarter.UserPages;
 
 import kickstarter.UserInterface;
 import kickstarter.Entities.Project;
-import kickstarter.Repository.ProjectList;
 
-public class DetailedProject  {
-	ProjectList projects;
+public class DetailedProject {
+
 	UserInterface ui;
-	public DetailedProject( UserInterface ui) {
-			this.ui=ui;
+
+	public DetailedProject(UserInterface ui) {
+		this.ui = ui;
 	}
 
 	public void getDetailedInfo(Project project) {
@@ -29,7 +29,7 @@ public class DetailedProject  {
 			String stringFromUI = ui.inputString();
 			if (stringFromUI.equals("e")) {
 				ui.display("exit");
-				return ;
+				return;
 			}
 			ui.display("input correct command, please");
 		}

@@ -2,22 +2,27 @@ package kickstarter.UserPages;
 
 import kickstarter.UserInterface;
 import kickstarter.Entities.Category;
-import kickstarter.Repository.CategoryList;
-import kickstarter.Repository.ProjectList;
+import kickstarter.Repository.Storage;
 
-public class Categories  {
-	CategoryList list;
-	ProjectList projects;
+public class Categories {
+	Storage<Category> categories;
 	UserInterface ui;
 
-	public Categories(CategoryList list, 
-			UserInterface ui) {
-		this.list = list;
+	public Categories(Storage<Category> categories, UserInterface ui) {
+		this.categories = categories;
 		this.ui = ui;
 	}
 
-	int[] printCategories() {
-		return list.printList(ui);
+	public int[] printCategories() {
+		int pointer = categories.length();
+		int[] options = new int[pointer];
+		for (int index = 0; index < pointer; index++) {
+
+			ui.display(categories.getEntity(index).id + "- "
+					+ categories.getEntity(index).name);
+			options[index] = categories.getEntity(index).id;
+		}
+		return options;
 	}
 
 	public Category selectCategory() {
@@ -39,7 +44,8 @@ public class Categories  {
 				int parsed = Integer.parseInt(stringFromUI);
 				for (int index = 0; index < options.length; index++) {
 					if (parsed == options[index]) {
-						Category categoryToUserProjectsView = list.get(index);
+						Category categoryToUserProjectsView = categories
+								.getEntity(index);
 						return categoryToUserProjectsView;
 					}
 				}

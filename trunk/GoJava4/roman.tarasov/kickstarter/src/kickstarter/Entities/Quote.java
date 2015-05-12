@@ -7,9 +7,7 @@ public class Quote {
 		String newQuote = new String(quote);
 		this.quote = newQuote;
 	}
-
 	public String getQuote() {
 		return quote;
 	}
-
 }
