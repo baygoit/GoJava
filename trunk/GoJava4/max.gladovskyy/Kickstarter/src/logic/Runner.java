@@ -19,8 +19,6 @@ public class Runner {
 	public Runner(Output output, Input input) {
 		this.output = output;
 		this.input = input;
-		this.dataSource = dataSource;
-
 	}
 
 	public void run() {
