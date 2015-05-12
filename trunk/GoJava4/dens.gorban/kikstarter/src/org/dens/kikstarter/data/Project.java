@@ -48,6 +48,7 @@ public class Project {
 		return questinaries;
 	}
 	public void addQuestinary(Questionare questinaries) {
+		//todo: realise add questionare
 		checkQuestionare();
 		
 	}
