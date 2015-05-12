@@ -9,13 +9,13 @@ public class Quotes {
 	public Quotes() {
 		quotes = new String[] {
 				"\"Start by doing what's necessary; then do what's possible;\nand suddenly you are "
-				+ "doing the impossible.\"",
+						+ "doing the impossible.\"",
 				"\"Perfection is not attainable, but if we chase perfection\nwe can catch "
-				+ "excellence.\"",
+						+ "excellence.\"",
 				"\"My favorite things in life don't cost any money. It's\nreally clear that the "
-				+ "most precious resource we all have is time.\"",
+						+ "most precious resource we all have is time.\"",
 				"\"You have to learn the rules of the game. And then you have\nto play better than "
-				+ "anyone else\"",
+						+ "anyone else\"",
 				"\"Life isn't about finding yourself. Life is about creating\nyourself.\"" };
 	}
 
