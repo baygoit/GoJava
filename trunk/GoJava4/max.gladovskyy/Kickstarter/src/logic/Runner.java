@@ -9,31 +9,35 @@ import datasource.DataSource;
 import entities.*;
 
 public class Runner {
+	private static final int CATEGORY_LEVEL = 0;
+	private static final int PROJECT_LEVEL = 0;
 	private Output output;
 	private Input input;
 	private DataSource dataSource;
-	
+	private int[] menuCurrentPosition = new int[2];
+
 	public Runner(Output output, Input input, DataSource dataSource) {
 		this.output = output;
 		this.input = input;
 		this.dataSource = dataSource;
+
 	}
 
 	public void run() {
-		int[] menuCurrentPosition = new int[2];
+		
+		
 		while (true) {
-			if (menuCurrentPosition[0] == 0 && menuCurrentPosition[1] == 0) {
-			Quote quote = new Quote();
-			List<String> categorys = dataSource.getCategorysNames();
-			Page mainPage = new MainPage(quote, categorys);
-			output.print(mainPage);
-			} else if (menuCurrentPosition[1] == 0) {
-				String categoryName = dataSource.get
+			if (menuCurrentPosition[CATEGORY_LEVEL] == 0) {
+			output.print(new MainPage().getPage());
+			} else if (menuCurrentPosition[PROJECT_LEVEL] == 0) {
+				CategoryPage categoryPage = new CategoryPage(menuCurrentPosition[CATEGORY_LEVEL]);
+				output.print(categoryPage.getPage());
 			} else {
-				
+				ProjectPage projectPage = new ProjectPage(menuCurrentPosition[PROJECT_LEVEL]);
+				output.print(projectPage.getPage());
 			}
+			
 		}
 		
 	}
-
 }
