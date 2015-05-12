@@ -16,26 +16,36 @@ public class Projects {
 		this.ui = ui;
 	}
 
-	public Storage<Project> printProjects() {
-		Storage<Project> projectsByCategory = new EntityStorage<Project>();
+	public Storage<Project> sortProjectsByCategory() {
+		Storage<Project> sortedProjects = new EntityStorage<Project>();
 		int pointer = projects.length();
 		for (int index = 0; index < pointer; index++) {
 			if (projects.getEntity(index).category.id == targetCategory.id) {
-				ui.display(projects.getEntity(index).id + "- "
-						+ projects.getEntity(index).name);
-				projectsByCategory.add(projects.getEntity(index));
+				sortedProjects.add(projects.getEntity(index));
 			}
 		}
-		return projectsByCategory;
+		return sortedProjects;
+	}
+
+	void printProjectsInfo(Storage<Project> sortedToSelect) {
+		for (int index = 0; index < sortedToSelect.length(); index++) {
+			Project project = sortedToSelect.getEntity(index);
+			ui.display("ID:<" + project.id + "> name:<" + project.name
+					+ "> short desc.:<" + project.shortDescription
+					+ "> goal:<" + project.goal + "> pledged:<"+project.pledged+"> days to go:<"+project.daysToGo+">");
+		}
+
 	}
 
 	public Project selectProject() {
 		ui.display("________________________");
 		ui.display("|     Projects         |");
 		ui.display("|______________________|");
-		Storage<Project> options = printProjects();
+		Storage<Project> sortedToSelect = sortProjectsByCategory();
+		printProjectsInfo(sortedToSelect);
+
 		ui.display("------------------------");
-		ui.display("Select Project:");
+		ui.display("Select Project by ID:");
 		while (true) {
 			ui.display(" e- exit to Categories ");
 			String stringFromUI = ui.inputString();
@@ -45,9 +55,9 @@ public class Projects {
 			}
 			try {
 				int parsed = Integer.parseInt(stringFromUI);
-				for (int index = 0; index < options.length(); index++) {
-					if (parsed == options.getEntity(index).id) {
-						Project projectToDetailedView = options
+				for (int index = 0; index < sortedToSelect.length(); index++) {
+					if (parsed == sortedToSelect.getEntity(index).id) {
+						Project projectToDetailedView = sortedToSelect
 								.getEntity(index);
 						return projectToDetailedView;
 					}

@@ -18,8 +18,8 @@ public class Categories {
 		int[] options = new int[pointer];
 		for (int index = 0; index < pointer; index++) {
 
-			ui.display(categories.getEntity(index).id + "- "
-					+ categories.getEntity(index).name);
+			ui.display("ID:<"+categories.getEntity(index).id + "> name:<"
+					+ categories.getEntity(index).name+">");
 			options[index] = categories.getEntity(index).id;
 		}
 		return options;
@@ -31,7 +31,7 @@ public class Categories {
 		ui.display("=========================");
 		int[] options = printCategories();
 		ui.display("------------------------");
-		ui.display("Select Category:");
+		ui.display("Select Category by ID:");
 
 		while (true) {
 			ui.display(" e- exit  ");

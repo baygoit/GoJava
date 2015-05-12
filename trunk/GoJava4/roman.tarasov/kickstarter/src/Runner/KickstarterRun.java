@@ -35,7 +35,9 @@ public class KickstarterRun {
 
 		project = new Project("Create electrobike", category);
 		project.description = "high efficiency";
+		project.shortDescription = "short description";
 		project.history = "history of bike creation";
+		project.linkToVideo = "www.link.to.demo.video";
 		project.pledged = 25;
 		project.goal = 2000;
 		project.id = 23;

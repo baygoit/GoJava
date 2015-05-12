@@ -15,13 +15,16 @@ public class DetailedProject {
 		ui.display("________________________");
 		ui.display("|Detailed project info |");
 		ui.display("|______________________|");
-		ui.display("category : " + project.category.name);
-		ui.display("name     : " + project.name);
-		ui.display("id       : " + project.id);
-		ui.display("description : " + project.description);
-		ui.display("goal     : " + project.goal);
-		ui.display("pledged  : " + project.pledged);
-		ui.display("expire date     : " + project.expireDate);
+		ui.display("category :<" + project.category.name+">");
+		ui.display("name     :<" + project.name+">");
+		ui.display("ID       :<" + project.id+">");
+		ui.display("description:<" + project.description+">");
+		ui.display("goal     :<" + project.goal+">");
+		ui.display("pledged  :<" + project.pledged+">");
+		ui.display("days to go :<" + project.daysToGo+">");
+		ui.display("history :<" + project.history+">");
+		ui.display("link to video :<" + project.linkToVideo+">");
+		
 
 		ui.display("------------------------");
 		while (true) {
