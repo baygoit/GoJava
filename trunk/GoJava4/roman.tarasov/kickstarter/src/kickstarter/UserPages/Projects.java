@@ -7,8 +7,8 @@ import kickstarter.Repository.EntityStorage;
 import kickstarter.Repository.Storage;
 
 public class Projects {
-	UserInterface ui;
-	Storage<Project> projects;
+	private UserInterface ui;
+	private Storage<Project> projects;
 	public Category targetCategory;
 
 	public Projects(Storage<Project> projects, UserInterface ui) {
@@ -20,7 +20,7 @@ public class Projects {
 		Storage<Project> sortedProjects = new EntityStorage<Project>();
 		int pointer = projects.length();
 		for (int index = 0; index < pointer; index++) {
-			if (projects.getEntity(index).category.id == targetCategory.id) {
+			if (projects.getEntity(index).categoryID == targetCategory.id) {
 				sortedProjects.add(projects.getEntity(index));
 			}
 		}

@@ -5,7 +5,7 @@ import kickstarter.Entities.Project;
 
 public class DetailedProject {
 
-	UserInterface ui;
+	private UserInterface ui;
 
 	public DetailedProject(UserInterface ui) {
 		this.ui = ui;
@@ -15,7 +15,6 @@ public class DetailedProject {
 		ui.display("________________________");
 		ui.display("|Detailed project info |");
 		ui.display("|______________________|");
-		ui.display("category :<" + project.category.name+">");
 		ui.display("name     :<" + project.name+">");
 		ui.display("ID       :<" + project.id+">");
 		ui.display("description:<" + project.description+">");
@@ -24,7 +23,10 @@ public class DetailedProject {
 		ui.display("days to go :<" + project.daysToGo+">");
 		ui.display("history :<" + project.history+">");
 		ui.display("link to video :<" + project.linkToVideo+">");
-		
+		ui.display("comments :");
+		for (int index=0;index<project.getCommentLength();index++){
+			ui.display("user ID:<"+project.usersID[index]+">  comment:<"+project.comment[index]+">");
+		}
 
 		ui.display("------------------------");
 		while (true) {

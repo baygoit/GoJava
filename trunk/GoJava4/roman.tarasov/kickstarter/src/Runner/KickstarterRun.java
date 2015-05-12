@@ -41,17 +41,14 @@ public class KickstarterRun {
 		project.pledged = 25;
 		project.goal = 2000;
 		project.id = 23;
+		project.addComment(0,"question");
+		project.addComment(1, "answer");
 		projects.add(project);
 
 		project = new Project("Create quadrocopter", category);
 		project.id = 4;
 		projects.add(project);
 
-		/*
-		 * category = new Category("Technology"); kickstarter.add(category);
-		 * project = new Project("Create quadrocopter", category);
-		 * kickstarter.add(project);
-		 */
 		kickstarter.addCategories(categories);
 		kickstarter.addProjects(projects);
 		kickstarter.add(quotes);

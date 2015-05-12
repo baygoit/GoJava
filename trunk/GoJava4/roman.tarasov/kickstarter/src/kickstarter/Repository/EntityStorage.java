@@ -6,15 +6,14 @@ public class EntityStorage<T> implements Storage<T> {
 	final int INIT_SIZE = 10;
 	final int ADD_TO_SIZE = 10;
 	final int START_INDEX = 0;
-	Object[] objects = new Object[INIT_SIZE];
+	private Object[] objects = new Object[INIT_SIZE];
 	int pointer = START_INDEX;
 
 	@Override
 	public void add(T entity) {
 		if (pointer >= objects.length) {
 			Object[] newObjects = new Object[objects.length + ADD_TO_SIZE];
-			System.arraycopy(objects, START_INDEX, newObjects, START_INDEX,
-					objects.length);
+			System.arraycopy(objects, 0, newObjects, 0, objects.length);
 			objects = newObjects;
 			objects[pointer] = entity;
 		}

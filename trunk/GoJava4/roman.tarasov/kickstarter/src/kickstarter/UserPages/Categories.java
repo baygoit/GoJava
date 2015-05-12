@@ -5,15 +5,15 @@ import kickstarter.Entities.Category;
 import kickstarter.Repository.Storage;
 
 public class Categories {
-	Storage<Category> categories;
-	UserInterface ui;
+	private Storage<Category> categories;
+	private UserInterface ui;
 
 	public Categories(Storage<Category> categories, UserInterface ui) {
 		this.categories = categories;
 		this.ui = ui;
 	}
 
-	public int[] printCategories() {
+	private int[] printCategories() {
 		int pointer = categories.length();
 		int[] options = new int[pointer];
 		for (int index = 0; index < pointer; index++) {
