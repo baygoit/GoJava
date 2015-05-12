@@ -1,6 +1,12 @@
-package kickstarter;
+package Runner;
 
-public class KickstarterStart {
+import kickstarter.Kickstarter;
+import kickstarter.Entities.Category;
+import kickstarter.Entities.Project;
+import kickstarter.Repository.CategoryList;
+import kickstarter.Repository.ProjectList;
+
+public class KickstarterRun {
 
 	public static void main(String[] args) {
 

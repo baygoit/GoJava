@@ -1,11 +1,14 @@
-package kickstarter;
+package kickstarter.Repository;
+
+import kickstarter.UserInterface;
+import kickstarter.Entities.Category;
 
 public class CategoryList {
 	Category[] categories = new Category[10];
 	int[] deleted = new int[10];
 	int pointer = 0;
 
-	void addCategory(Category categoryToList) {
+	public void addCategory(Category categoryToList) {
 		if (pointer >= categories.length) {
 			Category[] newCategories = new Category[categories.length + 10];
 			System.arraycopy(categories, 0, newCategories, 0, categories.length);
@@ -25,7 +28,7 @@ public class CategoryList {
 		// TODO
 	}
 
-	int[] printList(UserInterface ui) {
+	public int[] printList(UserInterface ui) {
 		if (pointer == 0) {
 			ui.display("CategoryList null");
 			return null;

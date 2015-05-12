@@ -1,13 +1,17 @@
-package kickstarter;
+package kickstarter.Repository;
+
+import kickstarter.UserInterface;
+import kickstarter.Entities.Category;
+import kickstarter.Entities.Project;
 
 public class ProjectList {
 	Project[] projects = new Project[10];
 	int[] deleted = new int[10];
 	int pointer = 0;
-	Category targetCategory;
+	public Category targetCategory;
 	Project targetProject;
 
-	void addProject(Project projectToList) {
+	public void addProject(Project projectToList) {
 		if (pointer >= projects.length) {
 			Project[] newProjects = new Project[projects.length + 10];
 			System.arraycopy(projects, 0, newProjects, 0, projects.length);
@@ -26,7 +30,7 @@ public class ProjectList {
 		// TODO
 	}
 
-	Project[] printList(UserInterface ui) {
+	public Project[] printList(UserInterface ui) {
 		if (pointer == 0) {
 			ui.display("ProjectList null");
 			return null;

@@ -1,10 +1,14 @@
-package kickstarter;
+package kickstarter.UserPages;
 
-public class PageUserProjectsView {
+import kickstarter.UserInterface;
+import kickstarter.Entities.Project;
+import kickstarter.Repository.ProjectList;
+
+public class Projects {
 	ProjectList projects;
 	UserInterface ui;
 
-	public PageUserProjectsView(ProjectList projects, UserInterface ui) {
+	public Projects(ProjectList projects, UserInterface ui) {
 		this.projects = projects;
 		this.ui = ui;
 	}
@@ -41,5 +45,4 @@ public class PageUserProjectsView {
 			}
 		}
 	}
-
 }

@@ -1,12 +1,20 @@
 package kickstarter;
 
+import kickstarter.Entities.Category;
+import kickstarter.Entities.Project;
+import kickstarter.Repository.CategoryList;
+import kickstarter.Repository.ProjectList;
+import kickstarter.UserPages.DetailedProject;
+import kickstarter.UserPages.Categories;
+import kickstarter.UserPages.Projects;
+
 public class PageDispatcher {
 	UserInterface ui;
 	CategoryList categories;
 	ProjectList projects;
-	PageUserCategoriesView userCategoriesView;
-	PageUserProjectsView userProjectsView;
-	DetailedProjectInfo detailedProjectInfo;
+	Categories userCategoriesView;
+	Projects userProjectsView;
+	DetailedProject detailedProjectInfo;
 
 	PageDispatcher(UserInterface ui, CategoryList categories,
 			ProjectList projects) {
@@ -41,9 +49,9 @@ public class PageDispatcher {
 	}
 
 	public void startDispatcher() {
-		userCategoriesView = new PageUserCategoriesView(categories, ui);
-		userProjectsView = new PageUserProjectsView(projects, ui);
-		detailedProjectInfo = new DetailedProjectInfo(ui);
+		userCategoriesView = new Categories(categories, ui);
+		userProjectsView = new Projects(projects, ui);
+		detailedProjectInfo = new DetailedProject(ui);
 		cycleDispatcher();
 	}
 }

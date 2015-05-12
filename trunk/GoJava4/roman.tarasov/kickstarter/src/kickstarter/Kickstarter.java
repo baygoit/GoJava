@@ -1,5 +1,8 @@
 package kickstarter;
 
+import kickstarter.Repository.CategoryList;
+import kickstarter.Repository.ProjectList;
+
 public class Kickstarter {
 
 	CategoryList categories;
@@ -12,11 +15,11 @@ public class Kickstarter {
 		dispatcher.startDispatcher();
 	}
 
-	void add(CategoryList listCategories) {
+	public void add(CategoryList listCategories) {
 		this.categories = listCategories;
 	}
 
-	void add(ProjectList listProjects) {
+ public void add(ProjectList listProjects) {
 		this.projects = listProjects;
 	}
 

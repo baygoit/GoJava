@@ -1,14 +1,18 @@
-package kickstarter;
+package kickstarter.UserPages;
 
-public class PageUserCategoriesView  {
+import kickstarter.UserInterface;
+import kickstarter.Entities.Category;
+import kickstarter.Repository.CategoryList;
+import kickstarter.Repository.ProjectList;
+
+public class Categories  {
 	CategoryList list;
 	ProjectList projects;
 	UserInterface ui;
 
-	PageUserCategoriesView(CategoryList list, 
+	public Categories(CategoryList list, 
 			UserInterface ui) {
 		this.list = list;
-		//this.projects = projects;
 		this.ui = ui;
 	}
 
@@ -45,6 +49,4 @@ public class PageUserCategoriesView  {
 			}
 		}
 	}
-
-
 }

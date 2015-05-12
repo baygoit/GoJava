@@ -1,13 +1,17 @@
-package kickstarter;
+package kickstarter.UserPages;
 
-public class DetailedProjectInfo  {
+import kickstarter.UserInterface;
+import kickstarter.Entities.Project;
+import kickstarter.Repository.ProjectList;
+
+public class DetailedProject  {
 	ProjectList projects;
 	UserInterface ui;
-	public DetailedProjectInfo( UserInterface ui) {
+	public DetailedProject( UserInterface ui) {
 			this.ui=ui;
 	}
 
-	void getDetailedInfo(Project project) {
+	public void getDetailedInfo(Project project) {
 		ui.display("________________________");
 		ui.display("|Detailed project info |");
 		ui.display("|______________________|");
