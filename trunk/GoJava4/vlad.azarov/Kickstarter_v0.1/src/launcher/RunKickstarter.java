@@ -3,8 +3,9 @@ package launcher;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-import entities.*;
-import storages.*;
+import entities.Category;
+import entities.Project;
+import entities.Quotes;
 
 public class RunKickstarter {
 
@@ -12,34 +13,81 @@ public class RunKickstarter {
 
 	public static void main(String[] args) {
 
-		Category videoCategory = new Category("Video");
-		Category designCategory = new Category("Design");
+		Category designCategory = new Category("DESIGN");
+		Category technologyCategory = new Category("TECHNOLOGY");
 
-		Project videoProject01 = new Project("Some video project #1", 0001,
-				"Short description", 5000, 365, "Long description", null, null);
-		Project videoProject02 = new Project("Some video project #2", 0002,
-				"Short description", 250000, 25, "Long description", null, null);
-		Project videoProject03 = new Project("Some video project #3", 0003,
-				"Short description", 500150, 96, "Long description", null, null);
-		Project videoProject04 = new Project("Some video project #4", 0004,
-				"Short description", 1000000, 96, "Long description", null,
-				null);
-		Project[] videoProjects = { videoProject01, videoProject02,
-				videoProject03, videoProject04 };
-
-		Project designProject01 = new Project("Some design roject #1", 0005,
-				"Short description", 1000000, 226, "Long description", null,
-				null);
-		Project designProject02 = new Project("Some design roject #2", 0006,
-				"Short description", 100, 3, "Long description", null, null);
-		Project designProject03 = new Project("Some design roject #3", 0007,
-				"Short description", 5600, 26, "Long description", null, null);
+		Project designProject01 = new Project(
+				"SNAP",
+				"Design Your Own Furniture",
+				15000,
+				27000,
+				30,
+				"With SNAP you can create endless solutions for your living space. You can "
+						+ "transform any surface into a unique piece of furniture.",
+				"http://www.youtube.com/01",
+				"How do I choose the color combination?");
+		Project designProject02 = new Project("HYDAWAY",
+				"A Pocket-Sized Water Bottle Fit for any Adventure", 20000,
+				181437, 3,
+				"HYDAWAY is a handy alternative to disposable plastic water bottles - it folds"
+						+ "down easily to fit in almost any pocket!",
+				"http://www.youtube.com/0143534",
+				"How much is the bottle weight");
+		Project designProject03 = new Project(
+				"Dash 4.0 Wallet",
+				"A Minimal Wallet Redefined",
+				5000,
+				46848,
+				52,
+				"The ORIGINAL quickdraw wallet for minimalists. Carry the things you need, and "
+						+ "access them easily.",
+				"http://www.youtube.com/0143534",
+				"What are the dimensions of the wallet?");
+		Project designProject04 = new Project(
+				"USB ChargeDoubler",
+				"Double your charging speed!",
+				2750,
+				2140,
+				32,
+				"“THE ORIGINAL” Up to 200% charging speed for iPhone® & Android™. No data theft. "
+						+ "The magnetic usb cable for your keyring.",
+				"http://www.youtube.com/0143534", "Have a question?");
 		Project[] designProjects = { designProject01, designProject02,
-				designProject03 };
+				designProject03, designProject04 };
 
-		videoCategory.setProjects(videoProjects);
+		Project technologyProject01 = new Project(
+				"FireFly Hand",
+				"Light up your life",
+				3500,
+				470,
+				25,
+				"FireFly Hand is the next generation electric "
+						+ "flashlight, which is capable of making your life significantly easier.​",
+				"http://www.youtube.com/0143534", "Have a question?");
+		Project technologyProject02 = new Project(
+				"Cubit",
+				"The Make Anything Platform",
+				50000,
+				169,
+				34,
+				"A platform that brings together plug & play hardware and drag & drop software "
+						+ "to allow everyone to create and invent!",
+				"http://www.youtube.com/0143534", "Have a question?");
+		Project technologyProject03 = new Project(
+				"Noki",
+				"The smart doorlock for Europe",
+				125000,
+				119082,
+				44,
+				"Noki is the first smart doorlock for Europe. It opens your door when you come "
+				+ "home and locks it when you leave.",
+				"http://www.youtube.com/031234", "Have a question?");
+		Project[] technologyProjects = { technologyProject01,
+				technologyProject02, technologyProject03 };
+
 		designCategory.setProjects(designProjects);
-		Category[] categoryArray = { videoCategory, designCategory };
+		technologyCategory.setProjects(technologyProjects);
+		Category[] categoryArray = { designCategory, technologyCategory };
 
 		boolean isExit = false;
 		while (!isExit) {
@@ -86,7 +134,7 @@ public class RunKickstarter {
 			System.out.println();
 			System.out.println("Press 0 for exit from this category");
 			System.out
-					.println("==============================================");
+					.println("====================================================================");
 
 			int keyCode = readUserInput();
 			if (keyCode == 0) {
@@ -110,12 +158,15 @@ public class RunKickstarter {
 		for (int i = 0; i < currentCategoryProjects.length; i++) {
 			System.out.print("  " + (i + 1) + ": ");
 			System.out.println(currentCategoryProjects[i].getName());
-			System.out.println("  Short Description: " + currentCategoryProjects[i].getBrief() );
-			System.out.println("  Pledged: " + currentCategoryProjects[i].getPledged());
-			System.out.println("  Days to go: " + currentCategoryProjects[i].getDaysToGo());
+			System.out.println("  Short Description: "
+					+ currentCategoryProjects[i].getBrief());
+			System.out.println("  Pledged: "
+					+ currentCategoryProjects[i].getPledged());
+			System.out.println("  Days to go: "
+					+ currentCategoryProjects[i].getDaysToGo());
 		}
 	}
-	
+
 	public static void showProjectInfo(Project project) {
 		System.out.println(project.getName());
 		System.out.println("  Short Description: " + project.getBrief());
@@ -125,16 +176,17 @@ public class RunKickstarter {
 		System.out.println("  Video link: " + project.getLink());
 		System.out.println("  Questions/Answers " + project.getFAQ());
 	}
-	
+
 	private static void showProjectMenu(Project project) {
-		while(true) {
-			
+		while (true) {
+
 			showProjectInfo(project);
-			
+
 			System.out.println();
 			System.out.println("Press 0 to return back");
-			System.out.println("-------------------------------------------");
-			
+			System.out
+					.println("------------------------------------------------------------------");
+
 			int keyCode = readUserInput();
 			if (keyCode == 0) {
 				break;
@@ -142,9 +194,7 @@ public class RunKickstarter {
 				System.out.println("Wrong code!");
 			}
 		}
-		
+
 	}
-	
-	
 
 }
