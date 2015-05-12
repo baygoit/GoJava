@@ -3,8 +3,13 @@ package Runner;
 import kickstarter.Kickstarter;
 import kickstarter.Entities.Category;
 import kickstarter.Entities.Project;
+import kickstarter.Entities.Quote;
 import kickstarter.Repository.CategoryList;
+import kickstarter.Repository.EntityStorage;
+import kickstarter.Repository.QuoteList;
+import kickstarter.Repository.Storage;
 import kickstarter.Repository.ProjectList;
+//import kickstarter.Repository.QuoteList;
 
 public class KickstarterRun {
 
@@ -13,6 +18,22 @@ public class KickstarterRun {
 		Kickstarter kickstarter = new Kickstarter();
 		CategoryList categories = new CategoryList();
 		ProjectList projects = new ProjectList();
+		Storage<Quote> quotes =new EntityStorage<Quote>();
+
+		Quote quote = new Quote();
+		quote.setQuote("first quote");
+		quotes.add(quote);
+		
+		quote = new Quote();
+		quote.setQuote("second quote");
+		quotes.add(quote);
+		
+		Quote concrete =quotes.getEntity(0);
+		System.out.println(concrete.getQuote());
+		concrete =quotes.getEntity(1);
+		System.out.println(concrete.getQuote());
+		
+		
 		Project project;
 		Category category = new Category("Social");
 		category.id = 2;
