@@ -1,15 +1,15 @@
 package entities;
 
-public abstract class Project {
+public class Project {
 	
-	protected String name;
-	protected int projectID;
-	protected String brief;
-	protected int pledged;
-	protected int daysToGo;
-	protected String description;
-	protected String link;
-	protected String FAQ;
+	private String name;
+	private int projectID;
+	private String brief;
+	private int pledged;
+	private int daysToGo;
+	private String description;
+	private String link;
+	private String FAQ;
 	
 	public Project() {
 	}
@@ -93,14 +93,6 @@ public abstract class Project {
 		FAQ = fAQ;
 	}
 
-	public void showShortProjectMenu() {
-		System.out.println(name);
-		System.out.println(brief);
-	}
-	
-	public abstract void showProject();
-
-	
 }
 
 

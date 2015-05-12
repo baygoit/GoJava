@@ -2,28 +2,27 @@ package entities;
 
 public class Category {
 	
-	private String[] categoryName;
-	private int[] categoryID;
-	Project[] projects; 
+	private String name;
+	private Project[] projects;
 	
-	public Category() {
-		categoryName = new String[] {
-				"[1] Art",
-				"[2] Design",
-				"[3] Games",
-				"[4] Technology"
-				};	
+	public Category(String name) {
+		this.name = name;
 	}
-	
-	
-	public void showCategoryMenu() {
-		System.out.println("CATEGORIES:");
-		for(String category : categoryName) {
-			System.out.printf("\n\t%s",category);
-		}
-		System.out.println();
-		System.out.println("--------------------------------------------------------------------");
+
+	public String getName() {
+		return name;
 	}
-	
-		
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Project[] getProjects() {
+		return projects;
+	}
+
+	public void setProjects(Project[] projects) {
+		this.projects = projects;
+	}
+			
 }
