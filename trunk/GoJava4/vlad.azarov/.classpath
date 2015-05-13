@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="JavaBasics/anagram/src"/>
+	<classpathentry kind="src" path="JavaBasics/distance/src"/>
+	<classpathentry kind="src" path="JavaBasics/hello_world/src"/>
+	<classpathentry kind="src" path="JavaBasics/lonely_number/src"/>
+	<classpathentry kind="src" path="JavaBasics/long_division/src"/>
+	<classpathentry kind="src" path="Kickstarter_v0.1/src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="output" path="Kickstarter_v0.1/bin"/>
+</classpath>
