@@ -49,7 +49,7 @@ public class RunKickstarter {
 		2750,
 		2140,
 		32,
-		"“THE ORIGINAL” Up to 200% charging speed for iPhone® & Android™. No data theft. "
+		"THE ORIGINAL Up to 200% charging speed for iPhone� & Android. No data theft. "
 			+ "The magnetic usb cable for your keyring.",
 		"http://www.youtube.com/0143534", "Have a question?");
 	Project[] designProjects = { designProject01, designProject02,
