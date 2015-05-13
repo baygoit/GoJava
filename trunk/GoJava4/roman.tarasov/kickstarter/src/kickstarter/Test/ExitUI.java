@@ -3,7 +3,7 @@ package kickstarter.Test;
 import kickstarter.UserInterface;
 
 
-public class TestUI implements  UserInterface {
+public class ExitUI implements  UserInterface {
 
 	@Override
 	public String inputString() {

@@ -84,6 +84,20 @@ public class KickstarterRun {
 		comments = new Comments(project);
 		comments.addComment(3, "What a weight of bike?");
 		comments.addComment(2, "The weight of bike is 15 kilo");
+		comments.addComment(3, "What a weight of bike?");
+		comments.addComment(2, "The weight of bike is 15 kilo");
+		comments.addComment(3, "What a weight of bike?");
+		comments.addComment(2, "The weight of bike is 15 kilo");
+		comments.addComment(3, "What a weight of bike?");
+		comments.addComment(2, "The weight of bike is 15 kilo");
+		comments.addComment(3, "What a weight of bike?");
+		comments.addComment(2, "The weight of bike is 15 kilo");
+		comments.addComment(3, "What a weight of bike?");
+		comments.addComment(2, "The weight of bike is 15 kilo");
+		comments.addComment(3, "What a weight of bike?");
+		comments.addComment(2, "The weight of bike is 15 kilo");
+		comments.addComment(3, "What a weight of bike?");
+		comments.addComment(2, "The weight of bike is 15 kilo");
 		allComments.add(comments);
 
 		projects.add(project);

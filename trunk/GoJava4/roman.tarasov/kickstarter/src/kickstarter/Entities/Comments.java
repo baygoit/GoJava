@@ -15,13 +15,15 @@ public class Comments {
 	}
 
 	public void addComment(int userID, String newComment) {
-		if (commentIndex >= comment.length) {
+		int len =comment.length;
+		if (commentIndex >= len) {
 			String[] newComments = new String[comment.length + ADD_TO_SIZE];
 			System.arraycopy(comment, 0, newComments, 0, comment.length);
 			comment = newComments;
 
-			int[] newUsersID = new int[comment.length + ADD_TO_SIZE];
-			System.arraycopy(usersID, 0, newUsersID, 0, comment.length);
+			int[] newUsersID = new int[len + ADD_TO_SIZE];
+			System.arraycopy(usersID, 0, newUsersID, 0, getCommentLength());
+		
 			usersID = newUsersID;
 
 		}

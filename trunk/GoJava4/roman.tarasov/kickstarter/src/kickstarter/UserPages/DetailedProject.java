@@ -15,10 +15,12 @@ public class DetailedProject {
 		this.allComments = allComments;
 	}
 
-	Comments selectCommentsToProject(Project project) {
-		for (int index = 0; index < allComments.length(); index++) {
-			if (allComments.getEntity(index).projectID == project.id) {
-				return allComments.getEntity(index);
+	public Comments selectCommentsToProject(Project project) {
+		if (project != null) {
+			for (int index = 0; index < allComments.length(); index++) {
+				if (allComments.getEntity(index).projectID == project.id) {
+					return allComments.getEntity(index);
+				}
 			}
 		}
 		return null;
@@ -37,7 +39,7 @@ public class DetailedProject {
 		ui.display("history :<" + project.history + ">");
 		ui.display("link to video :<" + project.linkToVideo + ">");
 		ui.display("comments :");
-		
+
 		Comments comments = selectCommentsToProject(project);
 		if (comments != null) {
 			for (int index = 0; index < comments.getCommentLength(); index++) {
