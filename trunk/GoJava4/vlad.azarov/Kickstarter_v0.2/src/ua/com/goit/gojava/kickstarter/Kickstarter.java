@@ -2,6 +2,7 @@ package ua.com.goit.gojava.kickstarter;
 
 import java.util.Arrays;
 import java.util.Random;
+import java.util.Scanner;
 
 public class Kickstarter {
 
@@ -36,6 +37,11 @@ public class Kickstarter {
 	System.out.println();
 	System.out.println("Choose the category:");
 	System.out.println(Arrays.toString(categories.getCategories()));
+	
+	Scanner scanner = new Scanner(System.in);
+	int categoryIndex = scanner.nextInt();
+	String categoryName = categories.getName(categoryIndex);
+	System.out.println("You chosed " + categoryName);
 	
     }
 }

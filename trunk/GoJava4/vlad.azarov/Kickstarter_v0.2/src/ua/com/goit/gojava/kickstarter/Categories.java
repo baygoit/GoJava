@@ -13,8 +13,13 @@ public class Categories {
     public String[] getCategories() {
 	String[] result = new String[count];
 	for (int index = 0; index < this.count; index++) {
-	    result[index] = categories[index].getName();
+	    result[index] = String.valueOf(index) + " - " + categories[index].getName();
 	}
 	return result;
     }
+
+    public String getName(int index) {
+	return categories[index].getName();
+    }
+
 }
