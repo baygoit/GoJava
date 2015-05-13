@@ -34,14 +34,17 @@ public class Runner {
 		project1.setHistory("History1");
 		project1.setLink("www.project1.com");
 		project1.setQuestionsAndAnswers("why1");
+		
 		Project project2 = new Project("velo track", "velo track in Kiev", 100000, 50000, 200, sport);
 		project2.setHistory("History2");
 		project2.setLink("www.project2.com");
 		project2.setQuestionsAndAnswers("why2");
+		
 		Project project3 = new Project("IT-school", "IT - future of Ukraine", 1000000, 700000, 1000, business);
 		project3.setHistory("History3");
 		project3.setLink("www.project3.com");
 		project3.setQuestionsAndAnswers("why3");
+		
 		ProjectsStorage projectsStorage = new ProjectsStorage();
 		projectsStorage.add(project1);
 		projectsStorage.add(project2);
