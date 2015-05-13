@@ -16,7 +16,8 @@ public class Kickstarter {
 	private CategoriesStorage categories;
 	private ProjectsStorage projects;
 
-	public Kickstarter(UserInterface userInterface, QuotesStorage quotes, CategoriesStorage categories, ProjectsStorage projects) {
+	public Kickstarter(UserInterface userInterface, QuotesStorage quotes, CategoriesStorage categories,
+			ProjectsStorage projects) {
 		this.userInterface = userInterface;
 		this.quotes = quotes;
 		this.categories = categories;
