@@ -1,6 +1,7 @@
 package kickstarter;
 
 import kickstarter.Entities.Category;
+import kickstarter.Entities.Comments;
 import kickstarter.Entities.Project;
 import kickstarter.Entities.Quote;
 import kickstarter.Repository.Storage;
@@ -11,11 +12,12 @@ public class Kickstarter {
 	Storage<Project> projects;
 	UserInterface ui;
 	Storage<Quote> quotes;
+	Storage<Comments> allComments;
 
 	public void start() {
 		ui = new ConsoleUI();
 		PageDispatcher dispatcher = new PageDispatcher(ui, categories,
-				projects, quotes);
+				projects, quotes,allComments);
 		dispatcher.startDispatcher();
 	}
 
@@ -27,8 +29,13 @@ public class Kickstarter {
 		this.projects = projects;
 	}
 
-	public void add(Storage<Quote> quotes) {
+	public void addQuotes(Storage<Quote> quotes) {
 		this.quotes = quotes;
+
+	}
+
+	public void addAllComments(Storage<Comments> allComments) {
+		this.allComments = allComments;
 
 	}
 }

@@ -2,6 +2,7 @@ package Runner;
 
 import kickstarter.Kickstarter;
 import kickstarter.Entities.Category;
+import kickstarter.Entities.Comments;
 import kickstarter.Entities.Project;
 import kickstarter.Entities.Quote;
 import kickstarter.Repository.EntityStorage;
@@ -15,11 +16,12 @@ public class KickstarterRun {
 		Kickstarter kickstarter = new Kickstarter();
 		Storage<Category> categories = new EntityStorage<Category>();
 		Storage<Project> projects = new EntityStorage<Project>();
-
 		Storage<Quote> quotes = new EntityStorage<Quote>();
+		Storage<Comments> allComments = new EntityStorage<Comments>();
 		runner.createQuotes(quotes);
 
 		Project project;
+		Comments comments;
 		Category category = new Category("Social");
 		category.id = 2;
 		categories.add(category);
@@ -28,6 +30,10 @@ public class KickstarterRun {
 		project.description = "raising money for paint";
 		project.id = 8;
 		projects.add(project);
+		comments = new Comments(project);
+		comments.addComment(1, "What color will paint?");
+		comments.addComment(2, "Paint is Green");
+		allComments.add(comments);
 
 		category = new Category("Technology");
 		category.id = 5;
@@ -41,8 +47,12 @@ public class KickstarterRun {
 		project.pledged = 25;
 		project.goal = 2000;
 		project.id = 23;
-		project.addComment(0,"question");
-		project.addComment(1, "answer");
+
+		comments = new Comments(project);
+		comments.addComment(3, "What a weight of bike?");
+		comments.addComment(2, "The weight of bike is 15 kilo");
+		allComments.add(comments);
+
 		projects.add(project);
 
 		project = new Project("Create quadrocopter", category);
@@ -51,7 +61,8 @@ public class KickstarterRun {
 
 		kickstarter.addCategories(categories);
 		kickstarter.addProjects(projects);
-		kickstarter.add(quotes);
+		kickstarter.addQuotes(quotes);
+		kickstarter.addAllComments(allComments);
 		kickstarter.start();
 	}
 

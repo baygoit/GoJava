@@ -34,7 +34,6 @@ public class Projects {
 					+ "> short desc.:<" + project.shortDescription
 					+ "> goal:<" + project.goal + "> pledged:<"+project.pledged+"> days to go:<"+project.daysToGo+">");
 		}
-
 	}
 
 	public Project selectProject() {
