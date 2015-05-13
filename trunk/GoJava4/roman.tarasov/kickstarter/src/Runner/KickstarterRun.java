@@ -1,6 +1,8 @@
 package Runner;
 
+import kickstarter.ConsoleUI;
 import kickstarter.Kickstarter;
+import kickstarter.UserInterface;
 import kickstarter.Entities.Category;
 import kickstarter.Entities.Comments;
 import kickstarter.Entities.Project;
@@ -9,16 +11,47 @@ import kickstarter.Repository.EntityStorage;
 import kickstarter.Repository.Storage;
 
 public class KickstarterRun {
+	static KickstarterRun runner;
 	Kickstarter kickstarter;
 
 	public static void main(String[] args) {
-		KickstarterRun runner = new KickstarterRun();
-		Kickstarter kickstarter = new Kickstarter();
+		runner = new KickstarterRun();
+		runner.newKickstarter();
+		runner.kickstarterLoader();
+		runner.kickstarterStart(runner.kickstarterSetConsoleUi());
+	}
+
+	public void kickstarterTest() {
+		//runner = new KickstarterRun();
+		runner.newKickstarter();
+		runner.kickstarterLoader();
+	}
+
+	UserInterface kickstarterSetConsoleUi() {
+		return new ConsoleUI();
+	}
+
+	public void kickstarterStart(UserInterface userInterface) {
+		kickstarter.start(userInterface);
+	}
+
+	public void newKickstarter() {
+		kickstarter = new Kickstarter();
+	}
+
+	public void kickstarterLoader() {
 		Storage<Category> categories = new EntityStorage<Category>();
 		Storage<Project> projects = new EntityStorage<Project>();
 		Storage<Quote> quotes = new EntityStorage<Quote>();
 		Storage<Comments> allComments = new EntityStorage<Comments>();
-		runner.createQuotes(quotes);
+
+		Quote quote = new Quote();
+		quote.setQuote("first quote");
+		quotes.add(quote);
+
+		quote = new Quote();
+		quote.setQuote("second quote");
+		quotes.add(quote);
 
 		Project project;
 		Comments comments;
@@ -63,16 +96,5 @@ public class KickstarterRun {
 		kickstarter.addProjects(projects);
 		kickstarter.addQuotes(quotes);
 		kickstarter.addAllComments(allComments);
-		kickstarter.start();
-	}
-
-	void createQuotes(Storage<Quote> quotes) {
-		Quote quote = new Quote();
-		quote.setQuote("first quote");
-		quotes.add(quote);
-
-		quote = new Quote();
-		quote.setQuote("second quote");
-		quotes.add(quote);
 	}
 }

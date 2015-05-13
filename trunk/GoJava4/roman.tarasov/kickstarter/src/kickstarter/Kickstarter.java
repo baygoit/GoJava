@@ -14,10 +14,11 @@ public class Kickstarter {
 	Storage<Quote> quotes;
 	Storage<Comments> allComments;
 
-	public void start() {
-		ui = new ConsoleUI();
-		PageDispatcher dispatcher = new PageDispatcher(ui, categories,
-				projects, quotes,allComments);
+	public void start(UserInterface ui) {
+
+		this.ui = ui;
+		PageDispatcher dispatcher = new PageDispatcher(this.ui, categories,
+				projects, quotes, allComments);
 		dispatcher.startDispatcher();
 	}
 

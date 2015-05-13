@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class ConsoleUI implements UserInterface {
 	Scanner scanner;
-	ConsoleUI() {
+	public ConsoleUI() {
 		scanner = new Scanner(System.in);
 	}
 

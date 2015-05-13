@@ -36,7 +36,10 @@ public class EntityStorage<T> implements Storage<T> {
 	@SuppressWarnings("unchecked")
 	@Override
 	public T getRandom() {
-		int random = new Random().nextInt(length());
-		return (T) objects[random];
+		if (length() > 0) {
+			int random = new Random().nextInt(length());
+			return (T) objects[random];
+		}
+		return null;
 	}
 }
