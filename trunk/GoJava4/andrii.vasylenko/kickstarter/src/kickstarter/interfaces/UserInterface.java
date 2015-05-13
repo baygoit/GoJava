@@ -11,13 +11,14 @@ import kickstarter.interfaces.readers.Reader;
 import kickstarter.storages.Storage;
 
 public class UserInterface {
-	private ShowDataAgent dataViewGenerator = new ShowDataAgent();
+	private ShowDataAgent dataViewGenerator;
 	private Printer printer;
 	private Reader reader;
 	
 	public UserInterface(Printer printer, Reader reader) {
 		this.printer = printer;
 		this.reader = reader;
+		this.dataViewGenerator = new ShowDataAgent();
 	}
 	
 	public void showQuotePage(Quote quote) {
