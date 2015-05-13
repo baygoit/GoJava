@@ -1,6 +1,6 @@
 package kickstarter.storages;
 
-import kickstarter.data_types.Data;
+import kickstarter.engine.Data;
 
 public interface Storage<T extends Data> {
 	T get(int index);

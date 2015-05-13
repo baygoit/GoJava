@@ -1,4 +1,4 @@
-package kickstarter.data_types;
+package kickstarter.engine;
 
 public interface Data {
 	int getId();

@@ -1,6 +1,7 @@
-package kickstarter.data_types;
+package kickstarter.engine;
 
 import static org.junit.Assert.*;
+import kickstarter.engine.Quote;
 
 import org.junit.Test;
 

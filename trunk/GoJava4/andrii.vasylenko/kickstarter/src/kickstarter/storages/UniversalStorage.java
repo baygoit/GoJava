@@ -2,7 +2,7 @@ package kickstarter.storages;
 
 import java.util.Arrays;
 
-import kickstarter.data_types.Data;
+import kickstarter.engine.Data;
 
 public class UniversalStorage<T extends Data> implements Storage<T> {
 	public static final int MINIMUM_STORAGE_SIZE = 10;

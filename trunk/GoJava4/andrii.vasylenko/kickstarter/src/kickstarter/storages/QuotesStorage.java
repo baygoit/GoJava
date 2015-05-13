@@ -2,7 +2,7 @@ package kickstarter.storages;
 
 import java.util.Random;
 
-import kickstarter.data_types.Quote;
+import kickstarter.engine.Quote;
 
 public class QuotesStorage implements Storage<Quote> {
 	private UniversalStorage<Quote> quotes = new UniversalStorage<Quote>();

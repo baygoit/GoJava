@@ -1,4 +1,4 @@
-package kickstarter.data_types;
+package kickstarter.engine;
 
 public class Project implements Data {
 	private static int count = 0;

@@ -1,6 +1,6 @@
 package kickstarter.storages;
 
-import kickstarter.data_types.Category;
+import kickstarter.engine.Category;
 
 public class CategoriesStorage implements Storage<Category> {
 	private UniversalStorage<Category> categories = new UniversalStorage<Category>();
