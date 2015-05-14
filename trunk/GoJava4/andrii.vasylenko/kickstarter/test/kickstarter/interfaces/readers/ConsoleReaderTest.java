@@ -11,7 +11,7 @@ import org.junit.Test;
 public class ConsoleReaderTest {
 
 	@Test
-	public void test() throws IOException {
+	public void shouldInputStringMessage_whenGetLine() throws IOException {
 		InputStream defaultStream = System.in;
 		
 		String inputLine = "Test Line 12345";
