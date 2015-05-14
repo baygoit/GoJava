@@ -31,7 +31,7 @@ public class Runner {
 				CategoryPage categoryPage = new CategoryPage(menuPosition[CATEGORY_LEVEL]);
 				output.print(categoryPage.getPage());
 			} else {
-				ProjectPage projectPage = new ProjectPage(menuPosition[PROJECT_LEVEL]);
+				ProjectPage projectPage = new ProjectPage(menuPosition[CATEGORY_LEVEL],menuPosition[PROJECT_LEVEL]);
 				output.print(projectPage.getPage());
 			}
 			input.getFromUser(menuPosition);

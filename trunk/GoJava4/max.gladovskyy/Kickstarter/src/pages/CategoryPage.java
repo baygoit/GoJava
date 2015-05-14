@@ -2,17 +2,30 @@ package pages;
 
 import java.util.ArrayList;
 
+import kickstarter.Kickstarter;
+import datasource.DataSource;
+import entities.Project;
+
 public class CategoryPage implements Page {
-	private int categoryIndex;
+	private DataSource dataSource = Kickstarter.getDataSource();
+	private String categoryName;
+	private ArrayList<Project> projects = dataSource.getProjectsList();
 	private ArrayList<String> page = new ArrayList<String>();
 
 	public CategoryPage(int categoryIndex) {
-		this.categoryIndex = categoryIndex;
+		this.categoryName = dataSource.getCategoryName(categoryIndex);
 	}
 
 	@Override
 	public ArrayList<String> getPage() {
-		// TODO Auto-generated method stub
+		page.add("You in category: " + categoryName);
+		page.add("");
+		page.add("Plese choose project from list below:");
+		for (Project category : projects) {
+			page.add(projects.indexOf(category)+1+") "+category.getName());
+		}
+		page.add("");
+		page.add("0) Exit");
 		return page;
 	}
 
