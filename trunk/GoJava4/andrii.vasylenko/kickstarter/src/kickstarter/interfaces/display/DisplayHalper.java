@@ -3,6 +3,7 @@ package kickstarter.interfaces.display;
 import java.io.IOException;
 
 import kickstarter.engine.Data;
+import kickstarter.engine.Defaults;
 import kickstarter.interfaces.printers.Printer;
 import kickstarter.interfaces.readers.Reader;
 import kickstarter.storages.Storage;
@@ -41,8 +42,8 @@ public class DisplayHalper<T extends Data> {
 
 	private Data showChoiceItemDialog(String head) throws NumberFormatException, IOException {
 		int itemId = choiceItemId(head, getItemsDescription());
-		if (itemId == Data.Defaults.EXIT.getId()) {
-			return Data.Defaults.EXIT;
+		if (itemId == Defaults.EXIT.getId()) {
+			return Defaults.EXIT;
 		}
 		return getItemById(itemId);
 	}
@@ -57,7 +58,7 @@ public class DisplayHalper<T extends Data> {
 			}
 		}
 
-		result.append(Data.Defaults.EXIT.getId() + " - exit");
+		result.append(Defaults.EXIT.getId() + " - exit");
 
 		return result.toString();
 	}

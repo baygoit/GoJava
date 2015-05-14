@@ -2,6 +2,7 @@ package kickstarter;
 
 import kickstarter.engine.Category;
 import kickstarter.engine.Data;
+import kickstarter.engine.Defaults;
 import kickstarter.engine.Project;
 import kickstarter.engine.Quote;
 import kickstarter.interfaces.UserInterface;
@@ -41,7 +42,7 @@ public class Kickstarter {
 	private void choiceCategory() {
 		while (true) {
 			Data item = userInterface.choiceCategory(categories);
-			if (item == Data.Defaults.EXIT) {
+			if (item == Defaults.EXIT) {
 				return;
 			}
 			Category category = (Category) item;
@@ -52,7 +53,7 @@ public class Kickstarter {
 	private void choiceProject(Category category) {
 		while (true) {
 			Data item = userInterface.choiceProject(projects.getProjectsInCategory(category));
-			if (item == Data.Defaults.EXIT) {
+			if (item == Defaults.EXIT) {
 				return;
 			}
 			Project project = (Project) item;
