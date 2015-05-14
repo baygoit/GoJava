@@ -6,34 +6,56 @@ public class Project implements Data {
 	private int id;
 	private String name;
 	private String description;
-	private int totalAmount;
-	private int collectAmount;
-	private int daysLeft;
 	private Category category;
+	private int totalAmount;
+	private int daysLeft;
+	private int collectAmount;
 	private String history;
 	private String link;
 	private String questionsAndAnswers;
 
-	public Project(String name, String description, int totalAmount, int collectAmount, int daysLeft, Category category) {
+	public Project(String name, String description, Category category, int totalAmount, int daysLeft) {
+		if (name == null || description == null || category == null || totalAmount <= 0 || daysLeft <= 0) {
+			throw new IllegalArgumentException();
+		}
 		this.id = ++count;
 		this.name = name;
 		this.description = description;
-		this.totalAmount = totalAmount;
-		this.collectAmount = collectAmount;
-		this.daysLeft = daysLeft;
 		this.category = category;
+		this.totalAmount = totalAmount;
+		this.daysLeft = daysLeft;
+		this.collectAmount = 0;
+		this.history = "";
+		this.link = "";
+		this.questionsAndAnswers = "";
 	}
 
 	public void setHistory(String history) {
+		if (history == null) {
+			throw new IllegalArgumentException();
+		}
 		this.history = history;
 	}
 
 	public void setLink(String link) {
+		if (link == null) {
+			throw new IllegalArgumentException();
+		}
 		this.link = link;
 	}
 
 	public void setQuestionsAndAnswers(String questionsAndAnswers) {
+		if (questionsAndAnswers == null) {
+			throw new IllegalArgumentException();
+		}
 		this.questionsAndAnswers = questionsAndAnswers;
+	}
+	
+	public void donate(int amount) {
+		if (amount <= 0) {
+			throw new IllegalArgumentException();
+		}
+		collectAmount += amount;
 	}
 
 	@Override
@@ -43,10 +65,6 @@ public class Project implements Data {
 
 	public Category getCategory() {
 		return category;
-	}
-
-	public static int getCount() {
-		return count;
 	}
 
 	public String getName() {

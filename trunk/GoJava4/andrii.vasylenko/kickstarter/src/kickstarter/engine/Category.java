@@ -7,6 +7,9 @@ public class Category implements Data {
 	private String name;
 
 	public Category(String name) {
+		if (name == null) {
+			throw new IllegalArgumentException();
+		}
 		this.id = ++count;
 		this.name = name;
 	}

@@ -9,13 +9,19 @@ public class CategoryTest {
 	
 	@Test
 	public void shouldNextId_whenCreateNew() {
-		Category firstCategory = new Category("Name");
-		int firstId = firstCategory.getId();
+		int firstId = new Category("Name").getId();
 		
-		for (int i = ++firstId; i < 10 + firstId; i++, firstId++) {
-			Category currentCategory = new Category("Name"+i);
-			assertEquals(i, currentCategory.getId());
+		for (int i = ++firstId; i < 10 + firstId; i++) {
+			Category category = new Category("Name"+i);
+			assertEquals(i, category.getId());
+			Data data = category;
+			assertEquals(i, data.getId());
 		}
+	}
+
+	@Test(expected=IllegalArgumentException.class)
+	public void shouldException_whenNullName() throws IllegalArgumentException {
+		new Category(null);
 	}
 
 	@Test

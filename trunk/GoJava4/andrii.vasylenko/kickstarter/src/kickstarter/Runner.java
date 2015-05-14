@@ -30,17 +30,20 @@ public class Runner {
 		categories.add(sport);
 		categories.add(business);
 
-		Project project1 = new Project("velo parking", "velo parking in Kiev", 10000, 7000, 100, sport);
+		Project project1 = new Project("velo parking", "velo parking in Kiev", sport, 10000, 100);
+		project1.donate(7000);
 		project1.setHistory("History1");
 		project1.setLink("www.project1.com");
 		project1.setQuestionsAndAnswers("why1");
 
-		Project project2 = new Project("velo track", "velo track in Kiev", 100000, 50000, 200, sport);
+		Project project2 = new Project("velo track", "velo track in Kiev", sport, 100000, 200);
+		project2.donate(50000);
 		project2.setHistory("History2");
 		project2.setLink("www.project2.com");
 		project2.setQuestionsAndAnswers("why2");
 
-		Project project3 = new Project("IT-school", "IT - future of Ukraine", 1000000, 700000, 1000, business);
+		Project project3 = new Project("IT-school", "IT - future of Ukraine", business, 1000000, 1000);
+		project3.donate(700000);
 		project3.setHistory("History3");
 		project3.setLink("www.project3.com");
 		project3.setQuestionsAndAnswers("why3");

@@ -7,6 +7,9 @@ public class Quote implements Data {
 	private String quote;
 
 	public Quote(String quote) {
+		if (quote == null) {
+			throw new IllegalArgumentException();
+		}
 		this.id = ++count;
 		this.quote = quote;
 	}
