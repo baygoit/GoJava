@@ -1,9 +1,11 @@
 package UserInterface;
 
+import java.util.ArrayList;
+
 import pages.Page;
 
 public interface Output {
 
-	void print(String[] page);
+	void print(ArrayList<String> page);
 
 }

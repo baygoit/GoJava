@@ -1,15 +1,19 @@
 package pages;
 
-public class CategoryPage implements Page {
+import java.util.ArrayList;
 
-	public CategoryPage(int i) {
-		// TODO Auto-generated constructor stub
+public class CategoryPage implements Page {
+	private int categoryIndex;
+	private ArrayList<String> page = new ArrayList<String>();
+
+	public CategoryPage(int categoryIndex) {
+		this.categoryIndex = categoryIndex;
 	}
 
 	@Override
-	public String[] getPage() {
+	public ArrayList<String> getPage() {
 		// TODO Auto-generated method stub
-		return null;
+		return page;
 	}
 
 }

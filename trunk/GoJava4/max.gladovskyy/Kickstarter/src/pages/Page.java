@@ -1,5 +1,7 @@
 package pages;
 
+import java.util.ArrayList;
+
 public interface Page {
-	String[] getPage();
+	ArrayList<String> getPage();
 }

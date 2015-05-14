@@ -1,5 +1,7 @@
 package pages;
 
+import java.util.ArrayList;
+
 public class ProjectPage implements Page {
 
 	public ProjectPage(int i) {
@@ -7,7 +9,7 @@ public class ProjectPage implements Page {
 	}
 
 	@Override
-	public String[] getPage() {
+	public ArrayList<String> getPage() {
 		// TODO Auto-generated method stub
 		return null;
 	}

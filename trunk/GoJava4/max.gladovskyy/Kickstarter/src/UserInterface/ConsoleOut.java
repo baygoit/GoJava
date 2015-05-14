@@ -1,11 +1,12 @@
 package UserInterface;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class ConsoleOut implements Output {
 
 	@Override
-	public void print(String[] page) {
+	public void print(ArrayList<String> page) {
 		clearConsole();
 		for (String string : page) {
 			System.out.println(string);
