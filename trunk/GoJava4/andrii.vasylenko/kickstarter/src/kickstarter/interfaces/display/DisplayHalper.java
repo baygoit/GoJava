@@ -31,9 +31,7 @@ public class DisplayHalper<T extends Data> {
 		while (true) {
 			try {
 				return showChoiceItemDialog(head);
-			} catch (IndexOutOfBoundsException ignore) {
-			} catch (NumberFormatException ignore) {
-			} catch (IOException ignore) {
+			} catch (Exception ignore) {
 			}
 			printer.showMessage("--------------------");
 			printer.showMessage("try again please");
