@@ -20,10 +20,11 @@ public class ConsolePrinterTest {
 		
 		Printer printer = new ConsolePrinter();
 		printer.showMessage("TEST MESSAGE");
+		String result = outputStream.toString();
 		
 		System.setOut(defaultStream);
 		
-		assertEquals("TEST MESSAGE\r\n", outputStream.toString());
+		assertEquals("TEST MESSAGE\r\n", result);
 	}
 
 }
