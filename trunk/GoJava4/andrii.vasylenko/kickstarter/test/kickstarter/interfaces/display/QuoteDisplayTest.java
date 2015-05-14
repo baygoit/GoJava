@@ -8,7 +8,7 @@ import org.junit.Test;
 public class QuoteDisplayTest {
 
 	@Test
-	public void shouldDescriptionWithName_whenGetDescription() {
+	public void shouldQuote_whenGetDescription() {
 		Quote quote = new Quote("Interesting quote");
 		Display<Quote> display = new QuoteDisplay();
 		
