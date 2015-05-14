@@ -1,12 +1,6 @@
 package kickstarter.Test;
 
-import static org.junit.Assert.*;
-import kickstarter.Kickstarter;
 import kickstarter.UserInterface;
-
-
-
-import kickstarter.UserPages.DetailedProject;
 
 import org.junit.Test;
 
@@ -21,8 +15,6 @@ public class fake_console {
 		runner.newKickstarter();
 		runner.kickstarterLoader();
 		runner.kickstarterStart(ui);
-		
+
 	}
 }
-
-

@@ -1,6 +1,7 @@
 package kickstarter.Test;
 
 import static org.junit.Assert.*;
+
 import kickstarter.Entities.Category;
 import kickstarter.Entities.Comments;
 import kickstarter.Entities.Project;
@@ -50,6 +51,7 @@ public class AllTest {
 		assertArrayEquals(comments.usersID, array);
 
 	}
+
 	@Test
 	public void verify_names_of_added_categories() {
 		Storage<Category> categories = new EntityStorage<Category>();
@@ -103,6 +105,7 @@ public class AllTest {
 		Storage<Quote> quotes = new EntityStorage<Quote>();
 		assertNull(quotes.getRandom());
 	}
+
 	@Test
 	public void test_Quote() {
 		Quote quote = new Quote();
@@ -111,6 +114,7 @@ public class AllTest {
 		quote.setQuote("");
 		assertEquals("", quote.getQuote());
 	}
+
 	@Test
 	public void detailed_project_info() {
 

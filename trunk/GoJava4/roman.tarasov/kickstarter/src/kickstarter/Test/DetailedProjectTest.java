@@ -1,6 +1,7 @@
 package kickstarter.Test;
 
 import static org.junit.Assert.*;
+
 import kickstarter.UserInterface;
 import kickstarter.Entities.Category;
 import kickstarter.Entities.Comments;
@@ -46,4 +47,5 @@ public class DetailedProjectTest {
 	public void test_detailed_project_info() {
 		page.getDetailedInfo(project, allComments);
 	}
+
 }

@@ -22,7 +22,7 @@ public class KickstarterRun {
 	}
 
 	public void kickstarterTest() {
-		//runner = new KickstarterRun();
+
 		runner.newKickstarter();
 		runner.kickstarterLoader();
 	}
@@ -82,22 +82,9 @@ public class KickstarterRun {
 		project.id = 23;
 
 		comments = new Comments(project);
-		comments.addComment(3, "What a weight of bike?");
+		comments.addComment(3, "how much weight the bike?");
 		comments.addComment(2, "The weight of bike is 15 kilo");
-		comments.addComment(3, "What a weight of bike?");
-		comments.addComment(2, "The weight of bike is 15 kilo");
-		comments.addComment(3, "What a weight of bike?");
-		comments.addComment(2, "The weight of bike is 15 kilo");
-		comments.addComment(3, "What a weight of bike?");
-		comments.addComment(2, "The weight of bike is 15 kilo");
-		comments.addComment(3, "What a weight of bike?");
-		comments.addComment(2, "The weight of bike is 15 kilo");
-		comments.addComment(3, "What a weight of bike?");
-		comments.addComment(2, "The weight of bike is 15 kilo");
-		comments.addComment(3, "What a weight of bike?");
-		comments.addComment(2, "The weight of bike is 15 kilo");
-		comments.addComment(3, "What a weight of bike?");
-		comments.addComment(2, "The weight of bike is 15 kilo");
+
 		allComments.add(comments);
 
 		projects.add(project);
@@ -105,6 +92,10 @@ public class KickstarterRun {
 		project = new Project("Create quadrocopter", category);
 		project.id = 4;
 		projects.add(project);
+		
+		category = new Category("Music");
+		category.id = 9;
+		categories.add(category);
 
 		kickstarter.addCategories(categories);
 		kickstarter.addProjects(projects);
