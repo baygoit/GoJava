@@ -30,6 +30,9 @@ public class UniversalStorage<T extends Data> implements Storage<T> {
 
 	@Override
 	public void add(T object) {
+		if (object == null) {
+			throw new IllegalArgumentException();
+		}
 		checkArrayLenght();
 		objects[size++] = object;
 	}
