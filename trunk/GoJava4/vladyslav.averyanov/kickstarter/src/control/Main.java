@@ -9,6 +9,8 @@ import java.util.Random;
 import model.Category;
 import model.Project;
 import model.Quote;
+import control.QuoteService;
+import view.ConsolePrinter;
 
 public class Main {
 
@@ -79,8 +81,7 @@ public class Main {
 		boolean isExit = false;
 		while (!isExit) {
 			Quote chosenQuote = quoteSet[new Random().nextInt(quoteSet.length)];
-			System.out.println(chosenQuote.getContent() + ". "
-					+ chosenQuote.getAuthor());
+			System.out.println(chosenQuote.getQuoteWithAuthor());
 			showCategories(categoryArray);
 			System.out.print("Please choose category or print 0 to exit: ");
 

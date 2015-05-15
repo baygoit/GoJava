@@ -2,8 +2,8 @@ package model;
 
 public class Quote {
 	
-	String content;
-	String author;
+	private String content;
+	private String author;
 	
 	public Quote() {
 
@@ -13,21 +13,17 @@ public class Quote {
 		this.content = content;
 		this.author = author;
 	}
+	
+	public String getQuoteWithAuthor() {
+		return ("\""+getContent()+"\", "+getAuthor());
+	}
 
-	public String getContent() {
+	private String getContent() {
 		return content;
 	}
 
-	public void setContent(String content) {
-		this.content = content;
-	}
-
-	public String getAuthor() {
+	private String getAuthor() {
 		return author;
 	}
-
-	public void setAuthor(String author) {
-		this.author = author;
-	}	
 
 }
