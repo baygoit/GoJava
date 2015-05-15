@@ -11,4 +11,9 @@ public class AnagramTest {
 		assertEquals("", new Anagram("").getAnagram());
 	}
 
+	@Test(expected=IllegalArgumentException.class)
+	public void shouldException_whenNull() {
+		assertNotEquals("", new Anagram(null).getAnagram());
+	}
+
 }
