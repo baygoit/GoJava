@@ -88,7 +88,7 @@ public class AnagramTest {
 
 	@Test(expected = IllegalArgumentException.class)
 	public void shouldException_whenLine—ontainsNotAllowSymbols() {
-		assertAnagramUsedWordsReverser("", "It's not allow symbols: !&?), ect");
+		assertAnagramUsedWordsReverser("", "It's not allow symbols: !&?,() ect");
 	}
 
 	private void assertAnagramUsedWordsReverser(String expected, String inputLine) {

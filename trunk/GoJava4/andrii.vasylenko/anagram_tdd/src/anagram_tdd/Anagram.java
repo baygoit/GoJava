@@ -10,7 +10,7 @@ public class Anagram {
 	public Anagram(String line, Reverser reverser) throws IllegalArgumentException {
 		this.line = line;
 		this.reverser = reverser;
-		
+
 		checkInitialization();
 	}
 
