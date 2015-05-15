@@ -18,6 +18,7 @@ public class Page {
 	
 	protected PageType nextPage;
 	protected PageType previousPage;
+	protected RequestData requestData; 
 	
 	public Page(){
 	
@@ -51,7 +52,7 @@ public class Page {
 		printer.print(footer);
 		printer.print(whereAmI);
 		getInput();
-		dispatcher.requestPage(nextPage);
+		dispatcher.requestPage(nextPage, requestData);
 	}
 
 	protected void getInput() {

@@ -2,44 +2,40 @@ package com.sergiisavin.kickstarter.UserInterface;
 
 import java.util.Scanner;
 
-public class CategoriesPage extends Page{
-
-	int numberOfCategories = 0;
-	String[] categories;
+public class DetailedProjectDescriptionPage extends Page {
 	
-	public CategoriesPage(){
-		previousPage = PageType.WELCOME_USER_PAGE;
-	}
-	
-	public CategoriesPage(Printer printer) {
+	public DetailedProjectDescriptionPage(Printer printer, RequestData request) {
 		this.printer = printer;
-		previousPage = PageType.WELCOME_USER_PAGE;
+		this.requestData = request;
+		previousPage = PageType.PROJECTS_PAGE;
 	}
 
+	public DetailedProjectDescriptionPage(){
+		previousPage = PageType.PROJECTS_PAGE;
+	}
+	
+	public DetailedProjectDescriptionPage(Printer printer) {
+		this.printer = printer;
+		previousPage = PageType.PROJECTS_PAGE;
+	}
+	
 	@Override
 	public void constructPage(){
 		header = "/////////////////////////////////\n"+
-				 "//          CATEGORIES         //\n"+
+				 "//DETAILED PROJECT DESCRIPTION//\n"+
 				 "////////////////////////////////\n";
 		dataArea = constructDataArea();
 		footer = "\n----------------------------------\n"
 				+ "Enter (exit) - to exit : (prev) - to go to previous page\n";
-		whereAmI = "Welcome User Page > Categories > ";
+		whereAmI = "Welcome User Page > Categories > Projects";
 	}
 	
 	private String constructDataArea() {
-		numberOfCategories = kickstarter.getCategories().length;
-		StringBuffer result = new StringBuffer();
-		categories = kickstarter.getCategories();
-		for(int i = 0; i < categories.length; i++){
-			result.append("(" + i + ") ");
-			result.append(categories[i]);
-			result.append("\n");
-		}
+		String result = "HERE WILL BE DETAILED DESCRIPTION";
 		
 		return result.toString();
 	}
-
+	
 	@Override
 	protected void getInput(){
 		Scanner scanner = new Scanner(System.in);
@@ -53,19 +49,13 @@ public class CategoriesPage extends Page{
 			}
 			switch(input){
 			case "prev":
-				nextPage = PageType.WELCOME_USER_PAGE;
+				nextPage = PageType.PROJECTS_PAGE;
+				requestData.data = requestData.category;
 				flag = false;
 				break;
 		
 			default:
-				if(isNumber(input)){
-					int choice = toNumber(input);
-					if((choice >= 0) && choice < numberOfCategories){
-						requestData = new RequestData(categories[choice]);
-						nextPage = PageType.PROJECTS_PAGE;
-						flag = false;
-					}
-				}
+				
 			}
 			
 		}while(flag);

@@ -17,7 +17,7 @@ public class PageDispatcher {
 		this.kickstarter = kickstarter;
 	}
 
-	public void requestPage(PageType pageType) {
+	public void requestPage(PageType pageType, RequestData request) {
 		Page page = null;
 		switch(pageType){
 		case WELCOME_USER_PAGE:
@@ -36,7 +36,14 @@ public class PageDispatcher {
 			page = new CategoriesPage(printer);
 			startPage(page);
 			break;
-			
+		case PROJECTS_PAGE:
+			page = new ProjectsPage(printer, request);
+			startPage(page);
+			break;
+		case DETAILED_PROJECT_DESCRIPTION_PAGE:
+			page = new DetailedProjectDescriptionPage(printer, request);
+			startPage(page);
+			break;
 			default:
 				
 		}

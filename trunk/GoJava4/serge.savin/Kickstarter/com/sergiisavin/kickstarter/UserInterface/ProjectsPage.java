@@ -2,44 +2,50 @@ package com.sergiisavin.kickstarter.UserInterface;
 
 import java.util.Scanner;
 
-public class CategoriesPage extends Page{
+public class ProjectsPage extends Page {
 
-	int numberOfCategories = 0;
-	String[] categories;
+	private String[] projects;
+	private int numberOfProjects;
+	private String category;
 	
-	public CategoriesPage(){
-		previousPage = PageType.WELCOME_USER_PAGE;
-	}
-	
-	public CategoriesPage(Printer printer) {
+	public ProjectsPage(Printer printer, RequestData request) {
+		requestData = request;
 		this.printer = printer;
-		previousPage = PageType.WELCOME_USER_PAGE;
+		this.requestData = request;
+		this.category = request.data;
 	}
 
+	public ProjectsPage(){
+		previousPage = PageType.CATEGORIES_PAGE;
+	}
+	
+	public ProjectsPage(Printer printer) {
+		this.printer = printer;
+	}
+	
 	@Override
 	public void constructPage(){
 		header = "/////////////////////////////////\n"+
-				 "//          CATEGORIES         //\n"+
+				 "//          PROJECTS           //\n"+
 				 "////////////////////////////////\n";
 		dataArea = constructDataArea();
 		footer = "\n----------------------------------\n"
 				+ "Enter (exit) - to exit : (prev) - to go to previous page\n";
-		whereAmI = "Welcome User Page > Categories > ";
+		whereAmI = "Welcome User Page > Categories > Projects";
 	}
 	
 	private String constructDataArea() {
-		numberOfCategories = kickstarter.getCategories().length;
 		StringBuffer result = new StringBuffer();
-		categories = kickstarter.getCategories();
-		for(int i = 0; i < categories.length; i++){
+		projects = kickstarter.getProjectsByCategory(requestData.data);
+		for(int i = 0; i < projects.length; i++){
 			result.append("(" + i + ") ");
-			result.append(categories[i]);
+			result.append(projects[i]);
 			result.append("\n");
 		}
-		
+		numberOfProjects = kickstarter.getProjectsByCategory(requestData.data).length;
 		return result.toString();
 	}
-
+	
 	@Override
 	protected void getInput(){
 		Scanner scanner = new Scanner(System.in);
@@ -53,16 +59,17 @@ public class CategoriesPage extends Page{
 			}
 			switch(input){
 			case "prev":
-				nextPage = PageType.WELCOME_USER_PAGE;
+				nextPage = PageType.CATEGORIES_PAGE;
 				flag = false;
 				break;
 		
 			default:
 				if(isNumber(input)){
 					int choice = toNumber(input);
-					if((choice >= 0) && choice < numberOfCategories){
-						requestData = new RequestData(categories[choice]);
-						nextPage = PageType.PROJECTS_PAGE;
+					if((choice >= 0) && choice < numberOfProjects){
+						requestData = new RequestData(projects[choice]);
+						requestData.category = this.category;
+						nextPage = PageType.DETAILED_PROJECT_DESCRIPTION_PAGE;
 						flag = false;
 					}
 				}
