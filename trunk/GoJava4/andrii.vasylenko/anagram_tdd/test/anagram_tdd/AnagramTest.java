@@ -66,4 +66,11 @@ public class AnagramTest {
 		assertEquals("marganA esrever hcae drow 321", new Anagram("Anagram reverse each word 123").getAnagram());
 	}
 
+	@Test
+	public void shouldIgnoreFirstAndLastSpaces_whenSentenceWithFirstOrLastSpaces() {
+		assertEquals("marganA esrever hcae drow 321", new Anagram(" Anagram reverse each word 123 ").getAnagram());
+		assertEquals("marganA esrever hcae drow 321", new Anagram(" Anagram reverse each word 123").getAnagram());
+		assertEquals("marganA esrever hcae drow 321", new Anagram("Anagram reverse each word 123 ").getAnagram());
+	}
+
 }
