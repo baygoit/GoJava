@@ -11,7 +11,7 @@ public interface DataSource {
 
 	String getSomeQuote();
 
-	ArrayList<Project> getProjectsList();
+	ArrayList<Project> getProjectsList(int categoryIndex);
 
 	String getCategoryName(int categoryIndex);
 

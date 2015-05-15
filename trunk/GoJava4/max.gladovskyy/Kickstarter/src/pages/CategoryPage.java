@@ -9,11 +9,12 @@ import entities.Project;
 public class CategoryPage implements Page {
 	private DataSource dataSource = Kickstarter.getDataSource();
 	private String categoryName;
-	private ArrayList<Project> projects = dataSource.getProjectsList();
+	private ArrayList<Project> projects;
 	private ArrayList<String> page = new ArrayList<String>();
 
 	public CategoryPage(int categoryIndex) {
 		this.categoryName = dataSource.getCategoryName(categoryIndex);
+		projects = dataSource.getProjectsList(categoryIndex);
 	}
 
 	@Override
