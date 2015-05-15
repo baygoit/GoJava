@@ -12,7 +12,9 @@ public class Anagram {
 	}
 
 	public String getAnagram() {
-		return line;
+		StringBuilder result = new StringBuilder(line);
+		result.reverse();
+		return result.toString();
 	}
 
 }

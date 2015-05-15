@@ -30,4 +30,10 @@ public class AnagramTest {
 	public void shouldDigit_whenDigit() {
 		assertEquals("1", new Anagram("1").getAnagram());
 	}
+
+	@Test
+	public void shouldReverseLetters_whenTwoLetters() {
+		assertEquals("ba", new Anagram("ab").getAnagram());
+	}
+
 }
