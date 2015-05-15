@@ -7,20 +7,21 @@ import kickstarter.ui.UserInterface;
 
 public class Model {
 	private Storage<Page> pages;
-	private UserInterface ui;
+
 	private int[] options;
 	private int[] parameterForPrint;
 	private int pageIndex;
+	private int previousPageIndex;
 	final int CATEGORIES = 0;
 	final int PROJECTS = 1;
 	final int DETAILED_PROJECT = 2;
+	final int WRONG_CHOICE = 3;
 	private String[] stringCommands = { "Select category by ID ; e - End",
 			"Select project by ID ; c - to Category Page",
-			"c - to Category Page" };
+			"c - to Category Page", "p - to previous Page" };
 
-	public Model(UserInterface ui) {
+	public Model() {
 		pages = new EntityStorage<Page>();
-		this.ui = ui;
 	}
 
 	public int[] getParameterForPrint() {
@@ -45,7 +46,6 @@ public class Model {
 
 	private void doCommandForCategoriesPage(String command) {
 		if (command.equals("e")) {
-			ui.display("Good Bye");
 			System.exit(0);
 		}
 		int parsed;
@@ -61,7 +61,8 @@ public class Model {
 			throw new IndexOutOfBoundsException();
 		} catch (NullPointerException | NumberFormatException
 				| IndexOutOfBoundsException e) {
-			ui.display("input correct command, please");
+			pageIndex = WRONG_CHOICE;
+			previousPageIndex = CATEGORIES;
 			return;
 		}
 	}
@@ -84,7 +85,8 @@ public class Model {
 			throw new IndexOutOfBoundsException();
 		} catch (NullPointerException | NumberFormatException
 				| IndexOutOfBoundsException e) {
-			ui.display("input correct command, please");
+			pageIndex = WRONG_CHOICE;
+			previousPageIndex = PROJECTS;
 			return;
 		}
 	}
@@ -95,7 +97,15 @@ public class Model {
 			pageIndex = CATEGORIES;
 			return;
 		}
-		ui.display("input correct command, please");
+		pageIndex = WRONG_CHOICE;
+		previousPageIndex = DETAILED_PROJECT;
+	}
+
+	private void doWrongChoicePage(String command) {
+		if (command.equals("p")) {
+			pageIndex = previousPageIndex;
+			return;
+		}
 	}
 
 	public void execute(String command) {
@@ -108,6 +118,9 @@ public class Model {
 			break;
 		case DETAILED_PROJECT:
 			doCommandForDetailedProjectPage(command);
+			break;
+		case WRONG_CHOICE:
+			doWrongChoicePage(command);
 			break;
 		default:
 			doCommandForCategoriesPage(command);

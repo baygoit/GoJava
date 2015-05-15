@@ -19,11 +19,10 @@ public class FakeConsole {
 		kickstarter.load();
 	}
 
+	// @Ignore
 	@Test
 	public void test_all_categories_and_projects() {
 
-		kickstarter.testUI(ui);
-		kickstarter.load();
 		String[] commands = new String[] { "5", "23", "c", "5", "4", "c", "4",
 				"8", "c" };
 		for (String command : commands) {
@@ -32,6 +31,7 @@ public class FakeConsole {
 		}
 	}
 
+	// @Ignore
 	@Test
 	public void test_quotes_resize() {
 		for (int number = 0; number < 30; number++) {
@@ -39,11 +39,13 @@ public class FakeConsole {
 		}
 	}
 
+	// @Ignore
 	@Test
 	public void test_comments_resize() {
 		kickstarter.testLoadComments();
 	}
 
+	// @Ignore
 	@Test
 	public void test_doCommandForProjectsPage() {
 		view();
@@ -56,24 +58,42 @@ public class FakeConsole {
 	public void test_doCommandForCategoriesPage_exception() {
 		view();
 		put("null");
+		view();
+		put("p");
+		
+
 	}
 
+	//@Ignore
 	@Test
 	public void test_doCommandForProjectsPage_exception() {
 		view();
 		put("5");
+		
 		view();
 		put("null");
+		
+		view();
+		put("p");
 	}
 
+	//@Ignore
 	@Test
 	public void test_doCommandForDetailedProjectPage_exception() {
 		view();
 		put("5");
+		
 		view();
 		put("23");
+		
 		view();
 		put("null");
+		
+		view();
+		put("null");
+		
+		view();
+		put("p");
 	}
 
 	@Ignore

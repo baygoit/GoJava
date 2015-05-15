@@ -11,6 +11,7 @@ import kickstarter.pages.CategoriesPage;
 import kickstarter.pages.DetailedProject;
 import kickstarter.pages.Page;
 import kickstarter.pages.ProjectsPage;
+import kickstarter.pages.WrongChoicePage;
 import kickstarter.repository.EntityStorage;
 import kickstarter.repository.Storage;
 import kickstarter.ui.ConsoleUI;
@@ -32,7 +33,7 @@ public class Kickstarter {
 		allComments = new EntityStorage<Comments>();
 		quotes = new EntityStorage<Quote>();
 		ui = new ConsoleUI();
-		model = new Model(ui);
+		model = new Model();
 		view = new View(model, ui);
 		controller = new Controller(model, view);
 	}
@@ -127,6 +128,8 @@ public class Kickstarter {
 		page = new ProjectsPage(projects, ui);
 		controller.addPage(page);
 		page = new DetailedProject(ui, allComments, projects);
+		controller.addPage(page);
+		page= new WrongChoicePage(ui);
 		controller.addPage(page);
 	}
 }
