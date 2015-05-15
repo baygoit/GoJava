@@ -15,6 +15,7 @@ import kickstarter.repository.EntityStorage;
 import kickstarter.repository.Storage;
 import kickstarter.ui.ConsoleUI;
 import kickstarter.ui.UserInterface;
+
 //Start MVC architecture
 public class Kickstarter {
 	Storage<Category> categories;
@@ -31,10 +32,10 @@ public class Kickstarter {
 		projects = new EntityStorage<Project>();
 		allComments = new EntityStorage<Comments>();
 		quotes = new EntityStorage<Quote>();
-		model = new Model();
-		view = new View(model);
-		controller = new Controller(model, view);
 		ui = new ConsoleUI();
+		model = new Model(ui);
+		view = new View(model, ui);
+		controller = new Controller(model, view);
 	}
 
 	public static void main(String[] args) {
@@ -100,7 +101,7 @@ public class Kickstarter {
 		comments.addComment(3, "how much weight the bike?");
 		comments.addComment(2, "The weight of bike is 15 kilo");
 		allComments.add(comments);
-		
+
 		project = new Project("Create quadrocopter", category);
 		project.ID = 4;
 		projects.add(project);

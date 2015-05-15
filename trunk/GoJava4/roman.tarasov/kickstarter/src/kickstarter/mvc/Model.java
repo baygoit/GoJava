@@ -3,9 +3,11 @@ package kickstarter.mvc;
 import kickstarter.pages.Page;
 import kickstarter.repository.EntityStorage;
 import kickstarter.repository.Storage;
+import kickstarter.ui.UserInterface;
 
 public class Model {
 	Storage<Page> pages;
+	private UserInterface ui;
 	int[] options;
 	int[] parameterForPrint;
 	int pageIndex;
@@ -16,8 +18,9 @@ public class Model {
 	String[] stringCommands = { "Select category by ID ; e - End",
 			"Select project by ID ; c - to Category Page", "c - to Category Page" };
 
-	public Model() {
+	public Model(UserInterface ui) {
 		pages = new EntityStorage<Page>();
+		this.ui=ui;
 	}
 
 	public int[] getParameterForPrint() {
@@ -42,7 +45,7 @@ public class Model {
 
 	void doCommandForCategoriesPage(String command) {
 		if (command.equals("e")) {
-			System.out.println("Good Bye");
+			ui.display("Good Bye");
 			System.exit(0);
 		}
 		int parsed;
@@ -58,7 +61,7 @@ public class Model {
 			throw new IndexOutOfBoundsException();
 		} catch (NullPointerException | NumberFormatException
 				| IndexOutOfBoundsException e) {
-			System.out.println("input correct command, please");
+			ui.display("input correct command, please");
 			return;
 		}
 	}
@@ -81,7 +84,7 @@ public class Model {
 			throw new IndexOutOfBoundsException();
 		} catch (NullPointerException | NumberFormatException
 				| IndexOutOfBoundsException e) {
-			System.out.println("input correct command, please");
+			ui.display("input correct command, please");
 			return;
 		}
 	}
@@ -92,7 +95,7 @@ public class Model {
 			pageIndex = CATEGORIES;
 			return;
 		}
-		System.out.println("input correct command, please");
+		ui.display("input correct command, please");
 	}
 
 	public void execute(String command) {
