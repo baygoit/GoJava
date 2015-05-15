@@ -78,17 +78,17 @@ public class AnagramTest {
 
 	@Test(expected = IllegalArgumentException.class)
 	public void shouldException_whenNullLine() {
-		new Anagram(null, new WordsReverser()).getAnagram();
+		assertAnagramUsedWordsReverser("", null);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void shouldException_whenNullReverser() {
-		new Anagram("", null).getAnagram();
+		assertAnagram("", "", null);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void shouldException_whenLine—ontainsNotAllowSymbols() {
-		new Anagram("marganA!  esrever&  hcae? drow)  ,321", new WordsReverser()).getAnagram();
+		assertAnagramUsedWordsReverser("", "marganA!  esrever&  hcae? drow)  ,321");
 	}
 
 	private void assertAnagramUsedWordsReverser(String expected, String inputLine) {
