@@ -14,7 +14,7 @@ public class ProjectPage implements Page {
 	
 	
 	public ProjectPage(int category, int project) {
-		this.project = dataSource.getProject(category, project)
+		this.project = dataSource.getProject(category, project);
 	}
 
 	@Override
