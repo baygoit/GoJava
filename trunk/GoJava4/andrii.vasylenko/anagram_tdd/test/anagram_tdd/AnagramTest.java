@@ -61,4 +61,9 @@ public class AnagramTest {
 		assertEquals("321 654 987", new Anagram("123 456 789").getAnagram());
 	}
 
+	@Test
+	public void shouldReverseEachWordOrNumber_whenSentenceWithNumbers() {
+		assertEquals("marganA esrever hcae drow 321", new Anagram("Anagram reverse each word 123").getAnagram());
+	}
+
 }
