@@ -51,4 +51,9 @@ public class AnagramTest {
 		assertEquals("654321", new Anagram("123456").getAnagram());
 	}
 
+	@Test
+	public void shouldReverseEachWord_whenSentence() {
+		assertEquals("marganA esrever hcae drow", new Anagram("Anagram reverse each word").getAnagram());
+	}
+
 }
