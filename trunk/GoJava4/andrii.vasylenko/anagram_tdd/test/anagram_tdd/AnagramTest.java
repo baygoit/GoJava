@@ -26,4 +26,8 @@ public class AnagramTest {
 		assertEquals("a", new Anagram("a").getAnagram());
 	}
 
+	@Test
+	public void shouldDigit_whenDigit() {
+		assertEquals("1", new Anagram("1").getAnagram());
+	}
 }
