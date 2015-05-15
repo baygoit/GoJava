@@ -4,75 +4,76 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import anagram_tdd.reverse.Reverser;
 import anagram_tdd.reverse.WordsReverser;
 
 public class AnagramTest {
 
 	@Test
 	public void shouldEmptyString_whenEmptyString() {
-		assertAnagram("", "");
+		assertAnagramUsedWordsReverser("", "");
 	}
 
 	@Test
 	public void shouldEmptyString_whenSpace() {
-		assertAnagram("", " ");
+		assertAnagramUsedWordsReverser("", " ");
 	}
 
 	@Test
 	public void shouldLetter_whenLetter() {
-		assertAnagram("a", "a");
+		assertAnagramUsedWordsReverser("a", "a");
 	}
 
 	@Test
 	public void shouldDigit_whenDigit() {
-		assertAnagram("1", "1");
+		assertAnagramUsedWordsReverser("1", "1");
 	}
 
 	@Test
 	public void shouldReverseLetters_whenTwoLetters() {
-		assertAnagram("ba", "ab");
+		assertAnagramUsedWordsReverser("ba", "ab");
 	}
 
 	@Test
 	public void shouldReverseDigits_whenTwoDigits() {
-		assertAnagram("21", "12");
+		assertAnagramUsedWordsReverser("21", "12");
 	}
 
 	@Test
 	public void shouldReverseWord_whenWord() {
-		assertAnagram("drow", "word");
+		assertAnagramUsedWordsReverser("drow", "word");
 	}
 
 	@Test
 	public void shouldReverseNumber_whenNumber() {
-		assertAnagram("654321", "123456");
+		assertAnagramUsedWordsReverser("654321", "123456");
 	}
 
 	@Test
 	public void shouldReverseEachWord_whenSentence() {
-		assertAnagram("marganA esrever hcae drow", "Anagram reverse each word");
+		assertAnagramUsedWordsReverser("marganA esrever hcae drow", "Anagram reverse each word");
 	}
 
 	@Test
 	public void shouldReverseEachNumber_whenNumbers() {
-		assertAnagram("321 654 987", "123 456 789");
+		assertAnagramUsedWordsReverser("321 654 987", "123 456 789");
 	}
 
 	@Test
 	public void shouldReverseEachWordOrNumber_whenSentenceWithNumbers() {
-		assertAnagram("marganA esrever hcae drow 321", "Anagram reverse each word 123");
+		assertAnagramUsedWordsReverser("marganA esrever hcae drow 321", "Anagram reverse each word 123");
 	}
 
 	@Test
 	public void shouldIgnoreFirstAndLastSpaces_whenSentenceWithFirstOrLastSpaces() {
-		assertAnagram("marganA esrever hcae drow 321", " Anagram reverse each word 123 ");
-		assertAnagram("marganA esrever hcae drow 321", " Anagram reverse each word 123");
-		assertAnagram("marganA esrever hcae drow 321", "Anagram reverse each word 123 ");
+		assertAnagramUsedWordsReverser("marganA esrever hcae drow 321", " Anagram reverse each word 123 ");
+		assertAnagramUsedWordsReverser("marganA esrever hcae drow 321", " Anagram reverse each word 123");
+		assertAnagramUsedWordsReverser("marganA esrever hcae drow 321", "Anagram reverse each word 123 ");
 	}
 
 	@Test
 	public void shouldSentenceWithDoubleSpaces_whenSentenceWithDoubleSpaces() {
-		assertAnagram("marganA  esrever  hcae drow  321", "Anagram  reverse  each word  123");
+		assertAnagramUsedWordsReverser("marganA  esrever  hcae drow  321", "Anagram  reverse  each word  123");
 	}
 
 	@Test(expected = IllegalArgumentException.class)
@@ -90,8 +91,12 @@ public class AnagramTest {
 		new Anagram("marganA!  esrever&  hcae? drow)  ,321", new WordsReverser()).getAnagram();
 	}
 
-	private void assertAnagram(String expected, String inputLine) {
-		assertEquals(expected, new Anagram(inputLine, new WordsReverser()).getAnagram());
+	private void assertAnagramUsedWordsReverser(String expected, String inputLine) {
+		assertAnagram(expected, inputLine, new WordsReverser());
+	}
+
+	private void assertAnagram(String expected, String inputLine, Reverser reverser) {
+		assertEquals(expected, new Anagram(inputLine, reverser).getAnagram());
 	}
 
 }
