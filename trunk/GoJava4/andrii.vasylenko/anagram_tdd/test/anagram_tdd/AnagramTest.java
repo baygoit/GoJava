@@ -81,13 +81,13 @@ public class AnagramTest {
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void shouldException_whenLine—ontainsNotAllowSymbols() {
-		new Anagram("marganA!  esrever&  hcae? drow)  ,321", new WordsReverser()).getAnagram();
+	public void shouldException_whenNullReverser() {
+		new Anagram("", null).getAnagram();
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void shouldException_whenNullReverser() {
-		new Anagram("", null).getAnagram();
+	public void shouldException_whenLine—ontainsNotAllowSymbols() {
+		new Anagram("marganA!  esrever&  hcae? drow)  ,321", new WordsReverser()).getAnagram();
 	}
 
 	private void assertAnagram(String expected, String inputLine) {

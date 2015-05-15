@@ -8,6 +8,11 @@ public class WordsReverser implements Reverser {
 		return reverseWords(words);
 	}
 
+	@Override
+	public boolean checkLine(String line) {
+		return line.matches("([A-Za-z0-9 ]*)");
+	}
+
 	private String[] getWords(String line) {
 		return line.trim().split(" ");
 	}

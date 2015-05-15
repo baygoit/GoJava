@@ -26,7 +26,7 @@ public class Anagram {
 		if (reverser == null) {
 			return false;
 		}
-		if (!line.matches("([A-Za-z0-9 ]*)")) {
+		if (!reverser.checkLine(line)) {
 			return false;
 		}
 
