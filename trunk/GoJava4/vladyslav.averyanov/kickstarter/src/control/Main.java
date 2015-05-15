@@ -17,28 +17,23 @@ public class Main {
 	public static int DEFAULT_VALUE = -1;
 
 	public static void main(String[] args) {
+		
 		Quote[] quoteSet = {
-				new Quote(
-						"«Пишите код так, как будто сопровождать его будет склонный к насилию психопат, "
+				new Quote("«Пишите код так, как будто сопровождать его будет склонный к насилию психопат, "
 								+ "который знает, где вы живете.»",
 						"Стив Макконнелл"),
 				new Quote("«Если что-то работает — то не трогай это»",
 						"Неизвестный автор"),
-				new Quote(
-						"«Самый лучший способ изучать язык программирования — это писать на нем программы»",
+				new Quote("«Самый лучший способ изучать язык программирования — это писать на нем программы»",
 						"Неизвестный автор"),
-				new Quote(
-						"«Хороший программист — это тот, кто смотрит в обе стороны, переходя дорогу с односторонним движением»",
+				new Quote("«Хороший программист — это тот, кто смотрит в обе стороны, переходя дорогу с односторонним движением»",
 						"Даг Линдер"),
-				new Quote(
-						"«Сложность программы растет до тех пор, пока не превысит способности программиста»",
+				new Quote("«Сложность программы растет до тех пор, пока не превысит способности программиста»",
 						"Законы Мэрфи") };
 
-		Category videoCategory = new Category("Video",
-				"Any video you can imagine. Start from multibillionaire "
+		Category videoCategory = new Category("Video",	"Any video you can imagine. Start from multibillionairy "
 						+ "blockbasters and ending your home videos");
-		Category audioCategory = new Category("Audio",
-				"Any audio you can imagine. New DJ-set or special musical "
+		Category audioCategory = new Category("Audio",	"Any audio you can imagine. New DJ-set or special musical "
 						+ "instrument - all of it here");
 
 		String[] questionsAndAnswers = { "Question 1; -> Answer 1;",
