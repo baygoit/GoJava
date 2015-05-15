@@ -1,30 +1,24 @@
 package anagram_tdd;
 
 public class Anagram {
-	
-	private String line;
 
-	public Anagram(String line) {
-		if (line == null) {
+	private String line;
+	private Reverser reverser;
+
+	public Anagram(String line) throws IllegalArgumentException {
+		if (!checkInputLine(line)) {
 			throw new IllegalArgumentException();
 		}
 		this.line = line;
+		this.reverser = new WordsReverser();
 	}
 
 	public String getAnagram() {
-		String words[] = line.trim().split(" ");
-		StringBuilder result = new StringBuilder();
-		for (int i = 0; i < words.length; i++) {
-			result.append(reverseWord(words[i]));
-			result.append(" ");
-		}
-		return result.toString().trim();
+		return reverser.reverseLine(line);
 	}
-	
-	private String reverseWord(String word) {
-		StringBuilder result = new StringBuilder(word);
-		result.reverse();
-		return result.toString();		
+
+	private boolean checkInputLine(String line) {
+		return line != null;
 	}
 
 }
