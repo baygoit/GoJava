@@ -7,7 +7,7 @@ import kickstarter.ui.UserInterface;
 
 public class CategoriesPage extends Page {
 	private Storage<Category> categories;
-	Storage<Quote> quotes;
+	private Storage<Quote> quotes;
 	private UserInterface ui;
 
 	public CategoriesPage(Storage<Category> categories, UserInterface ui,Storage<Quote> quotes) {

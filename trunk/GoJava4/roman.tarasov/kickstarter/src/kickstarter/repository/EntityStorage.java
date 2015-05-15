@@ -1,6 +1,5 @@
 package kickstarter.repository;
 
-
 import java.util.Random;
 
 public class EntityStorage<T> implements Storage<T> {
@@ -8,7 +7,7 @@ public class EntityStorage<T> implements Storage<T> {
 	final int ADD_TO_SIZE = 10;
 	final int START_INDEX = 0;
 	private Object[] objects = new Object[INIT_SIZE];
-	int pointer = START_INDEX;
+	private int pointer = START_INDEX;
 
 	@Override
 	public void add(T entity) {

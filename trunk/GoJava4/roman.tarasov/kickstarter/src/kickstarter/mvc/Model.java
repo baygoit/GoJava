@@ -6,21 +6,21 @@ import kickstarter.repository.Storage;
 import kickstarter.ui.UserInterface;
 
 public class Model {
-	Storage<Page> pages;
+	private Storage<Page> pages;
 	private UserInterface ui;
-	int[] options;
-	int[] parameterForPrint;
-	int pageIndex;
+	private int[] options;
+	private int[] parameterForPrint;
+	private int pageIndex;
 	final int CATEGORIES = 0;
 	final int PROJECTS = 1;
 	final int DETAILED_PROJECT = 2;
-	Page page;
-	String[] stringCommands = { "Select category by ID ; e - End",
-			"Select project by ID ; c - to Category Page", "c - to Category Page" };
+	private String[] stringCommands = { "Select category by ID ; e - End",
+			"Select project by ID ; c - to Category Page",
+			"c - to Category Page" };
 
 	public Model(UserInterface ui) {
 		pages = new EntityStorage<Page>();
-		this.ui=ui;
+		this.ui = ui;
 	}
 
 	public int[] getParameterForPrint() {
@@ -43,7 +43,7 @@ public class Model {
 		return pages.getEntity(pageIndex);
 	}
 
-	void doCommandForCategoriesPage(String command) {
+	private void doCommandForCategoriesPage(String command) {
 		if (command.equals("e")) {
 			ui.display("Good Bye");
 			System.exit(0);
@@ -66,7 +66,7 @@ public class Model {
 		}
 	}
 
-	void doCommandForProjectsPage(String command) {
+	private void doCommandForProjectsPage(String command) {
 		if (command.equals("c")) {
 			pageIndex = CATEGORIES;
 			return;
@@ -89,7 +89,7 @@ public class Model {
 		}
 	}
 
-	void doCommandForDetailedProjectPage(String command) {
+	private void doCommandForDetailedProjectPage(String command) {
 
 		if (command.equals("c")) {
 			pageIndex = CATEGORIES;
@@ -116,5 +116,9 @@ public class Model {
 
 	public void setOptions(int[] options) {
 		this.options = options;
+	}
+
+	public String[] getStringCommands() {
+		return stringCommands;
 	}
 }

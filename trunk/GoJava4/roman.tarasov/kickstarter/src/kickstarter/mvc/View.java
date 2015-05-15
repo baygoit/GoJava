@@ -29,6 +29,8 @@ public class View {
 		} else {
 			model.setOptions(null);
 		}
-		ui.display(model.stringCommands[index]);
+		String[] stringCommands=model.getStringCommands();
+		
+		ui.display(stringCommands[index]);
 	}
 }

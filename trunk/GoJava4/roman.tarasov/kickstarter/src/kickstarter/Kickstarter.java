@@ -16,7 +16,6 @@ import kickstarter.repository.Storage;
 import kickstarter.ui.ConsoleUI;
 import kickstarter.ui.UserInterface;
 
-//Start MVC architecture
 public class Kickstarter {
 	Storage<Category> categories;
 	Storage<Project> projects;
@@ -56,11 +55,11 @@ public class Kickstarter {
 	void load() {
 
 		Quote quote = new Quote();
-		quote.setQuote("first quote");
+		quote.setQuote("Explore projects, everywhere");
 		quotes.add(quote);
 
 		quote = new Quote();
-		quote.setQuote("second quote");
+		quote.setQuote("'To be is to do'—Socrates. 'To do is to be'—Jean-Paul Sartre. 'Do be do be do'—Frank Sinatra");
 		quotes.add(quote);
 
 		Category category;

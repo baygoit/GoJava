@@ -1,6 +1,5 @@
 package kickstarter.pages;
 
-import kickstarter.entities.Category;
 import kickstarter.entities.Project;
 import kickstarter.repository.EntityStorage;
 import kickstarter.repository.Storage;
@@ -9,7 +8,6 @@ import kickstarter.ui.UserInterface;
 public class ProjectsPage extends Page {
 	private UserInterface ui;
 	private Storage<Project> projects;
-	public Category targetCategory;
 	int targetCategoryID;
 	int[] parameterForPrint;
 
@@ -21,13 +19,13 @@ public class ProjectsPage extends Page {
 	public void print(int[] parameterForPrint) {
 		this.parameterForPrint = parameterForPrint;
 		targetCategoryID = parameterForPrint[0];
-		
+
 		ui.display("________________________");
 		ui.display("|     Projects         |");
 		ui.display("|______________________|");
-		
+
 		selectProject();
-		
+
 		ui.display("------------------------");
 	}
 

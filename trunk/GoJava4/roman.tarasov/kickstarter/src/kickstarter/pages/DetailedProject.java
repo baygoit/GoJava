@@ -8,8 +8,8 @@ import kickstarter.ui.UserInterface;
 public class DetailedProject extends Page {
 	private Storage<Project> projects;
 	private UserInterface ui;
-	Project project;
-	Storage<Comments> allComments;
+	private Project project;
+	private Storage<Comments> allComments;
 
 	public DetailedProject(UserInterface ui, Storage<Comments> allComments,
 			Storage<Project> projects) {
@@ -33,7 +33,7 @@ public class DetailedProject extends Page {
 		return null;
 	}
 
-	void getProjectByID(int projectID) {
+	private void getProjectByID(int projectID) {
 		for (int index = 0; index < projects.length(); index++) {
 			if (projects.getEntity(index).ID == projectID) {
 				project = projects.getEntity(index);
