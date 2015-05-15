@@ -23,10 +23,10 @@ public class Kickstarter {
 	Storage<Quote> quotes;
 	Model model;
 	View view;
-	Controller controller;
+	public Controller controller;
 	UserInterface ui;
 
-	Kickstarter() {
+	public Kickstarter() {
 		categories = new EntityStorage<Category>();
 		projects = new EntityStorage<Project>();
 		allComments = new EntityStorage<Comments>();
@@ -43,6 +43,10 @@ public class Kickstarter {
 		kickstarter.run();
 	}
 
+	public void testUI(UserInterface ui) {
+		this.ui = ui;
+	}
+
 	private void run() {
 		String command;
 		while (true) {
@@ -52,7 +56,22 @@ public class Kickstarter {
 		}
 	}
 
-	void load() {
+	public void testLoadQuote(String stringToQuote) {
+		Quote quote = new Quote();
+		quote.setQuote(stringToQuote);
+		quotes.add(quote);
+	}
+
+	public void testLoadComments() {
+		Category category = new Category("test comments");
+		Project project = new Project("test comments", category);
+		Comments comments = new Comments(project);
+		for (int number = 0; number < 30; number++) {
+			comments.addComment(1, "comment");
+		}
+	}
+
+	public void load() {
 
 		Quote quote = new Quote();
 		quote.setQuote("Explore projects, everywhere");
