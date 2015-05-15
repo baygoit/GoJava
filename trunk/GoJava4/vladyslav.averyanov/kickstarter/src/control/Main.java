@@ -1,10 +1,14 @@
-package go_java_4.vladyslav_averyanov.kickstarter;
+package control;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.Random;
+
+import model.Category;
+import model.Project;
+import model.Quote;
 
 public class Main {
 

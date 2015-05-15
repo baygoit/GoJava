@@ -1,4 +1,4 @@
-package go_java_4.vladyslav_averyanov.kickstarter;
+package model;
 
 public class Quote {
 	
