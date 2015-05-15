@@ -4,78 +4,84 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import anagram_tdd.reverse.WordsReverser;
+
 public class AnagramTest {
 
 	@Test
 	public void shouldEmptyString_whenEmptyString() {
-		assertEquals("", new Anagram("").getAnagram());
-	}
-
-	@Test(expected = IllegalArgumentException.class)
-	public void shouldException_whenNull() {
-		assertNotEquals("", new Anagram(null).getAnagram());
+		assertAnagram("", "");
 	}
 
 	@Test
 	public void shouldEmptyString_whenSpace() {
-		assertEquals("", new Anagram(" ").getAnagram());
+		assertAnagram("", " ");
 	}
 
 	@Test
 	public void shouldLetter_whenLetter() {
-		assertEquals("a", new Anagram("a").getAnagram());
+		assertAnagram("a", "a");
 	}
 
 	@Test
 	public void shouldDigit_whenDigit() {
-		assertEquals("1", new Anagram("1").getAnagram());
+		assertAnagram("1", "1");
 	}
 
 	@Test
 	public void shouldReverseLetters_whenTwoLetters() {
-		assertEquals("ba", new Anagram("ab").getAnagram());
+		assertAnagram("ba", "ab");
 	}
 
 	@Test
 	public void shouldReverseDigits_whenTwoDigits() {
-		assertEquals("21", new Anagram("12").getAnagram());
+		assertAnagram("21", "12");
 	}
 
 	@Test
 	public void shouldReverseWord_whenWord() {
-		assertEquals("drow", new Anagram("word").getAnagram());
+		assertAnagram("drow", "word");
 	}
 
 	@Test
 	public void shouldReverseNumber_whenNumber() {
-		assertEquals("654321", new Anagram("123456").getAnagram());
+		assertAnagram("654321", "123456");
 	}
 
 	@Test
 	public void shouldReverseEachWord_whenSentence() {
-		assertEquals("marganA esrever hcae drow", new Anagram("Anagram reverse each word").getAnagram());
+		assertAnagram("marganA esrever hcae drow", "Anagram reverse each word");
 	}
 
 	@Test
 	public void shouldReverseEachNumber_whenNumbers() {
-		assertEquals("321 654 987", new Anagram("123 456 789").getAnagram());
+		assertAnagram("321 654 987", "123 456 789");
 	}
 
 	@Test
 	public void shouldReverseEachWordOrNumber_whenSentenceWithNumbers() {
-		assertEquals("marganA esrever hcae drow 321", new Anagram("Anagram reverse each word 123").getAnagram());
+		assertAnagram("marganA esrever hcae drow 321", "Anagram reverse each word 123");
 	}
 
 	@Test
 	public void shouldIgnoreFirstAndLastSpaces_whenSentenceWithFirstOrLastSpaces() {
-		assertEquals("marganA esrever hcae drow 321", new Anagram(" Anagram reverse each word 123 ").getAnagram());
-		assertEquals("marganA esrever hcae drow 321", new Anagram(" Anagram reverse each word 123").getAnagram());
-		assertEquals("marganA esrever hcae drow 321", new Anagram("Anagram reverse each word 123 ").getAnagram());
+		assertAnagram("marganA esrever hcae drow 321", " Anagram reverse each word 123 ");
+		assertAnagram("marganA esrever hcae drow 321", " Anagram reverse each word 123");
+		assertAnagram("marganA esrever hcae drow 321", "Anagram reverse each word 123 ");
 	}
 
 	@Test
 	public void shouldSentenceWithDoubleSpaces_whenSentenceWithDoubleSpaces() {
-		assertEquals("marganA  esrever  hcae drow  321", new Anagram("Anagram  reverse  each word  123").getAnagram());
+		assertAnagram("marganA  esrever  hcae drow  321", "Anagram  reverse  each word  123");
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void shouldException_whenNullLine() {
+		new Anagram(null, new WordsReverser()).getAnagram();
+	}
+	
+	private void assertAnagram(String expected, String inputLine) {
+		assertEquals(expected, new Anagram(inputLine, new WordsReverser()).getAnagram());
 	}
 
 }
