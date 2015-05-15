@@ -7,8 +7,6 @@ import com.morkva.logic.*;
 import com.morkva.model.Repository;
 import com.morkva.model.impl.RepositoryImpl;
 
-import java.util.Scanner;
-
 public class KickstarterApp {
 
     static Category[] defaultCategories = new Category[]{
@@ -53,7 +51,6 @@ public class KickstarterApp {
 
     private Quoter quoter;
     private Repository<Category> categoryRepository;
-    private Repository<Quote> quoteRepository;
 
     private Reader reader;
 	private Printer printer;
@@ -61,9 +58,8 @@ public class KickstarterApp {
     public KickstarterApp(Printer printer) {
     	this.printer = printer;
         this.reader = new ConsoleReader(printer);
-        quoteRepository = new RepositoryImpl<>(defaultQuotes);
         categoryRepository = new RepositoryImpl<>(defaultCategories);
-        quoter = new ConsoleQuoter(quoteRepository);
+        quoter = new ConsoleQuoter(new RepositoryImpl<>(defaultQuotes));
 
         defaultCategories[0].setProjects(softwareCategoryProjects);
         defaultCategories[1].setProjects(videoCategoryProjects);
@@ -75,7 +71,7 @@ public class KickstarterApp {
     	int categoriesSize = categoryRepository.size();
         while (true) {
     		//Show quote
-            println(quoter.quote());
+            quoter.showQuote();
             
             showCategories(categoriesSize);
             

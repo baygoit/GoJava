@@ -18,15 +18,27 @@ public class RepositoryImpl<T extends Entity> implements Repository<T> {
         sort();
     }
 
+    public RepositoryImpl() {
+        this.objects = (T[]) new Entity[0]; //Facepalm, need Collections!
+    }
+
     @Override
     public T getByIndex(int index) {
-        return objects[index];
+        if (objects.length == 0) {
+            return null;
+        } else {
+            return objects[index];
+        }
     }
 
     @Override
     public T getById(int id) {
-        int searchResult = search(id);
-        return objects[searchResult];
+        if (objects.length == 0) {
+            return null;
+        } else {
+            int searchResult = search(id);
+            return objects[searchResult];
+        }
     }
 
     @Override

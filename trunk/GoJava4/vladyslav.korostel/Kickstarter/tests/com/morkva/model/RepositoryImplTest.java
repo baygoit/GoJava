@@ -12,101 +12,121 @@ import org.junit.Test;
  */
 public class RepositoryImplTest {
 
-    Category[] categories;
-    Quote[] quotes;
-
     Repository<Category> categoryRepository;
     Repository<Quote> quoteRepository;
 
     @Before
-    public void setUpAll() throws Exception {
-        categories = new Category[] {
-                new Category(3, "Name 3"),
-                new Category(2, "Name 2"),
-                new Category(1, "Name 1"),
-                new Category(4, "Name 4")
-        };
-
-        quotes = new Quote[] {
-                new Quote(1, "Test Quote", "Test author"),
-                new Quote(2, "«Пользователь» — слово, используемое компьютерщиками-профессионалами вместо слова «идиот».", "Дейв Барри"),
-                new Quote(3, "Каждый дурак может написать программу, которую может понять компьютер. Хороший программист пишет программу, которую может понять человек.", "Мартин Фаулер"),
-                new Quote(4, "Написание первых 90% программы занимает 90% времени. Оставшиеся 10% также требуют 90% времени, а окончательная шлифовка — еще 90% времени.", "Нейл Рубенкинг"),
-                new Quote(5, "Программирование — это гонка между компьютерщиками, которые создают программы, все лучше защищенные от дурака, и природой, которая создает все лучших дураков. Пока что природа выигрывает.", "Рич Кук")
-        };
-
-
-        categoryRepository = new RepositoryImpl<>(categories);
-        quoteRepository = new RepositoryImpl<>(quotes);
-
+    public void setUp() {
+        categoryRepository = new RepositoryImpl<>();
+        quoteRepository = new RepositoryImpl<>();
     }
 
     @Test
-    public void testGetByIndex() throws Exception {
+    public void shouldNonEmpty_WhenAdd() {
+        categoryRepository.add(new Category(1, "Name 1"));
+        Assert.assertEquals(1, categoryRepository.size());
+    }
+
+    @Test
+    public void shouldNotAdd_WhenExist() {
+        categoryRepository.add(new Category(1, "Name 1"));
+        boolean added = categoryRepository.add(new Category(1, "Name 1"));
+        Assert.assertFalse(added);
+        Assert.assertEquals(1, categoryRepository.size());
+    }
+
+    @Test
+    public void shouldNotRemove_WhenEmpty() {
+        boolean removed = categoryRepository.remove(new Category(1, "Name 1"));
+        Assert.assertFalse(removed);
+    }
+
+    @Test
+    public void shouldNotRemove_WhenNotExist() {
+        categoryRepository.add(new Category(1, "Name 1"));
+        categoryRepository.add(new Category(2, "Name 2"));
+        boolean removed = categoryRepository.remove(new Category(3, "Name 3"));
+        Assert.assertFalse(removed);
+    }
+
+    @Test
+    public void shouldRemove_WhenExist() {
+        Category category1 = new Category(1, "Name 1");
+        categoryRepository.add(category1);
+        Category category2 = new Category(2, "Name 2");
+        categoryRepository.add(category2);
+        Assert.assertEquals(2, categoryRepository.size());
+
+        boolean removed = categoryRepository.remove(category2);
+
+        Assert.assertTrue(removed);
+        Assert.assertEquals(1, categoryRepository.size());
+    }
+
+    @Test
+    public void shouldNotUpdate_WhenEmpty() {
+        boolean updated = categoryRepository.update(new Category(1, "Name 2"));
+        Assert.assertFalse(updated);
+    }
+
+    @Test
+    public void shouldNotUpdate_WhenNotExist() {
+        Category category1 = new Category(1, "Name 1");
+        Category category2 = new Category(2, "Name 2");
+        categoryRepository.add(category1);
+        categoryRepository.add(category2);
+        Assert.assertEquals(2, categoryRepository.size());
+
+        Category category3 = new Category(3, "Name 3");
+        boolean updated = categoryRepository.update(category3);
+        Assert.assertFalse(updated);
+    }
+
+    @Test
+    public void shouldUpdate_WhenExist() {
+        Category category1 = new Category(1, "Name 1");
+        Category category2 = new Category(2, "Name 2");
+        categoryRepository.add(category1);
+        categoryRepository.add(category2);
+        Assert.assertEquals(2, categoryRepository.size());
+
+        category2.setName("New Name 2");
+        boolean updated = categoryRepository.update(category2);
+        Assert.assertTrue(updated);
+        Assert.assertEquals("New Name 2", categoryRepository.getById(2).getName());
+    }
+
+    @Test
+    public void shouldNull_WhenEmpty() throws Exception {
         Category category = categoryRepository.getByIndex(0);
-        Category category2 = categoryRepository.getByIndex(3);
+        Category category2 = categoryRepository.getById(0);
 
-        Assert.assertEquals(category.getName(), "Name 1");
-        Assert.assertEquals(category2.getName(), "Name 4");
-
-        Quote quote1 = quoteRepository.getByIndex(0);
-        Quote quote2 = quoteRepository.getByIndex(4);
-
-        Assert.assertEquals(quote1.getId(), 1);
-        Assert.assertEquals(quote2.getId(), 5);
+        Assert.assertNull(category);
+        Assert.assertNull(category2);
     }
 
     @Test
-    public void testGetById() throws Exception {
-        Quote quote1 = quoteRepository.getById(3);
+    public void shouldNotNull_WhenNotEmpty() throws Exception {
+        categoryRepository.add(new Category(1, "Name 1"));
+        Category category = categoryRepository.getByIndex(0);
+        Category category2 = categoryRepository.getById(1);
 
-        Assert.assertEquals(quote1.getValue(), "Каждый дурак может написать программу, которую может понять компьютер. Хороший программист пишет программу, которую может понять человек.");
+        Assert.assertNotNull(category);
+        Assert.assertEquals("Name 1", category.getName());
 
-        Category category = categoryRepository.getById(2);
-
-        Assert.assertEquals(category.getId(), 2);
+        Assert.assertNotNull(category2);
+        Assert.assertEquals("Name 1", category2.getName());
     }
 
     @Test
-    public void testAdd() throws Exception {
-        Category categoryToAdd = new Category(5, "Name 5");
-        categoryRepository.add(categoryToAdd);
-        Category categoryToTest = categoryRepository.getById(5);
-        Assert.assertEquals(categoryToTest.getName(), "Name 5");
-
-        Quote quote1 = new Quote(6, "Test Quote", "Test Author");
-        quoteRepository.add(quote1);
-        Quote quote2 = quoteRepository.getById(6);
-        Assert.assertEquals(quote2.getValue(), quote1.getValue());
-    }
-
-    @Test
-    public void testRemove() throws Exception {
-        quoteRepository.remove(quotes[2]);
-        Assert.assertEquals(quoteRepository.size(), quotes.length-1);
-
-        categoryRepository.remove(categories[1]);
-        Assert.assertEquals(categoryRepository.size(), 3);
-    }
-
-    @Test
-    public void testUpdate() throws Exception {
-        Category category = categories[0];
-        category.setName("Name test");
-        categoryRepository.update(category);
-        Category category2 = categoryRepository.getById(category.getId());
-        Assert.assertEquals(category2.getName(), "Name test");
-
-        Quote quote1 = quotes[3];
-        quote1.setValue("Test Value");
-        quoteRepository.update(quote1);
-        Quote quote2 = quoteRepository.getById(quote1.getId());
-        Assert.assertEquals(quote2.getValue(), "Test Value");
-    }
-
-    @Test
-    public void testSize() throws Exception {
-        Assert.assertEquals(categoryRepository.size(), categories.length);
-        Assert.assertEquals(quoteRepository.size(), quotes.length);
+    public void shouldNotEmpty_WhenCreatedWithParams() {
+        Category[] categories = new Category[] {
+                new Category(1, "Name 1"),
+                new Category(3, "Name 3"),
+                new Category(2, "Name 2")
+        };
+        categoryRepository = new RepositoryImpl<>(categories);
+        int size = categoryRepository.size();
+        Assert.assertEquals(3, size);
     }
 }

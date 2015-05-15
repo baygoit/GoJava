@@ -2,7 +2,6 @@ package com.morkva.logic;
 
 import com.morkva.entities.Quote;
 import com.morkva.model.Repository;
-import com.morkva.model.impl.QuotesRepository;
 
 import java.util.Random;
 
@@ -18,7 +17,7 @@ public class ConsoleQuoter implements Quoter<String> {
     }
 
     @Override
-    public String quote() {
-        return quotesRepository.getByIndex(new Random().nextInt(quotesRepository.size())).toString();
+    public void showQuote() {
+        System.out.println(quotesRepository.getByIndex(new Random().nextInt(quotesRepository.size())).toString());
     }
 }
