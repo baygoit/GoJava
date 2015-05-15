@@ -6,6 +6,6 @@ public class RunKickstarter {
 
 	Kickstarter application = new Kickstarter();
 	application.run();
-	
+
     }
 }
