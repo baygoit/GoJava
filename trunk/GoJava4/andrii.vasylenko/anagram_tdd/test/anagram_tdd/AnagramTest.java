@@ -76,19 +76,19 @@ public class AnagramTest {
 		assertAnagramUsedWordsReverser("marganA  esrever  hcae drow  321", "Anagram  reverse  each word  123");
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = NullPointerException.class)
 	public void shouldException_whenNullLine() {
 		assertAnagramUsedWordsReverser("", null);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = NullPointerException.class)
 	public void shouldException_whenNullReverser() {
 		assertAnagram("", "", null);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void shouldException_whenLine—ontainsNotAllowSymbols() {
-		assertAnagramUsedWordsReverser("", "marganA!  esrever&  hcae? drow)  ,321");
+		assertAnagramUsedWordsReverser("", "It's not allow symbols: !&?), ect");
 	}
 
 	private void assertAnagramUsedWordsReverser(String expected, String inputLine) {

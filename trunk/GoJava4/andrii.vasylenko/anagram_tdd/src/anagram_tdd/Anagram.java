@@ -10,27 +10,21 @@ public class Anagram {
 	public Anagram(String line, Reverser reverser) throws IllegalArgumentException {
 		this.line = line;
 		this.reverser = reverser;
-		if (!checkInitialization()) {
-			throw new IllegalArgumentException();
-		}
+		
+		checkInitialization();
 	}
 
 	public String getAnagram() {
 		return reverser.reverseLine(line);
 	}
 
-	private boolean checkInitialization() {
-		if (line == null) {
-			return false;
-		}
-		if (reverser == null) {
-			return false;
+	private void checkInitialization() {
+		if (line == null || reverser == null) {
+			throw new NullPointerException();
 		}
 		if (!reverser.checkLine(line)) {
-			return false;
+			throw new IllegalArgumentException();
 		}
-
-		return true;
 	}
 
 }
