@@ -16,4 +16,14 @@ public class AnagramTest {
 		assertNotEquals("", new Anagram(null).getAnagram());
 	}
 
+	@Test
+	public void shouldEmptyString_whenSpace() {
+		assertEquals("", new Anagram(" ").getAnagram());
+	}
+
+	@Test
+	public void shouldLetter_whenLetter() {
+		assertEquals("a", new Anagram("a").getAnagram());
+	}
+
 }

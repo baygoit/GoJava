@@ -8,7 +8,7 @@ public class Anagram {
 		if (line == null) {
 			throw new IllegalArgumentException();
 		}
-		this.line = line;
+		this.line = line.trim();
 	}
 
 	public String getAnagram() {
