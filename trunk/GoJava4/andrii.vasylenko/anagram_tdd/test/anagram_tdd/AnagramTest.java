@@ -46,4 +46,9 @@ public class AnagramTest {
 		assertEquals("drow", new Anagram("word").getAnagram());
 	}
 
+	@Test
+	public void shouldReverseNumber_whenNumber() {
+		assertEquals("654321", new Anagram("123456").getAnagram());
+	}
+
 }
