@@ -36,4 +36,9 @@ public class AnagramTest {
 		assertEquals("ba", new Anagram("ab").getAnagram());
 	}
 
+	@Test
+	public void shouldReverseDigits_whenTwoDigits() {
+		assertEquals("21", new Anagram("12").getAnagram());
+	}
+
 }
