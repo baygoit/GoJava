@@ -80,6 +80,11 @@ public class AnagramTest {
 		new Anagram(null, new WordsReverser()).getAnagram();
 	}
 	
+	@Test(expected = IllegalArgumentException.class)
+	public void shouldException_whenNullReverser() {
+		new Anagram("", null).getAnagram();
+	}
+	
 	private void assertAnagram(String expected, String inputLine) {
 		assertEquals(expected, new Anagram(inputLine, new WordsReverser()).getAnagram());
 	}
