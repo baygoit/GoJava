@@ -1,5 +1,8 @@
 package anagram_tdd;
 
+import anagram_tdd.reverse.Reverser;
+import anagram_tdd.reverse.WordsReverser;
+
 public class Anagram {
 
 	private String line;

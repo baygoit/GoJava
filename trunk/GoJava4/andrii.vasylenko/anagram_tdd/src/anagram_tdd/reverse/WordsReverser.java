@@ -1,4 +1,4 @@
-package anagram_tdd;
+package anagram_tdd.reverse;
 
 public class WordsReverser implements Reverser {
 
