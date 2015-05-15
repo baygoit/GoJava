@@ -11,7 +11,7 @@ public class AnagramTest {
 		assertEquals("", new Anagram("").getAnagram());
 	}
 
-	@Test(expected=IllegalArgumentException.class)
+	@Test(expected = IllegalArgumentException.class)
 	public void shouldException_whenNull() {
 		assertNotEquals("", new Anagram(null).getAnagram());
 	}
@@ -71,6 +71,11 @@ public class AnagramTest {
 		assertEquals("marganA esrever hcae drow 321", new Anagram(" Anagram reverse each word 123 ").getAnagram());
 		assertEquals("marganA esrever hcae drow 321", new Anagram(" Anagram reverse each word 123").getAnagram());
 		assertEquals("marganA esrever hcae drow 321", new Anagram("Anagram reverse each word 123 ").getAnagram());
+	}
+
+	@Test
+	public void shouldSentenceWithDoubleSpaces_whenSentenceWithDoubleSpaces() {
+		assertEquals("marganA  esrever  hcae drow  321", new Anagram("Anagram  reverse  each word  123").getAnagram());
 	}
 
 }
