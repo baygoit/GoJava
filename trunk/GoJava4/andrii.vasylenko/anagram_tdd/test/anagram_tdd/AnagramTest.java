@@ -74,17 +74,22 @@ public class AnagramTest {
 	public void shouldSentenceWithDoubleSpaces_whenSentenceWithDoubleSpaces() {
 		assertAnagram("marganA  esrever  hcae drow  321", "Anagram  reverse  each word  123");
 	}
-	
+
 	@Test(expected = IllegalArgumentException.class)
 	public void shouldException_whenNullLine() {
 		new Anagram(null, new WordsReverser()).getAnagram();
 	}
-	
+
+	@Test(expected = IllegalArgumentException.class)
+	public void shouldException_whenLine—ontainsNotAllowSymbols() {
+		new Anagram("marganA!  esrever&  hcae? drow)  ,321", new WordsReverser()).getAnagram();
+	}
+
 	@Test(expected = IllegalArgumentException.class)
 	public void shouldException_whenNullReverser() {
 		new Anagram("", null).getAnagram();
 	}
-	
+
 	private void assertAnagram(String expected, String inputLine) {
 		assertEquals(expected, new Anagram(inputLine, new WordsReverser()).getAnagram());
 	}

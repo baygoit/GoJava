@@ -26,6 +26,10 @@ public class Anagram {
 		if (reverser == null) {
 			return false;
 		}
+		if (!line.isEmpty() && !line.matches("([A-Za-z0-9 ]+)")) {
+			return false;
+		}
+
 		return true;
 	}
 
