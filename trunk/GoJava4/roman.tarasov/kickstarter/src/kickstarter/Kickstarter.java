@@ -15,7 +15,7 @@ import kickstarter.repository.EntityStorage;
 import kickstarter.repository.Storage;
 import kickstarter.ui.ConsoleUI;
 import kickstarter.ui.UserInterface;
-
+//Start MVC architecture
 public class Kickstarter {
 	Storage<Category> categories;
 	Storage<Project> projects;
