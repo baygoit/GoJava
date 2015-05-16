@@ -51,13 +51,17 @@ public class LocalDataSource implements DataSource {
 
 	@Override
 	public String getCategoryName(int categoryIndex) {
-		// TODO Auto-generated method stub
+		for (Category c : data.get(categoryIndex-1).keySet()) {
+			return c.getName();
+		}
 		return null;
 	}
 
 	@Override
 	public Project getProject(int category, int project) {
-		// TODO Auto-generated method stub
+		for (Category c : data.get(categoryIndex-1).keySet()) {
+			return c;
+		}
 		return null;
 	}
 
