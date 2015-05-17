@@ -1,7 +1,8 @@
 package kickstarter.pages;
 
 public class TheEndPage extends Page {
-	public void print() {
+	public void viewWorkedStatus(int status) {
+		System.exit(0);
 	}
 
 	public String getHeader() {
@@ -12,4 +13,5 @@ public class TheEndPage extends Page {
 		header += "\n=========================";
 		return header;
 	}
+	
 }

@@ -6,6 +6,7 @@ import kickstarter.ui.UserInterface;
 public class View {
 	Model model;
 	Page page;
+	final int OK=0;
 	private UserInterface ui;
 
 	public View(Model model, UserInterface ui) {
@@ -17,7 +18,7 @@ public class View {
 		page = model.getPage();
 		String header=page.getHeader();
 		ui.display(header);
-		page.print();
+		page.viewWorkedStatus(OK);
 		
 	}
 }

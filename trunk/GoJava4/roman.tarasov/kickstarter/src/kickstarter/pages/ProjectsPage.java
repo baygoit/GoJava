@@ -1,23 +1,31 @@
 package kickstarter.pages;
 
+import kickstarter.mvc.Model;
+import kickstarter.mvc.iNavigator;
 import kickstarter.repository.ProjectRepository;
 
 public class ProjectsPage extends Page {
 	ProjectRepository projects;
 	int targetCategoryID;
-	final int ERROR_PAGE = 3;
+	
 	final int PROJECTS = 1;
 	final int DETAILED_PROJECT = 2;
+	iNavigator navigator;
+	final int THIS_PAGE=1;    //projects
+	final int NEXT_PAGE=2;    //detailed project
+	final int PREVIOUS_PAGE=0;//categories
+	final int ERROR_PAGE = 3; //error page
 
-	public ProjectsPage(ProjectRepository projects) {
+	public ProjectsPage(ProjectRepository projects, Model model) {
 		this.projects = projects;
+		navigator=model;
 	}
 
 	public void setParameterForPrint(int parameterForPrint) {
 		this.parameterForPrint = parameterForPrint;
 	}
 
-	public void print() {
+	public void viewWorkedStatus(int status) {
 	}
 
 	public String getHeader() {
@@ -29,6 +37,7 @@ public class ProjectsPage extends Page {
 		header += "\n";
 		header += projects.printProjectsInfo(parameterForPrint);
 		header += "\n------------------------";
+		header += "\n  p- previous page";
 		return header;
 	}
 
@@ -38,7 +47,7 @@ public class ProjectsPage extends Page {
 
 	public void execute(String message) {
 		if (message.equals("p")) {
-			nextPage = 1;
+			navigator.pageWillBe(PREVIOUS_PAGE);
 
 			return;
 		}
@@ -47,14 +56,14 @@ public class ProjectsPage extends Page {
 		if (options != null) {
 			for (int index = 0; index < options.length; index++) {
 				if (message.equals(options[index])) {
-					nextPage = DETAILED_PROJECT;
-					parameterForPrint = optionsInt[index];
-
+					navigator.pageWillBe(NEXT_PAGE);
+					
+					navigator.setOption(optionsInt[index],options[index]);
 					return;
 				}
 			}
 		}
-		nextPage = ERROR_PAGE;
+		navigator.pageWillBe(ERROR_PAGE);
 	}
 }
 /*

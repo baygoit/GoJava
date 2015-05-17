@@ -2,7 +2,7 @@ package kickstarter.pages;
 
 public class WrongChoicePage extends Page{
 
-	public void print() {
+	public void viewWorkedStatus(int status) {
 	}
 	public String getHeader() {
 		

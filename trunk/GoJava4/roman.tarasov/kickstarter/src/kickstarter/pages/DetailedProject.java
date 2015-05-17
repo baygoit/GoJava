@@ -60,7 +60,7 @@ public class DetailedProject extends Page {
 		return header;
 	}
 
-	public void print() {
+	public void viewWorkedStatus(int status) {
 	}
 
 	public String[] getOptions() {

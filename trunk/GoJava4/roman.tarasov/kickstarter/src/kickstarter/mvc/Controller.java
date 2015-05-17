@@ -23,7 +23,7 @@ public class Controller {
 		model.setPage(pageIndex);
 	}
 
-	public void addPage(Page page, ModelPage modelPage) {
-		model.add(page, modelPage);
+	public void addPage(Page page) {
+		model.add(page);
 	}
 }

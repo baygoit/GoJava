@@ -18,7 +18,7 @@ public class Page {
 		return null;
 	}
 
-	public void print() {
+	public void viewWorkedStatus(int status) {
 	}
 
 	public int getNextPage() {

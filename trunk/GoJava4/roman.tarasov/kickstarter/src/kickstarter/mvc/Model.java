@@ -1,91 +1,35 @@
 package kickstarter.mvc;
 
-
-
 import kickstarter.pages.Page;
 import kickstarter.repository.EntityStorage;
 import kickstarter.repository.Storage;
 
-public class Model {
+public class Model implements iNavigator {
 	private Storage<Page> pages;
-	private Storage<ModelPage> modelPages;
-	private String[] options;
+
 	private String parameterForPrint;
 	private int pageIndex;
-	private int previousPageIndex;
+
 	final int CATEGORIES = 0;
 	final int PROJECTS = 1;
 	final int DETAILED_PROJECT = 2;
 	final int WRONG_CHOICE = 3;
-	ModelPageInterface mpi;
-	ModelPage modelPage;
+	int intOption;
+	String stringOption;
+
 	Page page;
 
 	public Model() {
 		pages = new EntityStorage<Page>();
-		modelPages = new EntityStorage<ModelPage>();
-	}
-public void update (String command) {
-	
-	page = pages.getEntity(pageIndex);
-	page.execute(command);
-	int newpage=page.getNextPage();
-	int parameter =page.parameterForPrint;
 
-	pageIndex=newpage;
-	page = pages.getEntity(pageIndex);
-	page.parameterForPrint=parameter;
-
-	
-}
-/*
-	public void updates(String command) {
-		modelPage = modelPages.getEntity(pageIndex);
-		if (command == null) {
-			return;
-		}
-		if (command.equals("e")) {
-			pageIndex = modelPage.endPage;
-			return;
-
-		}
-		if (command.equals("p")) {
-			System.out.println("pppp");
-			pageIndex = modelPage.previousPage;
-			System.out.println(pageIndex);
-			return;
-		}
-		options = modelPage.options;
-		System.out.println(Arrays.toString(options) + " options");
-		if (options != null) {
-			for (int index = 0; index < options.length; index++) {
-				if (command.equals(options[index])) {
-
-					pageIndex = modelPage.nextPage;
-					modelPage = modelPages.getEntity(pageIndex);
-					modelPage.parameter = options[index];
-					parameterForPrint = new String(options[index]);
-					return;
-				}
-			}
-		}
-
-		if (pageIndex == modelPage.errorPage) {
-			return;
-		}
-		int tempMemory = pageIndex;
-		pageIndex = modelPage.errorPage;
-		modelPage = modelPages.getEntity(pageIndex);
-		modelPage.previousPage = tempMemory;
-	}
-*/
-	public void setOptions(String[] options) {
-		modelPage = modelPages.getEntity(pageIndex);
-		modelPage.setOptions(options);
 	}
 
-	public String getCommentOfOptions() {
-		return modelPage.getCommentOfOptions();
+	public void update(String command) {
+
+		page = pages.getEntity(pageIndex);
+		page.execute(command);
+		page = pages.getEntity(pageIndex);
+		page.parameterForPrint = intOption;
 	}
 
 	public void setPage(int pageIndex) {
@@ -104,8 +48,27 @@ public void update (String command) {
 		return parameterForPrint;
 	}
 
-	public void add(Page page, ModelPage modelPage) {
+	public void add(Page page) {
 		pages.add(page);
-		modelPages.add(modelPage);
+
+	}
+
+	@Override
+	public void pageWillBe(int nextPage) {
+		pageIndex = nextPage;
+
+	}
+
+	@Override
+	public void prevPage(int prevPage) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void setOption(int intOption, String stringOption) {
+		this.intOption = intOption;
+		this.stringOption = stringOption;
+
 	}
 }

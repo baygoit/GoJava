@@ -1,11 +1,10 @@
 package kickstarter;
 
-
 import kickstarter.entities.QuestionsAndAnswers;
 
 import kickstarter.mvc.Controller;
 import kickstarter.mvc.Model;
-import kickstarter.mvc.ModelPage;
+
 import kickstarter.mvc.View;
 import kickstarter.pages.CategoriesPage;
 import kickstarter.pages.DetailedProject;
@@ -22,7 +21,6 @@ import kickstarter.ui.ConsoleUI;
 import kickstarter.ui.UserInterface;
 
 public class Kickstarter {
-
 
 	Storage<QuestionsAndAnswers> allComments;
 
@@ -65,35 +63,19 @@ public class Kickstarter {
 		}
 	}
 
-
 	public void load() {
 
-		Page page = new CategoriesPage(categories, quotes);
+		Page page = new CategoriesPage(categories, quotes, model);
 		page.pageId = 0;
-		ModelPage modelPage = new ModelPage(0, 1, 3, 4);
-		modelPage.setCommentOfoptions("Select category by ID ; e - End");
-		controller.addPage(page, modelPage);
+		controller.addPage(page);
 		controller.setPage(0);
-
-		page = new ProjectsPage(projects);
-		modelPage = new ModelPage(0, 2, 3, 4);
-		modelPage
-				.setCommentOfoptions("Select project by ID ; c - to Category Page");
-		controller.addPage(page, modelPage);
-
+		page = new ProjectsPage(projects, model);
+		controller.addPage(page);
 		page = new DetailedProject(allComments, projects);
-		modelPage = new ModelPage(1, 2, 3, 4);
-		modelPage.setCommentOfoptions("c - to Category Page");
-		controller.addPage(page, modelPage);
-
+		controller.addPage(page);
 		page = new WrongChoicePage();
-		modelPage = new ModelPage(1, 2, 3, 4);
-		modelPage.setCommentOfoptions("p - to previous Page");
-		controller.addPage(page, modelPage);
-
+		controller.addPage(page);
 		page = new TheEndPage();
-		modelPage = new ModelPage(1, 2, 3, 4);
-
-		controller.addPage(page, modelPage);
+		controller.addPage(page);
 	}
 }

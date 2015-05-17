@@ -1,30 +1,34 @@
 package kickstarter.pages;
 
 import kickstarter.entities.Quote;
+import kickstarter.mvc.Model;
+import kickstarter.mvc.iNavigator;
 import kickstarter.repository.CategoriesRepository;
 import kickstarter.repository.QuotesRepository;
 
 public class CategoriesPage extends Page {
 
-	// private Storage<Quote> quotes;
-
 	final int ERROR_PAGE = 3;
 	final int PROJECTS = 1;
 	QuotesRepository quotesRepository;
 	CategoriesRepository categories;
+	iNavigator navigator;
+	final int THIS_PAGE=0;    //categories
+	final int NEXT_PAGE=1;    //projects
+	final int PREVIOUS_PAGE=4;//the end
 
 	public CategoriesPage(CategoriesRepository categories,
-			QuotesRepository quotesRepository) {
+			QuotesRepository quotesRepository, Model model) {
 		this.categories = categories;
 		this.quotesRepository = quotesRepository;
-
+		navigator=model;
 	}
 
 	public String getHeader() {
-		Quote randomQuote = quotesRepository.getRandomQuote();
+		Quote quote = quotesRepository.getRandomQuote();
 		String header = "";
 		header += "\n-----Quote------";
-		header += "\n" + randomQuote.getQuote();
+		header += "\n" + quote.getQuote();
 		header += "\n----------------";
 		header += "\n=========================";
 		header += "\n|     Categories        |";
@@ -32,11 +36,11 @@ public class CategoriesPage extends Page {
 		header += "\n";
 		header += categories.getListAllCategories();
 		header += "\n------------------------";
+		header += "\n  p- previous page";
 		return header;
 	}
 
-	public void print() {
-
+	public void viewWorkedStatus(int status) {
 	}
 
 	public String[] getOptions() {
@@ -44,17 +48,22 @@ public class CategoriesPage extends Page {
 	}
 
 	public void execute(String message) {
+		if(message.equals("p")){
+			navigator.pageWillBe(PREVIOUS_PAGE);
+			return;
+		}
 		options = categories.getStringOptions();
 		optionsInt = categories.getIntOptions();
 		if (options != null) {
 			for (int index = 0; index < options.length; index++) {
 				if (message.equals(options[index])) {
-					nextPage = PROJECTS;
-					parameterForPrint = optionsInt[index];
+					navigator.pageWillBe(NEXT_PAGE);
+					navigator.setOption(optionsInt[index],options[index]);
+					
 					return;
 				}
 			}
 		}
-		nextPage = ERROR_PAGE;
+		navigator.pageWillBe(ERROR_PAGE); 
 	}
 }
