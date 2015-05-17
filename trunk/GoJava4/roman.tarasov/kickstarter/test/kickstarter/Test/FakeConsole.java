@@ -16,7 +16,7 @@ public class FakeConsole {
 		kickstarter = new Kickstarter();
 		ui = new TestUI();
 		kickstarter.testUI(ui);
-		kickstarter.load();
+		
 	}
 
 	// @Ignore

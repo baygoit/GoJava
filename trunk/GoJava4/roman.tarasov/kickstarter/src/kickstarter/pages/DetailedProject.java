@@ -2,18 +2,25 @@ package kickstarter.pages;
 
 import kickstarter.entities.QuestionsAndAnswers;
 import kickstarter.entities.Project;
+import kickstarter.mvc.Model;
+import kickstarter.mvc.iNavigator;
 import kickstarter.repository.ProjectRepository;
 import kickstarter.repository.Storage;
 
 public class DetailedProject extends Page {
 
 	ProjectRepository projects;
-
+	iNavigator navigator;
+	final int CATEGORIES = 0;
+	final int PROJECTS = 1;
+	final int DETAILED_PROJECT = 2;
+	final int ERROR_PAGE = 3;
+	final int END_PAGE = 4;
 	private Storage<QuestionsAndAnswers> allComments;
 
 	public DetailedProject(Storage<QuestionsAndAnswers> allComments,
-			ProjectRepository projects) {
-
+			ProjectRepository projects, Model model) {
+		this.navigator = model;
 		this.allComments = allComments;
 		this.projects = projects;
 	}
@@ -49,6 +56,7 @@ public class DetailedProject extends Page {
 		header += "\n";
 		header += projects.printProjectsInfo(parameterForPrint);
 		header += "\n------------------------";
+		header += "\n  p- previous page";
 
 		QuestionsAndAnswers comments = selectCommentsToProject(project);
 		if (comments != null) {
@@ -68,8 +76,15 @@ public class DetailedProject extends Page {
 	}
 
 	public void execute(String message) {
-		nextPage = 1;
-		return;
+		navigator.saveProject(parameterForPrint);
+		if (message.equals("p")) {
+			
+			navigator.pageWillBe(PROJECTS);
+			navigator.setOption(navigator.getSavedCategory(), "null");
+			return;
+		}
+		navigator.savePageBeforeError(DETAILED_PROJECT);
+		navigator.pageWillBe(ERROR_PAGE);
 
 	}
 }

@@ -8,20 +8,21 @@ import kickstarter.repository.QuotesRepository;
 
 public class CategoriesPage extends Page {
 
-	final int ERROR_PAGE = 3;
-	final int PROJECTS = 1;
 	QuotesRepository quotesRepository;
 	CategoriesRepository categories;
 	iNavigator navigator;
-	final int THIS_PAGE=0;    //categories
-	final int NEXT_PAGE=1;    //projects
-	final int PREVIOUS_PAGE=4;//the end
+	
+	final int CATEGORIES = 0;
+	final int PROJECTS = 1;
+	final int DETAILED_PROJECT=2;
+	final int ERROR_PAGE = 3;
+	final int END_PAGE = 4;
 
 	public CategoriesPage(CategoriesRepository categories,
 			QuotesRepository quotesRepository, Model model) {
 		this.categories = categories;
 		this.quotesRepository = quotesRepository;
-		navigator=model;
+		navigator = model;
 	}
 
 	public String getHeader() {
@@ -36,7 +37,7 @@ public class CategoriesPage extends Page {
 		header += "\n";
 		header += categories.getListAllCategories();
 		header += "\n------------------------";
-		header += "\n  p- previous page";
+		header += "\n  e- The End";
 		return header;
 	}
 
@@ -48,8 +49,8 @@ public class CategoriesPage extends Page {
 	}
 
 	public void execute(String message) {
-		if(message.equals("p")){
-			navigator.pageWillBe(PREVIOUS_PAGE);
+		if (message.equals("e")) {
+			navigator.pageWillBe(END_PAGE);
 			return;
 		}
 		options = categories.getStringOptions();
@@ -57,13 +58,14 @@ public class CategoriesPage extends Page {
 		if (options != null) {
 			for (int index = 0; index < options.length; index++) {
 				if (message.equals(options[index])) {
-					navigator.pageWillBe(NEXT_PAGE);
-					navigator.setOption(optionsInt[index],options[index]);
-					
+					navigator.pageWillBe(PROJECTS);
+					navigator.setOption(optionsInt[index], options[index]);
+
 					return;
 				}
 			}
 		}
-		navigator.pageWillBe(ERROR_PAGE); 
+		navigator.savePageBeforeError(CATEGORIES);
+		navigator.pageWillBe(ERROR_PAGE);
 	}
 }

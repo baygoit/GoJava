@@ -3,13 +3,13 @@ package kickstarter.pages;
 public class Page {
 
 	public String[] options;
-	public int [] optionsInt;
+	public int[] optionsInt;
 	public int parameterForPrint;
 	public int selectedCategory;
 	public int selectedProject;
 	public int pageId;
 	public String name;
-	 int nextPage;
+	int nextPage;
 
 	public void execute(String parameter) {
 	}
@@ -23,12 +23,9 @@ public class Page {
 
 	public int getNextPage() {
 		return nextPage;
-		// TODO Auto-generated method stub
-		
 	}
 
 	public String getHeader() {
-		
 		return null;
 	}
 }

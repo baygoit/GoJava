@@ -1,7 +1,13 @@
 package kickstarter.pages;
 
-public class WrongChoicePage extends Page{
+import kickstarter.mvc.Model;
+import kickstarter.mvc.iNavigator;
 
+public class WrongChoicePage extends Page{
+	iNavigator navigator;
+	public WrongChoicePage(Model model) {
+		this.navigator=model;
+	}
 	public void viewWorkedStatus(int status) {
 	}
 	public String getHeader() {
@@ -10,10 +16,17 @@ public class WrongChoicePage extends Page{
 		header += "\n----- Wrong Choice ----------";
 		header += "\ninput correct command, please";
 		header += "\n-----------------------------";
+		header += "\n  p- previous page";
 		return header;
 	}
 
 	public String[] getOptions() {
 		return null;
+	}
+	public void execute(String message) {
+		if (message.equals("p")) {
+			navigator.pageWillBe(navigator.getSavedPage());
+			return;
+		}
 	}
 }

@@ -41,11 +41,22 @@ public class Kickstarter {
 		model = new Model();
 		view = new View(model, ui);
 		controller = new Controller(model, view);
+		Page page = new CategoriesPage(categories, quotes, model);
+		page.pageId = 0;
+		controller.addPage(page);
+		controller.setPage(0);
+		page = new ProjectsPage(projects, model);
+		controller.addPage(page);
+		page = new DetailedProject(allComments, projects,model);
+		controller.addPage(page);
+		page = new WrongChoicePage(model);
+		controller.addPage(page);
+		page = new TheEndPage();
+		controller.addPage(page);
 	}
 
 	public static void main(String[] args) {
 		Kickstarter kickstarter = new Kickstarter();
-		kickstarter.load();
 		kickstarter.run();
 	}
 
@@ -63,19 +74,4 @@ public class Kickstarter {
 		}
 	}
 
-	public void load() {
-
-		Page page = new CategoriesPage(categories, quotes, model);
-		page.pageId = 0;
-		controller.addPage(page);
-		controller.setPage(0);
-		page = new ProjectsPage(projects, model);
-		controller.addPage(page);
-		page = new DetailedProject(allComments, projects);
-		controller.addPage(page);
-		page = new WrongChoicePage();
-		controller.addPage(page);
-		page = new TheEndPage();
-		controller.addPage(page);
-	}
 }
