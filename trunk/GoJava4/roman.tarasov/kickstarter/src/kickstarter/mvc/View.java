@@ -15,6 +15,9 @@ public class View {
 
 	public void print() {
 		page = model.getPage();
+		String header=page.getHeader();
+		ui.display(header);
 		page.print();
+		
 	}
 }

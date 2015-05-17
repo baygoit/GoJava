@@ -4,37 +4,39 @@ import kickstarter.entities.Quote;
 import kickstarter.repository.CategoriesRepository;
 import kickstarter.repository.QuotesRepository;
 
-import kickstarter.ui.UserInterface;
-
 public class CategoriesPage extends Page {
 
 	// private Storage<Quote> quotes;
-	private UserInterface ui;
+
 	final int ERROR_PAGE = 3;
 	final int PROJECTS = 1;
 	QuotesRepository quotesRepository;
 	CategoriesRepository categories;
 
-	public CategoriesPage(CategoriesRepository categories, UserInterface ui,
+	public CategoriesPage(CategoriesRepository categories,
 			QuotesRepository quotesRepository) {
 		this.categories = categories;
 		this.quotesRepository = quotesRepository;
-		this.ui = ui;
+
+	}
+
+	public String getHeader() {
+		Quote randomQuote = quotesRepository.getRandomQuote();
+		String header = "";
+		header += "\n-----Quote------";
+		header += "\n" + randomQuote.getQuote();
+		header += "\n----------------";
+		header += "\n=========================";
+		header += "\n|     Categories        |";
+		header += "\n=========================";
+		header += "\n";
+		header += categories.getListAllCategories();
+		header += "\n------------------------";
+		return header;
 	}
 
 	public void print() {
-		Quote randomQuote = quotesRepository.getRandomQuote();
-		ui.display("-----Quote------");
-		ui.display(randomQuote.getQuote());
-		ui.display("----------------");
 
-		ui.display("=========================");
-		ui.display("|     Categories        |");
-		ui.display("=========================");
-		String list = categories.getListAllCategories();
-		ui.display(list);
-
-		ui.display("------------------------");
 	}
 
 	public String[] getOptions() {

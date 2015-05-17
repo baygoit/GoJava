@@ -68,30 +68,30 @@ public class Kickstarter {
 
 	public void load() {
 
-		Page page = new CategoriesPage(categories, ui, quotes);
+		Page page = new CategoriesPage(categories, quotes);
 		page.pageId = 0;
 		ModelPage modelPage = new ModelPage(0, 1, 3, 4);
 		modelPage.setCommentOfoptions("Select category by ID ; e - End");
 		controller.addPage(page, modelPage);
 		controller.setPage(0);
 
-		page = new ProjectsPage(projects, ui);
+		page = new ProjectsPage(projects);
 		modelPage = new ModelPage(0, 2, 3, 4);
 		modelPage
 				.setCommentOfoptions("Select project by ID ; c - to Category Page");
 		controller.addPage(page, modelPage);
 
-		page = new DetailedProject(ui, allComments, projects);
+		page = new DetailedProject(allComments, projects);
 		modelPage = new ModelPage(1, 2, 3, 4);
 		modelPage.setCommentOfoptions("c - to Category Page");
 		controller.addPage(page, modelPage);
 
-		page = new WrongChoicePage(ui);
+		page = new WrongChoicePage();
 		modelPage = new ModelPage(1, 2, 3, 4);
 		modelPage.setCommentOfoptions("p - to previous Page");
 		controller.addPage(page, modelPage);
 
-		page = new TheEndPage(ui);
+		page = new TheEndPage();
 		modelPage = new ModelPage(1, 2, 3, 4);
 
 		controller.addPage(page, modelPage);

@@ -26,4 +26,9 @@ public class Page {
 		// TODO Auto-generated method stub
 		
 	}
+
+	public String getHeader() {
+		
+		return null;
+	}
 }

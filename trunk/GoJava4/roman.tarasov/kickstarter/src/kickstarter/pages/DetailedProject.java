@@ -4,17 +4,16 @@ import kickstarter.entities.QuestionsAndAnswers;
 import kickstarter.entities.Project;
 import kickstarter.repository.ProjectRepository;
 import kickstarter.repository.Storage;
-import kickstarter.ui.UserInterface;
 
 public class DetailedProject extends Page {
 
 	ProjectRepository projects;
-	private UserInterface ui;
+
 	private Storage<QuestionsAndAnswers> allComments;
 
-	public DetailedProject(UserInterface ui, Storage<QuestionsAndAnswers> allComments,
+	public DetailedProject(Storage<QuestionsAndAnswers> allComments,
 			ProjectRepository projects) {
-		this.ui = ui;
+
 		this.allComments = allComments;
 		this.projects = projects;
 	}
@@ -30,33 +29,38 @@ public class DetailedProject extends Page {
 		return null;
 	}
 
-	public void print() {
+	public String getHeader() {
 		int projectID = parameterForPrint;
-
 		Project project = projects.getProjectById(projectID);
 
-		ui.display("________________________");
-		ui.display("|Detailed project info |");
-		ui.display("|______________________|");
-		ui.display("name     :<" + project.name + ">");
-		ui.display("ID       :<" + project.ID + ">");
-		ui.display("description:<" + project.description + ">");
-		ui.display("goal     :<" + project.goal + ">");
-		ui.display("pledged  :<" + project.pledged + ">");
-		ui.display("days to go :<" + project.daysToGo + ">");
-		ui.display("history :<" + project.history + ">");
-		ui.display("link to video :<" + project.linkToVideo + ">");
-		ui.display("comments :");
+		String header = "";
+		header += "\n________________________";
+		header += "\n|Detailed project info |";
+		header += "\n|______________________|";
+		header += "\nname     :<" + project.name + ">";
+		header += "\nID       :<" + project.ID + ">";
+		header += "\ndescription:<" + project.description + ">";
+		header += "\ngoal     :<" + project.goal + ">";
+		header += "\npledged  :<" + project.pledged + ">";
+		header += "\ndays to go :<" + project.daysToGo + ">";
+		header += "\nhistory :<" + project.history + ">";
+		header += "\nlink to video :<" + project.linkToVideo + ">";
+		header += "\ncomments :";
+		header += "\n";
+		header += projects.printProjectsInfo(parameterForPrint);
+		header += "\n------------------------";
 
 		QuestionsAndAnswers comments = selectCommentsToProject(project);
 		if (comments != null) {
 			for (int index = 0; index < comments.getCommentLength(); index++) {
-				ui.display("user ID:<" + comments.usersID[index]
-						+ ">  comment:<" + comments.comment[index] + ">");
+				header += "user ID:<" + comments.usersID[index]
+						+ ">  comment:<" + comments.comment[index] + ">";
 			}
 		}
-		ui.display("------------------------");
+		return header;
+	}
 
+	public void print() {
 	}
 
 	public String[] getOptions() {
@@ -64,11 +68,7 @@ public class DetailedProject extends Page {
 	}
 
 	public void execute(String message) {
-
 		nextPage = 1;
-
-		System.out.println(parameterForPrint + ".......");
-		// parameterForPrint=optionsInt[index];
 		return;
 
 	}

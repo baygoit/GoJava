@@ -1,22 +1,18 @@
 package kickstarter.pages;
 
-
-import kickstarter.ui.UserInterface;
-
 public class WrongChoicePage extends Page{
-	private UserInterface ui;
-	public WrongChoicePage(UserInterface ui){
-		this.ui=ui;
-	}
-
 
 	public void print() {
-		ui.display(" ");
-		ui.display("----- Wrong Choice ----------");
-		ui.display("input correct command, please");
-		ui.display("-----------------------------");
-		ui.display(" ");
 	}
+	public String getHeader() {
+		
+		String header = "";
+		header += "\n----- Wrong Choice ----------";
+		header += "\ninput correct command, please";
+		header += "\n-----------------------------";
+		return header;
+	}
+
 	public String[] getOptions() {
 		return null;
 	}

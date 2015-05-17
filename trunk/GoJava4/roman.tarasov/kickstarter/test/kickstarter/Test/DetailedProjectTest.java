@@ -12,6 +12,7 @@ import kickstarter.ui.UserInterface;
 import org.junit.Test;
 
 public class DetailedProjectTest {
+/*	
 	UserInterface ui = new ExitUI();
 	Category category = new Category("category");
 	Project project = new Project("project", category);
@@ -43,6 +44,6 @@ public class DetailedProjectTest {
 		assertNull(commentsFromSelectedProject);
 	}
 
-
+*/
 
 }

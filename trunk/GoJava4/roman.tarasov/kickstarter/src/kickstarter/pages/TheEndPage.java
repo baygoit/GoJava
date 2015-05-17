@@ -1,18 +1,15 @@
 package kickstarter.pages;
 
-import kickstarter.ui.UserInterface;
-
 public class TheEndPage extends Page {
-	UserInterface ui;
-
-	public TheEndPage(UserInterface ui) {
-		this.ui = ui;
+	public void print() {
 	}
 
-	public void print(String parameter) {
-		ui.display("=========================");
-		ui.display("|     The End           |");
-		ui.display("=========================");
-		System.exit(0);
+	public String getHeader() {
+
+		String header = "";
+		header += "\n=========================";
+		header += "\n|     The End           |";
+		header += "\n=========================";
+		return header;
 	}
 }
