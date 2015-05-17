@@ -2,11 +2,13 @@ package model;
 
 public class Category {
 	
-	private String name;
-	private Project[] projects;
+	private int id;
+    	private String name;
 	
-	public Category(String name) {
+	
+	public Category(String name, int id) {
 		this.name = name;
+		this.id = id;
 	}
 
 	public String getName() {
@@ -17,12 +19,8 @@ public class Category {
 		this.name = name;
 	}
 
-	public Project[] getProjects() {
-		return projects;
-	}
-
-	public void setProjects(Project[] projects) {
-		this.projects = projects;
+	public int getId() {
+	    return id;
 	}
 			
 }

@@ -1,107 +1,38 @@
 package control;
 
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import model.Category;
+import model.CategoriesRepository;
 import model.Project;
+import model.ProjectsRepository;
+import model.QuotesRepository;
 
 public class Kickstarter {
 
     public static int DEFAULT_INPUT = -1;
 
     public void run() {
-
-	Category designCategory = new Category("DESIGN");
-	Category technologyCategory = new Category("TECHNOLOGY");
-
-	Project designProject01 = new Project(
-		"SNAP",
-		"Design Your Own Furniture",
-		15000,
-		27000,
-		30,
-		"With SNAP you can create endless solutions for your living space. You can "
-			+ "transform any surface into a unique piece of furniture.",
-		"http://www.youtube.com/01",
-		"How do I choose the color combination?");
-	Project designProject02 = new Project("HYDAWAY",
-		"A Pocket-Sized Water Bottle Fit for any Adventure", 20000,
-		181437, 3,
-		"HYDAWAY is a handy alternative to disposable plastic water bottles - it folds"
-			+ "down easily to fit in almost any pocket!",
-		"http://www.youtube.com/0143534",
-		"How much is the bottle weight");
-	Project designProject03 = new Project(
-		"Dash 4.0 Wallet",
-		"A Minimal Wallet Redefined",
-		5000,
-		46848,
-		52,
-		"The ORIGINAL quickdraw wallet for minimalists. Carry the things you need, and "
-			+ "access them easily.",
-		"http://www.youtube.com/0143534",
-		"What are the dimensions of the wallet?");
-	Project designProject04 = new Project(
-		"USB ChargeDoubler",
-		"Double your charging speed!",
-		2750,
-		2140,
-		32,
-		"“THE ORIGINAL” Up to 200% charging speed for iPhone� & Android. No data theft. "
-			+ "The magnetic usb cable for your keyring.",
-		"http://www.youtube.com/0143534", "Have a question?");
-	Project[] designProjects = { designProject01, designProject02,
-		designProject03, designProject04 };
-
-	Project technologyProject01 = new Project(
-		"FireFly Hand",
-		"Light up your life",
-		3500,
-		470,
-		25,
-		"FireFly Hand is the next generation electric "
-			+ "flashlight, which is capable of making your life significantly easier.​",
-		"http://www.youtube.com/0143534", "Have a question?");
-	Project technologyProject02 = new Project(
-		"Cubit",
-		"The Make Anything Platform",
-		50000,
-		169,
-		34,
-		"A platform that brings together plug & play hardware and drag & drop software "
-			+ "to allow everyone to create and invent!",
-		"http://www.youtube.com/0143534", "Have a question?");
-	Project technologyProject03 = new Project(
-		"Noki",
-		"The smart doorlock for Europe",
-		125000,
-		119082,
-		44,
-		"Noki is the first smart doorlock for Europe. It opens your door when you come "
-			+ "home and locks it when you leave.",
-		"http://www.youtube.com/031234", "Have a question?");
-	Project[] technologyProjects = { technologyProject01,
-		technologyProject02, technologyProject03 };
-
-	designCategory.setProjects(designProjects);
-	technologyCategory.setProjects(technologyProjects);
-	Category[] categoryArray = { designCategory, technologyCategory };
-
-	QuoteService quoteService = new QuoteService();
+	
+	QuotesControl quotesControl = new QuotesControl();
+	CategoriesControl categoriesControl = new CategoriesControl();
 	
 	boolean isExit = false;
 	while (!isExit) {
-	    quoteService.callToShowQuoteMenu();
-	    showCategories(categoryArray);
+	    quotesControl.callToShowQuoteMenu();
+	    categoriesControl.showCategories();
+	    
 	    System.out.print("Choose category or print 0 to exit: ");
 
 	    int userInput = DEFAULT_INPUT;
 	    userInput = readUserInput();
+	    ArrayList <Category> categories = categoriesControl.getCategories();
 	    if (userInput == 0) {
 		isExit = true;
-	    } else if (userInput > 0 && userInput <= categoryArray.length) {
-		showCategoryMenu(categoryArray[userInput - 1]);
+	    } else if (userInput > 0 && userInput <= categories.size()) {
+		showCategoryMenu(categories.get(userInput-1));
 	    } else {
 		System.out.println("No such category.");
 	    }
@@ -115,18 +46,13 @@ public class Kickstarter {
 	} catch (InputMismatchException e) {
 	    e.printStackTrace();
 	}
+	System.out.println();
 	return (result >= DEFAULT_INPUT) ? result : DEFAULT_INPUT;
     }
 
-    public static void showCategories(Category[] categories) {
-	System.out.println("Select category: ");
-	for (int i = 0; i < categories.length; i++) {
-	    System.out.println(i + 1 + ": " + categories[i].getName());
-	}
-    }
-
     public static void showCategoryMenu(Category category) {
-	Project[] projectsOfCurrentCategory = category.getProjects();
+	ProjectsControl projectsControl = new ProjectsControl();
+	ArrayList <Project> projectsOfCurrentCategory = projectsControl.getProjectsByCategory(category);
 
 	while (true) {
 	    showProjectsOfCategory(category);
@@ -140,8 +66,8 @@ public class Kickstarter {
 	    if (keyCode == 0) {
 		break;
 	    } else {
-		if (keyCode > 0 && keyCode <= projectsOfCurrentCategory.length) {
-		    Project selectedProject = projectsOfCurrentCategory[keyCode - 1];
+		if (keyCode > 0 && keyCode <= projectsOfCurrentCategory.size()) {
+		    Project selectedProject = projectsOfCurrentCategory.get(keyCode);
 		    showProjectMenu(selectedProject);
 		} else {
 		    System.out.println("Project with #" + keyCode
@@ -154,16 +80,18 @@ public class Kickstarter {
     private static void showProjectsOfCategory(Category category) {
 	System.out.println("Category: " + category.getName());
 	System.out.println(" Projects: ");
-	Project[] currentCategoryProjects = category.getProjects();
-	for (int i = 0; i < currentCategoryProjects.length; i++) {
+	ProjectsControl projectsControl = new ProjectsControl();
+	ArrayList <Project> projectsOfCurrentCategory = projectsControl.getProjectsByCategory(category);
+	for (int i = 0; i < projectsOfCurrentCategory.size(); i++) {
 	    System.out.print("  " + (i + 1) + ": ");
-	    System.out.println(currentCategoryProjects[i].getName());
+	    Project currentProject = projectsOfCurrentCategory.get(i);
+	    System.out.println(currentProject.getName());
 	    System.out.println("  Short Description: "
-		    + currentCategoryProjects[i].getBrief());
+		    + currentProject.getBrief());
 	    System.out.println("  Pledged: "
-		    + currentCategoryProjects[i].getPledged());
+		    + currentProject.getPledged());
 	    System.out.println("  Days to go: "
-		    + currentCategoryProjects[i].getDaysToGo());
+		    + currentProject.getDaysToGo());
 	}
     }
 

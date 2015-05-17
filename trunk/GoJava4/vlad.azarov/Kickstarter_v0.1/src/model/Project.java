@@ -10,9 +10,11 @@ public class Project {
 	private String description;
 	private String link;
 	private String FAQ;
+	private Category category;
 
 	public Project(String name, String brief, int goal, int pledged,
-			int daysToGo, String description, String link, String FAQ) {
+			int daysToGo, String description, String link, String FAQ,
+			Category category) {
 		this.name = name;
 		this.brief = brief;
 		this.goal = goal;
@@ -21,6 +23,7 @@ public class Project {
 		this.description = description;
 		this.link = link;
 		this.FAQ = FAQ;
+		this.category = category;
 	}
 
 	public String getName() {
@@ -55,4 +58,11 @@ public class Project {
 		return FAQ;
 	}
 
+	public Category getCategory() {
+	    return category;
+	}
+
+	public void setCategory(Category category) {
+	    this.category = category;
+	}
 }

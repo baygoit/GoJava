@@ -3,12 +3,12 @@ package control;
 import model.QuotesRepository;
 import view.QuotesPage;
 
-public class QuoteService {
+public class QuotesControl {
     
     QuotesRepository quotesRepository;
     QuotesPage quotesPage;
     
-    public QuoteService() {
+    public QuotesControl() {
 	this.quotesRepository = new QuotesRepository();
 	this.quotesPage = new QuotesPage();
     }
