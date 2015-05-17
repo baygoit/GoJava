@@ -16,14 +16,14 @@ public class Controller {
 	}
 
 	public void executeCommand(String command) {
-		model.execute(command);
+		model.update(command);
 	}
 
 	public void setPage(int pageIndex) {
 		model.setPage(pageIndex);
 	}
 
-	public void addPage(Page page) {
-		model.add(page);
+	public void addPage(Page page, ModelPage modelPage) {
+		model.add(page, modelPage);
 	}
 }
