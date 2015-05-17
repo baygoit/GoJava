@@ -2,7 +2,7 @@ package kickstarter.Test;
 
 import static org.junit.Assert.*;
 import kickstarter.entities.Category;
-import kickstarter.entities.Comments;
+import kickstarter.entities.QuestionsAndAnswers;
 import kickstarter.entities.Project;
 import kickstarter.pages.DetailedProject;
 import kickstarter.repository.EntityStorage;
@@ -16,8 +16,8 @@ public class DetailedProjectTest {
 	Category category = new Category("category");
 	Project project = new Project("project", category);
 
-	Comments comments = new Comments(project);
-	Storage<Comments> allComments = new EntityStorage<Comments>();
+	QuestionsAndAnswers comments = new QuestionsAndAnswers(project);
+	Storage<QuestionsAndAnswers> allComments = new EntityStorage<QuestionsAndAnswers>();
 	Storage<Project> projects = new EntityStorage<Project>();
 	DetailedProject page = new DetailedProject(ui, allComments, projects);
 
@@ -29,7 +29,7 @@ public class DetailedProjectTest {
 		allComments.add(comments);
 
 		// then
-		Comments commentsFromSelectedProject = page
+		QuestionsAndAnswers commentsFromSelectedProject = page
 				.selectCommentsToProject(project);
 		assertEquals("one", commentsFromSelectedProject.comment[0]);
 		assertEquals("two", commentsFromSelectedProject.comment[1]);
@@ -38,7 +38,7 @@ public class DetailedProjectTest {
 	@Test
 	public void test_null_project_to_SelectCommentsToProject() {
 
-		Comments commentsFromSelectedProject = page
+		QuestionsAndAnswers commentsFromSelectedProject = page
 				.selectCommentsToProject(null);
 		assertNull(commentsFromSelectedProject);
 	}

@@ -31,18 +31,18 @@ public class FakeConsole {
 		}
 	}
 
-	// @Ignore
+	 @Ignore
 	@Test
 	public void test_quotes_resize() {
 		for (int number = 0; number < 30; number++) {
-			kickstarter.testLoadQuote(Integer.toString(number));
+		//	kickstarter.testLoadQuote(Integer.toString(number));
 		}
 	}
 
-	// @Ignore
+	 @Ignore
 	@Test
 	public void test_comments_resize() {
-		kickstarter.testLoadComments();
+//		kickstarter.testLoadComments();
 	}
 
 	// @Ignore
