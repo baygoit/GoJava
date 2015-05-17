@@ -9,7 +9,7 @@ import java.util.Random;
 import model.Category;
 import model.Project;
 import model.Quote;
-import control.QuoteService;
+import control.QuoteControl;
 import view.ConsolePrinter;
 
 public class Main {
@@ -18,18 +18,9 @@ public class Main {
 
 	public static void main(String[] args) {
 		
-		Quote[] quoteSet = {
-				new Quote("«Пишите код так, как будто сопровождать его будет склонный к насилию психопат, "
-								+ "который знает, где вы живете.»",
-						"Стив Макконнелл"),
-				new Quote("«Если что-то работает — то не трогай это»",
-						"Неизвестный автор"),
-				new Quote("«Самый лучший способ изучать язык программирования — это писать на нем программы»",
-						"Неизвестный автор"),
-				new Quote("«Хороший программист — это тот, кто смотрит в обе стороны, переходя дорогу с односторонним движением»",
-						"Даг Линдер"),
-				new Quote("«Сложность программы растет до тех пор, пока не превысит способности программиста»",
-						"Законы Мэрфи") };
+		QuoteControl quoteControl = new QuoteControl(); 
+		
+		ConsolePrinter consolePrinter = new ConsolePrinter();
 
 		Category videoCategory = new Category("Video",	"Any video you can imagine. Start from multibillionairy "
 						+ "blockbasters and ending your home videos");
@@ -75,8 +66,7 @@ public class Main {
 
 		boolean isExit = false;
 		while (!isExit) {
-			Quote chosenQuote = quoteSet[new Random().nextInt(quoteSet.length)];
-			System.out.println(chosenQuote.getQuoteWithAuthor());
+			consolePrinter.print(quoteControl.getRandomQuote());
 			showCategories(categoryArray);
 			System.out.print("Please choose category or print 0 to exit: ");
 

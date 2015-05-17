@@ -1,27 +1,33 @@
 package model;
 
+import java.util.ArrayList;
+import java.util.Random;
+
 import model.Quote;
 
 public class QuoteRepository {
 	
-	static {
-		Quote[] quoteSet = {
-			new Quote(
-					"«Пишите код так, как будто сопровождать его будет склонный к насилию психопат, "
-							+ "который знает, где вы живете.»",
-					"Стив Макконнелл"),
-			new Quote("«Если что-то работает — то не трогай это»",
-					"Неизвестный автор"),
-			new Quote(
-					"«Самый лучший способ изучать язык программирования — это писать на нем программы»",
-					"Неизвестный автор"),
-			new Quote(
-					"«Хороший программист — это тот, кто смотрит в обе стороны, переходя дорогу с односторонним движением»",
-					"Даг Линдер"),
-			new Quote(
-					"«Сложность программы растет до тех пор, пока не превысит способности программиста»",
-					"Законы Мэрфи") };
+	ArrayList <Quote> quotes;
+	
+	public QuoteRepository(){
+		quotes = new ArrayList<>();
 		
+		quotes.add(new Quote("You know you're in love when you can't fall asleep because reality is finally better than your dreams",
+				"Dr. Seuss"));
+		quotes.add(new Quote("A friend is someone who knows all about you and still loves you",
+				"Elbert Hubbard"));
+		quotes.add(new Quote("It is better to be hated for what you are than to be loved for what you are not",
+				"Andre Gide"));
+		quotes.add(new Quote("It is not a lack of love, but a lack of friendship that makes unhappy marriages",
+				"Friedrich Nietzsche"));
 	}
 	
+	public ArrayList <Quote> getQuotes(){
+		return quotes;
+	}
+	
+	public String getRandomQuote(){
+		return quotes.get(new Random().nextInt(quotes.size())).getQuoteWithAuthor();
+	}
+
 }
