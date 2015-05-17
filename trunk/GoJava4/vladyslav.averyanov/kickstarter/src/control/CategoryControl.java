@@ -5,13 +5,12 @@ import model.CategoryRepository;
 
 public class CategoryControl {
 	
-	CategoryRepository categoryRepository;
-	CategoryPage categoryPage;
+	private CategoryRepository categoryRepository;
+	private CategoryPage categoryPage;
 	
-	CategoryControl(){
+	public CategoryControl(){
 		categoryRepository = new CategoryRepository();
 	}
-	
 	
 	public void callToShowCategories(){
 		categoryPage.showCategories();

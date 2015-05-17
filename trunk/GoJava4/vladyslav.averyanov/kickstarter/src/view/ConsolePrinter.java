@@ -7,7 +7,7 @@ public class ConsolePrinter implements Printer {
 	}
 	
 	public void println (String s) {
-		print(s + "/n");
+		print(s + "\n");
 	}
 
 }

@@ -4,9 +4,9 @@ import model.QuoteRepository;
 
 public class QuoteControl {
 	
-	QuoteRepository quoteRepository;
+	private QuoteRepository quoteRepository;
 	
-	QuoteControl(){
+	public QuoteControl(){
 		quoteRepository = new QuoteRepository();
 	}
 	

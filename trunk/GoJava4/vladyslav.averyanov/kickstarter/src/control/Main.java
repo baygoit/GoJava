@@ -19,49 +19,16 @@ public class Main {
 	public static void main(String[] args) {
 		
 		QuoteControl quoteControl = new QuoteControl(); 
+		CategoryControl categoryControl = new CategoryControl();
+		ProjectControl projectControl = new ProjectControl();
+		
+		projectControl.getProjects(categoryControl.)
 		
 		ConsolePrinter consolePrinter = new ConsolePrinter();
 
-		Category videoCategory = new Category("Video",	"Any video you can imagine. Start from multibillionairy "
-						+ "blockbasters and ending your home videos");
-		Category audioCategory = new Category("Audio",	"Any audio you can imagine. New DJ-set or special musical "
-						+ "instrument - all of it here");
-
-		String[] questionsAndAnswers = { "Question 1; -> Answer 1;",
-				"Question 2; -> Answer 2;", "Question 3; -> Answer 3;" };
-
-		Project firstVideoProject = new Project("First Video Project",
-				"it is short description of it", 15000, 3698, 100,
-				videoCategory, "history of the project", questionsAndAnswers);
-		Project secondVideoProject = new Project("Second Video Project",
-				"it is short description of it", 320000, 12020, 200,
-				videoCategory, "history of the project", questionsAndAnswers);
-		Project thirdVideoProject = new Project("Third Video Project",
-				"it is short description of it", 64000, 20, 300, videoCategory,
-				"history of the project", questionsAndAnswers);
-		Project fourthVideoProject = new Project("4th Video Project",
-				"it is short description of it", 128000, 10, 400,
-				videoCategory, "history of the project", questionsAndAnswers);
 		Project[] videoProjects = { firstVideoProject, secondVideoProject,
 				thirdVideoProject, fourthVideoProject };
 
-		Project firstAudioProject = new Project("First Audio Project",
-				"it is short description of the Audio Project", 1000, 10999,
-				100, audioCategory, "history of the project",
-				questionsAndAnswers);
-		Project secondAudioProject = new Project("Second Audio Project",
-				"it is short description of the Audio Project", 2000, 2999,
-				200, audioCategory, "history of the project",
-				questionsAndAnswers);
-		Project thirdAudioProject = new Project("Third Audio Project",
-				"it is short description of the Audio Project", 3000, 3999,
-				300, audioCategory, "history of the project",
-				questionsAndAnswers);
-		Project[] audioProjects = { firstAudioProject, secondAudioProject,
-				thirdAudioProject };
-
-		videoCategory.setProjects(videoProjects);
-		audioCategory.setProjects(audioProjects);
 		Category[] categoryArray = { videoCategory, audioCategory };
 
 		boolean isExit = false;

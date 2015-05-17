@@ -4,7 +4,6 @@ public class Category {
 
 	private String name;
 	private String shortDescripotion;
-	private Project[] projects;
 
 	public Category(String name, String shortDescripotion) {
 		this.name = name;
@@ -25,14 +24,6 @@ public class Category {
 
 	public void setShortDescripotion(String shortDescripotion) {
 		this.shortDescripotion = shortDescripotion;
-	}
-
-	public Project[] getProjects() {
-		return projects;
-	}
-
-	public void setProjects(Project[] projects) {
-		this.projects = projects;
 	}
 
 }
