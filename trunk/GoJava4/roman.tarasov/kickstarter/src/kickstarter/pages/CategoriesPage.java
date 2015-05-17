@@ -1,47 +1,58 @@
 package kickstarter.pages;
 
-import kickstarter.entities.Category;
 import kickstarter.entities.Quote;
-import kickstarter.repository.Storage;
+import kickstarter.repository.CategoriesRepository;
+import kickstarter.repository.QuotesRepository;
+
 import kickstarter.ui.UserInterface;
 
 public class CategoriesPage extends Page {
-	private Storage<Category> categories;
-	private Storage<Quote> quotes;
-	private UserInterface ui;
 
-	public CategoriesPage(Storage<Category> categories, UserInterface ui,Storage<Quote> quotes) {
+	// private Storage<Quote> quotes;
+	private UserInterface ui;
+	final int ERROR_PAGE = 3;
+	final int PROJECTS = 1;
+	QuotesRepository quotesRepository;
+	CategoriesRepository categories;
+
+	public CategoriesPage(CategoriesRepository categories, UserInterface ui,
+			QuotesRepository quotesRepository) {
 		this.categories = categories;
-		this.quotes=quotes;
+		this.quotesRepository = quotesRepository;
 		this.ui = ui;
 	}
 
-	public void print(int[] parameterForPrint) {
-		print();
-	}
-
 	public void print() {
-		Quote randomQuote = quotes.getRandom();
+		Quote randomQuote = quotesRepository.getRandomQuote();
 		ui.display("-----Quote------");
 		ui.display(randomQuote.getQuote());
 		ui.display("----------------");
-		
+
 		ui.display("=========================");
 		ui.display("|     Categories        |");
 		ui.display("=========================");
+		String list = categories.getListAllCategories();
+		ui.display(list);
 
-		int pointer = categories.length();
-		options = new int[pointer];
-		for (int index = 0; index < pointer; index++) {
-
-			ui.display("ID:<" + categories.getEntity(index).ID + "> name:<"
-					+ categories.getEntity(index).name + ">");
-			options[index] = categories.getEntity(index).ID;
-		}
 		ui.display("------------------------");
 	}
 
-	public int[] getOptions() {
+	public String[] getOptions() {
 		return options;
+	}
+
+	public void execute(String message) {
+		options = categories.getStringOptions();
+		optionsInt = categories.getIntOptions();
+		if (options != null) {
+			for (int index = 0; index < options.length; index++) {
+				if (message.equals(options[index])) {
+					nextPage = PROJECTS;
+					parameterForPrint = optionsInt[index];
+					return;
+				}
+			}
+		}
+		nextPage = ERROR_PAGE;
 	}
 }

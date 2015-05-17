@@ -2,18 +2,28 @@ package kickstarter.pages;
 
 public class Page {
 
-	public int[] options;
-	public int[] parameterForPrint;
+	public String[] options;
+	public int [] optionsInt;
+	public int parameterForPrint;
+	public int selectedCategory;
+	public int selectedProject;
 	public int pageId;
 	public String name;
+	 int nextPage;
+
+	public void execute(String parameter) {
+	}
+
+	public String[] getOptions() {
+		return null;
+	}
 
 	public void print() {
 	}
 
-	public int[] getOptions() {
-		return null;
-	}
-
-	public void print(int[] parameterForPrint) {
+	public int getNextPage() {
+		return nextPage;
+		// TODO Auto-generated method stub
+		
 	}
 }

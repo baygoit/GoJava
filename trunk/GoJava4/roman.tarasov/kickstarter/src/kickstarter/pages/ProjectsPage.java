@@ -1,34 +1,35 @@
 package kickstarter.pages;
 
-import kickstarter.entities.Project;
-import kickstarter.repository.EntityStorage;
-import kickstarter.repository.Storage;
+
+import kickstarter.repository.ProjectRepository;
+
 import kickstarter.ui.UserInterface;
 
 public class ProjectsPage extends Page {
 	private UserInterface ui;
-	private Storage<Project> projects;
+	ProjectRepository projects;
+	
 	int targetCategoryID;
-	int[] parameterForPrint;
-
-	public ProjectsPage(Storage<Project> projects, UserInterface ui) {
+	final int ERROR_PAGE=3;
+	final int PROJECTS=1;
+	final int DETAILED_PROJECT=2;
+	public ProjectsPage(ProjectRepository projects, UserInterface ui) {
 		this.projects = projects;
 		this.ui = ui;
 	}
-
-	public void print(int[] parameterForPrint) {
-		this.parameterForPrint = parameterForPrint;
-		targetCategoryID = parameterForPrint[0];
-
+public void setParameterForPrint(int parameterForPrint){
+	this.parameterForPrint=parameterForPrint;
+}
+	public void print() {
+		
 		ui.display("________________________");
 		ui.display("|     Projects         |");
 		ui.display("|______________________|");
 
-		selectProject();
-
+		ui.display(projects.printProjectsInfo(parameterForPrint));
 		ui.display("------------------------");
 	}
-
+/*
 	public Storage<Project> sortProjectsByCategory() {
 		Storage<Project> sortedProjects = new EntityStorage<Project>();
 		int pointer = projects.length();
@@ -39,25 +40,49 @@ public class ProjectsPage extends Page {
 		}
 		return sortedProjects;
 	}
-
+*/
+	/*
 	void printProjectsInfo(Storage<Project> sortedToSelect) {
-		options = new int[sortedToSelect.length()];
+		options = new String[sortedToSelect.length()];
+		optionsInt=new int[sortedToSelect.length()];
 		for (int index = 0; index < sortedToSelect.length(); index++) {
 			Project project = sortedToSelect.getEntity(index);
-			options[index] = project.ID;
+			options[index] = Integer.toString(project.ID);
+			optionsInt[index]=project.ID;
 			ui.display("ID:<" + project.ID + "> name:<" + project.name
 					+ "> short desc.:<" + project.shortDescription + "> goal:<"
 					+ project.goal + "> pledged:<" + project.pledged
 					+ "> days to go:<" + project.daysToGo + ">");
 		}
 	}
-
-	public int[] getOptions() {
+*/
+	public String[] getOptions() {
 		return options;
 	}
-
+/*
 	public void selectProject() {
 		Storage<Project> sortedToSelect = sortProjectsByCategory();
 		printProjectsInfo(sortedToSelect);
+	}
+	*/
+	public void execute(String message){
+		if(message.equals("p")){
+			nextPage=1;
+			
+			return;
+		}
+		options=projects.getStringOptions();
+		optionsInt=projects.getIntOptions();
+		if (options != null) {
+			for (int index = 0; index < options.length; index++) {
+				if (message.equals(options[index])) {
+					nextPage=DETAILED_PROJECT;
+					parameterForPrint=optionsInt[index];
+					
+					return;
+				}
+			}
+		}
+		nextPage=ERROR_PAGE;
 	}
 }

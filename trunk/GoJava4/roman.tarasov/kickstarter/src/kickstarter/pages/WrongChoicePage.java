@@ -8,9 +8,7 @@ public class WrongChoicePage extends Page{
 	public WrongChoicePage(UserInterface ui){
 		this.ui=ui;
 	}
-	public void print(int[] parameterForPrint) {
-		print();
-	}
+
 
 	public void print() {
 		ui.display(" ");
@@ -19,7 +17,7 @@ public class WrongChoicePage extends Page{
 		ui.display("-----------------------------");
 		ui.display(" ");
 	}
-	public int[] getOptions() {
+	public String[] getOptions() {
 		return null;
 	}
 }

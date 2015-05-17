@@ -1,24 +1,25 @@
 package kickstarter.pages;
 
-import kickstarter.entities.Comments;
+import kickstarter.entities.QuestionsAndAnswers;
 import kickstarter.entities.Project;
+import kickstarter.repository.ProjectRepository;
 import kickstarter.repository.Storage;
 import kickstarter.ui.UserInterface;
 
 public class DetailedProject extends Page {
-	private Storage<Project> projects;
-	private UserInterface ui;
-	private Project project;
-	private Storage<Comments> allComments;
 
-	public DetailedProject(UserInterface ui, Storage<Comments> allComments,
-			Storage<Project> projects) {
+	ProjectRepository projects;
+	private UserInterface ui;
+	private Storage<QuestionsAndAnswers> allComments;
+
+	public DetailedProject(UserInterface ui, Storage<QuestionsAndAnswers> allComments,
+			ProjectRepository projects) {
 		this.ui = ui;
 		this.allComments = allComments;
 		this.projects = projects;
 	}
 
-	public Comments selectCommentsToProject(Project project) {
+	public QuestionsAndAnswers selectCommentsToProject(Project project) {
 		if (project != null) {
 			for (int index = 0; index < allComments.length(); index++) {
 				if (allComments.getEntity(index).projectID == project.ID) {
@@ -29,23 +30,10 @@ public class DetailedProject extends Page {
 		return null;
 	}
 
-	public int[] getOptions() {
-		return null;
-	}
+	public void print() {
+		int projectID = parameterForPrint;
 
-	private void getProjectByID(int projectID) {
-		for (int index = 0; index < projects.length(); index++) {
-			if (projects.getEntity(index).ID == projectID) {
-				project = projects.getEntity(index);
-				return;
-			}
-		}
-		project = null;
-	}
-
-	public void print(int[] parameterForPrint) {
-		int projectID = parameterForPrint[0];
-		getProjectByID(projectID);
+		Project project = projects.getProjectById(projectID);
 
 		ui.display("________________________");
 		ui.display("|Detailed project info |");
@@ -60,7 +48,7 @@ public class DetailedProject extends Page {
 		ui.display("link to video :<" + project.linkToVideo + ">");
 		ui.display("comments :");
 
-		Comments comments = selectCommentsToProject(project);
+		QuestionsAndAnswers comments = selectCommentsToProject(project);
 		if (comments != null) {
 			for (int index = 0; index < comments.getCommentLength(); index++) {
 				ui.display("user ID:<" + comments.usersID[index]
@@ -68,5 +56,20 @@ public class DetailedProject extends Page {
 			}
 		}
 		ui.display("------------------------");
+
+	}
+
+	public String[] getOptions() {
+		return options;
+	}
+
+	public void execute(String message) {
+
+		nextPage = 1;
+
+		System.out.println(parameterForPrint + ".......");
+		// parameterForPrint=optionsInt[index];
+		return;
+
 	}
 }
