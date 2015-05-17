@@ -12,8 +12,8 @@ public class Project {
 	public String linkToVideo = "null";
 	public int categoryID;
 
-	public Project(String name, Category category) {
+	public Project(String name, int categoryID) {
 		this.name = name;
-		this.categoryID = category.ID;
+		this.categoryID = categoryID;
 	}
 }
