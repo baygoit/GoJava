@@ -3,7 +3,7 @@ package kickstarter;
 import kickstarter.engine.Category;
 import kickstarter.engine.Project;
 import kickstarter.engine.Quote;
-import kickstarter.interfaces.UserInterface;
+import kickstarter.interfaces.display.UserInterface;
 import kickstarter.interfaces.printers.ConsolePrinter;
 import kickstarter.interfaces.printers.Printer;
 import kickstarter.interfaces.readers.ConsoleReader;

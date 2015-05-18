@@ -14,7 +14,7 @@ public class QuotesStorageTest {
 		assertTrue(storage.empty());
 	}
 	
-	@Test
+	/*@Test
 	public void shouldCorrectValue_whenAddNewElemetnts() {
 		Quote quote1 = new Quote("Quote1");
 		Quote quote2 = new Quote("Quote2");
@@ -44,6 +44,6 @@ public class QuotesStorageTest {
 	public void shouldException_whenGetRandomFromEmptyStorage() {
 		QuotesStorage storage = new QuotesStorage();
 		storage.getRandom();
-	}
+	}*/
 	
 }

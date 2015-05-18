@@ -1,25 +1,49 @@
-package kickstarter.interfaces.display;
+package kickstarter.interfaces.pages;
 
 import kickstarter.engine.Project;
 
-public class ProjectDisplay implements Display<Project> {
+public class ShowProjectPage implements ChoicePage {
+
+	private Project project;
+	private Project chosenItem;
+
+	public ShowProjectPage(Project project) {
+		this.project = project;
+	}
 
 	@Override
-	public String getDescription(Project project) {
+	public String getHead() {
+		return "--------------------" + "\r\n" + "Project:";
+	}
+
+	@Override
+	public String getBody() {
 		StringBuilder result = new StringBuilder();
 
-		result.append(project.getId());
-		result.append(" - " + project.getName());
-		result.append(", description=" + project.getDescription());
-		result.append(", totalAmount=" + project.getTotalAmount());
-		result.append(", collectAmount=" + project.getCollectAmount());
-		result.append(", daysLeft=" + project.getDaysLeft());
+		result.append(getDescription(project));
+
+		result.append(Project.EXIT.getId());
+		result.append(" - ");
+		result.append(Project.EXIT.getName());
+		result.append("\r\n");
 
 		return result.toString();
 	}
 
 	@Override
-	public String getDetailedDescription(Project project) {
+	public void setChosenItem(int itemId) {
+		if (itemId == Project.EXIT.getId()) {
+			chosenItem = Project.EXIT;
+			return;
+		}
+	}
+
+	@Override
+	public Project getChosenItem() {
+		return chosenItem;
+	}
+
+	private String getDescription(Project project) {
 		StringBuilder result = new StringBuilder();
 
 		result.append("name=");
@@ -38,6 +62,7 @@ public class ProjectDisplay implements Display<Project> {
 		result.append(project.getLink());
 		result.append("\r\n questionsAndAnswers=");
 		result.append(project.getQuestionsAndAnswers());
+		result.append("\r\n");
 
 		return result.toString();
 	}

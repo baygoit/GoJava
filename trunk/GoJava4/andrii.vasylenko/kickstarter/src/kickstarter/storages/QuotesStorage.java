@@ -1,7 +1,5 @@
 package kickstarter.storages;
 
-import java.util.Random;
-
 import kickstarter.engine.Quote;
 
 public class QuotesStorage implements Storage<Quote> {
@@ -30,17 +28,5 @@ public class QuotesStorage implements Storage<Quote> {
 	@Override
 	public Quote getById(int id) {
 		return quotes.getById(id);
-	}
-
-	public Quote getRandom() throws IndexOutOfBoundsException {
-		if (empty()) {
-			throw new IndexOutOfBoundsException();
-		}
-		int randomIndex = getRandomIndex();
-		return quotes.get(randomIndex);
-	}
-
-	private int getRandomIndex() {
-		return new Random().nextInt(size());
 	}
 }

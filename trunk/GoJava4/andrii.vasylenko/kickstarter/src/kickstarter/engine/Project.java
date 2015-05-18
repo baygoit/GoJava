@@ -3,6 +3,8 @@ package kickstarter.engine;
 public class Project implements Data {
 	private static int count = 0;
 
+	public static final Project EXIT = new Project("EXIT");
+
 	private int id;
 	private String name;
 	private String description;
@@ -14,12 +16,18 @@ public class Project implements Data {
 	private String link;
 	private String questionsAndAnswers;
 
+	private Project(String name) {
+		this.id = count++;
+		this.name = name;
+	}
+
 	public Project(String name, String description, Category category, int totalAmount, int daysLeft) {
+		this(name);
+
 		if (name == null || description == null || category == null || totalAmount <= 0 || daysLeft <= 0) {
 			throw new IllegalArgumentException();
 		}
-		this.id = ++count;
-		this.name = name;
+
 		this.description = description;
 		this.category = category;
 		this.totalAmount = totalAmount;
@@ -50,7 +58,7 @@ public class Project implements Data {
 		}
 		this.questionsAndAnswers = questionsAndAnswers;
 	}
-	
+
 	public void donate(int amount) {
 		if (amount <= 0) {
 			throw new IllegalArgumentException();

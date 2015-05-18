@@ -1,6 +1,5 @@
 package kickstarter.storages;
 
-import kickstarter.engine.Category;
 import kickstarter.engine.Project;
 
 public class ProjectsStorage implements Storage<Project> {
@@ -31,15 +30,4 @@ public class ProjectsStorage implements Storage<Project> {
 		return projects.empty();
 	}
 
-	public ProjectsStorage getProjectsInCategory(Category category) {
-		ProjectsStorage result = new ProjectsStorage();
-
-		for (int i = 0; i < size(); i++) {
-			if (get(i).getCategory() == category) {
-				result.add(get(i));
-			}
-		}
-
-		return result;
-	}
 }

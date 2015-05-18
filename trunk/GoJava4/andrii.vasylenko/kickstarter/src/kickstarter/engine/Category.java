@@ -2,7 +2,9 @@ package kickstarter.engine;
 
 public class Category implements Data {
 	private static int count = 0;
-	
+
+	public static final Category EXIT = new Category("EXIT");
+
 	private int id;
 	private String name;
 
@@ -10,10 +12,10 @@ public class Category implements Data {
 		if (name == null) {
 			throw new IllegalArgumentException();
 		}
-		this.id = ++count;
+		this.id = count++;
 		this.name = name;
 	}
-	
+
 	@Override
 	public int getId() {
 		return id;

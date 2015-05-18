@@ -2,7 +2,7 @@ package kickstarter.engine;
 
 public class Quote implements Data {
 	private static int count = 0;
-	
+
 	private int id;
 	private String quote;
 
@@ -18,7 +18,7 @@ public class Quote implements Data {
 	public int getId() {
 		return id;
 	}
-	
+
 	public String getQuote() {
 		return quote;
 	}
