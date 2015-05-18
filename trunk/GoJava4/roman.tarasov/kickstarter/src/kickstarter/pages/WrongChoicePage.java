@@ -1,10 +1,9 @@
 package kickstarter.pages;
 
 import kickstarter.mvc.Model;
-import kickstarter.mvc.iNavigator;
 
 public class WrongChoicePage extends Page{
-	iNavigator navigator;
+	
 	public WrongChoicePage(Model model) {
 		this.navigator=model;
 	}

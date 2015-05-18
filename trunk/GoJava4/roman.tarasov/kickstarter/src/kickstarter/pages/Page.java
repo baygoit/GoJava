@@ -1,7 +1,25 @@
 package kickstarter.pages;
 
-public class Page {
+import kickstarter.mvc.iNavigator;
+import kickstarter.repository.CategoriesRepository;
+import kickstarter.repository.CommentsRepository;
+import kickstarter.repository.ProjectRepository;
+import kickstarter.repository.QuotesRepository;
 
+public class Page {
+	iNavigator navigator;
+	ProjectRepository projects;
+	CommentsRepository allComments;
+	QuotesRepository quotesRepository;
+	CategoriesRepository categories;
+	
+	final int CATEGORIES = 0;
+	final int PROJECTS = 1;
+	final int DETAILED_PROJECT = 2;
+	final int ERROR_PAGE = 3;
+	final int END_PAGE = 4;
+	final int COMMENT_PAGE = 5;
+	
 	public String[] options;
 	public int[] optionsInt;
 	public int parameterForPage;
@@ -10,6 +28,8 @@ public class Page {
 	public int pageId;
 	public String name;
 	int nextPage;
+
+
 
 	public void execute(String parameter) {
 	}

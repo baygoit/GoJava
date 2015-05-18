@@ -3,20 +3,10 @@ package kickstarter.pages;
 import kickstarter.entities.ProjectComments;
 import kickstarter.entities.Project;
 import kickstarter.mvc.Model;
-import kickstarter.mvc.iNavigator;
 import kickstarter.repository.ProjectRepository;
 import kickstarter.repository.CommentsRepository;
 
 public class DetailedProject extends Page {
-
-	ProjectRepository projects;
-	iNavigator navigator;
-	CommentsRepository allComments;
-	final int CATEGORIES = 0;
-	final int PROJECTS = 1;
-	final int DETAILED_PROJECT = 2;
-	final int ERROR_PAGE = 3;
-	final int END_PAGE = 4;
 
 	public DetailedProject(CommentsRepository allComments,
 			ProjectRepository projects, Model model) {
