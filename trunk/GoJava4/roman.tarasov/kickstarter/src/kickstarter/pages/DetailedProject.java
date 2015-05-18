@@ -49,7 +49,7 @@ public class DetailedProject extends Page {
 			}
 		}
 		header += "\n------------------------";
-		header += "\nOptions: p- previous page; i- invest to project ; c- comment";
+		header += "\nOptions: <p> - previous page; <i>- invest to project ; <c>- comment";
 		return header;
 	}
 
@@ -65,6 +65,10 @@ public class DetailedProject extends Page {
 		if (message.equals("p")) {
 			navigator.pageWillBe(PROJECTS);
 			navigator.setOption(navigator.getSavedCategory(), "null");
+			return;
+		}
+		if (message.equals("c")) {
+			navigator.pageWillBe(COMMENT_PAGE);
 			return;
 		}
 		navigator.savePageBeforeError(DETAILED_PROJECT);

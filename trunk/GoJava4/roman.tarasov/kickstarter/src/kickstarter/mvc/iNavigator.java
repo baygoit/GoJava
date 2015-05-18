@@ -1,7 +1,7 @@
 package kickstarter.mvc;
 
 public interface iNavigator {
-	void pageWillBe(int nextPage);
+	void pageWillBe(int pageIndex);
 
 	void prevPage(int prevPage);
 

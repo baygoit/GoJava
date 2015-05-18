@@ -27,8 +27,8 @@ public class ProjectsPage extends Page {
 		header += "\n";
 		header += projects.printProjectsInfo(parameterForPage);
 		header += "\n------------------------";
-		header += "\nSelect project by ID";
-		header += "\nOptions:  p- previous page";
+		header += "\nSelect project by ID:<ID>";
+		header += "\nOptions:  <p> - previous page";
 		return header;
 	}
 

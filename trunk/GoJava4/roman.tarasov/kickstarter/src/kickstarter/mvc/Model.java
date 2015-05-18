@@ -51,8 +51,8 @@ public class Model implements iNavigator {
 	}
 
 	@Override
-	public void pageWillBe(int nextPage) {
-		pageIndex = nextPage;
+	public void pageWillBe(int pageIndex) {
+		this.pageIndex = pageIndex;
 	}
 
 	@Override

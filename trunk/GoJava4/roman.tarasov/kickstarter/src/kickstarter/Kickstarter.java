@@ -5,6 +5,7 @@ import kickstarter.mvc.Controller;
 import kickstarter.mvc.Model;
 import kickstarter.mvc.View;
 import kickstarter.pages.CategoriesPage;
+import kickstarter.pages.CommentPage;
 import kickstarter.pages.DetailedProject;
 import kickstarter.pages.Page;
 import kickstarter.pages.ProjectsPage;
@@ -49,6 +50,8 @@ public class Kickstarter {
 		page = new WrongChoicePage(model);
 		controller.addPage(page);
 		page = new TheEndPage();
+		controller.addPage(page);
+		page = new CommentPage(allComments, model, projects);
 		controller.addPage(page);
 	}
 
