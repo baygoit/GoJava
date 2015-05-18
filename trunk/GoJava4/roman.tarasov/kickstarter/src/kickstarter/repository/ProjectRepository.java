@@ -71,15 +71,6 @@ public class ProjectRepository {
 		return result;
 	}
 
-	public int[] getAllProjectsByCategoryID(int categoryID) {
-		int length = projects.length();
-		optionsStrings = new String[length];
-		for (int index = 0; index < length; index++) {
-			optionsInts[index] = projects.getEntity(index).ID;
-		}
-		return optionsInts;
-	}
-
 	public String[] getStringOptions() {
 		return optionsStrings;
 	}

@@ -45,6 +45,6 @@ public class EntityStorage<T> implements iStorage<T> {
 
 	@Override
 	public void update(T entity, int index) {
-
+//TODO
 	}
 }

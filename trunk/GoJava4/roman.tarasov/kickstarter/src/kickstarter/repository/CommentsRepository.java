@@ -16,7 +16,6 @@ public class CommentsRepository {
 		comment.addComment(3, "how much weight the bike?");
 		comment.addComment(2, "The weight of bike is 15 kilo");
 		allComments.add(comment);
-
 	}
 
 	public ProjectComments getCommentsByProjectID(int projectID) {
@@ -28,10 +27,4 @@ public class CommentsRepository {
 		}
 		return null;
 	}
-/*
-	public void update(ProjectComments projectComments,index) {
-		allComments.update(projectComments,);
-
-	}
-	*/
 }

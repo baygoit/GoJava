@@ -15,7 +15,6 @@ public class CommentPage extends Page {
 		this.navigator = model;
 		this.allComments = allComments;
 		this.projects = projects;
-
 	}
 
 	public void viewWorkedStatus(int status) {
@@ -53,7 +52,7 @@ public class CommentPage extends Page {
 		}
 		header += "\n------------------------";
 		header += "\nAdd comment in format :     <a:my comment>";
-		header += "\nDelete comment in format :  <d:0:1>            where 3- user ID, 0- comment ID ";
+		header += "\nDelete comment in format :  <d:3:0>            where 3- user ID, 0- comment ID ";
 		header += "\nOptions: <p>- previous page  ";
 		return header;
 	}

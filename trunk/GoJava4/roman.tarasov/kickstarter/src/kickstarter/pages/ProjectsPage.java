@@ -32,10 +32,6 @@ public class ProjectsPage extends Page {
 		return header;
 	}
 
-	public String[] getOptions() {
-		return options;
-	}
-
 	public void execute(String message) {
 		navigator.saveCategory(parameterForPage);
 		if (message.equals("p")) {

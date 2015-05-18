@@ -70,8 +70,7 @@ public class Kickstarter {
 		while (true) {
 			controller.printView();
 			command = ui.inputString();
-			controller.executeCommand(command);
+		    controller.executeCommand(command);
 		}
 	}
-
 }
