@@ -2,7 +2,7 @@ package kickstarter.Test;
 
 import static org.junit.Assert.*;
 import kickstarter.entities.Category;
-import kickstarter.entities.QuestionsAndAnswers;
+import kickstarter.entities.ProjectComments;
 import kickstarter.entities.Project;
 import kickstarter.pages.DetailedProject;
 import kickstarter.repository.EntityStorage;

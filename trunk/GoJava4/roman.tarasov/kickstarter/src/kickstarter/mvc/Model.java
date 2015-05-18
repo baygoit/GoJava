@@ -7,7 +7,7 @@ import kickstarter.repository.Storage;
 public class Model implements iNavigator {
 	private Storage<Page> pages;
 
-	private String parameterForPrint;
+	private String sParameterForPage;
 	private int pageIndex;
 
 	int intOption;
@@ -27,7 +27,7 @@ public class Model implements iNavigator {
 		page = pages.getEntity(pageIndex);
 		page.execute(command);
 		page = pages.getEntity(pageIndex);
-		page.parameterForPrint = intOption;
+		page.parameterForPage = intOption;
 	}
 
 	public void setPage(int pageIndex) {
@@ -43,7 +43,7 @@ public class Model implements iNavigator {
 	}
 
 	public String getParameterForPrint() {
-		return parameterForPrint;
+		return sParameterForPage;
 	}
 
 	public void add(Page page) {

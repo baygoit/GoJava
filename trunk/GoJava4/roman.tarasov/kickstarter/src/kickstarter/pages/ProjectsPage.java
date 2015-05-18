@@ -20,8 +20,8 @@ public class ProjectsPage extends Page {
 		navigator = model;
 	}
 
-	public void setParameterForPrint(int parameterForPrint) {
-		this.parameterForPrint = parameterForPrint;
+	public void setParameterForPrint(int parameterForPage) {
+		this.parameterForPage = parameterForPage;
 	}
 
 	public void viewWorkedStatus(int status) {
@@ -34,9 +34,10 @@ public class ProjectsPage extends Page {
 		header += "\n|     Projects         |";
 		header += "\n|______________________|";
 		header += "\n";
-		header += projects.printProjectsInfo(parameterForPrint);
+		header += projects.printProjectsInfo(parameterForPage);
 		header += "\n------------------------";
-		header += "\n  p- previous page";
+		header += "\nSelect project by ID";
+		header += "\nOptions:  p- previous page";
 		return header;
 	}
 
@@ -45,10 +46,9 @@ public class ProjectsPage extends Page {
 	}
 
 	public void execute(String message) {
-		navigator.saveCategory(parameterForPrint);
+		navigator.saveCategory(parameterForPage);
 		if (message.equals("p")) {
 			navigator.pageWillBe(CATEGORIES);
-
 			return;
 		}
 		options = projects.getStringOptions();
@@ -57,7 +57,6 @@ public class ProjectsPage extends Page {
 			for (int index = 0; index < options.length; index++) {
 				if (message.equals(options[index])) {
 					navigator.pageWillBe(DETAILED_PROJECT);
-
 					navigator.setOption(optionsInt[index], options[index]);
 					return;
 				}

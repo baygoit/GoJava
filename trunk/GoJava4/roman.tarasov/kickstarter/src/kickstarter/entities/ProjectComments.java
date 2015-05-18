@@ -1,6 +1,6 @@
 package kickstarter.entities;
 
-public class QuestionsAndAnswers {
+public class ProjectComments {
 	public int[] usersID;
 	public String[] comment;
 	private int commentIndex = 0;
@@ -8,7 +8,7 @@ public class QuestionsAndAnswers {
 	final int ADD_TO_SIZE = 10;
 	public int projectID;
 
-	public QuestionsAndAnswers(int projectID) {
+	public ProjectComments(int projectID) {
 		this.projectID = projectID;
 		usersID = new int[INIT_SIZE];
 		comment = new String[INIT_SIZE];

@@ -49,5 +49,4 @@ public class CategoriesRepository {
 	public String[] getStringOptions() {
 		return optionsStrings;
 	}
-
 }

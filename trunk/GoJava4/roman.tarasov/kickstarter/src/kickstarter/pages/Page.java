@@ -4,7 +4,7 @@ public class Page {
 
 	public String[] options;
 	public int[] optionsInt;
-	public int parameterForPrint;
+	public int parameterForPage;
 	public int selectedCategory;
 	public int selectedProject;
 	public int pageId;

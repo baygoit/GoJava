@@ -37,7 +37,8 @@ public class CategoriesPage extends Page {
 		header += "\n";
 		header += categories.getListAllCategories();
 		header += "\n------------------------";
-		header += "\n  e- The End";
+		header += "\nSelect category by ID";
+		header += "\nOptions:  e- The End";
 		return header;
 	}
 

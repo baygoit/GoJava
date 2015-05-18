@@ -13,5 +13,4 @@ public class TheEndPage extends Page {
 		header += "\n=========================";
 		return header;
 	}
-	
 }

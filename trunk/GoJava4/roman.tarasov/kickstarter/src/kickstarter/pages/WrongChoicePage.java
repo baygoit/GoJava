@@ -16,7 +16,7 @@ public class WrongChoicePage extends Page{
 		header += "\n----- Wrong Choice ----------";
 		header += "\ninput correct command, please";
 		header += "\n-----------------------------";
-		header += "\n  p- previous page";
+		header += "\nOptions:  p- previous page";
 		return header;
 	}
 

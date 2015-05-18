@@ -1,10 +1,8 @@
 package kickstarter;
 
-import kickstarter.entities.QuestionsAndAnswers;
 
 import kickstarter.mvc.Controller;
 import kickstarter.mvc.Model;
-
 import kickstarter.mvc.View;
 import kickstarter.pages.CategoriesPage;
 import kickstarter.pages.DetailedProject;
@@ -13,16 +11,13 @@ import kickstarter.pages.ProjectsPage;
 import kickstarter.pages.TheEndPage;
 import kickstarter.pages.WrongChoicePage;
 import kickstarter.repository.CategoriesRepository;
-import kickstarter.repository.EntityStorage;
+import kickstarter.repository.CommentsRepository;
 import kickstarter.repository.ProjectRepository;
 import kickstarter.repository.QuotesRepository;
-import kickstarter.repository.Storage;
 import kickstarter.ui.ConsoleUI;
 import kickstarter.ui.UserInterface;
 
 public class Kickstarter {
-
-	Storage<QuestionsAndAnswers> allComments;
 
 	QuotesRepository quotes;
 	CategoriesRepository categories;
@@ -31,11 +26,13 @@ public class Kickstarter {
 	View view;
 	public Controller controller;
 	UserInterface ui;
+	CommentsRepository allComments;
 
 	public Kickstarter() {
+		allComments = new CommentsRepository();
 		quotes = new QuotesRepository();
 		projects = new ProjectRepository();
-		allComments = new EntityStorage<QuestionsAndAnswers>();
+
 		categories = new CategoriesRepository();
 		ui = new ConsoleUI();
 		model = new Model();
@@ -47,7 +44,7 @@ public class Kickstarter {
 		controller.setPage(0);
 		page = new ProjectsPage(projects, model);
 		controller.addPage(page);
-		page = new DetailedProject(allComments, projects,model);
+		page = new DetailedProject(allComments, projects, model);
 		controller.addPage(page);
 		page = new WrongChoicePage(model);
 		controller.addPage(page);

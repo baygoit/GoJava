@@ -21,7 +21,6 @@ public class ProjectRepository {
 		projects.add(project);
 
 		categoryID = 4;
-
 		project = new Project("Paint the fence of the school", categoryID);
 		project.description = "raising money for paint";
 		project.ID = 8;
@@ -38,7 +37,6 @@ public class ProjectRepository {
 				return currentProject;
 			}
 		}
-
 		return null;
 	}
 
@@ -60,7 +58,6 @@ public class ProjectRepository {
 		Storage<Project> sortedToSelect = sortProjectsByCategoryID(categoryID);
 		int length = sortedToSelect.length();
 		optionsStrings = new String[length];
-
 		optionsInts = new int[length];
 		for (int index = 0; index < length; index++) {
 			Project project = sortedToSelect.getEntity(index);
@@ -70,7 +67,6 @@ public class ProjectRepository {
 					+ "> short desc.:<" + project.shortDescription + "> goal:<"
 					+ project.goal + "> pledged:<" + project.pledged
 					+ "> days to go:<" + project.daysToGo + ">");
-
 		}
 		return result;
 	}
@@ -79,22 +75,16 @@ public class ProjectRepository {
 		int length = projects.length();
 		optionsStrings = new String[length];
 		for (int index = 0; index < length; index++) {
-
 			optionsInts[index] = projects.getEntity(index).ID;
-
 		}
 		return optionsInts;
-
 	}
 
 	public String[] getStringOptions() {
 		return optionsStrings;
-
 	}
 
 	public int[] getIntOptions() {
 		return optionsInts;
-
 	}
-
 }

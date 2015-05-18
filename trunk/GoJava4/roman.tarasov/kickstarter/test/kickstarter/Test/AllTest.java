@@ -2,7 +2,7 @@ package kickstarter.Test;
 
 import static org.junit.Assert.*;
 import kickstarter.entities.Category;
-import kickstarter.entities.QuestionsAndAnswers;
+import kickstarter.entities.ProjectComments;
 import kickstarter.entities.Project;
 import kickstarter.entities.Quote;
 import kickstarter.repository.EntityStorage;
@@ -14,7 +14,7 @@ public class AllTest {
 
 	//Category category = new Category("category");
 	Project project = new Project("project", 5);
-	QuestionsAndAnswers comments = new QuestionsAndAnswers(23);
+	ProjectComments comments = new ProjectComments(23);
 
 	@Test
 	public void testAddComment() {
