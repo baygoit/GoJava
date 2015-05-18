@@ -45,7 +45,7 @@ public class ChoiceProjectPage implements ChoicePage {
 			return;
 		}
 
-		chosenItem = localProjects.getById(itemId);
+		chosenItem = localProjects.get(itemId);
 	}
 
 	@Override
