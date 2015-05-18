@@ -74,6 +74,10 @@ public class DetailedProject extends Page {
 			navigator.pageWillBe(COMMENT_PAGE);
 			return;
 		}
+		if (message.equals("i")) {
+			navigator.pageWillBe(INVEST_PAGE);
+			return;
+		}
 		navigator.savePageBeforeError(DETAILED_PROJECT);
 		navigator.pageWillBe(ERROR_PAGE);
 	}

@@ -19,6 +19,7 @@ public class Page {
 	final int ERROR_PAGE = 3;
 	final int END_PAGE = 4;
 	final int COMMENT_PAGE = 5;
+	final int INVEST_PAGE = 6;
 	
 	public String[] options;
 	public int[] optionsInt;
