@@ -14,7 +14,7 @@ public class Runner {
 	private Output output;
 	private Input input;
 	private DataSource dataSource;
-	private int[] menuPosition = new int[2];
+	private int[] menuPosition = {0,0};
 
 	public Runner(Output output, Input input) {
 		this.output = output;

@@ -27,7 +27,7 @@ public class LocalDataSource implements DataSource {
 	@Override
 	public ArrayList<Category> getCategoriesList() {
 		ArrayList<Category> result = new ArrayList<Category>();
-		for (HashMap<Category, List<Project>> category : data) {
+		for (HashMap<Category, ArrayList<Project>> category : data) {
 			for (Category c : category.keySet()) {
 				result.add(c);
 			}
@@ -59,8 +59,9 @@ public class LocalDataSource implements DataSource {
 
 	@Override
 	public Project getProject(int category, int project) {
-		for (Category c : data.get(categoryIndex-1).keySet()) {
-			return c;
+		for (Category c : data.get(category-1).keySet()) {
+			Project result = data.get(category - 1).get(c).get(project);
+			return result;
 		}
 		return null;
 	}
@@ -68,13 +69,13 @@ public class LocalDataSource implements DataSource {
 	@Override
 	public boolean checkIfProjectExist(int i, int userChoise) {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
 	public boolean checkIfCategoryExist(int userChoise) {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 }
