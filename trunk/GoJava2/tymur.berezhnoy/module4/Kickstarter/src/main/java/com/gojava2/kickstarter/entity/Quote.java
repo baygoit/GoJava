@@ -8,7 +8,6 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import org.springframework.data.annotation.PersistenceConstructor;
-
 @Entity
 @Table(name = "quotes")
 public class Quote {

@@ -2,9 +2,12 @@ package com.gojava2.kickstarter.controller;
 
 import java.security.Principal;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -53,9 +56,12 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/account-manage", method = RequestMethod.POST)
-	public String addProject(@ModelAttribute("project") Project project, 
-			@ModelAttribute("projectStatus") ProjectStatus projectStatus,
+	public String addProject(Model model, @Valid @ModelAttribute("project") Project project, BindingResult result,  
+			@Valid @ModelAttribute("projectStatus") ProjectStatus projectStatus,
 			Principal principal) {
+		if (result.hasErrors()) {
+			return account(model, principal);
+		}
 		String userName = principal.getName();
 		projectService.save(project, projectStatus, userName);
 		return "redirect:/account-manage.html";
@@ -63,7 +69,7 @@ public class UserController {
 	
 	@RequestMapping("/project/remove/{id}")
 	private String removeProject(@PathVariable int id) {
-		Project project = projectService.findOne(id);
+		Project project = projectService.get(id);
 		projectService.delet(project);
 		return "redirect:/account-manage.html";
 	}

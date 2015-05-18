@@ -47,4 +47,9 @@
 		<put-attribute name="body" value="/WEB-INF/jsp/account-manage.jsp" />
 		<put-attribute name="current" value="account-manage" />
 	</definition>
+	<definition name="payment" extends="common">
+		<put-attribute name="title" value="Payment" />
+		<put-attribute name="body" value="/WEB-INF/jsp/payment.jsp" />
+		<put-attribute name="current" value="payment" />
+	</definition>
 </tiles-definitions>

@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.data.annotation.PersistenceConstructor;
 
@@ -16,13 +17,15 @@ public class ProjectStatus {
 	@GeneratedValue
 	private Integer id;
 	
-	@Column(nullable = false, name = "requaried_amount", length = 250)
+	@NotNull
+	@Column(name = "requaried_amount")
 	private int requiredAmount;
 	
 	@Column(length = 250)
 	private int total;
 	
-	@Column(nullable = false, name = "days_left", length = 250)
+	@NotNull
+	@Column(name = "days_left")
 	private int daysLeft;
 	
 	@Column(length = 250)
@@ -76,5 +79,9 @@ public class ProjectStatus {
 	
 	public int getBackers() {
 		return backers;
-	}	
+	}
+	
+	public void addBaker() {
+		backers++;
+	}
 }

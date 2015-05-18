@@ -1,10 +1,10 @@
 <%@ include file="../layout/taglib.jsp" %>
 <script type="text/javascript" src="<c:url value="/resources/js/modal-remove.js" />"></script>
-<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-  New project
-</button>
+<script type="text/javascript" src="<c:url value="/resources/js/project-validation.js" />"></script>
 
-<form:form commandName="project" cssClass="form-horizontal">
+<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">New project</button>
+
+<form:form commandName="project" cssClass="form-horizontal projectForm">
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -17,24 +17,28 @@
 			<label for="name" class="col-sm-2 control-label">Project name: </label>	
 				<div class="col-sm-10">
 					<form:input path="name" cssClass="form-control" />
+					<form:errors path="name" />
 				</div>
 		</div>
 		<div class="form-group">
 			<label for="name" class="col-sm-2 control-label">Description: </label>	
 				<div class="col-sm-10">
-					<form:input path="description" cssClass="form-control" />
+					<form:textarea path="description" cssClass="form-control" rows="5" style="resize:none;" />
+					<form:errors path="description" />
 				</div>
 		</div>
 		<div class="form-group">
 			<label for="name" class="col-sm-2 control-label">Story: </label>	
 				<div class="col-sm-10">
-					<form:input path="story" cssClass="form-control" />
+					<form:textarea path="story" cssClass="form-control" rows="5" style="resize:none;" />
+					<form:errors path="story" />
 				</div>
 		</div>
 		<div class="form-group">
 			<label for="name" class="col-sm-2 control-label">Link: </label>	
 				<div class="col-sm-10">
-					<form:input path="link" cssClass="form-control" />
+					<form:input path="link" cssClass="form-control" placeholder="Enter with http://" />
+					<form:errors path="link" />
 				</div>
 		</div>
 		<form:form commandName="projectStatus">
@@ -42,19 +46,22 @@
 				<label for="name" class="col-sm-2 control-label">Required amount: </label>	
 					<div class="col-sm-10">
 						<form:input path="requiredAmount" cssClass="form-control" />
+						<form:errors path="requiredAmount" />
 					</div>
 			</div>
 			<div class="form-group">
 				<label for="name" class="col-sm-2 control-label">Days left: </label>	
 					<div class="col-sm-10">
 						<form:input path="daysLeft" cssClass="form-control" />
+						<form:errors path="daysLeft" />
 					</div>
 			</div>
 		</form:form>
 		<div class="form-group">
 			<label for="name" class="col-sm-2 control-label">Category:</label>
 				<div class="col-sm-10">
-					<form:select path="category.id">  
+					<form:select path="category.id">
+					<form:errors path="category.id" />
 					<form:option value="" label="Select category"/>                             
             		<form:options items="${categories}" itemValue="id" itemLabel="name" />
             		</form:select>

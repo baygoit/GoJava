@@ -1,7 +1,5 @@
 package com.gojava2.kickstarter.service;
 
-import java.util.Random;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,9 +13,7 @@ public class QuoteService {
 	private QuoteRepository quoteRepository;
 	
 	public Quote getRandomQuote() {
-        Random random = new Random();
-        
-        int index = random.nextInt((int) quoteRepository.count());
-        return quoteRepository.findOne(index + 1);
+		Quote quote = quoteRepository.getRandomQuote().get(1);
+        return quote;
 	}
 }

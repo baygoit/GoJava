@@ -34,7 +34,7 @@ public class User {
 	@NotNull(message = "Email must exist!")
 	private String email;
 	
-	@Size(min = 5, message = "Password must be fromt 5 to 30 characters!")
+	@Size(min = 5, message = "Password must be at least 5 characters!")
 	@NotNull(message = "Password must exist!")
 	private String password;
 	

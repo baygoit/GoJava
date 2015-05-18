@@ -1,16 +1,22 @@
 package com.gojava2.kickstarter.entity;
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
+import org.hibernate.validator.constraints.URL;
 import org.springframework.data.annotation.PersistenceConstructor;
 
 @Entity
@@ -28,16 +34,17 @@ public class Project {
 	@Transient
 	private final char symbolDollar = 36;
 	
-	@Column(nullable = false, length = 100)
+	@Size(min = 2, max = 100, message = "Name must be at least 2 characters!")
+	@NotNull(message = "Name must exist!")
 	private String name;
 	
-	@Column(length = 500)
+	@Size(max = 500, message = "Description must be maximum 500 characters!")
 	private String description;
 	
-	@Column(length = 500)
+	@Size(max = 500, message = "Story must be maximum 500 characters!")
 	private String story;
 	
-	@Column(length = 250)
+	@URL(message = "Not valid URL!")
 	private String link;
 	
 	@ManyToOne
@@ -47,6 +54,9 @@ public class Project {
 	@OneToOne(cascade = CascadeType.REMOVE)
 	@JoinColumn(name = "status_id")
 	private ProjectStatus status;
+	
+	@OneToMany(mappedBy = "project", fetch=FetchType.EAGER)
+    private List<FAQ> faq;
 	
 	public Project() {}
 	
@@ -127,5 +137,13 @@ public class Project {
 	
 	public ProjectStatus getStatus() {
 		return status;
+	}
+
+	public void setFaq(List<FAQ> faq) {
+		this.faq = faq;
+	}
+	
+	public List<FAQ> getFaq() {
+		return faq;
 	}
 }

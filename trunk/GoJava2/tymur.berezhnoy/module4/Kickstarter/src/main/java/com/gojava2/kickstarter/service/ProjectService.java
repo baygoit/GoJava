@@ -34,7 +34,7 @@ public class ProjectService {
 
 	public List<Project> getAll(int id) {
 		Category category = categoryRepository.findOne(id);
-        return projectRepository.findByCategory(category, new PageRequest(0, 20, Direction.DESC, "id"));
+        return projectRepository.findByCategory(category, new PageRequest(0, 20, Direction.ASC, "id"));
 	}
 	
 	public Project get(int id) {
@@ -51,9 +51,5 @@ public class ProjectService {
 	@PreAuthorize("#project.user.name == authentication.name or hasRole('ROLE_ADMIN')")
 	public void delet(@P("project") Project project) {
 		projectRepository.delete(project);
-	}
-
-	public Project findOne(int id) {
-		return projectRepository.findOne(id);
 	}
 }

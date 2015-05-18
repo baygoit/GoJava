@@ -47,6 +47,7 @@ public class InitDbService {
 	
 	@PostConstruct
 	public void insert() {
+		if(roleRepository.findByName("ROLE_ADMIN") == null) {
 		Role roleUser = new Role("ROLE_USER");
 		roleRepository.save(roleUser);
 		
@@ -88,7 +89,7 @@ public class InitDbService {
 		createProject("Tiny Epic Galaxies", "Develop your empire and colonize planets to create the most powerful galaxy!", "Here will be history", "http://www.galaxies.com", catgeroryGames, createProjectStatus(100000, 8000, 70, 9), userAdmin);
 		createProject("Shadowrun: Hong Kong", "A Shadowrun cyberpunk cRPG set in 2056s Magically Awakened Hong Kong by the developers of Shadowrun Returns and Dragonfall.", "Here will be history", "http://www.shadowrun.com", catgeroryGames, createProjectStatus(100000, 8000, 70, 9), userAdmin);
 		createProject("Starr Mazer", "A retro-sexy Point-and-Click Adventure Shoot em Up in SPACE!", "Here will be history", "http://www.starr mazer.com", catgeroryGames, createProjectStatus(100000, 8000, 70, 9), userAdmin);
-		
+		}
 	}
 	
 	private void createQuote(String content, String author) {
