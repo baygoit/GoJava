@@ -52,7 +52,7 @@ public class DetailedProject extends Page {
 			}
 		}
 		header += "\n------------------------";
-		header += "\nOptions: <p> - previous page; <i>- invest to project ; <c>- comment";
+		header += "\nOptions: <p> - previous page; <i>- invest to project ; <c>- comment ; <d>- donate";
 		return header;
 	}
 
@@ -76,6 +76,10 @@ public class DetailedProject extends Page {
 		}
 		if (message.equals("i")) {
 			navigator.pageWillBe(INVEST_PAGE);
+			return;
+		}
+		if (message.equals("d")) {
+			navigator.pageWillBe(DONATE_PAGE);
 			return;
 		}
 		navigator.savePageBeforeError(DETAILED_PROJECT);
