@@ -4,39 +4,44 @@ import java.util.Scanner;
 
 public class Anagram {
 	public static void main(String[] args) {
-		String inputText = initList();
-		String[] arrayText = createArray(inputText);
-		String outputText = permutation(arrayText);
-		System.out.println(outputText);
+		Anagram anagram = new Anagram();
+		anagram.go();
 	}
 
-	private static String initList() {
+	void go() {
+		String stringLine = initStringLine().trim();
+		String[] arrayString = createStringArray(stringLine);
+		System.out.println(permute(arrayString));
+	}
+
+	String initStringLine() {
 		try (Scanner consolText = new Scanner(System.in)) {
 			System.out.println("Enter the text.");
 			return consolText.nextLine();
 		}
 	}
 
-	private static String[] createArray(String inputText) {
+	String[] createStringArray(String inputText) {
 		String array = "";
-		String[] arrayText;
 		do {
 			int indexOfSeparator = inputText.indexOf(" ");
 			array += inputText.substring(0, indexOfSeparator + 1);
-			inputText = inputText.substring(indexOfSeparator + 1,
-					inputText.length());
+			inputText = inputText.substring(indexOfSeparator + 1, inputText.length()).trim();
 		} while (inputText.contains(" "));
 		array += inputText;
-		arrayText = array.split(" ");
-		return arrayText;
+		return array.split(" ");
 	}
 
-	private static String permutation(String[] arrayText) {
+	String permute(String[] arrayText) {
 		String outputText = "";
-		for (String text : arrayText) {
-			StringBuffer sb = new StringBuffer(text);
+		for (int index = 0; index < arrayText.length; index++) {
+			StringBuffer sb = new StringBuffer(arrayText[index]);
 			sb.reverse();
-			outputText += sb + " ";
+			if (index == arrayText.length - 1) {
+				outputText += sb;
+			} else {
+				outputText += sb + " ";
+			}
 		}
 		return outputText;
 	}
