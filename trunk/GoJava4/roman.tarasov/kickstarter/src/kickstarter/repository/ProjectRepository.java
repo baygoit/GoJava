@@ -4,8 +4,6 @@ import kickstarter.entities.Project;
 
 public class ProjectRepository {
 	iStorage<Project> projects;
-	private String[] optionsStrings;
-	private int[] optionsInts;
 
 	public ProjectRepository() {
 		int categoryID = 5;
@@ -28,6 +26,15 @@ public class ProjectRepository {
 
 	}
 
+	public int getProjectsLength() {
+		return projects.length();
+	}
+
+	public Project getProject(int index) {
+		return projects.getEntity(index);
+
+	}
+
 	public Project getProjectById(int ID) {
 		int length = projects.length();
 
@@ -38,44 +45,5 @@ public class ProjectRepository {
 			}
 		}
 		return null;
-	}
-
-	public iStorage<Project> sortProjectsByCategoryID(int categoryID) {
-
-		iStorage<Project> sortedProjects = new EntityStorage<Project>();
-		int length = projects.length();
-		for (int index = 0; index < length; index++) {
-			Project project = projects.getEntity(index);
-			if (project.categoryID == categoryID) {
-				sortedProjects.add(project);
-			}
-		}
-		return sortedProjects;
-	}
-
-	public String printProjectsInfo(int categoryID) {
-		String result = "";
-		iStorage<Project> sortedToSelect = sortProjectsByCategoryID(categoryID);
-		int length = sortedToSelect.length();
-		optionsStrings = new String[length];
-		optionsInts = new int[length];
-		for (int index = 0; index < length; index++) {
-			Project project = sortedToSelect.getEntity(index);
-			optionsStrings[index] = Integer.toString(project.ID);
-			optionsInts[index] = project.ID;
-			result += ("ID:<" + project.ID + "> name:<" + project.name
-					+ "> short desc.:<" + project.shortDescription + "> goal:<"
-					+ project.goal + "> pledged:<" + project.pledged
-					+ "> days to go:<" + project.daysToGo + ">");
-		}
-		return result;
-	}
-
-	public String[] getStringOptions() {
-		return optionsStrings;
-	}
-
-	public int[] getIntOptions() {
-		return optionsInts;
 	}
 }

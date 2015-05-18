@@ -15,6 +15,7 @@ public class InvestPage extends Page {
 		header += "\n=========================";
 		header += "\n";
 		header += "\n------------------------";
+		header += "\nOptions: <p>- previous page  ";
 		return header;
 	}
 
