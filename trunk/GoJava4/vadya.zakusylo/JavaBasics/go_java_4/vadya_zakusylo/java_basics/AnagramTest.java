@@ -44,7 +44,7 @@ public class AnagramTest {
 	}
 
 	@Test
-	public void testPermuteExpressionExpression() {
+	public void testPermuteExpressionToExpression() {
 		String[] arrayText = { "Have", "a", "nice", "day!" };
 		assertEquals("evaH a ecin !yad", anagram.permute(arrayText));
 	}
