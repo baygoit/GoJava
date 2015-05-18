@@ -1,8 +1,7 @@
 package com.morkva.model;
 
 import com.morkva.entities.Category;
-import com.morkva.entities.Quote;
-import com.morkva.model.impl.RepositoryImpl;
+import com.morkva.model.impl.CategoryRepository;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -10,15 +9,13 @@ import org.junit.Test;
 /**
  * Created by vladyslav on 11.05.15.
  */
-public class RepositoryImplTest {
+public class CategoryRepositoryTest {
 
     Repository<Category> categoryRepository;
-    Repository<Quote> quoteRepository;
 
     @Before
     public void setUp() {
-        categoryRepository = new RepositoryImpl<>();
-        quoteRepository = new RepositoryImpl<>();
+        categoryRepository = new CategoryRepository();
     }
 
     @Test
@@ -98,7 +95,7 @@ public class RepositoryImplTest {
 
     @Test
     public void shouldNull_WhenEmpty() throws Exception {
-        Category category = categoryRepository.getByIndex(0);
+        Category category = categoryRepository.findByName("Name 1");
         Category category2 = categoryRepository.getById(0);
 
         Assert.assertNull(category);
@@ -108,14 +105,13 @@ public class RepositoryImplTest {
     @Test
     public void shouldNotNull_WhenNotEmpty() throws Exception {
         categoryRepository.add(new Category(1, "Name 1"));
-        Category category = categoryRepository.getByIndex(0);
+        Category category = categoryRepository.findByName("Name 1");
         Category category2 = categoryRepository.getById(1);
+        Category category3 = categoryRepository.getByIndex(0);
 
         Assert.assertNotNull(category);
-        Assert.assertEquals("Name 1", category.getName());
-
         Assert.assertNotNull(category2);
-        Assert.assertEquals("Name 1", category2.getName());
+        Assert.assertNotNull(category3);
     }
 
     @Test
@@ -125,7 +121,7 @@ public class RepositoryImplTest {
                 new Category(3, "Name 3"),
                 new Category(2, "Name 2")
         };
-        categoryRepository = new RepositoryImpl<>(categories);
+        categoryRepository = new CategoryRepository(categories);
         int size = categoryRepository.size();
         Assert.assertEquals(3, size);
     }

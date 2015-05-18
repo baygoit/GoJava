@@ -8,10 +8,8 @@ import java.util.Scanner;
  */
 public class ConsoleReader implements Reader {
 
-    Printer printer;
 
-    public ConsoleReader(Printer printer) {
-        this.printer = printer;
+    public ConsoleReader() {
     }
 
     @Override
@@ -21,7 +19,7 @@ public class ConsoleReader implements Reader {
         try {
             userInput = scanner.nextInt();
         } catch (InputMismatchException e) {
-            printer.print("Please enter only numbers!" + "\n");
+            System.err.println("Please Enter only numbers");
             userInput = readUserInput();
         }
         return userInput;

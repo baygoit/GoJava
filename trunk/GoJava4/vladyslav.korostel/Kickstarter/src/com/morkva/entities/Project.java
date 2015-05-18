@@ -16,7 +16,6 @@ public class Project extends Entity {
     private String history;
     private String urlVideo;
     private String[] questionsAndAnswers;
-    private Printer printer;
 
     public Project(
             int id,
@@ -102,26 +101,26 @@ public class Project extends Entity {
         this.urlVideo = urlVideo;
     }
 
-    public void setPrinter(Printer printer) {
-        this.printer = printer;
+    public String getFullInfo() {
+        StringBuilder builder = new StringBuilder();
+        builder.append(this.getName()).append("\n");
+        builder.append("	Short Description: ").append(this.getShortDescr()).append("\n");
+        builder.append("	Need money: ").append(this.getNeedMoney()).append("\n");
+        builder.append("	Current money: ").append(this.getCurrentMoney()).append("\n");
+        builder.append("	Days left: ").append(this.getDaysLeft()).append("\n");
+        builder.append("	History: ").append(this.getHistory()).append("\n");
+        builder.append("	Video URL: ").append(this.getUrlVideo()).append("\n");
+        return builder.toString();
     }
 
-    public void showFullInfo() {
-        printer.print(this.getName() + "\n");
-        printer.print("	Short Description: " + this.getShortDescr() + "\n");
-        printer.print("	Need money: " + this.getNeedMoney() + "\n");
-        printer.print("	Current money: " + this.getCurrentMoney() + "\n");
-        printer.print("	Days left: " + this.getDaysLeft() + "\n");
-        printer.print("	History: " + this.getHistory() + "\n");
-        printer.print("	Video URL: " + this.getUrlVideo() + "\n");
-    }
-
-    public void showShortInfo() {
-        printer.print(this.getName() + "\n");
-        printer.print("	Short Description: " + this.getShortDescr() + "\n");
-        printer.print("	Need money: " + this.getNeedMoney() + "\n");
-        printer.print("	Current money: " + this.getCurrentMoney() + "\n");
-        printer.print("	Days left: " + this.getDaysLeft() + "\n");
+    public String getShortInfo() {
+        StringBuilder builder = new StringBuilder();
+        builder.append(this.getName() + "\n");
+        builder.append("	Short Description: " + this.getShortDescr() + "\n");
+        builder.append("	Need money: " + this.getNeedMoney() + "\n");
+        builder.append("	Current money: " + this.getCurrentMoney() + "\n");
+        builder.append("	Days left: " + this.getDaysLeft() + "\n");
+        return builder.toString();
     }
 
 }
