@@ -2,10 +2,13 @@ package kickstarter.interfaces.display;
 
 import kickstarter.interfaces.pages.ChoicePage;
 import kickstarter.interfaces.pages.Page;
+import kickstarter.interfaces.pages.PagesManipulator;
 import kickstarter.interfaces.printers.Printer;
 import kickstarter.interfaces.readers.Reader;
 
 public class UserInterface {
+	public static final PagesManipulator PAGES = new PagesManipulator();
+
 	private Printer printer;
 	private Reader reader;
 

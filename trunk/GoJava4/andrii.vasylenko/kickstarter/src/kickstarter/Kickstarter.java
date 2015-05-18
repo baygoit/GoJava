@@ -3,11 +3,8 @@ package kickstarter;
 import kickstarter.engine.Category;
 import kickstarter.engine.Project;
 import kickstarter.interfaces.display.UserInterface;
-import kickstarter.interfaces.pages.ChoiceCategoryPage;
-import kickstarter.interfaces.pages.ChoiceProjectPage;
-import kickstarter.interfaces.pages.ShowProjectPage;
-import kickstarter.interfaces.pages.ShowRandomQuotePage;
-import kickstarter.interfaces.pages.TheEndPage;
+import kickstarter.interfaces.pages.ChoicePage;
+import kickstarter.interfaces.pages.Page;
 import kickstarter.storages.CategoriesStorage;
 import kickstarter.storages.ProjectsStorage;
 import kickstarter.storages.QuotesStorage;
@@ -34,14 +31,15 @@ public class Kickstarter {
 	}
 
 	private void showQuote() {
-		userInterface.showPage(new ShowRandomQuotePage(quotes));
+		Page page = UserInterface.PAGES.getShowRandomQuotePage(quotes);
+		userInterface.showPage(page);
 	}
 
 	private void choiceCategory() {
 		while (true) {
-			ChoiceCategoryPage page = new ChoiceCategoryPage(categories);
+			ChoicePage page = UserInterface.PAGES.getChoiceCategoryPage(categories);
 			userInterface.choiceItem(page);
-			Category category = page.getChosenItem();
+			Category category = (Category) page.getChosenItem();
 			if (category == Category.EXIT) {
 				return;
 			}
@@ -51,9 +49,9 @@ public class Kickstarter {
 
 	private void choiceProject(Category category) {
 		while (true) {
-			ChoiceProjectPage page = new ChoiceProjectPage(projects, category);
+			ChoicePage page = UserInterface.PAGES.getChoiceProjectPage(projects, category);
 			userInterface.choiceItem(page);
-			Project project = page.getChosenItem();
+			Project project = (Project) page.getChosenItem();
 			if (project == Project.EXIT) {
 				return;
 			}
@@ -63,9 +61,9 @@ public class Kickstarter {
 
 	private void showProject(Project project) {
 		while (true) {
-			ShowProjectPage page = new ShowProjectPage(project);
+			ChoicePage page = UserInterface.PAGES.getShowProjectPage(project);
 			userInterface.choiceItem(page);
-			Project currentProject = page.getChosenItem();
+			Project currentProject = (Project) page.getChosenItem();
 			if (currentProject == Project.EXIT) {
 				return;
 			}
@@ -73,6 +71,7 @@ public class Kickstarter {
 	}
 
 	private void showTheEnd() {
-		userInterface.showPage(new TheEndPage());
+		Page page = UserInterface.PAGES.getTheEndPage();
+		userInterface.showPage(page);
 	}
 }
