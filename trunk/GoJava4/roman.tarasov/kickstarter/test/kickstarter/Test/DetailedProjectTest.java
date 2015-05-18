@@ -6,8 +6,8 @@ import kickstarter.entities.ProjectComments;
 import kickstarter.entities.Project;
 import kickstarter.pages.DetailedProject;
 import kickstarter.repository.EntityStorage;
-import kickstarter.repository.Storage;
-import kickstarter.ui.UserInterface;
+import kickstarter.repository.iStorage;
+import kickstarter.ui.iUserInterface;
 
 import org.junit.Test;
 

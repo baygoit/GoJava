@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 import kickstarter.entities.Category;
 import kickstarter.entities.Quote;
 import kickstarter.repository.EntityStorage;
-import kickstarter.repository.Storage;
+import kickstarter.repository.iStorage;
 
 import org.junit.Test;
 
@@ -12,7 +12,7 @@ public class EntityStorageTest {
 
 	@Test
 	public void verify_names_of_added_categories() {
-		Storage<Category> categories = new EntityStorage<Category>();
+		iStorage<Category> categories = new EntityStorage<Category>();
 		// when
 		categories.add(new Category("name1"));
 		categories.add(new Category("name2"));
@@ -44,7 +44,7 @@ public class EntityStorageTest {
 
 	@Test
 	public void verify_null_values() {
-		Storage<Category> categories = new EntityStorage<Category>();
+		iStorage<Category> categories = new EntityStorage<Category>();
 
 		assertNull(categories.getEntity(0));
 		assertNull(categories.getEntity(1));
@@ -53,14 +53,14 @@ public class EntityStorageTest {
 
 	@Test
 	public void get_random_object_from_objects() {
-		Storage<Quote> quotes = new EntityStorage<Quote>();
+		iStorage<Quote> quotes = new EntityStorage<Quote>();
 		quotes.add(new Quote());
 		assertNotNull(quotes.getRandom());
 	}
 
 	@Test
 	public void should_null_result_for_random_object_from_null_storage() {
-		Storage<Quote> quotes = new EntityStorage<Quote>();
+		iStorage<Quote> quotes = new EntityStorage<Quote>();
 		assertNull(quotes.getRandom());
 	}
 }

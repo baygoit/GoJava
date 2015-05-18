@@ -3,7 +3,7 @@ package kickstarter.repository;
 import kickstarter.entities.ProjectComments;
 
 public class CommentsRepository {
-	Storage<ProjectComments> allComments;
+	iStorage<ProjectComments> allComments;
 
 	public CommentsRepository() {
 		allComments = new EntityStorage<ProjectComments>();
@@ -28,4 +28,10 @@ public class CommentsRepository {
 		}
 		return null;
 	}
+/*
+	public void update(ProjectComments projectComments,index) {
+		allComments.update(projectComments,);
+
+	}
+	*/
 }

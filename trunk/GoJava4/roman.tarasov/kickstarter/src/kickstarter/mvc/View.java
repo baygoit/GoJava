@@ -1,15 +1,15 @@
 package kickstarter.mvc;
 
 import kickstarter.pages.Page;
-import kickstarter.ui.UserInterface;
+import kickstarter.ui.iUserInterface;
 
 public class View {
 	Model model;
 	Page page;
 	final int OK=0;
-	private UserInterface ui;
+	private iUserInterface ui;
 
-	public View(Model model, UserInterface ui) {
+	public View(Model model, iUserInterface ui) {
 		this.model = model;
 		this.ui = ui;
 	}

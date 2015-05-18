@@ -16,7 +16,7 @@ import kickstarter.repository.CommentsRepository;
 import kickstarter.repository.ProjectRepository;
 import kickstarter.repository.QuotesRepository;
 import kickstarter.ui.ConsoleUI;
-import kickstarter.ui.UserInterface;
+import kickstarter.ui.iUserInterface;
 
 public class Kickstarter {
 
@@ -26,7 +26,7 @@ public class Kickstarter {
 	Model model;
 	View view;
 	public Controller controller;
-	UserInterface ui;
+	iUserInterface ui;
 	CommentsRepository allComments;
 
 	public Kickstarter() {
@@ -60,7 +60,7 @@ public class Kickstarter {
 		kickstarter.run();
 	}
 
-	public void testUI(UserInterface ui) {
+	public void testUI(iUserInterface ui) {
 		this.ui = ui;
 	}
 

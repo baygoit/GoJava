@@ -4,7 +4,7 @@ import kickstarter.entities.Quote;
 
 
 public class QuotesRepository {
-	Storage<Quote> quotes;
+	iStorage<Quote> quotes;
 
 	public QuotesRepository() {
 		quotes = new EntityStorage<Quote>();

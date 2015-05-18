@@ -44,8 +44,11 @@ public class DetailedProject extends Page {
 		ProjectComments comments = selectCommentsToProject(project.ID);
 		if (comments != null) {
 			for (int index = 0; index < comments.getCommentLength(); index++) {
-				header += "user ID:<" + comments.usersID[index]
-						+ ">  comment:<" + comments.comment[index] + ">\n";
+				if (comments.usersID[index] != 0) {
+					header += "user ID:<" + comments.usersID[index]
+							+ ">  comment ID:<" + index + "> <"
+							+ comments.comment[index] + ">\n";
+				}
 			}
 		}
 		header += "\n------------------------";

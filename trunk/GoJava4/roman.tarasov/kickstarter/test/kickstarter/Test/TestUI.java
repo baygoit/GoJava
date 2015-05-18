@@ -1,8 +1,8 @@
 package kickstarter.Test;
 
-import kickstarter.ui.UserInterface;
+import kickstarter.ui.iUserInterface;
 
-public class TestUI implements UserInterface {
+public class TestUI implements iUserInterface {
 
 	@Override
 	public String inputString() {

@@ -2,7 +2,7 @@ package kickstarter.repository;
 
 import java.util.Random;
 
-public class EntityStorage<T> implements Storage<T> {
+public class EntityStorage<T> implements iStorage<T> {
 	final int INIT_SIZE = 10;
 	final int ADD_TO_SIZE = 10;
 	final int START_INDEX = 0;
@@ -41,5 +41,10 @@ public class EntityStorage<T> implements Storage<T> {
 			return (T) objects[random];
 		}
 		return null;
+	}
+
+	@Override
+	public void update(T entity, int index) {
+
 	}
 }

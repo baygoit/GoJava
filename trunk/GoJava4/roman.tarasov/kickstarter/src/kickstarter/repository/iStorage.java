@@ -1,7 +1,7 @@
 package kickstarter.repository;
 
 
-public interface Storage<T> {
+public interface iStorage<T> {
 
 	void add(T entity);
 
@@ -10,5 +10,7 @@ public interface Storage<T> {
 	int length();
 
 	T getRandom();
+
+	void update(T entity,int index);
 
 }

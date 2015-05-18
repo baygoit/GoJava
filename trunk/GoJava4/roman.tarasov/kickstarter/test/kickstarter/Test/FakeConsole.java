@@ -3,14 +3,14 @@ package kickstarter.Test;
 import static org.junit.Assert.*;
 import kickstarter.Kickstarter;
 import kickstarter.entities.Quote;
-import kickstarter.ui.UserInterface;
+import kickstarter.ui.iUserInterface;
 
 import org.junit.Ignore;
 import org.junit.Test;
 
 public class FakeConsole {
 	Kickstarter kickstarter;
-	UserInterface ui;
+	iUserInterface ui;
 
 	public FakeConsole() {
 		kickstarter = new Kickstarter();

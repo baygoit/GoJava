@@ -2,10 +2,10 @@ package kickstarter.mvc;
 
 import kickstarter.pages.Page;
 import kickstarter.repository.EntityStorage;
-import kickstarter.repository.Storage;
+import kickstarter.repository.iStorage;
 
 public class Model implements iNavigator {
-	private Storage<Page> pages;
+	private iStorage<Page> pages;
 
 	private String sParameterForPage;
 	private int pageIndex;

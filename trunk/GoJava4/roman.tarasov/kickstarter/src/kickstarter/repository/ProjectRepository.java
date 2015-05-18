@@ -3,7 +3,7 @@ package kickstarter.repository;
 import kickstarter.entities.Project;
 
 public class ProjectRepository {
-	Storage<Project> projects;
+	iStorage<Project> projects;
 	private String[] optionsStrings;
 	private int[] optionsInts;
 
@@ -40,9 +40,9 @@ public class ProjectRepository {
 		return null;
 	}
 
-	public Storage<Project> sortProjectsByCategoryID(int categoryID) {
+	public iStorage<Project> sortProjectsByCategoryID(int categoryID) {
 
-		Storage<Project> sortedProjects = new EntityStorage<Project>();
+		iStorage<Project> sortedProjects = new EntityStorage<Project>();
 		int length = projects.length();
 		for (int index = 0; index < length; index++) {
 			Project project = projects.getEntity(index);
@@ -55,7 +55,7 @@ public class ProjectRepository {
 
 	public String printProjectsInfo(int categoryID) {
 		String result = "";
-		Storage<Project> sortedToSelect = sortProjectsByCategoryID(categoryID);
+		iStorage<Project> sortedToSelect = sortProjectsByCategoryID(categoryID);
 		int length = sortedToSelect.length();
 		optionsStrings = new String[length];
 		optionsInts = new int[length];

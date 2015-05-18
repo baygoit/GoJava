@@ -3,7 +3,7 @@ package kickstarter.repository;
 import kickstarter.entities.Category;
 
 public class CategoriesRepository {
-	Storage<Category> categories;
+	iStorage<Category> categories;
 	private String[] optionsStrings;
 	private int[] optionsInts;
 

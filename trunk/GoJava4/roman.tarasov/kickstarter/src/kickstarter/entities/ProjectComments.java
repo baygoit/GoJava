@@ -34,4 +34,18 @@ public class ProjectComments {
 	public int getCommentLength() {
 		return commentIndex;
 	}
+
+	public void deleteComment(String userID, String commentID)
+			throws NullPointerException, NumberFormatException {
+		
+		int intUserID=Integer.parseInt(userID);
+		int intCommentID = Integer.parseInt(commentID);
+		if (intCommentID < 0 || intCommentID >= commentIndex
+				|| usersID[intCommentID] != intUserID) {
+			throw new NullPointerException(null);
+		}
+		usersID[intCommentID]=0;//0 - deleted comment
+		
+
+	}
 }
