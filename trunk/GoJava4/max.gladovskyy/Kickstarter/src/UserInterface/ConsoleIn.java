@@ -27,7 +27,8 @@ public class ConsoleIn implements Input {
 
 
 	private void processMainLevel(int[] menuPosition, int userChoise) {
-		if (dataSource.checkIfCategoryExist(userChoise)) {
+		//if (dataSource.checkIfCategoryExist(userChoise)) {
+			if (true) {
 			menuPosition[CATEGORY_LEVEL] = userChoise;
 		} else {
 			askForChoiseAgain(menuPosition);
@@ -39,8 +40,9 @@ public class ConsoleIn implements Input {
 		if (userChoise == 0) {
 			menuPosition[CATEGORY_LEVEL] = 0;
 		} else {
-			if (dataSource.checkIfProjectExist(menuPosition[CATEGORY_LEVEL], userChoise)) {
-				menuPosition[PROJECT_LEVEL] = userChoise;
+		//	if (dataSource.checkIfProjectExist(menuPosition[CATEGORY_LEVEL], userChoise)) {
+			if (true) {
+			menuPosition[PROJECT_LEVEL] = userChoise;
 			} else {
 				askForChoiseAgain(menuPosition);
 			}
