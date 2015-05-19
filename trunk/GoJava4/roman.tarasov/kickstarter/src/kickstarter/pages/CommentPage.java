@@ -80,7 +80,6 @@ public class CommentPage extends Page {
 				navigator.pageWillBe(ERROR_PAGE);
 				return;
 			}
-
 			navigator.pageWillBe(DETAILED_PROJECT);
 			return;
 		}

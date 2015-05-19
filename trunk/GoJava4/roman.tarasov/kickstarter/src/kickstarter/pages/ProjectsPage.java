@@ -7,7 +7,7 @@ import kickstarter.repository.ProjectRepository;
 import kickstarter.repository.iStorage;
 
 public class ProjectsPage extends Page {
-	
+
 	public ProjectsPage(ProjectRepository projects, Model model) {
 		this.projects = projects;
 		navigator = model;
@@ -19,6 +19,7 @@ public class ProjectsPage extends Page {
 
 	public void viewWorkedStatus(int status) {
 	}
+
 	public iStorage<Project> sortProjectsByCategoryID(int categoryID) {
 
 		iStorage<Project> sortedProjects = new EntityStorage<Project>();
@@ -31,7 +32,7 @@ public class ProjectsPage extends Page {
 		}
 		return sortedProjects;
 	}
-	
+
 	public String printProjectsInfo(int categoryID) {
 		String result = "";
 		iStorage<Project> sortedToSelect = sortProjectsByCategoryID(categoryID);
@@ -49,6 +50,7 @@ public class ProjectsPage extends Page {
 		}
 		return result;
 	}
+
 	public String getHeader() {
 
 		String header = "";

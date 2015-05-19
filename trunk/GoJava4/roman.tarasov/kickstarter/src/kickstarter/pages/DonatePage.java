@@ -14,7 +14,6 @@ public class DonatePage extends Page {
 	}
 
 	public String getHeader() {
-
 		String header = "";
 		header += "\n=========================";
 		header += "\n|       donate          |";
@@ -22,7 +21,6 @@ public class DonatePage extends Page {
 		header += "\n";
 		header += "\n------------------------";
 		header += "\nOptions: donate in format <bankir:777:20> where login -bankir-, cardnumber -777-, pay -20- \n<p>- previous page  ";
-		
 		return header;
 	}
 
@@ -64,20 +62,17 @@ public class DonatePage extends Page {
 				navigator.savePageBeforeError(DONATE_PAGE);
 				navigator.setOption(parameterForPage, resultOfBankOperation);
 				navigator.pageWillBe(BANK_OPERATION_RESULT_PAGE);
-
 				return;
 			}
 
 			int projectID = parameterForPage;
 			Project project = projects.getProjectById(projectID);
 			project.pledged += getMoney;
-
 			navigator.pageWillBe(BANK_OPERATION_RESULT_PAGE);
 			String setOption = "\nbalance before :" + balanceBefore
 					+ "\nbalance after :" + balanceAfter;
 			navigator.setOption(parameterForPage, setOption);
 			return;
-
 		}
 		navigator.savePageBeforeError(DONATE_PAGE);
 		navigator.pageWillBe(ERROR_PAGE);

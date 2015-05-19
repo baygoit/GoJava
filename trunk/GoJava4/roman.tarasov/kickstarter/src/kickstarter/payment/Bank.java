@@ -12,31 +12,32 @@ public class Bank {
 		bankAccount.put("bankir", (int) 777);
 		cardAccount.put((int) 777, (double) 5000);
 	}
-public	double getBalance(String login, String number){
-	if (login == null) {
-		return -1;
+
+	public double getBalance(String login, String number) {
+		if (login == null) {
+			return -1;
+		}
+		if (login.equals("")) {
+			return -1;
+		}
+		if (number == null) {
+			return -1;
+		}
+		if (number.equals("")) {
+			return -1;
+		}
+		int cardnumber = 0;
+		try {
+			cardnumber = Integer.parseInt(number);
+		} catch (NumberFormatException | NullPointerException e) {
+			return -1;
+		}
+		if (cardAccount.get(cardnumber) == null) {
+			return -1;
+		}
+		return cardAccount.get(cardnumber);
 	}
-	if (login.equals("")) {
-		return -1;
-	}
-	if (number == null) {
-		return -1;
-	}
-	if (number.equals("")) {
-		return -1;
-	}
-	int cardnumber=0;
-	try {
-		cardnumber = Integer.parseInt(number);
-	} catch (NumberFormatException | NullPointerException e) {
-		return -1;
-	}
-	if(cardAccount.get(cardnumber)==null){
-		return -1;
-	}
-	
-	return  cardAccount.get(cardnumber);
-}
+
 	public boolean getMoney(String login, String number, String money) {
 		if (money == null) {
 			return false;
@@ -56,13 +57,13 @@ public	double getBalance(String login, String number){
 		if (number.equals("")) {
 			return false;
 		}
-		int cardnumber=0;
+		int cardnumber = 0;
 		try {
 			cardnumber = Integer.parseInt(number);
 		} catch (NumberFormatException | NullPointerException e) {
 			return false;
 		}
-		double getMoney=0;
+		double getMoney = 0;
 		try {
 			getMoney = Double.parseDouble(money);
 		} catch (NumberFormatException | NullPointerException e) {
@@ -75,8 +76,8 @@ public	double getBalance(String login, String number){
 		if (bankAccount.get(login) == null) {
 			return false;
 		}
-		
-		if(cardAccount.get(cardnumber)==null){
+
+		if (cardAccount.get(cardnumber) == null) {
 			return false;
 		}
 		double moneyOnCard = cardAccount.get(cardnumber);

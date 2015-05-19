@@ -6,16 +6,18 @@ import kickstarter.payment.Bank;
 import kickstarter.repository.ProjectRepository;
 
 public class ApplyTransactionPage extends Page {
-	
-	public ApplyTransactionPage(Model model, Bank bank, ProjectRepository projects) {
-		this.navigator=model;
+
+	public ApplyTransactionPage(Model model, Bank bank,
+			ProjectRepository projects) {
+		this.navigator = model;
 		this.bank = bank;
-		this.projects=projects;
+		this.projects = projects;
 	}
+
 	public void viewWorkedStatus(int status) {
 	}
+
 	public String getHeader() {
-		
 		String header = "";
 		header += "\n=========================";
 		header += "\n|   apply transaction   |";
@@ -23,13 +25,13 @@ public class ApplyTransactionPage extends Page {
 		header += "\n";
 		header += "\n------------------------";
 		header += "\nOptions: apply  in format <bankir:777> where login -bankir-, cardnumber -777-  \n<p>- previous page  ";
-
 		return header;
 	}
 
 	public String[] getOptions() {
 		return null;
 	}
+
 	public void execute(String message) {
 
 		navigator.saveProject(parameterForPage);
@@ -41,7 +43,7 @@ public class ApplyTransactionPage extends Page {
 		double balanceBefore = 0;
 		double balanceAfter = 0;
 		double getMoney = 0;
-		
+
 		String resultOfBankOperation = "";
 		if (array.length == 2) {
 			try {
@@ -65,7 +67,6 @@ public class ApplyTransactionPage extends Page {
 				navigator.savePageBeforeError(DONATE_PAGE);
 				navigator.setOption(parameterForPage, resultOfBankOperation);
 				navigator.pageWillBe(BANK_OPERATION_RESULT_PAGE);
-
 				return;
 			}
 

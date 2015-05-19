@@ -63,9 +63,7 @@ public class CategoriesPage extends Page {
 			for (int index = 0; index < options.length; index++) {
 				if (message.equals(options[index])) {
 					navigator.pageWillBe(PROJECTS);
-					
 					navigator.setOption(optionsInt[index], options[index]);
-
 					return;
 				}
 			}

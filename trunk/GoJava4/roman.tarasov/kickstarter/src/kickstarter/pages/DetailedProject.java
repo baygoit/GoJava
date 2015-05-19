@@ -13,7 +13,6 @@ public class DetailedProject extends Page {
 		this.navigator = model;
 		this.allComments = allComments;
 		this.projects = projects;
-
 	}
 
 	public ProjectComments selectCommentsToProject(int projectID) {
@@ -75,12 +74,12 @@ public class DetailedProject extends Page {
 			return;
 		}
 		if (message.equals("i")) {
-			navigator.setOption(parameterForPage,"null");
+			navigator.setOption(parameterForPage, "null");
 			navigator.pageWillBe(INVEST_PAGE);
 			return;
 		}
 		if (message.equals("d")) {
-			navigator.setOption(parameterForPage,"null");
+			navigator.setOption(parameterForPage, "null");
 			navigator.pageWillBe(DONATE_PAGE);
 			return;
 		}

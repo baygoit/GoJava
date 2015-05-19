@@ -14,7 +14,7 @@ public class Page {
 	QuotesRepository quotesRepository;
 	CategoriesRepository categories;
 	Bank bank;
-	
+
 	final int CATEGORIES = 0;
 	final int PROJECTS = 1;
 	final int DETAILED_PROJECT = 2;
@@ -25,18 +25,16 @@ public class Page {
 	final int DONATE_PAGE = 7;
 	final int BANK_OPERATION_RESULT_PAGE = 8;
 	final int APPLY_TRANSACTION_PAGE = 9;
-	
+
 	public String[] options;
 	public int[] optionsInt;
 	public int parameterForPage;
-	public String  stringParameterForPage;
+	public String stringParameterForPage;
 	public int selectedCategory;
 	public int selectedProject;
 	public int pageId;
 	public String name;
 	int nextPage;
-
-
 
 	public void execute(String parameter) {
 	}

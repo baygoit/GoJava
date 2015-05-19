@@ -2,15 +2,16 @@ package kickstarter.pages;
 
 import kickstarter.mvc.Model;
 
-public class WrongChoicePage extends Page{
-	
+public class WrongChoicePage extends Page {
+
 	public WrongChoicePage(Model model) {
-		this.navigator=model;
+		this.navigator = model;
 	}
+
 	public void viewWorkedStatus(int status) {
 	}
+
 	public String getHeader() {
-		
 		String header = "";
 		header += "\n----- Wrong Choice ----------";
 		header += "\ninput correct command, please";
@@ -22,6 +23,7 @@ public class WrongChoicePage extends Page{
 	public String[] getOptions() {
 		return null;
 	}
+
 	public void execute(String message) {
 		if (message.equals("p")) {
 			navigator.pageWillBe(navigator.getSavedPage());
