@@ -32,7 +32,6 @@ public class ProjectRepository {
 
 	public Project getProject(int index) {
 		return projects.getEntity(index);
-
 	}
 
 	public Project getProjectById(int ID) {
