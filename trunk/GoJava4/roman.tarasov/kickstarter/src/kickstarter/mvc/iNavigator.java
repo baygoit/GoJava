@@ -1,9 +1,7 @@
 package kickstarter.mvc;
 
 public interface iNavigator {
-	void pageWillBe(int pageIndex);
-
-	void prevPage(int prevPage);
+	void next(int page);
 
 	void setOption(int intOption, String stringOption);
 
@@ -11,11 +9,11 @@ public interface iNavigator {
 
 	int getSavedCategory();
 
-	void saveProject(int selectedProject);
-
-	int getSavedProject();
-
 	void savePageBeforeError(int page);
 
 	int getSavedPage();
+
+	void goToAndBack(int toPage, int back);
+
+	void nextWithOptions(int page, int iOption, String sOption);
 }

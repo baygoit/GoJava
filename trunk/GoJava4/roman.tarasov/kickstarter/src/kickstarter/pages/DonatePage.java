@@ -24,14 +24,10 @@ public class DonatePage extends Page {
 		return header;
 	}
 
-	public String[] getOptions() {
-		return options;
-	}
-
 	public void execute(String message) {
-		navigator.saveProject(parameterForPage);
+		//navigator.saveProject(iOption);
 		if (message.equals("p")) {
-			navigator.pageWillBe(DETAILED_PROJECT);
+			navigator.next(DETAILED_PROJECT);
 			return;
 		}
 
@@ -60,21 +56,20 @@ public class DonatePage extends Page {
 
 			} catch (NumberFormatException | NullPointerException e) {
 				navigator.savePageBeforeError(DONATE_PAGE);
-				navigator.setOption(parameterForPage, resultOfBankOperation);
-				navigator.pageWillBe(BANK_OPERATION_RESULT_PAGE);
+				navigator.nextWithOptions(BANK_OPERATION_RESULT_PAGE,iOption, resultOfBankOperation);
 				return;
 			}
 
-			int projectID = parameterForPage;
+			int projectID = iOption;
 			Project project = projects.getProjectById(projectID);
 			project.pledged += getMoney;
-			navigator.pageWillBe(BANK_OPERATION_RESULT_PAGE);
 			String setOption = "\nbalance before :" + balanceBefore
 					+ "\nbalance after :" + balanceAfter;
-			navigator.setOption(parameterForPage, setOption);
+			navigator.nextWithOptions(BANK_OPERATION_RESULT_PAGE, iOption,
+					setOption);
 			return;
 		}
-		navigator.savePageBeforeError(DONATE_PAGE);
-		navigator.pageWillBe(ERROR_PAGE);
+
+		navigator.goToAndBack(ERROR_PAGE, DONATE_PAGE);
 	}
 }

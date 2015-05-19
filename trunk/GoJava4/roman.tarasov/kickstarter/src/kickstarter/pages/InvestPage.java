@@ -13,7 +13,7 @@ public class InvestPage extends Page {
 	}
 
 	public String getHeader() {
-		int projectID = parameterForPage;
+		int projectID = iOption;
 		project = projects.getProjectById(projectID);
 		String header = "";
 		header += "\n=========================";
@@ -35,14 +35,10 @@ public class InvestPage extends Page {
 		return header;
 	}
 
-	public String[] getOptions() {
-		return options;
-	}
-
 	public void execute(String message) {
-		navigator.setOption(parameterForPage, "null");
+		navigator.setOption(iOption, "null");
 		if (message.equals("p")) {
-			navigator.pageWillBe(DETAILED_PROJECT);
+			navigator.next(DETAILED_PROJECT);
 			return;
 		}
 		double amount = 0;
@@ -51,11 +47,10 @@ public class InvestPage extends Page {
 			amount = project.amount[selected - 1];
 
 		} catch (NumberFormatException | IndexOutOfBoundsException e) {
-			navigator.savePageBeforeError(INVEST_PAGE);
-			navigator.pageWillBe(ERROR_PAGE);
+			navigator.goToAndBack(ERROR_PAGE, INVEST_PAGE);
 			return;
 		}
-		navigator.setOption(parameterForPage, Double.toString(amount));
-		navigator.pageWillBe(APPLY_TRANSACTION_PAGE);
+	
+		navigator.nextWithOptions(APPLY_TRANSACTION_PAGE, iOption, Double.toString(amount));
 	}
 }

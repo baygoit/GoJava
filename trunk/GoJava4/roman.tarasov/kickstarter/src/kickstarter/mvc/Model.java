@@ -7,13 +7,12 @@ import kickstarter.repository.iStorage;
 public class Model implements iNavigator {
 	private iStorage<Page> pages;
 
-	private String sParameterForPage;
 	private int pageIndex;
 
-	int intOption;
+	int iOption;
 	int selectedCategory;
 	int selectedProject;
-	String stringOption;
+	String sOption;
 
 	Page page;
 
@@ -27,8 +26,8 @@ public class Model implements iNavigator {
 		page = pages.getEntity(pageIndex);
 		page.execute(command);
 		page = pages.getEntity(pageIndex);
-		page.parameterForPage = intOption;
-		page.stringParameterForPage=stringOption;
+		page.iOption = iOption;
+		page.sOption = sOption;
 	}
 
 	public void setPage(int pageIndex) {
@@ -43,38 +42,24 @@ public class Model implements iNavigator {
 		return pages.getEntity(pageIndex);
 	}
 
-	public String getParameterForPrint() {
-		return sParameterForPage;
-	}
-
 	public void add(Page page) {
 		pages.add(page);
 	}
 
 	@Override
-	public void pageWillBe(int pageIndex) {
+	public void next(int pageIndex) {
 		this.pageIndex = pageIndex;
 	}
 
 	@Override
-	public void prevPage(int prevPage) {
-		// TODO Auto-generated method stub
-	}
-
-	@Override
 	public void setOption(int intOption, String stringOption) {
-		this.intOption = intOption;
-		this.stringOption = stringOption;
+		this.iOption = intOption;
+		this.sOption = stringOption;
 	}
 
 	@Override
 	public void saveCategory(int selectedCategory) {
 		this.selectedCategory = selectedCategory;
-	}
-
-	@Override
-	public void saveProject(int selectedProject) {
-		this.selectedProject = selectedProject;
 	}
 
 	@Override
@@ -93,8 +78,17 @@ public class Model implements iNavigator {
 	}
 
 	@Override
-	public int getSavedProject() {
-		
-		return selectedProject;
+	public void goToAndBack(int toPage, int back) {
+		this.savePage = back;
+		this.pageIndex = toPage;
+
+	}
+
+	@Override
+	public void nextWithOptions(int page, int iOption, String sOption) {
+		this.pageIndex = page;
+		this.iOption = iOption;
+		this.sOption = sOption;
+
 	}
 }

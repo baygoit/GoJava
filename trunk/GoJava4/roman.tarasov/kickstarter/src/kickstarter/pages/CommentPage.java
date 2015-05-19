@@ -17,11 +17,8 @@ public class CommentPage extends Page {
 		this.projects = projects;
 	}
 
-	public void viewWorkedStatus(int status) {
-	}
-
 	public String getHeader() {
-		int projectID = parameterForPage;
+		int projectID = iOption;
 		project = projects.getProjectById(projectID);
 
 		String header = "";
@@ -58,9 +55,9 @@ public class CommentPage extends Page {
 	}
 
 	public void execute(String message) {
-		navigator.saveProject(parameterForPage);
+		
 		if (message.equals("p")) {
-			navigator.pageWillBe(DETAILED_PROJECT);
+			navigator.next(DETAILED_PROJECT);
 			return;
 		}
 		String[] array = message.split(":");
@@ -68,7 +65,7 @@ public class CommentPage extends Page {
 			// TODO
 			projectComments.addComment(1, array[1]);// 1- user ID
 
-			navigator.pageWillBe(DETAILED_PROJECT);
+			navigator.next(DETAILED_PROJECT);
 			return;
 
 		}
@@ -76,14 +73,13 @@ public class CommentPage extends Page {
 			try {
 				projectComments.deleteComment(array[1], array[2]);
 			} catch (NumberFormatException | NullPointerException e) {
-				navigator.savePageBeforeError(COMMENT_PAGE);
-				navigator.pageWillBe(ERROR_PAGE);
+				navigator.goToAndBack(ERROR_PAGE, COMMENT_PAGE);
 				return;
 			}
-			navigator.pageWillBe(DETAILED_PROJECT);
+			navigator.next(DETAILED_PROJECT);
 			return;
 		}
-		navigator.savePageBeforeError(COMMENT_PAGE);
-		navigator.pageWillBe(ERROR_PAGE);
+		navigator.goToAndBack(ERROR_PAGE, COMMENT_PAGE);
+		
 	}
 }

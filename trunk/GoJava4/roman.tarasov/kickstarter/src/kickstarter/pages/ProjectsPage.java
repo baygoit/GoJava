@@ -13,13 +13,6 @@ public class ProjectsPage extends Page {
 		navigator = model;
 	}
 
-	public void setParameterForPrint(int parameterForPage) {
-		this.parameterForPage = parameterForPage;
-	}
-
-	public void viewWorkedStatus(int status) {
-	}
-
 	public iStorage<Project> sortProjectsByCategoryID(int categoryID) {
 
 		iStorage<Project> sortedProjects = new EntityStorage<Project>();
@@ -58,7 +51,7 @@ public class ProjectsPage extends Page {
 		header += "\n|     Projects         |";
 		header += "\n|______________________|";
 		header += "\n";
-		header += printProjectsInfo(parameterForPage);
+		header += printProjectsInfo(iOption);
 		header += "\n------------------------";
 		header += "\nSelect project by ID:<ID>";
 		header += "\nOptions:  <p> - previous page";
@@ -66,22 +59,20 @@ public class ProjectsPage extends Page {
 	}
 
 	public void execute(String message) {
-		navigator.saveCategory(parameterForPage);
+		navigator.saveCategory(iOption);
 		if (message.equals("p")) {
-			navigator.pageWillBe(CATEGORIES);
+			navigator.next(CATEGORIES);
 			return;
 		}
 
 		if (options != null) {
 			for (int index = 0; index < options.length; index++) {
 				if (message.equals(options[index])) {
-					navigator.pageWillBe(DETAILED_PROJECT);
-					navigator.setOption(optionsInt[index], options[index]);
+					navigator.nextWithOptions(DETAILED_PROJECT, optionsInt[index], options[index]);
 					return;
 				}
 			}
 		}
-		navigator.savePageBeforeError(PROJECTS);
-		navigator.pageWillBe(ERROR_PAGE);
+		navigator.goToAndBack(ERROR_PAGE, PROJECTS);
 	}
 }

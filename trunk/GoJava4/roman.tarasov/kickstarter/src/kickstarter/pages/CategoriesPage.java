@@ -46,29 +46,21 @@ public class CategoriesPage extends Page {
 		return result;
 	}
 
-	public void viewWorkedStatus(int status) {
-	}
-
-	public String[] getOptions() {
-		return options;
-	}
-
 	public void execute(String message) {
 		if (message.equals("e")) {
-			navigator.pageWillBe(END_PAGE);
+			navigator.next(END_PAGE);
 			return;
 		}
 
 		if (options != null) {
 			for (int index = 0; index < options.length; index++) {
 				if (message.equals(options[index])) {
-					navigator.pageWillBe(PROJECTS);
-					navigator.setOption(optionsInt[index], options[index]);
+					navigator.nextWithOptions(PROJECTS,optionsInt[index], options[index]);
 					return;
 				}
 			}
 		}
-		navigator.savePageBeforeError(CATEGORIES);
-		navigator.pageWillBe(ERROR_PAGE);
+
+		navigator.goToAndBack(ERROR_PAGE, CATEGORIES);
 	}
 }

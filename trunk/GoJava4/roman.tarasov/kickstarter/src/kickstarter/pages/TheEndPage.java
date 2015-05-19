@@ -1,9 +1,6 @@
 package kickstarter.pages;
 
 public class TheEndPage extends Page {
-	public void viewWorkedStatus(int status) {
-		System.exit(0);
-	}
 
 	public String getHeader() {
 

@@ -14,22 +14,18 @@ public class ResultOfBankOperation extends Page {
 		header += "\n============================";
 		header += "\n";
 		header += "\n------------------------";
-		header += stringParameterForPage;
+		header += sOption;
 		header += "\nOptions: <p>- previous page  ";
 		return header;
 	}
 
-	public String[] getOptions() {
-		return options;
-	}
-
 	public void execute(String message) {
-		navigator.saveProject(parameterForPage);
+		//navigator.saveProject(iOption);
 		if (message.equals("p")) {
-			navigator.pageWillBe(DETAILED_PROJECT);
+			navigator.next(DETAILED_PROJECT);
 			return;
 		}
-		navigator.savePageBeforeError(BANK_OPERATION_RESULT_PAGE);
-		navigator.pageWillBe(ERROR_PAGE);
+		navigator.goToAndBack(ERROR_PAGE,BANK_OPERATION_RESULT_PAGE);
+
 	}
 }

@@ -18,7 +18,5 @@ public class View {
 		page = model.getPage();
 		String header=page.getHeader();
 		ui.display(header);
-		page.viewWorkedStatus(OK);
-		
 	}
 }

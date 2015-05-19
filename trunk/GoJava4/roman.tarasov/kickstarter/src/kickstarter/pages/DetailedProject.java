@@ -22,7 +22,7 @@ public class DetailedProject extends Page {
 	}
 
 	public String getHeader() {
-		int projectID = parameterForPage;
+		int projectID = iOption;
 		Project project = projects.getProjectById(projectID);
 
 		String header = "";
@@ -55,35 +55,25 @@ public class DetailedProject extends Page {
 		return header;
 	}
 
-	public void viewWorkedStatus(int status) {
-	}
-
-	public String[] getOptions() {
-		return options;
-	}
-
 	public void execute(String message) {
-		navigator.saveProject(parameterForPage);
+		//navigator.saveProject(iOption);
 		if (message.equals("p")) {
-			navigator.pageWillBe(PROJECTS);
-			navigator.setOption(navigator.getSavedCategory(), "null");
+			navigator.nextWithOptions(PROJECTS, navigator.getSavedCategory(), "null");
 			return;
 		}
 		if (message.equals("c")) {
-			navigator.pageWillBe(COMMENT_PAGE);
+			navigator.next(COMMENT_PAGE);
 			return;
 		}
 		if (message.equals("i")) {
-			navigator.setOption(parameterForPage, "null");
-			navigator.pageWillBe(INVEST_PAGE);
+			navigator.nextWithOptions(INVEST_PAGE, iOption, "null");
 			return;
 		}
 		if (message.equals("d")) {
-			navigator.setOption(parameterForPage, "null");
-			navigator.pageWillBe(DONATE_PAGE);
+			navigator.nextWithOptions(DONATE_PAGE, iOption, "null");
 			return;
 		}
-		navigator.savePageBeforeError(DETAILED_PROJECT);
-		navigator.pageWillBe(ERROR_PAGE);
+		navigator.goToAndBack(ERROR_PAGE, DETAILED_PROJECT);
+
 	}
 }
