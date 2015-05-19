@@ -53,12 +53,12 @@ public class MainServlet extends HttpServlet {
 	private Connection getConnection(HttpServletRequest req) {
 		Connection result = (Connection)req.getSession().getAttribute("connection");
 		if (result == null) {
-				try{
-					result = DriverManager.getConnection("jdbc:postgresql://localhost:5432/DataForKickstarter", "postgres", "Berezhnoi");
-				}catch(SQLException e) {
-					throw new RuntimeException(e);
-				}
-				req.getSession().setAttribute("connection", result);
+			try{
+				result = DriverManager.getConnection("jdbc:postgresql://localhost:5432/DataForKickstarter", "postgres", "Berezhnoi");
+			}catch(SQLException e) {
+				throw new RuntimeException(e);
+			}
+			req.getSession().setAttribute("connection", result);
 		}
 		return result;
 	}
