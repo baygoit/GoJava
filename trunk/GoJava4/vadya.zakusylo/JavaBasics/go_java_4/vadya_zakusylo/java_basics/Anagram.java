@@ -9,7 +9,7 @@ public class Anagram {
 	}
 
 	void go() {
-		String stringLine = initStringLine().trim();
+		String stringLine = initStringLine();
 		String[] arrayString = createStringArray(stringLine);
 		System.out.println(permute(arrayString));
 	}
@@ -21,7 +21,8 @@ public class Anagram {
 		}
 	}
 
-	String[] createStringArray(String inputText) {
+	String[] createStringArray(String stringLine) {
+		String inputText = stringLine.trim();
 		String array = "";
 		do {
 			int indexOfSeparator = inputText.indexOf(" ");

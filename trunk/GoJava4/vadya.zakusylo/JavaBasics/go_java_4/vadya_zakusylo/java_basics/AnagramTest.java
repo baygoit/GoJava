@@ -58,7 +58,7 @@ public class AnagramTest {
 
 	@Test
 	public void testCreateStringArrayExpressionWithManySpace() {
-		String inputText = "Have  a      nice           day! ";
+		String inputText = "        Have  a      nice           day!  ";
 		String[] arrayString = { "Have", "a", "nice", "day!" };
 		assertArrayEquals(arrayString, anagram.createStringArray(inputText));
 	}
