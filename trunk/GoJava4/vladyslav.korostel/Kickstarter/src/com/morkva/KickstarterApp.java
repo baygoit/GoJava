@@ -6,6 +6,7 @@ import com.morkva.entities.Quote;
 import com.morkva.logic.*;
 import com.morkva.model.Repository;
 
+import java.util.List;
 import java.util.Random;
 
 public class KickstarterApp {
@@ -47,7 +48,7 @@ public class KickstarterApp {
     
     public void showCategoryMenu(Category category) {
     	
-    	Project[] projectsOfCurrentCategory = category.getProjects();
+    	List<Project> projectsOfCurrentCategory = category.getProjects();
     	
         while (true) {
         	
@@ -61,8 +62,8 @@ public class KickstarterApp {
             if (keyCode == 0) {
                 break;
             } else {
-                if (keyCode > 0 && keyCode <= projectsOfCurrentCategory.length) {
-                	Project selectedProject = projectsOfCurrentCategory[keyCode-1];
+                if (keyCode > 0 && keyCode <= projectsOfCurrentCategory.size()) {
+                	Project selectedProject = projectsOfCurrentCategory.get(keyCode-1);
                 	showProjectMenu(selectedProject);
                 } else {
                 	println("Project with №" + keyCode + " does not exist");
@@ -99,10 +100,10 @@ public class KickstarterApp {
     public void showProjectsOfCategory(Category category) {
     	println("Category: " + category.getName());
         println("  Projects: ");
-        Project[] currentCategoryProjects = category.getProjects();
-        for (int i = 0; i < currentCategoryProjects.length; i++) {
+        List<Project> currentCategoryProjects = category.getProjects();
+        for (int i = 0; i < currentCategoryProjects.size(); i++) {
             System.out.print("  " + (i + 1) + ": ");
-            print(currentCategoryProjects[i].getShortInfo());
+            print(currentCategoryProjects.get(i).getShortInfo());
         }
     }
 

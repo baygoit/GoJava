@@ -3,30 +3,30 @@ package com.morkva.model.impl;
 import com.morkva.entities.Category;
 import com.morkva.model.Repository;
 
-import java.util.Arrays;
+import java.util.*;
 
 /**
  * Created by vladyslav on 17.05.15.
  */
 public class CategoryRepository implements Repository<Category> {
 
-    Category[] categories;
+    List<Category> categories;
 
-    public CategoryRepository(Category[] categories) {
+    public CategoryRepository(List<Category> categories) {
         this.categories = categories;
     }
 
     public CategoryRepository() {
-        this.categories = new Category[0];
+        this.categories = new ArrayList<>();
     }
 
     @Override
     public Category getById(int id) {
-        if (categories.length == 0) {
+        if (categories.size() == 0) {
             return null;
         } else {
             int searchResult = search(id);
-            return categories[searchResult];
+            return categories.get(searchResult);
         }
     }
 
@@ -43,10 +43,10 @@ public class CategoryRepository implements Repository<Category> {
 
     @Override
     public Category getByIndex(int index) {
-        if (categories.length == 0) {
+        if (categories.size() == 0) {
             return null;
         } else {
-            return categories[index];
+            return categories.get(index);
         }
     }
 
@@ -54,9 +54,7 @@ public class CategoryRepository implements Repository<Category> {
     public boolean add(Category object) {
         int searchResult = search(object.getId());
         if (searchResult < 0) {
-            Category[] temp = Arrays.copyOf(categories, categories.length + 1);
-            temp[temp.length - 1] = object;
-            this.categories = temp;
+            categories.add(object);
             sort();
             return true;
         } else {
@@ -68,8 +66,7 @@ public class CategoryRepository implements Repository<Category> {
     public boolean remove(Category object) {
         int searchResult = search(object.getId());
         if (searchResult > 0) {
-            System.arraycopy(categories, searchResult + 1, categories, searchResult, categories.length - 1 - searchResult);
-            categories = Arrays.copyOf(categories, categories.length - 1);
+            categories.remove(object);
             return true;
         } else {
             return false;
@@ -78,9 +75,9 @@ public class CategoryRepository implements Repository<Category> {
 
     @Override
     public boolean update(Category object) {
-        int searchResult = search(object.getId());
-        if (searchResult > 0) {
-            categories[searchResult] = object;
+        int index = search(object.getId());
+        if (index > 0) {
+            categories.set(index, object);
             sort();
             return true;
         } else {
@@ -90,12 +87,12 @@ public class CategoryRepository implements Repository<Category> {
 
     @Override
     public int size() {
-        return categories.length;
+        return categories.size();
     }
 
     @Override
-    public Category[] getAll() {
-        if (categories.length == 0) {
+    public List<Category> getAll() {
+        if (categories.size() == 0) {
             return null;
         } else {
             return categories;
@@ -103,10 +100,10 @@ public class CategoryRepository implements Repository<Category> {
     }
 
     private int search(int id) {
-        return Arrays.binarySearch(categories, id);
+        return Collections.binarySearch(categories, id);
     }
 
     private void sort() {
-        Arrays.sort(categories, (o1, o2) -> o1.compareTo(o2.getId()));
+        Collections.sort(categories, (o1, o2) -> o1.compareTo(o2.getId()));
     }
 }

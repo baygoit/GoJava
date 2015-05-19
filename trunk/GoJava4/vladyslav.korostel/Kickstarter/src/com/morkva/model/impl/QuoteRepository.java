@@ -11,23 +11,23 @@ import java.util.*;
  */
 public class QuoteRepository implements Repository<Quote> {
 
-    Quote[] quotes;
+    List<Quote> quotes;
 
-    public QuoteRepository(Quote[] quotes) {
+    public QuoteRepository(List<Quote> quotes) {
         this.quotes = quotes;
     }
 
     public QuoteRepository() {
-        this.quotes = new Quote[0];
+        this.quotes = new ArrayList<>();
     }
 
     @Override
     public Quote getById(int id) {
-        if (quotes.length == 0) {
+        if (quotes.size() == 0) {
             return null;
         } else {
             int searchResult = search(id);
-            return quotes[searchResult];
+            return quotes.get(searchResult);
         }
     }
 
@@ -44,10 +44,10 @@ public class QuoteRepository implements Repository<Quote> {
 
     @Override
     public Quote getByIndex(int index) {
-        if (quotes.length == 0) {
+        if (quotes.size() == 0) {
             return null;
         } else {
-            return quotes[index];
+            return quotes.get(index);
         }
     }
 
@@ -55,9 +55,7 @@ public class QuoteRepository implements Repository<Quote> {
     public boolean add(Quote object) {
         int searchResult = search(object.getId());
         if (searchResult < 0) {
-            Quote[] temp = Arrays.copyOf(quotes, quotes.length + 1);
-            temp[temp.length - 1] = object;
-            this.quotes = temp;
+            quotes.add(object);
             sort();
             return true;
         } else {
@@ -69,8 +67,7 @@ public class QuoteRepository implements Repository<Quote> {
     public boolean remove(Quote object) {
         int searchResult = search(object.getId());
         if (searchResult > 0) {
-            System.arraycopy(quotes, searchResult + 1, quotes, searchResult, quotes.length - 1 - searchResult);
-            quotes = Arrays.copyOf(quotes, quotes.length - 1);
+            quotes.remove(searchResult);
             return true;
         } else {
             return false;
@@ -81,7 +78,7 @@ public class QuoteRepository implements Repository<Quote> {
     public boolean update(Quote object) {
         int searchResult = search(object.getId());
         if (searchResult > 0) {
-            quotes[searchResult] = object;
+            quotes.set(searchResult, object);
             sort();
             return true;
         } else {
@@ -91,12 +88,12 @@ public class QuoteRepository implements Repository<Quote> {
 
     @Override
     public int size() {
-        return quotes.length;
+        return quotes.size();
     }
 
     @Override
-    public Quote[] getAll() {
-        if (quotes.length == 0) {
+    public List<Quote> getAll() {
+        if (quotes.size() == 0) {
             return null;
         } else {
             return quotes;
@@ -104,10 +101,10 @@ public class QuoteRepository implements Repository<Quote> {
     }
 
     private int search(int id) {
-        return Arrays.binarySearch(quotes, id);
+        return Collections.binarySearch(quotes, id);
     }
 
     private void sort() {
-        Arrays.sort(quotes, (o1, o2) -> o1.compareTo(o2.getId()));
+        Collections.sort(quotes, (o1, o2) -> o1.compareTo(o2.getId()));
     }
 }

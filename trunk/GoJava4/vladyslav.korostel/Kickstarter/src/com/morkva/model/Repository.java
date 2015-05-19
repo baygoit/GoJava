@@ -1,6 +1,9 @@
 package com.morkva.model;
 
+import com.morkva.entities.Category;
 import com.morkva.entities.Entity;
+
+import java.util.List;
 
 /**
  * Created by vladyslav on 07.05.15.
@@ -14,5 +17,5 @@ public interface Repository<T extends Entity> {
     boolean remove(T object);
     boolean update(T object);
     int size();
-    T[] getAll();
+    List<T> getAll();
 }

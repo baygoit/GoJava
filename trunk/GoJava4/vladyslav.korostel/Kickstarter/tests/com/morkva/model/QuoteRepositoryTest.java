@@ -9,6 +9,10 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * Created by vladyslav on 18.05.15.
  */
@@ -101,7 +105,7 @@ public class QuoteRepositoryTest {
         Quote quote1 = quoteRepository.findByName("Name 1");
         Quote quote2 = quoteRepository.getById(0);
         Quote quote3 = quoteRepository.getByIndex(0);
-        Quote[] quotes = quoteRepository.getAll();
+        List<Quote> quotes = quoteRepository.getAll();
 
         Assert.assertNull(quote1);
         Assert.assertNull(quote2);
@@ -115,7 +119,7 @@ public class QuoteRepositoryTest {
         Quote quote1 = quoteRepository.findByName("Value 1");
         Quote quote2 = quoteRepository.getById(1);
         Quote quote3 = quoteRepository.getByIndex(0);
-        Quote[] quotes = quoteRepository.getAll();
+        List<Quote> quotes = quoteRepository.getAll();
 
         Assert.assertNotNull(quote1);
         Assert.assertNotNull(quote2);
@@ -125,11 +129,11 @@ public class QuoteRepositoryTest {
 
     @Test
     public void shouldNotEmpty_WhenCreatedWithParams() {
-        Quote[] quotes = new Quote[] {
+        List<Quote> quotes = new ArrayList<>(Arrays.asList(
                 new Quote(1, "Value 1", "Author 1"),
                 new Quote(3, "Value 3", "Author 3"),
                 new Quote(2, "Value 2", "Author 2")
-        };
+        ));
         quoteRepository = new QuoteRepository(quotes);
         int size = quoteRepository.size();
         Assert.assertEquals(3, size);

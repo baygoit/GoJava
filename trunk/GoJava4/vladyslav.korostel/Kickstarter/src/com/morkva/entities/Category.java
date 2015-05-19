@@ -1,6 +1,6 @@
 package com.morkva.entities;
 
-import java.util.Arrays;
+import java.util.List;
 
 /**
  * Created by vladyslav on 02.05.15.
@@ -8,7 +8,7 @@ import java.util.Arrays;
 public class Category extends Entity{
 
     private String name;
-    private Project[] projects;
+    private List<Project> projects;
 
     public Category(Integer id, String name) {
         super(id);
@@ -23,11 +23,11 @@ public class Category extends Entity{
         this.name = name;
     }
 
-    public Project[] getProjects() {
+    public List<Project> getProjects() {
         return projects;
     }
 
-    public void setProjects(Project[] projects) {
+    public void setProjects(List<Project> projects) {
         this.projects = projects;
     }
 
@@ -35,7 +35,7 @@ public class Category extends Entity{
     public String toString() {
         return "Category{" +
                 "name='" + name + '\'' +
-                ", projects=" + Arrays.toString(projects) +
+                ", projects=" + projects.toString() +
                 '}';
         
     }

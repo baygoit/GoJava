@@ -6,6 +6,10 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * Created by vladyslav on 11.05.15.
  */
@@ -98,7 +102,7 @@ public class CategoryRepositoryTest {
         Category category = categoryRepository.findByName("Name 1");
         Category category2 = categoryRepository.getById(0);
         Category category3 = categoryRepository.getByIndex(0);
-        Category[] categories = categoryRepository.getAll();
+        List<Category> categories = categoryRepository.getAll();
 
         Assert.assertNull(category);
         Assert.assertNull(category2);
@@ -112,7 +116,7 @@ public class CategoryRepositoryTest {
         Category category = categoryRepository.findByName("Name 1");
         Category category2 = categoryRepository.getById(1);
         Category category3 = categoryRepository.getByIndex(0);
-        Category[] categories = categoryRepository.getAll();
+        List<Category> categories = categoryRepository.getAll();
 
         Assert.assertNotNull(category);
         Assert.assertNotNull(category2);
@@ -122,11 +126,11 @@ public class CategoryRepositoryTest {
 
     @Test
     public void shouldNotEmpty_WhenCreatedWithParams() {
-        Category[] categories = new Category[] {
+        List<Category> categories = new ArrayList<>(Arrays.asList(
                 new Category(1, "Name 1"),
                 new Category(3, "Name 3"),
                 new Category(2, "Name 2")
-        };
+        ));
         categoryRepository = new CategoryRepository(categories);
         int size = categoryRepository.size();
         Assert.assertEquals(3, size);
