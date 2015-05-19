@@ -5,7 +5,7 @@ import java.util.TreeSet;
 import kickstarter.engine.Data;
 
 public abstract class AbstractStorage<T extends Data> implements Storage<T> {
-	private TreeSet<T> dataSet = new TreeSet<T>();
+	private TreeSet<T> dataSet = new TreeSet<T>(); 
 
 	@Override
 	public void add(T data) {
