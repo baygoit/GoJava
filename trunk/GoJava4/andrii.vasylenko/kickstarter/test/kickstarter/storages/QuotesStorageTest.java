@@ -11,7 +11,7 @@ public class QuotesStorageTest {
 	public void shouldZeroSize_whenClearStorage() {
 		QuotesStorage storage = new QuotesStorage();
 		assertEquals(0, storage.size());
-		assertTrue(storage.isEmpty());
+		assertTrue(storage.empty());
 	}
 	
 	/*@Test

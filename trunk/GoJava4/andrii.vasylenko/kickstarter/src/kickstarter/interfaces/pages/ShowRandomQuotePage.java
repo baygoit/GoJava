@@ -28,7 +28,7 @@ public class ShowRandomQuotePage implements Page {
 	}
 
 	private Quote getRandom() {
-		if (quotes.isEmpty()) {
+		if (quotes.empty()) {
 			return null;
 		}
 		int randomIndex = new Random().nextInt(quotes.size());

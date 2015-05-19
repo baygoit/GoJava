@@ -36,7 +36,7 @@ public class ChoiceCategoryPage implements ChoicePage {
 			return;
 		}
 
-		chosenItem = categories.get(itemId);
+		chosenItem = categories.getById(itemId);
 	}
 
 	@Override
