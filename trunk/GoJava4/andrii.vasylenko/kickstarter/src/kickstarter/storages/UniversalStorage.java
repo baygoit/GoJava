@@ -1,28 +1,22 @@
 package kickstarter.storages;
 
-import java.util.Arrays;
+import java.util.LinkedList;
 
 import kickstarter.engine.Data;
 
 public abstract class UniversalStorage<T extends Data> implements Storage<T> {
-	public static final int MINIMUM_STORAGE_SIZE = 10;
-
-	private Data[] objects = new Data[MINIMUM_STORAGE_SIZE];
-	private int size = 0;
+	private LinkedList<T> objects = new LinkedList<T>();
 
 	@Override
 	public T get(int index) throws IndexOutOfBoundsException {
-		if (index < 0 || index >= size()) {
-			throw new IndexOutOfBoundsException();
-		}
-		return (T) objects[index];
+		return objects.get(index);
 	}
-	
+
 	@Override
 	public T getById(int id) throws IndexOutOfBoundsException {
 		for (int i = 0; i < size(); i++) {
-			if (objects[i].getId() == id) {
-				return (T) objects[i];
+			if (get(i).getId() == id) {
+				return get(i);
 			}
 		}
 		throw new IndexOutOfBoundsException();
@@ -30,28 +24,17 @@ public abstract class UniversalStorage<T extends Data> implements Storage<T> {
 
 	@Override
 	public void add(T object) {
-		if (object == null) {
-			throw new IllegalArgumentException();
-		}
-		checkArrayLenght();
-		objects[size++] = object;
+		objects.add(object);
 	}
 
 	@Override
 	public int size() {
-		return size;
+		return objects.size();
 	}
 
 	@Override
-	public boolean empty() {
-		return size() == 0;
+	public boolean isEmpty() {
+		return objects.isEmpty();
 	}
 
-	private void checkArrayLenght() {
-		if (size() < objects.length) {
-			return;
-		}
-		int newLength = objects.length + MINIMUM_STORAGE_SIZE;
-		objects = Arrays.copyOf(objects, newLength);
-	}
 }

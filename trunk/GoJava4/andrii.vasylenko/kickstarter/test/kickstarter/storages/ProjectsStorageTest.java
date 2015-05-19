@@ -14,7 +14,7 @@ public class ProjectsStorageTest {
 	public void shouldZeroSize_whenClearStorage() {
 		ProjectsStorage storage = new ProjectsStorage();
 		assertEquals(0, storage.size());
-		assertTrue(storage.empty());
+		assertTrue(storage.isEmpty());
 	}
 
 	@Test
@@ -30,7 +30,7 @@ public class ProjectsStorageTest {
 		assertEquals(2, storage.size());
 		storage.add(project3);
 		assertEquals(3, storage.size());
-		assertFalse(storage.empty());
+		assertFalse(storage.isEmpty());
 
 		assertEquals(project1, storage.get(0));
 		assertEquals(project2, storage.get(1));

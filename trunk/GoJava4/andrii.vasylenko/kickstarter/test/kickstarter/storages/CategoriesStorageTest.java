@@ -11,7 +11,7 @@ public class CategoriesStorageTest {
 	public void shouldZeroSize_whenClearStorage() {
 		CategoriesStorage storage = new CategoriesStorage();
 		assertEquals(0, storage.size());
-		assertTrue(storage.empty());
+		assertTrue(storage.isEmpty());
 	}
 
 	@Test
@@ -27,7 +27,7 @@ public class CategoriesStorageTest {
 		assertEquals(2, storage.size());
 		storage.add(category3);
 		assertEquals(3, storage.size());
-		assertFalse(storage.empty());
+		assertFalse(storage.isEmpty());
 		
 		assertEquals(category1, storage.get(0));
 		assertEquals(category2, storage.get(1));

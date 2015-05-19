@@ -11,5 +11,5 @@ public interface Storage<T extends Data> {
 
 	int size();
 	
-	boolean empty();
+	boolean isEmpty();
 }
