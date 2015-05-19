@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 import kickstarter.engine.Data;
 
-public class UniversalStorage<T extends Data> implements Storage<T> {
+public abstract class UniversalStorage<T extends Data> implements Storage<T> {
 	public static final int MINIMUM_STORAGE_SIZE = 10;
 
 	private Data[] objects = new Data[MINIMUM_STORAGE_SIZE];
