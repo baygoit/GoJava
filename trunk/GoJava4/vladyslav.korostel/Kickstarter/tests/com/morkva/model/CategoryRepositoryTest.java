@@ -97,9 +97,13 @@ public class CategoryRepositoryTest {
     public void shouldNull_WhenEmpty() throws Exception {
         Category category = categoryRepository.findByName("Name 1");
         Category category2 = categoryRepository.getById(0);
+        Category category3 = categoryRepository.getByIndex(0);
+        Category[] categories = categoryRepository.getAll();
 
         Assert.assertNull(category);
         Assert.assertNull(category2);
+        Assert.assertNull(category3);
+        Assert.assertNull(categories);
     }
 
     @Test
@@ -108,10 +112,12 @@ public class CategoryRepositoryTest {
         Category category = categoryRepository.findByName("Name 1");
         Category category2 = categoryRepository.getById(1);
         Category category3 = categoryRepository.getByIndex(0);
+        Category[] categories = categoryRepository.getAll();
 
         Assert.assertNotNull(category);
         Assert.assertNotNull(category2);
         Assert.assertNotNull(category3);
+        Assert.assertNotNull(categories);
     }
 
     @Test

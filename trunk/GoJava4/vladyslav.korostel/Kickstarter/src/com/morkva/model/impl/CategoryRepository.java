@@ -95,7 +95,11 @@ public class CategoryRepository implements Repository<Category> {
 
     @Override
     public Category[] getAll() {
-        return categories;
+        if (categories.length == 0) {
+            return null;
+        } else {
+            return categories;
+        }
     }
 
     private int search(int id) {

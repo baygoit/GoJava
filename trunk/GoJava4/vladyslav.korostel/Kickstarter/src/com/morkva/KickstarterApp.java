@@ -23,22 +23,21 @@ public class KickstarterApp {
 
     
     public void run() {
-    	int categoriesSize = categoryRepository.size();
+    	int categoriesCount = categoryRepository.size();
         while (true) {
-    		//Show quote
-            println(quoteRepository.getByIndex(new Random().nextInt(quoteRepository.size())));
+            showQuote();
             
-            showCategories(categoriesSize);
+            showCategories(categoriesCount);
             
             println("");
             println("Press 0 for exit");
             println("--------------------------------------------");
 
-            	int keyCode = reader.readUserInput();
-	            if (keyCode == 0) {
+            	int categoryNumber = reader.readUserInput();
+	            if (categoryNumber == 0) {
 	                break;
-	            } else if (keyCode > 0 && keyCode <= categoriesSize) {
-                    Category currentCategory = categoryRepository.getByIndex(keyCode-1);
+	            } else if (categoryNumber > 0 && categoryNumber <= categoriesCount) {
+                    Category currentCategory = categoryRepository.getByIndex(categoryNumber-1);
 	                showCategoryMenu(currentCategory);
 	            } else {
 	            	println("Wrong number!");
@@ -105,6 +104,10 @@ public class KickstarterApp {
             System.out.print("  " + (i + 1) + ": ");
             print(currentCategoryProjects[i].getShortInfo());
         }
+    }
+
+    private void showQuote() {
+        println(quoteRepository.getByIndex(new Random().nextInt(quoteRepository.size())));
     }
     
     public void print(Object o) {

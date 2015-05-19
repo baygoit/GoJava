@@ -4,7 +4,7 @@ import com.morkva.entities.Category;
 import com.morkva.entities.Quote;
 import com.morkva.model.Repository;
 
-import java.util.Arrays;
+import java.util.*;
 
 /**
  * Created by vladyslav on 17.05.15.
@@ -96,7 +96,11 @@ public class QuoteRepository implements Repository<Quote> {
 
     @Override
     public Quote[] getAll() {
-        return quotes;
+        if (quotes.length == 0) {
+            return null;
+        } else {
+            return quotes;
+        }
     }
 
     private int search(int id) {
