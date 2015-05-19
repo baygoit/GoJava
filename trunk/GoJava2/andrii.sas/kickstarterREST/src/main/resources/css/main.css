@@ -27,7 +27,7 @@ body {
 #categories a:first-child {
 	margin-left:0;	
 }
-#categories a {
+#categories a, input[type="submit"] {
 	text-decoration: none;
 	display:	inline-block;
 	background: #00D8FF;
@@ -38,13 +38,45 @@ body {
 	margin-left:20px;
 }
 
-#categories a:hover {
+#categories a:hover,  input[type="submit"]:hover {
 	background: #0AA9CF;
 }
 
 .project {
 	display:	inline-block;
-	margin-left:20px;
+	margin:		0 10px 10px;
 	border: 	2px solid #ebebeb;
 	padding: 	15px;
+}
+
+.hidden {
+	display: 	none;	
+}
+
+.main-info {
+	cursor:	pointer;
+}
+
+.highlighted {
+	margin:		0 5%;
+	width:		85%;
+	text-align:	left;
+}
+
+.faq textarea {
+	height: 50px;
+}
+
+textarea {
+	border:		2px solid #777;
+	resize:		none;
+	width:		30%;
+	vertical-align:middle;
+	box-sizing:	border-box;
+}
+
+input[type="submit"]{
+	line-height:		50px;
+	border:				none;
+	cursor:				pointer;
 }

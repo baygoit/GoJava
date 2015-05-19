@@ -9,9 +9,11 @@ import ua.com.sas.model.Quote;
 
 public interface ProjectsService {
 	
+	void addCategory(Category category);
+	
 	Category getWithProjects(int id);
 
-	List<Category> getAll(); 
+	List<Category> getAll();
 	
 	Project getCurrent(int id);
 	

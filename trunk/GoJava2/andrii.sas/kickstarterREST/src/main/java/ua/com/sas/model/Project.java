@@ -1,5 +1,8 @@
 package ua.com.sas.model;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -8,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
@@ -37,13 +41,22 @@ public class Project {
 	@Column(name = "video_link")
 	private String videoLink;
 
-	@Column(name = "question")
-	private String questions;
-
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "category_id", nullable = false, insertable = true, updatable = false)
 	@JsonIgnore
 	private Category category;
+	
+	@OneToMany(mappedBy = "project",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JsonIgnore
+	private List<Faq> faqs;
+
+	public List<Faq> getFaqs() {
+		return faqs;
+	}
+
+	public void setFaqs(List<Faq> faqs) {
+		this.faqs = faqs;
+	}
 
 	public Category getCategory() {
 		return category;
@@ -67,14 +80,6 @@ public class Project {
 	
 	public void setName(String name) {
 		this.name = name;
-	}
-	
-	public String getQuestions() {
-		return questions;
-	}
-
-	public void setQuestions(String questions) {
-		this.questions = questions;
 	}
 	
 	public String getDescription() {
@@ -123,34 +128,6 @@ public class Project {
 	
 	public void setVideoLink(String videoLink) {
 		this.videoLink = videoLink;
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + id;
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Project other = (Project) obj;
-		if (id != other.id)
-			return false;
-		if (name == null) {
-			if (other.name != null)
-				return false;
-		} else if (!name.equals(other.name))
-			return false;
-		return true;
 	}
 
 }

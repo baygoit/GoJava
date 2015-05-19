@@ -26,6 +26,11 @@ public class ProjectsServiceImp implements ProjectsService{
 	
 	@Autowired
 	private QuotesDAO quotesDAO;
+	
+	@Override
+	public void addCategory(Category category) {
+		categoriesDAO.add(category);
+	}
 
 	@Override
 	public Project getCurrent(int id) {
@@ -43,8 +48,7 @@ public class ProjectsServiceImp implements ProjectsService{
 
 	@Override
 	public List<Category> getAll() {
-		List<Category> categories = categoriesDAO.getCategories();
-		return categories;
+		return categoriesDAO.getCategories();
 	}
 
 	@Override

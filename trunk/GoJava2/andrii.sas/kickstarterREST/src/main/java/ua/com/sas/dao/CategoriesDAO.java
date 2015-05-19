@@ -6,7 +6,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 
-import ua.com.sas.model.*;
+import ua.com.sas.model.Category;
 
 @Repository
 public class CategoriesDAO extends AbstractDAO implements Categories {
@@ -29,7 +29,6 @@ public class CategoriesDAO extends AbstractDAO implements Categories {
 	public Category get(int id) {
 		Session session = getSession();
 	    Category category = (Category) session.get(Category.class, id);
-	    category.getProjects().size();
 	    return category;
 	}
 
