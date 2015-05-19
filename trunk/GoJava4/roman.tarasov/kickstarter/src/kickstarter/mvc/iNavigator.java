@@ -13,6 +13,8 @@ public interface iNavigator {
 
 	void saveProject(int selectedProject);
 
+	int getSavedProject();
+
 	void savePageBeforeError(int page);
 
 	int getSavedPage();

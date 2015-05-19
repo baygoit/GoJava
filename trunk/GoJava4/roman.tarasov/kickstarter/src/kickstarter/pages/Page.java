@@ -13,7 +13,7 @@ public class Page {
 	CommentsRepository allComments;
 	QuotesRepository quotesRepository;
 	CategoriesRepository categories;
-	
+	Bank bank;
 	
 	final int CATEGORIES = 0;
 	final int PROJECTS = 1;
@@ -24,6 +24,7 @@ public class Page {
 	final int INVEST_PAGE = 6;
 	final int DONATE_PAGE = 7;
 	final int BANK_OPERATION_RESULT_PAGE = 8;
+	final int APPLY_TRANSACTION_PAGE = 9;
 	
 	public String[] options;
 	public int[] optionsInt;

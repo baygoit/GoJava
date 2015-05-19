@@ -75,6 +75,7 @@ public class DetailedProject extends Page {
 			return;
 		}
 		if (message.equals("i")) {
+			navigator.setOption(parameterForPage,"null");
 			navigator.pageWillBe(INVEST_PAGE);
 			return;
 		}

@@ -24,11 +24,26 @@ public class CategoriesPage extends Page {
 		header += "\n|     Categories        |";
 		header += "\n=========================";
 		header += "\n";
-		header += categories.getListAllCategories();
+		header += getListAllCategories();
 		header += "\n------------------------";
 		header += "\nSelect category by ID:<ID>";
 		header += "\nOptions:  <e> - The End";
 		return header;
+	}
+
+	public String getListAllCategories() {
+		String result = "";
+		int length = categories.getCategoriesLength();
+		options = new String[length];
+		optionsInt = new int[length];
+		for (int index = 0; index < length; index++) {
+
+			result += ("ID:<" + categories.getCategory(index).ID + "> name:<"
+					+ categories.getCategory(index).name + ">\n");
+			options[index] = Integer.toString(categories.getCategory(index).ID);
+			optionsInt[index] = categories.getCategory(index).ID;
+		}
+		return result;
 	}
 
 	public void viewWorkedStatus(int status) {
@@ -43,12 +58,12 @@ public class CategoriesPage extends Page {
 			navigator.pageWillBe(END_PAGE);
 			return;
 		}
-		options = categories.getStringOptions();
-		optionsInt = categories.getIntOptions();
+
 		if (options != null) {
 			for (int index = 0; index < options.length; index++) {
 				if (message.equals(options[index])) {
 					navigator.pageWillBe(PROJECTS);
+					
 					navigator.setOption(optionsInt[index], options[index]);
 
 					return;

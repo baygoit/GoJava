@@ -4,6 +4,7 @@ package kickstarter;
 import kickstarter.mvc.Controller;
 import kickstarter.mvc.Model;
 import kickstarter.mvc.View;
+import kickstarter.pages.ApplyTransactionPage;
 import kickstarter.pages.CategoriesPage;
 import kickstarter.pages.CommentPage;
 import kickstarter.pages.DetailedProject;
@@ -57,12 +58,16 @@ public class Kickstarter {
 		controller.addPage(page);
 		page = new CommentPage(allComments, model, projects);
 		controller.addPage(page);
-		page = new InvestPage( model);
+		page = new InvestPage( model,projects);
 		controller.addPage(page);
-		page = new DonatePage( model,new Bank(),projects);
+		Bank bank=new Bank();
+		page = new DonatePage( model,bank,projects);
 		controller.addPage(page);
 		page = new ResultOfBankOperation( model);
 		controller.addPage(page);
+		page = new ApplyTransactionPage( model,bank,projects);
+		controller.addPage(page);
+	
 	}
 
 	public static void main(String[] args) {

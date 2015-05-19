@@ -11,6 +11,8 @@ public class Project {
 	public int daysToGo;
 	public String linkToVideo = "null";
 	public int categoryID;
+	public String[] investmentOptions;
+	public double [] amount ;
 
 	public Project(String name, int categoryID) {
 		this.name = name;

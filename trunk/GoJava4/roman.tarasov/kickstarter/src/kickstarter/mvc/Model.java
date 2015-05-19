@@ -91,4 +91,10 @@ public class Model implements iNavigator {
 	public int getSavedPage() {
 		return savePage;
 	}
+
+	@Override
+	public int getSavedProject() {
+		
+		return selectedProject;
+	}
 }

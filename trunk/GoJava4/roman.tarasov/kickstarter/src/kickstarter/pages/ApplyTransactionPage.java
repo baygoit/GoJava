@@ -5,52 +5,53 @@ import kickstarter.mvc.Model;
 import kickstarter.payment.Bank;
 import kickstarter.repository.ProjectRepository;
 
-public class DonatePage extends Page {
-
-	public DonatePage(Model model, Bank bank, ProjectRepository projects) {
-		navigator = model;
+public class ApplyTransactionPage extends Page {
+	
+	public ApplyTransactionPage(Model model, Bank bank, ProjectRepository projects) {
+		this.navigator=model;
 		this.bank = bank;
-		this.projects = projects;
+		this.projects=projects;
 	}
-
+	public void viewWorkedStatus(int status) {
+	}
 	public String getHeader() {
-
+		
 		String header = "";
 		header += "\n=========================";
-		header += "\n|       donate          |";
+		header += "\n|   apply transaction   |";
 		header += "\n=========================";
 		header += "\n";
 		header += "\n------------------------";
-		header += "\nOptions: donate in format <bankir:777:20> where login -bankir-, cardnumber -777-, pay -20- \n<p>- previous page  ";
-		
+		header += "\nOptions: apply  in format <bankir:777> where login -bankir-, cardnumber -777-  \n<p>- previous page  ";
+
 		return header;
 	}
 
 	public String[] getOptions() {
-		return options;
+		return null;
 	}
-
 	public void execute(String message) {
+
 		navigator.saveProject(parameterForPage);
 		if (message.equals("p")) {
 			navigator.pageWillBe(DETAILED_PROJECT);
 			return;
 		}
-
 		String[] array = message.split(":");
 		double balanceBefore = 0;
 		double balanceAfter = 0;
 		double getMoney = 0;
+		
 		String resultOfBankOperation = "";
-		if (array.length == 3) {
+		if (array.length == 2) {
 			try {
 				balanceBefore = bank.getBalance(array[0], array[1]);
 				if (balanceBefore < 0) {
 					resultOfBankOperation = "\nbalance error\n";
 					throw new NullPointerException("balance error");
 				}
-				getMoney = Double.parseDouble(array[2]);
-				if (!bank.getMoney(array[0], array[1], array[2])) {
+				getMoney = Double.parseDouble(stringParameterForPage);
+				if (!bank.getMoney(array[0], array[1], stringParameterForPage)) {
 					resultOfBankOperation = "\nbank operation error\n";
 					throw new NullPointerException("bank operation error");
 				}
@@ -79,7 +80,7 @@ public class DonatePage extends Page {
 			return;
 
 		}
-		navigator.savePageBeforeError(DONATE_PAGE);
+		navigator.savePageBeforeError(APPLY_TRANSACTION_PAGE);
 		navigator.pageWillBe(ERROR_PAGE);
 	}
 }

@@ -16,11 +16,15 @@ public class ProjectRepository {
 		project.pledged = 25;
 		project.goal = 2000;
 		project.ID = 23;
+		project.investmentOptions=new String[]{"1$ - ","10$ -","40$ -"};
+		project.amount=new double[] {1,10,40};
 		projects.add(project);
 
 		categoryID = 4;
 		project = new Project("Paint the fence of the school", categoryID);
 		project.description = "raising money for paint";
+		project.investmentOptions=new String[]{"1$ - ","10$ -","40$ -"};
+		project.amount=new double[] {1,10,40};
 		project.ID = 8;
 		projects.add(project);
 
