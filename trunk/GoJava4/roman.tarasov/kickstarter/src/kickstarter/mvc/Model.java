@@ -28,6 +28,7 @@ public class Model implements iNavigator {
 		page.execute(command);
 		page = pages.getEntity(pageIndex);
 		page.parameterForPage = intOption;
+		page.stringParameterForPage=stringOption;
 	}
 
 	public void setPage(int pageIndex) {

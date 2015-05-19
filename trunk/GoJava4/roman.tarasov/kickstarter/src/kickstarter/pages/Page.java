@@ -1,6 +1,7 @@
 package kickstarter.pages;
 
 import kickstarter.mvc.iNavigator;
+import kickstarter.payment.Bank;
 import kickstarter.repository.CategoriesRepository;
 import kickstarter.repository.CommentsRepository;
 import kickstarter.repository.ProjectRepository;
@@ -13,6 +14,7 @@ public class Page {
 	QuotesRepository quotesRepository;
 	CategoriesRepository categories;
 	
+	
 	final int CATEGORIES = 0;
 	final int PROJECTS = 1;
 	final int DETAILED_PROJECT = 2;
@@ -21,10 +23,12 @@ public class Page {
 	final int COMMENT_PAGE = 5;
 	final int INVEST_PAGE = 6;
 	final int DONATE_PAGE = 7;
+	final int BANK_OPERATION_RESULT_PAGE = 8;
 	
 	public String[] options;
 	public int[] optionsInt;
 	public int parameterForPage;
+	public String  stringParameterForPage;
 	public int selectedCategory;
 	public int selectedProject;
 	public int pageId;

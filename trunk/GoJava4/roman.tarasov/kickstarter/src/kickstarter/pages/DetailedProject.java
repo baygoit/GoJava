@@ -79,6 +79,7 @@ public class DetailedProject extends Page {
 			return;
 		}
 		if (message.equals("d")) {
+			navigator.setOption(parameterForPage,"null");
 			navigator.pageWillBe(DONATE_PAGE);
 			return;
 		}

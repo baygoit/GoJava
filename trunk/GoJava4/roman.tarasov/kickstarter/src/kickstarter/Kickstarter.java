@@ -11,8 +11,10 @@ import kickstarter.pages.DonatePage;
 import kickstarter.pages.InvestPage;
 import kickstarter.pages.Page;
 import kickstarter.pages.ProjectsPage;
+import kickstarter.pages.ResultOfBankOperation;
 import kickstarter.pages.TheEndPage;
 import kickstarter.pages.WrongChoicePage;
+import kickstarter.payment.Bank;
 import kickstarter.repository.CategoriesRepository;
 import kickstarter.repository.CommentsRepository;
 import kickstarter.repository.ProjectRepository;
@@ -57,7 +59,9 @@ public class Kickstarter {
 		controller.addPage(page);
 		page = new InvestPage( model);
 		controller.addPage(page);
-		page = new DonatePage( model);
+		page = new DonatePage( model,new Bank(),projects);
+		controller.addPage(page);
+		page = new ResultOfBankOperation( model);
 		controller.addPage(page);
 	}
 
