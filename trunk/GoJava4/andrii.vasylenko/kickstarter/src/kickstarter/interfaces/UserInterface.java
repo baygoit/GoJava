@@ -1,4 +1,4 @@
-package kickstarter.interfaces.display;
+package kickstarter.interfaces;
 
 import kickstarter.interfaces.pages.ChoicePage;
 import kickstarter.interfaces.pages.Page;

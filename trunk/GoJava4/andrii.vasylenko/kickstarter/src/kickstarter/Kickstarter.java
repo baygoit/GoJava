@@ -2,26 +2,15 @@ package kickstarter;
 
 import kickstarter.engine.Category;
 import kickstarter.engine.Project;
-import kickstarter.interfaces.display.UserInterface;
-import kickstarter.interfaces.pages.ChoicePage;
-import kickstarter.interfaces.pages.Page;
-import kickstarter.storages.CategoriesStorage;
-import kickstarter.storages.ProjectsStorage;
-import kickstarter.storages.QuotesStorage;
 
 public class Kickstarter {
 
-	private UserInterface userInterface;
-	private QuotesStorage quotes;
-	private CategoriesStorage categories;
-	private ProjectsStorage projects;
+	private Model model;
+	private View viewer;
 
-	public Kickstarter(UserInterface userInterface, QuotesStorage quotes, CategoriesStorage categories,
-			ProjectsStorage projects) {
-		this.userInterface = userInterface;
-		this.quotes = quotes;
-		this.categories = categories;
-		this.projects = projects;
+	public Kickstarter(Model model, View viewer) {
+		this.model = model;
+		this.viewer = viewer;
 	}
 
 	public void run() {
@@ -31,47 +20,76 @@ public class Kickstarter {
 	}
 
 	private void showQuote() {
-		Page page = UserInterface.PAGES.getShowRandomQuotePage(quotes);
-		userInterface.showPage(page);
+		viewer.view(model.getRandomQuote());
 	}
 
 	private void choiceCategory() {
 		while (true) {
-			ChoicePage page = UserInterface.PAGES.getChoiceCategoryPage(categories);
-			userInterface.choiceItem(page);
-			Category category = (Category) page.getChosenItem();
-			if (category == Category.EXIT) {
-				return;
+			try {
+				viewer.view("--------------------");
+				viewer.view("Choice Category:");
+				viewer.view(model.getCategoryIterator());
+				viewer.viewCategoryMenu();
+
+				int itemId = viewer.choiceItem();
+				Category category = model.getCategoryById(itemId);
+				if (category == Category.EXIT) {
+					return;
+				}
+
+				choiceProject(category);
+			} catch (Exception ignore) {
 			}
-			choiceProject(category);
+			viewer.view("--------------------");
+			viewer.view("try again please");
 		}
 	}
 
 	private void choiceProject(Category category) {
 		while (true) {
-			ChoicePage page = UserInterface.PAGES.getChoiceProjectPage(projects, category);
-			userInterface.choiceItem(page);
-			Project project = (Project) page.getChosenItem();
-			if (project == Project.EXIT) {
-				return;
+			try {
+				viewer.view("--------------------");
+				viewer.view("Choice Project:");
+				viewer.viewP(model.getProjectIterator(category));
+				viewer.viewProjectsMenu();
+
+				int itemId = viewer.choiceItem();
+				Project project = model.getProjectById(itemId);
+				if (project == Project.EXIT) {
+					return;
+				}
+
+				showProject(project);
+			} catch (Exception ignore) {
 			}
-			showProject(project);
+			viewer.view("--------------------");
+			viewer.view("try again please");
 		}
 	}
 
 	private void showProject(Project project) {
 		while (true) {
-			ChoicePage page = UserInterface.PAGES.getShowProjectPage(project);
-			userInterface.choiceItem(page);
-			Project currentProject = (Project) page.getChosenItem();
-			if (currentProject == Project.EXIT) {
-				return;
+			try {
+				viewer.view("--------------------");
+				viewer.view("Project:");
+				viewer.view(project);
+				viewer.viewProjectMenu();
+				
+				int itemId = viewer.choiceItem();
+				Project currentProject = model.getProjectById(itemId);
+				
+				if (currentProject == Project.EXIT) {
+					return;
+				}
+			} catch (Exception ignore) {
 			}
+			viewer.view("--------------------");
+			viewer.view("try again please");
 		}
 	}
 
 	private void showTheEnd() {
-		Page page = UserInterface.PAGES.getTheEndPage();
-		userInterface.showPage(page);
+		viewer.view("---------");
+		viewer.view("Good Luck!");
 	}
 }

@@ -1,5 +1,6 @@
 package kickstarter.storages;
 
+import java.util.Iterator;
 import java.util.LinkedList;
 
 import kickstarter.engine.Data;
@@ -35,6 +36,11 @@ public abstract class UniversalStorage<T extends Data> implements Storage<T> {
 	@Override
 	public boolean isEmpty() {
 		return objects.isEmpty();
+	}
+
+	@Override
+	public Iterator<T> getIterator() {
+		return objects.listIterator();
 	}
 
 }

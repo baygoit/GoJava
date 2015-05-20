@@ -1,5 +1,7 @@
 package kickstarter.storages;
 
+import java.util.Iterator;
+
 import kickstarter.engine.Data;
 
 public interface Storage<T extends Data> {
@@ -12,4 +14,6 @@ public interface Storage<T extends Data> {
 	int size();
 	
 	boolean isEmpty();
+
+	Iterator<T> getIterator();
 }

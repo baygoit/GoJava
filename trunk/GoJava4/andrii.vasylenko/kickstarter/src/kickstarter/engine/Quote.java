@@ -1,6 +1,7 @@
 package kickstarter.engine;
 
 public class Quote implements Data {
+	
 	private static int count = 0;
 
 	private int id;
@@ -10,7 +11,7 @@ public class Quote implements Data {
 		if (quote == null) {
 			throw new IllegalArgumentException();
 		}
-		this.id = ++count;
+		this.id = count++;
 		this.quote = quote;
 	}
 
