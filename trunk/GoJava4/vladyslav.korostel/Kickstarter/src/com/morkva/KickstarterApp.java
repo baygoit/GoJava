@@ -5,6 +5,7 @@ import com.morkva.entities.Project;
 import com.morkva.entities.Quote;
 import com.morkva.logic.*;
 import com.morkva.model.Repository;
+import com.morkva.ui.CategoriesPage;
 
 import java.util.List;
 import java.util.Random;
@@ -28,7 +29,8 @@ public class KickstarterApp {
         while (true) {
             showQuote();
             
-            showCategories(categoriesCount);
+            CategoriesPage categoriesPage = new CategoriesPage(printer, reader, categoryRepository);
+            categoriesPage.showCategories();
             
             println("");
             println("Press 0 for exit");
@@ -39,71 +41,10 @@ public class KickstarterApp {
 	                break;
 	            } else if (categoryNumber > 0 && categoryNumber <= categoriesCount) {
                     Category currentCategory = categoryRepository.getByIndex(categoryNumber-1);
-	                showCategoryMenu(currentCategory);
+	                categoriesPage.showMenu(currentCategory);
 	            } else {
 	            	println("Wrong number!");
 	            }
-        }
-    }
-    
-    public void showCategoryMenu(Category category) {
-    	
-    	List<Project> projectsOfCurrentCategory = category.getProjects();
-    	
-        while (true) {
-        	
-            showProjectsOfCategory(category);
-            
-            println("");
-            println("Press 0 for exit from this category");
-            println("--------------------------------------------");
-            
-            int keyCode = reader.readUserInput();
-            if (keyCode == 0) {
-                break;
-            } else {
-                if (keyCode > 0 && keyCode <= projectsOfCurrentCategory.size()) {
-                	Project selectedProject = projectsOfCurrentCategory.get(keyCode-1);
-                	showProjectMenu(selectedProject);
-                } else {
-                	println("Project with №" + keyCode + " does not exist");
-                }
-            }
-        } //end projectsListLoop
-    }
-    
-    public void showProjectMenu(Project project) {
-    	while(true) {
-    		
-            print(project.getFullInfo());
-            
-            println("");
-            println("Press 0 to return back");
-            println("--------------------------------------------");
-            
-            int keyCode = reader.readUserInput();
-            if (keyCode == 0) {
-            	break;
-            } else {
-            	println("Wrong code!");
-            }
-    	} //end loop
-    }
-    
-    public void showCategories(int size) {
-    	println("Select category: ");
-        for (int i = 0; i < size; i++) {
-            println(i + 1 + ": " + categoryRepository.getByIndex(i).getName());
-        }
-    }
-    
-    public void showProjectsOfCategory(Category category) {
-    	println("Category: " + category.getName());
-        println("  Projects: ");
-        List<Project> currentCategoryProjects = category.getProjects();
-        for (int i = 0; i < currentCategoryProjects.size(); i++) {
-            System.out.print("  " + (i + 1) + ": ");
-            print(currentCategoryProjects.get(i).getShortInfo());
         }
     }
 
@@ -119,7 +60,7 @@ public class KickstarterApp {
     	print(o + "\n");
     }
 
-    public void setCategoryRepository(Repository categoryRepository) {
+    public void setCategoryRepository(Repository<Category> categoryRepository) {
         this.categoryRepository = categoryRepository;
     }
 
