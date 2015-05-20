@@ -1,29 +1,32 @@
 package kickstarter.mvc;
 
-import kickstarter.pages.Page;
+import kickstarter.pages.PageView;
+import kickstarter.pages.model.PageModel;
 
 public class Controller {
-	private Model model;
-	private View view;
 
-	public Controller(Model model, View view) {
-		this.model = model;
+	private View view;
+	private iModel imodel;
+
+	public Controller(View view, Model model) {
 		this.view = view;
+		this.imodel = model;
 	}
 
 	public void printView() {
 		view.print();
 	}
 
-	public void executeCommand(String command) {
-		model.update(command);
+	public void update(String command) {
+		imodel.update(command);
 	}
 
 	public void setPage(int pageIndex) {
-		model.setPage(pageIndex);
+		imodel.setPage(pageIndex);
 	}
 
-	public void addPage(Page page) {
-		model.add(page);
+	public void add(PageView pageView, PageModel pagesModel) {
+		imodel.add(pageView, pagesModel);
+
 	}
 }

@@ -154,7 +154,7 @@ public class FakeConsole {
 	}
 	void put(String command) {
 		System.out.println("_________   "+command+"  _________");
-		kickstarter.controller.executeCommand(command);
+		kickstarter.controller.update(command);
 	}
 
 	void view() {

@@ -2,15 +2,13 @@ package kickstarter.pages;
 
 import kickstarter.entities.ProjectComments;
 import kickstarter.entities.Project;
-import kickstarter.mvc.Model;
 import kickstarter.repository.ProjectRepository;
 import kickstarter.repository.CommentsRepository;
 
-public class DetailedProject extends Page {
+public class DetailedProject extends PageView {
 
 	public DetailedProject(CommentsRepository allComments,
-			ProjectRepository projects, Model model) {
-		this.navigator = model;
+			ProjectRepository projects) {
 		this.allComments = allComments;
 		this.projects = projects;
 	}
@@ -22,7 +20,7 @@ public class DetailedProject extends Page {
 	}
 
 	public String getHeader() {
-		int projectID = iOption;
+		int projectID = intOption;
 		Project project = projects.getProjectById(projectID);
 
 		String header = "";
@@ -53,27 +51,5 @@ public class DetailedProject extends Page {
 		header += "\n------------------------";
 		header += "\nOptions: <p> - previous page; <i>- invest to project ; <c>- comment ; <d>- donate";
 		return header;
-	}
-
-	public void execute(String message) {
-		
-		if (message.equals("p")) {
-			navigator.nextWithOptions(PROJECTS, navigator.getSavedCategory(), "null");
-			return;
-		}
-		if (message.equals("c")) {
-			navigator.next(COMMENT_PAGE);
-			return;
-		}
-		if (message.equals("i")) {
-			navigator.nextWithOptions(INVEST_PAGE, iOption, "null");
-			return;
-		}
-		if (message.equals("d")) {
-			navigator.nextWithOptions(DONATE_PAGE, iOption, "null");
-			return;
-		}
-		navigator.goToAndBack(ERROR_PAGE, DETAILED_PROJECT);
-
 	}
 }

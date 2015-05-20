@@ -1,21 +1,21 @@
 package kickstarter.mvc;
 
-import kickstarter.pages.Page;
+import kickstarter.pages.PageView;
 import kickstarter.ui.iUserInterface;
 
 public class View {
-	Model model;
-	Page page;
+	iModel dispatcher;
+	PageView page;
 	final int OK=0;
 	private iUserInterface ui;
 
-	public View(Model model, iUserInterface ui) {
-		this.model = model;
+	public View(iModel dispatcher, iUserInterface ui) {
+		this.dispatcher = dispatcher;
 		this.ui = ui;
 	}
 
 	public void print() {
-		page = model.getPage();
+		page = dispatcher.getPage();
 		String header=page.getHeader();
 		ui.display(header);
 	}

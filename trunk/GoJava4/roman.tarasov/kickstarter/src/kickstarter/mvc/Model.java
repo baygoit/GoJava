@@ -1,94 +1,122 @@
 package kickstarter.mvc;
 
-import kickstarter.pages.Page;
+import java.util.Arrays;
+
+import kickstarter.pages.PageView;
+import kickstarter.pages.model.PageModel;
+import kickstarter.pages.model.ModelOptions;
+import kickstarter.pages.model.ViewOptions;
 import kickstarter.repository.EntityStorage;
 import kickstarter.repository.iStorage;
 
-public class Model implements iNavigator {
-	private iStorage<Page> pages;
+public class Model implements iModel {
+	final int CATEGORIES = 0;
+	final int PROJECTS = 1;
+	final int DETAILED_PROJECT = 2;
+	final int ERROR_PAGE = 3;
+	final int END_PAGE = 4;
+	final int COMMENT_PAGE = 5;
+	final int INVEST_PAGE = 6;
+	final int DONATE_PAGE = 7;
+	final int BANK_OPERATION_RESULT_PAGE = 8;
+	final int APPLY_TRANSACTION_PAGE = 9;
+	public String[] strOptions;
+	public int[] intOptions;
+	public int intOption;
+	public String strOption;
+	public int selectedCategory;
+	public int selectedProject;
+	public int pageId;
+	public String name;
+	int nextPage;
 
 	private int pageIndex;
+	ModelOptions options;
+	private iStorage<PageView> pages;
+	private iStorage<PageModel> modelPages;
 
-	int iOption;
-	int selectedCategory;
-	int selectedProject;
-	String sOption;
-
-	Page page;
-
+	PageModel pageModel;
 	private int savePage;
+	private ViewOptions viewOptions;
 
 	public Model() {
-		pages = new EntityStorage<Page>();
+		pages = new EntityStorage<PageView>();
+		modelPages = new EntityStorage<PageModel>();
 	}
 
 	public void update(String command) {
-		page = pages.getEntity(pageIndex);
-		page.execute(command);
-		page = pages.getEntity(pageIndex);
-		page.iOption = iOption;
-		page.sOption = sOption;
+		pageModel = modelPages.getEntity(pageIndex);
+		pageModel.execute(command);
+		pageModel = modelPages.getEntity(pageIndex);
 	}
 
-	public void setPage(int pageIndex) {
-		this.pageIndex = pageIndex;
+	public void setOptions(ModelOptions setO) {
+		this.options = setO;
+	}
+
+	public void setPage(int setPage) {
+		this.pageIndex = setPage;
 	}
 
 	public int getPageIndex() {
 		return pageIndex;
 	}
 
-	public Page getPage() {
+	public PageView getPage() {
 		return pages.getEntity(pageIndex);
 	}
 
-	public void add(Page page) {
-		pages.add(page);
+	public void next(int nextPage) {
+		this.pageIndex = nextPage;
 	}
 
-	@Override
-	public void next(int pageIndex) {
-		this.pageIndex = pageIndex;
-	}
-
-	@Override
 	public void setOption(int intOption, String stringOption) {
-		this.iOption = intOption;
-		this.sOption = stringOption;
+		this.intOption = intOption;
+		this.strOption = stringOption;
 	}
 
-	@Override
-	public void saveCategory(int selectedCategory) {
-		this.selectedCategory = selectedCategory;
-	}
-
-	@Override
 	public int getSavedCategory() {
 		return selectedCategory;
 	}
 
-	@Override
-	public void savePageBeforeError(int savePage) {
-		this.savePage = savePage;
+	public void savePageBeforeError(int saved) {
+		this.savePage = saved;
 	}
 
-	@Override
 	public int getSavedPage() {
 		return savePage;
 	}
 
-	@Override
 	public void goToAndBack(int toPage, int back) {
 		this.savePage = back;
 		this.pageIndex = toPage;
+	}
+
+	public void saveCategory(int sc) {
+		this.selectedCategory = sc;
+	}
+
+	public ModelOptions getOptions() {
+		return options;
+	}
+
+	public void add(PageView pv, PageModel pm) {
+		pages.add(pv);
+		modelPages.add(pm);
+	}
+
+	@Override
+	public void nextWithOptions(int next, ModelOptions o) {
+		this.pageIndex = next;
+		this.options = o;
 
 	}
 
 	@Override
-	public void nextWithOptions(int page, int iOption, String sOption) {
-		this.pageIndex = page;
-		this.iOption = iOption;
-		this.sOption = sOption;
+	public void setViewOptions(ViewOptions vo) {
+		this.viewOptions = vo;
 
 	}
+
+
 }

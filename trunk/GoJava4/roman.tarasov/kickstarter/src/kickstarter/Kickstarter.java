@@ -3,17 +3,29 @@ package kickstarter;
 import kickstarter.mvc.Controller;
 import kickstarter.mvc.Model;
 import kickstarter.mvc.View;
-import kickstarter.pages.ApplyTransactionPage;
-import kickstarter.pages.CategoriesPage;
-import kickstarter.pages.CommentPage;
+import kickstarter.mvc.iModel;
+
+import kickstarter.pages.ApplyTransaction;
+import kickstarter.pages.Categories;
+import kickstarter.pages.Comment;
 import kickstarter.pages.DetailedProject;
-import kickstarter.pages.DonatePage;
-import kickstarter.pages.InvestPage;
-import kickstarter.pages.Page;
-import kickstarter.pages.ProjectsPage;
+import kickstarter.pages.Donate;
+import kickstarter.pages.Invest;
+import kickstarter.pages.PageView;
+import kickstarter.pages.Projects;
 import kickstarter.pages.ResultOfBankOperation;
-import kickstarter.pages.TheEndPage;
-import kickstarter.pages.WrongChoicePage;
+import kickstarter.pages.TheEnd;
+import kickstarter.pages.WrongChoice;
+import kickstarter.pages.model.MApply;
+import kickstarter.pages.model.MCategories;
+import kickstarter.pages.model.MComment;
+import kickstarter.pages.model.MDonate;
+import kickstarter.pages.model.MInvest;
+import kickstarter.pages.model.MProjects;
+import kickstarter.pages.model.MResultOfBank;
+import kickstarter.pages.model.MTheEnd;
+import kickstarter.pages.model.MWrong;
+import kickstarter.pages.model.PageModel;
 import kickstarter.payment.Bank;
 import kickstarter.repository.CategoriesRepository;
 import kickstarter.repository.CommentsRepository;
@@ -27,11 +39,13 @@ public class Kickstarter {
 	QuotesRepository quotes;
 	CategoriesRepository categories;
 	ProjectRepository projects;
-	Model model;
+
+	PageModel pageModel;
 	View view;
 	public Controller controller;
 	iUserInterface ui;
 	CommentsRepository allComments;
+	iModel imodel;
 
 	public Kickstarter() {
 		allComments = new CommentsRepository();
@@ -40,32 +54,54 @@ public class Kickstarter {
 
 		categories = new CategoriesRepository();
 		ui = new ConsoleUI();
-		model = new Model();
+
+		Model model = new Model();
+
 		view = new View(model, ui);
-		controller = new Controller(model, view);
-		Page page = new CategoriesPage(categories, quotes, model);
-		page.pageId = 0;
-		controller.addPage(page);
+		controller = new Controller(view, model);
+		PageView pageView = new Categories(categories, quotes, model);
+		pageView.pageId = 0;
 		controller.setPage(0);
-		page = new ProjectsPage(projects, model);
-		controller.addPage(page);
-		page = new DetailedProject(allComments, projects, model);
-		controller.addPage(page);
-		page = new WrongChoicePage(model);
-		controller.addPage(page);
-		page = new TheEndPage();
-		controller.addPage(page);
-		page = new CommentPage(allComments, model, projects);
-		controller.addPage(page);
-		page = new InvestPage(model, projects);
-		controller.addPage(page);
+
+		pageModel = new MCategories(model);
+		controller.add(pageView, pageModel);
+
+		pageView = new Projects(projects, model);
+		pageModel = new MProjects(model);
+		controller.add(pageView, pageModel);
+
+		pageView = new DetailedProject(allComments, projects);
+		pageModel = new MProjects(model);
+		controller.add(pageView, pageModel);
+
+		pageView = new WrongChoice();
+		pageModel = new MWrong(model);
+		controller.add(pageView, pageModel);
+
+		pageView = new TheEnd();
+		pageModel = new MTheEnd(model);
+		controller.add(pageView, pageModel);
+
+		pageView = new Comment(allComments, projects);
+		pageModel = new MComment(model);
+		controller.add(pageView, pageModel);
+
+		pageView = new Invest(projects);
+		pageModel = new MInvest(model);
+		controller.add(pageView, pageModel);
+
 		Bank bank = new Bank();
-		page = new DonatePage(model, bank, projects);
-		controller.addPage(page);
-		page = new ResultOfBankOperation(model);
-		controller.addPage(page);
-		page = new ApplyTransactionPage(model, bank, projects);
-		controller.addPage(page);
+		pageView = new Donate(bank, projects);
+		pageModel = new MDonate(model);
+		controller.add(pageView, pageModel);
+
+		pageView = new ResultOfBankOperation();
+		pageModel = new MResultOfBank(model);
+		controller.add(pageView, pageModel);
+
+		pageView = new ApplyTransaction(bank, projects);
+		pageModel = new MApply(model);
+		controller.add(pageView, pageModel);
 	}
 
 	public static void main(String[] args) {
@@ -83,7 +119,7 @@ public class Kickstarter {
 		while (true) {
 			controller.printView();
 			command = ui.inputString();
-			controller.executeCommand(command);
+			controller.update(command);
 		}
 	}
 }

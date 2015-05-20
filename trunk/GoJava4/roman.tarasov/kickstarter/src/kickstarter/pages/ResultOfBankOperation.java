@@ -1,11 +1,6 @@
 package kickstarter.pages;
 
-import kickstarter.mvc.Model;
-
-public class ResultOfBankOperation extends Page {
-	public ResultOfBankOperation(Model model) {
-		navigator = model;
-	}
+public class ResultOfBankOperation extends PageView {
 
 	public String getHeader() {
 		String header = "";
@@ -17,15 +12,5 @@ public class ResultOfBankOperation extends Page {
 		header += sOption;
 		header += "\nOptions: <p>- previous page  ";
 		return header;
-	}
-
-	public void execute(String message) {
-		
-		if (message.equals("p")) {
-			navigator.next(DETAILED_PROJECT);
-			return;
-		}
-		navigator.goToAndBack(ERROR_PAGE,BANK_OPERATION_RESULT_PAGE);
-
 	}
 }
