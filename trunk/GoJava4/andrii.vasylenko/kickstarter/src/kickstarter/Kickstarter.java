@@ -20,76 +20,60 @@ public class Kickstarter {
 	}
 
 	private void showQuote() {
-		viewer.view(model.getRandomQuote());
+		viewer.viewQuote(model.getRandomQuote());
 	}
 
 	private void choiceCategory() {
 		while (true) {
 			try {
-				viewer.view("--------------------");
-				viewer.view("Choice Category:");
-				viewer.view(model.getCategoryIterator());
-				viewer.viewCategoryMenu();
+				viewer.viewCategories(model.getCategoryIterator());
 
-				int itemId = viewer.choiceItem();
-				Category category = model.getCategoryById(itemId);
-				if (category == Category.EXIT) {
+				Category chosenCategory = model.getCategoryById(viewer.choiceItem());
+				if (chosenCategory == Category.EXIT) {
 					return;
 				}
+				choiceProject(chosenCategory);
 
-				choiceProject(category);
 			} catch (Exception ignore) {
 			}
-			viewer.view("--------------------");
-			viewer.view("try again please");
+			viewer.viewErrorMessage();
 		}
 	}
 
 	private void choiceProject(Category category) {
 		while (true) {
 			try {
-				viewer.view("--------------------");
-				viewer.view("Choice Project:");
-				viewer.viewP(model.getProjectIterator(category));
-				viewer.viewProjectsMenu();
+				viewer.viewProjects(model.getProjectIterator(category));
 
-				int itemId = viewer.choiceItem();
-				Project project = model.getProjectById(itemId);
-				if (project == Project.EXIT) {
+				Project chosenProject = model.getProjectById(viewer.choiceItem());
+				if (chosenProject == Project.EXIT) {
 					return;
 				}
+				showProject(chosenProject);
 
-				showProject(project);
 			} catch (Exception ignore) {
 			}
-			viewer.view("--------------------");
-			viewer.view("try again please");
+			viewer.viewErrorMessage();
 		}
 	}
 
 	private void showProject(Project project) {
 		while (true) {
 			try {
-				viewer.view("--------------------");
-				viewer.view("Project:");
-				viewer.view(project);
-				viewer.viewProjectMenu();
-				
-				int itemId = viewer.choiceItem();
-				Project currentProject = model.getProjectById(itemId);
-				
-				if (currentProject == Project.EXIT) {
+				viewer.viewProject(project);
+
+				Project chosenItem = model.getProjectById(viewer.choiceItem());
+				if (chosenItem == Project.EXIT) {
 					return;
 				}
+
 			} catch (Exception ignore) {
 			}
-			viewer.view("--------------------");
-			viewer.view("try again please");
+			viewer.viewErrorMessage();
 		}
 	}
 
 	private void showTheEnd() {
-		viewer.view("---------");
-		viewer.view("Good Luck!");
+		viewer.viewTheEndMessage();
 	}
 }
