@@ -5,15 +5,20 @@ import java.util.ArrayList;
 import ua.com.goit.gojava.kickstarter.model.CategoriesRepository;
 import ua.com.goit.gojava.kickstarter.model.Category;
 import ua.com.goit.gojava.kickstarter.view.CategoriesPage;
+import ua.com.goit.gojava.kickstarter.view.Printer;
 
 public class CategoriesControl {
-    
-    CategoriesRepository categoriesRepository;
-    CategoriesPage categoriesPage;
-    
-    public CategoriesControl() {
+
+    private CategoriesRepository categoriesRepository;
+    private CategoriesPage categoriesPage;
+    private ProjectsControl projectsControl;
+    private InputControl inputControl;
+
+    public CategoriesControl(Printer printer) {
 	categoriesRepository = new CategoriesRepository();
-	categoriesPage = new CategoriesPage();
+	categoriesPage = new CategoriesPage(printer);
+	projectsControl = new ProjectsControl(printer);
+	inputControl = new InputControl();
     }
 
     public ArrayList<Category> getCategories() {
@@ -24,4 +29,7 @@ public class CategoriesControl {
 	categoriesPage.showCategories(getCategories());
     }
 
+    public void showCategoryMenu(Category category){
+	categoriesPage.showCategoryMenu(category, projectsControl.getProjectsByCategory(category), inputControl.readUserInput());
+    }
 }
