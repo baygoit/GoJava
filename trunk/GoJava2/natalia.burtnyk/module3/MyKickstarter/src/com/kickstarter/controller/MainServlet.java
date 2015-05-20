@@ -37,14 +37,14 @@ public class MainServlet extends HttpServlet {
 		if (action.startsWith("/categories")) {
 			
 			QuotesDAO quotesDAO = new QuotesDAO(connection);
-			resp.getOutputStream().println(quotesDAO.getRandomQuote());
-			
+		
 			CategoriesDAO categoriesDAO = new CategoriesDAO(connection);
 			List<Сategory> categories = categoriesDAO.getCategories();
 			
-			for (Сategory сategory : categories) {
-				resp.getOutputStream().println(сategory.getName());
-			}
+			req.setAttribute("quote", quotesDAO.getRandomQuote());
+			req.setAttribute("categories", categories);
+			req.getRequestDispatcher("categories.jsp").forward(req, resp);
+	
 		} else if (action.equals("/projects")){
 			// to do
 		}
@@ -55,7 +55,7 @@ public class MainServlet extends HttpServlet {
 		if (result == null) {
 			try{
 				result = DriverManager.getConnection("jdbc:postgresql://localhost:5432/DataForKickstarter", "postgres", "Berezhnoi");
-			}catch(SQLException e) {
+			}catch (SQLException e) {
 				throw new RuntimeException(e);
 			}
 			req.getSession().setAttribute("connection", result);
