@@ -6,7 +6,6 @@ import org.junit.Test;
 
 public class ProjectTest {
 
-	private Category category = new Category("name");
 
 	@Test
 	public void shouldNextId_whenCreateNew() {

@@ -1,7 +1,6 @@
 package kickstarter.storages;
 
 import static org.junit.Assert.*;
-import kickstarter.engine.Category;
 import kickstarter.engine.Project;
 
 import org.junit.Test;
