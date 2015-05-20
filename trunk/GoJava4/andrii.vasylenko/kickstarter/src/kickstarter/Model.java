@@ -10,16 +10,20 @@ import kickstarter.storages.CategoriesStorage;
 import kickstarter.storages.ProjectsStorage;
 import kickstarter.storages.QuotesStorage;
 import kickstarter.storages.Storage;
+import kickstarter.storages.relations.ProjectsInCategory;
+import kickstarter.storages.relations.Relations;
 
 public class Model {
 	private Storage<Quote> quotes;
 	private Storage<Category> categories;
 	private Storage<Project> projects;
+	private Relations<Project, Category> projectsInCategory;
 
 	public Model() {
 		quotes = new QuotesStorage();
 		categories = new CategoriesStorage();
 		projects = new ProjectsStorage();
+		projectsInCategory = new ProjectsInCategory();
 	}
 
 	public void addQuote(Quote quote) {
@@ -52,6 +56,7 @@ public class Model {
 
 	public void addProject(Project project, Category category) {
 		projects.add(project);
+		projectsInCategory.add(project, category);
 	}
 
 	public Iterator<Project> getProjectsIterator(Category category) {
@@ -74,17 +79,7 @@ public class Model {
 		throw new IndexOutOfBoundsException();
 	}
 
-	private ProjectsStorage getProjectsInCategory(Category category) {
-		ProjectsStorage result = new ProjectsStorage();
-
-		Iterator<Project> iterator = projects.getIterator();
-		while (iterator.hasNext()) {
-			Project project = iterator.next();
-			if (project.getCategory() == category) {
-				result.add(project);
-			}
-		}
-
-		return result;
+	private Storage<Project> getProjectsInCategory(Category category) {
+		return projectsInCategory.getProjects(category);
 	}
 }
