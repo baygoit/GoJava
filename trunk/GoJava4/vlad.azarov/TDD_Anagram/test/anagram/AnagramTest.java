@@ -17,13 +17,12 @@ public class AnagramTest {
     }
 
     @Test
-    public void makeAnagram() {
-	anagram.makeAnagramFrom("Hello");
+    public void makeAnagramFrom() {
+	anagram.makeAnagramFrom("some text");
     }
     
     @Test
     public void printResult() {
 	anagram.printResult();
-	System.out.println();
     }
 }
