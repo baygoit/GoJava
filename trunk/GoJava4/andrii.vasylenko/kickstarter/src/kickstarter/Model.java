@@ -6,11 +6,7 @@ import java.util.Random;
 import kickstarter.engine.Category;
 import kickstarter.engine.Project;
 import kickstarter.engine.Quote;
-import kickstarter.storages.CategoriesStorage;
-import kickstarter.storages.ProjectsStorage;
-import kickstarter.storages.QuotesStorage;
 import kickstarter.storages.Storage;
-import kickstarter.storages.relations.ProjectsInCategory;
 import kickstarter.storages.relations.Relations;
 
 public class Model {
@@ -19,11 +15,12 @@ public class Model {
 	private Storage<Project> projects;
 	private Relations<Project, Category> projectsInCategory;
 
-	public Model() {
-		quotes = new QuotesStorage();
-		categories = new CategoriesStorage();
-		projects = new ProjectsStorage();
-		projectsInCategory = new ProjectsInCategory();
+	public Model(Storage<Quote> quotes, Storage<Category> categories, Storage<Project> projects,
+			Relations<Project, Category> projectsInCategory) {
+		this.quotes = quotes;
+		this.categories = categories;
+		this.projects = projects;
+		this.projectsInCategory = projectsInCategory;
 	}
 
 	public void addQuote(Quote quote) {
@@ -60,7 +57,7 @@ public class Model {
 	}
 
 	public Iterator<Project> getProjectsIterator(Category category) {
-		return getProjectsInCategory(category).getIterator();
+		return projectsInCategory.getProjects(category).getIterator();
 	}
 
 	public Project getProject(int id, Category category) {
@@ -68,7 +65,7 @@ public class Model {
 			return Project.EXIT;
 		}
 
-		return getProjectsInCategory(category).getById(id);
+		return projectsInCategory.getProjects(category).getById(id);
 	}
 
 	public Project getProjectItem(int id) {
@@ -77,9 +74,5 @@ public class Model {
 		}
 
 		throw new IndexOutOfBoundsException();
-	}
-
-	private Storage<Project> getProjectsInCategory(Category category) {
-		return projectsInCategory.getProjects(category);
 	}
 }

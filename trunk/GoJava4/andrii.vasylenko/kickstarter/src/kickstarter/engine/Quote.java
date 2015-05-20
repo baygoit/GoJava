@@ -1,7 +1,7 @@
 package kickstarter.engine;
 
 public class Quote implements Data {
-	
+
 	private static int count = 0;
 
 	private int id;

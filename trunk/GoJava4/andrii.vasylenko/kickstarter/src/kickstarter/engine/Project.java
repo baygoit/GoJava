@@ -8,7 +8,6 @@ public class Project implements Data {
 	private int id;
 	private String name;
 	private String description;
-	private Category category;
 	private int totalAmount;
 	private int daysLeft;
 	private int collectAmount;
@@ -17,19 +16,22 @@ public class Project implements Data {
 	private String questionsAndAnswers;
 
 	private Project(String name) {
+		if (name == null) {
+			throw new IllegalArgumentException();
+		}
+
 		this.id = count++;
 		this.name = name;
 	}
 
-	public Project(String name, String description, Category category, int totalAmount, int daysLeft) {
+	public Project(String name, String description, int totalAmount, int daysLeft) {
 		this(name);
 
-		if (name == null || description == null || category == null || totalAmount <= 0 || daysLeft <= 0) {
+		if (description == null || totalAmount <= 0 || daysLeft <= 0) {
 			throw new IllegalArgumentException();
 		}
 
 		this.description = description;
-		this.category = category;
 		this.totalAmount = totalAmount;
 		this.daysLeft = daysLeft;
 		this.collectAmount = 0;
@@ -69,10 +71,6 @@ public class Project implements Data {
 	@Override
 	public int getId() {
 		return id;
-	}
-
-	public Category getCategory() {
-		return category;
 	}
 
 	public String getName() {

@@ -8,7 +8,7 @@ import org.junit.Test;
 
 public class ProjectsStorageTest {
 
-	private Category category = new Category("name");
+	
 
 	@Test
 	public void shouldZeroSize_whenClearStorage() {
@@ -19,9 +19,9 @@ public class ProjectsStorageTest {
 
 	@Test
 	public void shouldCorrectValue_whenAddNewElemetnts() {
-		Project project1 = new Project("name1", "description", category, 1, 1);
-		Project project2 = new Project("name2", "description", category, 1, 1);
-		Project project3 = new Project("name3", "description", category, 1, 1);
+		Project project1 = new Project("name1", "description",  1, 1);
+		Project project2 = new Project("name2", "description",  1, 1);
+		Project project3 = new Project("name3", "description",  1, 1);
 
 		ProjectsStorage storage = new ProjectsStorage();
 		storage.add(project1);
