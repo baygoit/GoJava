@@ -30,12 +30,12 @@ public class ProjectsPage extends Page {
 		String result = "";
 		iStorage<Project> sortedToSelect = sortProjectsByCategoryID(categoryID);
 		int length = sortedToSelect.length();
-		options = new String[length];
-		optionsInt = new int[length];
+		sOptions = new String[length];
+		iOptions = new int[length];
 		for (int index = 0; index < length; index++) {
 			Project project = sortedToSelect.getEntity(index);
-			options[index] = Integer.toString(project.ID);
-			optionsInt[index] = project.ID;
+			sOptions[index] = Integer.toString(project.ID);
+			iOptions[index] = project.ID;
 			result += ("ID:<" + project.ID + "> name:<" + project.name
 					+ "> short desc.:<" + project.shortDescription + "> goal:<"
 					+ project.goal + "> pledged:<" + project.pledged
@@ -65,10 +65,10 @@ public class ProjectsPage extends Page {
 			return;
 		}
 
-		if (options != null) {
-			for (int index = 0; index < options.length; index++) {
-				if (message.equals(options[index])) {
-					navigator.nextWithOptions(DETAILED_PROJECT, optionsInt[index], options[index]);
+		if (sOptions != null) {
+			for (int index = 0; index < sOptions.length; index++) {
+				if (message.equals(sOptions[index])) {
+					navigator.nextWithOptions(DETAILED_PROJECT, iOptions[index], sOptions[index]);
 					return;
 				}
 			}

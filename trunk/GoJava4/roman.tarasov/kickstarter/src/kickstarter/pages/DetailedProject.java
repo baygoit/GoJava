@@ -56,7 +56,7 @@ public class DetailedProject extends Page {
 	}
 
 	public void execute(String message) {
-		//navigator.saveProject(iOption);
+		
 		if (message.equals("p")) {
 			navigator.nextWithOptions(PROJECTS, navigator.getSavedCategory(), "null");
 			return;

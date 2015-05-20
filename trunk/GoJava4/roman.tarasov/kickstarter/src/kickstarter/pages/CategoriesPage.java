@@ -34,14 +34,14 @@ public class CategoriesPage extends Page {
 	public String getListAllCategories() {
 		String result = "";
 		int length = categories.getCategoriesLength();
-		options = new String[length];
-		optionsInt = new int[length];
+		sOptions = new String[length];
+		iOptions = new int[length];
 		for (int index = 0; index < length; index++) {
 
 			result += ("ID:<" + categories.getCategory(index).ID + "> name:<"
 					+ categories.getCategory(index).name + ">\n");
-			options[index] = Integer.toString(categories.getCategory(index).ID);
-			optionsInt[index] = categories.getCategory(index).ID;
+			sOptions[index] = Integer.toString(categories.getCategory(index).ID);
+			iOptions[index] = categories.getCategory(index).ID;
 		}
 		return result;
 	}
@@ -52,10 +52,10 @@ public class CategoriesPage extends Page {
 			return;
 		}
 
-		if (options != null) {
-			for (int index = 0; index < options.length; index++) {
-				if (message.equals(options[index])) {
-					navigator.nextWithOptions(PROJECTS,optionsInt[index], options[index]);
+		if (sOptions != null) {
+			for (int index = 0; index < sOptions.length; index++) {
+				if (message.equals(sOptions[index])) {
+					navigator.nextWithOptions(PROJECTS,iOptions[index], sOptions[index]);
 					return;
 				}
 			}

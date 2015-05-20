@@ -22,13 +22,13 @@ public class InvestPage extends Page {
 		header += "\n";
 		header += "\n  Investment options :";
 		int length = project.investmentOptions.length;
-		optionsInt = new int[length];
-		options = new String[length];
+		iOptions = new int[length];
+		sOptions = new String[length];
 		for (int index = 0; index < length; index++) {
 			String option = project.investmentOptions[index];
 			header += "\n" + (index + 1) + " -" + option;
-			optionsInt[index] = index + 1;
-			options[index] = Integer.toString(index + 1);
+			iOptions[index] = index + 1;
+			sOptions[index] = Integer.toString(index + 1);
 		}
 		header += "\n------------------------";
 		header += "\nOptions: <p>- previous page  ";

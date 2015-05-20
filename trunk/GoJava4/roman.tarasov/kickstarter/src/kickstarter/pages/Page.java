@@ -26,8 +26,8 @@ public class Page {
 	final int BANK_OPERATION_RESULT_PAGE = 8;
 	final int APPLY_TRANSACTION_PAGE = 9;
 
-	public String[] options;
-	public int[] optionsInt;
+	public String[] sOptions;
+	public int[] iOptions;
 	public int iOption;
 	public String sOption;
 	public int selectedCategory;

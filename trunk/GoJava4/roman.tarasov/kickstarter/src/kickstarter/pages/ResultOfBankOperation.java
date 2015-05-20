@@ -20,7 +20,7 @@ public class ResultOfBankOperation extends Page {
 	}
 
 	public void execute(String message) {
-		//navigator.saveProject(iOption);
+		
 		if (message.equals("p")) {
 			navigator.next(DETAILED_PROJECT);
 			return;
