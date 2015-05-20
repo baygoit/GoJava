@@ -22,69 +22,84 @@ public class View {
 		this.display = new DisplayHandler();
 	}
 
-	private void view(String string) {
-		printer.showMessage(string);
+	public void viewQuote(Quote quote) {
+		view(display.getQuoteDisplay().getDescription(quote));
 	}
-	
+
+	public void viewCategories(Iterator<Category> iterator) {
+		viewCategoriesHead();
+		viewCategoriesBody(iterator);
+		viewCategoriesMenu();
+	}
+
+	public void viewProjects(Iterator<Project> iterator) {
+		viewProjectsHead();
+		viewProjectsBody(iterator);
+		viewProjectsMenu();
+	}
+
+	public void viewProject(Project project) {
+		viewProjectHead();
+		view(display.getProjectDetailDisplay().getDescription(project));
+		viewProjectMenu();
+	}
+
 	public void viewErrorMessage() {
 		view("--------------------");
 		view("try again please");
 	}
-	
+
 	public void viewTheEndMessage() {
 		view("---------");
 		view("Good Luck!");
 	}
 
-	public void viewQuote(Quote quote) {
-		printer.showMessage(display.getQuoteDisplay().getDescription(quote));
+	public int choiceItem() throws NumberFormatException, IOException {
+		return Integer.parseInt(reader.getLine());
 	}
 
-	public void viewCategories(Iterator<Category> iterator) {
-		printer.showMessage("--------------------");
-		printer.showMessage("Choice Category:");
-		
-		//-----------------
-		
+	private void view(String string) {
+		printer.showMessage(string);
+	}
+
+	private void viewCategoriesHead() {
+		view("--------------------");
+		view("Choice Category:");
+	}
+
+	private void viewCategoriesBody(Iterator<Category> iterator) {
 		StringBuilder result = new StringBuilder();
 
 		while (iterator.hasNext()) {
 			result.append(display.getCategoryDisplay().getDescription(iterator.next()));
 		}
 
-		printer.showMessage(result.toString());
-		
-		//-----------
-		viewCategoryMenu();
+		view(result.toString());
 	}
 
-	public void viewProjects(Iterator<Project> iterator) {
-		printer.showMessage("--------------------");
-		printer.showMessage("Choice Project:");
-
-		//--
-		
-		StringBuilder result = new StringBuilder();
-
-		while (iterator.hasNext()) {
-			result.append(display.getProjectDisplay().getDescription(iterator.next()));
-		}
-
-		printer.showMessage(result.toString());
-		
-		//-----------
-		viewProjectsMenu();
-	}
-
-	private void viewCategoryMenu() {
+	private void viewCategoriesMenu() {
 		StringBuilder menu = new StringBuilder();
 
 		menu.append(Category.EXIT.getId());
 		menu.append(" - ");
 		menu.append(Category.EXIT.getName());
 
-		printer.showMessage(menu.toString());
+		view(menu.toString());
+	}
 
+	private void viewProjectsHead() {
+		view("--------------------");
+		view("Choice Project:");
+	}
+
+	private void viewProjectsBody(Iterator<Project> iterator) {
+		StringBuilder result = new StringBuilder();
+
+		while (iterator.hasNext()) {
+			result.append(display.getProjectDisplay().getDescription(iterator.next()));
+		}
+
+		view(result.toString());
 	}
 
 	private void viewProjectsMenu() {
@@ -94,8 +109,12 @@ public class View {
 		menu.append(" - ");
 		menu.append(Project.EXIT.getName());
 
-		printer.showMessage(menu.toString());
+		view(menu.toString());
+	}
 
+	private void viewProjectHead() {
+		view("--------------------");
+		view("Project:");
 	}
 
 	private void viewProjectMenu() {
@@ -105,24 +124,6 @@ public class View {
 		menu.append(" - ");
 		menu.append(Project.EXIT.getName());
 
-		printer.showMessage(menu.toString());
-
-	}
-
-	public void viewProject(Project project) {
-		view("--------------------");
-		view("Project:");
-		
-		//-------------
-		
-		printer.showMessage(display.getProjectDetailDisplay().getDescription(project));
-		
-		//--------------
-		
-		viewProjectMenu();
-	}
-
-	public int choiceItem() throws NumberFormatException, IOException {
-		return Integer.parseInt(reader.getLine());
+		view(menu.toString());
 	}
 }

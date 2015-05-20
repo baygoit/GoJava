@@ -26,9 +26,9 @@ public class Kickstarter {
 	private void choiceCategory() {
 		while (true) {
 			try {
-				viewer.viewCategories(model.getCategoryIterator());
+				viewer.viewCategories(model.getCategoriesIterator());
 
-				Category chosenCategory = model.getCategoryById(viewer.choiceItem());
+				Category chosenCategory = model.getCategory(viewer.choiceItem());
 				if (chosenCategory == Category.EXIT) {
 					return;
 				}
@@ -43,9 +43,9 @@ public class Kickstarter {
 	private void choiceProject(Category category) {
 		while (true) {
 			try {
-				viewer.viewProjects(model.getProjectIterator(category));
+				viewer.viewProjects(model.getProjectsIterator(category));
 
-				Project chosenProject = model.getProjectById(viewer.choiceItem());
+				Project chosenProject = model.getProject(viewer.choiceItem(), category);
 				if (chosenProject == Project.EXIT) {
 					return;
 				}
@@ -62,7 +62,7 @@ public class Kickstarter {
 			try {
 				viewer.viewProject(project);
 
-				Project chosenItem = model.getProjectById(viewer.choiceItem());
+				Project chosenItem = model.getProjectItem(viewer.choiceItem());
 				if (chosenItem == Project.EXIT) {
 					return;
 				}
