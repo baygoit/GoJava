@@ -13,7 +13,7 @@ public class QuoteService {
 	private QuoteRepository quoteRepository;
 	
 	public Quote getRandomQuote() {
-		Quote quote = quoteRepository.getRandomQuote().get(1);
-        return quote;
+//		Quote quote = quoteRepository.getRandomQuote().get(1);
+        return quoteRepository.getRandomQuote();
 	}
 }
