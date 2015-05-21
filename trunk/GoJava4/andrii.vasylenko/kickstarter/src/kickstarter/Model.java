@@ -48,7 +48,7 @@ public class Model {
 			return Category.EXIT;
 		}
 
-		return categories.getById(id);
+		return categories.get(id);
 	}
 
 	public void addProject(Project project, Category category) {
@@ -65,7 +65,7 @@ public class Model {
 			return Project.EXIT;
 		}
 
-		return projectsInCategory.getProjects(category).getById(id);
+		return projectsInCategory.getProjects(category).get(id);
 	}
 
 	public Project getProjectItem(int id) {

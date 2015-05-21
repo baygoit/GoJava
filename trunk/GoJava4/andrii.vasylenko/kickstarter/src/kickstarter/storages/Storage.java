@@ -7,7 +7,7 @@ import kickstarter.engine.Data;
 public interface Storage<T extends Data> {
 	void add(T object);
 
-	T getById(int id);
+	T get(int id);
 
 	Iterator<T> getIterator();
 

@@ -35,9 +35,9 @@ public class ProjectsStorageTest {
 		assertEquals(project2, storage.get(1));
 		assertEquals(project3, storage.get(2));*/
 
-		assertEquals(project1, storage.getById(project1.getId()));
-		assertEquals(project2, storage.getById(project2.getId()));
-		assertEquals(project3, storage.getById(project3.getId()));
+		assertEquals(project1, storage.get(project1.getId()));
+		assertEquals(project2, storage.get(project2.getId()));
+		assertEquals(project3, storage.get(project3.getId()));
 	}
 
 /*	@Test

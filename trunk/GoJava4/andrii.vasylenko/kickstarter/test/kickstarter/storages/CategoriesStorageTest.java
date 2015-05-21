@@ -33,9 +33,9 @@ public class CategoriesStorageTest {
 		assertEquals(category2, storage.get(1));
 		assertEquals(category3, storage.get(2));*/
 		
-		assertEquals(category1, storage.getById(category1.getId()));
-		assertEquals(category2, storage.getById(category2.getId()));
-		assertEquals(category3, storage.getById(category3.getId()));
+		assertEquals(category1, storage.get(category1.getId()));
+		assertEquals(category2, storage.get(category2.getId()));
+		assertEquals(category3, storage.get(category3.getId()));
 	}	
 
 }
