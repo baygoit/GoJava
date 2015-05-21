@@ -29,9 +29,9 @@ public class CategoriesStorageTest {
 		assertEquals(3, storage.size());
 		assertFalse(storage.isEmpty());
 		
-		assertEquals(category1, storage.get(0));
+/*		assertEquals(category1, storage.get(0));
 		assertEquals(category2, storage.get(1));
-		assertEquals(category3, storage.get(2));
+		assertEquals(category3, storage.get(2));*/
 		
 		assertEquals(category1, storage.getById(category1.getId()));
 		assertEquals(category2, storage.getById(category2.getId()));

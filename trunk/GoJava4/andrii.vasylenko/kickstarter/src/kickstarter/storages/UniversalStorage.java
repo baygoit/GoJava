@@ -9,15 +9,12 @@ public abstract class UniversalStorage<T extends Data> implements Storage<T> {
 	private LinkedList<T> objects = new LinkedList<T>();
 
 	@Override
-	public T get(int index) throws IndexOutOfBoundsException {
-		return objects.get(index);
-	}
-
-	@Override
 	public T getById(int id) throws IndexOutOfBoundsException {
-		for (int i = 0; i < size(); i++) {
-			if (get(i).getId() == id) {
-				return get(i);
+		Iterator<T> iterator = getIterator();
+		while (iterator.hasNext()) {
+			T object = iterator.next();
+			if (object.getId() == id) {
+				return object;
 			}
 		}
 		throw new IndexOutOfBoundsException();
