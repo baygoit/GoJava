@@ -31,8 +31,8 @@ public class Model {
 		if (quotes.isEmpty()) {
 			return null;
 		}
-		int randomIndex = new Random().nextInt(quotes.size());
-		return quotes.get(randomIndex);
+
+		return calculateRandomQuote();
 	}
 
 	public void addCategory(Category category) {
@@ -75,4 +75,14 @@ public class Model {
 
 		throw new IndexOutOfBoundsException();
 	}
+
+	private Quote calculateRandomQuote() {
+		int index = new Random().nextInt(quotes.size());
+		Iterator<Quote> iterator = quotes.getIterator();
+		while (index-- > 0) {
+			iterator.next();
+		}
+		return iterator.next();
+	}
+
 }
