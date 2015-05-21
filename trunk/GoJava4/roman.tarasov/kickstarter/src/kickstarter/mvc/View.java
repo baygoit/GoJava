@@ -17,21 +17,19 @@ public class View implements iView {
 	public View(iModel imodel, iUserInterface ui) {
 		this.imodel = imodel;
 		this.ui = ui;
-		pagesView=new ArrayList<PageView>();
+		pagesView = new ArrayList<PageView>();
 	}
+
 	@Override
 	public void addPageView(PageView page) {
 		pagesView.add(page);
-		
 	}
+
 	@Override
 	public void print() {
-		
 		pageIndex = imodel.getPageIndex();
 		page = pagesView.get(pageIndex);
 		String header = page.getHeader();
 		ui.display(header);
 	}
-
-
 }

@@ -13,7 +13,7 @@ public class DonateM extends PageModel {
 		this.projects = projects;
 		this.imodel = imodel;
 	}
-
+	@Override
 	public void execute(String message) {
 		if (message.equals("p")) {
 			imodel.next(DETAILED_PROJECT);

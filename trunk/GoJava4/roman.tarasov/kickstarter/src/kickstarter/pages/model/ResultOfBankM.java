@@ -6,7 +6,7 @@ public class ResultOfBankM extends PageModel {
 	public ResultOfBankM(iModel imodel) {
 		super(imodel);
 	}
-
+	@Override
 	public void execute(String message) {
 
 		if (message.equals("p")) {

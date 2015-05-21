@@ -12,7 +12,7 @@ public class ApplyM extends PageModel {
 		this.bank=bank;
 		this.projects=projects;
 	}
-
+	@Override
 	public void execute(String message) {
 		if (message.equals("p")) {
 			imodel.next(DETAILED_PROJECT);

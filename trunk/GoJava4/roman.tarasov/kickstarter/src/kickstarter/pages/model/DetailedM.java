@@ -7,7 +7,7 @@ public class DetailedM extends PageModel {
 	public DetailedM(iModel imodel) {
 		super(imodel);
 	}
-
+	@Override
 	public void execute(String message) {
 
 		if (message.equals("p")) {

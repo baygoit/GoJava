@@ -2,21 +2,22 @@ package kickstarter.mvc;
 
 import kickstarter.mvc.interfaces.iController;
 import kickstarter.mvc.interfaces.iModel;
+import kickstarter.mvc.interfaces.iView;
 
 
 
 public class Controller implements iController{
 
-	private View view;
+	private iView iview;
 	private iModel imodel;
 
-	public Controller(View view, Model model) {
-		this.view = view;
-		this.imodel = model;
+	public Controller(iView iview, iModel imodel) {
+		this.iview = iview;
+		this.imodel = imodel;
 	}
 
 	public void printView() {
-		view.print();
+		iview.print();
 	}
 
 	public void update(String command) {

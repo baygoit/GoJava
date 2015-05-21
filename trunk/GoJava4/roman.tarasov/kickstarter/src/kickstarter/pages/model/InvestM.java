@@ -12,6 +12,7 @@ public class InvestM extends PageModel {
 	this.imodel = imodel;
 	}
 
+	@Override
 	public void execute(String message) {
 
 		if (message.equals("p")) {
