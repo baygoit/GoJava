@@ -5,8 +5,8 @@ public class Сategory {
     private String name;
     private int id;
     
-    public Сategory(String name) {
-       this.name = name;
+    public Сategory(int id) {
+       this.id = id;
     }
     
     public Сategory (int id,String name) {

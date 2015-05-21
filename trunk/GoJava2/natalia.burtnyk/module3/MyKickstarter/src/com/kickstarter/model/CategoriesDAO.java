@@ -65,7 +65,7 @@ public class CategoriesDAO implements Categories {
 			ResultSet resultSet = statement.executeQuery("SELECT * FROM categories");
 			result = new ArrayList<Сategory>();
 			while (resultSet.next()) {
-				Сategory category = new Сategory (resultSet.getString("name"));
+				Сategory category = new Сategory(resultSet.getInt("id"), resultSet.getString("name"));
 				result.add(category);
 			}
 		} catch (Exception e) {
