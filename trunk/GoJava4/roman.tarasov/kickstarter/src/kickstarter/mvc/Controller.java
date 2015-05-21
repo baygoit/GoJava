@@ -2,8 +2,7 @@ package kickstarter.mvc;
 
 import kickstarter.mvc.interfaces.iController;
 import kickstarter.mvc.interfaces.iModel;
-import kickstarter.pages.model.PageModel;
-import kickstarter.pages.view.PageView;
+
 
 
 public class Controller implements iController{
@@ -28,8 +27,5 @@ public class Controller implements iController{
 		imodel.setPage(pageIndex);
 	}
 
-	public void add(PageView pageView, PageModel pagesModel) {
-		imodel.add(pageView, pagesModel);
 
-	}
 }

@@ -9,6 +9,7 @@ import kickstarter.repository.CommentsRepository;
 import kickstarter.repository.ProjectRepository;
 
 public class PageModel {
+	
 	final int CATEGORIES = 0;
 	final int PROJECTS = 1;
 	final int DETAILED_PROJECT = 2;
@@ -19,12 +20,11 @@ public class PageModel {
 	final int DONATE_PAGE = 7;
 	final int BANK_OPERATION_RESULT_PAGE = 8;
 	final int APPLY_TRANSACTION_PAGE = 9;
+	
 	public String[] strOptions;
 	public int[] intOptions;
 	public int intOption;
 	public String strOption;
-	//public int selectedCategory;
-	//public int selectedProject;
 	public int pageId;
 	public String name;
 	int nextPage;
@@ -35,8 +35,6 @@ public class PageModel {
 	ProjectComments projectComments;
 	iModel imodel;
 	PageView page;
-
-
 
 	public PageView getPage() {
 		return null;

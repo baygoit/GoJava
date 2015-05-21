@@ -8,6 +8,10 @@ import kickstarter.repository.QuotesRepository;
 
 public class Categories extends PageView {
 
+	private iModel imodel;
+	private QuotesRepository quotesRepository;
+	private CategoriesRepository categories;
+
 	public Categories(CategoriesRepository categories,
 			QuotesRepository quotesRepository, iModel imodel) {
 		this.categories = categories;

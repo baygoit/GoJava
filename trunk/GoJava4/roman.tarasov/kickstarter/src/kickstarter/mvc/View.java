@@ -2,23 +2,20 @@ package kickstarter.mvc;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import kickstarter.mvc.interfaces.iController;
 import kickstarter.mvc.interfaces.iModel;
 import kickstarter.mvc.interfaces.iView;
 import kickstarter.pages.view.PageView;
 import kickstarter.ui.iUserInterface;
 
 public class View implements iView {
-	iModel imodel;
-	PageView page;
-	iController icontroller;
-	final int OK = 0;
+	private iModel imodel;
+	private PageView page;
 	private iUserInterface ui;
-	List<PageView> pagesView;
+	private List<PageView> pagesView;
+	private int pageIndex;
 
-	public View(iModel dispatcher, iUserInterface ui) {
-		this.imodel = dispatcher;
+	public View(iModel imodel, iUserInterface ui) {
+		this.imodel = imodel;
 		this.ui = ui;
 		pagesView=new ArrayList<PageView>();
 	}
@@ -29,7 +26,9 @@ public class View implements iView {
 	}
 	@Override
 	public void print() {
-		page = imodel.getPage();
+		
+		pageIndex = imodel.getPageIndex();
+		page = pagesView.get(pageIndex);
 		String header = page.getHeader();
 		ui.display(header);
 	}

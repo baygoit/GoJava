@@ -16,7 +16,7 @@ public class DetailedProject extends PageView {
 		this.imodel = imodel;
 	}
 
-	public ProjectComments selectCommentsToProject(int projectID) {
+	private ProjectComments selectCommentsToProject(int projectID) {
 		ProjectComments comments = allComments
 				.getCommentsByProjectID(projectID);
 		return comments;
@@ -50,7 +50,7 @@ public class DetailedProject extends PageView {
 				if (comments.usersID[index] != 0) {
 					header += "user ID:<" + comments.usersID[index]
 							+ ">  comment ID:<" + index + "> <"
-							+ comments.comment[index] + ">\n";
+							+ comments.getComment()[index] + ">\n";
 				}
 			}
 		}

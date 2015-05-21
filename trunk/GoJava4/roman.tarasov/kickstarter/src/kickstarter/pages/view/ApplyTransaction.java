@@ -1,17 +1,7 @@
 package kickstarter.pages.view;
 
 
-import kickstarter.mvc.interfaces.iModel;
-import kickstarter.payment.Bank;
-import kickstarter.repository.ProjectRepository;
-
 public class ApplyTransaction extends PageView {
-
-	public ApplyTransaction(Bank bank, ProjectRepository projects, iModel imodel) {
-		this.bank = bank;
-		this.projects = projects;
-		this.imodel=imodel;
-	}
 
 	public String getHeader() {
 		String header = "";

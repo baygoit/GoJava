@@ -1,13 +1,11 @@
 package kickstarter.pages.view;
 
-import kickstarter.entities.Project;
 import kickstarter.mvc.interfaces.iModel;
 import kickstarter.mvc.options.ModelOptions;
 import kickstarter.repository.ProjectRepository;
 
 public class Invest extends PageView {
-	Project project;
-	iModel imodel;
+
 	public Invest(ProjectRepository projects, iModel imodel) {
 		this.projects = projects;
 		this.imodel=imodel;

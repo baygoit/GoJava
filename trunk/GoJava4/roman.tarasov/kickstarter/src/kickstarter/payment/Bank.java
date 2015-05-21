@@ -3,8 +3,8 @@ package kickstarter.payment;
 import java.util.HashMap;
 
 public class Bank {
-	HashMap<String, Integer> bankAccount; // login , cardnumber
-	HashMap<Integer, Double> cardAccount; // cardnumber, money
+	private HashMap<String, Integer> bankAccount; // login , cardnumber
+	private HashMap<Integer, Double> cardAccount; // cardnumber, money
 
 	public Bank() {
 		bankAccount = new HashMap<String, Integer>();

@@ -2,7 +2,7 @@ package kickstarter.entities;
 
 public class ProjectComments {
 	public int[] usersID;
-	public String[] comment;
+	private String[] comment;
 	private int commentIndex = 0;
 	final int INIT_SIZE = 10;
 	final int ADD_TO_SIZE = 10;
@@ -11,22 +11,22 @@ public class ProjectComments {
 	public ProjectComments(int projectID) {
 		this.projectID = projectID;
 		usersID = new int[INIT_SIZE];
-		comment = new String[INIT_SIZE];
+		setComment(new String[INIT_SIZE]);
 	}
 
 	public void addComment(int userID, String newComment) {
-		int len = comment.length;
+		int len = getComment().length;
 		if (commentIndex >= len) {
-			String[] newComments = new String[comment.length + ADD_TO_SIZE];
-			System.arraycopy(comment, 0, newComments, 0, comment.length);
-			comment = newComments;
+			String[] newComments = new String[getComment().length + ADD_TO_SIZE];
+			System.arraycopy(getComment(), 0, newComments, 0, getComment().length);
+			setComment(newComments);
 
 			int[] newUsersID = new int[len + ADD_TO_SIZE];
 			System.arraycopy(usersID, 0, newUsersID, 0, getCommentLength());
 
 			usersID = newUsersID;
 		}
-		comment[commentIndex] = newComment;
+		getComment()[commentIndex] = newComment;
 		usersID[commentIndex] = userID;
 		commentIndex++;
 	}
@@ -45,5 +45,13 @@ public class ProjectComments {
 			throw new NullPointerException(null);
 		}
 		usersID[intCommentID] = 0;// 0 - deleted comment
+	}
+
+	public String[] getComment() {
+		return comment;
+	}
+
+	public void setComment(String[] comment) {
+		this.comment = comment;
 	}
 }

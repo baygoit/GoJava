@@ -1,17 +1,14 @@
 package kickstarter.pages.view;
 
-import kickstarter.entities.Project;
-import kickstarter.entities.ProjectComments;
 import kickstarter.mvc.interfaces.iModel;
 import kickstarter.mvc.options.ModelOptions;
 import kickstarter.repository.CommentsRepository;
 import kickstarter.repository.ProjectRepository;
 
 public class Comment extends PageView {
-	ProjectComments projectComments;
-	Project project;
-	iModel model;
-	public Comment(CommentsRepository allComments, ProjectRepository projects, iModel imodel) {
+
+	
+	public Comment(CommentsRepository allComments, ProjectRepository projects,iModel imodel) {
 
 		this.allComments = allComments;
 		this.projects = projects;
@@ -46,7 +43,7 @@ public class Comment extends PageView {
 				if (projectComments.usersID[index] != 0) {
 					header += "user ID:<" + projectComments.usersID[index]
 							+ ">  comment ID:<" + index + "> <"
-							+ projectComments.comment[index] + ">\n";
+							+ projectComments.getComment()[index] + ">\n";
 				}
 			}
 		}
