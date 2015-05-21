@@ -1,12 +1,13 @@
 package kickstarter.pages.view;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import kickstarter.entities.Project;
 import kickstarter.mvc.interfaces.iModel;
 import kickstarter.mvc.options.ModelOptions;
 import kickstarter.mvc.options.ViewOptions;
-import kickstarter.repository.EntityStorage;
 import kickstarter.repository.ProjectRepository;
-import kickstarter.repository.iStorage;
 
 public class Projects extends PageView {
 
@@ -15,9 +16,9 @@ public class Projects extends PageView {
 		this.imodel = imodel;
 	}
 
-	public iStorage<Project> sortProjectsByCategoryID(int categoryID) {
+	public List<Project> sortProjectsByCategoryID(int categoryID) {
 
-		iStorage<Project> sortedProjects = new EntityStorage<Project>();
+		List<Project> sortedProjects = new ArrayList<Project>();
 		int length = projects.getProjectsLength();
 		for (int index = 0; index < length; index++) {
 			Project project = projects.getProject(index);
@@ -30,12 +31,12 @@ public class Projects extends PageView {
 
 	public String printProjectsInfo(int categoryID) {
 		String result = "";
-		iStorage<Project> sortedToSelect = sortProjectsByCategoryID(categoryID);
-		int length = sortedToSelect.length();
+		List<Project> sortedToSelect = sortProjectsByCategoryID(categoryID);
+		int length = sortedToSelect.size();
 		strOptions = new String[length];
 		intOptions = new int[length];
 		for (int index = 0; index < length; index++) {
-			Project project = sortedToSelect.getEntity(index);
+			Project project = sortedToSelect.get(index);
 
 			strOptions[index] = Integer.toString(project.ID);
 			intOptions[index] = project.ID;

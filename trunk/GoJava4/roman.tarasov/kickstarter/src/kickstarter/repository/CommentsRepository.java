@@ -1,12 +1,15 @@
 package kickstarter.repository;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import kickstarter.entities.ProjectComments;
 
 public class CommentsRepository {
-	iStorage<ProjectComments> allComments;
+	List<ProjectComments> allComments;
 
 	public CommentsRepository() {
-		allComments = new EntityStorage<ProjectComments>();
+		allComments = new ArrayList<ProjectComments>();
 		ProjectComments comment = new ProjectComments(8);
 		comment.addComment(1, "What color will paint?");
 		comment.addComment(2, "Paint is Green");
@@ -20,9 +23,9 @@ public class CommentsRepository {
 
 	public ProjectComments getCommentsByProjectID(int projectID) {
 
-		for (int index = 0; index < allComments.length(); index++) {
-			if (allComments.getEntity(index).projectID == projectID) {
-				return allComments.getEntity(index);
+		for (int index = 0; index < allComments.size(); index++) {
+			if (allComments.get(index).projectID == projectID) {
+				return allComments.get(index);
 			}
 		}
 		return null;

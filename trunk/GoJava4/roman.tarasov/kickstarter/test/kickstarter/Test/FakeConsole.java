@@ -1,11 +1,14 @@
 package kickstarter.Test;
 
 import static org.junit.Assert.*;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import kickstarter.Kickstarter;
 import kickstarter.entities.Category;
-import kickstarter.entities.Quote;
-import kickstarter.repository.EntityStorage;
-import kickstarter.repository.iStorage;
+
+
 import kickstarter.ui.iUserInterface;
 
 import org.junit.Ignore;
@@ -101,7 +104,7 @@ public class FakeConsole {
 	}
 	@Test
 	public void verify_names_of_added_categories() {
-		iStorage<Category> categories = new EntityStorage<Category>();
+		List<Category> categories = new ArrayList<Category>();
 		// when
 		categories.add(new Category("name1"));
 		categories.add(new Category("name2"));
@@ -117,41 +120,30 @@ public class FakeConsole {
 		categories.add(new Category("name12"));
 
 		// then
-		assertEquals("name1", categories.getEntity(0).name);
-		assertEquals("name2", categories.getEntity(1).name);
-		assertEquals("name3", categories.getEntity(2).name);
-		assertEquals("name4", categories.getEntity(3).name);
-		assertEquals("name5", categories.getEntity(4).name);
-		assertEquals("name6", categories.getEntity(5).name);
-		assertEquals("name7", categories.getEntity(6).name);
-		assertEquals("name8", categories.getEntity(7).name);
-		assertEquals("name9", categories.getEntity(8).name);
-		assertEquals("name10", categories.getEntity(9).name);
-		assertEquals("name11", categories.getEntity(10).name);
-		assertEquals("name12", categories.getEntity(11).name);
+		assertEquals("name1", categories.get(0).name);
+		assertEquals("name2", categories.get(1).name);
+		assertEquals("name3", categories.get(2).name);
+		assertEquals("name4", categories.get(3).name);
+		assertEquals("name5", categories.get(4).name);
+		assertEquals("name6", categories.get(5).name);
+		assertEquals("name7", categories.get(6).name);
+		assertEquals("name8", categories.get(7).name);
+		assertEquals("name9", categories.get(8).name);
+		assertEquals("name10", categories.get(9).name);
+		assertEquals("name11", categories.get(10).name);
+		assertEquals("name12", categories.get(11).name);
 	}
 
 	@Test
 	public void verify_null_values() {
-		iStorage<Category> categories = new EntityStorage<Category>();
+		List<Category> categories = new ArrayList<Category>();
 
-		assertNull(categories.getEntity(0));
-		assertNull(categories.getEntity(1));
-		assertEquals(categories.length(), 0);
+		assertNull(categories.get(0));
+		assertNull(categories.get(1));
+		assertEquals(categories.size(), 0);
 	}
 
-	@Test
-	public void get_random_object_from_objects() {
-		iStorage<Quote> quotes = new EntityStorage<Quote>();
-		quotes.add(new Quote());
-		assertNotNull(quotes.getRandom());
-	}
 
-	@Test
-	public void should_null_result_for_random_object_from_null_storage() {
-		iStorage<Quote> quotes = new EntityStorage<Quote>();
-		assertNull(quotes.getRandom());
-	}
 	void put(String command) {
 		System.out.println("_________   "+command+"  _________");
 		kickstarter.controller.update(command);

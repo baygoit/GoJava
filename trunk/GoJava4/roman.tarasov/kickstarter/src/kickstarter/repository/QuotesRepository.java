@@ -1,13 +1,17 @@
 package kickstarter.repository;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 import kickstarter.entities.Quote;
 
 
 public class QuotesRepository {
-	iStorage<Quote> quotes;
+	List<Quote> quotes;
 
 	public QuotesRepository() {
-		quotes = new EntityStorage<Quote>();
+		quotes = new ArrayList<Quote>();
 		Quote quote = new Quote();
 		quote.setQuote("Explore projects, everywhere");
 		quotes.add(quote);
@@ -18,6 +22,7 @@ public class QuotesRepository {
 
 	}
 	public Quote getRandomQuote(){
-		return quotes.getRandom();
+		return quotes.get(new Random().nextInt(quotes.size()));
 	}
+
 }
