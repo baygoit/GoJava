@@ -6,12 +6,16 @@
 		<title>Kickstarter</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	</head>
-	<body>
-		<c:out value="${quote}"/>
+		<body>
+			<c:out value="${quote}"/>
+		<br/> 
+			*** *** *** *** *** ***
+		<br/> 
+			<c:forEach items="${categories}" var="category">
+			<a href="/MyKickstarter/projects?category=${category.id}">
+			<c:out value="${category.id}. ${category.name}"/>
+			</a>
 			<br/>
-		<c:forEach items="${categories}" var="category">
-			<a href="/sample/projects?category=${category.id}"><c:out value="${category.id}, ${category.name}"/></a>
-			<br/>
-		</c:forEach>
-	</body>
-</html>
+			</c:forEach>
+		</body>
+	</html>
