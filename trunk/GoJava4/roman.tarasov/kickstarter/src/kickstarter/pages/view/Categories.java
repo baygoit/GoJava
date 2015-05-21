@@ -1,8 +1,8 @@
-package kickstarter.pages;
+package kickstarter.pages.view;
 
 import kickstarter.entities.Quote;
-import kickstarter.mvc.iModel;
-import kickstarter.pages.model.ViewOptions;
+import kickstarter.mvc.interfaces.iModel;
+import kickstarter.mvc.options.ViewOptions;
 import kickstarter.repository.CategoriesRepository;
 import kickstarter.repository.QuotesRepository;
 

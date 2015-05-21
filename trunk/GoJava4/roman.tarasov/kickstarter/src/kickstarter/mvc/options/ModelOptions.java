@@ -1,4 +1,4 @@
-package kickstarter.pages.model;
+package kickstarter.mvc.options;
 
 public class ModelOptions {
 	public int[] intOptions;

@@ -1,9 +1,11 @@
 package kickstarter.pages.model;
 
-import kickstarter.mvc.iModel;
+import kickstarter.mvc.interfaces.iModel;
+import kickstarter.mvc.options.ModelOptions;
+import kickstarter.mvc.options.ViewOptions;
 
-public class MProjects extends PageModel {
-	public MProjects(iModel imodel) {
+public class ProjectsM extends PageModel {
+	public ProjectsM(iModel imodel) {
 		super(imodel);
 	}
 

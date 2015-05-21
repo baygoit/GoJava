@@ -1,9 +1,10 @@
 package kickstarter.pages.model;
 
-import kickstarter.mvc.iModel;
+import kickstarter.mvc.interfaces.iModel;
+import kickstarter.mvc.options.ModelOptions;
 
-public class MDetailed extends PageModel {
-	public MDetailed(iModel imodel) {
+public class DetailedM extends PageModel {
+	public DetailedM(iModel imodel) {
 		super(imodel);
 	}
 
@@ -11,7 +12,6 @@ public class MDetailed extends PageModel {
 
 		if (message.equals("p")) {
 			ModelOptions o = imodel.getModelOptions();
-			//o.intOption = imodel.getSavedCategory();
 			imodel.nextWithOptions(PROJECTS, o);
 			return;
 		}

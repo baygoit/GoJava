@@ -1,10 +1,11 @@
 package kickstarter.pages.model;
 
-import kickstarter.mvc.iModel;
+import kickstarter.mvc.interfaces.iModel;
+import kickstarter.mvc.options.ModelOptions;
 import kickstarter.repository.ProjectRepository;
 
-public class MInvest extends PageModel {
-	public MInvest(ProjectRepository projects,iModel imodel) {
+public class InvestM extends PageModel {
+	public InvestM(ProjectRepository projects,iModel imodel) {
 		super(imodel);
 	
 	this.projects = projects;

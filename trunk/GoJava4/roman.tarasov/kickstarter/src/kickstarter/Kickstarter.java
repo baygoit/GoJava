@@ -3,29 +3,29 @@ package kickstarter;
 import kickstarter.mvc.Controller;
 import kickstarter.mvc.Model;
 import kickstarter.mvc.View;
-import kickstarter.mvc.iModel;
-import kickstarter.pages.ApplyTransaction;
-import kickstarter.pages.Categories;
-import kickstarter.pages.Comment;
-import kickstarter.pages.DetailedProject;
-import kickstarter.pages.Donate;
-import kickstarter.pages.Invest;
-import kickstarter.pages.PageView;
-import kickstarter.pages.Projects;
-import kickstarter.pages.ResultOfBankOperation;
-import kickstarter.pages.TheEnd;
-import kickstarter.pages.WrongChoice;
-import kickstarter.pages.model.MApply;
-import kickstarter.pages.model.MCategories;
-import kickstarter.pages.model.MComment;
-import kickstarter.pages.model.MDetailed;
-import kickstarter.pages.model.MDonate;
-import kickstarter.pages.model.MInvest;
-import kickstarter.pages.model.MProjects;
-import kickstarter.pages.model.MResultOfBank;
-import kickstarter.pages.model.MTheEnd;
-import kickstarter.pages.model.MWrong;
+import kickstarter.mvc.interfaces.iModel;
+import kickstarter.pages.model.ApplyM;
+import kickstarter.pages.model.CategoriesM;
+import kickstarter.pages.model.CommentM;
+import kickstarter.pages.model.DetailedM;
+import kickstarter.pages.model.DonateM;
+import kickstarter.pages.model.InvestM;
+import kickstarter.pages.model.ProjectsM;
+import kickstarter.pages.model.ResultOfBankM;
+import kickstarter.pages.model.TheEndM;
+import kickstarter.pages.model.WrongM;
 import kickstarter.pages.model.PageModel;
+import kickstarter.pages.view.ApplyTransaction;
+import kickstarter.pages.view.Categories;
+import kickstarter.pages.view.Comment;
+import kickstarter.pages.view.DetailedProject;
+import kickstarter.pages.view.Donate;
+import kickstarter.pages.view.Invest;
+import kickstarter.pages.view.PageView;
+import kickstarter.pages.view.Projects;
+import kickstarter.pages.view.ResultOfBankOperation;
+import kickstarter.pages.view.TheEnd;
+import kickstarter.pages.view.WrongChoice;
 import kickstarter.payment.Bank;
 import kickstarter.repository.CategoriesRepository;
 import kickstarter.repository.CommentsRepository;
@@ -59,48 +59,49 @@ public class Kickstarter {
 
 		view = new View(model, ui);
 		controller = new Controller(view, model);
+		
 		PageView pageView = new Categories(categories, quotes, model);
 		pageView.pageId = 0;
 		controller.setPage(0);
 
-		pageModel = new MCategories(model);
+		pageModel = new CategoriesM(model);
 		controller.add(pageView, pageModel);
 
 		pageView = new Projects(projects, model);
-		pageModel = new MProjects(model);
+		pageModel = new ProjectsM(model);
 		controller.add(pageView, pageModel);
 
 		pageView = new DetailedProject(allComments, projects,model);
-		pageModel = new MDetailed(model);
+		pageModel = new DetailedM(model);
 		controller.add(pageView, pageModel);
 
 		pageView = new WrongChoice();
-		pageModel = new MWrong(model);
+		pageModel = new WrongM(model);
 		controller.add(pageView, pageModel);
 
 		pageView = new TheEnd();
-		pageModel = new MTheEnd(model);
+		pageModel = new TheEndM(model);
 		controller.add(pageView, pageModel);
 
 		pageView = new Comment(allComments, projects,model);
-		pageModel = new MComment(allComments, projects, model);
+		pageModel = new CommentM(allComments, projects, model);
 		controller.add(pageView, pageModel);
 
 		pageView = new Invest(projects,model);
-		pageModel = new MInvest(projects,model);
+		pageModel = new InvestM(projects,model);
 		controller.add(pageView, pageModel);
 
 		Bank bank = new Bank();
 		pageView = new Donate(bank, projects,model);
-		pageModel = new MDonate(bank, projects, model);
+		pageModel = new DonateM(bank, projects, model);
 		controller.add(pageView, pageModel);
 
 		pageView = new ResultOfBankOperation(model);
-		pageModel = new MResultOfBank(model);
+		pageModel = new ResultOfBankM(model);
 		controller.add(pageView, pageModel);
 
 		pageView = new ApplyTransaction(bank, projects,model);
-		pageModel = new MApply(bank, projects,model);
+		pageModel = new ApplyM(bank, projects,model);
 		controller.add(pageView, pageModel);
 	}
 

@@ -1,11 +1,12 @@
 package kickstarter.pages.model;
 
-import kickstarter.mvc.iModel;
+import kickstarter.mvc.interfaces.iModel;
+import kickstarter.mvc.options.ModelOptions;
 import kickstarter.repository.CommentsRepository;
 import kickstarter.repository.ProjectRepository;
 
-public class MComment extends PageModel {
-	public MComment(CommentsRepository allComments, ProjectRepository projects,
+public class CommentM extends PageModel {
+	public CommentM(CommentsRepository allComments, ProjectRepository projects,
 			iModel imodel) {
 		super(imodel);
 		this.allComments = allComments;

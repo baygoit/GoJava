@@ -1,4 +1,4 @@
-package kickstarter.pages;
+package kickstarter.pages.view;
 
 
 public class WrongChoice extends PageView {

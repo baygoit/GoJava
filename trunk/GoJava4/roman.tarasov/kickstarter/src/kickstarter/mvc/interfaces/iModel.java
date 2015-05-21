@@ -1,9 +1,9 @@
-package kickstarter.mvc;
+package kickstarter.mvc.interfaces;
 
-import kickstarter.pages.PageView;
+import kickstarter.mvc.options.ModelOptions;
+import kickstarter.mvc.options.ViewOptions;
 import kickstarter.pages.model.PageModel;
-import kickstarter.pages.model.ModelOptions;
-import kickstarter.pages.model.ViewOptions;
+import kickstarter.pages.view.PageView;
 
 public interface iModel {
 	public void update(String command);
@@ -33,5 +33,7 @@ public interface iModel {
 	void setViewOptions(ViewOptions vo);
 
 	ViewOptions getViewOptions();
+
+	void addPageModel(PageModel pageModel);
 
 }

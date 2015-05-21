@@ -1,9 +1,9 @@
 package kickstarter.pages.model;
 
-import kickstarter.mvc.iModel;
+import kickstarter.mvc.interfaces.iModel;
 
-public class MWrong extends PageModel {
-	public MWrong(iModel imodel) {
+public class WrongM extends PageModel {
+	public WrongM(iModel imodel) {
 		super(imodel);
 	}
 

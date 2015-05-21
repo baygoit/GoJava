@@ -1,9 +1,9 @@
-package kickstarter.pages;
+package kickstarter.pages.view;
 
 import kickstarter.entities.Project;
-import kickstarter.mvc.iModel;
-import kickstarter.pages.model.ModelOptions;
-import kickstarter.pages.model.ViewOptions;
+import kickstarter.mvc.interfaces.iModel;
+import kickstarter.mvc.options.ModelOptions;
+import kickstarter.mvc.options.ViewOptions;
 import kickstarter.repository.EntityStorage;
 import kickstarter.repository.ProjectRepository;
 import kickstarter.repository.iStorage;

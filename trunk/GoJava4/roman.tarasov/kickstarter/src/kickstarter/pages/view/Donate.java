@@ -1,7 +1,7 @@
-package kickstarter.pages;
+package kickstarter.pages.view;
 
 
-import kickstarter.mvc.iModel;
+import kickstarter.mvc.interfaces.iModel;
 import kickstarter.payment.Bank;
 import kickstarter.repository.ProjectRepository;
 

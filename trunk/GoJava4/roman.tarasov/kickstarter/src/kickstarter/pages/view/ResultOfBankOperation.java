@@ -1,8 +1,8 @@
-package kickstarter.pages;
+package kickstarter.pages.view;
 
 
-import kickstarter.mvc.iModel;
-import kickstarter.pages.model.ModelOptions;
+import kickstarter.mvc.interfaces.iModel;
+import kickstarter.mvc.options.ModelOptions;
 
 public class ResultOfBankOperation extends PageView {
 

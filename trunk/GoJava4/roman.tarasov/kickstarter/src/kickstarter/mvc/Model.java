@@ -1,9 +1,13 @@
 package kickstarter.mvc;
 
-import kickstarter.pages.PageView;
+import java.util.ArrayList;
+import java.util.List;
+
+import kickstarter.mvc.interfaces.iModel;
+import kickstarter.mvc.options.ModelOptions;
+import kickstarter.mvc.options.ViewOptions;
 import kickstarter.pages.model.PageModel;
-import kickstarter.pages.model.ModelOptions;
-import kickstarter.pages.model.ViewOptions;
+import kickstarter.pages.view.PageView;
 import kickstarter.repository.EntityStorage;
 import kickstarter.repository.iStorage;
 
@@ -33,7 +37,7 @@ public class Model implements iModel {
 	private ViewOptions viewOptions;
 	private iStorage<PageView> pages;
 	private iStorage<PageModel> modelPages;
-
+	List<PageModel> pagesModel;
 	PageModel pageModel;
 	private int savePage;
 
@@ -42,8 +46,12 @@ public class Model implements iModel {
 		viewOptions = new ViewOptions();
 		pages = new EntityStorage<PageView>();
 		modelPages = new EntityStorage<PageModel>();
+		pagesModel=new ArrayList<PageModel>();
 	}
-
+	@Override
+	public void addPageModel(PageModel pageModel){
+		pagesModel.add(pageModel);
+	}
 	public void update(String command) {
 		pageModel = modelPages.getEntity(pageIndex);
 		pageModel.execute(command);

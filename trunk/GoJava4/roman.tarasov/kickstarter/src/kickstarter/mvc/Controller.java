@@ -1,9 +1,12 @@
 package kickstarter.mvc;
 
-import kickstarter.pages.PageView;
+import kickstarter.mvc.interfaces.iController;
+import kickstarter.mvc.interfaces.iModel;
 import kickstarter.pages.model.PageModel;
+import kickstarter.pages.view.PageView;
 
-public class Controller {
+
+public class Controller implements iController{
 
 	private View view;
 	private iModel imodel;

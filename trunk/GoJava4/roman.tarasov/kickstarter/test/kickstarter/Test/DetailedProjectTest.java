@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 import kickstarter.entities.Category;
 import kickstarter.entities.ProjectComments;
 import kickstarter.entities.Project;
-import kickstarter.pages.DetailedProject;
+import kickstarter.pages.view.DetailedProject;
 import kickstarter.repository.EntityStorage;
 import kickstarter.repository.iStorage;
 import kickstarter.ui.iUserInterface;

@@ -48,7 +48,7 @@
   </class>  
   <association id="6">    
     <end type="SOURCE" refId="4" navigable="false">      
-      <attribute id="7" name="dispatcher"/>      
+      <attribute id="7" name="imodel"/>      
       <multiplicity id="8" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="1" navigable="true"/>    

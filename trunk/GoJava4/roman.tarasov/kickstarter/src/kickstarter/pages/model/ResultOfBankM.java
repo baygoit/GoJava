@@ -1,9 +1,9 @@
 package kickstarter.pages.model;
 
-import kickstarter.mvc.iModel;
+import kickstarter.mvc.interfaces.iModel;
 
-public class MResultOfBank extends PageModel {
-	public MResultOfBank(iModel imodel) {
+public class ResultOfBankM extends PageModel {
+	public ResultOfBankM(iModel imodel) {
 		super(imodel);
 	}
 
