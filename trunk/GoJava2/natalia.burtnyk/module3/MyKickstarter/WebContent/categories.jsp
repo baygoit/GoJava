@@ -8,9 +8,9 @@
 	</head>
 		<body>
 			<c:out value="${quote}"/>
-		<br/> 
+			<br/> 
 			*** *** *** *** *** ***
-		<br/> 
+			<br/> 
 			<c:forEach items="${categories}" var="category">
 			<a href="/MyKickstarter/projects?category=${category.id}">
 			<c:out value="${category.id}. ${category.name}"/>
