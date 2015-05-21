@@ -28,9 +28,9 @@ public class CategoriesController {
 	categoriesPage.showCategories(getCategories());
     }
 
-    public void showCategoryMenu(Category category) {
-	categoriesPage.showCategoryMenu(category,
-		projectsControl.getProjectsByCategory(category),
+    public void showCategoryMenu1(Category category) {
+	categoriesPage.showCategoryMenu2(category,
+		projectsControl.getProjectsFromCategory(category),
 		inputControl.readUserInput());
     }
 }

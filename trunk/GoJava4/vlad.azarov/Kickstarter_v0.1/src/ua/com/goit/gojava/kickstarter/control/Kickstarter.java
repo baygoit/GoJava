@@ -24,10 +24,10 @@ public class Kickstarter {
 	    if (userInput == 0) {
 		isExit = true;
 	    } else if (userInput > 0 && userInput <= categories.size()) {
-		categoriesController.showCategoryMenu(categories
+		categoriesController.showCategoryMenu1(categories
 			.get(userInput - 1));
 	    } else {
-		System.out.println("No such category.");
+		System.out.println("There is no such category.");
 	    }
 	}
     }

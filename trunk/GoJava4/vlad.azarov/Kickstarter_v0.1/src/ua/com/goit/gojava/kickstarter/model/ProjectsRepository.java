@@ -87,7 +87,7 @@ public class ProjectsRepository implements Repository {
 	projects.add(project);
     }
 
-    public ArrayList<Project> getProjectsByCategory(Category category) {
+    public ArrayList<Project> getProjectsFromCategory(Category category) {
 	ArrayList<Project> result = new ArrayList<>();
 	for (Project currentProject : projects) {
 	    if (currentProject.getCategory().getName()

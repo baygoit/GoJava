@@ -19,8 +19,8 @@ public class ProjectsController {
 	projectsPage = new ProjectsPage(printer);
     }
 
-    public ArrayList<Project> getProjectsByCategory(Category category) {
-	return projectsRepository.getProjectsByCategory(category);
+    public ArrayList<Project> getProjectsFromCategory(Category category) {
+	return projectsRepository.getProjectsFromCategory(category);
     }
     
     public void showProjectInfo(Project project) {
@@ -32,6 +32,6 @@ public class ProjectsController {
     }
     
     public void showProjectsOfCategory(Category category) {
-	projectsPage.showProjectsOfCategory(category, getProjectsByCategory(category));
+	projectsPage.showProjectsOfCategory(category, getProjectsFromCategory(category));
     }
 }

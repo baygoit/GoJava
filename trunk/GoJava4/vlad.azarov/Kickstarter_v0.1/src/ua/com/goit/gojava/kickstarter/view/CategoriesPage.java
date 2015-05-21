@@ -23,7 +23,7 @@ public class CategoriesPage {
 	}
     }
 
-    public void showCategoryMenu(Category category,
+    public void showCategoryMenu2(Category category,
 	    ArrayList<Project> projectsOfCurrentCategory, int userInput) {
 	while (true) {
 	    projectsPage.showProjectsOfCategory(category,
