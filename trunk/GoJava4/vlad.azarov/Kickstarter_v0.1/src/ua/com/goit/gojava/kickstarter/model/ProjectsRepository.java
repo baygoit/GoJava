@@ -2,7 +2,7 @@ package ua.com.goit.gojava.kickstarter.model;
 
 import java.util.ArrayList;
 
-public class ProjectsRepository implements Repository{
+public class ProjectsRepository implements Repository {
 
     private ArrayList<Project> projects;
     private CategoriesRepository categoryRepository;
@@ -20,19 +20,15 @@ public class ProjectsRepository implements Repository{
 		"With SNAP you can create endless solutions for your living space. You can "
 			+ "transform any surface into a unique piece of furniture.",
 		"http://www.youtube.com/01",
-		"How do I choose the color combination?", 
-		categoryRepository.getById(1)));
-	add(new Project(
-		"HYDAWAY",
-		"A Pocket-Sized Water Bottle Fit for any Adventure", 
-		20000,
-		181437, 
-		3,
+		"How do I choose the color combination?", categoryRepository
+			.getById(1)));
+	add(new Project("HYDAWAY",
+		"A Pocket-Sized Water Bottle Fit for any Adventure", 20000,
+		181437, 3,
 		"HYDAWAY is a handy alternative to disposable plastic water bottles - it folds"
 			+ "down easily to fit in almost any pocket!",
 		"http://www.youtube.com/0143534",
-		"How much is the bottle weight", 
-		categoryRepository.getById(1)));
+		"How much is the bottle weight", categoryRepository.getById(1)));
 	add(new Project(
 		"Dash 4.0 Wallet",
 		"A Minimal Wallet Redefined",
@@ -54,7 +50,7 @@ public class ProjectsRepository implements Repository{
 			+ "The magnetic usb cable for your keyring.",
 		"http://www.youtube.com/0143534", "Have a question?",
 		categoryRepository.getById(1)));
-	
+
 	add(new Project(
 		"FireFly Hand",
 		"Light up your life",
@@ -90,12 +86,13 @@ public class ProjectsRepository implements Repository{
     public void add(Project project) {
 	projects.add(project);
     }
-    
-    public ArrayList <Project> getProjectsByCategory(Category category){
-	ArrayList <Project> result = new ArrayList<>();
-	for (Project currentProject : projects){
-	    if (currentProject.getCategory().getName().equals(category.getName())){
-		result.add(currentProject);		
+
+    public ArrayList<Project> getProjectsByCategory(Category category) {
+	ArrayList<Project> result = new ArrayList<>();
+	for (Project currentProject : projects) {
+	    if (currentProject.getCategory().getName()
+		    .equals(category.getName())) {
+		result.add(currentProject);
 	    }
 	}
 	return result;

@@ -6,7 +6,7 @@ import ua.com.goit.gojava.kickstarter.model.Category;
 import ua.com.goit.gojava.kickstarter.model.Project;
 
 public class ProjectsPage {
-    
+
     Printer printer;
 
     public ProjectsPage(Printer printer) {
@@ -25,31 +25,28 @@ public class ProjectsPage {
 
     public void showProjectMenu(Project project, int userInput) {
 	while (true) {
-
 	    showProjectInfo(project);
-
 	    printer.println("");
-	    printer.println("Press 0 to return back");
+	    printer.println("Enter \"0\" to return");
 	    printer.println("------------------------------------------------------------------");
-
-	    int keyCode = userInput;
-	    if (keyCode == 0) {
+	    int key = userInput;
+	    if (key == 0) {
 		break;
 	    } else {
-		printer.println("Wrong code!");
+		printer.println("You entered an invalid character!");
 	    }
 	}
     }
-    
-    public void showProjectsOfCategory(Category category, ArrayList<Project> projectsOfCurrentCategory) {
+
+    public void showProjectsOfCategory(Category category,
+	    ArrayList<Project> projectsOfCurrentCategory) {
 	printer.println("Category: " + category.getName());
 	printer.println(" Projects: ");
 	for (int i = 0; i < projectsOfCurrentCategory.size(); i++) {
 	    printer.print("  " + (i + 1) + ": ");
 	    Project currentProject = projectsOfCurrentCategory.get(i);
 	    printer.println(currentProject.getName());
-	    printer.println("  Short Description: "
-		    + currentProject.getBrief());
+	    printer.println("  Short Description: " + currentProject.getBrief());
 	    printer.println("  Pledged: " + currentProject.getPledged());
 	    printer.println("  Days to go: " + currentProject.getDaysToGo());
 	}

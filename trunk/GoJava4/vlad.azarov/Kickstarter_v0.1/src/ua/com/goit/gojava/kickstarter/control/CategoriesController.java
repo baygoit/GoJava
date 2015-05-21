@@ -1,24 +1,23 @@
 package ua.com.goit.gojava.kickstarter.control;
 
 import java.util.ArrayList;
-
 import ua.com.goit.gojava.kickstarter.model.CategoriesRepository;
 import ua.com.goit.gojava.kickstarter.model.Category;
 import ua.com.goit.gojava.kickstarter.view.CategoriesPage;
 import ua.com.goit.gojava.kickstarter.view.Printer;
 
-public class CategoriesControl {
+public class CategoriesController {
 
     private CategoriesRepository categoriesRepository;
     private CategoriesPage categoriesPage;
-    private ProjectsControl projectsControl;
-    private InputControl inputControl;
+    private ProjectsController projectsControl;
+    private InputController inputControl;
 
-    public CategoriesControl(Printer printer) {
+    public CategoriesController(Printer printer) {
 	categoriesRepository = new CategoriesRepository();
 	categoriesPage = new CategoriesPage(printer);
-	projectsControl = new ProjectsControl(printer);
-	inputControl = new InputControl();
+	projectsControl = new ProjectsController(printer);
+	inputControl = new InputController();
     }
 
     public ArrayList<Category> getCategories() {
@@ -29,7 +28,9 @@ public class CategoriesControl {
 	categoriesPage.showCategories(getCategories());
     }
 
-    public void showCategoryMenu(Category category){
-	categoriesPage.showCategoryMenu(category, projectsControl.getProjectsByCategory(category), inputControl.readUserInput());
+    public void showCategoryMenu(Category category) {
+	categoriesPage.showCategoryMenu(category,
+		projectsControl.getProjectsByCategory(category),
+		inputControl.readUserInput());
     }
 }

@@ -6,40 +6,43 @@ import ua.com.goit.gojava.kickstarter.model.Category;
 import ua.com.goit.gojava.kickstarter.model.Project;
 
 public class CategoriesPage {
-    
+
     ProjectsPage projectsPage;
     Printer printer;
-    
-    public CategoriesPage(Printer printer){
+
+    public CategoriesPage(Printer printer) {
 	projectsPage = new ProjectsPage(printer);
 	this.printer = printer;
     }
-    
+
     public void showCategories(ArrayList<Category> categories) {
 	printer.println("Select category: ");
 	for (int index = 0; index < categories.size(); index++) {
-	    printer.println(categories.get(index).getId() + ": " + categories.get(index).getName());
+	    printer.println(categories.get(index).getId() + ": "
+		    + categories.get(index).getName());
 	}
     }
-    
-    public void showCategoryMenu(Category category, ArrayList<Project> projectsOfCurrentCategory, int userInput) {
+
+    public void showCategoryMenu(Category category,
+	    ArrayList<Project> projectsOfCurrentCategory, int userInput) {
 	while (true) {
-	    projectsPage.showProjectsOfCategory(category, projectsOfCurrentCategory);
+	    projectsPage.showProjectsOfCategory(category,
+		    projectsOfCurrentCategory);
 
 	    printer.println("");
-	    printer.println("Press 0 for exit from this category");
+	    printer.println("Enter \"0\" to select another category: ");
 	    printer.println("====================================================================");
 
-	    int keyCode = userInput;
-	    if (keyCode == 0) {
+	    int key = userInput;
+	    if (key == 0) {
 		break;
 	    } else {
-		if (keyCode > 0 && keyCode <= projectsOfCurrentCategory.size()) {
+		if (key > 0 && key <= projectsOfCurrentCategory.size()) {
 		    Project selectedProject = projectsOfCurrentCategory
-			    .get(keyCode);
+			    .get(key - 1);
 		    projectsPage.showProjectMenu(selectedProject, userInput);
 		} else {
-		    printer.println("Project with #" + keyCode
+		    printer.println("Project with #" + userInput
 			    + " does not exist");
 		}
 	    }

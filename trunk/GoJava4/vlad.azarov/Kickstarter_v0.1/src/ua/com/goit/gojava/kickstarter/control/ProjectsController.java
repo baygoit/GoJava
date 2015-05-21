@@ -8,13 +8,13 @@ import ua.com.goit.gojava.kickstarter.model.ProjectsRepository;
 import ua.com.goit.gojava.kickstarter.view.Printer;
 import ua.com.goit.gojava.kickstarter.view.ProjectsPage;
 
-public class ProjectsControl {
+public class ProjectsController {
 
     private ProjectsPage projectsPage;
     private ProjectsRepository projectsRepository;
-    private InputControl inputControl;
+    private InputController inputControl;
 
-    public ProjectsControl(Printer printer) {
+    public ProjectsController(Printer printer) {
 	projectsRepository = new ProjectsRepository();
 	projectsPage = new ProjectsPage(printer);
     }
