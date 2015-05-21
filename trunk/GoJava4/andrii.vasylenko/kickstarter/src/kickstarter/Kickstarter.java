@@ -35,8 +35,8 @@ public class Kickstarter {
 				choiceProject(chosenCategory);
 
 			} catch (Exception ignore) {
+				viewer.viewErrorMessage();
 			}
-			viewer.viewErrorMessage();
 		}
 	}
 
@@ -52,8 +52,8 @@ public class Kickstarter {
 				showProject(chosenProject);
 
 			} catch (Exception ignore) {
+				viewer.viewErrorMessage();
 			}
-			viewer.viewErrorMessage();
 		}
 	}
 
@@ -68,8 +68,8 @@ public class Kickstarter {
 				}
 
 			} catch (Exception ignore) {
+				viewer.viewErrorMessage();
 			}
-			viewer.viewErrorMessage();
 		}
 	}
 
