@@ -4,7 +4,6 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class ConsoleInput implements Input {
-
 	public int read() {
 		@SuppressWarnings("resource")
 		Scanner scanner = new Scanner(System.in);

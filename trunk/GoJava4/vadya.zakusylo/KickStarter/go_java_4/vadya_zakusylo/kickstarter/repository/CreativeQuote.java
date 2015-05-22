@@ -1,17 +1,43 @@
 package go_java_4.vadya_zakusylo.kickstarter.repository;
 
-public class CreativeQuote extends Quote {
-	
-	void initArrayQuotes() {
-		quotes = new String[6];
-		quotes[0] = "Happiness lies in the joy of achievement and the thrill of"
-				+ "creative effort.\n\n\tFranklin D. Roosevelt";
-		quotes[1] = "If you want creative workers, give them enough time to play."
-				+ "\n\n\tJohn Cleese";
-		quotes[2] = "Creativity takes courage.\n\n\tHenri Matisse";
-		quotes[3] = "Creativity is contagious pass it on.\n\n\tEinstein";
-		quotes[4] = "The best way to predict the future is to invent it.\n\n\tAlan Kay";
-		quotes[5] = "You have to speak your dream out loud.\n\n\tKelly Corrigan";
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
+import java.util.Set;
+
+public class CreativeQuote implements Quote {
+	private HashMap<String, String> quotes;
+
+	public CreativeQuote() {
+		quotes = new HashMap<String, String>();
+		initQuotes();
 	}
-	
+
+	public void initQuotes() {
+		quotes.put("Franklin D. Roosevelt", "Happiness lies in the joy of achievement and the"
+				+ "thrill of creative effort.");
+		quotes.put("Henri Matisse", "Creativity takes courage.");
+		quotes.put("Einstein", "Creativity is contagious pass it on.");
+		quotes.put("John Cleese", "If you want creative workers, give them enough time to play.");
+		quotes.put("Alan Kay", "The best way to predict the future is to invent it.");
+		quotes.put("Kelly Corrigan", "You have to speak your dream out loud.");
+	}
+
+	public String printQuote() {
+		Set<Map.Entry<String, String>> keys = quotes.entrySet();
+		int randomIndexKey = new Random().nextInt(keys.size());
+		int currentIndex = 0;
+		String randomKey = null;
+		String randomValue = null;
+		for (Map.Entry<String, String> key : keys) {
+			randomKey = key.getKey();
+			if (randomIndexKey == currentIndex) {
+				break;
+			}
+			currentIndex++;
+		}
+		randomValue = quotes.get(randomKey);
+		return randomValue + "\n\t" + randomKey;
+	}
+
 }

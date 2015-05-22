@@ -1,31 +1,9 @@
 package go_java_4.vadya_zakusylo.kickstarter.repository;
 
-import java.util.Random;
+public interface Quote {
 
-public abstract class Quote {
-	String[] quotes;
+	void initQuotes();
 
-	public String chooseQuote() {
-		initArrayQuotes();
-		int randomIndex = chooseRandomIndex();
-		return printQuote(randomIndex);
-	}
-	
-	abstract void initArrayQuotes();
+	String printQuote();
 
-	private int chooseRandomIndex() {
-		if (quotes.length > 0) {
-			return new Random().nextInt(quotes.length);
-		} else {
-			return -1;
-		}
-	}
-
-	private String printQuote(int randomIndex) {
-		if (randomIndex >= 0) {
-			return quotes[randomIndex];
-		} else {
-			return "";
-		}
-	}
 }

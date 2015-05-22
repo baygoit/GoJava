@@ -1,5 +1,7 @@
 package go_java_4.vadya_zakusylo.kickstarter;
 
+import java.util.Set;
+
 import go_java_4.vadya_zakusylo.kickstarter.input.Input;
 import go_java_4.vadya_zakusylo.kickstarter.output.Output;
 import go_java_4.vadya_zakusylo.kickstarter.repository.Category;
@@ -30,26 +32,29 @@ public class KickStarter {
 	}
 
 	private void printQuote() {
-		output.write(quote.chooseQuote());
+		output.write(quote.printQuote());
 	}
 
 	private void chooseCategory() {
+		Set<Category> categories = content.categories.getCategories();
 		while (true) {
-			Category[] categories = content.arrayCategory.getCategories();
 			output.write("\nChoose the category:");
-			showCategories(categories);
+			int numberCategory = 0;
+			for (Category category : categories) {
+				System.out.println(++numberCategory + ". " + category.getNameCategory());
+			}
 			output.write("\nInput 0 for exit");
 			output.write("\n--------------------------------------------------------------------------------");
 			int index = inputIndex(categories);
 			if (index == 0) {
 				break;
 			}
-			category = categories[index - 1];
+			/*category = categories;
 			output.write("You chose " + category.getNameCategory());
-			chooseProject();
+			chooseProject();*/
 		}
 	}
-
+/*
 	private void chooseProject() {
 		while (true) {
 			Project[] projects = category.getProjects();
@@ -67,12 +72,6 @@ public class KickStarter {
 		}
 	}
 
-	private void showCategories(Category[] categories) {
-		for (int indexCategory = 0; indexCategory < categories.length; indexCategory++) {
-			category = categories[indexCategory];
-			output.write(indexCategory + 1 + ". " + category.getNameCategory());
-		}
-	}
 
 	private void showProjects(Project[] projects) {
 		for (int indexProject = 0; indexProject < projects.length; indexProject++) {
@@ -94,11 +93,11 @@ public class KickStarter {
 				break;
 			}
 		}
-	}
+	}*/
 
-	private int inputIndex(Object[] contents) {
+	int inputIndex(Set<Category> categories) {
 		int index = input.read();
-		while (index < 0 || index > contents.length) {
+		while (index < 0 || index > categories.size()) {
 			output.write("Choose one of the variants!");
 			index = input.read();
 		}
