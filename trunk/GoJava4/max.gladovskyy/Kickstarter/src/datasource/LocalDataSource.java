@@ -51,17 +51,26 @@ public class LocalDataSource implements DataSource {
 
 	@Override
 	public String getCategoryName(int categoryIndex) {
-		for (Category c : data.get(categoryIndex-1).keySet()) {
-			return c.getName();
+		try {
+			for (Category c : data.get(categoryIndex-1).keySet()) {
+				return c.getName();
+			}
+		} catch (IndexOutOfBoundsException e) {
+			System.err.println("no such variant.");
+			System.exit(0);
 		}
 		return null;
 	}
 
 	@Override
 	public Project getProject(int category, int project) {
-		for (Category c : data.get(category-1).keySet()) {
-			Project result = data.get(category - 1).get(c).get(project-1);
-			return result;
+		try {
+			for (Category c : data.get(category-1).keySet()) {
+				Project result = data.get(category - 1).get(c).get(project-1);
+				return result;
+			}
+		} catch (IndexOutOfBoundsException e) {
+			System.err.println("no such variant.");
 		}
 		return null;
 	}
@@ -69,13 +78,14 @@ public class LocalDataSource implements DataSource {
 	@Override
 	public boolean checkIfProjectExist(int i, int userChoise) {
 		// TODO Auto-generated method stub
-		return true;
+		return false;
 	}
 
 	@Override
 	public boolean checkIfCategoryExist(int userChoise) {
 		// TODO Auto-generated method stub
-		return true;
+		return false;
 	}
+
 
 }
