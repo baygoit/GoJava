@@ -1,14 +1,14 @@
 package com.morkva.model.impl;
 
 import com.morkva.entities.Category;
-import com.morkva.model.Repository;
+import com.morkva.model.IRepository;
 
 import java.util.*;
 
 /**
  * Created by vladyslav on 17.05.15.
  */
-public class CategoryRepository implements Repository<Category> {
+public class CategoryRepository implements IRepository<Category> {
 
     List<Category> categories;
 

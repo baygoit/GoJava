@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Created by vladyslav on 07.05.15.
  */
-public interface Repository<T extends Entity> {
+public interface IRepository<T extends Entity> {
 
     T getById(int id);
     T findByName(String name);

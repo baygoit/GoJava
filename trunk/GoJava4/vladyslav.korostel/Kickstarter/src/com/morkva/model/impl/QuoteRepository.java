@@ -1,15 +1,14 @@
 package com.morkva.model.impl;
 
-import com.morkva.entities.Category;
 import com.morkva.entities.Quote;
-import com.morkva.model.Repository;
+import com.morkva.model.IRepository;
 
 import java.util.*;
 
 /**
  * Created by vladyslav on 17.05.15.
  */
-public class QuoteRepository implements Repository<Quote> {
+public class QuoteRepository implements IRepository<Quote> {
 
     List<Quote> quotes;
 
