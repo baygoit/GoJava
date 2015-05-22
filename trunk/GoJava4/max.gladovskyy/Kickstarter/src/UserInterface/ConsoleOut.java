@@ -15,11 +15,8 @@ public class ConsoleOut implements Output {
 	}
 
 	private void clearConsole() {
-		try {
-			Runtime.getRuntime().exec("cls");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+
+			System.out.println("\n\n\n\n\n");
 	}
 
 }

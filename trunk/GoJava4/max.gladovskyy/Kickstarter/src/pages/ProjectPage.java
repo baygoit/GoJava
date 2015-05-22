@@ -19,8 +19,17 @@ public class ProjectPage implements Page {
 
 	@Override
 	public ArrayList<String> getPage() {
-		// TODO Auto-generated method stub
-		return null;
+		page.add("You in project: " + project.getName());
+		page.add("");
+		page.add("Money needed: " + project.getAmountNeeded());
+		page.add("Money Collected: " + project.getAmountCollected());
+		page.add("Days left: " + project.getDaysLeft());
+		page.add("History: " + project.getHistory());
+		page.add("Video URL: " + project.getVideoURL());
+		page.add("QA's: " + project.getQuestionsAndAnswers());
+		page.add("");
+		page.add("0) Exit");
+		return page;
 	}
 
 }

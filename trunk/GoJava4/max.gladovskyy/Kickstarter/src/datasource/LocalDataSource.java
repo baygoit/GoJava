@@ -13,13 +13,13 @@ public class LocalDataSource implements DataSource {
 		for (int i = 0; i < 6; i++) {
 			Category category = new Category(i, "Category " + i);
 			data.add(new HashMap<Category, ArrayList<Project>>());
-			data.get(0).put(category, new ArrayList<Project>());
+			data.get(i).put(category, new ArrayList<Project>());
 			for (int j = 0; j < 6; j++) {
 				Project project = new Project(i * j, "project " + i * j,
 						"short description of project" + i * j, i * j * 10, i
 								* j, i * j / 2, "some histry", "video URL",
 						null);
-				data.get(0).get(category).add(project);
+				data.get(i).get(category).add(project);
 			}
 		}
 	}
@@ -42,8 +42,8 @@ public class LocalDataSource implements DataSource {
 
 	@Override
 	public ArrayList<Project> getProjectsList(int categoryIndex) {
-		for (Category c : data.get(categoryIndex-1).keySet()) {
-			ArrayList<Project> result = data.get(categoryIndex - 1).get(c);
+		for (ArrayList<Project> p : data.get(categoryIndex - 1).values()) {
+			ArrayList<Project> result = p;
 			return result;
 		}
 		return null;
@@ -60,7 +60,7 @@ public class LocalDataSource implements DataSource {
 	@Override
 	public Project getProject(int category, int project) {
 		for (Category c : data.get(category-1).keySet()) {
-			Project result = data.get(category - 1).get(c).get(project);
+			Project result = data.get(category - 1).get(c).get(project-1);
 			return result;
 		}
 		return null;
