@@ -1,12 +1,11 @@
 package org.dens.kikstarter.data;
 
-public class Ñitation {
-	
+public class Ð¡itation {
+
 	private String phrase;
 	private String author;
 	
-	public Ñitation(String phrase, String author) {
-		super();
+	public Ð¡itation(String phrase, String author) {
 		this.phrase = phrase;
 		this.author = author;
 	}
@@ -23,7 +22,4 @@ public class Ñitation {
 	public String toString() {
 		return  phrase + " '" + author + "'";
 	}
-	
-	
-	
 }
