@@ -4,22 +4,22 @@ import com.morkva.logic.Printer;
 import com.morkva.logic.Reader;
 import com.morkva.ui.CommandType;
 import com.morkva.ui.Model;
+import com.morkva.ui.views.IView;
 import com.morkva.ui.views.ProjectView;
 
 /**
  * Created by vladyslav on 22.05.15.
  */
-public class ProjectController {
+public class ProjectController implements IController{
 
     private Model model;
-    private ProjectView view;
+    private IView view;
     private Reader reader;
 
     public ProjectController(Printer printer, Model model, Reader reader) {
         this.reader = reader;
         this.view = new ProjectView(model, printer);
         this.model = model;
-        this.model.setCurrentCategory(model.getCurrentCategory());
     }
 
     public void showView() {

@@ -10,7 +10,7 @@ import com.morkva.ui.controllers.ProjectController;
 /**
  * Created by vladyslav on 22.05.15.
  */
-public class ProjectView {
+public class ProjectView implements IView{
 
     Model model;
     Printer printer;

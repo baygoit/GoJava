@@ -8,7 +8,7 @@ import com.morkva.ui.Model;
 /**
  * Created by vladyslav on 22.05.15.
  */
-public class CategoryView {
+public class CategoryView implements IView {
 
     Model model;
     Printer printer;

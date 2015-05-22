@@ -4,6 +4,7 @@ import com.morkva.logic.Printer;
 import com.morkva.logic.Reader;
 import com.morkva.ui.controllers.CategoriesController;
 import com.morkva.ui.controllers.CategoryController;
+import com.morkva.ui.controllers.IController;
 import com.morkva.ui.controllers.ProjectController;
 
 /**
@@ -24,23 +25,23 @@ public class ViewHelper {
     public void showView(ViewType viewType) {
         switch (viewType) {
             case CATEGORIES_PAGE:
-                CategoriesController categoriesController = new CategoriesController(model, reader, printer);
+                IController categoriesController = new CategoriesController(model, reader, printer);
                 categoriesController.showView();
-                sendCommand(categoriesController.readInput());
+                runCommand(categoriesController.readInput());
                 break;
             case CATEGORY_PAGE:
-                CategoryController categoryController = new CategoryController(printer, model, reader);
+                IController categoryController = new CategoryController(printer, model, reader);
                 categoryController.showView();
-                sendCommand(categoryController.readInput());
+                runCommand(categoryController.readInput());
                 break;
             case PROJECT_PAGE:
-                ProjectController projectController = new ProjectController(printer, model, reader);
+                IController projectController = new ProjectController(printer, model, reader);
                 projectController.showView();
-                sendCommand(projectController.readInput());
+                runCommand(projectController.readInput());
         }
     }
 
-    public void sendCommand(CommandType command) {
+    public void runCommand(CommandType command) {
         switch (command) {
             case SHOW_CATEGORIES_VIEW:
                 showView(ViewType.CATEGORIES_PAGE);
@@ -51,16 +52,19 @@ public class ViewHelper {
             case SHOW_PROJECT_VIEW:
                 showView(ViewType.PROJECT_PAGE);
                 break;
-            case DEFAULT_COMMAND:
-                System.err.println("DEFAULT_COMMAND");
-                break;
             case EXIT_FROM_CATEGORY:
                 showView(ViewType.CATEGORIES_PAGE);
+                model.setCurrentCategory(null);
                 break;
             case EXIT_FROM_PROJECT:
                 showView(ViewType.CATEGORY_PAGE);
+                model.setCurrentProject(null);
             case EXIT:
                 System.exit(0);
+                break;
+            case DEFAULT_COMMAND:
+                System.err.println("DEFAULT_COMMAND");
+                break;
         }
     }
 }

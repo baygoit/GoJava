@@ -5,14 +5,15 @@ import com.morkva.logic.Reader;
 import com.morkva.ui.CommandType;
 import com.morkva.ui.Model;
 import com.morkva.ui.views.CategoryView;
+import com.morkva.ui.views.IView;
 
 /**
  * Created by vladyslav on 22.05.15.
  */
-public class CategoryController {
+public class CategoryController implements IController{
 
     private Model model;
-    private CategoryView view;
+    private IView view;
     private Reader reader;
 
     public CategoryController(Printer printer, Model model, Reader reader) {
@@ -31,7 +32,7 @@ public class CategoryController {
         int keyCode = reader.readUserInput();
         if (keyCode == 0) {
             command = CommandType.EXIT_FROM_CATEGORY;
-        } else if (keyCode > 0 && keyCode <= model.getCurrentCategory().getProjects().size()) {
+        } else if (keyCode > 0) {
             model.setCurrentProject(model.getProjectByIdFromCurrentCategory(keyCode));
             command = CommandType.SHOW_PROJECT_VIEW;
         }

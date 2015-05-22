@@ -5,12 +5,13 @@ import com.morkva.logic.Reader;
 import com.morkva.ui.CommandType;
 import com.morkva.ui.Model;
 import com.morkva.ui.views.CategoriesView;
+import com.morkva.ui.views.IView;
 
 /**
  * Created by vladyslav on 22.05.15.
  */
-public class CategoriesController {
-    CategoriesView view;
+public class CategoriesController implements IController{
+    IView view;
     Model model;
     Reader reader;
     Printer printer;

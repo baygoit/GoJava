@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Created by vladyslav on 22.05.15.
  */
-public class CategoriesView {
+public class CategoriesView implements IView{
     Model model;
     Printer printer;
 

@@ -28,7 +28,7 @@ public class KickstarterApp {
         showQuote();
         ViewHelper viewHelper = new ViewHelper(new Model(categoryRepository), printer, reader);
         while (true) {
-            viewHelper.sendCommand(CommandType.SHOW_CATEGORIES_VIEW);
+            viewHelper.runCommand(CommandType.SHOW_CATEGORIES_VIEW);
         }
     }
 
