@@ -1,13 +1,13 @@
 package com.morkva;
 
 import com.morkva.entities.Category;
-import com.morkva.entities.Project;
 import com.morkva.entities.Quote;
 import com.morkva.logic.*;
 import com.morkva.model.Repository;
-import com.morkva.ui.CategoriesPage;
+import com.morkva.ui.CommandType;
+import com.morkva.ui.Model;
+import com.morkva.ui.ViewHelper;
 
-import java.util.List;
 import java.util.Random;
 
 public class KickstarterApp {
@@ -25,28 +25,13 @@ public class KickstarterApp {
 
     
     public void run() {
-    	int categoriesCount = categoryRepository.size();
+        showQuote();
+        ViewHelper viewHelper = new ViewHelper(new Model(categoryRepository), printer, reader);
         while (true) {
-            showQuote();
-            
-            CategoriesPage categoriesPage = new CategoriesPage(printer, reader, categoryRepository);
-            categoriesPage.showCategories();
-            
-            println("");
-            println("Press 0 for exit");
-            println("--------------------------------------------");
-
-            	int categoryNumber = reader.readUserInput();
-	            if (categoryNumber == 0) {
-	                break;
-	            } else if (categoryNumber > 0 && categoryNumber <= categoriesCount) {
-                    Category currentCategory = categoryRepository.getByIndex(categoryNumber-1);
-	                categoriesPage.showMenu(currentCategory);
-	            } else {
-	            	println("Wrong number!");
-	            }
+            viewHelper.sendCommand(CommandType.SHOW_CATEGORIES_VIEW);
         }
     }
+
 
     private void showQuote() {
         println(quoteRepository.getByIndex(new Random().nextInt(quoteRepository.size())));
