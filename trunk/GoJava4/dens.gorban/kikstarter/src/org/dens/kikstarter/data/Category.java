@@ -1,10 +1,13 @@
 package org.dens.kikstarter.data;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Category {
 
 	private String name;
 	private String description;
-	private Project[] projects = new Project[10];
+	private List<Project> projects = new ArrayList<>();
 
 	public String getName() {
 		return name;
@@ -25,21 +28,16 @@ public class Category {
 	}
 
 	public void addProject(Project project) {
-		int length = projects.length;
+		int length = projects.size();
 		for(int index = 0; index < length; index++){
-			if(projects[index]==null){
-				projects[index] = project;
+			if(projects.get(index)==null){
+				projects.set(index, project);
 				return;
 			}
 		}		
-		//if array is overflow
-		Project[] projectsTemp = new Project[length+10];
-		System.arraycopy(projects, 0, projectsTemp, 0, length);
-		projects = projectsTemp;
-		projects[length] = project;
 	}
 
-	public Project[] getProjets() {
+	public List<Project> getProjets() {
 		return projects;
 	}
 	

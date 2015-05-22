@@ -4,22 +4,22 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import org.dens.kikstarter.data.小itation;
+import org.dens.kikstarter.data.裪tation;
 
 public class CitationProducer {
 	
-	private List<小itation> citations = new ArrayList<>();
+	private List<裪tation> citations = new ArrayList<>();
 	
 	public CitationProducer() {
-		citations.add(new 小itation("A lot of times people look at the negative side of what they feel they can't do. \n I always look on the positive side of what I can do.","Chuck Norris"));
-		citations.add(new 小itation("Men are like steel. When they lose their temper, they lose their worth.","Chuck Norris"));
-		citations.add(new 小itation("I don't initiate violence, I retaliate.","Chuck Norris"));
-		citations.add(new 小itation("Good morals lead to good laws.","Chuck Norris"));
-		citations.add(new 小itation("Violence is my last option.","Chuck Norris"));
+		citations.add(new 裪tation("A lot of times people look at the negative side of what they feel they can't do. \n I always look on the positive side of what I can do.","Chuck Norris"));
+		citations.add(new 裪tation("Men are like steel. When they lose their temper, they lose their worth.","Chuck Norris"));
+		citations.add(new 裪tation("I don't initiate violence, I retaliate.","Chuck Norris"));
+		citations.add(new 裪tation("Good morals lead to good laws.","Chuck Norris"));
+		citations.add(new 裪tation("Violence is my last option.","Chuck Norris"));
 				
 	}
 	
-	public 小itation next() {
+	public 裪tation next() {
 		Random generator = new Random();
 		int index = generator.nextInt(citations.size());
 		return citations.get(index);			

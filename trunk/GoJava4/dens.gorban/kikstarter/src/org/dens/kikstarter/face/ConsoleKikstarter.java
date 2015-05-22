@@ -4,31 +4,35 @@ import java.io.PrintStream;
 import java.util.List;
 import java.util.Scanner;
 
+import org.dens.kikstarter.IConsoleKikstarter;
 import org.dens.kikstarter.data.Category;
 import org.dens.kikstarter.data.CategoryProducer;
 import org.dens.kikstarter.data.CitationProducer;
 import org.dens.kikstarter.data.Project;
 
-public class ConsoleKikstarter {
+public class ConsoleKikstarter implements IConsoleKikstarter{
 
 	private Printer printer;
 	private Reader scanner;
 	private CitationProducer citationProducer;
 	private CategoryProducer categoryProducer;
     
+	@Override
 	public void start(){
 		printer.printBlock("Citate of the day ",  citationProducer.next().toString());	
 		printCategories();	
 		Category selectedCategory = proposeUserToSelectCategory();
 		selectProject(selectedCategory);
 	}
+	
+	
 
 	private void selectProject(Category selectedCategory) {
-		Project[] projets = selectedCategory.getProjets();
+		List<Project> projets = selectedCategory.getProjets();
 		printer.printHeader("Projects: ");
-		for(int index = 0; index< projets.length; index++){
-			if(projets[index] != null){
-				printer.printOption(index, projets[index].getName());
+		for(int index = 0; index< projets.size(); index++){
+			if(projets.get(index) != null){
+				printer.printOption(index, projets.get(index).getName());
 			}
 		}
 		String header = "Choose Project: ";
@@ -37,7 +41,7 @@ public class ConsoleKikstarter {
 		Project project;
 		try{
 			int option = parseInput(input);
-			project = projets[option];
+			project = projets.get(option);
 			printer.printLine("Description: "+project.getDescription(), false);
 			printer.printLine("Required Funds: "+project.getRequiredFunds(), false);
 			printer.printLine("Borrowed Funds: "+project.getBorrowedFunds(), false);			
