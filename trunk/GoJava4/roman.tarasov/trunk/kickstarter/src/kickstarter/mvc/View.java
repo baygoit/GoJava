@@ -5,6 +5,7 @@ import java.util.List;
 
 import kickstarter.mvc.interfaces.iModel;
 import kickstarter.mvc.interfaces.iView;
+
 import kickstarter.pages.viewContent.PageView;
 import kickstarter.ui.iUserInterface;
 
@@ -28,6 +29,7 @@ public class View implements iView {
 
 	@Override
 	public void print() {
+		
 		pageIndex = imodel.getPageIndex();
 		page = pagesView.get(pageIndex);
 		String header = page.getHeader();

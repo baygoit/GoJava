@@ -16,7 +16,7 @@ import org.junit.Test;
 
 public class FakeConsole {
 	Kickstarter kickstarter;
-	iUserInterface ui;
+	public iUserInterface ui;
 
 	public FakeConsole() {
 		kickstarter = new Kickstarter();
