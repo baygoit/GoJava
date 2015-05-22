@@ -6,20 +6,18 @@ public class StatesConsoleKikstarter implements ViewState, IConsoleKikstarter{
 		
 	private View view;
 	
-	public StatesConsoleKikstarter(View view) {
-		this.view = view;
+	public StatesConsoleKikstarter() {
+		this.view = new CitationView();
 	}
+	
 	@Override
 	public void start(){		
 		while(true){			
-			doStep();		
+			view.printInfo();
+			view.action(this);			
 		}
 	}
 
-	private void doStep() {
-		view.printInfo();
-		view.action(this);			
-	}
 
 	@Override
 	public void setView(View view) {

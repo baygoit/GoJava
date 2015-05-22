@@ -30,7 +30,7 @@ public class CategoryView implements View {
 		Category category;
 		try {
 			input = parseInput(indexString);
-			category = producer.getCategories().get(input);
+			category = producer.getCategories().get(input-1);
 			scanner.printHeader(category.getName());
 			scanner.printLine(category.getDescription(), false);
 			ProjectsView projectsView = new ProjectsView(category);

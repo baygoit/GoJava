@@ -19,6 +19,7 @@ public class ProjectsView implements View {
 	@Override
 	public void printInfo() {
 		List<Project> projets = choosenCategory.getProjets();
+		scanner.printHeader("Projects list for Category: "+ choosenCategory.getName());
 		for (int index = 0; index < projets.size(); index++) {
 			scanner.printOption(index + 1, projets.get(index).getName());
 		}
@@ -42,9 +43,11 @@ public class ProjectsView implements View {
 				return;
 			}
 			Project project = choosenCategory.getProjets().get(input - 1);
-			scanner.printHeader(project.getName());
-			scanner.printLine(project.getDescription(), false);
-			
+			scanner.printHeader("Project: "+project.getName());
+			scanner.printLine("Description: "+project.getDescription(), false);
+			scanner.printLine("Required Funds: "+project.getRequiredFunds(), false);
+			scanner.printLine("Borrowed Funds: "+project.getBorrowedFunds(), false);			
+			scanner.printLine("Days Left: "+project.getDaysLeft(), false);			
 		} catch (Exception ex) {
 			scanner.printLine("Incorrect input: " + indexString, false);
 		}
