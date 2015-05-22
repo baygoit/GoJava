@@ -1,12 +1,12 @@
 package kickstarter.storages;
 
-import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedHashSet;
 
 import kickstarter.engine.Data;
 
-public abstract class UniversalStorage<T extends Data> implements Storage<T> {
-	private HashSet<T> objects = new HashSet<T>();
+public abstract class AbstractStorage<T extends Data> implements Storage<T> {
+	private LinkedHashSet<T> objects = new LinkedHashSet<T>();
 
 	@Override
 	public T get(int id) throws IndexOutOfBoundsException {

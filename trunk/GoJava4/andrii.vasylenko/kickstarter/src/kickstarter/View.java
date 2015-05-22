@@ -1,12 +1,9 @@
 package kickstarter;
 
 import java.io.IOException;
-import java.util.Iterator;
 
 import kickstarter.engine.Category;
 import kickstarter.engine.Project;
-import kickstarter.engine.Quote;
-import kickstarter.interfaces.display.DisplayHandler;
 import kickstarter.interfaces.printers.Printer;
 import kickstarter.interfaces.readers.Reader;
 
@@ -14,33 +11,32 @@ public class View {
 
 	private Printer printer;
 	private Reader reader;
-	private DisplayHandler display;
 
 	public View(Printer printer, Reader reader) {
 		this.printer = printer;
 		this.reader = reader;
-		this.display = new DisplayHandler();
 	}
 
-	public void viewQuote(Quote quote) {
-		view(display.getQuoteDisplay().getDescription(quote));
+	public void showQuoteDialog(String quote) {
+		viewQuoteHead();
+		view(quote);
 	}
 
-	public void viewCategories(Iterator<Category> iterator) {
+	public void viewCategories(String categories) {
 		viewCategoriesHead();
-		viewCategoriesBody(iterator);
+		view(categories);
 		viewCategoriesMenu();
 	}
 
-	public void viewProjects(Iterator<Project> iterator) {
+	public void viewProjects(String projects) {
 		viewProjectsHead();
-		viewProjectsBody(iterator);
+		view(projects);
 		viewProjectsMenu();
 	}
 
-	public void viewProject(Project project) {
+	public void viewProject(String project) {
 		viewProjectHead();
-		view(display.getProjectDetailDisplay().getDescription(project));
+		view(project);
 		viewProjectMenu();
 	}
 
@@ -62,19 +58,13 @@ public class View {
 		printer.showMessage(string);
 	}
 
+	private void viewQuoteHead() {
+		view("Quote:");
+	}
+	
 	private void viewCategoriesHead() {
 		view("--------------------");
 		view("Choice Category:");
-	}
-
-	private void viewCategoriesBody(Iterator<Category> iterator) {
-		StringBuilder result = new StringBuilder();
-
-		while (iterator.hasNext()) {
-			result.append(display.getCategoryDisplay().getDescription(iterator.next()));
-		}
-
-		view(result.toString());
 	}
 
 	private void viewCategoriesMenu() {
@@ -90,16 +80,6 @@ public class View {
 	private void viewProjectsHead() {
 		view("--------------------");
 		view("Choice Project:");
-	}
-
-	private void viewProjectsBody(Iterator<Project> iterator) {
-		StringBuilder result = new StringBuilder();
-
-		while (iterator.hasNext()) {
-			result.append(display.getProjectDisplay().getDescription(iterator.next()));
-		}
-
-		view(result.toString());
 	}
 
 	private void viewProjectsMenu() {

@@ -1,6 +1,13 @@
 package kickstarter.engine;
 
+import kickstarter.interfaces.display.Display;
+import kickstarter.interfaces.display.ProjectDisplay;
+import kickstarter.interfaces.display.ProjectsDisplay;
+
 public class Project implements Data {
+	public static Display<Project> DISPLAY = new ProjectsDisplay();
+	public static Display<Project> DETAIL_DISPLAY = new ProjectDisplay();
+	
 	private static int count = 0;
 
 	public static final Project EXIT = new Project("EXIT");

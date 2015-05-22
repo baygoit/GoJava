@@ -2,9 +2,9 @@ package kickstarter.interfaces.display;
 
 import kickstarter.engine.Category;
 
-public class CategoryDisplay implements Display<Category> {
+public class CategoriesDisplay extends AbstractDisplay<Category> {
 	@Override
-	public String getDescription(Category category) {
+	public String getView(Category category) {
 		if (category == null) {
 			return "";
 		}

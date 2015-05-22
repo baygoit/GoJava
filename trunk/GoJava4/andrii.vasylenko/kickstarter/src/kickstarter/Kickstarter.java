@@ -2,6 +2,7 @@ package kickstarter;
 
 import kickstarter.engine.Category;
 import kickstarter.engine.Project;
+import kickstarter.engine.Quote;
 
 public class Kickstarter {
 
@@ -20,13 +21,15 @@ public class Kickstarter {
 	}
 
 	private void showQuote() {
-		viewer.viewQuote(model.getRandomQuote());
+		String quoteView = Quote.DISPLAY.getView(model.getRandomQuote());
+		viewer.showQuoteDialog(quoteView);
 	}
 
 	private void choiceCategory() {
 		while (true) {
 			try {
-				viewer.viewCategories(model.getCategoriesIterator());
+				String categoriesView = Category.DISPLAY.getView(model.getCategoriesIterator());
+				viewer.viewCategories(categoriesView);
 
 				Category chosenCategory = model.getCategory(viewer.choiceItem());
 				if (chosenCategory == Category.EXIT) {
@@ -43,7 +46,8 @@ public class Kickstarter {
 	private void choiceProject(Category category) {
 		while (true) {
 			try {
-				viewer.viewProjects(model.getProjectsIterator(category));
+				String projectsView = Project.DISPLAY.getView(model.getProjectsIterator(category));
+				viewer.viewProjects(projectsView);
 
 				Project chosenProject = model.getProject(viewer.choiceItem(), category);
 				if (chosenProject == Project.EXIT) {
@@ -60,7 +64,8 @@ public class Kickstarter {
 	private void showProject(Project project) {
 		while (true) {
 			try {
-				viewer.viewProject(project);
+				String projectView = Project.DETAIL_DISPLAY.getView(project);
+				viewer.viewProject(projectView);
 
 				Project chosenItem = model.getProjectItem(viewer.choiceItem());
 				if (chosenItem == Project.EXIT) {
