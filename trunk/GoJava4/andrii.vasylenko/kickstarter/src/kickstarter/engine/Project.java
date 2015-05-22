@@ -1,16 +1,9 @@
 package kickstarter.engine;
 
-import kickstarter.interfaces.display.Display;
-import kickstarter.interfaces.display.ProjectDisplay;
-import kickstarter.interfaces.display.ProjectsDisplay;
+import kickstarter.interfaces.menu.ProjectsMenu;
 
 public class Project implements Data {
-	public static Display<Project> DISPLAY = new ProjectsDisplay();
-	public static Display<Project> DETAIL_DISPLAY = new ProjectDisplay();
-	
-	private static int count = 0;
-
-	public static final Project EXIT = new Project("EXIT");
+	private static int count = ProjectsMenu.size();
 
 	private int id;
 	private String name;
@@ -22,22 +15,13 @@ public class Project implements Data {
 	private String link;
 	private String questionsAndAnswers;
 
-	private Project(String name) {
-		if (name == null) {
+	public Project(String name, String description, int totalAmount, int daysLeft) {
+		if (name == null || description == null || totalAmount <= 0 || daysLeft <= 0) {
 			throw new IllegalArgumentException();
 		}
 
 		this.id = count++;
 		this.name = name;
-	}
-
-	public Project(String name, String description, int totalAmount, int daysLeft) {
-		this(name);
-
-		if (description == null || totalAmount <= 0 || daysLeft <= 0) {
-			throw new IllegalArgumentException();
-		}
-
 		this.description = description;
 		this.totalAmount = totalAmount;
 		this.daysLeft = daysLeft;

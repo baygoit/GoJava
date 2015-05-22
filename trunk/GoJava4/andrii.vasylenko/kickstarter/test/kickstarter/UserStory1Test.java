@@ -5,6 +5,11 @@ import static org.mockito.Mockito.*;
 
 import java.io.IOException;
 
+import kickstarter.interfaces.Preparer;
+import kickstarter.interfaces.display.CategoriesDisplay;
+import kickstarter.interfaces.display.ProjectDisplay;
+import kickstarter.interfaces.display.ProjectsDisplay;
+import kickstarter.interfaces.display.QuotesDisplay;
 import kickstarter.interfaces.printers.Printer;
 import kickstarter.interfaces.readers.Reader;
 
@@ -51,7 +56,7 @@ public class UserStory1Test {
 	}
 
 	private void runKickstarter(Printer printer, Reader reader) {
-		Kickstarter kickstarter = new Kickstarter(initModel(), new View(printer, reader));
+		Kickstarter kickstarter = new Kickstarter(initModel(), new View(printer, reader), new Preparer(new QuotesDisplay(), new CategoriesDisplay(), new ProjectsDisplay(), new ProjectDisplay()));
 		kickstarter.run();
 	}
 

@@ -2,16 +2,20 @@ package kickstarter;
 
 import kickstarter.engine.Category;
 import kickstarter.engine.Project;
-import kickstarter.engine.Quote;
+import kickstarter.interfaces.Preparer;
+import kickstarter.interfaces.menu.CategoriesMenu;
+import kickstarter.interfaces.menu.ProjectsMenu;
 
 public class Kickstarter {
 
 	private Model model;
 	private View viewer;
+	private Preparer preparer;
 
-	public Kickstarter(Model model, View viewer) {
+	public Kickstarter(Model model, View viewer, Preparer preparer) {
 		this.model = model;
 		this.viewer = viewer;
+		this.preparer = preparer;
 	}
 
 	public void run() {
@@ -21,20 +25,22 @@ public class Kickstarter {
 	}
 
 	private void showQuote() {
-		String quoteView = Quote.DISPLAY.getView(model.getRandomQuote());
+		String quoteView = preparer.getQuoteView(model.getRandomQuote());
 		viewer.showQuoteDialog(quoteView);
 	}
 
 	private void choiceCategory() {
 		while (true) {
 			try {
-				String categoriesView = Category.DISPLAY.getView(model.getCategoriesIterator());
+				String categoriesView = preparer.getCategoriesView(model.getCategoriesIterator());
 				viewer.viewCategories(categoriesView);
 
-				Category chosenCategory = model.getCategory(viewer.choiceItem());
-				if (chosenCategory == Category.EXIT) {
+				int chosenItem = viewer.choiceItem();
+				if (chosenItem == CategoriesMenu.EXIT.getId()) {
 					return;
 				}
+
+				Category chosenCategory = model.getCategory(chosenItem);
 				choiceProject(chosenCategory);
 
 			} catch (Exception ignore) {
@@ -46,13 +52,15 @@ public class Kickstarter {
 	private void choiceProject(Category category) {
 		while (true) {
 			try {
-				String projectsView = Project.DISPLAY.getView(model.getProjectsIterator(category));
+				String projectsView = preparer.getProjectsView(model.getProjectsIterator(category));
 				viewer.viewProjects(projectsView);
 
-				Project chosenProject = model.getProject(viewer.choiceItem(), category);
-				if (chosenProject == Project.EXIT) {
+				int chosenItem = viewer.choiceItem();
+				if (chosenItem == ProjectsMenu.EXIT.getId()) {
 					return;
 				}
+
+				Project chosenProject = model.getProject(chosenItem, category);
 				showProject(chosenProject);
 
 			} catch (Exception ignore) {
@@ -64,11 +72,11 @@ public class Kickstarter {
 	private void showProject(Project project) {
 		while (true) {
 			try {
-				String projectView = Project.DETAIL_DISPLAY.getView(project);
+				String projectView = preparer.getProjectView(project);
 				viewer.viewProject(projectView);
 
-				Project chosenItem = model.getProjectItem(viewer.choiceItem());
-				if (chosenItem == Project.EXIT) {
+				int chosenItem = viewer.choiceItem();
+				if (chosenItem == ProjectsMenu.EXIT.getId()) {
 					return;
 				}
 

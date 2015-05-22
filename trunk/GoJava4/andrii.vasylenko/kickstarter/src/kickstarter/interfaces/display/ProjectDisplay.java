@@ -8,7 +8,7 @@ public class ProjectDisplay extends AbstractDisplay<Project> {
 		if (project == null) {
 			return "";
 		}
-		
+
 		StringBuilder result = new StringBuilder();
 
 		result.append("name=");

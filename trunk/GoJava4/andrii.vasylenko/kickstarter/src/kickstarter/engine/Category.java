@@ -1,14 +1,9 @@
 package kickstarter.engine;
 
-import kickstarter.interfaces.display.CategoriesDisplay;
-import kickstarter.interfaces.display.Display;
+import kickstarter.interfaces.menu.CategoriesMenu;
 
 public class Category implements Data {
-	public static Display<Category> DISPLAY = new CategoriesDisplay();
-	
-	private static int count = 0;
-
-	public static final Category EXIT = new Category("EXIT");
+	private static int count = CategoriesMenu.size();
 
 	private int id;
 	private String name;

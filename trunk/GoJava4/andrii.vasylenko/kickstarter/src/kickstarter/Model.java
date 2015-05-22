@@ -44,10 +44,6 @@ public class Model {
 	}
 
 	public Category getCategory(int id) {
-		if (id == Category.EXIT.getId()) {
-			return Category.EXIT;
-		}
-
 		return categories.get(id);
 	}
 
@@ -61,18 +57,10 @@ public class Model {
 	}
 
 	public Project getProject(int id, Category category) {
-		if (id == Project.EXIT.getId()) {
-			return Project.EXIT;
-		}
-
 		return projectsInCategory.getProjects(category).get(id);
 	}
 
 	public Project getProjectItem(int id) {
-		if (id == Project.EXIT.getId()) {
-			return Project.EXIT;
-		}
-
 		throw new IndexOutOfBoundsException();
 	}
 

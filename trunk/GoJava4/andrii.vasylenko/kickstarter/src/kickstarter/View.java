@@ -2,8 +2,9 @@ package kickstarter;
 
 import java.io.IOException;
 
-import kickstarter.engine.Category;
-import kickstarter.engine.Project;
+import kickstarter.interfaces.menu.CategoriesMenu;
+import kickstarter.interfaces.menu.Menu;
+import kickstarter.interfaces.menu.ProjectsMenu;
 import kickstarter.interfaces.printers.Printer;
 import kickstarter.interfaces.readers.Reader;
 
@@ -25,19 +26,31 @@ public class View {
 	public void viewCategories(String categories) {
 		viewCategoriesHead();
 		view(categories);
-		viewCategoriesMenu();
+		viewMenu(CategoriesMenu.values());
+	}
+
+	private void viewMenu(Menu[] menu) {
+		StringBuilder result = new StringBuilder();
+
+		for (Menu item : menu) {
+			result.append(item.getId());
+			result.append(" - ");
+			result.append(item);
+		}
+
+		view(result.toString());
 	}
 
 	public void viewProjects(String projects) {
 		viewProjectsHead();
 		view(projects);
-		viewProjectsMenu();
+		viewMenu(ProjectsMenu.values());
 	}
 
 	public void viewProject(String project) {
 		viewProjectHead();
 		view(project);
-		viewProjectMenu();
+		viewMenu(ProjectsMenu.values());
 	}
 
 	public void viewErrorMessage() {
@@ -61,20 +74,10 @@ public class View {
 	private void viewQuoteHead() {
 		view("Quote:");
 	}
-	
+
 	private void viewCategoriesHead() {
 		view("--------------------");
 		view("Choice Category:");
-	}
-
-	private void viewCategoriesMenu() {
-		StringBuilder menu = new StringBuilder();
-
-		menu.append(Category.EXIT.getId());
-		menu.append(" - ");
-		menu.append(Category.EXIT.getName());
-
-		view(menu.toString());
 	}
 
 	private void viewProjectsHead() {
@@ -82,28 +85,8 @@ public class View {
 		view("Choice Project:");
 	}
 
-	private void viewProjectsMenu() {
-		StringBuilder menu = new StringBuilder();
-
-		menu.append(Project.EXIT.getId());
-		menu.append(" - ");
-		menu.append(Project.EXIT.getName());
-
-		view(menu.toString());
-	}
-
 	private void viewProjectHead() {
 		view("--------------------");
 		view("Project:");
-	}
-
-	private void viewProjectMenu() {
-		StringBuilder menu = new StringBuilder();
-
-		menu.append(Project.EXIT.getId());
-		menu.append(" - ");
-		menu.append(Project.EXIT.getName());
-
-		view(menu.toString());
 	}
 }

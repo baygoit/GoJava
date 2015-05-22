@@ -8,7 +8,7 @@ public class CategoriesDisplay extends AbstractDisplay<Category> {
 		if (category == null) {
 			return "";
 		}
-		
+
 		StringBuilder result = new StringBuilder();
 		result.append(category.getId());
 		result.append(" - ");
@@ -16,4 +16,5 @@ public class CategoriesDisplay extends AbstractDisplay<Category> {
 		result.append("\r\n");
 		return result.toString();
 	}
+
 }
