@@ -1,11 +1,10 @@
 package ua.com.goit.gojava.kickstarter.model;
 
 public class Category {
-	
+
 	private int id;
-    	private String name;
-	
-	
+	private String name;
+
 	public Category(String name, int id) {
 		this.name = name;
 		this.id = id;
@@ -20,7 +19,7 @@ public class Category {
 	}
 
 	public int getId() {
-	    return id;
+		return id;
 	}
-			
+
 }

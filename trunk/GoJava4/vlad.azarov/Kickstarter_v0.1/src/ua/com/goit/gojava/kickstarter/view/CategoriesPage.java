@@ -9,6 +9,7 @@ public class CategoriesPage {
 
     ProjectsPage projectsPage;
     Printer printer;
+    ConsoleInputReader inputReader = new ConsoleInputReader();
 
     public CategoriesPage(Printer printer) {
 	projectsPage = new ProjectsPage(printer);
@@ -33,14 +34,14 @@ public class CategoriesPage {
 	    printer.println("Enter \"0\" to select another category: ");
 	    printer.println("====================================================================");
 
-	    int key = userInput;
+	    int key = inputReader.readUserInput();
 	    if (key == 0) {
 		break;
 	    } else {
 		if (key > 0 && key <= projectsOfCurrentCategory.size()) {
 		    Project selectedProject = projectsOfCurrentCategory
 			    .get(key - 1);
-		    projectsPage.showProjectMenu(selectedProject, userInput);
+		    projectsPage.showProjectMenu(selectedProject);
 		} else {
 		    printer.println("Project with #" + userInput
 			    + " does not exist");

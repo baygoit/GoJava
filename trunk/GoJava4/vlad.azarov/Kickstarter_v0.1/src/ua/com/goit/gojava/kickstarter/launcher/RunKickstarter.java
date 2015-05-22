@@ -4,10 +4,10 @@ import ua.com.goit.gojava.kickstarter.control.Kickstarter;
 
 public class RunKickstarter {
 
-    public static void main(String[] args) {
+	public static void main(String[] args) {
 
-	Kickstarter application = new Kickstarter();
+		Kickstarter application = new Kickstarter();
 
-	application.run();
-    }
+		application.run();
+	}
 }

@@ -8,9 +8,11 @@ import ua.com.goit.gojava.kickstarter.model.Project;
 public class ProjectsPage {
 
     Printer printer;
+    Reader reader;
 
     public ProjectsPage(Printer printer) {
-	this.printer = printer;
+    	this.printer = printer;
+    	this.reader	= new ConsoleInputReader();
     }
 
     public void showProjectInfo(Project project) {
@@ -23,19 +25,19 @@ public class ProjectsPage {
 	printer.println("  Questions/Answers " + project.getFAQ());
     }
 
-    public void showProjectMenu(Project project, int userInput) {
-	while (true) {
+    public void showProjectMenu(Project project) {
+	//while (true) {
 	    showProjectInfo(project);
 	    printer.println("");
 	    printer.println("Enter \"0\" to return");
 	    printer.println("------------------------------------------------------------------");
-	    int key = userInput;
+	    int key = reader.readUserInput();
 	    if (key == 0) {
-		break;
+		//break;
 	    } else {
 		printer.println("You entered an invalid character!");
 	    }
-	}
+	//}
     }
 
     public void showProjectsOfCategory(Category category,
