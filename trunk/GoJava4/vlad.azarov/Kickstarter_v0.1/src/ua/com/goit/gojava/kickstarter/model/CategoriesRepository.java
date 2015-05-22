@@ -29,4 +29,9 @@ public class CategoriesRepository {
 	public void add(Category category) {
 		categories.add(category);
 	}
+
+	public int getByUserInput(int userInput) {
+	    // TODO Auto-generated method stub
+	    return 0;
+	}
 }

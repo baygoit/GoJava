@@ -4,15 +4,18 @@ import java.util.ArrayList;
 
 import ua.com.goit.gojava.kickstarter.model.Category;
 import ua.com.goit.gojava.kickstarter.model.Project;
+import ua.com.goit.gojava.kickstarter.model.ProjectsRepository;
 
-public class ProjectsPage {
+public class ProjectsViewer {
 
     Printer printer;
     Reader reader;
+    ProjectsRepository projectsRepository;
+    
 
-    public ProjectsPage(Printer printer) {
+    public ProjectsViewer(Printer printer) {
     	this.printer = printer;
-    	this.reader	= new ConsoleInputReader();
+    	this.reader = new ConsoleInputReader();
     }
 
     public void showProjectInfo(Project project) {
@@ -53,6 +56,22 @@ public class ProjectsPage {
 	    printer.println("  Pledged: " + currentProject.getPledged());
 	    printer.println("  Days to go: " + currentProject.getDaysToGo());
 	}
+    }
+
+
+    public void showProjectsFromParticularCategory(int userInput) {
+	projectsRepository.getProjectsFromParticularCategory(userInput);
+	
+	printer.println(" Projects: ");
+	for (int i = 0; i < projectsRepository.getProjectsRepositorySize(); i++) {
+	    printer.print("  " + (i + 1) + ": ");
+	    Project currentProject = projectsOfCurrentCategory.get(i);
+	    printer.println(currentProject.getName());
+	    printer.println("  Short Description: " + currentProject.getBrief());
+	    printer.println("  Pledged: " + currentProject.getPledged());
+	    printer.println("  Days to go: " + currentProject.getDaysToGo());
+	}
+	
     }
 
 }

@@ -2,7 +2,7 @@ package ua.com.goit.gojava.kickstarter.view;
 
 import ua.com.goit.gojava.kickstarter.model.Quote;
 
-public class QuotesPage {
+public class QuotesViewer {
 
     public void showQuoteMenu(Quote quote) {
 

@@ -6,16 +6,16 @@ import ua.com.goit.gojava.kickstarter.model.Category;
 import ua.com.goit.gojava.kickstarter.model.Project;
 import ua.com.goit.gojava.kickstarter.model.ProjectsRepository;
 import ua.com.goit.gojava.kickstarter.view.Printer;
-import ua.com.goit.gojava.kickstarter.view.ProjectsPage;
+import ua.com.goit.gojava.kickstarter.view.ProjectsViewer;
 
 public class ProjectsController {
 
-	private ProjectsPage projectsPage;
+	private ProjectsViewer projectsViewer;
 	private ProjectsRepository projectsRepository;
 
 	public ProjectsController(Printer printer) {
 		projectsRepository = new ProjectsRepository();
-		projectsPage = new ProjectsPage(printer);
+		projectsViewer = new ProjectsViewer(printer);
 	}
 
 	public ArrayList<Project> getProjectsFromCategory(Category category) {
@@ -23,15 +23,15 @@ public class ProjectsController {
 	}
 
 	public void showProjectInfo(Project project) {
-		projectsPage.showProjectInfo(project);
+		projectsViewer.showProjectInfo(project);
 	}
 
 	public void showProjectMenu(Project project) {
-		projectsPage.showProjectMenu(project);
+		projectsViewer.showProjectMenu(project);
 	}
 
 	public void showProjectsOfCategory(Category category) {
-		projectsPage.showProjectsOfCategory(category,
+		projectsViewer.showProjectsOfCategory(category,
 				getProjectsFromCategory(category));
 	}
 }

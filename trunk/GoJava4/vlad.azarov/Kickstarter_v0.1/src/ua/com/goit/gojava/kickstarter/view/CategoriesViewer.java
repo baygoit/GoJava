@@ -5,14 +5,14 @@ import java.util.ArrayList;
 import ua.com.goit.gojava.kickstarter.model.Category;
 import ua.com.goit.gojava.kickstarter.model.Project;
 
-public class CategoriesPage {
+public class CategoriesViewer {
 
-    ProjectsPage projectsPage;
+    ProjectsViewer projectsViewer;
     Printer printer;
-    ConsoleInputReader inputReader = new ConsoleInputReader();
+    ConsoleInputReader reader = new ConsoleInputReader();
 
-    public CategoriesPage(Printer printer) {
-	projectsPage = new ProjectsPage(printer);
+    public CategoriesViewer(Printer printer) {
+	projectsViewer = new ProjectsViewer(printer);
 	this.printer = printer;
     }
 
@@ -27,27 +27,31 @@ public class CategoriesPage {
     public void showCategoryMenu2(Category category,
 	    ArrayList<Project> projectsOfCurrentCategory, int userInput) {
 	while (true) {
-	    projectsPage.showProjectsOfCategory(category,
+	    projectsViewer.showProjectsOfCategory(category,
 		    projectsOfCurrentCategory);
 
 	    printer.println("");
 	    printer.println("Enter \"0\" to select another category: ");
 	    printer.println("====================================================================");
 
-	    int key = inputReader.readUserInput();
+	    int key = reader.readUserInput();
 	    if (key == 0) {
 		break;
 	    } else {
 		if (key > 0 && key <= projectsOfCurrentCategory.size()) {
 		    Project selectedProject = projectsOfCurrentCategory
 			    .get(key - 1);
-		    projectsPage.showProjectMenu(selectedProject);
+		    projectsViewer.showProjectMenu(selectedProject);
 		} else {
 		    printer.println("Project with #" + userInput
 			    + " does not exist");
 		}
 	    }
 	}
+    }
+
+    public void getCategoryProjects(int userInput) {
+	projectsViewer.showProjectsFromParticularCategory(userInput);
     }
 
 }
