@@ -1,8 +1,13 @@
 package ua.com.goit.gojava.kickstarter.control;
 
 import java.util.ArrayList;
+
 import ua.com.goit.gojava.kickstarter.model.Category;
+import ua.com.goit.gojava.kickstarter.view.CategoriesPage;
 import ua.com.goit.gojava.kickstarter.view.ConsolePrinter;
+import ua.com.goit.gojava.kickstarter.view.Printer;
+import ua.com.goit.gojava.kickstarter.view.ProjectsPage;
+import ua.com.goit.gojava.kickstarter.view.Reader;
 
 public class Kickstarter {
 
@@ -21,6 +26,12 @@ public class Kickstarter {
 	    int userInput = inputController.readUserInput();
 	    ArrayList<Category> categories = categoriesController
 		    .getCategories();
+	    
+//	    System.out.println("TEST" + categories.get(1));
+//	    System.out.println("TEST2 ");
+//	    categoriesController.showCategoryMenu1(categories.get(userInput - 1));
+//	    CategoriesPage cp = new CategoriesPage(printer);
+	    
 	    if (userInput == 0) {
 		isExit = true;
 	    } else if (userInput > 0 && userInput <= categories.size()) {

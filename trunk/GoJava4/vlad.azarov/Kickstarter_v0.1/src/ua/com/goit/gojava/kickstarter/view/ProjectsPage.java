@@ -40,6 +40,7 @@ public class ProjectsPage {
 
     public void showProjectsOfCategory(Category category,
 	    ArrayList<Project> projectsOfCurrentCategory) {
+	
 	printer.println("Category: " + category.getName());
 	printer.println(" Projects: ");
 	for (int i = 0; i < projectsOfCurrentCategory.size(); i++) {

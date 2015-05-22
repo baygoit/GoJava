@@ -1,6 +1,7 @@
 package ua.com.goit.gojava.kickstarter.control;
 
 import java.util.ArrayList;
+
 import ua.com.goit.gojava.kickstarter.model.CategoriesRepository;
 import ua.com.goit.gojava.kickstarter.model.Category;
 import ua.com.goit.gojava.kickstarter.view.CategoriesPage;
@@ -33,4 +34,5 @@ public class CategoriesController {
 		projectsControl.getProjectsFromCategory(category),
 		inputControl.readUserInput());
     }
+
 }
