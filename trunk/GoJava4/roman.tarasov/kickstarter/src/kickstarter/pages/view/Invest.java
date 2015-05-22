@@ -2,12 +2,13 @@ package kickstarter.pages.view;
 
 import kickstarter.mvc.interfaces.iModel;
 import kickstarter.mvc.options.ModelOptions;
-import kickstarter.repository.ProjectRepository;
+import kickstarter.repository.fasade.Repository;
+
 
 public class Invest extends PageView {
 
-	public Invest(ProjectRepository projects, iModel imodel) {
-		this.projects = projects;
+	public Invest(Repository repository, iModel imodel) {
+		this.repository=repository;
 		this.imodel=imodel;
 	}
 
@@ -15,7 +16,7 @@ public class Invest extends PageView {
 	
 		ModelOptions o = imodel.getModelOptions();
 		int projectID=o.intSelectedProject;
-		project = projects.getProjectById(projectID);
+		project = repository.getProjectById(projectID);
 		String header = "";
 		header += "\n=========================";
 		header += "\n|   invest to project   |";

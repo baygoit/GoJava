@@ -3,13 +3,13 @@ package kickstarter.pages.view;
 
 import kickstarter.mvc.interfaces.iModel;
 import kickstarter.payment.Bank;
-import kickstarter.repository.ProjectRepository;
+import kickstarter.repository.fasade.Repository;
 
 public class Donate extends PageView {
 
-	public Donate(Bank bank, ProjectRepository projects, iModel imodel) {
+	public Donate(Bank bank, Repository repository, iModel imodel) {
 		this.bank = bank;
-		this.projects = projects;
+		this.repository = repository;
 		this.imodel=imodel;
 	}
 

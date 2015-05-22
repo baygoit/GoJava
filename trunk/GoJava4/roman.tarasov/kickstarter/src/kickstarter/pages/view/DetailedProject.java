@@ -4,20 +4,19 @@ import kickstarter.entities.ProjectComments;
 import kickstarter.entities.Project;
 import kickstarter.mvc.interfaces.iModel;
 import kickstarter.mvc.options.ModelOptions;
-import kickstarter.repository.ProjectRepository;
-import kickstarter.repository.CommentsRepository;
+import kickstarter.repository.fasade.Repository;
 
 public class DetailedProject extends PageView {
 
-	public DetailedProject(CommentsRepository allComments,
-			ProjectRepository projects,iModel imodel) {
-		this.allComments = allComments;
-		this.projects = projects;
+	public DetailedProject(Repository repository,iModel imodel) {
+
+			this.repository=repository;
+	
 		this.imodel = imodel;
 	}
 
 	private ProjectComments selectCommentsToProject(int projectID) {
-		ProjectComments comments = allComments
+		ProjectComments comments = repository
 				.getCommentsByProjectID(projectID);
 		return comments;
 	}
@@ -27,7 +26,7 @@ public class DetailedProject extends PageView {
 		ModelOptions o = imodel.getModelOptions();
 		int projectID = o.intSelectedProject;
 		
-		Project project = projects.getProjectById(projectID);
+		Project project = repository.getProjectById(projectID);
 
 		String header = "";
 		header += "\n________________________";

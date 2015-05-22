@@ -5,8 +5,7 @@ import kickstarter.entities.ProjectComments;
 import kickstarter.mvc.interfaces.iModel;
 import kickstarter.pages.view.PageView;
 import kickstarter.payment.Bank;
-import kickstarter.repository.CommentsRepository;
-import kickstarter.repository.ProjectRepository;
+import kickstarter.repository.fasade.Repository;
 
 public class PageModel {
 	
@@ -30,9 +29,9 @@ public class PageModel {
 	int nextPage;
 	Project project;
 	Bank bank;
-	ProjectRepository projects;
-	CommentsRepository allComments;
+	Repository repository;
 	ProjectComments projectComments;
+
 	iModel imodel;
 	PageView page;
 

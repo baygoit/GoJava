@@ -7,21 +7,21 @@ import kickstarter.entities.Project;
 import kickstarter.mvc.interfaces.iModel;
 import kickstarter.mvc.options.ModelOptions;
 import kickstarter.mvc.options.ViewOptions;
-import kickstarter.repository.ProjectRepository;
+import kickstarter.repository.fasade.Repository;
 
 public class Projects extends PageView {
 
-	public Projects(ProjectRepository projects, iModel imodel) {
-		this.projects = projects;
+	public Projects(Repository repository, iModel imodel) {
+		this.repository=repository;
 		this.imodel = imodel;
 	}
 
 	public List<Project> sortProjectsByCategoryID(int categoryID) {
 
 		List<Project> sortedProjects = new ArrayList<Project>();
-		int length = projects.getProjectsLength();
+		int length = repository.getProjectsLength();
 		for (int index = 0; index < length; index++) {
-			Project project = projects.getProject(index);
+			Project project = repository.getProject(index);
 			if (project.categoryID == categoryID) {
 				sortedProjects.add(project);
 			}

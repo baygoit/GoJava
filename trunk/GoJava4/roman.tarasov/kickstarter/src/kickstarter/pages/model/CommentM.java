@@ -1,18 +1,18 @@
 package kickstarter.pages.model;
 
+
 import kickstarter.mvc.interfaces.iModel;
 import kickstarter.mvc.options.ModelOptions;
-import kickstarter.repository.CommentsRepository;
-import kickstarter.repository.ProjectRepository;
+import kickstarter.repository.fasade.Repository;
 
 public class CommentM extends PageModel {
-	public CommentM(CommentsRepository allComments, ProjectRepository projects,
-			iModel imodel) {
+	public CommentM(Repository repository, iModel imodel) {
 		super(imodel);
-		this.allComments = allComments;
+		this.repository = repository;
 		this.imodel = imodel;
-		this.projects = projects;
+		
 	}
+
 	@Override
 	public void execute(String message) {
 		if (message.equals("p")) {
@@ -22,8 +22,8 @@ public class CommentM extends PageModel {
 		ModelOptions o = imodel.getModelOptions();
 		int projectID = o.intSelectedProject;
 
-		project = projects.getProjectById(projectID);
-		projectComments = allComments.getCommentsByProjectID(project.ID);
+		project = repository.getProjectById(projectID);
+		projectComments = repository.getCommentsByProjectID(project.ID);
 		String[] array = message.split(":");
 		if (array[0].equals("a") && array.length == 2) {
 			// TODO

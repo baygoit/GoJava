@@ -1,26 +1,23 @@
 package kickstarter.pages.view;
 
+
 import kickstarter.entities.Quote;
 import kickstarter.mvc.interfaces.iModel;
 import kickstarter.mvc.options.ViewOptions;
-import kickstarter.repository.CategoriesRepository;
-import kickstarter.repository.QuotesRepository;
+import kickstarter.repository.fasade.Repository;
 
 public class Categories extends PageView {
 
-	private iModel imodel;
-	private QuotesRepository quotesRepository;
-	private CategoriesRepository categories;
+	public Categories( Repository repository, iModel imodel) {
 
-	public Categories(CategoriesRepository categories,
-			QuotesRepository quotesRepository, iModel imodel) {
-		this.categories = categories;
-		this.quotesRepository = quotesRepository;
 		this.imodel = imodel;
+		this.repository=repository;
 	}
 
 	public String getHeader() {
-		Quote quote = quotesRepository.getRandomQuote();
+		
+		
+		Quote quote = repository.getRandomQuote();
 		String header = "";
 		header += "\n-----Quote------";
 		header += "\n" + quote.getQuote();
@@ -38,16 +35,16 @@ public class Categories extends PageView {
 
 	public String getListAllCategories() {
 		String result = "";
-		int length = categories.getCategoriesLength();
+		int length = repository.getCategoriesLength();
 		strOptions = new String[length];
 		intOptions = new int[length];
 		for (int index = 0; index < length; index++) {
 
-			result += ("ID:<" + categories.getCategory(index).ID + "> name:<"
-					+ categories.getCategory(index).name + ">\n");
+			result += ("ID:<" + repository.getCategory(index).ID + "> name:<"
+					+ repository.getCategory(index).name + ">\n");
 			strOptions[index] = Integer
-					.toString(categories.getCategory(index).ID);
-			intOptions[index] = categories.getCategory(index).ID;
+					.toString(repository.getCategory(index).ID);
+			intOptions[index] = repository.getCategory(index).ID;
 		}
 		ViewOptions vo =imodel.getViewOptions(); 
 		vo.intCategories = intOptions;

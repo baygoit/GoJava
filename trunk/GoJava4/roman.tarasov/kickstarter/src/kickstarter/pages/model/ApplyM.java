@@ -4,13 +4,13 @@ import kickstarter.entities.Project;
 import kickstarter.mvc.interfaces.iModel;
 import kickstarter.mvc.options.ModelOptions;
 import kickstarter.payment.Bank;
-import kickstarter.repository.ProjectRepository;
+import kickstarter.repository.fasade.Repository;
 
 public class ApplyM extends PageModel {
-	public ApplyM(Bank bank, ProjectRepository projects, iModel imodel) {
+	public ApplyM(Bank bank, Repository repository, iModel imodel) {
 		super(imodel);
 		this.bank=bank;
-		this.projects=projects;
+		this.repository=repository;
 	}
 	@Override
 	public void execute(String message) {
@@ -53,7 +53,7 @@ public class ApplyM extends PageModel {
 			}
 
 			int projectID = o.intSelectedProject;
-			Project project = projects.getProjectById(projectID);
+			Project project = repository.getProjectById(projectID);
 			project.pledged += getMoney;
 
 			String setOption = "\nbalance before :" + balanceBefore

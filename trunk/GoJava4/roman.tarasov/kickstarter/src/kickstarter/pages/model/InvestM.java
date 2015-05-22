@@ -2,13 +2,14 @@ package kickstarter.pages.model;
 
 import kickstarter.mvc.interfaces.iModel;
 import kickstarter.mvc.options.ModelOptions;
-import kickstarter.repository.ProjectRepository;
+import kickstarter.repository.fasade.Repository;
+
 
 public class InvestM extends PageModel {
-	public InvestM(ProjectRepository projects,iModel imodel) {
+	public InvestM(Repository repository,iModel imodel) {
 		super(imodel);
 	
-	this.projects = projects;
+	this.repository=repository;
 	this.imodel = imodel;
 	}
 
@@ -21,7 +22,7 @@ public class InvestM extends PageModel {
 		}
 		ModelOptions o = imodel.getModelOptions();
 		int projectID=o.intSelectedProject;
-		project = projects.getProjectById(projectID);
+		project = repository.getProjectById(projectID);
 		double amount = 0;
 		try {
 			int selected = Integer.parseInt(message);

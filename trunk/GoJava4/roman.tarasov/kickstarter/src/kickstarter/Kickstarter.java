@@ -1,5 +1,6 @@
 package kickstarter;
 
+import kickstarter.entities.ProjectComments;
 import kickstarter.mvc.Controller;
 import kickstarter.mvc.Model;
 import kickstarter.mvc.View;
@@ -26,24 +27,19 @@ import kickstarter.pages.view.ResultOfBankOperation;
 import kickstarter.pages.view.TheEnd;
 import kickstarter.pages.view.WrongChoice;
 import kickstarter.payment.Bank;
-import kickstarter.repository.CategoriesRepository;
-import kickstarter.repository.CommentsRepository;
-import kickstarter.repository.ProjectRepository;
-import kickstarter.repository.QuotesRepository;
+import kickstarter.repository.fasade.Repository;
 import kickstarter.ui.ConsoleUI;
 import kickstarter.ui.iUserInterface;
 
 public class Kickstarter {
 
-	private QuotesRepository quotes;
-	private CategoriesRepository categories;
-	private ProjectRepository projects;
-
+	ProjectComments projectComments;
 	private View view;
 	private Model model;
 	public Controller controller;
 	private iUserInterface ui;
-	private CommentsRepository allComments;
+
+	private Repository repository;
 	private Bank bank;
 
 	public Kickstarter() {
@@ -56,10 +52,8 @@ public class Kickstarter {
 	}
 
 	public void init() {
-		allComments = new CommentsRepository();
-		quotes = new QuotesRepository();
-		projects = new ProjectRepository();
-		categories = new CategoriesRepository();
+
+		repository = new Repository();
 		bank = new Bank();
 
 		model = new Model();
@@ -87,32 +81,32 @@ public class Kickstarter {
 		pageModel = new TheEndM(model);
 		model.addPageModel(pageModel);
 
-		pageModel = new CommentM(allComments, projects, model);
+		pageModel = new CommentM(repository, model);
 		model.addPageModel(pageModel);
 
-		pageModel = new InvestM(projects, model);
+		pageModel = new InvestM(repository, model);
 		model.addPageModel(pageModel);
 
-		pageModel = new DonateM(bank, projects, model);
+		pageModel = new DonateM(bank, repository, model);
 		model.addPageModel(pageModel);
 
 		pageModel = new ResultOfBankM(model);
 		model.addPageModel(pageModel);
 
-		pageModel = new ApplyM(bank, projects, model);
+		pageModel = new ApplyM(bank, repository, model);
 		model.addPageModel(pageModel);
 
 	}
 
 	private void viewInit() {
-		PageView pageView = new Categories(categories, quotes, model);
-	//	pageView.pageId = 0;
+
+		PageView pageView = new Categories(repository, model);
 		view.addPageView(pageView);
 
-		pageView = new Projects(projects, model);
+		pageView = new Projects(repository, model);
 		view.addPageView(pageView);
 
-		pageView = new DetailedProject(allComments, projects, model);
+		pageView = new DetailedProject(repository, model);
 		view.addPageView(pageView);
 
 		pageView = new WrongChoice();
@@ -121,13 +115,13 @@ public class Kickstarter {
 		pageView = new TheEnd();
 		view.addPageView(pageView);
 
-		pageView = new Comment(allComments, projects,model);
+		pageView = new Comment(repository, model);
 		view.addPageView(pageView);
 
-		pageView = new Invest(projects, model);
+		pageView = new Invest(repository, model);
 		view.addPageView(pageView);
 
-		pageView = new Donate(bank, projects, model);
+		pageView = new Donate(bank, repository, model);
 		view.addPageView(pageView);
 
 		pageView = new ResultOfBankOperation(model);

@@ -19,6 +19,7 @@ public class CategoriesM extends PageModel {
 		intOptions = options.intCategories;
 
 		if (strOptions != null) {
+			
 			for (int index = 0; index < strOptions.length; index++) {
 				if (message.equals(strOptions[index])) {
 					ModelOptions o = imodel.getModelOptions();

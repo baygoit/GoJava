@@ -4,13 +4,13 @@ import kickstarter.entities.Project;
 import kickstarter.mvc.interfaces.iModel;
 import kickstarter.mvc.options.ModelOptions;
 import kickstarter.payment.Bank;
-import kickstarter.repository.ProjectRepository;
+import kickstarter.repository.fasade.Repository;
 
 public class DonateM extends PageModel {
-	public DonateM(Bank bank, ProjectRepository projects, iModel imodel) {
+	public DonateM(Bank bank,Repository repository, iModel imodel) {
 		super(imodel);
 		this.bank = bank;
-		this.projects = projects;
+		this.repository=repository;
 		this.imodel = imodel;
 	}
 	@Override
@@ -53,7 +53,7 @@ public class DonateM extends PageModel {
 			}
 
 			int projectID = o.intSelectedProject;
-			Project project = projects.getProjectById(projectID);
+			Project project = repository.getProjectById(projectID);
 			project.pledged += getMoney;
 			String setOption = "\nbalance before :" + balanceBefore
 					+ "\nbalance after :" + balanceAfter;
