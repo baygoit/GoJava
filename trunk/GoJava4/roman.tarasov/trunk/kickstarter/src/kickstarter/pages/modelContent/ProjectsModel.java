@@ -15,15 +15,15 @@ public class ProjectsModel extends PageModel {
 			imodel.next(CATEGORIES);
 			return;
 		}
-		ViewOptions in = imodel.getViewOptions();
+		ViewOptions viewOptions = imodel.getViewOptions();
 
-		if (in.intProjects != null) {
-			for (int index = 0; index < in.intProjects.length; index++) {
-				if (message.equals(in.strProjects[index])) {
-					ModelOptions o = imodel.getModelOptions();
-					o.intSelectedProject = in.intProjects[index];
-					o.strSelectedProject = in.strProjects[index];
-					imodel.nextWithOptions(DETAILED_PROJECT, o);
+		if (viewOptions.intProjects != null) {
+			for (int index = 0; index < viewOptions.intProjects.length; index++) {
+				if (message.equals(viewOptions.strProjects[index])) {
+					ModelOptions modelOptions = imodel.getModelOptions();
+					modelOptions.intSelectedProject = viewOptions.intProjects[index];
+					modelOptions.strSelectedProject = viewOptions.strProjects[index];
+					imodel.nextWithOptions(DETAILED_PROJECT, modelOptions);
 					return;
 				}
 			}

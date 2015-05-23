@@ -12,13 +12,12 @@ public class PageView {
 	protected Bank bank;
 	protected ProjectComments projectComments;
 	protected Project project;
-	protected  String[] strOptions;
-	protected  int[] intOptions;
-
+	protected String[] strOptions;
+	protected int[] intOptions;
 	protected Repository repository;
+
 	public void execute(String parameter) {
 	}
-
 
 	public String getHeader() {
 		return null;

@@ -13,12 +13,12 @@ public class Controller {
 		this.imodel = imodel;
 	}
 
-	public void printView() {
-		iview.print();
+	public void showPage() {
+		iview.showPage();
 	}
 
-	public void update(String command) {
-		imodel.update(command);
+	public void update(String message) {
+		imodel.update(message);
 	}
 
 	public void setPage(int pageIndex) {

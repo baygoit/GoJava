@@ -30,9 +30,9 @@ public class Model implements iModel {
 	}
 
 	@Override
-	public void update(String command) {
+	public void update(String message) {
 		pageModel = pagesModel.get(pageIndex);
-		pageModel.update(command);
+		pageModel.update(message);
 		pageModel = pagesModel.get(pageIndex);
 	}
 

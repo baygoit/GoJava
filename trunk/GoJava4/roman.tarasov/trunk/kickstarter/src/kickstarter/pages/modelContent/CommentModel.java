@@ -1,8 +1,6 @@
 package kickstarter.pages.modelContent;
 
-
 import kickstarter.mvc.interfaces.iModel;
-import kickstarter.mvc.options.ModelOptions;
 import kickstarter.repository.facade.Repository;
 
 public class CommentModel extends PageModel {
@@ -10,7 +8,7 @@ public class CommentModel extends PageModel {
 		super(imodel);
 		this.repository = repository;
 		this.imodel = imodel;
-		
+
 	}
 
 	@Override
@@ -19,9 +17,8 @@ public class CommentModel extends PageModel {
 			imodel.next(DETAILED_PROJECT);
 			return;
 		}
-		ModelOptions o = imodel.getModelOptions();
-		int projectID = o.intSelectedProject;
 
+		int projectID = imodel.getModelOptions().intSelectedProject;
 		project = repository.getProjectById(projectID);
 		projectComments = repository.getCommentsByProjectID(project.ID);
 		String[] array = message.split(":");

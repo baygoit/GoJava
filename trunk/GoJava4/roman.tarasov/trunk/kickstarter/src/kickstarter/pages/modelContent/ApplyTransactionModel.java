@@ -9,9 +9,10 @@ import kickstarter.repository.facade.Repository;
 public class ApplyTransactionModel extends PageModel {
 	public ApplyTransactionModel(Bank bank, Repository repository, iModel imodel) {
 		super(imodel);
-		this.bank=bank;
-		this.repository=repository;
+		this.bank = bank;
+		this.repository = repository;
 	}
+
 	@Override
 	public void update(String message) {
 		if (message.equals("p")) {
@@ -22,8 +23,8 @@ public class ApplyTransactionModel extends PageModel {
 		double balanceBefore = 0;
 		double balanceAfter = 0;
 		double getMoney = 0;
-		ModelOptions o =imodel.getModelOptions();
-		strOption=o.strOption;
+		ModelOptions modelOptions = imodel.getModelOptions();
+		strOption = modelOptions.strOption;
 		String resultOfBankOperation = "";
 		if (array.length == 2) {
 			try {
@@ -45,23 +46,23 @@ public class ApplyTransactionModel extends PageModel {
 
 			} catch (NumberFormatException | NullPointerException e) {
 				imodel.savePageBeforeError(DONATE_PAGE);
-				o =imodel.getModelOptions();
-				o.intOption = intOption;
-				o.strOption = resultOfBankOperation;
-				imodel.nextWithOptions(BANK_OPERATION_RESULT_PAGE, o);
+				modelOptions = imodel.getModelOptions();
+				modelOptions.intOption = intOption;
+				modelOptions.strOption = resultOfBankOperation;
+				imodel.nextWithOptions(BANK_OPERATION_RESULT_PAGE, modelOptions);
 				return;
 			}
 
-			int projectID = o.intSelectedProject;
-			Project project = repository.getProjectById(projectID);
+			Project project = repository
+					.getProjectById(modelOptions.intSelectedProject);
 			project.pledged += getMoney;
 
 			String setOption = "\nbalance before :" + balanceBefore
 					+ "\nbalance after :" + balanceAfter;
-		
-			o.intOption = intOption;
-			o.strOption = setOption;
-			imodel.nextWithOptions(BANK_OPERATION_RESULT_PAGE, o);
+
+			modelOptions.intOption = intOption;
+			modelOptions.strOption = setOption;
+			imodel.nextWithOptions(BANK_OPERATION_RESULT_PAGE, modelOptions);
 			return;
 		}
 		imodel.goToAndBack(ERROR_PAGE, APPLY_TRANSACTION_PAGE);

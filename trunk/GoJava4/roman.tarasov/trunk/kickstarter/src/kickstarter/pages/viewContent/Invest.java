@@ -1,21 +1,18 @@
 package kickstarter.pages.viewContent;
 
 import kickstarter.mvc.interfaces.iModel;
-import kickstarter.mvc.options.ModelOptions;
 import kickstarter.repository.facade.Repository;
-
 
 public class Invest extends PageView {
 
 	public Invest(Repository repository, iModel imodel) {
-		this.repository=repository;
-		this.imodel=imodel;
+		this.repository = repository;
+		this.imodel = imodel;
 	}
 
 	public String getHeader() {
-	
-		ModelOptions o = imodel.getModelOptions();
-		int projectID=o.intSelectedProject;
+
+		int projectID = imodel.getModelOptions().intSelectedProject;
 		project = repository.getProjectById(projectID);
 		String header = "";
 		header += "\n=========================";

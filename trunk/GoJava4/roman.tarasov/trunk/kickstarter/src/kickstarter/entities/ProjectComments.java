@@ -18,7 +18,8 @@ public class ProjectComments {
 		int len = getComment().length;
 		if (commentIndex >= len) {
 			String[] newComments = new String[getComment().length + ADD_TO_SIZE];
-			System.arraycopy(getComment(), 0, newComments, 0, getComment().length);
+			System.arraycopy(getComment(), 0, newComments, 0,
+					getComment().length);
 			setComment(newComments);
 
 			int[] newUsersID = new int[len + ADD_TO_SIZE];

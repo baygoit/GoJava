@@ -6,17 +6,16 @@ import kickstarter.repository.facade.Repository;
 
 public class Comment extends PageView {
 
-	
 	public Comment(Repository repository, iModel imodel) {
-		this.repository=repository;
+		this.repository = repository;
 
-		this.imodel=imodel;
+		this.imodel = imodel;
 	}
 
 	public String getHeader() {
-		ModelOptions o =imodel.getModelOptions();
-		int projectID = o.intSelectedProject;
-		
+		ModelOptions modelOptions = imodel.getModelOptions();
+		int projectID = modelOptions.intSelectedProject;
+
 		project = repository.getProjectById(projectID);
 
 		String header = "";

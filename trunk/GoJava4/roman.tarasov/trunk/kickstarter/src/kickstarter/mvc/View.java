@@ -28,7 +28,7 @@ public class View implements iView {
 	}
 
 	@Override
-	public void print() {
+	public void showPage() {
 		
 		pageIndex = imodel.getPageIndex();
 		page = pagesView.get(pageIndex);

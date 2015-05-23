@@ -5,14 +5,13 @@ import java.util.List;
 
 import kickstarter.entities.Project;
 import kickstarter.mvc.interfaces.iModel;
-import kickstarter.mvc.options.ModelOptions;
 import kickstarter.mvc.options.ViewOptions;
 import kickstarter.repository.facade.Repository;
 
 public class Projects extends PageView {
 
 	public Projects(Repository repository, iModel imodel) {
-		this.repository=repository;
+		this.repository = repository;
 		this.imodel = imodel;
 	}
 
@@ -46,10 +45,9 @@ public class Projects extends PageView {
 					+ project.goal + "> pledged:<" + project.pledged
 					+ "> days to go:<" + project.daysToGo + ">");
 		}
-		ViewOptions vo = imodel.getViewOptions();
-		vo.intProjects = intOptions;
-		vo.strProjects = strOptions;
-
+		ViewOptions viewOptions = imodel.getViewOptions();
+		viewOptions.intProjects = intOptions;
+		viewOptions.strProjects = strOptions;
 		return result;
 	}
 
@@ -60,8 +58,7 @@ public class Projects extends PageView {
 		header += "\n|     Projects         |";
 		header += "\n|______________________|";
 		header += "\n";
-		ModelOptions mo = imodel.getModelOptions();
-		int categogyID = mo.intSelectedCategory;
+		int categogyID = imodel.getModelOptions().intSelectedCategory;
 		header += printProjectsInfo(categogyID);
 		header += "\n------------------------";
 		header += "\nSelect project by ID:<ID>";

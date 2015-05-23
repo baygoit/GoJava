@@ -1,13 +1,11 @@
 package kickstarter.pages.viewContent;
 
-
 import kickstarter.mvc.interfaces.iModel;
-import kickstarter.mvc.options.ModelOptions;
 
 public class ResultOfBankOperation extends PageView {
 
 	public ResultOfBankOperation(iModel imodel) {
-		this.imodel=imodel;
+		this.imodel = imodel;
 	}
 
 	public String getHeader() {
@@ -17,8 +15,7 @@ public class ResultOfBankOperation extends PageView {
 		header += "\n============================";
 		header += "\n";
 		header += "\n------------------------";
-		ModelOptions o = imodel.getModelOptions();
-		header += o.strOption;
+		header += imodel.getModelOptions().strOption;
 		header += "\nOptions: <p>- previous page  ";
 		return header;
 	}

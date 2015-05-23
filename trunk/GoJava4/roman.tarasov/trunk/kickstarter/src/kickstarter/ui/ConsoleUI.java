@@ -1,10 +1,10 @@
 package kickstarter.ui;
 
-
 import java.util.Scanner;
 
 public class ConsoleUI implements iUserInterface {
 	Scanner scanner;
+
 	public ConsoleUI() {
 		scanner = new Scanner(System.in);
 	}

@@ -52,20 +52,18 @@ public class Kickstarter {
 	}
 
 	public void init() {
-
 		repository = new Repository();
 		bank = new Bank();
-
 		model = new Model();
 		ui = new ConsoleUI();
 		view = new View(model, ui);
 		controller = new Controller(view, model);
 		viewInit();
 		modelInit();
-
 	}
 
 	private void modelInit() {
+		controller.setPage(0);
 		PageModel pageModel = new CategoriesModel(model);
 		model.addPageModel(pageModel);
 
@@ -136,12 +134,12 @@ public class Kickstarter {
 	}
 
 	private void run() {
-		String command = null;
+		String message = null;
 
 		while (true) {
-			controller.printView();
-			command = ui.inputString();
-			controller.update(command);
+			controller.showPage();
+			message = ui.inputString();
+			controller.update(message);
 		}
 	}
 }

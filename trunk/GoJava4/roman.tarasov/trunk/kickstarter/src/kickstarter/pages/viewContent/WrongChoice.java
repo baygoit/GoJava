@@ -1,6 +1,5 @@
 package kickstarter.pages.viewContent;
 
-
 public class WrongChoice extends PageView {
 
 	public String getHeader() {

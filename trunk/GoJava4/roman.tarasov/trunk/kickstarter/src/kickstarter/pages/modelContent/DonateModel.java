@@ -25,7 +25,7 @@ public class DonateModel extends PageModel {
 		double balanceAfter = 0;
 		double getMoney = 0;
 		String resultOfBankOperation = "";
-		ModelOptions o = imodel.getModelOptions();
+		ModelOptions modelOptions = imodel.getModelOptions();
 		if (array.length == 3) {
 			try {
 				balanceBefore = bank.getBalance(array[0], array[1]);
@@ -46,21 +46,21 @@ public class DonateModel extends PageModel {
 
 			} catch (NumberFormatException | NullPointerException e) {
 				imodel.savePageBeforeError(DONATE_PAGE);
-				o.intOption = intOption;
-				o.strOption = resultOfBankOperation;
-				imodel.nextWithOptions(BANK_OPERATION_RESULT_PAGE, o);
+				modelOptions.intOption = intOption;
+				modelOptions.strOption = resultOfBankOperation;
+				imodel.nextWithOptions(BANK_OPERATION_RESULT_PAGE, modelOptions);
 				return;
 			}
 
-			int projectID = o.intSelectedProject;
+			int projectID = modelOptions.intSelectedProject;
 			Project project = repository.getProjectById(projectID);
 			project.pledged += getMoney;
 			String setOption = "\nbalance before :" + balanceBefore
 					+ "\nbalance after :" + balanceAfter;
 
-			o.intOption = intOption;
-			o.strOption = setOption;
-			imodel.nextWithOptions(BANK_OPERATION_RESULT_PAGE, o);
+			modelOptions.intOption = intOption;
+			modelOptions.strOption = setOption;
+			imodel.nextWithOptions(BANK_OPERATION_RESULT_PAGE, modelOptions);
 			return;
 		}
 

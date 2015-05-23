@@ -14,19 +14,19 @@ public class CategoriesModel extends PageModel {
 			imodel.next(END_PAGE);
 			return;
 		}
-		ViewOptions options = imodel.getViewOptions();
-		strOptions = options.strCategories;
-		intOptions = options.intCategories;
+		ViewOptions vieOptions = imodel.getViewOptions();
+		strOptions = vieOptions.strCategories;
+		intOptions = vieOptions.intCategories;
 
 		if (strOptions != null) {
 			
 			for (int index = 0; index < strOptions.length; index++) {
 				if (message.equals(strOptions[index])) {
-					ModelOptions o = imodel.getModelOptions();
-					o.intOption = intOptions[index];
-					o.intSelectedCategory = intOptions[index];
-					o.strSelectedCategory = strOptions[index];
-					imodel.nextWithOptions(PROJECTS, o);
+					ModelOptions modelOptions = imodel.getModelOptions();
+					modelOptions.intOption = intOptions[index];
+					modelOptions.intSelectedCategory = intOptions[index];
+					modelOptions.strSelectedCategory = strOptions[index];
+					imodel.nextWithOptions(PROJECTS, modelOptions);
 					return;
 				}
 			}
