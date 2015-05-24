@@ -12,8 +12,7 @@ public class Invest extends PageView {
 
 	public String getHeader() {
 
-		int projectID = imodel.getModelOptions().intSelectedProject;
-		project = repository.getProjectById(projectID);
+		project = repository.getProjectById(imodel.getModelOptions().intSelectedProject);
 		String header = "";
 		header += "\n=========================";
 		header += "\n|   invest to project   |";
@@ -24,8 +23,7 @@ public class Invest extends PageView {
 		intOptions = new int[length];
 		strOptions = new String[length];
 		for (int index = 0; index < length; index++) {
-			String option = project.investmentOptions[index];
-			header += "\n" + (index + 1) + " -" + option;
+			header += "\n" + (index + 1) + " -" +  project.investmentOptions[index];
 			intOptions[index] = index + 1;
 			strOptions[index] = Integer.toString(index + 1);
 		}

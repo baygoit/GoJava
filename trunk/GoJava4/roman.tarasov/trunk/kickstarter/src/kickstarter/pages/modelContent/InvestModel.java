@@ -1,7 +1,6 @@
 package kickstarter.pages.modelContent;
 
 import kickstarter.mvc.interfaces.iModel;
-import kickstarter.mvc.options.ModelOptions;
 import kickstarter.repository.facade.Repository;
 
 public class InvestModel extends PageModel {
@@ -13,15 +12,14 @@ public class InvestModel extends PageModel {
 	}
 
 	@Override
-	public void update(String message) {
+	public void updateStateOfPageModel(String message) {
 
 		if (message.equals("p")) {
 			imodel.next(DETAILED_PROJECT);
 			return;
 		}
-		ModelOptions modelOptions = imodel.getModelOptions();
-		int projectID = modelOptions.intSelectedProject;
-		project = repository.getProjectById(projectID);
+		modelOptions = imodel.getModelOptions();
+		project = repository.getProjectById(modelOptions.intSelectedProject);
 		double amount = 0;
 		try {
 			int selected = Integer.parseInt(message);
@@ -31,9 +29,8 @@ public class InvestModel extends PageModel {
 			imodel.goToAndBack(ERROR_PAGE, INVEST_PAGE);
 			return;
 		}
-		modelOptions = imodel.getModelOptions();
 		modelOptions.intOption = intOption;
-		modelOptions.strOption = Double.toString(amount);
+		modelOptions.amountToInvest = Double.toString(amount);
 		imodel.nextWithOptions(APPLY_TRANSACTION_PAGE, modelOptions);
 	}
 }

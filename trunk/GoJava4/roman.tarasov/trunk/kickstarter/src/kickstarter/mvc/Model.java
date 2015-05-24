@@ -10,7 +10,7 @@ import kickstarter.pages.modelContent.PageModel;
 
 public class Model implements iModel {
 
-	private int pageIndex;
+	private int currentPage;
 	private ModelOptions modelOptions;
 	private ViewOptions viewOptions;
 
@@ -30,10 +30,10 @@ public class Model implements iModel {
 	}
 
 	@Override
-	public void update(String message) {
-		pageModel = pagesModel.get(pageIndex);
-		pageModel.update(message);
-		pageModel = pagesModel.get(pageIndex);
+	public void updateStateOfModel(String message) {
+		pageModel = pagesModel.get(currentPage);
+		pageModel.updateStateOfPageModel(message);
+		pageModel = pagesModel.get(currentPage);
 	}
 
 	@Override
@@ -43,17 +43,17 @@ public class Model implements iModel {
 
 	@Override
 	public void setPage(int setPage) {
-		this.pageIndex = setPage;
+		this.currentPage = setPage;
 	}
 
 	@Override
-	public int getPageIndex() {
-		return pageIndex;
+	public int getCurrentPage() {
+		return currentPage;
 	}
 
 	@Override
 	public void next(int nextPage) {
-		this.pageIndex = nextPage;
+		this.currentPage = nextPage;
 	}
 
 	@Override
@@ -69,7 +69,7 @@ public class Model implements iModel {
 	@Override
 	public void goToAndBack(int toPage, int back) {
 		this.savePage = back;
-		this.pageIndex = toPage;
+		this.currentPage = toPage;
 	}
 
 	@Override
@@ -79,7 +79,7 @@ public class Model implements iModel {
 
 	@Override
 	public void nextWithOptions(int next, ModelOptions o) {
-		this.pageIndex = next;
+		this.currentPage = next;
 		this.modelOptions = o;
 	}
 

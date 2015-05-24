@@ -20,7 +20,7 @@ public class Projects extends PageView {
 		List<Project> sortedProjects = new ArrayList<Project>();
 		int length = repository.getProjectsLength();
 		for (int index = 0; index < length; index++) {
-			Project project = repository.getProject(index);
+			project = repository.getProject(index);
 			if (project.categoryID == categoryID) {
 				sortedProjects.add(project);
 			}
@@ -35,7 +35,7 @@ public class Projects extends PageView {
 		strOptions = new String[length];
 		intOptions = new int[length];
 		for (int index = 0; index < length; index++) {
-			Project project = sortedToSelect.get(index);
+			project = sortedToSelect.get(index);
 
 			strOptions[index] = Integer.toString(project.ID);
 			intOptions[index] = project.ID;
@@ -58,8 +58,7 @@ public class Projects extends PageView {
 		header += "\n|     Projects         |";
 		header += "\n|______________________|";
 		header += "\n";
-		int categogyID = imodel.getModelOptions().intSelectedCategory;
-		header += printProjectsInfo(categogyID);
+		header += printProjectsInfo(imodel.getModelOptions().intSelectedCategory);
 		header += "\n------------------------";
 		header += "\nSelect project by ID:<ID>";
 		header += "\nOptions:  <p> - previous page";

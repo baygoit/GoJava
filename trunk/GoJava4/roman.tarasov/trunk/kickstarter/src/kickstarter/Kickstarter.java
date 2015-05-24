@@ -1,6 +1,5 @@
 package kickstarter;
 
-import kickstarter.entities.ProjectComments;
 import kickstarter.mvc.Controller;
 import kickstarter.mvc.Model;
 import kickstarter.mvc.View;
@@ -12,9 +11,9 @@ import kickstarter.pages.modelContent.DonateModel;
 import kickstarter.pages.modelContent.InvestModel;
 import kickstarter.pages.modelContent.PageModel;
 import kickstarter.pages.modelContent.ProjectsModel;
-import kickstarter.pages.modelContent.ResultOfBankModel;
+import kickstarter.pages.modelContent.ResultOfBankOperationModel;
 import kickstarter.pages.modelContent.TheEndModel;
-import kickstarter.pages.modelContent.WrongModel;
+import kickstarter.pages.modelContent.WrongChoiceModel;
 import kickstarter.pages.viewContent.ApplyTransaction;
 import kickstarter.pages.viewContent.Categories;
 import kickstarter.pages.viewContent.Comment;
@@ -33,7 +32,7 @@ import kickstarter.ui.iUserInterface;
 
 public class Kickstarter {
 
-	ProjectComments projectComments;
+
 	private View view;
 	private Model model;
 	public Controller controller;
@@ -73,7 +72,7 @@ public class Kickstarter {
 		pageModel = new DetailedProjectModel(model);
 		model.addPageModel(pageModel);
 
-		pageModel = new WrongModel(model);
+		pageModel = new WrongChoiceModel(model);
 		model.addPageModel(pageModel);
 
 		pageModel = new TheEndModel(model);
@@ -88,7 +87,7 @@ public class Kickstarter {
 		pageModel = new DonateModel(bank, repository, model);
 		model.addPageModel(pageModel);
 
-		pageModel = new ResultOfBankModel(model);
+		pageModel = new ResultOfBankOperationModel(model);
 		model.addPageModel(pageModel);
 
 		pageModel = new ApplyTransactionModel(bank, repository, model);
@@ -139,7 +138,7 @@ public class Kickstarter {
 		while (true) {
 			controller.showPage();
 			message = ui.inputString();
-			controller.update(message);
+			controller.updateStateOfModel(message);
 		}
 	}
 }

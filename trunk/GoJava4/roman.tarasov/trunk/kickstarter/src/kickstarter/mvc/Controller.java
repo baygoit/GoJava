@@ -17,11 +17,11 @@ public class Controller {
 		iview.showPage();
 	}
 
-	public void update(String message) {
-		imodel.update(message);
+	public void updateStateOfModel(String message) {
+		imodel.updateStateOfModel(message);
 	}
 
-	public void setPage(int pageIndex) {
-		imodel.setPage(pageIndex);
+	public void setPage(int currentPage) {
+		imodel.setPage(currentPage);
 	}
 }

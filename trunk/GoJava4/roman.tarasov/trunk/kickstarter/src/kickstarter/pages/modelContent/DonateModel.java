@@ -1,20 +1,19 @@
 package kickstarter.pages.modelContent;
 
-import kickstarter.entities.Project;
 import kickstarter.mvc.interfaces.iModel;
-import kickstarter.mvc.options.ModelOptions;
 import kickstarter.payment.Bank;
 import kickstarter.repository.facade.Repository;
 
 public class DonateModel extends PageModel {
-	public DonateModel(Bank bank,Repository repository, iModel imodel) {
+	public DonateModel(Bank bank, Repository repository, iModel imodel) {
 		super(imodel);
 		this.bank = bank;
-		this.repository=repository;
+		this.repository = repository;
 		this.imodel = imodel;
 	}
+
 	@Override
-	public void update(String message) {
+	public void updateStateOfPageModel(String message) {
 		if (message.equals("p")) {
 			imodel.next(DETAILED_PROJECT);
 			return;
@@ -25,7 +24,7 @@ public class DonateModel extends PageModel {
 		double balanceAfter = 0;
 		double getMoney = 0;
 		String resultOfBankOperation = "";
-		ModelOptions modelOptions = imodel.getModelOptions();
+		modelOptions = imodel.getModelOptions();
 		if (array.length == 3) {
 			try {
 				balanceBefore = bank.getBalance(array[0], array[1]);
@@ -47,19 +46,18 @@ public class DonateModel extends PageModel {
 			} catch (NumberFormatException | NullPointerException e) {
 				imodel.savePageBeforeError(DONATE_PAGE);
 				modelOptions.intOption = intOption;
-				modelOptions.strOption = resultOfBankOperation;
+				modelOptions.resultOfBankOperation = resultOfBankOperation;
 				imodel.nextWithOptions(BANK_OPERATION_RESULT_PAGE, modelOptions);
 				return;
 			}
 
-			int projectID = modelOptions.intSelectedProject;
-			Project project = repository.getProjectById(projectID);
+			project = repository
+					.getProjectById(modelOptions.intSelectedProject);
 			project.pledged += getMoney;
-			String setOption = "\nbalance before :" + balanceBefore
-					+ "\nbalance after :" + balanceAfter;
 
 			modelOptions.intOption = intOption;
-			modelOptions.strOption = setOption;
+			modelOptions.resultOfBankOperation = "\nbalance before :"
+					+ balanceBefore + "\nbalance after :" + balanceAfter;
 			imodel.nextWithOptions(BANK_OPERATION_RESULT_PAGE, modelOptions);
 			return;
 		}

@@ -15,7 +15,7 @@ public class ResultOfBankOperation extends PageView {
 		header += "\n============================";
 		header += "\n";
 		header += "\n------------------------";
-		header += imodel.getModelOptions().strOption;
+		header += imodel.getModelOptions().resultOfBankOperation;
 		header += "\nOptions: <p>- previous page  ";
 		return header;
 	}

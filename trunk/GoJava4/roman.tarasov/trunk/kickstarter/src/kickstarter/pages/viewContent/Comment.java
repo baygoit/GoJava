@@ -1,10 +1,11 @@
 package kickstarter.pages.viewContent;
 
 import kickstarter.mvc.interfaces.iModel;
-import kickstarter.mvc.options.ModelOptions;
 import kickstarter.repository.facade.Repository;
 
 public class Comment extends PageView {
+
+
 
 	public Comment(Repository repository, iModel imodel) {
 		this.repository = repository;
@@ -13,10 +14,8 @@ public class Comment extends PageView {
 	}
 
 	public String getHeader() {
-		ModelOptions modelOptions = imodel.getModelOptions();
-		int projectID = modelOptions.intSelectedProject;
-
-		project = repository.getProjectById(projectID);
+		modelOptions = imodel.getModelOptions();
+		project = repository.getProjectById(modelOptions.intSelectedProject);
 
 		String header = "";
 		header += "\n_________________________";

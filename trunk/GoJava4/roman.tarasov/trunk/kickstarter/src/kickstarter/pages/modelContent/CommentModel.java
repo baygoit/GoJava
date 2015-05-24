@@ -12,14 +12,13 @@ public class CommentModel extends PageModel {
 	}
 
 	@Override
-	public void update(String message) {
+	public void updateStateOfPageModel(String message) {
 		if (message.equals("p")) {
 			imodel.next(DETAILED_PROJECT);
 			return;
 		}
 
-		int projectID = imodel.getModelOptions().intSelectedProject;
-		project = repository.getProjectById(projectID);
+		project = repository.getProjectById(imodel.getModelOptions().intSelectedProject);
 		projectComments = repository.getCommentsByProjectID(project.ID);
 		String[] array = message.split(":");
 		if (array[0].equals("a") && array.length == 2) {

@@ -3,46 +3,42 @@ package kickstarter.pages.modelContent;
 import kickstarter.entities.Project;
 import kickstarter.entities.ProjectComments;
 import kickstarter.mvc.interfaces.iModel;
+import kickstarter.mvc.options.ModelOptions;
 import kickstarter.pages.viewContent.PageView;
 import kickstarter.payment.Bank;
 import kickstarter.repository.facade.Repository;
 
-public class PageModel {
+public abstract class PageModel {
 	
-	final int CATEGORIES = 0;
-	final int PROJECTS = 1;
-	final int DETAILED_PROJECT = 2;
-	final int ERROR_PAGE = 3;
-	final int END_PAGE = 4;
-	final int COMMENT_PAGE = 5;
-	final int INVEST_PAGE = 6;
-	final int DONATE_PAGE = 7;
-	final int BANK_OPERATION_RESULT_PAGE = 8;
-	final int APPLY_TRANSACTION_PAGE = 9;
+	protected final int CATEGORIES = 0;
+	protected final int PROJECTS = 1;
+	protected final int DETAILED_PROJECT = 2;
+	protected final int ERROR_PAGE = 3;
+	protected final int END_PAGE = 4;
+	protected final int COMMENT_PAGE = 5;
+	protected final int INVEST_PAGE = 6;
+	protected final int DONATE_PAGE = 7;
+	protected final int BANK_OPERATION_RESULT_PAGE = 8;
+	protected final int APPLY_TRANSACTION_PAGE = 9;
 	
-	public String[] strOptions;
-	public int[] intOptions;
-	public int intOption;
-	public String strOption;
-	public int pageId;
-	public String name;
-	int nextPage;
-	Project project;
-	Bank bank;
-	Repository repository;
-	ProjectComments projectComments;
+	protected String[] strOptions;
+	protected int[] intOptions;
+	protected int intOption;
+	protected String strOption;
+	protected int pageId;
+	protected int nextPage;
+	protected Project project;
+	protected Bank bank;
+	protected Repository repository;
+	protected ProjectComments projectComments;
+	protected ModelOptions modelOptions;
+	protected iModel imodel;
+	protected PageView page;
 
-	iModel imodel;
-	PageView page;
-
-	public PageView getPage() {
-		return null;
-	}
 
 	PageModel(iModel imodel) {
 		this.imodel = imodel;
 	}
 
-	public void update(String command) {
-	}
+	public abstract void updateStateOfPageModel(String message);
 }

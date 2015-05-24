@@ -6,7 +6,7 @@ import kickstarter.pages.modelContent.PageModel;
 
 public interface iModel {
 
-	public void update(String command);
+	public void updateStateOfModel(String command);
 
 	ModelOptions getModelOptions();
 
@@ -30,6 +30,6 @@ public interface iModel {
 
 	void addPageModel(PageModel pageModel);
 
-	public int getPageIndex();
+	public int getCurrentPage();
 
 }

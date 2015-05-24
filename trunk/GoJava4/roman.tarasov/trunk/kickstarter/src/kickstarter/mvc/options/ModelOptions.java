@@ -9,5 +9,6 @@ public class ModelOptions {
 	public String strSelectedCategory;
 	public int intSelectedProject;
 	public String strSelectedProject;
-
+	public String resultOfBankOperation;
+	public String amountToInvest;
 }

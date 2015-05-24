@@ -1,7 +1,6 @@
 package kickstarter.pages.modelContent;
 
 import kickstarter.mvc.interfaces.iModel;
-import kickstarter.mvc.options.ModelOptions;
 
 public class DetailedProjectModel extends PageModel {
 	public DetailedProjectModel(iModel imodel) {
@@ -9,10 +8,10 @@ public class DetailedProjectModel extends PageModel {
 	}
 
 	@Override
-	public void update(String message) {
+	public void updateStateOfPageModel(String message) {
 
 		if (message.equals("p")) {
-			ModelOptions modelOptions = imodel.getModelOptions();
+			modelOptions = imodel.getModelOptions();
 			imodel.nextWithOptions(PROJECTS, modelOptions);
 			return;
 		}
@@ -21,13 +20,13 @@ public class DetailedProjectModel extends PageModel {
 			return;
 		}
 		if (message.equals("i")) {
-			ModelOptions modelOptions = imodel.getModelOptions();
+			modelOptions = imodel.getModelOptions();
 			modelOptions.intOption = intOption;
 			imodel.nextWithOptions(INVEST_PAGE, modelOptions);
 			return;
 		}
 		if (message.equals("d")) {
-			ModelOptions modelOptions = imodel.getModelOptions();
+			modelOptions = imodel.getModelOptions();
 			modelOptions.intOption = intOption;
 			imodel.nextWithOptions(DONATE_PAGE, modelOptions);
 			return;

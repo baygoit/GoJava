@@ -1,8 +1,6 @@
 package kickstarter.pages.modelContent;
 
-import kickstarter.entities.Project;
 import kickstarter.mvc.interfaces.iModel;
-import kickstarter.mvc.options.ModelOptions;
 import kickstarter.payment.Bank;
 import kickstarter.repository.facade.Repository;
 
@@ -14,7 +12,7 @@ public class ApplyTransactionModel extends PageModel {
 	}
 
 	@Override
-	public void update(String message) {
+	public void updateStateOfPageModel(String message) {
 		if (message.equals("p")) {
 			imodel.next(DETAILED_PROJECT);
 			return;
@@ -23,8 +21,8 @@ public class ApplyTransactionModel extends PageModel {
 		double balanceBefore = 0;
 		double balanceAfter = 0;
 		double getMoney = 0;
-		ModelOptions modelOptions = imodel.getModelOptions();
-		strOption = modelOptions.strOption;
+		modelOptions = imodel.getModelOptions();
+		String amountToInvest = modelOptions.amountToInvest;
 		String resultOfBankOperation = "";
 		if (array.length == 2) {
 			try {
@@ -33,8 +31,8 @@ public class ApplyTransactionModel extends PageModel {
 					resultOfBankOperation = "\nbalance error\n";
 					throw new NullPointerException("balance error");
 				}
-				getMoney = Double.parseDouble(strOption);
-				if (!bank.getMoney(array[0], array[1], strOption)) {
+				getMoney = Double.parseDouble(amountToInvest);
+				if (!bank.getMoney(array[0], array[1], amountToInvest)) {
 					resultOfBankOperation = "\nbank operation error\n";
 					throw new NullPointerException("bank operation error");
 				}
@@ -47,24 +45,22 @@ public class ApplyTransactionModel extends PageModel {
 			} catch (NumberFormatException | NullPointerException e) {
 				imodel.savePageBeforeError(DONATE_PAGE);
 				modelOptions = imodel.getModelOptions();
-				modelOptions.intOption = intOption;
-				modelOptions.strOption = resultOfBankOperation;
+				modelOptions.resultOfBankOperation = resultOfBankOperation;
 				imodel.nextWithOptions(BANK_OPERATION_RESULT_PAGE, modelOptions);
 				return;
 			}
 
-			Project project = repository
+			project = repository
 					.getProjectById(modelOptions.intSelectedProject);
 			project.pledged += getMoney;
 
-			String setOption = "\nbalance before :" + balanceBefore
+			modelOptions.resultOfBankOperation = "\nbalance before :" + balanceBefore
 					+ "\nbalance after :" + balanceAfter;
-
-			modelOptions.intOption = intOption;
-			modelOptions.strOption = setOption;
 			imodel.nextWithOptions(BANK_OPERATION_RESULT_PAGE, modelOptions);
 			return;
 		}
 		imodel.goToAndBack(ERROR_PAGE, APPLY_TRANSACTION_PAGE);
 	}
+
+
 }

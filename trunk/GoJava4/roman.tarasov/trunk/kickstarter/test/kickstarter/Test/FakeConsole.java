@@ -43,7 +43,7 @@ public class FakeConsole {
 
 	void put(String command) {
 		System.out.println("_________   " + command + "  _________");
-		kickstarter.controller.update(command);
+		kickstarter.controller.updateStateOfModel(command);
 	}
 
 	void view() {

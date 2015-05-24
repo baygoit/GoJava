@@ -1,7 +1,6 @@
 package kickstarter.pages.viewContent;
 
 import kickstarter.entities.ProjectComments;
-import kickstarter.entities.Project;
 import kickstarter.mvc.interfaces.iModel;
 import kickstarter.repository.facade.Repository;
 
@@ -18,8 +17,8 @@ public class DetailedProject extends PageView {
 	}
 
 	public String getHeader() {
-		int projectID = imodel.getModelOptions().intSelectedProject;
-		Project project = repository.getProjectById(projectID);
+	
+		project = repository.getProjectById(imodel.getModelOptions().intSelectedProject);
 		String header = "";
 		header += "\n________________________";
 		header += "\n|Detailed project info |";

@@ -8,7 +8,7 @@ public class TheEndModel extends PageModel {
 		super(imodel);
 	}
 	@Override
-	public void update(String message) {
+	public void updateStateOfPageModel(String message) {
 		System.exit(0);
 	}
 }

@@ -14,7 +14,7 @@ public class View implements iView {
 	private PageView page;
 	private iUserInterface ui;
 	private List<PageView> pagesView;
-	private int pageIndex;
+	private int currentPage;
 
 	public View(iModel imodel, iUserInterface ui) {
 		this.imodel = imodel;
@@ -30,9 +30,8 @@ public class View implements iView {
 	@Override
 	public void showPage() {
 		
-		pageIndex = imodel.getPageIndex();
-		page = pagesView.get(pageIndex);
-		String header = page.getHeader();
-		ui.display(header);
+		currentPage = imodel.getCurrentPage();
+		page = pagesView.get(currentPage);
+		ui.display(page.getHeader());
 	}
 }
