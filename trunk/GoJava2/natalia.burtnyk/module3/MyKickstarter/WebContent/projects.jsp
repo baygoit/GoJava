@@ -12,11 +12,7 @@
 			<a href="/MyKickstarter/project?id=${project.id}">
 			<c:out value="${project.id}"/>
 			<c:out value="${project.name}"/></a><br/>
-			<c:out value="${project.description}"/><br/>
-			<c:out value="${project.history}"/><br/>
-			<c:out value="${project.requiredAmount}"/><br/>
-			<c:out value="${project.total}"/><br/>
-			<c:out value="${project.days}"/><br/>
+			<c:out value="${project.description}"/>
 			<br/>-----------------------------------
 			<br/>
 		</c:forEach>
