@@ -1,242 +1,274 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<class-diagram version="1.1.8" icons="true" automaticImage="PNG" always-add-relationships="false" generalizations="true" 
-  realizations="true" associations="true" dependencies="false" nesting-relationships="true">  
-  <class id="1" language="java" name="go_java_4.vadya_zakusylo.kickstarter.KickStarter" project="KickStarter" 
-    file="/KickStarter/src/go_java_4/vadya_zakusylo/kickstarter/KickStarter.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="641" y="122"/>    
-    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="false" protected="true" private="false" static="true"/>      
-      <operations public="true" package="false" protected="true" private="false" static="true"/>    
-    </display>  
-  </class>  
-  <class id="2" language="java" name="go_java_4.vadya_zakusylo.kickstarter.Runner" project="KickStarter" 
-    file="/KickStarter/src/go_java_4/vadya_zakusylo/kickstarter/Runner.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="690" y="6"/>    
-    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="false" protected="true" private="false" static="true"/>      
-      <operations public="true" package="false" protected="true" private="false" static="true"/>    
-    </display>  
-  </class>  
-  <class id="3" language="java" name="go_java_4.vadya_zakusylo.kickstarter.input.ConsoleInput" project="KickStarter" 
-    file="/KickStarter/src/go_java_4/vadya_zakusylo/kickstarter/input/ConsoleInput.java" binary="false" 
+<class-diagram version="1.1.8" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
+  associations="true" dependencies="false" nesting-relationships="true">  
+  <class id="1" language="java" name="go_java_4.vadya_zakusylo.kickstarter.repository.Project" project="KickStarter" 
+    file="/KickStarter/src/go_java_4/vadya_zakusylo/kickstarter/repository/Project.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="85" width="116" x="864" y="288"/>    
-    <display autosize="false" stereotype="true" package="false" initial-value="false" signature="true" 
+    <position height="-1" width="-1" x="1302" y="189"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="false" protected="true" private="false" static="true"/>      
-      <operations public="true" package="false" protected="true" private="false" static="true"/>    
+      <attributes public="true" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <interface id="4" language="java" name="go_java_4.vadya_zakusylo.kickstarter.input.Input" project="KickStarter" 
-    file="/KickStarter/src/go_java_4/vadya_zakusylo/kickstarter/input/Input.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="67" width="111" x="864" y="176"/>    
-    <display autosize="false" stereotype="true" package="false" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="false" protected="true" private="false" static="true"/>      
-      <operations public="true" package="false" protected="true" private="false" static="true"/>    
-    </display>  
-  </interface>  
-  <interface id="5" language="java" name="go_java_4.vadya_zakusylo.kickstarter.output.Output" project="KickStarter" 
-    file="/KickStarter/src/go_java_4/vadya_zakusylo/kickstarter/output/Output.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="67" width="116" x="1041" y="174"/>    
-    <display autosize="false" stereotype="true" package="false" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="false" protected="true" private="false" static="true"/>      
-      <operations public="true" package="false" protected="true" private="false" static="true"/>    
-    </display>  
-  </interface>  
-  <class id="6" language="java" name="go_java_4.vadya_zakusylo.kickstarter.output.ConsoleOutput" project="KickStarter" 
-    file="/KickStarter/src/go_java_4/vadya_zakusylo/kickstarter/output/ConsoleOutput.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="85" width="115" x="1043" y="287"/>    
-    <display autosize="false" stereotype="true" package="false" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="false" protected="true" private="false" static="true"/>      
-      <operations public="true" package="false" protected="true" private="false" static="true"/>    
-    </display>  
-  </class>  
-  <class id="7" language="java" name="go_java_4.vadya_zakusylo.kickstarter.repository.ArrayCategory" 
-    project="KickStarter" file="/KickStarter/src/go_java_4/vadya_zakusylo/kickstarter/repository/ArrayCategory.java" 
+  <interface id="2" language="java" name="go_java_4.vadya_zakusylo.kickstarter.repository.CategoryInterface" 
+    project="KickStarter" file="/KickStarter/src/go_java_4/vadya_zakusylo/kickstarter/repository/CategoryInterface.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="91" y="529"/>    
-    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+    <position height="-1" width="-1" x="1300" y="488"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="false" protected="true" private="false" static="true"/>      
-      <operations public="true" package="false" protected="true" private="false" static="true"/>    
+      <attributes public="true" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="3" language="java" name="go_java_4.vadya_zakusylo.kickstarter.repository.QuoteInterface" 
+    project="KickStarter" file="/KickStarter/src/go_java_4/vadya_zakusylo/kickstarter/repository/QuoteInterface.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="685" y="485"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="4" language="java" name="go_java_4.vadya_zakusylo.kickstarter.Main" project="KickStarter" 
+    file="/KickStarter/src/go_java_4/vadya_zakusylo/kickstarter/Main.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="684" y="224"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="5" language="java" name="go_java_4.vadya_zakusylo.kickstarter.repository.ProjectInterface" 
+    project="KickStarter" file="/KickStarter/src/go_java_4/vadya_zakusylo/kickstarter/repository/ProjectInterface.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1563" y="478"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="6" language="java" name="go_java_4.vadya_zakusylo.kickstarter.repository.Content" project="KickStarter" 
+    file="/KickStarter/src/go_java_4/vadya_zakusylo/kickstarter/repository/Content.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="967" y="699"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" name="go_java_4.vadya_zakusylo.kickstarter.KickStarter" project="KickStarter" 
+    file="/KickStarter/src/go_java_4/vadya_zakusylo/kickstarter/KickStarter.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="967" y="215"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
   <class id="8" language="java" name="go_java_4.vadya_zakusylo.kickstarter.repository.Category" project="KickStarter" 
     file="/KickStarter/src/go_java_4/vadya_zakusylo/kickstarter/repository/Category.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="638" y="528"/>    
-    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+    <position height="-1" width="-1" x="1564" y="201"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="false" protected="true" private="false" static="true"/>      
-      <operations public="true" package="false" protected="true" private="false" static="true"/>    
+      <attributes public="true" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <class id="9" language="java" name="go_java_4.vadya_zakusylo.kickstarter.repository.Content" project="KickStarter" 
-    file="/KickStarter/src/go_java_4/vadya_zakusylo/kickstarter/repository/Content.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="92" y="208"/>    
-    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="false" protected="true" private="false" static="true"/>      
-      <operations public="true" package="false" protected="true" private="false" static="true"/>    
-    </display>  
-  </class>  
-  <class id="10" language="java" name="go_java_4.vadya_zakusylo.kickstarter.repository.CreativeQuote" 
-    project="KickStarter" file="/KickStarter/src/go_java_4/vadya_zakusylo/kickstarter/repository/CreativeQuote.java" 
+  <interface id="9" language="java" name="go_java_4.vadya_zakusylo.kickstarter.repository.ContentInterface" 
+    project="KickStarter" file="/KickStarter/src/go_java_4/vadya_zakusylo/kickstarter/repository/ContentInterface.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="121" y="13"/>    
-    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+    <position height="-1" width="-1" x="967" y="493"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="false" protected="true" private="false" static="true"/>      
-      <operations public="true" package="false" protected="true" private="false" static="true"/>    
+      <attributes public="true" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="false" static="true"/>    
     </display>  
-  </class>  
-  <class id="11" language="java" name="go_java_4.vadya_zakusylo.kickstarter.repository.Quote" project="KickStarter" 
+  </interface>  
+  <class id="10" language="java" name="go_java_4.vadya_zakusylo.kickstarter.repository.Quote" project="KickStarter" 
     file="/KickStarter/src/go_java_4/vadya_zakusylo/kickstarter/repository/Quote.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="301" y="13"/>    
-    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+    <position height="-1" width="-1" x="683" y="694"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="false" protected="true" private="false" static="true"/>      
-      <operations public="true" package="false" protected="true" private="false" static="true"/>    
+      <attributes public="true" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <class id="12" language="java" name="go_java_4.vadya_zakusylo.kickstarter.repository.Project" project="KickStarter" 
-    file="/KickStarter/src/go_java_4/vadya_zakusylo/kickstarter/repository/Project.java" binary="false" 
+  <class id="11" language="java" name="go_java_4.vadya_zakusylo.kickstarter.input.ConsoleInput" project="KickStarter" 
+    file="/KickStarter/src/go_java_4/vadya_zakusylo/kickstarter/input/ConsoleInput.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="347" y="333"/>    
-    <display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+    <position height="-1" width="-1" x="436" y="222"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="false" protected="true" private="false" static="true"/>      
-      <operations public="true" package="false" protected="true" private="false" static="true"/>    
+      <attributes public="true" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <association id="13">    
-    <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="14" name="content"/>      
-      <multiplicity id="15" minimum="0" maximum="1"/>    
+  <interface id="12" language="java" name="go_java_4.vadya_zakusylo.kickstarter.input.Input" project="KickStarter" 
+    file="/KickStarter/src/go_java_4/vadya_zakusylo/kickstarter/input/Input.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="435" y="476"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="13" language="java" name="go_java_4.vadya_zakusylo.kickstarter.output.Output" project="KickStarter" 
+    file="/KickStarter/src/go_java_4/vadya_zakusylo/kickstarter/output/Output.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="168" y="475"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="14" language="java" name="go_java_4.vadya_zakusylo.kickstarter.output.ConsoleOutput" project="KickStarter" 
+    file="/KickStarter/src/go_java_4/vadya_zakusylo/kickstarter/output/ConsoleOutput.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="169" y="219"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <realization id="15">    
+    <end type="SOURCE" refId="1"/>    
+    <end type="TARGET" refId="5"/>  
+  </realization>  
+  <realization id="16">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="9"/>  
+  </realization>  
+  <realization id="17">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="2"/>  
+  </realization>  
+  <association id="18">    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="19" name="content"/>      
+      <multiplicity id="20" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="9" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="16">    
-    <end type="SOURCE" refId="9" navigable="false">      
-      <attribute id="17" name="arrayCategory"/>      
-      <multiplicity id="18" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="7" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="19">    
-    <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="20" name="output"/>      
-      <multiplicity id="21" minimum="0" maximum="1"/>    
+  <association id="21">    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="22" name="projects"/>      
+      <multiplicity id="23" minimum="0" maximum="2147483647"/>    
     </end>    
     <end type="TARGET" refId="5" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="22">    
-    <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="23" name="quote"/>      
-      <multiplicity id="24" minimum="0" maximum="1"/>    
+  <association id="24">    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="25" name="quote"/>      
+      <multiplicity id="26" minimum="0" maximum="1"/>    
     </end>    
-    <end type="TARGET" refId="11" navigable="true"/>    
+    <end type="TARGET" refId="3" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="25">    
-    <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="26" name="input"/>      
-      <multiplicity id="27" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="4" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
+  <realization id="27">    
+    <end type="SOURCE" refId="11"/>    
+    <end type="TARGET" refId="12"/>  
+  </realization>  
   <association id="28">    
-    <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="29" name="output"/>      
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="29" name="content"/>      
       <multiplicity id="30" minimum="0" maximum="1"/>    
     </end>    
-    <end type="TARGET" refId="5" navigable="true"/>    
+    <end type="TARGET" refId="9" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="31">    
-    <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="32" name="project"/>      
-      <multiplicity id="33" minimum="0" maximum="1"/>    
+  <realization id="31">    
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="3"/>  
+  </realization>  
+  <association id="32">    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="33" name="input"/>      
+      <multiplicity id="34" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="12" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <realization id="34">    
-    <end type="SOURCE" refId="3"/>    
-    <end type="TARGET" refId="4"/>  
-  </realization>  
   <association id="35">    
     <end type="SOURCE" refId="1" navigable="false">      
       <attribute id="36" name="category"/>      
       <multiplicity id="37" minimum="0" maximum="1"/>    
     </end>    
-    <end type="TARGET" refId="8" navigable="true"/>    
+    <end type="TARGET" refId="2" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="38">    
     <end type="SOURCE" refId="7" navigable="false">      
-      <attribute id="39" name="categories"/>      
-      <multiplicity id="40" minimum="0" maximum="2147483647"/>    
+      <attribute id="39" name="project"/>      
+      <multiplicity id="40" minimum="0" maximum="1"/>    
     </end>    
-    <end type="TARGET" refId="8" navigable="true"/>    
+    <end type="TARGET" refId="5" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <generalization id="41">    
-    <end type="SOURCE" refId="10"/>    
-    <end type="TARGET" refId="11"/>  
-  </generalization>  
-  <association id="42">    
-    <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="43" name="input"/>      
-      <multiplicity id="44" minimum="0" maximum="1"/>    
+  <association id="41">    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="42" name="output"/>      
+      <multiplicity id="43" minimum="0" maximum="1"/>    
     </end>    
-    <end type="TARGET" refId="4" navigable="true"/>    
+    <end type="TARGET" refId="13" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="45">    
-    <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="46" name="quote"/>      
-      <multiplicity id="47" minimum="0" maximum="1"/>    
+  <association id="44">    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="45" name="categories"/>      
+      <multiplicity id="46" minimum="0" maximum="2147483647"/>    
     </end>    
-    <end type="TARGET" refId="11" navigable="true"/>    
+    <end type="TARGET" refId="2" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="48">    
-    <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="49" name="content"/>      
-      <multiplicity id="50" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="9" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="51">    
-    <end type="SOURCE" refId="8" navigable="false">      
-      <attribute id="52" name="projects"/>      
-      <multiplicity id="53" minimum="0" maximum="2147483647"/>    
+  <association id="47">    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="48" name="input"/>      
+      <multiplicity id="49" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="12" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <realization id="54">    
-    <end type="SOURCE" refId="6"/>    
-    <end type="TARGET" refId="5"/>  
+  <association id="50">    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="51" name="category"/>      
+      <multiplicity id="52" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="53">    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="54" name="quote"/>      
+      <multiplicity id="55" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="56">    
+    <end type="SOURCE" refId="14"/>    
+    <end type="TARGET" refId="13"/>  
   </realization>  
-  <classifier-display autosize="true" stereotype="true" package="false" initial-value="false" signature="true" 
+  <association id="57">    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="58" name="output"/>      
+      <multiplicity id="59" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="13" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
     sort-features="false" accessors="true" visibility="true">    
-    <attributes public="true" package="false" protected="true" private="false" static="true"/>    
-    <operations public="true" package="false" protected="true" private="false" static="true"/>  
+    <attributes public="true" package="false" protected="false" private="false" static="true"/>    
+    <operations public="true" package="false" protected="false" private="false" static="true"/>  
   </classifier-display>  
   <association-display labels="true" multiplicity="true"/>
 </class-diagram>

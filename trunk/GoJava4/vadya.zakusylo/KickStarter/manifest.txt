@@ -1,1 +1,1 @@
-Main-Class: go_java_4.vadya_zakusylo.kickstarter.Runner
+Main-Class: go_java_4.vadya_zakusylo.kickstarter.Main

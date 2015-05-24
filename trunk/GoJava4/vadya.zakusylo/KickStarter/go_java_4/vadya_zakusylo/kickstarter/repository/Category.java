@@ -1,26 +1,34 @@
 package go_java_4.vadya_zakusylo.kickstarter.repository;
 
-import java.util.LinkedHashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
-public class Category {
+public class Category implements CategoryInterface {
 	private String nameCategory;
-	private Set<Project> projects;
+	private List<ProjectInterface> projects;
 
 	public Category(String nameCategory) {
 		this.nameCategory = nameCategory;
-		projects = new LinkedHashSet<Project>();
+		projects = new ArrayList<ProjectInterface>();
 	}
 
-	public String getNameCategory() {
+	public String getName() {
 		return nameCategory;
 	}
 
-	public Set<Project> getProjects() {
+	public void addProject(ProjectInterface oneProject) {
+		projects.add(oneProject);
+	}
+
+	public void removeProject(ProjectInterface oneProject) {
+		int index = projects.indexOf(oneProject);
+		if (index >= 0) {
+			projects.remove(index);
+		}
+	}
+
+	public List<ProjectInterface> getProjects() {
 		return projects;
 	}
 
-	public void addProject(Project project) {
-		projects.add(project);
-	}
 }

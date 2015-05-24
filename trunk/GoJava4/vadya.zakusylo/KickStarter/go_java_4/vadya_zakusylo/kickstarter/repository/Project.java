@@ -1,6 +1,6 @@
 package go_java_4.vadya_zakusylo.kickstarter.repository;
 
-public class Project {
+public class Project implements ProjectInterface {
 	private String name;
 	private String shortDescription;
 	private double needMoney;
@@ -8,6 +8,7 @@ public class Project {
 	private int daysLeft;
 	private String history;
 	private String urlVideo;
+	private CategoryInterface category;
 
 	public Project(String name, String shortDescription, double needMoney, double currentMoney,
 			int daysLeft, String history, String urlVideo) {
@@ -20,6 +21,18 @@ public class Project {
 		this.urlVideo = urlVideo;
 	}
 
+	public void setCategory(CategoryInterface category) {
+		if (this.category != null) {
+			clearCategory();
+		}
+		this.category = category;
+		category.addProject(this);
+	}
+
+	private void clearCategory() {
+		category.removeProject(this);
+	}
+
 	public String getShortContent() {
 		String shortContent = name + "\n\t" + shortDescription + "\n\tNeed money: " + needMoney
 				+ "\tCurrent money: " + currentMoney + "\n\tDays left: " + daysLeft;
@@ -30,14 +43,6 @@ public class Project {
 		String fullContent = getShortContent() + "\n\tHistory of the project: " + history
 				+ "\n\tLook video: " + urlVideo;
 		return fullContent;
-	}
-
-	public void setCurrentMoney(int currentMoney) {
-		this.currentMoney = currentMoney;
-	}
-
-	public void setDaysLeft(int daysLeft) {
-		this.daysLeft = daysLeft;
 	}
 
 }

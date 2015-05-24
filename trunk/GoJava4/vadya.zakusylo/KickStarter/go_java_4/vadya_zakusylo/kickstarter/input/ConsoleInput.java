@@ -12,6 +12,8 @@ public class ConsoleInput implements Input {
 			index = scanner.nextInt();
 		} catch (InputMismatchException e) {
 			System.out.println("Incorrect input! Try input correct number!");
+			System.out
+					.println("--------------------------------------------------------------------------------");
 			index = read();
 		}
 		return index;
