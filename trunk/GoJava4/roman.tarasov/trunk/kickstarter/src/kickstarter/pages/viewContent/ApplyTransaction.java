@@ -1,16 +1,17 @@
 package kickstarter.pages.viewContent;
 
-
 public class ApplyTransaction extends PageView {
 
 	public String getHeader() {
-		String header = "";
-		header += "\n=========================";
-		header += "\n|   apply transaction   |";
-		header += "\n=========================";
-		header += "\n";
-		header += "\n------------------------";
-		header += "\nOptions: apply  in format <bankir:777> where login -bankir-, cardnumber -777-  \n<p>- previous page  ";
-		return header;
+		StringBuilder header = new StringBuilder();
+
+		header.append("\n=========================");
+		header.append("\n|   apply transaction   |");
+		header.append("\n=========================");
+		header.append("\n");
+		header.append("\n------------------------");
+		header.append("\nOptions: apply  in format <bankir:777> where login -bankir-, cardnumber -777-  \n<p>- previous page  ");
+		
+		return header.toString();
 	}
 }

@@ -34,4 +34,10 @@ public class View implements iView {
 		page = pagesView.get(currentPage);
 		ui.display(page.getHeader());
 	}
+
+	@Override
+	public void setUserInterface(iUserInterface ui) {
+		this.ui=ui;
+		
+	}
 }

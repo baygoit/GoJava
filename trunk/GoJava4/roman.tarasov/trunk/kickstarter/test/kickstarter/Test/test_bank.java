@@ -45,5 +45,14 @@ public class test_bank {
 	public void test__incorrect_cardnumber() {
 		assertFalse(bank.getMoney("a", "77", "20"));
 	}
+	@Test
+	public void test__infinity() {
+		assertFalse(bank.getMoney("bankir", "777", "Infinity"));
+
+	}
+	@Test
+	public void test__NaN() {
+		assertFalse(bank.getMoney("bankir", "777", "NaN"));
+	}
 
 }

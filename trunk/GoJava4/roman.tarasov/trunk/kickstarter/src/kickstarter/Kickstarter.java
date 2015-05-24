@@ -130,6 +130,7 @@ public class Kickstarter {
 
 	public void testUI(iUserInterface ui) {
 		this.ui = ui;
+		view.setUserInterface(ui);
 	}
 
 	private void run() {

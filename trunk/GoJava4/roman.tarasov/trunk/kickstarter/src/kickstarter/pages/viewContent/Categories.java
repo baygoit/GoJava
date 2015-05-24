@@ -16,19 +16,21 @@ public class Categories extends PageView {
 	public String getHeader() {
 
 		Quote quote = repository.getRandomQuote();
-		String header = "";
-		header += "\n-----Quote------";
-		header += "\n" + quote.getQuote();
-		header += "\n----------------";
-		header += "\n=========================";
-		header += "\n|     Categories        |";
-		header += "\n=========================";
-		header += "\n";
-		header += getListAllCategories();
-		header += "\n------------------------";
-		header += "\nSelect category by ID:<ID>";
-		header += "\nOptions:  <e> - The End";
-		return header;
+		StringBuilder header = new StringBuilder();
+	
+		header.append("\n-----Quote------");
+		header.append("\n");
+		header.append(quote.getQuote());
+		header.append("\n----------------");
+		header.append("\n=========================");
+		header.append("\n|     Categories        |");
+		header.append("\n=========================");
+		header.append("\n");
+		header.append(getListAllCategories());
+		header.append("\n------------------------");
+		header.append("\nSelect category by ID:<ID>");
+		header.append("\nOptions:  <e> - The End");
+		return header.toString();
 	}
 
 	public String getListAllCategories() {

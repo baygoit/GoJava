@@ -33,11 +33,13 @@ public class FakeConsole {
 				"i", "999999", "p", "3", "bankir:777", "p", "i", "1", "p", "i",
 				"2", "null", "p", "b800", "p", "bankir:777", "p", "d",
 				"bankir:777:4449", "p", "i", "3", "bankir:777", "p", "d",
-				"bankir:777:3" ,"null","p"};
+				"bankir:777:3", "null", "p" };
+
 		for (String command : commands) {
 			view();
 			put(command);
 		}
+
 		view();
 	}
 

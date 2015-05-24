@@ -9,14 +9,14 @@ public class ResultOfBankOperation extends PageView {
 	}
 
 	public String getHeader() {
-		String header = "";
-		header += "\n============================";
-		header += "\n| Result of Bank operation |";
-		header += "\n============================";
-		header += "\n";
-		header += "\n------------------------";
-		header += imodel.getModelOptions().resultOfBankOperation;
-		header += "\nOptions: <p>- previous page  ";
-		return header;
+		StringBuilder header = new StringBuilder();
+		header.append("\n============================");
+		header.append("\n| Result of Bank operation |");
+		header.append("\n============================");
+		header.append("\n");
+		header.append("\n------------------------");
+		header.append(imodel.getModelOptions().resultOfBankOperation);
+		header.append("\nOptions: <p>- previous page  ");
+		return header.toString();
 	}
 }

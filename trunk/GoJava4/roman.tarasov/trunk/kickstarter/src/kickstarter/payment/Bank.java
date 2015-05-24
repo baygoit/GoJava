@@ -45,6 +45,7 @@ public class Bank {
 		if (money.equals("")) {
 			return false;
 		}
+
 		if (login == null) {
 			return false;
 		}
@@ -63,9 +64,15 @@ public class Bank {
 		} catch (NumberFormatException | NullPointerException e) {
 			return false;
 		}
-		double getMoney = 0;
+		Double getMoney = (double) 0;
 		try {
 			getMoney = Double.parseDouble(money);
+			if(getMoney.isNaN()){
+				throw new NumberFormatException();
+			}
+			if(getMoney.isInfinite()){
+				throw new NumberFormatException();
+			}
 		} catch (NumberFormatException | NullPointerException e) {
 			return false;
 		}

@@ -53,16 +53,16 @@ public class Projects extends PageView {
 
 	public String getHeader() {
 
-		String header = "";
-		header += "\n________________________";
-		header += "\n|     Projects         |";
-		header += "\n|______________________|";
-		header += "\n";
-		header += printProjectsInfo(imodel.getModelOptions().intSelectedCategory);
-		header += "\n------------------------";
-		header += "\nSelect project by ID:<ID>";
-		header += "\nOptions:  <p> - previous page";
-		return header;
+		StringBuilder header = new StringBuilder();
+		header.append("\n________________________");
+		header.append("\n|     Projects         |");
+		header.append("\n|______________________|");
+		header.append("\n");
+		header.append(printProjectsInfo(imodel.getModelOptions().intSelectedCategory));
+		header.append("\n------------------------");
+		header.append("\nSelect project by ID:<ID>");
+		header.append("\nOptions:  <p> - previous page");
+		return header.toString();
 	}
 
 }

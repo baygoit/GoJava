@@ -3,11 +3,11 @@ package kickstarter.pages.viewContent;
 public class WrongChoice extends PageView {
 
 	public String getHeader() {
-		String header = "";
-		header += "\n----- Wrong Choice ----------";
-		header += "\ninput correct command, please";
-		header += "\n-----------------------------";
-		header += "\nOptions:  <p> - previous page";
-		return header;
+		StringBuilder header = new StringBuilder();
+		header.append("\n----- Wrong Choice ----------");
+		header.append("\ninput correct command, please");
+		header.append("\n-----------------------------");
+		header.append("\nOptions:  <p> - previous page");
+		return header.toString();
 	}
 }

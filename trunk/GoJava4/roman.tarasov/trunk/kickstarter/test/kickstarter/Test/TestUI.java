@@ -12,6 +12,7 @@ public class TestUI implements iUserInterface {
 
 	@Override
 	public void display(String stringToDisplay) {
+		//return;
 		System.out.println(stringToDisplay);
 		
 
