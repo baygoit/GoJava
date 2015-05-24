@@ -31,9 +31,14 @@ public class ProjectsDAO implements Projects {
                                                                                                         + "FROM projects INNER JOIN categories "
                                                                                                         + "ON categories.id = projects.category_id WHERE projects.id = " + index);
                 while (resultSet.next()) {
-                result = new Project(resultSet.getInt("id"), resultSet.getString("name"), resultSet.getString("discription"), 
-                		resultSet.getString("history"), resultSet.getString("url"), resultSet.getInt("req_amount"),
-                                resultSet.getInt("total"), resultSet.getInt("days"));
+                result = new Project(resultSet.getInt("id"),
+                		resultSet.getString("name"), 
+                		resultSet.getString("discription"), 
+                		resultSet.getString("history"),
+                		resultSet.getString("url"), 
+                		resultSet.getInt("req_amount"),
+                        resultSet.getInt("total"),
+                        resultSet.getInt("days"));
                 
                 Сategory category = new Сategory(resultSet.getInt("category_id"), resultSet.getString("category_name"));
                 result.setСategory(category);
