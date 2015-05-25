@@ -56,7 +56,7 @@ public class KickStarter {
 		}
 	}
 
-	private void chooseProject() {
+	void chooseProject() {
 		List<ProjectInterface> projects = category.getProjects();
 		while (true) {
 			if (projects.isEmpty()) {
