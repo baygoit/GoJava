@@ -29,7 +29,7 @@ public class Projects extends PageView {
 	}
 
 	public String printProjectsInfo(int categoryID) {
-		String result = "";
+		StringBuilder result = new StringBuilder();
 		List<Project> sortedToSelect = sortProjectsByCategoryID(categoryID);
 		int length = sortedToSelect.size();
 		strOptions = new String[length];
@@ -40,15 +40,25 @@ public class Projects extends PageView {
 			strOptions[index] = Integer.toString(project.ID);
 			intOptions[index] = project.ID;
 
-			result += ("ID:<" + project.ID + "> name:<" + project.name
-					+ "> short desc.:<" + project.shortDescription + "> goal:<"
-					+ project.goal + "> pledged:<" + project.pledged
-					+ "> days to go:<" + project.daysToGo + ">");
+			result.append("\nID:<");
+			result.append(project.ID);
+			result.append("> name:<");
+			result.append(project.name);
+			result.append(">\n short desc.:<");
+			result.append(project.shortDescription);
+			result.append(">\n goal:<");
+			result.append(project.goal);
+			result.append(">\n pledged:<");
+			result.append(project.pledged);
+			result.append(">\n days to go:<");
+			result.append(project.daysToGo);
+			result.append(">");
+			result.append("\n================================");
 		}
 		ViewOptions viewOptions = imodel.getViewOptions();
 		viewOptions.intProjects = intOptions;
 		viewOptions.strProjects = strOptions;
-		return result;
+		return result.toString();
 	}
 
 	public String getHeader() {

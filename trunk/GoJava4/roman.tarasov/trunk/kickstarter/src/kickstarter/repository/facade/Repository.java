@@ -67,6 +67,40 @@ public class Repository {
 		project.amount = new double[] { 1, 10, 40 };
 		project.ID = 8;
 		projects.add(project);
+
+		
+		categoryID = 4;
+		project = new Project("Help Build ACRE's New Home in Chicago", categoryID);
+		project.description = "The renovation of our new space and expansion of our Chicago programming!";
+		project.shortDescription = "Help ACRE achieve our most ambitious project to date";
+		project.investmentOptions = new String[] { "100$ - ", "150$ -", "400$ -" };
+		project.amount = new double[] { 100, 150, 400 };
+		project.pledged = 5000;
+		project.goal = 10000;
+		project.ID = 1;
+		projects.add(project);
+		
+		
+		categoryID = 5;
+		project = new Project("Microduino mCookie", categoryID);
+		project.description = "Small, stackable, Arduino-compatible electronics for makers, designers, engineers, students and curious tinkerers of all ages.";
+		project.shortDescription = "The smallest electronic modules on LEGO";
+		project.history = "history of Microduino mCookie";
+		project.linkToVideo = "https://www.microduino.cc/module/view?id=53da0abdc69eee000055f55d";
+		project.pledged = 205;
+		project.goal = 20000;
+		project.ID = 20;
+		project.investmentOptions = new String[] { "10$ - ", "20$ -", "100$ -" };
+		project.amount = new double[] { 10, 20, 100 };
+		projects.add(project);
+		comment = new ProjectComments(20);
+		comment.addComment(
+				3,
+				"One request: make sure your documentation and tutorials are crystal clear and checked by a native English speaker. (At one point they weren't) That's half of the product :)");
+		comment.addComment(
+				2,
+				"Will your company be considering a camera module, fingerprint scanner or a capacitive lcd/led display with fingerprint scanner ability?");
+		allComments.add(comment);
 	}
 
 	public Category getCategory(int index) {
