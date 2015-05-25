@@ -14,10 +14,8 @@ import kickstarter.entities.Quote;
 public class Repository {
 
 	private List<Quote> quotes;
-	private List<ProjectComments> allComments;
-
 	private HashMap<Integer, Category> categoriesByTheirIDs;
-	private HashMap<Integer, Project> projectByProjectID;
+	private HashMap<Integer, Project> oneProjectByProjectID;
 	private HashMap<Integer, HashMap<Integer, Project>> projectsByCategoryID;
 	private HashMap<Integer, ProjectComments> commentsByProjectID;
 
@@ -42,8 +40,6 @@ public class Repository {
 		category.ID = 4;
 		categoriesByTheirIDs.put(category.ID, category);
 
-		allComments = new ArrayList<ProjectComments>();
-
 		int projectID = 8;
 		ProjectComments comment = new ProjectComments(projectID);
 		comment.addComment(1, "What color will paint?");
@@ -58,7 +54,7 @@ public class Repository {
 
 		// =================================================================================
 		int categoryID = 5;
-		projectByProjectID = new HashMap<Integer, Project>();
+		oneProjectByProjectID = new HashMap<Integer, Project>();
 		Project project = new Project("Create electrobike", categoryID);
 		project.description = "high efficiency";
 		project.shortDescription = "short description";
@@ -69,7 +65,7 @@ public class Repository {
 		project.ID = 23;
 		project.investmentOptions = new String[] { "1$ - ", "10$ -", "40$ -" };
 		project.amount = new double[] { 1, 10, 40 };
-		projectByProjectID.put((Integer) project.ID, project);
+		oneProjectByProjectID.put((Integer) project.ID, project);
 
 		project = new Project("Microduino mCookie", categoryID);
 		project.description = "Small, stackable, Arduino-compatible electronics for makers, designers, engineers, students and curious tinkerers of all ages.";
@@ -81,8 +77,8 @@ public class Repository {
 		project.ID = 20;
 		project.investmentOptions = new String[] { "10$ - ", "20$ -", "100$ -" };
 		project.amount = new double[] { 10, 20, 100 };
-		projectByProjectID.put((Integer) project.ID, project);
-		projectsByCategoryID.put(categoryID, projectByProjectID);
+		oneProjectByProjectID.put((Integer) project.ID, project);
+		projectsByCategoryID.put(categoryID, oneProjectByProjectID);
 		
 		comment = new ProjectComments(project.ID);
 		comment.addComment(
@@ -95,14 +91,14 @@ public class Repository {
 
 		// =================================================================================
 		categoryID = 4;
-		projectByProjectID = new HashMap<Integer, Project>();
+		oneProjectByProjectID = new HashMap<Integer, Project>();
 
 		project = new Project("Paint the fence of the school", categoryID);
 		project.description = "raising money for paint";
 		project.investmentOptions = new String[] { "1$ - ", "10$ -", "40$ -" };
 		project.amount = new double[] { 1, 10, 40 };
 		project.ID = 8;
-		projectByProjectID.put((Integer) project.ID, project);
+		oneProjectByProjectID.put((Integer) project.ID, project);
 
 		project = new Project("Help Build ACRE's New Home in Chicago",
 				categoryID);
@@ -114,11 +110,9 @@ public class Repository {
 		project.pledged = 5000;
 		project.goal = 10000;
 		project.ID = 1;
-		projectByProjectID.put((Integer) project.ID, project);
-		projectsByCategoryID.put(categoryID, projectByProjectID);
+		oneProjectByProjectID.put((Integer) project.ID, project);
+		projectsByCategoryID.put(categoryID, oneProjectByProjectID);
 		// =================================================================================
-
-
 	}
 
 	public Quote getRandomQuote() {
@@ -157,7 +151,7 @@ public class Repository {
 		return projects.get((Integer) intSelectedProject);
 	}
 
-	public void addComment(int user, int projectID, String string) {
+	public void addNewComment(int user, int projectID, String string) {
 		ProjectComments comment = new ProjectComments(projectID);
 		comment.addComment(user, string);
 		commentsByProjectID.put(projectID, comment);

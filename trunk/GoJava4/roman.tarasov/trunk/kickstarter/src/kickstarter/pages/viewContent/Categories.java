@@ -32,7 +32,7 @@ public class Categories extends PageView {
 		header.append(getListAllCategories());
 		header.append("\n------------------------");
 		header.append("\nSelect category by ID:<ID>");
-		header.append("\nOptions:  <e> - The End");
+		header.append("\nOptions:  <e> - The End;  <f> ");
 		return header.toString();
 	}
 

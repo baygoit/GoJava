@@ -30,7 +30,7 @@ public class CommentModel extends PageModel {
 				projectComments.addComment(1, array[1]);// 1- user ID
 			}
 			else{
-				repository.addComment(1,imodel
+				repository.addNewComment(1,imodel
 						.getModelOptions().intSelectedProject,array[1]);
 			}
 			imodel.next(DETAILED_PROJECT);

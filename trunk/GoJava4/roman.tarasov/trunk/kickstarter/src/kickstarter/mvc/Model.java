@@ -33,7 +33,6 @@ public class Model implements iModel {
 	public void updateStateOfModel(String message) {
 		pageModel = pagesModel.get(currentPage);
 		pageModel.updateStateOfPageModel(message);
-		pageModel = pagesModel.get(currentPage);
 	}
 
 	@Override

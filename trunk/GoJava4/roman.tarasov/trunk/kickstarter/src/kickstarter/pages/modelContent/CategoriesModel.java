@@ -13,9 +13,9 @@ public class CategoriesModel extends PageModel {
 			imodel.next(END_PAGE);
 			return;
 		}
-		ViewOptions vieOptions = imodel.getViewOptions();
-		strOptions = vieOptions.strCategories;
-		intOptions = vieOptions.intCategories;
+		ViewOptions viewOptions = imodel.getViewOptions();
+		strOptions = viewOptions.strCategories;
+		intOptions = viewOptions.intCategories;
 
 		if (strOptions != null) {
 			
