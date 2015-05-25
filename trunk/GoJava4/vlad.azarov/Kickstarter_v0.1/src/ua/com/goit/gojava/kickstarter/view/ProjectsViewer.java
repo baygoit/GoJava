@@ -19,27 +19,12 @@ public class ProjectsViewer {
 
 	public void showProjectInfo(Project project) {
 		printer.println(project.getName());
-		printer.println("  Short Description: " + project.getBrief());
+		printer.println("  Short Description: " + project.getShortDescription());
 		printer.println("  Pledged: " + project.getPledged());
 		printer.println("  Days to go: " + project.getDaysToGo());
-		printer.println("  History: " + project.getDescription());
+		printer.println("  History: " + project.getFullDescription());
 		printer.println("  Video link: " + project.getLink());
 		printer.println("  Questions/Answers " + project.getFAQ());
-	}
-
-	public void showProjectMenu(Project project) {
-		// while (true) {
-		showProjectInfo(project);
-		printer.println("");
-		printer.println("Enter \"0\" to return");
-		printer.println("------------------------------------------------------------------");
-		int key = reader.readUserInput();
-		if (key == 0) {
-			// break;
-		} else {
-			printer.println("You entered an invalid character!");
-		}
-		// }
 	}
 
 	public void showProjectsOfCategory(Category category,
@@ -51,7 +36,7 @@ public class ProjectsViewer {
 			printer.print("  " + (i + 1) + ": ");
 			Project currentProject = projectsOfCurrentCategory.get(i);
 			printer.println(currentProject.getName());
-			printer.println("  Short Description: " + currentProject.getBrief());
+			printer.println("  Short Description: " + currentProject.getShortDescription());
 			printer.println("  Pledged: " + currentProject.getPledged());
 			printer.println("  Days to go: " + currentProject.getDaysToGo());
 		}

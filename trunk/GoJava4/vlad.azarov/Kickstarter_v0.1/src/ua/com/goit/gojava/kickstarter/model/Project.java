@@ -3,25 +3,25 @@ package ua.com.goit.gojava.kickstarter.model;
 public class Project {
 
 	private String name;
-	private String brief;
+	private String shortDescription;
 	private int goal;
 	private int pledged;
 	private int daysToGo;
-	private String description;
+	private String fullDescription;
 	private String link;
 	private String FAQ;
 	private Category category;
 	private int id;
 
-	public Project(String name, String brief, int goal, int pledged,
-			int daysToGo, String description, String link, String FAQ,
+	public Project(String name, String shortDescription, int goal, int pledged,
+			int daysToGo, String fullDescription, String link, String FAQ,
 			Category category, int id) {
 		this.name = name;
-		this.brief = brief;
+		this.shortDescription = shortDescription;
 		this.goal = goal;
 		this.pledged = pledged;
 		this.daysToGo = daysToGo;
-		this.description = description;
+		this.fullDescription = fullDescription;
 		this.link = link;
 		this.FAQ = FAQ;
 		this.category = category;
@@ -32,8 +32,8 @@ public class Project {
 		return name;
 	}
 
-	public String getBrief() {
-		return brief;
+	public String getShortDescription() {
+		return shortDescription;
 	}
 
 	public int getGoal() {
@@ -48,8 +48,8 @@ public class Project {
 		return daysToGo;
 	}
 
-	public String getDescription() {
-		return description;
+	public String getFullDescription() {
+		return fullDescription;
 	}
 
 	public String getLink() {
@@ -68,7 +68,7 @@ public class Project {
 		this.category = category;
 	}
 	
-	public int getProjectId() {
+	public int getId() {
 	    return id;
 	}
 }

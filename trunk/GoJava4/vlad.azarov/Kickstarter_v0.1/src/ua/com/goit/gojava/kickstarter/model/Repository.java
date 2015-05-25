@@ -1,8 +1,8 @@
 package ua.com.goit.gojava.kickstarter.model;
 
-public interface Repository {
-    
-    //void add(T extends Iterable);
-    
+import java.util.ArrayList;
 
+public interface Repository {
+
+	ArrayList<Project> getProjectsOfCategoryArray(Category category);    
 }
