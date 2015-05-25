@@ -83,6 +83,15 @@ public class Repository {
 		project.amount = new double[] { 10, 20, 100 };
 		projectByProjectID.put((Integer) project.ID, project);
 		projectsByCategoryID.put(categoryID, projectByProjectID);
+		
+		comment = new ProjectComments(project.ID);
+		comment.addComment(
+				3,
+				"One request: make sure your documentation and tutorials are crystal clear and checked by a native English speaker. (At one point they weren't) That's half of the product :)");
+		comment.addComment(
+				2,
+				"Will your company be considering a camera module, fingerprint scanner or a capacitive lcd/led display with fingerprint scanner ability?");
+		commentsByProjectID.put(project.ID, comment);
 
 		// =================================================================================
 		categoryID = 4;
@@ -109,14 +118,7 @@ public class Repository {
 		projectsByCategoryID.put(categoryID, projectByProjectID);
 		// =================================================================================
 
-		comment = new ProjectComments(20);
-		comment.addComment(
-				3,
-				"One request: make sure your documentation and tutorials are crystal clear and checked by a native English speaker. (At one point they weren't) That's half of the product :)");
-		comment.addComment(
-				2,
-				"Will your company be considering a camera module, fingerprint scanner or a capacitive lcd/led display with fingerprint scanner ability?");
-		allComments.add(comment);
+
 	}
 
 	public Quote getRandomQuote() {
