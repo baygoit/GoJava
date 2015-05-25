@@ -1,5 +1,8 @@
 package kickstarter.pages.viewContent;
 
+import java.util.List;
+
+import kickstarter.entities.Category;
 import kickstarter.entities.Quote;
 import kickstarter.mvc.interfaces.iModel;
 import kickstarter.mvc.options.ViewOptions;
@@ -35,16 +38,18 @@ public class Categories extends PageView {
 
 	public String getListAllCategories() {
 		String result = "";
-		int length = repository.getCategoriesLength();
+		
+		List<Category> listAllCategories=repository.getListAllCategories();
+		int length=listAllCategories.size();
 		strOptions = new String[length];
 		intOptions = new int[length];
 		for (int index = 0; index < length; index++) {
-
-			result += ("ID:<" + repository.getCategory(index).ID + "> name:<"
-					+ repository.getCategory(index).name + ">\n");
+			Category currentCategory=listAllCategories.get(index);
+			result += ("ID:<" + currentCategory.ID + "> name:<"
+					+ currentCategory.name + ">\n");
 			strOptions[index] = Integer
-					.toString(repository.getCategory(index).ID);
-			intOptions[index] = repository.getCategory(index).ID;
+					.toString(currentCategory.ID);
+			intOptions[index] = currentCategory.ID;
 		}
 		ViewOptions viewOptions = imodel.getViewOptions();
 		viewOptions.intCategories = intOptions;

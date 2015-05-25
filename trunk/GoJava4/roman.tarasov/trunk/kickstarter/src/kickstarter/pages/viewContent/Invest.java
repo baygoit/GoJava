@@ -12,8 +12,9 @@ public class Invest extends PageView {
 
 	public String getHeader() {
 
-		project = repository
-				.getProjectById(imodel.getModelOptions().intSelectedProject);
+		project = repository.getProjectByCategoryIDandProjectID(
+				imodel.getModelOptions().intSelectedCategory,
+				imodel.getModelOptions().intSelectedProject);
 		StringBuilder header = new StringBuilder();
 
 		header.append("\n=========================");

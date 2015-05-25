@@ -13,7 +13,9 @@ public class Comment extends PageView {
 
 	public String getHeader() {
 		modelOptions = imodel.getModelOptions();
-		project = repository.getProjectById(modelOptions.intSelectedProject);
+		project = repository.getProjectByCategoryIDandProjectID(
+				modelOptions.intSelectedCategory,
+				modelOptions.intSelectedProject);
 
 		StringBuilder header = new StringBuilder();
 		header.append("\n_________________________");

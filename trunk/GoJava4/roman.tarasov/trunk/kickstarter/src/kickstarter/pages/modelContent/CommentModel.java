@@ -18,13 +18,21 @@ public class CommentModel extends PageModel {
 			return;
 		}
 
-		project = repository.getProjectById(imodel.getModelOptions().intSelectedProject);
-		projectComments = repository.getCommentsByProjectID(project.ID);
+		project = repository.getProjectByCategoryIDandProjectID(
+				imodel.getModelOptions().intSelectedCategory,
+				imodel.getModelOptions().intSelectedProject);
+		projectComments = repository.getCommentsByProjectID(imodel
+				.getModelOptions().intSelectedProject);
 		String[] array = message.split(":");
 		if (array[0].equals("a") && array.length == 2) {
 			// TODO
-			projectComments.addComment(1, array[1]);// 1- user ID
-
+			if (projectComments != null) {
+				projectComments.addComment(1, array[1]);// 1- user ID
+			}
+			else{
+				repository.addComment(1,imodel
+						.getModelOptions().intSelectedProject,array[1]);
+			}
 			imodel.next(DETAILED_PROJECT);
 			return;
 		}

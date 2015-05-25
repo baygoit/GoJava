@@ -1,6 +1,5 @@
 package kickstarter.pages.viewContent;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import kickstarter.entities.Project;
@@ -15,27 +14,16 @@ public class Projects extends PageView {
 		this.imodel = imodel;
 	}
 
-	public List<Project> sortProjectsByCategoryID(int categoryID) {
-
-		List<Project> sortedProjects = new ArrayList<Project>();
-		int length = repository.getProjectsLength();
-		for (int index = 0; index < length; index++) {
-			project = repository.getProject(index);
-			if (project.categoryID == categoryID) {
-				sortedProjects.add(project);
-			}
-		}
-		return sortedProjects;
-	}
-
 	public String printProjectsInfo(int categoryID) {
 		StringBuilder result = new StringBuilder();
-		List<Project> sortedToSelect = sortProjectsByCategoryID(categoryID);
-		int length = sortedToSelect.size();
+
+		List<Project> projectsByCategory = repository
+				.getListOfProjectsByCategoryID(categoryID);
+		int length = projectsByCategory.size();
 		strOptions = new String[length];
 		intOptions = new int[length];
 		for (int index = 0; index < length; index++) {
-			project = sortedToSelect.get(index);
+			project = projectsByCategory.get(index);
 
 			strOptions[index] = Integer.toString(project.ID);
 			intOptions[index] = project.ID;

@@ -50,17 +50,17 @@ public class ApplyTransactionModel extends PageModel {
 				return;
 			}
 
-			project = repository
-					.getProjectById(modelOptions.intSelectedProject);
+			project = repository.getProjectByCategoryIDandProjectID(
+					modelOptions.intSelectedCategory,
+					modelOptions.intSelectedProject);
 			project.pledged += getMoney;
 
-			modelOptions.resultOfBankOperation = "\nbalance before :" + balanceBefore
-					+ "\nbalance after :" + balanceAfter;
+			modelOptions.resultOfBankOperation = "\nbalance before :"
+					+ balanceBefore + "\nbalance after :" + balanceAfter;
 			imodel.nextWithOptions(BANK_OPERATION_RESULT_PAGE, modelOptions);
 			return;
 		}
 		imodel.goToAndBack(ERROR_PAGE, APPLY_TRANSACTION_PAGE);
 	}
-
 
 }

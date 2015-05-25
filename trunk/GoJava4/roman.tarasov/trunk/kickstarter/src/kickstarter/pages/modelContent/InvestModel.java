@@ -19,7 +19,7 @@ public class InvestModel extends PageModel {
 			return;
 		}
 		modelOptions = imodel.getModelOptions();
-		project = repository.getProjectById(modelOptions.intSelectedProject);
+		project = repository.getProjectByCategoryIDandProjectID(modelOptions.intSelectedCategory,modelOptions.intSelectedProject);
 		double amount = 0;
 		try {
 			int selected = Integer.parseInt(message);

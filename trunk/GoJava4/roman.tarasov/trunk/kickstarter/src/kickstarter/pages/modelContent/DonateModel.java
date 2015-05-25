@@ -52,7 +52,7 @@ public class DonateModel extends PageModel {
 			}
 
 			project = repository
-					.getProjectById(modelOptions.intSelectedProject);
+					.getProjectByCategoryIDandProjectID(modelOptions.intSelectedCategory,modelOptions.intSelectedProject);
 			project.pledged += getMoney;
 
 			modelOptions.intOption = intOption;
