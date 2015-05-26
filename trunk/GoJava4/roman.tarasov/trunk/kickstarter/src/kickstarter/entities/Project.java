@@ -1,6 +1,16 @@
 package kickstarter.entities;
 
-public class Project {
+import java.io.Serializable;
+
+public class Project implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 266139065309641330L;
+	/**
+	 * 
+	 */
+	
 	public String name = "null";
 	public String description = "null";
 	public String shortDescription = "null";

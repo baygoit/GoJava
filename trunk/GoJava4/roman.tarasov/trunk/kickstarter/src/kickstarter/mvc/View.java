@@ -17,9 +17,9 @@ public class View implements iView {
 	private iUserInterface ui;
 	private List<PageView> pagesView;
 	private int currentPage;
-	iViewState correct;
-	iViewState error;
-	iViewState state;
+	private iViewState correct;
+	private iViewState error;
+	private iViewState state;
 
 	public View(iUserInterface ui) {
 		correct = new HasCorrectRepository();
@@ -33,7 +33,7 @@ public class View implements iView {
 
 		@Override
 		public void showPage() {
-			if (!imodel.getViewOptions().viewError) {
+			if (!imodel.getViewOptions().repositoryError) {
 				state = correct;
 				state.showPage();
 			}
@@ -57,7 +57,7 @@ public class View implements iView {
 		void repositoryError() {
 			currentPage = imodel.getRepositoryErrorPageIndex();
 			page = pagesView.get(currentPage);
-			imodel.getViewOptions().viewError=true;
+			imodel.getViewOptions().repositoryError=true;
 			try {
 				ui.display(page.getHeader());
 				imodel.next(currentPage);

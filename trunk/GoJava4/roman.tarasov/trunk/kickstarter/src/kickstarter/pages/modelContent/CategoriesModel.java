@@ -11,9 +11,13 @@ public class CategoriesModel extends PageModel {
 			imodel.next(END_PAGE);
 			return;
 		}
+		if (message.equals("r")) {
+			imodel.next(REPOSITORY_MENU_PAGE);
+			return;
+		}
 		ViewOptions viewOptions = imodel.getViewOptions();
-		if(viewOptions.viewError){
-		imodel.next(FILE_ERROR_PAGE);
+		if(viewOptions.repositoryError){
+		imodel.next(REPOSITORY_MENU_PAGE);
 			return;
 		}
 		strOptions = viewOptions.strCategories;

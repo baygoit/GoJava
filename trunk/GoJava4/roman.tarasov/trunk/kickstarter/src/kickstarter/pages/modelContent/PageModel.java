@@ -10,7 +10,7 @@ import kickstarter.repository.facade.RepositoryException;
 import kickstarter.repository.facade.iRepository;
 
 public abstract class PageModel {
-	
+
 	protected final int CATEGORIES = 0;
 	protected final int PROJECTS = 1;
 	protected final int DETAILED_PROJECT = 2;
@@ -21,8 +21,8 @@ public abstract class PageModel {
 	protected final int DONATE_PAGE = 7;
 	protected final int BANK_OPERATION_RESULT_PAGE = 8;
 	protected final int APPLY_TRANSACTION_PAGE = 9;
-	protected final int FILE_ERROR_PAGE = 10;
-	
+	protected final int REPOSITORY_MENU_PAGE = 10;
+
 	protected String[] strOptions;
 	protected int[] intOptions;
 	protected int intOption;
@@ -37,5 +37,6 @@ public abstract class PageModel {
 	public iModel imodel;
 	protected PageView page;
 
-	public abstract void updateStateOfPageModel(String message) throws RepositoryException;
+	public abstract void updateStateOfPageModel(String message)
+			throws RepositoryException;
 }

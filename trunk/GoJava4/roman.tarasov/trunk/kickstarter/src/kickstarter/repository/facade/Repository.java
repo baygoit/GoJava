@@ -1,5 +1,7 @@
 package kickstarter.repository.facade;
 
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -9,12 +11,17 @@ import kickstarter.entities.Project;
 import kickstarter.entities.ProjectComments;
 import kickstarter.entities.Quote;
 
-public class Repository implements iRepository {
+public class Repository implements iRepository ,Serializable{
 
-	private List<Quote> quotes;
-	private List<Category> categories;
-	private List<Project> projects;
-	private List<ProjectComments> allComments;
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private  List<Quote> quotes;
+	private  List<Category> categories;
+	private  List<Project> projects;
+	private  List<ProjectComments> allComments;
 
 	public Repository() {
 

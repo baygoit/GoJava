@@ -7,7 +7,8 @@ import kickstarter.entities.Project;
 import kickstarter.entities.ProjectComments;
 import kickstarter.entities.Quote;
 
-public class FileSystemRepository implements iRepository{
+public class FileSystemRepository implements iRepository {
+	String fileName = "default";
 
 	@Override
 	public Category getCategory(int index) throws RepositoryException {
@@ -22,11 +23,11 @@ public class FileSystemRepository implements iRepository{
 	@Override
 	public Quote getRandomQuote() throws RepositoryException {
 		throw new RepositoryException();
-		
 	}
 
 	@Override
-	public ProjectComments getCommentsByProjectID(int projectID) throws RepositoryException {
+	public ProjectComments getCommentsByProjectID(int projectID)
+			throws RepositoryException {
 		throw new RepositoryException();
 	}
 
@@ -50,4 +51,11 @@ public class FileSystemRepository implements iRepository{
 		throw new RepositoryException();
 	}
 
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
+
+	public String getFileNameOfRepository() {
+		return fileName;
+	}
 }

@@ -7,5 +7,5 @@ public class ViewOptions {
 		public String strOption;
 		public int[] intProjects;
 		public String[] strProjects;
-		public boolean viewError;
+		public boolean repositoryError;
 }

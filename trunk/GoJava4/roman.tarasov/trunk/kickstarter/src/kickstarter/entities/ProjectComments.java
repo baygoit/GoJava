@@ -1,6 +1,12 @@
 package kickstarter.entities;
 
-public class ProjectComments {
+import java.io.Serializable;
+
+public class ProjectComments implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4689189179769667015L;
 	public int[] usersID;
 	private String[] comment;
 	private int commentIndex = 0;

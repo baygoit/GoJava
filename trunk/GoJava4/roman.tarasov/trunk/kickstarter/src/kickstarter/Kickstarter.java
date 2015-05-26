@@ -9,7 +9,7 @@ import kickstarter.pages.modelContent.CategoriesModel;
 import kickstarter.pages.modelContent.CommentModel;
 import kickstarter.pages.modelContent.DetailedProjectModel;
 import kickstarter.pages.modelContent.DonateModel;
-import kickstarter.pages.modelContent.FileErrorModel;
+import kickstarter.pages.modelContent.RepositoryMenuModel;
 import kickstarter.pages.modelContent.InvestModel;
 import kickstarter.pages.modelContent.PageModel;
 import kickstarter.pages.modelContent.ProjectsModel;
@@ -21,7 +21,7 @@ import kickstarter.pages.viewContent.Categories;
 import kickstarter.pages.viewContent.Comment;
 import kickstarter.pages.viewContent.DetailedProject;
 import kickstarter.pages.viewContent.Donate;
-import kickstarter.pages.viewContent.FileError;
+import kickstarter.pages.viewContent.RepositoryMenu;
 import kickstarter.pages.viewContent.Invest;
 import kickstarter.pages.viewContent.PageView;
 import kickstarter.pages.viewContent.Projects;
@@ -63,8 +63,9 @@ public class Kickstarter {
 		model = new Model();
 		ui = new ConsoleUI();
 		view = new View(ui);
-		controller = new Controller(view, model,fileSystemRepository,inMemoryRepository);
-		icontroller=controller;
+		controller = new Controller(view, model, fileSystemRepository,
+				inMemoryRepository);
+		icontroller = controller;
 		viewInit();
 		modelInit();
 		controllerInit();
@@ -72,8 +73,9 @@ public class Kickstarter {
 
 	private void controllerInit() {
 		controller.setPage(0);
-	
-		controller.setRepository(fileSystemRepository);
+		//controller.setRepository(fileSystemRepository);
+		controller.setRepository(inMemoryRepository);
+		controller.setFileNameOfRepository("repository");
 		controller.setModel(model);
 	}
 
@@ -109,7 +111,8 @@ public class Kickstarter {
 		pageModel = new ApplyTransactionModel(bank);
 		model.addPageModel(pageModel);
 
-		pageModel = new FileErrorModel(inMemoryRepository, fileSystemRepository,icontroller);
+		pageModel = new RepositoryMenuModel(inMemoryRepository,
+				fileSystemRepository, icontroller);
 		model.addPageModel(pageModel);
 
 	}
@@ -146,7 +149,7 @@ public class Kickstarter {
 		pageView = new ApplyTransaction();
 		view.addPageView(pageView);
 
-		pageView = new FileError();
+		pageView = new RepositoryMenu();
 		view.addPageView(pageView);
 	}
 
