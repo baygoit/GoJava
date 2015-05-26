@@ -6,4 +6,6 @@ public interface Printer {
     
     void println(String s);
 
+    void printError(String s);
+    
 }

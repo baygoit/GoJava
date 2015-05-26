@@ -4,61 +4,64 @@ import ua.com.goit.gojava.kickstarter.model.Category;
 import ua.com.goit.gojava.kickstarter.model.Project;
 import ua.com.goit.gojava.kickstarter.model.ProjectsRepository;
 import ua.com.goit.gojava.kickstarter.model.Repository;
-import ua.com.goit.gojava.kickstarter.model.pages.PageId;
 
 public class CategoriesViewer {
 
-	ProjectsViewer projectsViewer;
-	Printer printer;
-	Repository repository; 
+    ProjectsViewer projectsViewer;
+    Printer printer;
+    Repository repository;
 
-	public CategoriesViewer(Printer printer) {
-		projectsViewer = new ProjectsViewer(printer);
-		this.printer = printer;
-		repository = new ProjectsRepository();
-	}
+    public CategoriesViewer(Printer printer) {
+	projectsViewer = new ProjectsViewer(printer);
+	this.printer = printer;
+	repository = new ProjectsRepository();
+    }
 
-	public void showCategories() {
-		
-	}
+    public void showCategoriesMenu() {
+	StringBuilder categoryMenu = new StringBuilder();
+	categoryMenu.append("CATEGORIES:\n");
+	categoryMenu.append(getAllCategories());
+	categoryMenu.append("\n\t [BYE] EXIT");
+	categoryMenu.append("\n\n\t Enter the number of the category to explore it ");
+	categoryMenu.append("\n\t or \"bye\" to quit: ");
+	printer.print(categoryMenu.toString());
+    }
 
-	public void showCategoryMenu() {
-		StringBuilder categoryMenu = new StringBuilder();
-		categoryMenu.append("====================================================================\n");
-		categoryMenu.append("Categories:\n");
-		categoryMenu.append(getAllCategories());
-		categoryMenu.append("--------------------------------------------------------------------\n");
-		printer.println(categoryMenu.toString());
+    private String getAllCategories() {
+	StringBuilder result = new StringBuilder();
+	int index = 1;
+	for (Category category : Category.values()) {
+	    result.append("\t [" + index + "] ");
+	    result.append(category);
+	    result.append("\n");
+	    index++;
 	}
-	
-	private String getAllCategories(){
-		StringBuilder result = new StringBuilder();
-		int index = 1;
-		for (Category category : Category.values()){
-			result.append(" ["+index+"] ");
-			result.append(category);
-			result.append("\n");
-			index++;
-		}
-		return result.toString();
-	}
+	return result.toString();
+    }
 
-	public void showCategoryWithProjects(Category category) {
-		StringBuilder categoryWithProjects = new StringBuilder();
-		categoryWithProjects.append("\nCategory: "+category+" \n");
-		categoryWithProjects.append("Projects:\n");
-		categoryWithProjects.append(getProjectsOfCategory(category));
-		printer.println(categoryWithProjects.toString());
+    public void showProjectsOf(Category category) {
+	StringBuilder categoryWithProjects = new StringBuilder();
+	categoryWithProjects.append("CATEGORIES > " + category + " \n");
+	categoryWithProjects.append("PROJECTS:\n");
+	categoryWithProjects.append(getProjectsOfCategory(category));
+
+	// categoryWithProjects.toString();
+	// categoryWithProjects.append("\t Enter the project number for detail information ");
+	// categoryWithProjects.append("\t or \"0\" to return back to categories: ");
+
+	printer.println(categoryWithProjects.toString());
+	printer.println("\t Enter the project number for detail information ");
+	printer.print("\t or \"0\" to return back to categories: ");
+    }
+
+    public String getProjectsOfCategory(Category category) {
+	StringBuilder result = new StringBuilder();
+	for (Project project : repository.getProjectsOfCategoryArray(category)) {
+	    result.append("\t [" + project.getId() + "] " + project.getName());
+	    result.append(" - " + project.getShortDescription());
+	    result.append("\n");
 	}
-	
-	
-	public String getProjectsOfCategory(Category category) {
-		StringBuilder result = new StringBuilder();
-		for (Project project : repository.getProjectsOfCategoryArray(category)){
-			result.append("["+project.getId()+"] "+project.getName()+"/n");
-			result.append("   "+project.getShortDescription());
-		}
-		return result.toString();
-	}
+	return result.toString();
+    }
 
 }

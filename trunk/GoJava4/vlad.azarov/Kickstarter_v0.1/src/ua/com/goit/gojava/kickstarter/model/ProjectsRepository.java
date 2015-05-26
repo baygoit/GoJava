@@ -24,9 +24,9 @@ public class ProjectsRepository implements Repository {
 				"HYDAWAY is a handy alternative to disposable plastic water bottles - it folds"
 						+ "down easily to fit in almost any pocket!",
 				"http://www.youtube.com/0143534",
-				"How much is the bottle weight", Category.DESIGN, 1));
+				"How much is the bottle weight", Category.DESIGN, 2));
 		add(new Project(
-				"Dash 4.0 Wallet",
+				"DASH 4.0 WALLET",
 				"A Minimal Wallet Redefined",
 				5000,
 				46848,
@@ -35,20 +35,20 @@ public class ProjectsRepository implements Repository {
 						+ "access them easily.",
 				"http://www.youtube.com/0143534",
 				"What are the dimensions of the wallet?",
-				Category.DESIGN, 1));
+				Category.DESIGN, 3));
 		add(new Project(
-				"USB ChargeDoubler",
+				"USB CHARGEDOUBLER",
 				"Double your charging speed!",
 				2750,
 				2140,
 				32,
-				"“THE ORIGINAL” Up to 200% charging speed for iPhone & Android. No data theft. "
+				"THE ORIGINAL Up to 200% charging speed for iPhone & Android. No data theft. "
 						+ "The magnetic usb cable for your keyring.",
 				"http://www.youtube.com/0143534", "Have a question?",
-				Category.DESIGN, 1));
+				Category.DESIGN, 4));
 
 		add(new Project(
-				"FireFly Hand",
+				"FIREFLY HAND",
 				"Light up your life",
 				3500,
 				470,
@@ -56,9 +56,9 @@ public class ProjectsRepository implements Repository {
 				"FireFly Hand is the next generation electric "
 						+ "flashlight, which is capable of making your life significantly easier.​",
 				"http://www.youtube.com/0143534", "Have a question?",
-				Category.TECHNOLOGY, 2));
+				Category.TECHNOLOGY, 1));
 		add(new Project(
-				"Cubit",
+				"CUBIT",
 				"The Make Anything Platform",
 				50000,
 				169,
@@ -68,7 +68,7 @@ public class ProjectsRepository implements Repository {
 				"http://www.youtube.com/0143534", "Have a question?",
 				Category.TECHNOLOGY, 2));
 		add(new Project(
-				"Noki",
+				"NOKI",
 				"The smart doorlock for Europe",
 				125000,
 				119082,
@@ -76,7 +76,7 @@ public class ProjectsRepository implements Repository {
 				"Noki is the first smart doorlock for Europe. It opens your door when you come "
 						+ "home and locks it when you leave.",
 				"http://www.youtube.com/031234", "Have a question?",
-				Category.TECHNOLOGY, 2));
+				Category.TECHNOLOGY, 3));
 	}
 
 	public void add(Project project) {

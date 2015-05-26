@@ -9,5 +9,9 @@ public class ConsolePrinter implements Printer {
     public void println(String s) {
 	print(s + "\n");
     }
+    
+    public void printError(String s) {
+	System.err.println(s);
+    }
 
 }
