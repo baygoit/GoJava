@@ -35,7 +35,6 @@ public class Controller implements iController {
 		imodel.setPage(currentPage);
 	}
 
-
 	public void setRepository(iRepository setRepository) {
 		imodel.setRepository(setRepository);
 		iview.setRepository(setRepository);
@@ -59,19 +58,15 @@ public class Controller implements iController {
 	@Override
 	public void setFileNameOfRepository(String fileName) {
 		fileSystemRepository.setFileName(fileName);
-
 	}
 
 	@Override
 	public String getFileNameOfRepository() {
-
 		return fileSystemRepository.getFileNameOfRepository();
 	}
 
 	@Override
 	public void setIRepository(Repository setRepository) {
 		setRepository(setRepository);
-		
 	}
-
 }

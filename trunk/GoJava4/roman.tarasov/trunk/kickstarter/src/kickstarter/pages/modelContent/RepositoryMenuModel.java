@@ -12,10 +12,10 @@ import kickstarter.repository.facade.FileSystemRepository;
 import kickstarter.repository.facade.Repository;
 
 public class RepositoryMenuModel extends PageModel {
-	Repository inMemoryRepository;
-	Repository deserializedRepository;
-	FileSystemRepository fileSystemRepository;
-	iController icontroller;
+	private Repository inMemoryRepository;
+	private Repository deserializedRepository;
+	private FileSystemRepository fileSystemRepository;
+	private iController icontroller;
 
 	public RepositoryMenuModel(Repository inMemoryRepository,
 			FileSystemRepository fileSystemRepository, iController icontroller) {
