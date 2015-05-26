@@ -75,7 +75,7 @@ public class RepositoryMenuModel extends PageModel {
 					new BufferedInputStream(new FileInputStream("object.ser")))) {
 				deserializedRepository = (Repository) in.readObject();
 			} catch (ClassNotFoundException | IOException e) {
-				imodel.goToAndBack(ERROR_PAGE, CATEGORIES);
+				imodel.goToAndBack(ERROR_PAGE, REPOSITORY_MENU_PAGE);
 				return;
 			}
 		}

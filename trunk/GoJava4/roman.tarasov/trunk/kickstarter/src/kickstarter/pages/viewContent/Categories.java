@@ -9,15 +9,19 @@ import kickstarter.repository.facade.RepositoryException;
 
 public class Categories extends PageView {
 
-
 	public String getHeader() throws RepositoryException {
 
-		Quote quote = repository.getRandomQuote();
 		StringBuilder header = new StringBuilder();
 
 		header.append("\n-----Quote------");
 		header.append("\n");
-		header.append(quote.getQuote());
+		try {
+			Quote quote = repository.getRandomQuote();
+			header.append(quote.getQuote());
+		} catch (NullPointerException e) {
+			throw new RepositoryException();
+		}
+
 		header.append("\n----------------");
 		header.append("\n=========================");
 		header.append("\n|     Categories        |");
