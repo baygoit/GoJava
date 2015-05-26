@@ -11,11 +11,11 @@ import kickstarter.repository.facade.RepositoryException;
 import kickstarter.repository.facade.iRepository;
 
 public class Model implements iModel {
-	// protected final int FILE_ERROR_PAGE = 10;
+	protected final int REPOSITORY_ERROR_PAGE = 10;
 	private int currentPage;
 	private ModelOptions modelOptions;
 	private ViewOptions viewOptions;
-	
+
 	private List<PageModel> pagesModel;
 	private PageModel pageModel;
 	private int savePage;
@@ -104,16 +104,19 @@ public class Model implements iModel {
 	@Override
 	public void setRepository(iRepository setRepository) {
 		for (PageModel pageModel : pagesModel)
-			pageModel.repository=setRepository;
+			pageModel.repository = setRepository;
 	}
 
 	@Override
 	public void setModel(iModel setModel) {
-		for (PageModel pageModel : pagesModel){
-			pageModel.imodel=setModel;
+		for (PageModel pageModel : pagesModel) {
+			pageModel.imodel = setModel;
 		}
-		
-		
 	}
+
+	@Override
+	public int getRepositoryErrorPageIndex() {
 	
+		return REPOSITORY_ERROR_PAGE;
+	}
 }

@@ -2,19 +2,11 @@ package kickstarter.pages.viewContent;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import kickstarter.entities.Project;
-import kickstarter.mvc.interfaces.iModel;
 import kickstarter.mvc.options.ViewOptions;
 import kickstarter.repository.facade.RepositoryException;
-import kickstarter.repository.facade.iRepository;
 
 public class Projects extends PageView {
-
-	public Projects(iRepository repository, iModel imodel) {
-		this.repository = repository;
-		this.imodel = imodel;
-	}
 
 	public List<Project> sortProjectsByCategoryID(int categoryID) throws RepositoryException  {
 
@@ -75,5 +67,4 @@ public class Projects extends PageView {
 		header.append("\nOptions:  <p> - previous page");
 		return header.toString();
 	}
-
 }

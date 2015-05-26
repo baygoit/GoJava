@@ -38,6 +38,4 @@ public abstract class PageModel {
 	protected PageView page;
 
 	public abstract void updateStateOfPageModel(String message) throws RepositoryException;
-
-
 }

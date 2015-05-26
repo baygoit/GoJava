@@ -1,16 +1,9 @@
 package kickstarter.pages.viewContent;
 
-import kickstarter.mvc.interfaces.iModel;
 import kickstarter.repository.facade.RepositoryException;
-import kickstarter.repository.facade.iRepository;
+
 
 public class Comment extends PageView {
-
-	public Comment(iRepository repository, iModel imodel) {
-		this.repository = repository;
-
-		this.imodel = imodel;
-	}
 
 	public String getHeader() throws RepositoryException  {
 		modelOptions = imodel.getModelOptions();

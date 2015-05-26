@@ -37,4 +37,6 @@ public interface iModel {
 
 	public void setModel(iModel setModel);
 
+	public int getRepositoryErrorPageIndex();
+
 }

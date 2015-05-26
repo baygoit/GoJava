@@ -1,16 +1,10 @@
 package kickstarter.pages.viewContent;
 
 import kickstarter.entities.ProjectComments;
-import kickstarter.mvc.interfaces.iModel;
 import kickstarter.repository.facade.RepositoryException;
-import kickstarter.repository.facade.iRepository;
 
 public class DetailedProject extends PageView {
 
-	public DetailedProject(iRepository repository, iModel imodel) {
-		this.repository = repository;
-		this.imodel = imodel;
-	}
 
 	private ProjectComments selectCommentsOfProject(int projectID) throws RepositoryException {
 		ProjectComments comments = repository.getCommentsByProjectID(projectID);

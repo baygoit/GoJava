@@ -4,24 +4,17 @@ import java.util.List;
 
 import kickstarter.entities.Category;
 import kickstarter.entities.Quote;
-import kickstarter.mvc.interfaces.iModel;
 import kickstarter.mvc.options.ViewOptions;
 import kickstarter.repository.facade.RepositoryException;
 
+public class Categories extends PageView {
 
-public class Categories extends PageView{
-
-	public Categories( iModel imodel) {
-
-		this.imodel = imodel;
-		
-	}
 
 	public String getHeader() throws RepositoryException {
 
 		Quote quote = repository.getRandomQuote();
 		StringBuilder header = new StringBuilder();
-	
+
 		header.append("\n-----Quote------");
 		header.append("\n");
 		header.append(quote.getQuote());
@@ -39,17 +32,16 @@ public class Categories extends PageView{
 
 	public String getListAllCategories() throws RepositoryException {
 		String result = "";
-		
-		List<Category> listAllCategories=repository.getListAllCategories();
-		int length=listAllCategories.size();
+
+		List<Category> listAllCategories = repository.getListAllCategories();
+		int length = listAllCategories.size();
 		strOptions = new String[length];
 		intOptions = new int[length];
 		for (int index = 0; index < length; index++) {
-			Category currentCategory=listAllCategories.get(index);
+			Category currentCategory = listAllCategories.get(index);
 			result += ("ID:<" + currentCategory.ID + "> name:<"
 					+ currentCategory.name + ">\n");
-			strOptions[index] = Integer
-					.toString(currentCategory.ID);
+			strOptions[index] = Integer.toString(currentCategory.ID);
 			intOptions[index] = currentCategory.ID;
 		}
 		ViewOptions viewOptions = imodel.getViewOptions();

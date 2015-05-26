@@ -1,12 +1,6 @@
 package kickstarter.pages.viewContent;
 
-import kickstarter.mvc.interfaces.iModel;
-
 public class ResultOfBankOperation extends PageView {
-
-	public ResultOfBankOperation(iModel imodel) {
-		this.imodel = imodel;
-	}
 
 	public String getHeader() {
 		StringBuilder header = new StringBuilder();

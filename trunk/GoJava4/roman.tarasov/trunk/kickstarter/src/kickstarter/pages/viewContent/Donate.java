@@ -1,15 +1,11 @@
 package kickstarter.pages.viewContent;
 
-import kickstarter.mvc.interfaces.iModel;
 import kickstarter.payment.Bank;
-import kickstarter.repository.facade.iRepository;
 
 public class Donate extends PageView {
 
-	public Donate(Bank bank, iRepository repository, iModel imodel) {
-		this.bank = bank;
-		this.repository = repository;
-		this.imodel = imodel;
+	public Donate(Bank bank) {
+		this.bank = bank;		
 	}
 
 	public String getHeader() {

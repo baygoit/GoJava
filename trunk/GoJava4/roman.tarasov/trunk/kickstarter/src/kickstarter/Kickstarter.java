@@ -3,6 +3,7 @@ package kickstarter;
 import kickstarter.mvc.Controller;
 import kickstarter.mvc.Model;
 import kickstarter.mvc.View;
+import kickstarter.mvc.interfaces.iController;
 import kickstarter.pages.modelContent.ApplyTransactionModel;
 import kickstarter.pages.modelContent.CategoriesModel;
 import kickstarter.pages.modelContent.CommentModel;
@@ -30,7 +31,6 @@ import kickstarter.pages.viewContent.WrongChoice;
 import kickstarter.payment.Bank;
 import kickstarter.repository.facade.FileSystemRepository;
 import kickstarter.repository.facade.Repository;
-import kickstarter.repository.facade.iRepository;
 import kickstarter.ui.ConsoleUI;
 import kickstarter.ui.iUserInterface;
 
@@ -39,9 +39,9 @@ public class Kickstarter {
 	private View view;
 	private Model model;
 	public Controller controller;
+	public iController icontroller;
 	private iUserInterface ui;
 	private FileSystemRepository fileSystemRepository;
-	private iRepository repository;
 	private Repository inMemoryRepository;
 	private Bank bank;
 
@@ -63,7 +63,8 @@ public class Kickstarter {
 		model = new Model();
 		ui = new ConsoleUI();
 		view = new View(ui);
-		controller = new Controller(view, model);
+		controller = new Controller(view, model,fileSystemRepository,inMemoryRepository);
+		icontroller=controller;
 		viewInit();
 		modelInit();
 		controllerInit();
@@ -71,7 +72,8 @@ public class Kickstarter {
 
 	private void controllerInit() {
 		controller.setPage(0);
-		controller.setRepository(inMemoryRepository);
+	
+		controller.setRepository(fileSystemRepository);
 		controller.setModel(model);
 	}
 
@@ -107,20 +109,20 @@ public class Kickstarter {
 		pageModel = new ApplyTransactionModel(bank);
 		model.addPageModel(pageModel);
 
-		pageModel = new FileErrorModel(inMemoryRepository, fileSystemRepository);
+		pageModel = new FileErrorModel(inMemoryRepository, fileSystemRepository,icontroller);
 		model.addPageModel(pageModel);
 
 	}
 
 	private void viewInit() {
 
-		PageView pageView = new Categories(model);
+		PageView pageView = new Categories();
 		view.addPageView(pageView);
 
-		pageView = new Projects(repository, model);
+		pageView = new Projects();
 		view.addPageView(pageView);
 
-		pageView = new DetailedProject(repository, model);
+		pageView = new DetailedProject();
 		view.addPageView(pageView);
 
 		pageView = new WrongChoice();
@@ -129,16 +131,16 @@ public class Kickstarter {
 		pageView = new TheEnd();
 		view.addPageView(pageView);
 
-		pageView = new Comment(repository, model);
+		pageView = new Comment();
 		view.addPageView(pageView);
 
-		pageView = new Invest(repository, model);
+		pageView = new Invest();
 		view.addPageView(pageView);
 
-		pageView = new Donate(bank, repository, model);
+		pageView = new Donate(bank);
 		view.addPageView(pageView);
 
-		pageView = new ResultOfBankOperation(model);
+		pageView = new ResultOfBankOperation();
 		view.addPageView(pageView);
 
 		pageView = new ApplyTransaction();
