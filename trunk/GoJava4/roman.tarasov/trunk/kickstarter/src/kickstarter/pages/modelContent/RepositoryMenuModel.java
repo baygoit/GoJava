@@ -63,6 +63,7 @@ public class RepositoryMenuModel extends PageModel {
 				imodel.goToAndBack(ERROR_PAGE, REPOSITORY_MENU_PAGE);
 				return;
 			}
+			inMemoryRepository=deserializedRepository;
 			icontroller.setIRepository(deserializedRepository);
 			imodel.getViewOptions().repositoryError = false;
 			imodel.next(CATEGORIES);

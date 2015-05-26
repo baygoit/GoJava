@@ -58,4 +58,10 @@ public class FileSystemRepository implements iRepository {
 	public String getFileNameOfRepository() {
 		return fileName;
 	}
+
+	@Override
+	public void addNewComment(int i, int intSelectedProject, String string)throws RepositoryException {
+		// TODO Auto-generated method stub
+		
+	}
 }

@@ -25,4 +25,7 @@ public interface iRepository {
 
 	public abstract List<Category> getListAllCategories()throws RepositoryException;
 
+	public abstract void addNewComment(int i, int intSelectedProject,
+			String string) throws RepositoryException;
+
 }

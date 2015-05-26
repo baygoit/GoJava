@@ -17,8 +17,14 @@ public class CommentModel extends PageModel {
 		String[] array = message.split(":");
 		if (array[0].equals("a") && array.length == 2) {
 			// TODO
-			  projectComments.addComment(1, array[1]);// 1- user ID
 
+              if (projectComments != null) {
+                  projectComments.addComment(1, array[1]);// 1- user ID
+          }
+          else{
+                  repository.addNewComment(1,imodel
+                                  .getModelOptions().intSelectedProject,array[1]);
+          }
 			imodel.next(DETAILED_PROJECT);
 			return;
 		}

@@ -185,4 +185,12 @@ public class Repository implements iRepository ,Serializable{
 		
 		return categories;
 	}
+
+	@Override
+    public void addNewComment(int user, int projectID, String string) {
+        ProjectComments comment = new ProjectComments(projectID);
+     
+        comment.addComment(user, string);
+        allComments.add( comment);
+}
 }
