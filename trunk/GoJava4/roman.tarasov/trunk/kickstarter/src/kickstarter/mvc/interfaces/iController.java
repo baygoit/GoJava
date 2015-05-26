@@ -1,6 +1,7 @@
 package kickstarter.mvc.interfaces;
 
 import kickstarter.repository.facade.Repository;
+import kickstarter.repository.facade.iRepository;
 
 public interface iController {
 	void setFileSystemRepository();
@@ -11,5 +12,5 @@ public interface iController {
 
 	String getFileNameOfRepository();
 
-	void setIRepository(Repository setRepository);
+	void setIRepository(iRepository setRepository);
 }

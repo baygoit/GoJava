@@ -42,15 +42,27 @@ public class RepositoryMenuModel extends PageModel {
 			return;
 		}
 		if (message.equals("c")) {
-			RepositoryExchanger repositoryExchanger = new RepositoryExchanger();
-			repositoryExchanger.memoryToFile();
+			try (ObjectOutputStream out = new ObjectOutputStream(
+					new BufferedOutputStream(new FileOutputStream("object.ser")))) {
+
+				out.writeObject(inMemoryRepository);
+			} catch (IOException e) {
+				imodel.goToAndBack(ERROR_PAGE, REPOSITORY_MENU_PAGE);
+				return;
+			}
 			imodel.getViewOptions().repositoryError = false;
 			imodel.next(CATEGORIES);
 			return;
 		}
 		if (message.equals("f")) {
-			RepositoryExchanger repositoryExchanger = new RepositoryExchanger();
-			repositoryExchanger.fileToMemory();
+
+			try (ObjectInputStream in = new ObjectInputStream(
+					new BufferedInputStream(new FileInputStream("object.ser")))) {
+				deserializedRepository = (Repository) in.readObject();
+			} catch (ClassNotFoundException | IOException e) {
+				imodel.goToAndBack(ERROR_PAGE, REPOSITORY_MENU_PAGE);
+				return;
+			}
 			icontroller.setIRepository(deserializedRepository);
 			imodel.getViewOptions().repositoryError = false;
 			imodel.next(CATEGORIES);
@@ -59,25 +71,5 @@ public class RepositoryMenuModel extends PageModel {
 		imodel.goToAndBack(ERROR_PAGE, REPOSITORY_MENU_PAGE);
 	}
 
-	class RepositoryExchanger {
-		private void memoryToFile() {
-			try (ObjectOutputStream out = new ObjectOutputStream(
-					new BufferedOutputStream(new FileOutputStream("object.ser")))) {
 
-				out.writeObject(inMemoryRepository);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-
-		private void fileToMemory() {
-			try (ObjectInputStream in = new ObjectInputStream(
-					new BufferedInputStream(new FileInputStream("object.ser")))) {
-				deserializedRepository = (Repository) in.readObject();
-			} catch (ClassNotFoundException | IOException e) {
-				imodel.goToAndBack(ERROR_PAGE, REPOSITORY_MENU_PAGE);
-				return;
-			}
-		}
-	}
 }

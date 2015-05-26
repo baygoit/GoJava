@@ -44,6 +44,9 @@ public class FakeConsole {
 		view();
 	}
 
+	
+	 
+	
 	void put(String command) {
 		System.out.println("_________   " + command + "  _________");
 		try {

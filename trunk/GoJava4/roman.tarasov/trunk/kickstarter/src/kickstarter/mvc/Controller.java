@@ -66,7 +66,7 @@ public class Controller implements iController {
 	}
 
 	@Override
-	public void setIRepository(Repository setRepository) {
+	public void setIRepository(iRepository setRepository) {
 		setRepository(setRepository);
 	}
 }
