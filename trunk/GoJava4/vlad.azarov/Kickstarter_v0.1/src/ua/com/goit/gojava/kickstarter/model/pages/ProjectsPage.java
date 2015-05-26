@@ -18,7 +18,7 @@ public class ProjectsPage implements Page {
 
     @Override
     public void showPage() {
-	categoriesViewer.showProjectsOf(category);
+	categoriesViewer.showProjectsMenu(category);
     }
 
     @Override

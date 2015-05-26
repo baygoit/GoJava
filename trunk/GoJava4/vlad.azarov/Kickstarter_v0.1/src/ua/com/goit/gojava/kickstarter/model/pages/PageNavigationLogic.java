@@ -34,11 +34,9 @@ public class PageNavigationLogic {
 	    if (categoryId >= 0 && categoryId < Category.values().length) {
 		currentCategory = Category.values()[categoryId];
 		nextPage = new ProjectsPage(printer, currentCategory);
-		System.out.println("--------------------------------------------------------------------");
+		printer.println("--------------------------------------------------------------------");
 	    } else {
-		String message = "DESCRIPTION: THERE IS NO SUCH CATEGORY";
-		showErrorPage(message);
-		System.out.println("--------------------------------------------------------------------");
+		showErrorPage();
 		return currentPage;
 	    }
 	} else if (currentPage.getPageId().equals(PageId.PROJECTS)) {
@@ -50,8 +48,7 @@ public class PageNavigationLogic {
 		nextPage = new ProjectInfoPage(printer, currentProject);
 		System.out.println("Current page is ProjectPage : ");
 	    } else {
-		String message = "There is no such project";
-		showErrorPage(message);
+		showErrorPage();
 		return currentPage;
 	    }
 	} else if (currentPage.getPageId().equals(PageId.PROJECT_INFO)) {
@@ -66,9 +63,10 @@ public class PageNavigationLogic {
 	return nextPage;
     }
 
-    public void showErrorPage(String message) {
+    public void showErrorPage() {
 	new ErrorPage(printer).showPage();
-	//printer.printError(message);
+	//printer.printError("DESCRIPTION: THERE IS NO SUCH CATEGORY");
+	//printer.printError(""THERE IS NO SUCH PROJECT");
 	//System.out.println("");
     }
 

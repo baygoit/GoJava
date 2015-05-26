@@ -14,8 +14,6 @@ public class QuotesViewer {
 	StringBuilder quoteMenu = new StringBuilder();
 	quoteMenu.append("			  INSPIRING QUOTE:\n");
 	quoteMenu.append(quote.getQuote() + "\n");
-	quoteMenu
-		.append("--------------------------------------------------------------------\n");
 	printer.print(quoteMenu.toString());
     }
 

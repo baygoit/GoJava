@@ -19,11 +19,12 @@ public class CategoriesViewer {
 
     public void showCategoriesMenu() {
 	StringBuilder categoryMenu = new StringBuilder();
+	categoryMenu.append("--------------------------------------------------------------------\n");
 	categoryMenu.append("CATEGORIES:\n");
 	categoryMenu.append(getAllCategories());
-	categoryMenu.append("\n\t [BYE] EXIT");
+	categoryMenu.append("\t [QUIT]");
 	categoryMenu.append("\n\n\t Enter the number of the category to explore it ");
-	categoryMenu.append("\n\t or \"bye\" to quit: ");
+	categoryMenu.append("\n\t or \"quit\" to exit: ");
 	printer.print(categoryMenu.toString());
     }
 
@@ -39,15 +40,11 @@ public class CategoriesViewer {
 	return result.toString();
     }
 
-    public void showProjectsOf(Category category) {
+    public void showProjectsMenu(Category category) {
 	StringBuilder categoryWithProjects = new StringBuilder();
 	categoryWithProjects.append("CATEGORIES > " + category + " \n");
 	categoryWithProjects.append("PROJECTS:\n");
 	categoryWithProjects.append(getProjectsOfCategory(category));
-
-	// categoryWithProjects.toString();
-	// categoryWithProjects.append("\t Enter the project number for detail information ");
-	// categoryWithProjects.append("\t or \"0\" to return back to categories: ");
 
 	printer.println(categoryWithProjects.toString());
 	printer.println("\t Enter the project number for detail information ");
@@ -61,6 +58,7 @@ public class CategoriesViewer {
 	    result.append(" - " + project.getShortDescription());
 	    result.append("\n");
 	}
+	result.append("\t [0] PREVIOUS MENU \n");
 	return result.toString();
     }
 

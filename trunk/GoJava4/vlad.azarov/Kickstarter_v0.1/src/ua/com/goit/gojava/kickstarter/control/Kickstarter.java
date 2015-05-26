@@ -40,7 +40,7 @@ public class Kickstarter {
 	quotesViewer.showQuoteMenu(quotesRepository.getRandomQuote());
 	
 	while (!isExit) {
-	    if (userInput.toLowerCase().equals("bye")) {
+	    if (userInput.toLowerCase().equals("quit")) {
 		isExit = true;
 		printer.println("--------------------------------------------------------------------");
 		printer.println("                     GOODBYE! HAVE A NICE DAY!                      ");
