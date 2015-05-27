@@ -9,8 +9,6 @@ import com.goit.kickstarter.glmax.view.MainPage;
 import com.goit.kickstarter.glmax.view.Output;
 import com.goit.kickstarter.glmax.view.ProjectPage;
 
-import pages.*;
-import entities.*;
 
 public class Runner {
 	private static final int CATEGORY_LEVEL = 0;
