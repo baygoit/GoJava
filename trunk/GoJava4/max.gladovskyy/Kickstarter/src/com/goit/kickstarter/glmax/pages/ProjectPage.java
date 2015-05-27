@@ -1,8 +1,9 @@
-package com.goit.kickstarter.glmax.view;
+package com.goit.kickstarter.glmax.pages;
 
 import java.util.ArrayList;
 
 import com.goit.kickstarter.glmax.controller.Kickstarter;
+import com.goit.kickstarter.glmax.enteties.Project;
 import com.goit.kickstarter.glmax.model.DataSource;
 
 public class ProjectPage implements Page {

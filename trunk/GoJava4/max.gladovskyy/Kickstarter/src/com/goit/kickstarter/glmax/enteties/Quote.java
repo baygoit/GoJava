@@ -1,4 +1,4 @@
-package com.goit.kickstarter.glmax.model;
+package com.goit.kickstarter.glmax.enteties;
 
 public class Quote {
 	private String quote;

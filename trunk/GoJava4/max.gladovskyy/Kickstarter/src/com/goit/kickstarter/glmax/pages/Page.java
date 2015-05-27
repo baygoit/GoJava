@@ -1,4 +1,4 @@
-package com.goit.kickstarter.glmax.view;
+package com.goit.kickstarter.glmax.pages;
 
 import java.util.ArrayList;
 
