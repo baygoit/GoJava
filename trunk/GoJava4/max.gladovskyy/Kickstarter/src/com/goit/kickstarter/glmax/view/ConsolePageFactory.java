@@ -5,19 +5,15 @@ import java.util.Map;
 
 import com.goit.kickstarter.glmax.controller.Position;
 import com.goit.kickstarter.glmax.controller.Runner;
-import com.goit.kickstarter.glmax.pages.MainPage;
-import com.goit.kickstarter.glmax.pages.Page;
-import com.goit.kickstarter.glmax.pages.PageFactory;
+import com.goit.kickstarter.glmax.pages.*;
 
 public class ConsolePageFactory implements PageFactory {
-	
+
 	private Map<Position, Map<Integer, Page>> cache;
-	
-	
 
 	public ConsolePageFactory() {
-		this.cache = new HashMap<Position, Map<Integer,Page>>();
-		
+		this.cache = new HashMap<Position, Map<Integer, Page>>();
+
 		for (Position position : Position.values()) {
 			cache.put(position, new HashMap<Integer, Page>());
 		}
@@ -25,31 +21,27 @@ public class ConsolePageFactory implements PageFactory {
 
 	@Override
 	public Page getPage(Position position, Runner runner) {
-
-		switch (position) {
-		case Main:
-			return getPage(runner, Position.Main);
-		case Category:
-			return getPage(runner, Position.Category);
-		case Project:
-			return getPage(runner, Position.Project);
-		case Payment:
-			return getPage(runner, Position.Payment);
-		case Question:
-			return getPage(runner, Position.Question);
-		}
-		return null;
-	}
-
-
-	private Page getMainPage(Runner runner, Position position) {
+		Page page;
 		int entetieIndex = runner.getCurrentEntetieIndex();
-		if (cache.get(position).containsKey(0)) {
-			return cache.get(Position.Main).get(0);
+
+		if (cache.get(position).containsKey(entetieIndex)) {
+			return cache.get(position).get(entetieIndex);
 		} else {
-			Page mainPage = new MainPage(runner);
-			cache.get(Position.Main).put(0, mainPage);
-			return mainPage;
+			switch (position) {
+			case Main:
+				page = new MainPage(runner, entetieIndex);
+			case Category:
+				page = new CategoryPage(runner, entetieIndex);
+			case Project:
+				page = new ProjectPage(runner, entetieIndex);
+			case Payment:
+				page = new PaymentPage(runner, entetieIndex);
+			case Question:
+				page = new QuestionPage(runner, entetieIndex);
+			}
+
+			cache.get(position).put(entetieIndex, page);
+			return page;
 		}
 	}
 

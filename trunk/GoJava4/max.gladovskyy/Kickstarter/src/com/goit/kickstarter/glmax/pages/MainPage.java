@@ -14,7 +14,7 @@ public class MainPage implements Page {
 	private ArrayList<String> page = new ArrayList<String>();
 	
 	
-	public MainPage(Runner runner) {
+	public MainPage(Runner runner, int entetieIndex) {
 		page.add(runner.getSomeQoute());
 		page.add("");
 		page.add("Plese choose category from list below:");
