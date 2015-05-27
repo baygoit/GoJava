@@ -1,8 +1,6 @@
-package UserInterface;
+package com.goit.kickstarter.glmax.view;
 
 import java.util.ArrayList;
-
-import pages.Page;
 
 public interface Output {
 

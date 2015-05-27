@@ -1,10 +1,10 @@
-package UserInterface;
+package com.goit.kickstarter.glmax.view;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-import datasource.DataSource;
-import kickstarter.Kickstarter;
+import com.goit.kickstarter.glmax.controller.Kickstarter;
+import com.goit.kickstarter.glmax.model.DataSource;
 
 public class ConsoleIn implements Input {
 	private static final int CATEGORY_LEVEL = 0;

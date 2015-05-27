@@ -1,4 +1,4 @@
-package UserInterface;
+package com.goit.kickstarter.glmax.view;
 
 public interface Input {
 

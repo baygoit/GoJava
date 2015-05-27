@@ -1,11 +1,15 @@
-package logic;
+package com.goit.kickstarter.glmax.controller;
 
 import java.util.List;
 
+import com.goit.kickstarter.glmax.model.DataSource;
+import com.goit.kickstarter.glmax.view.CategoryPage;
+import com.goit.kickstarter.glmax.view.Input;
+import com.goit.kickstarter.glmax.view.MainPage;
+import com.goit.kickstarter.glmax.view.Output;
+import com.goit.kickstarter.glmax.view.ProjectPage;
+
 import pages.*;
-import UserInterface.Input;
-import UserInterface.Output;
-import datasource.DataSource;
 import entities.*;
 
 public class Runner {

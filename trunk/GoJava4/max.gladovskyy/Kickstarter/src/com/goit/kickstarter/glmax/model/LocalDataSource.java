@@ -1,10 +1,8 @@
-package datasource;
+package com.goit.kickstarter.glmax.model;
 
 import java.util.*;
 
-import entities.Category;
-import entities.Project;
-import entities.Quote;
+import com.goit.kickstarter.glmax.view.Project;
 
 public class LocalDataSource implements DataSource {
 	private List<HashMap<Category, ArrayList<Project>>> data = new ArrayList<HashMap<Category, ArrayList<Project>>>();

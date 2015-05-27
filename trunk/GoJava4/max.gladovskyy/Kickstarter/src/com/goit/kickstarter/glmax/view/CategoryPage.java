@@ -1,10 +1,9 @@
-package pages;
+package com.goit.kickstarter.glmax.view;
 
 import java.util.ArrayList;
 
-import kickstarter.Kickstarter;
-import datasource.DataSource;
-import entities.Project;
+import com.goit.kickstarter.glmax.controller.Kickstarter;
+import com.goit.kickstarter.glmax.model.DataSource;
 
 public class CategoryPage implements Page {
 	private DataSource dataSource = Kickstarter.getDataSource();

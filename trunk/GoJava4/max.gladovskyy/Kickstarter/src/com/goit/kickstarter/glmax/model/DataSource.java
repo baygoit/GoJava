@@ -1,9 +1,8 @@
-package datasource;
+package com.goit.kickstarter.glmax.model;
 
 import java.util.ArrayList;
 
-import entities.Category;
-import entities.Project;
+import com.goit.kickstarter.glmax.view.Project;
 
 public interface DataSource {
 

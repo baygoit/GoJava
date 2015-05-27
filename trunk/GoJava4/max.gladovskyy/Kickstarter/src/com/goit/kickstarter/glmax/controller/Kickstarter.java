@@ -1,12 +1,12 @@
-package kickstarter;
+package com.goit.kickstarter.glmax.controller;
 
-import datasource.DataSource;
-import datasource.LocalDataSource;
-import UserInterface.ConsoleIn;
-import UserInterface.ConsoleOut;
-import UserInterface.Input;
-import UserInterface.Output;
-import logic.Runner;
+import com.goit.kickstarter.glmax.model.DataSource;
+import com.goit.kickstarter.glmax.model.LocalDataSource;
+import com.goit.kickstarter.glmax.view.ConsoleIn;
+import com.goit.kickstarter.glmax.view.ConsoleOut;
+import com.goit.kickstarter.glmax.view.Input;
+import com.goit.kickstarter.glmax.view.Output;
+
 
 public class Kickstarter {
 

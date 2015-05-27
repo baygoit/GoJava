@@ -1,4 +1,6 @@
-package entities;
+package com.goit.kickstarter.glmax.view;
+
+import com.goit.kickstarter.glmax.model.QuestionsAndAnswers;
 
 public class Project {
 	private int id;

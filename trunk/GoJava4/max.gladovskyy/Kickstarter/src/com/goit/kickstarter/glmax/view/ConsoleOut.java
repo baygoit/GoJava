@@ -1,4 +1,4 @@
-package UserInterface;
+package com.goit.kickstarter.glmax.view;
 
 import java.io.IOException;
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package entities;
+package com.goit.kickstarter.glmax.model;
 
 public class Category {
 	private int id;
