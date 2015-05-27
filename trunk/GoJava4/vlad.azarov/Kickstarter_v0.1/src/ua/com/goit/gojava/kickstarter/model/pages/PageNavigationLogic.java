@@ -21,14 +21,9 @@ public class PageNavigationLogic {
 
     public Page defineNextPage(Page currentPage, String userInput) {
 	Page nextPage;
-	// System.out.println("Category.values().length="+Category.values().length);
-	// System.out.println("userInput="+userInput);
-	// System.out.println("((currentPage.getPageId().equals(PageId.HOME) && (userInput > 0 && userInput <= Category.values().length)))"+((currentPage.getPageId().equals(PageId.HOME)
-	// && (userInput > 0 && userInput <= Category.values().length))));
 	if (userInput.equals("0")) {
 	    nextPage = new CategoriesPage(printer);
 
-	    
 	} else if (currentPage.getPageId().equals(PageId.CATEGORIES)) {
 	    int categoryId = parseStringToInt(userInput) - 1;
 	    if (categoryId >= 0 && categoryId < Category.values().length) {
@@ -39,35 +34,43 @@ public class PageNavigationLogic {
 		showErrorPage();
 		return currentPage;
 	    }
+	    
 	} else if (currentPage.getPageId().equals(PageId.PROJECTS)) {
 	    int projectId = parseStringToInt(userInput);
 	    if (projectsRepository.isCurrentProjectExist(projectId,
 		    currentCategory)) {
 		currentProject = projectsRepository.getProjectByIdAndCategory(
 			projectId, currentCategory);
-		nextPage = new ProjectInfoPage(printer, currentProject);
-		System.out.println("Current page is ProjectPage : ");
+		nextPage = new ProjectInfoPage(printer, currentProject, currentCategory);
+		printer.println("--------------------------------------------------------------------");
 	    } else {
 		showErrorPage();
 		return currentPage;
 	    }
+	    
 	} else if (currentPage.getPageId().equals(PageId.PROJECT_INFO)) {
-	    // if ()
-	    //
-	    nextPage = new ProjectInfoPage(printer, currentProject);
+	    int projectInfoId = parseStringToInt(userInput);
+	    if (projectsRepository.isCurrentProjectExist(projectInfoId,
+		    currentCategory)) {
+		currentProject = projectsRepository.getProjectByIdAndCategory(
+			projectInfoId, currentCategory);
+	    }
+	    nextPage = new ProjectInfoPage(printer, currentProject, currentCategory);
+	    System.out.println("Current page is sgldfhsodpfh : ");
 	} else {
 	    nextPage = null;
 	    System.out.println("userInput=" + userInput);
-	    System.out.println("currentPage.getPageId().equals(PageId.HOME)");
+	    System.out.println("currentPage.getPageId().equals(PageId.CATEGORIES)");
 	}
+	
 	return nextPage;
     }
 
     public void showErrorPage() {
 	new ErrorPage(printer).showPage();
-	//printer.printError("DESCRIPTION: THERE IS NO SUCH CATEGORY");
-	//printer.printError(""THERE IS NO SUCH PROJECT");
-	//System.out.println("");
+	// printer.printError("DESCRIPTION: THERE IS NO SUCH CATEGORY");
+	// printer.printError(""THERE IS NO SUCH PROJECT");
+	// System.out.println("");
     }
 
     private int parseStringToInt(String userInput) {

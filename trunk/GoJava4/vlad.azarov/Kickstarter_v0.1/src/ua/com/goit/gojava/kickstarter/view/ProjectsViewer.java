@@ -17,14 +17,15 @@ public class ProjectsViewer {
 		this.reader = new ConsoleInputReader();
 	}
 
-	public void showProjectInfo(Project project) {
-		printer.println(project.getName());
-		printer.println("  Short Description: " + project.getShortDescription());
-		printer.println("  Pledged: " + project.getPledged());
-		printer.println("  Days to go: " + project.getDaysToGo());
-		printer.println("  History: " + project.getFullDescription());
-		printer.println("  Video link: " + project.getLink());
-		printer.println("  Questions/Answers " + project.getFAQ());
+	public void showProjectInfo(Project project, Category category) {
+	    	printer.println("CATEGORIES > " + category.name() + " > " + project.getName());
+		printer.println(project.getName() + ": ");
+		printer.println("\t Short Description: " + project.getShortDescription());
+		printer.println("\t Pledged: " + project.getPledged());
+		printer.println("\t Days to go: " + project.getDaysToGo());
+		printer.println("\t History: " + project.getFullDescription());
+		printer.println("\t Video link: " + project.getLink());
+		printer.println("\t Questions/Answers: " + project.getFAQ());
 	}
 
 	public void showProjectsOfCategory(Category category,

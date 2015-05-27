@@ -15,14 +15,15 @@ public class Kickstarter {
     Printer printer;
     Quote quote;
     QuotesViewer quotesViewer;
-    PageId currentPage;
+    //PageId currentPage;
     PageNavigationLogic pageNavigationLogic;
     QuotesRepository quotesRepository;
+    
 
     public Kickstarter(Reader reader, Printer printer) {
 	this.reader = reader;
 	this.printer = printer;
-	currentPage = PageId.CATEGORIES;
+	//currentPage = PageId.CATEGORIES;
 	pageNavigationLogic = new PageNavigationLogic(printer);
 	quotesViewer = new QuotesViewer(printer);
 	quotesRepository = new QuotesRepository();
@@ -36,7 +37,6 @@ public class Kickstarter {
 	System.out.print("====================================================================\n");
 	System.out.println("                    WELCOME TO KICKSTARTER v.2.0.");
 	System.out.println("--------------------------------------------------------------------");
-	
 	quotesViewer.showQuoteMenu(quotesRepository.getRandomQuote());
 	
 	while (!isExit) {

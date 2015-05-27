@@ -4,7 +4,7 @@ import ua.com.goit.gojava.kickstarter.control.Kickstarter;
 import ua.com.goit.gojava.kickstarter.view.ConsoleInputReader;
 import ua.com.goit.gojava.kickstarter.view.ConsolePrinter;
 
-public class RunKickstarter {
+public class Launcher {
 
 	public static void main(String[] args) {
 
