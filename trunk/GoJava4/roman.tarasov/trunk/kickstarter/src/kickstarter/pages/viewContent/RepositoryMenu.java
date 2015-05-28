@@ -7,7 +7,7 @@ public class RepositoryMenu extends PageView {
 		header.append("\n-------------------------------");
 		header.append("\n      Repository menu          ");
 		header.append("\n-------------------------------");
-		header.append("\nOptions:  <c> - copy MemoryRepository to FileRepository\n          <e> - The End\n          <m> - connect to MemoryRepository\n          <f> - copy  FileRepository to MemoryRepository\n          <p> - previous page");
+		header.append("\nOptions:  <c> - create Image of Repository and store to File\n          <f> - restore  Repository from Image\n          <m> - connect to Default Repository\n          <p> - previous page\n          <e> - The End");
 		return header.toString();
 	}
 }

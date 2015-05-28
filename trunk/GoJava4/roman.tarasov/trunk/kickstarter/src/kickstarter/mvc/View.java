@@ -3,6 +3,7 @@ package kickstarter.mvc;
 import java.util.ArrayList;
 import java.util.List;
 
+import kickstarter.mvc.interfaces.IndexOfPage;
 import kickstarter.mvc.interfaces.iModel;
 import kickstarter.mvc.interfaces.iView;
 import kickstarter.pages.viewContent.PageView;
@@ -55,14 +56,14 @@ public class View implements iView {
 		}
 
 		void repositoryError() {
-			currentPage = imodel.getRepositoryErrorPageIndex();
+			currentPage = IndexOfPage.REPOSITORY_MENU_PAGE.ordinal();
 			page = pagesView.get(currentPage);
 			imodel.getViewOptions().repositoryError=true;
 			try {
 				ui.display(page.getHeader());
 				imodel.next(currentPage);
 			} catch (RepositoryException e1) {
-
+//TODO throw ViewException
 				e1.printStackTrace();
 			}
 		}

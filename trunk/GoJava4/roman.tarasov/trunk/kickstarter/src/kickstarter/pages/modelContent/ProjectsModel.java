@@ -1,5 +1,6 @@
 package kickstarter.pages.modelContent;
 
+import kickstarter.mvc.interfaces.IndexOfPage;
 import kickstarter.mvc.options.ViewOptions;
 
 public class ProjectsModel extends PageModel {
@@ -8,7 +9,7 @@ public class ProjectsModel extends PageModel {
 	public void updateStateOfPageModel(String message) {
 
 		if (message.equals("p")) {
-			imodel.next(CATEGORIES);
+			imodel.next(IndexOfPage.CATEGORIES.ordinal());
 			return;
 		}
 		ViewOptions viewOptions = imodel.getViewOptions();
@@ -19,11 +20,11 @@ public class ProjectsModel extends PageModel {
 					modelOptions = imodel.getModelOptions();
 					modelOptions.intSelectedProject = viewOptions.intProjects[index];
 					modelOptions.strSelectedProject = viewOptions.strProjects[index];
-					imodel.nextWithOptions(DETAILED_PROJECT, modelOptions);
+					imodel.nextWithOptions(IndexOfPage.DETAILED_PROJECT.ordinal(), modelOptions);
 					return;
 				}
 			}
 		}
-		imodel.goToAndBack(ERROR_PAGE, PROJECTS);
+		imodel.goToAndBack(IndexOfPage.ERROR_PAGE.ordinal(), IndexOfPage.PROJECTS.ordinal());
 	}
 }

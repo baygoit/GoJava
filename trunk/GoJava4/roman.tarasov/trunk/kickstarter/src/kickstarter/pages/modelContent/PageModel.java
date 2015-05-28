@@ -11,18 +11,6 @@ import kickstarter.repository.facade.iRepository;
 
 public abstract class PageModel {
 
-	protected final int CATEGORIES = 0;
-	protected final int PROJECTS = 1;
-	protected final int DETAILED_PROJECT = 2;
-	protected final int ERROR_PAGE = 3;
-	protected final int END_PAGE = 4;
-	protected final int COMMENT_PAGE = 5;
-	protected final int INVEST_PAGE = 6;
-	protected final int DONATE_PAGE = 7;
-	protected final int BANK_OPERATION_RESULT_PAGE = 8;
-	protected final int APPLY_TRANSACTION_PAGE = 9;
-	protected final int REPOSITORY_MENU_PAGE = 10;
-
 	protected String[] strOptions;
 	protected int[] intOptions;
 	protected int intOption;

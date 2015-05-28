@@ -1,6 +1,7 @@
 package kickstarter.pages.modelContent;
 
 
+import kickstarter.mvc.interfaces.IndexOfPage;
 import kickstarter.mvc.options.ViewOptions;
 
 public class CategoriesModel extends PageModel {
@@ -8,16 +9,16 @@ public class CategoriesModel extends PageModel {
 	@Override
 	public void updateStateOfPageModel(String message) {
 		if (message.equals("e")) {
-			imodel.next(END_PAGE);
+			imodel.next(IndexOfPage.END_PAGE.ordinal());
 			return;
 		}
 		if (message.equals("r")) {
-			imodel.next(REPOSITORY_MENU_PAGE);
+			imodel.next(IndexOfPage.REPOSITORY_MENU_PAGE.ordinal());
 			return;
 		}
 		ViewOptions viewOptions = imodel.getViewOptions();
 		if(viewOptions.repositoryError){
-		imodel.next(REPOSITORY_MENU_PAGE);
+		imodel.next(IndexOfPage.REPOSITORY_MENU_PAGE.ordinal());
 			return;
 		}
 		strOptions = viewOptions.strCategories;
@@ -31,12 +32,12 @@ public class CategoriesModel extends PageModel {
 					modelOptions.intOption = intOptions[index];
 					modelOptions.intSelectedCategory = intOptions[index];
 					modelOptions.strSelectedCategory = strOptions[index];
-					imodel.nextWithOptions(PROJECTS, modelOptions);
+					imodel.nextWithOptions(IndexOfPage.PROJECTS.ordinal(), modelOptions);
 					return;
 				}
 			}
 		}
-		imodel.goToAndBack(ERROR_PAGE, CATEGORIES);
+		imodel.goToAndBack(IndexOfPage.ERROR_PAGE.ordinal(), IndexOfPage.CATEGORIES.ordinal());
 	}
 
 }

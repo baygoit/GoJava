@@ -11,7 +11,7 @@ import kickstarter.repository.facade.RepositoryException;
 import kickstarter.repository.facade.iRepository;
 
 public class Model implements iModel {
-	protected final int REPOSITORY_MENU_PAGE = 10;
+	
 	private int currentPage;
 	private ModelOptions modelOptions;
 	private ViewOptions viewOptions;
@@ -113,8 +113,5 @@ public class Model implements iModel {
 		}
 	}
 
-	@Override
-	public int getRepositoryErrorPageIndex() {
-		return REPOSITORY_MENU_PAGE;
-	}
+
 }

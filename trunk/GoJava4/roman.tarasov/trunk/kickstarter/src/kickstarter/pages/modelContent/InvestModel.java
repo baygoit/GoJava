@@ -1,5 +1,6 @@
 package kickstarter.pages.modelContent;
 
+import kickstarter.mvc.interfaces.IndexOfPage;
 import kickstarter.repository.facade.RepositoryException;
 
 
@@ -9,7 +10,7 @@ public class InvestModel extends PageModel {
 	public void updateStateOfPageModel(String message) throws RepositoryException  {
 
 		if (message.equals("p")) {
-			imodel.next(DETAILED_PROJECT);
+			imodel.next(IndexOfPage.DETAILED_PROJECT.ordinal());
 			return;
 		}
 		modelOptions = imodel.getModelOptions();
@@ -20,11 +21,11 @@ public class InvestModel extends PageModel {
 			amount = project.amount[selected - 1];
 
 		} catch (NumberFormatException | IndexOutOfBoundsException e) {
-			imodel.goToAndBack(ERROR_PAGE, INVEST_PAGE);
+			imodel.goToAndBack(IndexOfPage.ERROR_PAGE.ordinal(), IndexOfPage.INVEST_PAGE.ordinal());
 			return;
 		}
 		modelOptions.intOption = intOption;
 		modelOptions.amountToInvest = Double.toString(amount);
-		imodel.nextWithOptions(APPLY_TRANSACTION_PAGE, modelOptions);
+		imodel.nextWithOptions(IndexOfPage.APPLY_TRANSACTION_PAGE.ordinal(), modelOptions);
 	}
 }

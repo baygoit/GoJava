@@ -2,6 +2,7 @@ package kickstarter.Test;
 
 import static org.junit.Assert.*;
 import kickstarter.Kickstarter;
+import kickstarter.mvc.interfaces.IndexOfPage;
 import kickstarter.ui.iUserInterface;
 
 import org.junit.Ignore;
@@ -10,7 +11,19 @@ import org.junit.Test;
 public class FakeConsole {
 	Kickstarter kickstarter;
 	public iUserInterface ui;
+	void put(String command) {
+		System.out.println("_________   " + command + "  _________");
+		try {
+			kickstarter.controller.updateStateOfModel(command);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
+	void view() {
+		kickstarter.controller.showPage();
+	}
 	public FakeConsole() {
 		kickstarter = new Kickstarter();
 		ui = new TestUI();
@@ -43,22 +56,4 @@ public class FakeConsole {
 
 		view();
 	}
-
-	
-	 
-	
-	void put(String command) {
-		System.out.println("_________   " + command + "  _________");
-		try {
-			kickstarter.controller.updateStateOfModel(command);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-
-	void view() {
-		kickstarter.controller.showPage();
-	}
-
 }

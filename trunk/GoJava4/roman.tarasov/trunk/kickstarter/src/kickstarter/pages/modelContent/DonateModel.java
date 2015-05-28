@@ -1,6 +1,7 @@
 package kickstarter.pages.modelContent;
 
 
+import kickstarter.mvc.interfaces.IndexOfPage;
 import kickstarter.payment.Bank;
 import kickstarter.repository.facade.RepositoryException;
 
@@ -14,7 +15,7 @@ public class DonateModel extends PageModel {
 	public void updateStateOfPageModel(String message)
 			throws RepositoryException {
 		if (message.equals("p")) {
-			imodel.next(DETAILED_PROJECT);
+			imodel.next(IndexOfPage.DETAILED_PROJECT.ordinal());
 			return;
 		}
 
@@ -43,10 +44,10 @@ public class DonateModel extends PageModel {
 				}
 
 			} catch (NumberFormatException | NullPointerException e) {
-				imodel.savePageBeforeError(DONATE_PAGE);
+				imodel.savePageBeforeError(IndexOfPage.DONATE_PAGE.ordinal());
 				modelOptions.intOption = intOption;
 				modelOptions.resultOfBankOperation = resultOfBankOperation;
-				imodel.nextWithOptions(BANK_OPERATION_RESULT_PAGE, modelOptions);
+				imodel.nextWithOptions(IndexOfPage.BANK_OPERATION_RESULT_PAGE.ordinal(), modelOptions);
 				return;
 			}
 
@@ -57,10 +58,10 @@ public class DonateModel extends PageModel {
 			modelOptions.intOption = intOption;
 			modelOptions.resultOfBankOperation = "\nbalance before :"
 					+ balanceBefore + "\nbalance after :" + balanceAfter;
-			imodel.nextWithOptions(BANK_OPERATION_RESULT_PAGE, modelOptions);
+			imodel.nextWithOptions(IndexOfPage.BANK_OPERATION_RESULT_PAGE.ordinal(), modelOptions);
 			return;
 		}
 
-		imodel.goToAndBack(ERROR_PAGE, DONATE_PAGE);
+		imodel.goToAndBack(IndexOfPage.ERROR_PAGE.ordinal(),IndexOfPage.DONATE_PAGE.ordinal() );
 	}
 }
