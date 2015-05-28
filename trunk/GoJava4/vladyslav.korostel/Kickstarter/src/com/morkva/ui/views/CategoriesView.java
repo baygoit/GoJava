@@ -2,10 +2,9 @@ package com.morkva.ui.views;
 
 import com.morkva.entities.Category;
 import com.morkva.logic.Printer;
+import com.morkva.logic.Reader;
 import com.morkva.ui.Model;
-import com.morkva.ui.controllers.CategoriesController;
-
-import java.util.List;
+import com.morkva.ui.ViewType;
 
 /**
  * Created by vladyslav on 22.05.15.
@@ -13,17 +12,32 @@ import java.util.List;
 public class CategoriesView implements IView{
     Model model;
     Printer printer;
+    Reader reader;
 
-    public CategoriesView(Model model, Printer printer) {
+    public CategoriesView(Model model, Printer printer, Reader reader) {
         this.model = model;
         this.printer = printer;
+        this.reader = reader;
     }
 
-    public void show() {
+    public void showContent() {
         for (Category category : model.getCategories()) {
             printer.print(category.getId() + ": " + category.getName() + "\n");
         }
         showFooter();
+    }
+
+    @Override
+    public ViewType readInput() {
+        while (true) {
+            int keyCode = reader.readUserInput();
+            if (keyCode == 0) {
+                System.exit(0);
+            } else if (keyCode > 0 && keyCode <= model.getCategories().size()) {
+                model.setCurrentCategory(model.getCategoryById(keyCode));
+                return ViewType.CATEGORY_PAGE;
+            }
+        }
     }
 
     private void showFooter() {

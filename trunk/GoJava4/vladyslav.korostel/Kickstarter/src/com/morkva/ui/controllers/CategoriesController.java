@@ -2,8 +2,8 @@ package com.morkva.ui.controllers;
 
 import com.morkva.logic.Printer;
 import com.morkva.logic.Reader;
-import com.morkva.ui.CommandType;
 import com.morkva.ui.Model;
+import com.morkva.ui.ViewType;
 import com.morkva.ui.views.CategoriesView;
 import com.morkva.ui.views.IView;
 
@@ -13,30 +13,20 @@ import com.morkva.ui.views.IView;
 public class CategoriesController implements IController{
     IView view;
     Model model;
-    Reader reader;
     Printer printer;
 
     public CategoriesController(Model model, Reader reader, Printer printer) {
         this.model = model;
-        this.reader = reader;
         this.printer = printer;
-        this.view = new CategoriesView(model, printer);
+        this.view = new CategoriesView(model, printer, reader);
     }
 
     public void showView() {
-        view.show();
+        view.showContent();
     }
 
 
-    public CommandType readInput() {
-        CommandType command = CommandType.DEFAULT_COMMAND;
-        int keyCode = reader.readUserInput();
-        if (keyCode == 0) {
-            command = CommandType.EXIT;
-        } else if (keyCode > 0 && keyCode <= model.getCategories().size()) {
-            model.setCurrentCategory(model.getCategoryById(keyCode));
-            command = CommandType.SHOW_CATEGORY_VIEW;
-        }
-        return command;
+    public ViewType readInput() {
+        return view.readInput();
     }
 }

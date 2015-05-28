@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class CategoryRepositoryTest {
 
-    Repository<Category> categoryRepository;
+    IRepository<Category> categoryRepository;
 
     @Before
     public void setUp() {

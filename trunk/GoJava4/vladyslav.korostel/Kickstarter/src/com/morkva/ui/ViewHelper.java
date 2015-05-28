@@ -27,44 +27,34 @@ public class ViewHelper {
             case CATEGORIES_PAGE:
                 IController categoriesController = new CategoriesController(model, reader, printer);
                 categoriesController.showView();
-                runCommand(categoriesController.readInput());
+                ViewResolver.getInstance().setNextView(categoriesController.readInput());
                 break;
             case CATEGORY_PAGE:
                 IController categoryController = new CategoryController(printer, model, reader);
                 categoryController.showView();
-                runCommand(categoryController.readInput());
+                ViewResolver.getInstance().setNextView(categoryController.readInput());
                 break;
             case PROJECT_PAGE:
                 IController projectController = new ProjectController(printer, model, reader);
                 projectController.showView();
-                runCommand(projectController.readInput());
+                ViewResolver.getInstance().setNextView(projectController.readInput());
         }
     }
 
-    public void runCommand(CommandType command) {
-        switch (command) {
-            case SHOW_CATEGORIES_VIEW:
-                showView(ViewType.CATEGORIES_PAGE);
-                break;
-            case SHOW_CATEGORY_VIEW:
-                showView(ViewType.CATEGORY_PAGE);
-                break;
-            case SHOW_PROJECT_VIEW:
-                showView(ViewType.PROJECT_PAGE);
-                break;
-            case EXIT_FROM_CATEGORY:
-                showView(ViewType.CATEGORIES_PAGE);
-                model.setCurrentCategory(null);
-                break;
-            case EXIT_FROM_PROJECT:
-                showView(ViewType.CATEGORY_PAGE);
-                model.setCurrentProject(null);
-            case EXIT:
-                System.exit(0);
-                break;
-            case DEFAULT_COMMAND:
-                System.err.println("DEFAULT_COMMAND");
-                break;
+    public void runCommand() {
+        while (true) {
+            ViewType viewType = ViewResolver.getInstance().getNextView();
+            switch (viewType) {
+                case CATEGORIES_PAGE:
+                    showView(ViewType.CATEGORIES_PAGE);
+                    break;
+                case CATEGORY_PAGE:
+                    showView(ViewType.CATEGORY_PAGE);
+                    break;
+                case PROJECT_PAGE:
+                    showView(ViewType.PROJECT_PAGE);
+                    break;
+            }
         }
     }
 }

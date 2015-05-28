@@ -3,17 +3,18 @@ package com.morkva;
 import com.morkva.entities.Category;
 import com.morkva.entities.Quote;
 import com.morkva.logic.*;
-import com.morkva.model.Repository;
-import com.morkva.ui.CommandType;
+import com.morkva.model.IRepository;
 import com.morkva.ui.Model;
 import com.morkva.ui.ViewHelper;
+import com.morkva.ui.ViewResolver;
+import com.morkva.ui.ViewType;
 
 import java.util.Random;
 
 public class KickstarterApp {
 
-    private Repository<Category> categoryRepository;
-    private Repository<Quote> quoteRepository;
+    private IRepository<Category> categoryRepository;
+    private IRepository<Quote> quoteRepository;
 
     private Reader reader;
 	private Printer printer;
@@ -27,9 +28,8 @@ public class KickstarterApp {
     public void run() {
         showQuote();
         ViewHelper viewHelper = new ViewHelper(new Model(categoryRepository), printer, reader);
-        while (true) {
-            viewHelper.runCommand(CommandType.SHOW_CATEGORIES_VIEW);
-        }
+        ViewResolver.getInstance().setNextView(ViewType.CATEGORIES_PAGE);
+        viewHelper.runCommand();
     }
 
 
@@ -45,11 +45,11 @@ public class KickstarterApp {
     	print(o + "\n");
     }
 
-    public void setCategoryRepository(Repository<Category> categoryRepository) {
+    public void setCategoryRepository(IRepository<Category> categoryRepository) {
         this.categoryRepository = categoryRepository;
     }
 
-    public void setQuoteRepository(Repository<Quote> quoteRepository) {
+    public void setQuoteRepository(IRepository<Quote> quoteRepository) {
         this.quoteRepository = quoteRepository;
     }
 }

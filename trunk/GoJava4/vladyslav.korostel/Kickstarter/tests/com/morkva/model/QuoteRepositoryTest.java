@@ -18,7 +18,7 @@ import java.util.List;
  */
 public class QuoteRepositoryTest {
 
-    Repository<Quote> quoteRepository;
+    IRepository<Quote> quoteRepository;
     
     @Before
     public void setUp() {

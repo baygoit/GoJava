@@ -2,7 +2,7 @@ package com.morkva.ui;
 
 import com.morkva.entities.Category;
 import com.morkva.entities.Project;
-import com.morkva.model.Repository;
+import com.morkva.model.IRepository;
 
 import java.util.List;
 
@@ -10,11 +10,11 @@ import java.util.List;
  * Created by vladyslav on 22.05.15.
  */
 public class Model {
-    Repository<Category> categoryRepository;
+    IRepository<Category> categoryRepository;
     private Category currentCategory;
     private Project currentProject;
 
-    public Model(Repository<Category> categoryRepository) {
+    public Model(IRepository<Category> categoryRepository) {
         this.categoryRepository = categoryRepository;
     }
 

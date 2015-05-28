@@ -1,10 +1,10 @@
 package com.morkva.ui.controllers;
 
+import com.morkva.entities.Project;
 import com.morkva.logic.Printer;
 import com.morkva.logic.Reader;
-import com.morkva.ui.CommandType;
 import com.morkva.ui.Model;
-import com.morkva.ui.views.IView;
+import com.morkva.ui.ViewType;
 import com.morkva.ui.views.ProjectView;
 
 /**
@@ -13,27 +13,24 @@ import com.morkva.ui.views.ProjectView;
 public class ProjectController implements IController{
 
     private Model model;
-    private IView view;
-    private Reader reader;
+    private ProjectView view;
 
     public ProjectController(Printer printer, Model model, Reader reader) {
-        this.reader = reader;
-        this.view = new ProjectView(model, printer);
+        this.view = new ProjectView(model, printer, reader, this);
         this.model = model;
     }
 
     public void showView() {
-        view.show();
+        view.showContent();
     }
 
-    public CommandType readInput() {
-        CommandType command;
-        int keyCode = reader.readUserInput();
-        if (keyCode == 0) {
-            command = CommandType.EXIT_FROM_PROJECT;
-        } else {
-            command = CommandType.DEFAULT_COMMAND;
-        }
-        return command;
+    public ViewType readInput() {
+        return view.readInput();
+    }
+
+    public void investToTheProject(int amount) {
+        Project project = model.getCurrentProject();
+        project.setCurrentMoney(project.getCurrentMoney() + amount);
+        project.setNeedMoney(project.getNeedMoney() - amount);
     }
 }
