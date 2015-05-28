@@ -14,12 +14,12 @@ public class ProjectsModel extends PageModel {
 		}
 		ViewValues ViewValues = iview.getViewValues();
 
-		if (ViewValues.intProjects != null) {
-			for (int index = 0; index < ViewValues.intProjects.length; index++) {
-				if (message.equals(ViewValues.strProjects[index])) {
+		if (ViewValues.getIntProjects() != null) {
+			for (int index = 0; index < ViewValues.getIntProjects().length; index++) {
+				if (message.equals(ViewValues.getStrProjects()[index])) {
 					modelValues = imodel.getModelValues();
-					modelValues.intSelectedProject = ViewValues.intProjects[index];
-					modelValues.strSelectedProject = ViewValues.strProjects[index];
+					modelValues.setIntSelectedProject(ViewValues.getIntProjects()[index]);
+					modelValues.setStrSelectedProject(ViewValues.getStrProjects()[index]);
 					imodel.nextWithValues(
 							IndexOfPage.DETAILED_PROJECT.ordinal(), modelValues);
 					return;

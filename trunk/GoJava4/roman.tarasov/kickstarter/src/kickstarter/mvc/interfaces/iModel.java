@@ -1,6 +1,6 @@
 package kickstarter.mvc.interfaces;
 
-import kickstarter.mvc.View;
+
 import kickstarter.mvc.modelState.ModelValues;
 import kickstarter.pages.modelContent.PageModel;
 import kickstarter.repository.facade.iRepository;
@@ -33,6 +33,7 @@ public interface iModel {
 
 	public void setModel(iModel setModel);
 
-	public void setView(View view);
+	public void setView(iView setView);
+	
 
 }

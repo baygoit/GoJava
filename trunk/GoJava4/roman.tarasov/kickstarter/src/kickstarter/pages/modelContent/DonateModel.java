@@ -45,18 +45,18 @@ public class DonateModel extends PageModel {
 
 			} catch (NumberFormatException | NullPointerException e) {
 				imodel.savePageBeforeError(IndexOfPage.DONATE_PAGE.ordinal());
-				modelValues.resultOfBankOperation = resultOfBankOperation;
+				modelValues.setResultOfBankOperation(resultOfBankOperation);
 				imodel.nextWithValues(
 						IndexOfPage.BANK_OPERATION_RESULT_PAGE.ordinal(),
 						modelValues);
 				return;
 			}
 
-			Project project = repository.getProjectById(modelValues.intSelectedProject);
-			project.pledged += getMoney;
+			Project project = repository.getProjectById(modelValues.getIntSelectedProject());
+			project.setPledged(project.getPledged() + getMoney);
 
-			modelValues.resultOfBankOperation = "\nbalance before :"
-					+ balanceBefore + "\nbalance after :" + balanceAfter;
+			modelValues.setResultOfBankOperation("\nbalance before :"
+					+ balanceBefore + "\nbalance after :" + balanceAfter);
 			imodel.nextWithValues(
 					IndexOfPage.BANK_OPERATION_RESULT_PAGE.ordinal(),
 					modelValues);

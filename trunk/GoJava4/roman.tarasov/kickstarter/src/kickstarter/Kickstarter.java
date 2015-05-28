@@ -29,144 +29,67 @@ import kickstarter.pages.viewContent.ResultOfBankOperation;
 import kickstarter.pages.viewContent.TheEnd;
 import kickstarter.pages.viewContent.WrongChoice;
 import kickstarter.payment.Bank;
-import kickstarter.repository.facade.FileSystemRepository;
-import kickstarter.repository.facade.Repository;
+import kickstarter.repository.facade.FileRepositoryDriver;
+import kickstarter.repository.facade.MemoryRepository;
+import kickstarter.repository.facade.RepositoryException;
 import kickstarter.ui.ConsoleUI;
 import kickstarter.ui.iUserInterface;
 
 public class Kickstarter {
 
+	private iUserInterface ui;
 	private View view;
+
 	private Model model;
 	public Controller controller;
 	public iController icontroller;
-	private iUserInterface ui;
-	private FileSystemRepository fileSystemRepository;
-	private Repository inMemoryRepository;
+
+	public FileRepositoryDriver fileRepositoryDriver;
+	private MemoryRepository inMemoryRepository;
 	private Bank bank;
-
-	public Kickstarter() {
-	}
-
-	public static void main(String[] args) {
-		Kickstarter kickstarter = new Kickstarter();
-		kickstarter.init();
-		kickstarter.run();
-	}
-
-	public void init() {
-		inMemoryRepository = new Repository();
-
-		fileSystemRepository = new FileSystemRepository();
-
-		bank = new Bank();
-		model = new Model();
-		ui = new ConsoleUI();
-		view = new View(ui);
-		controller = new Controller(view, model, fileSystemRepository,
-				inMemoryRepository);
-		icontroller = controller;
-		viewInit();
-		modelInit();
-		controllerInit();
-	}
-
-	private void controllerInit() {
-		controller.setPage(0);
-		//controller.setRepository(fileSystemRepository);
-		controller.setRepository(inMemoryRepository);
-		controller.setFileNameOfRepository("repository");
-		controller.setView(view);
-		controller.setModel(model);
-	}
-
-	private void modelInit() {
-
-		PageModel pageModel = new CategoriesModel();
-		model.addPageModel(pageModel);
-
-		pageModel = new ProjectsModel();
-		model.addPageModel(pageModel);
-
-		pageModel = new DetailedProjectModel();
-		model.addPageModel(pageModel);
-
-		pageModel = new WrongChoiceModel();
-		model.addPageModel(pageModel);
-
-		pageModel = new TheEndModel();
-		model.addPageModel(pageModel);
-
-		pageModel = new CommentModel();
-		model.addPageModel(pageModel);
-
-		pageModel = new InvestModel();
-		model.addPageModel(pageModel);
-
-		pageModel = new DonateModel(bank);
-		model.addPageModel(pageModel);
-
-		pageModel = new ResultOfBankOperationModel();
-		model.addPageModel(pageModel);
-
-		pageModel = new ApplyTransactionModel(bank);
-		model.addPageModel(pageModel);
-
-		pageModel = new RepositoryMenuModel(inMemoryRepository,
-				fileSystemRepository, icontroller);
-		model.addPageModel(pageModel);
-
-	}
-
-	private void viewInit() {
-
-		PageView pageView = new Categories();
-		view.addPageView(pageView);
-
-		pageView = new Projects();
-		view.addPageView(pageView);
-
-		pageView = new DetailedProject();
-		view.addPageView(pageView);
-
-		pageView = new WrongChoice();
-		view.addPageView(pageView);
-
-		pageView = new TheEnd();
-		view.addPageView(pageView);
-
-		pageView = new Comment();
-		view.addPageView(pageView);
-
-		pageView = new Invest();
-		view.addPageView(pageView);
-
-		pageView = new Donate(bank);
-		view.addPageView(pageView);
-
-		pageView = new ResultOfBankOperation();
-		view.addPageView(pageView);
-
-		pageView = new ApplyTransaction();
-		view.addPageView(pageView);
-
-		pageView = new RepositoryMenu();
-		view.addPageView(pageView);
-	}
+	private MemoryRepository memoryRepository;
 
 	public void testUI(iUserInterface ui) {
 		this.ui = ui;
 		view.setUserInterface(ui);
 	}
 
-	private void run() {
+	void run() {
 		String message = null;
 
 		while (true) {
 			controller.showPage();
 			message = ui.inputString();
 			controller.updateStateOfModel(message);
-
 		}
+	}
+
+	void setBank(Bank setBank) {
+		this.bank = setBank;
+	}
+
+	void setController(Controller setController) {
+		this.controller = setController;
+	}
+
+	void setView(View setView) {
+		this.view = setView;
+	}
+
+	void setModel(Model setModel) {
+		this.model = setModel;
+	}
+
+	public void setFileRepositoryDriver(
+			FileRepositoryDriver fileRepositoryDriver) {
+		this.fileRepositoryDriver = fileRepositoryDriver;
+	}
+
+	public void setMemoryRepository(MemoryRepository memoryRepository) {
+		this.memoryRepository = memoryRepository;
+	}
+
+	public void setUI(iUserInterface ui) {
+		this.ui = ui;
 	}
 }

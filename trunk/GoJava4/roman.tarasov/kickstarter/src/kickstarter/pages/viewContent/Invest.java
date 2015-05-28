@@ -8,7 +8,7 @@ public class Invest extends PageView {
 	public String getHeader() throws RepositoryException {
 
 		Project project = repository
-				.getProjectById(imodel.getModelValues().intSelectedProject);
+				.getProjectById(imodel.getModelValues().getIntSelectedProject());
 		StringBuilder header = new StringBuilder();
 
 		header.append("\n=========================");
@@ -16,14 +16,14 @@ public class Invest extends PageView {
 		header.append("\n=========================");
 		header.append("\n");
 		header.append("\n  Investment options :");
-		int length = project.investmentOptions.length;
+		int length = project.getInvestmentOptions().length;
 		intValues = new int[length];
 		strValues = new String[length];
 		for (int index = 0; index < length; index++) {
 			header.append("\n");
 			header.append((index + 1));
 			header.append(" -");
-			header.append(project.investmentOptions[index]);
+			header.append(project.getInvestmentOptions()[index]);
 			intValues[index] = index + 1;
 			strValues[index] = Integer.toString(index + 1);
 		}

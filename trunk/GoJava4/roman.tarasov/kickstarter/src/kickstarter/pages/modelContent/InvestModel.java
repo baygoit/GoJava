@@ -15,7 +15,7 @@ public class InvestModel extends PageModel {
 			return;
 		}
 		modelValues = imodel.getModelValues();
-		Project project = repository.getProjectById(modelValues.intSelectedProject);
+		Project project = repository.getProjectById(modelValues.getIntSelectedProject());
 		double amount = 0;
 		try {
 			int selected = Integer.parseInt(message);
@@ -26,7 +26,7 @@ public class InvestModel extends PageModel {
 					IndexOfPage.INVEST_PAGE.ordinal());
 			return;
 		}
-		modelValues.amountToInvest = Double.toString(amount);
+		modelValues.setAmountToInvest(Double.toString(amount));
 		imodel.nextWithValues(IndexOfPage.APPLY_TRANSACTION_PAGE.ordinal(),
 				modelValues);
 	}

@@ -10,20 +10,15 @@ import java.io.ObjectOutputStream;
 
 import kickstarter.mvc.interfaces.IndexOfPage;
 import kickstarter.mvc.interfaces.iController;
-import kickstarter.repository.facade.FileSystemRepository;
-import kickstarter.repository.facade.Repository;
+import kickstarter.repository.facade.MemoryRepository;
 
 public class RepositoryMenuModel extends PageModel {
-	private Repository inMemoryRepository;
-	private Repository deserializedRepository;
-	private FileSystemRepository fileSystemRepository;
+
+	private MemoryRepository deserializedRepository;
 	private iController icontroller;
 
-	public RepositoryMenuModel(Repository inMemoryRepository,
-			FileSystemRepository fileSystemRepository, iController icontroller) {
+	public RepositoryMenuModel(iController icontroller) {
 
-		this.inMemoryRepository = inMemoryRepository;
-		this.fileSystemRepository = fileSystemRepository;
 		this.icontroller = icontroller;
 	}
 
@@ -35,7 +30,7 @@ public class RepositoryMenuModel extends PageModel {
 		}
 		if (message.equals("d")) {
 			icontroller.setInMemoryRepository();
-			iview.getViewValues().repositoryError = false;
+			iview.getViewValues().setRepositoryError(false);
 			imodel.next(IndexOfPage.CATEGORIES.ordinal());
 			return;
 		}
@@ -46,14 +41,14 @@ public class RepositoryMenuModel extends PageModel {
 		if (message.equals("c")) {
 			try (ObjectOutputStream out = new ObjectOutputStream(
 					new BufferedOutputStream(new FileOutputStream("object.ser")))) {
-
-				out.writeObject(inMemoryRepository);
+				;
+				out.writeObject(icontroller.getCurrentRepository());
 			} catch (IOException e) {
 				imodel.goToAndBack(IndexOfPage.ERROR_PAGE.ordinal(),
 						IndexOfPage.REPOSITORY_MENU_PAGE.ordinal());
 				return;
 			}
-			iview.getViewValues().repositoryError = false;
+			iview.getViewValues().setRepositoryError(false);
 			imodel.next(IndexOfPage.CATEGORIES.ordinal());
 			return;
 		}
@@ -61,15 +56,16 @@ public class RepositoryMenuModel extends PageModel {
 
 			try (ObjectInputStream in = new ObjectInputStream(
 					new BufferedInputStream(new FileInputStream("object.ser")))) {
-				deserializedRepository = (Repository) in.readObject();
+				
+				deserializedRepository = (MemoryRepository) in.readObject();
 			} catch (ClassNotFoundException | IOException e) {
 				imodel.goToAndBack(IndexOfPage.ERROR_PAGE.ordinal(),
 						IndexOfPage.REPOSITORY_MENU_PAGE.ordinal());
 				return;
 			}
-			inMemoryRepository = deserializedRepository;
+
 			icontroller.setIRepository(deserializedRepository);
-			iview.getViewValues().repositoryError = false;
+			iview.getViewValues().setRepositoryError(false);
 			imodel.next(IndexOfPage.CATEGORIES.ordinal());
 			return;
 		}

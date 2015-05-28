@@ -16,8 +16,8 @@ public class Projects extends PageView {
 		List<Project> sortedProjects = new ArrayList<Project>();
 		int length = repository.getProjectsLength();
 		for (int index = 0; index < length; index++) {
-			project = repository.getProject(index);
-			if (project.categoryID == categoryID) {
+			project = repository.getProjectByIndex(index);
+			if (project.getCategoryID() == categoryID) {
 				sortedProjects.add(project);
 			}
 		}
@@ -33,27 +33,27 @@ public class Projects extends PageView {
 		for (int index = 0; index < length; index++) {
 			project = sortedToSelect.get(index);
 
-			strValues[index] = Integer.toString(project.ID);
-			intValues[index] = project.ID;
+			strValues[index] = Integer.toString(project.getID());
+			intValues[index] = project.getID();
 
 			result.append("\nID:<");
-			result.append(project.ID);
+			result.append(project.getID());
 			result.append("> name:<");
-			result.append(project.name);
+			result.append(project.getName());
 			result.append(">\n short desc.:<");
-			result.append(project.shortDescription);
+			result.append(project.getShortDescription());
 			result.append(">\n goal:<");
-			result.append(project.goal);
+			result.append(project.getGoal());
 			result.append(">\n pledged:<");
-			result.append(project.pledged);
+			result.append(project.getPledged());
 			result.append(">\n days to go:<");
-			result.append(project.daysToGo);
+			result.append(project.getDaysToGo());
 			result.append(">");
 			result.append("\n================================");
 		}
 		ViewValues ViewValues = iview.getViewValues();
-		ViewValues.intProjects = intValues;
-		ViewValues.strProjects = strValues;
+		ViewValues.setIntProjects(intValues);
+		ViewValues.setStrProjects(strValues);
 		return result.toString();
 	}
 
@@ -64,7 +64,7 @@ public class Projects extends PageView {
 		header.append("\n|     Projects         |");
 		header.append("\n|______________________|");
 		header.append("\n");
-		header.append(printProjectsInfo(imodel.getModelValues().intSelectedCategory));
+		header.append(printProjectsInfo(imodel.getModelValues().getIntSelectedCategory()));
 		header.append("\n------------------------");
 		header.append("\nSelect project by ID:<ID>");
 		header.append("\nOptions:  <p> - previous page");

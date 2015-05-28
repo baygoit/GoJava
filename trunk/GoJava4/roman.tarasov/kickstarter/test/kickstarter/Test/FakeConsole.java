@@ -1,34 +1,38 @@
 package kickstarter.Test;
 
 import static org.junit.Assert.*;
-import kickstarter.Kickstarter;
+
+import java.util.List;
+
+
+
+import kickstarter.Runner;
+import kickstarter.entities.Category;
 import kickstarter.mvc.interfaces.IndexOfPage;
+import kickstarter.repository.facade.RepositoryException;
 import kickstarter.ui.iUserInterface;
 
 import org.junit.Ignore;
 import org.junit.Test;
 
 public class FakeConsole {
-	Kickstarter kickstarter;
+	Runner runner;
 	public iUserInterface ui;
 	void put(String command) {
 		System.out.println("_________   " + command + "  _________");
-		try {
-			kickstarter.controller.updateStateOfModel(command);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
+			runner.kickstarter.controller.updateStateOfModel(command);
+
 	}
 
 	void view() {
-		kickstarter.controller.showPage();
+		runner.kickstarter.controller.showPage();
 	}
 	public FakeConsole() {
-		kickstarter = new Kickstarter();
+		runner = new Runner();
 		ui = new TestUI();
-		kickstarter.init();
-		kickstarter.testUI(ui);
+		runner.init();
+		runner.kickstarter.testUI(ui);
 
 	}
 
@@ -56,4 +60,5 @@ public class FakeConsole {
 
 		view();
 	}
+
 }

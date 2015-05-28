@@ -1,16 +1,20 @@
 package kickstarter.repository.facade;
 
+import java.io.BufferedOutputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-
 import kickstarter.entities.Category;
 import kickstarter.entities.Project;
 import kickstarter.entities.ProjectComments;
 import kickstarter.entities.Quote;
 
-public class Repository implements iRepository, Serializable {
+
+public class MemoryRepository implements iRepository, Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private List<Quote> quotes;
@@ -18,7 +22,7 @@ public class Repository implements iRepository, Serializable {
 	private List<Project> projects;
 	private List<ProjectComments> allComments;
 
-	public Repository() {
+	public MemoryRepository() {
 
 		quotes = new ArrayList<Quote>();
 		Quote quote = new Quote();
@@ -31,11 +35,11 @@ public class Repository implements iRepository, Serializable {
 
 		categories = new ArrayList<Category>();
 		Category category = new Category("Technology");
-		category.ID = 5;
+		category.setID(5);
 		categories.add(category);
 
 		category = new Category("Social");
-		category.ID = 4;
+		category.setID(4);
 		categories.add(category);
 		allComments = new ArrayList<ProjectComments>();
 
@@ -51,48 +55,48 @@ public class Repository implements iRepository, Serializable {
 		int categoryID = 5;
 		projects = new ArrayList<Project>();
 		Project project = new Project("Create electrobike", categoryID);
-		project.description = "high efficiency";
-		project.shortDescription = "short description";
-		project.history = "history of bike creation";
-		project.linkToVideo = "www.link.to.demo.video";
-		project.pledged = 25;
-		project.goal = 2000;
-		project.ID = 23;
-		project.investmentOptions = new String[] { "1$ - ", "10$ -", "40$ -" };
+		project.setDescription("high efficiency");
+		project.setShortDescription("short description");
+		project.setHistory("history of bike creation");
+		project.setLinkToVideo("www.link.to.demo.video");
+		project.setPledged(25);
+		project.setGoal(2000);
+		project.setID(23);
+		project.setInvestmentOptions(new String[] { "1$ - ", "10$ -", "40$ -" });
 		project.amount = new double[] { 1, 10, 40 };
 		projects.add(project);
 
 		categoryID = 4;
 		project = new Project("Paint the fence of the school", categoryID);
-		project.description = "raising money for paint";
-		project.investmentOptions = new String[] { "1$ - ", "10$ -", "40$ -" };
+		project.setDescription("raising money for paint");
+		project.setInvestmentOptions(new String[] { "1$ - ", "10$ -", "40$ -" });
 		project.amount = new double[] { 1, 10, 40 };
-		project.ID = 8;
+		project.setID(8);
 		projects.add(project);
 
 		categoryID = 4;
 		project = new Project("Help Build ACRE's New Home in Chicago",
 				categoryID);
-		project.description = "The renovation of our new space and expansion of our Chicago programming!";
-		project.shortDescription = "Help ACRE achieve our most ambitious project to date";
-		project.investmentOptions = new String[] { "100$ - ", "150$ -",
-				"400$ -" };
+		project.setDescription("The renovation of our new space and expansion of our Chicago programming!");
+		project.setShortDescription("Help ACRE achieve our most ambitious project to date");
+		project.setInvestmentOptions(new String[] { "100$ - ", "150$ -",
+				"400$ -" });
 		project.amount = new double[] { 100, 150, 400 };
-		project.pledged = 5000;
-		project.goal = 10000;
-		project.ID = 1;
+		project.setPledged(5000);
+		project.setGoal(10000);
+		project.setID(1);
 		projects.add(project);
 
 		categoryID = 5;
 		project = new Project("Microduino mCookie", categoryID);
-		project.description = "Small, stackable, Arduino-compatible electronics for makers, designers, engineers, students and curious tinkerers of all ages.";
-		project.shortDescription = "The smallest electronic modules on LEGO";
-		project.history = "history of Microduino mCookie";
-		project.linkToVideo = "https://www.microduino.cc/module/view?id=53da0abdc69eee000055f55d";
-		project.pledged = 205;
-		project.goal = 20000;
-		project.ID = 20;
-		project.investmentOptions = new String[] { "10$ - ", "20$ -", "100$ -" };
+		project.setDescription("Small, stackable, Arduino-compatible electronics for makers, designers, engineers, students and curious tinkerers of all ages.");
+		project.setShortDescription("The smallest electronic modules on LEGO");
+		project.setHistory("history of Microduino mCookie");
+		project.setLinkToVideo("https://www.microduino.cc/module/view?id=53da0abdc69eee000055f55d");
+		project.setPledged(205);
+		project.setGoal(20000);
+		project.setID(20);
+		project.setInvestmentOptions(new String[] { "10$ - ", "20$ -", "100$ -" });
 		project.amount = new double[] { 10, 20, 100 };
 		projects.add(project);
 		comment = new ProjectComments(20);
@@ -137,7 +141,7 @@ public class Repository implements iRepository, Serializable {
 	}
 
 	@Override
-	public Project getProject(int index) {
+	public Project getProjectByIndex(int index) {
 		return projects.get(index);
 	}
 
@@ -147,7 +151,7 @@ public class Repository implements iRepository, Serializable {
 
 		for (int index = 0; index < length; index++) {
 			Project currentProject = projects.get(index);
-			if (currentProject.ID == ID) {
+			if (currentProject.getID() == ID) {
 				return currentProject;
 			}
 		}
@@ -164,5 +168,38 @@ public class Repository implements iRepository, Serializable {
 		ProjectComments comment = new ProjectComments(projectID);
 		comment.addComment(user, string);
 		allComments.add(comment);
+	}
+
+	@Override
+	public void createFileSystemRepository() throws RepositoryException {
+		CategoriesRepository categoriesRepository = new CategoriesRepository();
+		categoriesRepository.setCategories(categories);
+		try (ObjectOutputStream out = new ObjectOutputStream(
+				new BufferedOutputStream(new FileOutputStream("categories.ser")))) {
+
+			out.writeObject(categoriesRepository);
+		} catch (IOException e) {
+			throw new RepositoryException("Error categories.ser creation");
+		}
+
+		ProjectsRepository projectsRepository = new ProjectsRepository();
+		projectsRepository.setProjects(projects);
+		try (ObjectOutputStream out = new ObjectOutputStream(
+				new BufferedOutputStream(new FileOutputStream("projects.ser")))) {
+
+			out.writeObject(projectsRepository);
+		} catch (IOException e) {
+			throw new RepositoryException("Error projects.ser creation");
+		}
+		
+		QuotesRepository quotesRepository = new QuotesRepository();
+		quotesRepository.setQuotes(quotes);
+		try (ObjectOutputStream out = new ObjectOutputStream(
+				new BufferedOutputStream(new FileOutputStream("quotes.ser")))) {
+
+			out.writeObject(quotesRepository);
+		} catch (IOException e) {
+			throw new RepositoryException("Error quotes.ser creation");
+		}
 	}
 }

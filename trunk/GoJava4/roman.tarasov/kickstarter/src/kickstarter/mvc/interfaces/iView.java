@@ -5,7 +5,7 @@ import kickstarter.pages.viewContent.PageView;
 import kickstarter.repository.facade.iRepository;
 import kickstarter.ui.iUserInterface;
 
-public interface iView  {
+public interface iView {
 
 	void addPageView(PageView page);
 
@@ -13,11 +13,11 @@ public interface iView  {
 
 	void setRepository(iRepository setRepository);
 
-	void setModel(iModel setModel);
-
 	void showPage();
 
 	ViewValues getViewValues();
 
 	void setView(iView setView);
+
+	void setModel(iModel setModel);
 }

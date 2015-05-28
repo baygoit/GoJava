@@ -18,14 +18,12 @@ public class DetailedProjectModel extends PageModel {
 		}
 		if (message.equals("i")) {
 			modelValues = imodel.getModelValues();
-			modelValues.intValue = intValue;
 			imodel.nextWithValues(IndexOfPage.INVEST_PAGE.ordinal(),
 					modelValues);
 			return;
 		}
 		if (message.equals("d")) {
 			modelValues = imodel.getModelValues();
-			modelValues.intValue = intValue;
 			imodel.nextWithValues(IndexOfPage.DONATE_PAGE.ordinal(),
 					modelValues);
 			return;

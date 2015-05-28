@@ -3,25 +3,17 @@ package kickstarter.mvc;
 import kickstarter.mvc.interfaces.iController;
 import kickstarter.mvc.interfaces.iModel;
 import kickstarter.mvc.interfaces.iView;
-import kickstarter.repository.facade.FileSystemRepository;
-import kickstarter.repository.facade.Repository;
+import kickstarter.repository.facade.FileRepositoryDriver;
+import kickstarter.repository.facade.MemoryRepository;
 import kickstarter.repository.facade.iRepository;
 
 public class Controller implements iController {
 
 	private iView iview;
 	private iModel imodel;
-	private FileSystemRepository fileSystemRepository;
-	private Repository inMemoryRepository;
-
-	public Controller(iView iview, iModel imodel,
-			FileSystemRepository fileSystemRepository,
-			Repository inMemoryRepository) {
-		this.iview = iview;
-		this.imodel = imodel;
-		this.fileSystemRepository = fileSystemRepository;
-		this.inMemoryRepository = inMemoryRepository;
-	}
+	private FileRepositoryDriver fileRepositoryDriver;
+	private MemoryRepository inMemoryRepository;
+	private iRepository currentRepository;
 
 	public void showPage() {
 		iview.showPage();
@@ -35,43 +27,60 @@ public class Controller implements iController {
 		imodel.setPage(currentPage);
 	}
 
-	public void setRepository(iRepository setRepository) {
+	public void setCurrentRepository(iRepository setRepository) {
+		this.currentRepository=setRepository;
 		imodel.setRepository(setRepository);
 		iview.setRepository(setRepository);
 	}
 
-	public void setModel(iModel setModel) {
+	public void initModel(iModel setModel) {
 		iview.setModel(setModel);
 		imodel.setModel(setModel);
+	}
+	public void initView(iView setView) {
+		iview.setView(setView);
+		imodel.setView(setView);
 	}
 
 	@Override
 	public void setFileSystemRepository() {
-		setRepository(fileSystemRepository);
+		setCurrentRepository(fileRepositoryDriver);
 	}
 
 	@Override
 	public void setInMemoryRepository() {
-		setRepository(inMemoryRepository);
+		setCurrentRepository(inMemoryRepository);
 	}
 
 	@Override
 	public void setFileNameOfRepository(String fileName) {
-		fileSystemRepository.setFileName(fileName);
+		fileRepositoryDriver.setFileName(fileName);
 	}
 
 	@Override
 	public String getFileNameOfRepository() {
-		return fileSystemRepository.getFileNameOfRepository();
+		return fileRepositoryDriver.getFileNameOfRepository();
 	}
 
 	@Override
 	public void setIRepository(iRepository setRepository) {
-		setRepository(setRepository);
+		setCurrentRepository(setRepository);
 	}
 
-	public void setView(View view) {
-		iview.setView(view);
-		imodel.setView(view);
+	@Override
+	public void setInterfaces(iView iview, iModel imodel) {
+		this.iview=iview;
+		this.imodel=imodel;
+	}
+
+	public void setRepositories(FileRepositoryDriver fileRepositoryDriver,
+			MemoryRepository inMemoryRepository) {
+		this.fileRepositoryDriver=fileRepositoryDriver;
+		this.inMemoryRepository=inMemoryRepository;
+	}
+
+	@Override
+	public iRepository getCurrentRepository() {
+		return currentRepository;
 	}
 }

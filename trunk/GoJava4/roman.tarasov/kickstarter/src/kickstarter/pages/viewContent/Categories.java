@@ -19,7 +19,7 @@ public class Categories extends PageView {
 			Quote quote = repository.getRandomQuote();
 			header.append(quote.getQuote());
 		} catch (NullPointerException e) {
-			throw new RepositoryException();
+			throw new RepositoryException("");
 		}
 
 		header.append("\n----------------");
@@ -30,27 +30,32 @@ public class Categories extends PageView {
 		header.append(getListAllCategories());
 		header.append("\n------------------------");
 		header.append("\nSelect category by ID:<ID>");
-		header.append("\nOptions:  <r> - Repository menu;  <e> - The End");
+		header.append("\nOptions:  <r> - MemoryRepository menu;  <e> - The End");
 		return header.toString();
 	}
 
 	public String getListAllCategories() throws RepositoryException {
-		String result = "";
 
+		StringBuilder result = new StringBuilder();
 		List<Category> listAllCategories = repository.getListAllCategories();
 		int length = listAllCategories.size();
 		strValues = new String[length];
 		intValues = new int[length];
 		for (int index = 0; index < length; index++) {
 			Category currentCategory = listAllCategories.get(index);
-			result += ("ID:<" + currentCategory.ID + "> name:<"
-					+ currentCategory.name + ">\n");
-			strValues[index] = Integer.toString(currentCategory.ID);
-			intValues[index] = currentCategory.ID;
+
+			result.append("ID:<");
+			result.append(currentCategory.getID());
+			result.append("> name:<");
+			result.append(currentCategory.getName());
+			result.append(">\n");
+
+			strValues[index] = Integer.toString(currentCategory.getID());
+			intValues[index] = currentCategory.getID();
 		}
 		ViewValues ViewValues = iview.getViewValues();
-		ViewValues.intCategories = intValues;
-		ViewValues.strCategories = strValues;
-		return result;
+		ViewValues.setIntCategories(intValues);
+		ViewValues.setStrCategories(strValues);
+		return result.toString();
 	}
 }

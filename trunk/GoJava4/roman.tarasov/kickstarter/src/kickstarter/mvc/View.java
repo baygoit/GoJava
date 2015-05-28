@@ -28,7 +28,7 @@ public class View implements iView {
 	public View(iUserInterface ui) {
 		correct = new HasCorrectRepository();
 		error = new HasRepositoryError();
-		ViewValues=new ViewValues();
+		ViewValues = new ViewValues();
 		state = correct;
 		this.ui = ui;
 		pagesView = new ArrayList<PageView>();
@@ -38,9 +38,18 @@ public class View implements iView {
 
 		@Override
 		public void showPage() {
-			if (!ViewValues.repositoryError) {
+			if (!ViewValues.getRepositoryError()) {
 				state = correct;
 				state.showPage();
+			}
+			try {
+				imodel.setPage(IndexOfPage.REPOSITORY_MENU_PAGE.ordinal());
+				currentPage = imodel.getCurrentPage();
+				page = pagesView.get(currentPage);
+				ui.display(page.getHeader());
+			} catch (RepositoryException e) {
+				// TODO throw ViewException
+				e.printStackTrace();
 			}
 		}
 	}
@@ -55,19 +64,18 @@ public class View implements iView {
 			} catch (RepositoryException e) {
 				state = error;
 				repositoryError();
-				return;
 			}
 		}
 
 		void repositoryError() {
 			currentPage = IndexOfPage.REPOSITORY_MENU_PAGE.ordinal();
 			page = pagesView.get(currentPage);
-			ViewValues.repositoryError=true;
+			ViewValues.setRepositoryError(true);
 			try {
 				ui.display(page.getHeader());
 				imodel.next(currentPage);
 			} catch (RepositoryException e1) {
-//TODO throw ViewException
+				// TODO throw ViewException
 				e1.printStackTrace();
 			}
 		}
@@ -101,6 +109,7 @@ public class View implements iView {
 		}
 		this.imodel = setModel;
 	}
+
 	@Override
 	public void setView(iView setView) {
 		for (PageView pageView : pagesView) {

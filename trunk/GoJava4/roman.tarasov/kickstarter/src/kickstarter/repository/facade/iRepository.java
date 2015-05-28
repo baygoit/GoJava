@@ -20,7 +20,8 @@ public interface iRepository {
 
 	public abstract int getProjectsLength() throws RepositoryException;
 
-	public abstract Project getProject(int index) throws RepositoryException;
+	public abstract Project getProjectByIndex(int index)
+			throws RepositoryException;
 
 	public abstract Project getProjectById(int ID) throws RepositoryException;
 
@@ -29,5 +30,7 @@ public interface iRepository {
 
 	public abstract void addNewComment(int i, int intSelectedProject,
 			String string) throws RepositoryException;
+
+	void createFileSystemRepository() throws RepositoryException;
 
 }

@@ -8,26 +8,42 @@ public class Comment extends PageView {
 
 	public String getHeader() throws RepositoryException {
 		modelValues = imodel.getModelValues();
-		Project project = repository.getProjectById(modelValues.intSelectedProject);
+		Project project = repository
+				.getProjectById(modelValues.getIntSelectedProject());
 
 		StringBuilder header = new StringBuilder();
 		header.append("\n_________________________");
 		header.append("\n|Add comment to project  |");
 		header.append("\n|________________________|");
 		header.append("\nname     :<");
-		header.append(project.name);
+		header.append(project.getName());
 		header.append(">");
-		header.append("\nID       :<" + project.ID + ">");
-		header.append("\ndescription:<" + project.description + ">");
-		header.append("\ngoal     :<" + project.goal + ">");
-		header.append("\npledged  :<" + project.pledged + ">");
-		header.append("\ndays to go :<" + project.daysToGo + ">");
-		header.append("\nhistory :<" + project.history + ">");
-		header.append("\nlink to video :<" + project.linkToVideo + ">");
+		header.append("\nID       :<");
+		header.append(project.getID());
+		header.append(">");
+		header.append("\ndescription:<");
+		header.append(project.getDescription());
+		header.append(">");
+		header.append("\ngoal     :<");
+		header.append(project.getGoal());
+		header.append(">");
+		header.append("\npledged  :<");
+		header.append(project.getPledged());
+		header.append(">");
+		header.append("\ndays to go :<");
+		header.append(project.getDaysToGo());
+		header.append(">");
+		header.append("\nhistory :<");
+		header.append(project.getHistory());
+		header.append(">");
+		header.append("\nlink to video :<");
+		header.append(project.getLinkToVideo());
+		header.append(">");
 		header.append("\ncomments :");
 		header.append("\n");
 
-		ProjectComments projectComments = repository.getCommentsByProjectID(project.ID);
+		ProjectComments projectComments = repository
+				.getCommentsByProjectID(project.getID());
 
 		if (projectComments != null) {
 			for (int index = 0; index < projectComments.getCommentLength(); index++) {

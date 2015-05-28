@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import kickstarter.mvc.interfaces.iModel;
+import kickstarter.mvc.interfaces.iView;
 import kickstarter.mvc.modelState.ModelValues;
 import kickstarter.pages.modelContent.PageModel;
 import kickstarter.repository.facade.RepositoryException;
@@ -35,7 +36,7 @@ public class Model implements iModel {
 			pageModel = pagesModel.get(currentPage);
 			pageModel.updateStateOfPageModel(message);
 		} catch (RepositoryException e) {
-
+//TODO throw new ModelException
 			e.printStackTrace();
 		}
 	}
@@ -103,9 +104,9 @@ public class Model implements iModel {
 
 
 	@Override
-	public void setView(View view) {
+	public void setView(iView setView) {
 		for (PageModel pageModel : pagesModel) {
-			pageModel.iview = view;
+			pageModel.iview = setView;
 		}
 	}
 

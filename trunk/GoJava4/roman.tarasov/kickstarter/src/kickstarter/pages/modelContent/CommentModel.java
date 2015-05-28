@@ -16,8 +16,8 @@ public class CommentModel extends PageModel {
 		}
 
 		Project project = repository
-				.getProjectById(imodel.getModelValues().intSelectedProject);
-		projectComments = repository.getCommentsByProjectID(project.ID);
+				.getProjectById(imodel.getModelValues().getIntSelectedProject());
+		projectComments = repository.getCommentsByProjectID(project.getID());
 		String[] array = message.split(":");
 		if (array[0].equals("a") && array.length == 2) {
 			if (projectComments != null) {
@@ -25,7 +25,7 @@ public class CommentModel extends PageModel {
 				projectComments.addComment(1, array[1]);// 1- user ID
 			} else {
 				repository.addNewComment(1,
-						imodel.getModelValues().intSelectedProject, array[1]);
+						imodel.getModelValues().getIntSelectedProject(), array[1]);
 			}
 			imodel.next(IndexOfPage.DETAILED_PROJECT.ordinal());
 			return;
