@@ -11,7 +11,7 @@ public class ApplyTransaction extends PageView {
 		header.append("\n");
 		header.append("\n------------------------");
 		header.append("\nOptions: apply  in format <bankir:777> where login -bankir-, cardnumber -777-  \n<p>- previous page  ");
-		
+
 		return header.toString();
 	}
 }

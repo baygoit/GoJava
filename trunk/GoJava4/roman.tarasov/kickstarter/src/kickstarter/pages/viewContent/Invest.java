@@ -1,13 +1,14 @@
 package kickstarter.pages.viewContent;
 
+import kickstarter.entities.Project;
 import kickstarter.repository.facade.RepositoryException;
 
 public class Invest extends PageView {
 
 	public String getHeader() throws RepositoryException {
 
-		project = repository
-				.getProjectById(imodel.getModelOptions().intSelectedProject);
+		Project project = repository
+				.getProjectById(imodel.getModelValues().intSelectedProject);
 		StringBuilder header = new StringBuilder();
 
 		header.append("\n=========================");
@@ -16,15 +17,15 @@ public class Invest extends PageView {
 		header.append("\n");
 		header.append("\n  Investment options :");
 		int length = project.investmentOptions.length;
-		intOptions = new int[length];
-		strOptions = new String[length];
+		intValues = new int[length];
+		strValues = new String[length];
 		for (int index = 0; index < length; index++) {
 			header.append("\n");
 			header.append((index + 1));
 			header.append(" -");
 			header.append(project.investmentOptions[index]);
-			intOptions[index] = index + 1;
-			strOptions[index] = Integer.toString(index + 1);
+			intValues[index] = index + 1;
+			strValues[index] = Integer.toString(index + 1);
 		}
 		header.append("\n------------------------");
 		header.append("\nOptions: <p>- previous page  ");

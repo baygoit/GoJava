@@ -4,7 +4,7 @@ import java.util.List;
 
 import kickstarter.entities.Category;
 import kickstarter.entities.Quote;
-import kickstarter.mvc.viewState.ViewOptions;
+import kickstarter.mvc.viewState.ViewValues;
 import kickstarter.repository.facade.RepositoryException;
 
 public class Categories extends PageView {
@@ -39,18 +39,18 @@ public class Categories extends PageView {
 
 		List<Category> listAllCategories = repository.getListAllCategories();
 		int length = listAllCategories.size();
-		strOptions = new String[length];
-		intOptions = new int[length];
+		strValues = new String[length];
+		intValues = new int[length];
 		for (int index = 0; index < length; index++) {
 			Category currentCategory = listAllCategories.get(index);
 			result += ("ID:<" + currentCategory.ID + "> name:<"
 					+ currentCategory.name + ">\n");
-			strOptions[index] = Integer.toString(currentCategory.ID);
-			intOptions[index] = currentCategory.ID;
+			strValues[index] = Integer.toString(currentCategory.ID);
+			intValues[index] = currentCategory.ID;
 		}
-		ViewOptions ViewOptions = iview.getViewOptions();
-		ViewOptions.intCategories = intOptions;
-		ViewOptions.strCategories = strOptions;
+		ViewValues ViewValues = iview.getViewValues();
+		ViewValues.intCategories = intValues;
+		ViewValues.strCategories = strValues;
 		return result;
 	}
 }

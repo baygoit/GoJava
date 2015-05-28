@@ -4,12 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import kickstarter.entities.Project;
-import kickstarter.mvc.viewState.ViewOptions;
+import kickstarter.mvc.viewState.ViewValues;
 import kickstarter.repository.facade.RepositoryException;
 
 public class Projects extends PageView {
+	Project project;
 
-	public List<Project> sortProjectsByCategoryID(int categoryID) throws RepositoryException  {
+	public List<Project> sortProjectsByCategoryID(int categoryID)
+			throws RepositoryException {
 
 		List<Project> sortedProjects = new ArrayList<Project>();
 		int length = repository.getProjectsLength();
@@ -22,17 +24,17 @@ public class Projects extends PageView {
 		return sortedProjects;
 	}
 
-	public String printProjectsInfo(int categoryID) throws RepositoryException  {
+	public String printProjectsInfo(int categoryID) throws RepositoryException {
 		StringBuilder result = new StringBuilder();
 		List<Project> sortedToSelect = sortProjectsByCategoryID(categoryID);
 		int length = sortedToSelect.size();
-		strOptions = new String[length];
-		intOptions = new int[length];
+		strValues = new String[length];
+		intValues = new int[length];
 		for (int index = 0; index < length; index++) {
 			project = sortedToSelect.get(index);
 
-			strOptions[index] = Integer.toString(project.ID);
-			intOptions[index] = project.ID;
+			strValues[index] = Integer.toString(project.ID);
+			intValues[index] = project.ID;
 
 			result.append("\nID:<");
 			result.append(project.ID);
@@ -49,20 +51,20 @@ public class Projects extends PageView {
 			result.append(">");
 			result.append("\n================================");
 		}
-		ViewOptions ViewOptions = iview.getViewOptions();
-		ViewOptions.intProjects = intOptions;
-		ViewOptions.strProjects = strOptions;
+		ViewValues ViewValues = iview.getViewValues();
+		ViewValues.intProjects = intValues;
+		ViewValues.strProjects = strValues;
 		return result.toString();
 	}
 
-	public String getHeader() throws RepositoryException  {
+	public String getHeader() throws RepositoryException {
 
 		StringBuilder header = new StringBuilder();
 		header.append("\n________________________");
 		header.append("\n|     Projects         |");
 		header.append("\n|______________________|");
 		header.append("\n");
-		header.append(printProjectsInfo(imodel.getModelOptions().intSelectedCategory));
+		header.append(printProjectsInfo(imodel.getModelValues().intSelectedCategory));
 		header.append("\n------------------------");
 		header.append("\nSelect project by ID:<ID>");
 		header.append("\nOptions:  <p> - previous page");

@@ -1,7 +1,7 @@
 package kickstarter.pages.modelContent;
 
 import kickstarter.mvc.interfaces.IndexOfPage;
-import kickstarter.mvc.viewState.ViewOptions;
+import kickstarter.mvc.viewState.ViewValues;
 
 public class ProjectsModel extends PageModel {
 
@@ -12,19 +12,21 @@ public class ProjectsModel extends PageModel {
 			imodel.next(IndexOfPage.CATEGORIES.ordinal());
 			return;
 		}
-		ViewOptions ViewOptions = iview.getViewOptions();
+		ViewValues ViewValues = iview.getViewValues();
 
-		if (ViewOptions.intProjects != null) {
-			for (int index = 0; index < ViewOptions.intProjects.length; index++) {
-				if (message.equals(ViewOptions.strProjects[index])) {
-					modelOptions = imodel.getModelOptions();
-					modelOptions.intSelectedProject = ViewOptions.intProjects[index];
-					modelOptions.strSelectedProject = ViewOptions.strProjects[index];
-					imodel.nextWithOptions(IndexOfPage.DETAILED_PROJECT.ordinal(), modelOptions);
+		if (ViewValues.intProjects != null) {
+			for (int index = 0; index < ViewValues.intProjects.length; index++) {
+				if (message.equals(ViewValues.strProjects[index])) {
+					modelValues = imodel.getModelValues();
+					modelValues.intSelectedProject = ViewValues.intProjects[index];
+					modelValues.strSelectedProject = ViewValues.strProjects[index];
+					imodel.nextWithValues(
+							IndexOfPage.DETAILED_PROJECT.ordinal(), modelValues);
 					return;
 				}
 			}
 		}
-		imodel.goToAndBack(IndexOfPage.ERROR_PAGE.ordinal(), IndexOfPage.PROJECTS.ordinal());
+		imodel.goToAndBack(IndexOfPage.ERROR_PAGE.ordinal(),
+				IndexOfPage.PROJECTS.ordinal());
 	}
 }

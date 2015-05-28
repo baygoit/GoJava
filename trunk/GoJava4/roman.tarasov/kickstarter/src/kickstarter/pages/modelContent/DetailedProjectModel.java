@@ -2,17 +2,14 @@ package kickstarter.pages.modelContent;
 
 import kickstarter.mvc.interfaces.IndexOfPage;
 
-
-
 public class DetailedProjectModel extends PageModel {
-
 
 	@Override
 	public void updateStateOfPageModel(String message) {
 
 		if (message.equals("p")) {
-			modelOptions = imodel.getModelOptions();
-			imodel.nextWithOptions(IndexOfPage.PROJECTS.ordinal(), modelOptions);
+			modelValues = imodel.getModelValues();
+			imodel.nextWithValues(IndexOfPage.PROJECTS.ordinal(), modelValues);
 			return;
 		}
 		if (message.equals("c")) {
@@ -20,17 +17,20 @@ public class DetailedProjectModel extends PageModel {
 			return;
 		}
 		if (message.equals("i")) {
-			modelOptions = imodel.getModelOptions();
-			modelOptions.intOption = intOption;
-			imodel.nextWithOptions(IndexOfPage.INVEST_PAGE.ordinal(), modelOptions);
+			modelValues = imodel.getModelValues();
+			modelValues.intValue = intValue;
+			imodel.nextWithValues(IndexOfPage.INVEST_PAGE.ordinal(),
+					modelValues);
 			return;
 		}
 		if (message.equals("d")) {
-			modelOptions = imodel.getModelOptions();
-			modelOptions.intOption = intOption;
-			imodel.nextWithOptions(IndexOfPage.DONATE_PAGE.ordinal(), modelOptions);
+			modelValues = imodel.getModelValues();
+			modelValues.intValue = intValue;
+			imodel.nextWithValues(IndexOfPage.DONATE_PAGE.ordinal(),
+					modelValues);
 			return;
 		}
-		imodel.goToAndBack(IndexOfPage.ERROR_PAGE.ordinal(), IndexOfPage.DETAILED_PROJECT.ordinal());
+		imodel.goToAndBack(IndexOfPage.ERROR_PAGE.ordinal(),
+				IndexOfPage.DETAILED_PROJECT.ordinal());
 	}
 }

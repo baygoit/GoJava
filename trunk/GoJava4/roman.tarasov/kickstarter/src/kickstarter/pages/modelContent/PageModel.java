@@ -1,28 +1,22 @@
 package kickstarter.pages.modelContent;
 
-import kickstarter.entities.Project;
-import kickstarter.entities.ProjectComments;
 import kickstarter.mvc.interfaces.iModel;
 import kickstarter.mvc.interfaces.iView;
-import kickstarter.mvc.options.ModelOptions;
+import kickstarter.mvc.modelState.ModelValues;
 import kickstarter.pages.viewContent.PageView;
-import kickstarter.payment.Bank;
 import kickstarter.repository.facade.RepositoryException;
 import kickstarter.repository.facade.iRepository;
 
 public abstract class PageModel {
 
-	protected String[] strOptions;
-	protected int[] intOptions;
-	protected int intOption;
-	protected String strOption;
+	protected String[] strValues;
+	protected int[] intValues;
+	protected int intValue;
+	protected String strValue;
 	protected int pageId;
 	protected int nextPage;
-	protected Project project;
-	protected Bank bank;
 	public iRepository repository;
-	protected ProjectComments projectComments;
-	protected ModelOptions modelOptions;
+	protected ModelValues modelValues;
 	public iModel imodel;
 	public iView iview;
 	protected PageView page;

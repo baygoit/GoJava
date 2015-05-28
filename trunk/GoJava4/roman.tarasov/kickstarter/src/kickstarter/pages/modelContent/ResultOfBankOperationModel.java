@@ -2,7 +2,6 @@ package kickstarter.pages.modelContent;
 
 import kickstarter.mvc.interfaces.IndexOfPage;
 
-
 public class ResultOfBankOperationModel extends PageModel {
 
 	@Override
@@ -12,6 +11,7 @@ public class ResultOfBankOperationModel extends PageModel {
 			imodel.next(IndexOfPage.DETAILED_PROJECT.ordinal());
 			return;
 		}
-		imodel.goToAndBack(IndexOfPage.END_PAGE.ordinal(), IndexOfPage.BANK_OPERATION_RESULT_PAGE.ordinal());
+		imodel.goToAndBack(IndexOfPage.END_PAGE.ordinal(),
+				IndexOfPage.BANK_OPERATION_RESULT_PAGE.ordinal());
 	}
 }

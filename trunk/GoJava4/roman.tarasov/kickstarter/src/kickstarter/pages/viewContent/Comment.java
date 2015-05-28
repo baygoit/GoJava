@@ -1,13 +1,14 @@
 package kickstarter.pages.viewContent;
 
+import kickstarter.entities.Project;
+import kickstarter.entities.ProjectComments;
 import kickstarter.repository.facade.RepositoryException;
-
 
 public class Comment extends PageView {
 
-	public String getHeader() throws RepositoryException  {
-		modelOptions = imodel.getModelOptions();
-		project = repository.getProjectById(modelOptions.intSelectedProject);
+	public String getHeader() throws RepositoryException {
+		modelValues = imodel.getModelValues();
+		Project project = repository.getProjectById(modelValues.intSelectedProject);
 
 		StringBuilder header = new StringBuilder();
 		header.append("\n_________________________");
@@ -26,7 +27,7 @@ public class Comment extends PageView {
 		header.append("\ncomments :");
 		header.append("\n");
 
-		projectComments = repository.getCommentsByProjectID(project.ID);
+		ProjectComments projectComments = repository.getCommentsByProjectID(project.ID);
 
 		if (projectComments != null) {
 			for (int index = 0; index < projectComments.getCommentLength(); index++) {

@@ -1,6 +1,6 @@
 package kickstarter.mvc.interfaces;
 
-import kickstarter.mvc.viewState.ViewOptions;
+import kickstarter.mvc.viewState.ViewValues;
 import kickstarter.pages.viewContent.PageView;
 import kickstarter.repository.facade.iRepository;
 import kickstarter.ui.iUserInterface;
@@ -17,7 +17,7 @@ public interface iView  {
 
 	void showPage();
 
-	ViewOptions getViewOptions();
+	ViewValues getViewValues();
 
 	void setView(iView setView);
 }

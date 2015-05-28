@@ -6,7 +6,7 @@ import java.util.List;
 import kickstarter.mvc.interfaces.IndexOfPage;
 import kickstarter.mvc.interfaces.iModel;
 import kickstarter.mvc.interfaces.iView;
-import kickstarter.mvc.viewState.ViewOptions;
+import kickstarter.mvc.viewState.ViewValues;
 import kickstarter.mvc.viewState.iViewState;
 import kickstarter.pages.viewContent.PageView;
 import kickstarter.repository.facade.RepositoryException;
@@ -23,12 +23,12 @@ public class View implements iView {
 	private iViewState correct;
 	private iViewState error;
 	private iViewState state;
-	private ViewOptions ViewOptions;
+	private ViewValues ViewValues;
 
 	public View(iUserInterface ui) {
 		correct = new HasCorrectRepository();
 		error = new HasRepositoryError();
-		ViewOptions=new ViewOptions();
+		ViewValues=new ViewValues();
 		state = correct;
 		this.ui = ui;
 		pagesView = new ArrayList<PageView>();
@@ -38,7 +38,7 @@ public class View implements iView {
 
 		@Override
 		public void showPage() {
-			if (!ViewOptions.repositoryError) {
+			if (!ViewValues.repositoryError) {
 				state = correct;
 				state.showPage();
 			}
@@ -62,7 +62,7 @@ public class View implements iView {
 		void repositoryError() {
 			currentPage = IndexOfPage.REPOSITORY_MENU_PAGE.ordinal();
 			page = pagesView.get(currentPage);
-			ViewOptions.repositoryError=true;
+			ViewValues.repositoryError=true;
 			try {
 				ui.display(page.getHeader());
 				imodel.next(currentPage);
@@ -110,7 +110,7 @@ public class View implements iView {
 	}
 
 	@Override
-	public ViewOptions getViewOptions() {
-		return ViewOptions;
+	public ViewValues getViewValues() {
+		return ViewValues;
 	}
 }

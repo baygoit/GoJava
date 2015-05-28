@@ -73,6 +73,5 @@ public class Controller implements iController {
 	public void setView(View view) {
 		iview.setView(view);
 		imodel.setView(view);
-		
 	}
 }

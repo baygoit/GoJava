@@ -1,10 +1,10 @@
-package kickstarter.mvc.options;
+package kickstarter.mvc.modelState;
 
-public class ModelOptions {
-	public int[] intOptions;
-	public String[] strOptions;
-	public int intOption;
-	public String strOption;
+public class ModelValues {
+	public int[] intValues;
+	public String[] strValues;
+	public int intValue;
+	public String strValue;
 	public int intSelectedCategory;
 	public String strSelectedCategory;
 	public int intSelectedProject;

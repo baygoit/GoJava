@@ -1,20 +1,21 @@
 package kickstarter.pages.viewContent;
 
+import kickstarter.entities.Project;
 import kickstarter.entities.ProjectComments;
 import kickstarter.repository.facade.RepositoryException;
 
 public class DetailedProject extends PageView {
 
-
-	private ProjectComments selectCommentsOfProject(int projectID) throws RepositoryException {
+	private ProjectComments selectCommentsOfProject(int projectID)
+			throws RepositoryException {
 		ProjectComments comments = repository.getCommentsByProjectID(projectID);
 		return comments;
 	}
 
-	public String getHeader() throws RepositoryException  {
+	public String getHeader() throws RepositoryException {
 
-		project = repository
-				.getProjectById(imodel.getModelOptions().intSelectedProject);
+		Project project = repository
+				.getProjectById(imodel.getModelValues().intSelectedProject);
 		StringBuilder header = new StringBuilder();
 		header.append("\n________________________");
 		header.append("\n|Detailed project info |");

@@ -1,12 +1,12 @@
 package kickstarter.pages.modelContent;
 
-
+import kickstarter.entities.Project;
 import kickstarter.mvc.interfaces.IndexOfPage;
 import kickstarter.payment.Bank;
 import kickstarter.repository.facade.RepositoryException;
 
-
 public class DonateModel extends PageModel {
+	Bank bank;
 	public DonateModel(Bank bank) {
 		this.bank = bank;
 	}
@@ -24,7 +24,7 @@ public class DonateModel extends PageModel {
 		double balanceAfter = 0;
 		double getMoney = 0;
 		String resultOfBankOperation = "";
-		modelOptions = imodel.getModelOptions();
+		modelValues = imodel.getModelValues();
 		if (array.length == 3) {
 			try {
 				balanceBefore = bank.getBalance(array[0], array[1]);
@@ -45,23 +45,25 @@ public class DonateModel extends PageModel {
 
 			} catch (NumberFormatException | NullPointerException e) {
 				imodel.savePageBeforeError(IndexOfPage.DONATE_PAGE.ordinal());
-				modelOptions.intOption = intOption;
-				modelOptions.resultOfBankOperation = resultOfBankOperation;
-				imodel.nextWithOptions(IndexOfPage.BANK_OPERATION_RESULT_PAGE.ordinal(), modelOptions);
+				modelValues.resultOfBankOperation = resultOfBankOperation;
+				imodel.nextWithValues(
+						IndexOfPage.BANK_OPERATION_RESULT_PAGE.ordinal(),
+						modelValues);
 				return;
 			}
 
-			project = repository
-					.getProjectById(modelOptions.intSelectedProject);
+			Project project = repository.getProjectById(modelValues.intSelectedProject);
 			project.pledged += getMoney;
 
-			modelOptions.intOption = intOption;
-			modelOptions.resultOfBankOperation = "\nbalance before :"
+			modelValues.resultOfBankOperation = "\nbalance before :"
 					+ balanceBefore + "\nbalance after :" + balanceAfter;
-			imodel.nextWithOptions(IndexOfPage.BANK_OPERATION_RESULT_PAGE.ordinal(), modelOptions);
+			imodel.nextWithValues(
+					IndexOfPage.BANK_OPERATION_RESULT_PAGE.ordinal(),
+					modelValues);
 			return;
 		}
 
-		imodel.goToAndBack(IndexOfPage.ERROR_PAGE.ordinal(),IndexOfPage.DONATE_PAGE.ordinal() );
+		imodel.goToAndBack(IndexOfPage.ERROR_PAGE.ordinal(),
+				IndexOfPage.DONATE_PAGE.ordinal());
 	}
 }

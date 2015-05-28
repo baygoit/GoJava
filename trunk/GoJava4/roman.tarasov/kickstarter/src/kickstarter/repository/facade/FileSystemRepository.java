@@ -7,6 +7,7 @@ import kickstarter.entities.Project;
 import kickstarter.entities.ProjectComments;
 import kickstarter.entities.Quote;
 
+//TODO
 public class FileSystemRepository implements iRepository {
 	String fileName = "default";
 
@@ -60,8 +61,9 @@ public class FileSystemRepository implements iRepository {
 	}
 
 	@Override
-	public void addNewComment(int i, int intSelectedProject, String string)throws RepositoryException {
+	public void addNewComment(int i, int intSelectedProject, String string)
+			throws RepositoryException {
 		// TODO Auto-generated method stub
-		
+
 	}
 }

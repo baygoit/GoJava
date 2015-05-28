@@ -35,7 +35,7 @@ public class RepositoryMenuModel extends PageModel {
 		}
 		if (message.equals("d")) {
 			icontroller.setInMemoryRepository();
-			iview.getViewOptions().repositoryError = false;
+			iview.getViewValues().repositoryError = false;
 			imodel.next(IndexOfPage.CATEGORIES.ordinal());
 			return;
 		}
@@ -49,10 +49,11 @@ public class RepositoryMenuModel extends PageModel {
 
 				out.writeObject(inMemoryRepository);
 			} catch (IOException e) {
-				imodel.goToAndBack(IndexOfPage.ERROR_PAGE.ordinal(), IndexOfPage.REPOSITORY_MENU_PAGE.ordinal());
+				imodel.goToAndBack(IndexOfPage.ERROR_PAGE.ordinal(),
+						IndexOfPage.REPOSITORY_MENU_PAGE.ordinal());
 				return;
 			}
-			iview.getViewOptions().repositoryError = false;
+			iview.getViewValues().repositoryError = false;
 			imodel.next(IndexOfPage.CATEGORIES.ordinal());
 			return;
 		}
@@ -62,17 +63,18 @@ public class RepositoryMenuModel extends PageModel {
 					new BufferedInputStream(new FileInputStream("object.ser")))) {
 				deserializedRepository = (Repository) in.readObject();
 			} catch (ClassNotFoundException | IOException e) {
-				imodel.goToAndBack(IndexOfPage.ERROR_PAGE.ordinal(), IndexOfPage.REPOSITORY_MENU_PAGE.ordinal());
+				imodel.goToAndBack(IndexOfPage.ERROR_PAGE.ordinal(),
+						IndexOfPage.REPOSITORY_MENU_PAGE.ordinal());
 				return;
 			}
-			inMemoryRepository=deserializedRepository;
+			inMemoryRepository = deserializedRepository;
 			icontroller.setIRepository(deserializedRepository);
-			iview.getViewOptions().repositoryError = false;
+			iview.getViewValues().repositoryError = false;
 			imodel.next(IndexOfPage.CATEGORIES.ordinal());
 			return;
 		}
-		imodel.goToAndBack(IndexOfPage.ERROR_PAGE.ordinal(),IndexOfPage.REPOSITORY_MENU_PAGE.ordinal() );
+		imodel.goToAndBack(IndexOfPage.ERROR_PAGE.ordinal(),
+				IndexOfPage.REPOSITORY_MENU_PAGE.ordinal());
 	}
-
 
 }

@@ -1,11 +1,10 @@
 package kickstarter.pages.modelContent;
 
-
 import kickstarter.mvc.interfaces.IndexOfPage;
-import kickstarter.mvc.viewState.ViewOptions;
+import kickstarter.mvc.viewState.ViewValues;
 
 public class CategoriesModel extends PageModel {
-	
+
 	@Override
 	public void updateStateOfPageModel(String message) {
 		if (message.equals("e")) {
@@ -16,28 +15,29 @@ public class CategoriesModel extends PageModel {
 			imodel.next(IndexOfPage.REPOSITORY_MENU_PAGE.ordinal());
 			return;
 		}
-		ViewOptions ViewOptions = iview.getViewOptions();
-		if(ViewOptions.repositoryError){
-		imodel.next(IndexOfPage.REPOSITORY_MENU_PAGE.ordinal());
+		ViewValues ViewValues = iview.getViewValues();
+		if (ViewValues.repositoryError) {
+			imodel.next(IndexOfPage.REPOSITORY_MENU_PAGE.ordinal());
 			return;
 		}
-		strOptions = ViewOptions.strCategories;
-		intOptions = ViewOptions.intCategories;
+		strValues = ViewValues.strCategories;
+		intValues = ViewValues.intCategories;
 
-		if (strOptions != null) {
-			
-			for (int index = 0; index < strOptions.length; index++) {
-				if (message.equals(strOptions[index])) {
-					modelOptions = imodel.getModelOptions();
-					modelOptions.intOption = intOptions[index];
-					modelOptions.intSelectedCategory = intOptions[index];
-					modelOptions.strSelectedCategory = strOptions[index];
-					imodel.nextWithOptions(IndexOfPage.PROJECTS.ordinal(), modelOptions);
+		if (strValues != null) {
+
+			for (int index = 0; index < strValues.length; index++) {
+				if (message.equals(strValues[index])) {
+					modelValues = imodel.getModelValues();
+					modelValues.intSelectedCategory = intValues[index];
+					modelValues.strSelectedCategory = strValues[index];
+					imodel.nextWithValues(IndexOfPage.PROJECTS.ordinal(),
+							modelValues);
 					return;
 				}
 			}
 		}
-		imodel.goToAndBack(IndexOfPage.ERROR_PAGE.ordinal(), IndexOfPage.CATEGORIES.ordinal());
+		imodel.goToAndBack(IndexOfPage.ERROR_PAGE.ordinal(),
+				IndexOfPage.CATEGORIES.ordinal());
 	}
 
 }

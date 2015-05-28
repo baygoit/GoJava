@@ -1,6 +1,5 @@
 package kickstarter.repository.facade;
 
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,17 +10,13 @@ import kickstarter.entities.Project;
 import kickstarter.entities.ProjectComments;
 import kickstarter.entities.Quote;
 
-public class Repository implements iRepository ,Serializable{
+public class Repository implements iRepository, Serializable {
 
-
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
-	private  List<Quote> quotes;
-	private  List<Category> categories;
-	private  List<Project> projects;
-	private  List<ProjectComments> allComments;
+	private List<Quote> quotes;
+	private List<Category> categories;
+	private List<Project> projects;
+	private List<ProjectComments> allComments;
 
 	public Repository() {
 
@@ -75,19 +70,19 @@ public class Repository implements iRepository ,Serializable{
 		project.ID = 8;
 		projects.add(project);
 
-		
 		categoryID = 4;
-		project = new Project("Help Build ACRE's New Home in Chicago", categoryID);
+		project = new Project("Help Build ACRE's New Home in Chicago",
+				categoryID);
 		project.description = "The renovation of our new space and expansion of our Chicago programming!";
 		project.shortDescription = "Help ACRE achieve our most ambitious project to date";
-		project.investmentOptions = new String[] { "100$ - ", "150$ -", "400$ -" };
+		project.investmentOptions = new String[] { "100$ - ", "150$ -",
+				"400$ -" };
 		project.amount = new double[] { 100, 150, 400 };
 		project.pledged = 5000;
 		project.goal = 10000;
 		project.ID = 1;
 		projects.add(project);
-		
-		
+
 		categoryID = 5;
 		project = new Project("Microduino mCookie", categoryID);
 		project.description = "Small, stackable, Arduino-compatible electronics for makers, designers, engineers, students and curious tinkerers of all ages.";
@@ -110,33 +105,21 @@ public class Repository implements iRepository ,Serializable{
 		allComments.add(comment);
 	}
 
-	/* (non-Javadoc)
-	 * @see kickstarter.repository.facade.iRepository#getCategory(int)
-	 */
 	@Override
 	public Category getCategory(int index) {
 		return categories.get(index);
 	}
 
-	/* (non-Javadoc)
-	 * @see kickstarter.repository.facade.iRepository#getCategoriesLength()
-	 */
 	@Override
 	public int getCategoriesLength() {
 		return categories.size();
 	}
 
-	/* (non-Javadoc)
-	 * @see kickstarter.repository.facade.iRepository#getRandomQuote()
-	 */
 	@Override
 	public Quote getRandomQuote() {
 		return quotes.get(new Random().nextInt(quotes.size()));
 	}
 
-	/* (non-Javadoc)
-	 * @see kickstarter.repository.facade.iRepository#getCommentsByProjectID(int)
-	 */
 	@Override
 	public ProjectComments getCommentsByProjectID(int projectID) {
 
@@ -148,25 +131,16 @@ public class Repository implements iRepository ,Serializable{
 		return null;
 	}
 
-	/* (non-Javadoc)
-	 * @see kickstarter.repository.facade.iRepository#getProjectsLength()
-	 */
 	@Override
 	public int getProjectsLength() {
 		return projects.size();
 	}
 
-	/* (non-Javadoc)
-	 * @see kickstarter.repository.facade.iRepository#getProject(int)
-	 */
 	@Override
 	public Project getProject(int index) {
 		return projects.get(index);
 	}
 
-	/* (non-Javadoc)
-	 * @see kickstarter.repository.facade.iRepository#getProjectById(int)
-	 */
 	@Override
 	public Project getProjectById(int ID) {
 		int length = projects.size();
@@ -182,15 +156,13 @@ public class Repository implements iRepository ,Serializable{
 
 	@Override
 	public List<Category> getListAllCategories() {
-		
 		return categories;
 	}
 
 	@Override
-    public void addNewComment(int user, int projectID, String string) {
-        ProjectComments comment = new ProjectComments(projectID);
-     
-        comment.addComment(user, string);
-        allComments.add( comment);
-}
+	public void addNewComment(int user, int projectID, String string) {
+		ProjectComments comment = new ProjectComments(projectID);
+		comment.addComment(user, string);
+		allComments.add(comment);
+	}
 }

@@ -1,7 +1,7 @@
 package kickstarter.mvc.interfaces;
 
 import kickstarter.mvc.View;
-import kickstarter.mvc.options.ModelOptions;
+import kickstarter.mvc.modelState.ModelValues;
 import kickstarter.pages.modelContent.PageModel;
 import kickstarter.repository.facade.iRepository;
 
@@ -9,9 +9,9 @@ public interface iModel {
 
 	public void updateStateOfModel(String command);
 
-	ModelOptions getModelOptions();
+	ModelValues getModelValues();
 
-	void setModelOptions(ModelOptions options);
+	void setModelValues(ModelValues values);
 
 	public void setPage(int page);
 
@@ -23,7 +23,7 @@ public interface iModel {
 
 	void goToAndBack(int toPage, int back);
 
-	public void nextWithOptions(int next, ModelOptions o);
+	public void nextWithValues(int next, ModelValues modelValues);
 
 	void addPageModel(PageModel pageModel);
 

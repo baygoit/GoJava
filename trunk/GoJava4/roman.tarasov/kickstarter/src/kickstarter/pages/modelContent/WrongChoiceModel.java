@@ -1,6 +1,5 @@
 package kickstarter.pages.modelContent;
 
-
 public class WrongChoiceModel extends PageModel {
 
 	@Override

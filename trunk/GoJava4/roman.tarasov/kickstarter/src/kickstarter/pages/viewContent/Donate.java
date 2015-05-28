@@ -3,9 +3,9 @@ package kickstarter.pages.viewContent;
 import kickstarter.payment.Bank;
 
 public class Donate extends PageView {
-
+	Bank bank;
 	public Donate(Bank bank) {
-		this.bank = bank;		
+		this.bank = bank;
 	}
 
 	public String getHeader() {

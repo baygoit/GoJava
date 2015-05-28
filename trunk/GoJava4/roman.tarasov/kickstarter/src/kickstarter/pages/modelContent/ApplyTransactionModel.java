@@ -1,10 +1,12 @@
 package kickstarter.pages.modelContent;
 
+import kickstarter.entities.Project;
 import kickstarter.mvc.interfaces.IndexOfPage;
 import kickstarter.payment.Bank;
 import kickstarter.repository.facade.RepositoryException;
 
 public class ApplyTransactionModel extends PageModel {
+	Bank bank;
 	public ApplyTransactionModel(Bank bank) {
 		this.bank = bank;
 	}
@@ -20,8 +22,8 @@ public class ApplyTransactionModel extends PageModel {
 		double balanceBefore = 0;
 		double balanceAfter = 0;
 		double getMoney = 0;
-		modelOptions = imodel.getModelOptions();
-		String amountToInvest = modelOptions.amountToInvest;
+		modelValues = imodel.getModelValues();
+		String amountToInvest = modelValues.amountToInvest;
 		String resultOfBankOperation = "";
 		if (array.length == 2) {
 
@@ -44,23 +46,27 @@ public class ApplyTransactionModel extends PageModel {
 
 			} catch (NumberFormatException | NullPointerException e) {
 				imodel.savePageBeforeError(IndexOfPage.DONATE_PAGE.ordinal());
-				modelOptions = imodel.getModelOptions();
-				modelOptions.resultOfBankOperation = resultOfBankOperation;
-				imodel.nextWithOptions(IndexOfPage.BANK_OPERATION_RESULT_PAGE.ordinal(), modelOptions);
+				modelValues = imodel.getModelValues();
+				modelValues.resultOfBankOperation = resultOfBankOperation;
+				imodel.nextWithValues(
+						IndexOfPage.BANK_OPERATION_RESULT_PAGE.ordinal(),
+						modelValues);
 				return;
 			}
 
-			project = repository
-					.getProjectById(modelOptions.intSelectedProject);
+			Project project = repository.getProjectById(modelValues.intSelectedProject);
 			project.pledged += getMoney;
 
-			modelOptions.resultOfBankOperation = "\nbalance before :"
+			modelValues.resultOfBankOperation = "\nbalance before :"
 					+ balanceBefore + "\nbalance after :" + balanceAfter;
-			imodel.nextWithOptions(IndexOfPage.BANK_OPERATION_RESULT_PAGE.ordinal(), modelOptions);
+			imodel.nextWithValues(
+					IndexOfPage.BANK_OPERATION_RESULT_PAGE.ordinal(),
+					modelValues);
 			return;
 
 		}
-		imodel.goToAndBack(IndexOfPage.ERROR_PAGE.ordinal(), IndexOfPage.APPLY_TRANSACTION_PAGE.ordinal());
+		imodel.goToAndBack(IndexOfPage.ERROR_PAGE.ordinal(),
+				IndexOfPage.APPLY_TRANSACTION_PAGE.ordinal());
 	}
 
 }

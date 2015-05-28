@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import kickstarter.mvc.interfaces.iModel;
-import kickstarter.mvc.options.ModelOptions;
+import kickstarter.mvc.modelState.ModelValues;
 import kickstarter.pages.modelContent.PageModel;
 import kickstarter.repository.facade.RepositoryException;
 import kickstarter.repository.facade.iRepository;
@@ -12,14 +12,14 @@ import kickstarter.repository.facade.iRepository;
 public class Model implements iModel {
 	
 	private int currentPage;
-	private ModelOptions modelOptions;
+	private ModelValues modelValues;
 
 	private List<PageModel> pagesModel;
 	private PageModel pageModel;
 	private int savePage;
 
 	public Model() {
-		modelOptions = new ModelOptions();
+		modelValues = new ModelValues();
 		pagesModel = new ArrayList<PageModel>();
 	}
 
@@ -41,8 +41,8 @@ public class Model implements iModel {
 	}
 
 	@Override
-	public void setModelOptions(ModelOptions setO) {
-		this.modelOptions = setO;
+	public void setModelValues(ModelValues setO) {
+		this.modelValues = setO;
 	}
 
 	@Override
@@ -77,14 +77,14 @@ public class Model implements iModel {
 	}
 
 	@Override
-	public ModelOptions getModelOptions() {
-		return modelOptions;
+	public ModelValues getModelValues() {
+		return modelValues;
 	}
 
 	@Override
-	public void nextWithOptions(int next, ModelOptions o) {
+	public void nextWithValues(int next, ModelValues o) {
 		this.currentPage = next;
-		this.modelOptions = o;
+		this.modelValues = o;
 	}
 
 
