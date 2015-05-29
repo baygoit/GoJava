@@ -1,6 +1,7 @@
 package kickstarter.model.engine;
 
 public class Project {
+	private int id;
 	private String name;
 	private String description;
 	private int totalAmount;
@@ -10,8 +11,9 @@ public class Project {
 	private String link;
 	private String questionsAndAnswers;
 
-	public Project(String name, String description, int totalAmount, int daysLeft, String history, String link,
+	public Project(int id, String name, String description, int totalAmount, int daysLeft, String history, String link,
 			String questionsAndAnswers) {
+		this.id = id;
 		this.name = name;
 		this.description = description;
 		this.totalAmount = totalAmount;
@@ -22,11 +24,21 @@ public class Project {
 		this.questionsAndAnswers = questionsAndAnswers;
 	}
 
-	public void donate(int amount) {
+	public Project(int id, String name, String description, int totalAmount, int daysLeft, String history, String link,
+			String questionsAndAnswers, int collectAmount) {
+		this(id, name, description, totalAmount, daysLeft, history, link, questionsAndAnswers);
+		donate(collectAmount);
+	}
+
+	private void donate(int amount) {
 		if (amount <= 0) {
 			throw new IllegalArgumentException();
 		}
 		collectAmount += amount;
+	}
+
+	public int getId() {
+		return id;
 	}
 
 	public String getName() {

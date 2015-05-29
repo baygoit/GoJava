@@ -5,7 +5,7 @@ import kickstarter.control.State;
 import kickstarter.view.printer.Printer;
 import kickstarter.view.reader.Reader;
 
-public class ProjectView extends ConsoleView {
+public class ProjectView extends AbstractView {
 
 	public ProjectView(Printer printer, Reader reader) {
 		super(printer, reader);

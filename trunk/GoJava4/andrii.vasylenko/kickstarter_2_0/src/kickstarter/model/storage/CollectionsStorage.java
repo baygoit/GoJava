@@ -22,10 +22,8 @@ public class CollectionsStorage implements Storage {
 
 	@Override
 	public Quote getRandomQuote() {
-		if (quotes.isEmpty()) {
-			return null;
-		}
-		return calculateRandomQuote();
+		int index = new Random().nextInt(quotes.size());
+		return quotes.get(index);
 	}
 
 	@Override
@@ -59,10 +57,5 @@ public class CollectionsStorage implements Storage {
 	@Override
 	public Project getProject(int index, Category category) {
 		return projects.get(category).get(index);
-	}
-
-	private Quote calculateRandomQuote() {
-		int index = new Random().nextInt(quotes.size());
-		return quotes.get(index);
 	}
 }

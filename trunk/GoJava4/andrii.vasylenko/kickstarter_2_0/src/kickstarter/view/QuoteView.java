@@ -4,7 +4,7 @@ import kickstarter.control.State;
 import kickstarter.view.printer.Printer;
 import kickstarter.view.reader.Reader;
 
-public class QuoteView extends ConsoleView {
+public class QuoteView extends AbstractView {
 
 	public QuoteView(Printer printer, Reader reader) {
 		super(printer, reader);
