@@ -13,7 +13,6 @@ public class CategoriesRepository implements Serializable {
 	ArrayList<Category> categories;
 
 	public List<Category> getCategories() {
-
 		return categories;
 	}
 

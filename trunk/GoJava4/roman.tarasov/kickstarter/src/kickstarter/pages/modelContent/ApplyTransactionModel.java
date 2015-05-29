@@ -7,7 +7,7 @@ import kickstarter.repository.facade.RepositoryException;
 import kickstarter.repository.facade.entity.Project;
 
 public class ApplyTransactionModel extends PageModel {
-	Bank bank;
+	private Bank bank;
 
 	public ApplyTransactionModel(Bank bank) {
 		this.bank = bank;

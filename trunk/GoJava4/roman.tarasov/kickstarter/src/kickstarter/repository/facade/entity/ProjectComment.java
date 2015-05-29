@@ -14,7 +14,6 @@ public class ProjectComment implements Serializable {
 		super();
 		this.projectID = projectID;
 		this.userID = userID;
-
 		this.comment = comment;
 	}
 

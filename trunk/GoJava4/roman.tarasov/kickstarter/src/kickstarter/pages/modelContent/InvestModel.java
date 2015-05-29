@@ -20,7 +20,7 @@ public class InvestModel extends PageModel {
 		double amount = 0;
 		try {
 			int selected = Integer.parseInt(message);
-			amount = project.amount[selected - 1];
+			amount = project.getAmount()[selected - 1];
 			modelValues.setAmountToInvest(Double.toString(amount));
 			imodel.nextWithValues(IndexOfPage.APPLY_TRANSACTION_PAGE.ordinal(),
 					modelValues);

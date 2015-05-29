@@ -43,14 +43,13 @@ public class RepositoryMenuModel extends PageModel {
 					new BufferedOutputStream(new FileOutputStream("object.ser")))) {
 				;
 				out.writeObject(icontroller.getCurrentRepository());
+				iview.getViewValues().setRepositoryError(false);
+				imodel.next(IndexOfPage.CATEGORIES.ordinal());
 
 			} catch (IOException e) {
 				imodel.goToAndBack(IndexOfPage.ERROR_PAGE.ordinal(),
 						IndexOfPage.REPOSITORY_MENU_PAGE.ordinal());
-				return;
 			}
-			iview.getViewValues().setRepositoryError(false);
-			imodel.next(IndexOfPage.CATEGORIES.ordinal());
 			return;
 		}
 		if (message.equals("i")) {

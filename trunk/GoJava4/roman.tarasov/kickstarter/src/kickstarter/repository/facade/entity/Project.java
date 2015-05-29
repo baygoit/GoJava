@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class Project implements Serializable {
 
 	private static final long serialVersionUID = 266139065309641330L;
-
+	private  double[] amount;
 	private String name;
 	private String description;
 	private String shortDescription;
@@ -119,6 +119,6 @@ public class Project implements Serializable {
 		this.amount = amount;
 	}
 
-	public double[] amount;
+	
 
 }

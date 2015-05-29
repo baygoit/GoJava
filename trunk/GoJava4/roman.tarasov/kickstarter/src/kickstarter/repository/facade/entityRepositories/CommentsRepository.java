@@ -48,9 +48,9 @@ public class CommentsRepository implements Serializable {
 	}
 
 	public void deleteComment(int projectID, int commentID)
-			throws  RepositoryException {
+			throws RepositoryException {
 		List<ProjectComment> listFromAllComments = getCommentsByProjectID(projectID);
-		if(listFromAllComments!=null){
+		if (listFromAllComments != null) {
 			listFromAllComments.remove(commentID);
 			return;
 		}

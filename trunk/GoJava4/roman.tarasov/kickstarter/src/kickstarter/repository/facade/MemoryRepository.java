@@ -90,14 +90,14 @@ public class MemoryRepository implements iRepository, Serializable {
 		project.setGoal(2000);
 		project.setID(23);
 		project.setInvestmentOptions(new String[] { "1$ - ", "10$ -", "40$ -" });
-		project.amount = new double[] { 1, 10, 40 };
+		project.setAmount(new double[] { 1, 10, 40 });
 		projects.add(project);
 
 		categoryID = 4;
 		project = new Project("Paint the fence of the school", categoryID);
 		project.setDescription("raising money for paint");
 		project.setInvestmentOptions(new String[] { "1$ - ", "10$ -", "40$ -" });
-		project.amount = new double[] { 1, 10, 40 };
+		project.setAmount(new double[] { 1, 10, 40 });
 		project.setID(8);
 		projects.add(project);
 
@@ -108,7 +108,7 @@ public class MemoryRepository implements iRepository, Serializable {
 		project.setShortDescription("Help ACRE achieve our most ambitious project to date");
 		project.setInvestmentOptions(new String[] { "100$ - ", "150$ -",
 				"400$ -" });
-		project.amount = new double[] { 100, 150, 400 };
+		project.setAmount(new double[] { 100, 150, 400 });
 		project.setPledged(5000);
 		project.setGoal(10000);
 		project.setID(1);
@@ -124,7 +124,7 @@ public class MemoryRepository implements iRepository, Serializable {
 		project.setGoal(20000);
 		project.setID(20);
 		project.setInvestmentOptions(new String[] { "10$ - ", "20$ -", "100$ -" });
-		project.amount = new double[] { 10, 20, 100 };
+		project.setAmount(new double[] { 10, 20, 100 });
 		projects.add(project);
 		projectsRepository.setProjects(projects);
 
