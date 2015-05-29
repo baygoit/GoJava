@@ -5,6 +5,11 @@ import static org.junit.Assert.*;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import com.sergiisavin.kickstarter.userinterface.dispatcher.PageDispatcher;
+import com.sergiisavin.kickstarter.userinterface.pages.Page;
+import com.sergiisavin.kickstarter.userinterface.printer.Printer;
+import com.sergiisavin.kickstarter.userinterface.printer.UpperCaseConsolePrinter;
+
 public class PageTest {
 
 

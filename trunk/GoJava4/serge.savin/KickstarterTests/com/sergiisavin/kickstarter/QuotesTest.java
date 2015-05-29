@@ -2,8 +2,13 @@ package com.sergiisavin.kickstarter;
 
 import static org.junit.Assert.*;
 
+import javax.naming.OperationNotSupportedException;
+
 import org.junit.Before;
 import org.junit.Test;
+
+import com.sergiisavin.kickstarter.quote.container.Quotes;
+import com.sergiisavin.kickstarter.quote.container.memory.QuotesContainer;
 
 public class QuotesTest {
 
@@ -26,17 +31,27 @@ public class QuotesTest {
 	
 	@Test
 	public void testAddQuotes(){
-		quotes.add("Quote number three");
-		quotes.add("Quote number four");
-		quotes.add("Quote number five");
-		quotes.add("Quote number six");
-		quotes.add("Quote number seven");
+		try {
+			quotes.add("Quote number three");
+			quotes.add("Quote number four");
+			quotes.add("Quote number five");
+			quotes.add("Quote number six");
+			quotes.add("Quote number seven");
+		} catch (OperationNotSupportedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		assertEquals(7, quotes.getSize());
 	}
 	
 	@Test(expected = Quotes.IllegalArgumentException.class)
 	public void testNullCannotBeAddedToQuotes(){
-		quotes.add(null);
+		try {
+			quotes.add(null);
+		} catch (OperationNotSupportedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	@Test(expected = Quotes.IllegalArgumentException.class)
@@ -46,7 +61,12 @@ public class QuotesTest {
 	
 	@Test
 	public void testGetRandomQuote(){
-		quotes.add("Quote number three");
+		try {
+			quotes.add("Quote number three");
+		} catch (OperationNotSupportedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		String randomQuote = quotes.getRandomQuote();
 		assertNotNull(randomQuote);
 		System.out.println(randomQuote);
@@ -54,20 +74,40 @@ public class QuotesTest {
 	
 	@Test
 	public void testDaleteQuotes(){
-		quotes.add("Quote number three");
+		try {
+			quotes.add("Quote number three");
+		} catch (OperationNotSupportedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		int index = 2;
-		quotes.delete(index);
+		try {
+			quotes.delete(index);
+		} catch (OperationNotSupportedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		assertEquals(quotes.getSize(), 2);						
 	}
 	
 	@Test(expected = Quotes.IllegalArgumentException.class)
 	public void testNegativeArgumentsCannotBeIndexesToDeleteQuotes(){
-		quotes.delete(-1);
+		try {
+			quotes.delete(-1);
+		} catch (OperationNotSupportedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	@Test
 	public void testWhatIsSecondQuote(){
-		quotes.add("Quote number three");
+		try {
+			quotes.add("Quote number three");
+		} catch (OperationNotSupportedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		assertEquals(quotes.get(1), "An apple a day keeps doctors away");
 		
 	}

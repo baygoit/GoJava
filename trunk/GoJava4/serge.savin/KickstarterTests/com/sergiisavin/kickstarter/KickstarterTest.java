@@ -2,9 +2,19 @@ package com.sergiisavin.kickstarter;
 
 import static org.junit.Assert.*;
 
+import javax.naming.OperationNotSupportedException;
+
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
+
+import com.sergiisavin.kickstarter.category.container.Categories;
+import com.sergiisavin.kickstarter.category.container.memory.CategoriesContainer;
+import com.sergiisavin.kickstarter.project.Project;
+import com.sergiisavin.kickstarter.project.container.Projects;
+import com.sergiisavin.kickstarter.project.container.memory.ProjectsContainer;
+import com.sergiisavin.kickstarter.quote.container.Quotes;
+import com.sergiisavin.kickstarter.quote.container.memory.QuotesContainer;
 
 public class KickstarterTest {
 
@@ -22,10 +32,20 @@ public class KickstarterTest {
 		Projects projects = new ProjectsContainer();
 		Project project = new Project("Jumping Frog Toy", "01.05.2015", "01.11.2015", 20000.0, 0.0, "Toys",
 				"DESCRIPTION", "PROJECT HISTORY", "VIDEO URL", "QUESTIONS AND ANSWERS");
-		projects.add(project);
+		try {
+			projects.add(project);
+		} catch (OperationNotSupportedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		project = new Project("Boomba", "01.05.2015", "01.11.2015", 20000.0, 0.0, "Toys",
 					"DESCRIPTION", "PROJECT HISTORY", "VIDEO URL", "QUESTIONS AND ANSWERS");
-		projects.add(project);
+		try {
+			projects.add(project);
+		} catch (OperationNotSupportedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		kickstarter.injectProjects(projects);
 	}
 
@@ -70,5 +90,15 @@ public class KickstarterTest {
 		for(String project : projectsByCategory){
 			System.out.println(project);
 		}
+	}
+	
+	@Test
+	public void getCategories(){
+		String[] categories = kickstarter.getCategories();
+		String result = "";
+		for(int i = 0 ; i < categories.length; i ++){
+			result += categories[i] + " ";
+		}
+		assertEquals("Toys Software Gadgets ", result);
 	}
 }

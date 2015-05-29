@@ -4,11 +4,15 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import com.sergiisavin.kickstarter.Categories;
-import com.sergiisavin.kickstarter.CategoriesContainer;
 import com.sergiisavin.kickstarter.Kickstarter;
-import com.sergiisavin.kickstarter.Quotes;
-import com.sergiisavin.kickstarter.QuotesContainer;
+import com.sergiisavin.kickstarter.category.container.Categories;
+import com.sergiisavin.kickstarter.category.container.memory.CategoriesContainer;
+import com.sergiisavin.kickstarter.quote.container.Quotes;
+import com.sergiisavin.kickstarter.quote.container.memory.QuotesContainer;
+import com.sergiisavin.kickstarter.userinterface.dispatcher.PageDispatcher;
+import com.sergiisavin.kickstarter.userinterface.pages.PageType;
+import com.sergiisavin.kickstarter.userinterface.printer.ConsolePrinter;
+import com.sergiisavin.kickstarter.userinterface.printer.Printer;
 
 public class PageDispatcherTest {
 
