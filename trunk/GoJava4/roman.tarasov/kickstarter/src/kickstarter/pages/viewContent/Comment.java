@@ -1,5 +1,7 @@
 package kickstarter.pages.viewContent;
 
+import java.util.List;
+
 import kickstarter.entities.Project;
 import kickstarter.entities.ProjectComments;
 import kickstarter.repository.facade.RepositoryException;
@@ -8,8 +10,9 @@ public class Comment extends PageView {
 
 	public String getHeader() throws RepositoryException {
 		modelValues = imodel.getModelValues();
-		Project project = repository
-				.getProjectById(modelValues.getIntSelectedProject());
+		int projectID=modelValues
+				.getIntSelectedProject();
+		Project project = repository.getProjectById(projectID);
 
 		StringBuilder header = new StringBuilder();
 		header.append("\n_________________________");
@@ -42,25 +45,27 @@ public class Comment extends PageView {
 		header.append("\ncomments :");
 		header.append("\n");
 
-		ProjectComments projectComments = repository
-				.getCommentsByProjectID(project.getID());
-
-		if (projectComments != null) {
-			for (int index = 0; index < projectComments.getCommentLength(); index++) {
-				if (projectComments.usersID[index] != 0) {
+		int lengthComments = repository.getCommentLength(modelValues
+				.getIntSelectedProject());
+		
+		List<ProjectComments> commentsOfProject=repository.getCommentsByProjectID(projectID);
+		
+		if (commentsOfProject != null) {
+			for (int index = 0; index < lengthComments; index++) {
+				
 					header.append("user ID:<");
-					header.append(projectComments.usersID[index]);
+					header.append(commentsOfProject.get(index).getUserID());
 					header.append(">  comment ID:<");
 					header.append(index);
 					header.append("> <");
-					header.append(projectComments.getComment()[index]);
+					header.append(commentsOfProject.get(index).getComment());
 					header.append(">\n");
-				}
+				
 			}
 		}
 		header.append("\n------------------------");
 		header.append("\nAdd comment in format :     <a:my comment>");
-		header.append("\nDelete comment in format :  <d:3:0>            where 3- user ID, 0- comment ID ");
+		header.append("\nDelete comment in format :  <d:0>  , where  0- comment ID ");
 		header.append("\nOptions: <p>- previous page  ");
 		return header.toString();
 	}

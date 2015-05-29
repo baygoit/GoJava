@@ -1,12 +1,11 @@
 package kickstarter.pages.modelContent;
 
-import kickstarter.entities.Project;
 import kickstarter.entities.ProjectComments;
 import kickstarter.mvc.interfaces.IndexOfPage;
 import kickstarter.repository.facade.RepositoryException;
 
 public class CommentModel extends PageModel {
-	ProjectComments projectComments;
+
 	@Override
 	public void updateStateOfPageModel(String message)
 			throws RepositoryException {
@@ -14,26 +13,25 @@ public class CommentModel extends PageModel {
 			imodel.next(IndexOfPage.DETAILED_PROJECT.ordinal());
 			return;
 		}
+		int projectID = imodel.getModelValues().getIntSelectedProject();
 
-		Project project = repository
-				.getProjectById(imodel.getModelValues().getIntSelectedProject());
-		projectComments = repository.getCommentsByProjectID(project.getID());
 		String[] array = message.split(":");
 		if (array[0].equals("a") && array.length == 2) {
-			if (projectComments != null) {
-				// TODO
-				projectComments.addComment(1, array[1]);// 1- user ID
-			} else {
-				repository.addNewComment(1,
-						imodel.getModelValues().getIntSelectedProject(), array[1]);
-			}
+
+			ProjectComments projectComments = new ProjectComments(projectID, 1,
+					array[1]);
+			repository.addNewComment(projectComments);
+
 			imodel.next(IndexOfPage.DETAILED_PROJECT.ordinal());
 			return;
 		}
-		if (array[0].equals("d") && array.length == 3) {
+
+		if (array[0].equals("d") && array.length == 2) {
 			try {
-				projectComments.deleteComment(array[1], array[2]);
-			} catch (NumberFormatException | NullPointerException e) {
+				repository.deleteComment(projectID,
+						(int) Integer.parseInt(array[1]));
+			} catch (RepositoryException e) {
+			
 				imodel.goToAndBack(IndexOfPage.ERROR_PAGE.ordinal(),
 						IndexOfPage.COMMENT_PAGE.ordinal());
 				return;
@@ -41,6 +39,7 @@ public class CommentModel extends PageModel {
 			imodel.next(IndexOfPage.DETAILED_PROJECT.ordinal());
 			return;
 		}
+
 		imodel.goToAndBack(IndexOfPage.ERROR_PAGE.ordinal(),
 				IndexOfPage.COMMENT_PAGE.ordinal());
 	}

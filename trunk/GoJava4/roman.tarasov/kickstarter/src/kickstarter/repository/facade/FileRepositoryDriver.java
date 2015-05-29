@@ -29,11 +29,6 @@ public class FileRepositoryDriver implements iRepository {
 		throw new RepositoryException("");
 	}
 
-	@Override
-	public ProjectComments getCommentsByProjectID(int projectID)
-			throws RepositoryException {
-		throw new RepositoryException("");
-	}
 
 	@Override
 	public int getProjectsLength() throws RepositoryException {
@@ -87,13 +82,34 @@ public class FileRepositoryDriver implements iRepository {
 		return fileName;
 	}
 
-	@Override
-	public void addNewComment(int i, int intSelectedProject, String string)
-			throws RepositoryException {
-	}
 
 	@Override
 	public void createFileSystemRepository() throws RepositoryException {
 
+	}
+
+	@Override
+	public void addNewComment(ProjectComments comment)throws RepositoryException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public int getCommentLength(int projectID){
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public List<ProjectComments> getCommentsByProjectID(int projectID)
+			throws RepositoryException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void deleteComment(int projectID, int commentID) {
+		// TODO Auto-generated method stub
+		
 	}
 }

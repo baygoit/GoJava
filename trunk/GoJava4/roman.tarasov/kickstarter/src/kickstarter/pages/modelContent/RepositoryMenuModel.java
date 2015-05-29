@@ -43,6 +43,7 @@ public class RepositoryMenuModel extends PageModel {
 					new BufferedOutputStream(new FileOutputStream("object.ser")))) {
 				;
 				out.writeObject(icontroller.getCurrentRepository());
+				
 			} catch (IOException e) {
 				imodel.goToAndBack(IndexOfPage.ERROR_PAGE.ordinal(),
 						IndexOfPage.REPOSITORY_MENU_PAGE.ordinal());

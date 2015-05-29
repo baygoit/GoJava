@@ -15,7 +15,7 @@ public interface iRepository {
 
 	public abstract Quote getRandomQuote() throws RepositoryException;
 
-	public abstract ProjectComments getCommentsByProjectID(int projectID)
+	public abstract List<ProjectComments> getCommentsByProjectID(int projectID)
 			throws RepositoryException;
 
 	public abstract int getProjectsLength() throws RepositoryException;
@@ -28,9 +28,12 @@ public interface iRepository {
 	public abstract List<Category> getListAllCategories()
 			throws RepositoryException;
 
-	public abstract void addNewComment(int i, int intSelectedProject,
-			String string) throws RepositoryException;
-
 	void createFileSystemRepository() throws RepositoryException;
+
+	void addNewComment(ProjectComments comment) throws RepositoryException;
+
+	public abstract int getCommentLength(int projectID);
+
+	public abstract void deleteComment(int projectID, int commentID) throws RepositoryException;
 
 }

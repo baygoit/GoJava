@@ -1,21 +1,16 @@
 package kickstarter.pages.viewContent;
 
+import java.util.List;
+
 import kickstarter.entities.Project;
 import kickstarter.entities.ProjectComments;
 import kickstarter.repository.facade.RepositoryException;
 
 public class DetailedProject extends PageView {
 
-	private ProjectComments selectCommentsOfProject(int projectID)
-			throws RepositoryException {
-		ProjectComments comments = repository.getCommentsByProjectID(projectID);
-		return comments;
-	}
-
 	public String getHeader() throws RepositoryException {
-
-		Project project = repository
-				.getProjectById(imodel.getModelValues().getIntSelectedProject());
+		int projectID = imodel.getModelValues().getIntSelectedProject();
+		Project project = repository.getProjectById(projectID);
 		StringBuilder header = new StringBuilder();
 		header.append("\n________________________");
 		header.append("\n|Detailed project info |");
@@ -47,20 +42,25 @@ public class DetailedProject extends PageView {
 		header.append("\ncomments :");
 		header.append("\n");
 
-		ProjectComments comments = selectCommentsOfProject(project.getID());
-		if (comments != null) {
-			for (int index = 0; index < comments.getCommentLength(); index++) {
-				if (comments.usersID[index] != 0) {
-					header.append("user ID:<");
-					header.append(comments.usersID[index]);
-					header.append(">  comment ID:<");
-					header.append(index);
-					header.append("> <");
-					header.append(comments.getComment()[index]);
-					header.append(">\n");
-				}
+		int lengthComments = repository.getCommentLength(projectID);
+
+		List<ProjectComments> commentsOfProject = repository
+				.getCommentsByProjectID(projectID);
+
+		if (commentsOfProject != null) {
+			for (int index = 0; index < lengthComments; index++) {
+
+				header.append("user ID:<");
+				header.append(commentsOfProject.get(index).getUserID());
+				header.append(">  comment ID:<");
+				header.append(index);
+				header.append("> <");
+				header.append(commentsOfProject.get(index).getComment());
+				header.append(">\n");
+
 			}
 		}
+
 		header.append("\n------------------------");
 		header.append("\nOptions: <p> - previous page; <i>- invest to project ; <c>- comment ; <d>- donate");
 		return header.toString();

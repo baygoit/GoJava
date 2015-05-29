@@ -2,61 +2,52 @@ package kickstarter.entities;
 
 import java.io.Serializable;
 
-public class ProjectComments implements Serializable{
+public class ProjectComments implements Serializable {
 
-	private static final long serialVersionUID = -4689189179769667015L;
-	public int[] usersID;
-	private String[] comment;
-	private int commentIndex = 0;
-	final int INIT_SIZE = 10;
-	final int ADD_TO_SIZE = 10;
-	public int projectID;
+	private static final long serialVersionUID = 6511337370371120313L;
+	private int projectID;
+	private int userID;
+	private int commentID;
+	private String comment;
 
-	public ProjectComments(int projectID) {
+	public ProjectComments(int projectID, int userID, String comment) {
+		super();
 		this.projectID = projectID;
-		usersID = new int[INIT_SIZE];
-		setComment(new String[INIT_SIZE]);
+		this.userID = userID;
+
+		this.comment = comment;
 	}
 
-	public void addComment(int userID, String newComment) {
-		int len = getComment().length;
-		if (commentIndex >= len) {
-			String[] newComments = new String[getComment().length + ADD_TO_SIZE];
-			System.arraycopy(getComment(), 0, newComments, 0,
-					getComment().length);
-			setComment(newComments);
-
-			int[] newUsersID = new int[len + ADD_TO_SIZE];
-			System.arraycopy(usersID, 0, newUsersID, 0, getCommentLength());
-
-			usersID = newUsersID;
-		}
-		getComment()[commentIndex] = newComment;
-		usersID[commentIndex] = userID;
-		commentIndex++;
-	}
-
-	public int getCommentLength() {
-		return commentIndex;
-	}
-
-	public void deleteComment(String userID, String commentID)
-			throws NullPointerException, NumberFormatException {
-
-		int intUserID = Integer.parseInt(userID);
-		int intCommentID = Integer.parseInt(commentID);
-		if (intCommentID < 0 || intCommentID >= commentIndex
-				|| usersID[intCommentID] != intUserID) {
-			throw new NullPointerException(null);
-		}
-		usersID[intCommentID] = 0;// 0 - deleted comment
-	}
-
-	public String[] getComment() {
+	public String getComment() {
 		return comment;
 	}
 
-	public void setComment(String[] comment) {
+	public void setComment(String comment) {
 		this.comment = comment;
 	}
+
+	public int getProjectID() {
+		return projectID;
+	}
+
+	public void setProjectID(int projectID) {
+		this.projectID = projectID;
+	}
+
+	public int getUserID() {
+		return userID;
+	}
+
+	public void setUserID(int userID) {
+		this.userID = userID;
+	}
+
+	public int getCommentID() {
+		return commentID;
+	}
+
+	public void setCommentID(int commentID) {
+		this.commentID = commentID;
+	}
+
 }

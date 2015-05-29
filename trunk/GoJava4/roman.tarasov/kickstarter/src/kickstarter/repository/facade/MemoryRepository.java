@@ -8,22 +8,26 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
 import kickstarter.entities.Category;
 import kickstarter.entities.Project;
 import kickstarter.entities.ProjectComments;
 import kickstarter.entities.Quote;
 
-
 public class MemoryRepository implements iRepository, Serializable {
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -9048596809324290852L;
 	private List<Quote> quotes;
 	private List<Category> categories;
 	private List<Project> projects;
 	private List<ProjectComments> allComments;
+	private QuotesRepository quotesRepository;
+	private CategoriesRepository categoriesRepository;
+	private CommentsRepository commentsRepository;
+	private ProjectsRepository projectsRepository;
 
 	public MemoryRepository() {
-
+		quotesRepository = new QuotesRepository();
 		quotes = new ArrayList<Quote>();
 		Quote quote = new Quote();
 		quote.setQuote("Explore projects, everywhere");
@@ -32,7 +36,10 @@ public class MemoryRepository implements iRepository, Serializable {
 		quote = new Quote();
 		quote.setQuote("'To be is to do'—Socrates. 'To do is to be'—Jean-Paul Sartre. 'Do be do be do'—Frank Sinatra");
 		quotes.add(quote);
+		quotesRepository.setQuotes(quotes);
 
+		// ----------------------------------------------------------
+		categoriesRepository = new CategoriesRepository();
 		categories = new ArrayList<Category>();
 		Category category = new Category("Technology");
 		category.setID(5);
@@ -41,17 +48,35 @@ public class MemoryRepository implements iRepository, Serializable {
 		category = new Category("Social");
 		category.setID(4);
 		categories.add(category);
+		categoriesRepository.setCategories(categories);
+		// ----------------------------------------------------------
+		commentsRepository = new CommentsRepository();
 		allComments = new ArrayList<ProjectComments>();
 
-		ProjectComments comment = new ProjectComments(8);
-		comment.addComment(1, "What color will paint?");
-		comment.addComment(2, "Paint is Green");
-		allComments.add(comment);
+		ProjectComments comment = new ProjectComments(8, 3,
+				"What color will paint?");
+		commentsRepository.addComment(comment);
+		comment = new ProjectComments(8, 2, "Paint is Green");
+		commentsRepository.addComment(comment);
 
-		comment = new ProjectComments(23);
-		comment.addComment(3, "how much weight the bike?");
-		comment.addComment(2, "The weight of bike is 15 kilo");
-		allComments.add(comment);
+		comment = new ProjectComments(23, 4, "how much weight the bike?");
+		commentsRepository.addComment(comment);
+		comment = new ProjectComments(23, 5, "The weight of bike is 15 kilo");
+		commentsRepository.addComment(comment);
+
+		comment = new ProjectComments(
+				20,
+				8,
+				"One request: make sure your documentation and tutorials are crystal clear and checked by a native English speaker. (At one point they weren't) That's half of the product :)");
+		commentsRepository.addComment(comment);
+		comment = new ProjectComments(
+				20,
+				8,
+				"Will your company be considering a camera module, fingerprint scanner or a capacitive lcd/led display with fingerprint scanner ability?");
+		commentsRepository.addComment(comment);
+		// ----------------------------------------------------------
+		projectsRepository = new ProjectsRepository();
+
 		int categoryID = 5;
 		projects = new ArrayList<Project>();
 		Project project = new Project("Create electrobike", categoryID);
@@ -99,14 +124,8 @@ public class MemoryRepository implements iRepository, Serializable {
 		project.setInvestmentOptions(new String[] { "10$ - ", "20$ -", "100$ -" });
 		project.amount = new double[] { 10, 20, 100 };
 		projects.add(project);
-		comment = new ProjectComments(20);
-		comment.addComment(
-				3,
-				"One request: make sure your documentation and tutorials are crystal clear and checked by a native English speaker. (At one point they weren't) That's half of the product :)");
-		comment.addComment(
-				2,
-				"Will your company be considering a camera module, fingerprint scanner or a capacitive lcd/led display with fingerprint scanner ability?");
-		allComments.add(comment);
+		projectsRepository.setProjects(projects);
+
 	}
 
 	@Override
@@ -122,17 +141,6 @@ public class MemoryRepository implements iRepository, Serializable {
 	@Override
 	public Quote getRandomQuote() {
 		return quotes.get(new Random().nextInt(quotes.size()));
-	}
-
-	@Override
-	public ProjectComments getCommentsByProjectID(int projectID) {
-
-		for (int index = 0; index < allComments.size(); index++) {
-			if (allComments.get(index).projectID == projectID) {
-				return allComments.get(index);
-			}
-		}
-		return null;
 	}
 
 	@Override
@@ -164,16 +172,14 @@ public class MemoryRepository implements iRepository, Serializable {
 	}
 
 	@Override
-	public void addNewComment(int user, int projectID, String string) {
-		ProjectComments comment = new ProjectComments(projectID);
-		comment.addComment(user, string);
-		allComments.add(comment);
+	public void addNewComment(ProjectComments comment) {
+
+		commentsRepository.addComment(comment);
 	}
 
 	@Override
 	public void createFileSystemRepository() throws RepositoryException {
-		CategoriesRepository categoriesRepository = new CategoriesRepository();
-		categoriesRepository.setCategories(categories);
+
 		try (ObjectOutputStream out = new ObjectOutputStream(
 				new BufferedOutputStream(new FileOutputStream("categories.ser")))) {
 
@@ -182,8 +188,6 @@ public class MemoryRepository implements iRepository, Serializable {
 			throw new RepositoryException("Error categories.ser creation");
 		}
 
-		ProjectsRepository projectsRepository = new ProjectsRepository();
-		projectsRepository.setProjects(projects);
 		try (ObjectOutputStream out = new ObjectOutputStream(
 				new BufferedOutputStream(new FileOutputStream("projects.ser")))) {
 
@@ -191,9 +195,7 @@ public class MemoryRepository implements iRepository, Serializable {
 		} catch (IOException e) {
 			throw new RepositoryException("Error projects.ser creation");
 		}
-		
-		QuotesRepository quotesRepository = new QuotesRepository();
-		quotesRepository.setQuotes(quotes);
+
 		try (ObjectOutputStream out = new ObjectOutputStream(
 				new BufferedOutputStream(new FileOutputStream("quotes.ser")))) {
 
@@ -202,4 +204,23 @@ public class MemoryRepository implements iRepository, Serializable {
 			throw new RepositoryException("Error quotes.ser creation");
 		}
 	}
+
+	@Override
+	public int getCommentLength(int projectID) {
+		return commentsRepository.getCommentLength(projectID);
+	}
+
+	@Override
+	public List<ProjectComments> getCommentsByProjectID(int projectID)
+			throws RepositoryException {
+
+		return commentsRepository.getCommentsByProjectID(projectID);
+	}
+
+	@Override
+	public void deleteComment(int projectID, int commentID) throws RepositoryException{
+		commentsRepository.deleteComment( projectID, commentID);
+		
+	}
+
 }

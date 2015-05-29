@@ -38,14 +38,17 @@ import kickstarter.ui.iUserInterface;
 
 public class Runner {
 	public Kickstarter kickstarter;
+
 	public static void main(String[] args) {
-		Runner runner=new Runner();
+		Runner runner = new Runner();
 		runner.init();
 		runner.run();
 	}
-public  void run(){
-	kickstarter.run();
-}
+
+	public void run() {
+		kickstarter.run();
+	}
+
 	public void init() {
 		iUserInterface ui = new ConsoleUI();
 		MemoryRepository memoryRepository = new MemoryRepository();
@@ -53,15 +56,14 @@ public  void run(){
 		Bank bank = new Bank();
 		Model model = new Model();
 		View view = new View(ui);
-		
+
 		createFileSystemRepository(memoryRepository);
 		Controller controller = new Controller();
 		iController icontroller = controller;
-		modelInit(model, bank,  icontroller);
+		modelInit(model, bank, icontroller);
 		viewInit(view, bank);
-		controllerInit(controller, view, model,
-				fileRepositoryDriver, memoryRepository);
-
+		controllerInit(controller, view, model, fileRepositoryDriver,
+				memoryRepository);
 
 		kickstarter = new Kickstarter();
 		kickstarter.setBank(bank);
@@ -71,7 +73,6 @@ public  void run(){
 		kickstarter.setFileRepositoryDriver(fileRepositoryDriver);
 		kickstarter.setMemoryRepository(memoryRepository);
 		kickstarter.setUI(ui);
-		
 
 	}
 
@@ -84,25 +85,22 @@ public  void run(){
 		}
 	}
 
-	private void controllerInit(Controller controller, View view,
-			Model model, FileRepositoryDriver fileRepositoryDriver,
+	private void controllerInit(Controller controller, View view, Model model,
+			FileRepositoryDriver fileRepositoryDriver,
 			MemoryRepository defaultRepository) {
-
-		// controller.setRepository(inMemoryRepository);
 
 		controller.setInterfaces(view, model);
 		controller.setRepositories(fileRepositoryDriver, defaultRepository);
 		controller.initView(view);
 		controller.initModel(model);
 		controller.setPage(IndexOfPage.CATEGORIES.ordinal());
-		//controller.setCurrentRepository(fileRepositoryDriver);
+		// controller.setCurrentRepository(fileRepositoryDriver);
 		controller.setInMemoryRepository();
 		controller.setFileNameOfRepository("repository");
 
 	}
 
-	private void modelInit(Model model, Bank bank,
-			 iController icontroller) {
+	private void modelInit(Model model, Bank bank, iController icontroller) {
 
 		PageModel pageModel = new CategoriesModel();
 		model.addPageModel(pageModel);
