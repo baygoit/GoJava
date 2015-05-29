@@ -2,7 +2,9 @@ package com.morkva.ui;
 
 import com.morkva.entities.Category;
 import com.morkva.entities.Project;
+import com.morkva.entities.User;
 import com.morkva.model.IRepository;
+import com.morkva.utils.UserType;
 
 import java.util.List;
 
@@ -11,11 +13,14 @@ import java.util.List;
  */
 public class Model {
     IRepository<Category> categoryRepository;
+    IRepository<User> userRepository;
     private Category currentCategory;
     private Project currentProject;
+    private UserType currentUserType;
 
-    public Model(IRepository<Category> categoryRepository) {
+    public Model(IRepository<Category> categoryRepository, IRepository<User> userRepository) {
         this.categoryRepository = categoryRepository;
+        this.userRepository = userRepository;
     }
 
     public Category getCurrentCategory() {
@@ -52,5 +57,13 @@ public class Model {
 
     public Project getCurrentProject() {
         return currentProject;
+    }
+
+    public void setCurrentUserType(UserType currentUserType) {
+        this.currentUserType = currentUserType;
+    }
+
+    public UserType getCurrentUserType() {
+        return currentUserType;
     }
 }

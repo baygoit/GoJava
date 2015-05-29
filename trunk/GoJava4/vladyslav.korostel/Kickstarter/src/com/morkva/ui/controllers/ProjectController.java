@@ -12,12 +12,10 @@ import com.morkva.ui.views.ProjectView;
  */
 public class ProjectController implements IController{
 
-    private Model model;
     private ProjectView view;
 
     public ProjectController(Printer printer, Model model, Reader reader) {
         this.view = new ProjectView(model, printer, reader, this);
-        this.model = model;
     }
 
     public void showView() {
@@ -28,9 +26,5 @@ public class ProjectController implements IController{
         return view.readInput();
     }
 
-    public void investToTheProject(int amount) {
-        Project project = model.getCurrentProject();
-        project.setCurrentMoney(project.getCurrentMoney() + amount);
-        project.setNeedMoney(project.getNeedMoney() - amount);
-    }
+
 }

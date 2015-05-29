@@ -1,6 +1,8 @@
 package com.morkva.entities;
 
-import com.morkva.logic.Printer;
+import com.morkva.utils.PaymentOption;
+
+import java.util.Map;
 
 /**
  * Created by vladyslav on 02.05.15.
@@ -15,7 +17,7 @@ public class Project extends Entity {
     private int daysLeft;
     private String history;
     private String urlVideo;
-    private String[] questionsAndAnswers;
+    private Map<Integer, PaymentOption> paymentOptions;
 
     public Project(
             int id,
@@ -67,6 +69,9 @@ public class Project extends Entity {
 
     public void setNeedMoney(int needMoney) {
         this.needMoney = needMoney;
+        if (getNeedMoney() < 0) {
+            this.needMoney = 0;
+        }
     }
 
     public int getCurrentMoney() {
@@ -122,5 +127,14 @@ public class Project extends Entity {
         builder.append("	Days left: " + this.getDaysLeft() + "\n");
         return builder.toString();
     }
+
+    public Map<Integer, PaymentOption> getPaymentOptions() {
+        return paymentOptions;
+    }
+
+    public void setPaymentOptions(Map<Integer, PaymentOption> paymentOptions) {
+        this.paymentOptions = paymentOptions;
+    }
+
 
 }

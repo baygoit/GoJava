@@ -2,10 +2,7 @@ package com.morkva.ui;
 
 import com.morkva.logic.Printer;
 import com.morkva.logic.Reader;
-import com.morkva.ui.controllers.CategoriesController;
-import com.morkva.ui.controllers.CategoryController;
-import com.morkva.ui.controllers.IController;
-import com.morkva.ui.controllers.ProjectController;
+import com.morkva.ui.controllers.*;
 
 /**
  * Created by vladyslav on 22.05.15.
@@ -38,6 +35,17 @@ public class ViewHelper {
                 IController projectController = new ProjectController(printer, model, reader);
                 projectController.showView();
                 ViewResolver.getInstance().setNextView(projectController.readInput());
+                break;
+            case LOGIN_PAGE:
+                IController loginController = new LoginController(model, printer, reader);
+                loginController.showView();
+                ViewResolver.getInstance().setNextView(loginController.readInput());
+                break;
+            case PAYMENT_PAGE:
+                IController paymentController = new PaymentController(model, printer, reader);
+                paymentController.showView();
+                ViewResolver.getInstance().setNextView(paymentController.readInput());
+
         }
     }
 
@@ -45,6 +53,9 @@ public class ViewHelper {
         while (true) {
             ViewType viewType = ViewResolver.getInstance().getNextView();
             switch (viewType) {
+                case LOGIN_PAGE:
+                    showView(ViewType.LOGIN_PAGE);
+                    break;
                 case CATEGORIES_PAGE:
                     showView(ViewType.CATEGORIES_PAGE);
                     break;
@@ -53,6 +64,9 @@ public class ViewHelper {
                     break;
                 case PROJECT_PAGE:
                     showView(ViewType.PROJECT_PAGE);
+                    break;
+                case PAYMENT_PAGE:
+                    showView(ViewType.PAYMENT_PAGE);
                     break;
             }
         }

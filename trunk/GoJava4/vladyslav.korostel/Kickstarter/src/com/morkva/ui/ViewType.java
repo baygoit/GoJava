@@ -6,5 +6,7 @@ package com.morkva.ui;
 public enum ViewType {
     CATEGORIES_PAGE,
     CATEGORY_PAGE,
-    PROJECT_PAGE
+    LOGIN_PAGE,
+    PAYMENT_PAGE,
+    QUESTION_PAGE, PROJECT_PAGE
 }

@@ -12,8 +12,8 @@ public class QuoteRepository implements IRepository<Quote> {
 
     List<Quote> quotes;
 
-    public QuoteRepository(List<Quote> quotes) {
-        this.quotes = quotes;
+    public QuoteRepository(List<Quote> dataSource) {
+        this.quotes = dataSource;
     }
 
     public QuoteRepository() {

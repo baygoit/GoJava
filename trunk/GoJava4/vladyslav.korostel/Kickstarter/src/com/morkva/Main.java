@@ -6,11 +6,10 @@ import com.morkva.entities.Quote;
 import com.morkva.logic.*;
 import com.morkva.model.impl.CategoryRepository;
 import com.morkva.model.impl.QuoteRepository;
+import com.morkva.utils.PaymentOption;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by vladyslav on 07.05.15.
@@ -53,6 +52,12 @@ public class Main {
     ));
 
     public static void main(String[] args) throws IOException {
+
+        Map<Integer, PaymentOption> paymentOptions = new HashMap<>();
+        paymentOptions.put(1, new PaymentOption("Descr 1", 10));
+        paymentOptions.put(2, new PaymentOption("Descr 2", 50));
+        paymentOptions.put(3, new PaymentOption("Descr 3", 100));
+        softwareCategoryProjects.get(0).setPaymentOptions(paymentOptions);
 
         defaultCategories.get(0).setProjects(softwareCategoryProjects);
         defaultCategories.get(1).setProjects(videoCategoryProjects);

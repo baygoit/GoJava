@@ -12,8 +12,8 @@ public class CategoryRepository implements IRepository<Category> {
 
     List<Category> categories;
 
-    public CategoryRepository(List<Category> categories) {
-        this.categories = categories;
+    public CategoryRepository(List<Category> dataSource) {
+        this.categories = dataSource;
     }
 
     public CategoryRepository() {
