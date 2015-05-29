@@ -23,8 +23,6 @@ public class CategoriesViewer {
 	menu.append("--------------------------------------------------------------------\n");
 	menu.append(getAllCategories());
 	menu.append("\t [0] EXIT");
-	menu.append("\n\n\t Enter the number of the category to explore it ");
-	menu.append("\n\t or \"0\" to exit: ");
 	printer.println(menu.toString());
     }
 

@@ -86,10 +86,10 @@ public class ProjectsRepo implements Repo {
 	return null;
     }
     
-    public ArrayList<Project> getProjects(String projectName) {
+    public ArrayList<Project> getProjects(String categoryName) {
 	ArrayList<Project> tempProjectsArray = new ArrayList<>();
 	for (Project project : projects) {
-	    if (project.getName().equals(projectName)) {
+	    if (categoryName.equals(project.getCategory().getName())) {
 		tempProjectsArray.add(project);
 	    }
 	}

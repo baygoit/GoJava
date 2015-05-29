@@ -5,58 +5,56 @@ import kickstarter.reader.Reader;
 import kickstarter.repos.CategoriesRepo;
 import kickstarter.repos.ProjectsRepo;
 import kickstarter.view.CategoriesViewer;
+import kickstarter.view.PageNavigation;
 import kickstarter.view.ProjectsViewer;
 import kickstarter.view.QuotesViewer;
 
 public class Kickstarter {
-
-    private Reader reader;
-    private Printer printer;
     
+    private Printer printer;
+    private Reader reader;
     private QuotesViewer quotesViewer;
     private CategoriesViewer categoriesViewer;
     private ProjectsViewer projectsViewer;
     private CategoriesRepo categoriesRepo;
     private ProjectsRepo projectsRepo;
+    private PageNavigation pageNavigation;
 
     public Kickstarter(Reader reader, Printer printer) {
-	this.reader = reader;
 	this.printer = printer;
+	this.reader = reader;
 	quotesViewer = new QuotesViewer(printer);
 	categoriesViewer = new CategoriesViewer(printer);
 	projectsViewer = new ProjectsViewer(printer);
 	categoriesRepo = new CategoriesRepo();
 	projectsRepo = new ProjectsRepo();
+	pageNavigation = new PageNavigation(printer, reader);
     }
 
     public void run() {
-
+	
+	int userInput = -1;
+	
 	greeting();
 	quotesViewer.showQuoteMenu();
-	
 	categoriesViewer.showCategoriesMenu();
+	System.out.print("ENTER: ");
+	userInput = reader.readUserInput();
 	
-	projectsViewer.showAllProjectsOfCategory(categoriesRepo.getCategory("TECHNOLOGY"));
-	projectsViewer.showAllProjectsOfCategory(categoriesRepo.getCategory("DESIGN"));
-	projectsViewer.showDetailProject(categoriesRepo.getCategory("TECHNOLOGY"), projectsRepo.getProject("SNAP"));
-	projectsViewer.showDetailProject(categoriesRepo.getCategory("TECHNOLOGY"), projectsRepo.getProject("HYDAWAY"));
-	projectsViewer.showDetailProject(categoriesRepo.getCategory("TECHNOLOGY"), projectsRepo.getProject("DASH 4.0 WALLET"));
-	projectsViewer.showDetailProject(categoriesRepo.getCategory("TECHNOLOGY"), projectsRepo.getProject("USB CHARGEDOUBLER"));
+	boolean isExit = false;
+	while (!isExit) {
+	    if (userInput == 0) {
+		isExit = true;
+		farewell();
+	    } else {
+		//categoriesViewer.showCategoriesMenu();
+		//printer.print("\n\t Choose the category: ");
+		pageNavigation.navigate(userInput);
+	    }
+	}
 	
-	projectsViewer.showDetailProject(categoriesRepo.getCategory("DESIGN"), projectsRepo.getProject("FIREFLY HAND"));
-	projectsViewer.showDetailProject(categoriesRepo.getCategory("DESIGN"), projectsRepo.getProject("CUBIT"));
-	projectsViewer.showDetailProject(categoriesRepo.getCategory("DESIGN"), projectsRepo.getProject("NOKI"));
-//	boolean isExit = false;
-//	int userInput = -1;
-//
-//	while (!isExit) {
-//	    if (userInput == 0) {
-//		isExit = true;
-//		farewell();
-//	    } else {
-//		userInput = reader.readUserInput();
-//	    }
-//	}
+	
+	
     }
 
     public void greeting() {
@@ -70,4 +68,5 @@ public class Kickstarter {
 	printer.println("                     GOODBYE! HAVE A NICE DAY!                      ");
 	printer.println("====================================================================");
     }
+
 }
