@@ -32,11 +32,11 @@ public class TestContent {
 
 	@Test
 	public void testAddCategories() {
-		categories.add(new Category("Category1"));
+		categories.add(new Category("Snowboarding"));
 		assertEquals(1, categories.size());
-		categories.add(new Category("Category2"));
+		categories.add(new Category("Traveling"));
 		assertEquals(2, categories.size());
 		assertFalse(categories.isEmpty());
 	}
-
+	
 }

@@ -10,12 +10,12 @@ public class Project implements ProjectInterface {
 	private String urlVideo;
 	private CategoryInterface category;
 
-	public Project(String name, String shortDescription, double needMoney, double currentMoney,
-			int daysLeft, String history, String urlVideo) {
+	public Project(String name, String shortDescription, double needMoney, int daysLeft,
+			String history, String urlVideo) {
 		this.name = name;
 		this.shortDescription = shortDescription;
 		this.needMoney = needMoney;
-		this.currentMoney = currentMoney;
+		currentMoney = 0.0;
 		this.daysLeft = daysLeft;
 		this.history = history;
 		this.urlVideo = urlVideo;

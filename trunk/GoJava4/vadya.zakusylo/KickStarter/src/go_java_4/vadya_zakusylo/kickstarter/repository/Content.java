@@ -25,21 +25,21 @@ public class Content implements ContentInterface {
 				"GNU Dirty Pillow BTX Snowboard",
 				"Snowboard is a befuddling"
 						+ "mutant hybrid child of a pow board and it's forbidden love affair with a park"
-						+ "board", 400.00, 0, 30, "history",
+						+ "board", 400.00, 30, "history",
 				"https://www.youtube.com/watch?v=b2v2Z4AC58E");
 		ProjectInterface projectSecond = new Project("I/OS Replacement Lenses",
-				"Photochromic Red Sensor Lens", 140, 0, 90, "history",
+				"Photochromic Red Sensor Lens", 140, 90, "history",
 				"https://www.youtube.com/watch?v=rvWwBoIyS-M");
 		ProjectInterface projectThird = new Project("Primus Litech Superset",
-				"The set consists of two pots, a lid, and" + "a separate pot gripper", 50, 0, 30,
+				"The set consists of two pots, a lid, and" + "a separate pot gripper", 50, 30,
 				"history", "https://www.youtube.com/watch?v=rV055FvDF8s");
 		ProjectInterface projectFourth = new Project("Tent VEIG PRO III",
 				"Double entrance expedition tent adapted for"
-						+ "using in difficult weather conditions", 270, 0, 90, "history",
+						+ "using in difficult weather conditions", 270, 90, "history",
 				"https://www.youtube.com/watch?v=3zt7RftZPz4");
 		ProjectInterface projectFifth = new Project(
 				"Java: The Complete Reference (Complete Reference Series)",
-				"Book by Herbert Schildt", 50, 0, 30, "history", "");
+				"Book by Herbert Schildt", 50, 30, "history", "");
 
 		projectFirst.setCategory(categoryFirst);
 		projectSecond.setCategory(categoryFirst);
