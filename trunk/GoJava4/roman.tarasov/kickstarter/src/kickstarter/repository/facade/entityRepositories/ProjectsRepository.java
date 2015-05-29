@@ -13,7 +13,6 @@ public class ProjectsRepository implements Serializable {
 	ArrayList<Project> projects;
 
 	public List<Project> getProjects() {
-
 		return projects;
 	}
 

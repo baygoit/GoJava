@@ -17,31 +17,19 @@ public abstract class PageModel {
 	protected int nextPage;
 	protected  iRepository repository;
 	protected ModelValues modelValues;
-	private  iModel imodel;
-	private  iView iview;
+	protected  iModel imodel;
+	protected  iView iview;
 	protected PageView page;
 
 	public abstract void updateStateOfPageModel(String message)
 			throws RepositoryException;
 
-	public iRepository getRepository() {
-		return repository;
-	}
-
 	public void setRepository(iRepository repository) {
 		this.repository = repository;
 	}
 
-	public iView getIview() {
-		return iview;
-	}
-
 	public void setIview(iView iview) {
 		this.iview = iview;
-	}
-
-	public iModel getImodel() {
-		return imodel;
 	}
 
 	public void setImodel(iModel imodel) {

@@ -2,6 +2,7 @@ package kickstarter.Test;
 
 import static org.junit.Assert.*;
 import kickstarter.payment.Bank;
+import kickstarter.payment.BankException;
 
 import org.junit.Test;
 
@@ -10,49 +11,99 @@ public class test_bank {
 
 	@Test
 	public void test_get_correct_lot_of_money() {
-		assertTrue(bank.getMoney("bankir", "777", "2000"));
+		try {
+			assertTrue(bank.getMoney("bankir", "777", "2000"));
+		} catch (BankException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@Test
 	public void test_get_null_lot_of_money() {
-		assertFalse(bank.getMoney("bankir", "777", "0"));
+		try {
+			assertFalse(bank.getMoney("bankir", "777", "0"));
+		} catch (BankException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@Test
 	public void test_get_incorrect_lot_of_money() {
-		assertFalse(bank.getMoney("bankir", "777", "-1"));
+		try {
+			assertFalse(bank.getMoney("bankir", "777", "-1"));
+		} catch (BankException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@Test
 	public void test_get_too_many_money() {
-		assertFalse(bank.getMoney("bankir", "777", "5001"));
+		try {
+			assertFalse(bank.getMoney("bankir", "777", "5001"));
+		} catch (BankException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@Test
 	public void test_null_login() {
-		assertFalse(bank.getMoney(null, "777", "5"));
+		try {
+			assertFalse(bank.getMoney(null, "777", "5"));
+		} catch (BankException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@Test
 	public void test__empty_login() {
-		assertFalse(bank.getMoney("", "777", "20"));
+		try {
+			assertFalse(bank.getMoney("", "777", "20"));
+		} catch (BankException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	@Test
 	public void test__incorrect_login() {
-		assertFalse(bank.getMoney("a", "777", "20"));
+		try {
+			assertFalse(bank.getMoney("a", "777", "20"));
+		} catch (BankException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	@Test
 	public void test__incorrect_cardnumber() {
-		assertFalse(bank.getMoney("a", "77", "20"));
+		try {
+			assertFalse(bank.getMoney("a", "77", "20"));
+		} catch (BankException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	@Test
 	public void test__infinity() {
-		assertFalse(bank.getMoney("bankir", "777", "Infinity"));
+		try {
+			assertFalse(bank.getMoney("bankir", "777", "Infinity"));
+		} catch (BankException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 	@Test
 	public void test__NaN() {
-		assertFalse(bank.getMoney("bankir", "777", "NaN"));
+		try {
+			assertFalse(bank.getMoney("bankir", "777", "NaN"));
+		} catch (BankException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }

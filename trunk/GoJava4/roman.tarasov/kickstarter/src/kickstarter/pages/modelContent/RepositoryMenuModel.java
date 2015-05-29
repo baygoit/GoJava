@@ -25,17 +25,17 @@ public class RepositoryMenuModel extends PageModel {
 	@Override
 	public void updateStateOfPageModel(String message) {
 		if (message.equals("p")) {
-			getImodel().next(IndexOfPage.CATEGORIES.ordinal());
+			imodel.next(IndexOfPage.CATEGORIES.ordinal());
 			return;
 		}
 		if (message.equals("d")) {
 			icontroller.setInMemoryRepository();
-			getIview().getViewValues().setRepositoryError(false);
-			getImodel().next(IndexOfPage.CATEGORIES.ordinal());
+			iview.getViewValues().setRepositoryError(false);
+			imodel.next(IndexOfPage.CATEGORIES.ordinal());
 			return;
 		}
 		if (message.equals("e")) {
-			getImodel().next(IndexOfPage.END_PAGE.ordinal());
+			imodel.next(IndexOfPage.END_PAGE.ordinal());
 			return;
 		}
 		if (message.equals("c")) {
@@ -43,35 +43,32 @@ public class RepositoryMenuModel extends PageModel {
 					new BufferedOutputStream(new FileOutputStream("object.ser")))) {
 				;
 				out.writeObject(icontroller.getCurrentRepository());
-				
+
 			} catch (IOException e) {
-				getImodel().goToAndBack(IndexOfPage.ERROR_PAGE.ordinal(),
+				imodel.goToAndBack(IndexOfPage.ERROR_PAGE.ordinal(),
 						IndexOfPage.REPOSITORY_MENU_PAGE.ordinal());
 				return;
 			}
-			getIview().getViewValues().setRepositoryError(false);
-			getImodel().next(IndexOfPage.CATEGORIES.ordinal());
+			iview.getViewValues().setRepositoryError(false);
+			imodel.next(IndexOfPage.CATEGORIES.ordinal());
 			return;
 		}
 		if (message.equals("i")) {
 
 			try (ObjectInputStream in = new ObjectInputStream(
 					new BufferedInputStream(new FileInputStream("object.ser")))) {
-				
-				deserializedRepository = (MemoryRepository) in.readObject();
-			} catch (ClassNotFoundException | IOException e) {
-				getImodel().goToAndBack(IndexOfPage.ERROR_PAGE.ordinal(),
-						IndexOfPage.REPOSITORY_MENU_PAGE.ordinal());
-				return;
-			}
 
-			icontroller.setIRepository(deserializedRepository);
-			getIview().getViewValues().setRepositoryError(false);
-			getImodel().next(IndexOfPage.CATEGORIES.ordinal());
+				deserializedRepository = (MemoryRepository) in.readObject();
+				icontroller.setIRepository(deserializedRepository);
+				iview.getViewValues().setRepositoryError(false);
+				imodel.next(IndexOfPage.CATEGORIES.ordinal());
+			} catch (ClassNotFoundException | IOException e) {
+				imodel.goToAndBack(IndexOfPage.ERROR_PAGE.ordinal(),
+						IndexOfPage.REPOSITORY_MENU_PAGE.ordinal());
+			}
 			return;
 		}
-		getImodel().goToAndBack(IndexOfPage.ERROR_PAGE.ordinal(),
+		imodel.goToAndBack(IndexOfPage.ERROR_PAGE.ordinal(),
 				IndexOfPage.REPOSITORY_MENU_PAGE.ordinal());
 	}
-
 }

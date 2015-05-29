@@ -68,8 +68,8 @@ public class Runner {
 		kickstarter = new Kickstarter();
 		kickstarter.setController(controller);
 		kickstarter.setView(view);
+		kickstarter.setModel(model);
 		kickstarter.setUI(ui);
-
 	}
 
 	private void createFileSystemRepository(MemoryRepository inMemoryRepository) {
@@ -90,7 +90,6 @@ public class Runner {
 		controller.initView(view);
 		controller.initModel(model);
 		controller.setPage(IndexOfPage.CATEGORIES.ordinal());
-		// controller.setCurrentRepository(fileRepositoryDriver);
 		controller.setInMemoryRepository();
 		controller.setFileNameOfRepository("repository");
 
@@ -156,7 +155,7 @@ public class Runner {
 		pageView = new Invest();
 		view.addPageView(pageView);
 
-		pageView = new Donate(bank);
+		pageView = new Donate();
 		view.addPageView(pageView);
 
 		pageView = new ResultOfBankOperation();

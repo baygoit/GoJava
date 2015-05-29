@@ -2,11 +2,13 @@ package kickstarter.pages.modelContent;
 
 import kickstarter.mvc.interfaces.IndexOfPage;
 import kickstarter.payment.Bank;
+import kickstarter.payment.BankException;
 import kickstarter.repository.facade.RepositoryException;
 import kickstarter.repository.facade.entity.Project;
 
 public class DonateModel extends PageModel {
-	Bank bank;
+	private Bank bank;
+
 	public DonateModel(Bank bank) {
 		this.bank = bank;
 	}
@@ -15,7 +17,7 @@ public class DonateModel extends PageModel {
 	public void updateStateOfPageModel(String message)
 			throws RepositoryException {
 		if (message.equals("p")) {
-			getImodel().next(IndexOfPage.DETAILED_PROJECT.ordinal());
+			imodel.next(IndexOfPage.DETAILED_PROJECT.ordinal());
 			return;
 		}
 
@@ -23,47 +25,34 @@ public class DonateModel extends PageModel {
 		double balanceBefore = 0;
 		double balanceAfter = 0;
 		double getMoney = 0;
-		String resultOfBankOperation = "";
-		modelValues = getImodel().getModelValues();
+		//String resultOfBankOperation = "";
+		modelValues = imodel.getModelValues();
 		if (array.length == 3) {
 			try {
 				balanceBefore = bank.getBalance(array[0], array[1]);
-				if (balanceBefore < 0) {
-					resultOfBankOperation = "\nbalance error\n";
-					throw new NullPointerException("balance error");
-				}
 				getMoney = Double.parseDouble(array[2]);
-				if (!bank.getMoney(array[0], array[1], array[2])) {
-					resultOfBankOperation = "\nbank operation error\n";
-					throw new NullPointerException("bank operation error");
-				}
+				bank.getMoney(array[0], array[1], array[2]);
 				balanceAfter = bank.getBalance(array[0], array[1]);
-				if (balanceAfter < 0) {
-					resultOfBankOperation = "\nbalance error\n";
-					throw new NullPointerException("balance error");
-				}
+				Project project = repository.getProjectById(modelValues
+						.getIntSelectedProject());
+				project.setPledged(project.getPledged() + getMoney);
 
-			} catch (NumberFormatException | NullPointerException e) {
-				getImodel().savePageBeforeError(IndexOfPage.DONATE_PAGE.ordinal());
-				modelValues.setResultOfBankOperation(resultOfBankOperation);
-				getImodel().nextWithValues(
+				modelValues.setResultOfBankOperation("\nbalance before :"
+						+ balanceBefore + "\nbalance after :" + balanceAfter);
+				imodel.nextWithValues(
 						IndexOfPage.BANK_OPERATION_RESULT_PAGE.ordinal(),
 						modelValues);
-				return;
+			} catch (NumberFormatException | NullPointerException | BankException e) {
+				imodel.savePageBeforeError(IndexOfPage.DONATE_PAGE.ordinal());
+				modelValues.setResultOfBankOperation(e.toString());
+				imodel.nextWithValues(
+						IndexOfPage.BANK_OPERATION_RESULT_PAGE.ordinal(),
+						modelValues);
 			}
-
-			Project project = getRepository().getProjectById(modelValues.getIntSelectedProject());
-			project.setPledged(project.getPledged() + getMoney);
-
-			modelValues.setResultOfBankOperation("\nbalance before :"
-					+ balanceBefore + "\nbalance after :" + balanceAfter);
-			getImodel().nextWithValues(
-					IndexOfPage.BANK_OPERATION_RESULT_PAGE.ordinal(),
-					modelValues);
 			return;
 		}
 
-		getImodel().goToAndBack(IndexOfPage.ERROR_PAGE.ordinal(),
+		imodel.goToAndBack(IndexOfPage.ERROR_PAGE.ordinal(),
 				IndexOfPage.DONATE_PAGE.ordinal());
 	}
 }

@@ -14,8 +14,7 @@ import kickstarter.repository.facade.iRepository;
 import kickstarter.ui.iUserInterface;
 
 public class View implements iView {
-	public iModel imodel;
-	public iView iview;
+	private iModel imodel;
 	private PageView page;
 	private iUserInterface ui;
 	private List<PageView> pagesView;
@@ -115,7 +114,6 @@ public class View implements iView {
 		for (PageView pageView : pagesView) {
 			pageView.setIview(setView);
 		}
-		this.iview = setView;
 	}
 
 	@Override

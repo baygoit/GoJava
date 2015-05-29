@@ -8,8 +8,8 @@ public class ResultOfBankOperation extends PageView {
 		header.append("\n| Result of Bank operation |");
 		header.append("\n============================");
 		header.append("\n");
+		header.append(imodel.getModelValues().getResultOfBankOperation());
 		header.append("\n------------------------");
-		header.append(getImodel().getModelValues().getResultOfBankOperation());
 		header.append("\nOptions: <p>- previous page  ");
 		return header.toString();
 	}

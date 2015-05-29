@@ -8,15 +8,15 @@ import kickstarter.repository.facade.RepositoryException;
 import kickstarter.repository.facade.entity.Project;
 
 public class Projects extends PageView {
-	Project project;
+	private Project project;
 
-	public List<Project> sortProjectsByCategoryID(int categoryID)
+	private List<Project> sortProjectsByCategoryID(int categoryID)
 			throws RepositoryException {
 
 		List<Project> sortedProjects = new ArrayList<Project>();
-		int length = getRepository().getProjectsLength();
+		int length = repository.getProjectsLength();
 		for (int index = 0; index < length; index++) {
-			project = getRepository().getProjectByIndex(index);
+			project = repository.getProjectByIndex(index);
 			if (project.getCategoryID() == categoryID) {
 				sortedProjects.add(project);
 			}
@@ -24,7 +24,7 @@ public class Projects extends PageView {
 		return sortedProjects;
 	}
 
-	public String printProjectsInfo(int categoryID) throws RepositoryException {
+	private String printProjectsInfo(int categoryID) throws RepositoryException {
 		StringBuilder result = new StringBuilder();
 		List<Project> sortedToSelect = sortProjectsByCategoryID(categoryID);
 		int length = sortedToSelect.size();
@@ -51,7 +51,7 @@ public class Projects extends PageView {
 			result.append(">");
 			result.append("\n================================");
 		}
-		ViewValues ViewValues = getIview().getViewValues();
+		ViewValues ViewValues = iview.getViewValues();
 		ViewValues.setIntProjects(intValues);
 		ViewValues.setStrProjects(strValues);
 		return result.toString();
@@ -64,7 +64,7 @@ public class Projects extends PageView {
 		header.append("\n|     Projects         |");
 		header.append("\n|______________________|");
 		header.append("\n");
-		header.append(printProjectsInfo(getImodel().getModelValues().getIntSelectedCategory()));
+		header.append(printProjectsInfo(imodel.getModelValues().getIntSelectedCategory()));
 		header.append("\n------------------------");
 		header.append("\nSelect project by ID:<ID>");
 		header.append("\nOptions:  <p> - previous page");

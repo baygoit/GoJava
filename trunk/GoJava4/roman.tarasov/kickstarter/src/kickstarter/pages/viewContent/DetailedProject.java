@@ -9,8 +9,8 @@ import kickstarter.repository.facade.entity.ProjectComment;
 public class DetailedProject extends PageView {
 
 	public String getHeader() throws RepositoryException {
-		int projectID = getImodel().getModelValues().getIntSelectedProject();
-		Project project = getRepository().getProjectById(projectID);
+		int projectID = imodel.getModelValues().getIntSelectedProject();
+		Project project = repository.getProjectById(projectID);
 		StringBuilder header = new StringBuilder();
 		header.append("\n________________________");
 		header.append("\n|Detailed project info |");
@@ -42,9 +42,9 @@ public class DetailedProject extends PageView {
 		header.append("\ncomments :");
 		header.append("\n");
 
-		int lengthComments = getRepository().getCommentLength(projectID);
+		int lengthComments = repository.getCommentLength(projectID);
 
-		List<ProjectComment> commentsOfProject = getRepository()
+		List<ProjectComment> commentsOfProject = repository
 				.getCommentsByProjectID(projectID);
 
 		if (commentsOfProject != null) {

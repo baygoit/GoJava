@@ -9,10 +9,9 @@ import kickstarter.repository.facade.entity.ProjectComment;
 public class Comment extends PageView {
 
 	public String getHeader() throws RepositoryException {
-		modelValues = getImodel().getModelValues();
-		int projectID=modelValues
-				.getIntSelectedProject();
-		Project project = getRepository().getProjectById(projectID);
+		modelValues = imodel.getModelValues();
+		int projectID = modelValues.getIntSelectedProject();
+		Project project = repository.getProjectById(projectID);
 
 		StringBuilder header = new StringBuilder();
 		header.append("\n_________________________");
@@ -45,22 +44,23 @@ public class Comment extends PageView {
 		header.append("\ncomments :");
 		header.append("\n");
 
-		int lengthComments = getRepository().getCommentLength(modelValues
+		int lengthComments = repository.getCommentLength(modelValues
 				.getIntSelectedProject());
-		
-		List<ProjectComment> commentsOfProject=getRepository().getCommentsByProjectID(projectID);
-		
+
+		List<ProjectComment> commentsOfProject = repository
+				.getCommentsByProjectID(projectID);
+
 		if (commentsOfProject != null) {
 			for (int index = 0; index < lengthComments; index++) {
-				
-					header.append("user ID:<");
-					header.append(commentsOfProject.get(index).getUserID());
-					header.append(">  comment ID:<");
-					header.append(index);
-					header.append("> <");
-					header.append(commentsOfProject.get(index).getComment());
-					header.append(">\n");
-				
+
+				header.append("user ID:<");
+				header.append(commentsOfProject.get(index).getUserID());
+				header.append(">  comment ID:<");
+				header.append(index);
+				header.append("> <");
+				header.append(commentsOfProject.get(index).getComment());
+				header.append(">\n");
+
 			}
 		}
 		header.append("\n------------------------");

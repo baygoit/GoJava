@@ -1,15 +1,16 @@
 package kickstarter;
 
 import kickstarter.mvc.Controller;
+import kickstarter.mvc.Model;
 import kickstarter.mvc.View;
 import kickstarter.mvc.interfaces.iController;
-
 import kickstarter.ui.iUserInterface;
 
 public class Kickstarter {
 
 	private iUserInterface ui;
 	private View view;
+	private Model model;
 	public Controller controller;
 	public iController icontroller;
 
@@ -24,6 +25,10 @@ public class Kickstarter {
 
 	void setView(View setView) {
 		this.view = setView;
+	}
+
+	public void setModel(Model model) {
+		this.model = model;
 	}
 
 	public void setUI(iUserInterface ui) {

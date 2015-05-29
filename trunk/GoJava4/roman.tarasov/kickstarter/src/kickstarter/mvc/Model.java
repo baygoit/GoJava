@@ -14,7 +14,6 @@ public class Model implements iModel {
 	
 	private int currentPage;
 	private ModelValues modelValues;
-
 	private List<PageModel> pagesModel;
 	private PageModel pageModel;
 	private int savePage;
