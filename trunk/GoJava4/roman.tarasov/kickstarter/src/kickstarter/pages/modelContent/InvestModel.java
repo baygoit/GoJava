@@ -11,23 +11,23 @@ public class InvestModel extends PageModel {
 			throws RepositoryException {
 
 		if (message.equals("p")) {
-			imodel.next(IndexOfPage.DETAILED_PROJECT.ordinal());
+			getImodel().next(IndexOfPage.DETAILED_PROJECT.ordinal());
 			return;
 		}
-		modelValues = imodel.getModelValues();
-		Project project = repository.getProjectById(modelValues.getIntSelectedProject());
+		modelValues = getImodel().getModelValues();
+		Project project = getRepository().getProjectById(modelValues.getIntSelectedProject());
 		double amount = 0;
 		try {
 			int selected = Integer.parseInt(message);
 			amount = project.amount[selected - 1];
 
 		} catch (NumberFormatException | IndexOutOfBoundsException e) {
-			imodel.goToAndBack(IndexOfPage.ERROR_PAGE.ordinal(),
+			getImodel().goToAndBack(IndexOfPage.ERROR_PAGE.ordinal(),
 					IndexOfPage.INVEST_PAGE.ordinal());
 			return;
 		}
 		modelValues.setAmountToInvest(Double.toString(amount));
-		imodel.nextWithValues(IndexOfPage.APPLY_TRANSACTION_PAGE.ordinal(),
+		getImodel().nextWithValues(IndexOfPage.APPLY_TRANSACTION_PAGE.ordinal(),
 				modelValues);
 	}
 }

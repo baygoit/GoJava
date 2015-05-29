@@ -5,6 +5,7 @@ import kickstarter.payment.Bank;
 import kickstarter.repository.facade.RepositoryException;
 import kickstarter.repository.facade.entity.Project;
 
+
 public class ApplyTransactionModel extends PageModel {
 	Bank bank;
 	public ApplyTransactionModel(Bank bank) {
@@ -15,14 +16,14 @@ public class ApplyTransactionModel extends PageModel {
 	public void updateStateOfPageModel(String message)
 			throws RepositoryException {
 		if (message.equals("p")) {
-			imodel.next(IndexOfPage.DETAILED_PROJECT.ordinal());
+			getImodel().next(IndexOfPage.DETAILED_PROJECT.ordinal());
 			return;
 		}
 		String[] array = message.split(":");
 		double balanceBefore = 0;
 		double balanceAfter = 0;
 		double getMoney = 0;
-		modelValues = imodel.getModelValues();
+		modelValues = getImodel().getModelValues();
 		String amountToInvest = modelValues.getAmountToInvest();
 		String resultOfBankOperation = "";
 		if (array.length == 2) {
@@ -45,27 +46,27 @@ public class ApplyTransactionModel extends PageModel {
 				}
 
 			} catch (NumberFormatException | NullPointerException e) {
-				imodel.savePageBeforeError(IndexOfPage.DONATE_PAGE.ordinal());
-				modelValues = imodel.getModelValues();
+				getImodel().savePageBeforeError(IndexOfPage.DONATE_PAGE.ordinal());
+				modelValues = getImodel().getModelValues();
 				modelValues.setResultOfBankOperation(resultOfBankOperation); 
-				imodel.nextWithValues(
+				getImodel().nextWithValues(
 						IndexOfPage.BANK_OPERATION_RESULT_PAGE.ordinal(),
 						modelValues);
 				return;
 			}
 
-			Project project = repository.getProjectById(modelValues.getIntSelectedProject());
+			Project project = getRepository().getProjectById(modelValues.getIntSelectedProject());
 			project.setPledged(project.getPledged()+ getMoney);
 
 			modelValues.setResultOfBankOperation ("\nbalance before :"
 					+ balanceBefore + "\nbalance after :" + balanceAfter);
-			imodel.nextWithValues(
+			getImodel().nextWithValues(
 					IndexOfPage.BANK_OPERATION_RESULT_PAGE.ordinal(),
 					modelValues);
 			return;
 
 		}
-		imodel.goToAndBack(IndexOfPage.ERROR_PAGE.ordinal(),
+		getImodel().goToAndBack(IndexOfPage.ERROR_PAGE.ordinal(),
 				IndexOfPage.APPLY_TRANSACTION_PAGE.ordinal());
 	}
 

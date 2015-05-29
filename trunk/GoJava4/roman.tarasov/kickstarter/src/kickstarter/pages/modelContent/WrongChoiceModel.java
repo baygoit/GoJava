@@ -5,7 +5,7 @@ public class WrongChoiceModel extends PageModel {
 	@Override
 	public void updateStateOfPageModel(String message) {
 		if (message.equals("p")) {
-			imodel.next(imodel.getSavedPage());
+			getImodel().next(getImodel().getSavedPage());
 			return;
 		}
 	}

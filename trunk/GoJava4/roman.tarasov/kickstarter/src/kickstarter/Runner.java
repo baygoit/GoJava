@@ -66,12 +66,8 @@ public class Runner {
 				memoryRepository);
 
 		kickstarter = new Kickstarter();
-		kickstarter.setBank(bank);
 		kickstarter.setController(controller);
 		kickstarter.setView(view);
-		kickstarter.setModel(model);
-		kickstarter.setFileRepositoryDriver(fileRepositoryDriver);
-		kickstarter.setMemoryRepository(memoryRepository);
 		kickstarter.setUI(ui);
 
 	}

@@ -9,24 +9,24 @@ public class ProjectsModel extends PageModel {
 	public void updateStateOfPageModel(String message) {
 
 		if (message.equals("p")) {
-			imodel.next(IndexOfPage.CATEGORIES.ordinal());
+			getImodel().next(IndexOfPage.CATEGORIES.ordinal());
 			return;
 		}
-		ViewValues ViewValues = iview.getViewValues();
+		ViewValues ViewValues = getIview().getViewValues();
 
 		if (ViewValues.getIntProjects() != null) {
 			for (int index = 0; index < ViewValues.getIntProjects().length; index++) {
 				if (message.equals(ViewValues.getStrProjects()[index])) {
-					modelValues = imodel.getModelValues();
+					modelValues = getImodel().getModelValues();
 					modelValues.setIntSelectedProject(ViewValues.getIntProjects()[index]);
 					modelValues.setStrSelectedProject(ViewValues.getStrProjects()[index]);
-					imodel.nextWithValues(
+					getImodel().nextWithValues(
 							IndexOfPage.DETAILED_PROJECT.ordinal(), modelValues);
 					return;
 				}
 			}
 		}
-		imodel.goToAndBack(IndexOfPage.ERROR_PAGE.ordinal(),
+		getImodel().goToAndBack(IndexOfPage.ERROR_PAGE.ordinal(),
 				IndexOfPage.PROJECTS.ordinal());
 	}
 }

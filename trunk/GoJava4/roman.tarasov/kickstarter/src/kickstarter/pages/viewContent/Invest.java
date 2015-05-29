@@ -7,8 +7,8 @@ public class Invest extends PageView {
 
 	public String getHeader() throws RepositoryException {
 
-		Project project = repository
-				.getProjectById(imodel.getModelValues().getIntSelectedProject());
+		Project project = getRepository()
+				.getProjectById(getImodel().getModelValues().getIntSelectedProject());
 		StringBuilder header = new StringBuilder();
 
 		header.append("\n=========================");

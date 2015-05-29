@@ -8,10 +8,10 @@ public class ResultOfBankOperationModel extends PageModel {
 	public void updateStateOfPageModel(String message) {
 
 		if (message.equals("p")) {
-			imodel.next(IndexOfPage.DETAILED_PROJECT.ordinal());
+			getImodel().next(IndexOfPage.DETAILED_PROJECT.ordinal());
 			return;
 		}
-		imodel.goToAndBack(IndexOfPage.ERROR_PAGE.ordinal(),
+		getImodel().goToAndBack(IndexOfPage.ERROR_PAGE.ordinal(),
 				IndexOfPage.BANK_OPERATION_RESULT_PAGE.ordinal());
 	}
 }

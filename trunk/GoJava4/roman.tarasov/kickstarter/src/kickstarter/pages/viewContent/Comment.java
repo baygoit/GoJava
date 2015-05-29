@@ -9,10 +9,10 @@ import kickstarter.repository.facade.entity.ProjectComment;
 public class Comment extends PageView {
 
 	public String getHeader() throws RepositoryException {
-		modelValues = imodel.getModelValues();
+		modelValues = getImodel().getModelValues();
 		int projectID=modelValues
 				.getIntSelectedProject();
-		Project project = repository.getProjectById(projectID);
+		Project project = getRepository().getProjectById(projectID);
 
 		StringBuilder header = new StringBuilder();
 		header.append("\n_________________________");
@@ -45,10 +45,10 @@ public class Comment extends PageView {
 		header.append("\ncomments :");
 		header.append("\n");
 
-		int lengthComments = repository.getCommentLength(modelValues
+		int lengthComments = getRepository().getCommentLength(modelValues
 				.getIntSelectedProject());
 		
-		List<ProjectComment> commentsOfProject=repository.getCommentsByProjectID(projectID);
+		List<ProjectComment> commentsOfProject=getRepository().getCommentsByProjectID(projectID);
 		
 		if (commentsOfProject != null) {
 			for (int index = 0; index < lengthComments; index++) {

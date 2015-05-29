@@ -99,13 +99,13 @@ public class View implements iView {
 	@Override
 	public void setRepository(iRepository setRepository) {
 		for (PageView pageView : pagesView)
-			pageView.repository = setRepository;
+			pageView.setRepository(setRepository);
 	}
 
 	@Override
 	public void setModel(iModel setModel) {
 		for (PageView pageView : pagesView) {
-			pageView.imodel = setModel;
+			pageView.setImodel(setModel);
 		}
 		this.imodel = setModel;
 	}
@@ -113,7 +113,7 @@ public class View implements iView {
 	@Override
 	public void setView(iView setView) {
 		for (PageView pageView : pagesView) {
-			pageView.iview = setView;
+			pageView.setIview(setView);
 		}
 		this.iview = setView;
 	}

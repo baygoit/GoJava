@@ -15,12 +15,36 @@ public abstract class PageModel {
 	protected String strValue;
 	protected int pageId;
 	protected int nextPage;
-	public iRepository repository;
+	protected  iRepository repository;
 	protected ModelValues modelValues;
-	public iModel imodel;
-	public iView iview;
+	private  iModel imodel;
+	private  iView iview;
 	protected PageView page;
 
 	public abstract void updateStateOfPageModel(String message)
 			throws RepositoryException;
+
+	public iRepository getRepository() {
+		return repository;
+	}
+
+	public void setRepository(iRepository repository) {
+		this.repository = repository;
+	}
+
+	public iView getIview() {
+		return iview;
+	}
+
+	public void setIview(iView iview) {
+		this.iview = iview;
+	}
+
+	public iModel getImodel() {
+		return imodel;
+	}
+
+	public void setImodel(iModel imodel) {
+		this.imodel = imodel;
+	}
 }

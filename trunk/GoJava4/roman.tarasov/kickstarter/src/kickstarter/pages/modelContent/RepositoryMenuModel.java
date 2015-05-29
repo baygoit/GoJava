@@ -25,17 +25,17 @@ public class RepositoryMenuModel extends PageModel {
 	@Override
 	public void updateStateOfPageModel(String message) {
 		if (message.equals("p")) {
-			imodel.next(IndexOfPage.CATEGORIES.ordinal());
+			getImodel().next(IndexOfPage.CATEGORIES.ordinal());
 			return;
 		}
 		if (message.equals("d")) {
 			icontroller.setInMemoryRepository();
-			iview.getViewValues().setRepositoryError(false);
-			imodel.next(IndexOfPage.CATEGORIES.ordinal());
+			getIview().getViewValues().setRepositoryError(false);
+			getImodel().next(IndexOfPage.CATEGORIES.ordinal());
 			return;
 		}
 		if (message.equals("e")) {
-			imodel.next(IndexOfPage.END_PAGE.ordinal());
+			getImodel().next(IndexOfPage.END_PAGE.ordinal());
 			return;
 		}
 		if (message.equals("c")) {
@@ -45,12 +45,12 @@ public class RepositoryMenuModel extends PageModel {
 				out.writeObject(icontroller.getCurrentRepository());
 				
 			} catch (IOException e) {
-				imodel.goToAndBack(IndexOfPage.ERROR_PAGE.ordinal(),
+				getImodel().goToAndBack(IndexOfPage.ERROR_PAGE.ordinal(),
 						IndexOfPage.REPOSITORY_MENU_PAGE.ordinal());
 				return;
 			}
-			iview.getViewValues().setRepositoryError(false);
-			imodel.next(IndexOfPage.CATEGORIES.ordinal());
+			getIview().getViewValues().setRepositoryError(false);
+			getImodel().next(IndexOfPage.CATEGORIES.ordinal());
 			return;
 		}
 		if (message.equals("i")) {
@@ -60,17 +60,17 @@ public class RepositoryMenuModel extends PageModel {
 				
 				deserializedRepository = (MemoryRepository) in.readObject();
 			} catch (ClassNotFoundException | IOException e) {
-				imodel.goToAndBack(IndexOfPage.ERROR_PAGE.ordinal(),
+				getImodel().goToAndBack(IndexOfPage.ERROR_PAGE.ordinal(),
 						IndexOfPage.REPOSITORY_MENU_PAGE.ordinal());
 				return;
 			}
 
 			icontroller.setIRepository(deserializedRepository);
-			iview.getViewValues().setRepositoryError(false);
-			imodel.next(IndexOfPage.CATEGORIES.ordinal());
+			getIview().getViewValues().setRepositoryError(false);
+			getImodel().next(IndexOfPage.CATEGORIES.ordinal());
 			return;
 		}
-		imodel.goToAndBack(IndexOfPage.ERROR_PAGE.ordinal(),
+		getImodel().goToAndBack(IndexOfPage.ERROR_PAGE.ordinal(),
 				IndexOfPage.REPOSITORY_MENU_PAGE.ordinal());
 	}
 

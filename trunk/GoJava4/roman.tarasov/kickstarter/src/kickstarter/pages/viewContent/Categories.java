@@ -16,7 +16,7 @@ public class Categories extends PageView {
 		header.append("\n-----Quote------");
 		header.append("\n");
 		try {
-			Quote quote = repository.getRandomQuote();
+			Quote quote = getRepository().getRandomQuote();
 			header.append(quote.getQuote());
 		} catch (NullPointerException e) {
 			throw new RepositoryException("");
@@ -37,7 +37,7 @@ public class Categories extends PageView {
 	public String getListAllCategories() throws RepositoryException {
 
 		StringBuilder result = new StringBuilder();
-		List<Category> listAllCategories = repository.getListAllCategories();
+		List<Category> listAllCategories = getRepository().getListAllCategories();
 		int length = listAllCategories.size();
 		strValues = new String[length];
 		intValues = new int[length];
@@ -53,7 +53,7 @@ public class Categories extends PageView {
 			strValues[index] = Integer.toString(currentCategory.getID());
 			intValues[index] = currentCategory.getID();
 		}
-		ViewValues ViewValues = iview.getViewValues();
+		ViewValues ViewValues = getIview().getViewValues();
 		ViewValues.setIntCategories(intValues);
 		ViewValues.setStrCategories(strValues);
 		return result.toString();

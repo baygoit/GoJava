@@ -8,16 +8,16 @@ public class CategoriesModel extends PageModel {
 	@Override
 	public void updateStateOfPageModel(String message) {
 		if (message.equals("e")) {
-			imodel.next(IndexOfPage.END_PAGE.ordinal());
+			getImodel().next(IndexOfPage.END_PAGE.ordinal());
 			return;
 		}
 		if (message.equals("r")) {
-			imodel.next(IndexOfPage.REPOSITORY_MENU_PAGE.ordinal());
+			getImodel().next(IndexOfPage.REPOSITORY_MENU_PAGE.ordinal());
 			return;
 		}
-		ViewValues ViewValues = iview.getViewValues();
+		ViewValues ViewValues = getIview().getViewValues();
 		if (ViewValues.getRepositoryError()) {
-			imodel.next(IndexOfPage.REPOSITORY_MENU_PAGE.ordinal());
+			getImodel().next(IndexOfPage.REPOSITORY_MENU_PAGE.ordinal());
 			return;
 		}
 		strValues = ViewValues.getStrCategories();
@@ -27,15 +27,15 @@ public class CategoriesModel extends PageModel {
 
 			for (int index = 0; index < strValues.length; index++) {
 				if (message.equals(strValues[index])) {
-					modelValues = imodel.getModelValues();
+					modelValues = getImodel().getModelValues();
 					modelValues.setIntSelectedCategory(intValues[index]);
-					imodel.nextWithValues(IndexOfPage.PROJECTS.ordinal(),
+					getImodel().nextWithValues(IndexOfPage.PROJECTS.ordinal(),
 							modelValues);
 					return;
 				}
 			}
 		}
-		imodel.goToAndBack(IndexOfPage.ERROR_PAGE.ordinal(),
+		getImodel().goToAndBack(IndexOfPage.ERROR_PAGE.ordinal(),
 				IndexOfPage.CATEGORIES.ordinal());
 	}
 

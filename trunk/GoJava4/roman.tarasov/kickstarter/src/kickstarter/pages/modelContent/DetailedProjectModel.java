@@ -8,27 +8,27 @@ public class DetailedProjectModel extends PageModel {
 	public void updateStateOfPageModel(String message) {
 
 		if (message.equals("p")) {
-			modelValues = imodel.getModelValues();
-			imodel.nextWithValues(IndexOfPage.PROJECTS.ordinal(), modelValues);
+			modelValues = getImodel().getModelValues();
+			getImodel().nextWithValues(IndexOfPage.PROJECTS.ordinal(), modelValues);
 			return;
 		}
 		if (message.equals("c")) {
-			imodel.next(IndexOfPage.COMMENT_PAGE.ordinal());
+			getImodel().next(IndexOfPage.COMMENT_PAGE.ordinal());
 			return;
 		}
 		if (message.equals("i")) {
-			modelValues = imodel.getModelValues();
-			imodel.nextWithValues(IndexOfPage.INVEST_PAGE.ordinal(),
+			modelValues = getImodel().getModelValues();
+			getImodel().nextWithValues(IndexOfPage.INVEST_PAGE.ordinal(),
 					modelValues);
 			return;
 		}
 		if (message.equals("d")) {
-			modelValues = imodel.getModelValues();
-			imodel.nextWithValues(IndexOfPage.DONATE_PAGE.ordinal(),
+			modelValues = getImodel().getModelValues();
+			getImodel().nextWithValues(IndexOfPage.DONATE_PAGE.ordinal(),
 					modelValues);
 			return;
 		}
-		imodel.goToAndBack(IndexOfPage.ERROR_PAGE.ordinal(),
+		getImodel().goToAndBack(IndexOfPage.ERROR_PAGE.ordinal(),
 				IndexOfPage.DETAILED_PROJECT.ordinal());
 	}
 }

@@ -14,9 +14,9 @@ public class Projects extends PageView {
 			throws RepositoryException {
 
 		List<Project> sortedProjects = new ArrayList<Project>();
-		int length = repository.getProjectsLength();
+		int length = getRepository().getProjectsLength();
 		for (int index = 0; index < length; index++) {
-			project = repository.getProjectByIndex(index);
+			project = getRepository().getProjectByIndex(index);
 			if (project.getCategoryID() == categoryID) {
 				sortedProjects.add(project);
 			}
@@ -51,7 +51,7 @@ public class Projects extends PageView {
 			result.append(">");
 			result.append("\n================================");
 		}
-		ViewValues ViewValues = iview.getViewValues();
+		ViewValues ViewValues = getIview().getViewValues();
 		ViewValues.setIntProjects(intValues);
 		ViewValues.setStrProjects(strValues);
 		return result.toString();
@@ -64,7 +64,7 @@ public class Projects extends PageView {
 		header.append("\n|     Projects         |");
 		header.append("\n|______________________|");
 		header.append("\n");
-		header.append(printProjectsInfo(imodel.getModelValues().getIntSelectedCategory()));
+		header.append(printProjectsInfo(getImodel().getModelValues().getIntSelectedCategory()));
 		header.append("\n------------------------");
 		header.append("\nSelect project by ID:<ID>");
 		header.append("\nOptions:  <p> - previous page");

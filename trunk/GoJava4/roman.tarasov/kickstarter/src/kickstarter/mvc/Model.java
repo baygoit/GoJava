@@ -92,13 +92,13 @@ public class Model implements iModel {
 	@Override
 	public void setRepository(iRepository setRepository) {
 		for (PageModel pageModel : pagesModel)
-			pageModel.repository = setRepository;
+			pageModel.setRepository(setRepository);
 	}
 
 	@Override
 	public void setModel(iModel setModel) {
 		for (PageModel pageModel : pagesModel) {
-			pageModel.imodel = setModel;
+			pageModel.setImodel(setModel);
 		}
 	}
 
@@ -106,7 +106,7 @@ public class Model implements iModel {
 	@Override
 	public void setView(iView setView) {
 		for (PageModel pageModel : pagesModel) {
-			pageModel.iview = setView;
+			pageModel.setIview(setView);
 		}
 	}
 
