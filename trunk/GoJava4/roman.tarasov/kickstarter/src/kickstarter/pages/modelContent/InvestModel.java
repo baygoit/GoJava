@@ -22,8 +22,7 @@ public class InvestModel extends PageModel {
 			int selected = Integer.parseInt(message);
 			amount = project.getAmount()[selected - 1];
 			modelValues.setAmountToInvest(Double.toString(amount));
-			imodel.nextWithValues(IndexOfPage.APPLY_TRANSACTION_PAGE.ordinal(),
-					modelValues);
+			imodel.next(IndexOfPage.APPLY_TRANSACTION_PAGE.ordinal());
 		} catch (NumberFormatException | IndexOutOfBoundsException e) {
 			imodel.goToAndBack(IndexOfPage.ERROR_PAGE.ordinal(),
 					IndexOfPage.INVEST_PAGE.ordinal());

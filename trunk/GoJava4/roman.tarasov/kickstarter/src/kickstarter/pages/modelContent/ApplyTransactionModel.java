@@ -41,18 +41,15 @@ public class ApplyTransactionModel extends PageModel {
 
 				modelValues.setResultOfBankOperation("\nbalance before :"
 						+ balanceBefore + "\nbalance after :" + balanceAfter);
-				imodel.nextWithValues(
-						IndexOfPage.BANK_OPERATION_RESULT_PAGE.ordinal(),
-						modelValues);
+				imodel.next(IndexOfPage.BANK_OPERATION_RESULT_PAGE.ordinal());
 
 			} catch (NumberFormatException | NullPointerException
 					| BankException e) {
 				imodel.savePageBeforeError(IndexOfPage.DONATE_PAGE.ordinal());
 				modelValues = imodel.getModelValues();
 				modelValues.setResultOfBankOperation(resultOfBankOperation);
-				imodel.nextWithValues(
-						IndexOfPage.BANK_OPERATION_RESULT_PAGE.ordinal(),
-						modelValues);
+				imodel.next(IndexOfPage.BANK_OPERATION_RESULT_PAGE.ordinal());
+
 			}
 			return;
 		}

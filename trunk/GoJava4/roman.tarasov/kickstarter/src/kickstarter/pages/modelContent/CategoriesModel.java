@@ -29,8 +29,7 @@ public class CategoriesModel extends PageModel {
 				if (message.equals(strValues[index])) {
 					modelValues = imodel.getModelValues();
 					modelValues.setIntSelectedCategory(intValues[index]);
-					imodel.nextWithValues(IndexOfPage.PROJECTS.ordinal(),
-							modelValues);
+					imodel.next(IndexOfPage.PROJECTS.ordinal());
 					return;
 				}
 			}

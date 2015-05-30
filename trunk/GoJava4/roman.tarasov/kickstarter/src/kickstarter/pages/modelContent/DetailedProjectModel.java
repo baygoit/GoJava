@@ -8,8 +8,7 @@ public class DetailedProjectModel extends PageModel {
 	public void updateStateOfPageModel(String message) {
 
 		if (message.equals("p")) {
-			modelValues = imodel.getModelValues();
-			imodel.nextWithValues(IndexOfPage.PROJECTS.ordinal(), modelValues);
+			imodel.next(IndexOfPage.PROJECTS.ordinal());
 			return;
 		}
 		if (message.equals("c")) {
@@ -17,15 +16,12 @@ public class DetailedProjectModel extends PageModel {
 			return;
 		}
 		if (message.equals("i")) {
-			modelValues = imodel.getModelValues();
-			imodel.nextWithValues(IndexOfPage.INVEST_PAGE.ordinal(),
-					modelValues);
+			imodel.next(IndexOfPage.INVEST_PAGE.ordinal());
 			return;
 		}
 		if (message.equals("d")) {
 			modelValues = imodel.getModelValues();
-			imodel.nextWithValues(IndexOfPage.DONATE_PAGE.ordinal(),
-					modelValues);
+			imodel.next(IndexOfPage.DONATE_PAGE.ordinal());
 			return;
 		}
 		imodel.goToAndBack(IndexOfPage.ERROR_PAGE.ordinal(),

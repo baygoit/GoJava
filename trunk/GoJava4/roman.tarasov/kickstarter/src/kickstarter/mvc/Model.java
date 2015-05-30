@@ -41,11 +41,6 @@ public class Model implements iModel {
 	}
 
 	@Override
-	public void setModelValues(ModelValues setO) {
-		this.modelValues = setO;
-	}
-
-	@Override
 	public void setPage(int setPage) {
 		this.currentPage = setPage;
 	}
@@ -80,13 +75,6 @@ public class Model implements iModel {
 	public ModelValues getModelValues() {
 		return modelValues;
 	}
-
-	@Override
-	public void nextWithValues(int next, ModelValues o) {
-		this.currentPage = next;
-		this.modelValues = o;
-	}
-
 
 	@Override
 	public void setRepository(iRepository setRepository) {

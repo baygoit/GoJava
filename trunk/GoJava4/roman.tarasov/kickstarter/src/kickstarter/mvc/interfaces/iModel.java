@@ -11,8 +11,6 @@ public interface iModel {
 
 	ModelValues getModelValues();
 
-	void setModelValues(ModelValues values);
-
 	public void setPage(int page);
 
 	void next(int page);
@@ -22,9 +20,7 @@ public interface iModel {
 	int getSavedPage();
 
 	void goToAndBack(int toPage, int back);
-
-	public void nextWithValues(int next, ModelValues modelValues);
-
+	
 	void addPageModel(PageModel pageModel);
 
 	public int getCurrentPage();

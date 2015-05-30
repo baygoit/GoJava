@@ -3,8 +3,6 @@ package kickstarter.mvc.viewState;
 public class ViewValues {
 	private int[] intCategories;
 	private String[] strCategories;
-	private int intOption;
-	private String strOption;
 	private int[] intProjects;
 	private String[] strProjects;
 	private boolean repositoryError;
@@ -23,22 +21,6 @@ public class ViewValues {
 
 	public void setStrCategories(String[] strCategories) {
 		this.strCategories = strCategories;
-	}
-
-	public int getIntOption() {
-		return intOption;
-	}
-
-	public void setIntOption(int intOption) {
-		this.intOption = intOption;
-	}
-
-	public String getStrOption() {
-		return strOption;
-	}
-
-	public void setStrOption(String strOption) {
-		this.strOption = strOption;
 	}
 
 	public int[] getIntProjects() {

@@ -18,10 +18,11 @@ public class ProjectsModel extends PageModel {
 			for (int index = 0; index < ViewValues.getIntProjects().length; index++) {
 				if (message.equals(ViewValues.getStrProjects()[index])) {
 					modelValues = imodel.getModelValues();
-					modelValues.setIntSelectedProject(ViewValues.getIntProjects()[index]);
-					modelValues.setStrSelectedProject(ViewValues.getStrProjects()[index]);
-					imodel.nextWithValues(
-							IndexOfPage.DETAILED_PROJECT.ordinal(), modelValues);
+					modelValues.setIntSelectedProject(ViewValues
+							.getIntProjects()[index]);
+					modelValues.setStrSelectedProject(ViewValues
+							.getStrProjects()[index]);
+					imodel.next(IndexOfPage.DETAILED_PROJECT.ordinal());
 					return;
 				}
 			}

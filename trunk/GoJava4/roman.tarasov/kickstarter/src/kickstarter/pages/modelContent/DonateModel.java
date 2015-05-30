@@ -25,7 +25,6 @@ public class DonateModel extends PageModel {
 		double balanceBefore = 0;
 		double balanceAfter = 0;
 		double getMoney = 0;
-		//String resultOfBankOperation = "";
 		modelValues = imodel.getModelValues();
 		if (array.length == 3) {
 			try {
@@ -39,15 +38,12 @@ public class DonateModel extends PageModel {
 
 				modelValues.setResultOfBankOperation("\nbalance before :"
 						+ balanceBefore + "\nbalance after :" + balanceAfter);
-				imodel.nextWithValues(
-						IndexOfPage.BANK_OPERATION_RESULT_PAGE.ordinal(),
-						modelValues);
-			} catch (NumberFormatException | NullPointerException | BankException e) {
+				imodel.next(IndexOfPage.BANK_OPERATION_RESULT_PAGE.ordinal());
+			} catch (NumberFormatException | NullPointerException
+					| BankException e) {
 				imodel.savePageBeforeError(IndexOfPage.DONATE_PAGE.ordinal());
 				modelValues.setResultOfBankOperation(e.toString());
-				imodel.nextWithValues(
-						IndexOfPage.BANK_OPERATION_RESULT_PAGE.ordinal(),
-						modelValues);
+				imodel.next(IndexOfPage.BANK_OPERATION_RESULT_PAGE.ordinal());
 			}
 			return;
 		}
