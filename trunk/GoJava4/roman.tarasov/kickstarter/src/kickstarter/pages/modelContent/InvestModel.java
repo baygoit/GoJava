@@ -27,6 +27,5 @@ public class InvestModel extends PageModel {
 			imodel.goToAndBack(IndexOfPage.ERROR_PAGE.ordinal(),
 					IndexOfPage.INVEST_PAGE.ordinal());
 		}
-
 	}
 }

@@ -4,6 +4,7 @@ import kickstarter.mvc.Controller;
 import kickstarter.mvc.Model;
 import kickstarter.mvc.View;
 import kickstarter.mvc.interfaces.iController;
+import kickstarter.mvc.interfaces.iModel;
 import kickstarter.ui.iUserInterface;
 
 public class Kickstarter {
@@ -13,6 +14,22 @@ public class Kickstarter {
 	private Model model;
 	public Controller controller;
 	public iController icontroller;
+
+	private volatile static Kickstarter uniqueInstance;
+
+	private Kickstarter() {
+	}
+
+	public static Kickstarter getInstance() {
+		if (uniqueInstance == null) {
+			synchronized (Kickstarter.class) {
+				if (uniqueInstance == null) {
+					uniqueInstance = new Kickstarter();
+				}
+			}
+		}
+		return uniqueInstance;
+	}
 
 	public void testUI(iUserInterface ui) {
 		this.ui = ui;
@@ -31,6 +48,14 @@ public class Kickstarter {
 		this.model = model;
 	}
 
+	public Model getModel() {
+		return model;
+	}
+	
+	public View getView() {
+		return view;
+	}
+
 	public void setUI(iUserInterface ui) {
 		this.ui = ui;
 	}
@@ -44,4 +69,5 @@ public class Kickstarter {
 			controller.updateStateOfModel(message);
 		}
 	}
+
 }

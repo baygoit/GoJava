@@ -68,10 +68,10 @@ public class Bank {
 		try {
 			getMoney = Double.parseDouble(money);
 			if (getMoney.isNaN()) {
-				throw new NumberFormatException();
+				throw new BankException("incorrect money");
 			}
 			if (getMoney.isInfinite()) {
-				throw new NumberFormatException();
+				throw new BankException("incorrect money");
 			}
 		} catch (NumberFormatException | NullPointerException e) {
 			throw new BankException("incorrect money");

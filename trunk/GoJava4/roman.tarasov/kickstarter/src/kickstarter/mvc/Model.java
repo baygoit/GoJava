@@ -89,12 +89,13 @@ public class Model implements iModel {
 		}
 	}
 
-
 	@Override
 	public void setView(iView setView) {
 		for (PageModel pageModel : pagesModel) {
 			pageModel.setIview(setView);
 		}
 	}
+
+
 
 }

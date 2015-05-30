@@ -20,7 +20,6 @@ public class DetailedProjectModel extends PageModel {
 			return;
 		}
 		if (message.equals("d")) {
-			modelValues = imodel.getModelValues();
 			imodel.next(IndexOfPage.DONATE_PAGE.ordinal());
 			return;
 		}

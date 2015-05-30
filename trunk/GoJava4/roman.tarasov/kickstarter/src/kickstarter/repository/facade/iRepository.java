@@ -9,31 +9,29 @@ import kickstarter.repository.facade.entity.Quote;
 
 public interface iRepository {
 
-	public abstract Category getCategory(int index) throws RepositoryException;
+	Category getCategory(int index) throws RepositoryException;
 
-	public abstract int getCategoriesLength() throws RepositoryException;
+	int getCategoriesLength() throws RepositoryException;
 
-	public abstract Quote getRandomQuote() throws RepositoryException;
+	Quote getRandomQuote() throws RepositoryException;
 
-	public abstract List<ProjectComment> getCommentsByProjectID(int projectID)
+	List<ProjectComment> getCommentsByProjectID(int projectID)
 			throws RepositoryException;
 
-	public abstract int getProjectsLength() throws RepositoryException;
+	int getProjectsLength() throws RepositoryException;
 
-	public abstract Project getProjectByIndex(int index)
-			throws RepositoryException;
+	Project getProjectByIndex(int index) throws RepositoryException;
 
-	public abstract Project getProjectById(int ID) throws RepositoryException;
+	Project getProjectById(int ID) throws RepositoryException;
 
-	public abstract List<Category> getListAllCategories()
-			throws RepositoryException;
+	List<Category> getListAllCategories() throws RepositoryException;
 
 	void createFileSystemRepository() throws RepositoryException;
 
 	void addNewComment(ProjectComment comment) throws RepositoryException;
 
-	public abstract int getCommentLength(int projectID);
+	int getCommentLength(int projectID);
 
-	public abstract void deleteComment(int projectID, int commentID) throws RepositoryException;
+	void deleteComment(int projectID, int commentID) throws RepositoryException;
 
 }

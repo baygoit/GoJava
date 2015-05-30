@@ -30,6 +30,8 @@ public interface iModel {
 	public void setModel(iModel setModel);
 
 	public void setView(iView setView);
+
+
 	
 
 }

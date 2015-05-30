@@ -65,7 +65,7 @@ public class Runner {
 		controllerInit(controller, view, model, fileRepositoryDriver,
 				memoryRepository);
 
-		kickstarter = new Kickstarter();
+		kickstarter = Kickstarter.getInstance();
 		kickstarter.setController(controller);
 		kickstarter.setView(view);
 		kickstarter.setModel(model);
