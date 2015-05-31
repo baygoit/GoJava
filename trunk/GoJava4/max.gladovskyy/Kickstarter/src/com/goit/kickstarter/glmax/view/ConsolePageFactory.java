@@ -29,15 +29,20 @@ public class ConsolePageFactory implements PageFactory {
 		} else {
 			switch (position) {
 			case Main:
-				page = new MainPage(runner, entetieIndex);
+				page = new MainPage(runner);
+				break;
 			case Category:
-				page = new CategoryPage(runner, entetieIndex);
+				page = new CategoryPage(runner);
+				break;
 			case Project:
-				page = new ProjectPage(runner, entetieIndex);
+				page = new ProjectPage(runner);
+				break;
 			case Payment:
-				page = new PaymentPage(runner, entetieIndex);
+				page = new PaymentPage(runner);
+				break;
 			case Question:
-				page = new QuestionPage(runner, entetieIndex);
+				page = new QuestionPage(runner);
+				break;
 			}
 
 			cache.get(position).put(entetieIndex, page);

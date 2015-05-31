@@ -2,36 +2,32 @@ package com.goit.kickstarter.glmax.model;
 
 import java.util.*;
 
+import com.goit.kickstarter.glmax.controller.Position;
 import com.goit.kickstarter.glmax.enteties.Category;
 import com.goit.kickstarter.glmax.enteties.Project;
 
 public class LocalDataSource implements DataSource {
-	private List<HashMap<Category, ArrayList<Project>>> data = new ArrayList<HashMap<Category, ArrayList<Project>>>();
+	private ArrayList<Category> categories = new ArrayList<Category>();
+	private HashMap<Category, ArrayList<Project>> projects = new HashMap<Category, ArrayList<Project>>();
 
 	public LocalDataSource() {
 		for (int i = 0; i < 6; i++) {
 			Category category = new Category(i, "Category " + i);
-			data.add(new HashMap<Category, ArrayList<Project>>());
-			data.get(i).put(category, new ArrayList<Project>());
+			categories.add(category);
+			projects.put(category, new ArrayList<Project>());
 			for (int j = 0; j < 6; j++) {
 				Project project = new Project(i * j, "project " + i * j,
 						"short description of project" + i * j, i * j * 10, i
 								* j, i * j / 2, "some histry", "video URL",
 						null);
-				data.get(i).get(category).add(project);
+				projects.get(category).add(project);
 			}
 		}
 	}
 
 	@Override
 	public ArrayList<Category> getCategoriesList() {
-		ArrayList<Category> result = new ArrayList<Category>();
-		for (HashMap<Category, ArrayList<Project>> category : data) {
-			for (Category c : category.keySet()) {
-				result.add(c);
-			}
-		}
-		return result;
+		return categories;
 	}
 
 	@Override
@@ -41,49 +37,51 @@ public class LocalDataSource implements DataSource {
 
 	@Override
 	public ArrayList<Project> getProjectsList(int categoryIndex) {
-		for (ArrayList<Project> p : data.get(categoryIndex - 1).values()) {
-			ArrayList<Project> result = p;
-			return result;
-		}
-		return null;
+		return projects.get(categories.get(categoryIndex - 1));
 	}
 
 	@Override
 	public String getCategoryName(int categoryIndex) {
-		try {
-			for (Category c : data.get(categoryIndex-1).keySet()) {
-				return c.getName();
+		return categories.get(categoryIndex - 1).getName();
+	}
+
+	@Override
+	public Project getProject(int categoryIndex, int projectIndex) {
+		return getProjectsList(categoryIndex).get(projectIndex - 1);
+	}
+
+
+	@Override
+	public ArrayList<Integer> getChoisList(Position currentLevel,
+			Integer currentMenuObjectIndex) {
+		ArrayList<Integer> result = new ArrayList<Integer>();
+		
+		if (currentLevel == Position.Main) {
+			for (Category category : categories) {
+				result.add(result.size()+1);
 			}
-		} catch (IndexOutOfBoundsException e) {
-			System.err.println("no such variant.");
-			System.exit(0);
-		}
-		return null;
-	}
-
-	@Override
-	public Project getProject(int category, int project) {
-		try {
-			for (Category c : data.get(category-1).keySet()) {
-				Project result = data.get(category - 1).get(c).get(project-1);
-				return result;
+			result.add(0);
+		} else if (currentLevel == Position.Category) {
+			for (Project project : projects.get(categories.get(currentMenuObjectIndex))) {
+				result.add(result.size()+1);
 			}
-		} catch (IndexOutOfBoundsException e) {
-			System.err.println("no such variant.");
+			result.add(0);
+		} else if (currentLevel == Position.Project) {
+			result.add(1);
+			result.add(2);
+			result.add(0);
+		} else if (currentLevel == Position.Payment) {
+			result.add(0);
+		} else if (currentLevel == Position.Question) {
+			result.add(0);
 		}
-		return null;
+		return result;
 	}
 
 	@Override
-	public boolean checkIfProjectExist(int i, int userChoise) {
+	public void persistData() {
 		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean checkIfCategoryExist(int userChoise) {
-		// TODO Auto-generated method stub
-		return false;
+		
 	}
 
 

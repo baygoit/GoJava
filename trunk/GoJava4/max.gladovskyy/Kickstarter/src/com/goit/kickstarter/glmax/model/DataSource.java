@@ -19,10 +19,6 @@ public interface DataSource {
 
 	Project getProject(int category, int project);
 
-	boolean checkIfProjectExist(int i, int userChoise);
-
-	boolean checkIfCategoryExist(int userChoise);
-
 	ArrayList<Integer> getChoisList(Position currentLevel, Integer integer);
 
 	void persistData();

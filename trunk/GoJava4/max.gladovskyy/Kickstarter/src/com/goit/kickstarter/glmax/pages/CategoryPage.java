@@ -10,14 +10,14 @@ public class CategoryPage implements Page {
 	private ArrayList<Project> projects;
 	private ArrayList<String> page = new ArrayList<String>();
 
-	public CategoryPage(Runner runner, int categoryIndex) {
-		this.categoryName = runner.getCategoryName(categoryIndex);
-		projects = runner.getProjectsList(categoryIndex);
+	public CategoryPage(Runner runner) {
+		this.categoryName = runner.getCategoryName();
+		projects = runner.getProjectsList();
 		page.add("You in category: " + categoryName);
 		page.add("");
 		page.add("Plese choose project from list below:");
-		for (Project category : projects) {
-			page.add(projects.indexOf(category)+1+") "+category.getName());
+		for (Project project : projects) {
+			page.add(projects.indexOf(project)+1+") "+project.getName());
 		}
 		page.add("");
 		page.add("0) Exit");

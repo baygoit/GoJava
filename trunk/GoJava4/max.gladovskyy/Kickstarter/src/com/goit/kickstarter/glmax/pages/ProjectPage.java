@@ -13,8 +13,8 @@ public class ProjectPage implements Page {
 
 	
 	
-	public ProjectPage(Runner runner, int projectIndex) {
-		this.project = runner.getProject(projectIndex);
+	public ProjectPage(Runner runner) {
+		this.project = runner.getProject();
 		page.add("You in project: " + project.getName());
 		page.add("");
 		page.add("Money needed: " + project.getAmountNeeded());

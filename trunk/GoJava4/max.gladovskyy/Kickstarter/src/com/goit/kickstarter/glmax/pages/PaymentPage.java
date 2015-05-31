@@ -6,7 +6,7 @@ import com.goit.kickstarter.glmax.controller.Runner;
 
 public class PaymentPage implements Page {
 
-	public PaymentPage(Runner runner, int entetieIndex) {
+	public PaymentPage(Runner runner) {
 		// TODO Auto-generated constructor stub
 	}
 

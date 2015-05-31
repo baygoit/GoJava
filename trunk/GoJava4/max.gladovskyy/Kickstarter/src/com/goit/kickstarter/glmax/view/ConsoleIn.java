@@ -28,9 +28,6 @@ public class ConsoleIn implements Input {
 			System.err.println("You entered not a number. Try Again.");
 			return getUserChise(variantsAmount);
 		}
-		finally {
-			scaner.close();
-		}
 
 	}
 

@@ -20,6 +20,7 @@ public class Runner {
 		this.currentLevel = Position.Main;
 		this.currentMenuObjectIndex = 0;
 
+		menuHistory = new HashMap<Position, Integer>();
 		for (Position position : Position.values()) {
 			menuHistory.put(position, 0);
 		}
@@ -49,12 +50,15 @@ public class Runner {
 			currentMenuObjectIndex = nextPosition;
 		} else if (currentLevel == Position.Category) {
 			currentLevel = Position.Project;
+			menuHistory.put(Position.Category, currentMenuObjectIndex);
 			currentMenuObjectIndex = nextPosition;
 		} else if (currentLevel == Position.Project && nextPosition == 1) {
 			currentLevel = Position.Payment;
+			menuHistory.put(Position.Project, currentMenuObjectIndex);
 			currentMenuObjectIndex = 1;
 		} else if (currentLevel == Position.Project && nextPosition == 2) {
 			currentLevel = Position.Question;
+			menuHistory.put(Position.Project, currentMenuObjectIndex);
 			currentMenuObjectIndex = 2;
 		}
 	}
@@ -79,43 +83,28 @@ public class Runner {
 
 	}
 
-	public ArrayList<Integer> getVariantsAmount() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public void process(int fromUser) {
-		// TODO Auto-generated method stub
-
-	}
 
 	public String getSomeQoute() {
-		// TODO Auto-generated method stub
-		return null;
+		return dataSource.getSomeQuote();
 	}
 
 	public ArrayList<Category> getCategories() {
-		// TODO Auto-generated method stub
-		return null;
+		return dataSource.getCategoriesList();
 	}
 
 	public int getCurrentEntetieIndex() {
-		// TODO Auto-generated method stub
-		return 0;
+		return currentMenuObjectIndex;
 	}
 
-	public String getCategoryName(int categoryIndex) {
-		// TODO Auto-generated method stub
-		return null;
+	public String getCategoryName() {
+		return dataSource.getCategoryName(currentMenuObjectIndex);
 	}
 
-	public ArrayList<Project> getProjectsList(int categoryIndex) {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<Project> getProjectsList() {
+		return dataSource.getProjectsList(currentMenuObjectIndex);
 	}
 
-	public Project getProject(int projectIndex) {
-		// TODO Auto-generated method stub
-		return null;
+	public Project getProject() {
+		return dataSource.getProject(menuHistory.get(Position.Category), currentMenuObjectIndex);
 	}
 }

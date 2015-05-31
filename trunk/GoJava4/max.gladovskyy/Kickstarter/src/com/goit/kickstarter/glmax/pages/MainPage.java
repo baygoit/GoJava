@@ -10,13 +10,14 @@ public class MainPage implements Page {
 	private ArrayList<String> page = new ArrayList<String>();
 	
 	
-	public MainPage(Runner runner, int entetieIndex) {
+	public MainPage(Runner runner) {
 		page.add(runner.getSomeQoute());
 		page.add("");
 		page.add("Plese choose category from list below:");
 		int index = 1;
-		for (Category category : runner.getCategories()) {
-			page.add(index+") "+ category.getName());
+		ArrayList<Category> categories = runner.getCategories();
+		for (Category category : categories) {
+			page.add(categories.indexOf(category)+1+") "+category.getName());
 		}
 	}
 

@@ -6,7 +6,7 @@ import com.goit.kickstarter.glmax.controller.Runner;
 
 public class QuestionPage implements Page {
 
-	public QuestionPage(Runner runner, int entetieIndex) {
+	public QuestionPage(Runner runner) {
 		// TODO Auto-generated constructor stub
 	}
 

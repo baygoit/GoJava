@@ -22,9 +22,6 @@ public class ConsoleView implements View {
 	public void show(Position position) {
 		Page page = pageFactory.getPage(position, runner);
 		output.print(page.getPage());
-		
-		ArrayList<Integer> variantsAmount = runner.getVariantsAmount();
-		runner.process(reader.getFromUser(variantsAmount));
 	}
 
 	@Override
