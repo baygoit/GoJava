@@ -1,25 +1,17 @@
 package kickstarter.Test;
 
-import static org.junit.Assert.*;
-
-import java.util.List;
-
-import junit.framework.TestResult;
-import junit.framework.TestSuite;
 import kickstarter.Runner;
 import kickstarter.mvc.Controller;
 import kickstarter.mvc.interfaces.IndexOfPage;
-import kickstarter.mvc.interfaces.iController;
+
 import kickstarter.mvc.interfaces.iModel;
 import kickstarter.mvc.interfaces.iView;
-import kickstarter.repository.facade.RepositoryException;
-import kickstarter.repository.facade.entity.Category;
+
 import kickstarter.ui.iUserInterface;
 
 import org.junit.Assert;
-import org.junit.Ignore;
+
 import org.junit.Test;
-import org.junit.runner.RunWith;
 
 public class FakeConsole extends Assert {
 	Runner runner;
@@ -28,15 +20,7 @@ public class FakeConsole extends Assert {
 	public iView iview;
 	public iUserInterface ui;
 
-	void put(String command) {
-		System.out.println("_________   " + command + "  _________");
 
-		runner.kickstarter.controller.updateStateOfModel(command);
-	}
-
-	void view() {
-		runner.kickstarter.controller.showPage();
-	}
 
 	public FakeConsole() {
 		runner = new Runner();
@@ -48,8 +32,15 @@ public class FakeConsole extends Assert {
 		iview = runner.kickstarter.getView();
 
 	}
+	void put(String command) {
+		System.out.println("_________   " + command + "  _________");
 
-	
+		runner.kickstarter.controller.updateStateOfModel(command);
+	}
+
+	void view() {
+		runner.kickstarter.controller.showPage();
+	}
 	@Test
 	public void test_all_categories_and_projects() {
 
@@ -65,7 +56,8 @@ public class FakeConsole extends Assert {
 				"i", "999999", "p", "3", "bankir:777", "p", "i", "1", "p", "i",
 				"2", "null", "p", "b800", "p", "bankir:777", "p", "d",
 				"bankir:777:4449", "p", "i", "3", "bankir:777", "p", "d",
-				"bankir:777:3", "null", "p","p","p" ,"p","r","p","p","d","p","r","d","r","i","r","c"};
+				"bankir:777:3", "null", "p", "p", "p", "p", "r", "p", "p", "d",
+				"p", "r", "d", "r", "i", "r", "c" };
 
 		for (String command : commands) {
 			view();
@@ -74,7 +66,8 @@ public class FakeConsole extends Assert {
 		view();
 
 	}
-//@Ignore
+
+	// @Ignore
 	@Test
 	public void test_categories_model() {
 
@@ -84,24 +77,23 @@ public class FakeConsole extends Assert {
 		controller.updateStateOfModel("1");
 		int page = imodel.getCurrentPage();
 		assertEquals(IndexOfPage.PROJECTS.ordinal(), page);
-		
+
 		imodel.setPage(0);
 		controller.updateStateOfModel("2");
 		page = imodel.getCurrentPage();
 		assertEquals(IndexOfPage.PROJECTS.ordinal(), page);
-		
+
 		imodel.setPage(0);
 		controller.updateStateOfModel("3");
 		page = imodel.getCurrentPage();
 		assertEquals(IndexOfPage.ERROR_PAGE.ordinal(), page);
-		
+
 		imodel.setPage(0);
 		iview.getViewValues().setStrCategories(null);
 		controller.updateStateOfModel("1");
 		page = imodel.getCurrentPage();
 		assertEquals(IndexOfPage.ERROR_PAGE.ordinal(), page);
-		
-		
 
 	}
+
 }

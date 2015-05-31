@@ -16,13 +16,14 @@ public class test_comments_repository {
 	@Test
 	public void test() {
 		commentsRepository=new CommentsRepository();
-		projectComment= new ProjectComment(0, 0, "new");
+		projectComment.setComment("new");
 		commentsRepository.addComment(projectComment);
 		
 	List<ProjectComment> listOfCommentsByProjectID=commentsRepository.getCommentsByProjectID(0);
 	;
 	assertEquals(listOfCommentsByProjectID.get(0).getComment(), "new");
-	projectComment= new ProjectComment(0, 0, "new2");
+	projectComment= new ProjectComment();
+	projectComment.setComment("new2");
 	commentsRepository.addComment(projectComment);
 	assertEquals(listOfCommentsByProjectID.get(1).getComment(), "new2");
 	

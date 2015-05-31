@@ -18,8 +18,10 @@ public class CommentModel extends PageModel {
 		String[] array = message.split(":");
 		if (array[0].equals("a") && array.length == 2) {
 
-			ProjectComment projectComment = new ProjectComment(projectID, 1,
-					array[1]);
+			ProjectComment projectComment = new ProjectComment();
+			projectComment.setProjectID(projectID);
+			projectComment.setUserID(1);
+			projectComment.setComment(array[1]);
 			repository.addNewComment(projectComment);
 
 			imodel.next(IndexOfPage.DETAILED_PROJECT.ordinal());

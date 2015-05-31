@@ -91,6 +91,7 @@ public class Runner {
 		controller.initModel(model);
 		controller.setPage(IndexOfPage.CATEGORIES.ordinal());
 		controller.setInMemoryRepository();
+		//controller.setFileSystemRepository();
 		controller.setFileNameOfRepository("repository");
 
 	}

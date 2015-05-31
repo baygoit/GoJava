@@ -2,6 +2,10 @@ package kickstarter.repository.facade.entity;
 
 import java.io.Serializable;
 
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+@XmlRootElement
 public class Project implements Serializable {
 
 	private static final long serialVersionUID = 266139065309641330L;
@@ -18,15 +22,10 @@ public class Project implements Serializable {
 	private int categoryID;
 	private String[] investmentOptions;
 
-	public Project(String name, int categoryID) {
-		this.name = name;
-		this.categoryID = categoryID;
-	}
-
 	public String getName() {
 		return name;
 	}
-
+	@XmlElement
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -34,7 +33,7 @@ public class Project implements Serializable {
 	public String getDescription() {
 		return description;
 	}
-
+	@XmlElement
 	public void setDescription(String description) {
 		this.description = description;
 	}
@@ -42,7 +41,7 @@ public class Project implements Serializable {
 	public String getShortDescription() {
 		return shortDescription;
 	}
-
+	@XmlElement
 	public void setShortDescription(String shortDescription) {
 		this.shortDescription = shortDescription;
 	}
@@ -50,7 +49,7 @@ public class Project implements Serializable {
 	public String getHistory() {
 		return history;
 	}
-
+	@XmlElement
 	public void setHistory(String history) {
 		this.history = history;
 	}
@@ -58,7 +57,7 @@ public class Project implements Serializable {
 	public int getID() {
 		return ID;
 	}
-
+	@XmlAttribute
 	public void setID(int iD) {
 		ID = iD;
 	}
@@ -66,7 +65,7 @@ public class Project implements Serializable {
 	public int getGoal() {
 		return goal;
 	}
-
+	@XmlAttribute
 	public void setGoal(int goal) {
 		this.goal = goal;
 	}
@@ -74,7 +73,7 @@ public class Project implements Serializable {
 	public double getPledged() {
 		return pledged;
 	}
-
+	@XmlAttribute
 	public void setPledged(double pledged) {
 		this.pledged = pledged;
 	}
@@ -82,7 +81,7 @@ public class Project implements Serializable {
 	public int getDaysToGo() {
 		return daysToGo;
 	}
-
+	@XmlAttribute
 	public void setDaysToGo(int daysToGo) {
 		this.daysToGo = daysToGo;
 	}
@@ -90,7 +89,7 @@ public class Project implements Serializable {
 	public String getLinkToVideo() {
 		return linkToVideo;
 	}
-
+	@XmlElement
 	public void setLinkToVideo(String linkToVideo) {
 		this.linkToVideo = linkToVideo;
 	}
@@ -98,7 +97,7 @@ public class Project implements Serializable {
 	public int getCategoryID() {
 		return categoryID;
 	}
-
+	@XmlAttribute
 	public void setCategoryID(int categoryID) {
 		this.categoryID = categoryID;
 	}
@@ -106,7 +105,7 @@ public class Project implements Serializable {
 	public String[] getInvestmentOptions() {
 		return investmentOptions;
 	}
-
+	@XmlElement
 	public void setInvestmentOptions(String[] investmentOptions) {
 		this.investmentOptions = investmentOptions;
 	}
@@ -114,7 +113,7 @@ public class Project implements Serializable {
 	public double[] getAmount() {
 		return amount;
 	}
-
+	@XmlAttribute
 	public void setAmount(double[] amount) {
 		this.amount = amount;
 	}
