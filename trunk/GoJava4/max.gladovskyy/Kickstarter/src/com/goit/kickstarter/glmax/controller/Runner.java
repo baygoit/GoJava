@@ -3,6 +3,7 @@ package com.goit.kickstarter.glmax.controller;
 import java.util.*;
 
 import com.goit.kickstarter.glmax.enteties.Category;
+import com.goit.kickstarter.glmax.enteties.PaymentVariants;
 import com.goit.kickstarter.glmax.enteties.Project;
 import com.goit.kickstarter.glmax.model.*;
 import com.goit.kickstarter.glmax.view.*;
@@ -106,5 +107,9 @@ public class Runner {
 
 	public Project getProject() {
 		return dataSource.getProject(menuHistory.get(Position.Category), currentMenuObjectIndex);
+	}
+
+	public PaymentVariants getpaymentVariants() {
+		return dataSource.getpaymentVariants(menuHistory.get(Position.Category), menuHistory.get(Position.Project));
 	}
 }

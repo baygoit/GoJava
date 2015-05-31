@@ -19,12 +19,16 @@ public class ProjectPage implements Page {
 		page.add("");
 		page.add("Money needed: " + project.getAmountNeeded());
 		page.add("Money Collected: " + project.getAmountCollected());
+		page.add("");
 		page.add("Days left: " + project.getDaysLeft());
 		page.add("History: " + project.getHistory());
 		page.add("Video URL: " + project.getVideoURL());
 		page.add("QA's: " + project.getQuestionsAndAnswers());
 		page.add("");
+		page.add("1) Donate");
+		page.add("2) Ask a question");
 		page.add("0) Exit");
+		page.add("");
 	}
 
 	@Override

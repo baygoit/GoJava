@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.goit.kickstarter.glmax.controller.Position;
 import com.goit.kickstarter.glmax.enteties.Category;
+import com.goit.kickstarter.glmax.enteties.PaymentVariants;
 import com.goit.kickstarter.glmax.enteties.Project;
 
 public interface DataSource {
@@ -22,5 +23,7 @@ public interface DataSource {
 	ArrayList<Integer> getChoisList(Position currentLevel, Integer integer);
 
 	void persistData();
+
+	PaymentVariants getpaymentVariants(Integer integer, Integer currentMenuObjectIndex);
 
 }

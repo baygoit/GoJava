@@ -4,11 +4,13 @@ import java.util.*;
 
 import com.goit.kickstarter.glmax.controller.Position;
 import com.goit.kickstarter.glmax.enteties.Category;
+import com.goit.kickstarter.glmax.enteties.PaymentVariants;
 import com.goit.kickstarter.glmax.enteties.Project;
 
 public class LocalDataSource implements DataSource {
 	private ArrayList<Category> categories = new ArrayList<Category>();
 	private HashMap<Category, ArrayList<Project>> projects = new HashMap<Category, ArrayList<Project>>();
+	private HashMap<Project, PaymentVariants> payments = new HashMap<Project, PaymentVariants>();
 
 	public LocalDataSource() {
 		for (int i = 0; i < 6; i++) {
@@ -16,11 +18,17 @@ public class LocalDataSource implements DataSource {
 			categories.add(category);
 			projects.put(category, new ArrayList<Project>());
 			for (int j = 0; j < 6; j++) {
-				Project project = new Project(i * j, "project " + i * j,
+				Project project = new Project(i * 10 + j, "project " + i * j,
 						"short description of project" + i * j, i * j * 10, i
-								* j, i * j / 2, "some histry", "video URL",
-						null);
+								* j, i * j / 2, "some histry",
+						"www.youtube.com/?video=" + i * 10 + j + "LkmSk/", null);
 				projects.get(category).add(project);
+				HashMap<String, Integer> payment = new HashMap<String, Integer>();
+				payment.put("discount", 100 * j);
+				payment.put("free one", 200 * j);
+				PaymentVariants paymentVariants = new PaymentVariants(i * 100
+						+ j * 10, payment);
+				payments.put(project, paymentVariants);
 			}
 		}
 	}
@@ -50,20 +58,20 @@ public class LocalDataSource implements DataSource {
 		return getProjectsList(categoryIndex).get(projectIndex - 1);
 	}
 
-
 	@Override
 	public ArrayList<Integer> getChoisList(Position currentLevel,
 			Integer currentMenuObjectIndex) {
 		ArrayList<Integer> result = new ArrayList<Integer>();
-		
+
 		if (currentLevel == Position.Main) {
 			for (Category category : categories) {
-				result.add(result.size()+1);
+				result.add(result.size() + 1);
 			}
 			result.add(0);
 		} else if (currentLevel == Position.Category) {
-			for (Project project : projects.get(categories.get(currentMenuObjectIndex))) {
-				result.add(result.size()+1);
+			for (Project project : projects.get(categories
+					.get(currentMenuObjectIndex))) {
+				result.add(result.size() + 1);
 			}
 			result.add(0);
 		} else if (currentLevel == Position.Project) {
@@ -71,8 +79,13 @@ public class LocalDataSource implements DataSource {
 			result.add(2);
 			result.add(0);
 		} else if (currentLevel == Position.Payment) {
+			for (Map.Entry<String, Integer> paymentVariant : payments.get(projects
+					.get(currentMenuObjectIndex))) {
+				result.add(result.size() + 1);
+			}
 			result.add(0);
 		} else if (currentLevel == Position.Question) {
+			// TODO
 			result.add(0);
 		}
 		return result;
@@ -81,8 +94,14 @@ public class LocalDataSource implements DataSource {
 	@Override
 	public void persistData() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
+	@Override
+	public PaymentVariants getpaymentVariants(Integer categoryIndex,
+			Integer projectIndex) {
+		return payments.get(getProjectsList(categoryIndex)
+				.get(projectIndex - 1));
+	}
 
 }
