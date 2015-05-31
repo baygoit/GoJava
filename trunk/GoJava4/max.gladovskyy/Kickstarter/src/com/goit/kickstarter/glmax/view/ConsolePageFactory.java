@@ -21,7 +21,7 @@ public class ConsolePageFactory implements PageFactory {
 
 	@Override
 	public Page getPage(Position position, Runner runner) {
-		Page page;
+		Page page = null;
 		int entetieIndex = runner.getCurrentEntetieIndex();
 
 		if (cache.get(position).containsKey(entetieIndex)) {

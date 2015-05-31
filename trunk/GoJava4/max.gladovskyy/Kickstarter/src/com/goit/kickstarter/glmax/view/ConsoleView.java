@@ -1,5 +1,8 @@
 package com.goit.kickstarter.glmax.view;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.goit.kickstarter.glmax.controller.*;
 import com.goit.kickstarter.glmax.pages.*;
 
@@ -9,8 +12,7 @@ public class ConsoleView implements View {
 	private Input reader;
 	private Output output;
 
-	public ConsoleView(Runner runner) {
-		this.runner = runner;
+	public ConsoleView() {
 		this.pageFactory = new ConsolePageFactory();
 		this.reader = new ConsoleIn();
 		this.output = new ConsoleOut();
@@ -19,10 +21,19 @@ public class ConsoleView implements View {
 	@Override
 	public void show(Position position) {
 		Page page = pageFactory.getPage(position, runner);
-		page.print(output);
+		output.print(page.getPage());
 		
-		int variantsAmount = runner.getVariantsAmount();
+		ArrayList<Integer> variantsAmount = runner.getVariantsAmount();
 		runner.process(reader.getFromUser(variantsAmount));
+	}
+
+	@Override
+	public int getUserAction(ArrayList<Integer> choisList) {
+		return reader.getFromUser(choisList);
+	}
+
+	public void setRunner(Runner runner) {
+		this.runner = runner;
 	}
 
 }

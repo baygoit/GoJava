@@ -3,22 +3,18 @@ package com.goit.kickstarter.glmax.pages;
 import java.util.ArrayList;
 
 import com.goit.kickstarter.glmax.controller.Kickstarter;
+import com.goit.kickstarter.glmax.controller.Runner;
 import com.goit.kickstarter.glmax.enteties.Project;
 import com.goit.kickstarter.glmax.model.DataSource;
 
 public class ProjectPage implements Page {
-	private DataSource dataSource = Kickstarter.getDataSource();
 	private ArrayList<String> page = new ArrayList<String>();
 	private Project project;
 
 	
 	
-	public ProjectPage(int category, int project) {
-		this.project = dataSource.getProject(category, project);
-	}
-
-	@Override
-	public ArrayList<String> getPage() {
+	public ProjectPage(Runner runner, int projectIndex) {
+		this.project = runner.getProject(projectIndex);
 		page.add("You in project: " + project.getName());
 		page.add("");
 		page.add("Money needed: " + project.getAmountNeeded());
@@ -29,6 +25,10 @@ public class ProjectPage implements Page {
 		page.add("QA's: " + project.getQuestionsAndAnswers());
 		page.add("");
 		page.add("0) Exit");
+	}
+
+	@Override
+	public ArrayList<String> getPage() {
 		return page;
 	}
 

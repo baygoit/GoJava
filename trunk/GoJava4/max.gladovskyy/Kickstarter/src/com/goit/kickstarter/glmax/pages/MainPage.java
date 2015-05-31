@@ -2,12 +2,8 @@ package com.goit.kickstarter.glmax.pages;
 
 import java.util.ArrayList;
 
-import com.goit.kickstarter.glmax.controller.Kickstarter;
 import com.goit.kickstarter.glmax.controller.Runner;
 import com.goit.kickstarter.glmax.enteties.Category;
-import com.goit.kickstarter.glmax.enteties.Quote;
-import com.goit.kickstarter.glmax.model.DataSource;
-import com.goit.kickstarter.glmax.view.Output;
 
 public class MainPage implements Page {
 	
