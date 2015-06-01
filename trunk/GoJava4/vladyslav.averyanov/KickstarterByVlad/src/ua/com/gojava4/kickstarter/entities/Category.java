@@ -1,10 +1,10 @@
 package ua.com.gojava4.kickstarter.entities;
 
-public class categoryRepository {
+public class Category {
 	
 	private String name;
 	
-	public categoryRepository(String name){
+	public Category(String name){
 		this.name = name;
 	}
 	
