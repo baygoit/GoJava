@@ -1,7 +1,5 @@
 package ua.com.gojava4.kickstarter.entities;
 
-import java.util.Locale.Category;
-
 public class Project {
 
 	private String name;

@@ -1,17 +1,19 @@
 package ua.com.gojava4.kickstarter.model.repositories;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import ua.com.gojava4.kickstarter.entities.Quote;
 
 public class QuotesRepository {
-	private ArrayList<Quote> quotes;
+	
 	private Repository repository;
+	private List<Quote> quotes;
 
 	public QuotesRepository(Repository repository) {
-		quotes = new ArrayList<>();
 		this.repository = repository;
+		quotes = new ArrayList<>();
 		initialize();
 	}
 
@@ -20,13 +22,9 @@ public class QuotesRepository {
 		return quotes.get(randomQuoteIndex);
 	}
 
-	public void add(Quote quote) {
-		quotes.add(quote);
-	}
-
 	private void initialize() {
 		try {
-			quotes.addAll(repository.getAllQuotes());
+			quotes = repository.getAllQuotes();
 		} catch (NullPointerException e) {
 			add(new Quote(
 					"Life isn't about finding yourself. Life is about creating yourself.",
@@ -44,6 +42,10 @@ public class QuotesRepository {
 					"My favorite things in life don't cost any money. It's really clear\n that the most precious resource we all have is time.",
 					"(c)Author"));
 		}
+	}
+	
+	public void add(Quote quote) {
+		quotes.add(quote);
 	}
 
 }

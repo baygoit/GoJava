@@ -1,17 +1,17 @@
 package ua.com.gojava4.kickstarter.model.repositories;
 
 import java.util.List;
-import java.util.Locale.Category;
 
-import ua.com.gojava4.kickstarter.entities.Project;
 import ua.com.gojava4.kickstarter.entities.Quote;
+import ua.com.gojava4.kickstarter.entities.Category;
+import ua.com.gojava4.kickstarter.entities.Project;
 
 public interface Repository {
 
 	List<Quote> getAllQuotes();
 
-	List<Project> getAllProjects();
-
 	List<Category> getAllCategories();
+
+	List<Project> getAllProjects();
 
 }
