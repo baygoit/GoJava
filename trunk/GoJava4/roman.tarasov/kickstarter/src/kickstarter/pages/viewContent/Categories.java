@@ -6,6 +6,7 @@ import kickstarter.mvc.viewState.ViewValues;
 import kickstarter.repository.facade.RepositoryException;
 import kickstarter.repository.facade.entity.Category;
 import kickstarter.repository.facade.entity.Quote;
+import kickstarter.repository.facade.entityRepositories.IDcontent;
 
 public class Categories extends PageView {
 
@@ -37,12 +38,12 @@ public class Categories extends PageView {
 	private String getListAllCategories() throws RepositoryException {
 
 		StringBuilder result = new StringBuilder();
-		List<Category> listAllCategories = repository.getListAllCategories();
+		List<IDcontent> listAllCategories = repository.getListAllCategories();
 		int length = listAllCategories.size();
 		strValues = new String[length];
 		intValues = new int[length];
 		for (int index = 0; index < length; index++) {
-			Category currentCategory = listAllCategories.get(index);
+			Category currentCategory = (Category) listAllCategories.get(index);
 
 			result.append("ID:<");
 			result.append(currentCategory.getID());

@@ -33,6 +33,7 @@ import kickstarter.payment.Bank;
 import kickstarter.repository.facade.FileRepositoryDriver;
 import kickstarter.repository.facade.MemoryRepository;
 import kickstarter.repository.facade.RepositoryException;
+import kickstarter.repository.facade.iRepository;
 import kickstarter.ui.ConsoleUI;
 import kickstarter.ui.iUserInterface;
 
@@ -57,14 +58,14 @@ public class Runner {
 		Model model = new Model();
 		View view = new View(ui);
 
-		createFileSystemRepository(memoryRepository);
+		
 		Controller controller = new Controller();
 		iController icontroller = controller;
 		modelInit(model, bank, icontroller);
 		viewInit(view, bank);
 		controllerInit(controller, view, model, fileRepositoryDriver,
 				memoryRepository);
-
+		createFileSystemRepository(fileRepositoryDriver,memoryRepository);
 		kickstarter = Kickstarter.getInstance();
 		kickstarter.setController(controller);
 		kickstarter.setView(view);
@@ -72,9 +73,12 @@ public class Runner {
 		kickstarter.setUI(ui);
 	}
 
-	private void createFileSystemRepository(MemoryRepository inMemoryRepository) {
+	private void createFileSystemRepository(FileRepositoryDriver fileRepositoryDriver,MemoryRepository memoryRepository) {
+		iRepository idriver=fileRepositoryDriver;
+		iRepository imemory=memoryRepository;
+		idriver.setAllRepositories(imemory.getAllRepositories());
 		try {
-			inMemoryRepository.createFileSystemRepository();
+			fileRepositoryDriver.createFileSystemRepository();
 		} catch (RepositoryException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -5,8 +5,10 @@ import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+
+import kickstarter.repository.facade.entityRepositories.IDcontent;
 @XmlRootElement
-public class Quote implements Serializable {
+public class Quote extends IDcontent implements Serializable {
 
 	private static final long serialVersionUID = -7060451318379559888L;
 	private String quote;

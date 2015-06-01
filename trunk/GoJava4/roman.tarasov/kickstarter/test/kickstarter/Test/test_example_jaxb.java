@@ -5,61 +5,89 @@ import static org.junit.Assert.*;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
-
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
-import javax.xml.bind.Unmarshaller;
-
+import kickstarter.repository.facade.RepositoryException;
 import kickstarter.repository.facade.entity.Category;
-
+import kickstarter.repository.facade.entity.Project;
+import kickstarter.repository.facade.entityRepositories.ArrayListExtendedByID;
+import kickstarter.repository.facade.entityRepositories.IDcontent;
+import kickstarter.repository.facade.entityRepositories.IRepository;
+import kickstarter.repository.facade.entityRepositories.Repository;
 import org.junit.Ignore;
 import org.junit.Test;
 
 public class test_example_jaxb {
-	@Ignore
+	IRepository<IDcontent> categories;
+	IRepository<IDcontent> projects;
+
+	// @Ignore
 	@Test
-	public void test() {
-		Category categoryToMarshall = new Category();
-		categoryToMarshall.setName("test");
-		categoryToMarshall.setID(20);
+	public void copyRepositoryToFiles() {
+		Repository<Category> categoriesRepository = new Repository<Category>();
+		Repository<Project> projectsRepository = new Repository<Project>();
+		projects = projectsRepository;
+		categories = categoriesRepository;
+		Category category = new Category();
+		category.setName("category");
+		category.setID(20);
+		categories.addEntity(category);
+
+		Project project = new Project();
+		project.setID(8);
+		project.setName("project");
+		projects.addEntity(project);
+
+		String path = "icategories/test";
+		String fileName = "/categoryID.";
 
 		try {
-			try {
-				if (Files.notExists(Paths.get("categories"))) {
-					Files.createDirectory(Paths.get("categories"));
-				}
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			creatorFilesFromList(categories, path, fileName);
+		} catch (RepositoryException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		path = "iprojects/test";
+		fileName = "/projectID.";
+
+		try {
+			creatorFilesFromList(projects, path, fileName);
+		} catch (RepositoryException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
+	<T> void creatorFilesFromList(IRepository<IDcontent> irepository,
+			String path, String fileName) throws RepositoryException {
+		try {
+			if (Files.notExists(Paths.get(path))) {
+				Files.createDirectory(Paths.get(path));
 			}
-			File file = new File("./categories/file.xml");
-			JAXBContext jaxbContext = JAXBContext.newInstance(Category.class);
-			Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
-			jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-			jaxbMarshaller.marshal(categoryToMarshall, file);
-
-		} catch (JAXBException e) {
-			e.printStackTrace();
+		} catch (IOException e) {
+			throw new RepositoryException("Error directory creation");
 		}
-		Category categoryFromUnmarshall = null;
-		try {
+		ArrayListExtendedByID<IDcontent> entityList = irepository.getList();
+		for (IDcontent entity : entityList) {
+			try {
+				File file = new File(path + fileName
+						+ Integer.toString(entity.getID()) + ".xml");
 
-			File file = new File("./categories/file.xml");
-			JAXBContext jaxbContext = JAXBContext.newInstance(Category.class);
+				JAXBContext jaxbContext = JAXBContext.newInstance(entity
+						.getClass());
+				Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
+				jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT,
+						true);
+				jaxbMarshaller.marshal(entity, file);
 
-			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-			categoryFromUnmarshall = (Category) jaxbUnmarshaller
-					.unmarshal(file);
-
-		} catch (JAXBException e) {
-			e.printStackTrace();
+			} catch (JAXBException e) {
+				throw new RepositoryException(" marshalling error");
+			}
 		}
-		assertEquals("test", categoryFromUnmarshall.getName());
-		assertEquals(20, categoryFromUnmarshall.getID());
-
 	}
 
 }

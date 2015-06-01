@@ -6,6 +6,7 @@ import java.util.List;
 
 import kickstarter.repository.facade.entity.Category;
 
+
 public class CategoriesRepository implements Serializable {
 
 	private static final long serialVersionUID = -3600780897479968861L;
@@ -17,11 +18,21 @@ public class CategoriesRepository implements Serializable {
 	}
 
 	public void setCategories(List<Category> categoriesToCopy) {
-		
+
 		categories = new ArrayList<Category>();
 		for (Category category : categoriesToCopy) {
 			categories.add(category);
 		}
+	}
+
+	public void addCategory(Category categoryToList) {
+
+		if (categories != null) {
+			categories.add(categoryToList);
+			return;
+		}
+		categories = new ArrayList<Category>();
+		categories.add(categoryToList);
 	}
 
 }

@@ -1,63 +1,66 @@
 package kickstarter.repository.facade;
 
-import java.io.File;
-import java.io.IOException;
 import java.io.Serializable;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
+
 import kickstarter.repository.facade.entity.Category;
 import kickstarter.repository.facade.entity.Project;
 import kickstarter.repository.facade.entity.ProjectComment;
 import kickstarter.repository.facade.entity.Quote;
-import kickstarter.repository.facade.entityRepositories.CategoriesRepository;
 import kickstarter.repository.facade.entityRepositories.CommentsRepository;
-import kickstarter.repository.facade.entityRepositories.ProjectsRepository;
-import kickstarter.repository.facade.entityRepositories.QuotesRepository;
+import kickstarter.repository.facade.entityRepositories.IDcontent;
+import kickstarter.repository.facade.entityRepositories.IRepository;
+import kickstarter.repository.facade.entityRepositories.Repository;
 
 public class MemoryRepository implements iRepository, Serializable {
 
 	private static final long serialVersionUID = -9048596809324290852L;
-	private List<Quote> quotes;
-	private List<Category> categories;
-	private List<Project> projects;
-	private QuotesRepository quotesRepository;
-	private CategoriesRepository categoriesRepository;
 	private CommentsRepository commentsRepository;
-	private ProjectsRepository projectsRepository;
+
+	private Repository<Quote> quotesRepository;
+	private Repository<Category> categoriesRepository;
+	private Repository<Project> projectsRepository;
+
+	private IRepository<IDcontent> icategories;
+	private IRepository<IDcontent> iprojects;
+	private IRepository<IDcontent> iquotes;
+
+	private ArrayList<IRepository<IDcontent>> allRepositories;
 
 	public MemoryRepository() {
-		quotesRepository = new QuotesRepository();
-		quotes = new ArrayList<Quote>();
+		allRepositories = new ArrayList<IRepository<IDcontent>>();
+
+		quotesRepository = new Repository<Quote>();
+		iquotes = quotesRepository;
+		iquotes.setEntityName("quote");
+		iquotes.setFolderName("Quotes");
 		Quote quote = new Quote();
 		quote.setID(1);
-		quote.setQuote("Explore projects, everywhere");
-		quotes.add(quote);
+		quote.setQuote("Explore iprojects, everywhere");
+		iquotes.addEntity(quote);
 
 		quote = new Quote();
 		quote.setID(2);
 		quote.setQuote("'To be is to do'—Socrates. 'To do is to be'—Jean-Paul Sartre. 'Do be do be do'—Frank Sinatra");
-		quotes.add(quote);
-		quotesRepository.setQuotes(quotes);
+		iquotes.addEntity(quote);
 
 		// ----------------------------------------------------------
-		categoriesRepository = new CategoriesRepository();
-		categories = new ArrayList<Category>();
+		categoriesRepository = new Repository<Category>();
+		icategories = categoriesRepository;
+		icategories.setEntityName("category");
+		icategories.setFolderName("Categories");
 		Category category = new Category();
 		category.setID(5);
 		category.setName("Technology");
-		categories.add(category);
+		icategories.addEntity(category);
 
 		category = new Category();
 		category.setID(4);
 		category.setName("Social");
-		categories.add(category);
-		categoriesRepository.setCategories(categories);
+		icategories.addEntity(category);
+
 		// ----------------------------------------------------------
 		commentsRepository = new CommentsRepository();
 
@@ -96,10 +99,12 @@ public class MemoryRepository implements iRepository, Serializable {
 		comment.setComment("Will your company be considering a camera module, fingerprint scanner or a capacitive lcd/led display with fingerprint scanner ability?");
 		commentsRepository.addComment(comment);
 		// ----------------------------------------------------------
-		projectsRepository = new ProjectsRepository();
-
+		projectsRepository = new Repository<Project>();
+		iprojects = projectsRepository;
+		iprojects.setEntityName("project");
+		iprojects.setFolderName("Projects");
 		int categoryID = 5;
-		projects = new ArrayList<Project>();
+
 		Project project = new Project();
 		project.setCategoryID(categoryID);
 		project.setName("Create electrobike");
@@ -112,7 +117,7 @@ public class MemoryRepository implements iRepository, Serializable {
 		project.setID(23);
 		project.setInvestmentOptions(new String[] { "1$ - ", "10$ -", "40$ -" });
 		project.setAmount(new double[] { 1, 10, 40 });
-		projects.add(project);
+		iprojects.addEntity(project);
 
 		categoryID = 4;
 		project = new Project();
@@ -122,7 +127,7 @@ public class MemoryRepository implements iRepository, Serializable {
 		project.setInvestmentOptions(new String[] { "1$ - ", "10$ -", "40$ -" });
 		project.setAmount(new double[] { 1, 10, 40 });
 		project.setID(8);
-		projects.add(project);
+		iprojects.addEntity(project);
 
 		categoryID = 4;
 		project = new Project();
@@ -136,7 +141,7 @@ public class MemoryRepository implements iRepository, Serializable {
 		project.setPledged(5000);
 		project.setGoal(10000);
 		project.setID(1);
-		projects.add(project);
+		iprojects.addEntity(project);
 
 		categoryID = 5;
 		project = new Project();
@@ -151,184 +156,17 @@ public class MemoryRepository implements iRepository, Serializable {
 		project.setID(20);
 		project.setInvestmentOptions(new String[] { "10$ - ", "20$ -", "100$ -" });
 		project.setAmount(new double[] { 10, 20, 100 });
-		projects.add(project);
-		projectsRepository.setProjects(projects);
+		iprojects.addEntity(project);
+		allRepositories.add(iprojects);
+		allRepositories.add(icategories);
+		allRepositories.add(iquotes);
 
 	}
 
 	@Override
-	public Category getCategory(int index) {
-		return categories.get(index);
-	}
+	public ArrayList<IRepository<IDcontent>> getAllRepositories() {
+		return allRepositories;
 
-	@Override
-	public int getCategoriesLength() {
-		return categories.size();
-	}
-
-	@Override
-	public Quote getRandomQuote() {
-		return quotes.get(new Random().nextInt(quotes.size()));
-	}
-
-	@Override
-	public int getProjectsLength() {
-		return projects.size();
-	}
-
-	@Override
-	public Project getProjectByIndex(int index) {
-		return projects.get(index);
-	}
-
-	@Override
-	public Project getProjectById(int ID) {
-		int length = projects.size();
-
-		for (int index = 0; index < length; index++) {
-			Project currentProject = projects.get(index);
-			if (currentProject.getID() == ID) {
-				return currentProject;
-			}
-		}
-		return null;
-	}
-
-	@Override
-	public List<Category> getListAllCategories() {
-		return categories;
-	}
-
-	@Override
-	public void addNewComment(ProjectComment comment) {
-		commentsRepository.addComment(comment);
-	}
-
-	@Override
-	public void createFileSystemRepository() throws RepositoryException {
-		createRepositoryDir();
-		createCategoriesDir();
-		createProjectsDir();
-		createQuotesDir();
-		createCommentsDir();
-	}
-
-	private void createRepositoryDir() throws RepositoryException {
-		try {
-			if (Files.notExists(Paths.get("repository"))) {
-				Files.createDirectory(Paths.get("repository"));
-			}
-		} catch (IOException e) {
-			throw new RepositoryException("Error repository directory creation");
-		}
-	}
-
-	private void createCategoriesDir() throws RepositoryException {
-		try {
-			if (Files.notExists(Paths.get("repository/categories"))) {
-				Files.createDirectory(Paths.get("repository/categories"));
-			}
-		} catch (IOException e) {
-			throw new RepositoryException("Error categories directory creation");
-		}
-		for (Category category : categoriesRepository.getCategories()) {
-			try {
-				File file = new File("repository/categories/categoryID."
-						+ Integer.toString(category.getID()) + ".xml");
-				JAXBContext jaxbContext = JAXBContext
-						.newInstance(Category.class);
-				Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
-				jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT,
-						true);
-				jaxbMarshaller.marshal(category, file);
-
-			} catch (JAXBException e) {
-				throw new RepositoryException("categories marshalling error");
-			}
-		}
-	}
-
-	private void createProjectsDir() throws RepositoryException {
-		try {
-			if (Files.notExists(Paths.get("repository/projects"))) {
-				Files.createDirectory(Paths.get("repository/projects"));
-			}
-		} catch (IOException e) {
-			throw new RepositoryException("Error projects directory creation");
-		}
-		for (Project project : projectsRepository.getProjects()) {
-			try {
-				File file = new File("repository/projects/projectID."
-						+ Integer.toString(project.getID()) + ".xml");
-				JAXBContext jaxbContext = JAXBContext
-						.newInstance(Project.class);
-				Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
-				jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT,
-						true);
-				jaxbMarshaller.marshal(project, file);
-
-			} catch (JAXBException e) {
-				throw new RepositoryException("projects marshalling error");
-			}
-		}
-	}
-
-	private void createQuotesDir() throws RepositoryException {
-		try {
-			if (Files.notExists(Paths.get("repository/quotes"))) {
-				Files.createDirectory(Paths.get("repository/quotes"));
-			}
-		} catch (IOException e) {
-			throw new RepositoryException("Error quotes directory creation");
-		}
-		for (Quote quote : quotesRepository.getQuotes()) {
-			try {
-				File file = new File("repository/quotes/quoteID."
-						+ Integer.toString(quote.getID()) + ".xml");
-				JAXBContext jaxbContext = JAXBContext.newInstance(Quote.class);
-				Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
-				jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT,
-						true);
-				jaxbMarshaller.marshal(quote, file);
-
-			} catch (JAXBException e) {
-				throw new RepositoryException("quotes marshalling error");
-			}
-		}
-	}
-
-	private void createCommentsDir() throws RepositoryException {
-		try {
-			if (Files.notExists(Paths.get("repository/comments"))) {
-				Files.createDirectory(Paths.get("repository/comments"));
-			}
-		} catch (IOException e) {
-			throw new RepositoryException("Error comments directory creation");
-		}
-		for (Project project : projectsRepository.getProjects()) {
-			if (commentsRepository.getCommentLength(project.getID()) != 0) {
-				for (ProjectComment projectComment : commentsRepository
-						.getCommentsByProjectID(project.getID())) {
-					try {
-						File file = new File("repository/comments/"
-								+ "commentsOfProjectID."
-								+ Integer.toString(projectComment
-										.getProjectID()) + ".xml");
-						JAXBContext jaxbContext = JAXBContext
-								.newInstance(ProjectComment.class);
-						Marshaller jaxbMarshaller = jaxbContext
-								.createMarshaller();
-						jaxbMarshaller.setProperty(
-								Marshaller.JAXB_FORMATTED_OUTPUT, true);
-						jaxbMarshaller.marshal(projectComment, file);
-
-					} catch (JAXBException e) {
-						throw new RepositoryException(
-								"comments marshalling error");
-					}
-				}
-			}
-		}
 	}
 
 	@Override
@@ -346,5 +184,71 @@ public class MemoryRepository implements iRepository, Serializable {
 	public void deleteComment(int projectID, int commentID)
 			throws RepositoryException {
 		commentsRepository.deleteComment(projectID, commentID);
+	}
+
+	@Override
+	public Category getCategory(int index) {
+		return null;
+		// return icategories.get(index);
+	}
+
+	@Override
+	public int getCategoriesLength() {
+		return 0;
+		// return icategories.size();
+	}
+
+	@Override
+	public Quote getRandomQuote() {
+		 List<IDcontent> list = quotesRepository.getList();
+		return (Quote) quotesRepository.getList().get(
+				new Random().nextInt(list.size()));
+
+	}
+
+	@Override
+	public int getProjectsLength() {
+		return 0;
+		// return iprojects.size();
+	}
+
+	@Override
+	public Project getProjectByIndex(int index) {
+		List<IDcontent>  list = projectsRepository.getList();
+		return (Project) list.get(index);
+		
+	}
+
+	@Override
+	public Project getProjectById(int ID) {
+		List<IDcontent> list = projectsRepository.getList();
+
+		int length = list.size();
+
+		for (int index = 0; index < length; index++) {
+			Project currentProject = (Project) list.get(index);
+			if (currentProject.getID() == ID) {
+				return currentProject;
+			}
+		}
+		return null;
+	}
+
+	@Override
+	public   List<IDcontent> getListAllCategories() {
+		List<IDcontent> list = categoriesRepository.getList();
+		return  list;
+	}
+
+	@Override
+	public void addNewComment(ProjectComment comment) {
+		commentsRepository.addComment(comment);
+	}
+
+	@Override
+	public void setAllRepositories(
+			ArrayList<IRepository<IDcontent>> allRepositories) {
+		// TODO Auto-generated method stub
+
 	}
 }

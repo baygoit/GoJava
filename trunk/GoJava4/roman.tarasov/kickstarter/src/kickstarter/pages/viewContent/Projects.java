@@ -15,8 +15,11 @@ public class Projects extends PageView {
 
 		List<Project> sortedProjects = new ArrayList<Project>();
 		int length = repository.getProjectsLength();
+		System.out.println("-============================="+length);
 		for (int index = 0; index < length; index++) {
+			//project = repository.getProjectByIndex(index);
 			project = repository.getProjectByIndex(index);
+			System.out.println(project.toString());
 			if (project.getCategoryID() == categoryID) {
 				sortedProjects.add(project);
 			}
