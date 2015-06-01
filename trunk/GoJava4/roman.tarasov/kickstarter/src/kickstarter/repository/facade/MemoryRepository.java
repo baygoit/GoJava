@@ -194,8 +194,9 @@ public class MemoryRepository implements iRepository, Serializable {
 
 	@Override
 	public int getCategoriesLength() {
-		return 0;
-		// return icategories.size();
+		List<IDcontent> list = categoriesRepository.getList();
+		return list.size();
+	
 	}
 
 	@Override
@@ -208,8 +209,9 @@ public class MemoryRepository implements iRepository, Serializable {
 
 	@Override
 	public int getProjectsLength() {
-		return 0;
-		// return iprojects.size();
+		List<IDcontent> list = projectsRepository.getList();
+		return list.size();
+	
 	}
 
 	@Override
