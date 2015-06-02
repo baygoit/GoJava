@@ -2,8 +2,6 @@ package com.goit.kickstarter.glmax.pages;
 
 import java.util.ArrayList;
 
-import com.goit.kickstarter.glmax.controller.Runner;
-import com.goit.kickstarter.glmax.enteties.Category;
 import com.goit.kickstarter.glmax.view.Output;
 
 public abstract class Page {
@@ -11,8 +9,10 @@ public abstract class Page {
 	private int id;
 	private Page parentPage;
 	private ArrayList<Page> childPages;
+	
+	
 
-	abstract ArrayList<String> getPage();
+	abstract public void show(Output printer);
 
 	public Page getParentPage() {
 		return parentPage;
