@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<project amount="1.0 10.0 40.0" categoryID="5" daysToGo="0" goal="2000" id="23" pledged="25.0">
+    <description>high efficiency</description>
+    <history>history of bike creation</history>
+    <investmentOptions>1$ - </investmentOptions>
+    <investmentOptions>10$ -</investmentOptions>
+    <investmentOptions>40$ -</investmentOptions>
+    <linkToVideo>www.link.to.demo.video</linkToVideo>
+    <name>Create electrobike</name>
+    <shortDescription>short description</shortDescription>
+</project>
