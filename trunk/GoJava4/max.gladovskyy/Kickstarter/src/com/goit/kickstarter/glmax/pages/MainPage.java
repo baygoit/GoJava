@@ -1,28 +1,32 @@
 package com.goit.kickstarter.glmax.pages;
 
-import java.util.ArrayList;
+import com.goit.kickstarter.glmax.enteties.Entetie;
 
-import com.goit.kickstarter.glmax.controller.Runner;
-import com.goit.kickstarter.glmax.enteties.Category;
+public class MainPage extends Page {
+	
+	public MainPage(Entetie entetie) {
+		super(entetie);
+	}
 
-public class MainPage implements Page {
-	
-	private ArrayList<String> page = new ArrayList<String>();
-	
-	
-	public MainPage(Runner runner) {
-		page.add(runner.getSomeQoute());
-		page.add("");
-		page.add("Plese choose category from list below:");
-		int index = 1;
-		ArrayList<Category> categories = runner.getCategories();
-		for (Category category : categories) {
-			page.add(categories.indexOf(category)+1+") "+category.getName());
-		}
+	public void setQoute(String qoute) {
+		this.qoute = qoute;
 	}
 
 	@Override
-	public ArrayList<String> getPage() {
-		return page;
+	protected void prepareFormatedPage() {
+		formatedPage.add("Welcome to KickStarter");
+		formatedPage.add("We can make a kick for you start :)");
+		formatedPage.add("");
+		formatedPage.add(this.entetie.getName());
+		formatedPage.add("");
+		formatedPage.add("Plese choose category from list below:");
+		
+		for (int index = 1; index <= relatedPages.size(); index++) {
+			formatedPage.add(index+") "+ relatedPages.get(index).getName());
+		}
+		
+		formatedPage.add("");
+		formatedPage.add("0) Quit.");
 	}
+	
 }

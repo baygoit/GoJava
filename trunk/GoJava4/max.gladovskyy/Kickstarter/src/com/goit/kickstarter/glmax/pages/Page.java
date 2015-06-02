@@ -2,40 +2,46 @@ package com.goit.kickstarter.glmax.pages;
 
 import java.util.ArrayList;
 
+import com.goit.kickstarter.glmax.enteties.Entetie;
 import com.goit.kickstarter.glmax.view.Output;
 
 public abstract class Page {
-	
-	private int id;
-	private Page parentPage;
-	private ArrayList<Page> childPages;
-	
-	
 
-	abstract public void show(Output printer);
+	protected static final int parentPage = 0;
+	protected Entetie entetie;
+	protected ArrayList<Page> relatedPages;
+	protected ArrayList<String> formatedPage = new ArrayList<String>();
 
+	
+	public Page(Entetie entetie) {
+		this.entetie = entetie;
+		prepareFormatedPage();
+	}
+	
+	abstract protected void prepareFormatedPage();
+	
+	public void show(Output printer) {
+		printer.print(formatedPage);
+	}
+	
 	public Page getParentPage() {
-		return parentPage;
+		return relatedPages.get(parentPage);
 	}
 
-	public void setParentPage(Page parentPage) {
-		this.parentPage = parentPage;
+	public void setParentPage(Page page) {
+		this.relatedPages.add(parentPage, page);
 	}
 
-	public ArrayList<Page> getChildPages() {
-		return childPages;
-	}
-	
-	public Page getChildPage(int index) {
-		return childPages.get(index - 1);
+	public void addChildPages(ArrayList<Page> childPages) {
+		this.relatedPages.addAll(childPages);
 	}
 
-	public void setChildPages(ArrayList<Page> childPages) {
-		this.childPages = childPages;
+	public int getId() {
+		return this.entetie.getId();
 	}
-	
-	public int getPageId() {
-		return this.id;
+
+	public String getName() {
+		return this.entetie.getName();
 	}
-	
+
 }
