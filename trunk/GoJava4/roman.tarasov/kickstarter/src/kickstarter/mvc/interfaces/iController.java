@@ -8,5 +8,9 @@ public interface iController {
 
 	iDAO getDao();
 
-	void setDao(iDAO dao);
+	void setDaoInterfaces(iDAO defaultDAO,iDAO databaseDAO);
+
+	void setDefaultDAO();
+
+	void setDatabaseDAO();
 }

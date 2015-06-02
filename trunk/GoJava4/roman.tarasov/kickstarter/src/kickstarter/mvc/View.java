@@ -42,7 +42,7 @@ public class View implements iView {
 				state.showPage();
 			}
 			try {
-				imodel.setPage(IndexOfPage.REPOSITORY_MENU_PAGE.ordinal());
+				imodel.setPage(IndexOfPage.DAO_MENU_PAGE.ordinal());
 				currentPage = imodel.getCurrentPage();
 				page = pagesView.get(currentPage);
 				ui.display(page.getHeader());
@@ -67,7 +67,7 @@ public class View implements iView {
 		}
 
 		void repositoryError() {
-			currentPage = IndexOfPage.REPOSITORY_MENU_PAGE.ordinal();
+			currentPage = IndexOfPage.DAO_MENU_PAGE.ordinal();
 			page = pagesView.get(currentPage);
 			ViewValues.setRepositoryError(true);
 			try {

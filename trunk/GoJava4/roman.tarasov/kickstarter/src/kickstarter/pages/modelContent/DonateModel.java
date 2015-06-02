@@ -20,7 +20,6 @@ public class DonateModel extends PageModel {
 			imodel.next(IndexOfPage.DETAILED_PROJECT.ordinal());
 			return;
 		}
-
 		String[] array = message.split(":");
 		double balanceBefore = 0;
 		double balanceAfter = 0;

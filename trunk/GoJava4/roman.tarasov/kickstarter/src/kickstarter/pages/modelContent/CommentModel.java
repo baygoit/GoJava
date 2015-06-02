@@ -17,13 +17,11 @@ public class CommentModel extends PageModel {
 
 		String[] array = message.split(":");
 		if (array[0].equals("a") && array.length == 2) {
-
 			ProjectComment projectComment = new ProjectComment();
 			projectComment.setProjectID(projectID);
 			projectComment.setUserID(1);
 			projectComment.setComment(array[1]);
 			idao.getCommentService().addComment(projectComment);
-
 			imodel.next(IndexOfPage.DETAILED_PROJECT.ordinal());
 			return;
 		}

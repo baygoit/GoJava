@@ -7,7 +7,6 @@ import kickstarter.mvc.interfaces.iView;
 import kickstarter.mvc.modelState.ModelValues;
 import kickstarter.pages.viewContent.PageView;
 
-
 public abstract class PageModel {
 
 	protected String[] strValues;

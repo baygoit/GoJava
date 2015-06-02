@@ -7,12 +7,12 @@ import java.util.List;
 import kickstarter.dao.interfaces.iCommentService;
 import kickstarter.entity.ProjectComment;
 
-public class DefaultCommentsService implements iCommentService {
+public class DefaultCommentService implements iCommentService {
 
 	private int projectID;
 	HashMap<Integer, ArrayList<ProjectComment>> allComments;
 
-	public DefaultCommentsService() {
+	public DefaultCommentService() {
 		allComments = new HashMap<Integer, ArrayList<ProjectComment>>();
 	}
 

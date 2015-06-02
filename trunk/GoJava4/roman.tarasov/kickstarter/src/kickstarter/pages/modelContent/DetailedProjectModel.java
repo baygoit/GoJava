@@ -6,7 +6,6 @@ public class DetailedProjectModel extends PageModel {
 
 	@Override
 	public void updateStateOfPageModel(String message) {
-
 		if (message.equals("p")) {
 			imodel.next(IndexOfPage.PROJECTS.ordinal());
 			return;

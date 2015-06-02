@@ -7,7 +7,6 @@ public class ProjectsModel extends PageModel {
 
 	@Override
 	public void updateStateOfPageModel(String message) {
-
 		if (message.equals("p")) {
 			imodel.next(IndexOfPage.CATEGORIES.ordinal());
 			return;

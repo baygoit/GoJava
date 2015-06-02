@@ -11,13 +11,13 @@ public class CategoriesModel extends PageModel {
 			imodel.next(IndexOfPage.END_PAGE.ordinal());
 			return;
 		}
-		if (message.equals("r")) {
-			imodel.next(IndexOfPage.REPOSITORY_MENU_PAGE.ordinal());
+		if (message.equals("d")) {
+			imodel.next(IndexOfPage.DAO_MENU_PAGE.ordinal());
 			return;
 		}
 		ViewValues ViewValues = iview.getViewValues();
 		if (ViewValues.getRepositoryError()) {
-			imodel.next(IndexOfPage.REPOSITORY_MENU_PAGE.ordinal());
+			imodel.next(IndexOfPage.DAO_MENU_PAGE.ordinal());
 			return;
 		}
 		strValues = ViewValues.getStrCategories();

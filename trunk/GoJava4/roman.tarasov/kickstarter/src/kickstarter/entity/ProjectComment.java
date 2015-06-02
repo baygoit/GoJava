@@ -1,15 +1,13 @@
 package kickstarter.entity;
 
-import java.io.Serializable;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
-public class ProjectComment implements Serializable {
+public class ProjectComment  {
 
-	private static final long serialVersionUID = 6511337370371120313L;
 	private int projectID;
 	private int userID;
 	private int commentID;

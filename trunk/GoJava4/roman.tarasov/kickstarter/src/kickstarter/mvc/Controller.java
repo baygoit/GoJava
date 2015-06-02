@@ -10,6 +10,8 @@ public class Controller implements iController {
 	private iView iview;
 	private iModel imodel;
 	private iDAO dao;
+	private iDAO defaultDAO;
+	private iDAO databaseDAO;
 
 	public void showPage() {
 		iview.showPage();
@@ -33,7 +35,6 @@ public class Controller implements iController {
 		imodel.setView(setView);
 	}
 
-	@Override
 	public void setDao(iDAO idao) {
 		iview.setIDAO(idao);
 		imodel.setIDAO(idao);
@@ -48,5 +49,21 @@ public class Controller implements iController {
 	@Override
 	public iDAO getDao() {
 		return dao;
+	}
+
+	@Override
+	public void setDaoInterfaces(iDAO defaultDAO, iDAO databaseDAO) {
+		this.defaultDAO = defaultDAO;
+		this.databaseDAO = databaseDAO;
+	}
+
+	@Override
+	public void setDefaultDAO() {
+		setDao(defaultDAO);
+	}
+
+	@Override
+	public void setDatabaseDAO() {
+		setDao(databaseDAO);
 	}
 }

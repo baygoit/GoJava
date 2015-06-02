@@ -1,15 +1,14 @@
 package kickstarter;
 
 import kickstarter.dao.DAO;
+import kickstarter.dao.databaseServices.DBcategoryService;
+import kickstarter.dao.databaseServices.DBcommentService;
+import kickstarter.dao.databaseServices.DBquoteService;
 import kickstarter.dao.defaultServices.DefaultCategoryService;
-import kickstarter.dao.defaultServices.DefaultCommentsService;
+import kickstarter.dao.defaultServices.DefaultCommentService;
 import kickstarter.dao.defaultServices.DefaultProjectService;
 import kickstarter.dao.defaultServices.DefaultQuoteService;
-import kickstarter.dao.interfaces.iCategoryService;
-import kickstarter.dao.interfaces.iCommentService;
 import kickstarter.dao.interfaces.iDAO;
-import kickstarter.dao.interfaces.iProjectService;
-import kickstarter.dao.interfaces.iQuoteService;
 import kickstarter.mvc.Controller;
 import kickstarter.mvc.Model;
 import kickstarter.mvc.View;
@@ -23,7 +22,7 @@ import kickstarter.pages.modelContent.DonateModel;
 import kickstarter.pages.modelContent.InvestModel;
 import kickstarter.pages.modelContent.PageModel;
 import kickstarter.pages.modelContent.ProjectsModel;
-import kickstarter.pages.modelContent.RepositoryMenuModel;
+import kickstarter.pages.modelContent.DAOmenuModel;
 import kickstarter.pages.modelContent.ResultOfBankOperationModel;
 import kickstarter.pages.modelContent.TheEndModel;
 import kickstarter.pages.modelContent.WrongChoiceModel;
@@ -35,7 +34,7 @@ import kickstarter.pages.viewContent.Donate;
 import kickstarter.pages.viewContent.Invest;
 import kickstarter.pages.viewContent.PageView;
 import kickstarter.pages.viewContent.Projects;
-import kickstarter.pages.viewContent.RepositoryMenu;
+import kickstarter.pages.viewContent.DAOmenu;
 import kickstarter.pages.viewContent.ResultOfBankOperation;
 import kickstarter.pages.viewContent.TheEnd;
 import kickstarter.pages.viewContent.WrongChoice;
@@ -61,50 +60,48 @@ public class Runner {
 		Bank bank = new Bank();
 		Model model = new Model();
 		View view = new View(ui);
-		iDAO idao = daoInit();
+
+		iDAO iDefaultDAO = setDefaultServices(new DAO());
+		iDAO iDatabaseDAO = setDatabaseServices(new DAO());
+
 		Controller controller = new Controller();
 		iController icontroller = controller;
 		modelInit(model, bank, icontroller);
 		viewInit(view, bank);
-		controllerInit(controller, view, model, idao);
+		controllerInit(controller, view, model, iDefaultDAO, iDatabaseDAO);
 
 		kickstarter = Kickstarter.getInstance();
 		kickstarter.setController(controller);
 		kickstarter.setView(view);
 		kickstarter.setModel(model);
 		kickstarter.setUI(ui);
+
 	}
 
-	private iDAO daoInit() {
-
-		DefaultCommentsService defaultCommentService = new DefaultCommentsService();
-		iCommentService iCommentService = defaultCommentService;
-
-		DefaultProjectService defaultProjectService = new DefaultProjectService();
-		iProjectService iProjectService = defaultProjectService;
-
-		DefaultQuoteService defaultQuoteService = new DefaultQuoteService();
-		iQuoteService iQuoteService = defaultQuoteService;
-
-		DefaultCategoryService defaultCategoryService = new DefaultCategoryService();
-		iCategoryService iCategoryService = defaultCategoryService;
-
-		DAO DAO = new DAO();
-		iDAO idao = DAO;
-		idao.setCategoryService(iCategoryService);
-		idao.setProjectService(iProjectService);
-		idao.setCommentService(iCommentService);
-		idao.setQuoteService(iQuoteService);
+	private iDAO setDatabaseServices(iDAO idao) {
+		idao.setCategoryService(new DBcategoryService());
+		idao.setProjectService(new DefaultProjectService());
+		idao.setCommentService(new DBcommentService());
+		idao.setQuoteService(new DBquoteService());
 		return idao;
-
 	}
 
-	private void controllerInit(Controller controller, View view, Model model,	iDAO idao) {
+	private iDAO setDefaultServices(iDAO idao) {
+		idao.setCategoryService(new DefaultCategoryService());
+		idao.setProjectService(new DefaultProjectService());
+		idao.setCommentService(new DefaultCommentService());
+		idao.setQuoteService(new DefaultQuoteService());
+		return idao;
+	}
+
+	private void controllerInit(Controller controller, View view, Model model,
+			iDAO iDefaultDAO, iDAO iDatabaseDAO) {
 
 		controller.setInterfaces(view, model);
 		controller.setView(view);
 		controller.setModel(model);
-		controller.setDao(idao);
+		controller.setDaoInterfaces(iDefaultDAO, iDatabaseDAO);
+		controller.setDefaultDAO();
 		controller.setPage(IndexOfPage.CATEGORIES.ordinal());
 	}
 
@@ -140,7 +137,7 @@ public class Runner {
 		pageModel = new ApplyTransactionModel(bank);
 		model.addPageModel(pageModel);
 
-		pageModel = new RepositoryMenuModel(icontroller);
+		pageModel = new DAOmenuModel(icontroller);
 		model.addPageModel(pageModel);
 
 	}
@@ -177,7 +174,7 @@ public class Runner {
 		pageView = new ApplyTransaction();
 		view.addPageView(pageView);
 
-		pageView = new RepositoryMenu();
+		pageView = new DAOmenu();
 		view.addPageView(pageView);
 	}
 

@@ -6,7 +6,6 @@ public class ResultOfBankOperationModel extends PageModel {
 
 	@Override
 	public void updateStateOfPageModel(String message) {
-
 		if (message.equals("p")) {
 			imodel.next(IndexOfPage.DETAILED_PROJECT.ordinal());
 			return;
