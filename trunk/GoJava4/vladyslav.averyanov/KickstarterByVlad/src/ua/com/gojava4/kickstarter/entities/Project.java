@@ -10,12 +10,12 @@ public class Project {
 	private String fullDescription;
 	private String link;
 	private String FAQ;
-	private Category category;
+	private int categoryId;
 	private int id;
 
 	public Project(String name, String shortDescription, int goal, int pledged,
 			int daysToGo, String fullDescription, String link, String FAQ,
-			Category category, int id) {
+			int categoryId, int id) {
 		this.name = name;
 		this.shortDescription = shortDescription;
 		this.goal = goal;
@@ -24,7 +24,7 @@ public class Project {
 		this.fullDescription = fullDescription;
 		this.link = link;
 		this.FAQ = FAQ;
-		this.category = category;
+		this.categoryId = categoryId;
 		this.id = id;
 	}
 
@@ -60,12 +60,12 @@ public class Project {
 		return FAQ;
 	}
 
-	public Category getCategory() {
-		return category;
+	public int getCategoryId() {
+		return categoryId;
 	}
 
-	public void setCategory(Category category) {
-		this.category = category;
+	public void setCategoryId(int categoryId) {
+		this.categoryId = categoryId;
 	}
 	
 	public int getId() {

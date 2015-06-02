@@ -13,7 +13,7 @@ public class SimpleRepositoryFactory extends AbstractRepositoryFactory {
 	ArrayList<Category> categories;
 	ArrayList<Project> projects;
 	
-	SimpleRepositoryFactory (String factoryType){
+	public SimpleRepositoryFactory (String factoryType){
 		switch (factoryType.toLowerCase()) {
 		case "quotes":
 			initializeQuotes();
@@ -56,9 +56,6 @@ public class SimpleRepositoryFactory extends AbstractRepositoryFactory {
 	}
 
 	private void initializeProjects() {
-		initializeCategories();
-		Category category1 = categories.get(0);
-		Category category2 = categories.get(1);
 		projects.add(new Project(
 				"SNAP",
 				"Design Your Own Furniture",
@@ -68,14 +65,14 @@ public class SimpleRepositoryFactory extends AbstractRepositoryFactory {
 				"With SNAP you can create endless solutions for your living space. You can "
 						+ "transform any surface into a unique piece of furniture.",
 				"http://www.youtube.com/01",
-				"How do I choose the color combination?", category1, 1));
+				"How do I choose the color combination?", 1, 1));
 		projects.add(new Project("HYDAWAY",
 				"A Pocket-Sized Water Bottle Fit for any Adventure", 20000,
 				181437, 3,
 				"HYDAWAY is a handy alternative to disposable plastic water bottles - it folds"
 						+ "down easily to fit in almost any pocket!",
 				"http://www.youtube.com/0143534",
-				"How much is the bottle weight", category1, 2));
+				"How much is the bottle weight", 1, 2));
 		projects.add(new Project(
 				"DASH 4.0 WALLET",
 				"A Minimal Wallet Redefined",
@@ -86,7 +83,7 @@ public class SimpleRepositoryFactory extends AbstractRepositoryFactory {
 						+ "access them easily.",
 				"http://www.youtube.com/0143534",
 				"What are the dimensions of the wallet?",
-				category1, 3));
+				1, 3));
 		projects.add(new Project(
 				"USB CHARGEDOUBLER",
 				"Double your charging speed!",
@@ -96,7 +93,7 @@ public class SimpleRepositoryFactory extends AbstractRepositoryFactory {
 				"THE ORIGINAL Up to 200% charging speed for iPhone & Android. No data theft. "
 						+ "The magnetic usb cable for your keyring.",
 				"http://www.youtube.com/0143534", "Have a question?",
-				category1, 4));
+				1, 4));
 
 		projects.add(new Project(
 				"FIREFLY HAND",
@@ -107,7 +104,7 @@ public class SimpleRepositoryFactory extends AbstractRepositoryFactory {
 				"FireFly Hand is the next generation electric "
 						+ "flashlight, which is capable of making your life significantly easier.​",
 				"http://www.youtube.com/0143534", "Have a question?",
-				category2, 1));
+				2, 1));
 		projects.add(new Project(
 				"CUBIT",
 				"The Make Anything Platform",
@@ -117,7 +114,7 @@ public class SimpleRepositoryFactory extends AbstractRepositoryFactory {
 				"A platform that brings together plug & play hardware and drag & drop software "
 						+ "to allow everyone to create and invent!",
 				"http://www.youtube.com/0143534", "Have a question?",
-				category2, 2));
+				2, 2));
 		projects.add(new Project(
 				"NOKI",
 				"The smart doorlock for Europe",
@@ -127,7 +124,7 @@ public class SimpleRepositoryFactory extends AbstractRepositoryFactory {
 				"Noki is the first smart doorlock for Europe. It opens your door when you come "
 						+ "home and locks it when you leave.",
 				"http://www.youtube.com/031234", "Have a question?",
-				category2, 3));		
+				2, 3));		
 	}
 
 	@Override

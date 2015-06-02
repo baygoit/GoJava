@@ -23,7 +23,7 @@ public class ProjectsRepository {
 	public ArrayList<Project> getProjectsOfCategoryArray(Category category) {
 		ArrayList<Project> result = new ArrayList<>();
 		for (Project project : projects){
-			if (project.getCategory().equals(category)){
+			if (project.getCategoryId() == category.getId()){
 				result.add(project);
 			}
 		}
@@ -36,7 +36,7 @@ public class ProjectsRepository {
 
 	public boolean isCurrentProjectExist(int projectId, Category category) {
 		for (Project project : projects){
-			if ((project.getId() == projectId) && (project.getCategory().equals(category))){
+			if ((project.getId() == projectId) && (project.getCategoryId() == category.getId()) ){
 				return true;
 			};
 		}
@@ -45,7 +45,7 @@ public class ProjectsRepository {
 
 	public Project getProjectByIdAndCategory(int projectId, Category category) {
 		for (Project project : projects){
-			if ((project.getId() == projectId) && (project.getCategory().equals(category))){
+			if ((project.getId() == projectId) && (project.getCategoryId() == category.getId()) ){
 				return project;
 			};
 		}
@@ -56,8 +56,6 @@ public class ProjectsRepository {
 		try {
 			projects.addAll(dataSource.getAllProjects());
 		} catch (NullPointerException e) {
-			Category category1 = new Category(1, "Design");
-			Category category2 = new Category(2, "Technology");
 			add(new Project(
 					"SNAP",
 					"Design Your Own Furniture",
@@ -67,14 +65,14 @@ public class ProjectsRepository {
 					"With SNAP you can create endless solutions for your living space. You can "
 							+ "transform any surface into a unique piece of furniture.",
 					"http://www.youtube.com/01",
-					"How do I choose the color combination?", category1, 1));
+					"How do I choose the color combination?", 1, 1));
 			add(new Project("HYDAWAY",
 					"A Pocket-Sized Water Bottle Fit for any Adventure", 20000,
 					181437, 3,
 					"HYDAWAY is a handy alternative to disposable plastic water bottles - it folds"
 							+ "down easily to fit in almost any pocket!",
 					"http://www.youtube.com/0143534",
-					"How much is the bottle weight", category1, 2));
+					"How much is the bottle weight", 1, 2));
 			add(new Project(
 					"DASH 4.0 WALLET",
 					"A Minimal Wallet Redefined",
@@ -85,7 +83,7 @@ public class ProjectsRepository {
 							+ "access them easily.",
 					"http://www.youtube.com/0143534",
 					"What are the dimensions of the wallet?",
-					category1, 3));
+					1, 3));
 			add(new Project(
 					"USB CHARGEDOUBLER",
 					"Double your charging speed!",
@@ -95,7 +93,7 @@ public class ProjectsRepository {
 					"THE ORIGINAL Up to 200% charging speed for iPhone & Android. No data theft. "
 							+ "The magnetic usb cable for your keyring.",
 					"http://www.youtube.com/0143534", "Have a question?",
-					category1, 4));
+					1, 4));
 
 			add(new Project(
 					"FIREFLY HAND",
@@ -106,7 +104,7 @@ public class ProjectsRepository {
 					"FireFly Hand is the next generation electric "
 							+ "flashlight, which is capable of making your life significantly easier.​",
 					"http://www.youtube.com/0143534", "Have a question?",
-					category2, 1));
+					2, 1));
 			add(new Project(
 					"CUBIT",
 					"The Make Anything Platform",
@@ -116,7 +114,7 @@ public class ProjectsRepository {
 					"A platform that brings together plug & play hardware and drag & drop software "
 							+ "to allow everyone to create and invent!",
 					"http://www.youtube.com/0143534", "Have a question?",
-					category2, 2));
+					2, 2));
 			add(new Project(
 					"NOKI",
 					"The smart doorlock for Europe",
@@ -126,7 +124,7 @@ public class ProjectsRepository {
 					"Noki is the first smart doorlock for Europe. It opens your door when you come "
 							+ "home and locks it when you leave.",
 					"http://www.youtube.com/031234", "Have a question?",
-					category2, 3));
+					2, 3));
 		}
 	}
 }
