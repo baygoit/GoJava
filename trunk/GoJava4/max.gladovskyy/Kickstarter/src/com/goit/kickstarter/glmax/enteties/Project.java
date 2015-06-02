@@ -1,9 +1,8 @@
 package com.goit.kickstarter.glmax.enteties;
 
 
-public class Project {
-	private int id;
-	private String name;
+public class Project extends Entetie {
+	
 	private String shortDescription;
 	private int amountNeeded;
 	private int amountCollected;
@@ -16,9 +15,7 @@ public class Project {
 			int amountNeeded, int amountCollected, int daysLeft,
 			String history, String videoURL,
 			QuestionsAndAnswers questionsAndAnswers) {
-		super();
-		this.id = id;
-		this.name = name;
+		super(id, name);
 		this.shortDescription = shortDescription;
 		this.amountNeeded = amountNeeded;
 		this.amountCollected = amountCollected;
@@ -27,12 +24,7 @@ public class Project {
 		this.videoURL = videoURL;
 		this.questionsAndAnswers = questionsAndAnswers;
 	}
-	public int getId() {
-		return id;
-	}
-	public String getName() {
-		return name;
-	}
+
 	public String getShortDescription() {
 		return shortDescription;
 	}

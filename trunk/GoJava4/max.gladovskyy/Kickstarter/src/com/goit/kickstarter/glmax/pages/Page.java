@@ -24,6 +24,12 @@ public abstract class Page {
 		printer.print(formatedPage);
 	}
 	
+	protected void fillMenu() {
+		for (int index = 1; index <= relatedPages.size(); index++) {
+			formatedPage.add(index+") "+ relatedPages.get(index).getName());
+		}
+	}
+	
 	public Page getParentPage() {
 		return relatedPages.get(parentPage);
 	}

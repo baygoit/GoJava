@@ -1,39 +1,31 @@
 package com.goit.kickstarter.glmax.pages;
 
-import java.util.ArrayList;
-
-import com.goit.kickstarter.glmax.controller.Kickstarter;
-import com.goit.kickstarter.glmax.controller.Runner;
+import com.goit.kickstarter.glmax.enteties.Entetie;
 import com.goit.kickstarter.glmax.enteties.Project;
-import com.goit.kickstarter.glmax.model.DataSource;
 
-public class ProjectPage implements Page {
-	private ArrayList<String> page = new ArrayList<String>();
-	private Project project;
+public class ProjectPage extends Page {
 
-	
-	
-	public ProjectPage(Runner runner) {
-		this.project = runner.getProject();
-		page.add("You in project: " + project.getName());
-		page.add("");
-		page.add("Money needed: " + project.getAmountNeeded());
-		page.add("Money Collected: " + project.getAmountCollected());
-		page.add("");
-		page.add("Days left: " + project.getDaysLeft());
-		page.add("History: " + project.getHistory());
-		page.add("Video URL: " + project.getVideoURL());
-		page.add("QA's: " + project.getQuestionsAndAnswers());
-		page.add("");
-		page.add("1) Donate");
-		page.add("2) Ask a question");
-		page.add("0) Exit");
-		page.add("");
+	public ProjectPage(Entetie entetie) {
+		super(entetie);
 	}
 
 	@Override
-	public ArrayList<String> getPage() {
-		return page;
+	protected void prepareFormatedPage() {
+		Project project = (Project) entetie;
+		formatedPage.add("You in project: " + project.getName());
+		formatedPage.add("");
+		formatedPage.add("Money needed: " + project.getAmountNeeded());
+		formatedPage.add("Money Collected: " + project.getAmountCollected());
+		formatedPage.add("");
+		formatedPage.add("Days left: " + project.getDaysLeft());
+		formatedPage.add("History: " + project.getHistory());
+		formatedPage.add("Video URL: " + project.getVideoURL());
+		formatedPage.add("QA's: " + project.getQuestionsAndAnswers());
+		formatedPage.add("");
+		formatedPage.add("1) Make a donation");
+		formatedPage.add("2) Ask a question");
+		formatedPage.add("0) Exit");
+		formatedPage.add("");
 	}
 
 }

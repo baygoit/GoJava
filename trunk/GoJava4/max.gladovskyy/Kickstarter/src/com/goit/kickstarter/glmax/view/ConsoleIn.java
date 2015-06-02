@@ -1,34 +1,37 @@
 package com.goit.kickstarter.glmax.view;
 
-import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class ConsoleIn implements Input {
 
+	private int userChoise;
+
 	@Override
-	public int getFromUser(ArrayList<Integer> menuEnteties) {
+	public void getFromUser() {
 		System.out.println("Make a choise:");
-		int userChoise = getUserChise(menuEnteties);
-		return userChoise;
-		}		
-
-
-	private int getUserChise(ArrayList<Integer> variantsAmount) {
 		Scanner scaner = new Scanner(System.in);
 		try {
 			int result = scaner.nextInt();
-			if (variantsAmount.contains(result)) {
-			return result;
-			} else {
-				System.out.println("There no such variant. Try Again.");
-				return getUserChise(variantsAmount);
-			}
+
 		} catch (InputMismatchException e) {
 			System.err.println("You entered not a number. Try Again.");
-			return getUserChise(variantsAmount);
+			getFromUser();
 		}
-
 	}
+
+	public void validateUserChoise(int variantsAmount) {
+		if (userChoise < 0 || userChoise > variantsAmount) {
+		} else {
+			System.out.println("There no such variant. Try Again.");
+			getFromUser();
+			validateUserChoise(variantsAmount);
+		}
+	}
+
+	public int getUserChoise() {
+		return userChoise;
+	}
+	
 
 }

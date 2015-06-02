@@ -8,10 +8,6 @@ public class MainPage extends Page {
 		super(entetie);
 	}
 
-	public void setQoute(String qoute) {
-		this.qoute = qoute;
-	}
-
 	@Override
 	protected void prepareFormatedPage() {
 		formatedPage.add("Welcome to KickStarter");
@@ -20,11 +16,7 @@ public class MainPage extends Page {
 		formatedPage.add(this.entetie.getName());
 		formatedPage.add("");
 		formatedPage.add("Plese choose category from list below:");
-		
-		for (int index = 1; index <= relatedPages.size(); index++) {
-			formatedPage.add(index+") "+ relatedPages.get(index).getName());
-		}
-		
+		fillMenu();
 		formatedPage.add("");
 		formatedPage.add("0) Quit.");
 	}
