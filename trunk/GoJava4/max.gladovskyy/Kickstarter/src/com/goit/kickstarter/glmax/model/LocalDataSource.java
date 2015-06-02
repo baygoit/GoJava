@@ -79,8 +79,7 @@ public class LocalDataSource implements DataSource {
 			result.add(2);
 			result.add(0);
 		} else if (currentLevel == Position.Payment) {
-			for (Map.Entry<String, Integer> paymentVariant : payments.get(projects
-					.get(currentMenuObjectIndex))) {
+			for (Map.Entry<String, Integer> paymentVariant : payments.get(projects.get(currentMenuObjectIndex))) {
 				result.add(result.size() + 1);
 			}
 			result.add(0);

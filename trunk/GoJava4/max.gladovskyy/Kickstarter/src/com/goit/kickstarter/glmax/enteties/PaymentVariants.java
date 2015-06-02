@@ -4,20 +4,20 @@ import java.util.HashMap;
 
 public class PaymentVariants {
 	private int id;
-	private HashMap<String, Integer> payments;
+	private HashMap<String, Integer> payVariants;
 	
 	public PaymentVariants(int id, HashMap<String, Integer> payments) {
 		super();
 		this.id = id;
-		this.payments = payments;
+		this.payVariants = payments;
 	}
 
 	public HashMap<String, Integer> getPayments() {
-		return payments;
+		return payVariants;
 	}
 	
 	public Integer getCost(String paymentVariant) {
-		return payments.get(paymentVariant);
+		return payVariants.get(paymentVariant);
 	}
 
 }

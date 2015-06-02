@@ -6,7 +6,36 @@ import com.goit.kickstarter.glmax.controller.Runner;
 import com.goit.kickstarter.glmax.enteties.Category;
 import com.goit.kickstarter.glmax.view.Output;
 
-public interface Page {
+public abstract class Page {
+	
+	private int id;
+	private Page parentPage;
+	private ArrayList<Page> childPages;
 
-	ArrayList<String> getPage();
+	abstract ArrayList<String> getPage();
+
+	public Page getParentPage() {
+		return parentPage;
+	}
+
+	public void setParentPage(Page parentPage) {
+		this.parentPage = parentPage;
+	}
+
+	public ArrayList<Page> getChildPages() {
+		return childPages;
+	}
+	
+	public Page getChildPage(int index) {
+		return childPages.get(index - 1);
+	}
+
+	public void setChildPages(ArrayList<Page> childPages) {
+		this.childPages = childPages;
+	}
+	
+	public int getPageId() {
+		return this.id;
+	}
+	
 }
