@@ -1,19 +1,17 @@
 package com.goit.kickstarter.glmax.pages;
 
-import java.util.ArrayList;
+import com.goit.kickstarter.glmax.enteties.Entetie;
 
-import com.goit.kickstarter.glmax.controller.Runner;
+public class QuestionPage extends Page {
 
-public class QuestionPage implements Page {
-
-	public QuestionPage(Runner runner) {
-		// TODO Auto-generated constructor stub
+	public QuestionPage(Entetie entetie) {
+		super(null);
 	}
 
 	@Override
-	public ArrayList<String> getPage() {
-		// TODO Auto-generated method stub
-		return null;
+	protected void prepareFormatedPage() {
+		System.out.println("Enter your question please and press enter.");		
 	}
+
 
 }

@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.goit.kickstarter.glmax.controller.Position;
 import com.goit.kickstarter.glmax.controller.Runner;
+import com.goit.kickstarter.glmax.enteties.Entetie;
 import com.goit.kickstarter.glmax.pages.*;
 
 public class ConsolePageFactory implements PageFactory {
@@ -20,32 +21,31 @@ public class ConsolePageFactory implements PageFactory {
 	}
 
 	@Override
-	public Page getPage(Position position, Runner runner) {
+	public Page getPage(Position position, Entetie entetie) {
 		Page page = null;
-		int entetieIndex = runner.getCurrentEntetieIndex();
 
-		if (cache.get(position).containsKey(entetieIndex)) {
-			return cache.get(position).get(entetieIndex);
+		if (cache.get(position).containsKey(entetie.getId())) {
+			return cache.get(position).get(entetie.getId());
 		} else {
 			switch (position) {
 			case Main:
-				page = new MainPage(runner);
+				page = new MainPage(entetie);
 				break;
 			case Category:
-				page = new CategoryPage(runner);
+				page = new CategoryPage(entetie);
 				break;
 			case Project:
-				page = new ProjectPage(runner);
+				page = new ProjectPage(entetie);
 				break;
 			case Payment:
-				page = new PaymentPage(runner);
+				page = new PaymentPage(entetie);
 				break;
 			case Question:
-				page = new QuestionPage(runner);
+				page = new QuestionPage(entetie);
 				break;
 			}
 
-			cache.get(position).put(entetieIndex, page);
+			cache.get(position).put(entetie.getId(), page);
 			return page;
 		}
 	}
