@@ -1,0 +1,438 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.1.8" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
+  associations="true" dependencies="false" nesting-relationships="true">  
+  <class id="1" language="java" name="com.go_java4.alex_mirn.Launcher" project="kickstarter" 
+    file="/kickstarter/src/com/go_java4/alex_mirn/Launcher.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="762" y="283"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="2" language="java" name="com.go_java4.alex_mirn.data.Category" project="kickstarter" 
+    file="/kickstarter/src/com/go_java4/alex_mirn/data/Category.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="134" y="-269"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="3" language="java" name="com.go_java4.alex_mirn.data_containers.CategoriesContainer" project="kickstarter" 
+    file="/kickstarter/src/com/go_java4/alex_mirn/data_containers/CategoriesContainer.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-240" y="110"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="4" language="java" name="com.go_java4.alex_mirn.input_output.InputData" project="kickstarter" 
+    file="/kickstarter/src/com/go_java4/alex_mirn/input_output/InputData.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="18" y="1150"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="5" language="java" name="com.go_java4.alex_mirn.input_output.pages.CategoriesPage" project="kickstarter" 
+    file="/kickstarter/src/com/go_java4/alex_mirn/input_output/pages/CategoriesPage.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-850" y="1371"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="6" language="java" name="com.go_java4.alex_mirn.input_output.printers.Printer" project="kickstarter" 
+    file="/kickstarter/src/com/go_java4/alex_mirn/input_output/printers/Printer.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="266" y="1378"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="7" language="java" name="com.go_java4.alex_mirn.input_output.printers.ConsolePrinter" project="kickstarter" 
+    file="/kickstarter/src/com/go_java4/alex_mirn/input_output/printers/ConsolePrinter.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="343" y="1161"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="8" language="java" name="com.go_java4.alex_mirn.input_output.readers.ConsoleReader" project="kickstarter" 
+    file="/kickstarter/src/com/go_java4/alex_mirn/input_output/readers/ConsoleReader.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-251" y="948"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="9" language="java" name="com.go_java4.alex_mirn.input_output.readers.Reader" project="kickstarter" 
+    file="/kickstarter/src/com/go_java4/alex_mirn/input_output/readers/Reader.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-244" y="1088"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="10" language="java" name="com.go_java4.alex_mirn.logic.CategoriesLogic" project="kickstarter" 
+    file="/kickstarter/src/com/go_java4/alex_mirn/logic/CategoriesLogic.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="3" y="162"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="11" language="java" name="com.go_java4.alex_mirn.data.Quote" project="kickstarter" 
+    file="/kickstarter/src/com/go_java4/alex_mirn/data/Quote.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="344" y="-265"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="12" language="java" name="com.go_java4.alex_mirn.data_containers.QuotesContainer" project="kickstarter" 
+    file="/kickstarter/src/com/go_java4/alex_mirn/data_containers/QuotesContainer.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-489" y="91"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="13" language="java" name="com.go_java4.alex_mirn.data.Project" project="kickstarter" 
+    file="/kickstarter/src/com/go_java4/alex_mirn/data/Project.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-171" y="-191"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="14" language="java" name="com.go_java4.alex_mirn.data_containers.EntityContainer" project="kickstarter" 
+    file="/kickstarter/src/com/go_java4/alex_mirn/data_containers/EntityContainer.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-607" y="-202"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="15" language="java" name="com.go_java4.alex_mirn.data_containers.ProjectsContainer" project="kickstarter" 
+    file="/kickstarter/src/com/go_java4/alex_mirn/data_containers/ProjectsContainer.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-733" y="82"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="16" language="java" name="com.go_java4.alex_mirn.input_output.pages.OneProjectPage" project="kickstarter" 
+    file="/kickstarter/src/com/go_java4/alex_mirn/input_output/pages/OneProjectPage.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-950" y="1093"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="17" language="java" name="com.go_java4.alex_mirn.input_output.pages.ProjectsPage" project="kickstarter" 
+    file="/kickstarter/src/com/go_java4/alex_mirn/input_output/pages/ProjectsPage.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-967" y="761"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="18" language="java" name="com.go_java4.alex_mirn.logic.ProjectsLogic" project="kickstarter" 
+    file="/kickstarter/src/com/go_java4/alex_mirn/logic/ProjectsLogic.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-707" y="291"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="19" language="java" name="com.go_java4.alex_mirn.logic.OneProjectLogic" project="kickstarter" 
+    file="/kickstarter/src/com/go_java4/alex_mirn/logic/OneProjectLogic.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-691" y="516"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <enumeration id="20" language="java" name="com.go_java4.alex_mirn.input_output.pages.State" project="kickstarter" 
+    file="/kickstarter/src/com/go_java4/alex_mirn/input_output/pages/State.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="320" y="855"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </enumeration>  
+  <class id="21" language="java" name="com.go_java4.alex_mirn.input_output.pages.PageDispatcher" project="kickstarter" 
+    file="/kickstarter/src/com/go_java4/alex_mirn/input_output/pages/PageDispatcher.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="47" y="906"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="22" language="java" name="com.go_java4.alex_mirn.input_output.pages.IPage" project="kickstarter" 
+    file="/kickstarter/src/com/go_java4/alex_mirn/input_output/pages/IPage.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-276" y="797"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="23" language="java" name="com.go_java4.alex_mirn.Repository" project="kickstarter" 
+    file="/kickstarter/src/com/go_java4/alex_mirn/Repository.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-270" y="408"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="24" language="java" name="com.go_java4.alex_mirn.input_output.pages.AbstractPage" project="kickstarter" 
+    file="/kickstarter/src/com/go_java4/alex_mirn/input_output/pages/AbstractPage.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-621" y="1027"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <association id="25">    
+    <end type="SOURCE" refId="24" navigable="false">      
+      <attribute id="26" name="reader"/>      
+      <multiplicity id="27" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="28">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="6"/>  
+  </realization>  
+  <realization id="29">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="9"/>  
+  </realization>  
+  <association id="30">    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="31" name="reader">        
+        <position height="18" width="42" x="-387" y="958"/>      
+      </attribute>      
+      <multiplicity id="32" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-364" y="837"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="33">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="24"/>  
+  </generalization>  
+  <association id="34">    
+    <end type="SOURCE" refId="21" navigable="false">      
+      <attribute id="35" name="repository"/>      
+      <multiplicity id="36" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="23" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="37">    
+    <end type="SOURCE" refId="21" navigable="false">      
+      <attribute id="38" name="pagesStack"/>      
+      <multiplicity id="39" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="22" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="40">    
+    <end type="SOURCE" refId="21" navigable="false">      
+      <attribute id="41" name="reader"/>      
+      <multiplicity id="42" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="43">    
+    <end type="SOURCE" refId="15"/>    
+    <end type="TARGET" refId="14"/>  
+  </generalization>  
+  <generalization id="44">    
+    <end type="SOURCE" refId="16"/>    
+    <end type="TARGET" refId="24"/>  
+  </generalization>  
+  <association id="45">    
+    <end type="SOURCE" refId="23" navigable="false">      
+      <attribute id="46" name="quotes"/>      
+      <multiplicity id="47" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="12" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="48">    
+    <end type="SOURCE" refId="19" navigable="false">      
+      <attribute id="49" name="repository"/>      
+      <multiplicity id="50" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="23" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="51">    
+    <end type="SOURCE" refId="23" navigable="false">      
+      <attribute id="52" name="categories"/>      
+      <multiplicity id="53" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="54">    
+    <end type="SOURCE" refId="23" navigable="false">      
+      <attribute id="55" name="projects"/>      
+      <multiplicity id="56" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="15" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="57">    
+    <end type="SOURCE" refId="21" navigable="false">      
+      <attribute id="58" name="state"/>      
+      <multiplicity id="59" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="20" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="60">    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="14"/>  
+  </generalization>  
+  <association id="61">    
+    <end type="SOURCE" refId="13" navigable="false">      
+      <attribute id="62" name="category">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="63" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="64">    
+    <end type="SOURCE" refId="24" navigable="false">      
+      <attribute id="65" name="printer"/>      
+      <multiplicity id="66" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="6" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="67">    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="68" name="printer">        
+        <position height="0" width="0" x="-156" y="1075"/>      
+      </attribute>      
+      <multiplicity id="69" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-156" y="1075"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="6" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="70">    
+    <end type="SOURCE" refId="10" navigable="false">      
+      <attribute id="71" name="repository"/>      
+      <multiplicity id="72" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="23" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="73">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="14"/>  
+  </generalization>  
+  <association id="74">    
+    <end type="SOURCE" refId="21" navigable="false">      
+      <attribute id="75" name="ipage"/>      
+      <multiplicity id="76" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="22" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="77">    
+    <end type="SOURCE" refId="18" navigable="false">      
+      <attribute id="78" name="repository"/>      
+      <multiplicity id="79" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="23" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="80">    
+    <end type="SOURCE" refId="21" navigable="false">      
+      <attribute id="81" name="printer"/>      
+      <multiplicity id="82" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="6" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="83">    
+    <end type="SOURCE" refId="17"/>    
+    <end type="TARGET" refId="24"/>  
+  </generalization>  
+  <association id="84">    
+    <end type="SOURCE" refId="24" navigable="false">      
+      <attribute id="85" name="previousPage"/>      
+      <multiplicity id="86" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="22" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="87">    
+    <end type="SOURCE" refId="24" navigable="false">      
+      <attribute id="88" name="repository"/>      
+      <multiplicity id="89" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="23" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="90">    
+    <end type="SOURCE" refId="24"/>    
+    <end type="TARGET" refId="22"/>  
+  </realization>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>
