@@ -9,6 +9,7 @@ import kickstarter.model.factory.AbstractModelFactory;
 import kickstarter.model.factory.ModelFactory;
 import kickstarter.model.storage.CollectionsStorage;
 import kickstarter.model.storage.CsvFileStorage;
+import kickstarter.model.storage.DataBaseStorage;
 import kickstarter.model.storage.Storage;
 import kickstarter.view.factory.AbstractViewFactory;
 import kickstarter.view.factory.ViewFactory;
@@ -18,6 +19,17 @@ import kickstarter.view.reader.ConsoleReader;
 import kickstarter.view.reader.Reader;
 
 public class Runner {
+	public static void main(String... args) {
+		Runner runner = new Runner();
+
+		Storage storage = runner.initDataBaseStorage();
+		AbstractModelFactory models = runner.initModelFactory(storage);
+		AbstractViewFactory views = runner.initConsoleViewFactory();
+		Control control = runner.initKickstarter(models, views);
+
+		control.exequte();
+	}
+	
 	public Control initKickstarter(AbstractModelFactory models, AbstractViewFactory views) {
 		Control kickstarter = new Kickstarter(models, views);
 		return kickstarter;
@@ -32,6 +44,17 @@ public class Runner {
 
 	public AbstractModelFactory initModelFactory(Storage storage) {
 		return new ModelFactory(storage);
+	}
+
+	public Storage initDataBaseStorage() {
+		DataBaseStorage storage = new DataBaseStorage();
+		/*
+		storage.createTableQuotes();
+		storage.createTableCategories();
+		storage.createTableProjects();
+		addDataInStorage(storage);
+		*/
+		return storage;
 	}
 
 	public Storage initCollectionsStorage() {
