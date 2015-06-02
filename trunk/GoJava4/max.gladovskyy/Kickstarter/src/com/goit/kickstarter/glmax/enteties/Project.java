@@ -46,5 +46,9 @@ public class Project extends Entetie {
 	public QuestionsAndAnswers getQuestionsAndAnswers() {
 		return questionsAndAnswers;
 	}
+	
+	public void donate (int donation) {
+		this.amountCollected += donation;
+	}
 
 }

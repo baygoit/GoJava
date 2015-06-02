@@ -1,14 +1,9 @@
 package com.goit.kickstarter.glmax.enteties;
 
-public class Quote {
-	private String quote;
+public class Quote extends Entetie {
 
-	public Quote(String quote) {
-		this.quote = quote;
-	}
-
-	public String getQuote() {
-		return quote;
+	public Quote(int id, String name) {
+		super(id, name);
 	}
 
 }

@@ -5,14 +5,15 @@ import java.util.List;
 
 import com.goit.kickstarter.glmax.controller.Position;
 import com.goit.kickstarter.glmax.enteties.Category;
-import com.goit.kickstarter.glmax.enteties.PaymentVariants;
+import com.goit.kickstarter.glmax.enteties.Entetie;
+import com.goit.kickstarter.glmax.enteties.PaymentVariant;
 import com.goit.kickstarter.glmax.enteties.Project;
 
 public interface DataSource {
 
 	ArrayList<Category> getCategoriesList();
 
-	String getSomeQuote();
+	Entetie getSomeQuote();
 
 	ArrayList<Project> getProjectsList(int categoryIndex);
 
@@ -24,6 +25,6 @@ public interface DataSource {
 
 	void persistData();
 
-	PaymentVariants getpaymentVariants(Integer integer, Integer currentMenuObjectIndex);
+	PaymentVariant getpaymentVariants(Integer integer, Integer currentMenuObjectIndex);
 
 }

@@ -3,46 +3,53 @@ package com.goit.kickstarter.glmax.controller;
 import java.util.*;
 
 import com.goit.kickstarter.glmax.enteties.Category;
-import com.goit.kickstarter.glmax.enteties.PaymentVariants;
+import com.goit.kickstarter.glmax.enteties.PaymentVariant;
 import com.goit.kickstarter.glmax.enteties.Project;
 import com.goit.kickstarter.glmax.model.*;
+import com.goit.kickstarter.glmax.pages.Page;
+import com.goit.kickstarter.glmax.pages.PageFactory;
 import com.goit.kickstarter.glmax.view.*;
 
 public class Runner {
 	private DataSource dataSource;
-	private Integer currentMenuObjectIndex;
-	private Position currentLevel;
-	private Map<Position, Integer> menuHistory;
-	private View view;
+	private PageFactory pageFactory;
+	private Input reader;
+	private Output printer;
 
 	public Runner(DataSource dataSource, View view) {
 		this.dataSource = dataSource;
-		this.view = view;
-		this.currentLevel = Position.Main;
-		this.currentMenuObjectIndex = 0;
+		this.pageFactory = new ConsolePageFactory(dataSource);
+		this.reader = new ConsoleIn();
+		this.printer = new ConsoleOut();
 
-		menuHistory = new HashMap<Position, Integer>();
-		for (Position position : Position.values()) {
-			menuHistory.put(position, 0);
-		}
-
-		view.setRunner(this);
 	}
 
 	public void run() {
-
+		Page currentPage = initManePage();
+		currentPage.show(printer);
+		int userChois;
+		
 		while (true) {
-			view.show(currentLevel);
-			int nextPosition = view.getUserAction(dataSource.getChoisList(
-					currentLevel, currentMenuObjectIndex));
-
-			if (nextPosition == 0) {
-				moveBack();
+			userChois = reader.getValidatedUserChois(currentPage.getMenuVariantsAmount());
+			if (userChois == 0) {
+				currentPage = currentPage.getParentPage();
+				currentPage.show(printer);
 			} else {
-				moveForward(nextPosition);
+				currentPage = currentPage.getChildPage(userChois);
+				
+				//TODO finished here
 			}
-
 		}
+	}
+
+	private Page initManePage() {
+		Page result = pageFactory.getPage(Position.Main, dataSource.getSomeQuote());
+		ArrayList<Page> childPages;
+		for (Category category : dataSource.getCategories()) {
+			childPages.add(pageFactory.getPage(Position.Category, category));
+		}
+		result.addChildPages(childPages);
+		return result;
 	}
 
 	private void moveForward(int nextPosition) {
@@ -109,7 +116,7 @@ public class Runner {
 		return dataSource.getProject(menuHistory.get(Position.Category), currentMenuObjectIndex);
 	}
 
-	public PaymentVariants getpaymentVariants() {
+	public PaymentVariant getpaymentVariants() {
 		return dataSource.getpaymentVariants(menuHistory.get(Position.Category), menuHistory.get(Position.Project));
 	}
 }

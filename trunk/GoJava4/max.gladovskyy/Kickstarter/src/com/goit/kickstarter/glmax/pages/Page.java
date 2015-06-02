@@ -33,6 +33,10 @@ public abstract class Page {
 	public Page getParentPage() {
 		return relatedPages.get(parentPage);
 	}
+	
+	public Page getChildPage(int i) {
+		return relatedPages.get(i);
+	}
 
 	public void setParentPage(Page page) {
 		this.relatedPages.add(parentPage, page);
@@ -48,6 +52,10 @@ public abstract class Page {
 
 	public String getName() {
 		return this.entetie.getName();
+	}
+
+	public int getMenuVariantsAmount() {
+		return relatedPages.size();
 	}
 
 }

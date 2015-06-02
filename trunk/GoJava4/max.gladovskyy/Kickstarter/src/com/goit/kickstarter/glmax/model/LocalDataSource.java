@@ -4,13 +4,13 @@ import java.util.*;
 
 import com.goit.kickstarter.glmax.controller.Position;
 import com.goit.kickstarter.glmax.enteties.Category;
-import com.goit.kickstarter.glmax.enteties.PaymentVariants;
+import com.goit.kickstarter.glmax.enteties.PaymentVariant;
 import com.goit.kickstarter.glmax.enteties.Project;
 
 public class LocalDataSource implements DataSource {
 	private ArrayList<Category> categories = new ArrayList<Category>();
 	private HashMap<Category, ArrayList<Project>> projects = new HashMap<Category, ArrayList<Project>>();
-	private HashMap<Project, PaymentVariants> payments = new HashMap<Project, PaymentVariants>();
+	private HashMap<Project, PaymentVariant> payments = new HashMap<Project, PaymentVariant>();
 
 	public LocalDataSource() {
 		for (int i = 0; i < 6; i++) {
@@ -26,7 +26,7 @@ public class LocalDataSource implements DataSource {
 				HashMap<String, Integer> payment = new HashMap<String, Integer>();
 				payment.put("discount", 100 * j);
 				payment.put("free one", 200 * j);
-				PaymentVariants paymentVariants = new PaymentVariants(i * 100
+				PaymentVariant paymentVariants = new PaymentVariant(i * 100
 						+ j * 10, payment);
 				payments.put(project, paymentVariants);
 			}
@@ -97,7 +97,7 @@ public class LocalDataSource implements DataSource {
 	}
 
 	@Override
-	public PaymentVariants getpaymentVariants(Integer categoryIndex,
+	public PaymentVariant getpaymentVariants(Integer categoryIndex,
 			Integer projectIndex) {
 		return payments.get(getProjectsList(categoryIndex)
 				.get(projectIndex - 1));

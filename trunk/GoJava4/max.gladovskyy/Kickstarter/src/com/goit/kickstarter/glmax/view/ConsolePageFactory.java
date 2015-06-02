@@ -1,20 +1,21 @@
 package com.goit.kickstarter.glmax.view;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 import com.goit.kickstarter.glmax.controller.Position;
 import com.goit.kickstarter.glmax.controller.Runner;
 import com.goit.kickstarter.glmax.enteties.Entetie;
+import com.goit.kickstarter.glmax.model.DataSource;
 import com.goit.kickstarter.glmax.pages.*;
 
 public class ConsolePageFactory implements PageFactory {
 
 	private Map<Position, Map<Integer, Page>> cache;
 
-	public ConsolePageFactory() {
+	public ConsolePageFactory(DataSource dataSource) {
 		this.cache = new HashMap<Position, Map<Integer, Page>>();
-
 		for (Position position : Position.values()) {
 			cache.put(position, new HashMap<Integer, Page>());
 		}
