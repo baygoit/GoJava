@@ -20,7 +20,7 @@ public class CategoriesModel implements Model {
 		List<Category> categories = storage.getCategories();
 		for (int i = 0; i < categories.size(); i++) {
 			Category category = categories.get(i);
-			result.add(getDescription(category, i));
+			result.add(getDescription(category));
 		}
 
 		return result;
@@ -38,14 +38,16 @@ public class CategoriesModel implements Model {
 		}
 
 		List<Object> result = new ArrayList<>();
-		result.add(storage.getCategory(item - 1));
+		//result.add(storage.getCategory(item - 1));
+		result.add(storage.getCategory(item));
 		return result;
 	}
 
-	private String getDescription(Category category, int index) {
+	private String getDescription(Category category) {
 		StringBuilder result = new StringBuilder();
 
-		int numberInMenu = index + 1;
+		//int numberInMenu = category.getId() + 1;
+		int numberInMenu = category.getId();
 		result.append(numberInMenu);
 		result.append(" - ");
 

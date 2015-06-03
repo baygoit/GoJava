@@ -70,9 +70,18 @@ public class DataBaseStorage implements Storage {
 	}
 
 	@Override
-	public Category getCategory(int index) {
-		// TODO Auto-generated method stub
-		return null;
+	public Category getCategory(int id) {
+		try (Connection connection = DriverManager.getConnection(SQL_URL, SQL_USER, SQL_PASSWORD)) {
+			PreparedStatement statement = connection.prepareStatement("select id, name from categories where id = ?");
+			statement.setInt(1, id);
+			ResultSet resultQuery = statement.executeQuery();
+			while (resultQuery.next()) {
+				return new Category(resultQuery.getInt("id"), resultQuery.getString("name"));
+			}
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+		throw new RuntimeException();
 	}
 
 	@Override
@@ -98,14 +107,47 @@ public class DataBaseStorage implements Storage {
 
 	@Override
 	public List<Project> getProjects(Category category) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Project> result = new ArrayList<>();
+		try (Connection connection = DriverManager.getConnection(SQL_URL, SQL_USER, SQL_PASSWORD)) {
+			PreparedStatement statement = connection
+					.prepareStatement("select id, name, description, totalAmount, daysLeft, "
+							+ "collectAmount, history, link, questionsAndAnswers from projects "
+							+ "where id_category = ?");
+			statement.setInt(1, category.getId());
+			ResultSet resultQuery = statement.executeQuery();
+			while (resultQuery.next()) {
+				result.add(new Project(resultQuery.getInt("id"), resultQuery.getString("name"), resultQuery
+						.getString("description"), resultQuery.getInt("totalAmount"), resultQuery.getInt("daysLeft"),
+						resultQuery.getString("history"), resultQuery.getString("link"), resultQuery
+								.getString("questionsAndAnswers"), resultQuery.getInt("collectAmount")));
+			}
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+		return result;
+
 	}
 
 	@Override
-	public Project getProject(int index, Category category) {
-		// TODO Auto-generated method stub
-		return null;
+	public Project getProject(int id, Category category) {
+		try (Connection connection = DriverManager.getConnection(SQL_URL, SQL_USER, SQL_PASSWORD)) {
+			PreparedStatement statement = connection
+					.prepareStatement("select id, name, description, totalAmount, daysLeft, "
+							+ "collectAmount, history, link, questionsAndAnswers from projects where id = ? AND id_category = ?");
+			statement.setInt(1, id);
+			statement.setInt(2, category.getId());
+			ResultSet resultQuery = statement.executeQuery();
+			while (resultQuery.next()) {
+				return new Project(resultQuery.getInt("id"), resultQuery.getString("name"),
+						resultQuery.getString("description"), resultQuery.getInt("totalAmount"),
+						resultQuery.getInt("daysLeft"), resultQuery.getString("history"),
+						resultQuery.getString("link"), resultQuery.getString("questionsAndAnswers"),
+						resultQuery.getInt("collectAmount"));
+			}
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+		throw new RuntimeException();
 	}
 
 	public void createTableQuotes() {

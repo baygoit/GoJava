@@ -25,7 +25,7 @@ public class ProjectsModel implements Model {
 		List<Project> projects = storage.getProjects(category);
 		for (int i = 0; i < projects.size(); i++) {
 			Project project = projects.get(i);
-			result.add(getDescription(project, i));
+			result.add(getDescription(project));
 		}
 
 		return result;
@@ -41,16 +41,18 @@ public class ProjectsModel implements Model {
 		if (item == 0) {
 			parameters.remove(0);
 		} else {
-			parameters.add(0, storage.getProject(item - 1, category));
+			//parameters.add(0, storage.getProject(item - 1, category));
+			parameters.add(0, storage.getProject(item, category));
 		}
 
 		return parameters;
 	}
 
-	private String getDescription(Project project, int index) {
+	private String getDescription(Project project) {
 		StringBuilder result = new StringBuilder();
 
-		int numberInMenu = index + 1;
+		//int numberInMenu = project.getId() + 1;
+		int numberInMenu = project.getId();
 		result.append(numberInMenu);
 		result.append(" - ");
 
