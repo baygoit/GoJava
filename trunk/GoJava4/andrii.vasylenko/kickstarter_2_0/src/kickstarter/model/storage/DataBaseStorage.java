@@ -22,7 +22,7 @@ public class DataBaseStorage implements Storage {
 	public void addQuote(Quote quote) {
 		try (Connection connection = DriverManager.getConnection(SQL_URL, SQL_USER, SQL_PASSWORD)) {
 			PreparedStatement statement = connection.prepareStatement("insert into quotes (quote) values(?)");
-			statement.setString(1, quote.getQuote());
+			setQuoteFields(statement, quote);
 			statement.executeUpdate();
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
@@ -35,7 +35,7 @@ public class DataBaseStorage implements Storage {
 			Statement statement = connection.createStatement();
 			ResultSet result = statement.executeQuery("select id, quote from quotes order by random() limit 1");
 			while (result.next()) {
-				return new Quote(result.getInt("id"), result.getString("quote"));
+				return getQuote(result);
 			}
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
@@ -47,7 +47,7 @@ public class DataBaseStorage implements Storage {
 	public void addCategory(Category category) {
 		try (Connection connection = DriverManager.getConnection(SQL_URL, SQL_USER, SQL_PASSWORD)) {
 			PreparedStatement statement = connection.prepareStatement("insert into categories (name) values(?)");
-			statement.setString(1, category.getName());
+			setCategoryFields(statement, category);
 			statement.executeUpdate();
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
@@ -61,7 +61,7 @@ public class DataBaseStorage implements Storage {
 			Statement statement = connection.createStatement();
 			ResultSet resultQuery = statement.executeQuery("select id, name from categories");
 			while (resultQuery.next()) {
-				result.add(new Category(resultQuery.getInt("id"), resultQuery.getString("name")));
+				result.add(getCategory(resultQuery));
 			}
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
@@ -76,7 +76,7 @@ public class DataBaseStorage implements Storage {
 			statement.setInt(1, id);
 			ResultSet resultQuery = statement.executeQuery();
 			while (resultQuery.next()) {
-				return new Category(resultQuery.getInt("id"), resultQuery.getString("name"));
+				return getCategory(resultQuery);
 			}
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
@@ -90,15 +90,8 @@ public class DataBaseStorage implements Storage {
 			PreparedStatement statement = connection.prepareStatement("insert into projects ("
 					+ "id_category, name, description, totalAmount, daysLeft, collectAmount, "
 					+ "history, link, questionsAndAnswers) values(?,?,?,?,?,?,?,?,?)");
-			statement.setInt(1, getCategoryIdByName(category, connection));
-			statement.setString(2, project.getName());
-			statement.setString(3, project.getDescription());
-			statement.setInt(4, project.getTotalAmount());
-			statement.setInt(5, project.getDaysLeft());
-			statement.setInt(6, project.getCollectAmount());
-			statement.setString(7, project.getHistory());
-			statement.setString(8, project.getLink());
-			statement.setString(9, project.getQuestionsAndAnswers());
+			int categoryId = getCategoryIdByName(category, connection);
+			setProjectFields(statement, project, categoryId);
 			statement.executeUpdate();
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
@@ -116,10 +109,7 @@ public class DataBaseStorage implements Storage {
 			statement.setInt(1, category.getId());
 			ResultSet resultQuery = statement.executeQuery();
 			while (resultQuery.next()) {
-				result.add(new Project(resultQuery.getInt("id"), resultQuery.getString("name"), resultQuery
-						.getString("description"), resultQuery.getInt("totalAmount"), resultQuery.getInt("daysLeft"),
-						resultQuery.getString("history"), resultQuery.getString("link"), resultQuery
-								.getString("questionsAndAnswers"), resultQuery.getInt("collectAmount")));
+				result.add(getProject(resultQuery));
 			}
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
@@ -138,11 +128,7 @@ public class DataBaseStorage implements Storage {
 			statement.setInt(2, category.getId());
 			ResultSet resultQuery = statement.executeQuery();
 			while (resultQuery.next()) {
-				return new Project(resultQuery.getInt("id"), resultQuery.getString("name"),
-						resultQuery.getString("description"), resultQuery.getInt("totalAmount"),
-						resultQuery.getInt("daysLeft"), resultQuery.getString("history"),
-						resultQuery.getString("link"), resultQuery.getString("questionsAndAnswers"),
-						resultQuery.getInt("collectAmount"));
+				return getProject(resultQuery);
 			}
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
@@ -183,11 +169,60 @@ public class DataBaseStorage implements Storage {
 
 	private int getCategoryIdByName(Category category, Connection connection) throws SQLException {
 		PreparedStatement statement = connection.prepareStatement("select id from categories where name = ?");
-		statement.setString(1, category.getName());
+		setCategoryFields(statement, category);
 		ResultSet result = statement.executeQuery();
 		while (result.next()) {
 			return result.getInt("id");
 		}
 		throw new RuntimeException();
+	}
+
+	private void setQuoteFields(PreparedStatement statement, Quote quote) throws SQLException {
+		statement.setString(1, quote.getQuote());
+	}
+
+	private Quote getQuote(ResultSet result) throws SQLException {
+		int id = result.getInt("id");
+		String qoute = result.getString("quote");
+
+		return new Quote(id, qoute);
+	}
+
+	private void setCategoryFields(PreparedStatement statement, Category category) throws SQLException {
+		statement.setString(1, category.getName());
+	}
+
+	private Category getCategory(ResultSet resultQuery) throws SQLException {
+		int id = resultQuery.getInt("id");
+		String name = resultQuery.getString("name");
+
+		return new Category(id, name);
+	}
+
+	private void setProjectFields(PreparedStatement statement, Project project, int categoryId) throws SQLException {
+		statement.setInt(1, categoryId);
+		statement.setString(2, project.getName());
+		statement.setString(3, project.getDescription());
+		statement.setInt(4, project.getTotalAmount());
+		statement.setInt(5, project.getDaysLeft());
+		statement.setInt(6, project.getCollectAmount());
+		statement.setString(7, project.getHistory());
+		statement.setString(8, project.getLink());
+		statement.setString(9, project.getQuestionsAndAnswers());
+	}
+
+	private Project getProject(ResultSet resultQuery) throws SQLException {
+		int id = resultQuery.getInt("id");
+		String name = resultQuery.getString("name");
+		String description = resultQuery.getString("description");
+		int totalAmount = resultQuery.getInt("totalAmount");
+		int daysLeft = resultQuery.getInt("daysLeft");
+		String history = resultQuery.getString("history");
+		String link = resultQuery.getString("link");
+		String questionsAndAnswers = resultQuery.getString("questionsAndAnswers");
+		int collectAmount = resultQuery.getInt("collectAmount");
+
+		return new Project(id, name, description, totalAmount, daysLeft, history, link, questionsAndAnswers,
+				collectAmount);
 	}
 }
