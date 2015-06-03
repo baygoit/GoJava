@@ -9,6 +9,7 @@ public class BankException extends Exception {
 		this.message = message;
 	}
 
+	@Override
 	public String toString() {
 		return message;
 	}

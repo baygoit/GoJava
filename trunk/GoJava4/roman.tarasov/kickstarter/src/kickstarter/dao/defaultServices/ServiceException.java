@@ -9,6 +9,7 @@ public class ServiceException extends Exception {
 		this.message = message;
 	}
 
+	@Override
 	public String toString() {
 		return message;
 	}

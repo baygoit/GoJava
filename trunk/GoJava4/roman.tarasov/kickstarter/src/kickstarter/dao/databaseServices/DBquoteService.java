@@ -27,4 +27,9 @@ public class DBquoteService implements iQuoteService {
 	public Quote getRandomQuote() {
 		return quotes.get(new Random().nextInt(quotes.size()));
 	}
+
+	@Override
+	public List<Quote> getAll() {
+		return quotes;
+	}
 }

@@ -6,6 +6,6 @@ import kickstarter.entity.Category;
 
 public interface iCategoryService {
 
-	List<Category> getlistAllCategories();
+	List<Category> getAll();
 
 }

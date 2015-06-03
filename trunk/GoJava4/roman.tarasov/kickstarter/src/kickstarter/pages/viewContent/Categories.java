@@ -9,6 +9,7 @@ import kickstarter.mvc.viewState.ViewValues;
 
 public class Categories extends PageView {
 
+	@Override
 	public String getHeader() throws ServiceException {
 		StringBuilder header = new StringBuilder();
 
@@ -34,7 +35,7 @@ public class Categories extends PageView {
 
 	private String getListAllCategories() throws ServiceException {
 		StringBuilder result = new StringBuilder();
-		List<Category> listAllCategories = idao.getCategoryService().getlistAllCategories();
+		List<Category> listAllCategories = idao.getCategoryService().getAll();
 		int length = listAllCategories.size();
 		strValues = new String[length];
 		intValues = new int[length];

@@ -6,7 +6,6 @@ import java.util.List;
 import kickstarter.dao.interfaces.iProjectService;
 import kickstarter.entity.Project;
 
-
 public class DBprojectService implements iProjectService {
 	List<Project> projects;
 
@@ -88,5 +87,10 @@ public class DBprojectService implements iProjectService {
 			}
 		}
 		return null;
+	}
+
+	@Override
+	public List<Project> getAll() {
+		return projects;
 	}
 }

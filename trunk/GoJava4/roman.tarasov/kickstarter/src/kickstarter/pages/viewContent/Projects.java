@@ -56,6 +56,7 @@ public class Projects extends PageView {
 		return result.toString();
 	}
 
+	@Override
 	public String getHeader() throws ServiceException {
 
 		StringBuilder header = new StringBuilder();

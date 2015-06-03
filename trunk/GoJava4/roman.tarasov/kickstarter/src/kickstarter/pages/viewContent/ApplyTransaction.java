@@ -2,6 +2,7 @@ package kickstarter.pages.viewContent;
 
 public class ApplyTransaction extends PageView {
 
+	@Override
 	public String getHeader() {
 		StringBuilder header = new StringBuilder();
 

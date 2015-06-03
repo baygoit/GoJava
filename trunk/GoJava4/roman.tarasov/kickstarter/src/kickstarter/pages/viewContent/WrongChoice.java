@@ -2,6 +2,7 @@ package kickstarter.pages.viewContent;
 
 public class WrongChoice extends PageView {
 
+	@Override
 	public String getHeader() {
 		StringBuilder header = new StringBuilder();
 		header.append("\n----- Wrong Choice ----------");

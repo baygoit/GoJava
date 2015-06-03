@@ -1,5 +1,7 @@
 package kickstarter.dao.interfaces;
 
+import java.util.List;
+
 import kickstarter.entity.Project;
 
 public interface iProjectService {
@@ -10,4 +12,5 @@ public interface iProjectService {
 
 	Project getProjectById(int intSelectedProject);
 
+	List<Project> getAll();
 }

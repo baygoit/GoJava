@@ -1,5 +1,6 @@
 package kickstarter;
 
+import kickstarter.dao.databaseServices.iDatabaseService;
 import kickstarter.mvc.Controller;
 import kickstarter.mvc.Model;
 import kickstarter.mvc.View;
@@ -7,12 +8,15 @@ import kickstarter.mvc.interfaces.iController;
 import kickstarter.ui.iUserInterface;
 
 public class Kickstarter {
-
+	public static final String URL = "jdbc:postgresql://localhost:5432/kickstarter";
+	public static final String USER = "postgres";
+	public static final String PASSWORD = "root";
 	private iUserInterface ui;
 	private View view;
 	private Model model;
 	public Controller controller;
 	public iController icontroller;
+	private iDatabaseService dbService;
 
 	private volatile static Kickstarter uniqueInstance;
 
@@ -50,13 +54,17 @@ public class Kickstarter {
 	public Model getModel() {
 		return model;
 	}
-	
+
 	public View getView() {
 		return view;
 	}
 
 	public void setUI(iUserInterface ui) {
 		this.ui = ui;
+	}
+
+	public void setDatabaseService(iDatabaseService dbService) {
+		this.dbService = dbService;
 	}
 
 	void run() {

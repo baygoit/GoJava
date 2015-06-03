@@ -1,6 +1,5 @@
 package kickstarter.dao.interfaces;
 
-
 public interface iDAO {
 	
 	void setQuoteService(iQuoteService iQuoteService);
@@ -18,4 +17,6 @@ public interface iDAO {
 	void setCategoryService(iCategoryService categoryService);
 
 	void setProjectService(iProjectService iProjectService);
+	
+
 }

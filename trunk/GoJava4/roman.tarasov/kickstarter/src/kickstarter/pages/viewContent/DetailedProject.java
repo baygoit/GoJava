@@ -8,6 +8,7 @@ import kickstarter.entity.ProjectComment;
 
 public class DetailedProject extends PageView {
 
+	@Override
 	public String getHeader() throws ServiceException {
 		int projectID = imodel.getModelValues().getIntSelectedProject();
 		Project project = idao.getProjectService().getProjectById(projectID);

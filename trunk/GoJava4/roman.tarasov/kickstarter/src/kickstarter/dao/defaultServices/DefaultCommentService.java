@@ -3,6 +3,7 @@ package kickstarter.dao.defaultServices;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import kickstarter.dao.interfaces.iCommentService;
 import kickstarter.entity.ProjectComment;
@@ -55,5 +56,10 @@ public class DefaultCommentService implements iCommentService {
 			return;
 		}
 		throw new ServiceException("error delete comment ");
+	}
+
+	@Override
+	public Map<Integer, ArrayList<ProjectComment>> getAll() {
+		return allComments;
 	}
 }

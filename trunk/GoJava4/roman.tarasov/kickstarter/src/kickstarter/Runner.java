@@ -4,6 +4,9 @@ import kickstarter.dao.DAO;
 import kickstarter.dao.databaseServices.DBcategoryService;
 import kickstarter.dao.databaseServices.DBcommentService;
 import kickstarter.dao.databaseServices.DBquoteService;
+import kickstarter.dao.databaseServices.DatabaseService;
+import kickstarter.dao.databaseServices.DatabaseSettings;
+import kickstarter.dao.databaseServices.iDatabaseService;
 import kickstarter.dao.defaultServices.DefaultCategoryService;
 import kickstarter.dao.defaultServices.DefaultCommentService;
 import kickstarter.dao.defaultServices.DefaultProjectService;
@@ -43,6 +46,7 @@ import kickstarter.ui.ConsoleUI;
 import kickstarter.ui.iUserInterface;
 
 public class Runner {
+
 	public Kickstarter kickstarter;
 
 	public static void main(String[] args) {
@@ -64,6 +68,11 @@ public class Runner {
 		iDAO iDefaultDAO = setDefaultServices(new DAO());
 		iDAO iDatabaseDAO = setDatabaseServices(new DAO());
 
+		iDatabaseService dbService = new DatabaseService();
+		dbService.createDefaultDatabase(new DatabaseSettings(
+				"jdbc:postgresql://localhost:5432/kickstarter", "postgres",
+				"root"),iDefaultDAO);
+
 		Controller controller = new Controller();
 		iController icontroller = controller;
 		modelInit(model, bank, icontroller);
@@ -74,6 +83,7 @@ public class Runner {
 		kickstarter.setController(controller);
 		kickstarter.setView(view);
 		kickstarter.setModel(model);
+		kickstarter.setDatabaseService(dbService);
 		kickstarter.setUI(ui);
 
 	}

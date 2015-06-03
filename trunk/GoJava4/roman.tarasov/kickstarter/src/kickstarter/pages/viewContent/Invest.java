@@ -5,6 +5,7 @@ import kickstarter.entity.Project;
 
 public class Invest extends PageView {
 
+	@Override
 	public String getHeader() throws ServiceException {
 
 		Project project = idao.getProjectService().getProjectById(

@@ -88,4 +88,9 @@ public class DefaultProjectService implements iProjectService {
 		}
 		return null;
 	}
+
+	@Override
+	public List<Project> getAll() {
+		return projects;
+	}
 }

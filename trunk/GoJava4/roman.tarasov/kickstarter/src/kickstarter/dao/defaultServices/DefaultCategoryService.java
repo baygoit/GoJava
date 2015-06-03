@@ -23,7 +23,7 @@ public class DefaultCategoryService implements iCategoryService {
 	}
 
 	@Override
-	public List<Category> getlistAllCategories() {
+	public List<Category> getAll() {
 		return categories;
 	}
 }

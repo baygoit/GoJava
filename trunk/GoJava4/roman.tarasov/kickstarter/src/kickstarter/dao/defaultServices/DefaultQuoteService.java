@@ -13,18 +13,23 @@ public class DefaultQuoteService implements iQuoteService {
 	public DefaultQuoteService() {
 		quotes = new ArrayList<Quote>();
 		Quote quote = new Quote();
-		quote.setID(1);
+		quote.setID(8);
 		quote.setQuote("Explore iprojects, everywhere");
 		quotes.add(quote);
 
 		quote = new Quote();
-		quote.setID(2);
-		quote.setQuote("'To be is to do'—Socrates. 'To do is to be'—Jean-Paul Sartre. 'Do be do be do'—Frank Sinatra");
+		quote.setID(4);
+		quote.setQuote("<To be is to do> —Socrates. <To do is to be>—Jean-Paul Sartre. <Do be do be do>—Frank Sinatra");
 		quotes.add(quote);
 	}
 
 	@Override
 	public Quote getRandomQuote() {
 		return quotes.get(new Random().nextInt(quotes.size()));
+	}
+
+	@Override
+	public List<Quote> getAll() {
+		return quotes;
 	}
 }

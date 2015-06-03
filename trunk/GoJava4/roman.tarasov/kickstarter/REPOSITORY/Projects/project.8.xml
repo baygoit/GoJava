@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<project amount="1.0 10.0 40.0" categoryID="4" daysToGo="0" goal="0" id="8" pledged="0.0">
-    <description>raising money for paint</description>
-    <investmentOptions>1$ - </investmentOptions>
-    <investmentOptions>10$ -</investmentOptions>
-    <investmentOptions>40$ -</investmentOptions>
-    <name>Paint the fence of the school</name>
-</project>

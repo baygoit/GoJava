@@ -1,4 +1,5 @@
 package kickstarter.dao;
+
 import kickstarter.dao.interfaces.iCategoryService;
 import kickstarter.dao.interfaces.iCommentService;
 import kickstarter.dao.interfaces.iDAO;
@@ -51,4 +52,6 @@ public class DAO implements iDAO {
 	public iQuoteService getQuoteService() {
 		return iQuoteService;
 	}
+
+
 }
