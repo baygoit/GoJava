@@ -5,6 +5,7 @@ import static kickstarter.control.State.*;
 import java.util.List;
 
 import kickstarter.control.State;
+import kickstarter.exception.UnknownStateException;
 import kickstarter.model.CategoriesModel;
 import kickstarter.model.ErrorModel;
 import kickstarter.model.Model;
@@ -23,7 +24,7 @@ public class ModelFactory implements AbstractModelFactory {
 	}
 
 	@Override
-	public Model getInstance(State state, List<Object> parameters) {
+	public Model getInstance(State state, List<Object> parameters) throws UnknownStateException {
 		if (state == START) {
 			return new StartModel();
 		} else if (state == QUOTE) {
@@ -39,6 +40,6 @@ public class ModelFactory implements AbstractModelFactory {
 		} else if (state == THE_END) {
 			return new TheEndModel();
 		}
-		throw new IllegalArgumentException();
+		throw new UnknownStateException("no such state");
 	}
 }

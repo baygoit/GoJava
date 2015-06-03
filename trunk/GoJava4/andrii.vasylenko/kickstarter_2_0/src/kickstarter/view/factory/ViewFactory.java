@@ -2,6 +2,7 @@ package kickstarter.view.factory;
 
 import static kickstarter.control.State.*;
 import kickstarter.control.State;
+import kickstarter.exception.UnknownStateException;
 import kickstarter.view.CategoriesView;
 import kickstarter.view.ErrorView;
 import kickstarter.view.ProjectView;
@@ -24,7 +25,7 @@ public class ViewFactory implements AbstractViewFactory {
 	}
 
 	@Override
-	public View getInstance(State state) {
+	public View getInstance(State state) throws UnknownStateException {
 		if (state == START) {
 			return new StartView(printer, reader);
 		} else if (state == QUOTE) {
@@ -40,6 +41,6 @@ public class ViewFactory implements AbstractViewFactory {
 		} else if (state == THE_END) {
 			return new TheEndView(printer, reader);
 		}
-		throw new IllegalArgumentException();
+		throw new UnknownStateException("no such state");
 	}
 }

@@ -2,6 +2,9 @@ package kickstarter;
 
 import kickstarter.control.Control;
 import kickstarter.control.Kickstarter;
+import kickstarter.exception.CannotAddDataException;
+import kickstarter.exception.CannotCreateTableException;
+import kickstarter.exception.IncorrectLogicException;
 import kickstarter.model.engine.Category;
 import kickstarter.model.engine.Project;
 import kickstarter.model.engine.Quote;
@@ -23,12 +26,17 @@ public class Runner {
 		Storage storage = runner.initDataBaseStorage();
 		AbstractModelFactory models = runner.initModelFactory(storage);
 		AbstractViewFactory views = runner.initConsoleViewFactory();
-		Control control = runner.initKickstarter(models, views);
 
-		control.exequte();
+		try {
+			Control control = runner.initKickstarter(models, views);
+			control.exequte();
+		} catch (IncorrectLogicException e) {
+			e.printStackTrace();
+		}
 	}
-	
-	public Control initKickstarter(AbstractModelFactory models, AbstractViewFactory views) {
+
+	public Control initKickstarter(AbstractModelFactory models, AbstractViewFactory views)
+			throws IncorrectLogicException {
 		Control kickstarter = new Kickstarter(models, views);
 		return kickstarter;
 	}
@@ -46,16 +54,23 @@ public class Runner {
 
 	public Storage initDataBaseStorage() {
 		DataBaseStorage storage = new DataBaseStorage();
+
 		/*
-		storage.createTableQuotes();
-		storage.createTableCategories();
-		storage.createTableProjects();
-		addDataInStorage(storage);
-		*/
+		 * try { createTables(storage); addDataInStorage(storage); } catch
+		 * (CannotCreateTableException | CannotAddDataException e) {
+		 * e.printStackTrace(); }
+		 */
+
 		return storage;
 	}
 
-	public void addDataInStorage(Storage storage) {
+	public void createTables(DataBaseStorage storage) throws CannotCreateTableException {
+		storage.createTableQuotes();
+		storage.createTableCategories();
+		storage.createTableProjects();
+	}
+
+	public void addDataInStorage(Storage storage) throws CannotAddDataException {
 		storage.addQuote(new Quote(0, "Don't cry because it's over, smile because it happened"));
 		storage.addQuote(new Quote(1, "Be yourself; everyone else is already taken."));
 		storage.addQuote(new Quote(2, "A room without books is like a body without a soul."));

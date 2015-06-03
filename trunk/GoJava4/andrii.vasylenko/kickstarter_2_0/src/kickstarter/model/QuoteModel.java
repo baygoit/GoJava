@@ -3,6 +3,7 @@ package kickstarter.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import kickstarter.exception.CannotGetDataException;
 import kickstarter.model.engine.Quote;
 import kickstarter.model.storage.Storage;
 
@@ -14,7 +15,7 @@ public class QuoteModel implements Model {
 	}
 
 	@Override
-	public List<String> getData() {
+	public List<String> getData() throws CannotGetDataException {
 		List<String> result = new ArrayList<>();
 
 		Quote quote = storage.getRandomQuote();

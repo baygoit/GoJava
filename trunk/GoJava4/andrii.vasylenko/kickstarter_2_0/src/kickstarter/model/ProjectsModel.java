@@ -3,6 +3,7 @@ package kickstarter.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import kickstarter.exception.CannotGetDataException;
 import kickstarter.model.engine.Category;
 import kickstarter.model.engine.Project;
 import kickstarter.model.storage.Storage;
@@ -19,7 +20,7 @@ public class ProjectsModel implements Model {
 	}
 
 	@Override
-	public List<String> getData() {
+	public List<String> getData() throws CannotGetDataException {
 		List<String> result = new ArrayList<>();
 
 		List<Project> projects = storage.getProjects(category);
@@ -37,7 +38,7 @@ public class ProjectsModel implements Model {
 	}
 
 	@Override
-	public List<Object> getParameters(int item) {
+	public List<Object> getParameters(int item) throws CannotGetDataException {
 		if (item == 0) {
 			parameters.remove(0);
 		} else {

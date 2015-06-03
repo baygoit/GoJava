@@ -3,6 +3,7 @@ package kickstarter.view;
 import java.io.IOException;
 import java.util.List;
 
+import kickstarter.exception.IncorrectInputException;
 import kickstarter.view.printer.Printer;
 import kickstarter.view.reader.Reader;
 
@@ -38,11 +39,11 @@ public abstract class AbstractView implements View {
 	protected abstract String getMenu();
 
 	@Override
-	public int choiceItem() {
+	public int choiceItem() throws IncorrectInputException {
 		try {
 			return Integer.parseInt(reader.getLine());
-		} catch (IOException e) {
-			throw new IllegalArgumentException(e);
+		} catch (IOException | NumberFormatException e) {
+			throw new IncorrectInputException(e);
 		}
 	}
 

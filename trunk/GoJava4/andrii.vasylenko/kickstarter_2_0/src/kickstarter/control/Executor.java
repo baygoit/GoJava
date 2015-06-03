@@ -2,6 +2,9 @@ package kickstarter.control;
 
 import java.util.List;
 
+import kickstarter.exception.CannotGetDataException;
+import kickstarter.exception.IncorrectInputException;
+import kickstarter.exception.NoResultException;
 import kickstarter.model.Model;
 import kickstarter.view.View;
 
@@ -17,7 +20,7 @@ public class Executor {
 		this.view = view;
 	}
 
-	public void exequte() {
+	public void exequte() throws IncorrectInputException, CannotGetDataException {
 		executed = false;
 		showThePage();
 		int itemNumber = choiceItem();
@@ -28,31 +31,31 @@ public class Executor {
 		return executed;
 	}
 
-	public State getDirection() {
+	public State getDirection() throws NoResultException {
 		if (!isExecuted()) {
-			throw new IllegalStateException();
+			throw new NoResultException("not executed yet");
 		}
 		return direction;
 	}
 
-	public List<Object> getParameters() {
+	public List<Object> getParameters() throws NoResultException {
 		if (!isExecuted()) {
-			throw new IllegalStateException();
+			throw new NoResultException("not executed yet");
 		}
 		return parameters;
 	}
 
-	private void showThePage() {
+	private void showThePage() throws CannotGetDataException {
 		view.view(model.getData());
 	}
 
-	private void setResult(int itemNumber) {
+	private void setResult(int itemNumber) throws IncorrectInputException, CannotGetDataException {
 		direction = view.getDirection(itemNumber);
 		parameters = model.getParameters(itemNumber);
 		executed = true;
 	}
 
-	private int choiceItem() {
+	private int choiceItem() throws IncorrectInputException {
 		if (model.showOnly()) {
 			return 0;
 		}

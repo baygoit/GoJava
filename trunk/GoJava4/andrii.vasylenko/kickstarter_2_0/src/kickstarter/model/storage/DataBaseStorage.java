@@ -9,6 +9,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import kickstarter.exception.CannotAddDataException;
+import kickstarter.exception.CannotCreateTableException;
+import kickstarter.exception.CannotGetDataException;
 import kickstarter.model.engine.Category;
 import kickstarter.model.engine.Project;
 import kickstarter.model.engine.Quote;
@@ -19,18 +22,18 @@ public class DataBaseStorage implements Storage {
 	public static final String SQL_PASSWORD = "111";
 
 	@Override
-	public void addQuote(Quote quote) {
+	public void addQuote(Quote quote) throws CannotAddDataException {
 		try (Connection connection = DriverManager.getConnection(SQL_URL, SQL_USER, SQL_PASSWORD)) {
 			PreparedStatement statement = connection.prepareStatement("insert into quotes (quote) values(?)");
 			setQuoteFields(statement, quote);
 			statement.executeUpdate();
 		} catch (SQLException e) {
-			throw new RuntimeException(e);
+			throw new CannotAddDataException(e);
 		}
 	}
 
 	@Override
-	public Quote getRandomQuote() {
+	public Quote getRandomQuote() throws CannotGetDataException {
 		try (Connection connection = DriverManager.getConnection(SQL_URL, SQL_USER, SQL_PASSWORD)) {
 			Statement statement = connection.createStatement();
 			ResultSet result = statement.executeQuery("select id, quote from quotes order by random() limit 1");
@@ -38,24 +41,24 @@ public class DataBaseStorage implements Storage {
 				return getQuote(result);
 			}
 		} catch (SQLException e) {
-			throw new RuntimeException(e);
+			throw new CannotGetDataException(e);
 		}
-		throw new RuntimeException();
+		throw new CannotGetDataException("no existing data");
 	}
 
 	@Override
-	public void addCategory(Category category) {
+	public void addCategory(Category category) throws CannotAddDataException {
 		try (Connection connection = DriverManager.getConnection(SQL_URL, SQL_USER, SQL_PASSWORD)) {
 			PreparedStatement statement = connection.prepareStatement("insert into categories (name) values(?)");
 			setCategoryFields(statement, category);
 			statement.executeUpdate();
 		} catch (SQLException e) {
-			throw new RuntimeException(e);
+			throw new CannotAddDataException(e);
 		}
 	}
 
 	@Override
-	public List<Category> getCategories() {
+	public List<Category> getCategories() throws CannotGetDataException {
 		List<Category> result = new ArrayList<>();
 		try (Connection connection = DriverManager.getConnection(SQL_URL, SQL_USER, SQL_PASSWORD)) {
 			Statement statement = connection.createStatement();
@@ -64,13 +67,13 @@ public class DataBaseStorage implements Storage {
 				result.add(getCategory(resultQuery));
 			}
 		} catch (SQLException e) {
-			throw new RuntimeException(e);
+			throw new CannotGetDataException(e);
 		}
 		return result;
 	}
 
 	@Override
-	public Category getCategory(int id) {
+	public Category getCategory(int id) throws CannotGetDataException {
 		try (Connection connection = DriverManager.getConnection(SQL_URL, SQL_USER, SQL_PASSWORD)) {
 			PreparedStatement statement = connection.prepareStatement("select id, name from categories where id = ?");
 			statement.setInt(1, id);
@@ -79,13 +82,13 @@ public class DataBaseStorage implements Storage {
 				return getCategory(resultQuery);
 			}
 		} catch (SQLException e) {
-			throw new RuntimeException(e);
+			throw new CannotGetDataException(e);
 		}
-		throw new RuntimeException();
+		throw new CannotGetDataException("no existing data");
 	}
 
 	@Override
-	public void addProject(Project project, Category category) {
+	public void addProject(Project project, Category category) throws CannotAddDataException {
 		try (Connection connection = DriverManager.getConnection(SQL_URL, SQL_USER, SQL_PASSWORD)) {
 			PreparedStatement statement = connection.prepareStatement("insert into projects ("
 					+ "id_category, name, description, totalAmount, daysLeft, collectAmount, "
@@ -94,12 +97,12 @@ public class DataBaseStorage implements Storage {
 			setProjectFields(statement, project, categoryId);
 			statement.executeUpdate();
 		} catch (SQLException e) {
-			throw new RuntimeException(e);
+			throw new CannotAddDataException(e);
 		}
 	}
 
 	@Override
-	public List<Project> getProjects(Category category) {
+	public List<Project> getProjects(Category category) throws CannotGetDataException {
 		List<Project> result = new ArrayList<>();
 		try (Connection connection = DriverManager.getConnection(SQL_URL, SQL_USER, SQL_PASSWORD)) {
 			PreparedStatement statement = connection
@@ -112,14 +115,14 @@ public class DataBaseStorage implements Storage {
 				result.add(getProject(resultQuery));
 			}
 		} catch (SQLException e) {
-			throw new RuntimeException(e);
+			throw new CannotGetDataException(e);
 		}
 		return result;
 
 	}
 
 	@Override
-	public Project getProject(int id, Category category) {
+	public Project getProject(int id, Category category) throws CannotGetDataException {
 		try (Connection connection = DriverManager.getConnection(SQL_URL, SQL_USER, SQL_PASSWORD)) {
 			PreparedStatement statement = connection
 					.prepareStatement("select id, name, description, totalAmount, daysLeft, "
@@ -131,30 +134,30 @@ public class DataBaseStorage implements Storage {
 				return getProject(resultQuery);
 			}
 		} catch (SQLException e) {
-			throw new RuntimeException(e);
+			throw new CannotGetDataException(e);
 		}
-		throw new RuntimeException();
+		throw new CannotGetDataException("no existing data");
 	}
 
-	public void createTableQuotes() {
+	public void createTableQuotes() throws CannotCreateTableException {
 		try (Connection connection = DriverManager.getConnection(SQL_URL, SQL_USER, SQL_PASSWORD)) {
 			Statement statement = connection.createStatement();
 			statement.execute("create table quotes (id SERIAL not null PRIMARY KEY, quote varchar(255))");
 		} catch (SQLException e) {
-			throw new RuntimeException(e);
+			throw new CannotCreateTableException(e);
 		}
 	}
 
-	public void createTableCategories() {
+	public void createTableCategories() throws CannotCreateTableException {
 		try (Connection connection = DriverManager.getConnection(SQL_URL, SQL_USER, SQL_PASSWORD)) {
 			Statement statement = connection.createStatement();
 			statement.execute("create table categories (id SERIAL not null PRIMARY KEY, name varchar(255))");
 		} catch (SQLException e) {
-			throw new RuntimeException(e);
+			throw new CannotCreateTableException(e);
 		}
 	}
 
-	public void createTableProjects() {
+	public void createTableProjects() throws CannotCreateTableException {
 		try (Connection connection = DriverManager.getConnection(SQL_URL, SQL_USER, SQL_PASSWORD)) {
 			Statement statement = connection.createStatement();
 			statement.execute("create table projects (id SERIAL not null PRIMARY KEY, id_category integer,"
@@ -163,18 +166,19 @@ public class DataBaseStorage implements Storage {
 					+ "history varchar(255), link varchar(255), questionsAndAnswers varchar(255));"
 					+ "ALTER TABLE projects ADD FOREIGN KEY (id_category) REFERENCES categories(id)");
 		} catch (SQLException e) {
-			throw new RuntimeException(e);
+			throw new CannotCreateTableException(e);
 		}
 	}
 
-	private int getCategoryIdByName(Category category, Connection connection) throws SQLException {
+	private int getCategoryIdByName(Category category, Connection connection) throws SQLException,
+			CannotAddDataException {
 		PreparedStatement statement = connection.prepareStatement("select id from categories where name = ?");
 		setCategoryFields(statement, category);
 		ResultSet result = statement.executeQuery();
 		while (result.next()) {
 			return result.getInt("id");
 		}
-		throw new RuntimeException();
+		throw new CannotAddDataException("no chosen category");
 	}
 
 	private void setQuoteFields(PreparedStatement statement, Quote quote) throws SQLException {

@@ -1,5 +1,7 @@
 package kickstarter.control;
 
+import kickstarter.exception.IncorrectLogicException;
+
 public interface Control {
-	void exequte();
+	void exequte() throws IncorrectLogicException;
 }

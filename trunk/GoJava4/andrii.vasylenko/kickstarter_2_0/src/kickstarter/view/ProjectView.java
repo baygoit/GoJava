@@ -2,6 +2,7 @@ package kickstarter.view;
 
 import static kickstarter.control.State.*;
 import kickstarter.control.State;
+import kickstarter.exception.IncorrectInputException;
 import kickstarter.view.printer.Printer;
 import kickstarter.view.reader.Reader;
 
@@ -12,11 +13,11 @@ public class ProjectView extends AbstractView {
 	}
 
 	@Override
-	public State getDirection(int item) {
+	public State getDirection(int item) throws IncorrectInputException {
 		if (item == 0) {
 			return PROJECTS;
 		}
-		throw new IllegalArgumentException();
+		throw new IncorrectInputException("Unknown item");
 	}
 
 	@Override

@@ -3,6 +3,7 @@ package kickstarter.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import kickstarter.exception.CannotGetDataException;
 import kickstarter.model.engine.Project;
 
 public class ProjectModel implements Model {
@@ -36,11 +37,11 @@ public class ProjectModel implements Model {
 	}
 
 	@Override
-	public List<Object> getParameters(int item) {
+	public List<Object> getParameters(int item) throws CannotGetDataException {
 		if (item == 0) {
 			parameters.remove(0);
 		} else {
-			throw new IllegalArgumentException();
+			throw new CannotGetDataException("Illegal parameters");
 		}
 
 		return parameters;

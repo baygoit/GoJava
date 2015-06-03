@@ -31,9 +31,6 @@ public class Project {
 	}
 
 	private void donate(int amount) {
-		if (amount <= 0) {
-			throw new IllegalArgumentException();
-		}
 		collectAmount += amount;
 	}
 
