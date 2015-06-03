@@ -7,8 +7,6 @@ import kickstarter.model.engine.Project;
 import kickstarter.model.engine.Quote;
 import kickstarter.model.factory.AbstractModelFactory;
 import kickstarter.model.factory.ModelFactory;
-import kickstarter.model.storage.CollectionsStorage;
-import kickstarter.model.storage.CsvFileStorage;
 import kickstarter.model.storage.DataBaseStorage;
 import kickstarter.model.storage.Storage;
 import kickstarter.view.factory.AbstractViewFactory;
@@ -54,17 +52,6 @@ public class Runner {
 		storage.createTableProjects();
 		addDataInStorage(storage);
 		*/
-		return storage;
-	}
-
-	public Storage initCollectionsStorage() {
-		Storage storage = new CollectionsStorage();
-		addDataInStorage(storage);
-		return storage;
-	}
-
-	public Storage initCsvFileStorage() {
-		Storage storage = new CsvFileStorage();
 		return storage;
 	}
 

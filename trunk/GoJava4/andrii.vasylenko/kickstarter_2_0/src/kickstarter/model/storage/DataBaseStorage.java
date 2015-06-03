@@ -90,7 +90,7 @@ public class DataBaseStorage implements Storage {
 			PreparedStatement statement = connection.prepareStatement("insert into projects ("
 					+ "id_category, name, description, totalAmount, daysLeft, collectAmount, "
 					+ "history, link, questionsAndAnswers) values(?,?,?,?,?,?,?,?,?)");
-			statement.setInt(1, getCategoryId(category, connection));
+			statement.setInt(1, getCategoryIdByName(category, connection));
 			statement.setString(2, project.getName());
 			statement.setString(3, project.getDescription());
 			statement.setInt(4, project.getTotalAmount());
@@ -181,7 +181,7 @@ public class DataBaseStorage implements Storage {
 		}
 	}
 
-	private int getCategoryId(Category category, Connection connection) throws SQLException {
+	private int getCategoryIdByName(Category category, Connection connection) throws SQLException {
 		PreparedStatement statement = connection.prepareStatement("select id from categories where name = ?");
 		statement.setString(1, category.getName());
 		ResultSet result = statement.executeQuery();
