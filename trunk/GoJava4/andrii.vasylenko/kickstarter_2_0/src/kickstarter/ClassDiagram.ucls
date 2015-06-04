@@ -3,34 +3,34 @@
   associations="true" dependencies="false" nesting-relationships="true">  
   <interface id="1" language="java" name="kickstarter.control.Control" project="kickstarter_2_0" 
     file="/kickstarter_2_0/src/kickstarter/control/Control.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="81" width="103" x="1217" y="-56"/>    
+    <position height="81" width="103" x="4444" y="306"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="false" protected="false" private="false" static="true"/>      
       <operations public="true" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </interface>  
-  <interface id="2" language="java" name="kickstarter.view.factory.AbstractViewFactory" project="kickstarter_2_0" 
+  <class id="2" language="java" name="kickstarter.model.dao.CategoriesDAOImpl" project="kickstarter_2_0" 
+    file="/kickstarter_2_0/src/kickstarter/model/dao/CategoriesDAOImpl.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="153" width="181" x="1440" y="306"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="3" language="java" name="kickstarter.view.factory.AbstractViewFactory" project="kickstarter_2_0" 
     file="/kickstarter_2_0/src/kickstarter/view/factory/AbstractViewFactory.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="81" width="144" x="784" y="-56"/>    
+    <position height="81" width="144" x="3101" y="306"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="false" protected="false" private="false" static="true"/>      
       <operations public="true" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </interface>  
-  <interface id="3" language="java" name="kickstarter.model.factory.AbstractModelFactory" project="kickstarter_2_0" 
+  <interface id="4" language="java" name="kickstarter.model.factory.AbstractModelFactory" project="kickstarter_2_0" 
     file="/kickstarter_2_0/src/kickstarter/model/factory/AbstractModelFactory.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="81" width="209" x="1499" y="209"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="false" protected="false" private="false" static="true"/>      
-      <operations public="true" package="false" protected="false" private="false" static="true"/>    
-    </display>  
-  </interface>  
-  <interface id="4" language="java" name="kickstarter.model.Model" project="kickstarter_2_0" 
-    file="/kickstarter_2_0/src/kickstarter/model/Model.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="117" width="178" x="2035" y="209"/>    
+    <position height="81" width="209" x="2547" y="499"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="false" protected="false" private="false" static="true"/>      
@@ -39,43 +39,43 @@
   </interface>  
   <class id="5" language="java" name="kickstarter.view.reader.ConsoleReader" project="kickstarter_2_0" 
     file="/kickstarter_2_0/src/kickstarter/view/reader/ConsoleReader.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="99" width="111" x="194" y="-213"/>    
+    <position height="99" width="111" x="2753" y="113"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="false" protected="false" private="false" static="true"/>      
       <operations public="true" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <class id="6" language="java" name="kickstarter.model.TheEndModel" project="kickstarter_2_0" 
+  <interface id="6" language="java" name="kickstarter.model.Model" project="kickstarter_2_0" 
+    file="/kickstarter_2_0/src/kickstarter/model/Model.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="117" width="178" x="3621" y="499"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="7" language="java" name="kickstarter.model.dao.QuotesDAOImpl" project="kickstarter_2_0" 
+    file="/kickstarter_2_0/src/kickstarter/model/dao/QuotesDAOImpl.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="135" width="164" x="1236" y="306"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="8" language="java" name="kickstarter.model.dao.QuotesDAO" project="kickstarter_2_0" 
+    file="/kickstarter_2_0/src/kickstarter/model/dao/QuotesDAO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="117" width="149" x="1661" y="499"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="9" language="java" name="kickstarter.model.TheEndModel" project="kickstarter_2_0" 
     file="/kickstarter_2_0/src/kickstarter/model/TheEndModel.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="135" width="178" x="3654" y="-56"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="false" protected="false" private="false" static="true"/>      
-      <operations public="true" package="false" protected="false" private="false" static="true"/>    
-    </display>  
-  </class>  
-  <class id="7" language="java" name="kickstarter.model.factory.ModelFactory" project="kickstarter_2_0" 
-    file="/kickstarter_2_0/src/kickstarter/model/factory/ModelFactory.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="99" width="209" x="968" y="-56"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="false" protected="false" private="false" static="true"/>      
-      <operations public="true" package="false" protected="false" private="false" static="true"/>    
-    </display>  
-  </class>  
-  <class id="8" language="java" name="kickstarter.model.ErrorModel" project="kickstarter_2_0" 
-    file="/kickstarter_2_0/src/kickstarter/model/ErrorModel.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="135" width="178" x="3872" y="-56"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="false" protected="false" private="false" static="true"/>      
-      <operations public="true" package="false" protected="false" private="false" static="true"/>    
-    </display>  
-  </class>  
-  <class id="9" language="java" name="kickstarter.model.ProjectModel" project="kickstarter_2_0" 
-    file="/kickstarter_2_0/src/kickstarter/model/ProjectModel.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="135" width="178" x="1817" y="-56"/>    
+    <position height="135" width="178" x="3524" y="306"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="false" protected="false" private="false" static="true"/>      
@@ -84,544 +84,567 @@
   </class>  
   <class id="10" language="java" name="kickstarter.view.printer.ConsolePrinter" project="kickstarter_2_0" 
     file="/kickstarter_2_0/src/kickstarter/view/printer/ConsolePrinter.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="99" width="157" x="345" y="-213"/>    
+    <position height="99" width="157" x="2904" y="113"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="false" protected="false" private="false" static="true"/>      
       <operations public="true" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <class id="11" language="java" name="kickstarter.view.TheEndView" project="kickstarter_2_0" 
+  <class id="11" language="java" name="kickstarter.model.ProjectModel" project="kickstarter_2_0" 
+    file="/kickstarter_2_0/src/kickstarter/model/ProjectModel.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="135" width="178" x="3306" y="306"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="12" language="java" name="kickstarter.exception.NoResultException" project="kickstarter_2_0" 
+    file="/kickstarter_2_0/src/kickstarter/exception/NoResultException.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="153" width="289" x="110" y="113"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="13" language="java" name="kickstarter.model.factory.ModelFactory" project="kickstarter_2_0" 
+    file="/kickstarter_2_0/src/kickstarter/model/factory/ModelFactory.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="300" x="1661" y="306"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="14" language="java" name="kickstarter.model.ErrorModel" project="kickstarter_2_0" 
+    file="/kickstarter_2_0/src/kickstarter/model/ErrorModel.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="135" width="178" x="3742" y="306"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="15" language="java" name="kickstarter.view.TheEndView" project="kickstarter_2_0" 
     file="/kickstarter_2_0/src/kickstarter/view/TheEndView.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="99" width="164" x="2242" y="-56"/>    
+    <position height="99" width="164" x="4794" y="306"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="false" protected="false" private="false" static="true"/>      
       <operations public="true" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <class id="12" language="java" name="kickstarter.model.storage.CollectionsStorage" project="kickstarter_2_0" 
-    file="/kickstarter_2_0/src/kickstarter/model/storage/CollectionsStorage.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="225" width="197" x="-37" y="-56"/>    
+  <class id="16" language="java" name="kickstarter.exception.CannotGetDataException" project="kickstarter_2_0" 
+    file="/kickstarter_2_0/src/kickstarter/exception/CannotGetDataException.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="153" width="319" x="439" y="113"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="false" protected="false" private="false" static="true"/>      
       <operations public="true" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <class id="13" language="java" name="kickstarter.model.engine.Category" project="kickstarter_2_0" 
-    file="/kickstarter_2_0/src/kickstarter/model/engine/Category.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="99" width="112" x="253" y="209"/>    
+  <class id="17" language="java" name="kickstarter.model.dao.ProjectsDAOImpl" project="kickstarter_2_0" 
+    file="/kickstarter_2_0/src/kickstarter/model/dao/ProjectsDAOImpl.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="153" width="271" x="2001" y="306"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="false" protected="false" private="false" static="true"/>      
       <operations public="true" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <class id="14" language="java" name="kickstarter.model.QuoteModel" project="kickstarter_2_0" 
-    file="/kickstarter_2_0/src/kickstarter/model/QuoteModel.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="135" width="178" x="1599" y="-56"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="false" protected="false" private="false" static="true"/>      
-      <operations public="true" package="false" protected="false" private="false" static="true"/>    
-    </display>  
-  </class>  
-  <class id="15" language="java" name="kickstarter.view.CategoriesView" project="kickstarter_2_0" 
-    file="/kickstarter_2_0/src/kickstarter/view/CategoriesView.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="99" width="180" x="2446" y="-56"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="false" protected="false" private="false" static="true"/>      
-      <operations public="true" package="false" protected="false" private="false" static="true"/>    
-    </display>  
-  </class>  
-  <class id="16" language="java" name="kickstarter.control.Executor" project="kickstarter_2_0" 
-    file="/kickstarter_2_0/src/kickstarter/control/Executor.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="153" width="167" x="2035" y="-56"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="false" protected="false" private="false" static="true"/>      
-      <operations public="true" package="false" protected="false" private="false" static="true"/>    
-    </display>  
-  </class>  
-  <class id="17" language="java" name="kickstarter.view.ProjectView" project="kickstarter_2_0" 
-    file="/kickstarter_2_0/src/kickstarter/view/ProjectView.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="99" width="161" x="2666" y="-56"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="false" protected="false" private="false" static="true"/>      
-      <operations public="true" package="false" protected="false" private="false" static="true"/>    
-    </display>  
-  </class>  
-  <class id="18" language="java" name="kickstarter.model.StartModel" project="kickstarter_2_0" 
-    file="/kickstarter_2_0/src/kickstarter/model/StartModel.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="135" width="178" x="4090" y="-56"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="false" protected="false" private="false" static="true"/>      
-      <operations public="true" package="false" protected="false" private="false" static="true"/>    
-    </display>  
-  </class>  
-  <class id="19" language="java" name="kickstarter.view.factory.ViewFactory" project="kickstarter_2_0" 
-    file="/kickstarter_2_0/src/kickstarter/view/factory/ViewFactory.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="99" width="165" x="542" y="-213"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="false" protected="false" private="false" static="true"/>      
-      <operations public="true" package="false" protected="false" private="false" static="true"/>    
-    </display>  
-  </class>  
-  <class id="20" language="java" name="kickstarter.view.ProjectsView" project="kickstarter_2_0" 
-    file="/kickstarter_2_0/src/kickstarter/view/ProjectsView.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="99" width="167" x="2867" y="-56"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="false" protected="false" private="false" static="true"/>      
-      <operations public="true" package="false" protected="false" private="false" static="true"/>    
-    </display>  
-  </class>  
-  <class id="21" language="java" name="kickstarter.view.ErrorView" project="kickstarter_2_0" 
-    file="/kickstarter_2_0/src/kickstarter/view/ErrorView.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="99" width="152" x="3074" y="-56"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="false" protected="false" private="false" static="true"/>      
-      <operations public="true" package="false" protected="false" private="false" static="true"/>    
-    </display>  
-  </class>  
-  <interface id="22" language="java" name="kickstarter.view.View" project="kickstarter_2_0" 
-    file="/kickstarter_2_0/src/kickstarter/view/View.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="117" width="138" x="4151" y="209"/>    
+  <interface id="18" language="java" name="kickstarter.model.dao.ProjectsDAO" project="kickstarter_2_0" 
+    file="/kickstarter_2_0/src/kickstarter/model/dao/ProjectsDAO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="135" width="271" x="2796" y="499"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="false" protected="false" private="false" static="true"/>      
       <operations public="true" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </interface>  
-  <enumeration id="23" language="java" name="kickstarter.control.State" project="kickstarter_2_0" 
+  <class id="19" language="java" name="kickstarter.model.engine.Category" project="kickstarter_2_0" 
+    file="/kickstarter_2_0/src/kickstarter/model/engine/Category.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="117" width="120" x="4178" y="499"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="20" language="java" name="kickstarter.model.QuoteModel" project="kickstarter_2_0" 
+    file="/kickstarter_2_0/src/kickstarter/model/QuoteModel.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="135" width="178" x="2312" y="306"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="21" language="java" name="kickstarter.exception.IncorrectLogicException" project="kickstarter_2_0" 
+    file="/kickstarter_2_0/src/kickstarter/exception/IncorrectLogicException.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="153" width="315" x="798" y="113"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="22" language="java" name="kickstarter.exception.CannotAddDataException" project="kickstarter_2_0" 
+    file="/kickstarter_2_0/src/kickstarter/exception/CannotAddDataException.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="153" width="322" x="1153" y="113"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="23" language="java" name="kickstarter.view.CategoriesView" project="kickstarter_2_0" 
+    file="/kickstarter_2_0/src/kickstarter/view/CategoriesView.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="180" x="4998" y="306"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="24" language="java" name="kickstarter.control.Executor" project="kickstarter_2_0" 
+    file="/kickstarter_2_0/src/kickstarter/control/Executor.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="153" width="167" x="4587" y="306"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="25" language="java" name="kickstarter.view.ProjectView" project="kickstarter_2_0" 
+    file="/kickstarter_2_0/src/kickstarter/view/ProjectView.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="161" x="5218" y="306"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="26" language="java" name="kickstarter.exception.UnknownStateException" project="kickstarter_2_0" 
+    file="/kickstarter_2_0/src/kickstarter/exception/UnknownStateException.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="153" width="317" x="1515" y="113"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="27" language="java" name="kickstarter.model.StartModel" project="kickstarter_2_0" 
+    file="/kickstarter_2_0/src/kickstarter/model/StartModel.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="135" width="178" x="3960" y="306"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="28" language="java" name="kickstarter.view.factory.ViewFactory" project="kickstarter_2_0" 
+    file="/kickstarter_2_0/src/kickstarter/view/factory/ViewFactory.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="165" x="3101" y="113"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="29" language="java" name="kickstarter.view.ProjectsView" project="kickstarter_2_0" 
+    file="/kickstarter_2_0/src/kickstarter/view/ProjectsView.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="167" x="5419" y="306"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="30" language="java" name="kickstarter.view.ErrorView" project="kickstarter_2_0" 
+    file="/kickstarter_2_0/src/kickstarter/view/ErrorView.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="152" x="5626" y="306"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="31" language="java" name="kickstarter.exception.CannotCreateTableException" project="kickstarter_2_0" 
+    file="/kickstarter_2_0/src/kickstarter/exception/CannotCreateTableException.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="153" width="337" x="1872" y="113"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="32" language="java" name="kickstarter.model.dao.CategoriesDAO" project="kickstarter_2_0" 
+    file="/kickstarter_2_0/src/kickstarter/model/dao/CategoriesDAO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="135" width="177" x="1850" y="499"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="33" language="java" name="kickstarter.view.View" project="kickstarter_2_0" 
+    file="/kickstarter_2_0/src/kickstarter/view/View.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="117" width="138" x="6049" y="499"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </interface>  
+  <enumeration id="34" language="java" name="kickstarter.control.State" project="kickstarter_2_0" 
     file="/kickstarter_2_0/src/kickstarter/control/State.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="225" width="121" x="2253" y="209"/>    
+    <position height="225" width="121" x="4587" y="499"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="false" protected="false" private="false" static="true"/>      
       <operations public="true" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </enumeration>  
-  <interface id="24" language="java" name="kickstarter.model.storage.Storage" project="kickstarter_2_0" 
-    file="/kickstarter_2_0/src/kickstarter/model/storage/Storage.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="207" width="197" x="968" y="209"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="false" protected="false" private="false" static="true"/>      
-      <operations public="true" package="false" protected="false" private="false" static="true"/>    
-    </display>  
-  </interface>  
-  <class id="25" language="java" name="kickstarter.model.CategoriesModel" project="kickstarter_2_0" 
+  <class id="35" language="java" name="kickstarter.model.CategoriesModel" project="kickstarter_2_0" 
     file="/kickstarter_2_0/src/kickstarter/model/CategoriesModel.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="135" width="178" x="1360" y="-56"/>    
+    <position height="135" width="189" x="2530" y="306"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="false" protected="false" private="false" static="true"/>      
       <operations public="true" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <class id="26" language="java" name="kickstarter.model.ProjectsModel" project="kickstarter_2_0" 
+  <class id="36" language="java" name="kickstarter.model.ProjectsModel" project="kickstarter_2_0" 
     file="/kickstarter_2_0/src/kickstarter/model/ProjectsModel.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="135" width="202" x="542" y="-56"/>    
+    <position height="135" width="226" x="4178" y="306"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="false" protected="false" private="false" static="true"/>      
       <operations public="true" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <class id="27" language="java" name="kickstarter.view.QuoteView" project="kickstarter_2_0" 
+  <class id="37" language="java" name="kickstarter.view.QuoteView" project="kickstarter_2_0" 
     file="/kickstarter_2_0/src/kickstarter/view/QuoteView.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="99" width="157" x="3266" y="-56"/>    
+    <position height="99" width="157" x="5818" y="306"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="false" protected="false" private="false" static="true"/>      
       <operations public="true" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <class id="28" language="java" name="kickstarter.control.Kickstarter" project="kickstarter_2_0" 
+  <class id="38" language="java" name="kickstarter.control.Kickstarter" project="kickstarter_2_0" 
     file="/kickstarter_2_0/src/kickstarter/control/Kickstarter.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="99" width="300" x="1559" y="-213"/>    
+    <position height="99" width="300" x="3306" y="113"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="false" protected="false" private="false" static="true"/>      
       <operations public="true" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <interface id="29" language="java" name="kickstarter.view.reader.Reader" project="kickstarter_2_0" 
+  <class id="39" language="java" name="kickstarter.exception.IncorrectInputException" project="kickstarter_2_0" 
+    file="/kickstarter_2_0/src/kickstarter/exception/IncorrectInputException.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="153" width="312" x="2249" y="113"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="40" language="java" name="kickstarter.view.reader.Reader" project="kickstarter_2_0" 
     file="/kickstarter_2_0/src/kickstarter/view/reader/Reader.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="81" width="105" x="200" y="-56"/>    
+    <position height="81" width="105" x="2759" y="306"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="false" protected="false" private="false" static="true"/>      
       <operations public="true" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </interface>  
-  <class id="30" language="java" name="kickstarter.model.engine.Quote" project="kickstarter_2_0" 
+  <class id="41" language="java" name="kickstarter.model.engine.Quote" project="kickstarter_2_0" 
     file="/kickstarter_2_0/src/kickstarter/model/engine/Quote.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="99" width="112" x="-37" y="209"/>    
+    <position height="117" width="112" x="2601" y="113"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="false" protected="false" private="false" static="true"/>      
       <operations public="true" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <class id="31" language="java" name="kickstarter.view.StartView" project="kickstarter_2_0" 
+  <class id="42" language="java" name="kickstarter.view.StartView" project="kickstarter_2_0" 
     file="/kickstarter_2_0/src/kickstarter/view/StartView.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="99" width="151" x="3463" y="-56"/>    
+    <position height="99" width="151" x="6015" y="306"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="false" protected="false" private="false" static="true"/>      
       <operations public="true" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <class id="32" language="java" name="kickstarter.model.engine.Project" project="kickstarter_2_0" 
+  <class id="43" language="java" name="kickstarter.view.AbstractView" project="kickstarter_2_0" 
+    file="/kickstarter_2_0/src/kickstarter/view/AbstractView.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="117" width="170" x="5419" y="113"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="false" private="false" static="true"/>      
+      <operations public="true" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="44" language="java" name="kickstarter.model.engine.Project" project="kickstarter_2_0" 
     file="/kickstarter_2_0/src/kickstarter/model/engine/Project.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="243" width="247" x="1748" y="209"/>    
+    <position height="261" width="275" x="3306" y="499"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="false" protected="false" private="false" static="true"/>      
       <operations public="true" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <interface id="33" language="java" name="kickstarter.view.printer.Printer" project="kickstarter_2_0" 
+  <interface id="45" language="java" name="kickstarter.view.printer.Printer" project="kickstarter_2_0" 
     file="/kickstarter_2_0/src/kickstarter/view/printer/Printer.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="81" width="157" x="345" y="-56"/>    
+    <position height="81" width="157" x="2904" y="306"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="false" protected="false" private="false" static="true"/>      
       <operations public="true" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </interface>  
-  <class id="34" language="java" name="kickstarter.view.AbstractView" project="kickstarter_2_0" 
-    file="/kickstarter_2_0/src/kickstarter/view/AbstractView.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="117" width="167" x="2867" y="-213"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="false" protected="false" private="false" static="true"/>      
-      <operations public="true" package="false" protected="false" private="false" static="true"/>    
-    </display>  
-  </class>  
-  <class id="35" language="java" name="kickstarter.model.storage.CsvFileStorage" project="kickstarter_2_0" 
-    file="/kickstarter_2_0/src/kickstarter/model/storage/CsvFileStorage.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="545" y="361"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="false" protected="false" private="false" static="true"/>      
-      <operations public="true" package="false" protected="false" private="false" static="true"/>    
-    </display>  
-  </class>  
-  <association id="36">    
-    <end type="SOURCE" refId="34" navigable="false">      
-      <attribute id="37" name="printer">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="38" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="33" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="39">    
-    <end type="SOURCE" refId="12" navigable="false">      
-      <attribute id="40" name="quotes">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="41" minimum="0" maximum="2147483647">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="30" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <realization id="42">    
-    <end type="SOURCE" refId="26"/>    
-    <end type="TARGET" refId="4"/>  
-  </realization>  
-  <generalization id="43">    
-    <end type="SOURCE" refId="17"/>    
-    <end type="TARGET" refId="34"/>  
-  </generalization>  
-  <association id="44">    
-    <end type="SOURCE" refId="16" navigable="false">      
-      <attribute id="45" name="model">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="46" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="4" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <realization id="47">    
-    <end type="SOURCE" refId="14"/>    
-    <end type="TARGET" refId="4"/>  
-  </realization>  
-  <association id="48">    
-    <end type="SOURCE" refId="19" navigable="false">      
-      <attribute id="49" name="printer">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="50" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="33" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <realization id="51">    
-    <end type="SOURCE" refId="25"/>    
-    <end type="TARGET" refId="4"/>  
-  </realization>  
-  <association id="52">    
-    <end type="SOURCE" refId="12" navigable="false">      
-      <attribute id="53" name="categories">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="54" minimum="0" maximum="2147483647">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="13" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="55">    
-    <end type="SOURCE" refId="16" navigable="false">      
-      <attribute id="56" name="direction">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="57" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="23" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <generalization id="58">    
-    <end type="SOURCE" refId="31"/>    
-    <end type="TARGET" refId="34"/>  
-  </generalization>  
-  <realization id="59">    
-    <end type="SOURCE" refId="18"/>    
-    <end type="TARGET" refId="4"/>  
-  </realization>  
-  <realization id="60">    
-    <end type="SOURCE" refId="35"/>    
-    <end type="TARGET" refId="24"/>  
-  </realization>  
-  <association id="61">    
-    <end type="SOURCE" refId="16" navigable="false">      
-      <attribute id="62" name="view">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="63" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="22" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="64">    
-    <end type="SOURCE" refId="7" navigable="false">      
-      <attribute id="65" name="storage">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="66" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="24" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="67">    
-    <bendpoint x="1568" y="-56"/>    
-    <end type="SOURCE" refId="28" navigable="false">      
-      <attribute id="68" name="models">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="69" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="3" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="70">    
-    <end type="SOURCE" refId="25" navigable="false">      
-      <attribute id="71" name="storage">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="72" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="24" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <generalization id="73">    
-    <end type="SOURCE" refId="21"/>    
-    <end type="TARGET" refId="34"/>  
-  </generalization>  
-  <realization id="74">    
-    <end type="SOURCE" refId="12"/>    
-    <end type="TARGET" refId="24"/>  
-  </realization>  
-  <generalization id="75">    
-    <end type="SOURCE" refId="15"/>    
-    <end type="TARGET" refId="34"/>  
-  </generalization>  
-  <association id="76">    
-    <end type="SOURCE" refId="28" navigable="false">      
-      <attribute id="77" name="executor">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="78" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="16" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <realization id="79">    
-    <end type="SOURCE" refId="7"/>    
-    <end type="TARGET" refId="3"/>  
-  </realization>  
-  <realization id="80">    
-    <end type="SOURCE" refId="19"/>    
-    <end type="TARGET" refId="2"/>  
-  </realization>  
-  <generalization id="81">    
+  <realization id="46">    
     <end type="SOURCE" refId="20"/>    
-    <end type="TARGET" refId="34"/>  
-  </generalization>  
-  <realization id="82">    
-    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="6"/>  
+  </realization>  
+  <association id="47">    
+    <end type="SOURCE" refId="13" navigable="false">      
+      <attribute id="48" name="projects"/>      
+      <multiplicity id="49" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="18" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="50">    
+    <end type="SOURCE" refId="36" navigable="false">      
+      <attribute id="51" name="category"/>      
+      <multiplicity id="52" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="19" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="53">    
+    <end type="SOURCE" refId="24" navigable="false">      
+      <attribute id="54" name="view"/>      
+      <multiplicity id="55" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="33" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="56">    
+    <end type="SOURCE" refId="13"/>    
     <end type="TARGET" refId="4"/>  
   </realization>  
-  <realization id="83">    
-    <end type="SOURCE" refId="10"/>    
-    <end type="TARGET" refId="33"/>  
-  </realization>  
-  <association id="84">    
-    <end type="SOURCE" refId="26" navigable="false">      
-      <attribute id="85" name="storage">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="86" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="24" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="87">    
-    <end type="SOURCE" refId="19" navigable="false">      
-      <attribute id="88" name="reader">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="89" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="29" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <generalization id="90">    
-    <end type="SOURCE" refId="27"/>    
-    <end type="TARGET" refId="34"/>  
-  </generalization>  
-  <association id="91">    
-    <end type="SOURCE" refId="26" navigable="false">      
-      <attribute id="92" name="category">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="93" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="13" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <realization id="94">    
-    <bendpoint x="4298" y="-56"/>    
-    <end type="SOURCE" refId="34"/>    
-    <end type="TARGET" refId="22"/>  
-  </realization>  
-  <association id="95">    
-    <end type="SOURCE" refId="14" navigable="false">      
-      <attribute id="96" name="storage">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="97" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="24" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <realization id="98">    
-    <end type="SOURCE" refId="8"/>    
-    <end type="TARGET" refId="4"/>  
-  </realization>  
-  <association id="99">    
-    <end type="SOURCE" refId="28" navigable="false">      
-      <attribute id="100" name="views">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="101" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="2" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="102">    
-    <end type="SOURCE" refId="34" navigable="false">      
-      <attribute id="103" name="reader">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="104" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="29" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <realization id="105">    
-    <end type="SOURCE" refId="5"/>    
-    <end type="TARGET" refId="29"/>  
-  </realization>  
-  <association id="106">    
-    <end type="SOURCE" refId="9" navigable="false">      
-      <attribute id="107" name="project">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="108" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
+  <association id="57">    
+    <end type="SOURCE" refId="35" navigable="false">      
+      <attribute id="58" name="categories"/>      
+      <multiplicity id="59" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="32" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <realization id="109">    
-    <end type="SOURCE" refId="28"/>    
+  <generalization id="60">    
+    <end type="SOURCE" refId="15"/>    
+    <end type="TARGET" refId="43"/>  
+  </generalization>  
+  <generalization id="61">    
+    <end type="SOURCE" refId="42"/>    
+    <end type="TARGET" refId="43"/>  
+  </generalization>  
+  <realization id="62">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="40"/>  
+  </realization>  
+  <association id="63">    
+    <bendpoint x="3275" y="306"/>    
+    <end type="SOURCE" refId="38" navigable="false">      
+      <attribute id="64" name="models"/>      
+      <multiplicity id="65" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="66">    
+    <end type="SOURCE" refId="38"/>    
     <end type="TARGET" refId="1"/>  
   </realization>  
-  <generalization id="110">    
-    <end type="SOURCE" refId="11"/>    
-    <end type="TARGET" refId="34"/>  
-  </generalization>  
-  <realization id="111">    
-    <end type="SOURCE" refId="9"/>    
-    <end type="TARGET" refId="4"/>  
+  <realization id="67">    
+    <end type="SOURCE" refId="14"/>    
+    <end type="TARGET" refId="6"/>  
   </realization>  
+  <realization id="68">    
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="45"/>  
+  </realization>  
+  <realization id="69">    
+    <end type="SOURCE" refId="28"/>    
+    <end type="TARGET" refId="3"/>  
+  </realization>  
+  <association id="70">    
+    <end type="SOURCE" refId="38" navigable="false">      
+      <attribute id="71" name="executor"/>      
+      <multiplicity id="72" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="24" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="73">    
+    <end type="SOURCE" refId="11"/>    
+    <end type="TARGET" refId="6"/>  
+  </realization>  
+  <realization id="74">    
+    <bendpoint x="6196" y="306"/>    
+    <end type="SOURCE" refId="43"/>    
+    <end type="TARGET" refId="33"/>  
+  </realization>  
+  <realization id="75">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="8"/>  
+  </realization>  
+  <association id="76">    
+    <end type="SOURCE" refId="13" navigable="false">      
+      <attribute id="77" name="categories"/>      
+      <multiplicity id="78" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="32" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="79">    
+    <end type="SOURCE" refId="43" navigable="false">      
+      <attribute id="80" name="printer"/>      
+      <multiplicity id="81" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="45" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="82">    
+    <end type="SOURCE" refId="17"/>    
+    <end type="TARGET" refId="18"/>  
+  </realization>  
+  <association id="83">    
+    <end type="SOURCE" refId="38" navigable="false">      
+      <attribute id="84" name="views"/>      
+      <multiplicity id="85" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="86">    
+    <end type="SOURCE" refId="27"/>    
+    <end type="TARGET" refId="6"/>  
+  </realization>  
+  <association id="87">    
+    <end type="SOURCE" refId="13" navigable="false">      
+      <attribute id="88" name="quotes"/>      
+      <multiplicity id="89" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="8" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="90">    
+    <end type="SOURCE" refId="36"/>    
+    <end type="TARGET" refId="6"/>  
+  </realization>  
+  <association id="91">    
+    <end type="SOURCE" refId="24" navigable="false">      
+      <attribute id="92" name="direction"/>      
+      <multiplicity id="93" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="34" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="94">    
+    <end type="SOURCE" refId="35"/>    
+    <end type="TARGET" refId="6"/>  
+  </realization>  
+  <generalization id="95">    
+    <end type="SOURCE" refId="25"/>    
+    <end type="TARGET" refId="43"/>  
+  </generalization>  
+  <association id="96">    
+    <end type="SOURCE" refId="24" navigable="false">      
+      <attribute id="97" name="model"/>      
+      <multiplicity id="98" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="6" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="99">    
+    <end type="SOURCE" refId="28" navigable="false">      
+      <attribute id="100" name="printer"/>      
+      <multiplicity id="101" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="45" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="102">    
+    <end type="SOURCE" refId="43" navigable="false">      
+      <attribute id="103" name="reader"/>      
+      <multiplicity id="104" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="40" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="105">    
+    <end type="SOURCE" refId="36" navigable="false">      
+      <attribute id="106" name="projects"/>      
+      <multiplicity id="107" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="18" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="108">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="32"/>  
+  </realization>  
+  <generalization id="109">    
+    <end type="SOURCE" refId="30"/>    
+    <end type="TARGET" refId="43"/>  
+  </generalization>  
+  <association id="110">    
+    <end type="SOURCE" refId="20" navigable="false">      
+      <attribute id="111" name="quotesDAO"/>      
+      <multiplicity id="112" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="8" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="113">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="6"/>  
+  </realization>  
+  <generalization id="114">    
+    <end type="SOURCE" refId="37"/>    
+    <end type="TARGET" refId="43"/>  
+  </generalization>  
+  <generalization id="115">    
+    <end type="SOURCE" refId="29"/>    
+    <end type="TARGET" refId="43"/>  
+  </generalization>  
+  <association id="116">    
+    <end type="SOURCE" refId="28" navigable="false">      
+      <attribute id="117" name="reader"/>      
+      <multiplicity id="118" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="40" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="119">    
+    <end type="SOURCE" refId="23"/>    
+    <end type="TARGET" refId="43"/>  
+  </generalization>  
+  <association id="120">    
+    <end type="SOURCE" refId="11" navigable="false">      
+      <attribute id="121" name="project"/>      
+      <multiplicity id="122" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="44" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
     sort-features="false" accessors="true" visibility="true">    
     <attributes public="true" package="false" protected="false" private="false" static="true"/>    
