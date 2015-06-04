@@ -8,7 +8,7 @@ import kickstarter.entity.Category;
 
 public interface iCategoryService {
 
-	List<Category> getAll();
+	List<Category> getAll() throws SQLException;
 
 	void createCategories(iDAO interfaceDAO)
 			throws SQLException;

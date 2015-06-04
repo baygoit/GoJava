@@ -1,5 +1,6 @@
 package kickstarter.mvc;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,7 +47,7 @@ public class View implements iView {
 				currentPage = imodel.getCurrentPage();
 				page = pagesView.get(currentPage);
 				ui.display(page.getHeader());
-			} catch (ServiceException e) {
+			} catch (ServiceException | SQLException e) {
 				// TODO throw ViewException
 				e.printStackTrace();
 			}
@@ -60,7 +61,7 @@ public class View implements iView {
 			page = pagesView.get(currentPage);
 			try {
 				ui.display(page.getHeader());
-			} catch (ServiceException e) {
+			} catch (ServiceException | SQLException e) {
 				state = error;
 				repositoryError();
 			}
@@ -73,7 +74,7 @@ public class View implements iView {
 			try {
 				ui.display(page.getHeader());
 				imodel.next(currentPage);
-			} catch (ServiceException e1) {
+			} catch (ServiceException | SQLException e1) {
 				// TODO throw ViewException
 				e1.printStackTrace();
 			}

@@ -81,7 +81,7 @@ public class DBcommentService implements iCommentService {
 				.executeUpdate("CREATE TABLE comments (id_comment SERIAL not null PRIMARY KEY,id_project integer,id_user integer, comment varchar(255))");
 
 		for (Integer key : comments.keySet()) {
-			System.out.println(key);
+			
 			List<ProjectComment> value = comments.get(key);
 
 			for (ProjectComment comment : value) {

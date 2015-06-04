@@ -13,6 +13,7 @@ public class DefaultCategoryService implements iCategoryService {
 
 	public DefaultCategoryService() {
 		categories = new ArrayList<Category>();
+		
 		Category category = new Category();
 		category.setID(5);
 		category.setName("Technology");
@@ -22,6 +23,7 @@ public class DefaultCategoryService implements iCategoryService {
 		category.setID(4);
 		category.setName("Social");
 		categories.add(category);
+		
 	}
 
 	@Override

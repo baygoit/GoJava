@@ -1,9 +1,17 @@
 package kickstarter.Test;
 
 import static org.junit.Assert.*;
+
+import java.sql.SQLException;
+import java.util.List;
+
 import kickstarter.Runner;
 import kickstarter.dao.interfaces.iDAO;
+import kickstarter.entity.Category;
+import kickstarter.entity.Project;
+import kickstarter.entity.Quote;
 import kickstarter.mvc.Controller;
+import kickstarter.mvc.interfaces.iController;
 import kickstarter.mvc.interfaces.iModel;
 import kickstarter.mvc.interfaces.iView;
 import kickstarter.ui.iUserInterface;
@@ -29,7 +37,13 @@ public class test_creation_default_database {
 	}
 
 	@Test
-	public void test() {
-		iDAO idao = controller.getDao();
+	public void test() throws SQLException {
+		//controller.showPage();
+		iController i=controller;
+		i.setDatabaseDAO();
+		List<Category>list=i.getDao().getCategoryService().getAll();
+		Project project =i.getDao().getProjectService().getProjectById(20);
+	
+	
 	}
 }

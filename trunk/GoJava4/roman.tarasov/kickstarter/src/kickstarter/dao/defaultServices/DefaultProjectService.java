@@ -70,11 +70,6 @@ public class DefaultProjectService implements iProjectService {
 	}
 
 	@Override
-	public Project getProjectByIndex(int index) {
-		return projects.get(index);
-	}
-
-	@Override
 	public int getProjectsLength() {
 		return projects.size();
 	}
@@ -99,6 +94,24 @@ public class DefaultProjectService implements iProjectService {
 	@Override
 	public void createProjects(iDAO interfaceDAO)
 			throws SQLException {
+		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public List<Project> sortProjectsByCategoryID(int categoryID)  {
+			List<Project> sortedProjects = new ArrayList<Project>();
+			int length = projects.size();
+			for (int index = 0; index < length; index++) {
+			Project	project = projects.get(index);
+				if (project.getCategoryID() == categoryID) {
+					sortedProjects.add(project);
+				}
+			}
+			return sortedProjects;
+		}
+
+	@Override
+	public void storeProject(Project project) {
 		// TODO Auto-generated method stub
 		
 	}

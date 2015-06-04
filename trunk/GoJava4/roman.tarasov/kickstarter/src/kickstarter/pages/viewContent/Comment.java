@@ -1,5 +1,6 @@
 package kickstarter.pages.viewContent;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import kickstarter.dao.defaultServices.ServiceException;
@@ -9,7 +10,7 @@ import kickstarter.entity.ProjectComment;
 public class Comment extends PageView {
 
 	@Override
-	public String getHeader() throws ServiceException {
+	public String getHeader() throws ServiceException, SQLException {
 		modelValues = imodel.getModelValues();
 		int projectID = modelValues.getIntSelectedProject();
 		Project project = idao.getProjectService().getProjectById(projectID);

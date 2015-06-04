@@ -1,8 +1,8 @@
 package kickstarter.dao.databaseServices;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -11,37 +11,38 @@ import kickstarter.dao.interfaces.iQuoteService;
 import kickstarter.entity.Quote;
 
 public class DBquoteService implements iQuoteService {
-	private List<Quote> quotes;
 	private iDatabaseService databaseService;
 
 	public DBquoteService(iDatabaseService dbService) {
 		this.databaseService = dbService;
-		quotes = new ArrayList<Quote>();
-		Quote quote = new Quote();
-		quote.setID(1);
-		quote.setQuote("Explore iprojects, everywhere");
-		quotes.add(quote);
-
-		quote = new Quote();
-		quote.setID(2);
-		quote.setQuote("'To be is to do'—Socrates. 'To do is to be'—Jean-Paul Sartre. 'Do be do be do'—Frank Sinatra");
-		quotes.add(quote);
 	}
 
 	@Override
-	public Quote getRandomQuote() {
-		return quotes.get(new Random().nextInt(quotes.size()));
+	public Quote getRandomQuote() throws SQLException {
+		Statement statement = databaseService.getConnection().createStatement(
+				ResultSet.TYPE_SCROLL_INSENSITIVE, 0);
+		ResultSet resultSet = statement
+				.executeQuery("SELECT COUNT(*) AS rowcount FROM quotes");
+		resultSet.next();
+		int count = resultSet.getInt("rowcount");
+		int randomPointer = new Random().nextInt(count);
+		resultSet = statement.executeQuery("SELECT *  FROM quotes");
+		resultSet.absolute(randomPointer);
+		resultSet.next();
+		int id = resultSet.getInt("id");
+		Quote quote = new Quote();
+		quote.setID(id);
+		quote.setQuote(resultSet.getString("quote"));
+		return quote;
 	}
 
 	@Override
 	public List<Quote> getAll() {
-		return quotes;
+		return null;
 	}
 
 	@Override
-	public void createQuotes(iDAO sourceDAO)
-			throws SQLException {
-		databaseService.getConnection();
+	public void createQuotes(iDAO sourceDAO) throws SQLException {
 		List<Quote> quotes = sourceDAO.getQuoteService().getAll();
 		Statement statement = databaseService.getConnection().createStatement();
 		statement.executeUpdate("DROP TABLE IF EXISTS  quotes ");
@@ -52,5 +53,4 @@ public class DBquoteService implements iQuoteService {
 					+ quote.getID() + "," + "'" + quote.getQuote() + "')");
 		}
 	}
-
 }

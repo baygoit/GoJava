@@ -1,5 +1,6 @@
 package kickstarter.dao.databaseServices;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -12,29 +13,33 @@ import kickstarter.entity.Category;
 public class DBcategoryService implements iCategoryService {
 	private List<Category> categories;
 	private iDatabaseService dbService;
-	public DBcategoryService(iDatabaseService dbService) {
-		this.dbService=dbService;
-		
-		categories = new ArrayList<Category>();
-		Category category = new Category();
-		category.setID(5);
-		category.setName("Technology");
-		categories.add(category);
 
-		category = new Category();
-		category.setID(4);
-		category.setName("Social");
-		categories.add(category);
+	public DBcategoryService(iDatabaseService dbService) {
+		this.dbService = dbService;
 	}
 
 	@Override
-	public List<Category> getAll() {
+	public List<Category> getAll() throws SQLException {
+		categories = new ArrayList<Category>();
+		Statement statement = dbService.getConnection().createStatement();
+		ResultSet resultSet = statement
+				.executeQuery("SELECT COUNT(*) AS rowcount FROM categories");
+		resultSet.next();
+		int count = resultSet.getInt("rowcount");
+		resultSet = statement
+				.executeQuery("SELECT id,category  FROM categories");
+		for (int pointer = 0; pointer < count; pointer++) {
+			resultSet.next();
+			Category category = new Category();
+			category.setID(resultSet.getInt("id"));
+			category.setName(resultSet.getString("category"));
+			categories.add(category);
+		}
 		return categories;
 	}
 
 	@Override
-	public void createCategories(iDAO sourceDAO)
-			throws SQLException {
+	public void createCategories(iDAO sourceDAO) throws SQLException {
 		List<Category> categories = sourceDAO.getCategoryService().getAll();
 		Statement statement = dbService.getConnection().createStatement();
 		statement.executeUpdate("DROP TABLE IF EXISTS  categories ");

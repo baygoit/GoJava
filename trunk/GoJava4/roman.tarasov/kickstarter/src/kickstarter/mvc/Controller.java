@@ -10,7 +10,7 @@ public class Controller implements iController {
 
 	private iView iview;
 	private iModel imodel;
-	private iDAO dao;
+	private iDAO idao;
 	private iDAO defaultDAO;
 	private iDAO databaseDAO;
 	private iDatabaseService databaseService;
@@ -42,8 +42,10 @@ public class Controller implements iController {
 	}
 
 	public void setDao(iDAO idao) {
+		
 		iview.setIDAO(idao);
 		imodel.setIDAO(idao);
+		this.idao=idao;
 	}
 
 	@Override
@@ -54,7 +56,7 @@ public class Controller implements iController {
 
 	@Override
 	public iDAO getDao() {
-		return dao;
+		return idao;
 	}
 
 	@Override

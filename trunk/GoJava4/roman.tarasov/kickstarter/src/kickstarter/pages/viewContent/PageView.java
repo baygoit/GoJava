@@ -1,5 +1,7 @@
 package kickstarter.pages.viewContent;
 
+import java.sql.SQLException;
+
 import kickstarter.dao.defaultServices.ServiceException;
 import kickstarter.dao.interfaces.iDAO;
 import kickstarter.mvc.interfaces.iModel;
@@ -14,7 +16,7 @@ public abstract class PageView {
 	protected ModelValues modelValues;
 	protected iDAO idao;
 
-	public abstract String getHeader() throws ServiceException;
+	public abstract String getHeader() throws ServiceException, SQLException;
 
 
 	public void setImodel(iModel imodel) {

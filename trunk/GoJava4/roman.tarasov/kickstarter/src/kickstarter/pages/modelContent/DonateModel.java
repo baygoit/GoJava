@@ -1,5 +1,7 @@
 package kickstarter.pages.modelContent;
 
+import java.sql.SQLException;
+
 import kickstarter.dao.defaultServices.ServiceException;
 import kickstarter.entity.Project;
 import kickstarter.mvc.interfaces.IndexOfPage;
@@ -34,12 +36,12 @@ public class DonateModel extends PageModel {
 				Project project = idao.getProjectService().getProjectById(modelValues
 						.getIntSelectedProject());
 				project.setPledged(project.getPledged() + getMoney);
-
+				idao.getProjectService().storeProject(project);
 				modelValues.setResultOfBankOperation("\nbalance before :"
 						+ balanceBefore + "\nbalance after :" + balanceAfter);
 				imodel.next(IndexOfPage.BANK_OPERATION_RESULT_PAGE.ordinal());
 			} catch (NumberFormatException | NullPointerException
-					| BankException e) {
+					| BankException | SQLException e) {
 				imodel.savePageBeforeError(IndexOfPage.DONATE_PAGE.ordinal());
 				modelValues.setResultOfBankOperation(e.toString());
 				imodel.next(IndexOfPage.BANK_OPERATION_RESULT_PAGE.ordinal());

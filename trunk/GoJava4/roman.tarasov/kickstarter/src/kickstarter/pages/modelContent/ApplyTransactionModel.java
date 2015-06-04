@@ -1,5 +1,7 @@
 package kickstarter.pages.modelContent;
 
+import java.sql.SQLException;
+
 import kickstarter.dao.defaultServices.ServiceException;
 import kickstarter.entity.Project;
 import kickstarter.mvc.interfaces.IndexOfPage;
@@ -44,7 +46,7 @@ public class ApplyTransactionModel extends PageModel {
 				imodel.next(IndexOfPage.BANK_OPERATION_RESULT_PAGE.ordinal());
 
 			} catch (NumberFormatException | NullPointerException
-					| BankException e) {
+					| BankException | SQLException e) {
 				imodel.savePageBeforeError(IndexOfPage.DONATE_PAGE.ordinal());
 				modelValues = imodel.getModelValues();
 				modelValues.setResultOfBankOperation(resultOfBankOperation);

@@ -1,8 +1,7 @@
 package kickstarter.pages.viewContent;
 
-import java.util.ArrayList;
+import java.sql.SQLException;
 import java.util.List;
-
 import kickstarter.dao.defaultServices.ServiceException;
 import kickstarter.entity.Project;
 import kickstarter.mvc.viewState.ViewValues;
@@ -10,22 +9,11 @@ import kickstarter.mvc.viewState.ViewValues;
 public class Projects extends PageView {
 	private Project project;
 
-	private List<Project> sortProjectsByCategoryID(int categoryID)
-			throws ServiceException {
-		List<Project> sortedProjects = new ArrayList<Project>();
-		int length = idao.getProjectService().getProjectsLength();
-		for (int index = 0; index < length; index++) {
-			project = idao.getProjectService().getProjectByIndex(index);
-			if (project.getCategoryID() == categoryID) {
-				sortedProjects.add(project);
-			}
-		}
-		return sortedProjects;
-	}
 
-	private String printProjectsInfo(int categoryID) throws ServiceException {
+
+	private String printProjectsInfo(int categoryID) throws ServiceException, SQLException {
 		StringBuilder result = new StringBuilder();
-		List<Project> sortedToSelect = sortProjectsByCategoryID(categoryID);
+		List<Project> sortedToSelect = idao.getProjectService().sortProjectsByCategoryID(categoryID);
 		int length = sortedToSelect.size();
 		strValues = new String[length];
 		intValues = new int[length];
@@ -57,7 +45,7 @@ public class Projects extends PageView {
 	}
 
 	@Override
-	public String getHeader() throws ServiceException {
+	public String getHeader() throws ServiceException, SQLException {
 
 		StringBuilder header = new StringBuilder();
 		header.append("\n________________________");

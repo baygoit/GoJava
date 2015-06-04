@@ -1,12 +1,14 @@
 package kickstarter.pages.viewContent;
 
+import java.sql.SQLException;
+
 import kickstarter.dao.defaultServices.ServiceException;
 import kickstarter.entity.Project;
 
 public class Invest extends PageView {
 
 	@Override
-	public String getHeader() throws ServiceException {
+	public String getHeader() throws ServiceException, SQLException {
 
 		Project project = idao.getProjectService().getProjectById(
 				imodel.getModelValues().getIntSelectedProject());
