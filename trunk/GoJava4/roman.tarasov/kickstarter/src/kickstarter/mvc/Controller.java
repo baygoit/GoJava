@@ -1,5 +1,6 @@
 package kickstarter.mvc;
 
+import kickstarter.dao.databaseServices.iDatabaseService;
 import kickstarter.dao.interfaces.iDAO;
 import kickstarter.mvc.interfaces.iController;
 import kickstarter.mvc.interfaces.iModel;
@@ -12,6 +13,11 @@ public class Controller implements iController {
 	private iDAO dao;
 	private iDAO defaultDAO;
 	private iDAO databaseDAO;
+	private iDatabaseService databaseService;
+
+	public void setDatabaseService(iDatabaseService databaseService) {
+		this.databaseService = databaseService;
+	}
 
 	public void showPage() {
 		iview.showPage();
@@ -65,5 +71,10 @@ public class Controller implements iController {
 	@Override
 	public void setDatabaseDAO() {
 		setDao(databaseDAO);
+	}
+
+	@Override
+	public iDatabaseService getDatabaseService() {
+		return databaseService;
 	}
 }

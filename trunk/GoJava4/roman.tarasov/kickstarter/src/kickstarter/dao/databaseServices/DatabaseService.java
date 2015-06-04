@@ -6,12 +6,12 @@ import java.sql.SQLException;
 import kickstarter.dao.interfaces.iDAO;
 
 public class DatabaseService implements iDatabaseService {
-
+	Connection connection;
 	@Override
 	public void createDefaultDatabase(DatabaseSettings settings,
 			iDAO sourceDAO, iDAO destinationDAO) {
 
-		try (Connection connection = DriverManager.getConnection(
+		try (Connection  connection = DriverManager.getConnection(
 				settings.getUrl(), settings.getUser(), settings.getPassword())) {
 
 			destinationDAO.getProjectService().createProjects(sourceDAO,
@@ -26,5 +26,11 @@ public class DatabaseService implements iDatabaseService {
 			System.out.println(e.getMessage());
 			throw new RuntimeException(e);
 		}
+	}
+
+	@Override
+	public boolean getDatabaseStatus() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }

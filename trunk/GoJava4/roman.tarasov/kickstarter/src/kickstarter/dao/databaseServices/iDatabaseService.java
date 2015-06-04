@@ -6,4 +6,5 @@ public interface iDatabaseService {
 
 	void createDefaultDatabase(DatabaseSettings settings, iDAO sourceDAO,
 			iDAO destinationDAO);
+	boolean getDatabaseStatus();
 }

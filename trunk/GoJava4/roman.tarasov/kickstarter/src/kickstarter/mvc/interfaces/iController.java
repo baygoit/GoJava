@@ -1,5 +1,6 @@
 package kickstarter.mvc.interfaces;
 
+import kickstarter.dao.databaseServices.iDatabaseService;
 import kickstarter.dao.interfaces.iDAO;
 
 public interface iController {
@@ -13,4 +14,6 @@ public interface iController {
 	void setDefaultDAO();
 
 	void setDatabaseDAO();
+
+	iDatabaseService getDatabaseService();
 }

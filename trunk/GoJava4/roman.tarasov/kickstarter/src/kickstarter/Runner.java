@@ -76,8 +76,9 @@ public class Runner {
 
 		Controller controller = new Controller();
 		iController icontroller = controller;
+		controller.setDatabaseService(dbService);
 		modelInit(model, bank, icontroller);
-		viewInit(view, bank);
+		viewInit(view, bank, icontroller);
 		controllerInit(controller, view, model, iDefaultDAO, iDatabaseDAO);
 
 		kickstarter = Kickstarter.getInstance();
@@ -153,7 +154,7 @@ public class Runner {
 
 	}
 
-	private void viewInit(View view, Bank bank) {
+	private void viewInit(View view, Bank bank,iController icontroller) {
 
 		PageView pageView = new Categories();
 		view.addPageView(pageView);
@@ -185,7 +186,7 @@ public class Runner {
 		pageView = new ApplyTransaction();
 		view.addPageView(pageView);
 
-		pageView = new DAOmenu();
+		pageView = new DAOmenu(icontroller);
 		view.addPageView(pageView);
 	}
 
