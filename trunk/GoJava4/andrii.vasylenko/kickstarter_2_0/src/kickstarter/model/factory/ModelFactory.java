@@ -14,13 +14,19 @@ import kickstarter.model.ProjectsModel;
 import kickstarter.model.QuoteModel;
 import kickstarter.model.StartModel;
 import kickstarter.model.TheEndModel;
-import kickstarter.model.storage.Storage;
+import kickstarter.model.dao.CategoriesDAO;
+import kickstarter.model.dao.ProjectsDAO;
+import kickstarter.model.dao.QuotesDAO;
 
 public class ModelFactory implements AbstractModelFactory {
-	private Storage storage;
+	private QuotesDAO quotes;
+	private CategoriesDAO categories;
+	private ProjectsDAO projects;
 
-	public ModelFactory(Storage storage) {
-		this.storage = storage;
+	public ModelFactory(QuotesDAO quotes, CategoriesDAO categories, ProjectsDAO projects) {
+		this.quotes = quotes;
+		this.categories = categories;
+		this.projects = projects;
 	}
 
 	@Override
@@ -28,11 +34,11 @@ public class ModelFactory implements AbstractModelFactory {
 		if (state == START) {
 			return new StartModel();
 		} else if (state == QUOTE) {
-			return new QuoteModel(storage);
+			return new QuoteModel(quotes);
 		} else if (state == CATEGORIES) {
-			return new CategoriesModel(storage);
+			return new CategoriesModel(categories);
 		} else if (state == PROJECTS) {
-			return new ProjectsModel(storage, parameters);
+			return new ProjectsModel(projects, parameters);
 		} else if (state == PROJECT) {
 			return new ProjectModel(parameters);
 		} else if (state == ERROR) {

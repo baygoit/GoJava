@@ -4,17 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import kickstarter.exception.CannotGetDataException;
+import kickstarter.model.dao.ProjectsDAO;
 import kickstarter.model.engine.Category;
 import kickstarter.model.engine.Project;
-import kickstarter.model.storage.Storage;
 
 public class ProjectsModel implements Model {
-	private Storage storage;
+	private ProjectsDAO projects;
 	private Category category;
 	private List<Object> parameters;
 
-	public ProjectsModel(Storage storage, List<Object> parameters) {
-		this.storage = storage;
+	public ProjectsModel(ProjectsDAO projects, List<Object> parameters) {
+		this.projects = projects;
 		this.parameters = new ArrayList<Object>(parameters);
 		this.category = (Category) parameters.get(0);
 	}
@@ -23,9 +23,9 @@ public class ProjectsModel implements Model {
 	public List<String> getData() throws CannotGetDataException {
 		List<String> result = new ArrayList<>();
 
-		List<Project> projects = storage.getProjects(category);
-		for (int i = 0; i < projects.size(); i++) {
-			Project project = projects.get(i);
+		List<Project> projectsList = projects.getProjects(category.getId());
+		for (int i = 0; i < projectsList.size(); i++) {
+			Project project = projectsList.get(i);
 			result.add(getDescription(project));
 		}
 
@@ -42,8 +42,8 @@ public class ProjectsModel implements Model {
 		if (item == 0) {
 			parameters.remove(0);
 		} else {
-			//parameters.add(0, storage.getProject(item - 1, category));
-			parameters.add(0, storage.getProject(item, category));
+			// parameters.add(0, storage.getProject(item - 1, category));
+			parameters.add(0, projects.getProject(item, category.getId()));
 		}
 
 		return parameters;
@@ -52,7 +52,7 @@ public class ProjectsModel implements Model {
 	private String getDescription(Project project) {
 		StringBuilder result = new StringBuilder();
 
-		//int numberInMenu = project.getId() + 1;
+		// int numberInMenu = project.getId() + 1;
 		int numberInMenu = project.getId();
 		result.append(numberInMenu);
 		result.append(" - ");

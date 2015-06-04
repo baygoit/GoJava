@@ -4,24 +4,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 import kickstarter.exception.CannotGetDataException;
+import kickstarter.model.dao.CategoriesDAO;
 import kickstarter.model.engine.Category;
-import kickstarter.model.storage.Storage;
 
 public class CategoriesModel implements Model {
-	private Storage storage;
+	private CategoriesDAO categories;
 
-	public CategoriesModel(Storage storage) {
-		this.storage = storage;
+	public CategoriesModel(CategoriesDAO categories) {
+		this.categories = categories;
 	}
 
 	@Override
 	public List<String> getData() throws CannotGetDataException {
 		List<String> result = new ArrayList<>();
 
-		List<Category> categories = storage.getCategories();
-		for (int i = 0; i < categories.size(); i++) {
-			Category category = categories.get(i);
-			result.add(getDescription(category));
+		for (Category category : categories.getCategories()) {
+			result.add(getDescription(category.getId(), category.getName()));
 		}
 
 		return result;
@@ -34,26 +32,19 @@ public class CategoriesModel implements Model {
 
 	@Override
 	public List<Object> getParameters(int item) throws CannotGetDataException {
-		if (item == 0) {
-			return null;
+		List<Object> result = new ArrayList<>();
+
+		if (item != 0) {
+			int id = item;
+			Category category = categories.getCategory(id);
+			result.add(category);
 		}
 
-		List<Object> result = new ArrayList<>();
-		// result.add(storage.getCategory(item - 1));
-		result.add(storage.getCategory(item));
 		return result;
 	}
 
-	private String getDescription(Category category) {
-		StringBuilder result = new StringBuilder();
-
-		// int numberInMenu = category.getId() + 1;
-		int numberInMenu = category.getId();
-		result.append(numberInMenu);
-		result.append(" - ");
-
-		result.append(category.getName());
-
-		return result.toString();
+	private String getDescription(int id, String name) {
+		int item = id;
+		return String.format("%s - %s", item, name);
 	}
 }

@@ -4,21 +4,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 import kickstarter.exception.CannotGetDataException;
+import kickstarter.model.dao.QuotesDAO;
 import kickstarter.model.engine.Quote;
-import kickstarter.model.storage.Storage;
 
 public class QuoteModel implements Model {
-	private Storage storage;
+	private QuotesDAO quotesDAO;
 
-	public QuoteModel(Storage storage) {
-		this.storage = storage;
+	public QuoteModel(QuotesDAO quotesDAO) {
+		this.quotesDAO = quotesDAO;
 	}
 
 	@Override
 	public List<String> getData() throws CannotGetDataException {
 		List<String> result = new ArrayList<>();
 
-		Quote quote = storage.getRandomQuote();
+		Quote quote = quotesDAO.getRandomQuote();
 		if (quote != null) {
 			result.add(quote.getQuote());
 		}
