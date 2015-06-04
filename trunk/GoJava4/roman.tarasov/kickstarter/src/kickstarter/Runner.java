@@ -1,5 +1,7 @@
 package kickstarter;
 
+import java.sql.SQLException;
+
 import kickstarter.dao.DAO;
 import kickstarter.dao.databaseServices.DBcategoryService;
 import kickstarter.dao.databaseServices.DBcommentService;
@@ -66,17 +68,22 @@ public class Runner {
 		Model model = new Model();
 		View view = new View(ui);
 
+		iDatabaseService databaseService = new DatabaseService();
 		iDAO iDefaultDAO = setDefaultServices(new DAO());
-		iDAO iDatabaseDAO = setDatabaseServices(new DAO());
+		iDAO iDatabaseDAO = setDatabaseServices(new DAO(), databaseService);
 
-		iDatabaseService dbService = new DatabaseService();
-		dbService.createDefaultDatabase(new DatabaseSettings(
-				"jdbc:postgresql://localhost:5432/kickstarter", "postgres",
-				"root"),iDefaultDAO,iDatabaseDAO);
+		try {
+			databaseService.createDefaultDatabase(new DatabaseSettings(
+					"jdbc:postgresql://localhost:5432/kickstarter", "postgres",
+					"root"), iDefaultDAO, iDatabaseDAO);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		Controller controller = new Controller();
 		iController icontroller = controller;
-		controller.setDatabaseService(dbService);
+		controller.setDatabaseService(databaseService);
 		modelInit(model, bank, icontroller);
 		viewInit(view, bank, icontroller);
 		controllerInit(controller, view, model, iDefaultDAO, iDatabaseDAO);
@@ -85,16 +92,16 @@ public class Runner {
 		kickstarter.setController(controller);
 		kickstarter.setView(view);
 		kickstarter.setModel(model);
-		kickstarter.setDatabaseService(dbService);
+		kickstarter.setDatabaseService(databaseService);
 		kickstarter.setUI(ui);
 
 	}
 
-	private iDAO setDatabaseServices(iDAO idao) {
-		idao.setCategoryService(new DBcategoryService());
-		idao.setProjectService(new DBprojectService());
-		idao.setCommentService(new DBcommentService());
-		idao.setQuoteService(new DBquoteService());
+	private iDAO setDatabaseServices(iDAO idao, iDatabaseService databaseService) {
+		idao.setCategoryService(new DBcategoryService(databaseService));
+		idao.setProjectService(new DBprojectService(databaseService));
+		idao.setCommentService(new DBcommentService(databaseService));
+		idao.setQuoteService(new DBquoteService(databaseService));
 		return idao;
 	}
 
@@ -154,7 +161,7 @@ public class Runner {
 
 	}
 
-	private void viewInit(View view, Bank bank,iController icontroller) {
+	private void viewInit(View view, Bank bank, iController icontroller) {
 
 		PageView pageView = new Categories();
 		view.addPageView(pageView);

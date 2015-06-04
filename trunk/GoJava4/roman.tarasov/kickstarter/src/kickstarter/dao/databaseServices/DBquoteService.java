@@ -1,6 +1,5 @@
 package kickstarter.dao.databaseServices;
 
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -12,9 +11,11 @@ import kickstarter.dao.interfaces.iQuoteService;
 import kickstarter.entity.Quote;
 
 public class DBquoteService implements iQuoteService {
-	List<Quote> quotes;
+	private List<Quote> quotes;
+	private iDatabaseService databaseService;
 
-	public DBquoteService() {
+	public DBquoteService(iDatabaseService dbService) {
+		this.databaseService = dbService;
 		quotes = new ArrayList<Quote>();
 		Quote quote = new Quote();
 		quote.setID(1);
@@ -37,12 +38,12 @@ public class DBquoteService implements iQuoteService {
 		return quotes;
 	}
 
-
 	@Override
-	public void createQuotes(iDAO sourceDAO, Connection connection)
+	public void createQuotes(iDAO sourceDAO)
 			throws SQLException {
+		databaseService.getConnection();
 		List<Quote> quotes = sourceDAO.getQuoteService().getAll();
-		Statement statement = connection.createStatement();
+		Statement statement = databaseService.getConnection().createStatement();
 		statement.executeUpdate("DROP TABLE IF EXISTS  quotes ");
 		statement
 				.executeUpdate("CREATE TABLE quotes (id SERIAL not null PRIMARY KEY, quote varchar(255))");
@@ -51,5 +52,5 @@ public class DBquoteService implements iQuoteService {
 					+ quote.getID() + "," + "'" + quote.getQuote() + "')");
 		}
 	}
-	
+
 }

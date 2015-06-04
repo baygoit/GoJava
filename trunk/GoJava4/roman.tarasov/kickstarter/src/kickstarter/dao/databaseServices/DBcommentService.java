@@ -1,6 +1,5 @@
 package kickstarter.dao.databaseServices;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -15,11 +14,12 @@ import kickstarter.dao.interfaces.iDAO;
 import kickstarter.entity.ProjectComment;
 
 public class DBcommentService implements iCommentService {
-
+	private iDatabaseService dbService;
 	private int projectID;
-	HashMap<Integer, ArrayList<ProjectComment>> allComments;
+	private HashMap<Integer, ArrayList<ProjectComment>> allComments;
 
-	public DBcommentService() {
+	public DBcommentService(iDatabaseService dbService) {
+		this.dbService=dbService;
 		allComments = new HashMap<Integer, ArrayList<ProjectComment>>();
 	}
 
@@ -70,12 +70,12 @@ public class DBcommentService implements iCommentService {
 	}
 	
 	@Override
-	public void createComments(iDAO sourceDAO, Connection connection)
+	public void createComments(iDAO sourceDAO)
 			throws SQLException {
 		
 		Map<Integer, ArrayList<ProjectComment>> comments = sourceDAO
 				.getCommentService().getAll();
-		Statement statement = connection.createStatement();
+		Statement statement = dbService.getConnection().createStatement();
 		statement.executeUpdate("DROP TABLE IF EXISTS  comments ");
 		statement
 				.executeUpdate("CREATE TABLE comments (id_comment SERIAL not null PRIMARY KEY,id_project integer,id_user integer, comment varchar(255))");
@@ -86,7 +86,7 @@ public class DBcommentService implements iCommentService {
 
 			for (ProjectComment comment : value) {
 
-				PreparedStatement preparedStatement = connection
+				PreparedStatement preparedStatement = dbService.getConnection()
 						.prepareStatement("INSERT INTO comments (id_project, id_user, comment) values(?,?,?)");
 				preparedStatement.setInt(1, comment.getProjectID());
 				preparedStatement.setInt(2, comment.getUserID());

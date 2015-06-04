@@ -1,7 +1,6 @@
 package kickstarter.dao.databaseServices;
 
 import java.sql.Array;
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -11,7 +10,14 @@ import kickstarter.dao.interfaces.iProjectService;
 import kickstarter.entity.Project;
 
 public class DBprojectService implements iProjectService {
-	List<Project> projects;
+	private List<Project> projects;
+	private iDatabaseService dbService;
+
+
+	public DBprojectService(iDatabaseService dbService) {
+		
+		this.dbService = dbService;
+	}
 
 	@Override
 	public Project getProjectByIndex(int index) {
@@ -41,20 +47,20 @@ public class DBprojectService implements iProjectService {
 	}
 
 	@Override
-	public void createProjects(iDAO sourceDAO, Connection connection)
+	public void createProjects(iDAO sourceDAO)
 			throws SQLException {
 		List<Project> projects = sourceDAO.getProjectService().getAll();
-		Statement statement = connection.createStatement();
+		Statement statement = dbService.getConnection().createStatement();
 		statement.executeUpdate("DROP TABLE IF EXISTS  projects ");
 		statement
 				.executeUpdate("CREATE TABLE projects (id_project SERIAL not null PRIMARY KEY,id_category integer, name varchar(255),description varchar(255),amount float8[],days_to_go integer,pledged float8,history varchar(255),link varchar(255),short_description varchar(255))");
 		for (Project project : projects) {
-			PreparedStatement preparedStatement = connection
+			PreparedStatement preparedStatement = dbService.getConnection()
 					.prepareStatement("INSERT INTO projects ("
 							+ "id_project,id_category, name, description, amount, days_to_go, pledged, "
 							+ "history, link, short_description) values(?,?,?,?,?,?,?,?,?,?)");
 
-			Array sqlArray = connection.createArrayOf("float8",
+			Array sqlArray = dbService.getConnection().createArrayOf("float8",
 					project.getAmount());
 			preparedStatement.setInt(1, project.getID());
 			preparedStatement.setInt(2, project.getCategoryID());

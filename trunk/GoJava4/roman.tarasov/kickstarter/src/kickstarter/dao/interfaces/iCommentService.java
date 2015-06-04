@@ -1,6 +1,5 @@
 package kickstarter.dao.interfaces;
 
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +20,6 @@ public interface iCommentService {
 
 	Map<Integer, ArrayList<ProjectComment>> getAll();
 
-	void createComments(iDAO sourceDAO, Connection connection)
+	void createComments(iDAO sourceDAO)
 			throws SQLException;
 }

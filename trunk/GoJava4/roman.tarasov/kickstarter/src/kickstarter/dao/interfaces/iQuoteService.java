@@ -11,5 +11,5 @@ public interface iQuoteService {
 	Quote getRandomQuote();
 
 	List<Quote> getAll();
-	void createQuotes(iDAO interfaceDAO, Connection connection) throws SQLException;
+	void createQuotes(iDAO interfaceDAO) throws SQLException;
 }

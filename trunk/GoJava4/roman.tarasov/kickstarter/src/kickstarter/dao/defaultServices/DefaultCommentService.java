@@ -1,6 +1,5 @@
 package kickstarter.dao.defaultServices;
 
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -112,7 +111,7 @@ public class DefaultCommentService implements iCommentService {
 	}
 
 	@Override
-	public void createComments(iDAO sourceDAO, Connection connection)
+	public void createComments(iDAO sourceDAO)
 			throws SQLException {
 	}
 }

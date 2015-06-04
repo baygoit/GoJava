@@ -1,11 +1,9 @@
 package kickstarter.dao.defaultServices;
 
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-
 import kickstarter.dao.interfaces.iDAO;
 import kickstarter.dao.interfaces.iQuoteService;
 import kickstarter.entity.Quote;
@@ -37,7 +35,7 @@ public class DefaultQuoteService implements iQuoteService {
 	}
 
 	@Override
-	public void createQuotes(iDAO interfaceDAO, Connection connection)
+	public void createQuotes(iDAO interfaceDAO)
 			throws SQLException {
 		// TODO Auto-generated method stub
 		

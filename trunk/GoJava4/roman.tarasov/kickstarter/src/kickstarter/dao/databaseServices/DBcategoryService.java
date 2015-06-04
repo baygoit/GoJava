@@ -1,6 +1,5 @@
 package kickstarter.dao.databaseServices;
 
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -11,9 +10,11 @@ import kickstarter.dao.interfaces.iDAO;
 import kickstarter.entity.Category;
 
 public class DBcategoryService implements iCategoryService {
-	List<Category> categories;
-
-	public DBcategoryService() {
+	private List<Category> categories;
+	private iDatabaseService dbService;
+	public DBcategoryService(iDatabaseService dbService) {
+		this.dbService=dbService;
+		
 		categories = new ArrayList<Category>();
 		Category category = new Category();
 		category.setID(5);
@@ -32,10 +33,10 @@ public class DBcategoryService implements iCategoryService {
 	}
 
 	@Override
-	public void createCategories(iDAO sourceDAO, Connection connection)
+	public void createCategories(iDAO sourceDAO)
 			throws SQLException {
 		List<Category> categories = sourceDAO.getCategoryService().getAll();
-		Statement statement = connection.createStatement();
+		Statement statement = dbService.getConnection().createStatement();
 		statement.executeUpdate("DROP TABLE IF EXISTS  categories ");
 		statement
 				.executeUpdate("CREATE TABLE categories (id SERIAL not null PRIMARY KEY, category varchar(255))");

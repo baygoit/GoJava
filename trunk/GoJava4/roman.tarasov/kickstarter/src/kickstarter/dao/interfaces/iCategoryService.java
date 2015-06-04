@@ -1,6 +1,6 @@
 package kickstarter.dao.interfaces;
 
-import java.sql.Connection;
+
 import java.sql.SQLException;
 import java.util.List;
 
@@ -10,7 +10,7 @@ public interface iCategoryService {
 
 	List<Category> getAll();
 
-	void createCategories(iDAO interfaceDAO, Connection connection)
+	void createCategories(iDAO interfaceDAO)
 			throws SQLException;
 
 }

@@ -1,6 +1,6 @@
 package kickstarter.dao.interfaces;
 
-import java.sql.Connection;
+
 import java.sql.SQLException;
 import java.util.List;
 
@@ -16,5 +16,5 @@ public interface iProjectService {
 
 	List<Project> getAll();
 
-	void createProjects(iDAO interfaceDAO, Connection connection) throws SQLException;
+	void createProjects(iDAO interfaceDAO) throws SQLException;
 }

@@ -7,30 +7,22 @@ import kickstarter.dao.interfaces.iDAO;
 
 public class DatabaseService implements iDatabaseService {
 	Connection connection;
+
 	@Override
 	public void createDefaultDatabase(DatabaseSettings settings,
-			iDAO sourceDAO, iDAO destinationDAO) {
+			iDAO sourceDAO, iDAO destinationDAO) throws SQLException {
 
-		try (Connection  connection = DriverManager.getConnection(
-				settings.getUrl(), settings.getUser(), settings.getPassword())) {
+		connection = DriverManager.getConnection(settings.getUrl(),
+				settings.getUser(), settings.getPassword());
 
-			destinationDAO.getProjectService().createProjects(sourceDAO,
-					connection);
-			destinationDAO.getQuoteService()
-					.createQuotes(sourceDAO, connection);
-			destinationDAO.getCategoryService().createCategories(sourceDAO,
-					connection);
-			destinationDAO.getCommentService().createComments(sourceDAO, connection);
-
-		} catch (SQLException e) {
-			System.out.println(e.getMessage());
-			throw new RuntimeException(e);
-		}
+		destinationDAO.getProjectService().createProjects(sourceDAO);
+		destinationDAO.getQuoteService().createQuotes(sourceDAO);
+		destinationDAO.getCategoryService().createCategories(sourceDAO);
+		destinationDAO.getCommentService().createComments(sourceDAO);
 	}
 
 	@Override
-	public boolean getDatabaseStatus() {
-		// TODO Auto-generated method stub
-		return false;
+	public Connection getConnection() {
+		return connection;
 	}
 }

@@ -1,6 +1,5 @@
 package kickstarter.dao.defaultServices;
 
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -98,7 +97,7 @@ public class DefaultProjectService implements iProjectService {
 	}
 
 	@Override
-	public void createProjects(iDAO interfaceDAO, Connection connection)
+	public void createProjects(iDAO interfaceDAO)
 			throws SQLException {
 		// TODO Auto-generated method stub
 		

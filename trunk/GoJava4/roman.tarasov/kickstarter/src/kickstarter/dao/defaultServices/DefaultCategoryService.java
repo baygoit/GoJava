@@ -1,6 +1,5 @@
 package kickstarter.dao.defaultServices;
 
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +30,7 @@ public class DefaultCategoryService implements iCategoryService {
 	}
 
 	@Override
-	public void createCategories(iDAO interfaceDAO, Connection connection)
+	public void createCategories(iDAO interfaceDAO)
 			throws SQLException {
 	
 		
