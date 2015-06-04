@@ -10,22 +10,20 @@ import kickstarter.model.engine.Project;
 
 public class ProjectsModel implements Model {
 	private ProjectsDAO projects;
-	private Category category;
+	private int categoryId;
 	private List<Object> parameters;
 
 	public ProjectsModel(ProjectsDAO projects, List<Object> parameters) {
 		this.projects = projects;
 		this.parameters = new ArrayList<Object>(parameters);
-		this.category = (Category) parameters.get(0);
+		this.categoryId = ((Category) parameters.get(0)).getId();
 	}
 
 	@Override
 	public List<String> getData() throws CannotGetDataException {
 		List<String> result = new ArrayList<>();
 
-		List<Project> projectsList = projects.getProjects(category.getId());
-		for (int i = 0; i < projectsList.size(); i++) {
-			Project project = projectsList.get(i);
+		for (Project project : projects.getProjects(categoryId)) {
 			result.add(getDescription(project));
 		}
 
@@ -39,22 +37,24 @@ public class ProjectsModel implements Model {
 
 	@Override
 	public List<Object> getParameters(int item) throws CannotGetDataException {
+		List<Object> result = new ArrayList<>(parameters);
+
 		if (item == 0) {
-			parameters.remove(0);
+			result.remove(0);
 		} else {
-			// parameters.add(0, storage.getProject(item - 1, category));
-			parameters.add(0, projects.getProject(item, category.getId()));
+			int id = item;
+			Project project = projects.getProject(id, categoryId);
+			result.add(0, project);
 		}
 
-		return parameters;
+		return result;
 	}
 
 	private String getDescription(Project project) {
 		StringBuilder result = new StringBuilder();
 
-		// int numberInMenu = project.getId() + 1;
-		int numberInMenu = project.getId();
-		result.append(numberInMenu);
+		int item = project.getId();
+		result.append(item);
 		result.append(" - ");
 
 		result.append(project.getName());
