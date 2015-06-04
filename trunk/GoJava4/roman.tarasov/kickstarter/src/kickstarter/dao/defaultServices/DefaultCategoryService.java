@@ -1,9 +1,12 @@
 package kickstarter.dao.defaultServices;
 
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import kickstarter.dao.interfaces.iCategoryService;
+import kickstarter.dao.interfaces.iDAO;
 import kickstarter.entity.Category;
 
 public class DefaultCategoryService implements iCategoryService {
@@ -25,5 +28,12 @@ public class DefaultCategoryService implements iCategoryService {
 	@Override
 	public List<Category> getAll() {
 		return categories;
+	}
+
+	@Override
+	public void createCategories(iDAO interfaceDAO, Connection connection)
+			throws SQLException {
+	
+		
 	}
 }

@@ -3,6 +3,7 @@ package kickstarter;
 import kickstarter.dao.DAO;
 import kickstarter.dao.databaseServices.DBcategoryService;
 import kickstarter.dao.databaseServices.DBcommentService;
+import kickstarter.dao.databaseServices.DBprojectService;
 import kickstarter.dao.databaseServices.DBquoteService;
 import kickstarter.dao.databaseServices.DatabaseService;
 import kickstarter.dao.databaseServices.DatabaseSettings;
@@ -71,7 +72,7 @@ public class Runner {
 		iDatabaseService dbService = new DatabaseService();
 		dbService.createDefaultDatabase(new DatabaseSettings(
 				"jdbc:postgresql://localhost:5432/kickstarter", "postgres",
-				"root"),iDefaultDAO);
+				"root"),iDefaultDAO,iDatabaseDAO);
 
 		Controller controller = new Controller();
 		iController icontroller = controller;
@@ -90,7 +91,7 @@ public class Runner {
 
 	private iDAO setDatabaseServices(iDAO idao) {
 		idao.setCategoryService(new DBcategoryService());
-		idao.setProjectService(new DefaultProjectService());
+		idao.setProjectService(new DBprojectService());
 		idao.setCommentService(new DBcommentService());
 		idao.setQuoteService(new DBquoteService());
 		return idao;

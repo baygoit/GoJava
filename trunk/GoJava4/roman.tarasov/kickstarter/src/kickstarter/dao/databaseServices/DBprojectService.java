@@ -1,71 +1,17 @@
 package kickstarter.dao.databaseServices;
 
-import java.util.ArrayList;
+import java.sql.Array;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.List;
-
+import kickstarter.dao.interfaces.iDAO;
 import kickstarter.dao.interfaces.iProjectService;
 import kickstarter.entity.Project;
 
 public class DBprojectService implements iProjectService {
 	List<Project> projects;
-
-	public DBprojectService() {
-		projects = new ArrayList<Project>();
-		int categoryID = 5;
-
-		Project project = new Project();
-		project.setCategoryID(categoryID);
-		project.setName("Create electrobike");
-		project.setDescription("high efficiency");
-		project.setShortDescription("short description");
-		project.setHistory("history of bike creation");
-		project.setLinkToVideo("www.link.to.demo.video");
-		project.setPledged(25);
-		project.setGoal(2000);
-		project.setID(23);
-		project.setInvestmentOptions(new String[] { "1$ - ", "10$ -", "40$ -" });
-		project.setAmount(new double[] { 1, 10, 40 });
-		projects.add(project);
-
-		categoryID = 4;
-		project = new Project();
-		project.setCategoryID(categoryID);
-		project.setName("Paint the fence of the school");
-		project.setDescription("raising money for paint");
-		project.setInvestmentOptions(new String[] { "1$ - ", "10$ -", "40$ -" });
-		project.setAmount(new double[] { 1, 10, 40 });
-		project.setID(8);
-		projects.add(project);
-
-		categoryID = 4;
-		project = new Project();
-		project.setCategoryID(categoryID);
-		project.setName("Help Build ACRE's New Home in Chicago");
-		project.setDescription("The renovation of our new space and expansion of our Chicago programming!");
-		project.setShortDescription("Help ACRE achieve our most ambitious project to date");
-		project.setInvestmentOptions(new String[] { "100$ - ", "150$ -",
-				"400$ -" });
-		project.setAmount(new double[] { 100, 150, 400 });
-		project.setPledged(5000);
-		project.setGoal(10000);
-		project.setID(1);
-		projects.add(project);
-
-		categoryID = 5;
-		project = new Project();
-		project.setCategoryID(categoryID);
-		project.setName("Microduino mCookie");
-		project.setDescription("Small, stackable, Arduino-compatible electronics for makers, designers, engineers, students and curious tinkerers of all ages.");
-		project.setShortDescription("The smallest electronic modules on LEGO");
-		project.setHistory("history of Microduino mCookie");
-		project.setLinkToVideo("https://www.microduino.cc/module/view?id=53da0abdc69eee000055f55d");
-		project.setPledged(205);
-		project.setGoal(20000);
-		project.setID(20);
-		project.setInvestmentOptions(new String[] { "10$ - ", "20$ -", "100$ -" });
-		project.setAmount(new double[] { 10, 20, 100 });
-		projects.add(project);
-	}
 
 	@Override
 	public Project getProjectByIndex(int index) {
@@ -92,5 +38,35 @@ public class DBprojectService implements iProjectService {
 	@Override
 	public List<Project> getAll() {
 		return projects;
+	}
+
+	@Override
+	public void createProjects(iDAO sourceDAO, Connection connection)
+			throws SQLException {
+		List<Project> projects = sourceDAO.getProjectService().getAll();
+		Statement statement = connection.createStatement();
+		statement.executeUpdate("DROP TABLE IF EXISTS  projects ");
+		statement
+				.executeUpdate("CREATE TABLE projects (id_project SERIAL not null PRIMARY KEY,id_category integer, name varchar(255),description varchar(255),amount float8[],days_to_go integer,pledged float8,history varchar(255),link varchar(255),short_description varchar(255))");
+		for (Project project : projects) {
+			PreparedStatement preparedStatement = connection
+					.prepareStatement("INSERT INTO projects ("
+							+ "id_project,id_category, name, description, amount, days_to_go, pledged, "
+							+ "history, link, short_description) values(?,?,?,?,?,?,?,?,?,?)");
+
+			Array sqlArray = connection.createArrayOf("float8",
+					project.getAmount());
+			preparedStatement.setInt(1, project.getID());
+			preparedStatement.setInt(2, project.getCategoryID());
+			preparedStatement.setString(3, project.getName());
+			preparedStatement.setString(4, project.getDescription());
+			preparedStatement.setArray(5, sqlArray);
+			preparedStatement.setInt(6, project.getDaysToGo());
+			preparedStatement.setDouble(7, project.getPledged());
+			preparedStatement.setString(8, project.getHistory());
+			preparedStatement.setString(9, project.getLinkToVideo());
+			preparedStatement.setString(10, project.getShortDescription());
+			preparedStatement.executeUpdate();
+		}
 	}
 }

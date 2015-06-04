@@ -1,9 +1,13 @@
 package kickstarter.dao.databaseServices;
 
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import kickstarter.dao.interfaces.iDAO;
 import kickstarter.dao.interfaces.iQuoteService;
 import kickstarter.entity.Quote;
 
@@ -32,4 +36,20 @@ public class DBquoteService implements iQuoteService {
 	public List<Quote> getAll() {
 		return quotes;
 	}
+
+
+	@Override
+	public void createQuotes(iDAO sourceDAO, Connection connection)
+			throws SQLException {
+		List<Quote> quotes = sourceDAO.getQuoteService().getAll();
+		Statement statement = connection.createStatement();
+		statement.executeUpdate("DROP TABLE IF EXISTS  quotes ");
+		statement
+				.executeUpdate("CREATE TABLE quotes (id SERIAL not null PRIMARY KEY, quote varchar(255))");
+		for (Quote quote : quotes) {
+			statement.executeUpdate("INSERT INTO quotes VALUES ("
+					+ quote.getID() + "," + "'" + quote.getQuote() + "')");
+		}
+	}
+	
 }

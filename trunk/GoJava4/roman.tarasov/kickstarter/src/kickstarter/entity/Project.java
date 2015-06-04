@@ -8,7 +8,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Project  {
 
 	
-	private double[] amount;
+	
 	private String name;
 	private String description;
 	private String shortDescription;
@@ -20,7 +20,7 @@ public class Project  {
 	private String linkToVideo;
 	private int categoryID;
 	private String[] investmentOptions;
-
+	private Double[] amount;
 	public String getName() {
 		return name;
 	}
@@ -120,12 +120,12 @@ public class Project  {
 		this.investmentOptions = investmentOptions;
 	}
 
-	public double[] getAmount() {
+	public Double[] getAmount() {
 		return amount;
 	}
 
 	@XmlAttribute
-	public void setAmount(double[] amount) {
+	public void setAmount(Double[] amount) {
 		this.amount = amount;
 	}
 }
