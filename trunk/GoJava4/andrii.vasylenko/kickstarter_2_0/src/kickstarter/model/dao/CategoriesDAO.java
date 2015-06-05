@@ -8,11 +8,11 @@ import kickstarter.exception.CannotGetDataException;
 import kickstarter.model.engine.Category;
 
 public interface CategoriesDAO {
-	void createTableCategories() throws CannotCreateTableException;
-
 	void addCategory(String name) throws CannotAddDataException;
 
 	List<Category> getCategories() throws CannotGetDataException;
 
 	Category getCategory(int id) throws CannotGetDataException;
+
+	void createTableCategories() throws CannotCreateTableException;
 }

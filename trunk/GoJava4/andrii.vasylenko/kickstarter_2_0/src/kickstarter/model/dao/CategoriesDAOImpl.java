@@ -22,25 +22,6 @@ public class CategoriesDAOImpl implements CategoriesDAO {
 	}
 
 	@Override
-	public void createTableCategories() throws CannotCreateTableException {
-		try {
-			Statement statement = connection.createStatement();
-
-			StringBuilder sql = new StringBuilder();
-			sql.append("drop table IF EXISTS Categories CASCADE; ");
-			sql.append("create table Categories (");
-			sql.append("id serial not null PRIMARY KEY, ");
-			sql.append("name varchar(255)");
-			sql.append(")");
-
-			statement.execute(sql.toString());
-
-		} catch (SQLException e) {
-			throw new CannotCreateTableException(e);
-		}
-	}
-
-	@Override
 	public void addCategory(String name) throws CannotAddDataException {
 		try {
 			StringBuilder sql = new StringBuilder();
@@ -101,6 +82,25 @@ public class CategoriesDAOImpl implements CategoriesDAO {
 			}
 		} catch (SQLException e) {
 			throw new CannotGetDataException(e);
+		}
+	}
+
+	@Override
+	public void createTableCategories() throws CannotCreateTableException {
+		try {
+			Statement statement = connection.createStatement();
+
+			StringBuilder sql = new StringBuilder();
+			sql.append("drop table IF EXISTS Categories CASCADE; ");
+			sql.append("create table Categories (");
+			sql.append("id serial not null PRIMARY KEY, ");
+			sql.append("name varchar(255)");
+			sql.append(")");
+
+			statement.execute(sql.toString());
+
+		} catch (SQLException e) {
+			throw new CannotCreateTableException(e);
 		}
 	}
 

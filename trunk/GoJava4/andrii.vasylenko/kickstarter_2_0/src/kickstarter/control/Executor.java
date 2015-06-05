@@ -2,9 +2,8 @@ package kickstarter.control;
 
 import java.util.List;
 
-import kickstarter.exception.CannotGetDataException;
-import kickstarter.exception.IncorrectInputException;
 import kickstarter.exception.NoResultException;
+import kickstarter.exception.ProcessedException;
 import kickstarter.model.Model;
 import kickstarter.view.View;
 
@@ -20,11 +19,12 @@ public class Executor {
 		this.view = view;
 	}
 
-	public void exequte() throws IncorrectInputException, CannotGetDataException {
+	public void exequte() throws ProcessedException {
 		executed = false;
 		showThePage();
-		int itemNumber = choiceItem();
-		setResult(itemNumber);
+		StringBuilder input = new StringBuilder();
+		int itemNumber = choiceItem(input);
+		setResult(itemNumber, input.toString());
 	}
 
 	public boolean isExecuted() {
@@ -45,21 +45,21 @@ public class Executor {
 		return parameters;
 	}
 
-	private void showThePage() throws CannotGetDataException {
+	private void showThePage() throws ProcessedException {
 		view.view(model.getData());
 	}
 
-	private void setResult(int itemNumber) throws IncorrectInputException, CannotGetDataException {
+	private void setResult(int itemNumber, String input) throws ProcessedException {
 		direction = view.getDirection(itemNumber);
-		parameters = model.getParameters(itemNumber);
+		parameters = model.getParameters(itemNumber, input);
 		executed = true;
 	}
 
-	private int choiceItem() throws IncorrectInputException {
+	private int choiceItem(StringBuilder input) throws ProcessedException {
 		if (model.showOnly()) {
 			return 0;
 		}
-		return view.choiceItem();
+		return view.choiceItem(input);
 	}
 
 }

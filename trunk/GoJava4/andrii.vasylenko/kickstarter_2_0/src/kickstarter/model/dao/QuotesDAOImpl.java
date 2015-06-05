@@ -20,25 +20,6 @@ public class QuotesDAOImpl implements QuotesDAO {
 	}
 
 	@Override
-	public void createTableQuotes() throws CannotCreateTableException {
-		try {
-			Statement statement = connection.createStatement();
-
-			StringBuilder sql = new StringBuilder();
-			sql.append("drop table IF EXISTS Quotes; ");
-			sql.append("create table Quotes (");
-			sql.append("id serial not null PRIMARY KEY, ");
-			sql.append("quote varchar(255)");
-			sql.append(")");
-
-			statement.execute(sql.toString());
-
-		} catch (SQLException e) {
-			throw new CannotCreateTableException(e);
-		}
-	}
-
-	@Override
 	public void addQuote(String quote) throws CannotAddDataException {
 		try {
 			StringBuilder sql = new StringBuilder();
@@ -74,6 +55,25 @@ public class QuotesDAOImpl implements QuotesDAO {
 			}
 		} catch (SQLException e) {
 			throw new CannotGetDataException(e);
+		}
+	}
+
+	@Override
+	public void createTableQuotes() throws CannotCreateTableException {
+		try {
+			Statement statement = connection.createStatement();
+
+			StringBuilder sql = new StringBuilder();
+			sql.append("drop table IF EXISTS Quotes; ");
+			sql.append("create table Quotes (");
+			sql.append("id serial not null PRIMARY KEY, ");
+			sql.append("quote varchar(255)");
+			sql.append(")");
+
+			statement.execute(sql.toString());
+
+		} catch (SQLException e) {
+			throw new CannotCreateTableException(e);
 		}
 	}
 

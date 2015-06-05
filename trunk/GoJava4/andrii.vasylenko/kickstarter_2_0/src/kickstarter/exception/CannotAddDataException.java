@@ -1,6 +1,6 @@
 package kickstarter.exception;
 
-public class CannotAddDataException extends Exception {
+public class CannotAddDataException extends ProcessedException {
 
 	private static final long serialVersionUID = 9223217264541178374L;
 

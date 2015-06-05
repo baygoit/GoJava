@@ -1,6 +1,6 @@
 package kickstarter.exception;
 
-public class IncorrectInputException extends Exception {
+public class IncorrectInputException extends ProcessedException {
 
 	private static final long serialVersionUID = -1005953823472972804L;
 
@@ -24,5 +24,4 @@ public class IncorrectInputException extends Exception {
 	public IncorrectInputException(Throwable cause) {
 		super(cause);
 	}
-
 }

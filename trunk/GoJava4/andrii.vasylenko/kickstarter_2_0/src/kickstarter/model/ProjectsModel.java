@@ -36,7 +36,7 @@ public class ProjectsModel implements Model {
 	}
 
 	@Override
-	public List<Object> getParameters(int item) throws CannotGetDataException {
+	public List<Object> getParameters(int item, String input) throws CannotGetDataException {
 		List<Object> result = new ArrayList<>(parameters);
 
 		if (item == 0) {

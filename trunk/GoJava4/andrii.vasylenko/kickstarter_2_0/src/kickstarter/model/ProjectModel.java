@@ -38,7 +38,7 @@ public class ProjectModel implements Model {
 	}
 
 	@Override
-	public List<Object> getParameters(int item) throws CannotGetDataException {
+	public List<Object> getParameters(int item, String input) throws CannotGetDataException {
 		List<Object> result = new ArrayList<>(parameters);
 
 		if (item == 0) {
@@ -60,6 +60,8 @@ public class ProjectModel implements Model {
 		result.add(String.format("daysLeft=%s", project.getDaysLeft()));
 		result.add(String.format("history=%s", project.getHistory()));
 		result.add(String.format("link=%s", project.getLink()));
-		result.add(String.format("questionsAndAnswers=%s", project.getQuestionsAndAnswers()));
+		for (String question : project.getQuestionsAndAnswers()) {
+			result.add(String.format("  question=%s", question));
+		}
 	}
 }

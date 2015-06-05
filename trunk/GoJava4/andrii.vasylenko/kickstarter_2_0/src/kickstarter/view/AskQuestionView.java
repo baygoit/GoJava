@@ -1,6 +1,9 @@
 package kickstarter.view;
 
 import static kickstarter.control.State.*;
+
+import java.io.IOException;
+
 import kickstarter.control.State;
 import kickstarter.exception.IncorrectInputException;
 import kickstarter.view.printer.Printer;
@@ -14,10 +17,10 @@ public class AskQuestionView extends AbstractView {
 
 	@Override
 	public State getDirection(int item) throws IncorrectInputException {
-		if (item == 0) {
+		if (item == 0 || item == 1) {
 			return PROJECT;
 		}
-		throw new IncorrectInputException("Unknown item");	
+		throw new IncorrectInputException("Unknown item");
 	}
 
 	@Override
@@ -27,7 +30,28 @@ public class AskQuestionView extends AbstractView {
 
 	@Override
 	protected String getMenu() {
-		return "";
+		return String.format("%d - %s\r\n", 0, "EXIT");
 	}
 
+	@Override
+	public int choiceItem(StringBuilder input) throws IncorrectInputException {
+		try {
+			String line = getLine();
+			input.append(line);
+			return getItem(line);
+		} catch (IOException e) {
+			throw new IncorrectInputException(e);
+		}
+	}
+
+	private int getItem(String line) {
+		try {
+			int item = Integer.parseInt(line);
+			if (item == 0) {
+				return item;
+			}
+		} catch (NumberFormatException ignore) {
+		}
+		return 1;
+	}
 }

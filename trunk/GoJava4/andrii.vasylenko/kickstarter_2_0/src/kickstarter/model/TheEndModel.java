@@ -16,7 +16,7 @@ public class TheEndModel implements Model {
 	}
 
 	@Override
-	public List<Object> getParameters(int item) {
+	public List<Object> getParameters(int item, String input) {
 		return null;
 	}
 }

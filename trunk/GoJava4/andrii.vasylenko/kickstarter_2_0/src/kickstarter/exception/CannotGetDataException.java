@@ -1,6 +1,6 @@
 package kickstarter.exception;
 
-public class CannotGetDataException extends Exception {
+public class CannotGetDataException extends ProcessedException {
 
 	private static final long serialVersionUID = 5041805647587965295L;
 
@@ -23,5 +23,4 @@ public class CannotGetDataException extends Exception {
 	public CannotGetDataException(Throwable cause) {
 		super(cause);
 	}
-
 }

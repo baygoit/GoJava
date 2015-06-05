@@ -4,10 +4,9 @@ import static kickstarter.control.State.*;
 
 import java.util.List;
 
-import kickstarter.exception.CannotGetDataException;
-import kickstarter.exception.IncorrectInputException;
 import kickstarter.exception.IncorrectLogicException;
 import kickstarter.exception.NoResultException;
+import kickstarter.exception.ProcessedException;
 import kickstarter.exception.UnknownStateException;
 import kickstarter.model.factory.AbstractModelFactory;
 import kickstarter.view.factory.AbstractViewFactory;
@@ -35,7 +34,7 @@ public class Kickstarter implements Control {
 					}
 					executor = getExecutor(direction, executor.getParameters());
 				}
-			} catch (IncorrectInputException | CannotGetDataException e) {
+			} catch (ProcessedException e) {
 				showError();
 			} catch (UnknownStateException | NoResultException | NullPointerException | ClassCastException e) {
 				throw new IncorrectLogicException(e);
@@ -46,7 +45,7 @@ public class Kickstarter implements Control {
 	private void showError() throws IncorrectLogicException {
 		try {
 			getExecutor(ERROR).exequte();
-		} catch (IncorrectInputException | CannotGetDataException e) {
+		} catch (ProcessedException e) {
 			throw new IncorrectLogicException(e);
 		}
 	}

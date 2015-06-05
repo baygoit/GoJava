@@ -39,9 +39,9 @@ public abstract class AbstractView implements View {
 	protected abstract String getMenu();
 
 	@Override
-	public int choiceItem() throws IncorrectInputException {
+	public int choiceItem(StringBuilder input) throws IncorrectInputException {
 		try {
-			return Integer.parseInt(reader.getLine());
+			return Integer.parseInt(getLine());
 		} catch (IOException | NumberFormatException e) {
 			throw new IncorrectInputException(e);
 		}
@@ -49,5 +49,9 @@ public abstract class AbstractView implements View {
 
 	protected void view(String line) {
 		printer.showMessage(line);
+	}
+
+	protected String getLine() throws IOException {
+		return reader.getLine();
 	}
 }

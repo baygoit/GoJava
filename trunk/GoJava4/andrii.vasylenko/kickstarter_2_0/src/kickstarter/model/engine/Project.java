@@ -1,5 +1,7 @@
 package kickstarter.model.engine;
 
+import java.util.List;
+
 public class Project {
 	private int id;
 	private int categoryId;
@@ -10,10 +12,10 @@ public class Project {
 	private int collectAmount;
 	private String history;
 	private String link;
-	private String questionsAndAnswers;
+	private List<String> questionsAndAnswers;
 
 	public Project(int id, int categoryId, String name, String description, int totalAmount, int daysLeft,
-			String history, String link, String questionsAndAnswers, int collectAmount) {
+			String history, String link, List<String> questionsAndAnswers, int collectAmount) {
 		this.id = id;
 		this.categoryId = categoryId;
 		this.name = name;
@@ -63,7 +65,7 @@ public class Project {
 		return link;
 	}
 
-	public String getQuestionsAndAnswers() {
+	public List<String> getQuestionsAndAnswers() {
 		return questionsAndAnswers;
 	}
 }

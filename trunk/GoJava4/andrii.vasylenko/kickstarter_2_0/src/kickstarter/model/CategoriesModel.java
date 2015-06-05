@@ -31,7 +31,7 @@ public class CategoriesModel implements Model {
 	}
 
 	@Override
-	public List<Object> getParameters(int item) throws CannotGetDataException {
+	public List<Object> getParameters(int item, String input) throws CannotGetDataException {
 		List<Object> result = new ArrayList<>();
 
 		if (item != 0) {
