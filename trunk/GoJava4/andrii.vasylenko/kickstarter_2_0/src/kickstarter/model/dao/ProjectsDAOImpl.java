@@ -52,26 +52,6 @@ public class ProjectsDAOImpl implements ProjectsDAO {
 	}
 
 	@Override
-	public void addQuestion(int projectId, int categoryId, String question) throws CannotAddDataException {
-		try {
-			StringBuilder sql = new StringBuilder();
-			sql.append("insert into Questions (");
-			sql.append("id_project, question");
-			sql.append(") ");
-			sql.append("values(?,?)");
-
-			PreparedStatement statement = connection.prepareStatement(sql.toString());
-			statement.setInt(1, projectId);
-			statement.setString(2, question);
-
-			statement.executeUpdate();
-
-		} catch (SQLException e) {
-			throw new CannotAddDataException(e);
-		}
-	}
-
-	@Override
 	public List<Project> getProjects(int categoryId) throws CannotGetDataException {
 		List<Project> result = new ArrayList<>();
 
@@ -141,25 +121,6 @@ public class ProjectsDAOImpl implements ProjectsDAO {
 	}
 
 	@Override
-	public void donate(int projectId, int amount) throws CannotAddDataException {
-		try {
-			StringBuilder sql = new StringBuilder();
-			sql.append("update Projects ");
-			sql.append("set collect_amount = collect_amount + ? ");
-			sql.append("where id = ?");
-
-			PreparedStatement statement = connection.prepareStatement(sql.toString());
-			statement.setInt(1, amount);
-			statement.setInt(2, projectId);
-
-			statement.execute();
-
-		} catch (SQLException e) {
-			throw new CannotAddDataException(e);
-		}
-	}
-
-	@Override
 	public void createTableProjects() throws CannotCreateTableException {
 		try {
 			Statement statement = connection.createStatement();
@@ -183,31 +144,6 @@ public class ProjectsDAOImpl implements ProjectsDAO {
 			sql.append("alter table Projects ");
 			sql.append("add FOREIGN KEY (id_category) ");
 			sql.append("REFERENCES Categories(id); ");
-
-			sql.append("drop table IF EXISTS Questions; ");
-
-			sql.append("create table Questions (");
-			sql.append("id serial not null PRIMARY KEY, ");
-			sql.append("id_project integer, ");
-			sql.append("question varchar(255)");
-			sql.append("); ");
-
-			sql.append("alter table Questions ");
-			sql.append("add FOREIGN KEY (id_project) ");
-			sql.append("REFERENCES Projects(id); ");
-
-			sql.append("drop table IF EXISTS Payments; ");
-
-			sql.append("create table Payments (");
-			sql.append("id serial not null PRIMARY KEY, ");
-			sql.append("id_project integer, ");
-			sql.append("amount integer, ");
-			sql.append("description varchar(255)");
-			sql.append("); ");
-
-			sql.append("alter table Payments ");
-			sql.append("add FOREIGN KEY (id_project) ");
-			sql.append("REFERENCES Projects(id); ");
 
 			statement.execute(sql.toString());
 

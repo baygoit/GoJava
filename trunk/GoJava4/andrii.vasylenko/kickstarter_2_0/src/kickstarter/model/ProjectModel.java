@@ -8,13 +8,13 @@ import kickstarter.model.dao.ProjectsDAO;
 import kickstarter.model.engine.Project;
 
 public class ProjectModel implements Model {
-	private ProjectsDAO projects;
+	private ProjectsDAO dao;
 	private int projectId;
 	private int categoryId;
 	private List<Object> parameters;
 
-	public ProjectModel(ProjectsDAO projects, List<Object> parameters) {
-		this.projects = projects;
+	public ProjectModel(ProjectsDAO dao, List<Object> parameters) {
+		this.dao = dao;
 		this.parameters = new ArrayList<Object>(parameters);
 		Project project = (Project) parameters.get(0);
 		this.projectId = project.getId();
@@ -25,7 +25,7 @@ public class ProjectModel implements Model {
 	public List<String> getData() throws CannotGetDataException {
 		List<String> result = new ArrayList<>();
 
-		Project project = projects.getProject(projectId, categoryId);
+		Project project = dao.getProject(projectId, categoryId);
 
 		addData(result, project);
 

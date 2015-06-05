@@ -4,16 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import kickstarter.exception.ProcessedException;
-import kickstarter.model.dao.DonateDAO;
+import kickstarter.model.dao.PaymentsDAO;
 import kickstarter.model.engine.PaymentVariant;
 import kickstarter.model.engine.Project;
 
 public class DonateModel implements Model {
-	private DonateDAO dao;
+	private PaymentsDAO dao;
 	private int projectId;
 	private List<Object> parameters;
 
-	public DonateModel(DonateDAO dao, List<Object> parameters) {
+	public DonateModel(PaymentsDAO dao, List<Object> parameters) {
 		this.dao = dao;
 		this.parameters = new ArrayList<Object>(parameters);
 		Project project = (Project) parameters.get(0);

@@ -1,7 +1,6 @@
 package kickstarter.view;
 
 import static kickstarter.control.State.*;
-
 import kickstarter.control.State;
 import kickstarter.view.printer.Printer;
 import kickstarter.view.reader.Reader;
@@ -27,13 +26,6 @@ public class ProjectsView extends AbstractView {
 
 	@Override
 	protected String getMenu() {
-		StringBuilder result = new StringBuilder();
-
-		result.append(0);
-		result.append(" - ");
-		result.append("EXIT");
-		result.append("\r\n");
-
-		return result.toString();
+		return String.format("%d - %s\r\n", 0, "EXIT");
 	}
 }

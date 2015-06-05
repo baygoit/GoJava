@@ -5,22 +5,20 @@ import java.util.List;
 
 import kickstarter.exception.CannotAddDataException;
 import kickstarter.exception.CannotGetDataException;
-import kickstarter.model.dao.ProjectsDAO;
+import kickstarter.model.dao.QuestionsDAO;
 import kickstarter.model.engine.Project;
 
 public class AskQuestionModel implements Model {
 
-	private ProjectsDAO projects;
+	private QuestionsDAO dao;
 	private int projectId;
-	private int categoryId;
 	private List<Object> parameters;
 
-	public AskQuestionModel(ProjectsDAO projects, List<Object> parameters) {
-		this.projects = projects;
+	public AskQuestionModel(QuestionsDAO dao, List<Object> parameters) {
+		this.dao = dao;
 		this.parameters = new ArrayList<Object>(parameters);
 		Project project = (Project) parameters.get(0);
 		this.projectId = project.getId();
-		this.categoryId = project.getCategoryId();
 	}
 
 	@Override
@@ -38,7 +36,7 @@ public class AskQuestionModel implements Model {
 		List<Object> result = new ArrayList<>(parameters);
 
 		if (item == 1) {
-			projects.addQuestion(projectId, categoryId, input);
+			dao.addQuestion(projectId, input);
 		}
 
 		return result;

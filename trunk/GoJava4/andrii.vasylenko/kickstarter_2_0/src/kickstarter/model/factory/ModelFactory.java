@@ -19,21 +19,25 @@ import kickstarter.model.QuoteModel;
 import kickstarter.model.StartModel;
 import kickstarter.model.TheEndModel;
 import kickstarter.model.dao.CategoriesDAO;
-import kickstarter.model.dao.DonateDAO;
+import kickstarter.model.dao.PaymentsDAO;
 import kickstarter.model.dao.ProjectsDAO;
+import kickstarter.model.dao.QuestionsDAO;
 import kickstarter.model.dao.QuotesDAO;
 
 public class ModelFactory implements AbstractModelFactory {
 	private QuotesDAO quotes;
 	private CategoriesDAO categories;
 	private ProjectsDAO projects;
-	private DonateDAO donates;
+	private QuestionsDAO questions;
+	private PaymentsDAO payments;
 
-	public ModelFactory(QuotesDAO quotes, CategoriesDAO categories, ProjectsDAO projects, DonateDAO donates) {
+	public ModelFactory(QuotesDAO quotes, CategoriesDAO categories, ProjectsDAO projects, QuestionsDAO questions,
+			PaymentsDAO payments) {
 		this.quotes = quotes;
 		this.categories = categories;
 		this.projects = projects;
-		this.donates = donates;
+		this.questions = questions;
+		this.payments = payments;
 	}
 
 	@Override
@@ -49,13 +53,13 @@ public class ModelFactory implements AbstractModelFactory {
 		} else if (state == PROJECT) {
 			return new ProjectModel(projects, parameters);
 		} else if (state == ASK_QUESTION) {
-			return new AskQuestionModel(projects, parameters);
+			return new AskQuestionModel(questions, parameters);
 		} else if (state == DONATE) {
-			return new DonateModel(donates, parameters);
+			return new DonateModel(payments, parameters);
+		} else if (state == PAYMENT) {
+			return new PaymentModel(payments, parameters);
 		} else if (state == AMOUNT) {
 			return new AmountModel(parameters);
-		} else if (state == PAYMENT) {
-			return new PaymentModel(projects, parameters);
 		} else if (state == ERROR) {
 			return new ErrorModel();
 		} else if (state == THE_END) {

@@ -13,11 +13,11 @@ import kickstarter.exception.CannotCreateTableException;
 import kickstarter.exception.CannotGetDataException;
 import kickstarter.model.engine.PaymentVariant;
 
-public class DonateDAOImpl implements DonateDAO {
+public class PaymentsDAOImpl implements PaymentsDAO {
 
 	private Connection connection;
 
-	public DonateDAOImpl(Connection connection) {
+	public PaymentsDAOImpl(Connection connection) {
 		this.connection = connection;
 	}
 
@@ -36,6 +36,25 @@ public class DonateDAOImpl implements DonateDAO {
 			statement.setString(3, description);
 
 			statement.executeUpdate();
+
+		} catch (SQLException e) {
+			throw new CannotAddDataException(e);
+		}
+	}
+
+	@Override
+	public void donate(int projectId, int amount) throws CannotAddDataException {
+		try {
+			StringBuilder sql = new StringBuilder();
+			sql.append("update Projects ");
+			sql.append("set collect_amount = collect_amount + ? ");
+			sql.append("where id = ?");
+
+			PreparedStatement statement = connection.prepareStatement(sql.toString());
+			statement.setInt(1, amount);
+			statement.setInt(2, projectId);
+
+			statement.execute();
 
 		} catch (SQLException e) {
 			throw new CannotAddDataException(e);

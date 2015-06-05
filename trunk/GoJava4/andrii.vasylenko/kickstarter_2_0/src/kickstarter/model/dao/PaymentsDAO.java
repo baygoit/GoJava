@@ -7,8 +7,10 @@ import kickstarter.exception.CannotCreateTableException;
 import kickstarter.exception.CannotGetDataException;
 import kickstarter.model.engine.PaymentVariant;
 
-public interface DonateDAO {
+public interface PaymentsDAO {
 	void addPaymentVariant(int projectId, int amount, String description) throws CannotAddDataException;
+
+	void donate(int projectId, int amount) throws CannotAddDataException;
 
 	List<PaymentVariant> getPaymentVariants(int projectId) throws CannotGetDataException;
 

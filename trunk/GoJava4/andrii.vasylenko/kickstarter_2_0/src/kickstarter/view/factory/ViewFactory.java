@@ -44,10 +44,10 @@ public class ViewFactory implements AbstractViewFactory {
 			return new AskQuestionView(printer, reader);
 		} else if (state == DONATE) {
 			return new DonateView(printer, reader);
-		} else if (state == AMOUNT) {
-			return new AmountView(printer, reader);
 		} else if (state == PAYMENT) {
 			return new PaymentView(printer, reader);
+		} else if (state == AMOUNT) {
+			return new AmountView(printer, reader);
 		} else if (state == ERROR) {
 			return new ErrorView(printer, reader);
 		} else if (state == THE_END) {

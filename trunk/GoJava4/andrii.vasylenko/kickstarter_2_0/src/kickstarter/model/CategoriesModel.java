@@ -8,17 +8,17 @@ import kickstarter.model.dao.CategoriesDAO;
 import kickstarter.model.engine.Category;
 
 public class CategoriesModel implements Model {
-	private CategoriesDAO categories;
+	private CategoriesDAO dao;
 
-	public CategoriesModel(CategoriesDAO categories) {
-		this.categories = categories;
+	public CategoriesModel(CategoriesDAO dao) {
+		this.dao = dao;
 	}
 
 	@Override
 	public List<String> getData() throws CannotGetDataException {
 		List<String> result = new ArrayList<>();
 
-		for (Category category : categories.getCategories()) {
+		for (Category category : dao.getCategories()) {
 			result.add(getDescription(category.getId(), category.getName()));
 		}
 
@@ -36,7 +36,7 @@ public class CategoriesModel implements Model {
 
 		if (item != 0) {
 			int id = item;
-			Category category = categories.getCategory(id);
+			Category category = dao.getCategory(id);
 			result.add(category);
 		}
 

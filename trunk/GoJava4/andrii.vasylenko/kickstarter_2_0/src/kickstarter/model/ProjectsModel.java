@@ -9,12 +9,12 @@ import kickstarter.model.engine.Category;
 import kickstarter.model.engine.Project;
 
 public class ProjectsModel implements Model {
-	private ProjectsDAO projects;
+	private ProjectsDAO dao;
 	private int categoryId;
 	private List<Object> parameters;
 
-	public ProjectsModel(ProjectsDAO projects, List<Object> parameters) {
-		this.projects = projects;
+	public ProjectsModel(ProjectsDAO dao, List<Object> parameters) {
+		this.dao = dao;
 		this.parameters = new ArrayList<Object>(parameters);
 		this.categoryId = ((Category) parameters.get(0)).getId();
 	}
@@ -23,7 +23,7 @@ public class ProjectsModel implements Model {
 	public List<String> getData() throws CannotGetDataException {
 		List<String> result = new ArrayList<>();
 
-		for (Project project : projects.getProjects(categoryId)) {
+		for (Project project : dao.getProjects(categoryId)) {
 			result.add(getDescription(project));
 		}
 
@@ -43,7 +43,7 @@ public class ProjectsModel implements Model {
 			result.remove(0);
 		} else {
 			int id = item;
-			Project project = projects.getProject(id, categoryId);
+			Project project = dao.getProject(id, categoryId);
 			result.add(0, project);
 		}
 

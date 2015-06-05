@@ -4,16 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import kickstarter.exception.ProcessedException;
-import kickstarter.model.dao.ProjectsDAO;
+import kickstarter.model.dao.PaymentsDAO;
 import kickstarter.model.engine.Project;
 
 public class PaymentModel implements Model {
-	private ProjectsDAO dao;
+	private PaymentsDAO dao;
 	private List<Object> parameters;
 	private int amount;
 	private int projectId;
 
-	public PaymentModel(ProjectsDAO dao, List<Object> parameters) {
+	public PaymentModel(PaymentsDAO dao, List<Object> parameters) {
 		this.dao = dao;
 		this.parameters = new ArrayList<Object>(parameters);
 		this.amount = (int) parameters.get(0);
@@ -42,7 +42,7 @@ public class PaymentModel implements Model {
 		if (item == 1) {
 			dao.donate(projectId, amount);
 		}
-		
+
 		result.remove(0);
 
 		return result;
