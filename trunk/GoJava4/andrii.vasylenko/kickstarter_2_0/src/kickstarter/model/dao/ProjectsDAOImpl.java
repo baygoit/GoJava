@@ -87,7 +87,7 @@ public class ProjectsDAOImpl implements ProjectsDAO {
 
 		try {
 			StringBuilder sql = new StringBuilder();
-			sql.append("select id, name, description, ");
+			sql.append("select id, id_category, name, description, ");
 			sql.append("totalAmount, daysLeft, collectAmount, ");
 			sql.append("history, link, questionsAndAnswers ");
 			sql.append("from Projects ");
@@ -110,7 +110,7 @@ public class ProjectsDAOImpl implements ProjectsDAO {
 	public Project getProject(int id, int categoryId) throws CannotGetDataException {
 		try {
 			StringBuilder sql = new StringBuilder();
-			sql.append("select id, name, description, ");
+			sql.append("select id, id_category, name, description, ");
 			sql.append("totalAmount, daysLeft, collectAmount, ");
 			sql.append("history, link, questionsAndAnswers ");
 			sql.append("from Projects ");
@@ -136,6 +136,7 @@ public class ProjectsDAOImpl implements ProjectsDAO {
 
 	private Project getProject(ResultSet resultQuery) throws SQLException {
 		int id = resultQuery.getInt("id");
+		int categoryId = resultQuery.getInt("id_category");
 		String name = resultQuery.getString("name");
 		String description = resultQuery.getString("description");
 		int totalAmount = resultQuery.getInt("totalAmount");
@@ -145,7 +146,7 @@ public class ProjectsDAOImpl implements ProjectsDAO {
 		String questionsAndAnswers = resultQuery.getString("questionsAndAnswers");
 		int collectAmount = resultQuery.getInt("collectAmount");
 
-		return new Project(id, name, description, totalAmount, daysLeft, history, link, questionsAndAnswers,
-				collectAmount);
+		return new Project(id, categoryId, name, description, totalAmount, daysLeft, history, link,
+				questionsAndAnswers, collectAmount);
 	}
 }

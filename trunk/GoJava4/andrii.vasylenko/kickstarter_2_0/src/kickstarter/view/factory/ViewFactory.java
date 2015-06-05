@@ -3,6 +3,7 @@ package kickstarter.view.factory;
 import static kickstarter.control.State.*;
 import kickstarter.control.State;
 import kickstarter.exception.UnknownStateException;
+import kickstarter.view.AskQuestionView;
 import kickstarter.view.CategoriesView;
 import kickstarter.view.ErrorView;
 import kickstarter.view.ProjectView;
@@ -36,6 +37,8 @@ public class ViewFactory implements AbstractViewFactory {
 			return new ProjectsView(printer, reader);
 		} else if (state == PROJECT) {
 			return new ProjectView(printer, reader);
+		} else if (state == ASK_QUESTION) {
+			return new AskQuestionView(printer, reader);
 		} else if (state == ERROR) {
 			return new ErrorView(printer, reader);
 		} else if (state == THE_END) {

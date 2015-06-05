@@ -6,6 +6,7 @@ public enum State {
 	CATEGORIES,
 	PROJECTS,
 	PROJECT,
+	ASK_QUESTION,
 	THE_END,
 	ERROR,
 	EXIT;

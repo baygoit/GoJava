@@ -4,29 +4,30 @@ import java.util.ArrayList;
 import java.util.List;
 
 import kickstarter.exception.CannotGetDataException;
+import kickstarter.model.dao.ProjectsDAO;
 import kickstarter.model.engine.Project;
 
 public class ProjectModel implements Model {
-	private Project project;
+	private ProjectsDAO projects;
+	private int projectId;
+	private int categoryId;
 	private List<Object> parameters;
 
-	public ProjectModel(List<Object> parameters) {
+	public ProjectModel(ProjectsDAO projects, List<Object> parameters) {
+		this.projects = projects;
 		this.parameters = new ArrayList<Object>(parameters);
-		this.project = (Project) parameters.get(0);
+		Project project = (Project) parameters.get(0);
+		this.projectId = project.getId();
+		this.categoryId = project.getCategoryId();
 	}
 
 	@Override
-	public List<String> getData() {
+	public List<String> getData() throws CannotGetDataException {
 		List<String> result = new ArrayList<>();
 
-		result.add("name=" + project.getName());
-		result.add("description=" + project.getDescription());
-		result.add("totalAmount=" + project.getTotalAmount());
-		result.add("collectAmount=" + project.getCollectAmount());
-		result.add("daysLeft=" + project.getDaysLeft());
-		result.add("history=" + project.getHistory());
-		result.add("link=" + project.getLink());
-		result.add("questionsAndAnswers=" + project.getQuestionsAndAnswers());
+		Project project = projects.getProject(projectId, categoryId);
+
+		addData(result, project);
 
 		return result;
 	}
@@ -38,12 +39,27 @@ public class ProjectModel implements Model {
 
 	@Override
 	public List<Object> getParameters(int item) throws CannotGetDataException {
+		List<Object> result = new ArrayList<>(parameters);
+
 		if (item == 0) {
-			parameters.remove(0);
+			result.remove(0);
+		} else if (item == 1) {
+
 		} else {
 			throw new CannotGetDataException("Illegal parameters");
 		}
 
-		return parameters;
+		return result;
+	}
+
+	private void addData(List<String> result, Project project) {
+		result.add(String.format("name=%s", project.getName()));
+		result.add(String.format("description=%s", project.getDescription()));
+		result.add(String.format("totalAmount=%s", project.getTotalAmount()));
+		result.add(String.format("collectAmount=%s", project.getCollectAmount()));
+		result.add(String.format("daysLeft=%s", project.getDaysLeft()));
+		result.add(String.format("history=%s", project.getHistory()));
+		result.add(String.format("link=%s", project.getLink()));
+		result.add(String.format("questionsAndAnswers=%s", project.getQuestionsAndAnswers()));
 	}
 }

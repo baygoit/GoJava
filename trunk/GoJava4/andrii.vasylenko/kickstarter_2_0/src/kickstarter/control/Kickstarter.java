@@ -37,7 +37,7 @@ public class Kickstarter implements Control {
 				}
 			} catch (IncorrectInputException | CannotGetDataException e) {
 				showError();
-			} catch (UnknownStateException | NoResultException e) {
+			} catch (UnknownStateException | NoResultException | NullPointerException | ClassCastException e) {
 				throw new IncorrectLogicException(e);
 			}
 		}

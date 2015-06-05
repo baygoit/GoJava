@@ -6,6 +6,7 @@ import java.util.List;
 
 import kickstarter.control.State;
 import kickstarter.exception.UnknownStateException;
+import kickstarter.model.AskQuestionModel;
 import kickstarter.model.CategoriesModel;
 import kickstarter.model.ErrorModel;
 import kickstarter.model.Model;
@@ -40,7 +41,9 @@ public class ModelFactory implements AbstractModelFactory {
 		} else if (state == PROJECTS) {
 			return new ProjectsModel(projects, parameters);
 		} else if (state == PROJECT) {
-			return new ProjectModel(parameters);
+			return new ProjectModel(projects, parameters);
+		} else if (state == ASK_QUESTION) {
+			return new AskQuestionModel(projects, parameters);
 		} else if (state == ERROR) {
 			return new ErrorModel();
 		} else if (state == THE_END) {
