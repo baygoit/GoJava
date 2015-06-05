@@ -17,5 +17,10 @@ public class Quote {
     public String getQuoteAuthor() {
 	return author;
     }
+    
+    @Override
+	public String toString() {
+		return content + ", " + author;
+	}
 
 }

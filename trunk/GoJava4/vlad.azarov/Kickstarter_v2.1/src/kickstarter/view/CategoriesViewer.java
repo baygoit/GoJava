@@ -1,6 +1,10 @@
 package kickstarter.view;
 
+import java.util.Map;
+
+import kickstarter.logic.CategoriesLogic;
 import kickstarter.model.Category;
+import kickstarter.page.IPage;
 import kickstarter.printer.Printer;
 import kickstarter.repos.CategoriesRepo;
 
@@ -9,11 +13,12 @@ public class CategoriesViewer {
     ProjectsViewer projectsViewer;
     CategoriesRepo categoriesRepo;
     Printer printer;
+  
 
     public CategoriesViewer(Printer printer) {
 	projectsViewer = new ProjectsViewer(printer);
 	categoriesRepo = new CategoriesRepo();
-	this.printer = printer;
+	
     }
 
     public void showCategoriesMenu() {

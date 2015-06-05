@@ -38,21 +38,8 @@ public class Kickstarter {
 	greeting();
 	quotesViewer.showQuoteMenu();
 	categoriesViewer.showCategoriesMenu();
-	System.out.print("ENTER: ");
 	userInput = reader.readUserInput();
-	
-	boolean isExit = false;
-	while (!isExit) {
-	    if (userInput == 0) {
-		isExit = true;
-		farewell();
-	    } else {
-		//categoriesViewer.showCategoriesMenu();
-		//printer.print("\n\t Choose the category: ");
-		pageNavigation.navigate(userInput);
-	    }
-	}
-	
+	pageNavigation.navigate(userInput);
 	
 	
     }

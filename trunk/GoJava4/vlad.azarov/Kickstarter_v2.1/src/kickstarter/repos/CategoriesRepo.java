@@ -9,8 +9,8 @@ public class CategoriesRepo {
     private ArrayList<Category> categories = new ArrayList<>();
     
     public CategoriesRepo() {
-	add(new Category("TECHNOLOGY", 1));
-	add(new Category("DESIGN", 2));
+	add(new Category("TECHNOLOGY"));
+	add(new Category("DESIGN"));
     }
     
     public void add(Category category) {
@@ -29,5 +29,9 @@ public class CategoriesRepo {
 	}
 	System.out.println("CategoryRepo getCategory() RETURNED NULL");
 	return null;
+    }
+
+    public int size() {
+	return categories.size();
     }
 }

@@ -1,24 +1,29 @@
 package kickstarter.model;
 
 public class Category {
-    
-    private String name;
-    private int index;
-    
-    public Category(String name, int index) {
-	this.name = name;
-	this.index = index;
-    }
+	private String name;
+	private int id;
+	private static int count = 0;
 
-    public String getName() {
-        return name;
-    }
-    
-    public void setName(String name) {
-	this.name = name;
-    }
+	public Category(String name) {
+		this.name = name;
+		this.id = ++count;
+	}
 
-    public int getIndex() {
-        return index;
-    }
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public int getId() {
+		return id;
+	}
+	
+	@Override
+	public String toString() {
+		return name;
+	}
 }
