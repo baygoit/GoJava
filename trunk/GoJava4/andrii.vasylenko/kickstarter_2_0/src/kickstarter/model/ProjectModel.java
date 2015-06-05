@@ -45,6 +45,8 @@ public class ProjectModel implements Model {
 			result.remove(0);
 		} else if (item == 1) {
 
+		} else if (item == 2) {
+
 		} else {
 			throw new CannotGetDataException("Illegal parameters");
 		}

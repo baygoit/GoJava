@@ -17,5 +17,7 @@ public interface ProjectsDAO {
 
 	Project getProject(int id, int categoryId) throws CannotGetDataException;
 
+	void donate(int projectId, int amount) throws CannotAddDataException;
+
 	void createTableProjects() throws CannotCreateTableException;
 }

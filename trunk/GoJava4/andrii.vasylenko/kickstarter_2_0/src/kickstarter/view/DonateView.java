@@ -3,30 +3,29 @@ package kickstarter.view;
 import static kickstarter.control.State.*;
 import kickstarter.control.State;
 import kickstarter.exception.IncorrectInputException;
+import kickstarter.exception.ProcessedException;
 import kickstarter.view.printer.Printer;
 import kickstarter.view.reader.Reader;
 
-public class ProjectView extends AbstractView {
+public class DonateView extends AbstractView {
 
-	public ProjectView(Printer printer, Reader reader) {
+	public DonateView(Printer printer, Reader reader) {
 		super(printer, reader);
 	}
 
 	@Override
-	public State getDirection(int item) throws IncorrectInputException {
+	public State getDirection(int item) throws ProcessedException {
 		if (item == 0) {
-			return PROJECTS;
+			return PROJECT;
 		} else if (item == 1) {
-			return ASK_QUESTION;
-		} else if (item == 2) {
-			return DONATE;
+			return AMOUNT;
 		}
-		throw new IncorrectInputException("Unknown item");
+		return PAYMENT;
 	}
 
 	@Override
 	protected String getHead() {
-		return "---PROJECT---";
+		return "---DONATE---";
 	}
 
 	@Override
@@ -35,11 +34,15 @@ public class ProjectView extends AbstractView {
 
 		String format = "%d - %s\r\n";
 
-		result.append(String.format(format, 1, "Ask a question"));
-		result.append(String.format(format, 2, "Donate"));
+		result.append(String.format(format, 1, "Enter other amount"));
 		result.append(String.format(format, 0, "EXIT"));
 
 		return result.toString();
 	}
 
+	@Override
+	public int choiceItem(StringBuilder input) throws IncorrectInputException {
+		view("Choose a payment variant please");
+		return super.choiceItem(input);
+	}
 }

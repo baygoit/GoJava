@@ -7,6 +7,9 @@ public enum State {
 	PROJECTS,
 	PROJECT,
 	ASK_QUESTION,
+	DONATE,
+	AMOUNT,
+	PAYMENT,
 	THE_END,
 	ERROR,
 	EXIT;

@@ -11,6 +11,8 @@ import kickstarter.exception.CannotCreateTableException;
 import kickstarter.exception.IncorrectLogicException;
 import kickstarter.model.dao.CategoriesDAO;
 import kickstarter.model.dao.CategoriesDAOImpl;
+import kickstarter.model.dao.DonateDAO;
+import kickstarter.model.dao.DonateDAOImpl;
 import kickstarter.model.dao.ProjectsDAO;
 import kickstarter.model.dao.ProjectsDAOImpl;
 import kickstarter.model.dao.QuotesDAO;
@@ -61,27 +63,29 @@ public class Runner {
 		QuotesDAO quotesDAO = new QuotesDAOImpl(connection);
 		CategoriesDAO categoriesDAO = new CategoriesDAOImpl(connection);
 		ProjectsDAO projectsDAO = new ProjectsDAOImpl(connection);
+		DonateDAO donateDAO = new DonateDAOImpl(connection);
 
-		initDAO(quotesDAO, categoriesDAO, projectsDAO);
+		initDAO(quotesDAO, categoriesDAO, projectsDAO, donateDAO);
 
-		return new ModelFactory(quotesDAO, categoriesDAO, projectsDAO);
+		return new ModelFactory(quotesDAO, categoriesDAO, projectsDAO, donateDAO);
 	}
 
-	public void initDAO(QuotesDAO quotesDAO, CategoriesDAO categoriesDAO, ProjectsDAO projectsDAO) {
+	public void initDAO(QuotesDAO quotesDAO, CategoriesDAO categoriesDAO, ProjectsDAO projectsDAO, DonateDAO donateDAO) {
 		try {
 			quotesDAO.createTableQuotes();
 			categoriesDAO.createTableCategories();
 			projectsDAO.createTableProjects();
+			donateDAO.createTablePayments();
 
-			addDataInStorage(quotesDAO, categoriesDAO, projectsDAO);
+			setDefaultsData(quotesDAO, categoriesDAO, projectsDAO, donateDAO);
 		} catch (CannotCreateTableException | CannotAddDataException e) {
 			e.printStackTrace();
 			System.exit(0);
 		}
 	}
 
-	public void addDataInStorage(QuotesDAO quotesDAO, CategoriesDAO categoriesDAO, ProjectsDAO projectsDAO)
-			throws CannotAddDataException {
+	public void setDefaultsData(QuotesDAO quotesDAO, CategoriesDAO categoriesDAO, ProjectsDAO projectsDAO,
+			DonateDAO donateDAO) throws CannotAddDataException {
 		quotesDAO.addQuote("Don't cry because it's over, smile because it happened");
 		quotesDAO.addQuote("Be yourself; everyone else is already taken.");
 		quotesDAO.addQuote("A room without books is like a body without a soul.");
@@ -92,5 +96,11 @@ public class Runner {
 		projectsDAO.addProject(1, "velo parking", "velo parking in Kiev", 10000, 100, "History1", "www.project1.com");
 		projectsDAO.addProject(1, "velo track", "velo track in Kiev", 100000, 200, "History2", "www.project2.com");
 		projectsDAO.addProject(2, "IT-school", "IT - future of Ukraine", 1000000, 1000, "History3", "www.project3.com");
+
+		donateDAO.addPaymentVariant(1, 10, "minimum");
+		donateDAO.addPaymentVariant(1, 100, "medium");
+		donateDAO.addPaymentVariant(1, 500, "high");
+		donateDAO.addPaymentVariant(2, 10000, "standart");
+		donateDAO.addPaymentVariant(3, 50000, "standart");
 	}
 }

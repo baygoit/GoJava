@@ -6,17 +6,19 @@ import java.io.IOException;
 
 import kickstarter.control.State;
 import kickstarter.exception.IncorrectInputException;
+import kickstarter.exception.ProcessedException;
 import kickstarter.view.printer.Printer;
 import kickstarter.view.reader.Reader;
 
-public class AskQuestionView extends AbstractView {
+public class PaymentView extends AbstractView {
+	private static final String INPUT_MESSAGES[] = { "enter your name:", "enter your account number:" };
 
-	public AskQuestionView(Printer printer, Reader reader) {
+	public PaymentView(Printer printer, Reader reader) {
 		super(printer, reader);
 	}
 
 	@Override
-	public State getDirection(int item) throws IncorrectInputException {
+	public State getDirection(int item) throws ProcessedException {
 		if (item == 0 || item == 1) {
 			return PROJECT;
 		}
@@ -25,7 +27,7 @@ public class AskQuestionView extends AbstractView {
 
 	@Override
 	protected String getHead() {
-		return "---QUESTION---";
+		return "---DONATE---";
 	}
 
 	@Override
@@ -36,10 +38,15 @@ public class AskQuestionView extends AbstractView {
 	@Override
 	public int choiceItem(StringBuilder input) throws IncorrectInputException {
 		try {
-			view("enter a question please:");
-			String line = getLine();
-			input.append(line);
-			return getItem(line);
+			for (int i = 0; i < 2; i++) {
+				view(INPUT_MESSAGES[i]);
+				String line = getLine();
+				input.append(line);
+				if (getItem(line) == 0) {
+					return 0;
+				}
+			}
+			return 1;
 		} catch (IOException e) {
 			throw new IncorrectInputException(e);
 		}

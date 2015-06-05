@@ -141,6 +141,25 @@ public class ProjectsDAOImpl implements ProjectsDAO {
 	}
 
 	@Override
+	public void donate(int projectId, int amount) throws CannotAddDataException {
+		try {
+			StringBuilder sql = new StringBuilder();
+			sql.append("update Projects ");
+			sql.append("set collect_amount = collect_amount + ? ");
+			sql.append("where id = ?");
+
+			PreparedStatement statement = connection.prepareStatement(sql.toString());
+			statement.setInt(1, amount);
+			statement.setInt(2, projectId);
+
+			statement.execute();
+
+		} catch (SQLException e) {
+			throw new CannotAddDataException(e);
+		}
+	}
+
+	@Override
 	public void createTableProjects() throws CannotCreateTableException {
 		try {
 			Statement statement = connection.createStatement();
@@ -174,6 +193,19 @@ public class ProjectsDAOImpl implements ProjectsDAO {
 			sql.append("); ");
 
 			sql.append("alter table Questions ");
+			sql.append("add FOREIGN KEY (id_project) ");
+			sql.append("REFERENCES Projects(id); ");
+
+			sql.append("drop table IF EXISTS Payments; ");
+
+			sql.append("create table Payments (");
+			sql.append("id serial not null PRIMARY KEY, ");
+			sql.append("id_project integer, ");
+			sql.append("amount integer, ");
+			sql.append("description varchar(255)");
+			sql.append("); ");
+
+			sql.append("alter table Payments ");
 			sql.append("add FOREIGN KEY (id_project) ");
 			sql.append("REFERENCES Projects(id); ");
 
