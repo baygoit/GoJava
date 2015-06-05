@@ -3,7 +3,6 @@ package com.morkva.ui.controllers;
 import com.morkva.logic.Printer;
 import com.morkva.logic.Reader;
 import com.morkva.ui.Model;
-import com.morkva.ui.ViewType;
 import com.morkva.ui.views.LoginView;
 
 /**
@@ -27,7 +26,7 @@ public class LoginController implements IController {
     }
 
     @Override
-    public ViewType readInput() {
+    public IController readInput() {
         return view.readInput();
     }
 }

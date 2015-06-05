@@ -3,7 +3,8 @@ package com.morkva.ui.views;
 import com.morkva.logic.Printer;
 import com.morkva.logic.Reader;
 import com.morkva.ui.Model;
-import com.morkva.ui.ViewType;
+import com.morkva.ui.controllers.CategoriesController;
+import com.morkva.ui.controllers.IController;
 import com.morkva.ui.controllers.LoginController;
 import com.morkva.utils.UserType;
 
@@ -33,7 +34,7 @@ public class LoginView implements IView {
     }
 
     @Override
-    public ViewType readInput() {
+    public IController readInput() {
         while (true) {
             int keyCode = reader.readUserInput();
             if (keyCode == 1) {
@@ -41,7 +42,7 @@ public class LoginView implements IView {
                 System.err.println("Not Realised!");
             } else if (keyCode == 2) {
                 model.setCurrentUserType(UserType.GUEST);
-                return ViewType.CATEGORIES_PAGE;
+                return new CategoriesController(model, reader, printer);
             }
         }
     }

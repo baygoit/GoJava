@@ -8,7 +8,7 @@ import com.morkva.model.IRepository;
 import com.morkva.ui.Model;
 import com.morkva.ui.ViewHelper;
 import com.morkva.ui.ViewResolver;
-import com.morkva.ui.ViewType;
+import com.morkva.ui.controllers.LoginController;
 
 import java.util.Random;
 
@@ -31,7 +31,7 @@ public class KickstarterApp {
         showQuote();
         Model model = new Model(categoryRepository, userRepository);
         ViewHelper viewHelper = new ViewHelper(model, printer, reader);
-        ViewResolver.getInstance().setNextView(ViewType.LOGIN_PAGE);
+        ViewResolver.getInstance().setNextView(new LoginController(model, printer, reader));
         viewHelper.runCommand();
     }
 

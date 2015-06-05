@@ -4,7 +4,9 @@ import com.morkva.entities.Project;
 import com.morkva.logic.Printer;
 import com.morkva.logic.Reader;
 import com.morkva.ui.Model;
-import com.morkva.ui.ViewType;
+import com.morkva.ui.controllers.CategoryController;
+import com.morkva.ui.controllers.IController;
+import com.morkva.ui.controllers.PaymentController;
 import com.morkva.ui.controllers.ProjectController;
 
 /**
@@ -39,8 +41,8 @@ public class ProjectView implements IView {
         }
     }
 
-    public ViewType readInput() {
-        ViewType result = null;
+    public IController readInput() {
+        IController result = null;
         switch (model.getCurrentUserType()) {
             case GUEST:
                 result = readGuestInput();
@@ -53,17 +55,17 @@ public class ProjectView implements IView {
         return result;
     }
 
-    private ViewType readGuestInput() {
+    private IController readGuestInput() {
         while (true) {
             int keyCode = reader.readUserInput();
             if (keyCode == 1) {
-                return ViewType.PAYMENT_PAGE;
+                return new PaymentController(model, printer, reader);
             } else if (keyCode == 2) {
                 System.err.println("Not Realised!");
 //                return ViewType.QUESTION_PAGE;
                 //TODO Realise questions!
             } else if (keyCode == 0) {
-                return ViewType.CATEGORY_PAGE;
+                return new CategoryController(printer, model, reader);
             } else {
                 System.err.println("Wrong Code");
             }

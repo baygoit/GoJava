@@ -1,5 +1,6 @@
 package com.morkva.ui;
 
+import com.morkva.ui.controllers.IController;
 import com.morkva.ui.views.IView;
 
 /**
@@ -8,7 +9,7 @@ import com.morkva.ui.views.IView;
 public class ViewResolver {
     private static ViewResolver instance;
 
-    private ViewType nextView;
+    private IController nextController;
 
     public static ViewResolver getInstance() {
         if (instance == null) {
@@ -17,11 +18,11 @@ public class ViewResolver {
         return instance;
     }
 
-    public ViewType getNextView() {
-        return nextView;
+    public IController getNextView() {
+        return nextController;
     }
 
-    public void setNextView(ViewType nextView) {
-        this.nextView = nextView;
+    public void setNextView(IController nextController) {
+        this.nextController = nextController;
     }
 }

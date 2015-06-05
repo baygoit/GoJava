@@ -5,7 +5,9 @@ import com.morkva.entities.Project;
 import com.morkva.logic.Printer;
 import com.morkva.logic.Reader;
 import com.morkva.ui.Model;
-import com.morkva.ui.ViewType;
+import com.morkva.ui.controllers.CategoriesController;
+import com.morkva.ui.controllers.IController;
+import com.morkva.ui.controllers.ProjectController;
 
 /**
  * Created by vladyslav on 22.05.15.
@@ -33,14 +35,14 @@ public class CategoryView implements IView {
     }
 
     @Override
-    public ViewType readInput() {
+    public IController readInput() {
         while (true) {
             int keyCode = reader.readUserInput();
             if (keyCode == 0) {
-                return ViewType.CATEGORIES_PAGE;
+                return new CategoriesController(model, reader, printer);
             } else if (keyCode > 0) {
                 model.setCurrentProject(model.getProjectByIdFromCurrentCategory(keyCode));
-                return ViewType.PROJECT_PAGE;
+                return new ProjectController(printer, model, reader);
             }
         }
     }

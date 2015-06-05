@@ -4,7 +4,6 @@ import com.morkva.entities.Project;
 import com.morkva.logic.Printer;
 import com.morkva.logic.Reader;
 import com.morkva.ui.Model;
-import com.morkva.ui.ViewType;
 import com.morkva.ui.views.PaymentView;
 
 /**
@@ -32,7 +31,7 @@ public class PaymentController implements IController{
     }
 
     @Override
-    public ViewType readInput() {
+    public IController readInput() {
         return view.readInput();
     }
 }
