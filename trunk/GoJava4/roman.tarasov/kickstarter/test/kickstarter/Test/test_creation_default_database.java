@@ -24,6 +24,7 @@ public class test_creation_default_database {
 	public iModel imodel;
 	public iView iview;
 	public iUserInterface ui;
+	iController i;
 
 	public test_creation_default_database() {
 		runner = new Runner();
@@ -33,17 +34,26 @@ public class test_creation_default_database {
 		controller = runner.kickstarter.controller;
 		imodel = runner.kickstarter.getModel();
 		iview = runner.kickstarter.getView();
+		 i=controller;
 
 	}
 
 	@Test
 	public void test() throws SQLException {
-		//controller.showPage();
-		iController i=controller;
 		i.setDatabaseDAO();
 		List<Category>list=i.getDao().getCategoryService().getAll();
 		Project project =i.getDao().getProjectService().getProjectById(20);
-	
-	
+	}
+	@Test
+	public void test_update() throws SQLException {
+		i.setDatabaseDAO();
+		List<Category>list=i.getDao().getCategoryService().getAll();
+		Project project =i.getDao().getProjectService().getProjectById(20);
+		System.out.println("pledged before update: "+project.getPledged());
+		project.setPledged(1111);
+		i.getDao().getProjectService().storeProject(project);
+		System.out.println("pledged after update: "+project.getPledged());
+		project=i.getDao().getProjectService().getProjectById(20);
+		assertEquals((Double)project.getPledged(), (Double)(double)1111);
 	}
 }

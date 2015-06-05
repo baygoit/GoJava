@@ -6,9 +6,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 public class Project  {
-
-	
-	
 	private String name;
 	private String description;
 	private String shortDescription;
