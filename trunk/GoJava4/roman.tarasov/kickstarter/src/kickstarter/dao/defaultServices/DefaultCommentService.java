@@ -84,15 +84,6 @@ public class DefaultCommentService implements iCommentService {
 		return allComments.get(projectID);
 	}
 
-	@Override
-	public int getCommentLength(int projectID) {
-
-		List<ProjectComment> listFromAllComments = allComments.get(projectID);
-		if (listFromAllComments != null) {
-			return listFromAllComments.size();
-		}
-		return 0;
-	}
 
 	@Override
 	public void deleteComment(int projectID, int commentID)

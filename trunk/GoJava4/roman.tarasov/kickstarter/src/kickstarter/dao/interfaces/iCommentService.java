@@ -12,11 +12,9 @@ public interface iCommentService {
 
 	void addComment(ProjectComment newComment);
 
-	List<ProjectComment> getCommentsByProjectID(int projectID);
+	List<ProjectComment> getCommentsByProjectID(int projectID) throws SQLException;
 
-	int getCommentLength(int projectID);
-
-	void deleteComment(int projectID, int commentID) throws ServiceException;
+	void deleteComment(int projectID, int commentID) throws ServiceException, SQLException;
 
 	Map<Integer, ArrayList<ProjectComment>> getAll();
 

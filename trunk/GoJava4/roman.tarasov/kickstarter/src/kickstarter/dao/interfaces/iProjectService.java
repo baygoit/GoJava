@@ -19,5 +19,5 @@ public interface iProjectService {
 
 	List<Project> sortProjectsByCategoryID(int categoryID) throws SQLException;
 
-	void storeProject(Project project) throws SQLException;
+	void updateProject(Project project) throws SQLException;
 }

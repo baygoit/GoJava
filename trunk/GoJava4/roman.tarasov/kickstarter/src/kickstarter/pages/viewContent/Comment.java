@@ -46,19 +46,16 @@ public class Comment extends PageView {
 		header.append("\ncomments :");
 		header.append("\n");
 
-		int lengthComments = idao.getCommentService().getCommentLength(modelValues
-				.getIntSelectedProject());
-
 		List<ProjectComment> commentsOfProject = idao.getCommentService()
 				.getCommentsByProjectID(projectID);
 
 		if (commentsOfProject != null) {
-			for (int index = 0; index < lengthComments; index++) {
+			for (int index = 0; index < commentsOfProject.size(); index++) {
 
 				header.append("user ID:<");
 				header.append(commentsOfProject.get(index).getUserID());
 				header.append(">  comment ID:<");
-				header.append(index);
+				header.append(commentsOfProject.get(index).getCommentID());
 				header.append("> <");
 				header.append(commentsOfProject.get(index).getComment());
 				header.append(">\n");

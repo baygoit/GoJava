@@ -20,31 +20,28 @@ public class DBprojectService implements iProjectService {
 		this.dbService = dbService;
 	}
 
-	@Override
-	public void storeProject(Project project) throws SQLException {
-		updateProject(project);
-	}
 
-	private void updateProject(Project project) throws SQLException {
-		StringBuffer buffer = new StringBuffer();
+	@Override
+	public  void updateProject(Project project) throws SQLException {
+		StringBuffer sql = new StringBuffer();
 		
-		buffer.append("UPDATE projects set ");
-		buffer.append("id_project=? , ");
-		buffer.append("id_category=? , ");
-		buffer.append("name=? , ");
-		buffer.append("short_description=? , ");
-		buffer.append("description=? , ");
-		buffer.append("pledged=? , ");
-		buffer.append("amount=? , ");
-		buffer.append("days_to_go=? , ");
-		buffer.append("link=? , ");
-		buffer.append("history=? , ");
-		buffer.append("invest_options=? ");
-		buffer.append("WHERE id_project=");
-		buffer.append(Integer.toString(project.getID()));
+		sql.append("UPDATE projects set ");
+		sql.append("id_project=? , ");
+		sql.append("id_category=? , ");
+		sql.append("name=? , ");
+		sql.append("short_description=? , ");
+		sql.append("description=? , ");
+		sql.append("pledged=? , ");
+		sql.append("amount=? , ");
+		sql.append("days_to_go=? , ");
+		sql.append("link=? , ");
+		sql.append("history=? , ");
+		sql.append("invest_options=? ");
+		sql.append("WHERE id_project=");
+		sql.append(Integer.toString(project.getID()));
 
 		PreparedStatement preparedStatement = dbService.getConnection()
-				.prepareStatement(buffer.toString());
+				.prepareStatement(sql.toString());
 		fillStatement(preparedStatement, project);
 	}
 
@@ -53,25 +50,25 @@ public class DBprojectService implements iProjectService {
 			throws SQLException {
 		List<Project> sorted = new ArrayList<Project>();
 		Statement statement = dbService.getConnection().createStatement();
-		StringBuffer buffer = new StringBuffer();
+		StringBuffer sql = new StringBuffer();
 
-		buffer.append("SELECT ");
-		buffer.append("id_project, ");
-		buffer.append("id_category, ");
-		buffer.append("name, ");
-		buffer.append("short_description, ");
-		buffer.append("description, ");
-		buffer.append("pledged, ");
-		buffer.append("amount, ");
-		buffer.append("days_to_go, ");
-		buffer.append("link, ");
-		buffer.append("history,");
-		buffer.append("invest_options ");
-		buffer.append("FROM projects ");
-		buffer.append("WHERE id_category=");
-		buffer.append(Integer.toString(categoryID));
+		sql.append("SELECT ");
+		sql.append("id_project, ");
+		sql.append("id_category, ");
+		sql.append("name, ");
+		sql.append("short_description, ");
+		sql.append("description, ");
+		sql.append("pledged, ");
+		sql.append("amount, ");
+		sql.append("days_to_go, ");
+		sql.append("link, ");
+		sql.append("history,");
+		sql.append("invest_options ");
+		sql.append("FROM projects ");
+		sql.append("WHERE id_category=");
+		sql.append(Integer.toString(categoryID));
 
-		ResultSet rs = statement.executeQuery(buffer.toString());
+		ResultSet rs = statement.executeQuery(sql.toString());
 		while (rs.next()) {
 			sorted.add(newProject(rs));
 		}
@@ -91,25 +88,25 @@ public class DBprojectService implements iProjectService {
 	@Override
 	public Project getProjectById(int ID) throws SQLException {
 		Statement statement = dbService.getConnection().createStatement();
-		StringBuffer buffer = new StringBuffer();
+		StringBuffer sql = new StringBuffer();
 
-		buffer.append("SELECT ");
-		buffer.append("id_project, ");
-		buffer.append("id_category, ");
-		buffer.append("name, ");
-		buffer.append("short_description, ");
-		buffer.append("description, ");
-		buffer.append("pledged, ");
-		buffer.append("amount, ");
-		buffer.append("days_to_go, ");
-		buffer.append("link, ");
-		buffer.append("history, ");
-		buffer.append("invest_options ");
-		buffer.append("FROM projects ");
-		buffer.append("WHERE id_project=");
-		buffer.append(Integer.toString(ID));
+		sql.append("SELECT ");
+		sql.append("id_project, ");
+		sql.append("id_category, ");
+		sql.append("name, ");
+		sql.append("short_description, ");
+		sql.append("description, ");
+		sql.append("pledged, ");
+		sql.append("amount, ");
+		sql.append("days_to_go, ");
+		sql.append("link, ");
+		sql.append("history, ");
+		sql.append("invest_options ");
+		sql.append("FROM projects ");
+		sql.append("WHERE id_project=");
+		sql.append(Integer.toString(ID));
 
-		ResultSet rs = statement.executeQuery(buffer.toString());
+		ResultSet rs = statement.executeQuery(sql.toString());
 		rs.next();
 		return newProject(rs);
 	}
@@ -140,27 +137,27 @@ public class DBprojectService implements iProjectService {
 	}
 
 	private void insertProject(Project project) throws SQLException {
-		StringBuffer buffer = new StringBuffer();
+		StringBuffer sql = new StringBuffer();
 
-		buffer.append("INSERT INTO projects ");
-		buffer.append("(");
-		buffer.append("id_project, ");
-		buffer.append("id_category, ");
-		buffer.append("name, ");
-		buffer.append("short_description, ");
-		buffer.append("description, ");
-		buffer.append("pledged, ");
-		buffer.append("amount, ");
-		buffer.append("days_to_go, ");
-		buffer.append("link, ");
-		buffer.append("history, ");
-		buffer.append("invest_options");
-		buffer.append(")");
-		buffer.append("VALUES");
-		buffer.append("(?,?,?,?,?,?,?,?,?,?,?)");
+		sql.append("INSERT INTO projects ");
+		sql.append("(");
+		sql.append("id_project, ");
+		sql.append("id_category, ");
+		sql.append("name, ");
+		sql.append("short_description, ");
+		sql.append("description, ");
+		sql.append("pledged, ");
+		sql.append("amount, ");
+		sql.append("days_to_go, ");
+		sql.append("link, ");
+		sql.append("history, ");
+		sql.append("invest_options");
+		sql.append(")");
+		sql.append("VALUES");
+		sql.append("(?,?,?,?,?,?,?,?,?,?,?)");
 
 		PreparedStatement preparedStatement = dbService.getConnection()
-				.prepareStatement(buffer.toString());
+				.prepareStatement(sql.toString());
 		fillStatement(preparedStatement, project);
 	}
 
@@ -190,25 +187,25 @@ public class DBprojectService implements iProjectService {
 		List<Project> projects = sourceDAO.getProjectService().getAll();
 		Statement statement = dbService.getConnection().createStatement();
 		statement.executeUpdate("DROP TABLE IF EXISTS  projects ");
-		StringBuffer buffer = new StringBuffer();
+		StringBuffer sql = new StringBuffer();
 
-		buffer.append("CREATE TABLE projects");
-		buffer.append("(");
-		buffer.append("id_project SERIAL not null PRIMARY KEY,");
-		buffer.append("id_category integer,");
-		buffer.append("name varchar(255),");
-		buffer.append("short_description varchar(255),");
-		buffer.append("description varchar(255),");
-		buffer.append("pledged float8,");
-		buffer.append("amount float8[],");
-		buffer.append("days_to_go integer,");
-		buffer.append("link varchar(255),");
-		buffer.append("history varchar(255),");
-		buffer.append("invest_options varchar(255)[]");
-		buffer.append(")");
+		sql.append("CREATE TABLE projects");
+		sql.append("(");
+		sql.append("id_project SERIAL not null PRIMARY KEY,");
+		sql.append("id_category integer,");
+		sql.append("name varchar(255),");
+		sql.append("short_description varchar(255),");
+		sql.append("description varchar(255),");
+		sql.append("pledged float8,");
+		sql.append("amount float8[],");
+		sql.append("days_to_go integer,");
+		sql.append("link varchar(255),");
+		sql.append("history varchar(255),");
+		sql.append("invest_options varchar(255)[]");
+		sql.append(")");
 
 		statement
-				.executeUpdate(buffer.toString());
+				.executeUpdate(sql.toString());
 		for (Project project : projects) {
 			insertProject(project);
 		}

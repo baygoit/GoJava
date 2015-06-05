@@ -1,5 +1,7 @@
 package kickstarter.pages.modelContent;
 
+import java.sql.SQLException;
+
 import kickstarter.dao.defaultServices.ServiceException;
 import kickstarter.entity.ProjectComment;
 import kickstarter.mvc.interfaces.IndexOfPage;
@@ -31,7 +33,7 @@ public class CommentModel extends PageModel {
 				idao.getCommentService().deleteComment(projectID,
 						(int) Integer.parseInt(array[1]));
 				imodel.next(IndexOfPage.DETAILED_PROJECT.ordinal());
-			} catch (NumberFormatException |ServiceException e) {
+			} catch (NumberFormatException |ServiceException | SQLException e) {
 			
 				imodel.goToAndBack(IndexOfPage.ERROR_PAGE.ordinal(),
 						IndexOfPage.COMMENT_PAGE.ordinal());

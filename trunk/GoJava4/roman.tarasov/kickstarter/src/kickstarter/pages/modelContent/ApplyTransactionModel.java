@@ -40,7 +40,7 @@ public class ApplyTransactionModel extends PageModel {
 				Project project = idao.getProjectService().getProjectById(modelValues
 						.getIntSelectedProject());
 				project.setPledged(project.getPledged() + getMoney);
-
+				idao.getProjectService().updateProject(project);
 				modelValues.setResultOfBankOperation("\nbalance before :"
 						+ balanceBefore + "\nbalance after :" + balanceAfter);
 				imodel.next(IndexOfPage.BANK_OPERATION_RESULT_PAGE.ordinal());

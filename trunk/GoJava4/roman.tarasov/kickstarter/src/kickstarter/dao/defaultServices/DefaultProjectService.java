@@ -111,7 +111,7 @@ public class DefaultProjectService implements iProjectService {
 		}
 
 	@Override
-	public void storeProject(Project project) {
+	public void updateProject(Project project) {
 		// TODO Auto-generated method stub
 		
 	}
