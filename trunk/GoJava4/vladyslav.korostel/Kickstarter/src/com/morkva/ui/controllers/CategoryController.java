@@ -23,8 +23,8 @@ public class CategoryController implements IController{
         view.showContent();
     }
 
-    public IController readInput() {
-        return view.readInput();
+    public void readInput() {
+        view.readInput();
     }
 
 }

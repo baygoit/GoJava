@@ -4,7 +4,7 @@ import com.morkva.entities.Project;
 import com.morkva.logic.Printer;
 import com.morkva.logic.Reader;
 import com.morkva.ui.Model;
-import com.morkva.ui.controllers.IController;
+import com.morkva.ui.ViewResolver;
 import com.morkva.ui.controllers.PaymentController;
 import com.morkva.ui.controllers.ProjectController;
 import com.morkva.utils.PaymentOption;
@@ -40,17 +40,20 @@ public class PaymentView implements IView {
     }
 
     @Override
-    public IController readInput() {
+    public void readInput() {
         while (true) {
             int keyCode = reader.readUserInput();
             if (model.getCurrentProject().getPaymentOptions().containsKey(keyCode)) {
                 controller.investToTheProject(model.getCurrentProject().getPaymentOptions().get(keyCode).getAmount());
-                return new ProjectController(printer, model, reader);
+                ViewResolver.getInstance().setNextView(new ProjectController(printer, model, reader));
+                break;
             } else if (keyCode == 0){
-                return new ProjectController(printer, model, reader);
+                ViewResolver.getInstance().setNextView(new ProjectController(printer, model, reader));
+                break;
             } else if (keyCode > 0){
                 controller.investToTheProject(keyCode);
-                return new ProjectController(printer, model, reader);
+                ViewResolver.getInstance().setNextView(new ProjectController(printer, model, reader));
+                break;
             } else {
                 printer.print("Wrong Code!");
             }

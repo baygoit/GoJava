@@ -8,7 +8,6 @@ import java.util.Scanner;
  */
 public class ConsoleReader implements Reader {
 
-
     public ConsoleReader() {
     }
 

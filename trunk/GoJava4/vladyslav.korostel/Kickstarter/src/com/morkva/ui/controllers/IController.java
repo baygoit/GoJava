@@ -5,5 +5,5 @@ package com.morkva.ui.controllers;
  */
 public interface IController {
     void showView();
-    IController readInput();
+    void readInput();
 }

@@ -5,8 +5,8 @@ import com.morkva.entities.Project;
 import com.morkva.logic.Printer;
 import com.morkva.logic.Reader;
 import com.morkva.ui.Model;
+import com.morkva.ui.ViewResolver;
 import com.morkva.ui.controllers.CategoriesController;
-import com.morkva.ui.controllers.IController;
 import com.morkva.ui.controllers.ProjectController;
 
 /**
@@ -35,14 +35,18 @@ public class CategoryView implements IView {
     }
 
     @Override
-    public IController readInput() {
+    public void readInput() {
         while (true) {
             int keyCode = reader.readUserInput();
             if (keyCode == 0) {
-                return new CategoriesController(model, reader, printer);
+                ViewResolver.getInstance().setNextView(new CategoriesController(model, reader, printer));
+                break;
             } else if (keyCode > 0) {
                 model.setCurrentProject(model.getProjectByIdFromCurrentCategory(keyCode));
-                return new ProjectController(printer, model, reader);
+                ViewResolver.getInstance().setNextView(new ProjectController(printer, model, reader));
+                break;
+            } else {
+                printer.print("Wrong code!");
             }
         }
     }

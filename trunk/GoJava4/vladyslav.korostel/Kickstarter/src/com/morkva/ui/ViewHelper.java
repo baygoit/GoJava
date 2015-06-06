@@ -22,7 +22,7 @@ public class ViewHelper {
 
     public void showView(IController controller) {
         controller.showView();
-        ViewResolver.getInstance().setNextView(controller.readInput());
+        controller.readInput();
     }
 
     public void runCommand() {

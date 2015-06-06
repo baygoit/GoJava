@@ -25,7 +25,7 @@ public class CategoriesController implements IController{
     }
 
 
-    public IController readInput() {
-        return view.readInput();
+    public void readInput() {
+        view.readInput();
     }
 }

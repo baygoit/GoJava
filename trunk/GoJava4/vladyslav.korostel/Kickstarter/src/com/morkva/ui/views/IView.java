@@ -7,5 +7,5 @@ import com.morkva.ui.controllers.IController;
  */
 public interface IView {
     void showContent();
-    IController readInput();
+    void readInput();
 }

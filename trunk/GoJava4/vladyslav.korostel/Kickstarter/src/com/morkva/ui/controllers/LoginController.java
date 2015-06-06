@@ -26,7 +26,7 @@ public class LoginController implements IController {
     }
 
     @Override
-    public IController readInput() {
-        return view.readInput();
+    public void readInput() {
+        view.readInput();
     }
 }
