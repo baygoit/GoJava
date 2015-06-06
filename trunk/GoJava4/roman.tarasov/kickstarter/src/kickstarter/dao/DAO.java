@@ -1,5 +1,6 @@
 package kickstarter.dao;
 
+import kickstarter.dao.databaseServices.DBprojectService;
 import kickstarter.dao.interfaces.iCategoryService;
 import kickstarter.dao.interfaces.iCommentService;
 import kickstarter.dao.interfaces.iDAO;
@@ -9,9 +10,9 @@ import kickstarter.dao.interfaces.iQuoteService;
 
 public class DAO implements iDAO {
 	private iProjectService iProjectService;
-	private iCategoryService categoryService;
+	private iCategoryService iCategoryService;
 	private iQuoteService iQuoteService;
-	private iCommentService commentService;
+	private iCommentService iCommentService;
 
 	@Override
 	public void setProjectService(iProjectService iProjectService) {
@@ -20,12 +21,12 @@ public class DAO implements iDAO {
 
 	@Override
 	public void setCategoryService(iCategoryService categoryService) {
-		this.categoryService = categoryService;
+		this.iCategoryService = categoryService;
 	}
 
 	@Override
 	public void setCommentService(iCommentService commentService) {
-		this.commentService = commentService;
+		this.iCommentService = commentService;
 	}
 
 	@Override
@@ -35,12 +36,12 @@ public class DAO implements iDAO {
 
 	@Override
 	public iCategoryService getCategoryService() {
-		return categoryService;
+		return iCategoryService;
 	}
 
 	@Override
 	public iCommentService getCommentService() {
-		return commentService;
+		return iCommentService;
 	}
 
 	@Override
@@ -53,5 +54,11 @@ public class DAO implements iDAO {
 		return iQuoteService;
 	}
 
-
+	@Override
+	public String getName() {
+		if(iProjectService instanceof DBprojectService){
+			return "database";
+		}
+		return "memory";
+	}
 }

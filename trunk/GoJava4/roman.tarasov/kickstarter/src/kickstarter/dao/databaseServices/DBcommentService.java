@@ -15,6 +15,7 @@ import kickstarter.dao.interfaces.iDAO;
 import kickstarter.entity.ProjectComment;
 
 public class DBcommentService implements iCommentService {
+	private static final int MAX_COMMENT_ID = 2000000000;
 	private iDatabaseService dbService;
 	private int projectID;
 	private HashMap<Integer, ArrayList<ProjectComment>> allComments;
@@ -25,18 +26,34 @@ public class DBcommentService implements iCommentService {
 	}
 
 	@Override
-	public void addComment(ProjectComment newComment) {
-		projectID = newComment.getProjectID();
+	public void addComment(ProjectComment newComment) throws SQLException, ServiceException {
+		Statement statement = dbService.getConnection().createStatement();
+		StringBuffer sql = new StringBuffer();
 
-		ArrayList<ProjectComment> listFromAllComments = allComments
-				.get(projectID);
-		if (listFromAllComments != null) {
-			listFromAllComments.add(newComment);
-			return;
+		sql.append("SELECT ");
+		sql.append("MAX ");
+		sql.append("(id_comment) ");
+		sql.append("AS ");
+		sql.append("max_id ");
+		sql.append("FROM ");
+		sql.append("comments ");
+		statement.executeQuery(sql.toString());
+		ResultSet rs=statement.getResultSet();
+		rs.next();
+		int id=1+rs.getInt("max_id");
+		if(id>MAX_COMMENT_ID){
+			throw new ServiceException("id must be lower than 8");
 		}
-		ArrayList<ProjectComment> newList = new ArrayList<ProjectComment>();
-		newList.add(newComment);
-		allComments.put(projectID, newList);
+		PreparedStatement ps = dbService
+				.getConnection()
+				.prepareStatement(
+						"INSERT INTO comments (id_comment, id_project, id_user, comment) values(?,?,?,?)");
+		ps.setInt(1, id);
+		ps.setInt(2, newComment.getProjectID());
+		ps.setInt(3, newComment.getUserID());
+		ps.setString(4, newComment.getComment());
+		ps.executeUpdate();
+
 	}
 
 	@Override
@@ -76,7 +93,10 @@ public class DBcommentService implements iCommentService {
 		sql.append(" AND ");
 		sql.append("id_comment=");
 		sql.append(Integer.toString(commentID));
-		statement.executeUpdate(sql.toString());
+		int result=statement.executeUpdate(sql.toString());
+		if(result==0){
+			throw new ServiceException("row not found");
+		}
 	}
 
 	@Override
@@ -101,14 +121,13 @@ public class DBcommentService implements iCommentService {
 		sql.append(")");
 
 		statement.executeUpdate(sql.toString());
-
+		PreparedStatement ps = dbService
+				.getConnection()
+				.prepareStatement(
+						"INSERT INTO comments (id_project, id_user, comment) values(?,?,?)");
 		for (Integer key : comments.keySet()) {
 			List<ProjectComment> value = comments.get(key);
 			for (ProjectComment comment : value) {
-				PreparedStatement ps = dbService
-						.getConnection()
-						.prepareStatement(
-								"INSERT INTO comments (id_project, id_user, comment) values(?,?,?)");
 				ps.setInt(1, comment.getProjectID());
 				ps.setInt(2, comment.getUserID());
 				ps.setString(3, comment.getComment());

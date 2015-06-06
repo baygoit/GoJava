@@ -21,7 +21,7 @@ public class DAOmenu extends PageView {
 		boolean isClosed=true;
 		try {
 			isClosed = icontroller.getDatabaseService().getConnection().isClosed();
-		} catch (SQLException e) {
+		} catch (NullPointerException|SQLException e) {
 			isClosed=true;
 		}
 		if (isClosed) {
@@ -29,8 +29,11 @@ public class DAOmenu extends PageView {
 		} else {
 			header.append("<connected>");
 		}
+		header.append("\n Current DAO: ");
+		String nameOfDAO=icontroller.getDao().getName();
+		header.append(nameOfDAO);
 		header.append("\n-------------------------------");
-		header.append("\nOptions:   <m> - memory access\n           <d> - database access\n           <p> - previous page\n           <e> - The End");
+		header.append("\nOptions:   <m> - memory access\n           <d> - database access\n           <c> - copy from memory DAO to database DAO \n           <p> - previous page\n           <e> - The End");
 		return header.toString();
 	}
 }

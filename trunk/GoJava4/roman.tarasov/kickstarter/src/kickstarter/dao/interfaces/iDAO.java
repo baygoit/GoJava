@@ -17,6 +17,8 @@ public interface iDAO {
 	void setCategoryService(iCategoryService categoryService);
 
 	void setProjectService(iProjectService iProjectService);
+
+	String getName();
 	
 
 }

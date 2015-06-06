@@ -7,8 +7,10 @@ import kickstarter.dao.interfaces.iDAO;
 
 public interface iDatabaseService {
 
-	void createDefaultDatabase(DatabaseSettings settings, iDAO sourceDAO,
+	void createDefaultDatabase( iDAO sourceDAO,
 			iDAO destinationDAO) throws SQLException;
+
+	void createConnection(DatabaseSettings settings) throws SQLException;
 
 	Connection getConnection();
 }

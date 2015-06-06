@@ -71,16 +71,17 @@ public class Runner {
 		iDatabaseService databaseService = new DatabaseService();
 		iDAO iDefaultDAO = setDefaultServices(new DAO());
 		iDAO iDatabaseDAO = setDatabaseServices(new DAO(), databaseService);
-
+/*
 		try {
-			databaseService.createDefaultDatabase(new DatabaseSettings(
+			databaseService.createConnection(new DatabaseSettings(
 					"jdbc:postgresql://localhost:5432/kickstarter", "postgres",
-					"root"), iDefaultDAO, iDatabaseDAO);
+					"root"));
+			//databaseService.createDefaultDatabase(iDefaultDAO, iDatabaseDAO);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+*/
 		Controller controller = new Controller();
 		iController icontroller = controller;
 		controller.setDatabaseService(databaseService);

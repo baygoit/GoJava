@@ -16,4 +16,8 @@ public interface iController {
 	void setDatabaseDAO();
 
 	iDatabaseService getDatabaseService();
+
+	iDAO getDefaultDao();
+
+	iDAO getDatabaseDao();
 }

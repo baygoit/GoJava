@@ -23,8 +23,15 @@ public class CommentModel extends PageModel {
 			projectComment.setProjectID(projectID);
 			projectComment.setUserID(1);
 			projectComment.setComment(array[1]);
-			idao.getCommentService().addComment(projectComment);
-			imodel.next(IndexOfPage.DETAILED_PROJECT.ordinal());
+			try {
+				idao.getCommentService().addComment(projectComment);
+				imodel.next(IndexOfPage.DETAILED_PROJECT.ordinal());
+				
+			} catch (ServiceException|SQLException e) {
+				imodel.goToAndBack(IndexOfPage.ERROR_PAGE.ordinal(),
+						IndexOfPage.COMMENT_PAGE.ordinal());
+			}
+			
 			return;
 		}
 

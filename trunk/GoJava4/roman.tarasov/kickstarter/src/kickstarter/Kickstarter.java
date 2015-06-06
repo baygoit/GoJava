@@ -8,9 +8,7 @@ import kickstarter.mvc.interfaces.iController;
 import kickstarter.ui.iUserInterface;
 
 public class Kickstarter {
-	public static final String URL = "jdbc:postgresql://localhost:5432/kickstarter";
-	public static final String USER = "postgres";
-	public static final String PASSWORD = "root";
+
 	private iUserInterface ui;
 	private View view;
 	private Model model;

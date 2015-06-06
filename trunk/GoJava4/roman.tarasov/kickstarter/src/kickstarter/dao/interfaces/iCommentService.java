@@ -10,7 +10,7 @@ import kickstarter.entity.ProjectComment;
 
 public interface iCommentService {
 
-	void addComment(ProjectComment newComment);
+	void addComment(ProjectComment newComment) throws SQLException, ServiceException;
 
 	List<ProjectComment> getCommentsByProjectID(int projectID) throws SQLException;
 

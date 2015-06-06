@@ -18,7 +18,7 @@ public class DBquoteService implements iQuoteService {
 	}
 
 	@Override
-	public Quote getRandomQuote() throws SQLException {
+	public Quote getRandomQuote() throws SQLException  {
 		Statement statement = databaseService.getConnection().createStatement(
 				ResultSet.TYPE_SCROLL_INSENSITIVE, 0);
 		ResultSet resultSet = statement

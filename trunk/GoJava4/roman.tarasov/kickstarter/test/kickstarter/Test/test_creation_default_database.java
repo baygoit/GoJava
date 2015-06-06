@@ -37,54 +37,80 @@ public class test_creation_default_database {
 		controller = runner.kickstarter.controller;
 		imodel = runner.kickstarter.getModel();
 		iview = runner.kickstarter.getView();
-		 i=controller;
+		i = controller;
 
 	}
-//@Ignore
+
+	// @Ignore
 	@Test
 	public void test() throws SQLException {
 		i.setDatabaseDAO();
-		List<Category>list=i.getDao().getCategoryService().getAll();
-		Project project =i.getDao().getProjectService().getProjectById(20);
+		List<Category> list = i.getDao().getCategoryService().getAll();
+		Project project = i.getDao().getProjectService().getProjectById(20);
 	}
-//@Ignore
+
+	// @Ignore
 	@Test
 	public void test_update_project() throws SQLException {
 		i.setDatabaseDAO();
-		List<Category>list=i.getDao().getCategoryService().getAll();
-		Project project =i.getDao().getProjectService().getProjectById(20);
-		//System.out.println("pledged before update: "+project.getPledged());
+		List<Category> list = i.getDao().getCategoryService().getAll();
+		Project project = i.getDao().getProjectService().getProjectById(20);
+		// System.out.println("pledged before update: "+project.getPledged());
 		project.setPledged(1111);
 		i.getDao().getProjectService().updateProject(project);
-		//System.out.println("pledged after update: "+project.getPledged());
-		project=i.getDao().getProjectService().getProjectById(20);
-		assertEquals((Double)project.getPledged(), (Double)(double)1111);
+		// System.out.println("pledged after update: "+project.getPledged());
+		project = i.getDao().getProjectService().getProjectById(20);
+		assertEquals((Double) project.getPledged(), (Double) (double) 1111);
 	}
-//@Ignore
+
+	@Ignore
 	@Test
 	public void test_get_comments() throws SQLException {
 		i.setDatabaseDAO();
-	
-		 List<ProjectComment> comments = i.getDao().getCommentService().getCommentsByProjectID(23);
-		 for (ProjectComment comment:comments){
-			 System.out.println("comment : "+comment.getComment());
-		 }
-	
+
+		List<ProjectComment> comments = i.getDao().getCommentService()
+				.getCommentsByProjectID(23);
+		for (ProjectComment comment : comments) {
+			System.out.println("comment : " + comment.getComment());
+		}
+
 	}
-	@Test
+
+	// @Ignore
+	@Test(expected =ServiceException.class)
 	public void test_delete_comment() throws SQLException, ServiceException {
+		//i.setDatabaseDAO();
+		i.setDefaultDAO();
+		List<ProjectComment> comments = i.getDao().getCommentService()
+				.getCommentsByProjectID(23);
+		
+		i.getDao().getCommentService().deleteComment(23, 0);
+		comments = i.getDao().getCommentService().getCommentsByProjectID(23);
+
+	}
+
+	@Ignore
+	@Test
+	public void test_add_comment() throws SQLException, ServiceException {
 		i.setDatabaseDAO();
-		 List<ProjectComment> comments = i.getDao().getCommentService().getCommentsByProjectID(23);
-		 for (ProjectComment comment:comments){
-			 System.out.println("project id: "+comment.getProjectID()+"comment id: "+comment.getCommentID());
-		 }
-		 System.out.println("--------------------------------------");
-		 i.getDao().getCommentService().deleteComment(23, 3);
-		// i.getDao().getCommentService().deleteComment(23, 3);
-		  comments = i.getDao().getCommentService().getCommentsByProjectID(23);
-		 for (ProjectComment comment:comments){
-			 System.out.println("project id: "+comment.getProjectID()+"comment id: "+comment.getCommentID());
-		 }
-	
+		List<ProjectComment> comments = i.getDao().getCommentService()
+				.getCommentsByProjectID(23);
+		for (ProjectComment comment : comments) {
+			System.out.println("project id: " + comment.getProjectID()
+					+ "comment id: " + comment.getCommentID());
+		}
+		System.out.println("--------------------------------------");
+		ProjectComment newComment = new ProjectComment();
+		newComment.setComment("new comment");
+		newComment.setUserID(7);
+		newComment.setProjectID(23);
+
+		i.getDao().getCommentService().addComment(newComment);
+		comments = i.getDao().getCommentService().getCommentsByProjectID(23);
+		for (ProjectComment comment : comments) {
+			System.out.println("project id: " + comment.getProjectID()
+					+ "comment id: " + comment.getCommentID());
+		}
+
 	}
 }

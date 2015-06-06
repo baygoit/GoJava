@@ -64,6 +64,16 @@ public class Controller implements iController {
 		this.defaultDAO = defaultDAO;
 		this.databaseDAO = databaseDAO;
 	}
+	@Override
+	public iDAO getDefaultDao() {
+		return defaultDAO;
+		
+	}
+	@Override
+	public iDAO getDatabaseDao() {
+		return databaseDAO;
+		
+	}
 
 	@Override
 	public void setDefaultDAO() {
