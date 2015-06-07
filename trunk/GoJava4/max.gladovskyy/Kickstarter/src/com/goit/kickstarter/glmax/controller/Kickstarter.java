@@ -7,9 +7,8 @@ public class Kickstarter {
 
 	public static void main(String[] args) {
 		DataSource dataSource = new LocalDataSource();
-		View view = new ConsoleView();
 
-		Runner kickstarter = new Runner(dataSource, view);
+		Runner kickstarter = new Runner(dataSource);
 		kickstarter.run();
 	}
 

@@ -1,10 +1,5 @@
 package com.goit.kickstarter.glmax.controller;
 
-import java.util.*;
-
-import com.goit.kickstarter.glmax.enteties.Category;
-import com.goit.kickstarter.glmax.enteties.PaymentVariant;
-import com.goit.kickstarter.glmax.enteties.Project;
 import com.goit.kickstarter.glmax.model.*;
 import com.goit.kickstarter.glmax.pages.Page;
 import com.goit.kickstarter.glmax.pages.PageFactory;
@@ -16,16 +11,15 @@ public class Runner {
 	private Input reader;
 	private Output printer;
 
-	public Runner(DataSource dataSource, View view) {
+	public Runner(DataSource dataSource) {
 		this.dataSource = dataSource;
 		this.pageFactory = new ConsolePageFactory(dataSource);
 		this.reader = new ConsoleIn();
 		this.printer = new ConsoleOut();
-
 	}
 
 	public void run() {
-		Page currentPage = initManePage();
+		Page currentPage = pageFactory.getPage(Position.Main, dataSource.getSomeQuote());
 		currentPage.show(printer);
 		int userChois;
 		
@@ -38,16 +32,4 @@ public class Runner {
 			}
 		}
 	}
-
-
-	private Page initManePage() {
-		Page result = pageFactory.getPage(Position.Main, dataSource.getSomeQuote());
-		ArrayList<Page> childPages;
-		for (Category category : dataSource.getCategories()) {
-			childPages.add(pageFactory.getPage(Position.Category, category));
-		}
-		result.addChildPages(childPages);
-		return result;
-	}
-
 }
