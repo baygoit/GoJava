@@ -27,7 +27,7 @@ public class test_creation_default_database {
 	public iModel imodel;
 	public iView iview;
 	public iUserInterface ui;
-	iController i;
+	iController iC;
 
 	public test_creation_default_database() {
 		runner = new Runner();
@@ -37,38 +37,26 @@ public class test_creation_default_database {
 		controller = runner.kickstarter.controller;
 		imodel = runner.kickstarter.getModel();
 		iview = runner.kickstarter.getView();
-		i = controller;
+		iC = controller;
 
 	}
-
-	// @Ignore
-	@Test
-	public void test() throws SQLException {
-		i.setDatabaseDAO();
-		List<Category> list = i.getDao().getCategoryService().getAll();
-		Project project = i.getDao().getProjectService().getProjectById(20);
-	}
-
-	// @Ignore
+	
 	@Test
 	public void test_update_project() throws SQLException {
-		i.setDatabaseDAO();
-		List<Category> list = i.getDao().getCategoryService().getAll();
-		Project project = i.getDao().getProjectService().getProjectById(20);
-		// System.out.println("pledged before update: "+project.getPledged());
+		iC.setDatabaseDAO();
+		Project project = iC.getDao().getProjectService().getProjectById(20);
 		project.setPledged(1111);
-		i.getDao().getProjectService().updateProject(project);
-		// System.out.println("pledged after update: "+project.getPledged());
-		project = i.getDao().getProjectService().getProjectById(20);
+		iC.getDao().getProjectService().updateProject(project);
+		project = iC.getDao().getProjectService().getProjectById(20);
 		assertEquals((Double) project.getPledged(), (Double) (double) 1111);
 	}
 
-	@Ignore
+	
 	@Test
 	public void test_get_comments() throws SQLException {
-		i.setDatabaseDAO();
+		iC.setDatabaseDAO();
 
-		List<ProjectComment> comments = i.getDao().getCommentService()
+		List<ProjectComment> comments = iC.getDao().getCommentService()
 				.getCommentsByProjectID(23);
 		for (ProjectComment comment : comments) {
 			System.out.println("comment : " + comment.getComment());
@@ -76,24 +64,18 @@ public class test_creation_default_database {
 
 	}
 
-	// @Ignore
+	
 	@Test(expected =ServiceException.class)
-	public void test_delete_comment() throws SQLException, ServiceException {
-		//i.setDatabaseDAO();
-		i.setDefaultDAO();
-		List<ProjectComment> comments = i.getDao().getCommentService()
-				.getCommentsByProjectID(23);
-		
-		i.getDao().getCommentService().deleteComment(23, 0);
-		comments = i.getDao().getCommentService().getCommentsByProjectID(23);
-
+	public void test_delete_comment_from_default_dao() throws SQLException, ServiceException {
+	
+		iC.setDefaultDAO();
+		iC.getDao().getCommentService().deleteComment(23, 0);
 	}
 
-	@Ignore
 	@Test
 	public void test_add_comment() throws SQLException, ServiceException {
-		i.setDatabaseDAO();
-		List<ProjectComment> comments = i.getDao().getCommentService()
+		iC.setDatabaseDAO();
+		List<ProjectComment> comments = iC.getDao().getCommentService()
 				.getCommentsByProjectID(23);
 		for (ProjectComment comment : comments) {
 			System.out.println("project id: " + comment.getProjectID()
@@ -105,8 +87,8 @@ public class test_creation_default_database {
 		newComment.setUserID(7);
 		newComment.setProjectID(23);
 
-		i.getDao().getCommentService().addComment(newComment);
-		comments = i.getDao().getCommentService().getCommentsByProjectID(23);
+		iC.getDao().getCommentService().addComment(newComment);
+		comments = iC.getDao().getCommentService().getCommentsByProjectID(23);
 		for (ProjectComment comment : comments) {
 			System.out.println("project id: " + comment.getProjectID()
 					+ "comment id: " + comment.getCommentID());

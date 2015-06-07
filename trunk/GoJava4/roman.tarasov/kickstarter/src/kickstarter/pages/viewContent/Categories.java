@@ -30,7 +30,7 @@ public class Categories extends PageView {
 		header.append(getListAllCategories());
 		header.append("\n------------------------");
 		header.append("\nSelect category by ID:<ID>");
-		header.append("\nOptions:  <d> - DAO menu;  <e> - The End");
+		header.append("\nOptions:  <d> - DAO menu;  \n          <u> - User account menu \n          <e> - The End");
 		return header.toString();
 	}
 

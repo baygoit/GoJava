@@ -1,6 +1,7 @@
 package kickstarter.Test;
 
 import static org.junit.Assert.*;
+import kickstarter.dao.defaultServices.ServiceException;
 import kickstarter.payment.Bank;
 import kickstarter.payment.BankException;
 
@@ -102,7 +103,7 @@ public class test_bank {
 			assertFalse(bank.getMoney("bankir", "777", "NaN"));
 		} catch (BankException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			
 		}
 	}
 

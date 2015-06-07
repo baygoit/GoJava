@@ -20,11 +20,10 @@ public class DBprojectService implements iProjectService {
 		this.dbService = dbService;
 	}
 
-
 	@Override
-	public  void updateProject(Project project) throws SQLException {
+	public void updateProject(Project project) throws SQLException {
 		StringBuffer sql = new StringBuffer();
-		
+
 		sql.append("UPDATE projects set ");
 		sql.append("id_project=? , ");
 		sql.append("id_category=? , ");
@@ -126,7 +125,7 @@ public class DBprojectService implements iProjectService {
 		project.setLinkToVideo(rs.getString(9));
 		project.setHistory(rs.getString(10));
 		Array investOptions = rs.getArray(11);
-		String[]str=(String[])investOptions.getArray();
+		String[] str = (String[]) investOptions.getArray();
 		project.setInvestmentOptions(str);
 		return project;
 	}
@@ -134,31 +133,6 @@ public class DBprojectService implements iProjectService {
 	@Override
 	public List<Project> getAll() {
 		return projects;
-	}
-
-	private void insertProject(Project project) throws SQLException {
-		StringBuffer sql = new StringBuffer();
-
-		sql.append("INSERT INTO projects ");
-		sql.append("(");
-		sql.append("id_project, ");
-		sql.append("id_category, ");
-		sql.append("name, ");
-		sql.append("short_description, ");
-		sql.append("description, ");
-		sql.append("pledged, ");
-		sql.append("amount, ");
-		sql.append("days_to_go, ");
-		sql.append("link, ");
-		sql.append("history, ");
-		sql.append("invest_options");
-		sql.append(")");
-		sql.append("VALUES");
-		sql.append("(?,?,?,?,?,?,?,?,?,?,?)");
-
-		PreparedStatement preparedStatement = dbService.getConnection()
-				.prepareStatement(sql.toString());
-		fillStatement(preparedStatement, project);
 	}
 
 	void fillStatement(PreparedStatement ps, Project project)
@@ -204,11 +178,35 @@ public class DBprojectService implements iProjectService {
 		sql.append("invest_options varchar(255)[]");
 		sql.append(")");
 
-		statement
-				.executeUpdate(sql.toString());
+		statement.executeUpdate(sql.toString());
+		
 		for (Project project : projects) {
 			insertProject(project);
 		}
 	}
 
+	private void insertProject(Project project) throws SQLException {
+		StringBuffer sql = new StringBuffer();
+
+		sql.append("INSERT INTO projects ");
+		sql.append("(");
+		sql.append("id_project, ");
+		sql.append("id_category, ");
+		sql.append("name, ");
+		sql.append("short_description, ");
+		sql.append("description, ");
+		sql.append("pledged, ");
+		sql.append("amount, ");
+		sql.append("days_to_go, ");
+		sql.append("link, ");
+		sql.append("history, ");
+		sql.append("invest_options");
+		sql.append(")");
+		sql.append("VALUES");
+		sql.append("(?,?,?,?,?,?,?,?,?,?,?)");
+
+		PreparedStatement preparedStatement = dbService.getConnection()
+				.prepareStatement(sql.toString());
+		fillStatement(preparedStatement, project);
+	}
 }

@@ -16,17 +16,17 @@ public class DatabaseService implements iDatabaseService {
 		destinationDAO.getQuoteService().createQuotes(sourceDAO);
 		destinationDAO.getCategoryService().createCategories(sourceDAO);
 		destinationDAO.getCommentService().createComments(sourceDAO);
+		destinationDAO.getUserService().createAccounts(sourceDAO);
 	}
+
 	@Override
 	public void createConnection(DatabaseSettings settings) throws SQLException {
 		connection = DriverManager.getConnection(settings.getUrl(),
 				settings.getUser(), settings.getPassword());
-
 	}
+
 	@Override
 	public Connection getConnection() {
 		return connection;
 	}
-
-
 }

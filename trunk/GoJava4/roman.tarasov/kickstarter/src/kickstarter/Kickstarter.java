@@ -74,5 +74,4 @@ public class Kickstarter {
 			controller.updateStateOfModel(message);
 		}
 	}
-
 }

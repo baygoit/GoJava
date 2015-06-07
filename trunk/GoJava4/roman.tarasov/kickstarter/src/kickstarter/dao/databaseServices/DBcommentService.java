@@ -5,7 +5,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -17,12 +16,9 @@ import kickstarter.entity.ProjectComment;
 public class DBcommentService implements iCommentService {
 	private static final int MAX_COMMENT_ID = 2000000000;
 	private iDatabaseService dbService;
-	private int projectID;
-	private HashMap<Integer, ArrayList<ProjectComment>> allComments;
 
 	public DBcommentService(iDatabaseService dbService) {
 		this.dbService = dbService;
-		allComments = new HashMap<Integer, ArrayList<ProjectComment>>();
 	}
 
 	@Override

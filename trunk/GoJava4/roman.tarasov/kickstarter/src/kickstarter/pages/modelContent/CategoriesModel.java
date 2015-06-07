@@ -15,6 +15,10 @@ public class CategoriesModel extends PageModel {
 			imodel.next(IndexOfPage.DAO_MENU_PAGE.ordinal());
 			return;
 		}
+		if (message.equals("u")) {
+			imodel.next(IndexOfPage.USER_ACCOUNT.ordinal());
+			return;
+		}
 		ViewValues ViewValues = iview.getViewValues();
 		if (ViewValues.getRepositoryError()) {
 			imodel.next(IndexOfPage.DAO_MENU_PAGE.ordinal());

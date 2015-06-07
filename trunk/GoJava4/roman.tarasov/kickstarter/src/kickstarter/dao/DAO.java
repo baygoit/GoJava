@@ -6,6 +6,7 @@ import kickstarter.dao.interfaces.iCommentService;
 import kickstarter.dao.interfaces.iDAO;
 import kickstarter.dao.interfaces.iProjectService;
 import kickstarter.dao.interfaces.iQuoteService;
+import kickstarter.dao.interfaces.iUserService;
 
 
 public class DAO implements iDAO {
@@ -13,6 +14,15 @@ public class DAO implements iDAO {
 	private iCategoryService iCategoryService;
 	private iQuoteService iQuoteService;
 	private iCommentService iCommentService;
+	private iUserService iUserService;
+	@Override
+	public iUserService getUserService() {
+		return iUserService;
+	}
+	@Override
+	public void setUserService(iUserService iUserService) {
+		this.iUserService = iUserService;
+	}
 
 	@Override
 	public void setProjectService(iProjectService iProjectService) {

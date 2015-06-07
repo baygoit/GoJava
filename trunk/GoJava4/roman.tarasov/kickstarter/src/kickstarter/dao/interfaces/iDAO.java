@@ -19,6 +19,10 @@ public interface iDAO {
 	void setProjectService(iProjectService iProjectService);
 
 	String getName();
+
+	iUserService getUserService();
+
+	void setUserService(iUserService iUserService);
 	
 
 }
