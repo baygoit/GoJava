@@ -43,7 +43,7 @@ public class ProjectView implements IView {
     public void showContent() {
         Project project = model.getCurrentProject();
         printer.print(project.getFullInfo());
-        state.showFooter();
+        state.showMenu();
     }
 
 

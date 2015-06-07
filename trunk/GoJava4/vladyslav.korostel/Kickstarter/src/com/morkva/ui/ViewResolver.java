@@ -1,7 +1,6 @@
 package com.morkva.ui;
 
 import com.morkva.ui.controllers.IController;
-import com.morkva.ui.views.IView;
 
 /**
  * Created by vladyslav on 28.05.15.

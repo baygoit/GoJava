@@ -27,7 +27,7 @@ public class ProjectGuestState implements AuthState {
     }
 
     @Override
-    public void showFooter() {
+    public void showMenu() {
         printer.print("\n");
         printer.print("1 - Invest to the project\n");
         printer.print("2 - Ask question!");
