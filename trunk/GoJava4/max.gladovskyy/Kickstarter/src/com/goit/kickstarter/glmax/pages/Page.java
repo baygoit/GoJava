@@ -2,6 +2,7 @@ package com.goit.kickstarter.glmax.pages;
 
 import java.util.ArrayList;
 
+import com.goit.kickstarter.glmax.controller.Position;
 import com.goit.kickstarter.glmax.enteties.Entetie;
 import com.goit.kickstarter.glmax.view.Output;
 
