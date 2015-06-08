@@ -13,4 +13,6 @@ public interface iDatabaseService {
 	void createConnection(DatabaseSettings settings) throws SQLException;
 
 	Connection getConnection();
+
+	void closeConnection() throws SQLException;
 }

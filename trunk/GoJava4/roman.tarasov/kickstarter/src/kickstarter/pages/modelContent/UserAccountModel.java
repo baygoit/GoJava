@@ -17,7 +17,7 @@ public class UserAccountModel extends PageModel {
 		String[] array = message.split(":");
 		if (array.length == 2) {
 			try {
-				CurrentUserStatus approved = idao.getUserService().verifyUser(
+				CurrentUserStatus approved = idao.getUserService().verifyAccount(
 						array[0], array[1]);
 				if (approved == null) {
 					throw new ServiceException(

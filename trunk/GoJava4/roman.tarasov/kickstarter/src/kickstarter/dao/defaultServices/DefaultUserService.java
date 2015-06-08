@@ -32,7 +32,7 @@ public class DefaultUserService implements iUserService {
 
 	}
 	@Override
-	public CurrentUserStatus verifyUser(String login, String password) {
+	public CurrentUserStatus verifyAccount(String login, String password) {
 		for(User currentUser:users){
 			if(currentUser.getLogin().equals(login)&&currentUser.getPassword().equals(password)){
 				userStatus=new CurrentUserStatus();

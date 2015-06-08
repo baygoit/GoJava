@@ -57,10 +57,8 @@ public class DetailedProject extends PageView {
 				header.append("> <");
 				header.append(commentsOfProject.get(index).getComment());
 				header.append(">\n");
-
 			}
 		}
-
 		header.append("\n------------------------");
 		header.append("\nOptions: <p> - previous page; <i>- invest to project ; <c>- comment ; <d>- donate");
 		return header.toString();

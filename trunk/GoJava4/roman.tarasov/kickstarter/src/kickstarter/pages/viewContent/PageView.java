@@ -18,7 +18,6 @@ public abstract class PageView {
 
 	public abstract String getHeader() throws ServiceException, SQLException;
 
-
 	public void setImodel(iModel imodel) {
 		this.imodel = imodel;
 	}
@@ -30,5 +29,4 @@ public abstract class PageView {
 	public void setIDAO(iDAO idao) {
 		this.idao = idao;
 	}
-
 }

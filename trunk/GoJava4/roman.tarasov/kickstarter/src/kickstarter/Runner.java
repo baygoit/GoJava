@@ -132,7 +132,7 @@ public class Runner {
 		pageModel = new WrongChoiceModel();
 		model.addPageModel(pageModel);
 
-		pageModel = new TheEndModel();
+		pageModel = new TheEndModel(icontroller);
 		model.addPageModel(pageModel);
 
 		pageModel = new CommentModel();

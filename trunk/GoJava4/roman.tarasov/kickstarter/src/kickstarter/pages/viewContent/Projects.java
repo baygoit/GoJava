@@ -9,11 +9,11 @@ import kickstarter.mvc.viewState.ViewValues;
 public class Projects extends PageView {
 	private Project project;
 
-
-
-	private String printProjectsInfo(int categoryID) throws ServiceException, SQLException {
+	private String printProjectsInfo(int categoryID) throws ServiceException,
+			SQLException {
 		StringBuilder result = new StringBuilder();
-		List<Project> sortedToSelect = idao.getProjectService().sortProjectsByCategoryID(categoryID);
+		List<Project> sortedToSelect = idao.getProjectService()
+				.sortProjectsByCategoryID(categoryID);
 		int length = sortedToSelect.size();
 		strValues = new String[length];
 		intValues = new int[length];

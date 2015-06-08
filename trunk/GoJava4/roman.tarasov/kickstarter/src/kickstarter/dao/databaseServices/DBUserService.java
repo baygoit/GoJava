@@ -49,7 +49,7 @@ public class DBUserService implements iUserService {
 	}
 
 	@Override
-	public CurrentUserStatus verifyUser(String login, String password)
+	public CurrentUserStatus verifyAccount(String login, String password)
 			throws SQLException {
 		StringBuffer sql = new StringBuffer();
 

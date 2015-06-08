@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-
 import kickstarter.dao.interfaces.iDAO;
 import kickstarter.dao.interfaces.iProjectService;
 import kickstarter.entity.Project;
@@ -179,13 +178,15 @@ public class DBprojectService implements iProjectService {
 		sql.append(")");
 
 		statement.executeUpdate(sql.toString());
-		
+		PreparedStatement preparedStatement = dbService.getConnection()
+				.prepareStatement(sql.toString());
 		for (Project project : projects) {
-			insertProject(project);
+			insertProject(preparedStatement, project);
 		}
 	}
 
-	private void insertProject(Project project) throws SQLException {
+	private void insertProject(PreparedStatement preparedStatement,
+			Project project) throws SQLException {
 		StringBuffer sql = new StringBuffer();
 
 		sql.append("INSERT INTO projects ");
@@ -205,8 +206,6 @@ public class DBprojectService implements iProjectService {
 		sql.append("VALUES");
 		sql.append("(?,?,?,?,?,?,?,?,?,?,?)");
 
-		PreparedStatement preparedStatement = dbService.getConnection()
-				.prepareStatement(sql.toString());
 		fillStatement(preparedStatement, project);
 	}
 }

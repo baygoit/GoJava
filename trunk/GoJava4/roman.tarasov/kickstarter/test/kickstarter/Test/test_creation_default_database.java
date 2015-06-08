@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import kickstarter.Runner;
+import kickstarter.dao.databaseServices.DatabaseSettings;
 import kickstarter.dao.defaultServices.ServiceException;
 import kickstarter.dao.interfaces.iDAO;
 import kickstarter.entity.Category;
@@ -38,9 +39,26 @@ public class test_creation_default_database {
 		imodel = runner.kickstarter.getModel();
 		iview = runner.kickstarter.getView();
 		iC = controller;
+		try {
+			verifyDatabaseConnection(iC);
+		} catch (NullPointerException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
-	
+	private void verifyDatabaseConnection(iController icontroller) throws SQLException, NullPointerException{
+		
+		if (icontroller.getDatabaseService().getConnection()==null||icontroller.getDatabaseService().getConnection().isClosed()) {
+			icontroller.getDatabaseService().createConnection(
+					new DatabaseSettings(
+							"jdbc:postgresql://localhost:5432/kickstarter",
+							"postgres", "root"));
+		}
+	}
 	@Test
 	public void test_update_project() throws SQLException {
 		iC.setDatabaseDAO();

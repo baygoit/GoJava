@@ -29,4 +29,10 @@ public class DatabaseService implements iDatabaseService {
 	public Connection getConnection() {
 		return connection;
 	}
+
+	@Override
+	public void closeConnection() throws SQLException {
+		connection.close();
+		
+	}
 }

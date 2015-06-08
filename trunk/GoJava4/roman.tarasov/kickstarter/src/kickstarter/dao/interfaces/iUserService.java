@@ -7,7 +7,7 @@ import kickstarter.entity.CurrentUserStatus;
 import kickstarter.entity.User;
 
 public interface iUserService {
-	CurrentUserStatus verifyUser(String login, String password) throws SQLException;
+	CurrentUserStatus verifyAccount(String login, String password) throws SQLException;
 	
 	void createAccounts(iDAO sourceDAO) throws SQLException;
 	List<User> getAll();
