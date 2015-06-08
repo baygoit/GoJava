@@ -1,19 +1,22 @@
 package kickstarter.model;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import kickstarter.exception.CannotGetDataException;
-import kickstarter.model.dao.ProjectsDAO;
+import kickstarter.exception.IncorrectInputException;
+import kickstarter.exception.NoSuchDataException;
+import kickstarter.model.dao.DAO;
 import kickstarter.model.engine.Project;
 
 public class ProjectModel implements Model {
-	private ProjectsDAO dao;
+	private DAO dao;
 	private int projectId;
 	private int categoryId;
 	private List<Object> parameters;
 
-	public ProjectModel(ProjectsDAO dao, List<Object> parameters) {
+	@Override
+	public void init(DAO dao, List<Object> parameters) {
 		this.dao = dao;
 		this.parameters = new ArrayList<Object>(parameters);
 		Project project = (Project) parameters.get(0);
@@ -22,7 +25,7 @@ public class ProjectModel implements Model {
 	}
 
 	@Override
-	public List<String> getData() throws CannotGetDataException {
+	public List<String> getData() throws NoSuchDataException, SQLException {
 		List<String> result = new ArrayList<>();
 
 		Project project = dao.getProject(projectId, categoryId);
@@ -38,7 +41,7 @@ public class ProjectModel implements Model {
 	}
 
 	@Override
-	public List<Object> getParameters(int item, String input) throws CannotGetDataException {
+	public List<Object> getParameters(int item, String input) throws IncorrectInputException {
 		List<Object> result = new ArrayList<>(parameters);
 
 		if (item == 0) {
@@ -48,7 +51,7 @@ public class ProjectModel implements Model {
 		} else if (item == 2) {
 
 		} else {
-			throw new CannotGetDataException("Illegal parameters");
+			throw new IncorrectInputException("Illegal parameters");
 		}
 
 		return result;

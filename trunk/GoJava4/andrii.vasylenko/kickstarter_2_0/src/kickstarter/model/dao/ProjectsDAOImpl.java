@@ -1,7 +1,6 @@
 package kickstarter.model.dao;
 
 import java.sql.Array;
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -9,147 +8,74 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import kickstarter.exception.CannotAddDataException;
-import kickstarter.exception.CannotCreateTableException;
-import kickstarter.exception.CannotGetDataException;
+import kickstarter.exception.NoSuchDataException;
 import kickstarter.model.engine.Project;
 
 public class ProjectsDAOImpl implements ProjectsDAO {
+	private ConnectionPool connectionPool;
 
-	private Connection connection;
-
-	public ProjectsDAOImpl(Connection connection) {
-		this.connection = connection;
+	public ProjectsDAOImpl(ConnectionPool connectionPool) {
+		this.connectionPool = connectionPool;
 	}
 
 	@Override
 	public void addProject(int categoryId, String name, String description, int totalAmount, int daysLeft,
-			String history, String link) throws CannotAddDataException {
-		try {
-			StringBuilder sql = new StringBuilder();
-			sql.append("insert into Projects (");
-			sql.append("id_category, name, description, ");
-			sql.append("total_amount, days_left, collect_amount, ");
-			sql.append("history, link");
-			sql.append(") ");
-			sql.append("values(?,?,?,?,?,?,?,?)");
+			String history, String link) throws SQLException {
+		String sql = getInsertQuery();
+		PreparedStatement statement = connectionPool.getConnection().prepareStatement(sql);
 
-			PreparedStatement statement = connection.prepareStatement(sql.toString());
-			statement.setInt(1, categoryId);
-			statement.setString(2, name);
-			statement.setString(3, description);
-			statement.setInt(4, totalAmount);
-			statement.setInt(5, daysLeft);
-			statement.setInt(6, 0);
-			statement.setString(7, history);
-			statement.setString(8, link);
+		statement.setInt(1, categoryId);
+		statement.setString(2, name);
+		statement.setString(3, description);
+		statement.setInt(4, totalAmount);
+		statement.setInt(5, daysLeft);
+		statement.setInt(6, 0);
+		statement.setString(7, history);
+		statement.setString(8, link);
 
-			statement.executeUpdate();
-
-		} catch (SQLException e) {
-			throw new CannotAddDataException(e);
-		}
+		statement.executeUpdate();
 	}
 
 	@Override
-	public List<Project> getProjects(int categoryId) throws CannotGetDataException {
+	public List<Project> getProjects(int categoryId) throws SQLException {
 		List<Project> result = new ArrayList<>();
 
-		try {
-			StringBuilder sql = new StringBuilder();
-			sql.append("select id, id_category, name, description, ");
-			sql.append("total_amount, days_left, collect_amount, ");
-			sql.append("history, link ");
-			sql.append("from Projects ");
-			sql.append("where id_category = ?");
+		String sql = getMultiSelectQuery();
+		PreparedStatement statement = connectionPool.getConnection().prepareStatement(sql);
 
-			PreparedStatement statement = connection.prepareStatement(sql.toString());
-			statement.setInt(1, categoryId);
+		statement.setInt(1, categoryId);
 
-			ResultSet resultQuery = statement.executeQuery();
-			while (resultQuery.next()) {
-				result.add(getProject(resultQuery, false));
-			}
-		} catch (SQLException e) {
-			throw new CannotGetDataException(e);
+		ResultSet resultQuery = statement.executeQuery();
+
+		while (resultQuery.next()) {
+			result.add(getProject(resultQuery, false));
 		}
+
 		return result;
 	}
 
 	@Override
-	public Project getProject(int id, int categoryId) throws CannotGetDataException {
-		try {
-			StringBuilder sql = new StringBuilder();
-			sql.append("select ");
-			sql.append("P.id AS id, P.id_category AS id_category, ");
-			sql.append("P.name AS name, P.description AS description, ");
-			sql.append("P.total_amount AS total_amount, P.days_left AS days_left, ");
-			sql.append("P.collect_amount AS collect_amount, ");
-			sql.append("P.history AS history, P.link AS link, ");
-			sql.append("array_agg(Q.question) AS questions ");
+	public Project getProject(int id, int categoryId) throws NoSuchDataException, SQLException {
+		String sql = getSelectQuery();
+		PreparedStatement statement = connectionPool.getConnection().prepareStatement(sql);
 
-			sql.append("from Projects P ");
-			sql.append("left outer join Questions Q ");
-			sql.append("on P.id = Q.id_project ");
+		statement.setInt(1, id);
+		statement.setInt(2, categoryId);
 
-			sql.append("where P.id = ? ");
-			sql.append("AND ");
-			sql.append("P.id_category = ? ");
+		ResultSet resultQuery = statement.executeQuery();
 
-			sql.append("group by ");
-			sql.append("P.id, P.id_category, ");
-			sql.append("P.name, P.description, ");
-			sql.append("P.total_amount, P.days_left, ");
-			sql.append("P.collect_amount, ");
-			sql.append("P.history, P.link");
-
-			PreparedStatement statement = connection.prepareStatement(sql.toString());
-			statement.setInt(1, id);
-			statement.setInt(2, categoryId);
-
-			ResultSet resultQuery = statement.executeQuery();
-
-			if (resultQuery.next()) {
-				return getProject(resultQuery, true);
-			} else {
-				throw new CannotGetDataException("no existing data");
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-			throw new CannotGetDataException(e);
+		if (resultQuery.next()) {
+			return getProject(resultQuery, true);
+		} else {
+			throw new NoSuchDataException(String.format("Project where id = %d id_category = %d", id, categoryId));
 		}
 	}
 
 	@Override
-	public void createTableProjects() throws CannotCreateTableException {
-		try {
-			Statement statement = connection.createStatement();
-
-			StringBuilder sql = new StringBuilder();
-
-			sql.append("drop table IF EXISTS Projects CASCADE; ");
-
-			sql.append("create table Projects (");
-			sql.append("id serial not null PRIMARY KEY, ");
-			sql.append("id_category integer, ");
-			sql.append("name varchar(255), ");
-			sql.append("description varchar(255), ");
-			sql.append("total_amount integer, ");
-			sql.append("days_left integer, ");
-			sql.append("collect_amount integer, ");
-			sql.append("history varchar(255), ");
-			sql.append("link varchar(255)");
-			sql.append("); ");
-
-			sql.append("alter table Projects ");
-			sql.append("add FOREIGN KEY (id_category) ");
-			sql.append("REFERENCES Categories(id); ");
-
-			statement.execute(sql.toString());
-
-		} catch (SQLException e) {
-			throw new CannotCreateTableException(e);
-		}
+	public void createTableProjects() throws SQLException {
+		Statement statement = connectionPool.getConnection().createStatement();
+		String sql = getCreateQuery();
+		statement.execute(sql);
 	}
 
 	private Project getProject(ResultSet resultQuery, boolean withQuestions) throws SQLException {
@@ -182,5 +108,76 @@ public class ProjectsDAOImpl implements ProjectsDAO {
 		}
 
 		return result;
+	}
+
+	private String getInsertQuery() {
+		StringBuilder sql = new StringBuilder();
+		sql.append("insert into Projects (");
+		sql.append("id_category, name, description, ");
+		sql.append("total_amount, days_left, collect_amount, ");
+		sql.append("history, link");
+		sql.append(") ");
+		sql.append("values(?,?,?,?,?,?,?,?)");
+		return sql.toString();
+	}
+
+	private String getMultiSelectQuery() {
+		StringBuilder sql = new StringBuilder();
+		sql.append("select id, id_category, name, description, ");
+		sql.append("total_amount, days_left, collect_amount, ");
+		sql.append("history, link ");
+		sql.append("from Projects ");
+		sql.append("where id_category = ?");
+		return sql.toString();
+	}
+
+	private String getSelectQuery() {
+		StringBuilder sql = new StringBuilder();
+		sql.append("select ");
+		sql.append("P.id AS id, P.id_category AS id_category, ");
+		sql.append("P.name AS name, P.description AS description, ");
+		sql.append("P.total_amount AS total_amount, P.days_left AS days_left, ");
+		sql.append("P.collect_amount AS collect_amount, ");
+		sql.append("P.history AS history, P.link AS link, ");
+		sql.append("array_agg(Q.question) AS questions ");
+
+		sql.append("from Projects P ");
+		sql.append("left outer join Questions Q ");
+		sql.append("on P.id = Q.id_project ");
+
+		sql.append("where P.id = ? ");
+		sql.append("AND ");
+		sql.append("P.id_category = ? ");
+
+		sql.append("group by ");
+		sql.append("P.id, P.id_category, ");
+		sql.append("P.name, P.description, ");
+		sql.append("P.total_amount, P.days_left, ");
+		sql.append("P.collect_amount, ");
+		sql.append("P.history, P.link");
+		return sql.toString();
+	}
+
+	private String getCreateQuery() {
+		StringBuilder sql = new StringBuilder();
+
+		sql.append("drop table IF EXISTS Projects CASCADE; ");
+
+		sql.append("create table Projects (");
+		sql.append("id serial not null PRIMARY KEY, ");
+		sql.append("id_category integer, ");
+		sql.append("name varchar(255), ");
+		sql.append("description varchar(255), ");
+		sql.append("total_amount integer, ");
+		sql.append("days_left integer, ");
+		sql.append("collect_amount integer, ");
+		sql.append("history varchar(255), ");
+		sql.append("link varchar(255)");
+		sql.append("); ");
+
+		sql.append("alter table Projects ");
+		sql.append("add FOREIGN KEY (id_category) ");
+		sql.append("REFERENCES Categories(id); ");
+		return sql.toString();
 	}
 }

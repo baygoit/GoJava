@@ -1,19 +1,21 @@
 package kickstarter.model;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import kickstarter.exception.ProcessedException;
-import kickstarter.model.dao.PaymentsDAO;
+import kickstarter.exception.NoSuchDataException;
+import kickstarter.model.dao.DAO;
 import kickstarter.model.engine.PaymentVariant;
 import kickstarter.model.engine.Project;
 
 public class DonateModel implements Model {
-	private PaymentsDAO dao;
+	private DAO dao;
 	private int projectId;
 	private List<Object> parameters;
 
-	public DonateModel(PaymentsDAO dao, List<Object> parameters) {
+	@Override
+	public void init(DAO dao, List<Object> parameters) {
 		this.dao = dao;
 		this.parameters = new ArrayList<Object>(parameters);
 		Project project = (Project) parameters.get(0);
@@ -21,9 +23,9 @@ public class DonateModel implements Model {
 	}
 
 	@Override
-	public List<String> getData() throws ProcessedException {
+	public List<String> getData() throws SQLException {
 		List<String> result = new ArrayList<>();
-		
+
 		for (PaymentVariant variant : dao.getPaymentVariants(projectId)) {
 			result.add(addData(variant));
 		}
@@ -37,12 +39,12 @@ public class DonateModel implements Model {
 	}
 
 	@Override
-	public List<Object> getParameters(int item, String input) throws ProcessedException {
+	public List<Object> getParameters(int item, String input) throws NoSuchDataException, SQLException {
 		List<Object> result = new ArrayList<>(parameters);
 
 		if (item == 0) {
-		} else if (item == 1){
-			
+		} else if (item == 1) {
+
 		} else {
 			int id = item - 1;
 			PaymentVariant variant = dao.getPaymentVariant(id, projectId);
@@ -66,6 +68,6 @@ public class DonateModel implements Model {
 		result.append(variant.getDescription());
 		result.append(")");
 
-		return result.toString();	
+		return result.toString();
 	}
 }

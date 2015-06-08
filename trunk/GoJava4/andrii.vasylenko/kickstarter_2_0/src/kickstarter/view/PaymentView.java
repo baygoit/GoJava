@@ -7,15 +7,9 @@ import java.io.IOException;
 import kickstarter.control.State;
 import kickstarter.exception.IncorrectInputException;
 import kickstarter.exception.ProcessedException;
-import kickstarter.view.printer.Printer;
-import kickstarter.view.reader.Reader;
 
 public class PaymentView extends AbstractView {
 	private static final String INPUT_MESSAGES[] = { "enter your name:", "enter your account number:" };
-
-	public PaymentView(Printer printer, Reader reader) {
-		super(printer, reader);
-	}
 
 	@Override
 	public State getDirection(int item) throws ProcessedException {

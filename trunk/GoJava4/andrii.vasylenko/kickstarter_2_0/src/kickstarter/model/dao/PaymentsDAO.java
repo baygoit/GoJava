@@ -1,20 +1,19 @@
 package kickstarter.model.dao;
 
+import java.sql.SQLException;
 import java.util.List;
 
-import kickstarter.exception.CannotAddDataException;
-import kickstarter.exception.CannotCreateTableException;
-import kickstarter.exception.CannotGetDataException;
+import kickstarter.exception.NoSuchDataException;
 import kickstarter.model.engine.PaymentVariant;
 
 public interface PaymentsDAO {
-	void addPaymentVariant(int projectId, int amount, String description) throws CannotAddDataException;
+	void addPaymentVariant(int projectId, int amount, String description) throws SQLException;
 
-	void donate(int projectId, int amount) throws CannotAddDataException;
+	void donate(int projectId, int amount) throws SQLException;
 
-	List<PaymentVariant> getPaymentVariants(int projectId) throws CannotGetDataException;
+	List<PaymentVariant> getPaymentVariants(int projectId) throws SQLException;
 
-	PaymentVariant getPaymentVariant(int id, int projectId) throws CannotGetDataException;
+	PaymentVariant getPaymentVariant(int id, int projectId) throws NoSuchDataException, SQLException;
 
-	void createTablePayments() throws CannotCreateTableException;
+	void createTablePayments() throws SQLException;
 }

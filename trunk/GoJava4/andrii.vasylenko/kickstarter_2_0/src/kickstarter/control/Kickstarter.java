@@ -4,10 +4,7 @@ import static kickstarter.control.State.*;
 
 import java.util.List;
 
-import kickstarter.exception.IncorrectLogicException;
-import kickstarter.exception.NoResultException;
 import kickstarter.exception.ProcessedException;
-import kickstarter.exception.UnknownStateException;
 import kickstarter.model.factory.AbstractModelFactory;
 import kickstarter.view.factory.AbstractViewFactory;
 
@@ -16,14 +13,14 @@ public class Kickstarter implements Control {
 	private AbstractViewFactory views;
 	private Executor executor;
 
-	public Kickstarter(AbstractModelFactory models, AbstractViewFactory views) throws IncorrectLogicException {
+	public Kickstarter(AbstractModelFactory models, AbstractViewFactory views) {
 		this.models = models;
 		this.views = views;
 		this.executor = getExecutor(START);
 	}
 
 	@Override
-	public void exequte() throws IncorrectLogicException {
+	public void exequte() throws Exception {
 		while (true) {
 			try {
 				executor.exequte();
@@ -35,30 +32,16 @@ public class Kickstarter implements Control {
 					executor = getExecutor(direction, executor.getParameters());
 				}
 			} catch (ProcessedException e) {
-				showError();
-			} catch (UnknownStateException | NoResultException | NullPointerException | ClassCastException e) {
-				throw new IncorrectLogicException(e);
+				getExecutor(ERROR).exequte();
 			}
 		}
 	}
 
-	private void showError() throws IncorrectLogicException {
-		try {
-			getExecutor(ERROR).exequte();
-		} catch (ProcessedException e) {
-			throw new IncorrectLogicException(e);
-		}
+	private Executor getExecutor(State state) {
+		return getExecutor(state, null);
 	}
 
-	private Executor getExecutor(State state) throws IncorrectLogicException {
-		try {
-			return getExecutor(state, null);
-		} catch (UnknownStateException e) {
-			throw new IncorrectLogicException(e);
-		}
-	}
-
-	private Executor getExecutor(State state, List<Object> parameters) throws UnknownStateException {
+	private Executor getExecutor(State state, List<Object> parameters) {
 		return new Executor(models.getInstance(state, parameters), views.getInstance(state));
 	}
 }

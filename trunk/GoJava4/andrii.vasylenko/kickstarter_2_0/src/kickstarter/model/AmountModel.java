@@ -4,17 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import kickstarter.exception.IncorrectInputException;
-import kickstarter.exception.ProcessedException;
+import kickstarter.model.dao.DAO;
 
 public class AmountModel implements Model {
 	private List<Object> parameters;
 
-	public AmountModel(List<Object> parameters) {
+	@Override
+	public void init(DAO dao, List<Object> parameters) {
 		this.parameters = new ArrayList<Object>(parameters);
 	}
 
 	@Override
-	public List<String> getData() throws ProcessedException {
+	public List<String> getData() {
 		return new ArrayList<>();
 	}
 

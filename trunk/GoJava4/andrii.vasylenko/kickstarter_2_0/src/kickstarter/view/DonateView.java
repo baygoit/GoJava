@@ -4,14 +4,8 @@ import static kickstarter.control.State.*;
 import kickstarter.control.State;
 import kickstarter.exception.IncorrectInputException;
 import kickstarter.exception.ProcessedException;
-import kickstarter.view.printer.Printer;
-import kickstarter.view.reader.Reader;
 
 public class DonateView extends AbstractView {
-
-	public DonateView(Printer printer, Reader reader) {
-		super(printer, reader);
-	}
 
 	@Override
 	public State getDirection(int item) throws ProcessedException {

@@ -1,18 +1,17 @@
 package kickstarter.model.dao;
 
+import java.sql.SQLException;
 import java.util.List;
 
-import kickstarter.exception.CannotAddDataException;
-import kickstarter.exception.CannotCreateTableException;
-import kickstarter.exception.CannotGetDataException;
+import kickstarter.exception.NoSuchDataException;
 import kickstarter.model.engine.Category;
 
 public interface CategoriesDAO {
-	void addCategory(String name) throws CannotAddDataException;
+	void addCategory(String name) throws SQLException;
 
-	List<Category> getCategories() throws CannotGetDataException;
+	List<Category> getCategories() throws SQLException;
 
-	Category getCategory(int id) throws CannotGetDataException;
+	Category getCategory(int id) throws NoSuchDataException, SQLException;
 
-	void createTableCategories() throws CannotCreateTableException;
+	void createTableCategories() throws SQLException;
 }

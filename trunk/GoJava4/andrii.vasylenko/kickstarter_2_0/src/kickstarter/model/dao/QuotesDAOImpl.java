@@ -1,80 +1,49 @@
 package kickstarter.model.dao;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import kickstarter.exception.CannotAddDataException;
-import kickstarter.exception.CannotCreateTableException;
-import kickstarter.exception.CannotGetDataException;
+import kickstarter.exception.NoSuchDataException;
 import kickstarter.model.engine.Quote;
 
 public class QuotesDAOImpl implements QuotesDAO {
+	private ConnectionPool connectionPool;
 
-	private Connection connection;
-
-	public QuotesDAOImpl(Connection connection) {
-		this.connection = connection;
+	public QuotesDAOImpl(ConnectionPool connectionPool) {
+		this.connectionPool = connectionPool;
 	}
 
 	@Override
-	public void addQuote(String quote) throws CannotAddDataException {
-		try {
-			StringBuilder sql = new StringBuilder();
-			sql.append("insert into Quotes ");
-			sql.append("(quote) values(?)");
+	public void addQuote(String quote) throws SQLException {
+		String sql = getInsertQuery();
+		PreparedStatement statement = connectionPool.getConnection().prepareStatement(sql);
 
-			PreparedStatement statement = connection.prepareStatement(sql.toString());
-			statement.setString(1, quote);
+		statement.setString(1, quote);
 
-			statement.executeUpdate();
+		statement.executeUpdate();
+	}
 
-		} catch (SQLException e) {
-			throw new CannotAddDataException(e);
+	@Override
+	public Quote getRandomQuote() throws NoSuchDataException, SQLException {
+		String sql = getSelectQuery();
+		PreparedStatement statement = connectionPool.getConnection().prepareStatement(sql);
+
+		ResultSet resultQuery = statement.executeQuery();
+
+		if (resultQuery.next()) {
+			return getQuote(resultQuery);
+		} else {
+			throw new NoSuchDataException("Quote");
 		}
 	}
 
 	@Override
-	public Quote getRandomQuote() throws CannotGetDataException {
-		try {
-			StringBuilder sql = new StringBuilder();
-			sql.append("select id, quote ");
-			sql.append("from Quotes ");
-			sql.append("order by random() limit 1");
-
-			PreparedStatement statement = connection.prepareStatement(sql.toString());
-
-			ResultSet resultQuery = statement.executeQuery();
-
-			if (resultQuery.next()) {
-				return getQuote(resultQuery);
-			} else {
-				throw new CannotGetDataException("no existing data");
-			}
-		} catch (SQLException e) {
-			throw new CannotGetDataException(e);
-		}
-	}
-
-	@Override
-	public void createTableQuotes() throws CannotCreateTableException {
-		try {
-			Statement statement = connection.createStatement();
-
-			StringBuilder sql = new StringBuilder();
-			sql.append("drop table IF EXISTS Quotes; ");
-			sql.append("create table Quotes (");
-			sql.append("id serial not null PRIMARY KEY, ");
-			sql.append("quote varchar(255)");
-			sql.append(")");
-
-			statement.execute(sql.toString());
-
-		} catch (SQLException e) {
-			throw new CannotCreateTableException(e);
-		}
+	public void createTableQuotes() throws SQLException {
+		Statement statement = connectionPool.getConnection().createStatement();
+		String sql = getCreateQuery();
+		statement.execute(sql);
 	}
 
 	private Quote getQuote(ResultSet result) throws SQLException {
@@ -82,5 +51,30 @@ public class QuotesDAOImpl implements QuotesDAO {
 		String qoute = result.getString("quote");
 
 		return new Quote(id, qoute);
+	}
+
+	private String getInsertQuery() {
+		StringBuilder sql = new StringBuilder();
+		sql.append("insert into Quotes ");
+		sql.append("(quote) values(?)");
+		return sql.toString();
+	}
+
+	private String getSelectQuery() {
+		StringBuilder sql = new StringBuilder();
+		sql.append("select id, quote ");
+		sql.append("from Quotes ");
+		sql.append("order by random() limit 1");
+		return sql.toString();
+	}
+
+	private String getCreateQuery() {
+		StringBuilder sql = new StringBuilder();
+		sql.append("drop table IF EXISTS Quotes; ");
+		sql.append("create table Quotes (");
+		sql.append("id serial not null PRIMARY KEY, ");
+		sql.append("quote varchar(255)");
+		sql.append(")");
+		return sql.toString();
 	}
 }

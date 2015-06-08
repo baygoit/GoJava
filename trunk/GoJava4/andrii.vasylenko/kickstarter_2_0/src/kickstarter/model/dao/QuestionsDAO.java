@@ -1,10 +1,9 @@
 package kickstarter.model.dao;
 
-import kickstarter.exception.CannotAddDataException;
-import kickstarter.exception.CannotCreateTableException;
+import java.sql.SQLException;
 
 public interface QuestionsDAO {
-	void addQuestion(int projectId, String question) throws CannotAddDataException;
+	void addQuestion(int projectId, String question) throws SQLException;
 
-	void createTableQuestions() throws CannotCreateTableException;
+	void createTableQuestions() throws SQLException;
 }

@@ -6,14 +6,8 @@ import java.io.IOException;
 
 import kickstarter.control.State;
 import kickstarter.exception.IncorrectInputException;
-import kickstarter.view.printer.Printer;
-import kickstarter.view.reader.Reader;
 
 public class AskQuestionView extends AbstractView {
-
-	public AskQuestionView(Printer printer, Reader reader) {
-		super(printer, reader);
-	}
 
 	@Override
 	public State getDirection(int item) throws IncorrectInputException {

@@ -1,14 +1,14 @@
 package kickstarter.model.dao;
 
-import kickstarter.exception.CannotAddDataException;
-import kickstarter.exception.CannotCreateTableException;
-import kickstarter.exception.CannotGetDataException;
+import java.sql.SQLException;
+
+import kickstarter.exception.NoSuchDataException;
 import kickstarter.model.engine.Quote;
 
 public interface QuotesDAO {
-	void addQuote(String quote) throws CannotAddDataException;
+	void addQuote(String quote) throws SQLException;
 
-	Quote getRandomQuote() throws CannotGetDataException;
+	Quote getRandomQuote() throws NoSuchDataException, SQLException;
 
-	void createTableQuotes() throws CannotCreateTableException;
+	void createTableQuotes() throws SQLException;
 }

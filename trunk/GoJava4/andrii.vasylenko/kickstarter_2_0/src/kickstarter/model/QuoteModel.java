@@ -1,24 +1,26 @@
 package kickstarter.model;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import kickstarter.exception.CannotGetDataException;
-import kickstarter.model.dao.QuotesDAO;
+import kickstarter.exception.NoSuchDataException;
+import kickstarter.model.dao.DAO;
 import kickstarter.model.engine.Quote;
 
 public class QuoteModel implements Model {
-	private QuotesDAO quotesDAO;
+	private DAO dao;
 
-	public QuoteModel(QuotesDAO quotesDAO) {
-		this.quotesDAO = quotesDAO;
+	@Override
+	public void init(DAO dao, List<Object> parameters) {
+		this.dao = dao;
 	}
 
 	@Override
-	public List<String> getData() throws CannotGetDataException {
+	public List<String> getData() throws NoSuchDataException, SQLException {
 		List<String> result = new ArrayList<>();
 
-		Quote quote = quotesDAO.getRandomQuote();
+		Quote quote = dao.getRandomQuote();
 		if (quote != null) {
 			result.add(quote.getQuote());
 		}

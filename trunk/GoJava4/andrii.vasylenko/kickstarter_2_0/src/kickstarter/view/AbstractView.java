@@ -11,7 +11,11 @@ public abstract class AbstractView implements View {
 	private Printer printer;
 	private Reader reader;
 
-	public AbstractView(Printer printer, Reader reader) {
+	public AbstractView() {
+	}
+
+	@Override
+	public void init(Printer printer, Reader reader) {
 		this.printer = printer;
 		this.reader = reader;
 	}

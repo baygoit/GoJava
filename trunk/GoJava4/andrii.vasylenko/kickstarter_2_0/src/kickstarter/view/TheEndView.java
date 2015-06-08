@@ -3,14 +3,8 @@ package kickstarter.view;
 import java.util.List;
 
 import kickstarter.control.State;
-import kickstarter.view.printer.Printer;
-import kickstarter.view.reader.Reader;
 
 public class TheEndView extends AbstractView {
-
-	public TheEndView(Printer printer, Reader reader) {
-		super(printer, reader);
-	}
 
 	@Override
 	public State getDirection(int item) {

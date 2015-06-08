@@ -1,8 +1,8 @@
 package kickstarter.control;
 
+import java.sql.SQLException;
 import java.util.List;
 
-import kickstarter.exception.NoResultException;
 import kickstarter.exception.ProcessedException;
 import kickstarter.model.Model;
 import kickstarter.view.View;
@@ -19,7 +19,7 @@ public class Executor {
 		this.view = view;
 	}
 
-	public void exequte() throws ProcessedException {
+	public void exequte() throws ProcessedException, SQLException {
 		executed = false;
 		showThePage();
 		StringBuilder input = new StringBuilder();
@@ -31,25 +31,25 @@ public class Executor {
 		return executed;
 	}
 
-	public State getDirection() throws NoResultException {
+	public State getDirection() {
 		if (!isExecuted()) {
-			throw new NoResultException("not executed yet");
+			throw new IllegalStateException();
 		}
 		return direction;
 	}
 
-	public List<Object> getParameters() throws NoResultException {
+	public List<Object> getParameters() {
 		if (!isExecuted()) {
-			throw new NoResultException("not executed yet");
+			throw new IllegalStateException();
 		}
 		return parameters;
 	}
 
-	private void showThePage() throws ProcessedException {
+	private void showThePage() throws ProcessedException, SQLException {
 		view.view(model.getData());
 	}
 
-	private void setResult(int itemNumber, String input) throws ProcessedException {
+	private void setResult(int itemNumber, String input) throws ProcessedException, SQLException {
 		direction = view.getDirection(itemNumber);
 		parameters = model.getParameters(itemNumber, input);
 		executed = true;

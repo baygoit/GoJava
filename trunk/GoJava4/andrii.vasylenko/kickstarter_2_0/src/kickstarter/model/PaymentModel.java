@@ -1,19 +1,20 @@
 package kickstarter.model;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import kickstarter.exception.ProcessedException;
-import kickstarter.model.dao.PaymentsDAO;
+import kickstarter.model.dao.DAO;
 import kickstarter.model.engine.Project;
 
 public class PaymentModel implements Model {
-	private PaymentsDAO dao;
+	private DAO dao;
 	private List<Object> parameters;
 	private int amount;
 	private int projectId;
 
-	public PaymentModel(PaymentsDAO dao, List<Object> parameters) {
+	@Override
+	public void init(DAO dao, List<Object> parameters) {
 		this.dao = dao;
 		this.parameters = new ArrayList<Object>(parameters);
 		this.amount = (int) parameters.get(0);
@@ -22,7 +23,7 @@ public class PaymentModel implements Model {
 	}
 
 	@Override
-	public List<String> getData() throws ProcessedException {
+	public List<String> getData() {
 		List<String> result = new ArrayList<>();
 
 		result.add(String.format("amount = %d", amount));
@@ -36,7 +37,7 @@ public class PaymentModel implements Model {
 	}
 
 	@Override
-	public List<Object> getParameters(int item, String input) throws ProcessedException {
+	public List<Object> getParameters(int item, String input) throws SQLException {
 		List<Object> result = new ArrayList<>(parameters);
 
 		if (item == 1) {

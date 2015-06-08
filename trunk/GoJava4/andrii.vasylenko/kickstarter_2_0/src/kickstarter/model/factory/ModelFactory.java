@@ -2,10 +2,11 @@ package kickstarter.model.factory;
 
 import static kickstarter.control.State.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import kickstarter.control.State;
-import kickstarter.exception.UnknownStateException;
 import kickstarter.model.AmountModel;
 import kickstarter.model.AskQuestionModel;
 import kickstarter.model.CategoriesModel;
@@ -18,53 +19,35 @@ import kickstarter.model.ProjectsModel;
 import kickstarter.model.QuoteModel;
 import kickstarter.model.StartModel;
 import kickstarter.model.TheEndModel;
-import kickstarter.model.dao.CategoriesDAO;
-import kickstarter.model.dao.PaymentsDAO;
-import kickstarter.model.dao.ProjectsDAO;
-import kickstarter.model.dao.QuestionsDAO;
-import kickstarter.model.dao.QuotesDAO;
+import kickstarter.model.dao.DAO;
 
 public class ModelFactory implements AbstractModelFactory {
-	private QuotesDAO quotes;
-	private CategoriesDAO categories;
-	private ProjectsDAO projects;
-	private QuestionsDAO questions;
-	private PaymentsDAO payments;
+	private static final Map<State, Model> states = new HashMap<>();
 
-	public ModelFactory(QuotesDAO quotes, CategoriesDAO categories, ProjectsDAO projects, QuestionsDAO questions,
-			PaymentsDAO payments) {
-		this.quotes = quotes;
-		this.categories = categories;
-		this.projects = projects;
-		this.questions = questions;
-		this.payments = payments;
+	static {
+		states.put(START, new StartModel());
+		states.put(QUOTE, new QuoteModel());
+		states.put(CATEGORIES, new CategoriesModel());
+		states.put(PROJECTS, new ProjectsModel());
+		states.put(PROJECT, new ProjectModel());
+		states.put(ASK_QUESTION, new AskQuestionModel());
+		states.put(DONATE, new DonateModel());
+		states.put(PAYMENT, new PaymentModel());
+		states.put(AMOUNT, new AmountModel());
+		states.put(ERROR, new ErrorModel());
+		states.put(THE_END, new TheEndModel());
+	}
+
+	private DAO dao;
+
+	public ModelFactory(DAO dao) {
+		this.dao = dao;
 	}
 
 	@Override
-	public Model getInstance(State state, List<Object> parameters) throws UnknownStateException {
-		if (state == START) {
-			return new StartModel();
-		} else if (state == QUOTE) {
-			return new QuoteModel(quotes);
-		} else if (state == CATEGORIES) {
-			return new CategoriesModel(categories);
-		} else if (state == PROJECTS) {
-			return new ProjectsModel(projects, parameters);
-		} else if (state == PROJECT) {
-			return new ProjectModel(projects, parameters);
-		} else if (state == ASK_QUESTION) {
-			return new AskQuestionModel(questions, parameters);
-		} else if (state == DONATE) {
-			return new DonateModel(payments, parameters);
-		} else if (state == PAYMENT) {
-			return new PaymentModel(payments, parameters);
-		} else if (state == AMOUNT) {
-			return new AmountModel(parameters);
-		} else if (state == ERROR) {
-			return new ErrorModel();
-		} else if (state == THE_END) {
-			return new TheEndModel();
-		}
-		throw new UnknownStateException("no such state");
+	public Model getInstance(State state, List<Object> parameters) {
+		Model model = states.get(state);
+		model.init(dao, parameters);
+		return model;
 	}
 }

@@ -1,26 +1,28 @@
 package kickstarter.model;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import kickstarter.exception.CannotGetDataException;
-import kickstarter.model.dao.ProjectsDAO;
+import kickstarter.exception.NoSuchDataException;
+import kickstarter.model.dao.DAO;
 import kickstarter.model.engine.Category;
 import kickstarter.model.engine.Project;
 
 public class ProjectsModel implements Model {
-	private ProjectsDAO dao;
+	private DAO dao;
 	private int categoryId;
 	private List<Object> parameters;
 
-	public ProjectsModel(ProjectsDAO dao, List<Object> parameters) {
+	@Override
+	public void init(DAO dao, List<Object> parameters) {
 		this.dao = dao;
 		this.parameters = new ArrayList<Object>(parameters);
 		this.categoryId = ((Category) parameters.get(0)).getId();
 	}
 
 	@Override
-	public List<String> getData() throws CannotGetDataException {
+	public List<String> getData() throws SQLException {
 		List<String> result = new ArrayList<>();
 
 		for (Project project : dao.getProjects(categoryId)) {
@@ -36,7 +38,7 @@ public class ProjectsModel implements Model {
 	}
 
 	@Override
-	public List<Object> getParameters(int item, String input) throws CannotGetDataException {
+	public List<Object> getParameters(int item, String input) throws NoSuchDataException, SQLException {
 		List<Object> result = new ArrayList<>(parameters);
 
 		if (item == 0) {
