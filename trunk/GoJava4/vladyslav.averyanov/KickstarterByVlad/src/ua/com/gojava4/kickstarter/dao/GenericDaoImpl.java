@@ -11,9 +11,9 @@ import ua.com.gojava4.kickstarter.model.repositories.Repository;
 
 public class GenericDaoImpl implements Dao { 
 	
-	List<Quote> quotes;
-	List<Category> categories; 
-	List<Project> projects;
+	private List<Quote> quotes;
+	private List<Category> categories; 
+	private List<Project> projects;
 	
 	public GenericDaoImpl(Repository quotesRepository, 
 			Repository categoriesRepository, 
@@ -53,6 +53,16 @@ public class GenericDaoImpl implements Dao {
 	public Quote getRandomQuote() {
 		Random rnd = new Random();
 		return quotes.get(rnd.nextInt(quotes.size()-1));				
+	}
+
+	@Override
+	public Category getCategoryById(int categoryId) {
+		for (Category category : categories){
+			if (category.getId() == categoryId){
+				return category;
+			}
+		}
+		return null;
 	}
 	
 }

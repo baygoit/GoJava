@@ -1,6 +1,6 @@
 package ua.com.gojava4.kickstarter.model.repositories;
 
-import java.io.File;
+//import java.io.File;
 import java.util.List;
 
 import ua.com.gojava4.kickstarter.entities.Category;
@@ -9,7 +9,7 @@ import ua.com.gojava4.kickstarter.entities.Quote;
 
 public class FileRepositoryFactory extends AbstractRepositoryFactory {
 	
-	File file;
+	//private File file;
 	
 	FileRepositoryFactory (String factoryType){
 		switch (factoryType.toLowerCase()) {

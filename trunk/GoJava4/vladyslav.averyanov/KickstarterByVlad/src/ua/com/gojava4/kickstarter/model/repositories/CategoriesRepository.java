@@ -7,8 +7,8 @@ import ua.com.gojava4.kickstarter.entities.Category;
 
 public class CategoriesRepository {
 
-	Repository repository;
-	List<Category> categories;
+	private Repository repository;
+	private List<Category> categories;
 
 	CategoriesRepository(Repository repository) {
 		this.repository = repository;

@@ -2,18 +2,18 @@ package ua.com.gojava4.kickstarter.view.pages;
 
 import java.util.List;
 
+import ua.com.gojava4.kickstarter.control.DataIOTypeStorage;
 import ua.com.gojava4.kickstarter.control.ExitProgramException;
 import ua.com.gojava4.kickstarter.dao.Dao;
 import ua.com.gojava4.kickstarter.entities.Category;
-import ua.com.gojava4.kickstarter.entities.DataIOTypeStorage;
 import ua.com.gojava4.kickstarter.entities.Quote;
 import ua.com.gojava4.kickstarter.view.Reader;
 import ua.com.gojava4.kickstarter.view.Writer;
 
 public class CategoriesPage implements Page {
 
-	List<Category> allCategories;
-	DataIOTypeStorage dataIOTypeStorage;
+	private List<Category> allCategories;
+	private DataIOTypeStorage dataIOTypeStorage;
 
 	public CategoriesPage(Reader reader, Writer writer, Dao genericDao) {
 		

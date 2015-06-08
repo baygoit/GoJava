@@ -1,4 +1,4 @@
-package ua.com.gojava4.kickstarter.entities;
+package ua.com.gojava4.kickstarter.control;
 
 import ua.com.gojava4.kickstarter.dao.Dao;
 import ua.com.gojava4.kickstarter.view.Reader;
@@ -6,9 +6,9 @@ import ua.com.gojava4.kickstarter.view.Writer;
 
 public class DataIOTypeStorage {
 	
-	Reader reader;
-	Writer writer;
-	Dao genericDao;
+	private Reader reader;
+	private Writer writer;
+	private Dao genericDao;
 	
 	public DataIOTypeStorage(Reader reader,	Writer writer, Dao genericDao) {
 		this.reader = reader;

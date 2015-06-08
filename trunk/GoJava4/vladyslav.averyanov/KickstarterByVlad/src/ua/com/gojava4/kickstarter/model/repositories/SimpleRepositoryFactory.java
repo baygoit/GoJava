@@ -9,9 +9,9 @@ import ua.com.gojava4.kickstarter.entities.Project;
 
 public class SimpleRepositoryFactory extends AbstractRepositoryFactory {
 	
-	List<Quote> quotes;
-	List<Category> categories;
-	List<Project> projects;
+	private List<Quote> quotes;
+	private List<Category> categories;
+	private List<Project> projects;
 	
 	public SimpleRepositoryFactory (String factoryType){
 		switch (factoryType.toLowerCase()) {
