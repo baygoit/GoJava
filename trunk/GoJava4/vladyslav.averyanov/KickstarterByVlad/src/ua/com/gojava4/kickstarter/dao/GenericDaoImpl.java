@@ -24,9 +24,14 @@ public class GenericDaoImpl implements Dao {
 		this.projects = projectsRepository.getAllProjects();
 	}
 
-	private ArrayList<Category> getAllProjectsOfCategory(int categoryId) {
-		
-		return null;
+	public List<Project> getAllProjectsOfCategory(int categoryId) {
+		List<Project> result = new ArrayList<>();
+		for (Project project : projects){
+			if (project.getCategoryId() == categoryId){
+				result.add(project);
+			}
+		}
+		return result;
 	}
 
 	@Override

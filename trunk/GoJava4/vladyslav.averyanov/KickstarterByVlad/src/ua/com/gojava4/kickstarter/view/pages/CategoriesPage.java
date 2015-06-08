@@ -5,22 +5,23 @@ import java.util.List;
 import ua.com.gojava4.kickstarter.control.ExitProgramException;
 import ua.com.gojava4.kickstarter.dao.Dao;
 import ua.com.gojava4.kickstarter.entities.Category;
+import ua.com.gojava4.kickstarter.entities.DataIOTypeStorage;
 import ua.com.gojava4.kickstarter.entities.Quote;
 import ua.com.gojava4.kickstarter.view.Reader;
 import ua.com.gojava4.kickstarter.view.Writer;
 
 public class CategoriesPage implements Page {
 
-	Reader reader;
-	Writer writer;
-	Dao genericDao;
 	List<Category> allCategories;
+	DataIOTypeStorage dataIOTypeStorage;
 
 	public CategoriesPage(Reader reader, Writer writer, Dao genericDao) {
-		this.reader = reader;
-		this.writer = writer;
-		this.genericDao = genericDao;
-		this.allCategories = genericDao.getAllCategories();
+		
+	}
+
+	public CategoriesPage(DataIOTypeStorage dataIOTypeStorage) {
+		this.dataIOTypeStorage = dataIOTypeStorage;
+		this.allCategories = dataIOTypeStorage.getGenericDao().getAllCategories();
 	}
 
 	@Override
@@ -31,12 +32,12 @@ public class CategoriesPage implements Page {
 
 	@Override
 	public Page getNextPage() throws ExitProgramException {
-		String userInput = reader.readUserInput();
+		String userInput = dataIOTypeStorage.getReader().readUserInput();
 		try {
 			int categoryId = Integer.parseInt(userInput);
 			for (Category category : allCategories) {
 				if (category.getId() == categoryId) {
-					return new ProjectsPage(reader, writer, genericDao,	categoryId);
+					return new ProjectsPage(dataIOTypeStorage, categoryId);
 				}
 			}
 		} catch (NumberFormatException e) {
@@ -51,7 +52,7 @@ public class CategoriesPage implements Page {
 	}
 
 	private void showErrorDescription() {
-		writer.print("Error input. Threre is no such category!\n"
+		dataIOTypeStorage.getWriter().print("Error input. Threre is no such category!\n"
 				+ "To exit print q\n");
 	}
 
@@ -61,13 +62,13 @@ public class CategoriesPage implements Page {
 		for (Category category : allCategories) {
 			sb.append("<" + category.getId() + "> " + category.getName() + "\n");
 		}
-		writer.println(sb.toString());
+		dataIOTypeStorage.getWriter().println(sb.toString());
 	}
 
 	private void showRandomQuote() {
-		writer.println();
-		Quote quote = genericDao.getRandomQuote();
-		writer.println(quote.getQuoteString());
+		dataIOTypeStorage.getWriter().println();
+		Quote quote = dataIOTypeStorage.getGenericDao().getRandomQuote();
+		dataIOTypeStorage.getWriter().println(quote.getQuoteString());
 	}
 
 }

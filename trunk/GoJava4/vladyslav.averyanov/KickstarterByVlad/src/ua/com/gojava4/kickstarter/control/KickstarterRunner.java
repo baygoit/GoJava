@@ -2,6 +2,7 @@ package ua.com.gojava4.kickstarter.control;
 
 import ua.com.gojava4.kickstarter.dao.Dao;
 import ua.com.gojava4.kickstarter.dao.GenericDaoImpl;
+import ua.com.gojava4.kickstarter.entities.DataIOTypeStorage;
 import ua.com.gojava4.kickstarter.model.repositories.SimpleRepositoryFactory;
 import ua.com.gojava4.kickstarter.view.ConsoleReader;
 import ua.com.gojava4.kickstarter.view.ConsoleWriter;
@@ -16,7 +17,9 @@ public class KickstarterRunner {
 		Dao genericDao = new GenericDaoImpl(new SimpleRepositoryFactory("quotes"),
 				new SimpleRepositoryFactory("categories"),
 				new SimpleRepositoryFactory("projects"));
-		Kickstarter kickstarter = new Kickstarter(reader, writer, genericDao);
+		
+		DataIOTypeStorage dataIOTypeStorage = new DataIOTypeStorage(reader, writer, genericDao);
+		Kickstarter kickstarter = new Kickstarter(dataIOTypeStorage);
 		kickstarter.run();
 	}
 

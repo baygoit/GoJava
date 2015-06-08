@@ -2,20 +2,17 @@ package ua.com.gojava4.kickstarter.view.pages;
 
 import ua.com.gojava4.kickstarter.control.ExitProgramException;
 import ua.com.gojava4.kickstarter.dao.Dao;
+import ua.com.gojava4.kickstarter.entities.DataIOTypeStorage;
 import ua.com.gojava4.kickstarter.view.Reader;
 import ua.com.gojava4.kickstarter.view.Writer;
 
 public class ProjectsPage implements Page {
 	
-	Reader reader;
-	Writer writer;
-	Dao genericDao;
+	DataIOTypeStorage dataIOTypeStorage;
 	int categoryId;
 
-	public ProjectsPage(Reader reader, Writer writer, Dao genericDao, int categoryId) {
-		this.reader = reader;
-		this.writer = writer;
-		this.genericDao = genericDao;
+	public ProjectsPage(DataIOTypeStorage dataIOTypeStorage, int categoryId) {
+		this.dataIOTypeStorage = dataIOTypeStorage;
 		this.categoryId = categoryId;
 	}
 
@@ -26,7 +23,7 @@ public class ProjectsPage implements Page {
 
 	@Override
 	public Page getNextPage() throws ExitProgramException {
-		return new CategoriesPage(reader, writer, genericDao);
+		return new CategoriesPage(dataIOTypeStorage);
 	}
 
 }
