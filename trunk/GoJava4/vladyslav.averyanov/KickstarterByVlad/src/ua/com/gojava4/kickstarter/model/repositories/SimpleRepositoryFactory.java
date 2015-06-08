@@ -9,9 +9,9 @@ import ua.com.gojava4.kickstarter.entities.Project;
 
 public class SimpleRepositoryFactory extends AbstractRepositoryFactory {
 	
-	ArrayList<Quote> quotes;
-	ArrayList<Category> categories;
-	ArrayList<Project> projects;
+	List<Quote> quotes;
+	List<Category> categories;
+	List<Project> projects;
 	
 	public SimpleRepositoryFactory (String factoryType){
 		switch (factoryType.toLowerCase()) {
@@ -33,6 +33,7 @@ public class SimpleRepositoryFactory extends AbstractRepositoryFactory {
 	}
 
 	private void initializeQuotes() {
+		quotes = new ArrayList<Quote>();
 		quotes.add(new Quote(
 				"Life isn't about finding yourself. Life is about creating yourself.",
 				"\n(c)Author"));
@@ -51,11 +52,13 @@ public class SimpleRepositoryFactory extends AbstractRepositoryFactory {
 	}
 
 	private void initializeCategories() {
+		categories = new ArrayList<Category>();
 		categories.add(new Category(1, "Design"));
 		categories.add(new Category(2, "Technology"));
 	}
 
 	private void initializeProjects() {
+		projects = new ArrayList<Project>();
 		projects.add(new Project(
 				"SNAP",
 				"Design Your Own Furniture",

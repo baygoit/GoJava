@@ -2,19 +2,20 @@ package ua.com.gojava4.kickstarter.dao;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import ua.com.gojava4.kickstarter.entities.Category;
 import ua.com.gojava4.kickstarter.entities.Project;
 import ua.com.gojava4.kickstarter.entities.Quote;
 import ua.com.gojava4.kickstarter.model.repositories.Repository;
 
-public class GeneralDaoImpl implements Dao { 
+public class GenericDaoImpl implements Dao { 
 	
 	List<Quote> quotes;
 	List<Category> categories; 
 	List<Project> projects;
 	
-	public GeneralDaoImpl(Repository quotesRepository, 
+	public GenericDaoImpl(Repository quotesRepository, 
 			Repository categoriesRepository, 
 			Repository projectsRepository) {
 		
@@ -45,7 +46,8 @@ public class GeneralDaoImpl implements Dao {
 
 	@Override
 	public Quote getRandomQuote() {
-		return null;				
+		Random rnd = new Random();
+		return quotes.get(rnd.nextInt(quotes.size()-1));				
 	}
 	
 }

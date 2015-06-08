@@ -7,13 +7,8 @@ public class ConsoleReader implements Reader{
 	public String readUserInput() {
 		String result;
 		Scanner scanner = new Scanner(System.in);
-		try {
-			result = scanner.next();
-		}
-		finally{
-			scanner.close();
-		}		
-		
+		result = scanner.next();
+		//scanner.close();
 		return result;
 	}
 
