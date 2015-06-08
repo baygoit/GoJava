@@ -1,4 +1,4 @@
-package ua.com.gojava4.kickstarter.model.repositories;
+package ua.com.gojava4.kickstarter.dao;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,6 +6,7 @@ import java.util.List;
 import ua.com.gojava4.kickstarter.entities.Category;
 import ua.com.gojava4.kickstarter.entities.Project;
 import ua.com.gojava4.kickstarter.entities.Quote;
+import ua.com.gojava4.kickstarter.model.repositories.Repository;
 
 public class GeneralDaoImpl implements Dao { 
 	

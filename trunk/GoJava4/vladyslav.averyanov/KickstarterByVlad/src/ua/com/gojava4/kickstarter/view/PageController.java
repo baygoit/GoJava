@@ -1,7 +1,6 @@
-package ua.com.gojava4.kickstarter.control;
+package ua.com.gojava4.kickstarter.view;
 
-import ua.com.gojava4.kickstarter.view.Reader;
-import ua.com.gojava4.kickstarter.view.Writer;
+import ua.com.gojava4.kickstarter.control.KickstarterController;
 
 public class PageController implements KickstarterController {
 
