@@ -31,7 +31,6 @@ public class CommentModel extends PageModel {
 				imodel.goToAndBack(IndexOfPage.ERROR_PAGE.ordinal(),
 						IndexOfPage.COMMENT_PAGE.ordinal());
 			}
-			
 			return;
 		}
 
@@ -47,7 +46,6 @@ public class CommentModel extends PageModel {
 			}
 			return;
 		}
-
 		imodel.goToAndBack(IndexOfPage.ERROR_PAGE.ordinal(),
 				IndexOfPage.COMMENT_PAGE.ordinal());
 	}

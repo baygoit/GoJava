@@ -30,7 +30,7 @@ public class test_user_service {
 
 	}
 	@Test
-	public void test() {
+	public void test_existing_user() {
 		String message;
 		controller.showPage();
 		message="d";
@@ -56,6 +56,14 @@ public class test_user_service {
 		message="user:guest";
 		controller.updateStateOfModel(message);
 		controller.showPage();
+		
+		assertEquals(iC.getDao().getUserService().getUserStatus().getName(), "anonymous"); 
 	}
-
+	@Test
+	public void test_the_user_is_not_found() {
+		String message="user:null";
+		controller.updateStateOfModel(message);
+		controller.showPage();
+		assertEquals(iC.getDao().getUserService().getUserStatus(), null); 
+	}
 }

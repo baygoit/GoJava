@@ -11,7 +11,12 @@ public class UserAccount extends PageView {
 		header.append("\n");
 		header.append("\ncurrent user: ");
 		if(idao.getUserService().getUserStatus()!=null){
+			header.append("<");
 			header.append(idao.getUserService().getUserStatus().getName());
+			header.append(">");
+		}
+		else{
+			header.append("<********>");
 		}
 		header.append("\n------------------------");
 		header.append("\nOptions: <p>- previous page  \n<user:guest> - login and password");
