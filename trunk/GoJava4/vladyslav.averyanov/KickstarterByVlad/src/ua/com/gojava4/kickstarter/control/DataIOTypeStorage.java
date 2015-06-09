@@ -20,10 +20,6 @@ public class DataIOTypeStorage {
 		return reader;
 	}
 
-	public void setReader(Reader reader) {
-		this.reader = reader;
-	}
-
 	public Writer getWriter() {
 		return writer;
 	}
