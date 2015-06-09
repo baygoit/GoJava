@@ -4,8 +4,10 @@ import java.util.*;
 
 import com.goit.kickstarter.glmax.controller.Position;
 import com.goit.kickstarter.glmax.enteties.Category;
+import com.goit.kickstarter.glmax.enteties.Entetie;
 import com.goit.kickstarter.glmax.enteties.PaymentVariant;
 import com.goit.kickstarter.glmax.enteties.Project;
+import com.goit.kickstarter.glmax.enteties.Quote;
 
 public class LocalDataSource implements DataSource {
 	private ArrayList<Category> categories = new ArrayList<Category>();
@@ -23,11 +25,8 @@ public class LocalDataSource implements DataSource {
 								* j, i * j / 2, "some histry",
 						"www.youtube.com/?video=" + i * 10 + j + "LkmSk/", null);
 				projects.get(category).add(project);
-				HashMap<String, Integer> payment = new HashMap<String, Integer>();
-				payment.put("discount", 100 * j);
-				payment.put("free one", 200 * j);
 				PaymentVariant paymentVariants = new PaymentVariant(i * 100
-						+ j * 10, payment);
+						+ j * 10, "payment");
 				payments.put(project, paymentVariants);
 			}
 		}
@@ -39,8 +38,8 @@ public class LocalDataSource implements DataSource {
 	}
 
 	@Override
-	public String getSomeQuote() {
-		return "some qoute";
+	public Entetie getSomeQuote() {
+		return new Quote(12,"some qoute");
 	}
 
 	@Override
@@ -61,33 +60,8 @@ public class LocalDataSource implements DataSource {
 	@Override
 	public ArrayList<Integer> getChoisList(Position currentLevel,
 			Integer currentMenuObjectIndex) {
-		ArrayList<Integer> result = new ArrayList<Integer>();
 
-		if (currentLevel == Position.Main) {
-			for (Category category : categories) {
-				result.add(result.size() + 1);
-			}
-			result.add(0);
-		} else if (currentLevel == Position.Category) {
-			for (Project project : projects.get(categories
-					.get(currentMenuObjectIndex))) {
-				result.add(result.size() + 1);
-			}
-			result.add(0);
-		} else if (currentLevel == Position.Project) {
-			result.add(1);
-			result.add(2);
-			result.add(0);
-		} else if (currentLevel == Position.Payment) {
-			for (Map.Entry<String, Integer> paymentVariant : payments.get(projects.get(currentMenuObjectIndex))) {
-				result.add(result.size() + 1);
-			}
-			result.add(0);
-		} else if (currentLevel == Position.Question) {
-			// TODO
-			result.add(0);
-		}
-		return result;
+		return null;
 	}
 
 	@Override
@@ -101,6 +75,13 @@ public class LocalDataSource implements DataSource {
 			Integer projectIndex) {
 		return payments.get(getProjectsList(categoryIndex)
 				.get(projectIndex - 1));
+	}
+
+
+	@Override
+	public ArrayList<Entetie> getEntetiesList(Position next) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

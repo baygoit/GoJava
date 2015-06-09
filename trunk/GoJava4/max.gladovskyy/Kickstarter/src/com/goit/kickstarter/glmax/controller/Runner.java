@@ -12,24 +12,23 @@ public class Runner {
 	private Output printer;
 
 	public Runner(DataSource dataSource) {
-		this.dataSource = dataSource;
 		this.pageFactory = new ConsolePageFactory(dataSource);
 		this.reader = new ConsoleIn();
 		this.printer = new ConsoleOut();
+		this.dataSource = dataSource;
 	}
 
 	public void run() {
 		Page currentPage = pageFactory.getPage(Position.Main, dataSource.getSomeQuote());
-		currentPage.show(printer);
+		Page nextPage = null;
 		int userChois;
 		
 		while (true) {
+			currentPage.show(printer);
 			userChois = reader.getValidatedUserChois(currentPage.getMenuVariantsAmount());
-			if (userChois == 0) {
-				currentPage.getParentPage().show(printer);
-			} else {
-				currentPage.getChildPage(userChois).show(printer);
-			}
+			nextPage = currentPage.getChildPage(userChois);
+			pageFactory.prepareNextPage(nextPage);
+			
 		}
 	}
 }

@@ -1,11 +1,13 @@
 package com.goit.kickstarter.glmax.pages;
 
+import com.goit.kickstarter.glmax.controller.Position;
 import com.goit.kickstarter.glmax.enteties.Entetie;
 
 public class MainPage extends Page {
 	
 	public MainPage(Entetie entetie) {
 		super(entetie);
+		currentMenuLevel = Position.Main;
 	}
 
 	@Override

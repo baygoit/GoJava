@@ -10,23 +10,23 @@ public abstract class Page {
 
 	protected static final int parentPage = 0;
 	protected Entetie entetie;
-	protected ArrayList<Page> relatedPages;
+	protected Position currentMenuLevel;
+	protected ArrayList<Page> relatedPages = new ArrayList<Page>();
 	protected ArrayList<String> formatedPage = new ArrayList<String>();
-
 	
 	public Page(Entetie entetie) {
 		this.entetie = entetie;
-		prepareFormatedPage();
 	}
 	
 	abstract protected void prepareFormatedPage();
 	
 	public void show(Output printer) {
+		prepareFormatedPage();
 		printer.print(formatedPage);
 	}
 	
 	protected void fillMenu() {
-		for (int index = 1; index <= relatedPages.size(); index++) {
+		for (int index = 1; index < relatedPages.size(); index++) {
 			formatedPage.add(index+") "+ relatedPages.get(index).getName());
 		}
 	}
@@ -58,5 +58,11 @@ public abstract class Page {
 	public int getMenuVariantsAmount() {
 		return relatedPages.size();
 	}
+
+	public Position getCurrentMenuLevel() {
+		return currentMenuLevel;
+	}
+	
+	
 
 }

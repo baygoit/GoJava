@@ -27,4 +27,6 @@ public interface DataSource {
 
 	PaymentVariant getpaymentVariants(Integer integer, Integer currentMenuObjectIndex);
 
+	ArrayList<Entetie> getEntetiesList(Position next);
+
 }

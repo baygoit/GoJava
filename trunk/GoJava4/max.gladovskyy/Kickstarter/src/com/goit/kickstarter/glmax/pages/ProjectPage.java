@@ -1,5 +1,6 @@
 package com.goit.kickstarter.glmax.pages;
 
+import com.goit.kickstarter.glmax.controller.Position;
 import com.goit.kickstarter.glmax.enteties.Entetie;
 import com.goit.kickstarter.glmax.enteties.Project;
 
@@ -7,6 +8,7 @@ public class ProjectPage extends Page {
 
 	public ProjectPage(Entetie entetie) {
 		super(entetie);
+		currentMenuLevel = Position.Project;
 	}
 
 	@Override

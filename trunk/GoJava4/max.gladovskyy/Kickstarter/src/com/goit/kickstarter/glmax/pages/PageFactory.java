@@ -8,4 +8,7 @@ public interface PageFactory {
 	Page getPage(Position position, Entetie entetie);
 
 
+	void prepareNextPage(Page nextPage);
+
+
 }
