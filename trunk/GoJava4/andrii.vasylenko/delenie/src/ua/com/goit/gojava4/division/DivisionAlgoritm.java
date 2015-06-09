@@ -41,16 +41,7 @@ public class DivisionAlgoritm {
 		Logger logger = new Logger();
 		DivisionCalculator calculator = new DivisionCalculator(dividend, divisor, ACCURACY, logger);
 		double result = calculator.calculate();
-		return composeAnswer(result, logger);
-	}
-
-	private String composeAnswer(double result, Logger logger) {
-		StringBuilder answer = new StringBuilder();
-		answer.append(dividend);
-		answer.append(divisor);
-		answer.append(result);
-		answer.append(logger.getLog());
-		return answer.toString();
+		return logger.composeAnswer(result, dividend, divisor);
 	}
 
 	private String[] split(String formula) throws NumberFormatException {

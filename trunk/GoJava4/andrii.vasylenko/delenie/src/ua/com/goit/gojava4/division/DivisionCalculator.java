@@ -11,21 +11,18 @@ public class DivisionCalculator {
 
 	public DivisionCalculator(int dividend, int divisor, int accuracy, Logger logger) {
 		this.divisor = divisor;
-		int dividendWithAccuracy = addAccuracy(dividend);
-		this.dividendWithAccuracy = convert(dividendWithAccuracy);
 		this.accuracy = accuracy;
+		this.dividendWithAccuracy = convert(addAccuracy(dividend));
 		this.logger = logger;
 	}
 
 	public double calculate() {
-		double result = convert(calculateDivide());
-		result = removeAccuracy(result);
-		return result;
+		calculateDivide();
+		int result = convert(logger.getResult());
+		return removeAccuracy(result);
 	}
-	
-	private String calculateDivide() {
-		StringBuilder result = new StringBuilder();
 
+	private void calculateDivide() {
 		int currentDivident = 0;
 		int index = 0;
 		do {
@@ -33,52 +30,34 @@ public class DivisionCalculator {
 			if (!isCorrectDividend(currentDivident)) {
 				continue;
 			}
-			result.append(getDivide(currentDivident));
+			int result = currentDivident / divisor;
+			currentDivident -= result * divisor;
+			logger.logDivision(result * divisor, currentDivident);
+			logger.logResult(result);
+
 		} while (hasNextDigit(index++));
-
-		return result.toString();
-	}
-	
-	private int getDivide(int currentDivident) {
-		int result = currentDivident / divisor;
-		currentDivident -= result * divisor;
-		//TO DO:
-		//logger.log(SMTH);
-		return result;
-	}
-
-	private boolean hasNextDigit(int index) {
-		if (index >= dividendWithAccuracy.length()) {
-			return false;
-		}
-		return true;
 	}
 
 	private int getNextDigit(int currentDivident, int index) {
-		int result = currentDivident;
-		result *= RADIX;
-		result += convert(getDigit(dividendWithAccuracy, index));			
-		return result;
+		int digit = convert(getDigit(dividendWithAccuracy, index));
+		logger.logNextDigit(digit, index);
+		return currentDivident * RADIX + digit;
 	}
-	
+
+	private boolean hasNextDigit(int index) {
+		return index < dividendWithAccuracy.length() - 1;
+	}
+
 	private boolean isCorrectDividend(int currentDivident) {
 		return (currentDivident == 0) || (currentDivident / divisor >= MINIMUM_ALLOW_RESULT);
 	}
 
 	private int addAccuracy(int number) {
-		return (int) changeAccuracy(number, RADIX);
+		return number * (int) Math.pow(RADIX, accuracy);
 	}
 
-	private double removeAccuracy(double result) {
-		return changeAccuracy(result, 1 / RADIX);
-	}
-
-	private double changeAccuracy(double number, int radix) {
-		double result = number;
-		for (int i = 0; i < accuracy; i++) {
-			result *= radix;
-		}
-		return result;
+	private double removeAccuracy(int result) {
+		return result / Math.pow(RADIX, accuracy);
 	}
 
 	private String getDigit(String number, int index) {
