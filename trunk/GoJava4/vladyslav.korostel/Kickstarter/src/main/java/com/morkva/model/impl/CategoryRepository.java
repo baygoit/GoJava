@@ -1,6 +1,7 @@
 package com.morkva.model.impl;
 
 import com.morkva.entities.Category;
+import com.morkva.entities.Quote;
 import com.morkva.model.IRepository;
 
 import java.util.*;
@@ -31,63 +32,30 @@ public class CategoryRepository implements IRepository<Category> {
     }
 
     @Override
-    public Category findByName(String name) {
-        Category result = null;
-        for (Category category : categories) {
-            if (category.getName().equals(name)) {
-                result = category;
-            }
-        }
-        return result;
-    }
-
-    @Override
-    public Category getByIndex(int index) {
-        if (categories.size() == 0) {
-            return null;
-        } else {
-            return categories.get(index);
-        }
-    }
-
-    @Override
-    public boolean add(Category object) {
+    public Category add(Category object) {
         int searchResult = search(object.getId());
         if (searchResult < 0) {
             categories.add(object);
             sort();
-            return true;
-        } else {
-            return false;
         }
+        return null;
     }
 
     @Override
-    public boolean remove(Category object) {
+    public void remove(Category object) {
         int searchResult = search(object.getId());
         if (searchResult > 0) {
             categories.remove(object);
-            return true;
-        } else {
-            return false;
         }
     }
 
     @Override
-    public boolean update(Category object) {
+    public void update(Category object) {
         int index = search(object.getId());
         if (index > 0) {
             categories.set(index, object);
             sort();
-            return true;
-        } else {
-            return false;
         }
-    }
-
-    @Override
-    public int size() {
-        return categories.size();
     }
 
     @Override

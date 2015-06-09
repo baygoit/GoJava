@@ -5,13 +5,13 @@ package com.morkva.entities;
  */
 public abstract class Entity implements Comparable<Integer> {
 
-    private int id;
+    private Integer id;
 
     public Entity(int id) {
         this.id = id;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 

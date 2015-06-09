@@ -2,6 +2,8 @@ package com.morkva.model.impl;
 
 import com.morkva.entities.Quote;
 import com.morkva.model.IRepository;
+import com.morkva.model.dao.DAO;
+import com.morkva.model.dao.PersistException;
 
 import java.util.*;
 
@@ -10,100 +12,60 @@ import java.util.*;
  */
 public class QuoteRepository implements IRepository<Quote> {
 
-    List<Quote> quotes;
+    DAO<Quote, Integer> dao;
 
-    public QuoteRepository(List<Quote> dataSource) {
-        this.quotes = dataSource;
-    }
-
-    public QuoteRepository() {
-        this.quotes = new ArrayList<>();
+    public QuoteRepository(DAO<Quote, Integer> dao) {
+        this.dao = dao;
     }
 
     @Override
     public Quote getById(int id) {
-        if (quotes.size() == 0) {
-            return null;
-        } else {
-            int searchResult = search(id);
-            return quotes.get(searchResult);
+        Quote quote = null;
+        try {
+            quote = dao.getByPK(id);
+        } catch (PersistException e) {
+            e.printStackTrace();
+        }
+        return quote;
+    }
+
+    @Override
+    public Quote add(Quote object) {
+        Quote quote = null;
+        try {
+            quote = dao.create(object);
+        } catch (PersistException e) {
+            e.printStackTrace();
+        }
+        return quote;
+    }
+
+    @Override
+    public void remove(Quote object) {
+        try {
+            dao.delete(object);
+        } catch (PersistException e) {
+            e.printStackTrace();
         }
     }
 
     @Override
-    public Quote findByName(String name) {
-        Quote result = null;
-        for (Quote quote : quotes) {
-            if (quote.getValue().equals(name)) {
-                result = quote;
-            }
+    public void update(Quote object) {
+        try {
+            dao.update(object);
+        } catch (PersistException e) {
+            e.printStackTrace();
         }
-        return result;
-    }
-
-    @Override
-    public Quote getByIndex(int index) {
-        if (quotes.size() == 0) {
-            return null;
-        } else {
-            return quotes.get(index);
-        }
-    }
-
-    @Override
-    public boolean add(Quote object) {
-        int searchResult = search(object.getId());
-        if (searchResult < 0) {
-            quotes.add(object);
-            sort();
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    @Override
-    public boolean remove(Quote object) {
-        int searchResult = search(object.getId());
-        if (searchResult > 0) {
-            quotes.remove(searchResult);
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    @Override
-    public boolean update(Quote object) {
-        int searchResult = search(object.getId());
-        if (searchResult > 0) {
-            quotes.set(searchResult, object);
-            sort();
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    @Override
-    public int size() {
-        return quotes.size();
     }
 
     @Override
     public List<Quote> getAll() {
-        if (quotes.size() == 0) {
-            return null;
-        } else {
-            return quotes;
+        List<Quote> all = null;
+        try {
+            all = dao.getAll();
+        } catch (PersistException e) {
+            e.printStackTrace();
         }
-    }
-
-    private int search(int id) {
-        return Collections.binarySearch(quotes, id);
-    }
-
-    private void sort() {
-        Collections.sort(quotes, (o1, o2) -> o1.compareTo(o2.getId()));
+        return all;
     }
 }

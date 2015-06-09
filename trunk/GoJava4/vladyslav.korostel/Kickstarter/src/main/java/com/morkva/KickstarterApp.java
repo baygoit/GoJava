@@ -37,7 +37,7 @@ public class KickstarterApp {
 
 
     private void showQuote() {
-        println(quoteRepository.getByIndex(new Random().nextInt(quoteRepository.size())));
+        println(quoteRepository.getById(1));
     }
     
     public void print(Object o) {

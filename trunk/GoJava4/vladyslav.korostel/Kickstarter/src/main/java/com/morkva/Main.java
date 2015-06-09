@@ -4,11 +4,16 @@ import com.morkva.entities.Category;
 import com.morkva.entities.Project;
 import com.morkva.entities.Quote;
 import com.morkva.logic.*;
+import com.morkva.model.dao.PersistException;
+import com.morkva.model.dao.jdbc.DAOFactory;
+import com.morkva.model.dao.jdbc.mysql.MySQLDaoFactory;
 import com.morkva.model.impl.CategoryRepository;
 import com.morkva.model.impl.QuoteRepository;
 import com.morkva.utils.PaymentOption;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.*;
 
 /**
@@ -63,10 +68,16 @@ public class Main {
         defaultCategories.get(1).setProjects(videoCategoryProjects);
         defaultCategories.get(2).setProjects(gamesCategoryProjects);
 
+        DAOFactory<Connection> daoFactory = new MySQLDaoFactory();
+
         Printer printer = new ConsolePrinter();
         Reader reader = new ConsoleReader();
         KickstarterApp app = new KickstarterApp(printer, reader);
-        app.setQuoteRepository(new QuoteRepository(defaultQuotes));
+        try {
+            app.setQuoteRepository(new QuoteRepository(daoFactory.getDao(daoFactory.getContext(), Quote.class)));
+        } catch (PersistException e) {
+            e.printStackTrace();
+        }
         app.setCategoryRepository(new CategoryRepository(defaultCategories));
         app.run();
     }
