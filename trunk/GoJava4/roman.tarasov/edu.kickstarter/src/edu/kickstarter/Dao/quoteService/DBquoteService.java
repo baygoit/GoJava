@@ -5,7 +5,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 import java.util.Random;
-import edu.kickstarter.databaseDao.DatabaseService;
+
+import edu.kickstarter.database.DatabaseService;
 import edu.kickstarter.entity.Quote;
 
 public class DBquoteService implements QuoteService {

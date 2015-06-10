@@ -5,7 +5,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import edu.kickstarter.databaseDao.DatabaseService;
+
+import edu.kickstarter.database.DatabaseService;
 import edu.kickstarter.entity.Category;
 
 public class DBcategoryServiceImpl implements CategoryService {
