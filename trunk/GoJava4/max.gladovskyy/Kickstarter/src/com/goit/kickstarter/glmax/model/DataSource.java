@@ -21,12 +21,10 @@ public interface DataSource {
 
 	Project getProject(int category, int project);
 
-	ArrayList<Integer> getChoisList(Position currentLevel, Integer integer);
-
 	void persistData();
 
 	PaymentVariant getpaymentVariants(Integer integer, Integer currentMenuObjectIndex);
 
-	ArrayList<Entetie> getEntetiesList(Position next);
+	ArrayList<Entetie> getEntetiesList(Position next, int id);
 
 }

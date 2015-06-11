@@ -74,7 +74,7 @@ public class ConsolePageFactory implements PageFactory {
 	@Override
 	public void prepareNextPage(Page nextPage) {
 		ArrayList<Page> childPages = new ArrayList<Page>();
-		for (Entetie entetie: dataSource.getEntetiesList(nextPage.getCurrentMenuLevel().next())) {
+		for (Entetie entetie: dataSource.getEntetiesList(nextPage.getCurrentMenuLevel(),nextPage.getId())) {
 			Page page = this.getPage(nextPage.getCurrentMenuLevel().next(), entetie);
 			page.setParentPage(nextPage);
 			childPages.add(page);

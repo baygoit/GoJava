@@ -8,6 +8,10 @@ import com.goit.kickstarter.glmax.enteties.Entetie;
 import com.goit.kickstarter.glmax.enteties.PaymentVariant;
 import com.goit.kickstarter.glmax.enteties.Project;
 import com.goit.kickstarter.glmax.enteties.Quote;
+import com.goit.kickstarter.glmax.pages.CategoryPage;
+import com.goit.kickstarter.glmax.pages.PaymentPage;
+import com.goit.kickstarter.glmax.pages.ProjectPage;
+import com.goit.kickstarter.glmax.pages.QuestionPage;
 
 public class LocalDataSource implements DataSource {
 	private ArrayList<Category> categories = new ArrayList<Category>();
@@ -58,13 +62,6 @@ public class LocalDataSource implements DataSource {
 	}
 
 	@Override
-	public ArrayList<Integer> getChoisList(Position currentLevel,
-			Integer currentMenuObjectIndex) {
-
-		return null;
-	}
-
-	@Override
 	public void persistData() {
 		// TODO Auto-generated method stub
 
@@ -79,9 +76,27 @@ public class LocalDataSource implements DataSource {
 
 
 	@Override
-	public ArrayList<Entetie> getEntetiesList(Position next) {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<Entetie> getEntetiesList(Position next, int id) {
+		ArrayList<Entetie> result = new ArrayList<Entetie>();
+		switch (next) {
+		case Main:
+			result.addAll(categories);
+			break;
+		case Category:
+			result.addAll(getProjectsList(id));
+			break;
+		case Project:
+			result = null;
+			break;
+		case Payment:
+			result = null;
+			break;
+		case Question:
+			result = null;
+			break;
+		}
+		return result;
 	}
+
 
 }

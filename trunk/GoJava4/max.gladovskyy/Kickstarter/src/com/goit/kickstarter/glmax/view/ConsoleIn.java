@@ -18,16 +18,12 @@ public class ConsoleIn implements Input {
 		return userChoise;
 	}
 	
-	public String getStringUserChois() {
-		Scanner scaner = new Scanner(System.in);
-		return scaner.nextLine();
-	}
 
 	private void getIntFromUser() {
 		System.out.println("Make a choise:");
 		Scanner scaner = new Scanner(System.in);
 		try {
-			int result = scaner.nextInt();
+			userChoise = scaner.nextInt();
 
 		} catch (InputMismatchException e) {
 			System.err.println("You entered not a number. Try Again.");
@@ -37,11 +33,10 @@ public class ConsoleIn implements Input {
 
 	private void validateUserChoise(int variantsAmount) {
 		if (userChoise < 0 || userChoise > (variantsAmount - 1)) {
-		} else {
 			System.out.println("There no such variant. Try Again.");
 			getIntFromUser();
 			validateUserChoise(variantsAmount);
-		}
+		} 
 	}
 
 }

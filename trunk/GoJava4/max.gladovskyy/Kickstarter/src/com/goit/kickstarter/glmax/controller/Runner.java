@@ -26,8 +26,9 @@ public class Runner {
 		while (true) {
 			currentPage.show(printer);
 			userChois = reader.getValidatedUserChois(currentPage.getMenuVariantsAmount());
-			nextPage = currentPage.getChildPage(userChois);
-			pageFactory.prepareNextPage(nextPage);
+			currentPage = currentPage.getChildPage(userChois);
+			pageFactory.prepareNextPage(currentPage);
+			
 			
 		}
 	}
