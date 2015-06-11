@@ -5,16 +5,18 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+
 import edu.kickstarter.database.DatabaseService;
+import edu.kickstarter.database.KickstarterException;
 import edu.kickstarter.entity.Category;
 
 public class DBcategoryServiceImpl implements CategoryService {
 	private List<Category> categories;
 
 	@Override
-	public List<Category> getAll() throws SQLException {
+	public List<Category> getAll() throws  KickstarterException {
 		categories = new ArrayList<Category>();
-		
+		try{
 		Statement statement = DatabaseService.getInstance().getConnection().createStatement();
 		ResultSet resultSet = statement
 				.executeQuery("SELECT COUNT(*) AS rowcount FROM categories");
@@ -28,6 +30,9 @@ public class DBcategoryServiceImpl implements CategoryService {
 			category.setID(resultSet.getInt("id"));
 			category.setName(resultSet.getString("category"));
 			categories.add(category);
+		}
+		}catch(SQLException e){
+			throw new KickstarterException("SQLException",e);
 		}
 		return categories;
 	}

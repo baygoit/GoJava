@@ -2,7 +2,6 @@ package edu.kickstarter.database;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
@@ -11,6 +10,7 @@ public class DatabaseService {
 
 	private static Connection connection;
 	private volatile static DatabaseService uniqueInstance;
+	private volatile DataSource ds = null;
 
 	private DatabaseService() {
 	}
@@ -26,25 +26,22 @@ public class DatabaseService {
 		return uniqueInstance;
 	}
 
-	public Connection getConnection() {
+	public synchronized Connection getConnection() throws KickstarterException {
 		try {
-			if (connection != null) {
-				if (!connection.isClosed()) {
-					return connection;
-				}
+			if (ds == null) {
+				InitialContext initCtx = new InitialContext();
+				ds = (DataSource) initCtx
+						.lookup("java:comp/env/jdbc/kickstarter");
 			}
-			Context initCtx = new InitialContext();
-			DataSource ds = (DataSource) initCtx
-					.lookup("java:comp/env/jdbc/kickstarter");
 			connection = ds.getConnection();
-			return connection;
 		} catch (SQLException | NamingException e) {
-			e.printStackTrace();
-			return null;
+			ds = null;
+			throw new KickstarterException("Exception", e);
 		}
+		return connection;
 	}
 
-	public void closeConnection() throws SQLException {
+	public synchronized void closeConnection() throws SQLException {
 		connection.close();
 	}
 }

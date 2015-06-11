@@ -1,0 +1,14 @@
+package edu.kickstarter.database;
+
+public class KickstarterException extends Exception {
+
+	private static final long serialVersionUID = -2062780015034365123L;
+
+	public KickstarterException(String message) {
+		super(message);
+	}
+
+	public KickstarterException(String message, Throwable throwable) {
+		super(message, throwable);
+	}
+}

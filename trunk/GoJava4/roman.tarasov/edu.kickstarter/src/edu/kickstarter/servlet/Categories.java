@@ -7,12 +7,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.PrintWriter;
-import java.sql.SQLException;
 import java.util.List;
 import javax.servlet.http.HttpSession;
 import edu.kickstarter.DAO.Dao;
+import edu.kickstarter.database.KickstarterException;
 import edu.kickstarter.entity.Category;
-
 
 /**
  * Servlet implementation class Categories
@@ -37,7 +36,8 @@ public class Categories extends HttpServlet {
 		out.println("<title>kickstarter.edu</title>");
 		StringBuffer html = new StringBuffer();
 		try {
-			out.println(Dao.getQuoteService().getRandomQuote().getQuote());
+			String s =Dao.getQuoteService().getRandomQuote().getQuote();
+			out.println(s);
 			List<Category> categories = Dao.getCategoryService().getAll();
 			html.append("<nav>");
 			html.append("<ul class='top-menu'>");
@@ -51,9 +51,8 @@ public class Categories extends HttpServlet {
 			html.append("</ul>");
 			html.append("</nav>");
 			out.println(html.toString());
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (KickstarterException e) {
+			// TODO
 		}
 		out.close();
 	}
