@@ -2,6 +2,9 @@ package edu.kickstarter.servlet;
 
 import java.io.IOException;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,10 +12,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
+import javax.sql.DataSource;
 
 import edu.kickstarter.Dao.categoryService.CategoryService;
 import edu.kickstarter.Dao.quoteService.Dao;
@@ -27,7 +34,6 @@ import edu.kickstarter.entity.Category;
 @WebServlet("/Categories")
 public class Categories extends HttpServlet {
 
-	
 	private static final long serialVersionUID = 1L;
 	private PrintWriter out;
 	private CategoryService categoryService;
@@ -69,7 +75,7 @@ public class Categories extends HttpServlet {
 
 	@Override
 	public void init() throws ServletException {
-		 Dao.getInstance();
+		Dao.getInstance();
 	}
 
 	@Override

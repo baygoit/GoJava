@@ -4,6 +4,11 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+
 public class DatabaseService {
 
 	private static Connection connection;
@@ -30,11 +35,11 @@ public class DatabaseService {
 					return connection;
 				}
 			}
-			connection = DriverManager.getConnection(
-					"jdbc:postgresql://localhost:5432/kickstarter", "postgres",
-					"root");
+			Context initCtx = new InitialContext();
+			DataSource ds = (DataSource) initCtx.lookup("java:comp/env/jdbc/kickstarter");
+			connection = ds.getConnection();
 			return connection;
-		} catch (SQLException e) {
+		} catch (SQLException | NamingException e) {
 			e.printStackTrace();
 			return null;
 		}
