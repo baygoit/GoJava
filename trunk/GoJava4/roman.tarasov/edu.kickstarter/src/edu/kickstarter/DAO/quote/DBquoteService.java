@@ -5,8 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
-
-import edu.kickstarter.DAO.Dao;
+import edu.kickstarter.database.DatabaseService;
 import edu.kickstarter.database.KickstarterException;
 import edu.kickstarter.entity.Quote;
 
@@ -18,7 +17,7 @@ public class DBquoteService implements QuoteService {
 		Statement statement = null;
 		ResultSet resultSet = null;
 		Quote quote = null;
-		conn = Dao.getDatabaseService().getConnection();
+		conn = DatabaseService.getInstance().getConnection();
 		try {
 			StringBuffer sql = new StringBuffer();
 			statement = conn.createStatement();

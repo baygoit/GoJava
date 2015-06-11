@@ -8,35 +8,30 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import edu.kickstarter.DAO.Dao;
 
+
 /**
- * Servlet implementation class Projects
+ * Servlet implementation class Main
  */
-@WebServlet("/Projects")
-public class Projects extends HttpServlet {
+
+@WebServlet("/Main")
+public class Main extends HttpServlet {
+
 	private static final long serialVersionUID = 1L;
 
-
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
-	public Projects() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
 	@Override
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("Projects.jsp").forward(request,
-				response);
+
+		request.getRequestDispatcher("Main.jsp").forward(request, response);
 	}
 
 	@Override
 	public void init() throws ServletException {
 		Dao.getInstance();
+	}
+
+	@Override
+	public void destroy() {
+		super.destroy();
 	}
 }

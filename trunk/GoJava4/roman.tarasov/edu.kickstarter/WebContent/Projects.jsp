@@ -11,7 +11,7 @@
  </head>
  <body>
 
- <form action="Categories">
+ <form action="Main">
   <p><b> &quot;Projects&quot;</b></p>
   <p><input type="radio" name="answer" value="a1">1<Br>
   <input type="radio" name="answer" value="a2">2<Br>
