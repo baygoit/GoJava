@@ -38,8 +38,10 @@ public class Dao {
 					databaseService = DatabaseService.getInstance();
 					try {
 						databaseService.getConnection();
+						//categoryService = new DefaultCategoryServiceImpl();
 						categoryService = new DBcategoryServiceImpl();
 						quoteService = new DBquoteService();
+						//quoteService = new DefaultQuoteServiceImpl();
 
 					} catch (KickstarterException e) {
 						categoryService = new DefaultCategoryServiceImpl();

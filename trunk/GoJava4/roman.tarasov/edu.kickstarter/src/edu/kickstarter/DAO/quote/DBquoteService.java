@@ -66,9 +66,7 @@ public class DBquoteService implements QuoteService {
 		}
 
 		if (quote == null) {
-			throw new RuntimeException();
-			//throw new KickstarterException("SQLException");
-
+			throw new KickstarterException("SQLException");
 		}
 		return quote;
 	}

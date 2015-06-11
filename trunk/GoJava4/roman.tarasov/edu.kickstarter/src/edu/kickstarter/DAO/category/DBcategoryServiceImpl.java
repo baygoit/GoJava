@@ -1,5 +1,6 @@
 package edu.kickstarter.DAO.category;
 
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -12,12 +13,13 @@ import edu.kickstarter.entity.Category;
 
 public class DBcategoryServiceImpl implements CategoryService {
 	private List<Category> categories;
-
+	private Connection connection;
 	@Override
 	public List<Category> getAll() throws  KickstarterException {
 		categories = new ArrayList<Category>();
 		try{
-		Statement statement = DatabaseService.getInstance().getConnection().createStatement();
+			connection=DatabaseService.getInstance().getConnection();
+		Statement statement = connection.createStatement();
 		ResultSet resultSet = statement
 				.executeQuery("SELECT COUNT(*) AS rowcount FROM categories");
 		resultSet.next();
@@ -33,6 +35,11 @@ public class DBcategoryServiceImpl implements CategoryService {
 		}
 		}catch(SQLException e){
 			throw new KickstarterException("SQLException",e);
+		}
+		try {
+			connection.close();
+		} catch (SQLException e) {
+			throw new KickstarterException("SQLException by connection.close",e);
 		}
 		return categories;
 	}
