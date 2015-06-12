@@ -64,25 +64,25 @@ public class DistanceBetween2numbers {
 		return numbersLength;
 	}
 	private static int indexOfMinNumber(int[] numbers,int indexMinNumber){
-		int indexOfMinNumber;
+		int result;
 		if(indexMinNumber!=FIRSTINDEX){
-			indexOfMinNumber = FIRSTINDEX;
+			result = FIRSTINDEX;
 		}
 		else{
-			indexOfMinNumber = FIRSTINDEX+1;
+			result = FIRSTINDEX+1;
 		}
 		if(indexMinNumber == EMPTYINDEX){
-			indexOfMinNumber = FIRSTINDEX;
+			result = FIRSTINDEX;
 		}
 		for (int i = 0; i < numbers.length; i++) {
 			if (i != indexMinNumber) {
-				if (numbers[i] <numbers[indexOfMinNumber]) {
-					numbers[indexOfMinNumber] = numbers[i];
-					indexOfMinNumber = i;
+				if (numbers[i] <numbers[result]) {
+					numbers[result] = numbers[i];
+					result = i;
 				}
 			}
 		}
-		return indexOfMinNumber;
+		return result;
 				
 	}
 	private static int findDistanceBetween2Min(int[] numbers) {
