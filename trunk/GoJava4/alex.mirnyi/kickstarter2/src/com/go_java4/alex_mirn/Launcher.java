@@ -14,8 +14,6 @@ import com.go_java4.alex_mirn.view.pages.PageDispatcher;
 public class Launcher {
 	
 	public static void main(String[] args) {
-		System.out.println("It works!!!");
-		System.out.println("Alexxxx");
 		try {
 			Dao repository = new DaoImpl(new Random());
 
