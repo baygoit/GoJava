@@ -15,7 +15,8 @@ public class Launcher {
 	
 	public static void main(String[] args) {
 		System.out.println("It works!!!");
-
+		System.out.println("It works!!!");
+		System.out.println("It works!!!");
 		try {
 			Dao repository = new DaoImpl(new Random());
 
