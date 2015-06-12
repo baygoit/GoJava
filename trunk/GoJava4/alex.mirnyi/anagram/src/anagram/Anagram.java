@@ -7,6 +7,7 @@ public class Anagram {
     
     public static void main(String[] args){
         Scanner in = new Scanner(System.in);
+        System.out.println("New Changes!!!!!!!!!!!!!");
         System.out.println("Changes!!!!!!!!!!!!!");
         System.out.println("Enter a sentence:");
         String input = in.nextLine();
