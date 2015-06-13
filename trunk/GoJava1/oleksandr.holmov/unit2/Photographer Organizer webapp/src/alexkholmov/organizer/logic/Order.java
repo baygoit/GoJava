@@ -8,6 +8,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
@@ -26,12 +28,12 @@ public class Order {
     @Column(name="ord_id")
     private int orderId;
     
-    @OneToOne(cascade = CascadeType.MERGE)
-    @PrimaryKeyJoinColumn
+    @ManyToOne
+    @JoinColumn(name="cust_id")
     private Customer customer;
     
-    @OneToOne(cascade = CascadeType.MERGE)
-    @PrimaryKeyJoinColumn
+    @ManyToOne
+    @JoinColumn(name="stud_id")
     private FotoStudio fotoStudio;
 
     @OneToOne(cascade = CascadeType.MERGE)
