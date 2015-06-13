@@ -26,8 +26,4 @@ public class DefaultQuoteServiceImpl implements QuoteService {
 		return quotes.get(new Random().nextInt(quotes.size()));
 	}
 
-	@Override
-	public List<Quote> getAll() {
-		return quotes;
-	}
 }

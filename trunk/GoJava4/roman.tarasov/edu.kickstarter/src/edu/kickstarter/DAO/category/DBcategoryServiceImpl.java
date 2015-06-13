@@ -6,8 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-
-import edu.kickstarter.database.DatabaseService;
+import edu.kickstarter.DAO.Dao;
 import edu.kickstarter.database.KickstarterException;
 import edu.kickstarter.entity.Category;
 
@@ -18,7 +17,8 @@ public class DBcategoryServiceImpl implements CategoryService {
 	public List<Category> getAll() throws  KickstarterException {
 		categories = new ArrayList<Category>();
 		try{
-			connection=DatabaseService.getInstance().getConnection();
+			Dao.getInstance();
+			connection=Dao.getDatabaseService().getConnection();
 		Statement statement = connection.createStatement();
 		ResultSet resultSet = statement
 				.executeQuery("SELECT COUNT(*) AS rowcount FROM categories");

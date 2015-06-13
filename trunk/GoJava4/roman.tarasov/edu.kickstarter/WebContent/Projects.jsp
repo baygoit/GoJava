@@ -1,26 +1,33 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    <%
-
-    %>
-<!DOCTYPE HTML>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
- <head>
-  <meta charset="utf-8">
-  <title>Тег FORM</title>
- </head>
- <body>
-
- <form action="Main">
-  <p><b> &quot;Projects&quot;</b></p>
-  <p><input type="radio" name="answer" value="a1">1<Br>
-  <input type="radio" name="answer" value="a2">2<Br>
-  <input type="radio" name="answer" value="a3">3</p>
-  <menu type="toolbar">
- 
-</menu>
-  <p><input type="submit"></p>
- </form>
-
- </body>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Projects</title>
+</head>
+<body>
+	<h1>PROJECTS</h1>
+	<c:forEach var="project" items="${sortedProjects}">
+		<h2>
+			<a href="/edu.kickstarter/project?project=${project.ID}&category=${project.categoryID}"> 
+				<c:out value="${project.name}" />
+			</a>
+		</h2>
+		<h3>
+			<c:out value=" description= ${project.description}" />
+		</h3>
+		<h3>
+			<c:out value=" goal= ${project.goal}" />
+		</h3>
+		<h3>
+			<c:out value=" pledged= ${project.pledged}" />
+		</h3>
+		<h3>
+			<c:out value=" daysToGo= ${project.daysToGo}" />
+		</h3>
+		<br />
+	</c:forEach>
+</body>
 </html>
