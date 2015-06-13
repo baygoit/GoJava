@@ -41,7 +41,7 @@ public class DatabaseService {
 		return connection;
 	}
 
-	public synchronized void closeConnection() throws SQLException {
+	public synchronized void closeConnection() throws SQLException  {
 		connection.close();
 	}
 }

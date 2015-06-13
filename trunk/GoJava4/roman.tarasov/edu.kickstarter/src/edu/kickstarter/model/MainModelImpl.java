@@ -29,6 +29,6 @@ public class MainModelImpl implements Model {
 	@Override
 	public void setParameters(Object parameter) {
 		// TODO Auto-generated method stub
-		
+
 	}
 }

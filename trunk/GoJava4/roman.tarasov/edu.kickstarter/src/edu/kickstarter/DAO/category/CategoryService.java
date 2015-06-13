@@ -6,5 +6,5 @@ import edu.kickstarter.entity.Category;
 
 public interface CategoryService {
 
-	List<Category> getAll() throws  KickstarterException;
+	List<Category> getAll() throws KickstarterException;
 }

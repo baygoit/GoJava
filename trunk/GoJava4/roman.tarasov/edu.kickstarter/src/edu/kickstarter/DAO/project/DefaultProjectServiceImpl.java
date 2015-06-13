@@ -2,17 +2,15 @@ package edu.kickstarter.DAO.project;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import edu.kickstarter.entity.Project;
 
-
-public class DefaultProjectServiceImpl  implements ProjectService {
+public class DefaultProjectServiceImpl implements ProjectService {
 	List<Project> projects;
 
 	public DefaultProjectServiceImpl() {
 		projects = new ArrayList<Project>();
-		int categoryID = 5;
 
+		int categoryID = 5;
 		Project project = new Project();
 		project.setCategoryID(categoryID);
 		project.setName("Create electrobike");
@@ -45,7 +43,8 @@ public class DefaultProjectServiceImpl  implements ProjectService {
 		project.setShortDescription("Help ACRE achieve our most ambitious project to date");
 		project.setInvestmentOptions(new String[] { "100$ - ", "150$ -",
 				"400$ -" });
-		project.setAmount(new Double[] { (double) 100, (double) 150, (double) 400 });
+		project.setAmount(new Double[] { (double) 100, (double) 150,
+				(double) 400 });
 		project.setPledged(5000);
 		project.setGoal(10000);
 		project.setID(1);
@@ -68,15 +67,27 @@ public class DefaultProjectServiceImpl  implements ProjectService {
 	}
 
 	@Override
-	public List<Project> sortProjectsByCategoryID(int categoryID)  {
-			List<Project> sortedProjects = new ArrayList<Project>();
-			int length = projects.size();
-			for (int index = 0; index < length; index++) {
-			Project	project = projects.get(index);
-				if (project.getCategoryID() == categoryID) {
-					sortedProjects.add(project);
-				}
+	public List<Project> sortProjectsByCategoryID(int categoryID) {
+		List<Project> sortedProjects = new ArrayList<Project>();
+		int length = projects.size();
+		for (int index = 0; index < length; index++) {
+			Project project = projects.get(index);
+			if (project.getCategoryID() == categoryID) {
+				sortedProjects.add(project);
 			}
-			return sortedProjects;
 		}
+		return sortedProjects;
+	}
+
+	@Override
+	public Project getProjectById(int ID) {
+		int length = projects.size();
+		for (int index = 0; index < length; index++) {
+			Project currentProject = (Project) projects.get(index);
+			if (currentProject.getID() == ID) {
+				return currentProject;
+			}
+		}
+		return null;
+	}
 }

@@ -1,15 +1,14 @@
 package edu.kickstarter.model;
 
-import java.sql.SQLException;
 import java.util.List;
 import edu.kickstarter.DAO.Dao;
 import edu.kickstarter.database.KickstarterException;
 import edu.kickstarter.entity.Project;
 
-public class ProjectsModelImpl implements Model {
+public class ProjectsImpl implements Model {
 	private int categoryID;
 
-	public ProjectsModelImpl() {
+	public ProjectsImpl() {
 		Dao.getInstance();
 	}
 
@@ -17,14 +16,9 @@ public class ProjectsModelImpl implements Model {
 	public Object getAttribute(String name) throws KickstarterException {
 		List<Project> sortedProjects = null;
 		if (name.equals("sortedProjects")) {
-
-			try {
-				Dao.getInstance();
-				sortedProjects = Dao.getProjectService()
-						.sortProjectsByCategoryID(categoryID);
-			} catch (SQLException e) {
-				sortedProjects = null;
-			}
+			Dao.getInstance();
+			sortedProjects = Dao.getProjectService().sortProjectsByCategoryID(
+					categoryID);
 		}
 		return sortedProjects;
 	}

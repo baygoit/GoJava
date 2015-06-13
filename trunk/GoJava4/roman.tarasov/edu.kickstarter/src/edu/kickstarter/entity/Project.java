@@ -1,11 +1,6 @@
 package edu.kickstarter.entity;
 
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-
-@XmlRootElement
-public class Project  {
+public class Project {
 	private String name;
 	private String description;
 	private String shortDescription;
@@ -18,11 +13,11 @@ public class Project  {
 	private int CategoryID;
 	private String[] investmentOptions;
 	private Double[] amount;
+
 	public String getName() {
 		return name;
 	}
 
-	@XmlElement
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -31,7 +26,6 @@ public class Project  {
 		return description;
 	}
 
-	@XmlElement
 	public void setDescription(String description) {
 		this.description = description;
 	}
@@ -40,7 +34,6 @@ public class Project  {
 		return shortDescription;
 	}
 
-	@XmlElement
 	public void setShortDescription(String shortDescription) {
 		this.shortDescription = shortDescription;
 	}
@@ -49,7 +42,6 @@ public class Project  {
 		return history;
 	}
 
-	@XmlElement
 	public void setHistory(String history) {
 		this.history = history;
 	}
@@ -58,7 +50,6 @@ public class Project  {
 		return ID;
 	}
 
-	@XmlAttribute
 	public void setID(int iD) {
 		ID = iD;
 	}
@@ -67,7 +58,6 @@ public class Project  {
 		return goal;
 	}
 
-	@XmlAttribute
 	public void setGoal(int goal) {
 		this.goal = goal;
 	}
@@ -76,7 +66,6 @@ public class Project  {
 		return pledged;
 	}
 
-	@XmlAttribute
 	public void setPledged(double pledged) {
 		this.pledged = pledged;
 	}
@@ -85,7 +74,6 @@ public class Project  {
 		return daysToGo;
 	}
 
-	@XmlAttribute
 	public void setDaysToGo(int daysToGo) {
 		this.daysToGo = daysToGo;
 	}
@@ -94,7 +82,6 @@ public class Project  {
 		return linkToVideo;
 	}
 
-	@XmlElement
 	public void setLinkToVideo(String linkToVideo) {
 		this.linkToVideo = linkToVideo;
 	}
@@ -103,7 +90,6 @@ public class Project  {
 		return CategoryID;
 	}
 
-	@XmlAttribute
 	public void setCategoryID(int categoryID) {
 		this.CategoryID = categoryID;
 	}
@@ -112,7 +98,6 @@ public class Project  {
 		return investmentOptions;
 	}
 
-	@XmlElement
 	public void setInvestmentOptions(String[] investmentOptions) {
 		this.investmentOptions = investmentOptions;
 	}
@@ -121,7 +106,6 @@ public class Project  {
 		return amount;
 	}
 
-	@XmlAttribute
 	public void setAmount(Double[] amount) {
 		this.amount = amount;
 	}
