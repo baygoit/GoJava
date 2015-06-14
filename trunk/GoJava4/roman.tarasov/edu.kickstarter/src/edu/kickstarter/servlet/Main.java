@@ -37,10 +37,12 @@ public class Main extends HttpServlet {
 		}
 
 		if (action.startsWith("/projects")) {
+			request.setAttribute("url", "main");
 			forwardProjects(request, response);
 			return;
 		}
 		if (action.startsWith("/detailedProject")) {
+			request.setAttribute("url", "projects");
 			forwardDetailedProject(request, response);
 			return;
 		}
@@ -51,15 +53,23 @@ public class Main extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		Model detailProject = new DetailProjectImpl();
 		Object attribute;
+
 		try {
-			detailProject.setParameters(Integer.valueOf(request
-					.getParameter("project")));
+			String parameter = request.getParameter("project");
+			Integer projectID = 0;
+			try {
+				projectID = Integer.valueOf(parameter);
+			} catch (NumberFormatException e) {
+				throw new KickstarterException("illegal number of project ", e);
+			}
+			detailProject.setParameters(projectID);
 			attribute = detailProject.getAttribute("detailedProject");
 			Project detailedProject = (Project) attribute;
 			request.setAttribute("detailedProject", detailedProject);
 			request.getRequestDispatcher("DetailedProject.jsp").forward(
 					request, response);
 		} catch (KickstarterException e) {
+			request.setAttribute("error", e);
 			request.getRequestDispatcher("Error.jsp")
 					.forward(request, response);
 		}
@@ -70,9 +80,16 @@ public class Main extends HttpServlet {
 
 		Model projectsModel = new ProjectsImpl();
 		Object attribute;
+
 		try {
-			projectsModel.setParameters(Integer.valueOf(request
-					.getParameter("category")));
+			Integer categoryID = 0;
+			String parameter = request.getParameter("category");
+			try {
+				categoryID = Integer.valueOf(parameter);
+			} catch (NumberFormatException e) {
+				throw new KickstarterException("illegal number of category ", e);
+			}
+			projectsModel.setParameters(categoryID);
 			attribute = projectsModel.getAttribute("sortedProjects");
 			@SuppressWarnings("unchecked")
 			List<Project> sortedProjects = (List<Project>) attribute;
@@ -80,6 +97,7 @@ public class Main extends HttpServlet {
 			request.getRequestDispatcher("Projects.jsp").forward(request,
 					response);
 		} catch (KickstarterException e) {
+			request.setAttribute("error", e);
 			request.getRequestDispatcher("Error.jsp")
 					.forward(request, response);
 		}
@@ -98,6 +116,7 @@ public class Main extends HttpServlet {
 			request.setAttribute("quote", quote);
 			request.getRequestDispatcher("Main.jsp").forward(request, response);
 		} catch (KickstarterException e) {
+			request.setAttribute("error", e);
 			request.getRequestDispatcher("Error.jsp")
 					.forward(request, response);
 		}

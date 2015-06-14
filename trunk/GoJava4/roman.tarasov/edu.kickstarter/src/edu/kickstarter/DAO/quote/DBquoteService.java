@@ -34,7 +34,7 @@ public class DBquoteService implements QuoteService {
 		} catch (SQLException e) {
 			quote = null;
 			throw new KickstarterException(
-					"getRandomQuote exception", e);
+					"quote not found", e);
 		}
 		try {
 			Dao.getDatabaseService().closeConnection();

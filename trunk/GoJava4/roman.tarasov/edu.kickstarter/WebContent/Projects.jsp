@@ -9,9 +9,11 @@
 </head>
 <body>
 	<h1>PROJECTS</h1>
+<input type="button" value="previous page" onclick="self.location='${url}';" />
 	<c:forEach var="project" items="${sortedProjects}">
 		<h2>
-			<a href="/edu.kickstarter/detailedProject?project=${project.ID}&category=${project.categoryID}"> 
+			<a
+				href="/edu.kickstarter/detailedProject?project=${project.ID}&category=${project.categoryID}">
 				<c:out value="${project.name}" />
 			</a>
 		</h2>
@@ -29,5 +31,7 @@
 		</h3>
 		<br />
 	</c:forEach>
+	<input type="button" value="previous page" onclick="self.location='${url}';" />
+
 </body>
 </html>

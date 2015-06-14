@@ -14,10 +14,11 @@ public class DetailProjectImpl implements Model {
 		Project project = null;
 		if (name.equals("detailedProject")) {
 			try {
+				Dao.getInstance();
 				project = Dao.getProjectService().getProjectById(projectID);
 			} catch (SQLException e) {
 				project = null;
-				throw new KickstarterException(" DetailedProject exception", e);
+				throw new KickstarterException(" project info not found", e);
 			}
 		}
 		return project;

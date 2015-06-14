@@ -34,9 +34,10 @@ public class DBcategoryServiceImpl implements CategoryService {
 				category.setName(resultSet.getString("category"));
 				categories.add(category);
 			}
+			
 		} catch (SQLException e) {
 			categories = null;
-			throw new KickstarterException("getAll categories exception", e);
+			throw new KickstarterException("categories not found", e);
 		}
 		try {
 			Dao.getDatabaseService().closeConnection();

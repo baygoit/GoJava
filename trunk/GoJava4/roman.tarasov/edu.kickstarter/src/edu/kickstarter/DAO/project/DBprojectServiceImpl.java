@@ -111,7 +111,8 @@ public class DBprojectServiceImpl implements ProjectService {
 			project = newProject(rs);
 		} catch (KickstarterException | SQLException e) {
 			project = null;
-			throw new KickstarterException("getProjectById exception", e);
+		
+			throw new KickstarterException("project not found", e);
 		}
 		try {
 			Dao.getDatabaseService().closeConnection();
