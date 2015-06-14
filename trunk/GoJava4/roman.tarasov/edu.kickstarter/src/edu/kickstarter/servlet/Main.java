@@ -30,22 +30,25 @@ public class Main extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
+		
 		String action = getAction(request);
-		if (action.startsWith("/main")) {
+		if (action.startsWith("/main")||action.equals("/")) {
 			forwardMain(request, response);
 			return;
 		}
 
 		if (action.startsWith("/projects")) {
-			request.setAttribute("url", "main");
+			request.setAttribute("previous", "main");
 			forwardProjects(request, response);
 			return;
 		}
 		if (action.startsWith("/detailedProject")) {
-			request.setAttribute("url", "projects");
+			request.setAttribute("previous", "projects");
 			forwardDetailedProject(request, response);
 			return;
 		}
+		KickstarterException e=new KickstarterException("incorrect URL");
+		request.setAttribute("error", e);
 		request.getRequestDispatcher("Error.jsp").forward(request, response);
 	}
 

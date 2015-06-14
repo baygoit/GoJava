@@ -30,17 +30,17 @@ public class DBquoteService implements QuoteService {
 			quote = new Quote();
 			quote.setID(id);
 			quote.setQuote(resultSet.getString("quote"));
-			
+
 		} catch (SQLException e) {
 			quote = null;
-			throw new KickstarterException(
-					"quote not found", e);
-		}
-		try {
-			Dao.getDatabaseService().closeConnection();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new KickstarterException("quote not found", e);
+		} finally {
+			try {
+				Dao.getDatabaseService().closeConnection();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 
 		return quote;

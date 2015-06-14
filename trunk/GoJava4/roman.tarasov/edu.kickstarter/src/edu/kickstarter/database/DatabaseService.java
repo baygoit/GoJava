@@ -42,6 +42,7 @@ public class DatabaseService {
 	}
 
 	public synchronized void closeConnection() throws SQLException  {
+	System.err.println("close-----------");
 		connection.close();
 	}
 }

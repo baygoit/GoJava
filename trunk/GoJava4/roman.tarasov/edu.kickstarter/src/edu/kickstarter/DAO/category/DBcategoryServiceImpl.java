@@ -25,8 +25,13 @@ public class DBcategoryServiceImpl implements CategoryService {
 					.executeQuery("SELECT COUNT(*) AS rowcount FROM categories");
 			resultSet.next();
 			int count = resultSet.getInt("rowcount");
+
 			resultSet = statement
 					.executeQuery("SELECT id,category  FROM categories");
+
+			if (resultSet.wasNull()) {
+				throw new KickstarterException("categories not found");
+			}
 			for (int pointer = 0; pointer < count; pointer++) {
 				resultSet.next();
 				Category category = new Category();
@@ -34,16 +39,17 @@ public class DBcategoryServiceImpl implements CategoryService {
 				category.setName(resultSet.getString("category"));
 				categories.add(category);
 			}
-			
+
 		} catch (SQLException e) {
 			categories = null;
 			throw new KickstarterException("categories not found", e);
-		}
-		try {
-			Dao.getDatabaseService().closeConnection();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} finally {
+			try {
+				Dao.getDatabaseService().closeConnection();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		return categories;
 	}

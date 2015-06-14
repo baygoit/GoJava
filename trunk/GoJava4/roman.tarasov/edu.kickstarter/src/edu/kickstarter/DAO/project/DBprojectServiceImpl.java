@@ -41,20 +41,25 @@ public class DBprojectServiceImpl implements ProjectService {
 			sql.append(Integer.toString(categoryID));
 
 			ResultSet rs = statement.executeQuery(sql.toString());
-			while (rs.next()) {
-				sorted.add(newProject(rs));
+
+			if (!rs.next()) {
+				throw new KickstarterException("the category was not found");
 			}
+			do {
+				sorted.add(newProject(rs));
+			} while (rs.next());
 
 		} catch (SQLException | KickstarterException e) {
 			sorted = null;
 			throw new KickstarterException(
-					"sortProjectsByCategoryID exception", e);
-		}
-		try {
-			Dao.getDatabaseService().closeConnection();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+					"the category or projects was not found", e);
+		} finally {
+			try {
+				Dao.getDatabaseService().closeConnection();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		return sorted;
 	}
@@ -111,14 +116,15 @@ public class DBprojectServiceImpl implements ProjectService {
 			project = newProject(rs);
 		} catch (KickstarterException | SQLException e) {
 			project = null;
-		
-			throw new KickstarterException("project not found", e);
-		}
-		try {
-			Dao.getDatabaseService().closeConnection();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+
+			throw new KickstarterException("the project was not found", e);
+		} finally {
+			try {
+				Dao.getDatabaseService().closeConnection();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		return project;
 	}

@@ -9,7 +9,7 @@
 </head>
 <body>
 	<h1>PROJECTS</h1>
-<input type="button" value="previous page" onclick="self.location='${url}';" />
+<input type="button" value="previous page" onclick="self.location='${previous}';" />
 	<c:forEach var="project" items="${sortedProjects}">
 		<h2>
 			<a
@@ -31,7 +31,7 @@
 		</h3>
 		<br />
 	</c:forEach>
-	<input type="button" value="previous page" onclick="self.location='${url}';" />
+	<input type="button" value="previous page" onclick="self.location='${previous}';" />
 
 </body>
 </html>
