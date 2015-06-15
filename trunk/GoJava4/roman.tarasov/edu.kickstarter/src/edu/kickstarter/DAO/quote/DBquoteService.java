@@ -33,13 +33,16 @@ public class DBquoteService implements QuoteService {
 
 		} catch (SQLException e) {
 			quote = null;
-			throw new KickstarterException("quote not found", e);
+			
 		} finally {
 			try {
 				Dao.getDatabaseService().closeConnection();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+			}
+			if(quote==null){
+				throw new KickstarterException("quote not found");
 			}
 		}
 

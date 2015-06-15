@@ -42,13 +42,16 @@ public class DBcategoryServiceImpl implements CategoryService {
 
 		} catch (SQLException e) {
 			categories = null;
-			throw new KickstarterException("categories not found", e);
+
 		} finally {
 			try {
 				Dao.getDatabaseService().closeConnection();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+			}
+			if (categories == null) {
+				throw new KickstarterException("categories not found");
 			}
 		}
 		return categories;

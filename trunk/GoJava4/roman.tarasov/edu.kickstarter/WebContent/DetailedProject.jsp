@@ -8,7 +8,8 @@
 <title>Main</title>
 </head>
 <body>
-<input type="button" value="previous page" onclick="self.location='${previous}';" />
+	<input type="button" value="previous page"
+		onclick="self.location='${previous}';" />
 	<h1>
 		<c:out value=" ${detailedProject.name}" />
 	</h1>
@@ -30,6 +31,7 @@
 	<h3>
 		<c:out value=" linkToVideo= ${detailedProject.linkToVideo}" />
 	</h3>
-	<input type="button" value="previous page" onclick="self.location='${previous}';" />
+	<input type="button" value="previous page"
+		onclick="self.location='${previous}';" />
 </body>
 </html>

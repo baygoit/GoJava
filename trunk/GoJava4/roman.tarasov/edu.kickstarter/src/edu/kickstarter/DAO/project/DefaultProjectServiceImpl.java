@@ -2,6 +2,8 @@ package edu.kickstarter.DAO.project;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import edu.kickstarter.database.KickstarterException;
 import edu.kickstarter.entity.Project;
 
 public class DefaultProjectServiceImpl implements ProjectService {
@@ -67,7 +69,7 @@ public class DefaultProjectServiceImpl implements ProjectService {
 	}
 
 	@Override
-	public List<Project> sortProjectsByCategoryID(int categoryID) {
+	public List<Project> sortProjectsByCategoryID(int categoryID) throws KickstarterException {
 		List<Project> sortedProjects = new ArrayList<Project>();
 		int length = projects.size();
 		for (int index = 0; index < length; index++) {
@@ -76,11 +78,15 @@ public class DefaultProjectServiceImpl implements ProjectService {
 				sortedProjects.add(project);
 			}
 		}
+		if(sortedProjects.size()==0){
+			throw new KickstarterException(
+					"the category or projects was not found");
+		}
 		return sortedProjects;
 	}
 
 	@Override
-	public Project getProjectById(int ID) {
+	public Project getProjectById(int ID) throws KickstarterException {
 		int length = projects.size();
 		for (int index = 0; index < length; index++) {
 			Project currentProject = (Project) projects.get(index);
@@ -88,6 +94,6 @@ public class DefaultProjectServiceImpl implements ProjectService {
 				return currentProject;
 			}
 		}
-		return null;
+		throw new KickstarterException("the project was not found");
 	}
 }

@@ -51,14 +51,17 @@ public class DBprojectServiceImpl implements ProjectService {
 
 		} catch (SQLException | KickstarterException e) {
 			sorted = null;
-			throw new KickstarterException(
-					"the category or projects was not found", e);
+
 		} finally {
 			try {
 				Dao.getDatabaseService().closeConnection();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+			}
+			if (sorted == null) {
+				throw new KickstarterException(
+						"the category or projects was not found");
 			}
 		}
 		return sorted;
@@ -117,13 +120,15 @@ public class DBprojectServiceImpl implements ProjectService {
 		} catch (KickstarterException | SQLException e) {
 			project = null;
 
-			throw new KickstarterException("the project was not found", e);
 		} finally {
 			try {
 				Dao.getDatabaseService().closeConnection();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+			}
+			if (project == null) {
+				throw new KickstarterException("the project was not found");
 			}
 		}
 		return project;

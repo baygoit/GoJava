@@ -8,6 +8,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import edu.kickstarter.DAO.Dao;
 import edu.kickstarter.database.KickstarterException;
@@ -30,9 +31,14 @@ public class Main extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		
+		doProcess(request, response);
+	}
+
+	public void doProcess(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+
 		String action = getAction(request);
-		if (action.startsWith("/main")||action.equals("/")) {
+		if (action.startsWith("/main") || action.equals("/")) {
 			forwardMain(request, response);
 			return;
 		}
@@ -47,7 +53,7 @@ public class Main extends HttpServlet {
 			forwardDetailedProject(request, response);
 			return;
 		}
-		KickstarterException e=new KickstarterException("incorrect URL");
+		KickstarterException e = new KickstarterException("incorrect URL");
 		request.setAttribute("error", e);
 		request.getRequestDispatcher("Error.jsp").forward(request, response);
 	}
@@ -55,7 +61,7 @@ public class Main extends HttpServlet {
 	private void forwardDetailedProject(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		Model detailProject = new DetailProjectImpl();
-		Object attribute;
+		Object projectFromModel;
 
 		try {
 			String parameter = request.getParameter("project");
@@ -66,8 +72,9 @@ public class Main extends HttpServlet {
 				throw new KickstarterException("illegal number of project ", e);
 			}
 			detailProject.setParameters(projectID);
-			attribute = detailProject.getAttribute("detailedProject");
-			Project detailedProject = (Project) attribute;
+			projectFromModel = detailProject.getAttribute("detailedProject");
+			Project detailedProject = (Project) projectFromModel;
+
 			request.setAttribute("detailedProject", detailedProject);
 			request.getRequestDispatcher("DetailedProject.jsp").forward(
 					request, response);
@@ -83,19 +90,30 @@ public class Main extends HttpServlet {
 
 		Model projectsModel = new ProjectsImpl();
 		Object attribute;
-
+		Integer categoryID = null;
+		String parameterFromURL = request.getParameter("category");
 		try {
-			Integer categoryID = 0;
-			String parameter = request.getParameter("category");
-			try {
-				categoryID = Integer.valueOf(parameter);
-			} catch (NumberFormatException e) {
-				throw new KickstarterException("illegal number of category ", e);
+			categoryID = Integer.valueOf(parameterFromURL);
+		} catch (NumberFormatException e) {
+
+		}
+		if (categoryID == null) {
+			HttpSession session = request.getSession();
+			Object objectAttribute = session.getAttribute("category");
+			if (objectAttribute == null) {
+				forwardMain(request, response);
+				return;
 			}
+			categoryID = (Integer) session.getAttribute("category");
+		}
+		try {
 			projectsModel.setParameters(categoryID);
 			attribute = projectsModel.getAttribute("sortedProjects");
 			@SuppressWarnings("unchecked")
 			List<Project> sortedProjects = (List<Project>) attribute;
+			HttpSession session = request.getSession();
+			session.setAttribute("category", categoryID);
+
 			request.setAttribute("sortedProjects", sortedProjects);
 			request.getRequestDispatcher("Projects.jsp").forward(request,
 					response);
@@ -141,7 +159,7 @@ public class Main extends HttpServlet {
 		}
 	}
 
-	private String getAction(HttpServletRequest req) {
+	public String getAction(HttpServletRequest req) {
 		String requestURI = req.getRequestURI();
 		String action = requestURI.substring(req.getContextPath().length(),
 				requestURI.length());

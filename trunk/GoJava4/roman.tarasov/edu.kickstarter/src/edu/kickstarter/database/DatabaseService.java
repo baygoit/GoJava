@@ -34,15 +34,15 @@ public class DatabaseService {
 						.lookup("java:comp/env/jdbc/kickstarter");
 			}
 			connection = ds.getConnection();
-		} catch (SQLException | NamingException e) {
+
+		} catch (NamingException | SQLException e) {
 			ds = null;
-			throw new KickstarterException("Exception", e);
+			throw new KickstarterException("DatabaseService exception", e);
 		}
 		return connection;
 	}
 
-	public synchronized void closeConnection() throws SQLException  {
-	System.err.println("close-----------");
+	public synchronized void closeConnection() throws SQLException {
 		connection.close();
 	}
 }
