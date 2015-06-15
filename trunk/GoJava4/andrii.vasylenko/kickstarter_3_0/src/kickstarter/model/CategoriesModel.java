@@ -1,52 +1,25 @@
 package kickstarter.model;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
-import kickstarter.exception.NoSuchDataException;
 import kickstarter.model.dao.DAO;
-import kickstarter.model.engine.Category;
 
 public class CategoriesModel implements Model {
 	private DAO dao;
 
 	@Override
-	public void init(DAO dao, List<Object> parameters) {
+	public void init(DAO dao) {
 		this.dao = dao;
 	}
 
 	@Override
-	public List<String> getData() throws SQLException {
-		List<String> result = new ArrayList<>();
+	public Map<String, Object> getData(Map<String, Object> parameters) throws SQLException {
+		Map<String, Object> result = new HashMap<String, Object>();
 
-		for (Category category : dao.getCategories()) {
-			result.add(getDescription(category.getId(), category.getName()));
-		}
+		result.put("categories", dao.getCategories());
 
 		return result;
-	}
-
-	@Override
-	public boolean showOnly() {
-		return false;
-	}
-
-	@Override
-	public List<Object> getParameters(int item, String input) throws NoSuchDataException, SQLException {
-		List<Object> result = new ArrayList<>();
-
-		if (item != 0) {
-			int id = item;
-			Category category = dao.getCategory(id);
-			result.add(category);
-		}
-
-		return result;
-	}
-
-	private String getDescription(int id, String name) {
-		int item = id;
-		return String.format("%s - %s", item, name);
 	}
 }

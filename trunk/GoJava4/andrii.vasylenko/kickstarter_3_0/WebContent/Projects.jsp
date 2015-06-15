@@ -29,5 +29,12 @@
 		</h3>
 		<br />
 	</c:forEach>
+	<br />
+	<br />
+	<h3>
+		<a href="/kickstarter/categories"> 
+			<c:out value="<- back to categories" />
+		</a>
+	</h3>
 </body>
 </html>

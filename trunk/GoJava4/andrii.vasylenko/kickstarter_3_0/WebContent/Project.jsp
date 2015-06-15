@@ -38,5 +38,11 @@
 			<c:out value=" question= ${question}" />
 		</h3>
 	</c:forEach>
-</body>
+	<br />
+	<br />
+	<h3>
+		<a href="/kickstarter/projects?category=${project.categoryId}"> 
+			<c:out value="<- back to projects" />
+		</a>
+	</h3></body>
 </html>

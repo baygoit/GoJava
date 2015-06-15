@@ -1,17 +1,11 @@
 package kickstarter.model;
 
-import java.sql.SQLException;
-import java.util.List;
+import java.util.Map;
 
-import kickstarter.exception.ProcessedException;
 import kickstarter.model.dao.DAO;
 
 public interface Model {
-	void init(DAO dao, List<Object> parameters);
+	void init(DAO dao);
 
-	List<String> getData() throws ProcessedException, SQLException;
-
-	boolean showOnly();
-
-	List<Object> getParameters(int item, String input) throws ProcessedException, SQLException;
+	Map<String, Object> getData(Map<String, Object> parameters) throws Exception;
 }

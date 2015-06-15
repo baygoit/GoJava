@@ -1,33 +1,40 @@
 package kickstarter.model.dao;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+
+import org.apache.tomcat.dbcp.dbcp.BasicDataSource;
+
 public class ConnectionPoolImpl implements ConnectionPool {
-	private static final String SQL_URL = "jdbc:postgresql://localhost:5433/kickstarter";
-	private static final String SQL_USER = "postgres";
-	private static final String SQL_PASSWORD = "111";
-	
-	private Connection connection;
+	private static volatile ConnectionPool instance;
 
-	public ConnectionPoolImpl() throws SQLException {
-		try {
-			Class.forName("org.postgresql.Driver");
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+	private static volatile BasicDataSource connectionPool;
+
+	public static ConnectionPool getInstance() throws SQLException {
+		if (instance == null) {
+			synchronized (ConnectionPoolImpl.class) {
+				if (instance == null) {
+					instance = new ConnectionPoolImpl();
+				}
+			}
 		}
-		this.connection = DriverManager.getConnection(SQL_URL, SQL_USER, SQL_PASSWORD);
+		return instance;
+	}
+
+	private ConnectionPoolImpl() throws SQLException {
+		try {
+			InitialContext initCtx = new InitialContext();
+			connectionPool = (BasicDataSource) initCtx.lookup("java:comp/env/jdbc/kickstarter");
+		} catch (NamingException e) {
+			throw new SQLException(e);
+		}
 	}
 
 	@Override
-	public Connection getConnection() {
-		return connection;
-	}
-
-	@Override
-	public void close() throws Exception {
-		connection.close();
+	public Connection getConnection() throws SQLException {
+		return connectionPool.getConnection();
 	}
 }

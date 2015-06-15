@@ -1,40 +1,26 @@
 package kickstarter.model;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import kickstarter.exception.NoSuchDataException;
 import kickstarter.model.dao.DAO;
-import kickstarter.model.engine.Quote;
 
 public class QuoteModel implements Model {
 	private DAO dao;
 
 	@Override
-	public void init(DAO dao, List<Object> parameters) {
+	public void init(DAO dao) {
 		this.dao = dao;
 	}
 
 	@Override
-	public List<String> getData() throws NoSuchDataException, SQLException {
-		List<String> result = new ArrayList<>();
+	public Map<String, Object> getData(Map<String, Object> parameters) throws SQLException, NoSuchDataException {
+		Map<String, Object> result = new HashMap<String, Object>();
 
-		Quote quote = dao.getRandomQuote();
-		if (quote != null) {
-			result.add(quote.getQuote());
-		}
+		result.put("quote", dao.getRandomQuote());
 
 		return result;
-	}
-
-	@Override
-	public boolean showOnly() {
-		return true;
-	}
-
-	@Override
-	public List<Object> getParameters(int item, String input) {
-		return null;
 	}
 }
