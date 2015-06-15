@@ -2,83 +2,70 @@ package com.morkva;
 
 import com.morkva.entities.Category;
 import com.morkva.entities.Project;
-import com.morkva.entities.Quote;
-import com.morkva.logic.*;
+import com.morkva.logic.ConsolePrinter;
+import com.morkva.logic.ConsoleReader;
+import com.morkva.logic.Printer;
+import com.morkva.logic.Reader;
+import com.morkva.model.CategoryRepositoryImpl;
+import com.morkva.model.ProjectRepositoryImpl;
+import com.morkva.model.QuoteRepositoryImpl;
+import com.morkva.model.dao.DAO;
+import com.morkva.model.dao.DAOFactory;
 import com.morkva.model.dao.PersistException;
-import com.morkva.model.dao.jdbc.DAOFactory;
 import com.morkva.model.dao.jdbc.mysql.MySQLDaoFactory;
-import com.morkva.model.impl.CategoryRepository;
-import com.morkva.model.impl.QuoteRepository;
-import com.morkva.utils.PaymentOption;
 
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.SQLException;
-import java.util.*;
+import java.util.Random;
 
 /**
  * Created by vladyslav on 07.05.15.
  */
 public class Main {
 
-    static List<Category> defaultCategories = new ArrayList<>(Arrays.asList(
-            new Category(1, "Software"),
-            new Category(2, "Video"),
-            new Category(3, "Games")
-    ));
-
-    static List<Project> softwareCategoryProjects = new ArrayList<>(Arrays.asList(
-            new Project(1, "Instant Messenger Qip", "A very tiny instant messenger for all Platforms and IE6", 50000, 37000, 5, "History of the project", "http://youtube.com/kdjh1231"),
-            new Project(2, "Kickstarter", "One more kickstarter", 100, 5, 31, "History of the project", "http://youtube.com/kdjh1231"),
-            new Project(3, "Global IT forum", "IT forum for all planet and our solar system", 5, 2, 100, "History of the project", "http://youtube.com/kdjh1231")
-    ));
-
-    static List<Project> videoCategoryProjects = new ArrayList<>(Arrays.asList(
-            new Project(4, "Avengers 16", "New avengers from IT developers", 500, 0, 128, "History of the project", "http://youtube.com/kdjh1231"),
-            new Project(5, "Avatar 32", "New blue people from blue planet with blue scenario, not gay", 59999000, 49999000, 256, "History of the project", "http://youtube.com/kdjh1231"),
-            new Project(6, "Batmen 64", "Need anoter one actor for batman, not gay", 699, 3, 512, "History of the project", "http://youtube.com/kdjh1231"),
-            new Project(7, "Superman 1024", "History of a developer from Crypton", 600000, 4500, 1024, "History of the project", "http://youtube.com/kdjh1231")
-    ));
-
-    static List<Project> gamesCategoryProjects = new ArrayList<>(Arrays.asList(
-            new Project(8, "256-bit mario", "New mario for Oculus Rift", 3000, 0, 60, "History of the project", "http://youtube.com/kdjh1231"),
-            new Project(9, "Quake 2.5", "Doom is too boring", 10000, 500, 31, "History of the project", "http://youtube.com/kdjh1231"),
-            new Project(10, "CS 3.14", "New counter strike from ukrainian developers (need money for beer)", 100, 0, 3, "History of the project", "http://youtube.com/kdjh1231")
-
-    ));
-
-    static List<Quote> defaultQuotes = new ArrayList<>(Arrays.asList(
-            new Quote(1, "Test Quote", "Test author"),
-            new Quote(2, "«Пользователь» — слово, используемое компьютерщиками-профессионалами вместо слова «идиот».", "Дейв Барри"),
-            new Quote(3, "Каждый дурак может написать программу, которую может понять компьютер. Хороший программист пишет программу, которую может понять человек.", "Мартин Фаулер"),
-            new Quote(4, "Написание первых 90% программы занимает 90% времени. Оставшиеся 10% также требуют 90% времени, а окончательная шлифовка — еще 90% времени.", "Нейл Рубенкинг"),
-            new Quote(5, "Программирование — это гонка между компьютерщиками, которые создают программы, все лучше защищенные от дурака, и природой, которая создает все лучших дураков. Пока что природа выигрывает.", "Рич Кук")
-
-    ));
-
     public static void main(String[] args) throws IOException {
-
-        Map<Integer, PaymentOption> paymentOptions = new HashMap<>();
-        paymentOptions.put(1, new PaymentOption("Descr 1", 10));
-        paymentOptions.put(2, new PaymentOption("Descr 2", 50));
-        paymentOptions.put(3, new PaymentOption("Descr 3", 100));
-        softwareCategoryProjects.get(0).setPaymentOptions(paymentOptions);
-
-        defaultCategories.get(0).setProjects(softwareCategoryProjects);
-        defaultCategories.get(1).setProjects(videoCategoryProjects);
-        defaultCategories.get(2).setProjects(gamesCategoryProjects);
-
+        initTempData();
         DAOFactory<Connection> daoFactory = new MySQLDaoFactory();
 
         Printer printer = new ConsolePrinter();
         Reader reader = new ConsoleReader();
         KickstarterApp app = new KickstarterApp(printer, reader);
+        app.setQuoteRepository(new QuoteRepositoryImpl(daoFactory));
         try {
-            app.setQuoteRepository(new QuoteRepository(daoFactory.getDao(daoFactory.getContext(), Quote.class)));
+            app.setCategoryRepository(new CategoryRepositoryImpl(daoFactory.getDao(daoFactory.getContext(), Category.class)));
         } catch (PersistException e) {
             e.printStackTrace();
         }
-        app.setCategoryRepository(new CategoryRepository(defaultCategories));
+        try {
+            app.setProjectRepository(new ProjectRepositoryImpl(daoFactory.getDao(daoFactory.getContext(), Project.class)));
+        } catch (PersistException e) {
+            e.printStackTrace();
+        }
         app.run();
+    }
+
+    public static void initTempData() {
+        DAOFactory<Connection> daoFactory = new MySQLDaoFactory();
+        Connection connection = null;
+        DAO<Category, Integer> categoryDao;
+        DAO<Project, Integer> projectDao;
+
+        try {
+            connection = daoFactory.getContext();
+            categoryDao = daoFactory.getDao(connection, Category.class);
+            projectDao = daoFactory.getDao(connection, Project.class);
+
+            for (int i = 0; i < 5; i++) {
+                categoryDao.persist(new Category("Name " + i));
+            }
+
+            Category category = categoryDao.getByPK(1);
+            for (int i = 0; i < 5; i++) {
+                projectDao.persist(new Project("Name " + i, "Short description " + i, new Random().nextInt(10) * i, 0, 30, "History " + i, "Url video " + i, category));
+            }
+
+        } catch (PersistException e) {
+            e.printStackTrace();
+        }
     }
 }

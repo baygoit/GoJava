@@ -2,8 +2,8 @@ package com.morkva.ui;
 
 import com.morkva.entities.Category;
 import com.morkva.entities.Project;
-import com.morkva.entities.User;
-import com.morkva.model.IRepository;
+import com.morkva.model.CategoryRepository;
+import com.morkva.model.ProjectRepository;
 import com.morkva.utils.UserType;
 
 import java.util.List;
@@ -12,15 +12,15 @@ import java.util.List;
  * Created by vladyslav on 22.05.15.
  */
 public class Model {
-    IRepository<Category> categoryRepository;
-    IRepository<User> userRepository;
+    CategoryRepository categoryRepository;
+    ProjectRepository projectRepository;
     private Category currentCategory;
     private Project currentProject;
     private UserType currentUserType;
 
-    public Model(IRepository<Category> categoryRepository, IRepository<User> userRepository) {
+    public Model(CategoryRepository categoryRepository, ProjectRepository projectRepository) {
         this.categoryRepository = categoryRepository;
-        this.userRepository = userRepository;
+        this.projectRepository = projectRepository;
     }
 
     public Category getCurrentCategory() {
@@ -39,16 +39,8 @@ public class Model {
         return categoryRepository.getById(categoryId);
     }
 
-    public Project getProjectByIdFromCurrentCategory(int id) {
-        List<Project> projects = currentCategory.getProjects();
-        Project result = null;
-        for (Project project : projects) {
-            if (project.getId() == id) {
-                result = project;
-                break;
-            }
-        }
-        return result;
+    public List<Project> getProjectsFromCategory(Category category) {
+        return projectRepository.getProjectsForCategory(category);
     }
 
     public void setCurrentProject(Project currentProject) {
@@ -65,5 +57,9 @@ public class Model {
 
     public UserType getCurrentUserType() {
         return currentUserType;
+    }
+
+    public Project getProjectById(Integer keyCode) {
+        return projectRepository.getById(keyCode);
     }
 }

@@ -1,22 +1,21 @@
 package com.morkva;
 
-import com.morkva.entities.Category;
-import com.morkva.entities.Quote;
-import com.morkva.entities.User;
-import com.morkva.logic.*;
-import com.morkva.model.IRepository;
+import com.morkva.logic.Printer;
+import com.morkva.logic.Reader;
+import com.morkva.model.CategoryRepository;
+import com.morkva.model.ProjectRepository;
+import com.morkva.model.QuoteRepository;
 import com.morkva.ui.Model;
 import com.morkva.ui.ViewHelper;
 import com.morkva.ui.ViewResolver;
 import com.morkva.ui.controllers.LoginController;
 
-import java.util.Random;
-
 public class KickstarterApp {
 
-    private IRepository<Category> categoryRepository;
-    private IRepository<Quote> quoteRepository;
-    private IRepository<User> userRepository;
+    private CategoryRepository categoryRepository;
+    private ProjectRepository projectRepository;
+    private QuoteRepository quoteRepository;
+//    private Repository<User> userRepository;
 
     private Reader reader;
 	private Printer printer;
@@ -29,7 +28,7 @@ public class KickstarterApp {
     
     public void run() {
         showQuote();
-        Model model = new Model(categoryRepository, userRepository);
+        Model model = new Model(categoryRepository, projectRepository);
         ViewHelper viewHelper = new ViewHelper(model, printer, reader);
         ViewResolver.getInstance().setNextView(new LoginController(model, printer, reader));
         viewHelper.runCommand();
@@ -37,7 +36,7 @@ public class KickstarterApp {
 
 
     private void showQuote() {
-        println(quoteRepository.getById(1));
+        println(quoteRepository.getRandomQuote());
     }
     
     public void print(Object o) {
@@ -48,15 +47,19 @@ public class KickstarterApp {
     	print(o + "\n");
     }
 
-    public void setCategoryRepository(IRepository<Category> categoryRepository) {
+    public void setCategoryRepository(CategoryRepository categoryRepository) {
         this.categoryRepository = categoryRepository;
     }
 
-    public void setQuoteRepository(IRepository<Quote> quoteRepository) {
+    public void setProjectRepository(ProjectRepository projectRepository) {
+        this.projectRepository = projectRepository;
+    }
+
+    public void setQuoteRepository(QuoteRepository quoteRepository) {
         this.quoteRepository = quoteRepository;
     }
 
-    public void setUserRepository(IRepository<User> userRepository) {
-        this.userRepository = userRepository;
-    }
+//    public void setUserRepository(Repository<User> userRepository) {
+//        this.userRepository = userRepository;
+//    }
 }

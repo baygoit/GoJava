@@ -2,25 +2,25 @@ package com.morkva.model.dao.jdbc.mysql;
 
 import com.morkva.entities.Quote;
 import com.morkva.model.dao.DAO;
+import com.morkva.model.dao.DAOFactory;
 import com.morkva.model.dao.PersistException;
 import com.morkva.model.dao.jdbc.AbstractJDBCDao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
 /**
  * Created by koros on 06.06.2015.
  */
-public class MySQLQuoteDAO extends AbstractJDBCDao<Quote, Integer>{
+public class MySQLQuoteDAO extends AbstractJDBCDao<Quote, Integer> implements DAO<Quote, Integer>{
 
 
-    public MySQLQuoteDAO(Connection connection) {
-        super(connection);
+
+    public MySQLQuoteDAO(DAOFactory<Connection> parentFactory, Connection connection) {
+        super(parentFactory, connection);
     }
 
     @Override
@@ -79,5 +79,11 @@ public class MySQLQuoteDAO extends AbstractJDBCDao<Quote, Integer>{
         } catch (Exception e) {
             throw new PersistException(e);
         }
+    }
+
+    @Override
+    public Quote create() throws PersistException {
+        Quote quote = new Quote();
+        return persist(quote);
     }
 }

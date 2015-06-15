@@ -27,7 +27,7 @@ public class CategoryView implements IView {
     public void showContent() {
         Category category = model.getCurrentCategory();
         printer.print("Select project: ");
-        for (Project project : category.getProjects()) {
+        for (Project project : model.getProjectsFromCategory(model.getCurrentCategory())) {
             printer.print(project.getId() + ": " + project.getShortInfo());
         }
 
@@ -42,7 +42,7 @@ public class CategoryView implements IView {
                 ViewResolver.getInstance().setNextView(new CategoriesController(model, reader, printer));
                 break;
             } else if (keyCode > 0) {
-                model.setCurrentProject(model.getProjectByIdFromCurrentCategory(keyCode));
+                model.setCurrentProject(model.getProjectById(keyCode));
                 ViewResolver.getInstance().setNextView(new ProjectController(printer, model, reader));
                 break;
             } else {

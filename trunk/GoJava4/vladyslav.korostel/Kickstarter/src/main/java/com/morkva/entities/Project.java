@@ -1,5 +1,6 @@
 package com.morkva.entities;
 
+import com.morkva.model.dao.Identified;
 import com.morkva.utils.PaymentOption;
 
 import java.util.Map;
@@ -7,8 +8,9 @@ import java.util.Map;
 /**
  * Created by vladyslav on 02.05.15.
  */
-public class Project extends Entity {
+public class Project implements Identified<Integer> {
 
+    private Integer id;
     private Category category;
     private String name;
     private String shortDescr;
@@ -20,16 +22,15 @@ public class Project extends Entity {
     private Map<Integer, PaymentOption> paymentOptions;
 
     public Project(
-            int id,
             String name,
             String shortDescr,
             int needMoney,
             int currentMoney,
             int daysLeft,
             String history,
-            String urlVideo
+            String urlVideo,
+            Category category
     ) {
-        super(id);
         this.name = name;
         this.shortDescr = shortDescr;
         this.needMoney = needMoney;
@@ -37,6 +38,10 @@ public class Project extends Entity {
         this.daysLeft = daysLeft;
         this.history = history;
         this.urlVideo = urlVideo;
+        this.category = category;
+    }
+
+    public Project() {
     }
 
     public String getName() {
@@ -137,4 +142,12 @@ public class Project extends Entity {
     }
 
 
+    @Override
+    public Integer getId() {
+        return id;
+    }
+
+    protected void setId(Integer id) {
+        this.id = id;
+    }
 }

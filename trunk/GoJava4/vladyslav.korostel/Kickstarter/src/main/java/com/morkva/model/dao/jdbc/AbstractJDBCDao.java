@@ -1,25 +1,30 @@
 package com.morkva.model.dao.jdbc;
 
-import com.morkva.entities.Entity;
 import com.morkva.model.dao.DAO;
+import com.morkva.model.dao.DAOFactory;
+import com.morkva.model.dao.Identified;
 import com.morkva.model.dao.PersistException;
 
 import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by koros on 09.06.2015.
  */
-public abstract class AbstractJDBCDao<T extends Entity, PK extends Serializable> implements DAO<T, PK> {
+public abstract class AbstractJDBCDao<T extends Identified<PK>, PK extends Integer> implements DAO<T, PK> {
 
     private Connection connection;
+    private DAOFactory<Connection> parentFactory;
+    private Set<ManyToOne> relations = new HashSet<>();
 
-    public AbstractJDBCDao(Connection connection) {
+    public AbstractJDBCDao(DAOFactory<Connection> parentFactory, Connection connection) {
         this.connection = connection;
+        this.parentFactory = parentFactory;
     }
 
     public abstract String getSelectQuery();
@@ -29,14 +34,28 @@ public abstract class AbstractJDBCDao<T extends Entity, PK extends Serializable>
 
     protected abstract List<T> parseResultSet(ResultSet resultSet) throws PersistException;
 
+    protected Identified getDependence(Class<? extends Identified> dtoClass, Serializable pk) throws PersistException {
+        return parentFactory.getDao(connection, dtoClass).getByPK(pk);
+    }
+
     protected abstract void prepareStatementForInsert(PreparedStatement statement, T object) throws PersistException;
     protected abstract void prepareStatementForUpdate(PreparedStatement statement, T object) throws PersistException;
 
+    protected boolean addRelation(Class<? extends Identified> ownerClass, String field) {
+        try {
+            return relations.add(new ManyToOne(ownerClass, parentFactory, field));
+        } catch (NoSuchFieldException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     @Override
-    public T create(T object) throws PersistException {
+    public T persist(T object) throws PersistException {
         if (object.getId() != null) {
             throw new PersistException("Object is already persist.");
         }
+
+        saveDependences(object);
 
         T persistInstance;
 
@@ -64,6 +83,24 @@ public abstract class AbstractJDBCDao<T extends Entity, PK extends Serializable>
         return persistInstance;
     }
 
+    private void saveDependences(Identified owner) throws PersistException {
+        for (ManyToOne m : relations) {
+            try {
+                if (m.getDependence(owner) == null) {
+                    continue;
+                }
+                if (m.getDependence(owner).getId() == null) {
+                    Identified depend = m.persistDependence(owner, connection);
+                    m.setDependence(owner, depend);
+                } else {
+                    m.updateDependence(owner, connection);
+                }
+            } catch (Exception e) {
+                throw new PersistException("Exception  on save dependence in relation " + m + ".", e);
+            }
+        }
+    }
+
     @Override
     public void delete(T object) throws PersistException {
         String sql = getDeleteQuery();
@@ -84,7 +121,7 @@ public abstract class AbstractJDBCDao<T extends Entity, PK extends Serializable>
     }
 
     @Override
-    public T getByPK(int id) throws PersistException {
+    public T getByPK(Integer id) throws PersistException {
         List<T> list;
         String sql = getSelectQuery();
         sql += " WHERE id = ?";
@@ -107,6 +144,7 @@ public abstract class AbstractJDBCDao<T extends Entity, PK extends Serializable>
 
     @Override
     public void update(T object) throws PersistException {
+        saveDependences(object);
         String sql = getUpdateQuery();
         try (PreparedStatement statement = connection.prepareStatement(sql)){
             prepareStatementForUpdate(statement, object);

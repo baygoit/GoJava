@@ -1,17 +1,23 @@
 package com.morkva.entities;
 
-import java.util.List;
+import com.morkva.model.dao.Identified;
 
 /**
  * Created by vladyslav on 02.05.15.
  */
-public class Category extends Entity{
+public class Category implements Identified<Integer> {
 
+    private Integer id;
     private String name;
-    private List<Project> projects;
 
     public Category(Integer id, String name) {
-        super(id);
+        this.name = name;
+    }
+
+    public Category() {
+    }
+
+    public Category(String name) {
         this.name = name;
     }
 
@@ -23,20 +29,22 @@ public class Category extends Entity{
         this.name = name;
     }
 
-    public List<Project> getProjects() {
-        return projects;
+    @Override
+    public Integer getId() {
+        return id;
     }
 
-    public void setProjects(List<Project> projects) {
-        this.projects = projects;
+    protected void setId(Integer id) {
+        this.id = id;
     }
 
     @Override
     public String toString() {
         return "Category{" +
                 "name='" + name + '\'' +
-                ", projects=" + projects.toString() +
                 '}';
-        
     }
+
+
+
 }

@@ -1,6 +1,4 @@
-package com.morkva.model.dao.jdbc;
-
-import com.morkva.model.dao.DAO;
+package com.morkva.model.dao;
 
 /**
  * Created by koros on 09.06.2015.

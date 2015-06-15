@@ -1,10 +1,12 @@
 package com.morkva.model.dao.jdbc.mysql;
 
+import com.morkva.entities.Category;
+import com.morkva.entities.Project;
 import com.morkva.entities.Quote;
 import com.morkva.model.dao.DAO;
 import com.morkva.model.dao.PersistException;
-import com.morkva.model.dao.jdbc.DAOFactory;
-import com.morkva.model.dao.jdbc.DaoCreator;
+import com.morkva.model.dao.DAOFactory;
+import com.morkva.model.dao.DaoCreator;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -35,9 +37,22 @@ public class MySQLDaoFactory implements DAOFactory<Connection> {
         creators.put(Quote.class, new DaoCreator<Connection>() {
             @Override
             public DAO create(Connection connection) {
-                return new MySQLQuoteDAO(connection);
+                return new MySQLQuoteDAO(MySQLDaoFactory.this, connection);
             }
         });
+        creators.put(Category.class, new DaoCreator<Connection>() {
+            @Override
+            public DAO create(Connection connection) {
+                return new MySQLCategoryDao(MySQLDaoFactory.this, connection);
+            }
+        });
+        creators.put(Project.class, new DaoCreator<Connection>() {
+            @Override
+            public DAO create(Connection connection) {
+                return new MySQLProjectDao(MySQLDaoFactory.this, connection);
+            }
+        });
+
     }
 
     @Override

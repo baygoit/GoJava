@@ -1,17 +1,18 @@
 package com.morkva.entities;
 
+import com.morkva.model.dao.Identified;
 import com.morkva.utils.UserType;
 
 /**
  * Created by vladyslav on 28.05.15.
  */
-public class User extends Entity {
+public class User implements Identified<Integer> {
+    private Integer id;
     private String username;
     private String password;
     private UserType userType;
 
-    public User(int id) {
-        super(id);
+    public User() {
     }
 
     public String getUsername() {
@@ -24,5 +25,14 @@ public class User extends Entity {
 
     public UserType getUserType() {
         return userType;
+    }
+
+    @Override
+    public Integer getId() {
+        return id;
+    }
+
+    protected void setId(Integer id) {
+        this.id = id;
     }
 }
