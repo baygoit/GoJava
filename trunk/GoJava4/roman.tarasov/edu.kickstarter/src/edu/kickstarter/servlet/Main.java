@@ -14,9 +14,10 @@ import edu.kickstarter.DAO.Dao;
 import edu.kickstarter.database.KickstarterException;
 import edu.kickstarter.entity.Category;
 import edu.kickstarter.entity.Project;
+import edu.kickstarter.entity.ProjectComment;
 import edu.kickstarter.entity.Quote;
 import edu.kickstarter.model.DetailProjectImpl;
-import edu.kickstarter.model.MainModelImpl;
+import edu.kickstarter.model.MainImpl;
 import edu.kickstarter.model.Model;
 import edu.kickstarter.model.ProjectsImpl;
 
@@ -74,8 +75,13 @@ public class Main extends HttpServlet {
 			detailProject.setParameters(projectID);
 			projectFromModel = detailProject.getAttribute("detailedProject");
 			Project detailedProject = (Project) projectFromModel;
-
+			@SuppressWarnings("unchecked")
+			List<ProjectComment> comments = (List<ProjectComment>) detailProject
+					.getAttribute("comments");
+			
 			request.setAttribute("detailedProject", detailedProject);
+			request.setAttribute("comments", comments);
+			
 			request.getRequestDispatcher("DetailedProject.jsp").forward(
 					request, response);
 		} catch (KickstarterException e) {
@@ -126,7 +132,7 @@ public class Main extends HttpServlet {
 
 	private void forwardMain(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		Model mainModel = new MainModelImpl();
+		Model mainModel = new MainImpl();
 
 		try {
 			@SuppressWarnings("unchecked")

@@ -3,6 +3,9 @@ package edu.kickstarter.DAO;
 import edu.kickstarter.DAO.category.CategoryService;
 import edu.kickstarter.DAO.category.DBcategoryServiceImpl;
 import edu.kickstarter.DAO.category.DefaultCategoryServiceImpl;
+import edu.kickstarter.DAO.comments.CommentService;
+import edu.kickstarter.DAO.comments.DBcommentServiceImpl;
+import edu.kickstarter.DAO.comments.DefaultCommentServiceImpl;
 import edu.kickstarter.DAO.project.DBprojectServiceImpl;
 import edu.kickstarter.DAO.project.DefaultProjectServiceImpl;
 import edu.kickstarter.DAO.project.ProjectService;
@@ -18,6 +21,11 @@ public class Dao {
 	private static CategoryService categoryService;
 	private static QuoteService quoteService;
 	private static ProjectService projectService;
+	private static CommentService commentService;
+
+	public static CommentService getCommentService() {
+		return commentService;
+	}
 
 	public static ProjectService getProjectService() {
 		return projectService;
@@ -49,14 +57,13 @@ public class Dao {
 						categoryService = new DBcategoryServiceImpl();
 						quoteService = new DBquoteService();
 						projectService = new DBprojectServiceImpl();
-						// quoteService = new DefaultQuoteServiceImpl();
-						// categoryService = new DefaultCategoryServiceImpl();
-						// projectService=new DBprojectServiceImpl();
+						commentService = new DBcommentServiceImpl();
 
 					} catch (KickstarterException e) {
 						categoryService = new DefaultCategoryServiceImpl();
 						quoteService = new DefaultQuoteServiceImpl();
 						projectService = new DefaultProjectServiceImpl();
+						commentService = new DefaultCommentServiceImpl();
 					}
 				}
 			}

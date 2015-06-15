@@ -7,8 +7,8 @@ import edu.kickstarter.database.KickstarterException;
 import edu.kickstarter.entity.Category;
 import edu.kickstarter.entity.Quote;
 
-public class MainModelImpl implements Model {
-	public MainModelImpl() {
+public class MainImpl implements Model {
+	public MainImpl() {
 		Dao.getInstance();
 	}
 

@@ -8,7 +8,7 @@
 <title>Main</title>
 </head>
 <body>
-	<input type="button" value="previous page"
+	<input type="button" value="projects page"
 		onclick="self.location='${previous}';" />
 	<h1>
 		<c:out value=" ${detailedProject.name}" />
@@ -31,7 +31,14 @@
 	<h3>
 		<c:out value=" linkToVideo= ${detailedProject.linkToVideo}" />
 	</h3>
-	<input type="button" value="previous page"
+	<%="Comments:" %>
+	<br>
+	<c:forEach var="comment" items="${comments}">
+		<h3>
+			<c:out value="${comment.comment}" />
+		</h3>
+	</c:forEach>
+	<input type="button" value="projects page"
 		onclick="self.location='${previous}';" />
 </body>
 </html>
