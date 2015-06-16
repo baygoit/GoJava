@@ -1,12 +1,11 @@
 package vadya_zakusylo.kickstarter.my_sql;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
-import com.mysql.jdbc.Connection;
-import com.mysql.jdbc.PreparedStatement;
 
 import vadya_zakusylo.kickstarter.model.Category;
 import vadya_zakusylo.kickstarter.model.Project;
@@ -23,8 +22,7 @@ public class ProjectsDaoMySql extends ProjectsDao {
 	@Override
 	public List<Project> getProjectsList(Category category) {
 		try {
-			PreparedStatement preparedStatement = (PreparedStatement) connection
-					.prepareStatement(selectProjects());
+			PreparedStatement preparedStatement = connection.prepareStatement(selectProjects());
 			preparedStatement.setString(1, category.getName());
 			ResultSet resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {

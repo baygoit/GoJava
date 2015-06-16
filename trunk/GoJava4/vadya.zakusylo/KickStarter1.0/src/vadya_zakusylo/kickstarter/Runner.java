@@ -1,5 +1,6 @@
 package vadya_zakusylo.kickstarter;
 
+import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
@@ -19,8 +20,6 @@ import vadya_zakusylo.kickstarter.view.input.ConsoleInput;
 import vadya_zakusylo.kickstarter.view.input.Input;
 import vadya_zakusylo.kickstarter.view.output.ConsoleOutput;
 import vadya_zakusylo.kickstarter.view.output.Output;
-
-import com.mysql.jdbc.Connection;
 
 public class Runner {
 	private String driver = "com.mysql.jdbc.Driver";
@@ -48,8 +47,7 @@ public class Runner {
 	private void go() {
 		try {
 			Class.forName(driver);
-			try (Connection connection = (Connection) DriverManager.getConnection(url, user,
-					password)) {
+			try (Connection connection = DriverManager.getConnection(url, user, password)) {
 				quotesDao = new QuotesDaoMySql(connection);
 				categoriesDao = new CategoriesDaoMySql(connection);
 				projectsDao = new ProjectsDaoMySql(connection);

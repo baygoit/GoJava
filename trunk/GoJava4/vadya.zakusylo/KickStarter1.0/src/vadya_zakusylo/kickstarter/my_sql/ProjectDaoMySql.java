@@ -1,12 +1,11 @@
 package vadya_zakusylo.kickstarter.my_sql;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import vadya_zakusylo.kickstarter.model.dao.ProjectDao;
-
-import com.mysql.jdbc.Connection;
-import com.mysql.jdbc.PreparedStatement;
 
 public class ProjectDaoMySql extends ProjectDao {
 	private Connection connection;
@@ -19,8 +18,7 @@ public class ProjectDaoMySql extends ProjectDao {
 	public double getCurrenMoney(String nameProject) {
 		double currentMoney = 0;
 		try {
-			PreparedStatement preparedStatement = (PreparedStatement) connection
-					.prepareStatement(selectCurrentMoney());
+			PreparedStatement preparedStatement = connection.prepareStatement(selectCurrentMoney());
 			preparedStatement.setString(1, nameProject);
 			ResultSet resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
@@ -43,8 +41,7 @@ public class ProjectDaoMySql extends ProjectDao {
 	@Override
 	public void setCurrentMoney(double money, String nameProject) {
 		try {
-			PreparedStatement preparedStatement = (PreparedStatement) connection
-					.prepareStatement(updateCurrentMoney());
+			PreparedStatement preparedStatement = connection.prepareStatement(updateCurrentMoney());
 			preparedStatement.setDouble(1, money);
 			preparedStatement.setString(2, nameProject);
 			preparedStatement.executeUpdate();
@@ -64,8 +61,7 @@ public class ProjectDaoMySql extends ProjectDao {
 	@Override
 	public void setQuestion(String question, String name) {
 		try {
-			PreparedStatement preparedStatement = (PreparedStatement) connection
-					.prepareStatement(updateQuestion());
+			PreparedStatement preparedStatement = connection.prepareStatement(updateQuestion());
 			preparedStatement.setString(1, question);
 			preparedStatement.setString(2, name);
 			preparedStatement.executeUpdate();

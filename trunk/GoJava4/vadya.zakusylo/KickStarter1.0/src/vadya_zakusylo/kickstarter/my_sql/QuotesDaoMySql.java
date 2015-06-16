@@ -1,5 +1,7 @@
 package vadya_zakusylo.kickstarter.my_sql;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -7,9 +9,6 @@ import java.util.List;
 
 import vadya_zakusylo.kickstarter.model.Quote;
 import vadya_zakusylo.kickstarter.model.dao.QuotesDao;
-
-import com.mysql.jdbc.Connection;
-import com.mysql.jdbc.PreparedStatement;
 
 public class QuotesDaoMySql extends QuotesDao {
 	private Connection connection;
@@ -22,8 +21,7 @@ public class QuotesDaoMySql extends QuotesDao {
 	@Override
 	public List<Quote> getQuotesList() {
 		try {
-			PreparedStatement preparedStatement = (PreparedStatement) connection
-					.prepareStatement(selectQuotes());
+			PreparedStatement preparedStatement = connection.prepareStatement(selectQuotes());
 			ResultSet resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
 				quotes.add(new Quote(resultSet.getString("quotes_q.quote"), resultSet

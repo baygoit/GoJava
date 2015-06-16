@@ -1,12 +1,11 @@
 package vadya_zakusylo.kickstarter.my_sql;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
-import com.mysql.jdbc.Connection;
-import com.mysql.jdbc.PreparedStatement;
 
 import vadya_zakusylo.kickstarter.model.Category;
 import vadya_zakusylo.kickstarter.model.dao.CategoriesDao;
@@ -22,8 +21,7 @@ public class CategoriesDaoMySql extends CategoriesDao {
 	@Override
 	public List<Category> getCategoriesList() {
 		try {
-			PreparedStatement preparedStatement = (PreparedStatement) connection
-					.prepareStatement(selectCategories());
+			PreparedStatement preparedStatement = connection.prepareStatement(selectCategories());
 			ResultSet resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
 				categories.add(new Category(resultSet.getString("category")));
