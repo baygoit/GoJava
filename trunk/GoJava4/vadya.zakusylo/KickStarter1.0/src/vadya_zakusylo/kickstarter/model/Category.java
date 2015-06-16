@@ -1,7 +1,13 @@
 package vadya_zakusylo.kickstarter.model;
 
-public interface Category {
+public class Category {
+	private String nameCategory;
 
-	String getName();
+	public Category(String name) {
+		this.nameCategory = name;
+	}
 
+	public String getName() {
+		return nameCategory;
+	}
 }

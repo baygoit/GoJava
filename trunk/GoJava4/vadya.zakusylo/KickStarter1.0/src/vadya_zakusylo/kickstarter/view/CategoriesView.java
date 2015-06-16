@@ -20,9 +20,9 @@ public class CategoriesView extends ViewAbstract {
 	@Override
 	public void printContent() {
 		output.write();
-		for (int oneCategory = 1; oneCategory <= model.selectCategories().size(); oneCategory++) {
+		for (int oneCategory = 1; oneCategory <= model.getCategoriesList().size(); oneCategory++) {
 			output.write(oneCategory + ". "
-					+ model.selectCategories().get(oneCategory - 1).getName());
+					+ model.getCategoriesList().get(oneCategory - 1).getName());
 		}
 		output.write("\n0. Return");
 	}
@@ -32,7 +32,7 @@ public class CategoriesView extends ViewAbstract {
 		int inputNumber = input.readInt();
 		if (inputNumber == 0) {
 			state = State.START;
-		} else if (inputNumber > 0 && inputNumber <= model.selectCategories().size()) {
+		} else if (inputNumber > 0 && inputNumber <= model.getCategoriesList().size()) {
 			state = State.PROJECTS;
 			setCategory(inputNumber - 1);
 		} else {
@@ -42,6 +42,6 @@ public class CategoriesView extends ViewAbstract {
 	}
 
 	private void setCategory(int inputNumber) {
-		controller.setCategory(model.selectCategories().get(inputNumber));
+		controller.setCategory(model.getCategoriesList().get(inputNumber));
 	}
 }

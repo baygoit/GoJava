@@ -22,10 +22,10 @@ public class ProjectsView extends ViewAbstract {
 	public void printContent() {
 		Category category = model.getCategory();
 		System.out.println();
-		for (int oneProject = 1; oneProject <= model.selectProjects(category).size(); oneProject++) {
+		for (int oneProject = 1; oneProject <= model.getProjectsList(category).size(); oneProject++) {
 			output.write(oneProject + ". "
-					+ model.selectProjects(category).get(oneProject - 1).getName());
-			output.write(model.selectProjects(category).get(oneProject - 1).getShortContent());
+					+ model.getProjectsList(category).get(oneProject - 1).getName());
+			output.write(model.getProjectsList(category).get(oneProject - 1).getShortContent());
 		}
 		output.write("\n0. Return");
 	}
@@ -36,7 +36,7 @@ public class ProjectsView extends ViewAbstract {
 		if (inputNumber == 0) {
 			state = State.CATEGORIES;
 		} else if (inputNumber > 0
-				&& inputNumber <= model.selectProjects(model.getCategory()).size()) {
+				&& inputNumber <= model.getProjectsList(model.getCategory()).size()) {
 			state = State.PROJECT;
 			setProject(inputNumber - 1);
 		} else {
@@ -46,6 +46,6 @@ public class ProjectsView extends ViewAbstract {
 	}
 
 	private void setProject(int inputNumber) {
-		controller.setProject(model.selectProjects(model.getCategory()).get(inputNumber));
+		controller.setProject(model.getProjectsList(model.getCategory()).get(inputNumber));
 	}
 }

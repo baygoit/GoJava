@@ -4,8 +4,8 @@ import java.util.List;
 
 import vadya_zakusylo.kickstarter.model.Category;
 
-public interface CategoriesDao {
+public abstract class CategoriesDao {
 
-	List<Category> getCategoriesList();
+	public abstract List<Category> getCategoriesList();
 
 }

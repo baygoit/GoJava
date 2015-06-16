@@ -7,11 +7,11 @@ import vadya_zakusylo.kickstarter.view.input.Input;
 import vadya_zakusylo.kickstarter.view.output.Output;
 
 public abstract class ViewAbstract implements View {
-	protected Model model;
-	protected Controller controller;
-	protected State state;
-	protected Input input;
-	protected Output output;
+	State state;
+	Model model;
+	Controller controller;
+	Input input;
+	Output output;
 
 	public ViewAbstract(Model model, Controller controller, Input input, Output output) {
 		this.model = model;

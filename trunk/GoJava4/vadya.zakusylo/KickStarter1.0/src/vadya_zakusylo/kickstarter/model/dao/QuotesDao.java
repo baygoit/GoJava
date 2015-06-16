@@ -4,8 +4,8 @@ import java.util.List;
 
 import vadya_zakusylo.kickstarter.model.Quote;
 
-public interface QuotesDao {
+public abstract class QuotesDao {
 
-	List<Quote> getQuotesList();
+	public abstract List<Quote> getQuotesList();
 
 }

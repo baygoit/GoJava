@@ -1,7 +1,15 @@
 package vadya_zakusylo.kickstarter.model;
 
-public interface Quote {
+public class Quote {
+	private String quote;
+	private String author;
 
-	String getQuote();
+	public Quote(String quote, String author) {
+		this.quote = quote;
+		this.author = author;
+	}
 
+	public String getQuote() {
+		return quote + "\n\t\t" + author;
+	}
 }
