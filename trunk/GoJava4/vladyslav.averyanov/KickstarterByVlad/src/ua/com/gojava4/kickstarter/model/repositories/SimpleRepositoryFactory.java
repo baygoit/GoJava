@@ -7,7 +7,7 @@ import ua.com.gojava4.kickstarter.entities.Quote;
 import ua.com.gojava4.kickstarter.entities.Category;
 import ua.com.gojava4.kickstarter.entities.Project;
 
-public class SimpleRepositoryFactory extends AbstractRepositoryFactory {
+public class SimpleRepositoryFactory implements Repository {
 	
 	private List<Quote> quotes;
 	private List<Category> categories;
@@ -36,18 +36,18 @@ public class SimpleRepositoryFactory extends AbstractRepositoryFactory {
 		quotes = new ArrayList<Quote>();
 		quotes.add(new Quote(
 				"Life isn't about finding yourself. Life is about creating yourself.",
-				"\n(c)Author"));
+				"(c)George Bernard Shaw"));
 		quotes.add(new Quote(
-				"Start by doing what's necessary; then do what's possible and \nsuddenly you are doing the impossible.",
+				"Start by doing what's necessary; then do what's possible and suddenly you are doing the impossible.",
 				"(c)Author"));
 		quotes.add(new Quote(
-				"You have to learn the rules of the game. And then you have to \nplay better than anyone else.",
+				"You have to learn the rules of the game. And then you have to play better than anyone else.",
 				"(c)Author"));
 		quotes.add(new Quote(
-				"Perfection is not attainable, but if we chase perfection we can \ncatch excellence.",
+				"Perfection is not attainable, but if we chase perfection we can catch excellence.",
 				"(c)Author"));
 		quotes.add(new Quote(
-				"My favorite things in life don't cost any money. It's really clear\n that the most precious resource we all have is time.",
+				"My favorite things in life don't cost any money. It's really clear that the most precious resource we all have is time.",
 				"(c)Author"));		
 	}
 
@@ -105,7 +105,7 @@ public class SimpleRepositoryFactory extends AbstractRepositoryFactory {
 				470,
 				25,
 				"FireFly Hand is the next generation electric "
-						+ "flashlight, which is capable of making your life significantly easier.​",
+						+ "flashlight, which is capable of making your life significantly easier.",
 				"http://www.youtube.com/0143534", "Have a question?",
 				2, 1));
 		projects.add(new Project(

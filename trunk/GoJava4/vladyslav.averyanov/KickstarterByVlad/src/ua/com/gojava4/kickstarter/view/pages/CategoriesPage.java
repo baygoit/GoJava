@@ -3,7 +3,6 @@ package ua.com.gojava4.kickstarter.view.pages;
 import java.util.List;
 
 import ua.com.gojava4.kickstarter.control.DataIOTypeStorage;
-import ua.com.gojava4.kickstarter.control.ExitProgramException;
 import ua.com.gojava4.kickstarter.dao.Dao;
 import ua.com.gojava4.kickstarter.entities.Category;
 import ua.com.gojava4.kickstarter.entities.Quote;
@@ -21,7 +20,7 @@ public class CategoriesPage implements Page {
 
 	public CategoriesPage(DataIOTypeStorage dataIOTypeStorage) {
 		this.dataIOTypeStorage = dataIOTypeStorage;
-		this.allCategories = dataIOTypeStorage.getGenericDao().getAllCategories();
+		this.allCategories = dataIOTypeStorage.getDao().getAllCategories();
 	}
 
 	@Override
@@ -31,7 +30,7 @@ public class CategoriesPage implements Page {
 	}
 
 	@Override
-	public Page getNextPage() throws ExitProgramException {
+	public Page getNextPage(){
 		String userInput = dataIOTypeStorage.getReader().readUserInput();
 		try {
 			int categoryId = Integer.parseInt(userInput);
@@ -44,7 +43,7 @@ public class CategoriesPage implements Page {
 			if (userInput.toLowerCase().equals("exit")
 					|| userInput.toLowerCase().equals("quit")
 					|| userInput.toLowerCase().equals("q")) {
-				throw new ExitProgramException();
+				System.exit(0);
 			}
 		}
 		showErrorDescription();
@@ -60,14 +59,18 @@ public class CategoriesPage implements Page {
 		StringBuffer sb = new StringBuffer();
 		sb.append("\n  Categories\n");
 		for (Category category : allCategories) {
-			sb.append("<" + category.getId() + "> " + category.getName() + "\n");
+			sb.append("<");
+			sb.append(category.getId());
+			sb.append("> ");
+			sb.append(category.getName());
+			sb.append("\n");
 		}
 		dataIOTypeStorage.getWriter().println(sb.toString());
 	}
 
 	private void showRandomQuote() {
 		dataIOTypeStorage.getWriter().println();
-		Quote quote = dataIOTypeStorage.getGenericDao().getRandomQuote();
+		Quote quote = dataIOTypeStorage.getDao().getRandomQuote();
 		dataIOTypeStorage.getWriter().println(quote.getQuoteString());
 	}
 

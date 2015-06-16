@@ -1,7 +1,6 @@
 package ua.com.gojava4.kickstarter.view.pages;
 
 import ua.com.gojava4.kickstarter.control.DataIOTypeStorage;
-import ua.com.gojava4.kickstarter.control.ExitProgramException;
 import ua.com.gojava4.kickstarter.entities.Project;
 
 public class DetailedProjectPage implements Page {
@@ -28,10 +27,10 @@ public class DetailedProjectPage implements Page {
 	}
 
 	@Override
-	public Page getNextPage() throws ExitProgramException {
+	public Page getNextPage() {
 		String userInput = dataIOTypeStorage.getReader().readUserInput();
 		if (userInput.toLowerCase().equals("q")) {
-			throw new ExitProgramException();
+			System.exit(0);
 		} else if (userInput.toLowerCase().equals("prev")) {
 			return new ProjectsPage(dataIOTypeStorage, project.getCategoryId());
 		}

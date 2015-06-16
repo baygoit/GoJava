@@ -3,7 +3,6 @@ package ua.com.gojava4.kickstarter.view.pages;
 import java.util.List;
 
 import ua.com.gojava4.kickstarter.control.DataIOTypeStorage;
-import ua.com.gojava4.kickstarter.control.ExitProgramException;
 import ua.com.gojava4.kickstarter.entities.Project;
 
 public class ProjectsPage implements Page {
@@ -15,7 +14,7 @@ public class ProjectsPage implements Page {
 	public ProjectsPage(DataIOTypeStorage dataIOTypeStorage, int categoryId) {
 		this.dataIOTypeStorage = dataIOTypeStorage;
 		this.categoryId = categoryId;
-		this.projectsOfTheCategory = dataIOTypeStorage.getGenericDao().getAllProjects();
+		this.projectsOfTheCategory = dataIOTypeStorage.getDao().getAllProjectsOfCategory(categoryId);
 	}
 
 	@Override
@@ -26,7 +25,7 @@ public class ProjectsPage implements Page {
 	private void showProjectsOfTheCategory() {
 		StringBuffer sb = new StringBuffer();
 		sb.append("\n   Projects of Category "
-				+ dataIOTypeStorage.getGenericDao().getCategoryById(categoryId).getName()
+				+ dataIOTypeStorage.getDao().getCategoryById(categoryId).getName()
 				+"\n");
 		for (Project project : projectsOfTheCategory) {
 			if (project.getCategoryId() == categoryId){
@@ -37,7 +36,7 @@ public class ProjectsPage implements Page {
 	}
 
 	@Override
-	public Page getNextPage() throws ExitProgramException {
+	public Page getNextPage() {
 		String userInput = dataIOTypeStorage.getReader().readUserInput();
 		try {
 			int projectId = Integer.parseInt(userInput);
@@ -48,7 +47,7 @@ public class ProjectsPage implements Page {
 			}
 		} catch (NumberFormatException e) {
 			if (userInput.toLowerCase().equals("q")) {
-				throw new ExitProgramException();
+				System.exit(0);
 			} else if (userInput.toLowerCase().equals("prev")){
 				return new CategoriesPage(dataIOTypeStorage);
 			}

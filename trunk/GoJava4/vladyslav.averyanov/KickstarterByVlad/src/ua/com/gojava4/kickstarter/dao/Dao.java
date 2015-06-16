@@ -1,18 +1,10 @@
 package ua.com.gojava4.kickstarter.dao;
 
-import java.util.List;
+import java.sql.SQLException;
 
-import ua.com.gojava4.kickstarter.entities.Category;
-import ua.com.gojava4.kickstarter.entities.Project;
-import ua.com.gojava4.kickstarter.entities.Quote;
-import ua.com.gojava4.kickstarter.model.repositories.Repository;
-
-public interface Dao extends Repository {
-
-	Quote getRandomQuote();
+public interface Dao extends QuotesDao, CategoriesDao, ProjectsDao,
+		QuestionsAndAnswersDao, PaymentsDao {
 	
-	List<Project> getAllProjectsOfCategory(int categoryId);
-
-	Category getCategoryById(int categoryId);
-
+	void initData() throws SQLException;
+	
 }

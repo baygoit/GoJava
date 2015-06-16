@@ -15,15 +15,12 @@ public class Kickstarter {
 		dataIOTypeStorage.getWriter().println("Welcome to Kickstarter developed by Vlad");
 		Page currentPage = new CategoriesPage(dataIOTypeStorage);
 		boolean isExit = false;
+		
 		while (!isExit) {
 			currentPage.showPage();
-				try {
-					currentPage = currentPage.getNextPage();
-				}
-				catch (ExitProgramException e){
-					isExit = true;		
-					dataIOTypeStorage.getWriter().print("Bye! Have a nice day!");
-				}
+			currentPage = currentPage.getNextPage();
+			isExit = true;
+			dataIOTypeStorage.getWriter().print("Bye! Have a nice day!");
 		}
 	}
 }

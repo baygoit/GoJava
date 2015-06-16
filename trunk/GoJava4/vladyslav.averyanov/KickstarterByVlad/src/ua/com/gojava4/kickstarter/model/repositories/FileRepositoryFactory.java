@@ -7,7 +7,7 @@ import ua.com.gojava4.kickstarter.entities.Category;
 import ua.com.gojava4.kickstarter.entities.Project;
 import ua.com.gojava4.kickstarter.entities.Quote;
 
-public class FileRepositoryFactory extends AbstractRepositoryFactory {
+public class FileRepositoryFactory implements Repository {
 	
 	//private File file;
 	

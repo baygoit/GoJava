@@ -8,12 +8,12 @@ public class DataIOTypeStorage {
 	
 	private Reader reader;
 	private Writer writer;
-	private Dao genericDao;
+	private Dao dao;
 	
-	public DataIOTypeStorage(Reader reader,	Writer writer, Dao genericDao) {
+	public DataIOTypeStorage(Reader reader,	Writer writer, Dao dao) {
 		this.reader = reader;
 		this.writer = writer;
-		this.genericDao = genericDao;
+		this.dao = dao;
 	}
 
 	public Reader getReader() {
@@ -24,18 +24,8 @@ public class DataIOTypeStorage {
 		return writer;
 	}
 
-	public void setWriter(Writer writer) {
-		this.writer = writer;
+	public Dao getDao() {
+		return dao;
 	}
-
-	public Dao getGenericDao() {
-		return genericDao;
-	}
-
-	public void setGenericDao(Dao genericDao) {
-		this.genericDao = genericDao;
-	}
-	
-	
 
 }
