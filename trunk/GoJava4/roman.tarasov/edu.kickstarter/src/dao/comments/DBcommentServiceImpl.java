@@ -1,5 +1,6 @@
 package dao.comments;
 
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -7,20 +8,23 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import dao.Dao;
-import database.KickstarterException;
+import dao.pool.KickstarterException;
+
 
 public class DBcommentServiceImpl implements CommentService {
+	Connection conn;
+
+	public DBcommentServiceImpl(Connection conn) {
+		this.conn = conn;
+	}
 
 	@Override
 	public List<ProjectComment> getCommentsByProjectID(int projectID)
 			throws KickstarterException {
 		List<ProjectComment> commentsOfProject = new ArrayList<ProjectComment>();
-		Dao.getInstance();
 		Statement statement;
 		try {
-			statement = Dao.getDatabaseService().getConnection()
-					.createStatement();
+			statement = conn.createStatement();
 			StringBuffer sql = new StringBuffer();
 
 			sql.append("SELECT * FROM comments WHERE id_project=");
@@ -40,7 +44,7 @@ public class DBcommentServiceImpl implements CommentService {
 			commentsOfProject = null;
 		} finally {
 			try {
-				Dao.getDatabaseService().closeConnection();
+				conn.close();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

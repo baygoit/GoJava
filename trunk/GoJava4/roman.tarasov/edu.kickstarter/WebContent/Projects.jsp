@@ -8,7 +8,7 @@
 <title>Projects</title>
 </head>
 <body>
-	<h1>PROJECTS</h1>
+	<h1>PROJECTS.</h1>
 	<input type="button" value="main page"
 		onclick="self.location='${previous}';" />
 	<c:forEach var="project" items="${sortedProjects}">

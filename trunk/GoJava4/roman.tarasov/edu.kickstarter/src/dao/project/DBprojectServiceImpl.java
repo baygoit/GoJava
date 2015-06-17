@@ -1,26 +1,29 @@
 package dao.project;
 
 import java.sql.Array;
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import dao.Dao;
-import database.KickstarterException;
+import dao.pool.KickstarterException;
+
 
 public class DBprojectServiceImpl implements ProjectService {
+	Connection conn;
+	public DBprojectServiceImpl(Connection conn) {
+		this.conn=conn;
+	}
 
 	@Override
 	public List<Project> sortProjectsByCategoryID(int categoryID)
 			throws KickstarterException {
 		List<Project> sorted = new ArrayList<Project>();
 		Statement statement;
-		Dao.getInstance();
 		try {
-			statement = Dao.getDatabaseService().getConnection()
-					.createStatement();
+			statement = conn.createStatement();
 			StringBuffer sql = new StringBuffer();
 
 			sql.append("SELECT ");
@@ -53,7 +56,7 @@ public class DBprojectServiceImpl implements ProjectService {
 
 		} finally {
 			try {
-				Dao.getDatabaseService().closeConnection();
+				conn.close();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -88,13 +91,10 @@ public class DBprojectServiceImpl implements ProjectService {
 
 	@Override
 	public Project getProjectById(int ID) throws KickstarterException {
-		Dao.getInstance();
 		Project project = null;
-		;
 		Statement statement;
 		try {
-			statement = Dao.getDatabaseService().getConnection()
-					.createStatement();
+			statement = conn.createStatement();
 			StringBuffer sql = new StringBuffer();
 
 			sql.append("SELECT ");
@@ -116,12 +116,12 @@ public class DBprojectServiceImpl implements ProjectService {
 			ResultSet rs = statement.executeQuery(sql.toString());
 			rs.next();
 			project = newProject(rs);
-		} catch (KickstarterException | SQLException e) {
+		} catch (SQLException e) {
 			project = null;
 
 		} finally {
 			try {
-				Dao.getDatabaseService().closeConnection();
+				conn.close();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

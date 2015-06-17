@@ -14,12 +14,12 @@ import model.DetailProjectImpl;
 import model.MainImpl;
 import model.Model;
 import model.ProjectsImpl;
-import dao.Dao;
 import dao.category.Category;
 import dao.comments.ProjectComment;
+import dao.pool.KickstarterException;
+import dao.pool.Pool;
 import dao.project.Project;
 import dao.quote.Quote;
-import database.KickstarterException;
 
 /**
  * Servlet implementation class Main
@@ -78,10 +78,10 @@ public class Main extends HttpServlet {
 			@SuppressWarnings("unchecked")
 			List<ProjectComment> comments = (List<ProjectComment>) detailProject
 					.getAttribute("comments");
-			
+
 			request.setAttribute("detailedProject", detailedProject);
 			request.setAttribute("comments", comments);
-			
+
 			request.getRequestDispatcher("DetailedProject.jsp").forward(
 					request, response);
 		} catch (KickstarterException e) {
@@ -157,8 +157,7 @@ public class Main extends HttpServlet {
 	public void destroy() {
 		super.destroy();
 		try {
-			Dao.getInstance();
-			Dao.getDatabaseService().closeConnection();
+			Pool.getInstance().closeConnection();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

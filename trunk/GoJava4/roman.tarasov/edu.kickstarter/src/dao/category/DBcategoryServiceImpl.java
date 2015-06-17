@@ -7,20 +7,21 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import dao.Dao;
-import database.KickstarterException;
+import dao.pool.KickstarterException;
 
 public class DBcategoryServiceImpl implements CategoryService {
 	private List<Category> categories;
-	private Connection connection;
+	private Connection conn;
+
+	public DBcategoryServiceImpl(Connection conn) {
+		this.conn = conn;
+	}
 
 	@Override
 	public List<Category> getAll() throws KickstarterException {
 		categories = new ArrayList<Category>();
 		try {
-			Dao.getInstance();
-			connection = Dao.getDatabaseService().getConnection();
-			Statement statement = connection.createStatement();
+			Statement statement = conn.createStatement();
 			ResultSet resultSet = statement
 					.executeQuery("SELECT COUNT(*) AS rowcount FROM categories");
 			resultSet.next();
@@ -45,7 +46,7 @@ public class DBcategoryServiceImpl implements CategoryService {
 
 		} finally {
 			try {
-				Dao.getDatabaseService().closeConnection();
+				conn.close();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

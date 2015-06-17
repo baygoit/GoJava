@@ -2,7 +2,7 @@ package dao.category;
 
 import java.util.List;
 
-import database.KickstarterException;
+import dao.pool.KickstarterException;
 
 public interface CategoryService {
 

@@ -4,9 +4,9 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import dao.pool.KickstarterException;
 import dao.quote.DefaultQuoteServiceImpl;
 import dao.quote.Quote;
-import database.KickstarterException;
 
 import org.mockito.*;
 
@@ -31,5 +31,4 @@ public class example_mockito extends Mockito {
 		assertEquals(5, quote.getID());
 
 	}
-
 }

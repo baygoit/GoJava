@@ -1,6 +1,6 @@
 package dao.quote;
 
-import database.KickstarterException;
+import dao.pool.KickstarterException;
 
 public interface QuoteService {
 

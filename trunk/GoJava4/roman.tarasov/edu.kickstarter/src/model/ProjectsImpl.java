@@ -1,27 +1,34 @@
 package model;
 
+import java.sql.Connection;
 import java.util.List;
 
-import dao.Dao;
+import dao.pool.KickstarterException;
+import dao.pool.Pool;
+import dao.project.DBprojectServiceImpl;
+import dao.project.DefaultProjectServiceImpl;
 import dao.project.Project;
-import database.KickstarterException;
+import dao.project.ProjectService;
 
 public class ProjectsImpl implements Model {
 	private int categoryID;
 
-	public ProjectsImpl() {
-		Dao.getInstance();
-	}
-
 	@Override
 	public Object getAttribute(String name) throws KickstarterException {
-		List<Project> sortedProjects = null;
+
 		if (name.equals("sortedProjects")) {
-			Dao.getInstance();
-			sortedProjects = Dao.getProjectService().sortProjectsByCategoryID(
-					categoryID);
+			List<Project> sortedProjects = null;
+			ProjectService ps = null;
+			try {
+				Connection conn = Pool.getInstance().getConnection();
+				ps = new DBprojectServiceImpl(conn);
+			} catch (KickstarterException e1) {
+				ps = new DefaultProjectServiceImpl();
+			}
+			sortedProjects = ps.sortProjectsByCategoryID(categoryID);
+			return sortedProjects;
 		}
-		return sortedProjects;
+		return null;
 	}
 
 	@Override

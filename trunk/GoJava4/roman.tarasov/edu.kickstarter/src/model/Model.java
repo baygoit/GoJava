@@ -1,6 +1,6 @@
 package model;
 
-import database.KickstarterException;
+import dao.pool.KickstarterException;
 
 public interface Model {
 

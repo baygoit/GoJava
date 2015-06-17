@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import database.KickstarterException;
+import dao.pool.KickstarterException;
 
 public interface CommentService {
 
