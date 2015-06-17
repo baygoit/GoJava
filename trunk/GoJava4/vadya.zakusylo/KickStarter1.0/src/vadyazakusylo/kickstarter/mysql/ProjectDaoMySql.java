@@ -75,9 +75,9 @@ public class ProjectDaoMySql extends ProjectDao {
 	private String updateQuestion() {
 		StringBuilder sql = new StringBuilder();
 		sql.append("insert into questions ");
-		sql.append("(question, id_project)");
+		sql.append("(question, id_project) ");
 		sql.append("values (?, ");
-		sql.append("(select id_project");
+		sql.append("(select id_project ");
 		sql.append("from project ");
 		sql.append("where project = ?));");
 		return sql.toString();
