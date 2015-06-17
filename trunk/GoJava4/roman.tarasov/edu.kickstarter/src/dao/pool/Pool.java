@@ -42,8 +42,4 @@ public class Pool {
 		}
 		return connection;
 	}
-
-	public synchronized void closeConnection() throws SQLException {
-		connection.close();
-	}
 }

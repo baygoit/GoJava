@@ -3,13 +3,11 @@ package servlet;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
 import model.DetailProjectImpl;
 import model.MainImpl;
 import model.Model;
@@ -157,8 +155,8 @@ public class Main extends HttpServlet {
 	public void destroy() {
 		super.destroy();
 		try {
-			Pool.getInstance().closeConnection();
-		} catch (SQLException e) {
+			Pool.getInstance().getConnection().close();
+		} catch (SQLException | KickstarterException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

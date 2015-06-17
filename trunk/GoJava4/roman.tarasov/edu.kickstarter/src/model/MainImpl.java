@@ -2,7 +2,6 @@ package model;
 
 import java.sql.Connection;
 import java.util.List;
-
 import dao.category.Category;
 import dao.category.CategoryService;
 import dao.category.DBcategoryServiceImpl;
