@@ -10,21 +10,22 @@ import java.util.List;
 import vadya_zakusylo.kickstarter.model.Category;
 import vadya_zakusylo.kickstarter.model.Project;
 import vadya_zakusylo.kickstarter.model.dao.ProjectsDao;
+import vadya_zakusylo.kickstarter.model.exception.GettingDateException;
 
 public class ProjectsDaoMySql extends ProjectsDao {
 	private Connection connection;
-	private List<Project> projects = new ArrayList<Project>();
 
 	public ProjectsDaoMySql(Connection connection) {
 		this.connection = connection;
 	}
 
 	@Override
-	public List<Project> getProjectsList(Category category) {
+	public List<Project> getProjectsList(Category category) throws GettingDateException {
 		try {
 			PreparedStatement preparedStatement = connection.prepareStatement(selectProjects());
 			preparedStatement.setString(1, category.getName());
 			ResultSet resultSet = preparedStatement.executeQuery();
+			List<Project> projects = new ArrayList<Project>();
 			while (resultSet.next()) {
 				String name = resultSet.getString("project.project");
 				String shortDescription = resultSet.getString("description.description");
@@ -35,10 +36,11 @@ public class ProjectsDaoMySql extends ProjectsDao {
 				projects.add(new Project(name, shortDescription, needMoney, currentMoney, daysLeft,
 						urlVideo));
 			}
+			return projects;
 		} catch (SQLException e) {
 			System.out.println("Can't connect to table \"Projects\"");
+			throw new GettingDateException();
 		}
-		return projects;
 	}
 
 	private String selectProjects() {

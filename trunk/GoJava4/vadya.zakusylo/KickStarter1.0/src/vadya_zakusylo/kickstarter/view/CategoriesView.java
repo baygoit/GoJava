@@ -1,7 +1,11 @@
 package vadya_zakusylo.kickstarter.view;
 
+import java.util.List;
+
 import vadya_zakusylo.kickstarter.controller.Controller;
+import vadya_zakusylo.kickstarter.model.Category;
 import vadya_zakusylo.kickstarter.model.Model;
+import vadya_zakusylo.kickstarter.model.exception.GettingDateException;
 import vadya_zakusylo.kickstarter.view.factory.State;
 import vadya_zakusylo.kickstarter.view.input.Input;
 import vadya_zakusylo.kickstarter.view.output.Output;
@@ -17,14 +21,25 @@ public class CategoriesView extends ViewAbstract {
 		output.write("------------Choose one of the category------------");
 	}
 
+	List<Category> categoriesList;
+
 	@Override
 	public void printContent() {
-		output.write();
-		for (int oneCategory = 1; oneCategory <= model.getCategoriesList().size(); oneCategory++) {
-			output.write(oneCategory + ". "
-					+ model.getCategoriesList().get(oneCategory - 1).getName());
+		try {
+			output.write();
+			categoriesList = model.getCategoriesList();
+			printCategories();
+		} catch (GettingDateException e) {
+			output.write();
+			output.write(e);
 		}
 		output.write("\n0. Return");
+	}
+
+	private void printCategories() {
+		for (int oneCategory = 1; oneCategory <= categoriesList.size(); oneCategory++) {
+			output.write(oneCategory + ". " + categoriesList.get(oneCategory - 1).getName());
+		}
 	}
 
 	@Override
@@ -32,7 +47,7 @@ public class CategoriesView extends ViewAbstract {
 		int inputNumber = input.readInt();
 		if (inputNumber == 0) {
 			state = State.START;
-		} else if (inputNumber > 0 && inputNumber <= model.getCategoriesList().size()) {
+		} else if (inputNumber > 0 && inputNumber <= categoriesList.size()) {
 			state = State.PROJECTS;
 			setCategory(inputNumber - 1);
 		} else {
@@ -42,6 +57,6 @@ public class CategoriesView extends ViewAbstract {
 	}
 
 	private void setCategory(int inputNumber) {
-		controller.setCategory(model.getCategoriesList().get(inputNumber));
+		controller.setCategory(categoriesList.get(inputNumber));
 	}
 }

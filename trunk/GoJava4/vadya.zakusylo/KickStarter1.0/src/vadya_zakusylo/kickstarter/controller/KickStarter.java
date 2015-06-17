@@ -1,6 +1,5 @@
 package vadya_zakusylo.kickstarter.controller;
 
-import vadya_zakusylo.kickstarter.controller.Controller;
 import vadya_zakusylo.kickstarter.view.View;
 import vadya_zakusylo.kickstarter.view.factory.State;
 import vadya_zakusylo.kickstarter.view.factory.ViewFactory;

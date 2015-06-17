@@ -2,6 +2,7 @@ package vadya_zakusylo.kickstarter.view;
 
 import vadya_zakusylo.kickstarter.controller.Controller;
 import vadya_zakusylo.kickstarter.model.Model;
+import vadya_zakusylo.kickstarter.model.exception.GettingDateException;
 import vadya_zakusylo.kickstarter.view.factory.State;
 import vadya_zakusylo.kickstarter.view.input.Input;
 import vadya_zakusylo.kickstarter.view.output.Output;
@@ -39,7 +40,11 @@ public class DonateView extends ViewAbstract {
 			state = State.PROJECT;
 		} else if (inputNumber == 1) {
 			state = State.PROJECT;
-			controller.setCurrentMoney(donate);
+			try {
+				controller.setCurrentMoney(donate);
+			} catch (GettingDateException e) {
+				output.write(e);
+			}
 		} else {
 			state = State.ERROR_PROJECT;
 		}

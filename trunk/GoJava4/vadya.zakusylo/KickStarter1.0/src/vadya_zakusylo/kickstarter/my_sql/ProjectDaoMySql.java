@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import vadya_zakusylo.kickstarter.model.dao.ProjectDao;
+import vadya_zakusylo.kickstarter.model.exception.GettingDateException;
 
 public class ProjectDaoMySql extends ProjectDao {
 	private Connection connection;
@@ -15,7 +16,7 @@ public class ProjectDaoMySql extends ProjectDao {
 	}
 
 	@Override
-	public double getCurrenMoney(String nameProject) {
+	public double getCurrenMoney(String nameProject) throws GettingDateException {
 		double currentMoney = 0;
 		try {
 			PreparedStatement preparedStatement = connection.prepareStatement(selectCurrentMoney());
@@ -26,6 +27,7 @@ public class ProjectDaoMySql extends ProjectDao {
 			}
 		} catch (SQLException e) {
 			System.out.println("Can't connect to table \"Projects\"");
+			throw new GettingDateException();
 		}
 		return currentMoney;
 	}

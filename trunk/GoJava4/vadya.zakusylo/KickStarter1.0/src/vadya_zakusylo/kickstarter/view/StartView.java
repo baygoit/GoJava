@@ -2,6 +2,7 @@ package vadya_zakusylo.kickstarter.view;
 
 import vadya_zakusylo.kickstarter.controller.Controller;
 import vadya_zakusylo.kickstarter.model.Model;
+import vadya_zakusylo.kickstarter.model.exception.GettingDateException;
 import vadya_zakusylo.kickstarter.view.factory.State;
 import vadya_zakusylo.kickstarter.view.input.Input;
 import vadya_zakusylo.kickstarter.view.output.Output;
@@ -19,8 +20,12 @@ public class StartView extends ViewAbstract {
 
 	@Override
 	public void printContent() {
-		output.write();
-		output.write(model.getQuote().getQuote());
+		try {
+			output.write();
+			output.write(model.getQuote().getQuote());
+		} catch (GettingDateException | IndexOutOfBoundsException e) {
+			output.write();
+		}
 		output.write("\nInput:\n1 - to start\n0 - to exit");
 	}
 

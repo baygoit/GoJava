@@ -9,28 +9,30 @@ import java.util.List;
 
 import vadya_zakusylo.kickstarter.model.Quote;
 import vadya_zakusylo.kickstarter.model.dao.QuotesDao;
+import vadya_zakusylo.kickstarter.model.exception.GettingDateException;
 
 public class QuotesDaoMySql extends QuotesDao {
 	private Connection connection;
-	private List<Quote> quotes = new ArrayList<Quote>();
 
 	public QuotesDaoMySql(Connection connection) {
 		this.connection = connection;
 	}
 
 	@Override
-	public List<Quote> getQuotesList() {
+	public List<Quote> getQuotesList() throws GettingDateException {
 		try {
 			PreparedStatement preparedStatement = connection.prepareStatement(selectQuotes());
 			ResultSet resultSet = preparedStatement.executeQuery();
+			List<Quote> quotes = new ArrayList<Quote>();
 			while (resultSet.next()) {
 				quotes.add(new Quote(resultSet.getString("quotes_q.quote"), resultSet
 						.getString("quotes_a.autor")));
 			}
+			return quotes;
 		} catch (SQLException e) {
 			System.out.println("Can't connect to table \"Quotes\"");
+			throw new GettingDateException();
 		}
-		return quotes;
 	}
 
 	private String selectQuotes() {
