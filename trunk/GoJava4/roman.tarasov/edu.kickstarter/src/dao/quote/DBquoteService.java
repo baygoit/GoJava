@@ -4,11 +4,10 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-
 import dao.pool.KickstarterException;
 
 public class DBquoteService implements QuoteService {
-	Connection conn;
+	private Connection conn;
 
 	public DBquoteService(Connection conn) {
 		this.conn = conn;
@@ -46,7 +45,6 @@ public class DBquoteService implements QuoteService {
 				throw new KickstarterException("quote not found");
 			}
 		}
-
 		return quote;
 	}
 }

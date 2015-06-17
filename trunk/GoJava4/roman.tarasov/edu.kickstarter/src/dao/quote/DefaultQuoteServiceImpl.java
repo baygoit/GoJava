@@ -24,5 +24,4 @@ public class DefaultQuoteServiceImpl implements QuoteService {
 	public Quote getRandomQuote() {
 		return quotes.get(new Random().nextInt(quotes.size()));
 	}
-
 }

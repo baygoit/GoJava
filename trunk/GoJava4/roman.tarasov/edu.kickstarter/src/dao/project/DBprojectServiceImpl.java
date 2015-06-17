@@ -7,12 +7,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-
 import dao.pool.KickstarterException;
 
 
 public class DBprojectServiceImpl implements ProjectService {
-	Connection conn;
+	private Connection conn;
 	public DBprojectServiceImpl(Connection conn) {
 		this.conn=conn;
 	}

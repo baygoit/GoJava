@@ -6,11 +6,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-
 import dao.pool.KickstarterException;
 
 public class DBcategoryServiceImpl implements CategoryService {
-	private List<Category> categories;
+
 	private Connection conn;
 
 	public DBcategoryServiceImpl(Connection conn) {
@@ -19,7 +18,7 @@ public class DBcategoryServiceImpl implements CategoryService {
 
 	@Override
 	public List<Category> getAll() throws KickstarterException {
-		categories = new ArrayList<Category>();
+		List<Category> categories = new ArrayList<Category>();
 		try {
 			Statement statement = conn.createStatement();
 			ResultSet resultSet = statement

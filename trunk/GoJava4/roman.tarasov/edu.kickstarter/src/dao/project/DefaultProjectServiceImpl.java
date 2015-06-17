@@ -2,7 +2,6 @@ package dao.project;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import dao.pool.KickstarterException;
 
 public class DefaultProjectServiceImpl implements ProjectService {

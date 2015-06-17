@@ -18,27 +18,27 @@ public class MainImpl implements Model {
 	@Override
 	public Object getAttribute(String name) throws KickstarterException {
 		if (name.equals("categories")) {
-			CategoryService cs = null;
+			CategoryService categoryService = null;
 			List<Category> categories = null;
 			try {
 				Connection conn = Pool.getInstance().getConnection();
-				cs = new DBcategoryServiceImpl(conn);
+				categoryService = new DBcategoryServiceImpl(conn);
 			} catch (KickstarterException e1) {
-				cs = new DefaultCategoryServiceImpl();
+				categoryService = new DefaultCategoryServiceImpl();
 			}
-			categories = cs.getAll();
+			categories = categoryService.getAll();
 			return categories;
 		}
 		if (name.equals("quote")) {
 			Quote quote = null;
-			QuoteService qs = null;
+			QuoteService quoteService = null;
 			try {
 				Connection conn = Pool.getInstance().getConnection();
-				qs = new DBquoteService(conn);
+				quoteService = new DBquoteService(conn);
 			} catch (KickstarterException e1) {
-				qs = new DefaultQuoteServiceImpl();
+				quoteService = new DefaultQuoteServiceImpl();
 			}
-			quote = qs.getRandomQuote();
+			quote = quoteService.getRandomQuote();
 			return quote;
 		}
 		return null;

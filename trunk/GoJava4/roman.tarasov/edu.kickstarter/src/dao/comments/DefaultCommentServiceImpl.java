@@ -3,7 +3,6 @@ package dao.comments;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class DefaultCommentServiceImpl implements CommentService {
 
@@ -70,8 +69,4 @@ public class DefaultCommentServiceImpl implements CommentService {
 		return allComments.get(projectID);
 	}
 
-	@Override
-	public Map<Integer, ArrayList<ProjectComment>> getAll() {
-		return allComments;
-	}
 }

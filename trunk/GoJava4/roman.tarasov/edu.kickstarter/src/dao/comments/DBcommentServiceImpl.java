@@ -6,13 +6,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-
 import dao.pool.KickstarterException;
 
-
 public class DBcommentServiceImpl implements CommentService {
-	Connection conn;
+	private Connection conn;
 
 	public DBcommentServiceImpl(Connection conn) {
 		this.conn = conn;
@@ -55,10 +52,5 @@ public class DBcommentServiceImpl implements CommentService {
 		}
 
 		return commentsOfProject;
-	}
-
-	@Override
-	public Map<Integer, ArrayList<ProjectComment>> getAll() {
-		return null;
 	}
 }

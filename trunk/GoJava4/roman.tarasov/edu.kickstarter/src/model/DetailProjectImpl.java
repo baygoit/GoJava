@@ -2,7 +2,6 @@ package model;
 
 import java.sql.Connection;
 import java.util.List;
-
 import dao.comments.CommentService;
 import dao.comments.DBcommentServiceImpl;
 import dao.comments.DefaultCommentServiceImpl;
@@ -21,28 +20,28 @@ public class DetailProjectImpl implements Model {
 	public Object getAttribute(String name) throws KickstarterException {
 		if (name.equals("detailedProject")) {
 			Project project = null;
-			ProjectService ps = null;
+			ProjectService projectService = null;
 			
 			try {
 				Connection conn = Pool.getInstance().getConnection();
-				ps = new DBprojectServiceImpl(conn);
+				projectService = new DBprojectServiceImpl(conn);
 			} catch (KickstarterException e1) {
-				ps = new DefaultProjectServiceImpl();
+				projectService = new DefaultProjectServiceImpl();
 			}
-			project = ps.getProjectById(projectID);
+			project = projectService.getProjectById(projectID);
 			return project;
 
 		}
 		if (name.equals("comments")) {
 			List<ProjectComment> comments = null;
-			CommentService cs=null;
+			CommentService commentService=null;
 			try {
 				Connection conn = Pool.getInstance().getConnection();
-				cs = new DBcommentServiceImpl(conn);
+				commentService = new DBcommentServiceImpl(conn);
 			} catch (KickstarterException e1) {
-				cs = new DefaultCommentServiceImpl();
+				commentService = new DefaultCommentServiceImpl();
 			}
-			comments = cs.getCommentsByProjectID(projectID);
+			comments = commentService.getCommentsByProjectID(projectID);
 			return comments;
 		}
 		return null;

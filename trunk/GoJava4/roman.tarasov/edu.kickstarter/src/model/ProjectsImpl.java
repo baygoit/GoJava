@@ -2,7 +2,6 @@ package model;
 
 import java.sql.Connection;
 import java.util.List;
-
 import dao.pool.KickstarterException;
 import dao.pool.Pool;
 import dao.project.DBprojectServiceImpl;
@@ -18,14 +17,15 @@ public class ProjectsImpl implements Model {
 
 		if (name.equals("sortedProjects")) {
 			List<Project> sortedProjects = null;
-			ProjectService ps = null;
+			ProjectService projectService = null;
 			try {
 				Connection conn = Pool.getInstance().getConnection();
-				ps = new DBprojectServiceImpl(conn);
+				projectService = new DBprojectServiceImpl(conn);
 			} catch (KickstarterException e1) {
-				ps = new DefaultProjectServiceImpl();
+				projectService = new DefaultProjectServiceImpl();
 			}
-			sortedProjects = ps.sortProjectsByCategoryID(categoryID);
+			sortedProjects = projectService
+					.sortProjectsByCategoryID(categoryID);
 			return sortedProjects;
 		}
 		return null;

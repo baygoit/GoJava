@@ -43,13 +43,15 @@ public class Main extends HttpServlet {
 		}
 
 		if (action.startsWith("/projects")) {
-			request.setAttribute("previous", "main");
 			forwardProjects(request, response);
 			return;
 		}
 		if (action.startsWith("/detailedProject")) {
-			request.setAttribute("previous", "projects");
 			forwardDetailedProject(request, response);
+			return;
+		}
+		if (action.startsWith("/Login")) {
+			request.getRequestDispatcher("Login").forward(request, response);
 			return;
 		}
 		KickstarterException e = new KickstarterException("incorrect URL");
@@ -64,15 +66,27 @@ public class Main extends HttpServlet {
 
 		try {
 			String parameter = request.getParameter("project");
-			Integer projectID = 0;
+			Integer projectID = null;
 			try {
 				projectID = Integer.valueOf(parameter);
 			} catch (NumberFormatException e) {
-				throw new KickstarterException("illegal number of project ", e);
+
+			}
+			if (projectID == null) {
+				HttpSession session = request.getSession();
+				Object objectAttribute = session
+						.getAttribute("detailedProject");
+				if (objectAttribute == null) {
+					throw new KickstarterException("illegal number of project ");
+				}
+				projectID = (Integer) session.getAttribute("detailedProject");
 			}
 			detailProject.setParameters(projectID);
 			projectFromModel = detailProject.getAttribute("detailedProject");
 			Project detailedProject = (Project) projectFromModel;
+
+			HttpSession session = request.getSession();
+			session.setAttribute("detailedProject", projectID);
 			@SuppressWarnings("unchecked")
 			List<ProjectComment> comments = (List<ProjectComment>) detailProject
 					.getAttribute("comments");
