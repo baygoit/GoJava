@@ -19,8 +19,8 @@ public class Kickstarter {
 		while (!isExit) {
 			currentPage.showPage();
 			currentPage = currentPage.getNextPage();
-			isExit = true;
-			dataIOTypeStorage.getWriter().print("Bye! Have a nice day!");
+//			isExit = true;
+//			dataIOTypeStorage.getWriter().print("Bye! Have a nice day!");
 		}
 	}
 }

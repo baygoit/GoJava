@@ -30,5 +30,4 @@ public class QuotesDaoImpl implements QuotesDao {
 		}
 		return quote;
 	}
-
 }

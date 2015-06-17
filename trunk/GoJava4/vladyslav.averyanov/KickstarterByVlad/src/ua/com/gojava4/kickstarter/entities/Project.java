@@ -2,6 +2,8 @@ package ua.com.gojava4.kickstarter.entities;
 
 public class Project {
 
+	private int id;
+	private int categoryId;
 	private String name;
 	private String shortDescription;
 	private int moneyGoal;
@@ -10,12 +12,23 @@ public class Project {
 	private String fullDescription;
 	private String link;
 	private String FAQ;
-	private int categoryId;
-	private int id;
 	
+	public Project(int id, int categoryId, String name, String shortDescription, int moneyGoal, int pledged,
+			int daysToGo, String fullDescription, String link, String FAQ) {
+		this.name = name;
+		this.shortDescription = shortDescription;
+		this.moneyGoal = moneyGoal;
+		this.pledged = pledged;
+		this.daysToGo = daysToGo;
+		this.fullDescription = fullDescription;
+		this.link = link;
+		this.FAQ = FAQ;
+		this.categoryId = categoryId;
+		this.id = id;
+	}
+	@Deprecated
 	public Project(String name, String shortDescription, int moneyGoal, int pledged,
-			int daysToGo, String fullDescription, String link, String FAQ,
-			int categoryId, int id) {
+			int daysToGo, String fullDescription, String link, String FAQ, int categoryId, int id) {
 		this.name = name;
 		this.shortDescription = shortDescription;
 		this.moneyGoal = moneyGoal;

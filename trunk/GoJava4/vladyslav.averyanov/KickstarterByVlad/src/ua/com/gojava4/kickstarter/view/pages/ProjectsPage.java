@@ -24,12 +24,16 @@ public class ProjectsPage implements Page {
 
 	private void showProjectsOfTheCategory() {
 		StringBuffer sb = new StringBuffer();
-		sb.append("\n   Projects of Category "
-				+ dataIOTypeStorage.getDao().getCategoryById(categoryId).getName()
-				+"\n");
+		sb.append("\n   Projects of Category ");
+		sb.append(dataIOTypeStorage.getDao().getCategoryById(categoryId).getName());
+		sb.append("\n");
 		for (Project project : projectsOfTheCategory) {
 			if (project.getCategoryId() == categoryId){
-				sb.append("<" + project.getId() + "> " + project.getName() + "\n");
+				sb.append("<");
+				sb.append(project.getId());
+				sb.append("> ");
+				sb.append(project.getName());
+				sb.append("\n");
 			}
 		}
 		dataIOTypeStorage.getWriter().println(sb.toString());
