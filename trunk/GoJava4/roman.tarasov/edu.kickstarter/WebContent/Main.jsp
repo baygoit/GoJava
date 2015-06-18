@@ -18,7 +18,9 @@
 			</a>
 		</h2>
 	</c:forEach>
-	<h1><c:out value="${quote.quote}" /></h1>
-	
+	<h1>
+		<c:out value="${quote.quote}" />
+	</h1>
+
 </body>
 </html>

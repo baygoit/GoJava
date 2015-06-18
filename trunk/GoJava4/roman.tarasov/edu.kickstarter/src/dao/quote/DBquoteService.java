@@ -5,13 +5,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import dao.pool.KickstarterException;
+import dao.pool.Pool;
 
 public class DBquoteService implements QuoteService {
 	private Connection conn;
-
-	public DBquoteService(Connection conn) {
-		this.conn = conn;
-	}
 
 	@Override
 	public Quote getRandomQuote() throws KickstarterException {
@@ -20,6 +17,7 @@ public class DBquoteService implements QuoteService {
 		Quote quote = null;
 		try {
 			StringBuffer sql = new StringBuffer();
+			conn = Pool.getInstance().getConnection();
 			statement = conn.createStatement();
 			sql.append("select id, quote ");
 			sql.append("from quotes ");

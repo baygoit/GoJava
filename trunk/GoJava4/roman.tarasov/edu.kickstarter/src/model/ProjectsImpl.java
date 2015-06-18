@@ -1,7 +1,9 @@
 package model;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.List;
+
 import dao.pool.KickstarterException;
 import dao.pool.Pool;
 import dao.project.DBprojectServiceImpl;
@@ -18,10 +20,9 @@ public class ProjectsImpl implements Model {
 		if (name.equals("sortedProjects")) {
 			List<Project> sortedProjects = null;
 			ProjectService projectService = null;
-			try {
-				Connection conn = Pool.getInstance().getConnection();
-				projectService = new DBprojectServiceImpl(conn);
-			} catch (KickstarterException e1) {
+			if (connected()) {
+				projectService = new DBprojectServiceImpl();
+			} else {
 				projectService = new DefaultProjectServiceImpl();
 			}
 			sortedProjects = projectService
@@ -29,6 +30,17 @@ public class ProjectsImpl implements Model {
 			return sortedProjects;
 		}
 		return null;
+	}
+
+	boolean connected() {
+		boolean connected = false;
+		try {
+			Connection conn = Pool.getInstance().getConnection();
+			conn.close();
+			connected = true;
+		} catch (KickstarterException | SQLException e) {
+		}
+		return connected;
 	}
 
 	@Override

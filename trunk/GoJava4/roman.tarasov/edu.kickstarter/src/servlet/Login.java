@@ -41,6 +41,7 @@ public class Login extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
+
 		Model getUserName = new UserImpl();
 		User modelOfUser = new User();
 		User user = null;

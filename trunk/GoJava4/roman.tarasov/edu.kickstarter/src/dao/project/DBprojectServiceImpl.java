@@ -8,13 +8,10 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import dao.pool.KickstarterException;
-
+import dao.pool.Pool;
 
 public class DBprojectServiceImpl implements ProjectService {
 	private Connection conn;
-	public DBprojectServiceImpl(Connection conn) {
-		this.conn=conn;
-	}
 
 	@Override
 	public List<Project> sortProjectsByCategoryID(int categoryID)
@@ -22,6 +19,7 @@ public class DBprojectServiceImpl implements ProjectService {
 		List<Project> sorted = new ArrayList<Project>();
 		Statement statement;
 		try {
+			conn = Pool.getInstance().getConnection();
 			statement = conn.createStatement();
 			StringBuffer sql = new StringBuffer();
 
@@ -93,6 +91,7 @@ public class DBprojectServiceImpl implements ProjectService {
 		Project project = null;
 		Statement statement;
 		try {
+			conn = Pool.getInstance().getConnection();
 			statement = conn.createStatement();
 			StringBuffer sql = new StringBuffer();
 

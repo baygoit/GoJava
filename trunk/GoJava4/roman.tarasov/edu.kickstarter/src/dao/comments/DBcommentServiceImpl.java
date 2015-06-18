@@ -7,13 +7,10 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import dao.pool.KickstarterException;
+import dao.pool.Pool;
 
 public class DBcommentServiceImpl implements CommentService {
 	private Connection conn;
-
-	public DBcommentServiceImpl(Connection conn) {
-		this.conn = conn;
-	}
 
 	@Override
 	public List<ProjectComment> getCommentsByProjectID(int projectID)
@@ -21,6 +18,7 @@ public class DBcommentServiceImpl implements CommentService {
 		List<ProjectComment> commentsOfProject = new ArrayList<ProjectComment>();
 		Statement statement;
 		try {
+			conn = Pool.getInstance().getConnection();
 			statement = conn.createStatement();
 			StringBuffer sql = new StringBuffer();
 
@@ -50,7 +48,6 @@ public class DBcommentServiceImpl implements CommentService {
 				throw new KickstarterException("comments not found");
 			}
 		}
-
 		return commentsOfProject;
 	}
 }

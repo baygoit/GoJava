@@ -1,6 +1,7 @@
 package model;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.List;
 import dao.category.Category;
 import dao.category.CategoryService;
@@ -20,10 +21,10 @@ public class MainImpl implements Model {
 		if (name.equals("categories")) {
 			CategoryService categoryService = null;
 			List<Category> categories = null;
-			try {
-				Connection conn = Pool.getInstance().getConnection();
-				categoryService = new DBcategoryServiceImpl(conn);
-			} catch (KickstarterException e1) {
+
+			if (connected()) {
+				categoryService = new DBcategoryServiceImpl();
+			} else {
 				categoryService = new DefaultCategoryServiceImpl();
 			}
 			categories = categoryService.getAll();
@@ -32,16 +33,26 @@ public class MainImpl implements Model {
 		if (name.equals("quote")) {
 			Quote quote = null;
 			QuoteService quoteService = null;
-			try {
-				Connection conn = Pool.getInstance().getConnection();
-				quoteService = new DBquoteService(conn);
-			} catch (KickstarterException e1) {
+			if (connected()) {
+				quoteService = new DBquoteService();
+			} else {
 				quoteService = new DefaultQuoteServiceImpl();
 			}
 			quote = quoteService.getRandomQuote();
 			return quote;
 		}
 		return null;
+	}
+
+	boolean connected() {
+		boolean connected = false;
+		try {
+			Connection conn = Pool.getInstance().getConnection();
+			conn.close();
+			connected = true;
+		} catch (KickstarterException | SQLException e) {
+		}
+		return connected;
 	}
 
 	@Override

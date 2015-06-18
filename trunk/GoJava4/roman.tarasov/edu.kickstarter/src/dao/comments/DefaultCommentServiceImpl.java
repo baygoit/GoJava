@@ -16,14 +16,14 @@ public class DefaultCommentServiceImpl implements CommentService {
 		int projectID = 8;
 		ProjectComment comment = new ProjectComment();
 		comment.setComment("What color will paint?");
-		comment.setUserID(3);
+		comment.setUserID(5);
 		comment.setCommentID(1 + commentsInProject.size());
 		comment.setProjectID(projectID);
 		commentsInProject.add(comment);
 
 		comment = new ProjectComment();
 		comment.setComment("Paint is Green");
-		comment.setUserID(2);
+		comment.setUserID(9);
 		comment.setCommentID(1 + commentsInProject.size());
 		comment.setProjectID(projectID);
 		commentsInProject.add(comment);
@@ -33,7 +33,7 @@ public class DefaultCommentServiceImpl implements CommentService {
 		commentsInProject = new ArrayList<ProjectComment>();
 		comment = new ProjectComment();
 		comment.setComment("how much weight the bike?");
-		comment.setUserID(4);
+		comment.setUserID(9);
 		comment.setCommentID(1 + commentsInProject.size());
 		comment.setProjectID(projectID);
 		commentsInProject.add(comment);
@@ -50,7 +50,7 @@ public class DefaultCommentServiceImpl implements CommentService {
 		commentsInProject = new ArrayList<ProjectComment>();
 		comment = new ProjectComment();
 		comment.setComment("One request: make sure your documentation and tutorials are crystal clear and checked by a native English speaker. (At one point they weren't) That's half of the product :)");
-		comment.setUserID(8);
+		comment.setUserID(5);
 		comment.setCommentID(1 + commentsInProject.size());
 		comment.setProjectID(projectID);
 		commentsInProject.add(comment);

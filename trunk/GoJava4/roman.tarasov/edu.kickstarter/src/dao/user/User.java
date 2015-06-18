@@ -4,6 +4,15 @@ public class User {
 	private String name;
 	private String login;
 	private String password;
+	private int ID;
+
+	public int getID() {
+		return ID;
+	}
+
+	public void setID(int iD) {
+		ID = iD;
+	}
 
 	public String getName() {
 		return name;

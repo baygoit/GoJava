@@ -12,6 +12,7 @@ import model.DetailProjectImpl;
 import model.MainImpl;
 import model.Model;
 import model.ProjectsImpl;
+import model.UserImpl;
 import dao.category.Category;
 import dao.comments.ProjectComment;
 import dao.pool.KickstarterException;
@@ -61,7 +62,10 @@ public class Main extends HttpServlet {
 
 	private void forwardDetailedProject(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		Model detailProject = new DetailProjectImpl();
+
+		Model projectModel = new DetailProjectImpl();
+		Model userModel = new UserImpl();
+		
 		Object projectFromModel;
 
 		try {
@@ -79,18 +83,24 @@ public class Main extends HttpServlet {
 				if (objectAttribute == null) {
 					throw new KickstarterException("illegal number of project ");
 				}
-				projectID = (Integer) session.getAttribute("detailedProject");
+				projectID = (Integer) objectAttribute;
 			}
-			detailProject.setParameters(projectID);
-			projectFromModel = detailProject.getAttribute("detailedProject");
+			projectModel.setParameters(projectID);
+			projectFromModel = projectModel.getAttribute("detailedProject");
 			Project detailedProject = (Project) projectFromModel;
 
 			HttpSession session = request.getSession();
 			session.setAttribute("detailedProject", projectID);
 			@SuppressWarnings("unchecked")
-			List<ProjectComment> comments = (List<ProjectComment>) detailProject
+			List<ProjectComment> comments = (List<ProjectComment>) projectModel
 					.getAttribute("comments");
+			userModel.setParameters(comments);
 
+			@SuppressWarnings("unchecked")
+			List<String> listUsersNames = (List<String>) userModel
+				.getAttribute("listUsersNames");
+
+		    request.setAttribute("listUsersNames", listUsersNames);
 			request.setAttribute("detailedProject", detailedProject);
 			request.setAttribute("comments", comments);
 
@@ -107,6 +117,7 @@ public class Main extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 
 		Model projectsModel = new ProjectsImpl();
+		
 		Object attribute;
 		Integer categoryID = null;
 		String parameterFromURL = request.getParameter("category");
@@ -144,8 +155,9 @@ public class Main extends HttpServlet {
 
 	private void forwardMain(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		Model mainModel = new MainImpl();
 
+		Model mainModel = new MainImpl();
+		
 		try {
 			@SuppressWarnings("unchecked")
 			List<Category> categories = (List<Category>) mainModel

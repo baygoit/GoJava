@@ -4,7 +4,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=windows-1256">
+<meta http-equiv="Content-Type"
+	content="text/html; charset=windows-1256">
 <title>Projects</title>
 </head>
 <body>
@@ -18,19 +19,15 @@
 				<c:out value="${project.name}" />
 			</a>
 		</h2>
-		<h3>
-			<c:out value=" shortDescription= ${project.shortDescription}" />
-		</h3>
-		<h3>
-			<c:out value=" goal= ${project.goal}" />
-		</h3>
-		<h3>
-			<c:out value=" pledged= ${project.pledged}" />
-		</h3>
-		<h3>
-			<c:out value=" daysToGo= ${project.daysToGo}" />
-		</h3>
-		<br />
+
+		<c:out value=" shortDescription= ${project.shortDescription}" />
+		<br>
+		<c:out value=" goal= ${project.goal}" />
+		<br>
+		<c:out value=" pledged= ${project.pledged}" />
+		<br>
+		<c:out value=" daysToGo= ${project.daysToGo}" />
+		<br>
 	</c:forEach>
 	<input type="button" value="main page"
 		onclick="self.location='/edu.kickstarter/main';" />
