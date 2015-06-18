@@ -5,6 +5,8 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
+
 import kickstarter.control.state.State;
 import kickstarter.model.Model;
 import kickstarter.model.factory.ModelFactory;
@@ -14,6 +16,8 @@ import kickstarter.view.factory.ViewFactory;
 import kickstarter.view.factory.ViewFactoryImpl;
 
 public class ExecutorImpl implements Executor {
+	final static Logger logger = Logger.getLogger(ExecutorImpl.class);
+
 	private static volatile Executor instance;
 
 	private ViewFactory viewFactory = ViewFactoryImpl.getInstance();
@@ -53,7 +57,7 @@ public class ExecutorImpl implements Executor {
 	}
 
 	private void showError(Exception e) {
-		// TODO: show page with error
-		e.printStackTrace();
+		logger.error(e.getStackTrace(), e);
+		// TODO: show page with error for user
 	}
 }
