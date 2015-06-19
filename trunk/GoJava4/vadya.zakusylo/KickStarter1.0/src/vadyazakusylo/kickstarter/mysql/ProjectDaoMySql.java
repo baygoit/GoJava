@@ -5,14 +5,51 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import vadyazakusylo.kickstarter.model.Project;
 import vadyazakusylo.kickstarter.model.dao.ProjectDao;
 import vadyazakusylo.kickstarter.model.exception.GettingDateException;
 
-public class ProjectDaoMySql extends ProjectDao {
+public class ProjectDaoMySql implements ProjectDao {
 	private Connection connection;
 
 	public ProjectDaoMySql(Connection connection) {
 		this.connection = connection;
+	}
+
+	@Override
+	public Project getProject(String projectName) {
+		Project project = null;
+		try {
+			PreparedStatement preparedStatement = connection.prepareStatement(selectProject());
+			preparedStatement.setString(1, projectName);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			while (resultSet.next()) {
+				String name = resultSet.getString("project.project");
+				String shortDescription = resultSet.getString("description.description");
+				double needMoney = resultSet.getDouble("project.needMoney");
+				double currentMoney = resultSet.getDouble("project.currentMoney");
+				int daysLeft = resultSet.getInt("project.daysLeft");
+				String urlVideo = resultSet.getString("description.urlVideo");
+				project = new Project(name, shortDescription, needMoney, currentMoney, daysLeft,
+						urlVideo);
+			}
+		} catch (SQLException e) {
+			System.out.println("Can't connect to table \"Projects\"");
+			throw new GettingDateException();
+		}
+		return project;
+	}
+
+	private String selectProject() {
+		StringBuilder sql = new StringBuilder();
+		sql.append("select project.project, ");
+		sql.append("description.description, ");
+		sql.append("project.needMoney, project.currentMoney, ");
+		sql.append("project.daysLeft, description.urlVideo ");
+		sql.append("from project inner join description ");
+		sql.append("on project.id_project = description.id_project ");
+		sql.append("and project.project = ?;");
+		return sql.toString();
 	}
 
 	@Override

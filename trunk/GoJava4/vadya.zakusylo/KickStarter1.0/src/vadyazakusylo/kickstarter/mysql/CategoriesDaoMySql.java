@@ -11,7 +11,7 @@ import vadyazakusylo.kickstarter.model.Category;
 import vadyazakusylo.kickstarter.model.dao.CategoriesDao;
 import vadyazakusylo.kickstarter.model.exception.GettingDateException;
 
-public class CategoriesDaoMySql extends CategoriesDao {
+public class CategoriesDaoMySql implements CategoriesDao {
 	private Connection connection;
 	private List<Category> categories;
 

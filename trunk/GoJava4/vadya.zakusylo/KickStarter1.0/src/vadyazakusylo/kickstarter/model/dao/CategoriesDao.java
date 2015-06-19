@@ -5,8 +5,8 @@ import java.util.List;
 import vadyazakusylo.kickstarter.model.Category;
 import vadyazakusylo.kickstarter.model.exception.GettingDateException;
 
-public abstract class CategoriesDao {
+public interface CategoriesDao {
 
-	public abstract List<Category> getCategoriesList() throws GettingDateException;
+	List<Category> getCategoriesList() throws GettingDateException;
 
 }

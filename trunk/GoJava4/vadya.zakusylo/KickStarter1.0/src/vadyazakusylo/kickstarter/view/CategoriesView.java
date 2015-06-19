@@ -28,7 +28,7 @@ public class CategoriesView extends ViewAbstract {
 		try {
 			output.write();
 			categoriesList = model.getCategoriesList();
-			printCategories();
+			printCategoriesList();
 		} catch (GettingDateException e) {
 			output.write();
 			output.write(e);
@@ -36,7 +36,7 @@ public class CategoriesView extends ViewAbstract {
 		output.write("\n0. Return");
 	}
 
-	private void printCategories() {
+	private void printCategoriesList() {
 		for (int oneCategory = 1; oneCategory <= categoriesList.size(); oneCategory++) {
 			output.write(oneCategory + ". " + categoriesList.get(oneCategory - 1).getName());
 		}
@@ -57,6 +57,6 @@ public class CategoriesView extends ViewAbstract {
 	}
 
 	private void setCategory(int inputNumber) {
-		controller.setCategory(categoriesList.get(inputNumber));
+		controller.setCategoryChosen(categoriesList.get(inputNumber));
 	}
 }

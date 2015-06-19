@@ -8,7 +8,6 @@ import vadyazakusylo.kickstarter.view.input.Input;
 import vadyazakusylo.kickstarter.view.output.Output;
 
 public class DonateView extends ViewAbstract {
-	double donate;
 
 	public DonateView(Model model, Controller controller, Input input, Output output) {
 		super(model, controller, input, output);
@@ -19,17 +18,21 @@ public class DonateView extends ViewAbstract {
 		output.write("----------Window of donation to project-----------");
 	}
 
+	double donate;
+
 	@Override
 	public void printContent() {
 		output.write();
-		output.write("You may donating on " + model.getProject().getName());
-		output.write(model.getProject().getShortContent());
+		output.write("You may donating on " + model.getProjectChosen().getName());
+		output.write(model.getProjectChosen().getShortContent());
 		output.write("Input your name");
 		input.readString();
 		output.write("Input number of your pay card");
 		input.readInt();
-		output.write("Input donation (like is 10.0)");
-		donate = input.readDouble();
+		do {
+			output.write("Input donation (like is 10.0)");
+			donate = input.readDouble();
+		} while (donate <= 0);
 		output.write("\nInput:\n1 - to donate\n0 - to return");
 	}
 

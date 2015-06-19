@@ -27,10 +27,10 @@ public class ProjectsView extends ViewAbstract {
 	@Override
 	public void printContent() {
 		try {
-			Category category = model.getCategory();
-			projectsList = model.getProjectsList(category);
 			output.write();
-			printProjects();
+			Category category = model.getCategoryChosen();
+			projectsList = model.getProjectsList(category);
+			printProjectsList();
 		} catch (GettingDateException e) {
 			output.write();
 			output.write(e);
@@ -38,7 +38,7 @@ public class ProjectsView extends ViewAbstract {
 		output.write("\n0. Return");
 	}
 
-	private void printProjects() {
+	private void printProjectsList() {
 		for (int oneProject = 1; oneProject <= projectsList.size(); oneProject++) {
 			output.write(oneProject + ". " + projectsList.get(oneProject - 1).getName());
 			output.write(projectsList.get(oneProject - 1).getShortContent());
@@ -60,6 +60,6 @@ public class ProjectsView extends ViewAbstract {
 	}
 
 	private void setProject(int inputNumber) {
-		controller.setProject(projectsList.get(inputNumber));
+		controller.setProjectChosen(projectsList.get(inputNumber));
 	}
 }

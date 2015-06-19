@@ -22,6 +22,10 @@ public class Project {
 		return name;
 	}
 
+	// public void setCurrentMoney(double currentMoney) {
+	// this.currentMoney = currentMoney;
+	// }
+
 	public String getShortContent() {
 		String shortContent = shortDescription + "\n\tNeed money: " + needMoney
 				+ "\tCurrent money: " + currentMoney + "\n\tDays left: " + daysLeft;

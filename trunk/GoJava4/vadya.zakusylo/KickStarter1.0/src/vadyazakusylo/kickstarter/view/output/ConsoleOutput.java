@@ -8,11 +8,6 @@ public class ConsoleOutput implements Output {
 	}
 
 	@Override
-	public void write(String string) {
-		System.out.println(string);
-	}
-
-	@Override
 	public void write(Object object) {
 		System.out.println(object);
 	}

@@ -39,11 +39,11 @@ public class Model {
 		return categories;
 	}
 
-	public void setCategory(Category category) {
+	public void setCategoryChosen(Category category) {
 		categoryChosen = category;
 	}
 
-	public Category getCategory() {
+	public Category getCategoryChosen() {
 		return categoryChosen;
 	}
 
@@ -52,11 +52,15 @@ public class Model {
 		return projects;
 	}
 
-	public void setProject(Project project) {
+	public Project getProject(String projectChosenName) {
+		Project project =projectDao.getProject(projectChosenName);
+		return project;
+	}
+	public void setProjectChosen(Project project) {
 		projectChosen = project;
 	}
 
-	public Project getProject() {
+	public Project getProjectChosen() {
 		return projectChosen;
 	}
 

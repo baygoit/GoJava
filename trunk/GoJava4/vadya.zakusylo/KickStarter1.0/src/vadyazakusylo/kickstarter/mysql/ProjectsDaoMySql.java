@@ -12,7 +12,7 @@ import vadyazakusylo.kickstarter.model.Project;
 import vadyazakusylo.kickstarter.model.dao.ProjectsDao;
 import vadyazakusylo.kickstarter.model.exception.GettingDateException;
 
-public class ProjectsDaoMySql extends ProjectsDao {
+public class ProjectsDaoMySql implements ProjectsDao {
 	private Connection connection;
 
 	public ProjectsDaoMySql(Connection connection) {

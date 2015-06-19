@@ -1,13 +1,16 @@
 package vadyazakusylo.kickstarter.model.dao;
 
+import vadyazakusylo.kickstarter.model.Project;
 import vadyazakusylo.kickstarter.model.exception.GettingDateException;
 
-public abstract class ProjectDao {
+public interface ProjectDao {
 
-	public abstract double getCurrenMoney(String nameProject) throws GettingDateException;
+	Project getProject(String projectName);
 
-	public abstract void setCurrentMoney(double money, String nameProject);
+	double getCurrenMoney(String nameProject) throws GettingDateException;
 
-	public abstract void setQuestion(String question, String name);
+	void setCurrentMoney(double money, String nameProject);
+
+	void setQuestion(String question, String name);
 
 }

@@ -27,6 +27,6 @@ public class ExitView extends ViewAbstract {
 	public State chooseDirection() {
 		// NOP
 		// this method don't call
-		return null;
+		throw new AssertionError();
 	}
 }

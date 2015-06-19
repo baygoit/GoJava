@@ -11,7 +11,7 @@ import vadyazakusylo.kickstarter.model.Quote;
 import vadyazakusylo.kickstarter.model.dao.QuotesDao;
 import vadyazakusylo.kickstarter.model.exception.GettingDateException;
 
-public class QuotesDaoMySql extends QuotesDao {
+public class QuotesDaoMySql implements QuotesDao {
 	private Connection connection;
 
 	public QuotesDaoMySql(Connection connection) {
