@@ -52,10 +52,10 @@ public class Login extends HttpServlet {
 			user = (User) getUserName.getAttribute("userName");
 		} catch (KickstarterException e) {
 			request.getSession().setAttribute("userName", null);
-			response.sendRedirect("/edu.kickstarter/detailedProject");
+			response.sendRedirect("/edu.kickstarter/DetailedProject");
 			return;
 		}
 		request.getSession().setAttribute("userName", user.getName());
-		response.sendRedirect("/edu.kickstarter/detailedProject");
+		response.sendRedirect("/edu.kickstarter/DetailedProject");
 	}
 }

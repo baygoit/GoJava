@@ -19,16 +19,32 @@
     <servlet-name>Main</servlet-name>
     <servlet-class>servlet.Main</servlet-class>
   </servlet>
-    <servlet>
+  <servlet>
     <servlet-name>Login</servlet-name>
     <servlet-class>servlet.Login</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>Projects</servlet-name>
+    <servlet-class>servlet.Projects</servlet-class>
+  </servlet>
+    <servlet>
+    <servlet-name>DetailedProject</servlet-name>
+    <servlet-class>servlet.DetailedProject</servlet-class>
+  </servlet>
+    <servlet-mapping>
+    <servlet-name>DetailedProject</servlet-name>
+    <url-pattern>/DetailedProject</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Projects</servlet-name>
+    <url-pattern>/projects</url-pattern>
+  </servlet-mapping>
   <servlet-mapping>
     <servlet-name>Main</servlet-name>
-    <url-pattern>/</url-pattern>
+    <url-pattern>/main</url-pattern>
   </servlet-mapping>
-    <servlet-mapping>
+  <servlet-mapping>
     <servlet-name>Login</servlet-name>
-    <url-pattern>/Login</url-pattern>
+    <url-pattern>/login</url-pattern>
   </servlet-mapping>
 </web-app>

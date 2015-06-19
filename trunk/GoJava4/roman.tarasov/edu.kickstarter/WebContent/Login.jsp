@@ -8,9 +8,9 @@
 </head>
 <body>
 	<input type="button" value="project page"
-		onclick="self.location='/edu.kickstarter/detailedProject';" />
+		onclick="self.location='/edu.kickstarter/DetailedProject';" />
 	<h1>LOGIN: (Username: user , Password: pass)   </h1>
-	<form action="Login" method="post">
+	<form action="login" method="post">
 		Username: <input type="text" name="login"> <br>
         Password: <input type="password" name="pwd"> <br> <input
 			type="submit" value="Login">

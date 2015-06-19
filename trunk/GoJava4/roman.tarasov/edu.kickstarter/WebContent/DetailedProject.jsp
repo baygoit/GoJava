@@ -17,11 +17,11 @@
 		<p>
 	</c:if>
 	<input type="button" value="Donate"
-		onclick="self.location='/edu.kickstarter/detailedProject';" />
+		onclick="self.location='/edu.kickstarter/DetailedProject';" />
 	<input type="button" value="Invest"
-		onclick="self.location='/edu.kickstarter/detailedProject';" />
+		onclick="self.location='/edu.kickstarter/DetailedProject';" />
 	<input type="button" value="Comment"
-		onclick="self.location='/edu.kickstarter/detailedProject';" />
+		onclick="self.location='/edu.kickstarter/DetailedProject';" />
 	<br>
 	<br>
 	<input type="button" value="projects page"
