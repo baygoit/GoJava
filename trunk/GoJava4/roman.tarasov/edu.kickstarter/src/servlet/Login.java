@@ -57,5 +57,6 @@ public class Login extends HttpServlet {
 		}
 		request.getSession().setAttribute("userName", user.getName());
 		response.sendRedirect("/edu.kickstarter/DetailedProject");
+		
 	}
 }
