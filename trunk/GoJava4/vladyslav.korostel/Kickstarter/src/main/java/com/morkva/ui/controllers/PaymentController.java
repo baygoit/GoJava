@@ -23,6 +23,7 @@ public class PaymentController implements IController{
         Project project = model.getCurrentProject();
         project.setCurrentMoney(project.getCurrentMoney() + amount);
         project.setNeedMoney(project.getNeedMoney() - amount);
+        model.saveProject(project);
     }
 
     @Override

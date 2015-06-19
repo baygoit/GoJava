@@ -46,4 +46,13 @@ public class ProjectRepositoryImpl implements ProjectRepository {
         }
         return project;
     }
+
+    @Override
+    public void update(Project project) {
+        try {
+            projectDao.update(project);
+        } catch (PersistException e) {
+            e.printStackTrace();
+        }
+    }
 }

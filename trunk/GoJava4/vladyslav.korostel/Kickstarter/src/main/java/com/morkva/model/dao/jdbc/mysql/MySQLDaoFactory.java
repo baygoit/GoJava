@@ -1,6 +1,7 @@
 package com.morkva.model.dao.jdbc.mysql;
 
 import com.morkva.entities.Category;
+import com.morkva.entities.PaymentOption;
 import com.morkva.entities.Project;
 import com.morkva.entities.Quote;
 import com.morkva.model.dao.DAO;
@@ -50,6 +51,12 @@ public class MySQLDaoFactory implements DAOFactory<Connection> {
             @Override
             public DAO create(Connection connection) {
                 return new MySQLProjectDao(MySQLDaoFactory.this, connection);
+            }
+        });
+        creators.put(PaymentOption.class, new DaoCreator<Connection>() {
+            @Override
+            public DAO create(Connection connection) {
+                return new MySQLPaymentOptionDao(MySQLDaoFactory.this, connection);
             }
         });
 

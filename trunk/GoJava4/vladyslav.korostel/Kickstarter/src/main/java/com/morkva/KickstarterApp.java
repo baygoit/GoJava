@@ -3,6 +3,7 @@ package com.morkva;
 import com.morkva.logic.Printer;
 import com.morkva.logic.Reader;
 import com.morkva.model.CategoryRepository;
+import com.morkva.model.PaymentOptionRepository;
 import com.morkva.model.ProjectRepository;
 import com.morkva.model.QuoteRepository;
 import com.morkva.ui.Model;
@@ -15,6 +16,7 @@ public class KickstarterApp {
     private CategoryRepository categoryRepository;
     private ProjectRepository projectRepository;
     private QuoteRepository quoteRepository;
+    private PaymentOptionRepository paymentOptionRepository;
 //    private Repository<User> userRepository;
 
     private Reader reader;
@@ -28,7 +30,7 @@ public class KickstarterApp {
     
     public void run() {
         showQuote();
-        Model model = new Model(categoryRepository, projectRepository);
+        Model model = new Model(categoryRepository, projectRepository, paymentOptionRepository);
         ViewHelper viewHelper = new ViewHelper(model, printer, reader);
         ViewResolver.getInstance().setNextView(new LoginController(model, printer, reader));
         viewHelper.runCommand();
@@ -53,6 +55,10 @@ public class KickstarterApp {
 
     public void setProjectRepository(ProjectRepository projectRepository) {
         this.projectRepository = projectRepository;
+    }
+
+    public void setPaymentOptionRepository(PaymentOptionRepository paymentOptionRepository) {
+        this.paymentOptionRepository = paymentOptionRepository;
     }
 
     public void setQuoteRepository(QuoteRepository quoteRepository) {

@@ -13,4 +13,6 @@ public interface ProjectRepository {
     List<Project> getProjectsForCategory(Category category);
 
     Project getById(Integer keyCode);
+
+    void update(Project project);
 }

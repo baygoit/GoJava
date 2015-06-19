@@ -1,12 +1,14 @@
 package com.morkva;
 
 import com.morkva.entities.Category;
+import com.morkva.entities.PaymentOption;
 import com.morkva.entities.Project;
 import com.morkva.logic.ConsolePrinter;
 import com.morkva.logic.ConsoleReader;
 import com.morkva.logic.Printer;
 import com.morkva.logic.Reader;
 import com.morkva.model.CategoryRepositoryImpl;
+import com.morkva.model.PaymentOptionRepositoryImpl;
 import com.morkva.model.ProjectRepositoryImpl;
 import com.morkva.model.QuoteRepositoryImpl;
 import com.morkva.model.dao.DAO;
@@ -16,7 +18,6 @@ import com.morkva.model.dao.jdbc.mysql.MySQLDaoFactory;
 
 import java.io.IOException;
 import java.sql.Connection;
-import java.util.Random;
 
 /**
  * Created by vladyslav on 07.05.15.
@@ -41,6 +42,12 @@ public class Main {
         } catch (PersistException e) {
             e.printStackTrace();
         }
+
+        try {
+            app.setPaymentOptionRepository(new PaymentOptionRepositoryImpl(daoFactory.getDao(daoFactory.getContext(), PaymentOption.class)));
+        } catch (PersistException e) {
+            e.printStackTrace();
+        }
         app.run();
     }
 
@@ -49,11 +56,13 @@ public class Main {
         Connection connection = null;
         DAO<Category, Integer> categoryDao;
         DAO<Project, Integer> projectDao;
+        DAO<PaymentOption, Integer> paymentOptionDao;
 
         try {
             connection = daoFactory.getContext();
             categoryDao = daoFactory.getDao(connection, Category.class);
             projectDao = daoFactory.getDao(connection, Project.class);
+            paymentOptionDao = daoFactory.getDao(connection, PaymentOption.class);
 
             for (int i = 0; i < 5; i++) {
                 categoryDao.persist(new Category("Name " + i));
@@ -61,7 +70,12 @@ public class Main {
 
             Category category = categoryDao.getByPK(1);
             for (int i = 0; i < 5; i++) {
-                projectDao.persist(new Project("Name " + i, "Short description " + i, new Random().nextInt(10) * i, 0, 30, "History " + i, "Url video " + i, category));
+                projectDao.persist(new Project("Name " + i, "Short description " + i, 10000, 0, 30, "History " + i, "Url video " + i, category));
+            }
+
+            Project project = projectDao.getByPK(1);
+            for (int i = 1; i <= 3; i++) {
+                paymentOptionDao.persist(new PaymentOption("Decription " + i, 1000 * i, project));
             }
 
         } catch (PersistException e) {

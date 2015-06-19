@@ -1,8 +1,10 @@
 package com.morkva.ui;
 
 import com.morkva.entities.Category;
+import com.morkva.entities.PaymentOption;
 import com.morkva.entities.Project;
 import com.morkva.model.CategoryRepository;
+import com.morkva.model.PaymentOptionRepository;
 import com.morkva.model.ProjectRepository;
 import com.morkva.utils.UserType;
 
@@ -14,13 +16,16 @@ import java.util.List;
 public class Model {
     CategoryRepository categoryRepository;
     ProjectRepository projectRepository;
+    PaymentOptionRepository paymentOptionRepository;
+
     private Category currentCategory;
     private Project currentProject;
     private UserType currentUserType;
 
-    public Model(CategoryRepository categoryRepository, ProjectRepository projectRepository) {
+    public Model(CategoryRepository categoryRepository, ProjectRepository projectRepository, PaymentOptionRepository paymentOptionRepository) {
         this.categoryRepository = categoryRepository;
         this.projectRepository = projectRepository;
+        this.paymentOptionRepository = paymentOptionRepository;
     }
 
     public Category getCurrentCategory() {
@@ -61,5 +66,13 @@ public class Model {
 
     public Project getProjectById(Integer keyCode) {
         return projectRepository.getById(keyCode);
+    }
+
+    public List<PaymentOption> getPaymentOptionsForProject(Project project) {
+        return paymentOptionRepository.getPaymentOptionsForProject(project);
+    }
+
+    public void saveProject(Project project) {
+        projectRepository.update(project);
     }
 }

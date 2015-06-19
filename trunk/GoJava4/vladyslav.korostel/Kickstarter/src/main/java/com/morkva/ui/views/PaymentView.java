@@ -1,5 +1,6 @@
 package com.morkva.ui.views;
 
+import com.morkva.entities.PaymentOption;
 import com.morkva.entities.Project;
 import com.morkva.logic.Printer;
 import com.morkva.logic.Reader;
@@ -7,9 +8,6 @@ import com.morkva.ui.Model;
 import com.morkva.ui.ViewResolver;
 import com.morkva.ui.controllers.PaymentController;
 import com.morkva.ui.controllers.ProjectController;
-import com.morkva.utils.PaymentOption;
-
-import java.util.Map;
 
 /**
  * Created by vladyslav on 29.05.15.
@@ -32,8 +30,10 @@ public class PaymentView implements IView {
     public void showContent() {
         printer.print("How much do you want to invest?\n");
         Project project = model.getCurrentProject();
-        for (Map.Entry<Integer, PaymentOption> entry : project.getPaymentOptions().entrySet()) {
-            printer.print(entry.getKey() + ": " + entry.getValue().getAmount() + " - " + entry.getValue().getDescription() + "\n");
+        int i = 1;
+        for (PaymentOption paymentOption : model.getPaymentOptionsForProject(project)) {
+            printer.print(i + ": " + paymentOption.getAmount() + " - " + paymentOption.getDescription() + "\n");
+            i++;
         }
         printer.print("Or you can invest more money!\n");
         printer.print("0 to return\n");
@@ -43,11 +43,12 @@ public class PaymentView implements IView {
     public void readInput() {
         while (true) {
             int keyCode = reader.readUserInput();
-            if (model.getCurrentProject().getPaymentOptions().containsKey(keyCode)) {
-                controller.investToTheProject(model.getCurrentProject().getPaymentOptions().get(keyCode).getAmount());
+            if (keyCode == 0){
                 ViewResolver.getInstance().setNextView(new ProjectController(printer, model, reader));
                 break;
-            } else if (keyCode == 0){
+            } else if (model.getPaymentOptionsForProject(model.getCurrentProject()).get(keyCode-1) != null) {
+                System.err.println("HERE");
+                controller.investToTheProject(model.getPaymentOptionsForProject(model.getCurrentProject()).get(keyCode-1).getAmount());
                 ViewResolver.getInstance().setNextView(new ProjectController(printer, model, reader));
                 break;
             } else if (keyCode > 0){
