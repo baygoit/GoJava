@@ -12,8 +12,8 @@ public class Model {
 	private CategoriesDao categoriesDao;
 	private ProjectsDao projectsDao;
 	private ProjectDao projectDao;
-	private Category categoryChosen;
-	private Project projectChosen;
+	private Category workingCategory;
+	private Project workingProject;
 
 	public Model(QuotesDao quotesDao, CategoriesDao categoriesDao, ProjectsDao projectsDao,
 			ProjectDao projectDao) {
@@ -39,12 +39,12 @@ public class Model {
 		return categories;
 	}
 
-	public void setCategoryChosen(Category category) {
-		categoryChosen = category;
+	public void setWorkingCategory(Category category) {
+		workingCategory = category;
 	}
 
-	public Category getCategoryChosen() {
-		return categoryChosen;
+	public Category getWorkingCategory() {
+		return workingCategory;
 	}
 
 	public List<Project> getProjectsList(Category category) {
@@ -56,20 +56,20 @@ public class Model {
 		Project project =projectDao.getProject(projectChosenName);
 		return project;
 	}
-	public void setProjectChosen(Project project) {
-		projectChosen = project;
+	public void setWorkingProject(Project project) {
+		workingProject = project;
 	}
 
-	public Project getProjectChosen() {
-		return projectChosen;
+	public Project getWorkingProject() {
+		return workingProject;
 	}
 
 	public void setCurrentMoney(double money) {
-		money += projectDao.getCurrenMoney(projectChosen.getName());
-		projectDao.setCurrentMoney(money, projectChosen.getName());
+		money += projectDao.getCurrenMoney(workingProject.getName());
+		projectDao.setCurrentMoney(money, workingProject.getName());
 	}
 
 	public void setQuestion(String question) {
-		projectDao.setQuestion(question, projectChosen.getName());
+		projectDao.setQuestion(question, workingProject.getName());
 	}
 }

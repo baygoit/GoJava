@@ -24,8 +24,8 @@ public class ProjectView extends ViewAbstract {
 	@Override
 	public void printContent() {
 		try {
-			project = model.getProject(model.getProjectChosen().getName());
-			controller.setProjectChosen(project);
+			project = model.getProject(model.getWorkingProject().getName());
+			controller.setWorkingProject(project);
 			output.write();
 			printProject();
 			output.write("\nInput:\n1 - to donate\n2 - to ask question\n0 - to return");

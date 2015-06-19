@@ -21,12 +21,12 @@ public class Controller {
 		this.state = state;
 	}
 
-	public void setCategoryChosen(Category category) {
-		model.setCategoryChosen(category);
+	public void setWorkingCategory(Category category) {
+		model.setWorkingCategory(category);
 	}
 
-	public void setProjectChosen(Project project) {
-		model.setProjectChosen(project);
+	public void setWorkingProject(Project project) {
+		model.setWorkingProject(project);
 	}
 
 	public void setCurrentMoney(double money) {

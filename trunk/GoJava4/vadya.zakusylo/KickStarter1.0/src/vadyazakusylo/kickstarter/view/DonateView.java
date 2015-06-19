@@ -23,8 +23,8 @@ public class DonateView extends ViewAbstract {
 	@Override
 	public void printContent() {
 		output.write();
-		output.write("You may donating on " + model.getProjectChosen().getName());
-		output.write(model.getProjectChosen().getShortContent());
+		output.write("You may donating on " + model.getWorkingProject().getName());
+		output.write(model.getWorkingProject().getShortContent());
 		output.write("Input your name");
 		input.readString();
 		output.write("Input number of your pay card");

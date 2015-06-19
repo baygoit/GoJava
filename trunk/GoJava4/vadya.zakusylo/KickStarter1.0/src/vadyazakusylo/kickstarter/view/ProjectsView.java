@@ -28,7 +28,7 @@ public class ProjectsView extends ViewAbstract {
 	public void printContent() {
 		try {
 			output.write();
-			Category category = model.getCategoryChosen();
+			Category category = model.getWorkingCategory();
 			projectsList = model.getProjectsList(category);
 			printProjectsList();
 		} catch (GettingDateException e) {
@@ -52,14 +52,14 @@ public class ProjectsView extends ViewAbstract {
 			state = State.CATEGORIES;
 		} else if (inputNumber > 0 && inputNumber <= projectsList.size()) {
 			state = State.PROJECT;
-			setProject(inputNumber - 1);
+			setWorkingProject(inputNumber - 1);
 		} else {
 			state = State.ERROR_PROJECTS;
 		}
 		return state;
 	}
 
-	private void setProject(int inputNumber) {
-		controller.setProjectChosen(projectsList.get(inputNumber));
+	private void setWorkingProject(int inputNumber) {
+		controller.setWorkingProject(projectsList.get(inputNumber));
 	}
 }

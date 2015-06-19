@@ -49,14 +49,14 @@ public class CategoriesView extends ViewAbstract {
 			state = State.START;
 		} else if (inputNumber > 0 && inputNumber <= categoriesList.size()) {
 			state = State.PROJECTS;
-			setCategory(inputNumber - 1);
+			setWorkingCategory(inputNumber - 1);
 		} else {
 			state = State.ERROR_CATEGORIES;
 		}
 		return state;
 	}
 
-	private void setCategory(int inputNumber) {
-		controller.setCategoryChosen(categoriesList.get(inputNumber));
+	private void setWorkingCategory(int inputNumber) {
+		controller.setWorkingCategory(categoriesList.get(inputNumber));
 	}
 }
