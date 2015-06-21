@@ -9,6 +9,7 @@ import java.util.List;
 import dao.pool.KickstarterException;
 import dao.pool.Pool;
 
+
 public class DBcategoryServiceImpl implements CategoryService {
 
 	private Connection conn;

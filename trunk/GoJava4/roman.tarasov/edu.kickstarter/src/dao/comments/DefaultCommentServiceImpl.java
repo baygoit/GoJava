@@ -6,7 +6,6 @@ import java.util.List;
 
 public class DefaultCommentServiceImpl implements CommentService {
 
-
 	HashMap<Integer, ArrayList<ProjectComment>> allComments;
 	ArrayList<ProjectComment> commentsInProject;
 
