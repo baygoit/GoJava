@@ -11,7 +11,7 @@ public class DefaultQuoteServiceImpl implements QuoteService {
 		quotes = new ArrayList<Quote>();
 		Quote quote = new Quote();
 		quote.setID(8);
-		quote.setQuote("Explore projects, everywhere");
+		quote.setQuote("Explore projects, everywhere.");
 		quotes.add(quote);
 
 		quote = new Quote();

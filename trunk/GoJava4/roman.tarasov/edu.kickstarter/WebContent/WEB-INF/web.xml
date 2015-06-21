@@ -19,10 +19,7 @@
     <servlet-name>Main</servlet-name>
     <servlet-class>servlet.Main</servlet-class>
   </servlet>
-   <servlet>
-    <servlet-name>NewMain</servlet-name>
-    <servlet-class>servlet.NewMain</servlet-class>
-  </servlet>
+
   <servlet>
     <servlet-name>Login</servlet-name>
     <servlet-class>servlet.Login</servlet-class>
@@ -46,10 +43,6 @@
   <servlet-mapping>
     <servlet-name>Main</servlet-name>
     <url-pattern>/main</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>NewMain</servlet-name>
-    <url-pattern>/newmain</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>Login</servlet-name>

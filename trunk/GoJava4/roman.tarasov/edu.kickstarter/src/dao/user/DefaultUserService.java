@@ -42,7 +42,9 @@ public class DefaultUserService implements UserService {
 	public List<String> getUsersNamesByListComments(
 			List<ProjectComment> comments) throws KickstarterException {
 		List<String> userNames = new ArrayList<String>();
-
+if(comments==null){
+	return null;
+}
 		for (ProjectComment currentComment : comments) {
 			for (User currentUser : users) {
 				if (currentUser.getID() == (currentComment.getUserID())) {

@@ -13,7 +13,7 @@
 	<h1>Kickstarter</h1>
 	<c:forEach var="category" items="${categories}">
 		<h2>
-			<a href="/edu.kickstarter/projects?category=${category.ID}"> <c:out
+			<a href="projects?category=${category.ID}"> <c:out
 					value="${category.name}" />
 			</a>
 		</h2>

@@ -11,11 +11,11 @@
 <body>
 	<h1>PROJECTS</h1>
 	<input type="button" value="main page"
-		onclick="self.location='/edu.kickstarter/main';" />
+		onclick="self.location='main';" />
 	<c:forEach var="project" items="${sortedProjects}">
 		<h2>
 			<a
-				href="/edu.kickstarter/DetailedProject?project=${project.ID}&category=${project.categoryID}">
+				href="DetailedProject?project=${project.ID}&category=${project.categoryID}">
 				<c:out value="${project.name}" />
 			</a>
 		</h2>
@@ -30,7 +30,7 @@
 		<br>
 	</c:forEach>
 	<input type="button" value="main page"
-		onclick="self.location='/edu.kickstarter/main';" />
+		onclick="self.location='main';" />
 
 </body>
 </html>

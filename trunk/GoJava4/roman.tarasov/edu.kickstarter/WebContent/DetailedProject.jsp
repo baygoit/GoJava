@@ -17,15 +17,15 @@
 		<p>
 	</c:if>
 	<input type="button" value="Donate"
-		onclick="self.location='/edu.kickstarter/DetailedProject';" />
+		onclick="self.location='DetailedProject';" />
 	<input type="button" value="Invest"
-		onclick="self.location='/edu.kickstarter/DetailedProject';" />
+		onclick="self.location='DetailedProject';" />
 	<input type="button" value="Comment"
-		onclick="self.location='/edu.kickstarter/DetailedProject';" />
+		onclick="self.location='DetailedProject';" />
 	<br>
 	<br>
 	<input type="button" value="projects page"
-		onclick="self.location='/edu.kickstarter/projects';" />
+		onclick="self.location='projects';" />
 	<h1>
 		<c:out value=" ${detailedProject.name}" />
 	</h1>
@@ -65,6 +65,6 @@
 
 	
 	<input type="button" value="projects page"
-		onclick="self.location='/edu.kickstarter/projects';" />
+		onclick="self.location='projects';" />
 </body>
 </html>

@@ -1,9 +1,9 @@
 package model;
 
 public enum eModels {
-MAIN,
-PROJECTS,
-PROJECT,
-LOGIN,
-ERROR
+MAIN_M,
+PROJECTS_M,
+PROJECT_M,
+LOGIN_M,
+ERROR_M
 }
