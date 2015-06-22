@@ -1,11 +1,9 @@
-package com.morkva.ui;
+package com.morkva.model;
 
 import com.morkva.entities.Category;
 import com.morkva.entities.PaymentOption;
 import com.morkva.entities.Project;
-import com.morkva.model.CategoryRepository;
-import com.morkva.model.PaymentOptionRepository;
-import com.morkva.model.ProjectRepository;
+import com.morkva.entities.Quote;
 import com.morkva.utils.UserType;
 
 import java.util.List;
@@ -17,15 +15,17 @@ public class Model {
     CategoryRepository categoryRepository;
     ProjectRepository projectRepository;
     PaymentOptionRepository paymentOptionRepository;
+    QuoteRepository quoteRepository;
 
     private Category currentCategory;
     private Project currentProject;
     private UserType currentUserType;
 
-    public Model(CategoryRepository categoryRepository, ProjectRepository projectRepository, PaymentOptionRepository paymentOptionRepository) {
+    public Model(CategoryRepository categoryRepository, ProjectRepository projectRepository, PaymentOptionRepository paymentOptionRepository, QuoteRepository quoteRepository) {
         this.categoryRepository = categoryRepository;
         this.projectRepository = projectRepository;
         this.paymentOptionRepository = paymentOptionRepository;
+        this.quoteRepository = quoteRepository;
     }
 
     public Category getCurrentCategory() {
@@ -74,5 +74,9 @@ public class Model {
 
     public void saveProject(Project project) {
         projectRepository.update(project);
+    }
+
+    public Quote getRandomQuote() {
+        return quoteRepository.getRandomQuote();
     }
 }

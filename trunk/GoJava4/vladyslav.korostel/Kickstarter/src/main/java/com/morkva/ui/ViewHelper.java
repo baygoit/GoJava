@@ -2,8 +2,8 @@ package com.morkva.ui;
 
 import com.morkva.logic.Printer;
 import com.morkva.logic.Reader;
+import com.morkva.model.Model;
 import com.morkva.ui.controllers.*;
-import com.morkva.ui.views.IView;
 
 /**
  * Created by vladyslav on 22.05.15.

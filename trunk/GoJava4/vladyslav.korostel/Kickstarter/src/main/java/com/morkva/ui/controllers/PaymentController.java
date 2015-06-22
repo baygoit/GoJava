@@ -3,7 +3,7 @@ package com.morkva.ui.controllers;
 import com.morkva.entities.Project;
 import com.morkva.logic.Printer;
 import com.morkva.logic.Reader;
-import com.morkva.ui.Model;
+import com.morkva.model.Model;
 import com.morkva.ui.views.PaymentView;
 
 /**

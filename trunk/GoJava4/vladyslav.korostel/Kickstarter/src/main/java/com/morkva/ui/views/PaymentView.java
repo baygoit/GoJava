@@ -4,7 +4,7 @@ import com.morkva.entities.PaymentOption;
 import com.morkva.entities.Project;
 import com.morkva.logic.Printer;
 import com.morkva.logic.Reader;
-import com.morkva.ui.Model;
+import com.morkva.model.Model;
 import com.morkva.ui.ViewResolver;
 import com.morkva.ui.controllers.PaymentController;
 import com.morkva.ui.controllers.ProjectController;

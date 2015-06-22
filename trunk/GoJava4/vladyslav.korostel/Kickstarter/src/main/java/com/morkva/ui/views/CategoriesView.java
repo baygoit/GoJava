@@ -3,7 +3,7 @@ package com.morkva.ui.views;
 import com.morkva.entities.Category;
 import com.morkva.logic.Printer;
 import com.morkva.logic.Reader;
-import com.morkva.ui.Model;
+import com.morkva.model.Model;
 import com.morkva.ui.ViewResolver;
 import com.morkva.ui.controllers.CategoryController;
 
