@@ -1,5 +1,7 @@
 package model;
 
+import model.eModels;
+
 public class ModelStrategy {
 	private volatile static ModelStrategy uniqueInstance;
 	private static MainDao mainDao;
@@ -17,8 +19,8 @@ public class ModelStrategy {
 					uniqueInstance = new ModelStrategy();
 					mainDao = new MainDao();
 					detailedProjectDao = new DetailedProjectDao();
-					projectsDao=new ProjectsDao();
-					loginDao=new LoginDao();
+					projectsDao = new ProjectsDao();
+					loginDao = new LoginDao();
 				}
 			}
 		}

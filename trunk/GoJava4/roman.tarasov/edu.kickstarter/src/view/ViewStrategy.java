@@ -1,11 +1,14 @@
 package view;
 
+import view.eViews;
+
 public class ViewStrategy {
 	private volatile static ViewStrategy uniqueInstance;
 	private static CategoriesView categoriesView;
 	private static DetailedProjectView detailedProjectView;
 	private static ProjectsView projectsView;
 	private static LoginView loginView;
+
 	private ViewStrategy() {
 	}
 
@@ -15,9 +18,9 @@ public class ViewStrategy {
 				if (uniqueInstance == null) {
 					uniqueInstance = new ViewStrategy();
 					categoriesView = new CategoriesView();
-					detailedProjectView=new DetailedProjectView();
-					projectsView=new ProjectsView();
-					loginView= new LoginView();
+					detailedProjectView = new DetailedProjectView();
+					projectsView = new ProjectsView();
+					loginView = new LoginView();
 				}
 			}
 		}
@@ -27,7 +30,7 @@ public class ViewStrategy {
 	public iView selectView(eViews selectedView) {
 		iView iview = null;
 		switch (selectedView) {
-	
+
 		case CATEGORIES_V:
 			iview = categoriesView;
 			break;

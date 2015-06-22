@@ -43,9 +43,8 @@ public class ProjectsDao implements iModel {
 			HttpSession session = request.getSession();
 			Object objectAttribute = session.getAttribute("category");
 			if (objectAttribute == null) {
-				iView view = ViewStrategy.getInstance().selectView(CATEGORIES_V);
-				view.forward(request, response);
-				return;
+				throw new KickstarterException ("illegal number of category");
+				
 			}
 			categoryID = (Integer) session.getAttribute("category");
 		}

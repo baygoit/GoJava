@@ -1,4 +1,6 @@
-package tests;
+package edu.kickstarter;
+
+
 
 import static org.junit.Assert.*;
 import org.junit.Test;
@@ -8,16 +10,16 @@ import dao.quote.Quote;
 
 import org.mockito.*;
 
-public class example_mockito extends Mockito {
+public class example_mockitoTest extends Mockito {
 	DefaultQuoteServiceImpl serv;
 
-	public example_mockito() {
+	public example_mockitoTest() {
 		super();
 		serv = new DefaultQuoteServiceImpl();
 	}
 
 	@Test
-	public void test() throws KickstarterException {
+	public void testTest() throws KickstarterException {
 
 		Quote quote = new Quote();
 		quote.setID(5);
