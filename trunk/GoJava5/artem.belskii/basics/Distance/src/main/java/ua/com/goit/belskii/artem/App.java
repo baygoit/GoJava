@@ -8,6 +8,10 @@ public class App
 {
     public static void main( String[] args )
     {
-        System.out.println( "Hello World!" );
+    	Input consoleIn=new Input();
+    	consoleIn.setString();
+    	
+    	Distance distance = new Distance();
+    	System.out.println(distance.findDistance(consoleIn.getInput()));
     }
 }
