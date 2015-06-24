@@ -1,0 +1,55 @@
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-4.1.xsd">
+
+	<!-- bank -->
+	<bean id="Bank" class="dao.bank.Bank" />
+	<!-- <bean id="BankException" class="dao.bank.BankException" <constructor-arg></constructor-arg> 
+		</bean> -->
+	<!-- category -->
+	<bean id="Category" class="dao.category.Category" scope="prototype" />
+	<bean id="CategoryService" class="dao.category.CategoryService" />
+	<bean id="DBcategoryServiceImpl" class="dao.category.DBcategoryServiceImpl" />
+	<bean id="DefaultCategoryServiceImpl" class="dao.category.DefaultCategoryServiceImpl" />
+
+	<!-- project -->
+	<bean id="DBProjectService" class="dao.project.DBprojectServiceImpl" />
+	<bean id="DefaultProjectService" class="dao.project.DefaultProjectServiceImpl" />
+	<bean id="Project" class="dao.project.Project" scope="prototype" />
+	<!-- <bean id="ProjectService" class="dao.project.ProjectService" /> -->
+
+	<!-- quote -->
+	<bean id="DBQuoteService" class="dao.quote.DBquoteServiceImpl" />
+	<bean id="DefaultQuoteService" class="dao.quote.DefaultQuoteServiceImpl" />
+	<bean id="Quote" class="dao.quote.Quote" scope="prototype" />
+	<!-- <bean id="QuoteService" class="dao.quote.QuoteService" /> -->
+
+	<!-- user -->
+	<bean id="DBUserService" class="dao.user.DBUserService" />
+	<bean id="DefaultUserService" class="dao.user.DefaultUserService" />
+	<bean id="User" class="dao.user.User" scope="prototype" />
+	<!-- <bean id="UserService" class="dao.user.UserService" /> -->
+
+	<!-- model -->
+	<bean id="DetailedProjectDao" class="model.DetailedProjectDao" />
+	<bean id="LoginDao" class="model.LoginDao" />
+	<bean id="MainDao" class="model.MainDao" />
+	<bean id="ModelStrategy" class="model.ModelStrategy" />
+	<bean id="ProjectsDao" class="model.ProjectsDao" />
+
+	<!-- servlet -->
+	<bean id="DetailedProject" class="servlet.DetailedProject" />
+	<bean id="Login" class="servlet.Login" />
+	<bean id="Main" class="servlet.Main" />
+	<bean id="Projects" class="servlet.Projects" />
+
+	<!-- view -->
+	<bean id="CategoriesView" class="view.CategoriesView" />
+	<bean id="DetailedProjectView" class="view.DetailedProjectView" />
+	<bean id="LoginView" class="view.LoginView" />
+	<bean id="ProjectsView" class="view.ProjectsView" />
+	<bean id="ViewStrategy" class="view.ViewStrategy" />
+
+</beans>
