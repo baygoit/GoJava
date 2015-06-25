@@ -5,9 +5,24 @@ import java.util.List;
 import dao.pool.KickstarterException;
 
 public class DefaultProjectServiceImpl implements ProjectService {
-	List<Project> projects;
+	static List<Project> projects;
+	private volatile static DefaultProjectServiceImpl uniqueInstance;
+	
+	private DefaultProjectServiceImpl() {
+	}
 
-	public DefaultProjectServiceImpl() {
+	public static DefaultProjectServiceImpl getInstance() {
+		if (uniqueInstance == null) {
+			synchronized (DefaultProjectServiceImpl.class) {
+				if (uniqueInstance == null) {
+					uniqueInstance = new DefaultProjectServiceImpl();
+					init();
+				}
+			}
+		}
+		return uniqueInstance;
+	}
+	public static void init() {
 		projects = new ArrayList<Project>();
 
 		int categoryID = 5;
@@ -93,5 +108,11 @@ public class DefaultProjectServiceImpl implements ProjectService {
 			}
 		}
 		throw new KickstarterException("the project was not found");
+	}
+
+	@Override
+	public void updateProject(Project project) {
+		// TODO Auto-generated method stub
+		
 	}
 }

@@ -17,5 +17,21 @@
 			<c:out value=" only for registered user" />
 		<p>
 	</c:if>
+		<c:if test="${user!=null}">
+		<p>
+			<c:out value=" ${user.name }" />
+		<p>
+		<h1>Enter the payment details </h1>
+		<form action="donate" method="post">
+			Login :(bankir) <input type="text" name="bankLogin"> <br> Card
+			Number: (777)<input type="text" name="bankCardNumber"> <br>
+
+		</form>
+
+	</c:if>
+	<c:if test="${balanceBefore!=null&&balanceAfter!=null}">
+		<c:out value=" balance before operation: ${balanceBefore}" />
+		<c:out value=" balance after operation: ${balanceAfter}" />
+	</c:if>
 </body>
 </html>

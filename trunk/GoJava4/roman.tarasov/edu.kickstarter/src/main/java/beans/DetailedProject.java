@@ -1,12 +1,9 @@
 package beans;
 
-
 import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
 import view.ViewDispatcher;
 import view.ViewStrategy;
 import view.eViews;
@@ -36,7 +33,7 @@ public class DetailedProject extends DatabaseConnectionChecker implements iBean 
 			commentService = new DBcommentServiceImpl();
 			userService = new DBUserService();
 		} else {
-			projectService = new DefaultProjectServiceImpl();
+			projectService = DefaultProjectServiceImpl.getInstance();
 			commentService = DefaultCommentService.getInstance();
 			userService = new DefaultUserService();
 		}

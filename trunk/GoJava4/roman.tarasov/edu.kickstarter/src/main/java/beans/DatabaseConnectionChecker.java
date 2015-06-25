@@ -2,7 +2,6 @@ package beans;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-
 import dao.pool.KickstarterException;
 import dao.pool.Pool;
 

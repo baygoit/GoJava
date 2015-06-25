@@ -2,6 +2,7 @@ package dao.project;
 
 import java.sql.Array;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -129,5 +130,74 @@ public class DBprojectServiceImpl implements ProjectService {
 			}
 		}
 		return project;
+	}
+
+	@Override
+	public void updateProject(Project project) throws KickstarterException {
+		StringBuffer sql = new StringBuffer();
+		int error = 0;
+		try {
+			sql.append("UPDATE projects set ");
+			sql.append("id_project=? , ");
+			sql.append("id_category=? , ");
+			sql.append("name=? , ");
+			sql.append("short_description=? , ");
+			sql.append("description=? , ");
+			sql.append("pledged=? , ");
+			sql.append("amount=? , ");
+			sql.append("days_to_go=? , ");
+			sql.append("link=? , ");
+			sql.append("history=? , ");
+			sql.append("invest_options=? ");
+			sql.append("WHERE id_project=");
+			sql.append(Integer.toString(project.getID()));
+
+			PreparedStatement preparedStatement = Pool.getInstance()
+					.getConnection().prepareStatement(sql.toString());
+			fillStatement(preparedStatement, project);
+		} catch (KickstarterException | SQLException e) {
+			error = 1;
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				error += 2;
+			}
+			if (error == 1) {
+				throw new KickstarterException("update project has error");
+			}
+			if (error == 2) {
+				throw new KickstarterException(
+						"connection close after update project  has error");
+			}
+			if (error == 3) {
+				throw new KickstarterException("database operations  has error");
+			}
+		}
+	}
+
+	void fillStatement(PreparedStatement ps, Project project)
+			throws KickstarterException {
+		try {
+			ps.setInt(1, project.getID());
+			ps.setInt(2, project.getCategoryID());
+			ps.setString(3, project.getName());
+			ps.setString(4, project.getShortDescription());
+			ps.setString(5, project.getDescription());
+			ps.setDouble(6, project.getPledged());
+			Array sqlArray = Pool.getInstance().getConnection()
+					.createArrayOf("float8", project.getAmount());
+			ps.setArray(7, sqlArray);
+			ps.setInt(8, project.getDaysToGo());
+			ps.setString(9, project.getLinkToVideo());
+			ps.setString(10, project.getHistory());
+			sqlArray = Pool.getInstance().getConnection()
+					.createArrayOf("varchar", project.getInvestmentOptions());
+			ps.setArray(11, sqlArray);
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			throw new KickstarterException("update project has error", e);
+		}
+
 	}
 }

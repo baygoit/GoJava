@@ -1,10 +1,8 @@
 package beans;
 
 import java.io.IOException;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import dao.pool.KickstarterException;
 import dao.user.DBUserService;
 import dao.user.DefaultUserService;
@@ -46,8 +44,6 @@ public class Login extends DatabaseConnectionChecker implements iBean {
 		} catch (IOException e) {
 		}
 	}
-
-
 
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response)

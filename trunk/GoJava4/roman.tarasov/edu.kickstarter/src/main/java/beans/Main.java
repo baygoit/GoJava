@@ -2,10 +2,8 @@ package beans;
 
 
 import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import static view.eViews.*;
 import view.ViewDispatcher;
 import view.ViewStrategy;

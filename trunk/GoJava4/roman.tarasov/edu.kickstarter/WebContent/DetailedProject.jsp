@@ -11,7 +11,7 @@
 <title>Main</title>
 </head>
 <body>
-	<c:if test="${userName!=null}">
+	<c:if test="${user!=null}">
 		<p>
 			<jsp:include page="UserMenu.jsp"></jsp:include>
 		<p>

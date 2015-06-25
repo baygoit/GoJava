@@ -1,11 +1,9 @@
 package beans;
 
 import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
 import static view.eViews.*;
 import view.ViewDispatcher;
 import view.ViewStrategy;
@@ -26,7 +24,7 @@ public class Projects extends DatabaseConnectionChecker implements iBean {
 		if (connected()) {
 			projectService = new DBprojectServiceImpl();
 		} else {
-			projectService = new DefaultProjectServiceImpl();
+			projectService =  DefaultProjectServiceImpl.getInstance();
 		}
 
 		Integer categoryID = null;

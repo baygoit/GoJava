@@ -7,10 +7,11 @@ import dao.pool.KickstarterException;
 
 
 public class DefaultCommentService implements CommentService{
-	private volatile static DefaultCommentService uniqueInstance;
+	
 	private volatile static HashMap<Integer, ArrayList<ProjectComment>> allComments;
 	private volatile static ArrayList<ProjectComment> commentsInProject;
-
+	private volatile static DefaultCommentService uniqueInstance;
+	
 	private DefaultCommentService() {
 	}
 

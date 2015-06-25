@@ -9,10 +9,10 @@
 <body>
 	<input type="button" value="project page"
 		onclick="self.location='DetailedProject';" />
-	<h1>LOGIN: (Username: user , Password: pass)   </h1>
+	<h1>LOGIN  </h1>
 	<form action="login" method="post">
-		Username: <input type="text" name="login"> <br>
-        Password: <input type="password" name="pwd"> <br> <input
+		Username(user): <input type="text" name="login"> <br>
+        Password(pass): <input type="password" name="pwd"> <br> <input
 			type="submit" value="Login">
 	</form>
 </body>

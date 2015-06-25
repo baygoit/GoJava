@@ -15,4 +15,8 @@ public class Donate extends ParentServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		dispatchDoGet(request,response,DONATE_M);
 	}
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		dispatchDoPost(request,response,DONATE_M);
+	}
 }
