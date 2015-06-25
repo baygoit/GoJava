@@ -2,9 +2,10 @@ package view;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import dao.pool.KickstarterException;
 
-public class LoginView implements iView {
+public class Login extends ViewDispatcher {
 
 	@Override
 	public void forward(HttpServletRequest request, HttpServletResponse response)

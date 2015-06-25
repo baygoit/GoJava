@@ -1,25 +1,25 @@
-package model;
+package beans;
 
-import java.sql.Connection;
-import java.sql.SQLException;
+
 import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import static view.eViews.*;
+import view.ViewDispatcher;
 import view.ViewStrategy;
-import view.iView;
 import dao.category.Category;
 import dao.category.CategoryService;
 import dao.category.DBcategoryServiceImpl;
 import dao.category.DefaultCategoryServiceImpl;
 import dao.pool.KickstarterException;
-import dao.pool.Pool;
 import dao.quote.DBquoteServiceImpl;
 import dao.quote.DefaultQuoteServiceImpl;
 import dao.quote.Quote;
 import dao.quote.QuoteService;
 
-public class MainDao implements iModel {
+public class Main extends DatabaseConnectionChecker implements iBean {
 
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -36,7 +36,7 @@ public class MainDao implements iModel {
 		}
 
 		Quote quote = quoteService.getRandomQuote();
-		iView view = ViewStrategy.getInstance().selectView(CATEGORIES_V);
+		ViewDispatcher view = ViewStrategy.getInstance().selectView(CATEGORIES_V);
 		request.setAttribute("quote", quote);
 
 		List<Category> categories = null;
@@ -44,17 +44,6 @@ public class MainDao implements iModel {
 		request.setAttribute("categories", categories);
 		view.forward(request, response);
 
-	}
-
-	boolean connected() {
-		boolean connected = false;
-		try {
-			Connection conn = Pool.getInstance().getConnection();
-			conn.close();
-			connected = true;
-		} catch (KickstarterException | SQLException e) {
-		}
-		return connected;
 	}
 
 	@Override

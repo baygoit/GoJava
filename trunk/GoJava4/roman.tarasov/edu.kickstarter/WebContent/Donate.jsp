@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h3>Donate</h3>
+<h2>Donate</h2>
 	<input type="button" value="project page"
 		onclick="self.location='DetailedProject';" />
 

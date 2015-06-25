@@ -1,6 +1,6 @@
-package model;
+package beans;
 
-public enum eModels {
+public enum eBeans {
 MAIN_M,
 PROJECTS_M,
 PROJECT_M,

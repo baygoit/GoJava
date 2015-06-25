@@ -5,16 +5,16 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.pool.KickstarterException;
 
-public class CommentView implements iView {
+public class Donate extends ViewDispatcher{
 
 	@Override
 	public void forward(HttpServletRequest request, HttpServletResponse response)
 			throws KickstarterException {
 		try {
-			request.getRequestDispatcher("Comment.jsp").forward(request,
+			request.getRequestDispatcher("Donate.jsp").forward(request,
 					response);
 		} catch (Exception e) {
-			throw new KickstarterException("Comment.jsp exception", e);
+			throw new KickstarterException("Donate.jsp exception", e);
 		}
 	}
 }

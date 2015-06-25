@@ -5,13 +5,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.pool.KickstarterException;
 
-public class CommentFormView  implements iView{
+public class Comment extends ViewDispatcher  {
 
 	@Override
 	public void forward(HttpServletRequest request, HttpServletResponse response)
 			throws KickstarterException {
-		// TODO Auto-generated method stub
-		
-	}
+		dispatchForward(request, response,"Comment.jsp","Comment.jsp exception");
 
+	}
 }

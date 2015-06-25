@@ -5,7 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.pool.KickstarterException;
 
-public class DetailedProjectView implements iView {
+public class DetailedProject extends ViewDispatcher {
 
 	@Override
 	public void forward(HttpServletRequest request, HttpServletResponse response)

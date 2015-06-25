@@ -1,21 +1,20 @@
-package model;
+package beans;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.SQLException;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
 import dao.comments.CommentService;
 import dao.comments.DBcommentServiceImpl;
 import dao.comments.DefaultCommentService;
 import dao.comments.ProjectComment;
 import dao.pool.KickstarterException;
-import dao.pool.Pool;
 import dao.project.Project;
 import dao.user.User;
 
-public class CommentFormDao implements iModel {
+public class CommentForm extends DatabaseConnectionChecker implements iBean {
 
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -48,18 +47,5 @@ public class CommentFormDao implements iModel {
 		} catch (IOException e) {
 
 		}
-
-	}
-
-	boolean connected() {
-		boolean connected = false;
-		try {
-			Connection conn = Pool.getInstance().getConnection();
-			conn.close();
-			connected = true;
-		} catch (KickstarterException | SQLException e) {
-
-		}
-		return connected;
 	}
 }

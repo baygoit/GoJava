@@ -5,7 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.pool.KickstarterException;
 
-public class InvestView implements iView {
+public class Invest extends ViewDispatcher {
 
 	@Override
 	public void forward(HttpServletRequest request, HttpServletResponse response)

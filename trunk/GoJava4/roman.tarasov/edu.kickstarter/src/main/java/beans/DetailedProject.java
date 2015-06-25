@@ -1,20 +1,20 @@
-package model;
+package beans;
 
-import java.sql.Connection;
-import java.sql.SQLException;
+
 import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import view.ViewDispatcher;
 import view.ViewStrategy;
 import view.eViews;
-import view.iView;
 import dao.comments.CommentService;
 import dao.comments.DBcommentServiceImpl;
 import dao.comments.DefaultCommentService;
 import dao.comments.ProjectComment;
 import dao.pool.KickstarterException;
-import dao.pool.Pool;
 import dao.project.DBprojectServiceImpl;
 import dao.project.DefaultProjectServiceImpl;
 import dao.project.Project;
@@ -23,7 +23,7 @@ import dao.user.DBUserService;
 import dao.user.DefaultUserService;
 import dao.user.UserService;
 
-public class DetailedProjectDao implements iModel {
+public class DetailedProject extends DatabaseConnectionChecker implements iBean {
 
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -76,20 +76,9 @@ public class DetailedProjectDao implements iModel {
 				.getUsersNamesByListComments(comments);
 		request.setAttribute("listUsersNames", listUsersNames);
 
-		iView view = ViewStrategy.getInstance().selectView(
+		ViewDispatcher selectedView = ViewStrategy.getInstance().selectView(
 				eViews.DETAILED_PROJECT_V);
-		view.forward(request, response);
-	}
-
-	boolean connected() {
-		boolean connected = false;
-		try {
-			Connection conn = Pool.getInstance().getConnection();
-			conn.close();
-			connected = true;
-		} catch (KickstarterException | SQLException e) {
-		}
-		return connected;
+		selectedView.forward(request, response);
 	}
 
 	@Override

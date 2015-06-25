@@ -19,6 +19,7 @@
     <servlet-name>Donate</servlet-name>
     <servlet-class>servlet.Donate</servlet-class>
   </servlet>
+ 
   <servlet>
     <servlet-name>Main</servlet-name>
     <servlet-class>servlet.Main</servlet-class>
@@ -31,7 +32,7 @@
     <servlet-name>Invest</servlet-name>
     <servlet-class>servlet.Invest</servlet-class>
   </servlet>
-   <servlet>
+  <servlet>
     <servlet-name>CommentForm</servlet-name>
     <servlet-class>servlet.CommentForm</servlet-class>
   </servlet>
@@ -47,11 +48,23 @@
     <servlet-name>DetailedProject</servlet-name>
     <servlet-class>servlet.DetailedProject</servlet-class>
   </servlet>
+  <filter>
+   <filter-name>RootToMainRedirector</filter-name>
+   <filter-class>servlet.RootToMainRedirector</filter-class>
+   <init-param>
+	  <param-name>test-param</param-name>
+	  <param-value>Initialization Parameter</param-value>
+   </init-param>
+</filter>
+<filter-mapping>
+   <filter-name>RootToMainRedirector</filter-name>
+   <url-pattern>/*</url-pattern>
+</filter-mapping>
   <servlet-mapping>
     <servlet-name>DetailedProject</servlet-name>
     <url-pattern>/DetailedProject</url-pattern>
   </servlet-mapping>
-    <servlet-mapping>
+  <servlet-mapping>
     <servlet-name>CommentForm</servlet-name>
     <url-pattern>/commentForm</url-pattern>
   </servlet-mapping>

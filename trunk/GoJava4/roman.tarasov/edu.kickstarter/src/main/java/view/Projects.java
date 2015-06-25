@@ -2,18 +2,19 @@ package view;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import dao.pool.KickstarterException;
 
-public class DonateView implements iView {
-
+public class Projects extends ViewDispatcher {
+ 
 	@Override
 	public void forward(HttpServletRequest request, HttpServletResponse response)
 			throws KickstarterException {
 		try {
-			request.getRequestDispatcher("Donate.jsp").forward(request,
-					response);
+			request.getRequestDispatcher("Projects.jsp").forward(request, response);
 		} catch (Exception e) {
-			throw new KickstarterException("Donate.jsp exception", e);
+			throw new KickstarterException("Projects.jsp exception", e);
 		}
 	}
+
 }

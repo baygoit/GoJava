@@ -1,23 +1,17 @@
-package model;
+package beans;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.SQLException;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import dao.pool.KickstarterException;
-import dao.pool.Pool;
 import dao.user.DBUserService;
 import dao.user.DefaultUserService;
 import dao.user.User;
 import dao.user.UserService;
 
-public class LoginDao implements iModel {
-
-	@Override
-	public void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws KickstarterException {
-	}
+public class Login extends DatabaseConnectionChecker implements iBean {
 
 	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response) {
@@ -53,15 +47,12 @@ public class LoginDao implements iModel {
 		}
 	}
 
-	boolean connected() {
-		boolean connected = false;
-		try {
-			Connection conn = Pool.getInstance().getConnection();
-			conn.close();
-			connected = true;
-		} catch (KickstarterException | SQLException e) {
 
-		}
-		return connected;
+
+	@Override
+	public void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws KickstarterException {
+		// TODO Auto-generated method stub
+
 	}
 }
