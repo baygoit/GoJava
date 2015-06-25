@@ -5,13 +5,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.pool.KickstarterException;
 
-public class CommentForm extends ViewDispatcher{
+public class CommentForm extends ViewDispatcher {
 
 	@Override
 	public void forward(HttpServletRequest request, HttpServletResponse response)
 			throws KickstarterException {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

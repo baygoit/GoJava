@@ -10,12 +10,6 @@ public class Invest extends ViewDispatcher {
 	@Override
 	public void forward(HttpServletRequest request, HttpServletResponse response)
 			throws KickstarterException {
-		try {
-			request.getRequestDispatcher("Invest.jsp").forward(request, response);
-		} catch (Exception e) {
-			throw new KickstarterException("Invest.jsp exception", e);
-		}
-		
+		dispatchForward(request, response, "Invest.jsp", "Invest.jsp exception");
 	}
-
 }

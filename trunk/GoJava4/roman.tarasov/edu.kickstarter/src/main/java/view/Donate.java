@@ -5,16 +5,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.pool.KickstarterException;
 
-public class Donate extends ViewDispatcher{
+public class Donate extends ViewDispatcher {
 
 	@Override
 	public void forward(HttpServletRequest request, HttpServletResponse response)
 			throws KickstarterException {
-		try {
-			request.getRequestDispatcher("Donate.jsp").forward(request,
-					response);
-		} catch (Exception e) {
-			throw new KickstarterException("Donate.jsp exception", e);
-		}
+		dispatchForward(request, response, "Donate.jsp", "Donate.jsp exception");
 	}
 }

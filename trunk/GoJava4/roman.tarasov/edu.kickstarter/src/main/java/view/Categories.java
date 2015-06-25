@@ -10,6 +10,6 @@ public class Categories extends ViewDispatcher {
 	@Override
 	public void forward(HttpServletRequest request, HttpServletResponse response)
 			throws KickstarterException {
-		dispatchForward(request, response,"Main.jsp","Main.jsp exception");
+		dispatchForward(request, response, "Main.jsp", "Main.jsp exception");
 	}
 }
