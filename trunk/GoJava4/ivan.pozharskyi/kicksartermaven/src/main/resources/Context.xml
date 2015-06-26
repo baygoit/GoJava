@@ -1,0 +1,11 @@
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+   <bean id="testSpring" class="com.ivanpozharskyi.kickstarter.controller.TestSpringBean">
+       <property name="field1" value="Hello Spring!!!"/>
+   </bean>
+ 
+</beans>
