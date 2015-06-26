@@ -3,7 +3,7 @@
 	crossContext="true" reloadable="true">
 	<Resource name="jdbc/kickstarter" auth="Container" type="javax.sql.DataSource"
 		maxActive="100" maxIdle="30" maxWait="10000" username="postgres"
-		password="roota" driverClassName="org.postgresql.Driver"
+		password="root" driverClassName="org.postgresql.Driver"
 		removeAbandoned="true" removeAbandonedTimeout="60" logAbandoned="true"
 		url="jdbc:postgresql://localhost:5432/kickstarter" />
 </Context>
