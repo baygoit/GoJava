@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class MemoryProjectDaoImpl implements ProjectDao {
+public class MemoryProjectDao {
 	static List<Project> projects;
 
 
-	MemoryProjectDaoImpl() {
+public	MemoryProjectDao() {
 		projects = new ArrayList<Project>();
 
 		int categoryID = 5;
@@ -67,7 +67,6 @@ public class MemoryProjectDaoImpl implements ProjectDao {
 		projects.add(project);
 	}
 
-	@Override
 	public List<Project> sortProjectsByCategoryID(int categoryID) throws KickstarterException {
 		List<Project> sortedProjects = new ArrayList<Project>();
 		int length = projects.size();
@@ -84,7 +83,6 @@ public class MemoryProjectDaoImpl implements ProjectDao {
 		return sortedProjects;
 	}
 
-	@Override
 	public Project getProjectById(int ID) throws KickstarterException {
 		int length = projects.size();
 		for (int index = 0; index < length; index++) {
@@ -96,7 +94,6 @@ public class MemoryProjectDaoImpl implements ProjectDao {
 		throw new KickstarterException("the project was not found");
 	}
 
-	@Override
 	public void updateProject(Project project) {
 		// TODO Auto-generated method stub
 		

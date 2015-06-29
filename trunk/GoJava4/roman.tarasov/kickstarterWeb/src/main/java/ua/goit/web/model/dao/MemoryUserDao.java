@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class MemoryUserDao implements UserDao {
+public class MemoryUserDao  {
 	private User user;
 	List<User> users;
 
@@ -27,7 +27,6 @@ public class MemoryUserDao implements UserDao {
 		users.add(user);
 	}
 
-	@Override
 	public User getUserInfo(String login, String password)
 			throws KickstarterException {
 		if (login.equals(users.get(0).getLogin())
@@ -37,7 +36,6 @@ public class MemoryUserDao implements UserDao {
 		throw new KickstarterException("user not found");
 	}
 
-	@Override
 	public List<String> getUsersNamesByListComments(
 			List<Comment> comments) throws KickstarterException {
 		List<String> userNames = new ArrayList<String>();

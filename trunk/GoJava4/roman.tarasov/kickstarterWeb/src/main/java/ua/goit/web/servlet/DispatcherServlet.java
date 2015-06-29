@@ -29,12 +29,12 @@ public class DispatcherServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		ModelService model = getModel(request);
+		ModelService concreteModel = getModel(request);
 		try {
-			if(model==null){
+			if(concreteModel==null){
 				throw new KickstarterException("Model not found");
 			}
-			model.doGet(request, response);
+			concreteModel.doGet(request, response);
 		} catch (KickstarterException e) {
 		}
 	}
@@ -42,18 +42,18 @@ public class DispatcherServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		ModelService model = getModel(request);
+		ModelService concreteModel = getModel(request);
 		try {
-			if(model==null){
+			if(concreteModel==null){
 				throw new KickstarterException("Model not found");
 			}
-			model.doPost(request, response);
+			concreteModel.doPost(request, response);
 		} catch (KickstarterException e) {
 		}
 	}
 
 	private ModelService getModel(HttpServletRequest request) {
-		String path = dispatch(request);
+		String path = trimPath(request);
 		if (path.equals("/")) {
 			path = "/main";
 		}
@@ -70,7 +70,7 @@ public class DispatcherServlet extends HttpServlet {
 		return model;
 	}
 
-	private String dispatch(HttpServletRequest request) {
+	private String trimPath(HttpServletRequest request) {
 		String requestURI = request.getRequestURI();
 		return requestURI.substring(request.getContextPath().length(),
 				requestURI.length());

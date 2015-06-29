@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd">
 
@@ -16,38 +17,69 @@
 				</entry>
 				<entry key="projects" value-ref="Projects">
 				</entry>
+				<entry key="DetailedProject"
+					value-ref="DetailedProject">
+					
+				</entry>
 			</map>
 		</property>
 	</bean>
 
 	<bean id="Main" name="main" class="ua.goit.web.model.Main">
-		<constructor-arg>
-			<bean class="ua.goit.web.model.dao.MemoryQuoteDaoImpl" id="MemoryQuoteDaoImpl">
-			</bean>
-		</constructor-arg>
-		<constructor-arg>
-			<bean class="ua.goit.web.model.dao.MemoryCategoryDaoImpl" id="MemoryCategoryDaoImpl">
-			</bean>
+		<constructor-arg type="ua.goit.web.model.dao.IDao"
+			ref="MemoryDao">
 		</constructor-arg>
 	</bean>
 	
 	<bean id="Projects" name="projects" class="ua.goit.web.model.Projects">
-		<constructor-arg>
-			<bean id="MemoryProjectDaoImpl" class="ua.goit.web.model.dao.MemoryProjectDaoImpl">
-			</bean>
+		<constructor-arg type="ua.goit.web.model.dao.IDao"
+			ref="MemoryDao">
+			
+		
 		</constructor-arg>
 	</bean>
 	
-	<bean id="MemoryQuoteDaoImpl" name="memoryQuoteDaoImpl"
-		class="ua.goit.web.model.dao.MemoryQuoteDaoImpl">
+	<bean id="MemoryQuoteDao" name="memoryQuoteDaoImpl"
+		class="ua.goit.web.model.dao.MemoryQuoteDao">
 	</bean>
 
-	<bean id="MemoryCategoryDaoImpl" name="memoryCategoryDaoImpl"
-		class="ua.goit.web.model.dao.MemoryCategoryDaoImpl">
+	<bean id="MemoryCategoryDao" name="memoryCategoryDaoImpl"
+		class="ua.goit.web.model.dao.MemoryCategoryDao">
 	</bean>
-	<bean id="MemoryProjectDaoImpl" name="memoryProjectDaoImpl"
-		class="ua.goit.web.model.dao.MemoryProjectDaoImpl">
+	<bean id="MemoryProjectDao" name="memoryProjectDaoImpl"
+		class="ua.goit.web.model.dao.MemoryProjectDao">
 	</bean>
 
 
+
+	<bean id="MemoryDao" name="memoryDao"
+		class="ua.goit.web.model.dao.MemoryDao">
+	<constructor-arg type="ua.goit.web.model.dao.MemoryQuoteDao"
+		ref="MemoryQuoteDao">
+	</constructor-arg>
+	<constructor-arg type="ua.goit.web.model.dao.MemoryCategoryDao"
+		ref="MemoryCategoryDao">
+	</constructor-arg>
+	<constructor-arg type="ua.goit.web.model.dao.MemoryProjectDao"
+		ref="MemoryProjectDao">
+	</constructor-arg>
+	<constructor-arg type="ua.goit.web.model.dao.MemoryCommentDao"
+		ref="MemoryCommentDao">
+	</constructor-arg>
+	<constructor-arg type="ua.goit.web.model.dao.MemoryUserDao"
+		ref="MemoryUserDao">
+	</constructor-arg>
+	</bean>
+	<bean id="MemoryCommentDao" name="memoryCommentDao"
+		class="ua.goit.web.model.dao.MemoryCommentDao">
+	</bean>
+	<bean id="DetailedProject" name="detailedProject"
+		class="ua.goit.web.model.DetailedProject">
+	<constructor-arg type="ua.goit.web.model.dao.IDao"
+		ref="MemoryDao">
+	</constructor-arg>
+	</bean>
+	<bean id="MemoryUserDao" name="memoryUserDao"
+		class="ua.goit.web.model.dao.MemoryUserDao">
+	</bean>
 </beans>

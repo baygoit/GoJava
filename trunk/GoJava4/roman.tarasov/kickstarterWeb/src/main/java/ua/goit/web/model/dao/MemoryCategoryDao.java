@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class MemoryCategoryDaoImpl implements CategoryDao {
+public class MemoryCategoryDao   {
 	List<Category> categories;
 
-	public MemoryCategoryDaoImpl() {
+	public MemoryCategoryDao() {
 		categories = new ArrayList<Category>();
 
 		Category category = new Category();
@@ -21,8 +21,7 @@ public class MemoryCategoryDaoImpl implements CategoryDao {
 		categories.add(category);
 	}
 
-	@Override
-	public List<Category> getAll() {
+	public List<Category> getAllCategories() {
 		return categories;
 	}
 }
