@@ -51,4 +51,14 @@ public class Parser {
 	public int getFirstIntFromString(String toParse) {
 		return this.stringToInt(toParse)[0];
 	}
+	
+	public String[] stringToWords(String toParse) {
+		this.successParsing = false;
+		if (toParse.isEmpty()) {
+			return null;
+		}
+		String[] result = toParse.split(delimeter);
+		this.successParsing = true;
+		return result;
+	}
 }
