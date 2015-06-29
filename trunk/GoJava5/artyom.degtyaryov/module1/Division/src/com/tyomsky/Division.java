@@ -35,12 +35,16 @@ public class Division {
 		int remaining;
 		int currentMinus;
 		HashMap<Integer, Integer> operandsMap = new HashMap<>();
-		String completeResultString = "";
+		String completeResultString = divident + VERTICAL_SEPARATOR + divisor + "\n";
 		String resultString = "";
 		String commentString = "";
 
-		completeResultString += +divident + VERTICAL_SEPARATOR + divisor + "\n";
-
+		boolean resultIsNegative = (divident < 0) || (divisor < 0);
+		if (resultIsNegative){
+			divident = Math.abs(divident);
+			divisor = Math.abs(divisor);
+		}
+		
 		for (int index = 0; index <= ACCURACY; index++) {
 			result = divident / divisor;
 			remaining = divident % divisor;
@@ -58,16 +62,17 @@ public class Division {
 			}
 			operandsMap.put(divident, index);
 		}
-		completeResultString += formatCompleteResult(completeResultString, resultString, commentString);
+		completeResultString += formatCompleteResult(completeResultString, resultString, commentString,resultIsNegative);
 
 		return completeResultString;
 	}
 
-	private static String formatCompleteResult(String completeResultString, String resultString, String commentString) {
+	private static String formatCompleteResult(String completeResultString, String resultString, String commentString, boolean resultIsNegative) {
 		
 		String result = "";
 		String firstCommentString = commentString.substring(0, commentString.indexOf("\n"));
 		String commentTail = commentString.substring(commentString.indexOf("\n") + "\n".length());
+		if (resultIsNegative){resultString = "-"+resultString;}
 		
 		result += firstCommentString + VERTICAL_SEPARATOR + resultString + "\n" + commentTail;
 
