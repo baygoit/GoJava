@@ -31,4 +31,9 @@ public class Main extends ModelService implements IConcreteService {
 	public String getJspName() {
 		return "Main.jsp";
 	}
+
+	@Override
+	public void setAttributesForDoPost(HttpServletRequest request)
+			throws KickstarterException {
+	}
 }

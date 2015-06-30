@@ -3,7 +3,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<jsp:include page="LoginLink.jsp"></jsp:include>
+<ul class="user-menu js-user-menu">
+<li class="logged-out-link"><a href="login?project=${detailedProject.ID}&category=${category}">Log in</a></li>
+</ul>
 
 <head>
 <meta http-equiv="Content-Type"
@@ -11,15 +13,17 @@
 <title>Main</title>
 </head>
 <body>
+
 	<c:if test="${user!=null}">
 		<p>
 			<jsp:include page="UserMenu.jsp"></jsp:include>
 		<p>
 	</c:if>
-	<input type="button" value="Donate" onclick="self.location='donate';" />
-	<input type="button" value="Invest" onclick="self.location='invest';" />
-	<input type="button" value="Comment" onclick="self.location='comment';" />
-	<br>
+	<c:if test="${user==null}">
+	<h1>
+		<c:out value="Login for donate, invest or comment" />
+	</h1>
+	</c:if> 
 	<br>
 	<input type="button" value="projects page"
 		onclick="self.location='projects?category=${category}';" />

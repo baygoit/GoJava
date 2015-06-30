@@ -7,7 +7,12 @@
 
 <h2>
 	<c:out value="${userName}" />
-	<br>
+
+	<input type="button" value="Donate" onclick="self.location='donate';" />
+	<input type="button" value="Invest" onclick="self.location='invest';" />
+	<input type="button" value="Comment"
+		onclick="self.location='Comment?project=${detailedProject.ID}&category=${category}';" />
+	<br> <br>
 
 </h2>
 

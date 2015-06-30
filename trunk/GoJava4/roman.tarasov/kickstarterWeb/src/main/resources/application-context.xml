@@ -17,10 +17,11 @@
 				</entry>
 				<entry key="projects" value-ref="Projects">
 				</entry>
-				<entry key="DetailedProject"
-					value-ref="DetailedProject">
-					
+				<entry key="DetailedProject" value-ref="DetailedProject">
 				</entry>
+				<entry value-ref="CommentPage" key="Comment"></entry>
+				<entry key="login" value-ref="Login"></entry>
+				
 			</map>
 		</property>
 	</bean>
@@ -30,15 +31,13 @@
 			ref="MemoryDao">
 		</constructor-arg>
 	</bean>
-	
+
 	<bean id="Projects" name="projects" class="ua.goit.web.model.Projects">
 		<constructor-arg type="ua.goit.web.model.dao.IDao"
 			ref="MemoryDao">
-			
-		
 		</constructor-arg>
 	</bean>
-	
+
 	<bean id="MemoryQuoteDao" name="memoryQuoteDaoImpl"
 		class="ua.goit.web.model.dao.MemoryQuoteDao">
 	</bean>
@@ -50,36 +49,45 @@
 		class="ua.goit.web.model.dao.MemoryProjectDao">
 	</bean>
 
-
-
-	<bean id="MemoryDao" name="memoryDao"
-		class="ua.goit.web.model.dao.MemoryDao">
-	<constructor-arg type="ua.goit.web.model.dao.MemoryQuoteDao"
-		ref="MemoryQuoteDao">
-	</constructor-arg>
-	<constructor-arg type="ua.goit.web.model.dao.MemoryCategoryDao"
-		ref="MemoryCategoryDao">
-	</constructor-arg>
-	<constructor-arg type="ua.goit.web.model.dao.MemoryProjectDao"
-		ref="MemoryProjectDao">
-	</constructor-arg>
-	<constructor-arg type="ua.goit.web.model.dao.MemoryCommentDao"
-		ref="MemoryCommentDao">
-	</constructor-arg>
-	<constructor-arg type="ua.goit.web.model.dao.MemoryUserDao"
-		ref="MemoryUserDao">
-	</constructor-arg>
+	<bean id="MemoryDao" name="memoryDao" class="ua.goit.web.model.dao.MemoryDao">
+		<constructor-arg type="ua.goit.web.model.dao.MemoryQuoteDao"
+			ref="MemoryQuoteDao">
+		</constructor-arg>
+		<constructor-arg type="ua.goit.web.model.dao.MemoryCategoryDao"
+			ref="MemoryCategoryDao">
+		</constructor-arg>
+		<constructor-arg type="ua.goit.web.model.dao.MemoryProjectDao"
+			ref="MemoryProjectDao">
+		</constructor-arg>
+		<constructor-arg type="ua.goit.web.model.dao.MemoryCommentDao"
+			ref="MemoryCommentDao">
+		</constructor-arg>
+		<constructor-arg type="ua.goit.web.model.dao.MemoryUserDao"
+			ref="MemoryUserDao">
+		</constructor-arg>
 	</bean>
 	<bean id="MemoryCommentDao" name="memoryCommentDao"
 		class="ua.goit.web.model.dao.MemoryCommentDao">
 	</bean>
 	<bean id="DetailedProject" name="detailedProject"
 		class="ua.goit.web.model.DetailedProject">
-	<constructor-arg type="ua.goit.web.model.dao.IDao"
-		ref="MemoryDao">
-	</constructor-arg>
+		<constructor-arg type="ua.goit.web.model.dao.IDao"
+			ref="MemoryDao">
+		</constructor-arg>
 	</bean>
 	<bean id="MemoryUserDao" name="memoryUserDao"
 		class="ua.goit.web.model.dao.MemoryUserDao">
 	</bean>
+	<bean id="CommentPage" name="commentPage"
+		class="ua.goit.web.model.CommentPage">
+	<constructor-arg type="ua.goit.web.model.dao.IDao"
+		ref="MemoryDao">
+	</constructor-arg>
+	</bean>
+	<bean id="Login" name="login" class="ua.goit.web.model.Login">
+		<constructor-arg type="ua.goit.web.model.dao.IDao"
+			ref="MemoryDao">
+		</constructor-arg>
+	</bean>
+	
 </beans>

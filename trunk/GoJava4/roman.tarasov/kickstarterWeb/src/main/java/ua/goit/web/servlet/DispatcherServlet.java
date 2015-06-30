@@ -17,7 +17,7 @@ import ua.goit.web.model.dao.KickstarterException;
 public class DispatcherServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	@Autowired
-	ModelServiceLocator modelServiceLocator;
+	private ModelServiceLocator modelServiceLocator;
 
 	@Override
 	public void init(ServletConfig config) throws ServletException {
@@ -36,6 +36,9 @@ public class DispatcherServlet extends HttpServlet {
 			}
 			concreteModel.doGet(request, response);
 		} catch (KickstarterException e) {
+			request.setAttribute("error", e);
+			request.getRequestDispatcher("Error.jsp")
+					.forward(request, response);
 		}
 	}
 
@@ -49,6 +52,9 @@ public class DispatcherServlet extends HttpServlet {
 			}
 			concreteModel.doPost(request, response);
 		} catch (KickstarterException e) {
+			request.setAttribute("error", e);
+			request.getRequestDispatcher("Error.jsp")
+					.forward(request, response);
 		}
 	}
 

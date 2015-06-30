@@ -102,7 +102,4 @@ public class MemoryCommentDao {
 		}
 		return maxID + 1;
 	}
-
-	
-
 }

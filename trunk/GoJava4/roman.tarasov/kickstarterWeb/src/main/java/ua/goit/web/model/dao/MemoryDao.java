@@ -63,4 +63,8 @@ public class MemoryDao implements IDao {
 		return userDao.getUsersNamesByListComments(comments);
 	}
 
+	@Override
+	public User getUserInfo(String login, String password) throws KickstarterException{
+		return userDao.getUserInfo(login, password);
+	}
 }

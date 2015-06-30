@@ -39,4 +39,9 @@ public class Projects extends ModelService implements IConcreteService {
 	public String getJspName() {
 		return "Projects.jsp";
 	}
+
+	@Override
+	public void setAttributesForDoPost(HttpServletRequest request)
+			throws KickstarterException {
+	}
 }

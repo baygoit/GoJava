@@ -10,7 +10,7 @@
 
 
 <ul class="user-menu js-user-menu">
-<li class="logged-out-link"><a href="Login.jsp">Log in</a></li>
+<li class="logged-out-link"><a href="login">Log in</a></li>
 </ul>
 
 

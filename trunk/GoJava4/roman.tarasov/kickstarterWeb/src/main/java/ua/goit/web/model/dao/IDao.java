@@ -22,4 +22,6 @@ public interface IDao  {
 
 	List<String> getUsersNamesByListComments(List<Comment> comments) throws KickstarterException;
 
+	User getUserInfo(String login, String password) throws KickstarterException;
+
 }
