@@ -1,16 +1,19 @@
-package ua.goit.web.model.dao;
+package ua.goit.web.model.dao.memory;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import ua.goit.web.model.dao.Comment;
+import ua.goit.web.model.dao.KickstarterException;
 
 
-public class MemoryCommentDao {
+
+public class MCommentDao {
 	
 	private volatile static HashMap<Integer, ArrayList<Comment>> allComments;
 	private volatile static ArrayList<Comment> commentsInProject;
-	MemoryCommentDao(){
+	MCommentDao(){
 		
 		allComments = new HashMap<Integer, ArrayList<Comment>>();
 		commentsInProject = new ArrayList<Comment>();

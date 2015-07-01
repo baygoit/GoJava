@@ -9,6 +9,37 @@
 		annotation-config="true">
 	</context:component-scan>
 
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="${jdbc.driverClassName}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+	</bean>
+	<context:property-placeholder location="classpath:jdbc.properties" />
+
+
+	<bean id="DDao" name="dDao"
+		class="ua.goit.web.model.dao.database.DDao">
+	
+	<constructor-arg type="ua.goit.web.model.dao.database.DCategoryDao"
+		ref="DCategoryDao">
+		
+	</constructor-arg>
+	<constructor-arg type="ua.goit.web.model.dao.database.DQuoteDao"
+		ref="DQuoteDao">
+	</constructor-arg>
+	<constructor-arg type="ua.goit.web.model.dao.database.DUserDao"
+		ref="DUserDao">
+	</constructor-arg>
+	<constructor-arg type="ua.goit.web.model.dao.database.DCommentDao"
+		ref="DCommentDao">
+	</constructor-arg>
+	<constructor-arg type="ua.goit.web.model.dao.database.DProjectDao"
+		ref="DProjectDao">
+	</constructor-arg>
+	</bean>
+
 	<bean id="ModelServiceLocator" name="modelServiceLocator"
 		class="ua.goit.web.servlet.ModelServiceLocator" scope="singleton">
 		<property name="services">
@@ -21,73 +52,83 @@
 				</entry>
 				<entry value-ref="CommentPage" key="Comment"></entry>
 				<entry key="login" value-ref="Login"></entry>
-				
+
 			</map>
 		</property>
 	</bean>
 
 	<bean id="Main" name="main" class="ua.goit.web.model.Main">
-		<constructor-arg type="ua.goit.web.model.dao.IDao"
-			ref="MemoryDao">
-		</constructor-arg>
+		
 	</bean>
 
-	<bean id="Projects" name="projects" class="ua.goit.web.model.Projects">
-		<constructor-arg type="ua.goit.web.model.dao.IDao"
-			ref="MemoryDao">
-		</constructor-arg>
+	<bean id="Projects" name="projects"
+		class="ua.goit.web.model.Projects">
+		
 	</bean>
 
 	<bean id="MemoryQuoteDao" name="memoryQuoteDaoImpl"
-		class="ua.goit.web.model.dao.MemoryQuoteDao">
+		class="ua.goit.web.model.dao.memory.MQuoteDao">
 	</bean>
 
 	<bean id="MemoryCategoryDao" name="memoryCategoryDaoImpl"
-		class="ua.goit.web.model.dao.MemoryCategoryDao">
+		class="ua.goit.web.model.dao.memory.MCategoryDao">
 	</bean>
 	<bean id="MemoryProjectDao" name="memoryProjectDaoImpl"
-		class="ua.goit.web.model.dao.MemoryProjectDao">
+		class="ua.goit.web.model.dao.memory.MProjectDao">
 	</bean>
 
-	<bean id="MemoryDao" name="memoryDao" class="ua.goit.web.model.dao.MemoryDao">
-		<constructor-arg type="ua.goit.web.model.dao.MemoryQuoteDao"
+	<bean id="MemoryDao" name="memoryDao" class="ua.goit.web.model.dao.memory.MDao">
+		<constructor-arg type="ua.goit.web.model.dao.memory.MQuoteDao"
 			ref="MemoryQuoteDao">
 		</constructor-arg>
-		<constructor-arg type="ua.goit.web.model.dao.MemoryCategoryDao"
+		<constructor-arg type="ua.goit.web.model.dao.memory.MCategoryDao"
 			ref="MemoryCategoryDao">
 		</constructor-arg>
-		<constructor-arg type="ua.goit.web.model.dao.MemoryProjectDao"
+		<constructor-arg type="ua.goit.web.model.dao.memory.MProjectDao"
 			ref="MemoryProjectDao">
 		</constructor-arg>
-		<constructor-arg type="ua.goit.web.model.dao.MemoryCommentDao"
+		<constructor-arg type="ua.goit.web.model.dao.memory.MCommentDao"
 			ref="MemoryCommentDao">
 		</constructor-arg>
-		<constructor-arg type="ua.goit.web.model.dao.MemoryUserDao"
+		<constructor-arg type="ua.goit.web.model.dao.memory.MUserDao"
 			ref="MemoryUserDao">
 		</constructor-arg>
 	</bean>
 	<bean id="MemoryCommentDao" name="memoryCommentDao"
-		class="ua.goit.web.model.dao.MemoryCommentDao">
+		class="ua.goit.web.model.dao.memory.MCommentDao">
 	</bean>
 	<bean id="DetailedProject" name="detailedProject"
 		class="ua.goit.web.model.DetailedProject">
-		<constructor-arg type="ua.goit.web.model.dao.IDao"
-			ref="MemoryDao">
-		</constructor-arg>
+		
 	</bean>
 	<bean id="MemoryUserDao" name="memoryUserDao"
-		class="ua.goit.web.model.dao.MemoryUserDao">
+		class="ua.goit.web.model.dao.memory.MUserDao">
 	</bean>
 	<bean id="CommentPage" name="commentPage"
 		class="ua.goit.web.model.CommentPage">
-	<constructor-arg type="ua.goit.web.model.dao.IDao"
-		ref="MemoryDao">
-	</constructor-arg>
+		
 	</bean>
 	<bean id="Login" name="login" class="ua.goit.web.model.Login">
-		<constructor-arg type="ua.goit.web.model.dao.IDao"
-			ref="MemoryDao">
-		</constructor-arg>
+		
 	</bean>
-	
+
+	<bean id="DCategoryDao" name="dCategoryDao"
+		class="ua.goit.web.model.dao.database.DCategoryDao">
+	</bean>
+	<bean id="DQuoteDao" name="dQuoteDao"
+		class="ua.goit.web.model.dao.database.DQuoteDao">
+	</bean>
+	<bean id="Pool" name="pool"
+		class="ua.goit.web.model.dao.database.Pool" scope="singleton">
+	<property name="dataSource" ref="dataSource"></property>
+	</bean>
+	<bean id="DProjectDao" name="dProjectDao"
+		class="ua.goit.web.model.dao.database.DProjectDao">
+	</bean>
+	<bean id="DCommentDao" name="dCommentDao"
+		class="ua.goit.web.model.dao.database.DCommentDao">
+	</bean>
+	<bean id="DUserDao" name="dUserDao"
+		class="ua.goit.web.model.dao.database.DUserDao">
+	</bean>
 </beans>

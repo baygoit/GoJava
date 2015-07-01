@@ -1,9 +1,7 @@
 package ua.goit.web.model.dao;
 
 
-import org.springframework.stereotype.Repository;
 
-@Repository
 public class Quote {
 
 	private String quote;

@@ -1,9 +1,6 @@
 package ua.goit.web.model.dao;
 
 
-import org.springframework.stereotype.Repository;
-
-@Repository
 public class Category {
 	private String name;
 	private int ID;

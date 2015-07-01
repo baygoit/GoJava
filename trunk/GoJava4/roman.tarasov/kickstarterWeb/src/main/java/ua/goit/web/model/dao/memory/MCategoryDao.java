@@ -1,13 +1,15 @@
-package ua.goit.web.model.dao;
+package ua.goit.web.model.dao.memory;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import ua.goit.web.model.dao.Category;
 
-public class MemoryCategoryDao   {
+
+public class MCategoryDao   {
 	List<Category> categories;
 
-	public MemoryCategoryDao() {
+	public MCategoryDao() {
 		categories = new ArrayList<Category>();
 
 		Category category = new Category();

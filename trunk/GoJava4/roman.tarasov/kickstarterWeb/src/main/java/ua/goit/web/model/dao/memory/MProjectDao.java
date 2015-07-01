@@ -1,14 +1,17 @@
-package ua.goit.web.model.dao;
+package ua.goit.web.model.dao.memory;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import ua.goit.web.model.dao.KickstarterException;
+import ua.goit.web.model.dao.Project;
 
-public class MemoryProjectDao {
+
+public class MProjectDao {
 	static List<Project> projects;
 
 
-public	MemoryProjectDao() {
+public	MProjectDao() {
 		projects = new ArrayList<Project>();
 
 		int categoryID = 5;

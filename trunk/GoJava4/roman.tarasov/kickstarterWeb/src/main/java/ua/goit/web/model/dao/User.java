@@ -1,9 +1,6 @@
 package ua.goit.web.model.dao;
 
 
-import org.springframework.stereotype.Repository;
-
-@Repository
 public class User {
 	private String name;
 	private String login;

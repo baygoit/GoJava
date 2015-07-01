@@ -3,19 +3,14 @@ package ua.goit.web.model;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Service;
-import ua.goit.web.model.dao.IDao;
 import ua.goit.web.model.dao.KickstarterException;
 import ua.goit.web.model.dao.Project;
 
-
 @Service
 public class Projects extends ModelService implements IConcreteService {
-	public Projects(IDao dao) {
-		this.dao = dao;
+	public Projects() {
 		super.model = this;
 	}
-
-	private IDao dao;
 
 
 	@Override

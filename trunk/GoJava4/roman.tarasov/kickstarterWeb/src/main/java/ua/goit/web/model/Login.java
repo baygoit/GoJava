@@ -1,15 +1,11 @@
 package ua.goit.web.model;
 
 import javax.servlet.http.HttpServletRequest;
-import ua.goit.web.model.dao.IDao;
 import ua.goit.web.model.dao.KickstarterException;
 import ua.goit.web.model.dao.User;
 
 public class Login extends ModelService implements IConcreteService {
-	private IDao dao;
-
-	public Login(IDao dao) {
-		this.dao = dao;
+	public Login() {
 		super.model = this;
 	}
 

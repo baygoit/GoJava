@@ -1,17 +1,25 @@
-package ua.goit.web.model.dao;
+package ua.goit.web.model.dao.memory;
 
 import java.util.List;
 
-public class MemoryDao implements IDao {
-	private MemoryCategoryDao categoryDao;
-	private MemoryProjectDao projectDao;
-	private MemoryQuoteDao quoteDao;
-	private MemoryCommentDao commentDao;
-	private MemoryUserDao userDao;
+import ua.goit.web.model.dao.Category;
+import ua.goit.web.model.dao.Comment;
+import ua.goit.web.model.dao.IDao;
+import ua.goit.web.model.dao.KickstarterException;
+import ua.goit.web.model.dao.Project;
+import ua.goit.web.model.dao.Quote;
+import ua.goit.web.model.dao.User;
 
-	public MemoryDao(MemoryCategoryDao categoryDao,
-			MemoryProjectDao projectDao, MemoryQuoteDao quoteDao,
-			MemoryCommentDao commentDao, MemoryUserDao userDao) {
+public class MDao implements IDao {
+	private MCategoryDao categoryDao;
+	private MProjectDao projectDao;
+	private MQuoteDao quoteDao;
+	private MCommentDao commentDao;
+	private MUserDao userDao;
+
+	public MDao(MCategoryDao categoryDao,
+			MProjectDao projectDao, MQuoteDao quoteDao,
+			MCommentDao commentDao, MUserDao userDao) {
 
 		this.categoryDao = categoryDao;
 		this.projectDao = projectDao;

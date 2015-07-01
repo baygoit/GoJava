@@ -1,31 +1,21 @@
 package ua.goit.web.model;
 
 import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.stereotype.Service;
-
 import ua.goit.web.model.dao.Comment;
-import ua.goit.web.model.dao.IDao;
 import ua.goit.web.model.dao.KickstarterException;
 import ua.goit.web.model.dao.Project;
 
-
 @Service
-public class DetailedProject extends ModelService implements IConcreteService{
-	public DetailedProject(IDao dao) {
-		this.dao = dao;
+public class DetailedProject extends ModelService implements IConcreteService {
+	public DetailedProject() {
 		super.model = this;
 	}
 
-	private IDao dao;
-
-	
 	@Override
 	public void setAttributesForDoGet(HttpServletRequest request)
-			throws KickstarterException  {
-
+			throws KickstarterException {
 
 		String parameter = request.getParameter("project");
 		Integer projectIDfromParam = null;
@@ -42,15 +32,14 @@ public class DetailedProject extends ModelService implements IConcreteService{
 		} catch (NumberFormatException e) {
 			throw new KickstarterException("illegal number of category");
 		}
-		request.setAttribute("category",categoryID);
-		Project project =dao.getProjectById(projectIDfromParam);
-		request.setAttribute("detailedProject",project);
-	
-		List<Comment>comments = dao.getCommentsByProjectID(project.getID());
+		request.setAttribute("category", categoryID);
+		Project project = dao.getProjectById(projectIDfromParam);
+		request.setAttribute("detailedProject", project);
+
+		List<Comment> comments = dao.getCommentsByProjectID(project.getID());
 		request.setAttribute("comments", comments);
 
-		List<String> listUsersNames = dao
-				.getUsersNamesByListComments(comments);
+		List<String> listUsersNames = dao.getUsersNamesByListComments(comments);
 		request.setAttribute("listUsersNames", listUsersNames);
 	}
 

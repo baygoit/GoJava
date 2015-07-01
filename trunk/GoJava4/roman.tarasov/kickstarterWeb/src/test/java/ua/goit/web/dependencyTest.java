@@ -15,41 +15,41 @@ import ua.goit.web.servlet.ModelServiceLocator;
 public class dependencyTest extends Mockito {
 	ApplicationContext app;
 
-	@Before
-	public void setUp() {
-		app = new ClassPathXmlApplicationContext("application-context.xml");
-
-	}
-
-	@Test
-	public void mainTest() {
-
-		Main main = (Main) app.getBean("main");
-		HttpServletRequest stubrequest = mock(HttpServletRequest.class);
-		HttpServletResponse stubresponse = mock(HttpServletResponse.class);
-		try {
-			main.doGet(stubrequest, stubresponse);
-		} catch (KickstarterException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-
-	@Test
-	public void serviceLocatorTest() {
-		ModelServiceLocator modelServiceLocator = (ModelServiceLocator) app
-				.getBean("modelServiceLocator");
-
-
-		Main model = (Main) modelServiceLocator.getService("main");
-		HttpServletRequest stubrequest = mock(HttpServletRequest.class);
-		HttpServletResponse stubresponse = mock(HttpServletResponse.class);
-		try {
-			model.doGet(stubrequest, stubresponse);
-		} catch (KickstarterException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		System.err.println(model.toString());
-	}
+//	@Before
+//	public void setUp() {
+//		app = new ClassPathXmlApplicationContext("application-context.xml");
+//
+//	}
+//
+//	@Test
+//	public void mainTest() {
+//
+//		Main main = (Main) app.getBean("main");
+//		HttpServletRequest stubrequest = mock(HttpServletRequest.class);
+//		HttpServletResponse stubresponse = mock(HttpServletResponse.class);
+//		try {
+//			main.doGet(stubrequest, stubresponse);
+//		} catch (KickstarterException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//	}
+//
+//	@Test
+//	public void serviceLocatorTest() {
+//		ModelServiceLocator modelServiceLocator = (ModelServiceLocator) app
+//				.getBean("modelServiceLocator");
+//
+//
+//		Main model = (Main) modelServiceLocator.getService("main");
+//		HttpServletRequest stubrequest = mock(HttpServletRequest.class);
+//		HttpServletResponse stubresponse = mock(HttpServletResponse.class);
+//		try {
+//			model.doGet(stubrequest, stubresponse);
+//		} catch (KickstarterException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		System.err.println(model.toString());
+//	}
 }

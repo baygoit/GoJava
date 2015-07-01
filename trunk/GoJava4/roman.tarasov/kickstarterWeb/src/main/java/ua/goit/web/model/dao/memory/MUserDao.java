@@ -1,14 +1,18 @@
-package ua.goit.web.model.dao;
+package ua.goit.web.model.dao.memory;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import ua.goit.web.model.dao.Comment;
+import ua.goit.web.model.dao.KickstarterException;
+import ua.goit.web.model.dao.User;
 
-public class MemoryUserDao  {
+
+public class MUserDao  {
 	private User user;
 	List<User> users;
 
-	public MemoryUserDao() {
+	public MUserDao() {
 
 		users = new ArrayList<User>();
 

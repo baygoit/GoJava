@@ -1,14 +1,16 @@
-package ua.goit.web.model.dao;
+package ua.goit.web.model.dao.memory;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import ua.goit.web.model.dao.Quote;
 
-public class MemoryQuoteDao  {
+
+public class MQuoteDao  {
 	List<Quote> quotes;
 	
-	public MemoryQuoteDao() {
+	public MQuoteDao() {
 		quotes = new ArrayList<Quote>();
 		Quote quote = new Quote();
 		quote.setID(8);

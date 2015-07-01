@@ -1,8 +1,7 @@
 package ua.goit.web.model.dao;
 
 
-import org.springframework.stereotype.Repository;
-@Repository
+
 public class Project {
 	private String name;
 	private String description;
