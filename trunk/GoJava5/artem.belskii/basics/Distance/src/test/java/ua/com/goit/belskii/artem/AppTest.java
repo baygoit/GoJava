@@ -13,30 +13,6 @@ public class AppTest {
 	}
 
 	@Test
-	public void testMin() {
-		int[] elements = { 5, 7, 2, 16, 13, 4 };
-		assertEquals(2, list.findMin(elements));
-	}
-
-	@Test
-	public void testMin1() {
-		int[] elements = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-		assertEquals(1, list.findMin(elements));
-	}
-
-	@Test
-	public void testMax() {
-		int[] elements = { 5, 7, 2, 16, 13, 4 };
-		assertEquals(16, list.findMax(elements));
-	}
-
-	@Test
-	public void testMax1() {
-		int[] elements = { 9, 8, 7, 6, 5, 4, 3, 2, 1 };
-		assertEquals(9, list.findMax(elements));
-	}
-
-	@Test
 	public void testPosition() {
 		int[] elements = { 5, 7, 2, 16, 13, 4 };
 		assertEquals(0, list.findPosition(elements, 5));
@@ -56,13 +32,13 @@ public class AppTest {
 
 	@Test
 	public void testDistance() {
-		int[] elements = { 5, 7, 2, 1, 13, 16 };
-		assertEquals(2, list.findDistance(elements));
+		int[] elements = { 23, 45, 34, 12, 45, 4, 38, 56, 2, 49, 100, };
+		assertEquals(-3, list.findDistance(elements));
 	}
 
 	@Test
 	public void testDistance1() {
-		int[] elements = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+		int[] elements = { 1, 9, 3, 4, 5, 6, 7, 8, 2 };
 		assertEquals(8, list.findDistance(elements));
 	}
 
