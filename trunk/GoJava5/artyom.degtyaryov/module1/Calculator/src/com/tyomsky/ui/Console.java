@@ -9,13 +9,12 @@ public class Console {
 
     public String read(){
         Scanner scanner = new Scanner(System.in);
-        String result;
+        String result = "";
+
 //        if (scanner.hasNext()){
         	result = scanner.nextLine();
-//        }else{
-//        	result = "";
 //        }
-        scanner.close();
+//        scanner.close();
         return result;
     }
 
