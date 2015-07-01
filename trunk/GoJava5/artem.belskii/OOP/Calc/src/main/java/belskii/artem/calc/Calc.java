@@ -11,6 +11,9 @@ public class Calc {
 			if (expression[1].equals("+")) {
 				answer = operand1 + operand2;
 			}
+			if (expression[1].equals("-")) {
+				answer = operand1 - operand2;
+			}
 
 		} else {
 			System.out.println("Validation failed");
