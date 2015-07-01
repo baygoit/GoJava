@@ -9,7 +9,9 @@ public class Convert {
 			for (int i1 = separateWords[i].length(); i1 > 0; i1--) {
 				answer = answer + separateWords[i].substring(i1 - 1, i1);
 			}
-			answer = answer + " ";
+			if (i<=separateWords.length-2){
+				answer = answer + " ";
+			}
 		}
 		return answer;
 	}

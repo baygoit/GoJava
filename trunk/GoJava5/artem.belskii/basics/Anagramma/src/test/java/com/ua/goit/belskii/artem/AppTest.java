@@ -15,7 +15,7 @@ public class AppTest {
 
 	@Test
 	public void test() {
-		assertEquals("амам алым умар ", anagramma.convert("мама мыла раму"));
+		assertEquals("амам алым умар", anagramma.convert("мама мыла раму"));
 
 	}
 
