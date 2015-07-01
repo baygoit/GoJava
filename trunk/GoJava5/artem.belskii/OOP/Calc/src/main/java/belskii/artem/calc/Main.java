@@ -7,7 +7,6 @@ public class Main {
 		Input console  = new Input();
 		console.setMethod("console");
 		String input = console.read();
-		
 		Parser parser = new Parser();
 		String [] expression=parser.convert(input);
 		Calc calc = new Calc();
