@@ -9,7 +9,7 @@ public class Input {
 	private String input = "";
 
 	public void read() {
-		System.out.println("Please, enter text");
+		System.out.println("Please, put space-separated list:");
 		input = consoleIn.nextLine();
 	}
 
