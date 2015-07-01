@@ -70,7 +70,7 @@ public class ExpressionBuilder {
 		}
 		this.errorMessage = "Operator \"" + this.operator
 				+ "\" is not supported!";
-		return isValidOperator();
+		return false;
 	}
 
 	private boolean isValidOperator() {
