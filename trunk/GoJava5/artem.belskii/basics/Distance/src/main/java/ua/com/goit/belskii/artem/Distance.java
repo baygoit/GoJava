@@ -4,13 +4,11 @@ public class Distance {
 
 	public int findMin(int[] list) {
 		int min = Integer.MAX_VALUE;
-
 		for (int i = 0; i < list.length; i++) {
 			if (list[i] < min) {
 				min = list[i];
 			}
 		}
-
 		return min;
 	}
 
@@ -40,7 +38,6 @@ public class Distance {
 		int max = this.findMax(list);
 		int minPosition = this.findPosition(list, min);
 		int maxPosition = this.findPosition(list, max);
-
 		return maxPosition - minPosition;
 	}
 

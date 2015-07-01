@@ -8,20 +8,17 @@ public class Input {
 	Scanner consoleIn = new Scanner(System.in);
 	private String input = "";
 
-	public void setString() {
+	public void read() {
 		System.out.println("Please, enter text");
 		input = consoleIn.nextLine();
 	}
 
-	public int[] getInput() {
-
+	public int[] write() {
 		String[] separateNumbers = input.split(" ");
 		int[] answer = new int[separateNumbers.length];
-
 		for (int i = 0; i < separateNumbers.length; i++) {
 			answer[i] = Integer.parseInt(separateNumbers[i]);
 		}
-
 		return answer;
 	}
 
