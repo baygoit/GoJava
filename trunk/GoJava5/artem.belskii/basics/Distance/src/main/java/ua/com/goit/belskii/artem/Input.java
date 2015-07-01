@@ -14,7 +14,8 @@ public class Input {
 	}
 
 	public int[] write() {
-		String[] separateNumbers = input.split(" ");
+		String SPLITTER=" ";
+		String[] separateNumbers = input.split(SPLITTER);
 		int[] answer = new int[separateNumbers.length];
 		for (int i = 0; i < separateNumbers.length; i++) {
 			answer[i] = Integer.parseInt(separateNumbers[i]);
