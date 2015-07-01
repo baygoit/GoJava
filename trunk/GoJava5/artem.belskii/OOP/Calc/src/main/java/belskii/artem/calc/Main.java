@@ -4,8 +4,7 @@ package belskii.artem.calc;
 public class Main {
 
 	public static void main(String[] args) {
-		Input console  = new Input();
-		console.setMethod("console");
+		Console console  = new Console();
 		String input = console.read();
 		Parser parser = new Parser();
 		String [] expression=parser.convert(input);
