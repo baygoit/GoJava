@@ -25,7 +25,7 @@ public class Calculator {
 			}
 		} while (console
 				.read("Do you want one more calculation? \"y\" - yes, any other - no :")
-				.equals(Console.AGREE_CODE));
+				.toLowerCase().equals(Console.AGREE_CODE));
 		console.write("Calculator is turned off");
 	}
 }
