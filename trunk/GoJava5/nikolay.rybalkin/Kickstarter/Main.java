@@ -111,8 +111,8 @@ public class Main {
 					i++;
 					System.out.println(i + ") " + pair1.getValue());
 					
-					for (Map.Entry<Integer, String> pair3 : listProgectResult.entrySet()){
-						listProgectResult.put(i, pair1.getValue());
+					for (Map.Entry<Integer, String> pair2 : listProgectResult.entrySet()){
+						listProgectResult.put(i, pair1.getValue(););
 					}
 				}
 			}
