@@ -1,4 +1,5 @@
 package division;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -11,11 +12,12 @@ public class Division {
     static StringBuilder stolbikString = new StringBuilder();
     static ArrayList<Integer> stolbikArray = new ArrayList<Integer>();
     static boolean hasPeriod = false;
+    private static Scanner scanConsole;
 
     public static void main(String[] args) {
 
         System.out.println("Enter two numbers are stripped of their \"/\" : ");
-        Scanner scanConsole = new Scanner(System.in);
+        scanConsole = new Scanner(System.in);
         String numbers = scanConsole.nextLine();
         String[] tokens = numbers.split("/");
         int num1 = Integer.parseInt(tokens[0]);
