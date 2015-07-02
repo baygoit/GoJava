@@ -17,23 +17,9 @@ public class DetailedProject extends ModelService implements IConcreteService {
 	public void setAttributesForDoGet(HttpServletRequest request)
 			throws KickstarterException {
 
-		String parameter = request.getParameter("project");
-		Integer projectIDfromParam = null;
-
-		try {
-			projectIDfromParam = Integer.valueOf(parameter);
-		} catch (NumberFormatException e) {
-			throw new KickstarterException("illegal number of project ");
-		}
-		Integer categoryID = null;
-		String parameterFromURL = request.getParameter("category");
-		try {
-			categoryID = Integer.valueOf(parameterFromURL);
-		} catch (NumberFormatException e) {
-			throw new KickstarterException("illegal number of category");
-		}
-		request.setAttribute("category", categoryID);
-		Project project = dao.getProjectById(projectIDfromParam);
+		setAttributesFromParameters(request);
+		
+		Project project = dao.getProjectById((Integer)request.getAttribute("project"));
 		request.setAttribute("detailedProject", project);
 
 		List<Comment> comments = dao.getCommentsByProjectID(project.getID());

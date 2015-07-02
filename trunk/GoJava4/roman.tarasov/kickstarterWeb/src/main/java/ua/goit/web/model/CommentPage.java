@@ -14,26 +14,10 @@ public class CommentPage extends ModelService implements IConcreteService {
 		super.model = this;
 	}
 
-
 	@Override
 	public void setAttributesForDoGet(HttpServletRequest request)
 			throws KickstarterException {
-		String parameter = request.getParameter("project");
-		Integer projectID = null;
-		try {
-			projectID = Integer.valueOf(parameter);
-		} catch (NumberFormatException e) {
-			throw new KickstarterException("illegal number of project ");
-		}
-		Integer categoryID = null;
-		String parameterFromURL = request.getParameter("category");
-		try {
-			categoryID = Integer.valueOf(parameterFromURL);
-		} catch (NumberFormatException e) {
-			throw new KickstarterException("illegal number of category");
-		}
-		request.setAttribute("category", categoryID);
-		request.setAttribute("project", projectID);
+		setAttributesFromParameters(request);
 	}
 
 	@Override
@@ -50,30 +34,12 @@ public class CommentPage extends ModelService implements IConcreteService {
 			throw new KickstarterException(
 					"comments allowed only for registered user");
 		}
-
-		Comment comment = new Comment();
-		String parameter = request.getParameter("project");
-		Integer projectIDfromParam = null;
-		Project project = null;
-		try {
-			projectIDfromParam = Integer.valueOf(parameter);
-			project = dao.getProjectById(projectIDfromParam);
-
-		} catch (Exception e) {
-			throw new KickstarterException("illegal number of project ");
-		}
-
-		Integer categoryID = null;
-		String parameterFromURL = request.getParameter("category");
-		try {
-			categoryID = Integer.valueOf(parameterFromURL);
-		} catch (NumberFormatException e) {
-			throw new KickstarterException("illegal number of category");
-		}
-		request.setAttribute("category", categoryID);
-		request.setAttribute("project", projectIDfromParam);
+		
+		setAttributesFromParameters(request);
+		Project project = dao.getProjectById((Integer)request.getAttribute("project"));
 
 		User user = (User) session.getAttribute("user");
+		Comment comment = new Comment();
 		comment.setProjectID(project.getID());
 		comment.setUserID(user.getID());
 		comment.setComment(request.getParameter("commentForm"));

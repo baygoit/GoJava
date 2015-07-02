@@ -44,4 +44,31 @@ public class ModelService {
 	public void setDao(IDao dao) {
 		this.dao = dao;
 	}
+	
+	void setAttributesFromParameters(HttpServletRequest request) throws KickstarterException {
+		String parameter = request.getParameter("project");
+		Integer projectID = null;
+		try {
+			projectID = Integer.valueOf(parameter);
+		} catch (NumberFormatException e) {
+			throw new KickstarterException("illegal number of project ");
+		}
+		Integer categoryID = null;
+		String parameterFromURL = request.getParameter("category");
+		try {
+			categoryID = Integer.valueOf(parameterFromURL);
+		} catch (NumberFormatException e) {
+			throw new KickstarterException("illegal number of category");
+		}
+		Integer investOption = null;
+		String parameterInvestOption = request.getParameter("option");
+		try {
+			investOption = Integer.valueOf(parameterInvestOption);
+		} catch (NumberFormatException e) {
+			
+		}
+		request.setAttribute("option", investOption);
+		request.setAttribute("category", categoryID);
+		request.setAttribute("project", projectID);
+	}
 }

@@ -9,6 +9,7 @@
 		annotation-config="true">
 	</context:component-scan>
 
+	<context:property-placeholder location="classpath:jdbc.properties" />
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
 		destroy-method="close">
 		<property name="driverClassName" value="${jdbc.driverClassName}" />
@@ -16,28 +17,25 @@
 		<property name="username" value="${jdbc.username}" />
 		<property name="password" value="${jdbc.password}" />
 	</bean>
-	<context:property-placeholder location="classpath:jdbc.properties" />
 
+	<bean id="DDao" name="dDao" class="ua.goit.web.model.dao.database.DDao">
 
-	<bean id="DDao" name="dDao"
-		class="ua.goit.web.model.dao.database.DDao">
-	
-	<constructor-arg type="ua.goit.web.model.dao.database.DCategoryDao"
-		ref="DCategoryDao">
-		
-	</constructor-arg>
-	<constructor-arg type="ua.goit.web.model.dao.database.DQuoteDao"
-		ref="DQuoteDao">
-	</constructor-arg>
-	<constructor-arg type="ua.goit.web.model.dao.database.DUserDao"
-		ref="DUserDao">
-	</constructor-arg>
-	<constructor-arg type="ua.goit.web.model.dao.database.DCommentDao"
-		ref="DCommentDao">
-	</constructor-arg>
-	<constructor-arg type="ua.goit.web.model.dao.database.DProjectDao"
-		ref="DProjectDao">
-	</constructor-arg>
+		<constructor-arg type="ua.goit.web.model.dao.database.DCategoryDao"
+			ref="DCategoryDao">
+
+		</constructor-arg>
+		<constructor-arg type="ua.goit.web.model.dao.database.DQuoteDao"
+			ref="DQuoteDao">
+		</constructor-arg>
+		<constructor-arg type="ua.goit.web.model.dao.database.DUserDao"
+			ref="DUserDao">
+		</constructor-arg>
+		<constructor-arg type="ua.goit.web.model.dao.database.DCommentDao"
+			ref="DCommentDao">
+		</constructor-arg>
+		<constructor-arg type="ua.goit.web.model.dao.database.DProjectDao"
+			ref="DProjectDao">
+		</constructor-arg>
 	</bean>
 
 	<bean id="ModelServiceLocator" name="modelServiceLocator"
@@ -52,18 +50,16 @@
 				</entry>
 				<entry value-ref="CommentPage" key="Comment"></entry>
 				<entry key="login" value-ref="Login"></entry>
-
+				<entry key="donate" value-ref="Donate"></entry>
+				<entry key="invest" value-ref="Invest"></entry>
 			</map>
 		</property>
 	</bean>
 
 	<bean id="Main" name="main" class="ua.goit.web.model.Main">
-		
 	</bean>
 
-	<bean id="Projects" name="projects"
-		class="ua.goit.web.model.Projects">
-		
+	<bean id="Projects" name="projects" class="ua.goit.web.model.Projects">
 	</bean>
 
 	<bean id="MemoryQuoteDao" name="memoryQuoteDaoImpl"
@@ -73,6 +69,7 @@
 	<bean id="MemoryCategoryDao" name="memoryCategoryDaoImpl"
 		class="ua.goit.web.model.dao.memory.MCategoryDao">
 	</bean>
+
 	<bean id="MemoryProjectDao" name="memoryProjectDaoImpl"
 		class="ua.goit.web.model.dao.memory.MProjectDao">
 	</bean>
@@ -94,41 +91,59 @@
 			ref="MemoryUserDao">
 		</constructor-arg>
 	</bean>
+
 	<bean id="MemoryCommentDao" name="memoryCommentDao"
 		class="ua.goit.web.model.dao.memory.MCommentDao">
 	</bean>
+
 	<bean id="DetailedProject" name="detailedProject"
 		class="ua.goit.web.model.DetailedProject">
-		
 	</bean>
+
 	<bean id="MemoryUserDao" name="memoryUserDao"
 		class="ua.goit.web.model.dao.memory.MUserDao">
 	</bean>
-	<bean id="CommentPage" name="commentPage"
-		class="ua.goit.web.model.CommentPage">
-		
+
+	<bean id="CommentPage" name="commentPage" class="ua.goit.web.model.CommentPage">
 	</bean>
+
 	<bean id="Login" name="login" class="ua.goit.web.model.Login">
-		
 	</bean>
 
 	<bean id="DCategoryDao" name="dCategoryDao"
 		class="ua.goit.web.model.dao.database.DCategoryDao">
 	</bean>
+
 	<bean id="DQuoteDao" name="dQuoteDao"
 		class="ua.goit.web.model.dao.database.DQuoteDao">
 	</bean>
-	<bean id="Pool" name="pool"
-		class="ua.goit.web.model.dao.database.Pool" scope="singleton">
-	<property name="dataSource" ref="dataSource"></property>
+
+	<bean id="Pool" name="pool" class="ua.goit.web.model.dao.database.Pool"
+		scope="singleton">
+		<property name="dataSource" ref="dataSource"></property>
 	</bean>
+
 	<bean id="DProjectDao" name="dProjectDao"
 		class="ua.goit.web.model.dao.database.DProjectDao">
 	</bean>
+
 	<bean id="DCommentDao" name="dCommentDao"
 		class="ua.goit.web.model.dao.database.DCommentDao">
 	</bean>
-	<bean id="DUserDao" name="dUserDao"
-		class="ua.goit.web.model.dao.database.DUserDao">
+
+	<bean id="DUserDao" name="dUserDao" class="ua.goit.web.model.dao.database.DUserDao">
+	</bean>
+
+	<bean id="Bank" name="bank" class="ua.goit.web.model.dao.Bank"
+		scope="singleton">
+	</bean>
+
+	<bean id="Donate" name="donate" class="ua.goit.web.model.Donate">
+		<property name="bank" ref="bank">
+		</property>
+	</bean>
+
+	<bean id="Invest" name="invest" class="ua.goit.web.model.Invest">
+		<property name="bank" ref="bank"></property>
 	</bean>
 </beans>

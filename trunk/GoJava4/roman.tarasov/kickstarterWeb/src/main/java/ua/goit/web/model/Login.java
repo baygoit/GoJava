@@ -12,44 +12,13 @@ public class Login extends ModelService implements IConcreteService {
 	@Override
 	public void setAttributesForDoGet(HttpServletRequest request)
 			throws KickstarterException {
-		String parameter = request.getParameter("project");
-		Integer projectID = null;
-		try {
-			projectID = Integer.valueOf(parameter);
-		} catch (NumberFormatException e) {
-			throw new KickstarterException("illegal number of project ");
-		}
-		Integer categoryID = null;
-		String parameterFromURL = request.getParameter("category");
-		try {
-			categoryID = Integer.valueOf(parameterFromURL);
-		} catch (NumberFormatException e) {
-			throw new KickstarterException("illegal number of category");
-		}
-		request.setAttribute("category", categoryID);
-		request.setAttribute("project", projectID);
+		setAttributesFromParameters(request);
 	}
 
 	@Override
 	public void setAttributesForDoPost(HttpServletRequest request)
 			throws KickstarterException {
-		String parameter = request.getParameter("project");
-		Integer projectID = null;
-		try {
-			projectID = Integer.valueOf(parameter);
-		} catch (NumberFormatException e) {
-			throw new KickstarterException("illegal number of project ");
-		}
-		Integer categoryID = null;
-		String parameterFromURL = request.getParameter("category");
-		try {
-			categoryID = Integer.valueOf(parameterFromURL);
-		} catch (NumberFormatException e) {
-			throw new KickstarterException("illegal number of category");
-		}
-		request.setAttribute("category", categoryID);
-
-		request.setAttribute("project", projectID);
+		setAttributesFromParameters(request);
 		User modelOfUser = new User();
 		User user = null;
 

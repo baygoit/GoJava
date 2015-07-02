@@ -11,8 +11,7 @@ import java.util.List;
 import ua.goit.web.model.dao.KickstarterException;
 import ua.goit.web.model.dao.Project;
 
-
-public class DProjectDao  {
+public class DProjectDao {
 	private Connection conn;
 
 	public List<Project> sortProjectsByCategoryID(int categoryID)
@@ -133,6 +132,7 @@ public class DProjectDao  {
 		return project;
 	}
 
+
 	public void updateProject(Project project) throws KickstarterException {
 		StringBuffer sql = new StringBuffer();
 		int error = 0;
@@ -151,10 +151,11 @@ public class DProjectDao  {
 			sql.append("invest_options=? ");
 			sql.append("WHERE id_project=");
 			sql.append(Integer.toString(project.getID()));
-
-			PreparedStatement preparedStatement = Pool.getDataSource()
-					.getConnection().prepareStatement(sql.toString());
-			fillStatement(preparedStatement, project);
+			conn = Pool.getDataSource().getConnection();
+			PreparedStatement preparedStatement = conn.prepareStatement(sql
+					.toString());
+			fillStatement(preparedStatement, project, conn);
+			preparedStatement.executeUpdate();
 		} catch (KickstarterException | SQLException e) {
 			error = 1;
 		} finally {
@@ -176,8 +177,8 @@ public class DProjectDao  {
 		}
 	}
 
-	void fillStatement(PreparedStatement ps, Project project)
-			throws KickstarterException {
+	 void fillStatement(PreparedStatement ps, Project project,
+			Connection connection) throws KickstarterException {
 		try {
 			ps.setInt(1, project.getID());
 			ps.setInt(2, project.getCategoryID());
@@ -185,16 +186,18 @@ public class DProjectDao  {
 			ps.setString(4, project.getShortDescription());
 			ps.setString(5, project.getDescription());
 			ps.setDouble(6, project.getPledged());
-			Array sqlArray = Pool.getDataSource().getConnection()
-					.createArrayOf("float8", project.getAmount());
+
+			Array sqlArray = connection.createArrayOf("float8",
+					project.getAmount());
 			ps.setArray(7, sqlArray);
 			ps.setInt(8, project.getDaysToGo());
 			ps.setString(9, project.getLinkToVideo());
 			ps.setString(10, project.getHistory());
-			sqlArray = Pool.getDataSource().getConnection()
-					.createArrayOf("varchar", project.getInvestmentOptions());
+
+			sqlArray = connection.createArrayOf("varchar",
+					project.getInvestmentOptions());
 			ps.setArray(11, sqlArray);
-			ps.executeUpdate();
+			//ps.executeUpdate();
 		} catch (SQLException e) {
 			throw new KickstarterException("update project has error", e);
 		}

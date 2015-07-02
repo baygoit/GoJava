@@ -6,10 +6,13 @@
 "http://www.w3.org/TR/html4/loose.dtd">
 
 <h2>
-	<c:out value="${userName}" />
-
-	<input type="button" value="Donate" onclick="self.location='donate';" />
-	<input type="button" value="Invest" onclick="self.location='invest';" />
+	<br>
+	<c:out value="user: ${userName}" />
+	<br>
+	 <input type="button" value="Donate"
+		onclick="self.location='donate?project=${detailedProject.ID}&category=${category}';" />
+	<input type="button" value="Invest"
+		onclick="self.location='invest?project=${detailedProject.ID}&category=${category}';" />
 	<input type="button" value="Comment"
 		onclick="self.location='Comment?project=${detailedProject.ID}&category=${category}';" />
 	<br> <br>

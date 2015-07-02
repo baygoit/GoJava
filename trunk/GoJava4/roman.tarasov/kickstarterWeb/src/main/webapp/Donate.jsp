@@ -10,7 +10,7 @@
 <body>
 	<h2>Donate</h2>
 	<input type="button" value="project page"
-		onclick="self.location='DetailedProject';" />
+		onclick="self.location='DetailedProject?project=${project}&category=${category}';" />
 
 	<c:if test="${user==null}">
 		<p>
@@ -22,7 +22,7 @@
 			<c:out value=" ${user.name }" />
 		<p>
 		<h1>Enter the payment details </h1>
-		<form action="donate" method="post">
+		<form action="donate?project=${project}&category=${category}" method="post">
 			Login :(bankir) <input type="text" name="bankLogin"> <br> Card
 			Number: (777)<input type="text" name="bankCardNumber"> <br>
 			Pay : <input type="text" name="bankPay"> <br> <input
