@@ -110,7 +110,10 @@ public class Main {
 				for (Map.Entry<String, String> pair1 : listProgect.entrySet()){
 					i++;
 					System.out.println(i + ") " + pair1.getValue());					
-					listProgectResult.put(i, a);  	 	  		
+					String a = pair1.getValue();
+										
+					listProgectResult.put(i, a);
+					
 				}
 			}
         }
@@ -118,6 +121,7 @@ public class Main {
 		System.out.println(SPACE);
 		System.out.println("Choose a project");
 		System.out.println(SPACE);
+				
 		
 		scan = new Scanner(System.in);
 		int valueGet1 = Integer.parseInt(scan.nextLine());
@@ -130,7 +134,6 @@ public class Main {
 			}
         }
 		
-		System.out.println("Choose a project");
 		System.out.println(SPACE);
 		System.out.println("Select '0' Back to the category list");
 		
