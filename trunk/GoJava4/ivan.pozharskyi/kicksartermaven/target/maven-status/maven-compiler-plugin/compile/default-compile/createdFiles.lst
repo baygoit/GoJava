@@ -1,0 +1,15 @@
+com\ivanpozharskyi\kickstarter\DAO\CreationTables.class
+com\ivanpozharskyi\kickstarter\DAO\ProjectsDao.class
+com\ivanpozharskyi\kickstarter\entity\Answer.class
+com\ivanpozharskyi\kickstarter\entity\Categories.class
+com\ivanpozharskyi\kickstarter\DAO\CategoriesDAO.class
+com\ivanpozharskyi\kickstarter\DAO\ConnectionManager.class
+com\ivanpozharskyi\kickstarter\controller\MainServlet.class
+com\ivanpozharskyi\kickstarter\entity\Projects.class
+com\ivanpozharskyi\kickstarter\entity\Project.class
+com\ivanpozharskyi\kickstarter\entity\Quotes.class
+com\ivanpozharskyi\kickstarter\entity\Category.class
+com\ivanpozharskyi\kickstarter\entity\Quote.class
+com\ivanpozharskyi\kickstarter\entity\QuestionStorage.class
+com\ivanpozharskyi\kickstarter\DAO\QuotesDao.class
+com\ivanpozharskyi\kickstarter\entity\Question.class
