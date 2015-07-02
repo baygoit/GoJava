@@ -8,7 +8,7 @@ public class Calculator {
         Console console = new Console();
         Parser parser = new Parser();
         while (true){
-            console.write("Enter expression or q for exit");
+            console.write("Enter expression using pattern (x+y=) or q for exit");
             String input = console.read();
             if (input.equals("q")){
                 break;
