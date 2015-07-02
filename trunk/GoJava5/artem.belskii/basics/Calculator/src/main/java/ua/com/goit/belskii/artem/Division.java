@@ -19,8 +19,16 @@ public class Division {
 		divisorInt = Integer.parseInt(divisor);
 		dividentPartEndPos = divisor.length();
 	}
+	
+	public void calculate() {
+		while (result > 0) {
+			this.getPartDivident();
+			this.partDivision();
+		}
+		this.getResult();
+	}
 
-	public void getPartDivident() {
+	private void getPartDivident() {
 
 		if (dividentPartStartPos == 0) {
 			dividentPart = Integer.parseInt(divident.substring(
@@ -51,7 +59,7 @@ public class Division {
 		dividentPartEndPos++;
 	}
 
-	public void partDivision() {
+	private void partDivision() {
 		remainder = dividentPart % divisorInt;
 		result = dividentPart / divisorInt;
 		divisionResult.add(result);
@@ -61,15 +69,7 @@ public class Division {
 		divisionProcess.add("______________________");
 	}
 
-	public void calculate() {
-		while (result > 0) {
-			this.getPartDivident();
-			this.partDivision();
-		}
-		this.getResult();
-	}
-
-	public String getResult() {
+	private String getResult() {
 		StringBuffer result = new StringBuffer();
 		for (int i = 0; i < divisionProcess.size(); i++) {
 			System.out.println(divisionProcess.get(i));
