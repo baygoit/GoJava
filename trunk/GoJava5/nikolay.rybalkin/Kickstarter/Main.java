@@ -109,11 +109,8 @@ public class Main {
 				
 				for (Map.Entry<String, String> pair1 : listProgect.entrySet()){
 					i++;
-					System.out.println(i + ") " + pair1.getValue());
-					
-					for (Map.Entry<Integer, String> pair2 : listProgectResult.entrySet()){
-						listProgectResult.put(i, pair1.getValue(););
-					}
+					System.out.println(i + ") " + pair1.getValue());					
+					listProgectResult.put(i, a);  	 	  		
 				}
 			}
         }
