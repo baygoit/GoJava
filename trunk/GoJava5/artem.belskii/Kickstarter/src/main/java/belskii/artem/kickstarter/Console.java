@@ -1,16 +1,19 @@
 package belskii.artem.kickstarter;
 
-import javax.swing.border.EmptyBorder;
+import java.awt.Label;
+import java.awt.event.ComponentListener;
 
 import com.googlecode.lanterna.TerminalFacade;
 import com.googlecode.lanterna.gui.Action;
 import com.googlecode.lanterna.gui.Border;
 import com.googlecode.lanterna.gui.GUIScreen;
 import com.googlecode.lanterna.gui.Window;
+import com.googlecode.lanterna.gui.component.ActionListBox;
 import com.googlecode.lanterna.gui.component.Button;
+import com.googlecode.lanterna.gui.component.CheckBox;
+import com.googlecode.lanterna.gui.component.InteractableComponent;
 import com.googlecode.lanterna.gui.component.Panel;
 import com.googlecode.lanterna.gui.component.TextBox;
-import com.googlecode.lanterna.gui.dialog.MessageBox;
 
 public class Console extends Window{
     public Console(String title) {
@@ -21,29 +24,37 @@ public class Console extends Window{
     
     
     
-    public void start(Console console){
+	public void start(Console console) {
 		GUIScreen gui = TerminalFacade.createGUIScreen();
-    	gui.getScreen().startScreen();
-    	Panel motivation = new Panel(new Border.Standard(), Panel.Orientation.HORISONTAL);
-    	Motivation motivationText = initializeMotivationFromDatabase();
-    	motivation.addComponent(new TextBox(motivationText.getMotivation()));
-    	addComponent(motivation);
-    	
-    	this.addButton();
-    	
-    	gui.showWindow(console, GUIScreen.Position.NEW_CORNER_WINDOW);
-    	gui.getScreen().stopScreen();
+		gui.getScreen().startScreen();
+		// start motivation panel
+		Panel motivation = new Panel(new Border.Standard(), Panel.Orientation.HORISONTAL);
+		Motivation motivationText = initializeMotivationFromDatabase();
+		motivation.addComponent(new TextBox(motivationText.getMotivation()));
+		addComponent(motivation);
+		// end motivation panel
 
-    }
-    
-    public void addButton(){
-        addComponent(new Button("Exit", new Action() {
-            public void doAction() {
-            	System.exit(0);
-            }
-        }));
-    }
-    
+		// Show category panel
+		Category category = initializeCategoryFromDatabase();
+		Panel categoryPanel = new Panel(new Border.Invisible(),	Panel.Orientation.VERTICAL);
+		for (int i = 0; i < category.getCategoryList().size(); i++) {
+			categoryPanel.addComponent(new Button(category.getCategoryList().get(i)));
+		}
+		addComponent(categoryPanel);
+		//End category panel
+		this.addExitButton();
+		gui.showWindow(console, GUIScreen.Position.NEW_CORNER_WINDOW);
+		gui.getScreen().stopScreen();
+
+	}
+
+	public void addExitButton() {
+		addComponent(new Button("Exit", new Action() {
+			public void doAction() {
+				System.exit(0);
+			}
+		}));
+	}    
 	
     //prepare demo data
     private static Motivation initializeMotivationFromDatabase() {
@@ -56,4 +67,14 @@ public class Console extends Window{
 		return motivation;
 
 	}
+    
+	private static Category initializeCategoryFromDatabase() {
+		Category category = new Category();
+		category.addCategory("Techno");
+		category.addCategory("Art");
+		category.addCategory("Sport");
+		category.addCategory("Some category");
+		return category;
+	}
+
 }
