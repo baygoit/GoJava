@@ -1,4 +1,4 @@
-package goit.operations;
+package goit.calculator.operations;
 
 public class Multiplication extends Operation {
 

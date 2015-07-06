@@ -1,8 +1,10 @@
-package goit.parsers;
+package goit.calculator.parsers;
 
-import goit.operations.Operation;
+import goit.calculator.operations.Operation;
+import goit.calculator.operations.OperationFactory;
+import goit.common.ParseException;
 
-public class SimpleParser extends Parser {
+public class SimpleParser implements Parser {
 
     private boolean isValid(String text) {
         return text.matches("^[\\+|\\-]?\\d+[\\+|\\-|\\*|\\/]{1}\\d+$");
@@ -23,6 +25,6 @@ public class SimpleParser extends Parser {
         String operation = result.substring(operand[0].length(), operand[0].length() + 1);
         operand[0] = firstOperandSign.concat(operand[0]);
 
-        return Operation.create(Integer.parseInt(operand[0]), Integer.parseInt(operand[1]), operation);
+        return OperationFactory.getOperation(Integer.parseInt(operand[0]), Integer.parseInt(operand[1]), operation);
     }
 }

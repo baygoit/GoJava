@@ -1,25 +1,25 @@
-package goit;
+package goit.lonelyNumber;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Map;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-class LonelyNumber {
+public class LonelyNumber {
 
     private List<Integer> number;
     private Map<Integer, Integer> uniqueNumber;
     private Integer minValue;
 
-    LonelyNumber(List<Integer> number) {
+    public LonelyNumber(List<Integer> number) {
         this.number = number;
         prepare();
         setMinValue(Collections.min(uniqueNumber.values()));
     }
 
     private void prepare() {
-        uniqueNumber =  new HashMap<Integer, Integer>();
+        uniqueNumber = new HashMap<>();
         for (Integer element : number) {
             if (!uniqueNumber.containsKey(element)) {
                 uniqueNumber.put(element, Collections.frequency(number, element));
@@ -31,14 +31,14 @@ class LonelyNumber {
         this.minValue = minValue;
     }
 
-    Integer getMinValue() {
+    public Integer getMinValue() {
         return minValue;
     }
 
-    List<Integer> retrieve() {
-        List<Integer> result = new ArrayList<Integer>();
+    public List<Integer> retrieve() {
+        List<Integer> result = new ArrayList<>();
         for (Map.Entry<Integer, Integer> element : uniqueNumber.entrySet()) {
-            if (element.getValue().compareTo(minValue) == 0) {
+            if (element.getValue().equals(minValue)) {
                 result.add(element.getKey());
             }
         }

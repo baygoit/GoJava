@@ -1,4 +1,4 @@
-package goit.operations;
+package goit.calculator.operations;
 
 public class Addition extends Operation {
 
