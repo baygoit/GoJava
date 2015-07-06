@@ -17,13 +17,6 @@ public class Kickstarter {
 	}
 
 	public void run() {
-		/*Question to mentor\coach - it needs to extract menu processing logic and creating object output to new classes
-		 * or maybe it would be better to encapsulate output preparing in CategoryList, ProjectList and so on
-		 * or maybe should i implement a strategy pattern by creating an interface (for example) Displayable
-		 * and every instanse will setup and keep his own Displayable. 
-		 * But anyway we have to create one DisplayBehavior class for every object (CategoryListDisplay, ProjectListDisplay, etc.)
-		 * Can such logic be called a "strategy"?
-		 * */
 		init();
 		showQuote();
 		while (true) {
