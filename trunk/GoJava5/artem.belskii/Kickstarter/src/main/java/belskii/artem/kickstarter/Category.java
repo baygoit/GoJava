@@ -1,5 +1,18 @@
 package belskii.artem.kickstarter;
 
-public class Category {
+import java.util.ArrayList;
 
+public class Category {
+	ArrayList<String> categoryList = new ArrayList<String>();
+	
+	public void addCategory(String catName) {
+		categoryList.add(catName);
+	}
+
+	public ArrayList<String> getCategoryList() {
+		return categoryList;
+	}
+
+
+	
 }
