@@ -1,8 +1,8 @@
-package goit.operations;
+package goit.calculator.operations;
 
-public class Substraction extends Operation {
+public class Subtraction extends Operation {
 
-    public Substraction(int firstOperand, int secondOperand) {
+    public Subtraction(int firstOperand, int secondOperand) {
         super(firstOperand, secondOperand);
     }
     @Override

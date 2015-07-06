@@ -1,11 +1,11 @@
-package goit.streams;
+package goit.calculator.streams;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class Console extends Stream{
-    private final String EXIT_CODE = "y";
+public class ConsoleStream implements Stream {
+    private static final String EXIT_CODE = "y";
     private String line;
 
     private String getLine() {
@@ -35,7 +35,7 @@ public class Console extends Stream{
 
     public boolean hasNext() {
         String message = "Repeat(".concat(EXIT_CODE).concat(" - yes, otherwise - exit)?");
-        return read(message).compareToIgnoreCase(EXIT_CODE) == 0;
+        return read(message).equalsIgnoreCase(EXIT_CODE);
     }
 
     public void showResult(String message) {

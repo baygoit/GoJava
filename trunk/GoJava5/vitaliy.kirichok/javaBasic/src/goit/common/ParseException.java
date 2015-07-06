@@ -1,4 +1,4 @@
-package goit.parsers;
+package goit.common;
 
 public class ParseException extends Exception {
 
