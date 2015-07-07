@@ -13,8 +13,8 @@ public class ProjectsController {
 		this.view = view;
 	}
 	
-	public void addProject(String title, String details){
-		model.addProject(title, details);
+	public void addProject(String category, String title, String details){
+		model.addProject(category, title, details);
 	}
 	
 	public ArrayList<ProjectInfo> getProjectList(){
@@ -24,6 +24,18 @@ public class ProjectsController {
 	public ProjectInfo getProjectDetails(int id){
 		return model.getProjectDetails(id);
 	}
+	
+	public ArrayList<ProjectInfo> getProjectListFromCategory(String categoryName) {
+		ArrayList<ProjectInfo> answer= new ArrayList<ProjectInfo>();
+		for ( int i=0; i<model.getProjectList().size(); i++ ){
+			ProjectInfo projectInfo = model.getProjectDetails(i);
+			if (projectInfo.get("Category").equals(categoryName)){
+				answer.add(projectInfo);
+			}
+	}
+		return answer;
+	}
+
 
 	public void printProjectsList() {
 		view.printProjectsList(this.getProjectList());

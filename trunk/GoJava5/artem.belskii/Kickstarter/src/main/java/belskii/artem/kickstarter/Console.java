@@ -1,19 +1,14 @@
 package belskii.artem.kickstarter;
 
-import java.awt.Label;
-import java.awt.event.ComponentListener;
-
 import com.googlecode.lanterna.TerminalFacade;
 import com.googlecode.lanterna.gui.Action;
 import com.googlecode.lanterna.gui.Border;
 import com.googlecode.lanterna.gui.GUIScreen;
 import com.googlecode.lanterna.gui.Window;
-import com.googlecode.lanterna.gui.component.ActionListBox;
 import com.googlecode.lanterna.gui.component.Button;
-import com.googlecode.lanterna.gui.component.CheckBox;
-import com.googlecode.lanterna.gui.component.InteractableComponent;
 import com.googlecode.lanterna.gui.component.Panel;
 import com.googlecode.lanterna.gui.component.TextBox;
+import com.googlecode.lanterna.gui.dialog.ListSelectDialog;
 
 public class Console extends Window{
     public Console(String title) {
@@ -35,13 +30,30 @@ public class Console extends Window{
 		// end motivation panel
 
 		// Show category panel
-		Category category = initializeCategoryFromDatabase();
-		Panel categoryPanel = new Panel(new Border.Invisible(),	Panel.Orientation.VERTICAL);
+		Category categoryModel = initializeCategoryFromDatabase();
+		CategoryView categoryView = new CategoryView();
+		CategoryController category = new CategoryController(categoryModel, categoryView);
+		
+//		Panel categoryPanel = new Panel(new Border.Invisible(),	Panel.Orientation.VERTICAL);
 		for (int i = 0; i < category.getCategoryList().size(); i++) {
-			categoryPanel.addComponent(new Button(category.getCategoryList().get(i)));
+			final String categoryTitle=category.getCategoryList().get(i);
+			addComponent(new Button(categoryTitle, new Action() {
+				public void doAction() {
+					Projects projectModel = retriveProjectFromDatabase(); 
+					ProjectsView projectsView = new ProjectsView();
+					ProjectsController projects = new ProjectsController(projectModel, projectsView);
+					//System.out.println(projects.getProjectListFromCategory(categoryTitle));
+					ListSelectDialog.showDialog(getOwner(), "Project in category", "Description", projects.getProjectListFromCategory(categoryTitle));
+					
+					
+				}
+			}));
+					//category.getCategoryList().get(i))
+
 		}
-		addComponent(categoryPanel);
 		//End category panel
+		
+		
 		this.addExitButton();
 		gui.showWindow(console, GUIScreen.Position.NEW_CORNER_WINDOW);
 		gui.getScreen().stopScreen();
@@ -75,6 +87,13 @@ public class Console extends Window{
 		category.addCategory("Sport");
 		category.addCategory("Some category");
 		return category;
+	}
+	
+	private static Projects retriveProjectFromDatabase() {
+		Projects projects = new Projects();
+		projects.addProject("Techno", "Мой самый лучшей проект", "Выберете нас, и мы сделаем все отлично!");
+		projects.addProject("Art", "Мой еще более лучшей проект", "Лучше выберене нас!");
+		return projects;
 	}
 
 }
