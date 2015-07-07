@@ -25,12 +25,20 @@ public class ProjectsController {
 		return model.getProjectDetails(id);
 	}
 	
-	public ArrayList<ProjectInfo> getProjectListFromCategory(String categoryName) {
-		ArrayList<ProjectInfo> answer= new ArrayList<ProjectInfo>();
+	public String[] getProjectListFromCategory(String categoryName) {
+		String [] answer;
+		if (model.getProjectList().size()>0){
+			answer = new String[model.getProjectList().size()];
+		} else {
+			answer = new String[0];
+			answer[0]="";
+		}
+
 		for ( int i=0; i<model.getProjectList().size(); i++ ){
 			ProjectInfo projectInfo = model.getProjectDetails(i);
 			if (projectInfo.get("Category").equals(categoryName)){
-				answer.add(projectInfo);
+				answer[i]=projectInfo.get("Title");
+				//System.out.println(i+ " "+projectInfo.get("Title"));
 			}
 	}
 		return answer;

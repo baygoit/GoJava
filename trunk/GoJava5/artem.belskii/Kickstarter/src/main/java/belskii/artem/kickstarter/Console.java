@@ -1,5 +1,7 @@
 package belskii.artem.kickstarter;
 
+import belskii.artem.kickstarter.Projects.ProjectInfo;
+
 import com.googlecode.lanterna.TerminalFacade;
 import com.googlecode.lanterna.gui.Action;
 import com.googlecode.lanterna.gui.Border;
@@ -34,7 +36,6 @@ public class Console extends Window{
 		CategoryView categoryView = new CategoryView();
 		CategoryController category = new CategoryController(categoryModel, categoryView);
 		
-//		Panel categoryPanel = new Panel(new Border.Invisible(),	Panel.Orientation.VERTICAL);
 		for (int i = 0; i < category.getCategoryList().size(); i++) {
 			final String categoryTitle=category.getCategoryList().get(i);
 			addComponent(new Button(categoryTitle, new Action() {
@@ -42,13 +43,19 @@ public class Console extends Window{
 					Projects projectModel = retriveProjectFromDatabase(); 
 					ProjectsView projectsView = new ProjectsView();
 					ProjectsController projects = new ProjectsController(projectModel, projectsView);
-					//System.out.println(projects.getProjectListFromCategory(categoryTitle));
-					ListSelectDialog.showDialog(getOwner(), "Project in category", "Description", projects.getProjectListFromCategory(categoryTitle));
+					projects.getProjectListFromCategory(categoryTitle);
+										 
+					//System.out.println(projects.getProjectListFromCategory(categoryTitle).size());
+					try {
+						System.out.println(ListSelectDialog.showDialog(getOwner(), categoryTitle, categoryTitle, projects.getProjectListFromCategory(categoryTitle)));
+					} catch (Exception NullPointerException) {
+						
+					}
+					
 					
 					
 				}
 			}));
-					//category.getCategoryList().get(i))
 
 		}
 		//End category panel
@@ -82,17 +89,29 @@ public class Console extends Window{
     
 	private static Category initializeCategoryFromDatabase() {
 		Category category = new Category();
-		category.addCategory("Techno");
 		category.addCategory("Art");
-		category.addCategory("Sport");
-		category.addCategory("Some category");
+		category.addCategory("Comics");
+		category.addCategory("Crafts");
+		category.addCategory("Dance");
+		category.addCategory("Design");
+		category.addCategory("Fashion");
+		category.addCategory("Film & Video");
+		category.addCategory("Food");
+		category.addCategory("Games");
+		category.addCategory("Journalism");
+		category.addCategory("Music");
+		category.addCategory("Photography");
+		category.addCategory("Publishing");
+		category.addCategory("Technology");
+		category.addCategory("Theater");
+		
 		return category;
 	}
 	
 	private static Projects retriveProjectFromDatabase() {
 		Projects projects = new Projects();
-		projects.addProject("Techno", "Мой самый лучшей проект", "Выберете нас, и мы сделаем все отлично!");
-		projects.addProject("Art", "Мой еще более лучшей проект", "Лучше выберене нас!");
+		projects.addProject("Art", "Museum of Digital Art", "Opening its doors with your help, the Museum of Digital Art will be Europe's first physical & virtual museum dedicated to digital arts.");
+		projects.addProject("Art", "The Wabash Lights - The Beta Test", " A site-specific light installation created by the public on the Wabash stretch of elevated train tracks (L) in Chicago’s loop.");
 		return projects;
 	}
 
