@@ -7,11 +7,12 @@ public class Project {
 	private int amountCollected;
 	private int daysLeft;
 	private Category category;
+	private ProjectList list;
 	private String projectHistory;
 	private String linkToVideo;
 	private String questionsAnswers;
 	
-	public Project(String name) {
+	public Project(String name, ProjectList list) {
 		this.name = name;
 		description = "";
 		amountRequired = 0;
@@ -20,9 +21,11 @@ public class Project {
 		projectHistory = "";
 		linkToVideo = "";
 		questionsAnswers = "";
+		this.list = list;
+		this.list.add(this);
 	}
 	
-	public Project(String name, String desc, int required, int collected, int days) {
+	public Project(String name, String desc, int required, int collected, int days, ProjectList list) {
 		this.name = name;
 		description = desc;
 		amountRequired = required;
@@ -31,6 +34,8 @@ public class Project {
 		projectHistory = "";
 		linkToVideo = "";
 		questionsAnswers = "";
+		this.list = list;
+		this.list.add(this);
 	}
 	
 	public void setCategory(Category cat) {

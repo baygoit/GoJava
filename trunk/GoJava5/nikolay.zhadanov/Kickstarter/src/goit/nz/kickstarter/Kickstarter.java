@@ -5,13 +5,13 @@ import java.util.ArrayList;
 public class Kickstarter {
 	private final int EXIT = 0;
 	private Console console;
-	private QuoteList quotes;
+	private Quotes quotes;
 	private CategoryList categories;
 	private ProjectList projects;
 
 	public Kickstarter() {
 		console = new Console(System.in);
-		quotes = new QuoteList();
+		quotes = new Quotes();
 		categories = new CategoryList();
 		projects = new ProjectList();
 	}
@@ -135,28 +135,19 @@ public class Kickstarter {
 				+ "- they must be felt with the heart.\"\n(c) Helen Keller");
 		quotes.add("\"I can't change the direction of the wind, "
 				+ "but I can adjust my sails to always reach my destination.\"\n(c) Jimmy Dean");
-		Category cat1 = new Category("Art");
-		Category cat2 = new Category("Comics");
-		Category cat3 = new Category("Crafts");
-		Category cat4 = new Category("Games");
-		categories.add(cat1);
-		categories.add(cat2);
-		categories.add(cat3);
-		categories.add(cat4);
-		Project p1 = new Project("name1", "desc1", 1000, 0, 10);
-		Project p2 = new Project("name2", "desc2", 10000, 100, 90);
-		Project p3 = new Project("name3", "desc3", 100, 90, 15);
-		Project p4 = new Project("name4", "desc4", 100000, 50000, 100);
-		projects.add(p1);
-		projects.add(p2);
-		projects.add(p3);
-		projects.add(p4);
+		Category cat1 = new Category("Art", categories);
+		Category cat2 = new Category("Comics", categories);
+		Category cat3 = new Category("Crafts", categories);
+		Category cat4 = new Category("Games", categories);
+		Project p1 = new Project("name1", "desc1", 1000, 0, 10, projects);
+		Project p2 = new Project("name2", "desc2", 10000, 100, 90, projects);
+		Project p3 = new Project("name3", "desc3", 100, 90, 15, projects);
+		Project p4 = new Project("name4", "desc4", 100000, 50000, 100, projects);
 		p1.setCategory(cat2);
 		p2.setCategory(cat4);
 		p3.setCategory(cat3);
 		p4.setCategory(cat4);
-		Project p5 = new Project("Empty project");
-		projects.add(p5);
+		Project p5 = new Project("Empty project", projects);
 		p5.setCategory(cat4);
 		p1.setHistory("We have almost finished!\nWe are going to start!");
 		p1.setLink("http://www.youtube.com/jrgri74ht3h97");
