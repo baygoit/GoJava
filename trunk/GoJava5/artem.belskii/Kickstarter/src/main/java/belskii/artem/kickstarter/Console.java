@@ -50,7 +50,7 @@ public class Console extends Window{
 						MessageBox.showMessageBox(getOwner(), selectedProject, projectDetails);
 						
 						
-					} catch (Exception NullPointerException) {
+					} catch (NullPointerException e) {
 						
 					}
 				}
