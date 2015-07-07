@@ -12,7 +12,7 @@ public class ProjectsView {
 		}
 	}
 
-	public void printProjectDetails(ProjectInfo projectDetails) {
+	public void printProjectDetails(String projectDetails) {
 		System.out.println(projectDetails.toString());
 	}
 
