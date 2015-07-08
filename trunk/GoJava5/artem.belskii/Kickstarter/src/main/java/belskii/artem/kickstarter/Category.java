@@ -3,7 +3,7 @@ package belskii.artem.kickstarter;
 import java.util.ArrayList;
 
 public class Category {
-	ArrayList<String> categoryList = new ArrayList<String>();
+	private ArrayList<String> categoryList = new ArrayList<String>();
 	
 	public void addCategory(String catName) {
 		categoryList.add(catName);
@@ -12,7 +12,5 @@ public class Category {
 	public ArrayList<String> getCategoryList() {
 		return categoryList;
 	}
-
-
 	
 }

@@ -58,19 +58,20 @@ public class Console extends Window{
 		}
 		//End category panel
 		
-		this.addExitButton();
-		gui.showWindow(console, GUIScreen.Position.NEW_CORNER_WINDOW);
-		gui.getScreen().stopScreen();
-
-	}
-
-	public void addExitButton() {
 		addComponent(new Button("Exit", new Action() {
 			public void doAction() {
 				System.exit(0);
 			}
 		}));
-	}    
+		
+		gui.showWindow(console, GUIScreen.Position.NEW_CORNER_WINDOW);
+		gui.getScreen().stopScreen();
+		
+
+  
+	}
+
+  
 	
     //prepare demo data
     private static Motivation initializeMotivationFromDatabase() {
