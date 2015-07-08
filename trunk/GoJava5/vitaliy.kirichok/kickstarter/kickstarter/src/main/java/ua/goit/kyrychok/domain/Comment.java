@@ -1,4 +1,4 @@
-package ua.goit.kyrychok;
+package ua.goit.kyrychok.domain;
 
 import java.util.Date;
 import java.util.List;

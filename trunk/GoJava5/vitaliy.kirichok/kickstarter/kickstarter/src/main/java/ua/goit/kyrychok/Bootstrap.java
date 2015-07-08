@@ -1,8 +1,11 @@
 package ua.goit.kyrychok;
 
+import ua.goit.kyrychok.domain.Application;
+
 public class Bootstrap {
 
     public static void main(String[] args) {
-        System.out.println("sdf");
+        Application application = new Application();
+        application.run();
     }
 }
