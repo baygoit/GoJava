@@ -19,7 +19,7 @@ public class Anagram {
                 console.write(new StringBuilder(part).reverse().toString());
                 firstIteration = true;
             }
-            console.write("\n");
+            console.write(System.lineSeparator());
         } while (console.hasNext());
         console.close();
     }

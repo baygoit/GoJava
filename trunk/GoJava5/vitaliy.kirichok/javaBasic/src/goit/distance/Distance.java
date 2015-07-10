@@ -37,8 +37,8 @@ public class Distance {
 
     private static void findAllPositions(List<Integer> number, Integer firstNumber, int firstPosition, Integer secondNumber) {
         for (int index = 0; index < number.size(); index++) {
-            if (number.get(index) == secondNumber & firstPosition != index) {
-                System.out.println("[" + firstNumber + ", " + number.get(index) + "] = " + Math.abs(firstPosition - index));
+            if (number.get(index).equals(secondNumber) && firstPosition != index) {
+                System.out.println(String.format("[%s, %s] = %s", firstNumber, number.get(index), Math.abs(firstPosition - index)));
             }
         }
     }
