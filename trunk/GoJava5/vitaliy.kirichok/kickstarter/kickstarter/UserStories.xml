@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- https://cacoo.com/diagrams/xLPePzwytLxEAdyt -->
 <UserStories>
-    <UserStory name="1">
+    <UserStory name="1" implemented="0">
         <Description>
             Как гость (инвестор) я хочу видеть на главной страничке сайта побуждающую к творчеству цитату
             чтобы заинтересовать мое внимание
@@ -12,7 +12,7 @@
             </UseCase>
         </UseCases>
     </UserStory>
-    <UserStory name="2">
+    <UserStory name="2" implemented="0">
         <Description>
             Как гость я хочу видеть список категорий, с тем чтобы сфокусироваться на интересующей меня теме
         </Description>
@@ -23,7 +23,7 @@
             </UseCase>
         </UseCases>
     </UserStory>
-    <UserStory name="3">
+    <UserStory name="3" implemented="0">
         <Description>
             Как гость я хочу изучить список проектов определенной категории, чтобы понять во что я хочу инвестировать
         </Description>
@@ -35,7 +35,7 @@
             </UseCase>
         </UseCases>
     </UserStory>
-    <UserStory name="4">
+    <UserStory name="4" implemented="0">
         <Description>
             Как гость я хочу изучить конкретный проект, чтобы понять хочу ли я в него инвестировать
         </Description>
@@ -47,7 +47,7 @@
             </UseCase>
         </UseCases>
     </UserStory>
-    <UserStory name="5">
+    <UserStory name="5" implemented="0">
         <Description>
             Как гость я хочу иметь возможность изучать разные проекты в различных категориях
         </Description>

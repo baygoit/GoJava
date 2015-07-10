@@ -11,8 +11,8 @@ public class Project {
     private Integer pledge;
     private Date createDate;
     private Date deadlineDate;
-    private List<Comment> comments;
-    private List<Event> events;
+    private List<Faq> faqs;
+    private List<ProjectEvent> projectEvents;
 
     public Project(String name, String description, String shortDescription, Integer pledgeGoal, Integer pledge, Date createDate, Date deadlineDate) {
         this.name = name;

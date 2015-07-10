@@ -1,25 +1,36 @@
 package ua.goit.kyrychok.controllers;
 
-import ua.goit.kyrychok.common.Console;
-import ua.goit.kyrychok.domain.Project;
+import ua.goit.kyrychok.DataProvider;
+import ua.goit.kyrychok.common.Output;
+import ua.goit.kyrychok.models.ProjectModel;
 import ua.goit.kyrychok.views.ProjectView;
 
 public class ProjectController {
-    private Project model;
+    public static final int DEFAULT_POSITION = 0;
+    private ProjectModel model;
     private ProjectView view;
-    private Console console = new Console();
+    private int currentPosition;
 
-    public ProjectController(Project model, ProjectView view) {
-        this.model = model;
-        this.view = view;
+    public ProjectController(DataProvider dataProvider, Output output) {
+        model = new ProjectModel(dataProvider);
+        view = new ProjectView(output);
+        currentPosition = DEFAULT_POSITION;
     }
 
-    public void showModel(String path) {
-        final String location = path.concat(model.getName()).concat("/");
-        int result;
-        do {
-            view.show(location, model);
-            result = console.readValidInt("Enter your choice(0 - back): ", 0);
-        } while (result != 0);
+    public void showModel(int categoryIndex, int projectIndex) {
+        if (currentPosition == DEFAULT_POSITION) {
+            currentPosition = projectIndex;
+        }
+        model.load(categoryIndex - 1, currentPosition - 1);
+        view.show(model);
     }
+
+    public void handle(int categoryIndex, int projectIndex) {
+        showModel(categoryIndex, projectIndex);
+    }
+
+    public boolean canHandle(int index) {
+        return index != DEFAULT_POSITION;
+    }
+
 }

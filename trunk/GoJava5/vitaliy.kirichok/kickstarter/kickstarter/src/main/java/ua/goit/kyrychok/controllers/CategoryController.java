@@ -1,33 +1,43 @@
 package ua.goit.kyrychok.controllers;
 
-import ua.goit.kyrychok.common.Console;
-import ua.goit.kyrychok.domain.Category;
-import ua.goit.kyrychok.domain.Project;
+import ua.goit.kyrychok.DataProvider;
+import ua.goit.kyrychok.common.Output;
+import ua.goit.kyrychok.models.CategoryModel;
 import ua.goit.kyrychok.views.CategoryView;
-import ua.goit.kyrychok.views.ProjectView;
 
 public class CategoryController {
-    private Category model;
+    public static final int DEFAULT_POSITION = 0;
+    private CategoryModel model;
     private CategoryView view;
-    private Console console = new Console();
+    private ProjectController projectController;
+    private int currentPosition;
 
-    public CategoryController(Category model, CategoryView view) {
-        this.model = model;
-        this.view = view;
+    public CategoryController(DataProvider dataProvider, Output output) {
+        model = new CategoryModel(dataProvider);
+        view = new CategoryView(output);
+        projectController = new ProjectController(dataProvider, output);
+        currentPosition = DEFAULT_POSITION;
     }
 
-    public void showModel(String path) {
-        final String location = path.concat(model.getName()).concat("/");
-        int result;
-        do {
-            view.show(location, model);
-            result = console.readValidInt("Enter your choice(0 - back): ", model.getProjects().size());
-            if (result > 0) {
-                Project project = model.getProjects().get(result - 1);
-                ProjectController projectController = new ProjectController(project, new ProjectView());
-                projectController.showModel(location);
-            }
-        } while (result != 0);
+    private void showModel(int input) {
+        currentPosition = input;
+        model.load(input - 1);
+        view.show(model);
     }
 
+    public void handle(int input) {
+        if (input == DEFAULT_POSITION && input == currentPosition) {
+            return;
+        }
+        if (false) {
+            currentPosition = input;
+            //   categoryController.handle(input);
+        } else {
+            showModel(input);
+        }
+    }
+
+    public boolean canHandle(int index) {
+        return !(index == DEFAULT_POSITION && index == currentPosition);
+    }
 }

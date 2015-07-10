@@ -1,18 +1,23 @@
 package ua.goit.kyrychok.views;
 
-import ua.goit.kyrychok.common.Console;
+import ua.goit.kyrychok.common.Output;
 import ua.goit.kyrychok.domain.Project;
+import ua.goit.kyrychok.models.ProjectModel;
 
 public class ProjectView {
-    private Console console = new Console();
+    private Output output;
 
-    public void show(String path, Project model) {
-        console.writeLine(path);
-        console.writeLine(String.format("Name: %s", model.getName()));
-        console.writeLine(model.getShortDescription());
-        console.writeLine(String.format("Pledge: %s. Goal: %s", model.getPledge() / 100, model.getPledgeGoal() / 100));
-        console.writeLine(String.format("%s days to go", "DaysBetween"));
-        console.writeLine("-----------");
-        console.writeLine(String.format("Description: %s", model.getDescription()));
+    public ProjectView(Output output) {
+        this.output = output;
+    }
+
+    public void show(ProjectModel model) {
+        Project project = model.getProject();
+        output.show(String.format("Name: %s", project.getName()));
+        output.show(project.getShortDescription());
+        output.show(String.format("Pledge: %s. Goal: %s", project.getPledge() / 100, project.getPledgeGoal() / 100));
+        output.show(String.format("%s days to go", "DaysBetween"));
+        output.show("-----------");
+        output.show(String.format("Description: %s", project.getDescription()));
     }
 }
