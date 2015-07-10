@@ -1,4 +1,4 @@
-package com.tyomsky.kickstarter.model;
+package com.tyomsky.kickstarter.domain;
 
 import java.util.ArrayList;
 import java.util.Map;

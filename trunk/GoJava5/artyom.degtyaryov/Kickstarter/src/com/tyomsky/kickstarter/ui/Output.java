@@ -1,4 +1,4 @@
-package com.tyomsky.kickstarter.view;
+package com.tyomsky.kickstarter.ui;
 
 import java.util.ArrayList;
 

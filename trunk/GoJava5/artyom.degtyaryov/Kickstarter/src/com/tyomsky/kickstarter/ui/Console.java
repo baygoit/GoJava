@@ -1,4 +1,4 @@
-package com.tyomsky.kickstarter.view;
+package com.tyomsky.kickstarter.ui;
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;
@@ -6,19 +6,19 @@ import java.util.Scanner;
 
 public class Console implements Input, Output {
 
-    private int userChoise;
+    private int userChoice;
 
-    public int getNotValidatedUserChois() {
+    public int getNotValidatedUserChoice() {
         getIntFromUser();
-        return userChoise;
+        return userChoice;
     }
 
 
     private void getIntFromUser() {
-        System.out.println("Make a choise:");
-        Scanner scaner = new Scanner(System.in);
+        System.out.println("Make a choice:");
+        Scanner scanner = new Scanner(System.in);
         try {
-            userChoise = scaner.nextInt();
+            userChoice = scanner.nextInt();
 
         } catch (InputMismatchException e) {
             System.err.println("You entered not a number. Try Again.");
@@ -26,19 +26,19 @@ public class Console implements Input, Output {
         }
     }
 
-    private void validateUserChoise(int variants) {
-        if (userChoise < 0 || userChoise > (variants - 1)) {
+    private void validateUserChoice(int variants) {
+        if (userChoice < 0 || userChoice > (variants - 1)) {
             System.out.println("There no such variant. Try Again.");
             getIntFromUser();
-            validateUserChoise(variants);
+            validateUserChoice(variants);
         }
     }
 
     @Override
-    public int getUserChoice(int variants) {
+    public int getUserChoice() {
         getIntFromUser();
-        validateUserChoise(variants);
-        return userChoise;
+//        validateUserChoice(variants);
+        return userChoice;
     }
 
     @Override
@@ -51,7 +51,7 @@ public class Console implements Input, Output {
     }
 
     private void clearConsole() {
-        System.out.println("\n\n\n\n\n");
+        System.out.println("\n\n\n\n\n\n\n");
     }
 
 }

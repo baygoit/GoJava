@@ -1,25 +1,36 @@
 package com.tyomsky.kickstarter.view;
 
-import com.tyomsky.kickstarter.model.Category;
-import com.tyomsky.kickstarter.model.Entity;
+import com.tyomsky.kickstarter.ui.Output;
+import com.tyomsky.kickstarter.model.CategoryModel;
 
-public class CategoryView extends EntityView {
+import java.util.List;
 
-	public CategoryView(Entity entity) {
-		super(entity);
-		viewType = ViewTypes.Category;
-	}
+public class CategoryView extends AbstractView {
 
-	@Override
+    private CategoryModel model;
+
+    public CategoryView(CategoryModel model, Output output) {
+        super(output);
+        this.model = model;
+    }
+
+    @Override
     protected void prepareLayout() {
-		Category category = (Category) entity;
-		layout.add("You are in category: " + category.getName());
-		layout.add("");
-		layout.add("Please choose project:");
-		fillMenu();
-		layout.add("");
-		layout.add("0) Exit");
+        layout.clear();
+        layout.add("You r in " + model.getName());
+        layout.add("");
+        layout.add("Choose project:");
+        fillMenu();
+    }
 
-	}
+    private void fillMenu(){
+        List<String> projects = model.getProjects();
+        for (int i = 1; i < projects.size(); i++) {
+            layout.add(i+") "+projects.get(i-1));
+        }
+        layout.add("");
+        layout.add("0) Back");
 
+
+    }
 }

@@ -1,30 +1,26 @@
 package com.tyomsky.kickstarter.view;
 
-import com.tyomsky.kickstarter.model.Project;
-import com.tyomsky.kickstarter.model.Entity;
+import com.tyomsky.kickstarter.model.ProjectModel;
+import com.tyomsky.kickstarter.ui.Output;
 
-public class ProjectView extends EntityView {
+public class ProjectView extends AbstractView  {
 
-	public ProjectView(Entity entity) {
-		super(entity);
-		viewType = ViewTypes.Project;
-	}
+    private ProjectModel model;
 
-	@Override
+    public ProjectView(ProjectModel model, Output output) {
+        super(output);
+        this.model = model;
+    }
+
+    @Override
     protected void prepareLayout() {
-		Project project = (Project) entity;
-		layout.add("Project: " + project.getName());
-		layout.add("");
-		layout.add("Money needed: " + project.getAmountNeeded());
-		layout.add("Money collected: " + project.getAmountCollected());
-		layout.add("");
-		layout.add("Days left: " + project.getDaysLeft());
-		layout.add("Project history: " + project.getHistory());
-		layout.add("Video: " + project.getVideoURL());
-		layout.add("FAQ: " + project.getQuestionsAndAnswers());
-		layout.add("");
-		layout.add("0) Exit");
-		layout.add("");
-	}
+        layout.clear();
+        layout.add("You r in " + model.getProject().getName());
+        layout.add("");
+        layout.add("Description:" + model.getProject().getShortDescription());
+//        TODO: add other fields to layout
+        layout.add("");
+        layout.add("0) Back");
+    }
 
 }

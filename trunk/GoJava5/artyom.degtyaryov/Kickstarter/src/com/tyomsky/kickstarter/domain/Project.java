@@ -1,7 +1,11 @@
-package com.tyomsky.kickstarter.model;
+package com.tyomsky.kickstarter.domain;
 
-public class Project extends Entity {
+import java.util.ArrayList;
+import java.util.List;
 
+public class Project {
+
+    private String name;
     private String shortDescription;
     private int amountNeeded;
     private int amountCollected;
@@ -9,13 +13,13 @@ public class Project extends Entity {
     private String history;
     private String videoURL;
     private QuestionsAndAnswers questionsAndAnswers;
-    private Category category;
+    private List<Event> events;
 
-    public Project(int id, String name, String shortDescription,
+    public Project(String name, String shortDescription,
                    int amountNeeded, int amountCollected, int daysLeft,
                    String history, String videoURL,
-                   QuestionsAndAnswers questionsAndAnswers, Category category) {
-        super(id, name);
+                   QuestionsAndAnswers questionsAndAnswers) {
+        this.name = name;
         this.shortDescription = shortDescription;
         this.amountNeeded = amountNeeded;
         this.amountCollected = amountCollected;
@@ -23,33 +27,45 @@ public class Project extends Entity {
         this.history = history;
         this.videoURL = videoURL;
         this.questionsAndAnswers = questionsAndAnswers;
-        this.category = category;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public String getShortDescription() {
         return shortDescription;
     }
+
     public int getAmountNeeded() {
         return amountNeeded;
     }
+
     public int getAmountCollected() {
         return amountCollected;
     }
+
     public int getDaysLeft() {
         return daysLeft;
     }
+
     public String getHistory() {
         return history;
     }
+
     public String getVideoURL() {
         return videoURL;
     }
+
     public QuestionsAndAnswers getQuestionsAndAnswers() {
         return questionsAndAnswers;
     }
 
-    public void donate (int donation) {
-        this.amountCollected += donation;
+    public List<Event> getEvents() {
+        return events;
     }
 
+    public void setEvents(List<Event> events) {
+        this.events = events;
+    }
 }
