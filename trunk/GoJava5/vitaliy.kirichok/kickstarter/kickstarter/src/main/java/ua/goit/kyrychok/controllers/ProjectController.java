@@ -1,6 +1,7 @@
 package ua.goit.kyrychok.controllers;
 
 import ua.goit.kyrychok.DataProvider;
+import ua.goit.kyrychok.common.Input;
 import ua.goit.kyrychok.common.Output;
 import ua.goit.kyrychok.models.ProjectModel;
 import ua.goit.kyrychok.views.ProjectView;
@@ -9,28 +10,24 @@ public class ProjectController {
     public static final int DEFAULT_POSITION = 0;
     private ProjectModel model;
     private ProjectView view;
-    private int currentPosition;
+    private Input input;
 
-    public ProjectController(DataProvider dataProvider, Output output) {
+    public ProjectController(DataProvider dataProvider, Input input, Output output) {
         model = new ProjectModel(dataProvider);
         view = new ProjectView(output);
-        currentPosition = DEFAULT_POSITION;
+        this.input = input;
     }
 
-    public void showModel(int categoryIndex, int projectIndex) {
-        if (currentPosition == DEFAULT_POSITION) {
-            currentPosition = projectIndex;
-        }
-        model.load(categoryIndex - 1, currentPosition - 1);
-        view.show(model);
+    private boolean validInput(int input) {
+        return input == DEFAULT_POSITION;
     }
 
-    public void handle(int categoryIndex, int projectIndex) {
-        showModel(categoryIndex, projectIndex);
+    public void run(int categoryIndex, int projectIndex) {
+        model.load(categoryIndex - 1, projectIndex - 1);
+        int inputData;
+        do {
+            view.show(model);
+            inputData = input.getNext();
+        } while (!validInput(inputData));
     }
-
-    public boolean canHandle(int index) {
-        return index != DEFAULT_POSITION;
-    }
-
 }

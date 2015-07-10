@@ -17,18 +17,14 @@ public class Kickstarter {
         this.input = input;
         this.output = output;
         this.dataProvider = dataProvider;
-        controller = new MainPageController(dataProvider, output);
+        controller = new MainPageController(dataProvider, input, output);
     }
 
     public void run() {
         //hello
 
         input.init();
-        int inputData = DEFAULT_POSITION;
-        while (controller.canHandle(inputData)) {
-            controller.handle(inputData);
-            inputData = input.getNext();
-        }
+        controller.run();
         input.close();
     }
 }
