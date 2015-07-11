@@ -14,36 +14,38 @@ public class Main {
 
 	public void run() {
 
+		Output output = new Output();
+
         /** Print the motivator **/
         QuoteGenerate generate = new QuoteGenerate();
-        System.out.println(generate.quoteGenerate());
+		output.println(generate.quoteGenerate());
 
-        while (true) {
+		while (true) {
 
             /** We offer select category **/
-			System.out.println(SPACE);
-			System.out.println("Select category: ");
-			System.out.println(Arrays.toString(categories.getCategories()));
+			output.println(SPACE);
+			output.println("Select category: ");
+			output.println(Arrays.toString(categories.getCategories()));
 
             /** Asks the user to choose what he wants **/
 			ScanConsole scanConsole = new ScanConsole();
 
             /** Think selected category **/
 			Category category = categories.getName(scanConsole.consoleScan(b));
-			System.out.println("You selected category: " + category.getName());
+			output.println("You selected category: " + category.getName());
 
             /** We get the list of projects **/
 			Project[] foundProjects = projects.getProgects(category);
 
             /** Displays information on each project **/
 			for (Project project : foundProjects) {
-				System.out.println("Project name: " + project.getName());
-				System.out.println("Description: " + project.getDescription());
-				System.out.println("Need collected: " + project.getAmount() + "$");
-				System.out.println("Already collected: " + project.getExist() + "$");
-				System.out.println("Days remaining: " + project.getDays());
-				System.out.println("/-------------------------------------------------------------------------------/");
-				System.out.println(SPACE);
+				output.println("Project name: " + project.getName());
+				output.println("Description: " + project.getDescription());
+				output.println("Need collected: " + project.getAmount() + "$");
+				output.println("Already collected: " + project.getExist() + "$");
+				output.println("Days remaining: " + project.getDays());
+				output.println("/-------------------------------------------------------------------------------/");
+				output.println(SPACE);
 			}
 		}
 	}
