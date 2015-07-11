@@ -14,28 +14,28 @@ public class Main {
 
 	public void run() {
 
-        /** Выводим мотиватор **/
+        /** Print the motivator **/
         QuoteGenerate generate = new QuoteGenerate();
         System.out.println(generate.quoteGenerate());
 
         while (true) {
 
-            /** Предлогаем выбрать категорию **/
+            /** We offer select category **/
 			System.out.println(SPACE);
 			System.out.println("Select category: ");
 			System.out.println(Arrays.toString(categories.getCategories()));
 
-            /** Спрашиваем пользователя, что он хочит выбрать**/
+            /** Asks the user to choose what he wants **/
 			ScanConsole scanConsole = new ScanConsole();
 
-            /** Подучаем выбранную ватегорию **/
+            /** Think selected category **/
 			Category category = categories.getName(scanConsole.consoleScan(b));
 			System.out.println("You selected category: " + category.getName());
 
-            /** Подучаем список проектов **/
+            /** We get the list of projects **/
 			Project[] foundProjects = projects.getProgects(category);
 
-            /** Вывод информации по каждому проекту **/
+            /** Displays information on each project **/
 			for (Project project : foundProjects) {
 				System.out.println("Project name: " + project.getName());
 				System.out.println("Description: " + project.getDescription());
