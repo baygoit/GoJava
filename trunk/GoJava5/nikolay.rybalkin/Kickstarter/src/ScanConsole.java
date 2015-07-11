@@ -10,7 +10,6 @@ public class ScanConsole {
 		try {
 			scaner.hasNextInt();
 			number = scaner.nextInt();
-
 		} catch (Exception e) {
 			System.out.println("You entered is not a number!");
 		}
