@@ -48,6 +48,12 @@ public class Runner {
 		project5.setVideo("https://www.youtube.com");
 		project6.setVideo("https://www.youtube.com");
 
+		project1.setFaq("Q: questions \n A: answer");
+		project2.setFaq("Q: questions \n A: answer");
+		project3.setFaq("Q: questions \n A: answer");
+		project4.setFaq("Q: questions \n A: answer");
+		project5.setFaq("Q: questions \n A: answer");
+		project6.setFaq("Q: questions \n A: answer");
 
 		Main app = new Main(categories, projects);
 		app.run();

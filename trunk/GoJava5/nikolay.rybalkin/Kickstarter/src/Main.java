@@ -9,6 +9,7 @@ public class Main {
 	private Output output = new Output();
 
 	public Main(Categories categories, Projects projects) {
+
 		this.categories = categories;
 		this.projects = projects;
 	}
@@ -25,14 +26,13 @@ public class Main {
 
 			askCategory();
 
-
-
 			int categoryIndex = scanConsole.consoleScan();
 			Category category = shooseCategory(categoryIndex);
 
 			if (category == null){
 				continue;
 			}
+
 			Project[] foundProjects = projects.getProgects(category);
 			printProjects(foundProjects);
 
@@ -63,11 +63,25 @@ public class Main {
 	}
 
 	private void printProjectDetail(Project project) {
+
 		output.println("Project detail:");
 		printProject(project);
-		output.println(project.getHistory());
-		output.println(project.getVideo());
-		output.println(project.getFAQ());
+
+		String history = project.getHistory();
+		if (history != null){
+			output.println(history);
+		}
+
+		String video = project.getFAQ();
+		if (video != null){
+			output.println(video);
+		}
+
+		String faq = project.getFAQ();
+		if (faq != null){
+			output.println(faq);
+		}
+
 		output.println("---------------------------------------");
 	}
 
@@ -81,6 +95,7 @@ public class Main {
 	}
 
 	private void printProject(Project project) {
+
 		output.println("Project name: " + project.getName());
 		output.println("Description: " + project.getDescription());
 		output.println("Need collected: " + project.getAmount() + "$");
@@ -91,6 +106,7 @@ public class Main {
 	}
 
 	private void askCategory() {
+
 		output.println(SPACE);
 		output.println("Select category: ");
 		output.println(Arrays.toString(categories.getCategories()));
@@ -109,6 +125,7 @@ public class Main {
 	}
 
 	private void shooseProject(Project project) {
+
 		output.println("You selected project: " + project.getName());
 	}
 
