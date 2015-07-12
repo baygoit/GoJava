@@ -12,7 +12,7 @@ public class ScanConsole {
             if(scanner.hasNextInt()){
                 number = scanner.nextLine();
             }
-        } catch (Exception e) {
+        } catch (java.util.InputMismatchException e) {
             System.out.println("You entered is not a number!");
         }
         return number;
