@@ -1,8 +1,12 @@
-import java.io.PrintStream;
+package sort;
+
 import java.util.Arrays;
-import java.util.Random;
 
 public class Sort {
+
+    private static int[] array1  = {40, 10, 50, 30, 20};
+    private static int[] array2  = {40, 10, 50, 30, 20};
+    private static int[] array3  = {40, 10, 50, 30, 20};
 
     public static void main(String[] args){
 
@@ -12,10 +16,10 @@ public class Sort {
     }
 
     public static void  sortQuick(){
-        int[] array3  = {40, 10, 50, 30, 20};
+
         int low = 0;
         int high = array3.length - 1;
-        sortQuickLogic(array3, low, high);
+        sortQuickLogic(array1, low, high);
         System.out.println(Arrays.toString(array3));
     }
 
@@ -55,7 +59,6 @@ public class Sort {
 
     public static void  sortShell(){
 
-        int[] array2  = {40, 10, 50, 30, 20};
         int increment = array2.length / 2;
 
         while (increment > 0) {
@@ -78,13 +81,13 @@ public class Sort {
     }
 
     public static void sortBubble(){
-        int[] array1  = {40, 10, 50, 30, 20};
-        for(int k = array1.length-1; k >= 0; k--){
+
+        for(int k = array3.length-1; k >= 0; k--){
             for(int j = 0; j < k; j++){
-                if(array1[j] > array1[j + 1]){
-                    int tmp = array1[j];
-                    array1[j] = array1[j + 1];
-                    array1[j + 1] = tmp;
+                if(array3[j] > array3[j + 1]){
+                    int tmp = array3[j];
+                    array3[j] = array3[j + 1];
+                    array3[j + 1] = tmp;
                 }
             }
         }
