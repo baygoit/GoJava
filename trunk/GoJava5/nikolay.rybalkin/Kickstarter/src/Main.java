@@ -34,30 +34,37 @@ public class Main {
 
 			Project[] foundProjects = projects.getProgects(category);
 			printProjects(foundProjects);
-
-			while (true) {
-
-				ascProject(foundProjects);
-
-				int projectIndex = scanConsole.consoleScan();
-
-				if (projectIndex < 0 || foundProjects.length <=  projectIndex){
-					output.println("Not true index: " + projectIndex);
-					continue;
-				}
-
-				Project project = foundProjects[projectIndex];
-				shooseProject(project);
-				printProjectDetail(project);
-			}
+			projectMenu(output, foundProjects);
 		}
+	}
+
+	private void projectMenu(Output output, Project[] foundProjects) {
+		while (true) {
+
+            ascProject(foundProjects);
+
+            int projectIndex = scanConsole.consoleScan();
+
+            if (projectIndex == 0){
+                break;
+            }
+
+            if (projectIndex <= 0 || foundProjects.length <  projectIndex){
+                output.println("Not true index: " + projectIndex);
+                continue;
+            }
+
+            Project project = foundProjects[projectIndex - 1];
+            shooseProject(project);
+            printProjectDetail(project);
+        }
 	}
 
 	private void ascProject(Project[] foundProjects) {
 
 		int from = 0;
 		int to = foundProjects.length - 1;
-		output.println("Select project: [" + from + "..." +  to  + "]");
+		output.println("Select project: [" + from + "..." +  to  + " or 0 for exit to the projects list");
 	}
 
 	private void printProjectDetail(Project project) {
