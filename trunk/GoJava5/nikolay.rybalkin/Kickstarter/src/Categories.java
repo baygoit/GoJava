@@ -1,27 +1,27 @@
 
 public class Categories {
 
-    private Category[] categories = new Category[10];
-    private int index = 0;
+	private Category[] categories = new Category[10];
+	private int index = 0;
 
-    public void add(Category category) {
+	public void add(Category category) {
 
-        categories[index] = category;
-        index++;
-    }
+		categories[index] = category;
+		index++;
+	}
 
-    public String[] getCategories(){
+	public String[] getCategories(){
 
-        String[] result = new String[index];
+		String[] result = new String[index];
 
-        for (int i = 0; i < index; i++) {
-                result[i] = String.valueOf(i) + ") " + categories[i].getName();
-        }
+		for (int i = 0; i < index; i++) {
+				result[i] = String.valueOf(i) + ") " + categories[i].getName();
+		}
 
-        return result;
-    }
+		return result;
+	}
 
-    public Category getName(int index) {
-        return categories[index];
-    }
+	public Category getName(int index) {
+		return categories[index];
+	}
 }

@@ -2,60 +2,62 @@ import java.util.Arrays;
 
 public class Main {
 
-    private String SPACE = " ";
-    private Categories categories;
-    private Projects projects;
-    private int b;
+	private String SPACE = " ";
+	private Categories categories;
+	private Projects projects;
+	private ScanConsole scanConsole = new ScanConsole();
 
-    public Main(Categories categories, Projects projects) {
-        this.categories = categories;
-        this.projects = projects;
-    }
+	public Main(Categories categories, Projects projects) {
+		this.categories = categories;
+		this.projects = projects;
+	}
 
-    public void run() {
+	public void run() {
 
-        Output output = new Output();
+		Output output = new Output();
 
-        /** Print the motivator **/
-        QuoteGenerate generate = new QuoteGenerate();
-        output.println(generate.quoteGenerate());
+		/** Print the motivator **/
+		QuoteGenerate generate = new QuoteGenerate();
+		output.println(generate.quoteGenerate());
 
-        while (true) {
+		while (true) {
+			askCategory(output);
+			Category category = shooseCategory(output);
+			printProjects(output, category);
 
-            /** We offer select category **/
+			while (true) {
+				// TODO: попросить пользователя выбрать проект по номеру
+				// TODO: найти проект по индексу
+				// TODO: распечатать подробности проекта все то же что в списке + история проекта + линк на видео с демо + вопросы/ответы
+			}
+		}
+	}
+
+	private void printProjects(Output output, Category category) {
+		Project[] foundProjects = projects.getProgects(category);
+		for (Project project : foundProjects) {
+            output.println("Project name: " + project.getName());
+            output.println("Description: " + project.getDescription());
+            output.println("Need collected: " + project.getAmount() + "$");
+            output.println("Already collected: " + project.getExist() + "$");
+            output.println("Days remaining: " + project.getDays());
+            output.println("/-------------------------------------------------------------------------------/");
             output.println(SPACE);
-            output.println("Select category: ");
-            output.println(Arrays.toString(categories.getCategories()));
-
-            /** Asks the user to choose what he wants **/
-            ScanConsole scanConsole = new ScanConsole();
-
-            /** Think selected category **/
-            Category category = categories.getName(scanConsole.consoleScan(b));
-            output.println("You selected category: " + category.getName());
-
-            /** We get the list of projects **/
-            Project[] foundProjects = projects.getProgects(category);
-
-            /** Displays information on each project **/
-            for (Project project : foundProjects) {
-                output.println("Project name: " + project.getName());
-                output.println("Description: " + project.getDescription());
-                output.println("Need collected: " + project.getAmount() + "$");
-                output.println("Already collected: " + project.getExist() + "$");
-                output.println("Days remaining: " + project.getDays());
-                output.println("/-------------------------------------------------------------------------------/");
-                output.println(SPACE);
-            }
-
-            // TODO: попросить пользователя выбрать проект по номеру
-
-            // TODO: найти проект по индексу
-
-            // TODO: распечатать подробности проекта все то же что в списке + история проекта + линк на видео с демо + вопросы/ответы
-
         }
-    }
+	}
+
+	private void askCategory(Output output) {
+		output.println(SPACE);
+		output.println("Select category: ");
+		output.println(Arrays.toString(categories.getCategories()));
+	}
+
+	private Category shooseCategory(Output output) {
+
+		Category category = categories.getName(scanConsole.consoleScan());
+		output.println("You selected category: " + category.getName());
+		return category;
+	}
 
 }
 
