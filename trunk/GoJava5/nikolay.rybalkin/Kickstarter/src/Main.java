@@ -38,7 +38,7 @@ public class Main {
 
 			while (true) {
 
-				ascProject();
+				ascProject(foundProjects);
 
 				int projectIndex = scanConsole.consoleScan();
 
@@ -55,8 +55,11 @@ public class Main {
 		}
 	}
 
-	private void ascProject() {
-		output.println("Select project: ");
+	private void ascProject(Project[] foundProjects) {
+
+		int from = 0;
+		int to = foundProjects.length - 1;
+		output.println("Select project: [" + from + "..." +  to  + "]");
 	}
 
 	private void printProjectDetail(Project project) {
@@ -86,7 +89,6 @@ public class Main {
 		output.println("---------------------------------------");
 		output.println(SPACE);
 	}
-
 
 	private void askCategory() {
 		output.println(SPACE);

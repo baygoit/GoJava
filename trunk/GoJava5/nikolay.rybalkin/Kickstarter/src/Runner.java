@@ -34,6 +34,14 @@ public class Runner {
 		projects.add(project5);
 		projects.add(project6);
 
+		project1.setHistory("History this project");
+		project2.setHistory("History this project");
+		project3.setHistory("History this project");
+		project4.setHistory("History this project");
+		project5.setHistory("History this project");
+		project6.setHistory("History this project");
+
+
 		Main app = new Main(categories, projects);
 		app.run();
 	}

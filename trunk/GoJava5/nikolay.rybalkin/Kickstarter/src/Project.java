@@ -6,8 +6,13 @@ public class Project {
 	private int amount;
 	private int exist;
 	private int days;
-	private Category category;
 
+
+
+	private Category category;
+	private String history;
+	private String video;
+	private String faq;
 
 
 	public Project(String name, int amount, int days, String description) {
@@ -24,6 +29,18 @@ public class Project {
 
 	public void setCategory(Category category) {
 		this.category = category;
+	}
+
+	public void setHistory(String history) {
+		this.history = history;
+	}
+
+	public void setVideo(String video) {
+		this.video = video;
+	}
+
+	public void setFaq(String faq) {
+		this.faq = faq;
 	}
 
 	public Category getCategory() {
@@ -52,21 +69,16 @@ public class Project {
 
 	public String getHistory() {
 		//TODO забито хардкодом
-		return "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et" +
-				" dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip" +
-				" ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu" +
-				" fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia" +
-				" deserunt mollit anim id est laborum.";
+		return history;
 	}
 
 	public String getVideo() {
 		//TODO забито хардкодом
-		return "https://www.youtube.com/";
+		return video;
 	}
 
 	public String getFAQ() {
 		//TODO забито хардкодом
-		return "questions \n" +
-				"answers";
+		return faq;
 	}
 }
