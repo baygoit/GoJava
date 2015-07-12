@@ -1,7 +1,7 @@
 
 public class Projects {
 
-	private Project[] projects = new Project[100];
+	private Project[] projects = new Project[100]; //TODO надо подумать над этим моментом
 	private int index = 0;
 
 	public void add(Project project) {

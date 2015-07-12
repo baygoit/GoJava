@@ -72,12 +72,10 @@ public class Project {
 	}
 
 	public String getVideo() {
-		//TODO забито хардкодом
 		return video;
 	}
 
 	public String getFAQ() {
-		//TODO забито хардкодом
 		return faq;
 	}
 }

@@ -18,7 +18,6 @@ public class Main {
 
 		Output output = new Output();
 
-		/** Print the motivator **/
 		QuoteGenerate generate = new QuoteGenerate();
 		output.println(generate.quoteGenerate());
 
@@ -51,7 +50,6 @@ public class Main {
 				shooseProject(project);
 				printProjectDetail(project);
 			}
-			//TODO бесконечный цикл
 		}
 	}
 
@@ -89,7 +87,7 @@ public class Main {
 
 		for (int i = 0; i < foundProjects.length; i++) {
 			Project project = foundProjects[i];
-			output.print(i + ") ");
+			output.print((i + 1) + ") ");
 			printProject(project);
         }
 	}
@@ -114,12 +112,12 @@ public class Main {
 
 	private Category shooseCategory(int categoryIndex) {
 
-		if (categoryIndex < 0 || categories.size() <=  categoryIndex){
+		if ( categoryIndex <= 0 || categories.size() < categoryIndex){
 			output.println("Not true index: " + categoryIndex);
 			return null;
 		}
 
-		Category category = categories.get(categoryIndex);
+		Category category = categories.get(categoryIndex - 1);
 		output.println("You selected category: " + category.getName());
 		return category;
 	}
@@ -130,4 +128,10 @@ public class Main {
 	}
 
 }
+
+//Как гость я хочу иметь возможность изучать разные проекты в различных категориях
+//сценарий 1: находясь в списке проектов -> вижу запрос на выбор проекта и пункт меню "0 - выход" -> выбираю 0 -> попадаю
+//		в меню категорий -> вижу список категорий и возможность выбора другой категории
+//		сценарий 2: находясь в описании проекта -> вижу меню "0 - выход" -> выбираю 0 -> попадаю в меню проектов -> вижу список
+//		проектов и возможность выбора другого проекта
 

@@ -15,7 +15,7 @@ public class Categories {
 		String[] result = new String[index];
 
 		for (int i = 0; i < index; i++) {
-				result[i] = String.valueOf(i) + ") " + categories[i].getName();
+				result[i] = String.valueOf(i + 1) + ") " + categories[i].getName();
 		}
 		return result;
 	}
