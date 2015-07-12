@@ -6,6 +6,7 @@ public class Main {
 	private Categories categories;
 	private Projects projects;
 	private ScanConsole scanConsole = new ScanConsole();
+	private Output output = new Output();
 
 	public Main(Categories categories, Projects projects) {
 		this.categories = categories;
@@ -21,52 +22,46 @@ public class Main {
 		output.println(generate.quoteGenerate());
 
 		while (true) {
-			askCategory(output);
-			Category category = shooseCategory(output);
+			askCategory();
+			Category category = shooseCategory();
 
-			// TODO: нет нумерации проектов
-
-			printProjects(output, category);
-
+			Project[] foundProjects = projects.getProgects(category);
+			printProjects(foundProjects);
 
 			while (true) {
-
-				// TODO: попросить пользователя выбрать проект по номеру
-				ascProject(output);
-
-				// TODO: найти проект по индексу
-				Project project = shooseProject(output);
-
-				// TODO: распечатать подробности проекта все то же что в списке + история проекта + линк на видео с демо + вопросы/ответы
-				printProjectDetail(output, project);
+				ascProject();
+				Project project = foundProjects[scanConsole.consoleScan()];
+				//TODO если выбран не существующий проект вылетает ошибка
+				shooseProject(project);
+				printProjectDetail(project);
 			}
+			//TODO бесконечный цикл
 		}
-		// TODO: находясь в одной категории могу выбрать проект из другой
 	}
 
-	private void ascProject(Output output) {
-		output.println(SPACE);
+	private void ascProject() {
 		output.println("Select project: ");
 	}
 
-	private void printProjectDetail(Output output, Project project) {
+	private void printProjectDetail(Project project) {
 		output.println("Project detail:");
-		printProject(output, project);
+		printProject(project);
 		output.println(project.getHistory());
 		output.println(project.getVideo());
 		output.println(project.getFAQ());
+		output.println("---------------------------------------");
 	}
 
-	private void printProjects(Output output, Category category) {
-		Project[] foundProjects = projects.getProgects(category);
+	private void printProjects(Project[] foundProjects) {
+
 		for (int i = 0; i < foundProjects.length; i++) {
 			Project project = foundProjects[i];
 			System.out.print(i + ") ");
-			printProject(output, project);
+			printProject(project);
         }
 	}
 
-	private void printProject(Output output, Project project) {
+	private void printProject(Project project) {
 		output.println("Project name: " + project.getName());
 		output.println("Description: " + project.getDescription());
 		output.println("Need collected: " + project.getAmount() + "$");
@@ -77,22 +72,20 @@ public class Main {
 	}
 
 
-	private void askCategory(Output output) {
+	private void askCategory() {
 		output.println(SPACE);
 		output.println("Select category: ");
 		output.println(Arrays.toString(categories.getCategories()));
 	}
 
-	private Category shooseCategory(Output output) {
+	private Category shooseCategory() {
 		Category category = categories.get(scanConsole.consoleScan());
 		output.println("You selected category: " + category.getName());
 		return category;
 	}
 
-	private Project shooseProject(Output output) {
-		Project project = projects.get(scanConsole.consoleScan());
+	private void shooseProject(Project project) {
 		output.println("You selected project: " + project.getName());
-		return project;
 	}
 
 }
