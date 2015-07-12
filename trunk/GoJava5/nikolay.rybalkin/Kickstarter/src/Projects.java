@@ -28,10 +28,8 @@ public class Projects {
 		return result2;
 	}
 
-
-	public String getName(int index) {
-		return projects[index].getName();
+	public Project get(int index) {
+		return projects[index];
 	}
-
 
 }

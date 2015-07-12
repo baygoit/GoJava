@@ -21,7 +21,7 @@ public class Categories {
 		return result;
 	}
 
-	public Category getName(int index) {
+	public Category get(int index) {
 		return categories[index];
 	}
 }

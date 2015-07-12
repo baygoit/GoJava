@@ -18,6 +18,9 @@ public class Project {
 		this.exist = 0;
 	}
 
+	public Project(String name){
+		this.name = name;
+	}
 
 	public void setCategory(Category category) {
 		this.category = category;
@@ -45,5 +48,25 @@ public class Project {
 
 	public int getDays() {
 		return days;
+	}
+
+	public String getHistory() {
+		//TODO забито хардкодом
+		return "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et" +
+				" dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip" +
+				" ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu" +
+				" fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia" +
+				" deserunt mollit anim id est laborum.";
+	}
+
+	public String getVideo() {
+		//TODO забито хардкодом
+		return "https://www.youtube.com/";
+	}
+
+	public String getFAQ() {
+		//TODO забито хардкодом
+		return "questions \n" +
+				"answers";
 	}
 }
