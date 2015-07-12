@@ -1,37 +1,37 @@
 
 public class Projects {
 
-	private Project[] projects = new Project[100];
-	private int index = 0;
-	
-	public void add(Project project) {
-		projects[index] = project;
-		index++;
-	}
-	
-	public Project[] getProgects(Category category){
+    private Project[] projects = new Project[100];
+    private int index = 0;
 
-		Project[] result = new Project[100];
-		int found = 0;
+    public void add(Project project) {
+        projects[index] = project;
+        index++;
+    }
 
-		for (int i = 0; i < index; i++) {
-			Project project = projects[i];
+    public Project[] getProgects(Category category){
 
-			if (project.getCategory().equals(category)){
-				result[found] = project;
-				found++;
-			}
-		}
+        Project[] result = new Project[100];
+        int found = 0;
 
-		Project[] result2 = new Project[found];
-		System.arraycopy(result, 0, result2, 0, found);
-		return result2;
-	}
+        for (int i = 0; i < index; i++) {
+            Project project = projects[i];
+
+            if (project.getCategory().equals(category)){
+                result[found] = project;
+                found++;
+            }
+        }
+
+        Project[] result2 = new Project[found];
+        System.arraycopy(result, 0, result2, 0, found);
+        return result2;
+    }
 
 
-	public String getName(int index) {
-		return projects[index].getName();
-	}
+    public String getName(int index) {
+        return projects[index].getName();
+    }
 
 
 }

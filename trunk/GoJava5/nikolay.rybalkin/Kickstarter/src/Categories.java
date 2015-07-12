@@ -1,7 +1,7 @@
 
 public class Categories {
 
-	private Category[] categories = new Category[10];
+    private Category[] categories = new Category[10];
     private int index = 0;
 
     public void add(Category category) {
