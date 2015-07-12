@@ -17,11 +17,14 @@ public class Categories {
 		for (int i = 0; i < index; i++) {
 				result[i] = String.valueOf(i) + ") " + categories[i].getName();
 		}
-
 		return result;
 	}
 
 	public Category get(int index) {
 		return categories[index];
+	}
+
+	public int size() {
+		return index;
 	}
 }

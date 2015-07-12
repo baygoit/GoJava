@@ -22,16 +22,32 @@ public class Main {
 		output.println(generate.quoteGenerate());
 
 		while (true) {
-			askCategory();
-			Category category = shooseCategory();
 
+			askCategory();
+
+
+
+			int categoryIndex = scanConsole.consoleScan();
+			Category category = shooseCategory(categoryIndex);
+
+			if (category == null){
+				continue;
+			}
 			Project[] foundProjects = projects.getProgects(category);
 			printProjects(foundProjects);
 
 			while (true) {
+
 				ascProject();
-				Project project = foundProjects[scanConsole.consoleScan()];
-				//TODO если выбран не существующий проект вылетает ошибка
+
+				int projectIndex = scanConsole.consoleScan();
+
+				if (projectIndex < 0 || foundProjects.length <=  projectIndex){
+					output.println("Not true index: " + projectIndex);
+					continue;
+				}
+
+				Project project = foundProjects[projectIndex];
 				shooseProject(project);
 				printProjectDetail(project);
 			}
@@ -56,7 +72,7 @@ public class Main {
 
 		for (int i = 0; i < foundProjects.length; i++) {
 			Project project = foundProjects[i];
-			System.out.print(i + ") ");
+			output.print(i + ") ");
 			printProject(project);
         }
 	}
@@ -78,8 +94,14 @@ public class Main {
 		output.println(Arrays.toString(categories.getCategories()));
 	}
 
-	private Category shooseCategory() {
-		Category category = categories.get(scanConsole.consoleScan());
+	private Category shooseCategory(int categoryIndex) {
+
+		if (categoryIndex < 0 || categories.size() <=  categoryIndex){
+			output.println("Not true index: " + categoryIndex);
+			return null;
+		}
+
+		Category category = categories.get(categoryIndex);
 		output.println("You selected category: " + category.getName());
 		return category;
 	}
