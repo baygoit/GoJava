@@ -18,7 +18,7 @@ public class CategoryView {
         this.output = output;
     }
 
-    public void render(CategoryModel model) {
-        output.println("You choose option " + model.getCategoryIndex() + ": " + model.getCategoryName());
+    public void render(CategoryModel categoryModel) {
+        output.println("You choose option " + categoryModel.getCategoryIndex() + ": " + categoryModel.getCategoryName());
     }
 }

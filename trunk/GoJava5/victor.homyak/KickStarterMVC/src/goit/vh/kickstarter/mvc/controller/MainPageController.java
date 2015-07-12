@@ -1,6 +1,8 @@
 package goit.vh.kickstarter.mvc.controller;
 
+import goit.vh.kickstarter.Input;
 import goit.vh.kickstarter.InputListener;
+import goit.vh.kickstarter.mvc.model.CategoryModel;
 import goit.vh.kickstarter.mvc.model.MainPageModel;
 import goit.vh.kickstarter.mvc.view.MainPageView;
 
@@ -15,7 +17,7 @@ public class MainPageController implements InputListener {
 
     private MainPageView view;
     private MainPageModel model;
-
+    public int firstInput;
 
 
     public MainPageController(MainPageView view, MainPageModel model) {
@@ -25,10 +27,16 @@ public class MainPageController implements InputListener {
 
     public void onApplicationStart() {
         view.render(model);
+        Input input = new Input();
+        firstInput = input.listenInput();
+
+
     }
 
     @Override
-    public void onInput(String input) {
+    public void onInput(int firstInput) {
+
+        CategoryController controller = new CategoryController(firstInput);
 
     }
 }

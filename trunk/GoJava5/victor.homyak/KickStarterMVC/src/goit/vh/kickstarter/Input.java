@@ -13,10 +13,11 @@ public class Input {
 
     private InputListener inputListener;
 
-    public void listenInput() {
+    public int listenInput() {
         Scanner scanner = new Scanner(System.in);
-        while (scanner.hasNext()) {
-            inputListener.onInput(scanner.next());
+        while (scanner.hasNextInt()) {
+              inputListener.onInput(scanner.nextInt());
         }
+        return scanner.nextInt();
     }
 }
