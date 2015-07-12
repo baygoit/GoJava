@@ -5,10 +5,10 @@ import java.util.Scanner;
 
 public class Anagram {
 
-    private static String SPACE = " ";
-    private static Scanner scanConsole;
-
     public static void main(String[] args) {
+
+        String SPACE = " ";
+        Scanner scanConsole;
 
         System.out.println("Enter the console words separated by a space, then press enter: ");
         scanConsole = new Scanner(System.in);
