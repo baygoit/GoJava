@@ -34,11 +34,12 @@ public class Main {
 
 			Project[] foundProjects = projects.getProgects(category);
 			printProjects(foundProjects);
-			projectMenu(output, foundProjects);
+
+			projectMenu(foundProjects);
 		}
 	}
 
-	private void projectMenu(Output output, Project[] foundProjects) {
+	private void projectMenu(Project[] foundProjects) {
 		while (true) {
 
             ascProject(foundProjects);
@@ -62,9 +63,13 @@ public class Main {
 
 	private void ascProject(Project[] foundProjects) {
 
-		int from = 0;
-		int to = foundProjects.length - 1;
-		output.println("Select project: [" + from + "..." +  to  + " or 0 for exit to the projects list");
+		if (foundProjects.length == 0 ){
+			output.println("Projects in this category do not have to exit, enter 0");
+		}else {
+			int from = 0;
+			int to = foundProjects.length - 1;
+			output.println("Select project: [" + from + "..." +  to  + " or 0 for exit to the projects list");
+		}
 	}
 
 	private void printProjectDetail(Project project) {
@@ -135,10 +140,4 @@ public class Main {
 	}
 
 }
-
-//Как гость я хочу иметь возможность изучать разные проекты в различных категориях
-//сценарий 1: находясь в списке проектов -> вижу запрос на выбор проекта и пункт меню "0 - выход" -> выбираю 0 -> попадаю
-//		в меню категорий -> вижу список категорий и возможность выбора другой категории
-//		сценарий 2: находясь в описании проекта -> вижу меню "0 - выход" -> выбираю 0 -> попадаю в меню проектов -> вижу список
-//		проектов и возможность выбора другого проекта
 
