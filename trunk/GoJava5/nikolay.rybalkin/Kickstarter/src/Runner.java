@@ -41,6 +41,13 @@ public class Runner {
 		project5.setHistory("History this project");
 		project6.setHistory("History this project");
 
+		project1.setVideo("https://www.youtube.com");
+		project2.setVideo("https://www.youtube.com");
+		project3.setVideo("https://www.youtube.com");
+		project4.setVideo("https://www.youtube.com");
+		project5.setVideo("https://www.youtube.com");
+		project6.setVideo("https://www.youtube.com");
+
 
 		Main app = new Main(categories, projects);
 		app.run();

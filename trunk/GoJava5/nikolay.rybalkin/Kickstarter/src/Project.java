@@ -6,9 +6,6 @@ public class Project {
 	private int amount;
 	private int exist;
 	private int days;
-
-
-
 	private Category category;
 	private String history;
 	private String video;
@@ -21,6 +18,9 @@ public class Project {
 		this.days = days;
 		this.description = description;
 		this.exist = 0;
+		this.history = null;
+		this.video = null;
+		this.faq = null;
 	}
 
 	public Project(String name){
@@ -68,7 +68,6 @@ public class Project {
 	}
 
 	public String getHistory() {
-		//TODO забито хардкодом
 		return history;
 	}
 
