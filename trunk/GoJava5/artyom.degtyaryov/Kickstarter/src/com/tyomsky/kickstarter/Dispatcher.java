@@ -28,12 +28,12 @@ public class Dispatcher implements InputListener {
         initControllers();
     }
 
-    private void initControllers () {
+    private void initControllers() {
         Output output = configuration.getOutput();
         DataProvider dataProvider = configuration.getDataProvider();
         mainPageController = new MainPageController(new MainPageView(output), new MainPageModel(dataProvider));
         categoryController = new CategoryController(new CategoryView(output), new CategoryModel(dataProvider));
-        projectController  = new ProjectController(new ProjectView(output), new ProjectModel(dataProvider));
+        projectController = new ProjectController(new ProjectView(output), new ProjectModel(dataProvider));
     }
 
     @Override
@@ -44,7 +44,7 @@ public class Dispatcher implements InputListener {
         updatePath(input);
         boolean dispatched = dispatch();
         if (!dispatched) {
-            path.remove(path.size()-1);
+            path.remove(path.size() - 1);
             dispatch();
         }
     }
@@ -63,12 +63,13 @@ public class Dispatcher implements InputListener {
                 return mainPageController.showModel();
             }
             case 1: {
-                return categoryController.showModel(path.get(0)-1);
+                return categoryController.showModel(path.get(0) - 1);
             }
             case 2: {
-                return projectController.showModel(path.get(0)-1, path.get(1)-1);
+                return projectController.showModel(path.get(0) - 1, path.get(1) - 1);
             }
-            default: return false;
+            default:
+                return false;
 
         }
     }
@@ -78,7 +79,7 @@ public class Dispatcher implements InputListener {
             return false;
         }
         if (input == 0) {
-            path.remove(path.size()-1);
+            path.remove(path.size() - 1);
         } else {
             path.add(input);
         }

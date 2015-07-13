@@ -17,7 +17,6 @@ public class Kickstarter {
         while (true) {
             dispatcher.onInput(input.getUserChoice());
         }
-
     }
 
 }

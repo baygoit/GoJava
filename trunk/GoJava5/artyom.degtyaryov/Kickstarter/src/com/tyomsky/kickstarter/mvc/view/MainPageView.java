@@ -16,18 +16,17 @@ public class MainPageView {
     }
 
     protected void prepareLayout(MainPageModel model) {
-		MainPageModel mainPageModel = model;
         layout.clear();
-        layout.add(mainPageModel.getQuote());
+        layout.add(model.getQuote());
         layout.add("Welcome to KickStarter");
         layout.add("Please choose category:");
-		fillMenu(mainPageModel);
-	}
+        fillMenu(model);
+    }
 
     private void fillMenu(MainPageModel model) {
         List<String> categories = model.getCategories();
         for (int i = 0; i < categories.size(); i++) {
-            layout.add(String.valueOf(i+1)+") "+categories.get(i));
+            layout.add(String.valueOf(i + 1) + ") " + categories.get(i));
         }
         layout.add("");
         layout.add("0) Exit");

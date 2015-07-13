@@ -14,7 +14,7 @@ public class MainPageController {
         this.model = model;
     }
 
-    public boolean showModel(){
+    public boolean showModel() {
         boolean isShown = false;
         model.update();
         view.show(model);

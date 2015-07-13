@@ -26,7 +26,7 @@ public class CategoryView {
     private void fillMenu(CategoryModel model) {
         List<String> projects = model.getProjects();
         for (int i = 0; i < projects.size(); i++) {
-            layout.add(String.valueOf(i+1) + ") " + projects.get(i));
+            layout.add(String.valueOf(i + 1) + ") " + projects.get(i));
         }
         layout.add("");
         layout.add("0) Back");

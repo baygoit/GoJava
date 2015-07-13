@@ -18,7 +18,7 @@ public class CategoryController {
         try {
             model.update(index);
             view.show(model);
-            isShown =  true;
+            isShown = true;
         } catch (IllegalArgumentException e) {
             System.err.println(e);
             isShown = false;
