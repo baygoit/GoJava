@@ -1,3 +1,7 @@
+import model.*;
+import streams.Output;
+import streams.ScanConsole;
+
 import java.util.Arrays;
 
 public class Main {
@@ -64,7 +68,7 @@ public class Main {
 	private void ascProject(Project[] foundProjects) {
 
 		if (foundProjects.length == 0 ){
-			output.println("Projects in this category do not have to exit, enter 0");
+			output.println("model.Projects in this category do not have to exit, enter 0");
 		}else {
 			int from = 0;
 			int to = foundProjects.length - 1;
@@ -74,7 +78,7 @@ public class Main {
 
 	private void printProjectDetail(Project project) {
 
-		output.println("Project detail:");
+		output.println("model.Project detail:");
 		printProject(project);
 
 		String history = project.getHistory();
@@ -106,7 +110,7 @@ public class Main {
 
 	private void printProject(Project project) {
 
-		output.println("Project name: " + project.getName());
+		output.println("model.Project name: " + project.getName());
 		output.println("Description: " + project.getDescription());
 		output.println("Need collected: " + project.getAmount() + "$");
 		output.println("Already collected: " + project.getExist() + "$");

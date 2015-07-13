@@ -1,3 +1,6 @@
+package model;
+
+import model.Category;
 
 public class Project {
 

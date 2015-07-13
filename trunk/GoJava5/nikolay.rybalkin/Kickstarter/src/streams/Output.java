@@ -1,3 +1,4 @@
+package streams;
 
 public class Output {
 
