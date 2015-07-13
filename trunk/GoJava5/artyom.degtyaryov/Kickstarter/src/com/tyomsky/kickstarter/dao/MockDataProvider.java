@@ -38,12 +38,20 @@ public class MockDataProvider implements DataProvider {
 
     @Override
     public Category getCategory(int categoryIndex) {
-        return categories.get(categoryIndex);
+        if (categoryIndex < categories.size()) {
+            return categories.get(categoryIndex);
+        } else {
+            throw new IllegalArgumentException("category with this id doesn't exists");
+        }
     }
 
     @Override
     public Project getProject(int categoryIndex, int projectIndex) {
-        return categories.get(categoryIndex).getProjects().get(projectIndex);
+        if (categoryIndex < categories.size() && projectIndex < categories.get(categoryIndex).getProjects().size()) {
+            return categories.get(categoryIndex).getProjects().get(projectIndex);
+        } else {
+            throw new IllegalArgumentException("project with this id doesn't exists");
+        }
     }
 
 }

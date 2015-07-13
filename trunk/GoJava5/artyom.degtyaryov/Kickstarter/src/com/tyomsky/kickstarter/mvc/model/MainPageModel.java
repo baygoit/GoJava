@@ -6,14 +6,14 @@ import com.tyomsky.kickstarter.model.Category;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainPageModel extends AbstractModel{
+public class MainPageModel {
 
+    private DataProvider dataProvider;
     private String quote;
-
     private List<String> categories = new ArrayList<>();
 
     public MainPageModel(DataProvider dataProvider) {
-        super(dataProvider);
+        this.dataProvider = dataProvider;
     }
 
     public String getQuote() {
@@ -24,7 +24,7 @@ public class MainPageModel extends AbstractModel{
         return categories;
     }
 
-    public void update(int... parameters) {
+    public void update() {
         quote = dataProvider.getSomeQuote();
         List<Category> categories = dataProvider.getCategoriesList();
         this.categories.clear();
@@ -32,4 +32,5 @@ public class MainPageModel extends AbstractModel{
             this.categories.add(c.getName());
         }
     }
+
 }

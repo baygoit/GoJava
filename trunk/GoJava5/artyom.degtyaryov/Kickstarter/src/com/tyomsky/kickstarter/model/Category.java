@@ -2,7 +2,7 @@ package com.tyomsky.kickstarter.model;
 
 import java.util.List;
 
-public class Category  {
+public class Category {
 
     private String name;
 

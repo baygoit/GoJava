@@ -1,42 +1,25 @@
 package com.tyomsky.kickstarter.mvc.controller;
 
 import com.tyomsky.kickstarter.mvc.model.MainPageModel;
-import com.tyomsky.kickstarter.mvc.view.AbstractView;
+import com.tyomsky.kickstarter.mvc.view.MainPageView;
 
 
-public class MainPageController extends AbstractController{
+public class MainPageController {
 
     private MainPageModel model;
+    private MainPageView view;
 
-    public MainPageController(AbstractView view, MainPageModel model) {
-        super(view);
+    public MainPageController(MainPageView view, MainPageModel model) {
+        this.view = view;
         this.model = model;
     }
 
-    public void showModel(int... parameters){
-        if (parameters[0] == 0) {
-            currentIndex = 0;
-        }
+    public boolean showModel(){
+        boolean isShown = false;
         model.update();
         view.show(model);
+        isShown = true;
+        return isShown;
     }
 
-    public void processInput(int input) {
-        AbstractController child = getChild();
-        if (currentIndex == 0) {
-            if (input == 0) {
-                System.exit(0);
-            } else {
-                currentIndex = input;
-                child.showModel(input);
-            }
-        } else {
-            child.processInput(input);
-        }
-    }
-
-    public void onApplicationStart() {
-        model.update();
-        view.show(model);
-    }
 }

@@ -1,26 +1,23 @@
 package com.tyomsky.kickstarter;
 
-import com.tyomsky.kickstarter.mvc.controller.AbstractController;
-import com.tyomsky.kickstarter.mvc.controller.MainPageController;
 import com.tyomsky.kickstarter.ui.Input;
 
 public class Kickstarter {
 
-    private MainPageController controller;
-    private Input input;
+    private Dispatcher dispatcher;
+    Input input;
 
-    public Kickstarter(Input input, MainPageController mainController) {
+    public void init(Input input, Dispatcher dispatcher) {
         this.input = input;
-        this.controller = mainController;
+        this.dispatcher = dispatcher;
     }
 
     public void run() {
-        controller.onApplicationStart();
-        int userChoice;
+        dispatcher.onApplicationStart();
         while (true) {
-            userChoice = input.getUserChoice();
-            controller.processInput(userChoice);
+            dispatcher.onInput(input.getUserChoice());
         }
+
     }
 
 }

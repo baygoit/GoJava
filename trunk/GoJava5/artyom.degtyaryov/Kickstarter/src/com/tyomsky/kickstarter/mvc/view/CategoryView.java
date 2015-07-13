@@ -1,36 +1,40 @@
 package com.tyomsky.kickstarter.mvc.view;
 
-import com.tyomsky.kickstarter.mvc.model.AbstractModel;
-import com.tyomsky.kickstarter.mvc.model.ProjectModel;
 import com.tyomsky.kickstarter.ui.Output;
 import com.tyomsky.kickstarter.mvc.model.CategoryModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class CategoryView extends AbstractView {
+public class CategoryView {
+
+    private ArrayList<String> layout = new ArrayList<>();
+    private Output output;
 
     public CategoryView(Output output) {
-        super(output);
+        this.output = output;
     }
 
-    @Override
-    protected void prepareLayout(AbstractModel model) {
-        CategoryModel categoryModel = ((CategoryModel) model);
+    private void prepareLayout(CategoryModel model) {
         layout.clear();
-        layout.add("You r in " + categoryModel.getName());
+        layout.add("You r in " + model.getName());
         layout.add("");
         layout.add("Choose project:");
-        fillMenu(categoryModel);
+        fillMenu(model);
     }
 
-    private void fillMenu(CategoryModel model){
+    private void fillMenu(CategoryModel model) {
         List<String> projects = model.getProjects();
-        for (int i = 1; i < projects.size(); i++) {
-            layout.add(i+") "+projects.get(i-1));
+        for (int i = 0; i < projects.size(); i++) {
+            layout.add(String.valueOf(i+1) + ") " + projects.get(i));
         }
         layout.add("");
         layout.add("0) Back");
-
-
     }
+
+    public void show(CategoryModel model) {
+        prepareLayout(model);
+        output.print(layout);
+    }
+
 }
