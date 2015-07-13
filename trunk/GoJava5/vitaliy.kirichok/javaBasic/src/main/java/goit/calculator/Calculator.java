@@ -1,9 +1,9 @@
 package goit.calculator;
 
 import goit.calculator.operations.Operation;
-import goit.common.ParseException;
 import goit.calculator.parsers.Parser;
 import goit.calculator.streams.Stream;
+import goit.common.ParseException;
 
 public class Calculator {
     private Stream stream;
