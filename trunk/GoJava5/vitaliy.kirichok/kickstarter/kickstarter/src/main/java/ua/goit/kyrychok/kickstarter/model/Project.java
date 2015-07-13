@@ -41,10 +41,6 @@ public class Project {
         return balance;
     }
 
-    public Date getCreateDate() {
-        return createDate;
-    }
-
     public Date getDeadlineDate() {
         return deadlineDate;
     }

@@ -31,4 +31,5 @@ public class CategoryControllerTest {
 
         verify(view, times(1)).render(model);
     }
+
 }
