@@ -5,6 +5,8 @@ import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 public class Utils {
+    public static final String CHOICE_MESSAGE = "Your choice(0 - exit): ";
+
     public static Date convertDate(String date) {
         Date result = new Date();
         try {
@@ -46,4 +48,15 @@ public class Utils {
         return result;
     }
 
+    public static String getMoney(Integer money) {
+        return String.format("%.2f", new Float(money) / 100);
+    }
+
+    public static String getDate(Date date) {
+        String result = "";
+        if (date != null) {
+            result = new SimpleDateFormat("dd.MM.yyyy").format(date);
+        }
+        return result;
+    }
 }

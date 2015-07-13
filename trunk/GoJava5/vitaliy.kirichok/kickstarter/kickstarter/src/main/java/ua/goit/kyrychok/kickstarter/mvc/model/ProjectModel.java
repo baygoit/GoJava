@@ -1,9 +1,12 @@
 package ua.goit.kyrychok.kickstarter.mvc.model;
 
 import ua.goit.kyrychok.kickstarter.DataProvider;
+import ua.goit.kyrychok.kickstarter.model.Faq;
 import ua.goit.kyrychok.kickstarter.model.Project;
+import ua.goit.kyrychok.kickstarter.model.ProjectEvent;
 
 import java.util.Date;
+import java.util.List;
 
 public class ProjectModel {
     private DataProvider dataProvider;
@@ -37,4 +40,23 @@ public class ProjectModel {
         return project.getDeadlineDate();
     }
 
+    public String getDemoLink() {
+        return project.getDemoLink();
+    }
+
+    public boolean isFaqExists() {
+        return (project.getFaqs() != null && project.getFaqs().size() > 0);
+    }
+
+    public List<Faq> getFaqs() {
+        return project.getFaqs();
+    }
+
+    public boolean isProjectEvenExists() {
+        return (project.getProjectEvents() != null && project.getProjectEvents().size() > 0);
+    }
+
+    public List<ProjectEvent> getProjectEvent() {
+        return project.getProjectEvents();
+    }
 }

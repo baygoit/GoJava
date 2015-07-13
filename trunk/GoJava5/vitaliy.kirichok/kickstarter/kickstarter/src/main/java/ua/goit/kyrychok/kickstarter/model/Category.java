@@ -9,7 +9,6 @@ public class Category {
 
     public Category(String name) {
         this.name = name;
-        projects = new ArrayList<>();
     }
 
     public String getName() {
@@ -21,6 +20,9 @@ public class Category {
     }
 
     public void addProject(Project project) {
+        if (projects == null) {
+            projects = new ArrayList<>();
+        }
         projects.add(project);
     }
 

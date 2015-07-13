@@ -6,6 +6,8 @@ import ua.goit.kyrychok.kickstarter.mvc.model.MainPageModel;
 
 import java.util.List;
 
+import static ua.goit.kyrychok.kickstarter.Utils.CHOICE_MESSAGE;
+
 public class MainPageView {
     private Output output;
 
@@ -19,5 +21,6 @@ public class MainPageView {
         for (int counter = 0; counter < categories.size(); counter++) {
             output.writeLine(String.format("[%s]. %s", counter + 1, categories.get(counter).getName()));
         }
+        output.writeLine(CHOICE_MESSAGE);
     }
 }

@@ -3,6 +3,7 @@ package ua.goit.kyrychok.kickstarter;
 import ua.goit.kyrychok.kickstarter.model.Category;
 import ua.goit.kyrychok.kickstarter.model.Project;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class DataProvider {
@@ -29,5 +30,12 @@ public class DataProvider {
 
     public Project getProject(int categoryIndex, int projectIndex) {
         return categories.get(categoryIndex).getProjects().get(projectIndex);
+    }
+
+    public void addCategory(Category category) {
+        if (categories == null) {
+            categories = new ArrayList<>();
+        }
+        categories.add(category);
     }
 }
