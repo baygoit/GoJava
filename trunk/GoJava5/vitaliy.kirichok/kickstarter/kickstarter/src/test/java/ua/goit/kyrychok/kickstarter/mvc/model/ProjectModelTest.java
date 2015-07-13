@@ -25,9 +25,6 @@ public class ProjectModelTest {
     @InjectMocks
     private ProjectModel model;
 
-    @Mock
-    private Project project;
-
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
@@ -57,12 +54,12 @@ public class ProjectModelTest {
     @Test
     public void whenIsFaqExistsThenReturnFalse() throws Exception{
         //when(project.getFaqs()).thenReturn(new ArrayList<Faq>());
+        Project project = mock(Project.class);
         when(project.getName()).thenReturn("zzz");
         ProjectModel projectModel = new ProjectModel(dataProvider);
         String result = projectModel.getName();
         Assert.assertEquals(result, "zzz");
         //boolean result = model.isFaqExists();
         //Assert.assertTrue(result);
-    }
-    */
+    }*/
 }
