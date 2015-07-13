@@ -13,4 +13,13 @@ public class AnagramTest {
 
         Assert.assertEquals("Unexpected result", result, "ewq ytr oiu");
     }
+
+    @Test
+    public void whenGetAnagramNullThenEmpty() throws Exception {
+        Anagram anagram = new Anagram();
+
+        String result = anagram.getAnargam(null);
+
+        Assert.assertNotNull("Result must be empty, not null", result);
+    }
 }
