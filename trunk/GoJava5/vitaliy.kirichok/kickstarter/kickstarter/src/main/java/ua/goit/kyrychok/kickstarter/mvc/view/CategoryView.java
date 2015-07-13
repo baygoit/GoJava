@@ -10,7 +10,7 @@ import java.util.List;
 import static ua.goit.kyrychok.kickstarter.Utils.*;
 
 public class CategoryView {
-    Output output;
+    private Output output;
 
     public CategoryView(Output output) {
         this.output = output;

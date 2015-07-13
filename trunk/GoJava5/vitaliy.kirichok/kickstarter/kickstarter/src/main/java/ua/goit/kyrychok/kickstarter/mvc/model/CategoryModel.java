@@ -7,8 +7,8 @@ import ua.goit.kyrychok.kickstarter.model.Project;
 import java.util.List;
 
 public class CategoryModel {
-    DataProvider dataProvider;
-    Category category;
+    private DataProvider dataProvider;
+    private Category category;
 
     public CategoryModel(DataProvider dataProvider) {
         this.dataProvider = dataProvider;

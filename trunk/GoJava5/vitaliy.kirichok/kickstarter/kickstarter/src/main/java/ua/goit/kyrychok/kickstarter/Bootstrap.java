@@ -21,7 +21,7 @@ public class Bootstrap {
         project.addProjectEvent(new ProjectEvent(convertDate("12.07.2015"), "Project was started"));
         project.addProjectEvent(new ProjectEvent(convertDate("10.07.2015"), "Thank you"));
         category.addProject(project);
-        project = new Project("2st project in 1st category", "desc2", 1000, 350, convertDate("01.07.2015"), convertDate("20.08.2015"), "");
+        project = new Project("2nd project in 1st category", "desc2", 1000, 350, convertDate("01.07.2015"), convertDate("20.08.2015"), "");
         category.addProject(project);
         dataProvider.addCategory(category);
 
