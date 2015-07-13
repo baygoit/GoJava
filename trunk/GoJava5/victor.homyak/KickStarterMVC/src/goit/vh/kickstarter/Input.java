@@ -11,13 +11,16 @@ import java.util.Scanner;
  */
 public class Input {
 
-    private InputListener inputListener;
+    public InputListener inputListener;
+    public String input;
 
-    public int listenInput() {
+    public void listenInput() {
         Scanner scanner = new Scanner(System.in);
-        while (scanner.hasNextInt()) {
-              inputListener.onInput(scanner.nextInt());
-        }
-        return scanner.nextInt();
+        //while (scanner.hasNext()) {
+           // inputListener.onInput(scanner.next());
+             input = scanner.next();
+       // }
     }
+
+
 }

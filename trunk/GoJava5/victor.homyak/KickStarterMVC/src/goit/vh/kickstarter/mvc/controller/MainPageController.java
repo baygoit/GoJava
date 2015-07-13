@@ -2,7 +2,6 @@ package goit.vh.kickstarter.mvc.controller;
 
 import goit.vh.kickstarter.Input;
 import goit.vh.kickstarter.InputListener;
-import goit.vh.kickstarter.mvc.model.CategoryModel;
 import goit.vh.kickstarter.mvc.model.MainPageModel;
 import goit.vh.kickstarter.mvc.view.MainPageView;
 
@@ -28,15 +27,17 @@ public class MainPageController implements InputListener {
     public void onApplicationStart() {
         view.render(model);
         Input input = new Input();
-        firstInput = input.listenInput();
-
+        input.listenInput();
+        onInput(input.input);
 
     }
 
+
     @Override
-    public void onInput(int firstInput) {
+    public void onInput(String input) {
 
-        CategoryController controller = new CategoryController(firstInput);
-
+        int intInput = Integer.parseInt(input);
+        CategoryController categoryController = new CategoryController();
+       categoryController.onDealingWithInput(intInput);
     }
 }

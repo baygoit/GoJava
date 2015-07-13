@@ -12,9 +12,9 @@ public class Dispatcher implements InputListener {
     private int[] path = {0,0};
 
     @Override
-    public void onInput(int input) {
-       // int intInput = Integer.parseInt(input);
-        boolean wasUpdated = updatePath(input);
+    public void onInput(String input) {
+        int intInput = Integer.parseInt(input);
+        boolean wasUpdated = updatePath(intInput);
 
 
 

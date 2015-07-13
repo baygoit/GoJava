@@ -9,5 +9,5 @@ package goit.vh.kickstarter;
  */
 public interface InputListener {
 
-    void onInput(int input);
+    void onInput(String input);
 }

@@ -25,6 +25,7 @@ public class MainPageView {
         for (int i = 0; i < categories.length; i++) {
             output.println(String.valueOf(i + 1) + " " + categories[i].getName());
         }
+        System.out.println("Choose your project!");
     }
 
 }

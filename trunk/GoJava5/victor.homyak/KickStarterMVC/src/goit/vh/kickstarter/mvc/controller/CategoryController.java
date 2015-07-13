@@ -14,12 +14,14 @@ import goit.vh.kickstarter.mvc.view.CategoryView;
 public class CategoryController {
     public CategoryView categoryView;
 
-    public CategoryController(int index) {
-
-        CategoryModel categoryModel = new CategoryModel();
-        categoryModel.refreshModel(index);
-        categoryView.render(categoryModel);
+    public CategoryController(){
     }
 
+     public void onDealingWithInput(int index){
+         CategoryModel categoryModel = new CategoryModel();
+         categoryModel.refreshModel(index);
+         categoryView.render(categoryModel);
+
+     }
 
 }
