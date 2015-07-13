@@ -1,7 +1,7 @@
-package com.tyomsky.kickstarter.controller;
+package com.tyomsky.kickstarter.mvc.controller;
 
-import com.tyomsky.kickstarter.model.ProjectModel;
-import com.tyomsky.kickstarter.view.AbstractView;
+import com.tyomsky.kickstarter.mvc.model.ProjectModel;
+import com.tyomsky.kickstarter.mvc.view.AbstractView;
 
 public class ProjectController extends AbstractController{
 
@@ -16,7 +16,7 @@ public class ProjectController extends AbstractController{
     public void showModel(int... parameters) {
         if (parameters.length >= 2) {
             model.update(parameters[0]-1, parameters[1]-1);
-            view.show();
+            view.show(model);
         }
     }
 

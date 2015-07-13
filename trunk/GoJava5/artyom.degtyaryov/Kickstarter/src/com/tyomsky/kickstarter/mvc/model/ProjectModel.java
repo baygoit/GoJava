@@ -1,7 +1,7 @@
-package com.tyomsky.kickstarter.model;
+package com.tyomsky.kickstarter.mvc.model;
 
 import com.tyomsky.kickstarter.dao.DataProvider;
-import com.tyomsky.kickstarter.domain.Project;
+import com.tyomsky.kickstarter.model.Project;
 
 public class ProjectModel extends AbstractModel {
 

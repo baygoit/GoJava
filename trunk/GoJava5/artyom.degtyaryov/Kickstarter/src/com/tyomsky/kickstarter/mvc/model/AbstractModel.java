@@ -1,4 +1,4 @@
-package com.tyomsky.kickstarter.model;
+package com.tyomsky.kickstarter.mvc.model;
 
 import com.tyomsky.kickstarter.dao.DataProvider;
 

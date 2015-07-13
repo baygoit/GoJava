@@ -1,6 +1,6 @@
-package com.tyomsky.kickstarter.controller;
+package com.tyomsky.kickstarter.mvc.controller;
 
-import com.tyomsky.kickstarter.view.AbstractView;
+import com.tyomsky.kickstarter.mvc.view.AbstractView;
 
 public abstract class AbstractController {
 

@@ -1,7 +1,7 @@
-package com.tyomsky.kickstarter.controller;
+package com.tyomsky.kickstarter.mvc.controller;
 
-import com.tyomsky.kickstarter.model.CategoryModel;
-import com.tyomsky.kickstarter.view.CategoryView;
+import com.tyomsky.kickstarter.mvc.model.CategoryModel;
+import com.tyomsky.kickstarter.mvc.view.CategoryView;
 
 public class CategoryController extends AbstractController{
 
@@ -15,7 +15,7 @@ public class CategoryController extends AbstractController{
     @Override
     public void showModel(int...parameters) {
         model.update(parameters[0]-1);
-        view.show();
+        view.show(model);
     }
 
     @Override

@@ -1,19 +1,17 @@
 package com.tyomsky.kickstarter;
 
-import com.tyomsky.kickstarter.controller.AbstractController;
-import com.tyomsky.kickstarter.controller.CategoryController;
-import com.tyomsky.kickstarter.controller.MainPageController;
-import com.tyomsky.kickstarter.controller.ProjectController;
+import com.tyomsky.kickstarter.mvc.controller.AbstractController;
+import com.tyomsky.kickstarter.mvc.controller.CategoryController;
+import com.tyomsky.kickstarter.mvc.controller.MainPageController;
+import com.tyomsky.kickstarter.mvc.controller.ProjectController;
 import com.tyomsky.kickstarter.dao.DataProvider;
-import com.tyomsky.kickstarter.domain.Category;
-import com.tyomsky.kickstarter.domain.Project;
-import com.tyomsky.kickstarter.model.CategoryModel;
-import com.tyomsky.kickstarter.model.MainPageModel;
-import com.tyomsky.kickstarter.model.ProjectModel;
+import com.tyomsky.kickstarter.mvc.model.CategoryModel;
+import com.tyomsky.kickstarter.mvc.model.MainPageModel;
+import com.tyomsky.kickstarter.mvc.model.ProjectModel;
 import com.tyomsky.kickstarter.ui.Output;
-import com.tyomsky.kickstarter.view.CategoryView;
-import com.tyomsky.kickstarter.view.MainPageView;
-import com.tyomsky.kickstarter.view.ProjectView;
+import com.tyomsky.kickstarter.mvc.view.CategoryView;
+import com.tyomsky.kickstarter.mvc.view.MainPageView;
+import com.tyomsky.kickstarter.mvc.view.ProjectView;
 
 public class Configuration {
 
@@ -23,13 +21,13 @@ public class Configuration {
     public AbstractController getControllersConfiguration(){
 //        todo: think about var names
         MainPageModel mpm = new MainPageModel(dataProvider);
-        MainPageController mpc = new MainPageController(new MainPageView(mpm, output), mpm);
+        MainPageController mpc = new MainPageController(new MainPageView(output), mpm);
         CategoryModel cm = new CategoryModel(dataProvider);
-        CategoryController cc = new CategoryController(new CategoryView(cm, output), cm);
+        CategoryController cc = new CategoryController(new CategoryView(output), cm);
         mpc.setChild(cc);
         cc.setParent(mpc);
         ProjectModel pm = new ProjectModel(dataProvider);
-        ProjectController pc = new ProjectController(new ProjectView(pm, output), pm);
+        ProjectController pc = new ProjectController(new ProjectView(output), pm);
         cc.setChild(pc);
         pc.setParent(cc);
         return mpc;

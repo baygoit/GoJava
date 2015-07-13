@@ -1,7 +1,7 @@
-package com.tyomsky.kickstarter.controller;
+package com.tyomsky.kickstarter.mvc.controller;
 
-import com.tyomsky.kickstarter.model.MainPageModel;
-import com.tyomsky.kickstarter.view.AbstractView;
+import com.tyomsky.kickstarter.mvc.model.MainPageModel;
+import com.tyomsky.kickstarter.mvc.view.AbstractView;
 
 
 public class MainPageController extends AbstractController{
@@ -18,7 +18,7 @@ public class MainPageController extends AbstractController{
             currentIndex = 0;
         }
         model.update();
-        view.show();
+        view.show(model);
     }
 
     public void processInput(int input) {
@@ -35,4 +35,8 @@ public class MainPageController extends AbstractController{
         }
     }
 
+    public void onApplicationStart() {
+        model.update();
+        view.show(model);
+    }
 }

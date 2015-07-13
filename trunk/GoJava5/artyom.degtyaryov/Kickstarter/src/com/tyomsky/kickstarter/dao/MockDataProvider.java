@@ -2,8 +2,8 @@ package com.tyomsky.kickstarter.dao;
 
 import java.util.*;
 
-import com.tyomsky.kickstarter.domain.Category;
-import com.tyomsky.kickstarter.domain.Project;
+import com.tyomsky.kickstarter.model.Category;
+import com.tyomsky.kickstarter.model.Project;
 
 public class MockDataProvider implements DataProvider {
     private List<Category> categories = new ArrayList<>();
