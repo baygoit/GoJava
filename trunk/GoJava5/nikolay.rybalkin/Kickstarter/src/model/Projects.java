@@ -6,8 +6,7 @@ public class Projects {
 	private int index = 0;
 
 	public void add(Project project) {
-		projects[index] = project;
-		index++;
+		projects[index++] = project;
 	}
 
 	public Project[] getProgects(Category category){
