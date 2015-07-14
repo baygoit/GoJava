@@ -20,7 +20,9 @@ public class CategoryModel {
     public CategoryModel(DataRegistry dataRegistry) {
         this.dataRegistry = dataRegistry;
     }
+    public CategoryModel() {
 
+    }
 
     public void refreshModel(int input) {
         Category category = dataRegistry.getCategories()[input - 1];
