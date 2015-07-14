@@ -10,9 +10,11 @@ import org.mockito.stubbing.Answer;
 import ua.goit.kyrychok.kickstarter.Output;
 import ua.goit.kyrychok.kickstarter.TestDataProvider;
 import ua.goit.kyrychok.kickstarter.Utils;
+import ua.goit.kyrychok.kickstarter.model.Project;
 import ua.goit.kyrychok.kickstarter.mvc.model.CategoryModel;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import static org.mockito.Matchers.anyString;
@@ -37,7 +39,8 @@ public class CategoryViewTest {
 
         TestDataProvider testDataProvider = new TestDataProvider();
         testDataProvider.init();
-        when(model.getProjects()).thenReturn(testDataProvider.getProjects(0));
+        List<Project> projects = testDataProvider.getProjects(0);
+        when(model.getProjects()).thenReturn(projects);
 
         final List<String> view = new ArrayList<>();
 
@@ -59,12 +62,12 @@ public class CategoryViewTest {
         expectedResult.add("     Short Description: desc");
         expectedResult.add("     Goal: 100,00");
         expectedResult.add("     Balance: 3500,00");
-        expectedResult.add("     18 days to go");
+        expectedResult.add(String.format("     %s", Utils.getDiffDate(projects.get(0).getDeadlineDate(), new Date())));
         expectedResult.add("[2]. 2nd project");
         expectedResult.add("     Short Description: desc");
         expectedResult.add("     Goal: 100,00");
         expectedResult.add("     Balance: 3500,00");
-        expectedResult.add("     18 days to go");
+        expectedResult.add(String.format("     %s", Utils.getDiffDate(projects.get(1).getDeadlineDate(), new Date())));
         expectedResult.add(Utils.CHOICE_MESSAGE);
         Assert.assertArrayEquals("Not expected Category rendering", expectedResult.toArray(), view.toArray());
     }

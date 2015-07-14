@@ -11,9 +11,10 @@ public class Input {
 
     public void listenInput() {
         Scanner scanner = new Scanner(System.in);
-        boolean result = true;
-        while (result) {
-            result = inputListener.onInput(scanner.next());
+        while (scanner.hasNext()) {
+            if (!inputListener.onInput(scanner.next())) {
+                break;
+            }
         }
         scanner.close();
     }
