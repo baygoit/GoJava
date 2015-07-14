@@ -15,7 +15,7 @@ public class Kickstarter {
     public void run() {
         dispatcher.onApplicationStart();
         while (true) {
-            dispatcher.onInput(input.getUserChoice());
+            input.listenInput();
         }
     }
 

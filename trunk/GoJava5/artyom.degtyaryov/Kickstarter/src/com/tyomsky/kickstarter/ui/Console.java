@@ -1,44 +1,27 @@
 package com.tyomsky.kickstarter.ui;
 
+import com.tyomsky.kickstarter.mvc.controller.InputListener;
+
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Console implements Input, Output {
 
-    private int userChoice;
+    private InputListener inputListener;
 
-    public int getNotValidatedUserChoice() {
-        getIntFromUser();
-        return userChoice;
-    }
-
-
-    private void getIntFromUser() {
+    private int getIntFromUser() {
+        int result = 0;
         System.out.println("Make a choice:");
         Scanner scanner = new Scanner(System.in);
         try {
-            userChoice = scanner.nextInt();
+            result = scanner.nextInt();
 
         } catch (InputMismatchException e) {
             System.err.println("You entered not a number. Try Again.");
             getIntFromUser();
         }
-    }
-
-    private void validateUserChoice(int variants) {
-        if (userChoice < 0 || userChoice > (variants - 1)) {
-            System.out.println("There no such variant. Try Again.");
-            getIntFromUser();
-            validateUserChoice(variants);
-        }
-    }
-
-    @Override
-    public int getUserChoice() {
-        getIntFromUser();
-//        validateUserChoice(variants);
-        return userChoice;
+        return result;
     }
 
     @Override
@@ -54,4 +37,16 @@ public class Console implements Input, Output {
         System.out.println("\n\n\n\n\n\n\n");
     }
 
+    @Override
+    public void listenInput() {
+
+        while (true) {
+            inputListener.onInput(getIntFromUser());
+        }
+    }
+
+    @Override
+    public void setInputListener(InputListener inputListener) {
+        this.inputListener = inputListener;
+    }
 }

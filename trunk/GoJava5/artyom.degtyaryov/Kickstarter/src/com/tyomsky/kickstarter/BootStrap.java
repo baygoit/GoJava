@@ -2,13 +2,17 @@ package com.tyomsky.kickstarter;
 
 import com.tyomsky.kickstarter.dao.MockDataProvider;
 import com.tyomsky.kickstarter.ui.Console;
+import com.tyomsky.kickstarter.ui.Input;
 
 public class BootStrap {
 
     public static void main(String[] args) {
         Configuration configuration = getConfiguration();
         Kickstarter kickStarter = new Kickstarter();
-        kickStarter.init(new Console(), new Dispatcher(configuration));
+        Dispatcher dispatcher = new Dispatcher(configuration);
+        Input input = new Console();
+        input.setInputListener(dispatcher);
+        kickStarter.init(input, dispatcher);
         kickStarter.run();
     }
 
