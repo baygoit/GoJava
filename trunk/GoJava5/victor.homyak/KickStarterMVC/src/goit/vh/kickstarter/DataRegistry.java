@@ -1,6 +1,7 @@
 package goit.vh.kickstarter;
 
 import goit.vh.kickstarter.model.Category;
+import goit.vh.kickstarter.model.ListOfProjects;
 
 /**
  * Created with IntelliJ IDEA.
@@ -28,5 +29,8 @@ public class DataRegistry {
     }
 
 
+    public ListOfProjects[] getProject(int index) {
 
+        return
+    }
 }
