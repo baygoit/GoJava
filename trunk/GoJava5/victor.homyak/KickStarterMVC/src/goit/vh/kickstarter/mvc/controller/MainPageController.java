@@ -2,8 +2,11 @@ package goit.vh.kickstarter.mvc.controller;
 
 import goit.vh.kickstarter.Input;
 import goit.vh.kickstarter.InputListener;
+import goit.vh.kickstarter.LocationManager;
+import goit.vh.kickstarter.mvc.model.CategoryModel;
 import goit.vh.kickstarter.mvc.model.MainPageModel;
 import goit.vh.kickstarter.mvc.view.MainPageView;
+
 
 /**
  * Created with IntelliJ IDEA.
@@ -12,32 +15,28 @@ import goit.vh.kickstarter.mvc.view.MainPageView;
  * Time: 3:29 PM
  * To change this template use File | Settings | File Templates.
  */
-public class MainPageController implements InputListener {
-
+public class MainPageController  {
+    private LocationManager locationManager;
     private MainPageView view;
     private MainPageModel model;
-    public int firstInput;
-
 
     public MainPageController(MainPageView view, MainPageModel model) {
         this.view = view;
         this.model = model;
     }
 
-    public void onApplicationStart() {
+    public void start() {
         view.render(model);
-        Input input = new Input();
-        input.listenInput();
-        onInput(input.input);
+        view.readUserInput();
+        String userInput = view.getInput();
+        int index = Integer.parseInt(userInput);
+        locationManager.setInputIndex(index);
+        locationManager.categoryControllerStart();
+    }
 
+    public void setLocationManager(LocationManager locationManager) {
+        this.locationManager = locationManager;
     }
 
 
-    @Override
-    public void onInput(String input) {
-
-        int intInput = Integer.parseInt(input);
-        CategoryController categoryController = new CategoryController();
-       categoryController.onDealingWithInput(intInput);
-    }
 }
