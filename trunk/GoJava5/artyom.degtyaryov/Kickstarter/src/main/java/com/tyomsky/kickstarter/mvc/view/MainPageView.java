@@ -1,5 +1,6 @@
 package com.tyomsky.kickstarter.mvc.view;
 
+import com.tyomsky.kickstarter.model.Category;
 import com.tyomsky.kickstarter.ui.Output;
 import com.tyomsky.kickstarter.mvc.model.MainPageModel;
 
@@ -24,9 +25,9 @@ public class MainPageView {
     }
 
     private void fillMenu(MainPageModel model) {
-        List<String> categories = model.getCategories();
+        List<Category> categories = model.getCategories();
         for (int i = 0; i < categories.size(); i++) {
-            layout.add(String.valueOf(i + 1) + ") " + categories.get(i));
+            layout.add(String.valueOf(i + 1) + ") " + categories.get(i).getName());
         }
         layout.add("");
         layout.add("0) Exit");

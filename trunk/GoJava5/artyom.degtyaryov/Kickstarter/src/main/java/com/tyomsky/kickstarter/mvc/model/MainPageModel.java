@@ -10,7 +10,7 @@ public class MainPageModel {
 
     private DataProvider dataProvider;
     private String quote;
-    private List<String> categories = new ArrayList<>();
+    private List<Category> categories = new ArrayList<>();
 
     public MainPageModel(DataProvider dataProvider) {
         this.dataProvider = dataProvider;
@@ -20,17 +20,14 @@ public class MainPageModel {
         return quote;
     }
 
-    public List<String> getCategories() {
+    public List<Category> getCategories() {
         return categories;
     }
 
     public void update() {
         quote = dataProvider.getSomeQuote();
-        List<Category> categories = dataProvider.getCategoriesList();
-        this.categories.clear();
-        for (Category c : categories) {
-            this.categories.add(c.getName());
-        }
+        categories = dataProvider.getCategoriesList();
+
     }
 
 }
