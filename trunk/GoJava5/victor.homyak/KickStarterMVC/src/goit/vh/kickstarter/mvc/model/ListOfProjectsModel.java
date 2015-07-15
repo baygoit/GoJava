@@ -1,8 +1,7 @@
 package goit.vh.kickstarter.mvc.model;
 
 import goit.vh.kickstarter.DataRegistry;
-import goit.vh.kickstarter.model.Category;
-import goit.vh.kickstarter.model.ListOfProjects;
+import goit.vh.kickstarter.model.Project;
 
 /**
  * Created by Viktor on 14.07.2015.
@@ -10,16 +9,14 @@ import goit.vh.kickstarter.model.ListOfProjects;
 public class ListOfProjectsModel {
 
     private DataRegistry dataRegistry;
-
-//    private String categoryName;
-//    private String categoryIndex;
+    private Project[] listOfProjectses;
 
     public ListOfProjectsModel(DataRegistry dataRegistry) {
         this.dataRegistry = dataRegistry;
     }
 
-    public ListOfProjects[] listOfProjects() {
-        return dataRegistry.getListOfProjects();
+    public Project[] getListOfProjectses() {
+        return listOfProjectses;
     }
 
     public void setDataRegistry(DataRegistry dataRegistry) {
@@ -27,7 +24,7 @@ public class ListOfProjectsModel {
     }
 
     public void refreshModel(int input) {
-        ListOfProjects[] listOfProjects = dataRegistry.getProject(input);
+        listOfProjectses = dataRegistry.getProject(input);
 
     }
 }

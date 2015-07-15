@@ -33,7 +33,7 @@ public class MainPageControllerTest {
     public void onApplicationStartRenderMainPage() throws Exception {
         MainPageController controller = new MainPageController(view, model);
 
-        controller.onApplicationStart();
+      //  controller.onApplicationStart();
         verify(view, times(1)).render(model);
     }
 }

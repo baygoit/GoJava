@@ -13,23 +13,31 @@ public class LocationManager {
     private int inputIndex;
     private  MainPageController mainPageController;
     private CategoryController categoryController;
-    private ListOfProjectsController listOfProjects;
+    private ListOfProjectsController listOfProjectsController;
     private int[] path = {0,0};
 
     public LocationManager(MainPageController mainPageController, CategoryController categoryController) {
         this.mainPageController = mainPageController;
         this.categoryController = categoryController;
+
+    }
+    public LocationManager(MainPageController mainPageController, CategoryController categoryController,
+                           ListOfProjectsController listOfProjectsController) {
+        this.mainPageController = mainPageController;
+        this.categoryController = categoryController;
+        this.listOfProjectsController = listOfProjectsController;
     }
 
     public void onApplicationStart(){
         mainPageController.start();
+
     }
 
     public void categoryControllerStart() {
         categoryController.start(inputIndex);
     }
     public void listOfProjectsStart() {
-        listOfProjects.start(inputIndex);
+        listOfProjectsController.start(inputIndex);
     }
 
     private boolean updatePath(int inputIndex) {

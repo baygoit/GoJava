@@ -3,11 +3,11 @@ package goit.vh.kickstarter.model;
 /**
  * Created by Viktor on 14.07.2015.
  */
-public class ListOfProjects {
+public class Project {
 
     private String name;
 
-    public ListOfProjects(String name) {
+    public Project(String name) {
         this.name = name;
     }
 

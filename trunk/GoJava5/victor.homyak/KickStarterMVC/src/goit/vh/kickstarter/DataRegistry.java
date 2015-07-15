@@ -1,7 +1,10 @@
 package goit.vh.kickstarter;
 
 import goit.vh.kickstarter.model.Category;
-import goit.vh.kickstarter.model.ListOfProjects;
+import goit.vh.kickstarter.model.Project;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created with IntelliJ IDEA.
@@ -16,6 +19,9 @@ public class DataRegistry {
 
     private Category[] categories = new Category[0];
 
+    private    Map<Integer, Project[]> hm = new HashMap<Integer, Project[]>();
+
+
     public String getHelloMsg() {
          return DEFAULT_HELLO_MSG;
     }
@@ -28,9 +34,12 @@ public class DataRegistry {
         this.categories = categories;
     }
 
+    public void registerMapOfProjects(Map<Integer, Project[]> hm){
+        this.hm = hm;
+    }
 
-    public ListOfProjects[] getProject(int index) {
+    public Project[] getProject(int index) {
 
-        return
+        return hm.get(index);
     }
 }

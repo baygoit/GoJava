@@ -1,5 +1,7 @@
 package goit.vh.kickstarter;
 
+import goit.vh.kickstarter.model.Project;
+
 /**
  * Created with IntelliJ IDEA.
  * User: dmrachkovskyi

@@ -21,5 +21,6 @@ public class ListOfProjectsController {
     public void start(int inputIndex) {
         listOfProjectsModel.refreshModel(inputIndex);
         listOfProjectsView.render(listOfProjectsModel);
+
     }
 }
