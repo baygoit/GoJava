@@ -16,11 +16,10 @@ public class MainPageView {
         this.output = output;
     }
 
-    protected void prepareLayout(MainPageModel model) {
+    public void prepareLayout(MainPageModel model) {
         layout.clear();
         layout.add(model.getQuote());
         layout.add("Welcome to KickStarter");
-        layout.add("Please choose category:");
         fillMenu(model);
     }
 
@@ -38,4 +37,7 @@ public class MainPageView {
         output.print(layout);
     }
 
+    public ArrayList<String> getLayout() {
+        return layout;
+    }
 }
