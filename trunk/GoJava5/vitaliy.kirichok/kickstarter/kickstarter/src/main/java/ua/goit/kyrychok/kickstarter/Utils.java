@@ -5,7 +5,8 @@ import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 public class Utils {
-    public static final String CHOICE_MESSAGE = "Your choice(0 - exit): ";
+    public static final String EXIT_CODE = "0";
+    public static final String CHOICE_MESSAGE = String.format("Your choice(%s - exit): ", EXIT_CODE);
 
     public static Date convertDate(String date) {
         Date result = new Date();
@@ -59,4 +60,11 @@ public class Utils {
         }
         return result;
     }
+
+    public static void deleteLastElements(List<String> input, int count) {
+        for (int counter = 0; counter < count; counter++) {
+            input.remove(input.size() - 1);
+        }
+    }
+
 }

@@ -21,16 +21,14 @@ public class ProjectView {
         output.writeLine(String.format("Project name: %s", model.getName()));
         output.writeLine(String.format("Short Description: %s", model.getShortDescription()));
         output.writeLine(String.format("Demo link: %s", model.getDemoLink()));
-        output.writeLine(String.format("Goal: %s", getMoney(model.getGoal())));
-        output.writeLine(String.format("Balance: %s", getMoney(model.getBalance())));
-        output.writeLine(String.format("Time left: %s", getDiffDate(model.getDeadlineDate(), new Date())));
+        output.writeLine(String.format("Balance: %s; Goal: %s; Time left: %s", getMoney(model.getBalance()), getMoney(model.getGoal()), getDiffDate(model.getDeadlineDate(), new Date())));
         if (model.isFaqExists()) {
             output.writeLine("FAQ:");
             List<Faq> faqs = model.getFaqs();
             Faq faq;
             for (int counter = 0; counter < faqs.size(); counter++) {
                 faq = faqs.get(counter);
-                output.writeLine(String.format("  %s. [%s]", counter + 1, faq.getQuestion()));
+                output.writeLine(String.format("  %s. <%s>", counter + 1, faq.getQuestion()));
                 output.writeLine(String.format("      %s", faq.getAnswer()));
             }
         }
@@ -41,6 +39,8 @@ public class ProjectView {
                 output.writeLine(String.format("  %s: %s", getDate(projectEvent.getEventDate()), projectEvent.getMessage()));
             }
         }
+        output.writeLine("Actions:");
+        output.writeLine("[1]. Ask a question");
         output.writeLine(CHOICE_MESSAGE);
     }
 }

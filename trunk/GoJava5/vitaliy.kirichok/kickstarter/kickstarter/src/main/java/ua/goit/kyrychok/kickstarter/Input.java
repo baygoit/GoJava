@@ -11,11 +11,13 @@ public class Input {
 
     public void listenInput() {
         Scanner scanner = new Scanner(System.in);
-        while (scanner.hasNext()) {
-            if (!inputListener.onInput(scanner.next())) {
-                break;
+        try {
+            while (scanner.hasNext()) {
+                inputListener.onInput(scanner.nextLine());
             }
+            scanner.close();
+        } catch (StopDispatcherException e) {
+            scanner.close();
         }
-        scanner.close();
     }
 }

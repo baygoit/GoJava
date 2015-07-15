@@ -7,7 +7,9 @@ import org.mockito.MockitoAnnotations;
 import ua.goit.kyrychok.kickstarter.mvc.model.CategoryModel;
 import ua.goit.kyrychok.kickstarter.mvc.view.CategoryView;
 
-import static org.mockito.Matchers.anyInt;
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
@@ -26,8 +28,11 @@ public class CategoryControllerTest {
     @Test()
     public void onUpdateModelRenderView() throws Exception {
         CategoryController controller = new CategoryController(model, view);
+        List<String> input = new ArrayList<>();
+        input.add("-1");
+        input.add("1");
 
-        controller.update(anyInt());
+        controller.onInput(input);
 
         verify(view, times(1)).render(model);
     }

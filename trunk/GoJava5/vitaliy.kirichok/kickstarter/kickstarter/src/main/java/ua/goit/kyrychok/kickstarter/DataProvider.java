@@ -1,6 +1,7 @@
 package ua.goit.kyrychok.kickstarter;
 
 import ua.goit.kyrychok.kickstarter.model.Category;
+import ua.goit.kyrychok.kickstarter.model.Faq;
 import ua.goit.kyrychok.kickstarter.model.Project;
 
 import java.util.ArrayList;
@@ -37,5 +38,9 @@ public class DataProvider {
             categories = new ArrayList<>();
         }
         categories.add(category);
+    }
+
+    public void addFaq(int categoryIndex, int projectIndex, Faq faq) {
+        categories.get(categoryIndex).getProjects().get(projectIndex).addFaq(faq);
     }
 }

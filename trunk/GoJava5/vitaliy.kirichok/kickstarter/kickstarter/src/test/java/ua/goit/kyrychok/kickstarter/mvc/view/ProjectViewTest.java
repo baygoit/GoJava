@@ -73,18 +73,18 @@ public class ProjectViewTest {
         expectedResult.add(String.format("Project name: %s", project.getName()));
         expectedResult.add(String.format("Short Description: %s", project.getShortDescription()));
         expectedResult.add(String.format("Demo link: %s", project.getDemoLink()));
-        expectedResult.add(String.format("Goal: %s", getMoney(project.getGoal())));
-        expectedResult.add(String.format("Balance: %s", getMoney(project.getBalance())));
-        expectedResult.add(String.format("Time left: %s", getDiffDate(model.getDeadlineDate(), new Date())));
+        expectedResult.add(String.format("Balance: %s; Goal: %s; Time left: %s", getMoney(project.getBalance()), getMoney(project.getGoal()), getDiffDate(model.getDeadlineDate(), new Date())));
         expectedResult.add("FAQ:");
         for (int counter = 0; counter < faqs.size(); counter++) {
-            expectedResult.add(String.format("  %s. [%s]", counter + 1, faqs.get(counter).getQuestion()));
+            expectedResult.add(String.format("  %s. <%s>", counter + 1, faqs.get(counter).getQuestion()));
             expectedResult.add(String.format("      %s", faqs.get(counter).getAnswer()));
         }
         expectedResult.add("Project events:");
         for (ProjectEvent projectEvent : projectEvents) {
             expectedResult.add(String.format("  %s: %s", getDate(projectEvent.getEventDate()), projectEvent.getMessage()));
         }
+        expectedResult.add("Actions:");
+        expectedResult.add("[1]. Ask a question");
         expectedResult.add(Utils.CHOICE_MESSAGE);
 
         Assert.assertArrayEquals("Not expected Project rendering", expectedResult.toArray(), view.toArray());

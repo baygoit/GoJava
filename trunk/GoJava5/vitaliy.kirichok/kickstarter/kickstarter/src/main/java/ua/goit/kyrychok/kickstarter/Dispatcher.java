@@ -1,5 +1,6 @@
 package ua.goit.kyrychok.kickstarter;
 
+import ua.goit.kyrychok.kickstarter.mvc.controller.BaseController;
 import ua.goit.kyrychok.kickstarter.mvc.controller.CategoryController;
 import ua.goit.kyrychok.kickstarter.mvc.controller.MainPageController;
 import ua.goit.kyrychok.kickstarter.mvc.controller.ProjectController;
@@ -14,12 +15,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Dispatcher implements InputListener {
-    private List<Integer> currentPath = new ArrayList<>();
+    private List<String> currentPath = new ArrayList<>();
     private MainPageController mainPageController;
     private CategoryController categoryController;
     private ProjectController projectController;
     private DataProvider dataProvider;
     private Output output;
+    private BaseController currentController;
 
     public Dispatcher(DataProvider dataProvider, Output output) {
         this.dataProvider = dataProvider;
@@ -32,73 +34,35 @@ public class Dispatcher implements InputListener {
         categoryController = new CategoryController(categoryModel, categoryView);
         ProjectModel projectModel = new ProjectModel(dataProvider);
         ProjectView projectView = new ProjectView(output);
-        projectController = new ProjectController(projectModel, projectView);
+        projectController = new ProjectController(dataProvider, output, projectModel, projectView);
+        mainPageController.setChildController(categoryController);
+        categoryController.setChildController(projectController);
+        categoryController.setPreviousController(mainPageController);
+        projectController.setPreviousController(categoryController);
+        currentController = mainPageController;
     }
 
-    public void start() {
-        mainPageController.updateModel();
-    }
-
-    private boolean dispatch() {
-        switch (currentPath.size()) {
-            case 0:
-                return mainPageController.updateModel();
-            case 1:
-                return categoryController.update(currentPath.get(0));
-            case 2:
-                return projectController.update(currentPath.get(0), currentPath.get(1));
-            default:
-                output.writeLine("Array size error");//TODO Normal Action
-                return false;
-        }
-    }
-
-    private void addPathElement(int value) {
-        currentPath.add(value);
-    }
-
-    private void removePathElement() {
-        currentPath.remove(currentPath.size() - 1);
-    }
-
-    private boolean changePath(int input) throws StopDispatcherException {
-        if (input == 0 && currentPath.size() == 0) {
-            throw new StopDispatcherException();
-        }
-        if (input != 0 && currentPath.size() == 2) {
-            return false;
-        }
-        if (input == 0) {
-            removePathElement();
-        } else {
-            addPathElement(input);
-        }
-        return true;
-    }
-
-    private int parseInput(String input) {
-        int result;
+    public void onStart() {
         try {
-            result = Integer.parseInt(input);
-        } catch (NumberFormatException e) {
-            result = -1;
+            onInput("-1");
+        } catch (StopDispatcherException e) {
+            e.printStackTrace();//TODO do something
         }
-        return result;
     }
 
     @Override
-    public boolean onInput(String input) {
-        int inputPath = parseInput(input);
-        try {
-            changePath(inputPath);
-            if (!dispatch()) {
-                removePathElement();
-                dispatch();
+    public void onInput(String input) throws StopDispatcherException {
+        currentPath.add(input);
+        boolean needRepeat = false;
+        BaseController tempController;
+        do {
+            currentController.onInput(currentPath);
+            tempController = currentController.getNextController();
+            if (tempController == null) {
+                throw new StopDispatcherException();
             }
-            return true;
-        } catch (StopDispatcherException e) {
-            return false;
-        }
+            needRepeat = currentController.isNeedNextImmediateExecute();
+            currentController = tempController;
+        } while (needRepeat);
     }
-
 }

@@ -1,32 +1,29 @@
 package ua.goit.kyrychok.kickstarter.mvc.controller;
 
-import ua.goit.kyrychok.kickstarter.mvc.model.MainPageModel;
-import ua.goit.kyrychok.kickstarter.mvc.view.MainPageView;
+import ua.goit.kyrychok.kickstarter.DataProvider;
+import ua.goit.kyrychok.kickstarter.Output;
+import ua.goit.kyrychok.kickstarter.mvc.model.FaqModel;
+import ua.goit.kyrychok.kickstarter.mvc.view.FaqView;
 
 import java.util.List;
 
 import static ua.goit.kyrychok.kickstarter.Utils.EXIT_CODE;
 import static ua.goit.kyrychok.kickstarter.Utils.deleteLastElements;
 
-public class MainPageController extends BaseController {
-    private static final int OWN_PATH_INDEX = 1;
-    private MainPageModel model;
-    private MainPageView view;
+public class FaqController extends BaseController {
+    private static final int OWN_PATH_INDEX = 4;
+    private FaqModel model;
+    private FaqView view;
 
-    public MainPageController(MainPageModel model, MainPageView view) {
+    public FaqController(DataProvider dataProvider, Output output) {
         super();
-        this.model = model;
-        this.view = view;
+        model = new FaqModel(dataProvider);
+        view = new FaqView(output);
     }
 
     private boolean isValid(String input) {
         boolean result = true;
-        try {
-            int inputValue = Integer.parseInt(input);
-            if (inputValue < 1 || inputValue > model.getCount()) {
-                result = false;
-            }
-        } catch (NumberFormatException e) {
+        if (input.length() > 5) {
             result = false;
         }
         return result;
@@ -38,23 +35,20 @@ public class MainPageController extends BaseController {
         view.render(model);
     }
 
-    private void update(List<String> input) {
-        model.update();
-    }
-
     @Override
     public void onInput(List<String> input) {
         if (input.size() == OWN_PATH_INDEX) {
-            update(input);
             show();
         } else {
             String inputValue = input.get(OWN_PATH_INDEX);
             if (inputValue.equals(EXIT_CODE)) {
-                deleteLastElements(input, 1);
+                deleteLastElements(input, 2);
                 setNextController(getPreviousController());
                 setNeedNextImmediateExecute(true);
             } else if (isValid(inputValue)) {
-                setNextController(getChildController());
+                model.setQuestion(Integer.parseInt(input.get(OWN_PATH_INDEX - 3)) - 1, Integer.parseInt(input.get(OWN_PATH_INDEX - 2)) - 1, inputValue);
+                deleteLastElements(input, 2);
+                setNextController(getPreviousController());
                 setNeedNextImmediateExecute(true);
             } else {
                 deleteLastElements(input, 1);

@@ -25,4 +25,8 @@ public class CategoryModel {
     public void update(int index) {
         category = dataProvider.getCategory(index);
     }
+
+    public int getCount() {
+        return category.getProjects().size();
+    }
 }

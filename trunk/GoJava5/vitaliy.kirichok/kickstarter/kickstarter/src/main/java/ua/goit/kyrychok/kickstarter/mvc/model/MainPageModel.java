@@ -25,4 +25,8 @@ public class MainPageModel {
     public void update() {
         categories = dataProvider.getCategories();
     }
+
+    public int getCount() {
+        return categories.size();
+    }
 }
