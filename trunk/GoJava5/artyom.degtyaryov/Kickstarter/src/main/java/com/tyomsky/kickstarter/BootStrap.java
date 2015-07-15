@@ -9,7 +9,8 @@ public class BootStrap {
     public static void main(String[] args) {
         Configuration configuration = getConfiguration();
         Kickstarter kickStarter = new Kickstarter();
-        Dispatcher dispatcher = new Dispatcher(configuration);
+        Dispatcher dispatcher = new Dispatcher();
+        dispatcher.initControllers(configuration);
         Input input = new Console();
         input.setInputListener(dispatcher);
         kickStarter.init(input, dispatcher);

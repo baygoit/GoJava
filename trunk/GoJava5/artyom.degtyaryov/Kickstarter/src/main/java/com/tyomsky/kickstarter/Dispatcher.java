@@ -17,18 +17,15 @@ import java.util.ArrayList;
 
 public class Dispatcher implements InputListener {
 
-    private Configuration configuration;
     private ArrayList<Integer> path = new ArrayList<>();
     MainPageController mainPageController;
     CategoryController categoryController;
     ProjectController projectController;
 
-    public Dispatcher(Configuration configuration) {
-        this.configuration = configuration;
-        initControllers();
+    public Dispatcher() {
     }
 
-    private void initControllers() {
+    public void initControllers(Configuration configuration) {
         Output output = configuration.getOutput();
         DataProvider dataProvider = configuration.getDataProvider();
         mainPageController = new MainPageController(new MainPageView(output), new MainPageModel(dataProvider));
@@ -89,4 +86,21 @@ public class Dispatcher implements InputListener {
     public void onApplicationStart() {
         mainPageController.showModel();
     }
+
+    public ArrayList<Integer> getPath() {
+        return path;
+    }
+
+    public void setMainPageController(MainPageController mainPageController) {
+        this.mainPageController = mainPageController;
+    }
+
+    public void setCategoryController(CategoryController categoryController) {
+        this.categoryController = categoryController;
+    }
+
+    public void setProjectController(ProjectController projectController) {
+        this.projectController = projectController;
+    }
+
 }
