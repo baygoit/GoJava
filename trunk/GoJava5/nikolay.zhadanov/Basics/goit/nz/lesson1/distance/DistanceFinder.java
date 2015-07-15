@@ -6,67 +6,67 @@ import goit.nz.lesson1.Reader;
 import java.util.Arrays;
 
 public class DistanceFinder {
-	private final String INPUT_PROMPT = "Input row of integer numbers separated by whitespaces:";
 	private Reader console;
 	private Parser parser;
 	private int numberOfMinsToFind;
-	private int[] array;
+	private int[] originalNumbers;
 	private int[] mins;
 	private int[] minIndexes;
 
 	public DistanceFinder(int numberOfMins) {
-		console = new Reader(INPUT_PROMPT);
-		parser = new Parser("Row cointains not only integer numbers!");
+		console = new Reader(DistanceStrings.NUMBERS_PROMPT);
+		parser = new Parser(DistanceStrings.PARSER_WARNING);
 		numberOfMinsToFind = numberOfMins;
 	}
 
 	public void find() {
 		do {
-			this.array = parser.stringToInt(console.readLine());
-		} while (!parser.successParsing);
-		this.performFind();
+			originalNumbers = parser.stringToInt(console.readLine());
+		} while (!parser.isParsingSuccessful);
+		performFind();
 	}
-	
+
 	private void performFind() {
-		if (this.array.length < 2) {
-			this.showOutput(0);
+		if (originalNumbers.length < 2) {
+			showOutput(0);
 		}
-		int[] clone = Arrays.copyOf(array, array.length);
+		int[] clone = Arrays.copyOf(originalNumbers, originalNumbers.length);
 		Arrays.sort(clone);
-		int minCount = this.numberOfMinsToFind > clone.length ? clone.length
-				: this.numberOfMinsToFind;
-		this.mins = Arrays.copyOf(clone, minCount);
-		this.minIndexes = new int[minCount];
-		for (int i = 0; i < this.mins.length; i++) {
-			for (int j = 0; j < array.length; j++) {
-				if (array[j] == this.mins[i] && !isInMinIndex(j)) {
-					this.minIndexes[i] = j;
+		int minCount = 
+				numberOfMinsToFind > clone.length 
+				? clone.length
+				: numberOfMinsToFind;
+		mins = Arrays.copyOf(clone, minCount);
+		minIndexes = new int[minCount];
+		for (int i = 0; i < mins.length; i++) {
+			for (int j = 0; j < originalNumbers.length; j++) {
+				if (originalNumbers[j] == mins[i] && !isInMinIndex(j)) {
+					minIndexes[i] = j;
 					break;
 				}
 			}
 		}
-		Arrays.sort(this.minIndexes);
-		this.showOutput(this.minIndexes[this.minIndexes.length - 1]
-				- this.minIndexes[0]);
+		Arrays.sort(minIndexes);
+		showOutput(minIndexes[minIndexes.length - 1] - minIndexes[0]);
 	}
-	
+
 	private boolean isInMinIndex(int index) {
-		for (int i = 0; i < this.minIndexes.length; i++) {
-			if (index == this.minIndexes[i]) {
+		for (Integer minIndex : minIndexes) {
+			if (index == minIndex) {
 				return true;
 			}
 		}
 		return false;
 	}
-	
+
 	private void showOutput(int distance) {
 		System.out.println("For a list of numbers entered:");
-		for (int i = 0; i < this.array.length; i++) {
-			System.out.print(this.array[i] + " ");
+		for (Integer number : originalNumbers) {
+			System.out.print(number + " ");
 		}
 		System.out.println();
 		System.out.println("The result is:");
-		System.out.println("Minimums found: " + Arrays.toString(this.mins));
+		System.out.println("Minimums found: " + Arrays.toString(mins));
 		System.out.println("Distance = " + distance);
 	}
 }

@@ -5,14 +5,13 @@ import goit.nz.lesson1.Reader;
 
 public class Main {
 	public static void main(String[] args) {
-		Reader console = new Reader(
-				"How many minimums need to find? Input a number bigger then zero:");
-		Parser parser = new Parser("That is not an integer number!");
+		Reader console = new Reader(DistanceStrings.MAIN_PROMPT);
+		Parser parser = new Parser(DistanceStrings.PARSER_WARNING);
 		do {
 			int numberOfMins = 0;
 			do {
 				numberOfMins = parser.getFirstIntFromString(console.readLine());
-			} while (!parser.successParsing || numberOfMins <= 0);
+			} while (!parser.isParsingSuccessful || numberOfMins <= 1);
 			DistanceFinder finder = new DistanceFinder(numberOfMins);
 			finder.find();
 		} while (console.askForRepeat());
