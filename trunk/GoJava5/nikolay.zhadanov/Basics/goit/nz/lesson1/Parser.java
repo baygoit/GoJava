@@ -20,7 +20,7 @@ public class Parser {
 
 	public Parser(String delimeter, String errorMessage) {
 		errorInputMessage = errorMessage;
-		delimeter = delimeter;
+		this.delimeter = delimeter;
 		isParsingSuccessful = false;
 	}
 
