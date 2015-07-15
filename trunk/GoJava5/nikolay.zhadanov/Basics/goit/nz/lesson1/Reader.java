@@ -8,25 +8,26 @@ public class Reader {
 	private String prompt;
 
 	public Reader() {
-		this.console = new Scanner(System.in);
-		this.prompt = "";
+		console = new Scanner(System.in);
+		prompt = "";
 	}
 
 	public Reader(String prompt) {
-		this.console = new Scanner(System.in);
+		console = new Scanner(System.in);
 		this.prompt = prompt;
 	}
 
 	public String readLine() {
-		if (!this.prompt.isEmpty()) {
+		if (!prompt.isEmpty()) {
 			System.out.println(prompt);
 		}
-		return this.console.nextLine();
+		return console.nextLine();
 	}
 
 	public boolean askForRepeat() {
-		System.out.println("Do you want to repeat input? \""
-				+ this.AGREE_CODE + "\" for yes, any other for exit");
-		return console.nextLine().toLowerCase().equals(this.AGREE_CODE);
+		System.out
+				.printf("Do you want to repeat input? \"%s\" for yes, any other for exit",
+						AGREE_CODE);
+		return console.nextLine().toLowerCase().equals(AGREE_CODE);
 	}
 }

@@ -4,61 +4,62 @@ public class Parser {
 	private final String DEFAULT_DELIMETER = " ";
 	private String delimeter;
 	private String errorInputMessage;
-	public boolean successParsing;
-	
+	public boolean isParsingSuccessful;
+
 	public Parser() {
 		errorInputMessage = "Wrong input!";
-		delimeter = this.DEFAULT_DELIMETER;
-		successParsing = false;
+		delimeter = DEFAULT_DELIMETER;
+		isParsingSuccessful = false;
 	}
-	
+
 	public Parser(String errorMessage) {
 		errorInputMessage = errorMessage;
-		delimeter = this.DEFAULT_DELIMETER;
-		successParsing = false;
+		delimeter = DEFAULT_DELIMETER;
+		isParsingSuccessful = false;
 	}
-	
+
 	public Parser(String delimeter, String errorMessage) {
 		errorInputMessage = errorMessage;
-		this.delimeter = delimeter;
-		successParsing = false;
+		delimeter = delimeter;
+		isParsingSuccessful = false;
 	}
-	
+
 	public int[] stringToInt(String toParse) {
-		this.successParsing = false;
+		isParsingSuccessful = false;
 		String[] rawData = toParse.split(delimeter);
 		int[] result = new int[rawData.length];
 		for (int i = 0; i < rawData.length; i++) {
 			try {
 				result[i] = Integer.parseInt(rawData[i]);
 			} catch (NumberFormatException e) {
-				System.err.println(this.errorInputMessage);
-				System.err.println(e);
-				/* It's strange but i need to wait a bit because of error
-				  messages were displayed before then prompt of next input try */
-				try {
-					Thread.sleep(10);
-				} catch (InterruptedException e1) {
-					e1.printStackTrace();
-				}
+				System.out.println(errorInputMessage);
+				System.out.println(e);
+				/*
+				 * It's strange but i need to wait a bit because of error
+				 * messages were displayed before prompt of next input try
+				 */
+				/*
+				 * try { Thread.sleep(10); } catch (InterruptedException e1) {
+				 * e1.printStackTrace(); }
+				 */
 				return result;
 			}
 		}
-		this.successParsing = true;
+		isParsingSuccessful = true;
 		return result;
 	}
-	
+
 	public int getFirstIntFromString(String toParse) {
-		return this.stringToInt(toParse)[0];
+		return stringToInt(toParse)[0];
 	}
-	
+
 	public String[] stringToWords(String toParse) {
-		this.successParsing = false;
+		isParsingSuccessful = false;
 		if (toParse.isEmpty()) {
 			return null;
 		}
 		String[] result = toParse.split(delimeter);
-		this.successParsing = true;
+		isParsingSuccessful = true;
 		return result;
 	}
 }
