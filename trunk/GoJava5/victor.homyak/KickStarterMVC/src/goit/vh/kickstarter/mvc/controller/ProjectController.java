@@ -25,7 +25,11 @@ public class ProjectController {
         if (path[0]!=0&& path[1]==0) {
             projectModel.refreshListModel(path[0]);
             projectView.renderList(projectModel);
-
+            String userInput = projectView.getInput();
+            int index = Integer.parseInt(userInput);
+            path[1]= index;
+            locationManager.setPath(path);
+          
         }
         if (path[0]!=0&& path[1]!=0) {
             projectModel.refreshModel(path);

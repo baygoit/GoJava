@@ -43,7 +43,20 @@ public class LocationManager {
         path[0] = input;
         projectController.setDataRegistry(dataRegistry);
         projectController.start(path);
+        
 
+    }
+    
+    public void dispatch(int[] path){
+    	if(path[0]==0 && path[1]==0){
+    		mainPageController.start();
+    	if(path[0]!=0 && path[1]==0){
+    		categoryController.start(path);
+    	}
+    	if(path[0]!=0 && path[1]!=0){
+    		projectController.start(path);
+    	}
+    	}
     }
 //    private boolean updatePath(int inputIndex) {
 //        if (inputIndex != 0) {
@@ -72,5 +85,9 @@ public class LocationManager {
     public void setDataRegistry(DataRegistry dataRegistry){
         this.dataRegistry = dataRegistry;
     }
+	public void setPath(int[] path) {
+		this.path = path;
+		
+	}
 
 }
