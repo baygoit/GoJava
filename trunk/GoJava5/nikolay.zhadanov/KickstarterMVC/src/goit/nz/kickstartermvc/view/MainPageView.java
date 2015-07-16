@@ -27,6 +27,8 @@ public class MainPageView {
 				index++;
 			}
 			printOptions(modelSize);
+		} else {
+			showMsg("Categories are not found!");
 		}
 	}
 
