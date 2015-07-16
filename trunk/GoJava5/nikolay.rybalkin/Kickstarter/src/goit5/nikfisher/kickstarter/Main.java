@@ -5,6 +5,7 @@ import goit5.nikfisher.kickstarter.streams.Output;
 import goit5.nikfisher.kickstarter.streams.ScanConsole;
 
 import java.util.Arrays;
+import java.util.Random;
 
 public class Main {
 
@@ -24,7 +25,7 @@ public class Main {
 
 		Output output = new Output();
 
-		QuoteGenerate generate = new QuoteGenerate();
+		QuoteGenerate generate = new QuoteGenerate(new Random());
 		output.println(generate.quoteGenerate());
 
 		while (true){
