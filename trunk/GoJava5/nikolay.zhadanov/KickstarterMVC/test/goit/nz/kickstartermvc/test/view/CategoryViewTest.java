@@ -72,7 +72,7 @@ public class CategoryViewTest {
 		assertArrayEquals("Wrong projects layout", expectedResult,
 				view.toArray());
 	}
-	
+
 	@Test
 	public void whenCategoryHasNoProjectsThenWarningPrinted() {
 		MockStorage storage = new MockStorage();
@@ -100,15 +100,12 @@ public class CategoryViewTest {
 
 		CategoryView categoryView = new CategoryView(output);
 		categoryView.printProjects(model);
-		String[] expectedResult = {
-				"",
-				"There are no projects of category \"ART\"",
-				"",
-				"(0 - back)" };
+		String[] expectedResult = { "",
+				"There are no projects of category \"ART\"", "", "(0 - back)" };
 		assertArrayEquals("Wrong empty project list warning", expectedResult,
 				view.toArray());
 	}
-	
+
 	@Test
 	public void whenShowMsgThenMsgPrinted() {
 
@@ -126,8 +123,8 @@ public class CategoryViewTest {
 
 		CategoryView categoryView = new CategoryView(output);
 		categoryView.showMsg("Test");
-		
-		String[] expectedResult = {"", "Test"};
+
+		String[] expectedResult = { "", "Test" };
 		assertArrayEquals("Wrong msg printed", expectedResult, view.toArray());
 	}
 
