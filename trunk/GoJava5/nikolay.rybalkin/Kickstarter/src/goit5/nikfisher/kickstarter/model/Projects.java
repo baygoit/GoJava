@@ -2,8 +2,10 @@ package goit5.nikfisher.kickstarter.model;
 
 public class Projects {
 
-	private Project[] projects = new Project[100]; //TODO надо подумать над этим моментом
+	private Project[] projects = new Project[100]; //TODO РЅР°РґРѕ РїРѕРґСѓРјР°С‚СЊ РЅР°Рґ СЌС‚РёРј РјРѕРјРµРЅС‚РѕРј
 	private int index = 0;
+
+//	ArrayList<Project> projects = new ArrayList<>();
 
 	public void add(Project project) {
 		projects[index++] = project;

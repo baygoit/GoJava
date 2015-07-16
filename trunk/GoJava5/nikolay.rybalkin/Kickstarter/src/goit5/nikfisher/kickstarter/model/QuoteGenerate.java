@@ -13,7 +13,7 @@ public class QuoteGenerate {
 				"Get involved in the development of interesting projects!_2"
 		};
 		int index = new Random().nextInt(motivators.length);
-		String motivator = motivators[index];
-		return motivator;
+
+		return motivators[index];
 	}
 }

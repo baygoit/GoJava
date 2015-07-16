@@ -18,6 +18,9 @@ public class Runner {
 		categories.add(category2);
 		categories.add(category3);
 
+
+
+
 		Project project1 = new Project("Game \"Popcorn\"", 10000, 10, "Interesting game");
 		Project project2 = new Project("Design \"New Design\"", 10000, 10, "New innovation design");
 		Project project3 = new Project("Technology \"Wi-Fi\"", 10000, 10, "New technology");
@@ -31,6 +34,9 @@ public class Runner {
 		project4.setCategory(category1);
 		project5.setCategory(category2);
 		project6.setCategory(category3);
+
+
+
 
 		Projects projects = new Projects();
 		projects.add(project1);

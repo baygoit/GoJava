@@ -27,7 +27,7 @@ public class Main {
 		QuoteGenerate generate = new QuoteGenerate();
 		output.println(generate.quoteGenerate());
 
-		while (true) {
+		while (true){
 
 			askCategory();
 
