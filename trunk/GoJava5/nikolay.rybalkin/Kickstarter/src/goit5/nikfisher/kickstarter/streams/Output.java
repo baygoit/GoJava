@@ -1,4 +1,4 @@
-package streams;
+package goit5.nikfisher.kickstarter.streams;
 
 public class Output {
 

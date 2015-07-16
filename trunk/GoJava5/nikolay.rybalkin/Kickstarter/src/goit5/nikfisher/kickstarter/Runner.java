@@ -1,7 +1,9 @@
-import model.Categories;
-import model.Category;
-import model.Project;
-import model.Projects;
+package goit5.nikfisher.kickstarter;
+
+import goit5.nikfisher.kickstarter.model.Categories;
+import goit5.nikfisher.kickstarter.model.Category;
+import goit5.nikfisher.kickstarter.model.Project;
+import goit5.nikfisher.kickstarter.model.Projects;
 
 public class Runner {
 

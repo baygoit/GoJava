@@ -1,4 +1,4 @@
-package streams;
+package goit5.nikfisher.kickstarter.streams;
 
 import java.util.Scanner;
 

@@ -1,6 +1,8 @@
-import model.*;
-import streams.Output;
-import streams.ScanConsole;
+package goit5.nikfisher.kickstarter;
+
+import goit5.nikfisher.kickstarter.model.*;
+import goit5.nikfisher.kickstarter.streams.Output;
+import goit5.nikfisher.kickstarter.streams.ScanConsole;
 
 import java.util.Arrays;
 
@@ -68,7 +70,7 @@ public class Main {
 	private void ascProject(Project[] foundProjects) {
 
 		if (foundProjects.length == 0 ){
-			output.println("model.Projects in this category do not have to exit, enter 0");
+			output.println("goit5.nikfisher.kickstarter.model.Projects in this category do not have to exit, enter 0");
 		}else {
 			int from = 0;
 			int to = foundProjects.length - 1;
@@ -78,7 +80,7 @@ public class Main {
 
 	private void printProjectDetail(Project project) {
 
-		output.println("model.Project detail:");
+		output.println("goit5.nikfisher.kickstarter.model.Project detail:");
 		printProject(project);
 
 		String history = project.getHistory();
@@ -110,7 +112,7 @@ public class Main {
 
 	private void printProject(Project project) {
 
-		output.println("model.Project name: " + project.getName());
+		output.println("goit5.nikfisher.kickstarter.model.Project name: " + project.getName());
 		output.println("Description: " + project.getDescription());
 		output.println("Need collected: " + project.getAmount() + "$");
 		output.println("Already collected: " + project.getExist() + "$");
