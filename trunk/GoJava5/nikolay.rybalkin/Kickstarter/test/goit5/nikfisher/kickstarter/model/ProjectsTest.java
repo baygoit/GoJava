@@ -1,12 +1,10 @@
 package test.goit5.nikfisher.kickstarter.model;
 
-import goit5.nikfisher.kickstarter.model.Categories;
 import goit5.nikfisher.kickstarter.model.Category;
 import goit5.nikfisher.kickstarter.model.Project;
 import goit5.nikfisher.kickstarter.model.Projects;
 import org.junit.Test;
 
-import java.util.Arrays;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
