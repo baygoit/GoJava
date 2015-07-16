@@ -22,13 +22,14 @@ public class CategoryView {
 				printProjectInfo(index, project);
 				index++;
 			}
-			printOptions(modelSize);
 		} else {
 			printNotFound(categoryName);
 		}
+		printOptions(modelSize);
 	}
 
 	public void showMsg(String msg) {
+		output.println("");
 		output.println(msg);
 	}
 
@@ -52,15 +53,17 @@ public class CategoryView {
 
 	private void printOptions(int size) {
 		output.println("");
-		output.println(String.format("Choose your option [1 - %d] (0 - back)",
-				size));
+		if (size > 0) {
+			output.println(String.format(
+					"Choose your option [1 - %d] (0 - back)", size));
+		} else {
+			output.println("(0 - back)");
+		}
 	}
 
 	private void printNotFound(String categoryName) {
 		output.println("");
 		output.println(String.format(
 				"There are no projects of category \"%s\"", categoryName));
-		output.println("");
-		output.println("(0 - back)");
 	}
 }
