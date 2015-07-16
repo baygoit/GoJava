@@ -4,9 +4,7 @@ import java.util.Arrays;
 
 public class Sort {
 
-    private static int[] array1  = {40, 10, 50, 30, 20};
-    private static int[] array2  = {40, 10, 50, 30, 20};
-    private static int[] array3  = {40, 10, 50, 30, 20};
+    private static int[] array  = {40, 10, 50, 30, 20};
 
     public static void main(String[] args){
 
@@ -18,9 +16,9 @@ public class Sort {
     public static void  sortQuick(){
 
         int low = 0;
-        int high = array3.length - 1;
-        sortQuickLogic(array1, low, high);
-        System.out.println(Arrays.toString(array3));
+        int high = array.length - 1;
+        sortQuickLogic(array, low, high);
+        System.out.println(Arrays.toString(array));
     }
 
 
@@ -59,17 +57,17 @@ public class Sort {
 
     public static void  sortShell(){
 
-        int increment = array2.length / 2;
+        int increment = array.length / 2;
 
         while (increment > 0) {
-            for (int i = increment; i < array2.length; i++) {
+            for (int i = increment; i < array.length; i++) {
                 int j = i;
-                int temp = array2[i];
-                while (j >= increment && array2[j - increment] > temp) {
-                    array2[j] = array2[j - increment];
+                int temp = array[i];
+                while (j >= increment && array[j - increment] > temp) {
+                    array[j] = array[j - increment];
                     j = j - increment;
                 }
-                array2[j] = temp;
+                array[j] = temp;
             }
             if (increment == 2) {
                 increment = 1;
@@ -77,20 +75,20 @@ public class Sort {
                 increment *= (5.0 / 11);
             }
         }
-        System.out.println(Arrays.toString(array2));
+        System.out.println(Arrays.toString(array));
     }
 
     public static void sortBubble(){
 
-        for(int k = array3.length-1; k >= 0; k--){
+        for(int k = array.length-1; k >= 0; k--){
             for(int j = 0; j < k; j++){
-                if(array3[j] > array3[j + 1]){
-                    int tmp = array3[j];
-                    array3[j] = array3[j + 1];
-                    array3[j + 1] = tmp;
+                if(array[j] > array[j + 1]){
+                    int tmp = array[j];
+                    array[j] = array[j + 1];
+                    array[j + 1] = tmp;
                 }
             }
         }
-        System.out.println(Arrays.toString(array1));
+        System.out.println(Arrays.toString(array));
     }
 }
