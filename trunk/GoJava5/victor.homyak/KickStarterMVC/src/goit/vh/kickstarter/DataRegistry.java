@@ -38,8 +38,11 @@ public class DataRegistry {
         this.hm = hm;
     }
 
-    public Project[] getProject(int index) {
-
+    public Project[] getProjectList(int index) {
         return hm.get(index);
+    }
+
+    public Project getProject(int[]path) {
+        return hm.get(path[0])[1];
     }
 }

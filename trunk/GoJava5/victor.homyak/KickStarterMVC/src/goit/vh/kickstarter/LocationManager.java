@@ -1,7 +1,8 @@
 package goit.vh.kickstarter;
 
+import goit.vh.kickstarter.model.Project;
 import goit.vh.kickstarter.mvc.controller.CategoryController;
-import goit.vh.kickstarter.mvc.controller.ListOfProjectsController;
+import goit.vh.kickstarter.mvc.controller.ProjectController;
 import goit.vh.kickstarter.mvc.controller.MainPageController;
 
 /**
@@ -13,7 +14,8 @@ public class LocationManager {
     private int inputIndex;
     private  MainPageController mainPageController;
     private CategoryController categoryController;
-    private ListOfProjectsController listOfProjectsController;
+    private ProjectController projectController;
+    private DataRegistry dataRegistry;
     private int[] path = {0,0};
 
     public LocationManager(MainPageController mainPageController, CategoryController categoryController) {
@@ -22,10 +24,10 @@ public class LocationManager {
 
     }
     public LocationManager(MainPageController mainPageController, CategoryController categoryController,
-                           ListOfProjectsController listOfProjectsController) {
+                           ProjectController projectController) {
         this.mainPageController = mainPageController;
         this.categoryController = categoryController;
-        this.listOfProjectsController = listOfProjectsController;
+        this.projectController = projectController;
     }
 
     public void onApplicationStart(){
@@ -34,35 +36,41 @@ public class LocationManager {
     }
 
     public void categoryControllerStart() {
-        categoryController.start(inputIndex);
+        path[0] = inputIndex;
+        categoryController.start(path);
     }
-    public void listOfProjectsStart() {
-        listOfProjectsController.start(inputIndex);
-    }
+    public void listOfProjectsStart(int input) {
+        path[0] = input;
+        projectController.setDataRegistry(dataRegistry);
+        projectController.start(path);
 
-    private boolean updatePath(int inputIndex) {
-        if (inputIndex != 0) {
-            for (int i = 0; i < path.length; i++) {
-                if (path[i] == 0) {
-                    path[i] = inputIndex;
-                    return true;
-                }
-            }
-        } else {
-            for (int i = path.length - 1; i <= 0; i--) {
-                if (path[i] != 0) {
-                    path[i] = inputIndex;
-                    return true;
-                }
-            }
-        }
-        return false;
     }
+//    private boolean updatePath(int inputIndex) {
+//        if (inputIndex != 0) {
+//            for (int i = 0; i < path.length; i++) {
+//                if (path[i] == 0) {
+//                    path[i] = inputIndex;
+//                    return true;
+//                }
+//            }
+//        } else {
+//            for (int i = path.length - 1; i <= 0; i--) {
+//                if (path[i] != 0) {
+//                    path[i] = inputIndex;
+//                    return true;
+//                }
+//            }
+//        }
+//        return false;
+//    }
 
 
     public void setInputIndex(int inputIndex) {
         this.inputIndex = inputIndex;
     }
 
+    public void setDataRegistry(DataRegistry dataRegistry){
+        this.dataRegistry = dataRegistry;
+    }
 
 }

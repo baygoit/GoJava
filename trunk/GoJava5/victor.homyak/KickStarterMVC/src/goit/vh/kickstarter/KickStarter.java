@@ -4,10 +4,13 @@ import goit.vh.kickstarter.model.Category;
 import goit.vh.kickstarter.model.Project;
 import goit.vh.kickstarter.mvc.controller.CategoryController;
 import goit.vh.kickstarter.mvc.controller.MainPageController;
+import goit.vh.kickstarter.mvc.controller.ProjectController;
 import goit.vh.kickstarter.mvc.model.CategoryModel;
 import goit.vh.kickstarter.mvc.model.MainPageModel;
+import goit.vh.kickstarter.mvc.model.ProjectModel;
 import goit.vh.kickstarter.mvc.view.CategoryView;
 import goit.vh.kickstarter.mvc.view.MainPageView;
+import goit.vh.kickstarter.mvc.view.ProjectView;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -24,6 +27,7 @@ public class KickStarter {
     private MainPageController mainPageController;
     private CategoryController categoryController;
     private MainPageView mainPageView;
+    private ProjectController projectController;
     private LocationManager locationManager;
     public static void main(String[] args) {
         KickStarter kickStarter = new KickStarter();
@@ -39,21 +43,28 @@ public class KickStarter {
         Map<Integer,Project[]> hm = new HashMap<Integer, Project[]>();
 
         hm.put(1,new Project[]{new Project("Basketball"), new Project("Surfing"), new Project("Golf")});
-        hm.put(2,new Project[]{new Project("GameOfThrones"), new Project("Manager"), new Project("Bang"), new Project("Bingo")});
-        hm.put(3,new Project[]{new Project("ManInBlack4"), new Project("GreatAdventuresOfJesus")});
+        hm.put(2, new Project[]{new Project("GameOfThrones"), new Project("Manager"), new Project("Bang"), new Project("Bingo")});
+        hm.put(3, new Project[]{new Project("ManInBlack4"), new Project("GreatAdventuresOfJesus")});
         dataRegistry.registerMapOfProjects(hm);
 
 
         MainPageModel mainPageModel = new MainPageModel();
         mainPageModel.setDataRegistry(dataRegistry);
+
+
         CategoryModel categoryModel = new CategoryModel(dataRegistry);
+        ProjectModel projectModel = new ProjectModel(dataRegistry);
          mainPageView = new MainPageView(new Output());
+
+
 
         mainPageController = new MainPageController(mainPageView, mainPageModel);
         categoryController = new CategoryController(new CategoryView(new Output()),categoryModel);
-        locationManager = new LocationManager(mainPageController,categoryController);
+        projectController = new ProjectController(new ProjectView(new Output()),projectModel );
+        locationManager = new LocationManager(mainPageController,categoryController,projectController);
         mainPageController.setLocationManager(locationManager);
         categoryController.setLocationManager(locationManager);
+        locationManager.setDataRegistry(dataRegistry);
     }
 
     private void start() {

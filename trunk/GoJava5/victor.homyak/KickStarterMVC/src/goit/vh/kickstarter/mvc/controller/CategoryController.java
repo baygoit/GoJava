@@ -21,10 +21,10 @@ public class CategoryController {
         this.model = model;
     }
 
-    public void start(int index){
-        model.refreshModel(index);
+    public void start(int[] path){
+        model.refreshModel(path[0]);
         view.render(model);
-        locationManager.listOfProjectsStart();
+        locationManager.listOfProjectsStart(path[0]);
     }
     public void setLocationManager(LocationManager locationManager) {
         this.locationManager = locationManager;

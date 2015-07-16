@@ -6,12 +6,13 @@ import goit.vh.kickstarter.model.Project;
 /**
  * Created by Viktor on 14.07.2015.
  */
-public class ListOfProjectsModel {
+public class ProjectModel {
 
     private DataRegistry dataRegistry;
     private Project[] listOfProjectses;
+    private Project project;
 
-    public ListOfProjectsModel(DataRegistry dataRegistry) {
+    public ProjectModel(DataRegistry dataRegistry) {
         this.dataRegistry = dataRegistry;
     }
 
@@ -23,8 +24,12 @@ public class ListOfProjectsModel {
         this.dataRegistry = dataRegistry;
     }
 
-    public void refreshModel(int input) {
-        listOfProjectses = dataRegistry.getProject(input);
+    public void refreshModel(int[] path) {
+        project = dataRegistry.getProject( path);
+
+    }
+    public void refreshListModel(int input) {
+        listOfProjectses = dataRegistry.getProjectList(input);
 
     }
 }
