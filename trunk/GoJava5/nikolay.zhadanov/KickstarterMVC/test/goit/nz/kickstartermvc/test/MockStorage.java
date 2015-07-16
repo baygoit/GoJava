@@ -66,4 +66,15 @@ public class MockStorage extends DataStorage {
 		projects.add(p5);
 		registerProjects(projects);
 	}
+	
+	//for testing CategoryView
+	public List<Project> getProjects(String catName) {
+		List<Project> projects = new ArrayList<>();
+		for (Project p : getProjects()) {
+			if (p.getCategory().getName().equals(catName)) {
+				projects.add(p);
+			}
+		}
+		return projects;
+	}
 }
