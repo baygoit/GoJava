@@ -49,7 +49,6 @@ public class CategoryViewTest {
 			public Object answer(InvocationOnMock invocation) throws Throwable {
 				Object[] arguments = invocation.getArguments();
 				String str = (String) arguments[0];
-				System.out.println(str);
 				view.add(str);
 				return null;
 			}
@@ -92,7 +91,6 @@ public class CategoryViewTest {
 			public Object answer(InvocationOnMock invocation) throws Throwable {
 				Object[] arguments = invocation.getArguments();
 				String str = (String) arguments[0];
-				System.out.println(str);
 				view.add(str);
 				return null;
 			}

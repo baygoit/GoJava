@@ -4,6 +4,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
 @RunWith(Suite.class)
-@Suite.SuiteClasses({ MainPageViewTest.class, CategoryViewTest.class })
+@Suite.SuiteClasses({ MainPageViewTest.class, CategoryViewTest.class,
+		ProjectViewTest.class })
 public class ViewTestSuite {
 }
