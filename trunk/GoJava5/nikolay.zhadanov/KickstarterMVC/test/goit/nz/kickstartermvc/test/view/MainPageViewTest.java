@@ -105,8 +105,8 @@ public class MainPageViewTest {
 
 		MainPageView mainPageView = new MainPageView(output);
 		mainPageView.printCategories(model);
-		String expectedResult = "Categories are not found!";
-		assertEquals("Wrong categories render", expectedResult,view.get(0));
+		String[] expectedResult = {"", "Categories are not found!", "", "(0 - exit)"};
+		assertArrayEquals("Wrong categories render", expectedResult,view.toArray());
 	}
 
 	@Test
@@ -127,9 +127,9 @@ public class MainPageViewTest {
 
 		MainPageView mainPageView = new MainPageView(output);
 		mainPageView.showMsg("Test");
-		;
-		String expectedResult = "Test";
-		assertEquals("Wrong msg printed", expectedResult, view.get(0));
+		
+		String[] expectedResult = {"", "Test"};
+		assertArrayEquals("Wrong msg printed", expectedResult, view.toArray());
 	}
 
 }

@@ -26,13 +26,14 @@ public class MainPageView {
 						category.getName()));
 				index++;
 			}
-			printOptions(modelSize);
 		} else {
 			showMsg("Categories are not found!");
 		}
+		printOptions(modelSize);
 	}
 
 	public void showMsg(String msg) {
+		output.println("");
 		output.println(msg);
 	}
 
@@ -44,7 +45,11 @@ public class MainPageView {
 
 	private void printOptions(int modelSize) {
 		output.println("");
-		output.println(String.format("Choose your option [1 - %d] (0 - exit)",
-				modelSize));
+		if (modelSize > 0) {
+			output.println(String.format(
+					"Choose your option [1 - %d] (0 - exit)", modelSize));
+		} else {
+			output.println("(0 - exit)");
+		}
 	}
 }
