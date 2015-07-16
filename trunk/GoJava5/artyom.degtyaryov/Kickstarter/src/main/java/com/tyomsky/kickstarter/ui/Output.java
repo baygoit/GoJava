@@ -4,6 +4,6 @@ import java.util.ArrayList;
 
 public interface Output {
 
-	void print(ArrayList<String> view);
+	void print(String str);
 
 }

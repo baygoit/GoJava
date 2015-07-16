@@ -1,5 +1,7 @@
 package com.tyomsky.kickstarter.model;
 
+import com.tyomsky.kickstarter.mvc.model.AbstractPageModel;
+
 import java.util.List;
 
 public class Project {

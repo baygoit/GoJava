@@ -1,29 +1,20 @@
 package com.tyomsky.kickstarter.mvc.controller;
 
-import com.tyomsky.kickstarter.mvc.model.CategoryModel;
-import com.tyomsky.kickstarter.mvc.view.CategoryView;
+import com.tyomsky.kickstarter.model.Category;
+import com.tyomsky.kickstarter.mvc.model.CategoryPageModel;
+import com.tyomsky.kickstarter.mvc.view.CategoryPageView;
 
-public class CategoryController {
+public class CategoryController extends AbstractController<CategoryPageModel, CategoryPageView> implements InputListener{
 
-    CategoryModel model;
-    CategoryView view;
-
-    public CategoryController(CategoryView view, CategoryModel model) {
-        this.view = view;
-        this.model = model;
+    public CategoryController(CategoryPageModel model, CategoryPageView view) {
+        super(model, view);
     }
 
-    public boolean showModel(int index) {
-        boolean isShown = false;
-        try {
-            model.update(index);
-            view.show(model);
-            isShown = true;
-        } catch (IllegalArgumentException e) {
-            System.err.println(e);
-            isShown = false;
+    @Override
+    public void onInput(int... input) {
+        if (!(input.length < 1)) {
+            int projectId = input[0];
+            model.update(projectId);
         }
-        return isShown;
     }
-
 }

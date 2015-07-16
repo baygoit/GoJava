@@ -4,40 +4,29 @@ import com.tyomsky.kickstarter.model.Category;
 import com.tyomsky.kickstarter.ui.Output;
 import com.tyomsky.kickstarter.mvc.model.MainPageModel;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class MainPageView {
-
-    private ArrayList<String> layout = new ArrayList<>();
-    private Output output;
+public class MainPageView extends AbstractPageView<MainPageModel> implements ModelUpdateListener<MainPageModel> {
 
     public MainPageView(Output output) {
-        this.output = output;
+        super(output);
     }
 
-    public void prepareLayout(MainPageModel model) {
-        layout.clear();
-        layout.add(model.getQuote());
-        layout.add("Welcome to KickStarter");
-        fillMenu(model);
-    }
-
-    private void fillMenu(MainPageModel model) {
+    @Override
+    public void render(MainPageModel model) {
+        output.print(model.getQuote());
+        output.print("");
         List<Category> categories = model.getCategories();
         for (int i = 0; i < categories.size(); i++) {
-            layout.add(String.valueOf(i + 1) + ") " + categories.get(i).getName());
+            output.print(String.valueOf(i + 1)+") " + categories.get(i).getName());
         }
-        layout.add("");
-        layout.add("0) Exit");
+        output.print("");
+        output.print("0) Exit");
     }
 
-    public void show(MainPageModel model) {
-        prepareLayout(model);
-        output.print(layout);
+    @Override
+    public void onModelUpdate(MainPageModel model) {
+        render(model);
     }
 
-    public ArrayList<String> getLayout() {
-        return layout;
-    }
 }

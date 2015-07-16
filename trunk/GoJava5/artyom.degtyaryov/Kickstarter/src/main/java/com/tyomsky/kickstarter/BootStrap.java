@@ -1,6 +1,6 @@
 package com.tyomsky.kickstarter;
 
-import com.tyomsky.kickstarter.dao.MockDataProvider;
+import com.tyomsky.kickstarter.dao.MockDataRegistry;
 import com.tyomsky.kickstarter.ui.Console;
 import com.tyomsky.kickstarter.ui.Input;
 
@@ -10,7 +10,7 @@ public class BootStrap {
         Configuration configuration = getConfiguration();
         Kickstarter kickStarter = new Kickstarter();
         Dispatcher dispatcher = new Dispatcher();
-        dispatcher.initControllers(configuration);
+        dispatcher.initEnviroment(configuration);
         Input input = new Console();
         input.setInputListener(dispatcher);
         kickStarter.init(input, dispatcher);
@@ -19,7 +19,7 @@ public class BootStrap {
 
     private static Configuration getConfiguration() {
         Configuration configuration = new Configuration();
-        configuration.setDataProvider(new MockDataProvider());
+        configuration.setDataProvider(new MockDataRegistry());
         configuration.setOutput(new Console());
         return configuration;
     }

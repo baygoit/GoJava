@@ -5,10 +5,10 @@ import java.util.*;
 import com.tyomsky.kickstarter.model.Category;
 import com.tyomsky.kickstarter.model.Project;
 
-public class MockDataProvider implements DataProvider {
+public class MockDataRegistry implements DataRegistry {
     private List<Category> categories = new ArrayList<>();
 
-    public MockDataProvider() {
+    public MockDataRegistry() {
         Random random = new Random();
         for (int i = 0; i < 5 + random.nextInt(5); i++) {
             Category category = new Category("Category " + i);
@@ -37,7 +37,8 @@ public class MockDataProvider implements DataProvider {
     }
 
     @Override
-    public Category getCategory(int categoryIndex) {
+    public Category getCategoryById(int categoryId) {
+        int categoryIndex = getIndexByID(categoryId);
         if (categoryIndex < categories.size()) {
             return categories.get(categoryIndex);
         } else {
@@ -46,12 +47,19 @@ public class MockDataProvider implements DataProvider {
     }
 
     @Override
-    public Project getProject(int categoryIndex, int projectIndex) {
+    public Project getProjectById(int categoryId, int projectId) {
+        int categoryIndex = getIndexByID(categoryId);
+        int projectIndex = getIndexByID(projectId);
         if (categoryIndex < categories.size() && projectIndex < categories.get(categoryIndex).getProjects().size()) {
             return categories.get(categoryIndex).getProjects().get(projectIndex);
         } else {
             throw new IllegalArgumentException("project with this id doesn't exists");
         }
+    }
+
+    private int getIndexByID(int id) {
+        //some magic
+        return id - 1;
     }
 
 }

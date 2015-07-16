@@ -1,6 +1,6 @@
 package com.tyomsky.kickstarter.mvc.model;
 
-import com.tyomsky.kickstarter.dao.DataProvider;
+import com.tyomsky.kickstarter.dao.DataRegistry;
 import com.tyomsky.kickstarter.model.Category;
 import com.tyomsky.kickstarter.model.Project;
 import org.junit.Before;
@@ -18,7 +18,7 @@ import static org.mockito.Mockito.when;
 public class MainPageModelTest {
 
     @Mock
-    DataProvider dataProvider;
+    DataRegistry dataProvider;
 
     @InjectMocks
     MainPageModel model;

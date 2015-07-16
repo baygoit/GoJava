@@ -1,6 +1,6 @@
 package com.tyomsky.kickstarter.mvc.model;
 
-import com.tyomsky.kickstarter.dao.DataProvider;
+import com.tyomsky.kickstarter.dao.DataRegistry;
 import com.tyomsky.kickstarter.model.Category;
 import org.junit.Before;
 import org.junit.Test;
@@ -12,16 +12,16 @@ import org.mockito.MockitoAnnotations;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.when;
 
-public class CategoryModelTest {
+public class CategoryPageModelTest {
 
     @Mock
-    DataProvider dataProvider;
+    DataRegistry dataProvider;
 
     @Mock
     Category category;
 
     @InjectMocks
-    CategoryModel model;
+    CategoryPageModel model;
 
     @Before
     public void setUp() {
@@ -31,7 +31,7 @@ public class CategoryModelTest {
     @Test
     public void whenUpdateThenReturnCategory() {
         int categoryIndex = 1;
-        when(dataProvider.getCategory(categoryIndex)).thenReturn(category);
+        when(dataProvider.getCategoryById(categoryIndex)).thenReturn(category);
 
         Category expected = category;
         model.update(categoryIndex);

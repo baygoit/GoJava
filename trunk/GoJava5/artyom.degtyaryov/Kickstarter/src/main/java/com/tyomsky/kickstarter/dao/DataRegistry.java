@@ -4,14 +4,14 @@ import com.tyomsky.kickstarter.model.Category;
 import com.tyomsky.kickstarter.model.Project;
 import java.util.List;
 
-public interface DataProvider {
+public interface DataRegistry {
 
     List<Category> getCategoriesList();
 
     String getSomeQuote();
 
-    Category getCategory(int categoryIndex);
+    Category getCategoryById(int categoryId);
 
-	Project getProject(int category, int project);
+	Project getProjectById(int categoryId, int projectId);
 
 }

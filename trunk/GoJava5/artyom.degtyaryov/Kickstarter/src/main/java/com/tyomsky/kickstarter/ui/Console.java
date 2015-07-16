@@ -25,16 +25,12 @@ public class Console implements Input, Output {
     }
 
     @Override
-    public void print(ArrayList<String> view) {
-        clearConsole();
-        for (String string : view) {
-            System.out.println(string);
-        }
-
+    public void print(String str) {
+        System.out.println(str);
     }
 
     private void clearConsole() {
-        System.out.println("\n\n\n\n\n\n\n");
+        System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
     }
 
     @Override

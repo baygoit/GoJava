@@ -4,22 +4,15 @@ import com.tyomsky.kickstarter.mvc.model.MainPageModel;
 import com.tyomsky.kickstarter.mvc.view.MainPageView;
 
 
-public class MainPageController {
+public class MainPageController extends AbstractController<MainPageModel, MainPageView> implements InputListener{
 
-    private MainPageModel model;
-    private MainPageView view;
 
-    public MainPageController(MainPageView view, MainPageModel model) {
-        this.view = view;
-        this.model = model;
+    public MainPageController(MainPageModel model, MainPageView view) {
+        super(model, view);
     }
 
-    public boolean showModel() {
-        boolean isShown = false;
+    @Override
+    public void onInput(int... input) {
         model.update();
-        view.show(model);
-        isShown = true;
-        return isShown;
     }
-
 }
