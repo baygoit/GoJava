@@ -3,7 +3,7 @@ package calculator;
 public class Calc {
 
     public static int calc(int num1, String operand, int num2){
-        int res = 0;
+        int res;
         switch(operand){
             case "+": res = num1 + num2;
                 break;
