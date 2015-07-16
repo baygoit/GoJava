@@ -9,7 +9,6 @@ import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 import ua.goit.kyrychok.kickstarter.Output;
 import ua.goit.kyrychok.kickstarter.TestDataProvider;
-import ua.goit.kyrychok.kickstarter.Utils;
 import ua.goit.kyrychok.kickstarter.model.Faq;
 import ua.goit.kyrychok.kickstarter.model.Project;
 import ua.goit.kyrychok.kickstarter.model.ProjectEvent;
@@ -65,7 +64,8 @@ public class ProjectViewTest {
                 return null;
             }
         }).when(output).writeLine(anyString());
-        ProjectView projectView = new ProjectView(output);
+        ProjectView projectView = new ProjectView();
+        projectView.setOutput(output);
 
         projectView.render(model);
 
@@ -85,7 +85,7 @@ public class ProjectViewTest {
         }
         expectedResult.add("Actions:");
         expectedResult.add("[1]. Ask a question");
-        expectedResult.add(Utils.CHOICE_MESSAGE);
+        expectedResult.add(BaseView.CHOICE_MESSAGE);
 
         Assert.assertArrayEquals("Not expected Project rendering", expectedResult.toArray(), view.toArray());
     }

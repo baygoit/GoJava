@@ -22,13 +22,13 @@ public class TestDataProvider {
         Category category;
         Project project;
         category = new Category("Category 1");
-        project = new Project("1st project", "desc", 10000, 350000, convertDate("01.07.2015"), convertDate("01.08.2015"), "http://stackoverflow.com/");
+        project = new Project("1st project", "desc", 10010, 350000, convertDate("01.07.2015"), convertDate("01.08.2015"), "http://stackoverflow.com/");
         project.addFaq(new Faq("Question 1", "Answer on question 1"));
         project.addFaq(new Faq("Question 2", "Answer on question 2"));
         project.addProjectEvent(new ProjectEvent(convertDate("01.01.2015"), "Project event 1"));
         project.addProjectEvent(new ProjectEvent(convertDate("01.07.2015"), "Project event 2"));
         category.addProject(project);
-        project = new Project("2nd project", "desc", 10000, 350000, convertDate("01.07.2015"), convertDate("01.08.2015"), "http://stackoverflow.com/");
+        project = new Project("2nd project", "desc", 10010, 350000, convertDate("01.07.2015"), convertDate("01.08.2015"), "http://stackoverflow.com/");
         category.addProject(project);
         categories.add(category);
         categories.add(new Category("Category 2"));

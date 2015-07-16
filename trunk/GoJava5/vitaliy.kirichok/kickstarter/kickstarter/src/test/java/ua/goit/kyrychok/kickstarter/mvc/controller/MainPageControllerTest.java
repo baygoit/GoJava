@@ -7,9 +7,6 @@ import org.mockito.MockitoAnnotations;
 import ua.goit.kyrychok.kickstarter.mvc.model.MainPageModel;
 import ua.goit.kyrychok.kickstarter.mvc.view.MainPageView;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
@@ -26,12 +23,12 @@ public class MainPageControllerTest {
     }
 
     @Test()
-    public void onUpdateModelRenderMainPage() throws Exception {
-        MainPageController controller = new MainPageController(model, view);
-        List<String> input = new ArrayList<>();
-        input.add("-1");
+    public void whenShowModelRenderMainPage() throws Exception {
+        MainPageController controller = new MainPageController();
+        controller.setView(view);
+        controller.setModel(model);
 
-        controller.onInput(input);
+        controller.showModel();
 
         verify(view, times(1)).render(model);
     }

@@ -13,7 +13,7 @@ public class DataProviderTest {
     public void whenGetMsgThenReturnNotEmpty() throws Exception {
         DataProvider dataProvider = new DataProvider();
 
-        String result = dataProvider.getHelloMessage();
+        String result = dataProvider.getWelcomeMessage();
 
         Assert.assertNotNull("Hello message must be not null", result);
         Assert.assertTrue("Hello message must be not empty", result.trim().length() > 0);

@@ -20,6 +20,7 @@ import java.util.List;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.when;
+import static ua.goit.kyrychok.kickstarter.Utils.getMoney;
 
 public class CategoryViewTest {
 
@@ -53,22 +54,23 @@ public class CategoryViewTest {
                 return null;
             }
         }).when(output).writeLine(anyString());
-        CategoryView categoryView = new CategoryView(output);
+        CategoryView categoryView = new CategoryView();
+        categoryView.setOutput(output);
 
         categoryView.render(model);
         List<String> expectedResult = new ArrayList<>();
         expectedResult.add("Test Category");
         expectedResult.add("[1]. 1st project");
         expectedResult.add("     Short Description: desc");
-        expectedResult.add("     Goal: 100,00");
-        expectedResult.add("     Balance: 3500,00");
+        expectedResult.add(String.format("     Goal: %s", getMoney(projects.get(0).getGoal())));
+        expectedResult.add(String.format("     Balance: %s", getMoney(projects.get(0).getBalance())));
         expectedResult.add(String.format("     %s", Utils.getDiffDate(projects.get(0).getDeadlineDate(), new Date())));
         expectedResult.add("[2]. 2nd project");
         expectedResult.add("     Short Description: desc");
-        expectedResult.add("     Goal: 100,00");
-        expectedResult.add("     Balance: 3500,00");
+        expectedResult.add(String.format("     Goal: %s", getMoney(projects.get(1).getGoal())));
+        expectedResult.add(String.format("     Balance: %s", getMoney(projects.get(1).getBalance())));
         expectedResult.add(String.format("     %s", Utils.getDiffDate(projects.get(1).getDeadlineDate(), new Date())));
-        expectedResult.add(Utils.CHOICE_MESSAGE);
+        expectedResult.add(BaseView.CHOICE_MESSAGE);
         Assert.assertArrayEquals("Not expected Category rendering", expectedResult.toArray(), view.toArray());
     }
 }

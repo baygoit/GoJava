@@ -36,7 +36,7 @@ public class CategoryModelTest {
         Category category = testDataProvider.getCategory(0);
         when(dataProvider.getCategory(anyInt())).thenReturn(category);
 
-        model.update(anyInt());
+        model.update();
         List<Project> resultProjects = model.getProjects();
         String resultName = model.getName();
 

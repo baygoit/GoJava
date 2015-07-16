@@ -1,21 +1,15 @@
 package ua.goit.kyrychok.kickstarter.mvc.model;
 
-import ua.goit.kyrychok.kickstarter.DataProvider;
 import ua.goit.kyrychok.kickstarter.model.Category;
 
 import java.util.List;
 
 
-public class MainPageModel {
-    private DataProvider dataProvider;
+public class MainPageModel extends BaseModel {
     private List<Category> categories;
 
-    public MainPageModel(DataProvider dataProvider) {
-        this.dataProvider = dataProvider;
-    }
-
-    public String getHelloMessage() {
-        return dataProvider.getHelloMessage();
+    public String getWelcomeMessage() {
+        return getDataProvider().getWelcomeMessage();
     }
 
     public List<Category> getCategories() {
@@ -23,7 +17,7 @@ public class MainPageModel {
     }
 
     public void update() {
-        categories = dataProvider.getCategories();
+        categories = getDataProvider().getCategories();
     }
 
     public int getCount() {

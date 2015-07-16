@@ -4,20 +4,18 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import ua.goit.kyrychok.kickstarter.mvc.model.ProjectModel;
-import ua.goit.kyrychok.kickstarter.mvc.view.ProjectView;
+import ua.goit.kyrychok.kickstarter.mvc.model.FaqModel;
+import ua.goit.kyrychok.kickstarter.mvc.view.FaqView;
 
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
-public class ProjectControllerTest {
+public class FaqControllerTest {
 
     @Mock
-    private ProjectModel model;
+    private FaqModel model;
     @Mock
-    private ProjectView view;
-    @Mock
-    private BaseController baseController;
+    private FaqView view;
 
     @Before
     public void setUp() throws Exception {
@@ -25,9 +23,8 @@ public class ProjectControllerTest {
     }
 
     @Test()
-    public void whenShowModelRenderMainPage() throws Exception {
-        ProjectController controller = new ProjectController();
-        controller.setParentController(baseController);
+    public void whenShowModelRenderFaqPage() throws Exception {
+        FaqController controller = new FaqController();
         controller.setView(view);
         controller.setModel(model);
 
@@ -35,4 +32,5 @@ public class ProjectControllerTest {
 
         verify(view, times(1)).render(model);
     }
+
 }

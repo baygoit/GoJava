@@ -37,7 +37,7 @@ public class ProjectModelTest {
         Project project = testDataProvider.getProject(0, 0);
         when(dataProvider.getProject(anyInt(), anyInt())).thenReturn(project);
 
-        model.update(anyInt(), anyInt());
+        model.update(-1);
         List<Faq> resultFaqs = model.getFaqs();
         List<ProjectEvent> resultProjectEvents = model.getProjectEvent();
 
@@ -50,16 +50,4 @@ public class ProjectModelTest {
         Assert.assertArrayEquals("FAQs must be the same as registered", project.getFaqs().toArray(), resultFaqs.toArray());
         Assert.assertArrayEquals("Project Events must be the same as registered", project.getProjectEvents().toArray(), resultProjectEvents.toArray());
     }
-/*
-    @Test
-    public void whenIsFaqExistsThenReturnFalse() throws Exception{
-        //when(project.getFaqs()).thenReturn(new ArrayList<Faq>());
-        Project project = mock(Project.class);
-        when(project.getName()).thenReturn("zzz");
-        ProjectModel projectModel = new ProjectModel(dataProvider);
-        String result = projectModel.getName();
-        Assert.assertEquals(result, "zzz");
-        //boolean result = model.isFaqExists();
-        //Assert.assertTrue(result);
-    }*/
 }

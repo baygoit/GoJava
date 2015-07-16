@@ -1,6 +1,5 @@
 package ua.goit.kyrychok.kickstarter.mvc.view;
 
-import ua.goit.kyrychok.kickstarter.Output;
 import ua.goit.kyrychok.kickstarter.model.Faq;
 import ua.goit.kyrychok.kickstarter.model.ProjectEvent;
 import ua.goit.kyrychok.kickstarter.mvc.model.ProjectModel;
@@ -10,37 +9,32 @@ import java.util.List;
 
 import static ua.goit.kyrychok.kickstarter.Utils.*;
 
-public class ProjectView {
-    private Output output;
-
-    public ProjectView(Output output) {
-        this.output = output;
-    }
+public class ProjectView extends BaseView {
 
     public void render(ProjectModel model) {
-        output.writeLine(String.format("Project name: %s", model.getName()));
-        output.writeLine(String.format("Short Description: %s", model.getShortDescription()));
-        output.writeLine(String.format("Demo link: %s", model.getDemoLink()));
-        output.writeLine(String.format("Balance: %s; Goal: %s; Time left: %s", getMoney(model.getBalance()), getMoney(model.getGoal()), getDiffDate(model.getDeadlineDate(), new Date())));
+        getOutput().writeLine(String.format("Project name: %s", model.getName()));
+        getOutput().writeLine(String.format("Short Description: %s", model.getShortDescription()));
+        getOutput().writeLine(String.format("Demo link: %s", model.getDemoLink()));
+        getOutput().writeLine(String.format("Balance: %s; Goal: %s; Time left: %s", getMoney(model.getBalance()), getMoney(model.getGoal()), getDiffDate(model.getDeadlineDate(), new Date())));
         if (model.isFaqExists()) {
-            output.writeLine("FAQ:");
+            getOutput().writeLine("FAQ:");
             List<Faq> faqs = model.getFaqs();
             Faq faq;
             for (int counter = 0; counter < faqs.size(); counter++) {
                 faq = faqs.get(counter);
-                output.writeLine(String.format("  %s. <%s>", counter + 1, faq.getQuestion()));
-                output.writeLine(String.format("      %s", faq.getAnswer()));
+                getOutput().writeLine(String.format("  %s. <%s>", counter + 1, faq.getQuestion()));
+                getOutput().writeLine(String.format("      %s", faq.getAnswer()));
             }
         }
         if (model.isProjectEvenExists()) {
-            output.writeLine("Project events:");
+            getOutput().writeLine("Project events:");
             List<ProjectEvent> projectEvents = model.getProjectEvent();
             for (ProjectEvent projectEvent : projectEvents) {
-                output.writeLine(String.format("  %s: %s", getDate(projectEvent.getEventDate()), projectEvent.getMessage()));
+                getOutput().writeLine(String.format("  %s: %s", getDate(projectEvent.getEventDate()), projectEvent.getMessage()));
             }
         }
-        output.writeLine("Actions:");
-        output.writeLine("[1]. Ask a question");
-        output.writeLine(CHOICE_MESSAGE);
+        getOutput().writeLine("Actions:");
+        getOutput().writeLine("[1]. Ask a question");
+        getOutput().writeLine(CHOICE_MESSAGE);
     }
 }

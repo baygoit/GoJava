@@ -1,19 +1,19 @@
 package ua.goit.kyrychok.kickstarter.mvc.controller;
 
-import java.util.List;
-
 public abstract class BaseController {
-    private BaseController previousController;
+    public static final String EXIT_CODE = "0";
+
+    private BaseController parentController;
     private BaseController childController;
     private BaseController nextController;
     private boolean needNextImmediateExecute;
 
-    public BaseController getPreviousController() {
-        return previousController;
+    public BaseController getParentController() {
+        return parentController;
     }
 
-    public void setPreviousController(BaseController previousController) {
-        this.previousController = previousController;
+    public void setParentController(BaseController parentController) {
+        this.parentController = parentController;
     }
 
     public BaseController getChildController() {
@@ -40,5 +40,29 @@ public abstract class BaseController {
         this.needNextImmediateExecute = needNextImmediateExecute;
     }
 
-    public abstract void onInput(List<String> input);
+    public abstract void onInput(String input);
+
+    public abstract void showModel();
+
+    public void setModelIdentifier(int identifier) {
+
+    }
+
+    public int getModelIdentifier() {
+        return 0;
+    }
+
+    public void onShowModel() {
+        setNextController(this);
+        setNeedNextImmediateExecute(true);
+    }
+
+    public void doExit() {
+        setNextController(getParentController());
+        setNeedNextImmediateExecute(true);
+    }
+
+    public boolean isExit(String input) {
+        return EXIT_CODE.equals(input);
+    }
 }

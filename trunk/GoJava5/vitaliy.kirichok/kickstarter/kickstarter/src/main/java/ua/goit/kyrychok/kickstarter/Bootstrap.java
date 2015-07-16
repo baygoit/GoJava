@@ -34,8 +34,7 @@ public class Bootstrap {
 
         Output output = new Output();
 
-        KickStarter kickStarter = new KickStarter();
-        kickStarter.init(dataProvider, output);
+        KickStarter kickStarter = new KickStarter(dataProvider, output);
         kickStarter.run();
     }
 }

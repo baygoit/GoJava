@@ -5,7 +5,7 @@ public class KickStarter {
     private Output output;
     private Dispatcher dispatcher;
 
-    public void init(DataProvider dataProvider, Output output) {
+    public KickStarter(DataProvider dataProvider, Output output) {
         this.dataProvider = dataProvider;
         this.output = output;
     }

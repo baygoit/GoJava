@@ -1,12 +1,11 @@
 package ua.goit.kyrychok.kickstarter;
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 public class Utils {
-    public static final String EXIT_CODE = "0";
-    public static final String CHOICE_MESSAGE = String.format("Your choice(%s - exit): ", EXIT_CODE);
 
     public static Date convertDate(String date) {
         Date result = new Date();
@@ -38,11 +37,11 @@ public class Utils {
         Map<TimeUnit, Long> diff = Utils.computeDiff(currentDate, deadLineDate);
         String result;
         if (diff.get(TimeUnit.DAYS) > 0) {
-            result = String.format("%s days to go", diff.get(TimeUnit.DAYS));
+            result = String.format("%s days", diff.get(TimeUnit.DAYS));
         } else if (diff.get(TimeUnit.HOURS) > 0) {
-            result = String.format("%s hours to go", diff.get(TimeUnit.HOURS));
+            result = String.format("%s hours", diff.get(TimeUnit.HOURS));
         } else if (diff.get(TimeUnit.MINUTES) > 0) {
-            result = String.format("%s minutes to go", diff.get(TimeUnit.MINUTES));
+            result = String.format("%s minutes", diff.get(TimeUnit.MINUTES));
         } else {
             result = "time is up";
         }
@@ -50,7 +49,8 @@ public class Utils {
     }
 
     public static String getMoney(Integer money) {
-        return String.format("%.2f", new Float(money) / 100);
+        double value = new Double(money) / 100;
+        return new DecimalFormat("#.##").format(value);
     }
 
     public static String getDate(Date date) {
@@ -60,11 +60,4 @@ public class Utils {
         }
         return result;
     }
-
-    public static void deleteLastElements(List<String> input, int count) {
-        for (int counter = 0; counter < count; counter++) {
-            input.remove(input.size() - 1);
-        }
-    }
-
 }

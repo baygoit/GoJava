@@ -8,8 +8,7 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 import ua.goit.kyrychok.kickstarter.Output;
-import ua.goit.kyrychok.kickstarter.TestDataProvider;
-import ua.goit.kyrychok.kickstarter.mvc.model.MainPageModel;
+import ua.goit.kyrychok.kickstarter.mvc.model.FaqModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,10 +17,9 @@ import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.when;
 
-public class MainPageViewTest {
-
+public class FaqViewTest {
     @Mock
-    private MainPageModel model;
+    private FaqModel model;
     @Mock
     private Output output;
 
@@ -31,12 +29,8 @@ public class MainPageViewTest {
     }
 
     @Test
-    public void whenRenderMainPageThenPrintWelcomeMsgAndCategoriesList() throws Exception {
-        when(model.getWelcomeMessage()).thenReturn("Test Msg");
-
-        TestDataProvider testDataProvider = new TestDataProvider();
-        testDataProvider.init();
-        when(model.getCategories()).thenReturn(testDataProvider.getCategories());
+    public void whenRenderThenPrintInviteMessage() throws Exception {
+        when(model.getInviteMessage()).thenReturn("Test Msg");
 
         final List<String> view = new ArrayList<>();
 
@@ -49,11 +43,13 @@ public class MainPageViewTest {
                 return null;
             }
         }).when(output).writeLine(anyString());
-        MainPageView mainPageView = new MainPageView();
-        mainPageView.setOutput(output);
 
-        mainPageView.render(model);
-        String[] expectedResult = {"Test Msg", "[1]. Category 1", "[2]. Category 2", "[3]. Category 3", BaseView.CHOICE_MESSAGE};
+        FaqView faqView = new FaqView();
+        faqView.setOutput(output);
+
+        faqView.render(model);
+        String[] expectedResult = {"Test Msg", BaseView.CHOICE_MESSAGE};
         Assert.assertArrayEquals("Not expected MainPage rendering", expectedResult, view.toArray());
     }
+
 }

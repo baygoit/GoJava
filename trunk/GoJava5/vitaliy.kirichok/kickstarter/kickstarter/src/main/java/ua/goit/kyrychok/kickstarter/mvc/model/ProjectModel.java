@@ -1,6 +1,5 @@
 package ua.goit.kyrychok.kickstarter.mvc.model;
 
-import ua.goit.kyrychok.kickstarter.DataProvider;
 import ua.goit.kyrychok.kickstarter.model.Faq;
 import ua.goit.kyrychok.kickstarter.model.Project;
 import ua.goit.kyrychok.kickstarter.model.ProjectEvent;
@@ -8,16 +7,11 @@ import ua.goit.kyrychok.kickstarter.model.ProjectEvent;
 import java.util.Date;
 import java.util.List;
 
-public class ProjectModel {
-    private DataProvider dataProvider;
+public class ProjectModel extends BaseModel {
     private Project project;
 
-    public ProjectModel(DataProvider dataProvider) {
-        this.dataProvider = dataProvider;
-    }
-
-    public void update(int categoryIndex, int projectIndex) {
-        this.project = dataProvider.getProject(categoryIndex, projectIndex);
+    public void update(int categoryIndex) {
+        this.project = getDataProvider().getProject(categoryIndex, getIdentifier());
     }
 
     public String getName() {

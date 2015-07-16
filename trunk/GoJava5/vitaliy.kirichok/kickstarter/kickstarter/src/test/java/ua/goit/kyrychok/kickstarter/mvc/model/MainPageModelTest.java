@@ -29,9 +29,9 @@ public class MainPageModelTest {
 
     @Test
     public void whenGetMsgThenReturnNotNull() throws Exception {
-        when(dataProvider.getHelloMessage()).thenReturn("Hello Msg");
+        when(dataProvider.getWelcomeMessage()).thenReturn("Hello Msg");
 
-        String result = model.getHelloMessage();
+        String result = model.getWelcomeMessage();
 
         Assert.assertNotNull("Hello msg must not be null", result);
         Assert.assertEquals("Hello Msg must be the same as in date registry", "Hello Msg", result);

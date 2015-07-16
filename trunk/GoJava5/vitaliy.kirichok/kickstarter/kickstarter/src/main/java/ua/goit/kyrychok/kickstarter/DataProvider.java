@@ -8,13 +8,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DataProvider {
-    private static final String HELLO_MESSAGE = "This is HelloMessage";
+    private static final String WELCOME_MESSAGE = "This is HelloMessage";
 
-    private String helloMessage = HELLO_MESSAGE;
+    private String welcomeMessage = WELCOME_MESSAGE;
     private List<Category> categories;
 
-    public String getHelloMessage() {
-        return helloMessage;
+    public String getWelcomeMessage() {
+        return welcomeMessage;
     }
 
     public List<Category> getCategories() {
