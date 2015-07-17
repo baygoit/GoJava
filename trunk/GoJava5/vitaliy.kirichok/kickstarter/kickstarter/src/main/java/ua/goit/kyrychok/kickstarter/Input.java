@@ -12,7 +12,7 @@ public class Input {
     public void listenInput() {
         Scanner scanner = new Scanner(System.in);
         try {
-            while (scanner.hasNext()) {
+            while (scanner.hasNextLine()) {
                 inputListener.onInput(scanner.nextLine());
             }
             scanner.close();

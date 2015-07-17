@@ -43,4 +43,9 @@ public class DataProvider {
     public void addFaq(int categoryIndex, int projectIndex, Faq faq) {
         categories.get(categoryIndex).getProjects().get(projectIndex).addFaq(faq);
     }
+
+    public void incProjectBalance(int categoryIndex, int projectIndex, Integer amount) {
+        Project project = categories.get(categoryIndex).getProjects().get(projectIndex);
+        project.setBalance(project.getBalance() + amount);
+    }
 }

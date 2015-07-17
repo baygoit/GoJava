@@ -1,14 +1,8 @@
 package ua.goit.kyrychok.kickstarter;
 
 import ua.goit.kyrychok.kickstarter.mvc.controller.*;
-import ua.goit.kyrychok.kickstarter.mvc.model.CategoryModel;
-import ua.goit.kyrychok.kickstarter.mvc.model.FaqModel;
-import ua.goit.kyrychok.kickstarter.mvc.model.MainPageModel;
-import ua.goit.kyrychok.kickstarter.mvc.model.ProjectModel;
-import ua.goit.kyrychok.kickstarter.mvc.view.CategoryView;
-import ua.goit.kyrychok.kickstarter.mvc.view.FaqView;
-import ua.goit.kyrychok.kickstarter.mvc.view.MainPageView;
-import ua.goit.kyrychok.kickstarter.mvc.view.ProjectView;
+import ua.goit.kyrychok.kickstarter.mvc.model.*;
+import ua.goit.kyrychok.kickstarter.mvc.view.*;
 
 public class Dispatcher implements InputListener {
     private BaseController currentController;
@@ -46,12 +40,23 @@ public class Dispatcher implements InputListener {
         faqController.setModel(faqModel);
         faqController.setView(faqView);
 
+        PaymentController paymentController = new PaymentController();
+        PaymentView paymentView = new PaymentView();
+        paymentView.setOutput(output);
+        PaymentModel paymentModel = new PaymentModel();
+        paymentModel.setDataProvider(dataProvider);
+        paymentController.setModel(paymentModel);
+        paymentController.setView(paymentView);
+
         mainPageController.setChildController(categoryController);
         categoryController.setChildController(projectController);
         categoryController.setParentController(mainPageController);
         projectController.setParentController(categoryController);
         projectController.setFaqController(faqController);
+        projectController.setPaymentController(paymentController);
         faqController.setParentController(projectController);
+        paymentController.setParentController(projectController);
+
         currentController = mainPageController;
     }
 

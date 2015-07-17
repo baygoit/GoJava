@@ -41,6 +41,10 @@ public class Project {
         return balance;
     }
 
+    public void setBalance(Integer balance) {
+        this.balance = balance;
+    }
+
     public Date getDeadlineDate() {
         return deadlineDate;
     }

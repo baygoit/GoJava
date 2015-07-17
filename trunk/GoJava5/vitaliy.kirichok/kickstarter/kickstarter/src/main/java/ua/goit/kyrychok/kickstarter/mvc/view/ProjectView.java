@@ -35,6 +35,7 @@ public class ProjectView extends BaseView {
         }
         getOutput().writeLine("Actions:");
         getOutput().writeLine("[1]. Ask a question");
+        getOutput().writeLine("[2]. Invest");
         getOutput().writeLine(CHOICE_MESSAGE);
     }
 }

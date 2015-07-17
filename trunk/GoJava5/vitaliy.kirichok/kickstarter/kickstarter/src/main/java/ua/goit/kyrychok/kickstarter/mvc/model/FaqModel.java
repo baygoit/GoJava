@@ -5,7 +5,7 @@ import ua.goit.kyrychok.kickstarter.model.Faq;
 public class FaqModel extends BaseModel {
 
     public String getInviteMessage() {
-        return "Enter your question";
+        return "Enter your question(%s): ";
     }
 
     public void setQuestion(int categoryIndex, int projectIndex, String question) {

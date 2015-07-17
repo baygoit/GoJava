@@ -30,7 +30,7 @@ public class FaqViewTest {
 
     @Test
     public void whenRenderThenPrintInviteMessage() throws Exception {
-        when(model.getInviteMessage()).thenReturn("Test Msg");
+        when(model.getInviteMessage()).thenReturn(String.format("Test Msg(%s): ", BaseView.CHOICE_MESSAGE_SHORT));
 
         final List<String> view = new ArrayList<>();
 
@@ -48,7 +48,7 @@ public class FaqViewTest {
         faqView.setOutput(output);
 
         faqView.render(model);
-        String[] expectedResult = {"Test Msg", BaseView.CHOICE_MESSAGE};
+        String[] expectedResult = {String.format("Test Msg(%s): ", BaseView.CHOICE_MESSAGE_SHORT)};
         Assert.assertArrayEquals("Not expected MainPage rendering", expectedResult, view.toArray());
     }
 

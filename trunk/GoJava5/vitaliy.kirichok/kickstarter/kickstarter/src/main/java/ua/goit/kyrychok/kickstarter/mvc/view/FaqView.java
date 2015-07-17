@@ -5,7 +5,6 @@ import ua.goit.kyrychok.kickstarter.mvc.model.FaqModel;
 public class FaqView extends BaseView {
 
     public void render(FaqModel model) {
-        getOutput().writeLine(model.getInviteMessage());
-        getOutput().writeLine(CHOICE_MESSAGE);
+        getOutput().writeLine(String.format(model.getInviteMessage(), CHOICE_MESSAGE_SHORT));
     }
 }

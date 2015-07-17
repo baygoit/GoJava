@@ -20,7 +20,7 @@ public class FaqController extends BaseController {
     }
 
     private boolean isValid(String input) {
-        return !(input == null || input.length() > MAX_QUESTION_LENGTH);
+        return !(input == null || input.length() == 0 || input.length() > MAX_QUESTION_LENGTH);
     }
 
     @Override
