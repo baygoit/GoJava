@@ -3,7 +3,7 @@ package goit5.nikfisher.kickstarter.streams;
 import java.util.Scanner;
 
 
-public class ScanConsole {
+public class ScanConsole implements Read {
 
 	public int consoleScan(){
 

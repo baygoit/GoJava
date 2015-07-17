@@ -1,6 +1,6 @@
 package goit5.nikfisher.kickstarter.streams;
 
-public class Output {
+public class Output implements Write {
 
 	public void println(String result){
 		System.out.println(result);

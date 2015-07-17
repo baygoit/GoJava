@@ -4,6 +4,7 @@ import goit5.nikfisher.kickstarter.model.Categories;
 import goit5.nikfisher.kickstarter.model.Category;
 import goit5.nikfisher.kickstarter.model.Project;
 import goit5.nikfisher.kickstarter.model.Projects;
+import goit5.nikfisher.kickstarter.streams.ScanConsole;
 
 public class Runner {
 
@@ -67,7 +68,7 @@ public class Runner {
 		project5.setFaq("Q: questions \n A: answer");
 		project6.setFaq("Q: questions \n A: answer");
 
-		Main app = new Main(categories, projects);
+		Main app = new Main(categories, projects, new ScanConsole());
 		app.run();
 	}
 }

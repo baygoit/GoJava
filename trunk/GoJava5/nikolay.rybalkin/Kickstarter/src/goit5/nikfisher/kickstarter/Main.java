@@ -2,6 +2,7 @@ package goit5.nikfisher.kickstarter;
 
 import goit5.nikfisher.kickstarter.model.*;
 import goit5.nikfisher.kickstarter.streams.Output;
+import goit5.nikfisher.kickstarter.streams.Read;
 import goit5.nikfisher.kickstarter.streams.ScanConsole;
 
 import java.util.Arrays;
@@ -12,13 +13,14 @@ public class Main {
 	private String SPACE = " ";
 	private Categories categories;
 	private Projects projects;
-	private ScanConsole scanConsole = new ScanConsole();
 	private Output output = new Output();
+	private Read read;
 
-	public Main(Categories categories, Projects projects) {
+	public Main(Categories categories, Projects projects, Read read) {
 
 		this.categories = categories;
 		this.projects = projects;
+		this.read = read;
 	}
 
 	public void run() {
@@ -32,7 +34,11 @@ public class Main {
 
 			askCategory();
 
-			int categoryIndex = scanConsole.consoleScan();
+			int categoryIndex = read.consoleScan();
+
+			if (categoryIndex == 0){
+				break;
+			}
 			Category category = shooseCategory(categoryIndex);
 
 			if (category == null){
@@ -51,7 +57,7 @@ public class Main {
 
             ascProject(foundProjects);
 
-            int projectIndex = scanConsole.consoleScan();
+            int projectIndex = read.consoleScan();
 
             if (projectIndex == 0){
                 break;
@@ -71,7 +77,7 @@ public class Main {
 	private void ascProject(Project[] foundProjects) {
 
 		if (foundProjects.length == 0 ){
-			output.println("goit5.nikfisher.kickstarter.model.Projects in this category do not have to exit, enter 0");
+			output.println("Projects in this category do not have to exit, enter 0");
 		}else {
 			int from = 0;
 			int to = foundProjects.length - 1;
@@ -125,7 +131,7 @@ public class Main {
 	private void askCategory() {
 
 		output.println(SPACE);
-		output.println("Select category: ");
+		output.println("Select category (or 0 to exit): ");
 		output.println(Arrays.toString(categories.getCategories()));
 	}
 
