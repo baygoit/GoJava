@@ -74,7 +74,7 @@
             </UseCase>
         </UseCases>
     </UserStory>
-    <UserStory name="7" implemented="0">
+    <UserStory name="7" implemented="1">
         <Description>
             Как гость я хочу задать вопрос авторам по существующему проекту
         </Description>

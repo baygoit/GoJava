@@ -3,7 +3,11 @@ package ua.goit.kyrychok.kickstarter.mvc.controller;
 import ua.goit.kyrychok.kickstarter.mvc.model.FaqModel;
 import ua.goit.kyrychok.kickstarter.mvc.view.FaqView;
 
+import java.util.regex.Pattern;
+
 public class FaqController extends BaseController {
+    public static final int MAX_QUESTION_LENGTH = 150;
+    public static final Pattern questionPattern = Pattern.compile("^$");
     private FaqModel model;
     private FaqView view;
 
@@ -16,11 +20,7 @@ public class FaqController extends BaseController {
     }
 
     private boolean isValid(String input) {
-        boolean result = true;
-        if (input.length() > 5) {
-            result = false;
-        }
-        return result;
+        return !(input == null || input.length() > MAX_QUESTION_LENGTH);
     }
 
     @Override
