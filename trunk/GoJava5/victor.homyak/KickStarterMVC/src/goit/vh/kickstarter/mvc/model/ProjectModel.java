@@ -11,6 +11,7 @@ public class ProjectModel {
     private DataRegistry dataRegistry;
     private Project[] listOfProjectses;
     private Project project;
+    private String projectName;
 
     public ProjectModel(DataRegistry dataRegistry) {
         this.dataRegistry = dataRegistry;
@@ -20,16 +21,19 @@ public class ProjectModel {
         return listOfProjectses;
     }
 
-    public void setDataRegistry(DataRegistry dataRegistry) {
-        this.dataRegistry = dataRegistry;
-    }
-
     public void refreshModel(int[] path) {
-        project = dataRegistry.getProject( path);
-
+        project = dataRegistry.getProject(path);
+        this.projectName = project.getName();
     }
+
     public void refreshListModel(int input) {
         listOfProjectses = dataRegistry.getProjectList(input);
 
     }
+
+    public String getProjectName() {
+        return projectName;
+    }
+
 }
+

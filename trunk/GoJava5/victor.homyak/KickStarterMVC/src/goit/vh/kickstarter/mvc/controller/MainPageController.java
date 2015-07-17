@@ -10,12 +10,9 @@ import goit.vh.kickstarter.mvc.view.MainPageView;
 
 /**
  * Created with IntelliJ IDEA.
- * User: dmrachkovskyi
- * Date: 7/11/15
- * Time: 3:29 PM
- * To change this template use File | Settings | File Templates.
+ * User: Viktor
  */
-public class MainPageController  {
+public class MainPageController {
     private LocationManager locationManager;
     private MainPageView view;
     private MainPageModel model;

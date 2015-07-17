@@ -8,10 +8,7 @@ import java.util.Map;
 
 /**
  * Created with IntelliJ IDEA.
- * User: dmrachkovskyi
- * Date: 7/11/15
- * Time: 4:15 PM
- * To change this template use File | Settings | File Templates.
+ * User: Viktor
  */
 public class DataRegistry {
 
@@ -19,11 +16,11 @@ public class DataRegistry {
 
     private Category[] categories = new Category[0];
 
-    private    Map<Integer, Project[]> hm = new HashMap<Integer, Project[]>();
+    private Map<Integer, Project[]> hm = new HashMap<>();
 
 
     public String getHelloMsg() {
-         return DEFAULT_HELLO_MSG;
+        return DEFAULT_HELLO_MSG;
     }
 
     public Category[] getCategories() {
@@ -34,7 +31,7 @@ public class DataRegistry {
         this.categories = categories;
     }
 
-    public void registerMapOfProjects(Map<Integer, Project[]> hm){
+    public void registerMapOfProjects(Map<Integer, Project[]> hm) {
         this.hm = hm;
     }
 
@@ -42,7 +39,7 @@ public class DataRegistry {
         return hm.get(index);
     }
 
-    public Project getProject(int[]path) {
-        return hm.get(path[0])[1];
+    public Project getProject(int[] path) {
+        return hm.get(path[0])[path[1] - 1];
     }
 }

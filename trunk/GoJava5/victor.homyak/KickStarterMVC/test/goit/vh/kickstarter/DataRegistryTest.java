@@ -1,8 +1,8 @@
 package goit.vh.kickstarter;
 
-import goit.vh.kickstarter.model.Category;
 import org.junit.Assert;
 import org.junit.Test;
+import goit.vh.kickstarter.model.Category;
 
 /**
  * Created with IntelliJ IDEA.

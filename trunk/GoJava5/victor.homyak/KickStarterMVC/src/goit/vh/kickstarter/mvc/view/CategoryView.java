@@ -5,10 +5,7 @@ import goit.vh.kickstarter.mvc.model.CategoryModel;
 
 /**
  * Created with IntelliJ IDEA.
- * User: dmrachkovskyi
- * Date: 7/11/15
- * Time: 4:50 PM
- * To change this template use File | Settings | File Templates.
+ * User: Viktor
  */
 public class CategoryView {
 

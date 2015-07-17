@@ -1,7 +1,6 @@
 package goit.vh.kickstarter.mvc.view;
 
 import goit.vh.kickstarter.Output;
-import goit.vh.kickstarter.model.Category;
 import goit.vh.kickstarter.mvc.model.MainPageModel;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +11,8 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
+import goit.vh.kickstarter.model.Category;
+
 
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.doAnswer;
@@ -43,7 +44,7 @@ public class MainPageViewTest {
         Category[] category = {new Category("Category 1"), new Category("Category 2"), new Category("Category 3")};
         when(model.getCategories()).thenReturn(category);
 
-        final List<String> view = new ArrayList<String>();
+        final List<String> view = new ArrayList<>();
 
         // Here we mock output.println() to store received argument in List of Strings
         // so than we can compare it with expected result

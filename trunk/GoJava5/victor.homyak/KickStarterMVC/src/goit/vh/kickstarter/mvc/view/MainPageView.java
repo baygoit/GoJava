@@ -1,18 +1,15 @@
 package goit.vh.kickstarter.mvc.view;
 
 import goit.vh.kickstarter.Output;
-import goit.vh.kickstarter.model.Category;
 import goit.vh.kickstarter.mvc.model.MainPageModel;
+import goit.vh.kickstarter.model.Category;
 
-import java.io.IOException;
 import java.util.Scanner;
+
 
 /**
  * Created with IntelliJ IDEA.
- * User: dmrachkovskyi
- * Date: 7/11/15
- * Time: 3:13 PM
- * To change this template use File | Settings | File Templates.
+ * User: Viktor
  */
 public class MainPageView {
     private String input;
@@ -39,7 +36,7 @@ public class MainPageView {
 
 
     public void setInput(String input) {
-       this.input = input;
+        this.input = input;
     }
 
     public String getInput() {

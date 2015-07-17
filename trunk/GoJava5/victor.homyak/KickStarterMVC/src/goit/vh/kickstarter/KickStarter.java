@@ -1,7 +1,5 @@
 package goit.vh.kickstarter;
 
-import goit.vh.kickstarter.model.Category;
-import goit.vh.kickstarter.model.Project;
 import goit.vh.kickstarter.mvc.controller.CategoryController;
 import goit.vh.kickstarter.mvc.controller.MainPageController;
 import goit.vh.kickstarter.mvc.controller.ProjectController;
@@ -11,16 +9,15 @@ import goit.vh.kickstarter.mvc.model.ProjectModel;
 import goit.vh.kickstarter.mvc.view.CategoryView;
 import goit.vh.kickstarter.mvc.view.MainPageView;
 import goit.vh.kickstarter.mvc.view.ProjectView;
+import goit.vh.kickstarter.model.Category;
+import goit.vh.kickstarter.model.Project;
 
 import java.util.HashMap;
 import java.util.Map;
 
 /**
  * Created with IntelliJ IDEA.
- * User: dmrachkovskyi
- * Date: 7/11/15
- * Time: 3:48 PM
- * To change this template use File | Settings | File Templates.
+ * User: Viktor
  */
 public class KickStarter {
 
@@ -29,6 +26,7 @@ public class KickStarter {
     private MainPageView mainPageView;
     private ProjectController projectController;
     private LocationManager locationManager;
+
     public static void main(String[] args) {
         KickStarter kickStarter = new KickStarter();
         kickStarter.init();
@@ -40,9 +38,9 @@ public class KickStarter {
         DataRegistry dataRegistry = new DataRegistry();
         dataRegistry.registerCategories(new Category[]{new Category("Sport"), new Category("TableGame"), new Category("Video")});
 
-        Map<Integer,Project[]> hm = new HashMap<Integer, Project[]>();
+        Map<Integer, Project[]> hm = new HashMap<>();
 
-        hm.put(1,new Project[]{new Project("Basketball"), new Project("Surfing"), new Project("Golf")});
+        hm.put(1, new Project[]{new Project("Basketball"), new Project("Surfing"), new Project("Golf")});
         hm.put(2, new Project[]{new Project("GameOfThrones"), new Project("Manager"), new Project("Bang"), new Project("Bingo")});
         hm.put(3, new Project[]{new Project("ManInBlack4"), new Project("GreatAdventuresOfJesus")});
         dataRegistry.registerMapOfProjects(hm);
@@ -54,16 +52,16 @@ public class KickStarter {
 
         CategoryModel categoryModel = new CategoryModel(dataRegistry);
         ProjectModel projectModel = new ProjectModel(dataRegistry);
-         mainPageView = new MainPageView(new Output());
-
+        mainPageView = new MainPageView(new Output());
 
 
         mainPageController = new MainPageController(mainPageView, mainPageModel);
-        categoryController = new CategoryController(new CategoryView(new Output()),categoryModel);
-        projectController = new ProjectController(new ProjectView(new Output()),projectModel );
-        locationManager = new LocationManager(mainPageController,categoryController,projectController);
+        categoryController = new CategoryController(new CategoryView(new Output()), categoryModel);
+        projectController = new ProjectController(new ProjectView(new Output()), projectModel);
+        locationManager = new LocationManager(mainPageController, categoryController, projectController);
         mainPageController.setLocationManager(locationManager);
         categoryController.setLocationManager(locationManager);
+        projectController.setLocationManager(locationManager);
         locationManager.setDataRegistry(dataRegistry);
     }
 
