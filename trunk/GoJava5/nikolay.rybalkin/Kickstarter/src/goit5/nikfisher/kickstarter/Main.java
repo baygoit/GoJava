@@ -1,40 +1,37 @@
 package goit5.nikfisher.kickstarter;
 
 import goit5.nikfisher.kickstarter.model.*;
-import goit5.nikfisher.kickstarter.streams.Output;
-import goit5.nikfisher.kickstarter.streams.Read;
-import goit5.nikfisher.kickstarter.streams.ScanConsole;
+import goit5.nikfisher.kickstarter.streams.InputOutputConsoleInterface;
 
 import java.util.Arrays;
-import java.util.Random;
 
 public class Main {
 
 	private String SPACE = " ";
 	private Categories categories;
 	private Projects projects;
-	private Output output = new Output();
-	private Read read;
+	private InputOutputConsoleInterface io;
+	private QuoteGenerate generator;
 
-	public Main(Categories categories, Projects projects, Read read) {
+	public Main(Categories categories, Projects projects, InputOutputConsoleInterface io, QuoteGenerate generator) {
 
 		this.categories = categories;
 		this.projects = projects;
-		this.read = read;
+		this.io = io;
+		this.generator = generator;
 	}
 
 	public void run() {
 
-		Output output = new Output();
+//		Output output = new Output();
 
-		QuoteGenerate generate = new QuoteGenerate(new Random());
-		output.println(generate.quoteGenerate());
+		io.println(generator.quoteGenerate());
 
 		while (true){
 
 			askCategory();
 
-			int categoryIndex = read.consoleScan();
+			int categoryIndex = io.consoleScan();
 
 			if (categoryIndex == 0){
 				break;
@@ -50,6 +47,7 @@ public class Main {
 
 			projectMenu(foundProjects);
 		}
+		io.println("Sank!");
 	}
 
 	private void projectMenu(Project[] foundProjects) {
@@ -57,14 +55,14 @@ public class Main {
 
             ascProject(foundProjects);
 
-            int projectIndex = read.consoleScan();
+            int projectIndex = io.consoleScan();
 
             if (projectIndex == 0){
                 break;
             }
 
             if (projectIndex <= 0 || foundProjects.length <  projectIndex){
-                output.println("Not true index: " + projectIndex);
+				io.println("Not true index: " + projectIndex);
                 continue;
             }
 
@@ -77,80 +75,81 @@ public class Main {
 	private void ascProject(Project[] foundProjects) {
 
 		if (foundProjects.length == 0 ){
-			output.println("Projects in this category do not have to exit, enter 0");
+			io.println("Projects in this category do not have to exit, enter 0");
 		}else {
 			int from = 0;
 			int to = foundProjects.length - 1;
-			output.println("Select project: [" + from + "..." +  to  + " or 0 for exit to the projects list");
+			io.println("Select project: [" + from + "..." +  to  + " or 0 for exit to the projects list");
 		}
 	}
 
 	private void printProjectDetail(Project project) {
 
-		output.println("goit5.nikfisher.kickstarter.model.Project detail:");
+		io.println("goit5.nikfisher.kickstarter.model.Project detail:");
 		printProject(project);
 
 		String history = project.getHistory();
 		if (history != null){
-			output.println(history);
+			io.println(history);
 		}
 
 		String video = project.getFAQ();
 		if (video != null){
-			output.println(video);
+			io.println(video);
 		}
 
 		String faq = project.getFAQ();
 		if (faq != null){
-			output.println(faq);
+			io.println(faq);
 		}
 
-		output.println("---------------------------------------");
+		io.println("---------------------------------------");
 	}
 
 	private void printProjects(Project[] foundProjects) {
 
 		for (int i = 0; i < foundProjects.length; i++) {
 			Project project = foundProjects[i];
-			output.print((i + 1) + ") ");
+			io.print((i + 1) + ") ");
 			printProject(project);
         }
 	}
 
 	private void printProject(Project project) {
 
-		output.println("goit5.nikfisher.kickstarter.model.Project name: " + project.getName());
-		output.println("Description: " + project.getDescription());
-		output.println("Need collected: " + project.getAmount() + "$");
-		output.println("Already collected: " + project.getExist() + "$");
-		output.println("Days remaining: " + project.getDays());
-		output.println("---------------------------------------");
-		output.println(SPACE);
+		io.println("goit5.nikfisher.kickstarter.model.Project name: " + project.getName());
+		io.println("Description: " + project.getDescription());
+		io.println("Need collected: " + project.getAmount() + "$");
+		io.println("Already collected: " + project.getExist() + "$");
+		io.println("Days remaining: " + project.getDays());
+		io.println("---------------------------------------");
+		io.println(SPACE);
 	}
 
 	private void askCategory() {
 
-		output.println(SPACE);
-		output.println("Select category (or 0 to exit): ");
-		output.println(Arrays.toString(categories.getCategories()));
+		io.println(SPACE);
+		io.println("Select category (or 0 to exit): ");
+		io.println(Arrays.toString(categories.getCategories()));
 	}
 
 	private Category shooseCategory(int categoryIndex) {
 
 		if ( categoryIndex <= 0 || categories.size() < categoryIndex){
-			output.println("Not true index: " + categoryIndex);
+			io.println("Not true index: " + categoryIndex);
 			return null;
 		}
 
 		Category category = categories.get(categoryIndex - 1);
-		output.println("You selected category: " + category.getName());
+		io.println("You selected category: " + category.getName());
 		return category;
 	}
 
 	private void shooseProject(Project project) {
 
-		output.println("You selected project: " + project.getName());
+		io.println("You selected project: " + project.getName());
 	}
+
 
 }
 

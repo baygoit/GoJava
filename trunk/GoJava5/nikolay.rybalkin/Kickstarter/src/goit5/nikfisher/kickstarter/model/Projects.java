@@ -5,6 +5,8 @@ public class Projects {
 	private Project[] projects = new Project[100]; //TODO надо подумать над этим моментом
 	private int index = 0;
 
+
+
 //	ArrayList<Project> projects = new ArrayList<>();
 
 	public void add(Project project) {

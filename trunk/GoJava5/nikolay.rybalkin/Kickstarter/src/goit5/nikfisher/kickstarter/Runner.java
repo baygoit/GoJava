@@ -1,10 +1,9 @@
 package goit5.nikfisher.kickstarter;
 
-import goit5.nikfisher.kickstarter.model.Categories;
-import goit5.nikfisher.kickstarter.model.Category;
-import goit5.nikfisher.kickstarter.model.Project;
-import goit5.nikfisher.kickstarter.model.Projects;
-import goit5.nikfisher.kickstarter.streams.ScanConsole;
+import goit5.nikfisher.kickstarter.model.*;
+import goit5.nikfisher.kickstarter.streams.InputOutputConsole;
+
+import java.util.Random;
 
 public class Runner {
 
@@ -68,7 +67,7 @@ public class Runner {
 		project5.setFaq("Q: questions \n A: answer");
 		project6.setFaq("Q: questions \n A: answer");
 
-		Main app = new Main(categories, projects, new ScanConsole());
+		Main app = new Main(categories, projects, new InputOutputConsole(), new QuoteGenerate(new Random()));
 		app.run();
 	}
 }
