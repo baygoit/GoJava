@@ -12,6 +12,8 @@ import goit.vh.kickstarter.mvc.view.ProjectView;
 import goit.vh.kickstarter.model.Category;
 import goit.vh.kickstarter.model.Project;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -40,9 +42,51 @@ public class KickStarter {
 
         Map<Integer, Project[]> hm = new HashMap<>();
 
-        hm.put(1, new Project[]{new Project("Basketball"), new Project("Surfing"), new Project("Golf")});
-        hm.put(2, new Project[]{new Project("GameOfThrones"), new Project("Manager"), new Project("Bang"), new Project("Bingo")});
-        hm.put(3, new Project[]{new Project("ManInBlack4"), new Project("GreatAdventuresOfJesus")});
+
+
+
+        Calendar calendar =  Calendar.getInstance();
+        calendar.set(2018,05, 9);
+        hm.put(1, new Project[]{new Project("Gluconazol","Brend new anabolics",25000000,7500000,calendar.getTime() ,
+                                            "New MOC politics dictetes new requirements for pharmasy",
+                                            "Is it legal?\nno\nWhat side effects?\n85% brain cancer",
+                                            "https://www.youtube.com/watch?v=tk7RUVJmLk0"),
+                                new Project("Eczoskeleton","Brend new anabolics",25000000,7500000,calendar.getTime() ,
+                                        "New MOC politics dictetes new requirements for pharmasy",
+                                        "Is it legal?\nno\nWhat side effects?\n85% brain cancer",
+                                        "https://www.youtube.com/watch?v=tk7RUVJmLk0"),
+                                new Project("Slow Ball","New game with a big, heavy ball",25000000,7500000,calendar.getTime() ,
+                                        "New MOC politics dictetes new requirements for pharmasy",
+                                        "Is it legal?\nno\nWhat side effects?\n85% brain cancer",
+                                        "https://www.youtube.com/watch?v=tk7RUVJmLk0")});
+
+
+
+        hm.put(2, new Project[]{new Project("Gluconazol","Brend new anabolics",25000000,7500000,calendar.getTime() ,
+                                            "New MOC politics dictetes new requirements for pharmasy",
+                                            "Is it legal?\nno\nWhat side effects?\n85% brain cancer",
+                                            "https://www.youtube.com/watch?v=tk7RUVJmLk0"),
+                                new Project("Eczoskeleton","Brend new anabolics",25000000,7500000,calendar.getTime() ,
+                                            "New MOC politics dictetes new requirements for pharmasy",
+                                            "Is it legal?\nno\nWhat side effects?\n85% brain cancer",
+                                            "https://www.youtube.com/watch?v=tk7RUVJmLk0"),
+                                new Project("Slow Ball","New game with a big, heavy ball",25000000,7500000,calendar.getTime() ,
+                                            "New MOC politics dictetes new requirements for pharmasy",
+                                            "Is it legal?\nno\nWhat side effects?\n85% brain cancer",
+                                            "https://www.youtube.com/watch?v=tk7RUVJmLk0"),
+                                new Project("Slow Ball","New game with a big, heavy ball",25000000,7500000,calendar.getTime() ,
+                                             "New MOC politics dictetes new requirements for pharmasy",
+                                             "Is it legal?\nno\nWhat side effects?\n85% brain cancer",
+                                             "https://www.youtube.com/watch?v=tk7RUVJmLk0")});
+        hm.put(3, new Project[]{new Project("Gluconazol","Brend new anabolics",25000000,7500000,calendar.getTime() ,
+                                            "New MOC politics dictetes new requirements for pharmasy",
+                                            "Is it legal?\nno\nWhat side effects?\n85% brain cancer",
+                                            "https://www.youtube.com/watch?v=tk7RUVJmLk0"),
+                                new Project("Eczoskeleton","Brend new anabolics",25000000,7500000,calendar.getTime() ,
+                                            "New MOC politics dictetes new requirements for pharmasy",
+                                            "Is it legal?\nno\nWhat side effects?\n85% brain cancer",
+                                            "https://www.youtube.com/watch?v=tk7RUVJmLk0")});
+
         dataRegistry.registerMapOfProjects(hm);
 
 
@@ -51,6 +95,7 @@ public class KickStarter {
 
 
         CategoryModel categoryModel = new CategoryModel(dataRegistry);
+
         ProjectModel projectModel = new ProjectModel(dataRegistry);
         mainPageView = new MainPageView(new Output());
 
@@ -62,7 +107,8 @@ public class KickStarter {
         mainPageController.setLocationManager(locationManager);
         categoryController.setLocationManager(locationManager);
         projectController.setLocationManager(locationManager);
-        locationManager.setDataRegistry(dataRegistry);
+
+        projectController.setDataRegistry(dataRegistry);
     }
 
     private void start() {

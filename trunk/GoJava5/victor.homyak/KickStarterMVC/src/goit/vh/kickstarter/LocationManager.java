@@ -10,12 +10,12 @@ import goit.vh.kickstarter.mvc.controller.MainPageController;
 public class LocationManager {
 
     // FIXME: LocationManager will eventually throw StackOverFlowError. Dispatch using while loop to avoid.
-    private int inputIndex;
+
     private MainPageController mainPageController;
     private CategoryController categoryController;
     private ProjectController projectController;
-    private DataRegistry dataRegistry;
     private int[] path = {0, 0};
+    public boolean goToListOfModels = false;
 
     public LocationManager(MainPageController mainPageController, CategoryController categoryController,
                            ProjectController projectController) {
@@ -25,24 +25,21 @@ public class LocationManager {
     }
 
     public void onApplicationStart() {
-        mainPageController.start();
+       dispatch();
     }
 
-    public void categoryControllerStart() {
-        path[0] = inputIndex;
+    public void categoryControllerStart(int index) {
+        path[0] = index;
         categoryController.start(path);
     }
 
-    public void listOfProjectsStart(int input) {
-        path[0] = input;
-        projectController.setDataRegistry(dataRegistry);
-        projectController.start(path);
-        dispatch(path);
-    }
-
-    public void dispatch(int[] path) {
+    public void dispatch() {
+        if (goToListOfModels) {
+            projectController.start(path);
+            goToListOfModels = true;
+        }
         if (path[0] == 0 && path[1] == 0) {
-            mainPageController.start();
+            mainPageController.start(path);
         }
         if (path[0] != 0 && path[1] == 0) {
             categoryController.start(path);
@@ -54,37 +51,12 @@ public class LocationManager {
     }
 
     public void setInputIndex(int inputIndex) {
-        this.inputIndex = inputIndex;
-    }
-
-    public void setDataRegistry(DataRegistry dataRegistry) {
-        this.dataRegistry = dataRegistry;
+        path[0] = inputIndex;
     }
 
     public void setPath(int[] path) {
         this.path = path;
 
     }
-
-
-//    private boolean updatePath(int inputIndex) {
-//        if (inputIndex != 0) {
-//            for (int i = 0; i < path.length; i++) {
-//                if (path[i] == 0) {
-//                    path[i] = inputIndex;
-//                    return true;
-//                }
-//            }
-//        } else {
-//            for (int i = path.length - 1; i <= 0; i--) {
-//                if (path[i] != 0) {
-//                    path[i] = inputIndex;
-//                    return true;
-//                }
-//            }
-//        }
-//        return false;
-//    }
-
 
 }

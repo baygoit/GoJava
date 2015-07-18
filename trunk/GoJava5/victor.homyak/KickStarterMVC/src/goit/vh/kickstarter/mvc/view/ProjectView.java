@@ -1,6 +1,8 @@
 package goit.vh.kickstarter.mvc.view;
 
+import java.util.Date;
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
 import goit.vh.kickstarter.Output;
 import goit.vh.kickstarter.mvc.model.ProjectModel;
@@ -17,11 +19,13 @@ public class ProjectView {
         this.output = output;
     }
 
-    public void renderList(ProjectModel projectModel) {
+    public void renderList(Project[] projects) {
 
-        Project[] projects = projectModel.getListOfProjectses();
+
         for (int i = 0; i < projects.length; i++) {
-            output.println(String.valueOf(i + 1) + " " + projects[i].getName());
+            output.println(String.valueOf(i + 1) + " " + projects[i].getName() + " " + projects[i].getShortDescription() +
+                    " " + projects[i].getSumToRaise() + " " + projects[i].getCurrentSum() + " " +
+                    getDateDiff(new Date(),projects[i].getEndDate(), TimeUnit.DAYS));
         }
     }
 
@@ -45,5 +49,17 @@ public class ProjectView {
         Scanner scanner = new Scanner(System.in);
         String userInput = scanner.next();
         this.input = userInput;
+    }
+
+    /**
+     * Get a diff between two dates
+     * @param date1 the oldest date
+     * @param date2 the newest date
+     * @param timeUnit the unit in which you want the diff
+     * @return the diff value, in the provided unit
+     */
+    public static long getDateDiff(Date date1, Date date2, TimeUnit timeUnit) {
+        long diffInMillies = date2.getTime() - date1.getTime();
+        return timeUnit.convert(diffInMillies, TimeUnit.MILLISECONDS);
     }
 }

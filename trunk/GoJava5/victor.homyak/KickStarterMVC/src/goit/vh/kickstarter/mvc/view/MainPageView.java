@@ -1,6 +1,7 @@
 package goit.vh.kickstarter.mvc.view;
 
 import goit.vh.kickstarter.Output;
+import goit.vh.kickstarter.QuoteGenerator;
 import goit.vh.kickstarter.mvc.model.MainPageModel;
 import goit.vh.kickstarter.model.Category;
 
@@ -20,7 +21,10 @@ public class MainPageView {
     }
 
     public void render(MainPageModel model) {
-        output.println(model.getHelloMsg());
+
+        QuoteGenerator quote = new QuoteGenerator();
+        output.println(quote.getQuote() + "\n");
+
         Category[] categories = model.getCategories();
         for (int i = 0; i < categories.length; i++) {
             output.println(String.valueOf(i + 1) + " " + categories[i].getName());

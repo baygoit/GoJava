@@ -23,7 +23,7 @@ public class ProjectController {
     public void start(int[] path) {
         if (path[0]!=0&& path[1]==0) {
             projectModel.refreshListModel(path[0]);
-            projectView.renderList(projectModel);
+            projectView.renderList(projectModel.getListOfProjectses());
             projectView.readUserInput();
             String userInput = projectView.getInput();
             int index = Integer.parseInt(userInput);
@@ -32,6 +32,7 @@ public class ProjectController {
                 path[0] = 0;
             }
             locationManager.setPath(path);
+            locationManager.dispatch();
           
         }
         if (path[0]!=0&& path[1]!=0) {
@@ -44,7 +45,7 @@ public class ProjectController {
             if (index==0) {
                 path[0] = 0;
             }
-            locationManager.dispatch(path);
+            locationManager.dispatch();
         }
     }
 

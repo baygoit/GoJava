@@ -1,6 +1,6 @@
 package goit.vh.kickstarter.mvc.controller;
 
-import goit.vh.kickstarter.DataRegistry;
+
 import goit.vh.kickstarter.LocationManager;
 import goit.vh.kickstarter.mvc.model.CategoryModel;
 import goit.vh.kickstarter.mvc.view.CategoryView;
@@ -22,7 +22,13 @@ public class CategoryController {
     public void start(int[] path) {
         model.refreshModel(path[0]);
         view.render(model);
-        locationManager.listOfProjectsStart(path[0]);
+        //path[1] = 1488;
+        locationManager.goToListOfModels = true;
+
+      //  projectController.start(path);
+        locationManager.dispatch();
+        //locationManager.listOfProjectsStart(path[0]);
+        //locationManager.dispatch();
     }
 
     public void setLocationManager(LocationManager locationManager) {

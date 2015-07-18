@@ -22,13 +22,13 @@ public class MainPageController {
         this.model = model;
     }
 
-    public void start() {
+    public void start(int[] path) {
         view.render(model);
         view.readUserInput();
         String userInput = view.getInput();
         int index = Integer.parseInt(userInput);
-        locationManager.setInputIndex(index);
-        locationManager.categoryControllerStart();
+        path[0] = index;
+        locationManager.dispatch();
     }
 
     public void setLocationManager(LocationManager locationManager) {
