@@ -5,14 +5,6 @@ import goit5.nikfisher.kickstarter.model.*;
 import goit5.nikfisher.kickstarter.streams.InputOutputConsoleInterface;
 import org.junit.Test;
 import org.mockito.Mockito;
-import sun.nio.cs.Surrogate;
-
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Random;
-
-import static org.junit.Assert.assertEquals;
 
 public class MainTest{
 
