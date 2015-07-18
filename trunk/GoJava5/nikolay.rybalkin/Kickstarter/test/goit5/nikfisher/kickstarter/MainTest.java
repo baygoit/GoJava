@@ -4,7 +4,7 @@ import goit5.nikfisher.kickstarter.Main;
 import goit5.nikfisher.kickstarter.model.*;
 import goit5.nikfisher.kickstarter.streams.InputOutputConsoleInterface;
 import org.junit.Test;
-import org.mockito.Mockito;
+import static org.mockito.Mockito.*;
 
 import static org.mockito.Mockito.times;
 
@@ -20,28 +20,28 @@ public class MainTest{
 
         Projects projects = new Projects();
 
-        InputOutputConsoleInterface io = Mockito.mock(InputOutputConsoleInterface.class);
-        QuoteGenerate generator = Mockito.mock(QuoteGenerate.class);
+        InputOutputConsoleInterface io = mock(InputOutputConsoleInterface.class);
+        QuoteGenerate generator = mock(QuoteGenerate.class);
 
         Main main = new Main(categories, projects, io, generator);
 
         //when
-        Mockito.when(generator.quoteGenerate()).thenReturn("Test quote");
-        Mockito.when(io.consoleScan()).thenReturn(1, 0, 0);
+        when(generator.quoteGenerate()).thenReturn("Test quote");
+        when(io.consoleScan()).thenReturn(1, 0, 0);
 
         main.run();
 
         //then
-        Mockito.verify(io).println("Test quote");
-        Mockito.verify(io, times(2)).println(" ");
-        Mockito.verify(io, times(2)).println("Select category (or 0 to exit): ");
-        Mockito.verify(io, times(2)).println("[1) category1, 2) category2, 3) category3]");
-        Mockito.verify(io, times(1)).println("You selected category: category1");
-        Mockito.verify(io, times(1)).println("Projects in this category do not have to exit, enter 0");
-        Mockito.verify(io, times(2)).println(" ");
-        Mockito.verify(io, times(2)).println("Select category (or 0 to exit): ");
-        Mockito.verify(io, times(2)).println("[1) category1, 2) category2, 3) category3]");
-        Mockito.verify(io, times(1)).println("Sank!");
+        verify(io).println("Test quote");
+        verify(io, times(2)).println(" ");
+        verify(io, times(2)).println("Select category (or 0 to exit): ");
+        verify(io, times(2)).println("[1) category1, 2) category2, 3) category3]");
+        verify(io, times(1)).println("You selected category: category1");
+        verify(io, times(1)).println("Projects in this category do not have to exit, enter 0");
+        verify(io, times(2)).println(" ");
+        verify(io, times(2)).println("Select category (or 0 to exit): ");
+        verify(io, times(2)).println("[1) category1, 2) category2, 3) category3]");
+        verify(io, times(1)).println("Thank you for using our service!");
     }
 
     @Test
@@ -67,38 +67,75 @@ public class MainTest{
         project2.setHistory("history");
         project2.setFaq("QA");
         project2.setCategory(category);
-        project2.setVideo("Link Video");
+        project2.setVideo("link video");
 
-        InputOutputConsoleInterface io = Mockito.mock(InputOutputConsoleInterface.class);
-        QuoteGenerate generator = Mockito.mock(QuoteGenerate.class);
+        InputOutputConsoleInterface io = mock(InputOutputConsoleInterface.class);
+        QuoteGenerate generator = mock(QuoteGenerate.class);
 
         Main main = new Main(categories, projects, io, generator);
 
         //when
-        Mockito.when(generator.quoteGenerate()).thenReturn("Test quote");
-        Mockito.when(io.consoleScan()).thenReturn(1, 1, 0, 0, 0);
+        when(generator.quoteGenerate()).thenReturn("Test quote");
+
+        //1 - выбор категории 1
+        //2 - выбор проекта 2
+        //0 - выход из проекта TODO
+        //0 - выход из списка проектов
+        //0 - выход из списка категорий
+        //0 - выход из программы
+
+        when(io.consoleScan()).thenReturn(1, 2, 0, 0, 0);
 
         main.run();
 
         //then
-        Mockito.verify(io).println("Test quote");
-        Mockito.verify(io, times(5)).println(" ");
-        Mockito.verify(io, times(2)).println("Select category (or 0 to exit): ");
-        Mockito.verify(io, times(2)).println("[1) category1]");
-        Mockito.verify(io, times(1)).println("You selected category: category1");
-        Mockito.verify(io, times(2)).println("Project name: Game1 \"Popcorn\"");
-        Mockito.verify(io, times(3)).println("Description: Interesting game");
-        Mockito.verify(io, times(3)).println("Need collected: 10000$");
-        Mockito.verify(io, times(3)).println("Already collected: 0$");
-        Mockito.verify(io, times(3)).println("Days remaining: 10");
-        Mockito.verify(io, times(4)).println("---------------------------------------");
-        Mockito.verify(io, times(5)).println(" ");
-        Mockito.verify(io, times(1)).println("Project name: Game2 \"Popcorn\"");
-        Mockito.verify(io, times(2)).println("Select project: [0...1 or 0 for exit to the projects list");
-        Mockito.verify(io, times(1)).println("You selected project: Game1 \"Popcorn\"");
-        Mockito.verify(io, times(1)).println("Project detail:");
-        Mockito.verify(io, times(1)).println("history");
-        Mockito.verify(io, times(2)).println("QA");
-        Mockito.verify(io, times(1)).println("Sank!");
+        verify(io).println("Test quote");
+        verify(io, times(5)).println(" ");
+        verify(io, times(2)).println("Select category (or 0 to exit): ");
+        verify(io, times(2)).println("[1) category1]");
+        verify(io, times(1)).println("You selected category: category1");
+        verify(io, times(1)).println("Project name: Game1 \"Popcorn\"");
+        verify(io, times(3)).println("Description: Interesting game");
+        verify(io, times(3)).println("Need collected: 10000$");
+        verify(io, times(3)).println("Already collected: 0$");
+        verify(io, times(3)).println("Days remaining: 10");
+        verify(io, times(4)).println("---------------------------------------");
+        verify(io, times(5)).println(" ");
+        verify(io, times(2)).println("Project name: Game2 \"Popcorn\"");
+        verify(io, times(2)).println("Select project: [0...1 or 0 for exit to the projects list");
+        verify(io, times(1)).println("You selected project: Game2 \"Popcorn\"");
+        verify(io, times(1)).println("Project detail:");
+        verify(io, times(1)).println("history");
+        verify(io, times(2)).println("QA");
+        verify(io, times(1)).println("Operations on the project: [0 - go to the list of projects, 1 - invest in the project]");
+        verify(io, times(1)).println("Thank you for using our service!");
+    }
+
+    @Test
+    public void shouldPrintProjectMenuWenSelectIt() throws Exception {
+        //given
+        Categories categories = new Categories();
+        Category category = new Category("category");
+        categories.add(category);
+
+        Projects projects = new Projects();
+        Project project = new Project("Game1 \"Popcorn\"", 10000, 10, "Interesting game");
+        projects.add(project);
+        project.setCategory(category);
+
+        InputOutputConsoleInterface io = mock(InputOutputConsoleInterface.class);
+        QuoteGenerate generator = mock(QuoteGenerate.class);
+
+        Main main = new Main(categories, projects, io, generator);
+
+        //when
+        when(generator.quoteGenerate()).thenReturn("Test quote");
+        when(io.consoleScan()).thenReturn(1, 1, 1, 0, 0, 0);
+
+        main.run();
+
+        //then
+        verify(io, times(2)).println("Operations on the project: [0 - go to the list of projects, 1 - invest in the project]");
+        verify(io, times(1)).println("Thank you want to help");
     }
 }

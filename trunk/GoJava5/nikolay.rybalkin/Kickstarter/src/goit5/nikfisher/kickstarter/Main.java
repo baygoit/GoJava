@@ -7,6 +7,15 @@ import java.util.Arrays;
 
 public class Main {
 
+	//UserStory 6 Как гость я хочу инвестировать в понравившийся мне проект, чтобы поддержать его
+	//Сценарий: Находясь в конкретном проекте -> Вижу меню с вариантами, что могу сделать, один из пунктов - проинвестировать в проект ->
+	//Выбираю его -> Вижу вопрос от пеймент системы о вводе имени и номера карточки и суммы -> Ввожу их ->
+	//Перехожу на описание проекта, где вижу что инфа о количестве пожертвований поменялась
+
+	//TODO для каждого конкретного проекта
+	//TODO добавить раздел "оплата"
+	//TODO сделать так что-бы сумма списывалась из проекта как оплаченна\
+
 	private String SPACE = " ";
 	private Categories categories;
 	private Projects projects;
@@ -27,6 +36,12 @@ public class Main {
 
 		io.println(generator.quoteGenerate());
 
+		categoryMenu();
+		io.println("Thank you for using our service!");
+	}
+
+	//TODO вынести менюхи в некий абстрактный класс
+	private void categoryMenu() {
 		while (true){
 
 			askCategory();
@@ -45,34 +60,58 @@ public class Main {
 			Project[] foundProjects = projects.getProgects(category);
 			printProjects(foundProjects);
 
-			projectMenu(foundProjects);
+			projectsMenu(foundProjects);
 		}
-		io.println("Sank!");
 	}
 
-	private void projectMenu(Project[] foundProjects) {
+	private void projectsMenu(Project[] foundProjects) {
 		while (true) {
 
-            ascProject(foundProjects);
+            ascProjects(foundProjects);
 
-            int projectIndex = io.consoleScan();
+            int menuIndexElement = io.consoleScan();
 
-            if (projectIndex == 0){
+            if (menuIndexElement == 0){
                 break;
             }
 
-            if (projectIndex <= 0 || foundProjects.length <  projectIndex){
-				io.println("Not true index: " + projectIndex);
+            if (menuIndexElement <= 0 || foundProjects.length <  menuIndexElement){
+				io.println("Not true index: " + menuIndexElement);
                 continue;
             }
 
-            Project project = foundProjects[projectIndex - 1];
+            Project project = foundProjects[menuIndexElement - 1];
             shooseProject(project);
             printProjectDetail(project);
+
+			projectMenu(project);
         }
 	}
 
-	private void ascProject(Project[] foundProjects) {
+	private void projectMenu(Project project) {
+		while (true) {
+
+			ascProject(project);
+
+			int menuIndexElement = io.consoleScan();
+
+			if (menuIndexElement == 0){
+				break;
+			}
+
+			//TODO добавить логику работы
+			if (menuIndexElement == 1){
+				io.println("Thank you want to help");
+			}
+		}
+	}
+
+	private void ascProject(Project project) {
+		io.println("Operations on the project: [0 - go to the list of projects, 1 - invest in the project]");
+	}
+
+
+	private void ascProjects(Project[] foundProjects) {
 
 		if (foundProjects.length == 0 ){
 			io.println("Projects in this category do not have to exit, enter 0");
@@ -153,8 +192,5 @@ public class Main {
 
 }
 
-//TODO UserStory 6 Как гость я хочу инвестировать в понравившийся мне проект, чтобы поддержать его
-//TODO Сценарий: Находясь в конкретном проекте -> Вижу меню с вариантами, что могу сделать, один из пунктов - проинвестировать в проект ->
-//TODO Выбираю его -> Вижу вопрос от пеймент системы о вводе имени и номера карточки и суммы -> Ввожу их ->
-//TODO Перехожу на описание проекта, где вижу что инфа о количестве пожертвований поменялась
+
 
