@@ -85,7 +85,7 @@ public class Main {
 
 	private void printProjectDetail(Project project) {
 
-		io.println("goit5.nikfisher.kickstarter.model.Project detail:");
+		io.println("Project detail:");
 		printProject(project);
 
 		String history = project.getHistory();
@@ -117,7 +117,7 @@ public class Main {
 
 	private void printProject(Project project) {
 
-		io.println("goit5.nikfisher.kickstarter.model.Project name: " + project.getName());
+		io.println("Project name: " + project.getName());
 		io.println("Description: " + project.getDescription());
 		io.println("Need collected: " + project.getAmount() + "$");
 		io.println("Already collected: " + project.getExist() + "$");
@@ -152,4 +152,9 @@ public class Main {
 
 
 }
+
+//TODO UserStory 6 Как гость я хочу инвестировать в понравившийся мне проект, чтобы поддержать его
+//TODO Сценарий: Находясь в конкретном проекте -> Вижу меню с вариантами, что могу сделать, один из пунктов - проинвестировать в проект ->
+//TODO Выбираю его -> Вижу вопрос от пеймент системы о вводе имени и номера карточки и суммы -> Ввожу их ->
+//TODO Перехожу на описание проекта, где вижу что инфа о количестве пожертвований поменялась
 
