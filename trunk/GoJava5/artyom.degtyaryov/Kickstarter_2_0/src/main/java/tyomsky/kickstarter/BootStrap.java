@@ -2,6 +2,7 @@ package tyomsky.kickstarter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class BootStrap {
 
@@ -32,7 +33,7 @@ public class BootStrap {
         project3.setMoneyCollected(100_000);
         projectList.add(project3);
 
-        Kickstarter kickstarter = new Kickstarter(categoryList, projectList, new ConsoleIO());
+        Kickstarter kickstarter = new Kickstarter(categoryList, projectList, new ConsoleIO(), new QuoteGenerator(new Random()));
         kickstarter.run();
     }
 }

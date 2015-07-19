@@ -10,15 +10,18 @@ public class Kickstarter {
     private static final int EXIT_CODE = 0;
     private List<Category> categories;
     private List<Project> projects;
+    private QuoteGenerator quoteGenerator;
 
-    public Kickstarter(List<Category> categories, List<Project> projects, IO io) {
+    public Kickstarter(List<Category> categories, List<Project> projects, IO io, QuoteGenerator quoteGenerator) {
         this.categories = categories;
         this.projects = projects;
         this.io = io;
+        this.quoteGenerator = quoteGenerator;
     }
 
     public void run() {
-        io.println(new QuoteGenerator(new Random()).getQuote());
+        String quote = quoteGenerator.getQuote();
+        io.println(quote);
         processCategoriesMenu();
 
     }
@@ -128,7 +131,6 @@ public class Kickstarter {
             int menuIndex = i + 1;
             io.println(menuIndex + ": " + categories.get(i).getName());
         }
-        io.println("------------------------------------------------------");
     }
 
     private List<Project> getProjetsByCategory(Category category) {
