@@ -7,15 +7,6 @@ import java.util.Arrays;
 
 public class Main {
 
-	//UserStory 6 Как гость я хочу инвестировать в понравившийся мне проект, чтобы поддержать его
-	//Сценарий: Находясь в конкретном проекте -> Вижу меню с вариантами, что могу сделать, один из пунктов - проинвестировать в проект ->
-	//Выбираю его -> Вижу вопрос от пеймент системы о вводе имени и номера карточки и суммы -> Ввожу их ->
-	//Перехожу на описание проекта, где вижу что инфа о количестве пожертвований поменялась
-
-	//done для каждого конкретного проекта
-	//TODO добавить раздел "оплата"
-	//TODO сделать так что-бы сумма списывалась из проекта как оплаченна\
-
 	private String SPACE = " ";
 	private Categories    categories;
 	private Projects projects;
@@ -98,7 +89,13 @@ public class Main {
 
 				if (menu == 1){
 					io.println("Thank you want to help!");
+					int required_amount = project.getAmount();
+					io.println("The required amount: " + String.valueOf(required_amount));
 
+					io.println("1) If you invest up to 10% of the required amount, you will receive a 1% to 5%.");
+					io.println("2) If you invest up to 50% of the required amount, you will receive a 5% to 15%.");
+					io.println("3) If you invest up to 100% of the required amount, you will receive a 15% to 30%.");
+					io.println("-----------------");
 					io.println("Enter your name");
 					String name = io.consoleScanString();
 					io.println("Enter the number of your card");
@@ -110,6 +107,18 @@ public class Main {
 
 					io.println("Thank you " + name + " your money is successfully transferred to the account of the project");
 					io.println("---------------------------------------");
+
+					project.donate((amount));
+				}
+				if (menu == 2){
+					io.println("Enter your name");
+					String name = io.consoleScanString();
+					io.println("Enter your question");
+					String question = io.consoleScanString();
+					io.println("Thank you " + name + " for your question");
+					io.println("---------------------------------------");
+
+					project.question((question));
 				}
 				return null;
 			}
@@ -134,7 +143,7 @@ public class Main {
 	}
 
 	private void ascProject(Project project) {
-		io.println("Operations on the project: [0 - go to the list of projects, 1 - invest in the project]");
+		io.println("Operations on the project: [0 - go to the list of projects, 1 - invest in the project, 2 - ask a Question]");
 	}
 
 
@@ -159,15 +168,21 @@ public class Main {
 			io.println(history);
 		}
 
-		String video = project.getFAQ();
+		String video = project.getVideo();
 		if (video != null){
 			io.println(video);
 		}
 
-		String faq = project.getFAQ();
-		if (faq != null){
-			io.println(faq);
+		String question = project.getQuestion();
+		if (question != null){
+			io.println(question);
 		}
+
+		String ansver = project.getAnsver();
+		if (ansver != null){
+			io.println(ansver);
+		}
+
 
 		io.println("---------------------------------------");
 	}

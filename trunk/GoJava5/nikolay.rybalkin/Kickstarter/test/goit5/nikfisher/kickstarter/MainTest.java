@@ -62,7 +62,7 @@ public class MainTest{
         projects.add(project1);
 
         project1.setHistory("history");
-        project1.setFaq("QA");
+//        project1.setFaq("QA");
         project1.setCategory(category);
         project1.setVideo("Link Video");
 
@@ -70,7 +70,7 @@ public class MainTest{
         projects.add(project2);
 
         project2.setHistory("history");
-        project2.setFaq("QA");
+//        project2.setFaq("QA");
         project2.setCategory(category);
         project2.setVideo("link video");
 
@@ -173,7 +173,14 @@ public class MainTest{
         //then
         List<String> values = assertPrinted(io, 5);
 
-        assertTrue(values.toString().contains("Test quote"));
+        asseptPrinted(values, "Test quote");
+//        asseptPrinted(TOTAL - 25, project.getAmount());
+    }
+
+
+    private void asseptPrinted(List<String> values, String expected) {
+        assertTrue("Actual data" + values.toString() + "doesn't  contain" + expected,
+                values.contains(expected));
     }
 
     private List<String> assertPrinted(InputOutputConsoleInterface io, int times) {

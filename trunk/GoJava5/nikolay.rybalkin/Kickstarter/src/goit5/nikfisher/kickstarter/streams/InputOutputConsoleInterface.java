@@ -9,4 +9,5 @@ public interface InputOutputConsoleInterface {
     void println(String a);
 
     void print(String a);
+
 }

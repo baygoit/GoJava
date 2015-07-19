@@ -2,6 +2,8 @@ package goit5.nikfisher.kickstarter.model;
 
 public class Project {
 
+	private String question;
+	private String ansver;
 	private String name;
 	private String description;
 	private int amount;
@@ -10,7 +12,6 @@ public class Project {
 	private Category category;
 	private String history;
 	private String video;
-	private String faq;
 
 
 	public Project(String name, int amount, int days, String description) {
@@ -21,7 +22,8 @@ public class Project {
 		this.exist = 0;
 		this.history = null;
 		this.video = null;
-		this.faq = null;
+		this.question = null;
+		this.ansver = null;
 	}
 
 	public Project(String name){
@@ -40,8 +42,11 @@ public class Project {
 		this.video = video;
 	}
 
-	public void setFaq(String faq) {
-		this.faq = faq;
+	public void setQuestion(String question) {
+		this.question = question;
+	}
+	public void setAnsver(String ansver) {
+		this.ansver = ansver;
 	}
 
 	public Category getCategory() {
@@ -76,7 +81,23 @@ public class Project {
 		return video;
 	}
 
-	public String getFAQ() {
-		return faq;
+	public String getQuestion() {
+		return question;
 	}
+
+	public String getAnsver() {
+		return ansver;
+	}
+
+	//	public String getFAQ() {
+//		return faq;
+//	}
+
+	public void donate(int amount){
+		this.amount -= amount;
+	}
+	public void question(String question){
+		this.question = question;
+	}
+
 }

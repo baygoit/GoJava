@@ -60,12 +60,21 @@ public class Runner {
 		project5.setVideo("https://www.youtube.com");
 		project6.setVideo("https://www.youtube.com");
 
-		project1.setFaq("Q: questions \n A: answer");
-		project2.setFaq("Q: questions \n A: answer");
-		project3.setFaq("Q: questions \n A: answer");
-		project4.setFaq("Q: questions \n A: answer");
-		project5.setFaq("Q: questions \n A: answer");
-		project6.setFaq("Q: questions \n A: answer");
+
+
+		project1.setQuestion("No one has asked the question.");
+		project2.setQuestion("No one has asked the question.");
+		project3.setQuestion("No one has asked the question.");
+		project4.setQuestion("No one has asked the question.");
+		project5.setQuestion("No one has asked the question.");
+		project6.setQuestion("No one has asked the question.");
+
+		project1.setAnsver("Still no one answered");
+		project2.setAnsver("Still no one answered");
+		project3.setAnsver("Still no one answered");
+		project4.setAnsver("Still no one answered");
+		project5.setAnsver("Still no one answered");
+		project6.setAnsver("Still no one answered");
 
 		Main app = new Main(categories, projects, new InputOutputConsole(), new QuoteGenerate(new Random()));
 		app.run();
