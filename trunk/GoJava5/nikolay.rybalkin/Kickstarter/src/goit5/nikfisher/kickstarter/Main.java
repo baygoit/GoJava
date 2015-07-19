@@ -99,9 +99,18 @@ public class Main {
 				if (menu == 1){
 					io.println("Thank you want to help!");
 
-					int name = io.consoleScanInt();
-				}
+					io.println("Enter your name");
+					String name = io.consoleScanString();
+					io.println("Enter the number of your card");
+					int cardNumber = io.consoleScanInt();
+					io.println("Enter the amount of money");
+					int amount = io.consoleScanInt();
+					//TODO проверку наа вводимые значения
+					//TODO зачислить деньги на счет проекта
 
+					io.println("Thank you " + name + " your money is successfully transferred to the account of the project");
+					io.println("---------------------------------------");
+				}
 				return null;
 			}
 
@@ -136,7 +145,7 @@ public class Main {
 		}else {
 			int from = 0;
 			int to = foundProjects.length - 1;
-			io.println("Select project: [" + from + "..." +  to  + " or 0 for exit to the projects list");
+			io.println("Select project: [" + from + "..." +  to  + " or 0 for exit to the projects list]");
 		}
 	}
 

@@ -4,6 +4,11 @@ import goit5.nikfisher.kickstarter.Main;
 import goit5.nikfisher.kickstarter.model.*;
 import goit5.nikfisher.kickstarter.streams.InputOutputConsoleInterface;
 import org.junit.Test;
+import org.mockito.ArgumentCaptor;
+
+import java.util.List;
+
+import static junit.framework.Assert.assertTrue;
 import static org.mockito.Mockito.*;
 
 import static org.mockito.Mockito.times;
@@ -102,7 +107,7 @@ public class MainTest{
         verify(io, times(4)).println("---------------------------------------");
         verify(io, times(5)).println(" ");
         verify(io, times(2)).println("Project name: Game2 \"Popcorn\"");
-        verify(io, times(2)).println("Select project: [0...1 or 0 for exit to the projects list");
+        verify(io, times(2)).println("Select project: [0...1 or 0 for exit to the projects list]");
 //        verify(io, times(1)).println("You selected project: Game2 \"Popcorn\"");
         verify(io, times(1)).println("Project detail:");
         verify(io, times(1)).println("history");
@@ -137,5 +142,39 @@ public class MainTest{
         //then
         verify(io, times(2)).println("Operations on the project: [0 - go to the list of projects, 1 - invest in the project]");
         verify(io, times(1)).println("Thank you want to help!");
+    }
+
+
+    @Test
+    public void shouldIncomeAmountToProjectWhenDonate() throws Exception {
+        //given
+        int TOTAL = 100;
+
+        Categories categories = new Categories();
+        Category category = new Category("category");
+        categories.add(category);
+
+        Projects projects = new Projects();
+        Project project = new Project("Game1 \"Popcorn\"", TOTAL, 10, "Interesting game");
+        projects.add(project);
+        project.setCategory(category);
+
+        InputOutputConsoleInterface io = mock(InputOutputConsoleInterface.class);
+        QuoteGenerate generator = mock(QuoteGenerate.class);
+
+        Main main = new Main(categories, projects, io, generator);
+
+        //when
+        when(generator.quoteGenerate()).thenReturn("Test quote");
+        when(io.consoleScanString()).thenReturn("1", "1", "1", "Nik", "000000000000", "25", "0", "0", "0");
+
+        main.run();
+
+        //then
+        ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
+        verify(io, times(5)).println(captor.capture());
+        List<String> valies = captor.getAllValues();
+        assertTrue(valies.toString().contains("Test quote"));
+        assertTrue(valies.toString().contains("[0...1 or 0 for exit to the projects list]"));
     }
 }
