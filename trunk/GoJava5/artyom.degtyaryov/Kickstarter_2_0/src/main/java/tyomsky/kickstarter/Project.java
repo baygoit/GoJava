@@ -8,12 +8,17 @@ public class Project {
     private int moneyCollected;
     private int daysLeft;
     private Category category;
+    private String history;
+    private String demoVideoLink;
+    private String questionsAndAnswers;
 
-    public Project(String name, String description, int moneyNeeded, int daysLeft, Category category) {
+
+    public Project(String name, String description, int moneyNeeded, int daysLeft, String demoVideoLink, Category category) {
         this.name = name;
         this.description = description;
         this.moneyNeeded = moneyNeeded;
         this.daysLeft = daysLeft;
+        this.demoVideoLink = demoVideoLink;
         this.category = category;
     }
 
@@ -51,5 +56,25 @@ public class Project {
 
     public int getDaysLeft() {
         return daysLeft;
+    }
+
+    public void setHistory(String history) {
+        this.history = history;
+    }
+
+    public String getDemoVideoLink() {
+        return demoVideoLink;
+    }
+
+    public void setQuestionsAndAnswers(String questionsAndAnswers) {
+        this.questionsAndAnswers = questionsAndAnswers;
+    }
+
+    public String getHistory() {
+        return history;
+    }
+
+    public String getQuestionsAndAnswers() {
+        return questionsAndAnswers;
     }
 }
