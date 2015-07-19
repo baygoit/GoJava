@@ -32,12 +32,7 @@ public class BootStrap {
         project3.setMoneyCollected(100_000);
         projectList.add(project3);
 
-        Kickstarter kickstarter = new Kickstarter(categoryList, projectList);
+        Kickstarter kickstarter = new Kickstarter(categoryList, projectList, new ConsoleIO());
         kickstarter.run();
     }
-
-//    UserStory2 Как гость я хочу видеть список категорий, с тем чтобы сфокусироваться на интересующей меня теме
-//    сценарий 1: захожу в приложение -> вижу пронумерованный список категорий и запрос на выбор категории ->
-//    выбираю категорию по номеру -> вижу сообщение о том, что я выбрал
-
 }

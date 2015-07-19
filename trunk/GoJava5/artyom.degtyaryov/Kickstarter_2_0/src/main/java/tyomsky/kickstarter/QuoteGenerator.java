@@ -4,6 +4,12 @@ import java.util.Random;
 
 public class QuoteGenerator {
 
+    private Random random;
+
+    public QuoteGenerator(Random random) {
+        this.random = random;
+    }
+
     private String[] quotes = new String[]{
             "\"If you want to achieve greatness stop asking for permission.\" --Anonymous",
             "\"Things work out best for those who make the best of how things work out.\" --John Wooden",
@@ -27,7 +33,7 @@ public class QuoteGenerator {
     };
 
     public String getQuote() {
-        int index = new Random().nextInt(quotes.length);
+        int index = random.nextInt(quotes.length);
         return quotes[index];
     }
 

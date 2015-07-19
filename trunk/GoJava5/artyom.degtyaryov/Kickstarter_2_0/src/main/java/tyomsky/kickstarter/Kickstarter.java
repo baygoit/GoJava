@@ -2,21 +2,23 @@ package tyomsky.kickstarter;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
+import java.util.Random;
 
 public class Kickstarter {
 
+    private IO io;
     private static final int EXIT_CODE = 0;
-    List<Category> categories;
-    List<Project> projects;
+    private List<Category> categories;
+    private List<Project> projects;
 
-    public Kickstarter(List<Category> categories, List<Project> projects) {
+    public Kickstarter(List<Category> categories, List<Project> projects, IO io) {
         this.categories = categories;
         this.projects = projects;
+        this.io = io;
     }
 
     public void run() {
-        System.out.println(new QuoteGenerator().getQuote());
+        io.println(new QuoteGenerator(new Random()).getQuote());
         processCategoriesMenu();
 
     }
@@ -63,11 +65,11 @@ public class Kickstarter {
 
     private Project chooseProject(List<Project> foundProjects, int chosenMenuIndex) {
         if (projectIndexIsInvalid(chosenMenuIndex, foundProjects)) {
-            System.out.println("You have chosen wrong menu index " + chosenMenuIndex);
+            io.println("You have chosen wrong menu index " + chosenMenuIndex);
             return null; // or nil
         }
         Project project = foundProjects.get(chosenMenuIndex - 1);
-        System.out.println("You have chosen: " + project.getName());
+        io.println("You have chosen: " + project.getName());
         return project;
     }
 
@@ -79,13 +81,14 @@ public class Kickstarter {
     }
 
     private void printProjectDetails(Project project) {
-        System.out.println(project.getDescription());
-        System.out.println("Money to collect: " + project.getMoneyNeeded());
-        System.out.println("Collected money: " + project.getMoneyCollected());
-        System.out.println("Days left: " + project.getDaysLeft());
-        System.out.println("Demo video: " + project.getDemoVideoLink());
-        System.out.println("History: " + project.getHistory());
-        System.out.println("FAQ: " + project.getQuestionsAndAnswers());
+        String message = project.getDescription();
+        io.println(message);
+        io.println("Money to collect: " + project.getMoneyNeeded());
+        io.println("Collected money: " + project.getMoneyCollected());
+        io.println("Days left: " + project.getDaysLeft());
+        io.println("Demo video: " + project.getDemoVideoLink());
+        io.println("History: " + project.getHistory());
+        io.println("FAQ: " + project.getQuestionsAndAnswers());
     }
 
     private boolean projectIndexIsInvalid(int chosenMenuIndex, List<Project> projectsList) {
@@ -97,12 +100,12 @@ public class Kickstarter {
 
     private Category chooseCategory(int chosenMenuIndex) {
         if (categoryIndexIsInvalid(chosenMenuIndex)) {
-            System.out.println("You have chosen wrong menu index " + chosenMenuIndex);
+            io.println("You have chosen wrong menu index " + chosenMenuIndex);
             return null;
         }
         Category chosenCategory = categories.get(chosenMenuIndex - 1);
-        System.out.println("You have chosen: " + chosenCategory.getName());
-        System.out.println("------------------------------------------------------");
+        io.println("You have chosen: " + chosenCategory.getName());
+        io.println("------------------------------------------------------");
         return chosenCategory;
     }
 
@@ -110,23 +113,22 @@ public class Kickstarter {
         for (int i = 0; i < foundProjects.size(); i++) {
             int menuIndex = i + 1;
             Project project = foundProjects.get(i);
-            System.out.println(menuIndex + ": " + project.getShortPresentation());
-            System.out.println("------------------------------------------------------");
+            io.println(menuIndex + ": " + project.getShortPresentation());
+            io.println("------------------------------------------------------");
         }
     }
 
     private int getChosenMenuIndex() {
-        System.out.println("Make a choice (" + EXIT_CODE + " for exit): ");
-        Scanner scanner = new Scanner(System.in);
-        return scanner.nextInt();
+        io.println("Make a choice (" + EXIT_CODE + " for exit): ");
+        return io.read();
     }
 
     private void showCategories() {
         for (int i = 0; i < categories.size(); i++) {
             int menuIndex = i + 1;
-            System.out.println(menuIndex + ": " + categories.get(i).getName());
+            io.println(menuIndex + ": " + categories.get(i).getName());
         }
-        System.out.println("------------------------------------------------------");
+        io.println("------------------------------------------------------");
     }
 
     private List<Project> getProjetsByCategory(Category category) {
