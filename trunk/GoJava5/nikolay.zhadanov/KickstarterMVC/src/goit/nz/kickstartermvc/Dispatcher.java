@@ -26,4 +26,8 @@ public class Dispatcher implements InputListener {
 		}
 		return currentListenerIndex;
 	}
+	
+	public int getControllerListenersCount() {
+		return controllerListeners.size();
+	}
 }
