@@ -12,15 +12,13 @@ public class CategoryView {
 		this.output = output;
 	}
 
-	public void printProjects(CategoryModel model) {
+	public void printProjects(CategoryModel model, String categoryName) {
 		int modelSize = model.size();
-		String categoryName = model.getCategoryName().toUpperCase();
 		if (modelSize > 0) {
 			printTitle(categoryName);
 			int index = 0;
 			for (Project project : model.getProjects()) {
-				printProjectInfo(index, project);
-				index++;
+				printProjectInfo(index++, project);
 			}
 		} else {
 			printNotFound(categoryName);
@@ -47,7 +45,7 @@ public class CategoryView {
 	private void printTitle(String categoryName) {
 		output.println("");
 		output.println(String.format("Projects in category: \"%s\"",
-				categoryName));
+				categoryName.toUpperCase()));
 		output.println("-------------------");
 	}
 
@@ -64,6 +62,6 @@ public class CategoryView {
 	private void printNotFound(String categoryName) {
 		output.println("");
 		output.println(String.format(
-				"There are no projects of category \"%s\"", categoryName));
+				"There are no projects of category \"%s\"", categoryName.toUpperCase()));
 	}
 }

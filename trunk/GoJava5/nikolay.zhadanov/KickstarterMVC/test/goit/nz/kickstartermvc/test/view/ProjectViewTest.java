@@ -35,7 +35,9 @@ public class ProjectViewTest {
 		MockStorage storage = new MockStorage();
 		storage.init();
 
-		when(model.getProject()).thenReturn(storage.getProjects().get(0));
+		when(model.getProject()).thenReturn(
+				storage.getProjects(storage.getCategories().get(1).getName())
+						.get(0));
 
 		final List<String> view = new ArrayList<>();
 
@@ -51,30 +53,24 @@ public class ProjectViewTest {
 
 		ProjectView projectView = new ProjectView(output);
 		projectView.printProject(model);
-		String[] expectedResult = { 
-				"", 
-				"Overview of project: \"NAME1\"",
-				"-------------------", 
-				"     Description: desc1",
-				"     Goal: 1000",
-				"     Pledged: 0",
-				"     Days to go: 10",
+		String[] expectedResult = { "", "Overview of project: \"NAME1\"",
+				"-------------------", "     Description: desc1",
+				"     Goal: 1000", "     Pledged: 0", "     Days to go: 10",
 				"     Project Events:",
 				"We have almost finished!\nWe are going to start!",
 				"     Link to video: http://www.youtube.com/jrgri74ht3h97",
 				"     Project FAQ:",
-				"How can you imagine such idea?\nBecause of whisky, babe!",
-				"",
+				"How can you imagine such idea?\nBecause of whisky, babe!", "",
 				"(0 - back)" };
 		assertArrayEquals("Wrong project layout", expectedResult,
 				view.toArray());
 	}
-	
+
 	@Test
 	public void whenProjectIsNullThenWarningPrinted() {
-		
+
 		when(model.getProject()).thenReturn(null);
-		
+
 		final List<String> view = new ArrayList<>();
 
 		doAnswer(new Answer<Object>() {
@@ -89,10 +85,8 @@ public class ProjectViewTest {
 
 		ProjectView projectView = new ProjectView(output);
 		projectView.printProject(model);
-		String[] expectedResult = { 
-				"", 
-				"NPE case - model haven't returned the project",
-				"",
+		String[] expectedResult = { "",
+				"NPE case - model haven't returned the project", "",
 				"(0 - back)" };
 		assertArrayEquals("Wrong null project warning", expectedResult,
 				view.toArray());

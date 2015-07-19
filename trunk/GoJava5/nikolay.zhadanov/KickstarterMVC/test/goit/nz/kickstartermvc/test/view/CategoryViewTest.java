@@ -38,7 +38,6 @@ public class CategoryViewTest {
 		int testModelSize = storage.getProjects(testCategoryName).size();
 
 		when(model.size()).thenReturn(testModelSize);
-		when(model.getCategoryName()).thenReturn(testCategoryName);
 		when(model.getProjects()).thenReturn(
 				storage.getProjects(testCategoryName));
 
@@ -55,7 +54,7 @@ public class CategoryViewTest {
 		}).when(output).println(anyString());
 
 		CategoryView categoryView = new CategoryView(output);
-		categoryView.printProjects(model);
+		categoryView.printProjects(model, testCategoryName);
 		String[] expectedResult = {
 				"",
 				"Projects in category: \"CRAFTS\"",
@@ -80,7 +79,6 @@ public class CategoryViewTest {
 		int testModelSize = storage.getProjects(testCategoryName).size();
 
 		when(model.size()).thenReturn(testModelSize);
-		when(model.getCategoryName()).thenReturn(testCategoryName);
 		when(model.getProjects()).thenReturn(
 				storage.getProjects(testCategoryName));
 
@@ -97,7 +95,7 @@ public class CategoryViewTest {
 		}).when(output).println(anyString());
 
 		CategoryView categoryView = new CategoryView(output);
-		categoryView.printProjects(model);
+		categoryView.printProjects(model, testCategoryName);
 		String[] expectedResult = { "",
 				"There are no projects of category \"ART\"", "", "(0 - back)" };
 		assertArrayEquals("Wrong empty project list warning", expectedResult,

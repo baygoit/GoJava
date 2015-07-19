@@ -25,7 +25,7 @@ public class CategoryController implements DispatcherListener {
 		try {
 			userChoice = Integer.parseInt(input);
 		} catch (NumberFormatException e) {
-			showMessage("Input waits for integer numbers only - try one more time");
+			showMessage(ControllerMessages.INPUT_NOT_INTEGER_WARNING);
 			return move;
 		}
 		if (userChoice == 0) {
@@ -33,31 +33,29 @@ public class CategoryController implements DispatcherListener {
 		} else if (userChoice > 0 && userChoice <= model.size()) {
 			move = 1;
 		} else {
-			showMessage("Wrong option number");
+			showMessage(ControllerMessages.WRONG_USER_CHOICE_WARNING);
 		}
 		return move;
 	}
 
 	@Override
-	public void onTakeControl(int move) {
-		if (move >= 0) {
-			updateModel();
-		}
+	public void onTakeControl() {
+		updateModel();
 		updateView();
 	}
-	
+
 	public Project getChosenProject() {
 		return model.getChosenProject(userChoice);
 	}
-	
-	private void updateModel(){
+
+	private void updateModel() {
 		model.update(parentController.getChosenCategoryName());
 	}
-	
+
 	private void updateView() {
-		view.printProjects(model);
+		view.printProjects(model, parentController.getChosenCategoryName());
 	}
-	
+
 	private void showMessage(String msg) {
 		view.showMsg(msg);
 	}

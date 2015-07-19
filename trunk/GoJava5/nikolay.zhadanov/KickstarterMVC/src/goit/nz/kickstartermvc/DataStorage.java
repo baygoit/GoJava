@@ -30,16 +30,23 @@ public class DataStorage {
 	public void registerProjects(List<Project> projects) {
 		this.projects = projects;
 	}
-	
+
 	public List<Quote> getQuotes() {
 		return quotes;
 	}
-	
+
 	public List<Category> getCategories() {
 		return categories;
 	}
-	
-	public List<Project> getProjects() {
-		return projects;
+
+	public List<Project> getProjects(String chosenCategoryName) {
+		List<Project> result = new ArrayList<>();
+		for (Project project : projects) {
+			if (project.getCategory().getName().equals(chosenCategoryName)) {
+				result.add(project);
+			}
+		}
+		return result;
 	}
+
 }

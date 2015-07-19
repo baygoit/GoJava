@@ -22,7 +22,8 @@ public class Kickstarter {
 
 	public Kickstarter(DataStorage storage, Output output, Input input) {
 		this.input = input;
-		mainPageController = new MainPageController(new MainPageModel(storage),
+		mainPageController = new MainPageController(
+				new MainPageModel(storage),
 				new MainPageView(output));
 		categoryController = new CategoryController(new CategoryModel(storage),
 				new CategoryView(output), mainPageController);

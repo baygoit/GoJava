@@ -24,19 +24,19 @@ public class ProjectController implements DispatcherListener {
 		try {
 			userChoice = Integer.parseInt(input);
 		} catch (NumberFormatException e) {
-			showMessage("Input waits for integer numbers only - try one more time");
+			showMessage(ControllerMessages.INPUT_NOT_INTEGER_WARNING);
 			return move;
 		}
 		if (userChoice == 0) {
 			move = -1;
 		} else {
-			showMessage("Wrong option number");
+			showMessage(ControllerMessages.WRONG_USER_CHOICE_WARNING);
 		}
 		return move;
 	}
 
 	@Override
-	public void onTakeControl(int move) {
+	public void onTakeControl() {
 		updateModel();
 		updateView();
 	}

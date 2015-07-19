@@ -8,7 +8,6 @@ import java.util.List;
 
 public class CategoryModel {
 
-	private String chosenCategoryName;
 	private List<Project> categoryProjects;
 	private DataStorage storage;
 
@@ -17,21 +16,12 @@ public class CategoryModel {
 	}
 
 	public void update(String categoryName) {
-		this.chosenCategoryName = categoryName;
 		categoryProjects = new ArrayList<>();
-		for (Project project : storage.getProjects()) {
-			if (project.getCategory().getName().equals(chosenCategoryName)) {
-				categoryProjects.add(project);
-			}
-		}
+		categoryProjects.addAll(storage.getProjects(categoryName));
 	}
 
 	public List<Project> getProjects() {
 		return categoryProjects;
-	}
-
-	public String getCategoryName() {
-		return chosenCategoryName;
 	}
 
 	public int size() {

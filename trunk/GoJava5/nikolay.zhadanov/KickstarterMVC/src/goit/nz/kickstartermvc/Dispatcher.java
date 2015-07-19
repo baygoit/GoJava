@@ -8,7 +8,7 @@ import java.util.List;
 public class Dispatcher implements InputListener {
 
 	private List<DispatcherListener> controllerListeners;
-	private int currentListener;
+	private int currentListenerIndex;
 
 	public Dispatcher() {
 		controllerListeners = new ArrayList<>();
@@ -19,11 +19,11 @@ public class Dispatcher implements InputListener {
 	}
 
 	public int onInput(String input) {
-		int move = controllerListeners.get(currentListener).onInput(input);
-		currentListener += move;
-		if (currentListener >= 0) {
-			controllerListeners.get(currentListener).onTakeControl(move);
+		int move = controllerListeners.get(currentListenerIndex).onInput(input);
+		currentListenerIndex += move;
+		if (currentListenerIndex >= 0) {
+			controllerListeners.get(currentListenerIndex).onTakeControl();
 		}
-		return currentListener;
+		return currentListenerIndex;
 	}
 }

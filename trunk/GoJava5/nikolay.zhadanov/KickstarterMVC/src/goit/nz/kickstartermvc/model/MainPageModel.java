@@ -4,6 +4,7 @@ import goit.nz.kickstartermvc.DataStorage;
 import goit.nz.kickstartermvc.dao.Category;
 import goit.nz.kickstartermvc.dao.Quote;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -14,7 +15,6 @@ public class MainPageModel {
 
 	public MainPageModel(DataStorage storage) {
 		this.storage = storage;
-		update();
 	}
 
 	public List<Category> getCategories() {
@@ -38,7 +38,8 @@ public class MainPageModel {
 		return categories.size();
 	}
 
-	private void update() {
-		categories = storage.getCategories();
+	public void update() {
+		categories = new ArrayList<>();
+		categories.addAll(storage.getCategories());
 	}
 }
