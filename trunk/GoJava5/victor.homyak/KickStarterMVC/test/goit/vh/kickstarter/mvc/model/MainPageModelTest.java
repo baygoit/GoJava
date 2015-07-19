@@ -30,22 +30,22 @@ public class MainPageModelTest {
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
     }
-
-    @Test
-    public void whenGetMsgThanReturnNotNull() throws Exception {
-        //I`m not instantiating MainPageModel class and do not set dataRegistry field in it.
-        //It was done by Mockito framework in setUp method.
-        //Also you need to annotate MainPageModel field with @InjectMocks and DataRegistry with @Mock
-        //annotations to make it works.
-        //Google MockitoAnnotations, @Mock, @InjectMocks documentation for more info.
-        when(dataRegistry.getHelloMsg()).thenReturn("Hello Msg");
-
-        String result = model.getHelloMsg();
-
-        //You can have several common assertions in one test method
-        assertNotNull("Hello msg must not be null", result);
-        assertEquals("Hello Msg must be the same as in date registry", "Hello Msg", result);
-    }
+//
+//    @Test
+//    public void whenGetMsgThanReturnNotNull() throws Exception {
+//        //I`m not instantiating MainPageModel class and do not set dataRegistry field in it.
+//        //It was done by Mockito framework in setUp method.
+//        //Also you need to annotate MainPageModel field with @InjectMocks and DataRegistry with @Mock
+//        //annotations to make it works.
+//        //Google MockitoAnnotations, @Mock, @InjectMocks documentation for more info.
+//        when(dataRegistry.getHelloMsg()).thenReturn("Hello Msg");
+//
+//        String result = model.getHelloMsg();
+//
+//        //You can have several common assertions in one test method
+//        assertNotNull("Hello msg must not be null", result);
+//        assertEquals("Hello Msg must be the same as in date registry", "Hello Msg", result);
+//    }
 
 
 

@@ -11,10 +11,6 @@ public class MainPageModel {
 
     private DataRegistry dataRegistry;
 
-    public String getHelloMsg() {
-        return dataRegistry.getHelloMsg();
-    }
-
     public Category[] getCategories() {
         return dataRegistry.getCategories();
     }

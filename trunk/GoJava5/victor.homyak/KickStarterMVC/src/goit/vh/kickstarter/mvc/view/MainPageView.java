@@ -1,5 +1,6 @@
 package goit.vh.kickstarter.mvc.view;
 
+import goit.vh.kickstarter.Input;
 import goit.vh.kickstarter.Output;
 import goit.vh.kickstarter.QuoteGenerator;
 import goit.vh.kickstarter.mvc.model.MainPageModel;
@@ -13,7 +14,7 @@ import java.util.Scanner;
  * User: Viktor
  */
 public class MainPageView {
-    private String input;
+
     private Output output;
 
     public MainPageView(Output output) {
@@ -30,20 +31,5 @@ public class MainPageView {
             output.println(String.valueOf(i + 1) + " " + categories[i].getName());
         }
 
-    }
-
-    public void readUserInput() {
-        Scanner scanner = new Scanner(System.in);
-        String userInput = scanner.next();
-        this.input = userInput;
-    }
-
-
-    public void setInput(String input) {
-        this.input = input;
-    }
-
-    public String getInput() {
-        return this.input;
     }
 }

@@ -15,7 +15,6 @@ public class LocationManager {
     private CategoryController categoryController;
     private ProjectController projectController;
     private int[] path = {0, 0};
-    public boolean goToListOfModels = false;
 
     public LocationManager(MainPageController mainPageController, CategoryController categoryController,
                            ProjectController projectController) {
@@ -25,19 +24,11 @@ public class LocationManager {
     }
 
     public void onApplicationStart() {
-       dispatch();
+        dispatch();
     }
 
-    public void categoryControllerStart(int index) {
-        path[0] = index;
-        categoryController.start(path);
-    }
 
     public void dispatch() {
-        if (goToListOfModels) {
-            projectController.start(path);
-            goToListOfModels = true;
-        }
         if (path[0] == 0 && path[1] == 0) {
             mainPageController.start(path);
         }
@@ -48,10 +39,6 @@ public class LocationManager {
             projectController.start(path);
         }
 
-    }
-
-    public void setInputIndex(int inputIndex) {
-        path[0] = inputIndex;
     }
 
     public void setPath(int[] path) {

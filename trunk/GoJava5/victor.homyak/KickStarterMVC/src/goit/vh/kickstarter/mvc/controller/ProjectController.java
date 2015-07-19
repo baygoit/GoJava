@@ -1,7 +1,9 @@
 package goit.vh.kickstarter.mvc.controller;
 
 import goit.vh.kickstarter.DataRegistry;
+import goit.vh.kickstarter.Input;
 import goit.vh.kickstarter.LocationManager;
+import goit.vh.kickstarter.Output;
 import goit.vh.kickstarter.mvc.model.ProjectModel;
 import goit.vh.kickstarter.mvc.view.ProjectView;
 
@@ -14,38 +16,30 @@ public class ProjectController {
     private ProjectView projectView;
     private LocationManager locationManager;
     private DataRegistry dataRegistry;
-
+    private Input input = new Input();
+    private Output output = new Output();
     public ProjectController(ProjectView projectView, ProjectModel projectModel) {
         this.projectModel = projectModel;
         this.projectView = projectView;
     }
 
     public void start(int[] path) {
-        if (path[0]!=0&& path[1]==0) {
-            projectModel.refreshListModel(path[0]);
-            projectView.renderList(projectModel.getListOfProjectses());
-            projectView.readUserInput();
-            String userInput = projectView.getInput();
-            int index = Integer.parseInt(userInput);
-            path[1]= index;
-            if (index==0) {
-                path[0] = 0;
-            }
-            locationManager.setPath(path);
-            locationManager.dispatch();
-          
-        }
-        if (path[0]!=0&& path[1]!=0) {
+        if (path[0] != 0 && path[1] != 0) {
             projectModel.refreshModel(path);
             projectView.render(projectModel);
             projectView.readInProjectUserInput();
-            String userInput = projectView.getInput();
-            int index = Integer.parseInt(userInput);
-            path[1]= 0;
-            if (index==0) {
-                path[0] = 0;
+            int index = Integer.parseInt(input.getInput());
+            path[1]=index;
+            if(projectModel.refreshModel(path)==null){
+                output.println("You choose not sutable variant, try more.");
             }
-            locationManager.dispatch();
+            else {
+                path[1] = 0;
+                if (index == 0) {
+                    path[0] = 0;
+                }
+                locationManager.dispatch();
+            }
         }
     }
 

@@ -1,6 +1,7 @@
 package goit.vh.kickstarter.mvc.model;
 
 import goit.vh.kickstarter.DataRegistry;
+import goit.vh.kickstarter.Output;
 import goit.vh.kickstarter.model.Category;
 
 /**
@@ -12,18 +13,22 @@ public class CategoryModel {
     private DataRegistry dataRegistry;
     private String categoryName;
     private String categoryIndex;
+    private Output output = new Output();
 
     public CategoryModel(DataRegistry dataRegistry) {
         this.dataRegistry = dataRegistry;
     }
 
-
-    public void refreshModel(int input) {
-        Category category = dataRegistry.getCategories()[input - 1];
-
-        categoryIndex = String.valueOf(input);
-        categoryName = category.getName();
-
+    public Object refreshModel(int input) {
+        if (dataRegistry.getCategories().length < input - 1) {
+            output.println("You choose not sutable variant, try more.");
+            return null;
+        } else {
+            Category category = dataRegistry.getCategories()[input - 1];
+            categoryIndex = String.valueOf(input);
+            categoryName = category.getName();
+            return 1;
+        }
     }
 
     public String getCategoryName() {

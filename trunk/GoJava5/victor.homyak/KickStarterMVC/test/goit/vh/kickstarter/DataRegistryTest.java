@@ -13,24 +13,24 @@ import goit.vh.kickstarter.model.Category;
  */
 public class DataRegistryTest {
 
-    @Test
-    public void whenGetMsgThanReturnNotNull() throws Exception {
-        DataRegistry dataRegistry = new DataRegistry();
+//    @Test
+//    public void whenGetMsgThanReturnNotNull() throws Exception {
+//        DataRegistry dataRegistry = new DataRegistry();
+//
+//        String result = dataRegistry.getHelloMsg();
+//
+//        Assert.assertNotNull("Hello msg must not be null", result);
+//    }
 
-        String result = dataRegistry.getHelloMsg();
 
-        Assert.assertNotNull("Hello msg must not be null", result);
-    }
-
-
-    @Test
-    public void wenGetMsgThanReturnSomeStr() throws Exception {
-        DataRegistry dataRegistry = new DataRegistry();
-
-        String result = dataRegistry.getHelloMsg();
-
-        Assert.assertTrue("Hello msg must not be empty", result.trim().length() > 0);
-    }
+//    @Test
+//    public void wenGetMsgThanReturnSomeStr() throws Exception {
+//        DataRegistry dataRegistry = new DataRegistry();
+//
+//        String result = dataRegistry.getHelloMsg();
+//
+//        Assert.assertTrue("Hello msg must not be empty", result.trim().length() > 0);
+//    }
 
     @Test
     public void whenGetCategoriesThanReturnNotNull() throws Exception {

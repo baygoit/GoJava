@@ -2,6 +2,7 @@ package goit.vh.kickstarter.mvc.view;
 
 import goit.vh.kickstarter.Output;
 import goit.vh.kickstarter.mvc.model.CategoryModel;
+import goit.vh.kickstarter.mvc.model.ProjectModel;
 
 /**
  * Created with IntelliJ IDEA.
@@ -18,4 +19,5 @@ public class CategoryView {
     public void render(CategoryModel categoryModel) {
         output.println("You choose option " + categoryModel.getCategoryIndex() + ": " + categoryModel.getCategoryName());
     }
+
 }

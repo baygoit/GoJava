@@ -1,9 +1,7 @@
 package goit.vh.kickstarter.mvc.controller;
 
 import goit.vh.kickstarter.Input;
-import goit.vh.kickstarter.InputListener;
 import goit.vh.kickstarter.LocationManager;
-import goit.vh.kickstarter.mvc.model.CategoryModel;
 import goit.vh.kickstarter.mvc.model.MainPageModel;
 import goit.vh.kickstarter.mvc.view.MainPageView;
 
@@ -16,6 +14,7 @@ public class MainPageController {
     private LocationManager locationManager;
     private MainPageView view;
     private MainPageModel model;
+    private Input input = new Input();
 
     public MainPageController(MainPageView view, MainPageModel model) {
         this.view = view;
@@ -24,8 +23,7 @@ public class MainPageController {
 
     public void start(int[] path) {
         view.render(model);
-        view.readUserInput();
-        String userInput = view.getInput();
+        String userInput = input.getInput();
         int index = Integer.parseInt(userInput);
         path[0] = index;
         locationManager.dispatch();
