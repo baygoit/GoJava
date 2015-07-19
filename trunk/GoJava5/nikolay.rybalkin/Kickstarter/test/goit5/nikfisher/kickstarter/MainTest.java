@@ -171,10 +171,14 @@ public class MainTest{
         main.run();
 
         //then
+        List<String> values = assertPrinted(io, 5);
+
+        assertTrue(values.toString().contains("Test quote"));
+    }
+
+    private List<String> assertPrinted(InputOutputConsoleInterface io, int times) {
         ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
-        verify(io, times(5)).println(captor.capture());
-        List<String> valies = captor.getAllValues();
-        assertTrue(valies.toString().contains("Test quote"));
-        assertTrue(valies.toString().contains("[0...1 or 0 for exit to the projects list]"));
+        verify(io, times(times)).println(captor.capture());
+        return captor.getAllValues();
     }
 }
