@@ -12,12 +12,12 @@ public class Main {
 	//Выбираю его -> Вижу вопрос от пеймент системы о вводе имени и номера карточки и суммы -> Ввожу их ->
 	//Перехожу на описание проекта, где вижу что инфа о количестве пожертвований поменялась
 
-	//TODO для каждого конкретного проекта
+	//done для каждого конкретного проекта
 	//TODO добавить раздел "оплата"
 	//TODO сделать так что-бы сумма списывалась из проекта как оплаченна\
 
 	private String SPACE = " ";
-	private Categories categories;
+	private Categories    categories;
 	private Projects projects;
 	private InputOutputConsoleInterface io;
 	private QuoteGenerate generator;
@@ -39,7 +39,6 @@ public class Main {
 		io.println("Thank you for using our service!");
 	}
 
-	//TODO вынести менюхи в некий абстрактный класс
 	private Menu categoryMenu() {
 
 		return new Menu(io) {
@@ -99,6 +98,8 @@ public class Main {
 
 				if (menu == 1){
 					io.println("Thank you want to help!");
+
+					int name = io.consoleScanInt();
 				}
 
 				return null;

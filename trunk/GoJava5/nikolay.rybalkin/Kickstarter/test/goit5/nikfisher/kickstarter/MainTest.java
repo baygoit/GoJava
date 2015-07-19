@@ -27,7 +27,7 @@ public class MainTest{
 
         //when
         when(generator.quoteGenerate()).thenReturn("Test quote");
-        when(io.consoleScan()).thenReturn(1, 0, 0);
+        when(io.consoleScanInt()).thenReturn(1, 0, 0);
 
         main.run();
 
@@ -79,12 +79,12 @@ public class MainTest{
 
         //1 - выбор категории 1
         //2 - выбор проекта 2
-        //0 - выход из проекта TODO
+        //0 - выход из проекта
         //0 - выход из списка проектов
         //0 - выход из списка категорий
         //0 - выход из программы
 
-        when(io.consoleScan()).thenReturn(1, 2, 0, 0, 0);
+        when(io.consoleScanInt()).thenReturn(1, 2, 0, 0, 0);
 
         main.run();
 
@@ -130,7 +130,7 @@ public class MainTest{
 
         //when
         when(generator.quoteGenerate()).thenReturn("Test quote");
-        when(io.consoleScan()).thenReturn(1, 1, 1, 0, 0, 0);
+        when(io.consoleScanInt()).thenReturn(1, 1, 1, 0, 0, 0);
 
         main.run();
 

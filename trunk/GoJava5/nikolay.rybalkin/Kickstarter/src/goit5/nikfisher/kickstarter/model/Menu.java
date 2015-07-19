@@ -16,7 +16,7 @@ public abstract class Menu {
 
             ask();
 
-            int menuIndex = io.consoleScan();
+            int menuIndex = io.consoleScanInt();
 
             if (menuIndex == 0){
                 break;

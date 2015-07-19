@@ -7,7 +7,13 @@ public class InputOutputConsole implements InputOutputConsoleInterface{
 
 
     @Override
-    public int consoleScan() {
+    public String consoleScanString() {
+        Scanner scaner = new Scanner(System.in);
+        return scaner.next();
+    }
+
+    @Override
+    public int consoleScanInt() {
         Scanner scaner = new Scanner(System.in);
         int number = 0;
         try {

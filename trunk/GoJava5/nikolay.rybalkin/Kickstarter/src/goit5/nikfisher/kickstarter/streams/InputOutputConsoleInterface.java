@@ -2,7 +2,9 @@ package goit5.nikfisher.kickstarter.streams;
 
 public interface InputOutputConsoleInterface {
 
-    int consoleScan();
+    String consoleScanString();
+
+    int consoleScanInt();
 
     void println(String a);
 
