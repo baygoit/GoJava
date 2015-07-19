@@ -103,7 +103,7 @@ public class MainTest{
         verify(io, times(5)).println(" ");
         verify(io, times(2)).println("Project name: Game2 \"Popcorn\"");
         verify(io, times(2)).println("Select project: [0...1 or 0 for exit to the projects list");
-        verify(io, times(1)).println("You selected project: Game2 \"Popcorn\"");
+//        verify(io, times(1)).println("You selected project: Game2 \"Popcorn\"");
         verify(io, times(1)).println("Project detail:");
         verify(io, times(1)).println("history");
         verify(io, times(2)).println("QA");
@@ -136,6 +136,6 @@ public class MainTest{
 
         //then
         verify(io, times(2)).println("Operations on the project: [0 - go to the list of projects, 1 - invest in the project]");
-        verify(io, times(1)).println("Thank you want to help");
+        verify(io, times(1)).println("Thank you want to help!");
     }
 }

@@ -32,78 +32,95 @@ public class Main {
 
 	public void run() {
 
-//		Output output = new Output();
-
 		io.println(generator.quoteGenerate());
 
-		categoryMenu();
+		categoryMenu().runMenu();
+
 		io.println("Thank you for using our service!");
 	}
 
 	//TODO вынести менюхи в некий абстрактный класс
-	private void categoryMenu() {
-		while (true){
+	private Menu categoryMenu() {
 
-			askCategory();
+		return new Menu(io) {
 
-			int categoryIndex = io.consoleScan();
+			@Override
+			public Menu nextMenu(Object selected) {
+				Category category = (Category)selected;
+				Project[] found = projects.getProgects(category);
+				printProjects(found);
 
-			if (categoryIndex == 0){
-				break;
-			}
-			Category category = shooseCategory(categoryIndex);
-
-			if (category == null){
-				continue;
+				return projectsMenu(found);
 			}
 
-			Project[] foundProjects = projects.getProgects(category);
-			printProjects(foundProjects);
+			@Override
+			public Object choose(int menuIndex) {
+				return chooseCategory(menuIndex);
+			}
 
-			projectsMenu(foundProjects);
-		}
+			@Override
+			public void ask() {
+				askCategory();
+			}
+		};
 	}
 
-	private void projectsMenu(Project[] foundProjects) {
-		while (true) {
+	private Menu projectsMenu(final Project[] found) {
 
-            ascProjects(foundProjects);
+		return new Menu(io) {
 
-            int menuIndexElement = io.consoleScan();
+			@Override
+			public Menu nextMenu(Object selected) {
+				Project project = (Project)selected;
+				printProjectDetail(project);
+				projectMenu(project);
+				return projectMenu(project);
+			}
 
-            if (menuIndexElement == 0){
-                break;
-            }
+			@Override
+			public Object choose(int menuIndex) {
+				return chooseProjects(menuIndex, found);
+			}
 
-            if (menuIndexElement <= 0 || foundProjects.length <  menuIndexElement){
-				io.println("Not true index: " + menuIndexElement);
-                continue;
-            }
-
-            Project project = foundProjects[menuIndexElement - 1];
-            shooseProject(project);
-            printProjectDetail(project);
-
-			projectMenu(project);
-        }
+			@Override
+			public void ask() {
+				ascProjects(found);
+			}
+		};
 	}
 
-	private void projectMenu(Project project) {
-		while (true) {
+	private Menu projectMenu(Project project) {
 
-			ascProject(project);
+		return new Menu(io) {
 
-			int menuIndexElement = io.consoleScan();
+			@Override
+			public Menu nextMenu(Object selected) {
+				Integer menu = (Integer)selected;
 
-			if (menuIndexElement == 0){
-				break;
+				if (menu == 1){
+					io.println("Thank you want to help!");
+				}
+
+				return null;
 			}
 
-			//TODO добавить логику работы
-			if (menuIndexElement == 1){
-				io.println("Thank you want to help");
+			@Override
+			public Object choose(int menuIndex) {
+				return menuIndex;
 			}
-		}
+
+			@Override
+			public void ask() {
+				ascProject(project);
+			}
+		};
+	}
+
+	private void askCategory() {
+
+		io.println(SPACE);
+		io.println("Select category (or 0 to exit): ");
+		io.println(Arrays.toString(categories.getCategories()));
 	}
 
 	private void ascProject(Project project) {
@@ -165,14 +182,9 @@ public class Main {
 		io.println(SPACE);
 	}
 
-	private void askCategory() {
 
-		io.println(SPACE);
-		io.println("Select category (or 0 to exit): ");
-		io.println(Arrays.toString(categories.getCategories()));
-	}
 
-	private Category shooseCategory(int categoryIndex) {
+	private Category chooseCategory(int categoryIndex) {
 
 		if ( categoryIndex <= 0 || categories.size() < categoryIndex){
 			io.println("Not true index: " + categoryIndex);
@@ -184,7 +196,17 @@ public class Main {
 		return category;
 	}
 
-	private void shooseProject(Project project) {
+	private Project chooseProjects(int projectMenuIndex, Project[] foundProjects){
+
+		if (projectMenuIndex <= 0 || foundProjects.length <  projectMenuIndex){
+			io.println("Not true index: " + projectMenuIndex);
+			return null;
+		}
+		Project project = foundProjects[projectMenuIndex - 1];
+		return project;
+	}
+
+	private void chooseProject(Project project) {
 
 		io.println("You selected project: " + project.getName());
 	}
