@@ -85,9 +85,26 @@ public class Kickstarter {
             @Override
             public Menu nextMenu(Object selected) {
                 int chosenMenuIndex = (int) selected;
-                if (chosenMenuIndex == 1) {
+                if (chosenMenuIndex == 1){
                     io.println("Thanks for helping our project");
+                    io.println("Enter your name");
                     String name = io.read();
+                    io.println("Enter the number of your card");
+                    int cardNumber = Integer.parseInt(io.read());
+                    io.println("Enter the amount of money");
+                    int amount = Integer.parseInt(io.read());
+                    chosenProject.setMoneyCollected(chosenProject.getMoneyCollected() + amount);
+                    io.println("Thank you! You can go!");
+                }
+                if (chosenMenuIndex == 2){
+                    io.println("Enter your name");
+                    String name = io.read();
+                    io.println("Enter your question");
+                    String question = io.read();
+                    io.println("Thank you " + name + " for your question");
+                    io.println("---------------------------------------");
+
+                    chosenProject.setQuestionsAndAnswers((question));
                 }
                 return null; /// payment menu
             }
