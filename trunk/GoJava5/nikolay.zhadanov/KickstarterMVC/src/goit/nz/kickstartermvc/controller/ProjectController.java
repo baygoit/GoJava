@@ -10,6 +10,8 @@ public class ProjectController implements DispatcherListener {
 	private ProjectModel model;
 	private ProjectView view;
 	private int userChoice;
+	private String chosenCategoryName;
+	private int chosenProjectIndex;
 
 	public ProjectController(ProjectModel model, ProjectView view,
 			CategoryController parent) {
@@ -29,6 +31,8 @@ public class ProjectController implements DispatcherListener {
 		}
 		if (userChoice == 0) {
 			move = -1;
+		} else if (userChoice == 1) {
+			move = userChoice;
 		} else {
 			showMessage(ControllerMessages.WRONG_USER_CHOICE_WARNING);
 		}
@@ -37,12 +41,19 @@ public class ProjectController implements DispatcherListener {
 
 	@Override
 	public void onTakeControl() {
+		chosenCategoryName = parentController.getProjectCategoryName();
+		chosenProjectIndex = parentController.getProjectIndex();
 		updateModel();
 		updateView();
 	}
 
+	public void addPayment(int amount) {
+		model.updatePledgedAmount(chosenCategoryName, chosenProjectIndex,
+				amount);
+	}
+
 	private void updateModel() {
-		model.update(parentController.getChosenProject());
+		model.update(chosenCategoryName, chosenProjectIndex);
 	}
 
 	private void updateView() {

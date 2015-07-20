@@ -49,4 +49,10 @@ public class DataStorage {
 		return result;
 	}
 
+	public void addPledgedAmount(String categoryName, int projectIndex,
+			int amount) {
+		getProjects(categoryName).get(projectIndex - 1)
+				.addPledgedAmount(amount);
+	}
+
 }

@@ -97,4 +97,8 @@ public class Project {
 		}
 		return fAQ;
 	}
+	
+	public void addPledgedAmount(int amount) {
+		amountCollected += amount;
+	}
 }

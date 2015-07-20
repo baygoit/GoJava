@@ -1,7 +1,6 @@
 package goit.nz.kickstartermvc.controller;
 
 import goit.nz.kickstartermvc.DispatcherListener;
-import goit.nz.kickstartermvc.dao.Project;
 import goit.nz.kickstartermvc.model.CategoryModel;
 import goit.nz.kickstartermvc.view.CategoryView;
 
@@ -11,6 +10,7 @@ public class CategoryController implements DispatcherListener {
 	private CategoryModel model;
 	private CategoryView view;
 	private int userChoice;
+	private String chosenCategoryName;
 
 	public CategoryController(CategoryModel model, CategoryView view,
 			MainPageController parent) {
@@ -40,20 +40,25 @@ public class CategoryController implements DispatcherListener {
 
 	@Override
 	public void onTakeControl() {
+		chosenCategoryName = parentController.getChosenCategoryName();
 		updateModel();
 		updateView();
 	}
 
-	public Project getChosenProject() {
-		return model.getChosenProject(userChoice);
+	public int getProjectIndex() {
+		return userChoice;
+	}
+	
+	public String getProjectCategoryName() {
+		return chosenCategoryName;
 	}
 
 	private void updateModel() {
-		model.update(parentController.getChosenCategoryName());
+		model.update(chosenCategoryName);
 	}
 
 	private void updateView() {
-		view.printProjects(model, parentController.getChosenCategoryName());
+		view.printProjects(model, chosenCategoryName);
 	}
 
 	private void showMessage(String msg) {

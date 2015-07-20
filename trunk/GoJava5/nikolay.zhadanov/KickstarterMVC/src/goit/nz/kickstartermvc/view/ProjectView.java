@@ -15,12 +15,17 @@ public class ProjectView {
 	public void printProject(ProjectModel model) {
 		Project chosenProject = model.getProject();
 		if (chosenProject == null) {
-			showMsg("NPE case - model haven't returned the project");
+			printProjectNotFound();
 		} else {
 			printTitle(chosenProject.getName());
 			printProjectDetails(chosenProject);
+			printOptions();
 		}
-		printOptions();
+	}
+
+	private void printProjectNotFound() {
+		showMsg("NPE case - model haven't returned the project");
+		showMsg("[0 - Back]");
 	}
 
 	public void showMsg(String msg) {
@@ -53,6 +58,8 @@ public class ProjectView {
 
 	private void printOptions() {
 		output.println("");
-		output.println("(0 - back)");
+		output.println("Choose your option:");
+		output.println("[1 - Invest]");
+		output.println("[0 - Back]");
 	}
 }

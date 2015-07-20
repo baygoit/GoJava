@@ -28,7 +28,4 @@ public class CategoryModel {
 		return categoryProjects.size();
 	}
 
-	public Project getChosenProject(int index) {
-		return categoryProjects.get(index - 1);
-	}
 }

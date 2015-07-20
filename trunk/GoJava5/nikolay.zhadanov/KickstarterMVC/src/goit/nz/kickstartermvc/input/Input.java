@@ -13,7 +13,7 @@ public class Input {
 	public void listenInput() {
 		Scanner scanner  = new Scanner(System.in);
 		while (scanner.hasNext()) {
-			if (listener.onInput(scanner.next()) < 0) {
+			if (listener.onInput(scanner.nextLine()) < 0) {
 				break;
 			}
 		}
