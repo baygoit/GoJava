@@ -7,8 +7,17 @@ import java.util.Arrays;
 
 public class Main {
 
+	//UserStory 6 Как гость я хочу инвестировать в понравившийся мне проект, чтобы поддержать его
+	//Сценарий: Находясь в конкретном проекте -> Вижу меню с вариантами, что могу сделать, один из пунктов - проинвестировать в проект ->
+	//Выбираю его -> Вижу вопрос от пеймент системы о вводе имени и номера карточки и суммы -> Ввожу их ->
+	//Перехожу на описание проекта, где вижу что инфа о количестве пожертвований поменялась
+
+	//TODO для каждого конкретного проекта
+	//TODO добавить раздел "оплата"
+	//TODO сделать так что-бы сумма списывалась из проекта как оплаченна\
+
 	private String SPACE = " ";
-	private Categories    categories;
+	private Categories categories;
 	private Projects projects;
 	private InputOutputConsoleInterface io;
 	private QuoteGenerate generator;
@@ -23,127 +32,111 @@ public class Main {
 
 	public void run() {
 
+//		Output output = new Output();
+
 		io.println(generator.quoteGenerate());
 
-		categoryMenu().runMenu();
-
-		io.println("Thank you for using our service!");
+		categoryMenu();
+		io.println("Sank!");
 	}
 
-	private Menu categoryMenu() {
+	//TODO вынести менюхи в некий абстрактный класс
+	private void categoryMenu() {
+		while (true){
 
-		return new Menu(io) {
+			askCategory();
 
-			@Override
-			public Menu nextMenu(Object selected) {
-				Category category = (Category)selected;
-				Project[] found = projects.getProgects(category);
-				printProjects(found);
+			int categoryIndex = io.consoleScanInt();
 
-				return projectsMenu(found);
+			if (categoryIndex == 0){
+				break;
+			}
+			Category category = shooseCategory(categoryIndex);
+
+			if (category == null){
+				continue;
 			}
 
-			@Override
-			public Object choose(int menuIndex) {
-				return chooseCategory(menuIndex);
-			}
+			Project[] foundProjects = projects.getProgects(category);
+			printProjects(foundProjects);
 
-			@Override
-			public void ask() {
-				askCategory();
-			}
-		};
+			projectsMenu(foundProjects);
+		}
 	}
 
-	private Menu projectsMenu(final Project[] found) {
+	private void projectsMenu(Project[] foundProjects) {
+		while (true) {
 
-		return new Menu(io) {
+            ascProjects(foundProjects);
 
-			@Override
-			public Menu nextMenu(Object selected) {
-				Project project = (Project)selected;
-				printProjectDetail(project);
-				projectMenu(project);
-				return projectMenu(project);
-			}
+            int menuIndexElement = io.consoleScanInt();
 
-			@Override
-			public Object choose(int menuIndex) {
-				return chooseProjects(menuIndex, found);
-			}
+            if (menuIndexElement == 0){
+                break;
+            }
 
-			@Override
-			public void ask() {
-				ascProjects(found);
-			}
-		};
+            if (menuIndexElement <= 0 || foundProjects.length <  menuIndexElement){
+				io.println("Not true index: " + menuIndexElement);
+                continue;
+            }
+
+            Project project = foundProjects[menuIndexElement - 1];
+            shooseProject(project);
+            printProjectDetail(project);
+
+			projectMenu(project);
+        }
 	}
 
-	private Menu projectMenu(Project project) {
+	private void projectMenu(Project project) {
+		while (true) {
 
-		return new Menu(io) {
+			ascProject(project);
 
-			@Override
-			public Menu nextMenu(Object selected) {
-				Integer menu = (Integer)selected;
+			int menuIndexElement = io.consoleScanInt();
 
-				if (menu == 1){
-					io.println("Thank you want to help!");
-					int required_amount = project.getAmount();
-					io.println("The required amount: " + String.valueOf(required_amount));
-
-					io.println("1) If you invest up to 10% of the required amount, you will receive a 1% to 5%.");
-					io.println("2) If you invest up to 50% of the required amount, you will receive a 5% to 15%.");
-					io.println("3) If you invest up to 100% of the required amount, you will receive a 15% to 30%.");
-					io.println("-----------------");
-					io.println("Enter your name");
-					String name = io.consoleScanString();
-					io.println("Enter the number of your card");
-					int cardNumber = io.consoleScanInt();
-					io.println("Enter the amount of money");
-					int amount = io.consoleScanInt();
-					//TODO проверку наа вводимые значения
-					//TODO зачислить деньги на счет проекта
-
-					io.println("Thank you " + name + " your money is successfully transferred to the account of the project");
-					io.println("---------------------------------------");
-
-					project.donate((amount));
-				}
-				if (menu == 2){
-					io.println("Enter your name");
-					String name = io.consoleScanString();
-					io.println("Enter your question");
-					String question = io.consoleScanString();
-					io.println("Thank you " + name + " for your question");
-					io.println("---------------------------------------");
-
-					project.question((question));
-				}
-				return null;
+			if (menuIndexElement == 0){
+				break;
 			}
 
-			@Override
-			public Object choose(int menuIndex) {
-				return menuIndex;
+			if (menuIndexElement == 1){
+				io.println("Thank you want to help!");
+				int required_amount = project.getAmount();
+				io.println("The required amount: " + String.valueOf(required_amount));
+
+				io.println("1) If you invest up to 10% of the required amount, you will receive a 1% to 5%.");
+				io.println("2) If you invest up to 50% of the required amount, you will receive a 5% to 15%.");
+				io.println("3) If you invest up to 100% of the required amount, you will receive a 15% to 30%.");
+				io.println("-----------------");
+				io.println("Enter your name");
+				String name = io.consoleScanString();
+				io.println("Enter the number of your card");
+				int cardNumber = io.consoleScanInt();
+				io.println("Enter the amount of money");
+				int amount = io.consoleScanInt();
+				//TODO проверку наа вводимые значения
+				//TODO зачислить деньги на счет проекта
+
+				io.println("Thank you " + name + " your money is successfully transferred to the account of the project");
+				io.println("---------------------------------------");
+
+				project.donate((amount));
 			}
+			if (menuIndexElement == 2){
+				io.println("Enter your name");
+				String name = io.consoleScanString();
+				io.println("Enter your question");
+				String question = io.consoleScanString();
+				io.println("Thank you " + name + " for your question");
+				io.println("---------------------------------------");
 
-			@Override
-			public void ask() {
-				ascProject(project);
+				project.question((question));
 			}
-		};
-	}
-
-	private void askCategory() {
-
-		io.println(SPACE);
-		io.println("Select category (or 0 to exit): ");
-		io.println(Arrays.toString(categories.getCategories()));
+		}
 	}
 
 	private void ascProject(Project project) {
-		io.println("Operations on the project: [0 - go to the list of projects, 1 - invest in the project, 2 - ask a Question]");
+		io.println("Operations on the project: [0 - go to the list of projects, 1 - invest in the project, 2 - asc questions");
 	}
 
 
@@ -154,7 +147,7 @@ public class Main {
 		}else {
 			int from = 0;
 			int to = foundProjects.length - 1;
-			io.println("Select project: [" + from + "..." +  to  + " or 0 for exit to the projects list]");
+			io.println("Select project: [" + from + "..." +  to  + " or 0 for exit to the projects list");
 		}
 	}
 
@@ -183,7 +176,6 @@ public class Main {
 			io.println(ansver);
 		}
 
-
 		io.println("---------------------------------------");
 	}
 
@@ -207,9 +199,14 @@ public class Main {
 		io.println(SPACE);
 	}
 
+	private void askCategory() {
 
+		io.println(SPACE);
+		io.println("Select category (or 0 to exit): ");
+		io.println(Arrays.toString(categories.getCategories()));
+	}
 
-	private Category chooseCategory(int categoryIndex) {
+	private Category shooseCategory(int categoryIndex) {
 
 		if ( categoryIndex <= 0 || categories.size() < categoryIndex){
 			io.println("Not true index: " + categoryIndex);
@@ -221,17 +218,7 @@ public class Main {
 		return category;
 	}
 
-	private Project chooseProjects(int projectMenuIndex, Project[] foundProjects){
-
-		if (projectMenuIndex <= 0 || foundProjects.length <  projectMenuIndex){
-			io.println("Not true index: " + projectMenuIndex);
-			return null;
-		}
-		Project project = foundProjects[projectMenuIndex - 1];
-		return project;
-	}
-
-	private void chooseProject(Project project) {
+	private void shooseProject(Project project) {
 
 		io.println("You selected project: " + project.getName());
 	}
