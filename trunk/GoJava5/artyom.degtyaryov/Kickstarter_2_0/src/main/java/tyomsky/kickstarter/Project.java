@@ -8,9 +8,9 @@ public class Project {
     private int moneyCollected;
     private int daysLeft;
     private Category category;
-    private String history;
-    private String demoVideoLink;
-    private String questionsAndAnswers;
+    private String history = "";
+    private String demoVideoLink = "";
+    private String questionsAndAnswers = "";
 
 
     public Project(String name, String description, int moneyNeeded, int daysLeft, String demoVideoLink, Category category) {

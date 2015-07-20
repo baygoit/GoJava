@@ -97,14 +97,10 @@ public class Kickstarter {
                     io.println("Thank you! You can go!");
                 }
                 if (chosenMenuIndex == 2){
-                    io.println("Enter your name");
-                    String name = io.read();
                     io.println("Enter your question");
                     String question = io.read();
-                    io.println("Thank you " + name + " for your question");
-                    io.println("---------------------------------------");
-
-                    chosenProject.setQuestionsAndAnswers((question));
+                    io.println("Thank for your question");
+                    chosenProject.setQuestionsAndAnswers(chosenProject.getQuestionsAndAnswers()+"\n Q: "+question);
                 }
                 return null; /// payment menu
             }
@@ -125,7 +121,8 @@ public class Kickstarter {
 
     private void askProject(Project chosenProject) {
         io.println("Select action ("+EXIT_CODE +" for exit): \n" +
-                "1: Invest in project");
+                "1: Invest in project \n" +
+                "2: Ask a question");
     }
 
     private boolean isExitRequest(int chosenMenuIndex) {
