@@ -1,14 +1,20 @@
 package ua.goit.kyrychok.kickstarter.mvc.controller;
 
+import org.apache.commons.validator.routines.FloatValidator;
 import ua.goit.kyrychok.kickstarter.StandByMode;
 import ua.goit.kyrychok.kickstarter.mvc.model.PaymentModel;
 import ua.goit.kyrychok.kickstarter.mvc.view.PaymentView;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class PaymentController extends BaseController {
     private static final int MAX_USER_NAME_LENGTH = 100;
+    private static final Pattern cardNoPattern = Pattern.compile("^\\d{16}$");
     private PaymentModel model;
     private PaymentView view;
     private StandByMode currentMode;
+    private FloatValidator floatValidator = new FloatValidator();
 
     public void setModel(PaymentModel model) {
         this.model = model;
@@ -39,11 +45,21 @@ public class PaymentController extends BaseController {
     }
 
     private boolean isValidCardNo(String input) {
-        return true;
+        boolean result;
+        String cardNo = input.replaceAll(" ", "");
+        /**/
+        Matcher matcher = cardNoPattern.matcher(cardNo);
+        result = matcher.matches();
+        /*/
+        //Right validation
+        CreditCardValidator validator = new CreditCardValidator();
+        result = validator.isValid(cardNo);
+        /**/
+        return result;
     }
 
     private boolean isValidAmount(String input) {
-        return true;
+        return floatValidator.isValid(input);
     }
 
     public void setCurrentMode(StandByMode currentMode) {
@@ -74,11 +90,14 @@ public class PaymentController extends BaseController {
 
     private void updateModel(String input) {
         if (currentMode == StandByMode.AMOUNT) {
-            Integer amount = Integer.parseInt(input) * 100;
             int categoryIndex = getParentController().getParentController().getModelIdentifier();
             int projectIndex = getParentController().getModelIdentifier();
-            model.store(categoryIndex, projectIndex, amount);
+            model.store(categoryIndex, projectIndex, convertAmount(input));
         }
+    }
+
+    private int convertAmount(String input) {
+        return (int) (floatValidator.validate(input) * 100);
     }
 
     @Override
