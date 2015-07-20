@@ -61,7 +61,9 @@ public class ProjectViewTest {
 				"     Link to video: http://www.youtube.com/jrgri74ht3h97",
 				"     Project FAQ:",
 				"How can you imagine such idea?\nBecause of whisky, babe!", "",
-				"(0 - back)" };
+				"Choose your option:",
+				"[1 - Invest]",
+				"[0 - Back]" };
 		assertArrayEquals("Wrong project layout", expectedResult,
 				view.toArray());
 	}
@@ -87,7 +89,7 @@ public class ProjectViewTest {
 		projectView.printProject(model);
 		String[] expectedResult = { "",
 				"NPE case - model haven't returned the project", "",
-				"(0 - back)" };
+				"[0 - Back]" };
 		assertArrayEquals("Wrong null project warning", expectedResult,
 				view.toArray());
 	}

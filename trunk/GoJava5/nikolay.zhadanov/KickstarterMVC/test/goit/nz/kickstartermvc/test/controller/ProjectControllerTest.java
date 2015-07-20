@@ -9,7 +9,6 @@ import static org.mockito.Mockito.when;
 import goit.nz.kickstartermvc.controller.CategoryController;
 import goit.nz.kickstartermvc.controller.ControllerMessages;
 import goit.nz.kickstartermvc.controller.ProjectController;
-import goit.nz.kickstartermvc.dao.Project;
 import goit.nz.kickstartermvc.model.ProjectModel;
 import goit.nz.kickstartermvc.test.MockStorage;
 import goit.nz.kickstartermvc.view.ProjectView;
@@ -93,20 +92,17 @@ public class ProjectControllerTest {
 				view, parentController);
 		int messageIndex = 0;
 		int expected = 0;
-		int actual = projectController.onInput("-3");
+		int actual = projectController.onInput("-10");
 
 		assertEquals("Illegal move returned", expected, actual);
 		assertEquals("Wrong warning message",
 				ControllerMessages.WRONG_USER_CHOICE_WARNING,
 				message.get(messageIndex++));
 
-		expected = 0;
+		expected = 1;
 		actual = projectController.onInput("1");
 
 		assertEquals("Illegal move returned", expected, actual);
-		assertEquals("Wrong warning message",
-				ControllerMessages.WRONG_USER_CHOICE_WARNING,
-				message.get(messageIndex++));
 	}
 
 	@Test
@@ -114,16 +110,17 @@ public class ProjectControllerTest {
 		MockStorage storage = new MockStorage();
 		storage.init();
 
-		Project chosenProject = storage.getProjects(
-				storage.getCategories().get(3).getName()).get(1);
-		when(parentController.getChosenProject()).thenReturn(chosenProject);
+		String testCategoryName = storage.getCategories().get(3).getName();
+		int testProjectIndex = 1;
+		when(parentController.getProjectIndex()).thenReturn(testProjectIndex);
+		when(parentController.getProjectCategoryName()).thenReturn(testCategoryName);
 
 		ProjectController projectController = new ProjectController(model,
 				view, parentController);
 		projectController.onTakeControl();
 
 		verify(view, times(1)).printProject(model);
-		verify(model, times(1)).update(chosenProject);
+		verify(model, times(1)).update(testCategoryName, testProjectIndex);
 	}
 
 }

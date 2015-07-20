@@ -157,7 +157,8 @@ public class CategoryControllerTest {
 
 		String expected = storage.getProjects(testCategoryName).get(0)
 				.getName();
-		String actual = categoryController.getChosenProject().getName();
+		String actual = storage.getProjects(testCategoryName)
+				.get(categoryController.getProjectIndex() - 1).getName();
 		assertEquals(expected, actual);
 	}
 
