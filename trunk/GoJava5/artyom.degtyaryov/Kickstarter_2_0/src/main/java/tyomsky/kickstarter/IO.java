@@ -2,7 +2,7 @@ package tyomsky.kickstarter;
 
 public interface IO {
 
-    int read();
+    String read();
 
     void println(String message);
 

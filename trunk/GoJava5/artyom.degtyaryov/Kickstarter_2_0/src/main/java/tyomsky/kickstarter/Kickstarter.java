@@ -86,8 +86,8 @@ public class Kickstarter {
             public Menu nextMenu(Object selected) {
                 int chosenMenuIndex = (int) selected;
                 if (chosenMenuIndex == 1) {
-                    io.println("You have chosen \"1: Invest in project\"");
                     io.println("Thanks for helping our project");
+                    String name = io.read();
                 }
                 return null; /// payment menu
             }

@@ -31,10 +31,10 @@ public class KickstarterTest {
     class FakeIO implements IO {
 
         private List<String> messages = new LinkedList<>();
-        private List<Integer> input = new LinkedList<>();
+        private List<String> input = new LinkedList<>();
 
         @Override
-        public int read() {
+        public String read() {
             return input.remove(0);
         }
 
@@ -43,7 +43,7 @@ public class KickstarterTest {
             messages.add(message);
         }
 
-        public FakeIO(Integer... input) {
+        public FakeIO(String... input) {
             this.input = new LinkedList<>(Arrays.asList(input));
         }
 
@@ -51,7 +51,7 @@ public class KickstarterTest {
             return messages;
         }
 
-        public List<Integer> getInput() {
+        public List<String> getInput() {
             return input;
         }
     }
@@ -71,7 +71,7 @@ public class KickstarterTest {
     }
     @Test
     public void fakeCategoryNavigation () {
-        FakeIO io = new FakeIO(1, 0, 0);
+        FakeIO io = new FakeIO("1", "0", "0");
         List<Category> categories = new ArrayList<>();
         categories.add(new Category("category1"));
         categories.add(new Category("category2"));
@@ -92,7 +92,7 @@ public class KickstarterTest {
 
     @Test
     public void fakeCategoryAndProjectsNavigation () {
-        FakeIO io = new FakeIO(1, 1, 0, 0, 0);
+        FakeIO io = new FakeIO("1", "1", "0", "0", "0");
         List<Category> categories = new ArrayList<>();
         categories.add(new Category("category1"));
         categories.add(new Category("category2"));
@@ -141,7 +141,7 @@ public class KickstarterTest {
     @Test
     public void shouldPrintPaymentMenu_whenRequested() {
         when(mockQuoteGenerator.getQuote()).thenReturn("quote");
-        when(mockIO.read()).thenReturn(1,1,1,0,0,0);
+        when(mockIO.read()).thenReturn("1","1","1","0","0","0");
         List<Category> categories = new ArrayList<>();
         categories.add(new Category("category1"));
         categories.add(new Category("category2"));

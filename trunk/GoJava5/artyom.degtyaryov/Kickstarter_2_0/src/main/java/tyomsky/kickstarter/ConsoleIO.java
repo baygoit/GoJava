@@ -5,9 +5,9 @@ import java.util.Scanner;
 public class ConsoleIO implements IO {
 
     @Override
-    public int read() {
+    public String read() {
         Scanner scanner = new Scanner(System.in);
-        return scanner.nextInt();
+        return scanner.next();
     }
 
     @Override
