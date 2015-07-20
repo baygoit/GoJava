@@ -14,7 +14,7 @@ public class ProjectTest {
 		String actual = testProject.getDescription();
 		assertEquals(expected, actual);
 	}
-	
+
 	@Test
 	public void whenEventsIsEmptyThenReturnThreePoints() {
 		Project testProject = new Project("test");
@@ -22,7 +22,7 @@ public class ProjectTest {
 		String actual = testProject.getEvents();
 		assertEquals(expected, actual);
 	}
-	
+
 	@Test
 	public void whenLinkIsEmptyThenReturnFiller() {
 		Project testProject = new Project("test");
@@ -30,12 +30,26 @@ public class ProjectTest {
 		String actual = testProject.getLink();
 		assertEquals(expected, actual);
 	}
-	
+
 	@Test
 	public void whenFAQIsEmptyThenReturnNA() {
 		Project testProject = new Project("test");
 		String expected = "N/A";
 		String actual = testProject.getFAQ();
+		assertEquals(expected, actual);
+	}
+
+	@Test
+	public void whenAddPledgedAmountThenAmountAdded() {
+		Project testProject = new Project("test");
+		int expected = 0;
+		int actual = testProject.getPledgedAmount();
+		assertEquals(expected, actual);
+
+		int testAmount = 10;
+		expected = testAmount;
+		testProject.addPledgedAmount(testAmount);
+		actual = testProject.getPledgedAmount();
 		assertEquals(expected, actual);
 	}
 

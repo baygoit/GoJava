@@ -138,6 +138,7 @@ public class CategoryControllerTest {
 
 		verify(view, times(1)).printProjects(model, testCategoryName);
 		verify(model, times(1)).update(anyString());
+		assertEquals(testCategoryName, categoryController.getProjectCategoryName());
 	}
 
 	@Test

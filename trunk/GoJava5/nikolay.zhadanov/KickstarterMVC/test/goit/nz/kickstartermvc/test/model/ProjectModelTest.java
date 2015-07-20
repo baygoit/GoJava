@@ -22,4 +22,21 @@ public class ProjectModelTest {
 		assertEquals(expected, actual);
 	}
 
+	@Test
+	public void whenAddPledgedAmountThenAmountAddedToProject() {
+		MockStorage storage = new MockStorage();
+		storage.init();
+
+		ProjectModel model = new ProjectModel(storage);
+		String testCategoryName = storage.getCategories().get(1).getName();
+		int testProjectIndex = 1;
+		int testAmount = 100;
+		model.updatePledgedAmount(testCategoryName, testProjectIndex,
+				testAmount);
+		int expected = testAmount;
+		int actual = storage.getProjects(testCategoryName)
+				.get(testProjectIndex - 1).getPledgedAmount();
+		assertEquals(expected, actual);
+	}
+
 }
