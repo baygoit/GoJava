@@ -1,6 +1,5 @@
 package ua.goit.kyrychok.kickstarter.mvc.controller;
 
-import ua.goit.kyrychok.kickstarter.StandByMode;
 import ua.goit.kyrychok.kickstarter.mvc.model.ProjectModel;
 import ua.goit.kyrychok.kickstarter.mvc.view.ProjectView;
 
@@ -8,7 +7,7 @@ public class ProjectController extends BaseController {
     private ProjectModel model;
     private ProjectView view;
     private FaqController faqController;
-    private PaymentController paymentController;
+    private DonatePageController donatePageController;
 
     public void setModel(ProjectModel model) {
         this.model = model;
@@ -22,8 +21,8 @@ public class ProjectController extends BaseController {
         this.faqController = faqController;
     }
 
-    public void setPaymentController(PaymentController paymentController) {
-        this.paymentController = paymentController;
+    public void setDonatePageController(DonatePageController donatePageController) {
+        this.donatePageController = donatePageController;
     }
 
     private boolean isValid(String input) {
@@ -40,8 +39,7 @@ public class ProjectController extends BaseController {
         if (input == 1) {
             controller = faqController;
         } else if (input == 2) {
-            paymentController.setCurrentMode(StandByMode.USER);
-            controller = paymentController;
+            controller = donatePageController;
         }
         return controller;
     }

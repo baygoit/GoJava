@@ -1,9 +1,6 @@
 package ua.goit.kyrychok.kickstarter;
 
-import ua.goit.kyrychok.kickstarter.model.Category;
-import ua.goit.kyrychok.kickstarter.model.Faq;
-import ua.goit.kyrychok.kickstarter.model.Project;
-import ua.goit.kyrychok.kickstarter.model.ProjectEvent;
+import ua.goit.kyrychok.kickstarter.model.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +24,9 @@ public class TestDataProvider {
         project.addFaq(new Faq("Question 2", "Answer on question 2"));
         project.addProjectEvent(new ProjectEvent(convertDate("01.01.2015"), "Project event 1"));
         project.addProjectEvent(new ProjectEvent(convertDate("01.07.2015"), "Project event 2"));
+        project.addReward(new Reward(1000, "Some reward for donate 10$"));
+        project.addReward(new Reward(3000, "Some reward for donate 30$"));
+        project.addReward(new Reward(4000, "Some reward for donate 40$"));
         category.addProject(project);
         project = new Project("2nd project", "desc", 10010, 350000, convertDate("01.07.2015"), convertDate("01.08.2015"), "http://stackoverflow.com/");
         category.addProject(project);

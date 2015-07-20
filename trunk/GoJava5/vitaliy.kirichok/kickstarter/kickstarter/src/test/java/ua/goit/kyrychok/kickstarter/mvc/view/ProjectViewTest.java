@@ -85,7 +85,7 @@ public class ProjectViewTest {
         }
         expectedResult.add("Actions:");
         expectedResult.add("[1]. Ask a question");
-        expectedResult.add("[2]. Invest");
+        expectedResult.add("[2]. Donate");
         expectedResult.add(BaseView.CHOICE_MESSAGE);
 
         Assert.assertArrayEquals("Not expected Project rendering", expectedResult.toArray(), view.toArray());

@@ -48,14 +48,24 @@ public class Dispatcher implements InputListener {
         paymentController.setModel(paymentModel);
         paymentController.setView(paymentView);
 
+        DonatePageController donatePageController = new DonatePageController();
+        DonatePageView donatePageView = new DonatePageView();
+        donatePageView.setOutput(output);
+        DonatePageModel donatePageModel = new DonatePageModel();
+        donatePageModel.setDataProvider(dataProvider);
+        donatePageController.setModel(donatePageModel);
+        donatePageController.setView(donatePageView);
+
         mainPageController.setChildController(categoryController);
         categoryController.setChildController(projectController);
         categoryController.setParentController(mainPageController);
         projectController.setParentController(categoryController);
         projectController.setFaqController(faqController);
-        projectController.setPaymentController(paymentController);
+        projectController.setDonatePageController(donatePageController);
         faqController.setParentController(projectController);
         paymentController.setParentController(projectController);
+        donatePageController.setParentController(projectController);
+        donatePageController.setPaymentController(paymentController);
 
         currentController = mainPageController;
     }

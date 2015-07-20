@@ -62,16 +62,9 @@ public class PaymentController extends BaseController {
         return floatValidator.isValid(input);
     }
 
-    public void setCurrentMode(StandByMode currentMode) {
+    public void initCurrentMode(StandByMode currentMode) {
         this.currentMode = currentMode;
-    }
-
-    private BaseController returnNext() {
-        if (currentMode == StandByMode.AMOUNT) {
-            return getParentController();
-        } else {
-            return this;
-        }
+        setNextController(this);
     }
 
     private void changeMode() {
@@ -88,11 +81,20 @@ public class PaymentController extends BaseController {
         }
     }
 
+    public void setAmount(int amount) {
+        model.setAmount(amount);
+    }
+
     private void updateModel(String input) {
         if (currentMode == StandByMode.AMOUNT) {
+            setAmount(convertAmount(input));
+        }
+        if (currentMode == StandByMode.AMOUNT ||
+                (currentMode == StandByMode.CARD && model.getAmount() > 0)) {
             int categoryIndex = getParentController().getParentController().getModelIdentifier();
             int projectIndex = getParentController().getModelIdentifier();
-            model.store(categoryIndex, projectIndex, convertAmount(input));
+            model.store(categoryIndex, projectIndex);
+            setNextController(getParentController());
         }
     }
 
@@ -112,7 +114,6 @@ public class PaymentController extends BaseController {
             doExit();
         } else if (isValid(input)) {
             updateModel(input);
-            setNextController(returnNext());
             changeMode();
             setNeedNextImmediateExecute(true);
         }

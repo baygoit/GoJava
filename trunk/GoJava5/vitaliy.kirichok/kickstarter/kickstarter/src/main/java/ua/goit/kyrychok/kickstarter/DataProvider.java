@@ -3,6 +3,7 @@ package ua.goit.kyrychok.kickstarter;
 import ua.goit.kyrychok.kickstarter.model.Category;
 import ua.goit.kyrychok.kickstarter.model.Faq;
 import ua.goit.kyrychok.kickstarter.model.Project;
+import ua.goit.kyrychok.kickstarter.model.Reward;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,5 +48,13 @@ public class DataProvider {
     public void incProjectBalance(int categoryIndex, int projectIndex, Integer amount) {
         Project project = categories.get(categoryIndex).getProjects().get(projectIndex);
         project.setBalance(project.getBalance() + amount);
+    }
+
+    public void addReward(int categoryIndex, int projectIndex, Reward reward) {
+        categories.get(categoryIndex).getProjects().get(projectIndex).addReward(reward);
+    }
+
+    public List<Reward> getRewards(int categoryIndex, int projectIndex) {
+        return categories.get(categoryIndex).getProjects().get(projectIndex).getRewards();
     }
 }

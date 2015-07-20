@@ -1,9 +1,6 @@
 package ua.goit.kyrychok.kickstarter;
 
-import ua.goit.kyrychok.kickstarter.model.Category;
-import ua.goit.kyrychok.kickstarter.model.Faq;
-import ua.goit.kyrychok.kickstarter.model.Project;
-import ua.goit.kyrychok.kickstarter.model.ProjectEvent;
+import ua.goit.kyrychok.kickstarter.model.*;
 
 import static ua.goit.kyrychok.kickstarter.Utils.convertDate;
 
@@ -20,6 +17,9 @@ public class Bootstrap {
         project.addFaq(new Faq("Question 3", "Answer on question 3"));
         project.addProjectEvent(new ProjectEvent(convertDate("12.07.2015"), "Project was started"));
         project.addProjectEvent(new ProjectEvent(convertDate("10.07.2015"), "Thank you"));
+        project.addReward(new Reward(1000, "Some reward for donate 10$"));
+        project.addReward(new Reward(3000, "Some reward for donate 30$"));
+        project.addReward(new Reward(4000, "Some reward for donate 40$"));
         category.addProject(project);
         project = new Project("2nd project in 1st category", "desc2", 1000, 350, convertDate("01.07.2015"), convertDate("20.08.2015"), "");
         category.addProject(project);
