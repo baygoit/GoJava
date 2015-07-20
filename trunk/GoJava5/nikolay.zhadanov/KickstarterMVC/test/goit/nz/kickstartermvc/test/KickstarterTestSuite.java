@@ -20,6 +20,6 @@ import org.junit.runners.Suite;
 		CategoryModelTest.class, ProjectModelTest.class, ProjectTest.class,
 		MainPageControllerTest.class, CategoryControllerTest.class,
 		ProjectControllerTest.class, DispatcherTest.class,
-		KickstarterTest.class })
+		KickstarterTest.class, BootstrapTest.class })
 public class KickstarterTestSuite {
 }

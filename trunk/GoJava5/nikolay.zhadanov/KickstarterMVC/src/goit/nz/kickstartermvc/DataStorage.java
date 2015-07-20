@@ -20,15 +20,15 @@ public class DataStorage {
 	}
 
 	public void registerQuotes(List<Quote> quotes) {
-		this.quotes = quotes;
+		this.quotes.addAll(quotes);
 	}
 
 	public void registerCategories(List<Category> categories) {
-		this.categories = categories;
+		this.categories.addAll(categories);
 	}
 
 	public void registerProjects(List<Project> projects) {
-		this.projects = projects;
+		this.projects.addAll(projects);
 	}
 
 	public List<Quote> getQuotes() {
