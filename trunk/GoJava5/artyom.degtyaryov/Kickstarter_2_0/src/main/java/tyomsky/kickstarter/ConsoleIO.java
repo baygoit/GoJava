@@ -2,7 +2,7 @@ package tyomsky.kickstarter;
 
 import java.util.Scanner;
 
-class ConsoleIO implements IO {
+public class ConsoleIO implements IO {
 
     @Override
     public int read() {

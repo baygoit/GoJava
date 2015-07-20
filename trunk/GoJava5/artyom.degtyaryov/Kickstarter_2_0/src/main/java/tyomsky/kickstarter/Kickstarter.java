@@ -22,44 +22,93 @@ public class Kickstarter {
     public void run() {
         String quote = quoteGenerator.getQuote();
         io.println(quote);
-        processCategoriesMenu();
+        categoriesMenu().run();
+    }
+
+
+
+    private Menu categoriesMenu() {
+        return new Menu(io) {
+
+            @Override
+            public Menu nextMenu(Object selected) {
+                List<Project> foundProjects = getProjetsByCategory((Category) selected);
+                return projectsMenu(foundProjects);
+            }
+
+            @Override
+            public Object select(int chosenMenuIndex) {
+                return chooseCategory(chosenMenuIndex);
+            }
+
+            @Override
+            public void ask() {
+                askCategories();
+            }
+        };
+    }
+
+    private void askCategories() {
+        showCategories();
+        io.println("Select item ("+EXIT_CODE +" for exit)");
+    }
+
+    private Menu projectsMenu(final List<Project> foundProjects) {
+        return new Menu(io) {
+
+            @Override
+            public Menu nextMenu(Object selected) {
+                return projectMenu((Project) selected);
+            }
+
+            @Override
+            public Object select(int chosenMenuIndex) {
+                return chooseProject(foundProjects, chosenMenuIndex);
+            }
+
+            @Override
+            public void ask() {
+                askProjects(foundProjects);
+            }
+        };
+    }
+
+    private void askProjects(List<Project> foundProjects) {
+        showProjects(foundProjects);
+        io.println("Select item ("+ EXIT_CODE +" for exit)");
 
     }
 
-    private void processCategoriesMenu() {
-        while (true) {
-            showCategories();
-            int chosenMenuIndex = getChosenMenuIndex();
-            if (isExitRequest(chosenMenuIndex)) {
-                break;
-            }
-            Category chosenCategory = chooseCategory(chosenMenuIndex);
-            if (chosenCategory == null) {
-                continue;
-            }
-            List<Project> foundProjects = getProjetsByCategory(chosenCategory);
-            processProjectsMenu(foundProjects);
-        }
-    }
+    private Menu projectMenu(final Project chosenProject) {
+        return new Menu(io) {
 
-    private void processProjectsMenu(List<Project> foundProjects) {
-        while (true) {
-            showProjects(foundProjects);
-            int chosenMenuIndex = getChosenMenuIndex();
-            if (isExitRequest(chosenMenuIndex)) {
-                break;
-            }
-            Project chosenProject = chooseProject(foundProjects, chosenMenuIndex);
-            if (chosenProject == null) {
-                continue;
-            }
-            while (true) {
-                printProjectDetails(chosenProject);
-                if (isExitRequest(getChosenMenuIndex())) {
-                    break;
+            @Override
+            public Menu nextMenu(Object selected) {
+                int chosenMenuIndex = (int) selected;
+                if (chosenMenuIndex == 1) {
+                    io.println("You have chosen \"1: Invest in project\"");
+                    io.println("Thanks for helping our project");
                 }
+                return null; /// payment menu
             }
-        }
+
+            @Override
+            public Object select(int chosenMenuIndex) {
+                return chosenMenuIndex;
+            }
+
+            @Override
+            public void ask() {
+                printProjectDetails(chosenProject);
+                askProject(chosenProject);
+            }
+        };
+
+    }
+
+    private void askProject(Project chosenProject) {
+        io.println("Select action ("+EXIT_CODE +" for exit): \n" +
+                "1: Invest in project");
     }
 
     private boolean isExitRequest(int chosenMenuIndex) {
@@ -90,8 +139,14 @@ public class Kickstarter {
         io.println("Collected money: " + project.getMoneyCollected());
         io.println("Days left: " + project.getDaysLeft());
         io.println("Demo video: " + project.getDemoVideoLink());
-        io.println("History: " + project.getHistory());
-        io.println("FAQ: " + project.getQuestionsAndAnswers());
+        String history = project.getHistory();
+        if (!(history == null)) {
+            io.println("History: " + project.getHistory());
+        }
+        String qAndA = project.getQuestionsAndAnswers();
+        if (!(qAndA == null)) {
+            io.println("FAQ: " + project.getQuestionsAndAnswers());
+        }
     }
 
     private boolean projectIndexIsInvalid(int chosenMenuIndex, List<Project> projectsList) {
@@ -113,17 +168,15 @@ public class Kickstarter {
     }
 
     private void showProjects(List<Project> foundProjects) {
+        if (foundProjects.size() == 0) {
+            io.println("nothing to do here.");
+        }
         for (int i = 0; i < foundProjects.size(); i++) {
             int menuIndex = i + 1;
             Project project = foundProjects.get(i);
             io.println(menuIndex + ": " + project.getShortPresentation());
             io.println("------------------------------------------------------");
         }
-    }
-
-    private int getChosenMenuIndex() {
-        io.println("Make a choice (" + EXIT_CODE + " for exit): ");
-        return io.read();
     }
 
     private void showCategories() {
