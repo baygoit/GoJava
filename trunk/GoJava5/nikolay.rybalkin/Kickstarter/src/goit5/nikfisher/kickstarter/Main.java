@@ -15,7 +15,7 @@ public class Main {
 //	private InputOutputConsoleInterface io;
 //	private QuoteGenerate generator;
 //	private ProjectMenu projectMenu;
-//	private CategoryMenu categoreMenu;
+	private CategoryMenu categoreMenu;
 
 
 //	public Main(Categories categories, Projects projects, InputOutputConsoleInterface io, QuoteGenerate generator, ProjectMenu projectMenu) {
@@ -31,7 +31,7 @@ public class Main {
 
 //		io.println(generator.quoteGenerate());
 
-		CategoryMenu categoreMenu = new CategoryMenu();
+//		CategoryMenu categoreMenu = new CategoryMenu();
 		categoreMenu.categoryMenu();
 //		io.println("Sank!");
 	}

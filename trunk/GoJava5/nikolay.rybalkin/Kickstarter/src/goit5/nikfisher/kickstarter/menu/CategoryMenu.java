@@ -6,15 +6,22 @@ import goit5.nikfisher.kickstarter.model.Category;
 import goit5.nikfisher.kickstarter.model.Project;
 import goit5.nikfisher.kickstarter.model.Projects;
 import goit5.nikfisher.kickstarter.streams.InputOutputConsole;
+import goit5.nikfisher.kickstarter.streams.InputOutputConsoleInterface;
 
 import java.util.Arrays;
 
 public class CategoryMenu {
 
     private String SPACE = " ";
-    private InputOutputConsole io;
+    private InputOutputConsoleInterface io;
     private Projects projects;
     private Categories categories;
+
+    public CategoryMenu(InputOutputConsoleInterface io, Projects projects, Categories categories) {
+        this.io = io;
+        this.categories = categories;
+		this.projects = projects;
+    }
 
     public void categoryMenu() {
         while (true){
