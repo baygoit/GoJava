@@ -1,5 +1,6 @@
 package goit5.nikfisher.kickstarter;
 
+import goit5.nikfisher.kickstarter.menu.ProjectMenu;
 import goit5.nikfisher.kickstarter.model.*;
 import goit5.nikfisher.kickstarter.streams.InputOutputConsole;
 
@@ -68,7 +69,7 @@ public class Runner {
 		project5.setAnsver("Still no one answered");
 		project6.setAnsver("Still no one answered");
 
-		Main app = new Main(categories, projects, new InputOutputConsole(), new QuoteGenerate(new Random()));
+		Main app = new Main();
 		app.run();
 	}
 }
