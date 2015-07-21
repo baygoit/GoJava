@@ -7,12 +7,11 @@ import java.util.Random;
 public class Kickstarter {
 
     private IO io;
-    private static final int EXIT_CODE = 0;
-    private List<Category> categories;
-    private List<Project> projects;
+    private Categories categories;
+    private Projects projects;
     private QuoteGenerator quoteGenerator;
 
-    public Kickstarter(List<Category> categories, List<Project> projects, IO io, QuoteGenerator quoteGenerator) {
+    public Kickstarter(Categories categories, Projects projects, IO io, QuoteGenerator quoteGenerator) {
         this.categories = categories;
         this.projects = projects;
         this.io = io;
@@ -50,7 +49,7 @@ public class Kickstarter {
 
     private void askCategories() {
         showCategories();
-        io.println("Select item ("+EXIT_CODE +" for exit)");
+        io.println("Select item (0 for exit)");
     }
 
     private Menu projectsMenu(final List<Project> foundProjects) {
@@ -75,7 +74,7 @@ public class Kickstarter {
 
     private void askProjects(List<Project> foundProjects) {
         showProjects(foundProjects);
-        io.println("Select item ("+ EXIT_CODE +" for exit)");
+        io.println("Select item (0 for exit)");
 
     }
 
@@ -120,13 +119,9 @@ public class Kickstarter {
     }
 
     private void askProject(Project chosenProject) {
-        io.println("Select action ("+EXIT_CODE +" for exit): \n" +
+        io.println("Select action (0 for exit): \n" +
                 "1: Invest in project \n" +
                 "2: Ask a question");
-    }
-
-    private boolean isExitRequest(int chosenMenuIndex) {
-        return chosenMenuIndex == EXIT_CODE;
     }
 
     private Project chooseProject(List<Project> foundProjects, int chosenMenuIndex) {
@@ -202,9 +197,9 @@ public class Kickstarter {
 
     private List<Project> getProjetsByCategory(Category category) {
         List<Project> result = new ArrayList<>();
-        for (Project project : projects) {
-            if (project.getCategory().equals(category)) {
-                result.add(project);
+        for (int i = 0; i < projects.size(); i++) {
+            if (projects.get(i).getCategory().equals(category)) {
+                result.add(projects.get(i));
             }
         }
         return result;

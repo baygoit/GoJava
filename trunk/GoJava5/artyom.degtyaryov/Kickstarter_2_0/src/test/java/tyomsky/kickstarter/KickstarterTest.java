@@ -72,10 +72,10 @@ public class KickstarterTest {
     @Test
     public void fakeCategoryNavigation () {
         FakeIO io = new FakeIO("1", "0", "0");
-        List<Category> categories = new ArrayList<>();
+        Categories categories = new Categories();
         categories.add(new Category("category1"));
         categories.add(new Category("category2"));
-        Kickstarter kickstarter = new Kickstarter(categories, new ArrayList<Project>(), io, new StabQuoteGenerator());
+        Kickstarter kickstarter = new Kickstarter(categories, new Projects(), io, new StabQuoteGenerator());
         kickstarter.run();
         assertEquals("[quote," +
                 " 1: category1," +
@@ -92,11 +92,11 @@ public class KickstarterTest {
 
     @Test
     public void fakeCategoryAndProjectsNavigation () {
-        FakeIO io = new FakeIO("1", "1", "0", "0", "0");
-        List<Category> categories = new ArrayList<>();
+        FakeIO io = new FakeIO("1", "0", "0");
+        Categories categories = new Categories();
         categories.add(new Category("category1"));
         categories.add(new Category("category2"));
-        List<Project> projects = new ArrayList<>();
+        Projects projects = new Projects();
         projects.add(new Project("project1", "project1 desc", 100, 10, "link1", categories.get(0)));
         projects.add(new Project("project2", "project2 desc", 100, 10, "link2", categories.get(0)));
         Kickstarter kickstarter = new Kickstarter(categories, projects, io, new StabQuoteGenerator());
@@ -116,23 +116,6 @@ public class KickstarterTest {
                 "Need to collect - 100$. Collected - 0$. Days left - 10, " +
                 "------------------------------------------------------, " +
                 "Select item (0 for exit), " +
-                "You have chosen: project1, " +
-                "project1 desc, Money to collect: 100, " +
-                "Collected money: 0, " +
-                "Days left: 10, " +
-                "Demo video: link1, " +
-                "Select action (0 for exit): \n" +
-                "1: Invest in project, " +
-                "1: project1 \n" +
-                "project1 desc \n" +
-                "Need to collect - 100$. " +
-                "Collected - 0$. Days left - 10, " +
-                "------------------------------------------------------, " +
-                "2: project2 \n" +
-                "project2 desc \n" +
-                "Need to collect - 100$. Collected - 0$. Days left - 10, " +
-                "------------------------------------------------------, " +
-                "Select item (0 for exit), " +
                 "1: category1, " +
                 "2: category2, " +
                 "Select item (0 for exit)]", io.getMessages().toString());
@@ -142,10 +125,10 @@ public class KickstarterTest {
     public void shouldPrintPaymentMenu_whenRequested() {
         when(mockQuoteGenerator.getQuote()).thenReturn("quote");
         when(mockIO.read()).thenReturn("1","1","1","0","0","0");
-        List<Category> categories = new ArrayList<>();
+        Categories categories = new Categories();
         categories.add(new Category("category1"));
         categories.add(new Category("category2"));
-        List<Project> projects = new ArrayList<>();
+        Projects projects = new Projects();
         projects.add(new Project("project1", "project1 desc", 100, 10, "link1", categories.get(0)));
         projects.add(new Project("project2", "project2 desc", 100, 10, "link2", categories.get(0)));
         Kickstarter kickstarter = new Kickstarter(categories, projects, mockIO, mockQuoteGenerator);
