@@ -3,6 +3,7 @@ package goit5.nikfisher.kickstarter;
 import goit5.nikfisher.kickstarter.menu.CategoryMenu;
 import goit5.nikfisher.kickstarter.menu.ProjectMenu;
 import goit5.nikfisher.kickstarter.model.*;
+import goit5.nikfisher.kickstarter.streams.InputOutputConsole;
 import goit5.nikfisher.kickstarter.streams.InputOutputConsoleInterface;
 
 //import java.util.Arrays;
@@ -31,7 +32,7 @@ public class Main {
 
 //		io.println(generator.quoteGenerate());
 
-//		CategoryMenu categoreMenu = new CategoryMenu();
+		CategoryMenu categoreMenu = new CategoryMenu(new InputOutputConsole(),  new Projects(), new Categories());
 		categoreMenu.categoryMenu();
 //		io.println("Sank!");
 	}
