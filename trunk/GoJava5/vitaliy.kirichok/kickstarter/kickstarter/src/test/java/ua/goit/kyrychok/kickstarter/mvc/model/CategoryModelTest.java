@@ -44,5 +44,17 @@ public class CategoryModelTest {
         Assert.assertEquals("Category name must be the same as registered", category.getName(), resultName);
     }
 
+    @Test
+    public void whenGetCountThenReturnSameCount() throws Exception {
+        TestDataProvider testDataProvider = new TestDataProvider();
+        testDataProvider.init();
+        Category category = testDataProvider.getCategory(0);
+        when(dataProvider.getCategory(anyInt())).thenReturn(category);
 
+        model.update();
+        int result = model.getCount();
+        int expectedResult = category.getProjects().size();
+
+        Assert.assertEquals("getCount must return right result", expectedResult, result);
+    }
 }

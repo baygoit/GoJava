@@ -41,11 +41,15 @@ public class MainPageModelTest {
     public void whenGetCategoriesThenReturnSameCategories() throws Exception {
         TestDataProvider testDataProvider = new TestDataProvider();
         testDataProvider.init();
-        when(dataProvider.getCategories()).thenReturn(testDataProvider.getCategories());
+        List<Category> expectedResult = testDataProvider.getCategories();
+        int expectedCount = expectedResult.size();
+        when(dataProvider.getCategories()).thenReturn(expectedResult);
 
         model.update();
         List<Category> result = model.getCategories();
+        int count = model.getCount();
 
-        Assert.assertArrayEquals("Categories must be the same as registered", testDataProvider.getCategories().toArray(), result.toArray());
+        Assert.assertArrayEquals("Categories must be the same as registered", expectedResult.toArray(), result.toArray());
+        Assert.assertEquals("getCount must return right result", expectedCount, count);
     }
 }

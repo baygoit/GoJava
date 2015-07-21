@@ -8,21 +8,15 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 import ua.goit.kyrychok.kickstarter.Output;
-import ua.goit.kyrychok.kickstarter.TestDataProvider;
-import ua.goit.kyrychok.kickstarter.mvc.model.MainPageModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.doAnswer;
-import static org.mockito.Mockito.when;
 
-public class MainPageViewTest {
+public class PaymentViewTest {
 
-
-    @Mock
-    private MainPageModel model;
     @Mock
     private Output output;
 
@@ -32,13 +26,7 @@ public class MainPageViewTest {
     }
 
     @Test
-    public void whenRenderMainPageThenPrintWelcomeMsgAndCategoriesList() throws Exception {
-        when(model.getWelcomeMessage()).thenReturn("Test Msg");
-
-        TestDataProvider testDataProvider = new TestDataProvider();
-        testDataProvider.init();
-        when(model.getCategories()).thenReturn(testDataProvider.getCategories());
-
+    public void whenRenderThenPrintInviteMessage() throws Exception {
         final List<String> view = new ArrayList<>();
 
         doAnswer(new Answer<Object>() {
@@ -50,11 +38,13 @@ public class MainPageViewTest {
                 return null;
             }
         }).when(output).writeLine(anyString());
-        MainPageView mainPageView = new MainPageView();
-        mainPageView.setOutput(output);
+        PaymentView paymentView = new PaymentView();
+        paymentView.setOutput(output);
+        paymentView.render("Test invite message");
 
-        mainPageView.render(model);
-        String[] expectedResult = {"Test Msg", "[1]. Category 1", "[2]. Category 2", "[3]. Category 3", BaseView.CHOICE_MESSAGE};
-        Assert.assertArrayEquals("Not expected MainPage rendering", expectedResult, view.toArray());
+        List<String> expectedResult = new ArrayList<>();
+        expectedResult.add("Test invite message");
+        Assert.assertArrayEquals("Not expected Payment rendering", expectedResult.toArray(), view.toArray());
+
     }
 }

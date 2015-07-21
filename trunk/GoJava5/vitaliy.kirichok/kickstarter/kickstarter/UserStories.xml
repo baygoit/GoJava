@@ -63,7 +63,7 @@
             </UseCase>
         </UseCases>
     </UserStory>
-    <UserStory name="6" implemented="0">
+    <UserStory name="6" implemented="1">
         <Description>Как гость я хочу инвестировать в понравившийся мне проект, чтобы поддержать его</Description>
         <UseCases>
             <UseCase name="1">
@@ -87,7 +87,7 @@
             </UseCase>
         </UseCases>
     </UserStory>
-    <UserStory name="8" implemented="0">
+    <UserStory name="8" implemented="1">
         <Description>
             Как гость я хочу понимать, что я получу за свои инвестиции от проекта
         </Description>

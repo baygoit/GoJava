@@ -7,10 +7,6 @@ import java.util.List;
 public class DonatePageModel extends BaseModel {
     private List<Reward> rewards;
 
-    public List<Reward> getRewards() {
-        return rewards;
-    }
-
     public int getCount() {
         return rewards.size();
     }
