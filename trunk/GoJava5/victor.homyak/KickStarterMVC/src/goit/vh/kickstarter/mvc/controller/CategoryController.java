@@ -36,7 +36,7 @@ public class CategoryController {
     public void start(int[] path) {
         if (path[0] != 0 && path[1] == 0) {
 
-            if (model.refreshModel(path[0]) == null) {
+            if (model.refreshModel(path[0]) == null) {//TODO NULLObject
                 path[0] = 0;
                 locationManager.setPath(path);
                 locationManager.dispatch();

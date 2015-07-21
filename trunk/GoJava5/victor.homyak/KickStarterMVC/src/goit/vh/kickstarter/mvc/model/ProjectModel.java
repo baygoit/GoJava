@@ -14,9 +14,6 @@ public class ProjectModel {
     private Project[] listOfProjectses;
     private Project project;
     private String projectName;
-
-
-
     private String shortDescription;
     private int sumToRaise;
     private int currentSum;

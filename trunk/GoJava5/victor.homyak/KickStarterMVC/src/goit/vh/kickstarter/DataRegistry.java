@@ -11,7 +11,7 @@ import java.util.Map;
  * User: Viktor
  */
 public class DataRegistry {
-    private Output output = new Output();
+    private Output output = new Output();//
     private Category[] categories = new Category[0];
 
     private Map<Integer, Project[]> hm = new HashMap<>();
@@ -24,7 +24,7 @@ public class DataRegistry {
         this.categories = categories;
     }
 
-    public void registerMapOfProjects(Map<Integer, Project[]> hm) {
+    public void registerProjects(Map<Integer, Project[]> hm) {
         this.hm = hm;
     }
 
@@ -38,7 +38,7 @@ public class DataRegistry {
     }
 
     public Project getProject(int[] path) {
-        if (hm.get(path[0]).length < path[1]  ||(path[1] - 1)<0) {
+        if (hm.get(path[0]).length < path[1]  ||(path[1] - 1)<0) {//TODO renaime, make more understendeble. Use Enume
             //  output.println("You choose not sutable variant, try more.");
             return null;
         }

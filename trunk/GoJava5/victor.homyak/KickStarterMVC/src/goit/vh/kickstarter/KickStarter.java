@@ -13,7 +13,6 @@ import goit.vh.kickstarter.model.Category;
 import goit.vh.kickstarter.model.Project;
 
 import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -24,7 +23,7 @@ import java.util.Map;
 public class KickStarter {
 
     private final Output output = new Output();
-    private MainPageController mainPageController;
+    private MainPageController mainPageController;//TODO remove fields
     private CategoryController categoryController;
     private MainPageView mainPageView;
     private ProjectController projectController;
@@ -84,7 +83,7 @@ public class KickStarter {
                                             "Is it legal?\nno\nWhat side effects?\n85% brain cancer",
                                             "https://www.youtube.com/watch?v=tk7RUVJmLk0")});
 
-        dataRegistry.registerMapOfProjects(hm);
+        dataRegistry.registerProjects(hm);
 
 
         MainPageModel mainPageModel = new MainPageModel();
