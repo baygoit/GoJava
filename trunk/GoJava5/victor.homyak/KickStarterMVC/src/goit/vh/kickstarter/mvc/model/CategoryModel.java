@@ -2,31 +2,27 @@ package goit.vh.kickstarter.mvc.model;
 
 import goit.vh.kickstarter.DataRegistry;
 import goit.vh.kickstarter.Output;
-import goit.vh.kickstarter.model.Category;
+
+
+import java.util.ArrayList;
 
 /**
  * Created with IntelliJ IDEA.
  * User: Viktor
  */
 public class CategoryModel {
-
     private DataRegistry dataRegistry;
     private String categoryName;
-    private String categoryIndex;
+    private int categoryIndex;
     private Output output = new Output();
 
-    public CategoryModel(DataRegistry dataRegistry) {
-        this.dataRegistry = dataRegistry;
-    }
-
     public Object refreshModel(int input) {
-        if (dataRegistry.getCategories().length < input - 1) {
+        if (dataRegistry.getCategories().size() < input - 1) {
             output.println("You choose not sutable variant, try more.");
             return null;
         } else {
-            Category category = dataRegistry.getCategories()[input - 1];
-            categoryIndex = String.valueOf(input);
-            categoryName = category.getName();
+            categoryIndex = dataRegistry.getProjectList(input).get(0).getParentId();
+            categoryName = dataRegistry.getProjectList(input).get(0).getParentName();
             return 1;
         }
     }
@@ -35,7 +31,11 @@ public class CategoryModel {
         return categoryName;
     }
 
-    public String getCategoryIndex() {
+    public int getCategoryIndex() {
         return categoryIndex;
+    }
+
+    public void setDataRegistry(DataRegistry dataRegistry) {
+        this.dataRegistry = dataRegistry;
     }
 }

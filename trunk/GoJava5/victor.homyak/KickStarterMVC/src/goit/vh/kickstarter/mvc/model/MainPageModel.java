@@ -1,7 +1,9 @@
 package goit.vh.kickstarter.mvc.model;
 
 import goit.vh.kickstarter.DataRegistry;
-import goit.vh.kickstarter.model.Category;
+
+import java.util.ArrayList;
+import java.util.Map;
 
 /**
  * Created with IntelliJ IDEA.
@@ -11,7 +13,7 @@ public class MainPageModel {
 
     private DataRegistry dataRegistry;
 
-    public Category[] getCategories() {
+    public Map<Integer, ArrayList<ProjectModel>> getCategories() {
         return dataRegistry.getCategories();
     }
 

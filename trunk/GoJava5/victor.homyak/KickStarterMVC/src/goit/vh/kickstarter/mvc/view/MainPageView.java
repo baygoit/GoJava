@@ -1,12 +1,12 @@
 package goit.vh.kickstarter.mvc.view;
 
-import goit.vh.kickstarter.Input;
 import goit.vh.kickstarter.Output;
 import goit.vh.kickstarter.QuoteGenerator;
 import goit.vh.kickstarter.mvc.model.MainPageModel;
-import goit.vh.kickstarter.model.Category;
+import goit.vh.kickstarter.mvc.model.ProjectModel;
 
-import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Map;
 
 
 /**
@@ -26,10 +26,11 @@ public class MainPageView {
         QuoteGenerator quote = new QuoteGenerator();
         output.println(quote.getQuote() + "\n");
 
-        Category[] categories = model.getCategories();
-        for (int i = 0; i < categories.length; i++) {
-            output.println(String.valueOf(i + 1) + " " + categories[i].getName());
+        Map<Integer, ArrayList<ProjectModel>> categories = model.getCategories();
+        for (ArrayList<ProjectModel> value : categories.values()) {
+            output.println(value.get(0).getParentId() + " " + value.get(0).getParentName());
         }
+
 
     }
 }

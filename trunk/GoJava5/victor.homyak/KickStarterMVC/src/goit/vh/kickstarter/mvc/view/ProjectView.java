@@ -1,13 +1,11 @@
 package goit.vh.kickstarter.mvc.view;
 
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
-import goit.vh.kickstarter.Input;
 import goit.vh.kickstarter.Output;
 import goit.vh.kickstarter.mvc.model.ProjectModel;
-import goit.vh.kickstarter.model.Project;
 
 /**
  * Created by Viktor on 14.07.2015.
@@ -20,13 +18,13 @@ public class ProjectView {
         this.output = output;
     }
 
-    public void renderList(Project[] projects) {
+    public void renderList(ArrayList<ProjectModel> projects) {
 
-        for (int i = 0; i < projects.length; i++) {
-            output.println(String.valueOf(i + 1) + " " + projects[i].getName() + " " + projects[i].getShortDescription() +
-                    "\n Sum to raise: " + projects[i].getSumToRaise() + "; Already collected: " + projects[i].getCurrentSum()
+        for (int i = 0; i < projects.size(); i++) {
+            output.println(String.valueOf(i + 1) + " " + projects.get(i).getProjectName() + " " + projects.get(i).getShortDescription() +
+                    "\n Sum to raise: " + projects.get(i).getSumToRaise() + "; Already collected: " + projects.get(i).getCurrentSum()
                     + "; Days to end raising money: " +
-                    getDateDiff(new Date(), projects[i].getEndDate(), TimeUnit.DAYS));
+                    getDateDiff(new Date(), projects.get(i).getEndDate(), TimeUnit.DAYS));
         }
     }
 

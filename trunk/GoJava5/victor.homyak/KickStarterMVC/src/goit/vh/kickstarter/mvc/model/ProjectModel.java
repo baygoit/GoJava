@@ -1,8 +1,8 @@
 package goit.vh.kickstarter.mvc.model;
 
 import goit.vh.kickstarter.DataRegistry;
-import goit.vh.kickstarter.model.Project;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -11,8 +11,8 @@ import java.util.Date;
 public class ProjectModel {
 
     private DataRegistry dataRegistry;
-    private Project[] listOfProjectses;
-    private Project project;
+    private ArrayList<ProjectModel> listOfProjectses;
+    private ProjectModel projectModel;
     private String projectName;
     private String shortDescription;
     private int sumToRaise;
@@ -21,12 +21,30 @@ public class ProjectModel {
     private String projectHistory;
     private String fAQ;
     private String demoURL;
+    private String parentName;
+    private int parentId;
 
-    public ProjectModel(DataRegistry dataRegistry) {
-        this.dataRegistry = dataRegistry;
+    public ProjectModel() {
+
     }
 
-    public Project[] getListOfProjectses() {
+    public ProjectModel(String name, String shortDescription, int sumToRaise, int currentSum, Date endDate,
+                   String projectHistory, String fAQ, String demoURL, String parentName, int parentId) {
+        this.projectName = name;
+        this.shortDescription = shortDescription;
+        this.sumToRaise = sumToRaise;
+        this.currentSum = currentSum;
+        this.endDate = endDate;
+        this.projectHistory = projectHistory;
+        this.fAQ = fAQ;
+        this.demoURL = demoURL;
+        this.parentName = parentName;
+        this.parentId= parentId;
+    }
+
+
+
+    public ArrayList<ProjectModel> getListOfProjectses() {
         return listOfProjectses;
     }
 
@@ -34,15 +52,15 @@ public class ProjectModel {
         if (dataRegistry.getProject(path) == null) {
             return null;
         }
-        project = dataRegistry.getProject(path);
-        this.projectName = project.getName();
-        this.shortDescription = project.getShortDescription();
-        this.sumToRaise = project.getSumToRaise();
-        this.currentSum = project.getCurrentSum();
-        this.endDate = project.getEndDate();
-        this.projectHistory = project.getProjectHistory();
-        this.fAQ = project.getfAQ();
-        this.demoURL = project.getDemoURL();
+        projectModel = dataRegistry.getProject(path);
+        this.projectName = projectModel.getProjectName();
+        this.shortDescription = projectModel.getShortDescription();
+        this.sumToRaise = projectModel.getSumToRaise();
+        this.currentSum = projectModel.getCurrentSum();
+        this.endDate = projectModel.getEndDate();
+        this.projectHistory = projectModel.getProjectHistory();
+        this.fAQ = projectModel.getfAQ();
+        this.demoURL = projectModel.getDemoURL();
         return 1;
     }
 
@@ -85,6 +103,17 @@ public class ProjectModel {
         return projectName;
     }
 
+    public String getParentName() {
+        return parentName;
+    }
 
+    public int getParentId() {
+        return parentId;
+    }
+
+
+    public void setDataRegistry(DataRegistry dataRegistry) {
+        this.dataRegistry = dataRegistry;
+    }
 }
 

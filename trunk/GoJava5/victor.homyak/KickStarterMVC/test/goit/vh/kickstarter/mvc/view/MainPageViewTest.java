@@ -14,7 +14,6 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
-import goit.vh.kickstarter.model.Category;
 
 
 import static org.mockito.Matchers.anyString;
@@ -62,8 +61,8 @@ public class MainPageViewTest {
 //    @Test
 //    public void whenRenderMainPageThanPrintHelloMsgAndCategoriesList() throws Exception {
 //        when(model.getHelloMsg()).thenReturn("Test Msg");
-//        Category[] category = {new Category("Category 1"), new Category("Category 2"), new Category("Category 3")};
-//        when(model.getCategories()).thenReturn(category);
+//        CategoryModel[] CategoryModel = {new CategoryModel("CategoryModel 1"), new CategoryModel("CategoryModel 2"), new CategoryModel("CategoryModel 3")};
+//        when(model.getCategories()).thenReturn(CategoryModel);
 //
 //        final List<String> view = new ArrayList<>();
 //
@@ -81,7 +80,7 @@ public class MainPageViewTest {
 //        MainPageView mainPageView = new MainPageView(output);
 //
 //        mainPageView.render(model);
-//        String[] expectedResult = {"Test Msg", "1 Category 1", "2 Category 2", "3 Category 3"};
+//        String[] expectedResult = {"Test Msg", "1 CategoryModel 1", "2 CategoryModel 2", "3 CategoryModel 3"};
 //        Assert.assertArrayEquals(expectedResult, view.toArray());
 //    }
 }
