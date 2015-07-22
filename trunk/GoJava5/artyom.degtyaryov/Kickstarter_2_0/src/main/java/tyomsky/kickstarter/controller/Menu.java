@@ -1,6 +1,6 @@
-package tyomsky.kickstarter;
+package tyomsky.kickstarter.controller;
 
-import java.util.List;
+import tyomsky.kickstarter.ui.IO;
 
 public abstract class Menu {
 

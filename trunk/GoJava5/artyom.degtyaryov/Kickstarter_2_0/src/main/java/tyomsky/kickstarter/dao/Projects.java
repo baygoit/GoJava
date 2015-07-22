@@ -1,4 +1,6 @@
-package tyomsky.kickstarter;
+package tyomsky.kickstarter.dao;
+
+import tyomsky.kickstarter.model.Project;
 
 import java.util.ArrayList;
 import java.util.List;

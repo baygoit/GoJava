@@ -1,7 +1,9 @@
-package tyomsky.kickstarter;
+package tyomsky.kickstarter.dao;
 
 import org.junit.Before;
 import org.junit.Test;
+import tyomsky.kickstarter.dao.CategoriesDAO;
+import tyomsky.kickstarter.model.Category;
 
 import static org.junit.Assert.*;
 

@@ -1,4 +1,4 @@
-package tyomsky.kickstarter;
+package tyomsky.kickstarter.dao;
 
 import org.junit.After;
 

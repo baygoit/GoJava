@@ -1,5 +1,13 @@
 package tyomsky.kickstarter;
 
+import tyomsky.kickstarter.controller.Kickstarter;
+import tyomsky.kickstarter.dao.CategoriesDAO;
+import tyomsky.kickstarter.dao.CategoriesDAOFile;
+import tyomsky.kickstarter.dao.Projects;
+import tyomsky.kickstarter.model.Project;
+import tyomsky.kickstarter.model.QuoteGenerator;
+import tyomsky.kickstarter.ui.ConsoleIO;
+
 import java.util.Random;
 
 public class BootStrap {

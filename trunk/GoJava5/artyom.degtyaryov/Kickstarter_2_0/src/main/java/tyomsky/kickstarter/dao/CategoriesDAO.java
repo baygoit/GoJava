@@ -1,4 +1,6 @@
-package tyomsky.kickstarter;
+package tyomsky.kickstarter.dao;
+
+import tyomsky.kickstarter.model.Category;
 
 public interface CategoriesDAO {
 

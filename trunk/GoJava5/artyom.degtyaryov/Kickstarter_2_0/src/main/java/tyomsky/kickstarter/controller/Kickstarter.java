@@ -1,4 +1,11 @@
-package tyomsky.kickstarter;
+package tyomsky.kickstarter.controller;
+
+import tyomsky.kickstarter.dao.CategoriesDAO;
+import tyomsky.kickstarter.dao.Projects;
+import tyomsky.kickstarter.model.Category;
+import tyomsky.kickstarter.model.Project;
+import tyomsky.kickstarter.model.QuoteGenerator;
+import tyomsky.kickstarter.ui.IO;
 
 import java.util.ArrayList;
 import java.util.List;

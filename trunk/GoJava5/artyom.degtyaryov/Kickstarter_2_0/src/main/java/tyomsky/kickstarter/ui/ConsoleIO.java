@@ -1,4 +1,4 @@
-package tyomsky.kickstarter;
+package tyomsky.kickstarter.ui;
 
 import java.util.Scanner;
 

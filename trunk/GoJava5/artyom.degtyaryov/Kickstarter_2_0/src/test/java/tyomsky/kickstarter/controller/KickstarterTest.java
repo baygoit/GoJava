@@ -1,9 +1,17 @@
-package tyomsky.kickstarter;
+package tyomsky.kickstarter.controller;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import tyomsky.kickstarter.controller.Kickstarter;
+import tyomsky.kickstarter.dao.CategoriesDAO;
+import tyomsky.kickstarter.dao.CategoriesDAOMemory;
+import tyomsky.kickstarter.dao.Projects;
+import tyomsky.kickstarter.model.Category;
+import tyomsky.kickstarter.model.Project;
+import tyomsky.kickstarter.model.QuoteGenerator;
+import tyomsky.kickstarter.ui.IO;
 
 import java.util.*;
 

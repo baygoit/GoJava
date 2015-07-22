@@ -1,6 +1,6 @@
-package tyomsky.kickstarter;
+package tyomsky.kickstarter.dao;
 
-public class CategoriesDAOMemoryTest extends CategoriesTest{
+public class CategoriesDAOMemoryTest extends CategoriesTest {
 
     @Override
     public CategoriesDAO getCategoriesDAOImplementation() {
