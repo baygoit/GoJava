@@ -12,17 +12,17 @@ import static ua.goit.kyrychok.kickstarter.Utils.getMoney;
 public class CategoryView extends BaseView {
 
     public void render(CategoryModel model) {
-        getOutput().writeLine(model.getName());
+        writeLine(model.getName());
         List<Project> projects = model.getProjects();
         Project project;
         for (int counter = 0; counter < projects.size(); counter++) {
             project = projects.get(counter);
-            getOutput().writeLine(String.format("[%s]. %s", counter + 1, project.getName()));
-            getOutput().writeLine(String.format("     Short Description: %s", project.getShortDescription()));
-            getOutput().writeLine(String.format("     Goal: %s", getMoney(project.getGoal())));
-            getOutput().writeLine(String.format("     Balance: %s", getMoney(project.getBalance())));
-            getOutput().writeLine(String.format("     %s", getDiffDate(project.getDeadlineDate(), new Date())));
+            writeLine(String.format("[%s]. %s", counter + 1, project.getName()));
+            writeLineWithParam("     Short Description: %s", project.getShortDescription());
+            writeLine(String.format("     Goal: %s", getMoney(project.getGoal())));
+            writeLine(String.format("     Balance: %s", getMoney(project.getBalance())));
+            writeLine(String.format("     Time left: %s", getDiffDate(project.getDeadlineDate(), new Date())));
         }
-        getOutput().writeLine(CHOICE_MESSAGE);
+        writeLine(CHOICE_MESSAGE);
     }
 }

@@ -11,7 +11,7 @@ public class Bootstrap {
         Project project;
 
         category = new Category("Category 1");
-        project = new Project("1st project in 1st category", "desc", 10000, 350000, convertDate("01.07.2015"), convertDate("01.08.2015"), "http://stackoverflow.com/");
+        project = new Project("1st project in 1st category", 10000, convertDate("01.08.2015"), "desc", 350000, "http://stackoverflow.com/");
         project.addFaq(new Faq("Question 1", "Answer on question 1"));
         project.addFaq(new Faq("Question 2", "Answer on question 2"));
         project.addFaq(new Faq("Question 3", "Answer on question 3"));
@@ -21,12 +21,12 @@ public class Bootstrap {
         project.addReward(new Reward(3000, "Some reward for donate 30$"));
         project.addReward(new Reward(4000, "Some reward for donate 40$"));
         category.addProject(project);
-        project = new Project("2nd project in 1st category", "desc2", 1000, 350, convertDate("01.07.2015"), convertDate("20.08.2015"), "");
+        project = new Project("2nd project in 1st category", 1000, convertDate("20.08.2015"), "desc2", 350, "");
         category.addProject(project);
         dataProvider.addCategory(category);
 
         category = new Category("Category 2");
-        project = new Project("1st project in 2st category", "desc21", 1000000, 600000, convertDate("01.07.2015"), convertDate("01.11.2015"), "");
+        project = new Project("1st project in 2st category", 1000000, convertDate("01.11.2015"), "desc21", 600000, "");
         category.addProject(project);
         dataProvider.addCategory(category);
 

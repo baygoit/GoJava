@@ -8,7 +8,6 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 import ua.goit.kyrychok.kickstarter.Output;
-import ua.goit.kyrychok.kickstarter.TestDataProvider;
 import ua.goit.kyrychok.kickstarter.model.Faq;
 import ua.goit.kyrychok.kickstarter.model.Project;
 import ua.goit.kyrychok.kickstarter.model.ProjectEvent;
@@ -18,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import static org.apache.commons.lang3.time.DateUtils.addHours;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.when;
@@ -36,12 +36,15 @@ public class ProjectViewTest {
     }
 
     @Test
-    public void whenRenderProjectThenPrintAttributes() throws Exception {
-        TestDataProvider testDataProvider = new TestDataProvider();
-        testDataProvider.init();
-        Project project = testDataProvider.getProject(0, 0);
-        List<Faq> faqs = project.getFaqs();
-        List<ProjectEvent> projectEvents = project.getProjectEvents();
+    public void whenRenderProjectThenPrintAllAttributes() throws Exception {
+        Project project = new Project("project", 30000, addHours(new Date(), 3));
+        project.setShortDescription("desc");
+        project.setBalance(215);
+        project.setDemoLink("link");
+        project.addFaq(new Faq("question"));
+        project.addFaq(new Faq("question", "answer"));
+        project.addProjectEvent(new ProjectEvent(new Date(), "text"));
+
         when(model.getName()).thenReturn(project.getName());
         when(model.getDemoLink()).thenReturn(project.getDemoLink());
         when(model.getBalance()).thenReturn(project.getBalance());
@@ -75,14 +78,11 @@ public class ProjectViewTest {
         expectedResult.add(String.format("Demo link: %s", project.getDemoLink()));
         expectedResult.add(String.format("Balance: %s; Goal: %s; Time left: %s", getMoney(project.getBalance()), getMoney(project.getGoal()), getDiffDate(model.getDeadlineDate(), new Date())));
         expectedResult.add("FAQ:");
-        for (int counter = 0; counter < faqs.size(); counter++) {
-            expectedResult.add(String.format("  %s. <%s>", counter + 1, faqs.get(counter).getQuestion()));
-            expectedResult.add(String.format("      %s", faqs.get(counter).getAnswer()));
-        }
+        expectedResult.add("  1. <question>");
+        expectedResult.add("  2. <question>");
+        expectedResult.add("      answer");
         expectedResult.add("Project events:");
-        for (ProjectEvent projectEvent : projectEvents) {
-            expectedResult.add(String.format("  %s: %s", getDate(projectEvent.getEventDate()), projectEvent.getMessage()));
-        }
+        expectedResult.add(String.format("  %s: %s", getDate(project.getProjectEvents().get(0).getEventDate()), project.getProjectEvents().get(0).getMessage()));
         expectedResult.add("Actions:");
         expectedResult.add("[1]. Ask a question");
         expectedResult.add("[2]. Donate");

@@ -7,8 +7,8 @@ import java.util.List;
 public class Project {
     private String name;
     private String shortDescription;
-    private Integer goal;
-    private Integer balance;
+    private int goal;
+    private int balance;
     private Date createDate;
     private Date deadlineDate;
     private String demoLink;
@@ -16,13 +16,26 @@ public class Project {
     private List<ProjectEvent> projectEvents;
     private List<Reward> rewards;
 
-    public Project(String name, String shortDescription, Integer goal, Integer balance, Date createDate, Date deadlineDate, String demoLink) {
-        this.name = name;
+    public Project(String name, int goal, Date deadlineDate,
+                   String shortDescription, int balance, String demoLink) {
+        this(name, goal, deadlineDate);
         this.shortDescription = shortDescription;
-        this.goal = goal;
         this.balance = balance;
-        this.createDate = createDate;
+        this.demoLink = demoLink;
+    }
+
+    public Project(String name, int goal, Date deadlineDate) {
+        this.name = name;
+        this.goal = goal;
         this.deadlineDate = deadlineDate;
+        createDate = new Date();
+    }
+
+    public void setShortDescription(String shortDescription) {
+        this.shortDescription = shortDescription;
+    }
+
+    public void setDemoLink(String demoLink) {
         this.demoLink = demoLink;
     }
 
@@ -34,15 +47,15 @@ public class Project {
         return shortDescription;
     }
 
-    public Integer getGoal() {
+    public int getGoal() {
         return goal;
     }
 
-    public Integer getBalance() {
+    public int getBalance() {
         return balance;
     }
 
-    public void setBalance(Integer balance) {
+    public void setBalance(int balance) {
         this.balance = balance;
     }
 

@@ -11,8 +11,7 @@ public class FaqModel extends BaseModel {
     }
 
     public void setQuestion(int categoryIndex, int projectIndex, String question) {
-        Faq faq = new Faq();
-        faq.setQuestion(question);
+        Faq faq = new Faq(question);
         getDataProvider().addFaq(categoryIndex, projectIndex, faq);
     }
 }

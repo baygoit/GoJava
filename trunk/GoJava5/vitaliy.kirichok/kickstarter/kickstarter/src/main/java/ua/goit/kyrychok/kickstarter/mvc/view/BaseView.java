@@ -2,6 +2,7 @@ package ua.goit.kyrychok.kickstarter.mvc.view;
 
 import ua.goit.kyrychok.kickstarter.Output;
 
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static ua.goit.kyrychok.kickstarter.mvc.controller.BaseController.EXIT_CODE;
 
 public abstract class BaseView {
@@ -14,7 +15,15 @@ public abstract class BaseView {
         this.output = output;
     }
 
-    public Output getOutput() {
-        return output;
+    protected void writeLine(String line) {
+        if (isNotBlank(line)) {
+            output.writeLine(line);
+        }
+    }
+
+    protected void writeLineWithParam(String line, String param) {
+        if (isNotBlank(param)) {
+            writeLine(String.format(line, param));
+        }
     }
 }

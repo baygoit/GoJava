@@ -7,6 +7,7 @@ import java.util.List;
 
 import static ua.goit.kyrychok.kickstarter.Utils.convertDate;
 
+@Deprecated
 public class TestDataProvider {
     private List<Category> categories;
 
@@ -19,7 +20,7 @@ public class TestDataProvider {
         Category category;
         Project project;
         category = new Category("Category 1");
-        project = new Project("1st project", "desc", 10010, 350000, convertDate("01.07.2015"), convertDate("01.08.2015"), "http://stackoverflow.com/");
+        project = new Project("1st project", 10010, convertDate("01.08.2015"), "desc", 350000,  "http://stackoverflow.com/");
         project.addFaq(new Faq("Question 1", "Answer on question 1"));
         project.addFaq(new Faq("Question 2", "Answer on question 2"));
         project.addProjectEvent(new ProjectEvent(convertDate("01.01.2015"), "Project event 1"));
@@ -28,7 +29,7 @@ public class TestDataProvider {
         project.addReward(new Reward(3000, "Some reward for donate 30$"));
         project.addReward(new Reward(4000, "Some reward for donate 40$"));
         category.addProject(project);
-        project = new Project("2nd project", "desc", 10010, 350000, convertDate("01.07.2015"), convertDate("01.08.2015"), "http://stackoverflow.com/");
+        project = new Project("2nd project", 10010, convertDate("01.08.2015"), "desc", 350000, "http://stackoverflow.com/");
         category.addProject(project);
         categories.add(category);
         categories.add(new Category("Category 2"));

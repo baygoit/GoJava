@@ -7,9 +7,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import ua.goit.kyrychok.kickstarter.DataProvider;
-import ua.goit.kyrychok.kickstarter.TestDataProvider;
 import ua.goit.kyrychok.kickstarter.model.Category;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.mockito.Mockito.when;
@@ -39,9 +39,10 @@ public class MainPageModelTest {
 
     @Test
     public void whenGetCategoriesThenReturnSameCategories() throws Exception {
-        TestDataProvider testDataProvider = new TestDataProvider();
-        testDataProvider.init();
-        List<Category> expectedResult = testDataProvider.getCategories();
+        List<Category> expectedResult = new ArrayList<>();
+        expectedResult.add(new Category("Category 1"));
+        expectedResult.add(new Category("Category 2"));
+        expectedResult.add(new Category("Category 3"));
         int expectedCount = expectedResult.size();
         when(dataProvider.getCategories()).thenReturn(expectedResult);
 

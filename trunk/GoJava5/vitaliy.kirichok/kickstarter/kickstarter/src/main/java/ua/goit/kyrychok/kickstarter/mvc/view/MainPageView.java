@@ -8,12 +8,12 @@ import java.util.List;
 public class MainPageView extends BaseView {
 
     public void render(MainPageModel model) {
-        getOutput().writeLine(model.getWelcomeMessage());
+        writeLine(model.getWelcomeMessage());
         List<Category> categories = model.getCategories();
         for (int counter = 0; counter < categories.size(); counter++) {
-            getOutput().writeLine(String.format("[%s]. %s", counter + 1, categories.get(counter).getName()));
+            writeLine(String.format("[%s]. %s", counter + 1, categories.get(counter).getName()));
         }
-        getOutput().writeLine(CHOICE_MESSAGE);
+        writeLine(CHOICE_MESSAGE);
     }
 
 }

@@ -22,11 +22,11 @@ public class ProjectModel extends BaseModel {
         return project.getShortDescription();
     }
 
-    public Integer getBalance() {
+    public int getBalance() {
         return project.getBalance();
     }
 
-    public Integer getGoal() {
+    public int getGoal() {
         return project.getGoal();
     }
 

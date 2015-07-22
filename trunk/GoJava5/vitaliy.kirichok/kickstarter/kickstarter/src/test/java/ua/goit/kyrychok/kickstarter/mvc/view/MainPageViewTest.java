@@ -8,7 +8,7 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 import ua.goit.kyrychok.kickstarter.Output;
-import ua.goit.kyrychok.kickstarter.TestDataProvider;
+import ua.goit.kyrychok.kickstarter.model.Category;
 import ua.goit.kyrychok.kickstarter.mvc.model.MainPageModel;
 
 import java.util.ArrayList;
@@ -35,9 +35,11 @@ public class MainPageViewTest {
     public void whenRenderMainPageThenPrintWelcomeMsgAndCategoriesList() throws Exception {
         when(model.getWelcomeMessage()).thenReturn("Test Msg");
 
-        TestDataProvider testDataProvider = new TestDataProvider();
-        testDataProvider.init();
-        when(model.getCategories()).thenReturn(testDataProvider.getCategories());
+        List<Category> categories = new ArrayList<>();
+        categories.add(new Category("Category 1"));
+        categories.add(new Category("Category 2"));
+        categories.add(new Category("Category 3"));
+        when(model.getCategories()).thenReturn(categories);
 
         final List<String> view = new ArrayList<>();
 

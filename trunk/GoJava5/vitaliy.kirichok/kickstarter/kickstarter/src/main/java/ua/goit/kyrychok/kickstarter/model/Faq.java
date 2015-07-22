@@ -4,16 +4,13 @@ public class Faq {
     private String question;
     private String answer;
 
-    public Faq() {
+    public Faq(String question) {
+        this.question = question;
     }
 
     public Faq(String question, String answer) {
-        this.question = question;
+        this(question);
         this.answer = answer;
-    }
-
-    public void setQuestion(String question) {
-        this.question = question;
     }
 
     public String getQuestion() {
