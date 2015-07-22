@@ -1,7 +1,13 @@
 package goit.vh.kickstarter;
 
+import goit.vh.kickstarter.mvc.model.CategoryModel;
+import goit.vh.kickstarter.mvc.model.ProjectModel;
 import org.junit.Assert;
 import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 
 /**
@@ -11,46 +17,27 @@ import org.junit.Test;
  * Time: 12:45 PM
  * To change this template use File | Settings | File Templates.
  */
-//public class DataRegistryTest {
+public class DataRegistryTest {
 
-//    @Test
-//    public void whenGetMsgThanReturnNotNull() throws Exception {
-//        DataRegistry dataRegistry = new DataRegistry();
-//
-//        String result = dataRegistry.getHelloMsg();
-//
-//        Assert.assertNotNull("Hello msg must not be null", result);
-//    }
+    @Test
+    public void whenGetCategoriesThanReturnNotNull() throws Exception {
+        DataRegistry dataRegistry = new DataRegistry();
 
+        Map<Integer, ArrayList<ProjectModel>> result = dataRegistry.getCategories();
 
-//    @Test
-//    public void wenGetMsgThanReturnSomeStr() throws Exception {
-//        DataRegistry dataRegistry = new DataRegistry();
+        Assert.assertNotNull("Categories array must not be null", result);
+    }
 //
-//        String result = dataRegistry.getHelloMsg();
 //
-//        Assert.assertTrue("Hello msg must not be empty", result.trim().length() > 0);
-//    }
+    @Test
+    public void whenRegisterCategoriesThanReturnSameCategories() throws Exception {
+        DataRegistry dataRegistry = new DataRegistry();
+        Map<Integer, ArrayList<ProjectModel>> categories = new HashMap<>();
+        dataRegistry.registerCategories(categories);
 
-//    @Test
-//    public void whenGetCategoriesThanReturnNotNull() throws Exception {
-//        DataRegistry dataRegistry = new DataRegistry();
+        Map<Integer, ArrayList<ProjectModel>> result = dataRegistry.getCategories();
+
+        Assert.assertEquals("Categories must be the same as registered", categories, result);
+    }
 //
-//        CategoryModel[] result = dataRegistry.getCategories();
-//
-//        Assert.assertNotNull("Categories array must not be null", result);
-//    }
-//
-//
-//    @Test
-//    public void whenRegisterCategoriesThanReturnSameCategories() throws Exception {
-//        DataRegistry dataRegistry = new DataRegistry();
-//        CategoryModel[] categories = {new CategoryModel("CategoryModel 1"), new CategoryModel("CategoryModel 2"), new CategoryModel("CategoryModel 3")};
-//        dataRegistry.registerCategories(categories);
-//
-//        CategoryModel[] result = dataRegistry.getCategories();
-//
-//        Assert.assertArrayEquals("Categories must be the same as registered", categories, result);
-//    }
-//
-//}
+}
