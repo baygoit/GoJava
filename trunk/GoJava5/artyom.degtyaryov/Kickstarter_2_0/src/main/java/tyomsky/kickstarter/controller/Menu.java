@@ -4,7 +4,7 @@ import tyomsky.kickstarter.ui.IO;
 
 public abstract class Menu {
 
-    private IO io;
+    protected IO io;
 
     public Menu(IO io) {
         this.io = io;
