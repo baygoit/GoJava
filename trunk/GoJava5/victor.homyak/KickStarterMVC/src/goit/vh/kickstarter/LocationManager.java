@@ -24,11 +24,6 @@ public class LocationManager {
         this.projectController = projectController;
     }
 
-    public void onApplicationStart() {//TODO remove
-        dispatch();
-    }
-
-
     public void dispatch() {
         if (path[0] == 0 && path[1] == 0) {
             mainPageController.start(path);

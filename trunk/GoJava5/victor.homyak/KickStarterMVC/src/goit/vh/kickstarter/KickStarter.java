@@ -108,7 +108,7 @@ public class KickStarter {
     }
 
     private void start() {
-        locationManager.onApplicationStart();
+        locationManager.dispatch();
     }
 
 

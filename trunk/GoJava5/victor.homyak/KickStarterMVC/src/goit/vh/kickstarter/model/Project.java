@@ -15,11 +15,7 @@ public class Project {
     private String projectHistory;
     private String fAQ;
     private String demoURL;
-
-
-    public Project(String name) {
-        this.name = name;
-    }
+    
     public Project(String name, String shortDescription, int sumToRaise, int currentSum, Date endDate,
                    String projectHistory, String fAQ, String demoURL) {
         this.name = name;
