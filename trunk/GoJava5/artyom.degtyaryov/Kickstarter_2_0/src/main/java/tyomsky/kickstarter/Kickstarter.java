@@ -2,7 +2,6 @@ package tyomsky.kickstarter;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class Kickstarter {
 
@@ -21,30 +20,7 @@ public class Kickstarter {
     public void run() {
         String quote = quoteGenerator.getQuote();
         io.println(quote);
-        categoriesMenu().run();
-    }
-
-
-
-    private Menu categoriesMenu() {
-        return new Menu(io) {
-
-            @Override
-            public Menu nextMenu(Object selected) {
-                List<Project> foundProjects = getProjetsByCategory((Category) selected);
-                return projectsMenu(foundProjects);
-            }
-
-            @Override
-            public Object select(int chosenMenuIndex) {
-                return chooseCategory(chosenMenuIndex);
-            }
-
-            @Override
-            public void ask() {
-                askCategories();
-            }
-        };
+        new CategoriesMenu().run();
     }
 
     private void askCategories() {
@@ -52,69 +28,9 @@ public class Kickstarter {
         io.println("Select item (0 for exit)");
     }
 
-    private Menu projectsMenu(final List<Project> foundProjects) {
-        return new Menu(io) {
-
-            @Override
-            public Menu nextMenu(Object selected) {
-                return projectMenu((Project) selected);
-            }
-
-            @Override
-            public Object select(int chosenMenuIndex) {
-                return chooseProject(foundProjects, chosenMenuIndex);
-            }
-
-            @Override
-            public void ask() {
-                askProjects(foundProjects);
-            }
-        };
-    }
-
     private void askProjects(List<Project> foundProjects) {
         showProjects(foundProjects);
         io.println("Select item (0 for exit)");
-
-    }
-
-    private Menu projectMenu(final Project chosenProject) {
-        return new Menu(io) {
-
-            @Override
-            public Menu nextMenu(Object selected) {
-                int chosenMenuIndex = (int) selected;
-                if (chosenMenuIndex == 1){
-                    io.println("Thanks for helping our project");
-                    io.println("Enter your name");
-                    String name = io.read();
-                    io.println("Enter the number of your card");
-                    int cardNumber = Integer.parseInt(io.read());
-                    io.println("Enter the amount of money");
-                    int amount = Integer.parseInt(io.read());
-                    chosenProject.setMoneyCollected(chosenProject.getMoneyCollected() + amount);
-                    io.println("Thank you! You can go!");
-                }
-                if (chosenMenuIndex == 2){
-                    io.println("Enter your question");
-                    String question = io.read();
-                    io.println("Thank for your question");
-                    chosenProject.setQuestionsAndAnswers(chosenProject.getQuestionsAndAnswers()+"\n Q: "+question);
-                }
-                return null; /// payment menu
-            }
-
-            @Override
-            public Object select(int chosenMenuIndex) {
-                return chosenMenuIndex;
-            }
-
-            @Override
-            public void ask() {
-                printProjectDetails(chosenProject);
-                askProject(chosenProject);
-            }
-        };
 
     }
 
@@ -135,10 +51,7 @@ public class Kickstarter {
     }
 
     private boolean categoryIndexIsInvalid(int chosenMenuIndex) {
-        if (chosenMenuIndex <= 0 || chosenMenuIndex > categories.size()) {
-            return true;
-        }
-        return false;
+        return chosenMenuIndex <= 0 || chosenMenuIndex > categories.size();
     }
 
     private void printProjectDetails(Project project) {
@@ -159,10 +72,7 @@ public class Kickstarter {
     }
 
     private boolean projectIndexIsInvalid(int chosenMenuIndex, List<Project> projectsList) {
-        if (chosenMenuIndex <= 0 || chosenMenuIndex > projectsList.size()) {
-            return true;
-        }
-        return false;
+        return chosenMenuIndex <= 0 || chosenMenuIndex > projectsList.size();
     }
 
     private Category chooseCategory(int chosenMenuIndex) {
@@ -203,6 +113,152 @@ public class Kickstarter {
             }
         }
         return result;
+    }
+
+    private class CategoriesMenu extends Menu {
+
+        public CategoriesMenu() {
+            super(Kickstarter.this.io);
+        }
+
+        @Override
+        public Menu nextMenu(Object selected) {
+            List<Project> foundProjects = getProjetsByCategory((Category) selected);
+            return new ProjectsMenu(foundProjects);
+        }
+
+        @Override
+        public Object select(int chosenMenuIndex) {
+            return chooseCategory(chosenMenuIndex);
+        }
+
+        @Override
+        public void ask() {
+            askCategories();
+        }
+    }
+
+    private class ProjectsMenu extends Menu {
+
+        private final List<Project> foundProjects;
+
+        public ProjectsMenu(List<Project> foundProjects) {
+            super(Kickstarter.this.io);
+            this.foundProjects = foundProjects;
+        }
+
+        @Override
+        public Menu nextMenu(Object selected) {
+            return new ProjectMenu((Project) selected);
+        }
+
+        @Override
+        public Object select(int chosenMenuIndex) {
+            return chooseProject(foundProjects, chosenMenuIndex);
+        }
+
+        @Override
+        public void ask() {
+            askProjects(foundProjects);
+        }
+    }
+
+    private class ProjectMenu extends Menu {
+
+        private final Project project;
+
+        public ProjectMenu(Project project) {
+            super(Kickstarter.this.io);
+            this.project = project;
+        }
+
+        @Override
+        public Menu nextMenu(Object selected) {
+            int chosenMenuIndex = (int) selected;
+            if (chosenMenuIndex == 1){
+                return new PaymentMenu(project);
+            }
+            if (chosenMenuIndex == 2){
+                io.println("Enter your question");
+                String question = io.read();
+                io.println("Thank for your question");
+                project.setQuestionsAndAnswers(project.getQuestionsAndAnswers()+"\n Q: "+question);
+            }
+            return null;
+        }
+
+        @Override
+        public Object select(int chosenMenuIndex) {
+            return chosenMenuIndex;
+        }
+
+        @Override
+        public void ask() {
+            printProjectDetails(project);
+            askProject(project);
+        }
+    }
+
+    private class PaymentMenu extends Menu {
+
+        Project project;
+
+        public PaymentMenu( Project project) {
+            super(Kickstarter.this.io);
+            this.project = project;
+        }
+
+        @Override
+        public Menu nextMenu(Object selected) {
+            int chosenMenuIndex = (int) selected;
+            int amount;
+            switch (chosenMenuIndex) {
+                case 1: {
+                    amount = 1;
+                    break;
+                }
+                case 2: {
+                    amount = 5;
+                    break;
+                }
+                case 3: {
+                    amount = 20;
+                    break;
+                }
+                case 9: {
+                    io.println("Enter the amount of money");
+                    amount = Integer.parseInt(io.read());
+                    break;
+                }
+                default:
+                    amount = 0; //:(
+            }
+            io.println("Enter your name");
+            String name = io.read();
+            io.println("Enter the number of your card");
+            int cardNumber = Integer.parseInt(io.read());
+            project.setMoneyCollected(project.getMoneyCollected() + amount);
+            io.println("Thank you, "+ name +"! You can go now! ");
+            return null;
+
+        }
+
+        @Override
+        public Object select(int chosenMenuIndex) {
+            return chosenMenuIndex;
+        }
+
+        @Override
+        public void ask() {
+            //TODO to realise payment variants in project field
+            io.println("Thanks for helping our project");
+            io.println("You can choose variant or enter your sum:");
+            io.println("1 - 1$");
+            io.println("2 - 5$");
+            io.println("3 - 20$");
+            io.println("9 - Your sum");
+            io.println("0 - Back");
+        }
     }
 
 }

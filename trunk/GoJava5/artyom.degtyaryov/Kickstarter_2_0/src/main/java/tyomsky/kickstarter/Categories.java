@@ -1,21 +1,11 @@
 package tyomsky.kickstarter;
 
-import java.util.ArrayList;
-import java.util.List;
+public interface Categories {
 
-public class Categories {
+    int size();
 
-    List<Category> data = new ArrayList<>();
+    Category get(int index);
 
-    public int size() {
-        return data.size();
-    }
+    void add(Category category);
 
-    public Category get(int index) {
-        return data.get(index);
-    }
-
-    public void add(Category category) {
-        data.add(category);
-    }
 }

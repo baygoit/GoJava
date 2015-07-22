@@ -2,7 +2,6 @@ package tyomsky.kickstarter;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
@@ -72,7 +71,7 @@ public class KickstarterTest {
     @Test
     public void fakeCategoryNavigation () {
         FakeIO io = new FakeIO("1", "0", "0");
-        Categories categories = new Categories();
+        Categories categories = new InMemoryCategories();
         categories.add(new Category("category1"));
         categories.add(new Category("category2"));
         Kickstarter kickstarter = new Kickstarter(categories, new Projects(), io, new StabQuoteGenerator());
@@ -93,7 +92,7 @@ public class KickstarterTest {
     @Test
     public void fakeCategoryAndProjectsNavigation () {
         FakeIO io = new FakeIO("1", "0", "0");
-        Categories categories = new Categories();
+        Categories categories = new InMemoryCategories();
         categories.add(new Category("category1"));
         categories.add(new Category("category2"));
         Projects projects = new Projects();
@@ -125,7 +124,7 @@ public class KickstarterTest {
     public void shouldPrintPaymentMenu_whenRequested() {
         when(mockQuoteGenerator.getQuote()).thenReturn("quote");
         when(mockIO.read()).thenReturn("1","1","1","0","0","0");
-        Categories categories = new Categories();
+        Categories categories = new InMemoryCategories();
         categories.add(new Category("category1"));
         categories.add(new Category("category2"));
         Projects projects = new Projects();
