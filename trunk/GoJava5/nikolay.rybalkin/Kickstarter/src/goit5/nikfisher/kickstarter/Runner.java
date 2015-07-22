@@ -69,7 +69,7 @@ public class Runner {
 		project5.setAnsver("Still no one answered");
 		project6.setAnsver("Still no one answered");
 
-		Main app = new Main();
+		Main app = new Main(categories, projects, new InputOutputConsole(), new QuoteGenerate(new Random()));
 		app.run();
 	}
 }

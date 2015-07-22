@@ -34,7 +34,7 @@ public class CategoryMenu {
             if (categoryIndex == 0){
                 break;
             }
-            Category category = shooseCategory(categoryIndex);
+            Category category = chooseCategory(categoryIndex);
 
             if (category == null){
                 continue;
@@ -43,11 +43,12 @@ public class CategoryMenu {
             Project[] foundProjects = projects.getProgects(category);
             printProjects(foundProjects);
 
-//			projectsMenu(foundProjects);
+            ProjectsMenu projectsMenu = new ProjectsMenu(new InputOutputConsole());
+            projectsMenu.projectsMenu(foundProjects);
         }
     }
 
-    private Category shooseCategory(int categoryIndex) {
+    private Category chooseCategory(int categoryIndex) {
 
         if ( categoryIndex <= 0 || categories.size() < categoryIndex){
             io.println("Not true index: " + categoryIndex);
@@ -70,7 +71,19 @@ public class CategoryMenu {
         for (int i = 0; i < foundProjects.length; i++) {
             Project project = foundProjects[i];
             io.print((i + 1) + ") ");
-//            printProject(project);
+            printProject(project);
         }
     }
+
+    //TODO этот метод используется в двух классах, надо подумать как избежать дублирования
+    public void printProject(Project project) {
+
+		io.println("Project name: " + project.getName());
+		io.println("Description: " + project.getDescription());
+		io.println("Need collected: " + project.getAmount() + "$");
+		io.println("Already collected: " + project.getExist() + "$");
+		io.println("Days remaining: " + project.getDays());
+		io.println("---------------------------------------");
+		io.println(SPACE);
+	}
 }
