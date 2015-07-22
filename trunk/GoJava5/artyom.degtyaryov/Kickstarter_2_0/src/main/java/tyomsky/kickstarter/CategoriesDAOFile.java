@@ -2,11 +2,11 @@ package tyomsky.kickstarter;
 
 import java.io.*;
 
-public class InFileCategories implements Categories {
+public class CategoriesDAOFile implements CategoriesDAO {
 
     File file;
 
-    public InFileCategories(String fileName) {
+    public CategoriesDAOFile(String fileName) {
         this.file = findOrCreateFile(fileName);
     }
 

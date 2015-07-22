@@ -1,6 +1,6 @@
 package tyomsky.kickstarter;
 
-public interface Categories {
+public interface CategoriesDAO {
 
     int size();
 

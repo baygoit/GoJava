@@ -3,7 +3,7 @@ package tyomsky.kickstarter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class InMemoryCategories implements Categories {
+public class CategoriesDAOMemory implements CategoriesDAO {
 
     List<Category> data = new ArrayList<>();
 

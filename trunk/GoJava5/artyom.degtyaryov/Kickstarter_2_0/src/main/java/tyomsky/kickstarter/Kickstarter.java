@@ -6,11 +6,11 @@ import java.util.List;
 public class Kickstarter {
 
     private IO io;
-    private Categories categories;
+    private CategoriesDAO categories;
     private Projects projects;
     private QuoteGenerator quoteGenerator;
 
-    public Kickstarter(Categories categories, Projects projects, IO io, QuoteGenerator quoteGenerator) {
+    public Kickstarter(CategoriesDAO categories, Projects projects, IO io, QuoteGenerator quoteGenerator) {
         this.categories = categories;
         this.projects = projects;
         this.io = io;

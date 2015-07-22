@@ -1,12 +1,11 @@
 package tyomsky.kickstarter;
 
-import java.io.File;
 import java.util.Random;
 
 public class BootStrap {
 
     public static void main(String[] args) {
-        Categories categories = new InFileCategories("categories.txt");
+        CategoriesDAO categories = new CategoriesDAOFile("categories.txt");
 
         Projects projects = new Projects();
         Project project1 = new Project("GTA 5", "5-th episode of epic game",
