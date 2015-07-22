@@ -83,6 +83,8 @@ public class ProjectsMenu {
 		io.println("You selected project: " + project.getName());
 	}
 
+
+    //TODO этот метод дублируется в CategoryMenu, надо как-то от этого избавится
     public void printProject(Project project) {
 
         io.println("Project name: " + project.getName());

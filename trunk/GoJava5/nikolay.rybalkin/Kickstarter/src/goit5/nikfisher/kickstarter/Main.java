@@ -24,8 +24,8 @@ public class Main {
 
 		io.println(generator.quoteGenerate());
 
-		CategoryMenu categoreMenu = new CategoryMenu(new InputOutputConsole(),  projects, categories);
-		categoreMenu.categoryMenu();
+		CategoryMenu categoryMenu = new CategoryMenu(new InputOutputConsole(),  projects, categories);
+		categoryMenu.categoryMenu();
 
 		io.println("Sank!");
 	}
