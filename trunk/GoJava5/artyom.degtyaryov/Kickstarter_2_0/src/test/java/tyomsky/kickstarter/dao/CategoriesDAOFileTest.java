@@ -8,12 +8,12 @@ public class CategoriesDAOFileTest extends CategoriesTest {
 
     @After
     public void cleanUp() throws Exception {
-        File file = new File("categories.txt");
+        File file = new File("categoriesTest.txt");
         file.delete();
     }
 
     @Override
     public CategoriesDAO getCategoriesDAOImplementation() {
-        return new CategoriesDAOFile("categories.txt");
+        return new CategoriesDAOFile("categoriesTest.txt");
     }
 }

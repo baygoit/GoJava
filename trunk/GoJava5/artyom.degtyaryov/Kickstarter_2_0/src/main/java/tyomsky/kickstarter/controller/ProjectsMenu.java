@@ -5,7 +5,7 @@ import tyomsky.kickstarter.ui.IO;
 
 import java.util.List;
 
-public class ProjectsMenu extends Menu {
+public class ProjectsMenu extends Menu<Project> {
 
     private List<Project> projects;
 
@@ -15,12 +15,12 @@ public class ProjectsMenu extends Menu {
     }
 
     @Override
-    public Menu nextMenu(Object selected) {
-        return new ProjectMenu((Project) selected, io);
+    public Menu nextMenu(Project selected) {
+        return new ProjectMenu(selected, io);
     }
 
     @Override
-    public Object select(int chosenMenuIndex) {
+    public Project select(int chosenMenuIndex) {
         return chooseProject(projects, chosenMenuIndex);
     }
 

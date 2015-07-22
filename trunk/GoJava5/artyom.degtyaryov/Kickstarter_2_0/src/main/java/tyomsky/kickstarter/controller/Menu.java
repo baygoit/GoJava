@@ -2,7 +2,7 @@ package tyomsky.kickstarter.controller;
 
 import tyomsky.kickstarter.ui.IO;
 
-public abstract class Menu {
+public abstract class Menu<T> {
 
     protected IO io;
 
@@ -17,7 +17,7 @@ public abstract class Menu {
             if (chosenMenuIndex == 0) {
                 break;
             }
-            Object selected = select(chosenMenuIndex);
+            T selected = select(chosenMenuIndex);
             if (selected == null) {
                 continue;
             }
@@ -28,9 +28,9 @@ public abstract class Menu {
         }
     }
 
-    public abstract Menu nextMenu(Object selected);
+    public abstract Menu nextMenu(T selected);
 
-    public abstract Object select(int chosenMenuIndex);
+    public abstract T select(int chosenMenuIndex);
 
     public abstract void ask();
 

@@ -9,7 +9,7 @@ import tyomsky.kickstarter.ui.IO;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CategoriesMenu extends Menu {
+public class CategoriesMenu extends Menu<Category> {
 
     CategoriesDAO categories;
     Projects projects;
@@ -21,13 +21,13 @@ public class CategoriesMenu extends Menu {
     }
 
     @Override
-    public Menu nextMenu(Object selected) {
-        List<Project> foundProjects = getProjetsByCategory((Category) selected);
+    public Menu nextMenu(Category selected) {
+        List<Project> foundProjects = getProjetsByCategory(selected);
         return new ProjectsMenu(foundProjects, io);
     }
 
     @Override
-    public Object select(int chosenMenuIndex) {
+    public Category select(int chosenMenuIndex) {
         return chooseCategory(chosenMenuIndex);
     }
 

@@ -3,7 +3,7 @@ package tyomsky.kickstarter.controller;
 import tyomsky.kickstarter.model.Project;
 import tyomsky.kickstarter.ui.IO;
 
-public class PaymentMenu extends Menu {
+public class PaymentMenu extends Menu <Integer> {
 
     Project project;
 
@@ -13,8 +13,8 @@ public class PaymentMenu extends Menu {
     }
 
     @Override
-    public Menu nextMenu(Object selected) {
-        int chosenMenuIndex = (int) selected;
+    public Menu nextMenu(Integer selected) {
+        int chosenMenuIndex = selected;
         int amount;
         switch (chosenMenuIndex) {
             case 1: {
@@ -48,7 +48,7 @@ public class PaymentMenu extends Menu {
     }
 
     @Override
-    public Object select(int chosenMenuIndex) {
+    public Integer select(int chosenMenuIndex) {
         return chosenMenuIndex;
     }
 
