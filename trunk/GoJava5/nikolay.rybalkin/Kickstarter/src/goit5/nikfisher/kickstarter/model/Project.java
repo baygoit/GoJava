@@ -17,7 +17,7 @@ public class Project {
 
 	public Project(String name, int amount, int exist, int days, String description) {
 		this.name = name;
-		this.amount = amount;
+		this.amount = 10000;
 		this.days = days;
 		this.description = description;
 		this.exist = 0;

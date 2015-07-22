@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class Categories {
 
-	Map<Integer,Category> categories = new HashMap<>();
+	private Map<Integer,Category> categories = new HashMap<>();
 
 	private int index = 0;
 

@@ -6,8 +6,7 @@ import goit5.nikfisher.kickstarter.streams.InputOutputConsoleInterface;
 
 public class ProjectsMenu {
 
-    private String SPACE = " ";
-    private InputOutputConsoleInterface io;
+	private InputOutputConsoleInterface io;
 
     public ProjectsMenu(InputOutputConsoleInterface io) {
         this.io = io;
@@ -85,7 +84,7 @@ public class ProjectsMenu {
 
 
     //TODO этот метод дублируется в CategoryMenu, надо как-то от этого избавится
-    public void printProject(Project project) {
+	private void printProject(Project project) {
 
         io.println("Project name: " + project.getName());
         io.println("Description: " + project.getDescription());
@@ -93,7 +92,8 @@ public class ProjectsMenu {
         io.println("Already collected: " + project.getExist() + "$");
         io.println("Days remaining: " + project.getDays());
         io.println("---------------------------------------");
-        io.println(SPACE);
+		String SPACE = " ";
+		io.println(SPACE);
     }
 
 }

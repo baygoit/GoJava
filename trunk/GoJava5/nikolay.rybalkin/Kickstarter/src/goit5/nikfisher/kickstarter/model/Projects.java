@@ -7,7 +7,7 @@ public class Projects {
 
 	private int index = 0;
 
-	Map<Integer,Project> projects = new HashMap<>();
+	private Map<Integer,Project> projects = new HashMap<>();
 
 	public void add(Project project) {
 		projects.put(index++, project);

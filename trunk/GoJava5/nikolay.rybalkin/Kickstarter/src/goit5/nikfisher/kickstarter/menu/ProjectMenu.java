@@ -5,15 +5,13 @@ import goit5.nikfisher.kickstarter.streams.InputOutputConsoleInterface;
 
 public class ProjectMenu {
 
-    public static InputOutputConsoleInterface io;
+    private static InputOutputConsoleInterface io;
 
     public ProjectMenu(InputOutputConsoleInterface io) {
-        this.io = io;
+        ProjectMenu.io = io;
     }
 
     public void projectMenuRun(Project project) {
-
-        io.println("Operations on the project: [0 - go to the list of projects, 1 - invest in the project, 2 - asc questions");
 
         while (true) {
 

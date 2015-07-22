@@ -76,7 +76,7 @@ public class CategoryMenu {
     }
 
     //TODO этот метод используется в двух классах, надо подумать как избежать дублирования
-    public void printProject(Project project) {
+    private void printProject(Project project) {
 
 		io.println("Project name: " + project.getName());
 		io.println("Description: " + project.getDescription());
