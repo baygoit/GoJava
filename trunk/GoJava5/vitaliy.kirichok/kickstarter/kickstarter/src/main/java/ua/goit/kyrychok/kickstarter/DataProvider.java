@@ -57,4 +57,25 @@ public class DataProvider {
     public List<Reward> getRewards(int categoryIndex, int projectIndex) {
         return categories.get(categoryIndex).getProjects().get(projectIndex).getRewards();
     }
+
+    public Project getProject(int id) {
+        return categories.get(0).getProjects().get(0);
+    }
+
+    public void addFaq(int projectId, Faq faq) {
+        categories.get(0).getProjects().get(projectId).addFaq(faq);
+    }
+
+    public List<Reward> getRewards(int projectIndex) {
+        return categories.get(0).getProjects().get(projectIndex).getRewards();
+    }
+
+    public void incProjectBalance(int projectIndex, Integer amount) {
+        Project project = getProject(projectIndex);
+        project.setBalance(project.getBalance() + amount);
+    }
+
+    public Reward getReward(int id) {
+        return categories.get(0).getProjects().get(0).getRewards().get(id);
+    }
 }

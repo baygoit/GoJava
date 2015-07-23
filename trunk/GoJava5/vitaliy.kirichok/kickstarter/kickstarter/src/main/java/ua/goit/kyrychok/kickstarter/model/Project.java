@@ -15,6 +15,7 @@ public class Project {
     private List<Faq> faqs;
     private List<ProjectEvent> projectEvents;
     private List<Reward> rewards;
+    private int id;
 
     public Project(String name, int goal, Date deadlineDate,
                    String shortDescription, int balance, String demoLink) {
@@ -29,6 +30,13 @@ public class Project {
         this.goal = goal;
         this.deadlineDate = deadlineDate;
         createDate = new Date();
+        faqs = new ArrayList<>();
+        projectEvents = new ArrayList<>();
+        rewards = new ArrayList<>();
+    }
+
+    public int getId() {
+        return id;
     }
 
     public void setShortDescription(String shortDescription) {
@@ -80,23 +88,14 @@ public class Project {
     }
 
     public void addFaq(Faq faq) {
-        if (faqs == null) {
-            faqs = new ArrayList<>();
-        }
         faqs.add(faq);
     }
 
     public void addProjectEvent(ProjectEvent projectEvent) {
-        if (projectEvents == null) {
-            projectEvents = new ArrayList<>();
-        }
         projectEvents.add(projectEvent);
     }
 
     public void addReward(Reward reward) {
-        if (rewards == null) {
-            rewards = new ArrayList<>();
-        }
         rewards.add(reward);
     }
 }

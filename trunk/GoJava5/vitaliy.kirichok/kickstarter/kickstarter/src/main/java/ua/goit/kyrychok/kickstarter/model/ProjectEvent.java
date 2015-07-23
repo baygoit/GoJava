@@ -5,6 +5,7 @@ import java.util.Date;
 public class ProjectEvent {
     private Date eventDate;
     private String message;
+    private int id;
 
     public ProjectEvent(Date eventDate, String message) {
         this.eventDate = eventDate;

@@ -5,6 +5,8 @@ import org.junit.Test;
 import ua.goit.kyrychok.kickstarter.model.Category;
 import ua.goit.kyrychok.kickstarter.model.Project;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class DataProviderTest {
@@ -21,21 +23,20 @@ public class DataProviderTest {
 
     @Test
     public void whenRegisterCategoriesThenReturnSameCategories() throws Exception {
-        TestDataProvider testDataProvider = new TestDataProvider();
-        testDataProvider.init();
+        List<Category> categories = new ArrayList<>();
+        categories.add(new Category("1st category"));
+        categories.add(new Category("2nd category"));
         DataProvider dataProvider = new DataProvider();
-        dataProvider.setCategories(testDataProvider.getCategories());
+        dataProvider.setCategories(categories);
 
         List<Category> result = dataProvider.getCategories();
 
-        Assert.assertArrayEquals("Categories must be the same as registered", testDataProvider.getCategories().toArray(), result.toArray());
+        Assert.assertArrayEquals("Categories must be the same as registered", categories.toArray(), result.toArray());
     }
 
     @Test
     public void whenRegisterCategoryThenReturnSameCategory() throws Exception {
-        TestDataProvider testDataProvider = new TestDataProvider();
-        testDataProvider.init();
-        Category category = testDataProvider.getCategory(0);
+        Category category = new Category("Test category");
         DataProvider dataProvider = new DataProvider();
         dataProvider.addCategory(category);
 
@@ -46,11 +47,11 @@ public class DataProviderTest {
 
     @Test
     public void whenRegisterProjectThenReturnSameProject() throws Exception {
-        TestDataProvider testDataProvider = new TestDataProvider();
-        testDataProvider.init();
+        Category category = new Category("Test Category");
+        Project project = new Project("Project name", 1000, new Date());
+        category.addProject(project);
         DataProvider dataProvider = new DataProvider();
-        dataProvider.setCategories(testDataProvider.getCategories());
-        Project project = testDataProvider.getProject(0, 0);
+        dataProvider.addCategory(category);
 
         Project result = dataProvider.getProject(0, 0);
 

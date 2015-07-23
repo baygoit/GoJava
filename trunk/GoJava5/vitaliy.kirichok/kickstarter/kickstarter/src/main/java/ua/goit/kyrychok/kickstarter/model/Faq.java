@@ -3,6 +3,7 @@ package ua.goit.kyrychok.kickstarter.model;
 public class Faq {
     private String question;
     private String answer;
+    private int id;
 
     public Faq(String question) {
         this.question = question;

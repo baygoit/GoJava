@@ -20,7 +20,7 @@ public class TestDataProvider {
         Category category;
         Project project;
         category = new Category("Category 1");
-        project = new Project("1st project", 10010, convertDate("01.08.2015"), "desc", 350000,  "http://stackoverflow.com/");
+        project = new Project("1st project", 10010, convertDate("01.08.2015"), "desc", 350000, "http://stackoverflow.com/");
         project.addFaq(new Faq("Question 1", "Answer on question 1"));
         project.addFaq(new Faq("Question 2", "Answer on question 2"));
         project.addProjectEvent(new ProjectEvent(convertDate("01.01.2015"), "Project event 1"));

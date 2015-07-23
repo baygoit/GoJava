@@ -6,9 +6,15 @@ import java.util.List;
 public class Category {
     private String name;
     private List<Project> projects;
+    private int id;
 
     public Category(String name) {
         this.name = name;
+        projects = new ArrayList<>();
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getName() {
@@ -20,9 +26,6 @@ public class Category {
     }
 
     public void addProject(Project project) {
-        if (projects == null) {
-            projects = new ArrayList<>();
-        }
         projects.add(project);
     }
 
