@@ -7,16 +7,18 @@ import java.util.Arrays;
 
 import static org.junit.Assert.*;
 
-public abstract class CategoriesTest {
+public  class CategoriesTest {
 
-    private Categories categories;
+//    private Categories categories;
+//
+//    @Before
+//    public void  setup(){
+//        categories = getCategories();
+//    }
+//
+//    abstract Categories getCategories();
 
-    @Before
-    public void  setup(){
-        categories = getCategories();
-    }
-
-    abstract Categories getCategories();
+    InMemoryCategories categories = new InMemoryCategories();
 
     @Test
     public void shouldCategoriesWenAddCategories() throws Exception {

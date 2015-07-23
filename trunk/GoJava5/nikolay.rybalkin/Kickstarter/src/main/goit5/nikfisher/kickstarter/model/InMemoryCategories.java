@@ -5,7 +5,7 @@ import java.util.List;
 
 public class InMemoryCategories implements Categories {
 
-	private List<Category> categories = new LinkedList<Category>();
+	private List<Category> categories = new LinkedList<>();
 
 	@Override
 	public void add(Category category) {

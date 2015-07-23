@@ -12,11 +12,11 @@ public class CategoryMenu {
     private String SPACE = " ";
     private InputOutputConsoleInterface io;
     private Projects projects;
-    private InMemoryCategories categories;
+    private InFileCategories categories;
 
     public CategoryMenu(InputOutputConsoleInterface io, Projects projects, Categories categories) {
         this.io = io;
-        this.categories = (InMemoryCategories) categories;
+        this.categories = (InFileCategories) categories;
 		this.projects = projects;
     }
 
@@ -72,7 +72,7 @@ public class CategoryMenu {
         }
     }
 
-    //TODO этот метод используется в двух классах, надо подумать как избежать дублирования
+    //TODO пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     private void printProject(Project project) {
 
 		io.println("Project name: " + project.getName());
