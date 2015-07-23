@@ -13,7 +13,7 @@ public class ProjectControllerTest {
     @Mock
     private ProjectView view;
     @Mock
-    private BaseController baseController;
+    private AbstractController abstractController;
 
     @Before
     public void setUp() throws Exception {
@@ -23,7 +23,7 @@ public class ProjectControllerTest {
     @Test()
     public void whenShowModelRenderMainPage() throws Exception {
         ProjectController controller = new ProjectController();
-        controller.setParentController(baseController);
+        controller.setParentController(abstractController);
         controller.setView(view);
         //TODO  controller.setModel(model);
 

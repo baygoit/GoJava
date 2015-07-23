@@ -1,10 +1,11 @@
 package ua.goit.kyrychok.kickstarter;
 
 import ua.goit.kyrychok.kickstarter.controller.*;
+import ua.goit.kyrychok.kickstarter.dao.DataProvider;
 import ua.goit.kyrychok.kickstarter.view.*;
 
 public class Dispatcher implements InputListener {
-    private BaseController currentController;
+    private AbstractController currentController;
 
     public Dispatcher(DataProvider dataProvider, Output output) {
         MainPageController mainPageController = new MainPageController();
@@ -70,7 +71,7 @@ public class Dispatcher implements InputListener {
     @Override
     public void onInput(String input) throws StopDispatcherException {
         currentController.onInput(input);
-        BaseController tempController;
+        AbstractController tempController;
         tempController = currentController.getNextController();
         if (tempController == null) {
             throw new StopDispatcherException();

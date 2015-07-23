@@ -1,53 +1,23 @@
 package ua.goit.kyrychok.kickstarter.view;
 
-import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-import org.mockito.invocation.InvocationOnMock;
-import org.mockito.stubbing.Answer;
-import ua.goit.kyrychok.kickstarter.Output;
+import ua.goit.kyrychok.kickstarter.ConsoleOutput4Test;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.doAnswer;
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
+import static org.junit.Assert.assertTrue;
 
 public class FaqViewTest {
-    //TODO @Mock
-    //TODO private FaqModel model;
-    @Mock
-    private Output output;
-
-    @Before
-    public void setUp() throws Exception {
-        MockitoAnnotations.initMocks(this);
-    }
+    private ConsoleOutput4Test output = new ConsoleOutput4Test();
 
     @Test
     public void whenRenderThenPrintInviteMessage() throws Exception {
-        //TODO when(model.getInviteMessage()).thenReturn("Test Msg: ");
-
-        final List<String> view = new ArrayList<>();
-
-        doAnswer(new Answer<Object>() {
-            @Override
-            public Object answer(InvocationOnMock invocation) throws Throwable {
-                Object[] arguments = invocation.getArguments();
-                String str = (String) arguments[0];
-                view.add(str);
-                return null;
-            }
-        }).when(output).writeLine(anyString());
 
         FaqView faqView = new FaqView();
         faqView.setOutput(output);
 
-        //TODO faqView.render(model);
-        String[] expectedResult = {"Test Msg: "};
-        Assert.assertArrayEquals("Not expected MainPage rendering", expectedResult, view.toArray());
-    }
+        faqView.render();
 
+        assertTrue("Invite message must be showed", output.getResult().size() == 1);
+        assertTrue("Invite message can't be empty", isNotBlank(output.getResult().get(0)));
+    }
 }

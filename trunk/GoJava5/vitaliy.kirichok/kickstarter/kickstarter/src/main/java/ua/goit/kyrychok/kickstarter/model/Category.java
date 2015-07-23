@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Category {
     private String name;
-    private List<Project> projects;
+    private List<Project> projects = new ArrayList<>();
     private int id;
 
     public Category(String name) {
@@ -19,6 +19,10 @@ public class Category {
 
     public String getName() {
         return name;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public List<Project> getProjects() {

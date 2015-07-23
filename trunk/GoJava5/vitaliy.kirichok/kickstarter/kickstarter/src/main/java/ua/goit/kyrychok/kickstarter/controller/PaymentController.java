@@ -34,7 +34,7 @@ public class PaymentController extends AbstractPaymentController {
     }
 
     @Override
-    protected BaseController returnNextController() {
+    protected AbstractController returnNextController() {
         switch (currentMode) {
             case AMOUNT:
                 return getParentController();

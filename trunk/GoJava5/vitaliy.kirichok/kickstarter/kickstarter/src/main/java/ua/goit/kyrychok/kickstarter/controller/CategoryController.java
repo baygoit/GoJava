@@ -5,7 +5,7 @@ import ua.goit.kyrychok.kickstarter.view.CategoryView;
 
 import static java.lang.Integer.parseInt;
 
-public class CategoryController extends BaseController {
+public class CategoryController extends AbstractController {
     private Category model;
     private CategoryView view;
     private int categoryId;
@@ -45,12 +45,6 @@ public class CategoryController extends BaseController {
         updateModel();
         onShowModel();
         view.render(model);
-    }
-
-    @Deprecated
-    @Override
-    public int getModelIdentifier() {
-        return 0;
     }
 
     @Override

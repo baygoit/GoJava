@@ -12,6 +12,14 @@ public class ProjectEvent {
         this.message = message;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
+    }
+
     public Date getEventDate() {
         return eventDate;
     }

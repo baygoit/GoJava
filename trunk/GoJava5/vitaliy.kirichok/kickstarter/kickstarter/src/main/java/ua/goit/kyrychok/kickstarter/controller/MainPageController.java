@@ -1,12 +1,14 @@
 package ua.goit.kyrychok.kickstarter.controller;
 
-import ua.goit.kyrychok.kickstarter.model.Categories;
+import ua.goit.kyrychok.kickstarter.model.Category;
 import ua.goit.kyrychok.kickstarter.view.MainPageView;
+
+import java.util.List;
 
 import static java.lang.Integer.parseInt;
 
-public class MainPageController extends BaseController {
-    private Categories model = new Categories();
+public class MainPageController extends AbstractController {
+    private List<Category> model;
     private MainPageView view;
     private CategoryController categoryController;
 
@@ -19,20 +21,20 @@ public class MainPageController extends BaseController {
     }
 
     public void updateModel() {
-        model.setCategories(dataProvider.getCategories());
+        model = dataProvider.getCategories();
     }
 
     private boolean isValid(String input) {
         try {
             int inputValue = parseInt(input);
-            return !(inputValue < 1 || inputValue > model.getCategories().size());
+            return !(inputValue < 1 || inputValue > model.size());
         } catch (NumberFormatException e) {
             return false;
         }
     }
 
     private int getCategoryId(String input) {
-        return model.getCategories().get(parseInt(input) - 1).getId();
+        return model.get(parseInt(input) - 1).getId();
     }
 
     @Override

@@ -1,50 +1,49 @@
 package ua.goit.kyrychok.kickstarter.view;
 
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-import org.mockito.invocation.InvocationOnMock;
-import org.mockito.stubbing.Answer;
-import ua.goit.kyrychok.kickstarter.Output;
+import ua.goit.kyrychok.kickstarter.ConsoleOutput4Test;
+import ua.goit.kyrychok.kickstarter.StandByMode;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.doAnswer;
+import static java.lang.String.format;
+import static ua.goit.kyrychok.kickstarter.view.BaseView.CHOICE_MESSAGE_SHORT;
 
 public class PaymentViewTest {
+    private ConsoleOutput4Test output = new ConsoleOutput4Test();
 
-    @Mock
-    private Output output;
+    @Test
+    public void whenRenderThenPrintInviteMessage4UserName() throws Exception {
+        PaymentView paymentView = new PaymentView();
+        paymentView.setOutput(output);
+        paymentView.render(StandByMode.USER);
 
-    @Before
-    public void setUp() throws Exception {
-        MockitoAnnotations.initMocks(this);
+        List<String> expectedResult = new ArrayList<>();
+        expectedResult.add(format("Enter user name(%s): ", CHOICE_MESSAGE_SHORT));
+        Assert.assertArrayEquals("Not expected Payment rendering", expectedResult.toArray(), output.getResult().toArray());
     }
 
     @Test
-    public void whenRenderThenPrintInviteMessage() throws Exception {
-        final List<String> view = new ArrayList<>();
-
-        doAnswer(new Answer<Object>() {
-            @Override
-            public Object answer(InvocationOnMock invocation) throws Throwable {
-                Object[] arguments = invocation.getArguments();
-                String str = (String) arguments[0];
-                view.add(str);
-                return null;
-            }
-        }).when(output).writeLine(anyString());
+    public void whenRenderThenPrintInviteMessage4CardNo() throws Exception {
         PaymentView paymentView = new PaymentView();
         paymentView.setOutput(output);
-        //TODO paymentView.render("Test invite message");
+        paymentView.render(StandByMode.CARD);
 
         List<String> expectedResult = new ArrayList<>();
-        expectedResult.add("Test invite message");
-        Assert.assertArrayEquals("Not expected Payment rendering", expectedResult.toArray(), view.toArray());
+        expectedResult.add(format("Enter card number(%s): ", CHOICE_MESSAGE_SHORT));
+        Assert.assertArrayEquals("Not expected Payment rendering", expectedResult.toArray(), output.getResult().toArray());
+    }
 
+    @Test
+    public void whenRenderThenPrintInviteMessage4Amount() throws Exception {
+        PaymentView paymentView = new PaymentView();
+        paymentView.setOutput(output);
+        paymentView.render(StandByMode.AMOUNT);
+
+        List<String> expectedResult = new ArrayList<>();
+        expectedResult.add(format("Enter pledge amount(%s): ", CHOICE_MESSAGE_SHORT));
+        Assert.assertArrayEquals("Not expected Payment rendering", expectedResult.toArray(), output.getResult().toArray());
     }
 }

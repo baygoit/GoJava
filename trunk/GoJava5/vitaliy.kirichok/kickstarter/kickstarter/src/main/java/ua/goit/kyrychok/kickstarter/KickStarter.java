@@ -1,5 +1,7 @@
 package ua.goit.kyrychok.kickstarter;
 
+import ua.goit.kyrychok.kickstarter.dao.DataProvider;
+
 public class KickStarter {
     private DataProvider dataProvider;
     private Output output;

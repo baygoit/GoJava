@@ -8,7 +8,7 @@ import java.util.List;
 
 import static java.lang.Integer.parseInt;
 
-public class DonatePageController extends BaseController {
+public class DonatePageController extends AbstractController {
     private List<Reward> model;
     private DonatePageView view;
     private PaymentController paymentController;

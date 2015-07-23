@@ -14,6 +14,14 @@ public class Faq {
         this.answer = answer;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
+    }
+
     public String getQuestion() {
         return question;
     }

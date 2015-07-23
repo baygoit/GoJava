@@ -1,8 +1,6 @@
 package ua.goit.kyrychok.kickstarter;
 
-public class Output {
+public interface Output {
 
-    public void writeLine(String string) {
-        System.out.println(string);
-    }
+    void writeLine(String string);
 }

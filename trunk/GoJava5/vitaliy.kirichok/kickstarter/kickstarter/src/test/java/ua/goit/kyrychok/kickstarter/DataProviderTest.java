@@ -1,16 +1,7 @@
 package ua.goit.kyrychok.kickstarter;
 
-import org.junit.Assert;
-import org.junit.Test;
-import ua.goit.kyrychok.kickstarter.model.Category;
-import ua.goit.kyrychok.kickstarter.model.Project;
-
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
 public class DataProviderTest {
-
+/*
     @Test
     public void whenGetMsgThenReturnNotEmpty() throws Exception {
         DataProvider dataProvider = new DataProvider();
@@ -57,5 +48,5 @@ public class DataProviderTest {
 
         Assert.assertEquals("Project must be the same as registered", project, result);
     }
-
+*/
 }

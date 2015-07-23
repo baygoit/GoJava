@@ -4,7 +4,7 @@ import org.apache.commons.lang3.StringUtils;
 import ua.goit.kyrychok.kickstarter.model.Faq;
 import ua.goit.kyrychok.kickstarter.view.FaqView;
 
-public class FaqController extends BaseController {
+public class FaqController extends AbstractController {
     public static final int MAX_QUESTION_LENGTH = 150;
 
     private FaqView view;

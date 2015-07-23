@@ -3,7 +3,7 @@ package ua.goit.kyrychok.kickstarter.view;
 import ua.goit.kyrychok.kickstarter.Output;
 
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
-import static ua.goit.kyrychok.kickstarter.controller.BaseController.EXIT_CODE;
+import static ua.goit.kyrychok.kickstarter.controller.AbstractController.EXIT_CODE;
 
 public abstract class BaseView {
     public static final String CHOICE_MESSAGE_SHORT = String.format("%s - exit", EXIT_CODE);

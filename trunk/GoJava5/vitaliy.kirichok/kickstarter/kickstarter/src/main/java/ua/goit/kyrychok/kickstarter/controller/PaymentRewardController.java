@@ -33,7 +33,7 @@ public class PaymentRewardController extends AbstractPaymentController {
     }
 
     @Override
-    protected BaseController returnNextController() {
+    protected AbstractController returnNextController() {
         switch (currentMode) {
             case CARD:
                 return getParentController();

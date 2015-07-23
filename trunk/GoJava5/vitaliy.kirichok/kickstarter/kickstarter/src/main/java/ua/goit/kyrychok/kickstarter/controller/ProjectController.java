@@ -5,7 +5,7 @@ import ua.goit.kyrychok.kickstarter.view.ProjectView;
 
 import static java.lang.Integer.parseInt;
 
-public class ProjectController extends BaseController {
+public class ProjectController extends AbstractController {
     private Project model;
     private ProjectView view;
     private FaqController faqController;
@@ -37,7 +37,7 @@ public class ProjectController extends BaseController {
         }
     }
 
-    private BaseController returnNextController(String input) {
+    private AbstractController returnNextController(String input) {
         switch (parseInt(input)) {
             case 1:
                 faqController.setProjectId(projectId);

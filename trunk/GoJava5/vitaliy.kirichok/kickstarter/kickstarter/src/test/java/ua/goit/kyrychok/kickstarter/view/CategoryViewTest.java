@@ -1,14 +1,10 @@
 package ua.goit.kyrychok.kickstarter.view;
 
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-import org.mockito.invocation.InvocationOnMock;
-import org.mockito.stubbing.Answer;
-import ua.goit.kyrychok.kickstarter.Output;
+import ua.goit.kyrychok.kickstarter.ConsoleOutput4Test;
 import ua.goit.kyrychok.kickstarter.Utils;
+import ua.goit.kyrychok.kickstarter.model.Category;
 import ua.goit.kyrychok.kickstarter.model.Project;
 
 import java.util.ArrayList;
@@ -17,82 +13,56 @@ import java.util.List;
 
 import static java.lang.String.format;
 import static org.apache.commons.lang3.time.DateUtils.*;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.doAnswer;
 import static ua.goit.kyrychok.kickstarter.Utils.getMoney;
 
 public class CategoryViewTest {
-
-    //TODO @Mock
-    //TODO private CategoryModel model;
-    @Mock
-    private Output output;
-
-    @Before
-    public void setUp() throws Exception {
-        MockitoAnnotations.initMocks(this);
-    }
+    private ConsoleOutput4Test output = new ConsoleOutput4Test();
 
     @Test
     public void whenRenderCategoryThenPrintNameAndProjectsList() throws Exception {
-        //TODO        when(model.getName()).thenReturn("Test Category");
-
         final int goal = 10000;
         final int balance = 1000;
         final int timeLag = 5;
-        List<Project> projects = new ArrayList<>();
-        Project project;
+        Category category = new Category("Test Category");
 
-        project = new Project("1st project", goal, addMinutes(new Date(), timeLag));
-        projects.add(project);
+        Project project1 = new Project("1st project", goal, addMinutes(new Date(), timeLag));
+        category.addProject(project1);
 
-        project = new Project("2nd project", goal, addDays(new Date(), timeLag));
-        project.setShortDescription("desc");
-        projects.add(project);
+        Project project2 = new Project("2nd project", goal, addDays(new Date(), timeLag));
+        project2.setShortDescription("desc");
+        category.addProject(project2);
 
-        project = new Project("3rd project", goal, addHours(new Date(), timeLag));
-        project.setShortDescription("desc");
-        project.setBalance(balance);
-        projects.add(project);
+        Project project3 = new Project("3rd project", goal, addHours(new Date(), timeLag));
+        project3.setShortDescription("desc");
+        project3.setBalance(balance);
+        category.addProject(project3);
 
-        //TODO when(model.getProjects()).thenReturn(projects);
-
-        final List<String> view = new ArrayList<>();
-
-        doAnswer(new Answer<Object>() {
-            @Override
-            public Object answer(InvocationOnMock invocation) throws Throwable {
-                Object[] arguments = invocation.getArguments();
-                String str = (String) arguments[0];
-                view.add(str);
-                return null;
-            }
-        }).when(output).writeLine(anyString());
         CategoryView categoryView = new CategoryView();
         categoryView.setOutput(output);
 
-        //TODO categoryView.render(model);
+        categoryView.render(category);
+
         List<String> expectedResult = new ArrayList<>();
         expectedResult.add("Test Category");
 
         expectedResult.add("[1]. 1st project");
-        expectedResult.add(format("     Goal: %s", getMoney(projects.get(0).getGoal())));
-        expectedResult.add(format("     Balance: %s", getMoney(projects.get(0).getBalance())));
-        expectedResult.add(format("     Time left: %s", Utils.getDiffDate(projects.get(0).getDeadlineDate(), new Date())));
+        expectedResult.add(format("     Goal: %s", getMoney(project1.getGoal())));
+        expectedResult.add(format("     Balance: %s", getMoney(project1.getBalance())));
+        expectedResult.add(format("     Time left: %s", Utils.getDiffDate(project1.getDeadlineDate(), new Date())));
 
         expectedResult.add("[2]. 2nd project");
         expectedResult.add(format("     Short Description: %s", "desc"));
-        expectedResult.add(format("     Goal: %s", getMoney(projects.get(1).getGoal())));
-        expectedResult.add(format("     Balance: %s", getMoney(projects.get(1).getBalance())));
-        expectedResult.add(format("     Time left: %s", Utils.getDiffDate(projects.get(1).getDeadlineDate(), new Date())));
+        expectedResult.add(format("     Goal: %s", getMoney(project2.getGoal())));
+        expectedResult.add(format("     Balance: %s", getMoney(project2.getBalance())));
+        expectedResult.add(format("     Time left: %s", Utils.getDiffDate(project2.getDeadlineDate(), new Date())));
 
         expectedResult.add("[3]. 3rd project");
         expectedResult.add(format("     Short Description: %s", "desc"));
-        expectedResult.add(format("     Goal: %s", getMoney(projects.get(2).getGoal())));
-        expectedResult.add(format("     Balance: %s", getMoney(projects.get(2).getBalance())));
-        expectedResult.add(format("     Time left: %s", Utils.getDiffDate(projects.get(2).getDeadlineDate(), new Date())));
+        expectedResult.add(format("     Goal: %s", getMoney(project3.getGoal())));
+        expectedResult.add(format("     Balance: %s", getMoney(project3.getBalance())));
+        expectedResult.add(format("     Time left: %s", Utils.getDiffDate(project3.getDeadlineDate(), new Date())));
 
         expectedResult.add(BaseView.CHOICE_MESSAGE);
-        Assert.assertArrayEquals("Not expected Category rendering", expectedResult.toArray(), view.toArray());
+        Assert.assertArrayEquals("Not expected Category rendering", expectedResult.toArray(), output.getResult().toArray());
     }
 }

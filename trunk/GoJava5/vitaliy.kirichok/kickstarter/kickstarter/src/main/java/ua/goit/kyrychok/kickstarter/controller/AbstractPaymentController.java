@@ -8,7 +8,7 @@ import ua.goit.kyrychok.kickstarter.view.PaymentView;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public abstract class AbstractPaymentController extends BaseController {
+public abstract class AbstractPaymentController extends AbstractController {
     private static final int MAX_USER_NAME_LENGTH = 100;
     private static final Pattern cardNoPattern = Pattern.compile("^\\d{16}$");
     private PaymentView view;
@@ -66,7 +66,7 @@ public abstract class AbstractPaymentController extends BaseController {
 
     protected abstract void updateModel(String input);
 
-    protected abstract BaseController returnNextController();
+    protected abstract AbstractController returnNextController();
 
     @Override
     public void showModel() {
