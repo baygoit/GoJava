@@ -1,17 +1,26 @@
 package goit5.nikfisher.kickstarter.model;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Arrays;
 
 import static org.junit.Assert.*;
 
-public class CategoriesTest {
+public abstract class CategoriesTest {
+
+    private Categories categories;
+
+    @Before
+    public void  setup(){
+        categories = getCategories();
+    }
+
+    abstract Categories getCategories();
 
     @Test
     public void shouldCategoriesWenAddCategories() throws Exception {
         //given
-        InMemoryCategories categories = new InMemoryCategories();
 
         //when
         categories.add(new Category("Game"));
@@ -24,7 +33,6 @@ public class CategoriesTest {
     @Test
     public void shouldCategoriesWenNoCategories() throws Exception {
         //given
-        InMemoryCategories categories = new InMemoryCategories();
 
         //when
 
@@ -35,7 +43,6 @@ public class CategoriesTest {
     @Test
     public void shouldCategoriesIndex() throws Exception {
         //given
-        InMemoryCategories categories = new InMemoryCategories();
 
         //when
         Category category1 = new Category("name1");
@@ -51,7 +58,6 @@ public class CategoriesTest {
     @Test
     public void shouldCategoriesSize() throws Exception {
         //given
-        InMemoryCategories categories = new InMemoryCategories();
         assertEquals(0, categories.size());
 
         //when
