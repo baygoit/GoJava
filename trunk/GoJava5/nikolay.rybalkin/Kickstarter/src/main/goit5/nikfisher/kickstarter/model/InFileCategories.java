@@ -35,62 +35,62 @@ public class InFileCategories implements Categories {
     @Override
     public String[] getCategories() {
 
-//        BufferedReader in = null;
-//
-//        try {
-//            in = new BufferedReader(new FileReader(file));
-//
-//            List<String> result = new LinkedList<>();
-//            String line = in.readLine();
-//            int index = 1;
-//            while (line != null){
-//                result.add(index + ") " + line);
-//                line = in.readLine();
-//                index++;
-//            }
-//            return result.toArray(new String[result.size()]);
-//
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        } finally {
-//            try {
-//                assert in != null;
-//                in.close();
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        }
+        BufferedReader in = null;
+
+        try {
+            in = new BufferedReader(new FileReader(file));
+
+            List<String> result = new LinkedList<>();
+            String line = in.readLine();
+            int index = 1;
+            while (line != null){
+                result.add(index + ") " + line);
+                line = in.readLine();
+                index++;
+            }
+            return result.toArray(new String[result.size()]);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                assert in != null;
+                in.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
         return new String[0];
     }
 
     @Override
     public Category get(int index) {
-//        BufferedReader in = null;
-//
-//        try {
-//            in = new BufferedReader(new FileReader(file));
-//
-//            String line = in.readLine();
-//            int current = 0;
-//            while (line != null){
-//                if (current == index){
-//                    break;
-//                }
-//                line = in.readLine();
-//                current++;
-//            }
-//            return new Category(line);
-//
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        } finally {
-//            try {
-//                assert in != null;
-//                in.close();
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        }
+        BufferedReader in = null;
+
+        try {
+            in = new BufferedReader(new FileReader(file));
+
+            String line = in.readLine();
+            int current = 0;
+            while (line != null){
+                if (current == index){
+                    break;
+                }
+                line = in.readLine();
+                current++;
+            }
+            return new Category(line);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                assert in != null;
+                in.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
         return null;
     }
 

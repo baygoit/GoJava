@@ -41,13 +41,13 @@ public abstract class CategoriesTest {
     @Test
     public void shouldCategoriesIndex() throws Exception {
         //given
-
-        //when
         Category category1 = new Category("Game");
         categories.add(category1);
+
         Category category2 = new Category("Design");
         categories.add(category2);
 
+        //when
         //then
         assertEquals(category1, categories.get(0));
         assertEquals(category2, categories.get(1));

@@ -2,7 +2,6 @@ package goit5.nikfisher.kickstarter;
 
 import goit5.nikfisher.kickstarter.menu.CategoryMenu;
 import goit5.nikfisher.kickstarter.model.Categories;
-import goit5.nikfisher.kickstarter.streams.InputOutputConsole;
 import goit5.nikfisher.kickstarter.streams.InputOutputConsoleInterface;
 import goit5.nikfisher.kickstarter.model.Projects;
 import goit5.nikfisher.kickstarter.model.QuoteGenerate;
