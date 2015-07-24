@@ -37,7 +37,7 @@ public class ProjectMenu {
                 int cardNumber = io.consoleScanInt();
                 io.println("Enter the amount of money");
                 int amount = io.consoleScanInt();
-                //TODO проверку наа вводимые значения
+                //TODO
 
                 io.println("Thank you " + name + " your money is successfully transferred to the account of the project");
                 io.println("---------------------------------------");

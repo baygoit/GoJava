@@ -36,7 +36,7 @@ public class CategoryMenu {
                 continue;
             }
 
-            Project[] foundProjects = projects.getProgects(category);
+            Project[] foundProjects = projects.getProjects(category);
             printProjects(foundProjects);
 
             ProjectsMenu projectsMenu = new ProjectsMenu(new InputOutputConsole());

@@ -41,7 +41,7 @@ public class ProjectsMenu {
     private void ascProjects(Project[] foundProjects) {
 
 		if (foundProjects.length == 0 ){
-			io.println("Projects in this category do not have to exit, enter 0");
+			io.println("InMemoryProjects in this category do not have to exit, enter 0");
 		}else {
 			int from = 1;
 			int to = foundProjects.length;
@@ -81,7 +81,6 @@ public class ProjectsMenu {
 
 		io.println("You selected project: " + project.getName());
 	}
-
 
     //TODO method duplicated in CategoryMenu Class, need will think about this
 	private void printProject(Project project) {

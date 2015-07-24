@@ -33,7 +33,7 @@ public class Runner {
 		project5.setCategory(category2);
 		project6.setCategory(category3);
 
-		Projects projects = new Projects();
+		Projects projects = new InMemoryProjects();
 		projects.add(project1);
 		projects.add(project2);
 		projects.add(project3);

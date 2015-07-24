@@ -25,7 +25,7 @@ public class CategoryMenuTest {
         Categories categories = new InFileCategories("categories_test.txt");
         categories.add(new Category("Game"));
 
-        Projects projects = new Projects();
+        Projects projects = new InMemoryProjects();
 
         QuoteGenerate generator = mock(QuoteGenerate.class);
         InputOutputConsoleInterface io = mock(InputOutputConsoleInterface.class);
@@ -47,7 +47,7 @@ public class CategoryMenuTest {
         //given
         Categories categories = new InFileCategories("categories_test.txt");
 
-        Projects projects = new Projects();
+        Projects projects = new InMemoryProjects();
 
         QuoteGenerate generator = mock(QuoteGenerate.class);
         InputOutputConsoleInterface io = mock(InputOutputConsoleInterface.class);

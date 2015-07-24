@@ -1,15 +1,13 @@
 package goit5.nikfisher.kickstarter;
 
 import goit5.nikfisher.kickstarter.menu.CategoryMenu;
-import goit5.nikfisher.kickstarter.model.Categories;
+import goit5.nikfisher.kickstarter.model.*;
 import goit5.nikfisher.kickstarter.streams.InputOutputConsoleInterface;
-import goit5.nikfisher.kickstarter.model.Projects;
-import goit5.nikfisher.kickstarter.model.QuoteGenerate;
 
 public class Main {
 
+	private final Projects projects;
 	private Categories categories;
-	private Projects projects;
 	private InputOutputConsoleInterface io;
 	private QuoteGenerate generator;
 
@@ -25,7 +23,7 @@ public class Main {
 
 		io.println(generator.quoteGenerate());
 
-		CategoryMenu categoryMenu = new CategoryMenu(io,  projects, categories);
+		CategoryMenu categoryMenu = new CategoryMenu(io, projects, categories);
 		categoryMenu.categoryMenu();
 
 		io.println("Sank!");

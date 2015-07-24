@@ -12,7 +12,7 @@ import static org.mockito.Mockito.*;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
-public class ProjectsMenuTest {
+public class InMemoryProjectsMenuTest {
 
     @After
     public void cleanup(){
