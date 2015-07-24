@@ -69,9 +69,9 @@ public class ProjectsMenu {
 			io.println(question);
 		}
 
-		String ansver = project.getAnsver();
-		if (ansver != null){
-			io.println(ansver);
+		String answer = project.getAnsver();
+		if (answer != null){
+			io.println(answer);
 		}
 
 		io.println("---------------------------------------");
@@ -83,7 +83,7 @@ public class ProjectsMenu {
 	}
 
 
-    //TODO этот метод дублируется в CategoryMenu, надо как-то от этого избавится
+    //TODO method duplicated in CategoryMenu Class, need will think about this
 	private void printProject(Project project) {
 
         io.println("Project name: " + project.getName());
