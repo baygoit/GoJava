@@ -37,7 +37,7 @@ public class ProjectController extends AbstractController {
                 donatePageController.setProjectId(projectId);
                 return donatePageController;
             default:
-                throw new IndexOutOfBoundsException("Unexpected input value");
+                throw new IndexOutOfBoundsException("Unexpected input value: ".concat(input));
         }
     }
 
@@ -64,5 +64,9 @@ public class ProjectController extends AbstractController {
     @Override
     protected void doValidControl(String input) {
         setNextController(returnNextController(input));
+    }
+
+    @Override
+    protected void showError(String input) {
     }
 }

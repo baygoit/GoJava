@@ -18,7 +18,7 @@ public class PaymentViewTest {
     public void whenRenderThenPrintInviteMessage4UserName() throws Exception {
         PaymentView paymentView = new PaymentView();
         paymentView.setOutput(output);
-        paymentView.render(StandByMode.USER);
+        paymentView.render(StandByMode.EXPECTED_USER_NAME);
 
         List<String> expectedResult = new ArrayList<>();
         expectedResult.add(format("Enter user name(%s): ", CHOICE_MESSAGE_SHORT));
@@ -29,7 +29,7 @@ public class PaymentViewTest {
     public void whenRenderThenPrintInviteMessage4CardNo() throws Exception {
         PaymentView paymentView = new PaymentView();
         paymentView.setOutput(output);
-        paymentView.render(StandByMode.CARD);
+        paymentView.render(StandByMode.EXPECTED_CARD_NO);
 
         List<String> expectedResult = new ArrayList<>();
         expectedResult.add(format("Enter card number(%s): ", CHOICE_MESSAGE_SHORT));
@@ -40,7 +40,7 @@ public class PaymentViewTest {
     public void whenRenderThenPrintInviteMessage4Amount() throws Exception {
         PaymentView paymentView = new PaymentView();
         paymentView.setOutput(output);
-        paymentView.render(StandByMode.AMOUNT);
+        paymentView.render(StandByMode.EXPECTED_AMOUNT);
 
         List<String> expectedResult = new ArrayList<>();
         expectedResult.add(format("Enter pledge amount(%s): ", CHOICE_MESSAGE_SHORT));

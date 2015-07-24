@@ -21,7 +21,7 @@ public class PaymentControllerTest {
     public void whenShowModelThenRenderView() throws Exception {
         PaymentController controller = new PaymentController();
         controller.setView(view);
-        controller.setCurrentMode(StandByMode.USER);
+        controller.setCurrentMode(StandByMode.EXPECTED_USER_NAME);
 
         controller.takeControl();
 

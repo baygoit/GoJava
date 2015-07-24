@@ -16,7 +16,7 @@ public class Input {
                 inputListener.onInput(scanner.nextLine());
             }
             scanner.close();
-        } catch (StopDispatcherException e) {
+        } catch (EmptyDispatcherException e) {
             scanner.close();
         }
     }

@@ -7,7 +7,7 @@ import ua.goit.kyrychok.kickstarter.view.*;
 public class Dispatcher implements InputListener {
     private AbstractController currentController;
 
-    public Dispatcher(DataProvider dataProvider, Output output) {
+    public void init(DataProvider dataProvider, Output output) {
         MainPageController mainPageController = new MainPageController();
         mainPageController.setDataProvider(dataProvider);
         MainPageView mainPageView = new MainPageView();
@@ -69,12 +69,12 @@ public class Dispatcher implements InputListener {
     }
 
     @Override
-    public void onInput(String input) throws StopDispatcherException {
+    public void onInput(String input) throws EmptyDispatcherException {
         currentController.onInput(input);
         AbstractController tempController;
         tempController = currentController.getNextController();
         if (tempController == null) {
-            throw new StopDispatcherException();
+            throw new EmptyDispatcherException();
         }
         if (currentController != tempController) {
             currentController = tempController;

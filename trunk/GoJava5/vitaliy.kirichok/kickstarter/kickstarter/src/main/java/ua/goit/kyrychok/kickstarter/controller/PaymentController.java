@@ -8,17 +8,15 @@ public class PaymentController extends AbstractPaymentController {
     @Override
     protected void changeMode() {
         switch (currentMode) {
-            case USER:
-                currentMode = StandByMode.CARD;
+            case EXPECTED_USER_NAME:
+                currentMode = StandByMode.EXPECTED_CARD_NO;
                 break;
-            case CARD:
-                currentMode = StandByMode.AMOUNT;
+            case EXPECTED_CARD_NO:
+                currentMode = StandByMode.EXPECTED_AMOUNT;
                 break;
-            case AMOUNT:
-                currentMode = StandByMode.USER;
+            case EXPECTED_AMOUNT:
+                currentMode = StandByMode.EXPECTED_USER_NAME;
                 break;
-            default:
-                throw new IndexOutOfBoundsException("Unexpected input value");
         }
     }
 
@@ -28,21 +26,17 @@ public class PaymentController extends AbstractPaymentController {
 
     @Override
     protected void addPayment(String input) {
-        if (currentMode == StandByMode.AMOUNT) {
+        if (currentMode == StandByMode.EXPECTED_AMOUNT) {
             dataProvider.incProjectBalance(projectId, convertAmount(input));
         }
     }
 
     @Override
     protected AbstractController returnNextController() {
-        switch (currentMode) {
-            case AMOUNT:
-                return getParentController();
-            case USER:
-            case CARD:
-                return this;
-            default:
-                throw new IndexOutOfBoundsException("Unexpected input value");
+        AbstractController controller = this;
+        if (currentMode == StandByMode.EXPECTED_AMOUNT) {
+            controller = getParentController();
         }
+        return controller;
     }
 }

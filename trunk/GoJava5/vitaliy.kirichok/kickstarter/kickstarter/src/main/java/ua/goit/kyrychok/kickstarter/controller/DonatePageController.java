@@ -44,9 +44,9 @@ public class DonatePageController extends AbstractController {
             paymentRewardController.setRewardId(getRewardId(index - 2));
             controller = paymentRewardController;
         } else {
-            throw new IndexOutOfBoundsException("Unexpected input value");
+            throw new IndexOutOfBoundsException("Unexpected input value: ".concat(input));
         }
-        controller.setCurrentMode(StandByMode.USER);
+        controller.setCurrentMode(StandByMode.EXPECTED_USER_NAME);
         controller.setProjectId(projectId);
         return controller;
     }
@@ -74,5 +74,9 @@ public class DonatePageController extends AbstractController {
     @Override
     protected void doValidControl(String input) {
         setNextController(returnNextController(input));
+    }
+
+    @Override
+    protected void showError(String input) {
     }
 }

@@ -13,7 +13,8 @@ public class KickStarter {
     }
 
     public void run() {
-        dispatcher = new Dispatcher(dataProvider, output);
+        dispatcher = new Dispatcher();
+        dispatcher.init(dataProvider, output);
         Input input = new Input(dispatcher);
         dispatcher.onStart();
         input.listenInput();

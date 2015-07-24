@@ -1,7 +1,7 @@
 package ua.goit.kyrychok.kickstarter;
 
 public enum StandByMode {
-    USER,
-    CARD,
-    AMOUNT
+    EXPECTED_USER_NAME,
+    EXPECTED_CARD_NO,
+    EXPECTED_AMOUNT
 }

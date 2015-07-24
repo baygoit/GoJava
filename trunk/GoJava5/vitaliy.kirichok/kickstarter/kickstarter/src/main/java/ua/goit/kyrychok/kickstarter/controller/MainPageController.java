@@ -49,4 +49,8 @@ public class MainPageController extends AbstractController {
         categoryController.setCategoryId(getCategoryId(input));
         setNextController(categoryController);
     }
+
+    @Override
+    protected void showError(String input) {
+    }
 }

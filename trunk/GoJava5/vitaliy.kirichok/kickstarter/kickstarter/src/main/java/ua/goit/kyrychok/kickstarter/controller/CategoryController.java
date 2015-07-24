@@ -52,4 +52,8 @@ public class CategoryController extends AbstractController {
         projectController.setProjectId(getProjectId(input));
         setNextController(projectController);
     }
+
+    @Override
+    protected void showError(String input) {
+    }
 }

@@ -26,4 +26,8 @@ public abstract class BaseView {
             writeLine(String.format(line, param));
         }
     }
+
+    public void writeError(String errorMessage) {
+        writeLineWithParam("ERROR: %s", errorMessage);
+    }
 }

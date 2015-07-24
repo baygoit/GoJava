@@ -8,6 +8,8 @@ import ua.goit.kyrychok.kickstarter.view.PaymentView;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static java.lang.String.format;
+
 public abstract class AbstractPaymentController extends AbstractController {
     private static final int MAX_USER_NAME_LENGTH = 100;
     private static final Pattern cardNoPattern = Pattern.compile("^\\d{16}$");
@@ -58,14 +60,14 @@ public abstract class AbstractPaymentController extends AbstractController {
     @Override
     protected boolean isValid(String input) {
         switch (currentMode) {
-            case AMOUNT:
+            case EXPECTED_AMOUNT:
                 return isValidAmount(input);
-            case CARD:
+            case EXPECTED_CARD_NO:
                 return isValidCardNo(input);
-            case USER:
+            case EXPECTED_USER_NAME:
                 return isValidUserName(input);
             default:
-                throw new IndexOutOfBoundsException("Unexpected input value");
+                throw new IndexOutOfBoundsException("Unexpected current mode value: ".concat(currentMode.toString()));
         }
     }
 
@@ -86,5 +88,22 @@ public abstract class AbstractPaymentController extends AbstractController {
         if (getNextController() == this) {
             showModel();
         }
+    }
+
+    @Override
+    protected void showError(String input) {
+        String message = null;
+        switch (currentMode) {
+            case EXPECTED_AMOUNT:
+                message = "Can't parse inputted value as decimal number";
+                break;
+            case EXPECTED_CARD_NO:
+                message = "Card number must consist only from 16 digits";
+                break;
+            case EXPECTED_USER_NAME:
+                message = format("User name can't be empty and length can't be great than %s symbols", MAX_USER_NAME_LENGTH);
+                break;
+        }
+        view.writeError(message);
     }
 }

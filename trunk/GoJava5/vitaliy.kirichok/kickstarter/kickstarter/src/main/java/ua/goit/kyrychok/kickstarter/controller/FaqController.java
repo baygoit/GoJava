@@ -4,6 +4,8 @@ import org.apache.commons.lang3.StringUtils;
 import ua.goit.kyrychok.kickstarter.model.Faq;
 import ua.goit.kyrychok.kickstarter.view.FaqView;
 
+import static java.lang.String.format;
+
 public class FaqController extends AbstractController {
     public static final int MAX_QUESTION_LENGTH = 150;
 
@@ -41,5 +43,10 @@ public class FaqController extends AbstractController {
     protected void doValidControl(String input) {
         addFaq(input);
         setNextController(getParentController());
+    }
+
+    @Override
+    protected void showError(String input) {
+        view.writeError(format("Question can't be empty and length can't be great than %s symbols", MAX_QUESTION_LENGTH));
     }
 }

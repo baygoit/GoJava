@@ -8,13 +8,13 @@ public class PaymentView extends BaseView {
 
     public void render(StandByMode mode) {
         switch (mode) {
-            case USER:
+            case EXPECTED_USER_NAME:
                 writeLine(format("Enter user name(%s): ", CHOICE_MESSAGE_SHORT));
                 break;
-            case CARD:
+            case EXPECTED_CARD_NO:
                 writeLine(format("Enter card number(%s): ", CHOICE_MESSAGE_SHORT));
                 break;
-            case AMOUNT:
+            case EXPECTED_AMOUNT:
                 writeLine(format("Enter pledge amount(%s): ", CHOICE_MESSAGE_SHORT));
                 break;
         }
