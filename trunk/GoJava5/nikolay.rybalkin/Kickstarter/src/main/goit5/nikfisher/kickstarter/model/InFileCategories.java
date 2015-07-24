@@ -1,6 +1,5 @@
 package goit5.nikfisher.kickstarter.model;
 
-
 import java.io.*;
 import java.util.LinkedList;
 import java.util.List;

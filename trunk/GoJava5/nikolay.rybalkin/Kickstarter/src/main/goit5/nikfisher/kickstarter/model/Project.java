@@ -90,7 +90,6 @@ public class Project {
 		return ansver;
 	}
 
-
 	public void donate(int amount){
 		this.exist += amount;
 	}

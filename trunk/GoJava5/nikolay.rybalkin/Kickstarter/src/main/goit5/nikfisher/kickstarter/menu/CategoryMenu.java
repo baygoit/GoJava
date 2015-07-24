@@ -25,7 +25,6 @@ public class CategoryMenu {
 
             askCategory();
 
-
             int categoryIndex = io.consoleScanInt();
 
             if (categoryIndex == 0){
@@ -63,6 +62,7 @@ public class CategoryMenu {
         io.println("Select category (or 0 to exit): ");
         io.println(Arrays.toString(categories.getCategories()));
     }
+
     private void printProjects(Project[] foundProjects) {
 
         for (int i = 0; i < foundProjects.length; i++) {
@@ -72,7 +72,7 @@ public class CategoryMenu {
         }
     }
 
-    //TODO ���� ����� ������������ � ���� �������, ���� �������� ��� �������� ������������
+    //TODO
     private void printProject(Project project) {
 
 		io.println("Project name: " + project.getName());
