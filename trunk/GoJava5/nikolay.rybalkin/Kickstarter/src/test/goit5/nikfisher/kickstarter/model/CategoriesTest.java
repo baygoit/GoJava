@@ -2,6 +2,8 @@ package goit5.nikfisher.kickstarter.model;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import java.io.File;
 import java.util.Arrays;
 import static org.junit.Assert.*;
 
@@ -19,7 +21,6 @@ public abstract class CategoriesTest {
     @Test
     public void shouldCategoriesWenAddCategories() throws Exception {
         //given
-
         //when
         categories.add(new Category("Game"));
         categories.add(new Category("Design"));
@@ -31,9 +32,7 @@ public abstract class CategoriesTest {
     @Test
     public void shouldCategoriesWenNoCategories() throws Exception {
         //given
-
         //when
-
         //then
         assertEquals("[]", Arrays.toString(categories.getCategories()));
     }
@@ -62,7 +61,8 @@ public abstract class CategoriesTest {
     @Test
     public void shouldCategoriesSize() throws Exception {
         //given
-        assertEquals(0, categories.size());
+        new File("categories_test.txt").delete();
+
         //when
         categories.add(new Category("Game"));
         categories.add(new Category("Design"));
