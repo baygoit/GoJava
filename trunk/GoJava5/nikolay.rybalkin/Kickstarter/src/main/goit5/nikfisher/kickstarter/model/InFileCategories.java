@@ -111,7 +111,8 @@ public class InFileCategories implements Categories {
             }
             return counter;
 
-        } catch (IOException e) {
+        }
+        catch (IOException e) {
             e.printStackTrace();
         } finally {
             try {
