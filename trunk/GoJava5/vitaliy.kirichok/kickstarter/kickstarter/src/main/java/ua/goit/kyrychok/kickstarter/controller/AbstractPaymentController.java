@@ -3,6 +3,7 @@ package ua.goit.kyrychok.kickstarter.controller;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.validator.routines.FloatValidator;
 import ua.goit.kyrychok.kickstarter.StandByMode;
+import ua.goit.kyrychok.kickstarter.dao.DataProvider;
 import ua.goit.kyrychok.kickstarter.view.PaymentView;
 
 import java.util.regex.Matcher;
@@ -16,6 +17,10 @@ public abstract class AbstractPaymentController extends AbstractController {
     private PaymentView view;
     protected StandByMode currentMode;
     protected int projectId;
+
+    public AbstractPaymentController(DataProvider dataProvider) {
+        super(dataProvider);
+    }
 
     public void setProjectId(int projectId) {
         this.projectId = projectId;

@@ -1,5 +1,6 @@
 package ua.goit.kyrychok.kickstarter.view;
 
+import ua.goit.kyrychok.kickstarter.Output;
 import ua.goit.kyrychok.kickstarter.model.Category;
 import ua.goit.kyrychok.kickstarter.model.Project;
 
@@ -10,6 +11,10 @@ import static ua.goit.kyrychok.kickstarter.Utils.getDiffDate;
 import static ua.goit.kyrychok.kickstarter.Utils.getMoney;
 
 public class CategoryView extends BaseView {
+
+    public CategoryView(Output output) {
+        super(output);
+    }
 
     public void render(Category model) {
         writeLine(model.getName());

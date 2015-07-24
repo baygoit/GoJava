@@ -1,5 +1,5 @@
 package ua.goit.kyrychok.kickstarter;
 
 public interface InputListener {
-    void onInput(String input) throws EmptyDispatcherException;
+    void onInput(String input);
 }

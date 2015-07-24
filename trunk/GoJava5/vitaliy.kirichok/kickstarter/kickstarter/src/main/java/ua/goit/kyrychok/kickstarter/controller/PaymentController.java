@@ -2,8 +2,13 @@ package ua.goit.kyrychok.kickstarter.controller;
 
 import org.apache.commons.validator.routines.FloatValidator;
 import ua.goit.kyrychok.kickstarter.StandByMode;
+import ua.goit.kyrychok.kickstarter.dao.DataProvider;
 
 public class PaymentController extends AbstractPaymentController {
+
+    public PaymentController(DataProvider dataProvider) {
+        super(dataProvider);
+    }
 
     @Override
     protected void changeMode() {

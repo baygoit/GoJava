@@ -16,8 +16,7 @@ public class PaymentViewTest {
 
     @Test
     public void whenRenderThenPrintInviteMessage4UserName() throws Exception {
-        PaymentView paymentView = new PaymentView();
-        paymentView.setOutput(output);
+        PaymentView paymentView = new PaymentView(output);
         paymentView.render(StandByMode.EXPECTED_USER_NAME);
 
         List<String> expectedResult = new ArrayList<>();
@@ -27,8 +26,7 @@ public class PaymentViewTest {
 
     @Test
     public void whenRenderThenPrintInviteMessage4CardNo() throws Exception {
-        PaymentView paymentView = new PaymentView();
-        paymentView.setOutput(output);
+        PaymentView paymentView = new PaymentView(output);
         paymentView.render(StandByMode.EXPECTED_CARD_NO);
 
         List<String> expectedResult = new ArrayList<>();
@@ -38,8 +36,7 @@ public class PaymentViewTest {
 
     @Test
     public void whenRenderThenPrintInviteMessage4Amount() throws Exception {
-        PaymentView paymentView = new PaymentView();
-        paymentView.setOutput(output);
+        PaymentView paymentView = new PaymentView(output);
         paymentView.render(StandByMode.EXPECTED_AMOUNT);
 
         List<String> expectedResult = new ArrayList<>();

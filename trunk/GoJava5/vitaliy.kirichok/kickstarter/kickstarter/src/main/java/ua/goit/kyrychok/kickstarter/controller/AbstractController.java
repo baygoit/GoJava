@@ -9,6 +9,10 @@ public abstract class AbstractController {
     private AbstractController nextController;
     protected DataProvider dataProvider;
 
+    public AbstractController(DataProvider dataProvider) {
+        this.dataProvider = dataProvider;
+    }
+
     protected abstract void updateModel();
 
     protected abstract void renderModel();
@@ -18,10 +22,6 @@ public abstract class AbstractController {
     protected abstract void doValidControl(String input);
 
     protected abstract void showError(String input);
-
-    public void setDataProvider(DataProvider dataProvider) {
-        this.dataProvider = dataProvider;
-    }
 
     public AbstractController getParentController() {
         return parentController;

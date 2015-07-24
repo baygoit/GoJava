@@ -1,5 +1,6 @@
 package ua.goit.kyrychok.kickstarter.view;
 
+import ua.goit.kyrychok.kickstarter.Output;
 import ua.goit.kyrychok.kickstarter.model.Reward;
 
 import java.util.List;
@@ -7,6 +8,10 @@ import java.util.List;
 import static ua.goit.kyrychok.kickstarter.Utils.getMoney;
 
 public class DonatePageView extends BaseView {
+
+    public DonatePageView(Output output) {
+        super(output);
+    }
 
     public void render(List<Reward> model) {
         writeLine("[1]. Any amount");

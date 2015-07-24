@@ -1,5 +1,6 @@
 package ua.goit.kyrychok.kickstarter.view;
 
+import ua.goit.kyrychok.kickstarter.Output;
 import ua.goit.kyrychok.kickstarter.model.Faq;
 import ua.goit.kyrychok.kickstarter.model.Project;
 import ua.goit.kyrychok.kickstarter.model.ProjectEvent;
@@ -10,6 +11,10 @@ import java.util.List;
 import static ua.goit.kyrychok.kickstarter.Utils.*;
 
 public class ProjectView extends BaseView {
+
+    public ProjectView(Output output) {
+        super(output);
+    }
 
     public void render(Project model) {
         writeLine(String.format("Project name: %s", model.getName()));

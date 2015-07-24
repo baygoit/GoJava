@@ -1,6 +1,7 @@
 package ua.goit.kyrychok.kickstarter.controller;
 
 import ua.goit.kyrychok.kickstarter.StandByMode;
+import ua.goit.kyrychok.kickstarter.dao.DataProvider;
 import ua.goit.kyrychok.kickstarter.model.Reward;
 import ua.goit.kyrychok.kickstarter.view.DonatePageView;
 
@@ -14,6 +15,14 @@ public class DonatePageController extends AbstractController {
     private PaymentController paymentController;
     private PaymentRewardController paymentRewardController;
     private int projectId;
+
+    public DonatePageController(DataProvider dataProvider) {
+        super(dataProvider);
+    }
+
+    public void setModel(List<Reward> model) {
+        this.model = model;
+    }
 
     public void setProjectId(int projectId) {
         this.projectId = projectId;

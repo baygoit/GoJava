@@ -11,7 +11,7 @@ public abstract class BaseView {
 
     private Output output;
 
-    public void setOutput(Output output) {
+    public BaseView(Output output) {
         this.output = output;
     }
 

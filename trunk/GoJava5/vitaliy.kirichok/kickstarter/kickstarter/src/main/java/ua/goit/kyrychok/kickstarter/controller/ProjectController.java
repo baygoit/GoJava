@@ -1,5 +1,6 @@
 package ua.goit.kyrychok.kickstarter.controller;
 
+import ua.goit.kyrychok.kickstarter.dao.DataProvider;
 import ua.goit.kyrychok.kickstarter.model.Project;
 import ua.goit.kyrychok.kickstarter.view.ProjectView;
 
@@ -11,6 +12,14 @@ public class ProjectController extends AbstractController {
     private FaqController faqController;
     private DonatePageController donatePageController;
     private int projectId;
+
+    public ProjectController(DataProvider dataProvider) {
+        super(dataProvider);
+    }
+
+    public void setModel(Project model) {
+        this.model = model;
+    }
 
     public void setProjectId(int projectId) {
         this.projectId = projectId;

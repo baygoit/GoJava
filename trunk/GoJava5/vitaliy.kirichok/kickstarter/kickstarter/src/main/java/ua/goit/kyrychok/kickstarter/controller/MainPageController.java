@@ -1,5 +1,6 @@
 package ua.goit.kyrychok.kickstarter.controller;
 
+import ua.goit.kyrychok.kickstarter.dao.DataProvider;
 import ua.goit.kyrychok.kickstarter.model.Category;
 import ua.goit.kyrychok.kickstarter.view.MainPageView;
 
@@ -12,12 +13,20 @@ public class MainPageController extends AbstractController {
     private MainPageView view;
     private CategoryController categoryController;
 
+    public MainPageController(DataProvider dataProvider) {
+        super(dataProvider);
+    }
+
     public void setView(MainPageView view) {
         this.view = view;
     }
 
     public void setCategoryController(CategoryController categoryController) {
         this.categoryController = categoryController;
+    }
+
+    public void setModel(List<Category> model) {
+        this.model = model;
     }
 
     private int getCategoryId(String input) {

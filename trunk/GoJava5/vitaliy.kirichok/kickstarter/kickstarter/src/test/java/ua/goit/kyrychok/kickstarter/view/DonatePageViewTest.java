@@ -21,8 +21,7 @@ public class DonatePageViewTest {
         Reward reward = new Reward(2020, "reward 20.2");
         rewards.add(reward);
 
-        DonatePageView donatePageView = new DonatePageView();
-        donatePageView.setOutput(output);
+        DonatePageView donatePageView = new DonatePageView(output);
 
         donatePageView.render(rewards);
 

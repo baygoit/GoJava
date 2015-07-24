@@ -1,10 +1,15 @@
 package ua.goit.kyrychok.kickstarter.view;
 
+import ua.goit.kyrychok.kickstarter.Output;
 import ua.goit.kyrychok.kickstarter.StandByMode;
 
 import static java.lang.String.format;
 
 public class PaymentView extends BaseView {
+
+    public PaymentView(Output output) {
+        super(output);
+    }
 
     public void render(StandByMode mode) {
         switch (mode) {

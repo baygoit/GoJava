@@ -4,16 +4,21 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import ua.goit.kyrychok.kickstarter.dao.DataProvider;
+import ua.goit.kyrychok.kickstarter.model.Project;
 import ua.goit.kyrychok.kickstarter.view.ProjectView;
+
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 public class ProjectControllerTest {
 
-    //TODO @Mock
-    //TODO private ProjectModel model;
+    @Mock
+    private Project model;
     @Mock
     private ProjectView view;
     @Mock
-    private AbstractController abstractController;
+    private DataProvider dataProvider;
 
     @Before
     public void setUp() throws Exception {
@@ -21,14 +26,13 @@ public class ProjectControllerTest {
     }
 
     @Test()
-    public void whenShowModelRenderMainPage() throws Exception {
-        ProjectController controller = new ProjectController();
-        controller.setParentController(abstractController);
+    public void whenShowModelRenderView() throws Exception {
+        ProjectController controller = new ProjectController(dataProvider);
         controller.setView(view);
-        //TODO  controller.setModel(model);
+        controller.setModel(model);
 
-        controller.takeControl();
+        controller.showModel();
 
-        //TODO  verify(view, times(1)).render(model);
+        verify(view, times(1)).render(model);
     }
 }

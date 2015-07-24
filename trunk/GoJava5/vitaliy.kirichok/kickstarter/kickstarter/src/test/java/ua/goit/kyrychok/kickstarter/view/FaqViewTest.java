@@ -12,8 +12,7 @@ public class FaqViewTest {
     @Test
     public void whenRenderThenPrintInviteMessage() throws Exception {
 
-        FaqView faqView = new FaqView();
-        faqView.setOutput(output);
+        FaqView faqView = new FaqView(output);
 
         faqView.render();
 

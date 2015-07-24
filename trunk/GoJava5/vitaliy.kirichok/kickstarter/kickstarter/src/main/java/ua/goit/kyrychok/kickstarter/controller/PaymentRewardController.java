@@ -1,10 +1,15 @@
 package ua.goit.kyrychok.kickstarter.controller;
 
 import ua.goit.kyrychok.kickstarter.StandByMode;
+import ua.goit.kyrychok.kickstarter.dao.DataProvider;
 import ua.goit.kyrychok.kickstarter.model.Reward;
 
 public class PaymentRewardController extends AbstractPaymentController {
     private int rewardId;
+
+    public PaymentRewardController(DataProvider dataProvider) {
+        super(dataProvider);
+    }
 
     public void setRewardId(int rewardId) {
         this.rewardId = rewardId;

@@ -4,14 +4,23 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import ua.goit.kyrychok.kickstarter.dao.DataProvider;
+import ua.goit.kyrychok.kickstarter.model.Category;
 import ua.goit.kyrychok.kickstarter.view.MainPageView;
+
+import java.util.List;
+
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 public class MainPageControllerTest {
 
-    //TODO @Mock
-    //TODO private MainPageModel model;
+    @Mock
+    private DataProvider dataProvider;
     @Mock
     private MainPageView view;
+    @Mock
+    private List<Category> model;
 
     @Before
     public void setUp() throws Exception {
@@ -20,12 +29,12 @@ public class MainPageControllerTest {
 
     @Test()
     public void whenShowModelRenderMainPage() throws Exception {
-        MainPageController controller = new MainPageController();
+        MainPageController controller = new MainPageController(dataProvider);
         controller.setView(view);
-        //TODO controller.setModel(model);
+        controller.setModel(model);
 
-        controller.takeControl();
+        controller.showModel();
 
-        //TODO verify(view, times(1)).render(model);
+        verify(view, times(1)).render(model, null);
     }
 }

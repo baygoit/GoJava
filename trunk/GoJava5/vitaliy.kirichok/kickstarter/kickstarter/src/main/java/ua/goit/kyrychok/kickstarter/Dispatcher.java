@@ -8,44 +8,27 @@ public class Dispatcher implements InputListener {
     private AbstractController currentController;
 
     public void init(DataProvider dataProvider, Output output) {
-        MainPageController mainPageController = new MainPageController();
-        mainPageController.setDataProvider(dataProvider);
-        MainPageView mainPageView = new MainPageView();
-        mainPageView.setOutput(output);
-        mainPageController.setView(mainPageView);
+        MainPageController mainPageController = new MainPageController(dataProvider);
+        mainPageController.setView(new MainPageView(output));
 
-        CategoryController categoryController = new CategoryController();
-        categoryController.setDataProvider(dataProvider);
-        CategoryView categoryView = new CategoryView();
-        categoryView.setOutput(output);
-        categoryController.setView(categoryView);
+        CategoryController categoryController = new CategoryController(dataProvider);
+        categoryController.setView(new CategoryView(output));
 
-        ProjectController projectController = new ProjectController();
-        projectController.setDataProvider(dataProvider);
-        ProjectView projectView = new ProjectView();
-        projectView.setOutput(output);
-        projectController.setView(projectView);
+        ProjectController projectController = new ProjectController(dataProvider);
+        projectController.setView(new ProjectView(output));
 
-        FaqController faqController = new FaqController();
-        faqController.setDataProvider(dataProvider);
-        FaqView faqView = new FaqView();
-        faqView.setOutput(output);
-        faqController.setView(faqView);
+        FaqController faqController = new FaqController(dataProvider);
+        faqController.setView(new FaqView(output));
 
-        DonatePageController donatePageController = new DonatePageController();
-        donatePageController.setDataProvider(dataProvider);
-        DonatePageView donatePageView = new DonatePageView();
-        donatePageView.setOutput(output);
-        donatePageController.setView(donatePageView);
+        DonatePageController donatePageController = new DonatePageController(dataProvider);
+        donatePageController.setView(new DonatePageView(output));
 
-        PaymentController paymentController = new PaymentController();
-        paymentController.setDataProvider(dataProvider);
-        PaymentView paymentView = new PaymentView();
-        paymentView.setOutput(output);
+        PaymentView paymentView = new PaymentView(output);
+
+        PaymentController paymentController = new PaymentController(dataProvider);
         paymentController.setView(paymentView);
 
-        PaymentRewardController paymentRewardController = new PaymentRewardController();
-        paymentRewardController.setDataProvider(dataProvider);
+        PaymentRewardController paymentRewardController = new PaymentRewardController(dataProvider);
         paymentRewardController.setView(paymentView);
 
         paymentRewardController.setParentController(projectController);
@@ -69,12 +52,12 @@ public class Dispatcher implements InputListener {
     }
 
     @Override
-    public void onInput(String input) throws EmptyDispatcherException {
+    public void onInput(String input) {
         currentController.onInput(input);
         AbstractController tempController;
         tempController = currentController.getNextController();
         if (tempController == null) {
-            throw new EmptyDispatcherException();
+            throw new IllegalStateException("Unable to process input because application already stopped");
         }
         if (currentController != tempController) {
             currentController = tempController;

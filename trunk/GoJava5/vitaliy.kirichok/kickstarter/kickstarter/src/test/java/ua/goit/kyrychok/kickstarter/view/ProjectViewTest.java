@@ -27,8 +27,7 @@ public class ProjectViewTest {
         project.addFaq(new Faq("question", "answer"));
         project.addProjectEvent(new ProjectEvent(new Date(), "text"));
 
-        ProjectView projectView = new ProjectView();
-        projectView.setOutput(output);
+        ProjectView projectView = new ProjectView(output);
 
         projectView.render(project);
 

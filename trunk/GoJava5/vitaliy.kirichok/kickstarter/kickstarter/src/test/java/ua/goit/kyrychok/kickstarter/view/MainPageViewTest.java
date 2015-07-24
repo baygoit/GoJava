@@ -18,8 +18,7 @@ public class MainPageViewTest {
         categories.add(new Category("Category 2"));
         categories.add(new Category("Category 3"));
 
-        MainPageView mainPageView = new MainPageView();
-        mainPageView.setOutput(output);
+        MainPageView mainPageView = new MainPageView(output);
 
         mainPageView.render(categories, "Test Msg");
 

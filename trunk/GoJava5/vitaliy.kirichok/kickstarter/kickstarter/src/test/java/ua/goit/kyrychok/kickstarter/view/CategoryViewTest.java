@@ -37,8 +37,7 @@ public class CategoryViewTest {
         project3.setBalance(balance);
         category.addProject(project3);
 
-        CategoryView categoryView = new CategoryView();
-        categoryView.setOutput(output);
+        CategoryView categoryView = new CategoryView(output);
 
         categoryView.render(category);
 
