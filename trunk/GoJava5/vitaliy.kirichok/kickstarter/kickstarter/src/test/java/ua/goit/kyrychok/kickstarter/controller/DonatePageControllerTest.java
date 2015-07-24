@@ -25,7 +25,7 @@ public class DonatePageControllerTest {
         DonatePageController controller = new DonatePageController();
         controller.setView(view);
 
-        controller.showModel();
+        controller.takeControl();
 
         //TODO verify(view, times(1)).render(model);
     }

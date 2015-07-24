@@ -65,7 +65,7 @@ public class Dispatcher implements InputListener {
     }
 
     public void onStart() {
-        currentController.showModel();
+        currentController.takeControl();
     }
 
     @Override
@@ -76,7 +76,9 @@ public class Dispatcher implements InputListener {
         if (tempController == null) {
             throw new StopDispatcherException();
         }
-        tempController.showModel();
-        currentController = tempController;
+        if (currentController != tempController) {
+            currentController = tempController;
+            currentController.takeControl();
+        }
     }
 }

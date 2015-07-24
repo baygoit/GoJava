@@ -29,19 +29,35 @@ public abstract class AbstractController {
         this.nextController = nextController;
     }
 
-    public abstract void onInput(String input);
+    public void onInput(String input) {
+        if (isExit(input)) {
+            setNextController(getParentController());
+        } else if (isValid(input)) {
+            doValidControl(input);
+        } else {
+            showModel();
+        }
+    }
 
-    public abstract void showModel();
+    protected abstract void updateModel();
 
-    public void onShowModel() {
+    public void takeControl() {
+        updateModel();
+        showModel();
+    }
+
+    protected abstract void renderModel();
+
+    protected void showModel() {
         setNextController(this);
+        renderModel();
     }
 
-    public void doExit() {
-        setNextController(getParentController());
-    }
+    protected abstract boolean isValid(String input);
 
-    public boolean isExit(String input) {
+    protected abstract void doValidControl(String input);
+
+    private boolean isExit(String input) {
         return EXIT_CODE.equals(input);
     }
 }

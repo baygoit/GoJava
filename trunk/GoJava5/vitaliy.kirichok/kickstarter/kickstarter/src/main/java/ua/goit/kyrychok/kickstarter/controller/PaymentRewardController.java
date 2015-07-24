@@ -25,7 +25,7 @@ public class PaymentRewardController extends AbstractPaymentController {
     }
 
     @Override
-    protected void updateModel(String input) {
+    protected void addPayment(String input) {
         if (currentMode == StandByMode.CARD) {
             Reward reward = dataProvider.getReward(rewardId);
             dataProvider.incProjectBalance(projectId, reward.getAmount());

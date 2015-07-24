@@ -27,7 +27,7 @@ public class ProjectControllerTest {
         controller.setView(view);
         //TODO  controller.setModel(model);
 
-        controller.showModel();
+        controller.takeControl();
 
         //TODO  verify(view, times(1)).render(model);
     }

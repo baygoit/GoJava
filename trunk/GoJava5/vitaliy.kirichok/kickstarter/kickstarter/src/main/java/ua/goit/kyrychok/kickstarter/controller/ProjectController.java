@@ -28,15 +28,6 @@ public class ProjectController extends AbstractController {
         this.donatePageController = donatePageController;
     }
 
-    private boolean isValid(String input) {
-        try {
-            int inputValue = parseInt(input);
-            return !(inputValue < 1 || inputValue > 2);
-        } catch (NumberFormatException e) {
-            return false;
-        }
-    }
-
     private AbstractController returnNextController(String input) {
         switch (parseInt(input)) {
             case 1:
@@ -50,25 +41,28 @@ public class ProjectController extends AbstractController {
         }
     }
 
+    @Override
+    protected boolean isValid(String input) {
+        try {
+            int inputValue = parseInt(input);
+            return !(inputValue < 1 || inputValue > 2);
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
+    @Override
     public void updateModel() {
         model = dataProvider.getProject(projectId);
     }
 
     @Override
-    public void showModel() {
-        updateModel();
-        onShowModel();
+    protected void renderModel() {
         view.render(model);
     }
 
     @Override
-    public void onInput(String input) {
-        if (isExit(input)) {
-            doExit();
-        } else if (isValid(input)) {
-            setNextController(returnNextController(input));
-        } else {
-            setNextController(this);
-        }
+    protected void doValidControl(String input) {
+        setNextController(returnNextController(input));
     }
 }

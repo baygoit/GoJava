@@ -27,19 +27,6 @@ public abstract class AbstractPaymentController extends AbstractController {
         this.view = view;
     }
 
-    private boolean isValid(String input) {
-        switch (currentMode) {
-            case AMOUNT:
-                return isValidAmount(input);
-            case CARD:
-                return isValidCardNo(input);
-            case USER:
-                return isValidUserName(input);
-            default:
-                throw new IndexOutOfBoundsException("Unexpected input value");
-        }
-    }
-
     private boolean isValidUserName(String input) {
         return !(StringUtils.isBlank(input) || input.length() > MAX_USER_NAME_LENGTH);
     }
@@ -64,26 +51,40 @@ public abstract class AbstractPaymentController extends AbstractController {
 
     protected abstract void changeMode();
 
-    protected abstract void updateModel(String input);
+    protected abstract void addPayment(String input);
 
     protected abstract AbstractController returnNextController();
 
     @Override
-    public void showModel() {
-        onShowModel();
+    protected boolean isValid(String input) {
+        switch (currentMode) {
+            case AMOUNT:
+                return isValidAmount(input);
+            case CARD:
+                return isValidCardNo(input);
+            case USER:
+                return isValidUserName(input);
+            default:
+                throw new IndexOutOfBoundsException("Unexpected input value");
+        }
+    }
+
+    @Override
+    protected void updateModel() {
+    }
+
+    @Override
+    protected void renderModel() {
         view.render(currentMode);
     }
 
     @Override
-    public void onInput(String input) {
-        if (isExit(input)) {
-            doExit();
-        } else if (isValid(input)) {
-            updateModel(input);
-            setNextController(returnNextController());
-            changeMode();
-        } else {
-            setNextController(this);
+    protected void doValidControl(String input) {
+        addPayment(input);
+        setNextController(returnNextController());
+        changeMode();
+        if (getNextController() == this) {
+            showModel();
         }
     }
 }

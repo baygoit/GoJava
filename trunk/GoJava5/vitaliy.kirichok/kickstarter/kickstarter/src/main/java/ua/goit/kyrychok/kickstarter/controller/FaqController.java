@@ -18,30 +18,28 @@ public class FaqController extends AbstractController {
         this.view = view;
     }
 
-    private boolean isValid(String input) {
-        return !(StringUtils.isBlank(input) || input.length() > MAX_QUESTION_LENGTH);
-    }
-
-    @Override
-    public void showModel() {
-        onShowModel();
-        view.render();
-    }
-
-    public void updateModel(String question) {
+    public void addFaq(String question) {
         Faq faq = new Faq(question);
         dataProvider.addFaq(projectId, faq);
     }
 
     @Override
-    public void onInput(String input) {
-        if (isExit(input)) {
-            doExit();
-        } else if (isValid(input)) {
-            updateModel(input);
-            setNextController(getParentController());
-        } else {
-            setNextController(this);
-        }
+    protected boolean isValid(String input) {
+        return !(StringUtils.isBlank(input) || input.length() > MAX_QUESTION_LENGTH);
+    }
+
+    @Override
+    protected void updateModel() {
+    }
+
+    @Override
+    protected void renderModel() {
+        view.render();
+    }
+
+    @Override
+    protected void doValidControl(String input) {
+        addFaq(input);
+        setNextController(getParentController());
     }
 }

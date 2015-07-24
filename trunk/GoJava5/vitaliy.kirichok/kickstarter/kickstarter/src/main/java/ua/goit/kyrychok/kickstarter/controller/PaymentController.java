@@ -27,7 +27,7 @@ public class PaymentController extends AbstractPaymentController {
     }
 
     @Override
-    protected void updateModel(String input) {
+    protected void addPayment(String input) {
         if (currentMode == StandByMode.AMOUNT) {
             dataProvider.incProjectBalance(projectId, convertAmount(input));
         }

@@ -23,11 +23,17 @@ public class CategoryController extends AbstractController {
         this.view = view;
     }
 
+    public int getProjectId(String input) {
+        return model.getProjects().get(parseInt(input) - 1).getId();
+    }
+
+    @Override
     public void updateModel() {
         model = dataProvider.getCategory(categoryId);
     }
 
-    private boolean isValid(String input) {
+    @Override
+    protected boolean isValid(String input) {
         try {
             int inputValue = parseInt(input);
             return !(inputValue < 1 || inputValue > model.getProjects().size());
@@ -36,26 +42,14 @@ public class CategoryController extends AbstractController {
         }
     }
 
-    public int getProjectId(String input) {
-        return model.getProjects().get(parseInt(input) - 1).getId();
-    }
-
     @Override
-    public void showModel() {
-        updateModel();
-        onShowModel();
+    protected void renderModel() {
         view.render(model);
     }
 
     @Override
-    public void onInput(String input) {
-        if (isExit(input)) {
-            doExit();
-        } else if (isValid(input)) {
-            projectController.setProjectId(getProjectId(input));
-            setNextController(projectController);
-        } else {
-            setNextController(this);
-        }
+    protected void doValidControl(String input) {
+        projectController.setProjectId(getProjectId(input));
+        setNextController(projectController);
     }
 }

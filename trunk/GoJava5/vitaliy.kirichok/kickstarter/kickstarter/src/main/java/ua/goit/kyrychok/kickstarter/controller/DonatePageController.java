@@ -31,15 +31,6 @@ public class DonatePageController extends AbstractController {
         this.paymentController = paymentController;
     }
 
-    private boolean isValid(String input) {
-        try {
-            int inputValue = parseInt(input);
-            return !(inputValue < 1 || inputValue > model.size() + 1);
-        } catch (NumberFormatException e) {
-            return false;
-        }
-    }
-
     private int getRewardId(int index) {
         return model.get(index).getId();
     }
@@ -60,25 +51,28 @@ public class DonatePageController extends AbstractController {
         return controller;
     }
 
+    @Override
+    protected boolean isValid(String input) {
+        try {
+            int inputValue = parseInt(input);
+            return !(inputValue < 1 || inputValue > model.size() + 1);
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
+    @Override
     public void updateModel() {
         model = dataProvider.getRewards(projectId);
     }
 
     @Override
-    public void showModel() {
-        updateModel();
-        onShowModel();
+    protected void renderModel() {
         view.render(model);
     }
 
     @Override
-    public void onInput(String input) {
-        if (isExit(input)) {
-            doExit();
-        } else if (isValid(input)) {
-            setNextController(returnNextController(input));
-        } else {
-            setNextController(this);
-        }
+    protected void doValidControl(String input) {
+        setNextController(returnNextController(input));
     }
 }

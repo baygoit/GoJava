@@ -23,7 +23,7 @@ public class PaymentControllerTest {
         controller.setView(view);
         controller.setCurrentMode(StandByMode.USER);
 
-        controller.showModel();
+        controller.takeControl();
 
         //TODO verify(view, times(1)).render(anyString());
     }

@@ -7,10 +7,12 @@ import java.util.concurrent.TimeUnit;
 
 public class Utils {
 
+    private static final SimpleDateFormat DEFAULT_DATE_FORMAT = new SimpleDateFormat("dd.MM.yyyy");
+
     public static Date convertDate(String date) {
         Date result = new Date();
         try {
-            result = new SimpleDateFormat("dd.MM.yyyy").parse(date);
+            result = DEFAULT_DATE_FORMAT.parse(date);
         } catch (java.text.ParseException e) {
             e.printStackTrace();
         }
@@ -49,7 +51,7 @@ public class Utils {
     }
 
     public static String getMoney(Integer money) {
-        double value = new Double(money) / 100;
+        double value = (double) money / 100;
         return new DecimalFormat("#.##").format(value);
     }
 

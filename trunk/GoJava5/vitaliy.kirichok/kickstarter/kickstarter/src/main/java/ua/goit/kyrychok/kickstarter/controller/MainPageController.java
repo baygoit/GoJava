@@ -20,11 +20,17 @@ public class MainPageController extends AbstractController {
         this.categoryController = categoryController;
     }
 
+    private int getCategoryId(String input) {
+        return model.get(parseInt(input) - 1).getId();
+    }
+
+    @Override
     public void updateModel() {
         model = dataProvider.getCategories();
     }
 
-    private boolean isValid(String input) {
+    @Override
+    protected boolean isValid(String input) {
         try {
             int inputValue = parseInt(input);
             return !(inputValue < 1 || inputValue > model.size());
@@ -33,26 +39,14 @@ public class MainPageController extends AbstractController {
         }
     }
 
-    private int getCategoryId(String input) {
-        return model.get(parseInt(input) - 1).getId();
-    }
-
     @Override
-    public void showModel() {
-        updateModel();
-        onShowModel();
+    protected void renderModel() {
         view.render(model, dataProvider.getWelcomeMessage());
     }
 
     @Override
-    public void onInput(String input) {
-        if (isExit(input)) {
-            doExit();
-        } else if (isValid(input)) {
-            categoryController.setCategoryId(getCategoryId(input));
-            setNextController(categoryController);
-        } else {
-            setNextController(this);
-        }
+    protected void doValidControl(String input) {
+        categoryController.setCategoryId(getCategoryId(input));
+        setNextController(categoryController);
     }
 }
