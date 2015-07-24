@@ -3,7 +3,7 @@ package goit5.nikfisher.kickstarter.model;
 import java.util.HashMap;
 import java.util.Map;
 
-public class InMemoryCategories {
+public class InMemoryCategories implements Categories {
 
 	private Map<Integer,Category> categories = new HashMap<>();
 

@@ -13,6 +13,7 @@ public class Runner {
 		Category category2 = new Category("Design");
 		Category category3 = new Category("Technology");
 
+//		Categories categories = new InMemoryCategories();
 		Categories categories = new InFileCategories("categories.txt");
 		categories.add(category1);
 		categories.add(category2);
