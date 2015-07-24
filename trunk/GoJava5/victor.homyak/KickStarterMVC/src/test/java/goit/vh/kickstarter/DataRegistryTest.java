@@ -1,15 +1,20 @@
 package goit.vh.kickstarter;
 
-import goit.vh.kickstarter.mvc.model.CategoryModel;
+import goit.vh.kickstarter.mvc.model.MainPageModel;
 import goit.vh.kickstarter.mvc.model.ProjectModel;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Mockito.when;
 /**
  * Created with IntelliJ IDEA.
  * User: dmrachkovskyi
@@ -19,14 +24,25 @@ import java.util.Map;
  */
 public class DataRegistryTest {
 
-    @Test
-    public void whenGetCategoriesThanReturnNotNull() throws Exception {
-        DataRegistry dataRegistry = new DataRegistry();
+    @Mock
+    private  Map<Integer,ArrayList<ProjectModel>> mapOfArrayLists;
 
-        Map<Integer, ArrayList<ProjectModel>> result = dataRegistry.getCategories();
+    @Mock
+    private MainPageModel mainPageModel;
+    @Mock
+    private ProjectModel projectModel;
 
-        Assert.assertNotNull("Categories array must not be null", result);
+    @Mock
+    private Output output;
+
+    @Before
+    public void setUpMocs() throws Exception{
+        MockitoAnnotations.initMocks(this);
     }
+    @Test
+    public void whenGetCategoriesThanReturnMapOfArray() throws Exception {
+        when(mainPageModel.getCategories()).thenReturn(mapOfArrayLists);
+         }
 //
 //
     @Test
@@ -39,5 +55,7 @@ public class DataRegistryTest {
 
         Assert.assertEquals("Categories must be the same as registered", categories, result);
     }
+
+
 //
 }
