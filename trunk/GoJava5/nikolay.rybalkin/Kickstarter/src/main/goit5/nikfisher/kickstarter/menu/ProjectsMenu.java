@@ -1,6 +1,6 @@
 package goit5.nikfisher.kickstarter.menu;
 
-import goit5.nikfisher.kickstarter.model.Project;
+import goit5.nikfisher.kickstarter.model.Model.Project;
 import goit5.nikfisher.kickstarter.streams.InputOutputConsole;
 import goit5.nikfisher.kickstarter.streams.InputOutputConsoleInterface;
 

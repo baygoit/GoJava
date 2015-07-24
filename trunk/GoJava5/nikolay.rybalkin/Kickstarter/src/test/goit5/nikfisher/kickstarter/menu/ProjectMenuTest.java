@@ -49,7 +49,7 @@ public class ProjectMenuTest {
         //0 - выход из списка категорий
         //0 - выход из программы
 
-        when(io.consoleScanInt()).thenReturn(1, 1, 0, 0, 0, 0);
+        when(io.consoleScanInt()).thenReturn(0, 0, 0, 0, 0, 0);
 
         main.run();
 

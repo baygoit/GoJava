@@ -33,7 +33,7 @@ public class CategoryMenuTest {
         Main main = new Main(categories, projects, io, generator);
 
         //when
-        when(io.consoleScanInt()).thenReturn(0);
+        when(io.consoleScanInt()).thenReturn(1);
 
         main.run();
 
