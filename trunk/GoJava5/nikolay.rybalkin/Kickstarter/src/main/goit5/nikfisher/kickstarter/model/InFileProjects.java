@@ -1,8 +1,10 @@
 package goit5.nikfisher.kickstarter.model;
 
 import java.io.*;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 public class InFileProjects  implements Projects {
 
@@ -35,22 +37,31 @@ public class InFileProjects  implements Projects {
     public Project[] getProjects(Category category) {
 
         BufferedReader in = null;
+        int index = 0;
 
         try {
             in = new BufferedReader(new FileReader(file));
 
+
             List<String> result = new LinkedList<>();
             String line = in.readLine();
-            int index = 1;
+            int found = 0;
+
             while (line != null){
-                result.add(index + ") " + line);
-                line = in.readLine();
-                index++;
+//                Project project = file.get(found);
+//
+//                if (project.getCategory().equals(category)){
+//                    result[found] = project;
+//                    found++;
+//                }
             }
 
-            Project[] result2 = new Project[index];
-//            System.arraycopy(result, 0, result2, 0, index);
+            Project[] result2 = new Project[found];
+            System.arraycopy(result, 0, result2, 0, found);
             return result2;
+
+
+//            return result.toArray(new String[result.size()]);
 
         } catch (IOException e) {
             e.printStackTrace();

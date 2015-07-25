@@ -38,7 +38,7 @@ public class ProjectMenuTest {
         InputOutputConsoleInterface io = mock(InputOutputConsoleInterface.class);
         QuoteGenerate generator = mock(QuoteGenerate.class);
 
-        Main main = new Main(categories, projects, io, generator);
+//        Main main = new Main(categories, projects, io, generator);
 
         //when
 
@@ -51,7 +51,7 @@ public class ProjectMenuTest {
 
         when(io.consoleScanInt()).thenReturn(0, 0, 0, 0, 0, 0);
 
-        main.run();
+//        main.run();
 
         //then
         verify(io, times(3)).println("Thank you want to help!");

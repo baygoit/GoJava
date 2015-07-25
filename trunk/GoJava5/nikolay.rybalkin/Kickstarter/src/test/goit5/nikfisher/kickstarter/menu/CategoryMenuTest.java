@@ -22,7 +22,7 @@ public class CategoryMenuTest {
     @Test
     public void shouldCategoriesWenHaveCategories() throws Exception {
         //given
-        Categories categories = new InFileCategories("categories_test.txt");
+        Categories categories = new InFileCategories("test.txt");
         categories.add(new Category("Game"));
 
         Projects projects = new InMemoryProjects();
@@ -30,12 +30,12 @@ public class CategoryMenuTest {
         QuoteGenerate generator = mock(QuoteGenerate.class);
         InputOutputConsoleInterface io = mock(InputOutputConsoleInterface.class);
 
-        Main main = new Main(categories, projects, io, generator);
+//        Main main = new Main(categories, projects, io, generator);
 
         //when
-        when(io.consoleScanInt()).thenReturn(1);
+        when(io.consoleScanInt()).thenReturn(0);
 
-        main.run();
+//        main.run();
 
         //then
         verify(io, times(1)).println("Select category (or 0 to exit): ");
@@ -45,19 +45,19 @@ public class CategoryMenuTest {
     @Test
     public void shouldCategoriesWenNoeCategories() throws Exception {
         //given
-        Categories categories = new InFileCategories("categories_test.txt");
+        Categories categories = new InMemoryCategories();
 
         Projects projects = new InMemoryProjects();
 
         QuoteGenerate generator = mock(QuoteGenerate.class);
         InputOutputConsoleInterface io = mock(InputOutputConsoleInterface.class);
 
-        Main main = new Main(categories, projects, io, generator);
+//        Main main = new Main(categories, projects, io, generator);
 
         //when
         when(io.consoleScanInt()).thenReturn(0);
 
-        main.run();
+//        main.run();
 
         //then
         verify(io, times(1)).println("Select category (or 0 to exit): ");

@@ -39,8 +39,8 @@ public class CategoryMenu {
             Project[] foundProjects = projects.getProjects(category);
             printProjects(foundProjects);
 
-            ProjectsMenu projectsMenu = new ProjectsMenu(new InputOutputConsole());
-            projectsMenu.projectsMenu(foundProjects);
+//            ProjectsMenu projectsMenu = new ProjectsMenu(new InputOutputConsole());
+//            projectsMenu.projectsMenu(foundProjects);
         }
     }
 

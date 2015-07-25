@@ -15,21 +15,21 @@ public class InFileCategories implements Categories {
     @Override
     public void add(Category category) {
 
-        BufferedWriter out = null;
-        try {
-            out = new BufferedWriter(new FileWriter(file, true));
-            out.append(category.getName()).append("\n");
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                assert out != null;
-                out.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+//        BufferedWriter out = null;
+//        try {
+//            out = new BufferedWriter(new FileWriter(file, true));
+//            out.append(category.getName()).append("\n");
+//
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        } finally {
+//            try {
+//                assert out != null;
+//                out.close();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        }
     }
 
     @Override
