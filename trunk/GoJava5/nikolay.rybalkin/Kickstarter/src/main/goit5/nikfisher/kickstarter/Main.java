@@ -6,7 +6,7 @@ import goit5.nikfisher.kickstarter.streams.InputOutputConsoleInterface;
 
 public class Main {
 
-	private final Projects projects;
+	private Projects projects;
 	private Categories categories;
 	private InputOutputConsoleInterface io;
 	private QuoteGenerate generator;

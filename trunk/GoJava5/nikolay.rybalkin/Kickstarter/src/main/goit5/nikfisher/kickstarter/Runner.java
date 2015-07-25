@@ -9,6 +9,7 @@ public class Runner {
 
 	public static void main(String[] args){
 
+
 		Category category1 = new Category("Game");
 		Category category2 = new Category("Design");
 		Category category3 = new Category("Technology");
@@ -72,4 +73,5 @@ public class Runner {
 		Main app = new Main(categories, projects, new InputOutputConsole(), new QuoteGenerate(new Random()));
 		app.run();
 	}
+
 }
