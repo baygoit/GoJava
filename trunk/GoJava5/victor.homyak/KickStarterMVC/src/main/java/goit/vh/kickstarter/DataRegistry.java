@@ -29,14 +29,20 @@ public class DataRegistry {
         if (categories.get(index) != null) {
             return categories.get(index);
         } else {
-            output.println("You choose not sutable variant, try more.");
+            output.println("You choose not sutable variant, try more.\n");
             return null;
         }
     }
 
     public ProjectModel getProject(int[] path) {
+//        try {
+//            if (categories.size()<categories.get(path[0]).size()||categories.get(path[0]).size()<0)
+//                return null;
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
         if (categories.get(path[0]).size() < path[1]  ||(path[1] - 1)<0) {
-        //TODO renaime, make more understendeble. Use Enume
+        //TODO rename, make more understandable. Use Enum
             //  output.println("You choose not sutable variant, try more.");
             return null;
         }
