@@ -3,6 +3,7 @@ package goit5.nikfisher.kickstarter.view;
 import goit5.nikfisher.kickstarter.menu.CategoryMenu;
 import goit5.nikfisher.kickstarter.model.*;
 import goit5.nikfisher.kickstarter.streams.InputOutputConsole;
+import goit5.nikfisher.kickstarter.streams.InputOutputConsoleInterface;
 
 public class View{
 
@@ -12,8 +13,8 @@ public class View{
         Category category2 = new Category("Design");
         Category category3 = new Category("Technology");
 
-//		Categories categories = new InMemoryCategories();
-        Categories categories = new InFileCategories("categories.txt");
+		Categories categories = new InMemoryCategories();
+//        Categories categories = new InFileCategories("categories.txt");
         categories.add(category1);
         categories.add(category2);
         categories.add(category3);
@@ -32,7 +33,7 @@ public class View{
         project5.setCategory(category2);
         project6.setCategory(category3);
 
-        Projects projects = new InFileProjects("projects.txt");
+        Projects projects = new InMemoryProjects();
         projects.add(project1);
         projects.add(project2);
         projects.add(project3);

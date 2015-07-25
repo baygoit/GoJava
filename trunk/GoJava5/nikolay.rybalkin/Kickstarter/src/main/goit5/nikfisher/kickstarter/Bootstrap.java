@@ -5,13 +5,10 @@ import goit5.nikfisher.kickstarter.streams.InputOutputConsole;
 
 import java.util.Random;
 
-public class Runner {
+public class Bootstrap {
 
 	public static void main(String[] args){
-
-
 		Main app = new Main(new InputOutputConsole(), new QuoteGenerate(new Random()));
 		app.run();
 	}
-
 }

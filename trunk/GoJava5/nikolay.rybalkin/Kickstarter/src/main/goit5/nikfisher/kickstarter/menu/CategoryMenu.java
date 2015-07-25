@@ -12,11 +12,11 @@ public class CategoryMenu {
     private String SPACE = " ";
     private InputOutputConsoleInterface io;
     private Projects projects;
-    private InFileCategories categories;
+    private InMemoryCategories categories;
 
     public CategoryMenu(InputOutputConsoleInterface io, Projects projects, Categories categories) {
         this.io = io;
-        this.categories = (InFileCategories) categories;
+        this.categories = (InMemoryCategories) categories;
 		this.projects = projects;
     }
 
@@ -39,8 +39,8 @@ public class CategoryMenu {
             Project[] foundProjects = projects.getProjects(category);
             printProjects(foundProjects);
 
-//            ProjectsMenu projectsMenu = new ProjectsMenu(new InputOutputConsole());
-//            projectsMenu.projectsMenu(foundProjects);
+            ProjectsMenu projectsMenu = new ProjectsMenu(new InputOutputConsole());
+            projectsMenu.projectsMenu(foundProjects);
         }
     }
 
