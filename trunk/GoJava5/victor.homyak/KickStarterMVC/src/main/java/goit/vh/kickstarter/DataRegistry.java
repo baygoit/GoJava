@@ -35,7 +35,8 @@ public class DataRegistry {
     }
 
     public ProjectModel getProject(int[] path) {
-        if (categories.get(path[0]).size() < path[1]  ||(path[1] - 1)<0) {//TODO renaime, make more understendeble. Use Enume
+        if (categories.get(path[0]).size() < path[1]  ||(path[1] - 1)<0) {
+        //TODO renaime, make more understendeble. Use Enume
             //  output.println("You choose not sutable variant, try more.");
             return null;
         }

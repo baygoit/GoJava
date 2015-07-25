@@ -9,23 +9,22 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.when;
+
 /**
  * Created with IntelliJ IDEA.
- * User: dmrachkovskyi
- * Date: 7/12/15
- * Time: 12:45 PM
- * To change this template use File | Settings | File Templates.
+ * User: viktor
  */
 public class DataRegistryTest {
 
     @Mock
-    private  Map<Integer,ArrayList<ProjectModel>> mapOfArrayLists;
+    private Map<Integer, ArrayList<ProjectModel>> mapOfArrayLists;
 
     @Mock
     private MainPageModel mainPageModel;
@@ -36,14 +35,17 @@ public class DataRegistryTest {
     private Output output;
 
     @Before
-    public void setUpMocs() throws Exception{
+    public void setUpMocs() throws Exception {
         MockitoAnnotations.initMocks(this);
     }
+
     @Test
     public void whenGetCategoriesThanReturnMapOfArray() throws Exception {
         when(mainPageModel.getCategories()).thenReturn(mapOfArrayLists);
-         }
-//
+
+    }
+
+    //
 //
     @Test
     public void whenRegisterCategoriesThanReturnSameCategories() throws Exception {
@@ -54,6 +56,41 @@ public class DataRegistryTest {
         Map<Integer, ArrayList<ProjectModel>> result = dataRegistry.getCategories();
 
         Assert.assertEquals("Categories must be the same as registered", categories, result);
+    }
+
+    @Test
+
+    public void whenGetProjectList() throws Exception {
+
+        DataRegistry dataRegistry = new DataRegistry();
+        Map<Integer, ArrayList<ProjectModel>> categories = new HashMap<>();
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(2018, 05, 9);
+        ArrayList<ProjectModel> category1 = new ArrayList<>();
+        category1.add(new ProjectModel("Gluconazol -", "Brend new anabolics;", 25000000, 7500000, calendar.getTime(),
+                "New MOC politics dictetes new requirements for pharmasy;",
+                "Is it legal?\nno\nWhat side effects?\n85% brain cancer",
+                "https://www.youtube.com/watch?v=tk7RUVJmLk0", "Sport", 1));
+        category1.add(new ProjectModel("Eczoskeleton -", "This thing upgrades muscle power;", 4000000, 2500000, calendar.getTime(),
+                "Limites of human body was reached, but sport of big achievements  isn`t stopped;",
+                "Is it legal?\nno\nWhat side effects?\n85% brain cancer",
+                "https://www.youtube.com/watch?v=tk7RUVJmLk0", "Sport", 1));
+        ArrayList<ProjectModel> category2 = new ArrayList<>();
+        category2.add(new ProjectModel("Warriors of eternity -", "New game, clone of 'Game of thrones';", 10000, 1500, calendar.getTime(),
+                "Game of thrones was a very good game, but it starts to bore people, so new game is on!!;",
+                "Is it legal?\nno\nWhat side effects?\n85% brain cancer",
+                "https://www.youtube.com/watch?v=tk7RUVJmLk0", "Table games", 2));
+        category2.add(new ProjectModel("Robo rally 2 -", "Reincarnation of good old strategy;", 7500, 3000, calendar.getTime(),
+                "You will be able to construct factories in new version. The game map become twise bigger;",
+                "Is it legal?\nno\nWhat side effects?\n85% brain cancer",
+                "https://www.youtube.com/watch?v=tk7RUVJmLk0", "Table games", 2));
+        categories.put(1, category1);
+        categories.put(2, category2);
+        dataRegistry.registerCategories(categories);
+        //TODO refactor to get rid of return null
+        Assert.assertNull("Should return null", dataRegistry.getProjectList(5));
+
+        Assert.assertEquals("Should return category", category1, dataRegistry.getProjectList(1));
     }
 
 
