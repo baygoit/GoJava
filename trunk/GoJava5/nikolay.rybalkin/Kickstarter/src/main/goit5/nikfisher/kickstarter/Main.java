@@ -18,7 +18,7 @@ public class Main {
 
 		io.println(generator.quoteGenerate());
 
-		View view = new View();
+		View view = new View(io, new InMemoryProjects(), new InMemoryCategories() );
 		view.createCategories();
 
 		io.println("Sank!");

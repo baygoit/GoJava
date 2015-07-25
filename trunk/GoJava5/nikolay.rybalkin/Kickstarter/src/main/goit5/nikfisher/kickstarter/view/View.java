@@ -7,6 +7,16 @@ import goit5.nikfisher.kickstarter.streams.InputOutputConsoleInterface;
 
 public class View{
 
+    private InputOutputConsoleInterface io;
+    private Projects projects;
+    private InMemoryCategories categories;
+
+    public View(InputOutputConsoleInterface io, Projects projects, Categories categories) {
+        this.io = io;
+        this.categories = (InMemoryCategories) categories;
+        this.projects = projects;
+    }
+
     public void createCategories(){
 
         Category category1 = new Category("Game");
@@ -70,7 +80,7 @@ public class View{
         project6.setAnsver("Still no one answered");
 
 
-        CategoryMenu categoryMenu = new CategoryMenu(new InputOutputConsole(), projects, categories);
+        CategoryMenu categoryMenu = new CategoryMenu(io, projects, categories);
         categoryMenu.categoryMenu();
     }
 }
