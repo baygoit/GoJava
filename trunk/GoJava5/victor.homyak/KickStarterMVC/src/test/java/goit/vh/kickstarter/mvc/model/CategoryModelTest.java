@@ -21,8 +21,11 @@ import static org.mockito.Mockito.*;
  * Created by Viktor on 26.07.2015.
  */
 public class CategoryModelTest  {
+    @Mock
+    private DataRegistry dataRegistry;
+//
 //    @Mock
-//    private DataRegistry dataRegistry;
+//    Map<Integer, ArrayList<ProjectModel>> categories;
 
     @Mock
     private Output output = new Output();
@@ -35,16 +38,32 @@ public class CategoryModelTest  {
 
     @Test()
     public void whenRefreshShouldReturn0() throws Exception {
-       CategoryModel categoryModel = new CategoryModel();
-          DataRegistry dataRegistry = new DataRegistry();
+        CategoryModel categoryModel = new CategoryModel();
 
+        categoryModel.setDataRegistry(dataRegistry);
 
-        Map<Integer,List> mapOfSize2 = new HashMap<>();
-        mapOfSize2.put(1, anyList());
-        mapOfSize2.put(1,anyList());
-        when(dataRegistry.getCategories().size()).thenReturn(mapOfSize2.size());
+        Map<Integer,ArrayList<ProjectModel>> mapOfSize2 = new HashMap<>();
+        mapOfSize2.put(1, new ArrayList());
+        mapOfSize2.put(1, new ArrayList());
+        when(dataRegistry.getCategories()).thenReturn(mapOfSize2);
         Assert.assertEquals("Should return null", null, categoryModel.refreshModel(5));
 
+    }
+
+    @Test()
+    public void whenRefreshShouldReturn1() throws Exception {
+        CategoryModel categoryModel = new CategoryModel();
+
+        categoryModel.setDataRegistry(dataRegistry);
+
+        Map<Integer,ArrayList<ProjectModel>> mapOfSize2 = new HashMap<>();
+        mapOfSize2.put(1, new ArrayList());
+        mapOfSize2.put(1, new ArrayList());
+        when(dataRegistry.getCategories()).thenReturn(mapOfSize2);
+
+
+         when(dataRegistry.getProjectList(0)).thenReturn(new ArrayList<ProjectModel>());
+     //   Assert.assertEquals("Should return null", 1, categoryModel.refreshModel(1));
 
     }
 }
