@@ -105,7 +105,6 @@ public class KickStarter {
         mainPageController.setLocationManager(locationManager);
         categoryController.setLocationManager(locationManager);
         projectController.setLocationManager(locationManager);
-        projectController.setDataRegistry(dataRegistry);
     }
 
     private void start() {

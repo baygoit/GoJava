@@ -15,9 +15,8 @@ public class ProjectController {
     private ProjectModel projectModel;
     private ProjectView projectView;
     private LocationManager locationManager;
-    private DataRegistry dataRegistry;
-    private Input input = new Input();
     private Output output = new Output();
+
     public ProjectController(ProjectView projectView, ProjectModel projectModel) {
         this.projectModel = projectModel;
         this.projectView = projectView;
@@ -28,24 +27,19 @@ public class ProjectController {
             projectModel.refreshModel(path);
             projectView.render(projectModel);
             projectView.readInProjectUserInput();
-            int index = Integer.parseInt(input.getInput());
-            path[1]=index;
-            if(projectModel.refreshModel(path)==null){
+            path[1] = Integer.parseInt(projectView.getInput());
+            if (projectModel.refreshModel(path) == null) {
                 output.println("You choose not sutable variant, try more.");
-            }
-            else {
+            } else {
                 path[1] = 0;
-                if (index == 0) {
-                    path[0] = 0;
-                }
+//                if (index == 0) {
+//                    path[0] = 0;
+//                }
                 locationManager.dispatch();
             }
         }
     }
 
-    public void setDataRegistry(DataRegistry dataRegistry) {
-        this.dataRegistry = dataRegistry;
-    }
 
     public void setLocationManager(LocationManager locationManager) {
         this.locationManager = locationManager;

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
+import goit.vh.kickstarter.Input;
 import goit.vh.kickstarter.Output;
 import goit.vh.kickstarter.mvc.model.ProjectModel;
 
@@ -12,6 +13,7 @@ import goit.vh.kickstarter.mvc.model.ProjectModel;
  */
 public class ProjectView {
 
+    private String input;
     private Output output;
 
     public ProjectView(Output output) {
@@ -25,7 +27,9 @@ public class ProjectView {
                     "\n Sum to raise: " + projects.get(i).getSumToRaise() + "; Already collected: " + projects.get(i).getCurrentSum()
                     + "; Days to end raising money: " +
                     getDateDiff(new Date(), projects.get(i).getEndDate(), TimeUnit.DAYS));
+
         }
+        setInput(new Input().getInput());
     }
 
     public void render(ProjectModel projectModel) {
@@ -58,6 +62,12 @@ public class ProjectView {
         long diffInMillies = date2.getTime() - date1.getTime();
         return timeUnit.convert(diffInMillies, TimeUnit.MILLISECONDS);
     }
+    public void setInput(String input) {
+        this.input = input;
+    }
 
+    public String getInput() {
+        return input;
+    }
 
 }
