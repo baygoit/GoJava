@@ -45,20 +45,20 @@ public class MainPageViewTest {
     }
 
 
-    @Test
-    public void whenReadUserInputUpdateInputField() throws Exception {
-        String EXPECTED_INPUT  = "01234567";
-
-        when(input.getInput()).thenReturn(EXPECTED_INPUT);
-
+//    @Test
+//    public void whenReadUserInputUpdateInputField() throws Exception {
+//        String EXPECTED_INPUT  = "01234567";
+//
+//        when(input.getInput()).thenReturn(EXPECTED_INPUT);
+//
 //        MainPageView mainPageView = new MainPageView(output);
 //        mainPageView.readUserInput();
 //        Assert.assertEquals(
 //            "User Input should be correct",
 //    EXPECTED_INPUT,
 //            mainPageView.getUserInput());
-}
-
+//}
+//
 //    @Test
 //    public void whenRenderMainPageThanPrintHelloMsgAndCategoriesList() throws Exception {
 //        when(model.getHelloMsg()).thenReturn("Test Msg");
