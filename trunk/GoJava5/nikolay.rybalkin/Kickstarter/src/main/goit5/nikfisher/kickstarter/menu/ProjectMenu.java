@@ -30,21 +30,8 @@ public class ProjectMenu {
                 io.println("The required amount: " + String.valueOf(required_amount));
 
                 BonusMenu bonusMenu = new BonusMenu(io);
-                bonusMenu.bonusMenu();
+                bonusMenu.bonusMenu(project);
 
-                io.println("-----------------");
-                io.println("Enter your name");
-                String name = io.consoleScanString();
-                io.println("Enter the number of your card");
-                int cardNumber = io.consoleScanInt();
-                io.println("Enter the amount of money");
-                int amount = io.consoleScanInt();
-                //TODO
-
-                io.println("Thank you " + name + " your money is successfully transferred to the account of the project");
-                io.println("---------------------------------------");
-
-                project.donate((amount));
             }
             if (menuIndexElement == 2) {
                 io.println("Enter your name");
