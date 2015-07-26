@@ -29,7 +29,7 @@ public class ProjectMenu {
 
                 io.println("The required amount: " + String.valueOf(required_amount));
 
-                BonusMenu bonusMenu = new BonusMenu(io);
+                PaymentMenu bonusMenu = new PaymentMenu(io);
                 bonusMenu.bonusMenu(project);
 
             }

@@ -4,12 +4,12 @@ package goit5.nikfisher.kickstarter.menu;
 import goit5.nikfisher.kickstarter.model.Project;
 import goit5.nikfisher.kickstarter.streams.ConsoleInterfaceIO;
 
-public class BonusMenu {
+public class PaymentMenu {
 
     private static ConsoleInterfaceIO io;
 
-    public BonusMenu(ConsoleInterfaceIO io) {
-        BonusMenu.io = io;
+    public PaymentMenu(ConsoleInterfaceIO io) {
+        PaymentMenu.io = io;
     }
 
     public void bonusMenu(Project project){
