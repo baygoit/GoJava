@@ -1,4 +1,8 @@
-package goit5.nikfisher.kickstarter.model;
+package goit5.nikfisher.kickstarter.dao;
+
+import goit5.nikfisher.kickstarter.dao.Projects;
+import goit5.nikfisher.kickstarter.model.Category;
+import goit5.nikfisher.kickstarter.model.Project;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -31,7 +35,7 @@ public class InMemoryProjects implements Projects {
 
 		Project[] result2 = new Project[found];
 		System.arraycopy(result, 0, result2, 0, found);
-		return result2;
+		return result;
 	}
 
 	@Override

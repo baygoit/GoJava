@@ -1,5 +1,6 @@
 package goit5.nikfisher.kickstarter.model;
 
+import goit5.nikfisher.kickstarter.dao.Projects;
 import org.junit.Before;
 import org.junit.Test;
 

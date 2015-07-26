@@ -1,15 +1,17 @@
 package goit5.nikfisher.kickstarter;
 
+import goit5.nikfisher.kickstarter.dao.InMemoryCategories;
+import goit5.nikfisher.kickstarter.dao.InMemoryProjects;
 import goit5.nikfisher.kickstarter.model.*;
-import goit5.nikfisher.kickstarter.streams.InputOutputConsoleInterface;
+import goit5.nikfisher.kickstarter.streams.ConsoleInterfaceIO;
 import goit5.nikfisher.kickstarter.view.View;
 
 public class Main {
 
-	private InputOutputConsoleInterface io;
+	private ConsoleInterfaceIO io;
 	private QuoteGenerate generator;
 
-	public Main( InputOutputConsoleInterface io, QuoteGenerate generator) {
+	public Main( ConsoleInterfaceIO io, QuoteGenerate generator) {
 		this.io = io;
 		this.generator = generator;
 	}

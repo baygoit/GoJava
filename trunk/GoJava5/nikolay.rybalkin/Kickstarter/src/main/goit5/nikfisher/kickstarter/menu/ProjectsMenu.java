@@ -1,14 +1,14 @@
 package goit5.nikfisher.kickstarter.menu;
 
 import goit5.nikfisher.kickstarter.model.Project;
-import goit5.nikfisher.kickstarter.streams.InputOutputConsole;
-import goit5.nikfisher.kickstarter.streams.InputOutputConsoleInterface;
+import goit5.nikfisher.kickstarter.streams.ConsoleIO;
+import goit5.nikfisher.kickstarter.streams.ConsoleInterfaceIO;
 
 public class ProjectsMenu {
 
-	private InputOutputConsoleInterface io;
+	private ConsoleInterfaceIO io;
 
-    public ProjectsMenu(InputOutputConsoleInterface io) {
+    public ProjectsMenu(ConsoleInterfaceIO io) {
         this.io = io;
     }
 
@@ -33,7 +33,7 @@ public class ProjectsMenu {
             chooseProject(project);
             printProjectDetail(project);
 
-            ProjectMenu projectMenu = new ProjectMenu(new InputOutputConsole());
+            ProjectMenu projectMenu = new ProjectMenu(new ConsoleIO());
 			projectMenu.projectMenuRun(project);
 		}
 	}
@@ -41,7 +41,7 @@ public class ProjectsMenu {
     private void ascProjects(Project[] foundProjects) {
 
 		if (foundProjects.length == 0 ){
-			io.println("InMemoryProjects in this category do not have to exit, enter 0");
+			io.println("Projects in this category do not have to exit, enter 0");
 		}else {
 			int from = 1;
 			int to = foundProjects.length;

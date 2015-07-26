@@ -1,17 +1,20 @@
 package goit5.nikfisher.kickstarter.view;
 
+import goit5.nikfisher.kickstarter.dao.Categories;
+import goit5.nikfisher.kickstarter.dao.InMemoryCategories;
+import goit5.nikfisher.kickstarter.dao.InMemoryProjects;
+import goit5.nikfisher.kickstarter.dao.Projects;
 import goit5.nikfisher.kickstarter.menu.CategoryMenu;
 import goit5.nikfisher.kickstarter.model.*;
-import goit5.nikfisher.kickstarter.streams.InputOutputConsole;
-import goit5.nikfisher.kickstarter.streams.InputOutputConsoleInterface;
+import goit5.nikfisher.kickstarter.streams.ConsoleInterfaceIO;
 
 public class View{
 
-    private InputOutputConsoleInterface io;
+    private ConsoleInterfaceIO io;
     private Projects projects;
     private InMemoryCategories categories;
 
-    public View(InputOutputConsoleInterface io, Projects projects, Categories categories) {
+    public View(ConsoleInterfaceIO io, Projects projects, Categories categories) {
         this.io = io;
         this.categories = (InMemoryCategories) categories;
         this.projects = projects;
@@ -43,6 +46,7 @@ public class View{
         project5.setCategory(category2);
         project6.setCategory(category3);
 
+//        Projects projects = new InFileProjects("projects.txt");
         Projects projects = new InMemoryProjects();
         projects.add(project1);
         projects.add(project2);

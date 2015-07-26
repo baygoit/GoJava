@@ -1,4 +1,7 @@
-package goit5.nikfisher.kickstarter.model;
+package goit5.nikfisher.kickstarter.dao;
+
+import goit5.nikfisher.kickstarter.dao.Categories;
+import goit5.nikfisher.kickstarter.model.Category;
 
 import java.util.HashMap;
 import java.util.Map;

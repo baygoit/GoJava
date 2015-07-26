@@ -1,13 +1,13 @@
 package goit5.nikfisher.kickstarter.menu;
 
 import goit5.nikfisher.kickstarter.model.Project;
-import goit5.nikfisher.kickstarter.streams.InputOutputConsoleInterface;
+import goit5.nikfisher.kickstarter.streams.ConsoleInterfaceIO;
 
 public class ProjectMenu {
 
-    private static InputOutputConsoleInterface io;
+    private static ConsoleInterfaceIO io;
 
-    public ProjectMenu(InputOutputConsoleInterface io) {
+    public ProjectMenu(ConsoleInterfaceIO io) {
         ProjectMenu.io = io;
     }
 

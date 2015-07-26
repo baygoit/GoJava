@@ -1,7 +1,9 @@
-package goit5.nikfisher.kickstarter.model;
+package goit5.nikfisher.kickstarter.dao;
+
+import goit5.nikfisher.kickstarter.dao.Categories;
+import goit5.nikfisher.kickstarter.model.Category;
 
 import java.io.*;
-import java.util.LinkedList;
 import java.util.List;
 
 public class InFileCategories implements Categories {
@@ -35,31 +37,31 @@ public class InFileCategories implements Categories {
     @Override
     public String[] getCategories() {
 
-        BufferedReader in = null;
-
-        try {
-            in = new BufferedReader(new FileReader(file));
-
-            List<String> result = new LinkedList<>();
-            String line = in.readLine();
-            int index = 1;
-            while (line != null){
-                result.add(index + ") " + line);
-                line = in.readLine();
-                index++;
-            }
-            return result.toArray(new String[result.size()]);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                assert in != null;
-                in.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+//        BufferedReader in = null;
+//
+//        try {
+//            in = new BufferedReader(new FileReader(file));
+//
+//            List<String> result = new LinkedList<>();
+//            String line = in.readLine();
+//            int index = 1;
+//            while (line != null){
+//                result.add(index + ") " + line);
+//                line = in.readLine();
+//                index++;
+//            }
+//            return result.toArray(new String[result.size()]);
+//
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        } finally {
+//            try {
+//                assert in != null;
+//                in.close();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        }
         return new String[0];
     }
 

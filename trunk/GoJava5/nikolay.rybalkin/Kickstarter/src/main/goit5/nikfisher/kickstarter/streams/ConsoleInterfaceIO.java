@@ -1,6 +1,6 @@
 package goit5.nikfisher.kickstarter.streams;
 
-public interface InputOutputConsoleInterface {
+public interface ConsoleInterfaceIO {
 
     String consoleScanString();
 

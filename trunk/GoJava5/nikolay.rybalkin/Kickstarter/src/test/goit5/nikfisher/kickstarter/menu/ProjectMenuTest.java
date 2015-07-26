@@ -1,7 +1,11 @@
 package goit5.nikfisher.kickstarter.menu;
 
+import goit5.nikfisher.kickstarter.dao.Categories;
+import goit5.nikfisher.kickstarter.dao.InFileCategories;
+import goit5.nikfisher.kickstarter.dao.InMemoryProjects;
+import goit5.nikfisher.kickstarter.dao.Projects;
 import goit5.nikfisher.kickstarter.model.*;
-import goit5.nikfisher.kickstarter.streams.InputOutputConsoleInterface;
+import goit5.nikfisher.kickstarter.streams.ConsoleInterfaceIO;
 import org.junit.After;
 import org.junit.Test;
 
@@ -34,7 +38,7 @@ public class ProjectMenuTest {
         project1.setCategory(category);
         project1.setVideo("Link Video");
 
-        InputOutputConsoleInterface io = mock(InputOutputConsoleInterface.class);
+        ConsoleInterfaceIO io = mock(ConsoleInterfaceIO.class);
         QuoteGenerate generator = mock(QuoteGenerate.class);
 
 //        Main main = new Main(categories, projects, io, generator);

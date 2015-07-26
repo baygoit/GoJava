@@ -1,5 +1,8 @@
 package goit5.nikfisher.kickstarter.model;
 
+import goit5.nikfisher.kickstarter.dao.Categories;
+import goit5.nikfisher.kickstarter.dao.Projects;
+
 public class Model {
 
     private Category category;

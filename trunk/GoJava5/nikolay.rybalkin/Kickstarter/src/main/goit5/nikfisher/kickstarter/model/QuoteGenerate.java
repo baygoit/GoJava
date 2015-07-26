@@ -11,8 +11,6 @@ public class QuoteGenerate {
 		this.random = random;
 	}
 
-
-
 	public String quoteGenerate(){
 
 		String[] motivators = new String[]{
@@ -20,8 +18,11 @@ public class QuoteGenerate {
 				"Get involved in the development of interesting projects!_1",
 				"Get involved in the development of interesting projects!_2"
 		};
-		int index = random.nextInt(motivators.length);
 
-		return motivators[index];
+		return motivators[getIndex(motivators)];
+	}
+
+	private int getIndex(String[] motivators) {
+		return random.nextInt(motivators.length);
 	}
 }

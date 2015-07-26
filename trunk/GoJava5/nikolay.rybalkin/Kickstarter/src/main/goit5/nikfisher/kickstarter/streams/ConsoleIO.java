@@ -3,7 +3,7 @@ package goit5.nikfisher.kickstarter.streams;
 
 import java.util.Scanner;
 
-public class InputOutputConsole implements InputOutputConsoleInterface{
+public class ConsoleIO implements ConsoleInterfaceIO {
 
     private Scanner scaner = new Scanner(System.in);
 

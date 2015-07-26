@@ -1,20 +1,19 @@
 package goit5.nikfisher.kickstarter.menu;
 
-import goit5.nikfisher.kickstarter.Main;
+import goit5.nikfisher.kickstarter.dao.Categories;
+import goit5.nikfisher.kickstarter.dao.InMemoryCategories;
+import goit5.nikfisher.kickstarter.dao.InMemoryProjects;
+import goit5.nikfisher.kickstarter.dao.Projects;
 import goit5.nikfisher.kickstarter.model.*;
-import goit5.nikfisher.kickstarter.streams.InputOutputConsole;
-import goit5.nikfisher.kickstarter.streams.InputOutputConsoleInterface;
+import goit5.nikfisher.kickstarter.streams.ConsoleInterfaceIO;
 import goit5.nikfisher.kickstarter.view.View;
 import org.junit.After;
 import org.junit.Test;
+import org.mockito.Mock;
 
 import java.io.File;
-import java.util.Random;
 
 import static org.mockito.Mockito.*;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-
 public class CategoryMenuTest {
 
     @After
@@ -22,24 +21,28 @@ public class CategoryMenuTest {
         new File("category_test.txt").delete();
     }
 
+    @Mock
+    Categories categories = new InMemoryCategories();
+
     @Test
     public void shouldCategoriesWenHaveCategories() throws Exception {
         //given
-        Categories categories = new InMemoryCategories();
+
         categories.add(new Category("Game"));
 
         Projects projects = new InMemoryProjects();
 
-        InputOutputConsoleInterface io = mock(InputOutputConsoleInterface.class);
+        ConsoleInterfaceIO io = mock(ConsoleInterfaceIO.class);
         View view = new View(io, projects, categories);
-
         //when
+
+        when(io.consoleScanInt()).thenReturn(1, 0);
         view.createCategories();
-        when(io.consoleScanInt()).thenReturn(0, 0);
 
         //then
-//        verify(io, times(1)).println("Select category (or 0 to exit): ");
-//        verify(io, times(1)).println("[1) Game]");
+        verify(io, times(1)).println("Select category (or 0 to exit): ");
+        verify(io, times(1)).println(" ");
+        verify(io, times(1)).println("[1) Game]");
     }
 
 

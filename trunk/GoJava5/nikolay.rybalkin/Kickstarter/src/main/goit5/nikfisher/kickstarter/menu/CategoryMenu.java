@@ -1,20 +1,23 @@
 package goit5.nikfisher.kickstarter.menu;
 
 
+import goit5.nikfisher.kickstarter.dao.Categories;
+import goit5.nikfisher.kickstarter.dao.InMemoryCategories;
+import goit5.nikfisher.kickstarter.dao.Projects;
 import goit5.nikfisher.kickstarter.model.*;
-import goit5.nikfisher.kickstarter.streams.InputOutputConsole;
-import goit5.nikfisher.kickstarter.streams.InputOutputConsoleInterface;
+import goit5.nikfisher.kickstarter.streams.ConsoleIO;
+import goit5.nikfisher.kickstarter.streams.ConsoleInterfaceIO;
 
 import java.util.Arrays;
 
 public class CategoryMenu {
 
     private String SPACE = " ";
-    private InputOutputConsoleInterface io;
+    private ConsoleInterfaceIO io;
     private Projects projects;
     private InMemoryCategories categories;
 
-    public CategoryMenu(InputOutputConsoleInterface io, Projects projects, Categories categories) {
+    public CategoryMenu(ConsoleInterfaceIO io, Projects projects, Categories categories) {
         this.io = io;
         this.categories = (InMemoryCategories) categories;
 		this.projects = projects;
@@ -39,7 +42,7 @@ public class CategoryMenu {
             Project[] foundProjects = projects.getProjects(category);
             printProjects(foundProjects);
 
-            ProjectsMenu projectsMenu = new ProjectsMenu(new InputOutputConsole());
+            ProjectsMenu projectsMenu = new ProjectsMenu(new ConsoleIO());
             projectsMenu.projectsMenu(foundProjects);
         }
     }
