@@ -42,31 +42,30 @@ public class LocationManagerTest  {
 
        locationManager.dispatch();
 
-//       verify(mainPageController,times(1)).start(new int[]{0, 0});
-//
+       verify(mainPageController,times(1)).start(new int[]{0, 0});
+
    }
-//    @Test
-//    public void whenDispatchToCategoryController(){
-//
-//        LocationManager locationManager = new LocationManager(mainPageController,categoryController,projectController);
-//
-//        locationManager.dispatch();
-//
-//        verify(mainPageController,times(1)).start(new int[]{2, 0});
-//        verify(categoryController,times(1)).start(new int[]{2, 0});
-//
-//    }
-//
-//    @Test
-//    public void whenDispatchToProjestController(){
-//
-//        LocationManager locationManager = new LocationManager(mainPageController,categoryController,projectController);
-//
-//        locationManager.dispatch();
-//
-//
-//        verify(projectController, times(1)).start(new int[]{3, 2});
-//
-//    }
+    @Test
+    public void whenDispatchToCategoryController(){
+
+        LocationManager locationManager = new LocationManager(mainPageController,categoryController,projectController);
+               locationManager.setPath(new int[]{2, 0});
+        locationManager.dispatch();
+
+      //  verify(mainPageController,times(1)).start(new int[]{2, 0});
+        verify(categoryController,times(1)).start(new int[]{2, 0});
+
+    }
+
+    @Test
+    public void whenDispatchToProjestController(){
+
+        LocationManager locationManager = new LocationManager(mainPageController,categoryController,projectController);
+        locationManager.setPath(new int[]{3, 1});
+        locationManager.dispatch();
+
+        verify(projectController, times(1)).start(new int[]{3, 1});
+
+    }
 
 }

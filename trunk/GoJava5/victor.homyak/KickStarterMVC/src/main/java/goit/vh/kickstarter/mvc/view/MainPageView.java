@@ -1,5 +1,6 @@
 package goit.vh.kickstarter.mvc.view;
 
+import goit.vh.kickstarter.Input;
 import goit.vh.kickstarter.Output;
 import goit.vh.kickstarter.QuoteGenerator;
 import goit.vh.kickstarter.mvc.model.MainPageModel;
@@ -15,6 +16,10 @@ import java.util.Map;
  */
 public class MainPageView {
 
+
+
+
+    private String input;
     private Output output;
 
     public MainPageView(Output output) {
@@ -31,6 +36,15 @@ public class MainPageView {
             output.println(value.get(0).getParentId() + " " + value.get(0).getParentName());
         }
 
+        setInput(new Input().getInput());
 
+    }
+
+    public void setInput(String input) {
+        this.input = input;
+    }
+
+    public String getInput() {
+        return input;
     }
 }

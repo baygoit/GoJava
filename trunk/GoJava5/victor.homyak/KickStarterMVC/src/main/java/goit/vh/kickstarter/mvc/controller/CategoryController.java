@@ -21,7 +21,6 @@ public class CategoryController {
     private CategoryModel model;
     private Input input;
     private Output output = new Output();
-
     public CategoryController(CategoryView view,
                               ProjectView projectView,
                               CategoryModel model,

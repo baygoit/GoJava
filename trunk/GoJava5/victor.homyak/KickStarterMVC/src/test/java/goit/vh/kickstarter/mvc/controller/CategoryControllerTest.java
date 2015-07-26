@@ -22,7 +22,7 @@ public class CategoryControllerTest  {
     @Mock
     private ProjectModel projectModel;
 
-
+    @Mock
     private LocationManager locationManager;
 
     @Mock
@@ -44,7 +44,7 @@ public class CategoryControllerTest  {
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        categoryController = mock(CategoryController.class);
+      //  categoryController = mock(CategoryController.class);
     }
 
 
@@ -52,11 +52,14 @@ public class CategoryControllerTest  {
     public void whenDispatchToMain() throws Exception {
         int[] path = new int[]{0, 0};
 
-        //CategoryController categoryController = new CategoryController(view, projectView, model, projectModel);
-             categoryController.start(path);
+        CategoryController categoryController = new CategoryController(view, projectView, model, projectModel);
+        categoryController.setLocationManager(locationManager);
+        locationManager.setPath(path);
+
+        categoryController.start(path);
 
         verify(model).refreshModel(path[0]);
-        locationManager.setPath(path);
+
         verify(locationManager).dispatch();
 
     }
