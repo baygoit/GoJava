@@ -19,23 +19,21 @@ public class BonusMenu {
         io.println("2) If you invest 50% of the required amount, you will receive a 15%.");
         io.println("3) If you invest 100% of the required amount, you will receive a 30%.");
 
-
-
         int value = io.consoleScanInt();
         int required_amount = project.getAmount();
         int needAmount;
 
         switch (value){
             case 1: {
-                needAmount =  (required_amount / 100) * 5;
+                needAmount =  (required_amount / 100) * 10;
                 break;
             }
             case 2: {
-                needAmount =  (required_amount / 100) * 15;
+                needAmount =  (required_amount / 100) * 50;
                 break;
             }
             case 3: {
-                needAmount =  (required_amount / 100) * 30;
+                needAmount =  required_amount;
                 break;
             }
             default:
