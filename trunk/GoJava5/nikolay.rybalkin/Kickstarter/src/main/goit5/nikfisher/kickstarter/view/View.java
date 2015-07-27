@@ -2,7 +2,9 @@ package goit5.nikfisher.kickstarter.view;
 
 import goit5.nikfisher.kickstarter.dao.Categories;
 import goit5.nikfisher.kickstarter.dao.InMemoryCategories;
+import goit5.nikfisher.kickstarter.dao.InFileCategories;
 import goit5.nikfisher.kickstarter.dao.InMemoryProjects;
+import goit5.nikfisher.kickstarter.dao.InFileProjects;
 import goit5.nikfisher.kickstarter.dao.Projects;
 import goit5.nikfisher.kickstarter.menu.CategoryMenu;
 import goit5.nikfisher.kickstarter.model.*;
@@ -26,8 +28,8 @@ public class View{
         Category category2 = new Category("Design");
         Category category3 = new Category("Technology");
 
-		categories = new InMemoryCategories();
-//        Categories categories = new InFileCategories("categories.txt");
+//		categories = new InMemoryCategories();
+        categories = new InFileCategories("categories.txt");
         categories.add(category1);
         categories.add(category2);
         categories.add(category3);
@@ -46,7 +48,7 @@ public class View{
         project5.setCategory(category2);
         project6.setCategory(category3);
 
-//        Projects projects = new InFileProjects("projects.txt");
+//        projects = new InFileProjects("projects.txt");
         projects = new InMemoryProjects();
         projects.add(project1);
         projects.add(project2);

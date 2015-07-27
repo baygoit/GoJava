@@ -1,6 +1,6 @@
 package goit5.nikfisher.kickstarter.menu;
 
-import goit5.nikfisher.kickstarter.dao.Categories;
+import goit5.nikfisher.kickstarter.Main;
 import goit5.nikfisher.kickstarter.dao.InMemoryCategories;
 import goit5.nikfisher.kickstarter.dao.InMemoryProjects;
 import goit5.nikfisher.kickstarter.dao.Projects;
@@ -16,34 +16,61 @@ import java.io.File;
 import static org.mockito.Mockito.*;
 public class CategoryMenuTest {
 
-    @After
-    public void cleanup(){
-        new File("category_test.txt").delete();
-    }
+//    @After
+//    public void cleanup(){
+//        new File("category_test.txt").delete();
+//    }
 
     @Mock
-    Categories categories = new InMemoryCategories();
+    InMemoryCategories categories = new InMemoryCategories();
 
     @Test
-    public void shouldCategoriesWenHaveCategories() throws Exception {
+     public void shouldCategoriesWenHaveCategories() throws Exception {
         //given
 
         categories.add(new Category("Game"));
 
         Projects projects = new InMemoryProjects();
-
         ConsoleInterfaceIO io = mock(ConsoleInterfaceIO.class);
+        QuoteGenerate generator = mock(QuoteGenerate.class);
+
+        Main main = new Main(io, generator);
         View view = new View(io, projects, categories);
+        CategoryMenu categoryMenu = new CategoryMenu(io, projects, categories);
+
         //when
 
-        when(io.consoleScanInt()).thenReturn(1, 0);
+        when(io.consoleScanInt()).thenReturn(0);
+        categoryMenu.categoryMenu();
         view.createCategories();
+        main.run();
+
 
         //then
-        verify(io, times(1)).println("Select category (or 0 to exit): ");
-        verify(io, times(1)).println(" ");
         verify(io, times(1)).println("[1) Game]");
     }
 
+    @Test
+    public void shouldCategoriesWenNoCategories() throws Exception {
+        //given
+        Projects projects = new InMemoryProjects();
+        ConsoleInterfaceIO io = mock(ConsoleInterfaceIO.class);
+        QuoteGenerate generator = mock(QuoteGenerate.class);
+
+        Main main = new Main(io, generator);
+        View view = new View(io, projects, categories);
+        CategoryMenu categoryMenu = new CategoryMenu(io, projects, categories);
+
+        //when
+
+        when(io.consoleScanInt()).thenReturn(0);
+        categoryMenu.categoryMenu();
+        view.createCategories();
+        main.run();
+
+
+        //then
+        verify(io, times(1)).println("[]");
+    }
 
 }

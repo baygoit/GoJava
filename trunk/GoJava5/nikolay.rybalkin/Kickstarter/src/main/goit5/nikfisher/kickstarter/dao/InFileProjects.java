@@ -4,8 +4,7 @@ import goit5.nikfisher.kickstarter.model.Category;
 import goit5.nikfisher.kickstarter.model.Project;
 
 import java.io.*;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class InFileProjects  implements Projects {
 
@@ -38,14 +37,25 @@ public class InFileProjects  implements Projects {
     public List<Project> getProjects(Category category) {
 
         BufferedReader in = null;
-        int index = 0;
+
 
         try {
-            in = new BufferedReader(new FileReader(file));
+//            in = new BufferedReader(new FileReader(file));
+//
+            List<Project> result = new ArrayList<>();
+            String line = in.readLine();
+//            int index = 1;
+//
+//            while (line != null){
+//                Project project = line;
+//
+//                if (project.getCategory().equals(category)){
+//                    result.add(found, project);
+//                    found++;
+//                }
+//            }
 
-
-
-
+            return result;
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -57,7 +67,7 @@ public class InFileProjects  implements Projects {
                 e.printStackTrace();
             }
         }
-//        return new Project[0];
+
         return null;
     }
 

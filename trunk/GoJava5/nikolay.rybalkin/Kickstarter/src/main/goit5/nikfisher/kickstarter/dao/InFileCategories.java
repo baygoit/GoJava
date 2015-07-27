@@ -38,31 +38,31 @@ public class InFileCategories implements Categories {
     @Override
     public List<String> getCategories() {
 
-//        BufferedReader in = null;
-//
-//        try {
-//            in = new BufferedReader(new FileReader(file));
-//
-//            List<String> result = new LinkedList<>();
-//            String line = in.readLine();
-//            int index = 1;
-//            while (line != null){
-//                result.add(index + ") " + line);
-//                line = in.readLine();
-//                index++;
-//            }
-//            return result;
-//
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        } finally {
-//            try {
-//                assert in != null;
-//                in.close();
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        }
+        BufferedReader in = null;
+
+        try {
+            in = new BufferedReader(new FileReader(file));
+
+            List<String> result = new LinkedList<>();
+            String line = in.readLine();
+            int index = 1;
+            while (line != null){
+                result.add(index + ") " + line);
+                line = in.readLine();
+                index++;
+            }
+            return result;
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                assert in != null;
+                in.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
         return null;
     }
 
