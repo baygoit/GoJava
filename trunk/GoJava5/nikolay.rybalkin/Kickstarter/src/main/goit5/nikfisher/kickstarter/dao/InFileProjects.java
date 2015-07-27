@@ -35,7 +35,7 @@ public class InFileProjects  implements Projects {
     }
 
     @Override
-    public Project[] getProjects(Category category) {
+    public List<Project> getProjects(Category category) {
 
         BufferedReader in = null;
         int index = 0;
@@ -80,7 +80,8 @@ public class InFileProjects  implements Projects {
                 e.printStackTrace();
             }
         }
-        return new Project[0];
+//        return new Project[0];
+        return null;
     }
 
     @Override

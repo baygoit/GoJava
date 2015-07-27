@@ -8,7 +8,7 @@ import goit5.nikfisher.kickstarter.model.*;
 import goit5.nikfisher.kickstarter.streams.ConsoleIO;
 import goit5.nikfisher.kickstarter.streams.ConsoleInterfaceIO;
 
-import java.util.Arrays;
+import java.util.List;
 
 public class CategoryMenu {
 
@@ -39,7 +39,7 @@ public class CategoryMenu {
                 continue;
             }
 
-            Project[] foundProjects = projects.getProjects(category);
+            List<Project> foundProjects = projects.getProjects(category);
             printProjects(foundProjects);
 
             ProjectsMenu projectsMenu = new ProjectsMenu(new ConsoleIO());
@@ -66,10 +66,10 @@ public class CategoryMenu {
         io.println(String.valueOf(categories.getCategories()));
     }
 
-    private void printProjects(Project[] foundProjects) {
+    private void printProjects(List<Project> foundProjects) {
 
-        for (int i = 0; i < foundProjects.length; i++) {
-            Project project = foundProjects[i];
+        for (int i = 0; i < foundProjects.size(); i++) {
+            Project project = foundProjects.get(i);
             io.print((i + 1) + ") ");
             printProject(project);
         }

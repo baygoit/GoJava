@@ -3,7 +3,9 @@ package goit5.nikfisher.kickstarter.dao;
 import goit5.nikfisher.kickstarter.model.Category;
 import goit5.nikfisher.kickstarter.model.Project;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class InMemoryProjects implements Projects {
@@ -18,23 +20,21 @@ public class InMemoryProjects implements Projects {
 	}
 
 	@Override
-	public Project[] getProjects(Category category){
+	public List<Project> getProjects(Category category){
 
-		Project[] result = new Project[projects.size()];
+		List<Project> result = new ArrayList<>();
 		int found = 0;
 
 		for (int i = 0; i < index; i++) {
 			Project project = projects.get(i);
 
 			if (project.getCategory().equals(category)){
-				result[found] = project;
+				result.add(found, project);
 				found++;
 			}
 		}
 
-		Project[] result2 = new Project[found];
-		System.arraycopy(result, 0, result2, 0, found);
-		return result2;
+		return result;
 	}
 
 	@Override

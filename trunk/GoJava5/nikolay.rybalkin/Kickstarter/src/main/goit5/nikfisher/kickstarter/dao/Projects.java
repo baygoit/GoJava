@@ -10,7 +10,7 @@ public interface Projects {
 
     void add(Project project);
 
-    Project[] getProjects(Category category);
+    List<Project> getProjects(Category category);
 
     Project get(int index);
 }

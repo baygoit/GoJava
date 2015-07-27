@@ -4,6 +4,8 @@ import goit5.nikfisher.kickstarter.model.Project;
 import goit5.nikfisher.kickstarter.streams.ConsoleIO;
 import goit5.nikfisher.kickstarter.streams.ConsoleInterfaceIO;
 
+import java.util.List;
+
 public class ProjectsMenu {
 
 	private ConsoleInterfaceIO io;
@@ -12,7 +14,7 @@ public class ProjectsMenu {
         this.io = io;
     }
 
-	public void projectsMenu(Project[] foundProjects) {
+	public void projectsMenu(List<Project> foundProjects) {
 
 		while (true) {
 
@@ -24,11 +26,11 @@ public class ProjectsMenu {
                 break;
             }
 
-            if (menuIndex <= 0 || foundProjects.length <  menuIndex){
+            if (menuIndex <= 0 || foundProjects.size() <  menuIndex){
 				io.println("Not true index: " + menuIndex);
                 continue;
             }
-            Project project = foundProjects[menuIndex - 1];
+            Project project = foundProjects.get(menuIndex - 1);
 
             chooseProject(project);
             printProjectDetail(project);
@@ -38,13 +40,13 @@ public class ProjectsMenu {
 		}
 	}
 
-    private void ascProjects(Project[] foundProjects) {
+    private void ascProjects(List<Project> foundProjects) {
 
-		if (foundProjects.length == 0 ){
+		if (foundProjects.size() == 0 ){
 			io.println("Projects in this category do not have to exit, enter 0");
 		}else {
 			int from = 1;
-			int to = foundProjects.length;
+			int to = foundProjects.size();
 			io.println("Select project: [" + from + "..." +  to  + " or 0 for exit to the projects list");
 		}
 	}

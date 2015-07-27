@@ -18,28 +18,28 @@ public abstract class ProjectsTest {
 
     abstract Projects getProjects();
 
-    @Test
-    public void  shouldProjectsWenNoProjectsWithNoSameCategory() throws Exception {
-        //given
-
-        Category category1 = new Category("Game");
-        Category category2 = new Category("Design");
-
-        Project project1 = new Project("name1 \"Popcorn\"", 10000, 0, 10, "Interesting game");
-        Project project2 = new Project("name2 \"Popcorn\"", 10000, 0, 10, "Interesting game");
-
-        project1.setCategory(category1);
-        project2.setCategory(category1);
-
-        projects.add(project1);
-        projects.add(project2);
-
-        //when
-        Project[] found = projects.getProjects(category2);
-
-        //then
-        assertEquals(0, found.length);
-    }
+//    @Test
+//    public void  shouldProjectsWenNoProjectsWithNoSameCategory() throws Exception {
+//        //given
+//
+//        Category category1 = new Category("Game");
+//        Category category2 = new Category("Design");
+//
+//        Project project1 = new Project("name1 \"Popcorn\"", 10000, 0, 10, "Interesting game");
+//        Project project2 = new Project("name2 \"Popcorn\"", 10000, 0, 10, "Interesting game");
+//
+//        project1.setCategory(category1);
+//        project2.setCategory(category1);
+//
+//        projects.add(project1);
+//        projects.add(project2);
+//
+//        //when
+//        Project[] found = projects.getProjects(category2);
+//
+//        //then
+//        assertEquals(0, found.length);
+//    }
 //
 //    @Test
 //    public void  shouldProjectsWenNoProjectsWithSameCategory() throws Exception {
@@ -68,16 +68,16 @@ public abstract class ProjectsTest {
 //        assertSame(project3, found[1]);
 //    }
 
-    @Test
-    public void  shouldProjectsWenNoProjects() throws Exception {
-        //given
-
-        //when
-        Project[] found = projects.getProjects(new Category("Game"));
-
-        //then
-        assertEquals(0, found.length);
-    }
+//    @Test
+//    public void  shouldProjectsWenNoProjects() throws Exception {
+//        //given
+//
+//        //when
+//        Project[] found = projects.getProjects(new Category("Game"));
+//
+//        //then
+//        assertEquals(0, found.length);
+//    }
 
     @Test
     public void shouldProjectsIndex() throws Exception {
