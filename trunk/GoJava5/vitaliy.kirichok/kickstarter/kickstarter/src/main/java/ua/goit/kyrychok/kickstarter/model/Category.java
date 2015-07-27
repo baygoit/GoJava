@@ -17,6 +17,10 @@ public class Category {
         return id;
     }
 
+    public void setProjects(List<Project> projects) {
+        this.projects = projects;
+    }
+
     public String getName() {
         return name;
     }

@@ -9,7 +9,7 @@ public class DataProviderTest {
 
     @Test
     public void whenGetMsgThenReturnNotEmpty() throws Exception {
-        DataProvider dataProvider = MemoryDataProvider.getInstance();
+        DataProvider dataProvider = MemoryDataProvider.getNewInstance();
 
         String result = dataProvider.getWelcomeMessage();
 

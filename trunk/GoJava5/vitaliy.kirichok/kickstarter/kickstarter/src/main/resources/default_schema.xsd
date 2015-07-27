@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--Default schema -->
+<xs:schema version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <xs:element name="data" type="data"/>
+
+    <xs:complexType name="data">
+        <xs:sequence>
+            <xs:element name="welcome_message" type="xs:string"/>
+            <xs:element name="categories" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="category" type="category" minOccurs="0" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="category">
+        <xs:sequence>
+            <xs:element name="name" type="xs:string"/>
+            <xs:element name="projects" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="project" type="project" minOccurs="0" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+        <xs:attribute name="id" type="xs:string" use="required"/>
+    </xs:complexType>
+
+    <xs:complexType name="project">
+        <xs:sequence>
+            <xs:element name="name" type="xs:string"/>
+            <xs:element name="description" type="xs:string" minOccurs="0"/>
+            <xs:element name="goal" type="xs:int"/>
+            <xs:element name="balance" type="xs:int"/>
+            <xs:element name="create_date" type="xs:dateTime"/>
+            <xs:element name="deadline_date" type="xs:dateTime"/>
+            <xs:element name="demo_link" type="xs:string" minOccurs="0"/>
+            <xs:element name="faqs" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="faq" type="faq" minOccurs="0" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="events" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="event" type="event" minOccurs="0" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="rewards" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="reward" type="reward" minOccurs="0" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+        <xs:attribute name="id" type="xs:string" use="required"/>
+    </xs:complexType>
+
+    <xs:complexType name="faq">
+        <xs:sequence>
+            <xs:element name="question" type="xs:string"/>
+            <xs:element name="answer" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+        <xs:attribute name="id" type="xs:string" use="required"/>
+    </xs:complexType>
+
+    <xs:complexType name="event">
+        <xs:sequence>
+            <xs:element name="event_date" type="xs:dateTime"/>
+            <xs:element name="message" type="xs:string"/>
+        </xs:sequence>
+        <xs:attribute name="id" type="xs:string" use="required"/>
+    </xs:complexType>
+
+    <xs:complexType name="reward">
+        <xs:sequence>
+            <xs:element name="amount" type="xs:int"/>
+            <xs:element name="description" type="xs:string"/>
+        </xs:sequence>
+        <xs:attribute name="id" type="xs:string" use="required"/>
+    </xs:complexType>
+</xs:schema>
+

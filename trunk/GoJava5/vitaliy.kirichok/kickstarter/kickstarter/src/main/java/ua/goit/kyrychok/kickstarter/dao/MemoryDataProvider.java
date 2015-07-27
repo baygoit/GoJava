@@ -21,7 +21,7 @@ public class MemoryDataProvider implements DataProvider {
     private AtomicInteger projectEventSequence = new AtomicInteger(10);
     private AtomicInteger rewardSequence = new AtomicInteger(10);
 
-    public static MemoryDataProvider getInstance() {
+    public static MemoryDataProvider getNewInstance() {
         MemoryDataProvider memoryDataProvider = new MemoryDataProvider();
         memoryDataProvider.init();
         return memoryDataProvider;
@@ -138,13 +138,13 @@ public class MemoryDataProvider implements DataProvider {
         project1.addReward(getNewReward(4000, "Some reward for donate 40$"));
         category1.addProject(project1);
         Project project2 = getNewProject("2nd project in 1st category", 1000, addDays(new Date(), 4),
-                "desc2", 350, "");
+                "desc2", 350, null);
         category1.addProject(project2);
         categories.add(category1);
 
         Category category2 = getNewCategory("Category 2");
         Project project3 = getNewProject("1st project in 2st category", 1000000, addMinutes(new Date(), 10),
-                "desc21", 600000, "");
+                "desc21", 600000, null);
         category2.addProject(project3);
         categories.add(category2);
 

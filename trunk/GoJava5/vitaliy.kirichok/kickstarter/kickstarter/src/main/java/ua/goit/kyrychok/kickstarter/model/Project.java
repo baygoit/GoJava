@@ -35,6 +35,10 @@ public class Project {
         rewards = new ArrayList<>();
     }
 
+    public Date getCreateDate() {
+        return createDate;
+    }
+
     public int getId() {
         return id;
     }
@@ -81,6 +85,18 @@ public class Project {
 
     public List<Faq> getFaqs() {
         return faqs;
+    }
+
+    public void setFaqs(List<Faq> faqs) {
+        this.faqs = faqs;
+    }
+
+    public void setProjectEvents(List<ProjectEvent> projectEvents) {
+        this.projectEvents = projectEvents;
+    }
+
+    public void setRewards(List<Reward> rewards) {
+        this.rewards = rewards;
     }
 
     public List<ProjectEvent> getProjectEvents() {
