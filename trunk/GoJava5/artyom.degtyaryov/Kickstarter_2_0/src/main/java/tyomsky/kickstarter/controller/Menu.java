@@ -4,6 +4,7 @@ import tyomsky.kickstarter.ui.IO;
 
 public abstract class Menu<T> {
 
+    protected Menu childMenu;
     protected IO io;
 
     public Menu(IO io) {
@@ -33,5 +34,9 @@ public abstract class Menu<T> {
     public abstract T select(int chosenMenuIndex);
 
     public abstract void ask();
+
+    public void setChildMenu(Menu childMenu) {
+        this.childMenu = childMenu;
+    }
 
 }

@@ -1,76 +1,66 @@
 package tyomsky.kickstarter.controller;
 
 import tyomsky.kickstarter.dao.CategoriesDAO;
-import tyomsky.kickstarter.dao.Projects;
 import tyomsky.kickstarter.model.Category;
-import tyomsky.kickstarter.model.Project;
 import tyomsky.kickstarter.ui.IO;
+import tyomsky.kickstarter.view.TextView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class CategoriesMenu extends Menu<Category> {
 
-    CategoriesDAO categories;
-    Projects projects;
+    CategoriesDAO categoriesDAO;
+    List<Category> model;
+    TextView view;
 
-    public CategoriesMenu(CategoriesDAO categories, Projects projects, IO io) {
+    public CategoriesMenu(CategoriesDAO categoriesDAO, IO io, TextView view) {
         super(io);
-        this.categories = categories;
-        this.projects = projects;
+        this.categoriesDAO = categoriesDAO;
+        model = categoriesDAO.getAll();
+        this.view = view;
     }
 
-    @Override
-    public Menu nextMenu(Category selected) {
-        List<Project> foundProjects = getProjetsByCategory(selected);
-        return new ProjectsMenu(foundProjects, io);
-    }
-
-    @Override
-    public Category select(int chosenMenuIndex) {
-        return chooseCategory(chosenMenuIndex);
-    }
 
     @Override
     public void ask() {
         askCategories();
     }
 
-    private Category chooseCategory(int chosenMenuIndex) {
-        if (categoryIndexIsInvalid(chosenMenuIndex)) {
-            io.println("You have chosen wrong menu index " + chosenMenuIndex);
+    @Override
+    public Menu nextMenu(Category selected) {
+        ProjectsMenu projectsMenu = (ProjectsMenu) childMenu;
+        projectsMenu.setParentCategory(selected);
+        return projectsMenu;
+    }
+
+    @Override
+    public Category select(int chosenMenuIndex) {
+        Category selected = selectCategoryByIndex(chosenMenuIndex);
+        view.showSelected(selected == null ? "wrong input" : selected.getName());
+        return selected;
+    }
+
+    private Category selectCategoryByIndex(int index) {
+        if (categoryIndexIsInvalid(index)) {
             return null;
         }
-        Category chosenCategory = categories.get(chosenMenuIndex - 1);
-        io.println("You have chosen: " + chosenCategory.getName());
-        io.println("------------------------------------------------------");
-        return chosenCategory;
+        return model.get(index - 1);
     }
 
     private void askCategories() {
         showCategories();
-        io.println("Select item (0 for exit)");
+        view.showInputPrompt();
     }
 
     private void showCategories() {
-        for (int i = 0; i < categories.size(); i++) {
+        for (int i = 0; i < model.size(); i++) {
             int menuIndex = i + 1;
-            io.println(menuIndex + ": " + categories.get(i).getName());
+            view.showMenuElement(model.get(i), String.valueOf(menuIndex));
         }
     }
 
     private boolean categoryIndexIsInvalid(int chosenMenuIndex) {
-        return chosenMenuIndex <= 0 || chosenMenuIndex > categories.size();
-    }
-
-    private List<Project> getProjetsByCategory(Category category) {
-        List<Project> result = new ArrayList<>();
-        for (int i = 0; i < projects.size(); i++) {
-            if (projects.get(i).getCategory().equals(category)) {
-                result.add(projects.get(i));
-            }
-        }
-        return result;
+        return chosenMenuIndex <= 0 || chosenMenuIndex > model.size();
     }
 
 }

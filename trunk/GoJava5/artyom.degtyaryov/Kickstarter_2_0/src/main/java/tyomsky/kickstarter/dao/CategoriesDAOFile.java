@@ -3,6 +3,8 @@ package tyomsky.kickstarter.dao;
 import tyomsky.kickstarter.model.Category;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CategoriesDAOFile implements CategoriesDAO {
 
@@ -41,6 +43,23 @@ public class CategoriesDAOFile implements CategoriesDAO {
                 }
                 line = fileReader.readLine();
                 counter++;
+            }
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException("Can't find file!");
+        } catch (IOException e) {
+            throw new RuntimeException("Something wrong with reading! Can't read from file");
+        }
+        return result;
+    }
+
+    @Override
+    public List<Category> getAll() {
+        List<Category> result = new ArrayList<>();
+        try (BufferedReader fileReader = new BufferedReader(new FileReader(file))) {
+            String line = fileReader.readLine();
+            while (line != null) {
+                result.add(new Category(line));
+                line = fileReader.readLine();
             }
         } catch (FileNotFoundException e) {
             throw new RuntimeException("Can't find file!");

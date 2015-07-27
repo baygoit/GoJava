@@ -2,12 +2,14 @@ package tyomsky.kickstarter.dao;
 
 import org.junit.Before;
 import org.junit.Test;
-import tyomsky.kickstarter.dao.CategoriesDAO;
 import tyomsky.kickstarter.model.Category;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
-public abstract class CategoriesTest {
+public abstract class CategoriesDAOTest {
 
     private CategoriesDAO categories;
 
@@ -46,9 +48,28 @@ public abstract class CategoriesTest {
         assertEquals(sizeAfter, categories.size());
     }
 
+    @Test
     public void WhenAdd_ShouldGetElement() throws Exception {
         Category category = new Category("name");
         categories.add(category);
         assertEquals(category, categories.get(0));
+    }
+
+    @Test
+    public void WhenGetAll_ShouldReturnAllElements() {
+        Category category1 = new Category("name1");
+        Category category2 = new Category("name2");
+        Category category3 = new Category("name3");
+
+        List<Category> expected = new ArrayList<>();
+        expected.add(category1);
+        expected.add(category2);
+        expected.add(category3);
+
+        categories.add(category1);
+        categories.add(category2);
+        categories.add(category3);
+
+        assertArrayEquals(expected.toArray(), categories.getAll().toArray());
     }
 }

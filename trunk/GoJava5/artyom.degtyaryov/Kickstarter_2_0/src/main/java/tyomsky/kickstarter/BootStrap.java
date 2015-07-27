@@ -1,21 +1,27 @@
 package tyomsky.kickstarter;
 
-import tyomsky.kickstarter.controller.Kickstarter;
+import tyomsky.kickstarter.controller.*;
 import tyomsky.kickstarter.dao.CategoriesDAO;
 import tyomsky.kickstarter.dao.CategoriesDAOFile;
-import tyomsky.kickstarter.dao.Projects;
+import tyomsky.kickstarter.dao.ProjectsDAOMemory;
+import tyomsky.kickstarter.dao.ProjectsDAO;
+import tyomsky.kickstarter.model.Category;
 import tyomsky.kickstarter.model.Project;
 import tyomsky.kickstarter.model.QuoteGenerator;
 import tyomsky.kickstarter.ui.ConsoleIO;
+import tyomsky.kickstarter.view.TextView;
 
 import java.util.Random;
 
 public class BootStrap {
 
     public static void main(String[] args) {
+
+        ConsoleIO io = new ConsoleIO();
+
         CategoriesDAO categories = new CategoriesDAOFile("categories.txt");
 
-        Projects projects = new Projects();
+        ProjectsDAO projects = new ProjectsDAOMemory();
         Project project1 = new Project("GTA 5", "5-th episode of epic game",
                 1_000_000, 365, "http://youtube.com/89a0cdb8", categories.get(0));
         project1.setHistory("we just starter and its nothing to say now! To be continue.");
@@ -33,7 +39,17 @@ public class BootStrap {
         project3.setMoneyCollected(100_000);
         projects.add(project3);
 
-        Kickstarter kickstarter = new Kickstarter(categories, projects, new ConsoleIO(), new QuoteGenerator(new Random()));
+        TextView textView = new TextView(io);
+
+        Menu<Category> categoriesMenu = new CategoriesMenu(categories, io, textView);
+        Menu<Project> projectsMenu = new ProjectsMenu(projects, io, textView);
+        Menu<Integer> projectMenu = new ProjectMenu(projects, io);
+        Menu<Integer> paymentMenu = new PaymentMenu(projects, io);
+        categoriesMenu.setChildMenu(projectsMenu);
+        projectsMenu.setChildMenu(projectMenu);
+        projectMenu.setChildMenu(paymentMenu);
+
+        Kickstarter kickstarter = new Kickstarter(categoriesMenu, io, new QuoteGenerator(new Random()));
         kickstarter.run();
     }
 }

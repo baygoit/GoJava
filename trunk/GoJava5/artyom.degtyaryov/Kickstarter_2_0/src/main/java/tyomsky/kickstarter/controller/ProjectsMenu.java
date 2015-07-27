@@ -1,64 +1,83 @@
 package tyomsky.kickstarter.controller;
 
+import tyomsky.kickstarter.dao.ProjectsDAO;
+import tyomsky.kickstarter.model.Category;
 import tyomsky.kickstarter.model.Project;
 import tyomsky.kickstarter.ui.IO;
+import tyomsky.kickstarter.view.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProjectsMenu extends Menu<Project> {
 
-    private List<Project> projects;
+    private ProjectsDAO projectsDAO;
+    List<Project> model;
+    TextView view;
 
-    public ProjectsMenu(List<Project> foundProjects, IO io) {
+    public ProjectsMenu(ProjectsDAO projectsDAO, IO io, TextView view) {
         super(io);
-        this.projects = foundProjects;
+        this.projectsDAO = projectsDAO;
+        this.model = new ArrayList<>();
+        this.view = view;
     }
 
     @Override
     public Menu nextMenu(Project selected) {
-        return new ProjectMenu(selected, io);
+        ProjectMenu projectMenu = (ProjectMenu) childMenu;
+        projectMenu.setProject(selected);
+        return projectMenu;
     }
 
     @Override
     public Project select(int chosenMenuIndex) {
-        return chooseProject(projects, chosenMenuIndex);
+        Project selected = selectProjectByIndex(chosenMenuIndex);
+        view.showSelected(selected == null? "wrong input": selected.getName());
+        return selected;
     }
 
     @Override
     public void ask() {
-        askProjects(projects);
+        askProjects();
     }
 
-    private Project chooseProject(List<Project> foundProjects, int chosenMenuIndex) {
-        if (projectIndexIsInvalid(chosenMenuIndex, foundProjects)) {
-            io.println("You have chosen wrong menu index " + chosenMenuIndex);
+    private Project selectProjectByIndex(int chosenMenuIndex) {
+        if (projectIndexIsInvalid(chosenMenuIndex)) {
             return null; // or nil
         }
-        Project project = foundProjects.get(chosenMenuIndex - 1);
-        io.println("You have chosen: " + project.getName());
-        return project;
+        return model.get(chosenMenuIndex - 1);
     }
 
-    private boolean projectIndexIsInvalid(int chosenMenuIndex, List<Project> projectsList) {
-        return chosenMenuIndex <= 0 || chosenMenuIndex > projectsList.size();
+    private boolean projectIndexIsInvalid(int chosenMenuIndex) {
+        return chosenMenuIndex <= 0 || chosenMenuIndex > model.size();
     }
 
-    private void askProjects(List<Project> foundProjects) {
-        showProjects(foundProjects);
-        io.println("Select item (0 for exit)");
-
+    private void askProjects() {
+        showProjects();
+        view.showInputPrompt();
     }
 
-    private void showProjects(List<Project> foundProjects) {
-        if (foundProjects.size() == 0) {
-            io.println("nothing to do here.");
-        }
-        for (int i = 0; i < foundProjects.size(); i++) {
+    private void showProjects() {
+        for (int i = 0; i < model.size(); i++) {
+            Project project = model.get(i);
             int menuIndex = i + 1;
-            Project project = foundProjects.get(i);
-            io.println(menuIndex + ": " + project.getShortPresentation());
-            io.println("------------------------------------------------------");
+            view.showMenuElement(project, String.valueOf(menuIndex));
         }
     }
 
+    private List<Project> getProjectsByCategory(Category category) {
+        List<Project> result = new ArrayList<>();
+        for (int i = 0; i < projectsDAO.size(); i++) {
+            if (projectsDAO.get(i).getCategory().equals(category)) {
+                result.add(projectsDAO.get(i));
+            }
+        }
+        return result;
+    }
+
+    public void setParentCategory(Category parentCategory) {
+        if (parentCategory != null) {
+            this.model = getProjectsByCategory(parentCategory);
+        }
+    }
 }

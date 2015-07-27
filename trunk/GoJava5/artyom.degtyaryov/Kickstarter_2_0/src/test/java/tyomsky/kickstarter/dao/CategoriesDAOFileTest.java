@@ -4,7 +4,7 @@ import org.junit.After;
 
 import java.io.File;
 
-public class CategoriesDAOFileTest extends CategoriesTest {
+public class CategoriesDAOFileTest extends CategoriesDAOTest {
 
     @After
     public void cleanUp() throws Exception {

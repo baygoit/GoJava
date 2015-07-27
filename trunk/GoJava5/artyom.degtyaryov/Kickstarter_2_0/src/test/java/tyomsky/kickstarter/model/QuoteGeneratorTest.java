@@ -1,7 +1,6 @@
 package tyomsky.kickstarter.model;
 
 import org.junit.Test;
-import tyomsky.kickstarter.model.QuoteGenerator;
 
 import java.util.Random;
 

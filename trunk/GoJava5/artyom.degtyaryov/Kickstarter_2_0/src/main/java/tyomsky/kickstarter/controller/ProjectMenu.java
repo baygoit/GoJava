@@ -1,22 +1,26 @@
 package tyomsky.kickstarter.controller;
 
+import tyomsky.kickstarter.dao.ProjectsDAO;
 import tyomsky.kickstarter.model.Project;
 import tyomsky.kickstarter.ui.IO;
 
 public class ProjectMenu extends Menu<Integer> {
 
-    private final Project project;
+    ProjectsDAO projectsDAO;
+    private Project project;
 
-    public ProjectMenu(Project project, IO io) {
+    public ProjectMenu(ProjectsDAO projectsDAO, IO io) {
         super(io);
-        this.project = project;
+        this.projectsDAO = projectsDAO;
     }
 
     @Override
     public Menu nextMenu(Integer selected) {
         int chosenMenuIndex = selected;
         if (chosenMenuIndex == 1){
-            return new PaymentMenu(project, io);
+            PaymentMenu paymentMenu = (PaymentMenu) childMenu;
+            paymentMenu.setProject(project);
+            return paymentMenu;
         }
         if (chosenMenuIndex == 2){
             io.println("Enter your question");
@@ -61,4 +65,7 @@ public class ProjectMenu extends Menu<Integer> {
         }
     }
 
+    public void setProject(Project project) {
+        this.project = project;
+    }
 }

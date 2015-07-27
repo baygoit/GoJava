@@ -1,15 +1,17 @@
 package tyomsky.kickstarter.controller;
 
+import tyomsky.kickstarter.dao.ProjectsDAO;
 import tyomsky.kickstarter.model.Project;
 import tyomsky.kickstarter.ui.IO;
 
 public class PaymentMenu extends Menu <Integer> {
 
-    Project project;
+    private ProjectsDAO projectsDAO;
+    private Project project;
 
-    public PaymentMenu(Project project, IO io) {
+    public PaymentMenu(ProjectsDAO projectsDAO, IO io) {
         super(io);
-        this.project = project;
+        this.projectsDAO = projectsDAO;
     }
 
     @Override
@@ -63,5 +65,10 @@ public class PaymentMenu extends Menu <Integer> {
         io.println("9 - Your sum");
         io.println("0 - Back");
     }
+
+    public void setProject(Project project) {
+        this.project = project;
+    }
+
 }
 
