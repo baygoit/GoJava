@@ -1,5 +1,7 @@
 package goit5.nikfisher.kickstarter.model;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 
@@ -13,16 +15,15 @@ public class QuoteGenerate {
 
 	public String quoteGenerate(){
 
-		String[] motivators = new String[]{
-				"Get involved in the development of interesting projects!",
-				"Get involved in the development of interesting projects!_1",
-				"Get involved in the development of interesting projects!_2"
-		};
+		List<String> motivators = new ArrayList<>();
 
-		return motivators[getIndex(motivators)];
+		motivators.add("Get involved in the development of interesting projects!");
+		motivators.add("Get involved in the development of interesting projects!_1");
+		motivators.add("Get involved in the development of interesting projects!_2");
+
+		int index = random.nextInt(motivators.size());
+
+		return motivators.get(index);
 	}
 
-	private int getIndex(String[] motivators) {
-		return random.nextInt(motivators.length);
-	}
 }
