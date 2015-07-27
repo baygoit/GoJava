@@ -71,6 +71,7 @@ public class ProjectModel {
         }
         return 1;
     }
+
     public String getShortDescription() {
         return shortDescription;
     }

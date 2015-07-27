@@ -73,21 +73,24 @@ public class ProjectModelTest  {
         projectModel.refreshModel(path);
     }
 
-//    @Test()
-//         public void whenRefreshModelListShouldReturn0() throws Exception {
-//        ProjectModel projectModel = new ProjectModel();
-//        Map<Integer,ArrayList<ProjectModel>> mapOfSize2 = new HashMap<>();
-//        mapOfSize2.put(1, new ArrayList());
-//        mapOfSize2.put(1, new ArrayList());
-//        //when(dataRegistry.getCategories()).thenReturn(mapOfSize2);
-//        // DataRegistry dataRegistry = new DataRegistry();
-//        projectModel.setDataRegistry(dataRegistry);
-//        Assert.assertEquals("Should be the same",);
-//        when(dataRegistry.getProjectList(50)).thenReturn()
-//        projectModel.refreshListModel(50);
-//        Assert.assertNull("Should return null", dataRegistry.getProjectList(50));
-//
-//    }
+    @Test()
+         public void whenRefreshModelListShouldReturn0() throws Exception {
+        ProjectModel projectModel = new ProjectModel();
+
+        ArrayList<ProjectModel> arrayList = new ArrayList<>();
+        Map<Integer,ArrayList<ProjectModel>> mapOfSize2 = new HashMap<>();
+        mapOfSize2.put(1, new ArrayList());
+        mapOfSize2.put(1, new ArrayList());
+        dataRegistry.registerCategories(mapOfSize2);
+        //when(dataRegistry.getCategories()).thenReturn(mapOfSize2);
+        // DataRegistry dataRegistry = new DataRegistry();
+       // projectModel.setDataRegistry(dataRegistry);
+        when(dataRegistry.getCategories()).thenReturn(mapOfSize2);
+        when(dataRegistry.getProjectList(50)).thenReturn(arrayList);
+
+        Assert.assertNull("Should return null", projectModel.refreshListModel(50));
+
+    }
 
     @Test()
     public void whenRefreshModelListShouldReturn1() throws Exception {
@@ -95,6 +98,7 @@ public class ProjectModelTest  {
         Map<Integer,ArrayList<ProjectModel>> mapOfSize2 = new HashMap<>();
         mapOfSize2.put(1, new ArrayList());
         mapOfSize2.put(1, new ArrayList());
+
         //when(dataRegistry.getCategories()).thenReturn(mapOfSize2);
         // DataRegistry dataRegistry = new DataRegistry();
         projectModel.setDataRegistry(dataRegistry);

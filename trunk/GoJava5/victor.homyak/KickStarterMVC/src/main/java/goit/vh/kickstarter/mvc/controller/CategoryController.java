@@ -44,7 +44,7 @@ public class CategoryController {
             }
 
             projectView.renderList(projectModel.getListOfProjectses());
-            projectView.readUserInput();
+           projectView.readUserInput();
             path[1] = Integer.parseInt(projectView.getInput());
             if (projectModel.refreshModel(path) == null) {
                 output.println("You choose not sutable variant, returning to previous menu\n");
