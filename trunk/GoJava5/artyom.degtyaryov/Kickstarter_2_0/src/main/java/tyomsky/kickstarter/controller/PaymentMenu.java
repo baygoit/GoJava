@@ -2,13 +2,12 @@ package tyomsky.kickstarter.controller;
 
 import tyomsky.kickstarter.dao.ProjectsDAO;
 import tyomsky.kickstarter.model.Project;
-import tyomsky.kickstarter.ui.IO;
 import tyomsky.kickstarter.ui.Input;
 import tyomsky.kickstarter.view.TextView;
 
 public class PaymentMenu extends Menu <Integer> {
 
-    private ProjectsDAO projectsDAO;
+    private ProjectsDAO projectsDAO; // for getting payment variants in future
     private Project project;
     private TextView view;
 
@@ -61,10 +60,10 @@ public class PaymentMenu extends Menu <Integer> {
     @Override
     public void ask() {
         //TODO to realise payment variants in project field
-        view.showMenuElement("1$", "1");
-        view.showMenuElement("5$", "2");
-        view.showMenuElement("20$", "3");
-        view.showMenuElement("Input sum", "9");
+        view.showMenuElementWithID("1$", "1");
+        view.showMenuElementWithID("5$", "2");
+        view.showMenuElementWithID("20$", "3");
+        view.showMenuElementWithID("Input sum", "9");
         view.showInputPrompt();
     }
 

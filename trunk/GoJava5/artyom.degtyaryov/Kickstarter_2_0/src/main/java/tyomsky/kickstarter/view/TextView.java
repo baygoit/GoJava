@@ -13,7 +13,7 @@ public class TextView {
         this.output = output;
     }
 
-    public void showMenuElement(Project project, String id) {
+    public void showMenuElementWithID(Project project, String id) {
         showDelimiter();
         String elementPresentation = String.format("%s: %s \n" +
                         "%s \n" +
@@ -27,12 +27,12 @@ public class TextView {
         output.println("------------------------------------------------------");
     }
 
-    public void showMenuElement(Category category, String id) {
+    public void showMenuElementWithID(Category category, String id) {
         String elementPresentation = String.format("%s: %s", id, category.getName());
         output.println(elementPresentation);
     }
 
-    public void showMenuElement(String elementPresentation, String id) {
+    public void showMenuElementWithID(String elementPresentation, String id) {
         output.println(String.format("%s: %s", id, elementPresentation));
     }
 

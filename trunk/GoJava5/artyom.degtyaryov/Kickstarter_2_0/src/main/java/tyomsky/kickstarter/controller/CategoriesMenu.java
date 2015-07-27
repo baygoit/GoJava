@@ -2,7 +2,6 @@ package tyomsky.kickstarter.controller;
 
 import tyomsky.kickstarter.dao.CategoriesDAO;
 import tyomsky.kickstarter.model.Category;
-import tyomsky.kickstarter.ui.IO;
 import tyomsky.kickstarter.ui.Input;
 import tyomsky.kickstarter.view.TextView;
 
@@ -56,7 +55,7 @@ public class CategoriesMenu extends Menu<Category> {
     private void showCategories() {
         for (int i = 0; i < model.size(); i++) {
             int menuIndex = i + 1;
-            view.showMenuElement(model.get(i), String.valueOf(menuIndex));
+            view.showMenuElementWithID(model.get(i), String.valueOf(menuIndex));
         }
     }
 

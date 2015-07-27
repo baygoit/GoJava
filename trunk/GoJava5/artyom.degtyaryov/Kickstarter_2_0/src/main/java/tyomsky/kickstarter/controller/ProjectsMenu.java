@@ -61,7 +61,7 @@ public class ProjectsMenu extends Menu<Project> {
         for (int i = 0; i < model.size(); i++) {
             Project project = model.get(i);
             int menuIndex = i + 1;
-            view.showMenuElement(project, String.valueOf(menuIndex));
+            view.showMenuElementWithID(project, String.valueOf(menuIndex));
         }
     }
 

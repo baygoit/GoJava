@@ -48,8 +48,8 @@ public class ProjectMenu extends Menu<Integer> {
     }
 
     private void askProject(Project chosenProject) {
-        view.showMenuElement("Invest in project", "1");
-        view.showMenuElement("Ask a question", "2");
+        view.showMenuElementWithID("Invest in project", "1");
+        view.showMenuElementWithID("Ask a question", "2");
     }
 
     private void printProjectDetails(Project project) {
