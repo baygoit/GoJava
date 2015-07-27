@@ -35,7 +35,7 @@ public class InFileCategories implements Categories {
     }
 
     @Override
-    public String[] getCategories() {
+    public List<String> getCategories() {
 
 //        BufferedReader in = null;
 //
@@ -62,7 +62,8 @@ public class InFileCategories implements Categories {
 //                e.printStackTrace();
 //            }
 //        }
-        return new String[0];
+//        return new String[0];
+        return null;
     }
 
     @Override

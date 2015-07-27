@@ -63,7 +63,7 @@ public class CategoryMenu {
 
         io.println(SPACE);
         io.println("Select category (or 0 to exit): ");
-        io.println(Arrays.toString(categories.getCategories()));
+        io.println(String.valueOf(categories.getCategories()));
     }
 
     private void printProjects(Project[] foundProjects) {

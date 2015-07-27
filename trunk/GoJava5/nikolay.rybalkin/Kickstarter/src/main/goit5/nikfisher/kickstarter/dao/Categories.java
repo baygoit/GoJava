@@ -8,7 +8,7 @@ public interface Categories {
 
     void add(Category category);
 
-    String[]  getCategories();
+    List<String>  getCategories();
 
     Category get(int index);
 

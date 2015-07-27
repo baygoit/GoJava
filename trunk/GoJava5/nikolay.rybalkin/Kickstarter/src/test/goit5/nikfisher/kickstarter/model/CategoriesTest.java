@@ -27,7 +27,7 @@ public abstract class CategoriesTest {
         categories.add(new Category("Design"));
 
         //then
-        assertEquals("[1) Game, 2) Design]", Arrays.toString(categories.getCategories()));
+        assertEquals("[1) Game, 2) Design]", String.valueOf(categories.getCategories()));
     }
 
     @Test
@@ -35,7 +35,7 @@ public abstract class CategoriesTest {
         //given
         //when
         //then
-        assertEquals("[]", Arrays.toString(categories.getCategories()));
+        assertEquals("[]", String.valueOf(categories.getCategories()));
     }
 
     @Test
