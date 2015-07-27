@@ -56,14 +56,13 @@ public class CategoryModelTest  {
 
         categoryModel.setDataRegistry(dataRegistry);
 
-        Map<Integer,ArrayList<ProjectModel>> mapOfSize2 = new HashMap<>();
-        mapOfSize2.put(1, new ArrayList());
-        mapOfSize2.put(1, new ArrayList());
-        when(dataRegistry.getCategories()).thenReturn(mapOfSize2);
 
 
-         when(dataRegistry.getProjectList(0)).thenReturn(new ArrayList<ProjectModel>());
-     //   Assert.assertEquals("Should return null", 1, categoryModel.refreshModel(1));
+           ArrayList<ProjectModel> arrayList = new ArrayList<>();
+        arrayList.add(new ProjectModel());
+        when(dataRegistry.getProjectList(0)).thenReturn(arrayList);
 
+       Assert.assertEquals("Should return 0", 0, dataRegistry.getProjectList(0).get(0).getParentId());
+            categoryModel.refreshModel(0);
     }
 }

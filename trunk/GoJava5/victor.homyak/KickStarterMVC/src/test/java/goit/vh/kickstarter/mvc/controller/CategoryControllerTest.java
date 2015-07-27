@@ -72,7 +72,7 @@ public class CategoryControllerTest {
         categoryController.start(path);
 
         verify(model).refreshModel(path[0]);
-        verify(locationManager, times(4)).dispatch();
+        verify(locationManager, times(3)).dispatch();
 
     }
 

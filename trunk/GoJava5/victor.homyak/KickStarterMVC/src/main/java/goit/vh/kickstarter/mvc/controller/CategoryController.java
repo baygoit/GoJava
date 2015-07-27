@@ -39,10 +39,10 @@ public class CategoryController {
                 locationManager.dispatch();
             }
             view.render(model);
-            if (projectModel.refreshListModel(path[0]) == null) {
-                locationManager.dispatch();
-            }
-
+//            if (projectModel.refreshListModel(path[0]) == null) {
+//                locationManager.dispatch();
+//        }
+            projectModel.refreshListModel(path[0]);
             projectView.renderList(projectModel.getListOfProjectses());
            projectView.readUserInput();
             path[1] = Integer.parseInt(projectView.getInput());

@@ -48,6 +48,7 @@ public class ProjectView {
 
     public void readInProjectUserInput() {
         output.println("If you want to go back, choose '1'\nIf you want retern to mani menu, choose '0'");
+        setInput(new Input().getInput());
     }
 
     /**
