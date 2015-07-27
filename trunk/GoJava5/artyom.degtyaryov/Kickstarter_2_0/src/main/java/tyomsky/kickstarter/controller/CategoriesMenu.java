@@ -3,6 +3,7 @@ package tyomsky.kickstarter.controller;
 import tyomsky.kickstarter.dao.CategoriesDAO;
 import tyomsky.kickstarter.model.Category;
 import tyomsky.kickstarter.ui.IO;
+import tyomsky.kickstarter.ui.Input;
 import tyomsky.kickstarter.view.TextView;
 
 import java.util.List;
@@ -13,8 +14,8 @@ public class CategoriesMenu extends Menu<Category> {
     List<Category> model;
     TextView view;
 
-    public CategoriesMenu(CategoriesDAO categoriesDAO, IO io, TextView view) {
-        super(io);
+    public CategoriesMenu(CategoriesDAO categoriesDAO, Input input, TextView view) {
+        super(input);
         this.categoriesDAO = categoriesDAO;
         model = categoriesDAO.getAll();
         this.view = view;

@@ -3,51 +3,66 @@ package tyomsky.kickstarter.view;
 import tyomsky.kickstarter.model.Category;
 import tyomsky.kickstarter.model.Project;
 import tyomsky.kickstarter.ui.IO;
-
-import java.util.List;
+import tyomsky.kickstarter.ui.Output;
 
 public class TextView {
 
-    IO io;
+    Output output;
 
-    public TextView(IO io) {
-        this.io = io;
+    public TextView(Output output) {
+        this.output = output;
     }
 
     public void showMenuElement(Project project, String id) {
         showDelimiter();
         String elementPresentation = String.format("%s: %s \n" +
-                "%s \n" +
-                "Need to collect - %d$. Collected - %d$. Days left - %d",
-                id, project.getName(),project.getDescription(), project.getMoneyNeeded(),
+                        "%s \n" +
+                        "Need to collect - %d$. Collected - %d$. Days left - %d",
+                id, project.getName(), project.getDescription(), project.getMoneyNeeded(),
                 project.getMoneyCollected(), project.getDaysLeft());
-        io.println(elementPresentation);
+        output.println(elementPresentation);
     }
 
     private void showDelimiter() {
-        io.println("------------------------------------------------------");
+        output.println("------------------------------------------------------");
     }
 
     public void showMenuElement(Category category, String id) {
         String elementPresentation = String.format("%s: %s", id, category.getName());
-        io.println(elementPresentation);
+        output.println(elementPresentation);
     }
 
-    public void printFullDescription(Project project) {
+    public void showMenuElement(String elementPresentation, String id) {
+        output.println(String.format("%s: %s", id, elementPresentation));
+    }
 
+    public void showFullDescription(Project project) {
+        String message = project.getDescription();
+        output.println(message);
+        output.println("Money to collect: " + project.getMoneyNeeded());
+        output.println("Collected money: " + project.getMoneyCollected());
+        output.println("Days left: " + project.getDaysLeft());
+        output.println("Demo video: " + project.getDemoVideoLink());
+        String history = project.getHistory();
+        if (!(history == null)) {
+            output.println("History: " + project.getHistory());
+        }
+        String qAndA = project.getQuestionsAndAnswers();
+        if (!(qAndA == null)) {
+            output.println("FAQ: " + project.getQuestionsAndAnswers());
+        }
     }
 
     public void printMessage(String message) {
-
+        output.println(message);
     }
 
     public void showInputPrompt() {
-        io.println("Select item (0 for exit)");
+        output.println("Select item (0 for exit)");
     }
 
     public void showSelected(String selected) {
-       io.println(String.format("You have selected - %s", selected));
+        output.println(String.format("You have selected - %s", selected));
     }
-//    public void printIn
 
 }

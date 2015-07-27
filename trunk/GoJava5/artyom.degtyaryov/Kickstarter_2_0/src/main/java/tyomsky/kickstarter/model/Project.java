@@ -42,14 +42,6 @@ public class Project {
         return moneyCollected;
     }
 
-    public String getShortPresentation() {
-        return name + " \n" +
-                description + " \n" +
-                "Need to collect - " + moneyNeeded +
-                "$. Collected - " + moneyCollected +
-                "$. Days left - " + daysLeft;
-    }
-
     public void setMoneyCollected(int moneyCollected) {
         this.moneyCollected = moneyCollected;
     }

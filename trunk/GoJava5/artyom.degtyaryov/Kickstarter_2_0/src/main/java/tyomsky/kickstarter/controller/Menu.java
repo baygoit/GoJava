@@ -1,20 +1,20 @@
 package tyomsky.kickstarter.controller;
 
-import tyomsky.kickstarter.ui.IO;
+import tyomsky.kickstarter.ui.Input;
 
 public abstract class Menu<T> {
 
     protected Menu childMenu;
-    protected IO io;
+    protected Input input;
 
-    public Menu(IO io) {
-        this.io = io;
+    public Menu(Input input) {
+        this.input = input;
     }
 
     public void run() {
         while (true) {
             ask();
-            int chosenMenuIndex = Integer.parseInt(io.read());
+            int chosenMenuIndex = Integer.parseInt(input.read());
             if (chosenMenuIndex == 0) {
                 break;
             }

@@ -2,16 +2,20 @@ package tyomsky.kickstarter.controller;
 
 import tyomsky.kickstarter.dao.ProjectsDAO;
 import tyomsky.kickstarter.model.Project;
-import tyomsky.kickstarter.ui.IO;
+import tyomsky.kickstarter.ui.Input;
+import tyomsky.kickstarter.view.TextView;
 
 public class ProjectMenu extends Menu<Integer> {
 
-    ProjectsDAO projectsDAO;
-    private Project project;
+    private ProjectsDAO projectsDAO;
+    private Project model;
+    private TextView view;
 
-    public ProjectMenu(ProjectsDAO projectsDAO, IO io) {
-        super(io);
+
+    public ProjectMenu(ProjectsDAO projectsDAO, Input input, TextView view) {
+        super(input);
         this.projectsDAO = projectsDAO;
+        this.view = view;
     }
 
     @Override
@@ -19,14 +23,14 @@ public class ProjectMenu extends Menu<Integer> {
         int chosenMenuIndex = selected;
         if (chosenMenuIndex == 1){
             PaymentMenu paymentMenu = (PaymentMenu) childMenu;
-            paymentMenu.setProject(project);
+            paymentMenu.setProject(model);
             return paymentMenu;
         }
         if (chosenMenuIndex == 2){
-            io.println("Enter your question");
-            String question = io.read();
-            io.println("Thank for your question");
-            project.setQuestionsAndAnswers(project.getQuestionsAndAnswers()+"\n Q: "+question);
+            view.printMessage("Enter your question");
+            String question = input.read();
+            view.printMessage("Thanks for your question");
+            model.setQuestionsAndAnswers(model.getQuestionsAndAnswers()+"\n Q: "+question);
         }
         return null;
     }
@@ -38,34 +42,21 @@ public class ProjectMenu extends Menu<Integer> {
 
     @Override
     public void ask() {
-        printProjectDetails(project);
-        askProject(project);
+        printProjectDetails(model);
+        askProject(model);
+        view.showInputPrompt();
     }
 
     private void askProject(Project chosenProject) {
-        io.println("Select action (0 for exit): \n" +
-                "1: Invest in project \n" +
-                "2: Ask a question");
+        view.showMenuElement("Invest in project", "1");
+        view.showMenuElement("Ask a question", "2");
     }
 
     private void printProjectDetails(Project project) {
-        String message = project.getDescription();
-        io.println(message);
-        io.println("Money to collect: " + project.getMoneyNeeded());
-        io.println("Collected money: " + project.getMoneyCollected());
-        io.println("Days left: " + project.getDaysLeft());
-        io.println("Demo video: " + project.getDemoVideoLink());
-        String history = project.getHistory();
-        if (!(history == null)) {
-            io.println("History: " + project.getHistory());
-        }
-        String qAndA = project.getQuestionsAndAnswers();
-        if (!(qAndA == null)) {
-            io.println("FAQ: " + project.getQuestionsAndAnswers());
-        }
+        view.showFullDescription(project);
     }
 
-    public void setProject(Project project) {
-        this.project = project;
+    public void setModel(Project model) {
+        this.model = model;
     }
 }

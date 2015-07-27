@@ -3,7 +3,7 @@ package tyomsky.kickstarter.controller;
 import tyomsky.kickstarter.dao.ProjectsDAO;
 import tyomsky.kickstarter.model.Category;
 import tyomsky.kickstarter.model.Project;
-import tyomsky.kickstarter.ui.IO;
+import tyomsky.kickstarter.ui.Input;
 import tyomsky.kickstarter.view.TextView;
 
 import java.util.ArrayList;
@@ -15,8 +15,8 @@ public class ProjectsMenu extends Menu<Project> {
     List<Project> model;
     TextView view;
 
-    public ProjectsMenu(ProjectsDAO projectsDAO, IO io, TextView view) {
-        super(io);
+    public ProjectsMenu(ProjectsDAO projectsDAO, Input input, TextView view) {
+        super(input);
         this.projectsDAO = projectsDAO;
         this.model = new ArrayList<>();
         this.view = view;
@@ -25,7 +25,7 @@ public class ProjectsMenu extends Menu<Project> {
     @Override
     public Menu nextMenu(Project selected) {
         ProjectMenu projectMenu = (ProjectMenu) childMenu;
-        projectMenu.setProject(selected);
+        projectMenu.setModel(selected);
         return projectMenu;
     }
 

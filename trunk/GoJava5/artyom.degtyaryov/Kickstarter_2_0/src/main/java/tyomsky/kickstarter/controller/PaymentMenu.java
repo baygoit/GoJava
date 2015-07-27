@@ -3,15 +3,19 @@ package tyomsky.kickstarter.controller;
 import tyomsky.kickstarter.dao.ProjectsDAO;
 import tyomsky.kickstarter.model.Project;
 import tyomsky.kickstarter.ui.IO;
+import tyomsky.kickstarter.ui.Input;
+import tyomsky.kickstarter.view.TextView;
 
 public class PaymentMenu extends Menu <Integer> {
 
     private ProjectsDAO projectsDAO;
     private Project project;
+    private TextView view;
 
-    public PaymentMenu(ProjectsDAO projectsDAO, IO io) {
-        super(io);
+    public PaymentMenu(ProjectsDAO projectsDAO, Input input, TextView view) {
+        super(input);
         this.projectsDAO = projectsDAO;
+        this.view = view;
     }
 
     @Override
@@ -32,19 +36,19 @@ public class PaymentMenu extends Menu <Integer> {
                 break;
             }
             case 9: {
-                io.println("Enter the amount of money");
-                amount = Integer.parseInt(io.read());
+                view.printMessage("Enter the amount of money");
+                amount = Integer.parseInt(input.read());
                 break;
             }
             default:
                 amount = 0; //:(
         }
-        io.println("Enter your name");
-        String name = io.read();
-        io.println("Enter the number of your card");
-        int cardNumber = Integer.parseInt(io.read());
+        view.printMessage("Enter your name");
+        String name = input.read();
+        view.printMessage("Enter the number of your card");
+        int cardNumber = Integer.parseInt(input.read());
         project.setMoneyCollected(project.getMoneyCollected() + amount);
-        io.println("Thank you, "+ name +"! You can go now! ");
+        view.printMessage("Thank you, " + name + "! You can go now! ");
         return null;
 
     }
@@ -57,13 +61,11 @@ public class PaymentMenu extends Menu <Integer> {
     @Override
     public void ask() {
         //TODO to realise payment variants in project field
-        io.println("Thanks for helping our project");
-        io.println("You can choose variant or enter your sum:");
-        io.println("1 - 1$");
-        io.println("2 - 5$");
-        io.println("3 - 20$");
-        io.println("9 - Your sum");
-        io.println("0 - Back");
+        view.showMenuElement("1$", "1");
+        view.showMenuElement("5$", "2");
+        view.showMenuElement("20$", "3");
+        view.showMenuElement("Input sum", "9");
+        view.showInputPrompt();
     }
 
     public void setProject(Project project) {

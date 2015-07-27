@@ -4,22 +4,23 @@ import tyomsky.kickstarter.dao.CategoriesDAO;
 import tyomsky.kickstarter.dao.ProjectsDAO;
 import tyomsky.kickstarter.model.QuoteGenerator;
 import tyomsky.kickstarter.ui.IO;
+import tyomsky.kickstarter.view.TextView;
 
 public class Kickstarter {
 
-    private IO io;
+    private TextView textView;
     private Menu mainMenu;
     private QuoteGenerator quoteGenerator;
 
-    public Kickstarter(Menu mainMenu, IO io, QuoteGenerator quoteGenerator) {
+    public Kickstarter(Menu mainMenu, TextView textView, QuoteGenerator quoteGenerator) {
         this.mainMenu = mainMenu;
-        this.io = io;
+        this.textView = textView;
         this.quoteGenerator = quoteGenerator;
     }
 
     public void run() {
         String quote = quoteGenerator.getQuote();
-        io.println(quote);
+        textView.printMessage(quote);
         mainMenu.run();
     }
 

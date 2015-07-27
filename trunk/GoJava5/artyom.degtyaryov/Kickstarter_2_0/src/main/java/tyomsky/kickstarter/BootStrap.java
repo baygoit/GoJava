@@ -17,7 +17,7 @@ public class BootStrap {
 
     public static void main(String[] args) {
 
-        ConsoleIO io = new ConsoleIO();
+        ConsoleIO console = new ConsoleIO();
 
         CategoriesDAO categories = new CategoriesDAOFile("categories.txt");
 
@@ -39,17 +39,17 @@ public class BootStrap {
         project3.setMoneyCollected(100_000);
         projects.add(project3);
 
-        TextView textView = new TextView(io);
+        TextView textView = new TextView(console);
 
-        Menu<Category> categoriesMenu = new CategoriesMenu(categories, io, textView);
-        Menu<Project> projectsMenu = new ProjectsMenu(projects, io, textView);
-        Menu<Integer> projectMenu = new ProjectMenu(projects, io);
-        Menu<Integer> paymentMenu = new PaymentMenu(projects, io);
+        Menu<Category> categoriesMenu = new CategoriesMenu(categories, console, textView);
+        Menu<Project> projectsMenu = new ProjectsMenu(projects, console, textView);
+        Menu<Integer> projectMenu = new ProjectMenu(projects, console, textView);
+        Menu<Integer> paymentMenu = new PaymentMenu(projects, console, textView);
         categoriesMenu.setChildMenu(projectsMenu);
         projectsMenu.setChildMenu(projectMenu);
         projectMenu.setChildMenu(paymentMenu);
 
-        Kickstarter kickstarter = new Kickstarter(categoriesMenu, io, new QuoteGenerator(new Random()));
+        Kickstarter kickstarter = new Kickstarter(categoriesMenu, textView, new QuoteGenerator(new Random()));
         kickstarter.run();
     }
 }
