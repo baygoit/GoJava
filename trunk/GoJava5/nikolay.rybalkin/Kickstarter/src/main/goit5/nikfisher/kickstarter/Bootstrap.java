@@ -1,19 +1,22 @@
 package goit5.nikfisher.kickstarter;
 
-import goit5.nikfisher.kickstarter.model.*;
+
+import goit5.nikfisher.kickstarter.model.QuoteGenerate;
 import goit5.nikfisher.kickstarter.streams.ConsoleIO;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.Random;
-import java.util.logging.Logger;
+
 
 public class Bootstrap {
 
-	private static final Logger log = Logger.getLogger(String.valueOf(Bootstrap.class));
+	private static final Logger LOGGER = LogManager.getLogger(Bootstrap.class);
 
 	public static void main(String[] args){
-		log.info("Start program.");
+		LOGGER.info("Start program.");
 		Main app = new Main(new ConsoleIO(), new QuoteGenerate(new Random()));
 		app.run();
-		log.info("Finished program.");
+		LOGGER.info("Finished program.");
 	}
 }

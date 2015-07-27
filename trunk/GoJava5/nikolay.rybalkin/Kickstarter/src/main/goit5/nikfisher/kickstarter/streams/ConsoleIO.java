@@ -1,12 +1,13 @@
 package goit5.nikfisher.kickstarter.streams;
 
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import java.util.Scanner;
-import java.util.logging.Logger;
 
 public class ConsoleIO implements ConsoleInterfaceIO {
 
-    private static final Logger log = Logger.getLogger(String.valueOf(ConsoleIO.class));
+    private static final Logger LOGGER = LogManager.getLogger(ConsoleIO.class);
 
     private Scanner scaner = new Scanner(System.in);
 
@@ -23,7 +24,7 @@ public class ConsoleIO implements ConsoleInterfaceIO {
             number = scaner.nextInt();
         } catch (Exception e) {
             System.out.println("You entered is not a number!");
-            log.warning("You entered is not a number!");
+            LOGGER.error("You entered is not a number!");
         }
         return number;
     }
