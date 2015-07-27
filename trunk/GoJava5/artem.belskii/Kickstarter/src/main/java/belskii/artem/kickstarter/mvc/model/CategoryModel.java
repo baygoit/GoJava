@@ -1,9 +1,10 @@
 package belskii.artem.kickstarter.mvc.model;
 
 import java.util.List;
-import belskii.artem.kickstarter.dao.Category;
-import belskii.artem.kickstarter.dao.CategoryDao;
-import belskii.artem.kickstarter.dao.CategoryDaoImplHardCoding;
+
+import belskii.artem.kickstarter.dao.category.Category;
+import belskii.artem.kickstarter.dao.category.CategoryDao;
+import belskii.artem.kickstarter.dao.category.CategoryDaoImplHardCoding;
 
 public class CategoryModel {
 	CategoryDao categoryDao = new CategoryDaoImplHardCoding();

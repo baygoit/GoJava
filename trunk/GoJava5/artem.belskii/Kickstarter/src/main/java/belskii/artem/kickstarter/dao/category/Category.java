@@ -1,4 +1,4 @@
-package belskii.artem.kickstarter.dao;
+package belskii.artem.kickstarter.dao.category;
 
 public class Category {
 	private int categoryId;
@@ -13,16 +13,12 @@ public class Category {
 		return categoryId;
 	}
 
-	public void setCategoryId(int categoryId) {
+	public void updateCategoryId(int categoryId) {
 		this.categoryId = categoryId;
 	}
 
 	public String getCategoryName() {
 		return categoryName;
-	}
-
-	public void setCategoryName(String categoryName) {
-		this.categoryName = categoryName;
 	}
 
 }

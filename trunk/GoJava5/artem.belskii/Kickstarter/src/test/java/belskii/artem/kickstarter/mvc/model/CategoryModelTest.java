@@ -6,9 +6,9 @@ import java.util.ArrayList;
 import org.junit.Before;
 import org.junit.Test;
 
-import belskii.artem.kickstarter.dao.Category;
-import belskii.artem.kickstarter.dao.CategoryDao;
-import belskii.artem.kickstarter.dao.CategoryDaoImplHardCoding;
+import belskii.artem.kickstarter.dao.category.Category;
+import belskii.artem.kickstarter.dao.category.CategoryDao;
+import belskii.artem.kickstarter.dao.category.CategoryDaoImplHardCoding;
 
 public class CategoryModelTest {
 	private CategoryDao categoryDao;

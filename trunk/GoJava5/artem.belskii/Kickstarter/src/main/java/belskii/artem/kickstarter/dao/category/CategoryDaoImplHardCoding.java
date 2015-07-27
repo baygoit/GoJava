@@ -1,7 +1,6 @@
-package belskii.artem.kickstarter.dao;
+package belskii.artem.kickstarter.dao.category;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class CategoryDaoImplHardCoding implements CategoryDao {
 	private ArrayList<Category> categoryes;

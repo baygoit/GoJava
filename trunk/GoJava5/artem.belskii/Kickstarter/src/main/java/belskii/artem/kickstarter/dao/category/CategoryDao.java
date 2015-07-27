@@ -1,11 +1,9 @@
-package belskii.artem.kickstarter.dao;
+package belskii.artem.kickstarter.dao.category;
 
 import java.util.List;
 
 public interface CategoryDao {
 	public void addCategory(Category categoryInfo);
-
 	public List<Category> getCategoryList();
-
 	public String getCategoryById(int id);
 }
