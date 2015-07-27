@@ -11,8 +11,9 @@ public class Bootstrap {
 	private static final Logger log = Logger.getLogger(String.valueOf(Bootstrap.class));
 
 	public static void main(String[] args){
+		log.info("Start program.");
 		Main app = new Main(new ConsoleIO(), new QuoteGenerate(new Random()));
 		app.run();
-		log.info("This is an informational message!");
+		log.info("Finished program.");
 	}
 }

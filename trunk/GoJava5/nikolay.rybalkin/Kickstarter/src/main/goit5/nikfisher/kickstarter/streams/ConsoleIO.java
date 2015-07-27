@@ -2,8 +2,11 @@ package goit5.nikfisher.kickstarter.streams;
 
 
 import java.util.Scanner;
+import java.util.logging.Logger;
 
 public class ConsoleIO implements ConsoleInterfaceIO {
+
+    private static final Logger log = Logger.getLogger(String.valueOf(ConsoleIO.class));
 
     private Scanner scaner = new Scanner(System.in);
 
@@ -20,6 +23,7 @@ public class ConsoleIO implements ConsoleInterfaceIO {
             number = scaner.nextInt();
         } catch (Exception e) {
             System.out.println("You entered is not a number!");
+            log.warning("You entered is not a number!");
         }
         return number;
     }
