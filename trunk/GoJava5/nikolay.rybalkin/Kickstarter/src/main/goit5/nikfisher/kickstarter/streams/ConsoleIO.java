@@ -9,19 +9,19 @@ public class ConsoleIO implements ConsoleInterfaceIO {
 
     private static final Logger LOGGER = LogManager.getLogger(ConsoleIO.class);
 
-    private Scanner scaner = new Scanner(System.in);
+    private Scanner scanner = new Scanner(System.in);
 
     @Override
     public String consoleScanString() {
-        return scaner.next();
+        return scanner.next();
     }
 
     @Override
     public int consoleScanInt() {
         int number = 0;
         try {
-            scaner.hasNextInt();
-            number = scaner.nextInt();
+            scanner.hasNextInt();
+            number = scanner.nextInt();
         } catch (Exception e) {
             System.out.println("You entered is not a number!");
             LOGGER.error("You entered is not a number!");

@@ -4,14 +4,12 @@ import goit5.nikfisher.kickstarter.Main;
 import goit5.nikfisher.kickstarter.dao.InMemoryCategories;
 import goit5.nikfisher.kickstarter.dao.InMemoryProjects;
 import goit5.nikfisher.kickstarter.dao.Projects;
-import goit5.nikfisher.kickstarter.model.*;
+import goit5.nikfisher.kickstarter.model.Category;
+import goit5.nikfisher.kickstarter.model.QuoteGenerate;
 import goit5.nikfisher.kickstarter.streams.ConsoleInterfaceIO;
 import goit5.nikfisher.kickstarter.view.View;
-import org.junit.After;
 import org.junit.Test;
 import org.mockito.Mock;
-
-import java.io.File;
 
 import static org.mockito.Mockito.*;
 public class CategoryMenuTest {
@@ -40,7 +38,7 @@ public class CategoryMenuTest {
 
         //when
 
-        when(io.consoleScanInt()).thenReturn(0);
+        when(io.consoleScanInt()).thenReturn(1, 0, 0);
         categoryMenu.categoryMenu();
         view.createCategories();
         main.run();
@@ -48,6 +46,7 @@ public class CategoryMenuTest {
 
         //then
         verify(io, times(1)).println("[1) Game]");
+        verify(io, times(1)).println("You selected category: Game");
     }
 
     @Test
