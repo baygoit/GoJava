@@ -1,4 +1,4 @@
-package goit5.nikfisher.kickstarter.model;
+package goit5.nikfisher.kickstarter.dao;
 
 import org.junit.After;
 

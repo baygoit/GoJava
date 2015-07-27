@@ -2,7 +2,6 @@ package goit5.nikfisher.kickstarter.menu;
 
 
 import goit5.nikfisher.kickstarter.dao.Categories;
-import goit5.nikfisher.kickstarter.dao.InMemoryCategories;
 import goit5.nikfisher.kickstarter.dao.Projects;
 import goit5.nikfisher.kickstarter.model.*;
 import goit5.nikfisher.kickstarter.streams.ConsoleIO;
@@ -15,11 +14,11 @@ public class CategoryMenu {
     private String SPACE = " ";
     private ConsoleInterfaceIO io;
     private Projects projects;
-    private InMemoryCategories categories;
+    private Categories categories;
 
     public CategoryMenu(ConsoleInterfaceIO io, Projects projects, Categories categories) {
         this.io = io;
-        this.categories = (InMemoryCategories) categories;
+        this.categories = categories;
 		this.projects = projects;
     }
 

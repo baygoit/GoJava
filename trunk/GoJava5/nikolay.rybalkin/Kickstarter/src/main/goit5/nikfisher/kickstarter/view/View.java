@@ -12,11 +12,11 @@ public class View{
 
     private ConsoleInterfaceIO io;
     private Projects projects;
-    private InMemoryCategories categories;
+    private Categories categories;
 
     public View(ConsoleInterfaceIO io, Projects projects, Categories categories) {
         this.io = io;
-        this.categories = (InMemoryCategories) categories;
+        this.categories = categories;
         this.projects = projects;
     }
 
@@ -26,7 +26,7 @@ public class View{
         Category category2 = new Category("Design");
         Category category3 = new Category("Technology");
 
-		Categories categories = new InMemoryCategories();
+		categories = new InMemoryCategories();
 //        Categories categories = new InFileCategories("categories.txt");
         categories.add(category1);
         categories.add(category2);
@@ -47,7 +47,7 @@ public class View{
         project6.setCategory(category3);
 
 //        Projects projects = new InFileProjects("projects.txt");
-        Projects projects = new InMemoryProjects();
+        projects = new InMemoryProjects();
         projects.add(project1);
         projects.add(project2);
         projects.add(project3);

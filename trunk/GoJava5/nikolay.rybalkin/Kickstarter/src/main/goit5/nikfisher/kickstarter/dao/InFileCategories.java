@@ -4,6 +4,7 @@ import goit5.nikfisher.kickstarter.dao.Categories;
 import goit5.nikfisher.kickstarter.model.Category;
 
 import java.io.*;
+import java.util.LinkedList;
 import java.util.List;
 
 public class InFileCategories implements Categories {
@@ -50,7 +51,7 @@ public class InFileCategories implements Categories {
 //                line = in.readLine();
 //                index++;
 //            }
-//            return result.toArray(new String[result.size()]);
+//            return result;
 //
 //        } catch (IOException e) {
 //            e.printStackTrace();
@@ -62,7 +63,6 @@ public class InFileCategories implements Categories {
 //                e.printStackTrace();
 //            }
 //        }
-//        return new String[0];
         return null;
     }
 
