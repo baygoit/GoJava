@@ -1,11 +1,10 @@
-package goit5.nikfisher.kickstarter.model;
+package goit5.nikfisher.kickstarter.dao;
 
-import goit5.nikfisher.kickstarter.dao.Categories;
+import goit5.nikfisher.kickstarter.model.Category;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.io.File;
-import java.util.Arrays;
 import static org.junit.Assert.*;
 
 public abstract class CategoriesTest {
