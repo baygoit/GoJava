@@ -43,32 +43,9 @@ public class InFileProjects  implements Projects {
         try {
             in = new BufferedReader(new FileReader(file));
 
-            List<String> result = new LinkedList<>();
-            String line = in.readLine();
-            int found = 0;
 
-            while (line != null){
-//
-//                Project project = in.readLine();
-//
-//
-//                if (project.getCategory().equals(category)){
-//                    result[found] = project;
-//                    found++;
-//                }
-            }
-//            for (int i = 0; i < index; i++) {
-//                Project project = in.readLine();
-//
-//                if (project.getCategory().equals(category)){
-//                    result[found] = project;
-//                    found++;
-//                }
-//            }
 
-//            Project[] result2 = new Project[found];
-//            System.arraycopy(result, 0, result2, 0, found);
-//            return result;
+
 
         } catch (IOException e) {
             e.printStackTrace();
