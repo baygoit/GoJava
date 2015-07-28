@@ -22,41 +22,87 @@ public class PaymentController implements DispatcherListener {
 		if (isBackPressed(input)) {
 			model.clear();
 			move = -1;
+		} else if (model.getChosenRewardOptionIndex() == 0) {
+			parseRewardOptionChoice(input);
 		} else if (model.isCardHolderNameEmpty()) {
-			if (model.isCardHolderNameValid(input)) {
-				model.setCardHolderName(input);
-			} else {
-				showMessage(ControllerMessages.INPUT_WRONG_CARDHOLDER_NAME);
-			}
+			parseCardHolderName(input);
 		} else if (model.isCardNumberEmpty()) {
-			if (model.isCardNumberValid(input)) {
-				model.setCardNumber(input);
-			} else {
-				showMessage(ControllerMessages.INPUT_WRONG_CARD_NUMBER);
+			parseCardNumber(input);
+			if (model.isPaymentComplete()) {
+				finalizePayment();
+			}
+		} else if (!model.isPaymentComplete()) {
+			parseAmountPayed(input);
+			if (model.isPaymentComplete()) {
+				finalizePayment();
 			}
 		} else {
-			int amountPayed;
-			try {
-				amountPayed = Integer.parseInt(input);
-			} catch (NumberFormatException e) {
-				showMessage(ControllerMessages.INPUT_NOT_INTEGER_WARNING);
-				return move;
-			}
-			if (amountPayed > 0) {
-				model.setAmountPayed(amountPayed);
-				parentController.addPayment(model.getAmountPayed());
-				model.clear();
-				move = -1;
-			} else {
-				showMessage(ControllerMessages.INPUT_WRONG_PLEDGE_AMOUNT);
-			}
+			showMessage(ControllerMessages.WRONG_USER_CHOICE_WARNING);
 		}
 		return move;
 	}
 
+	private void parseAmountPayed(String input) {
+		int amountPayed = 0;
+		try {
+			amountPayed = Integer.parseInt(input);
+		} catch (NumberFormatException e) {
+			showMessage(ControllerMessages.INPUT_NOT_INTEGER_WARNING);
+		}
+		if (amountPayed > 0) {
+			model.setAmountPayed(amountPayed);
+		} else {
+			showMessage(ControllerMessages.INPUT_WRONG_PLEDGE_AMOUNT);
+		}
+	}
+
+	private void parseCardNumber(String input) {
+		if (model.isCardNumberValid(input)) {
+			model.setCardNumber(input);
+		} else {
+			showMessage(ControllerMessages.INPUT_WRONG_CARD_NUMBER);
+		}
+	}
+
+	private void parseCardHolderName(String input) {
+		if (model.isCardHolderNameValid(input)) {
+			model.setCardHolderName(input);
+		} else {
+			showMessage(ControllerMessages.INPUT_WRONG_CARDHOLDER_NAME);
+		}
+	}
+
+	private void parseRewardOptionChoice(String input) {
+		int userChoice = 0;
+		try {
+			userChoice = Integer.parseInt(input);
+		} catch (NumberFormatException e) {
+			showMessage(ControllerMessages.INPUT_NOT_INTEGER_WARNING);
+		}
+		if (userChoice > 0 && userChoice <= model.size()) {
+			model.setChosenRewardOption(userChoice);
+			if (userChoice < model.size()) {
+				model.setAmountPayed(model.getRewardOptions()
+						.get(userChoice - 1).getAmount());
+			}
+		} else {
+			showMessage(ControllerMessages.WRONG_USER_CHOICE_WARNING);
+		}
+	}
+
+	public void finalizePayment() {
+		view.update(model);
+		parentController.addPayment(model.getAmountPayed());
+	}
+
 	@Override
 	public void onTakeControl() {
+		updateModel();
 		updateView();
+	}
+
+	private void updateModel() {
+		model.update(parentController.getRewardOptions());
 	}
 
 	private boolean isBackPressed(String input) {
@@ -70,15 +116,7 @@ public class PaymentController implements DispatcherListener {
 	}
 
 	private void updateView() {
-		String prompt;
-		if (model.isCardHolderNameEmpty()) {
-			prompt = "Enter cardholder name:";
-		} else if (model.isCardNumberEmpty()) {
-			prompt = "Enter card number:";
-		} else {
-			prompt = "Enter positive amount:";
-		}
-		view.update(model.getPaymentData(), prompt);
+		view.update(model);
 	}
 
 	private void showMessage(String message) {

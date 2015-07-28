@@ -1,8 +1,11 @@
 package goit.nz.kickstartermvc.controller;
 
 import goit.nz.kickstartermvc.DispatcherListener;
+import goit.nz.kickstartermvc.dao.RewardOption;
 import goit.nz.kickstartermvc.model.ProjectModel;
 import goit.nz.kickstartermvc.view.ProjectView;
+
+import java.util.List;
 
 public class ProjectController implements DispatcherListener {
 
@@ -54,6 +57,10 @@ public class ProjectController implements DispatcherListener {
 
 	public void addQuestion(String question) {
 		model.addQuestion(chosenCategoryName, chosenProjectIndex, question);
+	}
+	
+	public List<RewardOption> getRewardOptions() {
+		return model.getRewardOptions();
 	}
 
 	private void updateModel() {

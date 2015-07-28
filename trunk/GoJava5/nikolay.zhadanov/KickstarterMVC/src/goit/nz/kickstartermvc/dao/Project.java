@@ -13,6 +13,7 @@ public class Project {
 	private String projectEvents; // TODO extract new class
 	private String linkToVideo;
 	private List<FAQ> faqs;
+	private List<RewardOption> rewardOptions;
 
 	public Project(String name) {
 		this.name = name;
@@ -23,6 +24,7 @@ public class Project {
 		projectEvents = "";
 		linkToVideo = "";
 		faqs = new ArrayList<>();
+		rewardOptions = new ArrayList<>();
 	}
 
 	public Project(String name, String desc, int required, int collected,
@@ -35,6 +37,7 @@ public class Project {
 		projectEvents = "";
 		linkToVideo = "";
 		faqs = new ArrayList<>();
+		rewardOptions = new ArrayList<>();
 	}
 
 	public void setCategory(Category cat) {
@@ -100,5 +103,13 @@ public class Project {
 	
 	public void addPledgedAmount(int amount) {
 		amountCollected += amount;
+	}
+	
+	public void addRewardOption(RewardOption rewardOption) {
+		rewardOptions.add(rewardOption);
+	}
+	
+	public List<RewardOption> getRewardOptions() {
+		return rewardOptions;
 	}
 }

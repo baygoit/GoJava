@@ -2,6 +2,9 @@ package goit.nz.kickstartermvc.model;
 
 import goit.nz.kickstartermvc.DataStorage;
 import goit.nz.kickstartermvc.dao.Project;
+import goit.nz.kickstartermvc.dao.RewardOption;
+
+import java.util.List;
 
 public class ProjectModel {
 
@@ -29,6 +32,10 @@ public class ProjectModel {
 	public void addQuestion(String categoryName, int projectIndex,
 			String question) {
 		storage.addQuestion(categoryName, projectIndex, question);
+	}
+	
+	public List<RewardOption> getRewardOptions() {
+		return currentProject.getRewardOptions();
 	}
 
 }
