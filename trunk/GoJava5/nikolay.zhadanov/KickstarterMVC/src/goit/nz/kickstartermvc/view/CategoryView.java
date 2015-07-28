@@ -27,41 +27,41 @@ public class CategoryView {
 	}
 
 	public void showMsg(String msg) {
-		output.println("");
-		output.println(msg);
+		output.write("");
+		output.write(msg);
 	}
 
 	private void printProjectInfo(int index, Project project) {
-		output.println(String.format("(%d). %s", index + 1, project.getName()));
-		output.println(String.format("     Description: %s",
+		output.write(String.format("(%d). %s", index + 1, project.getName()));
+		output.write(String.format("     Description: %s",
 				project.getDescription()));
-		output.println(String.format("     Goal: %s", project.getGoalAmount()));
-		output.println(String.format("     Pledged: %s",
+		output.write(String.format("     Goal: %s", project.getGoalAmount()));
+		output.write(String.format("     Pledged: %s",
 				project.getPledgedAmount()));
-		output.println(String.format("     Days to go: %s",
+		output.write(String.format("     Days to go: %s",
 				project.getDaysToGo()));
 	}
 
 	private void printTitle(String categoryName) {
-		output.println("");
-		output.println(String.format("Projects in category: \"%s\"",
+		output.write("");
+		output.write(String.format("Projects in category: \"%s\"",
 				categoryName.toUpperCase()));
-		output.println("-------------------");
+		output.write("-------------------");
 	}
 
 	private void printOptions(int size) {
-		output.println("");
+		output.write("");
 		if (size > 0) {
-			output.println(String.format(
+			output.write(String.format(
 					"Choose your option [1 - %d] (0 - back)", size));
 		} else {
-			output.println("(0 - back)");
+			output.write("(0 - back)");
 		}
 	}
 
 	private void printNotFound(String categoryName) {
-		output.println("");
-		output.println(String.format(
+		output.write("");
+		output.write(String.format(
 				"There are no projects of category \"%s\"", categoryName.toUpperCase()));
 	}
 }

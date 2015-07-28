@@ -32,14 +32,6 @@ public class ProjectTest {
 	}
 
 	@Test
-	public void whenFAQIsEmptyThenReturnNA() {
-		Project testProject = new Project("test");
-		String expected = "N/A";
-		String actual = testProject.getFAQ();
-		assertEquals(expected, actual);
-	}
-
-	@Test
 	public void whenAddPledgedAmountThenAmountAdded() {
 		Project testProject = new Project("test");
 		int expected = 0;

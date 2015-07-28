@@ -49,7 +49,7 @@ public class ProjectViewTest {
 				view.add(str);
 				return null;
 			}
-		}).when(output).println(anyString());
+		}).when(output).write(anyString());
 
 		ProjectView projectView = new ProjectView(output);
 		projectView.printProject(model);
@@ -59,9 +59,9 @@ public class ProjectViewTest {
 				"     Project Events:",
 				"We have almost finished!\nWe are going to start!",
 				"     Link to video: http://www.youtube.com/jrgri74ht3h97",
-				"     Project FAQ:",
-				"How can you imagine such idea?\nBecause of whisky, babe!", "",
-				"Choose your option:", "[1 - Invest]", "[0 - Back]" };
+				"     Project FAQ:", "Q: How can you imagine such idea?",
+				"A: Because of whisky, babe!", "", "Choose your option:",
+				"[1 - Invest]", "[2 - Ask question]", "[0 - Back]" };
 		assertArrayEquals("Wrong project layout", expectedResult,
 				view.toArray());
 	}
@@ -80,7 +80,7 @@ public class ProjectViewTest {
 				view.add(str);
 				return null;
 			}
-		}).when(output).println(anyString());
+		}).when(output).write(anyString());
 
 		String testMsg = "test";
 		projectView.showMsg(testMsg);

@@ -4,9 +4,9 @@ import java.util.Scanner;
 
 public class Input {
 	
-	private InputListener listener;
+	private ConsoleInputListener listener;
 
-	public void registerListener(InputListener listener) {
+	public void registerListener(ConsoleInputListener listener) {
 		this.listener = listener;
 	}
 	

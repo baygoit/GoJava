@@ -1,8 +1,11 @@
 package goit.nz.kickstartermvc.view;
 
+import goit.nz.kickstartermvc.dao.FAQ;
 import goit.nz.kickstartermvc.dao.Project;
 import goit.nz.kickstartermvc.model.ProjectModel;
 import goit.nz.kickstartermvc.output.Output;
+
+import java.util.List;
 
 public class ProjectView {
 
@@ -18,39 +21,44 @@ public class ProjectView {
 		printProjectDetails(chosenProject);
 		printOptions();
 	}
-	
+
 	public void showMsg(String message) {
-		output.println("");
-		output.println(message);
+		output.write("");
+		output.write(message);
 	}
 
 	private void printProjectDetails(Project project) {
-		output.println(String.format("     Description: %s",
+		output.write(String.format("     Description: %s",
 				project.getDescription()));
-		output.println(String.format("     Goal: %s", project.getGoalAmount()));
-		output.println(String.format("     Pledged: %s",
+		output.write(String.format("     Goal: %s", project.getGoalAmount()));
+		output.write(String.format("     Pledged: %s",
 				project.getPledgedAmount()));
-		output.println(String.format("     Days to go: %s",
-				project.getDaysToGo()));
-		output.println("     Project Events:");
-		output.println(project.getEvents());
-		output.println(String.format("     Link to video: %s",
-				project.getLink()));
-		output.println("     Project FAQ:");
-		output.println(project.getFAQ());
+		output.write(String.format("     Days to go: %s", project.getDaysToGo()));
+		output.write("     Project Events:");
+		output.write(project.getEvents());
+		output.write(String.format("     Link to video: %s", project.getLink()));
+		output.write("     Project FAQ:");
+		List<FAQ> projectFAQ = project.getFAQ();
+		if (projectFAQ.size() > 0) {
+			for (FAQ faq : project.getFAQ()) {
+				output.write(String.format("Q: %s", faq.getQuestion()));
+				output.write(String.format("A: %s", faq.getAnswer()));
+			}
+		}
 	}
 
 	private void printTitle(String projectName) {
-		output.println("");
-		output.println(String.format("Overview of project: \"%s\"",
+		output.write("");
+		output.write(String.format("Overview of project: \"%s\"",
 				projectName.toUpperCase()));
-		output.println("-------------------");
+		output.write("-------------------");
 	}
 
 	private void printOptions() {
-		output.println("");
-		output.println("Choose your option:");
-		output.println("[1 - Invest]");
-		output.println("[0 - Back]");
+		output.write("");
+		output.write("Choose your option:");
+		output.write("[1 - Invest]");
+		output.write("[2 - Ask question]");
+		output.write("[0 - Back]");
 	}
 }

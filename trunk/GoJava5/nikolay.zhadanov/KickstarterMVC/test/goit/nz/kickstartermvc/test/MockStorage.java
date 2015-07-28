@@ -5,6 +5,7 @@ import java.util.List;
 
 import goit.nz.kickstartermvc.DataStorage;
 import goit.nz.kickstartermvc.dao.Category;
+import goit.nz.kickstartermvc.dao.FAQ;
 import goit.nz.kickstartermvc.dao.Project;
 import goit.nz.kickstartermvc.dao.Quote;
 
@@ -55,10 +56,11 @@ public class MockStorage extends DataStorage {
 		p4.setCategory(cat4);
 		Project p5 = new Project("Empty project");
 		p5.setCategory(cat4);
-		p1.setEvents("We have almost finished!\nWe are going to start!");
+		p1.addEvents("We have almost finished!\nWe are going to start!");
 		p1.setLink("http://www.youtube.com/jrgri74ht3h97");
-		p1.setFAQ("How can you imagine such idea?\nBecause of whisky, babe!");
-		p2.setEvents("Blah-blah-blah-blah...");
+		FAQ f1 = new FAQ("How can you imagine such idea?", "Because of whisky, babe!");
+		p1.addFAQ(f1);
+		p2.addEvents("Blah-blah-blah-blah...");
 		projects.add(p1);
 		projects.add(p2);
 		projects.add(p3);

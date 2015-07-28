@@ -39,4 +39,20 @@ public class ProjectModelTest {
 		assertEquals(expected, actual);
 	}
 
+	@Test
+	public void whenAddQuestionThenQuestionAddedToProject() {
+		MockStorage storage = new MockStorage();
+		storage.init();
+
+		ProjectModel model = new ProjectModel(storage);
+		String testCategoryName = storage.getCategories().get(2).getName();
+		int testProjectIndex = 1;
+		String testQuestion = "test";
+		model.addQuestion(testCategoryName, testProjectIndex, testQuestion);
+		String expected = testQuestion;
+		String actual = storage.getProjects(testCategoryName)
+				.get(testProjectIndex - 1).getFAQ().get(0).getQuestion();
+		assertEquals(expected, actual);
+	}
+
 }

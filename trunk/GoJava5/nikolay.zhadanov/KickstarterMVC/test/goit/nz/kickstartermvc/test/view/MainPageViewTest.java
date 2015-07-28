@@ -45,7 +45,7 @@ public class MainPageViewTest {
 				view.add(str);
 				return null;
 			}
-		}).when(output).println(anyString());
+		}).when(output).write(anyString());
 
 		MainPageView mainPageView = new MainPageView(output);
 		mainPageView.printHelloMsg(model);
@@ -71,7 +71,7 @@ public class MainPageViewTest {
 				view.add(str);
 				return null;
 			}
-		}).when(output).println(anyString());
+		}).when(output).write(anyString());
 
 		MainPageView mainPageView = new MainPageView(output);
 		mainPageView.printCategories(model);
@@ -100,7 +100,7 @@ public class MainPageViewTest {
 				view.add(str);
 				return null;
 			}
-		}).when(output).println(anyString());
+		}).when(output).write(anyString());
 
 		MainPageView mainPageView = new MainPageView(output);
 		mainPageView.printCategories(model);
@@ -121,7 +121,7 @@ public class MainPageViewTest {
 				view.add(str);
 				return null;
 			}
-		}).when(output).println(anyString());
+		}).when(output).write(anyString());
 
 		MainPageView mainPageView = new MainPageView(output);
 		mainPageView.showMsg("Test");

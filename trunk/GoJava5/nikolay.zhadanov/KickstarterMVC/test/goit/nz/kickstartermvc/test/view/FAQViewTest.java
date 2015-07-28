@@ -4,12 +4,10 @@ import static org.junit.Assert.assertArrayEquals;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.doAnswer;
 import goit.nz.kickstartermvc.output.Output;
-import goit.nz.kickstartermvc.view.PaymentView;
+import goit.nz.kickstartermvc.view.FAQView;
 
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -18,7 +16,7 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 
-public class PaymentViewTest {
+public class FAQViewTest {
 	@Mock
 	private Output output;
 
@@ -42,8 +40,8 @@ public class PaymentViewTest {
 			}
 		}).when(output).write(anyString());
 
-		PaymentView paymentView = new PaymentView(output);
-		paymentView.showMsg("Test");
+		FAQView faqView = new FAQView(output);
+		faqView.showMsg("Test");
 
 		String[] expectedResult = { "", "Test" };
 		assertArrayEquals("Wrong msg printed", expectedResult, view.toArray());
@@ -51,9 +49,6 @@ public class PaymentViewTest {
 
 	@Test
 	public void whenUpdateThenViewUpdated() {
-		Map<String, String> testData = new LinkedHashMap<>();
-		testData.put("Title 1", "Value 1");
-		testData.put("Title 2", "Value 2");
 
 		final List<String> view = new ArrayList<>();
 
@@ -67,11 +62,10 @@ public class PaymentViewTest {
 			}
 		}).when(output).write(anyString());
 
-		PaymentView paymentView = new PaymentView(output);
-		paymentView.update(testData, "Test prompt");
-		String[] expectedResult = { "", "Title 1: Value 1", "Title 2: Value 2",
-				"", "Test prompt", "(0 - back)" };
-		assertArrayEquals("Wrong payment view render", expectedResult,
+		FAQView faqView = new FAQView(output);
+		faqView.update();
+		String[] expectedResult = { "", "Enter your question:", "(0 - back)" };
+		assertArrayEquals("Wrong FAQ view render", expectedResult,
 				view.toArray());
 	}
 

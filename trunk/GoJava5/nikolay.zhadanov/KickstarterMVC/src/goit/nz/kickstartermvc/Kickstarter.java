@@ -1,6 +1,7 @@
 package goit.nz.kickstartermvc;
 
 import goit.nz.kickstartermvc.controller.CategoryController;
+import goit.nz.kickstartermvc.controller.FAQController;
 import goit.nz.kickstartermvc.controller.MainPageController;
 import goit.nz.kickstartermvc.controller.PaymentController;
 import goit.nz.kickstartermvc.controller.ProjectController;
@@ -11,6 +12,7 @@ import goit.nz.kickstartermvc.model.PaymentModel;
 import goit.nz.kickstartermvc.model.ProjectModel;
 import goit.nz.kickstartermvc.output.Output;
 import goit.nz.kickstartermvc.view.CategoryView;
+import goit.nz.kickstartermvc.view.FAQView;
 import goit.nz.kickstartermvc.view.MainPageView;
 import goit.nz.kickstartermvc.view.PaymentView;
 import goit.nz.kickstartermvc.view.ProjectView;
@@ -21,6 +23,7 @@ public class Kickstarter {
 	private CategoryController categoryController;
 	private ProjectController projectController;
 	private PaymentController paymentController;
+	private FAQController faqController;
 	private Input input;
 	private Dispatcher dispatcher;
 
@@ -34,6 +37,8 @@ public class Kickstarter {
 				new ProjectView(output), categoryController);
 		paymentController = new PaymentController(new PaymentModel(),
 				new PaymentView(output), projectController);
+		faqController = new FAQController(new FAQView(output),
+				projectController);
 		dispatcher = new Dispatcher();
 	}
 
@@ -49,6 +54,7 @@ public class Kickstarter {
 		dispatcher.registerListener(categoryController);
 		dispatcher.registerListener(projectController);
 		dispatcher.registerListener(paymentController);
+		dispatcher.registerListener(faqController);
 	}
 
 }

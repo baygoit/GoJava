@@ -125,7 +125,7 @@ public class ProjectControllerTest {
 	}
 
 	@Test
-	public void whenAddPaymentThenAmountAddeToProject() {
+	public void whenAddPaymentThenAmountAddedToProject() {
 		MockStorage storage = new MockStorage();
 		storage.init();
 
@@ -145,6 +145,29 @@ public class ProjectControllerTest {
 		int actual = storage.getProjects(testCategoryName)
 				.get(testProjectIndex - 1).getPledgedAmount();
 		assertEquals(testAmount, actual);
+	}
+
+	@Test
+	public void whenAddQuestionThenQuestionAddedToProject() {
+		MockStorage storage = new MockStorage();
+		storage.init();
+
+		String testCategoryName = storage.getCategories().get(2).getName();
+		int testProjectIndex = 1;
+		when(parentController.getProjectCategoryName()).thenReturn(
+				testCategoryName);
+		when(parentController.getProjectIndex()).thenReturn(testProjectIndex);
+
+		ProjectModel testModel = new ProjectModel(storage);
+		ProjectController projectController = new ProjectController(testModel,
+				view, parentController);
+		projectController.onTakeControl();
+
+		String testQuestion = "test";
+		projectController.addQuestion(testQuestion);
+		String actual = storage.getProjects(testCategoryName)
+				.get(testProjectIndex - 1).getFAQ().get(0).getQuestion();
+		assertEquals(testQuestion, actual);
 	}
 
 }

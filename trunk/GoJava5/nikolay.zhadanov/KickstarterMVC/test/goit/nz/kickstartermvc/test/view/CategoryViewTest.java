@@ -51,7 +51,7 @@ public class CategoryViewTest {
 				view.add(str);
 				return null;
 			}
-		}).when(output).println(anyString());
+		}).when(output).write(anyString());
 
 		CategoryView categoryView = new CategoryView(output);
 		categoryView.printProjects(model, testCategoryName);
@@ -92,7 +92,7 @@ public class CategoryViewTest {
 				view.add(str);
 				return null;
 			}
-		}).when(output).println(anyString());
+		}).when(output).write(anyString());
 
 		CategoryView categoryView = new CategoryView(output);
 		categoryView.printProjects(model, testCategoryName);
@@ -115,7 +115,7 @@ public class CategoryViewTest {
 				view.add(str);
 				return null;
 			}
-		}).when(output).println(anyString());
+		}).when(output).write(anyString());
 
 		CategoryView categoryView = new CategoryView(output);
 		categoryView.showMsg("Test");

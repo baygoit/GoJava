@@ -26,4 +26,9 @@ public class ProjectModel {
 		storage.addPledgedAmount(categoryName, projectIndex, amount);
 	}
 
+	public void addQuestion(String categoryName, int projectIndex,
+			String question) {
+		storage.addQuestion(categoryName, projectIndex, question);
+	}
+
 }

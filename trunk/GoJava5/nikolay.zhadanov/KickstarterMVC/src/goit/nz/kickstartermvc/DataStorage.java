@@ -1,6 +1,7 @@
 package goit.nz.kickstartermvc;
 
 import goit.nz.kickstartermvc.dao.Category;
+import goit.nz.kickstartermvc.dao.FAQ;
 import goit.nz.kickstartermvc.dao.Project;
 import goit.nz.kickstartermvc.dao.Quote;
 
@@ -53,6 +54,12 @@ public class DataStorage {
 			int amount) {
 		getProjects(categoryName).get(projectIndex - 1)
 				.addPledgedAmount(amount);
+	}
+
+	public void addQuestion(String categoryName, int projectIndex,
+			String question) {
+		FAQ faq = new FAQ(question);
+		getProjects(categoryName).get(projectIndex - 1).addFAQ(faq);
 	}
 
 }

@@ -5,6 +5,6 @@ import org.junit.runners.Suite;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({ MainPageViewTest.class, CategoryViewTest.class,
-		ProjectViewTest.class, PaymentViewTest.class })
+		ProjectViewTest.class, PaymentViewTest.class, FAQViewTest.class })
 public class ViewTestSuite {
 }

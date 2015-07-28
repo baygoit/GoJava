@@ -1,9 +1,11 @@
 package goit.nz.kickstartermvc;
 
 import goit.nz.kickstartermvc.dao.Category;
+import goit.nz.kickstartermvc.dao.FAQ;
 import goit.nz.kickstartermvc.dao.Project;
 import goit.nz.kickstartermvc.dao.Quote;
 import goit.nz.kickstartermvc.input.Input;
+import goit.nz.kickstartermvc.output.ConsoleOutput;
 import goit.nz.kickstartermvc.output.Output;
 
 import java.util.ArrayList;
@@ -17,7 +19,7 @@ public class Bootstrap {
 
 	public static void main(String[] args) {
 		input = new Input();
-		output = new Output();
+		output = new ConsoleOutput();
 		storage = new DataStorage();
 		prepareData(storage);
 		app = new Kickstarter(storage, output, input);
@@ -43,10 +45,11 @@ public class Bootstrap {
 		p4.setCategory(categories.get(3));
 		Project p5 = new Project("Empty project");
 		p5.setCategory(categories.get(3));
-		p1.setEvents("We have almost finished!\nWe are going to start!");
+		p1.addEvents("We have almost finished!\nWe are going to start!");
 		p1.setLink("http://www.youtube.com/jrgri74ht3h97");
-		p1.setFAQ("How can you imagine such idea?\nBecause of whisky, babe!");
-		p2.setEvents("Blah-blah-blah-blah...");
+		FAQ f1 = new FAQ("How can you imagine such idea?", "Because of whisky, babe!");
+		p1.addFAQ(f1);
+		p2.addEvents("Blah-blah-blah-blah...");
 		projects.add(p1);
 		projects.add(p2);
 		projects.add(p3);
@@ -79,7 +82,7 @@ public class Bootstrap {
 
 	private static void loadCategories(DataStorage storage) {
 		List<Category> categories = new ArrayList<>();
-		Category cat1 = new Category("Art");
+		Category cat1 = new Category("Arts");
 		Category cat2 = new Category("Comics");
 		Category cat3 = new Category("Crafts");
 		Category cat4 = new Category("Games");

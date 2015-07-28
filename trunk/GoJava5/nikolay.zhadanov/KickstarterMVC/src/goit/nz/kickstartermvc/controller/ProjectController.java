@@ -31,7 +31,7 @@ public class ProjectController implements DispatcherListener {
 		}
 		if (userChoice == 0) {
 			move = -1;
-		} else if (userChoice == 1) {
+		} else if (userChoice == 1 || userChoice == 2) {
 			move = userChoice;
 		} else {
 			showMessage(ControllerMessages.WRONG_USER_CHOICE_WARNING);
@@ -50,6 +50,10 @@ public class ProjectController implements DispatcherListener {
 	public void addPayment(int amount) {
 		model.updatePledgedAmount(chosenCategoryName, chosenProjectIndex,
 				amount);
+	}
+
+	public void addQuestion(String question) {
+		model.addQuestion(chosenCategoryName, chosenProjectIndex, question);
 	}
 
 	private void updateModel() {

@@ -13,21 +13,21 @@ public class PaymentView {
 	}
 	
 	public void showMsg(String msg) {
-		output.println("");
-		output.println(msg);
+		output.write("");
+		output.write(msg);
 	}
 	
 	public void update(Map<String, String> paymentData, String prompt) {
-		output.println("");
+		output.write("");
 		for (Map.Entry<String, String> row : paymentData.entrySet()) {
-			output.println(String.format("%s: %s", row.getKey(), row.getValue()));
+			output.write(String.format("%s: %s", row.getKey(), row.getValue()));
 		}
 		showMsg(prompt);
 		printOption();
 	}
 	
 	private void printOption() {
-		output.println("(0 - back)");
+		output.write("(0 - back)");
 	}
 
 }

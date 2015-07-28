@@ -6,6 +6,6 @@ import org.junit.runners.Suite;
 @RunWith(Suite.class)
 @Suite.SuiteClasses({ MainPageControllerTest.class,
 		CategoryControllerTest.class, ProjectControllerTest.class,
-		PaymentControllerTest.class })
+		PaymentControllerTest.class, FAQControllerTest.class })
 public class ControllerTestSuite {
 }

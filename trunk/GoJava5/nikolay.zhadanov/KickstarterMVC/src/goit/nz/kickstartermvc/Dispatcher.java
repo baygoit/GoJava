@@ -1,11 +1,11 @@
 package goit.nz.kickstartermvc;
 
-import goit.nz.kickstartermvc.input.InputListener;
+import goit.nz.kickstartermvc.input.ConsoleInputListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Dispatcher implements InputListener {
+public class Dispatcher implements ConsoleInputListener {
 
 	private List<DispatcherListener> controllerListeners;
 	private int currentListenerIndex;

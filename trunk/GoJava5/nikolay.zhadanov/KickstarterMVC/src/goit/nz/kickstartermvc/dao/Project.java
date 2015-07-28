@@ -1,5 +1,8 @@
 package goit.nz.kickstartermvc.dao;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Project {
 	private String name;
 	private String description;
@@ -9,7 +12,7 @@ public class Project {
 	private Category category;
 	private String projectEvents; // TODO extract new class
 	private String linkToVideo;
-	private String fAQ; // TODO extract new class
+	private List<FAQ> faqs;
 
 	public Project(String name) {
 		this.name = name;
@@ -19,7 +22,7 @@ public class Project {
 		daysToGo = 0;
 		projectEvents = "";
 		linkToVideo = "";
-		fAQ = "";
+		faqs = new ArrayList<>();
 	}
 
 	public Project(String name, String desc, int required, int collected,
@@ -31,7 +34,7 @@ public class Project {
 		daysToGo = days;
 		projectEvents = "";
 		linkToVideo = "";
-		fAQ = "";
+		faqs = new ArrayList<>();
 	}
 
 	public void setCategory(Category cat) {
@@ -65,7 +68,7 @@ public class Project {
 		return daysToGo;
 	}
 
-	public void setEvents(String history) {
+	public void addEvents(String history) {
 		projectEvents = history;
 	}
 
@@ -73,8 +76,8 @@ public class Project {
 		linkToVideo = link;
 	}
 
-	public void setFAQ(String qa) {
-		fAQ = qa;
+	public void addFAQ(FAQ faq) {
+		faqs.add(faq);
 	}
 
 	public String getEvents() {
@@ -91,11 +94,8 @@ public class Project {
 		return linkToVideo;
 	}
 
-	public String getFAQ() {
-		if (fAQ.isEmpty()) {
-			return "N/A";
-		}
-		return fAQ;
+	public List<FAQ> getFAQ() {
+		return faqs;
 	}
 	
 	public void addPledgedAmount(int amount) {

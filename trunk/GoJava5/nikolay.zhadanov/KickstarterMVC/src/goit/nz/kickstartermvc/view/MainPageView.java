@@ -13,7 +13,7 @@ public class MainPageView {
 	}
 
 	public void printHelloMsg(MainPageModel model) {
-		output.println(model.getRandomQuote());
+		output.write(model.getRandomQuote());
 	}
 
 	public void printCategories(MainPageModel model) {
@@ -22,7 +22,7 @@ public class MainPageView {
 			printTitle();
 			int index = 1;
 			for (Category category : model.getCategories()) {
-				output.println(String.format("(%d). %s", index++,
+				output.write(String.format("(%d). %s", index++,
 						category.getName()));
 			}
 		} else {
@@ -32,23 +32,23 @@ public class MainPageView {
 	}
 
 	public void showMsg(String msg) {
-		output.println("");
-		output.println(msg);
+		output.write("");
+		output.write(msg);
 	}
 
 	private void printTitle() {
-		output.println("");
-		output.println("List of categories:");
-		output.println("-------------------");
+		output.write("");
+		output.write("List of categories:");
+		output.write("-------------------");
 	}
 
 	private void printOptions(int modelSize) {
-		output.println("");
+		output.write("");
 		if (modelSize > 0) {
-			output.println(String.format(
+			output.write(String.format(
 					"Choose your option [1 - %d] (0 - exit)", modelSize));
 		} else {
-			output.println("(0 - exit)");
+			output.write("(0 - exit)");
 		}
 	}
 }

@@ -1,8 +1,6 @@
 package goit.nz.kickstartermvc.output;
 
-public class Output {
+public interface Output {
 
-	public void println(String str) {
-		System.out.println(str);
-	}
+	void write(String str);
 }
