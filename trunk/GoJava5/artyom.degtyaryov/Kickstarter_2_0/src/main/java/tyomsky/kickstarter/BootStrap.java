@@ -2,10 +2,7 @@ package tyomsky.kickstarter;
 
 import tyomsky.kickstarter.common.DBConnectionManager;
 import tyomsky.kickstarter.controller.*;
-import tyomsky.kickstarter.dao.CategoriesDAO;
-import tyomsky.kickstarter.dao.CategoriesDAOFile;
-import tyomsky.kickstarter.dao.ProjectsDAOMemory;
-import tyomsky.kickstarter.dao.ProjectsDAO;
+import tyomsky.kickstarter.dao.*;
 import tyomsky.kickstarter.model.Category;
 import tyomsky.kickstarter.model.Project;
 import tyomsky.kickstarter.model.QuoteGenerator;
@@ -26,7 +23,10 @@ public class BootStrap {
 
         ConsoleIO console = new ConsoleIO();
 
-        CategoriesDAO categories = new CategoriesDAOFile("file/categories.txt");
+        CategoriesDAO categories = new CategoriesDAODB();
+        categories.add(new Category("Games"));
+        categories.add(new Category("Music"));
+        categories.add(new Category("Films"));
 
         ProjectsDAO projects = new ProjectsDAOMemory();
         Project project1 = new Project("GTA 5", "5-th episode of epic game",
