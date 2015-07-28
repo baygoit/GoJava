@@ -147,7 +147,7 @@ public class MainPageControllerTest {
 	@Test
 	public void whenGetChosenCategoryName() {
 		MockStorage storage = new MockStorage();
-		storage.init();
+		storage.prepareData();
 
 		MainPageModel mainPageModel = new MainPageModel(storage);
 		MainPageController mainPageController = new MainPageController(

@@ -11,7 +11,7 @@ public class ProjectModelTest {
 	@Test
 	public void whenUpdateThenModelIsUpdated() {
 		MockStorage storage = new MockStorage();
-		storage.init();
+		storage.prepareData();
 
 		ProjectModel model = new ProjectModel(storage);
 		String testCategoryName = storage.getCategories().get(1).getName();
@@ -25,7 +25,7 @@ public class ProjectModelTest {
 	@Test
 	public void whenAddPledgedAmountThenAmountAddedToProject() {
 		MockStorage storage = new MockStorage();
-		storage.init();
+		storage.prepareData();
 
 		ProjectModel model = new ProjectModel(storage);
 		String testCategoryName = storage.getCategories().get(1).getName();
@@ -42,7 +42,7 @@ public class ProjectModelTest {
 	@Test
 	public void whenAddQuestionThenQuestionAddedToProject() {
 		MockStorage storage = new MockStorage();
-		storage.init();
+		storage.prepareData();
 
 		ProjectModel model = new ProjectModel(storage);
 		String testCategoryName = storage.getCategories().get(2).getName();

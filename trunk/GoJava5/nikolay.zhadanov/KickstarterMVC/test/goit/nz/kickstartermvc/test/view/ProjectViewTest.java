@@ -33,7 +33,7 @@ public class ProjectViewTest {
 	@Test
 	public void whenPrintProjectThenProjectPrinted() {
 		MockStorage storage = new MockStorage();
-		storage.init();
+		storage.prepareData();
 
 		when(model.getProject()).thenReturn(
 				storage.getProjects(storage.getCategories().get(1).getName())

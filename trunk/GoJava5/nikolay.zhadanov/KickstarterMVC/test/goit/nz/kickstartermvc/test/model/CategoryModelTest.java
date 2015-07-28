@@ -11,7 +11,7 @@ public class CategoryModelTest {
 	@Test
 	public void whenUpdateThenModelIsUpdated() {
 		MockStorage storage = new MockStorage();
-		storage.init();
+		storage.prepareData();
 
 		CategoryModel model = new CategoryModel(storage);
 		model.update(storage.getCategories().get(0).getName());
@@ -28,7 +28,7 @@ public class CategoryModelTest {
 	@Test
 	public void whenGetProjectsThenProjectsReturned() {
 		MockStorage storage = new MockStorage();
-		storage.init();
+		storage.prepareData();
 
 		CategoryModel model = new CategoryModel(storage);
 		model.update(storage.getCategories().get(0).getName());
@@ -41,29 +41,5 @@ public class CategoryModelTest {
 		actual = model.getProjects().size();
 		assertEquals(expected, actual);
 	}
-
-//	@Test
-//	public void whenGetChosenProjectThenChosenProjectReturned() {
-//		MockStorage storage = new MockStorage();
-//		storage.init();
-//
-//		CategoryModel model = new CategoryModel(storage);
-//		model.update(storage.getCategories().get(3).getName());
-//		String expected = "name4";
-//		String actual = model.getChosenProject(2).getName();
-//		assertEquals(expected, actual);
-//	}
-
-//	@Test(expected = IndexOutOfBoundsException.class)
-//	public void whenGetChosenProjectWithIncorrectIndexThenIndexOutOfBoundsException() {
-//		MockStorage storage = new MockStorage();
-//		storage.init();
-//
-//		CategoryModel model = new CategoryModel(storage);
-//		model.update(storage.getCategories().get(0).getName());
-//		String expected = "name555";
-//		String actual = model.getChosenProject(1).getName();
-//		assertEquals(expected, actual);
-//	}
 
 }

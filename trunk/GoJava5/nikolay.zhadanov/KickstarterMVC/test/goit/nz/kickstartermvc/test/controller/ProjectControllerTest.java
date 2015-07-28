@@ -108,7 +108,7 @@ public class ProjectControllerTest {
 	@Test
 	public void whenOnTakeControlThenModelAndViewUpdated() {
 		MockStorage storage = new MockStorage();
-		storage.init();
+		storage.prepareData();
 
 		String testCategoryName = storage.getCategories().get(3).getName();
 		int testProjectIndex = 1;
@@ -127,7 +127,7 @@ public class ProjectControllerTest {
 	@Test
 	public void whenAddPaymentThenAmountAddedToProject() {
 		MockStorage storage = new MockStorage();
-		storage.init();
+		storage.prepareData();
 
 		String testCategoryName = storage.getCategories().get(1).getName();
 		int testProjectIndex = 1;
@@ -150,7 +150,7 @@ public class ProjectControllerTest {
 	@Test
 	public void whenAddQuestionThenQuestionAddedToProject() {
 		MockStorage storage = new MockStorage();
-		storage.init();
+		storage.prepareData();
 
 		String testCategoryName = storage.getCategories().get(2).getName();
 		int testProjectIndex = 1;

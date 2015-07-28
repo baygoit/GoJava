@@ -26,8 +26,8 @@ import org.junit.runners.Suite;
 		CategoryModelTest.class, ProjectModelTest.class, ProjectTest.class,
 		MainPageControllerTest.class, CategoryControllerTest.class,
 		ProjectControllerTest.class, DispatcherTest.class,
-		KickstarterTest.class, BootstrapTest.class, PaymentViewTest.class,
-		PaymentModelTest.class, PaymentControllerTest.class, FAQTest.class,
-		FAQViewTest.class, FAQControllerTest.class })
+		KickstarterTest.class, PaymentViewTest.class, PaymentModelTest.class,
+		PaymentControllerTest.class, FAQTest.class, FAQViewTest.class,
+		FAQControllerTest.class })
 public class KickstarterTestSuite {
 }

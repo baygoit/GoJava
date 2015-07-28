@@ -56,7 +56,7 @@ public class MainPageViewTest {
 	@Test
 	public void whenPrintCategoriesThenCategoriesPrinted() {
 		MockStorage storage = new MockStorage();
-		storage.init();
+		storage.prepareData();
 
 		when(model.getCategories()).thenReturn(storage.getCategories());
 		when(model.size()).thenReturn(storage.getCategories().size());
@@ -76,7 +76,7 @@ public class MainPageViewTest {
 		MainPageView mainPageView = new MainPageView(output);
 		mainPageView.printCategories(model);
 		String[] expectedResult = { "", "List of categories:",
-				"-------------------", "(1). Art", "(2). Comics",
+				"-------------------", "(1). Arts", "(2). Comics",
 				"(3). Crafts", "(4). Games", "",
 				"Choose your option [1 - 4] (0 - exit)" };
 		assertArrayEquals("Wrong categories render", expectedResult,

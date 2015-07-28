@@ -33,7 +33,7 @@ public class CategoryViewTest {
 	@Test
 	public void whenPrintProjectsThenProjectsPrinted() {
 		MockStorage storage = new MockStorage();
-		storage.init();
+		storage.prepareData();
 		String testCategoryName = "Crafts";
 		int testModelSize = storage.getProjects(testCategoryName).size();
 
@@ -74,7 +74,7 @@ public class CategoryViewTest {
 	@Test
 	public void whenCategoryHasNoProjectsThenWarningPrinted() {
 		MockStorage storage = new MockStorage();
-		storage.init();
+		storage.prepareData();
 		String testCategoryName = "Art";
 		int testModelSize = storage.getProjects(testCategoryName).size();
 
