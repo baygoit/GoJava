@@ -18,8 +18,26 @@ public class CategoryModelTest {
 	public void setUp() throws Exception {
 		categoryDao = new CategoryDaoImplHardCoding();
 		categoryesforEquals = new ArrayList<Category>();
-		Category category1 = new Category(0, "Art");
-		categoryesforEquals.add(category1);
+		categoryesforEquals.add(new Category(0, "Art"));
+		categoryesforEquals.add(new Category(1, "Comics"));
+		categoryesforEquals.add(new Category(2, "Crafts"));
+		categoryesforEquals.add(new Category(3, "Dance"));
+		categoryesforEquals.add(new Category(4, "Design"));
+		categoryesforEquals.add(new Category(5, "Fashion"));
+		categoryesforEquals.add(new Category(6, "Film & Video"));
+		categoryesforEquals.add(new Category(7, "Food"));
+		categoryesforEquals.add(new Category(8, "Games"));
+		categoryesforEquals.add(new Category(9, "Journalism"));
+		categoryesforEquals.add(new Category(10, "Music"));
+		categoryesforEquals.add(new Category(11, "Photography"));
+		categoryesforEquals.add(new Category(12, "Publishing"));
+		categoryesforEquals.add(new Category(13, "Technology"));
+		categoryesforEquals.add(new Category(14, "Theater"));
+	}
+	
+	@Test
+	public void getCategoryList(){
+			assertEquals(categoryDao.getCategoryNameById(10), categoryesforEquals.get(10).getCategoryName());
 	}
 
 	@Test
@@ -30,8 +48,15 @@ public class CategoryModelTest {
 
 	@Test
 	public void getNonExistCategoryId() {
-		assertEquals("-1", categoryDao.getCategoryById(1000));
-
+		assertEquals("-1", categoryDao.getCategoryNameById(1000));
 	}
+	
+	@Test
+	public void addCategory(){
+		categoryDao.addCategory(new Category(15, "Some category"));
+		assertEquals("Some category",categoryDao.getCategoryNameById(15));
+	}
+	
+
 
 }
