@@ -1,5 +1,6 @@
 package tyomsky.kickstarter;
 
+import tyomsky.kickstarter.common.DBConnectionManager;
 import tyomsky.kickstarter.controller.*;
 import tyomsky.kickstarter.dao.CategoriesDAO;
 import tyomsky.kickstarter.dao.CategoriesDAOFile;
@@ -11,15 +12,21 @@ import tyomsky.kickstarter.model.QuoteGenerator;
 import tyomsky.kickstarter.ui.ConsoleIO;
 import tyomsky.kickstarter.view.TextView;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Random;
 
 public class BootStrap {
 
     public static void main(String[] args) {
 
+        initializeDB();
+
         ConsoleIO console = new ConsoleIO();
 
-        CategoriesDAO categories = new CategoriesDAOFile("categories.txt");
+        CategoriesDAO categories = new CategoriesDAOFile("file/categories.txt");
 
         ProjectsDAO projects = new ProjectsDAOMemory();
         Project project1 = new Project("GTA 5", "5-th episode of epic game",
@@ -51,5 +58,22 @@ public class BootStrap {
 
         Kickstarter kickstarter = new Kickstarter(categoriesMenu, textView, new QuoteGenerator(new Random()));
         kickstarter.run();
+    }
+
+    public static void initializeDB() {
+        try {
+            Class.forName("org.h2.Driver");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        try (Connection connection = DriverManager.getConnection("jdbc:h2:mem:kickstarter;DB_CLOSE_DELAY=-1", "sa", "")) {
+            Statement statement = connection.createStatement();
+            statement.executeUpdate("CREATE TABLE Categories (" +
+                    " id INT PRIMARY KEY AUTO_INCREMENT," +
+                    " name VARCHAR(255) )");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
     }
 }

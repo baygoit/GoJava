@@ -3,6 +3,7 @@ package tyomsky.kickstarter.dao;
 import tyomsky.kickstarter.model.Category;
 
 import java.io.*;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +12,7 @@ public class CategoriesDAOFile implements CategoriesDAO {
     File file;
 
     public CategoriesDAOFile(String fileName) {
-        this.file = findOrCreateFile(fileName);
+        this.file = findFile(fileName);
     }
 
     @Override
@@ -78,15 +79,16 @@ public class CategoriesDAOFile implements CategoriesDAO {
         }
     }
 
-    private File findOrCreateFile(String fileName) {
-        File result = new File(fileName);
-        if (!result.exists()) {
-            try {
-                result.createNewFile();
-            } catch (IOException e) {
-                throw new RuntimeException("Can't create file!");
-            }
+    private File findFile(String fileName) {
+        ClassLoader classLoader = getClass().getClassLoader();
+        URL resource = classLoader.getResource(fileName);
+        File result;
+        if (resource != null) {
+            result = new File(resource.getFile());
+        } else {
+            throw new RuntimeException(String.format("File %s not found!", fileName));
         }
+
         return result;
     }
 

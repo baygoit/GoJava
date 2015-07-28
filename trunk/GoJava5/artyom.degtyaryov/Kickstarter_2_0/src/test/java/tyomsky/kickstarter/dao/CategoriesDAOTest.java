@@ -57,6 +57,7 @@ public abstract class CategoriesDAOTest {
 
     @Test
     public void WhenGetAll_ShouldReturnAllElements() {
+        categories.getAll();
         Category category1 = new Category("name1");
         Category category2 = new Category("name2");
         Category category3 = new Category("name3");
