@@ -5,14 +5,15 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.File;
-import static org.junit.Assert.*;
+
+import static org.junit.Assert.assertEquals;
 
 public abstract class CategoriesTest {
 
     private Categories categories;
 
     @Before
-    public void setup(){
+    public void setup() {
         categories = getCategories();
     }
 

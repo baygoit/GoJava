@@ -1,16 +1,15 @@
 package goit5.nikfisher.kickstarter.view;
 
 import goit5.nikfisher.kickstarter.dao.Categories;
-import goit5.nikfisher.kickstarter.dao.InMemoryCategories;
 import goit5.nikfisher.kickstarter.dao.InFileCategories;
 import goit5.nikfisher.kickstarter.dao.InMemoryProjects;
-import goit5.nikfisher.kickstarter.dao.InFileProjects;
 import goit5.nikfisher.kickstarter.dao.Projects;
 import goit5.nikfisher.kickstarter.menu.CategoryMenu;
-import goit5.nikfisher.kickstarter.model.*;
+import goit5.nikfisher.kickstarter.model.Category;
+import goit5.nikfisher.kickstarter.model.Project;
 import goit5.nikfisher.kickstarter.streams.ConsoleInterfaceIO;
 
-public class View{
+public class View {
 
     private ConsoleInterfaceIO io;
     private Projects projects;
@@ -22,7 +21,7 @@ public class View{
         this.projects = projects;
     }
 
-    public void createCategories(){
+    public void createCategories() {
 
         Category category1 = new Category("Game");
         Category category2 = new Category("Design");

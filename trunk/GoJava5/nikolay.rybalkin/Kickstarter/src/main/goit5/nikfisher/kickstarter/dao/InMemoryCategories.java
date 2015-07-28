@@ -1,6 +1,5 @@
 package goit5.nikfisher.kickstarter.dao;
 
-import goit5.nikfisher.kickstarter.dao.Categories;
 import goit5.nikfisher.kickstarter.model.Category;
 
 import java.util.ArrayList;
@@ -10,30 +9,30 @@ import java.util.Map;
 
 public class InMemoryCategories implements Categories {
 
-	private Map<Integer,Category> categories = new HashMap<>();
+    private Map<Integer, Category> categories = new HashMap<>();
 
-	private int index = 0;
+    private int index = 0;
 
-	public void add(Category category) {
+    public void add(Category category) {
 
-		categories.put(index++, category);
-	}
+        categories.put(index++, category);
+    }
 
-	public List<String> getCategories(){
+    public List<String> getCategories() {
 
-		List<String> result = new ArrayList<>();
+        List<String> result = new ArrayList<>();
 
-		for (int i = 0; i < index; i++) {
-				result.add(String.valueOf(i + 1) + ") " + categories.get(i).getName());
-		}
-		return result;
-	}
+        for (int i = 0; i < index; i++) {
+            result.add(String.valueOf(i + 1) + ") " + categories.get(i).getName());
+        }
+        return result;
+    }
 
-	public Category get(int index) {
-		return  categories.get(index);
-	}
+    public Category get(int index) {
+        return categories.get(index);
+    }
 
-	public int size() {
-		return index;
-	}
+    public int size() {
+        return index;
+    }
 }

@@ -10,37 +10,37 @@ import java.util.Map;
 
 public class InMemoryProjects implements Projects {
 
-	private int index = 0;
+    private int index = 0;
 
-	private Map<Integer,Project> projects = new HashMap<>();
+    private Map<Integer, Project> projects = new HashMap<>();
 
-	@Override
-	public void add(Project project) {
-		projects.put(index++, project);
-	}
+    @Override
+    public void add(Project project) {
+        projects.put(index++, project);
+    }
 
-	@Override
-	public List<Project> getProjects(Category category){
+    @Override
+    public List<Project> getProjects(Category category) {
 
-		List<Project> result = new ArrayList<>();
-		int found = 0;
+        List<Project> result = new ArrayList<>();
+        int found = 0;
 
-		for (int i = 0; i < index; i++) {
-			Project project = projects.get(i);
+        for (int i = 0; i < index; i++) {
+            Project project = projects.get(i);
 
-			if (project.getCategory().equals(category)){
-				result.add(found, project);
-				found++;
-			}
-		}
+            if (project.getCategory().equals(category)) {
+                result.add(found, project);
+                found++;
+            }
+        }
 
-		return result;
-	}
+        return result;
+    }
 
-	@Override
-	public Project get(int index) {
-		return projects.get(index);
-	}
+    @Override
+    public Project get(int index) {
+        return projects.get(index);
+    }
 
 
 }

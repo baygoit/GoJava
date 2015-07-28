@@ -12,7 +12,7 @@ public class PaymentMenu {
         PaymentMenu.io = io;
     }
 
-    public void bonusMenu(Project project){
+    public void bonusMenu(Project project) {
 
         io.println("Please select payment option:");
         io.println("1) If you invest 10% of the required amount, you will receive a 5%.");
@@ -23,17 +23,17 @@ public class PaymentMenu {
         int required_amount = project.getAmount();
         int needAmount;
 
-        switch (value){
+        switch (value) {
             case 1: {
-                needAmount =  (required_amount / 100) * 10;
+                needAmount = (required_amount / 100) * 10;
                 break;
             }
             case 2: {
-                needAmount =  (required_amount / 100) * 50;
+                needAmount = (required_amount / 100) * 50;
                 break;
             }
             case 3: {
-                needAmount =  required_amount;
+                needAmount = required_amount;
                 break;
             }
             default:

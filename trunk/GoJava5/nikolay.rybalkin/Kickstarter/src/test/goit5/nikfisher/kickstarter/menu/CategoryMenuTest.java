@@ -12,6 +12,7 @@ import org.junit.Test;
 import org.mockito.Mock;
 
 import static org.mockito.Mockito.*;
+
 public class CategoryMenuTest {
 
 //    @After
@@ -23,7 +24,7 @@ public class CategoryMenuTest {
     InMemoryCategories categories = new InMemoryCategories();
 
     @Test
-     public void shouldCategoriesWenHaveCategories() throws Exception {
+    public void shouldCategoriesWenHaveCategories() throws Exception {
         //given
 
         categories.add(new Category("Game"));

@@ -1,10 +1,6 @@
 package goit5.nikfisher.kickstarter.dao;
 
-import org.junit.After;
-
-import java.io.File;
-
-public class InFileCategoryTest /*extends CategoriesTest*/{
+public class InFileCategoryTest /*extends CategoriesTest*/ {
 
 //    @Override
 //    Categories getCategories() {

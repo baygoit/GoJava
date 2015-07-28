@@ -1,9 +1,11 @@
 package goit5.nikfisher.kickstarter.dao;
 
-import goit5.nikfisher.kickstarter.dao.Categories;
 import goit5.nikfisher.kickstarter.model.Category;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -46,7 +48,7 @@ public class InFileCategories implements Categories {
             List<String> result = new LinkedList<>();
             String line = in.readLine();
             int index = 1;
-            while (line != null){
+            while (line != null) {
                 result.add(index + ") " + line);
                 line = in.readLine();
                 index++;
@@ -75,8 +77,8 @@ public class InFileCategories implements Categories {
 
             String line = in.readLine();
             int current = 0;
-            while (line != null){
-                if (current == index){
+            while (line != null) {
+                if (current == index) {
                     break;
                 }
                 line = in.readLine();
@@ -108,14 +110,13 @@ public class InFileCategories implements Categories {
 
             int counter = 0;
             String line = in.readLine();
-            while (line != null){
+            while (line != null) {
                 line = in.readLine();
                 counter++;
             }
             return counter;
 
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         } finally {
             try {
@@ -130,7 +131,7 @@ public class InFileCategories implements Categories {
 
     private File createNewFile(String fileNme) {
         File file = new File(fileNme);
-        if(!file.exists()){
+        if (!file.exists()) {
             try {
                 file.createNewFile();
             } catch (IOException e) {

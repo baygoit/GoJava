@@ -3,7 +3,8 @@ package goit5.nikfisher.kickstarter.menu;
 
 import goit5.nikfisher.kickstarter.dao.Categories;
 import goit5.nikfisher.kickstarter.dao.Projects;
-import goit5.nikfisher.kickstarter.model.*;
+import goit5.nikfisher.kickstarter.model.Category;
+import goit5.nikfisher.kickstarter.model.Project;
 import goit5.nikfisher.kickstarter.streams.ConsoleIO;
 import goit5.nikfisher.kickstarter.streams.ConsoleInterfaceIO;
 
@@ -19,22 +20,22 @@ public class CategoryMenu {
     public CategoryMenu(ConsoleInterfaceIO io, Projects projects, Categories categories) {
         this.io = io;
         this.categories = categories;
-		this.projects = projects;
+        this.projects = projects;
     }
 
     public void categoryMenu() {
-        while (true){
+        while (true) {
 
             askCategory();
 
             int categoryIndex = io.consoleScanInt();
 
-            if (categoryIndex == 0){
+            if (categoryIndex == 0) {
                 break;
             }
             Category category = chooseCategory(categoryIndex);
 
-            if (category == null){
+            if (category == null) {
                 continue;
             }
 
@@ -48,7 +49,7 @@ public class CategoryMenu {
 
     private Category chooseCategory(int categoryIndex) {
 
-        if ( categoryIndex <= 0 || categories.size() < categoryIndex){
+        if (categoryIndex <= 0 || categories.size() < categoryIndex) {
             io.println("Not true index: " + categoryIndex);
             return null;
         }
@@ -77,12 +78,12 @@ public class CategoryMenu {
     //TODO
     private void printProject(Project project) {
 
-		io.println("Project name: " + project.getName());
-		io.println("Description: " + project.getDescription());
-		io.println("Need collected: " + project.getAmount() + "$");
-		io.println("Already collected: " + project.getExist() + "$");
-		io.println("Days remaining: " + project.getDays());
-		io.println("---------------------------------------");
-		io.println(SPACE);
-	}
+        io.println("Project name: " + project.getName());
+        io.println("Description: " + project.getDescription());
+        io.println("Need collected: " + project.getAmount() + "$");
+        io.println("Already collected: " + project.getExist() + "$");
+        io.println("Days remaining: " + project.getDays());
+        io.println("---------------------------------------");
+        io.println(SPACE);
+    }
 }

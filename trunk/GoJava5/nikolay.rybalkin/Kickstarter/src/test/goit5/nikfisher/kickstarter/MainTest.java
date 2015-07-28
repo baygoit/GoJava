@@ -5,7 +5,7 @@ import goit5.nikfisher.kickstarter.dao.InMemoryCategories;
 import goit5.nikfisher.kickstarter.dao.InMemoryProjects;
 import goit5.nikfisher.kickstarter.dao.Projects;
 import goit5.nikfisher.kickstarter.menu.CategoryMenu;
-import goit5.nikfisher.kickstarter.model.*;
+import goit5.nikfisher.kickstarter.model.Category;
 import goit5.nikfisher.kickstarter.streams.ConsoleInterfaceIO;
 import org.junit.After;
 import org.junit.Test;
@@ -14,14 +14,12 @@ import org.mockito.Mock;
 import java.io.File;
 
 import static org.mockito.Mockito.*;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
 
 public class MainTest {
 
 
     @After
-    public void cleanup(){
+    public void cleanup() {
         new File("category_test.txt").delete();
     }
 

@@ -3,10 +3,16 @@ package goit5.nikfisher.kickstarter.dao;
 import goit5.nikfisher.kickstarter.model.Category;
 import goit5.nikfisher.kickstarter.model.Project;
 
-import java.io.*;
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.util.ArrayList;
+import java.util.List;
 
-public class InFileProjects  implements Projects {
+public class InFileProjects implements Projects {
 
     private File file;
 
@@ -16,21 +22,20 @@ public class InFileProjects  implements Projects {
 
     @Override
     public void add(Project project) {
-//        BufferedWriter out = null;
-//        try {
-//            out = new BufferedWriter(new FileWriter(file, true));
-//            out.append(project.getName()).append("/");
-//
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        } finally {
-//            try {
-//                assert out != null;
-//                out.close();
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        }
+        BufferedWriter out = null;
+        try {
+            out = new BufferedWriter(new FileWriter(file, true));
+            out.append(project.getName()).append("\n");
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                assert out != null;
+                out.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     @Override
@@ -40,20 +45,23 @@ public class InFileProjects  implements Projects {
 
 
         try {
-//            in = new BufferedReader(new FileReader(file));
+            in = new BufferedReader(new FileReader(file));
 //
             List<Project> result = new ArrayList<>();
             String line = in.readLine();
-//            int index = 1;
-//
-//            while (line != null){
-//                Project project = line;
-//
+            int index = 1;
+
+            while (line != null){
+                Project project = new Project(line);
+
+                project.getCategory();
+
+                result.add(index, project);
 //                if (project.getCategory().equals(category)){
-//                    result.add(found, project);
-//                    found++;
+//                    result.add(index, project);
+//                    index++;
 //                }
-//            }
+            }
 
             return result;
 
@@ -80,8 +88,8 @@ public class InFileProjects  implements Projects {
 
             String line = in.readLine();
             int current = 0;
-            while (line != null){
-                if (current == index){
+            while (line != null) {
+                if (current == index) {
                     break;
                 }
                 line = in.readLine();
@@ -104,7 +112,7 @@ public class InFileProjects  implements Projects {
 
     private File createNewFile(String fileNme) {
         File file = new File(fileNme);
-        if(!file.exists()){
+        if (!file.exists()) {
             try {
                 file.createNewFile();
             } catch (IOException e) {

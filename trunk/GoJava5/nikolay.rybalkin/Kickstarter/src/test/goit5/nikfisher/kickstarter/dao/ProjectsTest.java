@@ -1,6 +1,5 @@
 package goit5.nikfisher.kickstarter.dao;
 
-import goit5.nikfisher.kickstarter.dao.Projects;
 import goit5.nikfisher.kickstarter.model.Category;
 import goit5.nikfisher.kickstarter.model.Project;
 import org.junit.Before;
@@ -16,14 +15,14 @@ public abstract class ProjectsTest {
     private Projects projects;
 
     @Before
-    public void setup(){
+    public void setup() {
         projects = getProjects();
     }
 
     abstract Projects getProjects();
 
     @Test
-    public void  shouldProjectsWenNoProjectsWithNoSameCategory() throws Exception {
+    public void shouldProjectsWenNoProjectsWithNoSameCategory() throws Exception {
         //given
 
         Category category1 = new Category("Game");
@@ -46,7 +45,7 @@ public abstract class ProjectsTest {
     }
 
     @Test
-    public void  shouldProjectsWenNoProjectsWithSameCategory() throws Exception {
+    public void shouldProjectsWenNoProjectsWithSameCategory() throws Exception {
         //given
         Category category1 = new Category("Game");
         Category category2 = new Category("Design");
@@ -73,11 +72,11 @@ public abstract class ProjectsTest {
     }
 
     @Test
-    public void  shouldProjectsWenNoProjects() throws Exception {
+    public void shouldProjectsWenNoProjects() throws Exception {
         //given
 
         //when
-        List <Project> found = projects.getProjects(new Category("Game"));
+        List<Project> found = projects.getProjects(new Category("Game"));
 
         //then
         assertEquals(0, found.size());
