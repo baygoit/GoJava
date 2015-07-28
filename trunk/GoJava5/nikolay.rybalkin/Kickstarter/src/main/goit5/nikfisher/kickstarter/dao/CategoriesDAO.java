@@ -12,6 +12,11 @@ import java.util.List;
 
 public class CategoriesDAO implements Categories {
 
+
+    public static Connection conn;
+    public static Statement statmt;
+    public static ResultSet resSet;
+
     static {
         try {
             Class.forName("org.sqlite.JDBC");
@@ -25,17 +30,18 @@ public class CategoriesDAO implements Categories {
         Connection connection = null;
         try {
             // create a database connection
-            connection = DriverManager.getConnection("jdbc:sqlite:./src/main/resources/kickstarters.db");
+            connection = DriverManager.getConnection("jdbc:sqlite:src/main/resources/kickstarter.db");
             Statement statement = connection.createStatement();
             statement.setQueryTimeout(30);  // set timeout to 30 sec.
 
             ResultSet rs = statement.executeQuery("select * from Categories");
+            while(rs.next())
+            {
+                // read the result set
+                System.out.println("name = " + rs.getString("name"));
+                System.out.println("id = " + rs.getInt("id"));
+            }
 
-//            while (rs.next()) {
-//                // read the result set
-//                System.out.println("name = " + rs.getString("name"));
-//                System.out.println("id = " + rs.getInt("id"));
-//            }
 
             System.out.println("Test connecting good!");
         } catch (SQLException e) {
