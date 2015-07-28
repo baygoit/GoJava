@@ -1,6 +1,6 @@
 package tyomsky.kickstarter;
 
-import tyomsky.kickstarter.common.DBConnectionManager;
+import tyomsky.kickstarter.common.DBConnector;
 import tyomsky.kickstarter.controller.*;
 import tyomsky.kickstarter.dao.*;
 import tyomsky.kickstarter.model.Category;
@@ -10,7 +10,6 @@ import tyomsky.kickstarter.ui.ConsoleIO;
 import tyomsky.kickstarter.view.TextView;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Random;
@@ -61,12 +60,7 @@ public class BootStrap {
     }
 
     public static void initializeDB() {
-        try {
-            Class.forName("org.h2.Driver");
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-        try (Connection connection = DriverManager.getConnection("jdbc:h2:mem:kickstarter;DB_CLOSE_DELAY=-1", "sa", "")) {
+        try (Connection connection = new DBConnector("h2db.properties").getConnection()) {
             Statement statement = connection.createStatement();
             statement.executeUpdate("CREATE TABLE Categories (" +
                     " id INT PRIMARY KEY AUTO_INCREMENT," +
@@ -74,6 +68,5 @@ public class BootStrap {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
     }
 }
