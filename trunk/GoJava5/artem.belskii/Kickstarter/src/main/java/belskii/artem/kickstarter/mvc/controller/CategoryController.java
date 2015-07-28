@@ -1,6 +1,6 @@
 package belskii.artem.kickstarter.mvc.controller;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import belskii.artem.kickstarter.dao.category.Category;
 import belskii.artem.kickstarter.mvc.model.CategoryModel;
@@ -19,12 +19,12 @@ public class CategoryController {
 		model.addCategory(categoriName);
 	}
 	
-	public List<Category> getCategoryList(){
+	public ArrayList<Category> getCategoryList(){
 		return model.getCategoryList();
 	}
 	
-	public void printCategoryList(){
-		view.printCategoryList();
+	public  ArrayList<Category> printCategoryList(){
+		return view.printCategoryList(this.getCategoryList());
 	}
 
 }

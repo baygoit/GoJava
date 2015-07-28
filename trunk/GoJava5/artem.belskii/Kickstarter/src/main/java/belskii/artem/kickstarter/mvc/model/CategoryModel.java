@@ -1,6 +1,6 @@
 package belskii.artem.kickstarter.mvc.model;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import belskii.artem.kickstarter.dao.category.Category;
 import belskii.artem.kickstarter.dao.category.CategoryDao;
@@ -13,7 +13,7 @@ public class CategoryModel {
 		categoryDao.addCategory(categoryInfo);
 	}
 
-	public List<Category> getCategoryList() {
+	public ArrayList<Category> getCategoryList() {
 		return categoryDao.getCategoryList();
 	}
 }
