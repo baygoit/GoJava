@@ -20,11 +20,10 @@ public class MainPageView {
 		int modelSize = model.size();
 		if (modelSize > 0) {
 			printTitle();
-			int index = 0;
+			int index = 1;
 			for (Category category : model.getCategories()) {
-				output.println(String.format("(%d). %s", index + 1,
+				output.println(String.format("(%d). %s", index++,
 						category.getName()));
-				index++;
 			}
 		} else {
 			showMsg("Categories are not found!");

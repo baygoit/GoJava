@@ -14,23 +14,14 @@ public class ProjectView {
 
 	public void printProject(ProjectModel model) {
 		Project chosenProject = model.getProject();
-		if (chosenProject == null) {
-			printProjectNotFound();
-		} else {
-			printTitle(chosenProject.getName());
-			printProjectDetails(chosenProject);
-			printOptions();
-		}
+		printTitle(chosenProject.getName());
+		printProjectDetails(chosenProject);
+		printOptions();
 	}
-
-	private void printProjectNotFound() {
-		showMsg("NPE case - model haven't returned the project");
-		showMsg("[0 - Back]");
-	}
-
-	public void showMsg(String msg) {
+	
+	public void showMsg(String message) {
 		output.println("");
-		output.println(msg);
+		output.println(message);
 	}
 
 	private void printProjectDetails(Project project) {

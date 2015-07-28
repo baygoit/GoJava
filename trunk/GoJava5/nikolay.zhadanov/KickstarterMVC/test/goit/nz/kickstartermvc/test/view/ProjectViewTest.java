@@ -61,17 +61,14 @@ public class ProjectViewTest {
 				"     Link to video: http://www.youtube.com/jrgri74ht3h97",
 				"     Project FAQ:",
 				"How can you imagine such idea?\nBecause of whisky, babe!", "",
-				"Choose your option:",
-				"[1 - Invest]",
-				"[0 - Back]" };
+				"Choose your option:", "[1 - Invest]", "[0 - Back]" };
 		assertArrayEquals("Wrong project layout", expectedResult,
 				view.toArray());
 	}
 
 	@Test
-	public void whenProjectIsNullThenWarningPrinted() {
-
-		when(model.getProject()).thenReturn(null);
+	public void whenShowMsgThenMessagePrinted() {
+		ProjectView projectView = new ProjectView(output);
 
 		final List<String> view = new ArrayList<>();
 
@@ -85,13 +82,10 @@ public class ProjectViewTest {
 			}
 		}).when(output).println(anyString());
 
-		ProjectView projectView = new ProjectView(output);
-		projectView.printProject(model);
-		String[] expectedResult = { "",
-				"NPE case - model haven't returned the project", "",
-				"[0 - Back]" };
-		assertArrayEquals("Wrong null project warning", expectedResult,
-				view.toArray());
+		String testMsg = "test";
+		projectView.showMsg(testMsg);
+		String[] expected = { "", testMsg };
+		assertArrayEquals("Wrong showMsg output", expected, view.toArray());
 	}
 
 }
