@@ -31,6 +31,10 @@ public class Project {
         this.name = name;
     }
 
+    public Project() {
+
+    }
+
     public void setCategory(Category category) {
         this.category = category;
     }

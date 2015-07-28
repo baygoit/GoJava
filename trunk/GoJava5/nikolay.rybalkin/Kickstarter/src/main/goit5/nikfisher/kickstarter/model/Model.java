@@ -19,53 +19,53 @@ public class Model {
     }
 
 
-    private static Category creeateNewCategory(Category category, String nameCategory) {
+    public void createNewCategory(Category category, String nameCategory) {
         category = new Category(nameCategory);
-        return category;
+//        return category;
     }
 
-    private static Categories creeateNewCategory(Categories categories, Category category) {
+    public static Categories creeateNewCategory(Categories categories, Category category) {
         categories.add(category);
         return categories;
     }
 
-    private static Project creeateNewproject(Project project, String name, int amount, int exist, int days, String description) {
+    public static Project creeateNewproject(Project project, String name, int amount, int exist, int days, String description) {
         project = new Project(name, amount, exist, days, "description");
         return project;
     }
 
-    private static Project addProjectInListCategories(Project project, Category category) {
+    public static Project addProjectInListCategories(Project project, Category category) {
         project.setCategory(category);
         return project;
     }
 
 
-    private static Projects addProjectInListProjects(Projects projects, Project project) {
+    public static Projects addProjectInListProjects(Projects projects, Project project) {
         projects.add(project);
         return projects;
     }
 
-    private static Project setHistory(Project project, String newHistory) {
+    public static Project setHistory(Project project, String newHistory) {
         project.setQuestion(newHistory);
         return project;
     }
 
-    private static Project setVideo(Project project, String newVideo) {
+    public static Project setVideo(Project project, String newVideo) {
         project.setQuestion(newVideo);
         return project;
     }
 
-    private static Project setQuestion(Project project, String newQuestion) {
+    public static Project setQuestion(Project project, String newQuestion) {
         project.setQuestion(newQuestion);
         return project;
     }
 
-    private static Project addAnsver(Project project, String newAnsver) {
+    public static Project addAnsver(Project project, String newAnsver) {
         project.setAnsver(newAnsver);
         return project;
     }
 
-    private static Category createCategory(Category category) {
+    public static Category createCategory(Category category) {
         return category;
     }
 

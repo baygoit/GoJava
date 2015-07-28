@@ -7,7 +7,6 @@ import goit5.nikfisher.kickstarter.dao.Projects;
 import goit5.nikfisher.kickstarter.model.Category;
 import goit5.nikfisher.kickstarter.model.QuoteGenerate;
 import goit5.nikfisher.kickstarter.streams.ConsoleInterfaceIO;
-import goit5.nikfisher.kickstarter.view.View;
 import org.junit.Test;
 import org.mockito.Mock;
 
@@ -34,14 +33,14 @@ public class CategoryMenuTest {
         QuoteGenerate generator = mock(QuoteGenerate.class);
 
         Main main = new Main(io, generator);
-        View view = new View(io, projects, categories);
+//        View view = new View(io, projects, categories);
         CategoryMenu categoryMenu = new CategoryMenu(io, projects, categories);
 
         //when
 
         when(io.consoleScanInt()).thenReturn(1, 0, 0);
         categoryMenu.categoryMenu();
-        view.createCategories();
+//        view.createCategories();
         main.run();
 
 
@@ -58,15 +57,15 @@ public class CategoryMenuTest {
         QuoteGenerate generator = mock(QuoteGenerate.class);
 
         Main main = new Main(io, generator);
-        View view = new View(io, projects, categories);
+//        View view = new View(io, projects, categories);
         CategoryMenu categoryMenu = new CategoryMenu(io, projects, categories);
 
         //when
 
         when(io.consoleScanInt()).thenReturn(0);
         categoryMenu.categoryMenu();
-        view.createCategories();
-        main.run();
+//        view.createCategories();
+//        main.run();
 
 
         //then

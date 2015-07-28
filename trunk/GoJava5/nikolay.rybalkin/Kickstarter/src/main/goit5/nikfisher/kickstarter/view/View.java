@@ -14,12 +14,17 @@ public class View {
     private ConsoleInterfaceIO io;
     private Projects projects;
     private Categories categories;
+    private Category category;
+    private Project project;
 
-    public View(ConsoleInterfaceIO io, Projects projects, Categories categories) {
+    public View(ConsoleInterfaceIO io, Project project, Projects projects, Category category, Categories categories) {
         this.io = io;
         this.categories = categories;
         this.projects = projects;
+        this.category = category;
+        this.project = project;
     }
+
 
     public void createCategories() {
 

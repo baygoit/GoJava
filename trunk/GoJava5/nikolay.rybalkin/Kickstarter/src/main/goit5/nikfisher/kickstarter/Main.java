@@ -2,6 +2,8 @@ package goit5.nikfisher.kickstarter;
 
 import goit5.nikfisher.kickstarter.dao.InMemoryCategories;
 import goit5.nikfisher.kickstarter.dao.InMemoryProjects;
+import goit5.nikfisher.kickstarter.model.Category;
+import goit5.nikfisher.kickstarter.model.Project;
 import goit5.nikfisher.kickstarter.model.QuoteGenerate;
 import goit5.nikfisher.kickstarter.streams.ConsoleInterfaceIO;
 import goit5.nikfisher.kickstarter.view.View;
@@ -20,7 +22,7 @@ public class Main {
 
         io.println(generator.quoteGenerate());
 
-        View view = new View(io, new InMemoryProjects(), new InMemoryCategories());
+        View view = new View(io, new Project(), new InMemoryProjects(), new Category(), new InMemoryCategories());
         view.createCategories();
 
         io.println("Sank!");
