@@ -37,6 +37,12 @@ public class CategoriesDAO implements Categories {
             Statement statement = connection.createStatement();
             statement.setQueryTimeout(30);  // set timeout to 30 sec.
 
+            statement.executeUpdate("drop table if exists categories");
+
+            statement.executeUpdate("create table categories (id INT PRIMARY KEY UNIQUE, name TEXT UNIQUE)");
+            statement.executeUpdate("insert into categories values(1, 'Game')");
+            statement.executeUpdate("insert into categories values(2, 'Video')");
+            statement.executeUpdate("insert into categories values(3, 'Music')");
 
             ResultSet rs = statement.executeQuery("select * from categories");
             while(rs.next())
@@ -46,7 +52,6 @@ public class CategoriesDAO implements Categories {
                 System.out.println("id = " + rs.getInt("id"));
             }
 
-            System.out.println("Test connecting good!");
         } catch (SQLException e) {
             // if the error message is "out of memory",
             // it probably means no database file is found
