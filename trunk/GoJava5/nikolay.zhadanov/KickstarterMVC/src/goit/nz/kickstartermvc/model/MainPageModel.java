@@ -20,7 +20,7 @@ public class MainPageModel {
 	public List<Category> getCategories() {
 		return categories;
 	}
-	
+
 	public Category getCategory(int index) {
 		return categories.get(index);
 	}
@@ -28,9 +28,12 @@ public class MainPageModel {
 	public String getRandomQuote() {
 		Random generator = new Random();
 		List<Quote> quotes = storage.getQuotes();
-		Quote randomQuote = quotes.get(generator.nextInt(quotes.size()));
-		String result = String.format("%s\n%s", randomQuote.getText(),
-				randomQuote.getAuthor());
+		String result = "";
+		if (quotes.size() > 0) {
+			Quote randomQuote = quotes.get(generator.nextInt(quotes.size()));
+			result = String.format("%s\n%s", randomQuote.getText(),
+					randomQuote.getAuthor());
+		}
 		return result;
 	}
 

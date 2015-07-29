@@ -14,6 +14,7 @@ public class Project {
 	private String linkToVideo;
 	private List<FAQ> faqs;
 	private List<RewardOption> rewardOptions;
+	private int id;
 
 	public Project(String name) {
 		this.name = name;
@@ -111,5 +112,13 @@ public class Project {
 	
 	public List<RewardOption> getRewardOptions() {
 		return rewardOptions;
+	}
+	
+	public void setId(int id) {
+		this.id = id;
+	}
+	
+	public int getId() {
+		return id;
 	}
 }
