@@ -33,7 +33,8 @@ public class PaymentRewardController extends AbstractPaymentController {
     protected void addPayment(String input) {
         if (currentMode == StandByMode.EXPECTED_CARD_NO) {
             Reward reward = dataProvider.getReward(rewardId);
-            dataProvider.incProjectBalance(projectId, reward.getAmount());
+            int amount = dataProvider.getProjectBalance(projectId) + reward.getAmount();
+            dataProvider.setProjectBalance(projectId, amount);
         }
     }
 

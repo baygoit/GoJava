@@ -20,7 +20,9 @@ public interface DataProvider {
 
     List<Reward> getRewards(int projectId);
 
-    void incProjectBalance(int projectId, Integer amount);
+    void setProjectBalance(int projectId, int amount);
+
+    int getProjectBalance(int projectId);
 
     Reward getReward(int id);
 }

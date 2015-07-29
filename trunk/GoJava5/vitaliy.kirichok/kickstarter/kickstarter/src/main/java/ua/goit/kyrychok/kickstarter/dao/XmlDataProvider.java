@@ -95,10 +95,16 @@ public class XmlDataProvider implements DataProvider {
     }
 
     @Override
-    public void incProjectBalance(int projectId, Integer amount) {
+    public void setProjectBalance(int projectId, int amount) {
         DtoProject dtoProject = getDtoProject(projectId);
-        dtoProject.balance = dtoProject.balance + amount;
+        dtoProject.balance = amount;
         marshal();
+    }
+
+    @Override
+    public int getProjectBalance(int projectId) {
+        DtoProject dtoProject = getDtoProject(projectId);
+        return dtoProject.balance;
     }
 
     @Override

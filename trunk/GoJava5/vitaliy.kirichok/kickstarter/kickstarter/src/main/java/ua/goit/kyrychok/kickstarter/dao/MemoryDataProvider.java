@@ -73,9 +73,15 @@ public class MemoryDataProvider implements DataProvider {
     }
 
     @Override
-    public void incProjectBalance(int projectId, Integer amount) {
+    public void setProjectBalance(int projectId, int amount) {
         Project project = getProject(projectId);
-        project.setBalance(project.getBalance() + amount);
+        project.setBalance(amount);
+    }
+
+    @Override
+    public int getProjectBalance(int projectId) {
+        Project project = getProject(projectId);
+        return project.getBalance();
     }
 
     @Override
