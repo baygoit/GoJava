@@ -6,4 +6,5 @@ public interface ProjectDao {
 	public void addProject(Project projectDetails);
 	public ArrayList<Project> getProjectList();
 	public Project getProjectDetails(int id);
+	public ArrayList<Project> getProjectFromCategory(int id);
 }

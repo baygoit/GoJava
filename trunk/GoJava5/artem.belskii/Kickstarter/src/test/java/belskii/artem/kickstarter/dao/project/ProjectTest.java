@@ -9,7 +9,7 @@ public class ProjectTest {
 private Project testProject;
 	@Before
 	public void setUp() throws Exception {
-		testProject = new Project("My test project",new Long(1), new Long(1),"28.07.2015","30.07.2015","https://www.youtube.com/watch?v=uC0pqWX3yB8");
+		testProject = new Project("My test project",new Long(1), new Long(1),"28.07.2015","30.07.2015","https://www.youtube.com/watch?v=uC0pqWX3yB8", 1);
 	}
 
 	@Test
@@ -82,5 +82,11 @@ private Project testProject;
 		testProject.updateVideoUrl("https://www.youtube.com/");
 		assertEquals("https://www.youtube.com/",testProject.getVideoUrl());
 	}
+	
+	@Test
+	public void getcategoryId(){
+		assertEquals(1, testProject.getcategoryId());
+	}
+
 
 }
