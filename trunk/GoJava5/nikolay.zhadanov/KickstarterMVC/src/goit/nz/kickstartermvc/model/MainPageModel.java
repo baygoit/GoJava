@@ -1,8 +1,8 @@
 package goit.nz.kickstartermvc.model;
 
-import goit.nz.kickstartermvc.DataStorage;
 import goit.nz.kickstartermvc.dao.Category;
 import goit.nz.kickstartermvc.dao.Quote;
+import goit.nz.kickstartermvc.storage.DataStorage;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,8 +1,8 @@
 package goit.nz.kickstartermvc.model;
 
-import goit.nz.kickstartermvc.DataStorage;
 import goit.nz.kickstartermvc.dao.Project;
 import goit.nz.kickstartermvc.dao.RewardOption;
+import goit.nz.kickstartermvc.storage.DataStorage;
 
 import java.util.List;
 

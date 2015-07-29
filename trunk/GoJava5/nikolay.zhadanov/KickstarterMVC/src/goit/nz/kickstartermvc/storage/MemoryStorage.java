@@ -1,4 +1,4 @@
-package goit.nz.kickstartermvc;
+package goit.nz.kickstartermvc.storage;
 
 import goit.nz.kickstartermvc.dao.Category;
 import goit.nz.kickstartermvc.dao.FAQ;
@@ -9,38 +9,41 @@ import goit.nz.kickstartermvc.dao.RewardOption;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DataStorage {
+public class MemoryStorage implements DataStorage{
 
 	private List<Quote> quotes;
 	private List<Category> categories;
 	private List<Project> projects;
 
-	public DataStorage() {
+	public MemoryStorage() {
 		quotes = new ArrayList<>();
 		categories = new ArrayList<>();
 		projects = new ArrayList<>();
 	}
 
-	public void registerQuotes(List<Quote> quotes) {
+	private void registerQuotes(List<Quote> quotes) {
 		this.quotes.addAll(quotes);
 	}
 
-	public void registerCategories(List<Category> categories) {
+	private void registerCategories(List<Category> categories) {
 		this.categories.addAll(categories);
 	}
 
-	public void registerProjects(List<Project> projects) {
+	private void registerProjects(List<Project> projects) {
 		this.projects.addAll(projects);
 	}
 
+	@Override
 	public List<Quote> getQuotes() {
 		return quotes;
 	}
 
+	@Override
 	public List<Category> getCategories() {
 		return categories;
 	}
 
+	@Override
 	public List<Project> getProjects(String chosenCategoryName) {
 		List<Project> result = new ArrayList<>();
 		for (Project project : projects) {
@@ -51,19 +54,22 @@ public class DataStorage {
 		return result;
 	}
 
+	@Override
 	public void addPledgedAmount(String categoryName, int projectIndex,
 			int amount) {
 		getProjects(categoryName).get(projectIndex - 1)
 				.addPledgedAmount(amount);
 	}
 
+	@Override
 	public void addQuestion(String categoryName, int projectIndex,
 			String question) {
 		FAQ faq = new FAQ(question);
 		getProjects(categoryName).get(projectIndex - 1).addFAQ(faq);
 	}
 	
-	public void prepareData() {
+	@Override
+	public void initStorage() {
 		loadQuotes();
 		loadCategories();
 		loadProjects();
@@ -135,5 +141,4 @@ public class DataStorage {
 		categories.add(cat4);
 		registerCategories(categories);
 	}
-
 }

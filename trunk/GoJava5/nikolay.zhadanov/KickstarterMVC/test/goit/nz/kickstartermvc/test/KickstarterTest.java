@@ -28,7 +28,7 @@ public class KickstarterTest {
 	@Test
 	public void whenRunThenInputListens() {
 		MockStorage storage = new MockStorage();
-		storage.prepareData();
+		storage.initStorage();
 		
 		Kickstarter test = new Kickstarter(storage, output, input);
 		test.run();

@@ -11,7 +11,7 @@ public class CategoryModelTest {
 	@Test
 	public void whenUpdateThenModelIsUpdated() {
 		MockStorage storage = new MockStorage();
-		storage.prepareData();
+		storage.initStorage();
 
 		CategoryModel model = new CategoryModel(storage);
 		model.update(storage.getCategories().get(0).getName());
@@ -28,7 +28,7 @@ public class CategoryModelTest {
 	@Test
 	public void whenGetProjectsThenProjectsReturned() {
 		MockStorage storage = new MockStorage();
-		storage.prepareData();
+		storage.initStorage();
 
 		CategoryModel model = new CategoryModel(storage);
 		model.update(storage.getCategories().get(0).getName());

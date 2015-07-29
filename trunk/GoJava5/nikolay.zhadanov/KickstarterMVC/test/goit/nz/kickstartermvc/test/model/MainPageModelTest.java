@@ -11,7 +11,7 @@ public class MainPageModelTest {
 	@Test
 	public void whenUpdateThenModelIsUpdated() {
 		MockStorage storage = new MockStorage();
-		storage.prepareData();
+		storage.initStorage();
 
 		MainPageModel model = new MainPageModel(storage);
 		model.update();
@@ -28,7 +28,7 @@ public class MainPageModelTest {
 	@Test
 	public void whenGetCategoryThenCategoryReturned() {
 		MockStorage storage = new MockStorage();
-		storage.prepareData();
+		storage.initStorage();
 
 		MainPageModel model = new MainPageModel(storage);
 		model.update();
@@ -41,7 +41,7 @@ public class MainPageModelTest {
 	@Test
 	public void whenGetRandomQuoteThenRandomQuoteReturned() {
 		MockStorage storage = new MockStorage();
-		storage.prepareData();
+		storage.initStorage();
 
 		MainPageModel model = new MainPageModel(storage);
 		String result = model.getRandomQuote();

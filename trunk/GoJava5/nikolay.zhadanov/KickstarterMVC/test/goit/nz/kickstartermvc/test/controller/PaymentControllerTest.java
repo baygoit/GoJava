@@ -3,7 +3,6 @@ package goit.nz.kickstartermvc.test.controller;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyString;
-import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -16,7 +15,6 @@ import goit.nz.kickstartermvc.view.PaymentView;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -56,6 +54,7 @@ public class PaymentControllerTest {
 				view, parentController);
 		when(model.isCardHolderNameEmpty()).thenReturn(true);
 		when(model.isCardHolderNameValid(anyString())).thenReturn(false);
+		when(model.getChosenRewardOptionIndex()).thenReturn(1);
 
 		final List<String> message = new ArrayList<>();
 
@@ -90,6 +89,7 @@ public class PaymentControllerTest {
 		when(model.isCardHolderNameEmpty()).thenReturn(false);
 		when(model.isCardNumberEmpty()).thenReturn(true);
 		when(model.isCardNumberValid(anyString())).thenReturn(false);
+		when(model.getChosenRewardOptionIndex()).thenReturn(1);
 
 		final List<String> message = new ArrayList<>();
 
@@ -123,6 +123,8 @@ public class PaymentControllerTest {
 				view, parentController);
 		when(model.isCardHolderNameEmpty()).thenReturn(false);
 		when(model.isCardNumberEmpty()).thenReturn(false);
+		when(model.isPaymentComplete()).thenReturn(false);
+		when(model.getChosenRewardOptionIndex()).thenReturn(1);
 
 		final List<String> message = new ArrayList<>();
 
@@ -150,18 +152,20 @@ public class PaymentControllerTest {
 	}
 
 	@Test
-	public void whenOnInputCorrectPaymentThenReturnBackMoveAndUpdateProject() {
+	public void whenOnInputCorrectPaymentThenPrintThanksAndUpdateProject() {
 
 		PaymentController paymentController = new PaymentController(model,
 				view, parentController);
 		when(model.isCardHolderNameEmpty()).thenReturn(false);
-		when(model.isCardNumberEmpty()).thenReturn(false);
+		when(model.isCardNumberEmpty()).thenReturn(true);
+		when(model.getChosenRewardOptionIndex()).thenReturn(1);
+		when(model.isPaymentComplete()).thenReturn(true);
 
-		int expected = -1;
-		int actual = paymentController.onInput("100");
+		int expected = 0;
+		int actual = paymentController.onInput("100139688596");
 		assertEquals(expected, actual);
 		verify(parentController, times(1)).addPayment(anyInt());
-		verify(model, times(1)).clear();
+		verify(view, times(1)).update(model);
 	}
 
 	@Test
@@ -169,33 +173,9 @@ public class PaymentControllerTest {
 
 		PaymentController paymentController = new PaymentController(model,
 				view, parentController);
-		when(model.isCardHolderNameEmpty()).thenReturn(true);
-
-		final List<String> message = new ArrayList<>();
-
-		doAnswer(new Answer<Object>() {
-			@Override
-			public Object answer(InvocationOnMock invocation) throws Throwable {
-				Object[] arguments = invocation.getArguments();
-				String str = (String) arguments[1];
-				message.add(str);
-				return null;
-			}
-		}).when(view).update(any(Map.class), anyString());
-		int messageIndex = 0;
 
 		paymentController.onTakeControl();
-		assertEquals("Enter cardholder name:", message.get(messageIndex++));
-
-		when(model.isCardHolderNameEmpty()).thenReturn(false);
-		when(model.isCardNumberEmpty()).thenReturn(true);
-		paymentController.onTakeControl();
-		assertEquals("Enter card number:", message.get(messageIndex++));
-		
-		when(model.isCardHolderNameEmpty()).thenReturn(false);
-		when(model.isCardNumberEmpty()).thenReturn(false);
-		paymentController.onTakeControl();
-		assertEquals("Enter positive amount:", message.get(messageIndex++));
+		verify(view, times(1)).update(model);
 	}
 
 }

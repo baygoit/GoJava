@@ -56,7 +56,7 @@ public class MainPageViewTest {
 	@Test
 	public void whenPrintCategoriesThenCategoriesPrinted() {
 		MockStorage storage = new MockStorage();
-		storage.prepareData();
+		storage.initStorage();
 
 		when(model.getCategories()).thenReturn(storage.getCategories());
 		when(model.size()).thenReturn(storage.getCategories().size());

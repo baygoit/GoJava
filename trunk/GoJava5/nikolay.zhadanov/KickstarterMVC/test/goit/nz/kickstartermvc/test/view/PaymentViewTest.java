@@ -3,13 +3,13 @@ package goit.nz.kickstartermvc.test.view;
 import static org.junit.Assert.assertArrayEquals;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.doAnswer;
+import goit.nz.kickstartermvc.model.PaymentModel;
 import goit.nz.kickstartermvc.output.Output;
+import goit.nz.kickstartermvc.test.MockStorage;
 import goit.nz.kickstartermvc.view.PaymentView;
 
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -21,6 +21,8 @@ import org.mockito.stubbing.Answer;
 public class PaymentViewTest {
 	@Mock
 	private Output output;
+	@Mock
+	private PaymentModel model;
 
 	@Before
 	public void setUp() throws Exception {
@@ -51,9 +53,12 @@ public class PaymentViewTest {
 
 	@Test
 	public void whenUpdateThenViewUpdated() {
-		Map<String, String> testData = new LinkedHashMap<>();
-		testData.put("Title 1", "Value 1");
-		testData.put("Title 2", "Value 2");
+		MockStorage storage = new MockStorage();
+		storage.initStorage();
+		PaymentModel testModel = new PaymentModel();
+		String testCategoryName = storage.getCategories().get(1).getName();
+		testModel.update(storage.getProjects(testCategoryName).get(0)
+				.getRewardOptions());
 
 		final List<String> view = new ArrayList<>();
 
@@ -68,9 +73,12 @@ public class PaymentViewTest {
 		}).when(output).write(anyString());
 
 		PaymentView paymentView = new PaymentView(output);
-		paymentView.update(testData, "Test prompt");
-		String[] expectedResult = { "", "Title 1: Value 1", "Title 2: Value 2",
-				"", "Test prompt", "(0 - back)" };
+		paymentView.update(testModel);
+		String[] expectedResult = { "", "You can choose such payment options:",
+				"-------------------", "[1 - 10 : Cool T-shirt]",
+				"[2 - 50 : free beta testing]",
+				"[3 - 100 : lifelong title of founder]",
+				"[4 - Any other amount]", "(0 - back)" };
 		assertArrayEquals("Wrong payment view render", expectedResult,
 				view.toArray());
 	}

@@ -126,7 +126,7 @@ public class CategoryControllerTest {
 	@Test
 	public void whenOnTakeControlThenModelAndViewUpdated() {
 		MockStorage storage = new MockStorage();
-		storage.prepareData();
+		storage.initStorage();
 		String testCategoryName = storage.getCategories().get(3).getName();
 
 		when(parentController.getChosenCategoryName()).thenReturn(
@@ -144,7 +144,7 @@ public class CategoryControllerTest {
 	@Test
 	public void whenGetChosenProject() {
 		MockStorage storage = new MockStorage();
-		storage.prepareData();
+		storage.initStorage();
 		String testCategoryName = storage.getCategories().get(3).getName();
 
 		when(parentController.getChosenCategoryName()).thenReturn(
