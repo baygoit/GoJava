@@ -14,15 +14,13 @@ public class View {
     private ConsoleInterfaceIO io;
     private Projects projects;
     private Categories categories;
-    private Category category;
-    private Project project;
 
     public View(ConsoleInterfaceIO io, Project project, Projects projects, Category category, Categories categories) {
         this.io = io;
         this.categories = categories;
         this.projects = projects;
-        this.category = category;
-        this.project = project;
+        Category category1 = category;
+        Project project1 = project;
     }
 
 
