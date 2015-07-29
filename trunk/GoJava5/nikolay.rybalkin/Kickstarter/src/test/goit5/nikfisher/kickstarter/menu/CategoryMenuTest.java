@@ -1,10 +1,11 @@
 package goit5.nikfisher.kickstarter.menu;
 
-import goit5.nikfisher.kickstarter.Main;
-import goit5.nikfisher.kickstarter.dao_old.InMemoryCategories;
-import goit5.nikfisher.kickstarter.dao_old.InMemoryProjects;
+import goit5.nikfisher.kickstarter.Runner;
+import goit5.nikfisher.kickstarter.dao.InMemoryCategories;
+import goit5.nikfisher.kickstarter.dao.InMemoryProjects;
 import goit5.nikfisher.kickstarter.dao.Projects;
 import goit5.nikfisher.kickstarter.model.Category;
+import goit5.nikfisher.kickstarter.model.Project;
 import goit5.nikfisher.kickstarter.model.QuoteGenerate;
 import goit5.nikfisher.kickstarter.streams.ConsoleInterfaceIO;
 import org.junit.Test;
@@ -32,20 +33,18 @@ public class CategoryMenuTest {
         ConsoleInterfaceIO io = mock(ConsoleInterfaceIO.class);
         QuoteGenerate generator = mock(QuoteGenerate.class);
 
-        Main main = new Main(io, generator);
-//        View view = new View(io, projects, categories);
+        Runner runner = new Runner(io, generator);
         CategoryMenu categoryMenu = new CategoryMenu(io, projects, categories);
 
         //when
 
         when(io.consoleScanInt()).thenReturn(1, 0, 0);
         categoryMenu.categoryMenu();
-//        view.createCategories();
-        main.run();
+        runner.run();
 
 
         //then
-        verify(io, times(1)).println("[1) Game]");
+        verify(io, times(2)).println("[1) Game]");
         verify(io, times(1)).println("You selected category: Game");
     }
 
@@ -56,20 +55,78 @@ public class CategoryMenuTest {
         ConsoleInterfaceIO io = mock(ConsoleInterfaceIO.class);
         QuoteGenerate generator = mock(QuoteGenerate.class);
 
-        Main main = new Main(io, generator);
-//        View view = new View(io, projects, categories);
+        Runner runner = new Runner(io, generator);
         CategoryMenu categoryMenu = new CategoryMenu(io, projects, categories);
 
         //when
 
-        when(io.consoleScanInt()).thenReturn(0);
+        when(io.consoleScanInt()).thenReturn(1, 0);
         categoryMenu.categoryMenu();
-//        view.createCategories();
-//        main.run();
+        runner.run();
 
 
         //then
-        verify(io, times(1)).println("[]");
+        verify(io, times(2)).println("[]");
+    }
+
+    @Test
+    public void shouldCategoriesShoseCategory() throws Exception {
+        //given
+        categories.add(new Category("Game"));
+
+        Projects projects = new InMemoryProjects();
+        ConsoleInterfaceIO io = mock(ConsoleInterfaceIO.class);
+        QuoteGenerate generator = mock(QuoteGenerate.class);
+
+        Runner runner = new Runner(io, generator);
+        CategoryMenu categoryMenu = new CategoryMenu(io, projects, categories);
+
+        //when
+        when(io.consoleScanInt()).thenReturn(2, 0);
+        categoryMenu.categoryMenu();
+        runner.run();
+
+
+        //then
+        verify(io, times(1)).println("Not true index: 2");
+    }
+
+    @Test
+    public void shouldCategoriesWhenHaveProjects() throws Exception {
+        //given
+        Category category1 = new Category("Game");
+        categories.add(category1);
+
+        Project project1 = new Project("Game \"Popcorn\"", 10000, 0, 10, "Interesting game");
+        Projects projects = new InMemoryProjects();
+        project1.setCategory(category1);
+        projects.add(project1);
+
+        ConsoleInterfaceIO io = mock(ConsoleInterfaceIO.class);
+        QuoteGenerate generator = mock(QuoteGenerate.class);
+
+        Runner runner = new Runner(io, generator);
+        CategoryMenu categoryMenu = new CategoryMenu(io, projects, categories);
+
+        //when
+        when(io.consoleScanInt()).thenReturn(1, 0);
+        categoryMenu.categoryMenu();
+        runner.run();
+
+
+        //then
+        verify(io, times(1)).println("You selected category: Game");
+        verify(io, times(4)).println(" ");
+        verify(io, times(1)).println("Project name: Game \"Popcorn\"");
+        verify(io, times(1)).println("Description: Interesting game");
+        verify(io, times(1)).println("Need collected: 10000$");
+        verify(io, times(1)).println("Already collected: 0$");
+        verify(io, times(1)).println("Days remaining: 10");
+        verify(io, times(1)).println("Project name: Game \"Popcorn\"");
+        verify(io, times(4)).println(" ");
+        verify(io, times(4)).println(" ");
+        verify(io, times(1)).println("Thank you for using our service!");
+
     }
 
 }

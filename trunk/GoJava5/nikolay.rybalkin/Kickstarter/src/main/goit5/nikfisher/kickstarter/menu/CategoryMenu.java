@@ -5,7 +5,6 @@ import goit5.nikfisher.kickstarter.dao.Categories;
 import goit5.nikfisher.kickstarter.dao.Projects;
 import goit5.nikfisher.kickstarter.model.Category;
 import goit5.nikfisher.kickstarter.model.Project;
-import goit5.nikfisher.kickstarter.streams.ConsoleIO;
 import goit5.nikfisher.kickstarter.streams.ConsoleInterfaceIO;
 
 import java.util.List;
@@ -42,8 +41,8 @@ public class CategoryMenu {
             List<Project> foundProjects = projects.getProjects(category);
             printProjects(foundProjects);
 
-            ProjectsMenu projectsMenu = new ProjectsMenu(new ConsoleIO());
-            projectsMenu.projectsMenu(foundProjects);
+//            ProjectsMenu projectsMenu = new ProjectsMenu(new ConsoleIO());
+//            projectsMenu.projectsMenu(foundProjects);
         }
     }
 

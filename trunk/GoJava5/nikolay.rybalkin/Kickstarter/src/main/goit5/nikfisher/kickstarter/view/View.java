@@ -2,8 +2,8 @@ package goit5.nikfisher.kickstarter.view;
 
 import goit5.nikfisher.kickstarter.dao.Categories;
 import goit5.nikfisher.kickstarter.dao.Projects;
-import goit5.nikfisher.kickstarter.dao_old.InMemoryCategories;
-import goit5.nikfisher.kickstarter.dao_old.InMemoryProjects;
+import goit5.nikfisher.kickstarter.dao.InMemoryCategories;
+import goit5.nikfisher.kickstarter.dao.InMemoryProjects;
 import goit5.nikfisher.kickstarter.menu.CategoryMenu;
 import goit5.nikfisher.kickstarter.model.Category;
 import goit5.nikfisher.kickstarter.model.Project;

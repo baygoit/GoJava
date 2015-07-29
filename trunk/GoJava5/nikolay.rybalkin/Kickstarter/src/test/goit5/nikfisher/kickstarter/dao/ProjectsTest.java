@@ -85,11 +85,11 @@ public abstract class ProjectsTest {
     @Test
     public void shouldProjectsIndex() throws Exception {
         //given
+        Project project1 = new Project("Game \"Popcorn\"", 10000, 0, 10, "Interesting game");
+        Project project2 = new Project("Design \"New Design\"", 10000, 0, 10, "New innovation design");
 
         //when
-        Project project1 = new Project("name1 \"Popcorn\"", 10000, 0, 10, "Interesting game");
         projects.add(project1);
-        Project project2 = new Project("name2 \"Popcorn\"", 10000, 0, 10, "Interesting game");
         projects.add(project2);
 
         //then

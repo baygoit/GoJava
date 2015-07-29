@@ -1,14 +1,14 @@
 package goit5.nikfisher.kickstarter.streams;
 
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Scanner;
 
 public class ConsoleIO implements ConsoleInterfaceIO {
 
-    private static final Logger LOGGER = LogManager.getLogger(ConsoleIO.class);
+    final static Logger LOGGER = LoggerFactory.getLogger(ConsoleIO.class);
 
     private Scanner scanner = new Scanner(System.in);
 
