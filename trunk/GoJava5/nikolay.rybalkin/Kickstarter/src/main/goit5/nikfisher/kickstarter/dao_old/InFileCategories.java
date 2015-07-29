@@ -1,5 +1,6 @@
-package goit5.nikfisher.kickstarter.dao;
+package goit5.nikfisher.kickstarter.dao_old;
 
+import goit5.nikfisher.kickstarter.dao.Categories;
 import goit5.nikfisher.kickstarter.model.Category;
 
 import java.io.BufferedReader;

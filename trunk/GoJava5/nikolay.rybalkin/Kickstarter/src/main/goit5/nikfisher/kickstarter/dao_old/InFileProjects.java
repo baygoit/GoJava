@@ -1,5 +1,6 @@
-package goit5.nikfisher.kickstarter.dao;
+package goit5.nikfisher.kickstarter.dao_old;
 
+import goit5.nikfisher.kickstarter.dao.Projects;
 import goit5.nikfisher.kickstarter.model.Category;
 import goit5.nikfisher.kickstarter.model.Project;
 
