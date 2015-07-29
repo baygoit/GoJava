@@ -1,7 +1,7 @@
 package goit5.nikfisher.kickstarter.view;
 
 import goit5.nikfisher.kickstarter.dao.Categories;
-import goit5.nikfisher.kickstarter.dao.InFileCategories;
+import goit5.nikfisher.kickstarter.dao.CategoriesDAO;
 import goit5.nikfisher.kickstarter.dao.InMemoryProjects;
 import goit5.nikfisher.kickstarter.dao.Projects;
 import goit5.nikfisher.kickstarter.menu.CategoryMenu;
@@ -33,7 +33,8 @@ public class View {
         Category category3 = new Category("Technology");
 
 //		categories = new InMemoryCategories();
-        categories = new InFileCategories("categories.txt");
+//        categories = new InFileCategories("categories.txt");
+        categories = new CategoriesDAO();
         categories.add(category1);
         categories.add(category2);
         categories.add(category3);

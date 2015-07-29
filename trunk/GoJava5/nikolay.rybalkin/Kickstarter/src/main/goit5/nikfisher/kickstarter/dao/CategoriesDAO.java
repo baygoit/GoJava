@@ -2,20 +2,11 @@ package goit5.nikfisher.kickstarter.dao;
 
 import goit5.nikfisher.kickstarter.model.Category;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-
+import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class CategoriesDAO implements Categories {
-
-
-    public static Connection conn;
-    public static Statement statmt;
-    public static ResultSet resSet;
 
     static {
         try {
@@ -25,39 +16,49 @@ public class CategoriesDAO implements Categories {
         }
     }
 
-    public static void main(String[] args) throws ClassNotFoundException {
+    Connection connection = null;
+    Category category = null;
 
+    private ResultSet getResultSet() throws SQLException {
+        connection = DriverManager.getConnection("jdbc:sqlite:src/main/resources/kickstarter.db");
+        Statement statement = connection.createStatement();
+        statement.setQueryTimeout(30);
+        return statement.executeQuery("SELECT * FROM categories");
+    }
 
+    @Override
+    public void add(Category category) {
 
+    }
 
-        Connection connection = null;
+    public static void main(String[] args) {
+        CategoriesDAO categoriesDAO = new CategoriesDAO();
+        Category category = categoriesDAO.get(1);
+        System.out.println(category);
+        System.out.println(categoriesDAO.size());
+        System.out.println(categoriesDAO.getCategories());
+    }
+
+    @Override
+    public List<String> getCategories() {
+
+        List<String> result = new ArrayList<>();
         try {
-            // create a database connection
-            connection = DriverManager.getConnection("jdbc:sqlite:src/main/resources/kickstarter.db");
-            Statement statement = connection.createStatement();
-            statement.setQueryTimeout(30);
+            ResultSet rs = getResultSet();
 
-            statement.executeUpdate("drop table if exists categories");
-
-            statement.executeUpdate("create table categories (id INT PRIMARY KEY UNIQUE, name TEXT UNIQUE)");
-            statement.executeUpdate("insert into categories values(1, 'Game')");
-            statement.executeUpdate("insert into categories values(2, 'Video')");
-            statement.executeUpdate("insert into categories values(3, 'Music')");
-
-            ResultSet rs = statement.executeQuery("select * from categories");
-            while(rs.next())
-            {
-                System.out.println("name = " + rs.getString("name"));
-                System.out.println("id = " + rs.getInt("id"));
+            while (rs.next()) {
+                result.add(rs.getInt("id") + ") " + rs.getString("name"));
             }
 
+            return result;
+
         } catch (SQLException e) {
+            throw new RuntimeException("Error query! (method getCategories()", e);
         } finally {
             try {
                 if (connection != null)
                     connection.close();
             } catch (SQLException e) {
-                // connection close failed.
                 System.err.println(e);
             }
         }
@@ -65,25 +66,54 @@ public class CategoriesDAO implements Categories {
 
 
     @Override
-    public void add(Category category) {
-
-    }
-
-    @Override
-    public List<String> getCategories() {
-        return null;
-    }
-
-    @Override
     public Category get(int index) {
-        return null;
+
+        try {
+            ResultSet rs = getResultSet();
+
+            while (rs.next()) {
+                category = new Category(rs.getInt("id"), rs.getString("name"));
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Error query! (method get() ", e);
+        } finally {
+            try {
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (SQLException e) {
+                System.err.println(e);
+            }
+        }
+        return category;
     }
 
     @Override
     public int size() {
-        return 0;
-    }
 
+        int size = 0;
+
+        try {
+            ResultSet rs = getResultSet();
+
+            while (rs.next()) {
+                size++;
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Error query! (method size()) ", e);
+        } finally {
+            try {
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (SQLException e) {
+                System.err.println(e);
+            }
+        }
+        return size;
+    }
 
 
 }

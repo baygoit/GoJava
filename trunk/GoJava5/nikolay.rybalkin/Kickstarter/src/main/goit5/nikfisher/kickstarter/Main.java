@@ -12,6 +12,8 @@ public class Main {
 
     private ConsoleInterfaceIO io;
     private QuoteGenerate generator;
+    private int id;
+    private String name;
 
     public Main(ConsoleInterfaceIO io, QuoteGenerate generator) {
         this.io = io;
@@ -22,7 +24,7 @@ public class Main {
 
         io.println(generator.quoteGenerate());
 
-        View view = new View(io, new Project(), new InMemoryProjects(), new Category(), new InMemoryCategories());
+        View view = new View(io, new Project(), new InMemoryProjects(), new Category(id, name), new InMemoryCategories());
         view.createCategories();
 
         io.println("Sank!");

@@ -3,13 +3,21 @@ package goit5.nikfisher.kickstarter.model;
 public class Category {
 
     private String name;
+    private int id;
 
+    @Deprecated
     public Category(String name) {
         this.name = name;
     }
 
-    public Category() {
+    public Category(int id, String name) {
+        this(name);
+        this.id = id;
+    }
 
+    @Override
+    public String toString(){
+        return String.format("Category [name = %s, id=  %s]", name,  id);
     }
 
     public String getName() {
