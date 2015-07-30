@@ -47,12 +47,12 @@ public class CategoryModelTest {
 	}
 
 	@Test
-	public void getNonExistCategoryId() {
+	public void testgetNonExistCategoryId() {
 		assertEquals("-1", categoryDao.getCategoryNameById(1000));
 	}
 	
 	@Test
-	public void addCategory(){
+	public void testaddCategory(){
 		categoryDao.addCategory(new Category(15, "Some category"));
 		assertEquals("Some category",categoryDao.getCategoryNameById(15));
 	}
