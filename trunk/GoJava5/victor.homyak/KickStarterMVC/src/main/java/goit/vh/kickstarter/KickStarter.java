@@ -4,7 +4,6 @@ import goit.vh.kickstarter.mvc.controller.CategoryController;
 import goit.vh.kickstarter.mvc.controller.MainPageController;
 import goit.vh.kickstarter.mvc.controller.ProjectController;
 import goit.vh.kickstarter.mvc.model.CategoryModel;
-import goit.vh.kickstarter.mvc.model.MainPageModel;
 import goit.vh.kickstarter.mvc.model.ProjectModel;
 import goit.vh.kickstarter.mvc.view.CategoryView;
 import goit.vh.kickstarter.mvc.view.MainPageView;
@@ -88,8 +87,8 @@ public class KickStarter {
         dataRegistry.registerCategories(categories);
 
 
-        MainPageModel mainPageModel = new MainPageModel();
-        mainPageModel.setDataRegistry(dataRegistry);
+//        MainPageModel mainPageModel = new MainPageModel();
+//        mainPageModel.setDataRegistry(dataRegistry);
 
         CategoryModel categoryModel = new CategoryModel();
         categoryModel.setDataRegistry(dataRegistry);
@@ -98,7 +97,10 @@ public class KickStarter {
         projectModel.setDataRegistry(dataRegistry);
 
         MainPageView mainPageView = new MainPageView(output);
-        MainPageController mainPageController = new MainPageController(mainPageView, mainPageModel);
+        MainPageController mainPageController = new MainPageController(mainPageView);
+        mainPageController.setDataRegistry(dataRegistry);
+
+
         CategoryController categoryController = new CategoryController(new CategoryView(output), new ProjectView(output), categoryModel, projectModel);
         ProjectController projectController = new ProjectController(new ProjectView(output), projectModel);
         locationManager = new LocationManager(mainPageController, categoryController, projectController);

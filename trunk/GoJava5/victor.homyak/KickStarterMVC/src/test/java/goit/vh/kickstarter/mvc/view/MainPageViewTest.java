@@ -2,24 +2,10 @@ package goit.vh.kickstarter.mvc.view;
 
 import goit.vh.kickstarter.Input;
 import goit.vh.kickstarter.Output;
-import goit.vh.kickstarter.mvc.model.CategoryModel;
-import goit.vh.kickstarter.mvc.model.MainPageModel;
-import java.util.ArrayList;
-import java.util.List;
 
-import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.mockito.invocation.InvocationOnMock;
-import org.mockito.stubbing.Answer;
-
-
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.doAnswer;
-import static org.mockito.Mockito.when;
 
 /**
  * Created with IntelliJ IDEA.
@@ -29,9 +15,6 @@ import static org.mockito.Mockito.when;
  * To change this template use File | Settings | File Templates.
  */
 public class MainPageViewTest {
-    
-    @Mock
-    private MainPageModel model;
 
     @Mock
     private Output output;

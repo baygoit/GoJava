@@ -1,7 +1,7 @@
 package goit.vh.kickstarter.mvc.controller;
 
+import goit.vh.kickstarter.DataRegistry;
 import goit.vh.kickstarter.LocationManager;
-import goit.vh.kickstarter.mvc.model.MainPageModel;
 import goit.vh.kickstarter.mvc.view.MainPageView;
 
 
@@ -12,15 +12,14 @@ import goit.vh.kickstarter.mvc.view.MainPageView;
 public class MainPageController {
     private LocationManager locationManager;
     private MainPageView view;
-    private MainPageModel model;
+    private DataRegistry dataRegistry;
 
-    public MainPageController(MainPageView view, MainPageModel model) {
+    public MainPageController(MainPageView view) {
         this.view = view;
-        this.model = model;
     }
 
     public void start(int[] path) {
-        view.render(model);
+        view.render(dataRegistry);
 
         path[0] = Integer.parseInt(view.getInput());
         locationManager.setPath(path);
@@ -31,5 +30,8 @@ public class MainPageController {
         this.locationManager = locationManager;
     }
 
+    public void setDataRegistry(DataRegistry dataRegistry) {
+        this.dataRegistry = dataRegistry;
+    }
 
 }

@@ -1,6 +1,5 @@
 package goit.vh.kickstarter;
 
-import goit.vh.kickstarter.mvc.model.MainPageModel;
 import goit.vh.kickstarter.mvc.model.ProjectModel;
 import org.junit.Assert;
 import org.junit.Before;
@@ -13,9 +12,6 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.mockito.Matchers.*;
-import static org.mockito.Matchers.matches;
-import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.when;
 
 /**
@@ -27,8 +23,6 @@ public class DataRegistryTest {
     @Mock
     private Map<Integer, ArrayList<ProjectModel>> mapOfArrayLists;
 
-    @Mock
-    private MainPageModel mainPageModel;
     @Mock
     private ProjectModel projectModel;
 
@@ -42,7 +36,9 @@ public class DataRegistryTest {
 
     @Test
     public void whenGetCategoriesThanReturnMapOfArray() throws Exception {
-        when(mainPageModel.getCategories()).thenReturn(mapOfArrayLists);
+        DataRegistry dataRegistry = new DataRegistry();
+
+        when(dataRegistry.getCategories()).thenReturn(mapOfArrayLists);
 
     }
 
