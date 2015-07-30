@@ -106,25 +106,21 @@ public class CategoryMenuTest {
         QuoteGenerate generator = mock(QuoteGenerate.class);
 
         Runner runner = new Runner(io, generator);
-        CategoryMenu categoryMenu = new CategoryMenu(io, projects, CATEGORIES);
 
         //when
-        when(io.consoleScanInt()).thenReturn(1, 0);
-        categoryMenu.categoryMenu();
+        when(io.consoleScanInt()).thenReturn(1, 0, 0);
         runner.run();
 
 
         //then
         verify(io, times(1)).println("You selected category: Game");
-        verify(io, times(4)).println(" ");
+        verify(io, times(3)).println(" ");
         verify(io, times(1)).println("Project name: Game \"Popcorn\"");
         verify(io, times(1)).println("Description: Interesting game");
         verify(io, times(1)).println("Need collected: 10000$");
         verify(io, times(1)).println("Already collected: 0$");
         verify(io, times(1)).println("Days remaining: 10");
         verify(io, times(1)).println("Project name: Game \"Popcorn\"");
-        verify(io, times(4)).println(" ");
-        verify(io, times(4)).println(" ");
         verify(io, times(1)).println("Thank you for using our service!");
 
     }

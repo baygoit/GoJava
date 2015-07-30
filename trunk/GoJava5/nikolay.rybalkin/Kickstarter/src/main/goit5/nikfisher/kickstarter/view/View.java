@@ -1,9 +1,9 @@
 package goit5.nikfisher.kickstarter.view;
 
 import goit5.nikfisher.kickstarter.dao.Categories;
-import goit5.nikfisher.kickstarter.dao.Projects;
 import goit5.nikfisher.kickstarter.dao.InMemoryCategories;
 import goit5.nikfisher.kickstarter.dao.InMemoryProjects;
+import goit5.nikfisher.kickstarter.dao.Projects;
 import goit5.nikfisher.kickstarter.menu.CategoryMenu;
 import goit5.nikfisher.kickstarter.model.Category;
 import goit5.nikfisher.kickstarter.model.Project;
@@ -20,6 +20,7 @@ public class View {
         this.categories = categories;
         this.projects = projects;
     }
+
 
     public void createCategories() {
 
