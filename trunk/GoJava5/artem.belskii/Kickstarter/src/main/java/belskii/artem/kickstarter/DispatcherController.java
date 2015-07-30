@@ -9,13 +9,13 @@ import belskii.artem.kickstarter.mvc.view.ProjectView;
 
 public class DispatcherController {
 	private String MOTIVATION_QUOTE="Берись и делай!";
-	int currentPosition=0;
-	int userInput=-1;
-	int userInputTmp=-1;
-	Output out = new Output();
-	Input in = new Input();
-	CategoryController category = new CategoryController(new CategoryModel(), new CategoryView());
-	ProjectController project = new ProjectController(new ProjectModel(), new ProjectView());
+	private int currentPosition=0;
+	private int userInput=-1;
+	private int userInputTmp=-1;
+	private Output out = new Output();
+	private Input in = new Input();
+	private CategoryController category = new CategoryController(new CategoryModel(), new CategoryView());
+	private ProjectController project = new ProjectController(new ProjectModel(), new ProjectView());
 	
 	
 	public void start(){
@@ -23,7 +23,7 @@ public class DispatcherController {
 		
 	}
 	
-	public  void checkInput(){
+	private  void checkInput(){
 		while (currentPosition!=-1){
 			if (currentPosition == 0 && userInput == -1 ){
 				showCategory();
@@ -55,18 +55,18 @@ public class DispatcherController {
 		}
 	}
 	
-	public void showCategory(){
+	private void showCategory(){
 		out.show("The Daily Motivator:");
 		out.show(MOTIVATION_QUOTE);
 		out.show("====================================");
 		out.showCategory(category.printCategoryList());
 	}
 	
-	public void showProjectFromCategoryId(int id){
+	private void showProjectFromCategoryId(int id){
 		out.showProjectList(project.getProjectFromCategory(id));
 	}
 	
-	public void showProjectDetails(int id){
+	private void showProjectDetails(int id){
 		out.showProjectDetails(project.printProjectDetails(userInput));		
 	}
 	
