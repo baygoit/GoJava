@@ -4,8 +4,6 @@ import goit5.nikfisher.kickstarter.model.Category;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.File;
-
 import static org.junit.Assert.assertEquals;
 
 public abstract class CategoriesTest {
@@ -62,7 +60,6 @@ public abstract class CategoriesTest {
     @Test
     public void shouldCategoriesSize() throws Exception {
         //given
-        new File("categories_test.txt").delete();
 
         //when
         categories.add(new Category("Game"));

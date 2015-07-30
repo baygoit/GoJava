@@ -2,12 +2,12 @@ package goit5.nikfisher.kickstarter.model;
 
 public class Category {
 
-    private String name;
+    final private String NAME;
     private int id;
 
     @Deprecated
     public Category(String name) {
-        this.name = name;
+        this.NAME = name;
     }
 
     public Category(int id, String name) {
@@ -15,13 +15,14 @@ public class Category {
         this.id = id;
     }
 
+    // TODO Temporary method
     @Override
     public String toString(){
-        return String.format("Category [name = %s, id=  %s]", name,  id);
+        return String.format("Category [name = %s, id=  %s]", NAME,  id);
     }
 
     public String getName() {
-        return name;
+        return NAME;
     }
 
     @Override
@@ -31,11 +32,11 @@ public class Category {
 
         Category category = (Category) o;
 
-        return !(name != null ? !name.equals(category.name) : category.name != null);
+        return !(NAME != null ? !NAME.equals(category.NAME) : category.NAME != null);
     }
 
     @Override
     public int hashCode() {
-        return name != null ? name.hashCode() : 0;
+        return NAME != null ? NAME.hashCode() : 0;
     }
 }

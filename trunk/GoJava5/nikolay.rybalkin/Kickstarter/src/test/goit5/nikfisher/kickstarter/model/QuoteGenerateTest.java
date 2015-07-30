@@ -13,15 +13,15 @@ public class QuoteGenerateTest {
 
     class FakeRandom extends Random {
 
-        private List<Integer> numbers;
+        final private List<Integer> NUMBERS;
 
         public FakeRandom(Integer... numbers) {
-            this.numbers = new LinkedList(Arrays.asList(numbers));
+            this.NUMBERS = new LinkedList<>(Arrays.asList(numbers));
         }
 
         @Override
         public int nextInt(int i) {
-            return numbers.remove(0);
+            return NUMBERS.remove(0);
         }
     }
 

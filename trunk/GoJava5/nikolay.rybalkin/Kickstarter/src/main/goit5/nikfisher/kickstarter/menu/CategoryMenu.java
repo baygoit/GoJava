@@ -11,15 +11,15 @@ import java.util.List;
 
 public class CategoryMenu {
 
-    private String SPACE = " ";
-    private ConsoleInterfaceIO io;
-    private Projects projects;
-    private Categories categories;
+    final private String SPACE = " ";
+    final private ConsoleInterfaceIO IO;
+    final private Projects PROJECTS;
+    final private Categories CATEGORIES;
 
     public CategoryMenu(ConsoleInterfaceIO io, Projects projects, Categories categories) {
-        this.io = io;
-        this.categories = categories;
-        this.projects = projects;
+        this.IO = io;
+        this.CATEGORIES = categories;
+        this.PROJECTS = projects;
     }
 
     public void categoryMenu() {
@@ -27,7 +27,7 @@ public class CategoryMenu {
 
             askCategory();
 
-            int categoryIndex = io.consoleScanInt();
+            int categoryIndex = IO.consoleScanInt();
 
             if (categoryIndex == 0) {
                 break;
@@ -38,7 +38,7 @@ public class CategoryMenu {
                 continue;
             }
 
-            List<Project> foundProjects = projects.getProjects(category);
+            List<Project> foundProjects = PROJECTS.getProjects(category);
             printProjects(foundProjects);
 
 //            ProjectsMenu projectsMenu = new ProjectsMenu(new ConsoleIO());
@@ -48,41 +48,41 @@ public class CategoryMenu {
 
     private Category chooseCategory(int categoryIndex) {
 
-        if (categoryIndex <= 0 || categories.size() < categoryIndex) {
-            io.println("Not true index: " + categoryIndex);
+        if (categoryIndex <= 0 || CATEGORIES.size() < categoryIndex) {
+            IO.println("Not true index: " + categoryIndex);
             return null;
         }
 
-        Category category = categories.get(categoryIndex - 1);
-        io.println("You selected category: " + category.getName());
+        Category category = CATEGORIES.get(categoryIndex - 1);
+        IO.println("You selected category: " + category.getName());
         return category;
     }
 
     private void askCategory() {
 
-        io.println(SPACE);
-        io.println("Select category (or 0 to exit): ");
-        io.println(String.valueOf(categories.getCategories()));
+        IO.println(SPACE);
+        IO.println("Select category (or 0 to exit): ");
+        IO.println(String.valueOf(CATEGORIES.getCategories()));
     }
 
     private void printProjects(List<Project> foundProjects) {
 
         for (int i = 0; i < foundProjects.size(); i++) {
             Project project = foundProjects.get(i);
-            io.print((i + 1) + ") ");
+            IO.print((i + 1) + ") ");
             printProject(project);
         }
     }
 
-    //TODO
+    //TODO duplicated method
     private void printProject(Project project) {
 
-        io.println("Project name: " + project.getName());
-        io.println("Description: " + project.getDescription());
-        io.println("Need collected: " + project.getAmount() + "$");
-        io.println("Already collected: " + project.getExist() + "$");
-        io.println("Days remaining: " + project.getDays());
-        io.println("---------------------------------------");
-        io.println(SPACE);
+        IO.println("Project name: " + project.getName());
+        IO.println("Description: " + project.getDescription());
+        IO.println("Need collected: " + project.getAmount() + "$");
+        IO.println("Already collected: " + project.getExist() + "$");
+        IO.println("Days remaining: " + project.getDays());
+        IO.println("---------------------------------------");
+        IO.println(SPACE);
     }
 }

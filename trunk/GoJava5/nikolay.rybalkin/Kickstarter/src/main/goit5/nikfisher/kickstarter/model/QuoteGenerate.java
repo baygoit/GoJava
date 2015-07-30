@@ -7,10 +7,10 @@ import java.util.Random;
 
 public class QuoteGenerate {
 
-    private Random random;
+    final private Random RANDOM;
 
     public QuoteGenerate(Random random) {
-        this.random = random;
+        this.RANDOM = random;
     }
 
     public String quoteGenerate() {
@@ -21,7 +21,7 @@ public class QuoteGenerate {
         motivators.add("Get involved in the development of interesting projects!_1");
         motivators.add("Get involved in the development of interesting projects!_2");
 
-        int index = random.nextInt(motivators.size());
+        int index = RANDOM.nextInt(motivators.size());
 
         return motivators.get(index);
     }

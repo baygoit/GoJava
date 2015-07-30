@@ -3,7 +3,7 @@ package goit5.nikfisher.kickstarter.model;
 public class Project {
 
     private String question;
-    private String ansver;
+    private String answer;
     private String name;
     private String description;
     private int amount;
@@ -19,17 +19,17 @@ public class Project {
     public Project(String name, int amount, int exist, int days, String description) {
         this.name = name;
         this.amount = 10000;
-        this.days = days;
+        this.days = 10;
         this.description = description;
         this.exist = 0;
         this.history = null;
         this.video = null;
         this.question = null;
-        this.ansver = null;
+        this.answer = null;
     }
 
     @Deprecated
-    public Project(String name) {
+    private Project(String name) {
         this.name = name;
     }
 
@@ -63,8 +63,8 @@ public class Project {
         this.question = question;
     }
 
-    public void setAnsver(String ansver) {
-        this.ansver = ansver;
+    public void setAnswer(String answer) {
+        this.answer = answer;
     }
 
     public Category getCategory() {
@@ -103,8 +103,8 @@ public class Project {
         return question;
     }
 
-    public String getAnsver() {
-        return ansver;
+    public String getAnswer() {
+        return answer;
     }
 
     public void donate(int amount) {

@@ -2,8 +2,6 @@ package goit5.nikfisher.kickstarter;
 
 import goit5.nikfisher.kickstarter.dao.InMemoryCategories;
 import goit5.nikfisher.kickstarter.dao.InMemoryProjects;
-import goit5.nikfisher.kickstarter.model.Category;
-import goit5.nikfisher.kickstarter.model.Project;
 import goit5.nikfisher.kickstarter.model.QuoteGenerate;
 import goit5.nikfisher.kickstarter.streams.ConsoleIO;
 import goit5.nikfisher.kickstarter.streams.ConsoleInterfaceIO;
@@ -15,24 +13,22 @@ import java.util.Random;
 
 public class Runner {
 
-    private ConsoleInterfaceIO io;
-    private QuoteGenerate generator;
-    private int id;
-    private String name;
+    final private ConsoleInterfaceIO IO;
+    final private QuoteGenerate GENERATOR;
 
-    final static Logger LOGGER = LoggerFactory.getLogger(Runner.class);
+    private final static Logger LOGGER = LoggerFactory.getLogger(Runner.class);
 
     public Runner(ConsoleInterfaceIO io, QuoteGenerate generator) {
-        this.io = io;
-        this.generator = generator;
+        this.IO = io;
+        this.GENERATOR = generator;
     }
 
     public void run() {
 
-        io.println(generator.quoteGenerate());
-        View view = new View(io, new Project(), new InMemoryProjects(), new Category(id, name), new InMemoryCategories());
+        IO.println(GENERATOR.quoteGenerate());
+        View view = new View(IO, new InMemoryProjects(), new InMemoryCategories());
         view.createCategories();
-        io.println("Thank you for using our service!");
+        IO.println("Thank you for using our service!");
     }
 
     public static void main(String[] args){

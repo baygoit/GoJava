@@ -12,11 +12,11 @@ public class InMemoryProjects implements Projects {
 
     private int index = 0;
 
-    private Map<Integer, Project> projects = new HashMap<>();
+    final private Map<Integer, Project> PROJECTS = new HashMap<>();
 
     @Override
     public void add(Project project) {
-        projects.put(index++, project);
+        PROJECTS.put(index++, project);
     }
 
     @Override
@@ -26,7 +26,7 @@ public class InMemoryProjects implements Projects {
         int found = 0;
 
         for (int i = 0; i < index; i++) {
-            Project project = projects.get(i);
+            Project project = PROJECTS.get(i);
 
             if (project.getCategory().equals(category)) {
                 result.add(found, project);
@@ -39,7 +39,7 @@ public class InMemoryProjects implements Projects {
 
     @Override
     public Project get(int index) {
-        return projects.get(index);
+        return PROJECTS.get(index);
     }
 
 

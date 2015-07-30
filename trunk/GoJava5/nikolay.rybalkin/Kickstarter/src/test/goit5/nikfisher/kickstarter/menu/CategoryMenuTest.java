@@ -21,20 +21,20 @@ public class CategoryMenuTest {
 //    }
 
     @Mock
-    InMemoryCategories categories = new InMemoryCategories();
+    final InMemoryCategories CATEGORIES = new InMemoryCategories();
 
     @Test
     public void shouldCategoriesWenHaveCategories() throws Exception {
         //given
 
-        categories.add(new Category("Game"));
+        CATEGORIES.add(new Category("Game"));
 
         Projects projects = new InMemoryProjects();
         ConsoleInterfaceIO io = mock(ConsoleInterfaceIO.class);
         QuoteGenerate generator = mock(QuoteGenerate.class);
 
         Runner runner = new Runner(io, generator);
-        CategoryMenu categoryMenu = new CategoryMenu(io, projects, categories);
+        CategoryMenu categoryMenu = new CategoryMenu(io, projects, CATEGORIES);
 
         //when
 
@@ -56,7 +56,7 @@ public class CategoryMenuTest {
         QuoteGenerate generator = mock(QuoteGenerate.class);
 
         Runner runner = new Runner(io, generator);
-        CategoryMenu categoryMenu = new CategoryMenu(io, projects, categories);
+        CategoryMenu categoryMenu = new CategoryMenu(io, projects, CATEGORIES);
 
         //when
 
@@ -70,16 +70,16 @@ public class CategoryMenuTest {
     }
 
     @Test
-    public void shouldCategoriesShoseCategory() throws Exception {
+    public void shouldCategoriesChooseCategory() throws Exception {
         //given
-        categories.add(new Category("Game"));
+        CATEGORIES.add(new Category("Game"));
 
         Projects projects = new InMemoryProjects();
         ConsoleInterfaceIO io = mock(ConsoleInterfaceIO.class);
         QuoteGenerate generator = mock(QuoteGenerate.class);
 
         Runner runner = new Runner(io, generator);
-        CategoryMenu categoryMenu = new CategoryMenu(io, projects, categories);
+        CategoryMenu categoryMenu = new CategoryMenu(io, projects, CATEGORIES);
 
         //when
         when(io.consoleScanInt()).thenReturn(2, 0);
@@ -95,7 +95,7 @@ public class CategoryMenuTest {
     public void shouldCategoriesWhenHaveProjects() throws Exception {
         //given
         Category category1 = new Category("Game");
-        categories.add(category1);
+        CATEGORIES.add(category1);
 
         Project project1 = new Project("Game \"Popcorn\"", 10000, 0, 10, "Interesting game");
         Projects projects = new InMemoryProjects();
@@ -106,7 +106,7 @@ public class CategoryMenuTest {
         QuoteGenerate generator = mock(QuoteGenerate.class);
 
         Runner runner = new Runner(io, generator);
-        CategoryMenu categoryMenu = new CategoryMenu(io, projects, categories);
+        CategoryMenu categoryMenu = new CategoryMenu(io, projects, CATEGORIES);
 
         //when
         when(io.consoleScanInt()).thenReturn(1, 0);

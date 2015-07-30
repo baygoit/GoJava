@@ -9,13 +9,13 @@ import java.util.Map;
 
 public class InMemoryCategories implements Categories {
 
-    private Map<Integer, Category> categories = new HashMap<>();
+    final private Map<Integer, Category> CATEGORIES = new HashMap<>();
 
     private int index = 0;
 
     public void add(Category category) {
 
-        categories.put(index++, category);
+        CATEGORIES.put(index++, category);
     }
 
     public List<String> getCategories() {
@@ -23,13 +23,13 @@ public class InMemoryCategories implements Categories {
         List<String> result = new ArrayList<>();
 
         for (int i = 0; i < index; i++) {
-            result.add(String.valueOf(i + 1) + ") " + categories.get(i).getName());
+            result.add(String.valueOf(i + 1) + ") " + CATEGORIES.get(i).getName());
         }
         return result;
     }
 
     public Category get(int index) {
-        return categories.get(index);
+        return CATEGORIES.get(index);
     }
 
     public int size() {
