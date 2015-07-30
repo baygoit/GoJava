@@ -4,8 +4,8 @@ import java.util.Scanner;
 
 public class Input {
 	Scanner in = new Scanner(System.in);
-	public String read(){
-		return in.nextLine();
+	public int read(){
+		return in.nextInt();
 	}
 
 }

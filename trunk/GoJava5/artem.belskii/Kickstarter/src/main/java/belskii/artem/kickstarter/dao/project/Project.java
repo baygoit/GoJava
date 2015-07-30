@@ -8,8 +8,9 @@ public class Project {
 	private String endDate;
 	private String videoUrl;
 	private int categoryId;
+	private String details;
 	
-	public Project(String name, Long goal, Long balance, String startDate, String endDate, String videoUrl, int categoryId){
+	public Project(String name, Long goal, Long balance, String startDate, String endDate, String videoUrl, int categoryId, String details){
 		this.name=name;
 		this.goal=goal;
 		this.balance=balance;
@@ -17,6 +18,7 @@ public class Project {
 		this.endDate=endDate;
 		this.videoUrl=videoUrl;
 		this.categoryId=categoryId;
+		this.details=details;
 	}
 
 	public String getName() {
@@ -73,6 +75,14 @@ public class Project {
 
 	public void updatecategoryId(int categoryId) {
 		this.categoryId = categoryId;
+	}
+
+	public String getDetails() {
+		return details;
+	}
+
+	public void updateDetails(String details) {
+		this.details = details;
 	}
 
 	

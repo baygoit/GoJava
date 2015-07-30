@@ -20,4 +20,8 @@ public class ProjectModel {
 	public Project getProjectDetails(int projectId){
 		return projectDao.getProjectDetails(projectId);
 	}
+	
+	public ArrayList<Project> getProjectFromCategory(int CategoryId){
+		return projectDao.getProjectFromCategory(CategoryId);
+	}
 }

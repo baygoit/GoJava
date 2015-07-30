@@ -1,5 +1,9 @@
 package belskii.artem.kickstarter.mvc.view;
 
+import java.util.ArrayList;
+
+import belskii.artem.kickstarter.dao.project.Project;
+
 public class ProjectView {
 
 	public void printProjectList() {
@@ -7,8 +11,9 @@ public class ProjectView {
 		
 	}
 
-	public void printProjectDetails(int id) {
-		// TODO Auto-generated method stub
+	public Project printProjectDetails(Project ProjectDetails) {
+		return ProjectDetails;
+		
 		
 	}
 

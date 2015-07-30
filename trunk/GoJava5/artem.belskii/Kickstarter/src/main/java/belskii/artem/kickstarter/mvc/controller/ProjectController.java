@@ -4,9 +4,7 @@ package belskii.artem.kickstarter.mvc.controller;
 import java.util.ArrayList;
 
 import belskii.artem.kickstarter.dao.project.Project;
-import belskii.artem.kickstarter.mvc.model.CategoryModel;
 import belskii.artem.kickstarter.mvc.model.ProjectModel;
-import belskii.artem.kickstarter.mvc.view.CategoryView;
 import belskii.artem.kickstarter.mvc.view.ProjectView;
 
 public class ProjectController {
@@ -30,7 +28,11 @@ public class ProjectController {
 		view.printProjectList();
 	}
 	
-	public void printProjectDetails(int id){
-		view.printProjectDetails(id);
+	public Project printProjectDetails(int id){
+		return view.printProjectDetails(model.getProjectDetails(id));
+	}
+	
+	public ArrayList<Project> getProjectFromCategory(int id){
+		return model.getProjectFromCategory(id);
 	}
 }

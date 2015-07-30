@@ -9,7 +9,7 @@ public class ProjectTest {
 private Project testProject;
 	@Before
 	public void setUp() throws Exception {
-		testProject = new Project("My test project",new Long(1), new Long(1),"28.07.2015","30.07.2015","https://www.youtube.com/watch?v=uC0pqWX3yB8", 1);
+		testProject = new Project("My test project",new Long(1), new Long(1),"28.07.2015","30.07.2015","https://www.youtube.com/watch?v=uC0pqWX3yB8", 1, "My super project!");
 	}
 
 	@Test
