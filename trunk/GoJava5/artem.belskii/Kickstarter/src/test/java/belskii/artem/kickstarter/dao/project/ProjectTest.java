@@ -87,6 +87,23 @@ private Project testProject;
 	public void getcategoryId(){
 		assertEquals(1, testProject.getcategoryId());
 	}
+	
+	@Test
+	public void getDetails(){
+		assertEquals("My super project!", testProject.getDetails());
+	}
+	
+	@Test
+	public void updateDetails(){
+		testProject.updateDetails("My new super project!");
+		assertEquals("My new super project!", testProject.getDetails());
+	}
+	
+	@Test
+	public void updateCategoryId(){
+		testProject.updatecategoryId(1);
+		assertEquals(1, testProject.getcategoryId());
+	}
 
 
 }
