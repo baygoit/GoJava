@@ -28,13 +28,15 @@ public class ProjectController {
             projectView.render(projectModel);
             projectView.readInProjectUserInput();
             path[1] = Integer.parseInt(projectView.getInput());
+            if (path[1] == 0) {
+                path[0] = 0;
+                locationManager.setPath(path);
+                locationManager.dispatch();
+            }
             if (projectModel.refreshModel(path) == null) {
                 output.println("You choose not sutable variant, try more.");
             } else {
                 path[1] = 0;
-//                if (index == 0) {
-//                    path[0] = 0;
-//                }
                 locationManager.dispatch();
             }
         }

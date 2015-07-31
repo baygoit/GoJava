@@ -71,7 +71,7 @@ public class CategoryControllerTest {
         when(projectView.getInput()).thenReturn("1");
         categoryController.start(path);
 
-        verify(model).refreshModel(path[0]);
+        verify(model,times(2)).refreshModel(path[0]);
         verify(locationManager, times(3)).dispatch();
 
     }

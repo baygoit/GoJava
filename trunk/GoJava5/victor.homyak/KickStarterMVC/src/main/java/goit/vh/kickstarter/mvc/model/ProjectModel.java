@@ -12,7 +12,7 @@ public class ProjectModel {
 
     private DataRegistry dataRegistry;
     private ArrayList<ProjectModel> listOfProjectses;
-    private ProjectModel projectModel;
+
     private String projectName;
     private String shortDescription;
     private int sumToRaise;
@@ -52,15 +52,14 @@ public class ProjectModel {
         if (dataRegistry.getProject(path) == null) {
             return null;
         }
-        projectModel = dataRegistry.getProject(path);
-        this.projectName = projectModel.getProjectName();
-        this.shortDescription = projectModel.getShortDescription();
-        this.sumToRaise = projectModel.getSumToRaise();
-        this.currentSum = projectModel.getCurrentSum();
-        this.endDate = projectModel.getEndDate();
-        this.projectHistory = projectModel.getProjectHistory();
-        this.fAQ = projectModel.getfAQ();
-        this.demoURL = projectModel.getDemoURL();
+        this.projectName = dataRegistry.getProject(path).getProjectName();
+        this.shortDescription = dataRegistry.getProject(path).getShortDescription();
+        this.sumToRaise = dataRegistry.getProject(path).getSumToRaise();
+        this.currentSum = dataRegistry.getProject(path).getCurrentSum();
+        this.endDate = dataRegistry.getProject(path).getEndDate();
+        this.projectHistory = dataRegistry.getProject(path).getProjectHistory();
+        this.fAQ = dataRegistry.getProject(path).getfAQ();
+        this.demoURL = dataRegistry.getProject(path).getDemoURL();
         return 1;
     }
 

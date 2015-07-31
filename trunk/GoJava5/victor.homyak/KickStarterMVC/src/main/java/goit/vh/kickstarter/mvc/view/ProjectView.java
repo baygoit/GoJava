@@ -29,7 +29,9 @@ public class ProjectView {
                     getDateDiff(new Date(), projects.get(i).getEndDate(), TimeUnit.DAYS));
 
         }
+        readUserInput();
         setInput(new Input().getInput());
+
     }
 
     public void render(ProjectModel projectModel) {

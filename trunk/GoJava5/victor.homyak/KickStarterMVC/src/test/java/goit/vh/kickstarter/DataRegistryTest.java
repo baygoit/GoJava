@@ -1,5 +1,6 @@
 package goit.vh.kickstarter;
 
+import goit.vh.kickstarter.mvc.model.CategoryModel;
 import goit.vh.kickstarter.mvc.model.ProjectModel;
 import org.junit.Assert;
 import org.junit.Before;
@@ -27,6 +28,9 @@ public class DataRegistryTest {
     private ProjectModel projectModel;
 
     @Mock
+    private CategoryModel categoryModel;
+
+    @Mock
     private Output output;
 
     @Before
@@ -34,13 +38,13 @@ public class DataRegistryTest {
         MockitoAnnotations.initMocks(this);
     }
 
-    @Test
-    public void whenGetCategoriesThanReturnMapOfArray() throws Exception {
-        DataRegistry dataRegistry = new DataRegistry();
-
-        when(dataRegistry.getCategories()).thenReturn(mapOfArrayLists);
-
-    }
+//    @Test
+//    public void whenGetCategoriesThanReturnMapOfArray() throws Exception {
+//        DataRegistry dataRegistry = new DataRegistry();
+//
+//        when(dataRegistry.getCategories()).thenReturn(mapOfArrayLists);
+//
+//    }
 
     //
 //
@@ -50,7 +54,7 @@ public class DataRegistryTest {
         Map<Integer, ArrayList<ProjectModel>> categories = new HashMap<>();
         dataRegistry.registerCategories(categories);
 
-        Map<Integer, ArrayList<ProjectModel>> result = dataRegistry.getCategories();
+        Map<Integer, ArrayList<ProjectModel>> result = categoryModel.getCategories();
 
         Assert.assertEquals("Categories must be the same as registered", categories, result);
     }

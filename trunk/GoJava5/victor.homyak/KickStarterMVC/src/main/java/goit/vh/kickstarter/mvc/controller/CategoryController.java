@@ -33,19 +33,25 @@ public class CategoryController {
     public void start(int[] path) {
         if (path[0] != 0 && path[1] == 0) {
 
-            if (model.refreshModel(path[0]) == null) {//TODO NULLObject
+            if (model.getCategories().size() < path[0] - 1) {
                 path[0] = 0;
                 locationManager.setPath(path);
                 locationManager.dispatch();
             }
+            model.refreshModel(path[0]);
             view.render(model);
-//            if (projectModel.refreshListModel(path[0]) == null) {
-//                locationManager.dispatch();
-//        }
+
             projectModel.refreshListModel(path[0]);
+
             projectView.renderList(projectModel.getListOfProjectses());
-           projectView.readUserInput();
+
             path[1] = Integer.parseInt(projectView.getInput());
+
+            if (path[1] == 0) {
+                path[0] = 0;
+                locationManager.setPath(path);
+                locationManager.dispatch();
+            }
             if (projectModel.refreshModel(path) == null) {
                 output.println("You choose not sutable variant, returning to previous menu\n");
                 path[1] = 0;

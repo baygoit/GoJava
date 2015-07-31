@@ -83,12 +83,7 @@ public class KickStarter {
 
         categories.put(3, category3);
 
-
         dataRegistry.registerCategories(categories);
-
-
-//        MainPageModel mainPageModel = new MainPageModel();
-//        mainPageModel.setDataRegistry(dataRegistry);
 
         CategoryModel categoryModel = new CategoryModel();
         categoryModel.setDataRegistry(dataRegistry);
@@ -96,14 +91,14 @@ public class KickStarter {
         ProjectModel projectModel = new ProjectModel();
         projectModel.setDataRegistry(dataRegistry);
 
-        MainPageView mainPageView = new MainPageView(output);
-        MainPageController mainPageController = new MainPageController(mainPageView);
-        mainPageController.setDataRegistry(dataRegistry);
 
-
+        MainPageController mainPageController = new MainPageController(new MainPageView(output),categoryModel);
         CategoryController categoryController = new CategoryController(new CategoryView(output), new ProjectView(output), categoryModel, projectModel);
         ProjectController projectController = new ProjectController(new ProjectView(output), projectModel);
+
+
         locationManager = new LocationManager(mainPageController, categoryController, projectController);
+
         mainPageController.setLocationManager(locationManager);
         categoryController.setLocationManager(locationManager);
         projectController.setLocationManager(locationManager);
