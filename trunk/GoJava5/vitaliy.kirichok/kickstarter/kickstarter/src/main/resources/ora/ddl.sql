@@ -10,6 +10,7 @@ prompt
 prompt Creating table CATEGORY
 prompt =======================
 prompt
+-- noinspection SqlDialectInspection
 create table CATEGORY
 (
   category_id NUMBER not null,

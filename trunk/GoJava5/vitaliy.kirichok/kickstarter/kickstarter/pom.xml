@@ -14,7 +14,8 @@
         <mockito-core.version>2.0.28-beta</mockito-core.version>
         <commons-lang3.version>3.4</commons-lang3.version>
         <commons-validator.version>1.4.1</commons-validator.version>
-        <ojdbc6.version>11.2.0</ojdbc6.version>
+        <ojdbc6.version>11.2.0.4</ojdbc6.version>
+        <oracle.ucp.version>11.2.0.4</oracle.ucp.version>
     </properties>
 
     <build>
@@ -60,6 +61,12 @@
             <groupId>com.oracle</groupId>
             <artifactId>ojdbc6</artifactId>
             <version>${ojdbc6.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.oracle</groupId>
+            <artifactId>ucp</artifactId>
+            <version>${oracle.ucp.version}</version>
             <scope>compile</scope>
         </dependency>
     </dependencies>

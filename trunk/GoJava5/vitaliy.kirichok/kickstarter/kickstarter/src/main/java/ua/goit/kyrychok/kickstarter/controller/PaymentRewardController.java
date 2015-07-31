@@ -1,14 +1,16 @@
 package ua.goit.kyrychok.kickstarter.controller;
 
 import ua.goit.kyrychok.kickstarter.StandByMode;
-import ua.goit.kyrychok.kickstarter.dao.DataProvider;
-import ua.goit.kyrychok.kickstarter.model.Reward;
+import ua.goit.kyrychok.kickstarter.dao.ProjectDao;
+import ua.goit.kyrychok.kickstarter.dao.RewardDao;
 
 public class PaymentRewardController extends AbstractPaymentController {
     private int rewardId;
+    private RewardDao rewardDao;
 
-    public PaymentRewardController(DataProvider dataProvider) {
-        super(dataProvider);
+    public PaymentRewardController(ProjectDao projectDao, RewardDao rewardDao) {
+        super(projectDao);
+        this.rewardDao = rewardDao;
     }
 
     public void setRewardId(int rewardId) {
@@ -32,9 +34,7 @@ public class PaymentRewardController extends AbstractPaymentController {
     @Override
     protected void addPayment(String input) {
         if (currentMode == StandByMode.EXPECTED_CARD_NO) {
-            Reward reward = dataProvider.getReward(rewardId);
-            int amount = dataProvider.getProjectBalance(projectId) + reward.getAmount();
-            dataProvider.setProjectBalance(projectId, amount);
+            incProjectBalance(projectId, rewardDao.load(rewardId).getAmount());
         }
     }
 

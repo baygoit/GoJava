@@ -1,6 +1,6 @@
 package ua.goit.kyrychok.kickstarter.controller;
 
-import ua.goit.kyrychok.kickstarter.dao.DataProvider;
+import ua.goit.kyrychok.kickstarter.dao.ProjectDao;
 import ua.goit.kyrychok.kickstarter.model.Project;
 import ua.goit.kyrychok.kickstarter.view.ProjectView;
 
@@ -12,9 +12,10 @@ public class ProjectController extends AbstractController {
     private FaqController faqController;
     private DonatePageController donatePageController;
     private int projectId;
+    private ProjectDao projectDao;
 
-    public ProjectController(DataProvider dataProvider) {
-        super(dataProvider);
+    public ProjectController(ProjectDao projectDao) {
+        this.projectDao = projectDao;
     }
 
     public void setModel(Project model) {
@@ -62,7 +63,7 @@ public class ProjectController extends AbstractController {
 
     @Override
     public void updateModel() {
-        model = dataProvider.getProject(projectId);
+        model = projectDao.load(projectId);
     }
 
     @Override

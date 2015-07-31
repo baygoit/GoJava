@@ -1,7 +1,7 @@
-package ua.goit.kyrychok.kickstarter.dao;
+package ua.goit.kyrychok.kickstarter.dao.xml;
 
 import org.xml.sax.SAXException;
-import ua.goit.kyrychok.kickstarter.dao.xmldto.*;
+import ua.goit.kyrychok.kickstarter.dao.xml.dto.*;
 import ua.goit.kyrychok.kickstarter.model.Category;
 import ua.goit.kyrychok.kickstarter.model.Faq;
 import ua.goit.kyrychok.kickstarter.model.Project;
@@ -20,7 +20,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import static java.lang.Integer.parseInt;
 import static java.lang.String.format;
 
-public class XmlDataProvider implements DataProvider {
+public class XmlStorage {
     private DtoRoot storage;
     private DtoConverter converter = new DtoConverter();
     private File dataFile;
@@ -30,27 +30,19 @@ public class XmlDataProvider implements DataProvider {
     private Unmarshaller unmarshaller;
     private AtomicInteger faqSequence = new AtomicInteger();
 
-    public static XmlDataProvider getNewInstance(File dataFile, File schemaFile) {
-        XmlDataProvider xmlDataProvider = new XmlDataProvider();
-        xmlDataProvider.dataFile = dataFile;
-        xmlDataProvider.schemaFile = schemaFile;
-        xmlDataProvider.init();
-        xmlDataProvider.unmarshal();
-        xmlDataProvider.setSequencesValue();
-        return xmlDataProvider;
+    public XmlStorage(File dataFile, File schemaFile) {
+        this.dataFile = dataFile;
+        this.schemaFile = schemaFile;
     }
 
-    @Override
     public String getWelcomeMessage() {
         return storage.welcomeMessage;
     }
 
-    @Override
     public List<Category> getCategories() {
         return converter.convertCategoriesToDomain(storage.categories);
     }
 
-    @Override
     public Category getCategory(int id) {
         for (DtoCategory category : storage.categories) {
             if (parseInt(category.id) == id) {
@@ -58,7 +50,6 @@ public class XmlDataProvider implements DataProvider {
             }
         }
         throw new IndexOutOfBoundsException(format("Category with id = \"%s\" not found", id));
-
     }
 
     private DtoProject getDtoProject(int id) {
@@ -72,12 +63,10 @@ public class XmlDataProvider implements DataProvider {
         throw new IndexOutOfBoundsException(format("Project with id = \"%s\" not found", id));
     }
 
-    @Override
     public Project getProject(int id) {
         return converter.convertToDomain(getDtoProject(id));
     }
 
-    @Override
     public void addFaq(int projectId, Faq faq) {
         DtoProject dtoProject = getDtoProject(projectId);
         if (dtoProject.faqs == null) {
@@ -88,26 +77,22 @@ public class XmlDataProvider implements DataProvider {
         marshal();
     }
 
-    @Override
     public List<Reward> getRewards(int projectId) {
         DtoProject project = getDtoProject(projectId);
         return converter.convertRewardsToDomain(project.rewards);
     }
 
-    @Override
     public void setProjectBalance(int projectId, int amount) {
         DtoProject dtoProject = getDtoProject(projectId);
         dtoProject.balance = amount;
         marshal();
     }
 
-    @Override
     public int getProjectBalance(int projectId) {
         DtoProject dtoProject = getDtoProject(projectId);
         return dtoProject.balance;
     }
 
-    @Override
     public Reward getReward(int id) {
         for (DtoCategory category : storage.categories) {
             for (DtoProject project : category.projects) {
@@ -151,7 +136,7 @@ public class XmlDataProvider implements DataProvider {
         }
     }
 
-    private void init() {
+    public void init() {
         try {
             SchemaFactory sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
             Schema schema = sf.newSchema(schemaFile);
@@ -161,6 +146,8 @@ public class XmlDataProvider implements DataProvider {
             marshaller.setSchema(schema);
             unmarshaller = context.createUnmarshaller();
             unmarshaller.setSchema(schema);
+            unmarshal();
+            setSequencesValue();
         } catch (JAXBException | SAXException e) {
             e.printStackTrace();//TODO handle exception
         }

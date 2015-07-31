@@ -1,34 +1,35 @@
 package ua.goit.kyrychok.kickstarter;
 
 import ua.goit.kyrychok.kickstarter.controller.*;
-import ua.goit.kyrychok.kickstarter.dao.DataProvider;
+import ua.goit.kyrychok.kickstarter.dao.factory.AbstractDaoFactory;
 import ua.goit.kyrychok.kickstarter.view.*;
 
 public class Dispatcher implements InputListener {
     private AbstractController currentController;
 
-    public void init(DataProvider dataProvider, Output output) {
-        MainPageController mainPageController = new MainPageController(dataProvider);
+    public void init(AbstractDaoFactory daoFactory, Output output) {
+
+        MainPageController mainPageController = new MainPageController(daoFactory.createCategory());
         mainPageController.setView(new MainPageView(output));
 
-        CategoryController categoryController = new CategoryController(dataProvider);
+        CategoryController categoryController = new CategoryController(daoFactory.createCategory());
         categoryController.setView(new CategoryView(output));
 
-        ProjectController projectController = new ProjectController(dataProvider);
+        ProjectController projectController = new ProjectController(daoFactory.createProject());
         projectController.setView(new ProjectView(output));
 
-        FaqController faqController = new FaqController(dataProvider);
+        FaqController faqController = new FaqController(daoFactory.createFaq());
         faqController.setView(new FaqView(output));
 
-        DonatePageController donatePageController = new DonatePageController(dataProvider);
+        DonatePageController donatePageController = new DonatePageController(daoFactory.createReward());
         donatePageController.setView(new DonatePageView(output));
 
         PaymentView paymentView = new PaymentView(output);
 
-        PaymentController paymentController = new PaymentController(dataProvider);
+        PaymentController paymentController = new PaymentController(daoFactory.createProject());
         paymentController.setView(paymentView);
 
-        PaymentRewardController paymentRewardController = new PaymentRewardController(dataProvider);
+        PaymentRewardController paymentRewardController = new PaymentRewardController(daoFactory.createProject(), daoFactory.createReward());
         paymentRewardController.setView(paymentView);
 
         paymentRewardController.setParentController(projectController);

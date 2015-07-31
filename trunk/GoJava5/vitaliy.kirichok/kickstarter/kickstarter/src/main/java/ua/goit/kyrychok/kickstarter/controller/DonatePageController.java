@@ -1,7 +1,7 @@
 package ua.goit.kyrychok.kickstarter.controller;
 
 import ua.goit.kyrychok.kickstarter.StandByMode;
-import ua.goit.kyrychok.kickstarter.dao.DataProvider;
+import ua.goit.kyrychok.kickstarter.dao.RewardDao;
 import ua.goit.kyrychok.kickstarter.model.Reward;
 import ua.goit.kyrychok.kickstarter.view.DonatePageView;
 
@@ -15,9 +15,10 @@ public class DonatePageController extends AbstractController {
     private PaymentController paymentController;
     private PaymentRewardController paymentRewardController;
     private int projectId;
+    private RewardDao rewardDao;
 
-    public DonatePageController(DataProvider dataProvider) {
-        super(dataProvider);
+    public DonatePageController(RewardDao rewardDao) {
+        this.rewardDao = rewardDao;
     }
 
     public void setModel(List<Reward> model) {
@@ -72,7 +73,7 @@ public class DonatePageController extends AbstractController {
 
     @Override
     public void updateModel() {
-        model = dataProvider.getRewards(projectId);
+        model = rewardDao.fetch(projectId);
     }
 
     @Override

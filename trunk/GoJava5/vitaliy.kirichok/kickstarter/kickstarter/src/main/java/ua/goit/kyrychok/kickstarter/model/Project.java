@@ -35,6 +35,10 @@ public class Project {
         rewards = new ArrayList<>();
     }
 
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
+    }
+
     public Date getCreateDate() {
         return createDate;
     }

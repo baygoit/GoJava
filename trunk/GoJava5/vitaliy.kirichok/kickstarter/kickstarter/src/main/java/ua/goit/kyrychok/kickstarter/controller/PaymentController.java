@@ -2,12 +2,12 @@ package ua.goit.kyrychok.kickstarter.controller;
 
 import org.apache.commons.validator.routines.FloatValidator;
 import ua.goit.kyrychok.kickstarter.StandByMode;
-import ua.goit.kyrychok.kickstarter.dao.DataProvider;
+import ua.goit.kyrychok.kickstarter.dao.ProjectDao;
 
 public class PaymentController extends AbstractPaymentController {
 
-    public PaymentController(DataProvider dataProvider) {
-        super(dataProvider);
+    public PaymentController(ProjectDao projectDao) {
+        super(projectDao);
     }
 
     @Override
@@ -32,8 +32,7 @@ public class PaymentController extends AbstractPaymentController {
     @Override
     protected void addPayment(String input) {
         if (currentMode == StandByMode.EXPECTED_AMOUNT) {
-            int amount = dataProvider.getProjectBalance(projectId) + convertAmount(input);
-            dataProvider.setProjectBalance(projectId, amount);
+            incProjectBalance(projectId, convertAmount(input));
         }
     }
 

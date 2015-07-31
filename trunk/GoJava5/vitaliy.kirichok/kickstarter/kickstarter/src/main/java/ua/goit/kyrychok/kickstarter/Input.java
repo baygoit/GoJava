@@ -4,20 +4,33 @@ import java.util.Scanner;
 
 public class Input {
     private InputListener inputListener;
+    private Scanner scanner;
 
-    public Input(InputListener inputListener) {
+    public Input() {
+        scanner = new Scanner(System.in);
+    }
+
+    public void addListener(InputListener inputListener) {
         this.inputListener = inputListener;
     }
 
+    public void close() {
+        if (scanner != null) {
+            scanner.close();
+        }
+    }
+
+    public String getLine() {
+        return scanner.nextLine();
+    }
+
     public void listenInput() {
-        Scanner scanner = new Scanner(System.in);
         try {
             while (scanner.hasNextLine()) {
                 inputListener.onInput(scanner.nextLine());
             }
-            scanner.close();
         } catch (IllegalStateException e) {
-            scanner.close();
+            close();
         }
     }
 }

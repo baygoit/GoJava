@@ -9,7 +9,7 @@
                     <name>1st project in 1st category</name>
                     <description>desc</description>
                     <goal>10000</goal>
-                    <balance>354000</balance>
+                    <balance>358000</balance>
                     <create_date>2015-07-27T13:43:33.903+03:00</create_date>
                     <deadline_date>2015-07-27T17:43:33.893+03:00</deadline_date>
                     <demo_link>http://stackoverflow.com/</demo_link>
@@ -40,6 +40,21 @@
                         </faq>
                         <faq id="17">
                             <question>sdfgsdfg</question>
+                        </faq>
+                        <faq id="18">
+                            <question>sdfgsdfg</question>
+                        </faq>
+                        <faq id="19">
+                            <question>dfghdfhdfhsdhsdf</question>
+                        </faq>
+                        <faq id="20">
+                            <question>fsdhsdfhsdfg</question>
+                        </faq>
+                        <faq id="21">
+                            <question>asdfasdgadg</question>
+                        </faq>
+                        <faq id="22">
+                            <question>dfgsdfgsdfg</question>
                         </faq>
                     </faqs>
                     <events>

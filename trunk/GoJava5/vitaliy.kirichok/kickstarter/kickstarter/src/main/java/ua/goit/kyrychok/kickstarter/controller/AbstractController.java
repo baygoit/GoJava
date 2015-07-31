@@ -1,17 +1,10 @@
 package ua.goit.kyrychok.kickstarter.controller;
 
-import ua.goit.kyrychok.kickstarter.dao.DataProvider;
-
 public abstract class AbstractController {
     public static final String EXIT_CODE = "0";
 
     private AbstractController parentController;
     private AbstractController nextController;
-    protected DataProvider dataProvider;
-
-    public AbstractController(DataProvider dataProvider) {
-        this.dataProvider = dataProvider;
-    }
 
     protected abstract void updateModel();
 

@@ -1,4 +1,4 @@
-package ua.goit.kyrychok.kickstarter.dao.xmldto;
+package ua.goit.kyrychok.kickstarter.dao.xml.dto;
 
 import javax.xml.bind.annotation.*;
 import java.util.List;

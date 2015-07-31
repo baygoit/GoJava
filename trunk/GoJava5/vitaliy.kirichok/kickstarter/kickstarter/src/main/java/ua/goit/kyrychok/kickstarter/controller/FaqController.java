@@ -1,7 +1,7 @@
 package ua.goit.kyrychok.kickstarter.controller;
 
 import org.apache.commons.lang3.StringUtils;
-import ua.goit.kyrychok.kickstarter.dao.DataProvider;
+import ua.goit.kyrychok.kickstarter.dao.FaqDao;
 import ua.goit.kyrychok.kickstarter.model.Faq;
 import ua.goit.kyrychok.kickstarter.view.FaqView;
 
@@ -12,9 +12,10 @@ public class FaqController extends AbstractController {
 
     private FaqView view;
     private int projectId;
+    private FaqDao faqDao;
 
-    public FaqController(DataProvider dataProvider) {
-        super(dataProvider);
+    public FaqController(FaqDao faqDao) {
+        this.faqDao = faqDao;
     }
 
     public void setProjectId(int projectId) {
@@ -27,7 +28,7 @@ public class FaqController extends AbstractController {
 
     public void addFaq(String question) {
         Faq faq = new Faq(question);
-        dataProvider.addFaq(projectId, faq);
+        faqDao.add(projectId, faq);
     }
 
     @Override

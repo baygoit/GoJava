@@ -1,4 +1,4 @@
-package ua.goit.kyrychok.kickstarter.dao;
+package ua.goit.kyrychok.kickstarter.dao.memory;
 
 import ua.goit.kyrychok.kickstarter.model.*;
 
@@ -11,92 +11,15 @@ import static java.lang.String.format;
 import static org.apache.commons.lang3.time.DateUtils.*;
 import static ua.goit.kyrychok.kickstarter.Utils.convertDate;
 
-public class MemoryDataProvider implements DataProvider {
+public class MemoryStorage {
     private static final String WELCOME_MESSAGE = "This is HelloMessage";
 
     private List<Category> categories = new ArrayList<>();
-    private AtomicInteger categorySequence = new AtomicInteger(10);
-    private AtomicInteger projectSequence = new AtomicInteger(10);
-    private AtomicInteger faqSequence = new AtomicInteger(10);
-    private AtomicInteger projectEventSequence = new AtomicInteger(10);
-    private AtomicInteger rewardSequence = new AtomicInteger(10);
-
-    public static MemoryDataProvider getNewInstance() {
-        MemoryDataProvider memoryDataProvider = new MemoryDataProvider();
-        memoryDataProvider.init();
-        return memoryDataProvider;
-    }
-
-    @Override
-    public String getWelcomeMessage() {
-        return WELCOME_MESSAGE;
-    }
-
-    @Override
-    public List<Category> getCategories() {
-        return categories;
-    }
-
-    @Override
-    public Category getCategory(int id) {
-        for (Category category : categories) {
-            if (category.getId() == id) {
-                return category;
-            }
-        }
-        throw new IndexOutOfBoundsException(format("Category with id = \"%s\" not found", id));
-    }
-
-    @Override
-    public Project getProject(int id) {
-        for (Category category : categories) {
-            for (Project project : category.getProjects()) {
-                if (project.getId() == id) {
-                    return project;
-                }
-            }
-        }
-        throw new IndexOutOfBoundsException(format("Project with id = \"%s\" not found", id));
-    }
-
-    @Override
-    public void addFaq(int projectId, Faq faq) {
-        Project project = getProject(projectId);
-        faq.setId(faqSequence.getAndIncrement());
-        project.addFaq(faq);
-    }
-
-    @Override
-    public List<Reward> getRewards(int projectId) {
-        Project project = getProject(projectId);
-        return project.getRewards();
-    }
-
-    @Override
-    public void setProjectBalance(int projectId, int amount) {
-        Project project = getProject(projectId);
-        project.setBalance(amount);
-    }
-
-    @Override
-    public int getProjectBalance(int projectId) {
-        Project project = getProject(projectId);
-        return project.getBalance();
-    }
-
-    @Override
-    public Reward getReward(int id) {
-        for (Category category : categories) {
-            for (Project project : category.getProjects()) {
-                for (Reward reward : project.getRewards()) {
-                    if (reward.getId() == id) {
-                        return reward;
-                    }
-                }
-            }
-        }
-        throw new IndexOutOfBoundsException(format("Reward with id = \"%s\" not found", id));
-    }
+    private AtomicInteger categorySequence = new AtomicInteger(1);
+    private AtomicInteger projectSequence = new AtomicInteger(1);
+    private AtomicInteger faqSequence = new AtomicInteger(1);
+    private AtomicInteger projectEventSequence = new AtomicInteger(1);
+    private AtomicInteger rewardSequence = new AtomicInteger(1);
 
     private Category getNewCategory(String name) {
         Category category = new Category(name);
@@ -130,7 +53,7 @@ public class MemoryDataProvider implements DataProvider {
         return reward;
     }
 
-    private void init() {
+    public void init() {
         Category category1 = getNewCategory("Category 1");
         Project project1 = getNewProject("1st project in 1st category", 10000, addHours(new Date(), 4),
                 "desc", 350000, "http://stackoverflow.com/");
@@ -155,5 +78,52 @@ public class MemoryDataProvider implements DataProvider {
         categories.add(category2);
 
         categories.add(getNewCategory("Empty Category"));
+    }
+
+    public String getWelcomeMessage() {
+        return WELCOME_MESSAGE;
+    }
+
+    public List<Category> getCategories() {
+        return categories;
+    }
+
+    public Category getCategory(int id) {
+        for (Category category : categories) {
+            if (category.getId() == id) {
+                return category;
+            }
+        }
+        throw new IndexOutOfBoundsException(format("Category with id = \"%s\" not found", id));
+    }
+
+    public Project getProject(int id) {
+        for (Category category : categories) {
+            for (Project project : category.getProjects()) {
+                if (project.getId() == id) {
+                    return project;
+                }
+            }
+        }
+        throw new IndexOutOfBoundsException(format("Project with id = \"%s\" not found", id));
+    }
+
+    public void addFaq(int projectId, Faq faq) {
+        Project project = getProject(projectId);
+        faq.setId(faqSequence.getAndIncrement());
+        project.addFaq(faq);
+    }
+
+    public Reward getReward(int id) {
+        for (Category category : categories) {
+            for (Project project : category.getProjects()) {
+                for (Reward reward : project.getRewards()) {
+                    if (reward.getId() == id) {
+                        return reward;
+                    }
+                }
+            }
+        }
+        throw new IndexOutOfBoundsException(format("Reward with id = \"%s\" not found", id));
     }
 }

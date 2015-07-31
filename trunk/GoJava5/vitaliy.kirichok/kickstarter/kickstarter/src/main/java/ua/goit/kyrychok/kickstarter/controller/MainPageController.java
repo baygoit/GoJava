@@ -1,6 +1,6 @@
 package ua.goit.kyrychok.kickstarter.controller;
 
-import ua.goit.kyrychok.kickstarter.dao.DataProvider;
+import ua.goit.kyrychok.kickstarter.dao.CategoryDao;
 import ua.goit.kyrychok.kickstarter.model.Category;
 import ua.goit.kyrychok.kickstarter.view.MainPageView;
 
@@ -12,9 +12,10 @@ public class MainPageController extends AbstractController {
     private List<Category> model;
     private MainPageView view;
     private CategoryController categoryController;
+    private CategoryDao categoryDao;
 
-    public MainPageController(DataProvider dataProvider) {
-        super(dataProvider);
+    public MainPageController(CategoryDao categoryDao) {
+        this.categoryDao = categoryDao;
     }
 
     public void setView(MainPageView view) {
@@ -35,7 +36,7 @@ public class MainPageController extends AbstractController {
 
     @Override
     public void updateModel() {
-        model = dataProvider.getCategories();
+        model = categoryDao.fetch();
     }
 
     @Override
@@ -50,7 +51,7 @@ public class MainPageController extends AbstractController {
 
     @Override
     protected void renderModel() {
-        view.render(model, dataProvider.getWelcomeMessage());
+        view.render(model, categoryDao.getWelcomeMessage());
     }
 
     @Override
