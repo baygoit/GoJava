@@ -24,9 +24,9 @@ public class ProjectController {
 		return model.getProjectList();
 	}
 	
-	public void printProjectList(){
-		view.printProjectList();
-	}
+	//public void printProjectList(){
+	//	view.printProjectList();
+	//}
 	
 	public Project printProjectDetails(int id){
 		return view.printProjectDetails(model.getProjectDetails(id));
