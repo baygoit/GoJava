@@ -7,7 +7,7 @@ import goit.vh.kickstarter.mvc.model.CategoryModel;
  */
 public interface CategoryDAO {
 
-      CategoryModel get();
-
-  //  CategoryModel
+      CategoryModel getCategories();
+      CategoryModel getCategoryByID(int id);
+  //
 }
