@@ -85,16 +85,14 @@ public class KickStarter {
                 "https://www.youtube.com/watch?v=tk7RUVJmLk0", "Ecology projects", 3));
 
         categories.put(3, category3);
-        CategoryInMemoryDAO categoryInMemoryDAO = new CategoryInMemoryDAO();
-        categoryInMemoryDAO.registerCategories(categories);
+
 
         //Here we initialize from what data storage we want to take information
-        DAOFactory postgreSQLFactory =
-                DAOFactory.getDAOFactory(DAOFactory.INMEMORY);
+        DAOFactory daoFactory =
+                DAOFactory.getDAOFactory(DAOFactory.POSTGRESQL);
 
-
-        CategoryDAO categoryDAO =
-                postgreSQLFactory.getCategoryDAO();
+        CategoryDAO categoryDAO = daoFactory.getCategoryDAO();
+        categoryDAO.registerCategories(categories);
 
         dataRegistry.registerCategories(categoryDAO.getCategories());
 

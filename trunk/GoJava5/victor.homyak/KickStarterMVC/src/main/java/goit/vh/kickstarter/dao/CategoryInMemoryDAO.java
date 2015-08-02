@@ -23,7 +23,7 @@ public class CategoryInMemoryDAO implements CategoryDAO {
     public CategoryModel getCategoryByID(int id) {
         return null;
     }
-
+    @Override
     public  void registerCategories(Map<Integer, ArrayList<ProjectModel>> categories) {
         this.categories = categories;
     }

@@ -13,6 +13,7 @@ public interface CategoryDAO {
 
       Map<Integer,ArrayList<ProjectModel>>  getCategories();
 
+       void registerCategories(Map<Integer,ArrayList<ProjectModel>> categories);
 
       CategoryModel getCategoryByID(int id);
   //

@@ -6,7 +6,7 @@ package goit.vh.kickstarter.dao;
 public class InMemoryDAOFactory extends DAOFactory {
     @Override
     public CategoryDAO getCategoryDAO() {
-        return null;
+        return  new CategoryInMemoryDAO();
     }
 
     @Override
