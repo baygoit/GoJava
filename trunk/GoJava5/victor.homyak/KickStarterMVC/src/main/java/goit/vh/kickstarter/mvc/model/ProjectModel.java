@@ -64,12 +64,8 @@ public class ProjectModel {
     }
 
     public void refreshListModel(int input) {
-
-//        if (dataRegistry.getProjectList(input) == null) {
-//            return null;
-//        }
         this.listOfProjectses = dataRegistry.getProjectList(input);
-      //  return 1;
+
     }
 
     public String getShortDescription() {

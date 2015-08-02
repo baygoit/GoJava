@@ -42,9 +42,9 @@ public class CategoryModelTest  {
 
         categoryModel.setDataRegistry(dataRegistry);
 
-        Map<Integer,ArrayList<ProjectModel>> mapOfSize2 = new HashMap<>();
-        mapOfSize2.put(1, new ArrayList());
-        mapOfSize2.put(1, new ArrayList());
+        Map<Integer,String> mapOfSize2 = new HashMap<>();
+        mapOfSize2.put(1, new String());
+        mapOfSize2.put(1, new String());
         when(dataRegistry.getCategories()).thenReturn(mapOfSize2);
       //  Assert.assertEquals("Should return null", null, categoryModel.refreshModel(5));
 

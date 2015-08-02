@@ -1,5 +1,8 @@
 package goit.vh.kickstarter;
 
+import goit.vh.kickstarter.dao.CategoryDAO;
+import goit.vh.kickstarter.dao.CategoryInMemoryDAO;
+import goit.vh.kickstarter.dao.DAOFactory;
 import goit.vh.kickstarter.mvc.controller.CategoryController;
 import goit.vh.kickstarter.mvc.controller.MainPageController;
 import goit.vh.kickstarter.mvc.controller.ProjectController;
@@ -82,8 +85,18 @@ public class KickStarter {
                 "https://www.youtube.com/watch?v=tk7RUVJmLk0", "Ecology projects", 3));
 
         categories.put(3, category3);
+        CategoryInMemoryDAO categoryInMemoryDAO = new CategoryInMemoryDAO();
+        categoryInMemoryDAO.registerCategories(categories);
 
-        dataRegistry.registerCategories(categories);
+        //Here we initialize from what data storage we want to take information
+        DAOFactory postgreSQLFactory =
+                DAOFactory.getDAOFactory(DAOFactory.INMEMORY);
+
+
+        CategoryDAO categoryDAO =
+                postgreSQLFactory.getCategoryDAO();
+
+        dataRegistry.registerCategories(categoryDAO.getCategories());
 
         CategoryModel categoryModel = new CategoryModel();
         categoryModel.setDataRegistry(dataRegistry);
@@ -93,7 +106,8 @@ public class KickStarter {
 
 
         MainPageController mainPageController = new MainPageController(new MainPageView(output),categoryModel);
-        CategoryController categoryController = new CategoryController(new CategoryView(output), new ProjectView(output), categoryModel, projectModel);
+        CategoryController categoryController = new CategoryController(new CategoryView(output), new ProjectView(output),
+                categoryModel, projectModel);
         ProjectController projectController = new ProjectController(new ProjectView(output), projectModel);
 
 

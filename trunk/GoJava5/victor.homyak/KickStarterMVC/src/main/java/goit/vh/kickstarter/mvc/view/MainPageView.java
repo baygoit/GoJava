@@ -32,10 +32,12 @@ public class MainPageView {
         QuoteGenerator quote = new QuoteGenerator();
         output.println(quote.getQuote() + "\n");
 
-        Map<Integer, ArrayList<ProjectModel>> categories = categoryModel.getCategories();
-        for (ArrayList<ProjectModel> value : categories.values()) {
-            output.println(value.get(0).getParentId() + " " + value.get(0).getParentName());
+        Map<Integer, String> categories = categoryModel.getCategories();
+        for (Map.Entry<Integer, String> entry : categories.entrySet())
+        {
+            System.out.println(entry.getKey() + ". " + entry.getValue());
         }
+
 
         setInput(new Input().getInput());
 

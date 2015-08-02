@@ -15,9 +15,18 @@ public class DataRegistry {
     private Output output = new Output();
 
     private Map<Integer, ArrayList<ProjectModel>> categories;
+    private Map<Integer,String> categoriesForMainPage;
 
-    public Map<Integer, ArrayList<ProjectModel>> getCategories() {
-        return categories;
+    public Map<Integer,String> getCategories() {
+        categoriesForMainPage = new HashMap<>();
+        for (int i = 0; i <categories.size() ; i++) {
+            categoriesForMainPage.put(i+1,categories.get(i+1).get(0).getParentName());
+        }
+//        for (Map.Entry<Integer, String> entry : categoriesForMainPage.entrySet())
+//        {
+//           entry.setValue()
+//        }
+        return categoriesForMainPage;
     }
 
 

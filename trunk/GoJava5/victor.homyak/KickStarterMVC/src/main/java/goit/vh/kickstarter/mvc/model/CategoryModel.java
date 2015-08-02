@@ -15,7 +15,7 @@ public class CategoryModel {
     private DataRegistry dataRegistry;
     private String categoryName;
     private int categoryIndex;
-    private Map<Integer, ArrayList<ProjectModel>> categories;
+    private Map<Integer, String> categories;
     private Output output = new Output();
 
     public void refreshModel(int input) {
@@ -37,7 +37,7 @@ public class CategoryModel {
     }
 
 
-    public Map<Integer, ArrayList<ProjectModel>> getCategories() {
+    public Map<Integer, String> getCategories() {
         return categories;
     }
 

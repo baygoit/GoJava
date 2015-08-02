@@ -48,16 +48,16 @@ public class DataRegistryTest {
 
     //
 //
-    @Test
-    public void whenRegisterCategoriesThanReturnSameCategories() throws Exception {
-        DataRegistry dataRegistry = new DataRegistry();
-        Map<Integer, ArrayList<ProjectModel>> categories = new HashMap<>();
-        dataRegistry.registerCategories(categories);
-
-        Map<Integer, ArrayList<ProjectModel>> result = categoryModel.getCategories();
-
-        Assert.assertEquals("Categories must be the same as registered", categories, result);
-    }
+//    @Test
+//    public void whenRegisterCategoriesThanReturnSameCategories() throws Exception {
+//        DataRegistry dataRegistry = new DataRegistry();
+//        Map<Integer, ArrayList<ProjectModel>> categories = new HashMap<>();
+//        dataRegistry.registerCategories(categories);
+//
+//        Map<Integer, ArrayList<ProjectModel>> result = categoryModel.getCategories();
+//
+//        Assert.assertEquals("Categories must be the same as registered", categories, result);
+//    }
 
     @Test
 
