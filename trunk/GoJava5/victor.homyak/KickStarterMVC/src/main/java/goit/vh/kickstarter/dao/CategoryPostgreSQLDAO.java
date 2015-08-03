@@ -53,6 +53,7 @@ public class CategoryPostgreSQLDAO implements CategoryDAO {
                         rs.getInt("sumtoraise"), rs.getInt("currentsum"), rs.getDate("enddate"),
                         rs.getString("projecthistory"), rs.getString("faq"), rs.getString("demourl"),
                         rs.getString("parentname"), rs.getInt("parentid")));
+                categories.put(categoryID, category);
             }
         } catch (SQLException e) {
             e.printStackTrace();
