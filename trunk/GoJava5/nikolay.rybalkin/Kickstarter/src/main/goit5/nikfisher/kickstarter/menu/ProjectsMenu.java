@@ -22,18 +22,18 @@ public class ProjectsMenu {
             if (menuIndex == 0) {
                 break;
             }
-////
-//            if (menuIndex <= 0 || foundProjects.size() < menuIndex) {
-//                IO.println("Not true index: " + menuIndex);
-//                continue;
-//            }
-//            Project project = foundProjects.get(menuIndex - 1);
+//
+            if (menuIndex <= 0 || foundProjects.size() < menuIndex) {
+                IO.println("Not true index: " + menuIndex);
+                continue;
+            }
+            Project project = foundProjects.get(menuIndex - 1);
 
-//            chooseProject(project);
-//            printProjectDetail(project);
+            chooseProject(project);
+            printProjectDetail(project);
 
-//            ProjectMenu projectMenu = new ProjectMenu(new ConsoleIO());
-//            projectMenu.projectMenuRun(project);
+ /*           ProjectMenu projectMenu = new ProjectMenu(new ConsoleIO());
+            projectMenu.projectMenuRun(project);*/
         }
     }
 
@@ -50,30 +50,30 @@ public class ProjectsMenu {
 
     private void printProjectDetail(Project project) {
 
-//        IO.println("Project detail:");
-//        printProject(project);
+        IO.println("Project detail:");
+        printProject(project);
 
-//        String history = project.getHistory();
-//        if (history != null) {
-//            IO.println(history);
-//        }
-//
-//        String video = project.getVideo();
-//        if (video != null) {
-//            IO.println(video);
-//        }
-//
-//        String question = project.getQuestion();
-//        if (question != null) {
-//            IO.println(question);
-//        }
-//
-//        String answer = project.getAnswer();
-//        if (answer != null) {
-//            IO.println(answer);
-//        }
-//
-//        IO.println("---------------------------------------");
+        String history = project.getHistory();
+        if (history != null) {
+            IO.println(history);
+        }
+
+        String video = project.getVideo();
+        if (video != null) {
+            IO.println(video);
+        }
+
+        String question = project.getQuestion();
+        if (question != null) {
+            IO.println(question);
+        }
+
+        String answer = project.getAnswer();
+        if (answer != null) {
+            IO.println(answer);
+        }
+
+        IO.println("---------------------------------------");
     }
 
     private void chooseProject(Project project) {
