@@ -35,13 +35,24 @@ public class CategoryPostgreSQLDAO implements CategoryDAO {
 
     @Override
     public Map<Integer, ArrayList<ProjectModel>> getCategories() {
-        String sql = "SELECT DISTINCT parentname,parentid FROM project ORDER BY parentname,parentid";
-
+        //  String sql = "SELECT DISTINCT parentname,parentid FROM project ORDER BY parentname,parentid";
+        String sql = "SELECT * FROM project ORDER BY parentid";
         Map<Integer, ArrayList<ProjectModel>> categories = new HashMap<>();
+        ArrayList<ProjectModel> category = new ArrayList<>();;
         try (PreparedStatement stm = connection.prepareStatement(sql)) {
             ResultSet rs = stm.executeQuery();
+            int categoryID = 1;
             while (rs.next()) {
-                categories.put(rs.getInt("parentid"), rs.getString("parentname"));
+
+                if (rs.getInt("parentid") != categoryID) {
+                    categories.put(categoryID, category);
+                    category = new ArrayList<>();
+                    categoryID = rs.getInt("parentid");
+                }
+                category.add(new ProjectModel(rs.getString("name"), rs.getString("shortdescription"),
+                        rs.getInt("sumtoraise"), rs.getInt("currentsum"), rs.getDate("enddate"),
+                        rs.getString("projecthistory"), rs.getString("faq"), rs.getString("demourl"),
+                        rs.getString("parentname"), rs.getInt("parentid")));
             }
         } catch (SQLException e) {
             e.printStackTrace();
