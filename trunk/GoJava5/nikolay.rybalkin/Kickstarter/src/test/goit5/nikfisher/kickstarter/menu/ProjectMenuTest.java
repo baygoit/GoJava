@@ -92,11 +92,11 @@ public class ProjectMenuTest{
         runner.run();
 
         //then
-        verify(io, times(3)).println("---------------------------------------");
+        verify(io, times(4)).println("---------------------------------------");
         verify(io, times(1)).println("History this project");
         verify(io, times(1)).println("https://www.youtube.com");
         verify(io, times(1)).println("No one has asked the question.");
         verify(io, times(1)).println("Still no one answered");
-        verify(io, times(3)).println("---------------------------------------");
+        verify(io, times(4)).println("---------------------------------------");
     }
 }

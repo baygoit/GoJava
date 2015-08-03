@@ -29,8 +29,8 @@ public class ProjectMenu {
 
                 IO.println("The required amount: " + String.valueOf(required_amount));
 
-//                PaymentMenu bonusMenu = new PaymentMenu(io);
-//                bonusMenu.bonusMenu(project);
+                PaymentMenu bonusMenu = new PaymentMenu(IO);
+                bonusMenu.bonusMenu(project);
 
             }
             if (menuIndexElement == 2) {
