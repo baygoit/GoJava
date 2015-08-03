@@ -14,11 +14,37 @@ public class PaymentMenu {
 
     public void bonusMenu(Project project) {
 
-        IO.println("Please select payment option:");
-        IO.println("1) If you invest 10% of the required amount, you will receive a 5%.");
-        IO.println("2) If you invest 50% of the required amount, you will receive a 15%.");
-        IO.println("3) If you invest 100% of the required amount, you will receive a 30%.");
+        selectPaymentOption();
+        needAmount(project);
+        String name = enterMenu();
+        enterNumberCard();
+        int amount = enterMoney();
+        outThankfull(name);
+        project.donate(amount);
 
+    }
+
+    private void outThankfull(String name) {
+        IO.println("Thank you " + name + " your money is successfully transferred to the account of the project");
+        IO.println("---------------------------------------");
+    }
+
+    private int enterMoney() {
+        IO.println("Enter the amount of money");
+        return IO.consoleScanInt();
+    }
+
+    private void enterNumberCard() {
+        IO.println("Enter the number of your card");
+        int cardNumber = IO.consoleScanInt();
+    }
+
+    private String enterMenu() {
+        IO.println("Enter your name");
+        return IO.consoleScanString();
+    }
+
+    private void needAmount(Project project) {
         int value = IO.consoleScanInt();
         int required_amount = project.getAmount();
         int needAmount;
@@ -42,19 +68,13 @@ public class PaymentMenu {
 
         IO.println("You need to make: " + needAmount);
         IO.println("-----------------");
-        IO.println("Enter your name");
-        String name = IO.consoleScanString();
-        IO.println("Enter the number of your card");
-        int cardNumber = IO.consoleScanInt();
+    }
 
-        IO.println("Enter the amount of money");
-        int amount = IO.consoleScanInt();
-
-        IO.println("Thank you " + name + " your money is successfully transferred to the account of the project");
-        IO.println("---------------------------------------");
-
-        project.donate(amount);
-
+    private void selectPaymentOption() {
+        IO.println("Please select payment option:");
+        IO.println("1) If you invest 10% of the required amount, you will receive a 5%.");
+        IO.println("2) If you invest 50% of the required amount, you will receive a 15%.");
+        IO.println("3) If you invest 100% of the required amount, you will receive a 30%.");
     }
 }
 
