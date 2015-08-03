@@ -1,14 +1,17 @@
 package goit5.nikfisher.kickstarter.menu;
 
 import goit5.nikfisher.kickstarter.model.Project;
-import goit5.nikfisher.kickstarter.streams.ConsoleIO;
 import goit5.nikfisher.kickstarter.streams.ConsoleInterfaceIO;
 
 import java.util.List;
 
 public class ProjectsMenu {
 
-    final private ConsoleInterfaceIO IO = new ConsoleIO();
+    final private ConsoleInterfaceIO IO;
+
+    public ProjectsMenu(ConsoleInterfaceIO io) {
+        this.IO = io;
+    }
 
     public void projectsMenu(List<Project> foundProjects) {
 
@@ -32,8 +35,8 @@ public class ProjectsMenu {
             chooseProject(project);
             printProjectDetail(project);
 
- /*           ProjectMenu projectMenu = new ProjectMenu(new ConsoleIO());
-            projectMenu.projectMenuRun(project);*/
+            ProjectMenu projectMenu = new ProjectMenu(IO);
+            projectMenu.projectMenuRun(project);
         }
     }
 

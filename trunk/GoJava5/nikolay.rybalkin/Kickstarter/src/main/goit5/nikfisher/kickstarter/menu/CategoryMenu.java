@@ -41,7 +41,7 @@ public class CategoryMenu {
             List<Project> foundProjects = PROJECTS.getProjects(category);
             printProjects(foundProjects);
 
-            ProjectsMenu projectsMenu = new ProjectsMenu();
+            ProjectsMenu projectsMenu = new ProjectsMenu(IO);
             projectsMenu.projectsMenu(foundProjects);
         }
     }
