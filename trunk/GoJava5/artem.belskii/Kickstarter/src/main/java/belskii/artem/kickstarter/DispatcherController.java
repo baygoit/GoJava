@@ -47,6 +47,11 @@ public class DispatcherController {
 				userInputTmp=userInput;
 				userInput=-2;
 			}
+			if (userInput==2 && currentPosition == 2){
+				project.asqAQuestion(currentProjectId);
+				userInputTmp=userInput;
+				userInput=-2;
+			}
 			if (userInput == 0 ){
 				if(currentPosition==2){
 					showProjectDetails(userInputTmp);
@@ -80,6 +85,7 @@ public class DispatcherController {
 	private void showProjectDetails(int id){
 		out.showProjectDetails(project.printProjectDetails(userInput));		
 		out.show("put 1 to make payment");
+		out.show("put 2 to asq a question");
 		out.show("put 0 to back to project list");
 	}
 	

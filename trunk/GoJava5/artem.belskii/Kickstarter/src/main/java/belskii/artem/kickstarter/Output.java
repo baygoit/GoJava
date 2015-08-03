@@ -50,6 +50,10 @@ public class Output {
 		strBuilder.append(" You can see promo video on url: ");
 		strBuilder.append(project.getVideoUrl());
 		System.out.println(strBuilder.toString());
+		System.out.println("FAQ:");
+		for (int i=0; i<project.getQuestions().size();i++){
+			System.out.println(project.getQuestions().get(i));
+		}
 	}
 	
 	public final static void clearConsole()

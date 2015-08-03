@@ -1,5 +1,7 @@
 package belskii.artem.kickstarter.dao.project;
 
+import java.util.ArrayList;
+
 public class Project {
 	private String name;
 	private Long goal;
@@ -9,6 +11,7 @@ public class Project {
 	private String videoUrl;
 	private int categoryId;
 	private String details;
+	private ArrayList<String> question = new ArrayList<String>();
 	
 	public Project(String name, Long goal, Long balance, String startDate, String endDate, String videoUrl, int categoryId, String details){
 		this.name=name;
@@ -84,7 +87,13 @@ public class Project {
 	public void updateDetails(String details) {
 		this.details = details;
 	}
+	
+	public ArrayList<String> getQuestions(){
+		return this.question;
+	}
+	
+	public void asqAQuestion(String question){
+		this.question.add(question);
+	}
 
-	
-	
 }

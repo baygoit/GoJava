@@ -18,6 +18,7 @@ public class ProjectModel {
 	}
 	
 	public Project getProjectDetails(int projectId){
+		if (projectId>=1){projectId-=1;}
 		return projectDao.getProjectDetails(projectId);
 	}
 	

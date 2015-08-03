@@ -11,6 +11,8 @@ import belskii.artem.kickstarter.mvc.view.ProjectView;
 public class ProjectController {
 	private ProjectModel model;
 	private ProjectView view;
+	private Scanner in = new Scanner(System.in);
+
 	
 	public ProjectController(ProjectModel model, ProjectView view) {
 		this.model = model;
@@ -39,7 +41,6 @@ public class ProjectController {
 
 	public void addPayment (int projectId) {
 		System.out.println("Please enter cardholder name:");
-		Scanner in = new Scanner(System.in);
 		String cardHolderName = in.nextLine();
 		System.out.println("Please enter card number:");
 		String cardNumber = in.nextLine();
@@ -47,5 +48,11 @@ public class ProjectController {
 		Long amount = in.nextLong();
 		model.getProjectDetails(projectId).updateBalance(amount);
 		System.out.println("Thanks, "+cardHolderName+"! Current balance:" +model.getProjectDetails(projectId).getBalance());
+	}
+
+	public void asqAQuestion(int projectId) {
+		System.out.println("Put your question on next line:");
+		model.getProjectDetails(projectId).asqAQuestion(in.nextLine());
+		System.out.println("Thanks for your question! Put 0 for retrun to project details.");
 	}
 }

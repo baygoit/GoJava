@@ -23,6 +23,7 @@ public class ProjectDaoImplHardCoding implements ProjectDao {
 
 	public Project getProjectDetails(int id) {
 		return projects.get(id);
+		
 	}
 
 	public ArrayList<Project> getProjectFromCategory(int id) {
