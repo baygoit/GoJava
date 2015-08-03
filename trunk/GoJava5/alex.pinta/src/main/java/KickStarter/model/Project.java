@@ -1,4 +1,4 @@
-package KickStarter.model;
+package java.KickStarter.model;
 
 import sun.reflect.Reflection;
 import sun.reflect.generics.tree.FieldTypeSignature;

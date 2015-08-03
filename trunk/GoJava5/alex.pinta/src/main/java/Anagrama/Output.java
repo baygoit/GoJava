@@ -1,4 +1,4 @@
-package Anagrama;
+package java.Anagrama;
 
 import java.io.OutputStream;
 

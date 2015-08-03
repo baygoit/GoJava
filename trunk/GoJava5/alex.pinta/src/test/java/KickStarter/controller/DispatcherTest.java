@@ -1,10 +1,10 @@
-package KickStarter.controller;
+package java.KickStarter.controller;
 
-import KickStarter.*;
+import java.KickStarter.*;
 import static org.junit.Assert.*;
 
-import KickStarter.dao.LoadingData;
-import KickStarter.dao.ManualInput;
+import java.KickStarter.dao.LoadingData;
+import java.KickStarter.dao.ManualInput;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

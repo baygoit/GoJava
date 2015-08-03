@@ -1,4 +1,4 @@
-package KickStarter;
+package java.KickStarter;
 
 import java.io.OutputStream;
 

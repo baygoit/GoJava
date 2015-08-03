@@ -1,8 +1,8 @@
-package KickStarter;
+package java.KickStarter;
 
-import KickStarter.controller.Dispatcher;
-import KickStarter.dao.LoadingStrategy;
-import KickStarter.dao.ManualInput;
+import java.KickStarter.controller.Dispatcher;
+import java.KickStarter.dao.LoadingStrategy;
+import java.KickStarter.dao.ManualInput;
 
 import java.io.InputStream;
 import java.io.OutputStream;

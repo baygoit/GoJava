@@ -1,7 +1,7 @@
-package KickStarter.dao;
+package java.KickStarter.dao;
 
-import KickStarter.model.Category;
-import KickStarter.model.Project;
+import java.KickStarter.model.Category;
+import java.KickStarter.model.Project;
 
 import javax.xml.bind.annotation.adapters.XmlAdapter;
 import java.util.*;

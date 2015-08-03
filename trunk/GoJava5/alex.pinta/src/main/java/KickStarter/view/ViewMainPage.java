@@ -1,8 +1,8 @@
-package KickStarter.view;
+package java.KickStarter.view;
 
 
-import KickStarter.controller.MainPageController;
-import KickStarter.model.Category;
+import java.KickStarter.controller.MainPageController;
+import java.KickStarter.model.Category;
 
 /**
  * Created with IntelliJ IDEA.

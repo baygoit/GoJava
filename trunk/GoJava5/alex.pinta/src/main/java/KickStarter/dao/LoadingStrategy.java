@@ -1,4 +1,4 @@
-package KickStarter.dao;
+package java.KickStarter.dao;
 
 import org.ini4j.Wini;
 

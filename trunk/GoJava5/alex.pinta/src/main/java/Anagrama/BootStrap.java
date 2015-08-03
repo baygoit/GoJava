@@ -1,4 +1,4 @@
-package Anagrama;
+package java.Anagrama;
 /**
  * Created with IntelliJ IDEA.
  *
@@ -7,7 +7,6 @@ package Anagrama;
  * Time: 17:19
  * @version: 1.0
  */
-import Anagrama.*;
 public class BootStrap {
 
     public static void main(String args[]){

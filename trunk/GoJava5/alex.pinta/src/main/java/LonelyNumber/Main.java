@@ -1,4 +1,4 @@
-package LonelyNumber;
+package java.LonelyNumber;
 
 import java.util.HashMap;
 import java.util.Map;

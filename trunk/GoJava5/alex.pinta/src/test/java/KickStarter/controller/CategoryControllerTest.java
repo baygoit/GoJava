@@ -1,4 +1,4 @@
-package KickStarter.controller;
+package java.KickStarter.controller;
 
 import org.junit.Test;
 
