@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="exploded-ear" name="GoIT_Homeworks:ear exploded">
-    <output-path>$PROJECT_DIR$/out/artifacts/GoIT_Homeworks_ear_exploded</output-path>
-    <root id="root">
-      <element id="javaee-facet-resources" facet="GoIT_Homeworks/javaeeApplication/javaEEApplication" />
-    </root>
-  </artifact>
-</component>
