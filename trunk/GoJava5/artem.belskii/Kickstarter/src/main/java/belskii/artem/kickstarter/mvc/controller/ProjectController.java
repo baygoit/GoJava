@@ -2,6 +2,7 @@
 package belskii.artem.kickstarter.mvc.controller;
 
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.Scanner;
 
 import belskii.artem.kickstarter.dao.project.Project;
@@ -27,10 +28,6 @@ public class ProjectController {
 		return model.getProjectList();
 	}
 	
-	//public void printProjectList(){
-	//	view.printProjectList();
-	//}
-	
 	public Project printProjectDetails(int id){
 		return view.printProjectDetails(model.getProjectDetails(id));
 	}
@@ -38,8 +35,16 @@ public class ProjectController {
 	public ArrayList<Project> getProjectFromCategory(int id){
 		return model.getProjectFromCategory(id);
 	}
+	
+	public void addPayment(int projectId){
+		for (Map.Entry entry : model.getProjectDetails(projectId).getPaymetVariants().entrySet()) {
+		    System.out.println("Payment Value: " + entry.getKey() + " Bonus: "+ entry.getValue());
+		}
+		model.getProjectDetails(projectId).updateBalance(in.nextLong());
+		System.out.println("Thanks! Current balance:" +model.getProjectDetails(projectId).getBalance());
+	}
 
-	public void addPayment (int projectId) {
+	public void addCustomPayment (int projectId) {
 		System.out.println("Please enter cardholder name:");
 		String cardHolderName = in.nextLine();
 		System.out.println("Please enter card number:");

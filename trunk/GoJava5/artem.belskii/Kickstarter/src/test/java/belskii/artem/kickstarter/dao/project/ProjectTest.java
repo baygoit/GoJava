@@ -2,6 +2,8 @@ package belskii.artem.kickstarter.dao.project;
 
 import static org.junit.Assert.*;
 
+import java.util.HashMap;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -9,7 +11,11 @@ public class ProjectTest {
 private Project testProject;
 	@Before
 	public void setUp() throws Exception {
-		testProject = new Project("My test project",new Long(1), new Long(1),"28.07.2015","30.07.2015","https://www.youtube.com/watch?v=uC0pqWX3yB8", 1, "My super project!");
+		HashMap<Long, String> paymentVariants = new HashMap<Long, String>();
+		paymentVariants.put(new Long(10), "some bonus");
+		paymentVariants.put(new Long(30), "other bonus");
+		paymentVariants.put(new Long(50), "extra bonus");
+		testProject = new Project("My test project",new Long(1), new Long(1),"28.07.2015","30.07.2015","https://www.youtube.com/watch?v=uC0pqWX3yB8", 1, "My super project!", paymentVariants);
 	}
 
 	@Test
@@ -47,7 +53,7 @@ private Project testProject;
 	@Test
 	public void testUpdateBalance() {
 		testProject.updateBalance(new Long(100000));
-		assertEquals(new Long(100000), testProject.getBalance());
+		assertEquals(new Long(100001), testProject.getBalance());
 	}
 
 	@Test

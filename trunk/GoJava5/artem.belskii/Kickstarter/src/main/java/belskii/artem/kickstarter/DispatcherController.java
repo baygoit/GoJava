@@ -43,7 +43,13 @@ public class DispatcherController {
 				userInput=-2;
 			}
 			if (userInput==1 && currentPosition == 2){
+				out.show("If you want set qustom value, put 3");
 				project.addPayment(currentProjectId);
+				userInputTmp=userInput;
+				userInput=-2;
+			}
+			if (userInput==3 && currentPosition == 2){
+				project.addCustomPayment(currentProjectId);
 				userInputTmp=userInput;
 				userInput=-2;
 			}
