@@ -16,7 +16,9 @@
         <commons-validator.version>1.4.1</commons-validator.version>
         <ojdbc6.version>11.2.0.4</ojdbc6.version>
         <oracle.ucp.version>11.2.0.4</oracle.ucp.version>
+        <remotedir>G:\ChromeDowloads\</remotedir>
     </properties>
+<!--https://go-java-1.googlecode.com/svn/trunk/GoJava5/vitaliy.kirichok-->
 
     <build>
         <plugins>
@@ -28,6 +30,27 @@
                     <source>1.7</source>
                     <target>1.7</target>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-install-plugin</artifactId>
+                <version>2.4</version>
+                <executions>
+                    <execution>
+                        <id>install-orajdbc</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>install-file</goal>
+                        </goals>
+                        <configuration>
+                            <groupId>com.oracle3</groupId>
+                            <artifactId>ojdbc63</artifactId>
+                            <version>11.2.0.11</version>
+                            <packaging>jar</packaging>
+                            <file>${remotedir}ojdbc6.jar</file>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
@@ -55,6 +78,12 @@
             <groupId>commons-validator</groupId>
             <artifactId>commons-validator</artifactId>
             <version>${commons-validator.version}</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.oracle3</groupId>
+            <artifactId>ojdbc63</artifactId>
+            <version>11.2.0.11</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
