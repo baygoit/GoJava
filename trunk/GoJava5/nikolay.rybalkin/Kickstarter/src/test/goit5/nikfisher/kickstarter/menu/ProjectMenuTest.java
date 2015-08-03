@@ -11,10 +11,11 @@ import org.junit.Test;
 
 import static org.mockito.Mockito.*;
 
+@SuppressWarnings("deprecation")
 public class ProjectMenuTest{
 
     @Test
-    public void shouldMenuWithProjectDetail() throws Exception {
+    public void shouldMenuWithProjectDetail() {
         //given
         InMemoryCategories categories = new InMemoryCategories();
         Category category = new Category("category1");

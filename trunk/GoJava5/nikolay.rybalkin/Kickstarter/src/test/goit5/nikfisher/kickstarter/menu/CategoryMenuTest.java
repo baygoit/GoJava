@@ -13,18 +13,14 @@ import org.mockito.Mock;
 
 import static org.mockito.Mockito.*;
 
+@SuppressWarnings("deprecation")
 public class CategoryMenuTest {
-
-//    @After
-//    public void cleanup(){
-//        new File("category_test.txt").delete();
-//    }
 
     @Mock
     final InMemoryCategories CATEGORIES = new InMemoryCategories();
 
     @Test
-    public void shouldCategoriesWenHaveCategories() throws Exception {
+    public void shouldCategoriesWenHaveCategories() {
         //given
 
         CATEGORIES.add(new Category("Game"));
@@ -49,7 +45,7 @@ public class CategoryMenuTest {
     }
 
     @Test
-    public void shouldCategoriesWenNoCategories() throws Exception {
+    public void shouldCategoriesWenNoCategories() {
         //given
         Projects projects = new InMemoryProjects();
         ConsoleInterfaceIO io = mock(ConsoleInterfaceIO.class);
@@ -70,7 +66,7 @@ public class CategoryMenuTest {
     }
 
     @Test
-    public void shouldCategoriesChooseCategory() throws Exception {
+    public void shouldCategoriesChooseCategory() {
         //given
         CATEGORIES.add(new Category("Game"));
 
@@ -92,7 +88,7 @@ public class CategoryMenuTest {
     }
 
     @Test
-    public void shouldCategoriesWhenHaveProjects() throws Exception {
+    public void shouldCategoriesWhenHaveProjects() {
         //given
         Category category1 = new Category("Game");
         CATEGORIES.add(category1);

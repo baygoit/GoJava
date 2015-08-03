@@ -16,7 +16,7 @@ public class QuoteGenerateTest {
         final private List<Integer> NUMBERS;
 
         public FakeRandom(Integer... numbers) {
-            this.NUMBERS = new LinkedList<Integer>(Arrays.asList(numbers));
+            this.NUMBERS = new LinkedList<>(Arrays.asList(numbers));
         }
 
         @Override
@@ -26,7 +26,7 @@ public class QuoteGenerateTest {
     }
 
     @Test
-    public void shouldQuoteGenerateNewQuote() throws Exception {
+    public void shouldQuoteGenerateNewQuote() {
         //given
         QuoteGenerate quoteGenerate = new QuoteGenerate(new FakeRandom(0));
 

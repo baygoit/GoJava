@@ -1,5 +1,6 @@
 package goit5.nikfisher.kickstarter.model;
 
+@SuppressWarnings("deprecation")
 public class Project {
 
     private String question;
@@ -12,16 +13,15 @@ public class Project {
     private Category category;
     private String history;
     private String video;
-    private int stillNeeded;
     private int id;
 
 
     public Project(String name, int amount, int exist, int days, String description) {
         this.name = name;
-        this.amount = 10000;
-        this.days = 10;
+        this.amount = amount;
+        this.days = days;
         this.description = description;
-        this.exist = 0;
+        this.exist = exist;
         this.history = null;
         this.video = null;
         this.question = null;

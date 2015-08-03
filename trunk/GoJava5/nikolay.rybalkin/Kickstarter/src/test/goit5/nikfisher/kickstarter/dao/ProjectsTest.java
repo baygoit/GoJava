@@ -10,6 +10,7 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
 
+@SuppressWarnings("deprecation")
 public abstract class ProjectsTest {
 
     private Projects projects;

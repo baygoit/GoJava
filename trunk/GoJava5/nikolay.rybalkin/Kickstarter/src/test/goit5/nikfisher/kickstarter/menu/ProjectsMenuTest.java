@@ -13,13 +13,14 @@ import org.mockito.Mock;
 
 import static org.mockito.Mockito.*;
 
+@SuppressWarnings("deprecation")
 public class ProjectsMenuTest {
 
     @Mock
     final InMemoryCategories CATEGORIES = new InMemoryCategories();
 
     @Test
-    public void shouldCategoriesWhenHaveProjects() throws Exception {
+    public void shouldCategoriesWhenHaveProjects() {
         //given
         Category category1 = new Category("Game");
         CATEGORIES.add(category1);

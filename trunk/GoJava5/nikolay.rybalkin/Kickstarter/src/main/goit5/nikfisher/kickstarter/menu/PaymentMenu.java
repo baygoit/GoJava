@@ -19,12 +19,12 @@ public class PaymentMenu {
         String name = enterMenu();
         enterNumberCard();
         int amount = enterMoney();
-        outThankfull(name);
+        outThanks(name);
         project.donate(amount);
 
     }
 
-    private void outThankfull(String name) {
+    private void outThanks(String name) {
         IO.println("Thank you " + name + " your money is successfully transferred to the account of the project");
         IO.println("---------------------------------------");
     }
@@ -36,7 +36,7 @@ public class PaymentMenu {
 
     private void enterNumberCard() {
         IO.println("Enter the number of your card");
-        int cardNumber = IO.consoleScanInt();
+        IO.consoleScanInt();
     }
 
     private String enterMenu() {

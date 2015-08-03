@@ -6,6 +6,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
+@SuppressWarnings("deprecation")
 public abstract class CategoriesTest {
 
     private Categories categories;
@@ -18,7 +19,7 @@ public abstract class CategoriesTest {
     abstract Categories getCategories();
 
     @Test
-    public void shouldCategoriesWenAddCategories() throws Exception {
+    public void shouldCategoriesWenAddCategories() {
         //given
         //when
         categories.add(new Category("Game"));
@@ -29,7 +30,7 @@ public abstract class CategoriesTest {
     }
 
     @Test
-    public void shouldCategoriesWenNoCategories() throws Exception {
+    public void shouldCategoriesWenNoCategories() {
         //given
         //when
         //then
@@ -37,7 +38,7 @@ public abstract class CategoriesTest {
     }
 
     @Test
-    public void shouldCategoriesIndex() throws Exception {
+    public void shouldCategoriesIndex() {
         //given
         Category category1 = new Category("Game");
         categories.add(category1);
@@ -52,13 +53,13 @@ public abstract class CategoriesTest {
     }
 
     @Test
-    public void shouldCategoriesSizeWhenNoCategories() throws Exception {
+    public void shouldCategoriesSizeWhenNoCategories() {
         //then
         assertEquals(0, categories.size());
     }
 
     @Test
-    public void shouldCategoriesSize() throws Exception {
+    public void shouldCategoriesSize() {
         //given
 
         //when

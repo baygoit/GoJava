@@ -1,5 +1,6 @@
 package goit5.nikfisher.kickstarter.model;
 
+@SuppressWarnings("deprecation")
 public class Category {
 
     final private String NAME;

@@ -9,6 +9,7 @@ import goit5.nikfisher.kickstarter.model.Category;
 import goit5.nikfisher.kickstarter.model.Project;
 import goit5.nikfisher.kickstarter.streams.ConsoleInterfaceIO;
 
+@SuppressWarnings("deprecation")
 public class View {
 
     final private ConsoleInterfaceIO IO;
