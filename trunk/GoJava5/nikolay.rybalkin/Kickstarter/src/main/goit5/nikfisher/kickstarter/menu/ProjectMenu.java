@@ -3,7 +3,7 @@ package goit5.nikfisher.kickstarter.menu;
 import goit5.nikfisher.kickstarter.model.Project;
 import goit5.nikfisher.kickstarter.streams.ConsoleInterfaceIO;
 
-public class ProjectMenu {
+class ProjectMenu {
 
     final private ConsoleInterfaceIO IO;
 

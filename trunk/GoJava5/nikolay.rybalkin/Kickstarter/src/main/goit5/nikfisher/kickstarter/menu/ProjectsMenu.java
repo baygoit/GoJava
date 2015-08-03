@@ -5,7 +5,7 @@ import goit5.nikfisher.kickstarter.streams.ConsoleInterfaceIO;
 
 import java.util.List;
 
-public class ProjectsMenu {
+class ProjectsMenu {
 
     final private ConsoleInterfaceIO IO;
 

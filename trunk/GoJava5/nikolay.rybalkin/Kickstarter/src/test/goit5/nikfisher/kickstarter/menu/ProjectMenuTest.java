@@ -58,7 +58,7 @@ public class ProjectMenuTest{
     }
 
     @Test
-    public void shouldMenuWithProjectPayment() throws Exception {
+    public void shouldMenuWithProjectPayment() {
         //given
         InMemoryCategories categories = new InMemoryCategories();
         Category category = new Category("category1");

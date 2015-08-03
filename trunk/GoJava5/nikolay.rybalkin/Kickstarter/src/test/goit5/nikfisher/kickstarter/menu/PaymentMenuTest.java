@@ -11,7 +11,7 @@ public class PaymentMenuTest {
 
 
     @Test
-    public void shouldMenuAddPayment() throws Exception {
+    public void shouldMenuAddPayment() {
         //given
         ConsoleInterfaceIO io = mock(ConsoleInterfaceIO.class);
         QuoteGenerate generator = mock(QuoteGenerate.class);

@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class ConsoleIO implements ConsoleInterfaceIO {
 
-    final static Logger LOGGER = LoggerFactory.getLogger(ConsoleIO.class);
+    private final static Logger LOGGER = LoggerFactory.getLogger(ConsoleIO.class);
     final private Scanner SCANNER = new Scanner(System.in);
 
     @Override

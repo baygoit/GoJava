@@ -23,7 +23,7 @@ public abstract class ProjectsTest {
     abstract Projects getProjects();
 
     @Test
-    public void shouldProjectsWenNoProjectsWithNoSameCategory() throws Exception {
+    public void shouldProjectsWenNoProjectsWithNoSameCategory() {
         //given
 
         Category category1 = new Category("Game");
@@ -46,7 +46,7 @@ public abstract class ProjectsTest {
     }
 
     @Test
-    public void shouldProjectsWenNoProjectsWithSameCategory() throws Exception {
+    public void shouldProjectsWenNoProjectsWithSameCategory() {
         //given
         Category category1 = new Category("Game");
         Category category2 = new Category("Design");
@@ -73,7 +73,7 @@ public abstract class ProjectsTest {
     }
 
     @Test
-    public void shouldProjectsWenNoProjects() throws Exception {
+    public void shouldProjectsWenNoProjects() {
         //given
 
         //when
@@ -84,7 +84,7 @@ public abstract class ProjectsTest {
     }
 
     @Test
-    public void shouldProjectsIndex() throws Exception {
+    public void shouldProjectsIndex() {
         //given
         Project project1 = new Project("Game \"Popcorn\"", 10000, 0, 10, "Interesting game");
         Project project2 = new Project("Design \"New Design\"", 10000, 0, 10, "New innovation design");

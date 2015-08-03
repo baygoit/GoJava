@@ -4,7 +4,7 @@ package goit5.nikfisher.kickstarter.menu;
 import goit5.nikfisher.kickstarter.model.Project;
 import goit5.nikfisher.kickstarter.streams.ConsoleInterfaceIO;
 
-public class PaymentMenu {
+class PaymentMenu {
 
     final private ConsoleInterfaceIO IO;
 

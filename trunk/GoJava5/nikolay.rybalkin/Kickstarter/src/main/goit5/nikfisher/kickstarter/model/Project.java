@@ -1,6 +1,6 @@
 package goit5.nikfisher.kickstarter.model;
 
-@SuppressWarnings("deprecation")
+@SuppressWarnings("ALL")
 public class Project {
 
     private String question;
