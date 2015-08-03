@@ -12,6 +12,7 @@ public class DispatcherController {
 	private int currentPosition=0;
 	private int userInput=-1;
 	private int userInputTmp=-1;
+	private int currentProjectId=-1;
 	private Output out = new Output();
 	private Input in = new Input();
 	private CategoryController category = new CategoryController(new CategoryModel(), new CategoryView());
@@ -36,10 +37,20 @@ public class DispatcherController {
 			}
 			if (userInput>=1 && currentPosition == 1){
 				showProjectDetails(userInput);
+				currentProjectId=userInput;
+				currentPosition+=1;
+				userInputTmp=userInput;
+				userInput=-2;
+			}
+			if (userInput==1 && currentPosition == 2){
+				project.addPayment(currentProjectId);
 				userInputTmp=userInput;
 				userInput=-2;
 			}
 			if (userInput == 0 ){
+				if(currentPosition==2){
+					showProjectDetails(userInputTmp);
+				}
 				if (currentPosition==1){
 					showProjectFromCategoryId(userInputTmp);
 				}
@@ -68,6 +79,8 @@ public class DispatcherController {
 	
 	private void showProjectDetails(int id){
 		out.showProjectDetails(project.printProjectDetails(userInput));		
+		out.show("put 1 to make payment");
+		out.show("put 0 to back to project list");
 	}
 	
 	

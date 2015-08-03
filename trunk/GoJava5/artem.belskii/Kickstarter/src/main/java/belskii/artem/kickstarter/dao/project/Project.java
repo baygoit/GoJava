@@ -42,7 +42,7 @@ public class Project {
 	}
 
 	public void updateBalance(Long balance) {
-		this.balance = balance;
+		this.balance += balance;
 	}
 
 	public String getStartDate() {
