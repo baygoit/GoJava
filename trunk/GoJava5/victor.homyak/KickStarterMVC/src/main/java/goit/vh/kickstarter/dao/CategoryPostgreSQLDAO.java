@@ -1,5 +1,6 @@
 package goit.vh.kickstarter.dao;
 
+        import goit.vh.kickstarter.Output;
         import goit.vh.kickstarter.mvc.model.CategoryModel;
         import goit.vh.kickstarter.mvc.model.ProjectModel;
 
@@ -58,6 +59,19 @@ public class CategoryPostgreSQLDAO implements CategoryDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+        //TODO How automatically close connection?
+        try {
+            if (connection.isClosed()){
+                new Output().println("Connection is closed");
+            }
+            else {
+                connection.close();
+                new Output().println("Connection was not closed! Closing connection...");
+            }
+        } catch (SQLException t) {
+            t.printStackTrace();
+        }
         return categories;
     }
 
@@ -81,9 +95,13 @@ public class CategoryPostgreSQLDAO implements CategoryDAO {
 
         try (Statement statement = connection.createStatement()) {
             statement.executeUpdate(sql);
+
         } catch (SQLException e) {
             e.printStackTrace();
+
         }
+       //TODO where we must close connection?
+
     }
 
 

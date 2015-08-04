@@ -1,5 +1,7 @@
 package goit.vh.kickstarter.dao;
 
+import org.postgresql.Driver;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -9,8 +11,12 @@ import java.sql.SQLException;
  */
 public class PostgreSQLDAOFactory extends DAOFactory {
 
+    private static final String URL = "jdbc:postgresql://localhost:5432/kickstarter";
+    private static final String USERNAME = "1";
+    private static final String PASSWORD = "1";
 
     public static Connection createConnection() {
+
         Connection connection = null;
         System.out.println("-------- PostgreSQL "
                 + "JDBC Connection Testing ------------");
@@ -27,8 +33,10 @@ public class PostgreSQLDAOFactory extends DAOFactory {
         System.out.println("PostgreSQL JDBC Driver Registered!");
 
         try {
-            connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/kickstarter", "1", "1");
-            if (connection != null)
+//            Driver driver =  new Driver();
+//            DriverManager.registerDriver(driver);
+            connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+            if (!connection.isClosed())
                 System.out.println("Connected!");
             return connection;
         } catch (SQLException e) {
