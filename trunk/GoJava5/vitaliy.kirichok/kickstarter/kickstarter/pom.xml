@@ -8,6 +8,12 @@
     <artifactId>kickstarter</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+    <scm>
+        <connection>
+            scm:svn:https://go-java-1.googlecode.com/svn/trunk/GoJava5/vitaliy.kirichok/lib
+        </connection>
+    </scm>
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <junit.version>4.12</junit.version>
@@ -16,9 +22,8 @@
         <commons-validator.version>1.4.1</commons-validator.version>
         <ojdbc6.version>11.2.0.4</ojdbc6.version>
         <oracle.ucp.version>11.2.0.4</oracle.ucp.version>
-        <remotedir>G:\ChromeDowloads\</remotedir>
+        <ora.checkout.directory>${project.build.directory}/oralibs</ora.checkout.directory>
     </properties>
-<!--https://go-java-1.googlecode.com/svn/trunk/GoJava5/vitaliy.kirichok-->
 
     <build>
         <plugins>
@@ -33,21 +38,57 @@
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-scm-plugin</artifactId>
+                <version>1.9.4</version>
+                <configuration>
+                    <checkoutDirectory>
+                        ${ora.checkout.directory}
+                    </checkoutDirectory>
+                    <username>vitaliy.kyrychok@gmail.com</username>
+                    <password>tQ3nr6Eq5Wq3</password>
+                    <connectionType>connection</connectionType>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>ORA: JDBC and UCP</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>checkout</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-install-plugin</artifactId>
                 <version>2.4</version>
                 <executions>
                     <execution>
-                        <id>install-orajdbc</id>
+                        <id>ORA JDBC</id>
                         <phase>validate</phase>
                         <goals>
                             <goal>install-file</goal>
                         </goals>
                         <configuration>
-                            <groupId>com.oracle3</groupId>
-                            <artifactId>ojdbc63</artifactId>
-                            <version>11.2.0.11</version>
+                            <groupId>com.oracle</groupId>
+                            <artifactId>ojdbc6</artifactId>
+                            <version>11.2.0.4</version>
                             <packaging>jar</packaging>
-                            <file>${remotedir}ojdbc6.jar</file>
+                            <file>${ora.checkout.directory}/ojdbc6.jar</file>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>ORA UCP</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>install-file</goal>
+                        </goals>
+                        <configuration>
+                            <groupId>com.oracle</groupId>
+                            <artifactId>ucp</artifactId>
+                            <version>11.2.0.4</version>
+                            <packaging>jar</packaging>
+                            <file>${ora.checkout.directory}/ucp.jar</file>
                         </configuration>
                     </execution>
                 </executions>
@@ -78,12 +119,6 @@
             <groupId>commons-validator</groupId>
             <artifactId>commons-validator</artifactId>
             <version>${commons-validator.version}</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.oracle3</groupId>
-            <artifactId>ojdbc63</artifactId>
-            <version>11.2.0.11</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
