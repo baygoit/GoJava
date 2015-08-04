@@ -29,7 +29,7 @@ public class Project {
     }
 
     @Deprecated
-    private Project(String name) {
+    public Project(String name) {
         this.name = name;
     }
 

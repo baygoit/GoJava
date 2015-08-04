@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<application>
+    <class name = "Projects">
+        <method name = "open"/>
+        <method name = "close"/>
+        <method name = "show"/>
+        <method name = "hide"/>
+    </class>
+</application>Game "Popcorn"
+Design "Popcorn"
