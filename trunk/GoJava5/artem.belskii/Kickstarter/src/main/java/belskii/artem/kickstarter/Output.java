@@ -1,6 +1,7 @@
 package belskii.artem.kickstarter;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import belskii.artem.kickstarter.dao.category.Category;
 import belskii.artem.kickstarter.dao.project.Project;
@@ -11,12 +12,12 @@ public class Output {
 		System.out.println(line);
 	}
 	
-	public void showCategory (ArrayList<Category> list){
-		for (int i = 0; i<list.size(); i++){
+	public void showCategory (HashMap<Integer, String> CategoryList){
+		for (int i = 0; i<CategoryList.size(); i++){
 			StringBuilder strBuilder = new StringBuilder();
-			strBuilder.append(list.get(i).getCategoryId());
+			strBuilder.append(CategoryList.get(i));
 			strBuilder.append(": ");
-			strBuilder.append(list.get(i).getCategoryName());
+			strBuilder.append(CategoryList.get(i));
 			System.out.println(strBuilder.toString());
 		}
 		System.out.println("Please select category number, and press Enter, or put 0 for exit:");

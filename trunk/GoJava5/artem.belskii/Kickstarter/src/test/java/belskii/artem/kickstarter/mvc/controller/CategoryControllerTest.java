@@ -43,8 +43,8 @@ public class CategoryControllerTest {
 
 	@Test
 	public void testAddCategory() {
-		category.addCategory(new Category(15, "Category testAddCategory"));
-		assertEquals("Category testAddCategory", category.getCategoryList().get(15).getCategoryName().toString());
+		category.addCategory("Category testAddCategory");
+		assertEquals("Category testAddCategory", category.getCategoryList().get(15));
 		
 	}
 
@@ -52,20 +52,22 @@ public class CategoryControllerTest {
 	public void testGetCategoryList() {
 		boolean answer=true;
 		for (int i=0; i<category.getCategoryList().size(); i++){
-			if (!category.getCategoryList().get(i).getCategoryName().equals(categoryesforEquals.get(i).getCategoryName())){
+			if (!category.getCategoryList().get(i).equals(categoryesforEquals.get(i).getCategoryName())){
 				answer=false;
 			}
 		}
-		assertTrue(answer);	}
+		assertTrue(answer);	
+	}
 
 	@Test
 	public void testPrintCategoryList() {
 		boolean answer=true;
 		for (int i=0; i<category.printCategoryList().size(); i++){
-			if (!category.printCategoryList().get(i).getCategoryName().equals(categoryesforEquals.get(i).getCategoryName())){
+			if (!category.printCategoryList().get(i).equals(categoryesforEquals.get(i).getCategoryName())){
 				answer=false;
 			}
 		}
+		assertTrue(answer);		
 	}
 
 }
