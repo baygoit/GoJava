@@ -1,45 +1,45 @@
 package belskii.artem.kickstarter.dao.category;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 
 public class CategoryDaoImplHardCoding implements CategoryDao {
-	private ArrayList<Category> categoryes;
+	private HashMap<Integer, String> categoryes;
 
 	public CategoryDaoImplHardCoding() {
-		categoryes = new ArrayList<Category>();
-		this.addCategory(new Category(1, "Art"));
-		this.addCategory(new Category(2, "Comics"));
-		this.addCategory(new Category(3, "Crafts"));
-		this.addCategory(new Category(4, "Dance"));
-		this.addCategory(new Category(5, "Design"));
-		this.addCategory(new Category(6, "Fashion"));
-		this.addCategory(new Category(7, "Film & Video"));
-		this.addCategory(new Category(8, "Food"));
-		this.addCategory(new Category(9, "Games"));
-		this.addCategory(new Category(10, "Journalism"));
-		this.addCategory(new Category(11, "Music"));
-		this.addCategory(new Category(12, "Photography"));
-		this.addCategory(new Category(13, "Publishing"));
-		this.addCategory(new Category(14, "Technology"));
-		this.addCategory(new Category(15, "Theater"));
+		categoryes = new HashMap<Integer, String>();
+		this.addCategory("Art");
+		this.addCategory("Comics");
+		this.addCategory("Crafts");
+		this.addCategory("Dance");
+		this.addCategory("Design");
+		this.addCategory("Fashion");
+		this.addCategory("Film & Video");
+		this.addCategory("Food");
+		this.addCategory("Games");
+		this.addCategory("Journalism");
+		this.addCategory("Music");
+		this.addCategory("Photography");
+		this.addCategory("Publishing");
+		this.addCategory("Technology");
+		this.addCategory("Theater");
 	}
 
-	public void addCategory(Category categoryInfo) {
-		categoryes.add(categoryInfo);
+	public void addCategory(String categoryName) {
+		int index = categoryes.size();
+		categoryes.put(index, categoryName);
 	}
 
-	public ArrayList<Category> getCategoryList() {
+	public HashMap<Integer,String> getCategoryList() {
 		return categoryes;
 	}
 
 	public String getCategoryNameById(int id) {
 		String answer;
-		try {
-			answer = this.getCategoryList().get(id).getCategoryName();
-		} catch (Exception IndexOutOfBoundsException) {
+		if (this.getCategoryList().containsKey(id)){		
+			answer = this.getCategoryList().get(id);
+		} else{
 			answer = "-1";
 		}
 		return answer;
 	}
-
 }

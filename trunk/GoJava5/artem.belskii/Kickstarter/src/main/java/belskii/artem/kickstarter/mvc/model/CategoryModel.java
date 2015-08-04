@@ -1,19 +1,18 @@
 package belskii.artem.kickstarter.mvc.model;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 
-import belskii.artem.kickstarter.dao.category.Category;
 import belskii.artem.kickstarter.dao.category.CategoryDao;
 import belskii.artem.kickstarter.dao.category.CategoryDaoImplHardCoding;
 
 public class CategoryModel {
 	CategoryDao categoryDao = new CategoryDaoImplHardCoding();
 
-	public void addCategory(Category categoryInfo) {
-		categoryDao.addCategory(categoryInfo);
+	public void addCategory(String categoryName) {
+		categoryDao.addCategory(categoryName);
 	}
 
-	public ArrayList<Category> getCategoryList() {
+	public HashMap<Integer, String> getCategoryList() {
 		return categoryDao.getCategoryList();
 	}
 }
