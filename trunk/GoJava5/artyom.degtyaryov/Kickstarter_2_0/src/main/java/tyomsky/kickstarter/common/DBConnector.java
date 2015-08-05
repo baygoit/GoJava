@@ -1,9 +1,6 @@
 package tyomsky.kickstarter.common;
 
-import java.io.Closeable;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -46,7 +43,9 @@ public class DBConnector {
 
     private void setProperties(String fileName) {
         properties = new Properties();
-        try (FileInputStream fis = new FileInputStream(fileName)) {
+        ClassLoader classLoader = getClass().getClassLoader();
+        File file = new File(classLoader.getResource(fileName).getFile());
+        try (FileInputStream fis = new FileInputStream(file)) {
             properties.load(fis);
         } catch (IOException e) {
             e.printStackTrace();
