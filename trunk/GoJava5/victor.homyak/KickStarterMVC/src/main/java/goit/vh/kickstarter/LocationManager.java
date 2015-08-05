@@ -10,7 +10,6 @@ import goit.vh.kickstarter.mvc.controller.MainPageController;
 public class LocationManager {
 
     // FIXME: LocationManager will eventually throw StackOverFlowError. Dispatch using while loop to avoid.
-    // TODO DAO pattern
 
     private MainPageController mainPageController;
     private CategoryController categoryController;

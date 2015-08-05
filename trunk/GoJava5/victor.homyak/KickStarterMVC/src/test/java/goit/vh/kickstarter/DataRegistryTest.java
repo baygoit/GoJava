@@ -88,13 +88,14 @@ public class DataRegistryTest {
         categories.put(1, category1);
         categories.put(2, category2);
         dataRegistry.registerCategories(categories);
-        //TODO refactor to get rid of return null
-        Assert.assertNull("Should return null", dataRegistry.getProjectList(5));
 
+        Assert.assertNull("Should return null", dataRegistry.getProjectList(5));
         Assert.assertEquals("Should return category", category1, dataRegistry.getProjectList(1));
     }
-    @Test
 
+
+
+    @Test(expected=IndexOutOfBoundsException.class)
     public void whenGetProject() throws Exception {
 
         DataRegistry dataRegistry = new DataRegistry();
@@ -125,12 +126,10 @@ public class DataRegistryTest {
         dataRegistry.registerCategories(categories);
         //TODO refactor to get rid of return null
 
-
-
       //  Assert.assertEquals("Should return null", NullPointerException, dataRegistry.getProject(new int[]{3, 0}));
-        Assert.assertNull("Should return null", dataRegistry.getProject(new int[]{2, 6}));
-        Assert.assertEquals("Should return project", category1.get(0), dataRegistry.getProject(new int[]{1,1}));
-    }
-
+   // public void testIndexOutOfBoundsException() {
+        dataRegistry.getProject(new int[]{2, 6});
+ //   }
+      Assert.assertEquals("Should return project", category1.get(0), dataRegistry.getProject(new int[]{1,1}));}}
 //
-}
+

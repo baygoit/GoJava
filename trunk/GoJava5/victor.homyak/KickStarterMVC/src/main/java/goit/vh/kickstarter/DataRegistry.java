@@ -25,31 +25,15 @@ public class DataRegistry {
         return categoriesForMainPage;
     }
 
-
     public void registerCategories(Map<Integer, ArrayList<ProjectModel>> categories) {
         this.categories = categories;
     }
 
-    public ArrayList<ProjectModel> getProjectList(int index) throws NullPointerException{
-        //try {
-            return categories.get(index);
-//        }catch (NullPointerException ex) {
-//            output.println("You choose not sutable variant, try more.\n");
-//        }
-//        if (categories.get(index) != null) {
-//            return categories.get(index);
-//        } else {
-//            output.println("You choose not sutable variant, try more.\n");
-//            return null;
-//        }
+    public ArrayList<ProjectModel> getProjectList(int index) throws NullPointerException {
+        return categories.get(index);
     }
 
-        public ProjectModel getProject(int[] path) throws IndexOutOfBoundsException{
-//        if (categories.get(path[0]).size() < path[1] || (path[1] - 1) < 0) {
-//            //TODO rename, make more understandable. Use Enum
-//            //  output.println("You choose not sutable variant, try more.");
-//            return null;
-//        }
+    public ProjectModel getProject(int[] path) throws IndexOutOfBoundsException {
         return categories.get(path[0]).get(path[1] - 1);
     }
 }

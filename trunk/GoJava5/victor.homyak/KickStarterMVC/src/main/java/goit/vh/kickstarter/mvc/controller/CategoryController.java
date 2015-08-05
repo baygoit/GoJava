@@ -41,9 +41,9 @@ public class CategoryController {
             }
             try {
                 model.refreshModel(path[0]);
-            }catch (RuntimeException myException){
+            } catch (RuntimeException myException) {
                 myException.toString();
-                path[0]=0;
+                path[0] = 0;
                 locationManager.setPath(path);
                 locationManager.dispatch();
             }
@@ -60,14 +60,6 @@ public class CategoryController {
                 locationManager.setPath(path);
                 locationManager.dispatch();
             }
-//            if (projectModel.refreshModel(path) == null) {
-//                output.println("You choose not sutable variant, returning to previous menu\n");
-//                path[1] = 0;
-//            }
-//            // TODO exception
-//            if (path[1] == 0) {
-//                path[0] = 0;
-//            }
 
             try {
                 projectModel.refreshModel(path);
@@ -82,22 +74,9 @@ public class CategoryController {
             locationManager.dispatch();
             locationManager.setPath(path);
             locationManager.dispatch();
-//            try {
-//                projectModel.refreshModel(path);
-//
-//            } catch (NullPointerException ex) {
-//                output.println("You choose not sutable variant, returning to previous menu\n");
-//                path[1] = 0;
-//                path[0] = 0;
-//
-//                locationManager.setPath(path);
-//                locationManager.dispatch();
-//            }
         }
-
         model.refreshModel(path[0]);
         locationManager.dispatch();
-
     }
 
     public void setLocationManager(LocationManager locationManager) {

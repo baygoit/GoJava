@@ -104,7 +104,6 @@ public class CategoryPostgreSQLDAO implements CategoryDAO {
 
     }
 
-
     @Override
     public CategoryModel getCategoryByID(int id) {
         return null;

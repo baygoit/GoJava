@@ -40,7 +40,7 @@ public class ProjectModelTest  {
     }
 
 
-    @Test()
+    @Test(expected=NullPointerException.class)
     public void whenRefreshModelShouldReturn0() throws Exception {
         int[] path = new int[]{30,9};
         Calendar calendar = Calendar.getInstance();
