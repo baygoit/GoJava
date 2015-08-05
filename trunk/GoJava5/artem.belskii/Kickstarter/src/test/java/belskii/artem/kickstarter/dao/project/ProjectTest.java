@@ -15,7 +15,7 @@ private Project testProject;
 		paymentVariants.put(new Long(10), "some bonus");
 		paymentVariants.put(new Long(30), "other bonus");
 		paymentVariants.put(new Long(50), "extra bonus");
-		testProject = new Project("My test project",new Long(1), new Long(1),"28.07.2015","30.07.2015","https://www.youtube.com/watch?v=uC0pqWX3yB8", 1, "My super project!", paymentVariants);
+		testProject = new Project("My test project",new Long(1), new Long(1),"28.07.2015","30.07.2015","https://www.youtube.com/watch?v=uC0pqWX3yB8", 1, "My super project!");
 	}
 
 	@Test

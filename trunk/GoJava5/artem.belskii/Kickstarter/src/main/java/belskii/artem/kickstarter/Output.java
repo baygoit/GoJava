@@ -1,9 +1,6 @@
 package belskii.artem.kickstarter;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-
-import belskii.artem.kickstarter.dao.category.Category;
 import belskii.artem.kickstarter.dao.project.Project;
 
 public class Output {
@@ -23,8 +20,8 @@ public class Output {
 		System.out.println("Please select category number, and press Enter, or put 0 for exit:");
 	}
 
-	public void showProjectList(ArrayList<Project> projectList) {
-		for (int i = 0; i<projectList.size();i++){
+	public void showProjectList(HashMap<Long, Project> projectList) {
+		for (long i = 0; i<projectList.size();i++){
 			StringBuilder strBuilder = new StringBuilder();
 			strBuilder.append(i+1);
 			strBuilder.append(": ");
@@ -52,9 +49,9 @@ public class Output {
 		strBuilder.append(project.getVideoUrl());
 		System.out.println(strBuilder.toString());
 		System.out.println("FAQ:");
-		for (int i=0; i<project.getQuestions().size();i++){
-			System.out.println(project.getQuestions().get(i));
-		}
+//		for (int i=0; i<project.getQuestions().size();i++){
+//			System.out.println(project.getQuestions().get(i));
+//		}
 	}
 	
 	public final static void clearConsole()

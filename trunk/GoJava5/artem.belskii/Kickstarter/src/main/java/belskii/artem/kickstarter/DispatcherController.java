@@ -42,22 +42,22 @@ public class DispatcherController {
 				userInputTmp=userInput;
 				userInput=-2;
 			}
-			if (userInput==1 && currentPosition == 2){
-				out.show("If you want set qustom value, put 3");
-				project.addPayment(currentProjectId);
-				userInputTmp=userInput;
-				userInput=-2;
-			}
-			if (userInput==3 && currentPosition == 2){
-				project.addCustomPayment(currentProjectId);
-				userInputTmp=userInput;
-				userInput=-2;
-			}
-			if (userInput==2 && currentPosition == 2){
-				project.asqAQuestion(currentProjectId);
-				userInputTmp=userInput;
-				userInput=-2;
-			}
+//			if (userInput==1 && currentPosition == 2){
+//				out.show("If you want set qustom value, put 3");
+//				project.addPayment(currentProjectId);
+//				userInputTmp=userInput;
+//				userInput=-2;
+//			}
+//			if (userInput==3 && currentPosition == 2){
+//				project.addCustomPayment(currentProjectId);
+//				userInputTmp=userInput;
+//				userInput=-2;
+//			}
+//			if (userInput==2 && currentPosition == 2){
+//				project.asqAQuestion(currentProjectId);
+//				userInputTmp=userInput;
+//				userInput=-2;
+//			}
 			if (userInput == 0 ){
 				if(currentPosition==2){
 					showProjectDetails(userInputTmp);

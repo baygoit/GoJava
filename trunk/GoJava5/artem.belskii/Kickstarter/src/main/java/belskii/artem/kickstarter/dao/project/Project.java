@@ -1,98 +1,91 @@
 package belskii.artem.kickstarter.dao.project;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
+
 
 public class Project {
-	private String name;
-	private Long goal;
-	private Long balance;
-	private String startDate; 
-	private String endDate;
-	private String videoUrl;
-	private int categoryId;
-	private String details;
-	private ArrayList<String> question = new ArrayList<String>();
-	private HashMap<Long, String> paymentVariants = new HashMap<Long, String>();
+	private HashMap<String, Object> project ;
 	
-	public Project(String name, Long goal, Long balance, String startDate, String endDate, String videoUrl, int categoryId, String details, HashMap<Long, String> paymetVariants){
-		this.name=name;
-		this.goal=goal;
-		this.balance=balance;
-		this.startDate=startDate;
-		this.endDate=endDate;
-		this.videoUrl=videoUrl;
-		this.categoryId=categoryId;
-		this.details=details;
-		this.paymentVariants.putAll(paymetVariants);
+	public Project(String name, Long goal, Long balance, String startDate, String endDate, String videoUrl, int categoryId, String details){
+		project = new HashMap<String, Object>(); 
+		project.put("NAME", name);
+		project.put("GOAL", goal);
+		project.put("BALANCE", balance);
+		project.put("START_DATE", startDate);
+		project.put("END_DATE", endDate);
+		project.put("VIDEO_URL", videoUrl);
+		project.put("CATEGORY_ID", categoryId);
+		project.put("DETAILS", details);
+		//this.paymentVariants.putAll(paymetVariants);
 	}
 
 	public String getName() {
-		return name;
+		return project.get("NAME").toString();
 	}
 
 	public void updateName(String name) {
-		this.name = name;
+		project.replace("NAME", name);
 	}
 
 	public Long getGoal() {
-		return goal;
+		return (Long) project.get("GOAL");
 	}
 
 	public void updateGoal(Long goal) {
-		this.goal = goal;
+		project.replace("GOAL", goal);
 	}
 
 	public Long getBalance() {
-		return balance;
+		return (Long) project.get("BALANCE");
 	}
 
 	public void updateBalance(Long balance) {
-		this.balance += balance;
+		Long currentBalance = this.getBalance(); 
+		project.replace("BALANCE", currentBalance+balance);
 	}
 
 	public String getStartDate() {
-		return startDate;
+		return project.get("START_DATE").toString();
 	}
 
 	public void updateStartDate(String startDate) {
-		this.startDate = startDate;
+		project.replace("START_DATE", startDate);
 	}
 
 	public String getEndDate() {
-		return endDate;
+		return project.get("END_DATE").toString();
 	}
 
 	public void updateEndDate(String endDate) {
-		this.endDate = endDate;
+		project.replace("END_DATE", endDate);
 	}
 
 	public String getVideoUrl() {
-		return videoUrl;
+		return project.get("VIDEO_URL").toString();
 	}
 
 	public void updateVideoUrl(String videoUrl) {
-		this.videoUrl = videoUrl;
+		project.replace("VIDEO_URL", videoUrl);
 	}
 
 	public int getcategoryId() {
-		return categoryId;
+		return (Integer) project.get("CATEGORY_ID");
+		
 	}
 
 	public void updatecategoryId(int categoryId) {
-		this.categoryId = categoryId;
+		project.replace("CATEGORY_ID", categoryId);
 	}
 
 	public String getDetails() {
-		return details;
+		return project.get("DETAILS").toString();
 	}
 
 	public void updateDetails(String details) {
-		this.details = details;
+		project.replace("DETAILS", details);
 	}
 	
-	public ArrayList<String> getQuestions(){
+/*	public ArrayList<String> getQuestions(){
 		return this.question;
 	}
 	
@@ -107,5 +100,5 @@ public class Project {
 	public void updatePaymetVariants(HashMap<Long, String> paymetVariants) {
 		this.paymentVariants.putAll(paymetVariants);
 	}
-
+*/
 }
