@@ -24,13 +24,13 @@ public class DBConnector {
     public Connection getConnection () {
         Connection connection = null;
         Properties connectionProps = new Properties();
-        connectionProps.put("user", this.userName);
-        connectionProps.put("password", this.password);
+        connectionProps.put("user", "sa");
+        connectionProps.put("password", "");
 
-        if ("h2".equals(this.dbms)) {
-            String currentUrlString = "jdbc:" + this.dbms + ":" + this.host + ":" + this.dbName;
+        if ("h2".equals("h2")) {
+            String currentUrlString = "jdbc:" + "h2" + ":" + "mem" + ":" + "kickstarter";
             try {
-                Class.forName(driver);
+                Class.forName("org.h2.Driver");
                 connection =
                         DriverManager.getConnection(currentUrlString + ";DB_CLOSE_DELAY=-1",
                                 connectionProps);
@@ -43,20 +43,20 @@ public class DBConnector {
 
     private void setProperties(String fileName) {
         properties = new Properties();
-        ClassLoader classLoader = getClass().getClassLoader();
-        File file = new File(classLoader.getResource(fileName).getFile());
-        try (FileInputStream fis = new FileInputStream(file)) {
-            properties.load(fis);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        dbms = properties.getProperty("dbms");
-        driver = properties.getProperty("driver");
-        host = properties.getProperty("host");
-        port = properties.getProperty("port");
-        dbName = properties.getProperty("database_name");
-        this.userName = properties.getProperty("user_name");
-        this.password = properties.getProperty("password");
+//        ClassLoader classLoader = getClass().getClassLoader();
+//        File file = new File(classLoader.getResource(fileName).getFile());
+//        try (FileInputStream fis = new FileInputStream(file)) {
+//            properties.load(fis);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        dbms = properties.getProperty("dbms");
+//        driver = properties.getProperty("driver");
+//        host = properties.getProperty("host");
+//        port = properties.getProperty("port");
+//        dbName = properties.getProperty("database_name");
+//        this.userName = properties.getProperty("user_name");
+//        this.password = properties.getProperty("password");
     }
 
 }
