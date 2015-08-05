@@ -10,10 +10,12 @@ public class CategoriesDAOFileTest extends CategoriesDAOTest {
     public void cleanUp() throws Exception {
         File file = new File("categoriesTest.txt");
         file.delete();
+        file.createNewFile();
     }
 
     @Override
     public CategoriesDAO getCategoriesDAOImplementation() {
+        File file = new File("categoriesTest.txt");
         return new CategoriesDAOFile("categoriesTest.txt");
     }
 }

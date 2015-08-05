@@ -12,7 +12,7 @@ public class CategoriesDAOFile implements CategoriesDAO {
     File file;
 
     public CategoriesDAOFile(String fileName) {
-        this.file = findFile(fileName);
+        this.file = findOrCreateFile(fileName);
     }
 
     @Override
@@ -79,14 +79,14 @@ public class CategoriesDAOFile implements CategoriesDAO {
         }
     }
 
-    private File findFile(String fileName) {
-        ClassLoader classLoader = getClass().getClassLoader();
-        URL resource = classLoader.getResource(fileName);
-        File result;
-        if (resource != null) {
-            result = new File(resource.getFile());
-        } else {
-            throw new RuntimeException(String.format("File %s not found!", fileName));
+    private File findOrCreateFile(String fileName) {
+        File result = new File(fileName);
+        if (!result.exists()) {
+            try {
+                result.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
         return result;
