@@ -1,7 +1,7 @@
-package java.KickStarter.dao;
+package KickStarter.dao;
 
-import java.KickStarter.model.Category;
-import java.KickStarter.model.Project;
+import KickStarter.model.Category;
+import KickStarter.model.Project;
 
 import java.sql.Date;
 import java.util.ArrayList;

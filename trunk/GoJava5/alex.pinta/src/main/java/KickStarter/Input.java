@@ -1,4 +1,4 @@
-package java.KickStarter;
+package KickStarter;
 
 import java.io.InputStream;
 import java.util.Scanner;

@@ -1,8 +1,8 @@
-package java.KickStarter.controller;
+package KickStarter.controller;
 
-import java.KickStarter.Output;
-import java.KickStarter.model.Project;
-import java.KickStarter.view.ViewProject;
+import KickStarter.Output;
+import KickStarter.model.Project;
+import KickStarter.view.ViewProject;
 
 import java.util.List;
 

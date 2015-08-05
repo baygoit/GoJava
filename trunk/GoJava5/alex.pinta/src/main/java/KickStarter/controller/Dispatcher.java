@@ -1,13 +1,13 @@
-package java.KickStarter.controller;
+package KickStarter.controller;
 
-import java.KickStarter.Input;
-import java.KickStarter.Output;
-import java.KickStarter.dao.InputFromFile;
-import java.KickStarter.dao.InputFromJDBC;
-import java.KickStarter.dao.LoadingData;
-import java.KickStarter.model.MainPageModel;
-import java.KickStarter.model.Project;
-import java.KickStarter.view.*;
+import KickStarter.Input;
+import KickStarter.Output;
+import KickStarter.dao.InputFromFile;
+import KickStarter.dao.InputFromJDBC;
+import KickStarter.dao.LoadingData;
+import KickStarter.model.MainPageModel;
+import KickStarter.model.Project;
+import KickStarter.view.*;
 
 
 import java.sql.Date;

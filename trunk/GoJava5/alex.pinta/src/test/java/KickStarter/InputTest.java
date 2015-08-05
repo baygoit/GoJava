@@ -1,7 +1,7 @@
-package java.KickStarter;
+package KickStarter;
 
 import static org.junit.Assert.*;
-import java.KickStarter.*;
+import KickStarter.*;
 import org.junit.Test;
 import org.mockito.*;
 import static org.mockito.Mockito.*;

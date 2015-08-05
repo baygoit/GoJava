@@ -1,4 +1,4 @@
-package java.SearchByArray;
+package SearchByArray;
 
 import java.io.InputStream;
 import java.lang.reflect.ParameterizedType;

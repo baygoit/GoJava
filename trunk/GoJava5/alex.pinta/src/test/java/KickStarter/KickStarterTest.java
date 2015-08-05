@@ -1,8 +1,8 @@
-package java.KickStarter;
+package KickStarter;
 
-import java.KickStarter.controller.Dispatcher;
-import java.KickStarter.dao.ManualInput;
-import java.KickStarter.*;
+import KickStarter.controller.Dispatcher;
+import KickStarter.dao.ManualInput;
+import KickStarter.*;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;

@@ -1,4 +1,4 @@
-package java.KickStarter.view;
+package KickStarter.view;
 
 import org.junit.Test;
 

@@ -1,4 +1,4 @@
-package java.Calculator;
+package Calculator;
 
 /**
  * Created with IntelliJ IDEA.

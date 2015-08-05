@@ -1,4 +1,4 @@
-package java.KickStarter.controller;
+package KickStarter.controller;
 
 import java.util.List;
 

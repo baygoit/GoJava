@@ -1,4 +1,4 @@
-package java.DivitedByColumn;
+package DivitedByColumn;
 
 /**
  * Created with IntelliJ IDEA.

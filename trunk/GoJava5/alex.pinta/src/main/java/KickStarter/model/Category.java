@@ -1,4 +1,4 @@
-package java.KickStarter.model;
+package KickStarter.model;
 
 import javax.xml.bind.annotation.*;
 

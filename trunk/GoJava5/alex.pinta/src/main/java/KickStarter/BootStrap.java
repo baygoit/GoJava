@@ -1,4 +1,4 @@
-package java.KickStarter;
+package KickStarter;
 
 /**
  * Created with IntelliJ IDEA.

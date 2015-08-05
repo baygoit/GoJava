@@ -1,4 +1,4 @@
-package java.SearchByArray;
+package SearchByArray;
 
 import java.util.ArrayList;
 import java.util.Scanner;

@@ -1,4 +1,4 @@
-package java.Anagrama;
+package Anagrama;
 /**
  * Created with IntelliJ IDEA.
  *
