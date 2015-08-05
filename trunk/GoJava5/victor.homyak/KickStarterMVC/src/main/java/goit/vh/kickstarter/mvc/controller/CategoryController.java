@@ -35,10 +35,18 @@ public class CategoryController {
 
             if (model.getCategories().size() < path[0] - 1) {
                 path[0] = 0;
+                output.println("You choose not sutable variant, try onese more!\n");
                 locationManager.setPath(path);
                 locationManager.dispatch();
             }
-            model.refreshModel(path[0]);
+            try {
+                model.refreshModel(path[0]);
+            }catch (RuntimeException myException){
+                myException.toString();
+                path[0]=0;
+                locationManager.setPath(path);
+                locationManager.dispatch();
+            }
             view.render(model);
 
             projectModel.refreshListModel(path[0]);
@@ -52,17 +60,41 @@ public class CategoryController {
                 locationManager.setPath(path);
                 locationManager.dispatch();
             }
-            if (projectModel.refreshModel(path) == null) {
-                output.println("You choose not sutable variant, returning to previous menu\n");
+//            if (projectModel.refreshModel(path) == null) {
+//                output.println("You choose not sutable variant, returning to previous menu\n");
+//                path[1] = 0;
+//            }
+//            // TODO exception
+//            if (path[1] == 0) {
+//                path[0] = 0;
+//            }
+
+            try {
+                projectModel.refreshModel(path);
+            } catch (IndexOutOfBoundsException ex) {
+                output.println("You choose not sutable variant, try more.");
                 path[1] = 0;
             }
-            // TODO exception
+
             if (path[1] == 0) {
                 path[0] = 0;
             }
+            locationManager.dispatch();
             locationManager.setPath(path);
             locationManager.dispatch();
+//            try {
+//                projectModel.refreshModel(path);
+//
+//            } catch (NullPointerException ex) {
+//                output.println("You choose not sutable variant, returning to previous menu\n");
+//                path[1] = 0;
+//                path[0] = 0;
+//
+//                locationManager.setPath(path);
+//                locationManager.dispatch();
+//            }
         }
+
         model.refreshModel(path[0]);
         locationManager.dispatch();
 

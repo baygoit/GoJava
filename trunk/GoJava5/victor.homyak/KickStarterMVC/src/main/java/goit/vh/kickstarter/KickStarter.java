@@ -36,7 +36,7 @@ public class KickStarter {
         //Here we initialize from what data storage we want to take
         //TODO save type of connection in property file
         DAOFactory daoFactory =
-                DAOFactory.getDAOFactory(DAOFactory.POSTGRESQL);
+                DAOFactory.getDAOFactory(DAOFactory.INMEMORY);
 
         DataRegistry dataRegistry = new DataRegistry();
         Map<Integer, ArrayList<ProjectModel>> categories = new HashMap<>();

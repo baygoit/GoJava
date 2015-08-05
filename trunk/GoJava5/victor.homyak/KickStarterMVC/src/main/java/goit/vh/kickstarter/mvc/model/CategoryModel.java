@@ -17,18 +17,24 @@ public class CategoryModel {
     private int categoryIndex;
     private Map<Integer, String> categories;
     private Output output = new Output();
+    private RuntimeException myException;
 
-    public void refreshModel(int input) {
+    public void refreshModel(int input)throws RuntimeException{
 
-        if (getCategories().size() < input - 1) {
+        if (getCategories().size() < input) {
             output.println("You choose not sutable variant, try more.");
-        //    return null;categoryIndex =
             categoryIndex = 0;
-            categoryName ="";
+            categoryName = "";
+            throw myException;
         } else {
-            categoryIndex = dataRegistry.getProjectList(input).get(0).getParentId();
-            categoryName = dataRegistry.getProjectList(input).get(0).getParentName();
-          //  return 1;
+            try {
+                categoryIndex = dataRegistry.getProjectList(input).get(0).getParentId();
+                categoryName = dataRegistry.getProjectList(input).get(0).getParentName();
+            } catch (NullPointerException ex) {
+                output.println("You choose not sutable variant, try more.");
+                categoryIndex = 0;
+                categoryName = "";
+            }
         }
     }
 

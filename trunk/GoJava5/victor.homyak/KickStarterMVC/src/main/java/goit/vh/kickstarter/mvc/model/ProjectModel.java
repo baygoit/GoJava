@@ -48,19 +48,25 @@ public class ProjectModel {
         return listOfProjectses;
     }
 
-    public Object refreshModel(int[] path) {
-        if (dataRegistry.getProject(path) == null) {
-            return null;
-        }
-        this.projectName = dataRegistry.getProject(path).getProjectName();
-        this.shortDescription = dataRegistry.getProject(path).getShortDescription();
-        this.sumToRaise = dataRegistry.getProject(path).getSumToRaise();
-        this.currentSum = dataRegistry.getProject(path).getCurrentSum();
-        this.endDate = dataRegistry.getProject(path).getEndDate();
-        this.projectHistory = dataRegistry.getProject(path).getProjectHistory();
-        this.fAQ = dataRegistry.getProject(path).getfAQ();
-        this.demoURL = dataRegistry.getProject(path).getDemoURL();
-        return 1;
+ //   public Object refreshModel(int[] path)throws IndexOutOfBoundsException{
+        public void refreshModel(int[] path)throws IndexOutOfBoundsException{
+//        if (dataRegistry.getProject(path) == null) {
+//            return null;
+//        }
+            try {
+                dataRegistry.getProject(path);
+                this.projectName = dataRegistry.getProject(path).getProjectName();
+                this.shortDescription = dataRegistry.getProject(path).getShortDescription();
+                this.sumToRaise = dataRegistry.getProject(path).getSumToRaise();
+                this.currentSum = dataRegistry.getProject(path).getCurrentSum();
+                this.endDate = dataRegistry.getProject(path).getEndDate();
+                this.projectHistory = dataRegistry.getProject(path).getProjectHistory();
+                this.fAQ = dataRegistry.getProject(path).getfAQ();
+                this.demoURL = dataRegistry.getProject(path).getDemoURL();
+            }catch (IndexOutOfBoundsException ex) {
+                ex.toString();
+            }
+      //  return 1;
     }
 
     public void refreshListModel(int input) {

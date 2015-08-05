@@ -56,7 +56,7 @@ public class ProjectControllerTest {
 
         ProjectController projectController = new ProjectController(projectView, projectModel);
         projectController.setLocationManager(locationManager);
-        when(projectModel.refreshModel(path)).thenReturn("1");
+      //  when(projectModel.refreshModel(path)).thenReturn("1");
         when(projectView.getInput()).thenReturn("1");
         locationManager.setPath(path);
         projectController.start(path);
