@@ -91,5 +91,13 @@ public class ProjectControllerTest {
 		assertEquals(1,project.getProjectId(2L).getFaq().size());
 	}
 	
+	@Test
+	public void testQuetomPayment(){
+		assertEquals(new Long(1),project.getProjectId(0L).getBalance());
+		project.getProjectId(0L).updateBalance(10L);
+		assertEquals(new Long(11),project.getProjectId(0L).getBalance());
+	}
+	
+	
 
 }

@@ -63,9 +63,6 @@ public class DispatcherController {
 				String question=scan.nextLine();
 				project.getProjectId(currentProjectId).asqAQuestion(question);
 				showProjectDetails(currentCategoryId, userInputTmp);
-
-//				userInputTmp=userInput;
-//				userInput=-2;
 			}
 			if (userInput == 0 ){
 				if(currentPosition==2){
