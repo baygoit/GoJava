@@ -20,6 +20,7 @@ public class ProjectDaoImplHardCoding implements ProjectDao {
 
 	public void addProject(Project projectDetails) {
 		Long index = new Long(this.projects.size());
+		projectDetails.setProjectId(index);
 		projects.put(index, projectDetails);
 	}
 
@@ -37,7 +38,8 @@ public class ProjectDaoImplHardCoding implements ProjectDao {
 		HashMap<Long, Project> projectList = this.getProjectList();
 		for ( long i=0; i<projectList.size();i++){
 			if (projectList.get(i).getcategoryId() == id){
-				answer.put(i, projectList.get(i));
+				Long index=new Long(answer.size());
+				answer.put(index, projectList.get(i));
 			}
 		}
 		return answer;

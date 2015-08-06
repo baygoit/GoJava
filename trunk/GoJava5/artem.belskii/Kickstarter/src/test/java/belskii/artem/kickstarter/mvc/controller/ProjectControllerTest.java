@@ -56,12 +56,17 @@ public class ProjectControllerTest {
 	@Test
 	public void testPrintProjectDetails() {
 		assertEquals("Project details",project.printProjectDetails(0).getDetails());
-
 	}
 
 	@Test
 	public void testGetProjectFromCategory() {
 		assertEquals("My test project from Art category", project.getProjectFromCategory(1).get(new Long(0)).getName());
+	}
+	
+	@Test
+	public void testGetProjectIdfromPositionInCategoryList(){
+		Long projectId=project.getProjectFromCategory(3).get(0L).getProjectId();
+		assertEquals("2",projectId.toString());
 	}
 
 }

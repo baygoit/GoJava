@@ -16,6 +16,7 @@ public class Project {
 		project.put("VIDEO_URL", videoUrl);
 		project.put("CATEGORY_ID", categoryId);
 		project.put("DETAILS", details);
+		project.put("PROJECT_ID","NaN");
 		//this.paymentVariants.putAll(paymetVariants);
 	}
 
@@ -84,7 +85,15 @@ public class Project {
 	public void updateDetails(String details) {
 		project.replace("DETAILS", details);
 	}
+
+	public Long getProjectId() {
+		return (Long) project.get("PROJECT_ID");
+	}
 	
+	public void setProjectId(long projectId) {
+		project.replace("PROJECT_ID", projectId);
+	}
+
 /*	public ArrayList<String> getQuestions(){
 		return this.question;
 	}
