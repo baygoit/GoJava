@@ -31,6 +31,11 @@ public class ProjectController {
 		return model.getProjectFromCategory(id);
 	}
 	
+	public Project getProjectId(Long id){
+		return model.getProjectList().get(id);
+	}
+	
+	
 //	public void addPayment(int projectId){
 //		for (Map.Entry entry : model.getProjectDetails(projectId).getPaymetVariants().entrySet()) {
 //		    System.out.println("Payment Value: " + entry.getKey() + " Bonus: "+ entry.getValue());

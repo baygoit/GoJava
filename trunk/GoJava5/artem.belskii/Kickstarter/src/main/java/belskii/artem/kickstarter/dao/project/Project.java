@@ -1,13 +1,16 @@
 package belskii.artem.kickstarter.dao.project;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 
 public class Project {
 	private HashMap<String, Object> project ;
+	private HashMap<Long, ArrayList<String>> faq;
 	
 	public Project(String name, Long goal, Long balance, String startDate, String endDate, String videoUrl, int categoryId, String details){
-		project = new HashMap<String, Object>(); 
+		project = new HashMap<String, Object>();
+		faq = new HashMap<Long, ArrayList<String>>();
 		project.put("NAME", name);
 		project.put("GOAL", goal);
 		project.put("BALANCE", balance);
@@ -94,14 +97,25 @@ public class Project {
 		project.replace("PROJECT_ID", projectId);
 	}
 
-/*	public ArrayList<String> getQuestions(){
-		return this.question;
+	public HashMap<Long, ArrayList<String>> getFaq(){
+		return this.faq;
 	}
 	
 	public void asqAQuestion(String question){
-		this.question.add(question);
+		Long index = new Long(this.faq.size());
+		ArrayList<String> newQuestion = new ArrayList<String>();
+		newQuestion.add(question);
+		newQuestion.add("not answered yet");		
+		this.faq.put(index, newQuestion);
 	}
-
+	
+	public void getAnswerForQuestion(Long questionId, String answer){
+		ArrayList<String> question =  this.faq.get(questionId);
+		question.set(1, answer);
+		this.faq.replace(questionId, question);
+	}
+	
+	/*
 	public HashMap<Long, String> getPaymetVariants() {
 		return paymentVariants;
 	}

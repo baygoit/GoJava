@@ -1,5 +1,7 @@
 package belskii.artem.kickstarter;
 
+import java.util.Scanner;
+
 import belskii.artem.kickstarter.mvc.controller.CategoryController;
 import belskii.artem.kickstarter.mvc.controller.ProjectController;
 import belskii.artem.kickstarter.mvc.model.CategoryModel;
@@ -55,11 +57,16 @@ public class DispatcherController {
 //				userInputTmp=userInput;
 //				userInput=-2;
 //			}
-//			if (userInput==2 && currentPosition == 2){
-//				project.asqAQuestion(currentProjectId);
+			if (userInput==2 && currentPosition == 2){
+				Scanner scan = new Scanner(System.in);
+				out.show("Put your questin on next line:");
+				String question=scan.nextLine();
+				project.getProjectId(currentProjectId).asqAQuestion(question);
+				showProjectDetails(currentCategoryId, userInputTmp);
+
 //				userInputTmp=userInput;
 //				userInput=-2;
-//			}
+			}
 			if (userInput == 0 ){
 				if(currentPosition==2){
 					showProjectDetails(currentCategoryId, userInputTmp);
@@ -92,7 +99,7 @@ public class DispatcherController {
 	
 	private void showProjectDetails(int categoryId, int selectedProject){
 		selectedProject=selectedProject-1;
-		System.out.println(project.getProjectFromCategory(categoryId).get(new Long(selectedProject)).getName());
+		out.showProjectDetails(project.getProjectFromCategory(categoryId).get(new Long(selectedProject)));
 		currentProjectId=project.getProjectFromCategory(categoryId).get(new Long(selectedProject)).getProjectId();
 		out.show("put 1 to make payment");
 		out.show("put 2 to asq a question");

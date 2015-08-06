@@ -1,5 +1,6 @@
 package belskii.artem.kickstarter;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import belskii.artem.kickstarter.dao.project.Project;
 
@@ -49,9 +50,15 @@ public class Output {
 		strBuilder.append(project.getVideoUrl());
 		System.out.println(strBuilder.toString());
 		System.out.println("FAQ:");
-//		for (int i=0; i<project.getQuestions().size();i++){
-//			System.out.println(project.getQuestions().get(i));
-//		}
+		if(project.getFaq().size()<1){
+			System.out.println("You can asq first question!");
+		}
+		for (long i=0; i<project.getFaq().size();i++){
+			ArrayList<String> question = project.getFaq().get(i);
+			System.out.println("Q: "+question.get(0));
+			System.out.println("A: "+question.get(1));
+			
+		}
 	}
 	
 	public final static void clearConsole()

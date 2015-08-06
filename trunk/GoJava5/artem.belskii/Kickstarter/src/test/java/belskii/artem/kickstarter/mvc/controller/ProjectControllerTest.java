@@ -68,5 +68,28 @@ public class ProjectControllerTest {
 		Long projectId=project.getProjectFromCategory(3).get(0L).getProjectId();
 		assertEquals("2",projectId.toString());
 	}
+	
+	@Test
+	public void testAsqAQuestion(){
+		project.getProjectId(0L).asqAQuestion("My test question");
+	}
+	
+	@Test
+	public void testGetAnswerForQuestion(){
+		project.getProjectId(0L).asqAQuestion("testgetAnswerForQuestion");
+		project.getProjectId(0L).getAnswerForQuestion(0L, "responce for testgetAnswerForQuestion");
+	}
+	
+	@Test
+	public void testGetFaq(){
+		project.getProjectId(0L).asqAQuestion("Question 1");
+		project.getProjectId(1L).asqAQuestion("Question 2");
+		project.getProjectId(1L).asqAQuestion("Question 2.1");
+		project.getProjectId(2L).asqAQuestion("Question 2");
+		assertEquals(1,project.getProjectId(0L).getFaq().size());
+		assertEquals(2,project.getProjectId(1L).getFaq().size());
+		assertEquals(1,project.getProjectId(2L).getFaq().size());
+	}
+	
 
 }
