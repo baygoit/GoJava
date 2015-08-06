@@ -12,7 +12,7 @@ public class CategoriesDAODBTest extends CategoriesDAOTest{
 
     @Before
     public void initializeDB() {
-        try (Connection connection = new DBConnector("h2db.properties").getConnection()) {
+        try (Connection connection = new DBConnector("conf/h2db.properties").getConnection()) {
             Statement statement = connection.createStatement();
             statement.executeUpdate("CREATE TABLE Categories (" +
                     " id INT PRIMARY KEY AUTO_INCREMENT," +
@@ -25,7 +25,7 @@ public class CategoriesDAODBTest extends CategoriesDAOTest{
 
     @After
     public void CleanUp() {
-        try (Connection connection = new DBConnector("h2db.properties").getConnection()) {
+        try (Connection connection = new DBConnector("conf/h2db.properties").getConnection()) {
             Statement statement = connection.createStatement();
             statement.executeUpdate("DROP TABLE Categories");
         } catch (SQLException e) {

@@ -24,13 +24,13 @@ public class DBConnector {
     public Connection getConnection () {
         Connection connection = null;
         Properties connectionProps = new Properties();
-        connectionProps.put("user", "sa");
-        connectionProps.put("password", "");
+        connectionProps.put("user", this.userName);
+        connectionProps.put("password", this.password);
 
-        if ("h2".equals("h2")) {
-            String currentUrlString = "jdbc:" + "h2" + ":" + "mem" + ":" + "kickstarter";
+        if ("h2".equals(this.dbms)) {
+            String currentUrlString = "jdbc:" + this.dbms + ":" + this.host + ":" + this.dbName;
             try {
-                Class.forName("org.h2.Driver");
+                Class.forName(driver);
                 connection =
                         DriverManager.getConnection(currentUrlString + ";DB_CLOSE_DELAY=-1",
                                 connectionProps);
@@ -43,20 +43,19 @@ public class DBConnector {
 
     private void setProperties(String fileName) {
         properties = new Properties();
-//        ClassLoader classLoader = getClass().getClassLoader();
-//        File file = new File(classLoader.getResource(fileName).getFile());
-//        try (FileInputStream fis = new FileInputStream(file)) {
-//            properties.load(fis);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        dbms = properties.getProperty("dbms");
-//        driver = properties.getProperty("driver");
-//        host = properties.getProperty("host");
-//        port = properties.getProperty("port");
-//        dbName = properties.getProperty("database_name");
-//        this.userName = properties.getProperty("user_name");
-//        this.password = properties.getProperty("password");
+        ClassLoader classLoader = getClass().getClassLoader();
+        try (InputStream fis = classLoader.getResourceAsStream(fileName)) {
+            properties.load(fis);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        dbms = properties.getProperty("dbms");
+        driver = properties.getProperty("driver");
+        host = properties.getProperty("host");
+        port = properties.getProperty("port");
+        dbName = properties.getProperty("database_name");
+        this.userName = properties.getProperty("user_name");
+        this.password = properties.getProperty("password");
     }
 
 }

@@ -12,7 +12,7 @@ public class CategoriesDAODB implements CategoriesDAO {
     @Override
     public int size() {
         int result = 0;
-        try (Connection connection = new DBConnector("h2db.properties").getConnection()) {
+        try (Connection connection = new DBConnector("conf/h2db.properties").getConnection()) {
             Statement statement = connection.createStatement();
             statement.execute("SELECT COUNT(1) AS count FROM Categories");
             ResultSet rs = statement.getResultSet();
@@ -28,7 +28,7 @@ public class CategoriesDAODB implements CategoriesDAO {
     @Override
     public Category get(int index) {
         Category result = null;
-        try (Connection connection = new DBConnector("h2db.properties").getConnection()) {
+        try (Connection connection = new DBConnector("conf/h2db.properties").getConnection()) {
             Statement statement = connection.createStatement();
             statement.execute("SELECT * FROM Categories WHERE id = " + String.valueOf(index+1));
             ResultSet rs = statement.getResultSet();
@@ -44,7 +44,7 @@ public class CategoriesDAODB implements CategoriesDAO {
     @Override
     public List<Category> getAll() {
         List <Category> result = new ArrayList<>();
-        try (Connection connection = new DBConnector("h2db.properties").getConnection()) {
+        try (Connection connection = new DBConnector("conf/h2db.properties").getConnection()) {
             Statement statement = connection.createStatement();
             statement.execute("SELECT * FROM Categories");
             ResultSet rs = statement.getResultSet();
@@ -60,7 +60,7 @@ public class CategoriesDAODB implements CategoriesDAO {
     @Override
     public void add(Category category) {
         String name = category.getName();
-        try (Connection connection = new DBConnector("h2db.properties").getConnection()) {
+        try (Connection connection = new DBConnector("conf/h2db.properties").getConnection()) {
             Statement statement = connection.createStatement();
             statement.executeUpdate("INSERT INTO Categories (name) values (\'"+ name +"\')");
         } catch (SQLException e) {

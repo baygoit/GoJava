@@ -1,9 +1,6 @@
 package tyomsky.kickstarter.controller;
 
-import tyomsky.kickstarter.dao.CategoriesDAO;
-import tyomsky.kickstarter.dao.ProjectsDAO;
 import tyomsky.kickstarter.model.QuoteGenerator;
-import tyomsky.kickstarter.ui.IO;
 import tyomsky.kickstarter.view.TextView;
 
 public class Kickstarter {

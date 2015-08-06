@@ -60,7 +60,7 @@ public class BootStrap {
     }
 
     public static void initializeDB() {
-        try (Connection connection = new DBConnector("h2db.properties").getConnection()) {
+        try (Connection connection = new DBConnector("conf/h2db.properties").getConnection()) {
             Statement statement = connection.createStatement();
             statement.executeUpdate("CREATE TABLE Categories (" +
                     " id INT PRIMARY KEY AUTO_INCREMENT," +
