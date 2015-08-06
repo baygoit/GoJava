@@ -12,7 +12,8 @@ public class DispatcherController {
 	private int currentPosition=0;
 	private int userInput=-1;
 	private int userInputTmp=-1;
-	private int currentProjectId;
+	private int CLEAN_VALUE=-2;
+	private Long currentProjectId;
 	private int currentCategoryId;	
 	private Output out = new Output();
 	private Input in = new Input();
@@ -35,13 +36,13 @@ public class DispatcherController {
 				currentCategoryId=userInput;
 				currentPosition+=1;
 				userInputTmp=userInput;
-				userInput=-2;
+				userInput=CLEAN_VALUE;
 			}
 			if (userInput>=1 && currentPosition == 1){
 				showProjectDetails(currentCategoryId, userInput);
 				currentPosition+=1;
 				userInputTmp=userInput;
-				userInput=-2;
+				userInput=CLEAN_VALUE;
 			}
 //			if (userInput==1 && currentPosition == 2){
 //				out.show("If you want set qustom value, put 3");
@@ -92,6 +93,7 @@ public class DispatcherController {
 	private void showProjectDetails(int categoryId, int selectedProject){
 		selectedProject=selectedProject-1;
 		System.out.println(project.getProjectFromCategory(categoryId).get(new Long(selectedProject)).getName());
+		currentProjectId=project.getProjectFromCategory(categoryId).get(new Long(selectedProject)).getProjectId();
 		out.show("put 1 to make payment");
 		out.show("put 2 to asq a question");
 		out.show("put 0 to back to project list");
