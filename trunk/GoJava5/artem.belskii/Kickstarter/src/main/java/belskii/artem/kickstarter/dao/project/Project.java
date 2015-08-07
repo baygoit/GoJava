@@ -7,10 +7,12 @@ import java.util.HashMap;
 public class Project {
 	private HashMap<String, Object> project ;
 	private HashMap<Long, ArrayList<String>> faq;
+	private HashMap<Long, HashMap<Long, String>> paymentVariants;
 	
 	public Project(String name, Long goal, Long balance, String startDate, String endDate, String videoUrl, int categoryId, String details){
 		project = new HashMap<String, Object>();
 		faq = new HashMap<Long, ArrayList<String>>();
+		paymentVariants = new HashMap<Long, HashMap<Long, String>>(); 
 		project.put("NAME", name);
 		project.put("GOAL", goal);
 		project.put("BALANCE", balance);
@@ -20,7 +22,6 @@ public class Project {
 		project.put("CATEGORY_ID", categoryId);
 		project.put("DETAILS", details);
 		project.put("PROJECT_ID","NaN");
-		//this.paymentVariants.putAll(paymetVariants);
 	}
 
 	public String getName() {
@@ -115,13 +116,15 @@ public class Project {
 		this.faq.replace(questionId, question);
 	}
 	
-	/*
-	public HashMap<Long, String> getPaymetVariants() {
+	public HashMap<Long, HashMap<Long, String>> getPaymetVariants() {
 		return paymentVariants;
 	}
 
-	public void updatePaymetVariants(HashMap<Long, String> paymetVariants) {
-		this.paymentVariants.putAll(paymetVariants);
+	public void addPaymetVariants(Long value, String bonus) {
+		HashMap<Long, String> paymetVariant = new HashMap<Long, String> (); 
+		paymetVariant.put(value, bonus);
+		Long index= new Long(this.paymentVariants.size());
+		this.paymentVariants.put(index, paymetVariant);
 	}
-*/
+
 }

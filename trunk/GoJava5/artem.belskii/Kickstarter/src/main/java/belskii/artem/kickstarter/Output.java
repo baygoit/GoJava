@@ -2,6 +2,9 @@ package belskii.artem.kickstarter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Set;
+import java.util.Map.Entry;
+
 import belskii.artem.kickstarter.dao.project.Project;
 
 public class Output {
@@ -81,5 +84,21 @@ public class Output {
 	    	System.out.println("Sorry, I can't clean your console :(");
 	    	System.out.println(e);
 	    }
+	}
+
+	public void showPaymentVariants(HashMap<Long, HashMap<Long, String>> paymentVariants) {
+		for (long i=0; i<paymentVariants.size(); i++){
+			StringBuilder strBuilder = new StringBuilder();
+			Object[] value = paymentVariants.get(i).keySet().toArray();
+			Object[] bonus = paymentVariants.get(i).values().toArray();
+			strBuilder.append(i+1);
+			strBuilder.append(": Payment amount ");
+			strBuilder.append(value[0]);
+			strBuilder.append(" bonus: ");
+			strBuilder.append(bonus[0]);
+			//strBuilder.append(paymentVariants.get(i).values());
+			System.out.println(strBuilder.toString());
+		} 
+		
 	}
 }

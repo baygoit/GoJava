@@ -1,6 +1,8 @@
 package belskii.artem.kickstarter;
 
+import java.util.Map.Entry;
 import java.util.Scanner;
+import java.util.Set;
 
 import belskii.artem.kickstarter.mvc.controller.CategoryController;
 import belskii.artem.kickstarter.mvc.controller.ProjectController;
@@ -21,6 +23,8 @@ public class DispatcherController {
 	private Input in = new Input();
 	private CategoryController category = new CategoryController(new CategoryModel(), new CategoryView());
 	private ProjectController project = new ProjectController(new ProjectModel(), new ProjectView());
+	private	Scanner scan = new Scanner(System.in);
+
 	
 	
 	public void start(){
@@ -46,22 +50,40 @@ public class DispatcherController {
 				userInputTmp=userInput;
 				userInput=CLEAN_VALUE;
 			}
-//			if (userInput==1 && currentPosition == 2){
-//				out.show("If you want set qustom value, put 3");
-//				project.addPayment(currentProjectId);
-//				userInputTmp=userInput;
-//				userInput=-2;
-//			}
-//			if (userInput==3 && currentPosition == 2){
-//				project.addCustomPayment(currentProjectId);
-//				userInputTmp=userInput;
-//				userInput=-2;
-//			}
+			if (userInput==1 && currentPosition == 2){
+				out.show("If you want set qustom value, put 3");
+				out.show("Put cardholder name:");
+				String cardholderName=scan.nextLine();
+				out.show("Put card nmumber:");
+				String cardNumber=scan.nextLine();
+				out.show("Put payment variant:");
+				out.showPaymentVariants(project.getProjectById(currentProjectId).getPaymetVariants());
+				Object[] rawPaymentAmount= project.getProjectById(currentProjectId).getPaymetVariants().get(scan.nextLong()-1).keySet().toArray();
+				Long paymentAmount = (Long) rawPaymentAmount[0]; 
+				project.getProjectById(currentProjectId).updateBalance(paymentAmount);
+				out.show("Thanks, "+cardholderName+"! New balance on this project: "+project.getProjectById(currentProjectId).getBalance());
+				out.show("Put 0 for return to project details.");
+				userInputTmp=userInput;
+				userInput=-2;
+			}
+			
+			if (userInput==3 && currentPosition == 2){
+				out.show("If you want set qustom value, put 3");
+				out.show("Put cardholder name:");
+				String cardholderName=scan.nextLine();
+				out.show("Put card nmumber:");
+				String cardNumber=scan.nextLine();
+				out.show("Put payment amount:");
+				project.getProjectById(currentProjectId).updateBalance(scan.nextLong());
+				out.show("Thanks, "+cardholderName+"! New balance on this project: "+project.getProjectById(currentProjectId).getBalance());
+				out.show("Put 0 for return to project details.");
+				userInputTmp=userInput;
+				userInput=-2;
+			}
 			if (userInput==2 && currentPosition == 2){
-				Scanner scan = new Scanner(System.in);
 				out.show("Put your questin on next line:");
 				String question=scan.nextLine();
-				project.getProjectId(currentProjectId).asqAQuestion(question);
+				project.getProjectById(currentProjectId).asqAQuestion(question);
 				showProjectDetails(currentCategoryId, userInputTmp);
 			}
 			if (userInput == 0 ){
@@ -102,6 +124,4 @@ public class DispatcherController {
 		out.show("put 2 to asq a question");
 		out.show("put 0 to back to project list");
 	}
-	
-	
 }
