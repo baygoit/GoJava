@@ -1,6 +1,6 @@
 package belskii.artem.kickstarter.mvc.model;
 
-import java.util.HashMap;
+import java.util.Map;
 
 import belskii.artem.kickstarter.dao.project.Project;
 import belskii.artem.kickstarter.dao.project.ProjectDao;
@@ -13,7 +13,7 @@ public class ProjectModel {
 		projectDao.addProject(projectDetails);
 	}
 	
-	public HashMap<Long, Project> getProjectList(){
+	public Map<Long, Project> getProjectList(){
 		return projectDao.getProjectList();
 	}
 	
@@ -22,7 +22,7 @@ public class ProjectModel {
 		return projectDao.getProjectDetails(projectId);
 	}
 	
-	public HashMap<Long, Project> getProjectFromCategory(int CategoryId){
+	public Map<Long, Project> getProjectFromCategory(int CategoryId){
 		
 		return projectDao.getProjectFromCategory(CategoryId);
 	}

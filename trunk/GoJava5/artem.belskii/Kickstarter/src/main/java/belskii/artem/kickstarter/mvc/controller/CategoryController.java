@@ -1,6 +1,6 @@
 package belskii.artem.kickstarter.mvc.controller;
 
-import java.util.HashMap;
+import java.util.Map;
 import belskii.artem.kickstarter.mvc.model.CategoryModel;
 import belskii.artem.kickstarter.mvc.view.CategoryView;
 
@@ -17,11 +17,11 @@ public class CategoryController {
 		model.addCategory(categoryName);
 	}
 	
-	public HashMap<Integer, String> getCategoryList(){
+	public Map<Integer, String> getCategoryList(){
 		return model.getCategoryList();
 	}
 	
-	public  HashMap<Integer, String> printCategoryList(){
+	public  Map<Integer, String> printCategoryList(){
 		return view.printCategoryList(this.getCategoryList());
 	}
 

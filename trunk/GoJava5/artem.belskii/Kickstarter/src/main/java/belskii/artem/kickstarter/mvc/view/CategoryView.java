@@ -1,11 +1,11 @@
 package belskii.artem.kickstarter.mvc.view;
 
-import java.util.HashMap;
+import java.util.Map;
 
 public class CategoryView {
 	
-	public HashMap<Integer, String> printCategoryList(HashMap<Integer, String> categoryList){
-		return categoryList;
+	public Map<Integer, String> printCategoryList(Map<Integer, String> map){
+		return map;
 	}
 
 }

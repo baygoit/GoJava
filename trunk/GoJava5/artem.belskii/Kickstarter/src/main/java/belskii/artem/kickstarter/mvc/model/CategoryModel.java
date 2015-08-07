@@ -1,6 +1,6 @@
 package belskii.artem.kickstarter.mvc.model;
 
-import java.util.HashMap;
+import java.util.Map;
 
 import belskii.artem.kickstarter.dao.category.CategoryDao;
 import belskii.artem.kickstarter.dao.category.CategoryDaoImplHardCoding;
@@ -12,7 +12,7 @@ public class CategoryModel {
 		categoryDao.addCategory(categoryName);
 	}
 
-	public HashMap<Integer, String> getCategoryList() {
+	public Map<Integer, String> getCategoryList() {
 		return categoryDao.getCategoryList();
 	}
 }

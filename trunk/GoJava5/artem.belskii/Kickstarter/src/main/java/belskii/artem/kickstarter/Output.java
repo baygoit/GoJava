@@ -2,6 +2,7 @@ package belskii.artem.kickstarter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 import belskii.artem.kickstarter.dao.project.Project;
 
@@ -11,14 +12,14 @@ public class Output {
 		System.out.println(line);
 	}
 	
-	public void showCategory (HashMap<Integer, String> CategoryList){
-		for (int i = 0; i<CategoryList.size(); i++){
-			System.out.println(i+1+": "+CategoryList.get(i));
+	public void showCategory (Map<Integer, String> categoryList){
+		for (int i = 0; i<categoryList.size(); i++){
+			System.out.println(i+1+": "+categoryList.get(i));
 		}
 		System.out.println("Please select category number, and press Enter, or put 0 for exit:");
 	}
 
-	public void showProjectList(HashMap<Long, Project> projectList) {
+	public void showProjectList(Map<Long, Project> projectList) {
 		for (long i = 0; i<projectList.size();i++){
 			System.out.println(i+1+": "+projectList.get(i).getName());
 			System.out.println("Please select project number, and press Enter, or put 0 for return to home page:");
