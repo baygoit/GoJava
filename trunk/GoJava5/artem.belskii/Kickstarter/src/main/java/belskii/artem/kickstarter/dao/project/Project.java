@@ -5,97 +5,102 @@ import java.util.HashMap;
 
 
 public class Project {
-	private HashMap<String, Object> project ;
 	private HashMap<Long, ArrayList<String>> faq;
 	private HashMap<Long, HashMap<Long, String>> paymentVariants;
+	private String name; 
+	private Long goal;
+	private Long balance; 
+	private String startDate; 
+	private String endDate;
+	private String videoUrl; 
+	private int categoryId;
+	private String details;
+	Long projectId;
+
 	
 	public Project(String name, Long goal, Long balance, String startDate, String endDate, String videoUrl, int categoryId, String details){
-		project = new HashMap<String, Object>();
 		faq = new HashMap<Long, ArrayList<String>>();
 		paymentVariants = new HashMap<Long, HashMap<Long, String>>(); 
-		project.put("NAME", name);
-		project.put("GOAL", goal);
-		project.put("BALANCE", balance);
-		project.put("START_DATE", startDate);
-		project.put("END_DATE", endDate);
-		project.put("VIDEO_URL", videoUrl);
-		project.put("CATEGORY_ID", categoryId);
-		project.put("DETAILS", details);
-		project.put("PROJECT_ID","NaN");
+		this.name=name;
+		this.goal=goal;
+		this.balance=balance;
+		this.startDate=startDate;
+		this.endDate=endDate;
+		this.videoUrl=videoUrl;
+		this.categoryId=categoryId;
+		this.details=details;
 	}
 
 	public String getName() {
-		return project.get("NAME").toString();
+		return this.name;
 	}
 
 	public void updateName(String name) {
-		project.put("NAME", name);
+		this.name=name;
 	}
 
 	public Long getGoal() {
-		return (Long) project.get("GOAL");
+		return this.goal;
 	}
 
 	public void updateGoal(Long goal) {
-		project.put("GOAL", goal);
+		this.goal=goal;
 	}
 
 	public Long getBalance() {
-		return (Long) project.get("BALANCE");
+		return this.balance;
 	}
 
 	public void updateBalance(Long balance) {
-		Long currentBalance = this.getBalance(); 
-		project.put("BALANCE", currentBalance+balance);
+		this.balance+=balance;
 	}
 
 	public String getStartDate() {
-		return project.get("START_DATE").toString();
+		return this.startDate;
 	}
 
 	public void updateStartDate(String startDate) {
-		project.put("START_DATE", startDate);
+		this.startDate=startDate;
 	}
 
 	public String getEndDate() {
-		return project.get("END_DATE").toString();
+		return this.endDate;
 	}
 
 	public void updateEndDate(String endDate) {
-		project.put("END_DATE", endDate);
+		this.endDate=endDate;
 	}
 
 	public String getVideoUrl() {
-		return project.get("VIDEO_URL").toString();
+		return this.videoUrl;
 	}
 
 	public void updateVideoUrl(String videoUrl) {
-		project.put("VIDEO_URL", videoUrl);
+		this.videoUrl=videoUrl;
 	}
 
 	public int getcategoryId() {
-		return (Integer) project.get("CATEGORY_ID");
-		
+		return this.categoryId;
 	}
 
 	public void updatecategoryId(int categoryId) {
-		project.put("CATEGORY_ID", categoryId);
+		this.categoryId=categoryId;
 	}
 
 	public String getDetails() {
-		return project.get("DETAILS").toString();
+		return this.details;
 	}
 
 	public void updateDetails(String details) {
-		project.put("DETAILS", details);
+		this.details=details;
 	}
 
 	public Long getProjectId() {
-		return (Long) project.get("PROJECT_ID");
+		return this.getProjectId();
 	}
 	
 	public void setProjectId(long projectId) {
-		project.put("PROJECT_ID", projectId);
+		this.projectId=projectId;
 	}
 
 	public HashMap<Long, ArrayList<String>> getFaq(){
