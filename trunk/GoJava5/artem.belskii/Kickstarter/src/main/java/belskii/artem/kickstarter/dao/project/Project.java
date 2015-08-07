@@ -96,7 +96,7 @@ public class Project {
 	}
 
 	public Long getProjectId() {
-		return this.getProjectId();
+		return this.projectId;
 	}
 	
 	public void setProjectId(long projectId) {
