@@ -29,7 +29,7 @@ public class Project {
 	}
 
 	public void updateName(String name) {
-		project.replace("NAME", name);
+		project.put("NAME", name);
 	}
 
 	public Long getGoal() {
@@ -37,7 +37,7 @@ public class Project {
 	}
 
 	public void updateGoal(Long goal) {
-		project.replace("GOAL", goal);
+		project.put("GOAL", goal);
 	}
 
 	public Long getBalance() {
@@ -46,7 +46,7 @@ public class Project {
 
 	public void updateBalance(Long balance) {
 		Long currentBalance = this.getBalance(); 
-		project.replace("BALANCE", currentBalance+balance);
+		project.put("BALANCE", currentBalance+balance);
 	}
 
 	public String getStartDate() {
@@ -54,7 +54,7 @@ public class Project {
 	}
 
 	public void updateStartDate(String startDate) {
-		project.replace("START_DATE", startDate);
+		project.put("START_DATE", startDate);
 	}
 
 	public String getEndDate() {
@@ -62,7 +62,7 @@ public class Project {
 	}
 
 	public void updateEndDate(String endDate) {
-		project.replace("END_DATE", endDate);
+		project.put("END_DATE", endDate);
 	}
 
 	public String getVideoUrl() {
@@ -70,7 +70,7 @@ public class Project {
 	}
 
 	public void updateVideoUrl(String videoUrl) {
-		project.replace("VIDEO_URL", videoUrl);
+		project.put("VIDEO_URL", videoUrl);
 	}
 
 	public int getcategoryId() {
@@ -79,7 +79,7 @@ public class Project {
 	}
 
 	public void updatecategoryId(int categoryId) {
-		project.replace("CATEGORY_ID", categoryId);
+		project.put("CATEGORY_ID", categoryId);
 	}
 
 	public String getDetails() {
@@ -87,7 +87,7 @@ public class Project {
 	}
 
 	public void updateDetails(String details) {
-		project.replace("DETAILS", details);
+		project.put("DETAILS", details);
 	}
 
 	public Long getProjectId() {
@@ -95,7 +95,7 @@ public class Project {
 	}
 	
 	public void setProjectId(long projectId) {
-		project.replace("PROJECT_ID", projectId);
+		project.put("PROJECT_ID", projectId);
 	}
 
 	public HashMap<Long, ArrayList<String>> getFaq(){
@@ -113,7 +113,7 @@ public class Project {
 	public void getAnswerForQuestion(Long questionId, String answer){
 		ArrayList<String> question =  this.faq.get(questionId);
 		question.set(1, answer);
-		this.faq.replace(questionId, question);
+		this.faq.put(questionId, question);
 	}
 	
 	public HashMap<Long, HashMap<Long, String>> getPaymetVariants() {

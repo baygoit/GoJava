@@ -16,7 +16,7 @@ public class Output {
 	public void showCategory (HashMap<Integer, String> CategoryList){
 		for (int i = 0; i<CategoryList.size(); i++){
 			StringBuilder strBuilder = new StringBuilder();
-			strBuilder.append(CategoryList.get(i));
+			strBuilder.append(i+1);
 			strBuilder.append(": ");
 			strBuilder.append(CategoryList.get(i));
 			System.out.println(strBuilder.toString());

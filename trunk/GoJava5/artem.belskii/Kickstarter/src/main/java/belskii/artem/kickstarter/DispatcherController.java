@@ -1,9 +1,6 @@
 package belskii.artem.kickstarter;
 
-import java.util.Map.Entry;
 import java.util.Scanner;
-import java.util.Set;
-
 import belskii.artem.kickstarter.mvc.controller.CategoryController;
 import belskii.artem.kickstarter.mvc.controller.ProjectController;
 import belskii.artem.kickstarter.mvc.model.CategoryModel;
