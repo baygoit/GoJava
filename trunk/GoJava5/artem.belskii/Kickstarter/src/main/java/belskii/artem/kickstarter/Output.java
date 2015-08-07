@@ -51,6 +51,7 @@ public class Output {
 			System.out.println("A: "+question.get(1));
 			
 		}
+		System.out.println("==================================");
 	}
 	
 	public final static void clearConsole()
