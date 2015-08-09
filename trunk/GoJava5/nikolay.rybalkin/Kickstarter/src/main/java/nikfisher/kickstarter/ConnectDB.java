@@ -3,44 +3,69 @@ package nikfisher.kickstarter;
 import org.slf4j.LoggerFactory;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
 
 public class ConnectDB {
 
 
     private final static org.slf4j.Logger LOGGER = LoggerFactory.getLogger(ConnectDB.class);
 
+    private static final String DB_DRIVER = "org.sqlite.JDBC";
+    private static final String DB_CONNECTION = "jdbc:sqlite:src/main/resources/kickstarter.db";
+    private static final String DB_USER = "";
+    private static final String DB_PASSWORD = "";
 
-    static {
+
+
+
+    public static void main(String[] args) throws Exception {
         try {
-            Class.forName("org.sqlite.JDBC");
+            insertWithPreparedStatement();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // H2 SQL Prepared Statement Example
+    private static void insertWithPreparedStatement() throws SQLException {
+        Connection connection = getDBConnection();
+        PreparedStatement selectPreparedStatement = null;
+
+        String SelectQuery = "select * from CATEGORIES";
+        try {
+            connection.setAutoCommit(false);
+
+            selectPreparedStatement = connection.prepareStatement(SelectQuery);
+            ResultSet rs = selectPreparedStatement.executeQuery();
+            System.out.println("H2 Database inserted through PreparedStatement");
+            while (rs.next()) {
+                System.out.println("Id "+rs.getInt("id")+" Name "+rs.getString("name"));
+            }
+            selectPreparedStatement.close();
+
+            connection.commit();
+        } catch (SQLException e) {
+            System.out.println("Exception Message " + e.getLocalizedMessage());
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            connection.close();
+        }
+    }
+
+    private static Connection getDBConnection() {
+        Connection dbConnection = null;
+        try {
+            Class.forName(DB_DRIVER);
         } catch (ClassNotFoundException e) {
-            throw new RuntimeException("Error loading JDBC driver! ", e);
+            System.out.println(e.getMessage());
         }
-    }
-
-    public ResultSet getResultSet(String tableName) throws SQLException {
-        Connection connection = DriverManager.getConnection("jdbc:sqlite:src/main/resources/kickstarter.db");
-        Statement statement = connection.createStatement();
-        statement.setQueryTimeout(30);
-        LOGGER.info("Connect DB.");
-        return statement.executeQuery("SELECT * FROM " + tableName);
-    }
-
-    public static ConnectDB connectDB;
-
-
-
-    public static void main(String[] args) throws SQLException {
-        List<String> result = new ArrayList<>();
-
-        ResultSet rs = connectDB.getResultSet("categories");
-
-        while (rs.next()) {
-            result.add(rs.getInt("id") + ") " + rs.getString("name"));
+        try {
+            dbConnection = DriverManager.getConnection(DB_CONNECTION, DB_USER, DB_PASSWORD);
+            return dbConnection;
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
         }
+        return dbConnection;
     }
-
-
 }
+
