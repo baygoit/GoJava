@@ -53,7 +53,7 @@ public class CategoryMenu {
             return null;
         }
 
-        Category category = CATEGORIES.get(categoryIndex - 1);
+        Category category = CATEGORIES.get(categoryIndex);
         IO.println("You selected category: " + category.getName());
         return category;
     }

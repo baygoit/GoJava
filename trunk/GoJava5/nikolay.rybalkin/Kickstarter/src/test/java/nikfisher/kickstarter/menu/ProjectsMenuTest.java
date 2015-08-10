@@ -1,7 +1,7 @@
 package nikfisher.kickstarter.menu;
 
 import nikfisher.kickstarter.Runner;
-import nikfisher.kickstarter.dao.InMemoryCategories;
+import nikfisher.kickstarter.dao.CategoriesDAO;
 import nikfisher.kickstarter.dao.InMemoryProjects;
 import nikfisher.kickstarter.dao.Projects;
 import nikfisher.kickstarter.model.Category;
@@ -17,7 +17,7 @@ import static org.mockito.Mockito.*;
 public class ProjectsMenuTest {
 
     @Mock
-    final InMemoryCategories CATEGORIES = new InMemoryCategories();
+    final CategoriesDAO CATEGORIES = new CategoriesDAO();
 
     @Test
     public void shouldCategoriesWhenHaveProjects() {

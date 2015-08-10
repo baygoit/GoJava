@@ -10,7 +10,8 @@ public interface Categories {
 
     List<String>  getCategories();
 
-    Category get(int index);
+    Category get(int id);
 
     int size();
+
 }

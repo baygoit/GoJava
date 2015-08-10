@@ -14,55 +14,21 @@ public class ConnectDB {
     private static final String DB_USER = "";
     private static final String DB_PASSWORD = "";
 
-
-
-
-    public static void main(String[] args) throws Exception {
-        try {
-            insertWithPreparedStatement();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    // H2 SQL Prepared Statement Example
-    private static void insertWithPreparedStatement() throws SQLException {
-        Connection connection = getDBConnection();
-        PreparedStatement selectPreparedStatement = null;
-
-        String SelectQuery = "select * from CATEGORIES";
-        try {
-            connection.setAutoCommit(false);
-
-            selectPreparedStatement = connection.prepareStatement(SelectQuery);
-            ResultSet rs = selectPreparedStatement.executeQuery();
-            System.out.println("H2 Database inserted through PreparedStatement");
-            while (rs.next()) {
-                System.out.println("Id "+rs.getInt("id")+" Name "+rs.getString("name"));
-            }
-            selectPreparedStatement.close();
-
-            connection.commit();
-        } catch (SQLException e) {
-            System.out.println("Exception Message " + e.getLocalizedMessage());
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            connection.close();
-        }
-    }
-
-    private static Connection getDBConnection() {
+    public static Connection getDBConnection() {
         Connection dbConnection = null;
         try {
             Class.forName(DB_DRIVER);
+            LOGGER.info("Successfully load DB driver");
         } catch (ClassNotFoundException e) {
+            LOGGER.info("Error load DB driver");
             System.out.println(e.getMessage());
         }
         try {
             dbConnection = DriverManager.getConnection(DB_CONNECTION, DB_USER, DB_PASSWORD);
+            LOGGER.info("Successfully connected to DB");
             return dbConnection;
         } catch (SQLException e) {
+            LOGGER.info("Error connect to DB");
             System.out.println(e.getMessage());
         }
         return dbConnection;

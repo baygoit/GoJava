@@ -1,6 +1,7 @@
 package nikfisher.kickstarter;
 
-import nikfisher.kickstarter.dao.InMemoryCategories;
+import nikfisher.kickstarter.dao.Categories;
+import nikfisher.kickstarter.dao.CategoriesDAO;
 import nikfisher.kickstarter.dao.InMemoryProjects;
 import nikfisher.kickstarter.model.QuoteGenerate;
 import nikfisher.kickstarter.streams.ConsoleIO;
@@ -15,6 +16,8 @@ public class Runner {
 
     final private ConsoleInterfaceIO IO;
     final private QuoteGenerate GENERATOR;
+    private Categories categories = new CategoriesDAO();
+
 
     private final static Logger LOGGER = LoggerFactory.getLogger(Runner.class);
 
@@ -26,7 +29,7 @@ public class Runner {
     public void run() {
 
         IO.println(GENERATOR.quoteGenerate());
-        View view = new View(IO, new InMemoryProjects(), new InMemoryCategories());
+        View view = new View(IO, new InMemoryProjects(), categories);
         view.createCategories();
         IO.println("Thank you for using our service!");
     }

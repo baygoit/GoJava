@@ -1,7 +1,7 @@
 package nikfisher.kickstarter.menu;
 
 import nikfisher.kickstarter.Runner;
-import nikfisher.kickstarter.dao.InMemoryCategories;
+import nikfisher.kickstarter.dao.CategoriesDAO;
 import nikfisher.kickstarter.dao.InMemoryProjects;
 import nikfisher.kickstarter.model.Category;
 import nikfisher.kickstarter.model.Project;
@@ -17,7 +17,7 @@ public class ProjectMenuTest{
     @Test
     public void shouldMenuWithProjectDetail() {
         //given
-        InMemoryCategories categories = new InMemoryCategories();
+        CategoriesDAO categories = new CategoriesDAO();
         Category category = new Category("category1");
         categories.add(category);
 
@@ -60,7 +60,7 @@ public class ProjectMenuTest{
     @Test
     public void shouldMenuWithProjectPayment() {
         //given
-        InMemoryCategories categories = new InMemoryCategories();
+        CategoriesDAO categories = new CategoriesDAO();
         Category category = new Category("category1");
         categories.add(category);
 
