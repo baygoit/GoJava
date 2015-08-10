@@ -1,6 +1,5 @@
 package tyomsky.kickstarter;
 
-import org.junit.experimental.categories.Categories;
 import tyomsky.kickstarter.common.DBConnector;
 import tyomsky.kickstarter.controller.*;
 import tyomsky.kickstarter.dao.*;
