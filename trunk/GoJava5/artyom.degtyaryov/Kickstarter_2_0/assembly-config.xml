@@ -25,14 +25,11 @@
     </dependencySets>
     <fileSets>
         <fileSet>
-            <outputDirectory>/conf</outputDirectory>
-            <directory>${basedir}/src/main/resources/conf</directory>
-        </fileSet>
-        <fileSet>
             <outputDirectory>/</outputDirectory>
             <directory>${basedir}/src/main/scripts</directory>
             <includes>
                 <include>start_ks.cmd</include>
+                <include>start_ks.sh</include>
             </includes>
         </fileSet>
     </fileSets>
