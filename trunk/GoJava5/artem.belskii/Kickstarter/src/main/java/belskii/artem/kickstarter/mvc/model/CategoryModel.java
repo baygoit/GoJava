@@ -3,10 +3,11 @@ package belskii.artem.kickstarter.mvc.model;
 import java.util.Map;
 
 import belskii.artem.kickstarter.dao.category.CategoryDao;
+import belskii.artem.kickstarter.dao.category.CategoryDaoImplFile;
 import belskii.artem.kickstarter.dao.category.CategoryDaoImplHardCoding;
 
 public class CategoryModel {
-	CategoryDao categoryDao = new CategoryDaoImplHardCoding();
+	CategoryDao categoryDao = new CategoryDaoImplFile();
 
 	public void addCategory(String categoryName) {
 		categoryDao.addCategory(categoryName);
