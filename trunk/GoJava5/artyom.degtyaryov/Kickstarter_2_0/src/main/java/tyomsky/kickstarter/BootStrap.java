@@ -1,5 +1,6 @@
 package tyomsky.kickstarter;
 
+import org.junit.experimental.categories.Categories;
 import tyomsky.kickstarter.common.DBConnector;
 import tyomsky.kickstarter.controller.*;
 import tyomsky.kickstarter.dao.*;
@@ -26,6 +27,7 @@ public class BootStrap {
         categories.add(new Category("Games"));
         categories.add(new Category("Music"));
         categories.add(new Category("Films"));
+//        CategoriesDAO categories = new CategoriesDAOFile("file/categories.txt");
 
         ProjectsDAO projects = new ProjectsDAOMemory();
         Project project1 = new Project("GTA 5", "5-th episode of epic game",

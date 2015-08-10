@@ -80,7 +80,12 @@ public class CategoriesDAOFile implements CategoriesDAO {
     }
 
     private File findOrCreateFile(String fileName) {
-        File result = new File(fileName);
+        ClassLoader classLoader = getClass().getClassLoader();
+        URL fileURL = classLoader.getResource(fileName);
+        if (fileURL == null) {
+            throw new RuntimeException(String.format("file %s, does not exists", fileName));
+        }
+        File result = new File(fileURL.getFile());
         if (!result.exists()) {
             try {
                 result.createNewFile();
