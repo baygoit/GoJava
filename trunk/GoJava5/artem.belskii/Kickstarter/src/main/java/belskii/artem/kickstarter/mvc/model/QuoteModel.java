@@ -1,10 +1,10 @@
 package belskii.artem.kickstarter.mvc.model;
 
 import belskii.artem.kickstarter.dao.quote.QuoteDao;
-import belskii.artem.kickstarter.dao.quote.QuoteDaoImplHardCoding;
+import belskii.artem.kickstarter.dao.quote.QuoteDaoImplHardFile;
 
 public class QuoteModel {
-	QuoteDao quoteDao = new QuoteDaoImplHardCoding();
+	QuoteDao quoteDao = new QuoteDaoImplHardFile();
 	
 	public String getRandomQuote(){
 		return quoteDao.getRandomQuote();

@@ -1,25 +1,32 @@
-package belskii.artem.kickstarter.dao.category;
+package belskii.artem.kickstarter.dao.quote;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.Random;
 
-public class CategoryDaoImplFile implements CategoryDao {
-	String FILE_PATH="C:\\temp\\categories.txt";
+public class QuoteDaoImplHardFile implements QuoteDao {
+	String FILE_PATH="C:\\temp\\quotes.txt";
 
+	@Override
+	public String getRandomQuote() {
+		Random random = new Random();
+		int randomId = random.nextInt(this.getQuoteList().size());
+		return this.getQuoteList().get(randomId);
+	}
 
-	public void addCategory(String categoryInfo) {
+	@Override
+	public void addQuote(String text) {
 		 try(BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH, true)))
 	        {
 	           
-	           	int index = this.getCategoryList().size();
+	           	int index = this.getQuoteList().size();
 	            writer.write(String.valueOf(index));
 	            writer.append(";");
-	            writer.append(categoryInfo);
+	            writer.append(text);
 	            writer.append('\n');
 	        }
 	        catch(IOException ex){
@@ -28,28 +35,22 @@ public class CategoryDaoImplFile implements CategoryDao {
 	        } 
 	}
 
-	public Map<Integer, String> getCategoryList() {
-		HashMap<Integer, String> categoryList = new HashMap<Integer, String>();
-		
+	private ArrayList<String> getQuoteList() {
+		ArrayList<String> quotesList = new ArrayList<String>();
 	      try(BufferedReader reader = new BufferedReader(new FileReader(FILE_PATH)))
 	        {
 	    	  	for(String line; (line = reader.readLine()) != null; ) {
 	    	  		String splittedString [] = line.split(";");
-	    	  		int index = new Integer(splittedString[0]);
-	    	  		String categoryName=splittedString[1];
-	    	  		categoryList.put(index, categoryName);
+	    	  		String quote=splittedString[1];
+	    	  		quotesList.add(quote);
 	    	  	}
 	        }
 	        catch(IOException ex){
 	            
 	            System.out.println(ex.getMessage());
 	        }   
-	      return categoryList;
-	}
 
-	public String getCategoryNameById(int id) {
-		String answer=this.getCategoryList().get(id);
-		return answer;
+		return quotesList;
 	}
 
 }
