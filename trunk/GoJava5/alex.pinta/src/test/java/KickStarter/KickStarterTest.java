@@ -25,12 +25,12 @@ public class KickStarterTest {
     public void init() throws Exception{
         MockitoAnnotations.initMocks(this);
     }
-    @Mock
-    Input input;
-    @Test
-    public void testRun() throws Exception {
-        KickStarter kickStarter = new KickStarter(System.in, System.out);
-        kickStarter.run();
-        verify(dispatcher).startApplication(isA(ManualInput.class));
-    }
+//    @Mock
+//    Input input;
+//    @Test
+//    public void testRun() throws Exception {
+//        KickStarter kickStarter = new KickStarter(System.in, System.out);
+//        kickStarter.run();
+//        verify(dispatcher).startApplication(isA(ManualInput.class));
+//    }
 }
