@@ -12,23 +12,17 @@ import java.util.List;
 
 public class DbFaqDao implements FaqDao {
     private DbDataSourceProvider dbDataSourceProvider;
+    private FaqSqlProvider sqlProvider;
 
-    public DbFaqDao(DbDataSourceProvider dbDataSourceProvider) {
+    public DbFaqDao(DbDataSourceProvider dbDataSourceProvider, FaqSqlProvider sqlProvider) {
         this.dbDataSourceProvider = dbDataSourceProvider;
+        this.sqlProvider = sqlProvider;
     }
 
     @Override
     public void add(int projectId, Faq faq) {
-        String sql = "INSERT INTO faq " +
-                "(question, answer, project_id) " +
-                "VALUES " +
-                "(?, ?, ?) ";
-        try (Connection connection = dbDataSourceProvider.getConnection();
-             PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.setString(1, faq.getQuestion());
-            statement.setString(2, faq.getAnswer());
-            statement.setInt(3, projectId);
-            statement.executeUpdate();
+        try (Connection connection = dbDataSourceProvider.getConnection()) {
+            add(projectId, faq, connection);
             connection.commit();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -37,13 +31,7 @@ public class DbFaqDao implements FaqDao {
 
     List<Faq> fetch(int projectId, Connection connection) throws SQLException {
         List<Faq> result = new ArrayList<>();
-        String sql = "SELECT f.faq_id AS id, " +
-                "f.question AS question, " +
-                "f.answer AS answer " +
-                "FROM faq f " +
-                "WHERE f.project_id = ? " +
-                "ORDER BY f.faq_id";
-        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+        try (PreparedStatement statement = connection.prepareStatement(sqlProvider.get4Fetch())) {
             statement.setInt(1, projectId);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
@@ -53,5 +41,27 @@ public class DbFaqDao implements FaqDao {
             }
         }
         return result;
+    }
+
+    void add(int projectId, Faq faq, Connection connection) throws SQLException {
+        try (PreparedStatement statement = connection.prepareStatement(sqlProvider.get4Add(), new String[]{"faq_id"})) {
+            statement.setString(1, faq.getQuestion());
+            statement.setString(2, faq.getAnswer());
+            statement.setInt(3, projectId);
+            statement.executeUpdate();
+            try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    faq.setId(generatedKeys.getInt(1));
+                } else {
+                    throw new SQLException("Can't receive faq ID.");
+                }
+            }
+        }
+    }
+
+    void addList(int projectId, List<Faq> faqs, Connection connection) throws SQLException {
+        for (Faq faq : faqs) {
+            add(projectId, faq, connection);
+        }
     }
 }

@@ -5,43 +5,41 @@ import ua.goit.kyrychok.kickstarter.dao.FaqDao;
 import ua.goit.kyrychok.kickstarter.dao.ProjectDao;
 import ua.goit.kyrychok.kickstarter.dao.RewardDao;
 import ua.goit.kyrychok.kickstarter.dao.database.*;
+import ua.goit.kyrychok.kickstarter.dao.database.factory.AbstractSqlProviderFactory;
 
 public class DbDaoFactory implements AbstractDaoFactory {
-    private DbDataSourceProvider dataSourceProvider;
+    private DbCategoryDao dbCategoryDao;
+    private DbProjectDao dbProjectDao;
+    private DbProjectEventDao dbProjectEventDao;
+    private DbRewardDao dbRewardDao;
+    private DbFaqDao dbFaqDao;
 
-    public DbDaoFactory(DbDataSourceProvider dataSourceProvider) {
-        this.dataSourceProvider = dataSourceProvider;
-    }
-
-    private DbFaqDao createCurrentFaq() {
-        return new DbFaqDao(dataSourceProvider);
-    }
-
-    private DbProjectDao createCurrentProject() {
-        DbProjectDao result = new DbProjectDao(dataSourceProvider,
-                createCurrentFaq());
-        return result;
+    public DbDaoFactory(DbDataSourceProvider dataSourceProvider, AbstractSqlProviderFactory sqlProviderFactory) {
+        dbFaqDao = new DbFaqDao(dataSourceProvider, sqlProviderFactory.createFaqSqlProvider());
+        dbRewardDao = new DbRewardDao(dataSourceProvider, sqlProviderFactory.createRewardSqlProvider());
+        dbProjectEventDao = new DbProjectEventDao(sqlProviderFactory.createProjectEventSqlProvider());
+        dbProjectDao = new DbProjectDao(dataSourceProvider, dbFaqDao, dbRewardDao, dbProjectEventDao, sqlProviderFactory.createProjectSqlProvider());
+        dbCategoryDao = new DbCategoryDao(dataSourceProvider, dbProjectDao, sqlProviderFactory.createCategorySqlProvider());
     }
 
     @Override
     public CategoryDao createCategory() {
-        DbCategoryDao result = new DbCategoryDao(dataSourceProvider, createCurrentProject());
-        return result;
+        return dbCategoryDao;
     }
 
     @Override
     public ProjectDao createProject() {
-        return createCurrentProject();
+        return dbProjectDao;
     }
 
     @Override
     public RewardDao createReward() {
-        return new DbRewardDao(dataSourceProvider);
+        return dbRewardDao;
     }
 
     @Override
     public FaqDao createFaq() {
-        return createCurrentFaq();
+        return dbFaqDao;
     }
 
 }

@@ -16,7 +16,8 @@ public class MainMenu {
         output.writeLine("Choose storage type:");
         output.writeLine("[1]. Memory storage");
         output.writeLine("[2]. XML storage");
-        output.writeLine("[3]. Database storage");
+        output.writeLine("[3]. Oracle DBMS");
+        output.writeLine("[4]. PostgreSQL DBMS");
         output.writeLine("Your choice(otherwise - exit):");
         read(input);
     }
@@ -29,6 +30,8 @@ public class MainMenu {
             daoFactoryType = DaoFactoryType.XML;
         } else if (inputValue.equals("3")) {
             daoFactoryType = DaoFactoryType.DATABASE;
+        } else if (inputValue.equals("4")) {
+            daoFactoryType = DaoFactoryType.POSTGRESQL;
         } else {
             input.close();
         }

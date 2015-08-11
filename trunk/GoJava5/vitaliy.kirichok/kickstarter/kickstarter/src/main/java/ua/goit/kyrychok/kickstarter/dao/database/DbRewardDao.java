@@ -12,22 +12,18 @@ import java.util.List;
 
 public class DbRewardDao implements RewardDao {
     private DbDataSourceProvider dbDataSourceProvider;
+    private RewardSqlProvider sqlProvider;
 
-    public DbRewardDao(DbDataSourceProvider dbDataSourceProvider) {
+    public DbRewardDao(DbDataSourceProvider dbDataSourceProvider, RewardSqlProvider sqlProvider) {
         this.dbDataSourceProvider = dbDataSourceProvider;
+        this.sqlProvider = sqlProvider;
     }
 
     @Override
     public List<Reward> fetch(int projectId) {
         List<Reward> result = new ArrayList<>();
-        String sql = "SELECT r.reward_id AS id, " +
-                "r.amount AS amount, " +
-                "r.description AS description " +
-                "FROM reward r " +
-                "WHERE r.project_id = ? " +
-                "ORDER BY r.amount, r.description";
         try (Connection connection = dbDataSourceProvider.getConnection();
-             PreparedStatement statement = connection.prepareStatement(sql)) {
+             PreparedStatement statement = connection.prepareStatement(sqlProvider.get4Fetch())) {
             statement.setInt(1, projectId);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
@@ -45,16 +41,11 @@ public class DbRewardDao implements RewardDao {
     @Override
     public Reward load(int id) {
         Reward result = null;
-        String sql = "SELECT r.reward_id AS id, " +
-                "r.amount AS amount, " +
-                "r.description AS description " +
-                "FROM reward r " +
-                "WHERE r.reward_id = ? ";
         try (Connection connection = dbDataSourceProvider.getConnection();
-             PreparedStatement statement = connection.prepareStatement(sql)) {
+             PreparedStatement statement = connection.prepareStatement(sqlProvider.get4Load())) {
             statement.setInt(1, id);
             ResultSet resultSet = statement.executeQuery();
-            while (resultSet.next()) {
+            if (resultSet.next()) {
                 result = new Reward(resultSet.getInt("amount"), resultSet.getString("description"));
                 result.setId(resultSet.getInt("id"));
             }
@@ -65,4 +56,25 @@ public class DbRewardDao implements RewardDao {
         return result;
     }
 
+    void add(int projectId, Reward reward, Connection connection) throws SQLException {
+        try (PreparedStatement statement = connection.prepareStatement(sqlProvider.get4Add(), new String[]{"reward_id"})) {
+            statement.setInt(1, reward.getAmount());
+            statement.setString(2, reward.getDescription());
+            statement.setInt(3, projectId);
+            statement.executeUpdate();
+            try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    reward.setId(generatedKeys.getInt(1));
+                } else {
+                    throw new SQLException("Can't receive reward ID.");
+                }
+            }
+        }
+    }
+
+    void addList(int projectId, List<Reward> rewards, Connection connection) throws SQLException {
+        for (Reward reward : rewards) {
+            add(projectId, reward, connection);
+        }
+    }
 }

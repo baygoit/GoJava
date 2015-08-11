@@ -1,6 +1,9 @@
 package ua.goit.kyrychok.kickstarter;
 
-import ua.goit.kyrychok.kickstarter.dao.database.OraDbDataSourceProvider;
+import ua.goit.kyrychok.kickstarter.dao.database.datasource_provider.OraDbDataSourceProvider;
+import ua.goit.kyrychok.kickstarter.dao.database.datasource_provider.PsqlDataSourceProvider;
+import ua.goit.kyrychok.kickstarter.dao.database.factory.OraSqlProviderFactory;
+import ua.goit.kyrychok.kickstarter.dao.database.factory.PsqlSqlProviderFactory;
 import ua.goit.kyrychok.kickstarter.dao.factory.AbstractDaoFactory;
 import ua.goit.kyrychok.kickstarter.dao.factory.DbDaoFactory;
 import ua.goit.kyrychok.kickstarter.dao.factory.MemoryDaoFactory;
@@ -21,7 +24,7 @@ public class KickStarter {
         this.output = output;
     }
 
-    private AbstractDaoFactory createDbDaoFactory(Properties properties) {
+    private AbstractDaoFactory createOraDbDaoFactory(Properties properties) {
         OraDbDataSourceProvider oraDbDataSourceProvider = new OraDbDataSourceProvider();
         try {
             oraDbDataSourceProvider.init(properties.getProperty("ora.url"),
@@ -29,7 +32,31 @@ public class KickStarter {
         } catch (SQLException e) {
             throw new RuntimeException("Can't initialize database", e);
         }
-        return new DbDaoFactory(oraDbDataSourceProvider);
+        return new DbDaoFactory(oraDbDataSourceProvider, new OraSqlProviderFactory());
+    }
+
+    private AbstractDaoFactory createPsqlDbDaoFactory(Properties properties) {
+        PsqlDataSourceProvider dataSourceProvider = new PsqlDataSourceProvider();
+        try {
+            dataSourceProvider.init(properties.getProperty("psql.url"),
+                    properties.getProperty("psql.user"), properties.getProperty("psql.password"));
+        } catch (SQLException e) {
+            throw new RuntimeException("Can't initialize database", e);
+        }
+        return new DbDaoFactory(dataSourceProvider, new PsqlSqlProviderFactory());
+    }
+
+    private AbstractDaoFactory createDbDaoFactory(DaoFactoryType factoryType, Properties properties) {
+        AbstractDaoFactory result = null;
+        switch (factoryType) {
+            case DATABASE:
+                result = createOraDbDaoFactory(properties);
+                break;
+            case POSTGRESQL:
+                result = createPsqlDbDaoFactory(properties);
+                break;
+        }
+        return result;
     }
 
     private AbstractDaoFactory createMemoryDaoFactory() {
@@ -54,14 +81,15 @@ public class KickStarter {
             case XML:
                 return createXmlDaoFactory("src/main/resources/data.xml", "src/main/resources/schema.xsd");
             case DATABASE:
+            case POSTGRESQL:
                 Properties properties = new Properties();
-                String fileName = "src/main/resources/database.properties";
+                String fileName = "src/main/resources/conf/database.properties";
                 try {
                     properties.load(new FileInputStream(fileName));
                 } catch (IOException e) {
                     throw new RuntimeException("Can't read properties file " + fileName, e);
                 }
-                return createDbDaoFactory(properties);
+                return createDbDaoFactory(factoryType, properties);
             default:
                 throw new RuntimeException("Not implemented factory " + factoryType);
         }

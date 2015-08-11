@@ -1,7 +1,8 @@
-package ua.goit.kyrychok.kickstarter.dao.database;
+package ua.goit.kyrychok.kickstarter.dao.database.datasource_provider;
 
 import oracle.ucp.jdbc.PoolDataSource;
 import oracle.ucp.jdbc.PoolDataSourceFactory;
+import ua.goit.kyrychok.kickstarter.dao.database.DbDataSourceProvider;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -33,8 +34,7 @@ public class OraDbDataSourceProvider implements DbDataSourceProvider {
         dataSource.setURL(url);
         dataSource.setUser(userName);
         dataSource.setPassword(userPassword);
-        //dataSource.setInitialPoolSize(1);
-        //dataSource.setMaxPoolSize(5);
+        dataSource.setMaxPoolSize(5);
         testConnection();
     }
 }

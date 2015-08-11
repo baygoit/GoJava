@@ -26,4 +26,9 @@ public class MemoryCategoryDao implements CategoryDao {
     public Category get(int id) {
         return storage.getCategory(id);
     }
+
+    @Override
+    public void add(Category category) {
+        //TODO need implementation
+    }
 }
