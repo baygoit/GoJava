@@ -39,8 +39,8 @@ public class CategoryDaoImplFile implements CategoryDao {
 	    	  		int index = new Integer(splittedString[0]);
 	    	  		String categoryName=splittedString[1];
 	    	  		categoryList.put(index, categoryName);
-	    	  		reader.close();
 	    	  	}
+    	  		reader.close();
 	        }
 	        catch(IOException ex){
 	            
