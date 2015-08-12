@@ -7,6 +7,9 @@
     <groupId>com.tyomsky</groupId>
     <artifactId>com.tyomsky.kickstarter</artifactId>
     <version>1.0-SNAPSHOT</version>
+
+    <packaging>war</packaging>
+
     <build>
         <plugins>
             <plugin>
@@ -82,6 +85,29 @@
                     </filesets>
                 </configuration>
             </plugin>
+
+            <plugin>
+                <groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat7-maven-plugin</artifactId>
+                <version>2.1</version>
+                <executions>
+                    <execution>
+                        <id>tomcat-run</id>
+                        <goals>
+                            <goal>exec-war-only</goal>
+                        </goals>
+                        <phase>package</phase>
+                        <configuration>
+                            <path>/</path>
+                            <!-- optional only if you want to use a preconfigured server.xml file -->
+                            <serverXml>src/main/tomcatconf/server.xml</serverXml>
+                            <!-- optional values which can be configurable -->
+                            <attachArtifactClassifier>exec-war</attachArtifactClassifier>
+                            <attachArtifactClassifierType>jar</attachArtifactClassifierType>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
 
@@ -102,6 +128,11 @@
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
             <version>1.4.187</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+            <version>2.5</version>
         </dependency>
     </dependencies>
 </project>

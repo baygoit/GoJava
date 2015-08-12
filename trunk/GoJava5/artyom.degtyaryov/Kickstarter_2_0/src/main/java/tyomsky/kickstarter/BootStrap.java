@@ -18,6 +18,7 @@ public class BootStrap {
 
     public static void main(String[] args) {
 
+
         initializeDB();
 
         ConsoleIO console = new ConsoleIO();
