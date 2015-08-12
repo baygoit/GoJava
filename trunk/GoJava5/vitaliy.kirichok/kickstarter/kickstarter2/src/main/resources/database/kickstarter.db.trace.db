@@ -1,0 +1,240 @@
+08-11 15:41:01 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Столбец "dfsdf" не найден
+Column "dfsdf" not found; SQL statement:
+insert into category(name) values("dfsdf") [42122-176]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:344)
+	at org.h2.message.DbException.get(DbException.java:178)
+	at org.h2.message.DbException.get(DbException.java:154)
+	at org.h2.expression.ExpressionColumn.optimize(ExpressionColumn.java:148)
+	at org.h2.command.dml.Insert.prepare(Insert.java:271)
+	at org.h2.command.Parser.prepareCommand(Parser.java:248)
+	at org.h2.engine.Session.prepareLocal(Session.java:442)
+	at org.h2.engine.Session.prepareCommand(Session.java:384)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1188)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:172)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:160)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1391)
+	at org.h2.server.web.WebApp.query(WebApp.java:1064)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1026)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1013)
+	at org.h2.server.web.WebThread.process(WebThread.java:168)
+	at org.h2.server.web.WebThread.run(WebThread.java:94)
+	at java.lang.Thread.run(Unknown Source)
+08-11 15:43:13 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Ошибка преобразования данных при конвертации "'' (PROJECT: PROJECT_ID BIGINT DEFAULT (NEXT VALUE FOR PUBLIC.SYSTEM_SEQUENCE_1C82A01B_111F_4A01_9313_9881C2A92142) NOT NULL NULL_TO_DEFAULT SEQUENCE PUBLIC.SYSTEM_SEQUENCE_1C82A01B_111F_4A01_9313_9881C2A92142)"
+Data conversion error converting "'' (PROJECT: PROJECT_ID BIGINT DEFAULT (NEXT VALUE FOR PUBLIC.SYSTEM_SEQUENCE_1C82A01B_111F_4A01_9313_9881C2A92142) NOT NULL NULL_TO_DEFAULT SEQUENCE PUBLIC.SYSTEM_SEQUENCE_1C82A01B_111F_4A01_9313_9881C2A92142)"; SQL statement:
+INSERT INTO "PUBLIC"."PROJECT"("PROJECT_ID","NAME","DESCRIPTION","GOAL","BALANCE","CREATE_DATE","DEADLINE_DATE","DEMO_LINK","CATEGORY_ID")VALUES(?,?,?,?,?,?,?,?,?) -- (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9) [22018-176]
+08-11 15:43:13 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Ошибка преобразования данных при конвертации "'' (PROJECT: PROJECT_ID BIGINT DEFAULT (NEXT VALUE FOR PUBLIC.SYSTEM_SEQUENCE_1C82A01B_111F_4A01_9313_9881C2A92142) NOT NULL NULL_TO_DEFAULT SEQUENCE PUBLIC.SYSTEM_SEQUENCE_1C82A01B_111F_4A01_9313_9881C2A92142)"
+Data conversion error converting "'' (PROJECT: PROJECT_ID BIGINT DEFAULT (NEXT VALUE FOR PUBLIC.SYSTEM_SEQUENCE_1C82A01B_111F_4A01_9313_9881C2A92142) NOT NULL NULL_TO_DEFAULT SEQUENCE PUBLIC.SYSTEM_SEQUENCE_1C82A01B_111F_4A01_9313_9881C2A92142)"; SQL statement:
+INSERT INTO "PUBLIC"."PROJECT"("PROJECT_ID","NAME","DESCRIPTION","GOAL","BALANCE","CREATE_DATE","DEADLINE_DATE","DEMO_LINK","CATEGORY_ID")VALUES(?,?,?,?,?,?,?,?,?) -- (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9) [22018-176]
+08-11 15:43:54 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Ошибка преобразования данных при конвертации "'' (PROJECT: PROJECT_ID BIGINT DEFAULT (NEXT VALUE FOR PUBLIC.SYSTEM_SEQUENCE_1C82A01B_111F_4A01_9313_9881C2A92142) NOT NULL NULL_TO_DEFAULT SEQUENCE PUBLIC.SYSTEM_SEQUENCE_1C82A01B_111F_4A01_9313_9881C2A92142)"
+Data conversion error converting "'' (PROJECT: PROJECT_ID BIGINT DEFAULT (NEXT VALUE FOR PUBLIC.SYSTEM_SEQUENCE_1C82A01B_111F_4A01_9313_9881C2A92142) NOT NULL NULL_TO_DEFAULT SEQUENCE PUBLIC.SYSTEM_SEQUENCE_1C82A01B_111F_4A01_9313_9881C2A92142)"; SQL statement:
+INSERT INTO "PUBLIC"."PROJECT"("PROJECT_ID","NAME","DESCRIPTION","GOAL","BALANCE","CREATE_DATE","DEADLINE_DATE","DEMO_LINK","CATEGORY_ID")VALUES(?,?,?,?,?,?,?,?,?) -- (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9) [22018-176]
+08-11 15:43:54 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Ошибка преобразования данных при конвертации "'' (PROJECT: PROJECT_ID BIGINT DEFAULT (NEXT VALUE FOR PUBLIC.SYSTEM_SEQUENCE_1C82A01B_111F_4A01_9313_9881C2A92142) NOT NULL NULL_TO_DEFAULT SEQUENCE PUBLIC.SYSTEM_SEQUENCE_1C82A01B_111F_4A01_9313_9881C2A92142)"
+Data conversion error converting "'' (PROJECT: PROJECT_ID BIGINT DEFAULT (NEXT VALUE FOR PUBLIC.SYSTEM_SEQUENCE_1C82A01B_111F_4A01_9313_9881C2A92142) NOT NULL NULL_TO_DEFAULT SEQUENCE PUBLIC.SYSTEM_SEQUENCE_1C82A01B_111F_4A01_9313_9881C2A92142)"; SQL statement:
+INSERT INTO "PUBLIC"."PROJECT"("PROJECT_ID","NAME","DESCRIPTION","GOAL","BALANCE","CREATE_DATE","DEADLINE_DATE","DEMO_LINK","CATEGORY_ID")VALUES(?,?,?,?,?,?,?,?,?) -- (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9) [22018-176]
+08-11 15:45:50 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Невозможно преобразование строки "1990" в тип "DATE"
+Cannot parse "DATE" constant "1990"; SQL statement:
+insert into project(name, goal, create_date, deadline_date, category_id) 
+values('sdfg', 100, 2010-10-10, 2010-10-12, 1) -- ('sdfg', 100, 1990, 1988, 1) [22007-176]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:344)
+	at org.h2.message.DbException.get(DbException.java:167)
+	at org.h2.value.ValueDate.parse(ValueDate.java:71)
+	at org.h2.value.Value.convertTo(Value.java:860)
+	at org.h2.table.Column.convert(Column.java:151)
+	at org.h2.command.dml.Insert.insertRows(Insert.java:144)
+	at org.h2.command.dml.Insert.update(Insert.java:115)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:79)
+	at org.h2.command.Command.executeUpdate(Command.java:254)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:186)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:160)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1391)
+	at org.h2.server.web.WebApp.query(WebApp.java:1064)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1026)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1013)
+	at org.h2.server.web.WebThread.process(WebThread.java:168)
+	at org.h2.server.web.WebThread.run(WebThread.java:94)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: java.lang.IllegalArgumentException: 1990
+	at org.h2.util.DateTimeUtils.parseDateValue(DateTimeUtils.java:273)
+	at org.h2.value.ValueDate.parse(ValueDate.java:69)
+	... 15 more
+08-11 15:46:22 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Невозможно преобразование строки "2010-12" в тип "DATE"
+Cannot parse "DATE" constant "2010-12"; SQL statement:
+insert into project(name, goal, create_date, deadline_date, category_id) 
+values('sdfg', 100, '2010-10-10', '2010-12', 1) -- ('sdfg', 100, '2010-10-10', '2010-12', 1) [22007-176]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:344)
+	at org.h2.message.DbException.get(DbException.java:167)
+	at org.h2.value.ValueDate.parse(ValueDate.java:71)
+	at org.h2.value.Value.convertTo(Value.java:860)
+	at org.h2.table.Column.convert(Column.java:151)
+	at org.h2.command.dml.Insert.insertRows(Insert.java:144)
+	at org.h2.command.dml.Insert.update(Insert.java:115)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:79)
+	at org.h2.command.Command.executeUpdate(Command.java:254)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:186)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:160)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1391)
+	at org.h2.server.web.WebApp.query(WebApp.java:1064)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1026)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1013)
+	at org.h2.server.web.WebThread.process(WebThread.java:168)
+	at org.h2.server.web.WebThread.run(WebThread.java:94)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: java.lang.IllegalArgumentException: 2010-12
+	at org.h2.util.DateTimeUtils.parseDateValue(DateTimeUtils.java:273)
+	at org.h2.value.ValueDate.parse(ValueDate.java:69)
+	... 15 more
+08-11 15:47:28 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Ошибка преобразования данных при конвертации "'' (PROJECT: PROJECT_ID BIGINT DEFAULT (NEXT VALUE FOR PUBLIC.SYSTEM_SEQUENCE_1C82A01B_111F_4A01_9313_9881C2A92142) NOT NULL NULL_TO_DEFAULT SEQUENCE PUBLIC.SYSTEM_SEQUENCE_1C82A01B_111F_4A01_9313_9881C2A92142)"
+Data conversion error converting "'' (PROJECT: PROJECT_ID BIGINT DEFAULT (NEXT VALUE FOR PUBLIC.SYSTEM_SEQUENCE_1C82A01B_111F_4A01_9313_9881C2A92142) NOT NULL NULL_TO_DEFAULT SEQUENCE PUBLIC.SYSTEM_SEQUENCE_1C82A01B_111F_4A01_9313_9881C2A92142)"; SQL statement:
+INSERT INTO "PUBLIC"."PROJECT"("PROJECT_ID","NAME","DESCRIPTION","GOAL","BALANCE","CREATE_DATE","DEADLINE_DATE","DEMO_LINK","CATEGORY_ID")VALUES(?,?,?,?,?,?,?,?,?) -- (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9) [22018-176]
+08-11 15:47:28 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Ошибка преобразования данных при конвертации "'' (PROJECT: PROJECT_ID BIGINT DEFAULT (NEXT VALUE FOR PUBLIC.SYSTEM_SEQUENCE_1C82A01B_111F_4A01_9313_9881C2A92142) NOT NULL NULL_TO_DEFAULT SEQUENCE PUBLIC.SYSTEM_SEQUENCE_1C82A01B_111F_4A01_9313_9881C2A92142)"
+Data conversion error converting "'' (PROJECT: PROJECT_ID BIGINT DEFAULT (NEXT VALUE FOR PUBLIC.SYSTEM_SEQUENCE_1C82A01B_111F_4A01_9313_9881C2A92142) NOT NULL NULL_TO_DEFAULT SEQUENCE PUBLIC.SYSTEM_SEQUENCE_1C82A01B_111F_4A01_9313_9881C2A92142)"; SQL statement:
+INSERT INTO "PUBLIC"."PROJECT"("PROJECT_ID","NAME","DESCRIPTION","GOAL","BALANCE","CREATE_DATE","DEADLINE_DATE","DEMO_LINK","CATEGORY_ID")VALUES(?,?,?,?,?,?,?,?,?) -- (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9) [22018-176]
+08-11 16:00:13 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Функция "TO_DATE" не найдена
+Function "TO_DATE" not found; SQL statement:
+insert into PROJECT (project_id, name, description, goal, balance, create_date, deadline_date, demo_link, category_id)
+values (1, 'Project1 in category1', 'this is description', 30000, 18250, to_date('16-07-2015', 'dd-mm-yyyy'), to_date('30-07-2015', 'dd-mm-yyyy'), null, 1) [90022-176]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:344)
+	at org.h2.message.DbException.get(DbException.java:178)
+	at org.h2.message.DbException.get(DbException.java:154)
+	at org.h2.command.Parser.readJavaFunction(Parser.java:2326)
+	at org.h2.command.Parser.readFunction(Parser.java:2378)
+	at org.h2.command.Parser.readTerm(Parser.java:2712)
+	at org.h2.command.Parser.readFactor(Parser.java:2244)
+	at org.h2.command.Parser.readSum(Parser.java:2231)
+	at org.h2.command.Parser.readConcat(Parser.java:2201)
+	at org.h2.command.Parser.readCondition(Parser.java:2051)
+	at org.h2.command.Parser.readAnd(Parser.java:2023)
+	at org.h2.command.Parser.readExpression(Parser.java:2015)
+	at org.h2.command.Parser.parseInsert(Parser.java:1055)
+	at org.h2.command.Parser.parsePrepared(Parser.java:402)
+	at org.h2.command.Parser.parse(Parser.java:306)
+	at org.h2.command.Parser.parse(Parser.java:278)
+	at org.h2.command.Parser.prepareCommand(Parser.java:243)
+	at org.h2.engine.Session.prepareLocal(Session.java:442)
+	at org.h2.engine.Session.prepareCommand(Session.java:384)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1188)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:172)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:160)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1391)
+	at org.h2.server.web.WebApp.query(WebApp.java:1064)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1026)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1013)
+	at org.h2.server.web.WebThread.process(WebThread.java:168)
+	at org.h2.server.web.WebThread.run(WebThread.java:94)
+	at java.lang.Thread.run(Unknown Source)
+08-11 16:00:13 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Функция "TO_DATE" не найдена
+Function "TO_DATE" not found; SQL statement:
+insert into PROJECT (project_id, name, description, goal, balance, create_date, deadline_date, demo_link, category_id)
+values (2, 'Project2 in category 1', 'this is description', 3256, 1, to_date('08-07-2015', 'dd-mm-yyyy'), to_date('06-08-2015', 'dd-mm-yyyy'), 'http://stackoverflow.com/', 1) [90022-176]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:344)
+	at org.h2.message.DbException.get(DbException.java:178)
+	at org.h2.message.DbException.get(DbException.java:154)
+	at org.h2.command.Parser.readJavaFunction(Parser.java:2326)
+	at org.h2.command.Parser.readFunction(Parser.java:2378)
+	at org.h2.command.Parser.readTerm(Parser.java:2712)
+	at org.h2.command.Parser.readFactor(Parser.java:2244)
+	at org.h2.command.Parser.readSum(Parser.java:2231)
+	at org.h2.command.Parser.readConcat(Parser.java:2201)
+	at org.h2.command.Parser.readCondition(Parser.java:2051)
+	at org.h2.command.Parser.readAnd(Parser.java:2023)
+	at org.h2.command.Parser.readExpression(Parser.java:2015)
+	at org.h2.command.Parser.parseInsert(Parser.java:1055)
+	at org.h2.command.Parser.parsePrepared(Parser.java:402)
+	at org.h2.command.Parser.parse(Parser.java:306)
+	at org.h2.command.Parser.parse(Parser.java:278)
+	at org.h2.command.Parser.prepareCommand(Parser.java:243)
+	at org.h2.engine.Session.prepareLocal(Session.java:442)
+	at org.h2.engine.Session.prepareCommand(Session.java:384)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1188)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:172)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:160)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1391)
+	at org.h2.server.web.WebApp.query(WebApp.java:1064)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1026)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1013)
+	at org.h2.server.web.WebThread.process(WebThread.java:168)
+	at org.h2.server.web.WebThread.run(WebThread.java:94)
+	at java.lang.Thread.run(Unknown Source)
+08-11 16:02:21 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Функция "TO_DATE" не найдена
+Function "TO_DATE" not found; SQL statement:
+insert into PROJECT_EVENT (project_event_id, event_date, message, project_id)
+values (1, to_date('22-07-2015', 'dd-mm-yyyy'), 'Thank you', 1) [90022-176]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:344)
+	at org.h2.message.DbException.get(DbException.java:178)
+	at org.h2.message.DbException.get(DbException.java:154)
+	at org.h2.command.Parser.readJavaFunction(Parser.java:2326)
+	at org.h2.command.Parser.readFunction(Parser.java:2378)
+	at org.h2.command.Parser.readTerm(Parser.java:2712)
+	at org.h2.command.Parser.readFactor(Parser.java:2244)
+	at org.h2.command.Parser.readSum(Parser.java:2231)
+	at org.h2.command.Parser.readConcat(Parser.java:2201)
+	at org.h2.command.Parser.readCondition(Parser.java:2051)
+	at org.h2.command.Parser.readAnd(Parser.java:2023)
+	at org.h2.command.Parser.readExpression(Parser.java:2015)
+	at org.h2.command.Parser.parseInsert(Parser.java:1055)
+	at org.h2.command.Parser.parsePrepared(Parser.java:402)
+	at org.h2.command.Parser.parse(Parser.java:306)
+	at org.h2.command.Parser.parse(Parser.java:278)
+	at org.h2.command.Parser.prepareCommand(Parser.java:243)
+	at org.h2.engine.Session.prepareLocal(Session.java:442)
+	at org.h2.engine.Session.prepareCommand(Session.java:384)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1188)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:172)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:160)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1391)
+	at org.h2.server.web.WebApp.query(WebApp.java:1064)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1026)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1013)
+	at org.h2.server.web.WebThread.process(WebThread.java:168)
+	at org.h2.server.web.WebThread.run(WebThread.java:94)
+	at java.lang.Thread.run(Unknown Source)
+08-11 16:02:21 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Функция "TO_DATE" не найдена
+Function "TO_DATE" not found; SQL statement:
+insert into PROJECT_EVENT (project_event_id, event_date, message, project_id)
+values (2, to_date('23-07-2015', 'dd-mm-yyyy'), 'We are started', 1) [90022-176]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:344)
+	at org.h2.message.DbException.get(DbException.java:178)
+	at org.h2.message.DbException.get(DbException.java:154)
+	at org.h2.command.Parser.readJavaFunction(Parser.java:2326)
+	at org.h2.command.Parser.readFunction(Parser.java:2378)
+	at org.h2.command.Parser.readTerm(Parser.java:2712)
+	at org.h2.command.Parser.readFactor(Parser.java:2244)
+	at org.h2.command.Parser.readSum(Parser.java:2231)
+	at org.h2.command.Parser.readConcat(Parser.java:2201)
+	at org.h2.command.Parser.readCondition(Parser.java:2051)
+	at org.h2.command.Parser.readAnd(Parser.java:2023)
+	at org.h2.command.Parser.readExpression(Parser.java:2015)
+	at org.h2.command.Parser.parseInsert(Parser.java:1055)
+	at org.h2.command.Parser.parsePrepared(Parser.java:402)
+	at org.h2.command.Parser.parse(Parser.java:306)
+	at org.h2.command.Parser.parse(Parser.java:278)
+	at org.h2.command.Parser.prepareCommand(Parser.java:243)
+	at org.h2.engine.Session.prepareLocal(Session.java:442)
+	at org.h2.engine.Session.prepareCommand(Session.java:384)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1188)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:172)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:160)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1391)
+	at org.h2.server.web.WebApp.query(WebApp.java:1064)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1026)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1013)
+	at org.h2.server.web.WebThread.process(WebThread.java:168)
+	at org.h2.server.web.WebThread.run(WebThread.java:94)
+	at java.lang.Thread.run(Unknown Source)
+08-11 16:04:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Синтаксическая ошибка в выражении SQL "SELECT * CATEGORY[*] "
+Syntax error in SQL statement "SELECT * CATEGORY[*] "; SQL statement:
+select * category [42000-176]
