@@ -28,6 +28,7 @@ public class QuoteDaoImplHardFile implements QuoteDao {
 	            writer.append(";");
 	            writer.append(text);
 	            writer.append('\n');
+	            writer.close();
 	        }
 	        catch(IOException ex){
 	            
@@ -44,6 +45,7 @@ public class QuoteDaoImplHardFile implements QuoteDao {
 	    	  		String quote=splittedString[1];
 	    	  		quotesList.add(quote);
 	    	  	}
+	    	  	reader.close();
 	        }
 	        catch(IOException ex){
 	            

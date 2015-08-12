@@ -4,7 +4,6 @@ import java.util.Map;
 
 import belskii.artem.kickstarter.dao.category.CategoryDao;
 import belskii.artem.kickstarter.dao.category.CategoryDaoImplFile;
-import belskii.artem.kickstarter.dao.category.CategoryDaoImplHardCoding;
 
 public class CategoryModel {
 	CategoryDao categoryDao = new CategoryDaoImplFile();

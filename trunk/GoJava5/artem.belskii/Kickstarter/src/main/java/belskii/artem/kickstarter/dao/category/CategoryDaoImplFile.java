@@ -21,6 +21,7 @@ public class CategoryDaoImplFile implements CategoryDao {
 	            writer.append(";");
 	            writer.append(categoryInfo);
 	            writer.append('\n');
+				writer.close();
 	        }
 	        catch(IOException ex){
 	            
@@ -38,6 +39,7 @@ public class CategoryDaoImplFile implements CategoryDao {
 	    	  		int index = new Integer(splittedString[0]);
 	    	  		String categoryName=splittedString[1];
 	    	  		categoryList.put(index, categoryName);
+	    	  		reader.close();
 	    	  	}
 	        }
 	        catch(IOException ex){
