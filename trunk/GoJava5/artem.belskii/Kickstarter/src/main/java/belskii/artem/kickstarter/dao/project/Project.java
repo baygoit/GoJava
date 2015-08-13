@@ -30,6 +30,20 @@ public class Project {
 		this.categoryId=categoryId;
 		this.details=details;
 	}
+	
+	public Project(String name, Long goal, Long balance, String startDate, String endDate, String videoUrl, int categoryId, String details, HashMap<Long, ArrayList<String>> faq,  HashMap<Long, HashMap<Long, String>> paymentVariants ){
+		this.faq=faq;
+		this.paymentVariants=paymentVariants; 
+		this.name=name;
+		this.goal=goal;
+		this.balance=balance;
+		this.startDate=startDate;
+		this.endDate=endDate;
+		this.videoUrl=videoUrl;
+		this.categoryId=categoryId;
+		this.details=details;
+	}
+
 
 	public String getName() {
 		return this.name;

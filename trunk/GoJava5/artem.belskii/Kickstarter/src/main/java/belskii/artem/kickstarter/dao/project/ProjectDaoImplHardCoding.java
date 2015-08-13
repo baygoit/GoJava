@@ -53,6 +53,17 @@ public class ProjectDaoImplHardCoding implements ProjectDao {
 		}
 		return answer;
 	}
+
+	@Override
+	public void commit() {
+		// empty realization, saving only in memory.
+	}
+
+	@Override
+	public void update(Project currentProject) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	
 }

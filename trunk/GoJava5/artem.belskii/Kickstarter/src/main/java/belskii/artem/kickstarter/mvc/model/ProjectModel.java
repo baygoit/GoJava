@@ -4,10 +4,10 @@ import java.util.Map;
 
 import belskii.artem.kickstarter.dao.project.Project;
 import belskii.artem.kickstarter.dao.project.ProjectDao;
-import belskii.artem.kickstarter.dao.project.ProjectDaoImplHardCoding;
+import belskii.artem.kickstarter.dao.project.ProjectDaoImplFile;
 
 public class ProjectModel {
-	ProjectDao projectDao = new ProjectDaoImplHardCoding();
+	ProjectDao projectDao = new ProjectDaoImplFile();
 	
 	public void addProject(Project projectDetails){
 		projectDao.addProject(projectDetails);
