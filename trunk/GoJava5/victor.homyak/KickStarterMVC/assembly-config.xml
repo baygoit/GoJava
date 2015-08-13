@@ -7,6 +7,8 @@
         <format>dir</format>
     </formats>
     <includeBaseDirectory>false</includeBaseDirectory>
+
+
     <dependencySets>
         <dependencySet>
             <outputDirectory>/</outputDirectory>
@@ -23,13 +25,14 @@
             <scope>runtime</scope>
         </dependencySet>
     </dependencySets>
+
+
     <fileSets>
         <fileSet>
             <outputDirectory>/</outputDirectory>
             <directory>${basedir}/src/main/scripts</directory>
             <includes>
                 <include>start_ks.cmd</include>
-                <include>start_ks.sh</include>
             </includes>
         </fileSet>
     </fileSets>
