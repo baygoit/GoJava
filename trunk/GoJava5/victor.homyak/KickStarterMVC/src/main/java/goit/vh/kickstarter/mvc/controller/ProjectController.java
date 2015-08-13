@@ -34,12 +34,6 @@ public class ProjectController {
                 locationManager.dispatch();
             }
 
-//            if (projectModel.refreshModel(path) == null) {
-//                output.println("You choose not sutable variant, try more.");
-//            } else {
-//                path[1] = 0;
-//                locationManager.dispatch();
-//            }
             try {
                 projectModel.refreshModel(path);
             } catch (IndexOutOfBoundsException ex) {

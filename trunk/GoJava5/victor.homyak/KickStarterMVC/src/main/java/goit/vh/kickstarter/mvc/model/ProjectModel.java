@@ -69,8 +69,10 @@ public class ProjectModel {
       //  return 1;
     }
 
-    public void refreshListModel(int input) {
+    public void refreshListModel(int input) { // FIXME: get rid  of me, and listOfProjects field
         this.listOfProjectses = dataRegistry.getProjectList(input);
+        // FIXME: make listOfProjectses a method in the project dao,
+        // and use it instead
 
     }
 

@@ -51,15 +51,35 @@
 
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
-                 <version>2.5.5</version>
+                <version>2.5.5</version>
                 <configuration>
                     <descriptors>
                         <descriptor>assembly-config.xml</descriptor>
                     </descriptors>
 
-                    <finalName>Kickstarter</finalName>
+                    <finalName>kickstarter</finalName>
                     <outputDirectory>output</outputDirectory>
+                    <appendAssemblyId>false</appendAssemblyId>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
 
+            <plugin>
+                <artifactId>maven-clean-plugin</artifactId>
+                <version>2.5</version>
+                <configuration>
+                    <filesets>
+                        <fileset>
+                            <directory>output</directory>
+                        </fileset>
+                    </filesets>
                 </configuration>
             </plugin>
 

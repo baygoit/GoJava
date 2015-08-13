@@ -11,8 +11,7 @@ import java.util.Map;
  * Created with IntelliJ IDEA.
  * User: Viktor
  */
-public class DataRegistry {
-    private Output output = new Output();
+public class DataRegistry { /* create CategoryService based on this class */
 
     private Map<Integer, ArrayList<ProjectModel>> categories;
     private Map<Integer, String> categoriesForMainPage;

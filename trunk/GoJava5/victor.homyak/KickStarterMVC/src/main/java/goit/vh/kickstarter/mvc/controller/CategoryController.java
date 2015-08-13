@@ -39,7 +39,8 @@ public class CategoryController {
                 locationManager.setPath(path);
                 locationManager.dispatch();
             }
-            try {
+            try { // FIXME: instead of using exception, create method to get Categories size in model, and check
+                  // categories size here. it will be faster, and easily understood.
                 model.refreshModel(path[0]);
             } catch (RuntimeException myException) {
                 myException.toString();
@@ -83,4 +84,46 @@ public class CategoryController {
         this.locationManager = locationManager;
     }
 
+}
+
+class Path {
+    private final int categoryId; // better to user either Integer and null, or even better, java 8 Option
+    private final int projectId;
+
+    public static final Path EMPTY = new Path(-1, -1);
+
+    public Path(int categoryId, int projectId) {
+        this.categoryId = categoryId;
+        this.projectId = projectId;
+    }
+
+    public Path goToCategory(int id) {
+        return new Path(id, -1);
+    }
+
+    public Path goToProject(int id) {
+        return new Path(categoryId, projectId);
+    }
+
+    public Path returnToCategory() {
+        return new Path(categoryId, -1);
+    }
+
+    public boolean isProjectDefined() {
+        return projectId != -1;
+    }
+
+    public boolean isCategoryDefined() {
+        return categoryId != -1;
+    }
+
+    public Path goToMainScreen() {
+        return EMPTY;
+    }
+
+    public static void exampleUsage() {
+        Path p = Path.EMPTY;
+        // user has clicked category 5:
+        Path p1 = p.goToCategory(5);
+    }
 }
