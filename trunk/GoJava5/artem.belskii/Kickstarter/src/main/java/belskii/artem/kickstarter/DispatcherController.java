@@ -1,5 +1,6 @@
 package belskii.artem.kickstarter;
 
+import belskii.artem.kickstarter.dao.project.Project;
 import belskii.artem.kickstarter.mvc.controller.CategoryController;
 import belskii.artem.kickstarter.mvc.controller.ProjectController;
 import belskii.artem.kickstarter.mvc.controller.QuoteController;
@@ -21,6 +22,7 @@ public class DispatcherController {
 	private CategoryController category = new CategoryController(new CategoryModel(), new CategoryView());
 	private ProjectController project = new ProjectController(new ProjectModel(), new ProjectView());
 	private QuoteController quote = new QuoteController(new QuoteModel());
+	private Project projectForCanges;
 	
 	public void start(){
 		this.checkInput();
@@ -67,7 +69,9 @@ public class DispatcherController {
 				out.show("Put card nmumber:");
 				String cardNumber=in.nextLine();
 				out.show("Put payment amount:");
-				project.getProjectById(currentProjectId).updateBalance(in.nextLong());
+				projectForCanges=project.getProjectById(currentProjectId);
+				projectForCanges.updateBalance(in.nextLong());
+				project.save(projectForCanges);
 				out.show("Thanks, "+cardholderName+"! New balance on this project: "+project.getProjectById(currentProjectId).getBalance());
 				out.show("Put 0 for return to project details.");
 				userInputTmp=userInput;
@@ -76,7 +80,9 @@ public class DispatcherController {
 			if (userInput==3 && currentPosition == 2){
 				out.show("Put your questin on next line:");
 				String question=in.nextLine();
-				project.getProjectById(currentProjectId).asqAQuestion(question);
+				projectForCanges=project.getProjectById(currentProjectId);
+				projectForCanges.asqAQuestion(question);
+				project.save(projectForCanges);
 				showProjectDetails(currentCategoryId, userInputTmp);
 			}
 			if (userInput == 0 ){

@@ -35,4 +35,8 @@ public class ProjectController {
 		return model.getProjectList().get(id);
 	}
 	
+	public void save(Project project){
+		model.save(project);
+	}
+	
 }

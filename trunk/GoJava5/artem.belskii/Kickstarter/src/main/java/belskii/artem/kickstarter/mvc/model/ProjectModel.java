@@ -26,4 +26,7 @@ public class ProjectModel {
 		
 		return projectDao.getProjectFromCategory(CategoryId);
 	}
+	public void save(Project project){
+		projectDao.update(project);
+	}
 }
