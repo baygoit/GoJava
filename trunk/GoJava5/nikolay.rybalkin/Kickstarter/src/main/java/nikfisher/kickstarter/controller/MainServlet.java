@@ -11,6 +11,11 @@ public class MainServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+
+        request.setAttribute("name", "Kickstarter");
+
+        request.getRequestDispatcher("index.jsp").forward(request, response);
+
 //        String action = getAction(request);
 //
 //        if (action.startsWith("/categories")) {
