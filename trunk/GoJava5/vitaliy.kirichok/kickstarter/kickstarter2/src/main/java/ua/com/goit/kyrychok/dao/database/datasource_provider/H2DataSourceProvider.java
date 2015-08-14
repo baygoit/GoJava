@@ -30,6 +30,7 @@ public class H2DataSourceProvider implements DbDataSourceProvider {
 
     @Override
     public void init(String url, String userName, String userPassword) throws SQLException {
+        System.out.println("url=" + url);
         dataSource = new JdbcDataSource();
         dataSource.setURL(url);
         dataSource.setUser(userName);

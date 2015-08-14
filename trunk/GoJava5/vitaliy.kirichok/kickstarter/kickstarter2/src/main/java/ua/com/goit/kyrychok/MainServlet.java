@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.Date;
 
 public class MainServlet extends HttpServlet {
 
@@ -52,6 +53,7 @@ public class MainServlet extends HttpServlet {
     private String getAction(HttpServletRequest req) {
         String result;
         String reqURI = req.getRequestURI();
+        System.out.println("reqURI = " + reqURI);
         result = reqURI.substring(req.getContextPath().length(), reqURI.length());
         return result;
     }
@@ -80,6 +82,7 @@ public class MainServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action = getAction(req);
+        System.out.println(new Date() + "action="+action);
         if (action.startsWith("/kickstarter")) {
             mainPageControl(req, resp);
         } else if (action.startsWith("/category")) {
