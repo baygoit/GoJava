@@ -1,8 +1,9 @@
 package goit.vh.kickstarter.dao;
 
-import goit.vh.kickstarter.Output;
 import goit.vh.kickstarter.mvc.model.CategoryModel;
 import goit.vh.kickstarter.mvc.model.ProjectModel;
+import org.postgresql.ds.PGConnectionPoolDataSource;
+import org.postgresql.ds.PGPoolingDataSource;
 
 import java.sql.*;
 import java.util.*;
@@ -12,34 +13,12 @@ import java.util.*;
  */
 public class CategoryPostgreSQLDAO implements CategoryDAO {
 
-    //  private final ConnectionFactory connectionFactory;
-
-    public CategoryPostgreSQLDAO(Connection connection) {
-        /*this.connection = connection;*/
-    }
-
-//    @Override
-//    public Map<Integer, String> getCategories() {
-//        String sql = "SELECT * FROM categoies ";
-//
-//        Map<Integer, String> categories = new HashMap<>();
-//        try (PreparedStatement stm = connection.prepareStatement(sql)) {
-//            ResultSet rs = stm.executeQuery();
-//            while (rs.next()) {
-//                categories.put(rs.getInt("id"), rs.getString("id"));
-//            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//        return categories;
-
-
     @Override
     public Map<Integer, ArrayList<ProjectModel>> getCategories() {
         String sql = "SELECT * FROM project ORDER BY parentid"; // FIXME: make this string static. Or better use prepared statement
         Map<Integer, ArrayList<ProjectModel>> categories = new HashMap<>();
         ArrayList<ProjectModel> category = new ArrayList<>();
-        try (Connection connection = PostgreSQLDAOFactory.createConnection()) {
+        try (Connection connection =  PGConnectionPool.getConnection()) {
             try (PreparedStatement stm = connection.prepareStatement(sql)) {
                 ResultSet rs = stm.executeQuery();
                 int categoryID = 1;
@@ -60,18 +39,7 @@ public class CategoryPostgreSQLDAO implements CategoryDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        //TODO How automatically close connection?
-//        try {
-//            if (connection.isClosed()){
-//                new Output().println("Connection is closed");
-//            }
-//            else {
-//                connection.close();
-//                new Output().println("Connection was not closed! Closing connection...");
-//            }
-//        } catch (SQLException t) {
-//            t.printStackTrace();
-//        }
+
         return categories;
     }
 
@@ -92,7 +60,7 @@ public class CategoryPostgreSQLDAO implements CategoryDAO {
                 "                'Is it legal?\\nno\\nWhat side effects?\\n85% brain cancer'," +
                 "                'https://www.youtube.com/watch?v=tk7RUVJmLk0','Table games', 2)";
 
-        try (Connection connection = PostgreSQLDAOFactory.createConnection()) {
+        try (Connection connection = PGConnectionPool.getConnection()) {
             try (Statement statement = connection.createStatement()) {
                 statement.executeUpdate(sql);
 
@@ -111,4 +79,6 @@ public class CategoryPostgreSQLDAO implements CategoryDAO {
     public CategoryModel getCategoryByID(int id) {
         return null;
     }
+
+
 }

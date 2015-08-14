@@ -1,8 +1,6 @@
 package goit.vh.kickstarter;
 
-import goit.vh.kickstarter.dao.CategoryDAO;
-import goit.vh.kickstarter.dao.CategoryInMemoryDAO;
-import goit.vh.kickstarter.dao.DAOFactory;
+import goit.vh.kickstarter.dao.*;
 import goit.vh.kickstarter.mvc.controller.CategoryController;
 import goit.vh.kickstarter.mvc.controller.MainPageController;
 import goit.vh.kickstarter.mvc.controller.ProjectController;
@@ -12,6 +10,7 @@ import goit.vh.kickstarter.mvc.view.CategoryView;
 import goit.vh.kickstarter.mvc.view.MainPageView;
 import goit.vh.kickstarter.mvc.view.ProjectView;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -37,6 +36,8 @@ public class KickStarter {
         //TODO save type of connection in property file
         DAOFactory daoFactory =
                 DAOFactory.getDAOFactory(DAOFactory.POSTGRESQL);
+
+
 
         DataRegistry dataRegistry = new DataRegistry();
         Map<Integer, ArrayList<ProjectModel>> categories = new HashMap<>();
