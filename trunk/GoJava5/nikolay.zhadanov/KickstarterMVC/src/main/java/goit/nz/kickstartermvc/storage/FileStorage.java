@@ -20,7 +20,7 @@ import java.util.Properties;
 
 public class FileStorage implements DataStorage {
 	private static final Path FILE_PROPS_PATH = FileSystems.getDefault()
-			.getPath("props", "file.properties");
+			.getPath("/props", "file.properties");
 	private Charset defaultCharset;
 	private Path categoriesPath;
 	private Path projectsPath;

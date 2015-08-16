@@ -9,8 +9,6 @@ import goit.nz.kickstartermvc.dao.RewardOption;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.file.FileSystems;
-import java.nio.file.Path;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -27,8 +25,7 @@ import javax.sql.DataSource;
 import org.apache.commons.dbcp2.BasicDataSource;
 
 public class DBStorage implements DataStorage {
-	private static final Path DB_PROPS_PATH = FileSystems.getDefault().getPath(
-			"props", "db.properties");
+	private static final String DB_PROPS_PATH = "props/db.properties";
 	private DataSource dbSource;
 
 	@Override
@@ -264,8 +261,7 @@ public class DBStorage implements DataStorage {
 		Properties props = new Properties();
 		ClassLoader classLoader = Thread.currentThread()
 				.getContextClassLoader();
-		try (InputStream input = classLoader.getResourceAsStream(DB_PROPS_PATH
-				.toString())) {
+		try (InputStream input = classLoader.getResourceAsStream(DB_PROPS_PATH)) {
 			props.load(input);
 		} catch (IOException e) {
 			e.printStackTrace();
