@@ -1,16 +1,16 @@
 package belskii.artem.kickstarter.mvc.model;
 
 import belskii.artem.kickstarter.dao.quote.QuoteDao;
-import belskii.artem.kickstarter.dao.quote.QuoteDaoImplHardFile;
+import belskii.artem.kickstarter.dao.quote.QuoteDaoImplPsql;
 
 public class QuoteModel {
-	QuoteDao quoteDao = new QuoteDaoImplHardFile();
-	
-	public String getRandomQuote(){
+	QuoteDao quoteDao = new QuoteDaoImplPsql("conf/database.conf");
+
+	public String getRandomQuote() {
 		return quoteDao.getRandomQuote();
 	}
-	
-	public void addQuote(String quote){
+
+	public void addQuote(String quote) {
 		quoteDao.addQuote(quote);
 	}
 }
