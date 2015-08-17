@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<Context>
+
+    <Resource name="jdbc/KickstarterDS" auth="Container" type="javax.sql.DataSource"
+              maxActive="3" maxIdle="30" maxWait="10000"
+              username="sa" password="" driverClassName="org.h2.Driver"
+              url="jdbc:h2:mem:kickstarter;DB_CLOSE_DELAY=-1"/>
+
+</Context>
