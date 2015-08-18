@@ -4,10 +4,10 @@ import java.util.Map;
 
 import belskii.artem.kickstarter.dao.project.Project;
 import belskii.artem.kickstarter.dao.project.ProjectDao;
-import belskii.artem.kickstarter.dao.project.ProjectDaoImplFile;
+import belskii.artem.kickstarter.dao.project.ProjectDaoImplPsql;
 
 public class ProjectModel {
-	ProjectDao projectDao = new ProjectDaoImplFile();
+	ProjectDao projectDao = new ProjectDaoImplPsql("conf/database.conf");
 	
 	public void addProject(Project projectDetails){
 		projectDao.addProject(projectDetails);

@@ -8,5 +8,5 @@ public interface ProjectDao {
 	public Project getProjectDetails(int id);
 	public Map<Long, Project> getProjectFromCategory(int id);
 	public void commit();
-	public void update(Project currentProject);
+	public void update(Project updatedProject);
 }
