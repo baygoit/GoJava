@@ -47,41 +47,42 @@ public class ProjectDaoImplPsql implements ProjectDao {
 			while (rs.next()) {
 				currentProjectId = new Integer(rs.getString("ID"));
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+			
+			String faqQuery = "INSERT INTO faq (PROJECT_ID,	QUESTION, ANSWER) values (?,?,?);";
+			try (PreparedStatement faqSatement = connection.prepareStatement(faqQuery)) {
+				statement.setInt(1, currentProjectId);
 
-		String faqQuery = "INSERT INTO faq (PROJECT_ID,	QUESTION, ANSWER) values (?,?,?);";
-		try (PreparedStatement statement = connection.prepareStatement(faqQuery)) {
-			statement.setInt(1, currentProjectId);
-
-			for (long i = 0; i < faq.size(); i++) {
-				ArrayList<String> question = new ArrayList<String>();
-				question.addAll(faq.get(i));
-				statement.setString(2, question.get(0)); // question
-				String answer = "not answered yet";
-				if (!question.get(1).equals("")) {
-					answer = question.get(1);
+				for (long i = 0; i < faq.size(); i++) {
+					ArrayList<String> question = new ArrayList<String>();
+					question.addAll(faq.get(i));
+					faqSatement.setString(2, question.get(0)); // question
+					String answer = "not answered yet";
+					if (!question.get(1).equals("")) {
+						answer = question.get(1);
+					}
+					faqSatement.setString(3, answer); // answer
+					faqSatement.execute();
 				}
-				statement.setString(3, answer); // answer
-				statement.execute();
+			} catch (SQLException e) {
+				e.printStackTrace();
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+			
+			String paymentQuery = "INSERT INTO payment_methods (PROJECT_ID,	PAYMENT_AMOUMT, BONUS) values (?,?,?);";
+			try (PreparedStatement paymentStatement = connection.prepareStatement(paymentQuery)) {
+				paymentStatement.setInt(1, currentProjectId);
 
-		String paymentQuery = "INSERT INTO payment_methods (PROJECT_ID,	PAYMENT_AMOUMT, BONUS) values (?,?,?);";
-		try (PreparedStatement statement = connection.prepareStatement(paymentQuery)) {
-			statement.setInt(1, currentProjectId);
+				for (long i = 0; i < paymentVariants.size(); i++) {
 
-			for (long i = 0; i < paymentVariants.size(); i++) {
-
-				Object[] value = paymentVariants.get(i).keySet().toArray();
-				statement.setLong(2, new Long(value[0].toString()));
-				Object[] bonus = paymentVariants.get(i).values().toArray();
-				statement.setString(3, bonus[0].toString());
-				statement.execute();
+					Object[] value = paymentVariants.get(i).keySet().toArray();
+					paymentStatement.setLong(2, new Long(value[0].toString()));
+					Object[] bonus = paymentVariants.get(i).values().toArray();
+					paymentStatement.setString(3, bonus[0].toString());
+					paymentStatement.execute();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
 			}
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -271,42 +272,39 @@ public class ProjectDaoImplPsql implements ProjectDao {
 			statement.setString(8, details);
 			statement.setLong(9, projectId);
 			statement.execute();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-
-		String faqQuery = "UPDATE faq SET QUESTION=?, ANSWER=?, PROJECT_ID=?;";
-		try (PreparedStatement statement = connection.prepareStatement(faqQuery)) {
-			for (long i = 0; i < faq.size(); i++) {
-				statement.setString(1, faq.get(i).get(0));
-				statement.setString(2, faq.get(i).get(1));
-				statement.setLong(3, updatedProject.getcategoryId());
-				statement.execute();
+			
+			String faqQuery = "UPDATE faq SET QUESTION=?, ANSWER=?, PROJECT_ID=?;";
+			try (PreparedStatement faqStatement = connection.prepareStatement(faqQuery)) {
+				for (long i = 0; i < faq.size(); i++) {
+					faqStatement.setString(1, faq.get(i).get(0));
+					faqStatement.setString(2, faq.get(i).get(1));
+					faqStatement.setLong(3, updatedProject.getcategoryId());
+					faqStatement.execute();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-
-		String paymentQuery = "UPDATE payment_methods SET PROJECT_ID=?,	PAYMENT_AMOUMT=?, BONUS=? where PROJECT_ID=?;";
-		try (PreparedStatement statement = connection.prepareStatement(paymentQuery)) {
-			for (long i = 0; i < paymentVariants.size(); i++) {
-				Object[] value = paymentVariants.get(i).keySet().toArray();
-				statement.setLong(1, new Long(value[0].toString()));
-				Object[] bonus = paymentVariants.get(i).values().toArray();
-				statement.setString(2, bonus[0].toString());
-				statement.setLong(3, updatedProject.getcategoryId());
-				statement.execute();
+			
+			String paymentQuery = "UPDATE payment_methods SET PROJECT_ID=?,	PAYMENT_AMOUMT=?, BONUS=? where PROJECT_ID=?;";
+			try (PreparedStatement paymentStatement = connection.prepareStatement(paymentQuery)) {
+				for (long i = 0; i < paymentVariants.size(); i++) {
+					Object[] value = paymentVariants.get(i).keySet().toArray();
+					paymentStatement.setLong(1, new Long(value[0].toString()));
+					Object[] bonus = paymentVariants.get(i).values().toArray();
+					paymentStatement.setString(2, bonus[0].toString());
+					paymentStatement.setLong(3, updatedProject.getcategoryId());
+					paymentStatement.execute();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-
-		try {
-			connection.commit();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
 		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+
+	
 		try {
 			connection.commit();
 		} catch (SQLException e) {
