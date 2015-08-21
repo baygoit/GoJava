@@ -6,7 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class QuoteDaoImplPsqlTest {
-	QuoteDao quote = new QuoteDaoImplPsql("conf/database.conf");
+	QuoteDao quote = new QuoteDaoImplPsql("src/test/conf/database.conf");
 
 	@Before
 	public void setUp() throws Exception {

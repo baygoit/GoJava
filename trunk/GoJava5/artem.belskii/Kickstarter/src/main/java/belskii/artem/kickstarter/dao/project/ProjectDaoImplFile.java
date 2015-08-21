@@ -11,7 +11,7 @@ import java.util.Map;
 
 public class ProjectDaoImplFile implements ProjectDao {
 
-	private static final String FILE_PATH = "C:\\temp\\project.txt";
+	private static final String FILE_PATH = "src/main/resources/project.txt";
 
 	@Override
 	public void addProject(Project projectDetails) {

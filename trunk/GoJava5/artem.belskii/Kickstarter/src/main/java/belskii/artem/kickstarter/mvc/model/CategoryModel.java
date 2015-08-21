@@ -6,7 +6,7 @@ import belskii.artem.kickstarter.dao.category.CategoryDao;
 import belskii.artem.kickstarter.dao.category.CategoryDaoImplPsql;
 
 public class CategoryModel {
-	CategoryDao categoryDao = new CategoryDaoImplPsql("conf/database.conf");
+	CategoryDao categoryDao = new CategoryDaoImplPsql("src/main/conf/database.conf");
 
 	public void addCategory(String categoryName) {
 		categoryDao.addCategory(categoryName);

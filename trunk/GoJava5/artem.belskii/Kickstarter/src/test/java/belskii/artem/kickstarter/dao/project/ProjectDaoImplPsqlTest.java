@@ -6,7 +6,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class ProjectDaoImplPsqlTest {
-	ProjectDao project = new ProjectDaoImplPsql("conf/database.conf");
+	String CONFIG_PATH="src/test/conf/database.conf";
+	ProjectDao project = new ProjectDaoImplPsql(CONFIG_PATH);
 
 	@Before
 	public void setUp() throws Exception {
@@ -63,7 +64,7 @@ public class ProjectDaoImplPsqlTest {
 		updatedProject.updateName("New Name");
 		assertEquals("New Name", updatedProject.getName());
 		project.update(updatedProject);
-		ProjectDao projectFromDb = new ProjectDaoImplPsql("conf/database.conf");
+		ProjectDao projectFromDb = new ProjectDaoImplPsql(CONFIG_PATH);
 		assertEquals("New Name", projectFromDb.getProjectDetails(1).getName());
 
 	}

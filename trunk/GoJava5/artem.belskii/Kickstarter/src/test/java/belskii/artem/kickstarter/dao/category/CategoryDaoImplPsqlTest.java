@@ -6,7 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class CategoryDaoImplPsqlTest {
-	CategoryDao category = new CategoryDaoImplPsql("conf/database.conf");
+	CategoryDao category = new CategoryDaoImplPsql("src/test/conf/database.conf");
 
 	@Before
 	public void setUp() throws Exception {

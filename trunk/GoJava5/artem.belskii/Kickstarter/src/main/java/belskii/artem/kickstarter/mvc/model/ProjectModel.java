@@ -7,7 +7,7 @@ import belskii.artem.kickstarter.dao.project.ProjectDao;
 import belskii.artem.kickstarter.dao.project.ProjectDaoImplPsql;
 
 public class ProjectModel {
-	ProjectDao projectDao = new ProjectDaoImplPsql("conf/database.conf");
+	ProjectDao projectDao = new ProjectDaoImplPsql("src/main/conf/database.conf");
 	
 	public void addProject(Project projectDetails){
 		projectDao.addProject(projectDetails);

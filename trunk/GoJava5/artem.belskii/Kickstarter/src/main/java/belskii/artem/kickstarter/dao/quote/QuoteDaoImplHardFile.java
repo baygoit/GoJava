@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class QuoteDaoImplHardFile implements QuoteDao {
-	String FILE_PATH="C:\\temp\\quotes.txt";
+	String FILE_PATH="src/main/resources/quotes.txt";
 
 	@Override
 	public String getRandomQuote() {

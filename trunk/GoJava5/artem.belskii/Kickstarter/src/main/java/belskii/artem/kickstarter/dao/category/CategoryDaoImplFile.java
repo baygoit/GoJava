@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class CategoryDaoImplFile implements CategoryDao {
-	String FILE_PATH="C:\\temp\\categories.txt";
+	String FILE_PATH="src/main/resources/categories.txt";
 
 
 	public void addCategory(String categoryInfo) {
