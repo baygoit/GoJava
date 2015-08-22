@@ -1,7 +1,5 @@
 package ua.com.goit.kyrychok.dao.database.sql_provider;
 
-import ua.com.goit.kyrychok.dao.database.CategorySqlProvider;
-
 public class H2CategorySqlProvider implements CategorySqlProvider {
 
     @Override

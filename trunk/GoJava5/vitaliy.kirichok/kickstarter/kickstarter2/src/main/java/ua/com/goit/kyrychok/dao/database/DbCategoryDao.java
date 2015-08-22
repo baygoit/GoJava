@@ -1,6 +1,8 @@
 package ua.com.goit.kyrychok.dao.database;
 
 import ua.com.goit.kyrychok.dao.CategoryDao;
+import ua.com.goit.kyrychok.dao.database.datasource_provider.DbDataSourceProvider;
+import ua.com.goit.kyrychok.dao.database.sql_provider.CategorySqlProvider;
 import ua.com.goit.kyrychok.domain.Category;
 
 import java.sql.*;
@@ -64,7 +66,6 @@ public class DbCategoryDao implements CategoryDao {
                     result.setId(id);
                 }
             }
-            result.setProjects(dbProjectDao.fetch(id, connection));
             connection.commit();
         } catch (SQLException e) {
             throw new RuntimeException(e);

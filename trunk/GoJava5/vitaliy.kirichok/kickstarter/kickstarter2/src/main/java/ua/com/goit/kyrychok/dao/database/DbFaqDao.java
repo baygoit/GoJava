@@ -1,6 +1,8 @@
 package ua.com.goit.kyrychok.dao.database;
 
 import ua.com.goit.kyrychok.dao.FaqDao;
+import ua.com.goit.kyrychok.dao.database.datasource_provider.DbDataSourceProvider;
+import ua.com.goit.kyrychok.dao.database.sql_provider.FaqSqlProvider;
 import ua.com.goit.kyrychok.domain.Faq;
 
 import java.sql.Connection;

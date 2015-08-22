@@ -1,7 +1,5 @@
 package ua.com.goit.kyrychok.dao.database.sql_provider;
 
-import ua.com.goit.kyrychok.dao.database.ProjectSqlProvider;
-
 public class H2ProjectSqlProvider implements ProjectSqlProvider {
     @Override
     public String get4Load() {

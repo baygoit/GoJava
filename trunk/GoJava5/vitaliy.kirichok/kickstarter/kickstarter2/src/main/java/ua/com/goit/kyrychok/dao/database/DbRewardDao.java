@@ -1,6 +1,8 @@
 package ua.com.goit.kyrychok.dao.database;
 
 import ua.com.goit.kyrychok.dao.RewardDao;
+import ua.com.goit.kyrychok.dao.database.datasource_provider.DbDataSourceProvider;
+import ua.com.goit.kyrychok.dao.database.sql_provider.RewardSqlProvider;
 import ua.com.goit.kyrychok.domain.Reward;
 
 import java.sql.Connection;

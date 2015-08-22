@@ -1,4 +1,4 @@
-package ua.com.goit.kyrychok.dao.database;
+package ua.com.goit.kyrychok.dao.database.sql_provider;
 
 public interface RewardSqlProvider {
     String get4Fetch();

@@ -1,6 +1,8 @@
 package ua.com.goit.kyrychok.dao.database;
 
 import ua.com.goit.kyrychok.dao.ProjectDao;
+import ua.com.goit.kyrychok.dao.database.datasource_provider.DbDataSourceProvider;
+import ua.com.goit.kyrychok.dao.database.sql_provider.ProjectSqlProvider;
 import ua.com.goit.kyrychok.domain.Project;
 
 import java.sql.*;
@@ -23,7 +25,7 @@ public class DbProjectDao implements ProjectDao {
     }
 
     @Override
-    public Project load(int id) {
+    public Project get(int id) {
         Project result = null;
         try (Connection connection = dbDataSourceProvider.getConnection()) {
             try (PreparedStatement statement = connection.prepareStatement(sqlProvider.get4Load())) {
@@ -38,9 +40,6 @@ public class DbProjectDao implements ProjectDao {
                     result.setId(id);
                 }
             }
-            result.setProjectEvents(dbProjectEventDao.fetch(id, connection));
-            result.setFaqs(dbFaqDao.fetch(id, connection));
-            result.setRewards(dbRewardDao.fetch(id, connection));
             connection.commit();
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -79,9 +78,11 @@ public class DbProjectDao implements ProjectDao {
         return result;
     }
 
-    List<Project> fetch(int categoryId, Connection connection) throws SQLException {
+    @Override
+    public List<Project> fetch(int categoryId) {
         List<Project> result = new ArrayList<>();
-        try (PreparedStatement statement = connection.prepareStatement(sqlProvider.get4Fetch())) {
+        try (Connection connection = dbDataSourceProvider.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sqlProvider.get4Fetch())) {
             statement.setInt(1, categoryId);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
@@ -91,6 +92,9 @@ public class DbProjectDao implements ProjectDao {
                 project.setBalance(resultSet.getInt("balance"));
                 result.add(project);
             }
+            connection.commit();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
         return result;
     }

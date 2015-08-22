@@ -1,7 +1,5 @@
 package ua.com.goit.kyrychok.dao.database.sql_provider;
 
-import ua.com.goit.kyrychok.dao.database.RewardSqlProvider;
-
 public class H2RewardSqlProvider implements RewardSqlProvider {
     @Override
     public String get4Fetch() {

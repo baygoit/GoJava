@@ -1,7 +1,5 @@
 package ua.com.goit.kyrychok.dao.database.sql_provider;
 
-import ua.com.goit.kyrychok.dao.database.ProjectEventSqlProvider;
-
 public class H2ProjectEventSqlProvider implements ProjectEventSqlProvider {
     @Override
     public String get4Fetch() {

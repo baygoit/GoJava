@@ -5,6 +5,7 @@ import ua.com.goit.kyrychok.dao.FaqDao;
 import ua.com.goit.kyrychok.dao.ProjectDao;
 import ua.com.goit.kyrychok.dao.RewardDao;
 import ua.com.goit.kyrychok.dao.database.*;
+import ua.com.goit.kyrychok.dao.database.datasource_provider.DbDataSourceProvider;
 import ua.com.goit.kyrychok.dao.database.factory.AbstractSqlProviderFactory;
 
 public class DbDaoFactory implements AbstractDaoFactory {

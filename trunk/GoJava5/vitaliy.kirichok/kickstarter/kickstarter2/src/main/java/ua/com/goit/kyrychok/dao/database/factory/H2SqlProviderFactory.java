@@ -1,6 +1,5 @@
 package ua.com.goit.kyrychok.dao.database.factory;
 
-import ua.com.goit.kyrychok.dao.database.*;
 import ua.com.goit.kyrychok.dao.database.sql_provider.*;
 
 public class H2SqlProviderFactory implements AbstractSqlProviderFactory {

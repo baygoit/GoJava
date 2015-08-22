@@ -1,7 +1,6 @@
 package ua.com.goit.kyrychok.dao.database.datasource_provider;
 
 import org.h2.jdbcx.JdbcDataSource;
-import ua.com.goit.kyrychok.dao.database.DbDataSourceProvider;
 
 import java.sql.Connection;
 import java.sql.SQLException;

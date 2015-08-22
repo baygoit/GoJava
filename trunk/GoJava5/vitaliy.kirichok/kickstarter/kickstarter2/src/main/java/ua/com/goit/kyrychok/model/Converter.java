@@ -1,7 +1,6 @@
 package ua.com.goit.kyrychok.model;
 
 import ua.com.goit.kyrychok.Utils;
-import ua.com.goit.kyrychok.domain.Faq;
 import ua.com.goit.kyrychok.domain.Project;
 import ua.com.goit.kyrychok.domain.ProjectEvent;
 import ua.com.goit.kyrychok.domain.Reward;
@@ -11,22 +10,6 @@ import java.util.Date;
 import java.util.List;
 
 public class Converter {
-
-    public static FaqModel convert(Faq faq) {
-        FaqModel result = new FaqModel();
-        result.id = faq.getId();
-        result.question = faq.getQuestion();
-        result.answer = faq.getAnswer();
-        return result;
-    }
-
-    public static List<FaqModel> convertFaqs(List<Faq> faqs) {
-        List<FaqModel> result = new ArrayList<>();
-        for (Faq faq : faqs) {
-            result.add(convert(faq));
-        }
-        return result;
-    }
 
     public static ProjectEventModel convert(ProjectEvent projectEvent) {
         ProjectEventModel result = new ProjectEventModel();
@@ -69,9 +52,14 @@ public class Converter {
         result.shortDescription = project.getShortDescription();
         result.timeLeft = Utils.getDiffDate(project.getDeadlineDate(), new Date());
         result.demoLink = project.getDemoLink();
-        result.faqs = convertFaqs(project.getFaqs());
-        result.projectEvents = convertProjectEvents(project.getProjectEvents());
-        result.rewards = convertRewards(project.getRewards());
+        return result;
+    }
+
+    public static List<ProjectModel> convertProjects(List<Project> projects) {
+        List<ProjectModel> result = new ArrayList<>();
+        for (Project project : projects) {
+            result.add(convert(project));
+        }
         return result;
     }
 }

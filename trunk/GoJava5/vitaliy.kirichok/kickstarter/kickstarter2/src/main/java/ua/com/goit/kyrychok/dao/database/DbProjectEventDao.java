@@ -1,6 +1,7 @@
 package ua.com.goit.kyrychok.dao.database;
 
 import ua.com.goit.kyrychok.dao.ProjectEventDao;
+import ua.com.goit.kyrychok.dao.database.sql_provider.ProjectEventSqlProvider;
 import ua.com.goit.kyrychok.domain.ProjectEvent;
 
 import java.sql.*;

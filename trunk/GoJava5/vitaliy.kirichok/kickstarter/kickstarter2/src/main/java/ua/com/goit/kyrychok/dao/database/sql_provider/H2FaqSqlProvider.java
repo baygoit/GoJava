@@ -1,7 +1,5 @@
 package ua.com.goit.kyrychok.dao.database.sql_provider;
 
-import ua.com.goit.kyrychok.dao.database.FaqSqlProvider;
-
 public class H2FaqSqlProvider implements FaqSqlProvider {
     @Override
     public String get4Add() {
