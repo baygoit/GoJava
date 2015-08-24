@@ -13,7 +13,7 @@ import java.util.Random;
 
 public class QuoteDAO {
 
-    final private Random RANDOM;
+    final private Random RANDOM = new Random();
     Connection connection = ConnectDB.getDBConnection();
 
     private ResultSet getResultSet() throws SQLException {
@@ -22,8 +22,7 @@ public class QuoteDAO {
         return statement.executeQuery("SELECT * FROM quote");
     }
 
-    public QuoteDAO(Random random) {
-        this.RANDOM = random;
+    public QuoteDAO() {
     }
 
     public String quoteGenerate() {

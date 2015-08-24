@@ -1,17 +1,11 @@
 package nikfisher.kickstarter;
 
-import nikfisher.kickstarter.dao.Categories;
-import nikfisher.kickstarter.dao.CategoriesDAO;
-import nikfisher.kickstarter.dao.Projects;
-import nikfisher.kickstarter.dao.ProjectsDAO;
+import nikfisher.kickstarter.dao.*;
 import nikfisher.kickstarter.menu.CategoryMenu;
-import nikfisher.kickstarter.dao.QuoteDAO;
 import nikfisher.kickstarter.streams.ConsoleIO;
 import nikfisher.kickstarter.streams.ConsoleInterfaceIO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.Random;
 
 public class Runner {
 
@@ -39,7 +33,7 @@ public class Runner {
     public static void main(String[] args){
 
         LOGGER.info("The successful launch of the program.");
-        Runner runner = new Runner(new ConsoleIO(), new QuoteDAO(new Random()));
+        Runner runner = new Runner(new ConsoleIO(), new QuoteDAO());
         runner.run();
         LOGGER.info("Finished program.");
     }

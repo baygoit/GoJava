@@ -6,16 +6,15 @@
            version="3.0">
 
     <display-name>Kickstarter</display-name>
-    <description>Description</description>
 
     <servlet>
-        <servlet-name>mainServlet</servlet-name>
+        <servlet-name>Kickstarter</servlet-name>
         <servlet-class>nikfisher.kickstarter.controller.MainServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>mainServlet</servlet-name>
-        <url-pattern>/</url-pattern>
+        <servlet-name>Kickstarter</servlet-name>
+        <url-pattern> </url-pattern>
     </servlet-mapping>
 
 </web-app>
