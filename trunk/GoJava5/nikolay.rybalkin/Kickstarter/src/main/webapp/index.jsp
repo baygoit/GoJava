@@ -5,6 +5,7 @@
 <head>
     <meta charset="utf-8">
     <title>Kickstarter</title>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,600' rel='stylesheet' type='text/css'>
     <link href="css/common.css" type="text/css" rel="stylesheet">
 </head>
 <body>
@@ -26,16 +27,18 @@
         </header>
         <section class="main_block cf">
             <div class="content f_left">
-                <h1>Hello! My name is <c:out value="${name}"/> </h1>
+                <h1>Hello! My name is <c:out value="${name}"/>.</h1>
             </div>
             <div class="right_sidebar f_right">
-                <c:forEach items="${categories}" var="category">
-                    <c:out value="${category.name}"/>
-                </c:forEach>
+                <ul>
+                    <c:forEach items="${categories}" var="category">
+                        <li><c:out value="${category.name}"/></li>
+                    </c:forEach>
+                </ul>
             </div>
         </section>
     </div>
-    <footer>
+    <footer class="footer">
 
     </footer>
 </body>
