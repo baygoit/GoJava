@@ -29,7 +29,9 @@
                 <h1>Hello! My name is <c:out value="${name}"/> </h1>
             </div>
             <div class="right_sidebar f_right">
-
+                <c:forEach items="${categories}" var="category">
+                    <c:out value="${category.name}"/>
+                </c:forEach>
             </div>
         </section>
     </div>
