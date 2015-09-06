@@ -23,30 +23,54 @@
 	<a href="<c:out value="${model.link}"/>"><c:out
 			value="${model.link}" /></a>
 	<br>
+	<br>
+	<b>Events: </b>
 	<c:choose>
 		<c:when test="${!empty model.events}">
-			<b>Events: </b>
 			<br>
 			<ol>
 				<c:forEach var="event" items="${model.events}">
 					<li><b>Event Date: </b> <c:out value="${event.date}" /><br>
 						<b>Description: </b> <c:out value="${event.description}" /><br>
-						<br></li>
+					</li>
 				</c:forEach>
 			</ol>
 		</c:when>
+		<c:otherwise>
+			<br>
+		</c:otherwise>
 	</c:choose>
+	<br>
+	<b>FAQ: </b>
 	<c:choose>
 		<c:when test="${!empty model.faq}">
-			<b>FAQ: </b>
 			<br>
 			<ol>
 				<c:forEach var="faq" items="${model.faq}">
 					<li><b>Question: </b> <c:out value="${faq.question}" /><br>
-						<b>Answer: </b> <c:out value="${faq.answer}" /><br> <br></li>
+						<b>Answer: </b> <c:out value="${faq.answer}" /><br></li>
 				</c:forEach>
 			</ol>
 		</c:when>
+		<c:otherwise>
+			<br>
+		</c:otherwise>
+	</c:choose>
+	<c:choose>
+		<c:when test="${param.action == 'addQuestion'}">
+			<form action="addQuestion" method="POST">
+				Enter your Question: <input type="text" name="question" size="20px">
+				<br>
+				<input type="hidden" name="id" value="${param.id}" /> <input
+					type="hidden" name="action" value="addQuestion" /> <input
+					type="submit" value="Confirm">
+			</form>
+			<a href="project?id=${model.id}&action=view">Cancel</a>
+		</c:when>
+		<c:otherwise>
+			<b><a href="project?id=${model.id}&action=addQuestion">Add
+					new question</a></b>
+		</c:otherwise>
 	</c:choose>
 	<br>
 	<br>
@@ -59,7 +83,8 @@
 				<li><a href="pledge?id=${model.id}&amount=0&done=no"><b>Donate
 							any amount</b></a></li>
 				<c:forEach var="reward" items="${model.rewardOptions}">
-					<li><a href="pledge?id=${model.id}&amount=${reward.amount}&done=no">
+					<li><a
+						href="pledge?id=${model.id}&amount=${reward.amount}&done=no">
 							<b>Donate: $ <c:out
 									value="${reward.amount} - ${reward.description}" /></b>
 					</a></li>

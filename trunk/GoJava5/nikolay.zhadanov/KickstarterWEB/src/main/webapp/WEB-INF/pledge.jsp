@@ -11,7 +11,6 @@
 			<br>
 			<br>
 			<br>
-			<b><a href="project?id=${param.id}&action=view">Back</a></b>
 		</c:when>
 		<c:otherwise>
 			<h2>Payment Page</h2>
@@ -36,14 +35,13 @@
 					</c:otherwise>
 				</c:choose>
 				<br> <input type="hidden" name="id" value="${param.id}" /> <input
-					type="hidden" name="done" value="yes" /> <input type="submit"
-					value="Make Donate">
+					type="submit" value="Make Donate">
 			</form>
 			<br>
 			<br>
 			<br>
-			<b><a href="project?id=${param.id}&action=view">Back</a></b>
 		</c:otherwise>
 	</c:choose>
+	<b><a href="project?id=${param.id}&action=view">Back</a></b>
 </body>
 </html>

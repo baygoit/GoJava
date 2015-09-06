@@ -13,15 +13,15 @@
 	<ol>
 		<c:forEach var="project" items="${model.projects}">
 			<li><b><a href="project?id=${project.id}&action=view"><c:out
-							value="${project.name}" /></a></b><br> 
-					<b>Description: </b> <c:out value="${project.description}" /><br>
-					<b>Cost: </b> <c:out value="${project.goalAmount}$" /><br>
-					<b>Balance: </b> <c:out value="${project.pledgedAmount}$" /><br>
-					<b>DeadLine: </b> <c:out value="${project.daysToGo}" /><br> <br></li>
+							value="${project.name}" /></a></b> <br> <b>Description: </b> <c:out
+					value="${project.description}" /> <br> <b>Goal: </b> <c:out
+					value="${project.goalAmount}$" /> <br> <b>Pledged: </b> <c:out
+					value="${project.pledgedAmount}$" /> <br> <b>Days Left: </b> <c:out
+					value="${project.daysToGo}" /> <br> <br></li>
 		</c:forEach>
 	</ol>
 	<br>
 	<br>
-	<b><a href="home">Back</a></b>
+	<b><a href="main">Back</a></b>
 </body>
 </html>

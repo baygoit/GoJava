@@ -1,7 +1,7 @@
 package goit.nz.kickstarter.dao;
 
-import goit.nz.kickstarter.memory.Quote;
-import goit.nz.kickstarter.storage.DataStorage;
+import goit.nz.kickstarter.domain.Quote;
+import goit.nz.kickstarter.storage.DataProvider;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -12,9 +12,9 @@ import java.util.List;
 import java.util.Random;
 
 public class QuoteDAO {
-	private DataStorage storage;
+	private DataProvider storage;
 
-	public QuoteDAO(DataStorage storage) {
+	public QuoteDAO(DataProvider storage) {
 		this.storage = storage;
 	}
 

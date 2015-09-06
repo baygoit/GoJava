@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- Data Sourse -->
+    <bean id="dataProvider" class="goit.nz.kickstarter.storage.PostgreDataProvider"  init-method="init">
+    	<constructor-arg type="java.lang.String" value="db.properties"/>
+    </bean>
+
+	<!-- DAO -->
+    <bean id="quoteDAO" class="goit.nz.kickstarter.dao.QuoteDAO">
+        <constructor-arg ref="dataProvider"/>
+    </bean>
+    <bean id="categoryDAO" class="goit.nz.kickstarter.dao.CategoryDAO">
+        <constructor-arg ref="dataProvider"/>
+    </bean>
+    <bean id="projectDAO" class="goit.nz.kickstarter.dao.ProjectDAO">
+        <constructor-arg ref="dataProvider"/>
+    </bean>
+
+	<!-- Actions -->
+	<bean id="addQuestionAction" class="goit.nz.kickstarter.action.AddQuestionAction">
+        <property name="projectDAO" ref="projectDAO"/>
+    </bean>
+    <bean id="categoryAction" class="goit.nz.kickstarter.action.CategoryAction">
+    	<property name="categoryDAO" ref="categoryDAO"/>
+        <property name="projectDAO" ref="projectDAO"/>
+    </bean>
+    <bean id="mainPageAction" class="goit.nz.kickstarter.action.MainPageAction">
+    	<property name="quoteDAO" ref="quoteDAO"/>
+        <property name="categoryDAO" ref="categoryDAO"/>
+    </bean>
+    <bean id="pledgeAction" class="goit.nz.kickstarter.action.PledgeAction">
+    	<property name="projectDAO" ref="projectDAO"/>
+    </bean>
+    <bean id="projectAction" class="goit.nz.kickstarter.action.ProjectAction">
+    	<property name="projectDAO" ref="projectDAO"/>
+    </bean>
+    
+    <!-- Action Factory -->
+    <bean id="actionFactory" class="goit.nz.kickstarter.action.ActionFactory">
+        <property name="actions">
+        	<map>
+                <entry key="GET/" value-ref="mainPageAction"/>
+                <entry key="GET/main" value-ref="mainPageAction"/>
+                <entry key="GET/category" value-ref="categoryAction"/>
+                <entry key="GET/project" value-ref="projectAction"/>
+                <entry key="GET/pledge" value-ref="pledgeAction"/>
+                <entry key="POST/pledge" value-ref="pledgeAction"/>
+                <entry key="POST/addQuestion" value-ref="addQuestionAction"/>
+            </map>
+        </property>
+    </bean>
+</beans>

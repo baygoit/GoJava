@@ -1,15 +1,14 @@
 package goit.nz.kickstarter.model;
 
 import goit.nz.kickstarter.dao.ProjectDAO;
-import goit.nz.kickstarter.memory.Project;
-import goit.nz.kickstarter.storage.DataStorage;
+import goit.nz.kickstarter.domain.Project;
 
 public class ProjectModel {
 	private ProjectDAO projectDAO;
 	private Project project;
 
-	public ProjectModel(DataStorage storage) {
-		projectDAO = new ProjectDAO(storage);
+	public ProjectModel(ProjectDAO projectDAO) {
+		this.projectDAO = projectDAO;
 	}
 
 	public void update(long projectId) {

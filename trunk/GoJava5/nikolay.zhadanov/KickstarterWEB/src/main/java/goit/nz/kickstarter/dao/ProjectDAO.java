@@ -1,10 +1,10 @@
 package goit.nz.kickstarter.dao;
 
-import goit.nz.kickstarter.memory.FAQ;
-import goit.nz.kickstarter.memory.Project;
-import goit.nz.kickstarter.memory.ProjectEvent;
-import goit.nz.kickstarter.memory.RewardOption;
-import goit.nz.kickstarter.storage.DataStorage;
+import goit.nz.kickstarter.domain.FAQ;
+import goit.nz.kickstarter.domain.Project;
+import goit.nz.kickstarter.domain.ProjectEvent;
+import goit.nz.kickstarter.domain.RewardOption;
+import goit.nz.kickstarter.storage.DataProvider;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -16,9 +16,9 @@ import java.util.Date;
 import java.util.List;
 
 public class ProjectDAO {
-	private DataStorage storage;
+	private DataProvider storage;
 
-	public ProjectDAO(DataStorage storage) {
+	public ProjectDAO(DataProvider storage) {
 		this.storage = storage;
 	}
 
@@ -156,6 +156,19 @@ public class ProjectDAO {
 		try (Connection conn = storage.getConnection()) {
 			PreparedStatement statement = conn.prepareStatement(sql);
 			statement.setInt(1, pledgedAmount);
+			statement.setLong(2, projectId);
+			statement.executeUpdate();
+			conn.commit();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void addQuestion(long projectId, String question) {
+		String sql = "INSERT INTO faqs (question, project_id) VALUES (?, ?)";
+		try (Connection conn = storage.getConnection()) {
+			PreparedStatement statement = conn.prepareStatement(sql);
+			statement.setString(1, question);
 			statement.setLong(2, projectId);
 			statement.executeUpdate();
 			conn.commit();

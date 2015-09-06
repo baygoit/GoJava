@@ -1,7 +1,7 @@
 package goit.nz.kickstarter.dao;
 
-import goit.nz.kickstarter.memory.Category;
-import goit.nz.kickstarter.storage.DataStorage;
+import goit.nz.kickstarter.domain.Category;
+import goit.nz.kickstarter.storage.DataProvider;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,9 +12,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CategoryDAO {
-	private DataStorage storage;
+	private DataProvider storage;
 
-	public CategoryDAO(DataStorage storage) {
+	public CategoryDAO(DataProvider storage) {
 		this.storage = storage;
 	}
 

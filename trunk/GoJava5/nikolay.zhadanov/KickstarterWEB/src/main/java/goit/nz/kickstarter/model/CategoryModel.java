@@ -2,9 +2,8 @@ package goit.nz.kickstarter.model;
 
 import goit.nz.kickstarter.dao.CategoryDAO;
 import goit.nz.kickstarter.dao.ProjectDAO;
-import goit.nz.kickstarter.memory.Category;
-import goit.nz.kickstarter.memory.Project;
-import goit.nz.kickstarter.storage.DataStorage;
+import goit.nz.kickstarter.domain.Category;
+import goit.nz.kickstarter.domain.Project;
 
 import java.util.List;
 
@@ -14,9 +13,9 @@ public class CategoryModel {
 	private Category category;
 	private List<Project> projects;
 
-	public CategoryModel(DataStorage storage) {
-		categoryDAO = new CategoryDAO(storage);
-		projectDAO = new ProjectDAO(storage);
+	public CategoryModel(CategoryDAO categoryDAO, ProjectDAO projectDAO) {
+		this.categoryDAO = categoryDAO;
+		this.projectDAO = projectDAO;
 	}
 	
 	public void update(long categoryId) {
