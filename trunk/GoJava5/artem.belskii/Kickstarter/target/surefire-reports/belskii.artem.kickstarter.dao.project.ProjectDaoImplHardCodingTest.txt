@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: belskii.artem.kickstarter.dao.project.ProjectDaoImplHardCodingTest
+-------------------------------------------------------------------------------
+Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.205 sec
