@@ -31,8 +31,8 @@ public class ProjectController {
 		return model.getProjectFromCategory(id);
 	}
 	
-	public Project getProjectById(int id){
-		return model.getProjectDetails(id);
+	public Project getProjectById(Long id){
+		return model.getProjectList().get(id);
 	}
 	
 	public void save(Project project){

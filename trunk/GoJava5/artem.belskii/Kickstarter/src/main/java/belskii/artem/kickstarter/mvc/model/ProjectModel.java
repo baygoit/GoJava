@@ -2,15 +2,12 @@ package belskii.artem.kickstarter.mvc.model;
 
 import java.util.Map;
 
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-
 import belskii.artem.kickstarter.dao.project.Project;
 import belskii.artem.kickstarter.dao.project.ProjectDao;
+import belskii.artem.kickstarter.dao.project.ProjectDaoImplPsql;
 
 public class ProjectModel {
-	ApplicationContext context = new ClassPathXmlApplicationContext("classpath:application-context.xml");
-	ProjectDao projectDao =  (ProjectDao) context.getBean("projectDaoImplPsql");
+	ProjectDao projectDao = new ProjectDaoImplPsql("src/main/conf/database.conf");
 	
 	public void addProject(Project projectDetails){
 		projectDao.addProject(projectDetails);

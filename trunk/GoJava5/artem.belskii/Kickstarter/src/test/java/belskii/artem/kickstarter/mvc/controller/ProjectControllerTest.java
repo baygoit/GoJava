@@ -71,31 +71,31 @@ public class ProjectControllerTest {
 	
 	@Test
 	public void testAsqAQuestion(){
-		project.getProjectById(0).asqAQuestion("My test question");
+		project.getProjectById(0L).asqAQuestion("My test question");
 	}
 	
 	@Test
 	public void testGetAnswerForQuestion(){
-		project.getProjectById(0).asqAQuestion("testgetAnswerForQuestion");
-		project.getProjectById(0).getAnswerForQuestion(0L, "responce for testgetAnswerForQuestion");
+		project.getProjectById(0L).asqAQuestion("testgetAnswerForQuestion");
+		project.getProjectById(0L).getAnswerForQuestion(0L, "responce for testgetAnswerForQuestion");
 	}
 	
 	@Test
 	public void testGetFaq(){
-		project.getProjectById(0).asqAQuestion("Question 1");
-		project.getProjectById(1).asqAQuestion("Question 2");
-		project.getProjectById(1).asqAQuestion("Question 2.1");
-		project.getProjectById(2).asqAQuestion("Question 2");
-		assertEquals(1,project.getProjectById(0).getFaq().size());
-		assertEquals(2,project.getProjectById(1).getFaq().size());
-		assertEquals(1,project.getProjectById(2).getFaq().size());
+		project.getProjectById(0L).asqAQuestion("Question 1");
+		project.getProjectById(1L).asqAQuestion("Question 2");
+		project.getProjectById(1L).asqAQuestion("Question 2.1");
+		project.getProjectById(2L).asqAQuestion("Question 2");
+		assertEquals(1,project.getProjectById(0L).getFaq().size());
+		assertEquals(2,project.getProjectById(1L).getFaq().size());
+		assertEquals(1,project.getProjectById(2L).getFaq().size());
 	}
 	
 	@Test
 	public void testQuetomPayment(){
-		assertEquals(new Long(1),project.getProjectById(0).getBalance());
-		project.getProjectById(0).updateBalance(10L);
-		assertEquals(new Long(11),project.getProjectById(0).getBalance());
+		assertEquals(new Long(1),project.getProjectById(0L).getBalance());
+		project.getProjectById(0L).updateBalance(10L);
+		assertEquals(new Long(11),project.getProjectById(0L).getBalance());
 	}
 	
 	
