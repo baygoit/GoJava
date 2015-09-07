@@ -51,8 +51,14 @@
 		<p>Or put custom payment amount <input type="text" name="customDonate" size="20px"> </p>
 		<input type="submit" value="submit">
 	</form>
-		
 	</c:if>
+	<c:if test="${fn:length(paymetVariants) eq 0}">
+	<form action="" method="POST">
+		<p>You can put custom payment amount <input type="text" name="customDonate" size="20px"> </p>
+		<input type="submit" value="submit">
+	</form>
+	</c:if>
+	
 	<p><a href=projects?categoryId=${categoryId} >Return to project list</a></p>
 </body>
 </html>
