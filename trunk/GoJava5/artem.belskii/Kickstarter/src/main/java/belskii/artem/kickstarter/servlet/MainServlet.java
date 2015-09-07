@@ -22,11 +22,57 @@ public class MainServlet extends HttpServlet{
 	private ProjectController project = new ProjectController(new ProjectModel(), new ProjectView());
 	private QuoteController quote = new QuoteController(new QuoteModel());
 	
+	public String getUserRequest(HttpServletRequest req){
+		String url = req.getRequestURI();
+		return url.substring(req.getContextPath().length());
+	}
+	
 	@Override
 	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+	       String userRequest = getUserRequest(req);
+	        if (userRequest.equals("/main")) {
+	            showMainPage(req, resp);
+	        } else if (userRequest.startsWith("/projects")) {
+	            showProjectsFromCategory(req, resp);
+	        } else if (userRequest.startsWith("/projectdetails")) {
+	            showProjectDetails(req, resp);
+	        } else {
+	            // 404
+	        }
+		
+		
+//		req.setAttribute("quote", quote.getRandomQuote());
+//		req.setAttribute("categoryList", category.getCategoryList().values());
+//		req.getRequestDispatcher("main.jsp").forward(req, resp);
+//
+//		if (getUserRequest(req).equals("/projects")){
+//			int categoryId=Integer.valueOf(req.getParameter("categoryId"));
+//			req.setAttribute("projectFromCategory","some projects");
+//			req.getRequestDispatcher("projects.jsp").forward(req, resp);
+//		}
+		
+
+	}
+
+	private void showProjectDetails(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		Long projectid=Long.valueOf(req.getParameter("projectid"));
+		req.setAttribute("project", project.getProjectById(projectid));
+		req.getRequestDispatcher("projectdetails.jsp").forward(req, resp);
+		
+	}
+
+	private void showProjectsFromCategory(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		int categoryId=Integer.valueOf(req.getParameter("categoryId"));
+		req.setAttribute("categoryName", category.getCategoryList().get(categoryId-1));
+		req.setAttribute("projectsFromCategory",project.getProjectFromCategory(categoryId).values());
+		req.getRequestDispatcher("projects.jsp").forward(req, resp);
+	}
+
+	private void showMainPage(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setAttribute("quote", quote.getRandomQuote());
 		req.setAttribute("categoryList", category.getCategoryList().values());
-		req.getRequestDispatcher("quote.jsp").forward(req, resp);
+		req.getRequestDispatcher("main.jsp").forward(req, resp);
+		
 	}
 
 }

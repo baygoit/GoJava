@@ -5,13 +5,15 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Kickstarter</title>
 </head>
 <body>
 <h1>Daily quote: <c:out value="${quote}" /></h1>
 
 <c:forEach var="category" items="${categoryList}" varStatus="loop">
-    <li><c:out value="${loop.index + 1})"/>: <c:out value="${category}"/></li>
+    <li>
+    <a href="projects?categoryId=<c:out value="${loop.index + 1}"/>">
+    <c:out value="${category}"/></a></li> 
 </c:forEach>
 
 </body>
