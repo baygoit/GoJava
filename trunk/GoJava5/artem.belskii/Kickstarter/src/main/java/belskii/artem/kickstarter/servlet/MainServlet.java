@@ -12,7 +12,6 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
-import belskii.artem.kickstarter.Hello;
 import belskii.artem.kickstarter.dao.project.Project;
 import belskii.artem.kickstarter.mvc.controller.CategoryController;
 import belskii.artem.kickstarter.mvc.controller.ProjectController;
@@ -98,10 +97,10 @@ public class MainServlet extends HttpServlet{
 	}
 
 	private void showMainPage(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//		WebApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(getServletContext());
-//		Hello hello = (Hello) context.getBean("helloBean");
+		WebApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(getServletContext());
+		Hello hello = (Hello) context.getBean("helloBean");
 		req.setAttribute("quote", quote.getRandomQuote());
-//		req.setAttribute("hello", hello.getHello());
+		req.setAttribute("hello", hello.getHello());
 		req.setAttribute("categoryList", category.getCategoryList().values());
 		req.getRequestDispatcher("main.jsp").forward(req, resp);
 	}
