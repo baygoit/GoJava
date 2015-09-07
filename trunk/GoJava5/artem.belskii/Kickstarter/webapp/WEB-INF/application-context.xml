@@ -3,10 +3,10 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd">
-        
-        <bean id="test" class="belskii.artem.kickstarter.mvc.model.QuoteModel">
-        	<property name="test" value="testValueFromSpring"/>
-        </bean>
+
+    <bean id="helloBean" class="belskii.artem.kickstarter.Hello">
+        <property name="hello" value="New value from Spring bean!"/>
+    </bean>
+
+
 </beans>
-        
-        

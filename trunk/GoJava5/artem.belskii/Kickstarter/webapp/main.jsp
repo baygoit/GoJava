@@ -8,6 +8,7 @@
 <title>Kickstarter</title>
 </head>
 <body>
+<h1><c:out value="${test}" /></h1>
 <h1>Daily quote: <c:out value="${quote}" /></h1>
 
 <c:forEach var="category" items="${categoryList}" varStatus="loop">
@@ -15,6 +16,6 @@
     <a href="projects?categoryId=<c:out value="${loop.index + 1}"/>">
     <c:out value="${category}"/></a></li> 
 </c:forEach>
-
+<h1>test point: <c:out value="${hello}"/></h1>
 </body>
 </html>

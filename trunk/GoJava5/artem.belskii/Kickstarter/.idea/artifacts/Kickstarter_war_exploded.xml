@@ -1,0 +1,27 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="Kickstarter:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/Kickstarter_war_exploded</output-path>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="Kickstarter" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Maven: org.apache.tomcat:tomcat-jdbc:7.0.35" />
+          <element id="library" level="project" name="Maven: org.apache.tomcat:tomcat-juli:7.0.35" />
+          <element id="library" level="project" name="Maven: org.postgresql:postgresql:9.4-1201-jdbc41" />
+          <element id="library" level="project" name="Maven: javax.servlet:jstl:1.2" />
+          <element id="library" level="project" name="Maven: org.mockito:mockito-all:1.9.5" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-context:4.2.0.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-aop:4.2.0.RELEASE" />
+          <element id="library" level="project" name="Maven: aopalliance:aopalliance:1.0" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-beans:4.2.0.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-core:4.2.0.RELEASE" />
+          <element id="library" level="project" name="Maven: commons-logging:commons-logging:1.2" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-expression:4.2.0.RELEASE" />
+        </element>
+      </element>
+      <element id="javaee-facet-resources" facet="Kickstarter/web/Web" />
+    </root>
+  </artifact>
+</component>

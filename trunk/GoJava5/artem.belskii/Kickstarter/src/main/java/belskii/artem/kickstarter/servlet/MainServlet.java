@@ -6,6 +6,13 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
+
+import belskii.artem.kickstarter.Hello;
 import belskii.artem.kickstarter.dao.project.Project;
 import belskii.artem.kickstarter.mvc.controller.CategoryController;
 import belskii.artem.kickstarter.mvc.controller.ProjectController;
@@ -21,7 +28,8 @@ public class MainServlet extends HttpServlet{
 	private ProjectController project = new ProjectController(new ProjectModel(), new ProjectView());
 	private QuoteController quote = new QuoteController(new QuoteModel());
 	private int categoryId;
-
+	
+	
 	public String getUserRequest(HttpServletRequest req){
 		String url = req.getRequestURI();
 		return url.substring(req.getContextPath().length());
@@ -90,7 +98,10 @@ public class MainServlet extends HttpServlet{
 	}
 
 	private void showMainPage(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+//		WebApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(getServletContext());
+//		Hello hello = (Hello) context.getBean("helloBean");
 		req.setAttribute("quote", quote.getRandomQuote());
+//		req.setAttribute("hello", hello.getHello());
 		req.setAttribute("categoryList", category.getCategoryList().values());
 		req.getRequestDispatcher("main.jsp").forward(req, resp);
 	}

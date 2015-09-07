@@ -61,6 +61,7 @@ public class DBConnector {
 		ds.setDefaultAutoCommit(false);
 		try {
 			connection = ds.getConnection();
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
