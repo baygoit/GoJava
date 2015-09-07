@@ -1,10 +1,14 @@
 package belskii.artem.kickstarter.mvc.model;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 import belskii.artem.kickstarter.dao.quote.QuoteDao;
-import belskii.artem.kickstarter.dao.quote.QuoteDaoImplPsql;
+
 
 public class QuoteModel {
-	QuoteDao quoteDao = new QuoteDaoImplPsql("src/main/conf/database.conf");
+	ApplicationContext context = new ClassPathXmlApplicationContext("classpath:application-context.xml");
+	QuoteDao quoteDao = (QuoteDao) context.getBean("quoteDaoImplPsql"); 
 
 	public String getRandomQuote() {
 		return quoteDao.getRandomQuote();

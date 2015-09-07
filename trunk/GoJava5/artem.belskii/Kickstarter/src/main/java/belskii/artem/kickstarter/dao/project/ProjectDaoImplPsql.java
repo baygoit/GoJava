@@ -1,6 +1,7 @@
 package belskii.artem.kickstarter.dao.project;
 
 import java.sql.Connection;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -72,7 +73,6 @@ public class ProjectDaoImplPsql implements ProjectDao {
 				paymentStatement.setInt(1, currentProjectId);
 
 				for (long i = 0; i < paymentVariants.size(); i++) {
-
 					Object[] value = paymentVariants.get(i).keySet().toArray();
 					paymentStatement.setLong(2, new Long(value[0].toString()));
 					Object[] bonus = paymentVariants.get(i).values().toArray();
@@ -98,7 +98,7 @@ public class ProjectDaoImplPsql implements ProjectDao {
 	public Map<Long, Project> getProjectList() {
 		Map<Long, Project> answer = new HashMap<Long, Project>();
 		Project selectedProject = null;
-		String projectQuery = "select ID, PROJECT_NAME, GOAL, BALANCE, START_DATE, END_DATE, VIDEO_URL, CATEGORY_ID, DETAILS from projects;";
+		String projectQuery = "select ID, PROJECT_NAME, GOAL, BALANCE, START_DATE, END_DATE, VIDEO_URL, CATEGORY_ID, DETAILS from projects ORDER BY ID ASC;";
 		try (PreparedStatement statement = connection.prepareStatement(projectQuery)) {
 			ResultSet rs = statement.executeQuery();
 			while (rs.next()) {
@@ -248,6 +248,8 @@ public class ProjectDaoImplPsql implements ProjectDao {
 
 	@Override
 	public void update(Project updatedProject) {
+		//System.out.println("try update project with id: "+updatedProject.getProjectId());
+	
 		HashMap<Long, ArrayList<String>> faq = updatedProject.getFaq();
 		HashMap<Long, HashMap<Long, String>> paymentVariants = updatedProject.getPaymetVariants();
 		String name = updatedProject.getName();
@@ -271,40 +273,81 @@ public class ProjectDaoImplPsql implements ProjectDao {
 			statement.setInt(7, categoryId);
 			statement.setString(8, details);
 			statement.setLong(9, projectId);
+			//System.out.println(statement);
 			statement.execute();
 			
-			String faqQuery = "UPDATE faq SET QUESTION=?, ANSWER=?, PROJECT_ID=?;";
-			try (PreparedStatement faqStatement = connection.prepareStatement(faqQuery)) {
-				for (long i = 0; i < faq.size(); i++) {
-					faqStatement.setString(1, faq.get(i).get(0));
-					faqStatement.setString(2, faq.get(i).get(1));
-					faqStatement.setLong(3, updatedProject.getcategoryId());
-					faqStatement.execute();
+			String checkfaqQuery="select exists(select 1 from faq where id=?);";
+			try (PreparedStatement checkfaqStatement = connection.prepareStatement(checkfaqQuery)) {
+				String faqQuery="";
+				if (statement.execute()){
+					faqQuery = "UPDATE faq SET QUESTION=?, ANSWER=?, PROJECT_ID=?;";
+					try (PreparedStatement faqStatement = connection.prepareStatement(faqQuery)) {
+						for (long i = 0; i < faq.size(); i++) {
+							faqStatement.setString(1, faq.get(i).get(0));
+							faqStatement.setString(2, faq.get(i).get(1));
+							faqStatement.setLong(3, updatedProject.getProjectId());
+							//System.out.println(faqStatement);
+							faqStatement.execute();
+						}
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+					
+				} else {
+					faqQuery = "INSERT INTO faq (PROJECT_ID, QUESTION, ANSWER) values (?,?,?);";
+					try (PreparedStatement faqStatement = connection.prepareStatement(faqQuery)) {
+						for (long i = 0; i < faq.size(); i++) {
+							faqStatement.setLong(1, updatedProject.getProjectId());
+							faqStatement.setString(2, faq.get(i).get(0));
+							faqStatement.setString(3, faq.get(i).get(1));
+							//System.out.println(faqStatement);
+							faqStatement.execute();
+						}
+
+					}
 				}
-			} catch (SQLException e) {
-				e.printStackTrace();
+			}
+			String checkPaymentMethodsQuery = "select exists(select 1 from payment_methods where id=?);";
+			try (PreparedStatement checkpaymentStatement = connection.prepareStatement(checkPaymentMethodsQuery)) {
+				if (statement.execute()){
+					String paymentQuery = "UPDATE payment_methods SET PROJECT_ID=?,	PAYMENT_AMOUMT=?, BONUS=? where PROJECT_ID=?;";
+					try (PreparedStatement paymentStatement = connection.prepareStatement(paymentQuery)) {
+						for (long i = 0; i < paymentVariants.size(); i++) {
+							Object[] value = paymentVariants.get(i).keySet().toArray();
+							paymentStatement.setLong(1, new Long(value[0].toString()));
+							Object[] bonus = paymentVariants.get(i).values().toArray();
+							paymentStatement.setString(2, bonus[0].toString());
+							paymentStatement.setLong(3, updatedProject.getcategoryId());
+							//System.out.println(paymentStatement);
+							paymentStatement.execute();
+						}
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				} else {
+					String paymentQuery = "INSERT INTO payment_methods (PROJECT_ID,	PAYMENT_AMOUMT, BONUS) values (?,?,?);";
+					try (PreparedStatement paymentStatement = connection.prepareStatement(paymentQuery)) {
+						paymentStatement.setLong(1, projectId);
+
+						for (long i = 0; i < paymentVariants.size(); i++) {
+							Object[] value = paymentVariants.get(i).keySet().toArray();
+							paymentStatement.setLong(2, new Long(value[0].toString()));
+							Object[] bonus = paymentVariants.get(i).values().toArray();
+							paymentStatement.setString(3, bonus[0].toString());
+							paymentStatement.execute();
+						}
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+					
+				}
 			}
 			
-			String paymentQuery = "UPDATE payment_methods SET PROJECT_ID=?,	PAYMENT_AMOUMT=?, BONUS=? where PROJECT_ID=?;";
-			try (PreparedStatement paymentStatement = connection.prepareStatement(paymentQuery)) {
-				for (long i = 0; i < paymentVariants.size(); i++) {
-					Object[] value = paymentVariants.get(i).keySet().toArray();
-					paymentStatement.setLong(1, new Long(value[0].toString()));
-					Object[] bonus = paymentVariants.get(i).values().toArray();
-					paymentStatement.setString(2, bonus[0].toString());
-					paymentStatement.setLong(3, updatedProject.getcategoryId());
-					paymentStatement.execute();
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
 		
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 
-
-	
 		try {
 			connection.commit();
 		} catch (SQLException e) {

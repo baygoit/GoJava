@@ -23,6 +23,7 @@ public class CategoryDaoImplPsql implements CategoryDao {
 		try (PreparedStatement statement = connection.prepareStatement(query)) {
 			statement.setString(1, categoryInfo);
 			statement.execute();
+			connection.commit();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

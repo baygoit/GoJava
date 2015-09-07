@@ -1,11 +1,10 @@
 package belskii.artem.kickstarter.dao;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.MessageFormat;
 import java.util.Properties;
@@ -25,11 +24,14 @@ public class DBConnector {
 		Properties prop = new Properties();
 		InputStream input = null;
 		try {
-			input = new FileInputStream(this.configFileName);
+			ClassLoader classLoader = getClass().getClassLoader();
+			File file = new File(classLoader.getResource(configFileName).getFile());
+			input = new FileInputStream(file);
 			prop.load(input);
 
 			conn = this.prepareConnection(prop.getProperty("host"), new Integer(prop.getProperty("port")),
-					prop.getProperty("user"), prop.getProperty("pass"), prop.getProperty("db"));
+					prop.getProperty("user"), prop.getProperty("pass"), prop.getProperty("db")
+					);
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		} finally {
@@ -56,27 +58,18 @@ public class DBConnector {
 		ds.setUsername(user);
 		ds.setPassword(pass);
 		ds.setDefaultAutoCommit(false);
+		ds.setInitialSize(2);
+		ds.setMaxActive(5);
+		ds.setMaxIdle(5);
+		ds.setMinIdle(2);
 		try {
 			connection = ds.getConnection();
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return connection;
 	}
 
-	public void test() {
-		Connection conn = this.prepareConnection("localhost", 5432, "root", "Vsyfrf;tvpkj", "kickstarter");
-		String query = "select * from quotes";
-		try (PreparedStatement statement = conn.prepareStatement(query)) {
-			ResultSet rs = statement.executeQuery();
-			while (rs.next()) {
-				System.out.println(rs.getString("TEXT"));
-			}
-
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
 
 }

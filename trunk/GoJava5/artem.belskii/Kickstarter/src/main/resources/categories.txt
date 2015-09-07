@@ -1,20 +1,2 @@
-0;Art
-1;Comics
-2;Crafts
-3;Dance
-4;Design
-5;Fashion
-6;Film & Video
-7;Food
-8;Games
-9;Journalism
-10;Music
-11;Photography
-12;Publishing
-13;Technology
-14;Theater
-15;New category
-16;New category
-17;New category
-18;New category
-19;New category
+0;New category
+1;New category
