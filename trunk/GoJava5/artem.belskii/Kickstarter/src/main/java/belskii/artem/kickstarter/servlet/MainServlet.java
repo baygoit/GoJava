@@ -6,7 +6,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import belskii.artem.kickstarter.dao.project.Project;
 import belskii.artem.kickstarter.mvc.controller.CategoryController;
 import belskii.artem.kickstarter.mvc.controller.ProjectController;
@@ -21,7 +20,6 @@ public class MainServlet extends HttpServlet{
 	private CategoryController category = new CategoryController(new CategoryModel(), new CategoryView());
 	private ProjectController project = new ProjectController(new ProjectModel(), new ProjectView());
 	private QuoteController quote = new QuoteController(new QuoteModel());
-	
 	private int categoryId;
 
 	public String getUserRequest(HttpServletRequest req){
@@ -97,4 +95,9 @@ public class MainServlet extends HttpServlet{
 		req.getRequestDispatcher("main.jsp").forward(req, resp);
 	}
 
+
+	
+
+
+	
 }
