@@ -1,5 +1,6 @@
 package belskii.artem.kickstarter.dao;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -25,7 +26,9 @@ public class DBConnector {
 		Properties prop = new Properties();
 		InputStream input = null;
 		try {
-			input = new FileInputStream(this.configFileName);
+			ClassLoader classLoader = getClass().getClassLoader();
+			File file = new File(classLoader.getResource(configFileName).getFile());
+			input = new FileInputStream(file);
 			prop.load(input);
 
 			conn = this.prepareConnection(prop.getProperty("host"), new Integer(prop.getProperty("port")),

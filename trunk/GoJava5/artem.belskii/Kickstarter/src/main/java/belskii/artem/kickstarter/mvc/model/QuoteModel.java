@@ -4,7 +4,7 @@ import belskii.artem.kickstarter.dao.quote.QuoteDao;
 import belskii.artem.kickstarter.dao.quote.QuoteDaoImplPsql;
 
 public class QuoteModel {
-	QuoteDao quoteDao = new QuoteDaoImplPsql("C://conf//database.conf");
+	QuoteDao quoteDao = new QuoteDaoImplPsql("conf/database.conf");
 
 	public String getRandomQuote() {
 		return quoteDao.getRandomQuote();
