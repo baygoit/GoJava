@@ -21,6 +21,8 @@ public class MainServlet extends HttpServlet{
 	private CategoryController category = new CategoryController(new CategoryModel(), new CategoryView());
 	private ProjectController project = new ProjectController(new ProjectModel(), new ProjectView());
 	private QuoteController quote = new QuoteController(new QuoteModel());
+	
+	private int categoryId;
 
 	public String getUserRequest(HttpServletRequest req){
 		String url = req.getRequestURI();
@@ -78,11 +80,12 @@ public class MainServlet extends HttpServlet{
 		int projectid=Integer.valueOf(req.getParameter("projectid"));
 		req.setAttribute("project", project.getProjectById(projectid));
 		req.setAttribute("paymetVariants", project.getProjectById(projectid).getPaymetVariants());
+		req.setAttribute("categoryId", categoryId);
 		req.getRequestDispatcher("projectdetails.jsp").forward(req, resp);
 	}
 
 	private void showProjectsFromCategory(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		int categoryId=Integer.valueOf(req.getParameter("categoryId"));
+		categoryId=Integer.valueOf(req.getParameter("categoryId"));
 		req.setAttribute("categoryName", category.getCategoryList().get(categoryId-1));
 		req.setAttribute("projectsFromCategory",project.getProjectFromCategory(categoryId).values());
 		req.getRequestDispatcher("projects.jsp").forward(req, resp);

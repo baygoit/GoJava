@@ -53,6 +53,6 @@
 	</form>
 		
 	</c:if>
-	
+	<p><a href=projects?categoryId=${categoryId} >Return to project list</a></p>
 </body>
 </html>

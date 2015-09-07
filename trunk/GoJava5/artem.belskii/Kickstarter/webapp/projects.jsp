@@ -13,8 +13,10 @@
     <a href="projectdetails?projectid=<c:out value="${project.projectId}"/>">
     Project name: <c:out value="${project.name}"/>. Project details: <c:out value="${project.details}"/>
     </a></li>
-      
 </c:forEach>
+
+
+<p><a href=main>Return to category list</a></p>
 
 
 
