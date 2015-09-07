@@ -15,7 +15,7 @@ public class DispatcherController {
 	private int userInput=-1;
 	private int userInputTmp=-1;
 	private int CLEAN_VALUE=-2;
-	private Long currentProjectId;
+	private int currentProjectId;
 	private int currentCategoryId;	
 	private Output out = new Output();
 	private Input in = new Input();
@@ -118,7 +118,7 @@ public class DispatcherController {
 	private void showProjectDetails(int categoryId, int selectedProject){
 		selectedProject=selectedProject-1;
 		out.showProjectDetails(project.getProjectFromCategory(categoryId).get(new Long(selectedProject)));
-		currentProjectId=project.getProjectFromCategory(categoryId).get(new Long(selectedProject)).getProjectId();
+		currentProjectId=Integer.valueOf(project.getProjectFromCategory(categoryId).get(new Long(selectedProject)).getProjectId().toString());
 		out.show("put 1 to make default payment");
 		out.show("put 2 to make qustom payment");
 		out.show("put 3 to asq a question");

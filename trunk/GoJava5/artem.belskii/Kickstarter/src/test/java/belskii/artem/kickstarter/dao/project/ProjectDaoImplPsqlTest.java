@@ -26,12 +26,24 @@ public class ProjectDaoImplPsqlTest {
 		project.getProjectDetails(1).addPaymetVariants(10L, "small bonus for project 1");
 		project.getProjectDetails(1).addPaymetVariants(30L, "standart bonus for project 1");
 		project.getProjectDetails(1).addPaymetVariants(50L, "extra bonus for project 1");
+		Project tmpProject = project.getProjectDetails(1); 
+		tmpProject.asqAQuestion("firs question");
+		tmpProject.asqAQuestion("second question");
+		project.update(tmpProject);
 		project.getProjectDetails(2).addPaymetVariants(10L, "small bonus for project 2");
 		project.getProjectDetails(2).addPaymetVariants(30L, "standart bonus for project 2");
 		project.getProjectDetails(2).addPaymetVariants(50L, "extra bonus for project 2");
+		tmpProject = project.getProjectDetails(2); 
+		tmpProject.asqAQuestion("firs question");
+		tmpProject.asqAQuestion("second question");
+		project.update(tmpProject);
 		project.getProjectDetails(3).addPaymetVariants(10L, "small bonus for project 3");
 		project.getProjectDetails(3).addPaymetVariants(30L, "standart bonus for project 3");
 		project.getProjectDetails(3).addPaymetVariants(50L, "extra bonus for project 3");
+		tmpProject = project.getProjectDetails(3); 
+		tmpProject.asqAQuestion("firs question");
+		tmpProject.asqAQuestion("second question");
+		project.update(tmpProject);
 	}
 
 	@Test

@@ -54,6 +54,8 @@ public class QuoteDaoImplPsql implements QuoteDao {
 		try (PreparedStatement statement = connection.prepareStatement(query)) {
 			statement.setString(1, text);
 			statement.execute();
+			connection.commit();
+		
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

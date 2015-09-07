@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
     
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"><html>
 <html>
@@ -20,7 +21,20 @@
     <li>Project details: <c:out value="${project.details}"/></li>
     <li></li>
     <li>FAQ for project:</li>
-
-    
+    <li>Project faq:</li>
+    <c:if test="${fn:length(project.faq) eq 0}">
+   		<p>You can ask first question:</p>
+   		<form action="" method="POST">
+	        Please enter your question:  <input type="text" name="question" size="20px"> <br>
+        <input type="submit" value="submit">
+    </form>
+	</c:if>
+	<c:if test="${fn:length(project.faq) gt 0}">
+		<c:forEach var="question" items="${project.faq}" varStatus="loop">
+				<p>Q: <c:out value="${question['value']['0']}"/></p>
+				<p>A: <c:out value="${question['value']['1']}"/></p>
+		</c:forEach>
+	</c:if>
+	
 </body>
 </html>

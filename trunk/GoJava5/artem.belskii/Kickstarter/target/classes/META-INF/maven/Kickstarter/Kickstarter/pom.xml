@@ -49,25 +49,32 @@
 			<artifactId>postgresql</artifactId>
 			<version>9.4-1201-jdbc41</version>
 		</dependency>
-
-
-		        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>jstl</artifactId>
-            <version>1.2</version>
-        </dependency>
-        
-        <dependency>
-    <groupId>javax.servlet</groupId>
-    <artifactId>servlet-api</artifactId>
-    <version>2.5</version>
-    <scope>provided</scope>
-</dependency>
-<dependency>
-    <groupId>javax.servlet.jsp</groupId>
-    <artifactId>jsp-api</artifactId>
-    <version>2.1</version>
-    <scope>provided</scope>
-</dependency>
-    </dependencies>		
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<version>2.5</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet.jsp</groupId>
+			<artifactId>jsp-api</artifactId>
+			<version>2.1</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.7.12</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>1.7.12</version>
+		</dependency>
+	</dependencies>
 </project>
