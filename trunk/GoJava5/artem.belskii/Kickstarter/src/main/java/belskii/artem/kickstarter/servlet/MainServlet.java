@@ -16,7 +16,6 @@ import belskii.artem.kickstarter.mvc.model.ProjectModel;
 import belskii.artem.kickstarter.mvc.model.QuoteModel;
 import belskii.artem.kickstarter.mvc.view.CategoryView;
 import belskii.artem.kickstarter.mvc.view.ProjectView;
-//implements DoGetServlet 
 
 public class MainServlet extends HttpServlet{
 	private CategoryController category = new CategoryController(new CategoryModel(), new CategoryView());
@@ -46,8 +45,31 @@ public class MainServlet extends HttpServlet{
 	public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
 		int projectid=Integer.valueOf(req.getParameter("projectid"));
 		Project projectforEdit = project.getProjectById(projectid);
-		projectforEdit.asqAQuestion(req.getParameter("question"));
-		project.save(projectforEdit);
+		String question = req.getParameter("question");
+		if (question.length()>0){
+			projectforEdit.asqAQuestion(req.getParameter("question"));
+			project.save(projectforEdit);
+		}
+		
+		Long donate=0L;
+		if(!req.getParameter("donate").equals("")){
+			donate=Long.valueOf(req.getParameter("donate"));			
+		}
+
+		Long customDonate = 0L;
+		if(!req.getParameter("customDonate").equals("")){
+			customDonate =Long.valueOf(req.getParameter("customDonate"));
+		}
+
+		if (donate>0 || customDonate>0){
+			if (customDonate>0){
+				projectforEdit.updateBalance(customDonate);
+				project.save(projectforEdit);
+			} else {
+				projectforEdit.updateBalance(donate);
+				project.save(projectforEdit);
+			}
+		}
 		this.showProjectDetails(req,resp);
 	}
 
@@ -55,6 +77,7 @@ public class MainServlet extends HttpServlet{
 	private void showProjectDetails(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		int projectid=Integer.valueOf(req.getParameter("projectid"));
 		req.setAttribute("project", project.getProjectById(projectid));
+		req.setAttribute("paymetVariants", project.getProjectById(projectid).getPaymetVariants());
 		req.getRequestDispatcher("projectdetails.jsp").forward(req, resp);
 	}
 

@@ -73,7 +73,6 @@ public class ProjectDaoImplPsql implements ProjectDao {
 				paymentStatement.setInt(1, currentProjectId);
 
 				for (long i = 0; i < paymentVariants.size(); i++) {
-
 					Object[] value = paymentVariants.get(i).keySet().toArray();
 					paymentStatement.setLong(2, new Long(value[0].toString()));
 					Object[] bonus = paymentVariants.get(i).values().toArray();
@@ -249,7 +248,7 @@ public class ProjectDaoImplPsql implements ProjectDao {
 
 	@Override
 	public void update(Project updatedProject) {
-		System.out.println("try update project with id: "+updatedProject.getProjectId());
+		//System.out.println("try update project with id: "+updatedProject.getProjectId());
 	
 		HashMap<Long, ArrayList<String>> faq = updatedProject.getFaq();
 		HashMap<Long, HashMap<Long, String>> paymentVariants = updatedProject.getPaymetVariants();
@@ -274,10 +273,10 @@ public class ProjectDaoImplPsql implements ProjectDao {
 			statement.setInt(7, categoryId);
 			statement.setString(8, details);
 			statement.setLong(9, projectId);
-			System.out.println(statement);
+			//System.out.println(statement);
 			statement.execute();
 			
-			String checkfaqQuery="select exists(select 1 from contact where id=?);";
+			String checkfaqQuery="select exists(select 1 from faq where id=?);";
 			try (PreparedStatement checkfaqStatement = connection.prepareStatement(checkfaqQuery)) {
 				String faqQuery="";
 				if (statement.execute()){
@@ -287,7 +286,7 @@ public class ProjectDaoImplPsql implements ProjectDao {
 							faqStatement.setString(1, faq.get(i).get(0));
 							faqStatement.setString(2, faq.get(i).get(1));
 							faqStatement.setLong(3, updatedProject.getProjectId());
-							System.out.println(faqStatement);
+							//System.out.println(faqStatement);
 							faqStatement.execute();
 						}
 					} catch (SQLException e) {
@@ -301,34 +300,54 @@ public class ProjectDaoImplPsql implements ProjectDao {
 							faqStatement.setLong(1, updatedProject.getProjectId());
 							faqStatement.setString(2, faq.get(i).get(0));
 							faqStatement.setString(3, faq.get(i).get(1));
-							System.out.println(faqStatement);
+							//System.out.println(faqStatement);
 							faqStatement.execute();
 						}
 
+					}
 				}
 			}
-			}
-			String paymentQuery = "UPDATE payment_methods SET PROJECT_ID=?,	PAYMENT_AMOUMT=?, BONUS=? where PROJECT_ID=?;";
-			try (PreparedStatement paymentStatement = connection.prepareStatement(paymentQuery)) {
-				for (long i = 0; i < paymentVariants.size(); i++) {
-					Object[] value = paymentVariants.get(i).keySet().toArray();
-					paymentStatement.setLong(1, new Long(value[0].toString()));
-					Object[] bonus = paymentVariants.get(i).values().toArray();
-					paymentStatement.setString(2, bonus[0].toString());
-					paymentStatement.setLong(3, updatedProject.getcategoryId());
-					System.out.println(paymentStatement);
-					paymentStatement.execute();
+			String checkPaymentMethodsQuery = "select exists(select 1 from payment_methods where id=?);";
+			try (PreparedStatement checkpaymentStatement = connection.prepareStatement(checkPaymentMethodsQuery)) {
+				if (statement.execute()){
+					String paymentQuery = "UPDATE payment_methods SET PROJECT_ID=?,	PAYMENT_AMOUMT=?, BONUS=? where PROJECT_ID=?;";
+					try (PreparedStatement paymentStatement = connection.prepareStatement(paymentQuery)) {
+						for (long i = 0; i < paymentVariants.size(); i++) {
+							Object[] value = paymentVariants.get(i).keySet().toArray();
+							paymentStatement.setLong(1, new Long(value[0].toString()));
+							Object[] bonus = paymentVariants.get(i).values().toArray();
+							paymentStatement.setString(2, bonus[0].toString());
+							paymentStatement.setLong(3, updatedProject.getcategoryId());
+							//System.out.println(paymentStatement);
+							paymentStatement.execute();
+						}
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				} else {
+					String paymentQuery = "INSERT INTO payment_methods (PROJECT_ID,	PAYMENT_AMOUMT, BONUS) values (?,?,?);";
+					try (PreparedStatement paymentStatement = connection.prepareStatement(paymentQuery)) {
+						paymentStatement.setLong(1, projectId);
+
+						for (long i = 0; i < paymentVariants.size(); i++) {
+							Object[] value = paymentVariants.get(i).keySet().toArray();
+							paymentStatement.setLong(2, new Long(value[0].toString()));
+							Object[] bonus = paymentVariants.get(i).values().toArray();
+							paymentStatement.setString(3, bonus[0].toString());
+							paymentStatement.execute();
+						}
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+					
 				}
-			} catch (SQLException e) {
-				e.printStackTrace();
 			}
+			
 		
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 
-
-	
 		try {
 			connection.commit();
 		} catch (SQLException e) {

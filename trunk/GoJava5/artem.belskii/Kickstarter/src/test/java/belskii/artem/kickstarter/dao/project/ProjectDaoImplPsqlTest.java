@@ -23,24 +23,26 @@ public class ProjectDaoImplPsqlTest {
 		project.addProject(new Project("My test project from Art category", new Long(1), new Long(1), "28.07.2015",	"30.07.2015", "https://www.youtube.com/watch?v=uC0pqWX3yB8", 1, "Project details"));
 		project.addProject(new Project("My test project1 from Comics category", new Long(2), new Long(2), "29.07.2015",	"31.07.2015", "https://www.youtube.com/watch?v=uC0pqWX3yB8", 2, "Project details"));
 		project.addProject(new Project("My test project2 from Crafts category", new Long(3), new Long(3), "30.07.2015",	"01.08.2015", "https://www.youtube.com/watch?v=uC0pqWX3yB8", 3, "Project details"));
-		project.getProjectDetails(1).addPaymetVariants(10L, "small bonus for project 1");
-		project.getProjectDetails(1).addPaymetVariants(30L, "standart bonus for project 1");
-		project.getProjectDetails(1).addPaymetVariants(50L, "extra bonus for project 1");
 		Project tmpProject = project.getProjectDetails(1); 
+		tmpProject.addPaymetVariants(10L, "small bonus for project 1");
+		tmpProject.addPaymetVariants(30L, "standart bonus for project 1");
+		tmpProject.addPaymetVariants(50L, "extra bonus for project 1");
 		tmpProject.asqAQuestion("firs question");
 		tmpProject.asqAQuestion("second question");
 		project.update(tmpProject);
-		project.getProjectDetails(2).addPaymetVariants(10L, "small bonus for project 2");
-		project.getProjectDetails(2).addPaymetVariants(30L, "standart bonus for project 2");
-		project.getProjectDetails(2).addPaymetVariants(50L, "extra bonus for project 2");
-		tmpProject = project.getProjectDetails(2); 
+		
+		tmpProject = project.getProjectDetails(2);
+		tmpProject.addPaymetVariants(10L, "small bonus for project 2");
+		tmpProject.addPaymetVariants(30L, "standart bonus for project 2");
+		tmpProject.addPaymetVariants(50L, "extra bonus for project 2");
 		tmpProject.asqAQuestion("firs question");
 		tmpProject.asqAQuestion("second question");
 		project.update(tmpProject);
-		project.getProjectDetails(3).addPaymetVariants(10L, "small bonus for project 3");
-		project.getProjectDetails(3).addPaymetVariants(30L, "standart bonus for project 3");
-		project.getProjectDetails(3).addPaymetVariants(50L, "extra bonus for project 3");
-		tmpProject = project.getProjectDetails(3); 
+		
+		tmpProject = project.getProjectDetails(3);
+		tmpProject.addPaymetVariants(10L, "small bonus for project 3");
+		tmpProject.addPaymetVariants(30L, "standart bonus for project 3");
+		tmpProject.addPaymetVariants(50L, "extra bonus for project 3");
 		tmpProject.asqAQuestion("firs question");
 		tmpProject.asqAQuestion("second question");
 		project.update(tmpProject);

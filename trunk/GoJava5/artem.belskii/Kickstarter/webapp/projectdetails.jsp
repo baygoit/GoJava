@@ -34,6 +34,24 @@
 				<p>Q: <c:out value="${question['value']['0']}"/></p>
 				<p>A: <c:out value="${question['value']['1']}"/></p>
 		</c:forEach>
+   		<form action="" method="POST">
+	        You can ask new question:  <input type="text" name="question" size="20px"> <br>
+        <input type="submit" value="submit">
+		
+	</c:if>
+	
+	<li>Donate</li>
+	<c:if test="${fn:length(paymetVariants) gt 0}">
+	<form action="" method="POST">
+		<c:forEach var="variant" items="${paymetVariants}" varStatus="loop">
+					<c:forEach var="variant" items="${variant['value']}" varStatus="loop">
+						<br>Pay "${variant['key']}" and get "${variant['value']}" <input type="radio" name="donate" value="${variant['key']}"> <br>
+					</c:forEach>
+		</c:forEach>
+		<p>Or put custom payment amount <input type="text" name="customDonate" size="20px"> </p>
+		<input type="submit" value="submit">
+	</form>
+		
 	</c:if>
 	
 </body>
