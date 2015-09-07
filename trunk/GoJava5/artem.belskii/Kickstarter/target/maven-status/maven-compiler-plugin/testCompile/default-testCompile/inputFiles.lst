@@ -1,2 +1,15 @@
-F:\Dropbox\java\GoJava_5\Kickstarter\src\test\java\belskii\artem\kickstarter\ProjectsTest.java
-F:\Dropbox\java\GoJava_5\Kickstarter\src\test\java\belskii\artem\kickstarter\CategoryTest.java
+C:\java\GoJava5\artem.belskii\Kickstarter\src\test\java\belskii\artem\kickstarter\dao\category\CategoryTest.java
+C:\java\GoJava5\artem.belskii\Kickstarter\src\test\java\belskii\artem\kickstarter\mvc\model\CategoryModelTest.java
+C:\java\GoJava5\artem.belskii\Kickstarter\src\test\java\belskii\artem\kickstarter\dao\project\ProjectDaoImplFileTest.java
+C:\java\GoJava5\artem.belskii\Kickstarter\src\test\java\belskii\artem\kickstarter\mvc\controller\ProjectControllerTest.java
+C:\java\GoJava5\artem.belskii\Kickstarter\src\test\java\belskii\artem\kickstarter\dao\category\CategoryDaoImplPsqlTest.java
+C:\java\GoJava5\artem.belskii\Kickstarter\src\test\java\belskii\artem\kickstarter\dao\project\ProjectTest.java
+C:\java\GoJava5\artem.belskii\Kickstarter\src\test\java\belskii\artem\kickstarter\dao\category\CategoryDaoImplFileTest.java
+C:\java\GoJava5\artem.belskii\Kickstarter\src\test\java\belskii\artem\kickstarter\mvc\model\ProjectModelTest.java
+C:\java\GoJava5\artem.belskii\Kickstarter\src\test\java\belskii\artem\kickstarter\dao\quote\QuoteDaoImplPsqlTest.java
+C:\java\GoJava5\artem.belskii\Kickstarter\src\test\java\belskii\artem\kickstarter\mvc\controller\QuoteControllerTest.java
+C:\java\GoJava5\artem.belskii\Kickstarter\src\test\java\belskii\artem\kickstarter\InputTest.java
+C:\java\GoJava5\artem.belskii\Kickstarter\src\test\java\belskii\artem\kickstarter\DispatcherControllerTest.java
+C:\java\GoJava5\artem.belskii\Kickstarter\src\test\java\belskii\artem\kickstarter\mvc\controller\CategoryControllerTest.java
+C:\java\GoJava5\artem.belskii\Kickstarter\src\test\java\belskii\artem\kickstarter\dao\project\ProjectDaoImplPsqlTest.java
+C:\java\GoJava5\artem.belskii\Kickstarter\src\test\java\belskii\artem\kickstarter\dao\project\ProjectDaoImplHardCodingTest.java
