@@ -55,12 +55,13 @@ public class ProjectDaoImplHardCoding implements ProjectDao {
 	}
 
 	@Override
-	public void commit() {
-		// empty realization, saving only in memory.
+	public void update(Project currentProject) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
-	public void update(Project currentProject) {
+	public void initDemoDB() {
 		// TODO Auto-generated method stub
 		
 	}
