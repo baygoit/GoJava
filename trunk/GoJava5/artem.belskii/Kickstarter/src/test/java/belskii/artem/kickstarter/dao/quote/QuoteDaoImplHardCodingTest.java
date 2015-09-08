@@ -2,20 +2,14 @@ package belskii.artem.kickstarter.dao.quote;
 
 import static org.junit.Assert.*;
 
-import org.junit.Before;
 import org.junit.Test;
 
-public class QuoteDaoImplPsqlTest {
+public class QuoteDaoImplHardCodingTest {
+	QuoteDao quoteDao = new QuoteDaoImplHardCoding();
 
-	QuoteDao quoteDao = new QuoteDaoImplPsql("conf/testDatabase.conf");
-	
-	@Before
-	public void setUp(){
-		quoteDao.initDemoDB();
-	}
-	
+
 	@Test
-	public void testQuoteDaoImplPsql() {
+	public void testQuoteDaoImplHardCoding() {
 		assertNotNull(quoteDao);
 	}
 
@@ -26,7 +20,7 @@ public class QuoteDaoImplPsqlTest {
 
 	@Test
 	public void testAddQuote() {
-		quoteDao.addQuote("some Quote");
+		quoteDao.addQuote("some quote");
 	}
 
 }

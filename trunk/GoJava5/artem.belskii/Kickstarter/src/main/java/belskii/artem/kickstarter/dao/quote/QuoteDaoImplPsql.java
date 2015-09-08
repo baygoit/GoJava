@@ -55,10 +55,35 @@ public class QuoteDaoImplPsql implements QuoteDao {
 			statement.setString(1, text);
 			statement.execute();
 			connection.commit();
-		
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public void initDemoDB() {
+		String dropTables = "DROP TABLE IF EXISTS QUOTES;";
+		try (PreparedStatement statement = connection.prepareStatement(dropTables)) {
+			connection.setAutoCommit(true);
+			statement.execute();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		String createQuote = "CREATE TABLE QUOTES (ID serial, TEXT varchar(500));";
+		try (PreparedStatement quoteStatement = connection.prepareStatement(createQuote)) {
+			connection.setAutoCommit(true);
+			quoteStatement.execute();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		};
+		this.addQuote("Things work out best for those who make the best of how things work out.");
+		this.addQuote("All our dreams can come true if we have the courage to pursue them.");
+		this.addQuote("Success is walking from failure to failure with no loss of enthusiasm.");
+		this.addQuote("Try not to become a person of success, but rather try to become a person of value.");
+		this.addQuote("Don't be afraid to give up the good to go for the great.");
+
 	}
 
 }

@@ -5,18 +5,11 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-public class QuoteDaoImplPsqlTest {
-
-	QuoteDao quoteDao = new QuoteDaoImplPsql("conf/testDatabase.conf");
-	
+public class QuoteDaoImplFileTest {
+	QuoteDao quoteDao = new QuoteDaoImplFile();
 	@Before
 	public void setUp(){
 		quoteDao.initDemoDB();
-	}
-	
-	@Test
-	public void testQuoteDaoImplPsql() {
-		assertNotNull(quoteDao);
 	}
 
 	@Test
@@ -26,7 +19,7 @@ public class QuoteDaoImplPsqlTest {
 
 	@Test
 	public void testAddQuote() {
-		quoteDao.addQuote("some Quote");
+		quoteDao.addQuote("someQuote");
 	}
 
 }

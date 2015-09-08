@@ -25,4 +25,10 @@ public class QuoteDaoImplHardCoding implements QuoteDao {
 		this.quotes.put(index, text);
 	}
 
+	@Override
+	public void initDemoDB() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
