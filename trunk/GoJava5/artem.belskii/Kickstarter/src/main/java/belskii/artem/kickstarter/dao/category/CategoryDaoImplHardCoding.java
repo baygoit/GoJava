@@ -42,4 +42,10 @@ public class CategoryDaoImplHardCoding implements CategoryDao {
 		}
 		return answer;
 	}
+
+	@Override
+	public void initDemoDB() {
+		// TODO Auto-generated method stub
+		
+	}
 }

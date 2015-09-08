@@ -13,13 +13,3 @@
 12;Publishing
 13;Technology
 14;Theater
-15;New category
-16;New category
-17;New category
-18;New category
-19;New category
-20;New category
-21;New category
-22;New category
-23;New category
-24;New category

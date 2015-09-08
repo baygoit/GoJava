@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class CategoryDaoImplFile implements CategoryDao {
-	String FILE_PATH="src/main/resources/categories.txt";
+	String FILE_PATH="src/main/resources/dataInFiles/categories.txt";
 
 
 	public void addCategory(String categoryInfo) {
@@ -52,6 +52,32 @@ public class CategoryDaoImplFile implements CategoryDao {
 	public String getCategoryNameById(int id) {
 		String answer=this.getCategoryList().get(id);
 		return answer;
+	}
+
+	@Override
+	public void initDemoDB() {
+		try(BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH, false)))
+        {   writer.write("");
+            writer.close();
+        }
+        catch(IOException ex){
+            System.out.println(ex.getMessage());
+        }
+		this.addCategory("Art");
+		this.addCategory("Comics");
+		this.addCategory("Crafts");
+		this.addCategory("Dance");
+		this.addCategory("Design");
+		this.addCategory("Fashion");
+		this.addCategory("Film & Video");
+		this.addCategory("Food");
+		this.addCategory("Games");
+		this.addCategory("Journalism");
+		this.addCategory("Music");
+		this.addCategory("Photography");
+		this.addCategory("Publishing");
+		this.addCategory("Technology");
+		this.addCategory("Theater");
 	}
 
 }

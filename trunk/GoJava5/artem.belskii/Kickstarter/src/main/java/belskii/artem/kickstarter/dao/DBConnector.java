@@ -57,7 +57,6 @@ public class DBConnector {
 		ds.setUrl(url);
 		ds.setUsername(user);
 		ds.setPassword(pass);
-		ds.setDefaultAutoCommit(false);
 		ds.setInitialSize(2);
 		ds.setMaxActive(5);
 		ds.setMaxIdle(5);

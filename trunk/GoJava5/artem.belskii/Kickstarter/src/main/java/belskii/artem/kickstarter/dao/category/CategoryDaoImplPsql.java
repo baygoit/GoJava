@@ -23,7 +23,6 @@ public class CategoryDaoImplPsql implements CategoryDao {
 		try (PreparedStatement statement = connection.prepareStatement(query)) {
 			statement.setString(1, categoryInfo);
 			statement.execute();
-			connection.commit();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -63,6 +62,38 @@ public class CategoryDaoImplPsql implements CategoryDao {
 			e.printStackTrace();
 		}
 		return answer;
+	}
+	
+	public void initDemoDB(){
+		
+		String dropTables = "DROP TABLE IF EXISTS CATEGORYES";
+		try (PreparedStatement statement = connection.prepareStatement(dropTables)) {
+			connection.setAutoCommit(true);
+			statement.execute();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		String createCategory = "CREATE TABLE CATEGORYES (ID serial, TITLE varchar(100));";
+		try (PreparedStatement categoryStatement = connection.prepareStatement(createCategory)) {
+			connection.setAutoCommit(true);
+			categoryStatement.execute();
+		} catch (SQLException e) {};
+
+		this.addCategory("Art");
+		this.addCategory("Comics");
+		this.addCategory("Crafts");
+		this.addCategory("Dance");
+		this.addCategory("Design");
+		this.addCategory("Fashion");		
+		this.addCategory("Film & Video");
+		this.addCategory("Food");
+		this.addCategory("Games");
+		this.addCategory("Journalism");
+		this.addCategory("Music");
+		this.addCategory("Photography");
+		this.addCategory("Publishing");
+		this.addCategory("Technology");
+		this.addCategory("Theater");
 	}
 
 }
