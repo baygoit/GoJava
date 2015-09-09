@@ -3,8 +3,15 @@ package belskii.artem.kickstarter.dao.project;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Entity
+@Table (name="PROJECT")
 public class Project {
+	@Id
+	private Long projectId;
 	private HashMap<Long, ArrayList<String>> faq;
 	private HashMap<Long, HashMap<Long, String>> paymentVariants;
 	private String name; 
@@ -15,9 +22,8 @@ public class Project {
 	private String videoUrl; 
 	private int categoryId;
 	private String details;
-	Long projectId;
-
 	
+	public Project(){}
 	public Project(String name, Long goal, Long balance, String startDate, String endDate, String videoUrl, int categoryId, String details){
 		faq = new HashMap<Long, ArrayList<String>>();
 		paymentVariants = new HashMap<Long, HashMap<Long, String>>(); 

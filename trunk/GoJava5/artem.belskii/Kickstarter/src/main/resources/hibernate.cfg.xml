@@ -21,6 +21,7 @@
     <property name="hbm2ddl.auto">update</property>
     <mapping class="belskii.artem.kickstarter.dao.quote.Quote"/>
     <mapping class="belskii.artem.kickstarter.dao.category.Category"/>
+    <mapping class="belskii.artem.kickstarter.dao.project.Project"/>
   </session-factory>
 
 </hibernate-configuration>
