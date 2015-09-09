@@ -21,7 +21,7 @@ public class CategoryTest {
 
 	@Test
 	public void testUpdateCategoryId() {
-		testCategory.updateCategoryId(101);
+		testCategory.setCategoryId(101);
 		assertEquals(101, testCategory.getCategoryId());
 	}
 

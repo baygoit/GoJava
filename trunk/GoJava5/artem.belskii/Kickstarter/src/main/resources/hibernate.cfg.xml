@@ -20,6 +20,7 @@
     <property name="dialect">org.hibernate.dialect.PostgreSQLDialect</property>
     <property name="hbm2ddl.auto">update</property>
     <mapping class="belskii.artem.kickstarter.dao.quote.Quote"/>
+    <mapping class="belskii.artem.kickstarter.dao.category.Category"/>
   </session-factory>
 
 </hibernate-configuration>
