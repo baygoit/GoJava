@@ -1,31 +1,32 @@
-package belskii.artem.kickstarter.dao.category;
+package belskii.artem.kickstarter.mvc.model;
 
 import static org.junit.Assert.*;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
-public class CategoryDaoImplHiberTest {
+public class CategoryModelHiberTest {
 
 	@Test
 	public void testAddCategory() {
-		CategoryDao category = new CategoryDaoImplHiber();
+		CategoryModelHiber category = new CategoryModelHiber();
 		category.addCategory("New Hiber Category");
 		assertTrue(!category.getCategoryNameById(1).equals(""));
 	}
 
 	@Test
 	public void testGetCategoryList() {
-		CategoryDao category = new CategoryDaoImplHiber();
-		assertTrue(category.getCategoryList().size()>1);
+		CategoryModelHiber category = new CategoryModelHiber();
+		assertTrue(category.getCategoryList().size()>=1);
 	}
 
 	@Test
 	public void testGetCategoryNameById() {
-		CategoryDao category = new CategoryDaoImplHiber();
+		CategoryModelHiber category = new CategoryModelHiber();
 		assertTrue(!category.getCategoryNameById(1).equals(""));
 	}
 
-	@Test
+	@Test @Ignore
 	public void testInitDemoDB() {
 		fail("Not yet implemented");
 	}

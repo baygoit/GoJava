@@ -8,7 +8,7 @@ public class QuoteTest {
 
 	@Test
 	public void testQuote() {
-		Quote quote = new Quote(1, "Some Test");
+		Quote quote = new Quote("Some Test");
 		assertNotNull(quote);
 	}
 

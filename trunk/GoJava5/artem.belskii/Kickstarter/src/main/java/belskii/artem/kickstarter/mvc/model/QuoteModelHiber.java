@@ -1,4 +1,4 @@
-package belskii.artem.kickstarter.dao.quote;
+package belskii.artem.kickstarter.mvc.model;
 
 import java.util.Random;
 
@@ -8,12 +8,12 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.criterion.Projections;
 
-public class QuoteDaoImplHiber implements QuoteDao {
+import belskii.artem.kickstarter.dao.quote.Quote;
 
+public class QuoteModelHiber {
 	SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
-	
 
-	private int getNextId() {
+	private int getMaxId() {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 		Criteria criteria = session
@@ -24,15 +24,14 @@ public class QuoteDaoImplHiber implements QuoteDao {
 			if (maxId==null){
 				maxId=0;
 			}
-			return maxId+1;
+			return maxId;
 	}
-
-	@Override
+	
 	public String getRandomQuote() {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 		Random random = new Random();
-		int randomId  = random.nextInt(this.getNextId()-1);
+		int randomId  = random.nextInt(this.getMaxId());
 		if(randomId==0){
 			randomId=1;
 		}
@@ -42,9 +41,8 @@ public class QuoteDaoImplHiber implements QuoteDao {
 
 	}
 
-	@Override
 	public void addQuote(String text) {
-		Quote quote = new Quote(this.getNextId(), text);
+		Quote quote = new Quote(text);
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 		session.save(quote);
@@ -52,7 +50,6 @@ public class QuoteDaoImplHiber implements QuoteDao {
 		session.close();
 	}
 
-	@Override
 	public void initDemoDB() {
 //		Session session = sessionFactory.openSession();
 //		session.beginTransaction();

@@ -2,6 +2,8 @@ package belskii.artem.kickstarter.dao.quote;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Table;
 import javax.persistence.Id;
 
@@ -10,16 +12,16 @@ import javax.persistence.Id;
 @Table (name="QUOTE")
 public class Quote {
 	@Id
-	@Column (name="ID")
+	@Column (name="ID") 
+	@GeneratedValue (strategy=GenerationType.IDENTITY)
 	private int id;
 	
 	@Column (name="QUOTE", length=500)
 	private String quote;
 	
-	Quote(){
+	public Quote(){
 	}
-	Quote(int id, String text){
-		this.setId(id);
+	public Quote(String text){
 		this.setQuote(text);
 	}
 

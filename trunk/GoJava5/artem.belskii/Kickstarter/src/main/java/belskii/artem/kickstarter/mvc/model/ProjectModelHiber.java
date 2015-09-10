@@ -1,23 +1,20 @@
-package belskii.artem.kickstarter.dao.project;
+package belskii.artem.kickstarter.mvc.model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.hibernate.Criteria;
-import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
-import org.hibernate.criterion.Expression;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
-import belskii.artem.kickstarter.dao.category.Category;
+import belskii.artem.kickstarter.dao.project.Project;
 
-public class ProjectDaoImplHiber implements ProjectDao {
+public class ProjectModelHiber {
 	SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
 
 	private Long getNextId() {
@@ -32,7 +29,7 @@ public class ProjectDaoImplHiber implements ProjectDao {
 		return maxId + 1;
 	}
 
-	@Override
+
 	public void addProject(Project projectDetails) {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
@@ -41,7 +38,7 @@ public class ProjectDaoImplHiber implements ProjectDao {
 		session.close();
 	}
 
-	@Override
+
 	public Map<Long, Project> getProjectList() {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
@@ -57,7 +54,7 @@ public class ProjectDaoImplHiber implements ProjectDao {
 
 	}
 
-	@Override
+
 	public Project getProjectDetails(int id) {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
@@ -65,7 +62,7 @@ public class ProjectDaoImplHiber implements ProjectDao {
 		return project;
 	}
 
-	@Override
+
 	public Map<Long, Project> getProjectFromCategory(int id) {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
@@ -82,7 +79,7 @@ public class ProjectDaoImplHiber implements ProjectDao {
 		return map;
 	}
 
-	@Override
+
 	public void update(Project updatedProject) {
 		Session session = sessionFactory.openSession();
 		Transaction transaction = session.beginTransaction();
@@ -92,7 +89,7 @@ public class ProjectDaoImplHiber implements ProjectDao {
 		session.close();
 	}
 	
-	@Override
+
 	public void initDemoDB() {
 	}
 
