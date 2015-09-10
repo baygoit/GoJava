@@ -17,7 +17,7 @@
     <property name="transaction.factory_class">org.hibernate.transaction.JDBCTransactionFactory</property>
     <property name="current_session_context_class">thread</property>
     <property name="hibernate.show_sql">false</property>
-    <property name="dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+    <property name="dialect">org.hibernate.dialect.PostgreSQL9Dialect</property>
     <property name="hbm2ddl.auto">update</property>
     <mapping class="belskii.artem.kickstarter.dao.quote.Quote"/>
     <mapping class="belskii.artem.kickstarter.dao.category.Category"/>
