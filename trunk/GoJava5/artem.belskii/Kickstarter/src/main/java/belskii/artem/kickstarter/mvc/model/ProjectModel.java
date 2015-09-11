@@ -10,7 +10,7 @@ import belskii.artem.kickstarter.dao.project.ProjectDao;
 
 public class ProjectModel {
 	ApplicationContext context = new ClassPathXmlApplicationContext("classpath:application-context.xml");
-	ProjectDao projectDao =  (ProjectDao) context.getBean("projectDaoImplPsql");
+	ProjectDao projectDao = (ProjectDao) context.getBean("projectDaoImpl");  
 	
 	public void addProject(Project projectDetails){
 		projectDao.addProject(projectDetails);

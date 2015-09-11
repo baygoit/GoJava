@@ -8,7 +8,9 @@ import belskii.artem.kickstarter.dao.quote.QuoteDao;
 
 public class QuoteModel {
 	ApplicationContext context = new ClassPathXmlApplicationContext("classpath:application-context.xml");
-	QuoteDao quoteDao = (QuoteDao) context.getBean("quoteDaoImplPsql"); 
+	QuoteDao quoteDao = (QuoteDao) context.getBean("quoteDaoImpl");
+			//new QuoteDaoImplHiber(); 
+			//(QuoteDao) context.getBean("quoteDaoImpl"); 
 
 	public String getRandomQuote() {
 		return quoteDao.getRandomQuote();

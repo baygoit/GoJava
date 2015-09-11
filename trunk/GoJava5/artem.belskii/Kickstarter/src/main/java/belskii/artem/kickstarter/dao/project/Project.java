@@ -4,15 +4,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
 @Table (name="PROJECT")
 public class Project {
-	@Id @GeneratedValue (strategy=GenerationType.IDENTITY)
+	@Id
 	private Long projectId;
 	private HashMap<Long, ArrayList<String>> faq;
 	private HashMap<Long, HashMap<Long, String>> paymentVariants;

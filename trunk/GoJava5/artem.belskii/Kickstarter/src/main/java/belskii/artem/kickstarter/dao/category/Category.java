@@ -2,8 +2,6 @@ package belskii.artem.kickstarter.dao.category;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -12,7 +10,6 @@ import javax.persistence.Table;
 public class Category {
 	@Id
 	@Column (name="ID")
-	@GeneratedValue (strategy=GenerationType.IDENTITY)
 	private int categoryId;
 	@Column (name="TITLE")
 	private String categoryName;
@@ -22,9 +19,6 @@ public class Category {
 		this.setCategoryId(id);
 		this.setCategoryName(name);
 	}
-	public Category(String name) {
-		this.setCategoryName(name);
-	}	
 	
 	public int getCategoryId() {
 		return categoryId;

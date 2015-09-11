@@ -9,9 +9,7 @@ import belskii.artem.kickstarter.dao.category.CategoryDao;
 
 public class CategoryModel {
 	ApplicationContext context = new ClassPathXmlApplicationContext("classpath:application-context.xml");
-	CategoryDao categoryDao = (CategoryDao) context.getBean("categoryDaoImplPsql"); 
-			//new CategoryDaoImplPsql("conf/database.conf");
-			//("src/main/conf/database.conf");
+	CategoryDao categoryDao = (CategoryDao) context.getBean("categoryDaoImpl");
 
 	public void addCategory(String categoryName) {
 		categoryDao.addCategory(categoryName);

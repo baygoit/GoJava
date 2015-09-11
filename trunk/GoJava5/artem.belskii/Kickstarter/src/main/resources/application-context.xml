@@ -4,15 +4,13 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-	<bean id="categoryDaoImplPsql" class="belskii.artem.kickstarter.dao.category.CategoryDaoImplPsql">
-		<constructor-arg type="String" value="conf/database.conf"/>
-	</bean>
-	<bean id="projectDaoImplPsql" class="belskii.artem.kickstarter.dao.project.ProjectDaoImplPsql">
-		<constructor-arg type="String" value="conf/database.conf"/>
-	</bean>
-	<bean id="quoteDaoImplPsql" class="belskii.artem.kickstarter.dao.quote.QuoteDaoImplPsql">
-		<constructor-arg type="String" value="conf/database.conf"/>
-	</bean>
+	<bean id="categoryDaoImpl" class="belskii.artem.kickstarter.dao.category.CategoryDaoImplHiber"/>
+	
+	<bean id="projectDaoImpl" class="belskii.artem.kickstarter.dao.project.ProjectDaoImplHiber"/>
+	
+	<bean id="quoteDaoImpl" class="belskii.artem.kickstarter.dao.quote.QuoteDaoImplHiber"/>
+		
+	
 	
 	<bean name="helloBean" class="belskii.artem.kickstarter.servlet.Hello">
 		<property name="hello" value="hello from spring"></property>
