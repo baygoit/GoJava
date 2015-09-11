@@ -20,7 +20,7 @@ public class HibernateTest {
 
     @Test
     @Transactional
-    @Rollback(false)
+    @Rollback
     public void testHibernate() {
         System.out.println(sessionFactory);
         Category category = new Category("category");

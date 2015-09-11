@@ -23,7 +23,7 @@ public class QuoteDAOUnitTest {
 
     @Test
     @Transactional
-    @Rollback(true)
+    @Rollback
     public void testSave() {
         Quote quote = new Quote("some quote");
         quoteDAO.save(quote);
@@ -33,7 +33,7 @@ public class QuoteDAOUnitTest {
 
     @Test
     @Transactional
-    @Rollback(true)
+    @Rollback
     public void testGet() {
         Quote quote = new Quote("some quote");
         quoteDAO.save(quote);

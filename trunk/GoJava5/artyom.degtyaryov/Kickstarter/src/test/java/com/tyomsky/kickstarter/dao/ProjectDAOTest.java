@@ -24,7 +24,7 @@ public class ProjectDAOTest {
 
     @Test
     @Transactional
-    @Rollback(false)
+    @Rollback
     public void testSave() {
         Project project = new Project();
         project.setName("project1");
@@ -62,7 +62,7 @@ public class ProjectDAOTest {
 
     @Test
     @Transactional
-    @Rollback(false)
+    @Rollback
     public void testUpdate() {
         Project project = new Project();
         project.setName("project1");
