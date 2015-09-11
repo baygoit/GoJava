@@ -1,28 +1,28 @@
-package belskii.artem.kickstarter.mvc.model;
+package belskii.artem.kickstarter.dao.category;
 
 import static org.junit.Assert.*;
 
 import org.junit.Ignore;
 import org.junit.Test;
 
-public class CategoryModelHiberTest {
+public class CategoryDaoImplHiberTest {
 
 	@Test
 	public void testAddCategory() {
-		CategoryModelHiber category = new CategoryModelHiber();
+		CategoryDao category = new CategoryDaoImplHiber();
 		category.addCategory("New Hiber Category");
 		assertTrue(!category.getCategoryNameById(1).equals(""));
 	}
 
 	@Test
 	public void testGetCategoryList() {
-		CategoryModelHiber category = new CategoryModelHiber();
-		assertTrue(category.getCategoryList().size()>=1);
+		CategoryDao category = new CategoryDaoImplHiber();
+		assertTrue(category.getCategoryList().size()>1);
 	}
 
 	@Test
 	public void testGetCategoryNameById() {
-		CategoryModelHiber category = new CategoryModelHiber();
+		CategoryDao category = new CategoryDaoImplHiber();
 		assertTrue(!category.getCategoryNameById(1).equals(""));
 	}
 
