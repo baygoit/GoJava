@@ -11,10 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class MainPageController {
 
-    @Autowired
     private QuoteService quoteService;
-
-    @Autowired
     private CategoryDAO categoryDAO;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
@@ -24,12 +21,13 @@ public class MainPageController {
         return "mainPage";
     }
 
-    public void setCategoryDAO(CategoryDAO categoryDAO) {
-        this.categoryDAO = categoryDAO;
-    }
-
+    @Autowired
     public void setQuoteService(QuoteService quoteService) {
         this.quoteService = quoteService;
     }
 
+    @Autowired
+    public void setCategoryDAO(CategoryDAO categoryDAO) {
+        this.categoryDAO = categoryDAO;
+    }
 }

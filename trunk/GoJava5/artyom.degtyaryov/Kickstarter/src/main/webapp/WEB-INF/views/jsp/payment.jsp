@@ -32,8 +32,7 @@
                     </div>
                 </div>
                 <div class="panel-body">
-                    <form action="payment/confirmed" role="form" id="payment-form" method="POST">
-                        <input type="hidden" name="projectId" value=${projectId}>
+                    <form action="confirmed/" role="form" id="payment-form" method="POST">
                         <div class="row">
                             <div class="col-xs-12">
                                 <div class="form-group">

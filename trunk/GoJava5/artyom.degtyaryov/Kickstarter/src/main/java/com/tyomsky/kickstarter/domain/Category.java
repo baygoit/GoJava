@@ -1,6 +1,9 @@
 package com.tyomsky.kickstarter.domain;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
 @Table(name="categories")
@@ -16,10 +19,6 @@ public class Category {
     }
 
     public Category(String name) {
-        this.name = name;
-    }
-
-    public Category(int id, String name) {
         this.name = name;
     }
 

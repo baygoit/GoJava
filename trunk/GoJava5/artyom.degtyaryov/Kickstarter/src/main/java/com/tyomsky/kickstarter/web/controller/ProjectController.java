@@ -1,14 +1,13 @@
 package com.tyomsky.kickstarter.web.controller;
 
-import com.tyomsky.kickstarter.dao.CategoryDAO;
 import com.tyomsky.kickstarter.dao.ProjectDAO;
 import com.tyomsky.kickstarter.dao.QuestionAndAnswerDAO;
-import com.tyomsky.kickstarter.domain.Category;
 import com.tyomsky.kickstarter.domain.Project;
 import com.tyomsky.kickstarter.domain.QuestionAndAnswer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,28 +15,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.List;
 
 @Controller
+@RequestMapping(value = "**/project")
 public class ProjectController {
 
     @Autowired
     ProjectDAO projectDAO;
 
     @Autowired
-    CategoryDAO categoryDAO;
-
-    @Autowired
     QuestionAndAnswerDAO questionAndAnswerDAO;
 
-    @RequestMapping(value = "/projects", method = RequestMethod.GET)
-    public String showProjectsByCategory(@RequestParam("categoryId") int categoryId, Model model) {
-        Category category = categoryDAO.get(categoryId);
-        List<Project> projects = projectDAO.getByCategoryId(categoryId);
-        model.addAttribute("category", category);
-        model.addAttribute("projects", projects);
-        return "projects";
-    }
-
-    @RequestMapping(value = "/project", method = RequestMethod.GET)
-    public String showProject(@RequestParam("projectId") int projectId, Model model) {
+    @RequestMapping(value = "{projectId}", method = RequestMethod.GET)
+    public String showProject(@PathVariable("projectId") int projectId, Model model) {
         Project project = projectDAO.get(projectId);
         List<QuestionAndAnswer> questionsAndAnswers = questionAndAnswerDAO.getList("project.id", projectId);
         System.out.println(questionsAndAnswers.size());
@@ -46,10 +34,10 @@ public class ProjectController {
         return "project";
     }
 
-    @RequestMapping(value = "/project/question", method = RequestMethod.POST)
+    @RequestMapping(value = "question", method = RequestMethod.POST)
     public String handleQuestion(@RequestParam("question") String question, @RequestParam("projectId") int projectId) {
         questionAndAnswerDAO.save(new QuestionAndAnswer(question));
-        return "redirect:/project?projectId="+projectId;
+        return "redirect:/project/"+projectId+"/";
     }
 
 }

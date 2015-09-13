@@ -38,7 +38,7 @@
                 <p><b>cost:</b> ${project.cost}
                     <b> balance:</b>${project.balance}
                     <b> deadline:</b>${project.deadLine}</p>
-                <a class="btn btn-primary" href="project?projectId=${project.id}">View Project <span class="glyphicon glyphicon-chevron-right"></span></a>
+                <a class="btn btn-primary" href="project/${project.id}/">View Project <span class="glyphicon glyphicon-chevron-right"></span></a>
 
             </div>
         </div>

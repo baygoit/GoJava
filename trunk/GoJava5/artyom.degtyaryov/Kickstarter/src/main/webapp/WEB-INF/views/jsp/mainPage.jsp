@@ -25,7 +25,7 @@
                 <h3>${category.name}</h3>
 
                 <p>
-                    <a class="btn btn-default" href="projects?categoryId=${category.id}" role="button">View projects</a>
+                    <a class="btn btn-default" href="category/${category.id}/" role="button">View projects</a>
                 </p>
             </div>
         </c:forEach>

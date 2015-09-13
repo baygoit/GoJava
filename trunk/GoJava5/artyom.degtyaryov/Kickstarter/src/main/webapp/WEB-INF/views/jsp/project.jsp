@@ -66,8 +66,7 @@
         You can help this project in next ways:
     </h4>
 
-    <form action="payment" method="POST">
-        <input type="hidden" name="projectId" value="${project.id}"/>
+    <form action="payment/add/" method="POST">
         <div class="row">
             <div class="col-md-4">
                 <div class="panel panel-danger">

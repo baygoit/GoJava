@@ -3,11 +3,7 @@ package com.tyomsky.kickstarter.domain;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "questions_and_answers")
@@ -23,6 +19,7 @@ public class QuestionAndAnswer {
 
     @ManyToOne
     @Cascade({CascadeType.SAVE_UPDATE})
+    @JoinColumn(name = "project_id")
     Project project;
 
     public QuestionAndAnswer() {
