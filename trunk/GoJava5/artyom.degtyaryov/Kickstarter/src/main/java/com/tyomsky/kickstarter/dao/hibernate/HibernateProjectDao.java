@@ -2,6 +2,7 @@ package com.tyomsky.kickstarter.dao.hibernate;
 
 import com.tyomsky.kickstarter.dao.ProjectDAO;
 import com.tyomsky.kickstarter.dao.common.AbstractHibernateDao;
+import com.tyomsky.kickstarter.domain.Category;
 import com.tyomsky.kickstarter.domain.Project;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -21,10 +22,9 @@ public class HibernateProjectDao extends AbstractHibernateDao<Project> implement
     @Override
     public List<Project> getByCategoryId(int categoryId) {
         List<Project> projects = new ArrayList<>();
-//        Query query = currentSession().createQuery("from Project where category.id = :categoryId")
-//                .setParameter("categoryId", categoryId);
-//        projects.addAll(query.list());
-        projects = getList("category.id", categoryId);
+        Category category = new Category();
+        category.setId(categoryId);
+        projects = getList("category", category);
         return projects;
     }
 
