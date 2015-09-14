@@ -7,8 +7,10 @@ import java.util.Map;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
 
 
 public class ProjectDaoImplHiber implements  ProjectDao{
@@ -65,16 +67,32 @@ public class ProjectDaoImplHiber implements  ProjectDao{
 
 	@Override
 	public Map<Long, Project> getProjectFromCategory(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+		
+		ArrayList<Project> arr = (ArrayList<Project>) session.createCriteria(Project.class).add(Restrictions.eq("categoryId", id)).list();
+		System.out.println(arr.size());
+		HashMap<Long,Project> map=new HashMap<Long,Project>();
+		long iL=0;
+		for (int i=0;arr.size()>i;i++) {
+			map.put(iL,arr.get(i));
+			iL++;
+		}
+		return map;
+
 	}
+
 
 	@Override
 	public void update(Project updatedProject) {
-		// TODO Auto-generated method stub
-		
+		Session session = sessionFactory.openSession();
+		Transaction transaction = session.beginTransaction();
+		transaction.begin();
+		session.saveOrUpdate(updatedProject);
+		transaction.commit();
+		session.close();
 	}
-
+	
 	@Override
 	public void initDemoDB() {
 		// TODO Auto-generated method stub

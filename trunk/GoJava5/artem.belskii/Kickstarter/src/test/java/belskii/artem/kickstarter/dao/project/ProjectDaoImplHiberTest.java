@@ -30,12 +30,19 @@ public class ProjectDaoImplHiberTest {
 
 	@Test
 	public void testGetProjectFromCategory() {
-		fail("Not yet implemented");
+		ProjectDao project = new ProjectDaoImplHiber();
+		assertEquals("Project details", project.getProjectFromCategory(1).get(0L).getDetails());
+		
 	}
 
 	@Test
 	public void testUpdate() {
-		fail("Not yet implemented");
+		ProjectDao project = new ProjectDaoImplHiber();
+		Project tmpProject=project.getProjectDetails(1);
+		tmpProject.updateName("New Project Name");
+		project.update(tmpProject);
+		assertEquals("New Project Name", project.getProjectDetails(1).getName());
+		
 	}
 
 	@Test
