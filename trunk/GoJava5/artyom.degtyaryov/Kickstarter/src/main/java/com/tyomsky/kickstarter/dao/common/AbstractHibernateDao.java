@@ -1,7 +1,6 @@
 package com.tyomsky.kickstarter.dao.common;
 
 import org.hibernate.*;
-import org.hibernate.cfg.ImprovedNamingStrategy;
 import org.hibernate.criterion.*;
 import org.hibernate.metadata.ClassMetadata;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,12 +21,8 @@ import static org.springframework.util.Assert.notNull;
 public abstract class AbstractHibernateDao<E> implements BasicCrudDao<E> {
 
     protected final Class<E> entityClass;
-    @Autowired
     private Random random;
-    @Autowired
     SessionFactory sessionFactory;
-    @Autowired
-    ImprovedNamingStrategy namingStrategy;
 
     public AbstractHibernateDao(Class<E> entityClass) {
         notNull(entityClass, "entityClass must not be null");
@@ -58,63 +53,11 @@ public abstract class AbstractHibernateDao<E> implements BasicCrudDao<E> {
         return currentSession().createCriteria(entityClass);
     }
 
-    protected Query query(String hql) {
-        return currentSession().createQuery(hql);
-    }
-
-    protected SQLQuery sqlQuery(String hql) {
-        return currentSession().createSQLQuery(hql);
-    }
-
-    protected Query queryByName(String queryName) {
-        return currentSession().getNamedQuery(queryName);
-    }
-
     protected Session currentSession() {
         return sessionFactory.getCurrentSession();
     }
 
-    protected List<E> all() {
-        return list(criteria());
-    }
-
-    public Class<E> getEntityClass() {
-        return entityClass;
-    }
-
-    /* === BEGIN GENERICS SUPPRESSION WRAPPERS === */
-
-    protected List<E> list(Criteria criteria) {
-        return list(criteria, true);
-    }
-
-    @SuppressWarnings("unchecked")
-    protected List<E> list(Criteria criteria, boolean cache) {
-        criteria.setCacheable(cache);
-        return new ArrayList<E>(new LinkedHashSet<E>(criteria.list())); // privent duplications
-    }
-
-    protected List<E> list(Query query) {
-        return list(query, true);
-    }
-
-    @SuppressWarnings("unchecked")
-    protected List<E> list(Query query, boolean cache) {
-        query.setCacheable(cache);
-        return query.list();
-    }
-
-    @SuppressWarnings("unchecked")
-    protected E uniqueResult(Criteria criteria) {
-        return (E) criteria.uniqueResult();
-    }
-
-    @SuppressWarnings("unchecked")
-    protected E uniqueResult(Query query) {
-        return (E) query.uniqueResult();
-    }
-
-    @SuppressWarnings("unchecked")
+    @Override
     public E get(Serializable id) {
         return (E) currentSession().get(entityClass, id);
     }
@@ -145,11 +88,6 @@ public abstract class AbstractHibernateDao<E> implements BasicCrudDao<E> {
         return criteria()
                 .add(eq(property, value))
                 .list();
-    }
-
-    @SuppressWarnings("unchecked")
-    protected E load(Serializable id) {
-        return (E) currentSession().load(entityClass, id);
     }
 
     @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
@@ -198,4 +136,13 @@ public abstract class AbstractHibernateDao<E> implements BasicCrudDao<E> {
         return null;
     }
 
+    @Autowired
+    public void setRandom(Random random) {
+        this.random = random;
+    }
+
+    @Autowired
+    public void setSessionFactory(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
 }
