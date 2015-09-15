@@ -22,4 +22,9 @@ public class ProjectServiceImpl implements ProjectService {
         return projectDAO.getListByCategory(category);
     }
 
+    @Override
+    public Project getProjectById(int id) {
+        return projectDAO.get(id);
+    }
+
 }

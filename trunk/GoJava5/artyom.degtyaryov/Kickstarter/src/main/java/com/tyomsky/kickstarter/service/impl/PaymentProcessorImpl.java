@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class PaymentProcessorImpl implements PaymentProcessor {
 
+    @Autowired
     private ProjectDAO projectDAO;
 
     @Override

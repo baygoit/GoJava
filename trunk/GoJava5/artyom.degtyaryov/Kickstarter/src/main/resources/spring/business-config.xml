@@ -26,6 +26,10 @@
         <constructor-arg ref="projectDao"/>
     </bean>
 
+    <bean id="questionAndAnswerService" class="com.tyomsky.kickstarter.service.impl.QuestionAndAnswerImpl">
+        <constructor-arg ref="questionAndAnswerDao"/>
+    </bean>
+
     <bean id="random" class="java.util.Random"/>
 
 </beans>

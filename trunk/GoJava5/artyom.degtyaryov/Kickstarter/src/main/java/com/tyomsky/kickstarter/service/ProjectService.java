@@ -9,4 +9,6 @@ public interface ProjectService {
 
     List<Project> getProjectsByCategory(Category category);
 
+    Project getProjectById(int id);
+
 }

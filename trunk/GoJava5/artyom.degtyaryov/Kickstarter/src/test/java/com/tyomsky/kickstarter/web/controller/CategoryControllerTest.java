@@ -47,7 +47,7 @@ public class CategoryControllerTest {
     }
 
     @Test
-    public void testGetCategory() throws Exception {
+    public void getCategory_ShouldAddCategoryAndProjectsByCategoryToModelAndReturnViewName() throws Exception {
 
         int requestedCategoryId = 1;
 

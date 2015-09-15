@@ -15,6 +15,10 @@
         <constructor-arg value="com.tyomsky.kickstarter.service.ProjectService"/>
     </bean>
 
+    <bean id="questionAndAnswerService" name="questionAndAnswerService" class="org.mockito.Mockito" factory-method="mock">
+        <constructor-arg value="com.tyomsky.kickstarter.service.QuestionAndAnswerService"/>
+    </bean>
+
     <bean id="projectDao" name="projectDao" class="org.mockito.Mockito" factory-method="mock">
         <constructor-arg value="com.tyomsky.kickstarter.dao.ProjectDAO"/>
     </bean>

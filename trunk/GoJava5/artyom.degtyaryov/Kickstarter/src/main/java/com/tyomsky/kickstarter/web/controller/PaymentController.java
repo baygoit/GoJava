@@ -3,6 +3,7 @@ package com.tyomsky.kickstarter.web.controller;
 import com.tyomsky.kickstarter.dao.ProjectDAO;
 import com.tyomsky.kickstarter.domain.Project;
 import com.tyomsky.kickstarter.service.PaymentProcessor;
+import com.tyomsky.kickstarter.service.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class PaymentController {
 
     @Autowired
-    private ProjectDAO projectDao;
+    private ProjectService projectService;
 
     @Autowired
     private PaymentProcessor paymentProcessor;
@@ -30,7 +31,7 @@ public class PaymentController {
 
     @RequestMapping(value = "add/confirmed", method = RequestMethod.POST)
     public String processPayment(@PathVariable(value = "projectId")int projectId, @RequestParam int amount, @RequestParam String cardNumber, Model model) {
-        Project project = projectDao.get(projectId);
+        Project project = projectService.getProjectById(projectId);
         paymentProcessor.processPayment(project, amount, cardNumber);
 
         return "redirect:/project/"+projectId+"/";

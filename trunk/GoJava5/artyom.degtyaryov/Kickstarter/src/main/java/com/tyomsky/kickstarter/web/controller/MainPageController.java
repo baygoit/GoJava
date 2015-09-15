@@ -1,6 +1,5 @@
 package com.tyomsky.kickstarter.web.controller;
 
-import com.tyomsky.kickstarter.dao.CategoryDAO;
 import com.tyomsky.kickstarter.service.CategoryService;
 import com.tyomsky.kickstarter.service.QuoteService;
 import org.springframework.beans.factory.annotation.Autowired;
