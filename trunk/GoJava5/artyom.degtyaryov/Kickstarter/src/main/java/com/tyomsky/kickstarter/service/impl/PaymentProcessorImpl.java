@@ -1,15 +1,15 @@
-package com.tyomsky.kickstarter.service;
+package com.tyomsky.kickstarter.service.impl;
 
 import com.tyomsky.kickstarter.dao.ProjectDAO;
 import com.tyomsky.kickstarter.domain.Payment;
 import com.tyomsky.kickstarter.domain.Project;
+import com.tyomsky.kickstarter.service.PaymentProcessor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class PaymentProcessorImpl implements PaymentProcessor {
 
-    @Autowired
     private ProjectDAO projectDAO;
 
     @Override

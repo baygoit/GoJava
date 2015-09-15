@@ -8,7 +8,7 @@
     <context:property-placeholder location="classpath:spring/datasource.properties,
                                             classpath:spring/hibernate.properties" system-properties-mode="OVERRIDE" ignore-resource-not-found="true"/>
 
-    <import resource="../../../test/resources/spring-test-config/business-config.xml" />
+    <import resource="business-config.xml" />
     <import resource="datasource-config.xml"/>
     <import resource="hibernate.xml" />
 

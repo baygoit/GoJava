@@ -91,7 +91,7 @@ public class ProjectDAOTest {
         projectDAO.save(project1);
         projectDAO.save(project2);
 
-        List<Project> projects = projectDAO.getByCategoryId(category.getId());
+        List<Project> projects = projectDAO.getListByCategory(category);
 
         assertTrue(projects.contains(project1));
         assertTrue(projects.contains(project2));

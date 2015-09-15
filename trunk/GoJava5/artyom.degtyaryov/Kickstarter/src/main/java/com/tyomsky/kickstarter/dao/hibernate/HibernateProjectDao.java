@@ -19,10 +19,8 @@ public class HibernateProjectDao extends AbstractHibernateDao<Project> implement
     }
 
     @Override
-    public List<Project> getByCategoryId(int categoryId) {
-        List<Project> projects = new ArrayList<>();
-        Category category = new Category();
-        category.setId(categoryId);
+    public List<Project> getListByCategory(Category category) {
+        List<Project> projects;
         projects = getList("category", category);
         return projects;
     }

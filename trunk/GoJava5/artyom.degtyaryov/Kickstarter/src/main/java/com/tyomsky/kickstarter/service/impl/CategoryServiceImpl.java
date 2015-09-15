@@ -1,7 +1,8 @@
-package com.tyomsky.kickstarter.service;
+package com.tyomsky.kickstarter.service.impl;
 
 import com.tyomsky.kickstarter.dao.CategoryDAO;
 import com.tyomsky.kickstarter.domain.Category;
+import com.tyomsky.kickstarter.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,6 +23,11 @@ public class CategoryServiceImpl implements CategoryService {
         List<Category> categories;
         categories = categoryDAO.getAll();
         return categories;
+    }
+
+    @Override
+    public Category getCategoryById(int id) {
+        return categoryDAO.get(id);
     }
 
 }
