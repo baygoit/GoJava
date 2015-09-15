@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-@Transactional()
 public class HibernateQuoteDao extends AbstractHibernateDao <Quote> implements QuoteDAO{
 
     public HibernateQuoteDao() {

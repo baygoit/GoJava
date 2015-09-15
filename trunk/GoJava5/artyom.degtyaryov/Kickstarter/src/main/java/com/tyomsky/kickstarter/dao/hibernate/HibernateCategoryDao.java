@@ -11,7 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
-@Transactional
 public class HibernateCategoryDao extends AbstractHibernateDao<Category> implements CategoryDAO {
 
     public HibernateCategoryDao() {

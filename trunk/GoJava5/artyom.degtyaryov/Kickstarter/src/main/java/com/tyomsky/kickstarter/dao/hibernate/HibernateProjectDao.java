@@ -12,7 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
-@Transactional
 public class HibernateProjectDao extends AbstractHibernateDao<Project> implements ProjectDAO {
 
     public HibernateProjectDao() {

@@ -18,6 +18,10 @@
         <constructor-arg ref="quoteDao"/>
     </bean>
 
+    <bean id="categoryService" class="com.tyomsky.kickstarter.service.CategoryServiceImpl">
+        <constructor-arg ref="categoryDao"/>
+    </bean>
+
     <bean id="random" class="java.util.Random"/>
 
 </beans>

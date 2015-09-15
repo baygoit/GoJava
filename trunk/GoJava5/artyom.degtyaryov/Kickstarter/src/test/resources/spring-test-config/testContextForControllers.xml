@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="quoteService" name="quoteService" class="org.mockito.Mockito" factory-method="mock">
+        <constructor-arg value="com.tyomsky.kickstarter.service.QuoteService"/>
+    </bean>
+
+    <bean id="categoryService" name="categoryService" class="org.mockito.Mockito" factory-method="mock">
+        <constructor-arg value="com.tyomsky.kickstarter.service.CategoryService"/>
+    </bean>
+
+    <bean id="projectDao" name="projectDao" class="org.mockito.Mockito" factory-method="mock">
+        <constructor-arg value="com.tyomsky.kickstarter.dao.ProjectDAO"/>
+    </bean>
+
+    <bean id="categoryDao" name="categoryDao" class="org.mockito.Mockito" factory-method="mock">
+        <constructor-arg value="com.tyomsky.kickstarter.dao.CategoryDAO"/>
+    </bean>
+
+    <bean id="questionAndAnswerDAO" name="questionAndAnswerDAO" class="org.mockito.Mockito" factory-method="mock">
+        <constructor-arg value="com.tyomsky.kickstarter.dao.QuestionAndAnswerDAO"/>
+    </bean>
+
+</beans>
