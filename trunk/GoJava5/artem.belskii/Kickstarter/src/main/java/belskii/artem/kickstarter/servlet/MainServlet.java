@@ -20,6 +20,7 @@ import belskii.artem.kickstarter.mvc.model.QuoteModel;
 import belskii.artem.kickstarter.mvc.view.CategoryView;
 import belskii.artem.kickstarter.mvc.view.ProjectView;
 
+
 public class MainServlet extends HttpServlet{
 	private CategoryController category = new CategoryController(new CategoryModel(), new CategoryView());
 	private ProjectController project = new ProjectController(new ProjectModel(), new ProjectView());
@@ -96,9 +97,7 @@ public class MainServlet extends HttpServlet{
 
 	private void showMainPage(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		WebApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(getServletContext());
-		Hello hello = (Hello) context.getBean("helloBean");
 		req.setAttribute("quote", quote.getRandomQuote());
-		req.setAttribute("hello", hello.getHello());
 		req.setAttribute("categoryList", category.getCategoryList().values());
 		req.getRequestDispatcher("main.jsp").forward(req, resp);
 	}
