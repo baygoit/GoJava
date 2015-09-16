@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+
+
+
+    <!--<bean id="dataSource"-->
+          <!--class="org.springframework.jdbc.datasource.DriverManagerDataSource">-->
+        <!--<property name="driverClassName" value="org.postgresql.Driver" />-->
+        <!--<property name="url" value="jdbc:postgresql://localhost:5432/KickStarter" />-->
+        <!--<property name="username" value="postgres" />-->
+        <!--<property name="password" value="root" />-->
+    <!--</bean>-->
+
+
+    <bean id="sessionFactory" class="model.HibernateUtil" factory-method="getSessionFactory"/>
+
+    <!--<bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">-->
+
+        <!--<property name="dataSource">-->
+            <!--<ref bean="dataSource"/>-->
+        <!--</property>-->
+        <!--<property name="hibernateProperties">-->
+            <!--<props>-->
+                <!--<prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQL9Dialect</prop>-->
+                <!--<prop key="connection.autocommit">false</prop>-->
+                <!--<prop key="connection.pool_size">10</prop>-->
+                <!--<prop key="hbm2ddl.auto">create</prop>-->
+                <!--<prop key="hibernate.show_sql">true</prop>-->
+                <!--<prop key="current_session_context_class">thread</prop>-->
+                <!--<prop key="hibernate.query.factory_class">org.hibernate.hql.internal.classic.ClassicQueryTranslatorFactory</prop>-->
+            <!--</props>-->
+        <!--</property>-->
+        <!--&lt;!&ndash;<property name="jtaTransactionManager" ref="transactionManager"/>&ndash;&gt;-->
+
+        <!--<property name="mappingResources">-->
+    <!--<list>-->
+    <!--<value>Spring/HibernateMapping.xml</value>-->
+    <!--</list>-->
+    <!--</property>-->
+
+    <!--&lt;!&ndash;<property name="mappingLocations">&ndash;&gt;-->
+    <!--&lt;!&ndash;<list>&ndash;&gt;-->
+    <!--&lt;!&ndash;<value>classpath:Spring/HibernateMapping.xml</value>&ndash;&gt;-->
+    <!--&lt;!&ndash;</list>&ndash;&gt;-->
+    <!--&lt;!&ndash;</property>&ndash;&gt;-->
+    <!--</bean>-->
+
+</beans>
