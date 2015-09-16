@@ -26,15 +26,15 @@ public class PascalTriangle {
                 int right = triangle[i - 1][leftOne + (2 * j) + 1];
                 triangle[i][leftOne + (2 * j)] = left + right;
             }
-        }return null;
+        }return triangle;
     }
-
 
     public static void main(String[] args) {
         PascalTriangle pascalTriangle = new PascalTriangle(10);
         pascalTriangle.calculateTriangle();
 
     }
+
 }
 
 
