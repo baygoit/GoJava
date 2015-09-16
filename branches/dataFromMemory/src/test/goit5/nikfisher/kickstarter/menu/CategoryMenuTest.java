@@ -1,4 +1,4 @@
-package goit5.nikfisher.kickstarter.menu;
+F1package goit5.nikfisher.kickstarter.menu;
 
 import goit5.nikfisher.kickstarter.Runner;
 import goit5.nikfisher.kickstarter.dao.InMemoryCategories;
