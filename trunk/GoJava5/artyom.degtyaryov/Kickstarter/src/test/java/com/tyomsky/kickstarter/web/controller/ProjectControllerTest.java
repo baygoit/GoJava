@@ -8,6 +8,7 @@ import com.tyomsky.kickstarter.service.QuestionAndAnswerService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -27,9 +28,8 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:spring-test-config/testContextForControllers.xml", "classpath:spring/spring-web-servlet.xml"})
@@ -111,7 +111,22 @@ public class ProjectControllerTest {
     }
 
     @Test
-    public void testHandleQuestion() throws Exception {
+    public void whenAddQuestion_shouldSaveQuestionAndRedirectToRelatedProjectView() throws Exception {
+        QuestionAndAnswer questionAndAnswer = new QuestionAndAnswer();
+        String question = "question";
+        questionAndAnswer.setQuestion(question);
 
+        when(questionAndAnswerServiceMock.save(questionAndAnswer)).thenReturn(questionAndAnswer);
+
+        String requestedURI = "/project/1/questions/add/?question="+question;
+        mockMvc.perform(post(requestedURI))
+                .andExpect(status().isMovedTemporarily())
+                .andExpect(view().name("redirect:/project/1/"))
+                .andExpect(redirectedUrl("/project/1/"));
+        ArgumentCaptor<QuestionAndAnswer> argumentCaptor = ArgumentCaptor.forClass(QuestionAndAnswer.class);
+        verify(questionAndAnswerServiceMock, times(1)).save(argumentCaptor.capture());
+        assertEquals(question, argumentCaptor.getValue().getQuestion());
     }
+
+
 }
