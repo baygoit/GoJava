@@ -1,5 +1,9 @@
 Manifest-Version: 1.0
+<<<<<<< HEAD
+Built-By: Administrator
+=======
 Built-By: Masta
+>>>>>>> 6e84ab8adfc82d0e2f9a194ed8442f47b672a7bb
 Created-By: IntelliJ IDEA
 Build-Jdk: 1.7.0_75
 

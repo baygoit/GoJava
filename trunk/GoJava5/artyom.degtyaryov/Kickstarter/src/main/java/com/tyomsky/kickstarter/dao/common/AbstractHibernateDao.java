@@ -145,4 +145,5 @@ public abstract class AbstractHibernateDao<E> implements BasicCrudDao<E> {
     public void setSessionFactory(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
+
 }

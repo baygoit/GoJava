@@ -2,6 +2,7 @@ package com.tyomsky.kickstarter.service;
 
 import com.tyomsky.kickstarter.dao.QuoteDAO;
 import com.tyomsky.kickstarter.domain.Quote;
+import com.tyomsky.kickstarter.service.impl.QuoteServiceImpl;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;

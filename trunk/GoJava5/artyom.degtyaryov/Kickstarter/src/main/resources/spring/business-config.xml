@@ -12,10 +12,22 @@
 
     <bean id="projectDao" class="com.tyomsky.kickstarter.dao.hibernate.HibernateProjectDao" />
 
-    <bean id="questionAndAnswerDAO" class="com.tyomsky.kickstarter.dao.hibernate.HibernateQuestionAndAnswerDao" />
+    <bean id="questionAndAnswerDao" class="com.tyomsky.kickstarter.dao.hibernate.HibernateQuestionAndAnswerDao" />
 
-    <bean id="quoteService" class="com.tyomsky.kickstarter.service.QuoteServiceImpl">
+    <bean id="quoteService" class="com.tyomsky.kickstarter.service.impl.QuoteServiceImpl">
         <constructor-arg ref="quoteDao"/>
+    </bean>
+
+    <bean id="categoryService" class="com.tyomsky.kickstarter.service.impl.CategoryServiceImpl">
+        <constructor-arg ref="categoryDao"/>
+    </bean>
+
+    <bean id="projectService" class="com.tyomsky.kickstarter.service.impl.ProjectServiceImpl">
+        <constructor-arg ref="projectDao"/>
+    </bean>
+
+    <bean id="questionAndAnswerService" class="com.tyomsky.kickstarter.service.impl.QuestionAndAnswerImpl">
+        <constructor-arg ref="questionAndAnswerDao"/>
     </bean>
 
     <bean id="random" class="java.util.Random"/>
