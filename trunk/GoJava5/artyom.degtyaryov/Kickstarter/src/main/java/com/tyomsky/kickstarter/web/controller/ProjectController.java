@@ -31,8 +31,8 @@ public class ProjectController {
         return "project";
     }
 
-    @RequestMapping(value = "question", method = RequestMethod.POST)
-    public String handleQuestion(@RequestParam("question") String question, @RequestParam("projectId") int projectId) {
+    @RequestMapping(value = "{projectId}/questions/add", method = RequestMethod.POST)
+    public String addQuestion(@RequestParam("question") String question, @PathVariable("projectId") int projectId) {
         questionAndAnswerService.save(new QuestionAndAnswer(question));
         return "redirect:/project/"+projectId+"/";
     }
