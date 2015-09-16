@@ -7,14 +7,13 @@ import com.tyomsky.kickstarter.service.QuestionAndAnswerService;
 
 import java.util.List;
 
-public class QuestionAndAnswerImpl implements QuestionAndAnswerService {
+public class QuestionAndAnswerServiceImpl implements QuestionAndAnswerService {
 
     QuestionAndAnswerDAO questionAndAnswerDAO;
 
-    public QuestionAndAnswerImpl(QuestionAndAnswerDAO questionAndAnswerDAO) {
+    public QuestionAndAnswerServiceImpl(QuestionAndAnswerDAO questionAndAnswerDAO) {
         this.questionAndAnswerDAO = questionAndAnswerDAO;
     }
-
 
     @Override
     public List<QuestionAndAnswer> getListByProject(Project project) {
