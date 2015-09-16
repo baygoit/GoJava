@@ -1,4 +1,4 @@
-package com.tyomsky.kickstarter.service;
+package com.tyomsky.kickstarter.service.impl;
 
 import com.tyomsky.kickstarter.dao.CategoryDAO;
 import com.tyomsky.kickstarter.domain.Category;
