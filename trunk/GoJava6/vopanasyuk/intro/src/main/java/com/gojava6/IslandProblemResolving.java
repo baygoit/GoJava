@@ -1,19 +1,33 @@
 package com.gojava6;
 
-/**
- * Created by sergiigetman on 8/25/15.
- * Consider 1 as "Island", 0 as "Water"
- * All vertically, horizontally, diagonally 1s set making one island
- */
+
 public class IslandProblemResolving {
 
+    int[][] islandMap;
+
     public IslandProblemResolving(int[][] islandMap) {
+        this.islandMap = islandMap;
     }
 
 
     public int countIslands() {
-        //TODO: write you code here
-        return 0;
+        int quantity = 0;
+        int height = islandMap.length;
+        int width = islandMap[0].length;
+
+        for (int i = 0; i < height; i++) {
+            for (int j = 0; j < width; j++) {
+                if (islandMap[i][j] == 1) {
+                    quantity++;
+                }
+                if (j > 0 && i > 0 && islandMap[i - 1][j - 1] == 1) {
+                    quantity--;
+                }
+            }
+        }
+
+
+        return quantity;
     }
 
 }
