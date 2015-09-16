@@ -3,7 +3,7 @@ package com.tyomsky.kickstarter.service;
 import com.tyomsky.kickstarter.domain.Payment;
 import com.tyomsky.kickstarter.domain.Project;
 
-public interface PaymentProcessor {
+public interface PaymentService {
 
     boolean processPayment(Payment payment);
 

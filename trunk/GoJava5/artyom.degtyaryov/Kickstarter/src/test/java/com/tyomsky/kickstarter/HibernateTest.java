@@ -31,5 +31,4 @@ public class HibernateTest {
         sessionFactory.getCurrentSession().persist(category3);
     }
 
-
 }

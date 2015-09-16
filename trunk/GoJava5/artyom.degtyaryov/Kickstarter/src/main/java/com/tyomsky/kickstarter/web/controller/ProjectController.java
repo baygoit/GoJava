@@ -1,9 +1,10 @@
 package com.tyomsky.kickstarter.web.controller;
 
-import com.tyomsky.kickstarter.dao.ProjectDAO;
 import com.tyomsky.kickstarter.dao.QuestionAndAnswerDAO;
 import com.tyomsky.kickstarter.domain.Project;
 import com.tyomsky.kickstarter.domain.QuestionAndAnswer;
+import com.tyomsky.kickstarter.service.ProjectService;
+import com.tyomsky.kickstarter.service.QuestionAndAnswerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,26 +19,31 @@ import java.util.List;
 @RequestMapping(value = "**/project")
 public class ProjectController {
 
-    @Autowired
-    ProjectDAO projectDAO;
-
-    @Autowired
-    QuestionAndAnswerDAO questionAndAnswerDAO;
+    ProjectService projectService;
+    QuestionAndAnswerService questionAndAnswerService;
 
     @RequestMapping(value = "{projectId}", method = RequestMethod.GET)
     public String showProject(@PathVariable("projectId") int projectId, Model model) {
-        Project project = projectDAO.get(projectId);
-        List<QuestionAndAnswer> questionsAndAnswers = questionAndAnswerDAO.getList("project.id", projectId);
-        System.out.println(questionsAndAnswers.size());
+        Project project = projectService.getProjectById(projectId);
+        List<QuestionAndAnswer> questionsAndAnswers = questionAndAnswerService.getListByProject(project);
         model.addAttribute("project", project);
         model.addAttribute("questionsAndAnswers", questionsAndAnswers);
         return "project";
     }
 
-    @RequestMapping(value = "question", method = RequestMethod.POST)
-    public String handleQuestion(@RequestParam("question") String question, @RequestParam("projectId") int projectId) {
-        questionAndAnswerDAO.save(new QuestionAndAnswer(question));
+    @RequestMapping(value = "{projectId}/questions/add", method = RequestMethod.POST)
+    public String addQuestion(@RequestParam("question") String question, @PathVariable("projectId") int projectId) {
+        questionAndAnswerService.save(new QuestionAndAnswer(question));
         return "redirect:/project/"+projectId+"/";
     }
 
+    @Autowired
+    public void setProjectService(ProjectService projectService) {
+        this.projectService = projectService;
+    }
+
+    @Autowired
+    public void setQuestionAndAnswerService(QuestionAndAnswerService questionAndAnswerService) {
+        this.questionAndAnswerService = questionAndAnswerService;
+    }
 }
