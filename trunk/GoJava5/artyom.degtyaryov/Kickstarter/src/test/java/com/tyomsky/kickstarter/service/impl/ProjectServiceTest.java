@@ -1,4 +1,4 @@
-package com.tyomsky.kickstarter.service;
+package com.tyomsky.kickstarter.service.impl;
 
 import com.tyomsky.kickstarter.dao.ProjectDAO;
 import com.tyomsky.kickstarter.domain.Category;
@@ -66,4 +66,5 @@ public class ProjectServiceTest {
         verify(projectDAO, times(1)).get(1);
         assertEquals(expectedProject, actualProject);
     }
+
 }

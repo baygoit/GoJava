@@ -15,15 +15,11 @@ public class PaymentServiceImpl implements PaymentService {
 
     @Override
     public boolean processPayment(Payment payment) {
-        if (payment == null || payment.getProject() == null){
+        if (payment == null){
             return false;
+        } else {
+            return processPayment(payment.getProject(), payment.getAmount(), payment.getPayer());
         }
-        Project project = payment.getProject();
-        int amount = payment.getAmount();
-        project.setBalance(project.getBalance() + amount);
-        projectDAO.merge(project);
-
-        return true;
     }
 
     @Override
