@@ -1,21 +1,22 @@
 package goit.nz.kickstarter.action;
 
-import goit.nz.kickstarter.dao.ProjectDAO;
+import goit.nz.kickstarter.service.ProjectService;
+
 import javax.servlet.http.HttpServletRequest;
 
 public class AddQuestionAction implements Action {
 	private String view;
-	private ProjectDAO projectDAO;
+	private ProjectService projectService;
 
-	public void setProjectDAO(ProjectDAO projectDAO) {
-		this.projectDAO = projectDAO;
+	public void setProjectService(ProjectService projectService) {
+		this.projectService = projectService;
 	}
 
 	@Override
 	public String execute(HttpServletRequest request) {
 		String question = request.getParameter("question");
 		long projectId = Long.parseLong(request.getParameter("id"));
-		projectDAO.addQuestion(projectId, question);
+		projectService.addQuestion(projectId, question);
 		view = "project?id=" + projectId + "&action=view";
 		return view;
 	}

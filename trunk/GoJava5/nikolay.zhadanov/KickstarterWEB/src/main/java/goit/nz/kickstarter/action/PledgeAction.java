@@ -1,15 +1,15 @@
 package goit.nz.kickstarter.action;
 
-import goit.nz.kickstarter.dao.ProjectDAO;
+import goit.nz.kickstarter.service.ProjectService;
 
 import javax.servlet.http.HttpServletRequest;
 
 public class PledgeAction implements Action {
 	private String view;
-	private ProjectDAO projectDAO;
+	private ProjectService projectService;
 
-	public void setProjectDAO(ProjectDAO projectDAO) {
-		this.projectDAO = projectDAO;
+	public void setProjectService(ProjectService projectService) {
+		this.projectService = projectService;
 	}
 
 	@Override
@@ -18,7 +18,7 @@ public class PledgeAction implements Action {
 			long projectId = Long.parseLong(request.getParameter("id"));
 			int pledgedAmount = Integer.parseInt(request
 					.getParameter("pledgeAmount"));
-			projectDAO.updatePledgedAmount(projectId, pledgedAmount);
+			projectService.pledgeAmount(projectId, pledgedAmount);
 			view = "pledge?id=" + projectId + "&done=yes";
 		} else {
 			view = "pledge";
