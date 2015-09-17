@@ -2,11 +2,14 @@ package belskii.artem.kickstarter.mvc.model;
 
 import java.util.Map;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 import belskii.artem.kickstarter.dao.category.CategoryDao;
-import belskii.artem.kickstarter.dao.category.CategoryDaoImplPsql;
 
 public class CategoryModel {
-	CategoryDao categoryDao = new CategoryDaoImplPsql("src/main/conf/database.conf");
+	ApplicationContext context = new ClassPathXmlApplicationContext("classpath:application-context.xml");
+	CategoryDao categoryDao = (CategoryDao) context.getBean("categoryDaoImpl");
 
 	public void addCategory(String categoryName) {
 		categoryDao.addCategory(categoryName);

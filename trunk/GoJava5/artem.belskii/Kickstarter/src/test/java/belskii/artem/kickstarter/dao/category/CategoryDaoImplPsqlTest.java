@@ -1,15 +1,21 @@
 package belskii.artem.kickstarter.dao.category;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 public class CategoryDaoImplPsqlTest {
-	CategoryDao category = new CategoryDaoImplPsql("src/test/conf/database.conf");
+	final Logger logger = LoggerFactory.getLogger(CategoryDaoImplPsqlTest.class);
+	private CategoryDao category = new CategoryDaoImplPsql("conf/testDatabase.conf");
 
 	@Before
 	public void setUp() throws Exception {
+		category.initDemoDB();
 	}
 
 	@Test
@@ -19,22 +25,9 @@ public class CategoryDaoImplPsqlTest {
 
 	@Test
 	public void testAddCategory() {
-		category.addCategory("Art");
-		category.addCategory("Comics");
-		category.addCategory("Crafts");
-		category.addCategory("Dance");
-		category.addCategory("Design");
-		category.addCategory("Fashion");
-		category.addCategory("Film & Video");
-		category.addCategory("Food");
-		category.addCategory("Games");
-		category.addCategory("Journalism");
-		category.addCategory("Music");
-		category.addCategory("Photography");
-		category.addCategory("Publishing");
-		category.addCategory("Technology");
-		category.addCategory("Theater");
-
+		int size=category.getCategoryList().size();
+		category.addCategory("NewTestCategory");
+		assertEquals("NewTestCategory",category.getCategoryNameById(size+1));
 	}
 
 	@Test

@@ -7,6 +7,6 @@ public interface ProjectDao {
 	public Map<Long, Project> getProjectList();
 	public Project getProjectDetails(int id);
 	public Map<Long, Project> getProjectFromCategory(int id);
-	public void commit();
 	public void update(Project updatedProject);
+	public void initDemoDB();
 }

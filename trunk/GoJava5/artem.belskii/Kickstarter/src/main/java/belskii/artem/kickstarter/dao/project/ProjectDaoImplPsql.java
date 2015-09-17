@@ -1,6 +1,7 @@
 package belskii.artem.kickstarter.dao.project;
 
 import java.sql.Connection;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -64,7 +65,7 @@ public class ProjectDaoImplPsql implements ProjectDao {
 					faqSatement.execute();
 				}
 			} catch (SQLException e) {
-				e.printStackTrace();
+				//e.printStackTrace();
 			}
 			
 			String paymentQuery = "INSERT INTO payment_methods (PROJECT_ID,	PAYMENT_AMOUMT, BONUS) values (?,?,?);";
@@ -72,7 +73,6 @@ public class ProjectDaoImplPsql implements ProjectDao {
 				paymentStatement.setInt(1, currentProjectId);
 
 				for (long i = 0; i < paymentVariants.size(); i++) {
-
 					Object[] value = paymentVariants.get(i).keySet().toArray();
 					paymentStatement.setLong(2, new Long(value[0].toString()));
 					Object[] bonus = paymentVariants.get(i).values().toArray();
@@ -80,17 +80,17 @@ public class ProjectDaoImplPsql implements ProjectDao {
 					paymentStatement.execute();
 				}
 			} catch (SQLException e) {
-				e.printStackTrace();
+				//e.printStackTrace();
 			}
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 
 		try {
 			connection.commit();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 	}
 
@@ -98,7 +98,7 @@ public class ProjectDaoImplPsql implements ProjectDao {
 	public Map<Long, Project> getProjectList() {
 		Map<Long, Project> answer = new HashMap<Long, Project>();
 		Project selectedProject = null;
-		String projectQuery = "select ID, PROJECT_NAME, GOAL, BALANCE, START_DATE, END_DATE, VIDEO_URL, CATEGORY_ID, DETAILS from projects;";
+		String projectQuery = "select ID, PROJECT_NAME, GOAL, BALANCE, START_DATE, END_DATE, VIDEO_URL, CATEGORY_ID, DETAILS from projects ORDER BY ID ASC;";
 		try (PreparedStatement statement = connection.prepareStatement(projectQuery)) {
 			ResultSet rs = statement.executeQuery();
 			while (rs.next()) {
@@ -118,7 +118,7 @@ public class ProjectDaoImplPsql implements ProjectDao {
 						i++;
 					}
 				} catch (SQLException e) {
-					e.printStackTrace();
+					//e.printStackTrace();
 				}
 				
 				String paymentQuery = "select PAYMENT_AMOUMT, BONUS from payment_methods where PROJECT_ID=?;";
@@ -129,14 +129,14 @@ public class ProjectDaoImplPsql implements ProjectDao {
 						selectedProject.addPaymetVariants(paymentRs.getLong("PAYMENT_AMOUMT"), paymentRs.getString("BONUS"));
 					}
 				} catch (SQLException e) {
-					e.printStackTrace();
+					//e.printStackTrace();
 				}
 				
 				answer.put(new Long(answer.size()), selectedProject);
 				
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 		
 		
@@ -167,7 +167,7 @@ public class ProjectDaoImplPsql implements ProjectDao {
 						i++;
 					}
 				} catch (SQLException e) {
-					e.printStackTrace();
+					//e.printStackTrace();
 				}
 				
 				String paymentQuery = "select PAYMENT_AMOUMT, BONUS from payment_methods where PROJECT_ID=?;";
@@ -178,13 +178,13 @@ public class ProjectDaoImplPsql implements ProjectDao {
 						selectedProject.addPaymetVariants(paymentRs.getLong("PAYMENT_AMOUMT"), paymentRs.getString("BONUS"));
 					}
 				} catch (SQLException e) {
-					e.printStackTrace();
+					//e.printStackTrace();
 				}
 
 				
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 		
 		return selectedProject;
@@ -215,7 +215,7 @@ public class ProjectDaoImplPsql implements ProjectDao {
 						i++;
 					}
 				} catch (SQLException e) {
-					e.printStackTrace();
+					//e.printStackTrace();
 				}
 				
 				String paymentQuery = "select PAYMENT_AMOUMT, BONUS from payment_methods where PROJECT_ID=?;";
@@ -226,14 +226,14 @@ public class ProjectDaoImplPsql implements ProjectDao {
 						selectedProject.addPaymetVariants(paymentRs.getLong("PAYMENT_AMOUMT"), paymentRs.getString("BONUS"));
 					}
 				} catch (SQLException e) {
-					e.printStackTrace();
+					//e.printStackTrace();
 				}
 				
 				answer.put(new Long(answer.size()), selectedProject);
 				
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 		
 		
@@ -241,13 +241,9 @@ public class ProjectDaoImplPsql implements ProjectDao {
 	}
 
 	@Override
-	public void commit() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
 	public void update(Project updatedProject) {
+		//System.out.println("try update project with id: "+updatedProject.getProjectId());
+	
 		HashMap<Long, ArrayList<String>> faq = updatedProject.getFaq();
 		HashMap<Long, HashMap<Long, String>> paymentVariants = updatedProject.getPaymetVariants();
 		String name = updatedProject.getName();
@@ -271,46 +267,153 @@ public class ProjectDaoImplPsql implements ProjectDao {
 			statement.setInt(7, categoryId);
 			statement.setString(8, details);
 			statement.setLong(9, projectId);
+			//System.out.println(statement);
 			statement.execute();
 			
-			String faqQuery = "UPDATE faq SET QUESTION=?, ANSWER=?, PROJECT_ID=?;";
-			try (PreparedStatement faqStatement = connection.prepareStatement(faqQuery)) {
-				for (long i = 0; i < faq.size(); i++) {
-					faqStatement.setString(1, faq.get(i).get(0));
-					faqStatement.setString(2, faq.get(i).get(1));
-					faqStatement.setLong(3, updatedProject.getcategoryId());
-					faqStatement.execute();
+			String checkfaqQuery="select exists(select 1 from faq where id=?);";
+			try (PreparedStatement checkfaqStatement = connection.prepareStatement(checkfaqQuery)) {
+				String faqQuery="";
+				if (statement.execute()){
+					faqQuery = "UPDATE faq SET QUESTION=?, ANSWER=?, PROJECT_ID=?;";
+					try (PreparedStatement faqStatement = connection.prepareStatement(faqQuery)) {
+						for (long i = 0; i < faq.size(); i++) {
+							faqStatement.setString(1, faq.get(i).get(0));
+							faqStatement.setString(2, faq.get(i).get(1));
+							faqStatement.setLong(3, updatedProject.getProjectId());
+							//System.out.println(faqStatement);
+							faqStatement.execute();
+						}
+					} catch (SQLException e) {
+						//e.printStackTrace();
+					}
+					
+				} else {
+					faqQuery = "INSERT INTO faq (PROJECT_ID, QUESTION, ANSWER) values (?,?,?);";
+					try (PreparedStatement faqStatement = connection.prepareStatement(faqQuery)) {
+						for (long i = 0; i < faq.size(); i++) {
+							faqStatement.setLong(1, updatedProject.getProjectId());
+							faqStatement.setString(2, faq.get(i).get(0));
+							faqStatement.setString(3, faq.get(i).get(1));
+							//System.out.println(faqStatement);
+							faqStatement.execute();
+						}
+
+					}
 				}
-			} catch (SQLException e) {
-				e.printStackTrace();
+			}
+			String checkPaymentMethodsQuery = "select exists(select 1 from payment_methods where id=?);";
+			try (PreparedStatement checkpaymentStatement = connection.prepareStatement(checkPaymentMethodsQuery)) {
+				if (statement.execute()){
+					String paymentQuery = "UPDATE payment_methods SET PROJECT_ID=?,	PAYMENT_AMOUMT=?, BONUS=? where PROJECT_ID=?;";
+					try (PreparedStatement paymentStatement = connection.prepareStatement(paymentQuery)) {
+						for (long i = 0; i < paymentVariants.size(); i++) {
+							Object[] value = paymentVariants.get(i).keySet().toArray();
+							paymentStatement.setLong(1, new Long(value[0].toString()));
+							Object[] bonus = paymentVariants.get(i).values().toArray();
+							paymentStatement.setString(2, bonus[0].toString());
+							paymentStatement.setLong(3, updatedProject.getcategoryId());
+							//System.out.println(paymentStatement);
+							paymentStatement.execute();
+						}
+					} catch (SQLException e) {
+						//e.printStackTrace();
+					}
+				} else {
+					String paymentQuery = "INSERT INTO payment_methods (PROJECT_ID,	PAYMENT_AMOUMT, BONUS) values (?,?,?);";
+					try (PreparedStatement paymentStatement = connection.prepareStatement(paymentQuery)) {
+						paymentStatement.setLong(1, projectId);
+
+						for (long i = 0; i < paymentVariants.size(); i++) {
+							Object[] value = paymentVariants.get(i).keySet().toArray();
+							paymentStatement.setLong(2, new Long(value[0].toString()));
+							Object[] bonus = paymentVariants.get(i).values().toArray();
+							paymentStatement.setString(3, bonus[0].toString());
+							paymentStatement.execute();
+						}
+					} catch (SQLException e) {
+						//e.printStackTrace();
+					}
+					
+				}
 			}
 			
-			String paymentQuery = "UPDATE payment_methods SET PROJECT_ID=?,	PAYMENT_AMOUMT=?, BONUS=? where PROJECT_ID=?;";
-			try (PreparedStatement paymentStatement = connection.prepareStatement(paymentQuery)) {
-				for (long i = 0; i < paymentVariants.size(); i++) {
-					Object[] value = paymentVariants.get(i).keySet().toArray();
-					paymentStatement.setLong(1, new Long(value[0].toString()));
-					Object[] bonus = paymentVariants.get(i).values().toArray();
-					paymentStatement.setString(2, bonus[0].toString());
-					paymentStatement.setLong(3, updatedProject.getcategoryId());
-					paymentStatement.execute();
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
 		
 		} catch (SQLException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 
-
-	
 		try {
 			connection.commit();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 
+	}
+	
+	public void initDemoDB(){
+		String dropProjects = "DROP TABLE IF EXISTS PROJECTS";
+		String dropFaq = "DROP TABLE IF EXISTS FAQ";
+		String dropPaymentMethods = "DROP TABLE IF EXISTS PAYMENT_METHODS";
+		try (PreparedStatement statement = connection.prepareStatement(dropProjects)) {
+			connection.setAutoCommit(true);
+			statement.execute();
+		} catch (SQLException e) {
+			//e.printStackTrace();
+		}
+		try (PreparedStatement statement = connection.prepareStatement(dropFaq)) {
+			connection.setAutoCommit(true);
+			statement.execute();
+		} catch (SQLException e) {
+			//e.printStackTrace();
+		}
+		try (PreparedStatement statement = connection.prepareStatement(dropPaymentMethods)) {
+			connection.setAutoCommit(true);
+			statement.execute();
+		} catch (SQLException e) {
+			//e.printStackTrace();
+		}
+		String createProjects = "CREATE TABLE PROJECTS (ID serial, PROJECT_NAME varchar(100), GOAL numeric, BALANCE numeric, START_DATE	varchar(20), END_DATE varchar(20), VIDEO_URL varchar(500), CATEGORY_ID	numeric, DETAILS		varchar(1000));";
+		String createFaq= "CREATE TABLE FAQ ( ID serial, PROJECT_ID	numeric, QUESTION varchar(1000), ANSWER varchar(1000));";
+		String createPaymentMethods="CREATE TABLE PAYMENT_METHODS (ID serial, PROJECT_ID numeric, PAYMENT_AMOUMT numeric, BONUS varchar(1000));";
+			try (PreparedStatement projectsStatement = connection.prepareStatement(createProjects)) {
+				connection.setAutoCommit(true);
+				projectsStatement.execute();
+			} catch (SQLException e) {};
+			try (PreparedStatement faqStatement = connection.prepareStatement(createFaq)) {
+				connection.setAutoCommit(true);
+				faqStatement.execute();
+			} catch (SQLException e) {};
+			try (PreparedStatement paymentMethodsStatement = connection.prepareStatement(createPaymentMethods)) {
+				connection.setAutoCommit(true);
+				paymentMethodsStatement.execute();
+			} catch (SQLException e) {};
+			
+			this.addProject(new Project("My test project from Art category", new Long(1), new Long(1), "28.07.2015",	"30.07.2015", "https://www.youtube.com/watch?v=uC0pqWX3yB8", 1, "Project details"));
+			this.addProject(new Project("My test project1 from Comics category", new Long(2), new Long(2), "29.07.2015",	"31.07.2015", "https://www.youtube.com/watch?v=uC0pqWX3yB8", 2, "Project details"));
+			this.addProject(new Project("My test project2 from Crafts category", new Long(3), new Long(3), "30.07.2015",	"01.08.2015", "https://www.youtube.com/watch?v=uC0pqWX3yB8", 3, "Project details"));
+			Project tmpProject = this.getProjectDetails(1);
+			tmpProject.addPaymetVariants(10L, "small bonus for project 1");
+			tmpProject.addPaymetVariants(30L, "standart bonus for project 1");
+			tmpProject.addPaymetVariants(50L, "extra bonus for project 1");
+			tmpProject.asqAQuestion("firs question");
+			tmpProject.asqAQuestion("second question");
+			this.update(tmpProject);
+			
+			Project tmp1Project = this.getProjectDetails(2);
+			tmp1Project.addPaymetVariants(10L, "small bonus for project 1");
+			tmp1Project.addPaymetVariants(30L, "standart bonus for project 1");
+			tmp1Project.addPaymetVariants(50L, "extra bonus for project 1");
+			tmp1Project.asqAQuestion("firs question");
+			tmp1Project.asqAQuestion("second question");
+			this.update(tmp1Project);
+
+			Project tmp2Project = this.getProjectDetails(3);			
+			tmp2Project.addPaymetVariants(10L, "small bonus for project 1");
+			tmp2Project.addPaymetVariants(30L, "standart bonus for project 1");
+			tmp2Project.addPaymetVariants(50L, "extra bonus for project 1");
+			tmp2Project.asqAQuestion("firs question");
+			tmp2Project.asqAQuestion("second question");
+			this.update(tmp2Project);
 	}
 
 }

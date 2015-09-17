@@ -1,6 +1,8 @@
 package belskii.artem.kickstarter.dao.category;
 
-import static org.junit.Assert.*;
+
+
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -19,7 +21,7 @@ public class CategoryTest {
 
 	@Test
 	public void testUpdateCategoryId() {
-		testCategory.updateCategoryId(101);
+		testCategory.setCategoryId(101);
 		assertEquals(101, testCategory.getCategoryId());
 	}
 

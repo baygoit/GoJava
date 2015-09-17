@@ -1,6 +1,8 @@
 package belskii.artem.kickstarter.dao.category;
 
-import static org.junit.Assert.*;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import java.util.HashMap;
 
@@ -29,6 +31,8 @@ public class CategoryDaoImplFileTest {
 		listForEquals.put(12,"Publishing");
 		listForEquals.put(13,"Technology");
 		listForEquals.put(14,"Theater");
+		
+		categoryDao.initDemoDB();
 	}
 
 	@Test

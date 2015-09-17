@@ -25,7 +25,6 @@ public class ProjectDaoImplFile implements ProjectDao {
 		String videoUrl = projectDetails.getVideoUrl();
 		int categoryId = projectDetails.getcategoryId();
 		String details = projectDetails.getDetails();
-		Long projectId = projectDetails.getProjectId();
 		
 		StringBuilder paymentVariantsStr = new StringBuilder();
 		for (long i=0; i<paymentVariants.size();i++){
@@ -150,9 +149,6 @@ public class ProjectDaoImplFile implements ProjectDao {
 		return answer;
 		}
 
-	@Override
-	public void commit() {
-	}
 	
 	@Override
 	public void update(Project updetedProject) {
@@ -171,6 +167,11 @@ public class ProjectDaoImplFile implements ProjectDao {
 		for (int i=0; i<projectList.size();i++){
 			this.addProject(projectList.get(new Long(i)));
 		}
+		
+	}
+	@Override
+	public void initDemoDB() {
+		// TODO Auto-generated method stub
 		
 	}
 
