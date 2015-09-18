@@ -14,6 +14,10 @@ public class IslandProblemResolving {
     }
 
     public int countIslands() {
+        return horizontalIslandsCount() + verticalIslandsCount() + diagonalIslandsCount();
+    }
+
+    private int horizontalIslandsCount() {
         int[][] map = this.islandMap;
         int count = 0;
 
@@ -31,6 +35,13 @@ public class IslandProblemResolving {
                 }
             }
         }
+        return count;
+    }
+
+    private int verticalIslandsCount() {
+        int[][] map = this.islandMap;
+        int count = 0;
+
         for (int k = 0; k < islandMap[0].length; k++) {
             for (int i = 0; i < islandMap.length - 1; i++) {
                 if (i == 0) {
@@ -45,6 +56,13 @@ public class IslandProblemResolving {
                 }
             }
         }
+        return count;
+    }
+
+    private int diagonalIslandsCount() {
+        int[][] map = this.islandMap;
+        int count = 0;
+
         for (int i = 0; i < islandMap.length - 1; i++) {
             for (int k = 0; k < islandMap[i].length - 1; k++) {
                 if ((i == 0) || (k == 0)) {
