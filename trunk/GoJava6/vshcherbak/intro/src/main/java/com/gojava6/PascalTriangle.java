@@ -1,8 +1,5 @@
 package com.gojava6;
 
-/**
- * Created by slavik on 8/26/15.
- */
 public class PascalTriangle {
     private int level;
     public int[][] triangle;
@@ -26,6 +23,6 @@ public class PascalTriangle {
                 triangle[i][j] = pascal(i, j);
             }
         }
-        return null;
+        return triangle;
     }
 }
