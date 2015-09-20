@@ -8,6 +8,8 @@ import com.gojava6.airbnb.users.Host;
 public class Main {
     public static void main(String[] args) throws Exception{
 
+        Application app = new Application();
+
         Host host1 = new Host();
         host1.setName("Nikolay");
         host1.setSurName("Chayka");
@@ -30,7 +32,6 @@ public class Main {
         loyaltyProgram.setAvailable(false);
 
         //Registration of 1 host and 2 clients
-        Application app = new Application();
         app.registerUser(host1);
         app.registerUser(client1);
         app.registerUser(client2);
