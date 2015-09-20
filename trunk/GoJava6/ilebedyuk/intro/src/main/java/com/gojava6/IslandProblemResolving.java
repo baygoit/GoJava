@@ -13,7 +13,7 @@ public class IslandProblemResolving {
     public IslandProblemResolving(int[][] islandMap) {
         this.islandMap = islandMap;
         this.heightArray = islandMap.length;
-        this.widthArray = islandMap[0].length;
+        //this.widthArray = islandMap[0].length;
     }
 
     public int countIslands() {
