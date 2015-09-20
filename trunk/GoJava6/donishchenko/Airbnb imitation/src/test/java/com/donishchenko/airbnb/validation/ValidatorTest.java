@@ -44,9 +44,7 @@ public class ValidatorTest {
         assertFalse("Hyphen and dot", Validator.validateEmail("sacr.-tum@gmail.com"));
         assertFalse("Email don't start with letter", Validator.validateEmail("-sacr8tum@gmail.com"));
         assertFalse("Too short username (<6)", Validator.validateEmail("sss@gmail.com"));
-        assertFalse("Too long username (>40)",
-                Validator.validateEmail("aaaaaaaaaabbbbbbbbbbccccccccccdddddddddda@gmail.com"));
-
+        assertTrue("True email", Validator.validateEmail("sacr8tum@gmail.com"));
     }
 
     @Test
