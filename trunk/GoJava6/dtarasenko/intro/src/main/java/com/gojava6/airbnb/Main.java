@@ -9,7 +9,6 @@ public class Main {
     public static void main(String[] args) throws Exception{
 
         Application app = new Application();
-        Application app1 = new Application();
 
         Host host1 = new Host();
         host1.setName("Nikolay");
