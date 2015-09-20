@@ -33,4 +33,12 @@ public class Host extends User {
         return super.validate() &&
                 Validator.validateCity(city);
     }
+
+    @Override
+    public String toString() {
+        return "Host{" +
+                "city='" + city + '\'' +
+                ", apartmentType=" + apartmentType +
+                '}';
+    }
 }

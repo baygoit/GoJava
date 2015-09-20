@@ -1,8 +1,9 @@
 package com.donishchenko.airbnb.model;
 
+import com.donishchenko.airbnb.common.Observer;
 import com.donishchenko.airbnb.validation.Validator;
 
-public abstract class User {
+public abstract class User implements Observer {
     private String name;
     private String surname;
     private String email;
@@ -41,5 +42,19 @@ public abstract class User {
         return Validator.validateName(name) &&
                 Validator.validateSurname(surname) &&
                 Validator.validateEmail(email);
+    }
+
+    @Override
+    public void update(String message) {
+        System.out.println(toString() + ": " + message);
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", email='" + email + '\'' +
+                '}';
     }
 }
