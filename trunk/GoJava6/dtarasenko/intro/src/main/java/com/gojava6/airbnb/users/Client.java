@@ -1,6 +1,8 @@
-package java.com.gojava6.airbnb;
+package com.gojava6.airbnb.users;
 
-public class Client extends User implements Observer{
+import com.gojava6.airbnb.observer.Observer;
+
+public class Client extends User implements Observer {
 
     @Override
     public void update(String loyaltyProgramName) {

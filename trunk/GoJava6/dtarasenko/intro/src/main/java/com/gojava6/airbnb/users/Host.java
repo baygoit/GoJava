@@ -1,4 +1,4 @@
-package java.com.gojava6.airbnb;
+package com.gojava6.airbnb.users;
 
 public class Host extends User{
     private String city;

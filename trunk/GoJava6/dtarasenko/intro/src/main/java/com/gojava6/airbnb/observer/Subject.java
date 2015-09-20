@@ -1,4 +1,4 @@
-package java.com.gojava6.airbnb;
+package com.gojava6.airbnb.observer;
 
 public interface Subject {
     void registerObserver(Observer observer);

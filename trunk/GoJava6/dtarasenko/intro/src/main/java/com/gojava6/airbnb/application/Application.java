@@ -1,4 +1,7 @@
-package java.com.gojava6.airbnb;
+package com.gojava6.airbnb.application;
+
+import com.gojava6.airbnb.users.Host;
+import com.gojava6.airbnb.users.User;
 
 import java.util.ArrayList;
 import java.util.List;

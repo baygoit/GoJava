@@ -1,4 +1,9 @@
-package java.com.gojava6.airbnb;
+package com.gojava6.airbnb;
+
+import com.gojava6.airbnb.application.Application;
+import com.gojava6.airbnb.application.LoyaltyProgram;
+import com.gojava6.airbnb.users.Client;
+import com.gojava6.airbnb.users.Host;
 
 public class Main {
     public static void main(String[] args) throws Exception{
