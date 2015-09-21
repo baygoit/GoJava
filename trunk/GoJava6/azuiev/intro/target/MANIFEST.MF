@@ -1,17 +1,5 @@
 Manifest-Version: 1.0
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
 Built-By: Administrator
-=======
-Built-By: Masta
->>>>>>> 6e84ab8adfc82d0e2f9a194ed8442f47b672a7bb
-=======
-Built-By: Administrator
->>>>>>> b406adcc396a7505479ad772bb83478ed6740c5d
-=======
-Built-By: Administrator
->>>>>>> b406adcc396a7505479ad772bb83478ed6740c5d
 Created-By: IntelliJ IDEA
 Build-Jdk: 1.7.0_75
 
