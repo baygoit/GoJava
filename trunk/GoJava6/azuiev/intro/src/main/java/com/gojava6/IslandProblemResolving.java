@@ -26,9 +26,9 @@ public class IslandProblemResolving {
         int count = 0;
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
-                if (islandMap[i][j]==1){
+                if (islandMap[i][j] == 1) {
                     count++;
-                    removeIsland(islandMap,i,j);
+                    removeIsland(islandMap, i, j);
                 }
             }
 
@@ -37,36 +37,34 @@ public class IslandProblemResolving {
     }
 
     private void removeIsland(int[][] islandMap, int i, int j) {
-        System.out.println(i+ " " + j);
-        islandMap[i][j]=0;
-        if ((j>0) && islandMap[i][j-1]==1){
-            removeIsland(islandMap,i,j-1);
+        System.out.println(i + " " + j);
+        islandMap[i][j] = 0;
+        if ((j > 0) && islandMap[i][j - 1] == 1) {
+            removeIsland(islandMap, i, j - 1);
         }
-        if ((j<islandMap[0].length-1) && islandMap[i][j+1]==1){
-            removeIsland(islandMap,i,j+1);
+        if ((j < islandMap[0].length - 1) && islandMap[i][j + 1] == 1) {
+            removeIsland(islandMap, i, j + 1);
         }
-        if ((i<islandMap.length-1) && islandMap[i+1][j]==1){
-            removeIsland(islandMap,i+1,j);
-        }
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-        if ((i>0) && islandMap[i-1][j]==1){
-            removeIsland(islandMap,i-1,j);
+        if ((i < islandMap.length - 1) && islandMap[i + 1][j] == 1) {
+            removeIsland(islandMap, i + 1, j);
         }
 
 
-=======
-        if ((i>0) && islandMap[i-1][j]==1){
-            removeIsland(islandMap,i-1,j);
+        if ((i > 0) && islandMap[i - 1][j] == 1) {
+            removeIsland(islandMap, i - 1, j);
         }
->>>>>>> b406adcc396a7505479ad772bb83478ed6740c5d
-=======
-        if ((i>0) && islandMap[i-1][j]==1){
-            removeIsland(islandMap,i-1,j);
+
+
+        if ((i > 0) && islandMap[i - 1][j] == 1) {
+            removeIsland(islandMap, i - 1, j);
+
+
+            if ((i > 0) && islandMap[i - 1][j] == 1) {
+                removeIsland(islandMap, i - 1, j);
+            }
+
         }
->>>>>>> b406adcc396a7505479ad772bb83478ed6740c5d
+
+
     }
-
-
 }
