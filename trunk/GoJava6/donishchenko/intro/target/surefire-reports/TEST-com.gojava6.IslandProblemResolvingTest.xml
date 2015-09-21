@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8" ?>
+=======
+<?xml version="1.0" encoding="UTF-8" ?>
+>>>>>>> b406adcc396a7505479ad772bb83478ed6740c5d
 <testsuite tests="1" failures="0" name="com.gojava6.IslandProblemResolvingTest" time="0.138" errors="0" skipped="0">
   <properties>
     <property name="idea.version" value="14.1.4"/>
@@ -23,7 +27,11 @@
     <property name="java.endorsed.dirs" value="C:\Program Files\Java\jdk1.8.0_05\jre\lib\endorsed"/>
     <property name="os.arch" value="x86"/>
     <property name="java.io.tmpdir" value="E:\TEMP\"/>
+<<<<<<< HEAD
     <property name="line.separator" value="
+=======
+    <property name="line.separator" value="
+>>>>>>> b406adcc396a7505479ad772bb83478ed6740c5d
 "/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="user.variant" value=""/>

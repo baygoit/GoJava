@@ -1,7 +1,9 @@
-package com.gojava6;
+package java.com.gojava6;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import java.com.gojava6.IslandProblemResolving;
 
 import static junit.framework.Assert.assertEquals;
 

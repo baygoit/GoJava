@@ -8,7 +8,14 @@ import com.tyomsky.kickstarter.service.QuestionAndAnswerService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
 import org.mockito.ArgumentCaptor;
+>>>>>>> b406adcc396a7505479ad772bb83478ed6740c5d
+=======
+import org.mockito.ArgumentCaptor;
+>>>>>>> b406adcc396a7505479ad772bb83478ed6740c5d
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -28,8 +35,19 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+<<<<<<< HEAD
+<<<<<<< HEAD
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
+=======
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+>>>>>>> b406adcc396a7505479ad772bb83478ed6740c5d
+=======
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+>>>>>>> b406adcc396a7505479ad772bb83478ed6740c5d
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:spring-test-config/testContextForControllers.xml", "classpath:spring/spring-web-servlet.xml"})
@@ -111,6 +129,14 @@ public class ProjectControllerTest {
     }
 
     @Test
+<<<<<<< HEAD
+<<<<<<< HEAD
+    public void testHandleQuestion() throws Exception {
+
+    }
+=======
+=======
+>>>>>>> b406adcc396a7505479ad772bb83478ed6740c5d
     public void whenAddQuestion_shouldSaveQuestionAndRedirectToRelatedProjectView() throws Exception {
         QuestionAndAnswer questionAndAnswer = new QuestionAndAnswer();
         String question = "question";
@@ -129,4 +155,8 @@ public class ProjectControllerTest {
     }
 
 
+<<<<<<< HEAD
+>>>>>>> b406adcc396a7505479ad772bb83478ed6740c5d
+=======
+>>>>>>> b406adcc396a7505479ad772bb83478ed6740c5d
 }

@@ -31,8 +31,18 @@ public class ProjectController {
         return "project";
     }
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+    @RequestMapping(value = "question", method = RequestMethod.POST)
+    public String handleQuestion(@RequestParam("question") String question, @RequestParam("projectId") int projectId) {
+=======
     @RequestMapping(value = "{projectId}/questions/add", method = RequestMethod.POST)
     public String addQuestion(@RequestParam("question") String question, @PathVariable("projectId") int projectId) {
+>>>>>>> b406adcc396a7505479ad772bb83478ed6740c5d
+=======
+    @RequestMapping(value = "{projectId}/questions/add", method = RequestMethod.POST)
+    public String addQuestion(@RequestParam("question") String question, @PathVariable("projectId") int projectId) {
+>>>>>>> b406adcc396a7505479ad772bb83478ed6740c5d
         questionAndAnswerService.save(new QuestionAndAnswer(question));
         return "redirect:/project/"+projectId+"/";
     }

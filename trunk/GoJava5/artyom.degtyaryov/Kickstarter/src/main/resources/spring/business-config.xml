@@ -26,7 +26,15 @@
         <constructor-arg ref="projectDao"/>
     </bean>
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+    <bean id="questionAndAnswerService" class="com.tyomsky.kickstarter.service.impl.QuestionAndAnswerImpl">
+=======
     <bean id="questionAndAnswerService" class="com.tyomsky.kickstarter.service.impl.QuestionAndAnswerServiceImpl">
+>>>>>>> b406adcc396a7505479ad772bb83478ed6740c5d
+=======
+    <bean id="questionAndAnswerService" class="com.tyomsky.kickstarter.service.impl.QuestionAndAnswerServiceImpl">
+>>>>>>> b406adcc396a7505479ad772bb83478ed6740c5d
         <constructor-arg ref="questionAndAnswerDao"/>
     </bean>
 
