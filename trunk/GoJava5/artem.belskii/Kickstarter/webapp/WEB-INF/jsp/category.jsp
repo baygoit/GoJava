@@ -7,16 +7,16 @@
 <title>Projects from category</title>
 </head>
 <body>
-<h1>Project list from <c:out value="${categoryName}"/> category</h1>
-<c:forEach var="project" items="${projectsFromCategory}" varStatus="loop">
+<h1>Project list from <c:out value="${currentCategory}"/> category</h1>
+<c:forEach var="project" items="${projectList}" varStatus="loop">
     <li>
-    <a href="projectdetails?projectid=<c:out value="${project.projectId}"/>">
+    <a href="<c:out value="${currentCategoryId}"/>/project/<c:out value="${project.projectId}"/>">
     Project name: <c:out value="${project.name}"/>. Project details: <c:out value="${project.details}"/>
     </a></li>
 </c:forEach>
 
 
-<p><a href=main>Return to category list</a></p>
+<p><a href=/<c:out value="${serverRoot}" />/>Return to category list</a></p>
 
 
 

@@ -24,7 +24,7 @@
     <li>Project faq:</li>
     <c:if test="${fn:length(project.faq) eq 0}">
    		<p>You can ask first question:</p>
-   		<form action="" method="POST">
+   		<form action="" name="question" method="POST">
 	        Please enter your question:  <input type="text" name="question" size="20px"> <br>
         <input type="submit" value="submit">
     </form>
@@ -42,7 +42,7 @@
 	
 	<li>Donate</li>
 	<c:if test="${fn:length(paymetVariants) gt 0}">
-	<form action="" method="POST">
+	<form action="" name="donate" method="POST">
 		<c:forEach var="variant" items="${paymetVariants}" varStatus="loop">
 					<c:forEach var="variant" items="${variant['value']}" varStatus="loop">
 						<br>Pay "${variant['key']}" and get "${variant['value']}" <input type="radio" name="donate" value="${variant['key']}"> <br>
@@ -53,12 +53,11 @@
 	</form>
 	</c:if>
 	<c:if test="${fn:length(paymetVariants) eq 0}">
-	<form action="" method="POST">
+	<form action="" name="customDonate" method="POST">
 		<p>You can put custom payment amount <input type="text" name="customDonate" size="20px"> </p>
 		<input type="submit" value="submit">
 	</form>
 	</c:if>
-	
-	<p><a href=projects?categoryId=${categoryId} >Return to project list</a></p>
+	<p><a href=/Kickstarter/category/${currentCategoryId} >Return to project list</a></p>
 </body>
 </html>

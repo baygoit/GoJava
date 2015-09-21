@@ -9,6 +9,9 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
+
+import belskii.artem.kickstarter.dao.project.Project;
 
 public class CategoryDaoImplHiber implements CategoryDao {
 	SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
@@ -65,6 +68,13 @@ public class CategoryDaoImplHiber implements CategoryDao {
 	public void initDemoDB() {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public int getCaterogyIdByName(String categoryName) {
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+		return  (int) session.createCriteria(Category.class).add(Restrictions.eq("categoryName", categoryName)).uniqueResult();
 	}
 
 }

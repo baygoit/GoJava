@@ -96,4 +96,10 @@ public class CategoryDaoImplPsql implements CategoryDao {
 		this.addCategory("Theater");
 	}
 
+	@Override
+	public int getCaterogyIdByName(String categoryName) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }

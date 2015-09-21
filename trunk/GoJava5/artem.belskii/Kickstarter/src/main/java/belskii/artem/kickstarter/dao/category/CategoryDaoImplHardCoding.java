@@ -48,4 +48,10 @@ public class CategoryDaoImplHardCoding implements CategoryDao {
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public int getCaterogyIdByName(String categoryName) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }

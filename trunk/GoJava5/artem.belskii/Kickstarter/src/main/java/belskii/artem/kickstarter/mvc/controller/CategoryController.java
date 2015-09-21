@@ -25,4 +25,8 @@ public class CategoryController {
 		return view.printCategoryList(this.getCategoryList());
 	}
 
+	public int getCaterogyIdByName(String categoryName) {
+		return model.getCaterogyIdByName(categoryName);
+	}
+
 }
