@@ -15,15 +15,12 @@ import belskii.artem.kickstarter.mvc.controller.QuoteController;
 import belskii.artem.kickstarter.mvc.model.CategoryModel;
 import belskii.artem.kickstarter.mvc.model.ProjectModel;
 import belskii.artem.kickstarter.mvc.model.QuoteModel;
-import belskii.artem.kickstarter.mvc.view.CategoryView;
-import belskii.artem.kickstarter.mvc.view.ProjectView;
-
 
 
 @Controller
 public class MainController {
-	private CategoryController category = new CategoryController(new CategoryModel(), new CategoryView());
-	private ProjectController project = new ProjectController(new ProjectModel(), new ProjectView());
+	private CategoryController category = new CategoryController(new CategoryModel());
+	private ProjectController project = new ProjectController(new ProjectModel());
 	private QuoteController quote = new QuoteController(new QuoteModel());
 	private String serverRoot = "Kickstarter";
 	private int currentCategoryId;
