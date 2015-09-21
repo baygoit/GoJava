@@ -1,13 +1,12 @@
-package java.com.gojava6;
+package com.gojava6;
+
 
 import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertArrayEquals;
 
-/**
- * Created by sergiigetman on 9/15/15.
- */
+
 public class PascalTriangleTest {
     private int level;
     private int[][] triangle;
