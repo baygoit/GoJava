@@ -4,15 +4,13 @@ package belskii.artem.kickstarter.mvc.controller;
 import java.util.Map;
 import belskii.artem.kickstarter.dao.project.Project;
 import belskii.artem.kickstarter.mvc.model.ProjectModel;
-import belskii.artem.kickstarter.mvc.view.ProjectView;
 
 public class ProjectController {
 	private ProjectModel model;
-	private ProjectView view;
 	
-	public ProjectController(ProjectModel model, ProjectView view) {
+	public ProjectController(ProjectModel model) {
 		this.model = model;
-		this.view = view;
+
 	}
 	
 	public void addProject(Project projectDetails){
@@ -21,10 +19,6 @@ public class ProjectController {
 	
 	public Map<Long, Project> getProjectList(){
 		return model.getProjectList();
-	}
-	
-	public Project printProjectDetails(int id){
-		return view.printProjectDetails(model.getProjectDetails(id));
 	}
 	
 	public Map<Long, Project> getProjectFromCategory(int id){

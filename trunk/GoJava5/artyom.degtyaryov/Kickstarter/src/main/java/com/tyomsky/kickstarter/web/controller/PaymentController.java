@@ -1,15 +1,7 @@
 package com.tyomsky.kickstarter.web.controller;
 
 import com.tyomsky.kickstarter.domain.Project;
-<<<<<<< HEAD
-<<<<<<< HEAD
-import com.tyomsky.kickstarter.service.PaymentProcessor;
-=======
 import com.tyomsky.kickstarter.service.PaymentService;
->>>>>>> b406adcc396a7505479ad772bb83478ed6740c5d
-=======
-import com.tyomsky.kickstarter.service.PaymentService;
->>>>>>> b406adcc396a7505479ad772bb83478ed6740c5d
 import com.tyomsky.kickstarter.service.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -39,15 +31,7 @@ public class PaymentController {
     @RequestMapping(value = "add/confirmed", method = RequestMethod.POST)
     public String processPayment(@PathVariable(value = "projectId")int projectId, @RequestParam int amount, @RequestParam String cardNumber, Model model) {
         Project project = projectService.getProjectById(projectId);
-<<<<<<< HEAD
-<<<<<<< HEAD
-        paymentProcessor.processPayment(project, amount, cardNumber);
-=======
         paymentService.processPayment(project, amount, cardNumber);
->>>>>>> b406adcc396a7505479ad772bb83478ed6740c5d
-=======
-        paymentService.processPayment(project, amount, cardNumber);
->>>>>>> b406adcc396a7505479ad772bb83478ed6740c5d
 
         return "redirect:/project/"+projectId+"/";
     }

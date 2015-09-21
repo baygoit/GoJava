@@ -18,4 +18,9 @@ public class CategoryModel {
 	public Map<Integer, String> getCategoryList() {
 		return categoryDao.getCategoryList();
 	}
+
+	public int getCaterogyIdByName(String categoryName) {
+		return categoryDao.getCaterogyIdByName(categoryName);
+	}
+
 }

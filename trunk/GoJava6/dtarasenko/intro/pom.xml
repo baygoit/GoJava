@@ -3,11 +3,11 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.gojava6</groupId>
-  <artifactId>intro</artifactId>
+  <artifactId>Intro2</artifactId>
   <version>1.0-SNAPSHOT</version>
   <packaging>jar</packaging>
 
-  <name>intro</name>
+  <name>Intro2</name>
   <url>http://maven.apache.org</url>
 
   <properties>

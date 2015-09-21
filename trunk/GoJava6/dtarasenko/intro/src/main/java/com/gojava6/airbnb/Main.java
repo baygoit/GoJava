@@ -14,7 +14,7 @@ public class Main {
         host1.setName("Nikolay");
         host1.setSurName("Chayka");
         host1.setEmail("nikolay.chayka@gmail.com");
-        host1.setApartmentType("House");
+        host1.setApartmentType(app.getTypeRoom());
         host1.setCity("Sofia");
 
         Client client1 = new Client();
