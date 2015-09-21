@@ -48,12 +48,18 @@ public class IslandProblemResolving {
         if ((i<islandMap.length-1) && islandMap[i+1][j]==1){
             removeIsland(islandMap,i+1,j);
         }
+<<<<<<< HEAD
 
         if ((i>0) && islandMap[i-1][j]==1){
             removeIsland(islandMap,i-1,j);
         }
 
 
+=======
+        if ((i>0) && islandMap[i-1][j]==1){
+            removeIsland(islandMap,i-1,j);
+        }
+>>>>>>> b406adcc396a7505479ad772bb83478ed6740c5d
     }
 
 

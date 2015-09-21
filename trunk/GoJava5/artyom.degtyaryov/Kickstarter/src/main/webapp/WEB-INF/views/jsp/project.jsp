@@ -45,8 +45,7 @@
             </c:forEach>
             <br/>
 
-            <form id="question_form" class="chat_form" action="project/question" method="POST">
-                <input type="hidden" name="projectId" value="${project.id}">
+            <form id="question_form" class="chat_form" action="questions/add" method="POST">
 
                 <div class="form-group">
                     <label for="question">Ask a question:</label>

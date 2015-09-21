@@ -30,7 +30,7 @@ public class MainServlet extends HttpServlet {
 		Action action = actionFactory.getAction(request);
 		String view = action.execute(request);
 		if ("GET".equals(request.getMethod())) {
-			request.getRequestDispatcher("/WEB-INF/" + view + ".jsp").forward(
+			request.getRequestDispatcher("/WEB-INF/pages/" + view + ".jsp").forward(
 					request, response);
 		} else {
 			response.sendRedirect(view);

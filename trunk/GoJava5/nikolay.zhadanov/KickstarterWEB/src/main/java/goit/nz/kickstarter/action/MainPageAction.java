@@ -1,29 +1,30 @@
 package goit.nz.kickstarter.action;
 
-import goit.nz.kickstarter.dao.CategoryDAO;
-import goit.nz.kickstarter.dao.QuoteDAO;
 import goit.nz.kickstarter.model.MainPageModel;
+import goit.nz.kickstarter.service.CategoryService;
+import goit.nz.kickstarter.service.QuoteService;
 
 import javax.servlet.http.HttpServletRequest;
 
 public class MainPageAction implements Action {
 	private MainPageModel model;
-	private QuoteDAO quoteDAO;
-	private CategoryDAO categoryDAO;
+	private QuoteService quoteService;
+	private CategoryService categoryService;
 	private final String VIEW = "main";
 
-	public void setQuoteDAO(QuoteDAO quoteDAO) {
-		this.quoteDAO = quoteDAO;
+	public void setQuoteService(QuoteService quoteService) {
+		this.quoteService = quoteService;
 	}
 
-	public void setCategoryDAO(CategoryDAO categoryDAO) {
-		this.categoryDAO = categoryDAO;
+	public void setCategoryService(CategoryService categoryService) {
+		this.categoryService = categoryService;
 	}
 
 	@Override
 	public String execute(HttpServletRequest request) {
-		model = new MainPageModel(quoteDAO, categoryDAO);
-		model.update();
+		model = new MainPageModel();
+		model.setQuote(quoteService.getRandomQuote());
+		model.setCategories(categoryService.getCategories());
 		request.setAttribute("model", model);
 		return VIEW;
 	}
