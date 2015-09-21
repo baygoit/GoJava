@@ -2,7 +2,7 @@ package belskii.artem.kickstarter.mvc.controller;
 
 import static org.junit.Assert.*;
 
-//import java.util.ArrayList;
+
 import java.util.HashMap;
 
 import org.junit.Before;
@@ -10,11 +10,9 @@ import org.junit.Test;
 
 import belskii.artem.kickstarter.dao.project.Project;
 import belskii.artem.kickstarter.mvc.model.ProjectModel;
-import belskii.artem.kickstarter.mvc.view.ProjectView;
 
 public class ProjectControllerTest {
 	private ProjectController project;
-	//private ArrayList<Project> projectForEquals = new ArrayList<Project>();
 	private HashMap<Long, Project> projectForEquals= new HashMap<Long, Project>();
 	
 	private HashMap<Long, String> paymentVariants;
@@ -24,7 +22,7 @@ public class ProjectControllerTest {
 		paymentVariants.put(new Long(10), "some bonus");
 		paymentVariants.put(new Long(30), "other bonus");
 		paymentVariants.put(new Long(50), "extra bonus");
-		project = new ProjectController(new ProjectModel(), new ProjectView());
+		project = new ProjectController(new ProjectModel());
 		projectForEquals.put(new Long(0), new Project("My test project from Art category",new Long(1), new Long(1),"28.07.2015","30.07.2015","https://www.youtube.com/watch?v=uC0pqWX3yB8", 1, "Project details"));
 		projectForEquals.put(new Long(1), new Project("My test project1 from Comics category",new Long(2), new Long(2),"29.07.2015","31.07.2015","https://www.youtube.com/watch?v=uC0pqWX3yB8", 2,"Project details"));
 		projectForEquals.put(new Long(2), new Project("My test project2 from Crafts category",new Long(3), new Long(3),"30.07.2015","01.08.2015","https://www.youtube.com/watch?v=uC0pqWX3yB8", 3, "Project details"));
@@ -50,12 +48,6 @@ public class ProjectControllerTest {
 			}
 		}
 		assertTrue(answer);
-	}
-
-
-	@Test
-	public void testPrintProjectDetails() {
-		assertEquals("Project details",project.printProjectDetails(0).getDetails());
 	}
 
 	@Test
@@ -97,7 +89,4 @@ public class ProjectControllerTest {
 		project.getProjectById(0).updateBalance(10L);
 		assertEquals(new Long(11),project.getProjectById(0).getBalance());
 	}
-	
-	
-
 }

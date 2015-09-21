@@ -1,2 +1,0 @@
-;;project 0;1;1;28.07.2015;30.07.2015;https://www.youtube.com/watch?v=uC0pqWX3yB8;1;Project details;0
-;;project 1;1;1;28.07.2015;30.07.2015;https://www.youtube.com/watch?v=uC0pqWX3yB8;1;Project details;
