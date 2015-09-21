@@ -5,9 +5,6 @@ import org.junit.Test;
 
 import static junit.framework.Assert.assertEquals;
 
-/**
- * Created by sergiigetman on 9/15/15.
- */
 public class IslandProblemResolvingTest {
     private int[][] islandMap;
     private int count;

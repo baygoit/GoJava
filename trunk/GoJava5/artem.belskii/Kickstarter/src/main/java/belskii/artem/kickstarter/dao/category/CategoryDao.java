@@ -7,4 +7,5 @@ public interface CategoryDao {
 	public Map<Integer, String> getCategoryList();
 	public String getCategoryNameById(int id);
 	public void initDemoDB();
+	public int getCaterogyIdByName(String categoryName);
 }
