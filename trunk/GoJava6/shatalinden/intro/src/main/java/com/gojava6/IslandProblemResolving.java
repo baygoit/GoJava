@@ -18,8 +18,6 @@ public class IslandProblemResolving {
     public int countIslands() {
         //TODO: write you code here
         if(islandMap == null) return 0;
-
-        else {
             for (int i = 0; i < islandMap.length; i++) {
                 for (int j = 0; j < islandMap[0].length; j++) {
                     if (islandMap[i][j] == 1) {
@@ -28,7 +26,7 @@ public class IslandProblemResolving {
                     }
                 }
             }
-        }
+
         return count;
     }
 
