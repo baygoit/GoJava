@@ -43,8 +43,10 @@ public class ValidatorTest {
         assertFalse("Two hyphens (--)", Validator.validateEmail("sacr--tum@gmail.com"));
         assertFalse("Hyphen and dot", Validator.validateEmail("sacr.-tum@gmail.com"));
         assertFalse("Email don't start with letter", Validator.validateEmail("-sacr8tum@gmail.com"));
-        assertFalse("Too short username (<6)", Validator.validateEmail("sss@gmail.com"));
         assertTrue("True email", Validator.validateEmail("sacr8tum@gmail.com"));
+        assertTrue("True email", Validator.validateEmail("kat1965@bigmir.net"));
+        assertTrue("True email", Validator.validateEmail("g.s.a.b.s@gmail.com"));
+        assertTrue("True email", Validator.validateEmail("c-v.bukovski@i.ua"));
     }
 
     @Test
