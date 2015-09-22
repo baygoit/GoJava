@@ -1,48 +1,92 @@
 package goit.nz.kickstarter.domain;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class Project {
-	private String name;
-	private String description;
-	private int amountRequired;
-	private int amountCollected;
-	private String deadline;
-	private long categoryId;
-	private List<ProjectEvent> events;
-	private String linkToVideo;
-	private List<FAQ> faqs;
-	private List<RewardOption> rewardOptions;
-	private long id;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
-	public Project(long id, String name, String desc, int required, int collected,
-			String date) {
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+
+@Entity
+@Table(name = "PROJECTS")
+public class Project {
+	@Column
+	private String name;
+	@Column
+	private String description;
+	@Column(name = "AMOUNT_GOAL")
+	private int amountRequired;
+	@Column(name = "AMOUNT_PLEDGED")
+	private int amountCollected;
+	@Column
+	private Date deadline;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "project")
+	@Cascade({ CascadeType.SAVE_UPDATE, CascadeType.REMOVE })
+	private List<ProjectEvent> events;
+	@Column(name = "LINK_TO_VIDEO")
+	private String linkToVideo;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "project")
+	@Cascade({ CascadeType.SAVE_UPDATE, CascadeType.REMOVE })
+	private List<FAQ> faqs;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "project")
+	@Cascade({ CascadeType.SAVE_UPDATE, CascadeType.REMOVE })
+	private List<RewardOption> rewardOptions;
+	@Id
+	@GeneratedValue
+	@Column(name = "ID")
+	private long id;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "CATEGORY_ID")
+	private Category category;
+
+	public Project() {
+	};
+
+	public Project(long id, String name, String desc, int required,
+			int collected) {
 		this.id = id;
 		this.name = name;
 		description = desc;
 		amountRequired = required;
 		amountCollected = collected;
-		deadline = date;
 		linkToVideo = "";
 		events = new ArrayList<>();
 		faqs = new ArrayList<>();
 		rewardOptions = new ArrayList<>();
 	}
 
-	public void setCategory(long categoryId) {
-		this.categoryId = categoryId;
+	public Category getCategory() {
+		return category;
 	}
 
-	public long getCategoryId() {
-		return categoryId;
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+
+	public void setDeadline(Date deadline) {
+		this.deadline = deadline;
+	}
+
+	public Date getDeadline() {
+		return deadline;
 	}
 
 	public String getName() {
 		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getDescription() {
@@ -52,25 +96,30 @@ public class Project {
 		return description;
 	}
 
-	public int getGoalAmount() {
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public int getAmountRequired() {
 		return amountRequired;
 	}
 
-	public int getPledgedAmount() {
+	public void setAmountRequired(int amount) {
+		amountRequired = amount;
+	}
+
+	public int getAmountCollected() {
 		return amountCollected;
+	}
+
+	public void setAmountCollected(int amount) {
+		amountCollected = amount;
 	}
 
 	public int getDaysToGo() {
 		int result = 0;
-		if (!deadline.isEmpty()) {
-			SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
-			Date end = null;
-			try {
-				end = dateFormat.parse(deadline);
-			} catch (ParseException e) {
-				e.printStackTrace();
-			}
-			long diff = end.getTime() - System.currentTimeMillis();
+		if (deadline != null) {
+			long diff = deadline.getTime() - System.currentTimeMillis();
 			result = (int) (diff / 86400000);
 		}
 		return result;
@@ -93,9 +142,6 @@ public class Project {
 	}
 
 	public String getLink() {
-		if (linkToVideo.isEmpty()) {
-			return "-/-";
-		}
 		return linkToVideo;
 	}
 
