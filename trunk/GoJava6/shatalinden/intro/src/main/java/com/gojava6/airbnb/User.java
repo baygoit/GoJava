@@ -3,7 +3,7 @@ package com.gojava6.airbnb;
 /**
  * Created by shata on 17.09.2015.
  */
-public class User {
+public class User implements Observer{
 
     enum appartType{place, room, appartment}
 
@@ -44,5 +44,9 @@ public class User {
 
     public String getCity() {
         return city;
+    }
+
+    public void update(String message) {
+        System.out.println(message);
     }
 }
