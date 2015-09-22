@@ -14,17 +14,39 @@ public class PascalTriangleTest {
 
     @Before
     public void setUp() {
-        level = 5;
-        triangle = new int[][]{
+        int level ;
+
+    }
+
+
+
+
+    @Test
+    public void testCalculateTriangle() {
+        int level =5;
+
+        int[][] triangle = {
                 {1},
                 {1, 1},
                 {1, 2, 1},
                 {1, 3, 3, 1},
                 {1, 4, 6, 4, 1}};
+        PascalTriangle pascalTriangle = new PascalTriangle(level);
+        assertArrayEquals(triangle, pascalTriangle.calculateTriangle());
     }
 
+
     @Test
-    public void testCalculateTriangle() {
+    public void testCalculateTriangle2() {
+        int level =4;
+
+        int[][] triangle = {
+                {1},
+                {1, 1},
+                {1, 2, 1},
+                {1, 3, 3, 1} };
+
+
         PascalTriangle pascalTriangle = new PascalTriangle(level);
         assertArrayEquals(triangle, pascalTriangle.calculateTriangle());
     }
