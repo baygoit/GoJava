@@ -59,28 +59,17 @@ public abstract class User implements Observer{
         return Name;
     }
 
-//    public void setName(String name) {
-//        Name = name;
-//    }
-
     public String getSurname() {
         return Surname;
     }
-
-//    public void setSurname(String surname) {
-//        Surname = surname;
-//    }
 
     public String getEmail() {
         return Email;
     }
 
-//    public void setEmail(String email) {
-//        Email = email;
-//    }
     @Override
     public void update(String news) {
-        System.out.println("Hello!" + User.this.getName() + ", today next news: " + news);
+        System.out.println("Hello! " + Name + ", today next news: " + news);
     }
 
 }

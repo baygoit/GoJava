@@ -7,9 +7,8 @@ import java.util.List;
  * Created by Игорь on 21.09.2015.
  */
 public class NewsSubscribe implements Subject {
-    private String news;
+    private String news = "Your discounts 20%!";
     private List<Observer> observers = new ArrayList<Observer>();
-
 
     public String getNews() {
         return news;
