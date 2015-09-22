@@ -1,4 +1,4 @@
-package com.gojava6.observer.project;
+package airbnb;
 
 /**
  * Created by slavik on 21.09.2015.

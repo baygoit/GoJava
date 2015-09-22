@@ -4,5 +4,7 @@
 public interface Observer {
 
     void update(String s);
-
+    String getName();
+    String getSurname();
+    String getEmail();
 }

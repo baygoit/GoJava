@@ -13,7 +13,7 @@ public class PascalTriangleTest {
     private int[][] triangle;
 
     @Before
-    public void setUp() {
+    /*public void setUp() {
         level = 5;
         triangle = new int[][]{
                 {1},
@@ -21,6 +21,18 @@ public class PascalTriangleTest {
                 {1, 2, 1},
                 {1, 3, 3, 1},
                 {1, 4, 6, 4, 1}};
+    }*/
+
+    public void setUp() {
+        level = 6;
+        triangle = new int[][]{
+                {1},
+                {1, 1},
+                {1, 2, 1},
+                {1, 3, 3, 1},
+                {1, 4, 6, 4, 1},
+                {1, 5, 10, 10, 5, 1}
+        };
     }
 
     @Test

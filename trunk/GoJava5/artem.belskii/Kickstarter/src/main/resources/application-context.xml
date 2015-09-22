@@ -4,10 +4,13 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-	<bean id="quoteDaoImpl" class="belskii.artem.kickstarter.dao.quote.QuoteDaoImplHiber"/>
+	<bean id="quoteDao" class="belskii.artem.kickstarter.dao.quote.QuoteDaoImplHiber"/>
 	<bean id="categoryDaoImpl" class="belskii.artem.kickstarter.dao.category.CategoryDaoImplHiber"/>
 	<bean id="projectDaoImpl" class="belskii.artem.kickstarter.dao.project.ProjectDaoImplHiber"/>
 	
+	<bean id="categoryModel" class="belskii.artem.kickstarter.mvc.model.CategoryModel">
+   		<constructor-arg name="categoryDao" ref="categoryDaoImpl"/>
+	</bean>
 	
 
 </beans>

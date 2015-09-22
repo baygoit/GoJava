@@ -1,11 +1,8 @@
 package com.gojava6.airbnb;
 
 /**
- * Created by shata on 17.09.2015.
+ * Created by sergiigetman on 9/16/15.
  */
 public interface Observer {
-
-    void notifyUsers ();
-
-    void register(User user);
+    void update(String message);
 }

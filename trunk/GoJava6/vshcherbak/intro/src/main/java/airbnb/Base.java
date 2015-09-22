@@ -1,4 +1,4 @@
-package com.gojava6.observer.project;
+package airbnb;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -10,11 +10,11 @@ import java.util.List;
 public class Base implements Observable {
 
     private List<User> users = new ArrayList<User>();
-    @Override
+
     public void add(User user) {
         users.add(user);
     }
-    @Override
+
     public void remove(String surname) {
         Iterator<User> it = users.iterator();
         while (it.hasNext()) {
@@ -24,7 +24,7 @@ public class Base implements Observable {
             }
         }
     }
-    @Override
+
     public void notifyAll(String data) {
         for (User user: users) {
             user.update(data);
