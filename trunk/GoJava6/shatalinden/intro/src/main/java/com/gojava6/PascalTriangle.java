@@ -29,10 +29,10 @@ public class PascalTriangle {
         }
 
         for (int i = 0; i < level; i++) {
-            int[] d = PascalTriangle[i];
+            int[] array = PascalTriangle[i];
             System.out.println();
-            for (int j = 0; j < d.length; j++) {
-                System.out.print(d[j]);
+            for (int j = 0; j < array.length; j++) {
+                System.out.print(array[j]);
             }
         }
 

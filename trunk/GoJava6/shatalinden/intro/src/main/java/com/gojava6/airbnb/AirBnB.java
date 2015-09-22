@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * Created by shata on 17.09.2015.
  */
-public class AirBnB implements Observer{
+public class AirBnB implements Subject{
 
     public AirBnB() {
     }
@@ -14,9 +14,10 @@ public class AirBnB implements Observer{
     private List<User> userList = new ArrayList<User>();
     private List<String> cities = new ArrayList<String>();
 
-    public void notifyUsers() {
+    public void notifyUsers(String message) {
         for(User user : userList) {
-            System.out.println(user.getName() + " notified.");
+//            System.out.println(user.getName() + " notified.");
+            user.update("New city: " + message + ", for " + user.getName().toString());
         }
     }
 
@@ -30,8 +31,12 @@ public class AirBnB implements Observer{
         }
     }
 
+    public void remove(User user) {
+        userList.remove(user);
+    }
+
     private void addCity(String city) {
-        if(!cities.contains(city)) notifyUsers();
+        if(!cities.contains(city)) notifyUsers(city);
         cities.add(city);
     }
 
