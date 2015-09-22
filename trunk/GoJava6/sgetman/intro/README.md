@@ -1,4 +1,4 @@
-#OneSwipeArray task description:#
+######OneSwipeArray task description:######
 
 A non-empty zero-indexed array A consisting of N integers is given (A cannot be null, N >= 2)
 
