@@ -1,6 +1,4 @@
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -9,7 +7,7 @@ import java.util.Set;
 public class AirBnBSystem implements SystemInterface {
 
     private Set<Observer> listOfObservers = new HashSet<Observer>();    // hashset of ALL types Users
-    private Set<String> listofCities = new HashSet<String>();    //list of cities
+    private Set<String> listofCities = new HashSet<String>();         //list of cities
 
     public Set<Observer> getListOfObservers() {
         return listOfObservers;
@@ -29,12 +27,22 @@ public class AirBnBSystem implements SystemInterface {
 
     public void registerObserver(Observer o) {
         listOfObservers.add(o);
-        System.out.println("//Observer registered");
     }
 
     public void removeObserver(Observer o) {
         listOfObservers.remove(o);
-        System.out.println("//Observer removed");
+    }
+
+    /* additional method for host registration
+     * used to notify (I couldn't do it earlier)
+     * (вынес его за пределы метода registerHost)
+     */
+
+    public void registerHostObserver(Host host) {
+        registerObserver(host);
+        if (!getListofCities().contains(host.getCity())) {
+            notifyAllObservers(host.getCity());
+        }
     }
 
     public void notifyAllObservers(String cityName) {
@@ -48,14 +56,9 @@ public class AirBnBSystem implements SystemInterface {
 
         if(validateName(host.getName()) && validateName(host.getSurname()) && validateEmail(host.getEmail())
                 && validateName(host.getCity()) && validateApartmentType(host.getApartmentType())) {
-
-            listOfObservers.add(host);
-            listofCities.add(host.getCity());
             System.out.println(host.getName() + " was sucsessfully registered as HOST.");
-            if (!listofCities.contains(host.getCity())) {
-                System.out.println("NOT CONTAIN " + host.getCity());
-                notifyAllObservers(host.getCity());
-            }
+            registerHostObserver(host);
+            listofCities.add(host.getCity());
         }
         else {
             System.out.println("Unfortunatly, your data is not valid. Try again!");
@@ -128,15 +131,5 @@ public class AirBnBSystem implements SystemInterface {
 
         else
             return false;
-    }
-
-    // method to check if there's such a value in the set
-    private boolean isCity(Set<String> listofCities, String targetValue) {
-
-        for(String s: listofCities){
-            if(s.equals(targetValue))
-                return true;
-        }
-        return false;
     }
 }
