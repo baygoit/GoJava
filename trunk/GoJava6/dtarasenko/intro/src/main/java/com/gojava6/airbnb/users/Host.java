@@ -1,9 +1,10 @@
 package com.gojava6.airbnb.users;
 
+import com.gojava6.airbnb.application.ApartmentType;
+
 public class Host extends User{
     private String city;
-    private String apartmentType;
-
+    private ApartmentType apartmentType;
 
     public String getCity() {
         return city;
@@ -13,11 +14,12 @@ public class Host extends User{
         this.city = city;
     }
 
-    public String getApartmentType() {
+    public ApartmentType getApartmentType() {
         return apartmentType;
     }
 
-    public void setApartmentType(String apartmentType) {
+    public void setApartmentType(ApartmentType apartmentType) {
         this.apartmentType = apartmentType;
     }
+
 }

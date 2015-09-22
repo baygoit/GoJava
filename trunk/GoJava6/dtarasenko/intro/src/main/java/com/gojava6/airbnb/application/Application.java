@@ -9,6 +9,9 @@ import java.util.List;
 public class Application{
 
     private List<User> listOfUsers = new ArrayList<User>();
+    private ApartmentType typePlace = ApartmentType.PLACE;
+    private ApartmentType typeRoom = ApartmentType.ROOM;
+    private ApartmentType typeApartment = ApartmentType.APARTMENT;
 
     public void registerUser(User user) {
         if (isValidUser(user)) {
@@ -28,7 +31,7 @@ public class Application{
                 if (isValidEmail(user.getEmail())) {
                     if (user instanceof Host) {
                         Host host = (Host) user;
-                        if (isValidText(host.getApartmentType())) {
+                        if (isValidText(host.getApartmentType().toString())) {
                             if (isValidText(host.getCity())) {
                                 isValid = true;
                             }
@@ -105,37 +108,15 @@ public class Application{
         return isValid;
     }
 
-//    private boolean isValidEmail(String email) {
-//
-//        boolean isValid = true;
-//
-//        String s = new String();
-//        for (char c = 'A'; c <= 'z'; c++) {
-//            s += c;
-//        }
-//
-//        char[] alphabet = s.toCharArray();
-//        char[] emailByChar = email.toCharArray();
-//
-//        for (int i = 0; i < emailByChar.length; i++) {
-//            boolean check = false;
-//            for (int k = 0; k < alphabet.length; k++) {
-//                if (emailByChar[i] == alphabet[k]) {
-//                    check = true;
-//                }
-//            }
-//            if (emailByChar[i] == '@') {
-//                check = true;
-//            }
-//            if (emailByChar[i] == '.') {
-//                check = true;
-//            }
-//            if (check == false) {
-//                isValid = false;
-//                break;
-//            }
-//        }
-//
-//        return true;
-//    }
+    public ApartmentType getTypePlace() {
+        return typePlace;
+    }
+
+    public ApartmentType getTypeRoom() {
+        return typeRoom;
+    }
+
+    public ApartmentType getTypeApartment() {
+        return typeApartment;
+    }
 }

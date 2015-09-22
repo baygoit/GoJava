@@ -7,7 +7,7 @@ public class Validator {
     private static String nameValidationPatternString =
             "([A-Z][a-z]{1,39})(-([A-Z][a-z]{1,39}))*";
     private static String emailValidationPatternString =
-            "([a-z]([-.]?[a-z0-9])*){5,40}@(([a-z](-?[a-z0-9])*){1,40}\\.[a-z]{2,6})";
+            "([a-z0-9]+([-.]?[a-z0-9])*)@(([a-z](-?[a-z0-9])*){1,40}\\.[a-z]{2,6})";
     private static String cityValidationPatternString =
             "([A-Z][a-z]{1,39})(-?([A-Z][a-z]{1,39}))*";
 
