@@ -18,7 +18,7 @@ public class OneSwipeArray {
             throw new IllegalArgumentException();
         }
         if (a.length < 2) {
-            System.out.println("<2");
+            System.out.println("array < 2");
             throw new IllegalArgumentException();
         }
 
@@ -31,7 +31,7 @@ public class OneSwipeArray {
             }
         }
 
-        if(counter>2){
+        if (counter > 2) {
             result = false;
         }
 
