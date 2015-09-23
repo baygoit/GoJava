@@ -89,25 +89,18 @@
 		<property name="quoteService" ref="quoteService" />
 		<property name="categoryService" ref="categoryService" />
 	</bean>
-	<bean id="pledgeAction" class="goit.nz.kickstarter.action.PledgeAction">
+	<bean id="donateAction" class="goit.nz.kickstarter.action.DonateAction">
 		<property name="projectService" ref="projectService" />
 	</bean>
 	<bean id="projectAction" class="goit.nz.kickstarter.action.ProjectAction">
 		<property name="projectService" ref="projectService" />
 	</bean>
+	
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/pages/" />
+        <property name="suffix" value=".jsp" />
+    </bean>
+    
+    <context:component-scan base-package="goit.nz.kickstarter.action" />
 
-	<!-- Action Factory -->
-	<bean id="actionFactory" class="goit.nz.kickstarter.action.ActionFactory">
-		<property name="actions">
-			<map>
-				<entry key="GET/" value-ref="mainPageAction" />
-				<entry key="GET/main" value-ref="mainPageAction" />
-				<entry key="GET/category" value-ref="categoryAction" />
-				<entry key="GET/project" value-ref="projectAction" />
-				<entry key="GET/pledge" value-ref="pledgeAction" />
-				<entry key="POST/pledge" value-ref="pledgeAction" />
-				<entry key="POST/addQuestion" value-ref="addQuestionAction" />
-			</map>
-		</property>
-	</bean>
 </beans>
