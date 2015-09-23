@@ -1,6 +1,12 @@
 package hw1;
 
-import org.junit.*;
+
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Ignore;
+import org.junit.Test;
+
+import java.util.Arrays;
 
 public class PascalTriangleTest {
     private int level;
@@ -20,6 +26,9 @@ public class PascalTriangleTest {
     @Test
     public void testCalculateTriangle() {
         PascalTriangle pascalTriangle = new PascalTriangle(level);
+        pascalTriangle.calculateTriangle();
+       /* System.out.println(triangle[0].length);
+        System.out.println(pascalTriangle.calculateTriangle()[0].length);*/
         Assert.assertArrayEquals(triangle, pascalTriangle.calculateTriangle());
     }
 

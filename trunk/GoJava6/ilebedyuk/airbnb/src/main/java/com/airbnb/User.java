@@ -11,32 +11,65 @@ public abstract class User implements Observer{
     private String Surname;
     private String Email;
 
-    public String getName() {
-        return Name;
+    public User(String name, String surname, String email) throws Exception {
+        if (User.validateName(name) == true && User.validateName(surname) == true && User.validateEmail(email) == true) {
+            this.Name = name;
+            this.Surname = surname;
+            this.Email = email;
+        } else throw new Exception();
     }
 
-    public void setName(String name) {
-        Name = name;
+    public static boolean validateName(String name) {
+        if (name == null || name.isEmpty() || isAlpha(name) == false){
+            return false;
+        }
+        return true;
+    }
+
+    public static boolean validateEmail(String email) {
+        if (isValidEmailAddress(email) == false || email == null || email.isEmpty()){
+            return false;
+        }
+        return true;
+    }
+
+    protected static boolean isAlpha(String name) {
+        char[] chars = name.toCharArray();
+
+        for (char c : chars) {
+            if (!Character.isLetter(c)){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private static boolean isValidEmailAddress(String email) {
+        boolean result = true;
+        try {
+            InternetAddress emailAddr = new InternetAddress(email);
+            emailAddr.validate();
+        } catch (AddressException ex) {
+            result = false;
+        }
+        return result;
+    }
+
+    public String getName() {
+        return Name;
     }
 
     public String getSurname() {
         return Surname;
     }
 
-    public void setSurname(String surname) {
-        Surname = surname;
-    }
-
     public String getEmail() {
         return Email;
     }
 
-    public void setEmail(String email) {
-        Email = email;
-    }
-
     @Override
     public void update(String news) {
-        System.out.println("Hello!" + getName() + ", today next news: " + news);
+        System.out.println("Hello! " + Name + ", today next news: " + news);
     }
+
 }
