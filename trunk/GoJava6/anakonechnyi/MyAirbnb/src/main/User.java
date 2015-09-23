@@ -35,7 +35,6 @@ public class User {
     }
 
     public boolean setEmail(String email) {
-        //to complite
         if (email.isEmpty()||email.equals("Null")||!(email.contains("@"))) {return false;}
         this.email = email;
         return true;
