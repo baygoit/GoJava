@@ -7,7 +7,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 /**
- * Created by sergiigetman on 9/22/15.
+ * Created by sergiigetman on 9/22/15..
  */
 public class OneSwipeArrayTest {
 
