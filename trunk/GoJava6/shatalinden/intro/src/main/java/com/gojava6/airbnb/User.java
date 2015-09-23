@@ -3,31 +3,16 @@ package com.gojava6.airbnb;
 /**
  * Created by shata on 17.09.2015.
  */
-public class User implements Observer{
+public abstract class User implements Observer{
 
-    enum appartType{place, room, appartment}
-
-    appartType type;
-    private String name;
-    private String surname;
     private String email;
-    private String city;
+    private String surname;
+    private String name;
 
     public User(String name, String surname, String email) {
         this.name = name;
         this.surname = surname;
         this.email = email;
-    }
-
-    public User(String name, String surname, String email, String city, appartType type) {
-        this.name = name;
-        this.surname = surname;
-        this.email = email;
-        this.city = city;
-        this.type = type;
-    }
-
-    public User() {
     }
 
     public String getName() {
@@ -40,10 +25,6 @@ public class User implements Observer{
 
     public String getEmail() {
         return email;
-    }
-
-    public String getCity() {
-        return city;
     }
 
     public void update(String message) {
