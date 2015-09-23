@@ -1,9 +1,10 @@
 package polymorphism;
 
-public class StandardTicket implements Ticket {
+public class PlaceTicket extends StandardTicket{
 
     @Override
     public int price() {
-        return 5;
+        return 10;
     }
+
 }
