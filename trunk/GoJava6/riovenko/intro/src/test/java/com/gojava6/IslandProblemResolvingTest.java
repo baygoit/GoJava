@@ -14,13 +14,20 @@ public class IslandProblemResolvingTest {
 
     @Before
     public void setUp() {
-        islandMap = new int[][]{
+        /*islandMap = new int[][]{
                 {1, 1, 0, 0, 1},
                 {1, 0, 0, 0, 0},
                 {0, 0, 1, 0, 1},
                 {1, 0, 0, 1, 1}
         };
-        count = 5;
+        count = 5;*/
+        islandMap = new int[][]{
+                {1, 1, 0, 0, 1, 0, 1, 0, 1},
+                {1, 0, 0, 0, 0, 0, 1, 0, 1},
+                {0, 0, 1, 0, 1, 0, 1, 1, 1},
+                {1, 0, 0, 1, 1, 0, 1, 0, 1}
+        };
+        count = 6;
     }
 
     @Test

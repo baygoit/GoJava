@@ -33,9 +33,21 @@ public class Application {
         Host host3 = new Host("Artem", "Nikolaev", "arnik@gmail.com", "Kyiv", ApartmentType.PLACE);
         airSys.registerHost(host3);
 
+        Client client4 = new Client("George", "Katuasvil", "george1@gmail.com");
+        airSys.registerClient(client4);
+
+        System.out.println("--------------------------");
+        System.out.println("List of cities: ");
         for(String tempCity : airSys.getListofCities()) {
             System.out.println(tempCity);
         }
+        System.out.println("--------------------------");
+
+        System.out.println("List of observers: ");
+        for(Observer n : airSys.getListOfObservers()) {
+            System.out.println(n.getName());
+        }
+        System.out.println("--------------------------");
 
         //Host host1 = new Host("Dan", "Vel", "dv@gmail.com", "Kiev", ApartmentType.ROOM);
         //airSys.registerHost(host1);
