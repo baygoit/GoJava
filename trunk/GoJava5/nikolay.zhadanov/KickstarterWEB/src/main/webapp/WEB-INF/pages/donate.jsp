@@ -2,11 +2,11 @@
 
 <html>
 <head>
-<title>Pledge</title>
+<title>Donate</title>
 </head>
 <body>
 	<c:choose>
-		<c:when test="${param.done == 'yes'}">
+		<c:when test="${confirmed}">
 			<h2>Thank you for your donate!</h2>
 			<br>
 			<br>
@@ -16,32 +16,32 @@
 			<h2>Payment Page</h2>
 			<br>
 			<c:choose>
-				<c:when test="${param.amount > 0}">
-					<b>Payment amount = <c:out value="${param.amount}" /></b>
+				<c:when test="${chosenAmount > 0}">
+					<b>Payment amount = <c:out value="${chosenAmount}" /></b>
 				</c:when>
 			</c:choose>
-			<form action="pledge" method="POST">
+			<form action="thankyou" method="POST">
 				Enter your Name: <input type="text" name="name" size="20px">
 				<br> Enter your Card Number: <input type="text" name="card"
 					size="20px"> <br>
 				<c:choose>
-					<c:when test="${param.amount > 0}">
-						<input type="hidden" name="pledgeAmount" value="${param.amount}" />
+					<c:when test="${chosenAmount > 0}">
+						<input type="hidden" name="chosenAmount" value="${chosenAmount}" />
 					</c:when>
 					<c:otherwise>
-    	Enter Pledge Sum:        <input type="number" name="pledgeAmount"
+    	Enter Pledge Sum:        <input type="number" name="chosenAmount"
 							size="20px">
 						<br>
 					</c:otherwise>
 				</c:choose>
-				<br> <input type="hidden" name="id" value="${param.id}" /> <input
-					type="submit" value="Make Donate">
+				<br> <input type="submit" value="Make Donate">
 			</form>
 			<br>
 			<br>
 			<br>
 		</c:otherwise>
 	</c:choose>
-	<b><a href="project?id=${param.id}&action=view">Back</a></b>
+	<b><a
+		href="/KickstarterWEB/main/category/${project.category.id}/project/${project.id}/view">Back</a></b>
 </body>
 </html>

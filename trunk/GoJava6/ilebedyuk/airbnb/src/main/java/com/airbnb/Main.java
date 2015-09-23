@@ -13,14 +13,16 @@ public class Main {
             airbnb.register(client1);
             airbnb.register(client2);
 
+            airbnb.getUsers();
+
             NewsSubscribe newsSubscribe = new NewsSubscribe();
             newsSubscribe.registerObserver(client1);
-            newsSubscribe.registerObserver(client1);
+            newsSubscribe.registerObserver(client2);
 
             newsSubscribe.notifyObservers();
 
-            newsSubscribe.removeObserver(client1);
-            newsSubscribe.notifyObservers();
+           newsSubscribe.removeObserver(client1);
+           newsSubscribe.notifyObservers();
 
         } catch (Exception e) {
             System.out.println("Uncorrect data");
