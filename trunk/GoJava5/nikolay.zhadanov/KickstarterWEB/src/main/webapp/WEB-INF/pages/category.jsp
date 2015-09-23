@@ -7,12 +7,12 @@
 <body>
 	<h2>
 		Category:
-		<c:out value="${model.category.name}" />
+		<c:out value="${category.name}" />
 	</h2>
 	<br>
 	<ol>
-		<c:forEach var="project" items="${model.projects}">
-			<li><b><a href="project?id=${project.id}&action=view"><c:out
+		<c:forEach var="project" items="${projects}">
+			<li><b><a href="${requestScope['javax.servlet.forward.request_uri']}/project/${project.id}/view"><c:out
 							value="${project.name}" /></a></b> <br> <b>Description: </b> <c:out
 					value="${project.description}" /> <br> <b>Goal: </b> <c:out
 					value="${project.amountRequired}$" /> <br> <b>Pledged: </b> <c:out
@@ -22,6 +22,6 @@
 	</ol>
 	<br>
 	<br>
-	<b><a href="main">Back</a></b>
+	<b><a href="/KickstarterWEB/main">Back</a></b>
 </body>
 </html>

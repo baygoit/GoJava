@@ -2,6 +2,7 @@ package goit.nz.kickstarter.service;
 
 import goit.nz.kickstarter.dao.ProjectDAO;
 import goit.nz.kickstarter.domain.Project;
+import goit.nz.kickstarter.domain.RewardOption;
 
 import java.util.List;
 
@@ -40,6 +41,25 @@ public class ProjectService {
 	@Transactional(readOnly = false)
 	public void addQuestion(long projectId, String question) {
 		projectDAO.addQuestion(projectId, question);
+	}
+
+	@Transactional(readOnly = true)
+	public int getRewardAmount(long projectId, long rewardId) {
+		Project project = getProject(projectId);
+		int result = 0;
+		int index = 0;
+		int size = project.getRewardOptions().size();
+		if (size > 0) {
+			while (result == 0 && index < size) {
+				RewardOption rewardOption = project.getRewardOptions().get(
+						index);
+				if (rewardOption.getId() == rewardId) {
+					result = rewardOption.getAmount();
+				}
+				index++;
+			}
+		}
+		return result;
 	}
 
 }

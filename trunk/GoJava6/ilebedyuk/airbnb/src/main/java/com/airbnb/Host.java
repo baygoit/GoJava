@@ -16,13 +16,6 @@ public class Host extends User {
         this.apartmentType = apartmentType;
     }
 
-//    public boolean validateCity(String city) {
-//        if (city == null || city.isEmpty() || isAlpha(city) == false){
-//            return false;
-//        }
-//        return true;
-//    }
-
     public ApartmentType getApartmentType() {
         return apartmentType;
     }
@@ -31,7 +24,4 @@ public class Host extends User {
         return city;
     }
 
-//    public void setCity(String city) {
-//        this.city = city;
-//    }
 }

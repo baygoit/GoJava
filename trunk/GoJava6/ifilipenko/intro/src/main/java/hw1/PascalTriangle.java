@@ -10,22 +10,30 @@ public class PascalTriangle {
 
     public int[][] calculateTriangle() {
 
-        int[][] triangle = new int[level][level];
+        if (level < 0) {
+            return null;
+        } else {
+            int[][] triangle = new int[level][];
 
-        //triangle[1] = new int[1 + 2];
-        triangle[0][0] = 1;
-        triangle[1][0] = 1;
-        triangle[1][1] = 1;
-
-        for (int i = 2; i < triangle.length; i++) {
-            triangle[i][0] = 1;
-            for (int j = 1; j < triangle[i].length-2; j++) {
-                triangle[i][j] = triangle[i-1][j] + triangle[i-1][j+1];
-                triangle[i][triangle[i].length-1] = 1;
+            for (int row = 0; row < triangle.length; row++) {
+                triangle[row] = new int[row + 1];
+                triangle[row][0] = 1; // first number in a row
+                triangle[row][row] = 1; // last number in a row
+                for (int col = 1; col < row; col++) {
+                    triangle[row][col] = triangle[row - 1][col-1] + triangle[row - 1][col];
+                }
             }
+            return triangle;
         }
+    }
 
-        return triangle;
+    public void print(int[][] triangle) {
+        for (int row = 0; row < triangle.length; row++) {
+            for (int col = 0; col < triangle[row].length; col++) {
+                System.out.print(" " + triangle[row][col]);
+            }
+            System.out.println("");
+        }
     }
 
 }
