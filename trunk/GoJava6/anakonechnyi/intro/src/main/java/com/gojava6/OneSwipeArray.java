@@ -5,6 +5,7 @@ import java.util.Arrays;
 /**
  * Created by user on 24.09.2015.
  */
+
 public class OneSwipeArray {
     public boolean solution (int[] array){
         //validation
