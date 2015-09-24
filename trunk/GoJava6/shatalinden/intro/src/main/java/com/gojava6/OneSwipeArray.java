@@ -1,8 +1,6 @@
 package com.gojava6;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 /**
  * Created by sergiigetman on 9/22/15.
@@ -10,6 +8,7 @@ import java.util.List;
 public class OneSwipeArray {
 
     public boolean solution(int[] trueArray) {
+
         if (trueArray == null) {
             throw new IllegalArgumentException();
         }
@@ -28,10 +27,10 @@ public class OneSwipeArray {
         for (int i = 0; i < arrayCopy.length; i++) {
             if (arrayToCheck[i] != arrayCopy[i]) {
                 count++;
+                if (count == 3) return false;
             }
         }
         if (count == 2) return true;
-
         return false;
     }
 }
