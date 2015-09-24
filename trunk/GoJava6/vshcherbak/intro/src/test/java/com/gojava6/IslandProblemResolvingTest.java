@@ -28,4 +28,36 @@ public class IslandProblemResolvingTest {
         IslandProblemResolving islandProblemResolving = new IslandProblemResolving(islandMap);
         assertEquals(count, islandProblemResolving.countIslands());
     }
+    @Test
+    public void testCountIslands1() {
+        islandMap = new int[][]{
+                {1, 1, 0, 0, 1},
+                {1, 0, 0, 0, 0},
+                {0, 0, 1, 0, 1},
+                {1, 0, 0, 1, 1},
+                {1, 0, 1, 0, 1}
+        };
+        count = 6;
+        IslandProblemResolving islandProblemResolving = new IslandProblemResolving(islandMap);
+        assertEquals(count, islandProblemResolving.countIslands());
+    }
+    @Test
+    public void testCountIslands2() {
+        islandMap = new int[][]{
+                {1}
+        };
+        count = 1;
+        IslandProblemResolving islandProblemResolving = new IslandProblemResolving(islandMap);
+        assertEquals(count, islandProblemResolving.countIslands());
+    }
+    @Test
+    public void testCountIslands4() {
+        islandMap = new int[][]{
+                {0, 0},
+                {0, 0}
+        };
+        count = 0;
+        IslandProblemResolving islandProblemResolving = new IslandProblemResolving(islandMap);
+        assertEquals(count, islandProblemResolving.countIslands());
+    }
 }
