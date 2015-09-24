@@ -9,20 +9,16 @@ import org.springframework.transaction.annotation.Transactional;
 public abstract class AbstractHibernateDAO {
 
 	private SessionFactory sessionFactory;
-	 
-    protected Session getSession() {
-        return sessionFactory.getCurrentSession();
-    }
- 
-    public void persist(Object entity) {
-        getSession().persist(entity);
-    }
- 
-    public void delete(Object entity) {
-        getSession().delete(entity);
-    }
-    
-    public void setSessionFactory(SessionFactory sessionFactory) {
-    	this.sessionFactory = sessionFactory;
-    }
+
+	protected Session getSession() {
+		return sessionFactory.getCurrentSession();
+	}
+
+	protected void merge(Object entity) {
+		getSession().merge(entity);
+	}
+
+	public void setSessionFactory(SessionFactory sessionFactory) {
+		this.sessionFactory = sessionFactory;
+	}
 }

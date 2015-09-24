@@ -19,8 +19,10 @@ public class Application {
                     host.switchedApartType="Place";
                     break;
                 case ROOM:
+                    host.switchedApartType="Room";
                     break;
                 case APARTMENT:
+                    host.switchedApartType="Apartment";
                     break;
             }
             Client client = new Client("Bony", "Client", "gooble@boom");

@@ -15,7 +15,8 @@ public class ProjectDAOImplHibernate extends AbstractHibernateDAO implements
 	@Override
 	@SuppressWarnings("unchecked")
 	public List<Project> getProjects(long categoryId) {
-		Query query = getSession().createQuery("from Project p where p.category.id = :id");
+		Query query = getSession().createQuery(
+				"from Project p where p.category.id = :id");
 		query.setLong("id", categoryId);
 		return (List<Project>) query.list();
 	}
@@ -28,10 +29,10 @@ public class ProjectDAOImplHibernate extends AbstractHibernateDAO implements
 	}
 
 	@Override
-	public void updatePledgedAmount(long projectId, int pledgedAmount) {
+	public void updatePledgedAmount(long projectId, int amount) {
 		Project project = getProject(projectId);
-		project.addPledgedAmount(pledgedAmount);
-		save(project);
+		project.addPledgedAmount(amount);
+		merge(project);
 	}
 
 	@Override
@@ -41,11 +42,7 @@ public class ProjectDAOImplHibernate extends AbstractHibernateDAO implements
 		faq.setQuestion(question);
 		faq.setProject(project);
 		project.addFAQ(faq);
-		save(project);
-	}
-	
-	private void save(Project project) {
-		getSession().merge(project);
+		merge(project);
 	}
 
 }

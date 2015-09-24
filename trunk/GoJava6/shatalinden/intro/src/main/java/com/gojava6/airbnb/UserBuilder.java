@@ -10,7 +10,7 @@ public class UserBuilder {
     private static boolean isEmail;
     private static boolean isCity;
 
-    public static User createHost(String name, String surname, String email, String city, User.appartType type) {
+    public static Host createHost(String name, String surname, String email, String city, ApartType type) {
         if (!(isName = validateName(name)))System.out.println("Incorrect name: " + name + ". Please enter new name.");
         if (!(isSurname = validateName(surname)))System.out.println("Incorrect surname: " + surname + ". Please enter new surname.");
         if (!(isEmail = validateEmail(email)))System.out.println("Incorrect email: " + email + ". Please enter new email.");
@@ -20,7 +20,7 @@ public class UserBuilder {
         }
         return null;
     }
-    public static User createClient(String name, String surname, String email) {
+    public static Client createClient(String name, String surname, String email) {
         if (!(isName = validateName(name)))System.out.println("Incorrect name: " + name + ". Please enter new name.");
         if (!(isSurname = validateName(surname)))System.out.println("Incorrect surname: " + surname + ". Please enter new surname.");
         if (!(isEmail = validateEmail(email)))System.out.println("Incorrect email: " + email + ". Please enter new email.");

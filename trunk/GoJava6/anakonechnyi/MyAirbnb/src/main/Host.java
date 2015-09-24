@@ -23,7 +23,7 @@ public class Host extends User implements Subject {
 
 
     @Override
-    public void registerObserver(Observer o) {//to check (super of host or client)
+    public void registerObserver(Observer o) {
         System.out.println("Register: " + o.toString());
         listOfClients.add(o);
         o.loyalty(10, this);
