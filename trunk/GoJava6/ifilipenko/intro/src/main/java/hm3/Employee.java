@@ -2,7 +2,7 @@ package hm3;
 
 public class Employee implements Comparable<Employee>{
 
-    int id;
+    int id; //why don't fields private, where is incapsulation?
     String name;
     int managerId;
 
@@ -15,7 +15,7 @@ public class Employee implements Comparable<Employee>{
 
     @Override
     public int compareTo(Employee employee) {
-        return managerId-employee.managerId;
+        return managerId-employee.managerId; //never use '-' when compare - read about numbers overflow. better use Integer.compare(int, int)
     }
 
     @Override
