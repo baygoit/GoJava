@@ -38,7 +38,7 @@ public class AirBnBSystem implements SystemInterface {
      * (вынес его за пределы метода registerHost)
      */
 
-    public void registerHostObserver(Host host) {
+    public void validateCity(Host host) {
         registerObserver(host);
         if (!getListofCities().contains(host.getCity())) {
             notifyAllObservers(host.getCity());
@@ -51,13 +51,12 @@ public class AirBnBSystem implements SystemInterface {
         }
     }
 
-    // we call this method when regiser host
     public void registerHost(Host host) {
 
         if(validateName(host.getName()) && validateName(host.getSurname()) && validateEmail(host.getEmail())
                 && validateName(host.getCity()) && validateApartmentType(host.getApartmentType())) {
             System.out.println(host.getName() + " was sucsessfully registered as HOST.");
-            registerHostObserver(host);
+            validateCity(host);
             listofCities.add(host.getCity());
         }
         else {
@@ -78,7 +77,7 @@ public class AirBnBSystem implements SystemInterface {
 
     }
 
-    /*  TO DO:
+    /*  TODO:
      * 1) change boolean result type in the next methods to String and
      *    use recursion until name or smth won't be right
      * 2) when we will use some input classes
@@ -100,7 +99,7 @@ public class AirBnBSystem implements SystemInterface {
         }
     }
 
-    // TO DO : Add InternetAdress class to validate email better
+    // TODO : Add InternetAdress class to validate email better
     private boolean validateEmail(String email) {
 
         if(email != null && email.contains("@gmail.com"))

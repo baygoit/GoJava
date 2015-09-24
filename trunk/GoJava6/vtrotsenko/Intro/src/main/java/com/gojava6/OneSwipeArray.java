@@ -1,7 +1,7 @@
 package com.gojava6;
 
 /**
- * Created by root on 22.09.15.
+ * Created by root on 24.09.15.
  */
 public class OneSwipeArray {
 
@@ -40,12 +40,13 @@ public class OneSwipeArray {
     }
 
     public int getPosition(int[] array) {
-        for(int i = 0; i < array.length; i++) {
-            if(array[i] > array[i+1]) {
-                return i;
+        for(int i = 0; i < array.length; i++)
+            for (int j = i+1; j < array.length; j++) {
+                if(array[i] > array[j])
+                    return i;
             }
-        }
         return -1;
     }
 
 }
+

@@ -14,7 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class CategoryAction {
 	private CategoryService categorySevice;
 	private ProjectService projectService;
-	private final String VIEW = "category";
+	private static final String VIEW = "category";
 
 	public void setCategoryService(CategoryService categoryService) {
 		this.categorySevice = categoryService;
