@@ -1,5 +1,7 @@
 package airbnb;
 
+import airbnb.common.Observer;
+
 /**
  * Created by slavik on 21.09.2015.
  */

@@ -1,33 +1,26 @@
 package airbnb;
-
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-
 /**
  * Created by slavik on 21.09.2015.
  */
-public class Base implements Observable {
+import airbnb.common.Observer;
+import airbnb.common.Subject;
+import java.util.ArrayList;
+import java.util.List;
 
-    private List<User> users = new ArrayList<User>();
+public class Base implements Subject {
 
-    public void add(User user) {
+    private List<Observer> users = new ArrayList<Observer>();
+    private List<Observer> clients = new ArrayList<Observer>();
+
+    public void add(Observer user) {
         users.add(user);
     }
 
-    public void remove(String surname) {
-        Iterator<User> it = users.iterator();
-        while (it.hasNext()) {
-            User u = it.next();
-            if(u.getSurname() == surname) {
-                it.remove();
-            }
-        }
+    public void remove(Observer user) {
+        users.remove(user);
     }
 
     public void notifyAll(String data) {
-        for (User user: users) {
-            user.update(data);
-        }
+        for (Observer user: users) user.update(data);
     }
 }
