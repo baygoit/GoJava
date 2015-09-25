@@ -2,6 +2,7 @@ package belskii.artem.kickstarter.mvc.model;
 
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -9,7 +10,17 @@ import belskii.artem.kickstarter.dao.category.CategoryDao;
 
 public class CategoryModel {
 	ApplicationContext context = new ClassPathXmlApplicationContext("classpath:application-context.xml");
-	CategoryDao categoryDao = (CategoryDao) context.getBean("categoryDaoImpl");
+    
+    private CategoryDao categoryDao = (CategoryDao) context.getBean("categoryDaoImpl");
+    private String testValue;
+
+//    @Autowired
+//	public void setTestValue(String value) {
+//    	System.out.println("=============================================================");
+//    	System.out.println(value);
+//    	System.out.println("=============================================================");
+//		this.testValue=value;
+//	}
 
 	public void addCategory(String categoryName) {
 		categoryDao.addCategory(categoryName);
