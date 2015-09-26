@@ -46,14 +46,13 @@ public class Validator {
         return validateString(name,"[a-zA-Z]{2}[a-zA-Z]*");
     }
 
-
     private boolean validateSurname(String surName) {
-        return true;
+        return validateString(surName,"[a-zA-Z]{2}[a-zA-Z]*");
     }
 
 
     private boolean validateEmail(String email) {
-        return true;
+        return validateString(email,"^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
     }
 
     private boolean validateCity(String city) {
