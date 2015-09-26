@@ -30,63 +30,32 @@ public class IslandProblemResolving {
                 }
             }
         }
-
         return count;
     }
 
     private void goForward(int[][] islandMap, int i, int j) {
-        if(i<islandMap.length-1&&islandMap[i+1][j]==1) {
+        if(i<islandMap.length-1&&islandMap[i + 1][j] == 1) {
             deleteIsland(islandMap, i + 1, j);
         }
-        if(j<islandMap[0].length-1&&islandMap[i][j+1]==1) {
+
+        if(j<islandMap[0].length-1&&islandMap[i][j + 1] == 1) {
             deleteIsland(islandMap, i, j + 1);
         }
     }
 
     private void goBack(int[][] islandMap, int i, int j) {
-        if(i>0&&islandMap[i-1][j]==1) {
+        if(i>0&&islandMap[i - 1][j] == 1) {
             deleteIsland(islandMap, i - 1, j);
         }
 
-        if(j>0&&islandMap[i][j-1]==1) {
+        if(j>0&&islandMap[i][j - 1] == 1) {
             deleteIsland(islandMap, i, j - 1);
         }
     }
 
     private void deleteIsland(int[][] islandMap, int i, int j) {
         islandMap[i][j] = 0;
-        System.out.println("i: " + i + ", j: " + j + ", count: " + count);
         goBack(islandMap, i, j);
         goForward(islandMap, i, j);
     }
-
-//    private void checkIsland(int[][] islandMap, int i, int j) {
-//        checkBack(islandMap, i, j);
-//        if(i<vertical || (i==vertical&&j<horizontal)) {}
-//        else count++;
-//        checkForward(islandMap, i, j);
-//    }
-
-//    private void checkForward(int[][] islandMap, int i, int j) {
-//        if(i<islandMap.length-1&&islandMap[i+1][j]==1) {
-//            checkIsland(islandMap, i + 1, j);
-//        }
-//        if(j<islandMap[0].length-1&&islandMap[i][j+1]==1) {
-//            checkIsland(islandMap, i, j + 1);
-//        }
-//    }
-//
-//    private void checkBack(int[][] islandMap, int i, int j) {
-//        if(i>0&&islandMap[i-1][j]==1) {
-//            if(i>horizontal)
-//            checkIsland(islandMap, i - 1, j);
-//            else {}
-//        }
-//        if(j>0&&islandMap[i][j-1]==1) {
-//            if(j>vertical)
-//            checkIsland(islandMap, i, j - 1);
-//            else {}
-//        }
-//    }
-
 }

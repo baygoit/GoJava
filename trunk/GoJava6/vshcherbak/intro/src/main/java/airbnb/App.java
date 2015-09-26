@@ -7,16 +7,16 @@ package airbnb;
 public class App {
     public static void main(String[] args) {
         Base base = new Base();
-        User user = new Client("Name", "Surname", "email@site.com", "Kiev", RentType.ROOM);
+        User user = new Host("Name", "Surname", "email@site.com", "Kiev", RentType.ROOM);
         base.add(user);
-        user =  new Client("NameOne", "SurnameOne", "emailOne@site.com", "Kiev", RentType.ROOM);
+        user =  new Host("NameOne", "SurnameOne", "emailOne@site.com", "Kiev", RentType.PLACE);
         base.add(user);
-        user =  new Host("NameTwo", "SurnameTwo", "emailTwo@site.com");
+        user =  new Client("NameTwo", "SurnameTwo", "emailTwo@site.com");
         base.add(user);
-        user =  new Host("NameThree", "SurnameThree", "emailThree@site.com");
+        user =  new Client("NameThree", "SurnameThree", "emailThree@site.com");
         base.add(user);
         base.notifyAll("ready");
-        base.remove("SurnameTwo");
+       // base.remove("SurnameTwo");
         base.notifyAll("minus one");
     }
 }

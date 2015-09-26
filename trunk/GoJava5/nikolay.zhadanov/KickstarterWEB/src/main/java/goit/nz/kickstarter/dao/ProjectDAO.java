@@ -10,7 +10,7 @@ public interface ProjectDAO {
 
 	abstract Project getProject(long id);
 
-	abstract void updatePledgedAmount(long projectId, int pledgedAmount);
+	abstract void updatePledgedAmount(long projectId, int amount);
 
 	abstract void addQuestion(long projectId, String question);
 

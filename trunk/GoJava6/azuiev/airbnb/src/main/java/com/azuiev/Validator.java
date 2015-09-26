@@ -38,30 +38,29 @@ public class Validator {
         return validateCity(host.city)&&validateApartament(host.apartmentType);
     }
 
-    private boolean validateApartament(ApartType apartmentType) {
-        return (apartmentType instanceof ApartType);
+    private boolean validate(Client client) {
+        return true;
+    }
+
+    private boolean validateName(String name) {
+        return validateString(name,"[a-zA-Z]{2}[a-zA-Z]*");
+    }
+
+    private boolean validateSurname(String surName) {
+        return validateString(surName,"[a-zA-Z]{2}[a-zA-Z]*");
+    }
+
+
+    private boolean validateEmail(String email) {
+        return validateString(email,"^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
     }
 
     private boolean validateCity(String city) {
         return validateString(city,"[a-zA-Z]{1}[a-zA-Z]");
     }
 
-
-    private boolean validate(Client client) {
-        return true;
-    }
-
-
-    private boolean validateEmail(String email) {
-        return false;
-    }
-
-    private boolean validateSurname(String surName) {
-        return false;
-    }
-
-    private boolean validateName(String name) {
-        return false;
+    private boolean validateApartament(ApartType apartmentType) {
+        return (apartmentType instanceof ApartType);
     }
 
 

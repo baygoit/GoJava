@@ -5,9 +5,13 @@ package com.gojava6.airbnb;
  */
 public interface Subject {
 
-    void notifyUsers (String message);
+    void notifyClients(String message);
 
-    void register(User user);
+    void register(Host host);
 
-    void remove(User user);
+    void register(Client client);
+
+    void remove(Host host);
+
+    void remove(Client client);
 }

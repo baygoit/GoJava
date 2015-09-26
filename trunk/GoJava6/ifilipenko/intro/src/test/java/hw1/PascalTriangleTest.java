@@ -3,10 +3,8 @@ package hw1;
 
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
-import java.util.Arrays;
 
 public class PascalTriangleTest {
     private int level;
@@ -24,19 +22,25 @@ public class PascalTriangleTest {
     }
 
     @Test
-    public void testCalculateTriangle() {
+     public void calculateTriangleWhenLevelIsPositiveNumber() {
         PascalTriangle pascalTriangle = new PascalTriangle(level);
-        pascalTriangle.calculateTriangle();
-       /* System.out.println(triangle[0].length);
-        System.out.println(pascalTriangle.calculateTriangle()[0].length);*/
-        Assert.assertArrayEquals(triangle, pascalTriangle.calculateTriangle());
+        int[][] actual = pascalTriangle.calculateTriangle();
+        Assert.assertArrayEquals(triangle, actual);
     }
 
-    @Ignore
     @Test
-    public void innaTest(){
-        System.out.println(triangle.length);
-        System.out.println(triangle[level-1].length);
-
+      public void calculateTriangleWhenLevelIsNegativeNumber() {
+        PascalTriangle pascalTriangle = new PascalTriangle(-5);
+        int[][] actual = pascalTriangle.calculateTriangle();
+        Assert.assertArrayEquals(null, actual);
     }
+
+    @Test
+    public void calculateTriangleWhenLevelIsZero() {
+        PascalTriangle pascalTriangle = new PascalTriangle(0);
+        int[][] actual = pascalTriangle.calculateTriangle();
+        int[][] expected = new int[0][0];
+        Assert.assertArrayEquals(expected, actual);
+    }
+
 }

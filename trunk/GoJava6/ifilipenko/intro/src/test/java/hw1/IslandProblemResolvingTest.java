@@ -21,8 +21,8 @@ public class IslandProblemResolvingTest {
 
     @Test
     public void testCountIslands() {
-        IslandProblemResolving islandProblemResolving = new IslandProblemResolving(islandMap);
-        Assert.assertEquals(count, islandProblemResolving.countIslands());
+        IslandProblemResolving islandProblemResolving = new IslandProblemResolving();
+        Assert.assertEquals(count, islandProblemResolving.countIslands(islandMap));
     }
 
 }

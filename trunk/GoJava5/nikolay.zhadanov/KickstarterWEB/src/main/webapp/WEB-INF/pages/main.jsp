@@ -6,16 +6,16 @@
 </head>
 <body>
 	<h2>
-		<c:out value="${model.quote.text}" />
+		<c:out value="${quote.text}" />
 	</h2>
 	<h2>
-		<c:out value="${model.quote.author}" />
+		<c:out value="${quote.author}" />
 	</h2>
 	<br>
 	<h2>Categories:</h2>
 	<ol>
-		<c:forEach var="category" items="${model.categories}">
-			<li><a href="category?id=${category.id}"><c:out
+		<c:forEach var="category" items="${categories}">
+			<li><a href="${requestScope['javax.servlet.forward.request_uri']}/category/${category.id}"><c:out
 						value="${category.name}" /></a></li>
 		</c:forEach>
 	</ol>

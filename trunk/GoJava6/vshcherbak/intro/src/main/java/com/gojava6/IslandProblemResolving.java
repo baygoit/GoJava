@@ -7,20 +7,23 @@ package com.gojava6;
  */
 public class IslandProblemResolving {
     private int[][] islandMap;
-    private int count;
+    int rowLength;
+    int colLength;
 
     public IslandProblemResolving(int[][] islandMap) {
         this.islandMap = islandMap;
+        this.rowLength = islandMap.length;
+        this.colLength = islandMap[0].length;
     }
 
-    public boolean isIsland(int r, int c, int rowLength, int colLength, int[][] islandMap) {
+    public boolean isIsland(int r, int c, int[][] islandMap) {
         if (islandMap[r][c] == 1) {
             islandMap[r][c] = 0;
 
-            if (r - 1 >= 0) isIsland(r - 1, c, rowLength, colLength, islandMap);
-            if (r + 1 < rowLength) isIsland(r + 1, c, rowLength, colLength, islandMap);
-            if (c - 1 >= 0) isIsland(r, c - 1, rowLength, colLength, islandMap);
-            if (c + 1 < colLength) isIsland(r, c + 1, rowLength, colLength, islandMap);
+            if (r - 1 >= 0) isIsland(r - 1, c, islandMap);
+            if (r + 1 < rowLength) isIsland(r + 1, c, islandMap);
+            if (c - 1 >= 0) isIsland(r, c - 1, islandMap);
+            if (c + 1 < colLength) isIsland(r, c + 1, islandMap);
             return true;
         }
         return false;
@@ -28,12 +31,11 @@ public class IslandProblemResolving {
 
     public int countIslands() {
         //TODO: write you code here
-        int rowLength = islandMap.length;
-        int colLength = islandMap[0].length;
+
         int total = 0;
         for (int r = 0; r < rowLength; r++) {
             for (int c = 0; c < colLength; c++) {
-                if (isIsland(r, c, rowLength, colLength, islandMap)) {
+                if (isIsland(r, c, islandMap)) {
                     total++;
                 }
             }
@@ -41,3 +43,4 @@ public class IslandProblemResolving {
         return total;
     }
 }
+
