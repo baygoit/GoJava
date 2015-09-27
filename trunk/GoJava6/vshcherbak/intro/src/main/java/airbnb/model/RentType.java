@@ -1,8 +1,8 @@
-package airbnb;
+package airbnb.model;
 
 /**
  * Created by slavik on 22.09.2015.
  */
-enum RentType {
+public enum RentType {
     PLACE, ROOM, APARTMENT
 }

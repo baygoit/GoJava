@@ -1,3 +1,10 @@
+package com.airbnb.system;
+
+import com.airbnb.observer.*;
+import com.airbnb.user.*;
+import com.airbnb.apartment.*;
+
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -33,38 +40,26 @@ public class AirBnBSystem implements SystemInterface {
         listOfObservers.remove(o);
     }
 
-    /* additional method for host registration
-     * used to notify (I couldn't do it earlier)
-     * (вынес его за пределы метода registerHost)
-     */
-
-    public void validateCity(Host host) {
-        registerObserver(host);
-        if (!getListofCities().contains(host.getCity())) {
-            notifyAllObservers(host.getCity());
-        }
-    }
-
     public void notifyAllObservers(String cityName) {
         for(Observer observer : listOfObservers) {
-            observer.update(cityName);
+            observer.update("The new city was added " + cityName);
         }
     }
 
     public void registerHost(Host host) {
 
         if(validateName(host.getName()) && validateName(host.getSurname()) && validateEmail(host.getEmail())
-                && validateName(host.getCity()) && validateApartmentType(host.getApartmentType())) {
+                && validateName(host.getCity()) && validateApartmentType(host.getApartment().getApartmentType())
+                && validateDate(host.getApartment().getFirstDayAvailable(), host.getApartment().getLastDayAvailable())) {
             System.out.println(host.getName() + " was sucsessfully registered as HOST.");
             validateCity(host);
             listofCities.add(host.getCity());
         }
         else {
-            System.out.println("Unfortunatly, your data is not valid. Try again!");
+            System.out.println("Unfortunatly, " + host.getName() + " your data is not valid. Try again!");
         }
     }
 
-    // we call this method when register client
     public void registerClient(Client client) {
 
         if(validateName(client.getName()) && validateName(client.getSurname()) && validateEmail(client.getEmail())) {
@@ -77,16 +72,20 @@ public class AirBnBSystem implements SystemInterface {
 
     }
 
-    /*  TODO:
-     * 1) change boolean result type in the next methods to String and
-     *    use recursion until name or smth won't be right
-     * 2) when we will use some input classes
-     *    to fill user's properties
-     * 3)
-     * 4) change registerHost and registerClient classes
-     */
+    //TODO: validate dates in better way
 
-    // method to check if mame valid
+    public void makeReservation(Observer observer, Host host, LocalDate startDate, LocalDate endDate) {
+        if (validateDate(startDate, endDate) && validateReservationDate(host.getApartment(), startDate, endDate)
+                && host.getApartment().isAvailable()) {
+            host.update("User " + observer.getName() + " " + observer.getSurname() + " wants to book " +
+                     host.getName() + " " + host.getSurname() + "'s apartment from " + startDate + " to " +
+                     endDate + ". Connect him " + observer.getEmail());
+            host.getApartment().updateAvailableDate(startDate, endDate);
+        }
+    }
+
+    // ------------------------------- VALIDATION --------------------------------------------
+
     private boolean validateName(String name) {
 
         if(name != null && !consistDigits(name))
@@ -112,6 +111,13 @@ public class AirBnBSystem implements SystemInterface {
         }
     }
 
+    private void validateCity(Host host) {
+        registerObserver(host);
+        if (!getListofCities().contains(host.getCity())) {
+            notifyAllObservers(host.getCity());
+        }
+    }
+
     private boolean validateApartmentType(ApartmentType apartmentType) {
 
         ApartmentType[] apartmentTypes = ApartmentType.values();
@@ -120,6 +126,23 @@ public class AirBnBSystem implements SystemInterface {
                 return true;
         }
         return false;
+    }
+
+    private boolean validateDate(LocalDate startDate, LocalDate endDate) {
+        if (startDate.compareTo(endDate) > 0) {
+            return false;
+        }
+        return true;
+    }
+
+    private boolean validateReservationDate(Apartment apartment, LocalDate startDate, LocalDate endDate) {
+        if (startDate.compareTo(apartment.getFirstDayAvailable()) < 0) {
+            return false;
+        }
+        if (endDate.compareTo(apartment.getLastDayAvailable()) > 0) {
+            return false;
+        }
+        return true;
     }
 
     // method to check whether some string consist Numbers or not
