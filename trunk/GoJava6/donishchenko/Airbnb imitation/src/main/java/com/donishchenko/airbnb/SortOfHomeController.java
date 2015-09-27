@@ -3,36 +3,49 @@ package com.donishchenko.airbnb;
 import com.donishchenko.airbnb.common.Subject;
 import com.donishchenko.airbnb.managers.*;
 import com.donishchenko.airbnb.model.*;
+import com.google.common.base.Joiner;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
-import java.util.Calendar;
-import java.util.Collection;
-import java.util.Date;
-import java.util.GregorianCalendar;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 public class SortOfHomeController implements Subject<User> {
+    public static final Logger log = LogManager.getLogger(SortOfHomeController.class.getName());
+
     private UserManager userManager = new UserManagerImpl();
     private ApartmentManager apartmentManager = new ApartmentManagerImpl();
     private ReservationManager reservationManager = new ReservationManagerImpl();
 
     public int addClient(String name, String surname, String email) {
+        log.entry();
+
         User client = new Client(name, surname, email);
         if (client.validate()) {
-            System.out.println("INFO: ClientID=" + client.getId() + " | Successful validation!");
+            log.info("ClientID=" + client.getId() + " | Successful validation. New User registered!");
             userManager.saveClient(client);
+
+            log.exit(client.getId());
             return client.getId();
         }
 
+        log.exit(-1);
         return -1;
     }
 
     public int addHost(String name, String surname, String email) {
+        log.entry();
+
         User host = new Host(name, surname, email);
         if (host.validate()) {
-            System.out.println("INFO: HostID=" + host.getId() + " | Successful validation!");
+            log.info("HostID=" + host.getId() + " | Successful validation. New Host registered!");
             userManager.saveHost(host);
+
+            log.exit(host.getId());
             return host.getId();
         }
 
+        log.exit(-1);
         return -1;
     }
 
@@ -56,8 +69,8 @@ public class SortOfHomeController implements Subject<User> {
 
     @Override
     public void notifyAllObservers(String message) {
-        Collection<User> set = SortOfDataBase.clients.values();
-        for (User user : set) {
+        List<User> list = userManager.getAllClients();
+        for (User user : list) {
             user.update(message);
         }
     }
@@ -84,13 +97,11 @@ public class SortOfHomeController implements Subject<User> {
 
     private void checkUniqueCity(String city) {
         if (SortOfDataBase.uniqueCities.add(city)) {
-            for (User user : SortOfDataBase.clients.values()) {
-                user.update("Hey! We have new available city - " + city + "!");
-            }
+            notifyAllObservers("\n\tHey! We have new available city - " + city + "!");
         }
     }
 
-    /* Test main */
+    /* Test main. Request simulation */
     public static void main(String[] args) {
         SortOfHomeController mainApp = new SortOfHomeController();
 
@@ -113,21 +124,51 @@ public class SortOfHomeController implements Subject<User> {
         for (Apartment ap : mainApp.apartmentManager.getAll()) {
             System.out.println("\t" + ap);
         }
+        System.out.println();
 
         /* Reservation system */
+        /* Test three reservations: 2 true, 1 false */
         User user = mainApp.userManager.getClientById(clientId);
         Apartment apartment = mainApp.apartmentManager.getById(apartmentId);
         Date start = new GregorianCalendar(2015, Calendar.SEPTEMBER, 26).getTime();
         Date end = new GregorianCalendar(2015, Calendar.SEPTEMBER, 27).getTime();
 
-        mainApp.reservationManager.makeReservation(user, apartment, start, end, "Thank you!");
+        mainApp.testReservation(user, apartment, start, end, "Thank you!");
 
         start = new GregorianCalendar(2015, Calendar.SEPTEMBER, 30).getTime();
         end = new GregorianCalendar(2015, Calendar.OCTOBER, 5).getTime();
-        mainApp.reservationManager.makeReservation(user, apartment, start, end, "Pleeeeaaaaase");
+        mainApp.testReservation(user, apartment, start, end, "Pleeeeaaaaase");
 
-        start = new GregorianCalendar(2015, Calendar.SEPTEMBER, 28).getTime();
+        start = new GregorianCalendar(2015, Calendar.SEPTEMBER, 27).getTime();
         end = new GregorianCalendar(2015, Calendar.SEPTEMBER, 29).getTime();
-        mainApp.reservationManager.makeReservation(user, apartment, start, end, "Pleeeeaaaaase");
+        mainApp.testReservation(user, apartment, start, end, "so?");
+
+        /* All reservations */
+        System.out.println("\nAll reservations:");
+        List<Reservation> list = mainApp.reservationManager.getAll();
+        for (Reservation reservation : list) {
+            System.out.print('\t');
+            System.out.println(reservation);
+        }
+
+        /* Custom reservations between two dates */
+        start = new GregorianCalendar(2015, Calendar.SEPTEMBER, 26).getTime();
+        end = new GregorianCalendar(2015, Calendar.SEPTEMBER, 30).getTime();
+        list = mainApp.reservationManager.getAllBetweenDates(start, end);
+        System.out.println("\nCustom reservations");
+        for (Reservation reservation : list) {
+            System.out.print('\t');
+            System.out.println(reservation);
+        }
+    }
+
+    private void testReservation(User user, Apartment apartment, Date start, Date end, String comment) {
+        if (log.isInfoEnabled()) {
+            SimpleDateFormat format = new SimpleDateFormat("dd.MM.yy");
+            log.info(Joiner.on("").join("Started reservation request: UserID='", user.getId(),
+                    "', apartmentID='", apartment.getId(), "', start='", format.format(start),
+                    "', end='", format.format(end), "'"));
+        }
+        reservationManager.makeReservation(user, apartment, start, end, comment);
     }
 }

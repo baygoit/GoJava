@@ -33,8 +33,8 @@ public class ApartmentManagerImpl implements ApartmentManager {
     }
 
     @Override
-    public Collection<Apartment> getAll() {
-        return SortOfDataBase.apartments.values();
+    public List<Apartment> getAll() {
+        return new LinkedList<>(SortOfDataBase.apartments.values());
     }
 
     @Override

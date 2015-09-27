@@ -4,9 +4,7 @@ import com.donishchenko.airbnb.SortOfDataBase;
 import com.donishchenko.airbnb.model.Apartment;
 import com.donishchenko.airbnb.model.User;
 
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
 
 public class UserManagerImpl implements UserManager {
     @Override
@@ -48,12 +46,12 @@ public class UserManagerImpl implements UserManager {
     }
 
     @Override
-    public Collection<User> getAllClients() {
-        return SortOfDataBase.clients.values();
+    public List<User> getAllClients() {
+        return new LinkedList<>(SortOfDataBase.clients.values());
     }
 
     @Override
-    public Collection<User> getAllHosts() {
-        return SortOfDataBase.hosts.values();
+    public List<User> getAllHosts() {
+        return new LinkedList<>(SortOfDataBase.hosts.values());
     }
 }
