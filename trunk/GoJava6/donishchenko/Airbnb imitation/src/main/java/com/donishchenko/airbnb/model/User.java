@@ -11,6 +11,8 @@ public abstract class User implements Observer {
     private String surname;
     private String email;
 
+    public User() {}
+
     public User(String name, String surname, String email) {
         this.id = ++USER_ID;
         this.name = name.trim();

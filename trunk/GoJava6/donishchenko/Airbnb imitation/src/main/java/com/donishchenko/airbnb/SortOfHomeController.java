@@ -1,17 +1,18 @@
 package com.donishchenko.airbnb;
 
 import com.donishchenko.airbnb.common.Subject;
-import com.donishchenko.airbnb.managers.ApartmentManager;
-import com.donishchenko.airbnb.managers.ApartmentManagerImpl;
-import com.donishchenko.airbnb.managers.UserManager;
-import com.donishchenko.airbnb.managers.UserManagerImpl;
+import com.donishchenko.airbnb.managers.*;
 import com.donishchenko.airbnb.model.*;
 
+import java.util.Calendar;
 import java.util.Collection;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 public class SortOfHomeController implements Subject<User> {
     private UserManager userManager = new UserManagerImpl();
     private ApartmentManager apartmentManager = new ApartmentManagerImpl();
+    private ReservationManager reservationManager = new ReservationManagerImpl();
 
     public int addClient(String name, String surname, String email) {
         User client = new Client(name, surname, email);
@@ -61,21 +62,24 @@ public class SortOfHomeController implements Subject<User> {
         }
     }
 
-    public void createApartment(int hostId, String city, ApartmentType type, boolean active) {
+    public int createApartment(int hostId, String city, ApartmentType type, boolean active) {
         if (hostId < 1) {
-            return;
+            return -1;
         }
 
         Host existingHost = (Host) SortOfDataBase.hosts.get(hostId);
         if (existingHost == null) {
-            return;
+            return -1;
         }
 
         Apartment apartment = new Apartment(existingHost, city, type, active);
         if (apartment.validate()) {
             checkUniqueCity(apartment.getCity());
             apartmentManager.save(apartment);
+            return apartment.getId();
         }
+
+        return -1;
     }
 
     private void checkUniqueCity(String city) {
@@ -91,7 +95,7 @@ public class SortOfHomeController implements Subject<User> {
         SortOfHomeController mainApp = new SortOfHomeController();
 
         /* Clients */
-        mainApp.addClient("Dmitry", "Onishchenko", "sacr8tum@gmail.com");
+        int clientId = mainApp.addClient("Dmitry", "Onishchenko", "sacr8tum@gmail.com");
         mainApp.addClient("Carl-Vicoria", "Bukovski", "c-v.bukovski@i.ua");
         mainApp.addClient("Katarina", "Gorava-Zhdanova", "kat1965@bigmir.net");
         mainApp.addClient("Ali", "Gur-Sabn-Al-Bin-Sourcevich", "g.s.a.b.s@gmail.com");
@@ -101,7 +105,8 @@ public class SortOfHomeController implements Subject<User> {
         int hostId = mainApp.addHost("John", "Doe", "j.doe-superman@gmail.com");
         System.out.println();
 
-        mainApp.createApartment(hostId, "Kiev", ApartmentType.APARTMENT, true);
+        /* Apartments */
+        int apartmentId = mainApp.createApartment(hostId, "Kiev", ApartmentType.APARTMENT, true);
         mainApp.createApartment(hostId, "Kiev", ApartmentType.APARTMENT, true);
 
         System.out.println("\nAll apartments:");
@@ -110,6 +115,19 @@ public class SortOfHomeController implements Subject<User> {
         }
 
         /* Reservation system */
-        
+        User user = mainApp.userManager.getClientById(clientId);
+        Apartment apartment = mainApp.apartmentManager.getById(apartmentId);
+        Date start = new GregorianCalendar(2015, Calendar.SEPTEMBER, 26).getTime();
+        Date end = new GregorianCalendar(2015, Calendar.SEPTEMBER, 27).getTime();
+
+        mainApp.reservationManager.makeReservation(user, apartment, start, end, "Thank you!");
+
+        start = new GregorianCalendar(2015, Calendar.SEPTEMBER, 30).getTime();
+        end = new GregorianCalendar(2015, Calendar.OCTOBER, 5).getTime();
+        mainApp.reservationManager.makeReservation(user, apartment, start, end, "Pleeeeaaaaase");
+
+        start = new GregorianCalendar(2015, Calendar.SEPTEMBER, 28).getTime();
+        end = new GregorianCalendar(2015, Calendar.SEPTEMBER, 29).getTime();
+        mainApp.reservationManager.makeReservation(user, apartment, start, end, "Pleeeeaaaaase");
     }
 }

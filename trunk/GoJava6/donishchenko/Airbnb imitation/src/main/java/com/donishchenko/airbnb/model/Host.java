@@ -3,12 +3,10 @@ package com.donishchenko.airbnb.model;
 import com.google.common.base.Joiner;
 
 public class Host extends User {
+    public Host() {}
+
     public Host(String name, String surname, String email) {
         super(name, surname, email);
-    }
-
-    public Apartment createApartment(String city, ApartmentType type, boolean active) {
-        return new Apartment(this, city, type, active);
     }
 
     @Override
