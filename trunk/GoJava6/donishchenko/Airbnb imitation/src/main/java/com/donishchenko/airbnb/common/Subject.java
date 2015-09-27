@@ -1,7 +1,7 @@
 package com.donishchenko.airbnb.common;
 
-public interface Subject {
-    void register(Observer o);
-    void remove(Observer o);
+public interface Subject<T> {
+    void register(T o);
+    void remove(T o);
     void notifyAllObservers(String message);
 }

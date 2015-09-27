@@ -1,3 +1,5 @@
+package com.airbnb.observer;
+
 /**
  * Created by root on 19.09.15.
  */
