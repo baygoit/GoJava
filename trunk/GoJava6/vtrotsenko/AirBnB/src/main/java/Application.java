@@ -22,6 +22,7 @@ public class Application {
         airSys.registerClient(client2);
         airSys.registerClient(client3);
 
+        // here must be fail registration
         Host host1 = new Host("Illya", "Litvin", "litvin@gmail.com", "Kyiv", LocalDate.of(2015, Month.SEPTEMBER, 10),
                 LocalDate.of(2015, Month.SEPTEMBER, 9), ApartmentType.ROOM);
 
@@ -38,19 +39,16 @@ public class Application {
         Client client4 = new Client("George", "Katuasvil", "george1@gmail.com");
         airSys.registerClient(client4);
 
-
-        System.out.println("--------------------------");
         System.out.println("List of cities: ");
         for(String tempCity : airSys.getListofCities()) {
             System.out.println(tempCity);
         }
-        System.out.println("--------------------------");
 
         System.out.println("List of observers: ");
         for(Observer n : airSys.getListOfObservers()) {
             System.out.println(n.getName());
         }
-        System.out.println("--------------------------");
+
         System.out.println("List of available Hosts: ");
         for (Observer observer : airSys.getListOfObservers()) {
             if (observer.getClass().equals(host1.getClass())) {
@@ -63,7 +61,7 @@ public class Application {
         }
         airSys.makeReservation(client2, host2, LocalDate.of(2015, Month.SEPTEMBER, 30),
                 LocalDate.of(2015, Month.OCTOBER, 2));
-        System.out.println("--------------------------");
+
         System.out.println("List of available Hosts: ");
         for (Observer observer : airSys.getListOfObservers()) {
             if (observer.getClass().equals(host1.getClass())) {
@@ -78,7 +76,7 @@ public class Application {
 
         airSys.makeReservation(client1, host2, LocalDate.of(2015, Month.SEPTEMBER, 29),
                 LocalDate.of(2015, Month.SEPTEMBER, 30));
-        System.out.println("--------------------------");
+
         System.out.println("List of available Hosts: ");
         for (Observer observer : airSys.getListOfObservers()) {
             if (observer.getClass().equals(host1.getClass())) {
