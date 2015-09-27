@@ -2,16 +2,28 @@ package com.donishchenko.airbnb.model;
 
 import com.donishchenko.airbnb.common.Observer;
 import com.donishchenko.airbnb.validation.Validator;
+import com.google.common.base.Joiner;
 
 public abstract class User implements Observer {
+    private static int USER_ID = 0;
+    private int id;
     private String name;
     private String surname;
     private String email;
 
     public User(String name, String surname, String email) {
+        this.id = ++USER_ID;
         this.name = name.trim();
         this.surname = surname.trim();
         this.email = email.trim();
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -51,10 +63,7 @@ public abstract class User implements Observer {
 
     @Override
     public String toString() {
-        return "User{" +
-                "name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", email='" + email + '\'' +
-                '}';
+        return Joiner.on("").join(
+                "User{id='", id, "', name='", name, "', surname='", surname, "', email='", email, "'}");
     }
 }
