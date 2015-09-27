@@ -11,19 +11,20 @@ import airbnb.model.User;
 
 public class App {
     public static void main(String[] args) {
-        Base base = new Base();
-        User user = new Host("Name", "Surname", "email@site.com", "Kiev", RentType.ROOM);
-        base.register(user);
-        user =  new Host("Nameone", "Surnameone", "emailone@site.com", "Kiev", RentType.PLACE);
-        base.register(user);
-        user =  new Host("Nameone", "Surnamefive", "emailone@site.com", "Kiev", RentType.APARTMENT);
-        base.register(user);
-        user =  new Client("Nametwo", "Surnametwo", "emailtwo@site.com");
-        base.register(user);
-        user =  new Client("Namethree", "Surnamethree", "emailthree@site.com");
-        base.register(user);
-        base.notifyAll("ready");
-        base.remove("Surnametwo");
-        base.notifyAll("minus one");
+        HomeHire hire = new HomeHire();
+        User user =  new Client("Jon", "Scott", "scott@site.com");
+        hire.register(user);
+        user =  new Client("Dylan", "Robinson", "robinson@site.com");
+        hire.register(user);
+        user = new Host("Brenda", "Taylor", "taylor@site.com", "Kiev", RentType.ROOM);
+        hire.register(user);
+        user =  new Host("Donna", "Small", "small@site.com", "Odessa", RentType.PLACE);
+        hire.register(user);
+        user =  new Host("Angle", "Baker", "baker@site.com", "Kiev", RentType.APARTMENT);
+        hire.register(user);
+
+        hire.notifyAll("ready");
+        hire.remove("Small");
+        hire.notifyAll("minus one");
     }
 }

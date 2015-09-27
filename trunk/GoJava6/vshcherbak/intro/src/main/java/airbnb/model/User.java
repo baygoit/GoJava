@@ -32,7 +32,7 @@ public class User implements Observer {
     public void setEmail(String input) { email = input; }
     @Override
     public String toString() {
-        return "Name " + name + " Surname " + surname + " email";
+        return "Name " + name + " Surname " + surname + " email " + email;
     }
     public boolean validate() {
         return Validation.validateName(name) &&

@@ -14,7 +14,11 @@ import java.util.Set;
 public class AirBnBSystem implements SystemInterface {
 
     private Set<Observer> listOfObservers = new HashSet<Observer>();    // hashset of ALL types Users
-    private Set<String> listofCities = new HashSet<String>();         //list of cities
+    private Set<String> listofCities = new HashSet<String>();           //list of cities
+
+    public AirBnBSystem() {
+        Log.setFileHandler();
+    }
 
     public Set<Observer> getListOfObservers() {
         return listOfObservers;
@@ -40,9 +44,12 @@ public class AirBnBSystem implements SystemInterface {
         listOfObservers.remove(o);
     }
 
+    // here we notify all observers
     public void notifyAllObservers(String cityName) {
         for(Observer observer : listOfObservers) {
-            observer.update("The new city was added " + cityName);
+            //observer.update("The new city was added " + cityName);
+            Log.logger.info(observer.getName() + " " + observer.getSurname() + " was notified that city " +
+                    cityName + " was added.");
         }
     }
 
@@ -51,12 +58,12 @@ public class AirBnBSystem implements SystemInterface {
         if(validateName(host.getName()) && validateName(host.getSurname()) && validateEmail(host.getEmail())
                 && validateName(host.getCity()) && validateApartmentType(host.getApartment().getApartmentType())
                 && validateDate(host.getApartment().getFirstDayAvailable(), host.getApartment().getLastDayAvailable())) {
-            System.out.println(host.getName() + " was sucsessfully registered as HOST.");
-            validateCity(host);
+            addCity(host);
             listofCities.add(host.getCity());
+            Log.logger.info(" -- " + host.getName() + " " + host.getSurname() + " was registered as CLIENT");
         }
         else {
-            System.out.println("Unfortunatly, " + host.getName() + " your data is not valid. Try again!");
+            Log.logger.info(" -- " + host.getName() + " " + host.getSurname() + " FAILED registration as HOST");
         }
     }
 
@@ -64,12 +71,12 @@ public class AirBnBSystem implements SystemInterface {
 
         if(validateName(client.getName()) && validateName(client.getSurname()) && validateEmail(client.getEmail())) {
             listOfObservers.add(client);
-            System.out.println(client.getName() + " was sucsessfully registered as CLIENT.");
+            //System.out.println(client.getName() + " was sucsessfully registered as CLIENT.");
+            Log.logger.info(" -- " + client.getName() + " " + client.getSurname() + " was registered as CLIENT");
         }
         else {
-            System.out.println("Unfortunatly, your data is not valid. Try again!");
+            Log.logger.info(" -- " + client.getName() + " " + client.getSurname() + " FAILED registration as CLIENT");
         }
-
     }
 
     //TODO: validate dates in better way
@@ -84,6 +91,13 @@ public class AirBnBSystem implements SystemInterface {
         }
     }
 
+    private void addCity(Host host) {
+        registerObserver(host);
+        if (!getListofCities().contains(host.getCity())) {
+            notifyAllObservers(host.getCity());
+        }
+    }
+
     // ------------------------------- VALIDATION --------------------------------------------
 
     private boolean validateName(String name) {
@@ -92,8 +106,8 @@ public class AirBnBSystem implements SystemInterface {
             return true;
 
         else {
-            System.out.println("WARNING! You've entered wrong name. It must not have any digits and " +
-                    "have at least 1 symbol");
+            System.out.println("Invalid name " + name);
+            Log.logger.warning("Validation of name/surname failed!");
             return false;
         }
     }
@@ -105,16 +119,9 @@ public class AirBnBSystem implements SystemInterface {
             return true;
 
         else {
-            System.out.println("WARNING! You've entered wrong email. To register AirBnB you must have " +
-                    "gmail account");
+            System.out.println("Invalid email " + email);
+            Log.logger.warning("Validation of email failed!");
             return false;
-        }
-    }
-
-    private void validateCity(Host host) {
-        registerObserver(host);
-        if (!getListofCities().contains(host.getCity())) {
-            notifyAllObservers(host.getCity());
         }
     }
 
@@ -125,21 +132,23 @@ public class AirBnBSystem implements SystemInterface {
             if (apartmentType.equals(apartmentType1))
                 return true;
         }
+        Log.logger.warning("Validation of reservation ApartmentType failed!");
         return false;
     }
 
     private boolean validateDate(LocalDate startDate, LocalDate endDate) {
         if (startDate.compareTo(endDate) > 0) {
+            System.out.println("Invalid date period!");
+            Log.logger.warning("Validation of date failed!");
             return false;
         }
         return true;
     }
 
     private boolean validateReservationDate(Apartment apartment, LocalDate startDate, LocalDate endDate) {
-        if (startDate.compareTo(apartment.getFirstDayAvailable()) < 0) {
-            return false;
-        }
-        if (endDate.compareTo(apartment.getLastDayAvailable()) > 0) {
+        if ( (startDate.compareTo(apartment.getFirstDayAvailable()) < 0) ||
+                (endDate.compareTo(apartment.getLastDayAvailable()) > 0) ) {
+            Log.logger.warning("Validation of reservation date failed!");
             return false;
         }
         return true;
