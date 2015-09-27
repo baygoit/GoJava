@@ -4,29 +4,35 @@ package airbnb;
  */
 //import airbnb.common.Observer;
 import airbnb.common.Subject;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+
+import java.util.*;
+
 import airbnb.model.Client;
 import airbnb.model.Host;
 //import airbnb.model.RentType;
 import airbnb.model.User;
 
-public class Base implements Subject {
+public class HomeHire implements Subject {
 
-    private List<User> hosts = new ArrayList<User>();
-    private List<User> clients = new ArrayList<User>();
+    private List<User> hosts = new ArrayList<>();
+    private List<User> clients = new ArrayList<>();
+    private Set<String> cities = new HashSet<>();
 
     public void register(User user) {
         if (user.getClass() == Client.class) {
-            if (user.validate()) {
-                clients.add(user);
+            Client client = (Client) user;
+            if (client.validate()) {
+                clients.add(client);
             } else {
                 System.out.println("Please enter valid data");
             }
         } else if (user.getClass() == Host.class) {
-            if (user.validate()) {
-                hosts.add(user);
+            Host host = (Host) user;
+            if (host.validate()) {
+                hosts.add(host);
+                if (cities.add(host.getCity())) {
+                    notifyAll("We have new city: " + host.getCity());
+                }
             } else {
                 System.out.println("Please enter valid data");
             }
@@ -39,14 +45,14 @@ public class Base implements Subject {
         Iterator<User> it = hosts.iterator();
         while (it.hasNext()) {
             User u = it.next();
-            if(u.getSurname() == surname) {
+            if(u.getSurname().equals(surname)) {
                 it.remove();
             }
         }
         it = clients.iterator();
         while (it.hasNext()) {
             User u = it.next();
-            if(u.getSurname() == surname) {
+            if(u.getSurname().equals(surname)) {
                 it.remove();
             }
         }
