@@ -22,5 +22,9 @@ public class Host extends User {
         return apartmentType;
     }
 
+    @Override
+    public boolean validation(){
+        return super.validation() && Validator.validateUserCity(city);
+    }
 
 }

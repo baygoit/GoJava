@@ -6,7 +6,7 @@ package com.Airbnb.app;
 public interface Subject {
     void registerHost (Host host);
     void registerClient (Client client);
-    void remove (Host host);
-    void remove (Client client);
-    void notifyAllClients (String message);
+    void removeClient (int id);
+    void removeHost (int id);
+    void notifyAll (String message);
 }

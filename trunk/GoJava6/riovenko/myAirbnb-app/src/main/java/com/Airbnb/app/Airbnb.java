@@ -2,7 +2,6 @@ package com.Airbnb.app;
 import java.util.List;
 import java.util.ArrayList;
 
-
 /**
  * Created by romanroma on 26.09.15.
  */
@@ -12,31 +11,33 @@ public class Airbnb implements Subject {
     public List<Client> clientList = new ArrayList<Client>();
 
     public void registerHost (Host host){
-        if (host==null){
-            System.out.println("Host not registered");
+        if (host.validation()) {
+            hostList.add(host);
         }
-        else hostList.add(host);
+        else System.out.println("Please enter valid data");
     }
 
     public void registerClient (Client client){
-        //User client = new Client (name,surname,email);
-        if (client==null){
-            System.out.println("Client not registered");
+        if (client.validation()) {
+            clientList.add(client);
         }
-        else clientList.add(client);
+        else System.out.println("Please enter valid data");
     }
 
-    public void remove (Host host){
-        hostList.remove(host);
+    public void removeClient (int id){
+        clientList.remove(clientList.get(id)));
     }
 
-    public void remove (Client client){
-        clientList.remove(client);
+    public void removeHost (int id){
+        hostList.remove(hostList.get(id));
     }
 
-    public void notifyAllClients (String message){
+    public void notifyAll (String message){
         for (Observer observer : clientList){
-            observer.update("NOTIFY");
+            observer.update(message);
+        }
+        for (Observer observer : hostList){
+            observer.update(message);
         }
     }
 
