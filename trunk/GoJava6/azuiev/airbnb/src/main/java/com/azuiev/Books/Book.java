@@ -20,9 +20,9 @@ public class Book implements Comparable<Book> {
 
     List<ReservationDates> periods = new LinkedList<ReservationDates>();
 
-    public static Book createBook(Host owner, String city, String address, ApartType apartType){
+    public static Book createBook(Host owner, String city, String address, ApartType apartType) {
 
-        Book book = new Book(owner,city,address,apartType);
+        Book book = new Book(owner, city, address, apartType);
 
         Validator v = Validator.getInstance();
 
@@ -30,7 +30,7 @@ public class Book implements Comparable<Book> {
             App.log.error("failed to create - " + book);
         } else {
             App.log.info("successfully created - " + book);
-            if(books.add(book)){
+            if (books.add(book)) {
                 App.log.info("added into listBooks - " + book);
             } else {
                 App.log.error("already in listBooks - " + book);
@@ -44,6 +44,10 @@ public class Book implements Comparable<Book> {
         this.city = city;
         this.address = address;
         this.apartType = apartType;
+    }
+
+    public static Set<Book> getBooks() {
+        return books;
     }
 
     public String getAddress() {
@@ -71,8 +75,20 @@ public class Book implements Comparable<Book> {
     }
 
     public boolean reserve(Date start, Date end) {
-        Date date1, date2;
+
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd G 'at' HH:mm:ss z");
+        if (!isFree(start, end)) {
+            App.log.error("Can`t be reserved - " + this + " in period {" + dateFormat.format(start) + ":" + dateFormat.format(end));
+            return false;
+        }
+
+        periods.add(new ReservationDates(start, end));
+        App.log.info("Successfully reserved - " + this + " in period {" + dateFormat.format(start) + ":" + dateFormat.format(end));
+        return true;
+    }
+
+    public boolean isFree(Date start, Date end) {
+        Date date1, date2;
         for (ReservationDates period : periods) {
             date1 = period.getBegin();
             date2 = period.getEnd();
@@ -83,20 +99,15 @@ public class Book implements Comparable<Book> {
             if (start.compareTo(date2) >= 0) {
                 continue;
             }
-
-            App.log.error("Can`t be reserved - " + this + " in period {"+dateFormat.format(start)+":"+dateFormat.format(end));
             return false;
 
         }
-
-        periods.add(new ReservationDates(start, end));
-        App.log.info("Successfully reserved - " + this + " in period {" + dateFormat.format(start) + ":" + dateFormat.format(end));
         return true;
     }
 
     @Override
     public int compareTo(Book o) {
-        return city.compareTo(o.getCity())*100+address.compareTo(o.getAddress());
+        return city.compareTo(o.getCity()) * 100 + address.compareTo(o.getAddress());
     }
 
 }
