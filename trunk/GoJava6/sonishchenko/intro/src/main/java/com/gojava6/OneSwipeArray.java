@@ -23,7 +23,7 @@ public class OneSwipeArray {
         }
 
         for (int i = 0; i < a.length - 1; i++) {
-            for (int j = 1; j < a.length; j++) {
+            for (int j = 1; j < a.length; j++) { //do you really need two cycles? 
                 if (a[i] > a[j]) {
                     counter++;
                     result = true;
