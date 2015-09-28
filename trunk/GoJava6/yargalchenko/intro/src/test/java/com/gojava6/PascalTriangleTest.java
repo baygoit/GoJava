@@ -25,7 +25,7 @@ public class PascalTriangleTest {
 
     @Test
     public void testCalculateTriangle() {
-        PascalTriangle pascalTriangle = new PascalTriangle(level);
-        assertArrayEquals(triangle, pascalTriangle.calculateTriangle());
+        PascalTriangle pascalTriangle = new PascalTriangle();
+        assertArrayEquals(triangle, pascalTriangle.calculateTriangle(level));
     }
 }
