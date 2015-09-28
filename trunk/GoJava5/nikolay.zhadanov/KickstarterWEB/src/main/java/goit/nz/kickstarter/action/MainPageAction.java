@@ -13,7 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class MainPageAction {
 	private QuoteService quoteService;
 	private CategoryService categoryService;
-	private final String VIEW = "main";
+	private static final String VIEW = "main";
 
 	public void setQuoteService(QuoteService quoteService) {
 		this.quoteService = quoteService;

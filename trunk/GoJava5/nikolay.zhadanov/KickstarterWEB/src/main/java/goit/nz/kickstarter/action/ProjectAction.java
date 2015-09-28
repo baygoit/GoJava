@@ -12,8 +12,8 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping(value = "**/project", method = RequestMethod.GET)
 public class ProjectAction {
+	private static final String VIEW = "project";
 	private ProjectService projectService;
-	private final String VIEW = "project";
 	private ModelAndView model;
 
 	public void setProjectService(ProjectService projectService) {

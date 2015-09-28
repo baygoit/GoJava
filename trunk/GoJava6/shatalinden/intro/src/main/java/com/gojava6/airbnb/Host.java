@@ -1,29 +1,29 @@
 package com.gojava6.airbnb;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by shata on 17.09.2015.
  */
 public class Host extends User {
 
-    public ApartType type;
+    List<Apartment> apartments = new ArrayList<>();
 
-    public String city;
-
-    public Host(String name, String surname, String email, String city, ApartType type) {
-        super(name, surname, email);
-        this.type = type;
-        this.city = city;
+    public Host(String name, String surname, String email, String city) {
+        super(name, surname, email, city);
+//        if (validation(name, surname, email, city)) {
+//            register(this);
+//        }
     }
 
-    public static Host hostConstructor(String name, String surname, String email, String city, ApartType type) {
-        return new Host (name, surname, email, city, type);
+    public void addApartments (Apartment apartment) {
+
+        apartment.host = this;
+        apartments.add(apartment);
     }
 
-    public ApartType getType() {
-        return type;
-    }
-
-    public String getCity() {
-        return city;
+    public List<Apartment> getApartments() {
+        return apartments;
     }
 }

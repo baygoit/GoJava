@@ -28,4 +28,12 @@ public class PascalTriangleTest {
         PascalTriangle pascalTriangle = new PascalTriangle(level);
         assertArrayEquals(triangle, pascalTriangle.calculateTriangle());
     }
+    @Test
+    public void testCalculateTriangle1() {
+        level = 1;
+        triangle = new int[][]{ {1} };
+
+        PascalTriangle pascalTriangle = new PascalTriangle(level);
+        assertArrayEquals(triangle, pascalTriangle.calculateTriangle());
+    }
 }

@@ -43,21 +43,16 @@ public class ProjectService {
 		projectDAO.addQuestion(projectId, question);
 	}
 
-	@Transactional(readOnly = true)
-	public int getRewardAmount(long projectId, long rewardId) {
-		Project project = getProject(projectId);
+	public int getRewardAmount(List<RewardOption> rewardOptions, long rewardId) {
 		int result = 0;
 		int index = 0;
-		int size = project.getRewardOptions().size();
-		if (size > 0) {
-			while (result == 0 && index < size) {
-				RewardOption rewardOption = project.getRewardOptions().get(
-						index);
-				if (rewardOption.getId() == rewardId) {
-					result = rewardOption.getAmount();
-				}
-				index++;
+		int size = rewardOptions.size();
+		while (result == 0 && index < size) {
+			RewardOption rewardOption = rewardOptions.get(index);
+			if (rewardOption.getId() == rewardId) {
+				result = rewardOption.getAmount();
 			}
+			index++;
 		}
 		return result;
 	}

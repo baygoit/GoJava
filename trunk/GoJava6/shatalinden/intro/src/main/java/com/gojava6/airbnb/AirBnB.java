@@ -12,40 +12,58 @@ public class AirBnB implements Subject{
 
     public AirBnB() {
     }
-    private List<Host> hostList = new ArrayList<Host>();
-    private List<Client> clientList = new ArrayList<Client>();
-    private Set<String> cities = new HashSet<String>();
+    private static List<Host> hostList = new ArrayList<Host>();
+    private static List<Client> clientList = new ArrayList<Client>();
+    private static Set<String> cities = new HashSet<String>();
 
+    @Override
     public void notifyClients(String message) {
         for(Client client : clientList) {
             client.update("New city: " + message + " for " + client.getName());
         }
     }
 
+    @Override
     public void register(Host host) {
         if(host==null) {
             System.out.println("Host not registered.");
         }
-        else hostList.add(host);
+        else {
+            hostList.add(host);
+        }
         if(cities.add(host.getCity())) {
             notifyClients(host.getCity());
         }
     }
 
+    @Override
     public void register(Client client) {
         if(client==null) {
-            System.out.println("Host not registered.");
+            System.out.println("Client not registered.");
         }
-        else clientList.add(client);
+        else {
+            clientList.add(client);
+        }
     }
 
-    public void remove(Host host) {
-        hostList.remove(host);
+    @Override
+    public void remove(User user) {
+        if (user.getClass().toString()=="Host") {
+            hostList.remove(user);
+        }
+        if (user.getClass().toString()=="Client") {
+            clientList.remove(user);
+        }
     }
 
-    public void remove(Client client) {
-
-        clientList.remove(client);
+    public void getCityApartments(String city) {
+        for (Host host : hostList) {
+            if (host.getCity()==city) {
+                for (Apartment apartment : host.getApartments()) {
+                    System.out.println(host.getCity() + ", " + host.getName() + ": " + apartment.getType());
+                }
+            }
+        }
     }
 
 }
