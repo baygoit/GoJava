@@ -40,7 +40,8 @@ public class IslandProblemResolving {
             // get all neighbors
             if(node.i > 0){
                 Node top = new Node(node.i-1, node.j);
-                if(!visited.contains(top) && grid[top.i][top.j] == 1){
+                //all if clauses are the same? let's move it to the one method!
+                if(!visited.contains(top) && grid[top.i][top.j] == 1){ //i hate copy-paste
                     q.add(top);
                     visited.add(top);
                 }
@@ -48,21 +49,21 @@ public class IslandProblemResolving {
 
             if(node.i < grid.length-1){
                 Node bottom = new Node(node.i+1, node.j);
-                if(!visited.contains(bottom) && grid[bottom.i][bottom.j] == 1){
+                if(!visited.contains(bottom) && grid[bottom.i][bottom.j] == 1){ //i hate copy-paste
                     q.add(bottom);
                     visited.add(bottom);
                 }
             }
             if(node.j < grid[0].length-1){
                 Node right = new Node(node.i, node.j+1);
-                if(!visited.contains(right) && grid[right.i][right.j] == 1){
+                if(!visited.contains(right) && grid[right.i][right.j] == 1){ //i hate copy-paste
                     q.add(right);
                     visited.add(right);
                 }
             }
             if(node.j > 0){
                 Node left = new Node(node.i, node.j-1);
-                if(!visited.contains(left) && grid[left.i][left.j] == 1){
+                if(!visited.contains(left) && grid[left.i][left.j] == 1){ //i hate copy-paste
                     q.add(left);
                     visited.add(left);
                 }
