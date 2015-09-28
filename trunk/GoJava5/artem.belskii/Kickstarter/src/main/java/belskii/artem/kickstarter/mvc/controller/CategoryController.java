@@ -17,9 +17,4 @@ public class CategoryController {
 	public Map<Integer, String> getCategoryList(){
 		return model.getCategoryList();
 	}
-	
-	public int getCaterogyIdByName(String categoryName) {
-		return model.getCaterogyIdByName(categoryName);
-	}
-
 }
