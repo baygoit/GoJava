@@ -1,4 +1,4 @@
-package com.gojava6;
+package com;
 
 /**
  * Created by sergiigetman on 8/25/15.

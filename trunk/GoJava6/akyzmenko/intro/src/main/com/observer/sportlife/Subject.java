@@ -1,4 +1,4 @@
-package com.gojava6.observer.sportlife;
+package com.observer.sportlife;
 
 /**
  * Created by sergiigetman on 9/16/15.

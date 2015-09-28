@@ -1,4 +1,4 @@
-package com.gojava6;
+package com;
 
 import org.junit.Before;
 import org.junit.Test;

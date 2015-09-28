@@ -1,4 +1,4 @@
-package com.gojava6.observer.sportlife;
+package com.observer.sportlife;
 
 import java.util.ArrayList;
 import java.util.List;
