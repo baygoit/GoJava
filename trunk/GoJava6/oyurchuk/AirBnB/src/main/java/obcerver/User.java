@@ -5,9 +5,9 @@ package obcerver;
  */
 public class User implements Observer{
 
-    public String name;
-    public String surname;
-    public final String mail ;
+    protected String name;
+    protected String surname;
+    protected final String mail ;
 
 
     public User(String name, String surname, String mail) {
