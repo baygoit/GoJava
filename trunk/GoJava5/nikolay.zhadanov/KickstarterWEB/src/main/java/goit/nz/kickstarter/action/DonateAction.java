@@ -12,7 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class DonateAction {
-	private String VIEW = "donate";
+	private static final String VIEW = "donate";
 	private ProjectService projectService;
 
 	public void setProjectService(ProjectService projectService) {
@@ -39,8 +39,8 @@ public class DonateAction {
 		model.addObject("project", project);
 		model.addObject("confirmed", false);
 		if (rewardId > 0) {
-			int chosenAmount = projectService.getRewardAmount(projectId,
-					rewardId);
+			int chosenAmount = projectService.getRewardAmount(
+					project.getRewardOptions(), rewardId);
 			model.addObject("chosenAmount", chosenAmount);
 		}
 		model.setViewName(VIEW);

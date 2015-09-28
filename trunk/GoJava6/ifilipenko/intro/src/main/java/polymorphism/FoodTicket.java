@@ -1,6 +1,6 @@
 package polymorphism;
 
-public class FoodTicket extends StandardTicket implements Ticket {
+public class FoodTicket extends StandardTicket{
 
     Ticket ticket = new StandardTicket();
 

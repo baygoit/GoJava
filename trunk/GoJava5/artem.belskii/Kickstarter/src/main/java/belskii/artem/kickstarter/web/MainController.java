@@ -23,7 +23,6 @@ public class MainController {
 	private ProjectController project = new ProjectController(new ProjectModel());
 	private QuoteController quote = new QuoteController(new QuoteModel());
 	private String serverRoot = "Kickstarter";
-	private int currentCategoryId;
 	
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index(ModelMap model) {
@@ -34,7 +33,7 @@ public class MainController {
     
     @RequestMapping(value = "/category/{categoryId}", method = RequestMethod.GET)
     public ModelAndView projectFromCategories(@PathVariable(value = "categoryId") int categoryId) {
-    	this.currentCategoryId=categoryId;
+    	
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("category");
 		modelAndView.addObject("projectList",project.getProjectFromCategory(categoryId).values());
@@ -44,21 +43,22 @@ public class MainController {
         return modelAndView;
     }
     
-    @RequestMapping(value = "**/project/{projectId}", method = RequestMethod.GET)
-    public ModelAndView projectDetails(@PathVariable(value = "projectId") int projectId) {
-		ModelAndView modelAndView = new ModelAndView();
+    @RequestMapping(value = "/category/{categoryId}/project/{projectId}", method = RequestMethod.GET)
+    public ModelAndView projectDetails(@PathVariable(value = "projectId") int projectId, @PathVariable(value = "categoryId") int categoryId) {
+    	ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("projectDetails");
 		modelAndView.addObject("project", project.getProjectById(projectId));
 		modelAndView.addObject("paymetVariants", project.getProjectById(projectId).getPaymetVariants());
-		modelAndView.addObject("currentCategoryId",currentCategoryId);
+		modelAndView.addObject("currentCategoryId",categoryId);
         return modelAndView;
     }
     
-    @RequestMapping(value = "**/project/{projectId}", method = RequestMethod.POST)
+    @RequestMapping(value = "/category/{categoryId}/project/{projectId}", method = RequestMethod.POST)
     public ModelAndView updateProject(@ModelAttribute("question") String question, 
     								@ModelAttribute("donate") String donate, 
     								@ModelAttribute("customDonate") String customDonate,
-    								@PathVariable(value = "projectId") int projectId){
+    								@PathVariable(value = "projectId") int projectId,
+    								@PathVariable(value = "categoryId") int categoryId){
     	Project projectForUpdate=project.getProjectById(projectId);
     	if (!question.equals("")){
     		projectForUpdate.asqAQuestion(question);
@@ -82,7 +82,7 @@ public class MainController {
 		modelAndView.setViewName("projectDetails");
 		modelAndView.addObject("project", projectForUpdate);
 		modelAndView.addObject("paymetVariants", projectForUpdate.getPaymetVariants());
-		modelAndView.addObject("currentCategoryId",currentCategoryId);
+		modelAndView.addObject("currentCategoryId",categoryId);
 		
     	return modelAndView;
     }

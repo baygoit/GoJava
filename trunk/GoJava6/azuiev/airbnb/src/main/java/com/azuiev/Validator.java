@@ -1,5 +1,11 @@
 package com.azuiev;
 
+import com.azuiev.Books.ApartType;
+import com.azuiev.Books.Book;
+import com.azuiev.Users.Client;
+import com.azuiev.Users.Host;
+import com.azuiev.Users.User;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -30,12 +36,17 @@ public class Validator {
         else return false;
     }
 
+    public boolean validateBook(Book book) {
+        return validateCity(book.getCity())&&validateApartament(book.getApartType());
+    }
+
     private boolean validate(User user) {
-        return validateName(user.name)&&validateSurname(user.surName)&&validateEmail(user.email);
+        return validateName(user.getName())&&validateSurname(user.getSurName())&&validateEmail(user.getEmail());
     }
 
     private boolean validate(Host host) {
-        return validateCity(host.city)&&validateApartament(host.apartmentType);
+        return true;
+        //return validateCity(host.city)&&validateApartament(host.apartmentType);
     }
 
     private boolean validate(Client client) {
@@ -46,14 +57,13 @@ public class Validator {
         return validateString(name,"[a-zA-Z]{2}[a-zA-Z]*");
     }
 
-
     private boolean validateSurname(String surName) {
-        return true;
+        return validateString(surName,"[a-zA-Z]{2}[a-zA-Z]*");
     }
 
 
     private boolean validateEmail(String email) {
-        return true;
+        return validateString(email,"^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
     }
 
     private boolean validateCity(String city) {
@@ -71,4 +81,6 @@ public class Validator {
         return m.matches();
 
     }
+
+
 }
