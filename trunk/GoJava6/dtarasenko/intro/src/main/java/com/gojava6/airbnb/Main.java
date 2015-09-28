@@ -92,6 +92,8 @@ public class Main {
         //reserveApartment
         app.reserveApartment(4, client1, new Date(115, 8, 10), new Date(115, 8, 15));
         app.reserveApartment(4, client1, new Date(115, 8, 20), new Date(115, 8, 25));
+        app.reserveApartment(4, client1, new Date(115, 8, 22), new Date(115, 8, 27));
+
 
         System.out.print("\nReservation list:");
         for (ReservationData rd : app.getListOfReservedDates()) {
@@ -106,7 +108,7 @@ public class Main {
         sr = new SearchResult(app);
         sr.filterByCity("Lviv");
         sr.filterByApartmentType("Apartment");
-        sr.filterByDates(new Date(115, 8, 16), new Date(115, 8, 17));
+        sr.filterByDates(new Date(115, 8, 15), new Date(115, 8, 17));
         sr.showSearchResults();
 
 

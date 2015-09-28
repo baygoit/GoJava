@@ -4,12 +4,15 @@ import com.gojava6.airbnb.apartment.Apartment;
 import com.gojava6.airbnb.apartment.ReservationData;
 import com.gojava6.airbnb.users.Client;
 import com.gojava6.airbnb.users.User;
+import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 public class Application {
+
+    private static final Logger log = Logger.getLogger(Application.class);
 
     private List<User> listOfUsers = new ArrayList<User>();
     private List<Apartment> listOfApartments = new ArrayList<Apartment>();
@@ -44,24 +47,34 @@ public class Application {
     }
 
     public void reserveApartment(int apartmentId, Client client, Date startDate, Date endDate) {
+
+        log.info("Start date: " + startDate.getDate() + " " + (startDate.getMonth() + 1)
+                + " " + (startDate.getYear() + 1900) + ". End date: " + endDate.getDate()
+                + " " + (endDate.getMonth() + 1) + " " + (endDate.getYear() + 1900) + ".");
+
         long start = startDate.getTime();
         long end = endDate.getTime();
 
         if (start > end) {
             System.out.println("\nPlease corrent input dates.");
+            log.info("Input date error.");
         }
         else {
             if (listOfReservedDates.isEmpty()) {
                 listOfReservedDates.add(new ReservationData(apartmentId, client.getUserId(), startDate, endDate));
                 System.out.println("\nReservation is completed.");
+                log.info("Reservation is completed.");
             }
             else {
                 if (isAvailable(apartmentId, start, end)) {
                     listOfReservedDates.add(new ReservationData(apartmentId, client.getUserId(), startDate, endDate));
                     System.out.println("\nReservation is completed.");
+                    log.info("Reservation is completed.");
+
                 }
                 else {
-                    System.out.println("Reservation is not impossible.");
+                    System.out.println("Reservation is not available.");
+                    log.info("Reservation is not available.");
                 }
             }
         }
@@ -70,6 +83,7 @@ public class Application {
 
 
     private boolean isAvailable(int apartmentId, long start, long end) {
+
         for (ReservationData rd : listOfReservedDates) {
             if (rd.getApartmentId() == apartmentId) {
                 if ((end < rd.getStart() || start > rd.getEnd())) {
