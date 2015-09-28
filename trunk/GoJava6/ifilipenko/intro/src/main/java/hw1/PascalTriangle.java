@@ -5,31 +5,34 @@ public class PascalTriangle {
     private int level;
 
     public PascalTriangle(int level) {
-    this.level = level;
+        this.level = level; //always check for validity as soon as possible. level < 0 should probably throw exception
     }
 
     public int[][] calculateTriangle() {
+        if (level < 0) { //check prev. comment
+            return null;
+        } else { //why do you need else clause if you've returned from if?
+            int[][] triangle = new int[level][];
 
-        int[][] triangle = new int[level][level];
-
-        for (int row = 0; row < level; row++) {
-            for (int col = 0; col <= row; col++) {
-                if (col == 0 || row == col) {
-                    triangle[row][col] = 1;
-                } else{
-                    triangle[row][col] = triangle[row-1][col-1] + triangle[row-1][col];
+            for (int row = 0; row < triangle.length; row++) {
+                triangle[row] = new int[row + 1];
+                triangle[row][0] = 1; // first number in a row
+                triangle[row][row] = 1; // last number in a row
+                for (int col = 1; col < row; col++) {
+                    triangle[row][col] = triangle[row - 1][col-1] + triangle[row - 1][col];
                 }
             }
+            return triangle;
         }
-
-/*        for (int i = 0; i < level; i++) {
-            for (int j = 0; j <= i; j++) {
-                System.out.print(triangle[i][j] + " ");
-            }
-            System.out.println();
-        }*/
-
-        return triangle;
-
     }
+
+    public void print(int[][] triangle) {
+        for (int row = 0; row < triangle.length; row++) {
+            for (int col = 0; col < triangle[row].length; col++) {
+                System.out.print(" " + triangle[row][col]);
+            }
+            System.out.println("");
+        }
+    }
+
 }

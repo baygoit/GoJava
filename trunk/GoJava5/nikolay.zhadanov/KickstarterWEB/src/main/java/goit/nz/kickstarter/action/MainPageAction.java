@@ -1,16 +1,19 @@
 package goit.nz.kickstarter.action;
 
-import goit.nz.kickstarter.model.MainPageModel;
 import goit.nz.kickstarter.service.CategoryService;
 import goit.nz.kickstarter.service.QuoteService;
 
-import javax.servlet.http.HttpServletRequest;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
-public class MainPageAction implements Action {
-	private MainPageModel model;
+@Controller
+@RequestMapping(value = "main")
+public class MainPageAction {
 	private QuoteService quoteService;
 	private CategoryService categoryService;
-	private final String VIEW = "main";
+	private static final String VIEW = "main";
 
 	public void setQuoteService(QuoteService quoteService) {
 		this.quoteService = quoteService;
@@ -20,13 +23,13 @@ public class MainPageAction implements Action {
 		this.categoryService = categoryService;
 	}
 
-	@Override
-	public String execute(HttpServletRequest request) {
-		model = new MainPageModel();
-		model.setQuote(quoteService.getRandomQuote());
-		model.setCategories(categoryService.getCategories());
-		request.setAttribute("model", model);
-		return VIEW;
+	@RequestMapping(method = RequestMethod.GET)
+	public ModelAndView execute() {
+		ModelAndView model = new ModelAndView();
+		model.addObject("quote", quoteService.getRandomQuote());
+		model.addObject("categories", categoryService.getCategories());
+		model.setViewName(VIEW);
+		return model;
 	}
 
 }

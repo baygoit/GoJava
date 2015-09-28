@@ -1,19 +1,37 @@
 package com.azuiev;
 
-/**
- * Hello world!
- */
+import com.azuiev.Books.ApartType;
+import com.azuiev.Books.Book;
+import com.azuiev.Organization.Organization;
+import com.azuiev.Users.Client;
+import com.azuiev.Users.Host;
+import com.azuiev.Users.User;
+import com.azuiev.Users.UserCreator;
+import org.apache.log4j.Logger;
+
 public class App {
+    public static final Logger log = Logger.getLogger(App.class);
+
     public static void main(String[] args) {
-        System.out.println("Hello World!");
 
-        Organisation SportLife = new Organisation();
+        log.trace("AIRBNB project");
 
-        User user1 = new Client("AA", "2", "3");
-        Validator v = Validator.getInstance();
-        if (!v.validateUser(user1)){
-            System.out.println("Alarm");
+        Organization sportLife = new Organization();
+        if (sportLife!=null){
+            log.info("Organization successfully created");
+        } else {
+            log.error("Organization creating failed");
         }
+        UserCreator userCreator = new UserCreator();
+
+        User user1 = userCreator.createUser(new Client("A", "TT", "a@a.aa"));
+        Host host1 = new Host("AA", "BB", "a@a.aa");
+        sportLife.register(user1);
+        sportLife.register(host1);
+
+        Book book1 = Book.createBook((Host) user1,"Kiev", "Lenina 1", ApartType.APARTAMENT);
+
+
 
     }
 }

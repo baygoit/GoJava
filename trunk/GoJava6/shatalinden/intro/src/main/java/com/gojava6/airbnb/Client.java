@@ -5,10 +5,7 @@ package com.gojava6.airbnb;
  */
 public class Client extends User{
 
-    private Client(String name, String surname, String email) {
-        super(name, surname, email);
-    }
-    public static User clientConstructor(String name, String surname, String email) {
-        return new Client(name, surname, email);
+    public Client(String name, String surname, String email, String city) {
+        super(name, surname, email,city);
     }
 }

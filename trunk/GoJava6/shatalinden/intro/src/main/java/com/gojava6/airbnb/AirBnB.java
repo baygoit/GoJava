@@ -1,7 +1,9 @@
 package com.gojava6.airbnb;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by shata on 17.09.2015.
@@ -10,34 +12,58 @@ public class AirBnB implements Subject{
 
     public AirBnB() {
     }
+    private static List<Host> hostList = new ArrayList<Host>();
+    private static List<Client> clientList = new ArrayList<Client>();
+    private static Set<String> cities = new HashSet<String>();
 
-    private List<User> userList = new ArrayList<User>();
-    private List<String> cities = new ArrayList<String>();
-
-    public void notifyUsers(String message) {
-        for(User user : userList) {
-//            System.out.println(user.getName() + " notified.");
-            user.update("New city: " + message + ", for " + user.getName().toString());
+    @Override
+    public void notifyClients(String message) {
+        for(Client client : clientList) {
+            client.update("New city: " + message + " for " + client.getName());
         }
     }
 
-    public void register(User user) {
-        if(user==null) {
-            System.out.println("User not registered.");
+    @Override
+    public void register(Host host) {
+        if(host==null) {
+            System.out.println("Host not registered.");
         }
-        else userList.add(user);
-        if(user != null && user.getClass().toString().contains("Host")) {
-            addCity(user.getCity());
+        else {
+            hostList.add(host);
+        }
+        if(cities.add(host.getCity())) {
+            notifyClients(host.getCity());
         }
     }
 
+    @Override
+    public void register(Client client) {
+        if(client==null) {
+            System.out.println("Client not registered.");
+        }
+        else {
+            clientList.add(client);
+        }
+    }
+
+    @Override
     public void remove(User user) {
-        userList.remove(user);
+        if (user.getClass().toString()=="Host") {
+            hostList.remove(user);
+        }
+        if (user.getClass().toString()=="Client") {
+            clientList.remove(user);
+        }
     }
 
-    private void addCity(String city) {
-        if(!cities.contains(city)) notifyUsers(city);
-        cities.add(city);
+    public void getCityApartments(String city) {
+        for (Host host : hostList) {
+            if (host.getCity()==city) {
+                for (Apartment apartment : host.getApartments()) {
+                    System.out.println(host.getCity() + ", " + host.getName() + ": " + apartment.getType());
+                }
+            }
+        }
     }
 
 }
