@@ -1,11 +1,11 @@
-package com.gojava6.airbnb.application;
+package com.gojava6.airbnb.apartment;
 
 
 public enum ApartmentType {
 
-    PLACE ("place"),
-    ROOM ("room"),
-    APARTMENT ("apartment");
+    PLACE ("Place"),
+    ROOM ("Room"),
+    APARTMENT ("Apartment");
 
     private final String apartmentType;
 
