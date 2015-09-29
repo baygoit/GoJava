@@ -19,7 +19,7 @@ public class OneSwipeArrayTest {
     public void setUp(){
         oneSwipeArray = new OneSwipeArray();
         trueArray = new int[]{1, 5, 3, 3, 7};
-        falseArray = new int[]{1, 3, 5, 3, 4};
+        falseArray = new int[]{1, 3, 5, 3, 4, 6, 1};
     }
 
     @Test

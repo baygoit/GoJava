@@ -27,10 +27,10 @@ public class OneSwipeArray {
     }
 
     private void swap(int[] trueArray, int bugIndex) {
-        int swapIndex = trueArray.length - 1;
-        for (int i = trueArray.length - 1; i > bugIndex; i--) {
-            if (trueArray[bugIndex] > trueArray[i]) {
-                swapIndex = i;
+        int swapIndex = trueArray.length-1;
+        for (int i = 1; i < trueArray.length; i++) {
+            if (trueArray[bugIndex] < trueArray[i]) {
+                swapIndex = i-1;
                 break;
             }
         }
@@ -41,8 +41,11 @@ public class OneSwipeArray {
 
     private int getBugIndex(int[] trueArray) {
         for (int i = 0; i < trueArray.length - 1; i++) {
-            if (trueArray[i] > trueArray[i + 1])
+            if (trueArray[i] > trueArray[i + 1]) {
+                while (i > 0 && trueArray[i - 1] == trueArray[i])
+                    i--;
                 return i;
+            }
         }
         return -1;
     }

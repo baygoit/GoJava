@@ -11,7 +11,5 @@ public interface Subject {
 
     void register(Client client);
 
-    void remove(Host host);
-
-    void remove(Client client);
+    void remove(User user);
 }

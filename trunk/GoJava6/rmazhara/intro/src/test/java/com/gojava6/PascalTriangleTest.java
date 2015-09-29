@@ -1,6 +1,7 @@
 package com.gojava6;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.junit.Assert.assertArrayEquals;
@@ -22,6 +23,12 @@ public class PascalTriangleTest {
                 {1, 3, 3, 1},
                 {1, 4, 6, 4, 1}};
     }
+    @Test
+    public void checkingBuilder() {
+        PascalTriangle pascalTriangle = new PascalTriangle(level);
+        pascalTriangle.show();
+    }
+
 
     @Test
     public void testCalculateTriangle() {
