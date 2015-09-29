@@ -9,7 +9,7 @@ import static org.junit.Assert.assertTrue;
 /**
  * Created by Ярослав on 29.09.2015.
  */
-public class OneSwipeArrayTest {
+public class OneSwipeArrayTest{
 
     private OneSwipeArray oneSwipeArray;
     private int[] falseArray;
