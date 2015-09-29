@@ -1,6 +1,6 @@
-package hm3;
+package hw3;
 
-public class Employee implements Comparable<Employee>{
+public class Employee implements Comparable<Employee> {
 
     int id; //why don't fields private, where is incapsulation?
     String name;
@@ -15,7 +15,7 @@ public class Employee implements Comparable<Employee>{
 
     @Override
     public int compareTo(Employee employee) {
-        return managerId-employee.managerId; //never use '-' when compare - read about numbers overflow. better use Integer.compare(int, int)
+        return Integer.compare(managerId, employee.managerId);
     }
 
     @Override
@@ -26,8 +26,6 @@ public class Employee implements Comparable<Employee>{
                 ", managerId=" + managerId +
                 '}';
     }
-
-
 
 
 }

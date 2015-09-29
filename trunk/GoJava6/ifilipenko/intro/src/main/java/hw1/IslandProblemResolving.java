@@ -67,6 +67,5 @@ public class IslandProblemResolving {
     private void nodeAdding(Node node) {
         q.add(node);
         visited.add(node);
-
     }
 }
