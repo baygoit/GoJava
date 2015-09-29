@@ -18,14 +18,15 @@ public class IslandProblemResolvingTest {
                 {1, 1, 0, 0, 1},
                 {1, 0, 0, 0, 0},
                 {0, 0, 1, 0, 1},
-                {1, 0, 0, 1, 1}
+                {1, 0, 0, 1, 1},
+                {0,1,0,0,0}
         };
-        count = 5;
+        count = 6;
     }
 
     @Test
     public void testCountIslands() {
         IslandProblemResolving islandProblemResolving = new IslandProblemResolving(islandMap);
-        assertEquals(count, islandProblemResolving.countIslands());
+        assertEquals(count, islandProblemResolving.countIslands(islandMap));
     }
 }
