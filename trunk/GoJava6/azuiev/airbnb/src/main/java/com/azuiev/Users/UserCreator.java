@@ -2,6 +2,8 @@ package com.azuiev.Users;
 import com.azuiev.App;
 import com.azuiev.Validator;
 
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -11,7 +13,7 @@ import java.util.TreeSet;
 public class UserCreator {
 
     private Set<String> emails = new TreeSet<String>();
-    private Set<User> users = new TreeSet<User>();
+    private List<User> users = new LinkedList<User>();
 
 
     public Host createHost(String name, String surName, String email) {
