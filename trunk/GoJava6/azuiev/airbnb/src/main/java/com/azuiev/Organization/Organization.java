@@ -7,12 +7,15 @@ import com.azuiev.Users.User;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * Created by Lera on 21.09.2015.
  */
 public class Organization implements Subject {
-    List<User> users = new ArrayList<User>();
+    private List<User> users = new ArrayList<User>();
+    private Set<String> cities = new TreeSet<String>();
 
     public Organization() {
     }
@@ -27,11 +30,13 @@ public class Organization implements Subject {
             users.add((User) o);
             App.log.info("Successfully registered "+ o + "in "+ this);
         } else {
-            App.log.info("Can`t be registered "+ null + "in "+ this);
+            App.log.info("Can`t be registered "+ null + " in "+ this);
         }
     }
 
-
+    public boolean isNewCity(String city){
+        return true;
+    }
 
     public void remove(Observer o) {
 
@@ -40,8 +45,12 @@ public class Organization implements Subject {
 
     public void notifyAllObservers(String message) {
         for (User user :users) {
-            //TODO
+            user.resiveMessage("Hello, Mr/Mrs "+ user.getName() + " "+ message);
         }
 
+    }
+
+    public void cityAdded(String city) {
+        notifyAllObservers("now we work also in "+ city);
     }
 }

@@ -28,4 +28,9 @@ public class PascalTriangleTest {
         PascalTriangle pascalTriangle = new PascalTriangle(level);
         assertArrayEquals(triangle, pascalTriangle.calculateTriangle());
     }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testIllegalArguments() {
+        PascalTriangle pascalTriangle = new PascalTriangle(-1);
+    }
 }

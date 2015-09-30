@@ -12,6 +12,7 @@ import java.util.*;
  */
 public class Book implements Comparable<Book> {
     private static Set<Book> books = new TreeSet<Book>();
+    private static Set<String> cities = new TreeSet<String>();
     private Host owner;
     private String city;
     private String address;
@@ -20,7 +21,7 @@ public class Book implements Comparable<Book> {
 
     List<ReservationDates> periods = new LinkedList<ReservationDates>();
 
-    public static Book createBook(Host owner, String city, String address, ApartType apartType) {
+    public static Book registerBook(Host owner, String city, String address, ApartType apartType) {
 
         Book book = new Book(owner, city, address, apartType);
 
@@ -35,6 +36,12 @@ public class Book implements Comparable<Book> {
             } else {
                 App.log.error("already in listBooks - " + book);
             }
+            if (!cities.contains(city)){
+                cities.add(city);
+                App.log.info("added new city - " + city);
+                App.sportLife.cityAdded(city);
+            }
+            return book;
         }
         return null;
     }

@@ -30,7 +30,7 @@ public class Main {
 
             //airbnb.getApartments();
             Date period1 = new Date(11,17);
-            Date period2 = new Date(18,20);
+            Date period2 = new Date(16,20);
 
             //System.out.println(airbnb.IsAvaible(room1, period1));
 
@@ -43,12 +43,14 @@ public class Main {
             //airbnb.searchByOwner(airbnb.searchByCity(airbnb.getApartments(), "Lviv"), host1);
              airbnb.searchByDate(airbnb.getApartments(), period2);
 
-//            NewsSubscribe newsSubscribe = new NewsSubscribe();
-//            newsSubscribe.registerObserver(client1);
-//            newsSubscribe.registerObserver(client2);
-//
-//            newsSubscribe.notifyObservers();
-//
+//            System.out.println(airbnb.IsAvaible(room1, period2));
+
+            NewsSubscribe newsSubscribe = new NewsSubscribe();
+            newsSubscribe.registerObserver(client1);
+            newsSubscribe.registerObserver(client2);
+
+            newsSubscribe.notifyObservers();
+
 //           newsSubscribe.removeObserver(client1);
 //           newsSubscribe.notifyObservers();
 

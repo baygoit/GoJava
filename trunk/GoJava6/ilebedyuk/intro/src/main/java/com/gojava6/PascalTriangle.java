@@ -7,13 +7,14 @@ public class PascalTriangle {
     private int level;
 
     public PascalTriangle(int level) {
+        if (level < 0){
+            throw new IllegalArgumentException();
+        }
         this.level = level;
     }
 
     public int[][] calculateTriangle() {
         int[][] array = new int[level][];
-        
-        if (level <= 0){return null;}
 
         array[0] = new int[1];
         array[1] = new int[2];

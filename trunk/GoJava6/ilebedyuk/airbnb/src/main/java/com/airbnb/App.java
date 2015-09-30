@@ -3,7 +3,10 @@ package com.airbnb;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import org.apache.log4j.Logger;
 
 /**
  * Created by ����� on 20.09.2015.
@@ -12,13 +15,9 @@ public class App {
     private List<Client> clients = new ArrayList<Client>();
     private List<Host> hosts = new ArrayList<Host>();
     private List<Apartment> apartments = new ArrayList<Apartment>();
-    private List<Date> reservationDates = new ArrayList<Date>();
+    private Map<Date,Apartment> reservationDates = new HashMap<Date, Apartment>();
 
-//    public void registerClient(Client client) throws Exception {
-//
-//        clients.add(client);
-//        System.out.println("Hello! " + client.getName() + ", you've been registered successfully!");
-//    }
+    private static final Logger log = Logger.getLogger(App.class);
 
     public void register(User user) {
         if (user instanceof Host) {
@@ -28,11 +27,6 @@ public class App {
         }
         System.out.println("Hello! " + user.getName() + ", you've been registered successfully!");
     }
-
-//    public void registerHosts(Host host) throws Exception {
-//        hosts.add(host);
-//        System.out.println("Hello! " + host.getName() + ", you've been registered successfully!");
-//    }
 
     public List<Client> getClients() {
         for (Client client : clients) {
@@ -55,12 +49,12 @@ public class App {
         return apartments;
     }
 
-    public List<Date> getReservationDates() {
-        for (Date date : reservationDates) {
-            date.getPeriod();
-        }
-
+    public Map<Date, Apartment> getReservationDates() {
         return reservationDates;
+    }
+
+    public void setReservationDates(Map<Date, Apartment> reservationDates) {
+        this.reservationDates = reservationDates;
     }
 
     public Apartment createApartment(Apartment.ApartmentType apartmentType, String city, User user ) throws Exception {
@@ -70,15 +64,22 @@ public class App {
         Apartment apartment = new Apartment(apartmentType, city, user.getName());
         apartments.add(apartment);
         System.out.println(user.getName() + " is create apartament " + apartmentType);
+        log.info("Apartments already created!");
         return apartment;
     }
 
     public void makeReservation(User user, Apartment apartment, Date period) throws Exception {
         if (clients.contains(user) == false) {
+            log.info("Apartments already reserved!");
             throw new Exception("You didn't registered");
         }
+        if (IsAvaible(apartment,period) == false){
+            log.info("Apartments already reserved!");
+            throw new Exception("Apartments already reserved!");
+        }
         System.out.println("Client " + user.getName() + " reserved apartment successfully! " + apartment.getApartmentType() + " on date: " + period.getDateBegin() + " to " + period.getDateEnd());
-        reservationDates.add(period);
+        reservationDates.put(period, apartment);
+        log.info("Reservation complete!");
     }
 
     public List<Apartment> searchByOwner(List<Apartment> apartments, User user) throws Exception {
@@ -120,9 +121,16 @@ public class App {
         }
 
     public boolean IsAvaible(Apartment apartament, Date period) {
-        for (Date dates : reservationDates) {
-            if (dates.getDateBegin() == period.getDateBegin() || dates.getDateEnd() == dates.getDateEnd()) {
-                return false;
+        for (Map.Entry<Date, Apartment> entry : reservationDates.entrySet()) {
+            for (long i = entry.getKey().getDateBegin(); i < entry.getKey().getDateEnd(); i++) {
+                for (long j = period.getDateBegin(); j < period.getDateEnd(); j++) {
+                    if (i == j && apartament.getApartmentType() == entry.getValue().getApartmentType()){
+                        log.info("That apartment in this period isn't available");
+                        return false;
+
+                    }
+                }
+
             }
         }
         return true;
