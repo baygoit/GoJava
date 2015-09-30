@@ -10,8 +10,10 @@ import com.azuiev.Users.UserCreator;
 import org.apache.log4j.Logger;
 
 public class App {
+
     public static final Logger log = Logger.getLogger(App.class);
     public static Organization sportLife = new Organization();
+
     public static void main(String[] args) {
 
         log.trace("AIRBNB project");

@@ -18,10 +18,12 @@ public class Validator {
 
     }
     public static Validator getInstance(){
-        if (validator!=null) {
-            return validator;
+
+        if (validator==null) {
+            validator = new Validator();
         }
-        else return new Validator();
+
+        return validator;
     }
 
     public boolean validateUser(User user) {

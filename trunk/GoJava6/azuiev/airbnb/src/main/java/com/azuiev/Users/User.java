@@ -4,6 +4,9 @@ import com.azuiev.App;
 import com.azuiev.Organization.Organization;
 import com.azuiev.Validator;
 
+import java.util.Set;
+import java.util.TreeSet;
+
 /**
  * Created by Lera on 21.09.2015.
  */
@@ -12,9 +15,11 @@ public abstract class User implements Observer {
     private String surName;
     private String email;
 
+
     public void resiveMessage(String s){
         System.out.println(s);
     }
+
     public User(String name, String surName, String email) {
 
         this.name = name;
