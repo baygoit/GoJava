@@ -1,31 +1,49 @@
 package com.gojava6;
 
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+import org.junit.runners.Parameterized.Parameters;
+
+import java.util.Arrays;
+import java.util.Collection;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+@RunWith(Parameterized.class)
 public class OneSwipeArrayTest {
+    @Parameters
+    public static Collection<Object[]> data() {
+        return Arrays.asList(new Object[][]{
+                {new int[]{1, 5, 3, 3, 7}, new int[]{1, 7, 3, 6, 4}},
+                {new int[]{1, 5, 3, 3, 3}, new int[]{1, 6, 2, 5, 12}},
+                {new int[]{1, 7, 3, 6, 3}, new int[]{1, 6, 2, 5, 12}}
+        });
+    }
 
-    private OneSwipeArray oneSwipeArray;
-    private int[] falseArray;
+    private static OneSwipeArray oneSwipeArray;
     private int[] trueArray;
+    private int[] falseArray;
 
-    @Before
-    public void setUp(){
+    public OneSwipeArrayTest(int[] trueArray, int[] falseArray) {
+        this.trueArray = trueArray;
+        this.falseArray = falseArray;
+    }
+
+    @BeforeClass
+    public static void setUp() {
         oneSwipeArray = new OneSwipeArray();
-        trueArray = new int[]{1, 5, 3, 3, 7};
-        falseArray = new int[]{1, 3, 5, 3, 4};
     }
 
     @Test
-    public void testSolution() {
+    public void testSolutionTrue() {
         assertTrue(oneSwipeArray.solution(trueArray));
     }
 
     @Test
-    public void testSolutionTwo() {
+    public void testSolutionFalse() {
         assertFalse(oneSwipeArray.solution(falseArray));
     }
 

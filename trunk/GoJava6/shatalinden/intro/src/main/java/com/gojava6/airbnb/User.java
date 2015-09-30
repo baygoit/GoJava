@@ -8,11 +8,13 @@ public abstract class User implements Observer{
     private String email;
     private String surname;
     private String name;
+    private String city;
 
-    public User(String name, String surname, String email) {
+    public User(String name, String surname, String email, String city) {
         this.name = name;
         this.surname = surname;
         this.email = email;
+        this.city = city;
     }
 
     public String getName() {
@@ -26,6 +28,8 @@ public abstract class User implements Observer{
     public String getEmail() {
         return email;
     }
+
+    public String getCity() { return city; }
 
     public void update(String message) {
         System.out.println(message);

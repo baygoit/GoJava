@@ -2,9 +2,20 @@ package com.gojava6.airbnb.users;
 
 public abstract class User {
 
+    private static int userIdCounter;
+    private int userId;
     private String name;
     private String surName;
     private String email;
+
+    public User() {
+        userIdCounter += 1;
+        this.userId =  userIdCounter;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
 
     public String getName() {
         return name;

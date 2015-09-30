@@ -18,10 +18,12 @@ public class Validator {
 
     }
     public static Validator getInstance(){
-        if (validator!=null) {
-            return validator;
+
+        if (validator==null) {
+            validator = new Validator();
         }
-        else return new Validator();
+
+        return validator;
     }
 
     public boolean validateUser(User user) {
@@ -67,7 +69,7 @@ public class Validator {
     }
 
     private boolean validateCity(String city) {
-        return validateString(city,"[a-zA-Z]{1}[a-zA-Z]");
+        return validateString(city,"[a-zA-Z]{1}[a-zA-Z]*");
     }
 
     private boolean validateApartament(ApartType apartmentType) {

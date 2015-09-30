@@ -1,6 +1,6 @@
 package com.gojava6;
 /*
- * Copyright (c) 2013 midgardabc.com
+ * Opanasyuk Valentin
  */
 import java.awt.Color;
 import java.awt.Dimension;
