@@ -28,4 +28,26 @@ public class IslandProblemResolvingTest {
         IslandProblemResolving islandProblemResolving = new IslandProblemResolving(islandMap);
         assertEquals(count, islandProblemResolving.countIslands());
     }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testSolutionNull() {
+        IslandProblemResolving islandProblemResolving = new IslandProblemResolving(null);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testSolutionHeightWidthNull() {
+        IslandProblemResolving islandProblemResolving = new IslandProblemResolving(new int[0][0]);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testSolutionMerge() {
+        IslandProblemResolving islandProblemResolving = new IslandProblemResolving(islandMap);
+        islandProblemResolving.merge(islandMap, -1, -1);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testSolutionMergeTest() {
+        IslandProblemResolving islandProblemResolving = new IslandProblemResolving(islandMap);
+        islandProblemResolving.merge(islandMap, 0, 3);
+    }
 }
