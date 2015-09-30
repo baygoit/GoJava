@@ -67,7 +67,7 @@ public class Validator {
     }
 
     private boolean validateCity(String city) {
-        return validateString(city,"[a-zA-Z]{1}[a-zA-Z]");
+        return validateString(city,"[a-zA-Z]{1}[a-zA-Z]*");
     }
 
     private boolean validateApartament(ApartType apartmentType) {

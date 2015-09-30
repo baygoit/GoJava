@@ -1,6 +1,7 @@
 package com.azuiev.Users;
 
 import com.azuiev.App;
+import com.azuiev.Organization.Organization;
 import com.azuiev.Validator;
 
 /**
@@ -11,6 +12,9 @@ public abstract class User implements Observer {
     private String surName;
     private String email;
 
+    public void resiveMessage(String s){
+        System.out.println(s);
+    }
     public User(String name, String surName, String email) {
 
         this.name = name;
