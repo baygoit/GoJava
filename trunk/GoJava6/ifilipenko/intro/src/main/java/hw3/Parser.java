@@ -7,9 +7,9 @@ import java.util.*;
 
 
 public class Parser {
-    PriorityQueue<Employee> employees = new PriorityQueue<>();
+    Queue<Employee> employees = new PriorityQueue<>();
 
-    public PriorityQueue<Employee> parseFileTextToSortedEmployeeList(String file) throws IOException {
+    public Queue<Employee> parseFileTextToSortedEmployeeList(String file) throws IOException {
         BufferedReader br = new BufferedReader(new FileReader(file));
         String result;
 
@@ -17,25 +17,26 @@ public class Parser {
             while ((result = br.readLine()) != null) {
                 StringTokenizer token = new StringTokenizer(result, ";");
                 int id = 0;
-                int managerId = 0;
                 String name = null;
-
-                if (token.hasMoreTokens()) {
+                int managerId = 0;
+                try {
                     id = Integer.valueOf(token.nextToken());
+
+                    if (token.hasMoreTokens()) {
+                        name = token.nextToken();
+                    }
+                    if (token.hasMoreTokens()) {
+                        managerId = Integer.valueOf(token.nextToken());
+                    }
+                    addEmployee(id, name, managerId);
+                } catch (NumberFormatException e) {
+                    addEmployee(id, name, managerId);
                 }
-                if (token.hasMoreTokens()) {
-                    name = token.nextToken();
-                }
-                if (token.hasMoreTokens()) {
-                    managerId = Integer.valueOf(token.nextToken());
-                }
-                addEmployee(id, name, managerId);
             }
         } finally {
             br.close();
         }
         return employees;
-
     }
 
     private void addEmployee(int id, String name, int managerId) {
