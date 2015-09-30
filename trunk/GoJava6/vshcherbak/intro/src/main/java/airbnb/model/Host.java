@@ -1,10 +1,5 @@
 package airbnb.model;
 
-/**
- * Created by slavik on 21.09.2015.
- */
-
-
 public class Host extends User {
     private String city;
     private RentType rent;
@@ -20,6 +15,11 @@ public class Host extends User {
     public RentType getRent() { return rent; }
     public void setCity(String data) { city = data; }
     public void setRent(RentType data) { rent = data; }
+
+    @Override
+    public String toString() {
+        return super.toString() + "city" + city + "rent" + rent;
+    }
 
     @Override
     public boolean validate() {
