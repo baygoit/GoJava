@@ -4,7 +4,6 @@ import com.azuiev.Books.ApartType;
 import com.azuiev.Books.Apartment;
 import com.azuiev.Organization.Organization;
 import com.azuiev.Users.User;
-import com.azuiev.Users.UserCreator;
 import com.azuiev.Users.UserRoles;
 import org.apache.log4j.Logger;
 
@@ -23,7 +22,7 @@ public class App {
             log.error("Organization creating failed");
         }
 
-        UserCreator userCreator = new UserCreator();
+        User.Builder userCreator = User.createBuilder();
 
         User user1 = userCreator.createUser("Aa", "TT", "a@a.aa", UserRoles.CLIENT, UserRoles.HOST);
         User host1 = userCreator.createUser("AA", "BB", "a@a.aa");
@@ -33,9 +32,6 @@ public class App {
 
         Apartment book1 = host1.registerBook("Kiev", "Lenina 1", ApartType.APARTAMENT);
         Apartment book2 = user1.registerBook("Moskva", "Pushkina 1", ApartType.PLACE);
-
-
-
 
     }
 }

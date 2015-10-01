@@ -3,10 +3,9 @@ package com.azuiev.Users;
 import com.azuiev.App;
 import com.azuiev.Books.ApartType;
 import com.azuiev.Books.Apartment;
+import com.azuiev.Validator;
 
-import java.util.Date;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by Lera on 21.09.2015.
@@ -17,7 +16,10 @@ public class User implements Observer {
     private String email;
     private List<UserRoles> myRoles = new LinkedList<UserRoles>();
 
-    public User(String name, String surName, String email) {
+    private User(){
+
+    }
+    private User(String name, String surName, String email) {
         this.name = name;
         this.surName = surName;
         this.email = email;
@@ -84,5 +86,58 @@ public class User implements Observer {
     @Override
     public String toString() {
         return String.format("name = '%s', surName = '%s', email = '%s'", name, surName, email);
+    }
+
+    public static Builder createBuilder(){
+        return new User().new Builder();
+    }
+
+    public class Builder{
+        public Builder() {
+        }
+
+        private Set<String> emails = new TreeSet<String>();
+        private List<User> users = new LinkedList<User>();
+
+        public User createUser(String name, String surName, String email) {
+
+            User user = new User(name, surName, email);
+
+            if (validate(user)) {
+                return user;
+            } else {
+                return null;
+            }
+        }
+        public User createUser(String name, String surName, String email, UserRoles... roles) {
+
+            User user = createUser(name, surName, email);
+            if (user != null){
+                for (UserRoles userRoles :roles) {
+                    user.addRole(userRoles);
+                }
+
+            }
+            return user;
+        }
+
+        private boolean validate(User user) {
+            if (emails.contains(user.getEmail())){
+                App.log.error("Failed to create user. Email is busy - " + user.getEmail());
+                return false;
+            }
+
+            Validator v = Validator.getInstance();
+
+            if (!v.validateUser(user)) {
+                App.log.error("Failed to create - " + user);
+                return false;
+            } else {
+                App.log.info("User created - " + user);
+                emails.add(user.getEmail());
+                users.add(user);
+                return true;
+            }
+        }
     }
 }
