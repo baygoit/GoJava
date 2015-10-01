@@ -89,11 +89,11 @@ public class User implements Observer {
     }
 
     public static Builder createBuilder(){
-        return new User().new Builder();
+        return new Builder();
     }
 
-    public class Builder{
-        public Builder() {
+    public static class Builder{
+        private Builder() {
         }
 
         private Set<String> emails = new TreeSet<String>();
