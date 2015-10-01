@@ -10,41 +10,35 @@ import java.util.TreeSet;
 /**
  * Created by Masta on 27.09.2015.
  */
-public class UserCreator {
+public class UserCreator{
 
     private Set<String> emails = new TreeSet<String>();
     private List<User> users = new LinkedList<User>();
 
 
-    public Host createHost(String name, String surName, String email) {
+    public User createUser(String name, String surName, String email) {
 
-        Host host = new Host(name, surName, email);
-        if (validate(host)) {
-            return host;
-        } else {
-            return null;
-        }
-    }
-
-    public Client createClient(String name, String surName, String email) {
-
-        Client client = new Client(name, surName, email);
-        if (validate(client)) {
-            return client;
-        } else {
-            return null;
-        }
-    }
-
-    public User createUser(User user) {
+        User user = new User(name, surName, email);
 
         if (validate(user)) {
             return user;
         } else {
             return null;
         }
-
     }
+    public User createUser(String name, String surName, String email, UserRoles... roles) {
+
+        User user = createUser(name, surName, email);
+        if (user != null){
+            for (UserRoles userRoles :roles) {
+                user.addRole(userRoles);
+            }
+
+        }
+        return user;
+    }
+
+
 
     private boolean validate(User user) {
         if (emails.contains(user.getEmail())){

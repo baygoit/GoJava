@@ -45,7 +45,7 @@ public class Organization implements Subject {
 
     public void notifyAllObservers(String message) {
         for (User user :users) {
-            user.resiveMessage("Hello, Mr/Mrs "+ user.getName() + " "+ message);
+            user.notifyObserver("Hello, Mr/Mrs "+ user.getName() + " "+ message);
         }
 
     }

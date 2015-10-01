@@ -1,9 +1,7 @@
 package com.azuiev;
 
 import com.azuiev.Books.ApartType;
-import com.azuiev.Books.Book;
-import com.azuiev.Users.Client;
-import com.azuiev.Users.Host;
+import com.azuiev.Books.Apartment;
 import com.azuiev.Users.User;
 
 import java.util.regex.Matcher;
@@ -15,8 +13,8 @@ import java.util.regex.Pattern;
 public class Validator {
     private static Validator validator;
     private Validator(){
-
     }
+
     public static Validator getInstance(){
 
         if (validator==null) {
@@ -29,30 +27,15 @@ public class Validator {
     public boolean validateUser(User user) {
         Boolean result;
         result = validate(user);
-        if (user instanceof Client) {
-            return result&&validate((Client) user);
-        }
-        if (user instanceof Host) {
-            return result&&validate((Host) user);
-        }
-        else return false;
+        return result;
     }
 
-    public boolean validateBook(Book book) {
-        return validateCity(book.getCity())&&validateApartament(book.getApartType());
+    public boolean validateApartment(Apartment apartment) {
+        return validateCity(apartment.getCity())&&validateApartType(apartment.getApartType());
     }
 
     private boolean validate(User user) {
         return validateName(user.getName())&&validateSurname(user.getSurName())&&validateEmail(user.getEmail());
-    }
-
-    private boolean validate(Host host) {
-        return true;
-        //return validateCity(host.city)&&validateApartament(host.apartmentType);
-    }
-
-    private boolean validate(Client client) {
-        return true;
     }
 
     private boolean validateName(String name) {
@@ -63,7 +46,6 @@ public class Validator {
         return validateString(surName,"[a-zA-Z]{2}[a-zA-Z]*");
     }
 
-
     private boolean validateEmail(String email) {
         return validateString(email,"^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
     }
@@ -72,16 +54,14 @@ public class Validator {
         return validateString(city,"[a-zA-Z]{1}[a-zA-Z]*");
     }
 
-    private boolean validateApartament(ApartType apartmentType) {
+    private boolean validateApartType(ApartType apartmentType) {
         return (apartmentType instanceof ApartType);
     }
-
 
     private boolean validateString(String string, String pattern) {
         Pattern p = Pattern.compile(pattern);
         Matcher m = p.matcher(string);
         return m.matches();
-
     }
 
 
