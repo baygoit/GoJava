@@ -1,5 +1,6 @@
 package com.gojava6;
 
+import com.gojava6.homework.IslandProblemResolving;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -15,13 +16,12 @@ public class IslandProblemResolvingTest {
     @Before
     public void setUp() {
         islandMap = new int[][]{
-                {1, 1, 1, 1, 1},
-                {1, 0, 0, 0, 1},
-                {1, 0, 1, 1, 0},
-                {1, 0, 0, 0, 1},
-                {0, 1, 1, 0, 1}
-    };
-        count = 4;
+                {1, 1, 0, 0, 1},
+                {1, 0, 0, 0, 0},
+                {0, 0, 1, 0, 1},
+                {1, 0, 0, 1, 1}
+        };
+        count = 5;
     }
 
     @Test
