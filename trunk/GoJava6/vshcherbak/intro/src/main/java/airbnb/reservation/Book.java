@@ -1,4 +1,5 @@
 package airbnb.reservation;
+/*  died during refactoring
 
 import airbnb.model.RentType;
 
@@ -49,9 +50,7 @@ public class Book {
     }
 
     public void makeReservation(int clientID, Date start, Date end,  RentType rent) {
-        int hostID = isAvailable(start, end, rent);
-        if (hostID >= 0) {
-            reservationDates.add(new ReservationDates(hostID, clientID, start, end,  rent));
-        }
+
     }
 }
+*/

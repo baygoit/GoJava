@@ -38,7 +38,7 @@ public class User implements Observer {
     }
     public boolean validate() {
         return Validation.validateName(name) &&
-                Validation.validateSurname(surname) &&
+                Validation.validateName(surname) &&
                 Validation.validateEmail(email);
     }
 

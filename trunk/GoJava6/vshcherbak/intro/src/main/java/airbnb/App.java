@@ -19,8 +19,8 @@ public class App {
         user =  new Host("Angle", "Baker", "baker@site.com", "Kiev", RentType.APARTMENT);
         hire.register(user);
 
-       /* hire.notifyAll("ready");
+        hire.notifyAll("ready");
         hire.remove("Small");
-        hire.notifyAll("minus one");*/
+        hire.notifyAll("minus one");
     }
 }

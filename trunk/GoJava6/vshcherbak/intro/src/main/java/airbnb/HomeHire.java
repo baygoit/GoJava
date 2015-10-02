@@ -1,90 +1,77 @@
 package airbnb;
 
-//import airbnb.common.Observer;
 import airbnb.common.Subject;
-
-import java.util.*;
-
-import airbnb.model.Client;
-import airbnb.model.Host;
-//import airbnb.model.RentType;
-import airbnb.model.RentType;
+import airbnb.reservation.Apartment;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.Iterator;
 import airbnb.model.User;
-import airbnb.reservation.Book;
+import airbnb.model.Host;
+import airbnb.model.Client;
 
 public class HomeHire implements Subject {
-//    private RentType rent;
-//    private String city;
-    private List<User> hosts = new ArrayList<>();
-    private List<User> clients = new ArrayList<>();
-    private Set<Book> cities = new HashSet<>();
+    private List<User> users = new ArrayList<>();
+    private Set<String> cities = new HashSet<>();
+    private Set<Apartment> apartments = new HashSet<>();
 
     public void register(User user) {
-        if (user.getClass() == Client.class) {
-            Client client = (Client) user;
-            if (client.validate()) {
-                clients.add(client);
-            } else {
-                System.out.println("Please enter valid data");
-            }
-        } else if (user.getClass() == Host.class) {
-            Host host = (Host) user;
-            if (host.validate()) {
-                hosts.add(host);
-                if (cities.add(new Book(host.getCity()))) {///???
-                    notifyAll("We have new city: " + host.getCity());
-                }
-                addToBook(host);
-            } else {
-                System.out.println("Please enter valid data");
-            }
+        if (user.validate()) {
+            users.add(user);
         } else {
-            System.out.println("Something wrong");
+            System.out.println("Please enter valid data");
+        }
+        if (user instanceof Host) {
+            Host host = (Host) user;
+            if (cities.add(host.getCity())) {///???
+                notifyAll("We have new city: " + host.getCity());
+            }
         }
     }
 
-    private void addToBook(Host host) {
-        RentType rent = host.getRent();
-        String city = host.getCity();
-        for (Book book: cities) {
-            if (book.getCity().equals(city)) {
-                switch (rent) {
-                    case PLACE: book.addPlace(host.getUserID());
-                    case ROOM: book.addRoom(host.getUserID());
-                    case APARTMENT: book.addApartment(host.getUserID());
-                }
-            }
-        }
+    private void addToApartment(Host host) {
+        apartments.add(new Apartment(host.getUserID(), host.getRent(), host.getCity()));
     }
 
     public void remove(String surname) {
-        Iterator<User> it = hosts.iterator();
+        Iterator<User> it = users.iterator();
         while (it.hasNext()) {
             User user = it.next();
             if(user.getSurname().equals(surname)) {
-                it.remove();
-            }
-            removeFromBook(user);
-        }
-        it = clients.iterator();
-        while (it.hasNext()) {
-            User user = it.next();
-            if(user.getSurname().equals(surname)) {
+                if (user instanceof Host) {
+                    Host host = (Host) user;
+                    removeFromApartment(host);
+                }
                 it.remove();
             }
         }
     }
 
-    private void removeFromBook(User user) {
-        for (Book book: cities) {
-            book.removePlace(user.getUserID());
-            book.removeRoom(user.getUserID());
-            book.removeApartment(user.getUserID());
+    private void removeFromApartment(Host host) {
+        for (Apartment apartment : apartments) {
+            if (apartment.getHostID() == host.getUserID()) { apartments.remove(apartment); }
         }
     }
 
     public void notifyAll(String data) {
-        for (User user: hosts) user.update(data);
-        for (User user: clients) user.update(data);
+        for (User user: users) user.update(data);
+    }
+    public void notifyHosts(String data) {
+        for (User user: users) {
+            if (user instanceof Host) {
+                Host host = (Host) user;
+                host.update(data);
+            }
+        }
+    }
+
+    public void notifyClients(String data) {
+        for (User user: users) {
+            if (user instanceof Client) {
+                Client client = (Client) user;
+                client.update(data);
+            }
+        }
     }
 }

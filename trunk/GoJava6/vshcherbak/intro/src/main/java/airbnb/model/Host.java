@@ -24,6 +24,6 @@ public class Host extends User {
     @Override
     public boolean validate() {
         return super.validate() &&
-                Validation.validateCity(city);
+                Validation.validateName(city);
     }
 }
