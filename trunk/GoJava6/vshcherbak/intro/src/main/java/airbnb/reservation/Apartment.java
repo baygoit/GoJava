@@ -79,4 +79,14 @@ public class Apartment implements Booking {
             }
         }
     }
+
+    @Override
+    public String toString() {
+        return "Apartment{" +
+                "apartmentID=" + apartmentID +
+                ", hostID=" + hostID +
+                ", rent=" + rent +
+                ", city='" + city + '\'' +
+                '}';
+    }
 }
