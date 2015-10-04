@@ -28,7 +28,6 @@ public class Apartment {
         this.apartmentType = apartmentType;
         this.city = city;
         this.ownerName = ownerName;
-       // id += 1;
     }
 
     public ApartmentType getApartmentType() {
