@@ -72,6 +72,7 @@ public class User implements Observer{
             log.info("Apartments already created!");
             return apartment;
         } else throw new Exception("You aren't Host");
+
     }
 
     private boolean validateUserData(String name) {
