@@ -1,11 +1,19 @@
 package airbnb.reservation;
 
-/**
- * Created by slavik on 27.09.15.
- */
 import java.util.Date;
 
 public class ReservationDates {
-    Date start;
-    Date end;
+    private int clientID;
+    private Date start;
+    private Date end;
+
+    public ReservationDates(int clientID, Date start, Date end) {
+        this.clientID = clientID;
+        this.start = start;
+        this.end = end;
+    }
+
+    public int getClientID() { return clientID; }
+    public Date getStart() { return start; }
+    public Date getEnd() { return end; }
 }

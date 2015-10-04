@@ -1,9 +1,8 @@
 package com.azuiev.Filter;
 
 import com.azuiev.Books.ApartType;
-import com.azuiev.Books.Book;
+import com.azuiev.Books.Apartment;
 
-import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -11,7 +10,7 @@ import java.util.List;
  * Created by Lera on 28.09.2015.
  */
 public class FilterByApartType implements Filter {
-    public List<Book> books = new LinkedList<Book>();
+    public List<Apartment> books = new LinkedList<Apartment>();
     private ApartType apartType;
     private FilterByCity filter;
 
@@ -21,9 +20,9 @@ public class FilterByApartType implements Filter {
     }
 
     @Override
-    public List<Book> selectBooks() {
+    public List<Apartment> selectBooks() {
         books = filter.selectBooks();
-            for (Book book : books) {
+            for (Apartment book : books) {
                 if (!apartType.equals(book.getApartType())) {
                     books.remove(book);
                 }

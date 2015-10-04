@@ -2,6 +2,8 @@ package airbnb;
 
 import org.junit.Ignore;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runner.Runner;
 
 /**
  * Created by mazha on 9/29/2015.
@@ -16,8 +18,11 @@ public class UserTest {
 //    }
 //
     @Test
-    public void emailValidationTest() throws MyException{
-        User user = new User();
+    public void emailValidationTest() throws MyException {
+//        Host host = new Host();
+        Menu menu = new Menu();
+        menu.startMenu();
+
 //        user.setEmail("anf@mdnf.asd");
 //        user.setEmail("12asd.f@aer");
 //        user.setEmail("adfag.adsd@adsf.afd");

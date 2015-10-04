@@ -1,9 +1,11 @@
 package airbnb;
 
+import java.util.Scanner;
+
 /**
  * Created by mazha on 9/29/2015.
  */
-public class User {
+abstract public class User {
 
     private String name;
     private String surname;
@@ -33,11 +35,14 @@ public class User {
         return email;
     }
 
-// honestly stolen regex for validation, but that's all that copy and paste yet;
+    // honestly stolen regex for validation, but that's all that copy and paste yet;
     public void setEmail(String email) throws MyException {
 
         if(email != null && !email.isEmpty() && email.matches("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$")){
-        this.email = email;
+            this.email = email;
         }else throw new MyException();
     }
+
+
+    abstract void registerNew(Scanner scanner) throws MyException;
 }
