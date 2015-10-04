@@ -44,7 +44,7 @@ public class AirBnBSystem implements SystemInterface {
         listOfObservers.remove(o);
     }
 
-    // here we notify all observers
+    // notification
     public void notifyAllObservers(String cityName) {
         for(Observer observer : listOfObservers) {
             Log.logger.info(observer.getName() + " " + observer.getSurname() + " was notified that city " +
