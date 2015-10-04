@@ -1,65 +1,119 @@
 package airbnb;
-/**
- * Created by slavik on 21.09.2015.
- */
-//import airbnb.common.Observer;
+
 import airbnb.common.Subject;
-
-import java.util.*;
-
-import airbnb.model.Client;
-import airbnb.model.Host;
-//import airbnb.model.RentType;
+import airbnb.model.RentType;
+import airbnb.reservation.Apartment;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.Iterator;
 import airbnb.model.User;
+import airbnb.model.Host;
+import airbnb.model.Client;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class HomeHire implements Subject {
-
-    private List<User> hosts = new ArrayList<>();
-    private List<User> clients = new ArrayList<>();
+    private List<User> users = new ArrayList<>();
     private Set<String> cities = new HashSet<>();
+    private Set<Apartment> apartments = new HashSet<>();
 
     public void register(User user) {
-        if (user.getClass() == Client.class) {
-            Client client = (Client) user;
-            if (client.validate()) {
-                clients.add(client);
-            } else {
-                System.out.println("Please enter valid data");
-            }
-        } else if (user.getClass() == Host.class) {
-            Host host = (Host) user;
-            if (host.validate()) {
-                hosts.add(host);
-                if (cities.add(host.getCity())) {
-                    notifyAll("We have new city: " + host.getCity());
-                }
-            } else {
-                System.out.println("Please enter valid data");
-            }
+        if (user.validate()) {
+            users.add(user);
         } else {
-            System.out.println("Something wrong");
+            System.out.println("Please enter valid data");
+        }
+        if (user instanceof Host) {
+            Host host = (Host) user;
+            addToApartment(host);
+        }
+    }
+
+    public boolean clientToHost(String surname, String city, RentType rent) {
+        for (User user: users) {
+            if (user.getSurname() == surname) {
+                if (user instanceof Client) {
+                    Client client = (Client) user;
+                    Host host = new Host(client.getName(), client.getSurname(), client.getEmail(), city, rent);
+                    users.add(host);
+                    addToApartment(host);
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    private void addToApartment(Host host) {
+        apartments.add(new Apartment(host.getUserID(), host.getRent(), host.getCity()));
+        if (cities.add(host.getCity())) {
+            notifyAll("We have new city: " + host.getCity());
         }
     }
 
     public void remove(String surname) {
-        Iterator<User> it = hosts.iterator();
+        Iterator<User> it = users.iterator();
         while (it.hasNext()) {
-            User u = it.next();
-            if(u.getSurname().equals(surname)) {
-                it.remove();
-            }
-        }
-        it = clients.iterator();
-        while (it.hasNext()) {
-            User u = it.next();
-            if(u.getSurname().equals(surname)) {
+            User user = it.next();
+            if(user.getSurname().equals(surname)) {
+                if (user instanceof Host) {
+                    Host host = (Host) user;
+                    removeFromApartment(host);
+                }
                 it.remove();
             }
         }
     }
 
+    private void removeFromApartment(Host host) {
+        for (Apartment apartment : apartments) {
+            if (apartment.getHostID() == host.getUserID()) { apartments.remove(apartment); }
+        }
+    }
+
+    public int search( String city, RentType rent, String startString, String endString ) throws ParseException {
+        SimpleDateFormat dt = new SimpleDateFormat("yyyy-mm-dd");
+        Date start = dt.parse(startString);
+        Date end = dt.parse(endString);
+        for ( Apartment apartment: apartments ) {
+            if ( apartment.getRent() == rent && apartment.getCity() == city ) {
+                if ( apartment.isAvailable(start, end) ) {
+                    apartment.makeReservation(1, start, end);
+                    return apartment.getApartmentID();
+                }
+            }
+        }
+        return -1;
+    }
+
     public void notifyAll(String data) {
-        for (User user: hosts) user.update(data);
-        for (User user: clients) user.update(data);
+        for (User user: users) user.update(data);
+    }
+
+    public void notifyHosts(String data) {
+        for (User user: users) {
+            if (user instanceof Host) {
+                Host host = (Host) user;
+                host.update(data);
+            }
+        }
+    }
+
+    public void notifyClients(String data) {
+        for (User user: users) {
+            if (user instanceof Client) {
+                Client client = (Client) user;
+                client.update(data);
+            }
+        }
+    }
+
+    public void getAllApartment() {
+        for ( Apartment apartment: apartments ) {
+            System.out.println(apartment);
+        }
     }
 }

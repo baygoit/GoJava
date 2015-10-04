@@ -7,5 +7,4 @@ public class Client extends User {
     public Client(String name, String surname, String email) throws Exception {
         super(name, surname, email);
     }
-
 }

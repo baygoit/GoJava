@@ -1,34 +1,16 @@
-Sep 27, 2015 9:11:11 PM com.airbnb.system.AirBnBSystem registerClient
-INFO:  -- Vlad Trotsenko was registered as CLIENT
-Sep 27, 2015 9:11:11 PM com.airbnb.system.AirBnBSystem registerClient
-INFO:  -- Tanya Odynets was registered as CLIENT
-Sep 27, 2015 9:11:11 PM com.airbnb.system.AirBnBSystem registerClient
-INFO:  -- Dennis Petrenko was registered as CLIENT
-Sep 27, 2015 9:11:11 PM com.airbnb.system.AirBnBSystem validateDate
-WARNING: Validation of date failed!
-Sep 27, 2015 9:11:11 PM com.airbnb.system.AirBnBSystem registerHost
-INFO:  -- Illya Litvin FAILED registration as HOST
-Sep 27, 2015 9:11:11 PM com.airbnb.system.AirBnBSystem notifyAllObservers
-INFO: Kirill Vaschen was notified that city Lviv was added.
-Sep 27, 2015 9:11:11 PM com.airbnb.system.AirBnBSystem notifyAllObservers
-INFO: Vlad Trotsenko was notified that city Lviv was added.
-Sep 27, 2015 9:11:11 PM com.airbnb.system.AirBnBSystem notifyAllObservers
-INFO: Tanya Odynets was notified that city Lviv was added.
-Sep 27, 2015 9:11:11 PM com.airbnb.system.AirBnBSystem notifyAllObservers
-INFO: Dennis Petrenko was notified that city Lviv was added.
-Sep 27, 2015 9:11:11 PM com.airbnb.system.AirBnBSystem registerHost
-INFO:  -- Kirill Vaschen was registered as CLIENT
-Sep 27, 2015 9:11:11 PM com.airbnb.system.AirBnBSystem notifyAllObservers
-INFO: Kirill Vaschen was notified that city Kyiv was added.
-Sep 27, 2015 9:11:11 PM com.airbnb.system.AirBnBSystem notifyAllObservers
-INFO: Vlad Trotsenko was notified that city Kyiv was added.
-Sep 27, 2015 9:11:11 PM com.airbnb.system.AirBnBSystem notifyAllObservers
-INFO: Artem Nikolaev was notified that city Kyiv was added.
-Sep 27, 2015 9:11:11 PM com.airbnb.system.AirBnBSystem notifyAllObservers
-INFO: Tanya Odynets was notified that city Kyiv was added.
-Sep 27, 2015 9:11:11 PM com.airbnb.system.AirBnBSystem notifyAllObservers
-INFO: Dennis Petrenko was notified that city Kyiv was added.
-Sep 27, 2015 9:11:11 PM com.airbnb.system.AirBnBSystem registerHost
-INFO:  -- Artem Nikolaev was registered as CLIENT
-Sep 27, 2015 9:11:11 PM com.airbnb.system.AirBnBSystem registerClient
-INFO:  -- George Katuasvil was registered as CLIENT
+Oct 04, 2015 1:38:56 PM com.airbnb.system.AirBnBSystem registerUser
+INFO:  -- Sasha Ivanova was registered!
+Oct 04, 2015 1:38:56 PM com.airbnb.system.AirBnBSystem notifyAllObservers
+INFO: Sasha Ivanova was notified that city Kyiv was added.
+Oct 04, 2015 1:38:56 PM com.airbnb.user.User becomeHost
+INFO:  -- Sasha Ivanova became HOST!
+Oct 04, 2015 1:38:56 PM com.airbnb.system.AirBnBSystem registerUser
+INFO:  -- Sergii Smirnoff was registered!
+Oct 04, 2015 1:38:56 PM com.airbnb.system.AirBnBSystem notifyAllObservers
+INFO: Sergii Smirnoff was notified that city Kyiv was added.
+Oct 04, 2015 1:38:56 PM com.airbnb.system.AirBnBSystem notifyAllObservers
+INFO: Sasha Ivanova was notified that city Kyiv was added.
+Oct 04, 2015 1:38:56 PM com.airbnb.user.User becomeHost
+INFO:  -- Sergii Smirnoff became HOST!
+Oct 04, 2015 1:38:56 PM com.airbnb.user.User registerApartment
+INFO: New apartment in Kyiv by Ivanova was registered

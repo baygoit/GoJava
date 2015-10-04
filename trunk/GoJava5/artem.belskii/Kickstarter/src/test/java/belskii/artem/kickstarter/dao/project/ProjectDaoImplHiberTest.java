@@ -10,11 +10,7 @@ public class ProjectDaoImplHiberTest {
 	@Test
 	public void testAddProject() {
 		ProjectDao project = new ProjectDaoImplHiber();
-		Project projectForSave= new Project("Hiber test", new Long(1), new Long(1), "28.07.2015",	"30.07.2015", "https://www.youtube.com/watch?v=uC0pqWX3yB8", 1, "Project details");
-		projectForSave.asqAQuestion("some test question");
-		projectForSave.addPaymetVariants(100L, "thanks :)");
-		project.addProject(projectForSave);
-		
+		project.addProject(new Project("Hiber test", new Long(1), new Long(1), "28.07.2015",	"30.07.2015", "https://www.youtube.com/watch?v=uC0pqWX3yB8", 1, "Project details"));
 	}
 
 	@Test

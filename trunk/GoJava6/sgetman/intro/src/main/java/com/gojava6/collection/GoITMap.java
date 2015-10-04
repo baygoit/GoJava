@@ -1,6 +1,7 @@
 package com.gojava6.collection;
 
 import java.util.LinkedList;
+import java.util.NoSuchElementException;
 
 /**
  * Created by sergiigetman on 9/23/15.
@@ -57,13 +58,17 @@ public class GoITMap {
         }
     }
 
+    public Object remove(Object key) {
+        throw new NoSuchElementException("not yet implemented");
+    }
+
     public static void main(String[] args) {
         GoITMap map = new GoITMap();
         map.put(new Integer(1),"One");
         map.put(new Integer(1),"One");
         map.put(new Integer(2),"Two");
         map.put(new Integer(11),"Eleven");
-        System.out.println(map.get(new Integer(1)));
+        System.out.println("assumed value: " + map.get(new Integer(1)));
         System.out.println(map.get(new Integer(2)));
         System.out.println(map.get(new Integer(1)));
         System.out.println(map.get(new Integer(11)));

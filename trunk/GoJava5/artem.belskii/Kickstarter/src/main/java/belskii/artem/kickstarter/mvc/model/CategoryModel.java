@@ -14,14 +14,6 @@ public class CategoryModel {
     private CategoryDao categoryDao = (CategoryDao) context.getBean("categoryDaoImpl");
     private String testValue;
 
-//    @Autowired
-//	public void setTestValue(String value) {
-//    	System.out.println("=============================================================");
-//    	System.out.println(value);
-//    	System.out.println("=============================================================");
-//		this.testValue=value;
-//	}
-
 	public void addCategory(String categoryName) {
 		categoryDao.addCategory(categoryName);
 	}
@@ -29,9 +21,4 @@ public class CategoryModel {
 	public Map<Integer, String> getCategoryList() {
 		return categoryDao.getCategoryList();
 	}
-
-	public int getCaterogyIdByName(String categoryName) {
-		return categoryDao.getCaterogyIdByName(categoryName);
-	}
-
 }
