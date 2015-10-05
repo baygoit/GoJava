@@ -1,7 +1,6 @@
 package com.airbnb;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by Игорь on 05.10.2015.

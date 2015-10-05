@@ -60,7 +60,7 @@ public class User implements Observer{
         log.info("Reservation complete!");
     }
 
-    public Apartment createApartment(Apartment.ApartmentType apartmentType, String city) throws Exception {
+    public Apartment addApartment(Apartment.ApartmentType apartmentType, String city) throws Exception {
         if (Application.getUser().contains(this) == false){
             throw new Exception("You're not registered!");
         }

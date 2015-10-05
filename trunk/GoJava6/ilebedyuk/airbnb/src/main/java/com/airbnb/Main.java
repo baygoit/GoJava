@@ -1,8 +1,5 @@
 package com.airbnb;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Created by Игорь on 21.09.2015.
  */
@@ -21,9 +18,9 @@ public class Main {
             airbnb.register(host2);
 
 
-          // Apartment room1 = client1.createApartment(Apartment.ApartmentType.Room, "Kiev");
-           Apartment place1 = host1.createApartment(Apartment.ApartmentType.Place, "Lviv");
-           Apartment room2 = host1.createApartment(Apartment.ApartmentType.Room, "Kiev");
+          // Apartment room1 = client1.addApartment(Apartment.ApartmentType.Room, "Kiev");
+           Apartment place1 = host1.addApartment(Apartment.ApartmentType.Place, "Lviv");
+           Apartment room2 = host1.addApartment(Apartment.ApartmentType.Room, "Kiev");
 
             ReservationDate period1 = new ReservationDate(11,17);
            // System.out.println(place1.getOwnerName());
