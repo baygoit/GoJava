@@ -1,29 +1,37 @@
 package airbnb.model;
 
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
+
 public class Host extends User {
-    private String city;
-    private RentType rent;
-    public Host(String name, String surname, String email, String city, RentType rent ) {
+    private Set<Integer> apartments = new HashSet<>();
+    public Host(String name, String surname, String email ) {
         super(name, surname, email);
-        this.city = city;
-        this.rent = rent;
     }
 
-    public String getCity() {
-        return city;
+    public void addApartment(int apartmentID) {
+        apartments.add(apartmentID);
     }
-    public RentType getRent() { return rent; }
-    public void setCity(String data) { city = data; }
-    public void setRent(RentType data) { rent = data; }
+
+    public void delApartment(int apartmentID) {
+        apartments.remove(apartmentID);
+    /*    Iterator<Integer> it = apartments.iterator();
+        while (it.hasNext()) {
+            Integer ID = it.next();
+            if ( ID == apartmentID) {
+                it.remove();
+            }
+        }*/
+    }
 
     @Override
     public String toString() {
-        return super.toString() + "city" + city + "rent" + rent;
+        return super.toString() + "I am a host";
     }
 
     @Override
     public boolean validate() {
-        return super.validate() &&
-                Validation.validateName(city);
+        return super.validate();
     }
 }
