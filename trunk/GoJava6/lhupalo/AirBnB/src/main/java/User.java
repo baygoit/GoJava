@@ -1,11 +1,11 @@
 /**
  * Created by L Hupalo on 23.09.2015.
  */
-public class User implements Observer {
+public class User {
     private String name;
     private String surname;
     private String email;
-    //ValidatorData validatorData = new ValidatorData();
+    boolean isHost = false;
 
     public User() {
 
@@ -13,7 +13,9 @@ public class User implements Observer {
 
     public User(String name, String surname, String email) {
 
-        if (ValidatorData.validateWords(name) == true && ValidatorData.validateWords(surname) == true && ValidatorData.validateEmail(email) == true) {
+        if (ValidatorData.validateWords(name) == true
+                && ValidatorData.validateWords(surname) == true
+                && ValidatorData.validateEmail(email) == true) {
             this.name = name;
             this.surname = surname;
             this.email = email;
@@ -50,7 +52,13 @@ public class User implements Observer {
             this.email = email;
         }
     }
-    public void update(String message) {
-        System.out.println( "Hello  " + message);
+
+
+
+    @Override
+    public String toString() {
+        String strng = name + " " +  surname+ " " +  email +" ;";
+        return strng ;
     }
+
 }

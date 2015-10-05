@@ -1,9 +1,9 @@
 /**
  * Created by  L Hupalo on 23.09.2015.
  */
-public class Client extends User {
+public class Client extends User implements Observer {
 
-
+    boolean isHost = false;
 
     public Client() {
         super();
@@ -14,8 +14,7 @@ public class Client extends User {
     }
 
     public void update(String message) {
-        System.out.println("Hello  " + message);
+        System.out.println("Hello  " + this.getName() + message);
     }
-
 
 }
