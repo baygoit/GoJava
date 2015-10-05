@@ -18,7 +18,7 @@ public class App
         airbnb.registerClient("Roman","Iovenko","email2@gmail.com");
         airbnb.registerHost("Vova", "New", "email3@gmail.com");
         airbnb.registerHost("Sasha","Prime","email4@gmail.com");
-        //airbnb.notifyAll("Done");
+        airbnb.notifyAll("Done");
         airbnb.removeClient(1);
 
     }

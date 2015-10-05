@@ -3,10 +3,7 @@ import com.Airbnb.app.common.Observer;
 import com.Airbnb.app.common.Subject;
 import com.Airbnb.app.model.*;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by romanroma on 26.09.15.
@@ -40,12 +37,14 @@ public class Airbnb implements Subject {
     }
 
     public void notifyAll (String message){
-        /*for (Observer observer : User.clients){
+        List<User> usersList = new LinkedList<User>(User.clients.values());
+        List<User> hostsList = new LinkedList<User>(User.hosts.values());
+        for (Observer observer : usersList){
             observer.update(message);
         }
-        for (Observer observer : hostList){
+        for (Observer observer : hostsList){
             observer.update(message);
-        }*/
+        }
     }
 
     public int createApartment (int hostId, String city, ApartType apartType, boolean reserved){

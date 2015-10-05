@@ -13,5 +13,5 @@ public interface Subject {
     void removeClient (int id);
     void removeHost (int id);
     int createApartment (int hostId, String city, ApartType apartType, boolean reserved);
-    //void notifyAll (String message);
+    void notifyAll (String message);
 }
