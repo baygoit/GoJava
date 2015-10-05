@@ -1,9 +1,5 @@
 package home_work.oneswipetest;
 
-/**
- * Created by slavik on 24.09.15.
- */
-
 import org.junit.Before;
 import org.junit.Test;
 

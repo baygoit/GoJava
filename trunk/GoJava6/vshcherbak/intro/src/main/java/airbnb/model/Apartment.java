@@ -1,19 +1,11 @@
-package airbnb.reservation;
+package airbnb.model;
 
-import airbnb.common.Booking;
-import airbnb.model.RentType;
-
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
-public class Apartment implements Booking {
+public class Apartment {
     private static int totalApartmentID = 0;
     private int apartmentID;
     private int hostID;
     private RentType rent;
     private String city;
-    private List<ReservationDates> reservation = new ArrayList<>();
 
     public Apartment(int hostID, RentType rent ,String city) {
         this.city = city;
@@ -59,28 +51,6 @@ public class Apartment implements Booking {
     }
 
     @Override
-    public boolean isAvailable(Date start, Date end) {
-        for ( ReservationDates reserv: reservation ) {
-            if (start.compareTo(reserv.getEnd()) < 0 || end.compareTo(reserv.getStart()) > 0 ) {
-                return  false;
-            }
-        }
-        return true;
-    }
-
-    public void makeReservation(int clientID, Date start, Date end) {
-        reservation.add(new ReservationDates(clientID, start, end));
-    }
-
-    public void clean(Date date) {
-        for ( ReservationDates reserv: reservation ) {
-            if (date.compareTo(reserv.getEnd()) > 0 ) {
-                reservation.remove(reserv);
-            }
-        }
-    }
-
-    @Override
     public String toString() {
         return "Apartment{" +
                 "apartmentID=" + apartmentID +
@@ -88,5 +58,25 @@ public class Apartment implements Booking {
                 ", rent=" + rent +
                 ", city='" + city + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Apartment)) return false;
+        Apartment apartment = (Apartment) o;
+        if (apartmentID != apartment.apartmentID) return false;
+        if (hostID != apartment.hostID) return false;
+        if (rent != apartment.rent) return false;
+        return city.equals(apartment.city);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = apartmentID;
+        result = 31 * result + hostID;
+        result = 31 * result + rent.hashCode();
+        result = 31 * result + city.hashCode();
+        return result;
     }
 }
