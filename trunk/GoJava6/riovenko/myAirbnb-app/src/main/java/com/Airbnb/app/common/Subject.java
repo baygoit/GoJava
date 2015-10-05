@@ -1,4 +1,7 @@
-package com.Airbnb.app;
+package com.Airbnb.app.common;
+
+import com.Airbnb.app.model.Client;
+import com.Airbnb.app.model.Host;
 
 /**
  * Created by romanroma on 26.09.15.

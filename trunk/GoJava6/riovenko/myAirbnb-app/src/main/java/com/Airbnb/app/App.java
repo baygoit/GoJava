@@ -1,5 +1,9 @@
 package com.Airbnb.app;
 
+import com.Airbnb.app.model.ApartType;
+import com.Airbnb.app.model.Client;
+import com.Airbnb.app.model.Host;
+
 /**
  * Hello world!
  *

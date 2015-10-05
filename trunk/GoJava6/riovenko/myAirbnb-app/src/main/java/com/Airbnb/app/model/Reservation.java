@@ -1,4 +1,4 @@
-package com.Airbnb.app;
+package com.Airbnb.app.model;
 
 /**
  * Created by romanroma on 28.09.15.

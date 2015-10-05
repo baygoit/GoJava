@@ -1,4 +1,9 @@
 package com.Airbnb.app;
+import com.Airbnb.app.common.Observer;
+import com.Airbnb.app.common.Subject;
+import com.Airbnb.app.model.Client;
+import com.Airbnb.app.model.Host;
+
 import java.util.List;
 import java.util.ArrayList;
 
@@ -25,7 +30,7 @@ public class Airbnb implements Subject {
     }
 
     public void removeClient (int id){
-        clientList.remove(clientList.get(id)));
+        clientList.remove(clientList.get(id));
     }
 
     public void removeHost (int id){
