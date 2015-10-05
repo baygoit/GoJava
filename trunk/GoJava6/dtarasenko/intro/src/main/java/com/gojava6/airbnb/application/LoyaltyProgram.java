@@ -10,11 +10,11 @@ public class LoyaltyProgram implements Subject {
 
     private String loyaltyProgramName;
     private boolean available;
-    private List<Observer> listOfObservers = new ArrayList<Observer>();
+    private List<Observer> observerList = new ArrayList<Observer>();
 
     public void setAvailable(boolean available) {
         this.available = available;
-        if (available == true) {
+        if (available) {
             notifyObservers();
         }
     }
@@ -25,20 +25,19 @@ public class LoyaltyProgram implements Subject {
 
     @Override
     public void registerObserver(Observer observer) {
-        listOfObservers.add(observer);
+        observerList.add(observer);
     }
 
     @Override
     public void removeObserver(Observer observer) {
-        listOfObservers.remove(observer);
+        observerList.remove(observer);
     }
 
     @Override
     public void notifyObservers() {
-        System.out.println();
-        System.out.println("Notifying all registered clients about new loyalty programs");
+        System.out.println("\nNotifying all registered clients about new loyalty programs:");
 
-        for (Observer observer : listOfObservers) {
+        for (Observer observer : observerList) {
             observer.update(loyaltyProgramName);
         }
     }
