@@ -1,21 +1,19 @@
 package com.Airbnb.app;
 import com.Airbnb.app.common.Observer;
 import com.Airbnb.app.common.Subject;
-import com.Airbnb.app.model.ApartType;
-import com.Airbnb.app.model.Client;
-import com.Airbnb.app.model.Host;
-import com.Airbnb.app.model.User;
+import com.Airbnb.app.model.*;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Map;
 
 /**
  * Created by romanroma on 26.09.15.
  */
 public class Airbnb implements Subject {
 
-    //public List<Host> hostList = new ArrayList<Host>();
-    //public List<Client> clientList = new ArrayList<Client>();
+    public static Map<Integer, Apartment> apartments = new HashMap<Integer, Apartment>();
 
     public void registerHost (String name, String surname, String email){
         User host = new Host(name, surname, email);
@@ -51,6 +49,20 @@ public class Airbnb implements Subject {
     }
 
     public int createApartment (int hostId, String city, ApartType apartType, boolean reserved){
+        if (hostId<1) {
+            return -1;
+        }
+
+        Host host = (Host) User.hosts.get(hostId);
+        if (host == null){
+            return -1;
+        }
+
+        Apartment apartment = new Apartment(host,city,apartType,reserved);
+        if (apartment.validation()){
+            apartments.put(apartment.getId(),apartment);
+            return apartment.getId();
+        }
         return -1;
     }
 
