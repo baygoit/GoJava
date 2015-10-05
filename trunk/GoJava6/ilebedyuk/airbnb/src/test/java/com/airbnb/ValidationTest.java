@@ -22,21 +22,21 @@ public class ValidationTest {
 
     @Test
     public void TestValidateName() throws Exception {
-        User user = new Client(name, surName, email);
+        User user = new User(name, surName, email);
         String resultName = user.getName();
         assertEquals(name, resultName);
     }
 
     @Test
     public void TestValidateSurname() throws Exception {
-        User user = new Client(name, surName, email);
+        User user = new User(name, surName, email);
         String resultSurname = user.getSurname();
         assertEquals(surName, resultSurname);
     }
 
     @Test
     public void TestValidateEmail() throws Exception {
-        User user = new Client(name, surName, email);
+        User user = new User(name, surName, email);
         String resultEmail = user.getEmail();
         assertEquals(email, resultEmail);
     }

@@ -3,11 +3,11 @@ package com.airbnb;
 /**
  * Created by Игорь on 27.09.2015.
  */
-public class Date {
+public class ReservationDate {
     private long dateBegin;
     private long dateEnd;
 
-    public Date(long dateBegin, long dateEnd) {
+    public ReservationDate(long dateBegin, long dateEnd) {
         this.dateBegin = dateBegin;
         this.dateEnd = dateEnd;
     }

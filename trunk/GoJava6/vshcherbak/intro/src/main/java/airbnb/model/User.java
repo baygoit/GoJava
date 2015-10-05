@@ -1,8 +1,6 @@
 package airbnb.model;
 
-import airbnb.common.Observer;
-
-public class User implements Observer {
+public class User {
     private static int nextUserID = 0;
     private int userID;
     private String name, surname, email;
@@ -14,9 +12,6 @@ public class User implements Observer {
         userID = nextUserID++;
     }
 
-    public void update(String message) {
-        System.out.println("send message: " + message + " to " + email);
-    }
 
     public String getName() {
         return name;

@@ -1,4 +1,4 @@
-package airbnb.reservation;
+package airbnb.accounting;
 /*  died during refactoring
 
 import airbnb.model.RentType;

@@ -1,5 +1,5 @@
 package airbnb;
-
+/*
 import airbnb.model.Client;
 import airbnb.model.Host;
 import airbnb.model.RentType;
@@ -20,11 +20,11 @@ public class App {
         hire.register(user);
         user =  new Host("Angle", "Baker", "baker@site.com", "Kiev", RentType.APARTMENT);
         hire.register(user);
-        /*
+
         hire.notifyAll("ready");
         hire.remove("Small");
         hire.notifyAll("minus one");
-        */
+
         int id = hire.search("Kiev", RentType.ROOM, "2015-10-05", "2015-10-10");
         System.out.println(id);
         id = hire.search("Kiev", RentType.APARTMENT, "2015-10-05", "2015-10-10");
@@ -37,3 +37,4 @@ public class App {
         hire.getAllApartment();
     }
 }
+*/
