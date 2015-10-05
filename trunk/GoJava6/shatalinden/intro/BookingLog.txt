@@ -1,0 +1,12 @@
+Successful. Kiev. Host: John. ROOM.
+	Dates from: 10, 2, 2016 to: 20, 2, 2016.
+	Time of request - Sun Oct 04 16:12:05 EEST 2015.
+Successful. Kiev. Host: Tony. PLACE.
+	Dates from: 9, 2, 2016 to: 19, 2, 2016.
+	Time of request - Sun Oct 04 16:12:05 EEST 2015.
+Successful. New-York. Host: Stan. APARTMENT.
+	Dates from: 27, 1, 2016 to: 5, 3, 2016.
+	Time of request - Sun Oct 04 16:12:05 EEST 2015.
+Failed. Kiev. Host: John. ROOM.
+	Dates from: 1, 1, 2015 to: 2, 7, 2016.
+	Time of request - Sun Oct 04 16:12:05 EEST 2015.

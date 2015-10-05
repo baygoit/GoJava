@@ -5,12 +5,16 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.mapping.List;
+
+import belskii.artem.kickstarter.dao.project.Project;
 
 public class CategoryDaoImplHiber implements CategoryDao {
 	SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
@@ -97,24 +101,6 @@ public class CategoryDaoImplHiber implements CategoryDao {
 			session.close();
 		}
 		return category.getCategoryName();
-	}
-
-	@Override
-	public int getCaterogyIdByName(String categoryName) {
-		int result = -1;
-		Transaction transaction = null;
-		Session session = null;
-		try {
-			session = sessionFactory.openSession();
-			transaction = session.beginTransaction();
-			result = (int) session.createCriteria(Category.class).add(Restrictions.eq("categoryName", categoryName)).uniqueResult();
-			transaction.commit();
-		} catch (Exception e) {
-			transaction.rollback();
-		} finally {
-			session.close();
-		}
-		return result;
 	}
 
 	@Override

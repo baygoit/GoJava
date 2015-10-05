@@ -5,14 +5,13 @@ public class PascalTriangle {
     private int level;
 
     public PascalTriangle(int level) {
-        this.level = level;
+        this.level = level; //always check for validity as soon as possible. level < 0 should probably throw exception
     }
 
     public int[][] calculateTriangle() {
-
-        if (level < 0) {
+        if (level < 0) { //check prev. comment
             return null;
-        } else {
+        } else { //why do you need else clause if you've returned from if?
             int[][] triangle = new int[level][];
 
             for (int row = 0; row < triangle.length; row++) {

@@ -5,32 +5,29 @@ package com.gojava6;
  */
 public class PascalTriangle {
     private int level;
-    private long C[][];
+    private int triangle[][];
 
         public PascalTriangle(int level) {
-            if(level > 66){
-                throw new RuntimeException("Data overflow");
-            }
 
             this.level = level;
-
+            this.calculateTriangle();
         }
 
     public void show(){
-        for (int n = 0; n <= level; n++) {
+        for (int n = 0; n < level; n++) {
             for (int k = 0; k <= n; k++) {
-                System.out.print(C[n][k] + " ");
+                System.out.print(triangle[n][k] + " ");
             }
             System.out.println();
         }
     }
 
     public int[][] calculateTriangle() {
-        C = new long[level+1][level+1];
-        for (int n = 0; n <= level; n++) {
-            C[n][0] = C[n][n] = 1;
-            for (int k = 1; k < n; k++) {
-                C[n][k] = C[n-1][k-1] + C[n-1][k];
+        triangle = new int[level][level+1];
+        for (int n = 0; n < level; n++) {
+            triangle[n][0] = triangle[n][n] = 1;
+            for (int k = 1; k <= n; k++) {
+                triangle[n][k] = triangle[n-1][k-1] + triangle[n-1][k];
             }
         }
         return null;
