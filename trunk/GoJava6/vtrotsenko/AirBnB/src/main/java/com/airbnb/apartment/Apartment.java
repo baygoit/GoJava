@@ -9,9 +9,15 @@ public class Apartment {
     private LocalDate firstDayAvailable;
     private LocalDate lastDayAvailable;
     private ApartmentType apartmentType;
-    private boolean isAvailable = true;
+    private boolean isAvailable;
 
-    public Apartment() {}
+    public Apartment(ApartmentType apartmentType,
+                     LocalDate firstDayAvailable, LocalDate lastDayAvailable) {
+        this.isAvailable = true;
+        this.apartmentType = apartmentType;
+        this.firstDayAvailable = firstDayAvailable;
+        this.lastDayAvailable = lastDayAvailable;
+    }
 
     public boolean isAvailable() {
         return isAvailable;

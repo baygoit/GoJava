@@ -31,10 +31,12 @@ public class OneSwipeArrayTest {
     public void testSolutionTwo() {
         assertFalse(oneSwipeArray.solution(falseArray));
     }
+
     @Test(expected = IllegalArgumentException.class)
     public void testSolutionNull() {
         oneSwipeArray.solution(null);
     }
+
     @Test(expected = IllegalArgumentException.class)
     public void testSolutionLessThanTwo() {
         oneSwipeArray.solution(new int[1]);

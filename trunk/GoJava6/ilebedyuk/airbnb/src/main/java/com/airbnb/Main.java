@@ -1,55 +1,54 @@
 package com.airbnb;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Created by Игорь on 21.09.2015.
  */
 public class Main {
     public static void main(String[] args) {
         try {
-            User client1 = new Client("Vasil", "Boyko", "jhg@gmail.com");
-            User client2 = new Client("Igor", "Lebedyukk", "igor@gmail.com");
-            User host1 = new Host("Petro", "Limar", "juy@gmail.com", "Kiev");
-            User host2 = new Host("Dima", "Tarasenko", "dima@gmail.com", "Lviv");
+            User client1 = new User("Vasil", "Boyko", "jhg@gmail.com");
+            User client2 = new User("Igor", "Lebedyukk", "igor@gmail.com");
+            User host1 = new User("Petro", "Limar", "juy@gmail.com", "Kiev");
+            User host2 = new User("Dima", "Tarasenko", "dima@gmail.com", "Lviv");
 
-            App airbnb = new App();
+            Application airbnb = new Application();
             airbnb.register(client1);
             //airbnb.register(client2);
             airbnb.register(host1);
             airbnb.register(host2);
 
-            //airbnb.getClients();
-            //airbnb.getHosts();
+
+          // Apartment room1 = client1.addApartment(Apartment.ApartmentType.Room, "Kiev");
+           Apartment place1 = host1.addApartment(Apartment.ApartmentType.Place, "Lviv");
+           Apartment room2 = host1.addApartment(Apartment.ApartmentType.Room, "Kiev");
+
+            ReservationDate period1 = new ReservationDate(11,17);
+           // System.out.println(place1.getOwnerName());
+            System.out.println(place1.isAvaible(period1));
+
+            client1.makeReservation(place1, period1);
+            System.out.println(place1.isAvaible(period1));
+
+            Search search = new Search();
+
+            search.searchByCity(search.getAllApartments(), "Lviv");
+            search.searchByDate(search.getAllApartments(), period1);
 
 
-            Apartment room1 = airbnb.createApartment(Apartment.ApartmentType.Room, "Kiev", host1);
-            Apartment place1 = airbnb.createApartment(Apartment.ApartmentType.Place, "Lviv", host1);
-            Apartment place2 = airbnb.createApartment(Apartment.ApartmentType.Place, "Lviv", host2);
-
-            //airbnb.getApartments();
-            Date period1 = new Date(11,17);
-            Date period2 = new Date(16,20);
-
-            //System.out.println(airbnb.IsAvaible(room1, period1));
-
-            airbnb.makeReservation(client1, room1, period1);
-
-            //System.out.println(airbnb.IsAvaible(room1, period1));
+//            Date period2 = new Date(16,20);
 
             //List<Apartment> searchApartments = new ArrayList<Apartment>();
 
             //airbnb.searchByOwner(airbnb.searchByCity(airbnb.getApartments(), "Lviv"), host1);
-             airbnb.searchByDate(airbnb.getApartments(), period2);
+//             airbnb.searchByDate(airbnb.getApartments(), period2);
 
-//            System.out.println(airbnb.IsAvaible(room1, period2));
+//            System.out.println(airbnb.isAvaible(room1, period2));
 
-            NewsSubscribe newsSubscribe = new NewsSubscribe();
-            newsSubscribe.registerObserver(client1);
-            newsSubscribe.registerObserver(client2);
-
-            newsSubscribe.notifyObservers();
+//            NewsSubscribe newsSubscribe = new NewsSubscribe();
+//            newsSubscribe.registerObserver(client1);
+//            newsSubscribe.registerObserver(client2);
+//
+//            newsSubscribe.notifyObservers();
 
 //           newsSubscribe.removeObserver(client1);
 //           newsSubscribe.notifyObservers();

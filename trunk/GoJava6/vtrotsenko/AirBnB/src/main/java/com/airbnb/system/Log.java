@@ -26,5 +26,6 @@ public class Log {
         catch (Exception ex) {
             System.out.println("Some problem with Logger");
         }
+
     }
 }
