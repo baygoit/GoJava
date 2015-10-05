@@ -7,26 +7,13 @@ import com.Airbnb.app.validation.Validator;
  */
 public class Host extends User {
 
-    private String city;
-    private ApartType apartmentType;
-
-    public Host(String name, String surname, String email, String city, ApartType apartmentType){
+    public Host(String name, String surname, String email){
         super(name, surname, email);
-        this.city = city;
-        this.apartmentType = apartmentType;
     }
 
-    public String getCity(){
-        return city;
-    }
-
-    public ApartType getApartmentType(){
-        return apartmentType;
-    }
-
-    @Override
-    public boolean validation(){
-        return super.validation() && Validator.validateUserCity(city);
-    }
+   // @Override
+   // public boolean validation(){
+   //     return super.validation() && Validator.validateUserCity(city);
+   // }
 
 }

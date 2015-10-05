@@ -3,6 +3,9 @@ package com.Airbnb.app.model;
 import com.Airbnb.app.common.Observer;
 import com.Airbnb.app.validation.Validator;
 
+import java.util.Map;
+import java.util.HashMap;
+
 /**
  * Created by romanroma on 26.09.15.
  */
@@ -12,6 +15,9 @@ public abstract class User implements Observer {
     private String name;
     private String surname;
     private String email;
+    public static Map<Integer, User> clients = new HashMap<Integer, User>();
+    public static Map<Integer, User> hosts = new HashMap<Integer, User>();
+    public static Map<Integer, Apartment> apartments = new HashMap<Integer, Apartment>();
 
     public User (String name, String surname, String email){
         this.id = ++user_id;
