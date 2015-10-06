@@ -15,4 +15,8 @@ public enum Fruits implements EnumHelper{
     public String getName() {
         return fruit;
     }
+
+    public Fruits getByName(String name) {
+        return this;
+    }
 }
