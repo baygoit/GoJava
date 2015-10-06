@@ -1,5 +1,9 @@
 package com.Airbnb.app;
 
+import com.Airbnb.app.model.ApartType;
+import com.Airbnb.app.model.Client;
+import com.Airbnb.app.model.Host;
+
 /**
  * Hello world!
  *
@@ -10,10 +14,11 @@ public class App
 
         Airbnb airbnb = new Airbnb();
 
-        airbnb.registerClient(new Client("Max", "Mad", "email@gmail.com"));
-        airbnb.registerClient(new Client("Roman","Iovenko","email2@gmail.com"));
-        airbnb.registerHost(new Host("Vova", "New", "email3@gmail.com", "Kyiv", ApartType.APARTMENT));
-        airbnb.registerHost(new Host("Sasha","Prime","email4@gmail.com","Odessa", ApartType.ROOM));
+        airbnb.registerClient("Max", "Mad", "email@gmail.com");
+        airbnb.registerClient("Roman","Iovenko","email2@gmail.com");
+        airbnb.registerHost("Vova", "New", "email3@gmail.com");
+        airbnb.registerHost("Sasha", "Prime", "email4@gmail.com");
+        airbnb.createApartment(1, "Kyiv", ApartType.ROOM, false);
         airbnb.notifyAll("Done");
         airbnb.removeClient(1);
 

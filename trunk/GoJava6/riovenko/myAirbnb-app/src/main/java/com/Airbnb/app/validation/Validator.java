@@ -1,4 +1,4 @@
-package com.Airbnb.app;
+package com.Airbnb.app.validation;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
