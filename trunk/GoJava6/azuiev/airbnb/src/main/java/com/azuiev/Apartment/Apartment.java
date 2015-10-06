@@ -1,7 +1,7 @@
-package com.azuiev.Books;
+package com.azuiev.Apartment;
 
-import com.azuiev.App;
-import com.azuiev.Users.User;
+import com.azuiev.AirBnB;
+import com.azuiev.User.User;
 import com.azuiev.Validator;
 
 import java.text.SimpleDateFormat;
@@ -28,18 +28,18 @@ public class Apartment implements Comparable<Apartment> {
         Validator v = Validator.getInstance();
 
         if (!v.validateApartment(apartment)) {
-            App.log.error("failed to create - " + apartment);
+            AirBnB.log.error("failed to create - " + apartment);
         } else {
-            App.log.info("successfully created - " + apartment);
+            AirBnB.log.info("successfully created - " + apartment);
             if (apartments.add(apartment)) {
-                App.log.info("added into listBooks - " + apartment);
+                AirBnB.log.info("added into listBooks - " + apartment);
             } else {
-                App.log.error("already in listBooks - " + apartment);
+                AirBnB.log.error("already in listBooks - " + apartment);
             }
             if (!cities.contains(city)){
                 cities.add(city);
-                App.log.info("added new city - " + city);
-                App.sportLife.cityAdded(city);
+                AirBnB.log.info("added new city - " + city);
+                AirBnB.sportLife.cityAdded(city);
             }
             return apartment;
         }
@@ -85,12 +85,12 @@ public class Apartment implements Comparable<Apartment> {
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd G 'at' HH:mm:ss z");
         if (!isFree(start, end)) {
-            App.log.error("User - " + this + "can`t reserve apartment in period {" + dateFormat.format(start) + ":" + dateFormat.format(end));
+            AirBnB.log.error("User - " + this + "can`t reserve apartment in period {" + dateFormat.format(start) + ":" + dateFormat.format(end));
             return false;
         }
 
         reservations.add(new Reservation(user, start, end));
-        App.log.info("User " + user + "successfully reserved - " + this + " in period {" + dateFormat.format(start) + ":" + dateFormat.format(end));
+        AirBnB.log.info("User " + user + "successfully reserved - " + this + " in period {" + dateFormat.format(start) + ":" + dateFormat.format(end));
         return true;
     }
 

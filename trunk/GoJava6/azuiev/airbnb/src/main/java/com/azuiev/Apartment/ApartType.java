@@ -1,4 +1,4 @@
-package com.azuiev.Books;
+package com.azuiev.Apartment;
 
 /**
  * Created by Lera on 21.09.2015.

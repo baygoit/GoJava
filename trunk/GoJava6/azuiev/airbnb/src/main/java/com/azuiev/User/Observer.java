@@ -1,4 +1,4 @@
-package com.azuiev.Users;
+package com.azuiev.User;
 
 /**
  * Created by Lera on 21.09.2015.

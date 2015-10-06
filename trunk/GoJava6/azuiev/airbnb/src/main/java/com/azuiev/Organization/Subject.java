@@ -1,6 +1,6 @@
 package com.azuiev.Organization;
 
-import com.azuiev.Users.Observer;
+import com.azuiev.User.Observer;
 
 /**
  * Created by Lera on 21.09.2015.

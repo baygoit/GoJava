@@ -1,4 +1,4 @@
-package com.azuiev.Users;
+package com.azuiev.User;
 
 /**
  * Created by Administrator on 01.10.15.

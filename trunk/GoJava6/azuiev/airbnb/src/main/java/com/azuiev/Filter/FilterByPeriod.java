@@ -1,6 +1,6 @@
 package com.azuiev.Filter;
 
-import com.azuiev.Books.Apartment;
+import com.azuiev.Apartment.Apartment;
 
 import java.util.Date;
 import java.util.LinkedList;

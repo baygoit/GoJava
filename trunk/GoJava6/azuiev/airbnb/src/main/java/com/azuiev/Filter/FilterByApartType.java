@@ -1,7 +1,7 @@
 package com.azuiev.Filter;
 
-import com.azuiev.Books.ApartType;
-import com.azuiev.Books.Apartment;
+import com.azuiev.Apartment.ApartType;
+import com.azuiev.Apartment.Apartment;
 
 import java.util.LinkedList;
 import java.util.List;
