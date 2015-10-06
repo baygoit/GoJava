@@ -1,0 +1,10 @@
+112 Elena 10
+113 Egor 9
+111 Dima 8
+115 Nikolay 7
+116 Igor 6
+114 Elena 5
+117 Egor 4
+118 Dima 3
+110 Nikolay 2
+119 Igor 1
