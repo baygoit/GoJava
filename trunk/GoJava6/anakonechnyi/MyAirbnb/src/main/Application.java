@@ -14,7 +14,8 @@ public class Application {
         try {
             Host host = new Host("Tony", "Host", "booble@goom");
             host.setCity("Kyiv");
-            switch (host.apartmentType.PLACE) {
+            host.setNewApartments("PLASE");
+            /*switch (host.apartmentType.PLACE) {
                 case PLACE:
                     host.switchedApartType="Place";
                     break;
@@ -24,7 +25,7 @@ public class Application {
                 case APARTMENT:
                     host.switchedApartType="Apartment";
                     break;
-            }
+            }*/
             Client client = new Client("Bony", "Client", "gooble@boom");
             host.registerObserver(client);
         } catch (InputMismatchException err) {
