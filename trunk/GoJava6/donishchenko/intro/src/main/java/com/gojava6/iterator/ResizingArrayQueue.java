@@ -104,7 +104,7 @@ public class ResizingArrayQueue<Item> implements Iterable<Item> {
     }
 
     private class ResizingArrayQueueIterator<Item> implements java.util.Iterator<Item> {
-        private int current;
+        private int current = first;
 
         @Override
         public boolean hasNext() {
