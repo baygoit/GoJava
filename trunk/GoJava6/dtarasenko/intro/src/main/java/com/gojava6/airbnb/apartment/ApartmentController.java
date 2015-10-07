@@ -1,9 +1,4 @@
-package com.gojava6.airbnb.application;
-
-import com.gojava6.airbnb.observer.Observer;
-import com.gojava6.airbnb.observer.Subject;
-import com.gojava6.airbnb.users.User;
-import com.gojava6.airbnb.users.UserController;
+package com.gojava6.airbnb.apartment;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -11,32 +6,19 @@ import java.util.List;
 
 import static com.gojava6.airbnb.application.JDBC.*;
 
-public class LoyaltyProgram implements Subject {
+public class ApartmentController {
 
-    private String loyaltyProgramName;
-    private boolean available;
-
-    public void setAvailable(boolean available) {
-        this.available = available;
-        if (available) {
-            notifyObservers();
-        }
-    }
-
-    public void setLoyaltyProgramName(String loyaltyProgramName) {
-        this.loyaltyProgramName = loyaltyProgramName;
-    }
-
-    @Override
-    public void registerObserver(Observer observer) {
-        User user = (User) observer; //TODO
+    public void createApartment(String city, ApartmentType apartmentType, Integer userId) {
         try {
             Connection conn = DriverManager.getConnection(sqlUrl, sqlUser, sqlPassword);
             Statement stmt = null;
 
             try {
                 stmt = conn.createStatement();
-                String sql = "INSERT INTO observer VALUES (" + user.getUserId() + ")";
+                String sql = "INSERT INTO apartment VALUES (null, '"
+                        + city + "', '"
+                        + apartmentType.getApartmentType() + "', '"
+                        + userId + "')";
 
                 stmt.executeUpdate(sql);
             } catch (SQLException ex) {
@@ -55,17 +37,16 @@ public class LoyaltyProgram implements Subject {
         }
     }
 
-    @Override
-    public void removeObserver(Observer observer) {
-        User user = (User) observer; //TODO
+    public void deleteApartment(Integer apartmentId) {
         try {
             Connection conn = DriverManager.getConnection(sqlUrl, sqlUser, sqlPassword);
             Statement stmt = null;
 
             try {
                 stmt = conn.createStatement();
-                String sql = "DELETE FROM observer WHERE user_id =" + user.getUserId();
+                String sql = "DELETE FROM apartment WHERE apartment_id = " + apartmentId;
                 stmt.executeUpdate(sql);
+                System.out.println("Apartment (ID=" + apartmentId + ") is deleted");
             } catch (SQLException ex) {
                 System.out.println("SQL query is no correct");
             } finally {
@@ -82,20 +63,8 @@ public class LoyaltyProgram implements Subject {
         }
     }
 
-    @Override
-    public void notifyObservers() {
-        System.out.println("\nNotifying all registered clients about new loyalty programs:");
-
-        UserController userController = new UserController();
-        List<Integer> userIdList = getUserIdList();
-        for (Integer userId : userIdList) {
-            User user = userController.getUser(userId);
-            user.update(loyaltyProgramName);
-        }
-    }
-
-    private List<Integer> getUserIdList() {
-        List<Integer> userIdList = new ArrayList<Integer>();
+    public List<Apartment> getApartmentList() {
+        List<Apartment> apartmentList = new ArrayList<Apartment>();
 
         try {
             Connection conn = DriverManager.getConnection(sqlUrl, sqlUser, sqlPassword);
@@ -104,12 +73,22 @@ public class LoyaltyProgram implements Subject {
 
             try {
                 stmt = conn.createStatement();
-                String sql = "SELECT * FROM observer";
+                String sql = "SELECT * FROM apartment";
                 rs = stmt.executeQuery(sql);
 
                 while (rs.next()) {
-                    Integer userId = rs.getInt("user_id");
-                    userIdList.add(userId);
+                    int apartmentId = rs.getInt("apartment_id");
+                    String city = rs.getString("city");
+                    String apartmentType = rs.getString("apartment_type");
+                    int userId = rs.getInt("user_id");
+
+                    Apartment apartment = new Apartment();
+                    apartment.setApartmentId(apartmentId);
+                    apartment.setCity(city);
+                    apartment.setApartmentType(apartmentType);
+                    apartment.setUserId(userId);
+
+                    apartmentList.add(apartment);
                 }
             } catch (SQLException ex) {
                 System.out.println("SQL query is no correct");
@@ -132,6 +111,14 @@ public class LoyaltyProgram implements Subject {
             System.out.println("No connection");
         }
 
-        return userIdList;
+        return apartmentList;
+    }
+
+    public void showAllApartments() {
+        List<Apartment> apartmentList = getApartmentList();
+
+        for (Apartment apartment : apartmentList) {
+            System.out.println(apartment.toString());
+        }
     }
 }

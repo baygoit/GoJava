@@ -1,29 +1,24 @@
 package com.gojava6.airbnb.application;
 
 import com.gojava6.airbnb.apartment.Apartment;
+import com.gojava6.airbnb.apartment.ApartmentController;
 import com.gojava6.airbnb.apartment.ApartmentType;
-import com.gojava6.airbnb.users.User;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class SearchResult {
+public class Search {
 
     private List<Apartment> apartmentList;
 
-    public SearchResult(List<User> userList) {
-        this.apartmentList = new ArrayList<Apartment>();
-
-        for (User user : userList) {
-            if (!user.getApartmentList().isEmpty()) {
-                this.apartmentList.addAll(user.getApartmentList());
-            }
-        }
+    public Search() {
+        ApartmentController apartmentController = new ApartmentController();
+        this.apartmentList = apartmentController.getApartmentList();
     }
 
     public void showSearchResults() {
-        System.out.println("\nSearchResult results:");
+        System.out.println("\nSearch results:");
         for (Apartment apartment : apartmentList) {
             System.out.println(apartment.toString());
         }
@@ -42,7 +37,7 @@ public class SearchResult {
     public void filterByApartmentType(ApartmentType apartmentType) {
         List<Apartment> list = new ArrayList<Apartment>();
         for (Apartment apartment : apartmentList) {
-            if (apartment.getApartmentType().equals(apartmentType)) {
+            if (apartment.getApartmentType().equals(apartmentType.getApartmentType())) {
                 list.add(apartment);
             }
         }

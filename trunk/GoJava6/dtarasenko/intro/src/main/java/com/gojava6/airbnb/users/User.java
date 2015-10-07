@@ -1,30 +1,21 @@
 package com.gojava6.airbnb.users;
 
-import com.gojava6.airbnb.apartment.Apartment;
 import com.gojava6.airbnb.observer.Observer;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class User implements Observer {
 
-    private static int userIdCounter;
     private int userId;
     private String name;
-    private String surName;
+    private String surname;
     private String email;
-    private UserType userType;
-    private List<Apartment> apartmentList;
-
-
-    public User() {
-        userIdCounter += 1;
-        this.userId =  userIdCounter;
-        this.userType = UserType.CLIENT;
-    }
+    private String userType;
 
     public int getUserId() {
         return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public String getName() {
@@ -35,12 +26,12 @@ public class User implements Observer {
         this.name = name;
     }
 
-    public String getSurName() {
-        return surName;
+    public String getSurname() {
+        return surname;
     }
 
-    public void setSurName(String surName) {
-        this.surName = surName;
+    public void setSurname(String surName) {
+        this.surname = surName;
     }
 
     public String getEmail() {
@@ -51,23 +42,12 @@ public class User implements Observer {
         this.email = email;
     }
 
-    public List<Apartment> getApartmentList() {
-        return apartmentList;
+    public String getUserType() {
+        return userType;
     }
 
-    public void becomeHost() {
-        this.userType = UserType.HOST;
-        this.apartmentList = new ArrayList<Apartment>();
-        System.out.println(name + " became host");
-    }
-
-    public void addApartment(Apartment apartment) {
-        if (userType.equals(UserType.HOST)) {
-            apartmentList.add(apartment);
-            System.out.println(name + " added apartment");
-        } else {
-            System.out.println("Only hosts can add apartments");
-        }
+    public void setUserType(String userType) {
+        this.userType = userType;
     }
 
     @Override
@@ -75,4 +55,14 @@ public class User implements Observer {
         System.out.println(getName() + ", " + loyaltyProgramName + " is available for you!");
     }
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "userType=" + userType +
+                ", userId=" + userId +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", email='" + email + '\'' +
+                '}';
+    }
 }
