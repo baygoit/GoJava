@@ -12,7 +12,7 @@ public class Application {
 
     public static void main(String[] args) {
         try {
-            Host host = new Host("Tony", "Host", "booble@goom");
+            User host = new User("Tony", "Host", "booble@goom");
             host.setCity("Kyiv");
             host.setNewApartments("PLASE");
             /*switch (host.apartmentType.PLACE) {

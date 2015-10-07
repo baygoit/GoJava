@@ -101,7 +101,7 @@ public class ResizingArrayQueue<Item> implements Iterable<Item> {
      */
     public Iterator<Item> iterator() {
         //TODO
-        return null;
+        return new ResArrQueIterator();
     }
 
 
