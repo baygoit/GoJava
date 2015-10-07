@@ -110,11 +110,11 @@ public class Deque<Item> implements Iterable<Item> {
 
     private class DequeIterator implements Iterator<Item> {
 
-        private Node current ;
+        private Node current = first;
 
         @Override
         public boolean hasNext() {
-            return false;
+            return current != null;
         }
 
         @Override
@@ -122,7 +122,9 @@ public class Deque<Item> implements Iterable<Item> {
             if (current == null) {
                 throw new NoSuchElementException();
             }
-            return null;
+            Item item = current.item;
+            current = current.next;
+            return item;
         }
 
     }

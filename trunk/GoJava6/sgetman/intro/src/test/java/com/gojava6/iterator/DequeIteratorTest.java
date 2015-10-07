@@ -23,10 +23,11 @@ public class DequeIteratorTest {
     @Test
     public void testIterator() {
         deque.addFirst(new Integer(1));
+        deque.addFirst(new Integer(2));
+
         Iterator integerIterator = deque.iterator();
-        while (integerIterator.hasNext()) {
-            System.out.println(integerIterator.next());
-        }
+        assertEquals(new Integer(2), integerIterator.next());
+        assertEquals(new Integer(1), integerIterator.next());
     }
 
     @Test(expected = NoSuchElementException.class)

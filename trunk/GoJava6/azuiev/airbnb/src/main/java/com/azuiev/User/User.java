@@ -3,14 +3,19 @@ package com.azuiev.User;
 import com.azuiev.AirBnB;
 import com.azuiev.Apartment.ApartType;
 import com.azuiev.Apartment.Apartment;
+import com.azuiev.DB.DBAirBnB;
+import com.azuiev.DB.Databasible;
 import com.azuiev.Validator;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.*;
 
 /**
  * Created by Lera on 21.09.2015.
  */
-public class User implements Observer {
+public class User implements Observer,Databasible {
     private String name;
     private String surName;
     private String email;
@@ -90,6 +95,37 @@ public class User implements Observer {
 
     public static Builder createBuilder(){
         return new Builder();
+    }
+
+    @Override
+    public Databasible fromDB() {
+        //TODO
+        String query = "select * from user";
+
+        DBAirBnB db = new DBAirBnB();
+        ResultSet rs = db.select(query);
+
+        List<User> list = new ArrayList<User>();
+
+        try {
+            while (rs.next()){
+                User.Builder builder = User.createBuilder();
+                User user = builder.createUser(rs.getString(2), rs.getString(3), rs.getString(4));
+                list.add(user);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+
+    }
+
+    @Override
+    public boolean intoDB() {
+        //TODO
+        String query = "insert into user values (null, '" + name + "', '" + surName + "', '" + email+"')";
+        return false;
     }
 
     public static class Builder{
