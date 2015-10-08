@@ -6,12 +6,12 @@ import com.google.common.base.Joiner;
 public class Apartment {
     private static int APARTMENT_ID = 0;
     private int id;
-    private Host host;
+    private User host;
     private String city;
     private ApartmentType apartmentType;
     private boolean active;
 
-    public Apartment(Host host, String city, ApartmentType apartmentType, boolean active) {
+    public Apartment(User host, String city, ApartmentType apartmentType, boolean active) {
         this.id = ++APARTMENT_ID;
         this.host = host;
         this.city = city;
@@ -23,11 +23,11 @@ public class Apartment {
         return id;
     }
 
-    public Host getHost() {
+    public User getHost() {
         return host;
     }
 
-    public void setHost(Host host) {
+    public void setHost(User host) {
         this.host = host;
     }
 

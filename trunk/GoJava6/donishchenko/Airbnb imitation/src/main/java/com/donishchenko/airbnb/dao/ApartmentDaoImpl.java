@@ -2,11 +2,12 @@ package com.donishchenko.airbnb.dao;
 
 import com.donishchenko.airbnb.SortOfDataBase;
 import com.donishchenko.airbnb.model.Apartment;
-import com.donishchenko.airbnb.model.Host;
+import com.donishchenko.airbnb.model.User;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.*;
+import java.util.LinkedList;
+import java.util.List;
 
 public class ApartmentDaoImpl implements ApartmentDao {
     public void save(Apartment apartment) {
@@ -47,7 +48,7 @@ public class ApartmentDaoImpl implements ApartmentDao {
     }
 
     @Override
-    public List<Apartment> getAllByHost(int id) {
+    public List<Apartment> getAllByUser(int id) {
         List<Apartment> list = new LinkedList<>();
         for (Apartment apartment : SortOfDataBase.apartments.values()) {
             if (apartment.getHost().getId() == id) {
@@ -59,10 +60,10 @@ public class ApartmentDaoImpl implements ApartmentDao {
     }
 
     @Override
-    public List<Apartment> getAllByHost(Host host) {
+    public List<Apartment> getAllByUser(User user) {
         List<Apartment> list = new LinkedList<>();
         for (Apartment apartment : SortOfDataBase.apartments.values()) {
-            if (apartment.getHost().getId() == host.getId()) {
+            if (apartment.getHost().getId() == user.getId()) {
                 list.add(apartment);
             }
         }
