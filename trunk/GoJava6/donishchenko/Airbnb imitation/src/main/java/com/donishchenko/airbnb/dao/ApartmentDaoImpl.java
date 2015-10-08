@@ -1,13 +1,20 @@
-package com.donishchenko.airbnb.managers;
+package com.donishchenko.airbnb.dao;
 
 import com.donishchenko.airbnb.SortOfDataBase;
 import com.donishchenko.airbnb.model.Apartment;
 import com.donishchenko.airbnb.model.Host;
 
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.*;
 
-public class ApartmentManagerImpl implements ApartmentManager {
+public class ApartmentDaoImpl implements ApartmentDao {
     public void save(Apartment apartment) {
+        try {
+            Connection conn = DBUtils.getConnection();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         SortOfDataBase.apartments.put(apartment.getId(), apartment);
     }
 
@@ -22,6 +29,8 @@ public class ApartmentManagerImpl implements ApartmentManager {
 
     @Override
     public List<Apartment> getByCity(String city) {
+
+
         List<Apartment> list = new LinkedList<>();
         for (Apartment apartment : SortOfDataBase.apartments.values()) {
             if (apartment.getCity().equals(city)) {

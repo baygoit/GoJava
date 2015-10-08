@@ -1,14 +1,34 @@
-package com.donishchenko.airbnb.managers;
+package com.donishchenko.airbnb.dao;
 
 import com.donishchenko.airbnb.SortOfDataBase;
 import com.donishchenko.airbnb.model.Apartment;
 import com.donishchenko.airbnb.model.User;
 
-import java.util.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 
-public class UserManagerImpl implements UserManager {
+public class UserDaoImpl implements UserDao {
+    private static final String saveUserQuery =
+            "INSERT INTO user VALUES(null,?,?,?)";
+
     @Override
     public void saveClient(User user) {
+        try (Connection conn = DBUtils.getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement(saveUserQuery);
+            stmt.setString(1, user.getName());
+            stmt.setString(2, user.getSurname());
+            stmt.setString(3, user.getEmail());
+
+            stmt.execute();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
         SortOfDataBase.clients.put(user.getId(), user);
     }
 

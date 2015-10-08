@@ -1,4 +1,4 @@
-package com.donishchenko.airbnb.managers;
+package com.donishchenko.airbnb.dao;
 
 import com.donishchenko.airbnb.SortOfDataBase;
 import com.donishchenko.airbnb.model.Apartment;
@@ -14,8 +14,8 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
-public class ReservationManagerImpl implements ReservationManager {
-    public static final Logger log = LogManager.getLogger(ReservationManagerImpl.class.getName());
+public class ReservationDaoImpl implements ReservationDao {
+    public static final Logger log = LogManager.getLogger(ReservationDaoImpl.class.getName());
 
     @Override
     public boolean makeReservation(User user, Apartment apartment, Date start, Date end, String comment) {

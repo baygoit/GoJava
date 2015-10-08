@@ -1,11 +1,11 @@
-package com.donishchenko.airbnb.managers;
+package com.donishchenko.airbnb.dao;
 
 import com.donishchenko.airbnb.model.Apartment;
 import com.donishchenko.airbnb.model.Host;
 
 import java.util.List;
 
-public interface ApartmentManager {
+public interface ApartmentDao {
     public void save(Apartment apartment);
     public void delete(int id);
     public Apartment getById(int id);

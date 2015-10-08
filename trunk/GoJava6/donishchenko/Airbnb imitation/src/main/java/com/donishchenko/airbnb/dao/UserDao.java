@@ -1,10 +1,10 @@
-package com.donishchenko.airbnb.managers;
+package com.donishchenko.airbnb.dao;
 
 import com.donishchenko.airbnb.model.User;
 
 import java.util.List;
 
-public interface UserManager {
+public interface UserDao {
     public void saveClient(User user);
     public void saveHost(User user);
     public void deleteClient(int id);

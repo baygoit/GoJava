@@ -19,7 +19,7 @@
             <AppenderRef ref="Console" />
             <AppenderRef ref="LogFile" />
         </Logger>
-        <Logger name="com.donishchenko.airbnb.managers.ReservationManagerImpl" level="INFO">
+        <Logger name="com.donishchenko.airbnb.dao.ReservationDaoImpl" level="INFO">
             <AppenderRef ref="Console" />
             <AppenderRef ref="LogFile" />
         </Logger>
