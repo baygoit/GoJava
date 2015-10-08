@@ -1,13 +1,17 @@
 package com.azuiev;
 
-import com.azuiev.Apartment.ApartType;
-import com.azuiev.Apartment.Apartment;
+import com.azuiev.DAO.DaoDB;
+import com.azuiev.DAO.DaoUser;
+import com.azuiev.Enums.ApartType;
+import com.azuiev.model.Apartment;
 import com.azuiev.DB.DBAirBnB;
-import com.azuiev.Organization.Organization;
-import com.azuiev.User.User;
-import com.azuiev.User.UserRoles;
+import com.azuiev.model.Organization;
+import com.azuiev.model.User;
+import com.azuiev.Enums.UserRoles;
 import org.apache.log4j.Logger;
 
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.List;
 
 public class AirBnB {
@@ -25,24 +29,21 @@ public class AirBnB {
             log.error("Organization creating failed");
         }
 
-        User.Builder userCreator = User.createBuilder();
-
-        User user1 = userCreator.createUser("Aa", "TT", "a@a.aa", UserRoles.CLIENT, UserRoles.HOST);
-        User user2 = userCreator.createUser("Bb", "BB", "b@a.aa");
-
-        sportLife.register(user1);
-        sportLife.register(user2);
-
-        Apartment book1 = user2.registerBook("Kiev", "Lenina 1", ApartType.APARTAMENT);
-        Apartment book2 = user1.registerBook("Moskva", "Pushkina 1", ApartType.PLACE);
-
-        DBAirBnB db = new DBAirBnB();
-        //db.addUser(user1);
-        //db.addUser(user2);
-        List<User> list = db.selectUser();
-        for (User user :list) {
-            System.out.println(user);
+        DaoDB db = new DBAirBnB();
+        DaoUser dao = new DaoUser(db.getConnection());
+        User user = null;
+        try {
+            user = dao.read(1);
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
+
+        sportLife.register(user);
+
+        Apartment book1 = user.registerBook("Kiev", "Lenina 1", ApartType.APARTAMENT);
+        Apartment book2 = user.registerBook("Moskva", "Pushkina 1", ApartType.PLACE);
+
+        System.out.println(user);
 
     }
 }

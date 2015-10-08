@@ -1,6 +1,4 @@
-package com.azuiev.Organization;
-
-import com.azuiev.User.Observer;
+package com.azuiev.Interfaces;
 
 /**
  * Created by Lera on 21.09.2015.

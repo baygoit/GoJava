@@ -1,30 +1,22 @@
-package com.azuiev.User;
+package com.azuiev.model;
 
 import com.azuiev.AirBnB;
-import com.azuiev.Apartment.ApartType;
-import com.azuiev.Apartment.Apartment;
-import com.azuiev.DB.DBAirBnB;
-import com.azuiev.DB.Databasible;
+import com.azuiev.Enums.ApartType;
+import com.azuiev.Enums.UserRoles;
+import com.azuiev.Interfaces.Observer;
 import com.azuiev.Validator;
-
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.*;
 
 /**
  * Created by Lera on 21.09.2015.
  */
-public class User implements Observer,Databasible {
+public class User implements Observer {
     private String name;
     private String surName;
     private String email;
     private List<UserRoles> myRoles = new LinkedList<UserRoles>();
 
-    private User(){
-
-    }
-    private User(String name, String surName, String email) {
+     private User(String name, String surName, String email) {
         this.name = name;
         this.surName = surName;
         this.email = email;
@@ -95,37 +87,6 @@ public class User implements Observer,Databasible {
 
     public static Builder createBuilder(){
         return new Builder();
-    }
-
-    @Override
-    public Databasible fromDB() {
-        //TODO
-        String query = "select * from user";
-
-        DBAirBnB db = new DBAirBnB();
-        ResultSet rs = db.select(query);
-
-        List<User> list = new ArrayList<User>();
-
-        try {
-            while (rs.next()){
-                User.Builder builder = User.createBuilder();
-                User user = builder.createUser(rs.getString(2), rs.getString(3), rs.getString(4));
-                list.add(user);
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return null;
-
-    }
-
-    @Override
-    public boolean intoDB() {
-        //TODO
-        String query = "insert into user values (null, '" + name + "', '" + surName + "', '" + email+"')";
-        return false;
     }
 
     public static class Builder{

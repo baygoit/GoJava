@@ -1,6 +1,6 @@
-package com.azuiev.Apartment;
+package com.azuiev.model;
 
-import com.azuiev.User.User;
+import com.azuiev.model.User;
 
 import java.util.Date;
 
