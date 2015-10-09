@@ -12,10 +12,13 @@ public class Employee implements Comparable<Employee> {
         this.managerId = managerId;
     }
 
+    public Employee() {
+    }
+
     @Override
     public int compareTo(Employee employee) {
-        //return managerId < employee.managerId? -1:(managerId == employee.managerId? 0: 1);
-        return Integer.compare(managerId, employee.managerId);
+        return managerId < employee.managerId? -1:(managerId == employee.managerId? 0: 1);
+        //return Integer.compare(managerId, employee.managerId);
     }
 
     @Override

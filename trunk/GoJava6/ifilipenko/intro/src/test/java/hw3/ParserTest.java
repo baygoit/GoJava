@@ -5,16 +5,13 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.IOException;
-import java.util.PriorityQueue;
-import java.util.Queue;
+import java.util.*;
 
 public class ParserTest {
 
-    String filePath1 = "/Users/inna/Dropbox/GitHub/GoJava/trunk/GoJava6/ifilipenko/intro/src/main/resources/parserFile1";
-    String filePath2 = "/Users/inna/Dropbox/GitHub/GoJava/trunk/GoJava6/ifilipenko/intro/src/main/resources/parserFile2";
-    String filePath3 = "/Users/inna/Dropbox/GitHub/GoJava/trunk/GoJava6/ifilipenko/intro/src/main/resources/parserFile3";
     Parser parser;
     Queue<Employee> actual;
+    //Set<Employee> actual;
 
     @Before
     public void init() {
@@ -23,7 +20,7 @@ public class ParserTest {
 
     @Test
     public void verifyThatEmployeeListIsSortedByManagerId() throws IOException {
-        actual = parser.parseFileTextToSortedEmployeeList(filePath1);
+        actual = parser.parseFileTextToSortedEmployeeList("/parserFile1");
 
         Queue<Employee> expected = new PriorityQueue<>();
         Employee employee1 = new Employee(3, "Name4", 1);
@@ -39,12 +36,12 @@ public class ParserTest {
     }
 
     @Test
-    public void verifyThatNullReturnsForNameAnd0ForManagerIdWhenTheyAreEmpty() throws IOException {
-        actual = parser.parseFileTextToSortedEmployeeList(filePath2);
+    public void verifyDefaultValuesReturnForEmployeeWhenIdOrNameOrManagerIsEmpty() throws IOException {
+        actual = parser.parseFileTextToSortedEmployeeList("/parserFile2");
 
         Queue<Employee> expected = new PriorityQueue<>();
         Employee employee1 = new Employee(3, "Name1", 4);
-        Employee employee2 = new Employee(2, null, 0);
+        Employee employee2 = new Employee();
         expected.add(employee1);
         expected.add(employee2);
 
@@ -54,7 +51,7 @@ public class ParserTest {
 
     @Test
     public void verifyThatEmployeeCannotBeEmpty() throws IOException {
-        actual = parser.parseFileTextToSortedEmployeeList(filePath3);
+        actual = parser.parseFileTextToSortedEmployeeList("/parserFile3");
 
         Queue<Employee> expected = new PriorityQueue<>();
         Employee employee1 = new Employee(0, null, 0);
@@ -64,8 +61,8 @@ public class ParserTest {
     }
 
     @Test
-    public void test(){
-        Queue<Employee> expected = new PriorityQueue<>();
+    public void sortQueue(){
+        Set<Employee> expected = new HashSet<>();
         Employee employee1 = new Employee(3, "Name4", 1);
         Employee employee2 = new Employee(1, "Name3", 4);
         Employee employee3 = new Employee(2, "Name2", 2);
@@ -78,9 +75,8 @@ public class ParserTest {
         for (Employee employee : expected) {
             System.out.println(employee);
         }
-
-
-
     }
+
+
 
 }
