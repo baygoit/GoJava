@@ -30,12 +30,12 @@ public class DAOjdbc {
             // create users from database
 
             while (rs.next()) {
-                User user = new User();
+                User user = new  User();
                 user.setName(rs.getString("UserName"));
                 user.setSurname(rs.getString("UserSurname"));
                 user.setEmail(rs.getString("UserEmail"));
                 user.setIsHost(rs.getInt("IsHost"));
-                System.out.println( user);
+                System.out.println(user);
             }
 
 

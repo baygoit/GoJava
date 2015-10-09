@@ -15,7 +15,7 @@ public class Jdbc {
 
     public void getConnection() {
         try {
-            connection = DriverManager.getConnection(url, name, pass);
+            connection =    DriverManager.getConnection(url, name, pass);
             stmt = connection.createStatement();
             System.out.println( "Connect");
         } catch (SQLException e) {
@@ -30,6 +30,8 @@ public class Jdbc {
             connection.close();
            // rs.close();
             System.out.println("Connect closed");
+
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
