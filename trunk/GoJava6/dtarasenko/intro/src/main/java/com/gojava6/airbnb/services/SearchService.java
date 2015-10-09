@@ -1,24 +1,23 @@
-package com.gojava6.airbnb.application;
+package com.gojava6.airbnb.services;
 
-import com.gojava6.airbnb.apartment.Apartment;
-import com.gojava6.airbnb.apartment.ApartmentController;
-import com.gojava6.airbnb.apartment.ApartmentType;
+import com.gojava6.airbnb.model.Apartment;
+import com.gojava6.airbnb.model.ApartmentType;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class Search {
+public class SearchService {
 
     private List<Apartment> apartmentList;
 
-    public Search() {
-        ApartmentController apartmentController = new ApartmentController();
-        this.apartmentList = apartmentController.getApartmentList();
+    public SearchService() {
+        ApartmentService apartmentService = new ApartmentService();
+        this.apartmentList = apartmentService.getApartmentList();
     }
 
     public void showSearchResults() {
-        System.out.println("\nSearch results:");
+        System.out.println("\nSearchService results:");
         for (Apartment apartment : apartmentList) {
             System.out.println(apartment.toString());
         }

@@ -1,6 +1,6 @@
-package com.gojava6.airbnb.application;
+package com.gojava6.airbnb.services;
 
-public class Validator {
+public class ValidationService {
 
     public boolean isValidName(String name) {
         if (!isText(name)) {

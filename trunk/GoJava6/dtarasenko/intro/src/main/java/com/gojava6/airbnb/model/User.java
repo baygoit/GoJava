@@ -1,4 +1,4 @@
-package com.gojava6.airbnb.users;
+package com.gojava6.airbnb.model;
 
 import com.gojava6.airbnb.observer.Observer;
 

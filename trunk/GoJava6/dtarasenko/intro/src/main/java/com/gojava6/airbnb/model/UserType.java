@@ -1,4 +1,4 @@
-package com.gojava6.airbnb.users;
+package com.gojava6.airbnb.model;
 
 
 public enum UserType {

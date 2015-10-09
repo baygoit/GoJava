@@ -1,5 +1,6 @@
-package com.gojava6.airbnb.apartment;
+package com.gojava6.airbnb.model;
 
+import com.gojava6.airbnb.services.ReservationService;
 import org.apache.log4j.Logger;
 
 import java.util.List;
@@ -73,8 +74,8 @@ public class Apartment {
 //    }
 
     public boolean isAvailable(long start, long end) {
-        ReservationController rc = new ReservationController();
-        List<Reservation> reservationList = rc.getReservationListOfApartment(apartmentId);
+        ReservationService reservationService = new ReservationService();
+        List<Reservation> reservationList = reservationService.getReservationListOfApartment(apartmentId);
 
         if (reservationList.isEmpty()) {
             System.out.println("\nApartment is available");

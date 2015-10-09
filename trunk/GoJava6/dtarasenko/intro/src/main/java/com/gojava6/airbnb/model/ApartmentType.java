@@ -1,4 +1,4 @@
-package com.gojava6.airbnb.apartment;
+package com.gojava6.airbnb.model;
 
 
 public enum ApartmentType {
