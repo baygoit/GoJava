@@ -7,12 +7,14 @@ import java.sql.*;
 /**
  * Created by Administrator on 06.10.15.
  */
-public class DBAirBnB implements DaoDB {
+public class AirbnbDB implements DaoDB {
 
     // JDBC URL, username and password of MySQL server
     private static final String url = "jdbc:mysql://localhost:3306/airbnb";
     private static final String user = "root";
     private static final String password = "masta";
+    private static final String driver = "com.mysql.jdbc.Driver";
+
 
     // JDBC variables for opening and managing connection
     private static Connection connection = null;
@@ -23,7 +25,7 @@ public class DBAirBnB implements DaoDB {
     public Connection getConnection() {
         if (connection == null) {
             try {
-                Class.forName("com.mysql.jdbc.Driver");
+                Class.forName(driver);
                 connection = DriverManager.getConnection(url, user, password);
 
             } catch (ClassNotFoundException e) {
