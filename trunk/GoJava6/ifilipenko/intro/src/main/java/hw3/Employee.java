@@ -2,11 +2,9 @@ package hw3;
 
 public class Employee implements Comparable<Employee> {
 
-    int id; //why don't fields private, where is incapsulation?
-    String name;
-    int managerId;
-
-    public Employee(){};
+    private int id;
+    private String name;
+    private int managerId;
 
     public Employee(int id, String name, int managerId) {
         this.id = id;
@@ -16,6 +14,7 @@ public class Employee implements Comparable<Employee> {
 
     @Override
     public int compareTo(Employee employee) {
+        //return managerId < employee.managerId? -1:(managerId == employee.managerId? 0: 1);
         return Integer.compare(managerId, employee.managerId);
     }
 
