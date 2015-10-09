@@ -4,15 +4,12 @@ import com.azuiev.DAO.DaoDB;
 import com.azuiev.DAO.DaoUser;
 import com.azuiev.Enums.ApartType;
 import com.azuiev.model.Apartment;
-import com.azuiev.DB.DBAirBnB;
+import com.azuiev.DB.AirbnbDB;
 import com.azuiev.model.Organization;
 import com.azuiev.model.User;
-import com.azuiev.Enums.UserRoles;
 import org.apache.log4j.Logger;
 
-import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.List;
 
 public class AirBnB {
 
@@ -29,7 +26,7 @@ public class AirBnB {
             log.error("Organization creating failed");
         }
 
-        DaoDB db = new DBAirBnB();
+        DaoDB db = new AirbnbDB();
         DaoUser dao = new DaoUser(db.getConnection());
         User user = null;
         try {
