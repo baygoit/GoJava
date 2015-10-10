@@ -5,7 +5,7 @@ public class User {
     private String name;
     private String surname;
     private String email;
-    boolean isHost = false;
+    private boolean isHost = false;
 
     public User() {
 
@@ -53,7 +53,14 @@ public class User {
         }
     }
 
+    public void setIsHost(int i) {
 
+        this.isHost = isHost;
+    }
+
+    public boolean isHost() {
+        return isHost;
+    }
 
     @Override
     public String toString() {

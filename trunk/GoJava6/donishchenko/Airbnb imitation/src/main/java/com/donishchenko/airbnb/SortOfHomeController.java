@@ -1,21 +1,24 @@
 package com.donishchenko.airbnb;
 
 import com.donishchenko.airbnb.common.Subject;
-import com.donishchenko.airbnb.managers.*;
+import com.donishchenko.airbnb.dao.*;
 import com.donishchenko.airbnb.model.*;
 import com.google.common.base.Joiner;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.List;
 
 public class SortOfHomeController implements Subject<User> {
     public static final Logger log = LogManager.getLogger(SortOfHomeController.class.getName());
 
-    private UserManager userManager = new UserManagerImpl();
-    private ApartmentManager apartmentManager = new ApartmentManagerImpl();
-    private ReservationManager reservationManager = new ReservationManagerImpl();
+    private UserDao userDao = new UserDaoImpl();
+    private ApartmentDao apartmentDao = new ApartmentDaoImpl();
+    private ReservationDao reservationDao = new ReservationDaoImpl();
 
     public int addClient(String name, String surname, String email) {
         log.entry();
@@ -23,7 +26,7 @@ public class SortOfHomeController implements Subject<User> {
         User client = new Client(name, surname, email);
         if (client.validate()) {
             log.info("ClientID=" + client.getId() + " | Successful validation. New User registered!");
-            userManager.saveClient(client);
+            userDao.saveClient(client);
 
             log.exit(client.getId());
             return client.getId();
@@ -39,7 +42,7 @@ public class SortOfHomeController implements Subject<User> {
         User host = new Host(name, surname, email);
         if (host.validate()) {
             log.info("HostID=" + host.getId() + " | Successful validation. New Host registered!");
-            userManager.saveHost(host);
+            userDao.saveHost(host);
 
             log.exit(host.getId());
             return host.getId();
@@ -50,11 +53,11 @@ public class SortOfHomeController implements Subject<User> {
     }
 
     public void deleteClient(int id) {
-        userManager.deleteClient(id);
+        userDao.deleteClient(id);
     }
 
     public void deleteHost(int id) {
-        userManager.deleteHost(id);
+        userDao.deleteHost(id);
     }
 
     @Override
@@ -69,7 +72,7 @@ public class SortOfHomeController implements Subject<User> {
 
     @Override
     public void notifyAllObservers(String message) {
-        List<User> list = userManager.getAllClients();
+        List<User> list = userDao.getAllClients();
         for (User user : list) {
             user.update(message);
         }
@@ -88,7 +91,7 @@ public class SortOfHomeController implements Subject<User> {
         Apartment apartment = new Apartment(existingHost, city, type, active);
         if (apartment.validate()) {
             checkUniqueCity(apartment.getCity());
-            apartmentManager.save(apartment);
+            apartmentDao.save(apartment);
             return apartment.getId();
         }
 
@@ -121,15 +124,15 @@ public class SortOfHomeController implements Subject<User> {
         mainApp.createApartment(hostId, "Kiev", ApartmentType.APARTMENT, true);
 
         System.out.println("\nAll apartments:");
-        for (Apartment ap : mainApp.apartmentManager.getAll()) {
+        for (Apartment ap : mainApp.apartmentDao.getAll()) {
             System.out.println("\t" + ap);
         }
         System.out.println();
 
         /* Reservation system */
         /* Test three reservations: 2 true, 1 false */
-        User user = mainApp.userManager.getClientById(clientId);
-        Apartment apartment = mainApp.apartmentManager.getById(apartmentId);
+        User user = mainApp.userDao.getClientById(clientId);
+        Apartment apartment = mainApp.apartmentDao.getById(apartmentId);
         Date start = new GregorianCalendar(2015, Calendar.SEPTEMBER, 26).getTime();
         Date end = new GregorianCalendar(2015, Calendar.SEPTEMBER, 27).getTime();
 
@@ -145,7 +148,7 @@ public class SortOfHomeController implements Subject<User> {
 
         /* All reservations */
         System.out.println("\nAll reservations:");
-        List<Reservation> list = mainApp.reservationManager.getAll();
+        List<Reservation> list = mainApp.reservationDao.getAll();
         for (Reservation reservation : list) {
             System.out.print('\t');
             System.out.println(reservation);
@@ -154,7 +157,7 @@ public class SortOfHomeController implements Subject<User> {
         /* Custom reservations between two dates */
         start = new GregorianCalendar(2015, Calendar.SEPTEMBER, 26).getTime();
         end = new GregorianCalendar(2015, Calendar.SEPTEMBER, 30).getTime();
-        list = mainApp.reservationManager.getAllBetweenDates(start, end);
+        list = mainApp.reservationDao.getAllBetweenDates(start, end);
         System.out.println("\nCustom reservations");
         for (Reservation reservation : list) {
             System.out.print('\t');
@@ -169,6 +172,6 @@ public class SortOfHomeController implements Subject<User> {
                     "', apartmentID='", apartment.getId(), "', start='", format.format(start),
                     "', end='", format.format(end), "'"));
         }
-        reservationManager.makeReservation(user, apartment, start, end, comment);
+        reservationDao.makeReservation(user, apartment, start, end, comment);
     }
 }

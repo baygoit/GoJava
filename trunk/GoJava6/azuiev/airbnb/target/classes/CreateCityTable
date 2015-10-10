@@ -1,0 +1,5 @@
+CREATE  TABLE `airbnb`.`city` (
+  `id` INT NOT NULL ,
+  `city` VARCHAR(50) NOT NULL ,
+  PRIMARY KEY (`id`) ,
+  UNIQUE INDEX `city_UNIQUE` (`city` ASC) );

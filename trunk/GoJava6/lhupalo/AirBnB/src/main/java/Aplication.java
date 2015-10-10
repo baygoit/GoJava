@@ -1,11 +1,13 @@
+import java.sql.SQLException;
+
 /**
  * Created by Ыўср on 23.09.2015.
  */
 public class Aplication  {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
         // First block - Observer/LoayaltyProgram
 
-        LoayaltyProgram loayaltyProgram = new LoayaltyProgram();
+       /* LoayaltyProgram loayaltyProgram = new LoayaltyProgram();
 
         Client client11 = new Client("Yan", "Serfo", "erf@gg.com");
         Client client21 = new Client("Tim", "Tornvald", "tim@bbol.com");
@@ -31,7 +33,15 @@ public class Aplication  {
         Apartment apartment4 = new Apartment("Paris", ApartmentType.ROOM, host2 );
         Apartment apartment5 = new Apartment("Berlin", ApartmentType.APARTMENT, host3 );
         Apartment apartment6 = new Apartment("Berlin", ApartmentType.ROOM, host3 );
-        Apartment apartment7 = new Apartment("Berlin", ApartmentType.PLACE, host3 );
+        Apartment apartment7 = new Apartment("Berlin", ApartmentType.PLACE, host3 );*/
+
+        //Jdbc jdbc = new Jdbc();
+       // jdbc.getConnection();
+    // jdbc.close();
+     DAOjdbc dAOjdbc = new DAOjdbc();
+    dAOjdbc.retrieve();
+
+
 
     }
 }
