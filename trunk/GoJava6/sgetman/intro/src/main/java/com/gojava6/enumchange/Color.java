@@ -15,4 +15,8 @@ public enum Color implements EnumHelper{
     public String getName() {
         return color;
     }
+
+    public EnumHelper getByName(String name) {
+        return Color.valueOf(name);
+    }
 }

@@ -1,6 +1,6 @@
 package com.azuiev.Filter;
 
-import com.azuiev.Books.Apartment;
+import com.azuiev.model.Apartment;
 import java.util.List;
 
 /**

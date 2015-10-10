@@ -1,8 +1,8 @@
 package com.azuiev;
 
-import com.azuiev.Books.ApartType;
-import com.azuiev.Books.Apartment;
-import com.azuiev.Users.User;
+import com.azuiev.Enums.ApartType;
+import com.azuiev.model.Apartment;
+import com.azuiev.model.User;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

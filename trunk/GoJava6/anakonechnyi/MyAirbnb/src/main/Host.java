@@ -7,34 +7,41 @@ import java.util.List;
 /**
  * Created by user on 19.09.2015.
  */
-public class Host extends User implements Subject {
+public class Host extends User {
     private String city;
-    public enum ApartmentType {PLACE , ROOM, APARTMENT};
-    public ApartmentType apartmentType;
-    public String switchedApartType;
-    private List<Observer> listOfClients = new ArrayList<Observer>();
+    //public enum ApartmentType {PLACE , ROOM, APARTMENT};
+    //public ApartmentType apartmentType;
+    //public String switchedApartType;
+    public List<Apartment> apartments;
+    //private List<Observer> listOfClients = new ArrayList<Observer>();
     public Host (String name, String sername, String email) {
         if (this.setName(name)&&this.setSername(sername)&&this.setEmail(email)) {
             System.out.println("Successful Host registration");
+            Searches.hostList.add(this);
         } else {
             throw new InputMismatchException();
         }
     }
 
 
+/*
     @Override
     public void registerObserver(Observer o) {
         System.out.println("Register: " + o.toString());
         listOfClients.add(o);
         o.loyalty(10, this);
     }
+*/
 
+/*
     @Override
     public void removeObserver(Observer o) {
         System.out.println("Remove: "+super.getName()+" "+super.getSername());
         listOfClients.remove(o);
     }
+*/
 
+/*
     @Override
     public void notifyObservers() {
         System.out.println("Notify Observers");
@@ -43,9 +50,10 @@ public class Host extends User implements Subject {
         }
 
     }
+*/
     @Override
     public String toString(){
-        return this.switchedApartType+" from "+this.getName()+" in "+this.getCity();
+        return this.getName()+" in "+this.getCity();
     }
 
     public String getCity() {
@@ -56,11 +64,20 @@ public class Host extends User implements Subject {
         this.city = city;
     }
 
-   /* public String getApartmentType() {
-        return apartmentType;
-    }*/
+    public void setNewApartments (String next) {
+        Apartment.ApartmentType type = Apartment.ApartmentType.valueOf(next);
+        apartments.add(new Apartment(type, this));
+        /*
+        switch (next.apartmentType) {
+            case Apartment.ApartmentType.PLACE:
 
-    /*public void setApartmentType(String apartmentType) {
-        this.apartmentType = apartmentType;
-    }*/
+                break;
+            case ROOM:
+                host.switchedApartType="Room";
+                break;
+            case APARTMENT:
+                host.switchedApartType="Apartment";
+                break;
+        }*/
+    }
 }

@@ -5,4 +5,7 @@ package com.gojava6.enumchange;
  */
 public interface EnumHelper {
     String getName();
+
+    EnumHelper getByName(String name);
+
 }

@@ -10,6 +10,7 @@ public abstract class User implements Observer {
     private String name;
     private String surname;
     private String email;
+    private boolean host;
 
     public User() {}
 
@@ -18,6 +19,12 @@ public abstract class User implements Observer {
         this.name = name.trim();
         this.surname = surname.trim();
         this.email = email.trim();
+        this.host = false;
+    }
+
+    public User(String name, String surname, String email, boolean host) {
+        this(name, surname, email);
+        this.host = host;
     }
 
     public int getId() {
@@ -50,6 +57,14 @@ public abstract class User implements Observer {
 
     public void setEmail(String email) {
         this.email = email.trim();
+    }
+
+    public boolean isHost() {
+        return host;
+    }
+
+    public void setHost(boolean host) {
+        this.host = host;
     }
 
     public boolean validate() {
