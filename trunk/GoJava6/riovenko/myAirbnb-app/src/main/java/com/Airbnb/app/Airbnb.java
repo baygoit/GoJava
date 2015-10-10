@@ -11,6 +11,7 @@ import java.util.*;
 public class Airbnb implements Subject {
 
     public static Map<Integer, Apartment> apartments = new HashMap<Integer, Apartment>();
+    public List<String> cities= new ArrayList<String>();
 
     public void registerHost (String name, String surname, String email){
         User host = new Host(name, surname, email);
