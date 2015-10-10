@@ -1,8 +1,6 @@
 package airbnb;
 
 import airbnb.common.Observer;
-import airbnb.model.Client;
-import airbnb.model.Host;
 import airbnb.model.User;
 
 import java.util.ArrayList;
@@ -32,17 +30,17 @@ public class Registration implements Observer {
 
     public void notifyHosts(String data) {
         for (User user: users) {
-            if (user instanceof Host) {
+            /*if (user instanceof Host) {
                 System.out.println("Send " + data + "to" + user.getEmail());
-            }
+            }*/
         }
     }
 
     public void notifyClients(String data) {
         for (User user: users) {
-            if (user instanceof Client) {
+           /* if (user instanceof Client) {
                 System.out.println("Send " + data + "to" + user.getEmail());
-            }
+            }*/
         }
     }
 

@@ -1,40 +1,36 @@
 package airbnb;
 
-import airbnb.accounting.Booking;
-import airbnb.accounting.ReservationDates;
-import airbnb.common.Subject;
-import airbnb.model.RentType;
-import airbnb.model.Apartment;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Set;
-import java.util.HashSet;
-import java.util.Iterator;
 import airbnb.model.User;
-import airbnb.model.Host;
-import airbnb.model.Client;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import airbnb.model.RentType;
+import airbnb.model.Adress;
+import airbnb.model.Apartment;
+import airbnb.model.UserType;
 
-public class HomeHire implements Subject {
-    private List<User> users = new ArrayList<>();
+import airbnb.processing.SQLProcessor;
+
+
+import java.text.ParseException;
+
+public class HomeHire {
+   /* private List<User> users = new ArrayList<>();
     private Set<String> cities = new HashSet<>();
     private Set<Apartment> apartments = new HashSet<>();
     private Booking book = new Booking(apartments);
-    private Registration delivery = new Registration(users);
+    private Registration delivery = new Registration(users);*/
 
-    public void register(User user) {
-        if (user.validate()) {
-            users.add(user);
-        } else {
-            System.out.println("Please enter valid data");
-        }
-        if (user instanceof Client) {
-            delivery.addToNotify(user);
-        }
-    }
 
+        /*public void register(User user) {
+            if (user.validate()) {
+                users.add(user);
+            } else {
+                System.out.println("Please enter valid data");
+            }
+            if (user instanceof Client) {
+                delivery.addToNotify(user);
+            }
+        }*/
+
+/*
     public boolean clientToHost(String surname) {
         for (User user: users) {
             if (user.getSurname() == surname) {
@@ -48,7 +44,8 @@ public class HomeHire implements Subject {
         }
         return false;
     }
-
+    */
+/*
     private void addApartment(Host host, RentType rent, String city) {
         Apartment apartment = new Apartment(host.getUserID(), rent, city);
         apartments.add(apartment);
@@ -57,8 +54,10 @@ public class HomeHire implements Subject {
             delivery.update("We have new city: " + city);
         }
     }
-
+    */
+/*
     public void remove(String surname) {
+
         Iterator<User> it = users.iterator();
         while (it.hasNext()) {
             User user = it.next();
@@ -70,8 +69,10 @@ public class HomeHire implements Subject {
                 it.remove();
             }
         }
-    }
 
+    }
+*/
+    /*
     private void removeApartment(Host host) {
         Iterator<Apartment> it = apartments.iterator();
         while (it.hasNext()) {
@@ -82,14 +83,29 @@ public class HomeHire implements Subject {
             }
         }
     }
-
+*/
+    /*
     public void getAllApartment() {
         for ( Apartment apartment: apartments ) {
             System.out.println(apartment);
         }
     }
-
+*/
     public static void main(String[] args) throws ParseException {
+        User user =  new User("Test", "Save", "qwer@site.com", UserType.HOST);
+        Adress adress = new Adress("Kiev", "Street", 42, 21);
+        Apartment apartment = new Apartment(2, RentType.ROOM, adress);
+        SQLProcessor processor =
+                new SQLProcessor("jdbc:mysql://localhost:3306/airbnb", "root", "atmel");
+        processor.openDataBase();
+        //processor.removeUser(6);
+        //processor.addUser(user);
+        //processor.getUsers();
+        //processor.addApartment(apartment);
+        processor.removeApartment(7);
+        processor.getApartments();
+        processor.closeDataBase();
+        /*
         HomeHire hire = new HomeHire();
         User user =  new Client("Jon", "Scott", "scott@site.com");
         hire.register(user);
@@ -116,5 +132,6 @@ public class HomeHire implements Subject {
         System.out.println(id);
 
         hire.getAllApartment();
+        */
     }
 }

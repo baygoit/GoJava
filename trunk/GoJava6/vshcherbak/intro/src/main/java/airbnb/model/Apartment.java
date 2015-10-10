@@ -5,10 +5,10 @@ public class Apartment {
     private int apartmentID;
     private int hostID;
     private RentType rent;
-    private String city;
+    private Adress adress;
 
-    public Apartment(int hostID, RentType rent ,String city) {
-        this.city = city;
+    public Apartment(int hostID, RentType rent ,Adress adress) {
+        this.adress = adress;
         this.rent = rent;
         this.hostID = hostID;
         apartmentID = totalApartmentID++;
@@ -30,8 +30,8 @@ public class Apartment {
         return rent;
     }
 
-    public String getCity() {
-        return city;
+    public Adress getAdress() {
+        return adress;
     }
 
     public void setApartmentID(int apartmentID) {
@@ -46,8 +46,8 @@ public class Apartment {
         this.rent = rent;
     }
 
-    public void setCity(String city) {
-        this.city = city;
+    public void setAdress(Adress adress) {
+        this.adress = adress;
     }
 
     @Override
@@ -56,7 +56,7 @@ public class Apartment {
                 "apartmentID=" + apartmentID +
                 ", hostID=" + hostID +
                 ", rent=" + rent +
-                ", city='" + city + '\'' +
+                ", adress='" + adress + '\'' +
                 '}';
     }
 
@@ -68,7 +68,7 @@ public class Apartment {
         if (apartmentID != apartment.apartmentID) return false;
         if (hostID != apartment.hostID) return false;
         if (rent != apartment.rent) return false;
-        return city.equals(apartment.city);
+        return adress.equals(apartment.adress);
     }
 
     @Override
@@ -76,7 +76,6 @@ public class Apartment {
         int result = apartmentID;
         result = 31 * result + hostID;
         result = 31 * result + rent.hashCode();
-        result = 31 * result + city.hashCode();
         return result;
     }
 }

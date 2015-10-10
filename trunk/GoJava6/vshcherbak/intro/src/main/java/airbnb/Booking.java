@@ -1,5 +1,6 @@
-package airbnb.accounting;
+package airbnb;
 
+import airbnb.accounting.ReservationDates;
 import airbnb.model.Apartment;
 import airbnb.model.RentType;
 import airbnb.model.User;
@@ -36,7 +37,7 @@ public class Booking {
         while (it.hasNext()) {
             ReservationDates reserv = it.next();
             if(reserv.getApartmentId() == apartmentID) {
-                it.remove();/// оповестить
+                it.remove();/// notify
             }
         }
     }
@@ -46,7 +47,7 @@ public class Booking {
         Date start = dt.parse(startString);
         Date end = dt.parse(endString);
         for ( Apartment apartment: apartments ) {
-            if ( apartment.getRent() == rent && apartment.getCity() == city ) {
+            if ( apartment.getRent() == rent ) {//apartment.getCity() == city
                 if ( isAvailable(apartment.getApartmentID(), start, end) ) {
                     return apartment.getApartmentID();
                 }

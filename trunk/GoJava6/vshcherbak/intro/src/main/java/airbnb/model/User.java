@@ -5,12 +5,18 @@ public class User {
     private int userID;
     private UserType type;
     private String name, surname, email;
+    private Boolean notify;
 
     public User(String name, String surname, String email, UserType type) {
         this.name = name;
         this.surname = surname;
         this.email = email;
         this.type = type;
+        if (type == UserType.CLIENT) {
+            notify = true;
+        } else {
+            notify = false;
+        }
         userID = nextUserID++;
     }
 
@@ -30,6 +36,14 @@ public class User {
     public UserType getType() { return type; }
     public int getUserID() { return userID; }
     public int getTotalUserID() { return nextUserID; }
+
+    public Boolean getNotify() {
+        return notify;
+    }
+
+    public void setNotify(Boolean notify) {
+        this.notify = notify;
+    }
 
     @Override
     public String toString() {
