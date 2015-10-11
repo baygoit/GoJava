@@ -1,4 +1,4 @@
-package com.donishchenko.airbnb.dao;
+package com.donishchenko.airbnb.jdbc;
 
 import java.io.IOException;
 import java.io.InputStream;

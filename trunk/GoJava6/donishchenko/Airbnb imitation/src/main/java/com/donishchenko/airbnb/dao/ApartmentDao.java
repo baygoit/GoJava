@@ -6,11 +6,11 @@ import com.donishchenko.airbnb.model.User;
 import java.util.List;
 
 public interface ApartmentDao {
-    public void save(Apartment apartment);
-    public void delete(int id);
-    public Apartment getById(int id);
-    public List<Apartment> getAll();
-    public List<Apartment> getByCity(String city);
-    public List<Apartment> getAllByUser(int id);
-    public List<Apartment> getAllByUser(User user);
+    void save(Apartment apartment);
+    void delete(int id);
+    Apartment getById(int id);
+    List<Apartment> getAll();
+    List<Apartment> getByCity(String city);
+    List<Apartment> getAllByUser(int id);
+    List<Apartment> getAllByUser(User user);
 }

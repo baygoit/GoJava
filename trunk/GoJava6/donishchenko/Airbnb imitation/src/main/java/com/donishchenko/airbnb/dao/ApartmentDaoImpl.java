@@ -1,6 +1,7 @@
 package com.donishchenko.airbnb.dao;
 
 import com.donishchenko.airbnb.SortOfDataBase;
+import com.donishchenko.airbnb.jdbc.DBUtils;
 import com.donishchenko.airbnb.model.Apartment;
 import com.donishchenko.airbnb.model.User;
 
@@ -61,13 +62,6 @@ public class ApartmentDaoImpl implements ApartmentDao {
 
     @Override
     public List<Apartment> getAllByUser(User user) {
-        List<Apartment> list = new LinkedList<>();
-        for (Apartment apartment : SortOfDataBase.apartments.values()) {
-            if (apartment.getHost().getId() == user.getId()) {
-                list.add(apartment);
-            }
-        }
-
-        return list;
+        return getAllByUser(user.getId());
     }
 }
