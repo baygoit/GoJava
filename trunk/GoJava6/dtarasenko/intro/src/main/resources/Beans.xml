@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+
+    <bean id="userService" class="com.gojava6.airbnb.services.UserService">
+        <constructor-arg ref="userDaoJDBC"/>
+    </bean>
+
+    <bean id="userDaoJDBC" class="com.gojava6.airbnb.dao.jdbc.UserDao">
+    </bean>
+
+
+    <bean id="apartmentService" class="com.gojava6.airbnb.services.ApartmentService">
+        <constructor-arg ref="apartmentDaoJDBC"/>
+    </bean>
+
+    <bean id="apartmentDaoJDBC" class="com.gojava6.airbnb.dao.jdbc.ApartmentDao">
+    </bean>
+
+
+    <bean id="reservationService" class="com.gojava6.airbnb.services.ReservationService">
+        <constructor-arg ref="reservationDaoJDBC"/>
+    </bean>
+
+    <bean id="reservationDaoJDBC" class="com.gojava6.airbnb.dao.jdbc.ReservationDao">
+    </bean>
+
+
+    <bean id="loyaltyProgramService" class="com.gojava6.airbnb.services.LoyaltyProgramService">
+        <constructor-arg ref="subscriberDaoJDBC"/>
+    </bean>
+
+    <bean id="subscriberDaoJDBC" class="com.gojava6.airbnb.dao.jdbc.SubscriberDao">
+    </bean>
+
+</beans>
