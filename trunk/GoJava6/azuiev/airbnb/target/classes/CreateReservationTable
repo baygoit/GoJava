@@ -1,12 +1,10 @@
-CREATE  TABLE `airbnb`.`reservation` (
-  `id` INT NOT NULL ,
-  `start` DATE NOT NULL ,
-  `end` DATE NOT NULL ,
-  `user` INT NOT NULL ,
-  PRIMARY KEY (`id`) ,
-  INDEX `user_reservation` (`user` ASC) ,
-  CONSTRAINT `user_reservation`
-    FOREIGN KEY (`user` )
-    REFERENCES `airbnb`.`user` (`id` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
+CREATE TABLE `airbnb`.`reservation` (
+  `id` INT NOT NULL,
+  `start` DATE NOT NULL,
+  `end` DATE NOT NULL,
+  `user` INT NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `user` (`user` ASC),
+  FOREIGN KEY (`user`)
+    REFERENCES `airbnb`.`user` (`id`)
+);
