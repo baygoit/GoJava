@@ -1,4 +1,4 @@
-package com.gojava6.airbnb.dao;
+package com.gojava6.airbnb.dao.jdbc;
 
 import java.sql.*;
 import java.util.ArrayList;
