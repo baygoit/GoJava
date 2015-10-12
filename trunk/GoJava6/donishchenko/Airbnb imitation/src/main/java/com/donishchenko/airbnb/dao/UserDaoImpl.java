@@ -20,8 +20,8 @@ public class UserDaoImpl implements UserDao {
     private static final String getAllUsersQuery =
             "SELECT * FROM user";
 
-    private static final String getAllUsersParamQuery =
-            "SELECT * FROM user WHERE isHost = ?";
+//    private static final String getAllUsersParamQuery =
+//            "SELECT * FROM user WHERE isHost = ?";
 
     @Override
     public void save(User user) throws SQLException {
@@ -83,17 +83,13 @@ public class UserDaoImpl implements UserDao {
             List<User> list = new LinkedList<>();
 
             String query = getAllUsersQuery;
-            boolean isHost = false;
-            if (param == Parameter.CLIENT) {
-                query = getAllUsersParamQuery;
-                isHost = false;
-            } else if (param == Parameter.HOST) {
-                query = getAllUsersParamQuery;
-                isHost = true;
+            if (param != Parameter.ALL) {
+                query = getAllUsersQuery + " WHERE isHost = ?";
             }
 
             PreparedStatement stat = conn.prepareStatement(query);
             if (param != Parameter.ALL) {
+                boolean isHost = (param != Parameter.CLIENT);
                 stat.setBoolean(1, isHost);
             }
 
