@@ -4,6 +4,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Arrays;
+
 public class OneSwipeArrayTest {
 
     private OneSwipeArray oneSwipeArray;
@@ -36,4 +38,14 @@ public class OneSwipeArrayTest {
     public void testSolutionLessThanTwo() {
         oneSwipeArray.solution(new int[1]);
     }
+
+    @Test
+    public void testInna() {
+        Arrays.sort(trueArray);
+        int[] expected = new int[]{1, 3, 3, 5, 7};
+        Assert.assertEquals(Arrays.toString(trueArray), Arrays.toString(expected));
+
+    }
+
+
 }
