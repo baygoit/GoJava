@@ -20,8 +20,8 @@ public class UserDaoImpl implements UserDao {
     private static final String getAllUsersQuery =
             "SELECT * FROM user";
 
-//    private static final String getAllUsersParamQuery =
-//            "SELECT * FROM user WHERE isHost = ?";
+    private static final String updateUserQuery =
+            "UPDATE user SET name = ?, surname = ?, email = ?, isHost = ? WHERE id = ?";
 
     @Override
     public void save(User user) throws SQLException {
@@ -41,6 +41,25 @@ public class UserDaoImpl implements UserDao {
         try (Connection conn = DBUtils.getConnection()) {
             PreparedStatement stat = conn.prepareStatement(deleteUserQuery);
             stat.setInt(1, id);
+
+            stat.executeUpdate();
+        }
+    }
+
+    @Override
+    public void update(int id, User user) throws SQLException {
+        User existingUser = getUserById(id);
+        if (existingUser.getId() != id) {
+            throw new SQLException("Wrong id");
+        }
+
+        try (Connection conn = DBUtils.getConnection()) {
+            PreparedStatement stat = conn.prepareStatement(updateUserQuery);
+            stat.setString(1, user.getName());
+            stat.setString(2, user.getSurname());
+            stat.setString(3, user.getEmail());
+            stat.setBoolean(4, user.isHost());
+            stat.setInt(5, id);
 
             stat.executeUpdate();
         }

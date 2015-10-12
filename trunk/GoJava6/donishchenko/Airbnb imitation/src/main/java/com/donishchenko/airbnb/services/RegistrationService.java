@@ -53,6 +53,15 @@ public class RegistrationService {
         deleteUser(user.getId());
     }
 
+    public void updateUser(int id, User user) {
+        try {
+            userDao.update(id, user);
+        } catch (SQLException e) {
+            //TODO throw cause to the controller
+            e.printStackTrace();
+        }
+    }
+
     public List<User> getAllUsers() {
         List<User> list = Collections.emptyList();
 
