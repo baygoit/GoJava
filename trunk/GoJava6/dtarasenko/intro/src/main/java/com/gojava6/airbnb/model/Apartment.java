@@ -2,6 +2,8 @@ package com.gojava6.airbnb.model;
 
 import com.gojava6.airbnb.services.ReservationService;
 import org.apache.log4j.Logger;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.util.List;
 
@@ -74,8 +76,10 @@ public class Apartment {
 //    }
 
     public boolean isAvailable(long start, long end) {
-        ReservationService reservationService = new ReservationService();
-        List<Reservation> reservationList = reservationService.getReservationListOfApartment(apartmentId);
+        ApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml");
+        ReservationService reservationService = (ReservationService) context.getBean("reservationService");
+
+        List<Reservation> reservationList = reservationService.getApartmentReservationList(apartmentId);
 
         if (reservationList.isEmpty()) {
             System.out.println("\nApartment is available");
@@ -91,7 +95,7 @@ public class Apartment {
         }
         System.out.println("\nApartment is available");
         return true;
-    }
+    } //TODO
 
     @Override
     public String toString() {

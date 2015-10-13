@@ -4,13 +4,13 @@ import com.donishchenko.airbnb.common.Observer;
 import com.donishchenko.airbnb.validation.Validator;
 import com.google.common.base.Joiner;
 
-public abstract class User implements Observer {
+public class User implements Observer {
     private static int USER_ID = 0;
     private int id;
     private String name;
     private String surname;
     private String email;
-    private boolean host;
+    private boolean isHost;
 
     public User() {}
 
@@ -19,12 +19,12 @@ public abstract class User implements Observer {
         this.name = name.trim();
         this.surname = surname.trim();
         this.email = email.trim();
-        this.host = false;
+        this.isHost = false;
     }
 
-    public User(String name, String surname, String email, boolean host) {
+    public User(String name, String surname, String email, boolean isHost) {
         this(name, surname, email);
-        this.host = host;
+        this.isHost = isHost;
     }
 
     public int getId() {
@@ -60,11 +60,11 @@ public abstract class User implements Observer {
     }
 
     public boolean isHost() {
-        return host;
+        return isHost;
     }
 
     public void setHost(boolean host) {
-        this.host = host;
+        this.isHost = host;
     }
 
     public boolean validate() {
@@ -81,6 +81,7 @@ public abstract class User implements Observer {
     @Override
     public String toString() {
         return Joiner.on("").join(
-                "User{id='", id, "', name='", name, "', surname='", surname, "', email='", email, "'}");
+                "User{id='", id, "', name='", name, "', surname='", surname, "', email='", email,
+                "', isHost='", isHost, "'}");
     }
 }

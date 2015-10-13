@@ -41,6 +41,7 @@ public class AirBnB {
         Apartment book2 = user.registerBook("Moskva", "Pushkina 1", ApartType.PLACE);
 
         System.out.println(user);
-
+        ApartType t = ApartType.values()[0];
+        System.out.println(t);
     }
 }
