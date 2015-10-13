@@ -1,10 +1,13 @@
 package airbnb.processing;
 
+import airbnb.accounting.ReservationDates;
 import airbnb.common.Processor;
 import airbnb.model.*;
-import java.util.Date;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.sql.*;
+import java.util.List;
 
 public class SQLProcessor implements Processor {
     private Connection connection = null;
@@ -15,10 +18,6 @@ public class SQLProcessor implements Processor {
     private String url;
     private String user;
     private String password;
-    private String addUserQuery = "INSERT INTO users VALUES(0,?,?,?,?,?,?);";
-    private String removeUserQuery = "DELETE FROM users WHERE user_id = ? ;";
-    private String addApartmentQuery = "INSERT INTO apartment VALUES (0,?,?,?,?,?,?,?,?);";
-    private String removeApartmentQuery = "DELETE FROM apartment WHERE apartment_id = ? ;";
 
     public SQLProcessor(String url, String user, String password) {
         this.url = url;
@@ -37,7 +36,6 @@ public class SQLProcessor implements Processor {
     private static Timestamp getCurrentTimeStamp() {
         Date today = new Date();
         return new Timestamp(today.getTime());
-
     }
 
     public void setQuery(String query) {
@@ -51,7 +49,6 @@ public class SQLProcessor implements Processor {
             System.out.println("Connection Failed! Check output console");
             e.printStackTrace();
         }
-        return;
     }
     public void closeDataBase() {
         try {
@@ -59,9 +56,9 @@ public class SQLProcessor implements Processor {
         } catch (SQLException e) {
             System.out.println("Connection don't want close!");
         }
-
     }
     public void addUser(User user) {
+        String addUserQuery = "INSERT INTO users VALUES(0,?,?,?,?,?,?);";
         //openDataBase();
         String userType;
         if (user.getType() == UserType.CLIENT) {
@@ -77,7 +74,6 @@ public class SQLProcessor implements Processor {
             pstmt.setString(4, user.getEmail());
             pstmt.setBoolean(5, user.getNotify());
             pstmt.setTimestamp(6, getCurrentTimeStamp());
-
             pstmt.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e);
@@ -85,9 +81,8 @@ public class SQLProcessor implements Processor {
         //delivery.addToNotify(user);
     }
     public void removeUser(int user_id) {
-
+        String removeUserQuery = "DELETE FROM users WHERE user_id = ? ;";
         //System.out.println(query);
-
         try {
             pstmt = connection.prepareStatement(removeUserQuery);
             pstmt.setInt(1, user_id);
@@ -97,15 +92,7 @@ public class SQLProcessor implements Processor {
         }
     }
     public void addApartment(Apartment apartment) {
-        query = "INSERT INTO apartment VALUES "
-                +"(0,"+apartment.getHostID()+",'"
-                +apartment.getAdress().getCity()+"','"
-                +apartment.getAdress().getStreet()+"',"
-                +apartment.getAdress().getHouse()+","
-                +apartment.getAdress().getRoom()+", '"
-                +apartment.getRent()+"', CURRENT_TIMESTAMP, null);";
-        //System.out.println(query);
-
+        String addApartmentQuery = "INSERT INTO apartment VALUES (0,?,?,?,?,?,?,?,?);";
         String apartmentType;
         if (apartment.getRent() == RentType.APARTMENT) {
             apartmentType = "apartment";
@@ -123,18 +110,47 @@ public class SQLProcessor implements Processor {
             pstmt.setInt(5, apartment.getAdress().getRoom());
             pstmt.setString(6, apartmentType);
             pstmt.setTimestamp(7, getCurrentTimeStamp());
-            pstmt.setString(6, "null");
-
+            pstmt.setString(8, "null");
             pstmt.executeUpdate();
-
         }catch (SQLException e) {
             System.out.println(e);
         }
     }
     public void removeApartment(int apartment_id) {
+        String removeApartmentQuery = "DELETE FROM apartment WHERE apartment_id = ? ;";
         try {
             pstmt = connection.prepareStatement(removeApartmentQuery);
             pstmt.setInt(1, apartment_id);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
+
+    public void addReservation(int apartment_id, int client_id, Date start, Date end) {
+        String addReservationQuery = "INSERT INTO reservation VALUES(0,?,?,?,?,?,?);";
+        java.sql.Date startDate = new java.sql.Date(start.getTime());
+        java.sql.Date endDate = new java.sql.Date(end.getTime());
+
+        try {
+            pstmt = connection.prepareStatement(addReservationQuery);
+            pstmt.setInt(1, apartment_id);
+            pstmt.setInt(2, client_id);
+            pstmt.setDate(3, startDate);
+            pstmt.setDate(4, endDate);
+            pstmt.setTimestamp(5, getCurrentTimeStamp());
+            pstmt.setString(6, "null");
+            pstmt.executeUpdate();
+        }catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
+
+    public void removeReservation(int reservation_id) {
+        String removeReservationQuery = "DELETE FROM reservation WHERE id = ? ;";
+        try {
+            pstmt = connection.prepareStatement(removeReservationQuery);
+            pstmt.setInt(1, reservation_id);
             pstmt.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e);
@@ -161,7 +177,8 @@ public class SQLProcessor implements Processor {
         }
     }
 
-    public void getApartments() {
+    public List<Apartment> getApartments() {
+        List<Apartment> apartments = new ArrayList<>();
         query = "select * from apartment;";
         try {
             stmt = connection.createStatement();
@@ -177,14 +194,125 @@ public class SQLProcessor implements Processor {
                 String rent = rs.getString("rent");
                 Date ts = rs.getTimestamp("ts");
                 String comments = rs.getString("comments");
-                System.out.println(apartment_id + " " + owner + ' ' + city + " " + street + ' ' + house
-                        + ' ' + room + ' ' + rent + ' ' + ts + ' ' + comments);
+                Adress adress = new Adress(city, street, house, room);
+                if (rent.equals("apartment")) {
+                    RentType rentType = RentType.APARTMENT;
+                } else if (rent.equals("room")) {
+                    RentType rentType = RentType.ROOM;
+                } else {
+                    RentType rentType = RentType.PLACE;
+                }
+                RentType rentType = RentType.APARTMENT;
+                apartments.add(new Apartment(owner, rentType, adress));
+                /*System.out.println(apartment_id + " " + owner + ' ' + city + " " + street + ' ' + house
+                        + ' ' + room + ' ' + rent + ' ' + ts + ' ' + comments);*/
             }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return apartments;
+    }
+
+    public List<ReservationDates> getReservations() {
+        List<ReservationDates> reservationDates = new ArrayList<>();
+        query = "select * from reservation;";
+        try {
+            stmt = connection.createStatement();
+            rs = stmt.executeQuery(query);
+
+            while (rs.next()) {
+                addReservationToList(reservationDates);
+               /* System.out.println(reservation_id + " " + apartment_id + " " + client_id + ' ' + start + " " + end + ' ' + ts
+                      + ' ' + comments);*/
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return reservationDates;
+    }
+
+    public List<ReservationDates> getReservation(Date start, Date end){
+        List<ReservationDates> reservationDates = new ArrayList<>();
+        String getReservationQuery = "SELECT * FROM reservation WHERE start < ? and end > ? ;";
+        java.sql.Date startDate = new java.sql.Date(start.getTime());
+        java.sql.Date endDate = new java.sql.Date(end.getTime());
+        try {
+            pstmt = connection.prepareStatement(getReservationQuery);
+            pstmt.setDate(1, endDate);
+            pstmt.setDate(2, startDate);
+            rs = pstmt.executeQuery(); /// make inside
+
+            while (rs.next()) {
+                addReservationToList(reservationDates);
+               /* System.out.println(reservation_id + " " + apartment_id + " " + client_id + ' ' + start + " " + end + ' ' + ts
+                      + ' ' + comments);*/
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return reservationDates;
+    }
+
+    private void addReservationToList(List<ReservationDates> reservationDates) throws SQLException {
+        int reservation_id = rs.getInt("reservation_id");
+        int apartment_id = rs.getInt("apartment_id");
+        int client_id = rs.getInt("client_id");
+        Date getStart = rs.getDate("start");
+        Date getEnd = rs.getDate("end");
+        Date ts = rs.getTimestamp("ts");
+        String comments = rs.getString("comments");
+        reservationDates.add(new ReservationDates(apartment_id, client_id, getStart, getEnd));
+    }
+
+    public void setNotify (int user_id) {
+        String setNotifyQuery = "UPDATE users SET notify = true WHERE user_id = ? ;";
+        try {
+            pstmt = connection.prepareStatement(setNotifyQuery);
+            pstmt.setInt(1, user_id);
+            pstmt.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e);
         }
     }
 
+    public void unSetNotify (int user_id) {
+        String unSetNotifyQuery = "UPDATE users SET notify = false WHERE user_id = ? ;";
+        try {
+            pstmt = connection.prepareStatement(unSetNotifyQuery);
+            pstmt.setInt(1, user_id);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
+
+    public List<String> getNotifyEmails(String kind) {
+        List<String> emails = new ArrayList<>();
+        if (kind.equals("All")) {
+            query = "SELECT email FROM users;";
+            getEmail(emails,query);
+        } else if (kind.equals("notify")) {
+            query = "SELECT email FROM users WHERE notify = true;";
+            getEmail(emails,query);
+        } else if (kind.equals("host")) {
+            query = "SELECT email FROM users WHERE kind = 'host';";
+            getEmail(emails,query);
+        } else if (kind.equals("client")) {
+            query = "SELECT email FROM users WHERE kind = 'client';";
+            getEmail(emails,query);
+        }
+        return emails;
+    }
+    private void getEmail (List<String> emails, String getEmailQuery) {
+        try {
+            stmt = connection.createStatement();
+            rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                String email = rs.getString("email");
+                emails.add(email);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
 }
-
-

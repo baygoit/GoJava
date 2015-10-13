@@ -1,6 +1,7 @@
 package airbnb;
 
 import airbnb.accounting.ReservationDates;
+import airbnb.common.Processor;
 import airbnb.model.Apartment;
 import airbnb.model.RentType;
 import airbnb.model.User;
@@ -12,9 +13,10 @@ import java.util.*;
 public class Booking {
     private Set<Apartment> apartments;
     private List<ReservationDates> reservation = new ArrayList<>();
+    private Processor processor;
 
-    public Booking(Set<Apartment> apartments) {
-        this.apartments = apartments;
+    public Booking(Processor processor) {
+        this.processor = processor;
     }
 
     public boolean isAvailable(int apartmentID, Date start, Date end) {
@@ -29,7 +31,7 @@ public class Booking {
     }
 
     public void makeReservation(int apartmentID, int clientID, Date start, Date end) {
-        reservation.add(new ReservationDates(apartmentID, clientID, start, end));
+        ;
     }
 
     public void delAllApartmentReservation(int apartmentID) {

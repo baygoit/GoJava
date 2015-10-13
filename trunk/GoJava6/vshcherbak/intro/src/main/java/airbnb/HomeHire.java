@@ -10,6 +10,9 @@ import airbnb.processing.SQLProcessor;
 
 
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 
 public class HomeHire {
    /* private List<User> users = new ArrayList<>();
@@ -95,15 +98,26 @@ public class HomeHire {
         User user =  new User("Test", "Save", "qwer@site.com", UserType.HOST);
         Adress adress = new Adress("Kiev", "Street", 42, 21);
         Apartment apartment = new Apartment(2, RentType.ROOM, adress);
+        SimpleDateFormat dt = new SimpleDateFormat("yyyy-mm-dd");
+        Date start = dt.parse("2015-08-11");
+        Date end = dt.parse("2015-11-17");
         SQLProcessor processor =
                 new SQLProcessor("jdbc:mysql://localhost:3306/airbnb", "root", "atmel");
         processor.openDataBase();
         //processor.removeUser(6);
         //processor.addUser(user);
+        //processor.unSetNotify(4);
+        //processor.setNotify(3);
+        //processor.unSetNotify(4);
         //processor.getUsers();
         //processor.addApartment(apartment);
-        processor.removeApartment(7);
-        processor.getApartments();
+        //processor.removeApartment(7);
+        //processor.getApartments();
+        //processor.addReservation(2, 3, start, end);
+        //processor.getReservations();
+        List<String> emails;
+        emails = processor.getNotifyEmails("client");
+        System.out.println(emails);
         processor.closeDataBase();
         /*
         HomeHire hire = new HomeHire();
