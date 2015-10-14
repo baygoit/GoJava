@@ -5,8 +5,8 @@ import com.gojava6.airbnb.model.ApartmentType;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import java.util.Date;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class SearchService {
