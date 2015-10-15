@@ -1,5 +1,6 @@
 package airbnb;
 
+import airbnb.accounting.ReservationDates;
 import airbnb.model.User;
 import airbnb.model.RentType;
 import airbnb.model.Adress;
@@ -98,11 +99,12 @@ public class HomeHire {
         User user =  new User("Test", "Save", "qwer@site.com", UserType.HOST);
         Adress adress = new Adress("Kiev", "Street", 42, 21);
         Apartment apartment = new Apartment(2, RentType.ROOM, adress);
-        SimpleDateFormat dt = new SimpleDateFormat("yyyy-mm-dd");
-        Date start = dt.parse("2015-08-11");
-        Date end = dt.parse("2015-11-17");
+        SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd");
+        Date start = dt.parse("2015-01-15");
+        Date end = dt.parse("2015-05-05");
         SQLProcessor processor =
                 new SQLProcessor("jdbc:mysql://localhost:3306/airbnb", "root", "atmel");
+        Booking book = new Booking(processor);
         processor.openDataBase();
         //processor.removeUser(6);
         //processor.addUser(user);
@@ -115,9 +117,14 @@ public class HomeHire {
         //processor.getApartments();
         //processor.addReservation(2, 3, start, end);
         //processor.getReservations();
-        List<String> emails;
-        emails = processor.getNotifyEmails("client");
-        System.out.println(emails);
+        //List<String> emails;
+        //emails = processor.getNotifyEmails("client");
+        //List<ReservationDates> reservation;
+        //reservation = processor.getReservations(start, end);
+        List<Apartment> apartments;
+        apartments = book.search("Kiev", RentType.ROOM, "2015-01-15", "2015-05-05");
+        System.out.println(apartments);
+        book.makeReservation(apartments.get(0).getApartmentID(), 1, "2015-01-15","2015-05-05");
         processor.closeDataBase();
         /*
         HomeHire hire = new HomeHire();

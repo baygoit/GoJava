@@ -7,6 +7,7 @@ import airbnb.model.User;
 /**
  * Created by RZA on 09.10.2015.
  */
+/*
 public class FileProcessor implements Processor {
     //void openDataBase();
     //void closeDataBase();
@@ -23,3 +24,4 @@ public class FileProcessor implements Processor {
         ;
     }
 }
+*/
