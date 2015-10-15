@@ -73,7 +73,5 @@ public abstract class AbstractDao {
         return objectList;
     }
 
-    Object createObject(ResultSet resultSet) throws SQLException {
-        return null;
-    }
+    abstract Object createObject(ResultSet resultSet) throws SQLException;
 }

@@ -2,7 +2,6 @@ package com.gojava6.airbnb.dao.jdbc;
 
 import com.gojava6.airbnb.dao.ISubscriberDao;
 import com.gojava6.airbnb.model.Subscriber;
-import com.gojava6.airbnb.model.User;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
