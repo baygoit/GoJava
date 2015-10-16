@@ -25,14 +25,6 @@ public class SQLProcessor implements Processor {
         this.url = url;
         this.user = user;
         this.password = password;
-
-       /* try {
-            Class.forName("com.mysql.jdbc.Driver");
-        } catch (ClassNotFoundException e) {
-            System.out.println("MySQL JDBC Driver not found");
-            e.printStackTrace();
-            //return;
-        }*/
     }
 
     private static Timestamp getCurrentTimeStamp() {
@@ -149,10 +141,22 @@ public class SQLProcessor implements Processor {
     }
 
     public void removeReservation(int reservation_id) {
-        String removeReservationQuery = "DELETE FROM reservation WHERE id = ? ;";
+        String removeReservationQuery = "DELETE FROM reservation WHERE reservation_id = ? ;";
         try {
             pstmt = connection.prepareStatement(removeReservationQuery);
             pstmt.setInt(1, reservation_id);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
+
+    public void removeReservations(Date date) {
+        java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+        String removeReservationQuery = "DELETE FROM reservation WHERE end < ? ;";
+        try {
+            pstmt = connection.prepareStatement(removeReservationQuery);
+            pstmt.setDate(1, sqlDate);
             pstmt.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e);
@@ -333,7 +337,7 @@ public class SQLProcessor implements Processor {
         }
     }
 
-    public List<String> getNotifyEmails(String kind) {
+    public List<String> getNotifyEmails(String kind) { // kind = All, notify, client, host
         List<String> emails = new ArrayList<>();
         if (kind.equals("All")) {
             query = "SELECT email FROM users;";

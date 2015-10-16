@@ -13,23 +13,12 @@ import java.util.*;
 
 public class Booking {
     private Set<Apartment> apartments;
-    private List<ReservationDates> reservation;// = new ArrayList<>();
+    private List<ReservationDates> reservation;
     private Processor processor;
 
     public Booking(Processor processor) {
         this.processor = processor;
     }
-
-   /* public boolean isAvailable(int apartmentID, Date start, Date end) {
-        for ( ReservationDates reserv: reservation ) {
-            if (reserv.getApartmentId() == apartmentID ) {
-                if (start.compareTo(reserv.getEnd()) < 0 || end.compareTo(reserv.getStart()) > 0) {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }*/
 
     public void makeReservation(int apartmentID, int clientID, String startString, String endString)throws ParseException {
         SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd");
@@ -47,11 +36,11 @@ public class Booking {
         return apartments;
     }
 
+    public void clean(int id) {
+        processor.removeReservation(id);
+    }
+
     public void clean(Date date) {
-        for ( ReservationDates reserv: reservation ) {
-            if (date.compareTo(reserv.getEnd()) > 0 ) {
-                reservation.remove(reserv);
-            }
-        }
+        processor.removeReservations(date);
     }
 }
