@@ -1,5 +1,6 @@
 package com.gojava6.junit.exercises;
 
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
@@ -16,6 +17,7 @@ public class PoliceTest {
     @Rule
     public ExpectedException expectedException = ExpectedException.none();
 
+    @Ignore
     @Test
     public void testDisarmPoliceman()  {
         expectedException.expect(IllegalArgumentException.class);
@@ -30,22 +32,26 @@ public class PoliceTest {
         police.disarm(null);
     }*/
 
+    @Ignore
     @Category(CriminalCategory.class)
     @Test
     public void testEliminate() throws Exception {
 
     }
 
+    @Ignore
     @Test
     public void testLockUp() throws Exception {
 
     }
 
+    @Ignore
     @Test
     public void testGetLockedUp() throws Exception {
 
     }
 
+    @Ignore
     @Category({AdministationCategory.class, CriminalCategory.class})
     @Test
     public void testMakeFee() throws Exception {
