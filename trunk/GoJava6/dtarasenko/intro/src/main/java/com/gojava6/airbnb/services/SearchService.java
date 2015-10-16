@@ -2,6 +2,8 @@ package com.gojava6.airbnb.services;
 
 import com.gojava6.airbnb.model.Apartment;
 import com.gojava6.airbnb.model.ApartmentType;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -12,7 +14,8 @@ public class SearchService {
     private List<Apartment> apartmentList;
 
     public SearchService() {
-        ApartmentService apartmentService = new ApartmentService();
+        ApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml");
+        ApartmentService apartmentService = (ApartmentService) context.getBean("apartmentService");
         this.apartmentList = apartmentService.getApartmentList();
     }
 

@@ -1,6 +1,6 @@
 package com.gojava6.airbnb.services;
 
-import com.gojava6.airbnb.dao.ReservationDao;
+import com.gojava6.airbnb.dao.IReservationDao;
 import com.gojava6.airbnb.model.Reservation;
 
 import java.util.Date;
@@ -8,26 +8,43 @@ import java.util.List;
 
 public class ReservationService {
 
-    ReservationDao reservationDao = new ReservationDao();
+    IReservationDao iReservationDao;
+
+    public ReservationService(IReservationDao iReservationDao) {
+        this.iReservationDao = iReservationDao;
+    }
 
     public void createReservation(int apartmentId, int userId, Date start, Date end) {
-        reservationDao.createReservation(apartmentId, userId, start, end);
+        Reservation reservation = new Reservation();
+        reservation.setApartmentId(apartmentId);
+        reservation.setUserId(userId);
+        reservation.setStart(start.getTime());
+        reservation.setEnd(end.getTime());
+
+        iReservationDao.createReservation(reservation);
     }
 
-    public void updateReservationDates(int reservation_id, Date start, Date end) {
-        reservationDao.updateReservationDates(reservation_id, start, end);
+    public void updateReservationDates(int reservationId, Date start, Date end) {
+        Reservation reservation = iReservationDao.getReservation(reservationId);
+        reservation.setStart(start.getTime());
+        reservation.setEnd(end.getTime());
+        iReservationDao.updateReservation(reservation);
     }
 
-    public void deleteReservation(int reservationId) {
-        reservationDao.deleteReservation(reservationId);
+    public void deleteReservation(Reservation reservation) {
+        iReservationDao.deleteReservation(reservation);
     }
 
     public List<Reservation> getReservationList() {
-        return (List<Reservation>)(List<?>) reservationDao.getReservationList();
+        return iReservationDao.getReservationList();
     }
 
-    public List<Reservation> getReservationListOfApartment(int apartment_Id) {
-        return (List<Reservation>)(List<?>) reservationDao.getReservationListOfApartment(apartment_Id);
+    public List<Reservation> getApartmentReservationList(int apartmentId) {
+        return iReservationDao.getApartmentReservationList(apartmentId);
+    }
+
+    public Reservation getReservation(int reservationId) {
+        return iReservationDao.getReservation(reservationId);
     }
 
     public void printAllReservations(){

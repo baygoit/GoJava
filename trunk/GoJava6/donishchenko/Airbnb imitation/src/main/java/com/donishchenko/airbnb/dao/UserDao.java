@@ -2,15 +2,15 @@ package com.donishchenko.airbnb.dao;
 
 import com.donishchenko.airbnb.model.User;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public interface UserDao {
-    public void saveClient(User user);
-    public void saveHost(User user);
-    public void deleteClient(int id);
-    public void deleteHost(int id);
-    public User getClientById(int id);
-    public User getHostById(int id);
-    public List<User> getAllClients();
-    public List<User> getAllHosts();
+    void save(User user) throws SQLException;
+    void delete(int id) throws SQLException;
+    void update(int id, User user) throws SQLException;
+    User getUserById(int id) throws SQLException;
+    List<User> getAllUsers() throws SQLException;
+    List<User> getAllClients() throws SQLException;
+    List<User> getAllHosts() throws SQLException;
 }

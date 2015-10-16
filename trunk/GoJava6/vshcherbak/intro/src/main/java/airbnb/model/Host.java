@@ -1,5 +1,5 @@
 package airbnb.model;
-
+/*
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
@@ -16,13 +16,13 @@ public class Host extends User {
 
     public void delApartment(int apartmentID) {
         apartments.remove(apartmentID);
-    /*    Iterator<Integer> it = apartments.iterator();
+    /   Iterator<Integer> it = apartments.iterator();
         while (it.hasNext()) {
             Integer ID = it.next();
             if ( ID == apartmentID) {
                 it.remove();
             }
-        }*/
+        }
     }
 
     @Override
@@ -35,3 +35,4 @@ public class Host extends User {
         return super.validate();
     }
 }
+*/

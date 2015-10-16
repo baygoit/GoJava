@@ -11,22 +11,17 @@ import java.util.Queue;
 
 public class Parser {
     Queue<Employee> employees = new PriorityQueue<>();
-    //Set<Employee> employees = new HashSet<>();
 
     public Queue<Employee> parseFileTextToSortedEmployeeList(String fileName) throws IOException {
         URL url = this.getClass().getResource(fileName);
         File file = new File(url.getFile());
-        BufferedReader reader = new BufferedReader(new FileReader(file));
         String result;
 
-        try {
+        try(BufferedReader reader = new BufferedReader(new FileReader(file))) {
             while ((result = reader.readLine()) != null) {
                 String[] row = result.split(";");
                 employees.add(parseEmployee(row));
             }
-        } finally {
-            if(reader!=null)
-                reader.close();
         }
         return employees;
     }

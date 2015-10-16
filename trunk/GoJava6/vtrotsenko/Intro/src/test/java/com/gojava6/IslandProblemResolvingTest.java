@@ -1,3 +1,4 @@
+/*
 package com.gojava6;
 
 import org.junit.After;
@@ -6,9 +7,11 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+*/
 /**
  * Created by root on 18.09.15.
- */
+ *//*
+
 public class IslandProblemResolvingTest {
 
     private int[][] islandMap;
@@ -30,4 +33,4 @@ public class IslandProblemResolvingTest {
         IslandProblemResolving isP = new IslandProblemResolving(islandMap);
         assertEquals(count, isP.numIslands(islandMap));
     }
-}
+}*/

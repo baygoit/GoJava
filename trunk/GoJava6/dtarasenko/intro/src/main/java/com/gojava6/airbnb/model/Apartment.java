@@ -2,12 +2,14 @@ package com.gojava6.airbnb.model;
 
 import com.gojava6.airbnb.services.ReservationService;
 import org.apache.log4j.Logger;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.util.List;
 
 public class Apartment {
 
-    private static final Logger log = Logger.getLogger(Apartment.class);
+    private static final Logger log = Logger.getLogger(Apartment.class);//TODO
 
     private int apartmentId;
     private String city;
@@ -73,25 +75,24 @@ public class Apartment {
 //        }
 //    }
 
-    public boolean isAvailable(long start, long end) {
-        ReservationService reservationService = new ReservationService();
-        List<Reservation> reservationList = reservationService.getReservationListOfApartment(apartmentId);
+    public boolean isAvailable(long start, long end) { //TODO
+        ApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml");
+        ReservationService reservationService = (ReservationService) context.getBean("reservationService");
+
+        List<Reservation> reservationList = reservationService.getApartmentReservationList(apartmentId);
 
         if (reservationList.isEmpty()) {
-            System.out.println("\nApartment is available");
             return true;
         } else {
             for (Reservation rd : reservationList) {
                 if (!(start < rd.getStart() && end < rd.getStart()) &&
                         !(start > rd.getEnd() && end > rd.getEnd())) {
-                    System.out.println("\nApartment is not available");
                     return false;
                 }
             }
         }
-        System.out.println("\nApartment is available");
         return true;
-    }
+    } //TODO
 
     @Override
     public String toString() {

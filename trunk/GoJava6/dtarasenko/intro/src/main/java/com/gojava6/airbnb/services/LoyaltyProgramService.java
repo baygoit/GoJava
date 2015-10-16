@@ -1,18 +1,24 @@
 package com.gojava6.airbnb.services;
 
-import com.gojava6.airbnb.dao.IDao;
-import com.gojava6.airbnb.dao.SubscriberDao;
+import com.gojava6.airbnb.dao.ISubscriberDao;
 import com.gojava6.airbnb.model.Subscriber;
 import com.gojava6.airbnb.model.User;
 import com.gojava6.airbnb.observer.Observer;
 import com.gojava6.airbnb.observer.Subject;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.util.List;
 
 public class LoyaltyProgramService implements Subject {
 
+    private ISubscriberDao iSubscriberDao;
     private String loyaltyProgramName;
     private boolean available;
+
+    public LoyaltyProgramService(ISubscriberDao iSubscriberDao) {
+        this.iSubscriberDao = iSubscriberDao;
+    }
 
     public void setAvailable(boolean available) {
         this.available = available;
@@ -25,7 +31,6 @@ public class LoyaltyProgramService implements Subject {
         this.loyaltyProgramName = loyaltyProgramName;
     }
 
-    @Override
     public void registerObserver(Observer observer) {
         User user = (User) observer;
         int userId = user.getUserId();
@@ -33,31 +38,27 @@ public class LoyaltyProgramService implements Subject {
         Subscriber subscriber = new Subscriber();
         subscriber.setUserId(userId);
 
-        IDao iDao = new SubscriberDao();
-        iDao.createObject(subscriber);
+        iSubscriberDao.createSubscriber(subscriber);
     }
 
-    @Override
     public void removeObserver(Observer observer) {
         User user = (User) observer;
         int userId = user.getUserId();
-
-        IDao iDao = new SubscriberDao();
-        iDao.deleteObject(userId);
+        Subscriber subscriber = iSubscriberDao.getSubscriber(userId);
+        iSubscriberDao.deleteSubscriber(subscriber);
     }
 
-    @Override
     public void notifyObservers() {
         System.out.println("\nNotifying all registered clients about new loyalty programs:");
 
-        UserService userService = new UserService();
+        ApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml");
+        UserService userService = (UserService) context.getBean("userService");
 
-        IDao iDao = new SubscriberDao();
-        List<Subscriber> subscriberList = (List<Subscriber>)(List<?>) iDao.getObjectList();
+        List<Subscriber> subscriberList = iSubscriberDao.getSubscriberList();
 
         for (Subscriber subscriber : subscriberList) {
-            int subscriberId = subscriber.getUserId();
-            User user = userService.getUser(subscriberId);
+            int userId = subscriber.getUserId();
+            User user = userService.getUser(userId);
             user.update(loyaltyProgramName);
         }
     }

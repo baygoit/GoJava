@@ -1,19 +1,14 @@
 CREATE  TABLE `airbnb`.`apartment` (
-  `id` INT NOT NULL ,
-  `adress` VARCHAR(120) NOT NULL ,
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `address` VARCHAR(120) NOT NULL ,
   `aparttype` TINYINT NOT NULL ,
   `user` INT NOT NULL ,
   `city` INT NOT NULL ,
   PRIMARY KEY (`id`) ,
-  INDEX `user_apartment` (`user` ASC) ,
-  INDEX `city_apartment` (`city` ASC) ,
-  CONSTRAINT `user_apartment`
+  INDEX `user` (`user` ASC) ,
+  INDEX `city` (`city` ASC) ,
     FOREIGN KEY (`user` )
-    REFERENCES `airbnb`.`user` (`id` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `city_apartment`
+    REFERENCES `airbnb`.`user` (`id` ),
     FOREIGN KEY (`city` )
     REFERENCES `airbnb`.`city` (`id` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
+);

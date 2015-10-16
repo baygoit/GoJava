@@ -28,7 +28,7 @@ public class PascalTriangleTest {
         Assert.assertArrayEquals(triangle, actual);
     }
 
-    @Test
+    @Test(expected = IllegalArgumentException.class)
       public void calculateTriangleWhenLevelIsNegativeNumber() {
         PascalTriangle pascalTriangle = new PascalTriangle(-5);
         int[][] actual = pascalTriangle.calculateTriangle();
@@ -41,6 +41,13 @@ public class PascalTriangleTest {
         int[][] actual = pascalTriangle.calculateTriangle();
         int[][] expected = new int[0][0];
         Assert.assertArrayEquals(expected, actual);
+    }
+
+    @Test(expected = OutOfMemoryError.class)
+    public void calculateTriangleWhenLevelIsMaxIntegerValue() {
+        PascalTriangle pascalTriangle = new PascalTriangle(Integer.MAX_VALUE);
+        int[][] actual = pascalTriangle.calculateTriangle();
+        Assert.assertArrayEquals(null, actual);
     }
 
 }
