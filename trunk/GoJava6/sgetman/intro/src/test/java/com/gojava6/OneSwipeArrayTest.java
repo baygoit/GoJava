@@ -1,6 +1,7 @@
 package com.gojava6;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.junit.Assert.assertFalse;
@@ -21,22 +22,25 @@ public class OneSwipeArrayTest {
         trueArray = new int[]{1, 5, 3, 3, 7};
         falseArray = new int[]{1, 3, 5, 3, 4};
     }
-
+    @Ignore
     @Test
     public void testSolution() {
         assertTrue(oneSwipeArray.solution(trueArray));
     }
 
+    @Ignore
     @Test
     public void testSolutionTwo() {
         assertFalse(oneSwipeArray.solution(falseArray));
     }
 
+    @Ignore
     @Test(expected = IllegalArgumentException.class)
     public void testSolutionNull() {
         oneSwipeArray.solution(null);
     }
 
+    @Ignore
     @Test(expected = IllegalArgumentException.class)
     public void testSolutionLessThanTwo() {
         oneSwipeArray.solution(new int[1]);
