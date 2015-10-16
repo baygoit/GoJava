@@ -1,12 +1,10 @@
 package com.gojava6.airbnb.services;
 
-import com.gojava6.airbnb.dao.IDao;
 import com.gojava6.airbnb.dao.ISubscriberDao;
-import com.gojava6.airbnb.dao.jdbc.SubscriberDao;
 import com.gojava6.airbnb.model.Subscriber;
+import com.gojava6.airbnb.model.User;
 import com.gojava6.airbnb.observer.Observer;
 import com.gojava6.airbnb.observer.Subject;
-import com.gojava6.airbnb.model.User;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -33,7 +31,6 @@ public class LoyaltyProgramService implements Subject {
         this.loyaltyProgramName = loyaltyProgramName;
     }
 
-    @Override
     public void registerObserver(Observer observer) {
         User user = (User) observer;
         int userId = user.getUserId();
@@ -44,7 +41,6 @@ public class LoyaltyProgramService implements Subject {
         iSubscriberDao.createSubscriber(subscriber);
     }
 
-    @Override
     public void removeObserver(Observer observer) {
         User user = (User) observer;
         int userId = user.getUserId();
@@ -52,7 +48,6 @@ public class LoyaltyProgramService implements Subject {
         iSubscriberDao.deleteSubscriber(subscriber);
     }
 
-    @Override
     public void notifyObservers() {
         System.out.println("\nNotifying all registered clients about new loyalty programs:");
 

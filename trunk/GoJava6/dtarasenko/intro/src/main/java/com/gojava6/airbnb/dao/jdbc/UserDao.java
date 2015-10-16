@@ -3,7 +3,8 @@ package com.gojava6.airbnb.dao.jdbc;
 import com.gojava6.airbnb.dao.IUserDao;
 import com.gojava6.airbnb.model.User;
 
-import java.sql.*;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 public class UserDao extends AbstractDao implements IUserDao {

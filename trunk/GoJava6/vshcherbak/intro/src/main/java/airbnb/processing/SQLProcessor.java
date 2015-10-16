@@ -4,10 +4,12 @@ import airbnb.accounting.ReservationDates;
 import airbnb.common.Processor;
 import airbnb.model.*;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.sql.*;
 import java.util.List;
+import java.util.ListIterator;
 
 public class SQLProcessor implements Processor {
     private Connection connection = null;
@@ -179,36 +181,83 @@ public class SQLProcessor implements Processor {
 
     public List<Apartment> getApartments() {
         List<Apartment> apartments = new ArrayList<>();
-        query = "select * from apartment;";
+        String getApartmentsQuery = "select * from apartment;";
         try {
             stmt = connection.createStatement();
-            rs = stmt.executeQuery(query);
+            rs = stmt.executeQuery(getApartmentsQuery);
 
             while (rs.next()) {
-                int apartment_id = rs.getInt("apartment_id");
-                int owner = rs.getInt("owner");
-                String city = rs.getString("city");
-                String street = rs.getString("street");
-                int house = rs.getInt("house");
-                int room = rs.getInt("room");
-                String rent = rs.getString("rent");
-                Date ts = rs.getTimestamp("ts");
-                String comments = rs.getString("comments");
-                Adress adress = new Adress(city, street, house, room);
-                if (rent.equals("apartment")) {
-                    RentType rentType = RentType.APARTMENT;
-                } else if (rent.equals("room")) {
-                    RentType rentType = RentType.ROOM;
-                } else {
-                    RentType rentType = RentType.PLACE;
-                }
-                RentType rentType = RentType.APARTMENT;
-                apartments.add(new Apartment(owner, rentType, adress));
+                addApartmentToList(apartments);
                 /*System.out.println(apartment_id + " " + owner + ' ' + city + " " + street + ' ' + house
                         + ' ' + room + ' ' + rent + ' ' + ts + ' ' + comments);*/
             }
         } catch (SQLException e) {
             System.out.println(e);
+        }
+        return apartments;
+    }
+
+    public List<Apartment> getApartments(String city, RentType rent) {
+        List<Apartment> apartments = new ArrayList<>();
+        String getApartmentsQuery = "select * from apartment where city=? and rent=?;";
+        try {
+            pstmt = connection.prepareStatement(getApartmentsQuery);
+            pstmt.setString(1, city);
+            if (rent.equals(RentType.APARTMENT)) {
+                pstmt.setString(2, "apartment");
+            } else if (rent.equals(RentType.ROOM)) {
+                pstmt.setString(2, "room");;
+            } else {
+                pstmt.setString(2, "place");
+            }
+            rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                addApartmentToList(apartments);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return apartments;
+    }
+
+    private void addApartmentToList(List<Apartment> apartments) throws SQLException {
+        int apartment_id = rs.getInt("apartment_id");
+        int owner = rs.getInt("owner");
+        String city = rs.getString("city");
+        String street = rs.getString("street");
+        int house = rs.getInt("house");
+        int room = rs.getInt("room");
+        String rent = rs.getString("rent");
+        Date ts = rs.getTimestamp("ts");
+        String comments = rs.getString("comments");
+        Adress adress = new Adress(city, street, house, room);
+        if (rent.equals("apartment")) {
+            RentType rentType = RentType.APARTMENT;
+        } else if (rent.equals("room")) {
+            RentType rentType = RentType.ROOM;
+        } else {
+            RentType rentType = RentType.PLACE;
+        }
+        RentType rentType = RentType.APARTMENT;
+        apartments.add(new Apartment(owner, rentType, adress));
+    }
+
+    public List<Apartment> search( String city, RentType rent, Date startString, Date endString ) throws ParseException {
+        List<Apartment> apartments;// = new ArrayList<>();
+        List<ReservationDates> reservationDates;// = new ArrayList<>();
+        apartments = getApartments(city, rent);
+        //System.out.println(apartments);
+        reservationDates = getReservations(startString, endString);
+        //System.out.println(reservationDates);
+        ListIterator<Apartment> aIt = apartments.listIterator();
+        while (aIt.hasNext()) {
+            Apartment apartment = aIt.next();
+            for (ReservationDates reserv: reservationDates) {
+                if (reserv.getApartmentId() == apartment.getApartmentID()) {
+                    aIt.remove();
+                }
+            }
         }
         return apartments;
     }
@@ -231,7 +280,7 @@ public class SQLProcessor implements Processor {
         return reservationDates;
     }
 
-    public List<ReservationDates> getReservation(Date start, Date end){
+    public List<ReservationDates> getReservations(Date start, Date end){
         List<ReservationDates> reservationDates = new ArrayList<>();
         String getReservationQuery = "SELECT * FROM reservation WHERE start < ? and end > ? ;";
         java.sql.Date startDate = new java.sql.Date(start.getTime());
@@ -244,8 +293,6 @@ public class SQLProcessor implements Processor {
 
             while (rs.next()) {
                 addReservationToList(reservationDates);
-               /* System.out.println(reservation_id + " " + apartment_id + " " + client_id + ' ' + start + " " + end + ' ' + ts
-                      + ' ' + comments);*/
             }
         } catch (SQLException e) {
             System.out.println(e);

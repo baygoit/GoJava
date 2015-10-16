@@ -8,6 +8,10 @@ import airbnb.model.Apartment;
 import airbnb.model.RentType;
 import airbnb.model.User;
 
+import java.text.ParseException;
+import java.util.Date;
+import java.util.List;
+
 public interface Processor {
     //void openDataBase();
     //void closeDataBase();
@@ -15,4 +19,7 @@ public interface Processor {
     void removeUser(int user_id);
     void addApartment(Apartment apartment);
     void removeApartment(int id);
+    void addReservation(int apartmentID, int clientID, Date start, Date end);
+    void removeReservation(int reservation_id);
+    List<Apartment> search( String city, RentType rent, Date start, Date end ) throws ParseException;
 }
