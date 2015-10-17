@@ -1,5 +1,7 @@
 package com.Airbnb.app.model;
 
+import com.Airbnb.app.model.ApartType;
+import com.Airbnb.app.model.Host;
 import com.Airbnb.app.validation.Validator;
 
 /**
@@ -8,12 +10,12 @@ import com.Airbnb.app.validation.Validator;
 public class Apartment {
     private static int APARTMENT_ID = 0;
     private int id;
-    private Host host;
+    private User host;
     private String city;
     private ApartType apartType;
     private boolean reserved;
 
-    public Apartment(Host host, String city, ApartType apartType, boolean reserved){
+    public Apartment(User host, String city, ApartType apartType, boolean reserved){
         this.id = ++APARTMENT_ID;
         this.host = host;
         this.city= city;
@@ -25,11 +27,11 @@ public class Apartment {
         return id;
     }
 
-    public Host getHost (){
+    public User getHost (){
         return host;
     }
 
-    public void setHost (Host host){
+    public void setHost (User host){
         this.host = host;
     }
 
