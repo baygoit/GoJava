@@ -1,4 +1,4 @@
-package com.azuiev.Filter;
+package com.azuiev.filter;
 
 import com.azuiev.model.Apartment;
 import java.util.List;

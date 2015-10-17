@@ -1,7 +1,7 @@
 package com.azuiev.model;
 
 import com.azuiev.AirBnB;
-import com.azuiev.Enums.ApartType;
+import com.azuiev.enums.ApartType;
 import com.azuiev.Validator;
 
 import java.text.SimpleDateFormat;

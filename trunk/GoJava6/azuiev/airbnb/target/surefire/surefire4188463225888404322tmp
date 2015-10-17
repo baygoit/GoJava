@@ -1,0 +1,27 @@
+#surefire
+#Sat Oct 17 16:31:33 EEST 2015
+testClassesDirectory=C\:\\need\\GoJava\\trunk\\GoJava6\\azuiev\\airbnb\\target\\test-classes
+classPathUrl.4=C\:\\Users\\Masta\\.m2\\repository\\mysql\\mysql-connector-java\\5.1.36\\mysql-connector-java-5.1.36.jar
+classPathUrl.3=C\:\\Users\\Masta\\.m2\\repository\\junit\\junit\\3.8.1\\junit-3.8.1.jar
+classPathUrl.2=C\:\\Users\\Masta\\.m2\\repository\\log4j\\log4j\\1.2.17\\log4j-1.2.17.jar
+useManifestOnlyJar=true
+classPathUrl.1=C\:\\need\\GoJava\\trunk\\GoJava6\\azuiev\\airbnb\\target\\classes
+reportsDirectory=C\:\\need\\GoJava\\trunk\\GoJava6\\azuiev\\airbnb\\target\\surefire-reports
+classPathUrl.0=C\:\\need\\GoJava\\trunk\\GoJava6\\azuiev\\airbnb\\target\\test-classes
+providerConfiguration=org.apache.maven.surefire.junit.JUnit3Provider
+testSuiteDefinitionTestSourceDirectory=C\:\\need\\GoJava\\trunk\\GoJava6\\azuiev\\airbnb\\src\\test\\java
+surefireClassPathUrl.1=C\:\\Users\\Masta\\.m2\\repository\\org\\apache\\maven\\surefire\\surefire-api\\2.12.4\\surefire-api-2.12.4.jar
+surefireClassPathUrl.0=C\:\\Users\\Masta\\.m2\\repository\\org\\apache\\maven\\surefire\\surefire-junit3\\2.12.4\\surefire-junit3-2.12.4.jar
+runOrder=filesystem
+useSystemClassLoader=true
+excludes0=**/*$*
+isTrimStackTrace=true
+tc.0=com.azuiev.AirBnBTest
+enableAssertions=true
+includes2=**/*TestCase.java
+failIfNoTests=false
+includes1=**/*Test.java
+runStatisticsFile=C\:\\need\\GoJava\\trunk\\GoJava6\\azuiev\\airbnb\\.surefire-934C02E541D3FC68C55CC2EE2AB5AEEE003D1A16
+includes0=**/Test*.java
+childDelegation=false
+classPathUrl.5=C\:\\Users\\Masta\\.m2\\repository\\javax\\servlet\\servlet-api\\2.5\\servlet-api-2.5.jar
