@@ -26,25 +26,39 @@
             <version>5.1.36</version>
         </dependency>
         <dependency>
+            <groupId>org.eclipse.jetty</groupId>
+            <artifactId>jetty-runner</artifactId>
+            <version>9.3.0.M1</version>
+        </dependency>
+
+        <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>servlet-api</artifactId>
             <version>2.5</version>
         </dependency>
-        </dependencies>
+    </dependencies>
     <build>
         <plugins>
             <plugin>
                 <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
                 <version>9.3.0.M1</version>
+            </plugin>
+                <!--
                 <configuration>
-
+                    <webApp>
+                        <baseResource implementation="org.eclipse.jetty.util.resource.ResourceCollection">
+                            <resourcesAsCSV>${project.basedir}/target/classes/com/azuiev/servlet</resourcesAsCSV>
+                        </baseResource>
+                    </webApp>
                 </configuration>
+
             </plugin>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.0</version>
             </plugin>
+            -->
             <plugin>
                 <artifactId>maven-war-plugin</artifactId>
                 <version>2.5</version>
@@ -52,7 +66,8 @@
                     <webXml>src\main\java\webapp\WEB-INF\web.xml</webXml>
                 </configuration>
             </plugin>
-        </plugins>
+
+           </plugins>
 
     </build>
 
