@@ -1,3 +1,4 @@
+/*
 package com.gojava6.iterator;
 
 import org.junit.Before;
@@ -8,9 +9,11 @@ import java.util.NoSuchElementException;
 
 import static org.junit.Assert.*;
 
+*/
 /**
  * Created by sergiigetman on 10/7/15.
- */
+ *//*
+
 public class DequeIteratorTest {
     private Deque<Integer> deque;
 
@@ -37,4 +40,4 @@ public class DequeIteratorTest {
     }
 
 
-}
+}*/

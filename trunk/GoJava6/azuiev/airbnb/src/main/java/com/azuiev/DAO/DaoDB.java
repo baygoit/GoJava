@@ -1,4 +1,4 @@
-package com.azuiev.DAO;
+package com.azuiev.dao;
 
 import java.sql.Connection;
 

@@ -1,6 +1,6 @@
-package com.azuiev.DB;
+package com.azuiev.db;
 
-import com.azuiev.DAO.DaoDB;
+import com.azuiev.dao.DaoDB;
 
 import java.sql.*;
 

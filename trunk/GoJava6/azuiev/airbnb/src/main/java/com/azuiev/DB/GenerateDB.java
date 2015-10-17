@@ -1,6 +1,6 @@
-package com.azuiev.DB;
+package com.azuiev.db;
 
-import com.azuiev.DAO.DaoDB;
+import com.azuiev.dao.DaoDB;
 
 import java.io.*;
 import java.sql.Connection;
@@ -55,6 +55,12 @@ public class GenerateDB implements DaoDB{
         list.add("CreateCityTable");
         list.add("CreateApartmentTable");
         list.add("CreateReservationTable");
+        list.add("CreateRoleTable");
+        list.add("AddUsers");
+        list.add("AddCities");
+        list.add("AddRole");
+        list.add("AddApartment");
+
         for (String fileName : list) {
             execute(fileName);
 

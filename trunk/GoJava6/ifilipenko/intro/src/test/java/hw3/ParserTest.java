@@ -11,7 +11,6 @@ public class ParserTest {
 
     Parser parser;
     Queue<Employee> actual;
-    //Set<Employee> actual;
 
     @Before
     public void init() {

@@ -101,7 +101,22 @@ public class ResizingArrayQueue<Item> implements Iterable<Item> {
      */
     public Iterator<Item> iterator() {
         //TODO
-        return new ResArrQueIterator();
+        return new ResizingArrayQueueIterator();
+    }
+
+    private class ResizingArrayQueueIterator implements Iterator<Item> {
+
+        int cursor = 0;
+
+        @Override
+        public boolean hasNext() {
+            return cursor < size();
+        }
+
+        @Override
+        public Item next() {
+            return q[cursor++];
+        }
     }
 
 

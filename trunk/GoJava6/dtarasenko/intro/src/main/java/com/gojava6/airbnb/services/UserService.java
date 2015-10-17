@@ -1,6 +1,6 @@
 package com.gojava6.airbnb.services;
 
-import com.gojava6.airbnb.dao.UserDao;
+import com.gojava6.airbnb.dao.IUserDao;
 import com.gojava6.airbnb.model.User;
 import com.gojava6.airbnb.model.UserType;
 
@@ -8,31 +8,42 @@ import java.util.List;
 
 public class UserService  {
 
-    UserDao userDao = new UserDao();
+    IUserDao iUserDao;
+
+    public UserService(IUserDao iUserDao) {
+        this.iUserDao = iUserDao;
+    }
 
     public void createUser(String name, String surname, String email, UserType userType) {
         ValidationService validationService = new ValidationService();
 
         if (validationService.isValidName(name) && validationService.isValidSurname(surname)
                 && validationService.isValidEmail(email)) {
-            userDao.createUser(name, surname, email, userType);
+
+            User user = new User();
+            user.setName(name);
+            user.setSurname(surname);
+            user.setEmail(email);
+            user.setUserType(userType.getUserType());
+            iUserDao.createUser(user);
         }
     }
 
-    public void deleteUser(Integer userId) {
-        userDao.deleteUser(userId);
+    public void deleteUser(User user) {
+        iUserDao.deleteUser(user);
     }
 
-    public void updateUserTypeToHost(Integer userId) {
-        userDao.updateUserTypeToHost(userId);
+    public void updateUserTypeToHost(User user) {
+        user.setUserType(UserType.HOST.getUserType());
+        iUserDao.updateUser(user);
     }
 
     public User getUser(Integer userId) {
-        return (User) userDao.getUser(userId);
+        return iUserDao.getUser(userId);
     }
 
     public List<User> getUserList() {
-        return (List<User>)(List<?>) userDao.getUserList();
+        return iUserDao.getUserList();
     }
 
     public void printAllUsers(){

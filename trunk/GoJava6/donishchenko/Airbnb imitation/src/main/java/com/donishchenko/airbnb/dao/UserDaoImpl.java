@@ -1,77 +1,136 @@
 package com.donishchenko.airbnb.dao;
 
-import com.donishchenko.airbnb.SortOfDataBase;
-import com.donishchenko.airbnb.model.Apartment;
+import com.donishchenko.airbnb.jdbc.DBUtils;
 import com.donishchenko.airbnb.model.User;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.util.Iterator;
+import java.sql.*;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
 public class UserDaoImpl implements UserDao {
     private static final String saveUserQuery =
-            "INSERT INTO user VALUES(null,?,?,?)";
+            "INSERT INTO user VALUES(null, ?, ?, ?, ?)";
+
+    private static final String deleteUserQuery =
+            "DELETE FROM user WHERE id = ?";
+
+    private static final String getUserByIdQuery =
+            "SELECT id, name, surname, email, isHost FROM user WHERE id = ?";
+
+    private static final String getAllUsersQuery =
+            "SELECT * FROM user";
+
+    private static final String updateUserQuery =
+            "UPDATE user SET name = ?, surname = ?, email = ?, isHost = ? WHERE id = ?";
 
     @Override
-    public void saveClient(User user) {
+    public void save(User user) throws SQLException {
         try (Connection conn = DBUtils.getConnection()) {
-            PreparedStatement stmt = conn.prepareStatement(saveUserQuery);
-            stmt.setString(1, user.getName());
-            stmt.setString(2, user.getSurname());
-            stmt.setString(3, user.getEmail());
+            PreparedStatement stat = conn.prepareStatement(saveUserQuery);
+            stat.setString(1, user.getName());
+            stat.setString(2, user.getSurname());
+            stat.setString(3, user.getEmail());
+            stat.setBoolean(4, user.isHost());
 
-            stmt.execute();
-        } catch (SQLException ex) {
-            ex.printStackTrace();
+            stat.executeUpdate();
+        }
+    }
+
+    @Override
+    public void delete(int id) throws SQLException {
+        try (Connection conn = DBUtils.getConnection()) {
+            PreparedStatement stat = conn.prepareStatement(deleteUserQuery);
+            stat.setInt(1, id);
+
+            stat.executeUpdate();
+        }
+    }
+
+    @Override
+    public void update(int id, User user) throws SQLException {
+        User existingUser = getUserById(id);
+        if (existingUser.getId() != id) {
+            throw new SQLException("Wrong id");
         }
 
-        SortOfDataBase.clients.put(user.getId(), user);
+        try (Connection conn = DBUtils.getConnection()) {
+            PreparedStatement stat = conn.prepareStatement(updateUserQuery);
+            stat.setString(1, user.getName());
+            stat.setString(2, user.getSurname());
+            stat.setString(3, user.getEmail());
+            stat.setBoolean(4, user.isHost());
+            stat.setInt(5, id);
+
+            stat.executeUpdate();
+        }
     }
 
     @Override
-    public void saveHost(User user) {
-        SortOfDataBase.hosts.put(user.getId(), user);
+    public User getUserById(int id) throws SQLException {
+        try (Connection conn = DBUtils.getConnection()) {
+            PreparedStatement stat = conn.prepareStatement(getUserByIdQuery);
+            stat.setInt(1, id);
+
+            ResultSet result = stat.executeQuery();
+            result.next();
+
+            return createUser(result);
+        }
     }
 
     @Override
-    public void deleteClient(int id) {
-        SortOfDataBase.clients.remove(id);
+    public List<User> getAllUsers() throws SQLException {
+        return getAllUsersWithParameter(Parameter.ALL);
     }
 
     @Override
-    public void deleteHost(int id) {
-        User host = SortOfDataBase.hosts.remove(id);
-        Map<Integer, Apartment> apartments = SortOfDataBase.apartments;
+    public List<User> getAllClients() throws SQLException {
+        return getAllUsersWithParameter(Parameter.CLIENT);
+    }
 
-        for(Iterator<Map.Entry<Integer, Apartment>> it = apartments.entrySet().iterator(); it.hasNext(); ) {
-            Map.Entry<Integer, Apartment> entry = it.next();
-            if(entry.getValue().getHost().getId() == host.getId()) {
-                it.remove();
+    @Override
+    public List<User> getAllHosts() throws SQLException {
+        return getAllUsersWithParameter(Parameter.HOST);
+    }
+
+    private enum Parameter {
+        ALL, CLIENT, HOST
+    }
+
+    private List<User> getAllUsersWithParameter(Parameter param) throws SQLException {
+        try (Connection conn = DBUtils.getConnection()) {
+            List<User> list = new LinkedList<>();
+
+            String query = getAllUsersQuery;
+            if (param != Parameter.ALL) {
+                query = getAllUsersQuery + " WHERE isHost = ?";
             }
+
+            PreparedStatement stat = conn.prepareStatement(query);
+            if (param != Parameter.ALL) {
+                boolean isHost = (param != Parameter.CLIENT);
+                stat.setBoolean(1, isHost);
+            }
+
+            ResultSet result = stat.executeQuery();
+            while (result.next()) {
+                list.add(createUser(result));
+            }
+
+            return list;
         }
     }
 
-    @Override
-    public User getClientById(int id) {
-        return SortOfDataBase.clients.get(id);
-    }
+    private User createUser(ResultSet result) throws SQLException {
+        int id          = result.getInt(1);
+        String name     = result.getString(2);
+        String surname  = result.getString(3);
+        String email    = result.getString(4);
+        boolean isHost  = result.getBoolean(5);
 
-    @Override
-    public User getHostById(int id) {
-        return SortOfDataBase.hosts.get(id);
-    }
+        User user = new User(name, surname, email, isHost);
+        user.setId(id);
 
-    @Override
-    public List<User> getAllClients() {
-        return new LinkedList<>(SortOfDataBase.clients.values());
-    }
-
-    @Override
-    public List<User> getAllHosts() {
-        return new LinkedList<>(SortOfDataBase.hosts.values());
+        return user;
     }
 }

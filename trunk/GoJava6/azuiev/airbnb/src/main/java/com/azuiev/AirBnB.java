@@ -1,10 +1,10 @@
 package com.azuiev;
 
-import com.azuiev.DAO.DaoDB;
-import com.azuiev.DAO.DaoUser;
-import com.azuiev.Enums.ApartType;
+import com.azuiev.dao.DaoDB;
+import com.azuiev.dao.DaoUser;
+import com.azuiev.enums.ApartType;
 import com.azuiev.model.Apartment;
-import com.azuiev.DB.AirbnbDB;
+import com.azuiev.db.AirbnbDB;
 import com.azuiev.model.Organization;
 import com.azuiev.model.User;
 import org.apache.log4j.Logger;
@@ -30,7 +30,7 @@ public class AirBnB {
         DaoUser dao = new DaoUser(db.getConnection());
         User user = null;
         try {
-            user = dao.read(1);
+            user = dao.getById(1);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -41,6 +41,7 @@ public class AirBnB {
         Apartment book2 = user.registerBook("Moskva", "Pushkina 1", ApartType.PLACE);
 
         System.out.println(user);
-
+        ApartType t = ApartType.values()[0];
+        System.out.println(t);
     }
 }

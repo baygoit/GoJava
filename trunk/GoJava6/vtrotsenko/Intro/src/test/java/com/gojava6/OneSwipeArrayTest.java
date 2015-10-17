@@ -1,8 +1,11 @@
+/*
 package com.gojava6;
 
+*/
 /**
  * Created by root on 24.09.15.
- */
+ *//*
+
 
 import org.junit.Before;
 import org.junit.Test;
@@ -42,4 +45,4 @@ public class OneSwipeArrayTest {
     public void testSolutionLessThanTwo() {
         oneSwipeArray.solution(new int[1]);
     }
-}
+}*/

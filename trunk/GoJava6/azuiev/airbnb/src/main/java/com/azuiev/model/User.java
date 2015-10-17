@@ -1,9 +1,9 @@
 package com.azuiev.model;
 
 import com.azuiev.AirBnB;
-import com.azuiev.Enums.ApartType;
-import com.azuiev.Enums.UserRoles;
-import com.azuiev.Interfaces.Observer;
+import com.azuiev.enums.ApartType;
+import com.azuiev.enums.UserRoles;
+import com.azuiev.interfaces.Observer;
 import com.azuiev.Validator;
 import java.util.*;
 

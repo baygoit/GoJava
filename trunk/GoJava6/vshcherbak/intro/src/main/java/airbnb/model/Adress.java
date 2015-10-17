@@ -47,4 +47,37 @@ public class Adress {
     public void setRoom(int room) {
         this.room = room;
     }
+
+    @Override
+    public String toString() {
+        return "Adress{" +
+                "city='" + city + '\'' +
+                ", street='" + street + '\'' +
+                ", house=" + house +
+                ", room=" + room +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Adress)) return false;
+
+        Adress adress = (Adress) o;
+
+        if (house != adress.house) return false;
+        if (room != adress.room) return false;
+        if (!city.equals(adress.city)) return false;
+        return street.equals(adress.street);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = city.hashCode();
+        result = 31 * result + street.hashCode();
+        result = 31 * result + house;
+        result = 31 * result + room;
+        return result;
+    }
 }
