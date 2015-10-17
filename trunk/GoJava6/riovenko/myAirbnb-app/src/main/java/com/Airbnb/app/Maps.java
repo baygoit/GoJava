@@ -15,6 +15,5 @@ public class Maps {
     public static Map<Integer, User> clients = new HashMap<Integer, User>();
     public static Map<Integer, User> hosts = new HashMap<Integer, User>();
     public static Map<Integer, Apartment> apartments = new HashMap<Integer, Apartment>();
-    public static Map<>
     public List<String> cities= new ArrayList<String>();
 }
