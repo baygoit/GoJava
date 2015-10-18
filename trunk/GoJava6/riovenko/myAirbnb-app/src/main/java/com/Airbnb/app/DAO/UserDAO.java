@@ -2,19 +2,18 @@ package com.Airbnb.app.DAO;
 
 import com.Airbnb.app.model.User;
 
+import java.sql.SQLException;
 import java.util.List;
 
 /**
  * Created by romanroma on 10.10.15.
  */
 public interface UserDAO {
-    public void registerClient (User user);
-    public void registerHost (User user);
-    public void deleteClient (int id);
-    public void deleteHost (int id);
-    public User getClient (int id);
-    public User getHost (int id);
-    public List<User> getAllClients();
-    public List<User>getAllHosts();
+    public void addUser (User user) throws SQLException;
+    public void deleteUser (int id) throws SQLException;
+    public User getUserbyId (int id) throws SQLException;
+    public List<User> getAllUsers() throws SQLException;
+    public List<User> getAllClients()throws SQLException;
+    public List<User>getAllHosts() throws SQLException;
 
 }

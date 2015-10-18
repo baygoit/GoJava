@@ -8,6 +8,8 @@ import com.Airbnb.app.model.*;
 import com.Airbnb.app.Maps;
 import com.Airbnb.app.DAO.UserDAO;
 import com.Airbnb.app.DAO.ApartmentDAO;
+import com.Airbnb.app.services.RegisrationService;
+import com.Airbnb.app.services.ReservationService;
 
 import java.util.*;
 import java.util.List;
@@ -15,75 +17,51 @@ import java.util.List;
 /**
  * Created by romanroma on 26.09.15.
  */
+
 public class AirbnbController implements Subject {
 
-    private UserDAO userDAO = new UserDAOimpl();
-    private ApartmentDAO apartmentDAO = new ApartmentDAOimpl();
+    private RegisrationService regisrationService = new RegisrationService();
+    private ReservationService reservationService = new ReservationService();
 
-    public void registerClient (String name, String surname, String email){
-        User client = new User(name, surname, email);
-        if (client.validation()) {
-            userDAO.registerClient(client);
-        }
-        else System.out.println("Please enter valid data");
+    public void registerUser (String name, String surname, String email, Boolean isHost){
+        regisrationService.registration(name, surname, email, isHost);
     }
 
-    public void registerHost (String name, String surname, String email){
-        User host = new User(name, surname, email);
-        if (host.validation()) {
-            userDAO.registerHost(host);
-        }
-        else System.out.println("Please enter valid data");
+    public void removeUser (int id){
+        regisrationService.deleteUser(id);
     }
 
-
-
-    public void removeClient (int id){
-
-        userDAO.deleteClient(id);
+    public List getAllUsers(){
+        return regisrationService.getAllUsers();
     }
 
-    public void removeHost (int id){
+    public List getAllClients(){
+        return regisrationService.getAllClients();
+    }
 
-        userDAO.deleteHost(id);
+    public List getAllHosts(){
+        return regisrationService.getAllHosts();
+    }
+
+    public void createApartment (int hostId, int cityId, ApartType apartType){
+        reservationService.createApartment(hostId, cityId, apartType);
     }
 
     public void notifyAll (String message){
-        List<User> list = userDAO.getAllClients();
-        for (User user: list){
-            user.update(message);
-        }
-    }
-
-    public int createApartment (int hostId, String city, ApartType apartType, boolean reserved){
-        if (hostId<1) {
-            return -1;
-        }
-
-        User host = Maps.hosts.get(hostId);
-        if (host == null){
-            return -1;
-        }
-
-        Apartment apartment = new Apartment(host,city,apartType,reserved);
-        if (apartment.validation()){
-            apartmentDAO.saveApartment(apartment);
-            return apartment.getId();
-        }
-        return -1;
+        return;
     }
 
     public static void main( String[] args ) {
 
         AirbnbController airbnbController = new AirbnbController();
 
-        airbnbController.registerClient("Max", "Mad", "email@gmail.com");
-        airbnbController.registerClient("Roman","Iovenko","email2@gmail.com");
-        airbnbController.registerHost("Vova", "New", "email3@gmail.com");
-        airbnbController.registerHost("Sasha", "Prime", "email4@gmail.com");
-        airbnbController.createApartment(1, "Kyiv", ApartType.ROOM, false);
-        airbnbController.notifyAll("Done");
-        airbnbController.removeClient(1);
+        airbnbController.registerUser("Max", "Mad", "email@gmail.com",false);
+        //airbnbController.registerUser("Roman","Iovenko","email2@gmail.com",false);
+        //airbnbController.registerUser("Vova", "New", "email3@gmail.com",true);
+        //airbnbController.registerUser("Sasha", "Prime", "email4@gmail.com",true);
+        //airbnbController.createApartment(1, "Kyiv", ApartType.ROOM, false);
+        //airbnbController.notifyAll("Done");
+        //airbnbController.removeUser(1);
 
     }
 

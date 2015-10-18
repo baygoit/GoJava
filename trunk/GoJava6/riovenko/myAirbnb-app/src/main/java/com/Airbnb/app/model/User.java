@@ -17,12 +17,12 @@ public class User implements Observer {
     private String email;
     private boolean host;
 
-    public User (String name, String surname, String email){
+    public User (String name, String surname, String email, Boolean isHost){
         this.id = ++user_id;
         this.name = name;
         this.surname = surname;
         this.email = email;
-        this.host = false;
+        this.host = isHost;
     }
 
     public int getId (){

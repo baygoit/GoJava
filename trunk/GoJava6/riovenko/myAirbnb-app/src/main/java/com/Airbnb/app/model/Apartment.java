@@ -1,7 +1,5 @@
 package com.Airbnb.app.model;
 
-import com.Airbnb.app.model.ApartType;
-import com.Airbnb.app.model.Host;
 import com.Airbnb.app.validation.Validator;
 
 /**
@@ -10,56 +8,51 @@ import com.Airbnb.app.validation.Validator;
 public class Apartment {
     private static int APARTMENT_ID = 0;
     private int id;
-    private User host;
-    private String city;
+    private int hostId;
+    private int cityId;
     private ApartType apartType;
-    private boolean reserved;
 
-    public Apartment(User host, String city, ApartType apartType, boolean reserved){
+    public Apartment(int hostId, int cityId, ApartType apartType){
         this.id = ++APARTMENT_ID;
-        this.host = host;
-        this.city= city;
+        this.hostId = hostId;
+        this.cityId = cityId;
         this.apartType = apartType;
-        this.reserved = reserved;
     }
 
     public int getId (){
         return id;
     }
 
-    public User getHost (){
-        return host;
+    public int getHost (){
+        return hostId;
     }
 
-    public void setHost (User host){
-        this.host = host;
+    public void setHost (int hostId){
+        this.hostId = hostId;
     }
 
-    public String getCity(){
-        return city;
+    public int getCity(){
+        return cityId;
     }
 
-    public void setCity(String city){
-        this.city = city;
+    public void setCity (int city){
+        this.cityId = cityId;
     }
 
     public ApartType getApartType () {
         return apartType;
     }
 
+    public int getApartTypeId (ApartType apartType){
+        return apartType.getId(apartType);
+    }
+
     public void setApartType (ApartType apartType){
         this.apartType = apartType;
     }
 
-    public boolean isReserved(){
-        return reserved;
-    }
-
-    public void setReserved (Boolean reserved){
-        this.reserved = reserved;
-    }
-
     public boolean validation (){
-        return Validator.validateUserCity(city);
+        //return Validator.validateUserCity(city);
+        return true;
     }
 }
