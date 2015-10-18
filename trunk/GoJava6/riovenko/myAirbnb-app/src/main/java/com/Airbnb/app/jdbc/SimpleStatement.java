@@ -8,7 +8,7 @@ import java.sql.*;
 public class SimpleStatement {
     public static void main(String[] args) throws SQLException {
         retrieve();
-        //update();
+        update();
     }
 
     private static void retrieve() throws SQLException {
