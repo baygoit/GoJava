@@ -10,12 +10,13 @@ public class Home {
         this.host = host;
         this.city = city;
         this.homeType = homeType;
+        this.active = true;
     }
 
     @Override
     public String toString() {
         return "Home{" +
-                "host=" + host +
+                "hostCode=" + host.toString() +
                 ", city='" + city + '\'' +
                 ", homeType=" + homeType +
                 ", active=" + active +

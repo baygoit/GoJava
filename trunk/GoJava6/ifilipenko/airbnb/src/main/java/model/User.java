@@ -3,6 +3,9 @@ package model;
 import java.util.Date;
 
 public class User {
+    private static int USER_ID = 0;
+    private int id;
+    private int externalCode;
     private String name;
     private String lastName;
     private GenderType gender;
@@ -13,7 +16,8 @@ public class User {
 
     public User() {}
 
-    public User(String name, String lastName, GenderType gender, Date birthDate, String email, String city) {
+    public User(int externalCode, String name, String lastName, GenderType gender, Date birthDate, String email, String city) {
+        this.externalCode = externalCode;
         this.name = name;
         this.lastName = lastName;
         this.gender = gender;
@@ -22,6 +26,22 @@ public class User {
         this.city = city;
     }
 
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getExternalCode() {
+        return externalCode;
+    }
+
+    public void setExternalCode(int externalCode) {
+        this.externalCode = externalCode;
+    }
     public void setName(String name) {
         this.name = name;
     }
@@ -87,7 +107,8 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
-                "name='" + name + '\'' +
+                "external code='" + externalCode + '\'' +
+                ", name='" + name + '\'' +
                 ", lastName='" + lastName + '\'' +
                 '}';
     }
