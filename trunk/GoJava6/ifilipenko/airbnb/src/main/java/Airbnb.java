@@ -1,9 +1,13 @@
-import model.Client;
-import model.User;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Airbnb {
 
     public static void main(String[] args) {
-        User client = new Client();
+
+        List<String> list = new ArrayList<>();
+        list.add("1");
+        System.out.println(list);
+
     }
 }
