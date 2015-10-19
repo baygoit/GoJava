@@ -1,4 +1,5 @@
-package dao;
+package dao.db;
 
 public class AbstractDao {
+
 }
