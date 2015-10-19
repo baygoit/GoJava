@@ -21,5 +21,9 @@ public interface Processor {
     void removeApartment(int id);
     void addReservation(int apartmentID, int clientID, Date start, Date end);
     void removeReservation(int reservation_id);
+    void removeReservations(Date date);
     List<Apartment> search( String city, RentType rent, Date start, Date end ) throws ParseException;
+    void setNotify (int user_id);
+    void unSetNotify (int user_id);
+    List<String> getNotifyEmails(String kind); // kind = All, notify, client, host
 }

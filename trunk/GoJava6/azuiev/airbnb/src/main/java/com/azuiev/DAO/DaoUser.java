@@ -1,12 +1,10 @@
-package com.azuiev.DAO;
+package com.azuiev.dao;
 import com.azuiev.model.User;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Administrator on 08.10.15.
@@ -19,7 +17,7 @@ public class DaoUser {
         this.connection = connection;
     }
 
-    public User read(Integer id) throws SQLException {
+    public User getById(Integer id) throws SQLException {
         //TODO
         String sql = "select * from user where id = ?;";
         PreparedStatement stmt = connection.prepareStatement(sql);

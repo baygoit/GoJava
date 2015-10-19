@@ -200,7 +200,7 @@ Dynamic libraries:
 
 VM Arguments:
 jvm_args: -agentlib:jdwp=transport=dt_socket,address=127.0.0.1:4514,suspend=y,server=n -Dfile.encoding=UTF-8 
-java_command: com.azuiev.DB.GenerateDB
+java_command: com.azuiev.db.GenerateDB
 Launcher Type: SUN_STANDARD
 
 Environment Variables:
