@@ -1,4 +1,7 @@
-package com.airbnb;
+package com.airbnb.services;
+
+import com.airbnb.observer.Observer;
+import com.airbnb.observer.Subject;
 
 import java.util.ArrayList;
 import java.util.List;
