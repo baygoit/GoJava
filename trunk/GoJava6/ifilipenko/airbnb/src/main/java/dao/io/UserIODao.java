@@ -14,7 +14,7 @@ public class UserIODao implements Dao {
     public void create(User newUser) throws IOException {
         int code = newUser.getExternalCode();
         if (users.containsKey(code)) {
-            users.replace(code, newUser);
+            users.put(code, newUser);
         }
         users.put(code, newUser);
 
