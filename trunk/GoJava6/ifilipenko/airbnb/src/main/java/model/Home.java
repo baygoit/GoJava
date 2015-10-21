@@ -2,49 +2,45 @@ package model;
 
 public class Home {
     private User host;
-    private String city;
+    private CityList city;
     private HomeType homeType;
     private boolean active;
 
-    public Home(User host, String city, HomeType homeType) {
+    public Home(CityList city, HomeType homeType) {
+        this.city = city;
+        this.homeType = homeType;
+        this.active = true;
+    }
+
+    public Home(User host, CityList city, HomeType homeType) {
         this.host = host;
         this.city = city;
         this.homeType = homeType;
         this.active = true;
     }
 
-    @Override
-    public String toString() {
-        return "Home{" +
-                "hostCode=" + host.toString() +
-                ", city='" + city + '\'' +
-                ", homeType=" + homeType +
-                ", active=" + active +
-                '}';
-    }
-
-    public User getHost() {
-        return host;
-    }
-
-    public void setHost(User host) {
-        this.host = host;
-    }
-
-    public String getCity() {
+    public CityList getCity() {
         return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
     }
 
     public HomeType getHomeType() {
         return homeType;
     }
 
+    public User getHost() {
+        return host;
+    }
+
+    public void setCity(CityList city) {
+        this.city = city;
+    }
+
     public void setHomeType(HomeType homeType) {
         this.homeType = homeType;
+    }
+
+    public void setHost(User host) {
+        this.host = host;
     }
 
     public boolean isActive() {
@@ -54,4 +50,17 @@ public class Home {
     public void setActive(boolean active) {
         this.active = active;
     }
+
+
+    @Override
+    public String toString() {
+        return "Home{" +
+                "host=" + host.toString() +
+                ", city=" + city +
+                ", homeType=" + homeType +
+                ", active=" + active +
+                '}';
+    }
+
+
 }

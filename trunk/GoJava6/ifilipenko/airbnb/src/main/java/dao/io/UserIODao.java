@@ -1,33 +1,26 @@
 package dao.io;
 
 import dao.Dao;
-import model.GenderType;
 import model.User;
 
 import java.io.*;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
 public class UserIODao implements Dao {
-
-    File userStorage = new File(this.getClass().getResource("/users").getFile());
-
-    private User user1 = new User(1, "Jennifer", "Richard", GenderType.FEMALE, new Date(11011999), "jr@gmail.com", "Miami");
-    private User user2 = new User(2, "Bridget", "Raabe", GenderType.FEMALE, new Date(12011999), "br@gmail.com", "NY");
-
-
     private Map<Integer, User> users = new HashMap<>();
+    MyUtil util = new MyUtil();
 
-    private void addToList() {
-        users.put(user1.getExternalCode(), user1);
-        users.put(user2.getExternalCode(), user2);
-    }
+    public void create(User newUser) throws IOException {
+        int code = newUser.getExternalCode();
+        if (users.containsKey(code)) {
+            users.replace(code, newUser);
+        }
+        users.put(code, newUser);
 
-    @Override
-    public void createAll(File file) throws IOException {
         try (
-                BufferedWriter writer = new BufferedWriter(new FileWriter(file))
+                BufferedWriter writer = new BufferedWriter(new FileWriter(util.getFile("/users")))
         ) {
-            addToList();
             for (Map.Entry<Integer, User> user : users.entrySet()) {
                 writer.write(user.getValue().getExternalCode() + " | ");
                 writer.write(user.getValue().getName() + " | ");
@@ -35,6 +28,7 @@ public class UserIODao implements Dao {
                 writer.write(user.getValue().getGender() + " | ");
                 writer.write(user.getValue().getBirthDate() + " | ");
                 writer.write(user.getValue().getEmail() + " | ");
+                writer.write(user.getValue().isHost() + " | ");
                 writer.write(user.getValue().getCity() + "\n");
             }
         } catch (IOException ex) {
@@ -43,10 +37,9 @@ public class UserIODao implements Dao {
     }
 
     public User getUserByCode(int code) throws IOException {
-        addToList();
         String line;
         try (
-                BufferedReader reader = new BufferedReader(new FileReader(userStorage))
+                BufferedReader reader = new BufferedReader(new FileReader(util.getFile("/users")))
         ) {
             while ((line = reader.readLine()) != null) {
                 String[] token = line.split("\n");
@@ -65,22 +58,6 @@ public class UserIODao implements Dao {
         }
 
         return null;
-    }
-
-
-    @Override
-    public void read() {
-
-    }
-
-    @Override
-    public void update() {
-
-    }
-
-    @Override
-    public void delete() {
-
     }
 
 

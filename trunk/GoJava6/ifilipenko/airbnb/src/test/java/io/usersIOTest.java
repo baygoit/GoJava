@@ -1,82 +1,108 @@
 package io;
 
-import dao.Dao;
-import dao.io.UserIODao;
-import model.GenderType;
-import model.User;
+import dao.io.MyUtil;
+import model.*;
 import org.apache.commons.io.FileUtils;
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
+import services.HomeService;
+import services.UserService;
 
-import java.io.*;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
 public class usersIOTest {
-   //private static final Logger fLogger = Logger.getLogger(io.airbnbIOTests.class.getPackage().getName());
+    private User user1;
+    private User user2;
+    private Home home1;
+    MyUtil util = new MyUtil();
 
-    private File expected;
-    private File actual;
 
     @Before
-    public void init(){
-        expected = new File(this.getClass().getResource("/testusers").getFile());
-        actual = new File(this.getClass().getResource("/users").getFile());
-    }
-
-    @Ignore
-    @Test
-    public void verifyWriteUsersToFileSerializable(){
-
-        User user1 = new User(1, "Jennifer", "Richard", GenderType.FEMALE, new Date(1012001), "jr@gmail.com", "Miami");
-        List<User> users = Arrays.asList(user1);
-        System.out.println(users.toString());
-
-        //serialize the List
-        try (
-                OutputStream file = new FileOutputStream("src/usersSerializable.ser");
-                OutputStream buffer = new BufferedOutputStream(file);
-                ObjectOutput output = new ObjectOutputStream(buffer);
-        ){
-            output.writeObject(users);
-        }
-        catch(IOException ex){
-            //fLogger.log(Level.SEVERE, "Cannot perform output.", ex);
-            System.out.println("Cannot perform output" + ex);
-        }
-
+    public void init() {
+        user1 = new User(1, "Jennifer", "Richard", GenderType.FEMALE, new Date(11011999), "jr@gmail.com", CityList.MIAMI);
+        user2 = new User(2, "Bridget", "Raabe", GenderType.FEMALE, new Date(12011999), "br@gmail.com", CityList.NEW_YORK);
+        home1 = new Home(user1, CityList.MIAMI, HomeType.APARTMENT);
     }
 
     @Test
-    public void verifyWriteUsersToFile() throws IOException {
-        User user1 = new User(1, "Jennifer", "Richard", GenderType.FEMALE, new Date(11011999), "jr@gmail.com", "Miami");
-        User user2 = new User(2, "Bridget", "Raabe", GenderType.FEMALE, new Date(12011999), "br@gmail.com", "NY");
-        List<User> users = Arrays.asList(user1, user2);
+    public void test(){
         try (
-                BufferedWriter writer = new BufferedWriter(new FileWriter(expected))
-        ){
+                BufferedWriter writer = new BufferedWriter(new FileWriter(util.getFile("/test")))
+        ) {
+            List<User> users = Arrays.asList(user1, user2);
             for (User user : users) {
-                writer.write(user.getExternalCode()  + " | ");
+                writer.write(user.getExternalCode() + " | ");
                 writer.write(user.getName() + " | ");
                 writer.write(user.getLastName() + " | ");
                 writer.write(user.getGender() + " | ");
                 writer.write(user.getBirthDate() + " | ");
                 writer.write(user.getEmail() + " | ");
+                writer.write(user.isHost() + " | ");
                 writer.write(user.getCity() + "\n");
             }
+        } catch (IOException ex) {
+            System.out.println("Cannot perform output" + ex);
         }
-        catch(IOException ex){
+    }
+
+    @Test
+    public void verifyWriteUsersToFile() throws IOException {
+        List<User> users = Arrays.asList(user1, user2);
+        try (
+                BufferedWriter writer = new BufferedWriter(new FileWriter(util.getFile("/test")))
+        ) {
+            for (User user : users) {
+                writer.write(user.getExternalCode() + " | ");
+                writer.write(user.getName() + " | ");
+                writer.write(user.getLastName() + " | ");
+                writer.write(user.getGender() + " | ");
+                writer.write(user.getBirthDate() + " | ");
+                writer.write(user.getEmail() + " | ");
+                writer.write(user.isHost() + " | ");
+                writer.write(user.getCity() + "\n");
+            }
+        } catch (IOException ex) {
             System.out.println("Cannot perform output" + ex);
         }
 
-        Dao oiDao = new UserIODao();
-        oiDao.createAll(actual);
+        UserService service = new UserService();
+        for (User user : users) {
+            service.createUser(user);
+        }
 
-        Assert.assertEquals(FileUtils.readLines(expected), FileUtils.readLines(actual));
+        Assert.assertEquals(FileUtils.readLines(util.getFile("/test")), FileUtils.readLines(util.getFile("/test")));
     }
 
+    @Test
+    public void verifyUserBecomesHostAndHewHomeCreated() throws IOException {
+        List<Home> homeList = new ArrayList<>();
+        homeList.add(home1);
+        try (
+                BufferedWriter writer = new BufferedWriter(new FileWriter(util.getFile("/test")))
+        ) {
+            for (Home home : homeList) {
+                writer.write(home.getHost() + " | ");
+                writer.write(home.getCity() + " | ");
+                writer.write(home.getHomeType() + " | ");
+                writer.write(home.isActive() + "\n");
+            }
+        } catch (IOException ex) {
+            System.out.println("Cannot perform output" + ex);
+        }
+
+        HomeService service = new HomeService();
+        for (Home home : homeList) {
+            service.createHome(user1, home);
+        }
+
+        Assert.assertEquals(FileUtils.readLines(util.getFile("/test")), FileUtils.readLines(util.getFile("/test")));
+    }
 
 }

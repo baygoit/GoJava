@@ -1,4 +1,4 @@
-package services;
+package services.validation;
 
 public interface ValidationStrategy {
 }
