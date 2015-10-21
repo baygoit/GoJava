@@ -13,35 +13,39 @@ public class Apartment implements Subject{
     public ApartmentType apartmentType;
     //private Date endOfRent;
     private LinkedList<Reservation> reservationList;
-    public Host host;
+    public static String city;
+    public User host;
     private List<Observer> listOfClients = new ArrayList<Observer>();
     //public String switchedApartType;
-    public Apartment(ApartmentType type, User userHost) {
+    public Apartment(ApartmentType type, User userHost, String city) {
         this.apartmentType=type;
-        this.host=host;
+        this.host=userHost;
+        this.city=city;
     }
 
-    @Override
+ //   @Override
     public void registerObserver(Observer o) {
         System.out.println("Register: " + o.toString());
         listOfClients.add(o);
         o.loyalty(10, this);
     }
 
-    @Override
+//    @Override
     public void removeObserver(Observer o) {
         System.out.println("Remove: "+o.toString());
         listOfClients.remove(o);
     }
 
-    @Override
+//    @Override
     public void notifyObservers() {
         System.out.println("Notify Observers");
         for (Observer obs :listOfClients) {
             obs.update(this);//this host
         }
     }
-
+    public String getCity() {
+        return city;
+    }
 
     /*public Date getEndDate() {
         return endOfRent;
