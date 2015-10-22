@@ -2,9 +2,7 @@ package com.Airbnb.app.DAO;
 
 import com.Airbnb.app.jdbc.DBConnection;
 import com.Airbnb.app.model.ApartType;
-import com.Airbnb.app.model.Apartment;
 
-import java.security.Timestamp;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -22,9 +20,6 @@ public class ReservationDAOImpl implements ReservationDAO {
     private java.sql.Date dateF;
     private java.sql.Date dateT;
 
-    /*private String addReservationQuery = "INSERT INTO reservation (apartmentId, userId, dateFrom, dateTo) JOIN " +
-            "apartment ON (reservation.apartmentId = apartment.idApartment) JOIN user ON " +
-            "(reservation.userId = user.idUser) VALUES (?,?,?,?)";*/
     private String addReservationQuery = "INSERT INTO reservation (apartmentId, userId, dateFrom, dateTo) " +
         " VALUES (?,?,?,?)";
     private String getPossibleApartmentQuery = "SELECT apt.idApartment, apt.apartmentTypeId,  FROM apt apartment " +

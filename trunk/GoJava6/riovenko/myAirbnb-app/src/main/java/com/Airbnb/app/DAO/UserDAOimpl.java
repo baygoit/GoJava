@@ -16,9 +16,10 @@ import java.util.List;
 public class UserDAOimpl implements UserDAO{
 
     private String addUserQuery = "INSERT INTO user (name, surname, email, isHost) VALUES (?, ?, ?, ?)";
-    private String deleteUserQuery = "DELETE FROM user WHERE id = ?";
-    private String getUserbyIdQuery = "Select id, name, surname, email, isHost FROM user WHERE id = ?";
+    private String deleteUserQuery = "DELETE FROM user WHERE idUser = ?";
+    private String getUserbyIdQuery = "Select idUser, name, surname, email, isHost FROM user WHERE idUser = ?";
     private String getUsersQuery = "SELECT * FROM user";
+    private String checkExistingUserQuery = "SELECT COUNT(*) FROM user WHERE email = ? ";
 
 
     public void addUser(User user) throws SQLException {
@@ -40,6 +41,17 @@ public class UserDAOimpl implements UserDAO{
             PreparedStatement psttmnt = connection.prepareStatement(deleteUserQuery);
             psttmnt.setInt(1, id);
             psttmnt.executeUpdate();
+        }
+    }
+
+    public int checkExistingUser (String email) throws SQLException {
+        try (Connection connection = DBConnection.getConnection()){
+            PreparedStatement psttmnt = connection.prepareStatement(checkExistingUserQuery);
+            psttmnt.setString(1, email);
+
+            ResultSet result = psttmnt.executeQuery();
+            result.next();
+            return result.getInt(1);
         }
     }
 
@@ -79,7 +91,8 @@ public class UserDAOimpl implements UserDAO{
 
         try(Connection connection = DBConnection.getConnection()){
             List<User> clientsList = new LinkedList<>();
-            PreparedStatement psttmnt = connection.prepareStatement(getUsersQuery + "WHERE isHost = False");
+            PreparedStatement psttmnt = connection.prepareStatement(getUsersQuery + " WHERE isHost = ?");
+            psttmnt.setBoolean(1, false);
 
             ResultSet result = psttmnt.executeQuery();
             while (result.next()){
@@ -95,7 +108,8 @@ public class UserDAOimpl implements UserDAO{
 
         try(Connection connection = DBConnection.getConnection()){
             List<User> clientsList = new LinkedList<>();
-            PreparedStatement psttmnt = connection.prepareStatement(getUsersQuery + "WHERE siHost = True");
+            PreparedStatement psttmnt = connection.prepareStatement(getUsersQuery + " WHERE isHost = ?");
+            psttmnt.setBoolean(1, true);
 
             ResultSet result = psttmnt.executeQuery();
             while (result.next()){

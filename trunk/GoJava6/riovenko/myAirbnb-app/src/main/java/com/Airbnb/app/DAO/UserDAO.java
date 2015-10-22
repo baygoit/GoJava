@@ -15,5 +15,6 @@ public interface UserDAO {
     public List<User> getAllUsers() throws SQLException;
     public List<User> getAllClients()throws SQLException;
     public List<User>getAllHosts() throws SQLException;
+    public int checkExistingUser (String email) throws SQLException;
 
 }

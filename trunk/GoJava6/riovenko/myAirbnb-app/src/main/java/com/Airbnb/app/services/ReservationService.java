@@ -27,6 +27,14 @@ public class ReservationService {
             e.printStackTrace();
         }
 
+        try {
+            if (apartmentDAO.checkExistingApartment (userId, city, apartType) == 1){
+                System.out.println ("Apartment : " + userId + " " + city + " " + apartType + " is already exist");
+                return;
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
         Apartment apartment = new Apartment (userId, city, apartType);
         createApartment(apartment);
     }

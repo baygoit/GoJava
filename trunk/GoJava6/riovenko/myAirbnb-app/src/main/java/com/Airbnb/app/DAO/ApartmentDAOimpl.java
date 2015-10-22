@@ -7,7 +7,6 @@ import com.Airbnb.app.model.Apartment;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.sql.ResultSet;
@@ -38,6 +37,8 @@ public class ApartmentDAOimpl implements ApartmentDAO {
             "JOIN apartmentType ON (apt.apartmentTypeId = idApartmentType)";
     private String getPossibleApartmentQuerry = "SELECT idApartment FROM apartment WHERE cityId = ?," +
             "apartmentTypeId = ?";
+    private String checkExistingApartment =
+            "SELECT COUNT(*) FROM apartment WHERE userId = ? and cityId = ? and apartmentTypeId = ?";
 
     public void addApartment (Apartment apartment) throws SQLException{
         try (Connection connection = DBConnection.getConnection()){
@@ -97,16 +98,7 @@ public class ApartmentDAOimpl implements ApartmentDAO {
             psttnmt.setString(1, city);
             psttnmt.executeUpdate();
         }
-
-        try(Connection connection = DBConnection.getConnection()){
-            PreparedStatement psttnmt = connection.prepareStatement(getCityIdQuery);
-            psttnmt.setString(1, city);
-
-            ResultSet result = psttnmt.executeQuery();
-            result.next();
-
-            return result.getInt(1);
-        }
+        return getCityId(city);
     }
 
     public int getCityId (String city) throws SQLException{
@@ -150,19 +142,16 @@ public class ApartmentDAOimpl implements ApartmentDAO {
         }
     }
 
-    /*public ArrayList<Integer> getPossibleApartment (String city, ApartType apartType) throws SQLException {
+    public int checkExistingApartment (int userId, String city, ApartType apartType) throws SQLException {
         try (Connection connection = DBConnection.getConnection()){
-            ArrayList<Integer> apartmentsList = new ArrayList<>();
-            PreparedStatement psttmnt = connection.prepareStatement(getPossibleApartmentQuerry);
-            psttmnt.setInt (1, getCityId(city));
-            psttmnt.setInt (2, getApartmentTypeId(apartType));
+            PreparedStatement psttmnt = connection.prepareStatement(checkExistingApartment);
+            psttmnt.setInt(1, userId);
+            psttmnt.setInt(2, getCityId(city));
+            psttmnt.setInt(3, getApartmentTypeId(apartType));
 
             ResultSet result = psttmnt.executeQuery();
-            while (result.next()){
-                apartmentsList.add(result.getInt(1));
-            }
-
-            return apartmentsList;
+            result.next();
+            return result.getInt(1);
         }
-    }*/
+    }
 }

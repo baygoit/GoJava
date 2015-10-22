@@ -18,5 +18,5 @@ public interface ApartmentDAO {
     public int getCityId (String City) throws SQLException;
     public int getApartmentTypeId (ApartType apartmentType) throws SQLException;
     public List<Apartment> getAllApartment () throws SQLException;
-    //public ArrayList<Integer> getPossibleApartment (String city, ApartType apartType) throws SQLException;
+    public int checkExistingApartment (int userId, String city, ApartType apartType) throws SQLException;
 }
