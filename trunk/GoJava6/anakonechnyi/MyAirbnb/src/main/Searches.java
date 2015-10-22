@@ -35,7 +35,7 @@ public class Searches {
     public LinkedList<Apartment> searchAvailableAtCity(String cityToCheck, LinkedList <Apartment> listForSearch) {
         LinkedList<Apartment> result = new LinkedList<Apartment>();
         for (Apartment toCheck : listForSearch) {
-            if (toCheck.host.getCity().equals(cityToCheck)){
+            if (toCheck.getCity().equals(cityToCheck)){
                 result.add(toCheck);
             }
         }

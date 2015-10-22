@@ -1,4 +1,4 @@
-package com.azuiev.Enums;
+package com.azuiev.enums;
 
 /**
  * Created by Administrator on 01.10.15.

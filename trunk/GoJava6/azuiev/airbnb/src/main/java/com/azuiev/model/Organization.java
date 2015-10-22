@@ -1,8 +1,8 @@
 package com.azuiev.model;
 
 import com.azuiev.AirBnB;
-import com.azuiev.Interfaces.Subject;
-import com.azuiev.Interfaces.Observer;
+import com.azuiev.interfaces.Subject;
+import com.azuiev.interfaces.Observer;
 
 import java.util.ArrayList;
 import java.util.List;

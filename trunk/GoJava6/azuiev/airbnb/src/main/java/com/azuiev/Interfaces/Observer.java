@@ -1,4 +1,4 @@
-package com.azuiev.Interfaces;
+package com.azuiev.interfaces;
 
 /**
  * Created by Lera on 21.09.2015.

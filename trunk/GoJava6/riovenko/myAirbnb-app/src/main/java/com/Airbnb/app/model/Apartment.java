@@ -8,36 +8,38 @@ import com.Airbnb.app.validation.Validator;
 public class Apartment {
     private static int APARTMENT_ID = 0;
     private int id;
-    private Host host;
+    private int hostId;
     private String city;
     private ApartType apartType;
-    private boolean reserved;
 
-    public Apartment(Host host, String city, ApartType apartType, boolean reserved){
+    public Apartment(int hostId, String city, ApartType apartType){
         this.id = ++APARTMENT_ID;
-        this.host = host;
-        this.city= city;
-        this.apartType = apartType;
-        this.reserved = reserved;
+        this.hostId = hostId;
+        this.city = city;
+        this.apartType= apartType;
     }
 
     public int getId (){
         return id;
     }
 
-    public Host getHost (){
-        return host;
+    public void setId(int id){
+        this.id = id;
     }
 
-    public void setHost (Host host){
-        this.host = host;
+    public int getHost (){
+        return hostId;
+    }
+
+    public void setHost (int hostId){
+        this.hostId = hostId;
     }
 
     public String getCity(){
         return city;
     }
 
-    public void setCity(String city){
+    public void setCity (String city){
         this.city = city;
     }
 
@@ -47,14 +49,6 @@ public class Apartment {
 
     public void setApartType (ApartType apartType){
         this.apartType = apartType;
-    }
-
-    public boolean isReserved(){
-        return reserved;
-    }
-
-    public void setReserved (Boolean reserved){
-        this.reserved = reserved;
     }
 
     public boolean validation (){

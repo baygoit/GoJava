@@ -1,6 +1,6 @@
 package com.azuiev;
 
-import com.azuiev.Enums.ApartType;
+import com.azuiev.enums.ApartType;
 import com.azuiev.model.Apartment;
 import com.azuiev.model.User;
 

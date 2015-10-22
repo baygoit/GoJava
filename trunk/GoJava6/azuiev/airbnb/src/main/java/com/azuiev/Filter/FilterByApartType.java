@@ -1,6 +1,6 @@
-package com.azuiev.Filter;
+package com.azuiev.filter;
 
-import com.azuiev.Enums.ApartType;
+import com.azuiev.enums.ApartType;
 import com.azuiev.model.Apartment;
 
 import java.util.LinkedList;

@@ -1,52 +1,53 @@
 package airbnb;
 
 import airbnb.common.Observer;
+import airbnb.common.Processor;
 import airbnb.model.User;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Registration implements Observer {
-    List<User> users;
-    private List<User> notify = new ArrayList<>();
+    private List<String> notify;
+    private Processor processor;
 
-    public Registration(List<User> users) {
-        this.users = users;
+    public Registration(Processor processor) {
+        this.processor = processor;
     }
 
-    public void addToNotify (User user) {
-        notify.add(user);
+    public void addToNotify (int user_id) {
+        processor.setNotify(user_id);
     }
 
-    public void removeFromNotify (User user) {
-        notify.remove(user);
+    public void removeFromNotify (int user_id) {
+       processor.unSetNotify(user_id);
     }
 
     public void notifyAll(String data) {
-        for (User user: users) {
-            System.out.println("Send " + data + " to " + user.getEmail());
+        notify = processor.getNotifyEmails("All");
+        for (String send: notify) {
+            System.out.println("Send " + data + " to " + send);
         }
     }
 
     public void notifyHosts(String data) {
-        for (User user: users) {
-            /*if (user instanceof Host) {
-                System.out.println("Send " + data + "to" + user.getEmail());
-            }*/
+        notify = processor.getNotifyEmails("host");
+        for (String send: notify) {
+            System.out.println("Send " + data + " to " + send);
         }
     }
 
     public void notifyClients(String data) {
-        for (User user: users) {
-           /* if (user instanceof Client) {
-                System.out.println("Send " + data + "to" + user.getEmail());
-            }*/
+        notify = processor.getNotifyEmails("client");
+        for (String send: notify) {
+            System.out.println("Send " + data + " to " + send);
         }
     }
 
     public void update(String message) {
-        for (User user: notify) {
-            System.out.println("Send " + message + " to " + user.getEmail());
+        notify = processor.getNotifyEmails("notify");
+        for (String send: notify) {
+            System.out.println("Send " + message + " to " + send);
         }
     }
 }

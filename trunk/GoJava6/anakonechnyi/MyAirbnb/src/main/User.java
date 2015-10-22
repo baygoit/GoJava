@@ -12,7 +12,7 @@ public class User implements Observer {
     private String email;
     private Boolean isHost;
     public List<Apartment> apartments;
-    private String city;
+    //private String city;
     public final int clientId;
 
 
@@ -61,12 +61,13 @@ public class User implements Observer {
 
     public void setNewApartments (String next) {
         Apartment.ApartmentType type = Apartment.ApartmentType.valueOf(next);
-        apartments.add(new Apartment(type, this));
+        apartments.add(new Apartment(type, this, "Kyiv"));
     }
 
     public String toString(){
-        return this.getName()+" in "+this.getCity();
+        return this.getName()/*+" in "+this.getCity()*/;
     }
+/*
 
     public String getCity() {
         return city;
@@ -75,16 +76,17 @@ public class User implements Observer {
     public void setCity(String city) {
         this.city = city;
     }
+*/
 
     public void setLikeHost() { this.isHost=true;}
 
 
-    @Override
+//    @Override
     public void update(Object obj) {
 
     }
 
-    @Override
+//    @Override
     public void loyalty(int discountPercent, Subject s) {
 
         System.out.println("Hello, "+getName()+". You have "+discountPercent+"% discount  from "+s.toString());
