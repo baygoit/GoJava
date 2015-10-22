@@ -24,11 +24,8 @@ public class ReservationDAOImpl implements ReservationDAO {
             "( ?, (SELECT apartment.userId FROM apartment WHERE apartment.idApartment = ?), ?, ?)";
     private String getPossibleApartmentQuery = "SELECT idApartment FROM apartment " +
             "LEFT JOIN reservation ON (apartment.idApartment = reservation.apartmentId) WHERE " +
-            " cityId = ? and apartmentTypeId = ? and (dateFrom > ? OR " +
-            " dateTo < ? )";
-    /*private String getPossibleApartmentQuery = "SELECT idApartment FROM apartment " +
-            "LEFT JOIN reservation ON (apartment.idApartment = reservation.apartmentId) WHERE " +
-            " cityId = ? and apartmentTypeId = ?";*/
+            " cityId = ? and apartmentTypeId = ? and (reservation.dateFrom > ? OR " +
+            " reservation.dateTo < ? )";
 
     public void makeReservation (int apartmentId, Date dateFrom, Date dateTo) throws SQLException{
         dateF = new java.sql.Date(dateFrom.getTime());
@@ -44,7 +41,7 @@ public class ReservationDAOImpl implements ReservationDAO {
             System.out.println(e.getMessage());
         }
     }
-    
+
     public List<Integer> searchPossibleApartment (String city, ApartType apartType, Date dateFrom, Date dateTo)
             throws SQLException {
         dateF = new java.sql.Date(dateFrom.getTime());

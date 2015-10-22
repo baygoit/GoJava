@@ -131,7 +131,7 @@ public class AirbnbController implements Subject {
 
         // RESERVATION
 
-        Calendar cal = Calendar.getInstance();
+        /*Calendar cal = Calendar.getInstance();
         cal.set(2015, Calendar.NOVEMBER, 1);
         java.util.Date dateFrom = cal.getTime();
         Calendar calTo = Calendar.getInstance();
@@ -143,8 +143,8 @@ public class AirbnbController implements Subject {
         List<Integer> arrayList = airbnbController.searchPossibleApartment
                 ("Kyiv", ApartType.PLACE, dateFrom, dateTo);
         for (Integer temp : arrayList) {
-            System.out.println ("Possible apartment : " + temp);
-        }
+            System.out.println ("Possible apartment id : " + temp);
+        }*/
     }
 
 
