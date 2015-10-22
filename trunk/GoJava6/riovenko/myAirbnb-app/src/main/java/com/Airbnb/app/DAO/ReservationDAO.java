@@ -4,6 +4,7 @@ import com.Airbnb.app.model.ApartType;
 import com.Airbnb.app.model.Apartment;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -12,6 +13,6 @@ import java.util.List;
  */
 public interface ReservationDAO {
     public void makeReservation (int apartmentId, Date dateFrom, Date dateTo) throws SQLException;
-    public List<Integer> searchPossibleReservations (String city, ApartType apartType,
+    public List<Integer> searchPossibleApartment (String city, ApartType apartType,
                                                        Date dateFrom, Date dateTo) throws SQLException;
 }

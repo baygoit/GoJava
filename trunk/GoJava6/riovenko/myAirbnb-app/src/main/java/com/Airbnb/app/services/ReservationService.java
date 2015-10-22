@@ -8,6 +8,7 @@ import com.Airbnb.app.model.ApartType;
 import com.Airbnb.app.model.Apartment;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -28,7 +29,7 @@ public class ReservationService {
         }
 
         try {
-            if (apartmentDAO.checkExistingApartment (userId, city, apartType) == 1){
+            if (apartmentDAO.checkExistingApartment(userId, city, apartType) == 1){
                 System.out.println ("Apartment : " + userId + " " + city + " " + apartType + " is already exist");
                 return;
             }
@@ -59,7 +60,7 @@ public class ReservationService {
         }
     }
 
-    public List<Apartment> getAllAprtment (){
+    public List<Apartment> getAllApartment (){
         List<Apartment> apartmentList = new LinkedList<>();
         try{
             apartmentList = apartmentDAO.getAllApartment();
@@ -84,5 +85,14 @@ public class ReservationService {
         } catch (SQLException e){
             e.printStackTrace();
         }
+    }
+
+    public List<Integer> searchPossibleApartment (String city, ApartType apartType, Date dateFrom, Date dateTo) {
+        try {
+            return reservationDAO.searchPossibleApartment(city, apartType, dateFrom, dateTo);
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+        return null;
     }
 }

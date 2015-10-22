@@ -16,32 +16,37 @@ import java.util.List;
  */
 public class ReservationDAOImpl implements ReservationDAO {
     ApartmentDAO apartmentDAO = new ApartmentDAOimpl();
-    private ArrayList<Integer> apartmentsList = new ArrayList<>();
+    private List<Integer> apartmentsList = new ArrayList<>();
     private java.sql.Date dateF;
     private java.sql.Date dateT;
 
-    private String addReservationQuery = "INSERT INTO reservation (apartmentId, userId, dateFrom, dateTo) " +
-        " VALUES (?,?,?,?)";
-    private String getPossibleApartmentQuery = "SELECT apt.idApartment, apt.apartmentTypeId,  FROM apt apartment " +
-            "LEFT JOIN reservation ON (apt.idApartment = reservation.apartmentId) WHERE" +
-            " idApartment = ? and apartmentTypeId = ? and dateFrom = ? and dateTo = ?";
+    private String addReservationQuery = "INSERT INTO reservation (apartmentId, userId, dateFrom, dateTo) VALUES " +
+            "( ?, (SELECT apartment.userId FROM apartment WHERE apartment.idApartment = ?), ?, ?)";
+    private String getPossibleApartmentQuery = "SELECT idApartment FROM apartment " +
+            "LEFT JOIN reservation ON (apartment.idApartment = reservation.apartmentId) WHERE " +
+            " cityId = ? and apartmentTypeId = ? and (dateFrom > ? OR " +
+            " dateTo < ? )";
+    /*private String getPossibleApartmentQuery = "SELECT idApartment FROM apartment " +
+            "LEFT JOIN reservation ON (apartment.idApartment = reservation.apartmentId) WHERE " +
+            " cityId = ? and apartmentTypeId = ?";*/
 
-    public void makeReservation (int apartmentId,Date dateFrom, Date dateTo) throws SQLException{
+    public void makeReservation (int apartmentId, Date dateFrom, Date dateTo) throws SQLException{
         dateF = new java.sql.Date(dateFrom.getTime());
         dateT = new java.sql.Date(dateTo.getTime());
         try (Connection connection = DBConnection.getConnection()){
             PreparedStatement psttmnt = connection.prepareStatement(addReservationQuery);
             psttmnt.setInt (1, apartmentId);
-            psttmnt.setInt (2, 3);
-            psttmnt.setDate(3, dateF);
-            psttmnt.setDate(4, dateT);
+            psttmnt.setInt (2, apartmentId);
+            psttmnt.setDate(3, dateT);
+            psttmnt.setDate(4, dateF);
             psttmnt.executeUpdate();
         } catch (SQLException e){
             System.out.println(e.getMessage());
         }
     }
-
-    public List<Integer> searchPossibleReservations (String city, ApartType apartType,Date dateFrom, Date dateTo) throws SQLException{
+    
+    public List<Integer> searchPossibleApartment (String city, ApartType apartType, Date dateFrom, Date dateTo)
+            throws SQLException {
         dateF = new java.sql.Date(dateFrom.getTime());
         dateT = new java.sql.Date(dateTo.getTime());
         try (Connection connection = DBConnection.getConnection()){
