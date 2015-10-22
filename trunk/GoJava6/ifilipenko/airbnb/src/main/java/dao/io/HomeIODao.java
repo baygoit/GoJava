@@ -5,6 +5,7 @@ import model.Home;
 import model.User;
 
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -13,13 +14,13 @@ import java.util.List;
 public class HomeIODao implements Dao {
 
     private List<Home> homeList = new ArrayList<>();
-    private MyUtil util = new MyUtil();
+    private File file = new File(this.getClass().getResource("/home").getFile());
 
     public void create(User host, Home newHome) throws IOException {
         newHome.setHost(host);
         homeList.add(newHome);
         try (
-                BufferedWriter writer = new BufferedWriter(new FileWriter(util.getFile("/home")))
+                BufferedWriter writer = new BufferedWriter(new FileWriter(file))
         ) {
             for (Home home : homeList) {
                 writer.write(home.getHost() + " | ");

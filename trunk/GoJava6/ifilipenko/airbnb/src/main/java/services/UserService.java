@@ -7,18 +7,22 @@ import model.User;
 import java.io.IOException;
 
 public class UserService {
-    HomeService hs = new HomeService();
     private UserIODao userIODao = new UserIODao();
+    private HomeService service = new HomeService();
 
-    public void createUser(User user) throws IOException {
+    public void userRegistration(User user) throws IOException {
         userIODao.create(user);
     }
 
+    public User getUserByCode(int userCode) throws IOException {
+        return userIODao.readUser(userCode);
+    }
+
     public void becomeHost(int userCode, Home newHome) throws IOException {
-        User host = userIODao.getUserByCode(userCode);
+        User host = getUserByCode(userCode);
         host.setHost(true);
         userIODao.create(host);
-        hs.createHome(host, newHome);
+        service.createHome(host, newHome);
     }
 
     public boolean searchPlace() {

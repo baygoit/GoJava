@@ -1,8 +1,10 @@
 import model.*;
 
+import java.io.File;
 import java.util.Date;
 
 public class Airbnb {
+     File file = new File(getClass().getResource("/test").getFile());
 
     public static void main(String[] args) {
 
