@@ -3,18 +3,31 @@ package com.Airbnb.app.model;
 /**
  * Created by romanroma on 26.09.15.
  */
-public enum  ApartType {
-    PLACE, ROOM, APARTMENT;
+public enum ApartType {
+    ROOM ("ROOM"),
+    PLACE ("PLACE"),
+    APARTMENT ("APARTMENT");
 
-    public int getId (ApartType apartType){
-        if (apartType == PLACE){
-            return 1;
-        }
-        else if (apartType == ROOM){
-            return 2;
-        }
-        else {
-            return 3;
-        }
+    public final String text;
+
+    private ApartType (final String text){
+        this.text = text;
     }
+
+    @Override
+    public String toString() {
+        return text;
+    }
+
+    public static ApartType getApartType (String type){
+        if (type == ROOM.toString())
+        {
+            return ROOM;
+        }
+        if (type == APARTMENT.toString()){
+            return APARTMENT;
+        }
+        return PLACE;
+    }
+
 }

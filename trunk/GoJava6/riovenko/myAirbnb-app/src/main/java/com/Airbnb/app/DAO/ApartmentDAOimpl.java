@@ -1,42 +1,168 @@
 package com.Airbnb.app.DAO;
 
-import com.Airbnb.app.Maps;
 import com.Airbnb.app.jdbc.DBConnection;
+import com.Airbnb.app.model.ApartType;
 import com.Airbnb.app.model.Apartment;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.sql.ResultSet;
 
 /**
  * Created by romanroma on 10.10.15.
  */
 public class ApartmentDAOimpl implements ApartmentDAO {
 
-    private static final String addApartmentQuery = "INSERT INTO apartment VALUES (null, ?, ?, ?)";
-    private static final String deleteApartmentQuery = "DELETE FROM apartment WHERE id = ?";
-    private static final String getApartmentbyIdQuery = "Select id, userId, cityId, apartmentType FROM apartment WHERE id = ?";
+    private String addApartmentQuery =
+            "INSERT INTO apartment (userId, cityId, apartmentTypeId) VALUES (?, ?, ?)";
+    private String deleteApartmentQuery =
+            "DELETE FROM apartment WHERE idApartment = ?";
+    private String getApartmentByIdQuery =
+            "SELECT apt.idApartment, apt.userId, apt.cityId, city.name, apt.apartmentTypeId, " +
+                    "apartmentType.apartmentType FROM apartment apt JOIN city ON (apt.cityId = idCity) " +
+                    "JOIN apartmentType ON (apt.apartmentTypeId = idApartmentType) WHERE idApartment = ?";
+    private String checkUniqueCityQuery =
+            "SELECT COUNT(*) FROM city WHERE name = ? ";
+    private String addUniqueCityQuery =
+            "INSERT INTO city (name) VALUES (?)";
+    private String getCityIdQuery =
+            "SELECT idCity FROM city WHERE name = ?";
+    private String getApartmentTypeIdQuery =
+            "SELECT idApartmentType FROM apartmentType WHERE apartmentType = ?";
+    private String getAllApartmentQuery = "SELECT apt.idApartment, apt.userId, apt.cityId, city.name, " +
+            "apt.apartmentTypeId, apartmentType.apartmentType FROM apartment apt JOIN city ON (apt.cityId = idCity) " +
+            "JOIN apartmentType ON (apt.apartmentTypeId = idApartmentType)";
+    private String getPossibleApartmentQuerry = "SELECT idApartment FROM apartment WHERE cityId = ?," +
+            "apartmentTypeId = ?";
 
-    public void addApartment(Apartment apartment) throws SQLException{
+    public void addApartment (Apartment apartment) throws SQLException{
         try (Connection connection = DBConnection.getConnection()){
             PreparedStatement psttmnt = connection.prepareStatement(addApartmentQuery);
             psttmnt.setInt(1, apartment.getHost());
-            psttmnt.setInt(2, apartment.getCity());
-            psttmnt.setInt(3, apartment.getApartTypeId(apartment.getApartType()));
+            psttmnt.setInt(2, getCityId(apartment.getCity()));
+            psttmnt.setInt(3, getApartmentTypeId(apartment.getApartType()));
             psttmnt.executeUpdate();
         }
     }
 
-    public void deleteApartment(int id)throws SQLException{
-        Maps.apartments.remove(id);
+    public void deleteApartment (int id)throws SQLException{
+        try (Connection connection = DBConnection.getConnection()){
+            PreparedStatement psttmnt = connection.prepareStatement(deleteApartmentQuery);
+            psttmnt.setInt(1, id);
+            psttmnt.executeUpdate();
+        }
     }
 
-    public Apartment getBiId(int id) throws SQLException{
-        return Maps.apartments.get(id);
+    public Apartment getApartmentById (int id) throws SQLException{
+        try (Connection connection = DBConnection.getConnection()){
+            PreparedStatement psttmnt = connection.prepareStatement(getApartmentByIdQuery);
+            psttmnt.setInt(1, id);
+
+            ResultSet result = psttmnt.executeQuery();
+            result.next();
+
+            Apartment apartment = new Apartment(result.getInt(2),result.getString(4),
+                    ApartType.getApartType(result.getString(6)));
+            apartment.setId(result.getInt(1));
+
+            return apartment;
+        }
     }
 
-    public List<Apartment> getAll()throws SQLException{
-        return null;
+    public int checkUniqueCity (String city) throws SQLException {
+        try (Connection connection = DBConnection.getConnection()){
+            PreparedStatement psttmnt = connection.prepareStatement(checkUniqueCityQuery);
+            psttmnt.setString(1, city);
+
+            ResultSet result = psttmnt.executeQuery();
+            result.next();
+
+            if(result.getInt(1) == 0){
+                return addUniqueCity(city);
+            }
+
+            else{
+                return getCityId(city);
+            }
+        }
     }
+
+    public int addUniqueCity (String city) throws SQLException{
+        try(Connection connection = DBConnection.getConnection()){
+            PreparedStatement psttnmt = connection.prepareStatement(addUniqueCityQuery);
+            psttnmt.setString(1, city);
+            psttnmt.executeUpdate();
+        }
+
+        try(Connection connection = DBConnection.getConnection()){
+            PreparedStatement psttnmt = connection.prepareStatement(getCityIdQuery);
+            psttnmt.setString(1, city);
+
+            ResultSet result = psttnmt.executeQuery();
+            result.next();
+
+            return result.getInt(1);
+        }
+    }
+
+    public int getCityId (String city) throws SQLException{
+        try (Connection connection = DBConnection.getConnection()){
+            PreparedStatement psttmnt = connection.prepareStatement(getCityIdQuery);
+            psttmnt.setString(1, city);
+
+            ResultSet result = psttmnt.executeQuery();
+            result.next();
+
+            return result.getInt(1);
+        }
+    }
+
+    public int getApartmentTypeId (ApartType apartmentType) throws SQLException{
+        try (Connection connection = DBConnection.getConnection()){
+            PreparedStatement psttmnt = connection.prepareStatement(getApartmentTypeIdQuery);
+            psttmnt.setString(1, apartmentType.toString());
+
+            ResultSet result = psttmnt.executeQuery();
+            result.next();
+
+            return result.getInt(1);
+        }
+    }
+
+    public List<Apartment> getAllApartment () throws SQLException{
+        try(Connection connection = DBConnection.getConnection()){
+            List<Apartment> apartmentList = new LinkedList<>();
+            PreparedStatement psttmnt = connection.prepareStatement(getAllApartmentQuery);
+
+            ResultSet result = psttmnt.executeQuery();
+            while (result.next()){
+                Apartment apartment = new Apartment(result.getInt(2),result.getString(4),
+                        ApartType.getApartType(result.getString(6)));
+                apartment.setId(result.getInt(1));
+                apartmentList.add(apartment);
+            }
+
+            return apartmentList;
+        }
+    }
+
+    /*public ArrayList<Integer> getPossibleApartment (String city, ApartType apartType) throws SQLException {
+        try (Connection connection = DBConnection.getConnection()){
+            ArrayList<Integer> apartmentsList = new ArrayList<>();
+            PreparedStatement psttmnt = connection.prepareStatement(getPossibleApartmentQuerry);
+            psttmnt.setInt (1, getCityId(city));
+            psttmnt.setInt (2, getApartmentTypeId(apartType));
+
+            ResultSet result = psttmnt.executeQuery();
+            while (result.next()){
+                apartmentsList.add(result.getInt(1));
+            }
+
+            return apartmentsList;
+        }
+    }*/
 }

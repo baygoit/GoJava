@@ -3,9 +3,6 @@ package com.Airbnb.app.model;
 import com.Airbnb.app.common.Observer;
 import com.Airbnb.app.validation.Validator;
 
-import java.util.Map;
-import java.util.HashMap;
-
 /**
  * Created by romanroma on 26.09.15.
  */
