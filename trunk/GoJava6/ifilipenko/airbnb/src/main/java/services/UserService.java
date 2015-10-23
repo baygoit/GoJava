@@ -19,9 +19,7 @@ public class UserService {
     }
 
     public void becomeHost(int userCode, Home newHome) throws IOException {
-        User host = getUserByCode(userCode);
-        host.setHost(true);
-        userIODao.create(host);
+        User host = this.getUserByCode(userCode);
         service.createHome(host, newHome);
     }
 

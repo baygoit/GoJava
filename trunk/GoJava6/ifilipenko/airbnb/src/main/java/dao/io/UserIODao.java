@@ -8,8 +8,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class UserIODao implements Dao {
-    private HashMap<Integer, User> users = new HashMap<>();
     private File file = new File(this.getClass().getResource("/users").getFile());
+    HashMap<Integer, User> users = new HashMap<>();
 
     public void create(User newUser) throws IOException {
         int code = newUser.getExternalCode();
@@ -34,9 +34,8 @@ public class UserIODao implements Dao {
     }
 
     public User readUser(int code) throws IOException {
+        int size = users.size();
         String line;
-        Map<Integer, User> map = users;
-        int size = map.size();
         try (
                 BufferedReader reader = new BufferedReader(new FileReader(file))
         ) {
@@ -47,7 +46,7 @@ public class UserIODao implements Dao {
                     for (int j = 0; j < user.length; j++) {
                         user[j] = user[j].trim();
                         if (user[j].equals(Integer.toString(code))) {
-                            User userNew = map.get(code);
+                            User userNew = users.get(code);
                             return userNew;
                         }
                     }

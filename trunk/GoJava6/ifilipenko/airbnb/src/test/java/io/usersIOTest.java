@@ -31,6 +31,7 @@ public class usersIOTest {
     private File expectedHome = new File(this.getClass().getResource("/testhome").getFile());
 
     private File expectedRes = new File(this.getClass().getResource("/reservation").getFile());
+    private File actualRes = new File(this.getClass().getResource("/testreservation").getFile());
 
     @Before
     public void init() {
@@ -59,6 +60,7 @@ public class usersIOTest {
             System.out.println("Cannot perform output" + ex);
         }
 
+         /*----------------------------------------------------*/
         UserService service = new UserService();
         for (User user : users) {
             service.userRegistration(user);
@@ -69,7 +71,7 @@ public class usersIOTest {
     }
 
     @Test
-    public void verify_UserBecomesHostAndHewHomeCreated() throws IOException {
+    public void verify_UserBecomesHostAndNewHomeCreated() throws IOException {
         List<Home> homeList = new ArrayList<>();
         homeList.add(home1);
         try (
@@ -93,7 +95,7 @@ public class usersIOTest {
         }
         UserService service = new UserService();
         for (Home home : homeList) {
-            service.becomeHost(1, home);
+            service.becomeHost(user1.getExternalCode(), home);
         }
 
         Assert.assertEquals(FileUtils.readLines(expectedHome), FileUtils.readLines(actualHome));
@@ -127,13 +129,15 @@ public class usersIOTest {
         List<Home> homeList = Arrays.asList(home1);
         UserService hService = new UserService();
         for (Home home : homeList) {
-            hService.becomeHost(1, home);
+            hService.becomeHost(user1.getExternalCode(), home);
         }
 
         ReservationService rService = new ReservationService();
         for (Reservation reservation : reservations) {
             rService.bookHome(reservation);
         }
+
+        Assert.assertEquals(FileUtils.readLines(expectedRes), FileUtils.readLines(actualRes));
     }
 
 }
