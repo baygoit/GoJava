@@ -1,7 +1,8 @@
 package com.airbnb.jdbc;
 
 import java.sql.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Игорь on 11.10.2015.

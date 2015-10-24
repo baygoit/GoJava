@@ -2,8 +2,6 @@ package com.airbnb.services;
 
 import com.airbnb.dao.IApartmentDao;
 import com.airbnb.model.Apartment;
-import com.airbnb.model.User;
-
 import java.util.List;
 
 /**
@@ -20,6 +18,10 @@ public class ApartamentService {
         return iApartmentDao.getApartmentList();
     }
 
+    public List<Apartment> getApartamentsByIdUser(int idUser){
+        return iApartmentDao.getApartmentListByIdUser(idUser);
+    }
+
     public Apartment getApartamentById(int idApartament){
         return iApartmentDao.getApartment(idApartament);
     }
@@ -32,12 +34,19 @@ public class ApartamentService {
         iApartmentDao.addToDb(apartment);
     }
 
-    public boolean isAvailable(int idApartament){
-        return true;
+    public boolean isAvailable(ReservationDatesService reservationDatesService, int idApartment, long dateStart, long dateFinish) {
+        return reservationDatesService.isAvailableApartment(idApartment, dateStart, dateFinish);
     }
 
     public void printApartaments(){
         List<Apartment> apartments = iApartmentDao.getApartmentList();
+        for (Apartment apartment : apartments) {
+            System.out.println(apartment.toString());
+        }
+    }
+
+    public void printApartamentsByIdUser(int idUser){
+        List<Apartment> apartments = iApartmentDao.getApartmentListByIdUser(idUser);
         for (Apartment apartment : apartments) {
             System.out.println(apartment.toString());
         }

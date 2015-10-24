@@ -28,6 +28,13 @@
     <bean id="reservationDatesDaoJDBC" class="com.airbnb.jdbc.JDBCReservationDateDataAcces">
     </bean>
 
+    <bean id="newsSubscribeService" class="com.airbnb.services.NewsSubscribeService">
+        <constructor-arg ref="newsSubscribeDaoJDBC"/>
+    </bean>
+
+    <bean id="newsSubscribeDaoJDBC" class="com.airbnb.jdbc.JDBCSubscribersDataAcces">
+    </bean>
+
     <!--<bean id="userDaoIO" class="com.airbnb.jdbc.IOUserDataAcces">-->
     <!--</bean>-->
 

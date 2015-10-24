@@ -10,6 +10,7 @@ import java.util.List;
  */
 public interface IReservationDao {
     List<ReservationDate> getReservationDateList();
+    List<ReservationDate> getReservationDateListByIdApartament(int idApartament);
     ReservationDate getReservationDate(int id);
     void delete(int id);
     void addToDb(ReservationDate reservationDate);

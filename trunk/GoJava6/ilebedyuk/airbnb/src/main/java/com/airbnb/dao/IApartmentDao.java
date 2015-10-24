@@ -9,6 +9,7 @@ import java.util.List;
  */
 public interface IApartmentDao {
     List<Apartment> getApartmentList();
+    List<Apartment> getApartmentListByIdUser(int idUser);
     Apartment getApartment(int id);
     void delete(int id);
     void addToDb(Apartment apartment);

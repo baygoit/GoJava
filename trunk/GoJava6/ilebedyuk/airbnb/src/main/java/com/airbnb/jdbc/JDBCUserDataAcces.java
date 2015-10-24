@@ -1,11 +1,13 @@
 package com.airbnb.jdbc;
 
-import com.airbnb.model.User;
 import com.airbnb.dao.IUserDao;
+import com.airbnb.model.User;
 import com.airbnb.model.UserType;
 
-import java.sql.*;
-import java.util.*;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Игорь on 06.10.2015.

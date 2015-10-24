@@ -1,10 +1,10 @@
 package com.airbnb.services;
 
 import com.airbnb.dao.IUserDao;
-import com.airbnb.jdbc.JDBCUserDataAcces;
 import com.airbnb.model.User;
-import com.airbnb.model.UserType;
+
 import java.util.List;
+
 
 /**
  * Created by Игорь on 11.10.2015.

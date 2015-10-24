@@ -2,7 +2,6 @@ package com.airbnb.model;
 
 
 import java.text.SimpleDateFormat;
-import java.sql.Date;
 
 /**
  * Created by Игорь on 27.09.2015.

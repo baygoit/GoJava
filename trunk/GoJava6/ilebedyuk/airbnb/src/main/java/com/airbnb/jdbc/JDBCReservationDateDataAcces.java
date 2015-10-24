@@ -30,6 +30,18 @@ public class JDBCReservationDateDataAcces extends AbstractBaseDao implements IRe
     }
 
     @Override
+    public List<ReservationDate> getReservationDateListByIdApartament(int idApartament) {
+        List<ReservationDate> reservationDates = new ArrayList<ReservationDate>();
+        sqlCode = "SELECT reservationdates.* FROM reservationdates join apartaments on apartaments.idapartaments = reservationdates.apartmentId where apartaments.idapartaments = " + idApartament + ";";
+        List<Object> objects = objectsList(sqlCode);
+        for (Object o : objects) {
+            ReservationDate reservationDate = (ReservationDate) o;
+            reservationDates.add(reservationDate);
+        }
+        return reservationDates;
+    }
+
+    @Override
     public ReservationDate getReservationDate(int id) {
         sqlCode = "select * from reservationdates where idreservationDates = " + id + ";";
         ReservationDate reservationDate = (ReservationDate) objectsList(sqlCode).get(0);

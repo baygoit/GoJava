@@ -27,6 +27,18 @@ public class JDBCApartmentDataAcces extends AbstractBaseDao implements IApartmen
     }
 
     @Override
+    public List<Apartment> getApartmentListByIdUser(int idUser) {
+        List<Apartment> apartments = new ArrayList<Apartment>();
+        sqlCode = "SELECT apartaments.* FROM apartaments join user on user.iduser = apartaments.iduser where user.iduser = " + idUser + ";";
+        List<Object> objects = objectsList(sqlCode);
+        for (Object o : objects) {
+            Apartment apartment = (Apartment) o;
+            apartments.add(apartment);
+        }
+        return apartments;
+    }
+
+    @Override
     public Apartment getApartment(int id) {
         sqlCode = "SELECT * FROM apartaments where idapartaments = " + id + ";";
         Apartment apartment = (Apartment) objectsList(sqlCode).get(0);
@@ -69,16 +81,4 @@ public class JDBCApartmentDataAcces extends AbstractBaseDao implements IApartmen
         }
         return apartment;
     }
-
-//    public void printApartaments(){
-//        List<Apartment> apartments = getApartmentList();
-//        for (Apartment apartment : apartments) {
-//            System.out.println(apartment.toString());
-//        }
-//    }
-
-//    public static void main(String[] args) {
-//        JDBCApartmentDataAcces jdbcApartmentDataAcces = new JDBCApartmentDataAcces();
-//        jdbcApartmentDataAcces.printApartaments();
-//    }
 }
