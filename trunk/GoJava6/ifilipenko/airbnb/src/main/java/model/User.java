@@ -11,12 +11,14 @@ public class User {
     private GenderType gender;
     private Date birthDate;
     private String email;
-    private String city;
+    private CityList city;
     private String country;
+    private boolean isHost;
 
-    public User() {}
+    public User() {
+    }
 
-    public User(int externalCode, String name, String lastName, GenderType gender, Date birthDate, String email, String city) {
+    public User(int externalCode, String name, String lastName, GenderType gender, Date birthDate, String email, CityList city) {
         this.externalCode = externalCode;
         this.name = name;
         this.lastName = lastName;
@@ -24,6 +26,7 @@ public class User {
         this.birthDate = birthDate;
         this.email = email;
         this.city = city;
+        this.isHost = false;
     }
 
 
@@ -42,6 +45,7 @@ public class User {
     public void setExternalCode(int externalCode) {
         this.externalCode = externalCode;
     }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -62,7 +66,7 @@ public class User {
         this.email = email;
     }
 
-    public void setCity(String city) {
+    public void setCity(CityList city) {
         this.city = city;
     }
 
@@ -90,7 +94,7 @@ public class User {
         return email;
     }
 
-    public String getCity() {
+    public CityList getCity() {
         return city;
     }
 
@@ -98,11 +102,13 @@ public class User {
         return country;
     }
 
-    public void searchPlace() {
-    };
+    public boolean isHost() {
+        return isHost;
+    }
 
-    public void bookPlace() {
-    };
+    public void setHost(boolean isHost) {
+        this.isHost = isHost;
+    }
 
     @Override
     public String toString() {

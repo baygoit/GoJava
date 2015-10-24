@@ -9,18 +9,22 @@ public class Apartment {
     private static int APARTMENT_ID = 0;
     private int id;
     private int hostId;
-    private int cityId;
+    private String city;
     private ApartType apartType;
 
-    public Apartment(int hostId, int cityId, ApartType apartType){
+    public Apartment(int hostId, String city, ApartType apartType){
         this.id = ++APARTMENT_ID;
         this.hostId = hostId;
-        this.cityId = cityId;
-        this.apartType = apartType;
+        this.city = city;
+        this.apartType= apartType;
     }
 
     public int getId (){
         return id;
+    }
+
+    public void setId(int id){
+        this.id = id;
     }
 
     public int getHost (){
@@ -31,20 +35,16 @@ public class Apartment {
         this.hostId = hostId;
     }
 
-    public int getCity(){
-        return cityId;
+    public String getCity(){
+        return city;
     }
 
-    public void setCity (int city){
-        this.cityId = cityId;
+    public void setCity (String city){
+        this.city = city;
     }
 
     public ApartType getApartType () {
         return apartType;
-    }
-
-    public int getApartTypeId (ApartType apartType){
-        return apartType.getId(apartType);
     }
 
     public void setApartType (ApartType apartType){
@@ -52,7 +52,6 @@ public class Apartment {
     }
 
     public boolean validation (){
-        //return Validator.validateUserCity(city);
-        return true;
+        return Validator.validateUserCity(city);
     }
 }

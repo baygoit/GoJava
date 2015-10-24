@@ -4,17 +4,16 @@ import java.util.Date;
 
 public class Reservation {
     private User user;
-    private HomeType homeType;
+    private Home home;
     private Date start;
     private Date end;
     private String comment;
 
-    public Reservation(User user, HomeType apartment, Date start, Date end, String comment) {
+    public Reservation(User user, Home home, Date start, Date end) {
         this.user = user;
-        this.homeType = apartment;
+        this.home = home;
         this.start = start;
         this.end = end;
-        this.comment = comment;
     }
 
     public User getUser() {
@@ -25,12 +24,12 @@ public class Reservation {
         this.user = user;
     }
 
-    public HomeType getHomeType() {
-        return homeType;
+    public Home getHome() {
+        return home;
     }
 
-    public void setHomeType(HomeType homeType) {
-        this.homeType = homeType;
+    public void setHome(Home home) {
+        this.home = home;
     }
 
     public Date getStart() {
@@ -61,7 +60,7 @@ public class Reservation {
     public String toString() {
         return "Reservation{" +
                 "user=" + user +
-                ", homeType=" + homeType +
+                ", home=" + home +
                 ", start=" + start +
                 ", end=" + end +
                 '}';
