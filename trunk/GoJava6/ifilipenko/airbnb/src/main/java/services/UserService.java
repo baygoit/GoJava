@@ -1,13 +1,13 @@
 package services;
 
-import dao.io.UserIODao;
+import dao.file.UserFileDao;
 import model.Home;
 import model.User;
 
 import java.io.IOException;
 
-public class UserService {
-    private UserIODao userIODao = new UserIODao();
+public class UserService{
+    private UserFileDao userIODao = new UserFileDao();
     private HomeService service = new HomeService();
 
     public void userRegistration(User user) throws IOException {
@@ -15,7 +15,7 @@ public class UserService {
     }
 
     public User getUserByCode(int userCode) throws IOException {
-        return userIODao.readUser(userCode);
+        return userIODao.loadByCode(userCode);
     }
 
     public void becomeHost(int userCode, Home newHome) throws IOException {
@@ -26,6 +26,5 @@ public class UserService {
     public boolean searchPlace() {
         return false;
     }
-
 
 }

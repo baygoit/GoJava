@@ -1,6 +1,6 @@
-package io;
+package file;
 
-import dao.io.MyUtil;
+import dao.file.MyUtil;
 import model.*;
 import org.apache.commons.io.FileUtils;
 import org.junit.Assert;
@@ -18,30 +18,44 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-public class usersIOTest {
+public class FileTest {
+    private MyUtil util = new MyUtil();
+
     private User user1;
     private User user2;
     private Home home1;
-    private MyUtil util = new MyUtil();
 
-    private File actualUser = util.getFile("/users");
-    private File expectedUser = util.getFile("/testusers");
-
-    private File actualHome = new File(this.getClass().getResource("/home").getFile());
-    private File expectedHome = new File(this.getClass().getResource("/testhome").getFile());
-
-    private File expectedRes = new File(this.getClass().getResource("/reservation").getFile());
-    private File actualRes = new File(this.getClass().getResource("/testreservation").getFile());
+    private File actualUser;
+    private File expectedUser;
+    private File actualHome;
+    private File expectedHome;
+    private File expectedRes;
+    private File actualRes;
+    private Reservation res;
 
     @Before
     public void init() {
         user1 = new User(1, "Jennifer", "Richard", GenderType.FEMALE, new Date(11011999), "jr@gmail.com", CityList.MIAMI);
         user2 = new User(2, "Bridget", "Raabe", GenderType.FEMALE, new Date(12011999), "br@gmail.com", CityList.NEW_YORK);
         home1 = new Home(user1, CityList.MIAMI, HomeType.APARTMENT);
+        res = new Reservation(user2, home1, new Date(10012015), new Date(15012016));
+
+        actualUser = util.getFile("/users");
+        expectedUser = util.getFile("/testusers");
+        actualHome = new File(this.getClass().getResource("/home").getFile());
+        expectedHome = new File(this.getClass().getResource("/testhome").getFile());
+        expectedRes = new File(this.getClass().getResource("/reservation").getFile());
+        actualRes = new File(this.getClass().getResource("/testreservation").getFile());
     }
 
     @Test
     public void verify_UserRegistration() throws IOException {
+        this.mockUserRegistration();
+        this.userRegistration();
+        Assert.assertEquals(FileUtils.readLines(expectedUser), FileUtils.readLines(actualUser));
+    }
+
+    private void mockUserRegistration(){
         List<User> users = Arrays.asList(user1, user2);
         try (
                 BufferedWriter writer = new BufferedWriter(new FileWriter(expectedUser))
@@ -53,25 +67,31 @@ public class usersIOTest {
                 writer.write(user.getGender() + " | ");
                 writer.write(user.getBirthDate() + " | ");
                 writer.write(user.getEmail() + " | ");
-                writer.write(user.isHost() + " | ");
                 writer.write(user.getCity() + "\n");
             }
         } catch (IOException ex) {
             System.out.println("Cannot perform output" + ex);
         }
 
-         /*----------------------------------------------------*/
+    }
+    private void userRegistration() throws IOException {
+        List<User> users = Arrays.asList(user1, user2);
         UserService service = new UserService();
         for (User user : users) {
             service.userRegistration(user);
         }
 
-        Assert.assertEquals(FileUtils.readLines(expectedUser),
-                FileUtils.readLines(actualUser));
     }
 
     @Test
     public void verify_UserBecomesHostAndNewHomeCreated() throws IOException {
+        this.mockUserBecomesHost();
+        this.userRegistration();
+        this.homeCreation();
+        Assert.assertEquals(FileUtils.readLines(expectedHome), FileUtils.readLines(actualHome));
+    }
+
+    private void mockUserBecomesHost(){
         List<Home> homeList = new ArrayList<>();
         homeList.add(home1);
         try (
@@ -86,24 +106,30 @@ public class usersIOTest {
         } catch (IOException ex) {
             System.out.println("Cannot perform output" + ex);
         }
-
-        /*----------------------------------------------------*/
-        List<User> users = Arrays.asList(user1, user2);
-        UserService uService = new UserService();
-        for (User user : users) {
-            uService.userRegistration(user);
-        }
+    }
+    private void homeCreation() throws IOException {
+        List<Home> homeList = Arrays.asList(home1);
         UserService service = new UserService();
         for (Home home : homeList) {
             service.becomeHost(user1.getExternalCode(), home);
         }
-
-        Assert.assertEquals(FileUtils.readLines(expectedHome), FileUtils.readLines(actualHome));
     }
 
     @Test
-    public void verify_UserBooksHome() throws IOException {
-        Reservation res = new Reservation(user2, home1, new Date(10012015), new Date(15012016));
+    public void BookHome_Normal_Success() throws IOException {
+        // Arrange
+        this.mockUserBooksHome();
+        this.userRegistration();
+        this.homeCreation();
+
+        // Act
+        this.placeReservation();
+
+        // Assert
+        Assert.assertEquals(FileUtils.readLines(expectedRes), FileUtils.readLines(actualRes));
+    }
+
+    private void mockUserBooksHome(){
         List<Reservation> reservations = Arrays.asList(res);
 
         try (
@@ -118,26 +144,23 @@ public class usersIOTest {
         } catch (IOException ex) {
             System.out.println("Cannot perform output" + ex);
         }
-
-         /*----------------------------------------------------*/
-        List<User> users = Arrays.asList(user1, user2);
-        UserService uService = new UserService();
-        for (User user : users) {
-            uService.userRegistration(user);
-        }
-
-        List<Home> homeList = Arrays.asList(home1);
-        UserService hService = new UserService();
-        for (Home home : homeList) {
-            hService.becomeHost(user1.getExternalCode(), home);
-        }
-
+    }
+    private void placeReservation(){
+        List<Reservation> reservations = Arrays.asList(res);
         ReservationService rService = new ReservationService();
         for (Reservation reservation : reservations) {
             rService.bookHome(reservation);
         }
 
-        Assert.assertEquals(FileUtils.readLines(expectedRes), FileUtils.readLines(actualRes));
+    }
+
+    @Test
+    public void verify_EmailIsSentToHostWhenHisPlacedIsBooked(){
+    }
+
+
+    private void mockSentEmail(){
+
     }
 
 }

@@ -1,4 +1,4 @@
-package dao.io;
+package dao.file;
 
 import dao.Dao;
 import model.Home;
@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomeIODao implements Dao {
+public class HomeFileDao implements Dao {
 
     private List<Home> homeList = new ArrayList<>();
     private File file = new File(this.getClass().getResource("/home").getFile());

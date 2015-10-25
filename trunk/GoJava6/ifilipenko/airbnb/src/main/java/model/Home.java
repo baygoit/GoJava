@@ -1,6 +1,9 @@
 package model;
 
-public class Home {
+import observer.Observer;
+import observer.Subject;
+
+public class Home implements Subject {
     private User host;
     private CityList city;
     private HomeType homeType;
@@ -63,4 +66,18 @@ public class Home {
     }
 
 
+    @Override
+    public void register(Observer observer) {
+
+    }
+
+    @Override
+    public void remove(Observer observer) {
+
+    }
+
+    @Override
+    public void notifyAllObservers(String message) {
+
+    }
 }

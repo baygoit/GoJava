@@ -1,4 +1,4 @@
-package dao.io;
+package dao.file;
 
 import model.Reservation;
 
@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ReservationIODao {
+public class ReservationFileDao {
     private List<Reservation> reservations = new ArrayList<>();
     private File file = new File(this.getClass().getResource("/reservation").getFile());
 
