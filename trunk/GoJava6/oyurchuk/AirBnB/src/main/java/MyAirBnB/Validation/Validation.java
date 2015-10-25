@@ -1,9 +1,11 @@
-package MyAirBnB;
+package MyAirBnB.Validation;
 
 /**
  * Created by macmini on 20.09.15.
  */
 
+
+    import MyAirBnB.Model.Apartment;
 
     import java.util.regex.Matcher;
     import java.util.regex.Pattern;

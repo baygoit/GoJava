@@ -1,4 +1,6 @@
-package obcerver;
+package MyAirBnB.Model;
+
+import MyAirBnB.Enum.ApartmentType;
 
 import java.util.Date;
 import java.util.List;
@@ -23,6 +25,7 @@ public class Apartment {
 
     public boolean isAvailable(Date starts, Date end){
 
+        // проверить на  null и на то, что end >= starts
         for (ReservationDate reservationDate :reservationDates) {
             if (end.compareTo(reservationDate.getStart()) < 0){
                 continue;

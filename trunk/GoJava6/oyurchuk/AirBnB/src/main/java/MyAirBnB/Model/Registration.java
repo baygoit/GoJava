@@ -1,4 +1,4 @@
-package MyAirBnB;
+package MyAirBnB.Model;
 
 import MyAirBnB.Interfaces.Observer;
 import MyAirBnB.Interfaces.Organization;

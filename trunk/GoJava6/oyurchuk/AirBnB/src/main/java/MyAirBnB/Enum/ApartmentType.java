@@ -1,5 +1,4 @@
-package obcerver;
-import java.lang.Enum;
+package MyAirBnB.Enum;
 
 /**
  * Created by macmini on 29.09.15.

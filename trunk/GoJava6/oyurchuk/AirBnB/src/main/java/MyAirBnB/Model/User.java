@@ -1,4 +1,8 @@
-package obcerver;
+package MyAirBnB.Model;
+import MyAirBnB.Enum.ApartmentType;
+import MyAirBnB.Interfaces.Observer;
+import MyAirBnB.Validation.Validation;
+
 import java.util.Date;
 
 /**
@@ -9,10 +13,18 @@ public class User implements Observer {
     protected String name;
     protected String surname;
     protected final String mail;
-    private enum Status  {CLIENT, HOST};
+
+    @Override
+    public String toString() {
+
+        return "i am user" + " " + name;
+    }
+
+    private enum Status {CLIENT, HOST};
+
     private Status myStatus = Status.CLIENT;
 
-    public User(String name, String surname, String mail) {
+    public User(String mail, String surname, String name) {
 
         this.mail = mail;
         this.surname = surname;
@@ -47,14 +59,15 @@ public class User implements Observer {
 
     @Override
     public void update(String message) {
-        System.out.println("Hello!" + getName());
+        System.out.println("Hello!" + getName()+" "+ message);
 
     }
 
+    // Host
     public boolean createApartment(String city, ApartmentType apartType, String address) {
 
-        if (myStatus == Status.CLIENT){
-            return false;
+        if (myStatus == Status.CLIENT) {
+            return false; // не регистрировать
         }
         Apartment apartment = new Apartment(city, apartType, address);
         Validation v = new Validation();
@@ -65,11 +78,15 @@ public class User implements Observer {
         }
     }
 
-    public void reservApartment (Apartment apartment, Date start, Date end){
 
-        apartment.makeReservation(start,end);
+    //Client
+    public boolean reserveApartment(Apartment apartment, Date start, Date end) {
 
+        if (myStatus == Status.HOST){
+            return false;
+        }
+        apartment.makeReservation(start, end);
+        return true;
     }
 }
-
 // из клиента сделать хоста

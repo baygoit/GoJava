@@ -1,4 +1,4 @@
-package MyAirBnB;
+package MyAirBnB.Model;
 
 import java.util.Date;
 

@@ -1,4 +1,6 @@
-package MyAirBnB;
+package MyAirBnB.Model;
+
+import MyAirBnB.JDBC.Jdbc;
 
 /**
  * Created by macmini on 20.09.15.
@@ -16,6 +18,10 @@ public class Constructor {
         registration.register(user);
 
         System.out.println(user);
+
+        Jdbc jdbc = new Jdbc();
+        String query = "select count(*) from user";
+        jdbc.doConn(query);
     }
 
 }

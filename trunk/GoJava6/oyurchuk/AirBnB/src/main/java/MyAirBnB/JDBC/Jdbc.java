@@ -9,7 +9,7 @@ import java.sql.SQLException;
 /**
  * Created by macmini on 11.10.15.
  */
-public class JavaToMySQL {
+public class Jdbc {
 
     private static final String url = "jdbc:mysql://localhost:3306/test";
     private static final String user = "root";
@@ -21,34 +21,49 @@ public class JavaToMySQL {
     private static Statement stmt;
     private static ResultSet rs;
 
-    public static void main (String args []){
-    String query = "select count(*) from user";
+
+
+    public ResultSet doConn (String query) {
+
 
         try {
             con = DriverManager.getConnection(url, user, password);
             stmt = con.createStatement();
             rs = stmt.executeQuery(query);
 
-            while (rs.next()){
+            while (rs.next()) {
                 int count = rs.getInt(1);
                 System.out.print("Total numbers of user in the table: " + count);
             }
 
-        } catch (SQLException sqlEx){
+
+        } catch (SQLException sqlEx) {
             sqlEx.printStackTrace();
-        }
 
-        finally {
-            try { con.close(); } catch (SQLException se) { /*can't do anything */ }
-            try { stmt.close(); } catch (SQLException se) {/*can't do anything */ }
-            try { rs.close(); } catch (SQLException se) {/*can't do anything */ }
 
-           }
-
+        } finally {
 
         }
+        try {
+            con.close();
+        } catch (SQLException se) { /*can't do anything */ }
+        try {
+            stmt.close();
+        } catch (SQLException se) {/*can't do anything */ }
+        try {
+            rs.close();
+        } catch (SQLException se) {/*can't do anything */ }
+        return rs;
 
     }
+
+
+        }
+
+
+
+
+
 
 
 
