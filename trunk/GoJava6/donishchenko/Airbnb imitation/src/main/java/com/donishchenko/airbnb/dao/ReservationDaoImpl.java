@@ -19,17 +19,17 @@ public class ReservationDaoImpl implements ReservationDao {
 
     //TODO test
     private static final String getAllAppartmentsWithParameters =
-            "select\n" +
+            "SELECT\n" +
                     "\tap.id\n" +
-                    "from\n" +
-                    "\tapartment as ap\n" +
-                    "\tLEFT JOIN reservation as res\n" +
-                    "\tON ap.id = res.apartmentId\n" +
-                    "where\n" +
-                    "\tap.city = \"Kiev\" and\n" +
-                    "\tap.type = 0 and\n" +
-                    "\t('2015-1-1' >= res.end or\n" +
-                    "\t'2015-1-3' <= res.start)";
+                    "FROM\n" +
+                    "\tapartment AS ap\n" +
+                    "\tLEFT JOIN reservation AS res\n" +
+                    "\tON ap.id = res.apartmentId AND\n" +
+                    "\t('2015-1-1' >= res.end OR\n" +
+                    "        '2015-1-3' <= res.start)\n" +
+                    "WHERE\n" +
+                    "\tap.city = 'Kiev' AND\n" +
+                    "\tap.type = 0";
 
     @Override
     public boolean makeReservation(User user, Apartment apartment, Date start, Date end, String comment) {
