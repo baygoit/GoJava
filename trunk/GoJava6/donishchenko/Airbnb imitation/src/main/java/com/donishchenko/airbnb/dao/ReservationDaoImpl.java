@@ -17,6 +17,20 @@ import java.util.List;
 public class ReservationDaoImpl implements ReservationDao {
     public static final Logger log = LogManager.getLogger(ReservationDaoImpl.class.getName());
 
+    //TODO test
+    private static final String getAllAppartmentsWithParameters =
+            "SELECT\n" +
+                    "\tap.id\n" +
+                    "FROM\n" +
+                    "\tapartment AS ap\n" +
+                    "\tLEFT JOIN reservation AS res\n" +
+                    "\tON ap.id = res.apartmentId AND\n" +
+                    "\t('2015-1-1' >= res.end OR\n" +
+                    "        '2015-1-3' <= res.start)\n" +
+                    "WHERE\n" +
+                    "\tap.city = 'Kiev' AND\n" +
+                    "\tap.type = 0";
+
     @Override
     public boolean makeReservation(User user, Apartment apartment, Date start, Date end, String comment) {
         if (end.before(start)) {

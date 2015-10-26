@@ -15,7 +15,15 @@ public class RegisrationService {
 
     private UserDAO userDAO = new UserDAOimpl();
 
-    public void registration (String name, String surname, String email, Boolean isHost){
+    public void register (String name, String surname, String email, Boolean isHost){
+        try {
+            if (userDAO.checkExistingUser(email) == 1){
+                System.out.println ("User : " + email + " is already exist");
+                return;
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
         User user = new User (name, surname, email, isHost);
         register(user);
     }
@@ -68,6 +76,15 @@ public class RegisrationService {
             e.printStackTrace();
         }
         return hostsList;
+    }
+
+    public User getUserById (int id){
+        try {
+            return userDAO.getUserById(id);
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+        return null;
     }
 
 }

@@ -1,6 +1,7 @@
 package dao.db;
 
-public class HomeDao {
+import dao.Dao;
 
+public class HomeDao implements Dao{
 
 }

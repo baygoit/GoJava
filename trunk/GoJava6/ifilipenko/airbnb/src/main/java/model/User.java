@@ -1,25 +1,51 @@
 package model;
 
-import java.util.Date;
+import observer.Observer;
 
-public class User {
+import java.util.Date;
+import java.util.HashMap;
+
+public class User implements Observer{
+    private static int USER_ID = 0;
+    private int id;
+    private int externalCode;
     private String name;
     private String lastName;
     private GenderType gender;
     private Date birthDate;
     private String email;
-    private String city;
+    private CityList city;
     private String country;
+    private HashMap<Integer, User> users;
 
-    public User() {}
+    public User() {
+    }
 
-    public User(String name, String lastName, GenderType gender, Date birthDate, String email, String city) {
+    public User(int externalCode, String name, String lastName, GenderType gender, Date birthDate, String email, CityList city) {
+        this.externalCode = externalCode;
         this.name = name;
         this.lastName = lastName;
         this.gender = gender;
         this.birthDate = birthDate;
         this.email = email;
         this.city = city;
+    }
+
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getExternalCode() {
+        return externalCode;
+    }
+
+    public void setExternalCode(int externalCode) {
+        this.externalCode = externalCode;
     }
 
     public void setName(String name) {
@@ -42,7 +68,7 @@ public class User {
         this.email = email;
     }
 
-    public void setCity(String city) {
+    public void setCity(CityList city) {
         this.city = city;
     }
 
@@ -62,6 +88,8 @@ public class User {
         return gender;
     }
 
+
+
     public Date getBirthDate() {
         return birthDate;
     }
@@ -70,7 +98,7 @@ public class User {
         return email;
     }
 
-    public String getCity() {
+    public CityList getCity() {
         return city;
     }
 
@@ -78,17 +106,25 @@ public class User {
         return country;
     }
 
-    public void searchPlace() {
-    };
+    public HashMap<Integer, User> getUsers() {
+        return users;
+    }
 
-    public void bookPlace() {
-    };
+    public void setUsers(HashMap<Integer, User> users) {
+        this.users = users;
+    }
 
     @Override
     public String toString() {
         return "User{" +
-                "name='" + name + '\'' +
+                "external code='" + externalCode + '\'' +
+                ", name='" + name + '\'' +
                 ", lastName='" + lastName + '\'' +
                 '}';
+    }
+
+    @Override
+    public void notifyObserver(String s) {
+
     }
 }

@@ -11,9 +11,10 @@ import java.util.List;
 public interface UserDAO {
     public void addUser (User user) throws SQLException;
     public void deleteUser (int id) throws SQLException;
-    public User getUserbyId (int id) throws SQLException;
+    public User getUserById (int id) throws SQLException;
     public List<User> getAllUsers() throws SQLException;
     public List<User> getAllClients()throws SQLException;
     public List<User>getAllHosts() throws SQLException;
+    public int checkExistingUser (String email) throws SQLException;
 
 }

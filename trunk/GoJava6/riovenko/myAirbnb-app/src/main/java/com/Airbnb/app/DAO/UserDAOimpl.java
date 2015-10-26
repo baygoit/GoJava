@@ -1,6 +1,5 @@
 package com.Airbnb.app.DAO;
 
-import com.Airbnb.app.Maps;
 import com.Airbnb.app.jdbc.DBConnection;
 import com.Airbnb.app.model.User;
 
@@ -16,10 +15,11 @@ import java.util.List;
  */
 public class UserDAOimpl implements UserDAO{
 
-    private static final String addUserQuery = "INSERT INTO user VALUES (null, ?, ?, ?, ?)";
-    private static final String deleteUserQuery = "DELETE FROM user WHERE id = ?";
-    private static final String getUserbyIdQuery = "Select id, name, surname, email, isHost FROM user WHERE id = ?";
-    private static final String getUsersQuery = "SELECT * FROM user";
+    private String addUserQuery = "INSERT INTO user (name, surname, email, isHost) VALUES (?, ?, ?, ?)";
+    private String deleteUserQuery = "DELETE FROM user WHERE idUser = ?";
+    private String getUserbyIdQuery = "Select idUser, name, surname, email, isHost FROM user WHERE idUser = ?";
+    private String getUsersQuery = "SELECT * FROM user";
+    private String checkExistingUserQuery = "SELECT COUNT(*) FROM user WHERE email = ? ";
 
 
     public void addUser(User user) throws SQLException {
@@ -44,7 +44,18 @@ public class UserDAOimpl implements UserDAO{
         }
     }
 
-    public User getUserbyId(int id) throws SQLException{
+    public int checkExistingUser (String email) throws SQLException {
+        try (Connection connection = DBConnection.getConnection()){
+            PreparedStatement psttmnt = connection.prepareStatement(checkExistingUserQuery);
+            psttmnt.setString(1, email);
+
+            ResultSet result = psttmnt.executeQuery();
+            result.next();
+            return result.getInt(1);
+        }
+    }
+
+    public User getUserById(int id) throws SQLException{
 
         try (Connection connection = DBConnection.getConnection()){
             PreparedStatement psttmnt = connection.prepareStatement(getUserbyIdQuery);
@@ -80,7 +91,8 @@ public class UserDAOimpl implements UserDAO{
 
         try(Connection connection = DBConnection.getConnection()){
             List<User> clientsList = new LinkedList<>();
-            PreparedStatement psttmnt = connection.prepareStatement(getUsersQuery + "WHERE isHost = False");
+            PreparedStatement psttmnt = connection.prepareStatement(getUsersQuery + " WHERE isHost = ?");
+            psttmnt.setBoolean(1, false);
 
             ResultSet result = psttmnt.executeQuery();
             while (result.next()){
@@ -96,7 +108,8 @@ public class UserDAOimpl implements UserDAO{
 
         try(Connection connection = DBConnection.getConnection()){
             List<User> clientsList = new LinkedList<>();
-            PreparedStatement psttmnt = connection.prepareStatement(getUsersQuery + "WHERE siHost = True");
+            PreparedStatement psttmnt = connection.prepareStatement(getUsersQuery + " WHERE isHost = ?");
+            psttmnt.setBoolean(1, true);
 
             ResultSet result = psttmnt.executeQuery();
             while (result.next()){
