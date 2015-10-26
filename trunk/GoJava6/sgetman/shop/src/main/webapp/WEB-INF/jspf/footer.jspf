@@ -6,8 +6,14 @@
 
 
             <div id="footer">
+                <br>
                 <hr>
-                <p id="footerText">[ footer text ]</p>
+                <p id="footerText" class="reallySmallText">
+                    <a href="#">Privacy Policy</a>
+                    &nbsp;&nbsp;::&nbsp;&nbsp;
+                    <a href="#">Contact</a>
+                    &nbsp;&nbsp;&copy;&nbsp;&nbsp;
+                    2010 the affable bean</p>
             </div>
         </div>
     </body>

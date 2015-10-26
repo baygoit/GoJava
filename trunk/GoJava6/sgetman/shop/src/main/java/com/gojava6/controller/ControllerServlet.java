@@ -5,12 +5,11 @@
 
 package com.gojava6.controller;
 
-import java.io.IOException;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 /**
  *
@@ -29,11 +28,34 @@ public class ControllerServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
 
+        /*InitialContext ctx = null;
+        try {
+            ctx = new InitialContext();
+        } catch (NamingException e) {
+            e.printStackTrace();
+        }
+        try {
+            DataSource ds = (DataSource)ctx.lookup("jdbc/affablebean");
+            Connection con = ds.getConnection();
+            Statement statement = con.createStatement();
+            String query = "select * from category";
+            ResultSet rs = statement.executeQuery(query);
+            while (rs.next()) {
+                System.out.println(rs.getString("name"));
+            }
+
+        } catch (NamingException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+*/
         String userPath = request.getServletPath();
 
         // if category page is requested
         if (userPath.equals("/category")) {
             // TODO: Implement category request
+            request.setAttribute("list","listOfCategory");
 
         // if cart page is requested
         } else if (userPath.equals("/viewCart")) {
