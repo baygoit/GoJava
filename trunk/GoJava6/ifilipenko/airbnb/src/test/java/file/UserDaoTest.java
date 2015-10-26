@@ -33,12 +33,12 @@ public class UserDaoTest {
 
 
     @Test
-    public void loadAll_Success() throws IOException {
+    public void readAll_Success() throws IOException {
         //Arrangement
         UserFileDao userDao = new UserFileDao(getFileAccessStub());
 
         //Act
-        List<User> users = userDao.loadAll();
+        List<User> users = userDao.readAll();
 
         //Assert
         Assert.assertEquals(3, users.size());
@@ -47,13 +47,13 @@ public class UserDaoTest {
 
 
     @Test
-    public void parseOneUser_Success() throws ParseException, IOException {
+    public void read_Success() throws ParseException, IOException {
         //
         String data = "2 | Inna | Filipenko | FEMALE | 01/02/2015 | br@gmail.com | NEW_YORK";
         UserFileDao userDao = new UserFileDao(null);
 
         //
-        User user = userDao.parseOneUser(data);
+        User user = userDao.read(data);
 
         //
         Assert.assertEquals(2, user.getExternalCode());
@@ -66,12 +66,12 @@ public class UserDaoTest {
     }
 
     @Test
-    public void loadByCode_Success() throws IOException {
+    public void readByCode_Success() throws IOException {
         //
         UserFileDao userDao = new UserFileDao(getFileAccessStub());
 
         //
-        User user = new UserFileDao(getFileAccessStub()).loadByCode(2);
+        User user = new UserFileDao(getFileAccessStub()).readByCode(2);
 
         //
         Assert.assertEquals(2, user.getExternalCode());
@@ -83,7 +83,7 @@ public class UserDaoTest {
         //
         FileAccess fileAccessStub = getFileAccessStub();
         UserFileDao userDao = new UserFileDao(fileAccessStub);
-        User user = userDao.parseOneUser("10 | Inna | Filipenko | FEMALE | 01/02/2015 | br@gmail.com | NEW_YORK");
+        User user = userDao.read("10 | Inna | Filipenko | FEMALE | 01/02/2015 | br@gmail.com | NEW_YORK");
 
         //
         userDao.create(user);
@@ -96,14 +96,14 @@ public class UserDaoTest {
     }
 
     @Test
-    public void serializeUser_Success() throws IOException, ParseException {
+    public void serialize_Success() throws IOException, ParseException {
         //
         FileAccess fileAccessStub = getFileAccessStub();
         UserFileDao userDao = new UserFileDao(fileAccessStub);
-        User user = userDao.parseOneUser("10 | Inna | Filipenko | FEMALE | 01/02/2015 | br@gmail.com | NEW_YORK");
+        User user = userDao.read("10 | Inna | Filipenko | FEMALE | 01/02/2015 | br@gmail.com | NEW_YORK");
 
         //
-        String actual = userDao.serializeUser(user);
+        String actual = userDao.serialize(user);
 
         //
         Assert.assertEquals("10 | Inna | Filipenko | FEMALE | 01/02/2015 | br@gmail.com | NEW_YORK", actual);

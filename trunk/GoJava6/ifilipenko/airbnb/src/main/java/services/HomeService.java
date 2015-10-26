@@ -11,7 +11,6 @@ public class HomeService{
 
 
     public void createHome(User host, Home home) throws IOException {
-        homeFileDao.create(host, home);
     }
 
 }

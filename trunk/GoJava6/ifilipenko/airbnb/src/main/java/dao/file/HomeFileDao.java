@@ -1,37 +1,41 @@
 package dao.file;
 
-import dao.Dao;
+import model.CityList;
 import model.Home;
-import model.User;
+import model.HomeType;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+public class HomeFileDao {
+    private final FileAccess fileAccess;
 
-public class HomeFileDao implements Dao {
-
-    private List<Home> homeList = new ArrayList<>();
-    private File file = new File(this.getClass().getResource("/home").getFile());
-
-    public void create(User host, Home newHome) throws IOException {
-        newHome.setHost(host);
-        homeList.add(newHome);
-        try (
-                BufferedWriter writer = new BufferedWriter(new FileWriter(file))
-        ) {
-            for (Home home : homeList) {
-                writer.write(home.getHost() + " | ");
-                writer.write(home.getCity() + " | ");
-                writer.write(home.getHomeType() + " | ");
-                writer.write(home.isActive() + "\n");
-            }
-        } catch (IOException ex) {
-            System.out.println("Cannot perform output" + ex);
-        }
+    public HomeFileDao() {
+        String file = this.getClass().getResource("/home").getPath();
+        this.fileAccess = new FileAccess(file);
     }
 
 
+    public String serializeHome(Home home) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(home.getHostCode())
+                .append(" | ")
+                .append(home.getCity())
+                .append(" | ")
+                .append(home.getHomeType());
+
+        return sb.toString();
+    }
+
+    public Home parseOneHome(String line) {
+        Home home = new Home();
+
+        String[] params = line.split("\\|");
+        for (int i = 0; i < params.length; i++) {
+            params[i] = params[i].trim();
+        }
+
+        home.setHost(Integer.parseInt(params[0]));
+        home.setCity(CityList.valueOf(params[1]));
+        home.setHomeType(HomeType.valueOf(params[2]));
+
+        return home;
+    }
 }

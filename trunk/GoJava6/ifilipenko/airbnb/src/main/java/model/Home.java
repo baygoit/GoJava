@@ -4,10 +4,12 @@ import observer.Observer;
 import observer.Subject;
 
 public class Home implements Subject {
-    private User host;
+    private int hostId;
     private CityList city;
     private HomeType homeType;
     private boolean active;
+
+    public Home(){};
 
     public Home(CityList city, HomeType homeType) {
         this.city = city;
@@ -15,8 +17,8 @@ public class Home implements Subject {
         this.active = true;
     }
 
-    public Home(User host, CityList city, HomeType homeType) {
-        this.host = host;
+    public Home(int hostId, CityList city, HomeType homeType) {
+        this.hostId = hostId;
         this.city = city;
         this.homeType = homeType;
         this.active = true;
@@ -30,8 +32,8 @@ public class Home implements Subject {
         return homeType;
     }
 
-    public User getHost() {
-        return host;
+    public int getHostCode() {
+        return hostId;
     }
 
     public void setCity(CityList city) {
@@ -42,8 +44,8 @@ public class Home implements Subject {
         this.homeType = homeType;
     }
 
-    public void setHost(User host) {
-        this.host = host;
+    public void setHost(int hostId) {
+        this.hostId = hostId;
     }
 
     public boolean isActive() {
@@ -58,10 +60,9 @@ public class Home implements Subject {
     @Override
     public String toString() {
         return "Home{" +
-                "host=" + host.toString() +
+                "hostID=" + hostId +
                 ", city=" + city +
                 ", homeType=" + homeType +
-                ", active=" + active +
                 '}';
     }
 

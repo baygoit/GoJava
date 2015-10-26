@@ -15,7 +15,7 @@ public class UserService{
     }
 
     public User getUserByCode(int userCode) throws IOException {
-        return userIODao.loadByCode(userCode);
+        return userIODao.readByCode(userCode);
     }
 
     public void becomeHost(int userCode, Home newHome) throws IOException {
