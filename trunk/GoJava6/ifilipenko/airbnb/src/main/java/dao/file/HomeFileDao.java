@@ -4,6 +4,10 @@ import model.CityList;
 import model.Home;
 import model.HomeType;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 public class HomeFileDao {
     private final FileAccess fileAccess;
 
@@ -12,8 +16,11 @@ public class HomeFileDao {
         this.fileAccess = new FileAccess(file);
     }
 
+    public HomeFileDao(FileAccess fileAccess) {
+        this.fileAccess = fileAccess;
+    }
 
-    public String serializeHome(Home home) {
+    public String serialize(Home home) {
         StringBuilder sb = new StringBuilder();
         sb.append(home.getHostCode())
                 .append(" | ")
@@ -24,7 +31,7 @@ public class HomeFileDao {
         return sb.toString();
     }
 
-    public Home parseOneHome(String line) {
+    public Home read(String line) {
         Home home = new Home();
 
         String[] params = line.split("\\|");
@@ -37,5 +44,26 @@ public class HomeFileDao {
         home.setHomeType(HomeType.valueOf(params[2]));
 
         return home;
+    }
+
+    public List<Home> readAll() {
+        List<Home> result = new ArrayList<>();
+
+        try {
+            List<String> homes = fileAccess.readAllLines();
+            for (String home : homes) {
+                result.add(read(home));
+            }
+        } catch (IOException ex) {
+            System.out.println("Cannot perform output" + ex);
+        }
+
+        return result;
+    }
+
+    public void create(Home home) throws IOException {
+        List<String> homes = fileAccess.readAllLines();
+        homes.add(serialize(home));
+        fileAccess.save(String.join("\n", homes));
     }
 }

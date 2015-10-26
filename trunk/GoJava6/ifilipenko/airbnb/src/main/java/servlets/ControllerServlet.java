@@ -45,7 +45,8 @@ public class ControllerServlet extends HttpServlet{
         String url = "/WEB-INF/view" + userPath + ".jsp";
 
         try {
-            request.getRequestDispatcher(url).forward(request, response);
+            response.getWriter().print("Pirivet");
+            //request.getRequestDispatcher(url).forward(request, response);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -83,7 +84,8 @@ public class ControllerServlet extends HttpServlet{
         String url = "/WEB-INF/view" + userPath + ".jsp";
 
         try {
-            request.getRequestDispatcher(url).forward(request, response);
+            response.getWriter().print("Pirivet");
+            //request.getRequestDispatcher(url).forward(request, response);
         } catch (Exception ex) {
             ex.printStackTrace();
         }

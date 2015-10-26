@@ -89,7 +89,8 @@ public class UserDaoTest {
         userDao.create(user);
 
         //
-        verify(fileAccessStub).save("2 | Inna | Filipenko | FEMALE | 01/02/2015 | br@gmail.com | NEW_YORK\n" +
+        verify(fileAccessStub).save(
+                "2 | Inna | Filipenko | FEMALE | 01/02/2015 | br@gmail.com | NEW_YORK\n" +
                 "3 | Bob | Marley | MALE | 30/03/2015 | br@gmail.com | NEW_YORK\n" +
                 "4 | John | Smith | MALE | 01/12/2015 | br@gmail.com | NEW_YORK\n" +
                 "10 | Inna | Filipenko | FEMALE | 01/02/2015 | br@gmail.com | NEW_YORK");

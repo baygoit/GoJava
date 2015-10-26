@@ -49,7 +49,6 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.3</version>
                 <configuration>
-                    <!-- or whatever version you use -->
                     <source>1.8</source>
                     <target>1.8</target>
                 </configuration>
@@ -59,6 +58,13 @@
                 <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
                 <version>9.3.4.v20151007</version>
+                <configuration>
+                    <webAppConfig>
+                        <contextPath>/airbnb</contextPath>
+                    </webAppConfig>
+                    <stopPort>9966</stopPort>
+                    <stopKey>jetty-stop</stopKey>
+                </configuration>
             </plugin>
         </plugins>
     </build>
