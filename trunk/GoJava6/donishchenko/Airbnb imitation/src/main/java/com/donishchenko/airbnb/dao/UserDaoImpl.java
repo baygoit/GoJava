@@ -15,7 +15,7 @@ public class UserDaoImpl implements UserDao {
             "DELETE FROM user WHERE id = ?";
 
     private static final String getUserByIdQuery =
-            "SELECT id, name, surname, email, isHost FROM user WHERE id = ?";
+            "SELECT * FROM user WHERE id = ?";
 
     private static final String getAllUsersQuery =
             "SELECT * FROM user";
@@ -48,8 +48,8 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void update(int id, User user) throws SQLException {
-        User existingUser = getUserById(id);
-        if (existingUser.getId() != id) {
+        User existingUser = get(id);
+        if (existingUser == null) {
             throw new SQLException("Wrong id");
         }
 
@@ -66,7 +66,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public User getUserById(int id) throws SQLException {
+    public User get(int id) throws SQLException {
         try (Connection conn = DBUtils.getConnection()) {
             PreparedStatement stat = conn.prepareStatement(getUserByIdQuery);
             stat.setInt(1, id);

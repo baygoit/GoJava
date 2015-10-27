@@ -9,7 +9,7 @@ public interface UserDao {
     void save(User user) throws SQLException;
     void delete(int id) throws SQLException;
     void update(int id, User user) throws SQLException;
-    User getUserById(int id) throws SQLException;
+    User get(int id) throws SQLException;
     List<User> getAllUsers() throws SQLException;
     List<User> getAllClients() throws SQLException;
     List<User> getAllHosts() throws SQLException;

@@ -99,8 +99,8 @@ public class SortOfHomeController {
 //
 //        /* Reservation system */
 //        /* Test three reservations: 2 true, 1 false */
-//        User user = app.userDao.getUserById(clientId);
-//        Apartment apartment = app.apartmentDao.getById(apartmentId);
+//        User user = app.userDao.get(clientId);
+//        Apartment apartment = app.apartmentDao.get(apartmentId);
 //        Date start = new GregorianCalendar(2015, Calendar.SEPTEMBER, 26).getTime();
 //        Date end = new GregorianCalendar(2015, Calendar.SEPTEMBER, 27).getTime();
 //
