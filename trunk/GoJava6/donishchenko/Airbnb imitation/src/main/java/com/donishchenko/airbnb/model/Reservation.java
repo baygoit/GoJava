@@ -6,7 +6,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Reservation {
-    private static int RESERVATION_ID = 0;
     private int id;
     private User user;
     private Apartment apartment;
@@ -17,7 +16,6 @@ public class Reservation {
     public Reservation() {}
 
     public Reservation(User user, Apartment apartment, Date start, Date end, String comment) {
-        this.id = ++RESERVATION_ID;
         this.user = user;
         this.apartment = apartment;
         this.start = start;

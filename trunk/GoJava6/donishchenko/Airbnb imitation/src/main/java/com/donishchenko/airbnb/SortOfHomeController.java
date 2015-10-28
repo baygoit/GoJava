@@ -51,7 +51,7 @@ public class SortOfHomeController {
             return -1;
         }
 
-        Apartment apartment = new Apartment(existingHost, city, type, active);
+        Apartment apartment = new Apartment(existingHost.getId(), city, type, active);
         if (apartment.validate()) {
             checkUniqueCity(apartment.getCity());
 //            apartmentDao.save(apartment);
