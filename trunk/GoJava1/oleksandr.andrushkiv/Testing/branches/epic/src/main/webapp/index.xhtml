@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Авторизация</title>
+</h:head>
+<h:body>
+
+
+    <h:form>
+
+        <p>Wellcome</p>
+
+        <h:panelGrid columns="3" cellpadding="2">
+            <p:outputLabel for="login" value="Login: "/>
+            <p:inputText id="login" value="#{indexPageMB.login}" required="false">
+               <!-- <f:converter converterId="javax.faces.Integer"/>-->
+                <!--<f:validateLength minimum="5"/>-->
+            </p:inputText>
+            <p:message for="login" display="text"/>
+            <p:outputLabel for="password" value="Password: "/>
+            <p:password id="password" value="#{indexPageMB.password}" feedback="true" inline="false" required="false">
+                <!--<f:validateLength minimum="5"/>-->
+            </p:password>
+
+            <p:message for="password" display="text"/>
+            <p:commandButton value="enter" action="#{indexPageMB.myAction}"/>
+        </h:panelGrid>
+
+        <p:spacer height="10"/>
+        <p:separator/>
+
+        <p:commandButton value="admin page" action="adminPage"/>
+            <p:commandButton value="user page" action="userPage"/>
+
+    </h:form>
+
+</h:body>
+</html> 

@@ -1,0 +1,16 @@
+Oct 04, 2015 1:38:56 PM com.airbnb.system.AirBnBSystem registerUser
+INFO:  -- Sasha Ivanova was registered!
+Oct 04, 2015 1:38:56 PM com.airbnb.system.AirBnBSystem notifyAllObservers
+INFO: Sasha Ivanova was notified that city Kyiv was added.
+Oct 04, 2015 1:38:56 PM com.airbnb.user.User becomeHost
+INFO:  -- Sasha Ivanova became HOST!
+Oct 04, 2015 1:38:56 PM com.airbnb.system.AirBnBSystem registerUser
+INFO:  -- Sergii Smirnoff was registered!
+Oct 04, 2015 1:38:56 PM com.airbnb.system.AirBnBSystem notifyAllObservers
+INFO: Sergii Smirnoff was notified that city Kyiv was added.
+Oct 04, 2015 1:38:56 PM com.airbnb.system.AirBnBSystem notifyAllObservers
+INFO: Sasha Ivanova was notified that city Kyiv was added.
+Oct 04, 2015 1:38:56 PM com.airbnb.user.User becomeHost
+INFO:  -- Sergii Smirnoff became HOST!
+Oct 04, 2015 1:38:56 PM com.airbnb.user.User registerApartment
+INFO: New apartment in Kyiv by Ivanova was registered

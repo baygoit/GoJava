@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+        xmlns:tx="http://www.springframework.org/schema/tx" xmlns:util="http://www.springframework.org/schema/util"
+        xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+                           http://www.springframework.org/schema/context
+                           http://www.springframework.org/schema/context/spring-context-3.2.xsd
+                           http://www.springframework.org/schema/tx 
+                           http://www.springframework.org/schema/tx/spring-tx.xsd
+                           http://www.springframework.org/schema/util
+                           http://www.springframework.org/schema/util/spring-util-2.0.xsd">
+
+        <!-- context:property-placeholder location="classpath:database.properties" /-->
+
+        <context:component-scan base-package="ua.com.goit.gojava.kickstarter" />
+
+        <!-- <context:annotation-config /> -->
+        
+        
+
+        <bean id="dataSource" class="org.apache.tomcat.jdbc.pool.DataSource"
+                destroy-method="close">
+                <property name="driverClassName" value="org.postgresql.Driver" />
+                <property name="url" value="jdbc:postgresql://localhost:5432/kickstarterdb" />
+                <property name="username" value="postgres" />
+                <property name="password" value="12345" />
+        </bean>
+
+        <bean id="sessionFactory"
+                class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+                <property name="dataSource" ref="dataSource" />
+                <property name="configLocation" value="classpath:hibernate.cfg.xml" />
+        </bean>
+        
+
+        <tx:annotation-driven />
+
+        <bean id="transactionManager"
+                class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+                <property name="sessionFactory" ref="sessionFactory" />
+        </bean>
+
+
+
+</beans>

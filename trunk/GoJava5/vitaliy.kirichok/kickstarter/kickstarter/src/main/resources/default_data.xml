@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<data>
+    <welcome_message>This is HelloMessage</welcome_message>
+    <categories>
+        <category id="10">
+            <name>Category 1</name>
+            <projects>
+                <project id="10">
+                    <name>1st project in 1st category</name>
+                    <description>desc</description>
+                    <goal>10000</goal>
+                    <balance>350000</balance>
+                    <create_date>2015-07-27T13:43:33.903+03:00</create_date>
+                    <deadline_date>2015-07-27T17:43:33.893+03:00</deadline_date>
+                    <demo_link>http://stackoverflow.com/</demo_link>
+                    <faqs>
+                        <faq id="10">
+                            <question>Question 1</question>
+                            <answer>Answer on question 1</answer>
+                        </faq>
+                        <faq id="11">
+                            <question>Question 2</question>
+                            <answer>Answer on question 2</answer>
+                        </faq>
+                        <faq id="12">
+                            <question>Question 3</question>
+                            <answer>Answer on question 3</answer>
+                        </faq>
+                    </faqs>
+                    <events>
+                        <event id="10">
+                            <event_date>2015-07-12T00:00:00+03:00</event_date>
+                            <message>Project was started</message>
+                        </event>
+                        <event id="11">
+                            <event_date>2015-07-10T00:00:00+03:00</event_date>
+                            <message>Thank you</message>
+                        </event>
+                    </events>
+                    <rewards>
+                        <reward id="10">
+                            <amount>1000</amount>
+                            <description>Some reward for donate 10$</description>
+                        </reward>
+                        <reward id="11">
+                            <amount>3000</amount>
+                            <description>Some reward for donate 30$</description>
+                        </reward>
+                        <reward id="12">
+                            <amount>4000</amount>
+                            <description>Some reward for donate 40$</description>
+                        </reward>
+                    </rewards>
+                </project>
+                <project id="11">
+                    <name>2nd project in 1st category</name>
+                    <description>desc2</description>
+                    <goal>1000</goal>
+                    <balance>350</balance>
+                    <create_date>2015-07-27T13:43:33.961+03:00</create_date>
+                    <deadline_date>2015-07-31T13:43:33.961+03:00</deadline_date>
+                    <faqs/>
+                    <events/>
+                    <rewards/>
+                </project>
+            </projects>
+        </category>
+        <category id="11">
+            <name>Category 2</name>
+            <projects>
+                <project id="12">
+                    <name>1st project in 2st category</name>
+                    <description>desc21</description>
+                    <goal>1000000</goal>
+                    <balance>600000</balance>
+                    <create_date>2015-07-27T13:43:33.962+03:00</create_date>
+                    <deadline_date>2015-07-27T13:53:33.962+03:00</deadline_date>
+                    <faqs/>
+                    <events/>
+                    <rewards/>
+                </project>
+            </projects>
+        </category>
+        <category id="12">
+            <name>Empty Category</name>
+            <projects/>
+        </category>
+    </categories>
+</data>

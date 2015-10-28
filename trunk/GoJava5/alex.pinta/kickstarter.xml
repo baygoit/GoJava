@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Main>
+    <catalogCategory name="List of category" id="1"/>
+    <catalogCategory name="Education" id="2"/>
+    <catalogCategory name="Games" id="3"/>
+    <catalogCategory name="Software" id="4"/>
+    <mappingCategoryAndProject>
+        <entries>
+            <key name="Software" id="4"/>
+        </entries>
+        <entries>
+            <key name="List of category" id="1"/>
+        </entries>
+        <entries>
+            <key name="Education" id="2"/>
+            <value id="1" name="Project math for school" fullDescription="Project for pupils 9-10 class" requirementAmount="100.0" balancedAmount="80.0" daysLeft="31"/>
+            <value id="2" name="Project english for school" fullDescription="Do you speak english? Let's study together!!!" requirementAmount="1000.0" balancedAmount="756.0" daysLeft="45"/>
+            <value id="3" name="Project chemistry for school" requirementAmount="0.0" balancedAmount="0.0" daysLeft="0"/>
+        </entries>
+        <entries>
+            <key name="Games" id="3"/>
+            <value id="4" name="Worms" fullDescription="WORMS!!! WORMS!!! WORMS!!! Challenge everybody." requirementAmount="5505.0" balancedAmount="6000.0" daysLeft="1"/>
+            <value id="5" name="Balda" requirementAmount="0.0" balancedAmount="0.0" daysLeft="0"/>
+            <value id="6" name="Puzzles" requirementAmount="0.0" balancedAmount="0.0" daysLeft="0"/>
+        </entries>
+    </mappingCategoryAndProject>
+</Main>

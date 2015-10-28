@@ -1,0 +1,20 @@
+<%--
+    Document   : footer
+    Created on : May 20, 2010, 12:20:12 AM
+    Author     : tgiunipero
+--%>
+
+
+            <div id="footer">
+                <br>
+                <hr>
+                <p id="footerText" class="reallySmallText">
+                    <a href="#">Privacy Policy</a>
+                    &nbsp;&nbsp;::&nbsp;&nbsp;
+                    <a href="#">Contact</a>
+                    &nbsp;&nbsp;&copy;&nbsp;&nbsp;
+                    2010 the affable bean</p>
+            </div>
+        </div>
+    </body>
+</html>
