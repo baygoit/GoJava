@@ -1,57 +1,46 @@
 package com.airbnb;
 
-import java.util.*;
+import com.airbnb.model.Apartment;
+import com.airbnb.services.ReservationDatesService;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Игорь on 05.10.2015.
  */
 public class Search {
+    List<Apartment> newListOfApartments = new ArrayList<Apartment>();
 
-    private static List<Apartment> AllApartments = new ArrayList<Apartment>();
-
-    public static List<Apartment> getAllApartments() {
-        return AllApartments;
-    }
-
-    public List<Apartment> searchByOwner(List<Apartment> apartments, User user) throws Exception {
-        if (apartments.isEmpty()){
-            throw new NullPointerException ("No one apartments is available!");
-        }
-        List<Apartment> newListOfApartments = new ArrayList<Apartment>();
+    public List<Apartment> searchByOwner(List<Apartment> apartments, int userId) {
         for (Apartment apartment : apartments) {
-            if (apartment.getOwnerName() == user.getName()){
+            if (apartment.getOwnerId() == userId){
                 newListOfApartments.add(apartment);
-                System.out.println(user.getName() + " has apartment: " + apartment.getApartmentType());
             }
         }
         return newListOfApartments;
     }
 
-    public List<Apartment> searchByCity(List<Apartment> apartments, String city) throws Exception {
-        if (apartments.isEmpty()){
-            throw new NullPointerException ("No one apartments is available!");
-        }
-        List<Apartment> newListOfApartments = new ArrayList<Apartment>();
+    public List<Apartment> searchByCity(List<Apartment> apartments, String city) {
         for (Apartment apartment : apartments) {
-            if (apartment.getCity() == city){
+            if (apartment.getCity().equals(city)){
                 newListOfApartments.add(apartment);
-                System.out.println("In city " + city + " next apartments: " + apartment.getApartmentType());
             }
         }
         return newListOfApartments;
     }
 
-    public List<Apartment> searchByDate(List<Apartment> apartments, ReservationDate period) throws Exception {
-        if (apartments.isEmpty()){
-            throw new NullPointerException ("No one apartments is available!");
-        }
-        List<Apartment> newListOfApartments = new ArrayList<Apartment>();
+    public List<Apartment> searchByDate(List<Apartment> apartments, ReservationDatesService reservationDatesService, long dateStart, long dateFinish) {
         for (Apartment apartment : apartments) {
-            if (apartment.isAvaible(period) == true){
+            if (reservationDatesService.isAvailableApartment(apartment.getIdAparnament(), dateStart, dateFinish) == true){
                 newListOfApartments.add(apartment);
-                System.out.println("On that period " + period.getDateBegin() + " to " + period.getDateEnd() + " next apartaments available:" + apartment.getApartmentType());
             }
         }
         return newListOfApartments;
+    }
+
+    public void printSearchedApartments(List<Apartment> newListOfApartments){
+        for (Apartment apartment : newListOfApartments) {
+            System.out.println(apartment.toString());
+        }
     }
 }

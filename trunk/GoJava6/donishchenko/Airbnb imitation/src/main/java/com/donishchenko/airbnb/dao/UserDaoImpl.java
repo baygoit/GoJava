@@ -1,6 +1,7 @@
 package com.donishchenko.airbnb.dao;
 
 import com.donishchenko.airbnb.jdbc.DBUtils;
+import com.donishchenko.airbnb.jdbc.QueryBuilder;
 import com.donishchenko.airbnb.model.User;
 
 import java.sql.*;
@@ -15,7 +16,7 @@ public class UserDaoImpl implements UserDao {
             "DELETE FROM user WHERE id = ?";
 
     private static final String getUserByIdQuery =
-            "SELECT id, name, surname, email, isHost FROM user WHERE id = ?";
+            "SELECT * FROM user WHERE id = ?";
 
     private static final String getAllUsersQuery =
             "SELECT * FROM user";
@@ -24,32 +25,40 @@ public class UserDaoImpl implements UserDao {
             "UPDATE user SET name = ?, surname = ?, email = ?, isHost = ? WHERE id = ?";
 
     @Override
-    public void save(User user) throws SQLException {
+    public int save(User user) throws SQLException {
         try (Connection conn = DBUtils.getConnection()) {
-            PreparedStatement stat = conn.prepareStatement(saveUserQuery);
+            PreparedStatement stat = conn.prepareStatement(saveUserQuery, Statement.RETURN_GENERATED_KEYS);
             stat.setString(1, user.getName());
             stat.setString(2, user.getSurname());
             stat.setString(3, user.getEmail());
             stat.setBoolean(4, user.isHost());
 
             stat.executeUpdate();
+
+            ResultSet keys = stat.getGeneratedKeys();
+            keys.next();
+            user.setId(keys.getInt(1));
+
+            return user.getId();
         }
     }
 
     @Override
-    public void delete(int id) throws SQLException {
+    public boolean delete(int id) throws SQLException {
         try (Connection conn = DBUtils.getConnection()) {
             PreparedStatement stat = conn.prepareStatement(deleteUserQuery);
             stat.setInt(1, id);
 
-            stat.executeUpdate();
+            int affectedRows = stat.executeUpdate();
+
+            return affectedRows != 0;
         }
     }
 
     @Override
-    public void update(int id, User user) throws SQLException {
-        User existingUser = getUserById(id);
-        if (existingUser.getId() != id) {
+    public boolean update(int id, User user) throws SQLException {
+        User existingUser = get(id);
+        if (existingUser == null) {
             throw new SQLException("Wrong id");
         }
 
@@ -61,12 +70,14 @@ public class UserDaoImpl implements UserDao {
             stat.setBoolean(4, user.isHost());
             stat.setInt(5, id);
 
-            stat.executeUpdate();
+            int affectedRows = stat.executeUpdate();
+
+            return affectedRows != 0;
         }
     }
 
     @Override
-    public User getUserById(int id) throws SQLException {
+    public User get(int id) throws SQLException {
         try (Connection conn = DBUtils.getConnection()) {
             PreparedStatement stat = conn.prepareStatement(getUserByIdQuery);
             stat.setInt(1, id);
@@ -80,36 +91,31 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public List<User> getAllUsers() throws SQLException {
-        return getAllUsersWithParameter(Parameter.ALL);
+        return getAllUsersWithParameter();
     }
 
     @Override
     public List<User> getAllClients() throws SQLException {
-        return getAllUsersWithParameter(Parameter.CLIENT);
+        return getAllUsersWithParameter("isHost", "0");
     }
 
     @Override
     public List<User> getAllHosts() throws SQLException {
-        return getAllUsersWithParameter(Parameter.HOST);
+        return getAllUsersWithParameter("isHost", "1");
     }
 
-    private enum Parameter {
-        ALL, CLIENT, HOST
-    }
+    private List<User> getAllUsersWithParameter(String...args) throws SQLException {
+        QueryBuilder queryBuilder = new QueryBuilder(getAllUsersQuery);
+        queryBuilder.parse(args);
 
-    private List<User> getAllUsersWithParameter(Parameter param) throws SQLException {
         try (Connection conn = DBUtils.getConnection()) {
             List<User> list = new LinkedList<>();
 
-            String query = getAllUsersQuery;
-            if (param != Parameter.ALL) {
-                query = getAllUsersQuery + " WHERE isHost = ?";
-            }
-
+            String query = queryBuilder.getQuery();
             PreparedStatement stat = conn.prepareStatement(query);
-            if (param != Parameter.ALL) {
-                boolean isHost = (param != Parameter.CLIENT);
-                stat.setBoolean(1, isHost);
+            int i = 1;
+            for (String value : queryBuilder.values()) {
+                stat.setObject(i, value);
             }
 
             ResultSet result = stat.executeQuery();

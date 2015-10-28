@@ -12,8 +12,8 @@ public class Application {
 
     public static void main(String[] args) {
         try {
-            User host = new User("Tony", "Host", "booble@goom");
-            host.setCity("Kyiv");
+            User host = new User("Tony", "Host1", "booble@goom");
+            //host.setCity("Kyiv");
             host.setNewApartments("PLASE");
             /*switch (host.apartmentType.PLACE) {
                 case PLACE:
@@ -26,8 +26,8 @@ public class Application {
                     host.switchedApartType="Apartment";
                     break;
             }*/
-            Client client = new Client("Bony", "Client", "gooble@boom");
-            host.registerObserver(client);
+            User client = new User("Bony", "Client1", "gooble@boom");
+            //host.registerObserver(client); to change
         } catch (InputMismatchException err) {
             System.out.println("Illegal name / sername / email");
         }

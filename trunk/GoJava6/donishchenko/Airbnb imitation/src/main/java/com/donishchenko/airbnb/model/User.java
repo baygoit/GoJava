@@ -5,7 +5,6 @@ import com.donishchenko.airbnb.validation.Validator;
 import com.google.common.base.Joiner;
 
 public class User implements Observer {
-    private static int USER_ID = 0;
     private int id;
     private String name;
     private String surname;
@@ -15,7 +14,6 @@ public class User implements Observer {
     public User() {}
 
     public User(String name, String surname, String email) {
-        this.id = ++USER_ID;
         this.name = name.trim();
         this.surname = surname.trim();
         this.email = email.trim();

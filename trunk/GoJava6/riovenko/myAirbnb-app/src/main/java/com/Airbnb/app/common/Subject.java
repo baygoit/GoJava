@@ -1,8 +1,5 @@
 package com.Airbnb.app.common;
 
-import com.Airbnb.app.model.ApartType;
-import com.Airbnb.app.model.User;
-
 /**
  * Created by romanroma on 26.09.15.
  */

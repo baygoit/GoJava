@@ -1,12 +1,12 @@
 package services;
 
+import dao.file.ReservationFileDao;
+import model.Reservation;
+
 public class ReservationService  {
+    private ReservationFileDao rDao = new ReservationFileDao();
 
-    public void searchPlace() {
-
-    }
-
-    public void bookPlace() {
-
+    public void bookHome(Reservation reservation) {
+        rDao.create(reservation);
     }
 }
