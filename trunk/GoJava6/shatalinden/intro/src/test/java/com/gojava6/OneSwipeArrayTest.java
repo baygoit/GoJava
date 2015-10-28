@@ -1,5 +1,6 @@
 package com.gojava6;
 
+import Practice.OneSwipeArray;
 import org.junit.Before;
 import org.junit.Test;
 
