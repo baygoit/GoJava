@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <ThresholdFilter level="DEBUG" onMatch="ACCEPT" onMismatch="DENY" />
+            <PatternLayout pattern="%d{dd.MM.yy | HH:mm:ss,SSS} %5p - %c{1}.%M %m%n" />
+        </Console>
+        <RollingFile name="LogFile" fileName="logs/appLog.log"
+                     filePattern="logs/appLog-%i.log" append="false">
+            <ThresholdFilter level="INFO" onMatch="ACCEPT" onMismatch="DENY" />
+            <PatternLayout pattern="%d{dd.MM.yy | HH:mm:ss,SSS} - %m%n"/>
+            <Policies>
+                <SizebasedTriggeringPolicy size="1 MB" />
+            </Policies>
+        </RollingFile>
+    </Appenders>
+    <Loggers>
+        <Logger name="com.donishchenko.airbnb.SortOfHomeController" level="INFO">
+            <AppenderRef ref="Console" />
+            <AppenderRef ref="LogFile" />
+        </Logger>
+        <Logger name="com.donishchenko.airbnb.dao.ReservationDaoImpl" level="INFO">
+            <AppenderRef ref="Console" />
+            <AppenderRef ref="LogFile" />
+        </Logger>
+        <Root level="ERROR" />
+    </Loggers>
+</Configuration>

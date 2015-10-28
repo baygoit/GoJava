@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+          "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+          "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+
+  <session-factory>
+    <property name="connection.driver_class">org.postgresql.Driver</property>
+    <property name="connection.url">jdbc:postgresql://localhost:5432/hiber</property>
+    <property name="connection.username">root</property>
+    <property name="connection.password">wUha01fSegzTbhCe</property>
+    <property name="cache.provider_class">org.hibernate.cache.HashtableCacheProvider</property>
+    <property name="transaction.factory_class">org.hibernate.transaction.JDBCTransactionFactory</property>
+    <property name="current_session_context_class">thread</property>
+    <property name="hibernate.show_sql">false</property>
+    <property name="dialect">org.hibernate.dialect.PostgreSQL82Dialect</property>
+    <property name="hbm2ddl.auto">update</property>
+    <mapping class="belskii.artem.kickstarter.dao.quote.Quote"/>
+    <mapping class="belskii.artem.kickstarter.dao.category.Category"/>
+    <mapping class="belskii.artem.kickstarter.dao.project.Project"/>
+  </session-factory>
+
+</hibernate-configuration>
