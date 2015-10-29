@@ -14,9 +14,9 @@ import java.util.List;
  */
 public class ApartmentDAO extends AbstractDAO{
 
-    public void createApartment (User user, Apartment apartment) {
+    public void createApartment (Apartment apartment) {
         String sqlQuery = "INSERT INTO `airbnb`.`apartments` (`host_id`, `type`, `city`) VALUES ('"+
-                user.clientId+"`, `"+
+                apartment.host+"`, `"+
                 apartment.apartmentType+"`, `"+
                 apartment.getCity()+");";
         updateDB(sqlQuery);
