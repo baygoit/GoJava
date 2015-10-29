@@ -1,7 +1,7 @@
-package main;
+package main.java.Services;
 
-import sun.util.calendar.BaseCalendar;
-import sun.util.calendar.LocalGregorianCalendar;
+import main.java.Models.Apartment;
+import main.java.Models.User;
 
 import java.util.Date;
 import java.util.LinkedList;

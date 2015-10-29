@@ -1,9 +1,10 @@
-package main;
+package main.java.Models;
 
 import java.util.Date;
 
 /**
- * Created by user on 30.09.2015.
+ * @autor A_Nakonechnyi
+ * @date 30.09.2015.
  */
 public class Reservation {
     private Date start;
