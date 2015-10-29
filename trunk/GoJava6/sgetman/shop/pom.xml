@@ -30,10 +30,21 @@
       <version>5.1.36</version>
     </dependency>
     <dependency>
-      <groupId>commons-dbutils</groupId>
-      <artifactId>commons-dbutils</artifactId>
-      <version>1.5</version>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-core</artifactId>
+      <version>5.0.2.Final</version>
     </dependency>
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-entitymanager</artifactId>
+      <version>5.0.2.Final</version>
+    </dependency>
+    <dependency>
+      <groupId>org.hibernate.javax.persistence</groupId>
+      <artifactId>hibernate-jpa-2.0-api</artifactId>
+      <version>1.0.1.Final</version>
+    </dependency>
+
   </dependencies>
   <build>
     <plugins>
