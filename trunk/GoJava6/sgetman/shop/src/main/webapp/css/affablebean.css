@@ -12,14 +12,13 @@ body {
     width: 850px;
     text-align: center;
     margin: 20px auto;
+    color: #444;
 }
 
 hr {
     border: 0;
     background-color: #333;
     height: 1px;
-    margin: 0 25px;
-    width: 300px;
 }
 
 table {
@@ -29,9 +28,32 @@ table {
     border: solid 1px #f5eabe;
 }
 
+a {
+    color: inherit;
+    text-decoration: underline;
+}
+
+a:hover { text-decoration: none }
+
+a:visited { color: inherit }
+
+img { border: none }
+
+input, select { margin: 5px }
+
+li { margin: 10px 0 }
+
+label { line-height: 30px }
+
+label.error {
+    font-size: smaller;
+    line-height: 20px;
+    font-style: italic;
+}
+
 
 /* general styles */
-#main { background: #eee }
+#main { background: #f7f7e9 }
 
 #singleColumn {
     margin: 20px 30px;
@@ -47,28 +69,41 @@ table {
     background-color: #f5eabe;
     padding: 5px;
     color: inherit;
+    display: inline;
+    border-radius: 4px;
 }
 
 .hMargin { margin: 0 30px }
 
 .smallText { font-size: small }
 
+.reallySmallText { font-size: xx-small }
+
 .header {
     background-color: #c3e3e0;
     height: 30px;
+}
+
+.error {
+    color: #c00;
+    font-style: italic;
+}
+
+.tableHeading {
+    font-weight: bold;
+    background-color: #edf8f7;
 }
 
 
 /* styles for elements contained in the header, i.e.,
    shopping cart widget, language toggle, and logo */
 #header {
+    width: 850px;
     height: 250px;
-    background: #aaa;
+    background: url(../img/stalk.png) no-repeat 28px 28px;
 }
 
 #logo {
-    height: 155px;
-    width: 155px;
     float: left;
     margin-left: 30px;
     margin-top: -20px;
@@ -87,16 +122,29 @@ table {
     height: 50px;
     width: 850px;
     float: right;
-    background: #ccc;
+}
+
+#cart {
+    position: absolute;
+    margin: 5px 0 0 2px;
+}
+
+.horizontalMargin {
+    margin-left: 28px;
+    margin-right: 5px
+}
+
+#viewCart {
+    text-align: left;
+    width: 210px;
 }
 
 .headerWidget {
     width: 194px;
-    margin: 20px 2px;
+    margin: 20px 0;
     font-size: small;
     float: right;
     line-height: 25px;
-    background: #aaa;
 }
 
 
@@ -105,23 +153,34 @@ table {
     height: 60px;
     width: 350px;
     clear: left;
-    background: #aaa;
+}
+
+#footerText { margin-top: 5px }
+
+#footerDivider {
+    margin: 0 25px;
+    width: 300px;
 }
 
 
 /* index page styles */
 #indexLeftColumn {
+    text-align: left;
     height: 400px;
     width: 350px;
     float: left;
-    background: #ccc;
 }
 
 #indexRightColumn {
+    text-align: left;
     height: 400px;
     width: 500px;
     float: left;
-    background: #eee;
+}
+
+#welcomeText {
+    margin: 30px 5px 0 30px;
+    line-height: 1.4em;
 }
 
 .categoryBox {
@@ -129,12 +188,30 @@ table {
     width: 212px;
     margin: 21px 14px 6px;
     float: inherit;
-    background: #ccc;
+}
+
+/* Safari - disables underline for category boxes on index page */
+.categoryBox a { text-decoration: none }
+
+.categoryLabel {
+    position: absolute;
+    background-color: #fff;
+    opacity: 0.7;
+    height: 40px;
+    width: 210px;
+    margin: 2px;
 }
 
 .categoryLabelText {
+    position: absolute;
     line-height: 150%;
     font-size: x-large;
+    margin: 3px 10px;
+}
+
+.categoryImage {
+    padding: 1px;
+    border:solid 1px #555;
 }
 
 
@@ -157,6 +234,7 @@ table {
     padding: 13px;
     display: block;
     background-color: #d3ede8;
+    border-radius: 4px;
 }
 
 #selectedCategory {
@@ -166,11 +244,13 @@ table {
 }
 
 #categoryTitle {
-    margin: -34px 180px 0 0;
+    margin-top: -40px;
+    right: 385px;
     font-size: x-large;
-    float: right;
+    position: absolute;
     background-color: #f5eabe;
     padding: 7px;
+    border-radius: 4px;
 }
 
 .categoryText {
@@ -178,7 +258,13 @@ table {
     font-size: x-large;
 }
 
-#productTable { width: 600px }
+#productTable {
+    width: 600px;
+
+    /* styles to collaborate with rounded categoryLabel */
+    position: relative;
+    z-index: 1;
+}
 
 #productTable tr { height: 90px }
 
@@ -204,24 +290,43 @@ table {
 
 /* checkout page styles */
 #checkoutTable {
-    width: 360px;
+    width: 405px;
+    padding: 10px;
     background-color: #f5eabe;
     float: left;
-    height: 280px;
+    border-radius: 4px;
 }
 
-#infoBox {
-    width: 300px;
-    padding-left: 30px;
-    float: left;
+#checkoutTable td {
+    vertical-align: top;
+    text-align: right;
+    margin: 5px;
 }
+
+.inputField { width: 190px }
+
+#infoBox { padding: 10px 25px 0 460px }
 
 #priceBox {
     padding: 10px;
-    margin: 10px 0;
-    height: 128px;
+    border: 1px solid #c3e3e0;
     background-color: #c3e3e0;
+    border-radius: 4px;
 }
+
+#priceBox td {
+    text-align: right;
+    padding: 5px;
+}
+
+.checkoutPriceColumn {
+    width: 80px;
+    font-weight: bold;
+}
+
+.total { border-top: 1px solid #444 }
+
+.indent { margin-left: 6em }
 
 
 /* confirmation page styles */
@@ -230,7 +335,7 @@ table {
     padding: 10px;
     background-color: #f5eabe;
     float: left;
-    width:540px;
+    border-radius: 4px;
 }
 
 .summaryColumn {
@@ -239,15 +344,50 @@ table {
     float: left;
 }
 
-#orderSummaryTable {
-    width: 100%;
-    text-align: left;
-    height: 200px;
+.detailsTable { text-align: left }
+
+.detailsTable th { padding: 5px 10px }
+
+.detailsTable td {
+    padding: 5px 10px 5px 20px;
+    font-size: small;
+    font-family: "Courier New", courier, monospace;
 }
+
+#orderSummaryTable { width: 100% }
 
 #deliveryAddressTable {
     width: 70%;
     margin-left: 15%;
-    text-align: left;
-    height: 200px;
 }
+
+#deliveryAddressTable td {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.quantityColumn {
+    text-align: center;
+    width: 62px;
+}
+
+.confirmationPriceColumn {
+    width: 90px;
+    font-weight: normal;
+}
+
+#deliverySurchargeCellLeft {
+    text-align: right;
+    padding: 0;
+}
+
+#deliverySurchargeCellRight { padding: 0 20px }
+
+#totalCellLeft {
+    text-align: right;
+    padding: 0;
+}
+
+#totalCellRight { padding: 0 20px }
+
+#dateProcessedRow { padding: 2px 0 10px 20px }
