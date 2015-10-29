@@ -99,15 +99,14 @@ public class DistanceBetweenTwoSmallestElements {
 				String[] userInputNumbers = inputUserString.split(" ");
 				int[] parsedUserInputNumbers = new int[userInputNumbers.length];
 
-				// Parsing every value from string array and adding to integer array
+				// Parsing every user's input numbers and adding to integer array
 				for (int barrier = 0; barrier < userInputNumbers.length; barrier++) {
 					parsedUserInputNumbers[barrier] = Integer.parseInt(userInputNumbers[barrier]);
 				}
 
-				// Checking array's capacity of user's input numbers
+				// Checking integer array's capacity of user's input numbers
 				if (parsedUserInputNumbers.length == 0 || parsedUserInputNumbers.length == 1
 						|| parsedUserInputNumbers.length > 20) {
-
 					throw new Exception();
 				} else {
 					return parsedUserInputNumbers;

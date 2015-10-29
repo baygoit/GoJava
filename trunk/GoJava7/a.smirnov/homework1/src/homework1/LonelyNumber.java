@@ -16,105 +16,98 @@ public class LonelyNumber {
 	public static void main(String[] args) {
 
 		// Testing
-		new LonelyNumber().printIntoConsoleResult(findLonelyNumber(setUpUserInputData()));
+		new LonelyNumber().findLonelyNumber(setUpUserInputData());
 	}
 
-	/* Method finds lonely number in input array */
-	public static List<Integer> findLonelyNumber(int[] array) {
+	/* Method finds lonely number in user's input array of numbers */
+	public void findLonelyNumber(int[] userInputNumbers) {
 
-		// List for saving all values which meet three times in input array
+		// List for saving lonely numbers
 		List<Integer> listOfLonelyNumbers = new ArrayList<>();
 
-		// Set for all unique elements from input array
+		// Set for all unique elements from user's input array of numbers
 		Set<Integer> setOfUniqueElements = new HashSet<>();
 
-		// Add to list all unique elements from input array
-		for (int barrier = 0; barrier < array.length; barrier++) {
-			setOfUniqueElements.add(array[barrier]);
+		// Adding to set of all unique numbers from user's input array of
+		// numbers
+		for (int barrier = 0; barrier < userInputNumbers.length; barrier++) {
+			setOfUniqueElements.add(userInputNumbers[barrier]);
 		}
 
-		// Checking the input array's capacity
-		if (array.length < 3) {
-			System.out.println("Incorrect amount of elements in array.");
-		} else {
+		for (int userNumber : setOfUniqueElements) {
 
-			for (int value : setOfUniqueElements) {
+			// Counter for searching lonely numbers
+			int countOfSteps = 0;
 
-				// Counter for calculating quantity of each HashSet element
-				// duplicates
-				int countOfSteps = 0;
-
-				// Comparison of elements from HashSet with elements from input
-				// array
-				for (int index = 0; index < array.length; index++) {
-					if (value == array[index]) {
-						countOfSteps++;
-					}
-				}
-
-				// Checking for lonely number
-				if (countOfSteps == 3) {
-					listOfLonelyNumbers.add(value);
-				}
-
-				// Checking on exceptions
-				if (countOfSteps > 3) {
-					System.out.println("Incorrect elements in array. Element [" + value
-							+ "] has been met in array more than three times.");
-					System.exit(0);
+			// Comparing every set's number with user's input numbers
+			for (int index = 0; index < userInputNumbers.length; index++) {
+				if (userNumber == userInputNumbers[index]) {
+					countOfSteps++;
 				}
 			}
+
+			// Checking for lonely number
+			if (countOfSteps == 3) {
+				listOfLonelyNumbers.add(userNumber);
+			}
+
 		}
-		return listOfLonelyNumbers;
+
+		// Printing into console result of searching
+		printIntoConsoleResult(userInputNumbers, listOfLonelyNumbers);
 	}
 
-	/*
-	 * Method prints into console result of lonely number searching process in
-	 * the input array
-	 */
-	public void printIntoConsoleResult(List<Integer> listOfLonelyNumbers) {
-		
+	// Method prints into console result of lonely number searching
+	public static void printIntoConsoleResult(int[] userInputNumbers, List<Integer> listOfLonelyNumbers) {
+		printUsersInputNumbers(userInputNumbers);
+
 		// Checking the list of lonely numbers
-		if (listOfLonelyNumbers.isEmpty()) {
-			System.out.println("There is no lonely number in array");
+		if (listOfLonelyNumbers.size() == 0) {
+			System.out.println("There is no lonely number in array of user's input numbers");
 		} else if (listOfLonelyNumbers.size() == 1) {
-			System.out.println("Lonely number: " + listOfLonelyNumbers);
+			System.out.println("Lonely number:" + listOfLonelyNumbers);
 		} else {
-			System.out.println("Incorrect elements in array. There are more than one lonely number in array: "
-					+ listOfLonelyNumbers);
+			System.out.println(
+					"There are more than one lonely numbers in array of user's input numbers: " + listOfLonelyNumbers);
 		}
 	}
 
-	// Method allowing user set up input data for program
+	// Method allows user to set up data
 	public static int[] setUpUserInputData() {
-		System.out.println("Please insert integer numbers for array separated by spaces: ");
+		String greetings = "integer numbers (not less than 3 numbers) separated by spaces: ";
+
+		// Printing into console greeting string with instruction
+		System.out.println("Please insert " + greetings);
 
 		// Handling of user's input data
 		while (true) {
 			try {
-				Scanner input = new Scanner(System.in);
-				String inputUserString = input.nextLine();
+				Scanner in = new Scanner(System.in);
+				String inputUserString = in.nextLine();
 				String[] arrayOfUsersNumbers = inputUserString.split(" ");
 				int[] inputUsersNumbers = new int[arrayOfUsersNumbers.length];
 
-				// Parsing every value from string array and adding to integer
+				// Parsing every user's input numbers and adding to integer
 				// array
 				for (int barrier = 0; barrier < arrayOfUsersNumbers.length; barrier++) {
 					inputUsersNumbers[barrier] = Integer.parseInt(arrayOfUsersNumbers[barrier]);
 				}
 
+				// Checking integer array's capacity of user's input numbers
 				if (inputUsersNumbers.length < 3) {
 					throw new Exception();
 				} else {
-					
-					// Printing into console the user's input array
-					System.out.println("User insert array " + Arrays.toString(inputUsersNumbers));
 					return inputUsersNumbers;
 				}
 			} catch (Exception e) {
-				System.out.println("User insert wrong value."
-						+ " Please, insert one more time integer numbers for array separated by spaces :  ");
+				System.out.println("User inserted wrong value." + System.lineSeparator()
+						+ "Please, insert one more time " + greetings);
 			}
 		}
+	}
+
+	// Method prints into console user's input numbers
+	public static void printUsersInputNumbers(int[] userInputNumbers) {
+		System.out.println("User inserted numbers " + Arrays.toString(userInputNumbers));
 	}
 }
