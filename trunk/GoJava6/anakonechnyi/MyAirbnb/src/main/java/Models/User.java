@@ -1,10 +1,14 @@
-package main;
+package main.java.Models;
+
+import main.java.Services.Searches;
+import main.java.Subject;
+import main.java.Observer;
 
 import java.util.InputMismatchException;
 import java.util.List;
 
 /**
- * Created by user on 19.09.2015.
+ * Created by A_Nakonechnyi on 19.09.2015.
  */
 public class User implements Observer {
     private String name;
@@ -16,7 +20,18 @@ public class User implements Observer {
     public final int clientId;
 
 
-    public User (String name, String sername, String email){
+    public User (int clientId, String name, String sername, String email , boolean isHost){
+        if (this.setName(name)&&this.setSername(sername)&&this.setEmail(email)) {
+            this.isHost=isHost;
+            this.clientId= clientId;
+            System.out.println("Successful Host registration");
+            //Searches.hostList.add(this);
+            //TODO addToDB method
+        } else {
+            throw new InputMismatchException();
+        }
+    }
+    /*public User (String name, String sername, String email){
         if (this.setName(name)&&this.setSername(sername)&&this.setEmail(email)) {
             this.isHost=false;
             clientId= (int) Math.random();
@@ -26,7 +41,7 @@ public class User implements Observer {
             throw new InputMismatchException();
         }
     }
-
+*/
     public String getName() {
         return name;
     }
@@ -60,8 +75,8 @@ public class User implements Observer {
     }
 
     public void setNewApartments (String next) {
-        Apartment.ApartmentType type = Apartment.ApartmentType.valueOf(next);
-        apartments.add(new Apartment(type, this, "Kyiv"));
+        ApartmentType type = ApartmentType.valueOf(next);
+        // TODO apartments.add(new Apartment(??? id ???,  type, this, "Kyiv"));
     }
 
     public String toString(){
@@ -77,11 +92,12 @@ public class User implements Observer {
         this.city = city;
     }
 */
+    public Boolean getIsHost() { return isHost;}
 
     public void setLikeHost() { this.isHost=true;}
 
-
-//    @Override
+ //   public int getClientId() {return clientId;}
+//?????    @Override
     public void update(Object obj) {
 
     }

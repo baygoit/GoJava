@@ -1,7 +1,8 @@
-package main;
+package main.java;
 
 /**
- * Created by user on 19.09.2015.
+ * @autor A_Nakonechnyi
+ * @date 19.09.2015.
  */
 public interface Subject {
     public void registerObserver (Observer O);

@@ -1,10 +1,11 @@
-package jdbc;
+package main.java.jdbc;
 
 import java.sql.*;
 import java.sql.SQLException;
 
 /**
- * Created by user on 14.10.2015.
+ * @autor A_Nakonechnyi
+ * @date 14.10.2015.
  */
 public class testSttmnt {
     public static void main(String[] args) throws SQLException {
@@ -20,7 +21,7 @@ public class testSttmnt {
 
         try {
             connection = DriverManager
-                    .getConnection("jdbc:mysql://localhost:3306/airbnb", "root", "polipoli");
+                    .getConnection("main.Java.jdbc:mysql://localhost:3306/airbnb", "root", "polipoli");
 
             stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery(query);
@@ -46,7 +47,7 @@ public class testSttmnt {
 
         try {
             connection = DriverManager
-                    .getConnection("jdbc:mysql://localhost:3306/airbnb", "root", "polipoli");
+                    .getConnection("main.Java.jdbc:mysql://localhost:3306/airbnb", "root", "polipoli");
 
             stmt = connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
                     ResultSet.CONCUR_UPDATABLE);
@@ -73,7 +74,7 @@ public class testSttmnt {
 
         try {
             connection = DriverManager
-                    .getConnection("jdbc:mysql://localhost:3306/airbnb", "root", "polipoli");
+                    .getConnection("main.Java.jdbc:mysql://localhost:3306/airbnb", "root", "polipoli");
 
             stmt = connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
                     ResultSet.CONCUR_UPDATABLE);

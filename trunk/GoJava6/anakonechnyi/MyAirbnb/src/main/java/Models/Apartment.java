@@ -1,4 +1,7 @@
-package main;
+package main.java.Models;
+
+import main.java.Subject;
+import main.java.Observer;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -6,24 +9,33 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * Created by user on 26.09.2015.
+ * @autor A_Nakonechnyi
+ * @date 26.09.2015.
  */
-public class Apartment implements Subject{
-    public enum ApartmentType {PLACE , ROOM, APARTMENT};
+public class Apartment implements Subject {
+    private int apartmentId;
+    //public enum ApartmentType {PLACE , ROOM, APARTMENT};
     public ApartmentType apartmentType;
     //private Date endOfRent;
     private LinkedList<Reservation> reservationList;
     public static String city;
-    public User host;
+    public int host;
     private List<Observer> listOfClients = new ArrayList<Observer>();
     //public String switchedApartType;
-    public Apartment(ApartmentType type, User userHost, String city) {
+    public Apartment(int apartmentId, int userHost, ApartmentType type,  String city) {
+        this.apartmentId=apartmentId;
         this.apartmentType=type;
         this.host=userHost;
         this.city=city;
     }
-
- //   @Override
+    /*public static ApartmentType valueOf (String apartTypeStr) {
+        if (apartTypeStr.equals("PLACE")){return ApartmentType.PLACE;}
+        if (apartTypeStr.equals("ROOM")){return ApartmentType.ROOM;}
+        if (apartTypeStr.equals("APARTMENT")){return ApartmentType.APARTMENT;}
+        System.out.println("Incorrect apartment type!!!");
+        return null;
+    }*/
+//    @Override
     public void registerObserver(Observer o) {
         System.out.println("Register: " + o.toString());
         listOfClients.add(o);
@@ -58,6 +70,10 @@ public class Apartment implements Subject{
             }
         }
         return true;
+    }
+
+    public int getApartmentId() {
+        return apartmentId;
     }
 
     public Boolean cancelReservation (int clientId, Reservation reservation) {
