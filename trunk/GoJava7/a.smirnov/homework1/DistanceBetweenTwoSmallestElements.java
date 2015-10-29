@@ -7,7 +7,6 @@ import java.util.Scanner;
 
 /**
  * DistanceBetweenTwoSmallestElements.java
- * 
  * @author Anton Smirnov
  * @version 22.10.2015
  * @java 7
