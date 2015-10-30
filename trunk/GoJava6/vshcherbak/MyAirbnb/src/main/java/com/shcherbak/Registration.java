@@ -1,3 +1,5 @@
+package com.shcherbak;
+
 import com.shcherbak.common.Observer;
 import com.shcherbak.common.Processor;
 

@@ -1,3 +1,5 @@
+package com.shcherbak;
+
 import com.shcherbak.model.*;
 import com.shcherbak.processing.SQLProcessor;
 
@@ -26,8 +28,8 @@ public class HomeHire {
         Date end = dt.parse("2015-04-01");
         SQLProcessor processor =
                 new SQLProcessor("jdbc:mysql://localhost:3306/airbnb", "root", "atmel");
-        //Booking book = new Booking(processor);
-        //Registration registration = new Registration(processor);
+        //com.shcherbak.Booking book = new com.shcherbak.Booking(processor);
+        //com.shcherbak.Registration registration = new com.shcherbak.Registration(processor);
         List<Apartment> apartments = new ArrayList<>();
 
         processor.openDataBase();

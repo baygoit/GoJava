@@ -1,3 +1,5 @@
+package com.shcherbak;
+
 import com.shcherbak.accounting.ReservationDates;
 import com.shcherbak.common.Processor;
 import com.shcherbak.model.Apartment;
