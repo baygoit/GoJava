@@ -16,7 +16,7 @@ public class HelloWorld {
         new HelloWorld().printHelloWorld();
     }
 
-    /* Method prints string "Hello world" into console */
+    // Method prints text "Hello world" into console
     public void printHelloWorld() {
         System.out.println("Hello world");
     }

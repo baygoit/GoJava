@@ -2,7 +2,7 @@ package com.donishchenko.airbnb.services;
 
 
 import com.donishchenko.airbnb.dao.UserDao;
-import com.donishchenko.airbnb.dao.UserDaoImpl;
+import com.donishchenko.airbnb.dao.JdbcUserDao;
 import com.donishchenko.airbnb.model.User;
 import com.google.common.base.Joiner;
 import org.apache.logging.log4j.LogManager;
@@ -15,7 +15,7 @@ import java.util.List;
 public class RegistrationService {
     public static Logger log = LogManager.getLogger(RegistrationService.class.getName());
 
-    private UserDao userDao = new UserDaoImpl();
+    private UserDao userDao = new JdbcUserDao();
 
     public void register(String name, String surname, String email, boolean isHost) {
         User user = new User(name, surname, email, isHost);
