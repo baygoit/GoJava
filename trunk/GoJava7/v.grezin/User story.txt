@@ -4,4 +4,8 @@ As User When I navigate on site I can Enter my user name and password in the fie
 push button Sign in. That to get access to my account and project administration part.
 
 2)As User I want register a new account.
-Push link or button register and fill in personal data (Nick name, Name, Surname )
+As User I want Push link or button register and fill in personal data to 
+the registration form(Nick name, Name, Surname, password, etc. )
+
+3) As User I want push link or in menu point ADD PROJECT.
+As User I want to fill in form for project registration.
