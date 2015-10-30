@@ -7,5 +7,12 @@ push button Sign in. That to get access to my account and project administration
 As User I want Push link or button register and fill in personal data to 
 the registration form(Nick name, Name, Surname, password, etc. )
 
-3) As User I want push link or in menu point ADD PROJECT.
-As User I want to fill in form for project registration.
+3) As User I want push link or in menu point that ADD PROJECT.
+As User I want choose category for my project or create new that it could be find faster.
+As User I want to fill in form for project registration, add project description, video presentation.
+
+4)As User I want have ability to donate projects that I like.
+As user I want enter to the project description and push on link or button DONATE and swich to choosing the payment way.
+
+5)As User I want have ability apply filters by Category, country, project budget etc.
+I want in the left side of site choose filters from the list and they shoul apply to project list.
