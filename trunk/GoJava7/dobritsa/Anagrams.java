@@ -2,7 +2,6 @@ package go.it.dobritsa;
 
 
 import java.util.Scanner;
-
 import go.it.main.WordsReverse;
 
 public class Anagrams extends WordsReverse{	
