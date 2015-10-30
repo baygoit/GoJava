@@ -8,6 +8,8 @@ import java.util.regex.Pattern;
 /**
  *  The DivisionAlgorithm class provides static method for division an
  *  integer on integer.
+ *  
+ *  @author Trentovskyj
  */
 public class Division {
 
