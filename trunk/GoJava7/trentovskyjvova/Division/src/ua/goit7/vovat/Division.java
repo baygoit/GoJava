@@ -5,11 +5,14 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ *  The DivisionAlgorithm class provides static method for division an
+ *  integer on integer.
+ */
 public class Division {
 
-	private static String result = "";
-	private static String leftMargin = "";
-	private static ArrayList<String> log = new ArrayList<String>();
+	private static final int BASE_MULTIPLIER = 10;
+	private static final int DECIMAL_PLACES = 100;
 
 	public static void main(String[] args) {
 
@@ -24,23 +27,30 @@ public class Division {
 
 		String strArray[] = operation.split("/");
 
-		System.out.println(" " + strArray[0] + " |" + strArray[1]);
+		ArrayList<String> log = makeDivision(Integer.parseInt(strArray[0]), Integer.parseInt(strArray[1]));
 
-		// recursion count
-		division(strArray[0], strArray[1]);
+		log.stream().forEach(n -> System.out.println(n));
+	}
 
-		log.set(0, "----------");
-		log.set(1, log.get(1) + "| " + result);
-		for (String strLog : log) {
-			System.out.println(strLog);
-		}
+	private static ArrayList<String> makeDivision(int dividend, int divisor) {
 
+		ArrayList<String> result = new ArrayList<String>();
+		result.add(" " + dividend + " |" + divisor);
+
+		QuotientBuilder quotientBuilder = new QuotientBuilder();
+
+		division(dividend, divisor, "", quotientBuilder, result);
+
+		result.set(1, "----------");
+		result.set(2, result.get(2) + "| " + quotientBuilder.get());
+
+		return result;
 	}
 
 	private static void checkInput(String operation) {
-		
-		Pattern p = Pattern.compile("\\d+/\\d+");
-		Matcher matcher = p.matcher(operation);
+
+		Pattern pattern = Pattern.compile("\\d+/\\d+");
+		Matcher matcher = pattern.matcher(operation);
 
 		if (!matcher.find()) {
 			System.out.println("Invalid input");
@@ -48,90 +58,152 @@ public class Division {
 		}
 	}
 
-	private static void division(String first, String second) {
-		int lengthA = first.length();
-		int lengthB = second.length();
+	/**
+	 * Division dividend on divisor and return result.
+	 * 
+	 * @param dividend an integer           
+	 * @param divisor an integer         
+	 * @return a String
+	 */
+	public static String division(int dividend, int divisor) {
+		ArrayList<String> result = new ArrayList<String>();
 
-		int a = Integer.parseInt(first.substring(0, Math.min(lengthA, lengthB)));
-		int b = Integer.parseInt(second);
+		QuotientBuilder quotientBuilder = new QuotientBuilder();
 
-		String newA = first;
-		while (a < b) {
-			if (lengthA > lengthB) {
-				newA = first.substring(0, lengthB + 1);
-				a = Integer.parseInt(newA);
-			} else {
-				newA += "0";
-				a *= 10;
-				if (result == "") {
-					result = "0.";
-				} else if (!result.contains(".")) {
-					result += ".";
-				} else if (first.length() + 1 < newA.length()) {
-					result += "0";
-				}
-			}
-		}
+		division(dividend, divisor, "", quotientBuilder, result);
 
-		log.add(leftMargin + " " + a);
+		return quotientBuilder.get();
+	}
 
-		int quotient = a / b;
-		result += quotient;
-		int product = quotient * b;
+	private static void division(int dividend, int divisor, String leftMargin, QuotientBuilder quotientBuilder,
+			ArrayList<String> result) {
 
-		log.add(leftMargin + "-" + product);
+		int curentDividend = getCurentDividend(Integer.toString(dividend), Integer.toString(divisor), quotientBuilder);
 
-		log.add(leftMargin + " ----");
+		result.add(leftMargin + " " + curentDividend);
+
+		int product = divide(curentDividend, divisor, quotientBuilder);
+
+		result.add(leftMargin + "-" + product);
+		result.add(leftMargin + " ----");
 		leftMargin += " ";
 
-		int firstA = Integer.parseInt(first);
-		if ((product % firstA != 0 || a % product != 0) && result.length() < 30) {
-			int difference = (int) Math.pow(10,
-					Math.max(lengthA - Math.min(newA.length(), Integer.toString(product).length()), 0));
-			if (firstA == (product * difference)) {
-				result = Integer.toString(Integer.parseInt(result) * difference);
-			} else {
-				int nextStepInt = 0;
-				int minus = product * difference;
-				if (a < minus) {
-					if (firstA > minus) {
-						nextStepInt = firstA - minus;
-						if (nextStepInt < b) {
-							result = Integer.toString(Integer.parseInt(result) * difference);
-						} else {
-							int zero = Integer.toString(minus).length() - Integer.toString(nextStepInt).length()
-									- Integer.toString(product).length();
-							if (zero > 0) {
-								result = Integer.toString(Integer.parseInt(result) * (int) Math.pow(10, zero));
-							}
-						}
-					} else {
-						nextStepInt = firstA - product;
-						if (!result.contains(".")) {
-							result += ".";
-						}
-					}
-				} else {
-					nextStepInt = a - (product * difference);
-				}
+		if (checkEnd(dividend, quotientBuilder, curentDividend, product)) {
 
-				division(Integer.toString(Math.abs(nextStepInt)), second);
+			int difference = (int) Math.pow(BASE_MULTIPLIER,
+					Math.max(length(dividend) - Math.min(length(curentDividend), length(product)), 0));
+			if (dividend == (product * difference)) {
+				quotientBuilder.multiply(difference);
+			} else {
+				
+				int nextStepDividend = findNextStepDividend(dividend, divisor, quotientBuilder, curentDividend, product,
+						difference);
+
+				division(nextStepDividend, divisor, leftMargin, quotientBuilder, result);
 			}
 		}
+
+	}
+
+	private static boolean checkEnd(int dividend, QuotientBuilder quotientBuilder, int curentDividend, int product) {
+		return (product % dividend != 0 || curentDividend % product != 0)
+				&& quotientBuilder.get().length() < DECIMAL_PLACES;
+	}
+
+	private static int findNextStepDividend(int dividend, int divisor, QuotientBuilder quotientBuilder,
+			int curentDividend, int product, int difference) {
+		
+		int nextStepDividend = 0;
+		int minus = product * difference;
+		if (curentDividend < minus) {
+			if (dividend > minus) {
+				nextStepDividend = dividend - minus;
+				if (nextStepDividend < divisor) {
+					quotientBuilder.multiply(difference);
+				} else {
+					int zerosToAdd = length(minus) - length(nextStepDividend) - length(product);
+					if (zerosToAdd > 0) {
+						quotientBuilder.multiply((int) Math.pow(BASE_MULTIPLIER, zerosToAdd));
+					}
+				}
+			} else {
+				nextStepDividend = dividend - product;
+				if (!quotientBuilder.get().contains(".")) {
+					quotientBuilder.add(".");
+				}
+			}
+		} else {
+			nextStepDividend = curentDividend - minus;
+		}
+		return nextStepDividend;
+	}
+
+	private static int divide(int curentDividend, int divisor, QuotientBuilder quotientBuilder) {
+		int c = curentDividend / divisor;
+		quotientBuilder.add(c);
+		int product = c * divisor;
+		return product;
+	}
+
+	private static Integer length(int in) {
+		return Integer.toString(in).length();
+	}
+
+	private static Integer getCurentDividend(String dividend, String divisor, QuotientBuilder quotientBuilder) {
+
+		int a = Integer.parseInt(dividend.substring(0, Math.min(dividend.length(), divisor.length())));
+
+		String newA = dividend;
+		while (a < Integer.parseInt(divisor)) {
+			if (dividend.length() > divisor.length()) {
+				newA = dividend.substring(0, divisor.length() + 1);
+			} else {
+				newA += "0";
+				if (quotientBuilder.get() == "") {
+					quotientBuilder.add("0.");
+				} else if (!quotientBuilder.get().contains(".")) {
+					quotientBuilder.add(".");
+				} else if (dividend.length() + 1 < newA.length()) {
+					quotientBuilder.add("0");
+				}
+			}
+			a = Integer.parseInt(newA);
+		}
+		return Integer.parseInt(newA);
 	}
 
 	private static String scanUserInput() {
-		
-		System.out.println("Enter the command like 24/48");
-		Scanner s = new Scanner(System.in);
 
-		String str = "";
-		if (s.hasNextLine()) {
-			str = s.nextLine();
+		System.out.println("Enter the command like 24/48");
+		Scanner scanner = new Scanner(System.in);
+
+		String input = "";
+		if (scanner.hasNextLine()) {
+			input = scanner.nextLine();
 		}
-		s.close();
-		
-		return str;
+		scanner.close();
+
+		return input;
 	}
 
+}
+
+class QuotientBuilder {
+	private String quotient = "";
+
+	public String get() {
+		return quotient;
+	}
+
+	public void add(String toAdd) {
+		quotient += toAdd;
+	}
+
+	public void add(int toAdd) {
+		quotient += toAdd;
+	}
+
+	public void multiply(int toMultiply) {
+		quotient = Integer.toString(Integer.parseInt(quotient) * toMultiply);
+	}
 }
