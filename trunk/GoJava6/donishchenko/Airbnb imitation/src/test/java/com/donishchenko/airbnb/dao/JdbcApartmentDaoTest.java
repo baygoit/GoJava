@@ -9,9 +9,9 @@ import java.sql.SQLException;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-public class ApartmentDaoImplTest {
+public class JdbcApartmentDaoTest {
 
-    private ApartmentDaoImpl apartmentDao = new ApartmentDaoImpl();
+    private JdbcApartmentDao apartmentDao = new JdbcApartmentDao();
 
     @Test
     public void testSave() throws SQLException {

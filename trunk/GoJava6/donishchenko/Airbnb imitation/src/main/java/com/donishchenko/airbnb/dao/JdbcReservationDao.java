@@ -14,8 +14,8 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
-public class ReservationDaoImpl implements ReservationDao {
-    public static final Logger log = LogManager.getLogger(ReservationDaoImpl.class.getName());
+public class JdbcReservationDao implements ReservationDao {
+    public static final Logger log = LogManager.getLogger(JdbcReservationDao.class.getName());
 
     //TODO test
     private static final String getAllAppartmentsWithParameters =

@@ -9,7 +9,7 @@ import java.sql.*;
 import java.util.LinkedList;
 import java.util.List;
 
-public class ApartmentDaoImpl implements ApartmentDao {
+public class JdbcApartmentDao implements ApartmentDao {
     private static final String saveApartmentQuery =
             "INSERT INTO apartment VALUES(null, ?, ?, ?, ?)";
 

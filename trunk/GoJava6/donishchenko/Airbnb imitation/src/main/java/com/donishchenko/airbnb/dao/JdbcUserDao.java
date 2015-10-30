@@ -8,7 +8,7 @@ import java.sql.*;
 import java.util.LinkedList;
 import java.util.List;
 
-public class UserDaoImpl implements UserDao {
+public class JdbcUserDao implements UserDao {
     private static final String saveUserQuery =
             "INSERT INTO user VALUES(null, ?, ?, ?, ?)";
 
