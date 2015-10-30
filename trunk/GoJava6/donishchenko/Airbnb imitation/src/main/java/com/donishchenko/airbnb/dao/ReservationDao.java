@@ -1,17 +1,19 @@
 package com.donishchenko.airbnb.dao;
 
-import com.donishchenko.airbnb.model.Apartment;
 import com.donishchenko.airbnb.model.Reservation;
-import com.donishchenko.airbnb.model.User;
 
+import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
 
 public interface ReservationDao {
-    public boolean makeReservation(User user, Apartment apartment, Date start, Date end, String comment);
-    public boolean isAvailable(Apartment apartment, Date start, Date end);
-    public Reservation getById(int id);
-    public List<Reservation> getAll();
-    public List<Reservation> getAllByApartment(Apartment apartment);
-    public List<Reservation> getAllBetweenDates(Date start, Date end);
+    int save(Reservation reservation) throws SQLException;
+    boolean delete(int id) throws SQLException;
+    boolean update(int id, Reservation reservation) throws SQLException;
+    Reservation get(int id) throws SQLException;
+    List<Reservation> getAll() throws SQLException;
+    List<Reservation> getAllByApartment(int apartmentId) throws SQLException;
+    List<Reservation> getAllByUser(int userId) throws SQLException;
+    List<Reservation> getAllByHost(int userId) throws SQLException;
+    List<Reservation> getAllBetweenDates(Date start, Date end) throws SQLException;
 }
