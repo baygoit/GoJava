@@ -5,7 +5,7 @@ import java.util.StringTokenizer;
 
 public class Anagram {
 
-	static String strValues = null, strResult = null;;
+	static String strValues = null, strResult = null;
 	static char chArray[];
 	static char tmp;
 
