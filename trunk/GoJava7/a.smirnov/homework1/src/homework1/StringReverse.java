@@ -9,55 +9,55 @@ public class StringReverse {
 		new StringReverse().reverseString(setUpUserInputData());
 	}
 
-	/* Method reversing input user's text */
-	public void reverseString(String inputUsersText) {
+	// Method reverses user's input text
+	public void reverseString(String inputUserText) {
 
-		// Converting input string into char array
-		char[] array = inputUsersText.toCharArray();
+		// Converting input text into char array
+		char[] storageOfAllCharsFromUserInputText = inputUserText.toCharArray();
 
 		StringBuilder tempWord = new StringBuilder();
 		StringBuilder finishText = new StringBuilder();
 
 		// Loop over user input string
-		for (int step = 0; step < array.length; step++) {
+		for (int step = 0; step < storageOfAllCharsFromUserInputText.length; step++) {
 
-			// Checking of every element in input string
-			if (array[step] >= 'a' && array[step] <= 'z' || array[step] >= 'A' && array[step] <= 'Z') {
+			// Checking of every char in the storage
+			if (storageOfAllCharsFromUserInputText[step] >= 'a' && storageOfAllCharsFromUserInputText[step] <= 'z' || storageOfAllCharsFromUserInputText[step] >= 'A' && storageOfAllCharsFromUserInputText[step] <= 'Z') {
 
 				// Adding to temporary variable
-				tempWord.append(array[step]);
+				tempWord.append(storageOfAllCharsFromUserInputText[step]);
 
-				// Checking of step value
-				if (step == array.length - 1) {
+				// Checking of loop step 
+				if (step == storageOfAllCharsFromUserInputText.length - 1) {
 					finishText.append(tempWord.reverse());
 				}
 			} else {
 
-				// Checking of capacity of temporary string
+				// Checking of capacity of temporary word
 				if (tempWord.toString().isEmpty()) {
 
-					// Adding element to finish string
-					finishText.append(array[step]);
+					// Adding char to finish text
+					finishText.append(storageOfAllCharsFromUserInputText[step]);
 				} else {
 
-					// Reversing of temporary string and adding to finish string
+					// Reversing of temporary word and adding to finish text
 					finishText.append(tempWord.reverse());
 
-					// Deleting all elements from temporary string
+					// Deleting all chars from temporary word
 					tempWord.delete(0, tempWord.length());
 
-					// Adding element to finish string
-					finishText.append(array[step]);
+					// Adding char to finish text
+					finishText.append(storageOfAllCharsFromUserInputText[step]);
 				}
 			}
 		}
-		printReversedText(inputUsersText, finishText);
+		printUserInptTextAndReversedText(inputUserText, finishText);
 	}
 	
 	// Method prints into console reversed text
-	public void printReversedText(String inputText, StringBuilder reversedText) {
-		System.out.println("User input text: " + inputText + System.lineSeparator()
-							+ "Reversed text: " + reversedText.toString());
+	public void printUserInptTextAndReversedText(String inputText, StringBuilder reversedText) {
+		System.out.println("User's input text: " + inputText + System.lineSeparator()
+							+ "Reversed user's text: " + reversedText.toString());
 	}
 
 	public static String setUpUserInputData() {

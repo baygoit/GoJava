@@ -20,91 +20,83 @@ public class LongDivision {
 		new LongDivision().divide(setUpUserInputData());
 	}
 
-	// Method showing dividing process
-	public void divide(int[] inputValues) {
+	// Method divides first user's input number on second user's input number
+	public void divide(int[] storageOfUserInputNumbers) {
 
-		int firstValue = inputValues[0];
-		int secondValue = inputValues[1];
+		int firstNumber = storageOfUserInputNumbers[0];
+		int secondNumber = storageOfUserInputNumbers[1];
 
-		// List of elements from dividing (step by step)
-		List<Integer> listOfAllNumeratorsAndDenominator = new ArrayList<>();
+		// Storage for all numbers from dividing process
+		List<Integer> storageOfAllNumeratorsAndDenominator = new ArrayList<>();
 
-		// Result from dividing firstValue on secondValue
+		// Result from dividing process
 		String result = "";
 
-		// Activities if first input value dividing on second input value
-		// WITHOUT remainder of the division
-		if (firstValue % secondValue == 0) {
-			result = result + firstValue / secondValue;
-			listOfAllNumeratorsAndDenominator.add(firstValue);
-			listOfAllNumeratorsAndDenominator.add(secondValue);
+		// Activities if first input value dividing on second input value WITHOUT remainder
+		if (firstNumber % secondNumber == 0) {
+			result = result + firstNumber / secondNumber;
+			storageOfAllNumeratorsAndDenominator.add(firstNumber);
+			storageOfAllNumeratorsAndDenominator.add(secondNumber);
 
-			// Printing in console every step of dividing process
-			printDividingProcessIntoConsole(listOfAllNumeratorsAndDenominator, result);
+			printDividingProcessIntoConsole(storageOfAllNumeratorsAndDenominator, result);
 
-			// Activities if first input value dividing on second input value
-			// WITH remainder of the division
+			
 		} else {
 
-			// Activities if first input value bigger than second input value
-			if (firstValue > secondValue && firstValue % secondValue != 0) {
-				listOfAllNumeratorsAndDenominator.add(firstValue);
-				int temp = firstValue / secondValue;
-				listOfAllNumeratorsAndDenominator.add(secondValue * temp);
-				result = result + temp;
-				firstValue = firstValue - secondValue * temp;
+			// Activities if first input value dividing on second input value WITH remainder
+			if (firstNumber > secondNumber && firstNumber % secondNumber != 0) {
+				storageOfAllNumeratorsAndDenominator.add(firstNumber);
+				int tempResultDividing = firstNumber / secondNumber;
+				storageOfAllNumeratorsAndDenominator.add(secondNumber * tempResultDividing);
+				result = result + tempResultDividing;
+				firstNumber = firstNumber - secondNumber * tempResultDividing;
 			}
 
-			// Checking of result string's capacity and adding of strings "0."
-			// or "."
+			// Checking of result from dividing
 			if (result.isEmpty()) {
 				result = result + "0.";
 			} else {
 				result = result + ".";
 			}
 
-			while (firstValue % secondValue != 0 && result.length() < 20) {
-				firstValue = firstValue * 10;
+			while (firstNumber % secondNumber != 0 && result.length() < 20) {
+				firstNumber = firstNumber * 10;
 
-				if (firstValue < secondValue) {
+				if (firstNumber < secondNumber) {
 					result = result + "0";
 				} else {
-					listOfAllNumeratorsAndDenominator.add(firstValue);
-					int temp = firstValue / secondValue;
-					result = result + temp;
-					firstValue = firstValue - secondValue * temp;
-					listOfAllNumeratorsAndDenominator.add(secondValue * temp);
+					storageOfAllNumeratorsAndDenominator.add(firstNumber);
+					int tempResultDividing = firstNumber / secondNumber;
+					firstNumber = firstNumber - secondNumber * tempResultDividing;
+					result = result + tempResultDividing;
+					storageOfAllNumeratorsAndDenominator.add(secondNumber * tempResultDividing);
 				}
 			}
 		}
 
-		// Printing in console every step of dividing process
-		printDividingProcessIntoConsole(listOfAllNumeratorsAndDenominator, result);
+		printDividingProcessIntoConsole(storageOfAllNumeratorsAndDenominator, result);
 	}
 
-	// Method allowing user set up input data for program
+	// Method allows user to set up data
 	public static int[] setUpUserInputData() {
-
 		// Handling of user's input data
 		while (true) {
 			try {
-				int[] inputValues = new int[2];
-				Scanner input = new Scanner(System.in);
+				int[] storageOfUserInputNumbers = new int[2];
+				Scanner in = new Scanner(System.in);
 
-				// Checking of user's first input value (numerator) and adding
-				// to array of input values
+				// Checking of first user's input number and adding to storage of user's input numbers
 				System.out.println("Please insert first value: ");
-				int inputFirstNumber = input.nextInt();
-				inputValues[0] = inputFirstNumber;
+				int inputFirstNumber = in.nextInt();
+				storageOfUserInputNumbers[0] = inputFirstNumber;
 
-				// Checking of user's second input value (denominator) and
-				// adding to array of input values
+				// Checking of second user's input number and adding to storage of user's input numbers
 				System.out.println("Please insert second value: ");
-				int inputSecondNumber = input.nextInt();
-				inputValues[1] = inputSecondNumber;
+				int inputSecondNumber = in.nextInt();
+				storageOfUserInputNumbers[1] = inputSecondNumber;
 
 				System.out.println("User wants divide " + inputFirstNumber + " on " + inputSecondNumber);
-				return inputValues;
+				return storageOfUserInputNumbers;
 			} catch (Exception e) {
 				System.out.println("User insert wrong value. Please try again");
 			}
@@ -112,6 +104,7 @@ public class LongDivision {
 
 	}
 
+	// Methods prints every steps of dividing process into console 
 	public void printDividingProcessIntoConsole(List<Integer> list, String result) {
 		String space = " ";
 		String separator = "------";
