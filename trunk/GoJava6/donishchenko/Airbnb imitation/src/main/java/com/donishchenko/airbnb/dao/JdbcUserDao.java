@@ -104,7 +104,7 @@ public class JdbcUserDao implements UserDao {
         return getAllUsersWithParameter("isHost", "1");
     }
 
-    private List<User> getAllUsersWithParameter(String...args) throws SQLException {
+    private List<User> getAllUsersWithParameter(Object...args) throws SQLException {
         QueryBuilder queryBuilder = new QueryBuilder(getAllUsersQuery);
         queryBuilder.parse(args);
 
@@ -114,7 +114,7 @@ public class JdbcUserDao implements UserDao {
             String query = queryBuilder.getQuery();
             PreparedStatement stat = conn.prepareStatement(query);
             int i = 1;
-            for (String value : queryBuilder.values()) {
+            for (Object value : queryBuilder.values()) {
                 stat.setObject(i, value);
             }
 

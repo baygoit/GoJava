@@ -6,14 +6,14 @@ import java.util.List;
 public class QueryBuilder {
     private String initialQuery;
     private String query;
-    private List<String> values = new ArrayList<>();
+    private List<Object> values = new ArrayList<>();
 
     public QueryBuilder(String initialQuery) {
         this.initialQuery = initialQuery;
         this.query = initialQuery;
     }
 
-    public void parse(String[] params) {
+    public void parse(Object[] params) {
         if (params.length != 0) {
             StringBuilder builder = new StringBuilder(initialQuery);
 
@@ -27,7 +27,7 @@ public class QueryBuilder {
         }
     }
 
-    public List<String> values() {
+    public List<Object> values() {
         return values;
     }
 
