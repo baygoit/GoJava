@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
  *  
  *  @author Trentovskyj
  */
-public class Division {
+public class DivisionAlgorithm {
 
 	private static final int BASE_MULTIPLIER = 10;
 	private static final int DECIMAL_PLACES = 100;
