@@ -1,0 +1,7 @@
+1)As User I want Login to the site as SIGN IN by entering User name and password.
+
+As User When I navigate on site I can Enter my user name and password in the fields on the top of the site and 
+push button Sign in. That to get access to my account and project administration part.
+
+2)As User I want register a new account.
+Push link or button register and fill in personal data (Nick name, Name, Surname )
