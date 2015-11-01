@@ -16,7 +16,7 @@ public class FileAccess {
         return Files.readAllLines(Paths.get(path));
     }
 
-    public void save(String data) throws IOException {
+    public void writeAllLines(String data) throws IOException {
         Files.write(Paths.get(path), data.getBytes());
     }
 }

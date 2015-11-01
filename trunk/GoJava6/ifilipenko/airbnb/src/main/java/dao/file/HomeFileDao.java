@@ -64,6 +64,6 @@ public class HomeFileDao {
     public void create(Home home) throws IOException {
         List<String> homes = fileAccess.readAllLines();
         homes.add(serialize(home));
-        fileAccess.save(String.join("\n", homes));
+        fileAccess.writeAllLines(String.join("\n", homes));
     }
 }
