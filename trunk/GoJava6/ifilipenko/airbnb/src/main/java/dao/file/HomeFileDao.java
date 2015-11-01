@@ -22,7 +22,7 @@ public class HomeFileDao {
 
     public String serialize(Home home) {
         StringBuilder sb = new StringBuilder();
-        sb.append(home.getHostCode())
+        sb.append(home.getHost())
                 .append(" | ")
                 .append(home.getCity())
                 .append(" | ")
@@ -39,7 +39,7 @@ public class HomeFileDao {
             params[i] = params[i].trim();
         }
 
-        home.setHost(Integer.parseInt(params[0]));
+        home.setHost(params[0]);
         home.setCity(CityList.valueOf(params[1]));
         home.setHomeType(HomeType.valueOf(params[2]));
 
@@ -63,7 +63,7 @@ public class HomeFileDao {
 
     public void create(Home home) throws IOException {
         List<String> homes = fileAccess.readAllLines();
-        homes.add(serialize(home));
+        homes.add(this.serialize(home));
         fileAccess.writeAllLines(String.join("\n", homes));
     }
 }

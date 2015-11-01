@@ -1,8 +1,7 @@
 package servlets;
 
-import model.CityList;
-import model.GenderType;
-import model.User;
+import model.*;
+import services.HomeService;
 import services.UserService;
 
 import javax.servlet.ServletException;
@@ -52,9 +51,16 @@ public class ControllerServlet extends HttpServlet {
             userPath = pageLogin(request, session);
         } else if (userPath.equals("/welcome")) {
             userPath = pageWelcome(request, session);
-        } else if (userPath.equals("/index")){
+        } else if (userPath.equals("/index")) {
             userPath = pageSingUp(request, session);
+        } else if (userPath.equals("/clients")) {
+            userPath = pageClients(request, session);
+        } else if (userPath.equals("/home")) {
+            userPath = pageBecomeHost(request, session);
+        } else if (userPath.equals("/homes")) {
+            userPath = pageHomes(request, session);
         }
+
 
         // use RequestDispatcher to forward request internally
         String url = isResource ? userPath : ("/WEB-INF/view" + userPath + ".jsp");
@@ -77,7 +83,6 @@ public class ControllerServlet extends HttpServlet {
 
             if (user != null) {
                 session.setAttribute("user", user);
-
                 userPath = "/welcome";
             }
         } else if (request.getParameter("action").equals("logout")) {
@@ -89,20 +94,24 @@ public class ControllerServlet extends HttpServlet {
     }
 
     private String pageWelcome(HttpServletRequest request, HttpSession session) {
-        if (session.getAttribute("user") == null) {
+        if (request.getAttribute("user") == null) {
             return "/login";
         } else {
             return "/welcome";
         }
     }
 
+    private String pageClients(HttpServletRequest request, HttpSession session) {
+        request.setAttribute("clients", new UserService().readAllUsers());
+        return "/clients";
+    }
+
     private String pageSingUp(HttpServletRequest request, HttpSession session) throws ParseException, IOException {
-        String userPath = "/index";
         User user = new User();
 
         if (request.getParameter("action") == null) {
             //
-        }else if (request.getParameter("action").equals("signup")) {
+        } else if (request.getParameter("action").equals("signup")) {
             user.setName(request.getParameter("fname"));
             user.setLastName(request.getParameter("lname"));
             user.setGender(GenderType.FEMALE);
@@ -113,11 +122,33 @@ public class ControllerServlet extends HttpServlet {
             new UserService().createUser(user);
 
             session.setAttribute("user", user);
+
             return "/welcome";
         }
 
         return "/index";
     }
 
+    private String pageBecomeHost(HttpServletRequest request, HttpSession session) throws IOException {
+        Home home = new Home();
+        User user = (User) session.getAttribute("user");
 
+        home.setHost(user.getEmail());
+        home.setCity(CityList.MIAMI);
+        home.setHomeType(HomeType.APARTMENT);
+
+        new HomeService().createHome(home);
+
+        session.setAttribute("home", home);
+
+        return "/home";
     }
+
+
+    private String pageHomes(HttpServletRequest request, HttpSession session) throws IOException {
+        request.setAttribute("homes", new HomeService().realAllHomes());
+        return "/homes";
+    }
+
+
+}

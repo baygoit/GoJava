@@ -5,6 +5,7 @@
     <body>
         <form method="POST" action="index?action=signup" class="form">
             <center>
+            <h1><font color="#FF1493">THIS IS A BRAND NEW AWESOME AIRBNB!</font></h1>
             <table border="1" width="30%" cellpadding="5">
                 <thead>
                     <tr>
@@ -14,27 +15,27 @@
                 <tbody>
                     <tr>
                         <td>First Name</td>
-                        <td><input type="text" name="fname" value="" /></td>
+                        <td><input type="text" name="fname" value="" required/></td>
                    </tr>
                     <tr>
                         <td>Last Name</td>
-                        <td><input type="text" name="lname" value="" /></td>
+                        <td><input type="text" name="lname" value="" required/></td>
                     </tr>
                     <tr>
                         <td>Gender</td>
-                        <td><input type="text" name="gender" value="" /></td>
+                        <td><input type="text" name="gender" value="" required/></td>
                     </tr>
                        <tr>
                         <td>Birth Date</td>
-                        <td><input type="text" name="bdate" value="" /></td>
+                        <td><input type="text" name="bdate" value="" required/></td>
                     </tr>
                     <tr>
                         <td>Email</td>
-                        <td><input type="text" name="email" value="" /></td>
+                        <td><input type="text" name="email" value="" required/></td>
                     </tr>
                     <tr>
                         <td>City</td>
-                        <td><input type="text" name="city" value="" /></td>
+                        <td><input type="text" name="city" value="" required/></td>
                     </tr>
                     <tr>
                         <td>User Name</td>
@@ -49,7 +50,7 @@
                         <td><input type="reset" value="Reset" /></td>
                     </tr>
                     <tr>
-                        <td colspan="2">Already registered!!! <a href="airbnb-1/WEB-INF/view/login.jsp">Login Here</a></td>
+                        <td colspan="2">Already registered!!! <a href="/login?action=login">Login Here</a></td>
                     </tr>
                 </tbody>
             </table>

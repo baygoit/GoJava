@@ -5,6 +5,7 @@ import model.Home;
 import model.User;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Random;
 
 public class UserService{
@@ -26,9 +27,13 @@ public class UserService{
         return userIODao.readByEmail(email);
     }
 
+    public List<User> readAllUsers(){
+        return userIODao.readAll();
+    }
+
     public void becomeHost(int userCode, Home newHome) throws IOException {
         User host = this.getUserByCode(userCode);
-        service.createHome(host, newHome);
+        service.createHome(newHome);
     }
 
     public boolean searchPlace() {

@@ -3,7 +3,7 @@
           xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
 
     <welcome-file-list>
-        <welcome-file>index.jsp</welcome-file>
+        <welcome-file>/WEB-INF/view/index.jsp</welcome-file>
     </welcome-file-list>
 
     <servlet>
@@ -21,7 +21,7 @@
 
     <jsp-config>
         <jsp-property-group>
-            <url-pattern>/WEB-INF/view/login.jsp</url-pattern>
+            <url-pattern>/WEB-INF/view/index.jsp</url-pattern>
             <url-pattern>/WEB-INF/view/*</url-pattern>
             <include-prelude>/WEB-INF/jspf/header.jspf</include-prelude>
             <include-coda>/WEB-INF/jspf/footer.jspf</include-coda>

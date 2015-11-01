@@ -107,7 +107,7 @@ public class User implements Observer, Serializable{
     @Override
     public String toString() {
         return "User{" +
-                "external code='" + id + '\'' +
+                "email='" + email + '\'' +
                 ", name='" + name + '\'' +
                 ", lastName='" + lastName + '\'' +
                 '}';
