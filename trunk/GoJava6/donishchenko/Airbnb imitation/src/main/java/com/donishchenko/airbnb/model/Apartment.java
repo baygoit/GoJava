@@ -58,6 +58,21 @@ public class Apartment {
     }
 
     @Override
+    public boolean equals(Object obj) {
+        if (obj == this) return true;
+        if (obj == null) return false;
+        if (!(obj instanceof Apartment)) return false;
+
+        Apartment other = (Apartment) obj;
+
+        return id == other.id &&
+                hostId == other.hostId &&
+                city.equals(other.city) &&
+                apartmentType == other.apartmentType &&
+                active == other.active;
+    }
+
+    @Override
     public String toString() {
         return Joiner.on("").join("Apartment{id='", id, "', hostId='", hostId, "', city='", city,
                 "', type='", apartmentType, "', active='", active, "'}");
