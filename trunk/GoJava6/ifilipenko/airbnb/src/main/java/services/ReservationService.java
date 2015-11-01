@@ -1,10 +1,10 @@
 package services;
 
-import dao.io.ReservationIODao;
+import dao.file.ReservationFileDao;
 import model.Reservation;
 
 public class ReservationService  {
-    private ReservationIODao rDao = new ReservationIODao();
+    private ReservationFileDao rDao = new ReservationFileDao();
 
     public void bookHome(Reservation reservation) {
         rDao.create(reservation);

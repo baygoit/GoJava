@@ -12,33 +12,53 @@ import java.util.List;
  */
 public class User implements Observer {
 
-    public UserType userType;
-
-    private String email;
-    private String surname;
     private String name;
-    private int apartmentID = 0;
+    private String surname;
+    private String email;
+    public UserType userType;
+    private int userID = 0;
 
     public List<Apartment> apartments = new ArrayList<>();
 
+    public User(String name, String surname, String email, int userType, int userID) {
+        this.name = name;
+        this.surname = surname;
+        this.email = email;
+        this.userID = userID;
+        if (userType == 0) this.userType = UserType.CLIENT;
+        else this.userType = UserType.HOST;
+    }
+
     public User(String name, String surname, String email, UserType userType) {
-            this.name = name;
-            this.surname = surname;
-            this.email = email;
-            this.userType = userType;
+        this.name = name;
+        this.surname = surname;
+        this.email = email;
+        this.userType = userType;
+    }
+
+    public static User createUser(String name, String surname, String email, int userType, int userID) {
+        return new User (name, surname, email, userType, userID);
     }
 
     public void becomeHost() {
             this.userType = UserType.HOST;
     }
 
+    public Boolean getBooleanUserType() {
+        if(this.userType == UserType.HOST) return true;
+        else return false;
+    }
+
     public UserType getUserType() {
-        UserType type = userType;
-        return type;
+        return this.userType;
     }
 
     public String getName() {
         return name;
+    }
+
+    public int getUserID() {
+        return userID;
     }
 
     public String getSurname() {
@@ -53,17 +73,19 @@ public class User implements Observer {
         System.out.println(message);
     }
 
-    public String addApartments (Apartment apartment) {
+    public User addApartments (Apartment apartment) {
         if (Validator.validateCity(apartment.city)) {
             if (this.getUserType() == UserType.HOST) {
                 apartment.user = this;
-                apartment.apartmentID = ++this.apartmentID;
+//                apartment.apartmentID = ++this.apartmentID;
                 apartments.add(apartment);
-                return apartment.city;
+//                return apartment.city;
+                return this;
             }
         }
         System.out.println("You can not add apartments to this user. Invalid user.");
-        return null;
+//        return null;
+        return this;
     }
 
     public Apartment getApartmentByID (int id) {

@@ -60,6 +60,7 @@ public class GenerateDB implements DaoDB{
         list.add("AddCities");
         list.add("AddRole");
         list.add("AddApartment");
+        list.add("AddReservations");
 
         for (String fileName : list) {
             execute(fileName);

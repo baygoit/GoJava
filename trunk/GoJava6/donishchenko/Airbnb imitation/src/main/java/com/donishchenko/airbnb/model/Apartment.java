@@ -4,16 +4,14 @@ import com.donishchenko.airbnb.validation.Validator;
 import com.google.common.base.Joiner;
 
 public class Apartment {
-    private static int APARTMENT_ID = 0;
     private int id;
-    private User host;
+    private int hostId;
     private String city;
     private ApartmentType apartmentType;
     private boolean active;
 
-    public Apartment(User host, String city, ApartmentType apartmentType, boolean active) {
-        this.id = ++APARTMENT_ID;
-        this.host = host;
+    public Apartment(int hostId, String city, ApartmentType apartmentType, boolean active) {
+        this.hostId = hostId;
         this.city = city;
         this.apartmentType = apartmentType;
         this.active = active;
@@ -23,12 +21,16 @@ public class Apartment {
         return id;
     }
 
-    public User getHost() {
-        return host;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public void setHost(User host) {
-        this.host = host;
+    public int getHostId() {
+        return hostId;
+    }
+
+    public void setHostId(int hostId) {
+        this.hostId = hostId;
     }
 
     public String getCity() {
@@ -57,7 +59,7 @@ public class Apartment {
 
     @Override
     public String toString() {
-        return Joiner.on("").join("Apartment{id='", id, "', hostId='", host.getId(), "', city='", city,
+        return Joiner.on("").join("Apartment{id='", id, "', hostId='", hostId, "', city='", city,
                 "', type='", apartmentType, "', active='", active, "'}");
     }
 

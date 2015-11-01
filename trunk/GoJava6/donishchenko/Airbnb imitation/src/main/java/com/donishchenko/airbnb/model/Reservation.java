@@ -6,20 +6,18 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Reservation {
-    private static int RESERVATION_ID = 0;
     private int id;
-    private User user;
-    private Apartment apartment;
+    private int userId;
+    private int apartmentId;
     private Date start;
     private Date end;
     private String comment;
 
     public Reservation() {}
 
-    public Reservation(User user, Apartment apartment, Date start, Date end, String comment) {
-        this.id = ++RESERVATION_ID;
-        this.user = user;
-        this.apartment = apartment;
+    public Reservation(int userId, int apartmentId, Date start, Date end, String comment) {
+        this.userId = userId;
+        this.apartmentId = apartmentId;
         this.start = start;
         this.end = end;
         this.comment = comment;
@@ -29,20 +27,24 @@ public class Reservation {
         return id;
     }
 
-    public User getUser() {
-        return user;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public int getUserId() {
+        return userId;
     }
 
-    public Apartment getApartment() {
-        return apartment;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
-    public void setApartment(Apartment apartment) {
-        this.apartment = apartment;
+    public int getApartmenId() {
+        return apartmentId;
+    }
+
+    public void setApartment(int apartmentId) {
+        this.apartmentId = apartmentId;
     }
 
     public Date getStart() {
@@ -72,8 +74,8 @@ public class Reservation {
     @Override
     public String toString() {
         SimpleDateFormat format = new SimpleDateFormat("dd.MM.yy");
-        return Joiner.on("").join("Reservation{id='", id, "', userId='", user.getId(),
-                "', apartmentId='", apartment.getId(), "', start='", format.format(start), "', end='",
+        return Joiner.on("").join("Reservation{id='", id, "', userId='", userId,
+                "', apartmentId='", apartmentId, "', start='", format.format(start), "', end='",
                 format.format(end), "', comment='", comment, "'}");
     }
 }

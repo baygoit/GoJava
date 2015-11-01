@@ -1,8 +1,11 @@
 package model;
 
-import java.util.Date;
+import observer.Observer;
 
-public class User {
+import java.util.Date;
+import java.util.HashMap;
+
+public class User implements Observer{
     private static int USER_ID = 0;
     private int id;
     private int externalCode;
@@ -13,7 +16,7 @@ public class User {
     private String email;
     private CityList city;
     private String country;
-    private boolean isHost;
+    private HashMap<Integer, User> users;
 
     public User() {
     }
@@ -26,7 +29,6 @@ public class User {
         this.birthDate = birthDate;
         this.email = email;
         this.city = city;
-        this.isHost = false;
     }
 
 
@@ -86,6 +88,8 @@ public class User {
         return gender;
     }
 
+
+
     public Date getBirthDate() {
         return birthDate;
     }
@@ -102,12 +106,12 @@ public class User {
         return country;
     }
 
-    public boolean isHost() {
-        return isHost;
+    public HashMap<Integer, User> getUsers() {
+        return users;
     }
 
-    public void setHost(boolean isHost) {
-        this.isHost = isHost;
+    public void setUsers(HashMap<Integer, User> users) {
+        this.users = users;
     }
 
     @Override
@@ -117,5 +121,10 @@ public class User {
                 ", name='" + name + '\'' +
                 ", lastName='" + lastName + '\'' +
                 '}';
+    }
+
+    @Override
+    public void notifyObserver(String s) {
+
     }
 }

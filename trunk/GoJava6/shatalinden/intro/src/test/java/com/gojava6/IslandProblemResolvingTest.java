@@ -1,5 +1,6 @@
 package com.gojava6;
 
+import Practice.IslandProblemResolving;
 import org.junit.Before;
 import org.junit.Test;
 

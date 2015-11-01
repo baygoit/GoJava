@@ -1,5 +1,6 @@
 package com.gojava6.airbnb.data;
 
+import com.gojava6.airbnb.apartment.Apartment;
 import com.gojava6.airbnb.user.User;
 
 import java.util.ArrayList;
@@ -14,4 +15,5 @@ public class Lists {
     public static List<User> hostList = new ArrayList<>();
     public static List<User> clientList = new ArrayList<>();
     public static Set<String> cities = new HashSet<>();
+    public static List<Apartment> apartments = new ArrayList<>();
 }
