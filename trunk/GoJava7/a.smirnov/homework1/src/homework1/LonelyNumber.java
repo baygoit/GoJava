@@ -24,7 +24,7 @@ public class LonelyNumber {
 	}
 
 	// Setup input data by User
-	private static int[] setupUserNumbers() {
+	private int[] setupUserNumbers() {
 		String instruction = "Please insert integer numbers (not less than 3 numbers) separated by spaces: ";
 		System.out.println(instruction);
 
@@ -86,6 +86,7 @@ public class LonelyNumber {
 		return result.toString();
 	}
 
+	
 	// Finding all unique numbers in storage of user's inserted numbers
 	private HashSet<Integer> findsAllUniqueUserNumbers(int[] userNumbers) {
 		HashSet<Integer> uniqueNumbers = new HashSet<>();
@@ -95,6 +96,7 @@ public class LonelyNumber {
 		return uniqueNumbers;
 	}
 
+	
 	// Printing into console user's inserted numbers and lonely number
 	private void printUserInsertedNumbersAndLonelyNumber(String result) {
 		System.out.println(result);
