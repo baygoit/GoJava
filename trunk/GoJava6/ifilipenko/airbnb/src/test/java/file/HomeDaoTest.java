@@ -48,6 +48,25 @@ public class HomeDaoTest {
     }
 
     @Test
+    public void create_Success() throws IOException {
+        //-------------------------------------
+        FileAccess stubFileAccess = getFileAccessStub();
+        HomeFileDao homeDao = new HomeFileDao(stubFileAccess);
+        Home home = homeDao.read("2 | NEW_YORK | ROOM");
+
+        //-------------------------------------
+        homeDao.create(home);
+
+        //-------------------------------------
+        verify(stubFileAccess).writeAllLines(
+                "2 | MIAMI | APARTMENT\n" +
+                        "3 | NEW_YORK | ROOM\n" +
+                        "4 | MIAMI | HOUSE\n" +
+                        "2 | NEW_YORK | ROOM");
+
+    }
+
+    @Test
     public void read_Success() {
         //-------------------------------------
         String line = "2 | MIAMI | APARTMENT ";
@@ -76,23 +95,5 @@ public class HomeDaoTest {
     }
 
 
-    @Test
-    public void create_Success() throws IOException {
-        //-------------------------------------
-        FileAccess stubFileAccess = getFileAccessStub();
-        HomeFileDao homeDao = new HomeFileDao(stubFileAccess);
-        Home home = homeDao.read("2 | NEW_YORK | ROOM");
-
-        //-------------------------------------
-        homeDao.create(home);
-
-        //-------------------------------------
-        verify(stubFileAccess).save(
-                        "2 | MIAMI | APARTMENT\n" +
-                        "3 | NEW_YORK | ROOM\n" +
-                        "4 | MIAMI | HOUSE\n" +
-                        "2 | NEW_YORK | ROOM");
-
-    }
 
 }
