@@ -7,7 +7,7 @@ import java.util.Scanner;
 /**
  * LongDivision.java
  * @author Anton Smirnov
- * @version 22.10.2015
+ * @version 01.11.2015
  * @java 7
  * @category homework1
  *
