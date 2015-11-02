@@ -1,8 +1,4 @@
-//it will be modify in nearest future
-
-package go.it.dobritsa;
-
-public class Division extends go.it.main.Division {
+public class Division{
 	static String visualization = "";
 
 	public static void main(String[] args) {
@@ -78,11 +74,6 @@ public class Division extends go.it.main.Division {
 		line1 = (line1 - line2);	
 		visualization += indent + " " + line1  + "\n";	
 		return result;
-	}	
-	
-	@Override
-	public float divide(int divident, int divisor) {		
-		return myDivide(divident, divisor);
-	}
+	}		
 
 }

@@ -1,11 +1,6 @@
-package go.it.dobritsa;
-
-
 import java.util.Scanner;
 
-import go.it.main.WordsReverse;
-
-public class Anagrams extends WordsReverse{	
+public class Anagrams{	
 
 	public static void main(String[] args) {		
 		String typedText = (typeText());			
@@ -52,9 +47,5 @@ public class Anagrams extends WordsReverse{
 		sc.close();		
 		return text;
 	}
-
-	@Override
-	public String reverseWords(String phrase) {		
-		return anagram(phrase);
-	}
+	
 }

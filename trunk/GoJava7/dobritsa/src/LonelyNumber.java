@@ -1,12 +1,10 @@
-package go.it.dobritsa;
+
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-//import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils.Collections;
-
-public class LonelyNumber extends go.it.main.LonelyNumber{
+public class LonelyNumber{
 
 	public static void main(String[] args) {
 		List<Integer> myArray1 = Arrays.asList(2, 3, 2, 4, 3, 7, 2, 3, 4, 4);
@@ -43,11 +41,4 @@ public class LonelyNumber extends go.it.main.LonelyNumber{
 		}	
 		return null;
 	}
-
-	@Override
-	public Integer findLonely(List<Integer> array, int repeatCount) {
-		
-		return myFindLonely(array);
-	}
-
 }
