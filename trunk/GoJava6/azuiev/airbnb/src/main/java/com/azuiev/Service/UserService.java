@@ -1,4 +1,4 @@
-package com.azuiev.Service;
+package com.azuiev.service;
 
 import com.azuiev.dao.DaoUser;
 import com.azuiev.model.User;

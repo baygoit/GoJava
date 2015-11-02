@@ -1,25 +1,25 @@
-C:\need\GoJava\trunk\GoJava6\azuiev\airbnb\src\main\java\com\azuiev\enums\UserRoles.java
-C:\need\GoJava\trunk\GoJava6\azuiev\airbnb\src\main\java\com\azuiev\filter\FilterByApartType.java
-C:\need\GoJava\trunk\GoJava6\azuiev\airbnb\src\main\java\com\azuiev\Validator.java
-C:\need\GoJava\trunk\GoJava6\azuiev\airbnb\src\main\java\com\azuiev\Service\CityService.java
-C:\need\GoJava\trunk\GoJava6\azuiev\airbnb\src\main\java\com\azuiev\filter\FilterByPeriod.java
-C:\need\GoJava\trunk\GoJava6\azuiev\airbnb\src\main\java\com\azuiev\filter\FilterByCity.java
-C:\need\GoJava\trunk\GoJava6\azuiev\airbnb\src\main\java\com\azuiev\dao\DaoCity.java
-C:\need\GoJava\trunk\GoJava6\azuiev\airbnb\src\main\java\com\azuiev\servlet\SearchServlet.java
-C:\need\GoJava\trunk\GoJava6\azuiev\airbnb\src\main\java\com\azuiev\interfaces\Observer.java
-C:\need\GoJava\trunk\GoJava6\azuiev\airbnb\src\main\java\com\azuiev\interfaces\Subject.java
-C:\need\GoJava\trunk\GoJava6\azuiev\airbnb\src\main\java\com\azuiev\model\Organization.java
-C:\need\GoJava\trunk\GoJava6\azuiev\airbnb\src\main\java\com\azuiev\enums\ApartType.java
-C:\need\GoJava\trunk\GoJava6\azuiev\airbnb\src\main\java\com\azuiev\dao\DaoDB.java
-C:\need\GoJava\trunk\GoJava6\azuiev\airbnb\src\main\java\com\azuiev\Service\UserService.java
-C:\need\GoJava\trunk\GoJava6\azuiev\airbnb\src\main\java\com\azuiev\dao\DaoModel.java
-C:\need\GoJava\trunk\GoJava6\azuiev\airbnb\src\main\java\com\azuiev\dao\DaoUser.java
-C:\need\GoJava\trunk\GoJava6\azuiev\airbnb\src\main\java\com\azuiev\filter\Filter.java
-C:\need\GoJava\trunk\GoJava6\azuiev\airbnb\src\main\java\com\azuiev\AirBnB.java
-C:\need\GoJava\trunk\GoJava6\azuiev\airbnb\src\main\java\com\azuiev\model\User.java
-C:\need\GoJava\trunk\GoJava6\azuiev\airbnb\src\main\java\com\azuiev\db\AirbnbDB.java
-C:\need\GoJava\trunk\GoJava6\azuiev\airbnb\src\main\java\com\azuiev\db\GenerateDB.java
-C:\need\GoJava\trunk\GoJava6\azuiev\airbnb\src\main\java\com\azuiev\model\Apartment.java
-C:\need\GoJava\trunk\GoJava6\azuiev\airbnb\src\main\java\com\azuiev\model\City.java
-C:\need\GoJava\trunk\GoJava6\azuiev\airbnb\src\main\java\com\azuiev\model\Reservation.java
-C:\need\GoJava\trunk\GoJava6\azuiev\airbnb\src\main\java\com\azuiev\servlet\RegistrationServlet.java
+C:\Documents and Settings\Administrator\goit\trunk\GoJava6\azuiev\airbnb\src\main\java\com\azuiev\dao\DaoUser.java
+C:\Documents and Settings\Administrator\goit\trunk\GoJava6\azuiev\airbnb\src\main\java\com\azuiev\interface\Observer.java
+C:\Documents and Settings\Administrator\goit\trunk\GoJava6\azuiev\airbnb\src\main\java\com\azuiev\servlet\RegistrationServlet.java
+C:\Documents and Settings\Administrator\goit\trunk\GoJava6\azuiev\airbnb\src\main\java\com\azuiev\AirBnB.java
+C:\Documents and Settings\Administrator\goit\trunk\GoJava6\azuiev\airbnb\src\main\java\com\azuiev\service\UserService.java
+C:\Documents and Settings\Administrator\goit\trunk\GoJava6\azuiev\airbnb\src\main\java\com\azuiev\db\AirbnbDB.java
+C:\Documents and Settings\Administrator\goit\trunk\GoJava6\azuiev\airbnb\src\main\java\com\azuiev\interface\Subject.java
+C:\Documents and Settings\Administrator\goit\trunk\GoJava6\azuiev\airbnb\src\main\java\com\azuiev\filter\FilterByCity.java
+C:\Documents and Settings\Administrator\goit\trunk\GoJava6\azuiev\airbnb\src\main\java\com\azuiev\servlet\SearchServlet.java
+C:\Documents and Settings\Administrator\goit\trunk\GoJava6\azuiev\airbnb\src\main\java\com\azuiev\filter\Filter.java
+C:\Documents and Settings\Administrator\goit\trunk\GoJava6\azuiev\airbnb\src\main\java\com\azuiev\model\City.java
+C:\Documents and Settings\Administrator\goit\trunk\GoJava6\azuiev\airbnb\src\main\java\com\azuiev\enums\UserRoles.java
+C:\Documents and Settings\Administrator\goit\trunk\GoJava6\azuiev\airbnb\src\main\java\com\azuiev\dao\DaoDB.java
+C:\Documents and Settings\Administrator\goit\trunk\GoJava6\azuiev\airbnb\src\main\java\com\azuiev\model\User.java
+C:\Documents and Settings\Administrator\goit\trunk\GoJava6\azuiev\airbnb\src\main\java\com\azuiev\dao\DaoCity.java
+C:\Documents and Settings\Administrator\goit\trunk\GoJava6\azuiev\airbnb\src\main\java\com\azuiev\dao\DaoModel.java
+C:\Documents and Settings\Administrator\goit\trunk\GoJava6\azuiev\airbnb\src\main\java\com\azuiev\db\GenerateDB.java
+C:\Documents and Settings\Administrator\goit\trunk\GoJava6\azuiev\airbnb\src\main\java\com\azuiev\model\Organization.java
+C:\Documents and Settings\Administrator\goit\trunk\GoJava6\azuiev\airbnb\src\main\java\com\azuiev\filter\FilterByPeriod.java
+C:\Documents and Settings\Administrator\goit\trunk\GoJava6\azuiev\airbnb\src\main\java\com\azuiev\model\Apartment.java
+C:\Documents and Settings\Administrator\goit\trunk\GoJava6\azuiev\airbnb\src\main\java\com\azuiev\model\Reservation.java
+C:\Documents and Settings\Administrator\goit\trunk\GoJava6\azuiev\airbnb\src\main\java\com\azuiev\Validator.java
+C:\Documents and Settings\Administrator\goit\trunk\GoJava6\azuiev\airbnb\src\main\java\com\azuiev\service\CityService.java
+C:\Documents and Settings\Administrator\goit\trunk\GoJava6\azuiev\airbnb\src\main\java\com\azuiev\filter\FilterByApartType.java
+C:\Documents and Settings\Administrator\goit\trunk\GoJava6\azuiev\airbnb\src\main\java\com\azuiev\enums\ApartType.java
