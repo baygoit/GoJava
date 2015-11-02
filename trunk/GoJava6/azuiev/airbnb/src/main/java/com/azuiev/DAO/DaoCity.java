@@ -2,8 +2,6 @@ package com.azuiev.dao;
 
 import com.azuiev.db.AirbnbDB;
 import com.azuiev.model.City;
-import com.azuiev.model.User;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
