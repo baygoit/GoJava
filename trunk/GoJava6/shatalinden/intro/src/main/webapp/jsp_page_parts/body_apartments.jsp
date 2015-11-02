@@ -1,24 +1,21 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<c:import url='jsp_page_parts/header.jsp' />
-
-<c:import url='jsp_page_parts/search_apartment.jsp' />
-
 <section class="listings">
     <div class="wrapper">
         <ul class="properties_list">
-            <c:forEach var='iterUser' items='${usersList}'>
+            <c:forEach var='apartment' items='${apartmentsList}' varStatus='iterator' >
+                <c:set var='picture' value='img/property_1.jpg' />
                 <li>
                     <a href="#">
-                        <img src="../img/user.jpg" alt="" title="" class="property_img"/>
+                        <img src=${picture} alt="" title="" class="property_img"/>
                     </a>
-                    <span class="price">${iterUser.name}</span>
+                    <span class="price">${apartment.price}$</span>
                     <div class="property_details">
                         <h1>
-                            <a>E-mail: ${iterUser.email}<br>This user is a: ${iterUser.type}</a>
+                            <a href="#">${apartment.shortDescription}</a>
                         </h1>
-                        <h2>ID: ${iterUser.userID}<span class="property_size"> Password: ${iterUser.password}</span></h2>
+                        <h2>Type: ${apartment.type} <span class="property_size"> City: ${apartment.city}</span></h2>
                     </div>
                 </li>
             </c:forEach>
@@ -27,6 +24,4 @@
             <a href="#" class="more_listing_btn">View More Listings</a>
         </div>
     </div>
-</section>
-
-<c:import url='jsp_page_parts/footer.jsp' />
+</section>	<!--  end listing section  -->
