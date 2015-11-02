@@ -22,7 +22,7 @@ public class MainController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         String path = req.getServletPath();
-        HttpSession session = req.getSession();
+        HttpSession session = req.getSession(false);
 
         if (path.equals("/")) {
             path = "/home";
@@ -38,7 +38,7 @@ public class MainController extends HttpServlet {
         //TODO test post
 
         String path = req.getServletPath();
-        HttpSession session = req.getSession();
+        HttpSession session = req.getSession(false);
 
         if (path.equals("/login")) {
             String login = (String) req.getParameter("login");
