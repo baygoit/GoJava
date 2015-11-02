@@ -3,10 +3,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.HashMap;
 
-
-public class divide {
-
-    public static void main(String[] args) throws IOException {
+public class Divide {
+	public static void main(String[] args) throws IOException {
 
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         int dividend, divisor, temp;
@@ -60,4 +58,3 @@ public class divide {
     }
 
 }
-

@@ -1,4 +1,4 @@
-package com.azuiev.Service;
+package com.azuiev.service;
 
 import com.azuiev.dao.DaoCity;
 import com.azuiev.model.City;
@@ -31,4 +31,6 @@ public class CityService {
         }
         return city;
     }
+
+
 }

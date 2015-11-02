@@ -3,7 +3,10 @@ package com.azuiev.servlet;
 import com.azuiev.dao.DaoCity;
 import com.azuiev.dao.DaoDB;
 import com.azuiev.db.AirbnbDB;
+import com.azuiev.model.Apartment;
 import com.azuiev.model.City;
+import com.azuiev.service.ApartmentService;
+import com.azuiev.service.CityService;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
@@ -22,19 +25,25 @@ public class SearchServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        DaoDB db = new AirbnbDB();
-        DaoCity daoCity = new DaoCity(db.getConnection());
-        List<City> city = null;
-        try {
-            city = (List<City>) daoCity.getAll();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        Integer cityId = (Integer) req.getAttribute("cityid");
+        {
 
-        req.setAttribute("City", city);
-        ServletContext context = req.getSession().getServletContext();
-       // ServletContext context = getServletContext();
-        req.getRequestDispatcher(context.getInitParameter("path")+"Search.jsp").forward(req,resp);
+            DaoDB db = new AirbnbDB();
+            CityService cityService = new CityService();
+            List<City> city = null;
+            city = cityService.getAll();
+
+            req.setAttribute("city", city);
+            if (req.getAttribute("cityid")!=null){
+                ApartmentService apartmentService = new ApartmentService();
+                List<Apartment> apartment = null;
+                apartment = ApartmentService.getByCity();
+
+            }
+            ServletContext context = req.getSession().getServletContext();
+            // ServletContext context = getServletContext();
+            req.getRequestDispatcher(context.getInitParameter("path") + "search.jsp").forward(req, resp);
+         }
 
     }
 }

@@ -6,7 +6,7 @@
 
     <context-param>
         <param-name>path</param-name>
-        <param-value>/WEB-INF/</param-value>
+        <param-value>/WEB-INF/view/</param-value>
     </context-param>
 
     <servlet>
@@ -26,4 +26,14 @@
         <servlet-name>SearchServlet</servlet-name>
         <url-pattern>/search</url-pattern>
     </servlet-mapping>
+<!--
+    <jsp-config>
+        <jsp-property-group>
+            <url-pattern>/</url-pattern>
+            <url-pattern>/WEB-INF/view/*</url-pattern>
+            <include-prelude>/WEB-INF/include/header.jsp</include-prelude>
+            <include-coda>/WEB-INF/jspf/footer.jspf</include-coda>
+        </jsp-property-group>
+    </jsp-config>
+    -->
 </web-app>

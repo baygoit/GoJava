@@ -1,9 +1,9 @@
 package com.gojava6.airbnb.validator;
 
 import com.gojava6.airbnb.user.User;
-import com.gojava6.airbnb.user.UserType;
 import org.junit.Before;
 import org.junit.Test;
+
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -12,10 +12,10 @@ public class ValidatorTest {
 
     @Before
     public void setUp() {
-        user = new User("Denis", "Shatalin", "shatalinden@gmail.com", UserType.CLIENT);
-        user1 = new User("Kolya15,42", "Shatalin", "shatalinden@gmail.com", UserType.CLIENT);
-        user2 = new User("Denis", "Shatalin152", "shatalinden@gmail.com", UserType.CLIENT);
-        user3 = new User("Denis", "Shatalin", "shatalindengmail.com", UserType.CLIENT);
+        user = new User("Denis", "Shatalin", "shatalinden@gmail.com", 0, 0, "password");
+        user1 = new User("Kolya15,42", "Shatalin", "shatalinden@gmail.com",  0, 0, "password1");
+        user2 = new User("Denis", "Shatalin152", "shatalinden@gmail.com",  0, 0, "password2");
+        user3 = new User("Denis", "Shatalin", "shatalindengmail.com",  0, 0, "password3");
 
     }
 

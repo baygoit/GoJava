@@ -46,7 +46,7 @@ public class Apartment implements Comparable<Apartment> {
         return null;
     }
 
-    private Apartment(User owner, String city, String address, ApartType apartType) {
+    public Apartment(User owner, String city, String address, ApartType apartType) {
         this.owner = owner;
         this.city = city;
         this.address = address;

@@ -7,12 +7,12 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class userDao  {
+public class UserDao {
 
     public static List<User> pullAllUsers() {
         List<User> users = new ArrayList<>();
         String query = "select * from users";
-        try (Connection connection = dbDao.initConnection()){
+        try (Connection connection = DbDao.initConnection()){
             Statement st = connection.createStatement();
             ResultSet resultSet = st.executeQuery(query);
             while (resultSet.next()) {
@@ -26,9 +26,24 @@ public class userDao  {
 
     public static User pullUserByID(int id) {
         User user = null;
-        try (Connection connection = dbDao.initConnection()) {
+        try (Connection connection = DbDao.initConnection()) {
             PreparedStatement ps = connection.prepareStatement("SELECT * FROM users WHERE id = ?");
             ps.setInt(1, id);
+            ResultSet resultSet = ps.executeQuery();
+            if(resultSet.next()) {
+                user = createUser(resultSet);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return user;
+    }
+
+    public static User pullUserByEmail(String email) {
+        User user = null;
+        try (Connection connection = DbDao.initConnection()) {
+            PreparedStatement ps = connection.prepareStatement("SELECT * FROM users WHERE email = ?");
+            ps.setString(1, email);
             ResultSet resultSet = ps.executeQuery();
             if(resultSet.next()) {
                 user = createUser(resultSet);
@@ -45,9 +60,10 @@ public class userDao  {
             String name = resultSet.getString("name");
             String surname = resultSet.getString("surname");
             String email = resultSet.getString("email");
+            String password = resultSet.getString("password");
             int userType = resultSet.getInt("usertype");
             int id = resultSet.getInt("id");
-            user = new User(name, surname, email, userType, id);
+            user = new User(name, surname, email, userType, id, password);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -55,27 +71,14 @@ public class userDao  {
     }
 
     public static void pushUser(User user) {
-        try (Connection connection = dbDao.initConnection()) {
-            PreparedStatement ps = connection.prepareStatement("INSERT INTO users VALUES(?,?,?,?,?)");
+        try (Connection connection = DbDao.initConnection()) {
+            PreparedStatement ps = connection.prepareStatement("INSERT INTO users VALUES(?,?,?,?,?,?)");
             ps.setInt(1, user.getUserID());
             ps.setString(2, user.getName());
             ps.setString(3, user.getSurname());
             ps.setString(4, user.getEmail());
             ps.setBoolean(5, user.getBooleanUserType());
-            ps.executeUpdate();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static void pushUser(String name, String surname, String email) {
-        try (Connection connection = dbDao.initConnection()) {
-            PreparedStatement ps = connection.prepareStatement("INSERT INTO users VALUES(?,?,?,?,?)");
-            ps.setInt(1, 0);
-            ps.setString(2, name);
-            ps.setString(3, surname);
-            ps.setString(4, email);
-            ps.setBoolean(5, false);
+            ps.setString(6, user.getPassword());
             ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
@@ -83,7 +86,7 @@ public class userDao  {
     }
 
     public static void updateUser(int id, Boolean userType) {
-        try (Connection connection = dbDao.initConnection()) {
+        try (Connection connection = DbDao.initConnection()) {
             PreparedStatement ps = connection.prepareStatement("UPDATE users SET usertype=? WHERE id=?");
             ps.setBoolean(1, userType);
             ps.setInt(2, id);
@@ -94,7 +97,7 @@ public class userDao  {
     }
 
     public static void deleteUser(int id) {
-        try (Connection connection = dbDao.initConnection()) {
+        try (Connection connection = DbDao.initConnection()) {
             PreparedStatement ps = connection.prepareStatement("DELETE FROM users WHERE id=?");
             ps.setInt(1, id);
             ps.executeUpdate();

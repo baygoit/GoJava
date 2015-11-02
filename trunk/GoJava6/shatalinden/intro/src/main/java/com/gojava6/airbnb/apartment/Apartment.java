@@ -22,6 +22,15 @@ public class Apartment {
 
     public List<ReservationDates> reservationDates = new ArrayList<>();
 
+    public Apartment(int id, String city, String type, int userid, int price, String shortDescription) {
+        this.apartmentID = id;
+        this.city = city;
+        setType(type);
+        this.userID = userid;
+        this.price = price;
+        this.shortDescription = shortDescription;
+    }
+
     public Apartment(String type, String city, int id, int userid) {
         this.city = city;
         this.apartmentID = id;

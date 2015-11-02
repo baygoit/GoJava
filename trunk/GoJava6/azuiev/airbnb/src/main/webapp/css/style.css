@@ -1,0 +1,26 @@
+.headtab1 {
+font:24px verdana, arial, helvetica, sans-serif; /* шрифт, размер шрифта */
+color : red; /* цвет шрифта */
+font-weight:900; /* насыщенность шрифта */
+background-color: light-blue;
+}
+
+.headtab2 {
+font:24px verdana, arial, helvetica, sans-serif; /* шрифт, размер шрифта */
+color : red; /* цвет шрифта */
+font-weight:900; /* насыщенность шрифта */
+background-color: light-blue;
+}
+
+h1 {
+font: 36px ravie, arial, helvetica, sans-serif;
+color : #999999;
+font-weight:100;
+padding-left : 6px;
+
+}
+
+body{
+background-color: #FFECDE;
+
+}
