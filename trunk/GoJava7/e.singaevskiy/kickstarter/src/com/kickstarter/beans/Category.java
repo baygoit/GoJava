@@ -25,5 +25,14 @@ public class Category {
 	public String toString() {
 		return "Category [name=" + name + "]";
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (obj == null || obj instanceof Category) {
+			Category category  = (Category)obj;
+			return category.getName().equals(name);
+		}
+		return false;
+	}
 
 }

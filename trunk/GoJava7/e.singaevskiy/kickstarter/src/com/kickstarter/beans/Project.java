@@ -1,5 +1,6 @@
 package com.kickstarter.beans;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -10,13 +11,13 @@ public class Project {
 	private Long balanceSum;
 	private Date startDate;
 	private Date endDate;
-	private List<Category> categories;
+	private List<Category> categories = new ArrayList<>();
 	private String description;
 	private String videoUrl;
 	private List<User> backers;
 	private List<Reward> rewards;
 	private User author;
-
+	
 	public String getName() {
 		return name;
 	}
@@ -64,6 +65,10 @@ public class Project {
 	public void setCategories(List<Category> categories) {
 		this.categories = categories;
 	}
+	
+	public void addCategory(Category category) {
+		this.categories.add(category);
+	}
 
 	public String getDescription() {
 		return description;
@@ -107,7 +112,7 @@ public class Project {
 
 	@Override
 	public String toString() {
-		return "Project [name=" + name + "]";
+		return "Project \"" + name + "\" by " + author;
 	}
 
 }
