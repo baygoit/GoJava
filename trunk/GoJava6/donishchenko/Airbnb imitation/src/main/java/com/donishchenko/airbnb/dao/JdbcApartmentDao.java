@@ -23,7 +23,7 @@ public class JdbcApartmentDao implements ApartmentDao {
             "SELECT * FROM apartment";
 
     private static final String updateApartmentQuery =
-            "UPDATE apartment SET host = ?, city = ?, type = ?, active = ? WHERE id = ?";
+            "UPDATE apartment SET userId = ?, city = ?, type = ?, active = ? WHERE id = ?";
 
     @Override
     public int save(Apartment apartment) throws SQLException {
@@ -115,7 +115,7 @@ public class JdbcApartmentDao implements ApartmentDao {
             PreparedStatement stat = conn.prepareStatement(query);
 
             int i = 1;
-            for (String value : queryBuilder.values()) {
+            for (Object value : queryBuilder.values()) {
                 stat.setObject(i, value);
             }
 

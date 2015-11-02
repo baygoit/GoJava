@@ -77,6 +77,22 @@ public class User implements Observer {
     }
 
     @Override
+    public boolean equals(Object obj) {
+        if (obj == this) return true;
+        if (obj == null) return false;
+
+        if (!(obj instanceof User)) return false;
+
+        User other = (User) obj;
+
+        return id == other.id &&
+                name.equals(other.name) &&
+                surname.equals(other.surname) &&
+                email.equals(other.email) &&
+                isHost == other.isHost;
+    }
+
+    @Override
     public String toString() {
         return Joiner.on("").join(
                 "User{id='", id, "', name='", name, "', surname='", surname, "', email='", email,

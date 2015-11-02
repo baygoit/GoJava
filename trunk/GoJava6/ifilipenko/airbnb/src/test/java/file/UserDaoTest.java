@@ -23,7 +23,7 @@ public class UserDaoTest {
         FileAccess stubFileAccess = mock(FileAccess.class);
         when(stubFileAccess.readAllLines()).thenReturn(
                 new ArrayList<>(Arrays.asList(
-                        "2 | Inna | Filipenko | FEMALE | 01/02/2015 | br@gmail.com | NEW_YORK",
+                        "2 | Inna | Filipenko | FEMALE | 01/02/2015 | if@gmail.com | NEW_YORK",
                         "3 | Bob | Marley | MALE | 30/03/2015 | br@gmail.com | NEW_YORK",
                         "4 | John | Smith | MALE | 01/12/2015 | br@gmail.com | NEW_YORK"
                 ))
@@ -31,6 +31,38 @@ public class UserDaoTest {
         return stubFileAccess;
     }
 
+    @Test
+    public void serialize_Success() throws IOException, ParseException {
+        //-------------------------------------
+        FileAccess fileAccessStub = getFileAccessStub();
+        UserFileDao userDao = new UserFileDao(fileAccessStub);
+        User user = userDao.read("10 | Inna | Filipenko | FEMALE | 01/02/2015 | if@gmail.com | NEW_YORK");
+
+        //-------------------------------------
+        String actual = userDao.serialize(user);
+
+        //-------------------------------------
+        Assert.assertEquals("10 | Inna | Filipenko | FEMALE | 01/02/2015 | if@gmail.com | NEW_YORK", actual);
+    }
+
+
+    @Test
+    public void create_Success() throws ParseException, IOException {
+        //-------------------------------------
+        FileAccess fileAccessStub = getFileAccessStub();
+        UserFileDao userDao = new UserFileDao(fileAccessStub);
+        User user = userDao.read("10 | Inna | Filipenko | FEMALE | 01/02/2015 | br@gmail.com | NEW_YORK");
+
+        //-------------------------------------
+        userDao.create(user);
+
+        //-------------------------------------
+        verify(fileAccessStub).writeAllLines(
+                "2 | Inna | Filipenko | FEMALE | 01/02/2015 | if@gmail.com | NEW_YORK\n" +
+                        "3 | Bob | Marley | MALE | 30/03/2015 | br@gmail.com | NEW_YORK\n" +
+                        "4 | John | Smith | MALE | 01/12/2015 | br@gmail.com | NEW_YORK\n" +
+                        "10 | Inna | Filipenko | FEMALE | 01/02/2015 | br@gmail.com | NEW_YORK");
+    }
 
     @Test
     public void readAll_Success() throws IOException {
@@ -48,15 +80,15 @@ public class UserDaoTest {
 
     @Test
     public void read_Success() throws ParseException, IOException {
-        //
+        //-------------------------------------
         String data = "2 | Inna | Filipenko | FEMALE | 01/02/2015 | br@gmail.com | NEW_YORK";
         UserFileDao userDao = new UserFileDao(null);
 
-        //
+        //-------------------------------------
         User user = userDao.read(data);
 
-        //
-        Assert.assertEquals(2, user.getExternalCode());
+        //-------------------------------------
+        Assert.assertEquals(2, user.getId());
         Assert.assertEquals("Inna", user.getName());
         Assert.assertEquals("Filipenko", user.getLastName());
         Assert.assertEquals(GenderType.FEMALE, user.getGender());
@@ -67,48 +99,27 @@ public class UserDaoTest {
 
     @Test
     public void readByCode_Success() throws IOException {
-        //
-        UserFileDao userDao = new UserFileDao(getFileAccessStub());
+        //-------------------------------------
+       // UserFileDao userDao = new UserFileDao(getFileAccessStub());
 
-        //
+        //-------------------------------------
         User user = new UserFileDao(getFileAccessStub()).readByCode(2);
 
-        //
-        Assert.assertEquals(2, user.getExternalCode());
-    }
-
-
-    @Test
-    public void create_Success() throws ParseException, IOException {
-        //
-        FileAccess fileAccessStub = getFileAccessStub();
-        UserFileDao userDao = new UserFileDao(fileAccessStub);
-        User user = userDao.read("10 | Inna | Filipenko | FEMALE | 01/02/2015 | br@gmail.com | NEW_YORK");
-
-        //
-        userDao.create(user);
-
-        //
-        verify(fileAccessStub).save(
-                "2 | Inna | Filipenko | FEMALE | 01/02/2015 | br@gmail.com | NEW_YORK\n" +
-                "3 | Bob | Marley | MALE | 30/03/2015 | br@gmail.com | NEW_YORK\n" +
-                "4 | John | Smith | MALE | 01/12/2015 | br@gmail.com | NEW_YORK\n" +
-                "10 | Inna | Filipenko | FEMALE | 01/02/2015 | br@gmail.com | NEW_YORK");
+        //-------------------------------------
+        Assert.assertEquals(2, user.getId());
     }
 
     @Test
-    public void serialize_Success() throws IOException, ParseException {
-        //
-        FileAccess fileAccessStub = getFileAccessStub();
-        UserFileDao userDao = new UserFileDao(fileAccessStub);
-        User user = userDao.read("10 | Inna | Filipenko | FEMALE | 01/02/2015 | br@gmail.com | NEW_YORK");
+    public void readByEmail_Success() throws IOException {
+        //-------------------------------------
+        UserFileDao userDao = new UserFileDao(getFileAccessStub());
 
-        //
-        String actual = userDao.serialize(user);
+        //-------------------------------------
+        User user = userDao.readByEmail("IF@gmail.com");
 
-        //
-        Assert.assertEquals("10 | Inna | Filipenko | FEMALE | 01/02/2015 | br@gmail.com | NEW_YORK", actual);
+        //-------------------------------------
+        Assert.assertEquals("if@gmail.com", user.getEmail());
+
     }
-
 
 }

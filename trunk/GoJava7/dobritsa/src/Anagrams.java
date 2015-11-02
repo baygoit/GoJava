@@ -1,6 +1,4 @@
-
 import java.util.Scanner;
-
 
 public class Anagrams{	
 
@@ -9,30 +7,32 @@ public class Anagrams{
 		System.out.println("Anagram: " + anagram(typedText));
 		System.out.println("");
 		
-		String myText = "to be or not to be";
+		String myText = "Hi, my name is Jim";
 		System.out.println("Original text: " + myText);	
 		System.out.println("Anagram: " + anagram(myText));		
 	}
 	
 	public static String anagram(String text) {
-		String[] textArray = text.split(" ");
+		if (text.equals(" ") | text.equals("") | text.equals(null)) return text;			
+		String[] textArray = text.split(" ");	
 		for (int i = 0; i < textArray.length; i++) {
 			textArray[i] = reverseWord(textArray[i]);		
 		}		
 		String anagram = "";
 		for(int i = 0; i < textArray.length; i++) {
 			anagram += " " + textArray[i].toString();
-		}
-		return anagram;		
+		}	
+		return anagram.trim();		
 	}
 	
-	public static String reverseWord(String word) {
+	public static String reverseWord(String word) {	
 		 if (word.length() <= 1) return word;	
 		 char[] wordChar=word.toCharArray();		 
 		 char reverseWordChar[] = new char[wordChar.length];		
-		 for (int i = 0, y = wordChar.length - 1; i < wordChar.length; i++) {			 
+		 int end = wordChar.length -1;			
+		 for (int i = 0, y = end; i <= end; i++) {				 
 			 reverseWordChar[i] = wordChar[y--];	
-		 }	
+		 }			
 		 return new String(reverseWordChar);	
 	}
 	
@@ -40,10 +40,8 @@ public class Anagrams{
 		Scanner sc = new Scanner(System.in);		
 		System.out.print("Type the text: ");
 		String text = sc.nextLine();
-		sc.close();
-		if (text.isEmpty()) {
-			System.out.println("You typed incorrect data");
-		}		
+		sc.close();		
 		return text;
 	}
+	
 }

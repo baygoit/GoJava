@@ -1,4 +1,3 @@
-
 import java.util.*;
 
 public class Distance{
@@ -91,5 +90,5 @@ public class Distance{
 		}						
 		return distances;	
 	}
-	
+
 }

@@ -14,6 +14,7 @@ public class ReservationDate {
     private int apartamentId;
     private SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 
+    public ReservationDate(){}
 
     public ReservationDate(long dateBegin, long dateEnd, int apartamentId) {
         this.dateBegin = dateBegin;
@@ -37,7 +38,7 @@ public class ReservationDate {
         this.dateEnd = dateEnd;
     }
 
-    public int getReservationDateId() {
+    public int getReservationDateId(int idreservationdates) {
         return reservationDateId;
     }
 

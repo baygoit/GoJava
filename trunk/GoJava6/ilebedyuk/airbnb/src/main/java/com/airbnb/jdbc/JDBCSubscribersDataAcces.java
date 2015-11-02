@@ -44,7 +44,7 @@ public class JDBCSubscribersDataAcces extends AbstractBaseDao implements ISubscr
     @Override
     public void addToDb(Observer observer) {
         User user = (User) observer;
-        sqlCode = "insert into user values(" + user.getUserId() + ");";
+        sqlCode = "insert into observer values(" + user.getUserId() + ");";
         updateData(sqlCode);
         System.out.println("User is added to DB");
     }

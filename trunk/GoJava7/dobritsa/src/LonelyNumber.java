@@ -1,9 +1,8 @@
 
+
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-
-
 
 public class LonelyNumber{
 
@@ -17,7 +16,7 @@ public class LonelyNumber{
 		List<Integer> myArray3 = Arrays.asList(3, 2, 4, 3, 2, 2, 3, 4, 4, 8);
 		System.out.println("The lonely integer number in array " + myArray3.toString() + " = " +myFindLonely(myArray3));
 	
-		List<Integer> myArray4 = Arrays.asList(3, 2, 4, 3, 2, 2, 3, 4, 4);
+		List<Integer> myArray4 = Arrays.asList(1, 1, 2, 2, 3, 3, 4, 4, 5, 5);
 		System.out.println("The lonely integer number in array " + myArray4.toString() + " = " +myFindLonely(myArray4));
 	
 	}
@@ -36,7 +35,8 @@ public class LonelyNumber{
 			if (!array.get(array.size()-2).equals(array.get(array.size()-1))) {
 				return array.get(array.size()-1);
 			}
-			System.out.println("The array does not correspond to the task");
+			System.out.println("The array " + array + " does not correspond to the task");
+			
 			System.exit(0);		
 		}	
 		return null;
