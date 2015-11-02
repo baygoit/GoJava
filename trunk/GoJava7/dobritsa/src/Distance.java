@@ -1,7 +1,9 @@
-
+package go.it.dobritsa;
 import java.util.*;
 
-public class Distance{
+import go.it.main.MinDistanse;
+
+public class Distance extends MinDistanse{
 	
 	public static void main(String[] args) {
 		List<Integer> typedNumber = typeNumbers();
@@ -91,5 +93,11 @@ public class Distance{
 		}						
 		return distances;	
 	}
-	
+
+	@Override
+	public Map<String, Integer> calculateDistances(List<Integer> array) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

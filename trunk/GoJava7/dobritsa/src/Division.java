@@ -1,5 +1,8 @@
+//it will be modify in nearest future
 
-public class Division{
+package go.it.dobritsa;
+
+public class Division extends go.it.main.Division {
 	static String visualization = "";
 
 	public static void main(String[] args) {
@@ -14,16 +17,20 @@ public class Division{
 		String myExample3 = "85/63";
 		myDivide(myExample3);	
 		System.out.println(visualization);	
+		
+		String myExample4 = "85/0";
+		myDivide(myExample4);	
+		System.out.println(visualization);	
 	}
 	
-	public static String myDivide(String exampleStr) {
+	public static float myDivide(String exampleStr) {
 		String[] exampleArr = exampleStr.split("/");				
 		int dividentInteger = Integer.valueOf(exampleArr[0]);
 		int divisorInteger = Integer.valueOf(exampleArr[1]);
 		return myDivide(dividentInteger, divisorInteger);
 	}	
 	
-	public static String myDivide(int divident, int divisor) {
+	public static float myDivide(int divident, int divisor) {		
 		visualization = "";	
 		String indent = "";			
 		int dividentInteger = divident;
@@ -31,7 +38,12 @@ public class Division{
 		Float result = (float)dividentInteger/(float)divisorInteger;				
 		char[] resultListChar = result.toString().toCharArray();	
 		int line1 = dividentInteger;	
-		int line2 = divisorInteger*Character.getNumericValue(resultListChar[2]);		
+		int line2 = divisorInteger*Character.getNumericValue(resultListChar[2]);	
+		
+		if (divisor == 0) {			
+			visualization = indent + "  " + dividentInteger + " |" + divisorInteger + "\n" + "Division by zero";			
+			return 0;
+		}
 		
 		//printFirstLine		
 		visualization += indent + "  " + dividentInteger + " |" + divisorInteger + "\n";
@@ -42,9 +54,8 @@ public class Division{
 			indent += " ";			
 			visualization += indent + "-" + line2 + " |" + result + "\n" + indent + " " + "---" + "\n";
 		} else {			
-			visualization += "The divident must be less than the divisor for this task";
-			System.out.println(visualization);
-			System.exit(0);
+			visualization += "The divident must be less than the divisor for this task";		
+			return 0;
 		}
 
 		//printOthersLines
@@ -65,7 +76,13 @@ public class Division{
 		
 		//printLastLine
 		line1 = (line1 - line2);	
-		visualization += indent + " " + line1  + "\n";
-		return visualization;
-	}		
+		visualization += indent + " " + line1  + "\n";	
+		return result;
+	}	
+	
+	@Override
+	public float divide(int divident, int divisor) {		
+		return myDivide(divident, divisor);
+	}
+
 }
