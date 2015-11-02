@@ -3,6 +3,7 @@ package com.donishchenko.airbnb.controller;
 import com.donishchenko.airbnb.dao.JdbcUserDao;
 import com.donishchenko.airbnb.dao.UserDao;
 import com.donishchenko.airbnb.model.User;
+import com.donishchenko.airbnb.services.RegistrationService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -10,10 +11,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class MainController extends HttpServlet {
 
     private UserDao userDao = new JdbcUserDao();
+    private RegistrationService regService = new RegistrationService();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -48,16 +51,39 @@ public class MainController extends HttpServlet {
             String login = (String) req.getParameter("login");
             String surname = (String) req.getParameter("surname");
             String email = (String) req.getParameter("email");
+
             User user = (User) session.getAttribute("user");
             user.setName(login);
             user.setSurname(surname);
             user.setEmail(email);
 
+            try {
+                userDao.update(user.getId(), user);
+            } catch (SQLException e) {
+                //TODO handle exception
+                e.printStackTrace();
+            }
+
             resp.sendRedirect("/");
+        } else if (path.equals("/registration")) {
+            String login = req.getParameter("login");
+            String surname = req.getParameter("surname");
+            String email = req.getParameter("email");
+            String password = req.getParameter("password");
+
+            User user = new User(login, surname, email);
+            if (user.validate()) {
+                try {
+                    int userId = userDao.save(user);
+                    user.setId(userId);
+
+                    session.setAttribute("user", user);
+
+                    resp.sendRedirect("/");
+                } catch (SQLException ex) {
+                    //TODO handle exception
+                }
+            }
         }
-
-//        String url = "/WEB-INF/views" + path + ".jsp";
-
-//        req.getRequestDispatcher(url).forward(req, resp);
     }
 }
