@@ -22,7 +22,7 @@
 <br>
 
 <table width="100%" border="0">
-        <caption><h1>List cities<h1></caption>
+        <caption><h1>List apartment<h1></caption>
         <tr>
         <c:forEach var="name" items="${apartment}">
             <th class="headtab2">

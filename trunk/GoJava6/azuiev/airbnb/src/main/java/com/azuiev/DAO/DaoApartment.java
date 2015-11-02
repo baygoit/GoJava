@@ -62,6 +62,22 @@ public class DaoApartment implements DaoModel{
 
     }
 
+    public List<Apartment> getByCity(Integer id) throws SQLException {
+        String sql = "select * from apartment where cityid = ?;";
+        PreparedStatement stmt = connection.prepareStatement(sql);
+        stmt.setInt(1, id);
+
+        ResultSet rs = stmt.executeQuery();
+
+        ArrayList<Apartment> list = null;
+
+        while (rs.next()){
+            list.add(new Apartment((User)rs.getObject(1),rs.getString(2),rs.getString(3), ApartType.values()[1]));
+        }
+
+        return list;
+    }
+
     @Override
     public void update(Object obj) {
         //TODO
@@ -76,5 +92,4 @@ public class DaoApartment implements DaoModel{
     public void delete(Object obj) {
         //TODO
     }
-
 }
