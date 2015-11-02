@@ -10,10 +10,6 @@ public class Anagrams{
 		String myText = "Hi, my name is Jim";
 		System.out.println("Original text: " + myText);	
 		System.out.println("Anagram: " + anagram(myText));		
-		
-		String myText2 = "This is words";
-		System.out.println("Original text: " + myText2);	
-		System.out.println("Anagram: " + anagram(myText2));	
 	}
 	
 	public static String anagram(String text) {
