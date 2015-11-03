@@ -5,8 +5,9 @@ import java.util.Scanner;
 
 /**
  * MergeSort.java
+ * 
  * @author Anton Smirnov
- * @version 22.10.2015
+ * @version 03.11.2015
  * @java 7
  * @category homework1
  *
@@ -16,96 +17,84 @@ public class MergeSort {
 	public static void main(String[] args) {
 
 		// Testing
-		new MergeSort().printInputNumbersAndSortedNumbers(setUpUserInputData());
+		new MergeSort().startProgram();
 	}
 
-	// Method sorts input array and returns new sorted one
-	public int[] sortMerge(int[] array) {
+	public void startProgram() {
+		int[] userNumbers = setupUserNumbers();
+		printInsertedNumbers(userNumbers);
+		printSortedNumbers(userNumbers);
+	}
 
-		// Checking the input array's capacity
-		if (array.length < 2) {
-			return array;
+	// Setup input data by User
+	private int[] setupUserNumbers() {
+		String instruction = "Please insert integer numbers " + "(not more than 20 numbers) separated by spaces: ";
+		System.out.println(instruction);
+
+		while (true) {
+			try {
+				Scanner in = new Scanner(System.in);
+				String tempText = in.nextLine();
+				String[] inputUserText = tempText.split(" ");
+				int[] userNumbers = new int[inputUserText.length];
+
+				for (int barrier = 0; barrier < inputUserText.length; barrier++) {
+					userNumbers[barrier] = Integer.parseInt(inputUserText[barrier]);
+				}
+
+				if (userNumbers.length > 20) {
+					throw new Exception();
+				} else {
+					return userNumbers;
+				}
+			} catch (Exception e) {
+				System.out.println(
+						"User inserted wrong value. " + "Please try again." + System.lineSeparator() + instruction);
+			}
 		}
-
-		// Finding the middle value of array length
-		int middleOfArrayLength = array.length / 2;
-
-		// Using adding method "merge"
-		return merge(sortMerge(Arrays.copyOfRange(array, 0, middleOfArrayLength)),
-				sortMerge(Arrays.copyOfRange(array, middleOfArrayLength, array.length)));
 	}
 
-	// Method sorts two arrays and merges its elements in one array
-	public int[] merge(int[] firstArray, int[] secondArray) {
+	// Dividing user storage of numbers on two halves and sorting its
+	private int[] sortMerge(int[] UserNumbers) {
+		if (UserNumbers.length < 2) {
+			return UserNumbers;
+		}
+		int middleOfArrayLength = UserNumbers.length / 2;
 
-		int firstIndex = 0, secondIndex = 0; // Counters loop
+		return merge(sortMerge(Arrays.copyOfRange(UserNumbers, 0, middleOfArrayLength)),
+				sortMerge(Arrays.copyOfRange(UserNumbers, middleOfArrayLength, UserNumbers.length)));
+	}
 
-		// New array for merging all elements from two input arrays
+	// Merging two sorted arrays in one general
+	private int[] merge(int[] firstArray, int[] secondArray) {
+
+		int indexOfFirstArray = 0, indexOfSecondArray = 0;
 		int[] result = new int[firstArray.length + secondArray.length];
 
-		// Scamper over new array
 		for (int barrier = 0; barrier < result.length; barrier++) {
-
-			// Checking the limit of counters loop
-			if (secondIndex < secondArray.length && firstIndex < firstArray.length) {
-
-				// Comparison elements of two input arrays
-				if (firstArray[firstIndex] > secondArray[secondIndex]) {
-
-					// Adding element to result array and increasing of second
-					// counter loop on 1
-					result[barrier] = secondArray[secondIndex++];
+			if (indexOfSecondArray < secondArray.length && indexOfFirstArray < firstArray.length) {
+				if (firstArray[indexOfFirstArray] > secondArray[indexOfSecondArray]) {
+					result[barrier] = secondArray[indexOfSecondArray++];
 				} else {
-
-					// Adding element to result array and increasing of first
-					// counter loop on 1
-					result[barrier] = firstArray[firstIndex++];
+					result[barrier] = firstArray[indexOfFirstArray++];
 				}
-			} else if (secondIndex < secondArray.length) {
-
-				// Adding element to result array and increasing of second
-				// counter loop on 1
-				result[barrier] = secondArray[secondIndex++];
+			} else if (indexOfSecondArray < secondArray.length) {
+				result[barrier] = secondArray[indexOfSecondArray++];
 			} else {
-
-				// Adding element to result array and increasing of first
-				// counter loop on 1
-				result[barrier] = firstArray[firstIndex++];
+				result[barrier] = firstArray[indexOfFirstArray++];
 			}
 		}
 		return result;
 	}
 
-	// Method allows user to set up data
-	public static int[] setUpUserInputData() {
-		String greetings = "Please insert integer numbers for array separated by spaces: ";
-		System.out.println(greetings);
-
-		// Handling of user's input data
-		while (true) {
-			try {
-				Scanner in = new Scanner(System.in);
-				String tempText = in.nextLine();
-				String[] inputUsersText = tempText.split(" ");
-				int[] storageOfUsersInputNumbers = new int[inputUsersText.length];
-
-				// Parsing every user's input numbers and adding to storage of user's input numbers
-				for (int barrier = 0; barrier < inputUsersText.length; barrier++) {
-					storageOfUsersInputNumbers[barrier] = Integer.parseInt(inputUsersText[barrier]);
-				}
-				
-				return storageOfUsersInputNumbers;
-			} catch (Exception e) {
-				System.out.println("User insert wrong value. Please, try again " 
-							+ System.lineSeparator() + greetings);
-			}
-		}
+	// Printing into console user's inserted numbers
+	private void printInsertedNumbers(int[] userNumbers) {
+		System.out.println("User's inserted numbers: " + Arrays.toString(userNumbers));
 	}
 
-	// Method prints into console sorted user's input numbers
-	public void printInputNumbersAndSortedNumbers(int[] storageOfUserInputNumbers) {
-		System.out.println("User's input numbers: " + Arrays.toString(storageOfUserInputNumbers));
-		System.out.println("Sorted user's numbers: " + Arrays.toString(sortMerge(storageOfUserInputNumbers)));
+	// Printing into console user's sorted numbers
+	private void printSortedNumbers(int[] userNumbers) {
+		System.out.println("User's sorted numbers: " + Arrays.toString(sortMerge(userNumbers)));
 	}
 
 }
