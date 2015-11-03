@@ -39,12 +39,6 @@ public class SimpleAuthFilter implements Filter {
                 filterChain.doFilter(servletRequest, servletResponse);
             }
         }
-
-//        if (LOGIN_URL.equals(path) || REGISTRATION_URL.equals(path) || session != null) {
-//            filterChain.doFilter(servletRequest, servletResponse);
-//        } else {
-//            resp.sendRedirect(LOGIN_URL);
-//        }
     }
 
     @Override

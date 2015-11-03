@@ -6,6 +6,8 @@ import com.google.common.base.Joiner;
 
 public class User implements Observer {
     private int id;
+    private String login;
+    private String password;
     private String name;
     private String surname;
     private String email;
@@ -13,16 +15,21 @@ public class User implements Observer {
 
     public User() {}
 
-    public User(String name, String surname, String email) {
-        this.name = name.trim();
-        this.surname = surname.trim();
-        this.email = email.trim();
-        this.isHost = false;
+    public User(String login, String password, String email) {
+        this(login, password, email, false, "", "");
     }
 
-    public User(String name, String surname, String email, boolean isHost) {
-        this(name, surname, email);
+    public User(String login, String password, String email, boolean isHost) {
+        this(login, password, email, isHost, "", "");
+    }
+
+    public User(String login, String password, String email, boolean isHost, String name, String surname) {
+        this.login = login;
+        this.password = password;
+        this.email = email;
         this.isHost = isHost;
+        this.name = name;
+        this.surname = surname;
     }
 
     public int getId() {
@@ -33,12 +40,28 @@ public class User implements Observer {
         this.id = id;
     }
 
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
-        this.name = name.trim();
+        this.name = name;
     }
 
     public String getSurname() {
@@ -46,7 +69,7 @@ public class User implements Observer {
     }
 
     public void setSurname(String surname) {
-        this.surname = surname.trim();
+        this.surname = surname;
     }
 
     public String getEmail() {
@@ -54,7 +77,7 @@ public class User implements Observer {
     }
 
     public void setEmail(String email) {
-        this.email = email.trim();
+        this.email = email;
     }
 
     public boolean isHost() {
@@ -66,9 +89,11 @@ public class User implements Observer {
     }
 
     public boolean validate() {
-        return Validator.validateName(name) &&
-                Validator.validateSurname(surname) &&
-                Validator.validateEmail(email);
+        return Validator.validateName(login) &&
+//                Validator.validatePassword(password) && //TODO password validation
+                Validator.validateEmail(email) &&
+                Validator.validateName(name) &&
+                Validator.validateSurname(surname);
     }
 
     @Override
@@ -86,16 +111,18 @@ public class User implements Observer {
         User other = (User) obj;
 
         return id == other.id &&
-                name.equals(other.name) &&
-                surname.equals(other.surname) &&
+                login.equals(other.login) &&
+                password.equals(other.password) &&
                 email.equals(other.email) &&
-                isHost == other.isHost;
+                isHost == other.isHost &&
+                name.equals(other.name) &&
+                surname.equals(other.surname);
     }
 
     @Override
     public String toString() {
         return Joiner.on("").join(
-                "User{id='", id, "', name='", name, "', surname='", surname, "', email='", email,
-                "', isHost='", isHost, "'}");
+                "User{id='", id, "', login='", login, "', pass=", password, "', email='", email,
+                "', isHost='", isHost, "', name='", name, "', surname='", surname, "'}");
     }
 }

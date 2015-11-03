@@ -22,6 +22,10 @@
                     <td>Password:</td>
                     <td><input type="password" name="password" placeholder="password"></td>
                 </tr>
+                <tr>
+                    <td></td>
+                    <td style="color: red"><c:out value="${requestScope.loginError}"/></td>
+                </tr>
                 <tr><td colspan="2"><input style="width:100%" type="submit" value="Login"></td></tr>
                 <tr><td colspan="2"><a href="/registration">Registration</a></td></tr>
             </table>

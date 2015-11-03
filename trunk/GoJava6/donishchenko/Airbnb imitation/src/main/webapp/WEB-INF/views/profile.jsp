@@ -11,13 +11,13 @@
 <center><h1>Welcome User!</h1></center>
 
 <div>
-    <form action="/edituser" method="POST">
+    <form action="/profile" method="POST">
         <table style="border: 1px solid black">
             Update User Info
             <input type="text" hidden name="id" value="${sessionScope.user.id}">
             <tr>
                 <td>Your name</td>
-                <td><input type="text" name="login" placeholder="login" value="${sessionScope.user.name}"></td>
+                <td><input type="text" name="name" placeholder="name" value="${sessionScope.user.name}"></td>
             </tr>
             <tr>
                 <td>Your surname</td>

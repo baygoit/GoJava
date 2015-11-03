@@ -1,9 +1,13 @@
 package com.donishchenko.airbnb.validation;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Validator {
+    private Map<String, String> errors = new HashMap<>();
+
     private static String nameValidationPatternString =
             "([A-Z][a-z]{1,39})(-([A-Z][a-z]{1,39}))*";
     private static String emailValidationPatternString =
@@ -13,16 +17,32 @@ public class Validator {
 
     private Validator() {}
 
-    public static boolean validateName(String name) {
-        return validateString(nameValidationPatternString, name);
+    public static boolean validateLogin(String login) {
+        return validateString(nameValidationPatternString, login);
     }
 
-    public static boolean validateSurname(String surname) {
-        return validateString(nameValidationPatternString, surname);
+    public static boolean validatePassword(String password) {
+        return validateString(nameValidationPatternString, password);
     }
 
     public static boolean validateEmail(String email) {
         return validateString(emailValidationPatternString, email);
+    }
+
+    /**
+     * Not required field.
+     * Returns true if empty, otherwise checks by pattern
+     */
+    public static boolean validateName(String name) {
+        return name.equals("") || validateString(nameValidationPatternString, name);
+    }
+
+    /**
+     * Not required field.
+     * Returns true if empty, otherwise checks by pattern
+     */
+    public static boolean validateSurname(String surname) {
+        return surname.equals("") || validateString(nameValidationPatternString, surname);
     }
 
     public static boolean validateCity(String city) {

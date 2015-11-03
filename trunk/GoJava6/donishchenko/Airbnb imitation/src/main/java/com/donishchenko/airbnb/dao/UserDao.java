@@ -10,6 +10,7 @@ public interface UserDao {
     boolean delete(int id) throws SQLException;
     boolean update(int id, User user) throws SQLException;
     User get(int id) throws SQLException;
+    User getByLoginPassword(String login, String password) throws SQLException;
     List<User> getAllUsers() throws SQLException;
     List<User> getAllClients() throws SQLException;
     List<User> getAllHosts() throws SQLException;

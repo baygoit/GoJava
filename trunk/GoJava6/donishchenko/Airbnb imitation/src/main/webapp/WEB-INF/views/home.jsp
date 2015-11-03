@@ -29,10 +29,11 @@
             <td>Email</td><td><c:out value="${sessionScope.user.email}" /></td>
         </tr>
         <tr>
-            <td colspan="2"><a href="/editUser">Edit</a></td>
+            <td colspan="2"><a href="/profile">Edit</a></td>
         </tr>
-
     </table>
+
+    <a href="/logout">Log out</a>
 </div>
 
 </body>
