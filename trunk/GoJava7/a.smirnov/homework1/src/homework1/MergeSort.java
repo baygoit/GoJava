@@ -4,14 +4,20 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 /**
+ * // OLEG very usefull :) Don't we know the name of the file? What if we rename it once?
  * MergeSort.java
  * 
+ * // OLEG git knows. Why we need this?
  * @author Anton Smirnov
+ * // OLEG what is this about?
  * @version 03.11.2015
+ * // OLEG why?
  * @java 7
+ * // OLEG why?
  * @category homework1
  *
  */
+ // OLEG Why we need this comment at all? Do we have some convension or requirements for this comment?
 
 public class MergeSort {
 	public static void main(String[] args) {
