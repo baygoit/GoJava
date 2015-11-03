@@ -1,0 +1,2 @@
+2015-11-02 21:12:49,571 ERROR c.g.f.AdminFilter [qtp2121645869-17] invalid user or password, user: qweqweqw , pass: admin
+2015-11-02 21:13:28,560 ERROR c.g.f.AdminFilter [qtp1519100796-23] invalid user or password, user: dqreqweqw , pass: admin
