@@ -22,8 +22,15 @@ public class MergeSort {
 
 	public void startProgram() {
 		int[] userNumbers = setupUserNumbers();
+
+		// Printing into console user's inserted numbers
 		printInsertedNumbers(userNumbers);
-		printSortedNumbers(userNumbers);
+
+		// Sorting user's inserted numbers
+		int[] sortedNumbers = sortMerge(userNumbers);
+
+		// Printing into console sorted numbers
+		printSortedNumbers(sortedNumbers);
 	}
 
 	// Setup input data by User
@@ -48,8 +55,9 @@ public class MergeSort {
 					return userNumbers;
 				}
 			} catch (Exception e) {
-				System.out.println(
-						"User inserted wrong value. " + "Please try again." + System.lineSeparator() + instruction);
+				System.out.println("User inserted wrong value. " 
+									+ "Please try again." 
+									+ System.lineSeparator() + instruction);
 			}
 		}
 	}
@@ -93,8 +101,8 @@ public class MergeSort {
 	}
 
 	// Printing into console user's sorted numbers
-	private void printSortedNumbers(int[] userNumbers) {
-		System.out.println("User's sorted numbers: " + Arrays.toString(sortMerge(userNumbers)));
+	private void printSortedNumbers(int[] sortedNumbers) {
+		System.out.println("User's sorted numbers: " + Arrays.toString(sortedNumbers));
 	}
 
 }
