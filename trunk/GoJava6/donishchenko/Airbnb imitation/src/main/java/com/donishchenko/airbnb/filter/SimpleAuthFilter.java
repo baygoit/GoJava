@@ -8,8 +8,8 @@ import java.io.IOException;
 
 public class SimpleAuthFilter implements Filter {
 
-    private static final String LOGIN_URL = "/login";
-    private static final String REGISTRATION_URL = "/registration";
+    public static final String LOGIN_URL = "/login";
+    public static final String REGISTRATION_URL = "/registration";
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -26,11 +26,25 @@ public class SimpleAuthFilter implements Filter {
         String path = req.getServletPath();
         HttpSession session = req.getSession(false);
 
-        if (LOGIN_URL.equals(path) || REGISTRATION_URL.equals(path) || session != null) {
-            filterChain.doFilter(servletRequest, servletResponse);
+        if (session == null) {
+            if (LOGIN_URL.equals(path) || REGISTRATION_URL.equals(path)) {
+                filterChain.doFilter(servletRequest, servletResponse);
+            } else {
+                resp.sendRedirect(LOGIN_URL);
+            }
         } else {
-            resp.sendRedirect(LOGIN_URL);
+            if (LOGIN_URL.equals(path) || REGISTRATION_URL.equals(path)) {
+                resp.sendRedirect("/");
+            } else {
+                filterChain.doFilter(servletRequest, servletResponse);
+            }
         }
+
+//        if (LOGIN_URL.equals(path) || REGISTRATION_URL.equals(path) || session != null) {
+//            filterChain.doFilter(servletRequest, servletResponse);
+//        } else {
+//            resp.sendRedirect(LOGIN_URL);
+//        }
     }
 
     @Override

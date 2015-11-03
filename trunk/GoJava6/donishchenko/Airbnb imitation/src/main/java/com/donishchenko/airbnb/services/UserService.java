@@ -12,8 +12,8 @@ import java.sql.SQLException;
 import java.util.Collections;
 import java.util.List;
 
-public class RegistrationService {
-    public static Logger log = LogManager.getLogger(RegistrationService.class.getName());
+public class UserService {
+    public static Logger log = LogManager.getLogger(UserService.class.getName());
 
     private UserDao userDao = new JdbcUserDao();
 

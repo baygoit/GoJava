@@ -2,8 +2,9 @@ package com.donishchenko.airbnb.controller;
 
 import com.donishchenko.airbnb.dao.JdbcUserDao;
 import com.donishchenko.airbnb.dao.UserDao;
+import com.donishchenko.airbnb.filter.SimpleAuthFilter;
 import com.donishchenko.airbnb.model.User;
-import com.donishchenko.airbnb.services.RegistrationService;
+import com.donishchenko.airbnb.services.UserService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -16,7 +17,7 @@ import java.sql.SQLException;
 public class MainController extends HttpServlet {
 
     private UserDao userDao = new JdbcUserDao();
-    private RegistrationService regService = new RegistrationService();
+    private UserService userService = new UserService();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -35,10 +36,14 @@ public class MainController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        //TODO test post
 
         String path = req.getServletPath();
         HttpSession session = req.getSession(false);
+
+        if (SimpleAuthFilter.LOGIN_URL.equals(path)) {
+
+        }
+
 
         if (path.equals("/login")) {
             String login = (String) req.getParameter("login");
