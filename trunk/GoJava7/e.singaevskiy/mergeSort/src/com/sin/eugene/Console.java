@@ -12,12 +12,14 @@ public class Console {
 	private static final String DELIMITER = " ";
 
 	public Console() {
+		// OLEG do we need this emply line? This is our code convention? But in setUserInput() there is no empty line... Inconsistent
 
 		this.userInput = "";
 		this.inputReader = new Scanner(System.in);
 
 	}
 
+	// OLEG it looks line this method do something more then just set...
 	public void setUserInput(String userInput) {
 		System.out.println(WELCOME_MESSAGE);
 		this.userInput = userInput;
@@ -34,9 +36,11 @@ public class Console {
 	public int[] parseUserInput() {
 
 		String[] numbers = this.userInput.split(DELIMITER);
+		// OLEG reSult!
 		int[] rezult = new int[numbers.length];
 		
 		for (int i = 0; i < numbers.length; i++) {
+			// OLEG what about runtime exception? just exit application with default stacktrace?
 			rezult[i] = Integer.parseInt(numbers[i]);
 		}
 
@@ -47,6 +51,8 @@ public class Console {
 	public void close() {
 
 		this.inputReader.close();
+		// OLEG why? It clear now that Console is not just a class to work with STDIN/STDOUT, but hold some string and threat it as array of integer delimited by DELIMITER, and parse string to array of integers
+		// OLEG SRL?
 		this.userInput = "";
 
 	}
