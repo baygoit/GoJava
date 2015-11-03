@@ -33,7 +33,14 @@ public class ApartmentService  {
         return Apartment;
     }
 
-    public static List<Apartment> getByCity() {
-        return null;
+    public static List<Apartment> getByCity(Integer id) {
+
+        List<Apartment> list = new ArrayList<Apartment>();
+        try {
+            list = (List<Apartment>) dao.getByCity(id);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
     }
 }

@@ -36,7 +36,8 @@ public class MainPage {
 	}
 
 	public void update() {
-
+		System.out.println("------------------------------------------");
+		
 		System.out.println("\"" + quote.getText() + "\" - " + quote.getAuthor());
 
 		System.out.print("\nCategories: | ");
@@ -47,13 +48,13 @@ public class MainPage {
 
 		if (currentCategory != null) {
 			System.out.println("\nCurrent category: " + currentCategory.getName());
-		}
-
-		if (projects.isEmpty()) {
-			System.out.println("No projects in this category");
-		} else {
-			for (Project project : projects) {
-				System.out.println(project);
+			
+			if (projects.isEmpty()) {
+				System.out.print("No projects in this category");
+			} else {
+				for (Project project : projects) {
+					System.out.println(project);
+				}
 			}
 		}
 

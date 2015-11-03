@@ -10,18 +10,18 @@
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/</url-pattern>
+        <url-pattern>/edituser</url-pattern>
         <url-pattern>/login</url-pattern>
         <url-pattern>/registration</url-pattern>
-        <url-pattern>/edituser</url-pattern>
     </servlet-mapping>
     
     <filter>
-        <filter-name>AuthFilter</filter-name>
-        <filter-class>com.donishchenko.airbnb.filter.AuthFilter</filter-class>
+        <filter-name>SimpleAuthFilter</filter-name>
+        <filter-class>com.donishchenko.airbnb.filter.SimpleAuthFilter</filter-class>
     </filter>
 
     <filter-mapping>
-        <filter-name>AuthFilter</filter-name>
+        <filter-name>SimpleAuthFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 

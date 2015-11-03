@@ -37,7 +37,7 @@ public class DaoApartment implements DaoModel{
 
 
         while (rs.next()){
-            list.add(new Apartment((User)rs.getObject(1),rs.getString(2),rs.getString(3), ApartType.values()[1]));
+            list.add(new Apartment((User)rs.getObject(1),rs.getString(3),rs.getString(2), ApartType.values()[1]));
         }
 
         return list;
@@ -55,11 +55,28 @@ public class DaoApartment implements DaoModel{
         Apartment Apartment = null;
 
         while (rs.next()){
-            Apartment = new Apartment((User)rs.getObject(1),rs.getString(2),rs.getString(3), ApartType.values()[1]);
+            Apartment = new Apartment((User)rs.getObject(1),rs.getString(3),rs.getString(2), ApartType.values()[1]);
         }
 
         return Apartment;
 
+    }
+
+    public List<Apartment> getByCity(Integer id) throws SQLException {
+        String sql = "select apartment.id, user, city.city, address, aparttype from apartment \n" +
+                "left join city on (apartment.city=city.id) where apartment.city = ?;";
+        PreparedStatement stmt = connection.prepareStatement(sql);
+        stmt.setInt(1, id);
+
+        ResultSet rs = stmt.executeQuery();
+
+        List<Apartment> list = new ArrayList<Apartment>();
+
+        while (rs.next()){
+            list.add(new Apartment(rs.getInt(1),rs.getInt(2),rs.getString(3),rs.getString(4), ApartType.values()[rs.getInt(5)]));
+        }
+
+        return list;
     }
 
     @Override
@@ -76,5 +93,4 @@ public class DaoApartment implements DaoModel{
     public void delete(Object obj) {
         //TODO
     }
-
 }
