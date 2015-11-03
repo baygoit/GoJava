@@ -9,4 +9,16 @@ package com.gojava6.chain.atm;
  * @version 10/31/15
  */
 public class Currency {
+
+    private int amount;
+
+    public Currency(int amt){
+        this.amount=amt;
+    }
+
+    public int getAmount(){
+        return this.amount;
+    }
 }
+
+

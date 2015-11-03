@@ -57,11 +57,14 @@ public class GenerateDB implements DaoDB{
         list.add("CreateApartmentTable");
         list.add("CreateReservationTable");
         list.add("CreateRoleTable");
+        list.add("CreateCityImages");
         list.add("AddUsers");
         list.add("AddCities");
         list.add("AddRole");
         list.add("AddApartment");
         list.add("AddReservations");
+        list.add("AddCityImages");
+
 
         for (String fileName : list) {
             execute(fileName);
