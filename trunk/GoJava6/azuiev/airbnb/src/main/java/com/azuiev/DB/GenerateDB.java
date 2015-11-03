@@ -50,6 +50,7 @@ public class GenerateDB implements DaoDB{
     private void recreate() {
 
         List<String> list = new ArrayList<String>();
+        list.add("DropSchema");
         list.add("CreateSchema");
         list.add("CreateUserTable");
         list.add("CreateCityTable");

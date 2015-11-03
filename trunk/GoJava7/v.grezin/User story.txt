@@ -1,11 +1,19 @@
 1)As User I want Login to the site as SIGN IN by entering User name and password.
 
-As User When I navigate on site I can Enter my user name and password in the fields on the top of the site and 
+When I enter to the site I can Enter my user name and password in the fields on the top of the site and 
 push button Sign in. That to get access to my account and project administration part.
 
 2)As User I want register a new account.
-As User I want Push link or button register and fill in personal data to 
-the registration form(Nick name, Name, Surname, password, etc. )
+Push link or button register and fill in personal data to 
+the registration form(Nick name, Name, Surname, password, etc. ) that get ability create new project.
 
-3) As User I want push link or in menu point ADD PROJECT.
-As User I want to fill in form for project registration.
+3) As User I want push link or in menu point that ADD PROJECT.
+Choose category for my project or create new that it could be find faster.
+Fill in form for project registration, add project description, video presentation etc.
+
+4)As User I want have ability to donate projects that I like.
+When I enter to the project page  push on link or button DONATE and swich to choosing the payment way 
+that support favorit project.
+
+5)As User I want have ability apply filters by Category, country, project budget etc.
+I want  choose filters from the list and they should apply to project list for speed up search.

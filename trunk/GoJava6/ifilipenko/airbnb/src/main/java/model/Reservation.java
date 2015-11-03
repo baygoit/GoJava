@@ -3,33 +3,36 @@ package model;
 import java.util.Date;
 
 public class Reservation {
-    private User user;
-    private Home home;
+    private int userId;
+    private int homeId;
     private Date start;
     private Date end;
     private String comment;
 
-    public Reservation(User user, Home home, Date start, Date end) {
-        this.user = user;
-        this.home = home;
+    public Reservation(){
+    }
+
+    public Reservation(int userId, int homeId, Date start, Date end) {
+        this.userId = userId;
+        this.homeId = homeId;
         this.start = start;
         this.end = end;
     }
 
-    public User getUser() {
-        return user;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUser(int userId) {
+        this.userId = userId;
     }
 
-    public Home getHome() {
-        return home;
+    public int getHomeId() {
+        return homeId;
     }
 
-    public void setHome(Home home) {
-        this.home = home;
+    public void setHome(int homeId) {
+        this.homeId = homeId;
     }
 
     public Date getStart() {
@@ -59,8 +62,8 @@ public class Reservation {
     @Override
     public String toString() {
         return "Reservation{" +
-                "user=" + user +
-                ", home=" + home +
+                "userId=" + userId +
+                ", homeId=" + homeId +
                 ", start=" + start +
                 ", end=" + end +
                 '}';

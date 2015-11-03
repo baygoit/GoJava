@@ -12,32 +12,35 @@ import java.util.List;
  */
 public class User implements Observer {
 
-    private String name;
-    private String surname;
-    private String email;
-    public UserType userType;
-    private int userID = 0;
+    private String name;           // must be private
+    private String surname;        // must be private
+    private String email;          // must be private
+    private String password;       // must be private
+    public UserType userType;      // must be public now, but become private later
+    private int userID = 0;        // must be private
 
     public List<Apartment> apartments = new ArrayList<>();
 
-    public User(String name, String surname, String email, int userType, int userID) {
+    public User(String name, String surname, String email, int userType, int userID, String password) {
         this.name = name;
         this.surname = surname;
         this.email = email;
         this.userID = userID;
+        this.password = password;
         if (userType == 0) this.userType = UserType.CLIENT;
         else this.userType = UserType.HOST;
     }
 
-    public User(String name, String surname, String email, UserType userType) {
+    public User(String name, String surname, String email, String password) {
         this.name = name;
         this.surname = surname;
         this.email = email;
-        this.userType = userType;
+        this.password = password;
+        this.userType = UserType.CLIENT;
     }
 
-    public static User createUser(String name, String surname, String email, int userType, int userID) {
-        return new User (name, surname, email, userType, userID);
+    public static User createUser(String name, String surname, String email, int userType, int userID, String password) {
+        return new User (name, surname, email, userType, userID, password);
     }
 
     public void becomeHost() {
@@ -51,6 +54,10 @@ public class User implements Observer {
 
     public UserType getUserType() {
         return this.userType;
+    }
+
+    public String getType() {
+        return this.userType.toString();
     }
 
     public String getName() {
@@ -67,6 +74,10 @@ public class User implements Observer {
 
     public String getEmail() {
         return email;
+    }
+
+    public String getPassword() {
+        return password;
     }
 
     public void update(String message) {

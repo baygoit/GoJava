@@ -4,9 +4,8 @@ import java.util.*;
 
 /**
  * LonelyNumber.java
- * 
  * @author Anton Smirnov
- * @version 22.10.2015
+ * @version 01.11.2015
  * @java 7
  * @category homework1
  *
@@ -16,98 +15,90 @@ public class LonelyNumber {
 	public static void main(String[] args) {
 
 		// Testing
-		new LonelyNumber().findLonelyNumber(setUpUserInputData());
+		new LonelyNumber().startProgram();
 	}
 
-	/* Method finds lonely number in user's input array of numbers */
-	public void findLonelyNumber(int[] userInputNumbers) {
-
-		// List for saving lonely numbers
-		List<Integer> listOfLonelyNumbers = new ArrayList<>();
-
-		// Set for all unique elements from user's input array of numbers
-		Set<Integer> setOfUniqueElements = new HashSet<>();
-
-		// Adding to set of all unique numbers from user's input array of
-		// numbers
-		for (int barrier = 0; barrier < userInputNumbers.length; barrier++) {
-			setOfUniqueElements.add(userInputNumbers[barrier]);
-		}
-
-		for (int userNumber : setOfUniqueElements) {
-
-			// Counter for searching lonely numbers
-			int countOfSteps = 0;
-
-			// Comparing every set's number with user's input numbers
-			for (int index = 0; index < userInputNumbers.length; index++) {
-				if (userNumber == userInputNumbers[index]) {
-					countOfSteps++;
-				}
-			}
-
-			// Checking for lonely number
-			if (countOfSteps == 3) {
-				listOfLonelyNumbers.add(userNumber);
-			}
-
-		}
-
-		// Printing into console result of searching
-		printIntoConsoleResult(userInputNumbers, listOfLonelyNumbers);
+	public void startProgram() {
+		String result = findLonelyNumber();
+		printUserInsertedNumbersAndLonelyNumber(result);
 	}
 
-	// Method prints into console result of lonely number searching
-	public static void printIntoConsoleResult(int[] userInputNumbers, List<Integer> listOfLonelyNumbers) {
-		printUsersInputNumbers(userInputNumbers);
+	// Setup input data by User
+	private int[] setupUserNumbers() {
+		String instruction = "Please insert integer numbers (not less than 3 numbers) separated by spaces: ";
+		System.out.println(instruction);
 
-		// Checking the list of lonely numbers
-		if (listOfLonelyNumbers.size() == 0) {
-			System.out.println("There is no lonely number in array of user's input numbers");
-		} else if (listOfLonelyNumbers.size() == 1) {
-			System.out.println("Lonely number:" + listOfLonelyNumbers);
-		} else {
-			System.out.println(
-					"There are more than one lonely numbers in array of user's input numbers: " + listOfLonelyNumbers);
-		}
-	}
-
-	// Method allows user to set up data
-	public static int[] setUpUserInputData() {
-		String greetings = "integer numbers (not less than 3 numbers) separated by spaces: ";
-
-		// Printing into console greeting string with instruction
-		System.out.println("Please insert " + greetings);
-
-		// Handling of user's input data
 		while (true) {
 			try {
 				Scanner in = new Scanner(System.in);
-				String inputUserString = in.nextLine();
-				String[] arrayOfUsersNumbers = inputUserString.split(" ");
-				int[] inputUsersNumbers = new int[arrayOfUsersNumbers.length];
+				String tempText = in.nextLine();
+				String[] inputUserText = tempText.split(" ");
+				int[] userNumbers = new int[inputUserText.length];
 
-				// Parsing every user's input numbers and adding to integer
-				// array
-				for (int barrier = 0; barrier < arrayOfUsersNumbers.length; barrier++) {
-					inputUsersNumbers[barrier] = Integer.parseInt(arrayOfUsersNumbers[barrier]);
+				for (int barrier = 0; barrier < inputUserText.length; barrier++) {
+					userNumbers[barrier] = Integer.parseInt(inputUserText[barrier]);
 				}
 
-				// Checking integer array's capacity of user's input numbers
-				if (inputUsersNumbers.length < 3) {
+				if (userNumbers.length < 3 || userNumbers.length > 20) {
 					throw new Exception();
 				} else {
-					return inputUsersNumbers;
+					return userNumbers;
 				}
 			} catch (Exception e) {
-				System.out.println("User inserted wrong value." + System.lineSeparator()
-						+ "Please, insert one more time " + greetings);
+				System.out.println("User inserted wrong value. Please try again." + System.lineSeparator() + instruction);
 			}
 		}
 	}
 
-	// Method prints into console user's input numbers
-	public static void printUsersInputNumbers(int[] userInputNumbers) {
-		System.out.println("User inserted numbers " + Arrays.toString(userInputNumbers));
+	// Finding lonely number in storage of user's inserted numbers
+	private String findLonelyNumber() {
+		int[] userNumbers = setupUserNumbers();
+		StringBuilder result = new StringBuilder();
+		StringBuilder lonelyNumbers = new StringBuilder();
+
+		result.append("User's inserted numbers ").append(Arrays.toString(userNumbers)).append(System.lineSeparator());
+		Set<Integer> uniqueNumbers = findsAllUniqueUserNumbers(userNumbers);
+
+		int counterOfLonelyNumbers = 0;
+		for (int unigueNumber : uniqueNumbers) {
+			int amountOfDuplicates = 0;
+
+			for (int index = 0; index < userNumbers.length; index++) {
+				if (unigueNumber == userNumbers[index]) {
+					amountOfDuplicates++;
+				}
+			}
+
+			if (amountOfDuplicates == 3) {
+				counterOfLonelyNumbers++;
+				lonelyNumbers.append(unigueNumber).append(" ");
+			}
+		}
+
+		if (counterOfLonelyNumbers == 0) {
+			result.append("There is no lonely number in user's inserted numbers");
+		} else if (counterOfLonelyNumbers == 1) {
+			result.append("Lonely number: ").append(lonelyNumbers);
+		} else {
+			result.append("There are more than one lonely numbers. These numbers are: ").append(lonelyNumbers);
+		}
+
+		return result.toString();
+	}
+
+	
+	// Finding all unique numbers in storage of user's inserted numbers
+	private HashSet<Integer> findsAllUniqueUserNumbers(int[] userNumbers) {
+		HashSet<Integer> uniqueNumbers = new HashSet<>();
+		for (Integer number : userNumbers) {
+			uniqueNumbers.add(number);
+		}
+		return uniqueNumbers;
+	}
+
+	
+	// Printing into console user's inserted numbers and lonely number
+	private void printUserInsertedNumbersAndLonelyNumber(String result) {
+		System.out.println(result);
 	}
 }

@@ -23,9 +23,9 @@ public class HomeDaoTest {
         FileAccess stubFileAccess = mock(FileAccess.class);
         when(stubFileAccess.readAllLines())
                 .thenReturn(new ArrayList<>(Arrays.asList(
-                                "2 | MIAMI | APARTMENT",
-                                "3 | NEW_YORK | ROOM",
-                                "4 | MIAMI | HOUSE"
+                                "if@gmail.com | MIAMI | APARTMENT",
+                                "bm@gmail.com | NEW_YORK | ROOM",
+                                "js@gmail.com | MIAMI | HOUSE"
                         ))
                 );
 
@@ -36,7 +36,7 @@ public class HomeDaoTest {
     public void serialize_Success() {
         //-------------------------------------
         HomeFileDao homeDao = new HomeFileDao();
-        String expected = "2 | MIAMI | APARTMENT";
+        String expected = "if@gmail.com | MIAMI | APARTMENT";
         Home home = homeDao.read(expected);
 
         //-------------------------------------
@@ -48,16 +48,35 @@ public class HomeDaoTest {
     }
 
     @Test
+    public void create_Success() throws IOException {
+        //-------------------------------------
+        FileAccess stubFileAccess = getFileAccessStub();
+        HomeFileDao homeDao = new HomeFileDao(stubFileAccess);
+        Home home = homeDao.read("if@gmail.com | NEW_YORK | ROOM");
+
+        //-------------------------------------
+        homeDao.create(home);
+
+        //-------------------------------------
+        verify(stubFileAccess).writeAllLines(
+                "if@gmail.com | MIAMI | APARTMENT\n" +
+                        "bm@gmail.com | NEW_YORK | ROOM\n" +
+                        "js@gmail.com | MIAMI | HOUSE\n" +
+                        "if@gmail.com | NEW_YORK | ROOM");
+
+    }
+
+    @Test
     public void read_Success() {
         //-------------------------------------
-        String line = "2 | MIAMI | APARTMENT ";
+        String line = "if@gmail.com | MIAMI | APARTMENT ";
         HomeFileDao homeDao = new HomeFileDao();
 
         //-------------------------------------
         Home home = homeDao.read(line);
 
         //-------------------------------------
-        Assert.assertEquals(2, home.getHostCode());
+        Assert.assertEquals("if@gmail.com", home.getHost());
         Assert.assertEquals(CityList.MIAMI, home.getCity());
         Assert.assertEquals(HomeType.APARTMENT, home.getHomeType());
     }
@@ -76,23 +95,5 @@ public class HomeDaoTest {
     }
 
 
-    @Test
-    public void create_Success() throws IOException {
-        //-------------------------------------
-        FileAccess stubFileAccess = getFileAccessStub();
-        HomeFileDao homeDao = new HomeFileDao(stubFileAccess);
-        Home home = homeDao.read("2 | NEW_YORK | ROOM");
-
-        //-------------------------------------
-        homeDao.create(home);
-
-        //-------------------------------------
-        verify(stubFileAccess).save(
-                        "2 | MIAMI | APARTMENT\n" +
-                        "3 | NEW_YORK | ROOM\n" +
-                        "4 | MIAMI | HOUSE\n" +
-                        "2 | NEW_YORK | ROOM");
-
-    }
 
 }

@@ -7,7 +7,7 @@ import java.util.Scanner;
 /**
  * LongDivision.java
  * @author Anton Smirnov
- * @version 22.10.2015
+ * @version 01.11.2015
  * @java 7
  * @category homework1
  *
@@ -17,114 +17,109 @@ public class LongDivision {
 	public static void main(String[] args) {
 
 		// Testing
-		new LongDivision().divide(setUpUserInputData());
+		new LongDivision().startProgram();
 	}
 
-	// Method showing dividing process
-	public void divide(int[] inputValues) {
+	public void startProgram() {
+		printDividingProcessAndResult();
+	}
 
-		int firstValue = inputValues[0];
-		int secondValue = inputValues[1];
+	// Setup input data by User
+	private int[] setupUserNumbers() {
+		while (true) {
+			try {
+				int[] userNumbers = new int[2];
+				Scanner in = new Scanner(System.in);
 
-		// List of elements from dividing (step by step)
-		List<Integer> listOfAllNumeratorsAndDenominator = new ArrayList<>();
+				System.out.print("Please insert first number: ");
+				int inputFirstNumber = in.nextInt();
+				userNumbers[0] = inputFirstNumber;
 
-		// Result from dividing firstValue on secondValue
-		String result = "";
+				System.out.print("Please insert second number: ");
+				int inputSecondNumber = in.nextInt();
+				userNumbers[1] = inputSecondNumber;
 
-		// Activities if first input value dividing on second input value
-		// WITHOUT remainder of the division
-		if (firstValue % secondValue == 0) {
-			result = result + firstValue / secondValue;
-			listOfAllNumeratorsAndDenominator.add(firstValue);
-			listOfAllNumeratorsAndDenominator.add(secondValue);
+				return userNumbers;
+			} catch (Exception e) {
+				System.out.println("User insert wrong value. Please try again.");
+			}
+		}
+	}
 
-			// Printing in console every step of dividing process
-			printDividingProcessIntoConsole(listOfAllNumeratorsAndDenominator, result);
+	
+	// Dividing first user's inserted number on second user's inserted number
+	private String divideFirstNumberOnSecondNumber() {
+		int[] userNumbers = setupUserNumbers();
+		int firstNumber = userNumbers[0];
+		int secondNumber = userNumbers[1];
 
-			// Activities if first input value dividing on second input value
-			// WITH remainder of the division
+		StringBuilder result = new StringBuilder();
+		StringBuilder divingProcess = new StringBuilder();
+		String space = " ";
+		char oneSpace = ' ';
+
+		// Activities if first input value dividing on second input value WITHOUT remainder
+		if (firstNumber % secondNumber == 0) {
+			result.append(firstNumber / secondNumber);
+			saveEveryDividingSteps(divingProcess, firstNumber, secondNumber, space);
 		} else {
 
-			// Activities if first input value bigger than second input value
-			if (firstValue > secondValue && firstValue % secondValue != 0) {
-				listOfAllNumeratorsAndDenominator.add(firstValue);
-				int temp = firstValue / secondValue;
-				listOfAllNumeratorsAndDenominator.add(secondValue * temp);
-				result = result + temp;
-				firstValue = firstValue - secondValue * temp;
+			// Activities if first input value dividing on second input value WITH remainder
+			if (firstNumber > secondNumber && firstNumber % secondNumber != 0) {
+				saveEveryDividingSteps(divingProcess, firstNumber, secondNumber, space);
+				result.append(firstNumber / secondNumber);
+				firstNumber = firstNumber - secondNumber * (firstNumber / secondNumber);
+				space = space + oneSpace;
 			}
 
-			// Checking of result string's capacity and adding of strings "0."
-			// or "."
-			if (result.isEmpty()) {
-				result = result + "0.";
+			if (result.toString().isEmpty()) {
+				result.append("0.");
 			} else {
-				result = result + ".";
+				result.append(".");
 			}
 
-			while (firstValue % secondValue != 0 && result.length() < 20) {
-				firstValue = firstValue * 10;
+			while (firstNumber % secondNumber != 0 && result.length() < 20) {
+				firstNumber = firstNumber * 10;
 
-				if (firstValue < secondValue) {
-					result = result + "0";
+				if (firstNumber < secondNumber) {
+					result.append("0");
 				} else {
-					listOfAllNumeratorsAndDenominator.add(firstValue);
-					int temp = firstValue / secondValue;
-					result = result + temp;
-					firstValue = firstValue - secondValue * temp;
-					listOfAllNumeratorsAndDenominator.add(secondValue * temp);
+					int tempResultDividing = firstNumber / secondNumber;
+					saveEveryDividingSteps(divingProcess, firstNumber, secondNumber, space);
+					firstNumber = firstNumber - secondNumber * tempResultDividing;
+					result.append(tempResultDividing);
+					space += oneSpace;
 				}
 			}
 		}
-
-		// Printing in console every step of dividing process
-		printDividingProcessIntoConsole(listOfAllNumeratorsAndDenominator, result);
+		divingProcess.append(space).append(" result is: ").append(result);
+		return divingProcess.toString();
 	}
 
-	// Method allowing user set up input data for program
-	public static int[] setUpUserInputData() {
-
-		// Handling of user's input data
-		while (true) {
-			try {
-				int[] inputValues = new int[2];
-				Scanner input = new Scanner(System.in);
-
-				// Checking of user's first input value (numerator) and adding
-				// to array of input values
-				System.out.println("Please insert first value: ");
-				int inputFirstNumber = input.nextInt();
-				inputValues[0] = inputFirstNumber;
-
-				// Checking of user's second input value (denominator) and
-				// adding to array of input values
-				System.out.println("Please insert second value: ");
-				int inputSecondNumber = input.nextInt();
-				inputValues[1] = inputSecondNumber;
-
-				System.out.println("User wants divide " + inputFirstNumber + " on " + inputSecondNumber);
-				return inputValues;
-			} catch (Exception e) {
-				System.out.println("User insert wrong value. Please try again");
-			}
-		}
-
+	
+	// Printing into console every steps of dividing process and result
+	private void printDividingProcessAndResult() {
+		String result = divideFirstNumberOnSecondNumber();
+		System.out.println(result);
 	}
 
-	public void printDividingProcessIntoConsole(List<Integer> list, String result) {
-		String space = " ";
+	
+	// Saving every steps from dividing process
+	private void saveEveryDividingSteps(StringBuilder divingProcess, int firstNumber, int secondNumber, String space) {
 		String separator = "------";
 		char oneSpace = ' ';
 		char underscore = '_';
 
-		StringBuilder finishLine = new StringBuilder();
-		for (int barrier = 0; barrier < list.size() - 1; barrier = barrier + 2) {
-			finishLine.append(space + underscore + list.get(barrier)).append(System.lineSeparator())
-					.append(space + oneSpace + list.get(barrier + 1)).append(System.lineSeparator())
-					.append(space + separator).append(System.lineSeparator());
-			space = space + "  ";
+		if (firstNumber % secondNumber == 0) {
+
+			divingProcess.append(space).append(underscore).append(firstNumber).append(System.lineSeparator())
+					.append(space).append(oneSpace).append(firstNumber).append(System.lineSeparator()).append(space)
+					.append(separator).append(System.lineSeparator());
+
+		} else {
+			divingProcess.append(space).append(underscore).append(firstNumber).append(System.lineSeparator())
+					.append(space).append(oneSpace).append(secondNumber * (firstNumber / secondNumber))
+					.append(System.lineSeparator()).append(space).append(separator).append(System.lineSeparator());
 		}
-		System.out.println(finishLine.toString() + System.lineSeparator() + space + " result is: " + result);
 	}
 }

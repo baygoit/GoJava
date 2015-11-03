@@ -34,8 +34,8 @@
 
       <dependency>
           <groupId>javax.servlet</groupId>
-          <artifactId>servlet-api</artifactId>
-          <version>3.0-alpha-1</version>
+          <artifactId>javax.servlet-api</artifactId>
+          <version>3.1.0</version>
           <scope>provided</scope>
       </dependency>
 
@@ -85,6 +85,7 @@
             <version>2.1.1</version>
             <configuration>
                 <webXml>src\main\WEB-INF\web.xml</webXml>
+                <!--<webXml>src\main\WEB-INF\web_servlets.xml</webXml>-->
             </configuration>
         </plugin>
 

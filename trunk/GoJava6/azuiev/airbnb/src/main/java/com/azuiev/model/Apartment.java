@@ -3,6 +3,7 @@ package com.azuiev.model;
 import com.azuiev.AirBnB;
 import com.azuiev.enums.ApartType;
 import com.azuiev.Validator;
+import com.azuiev.service.UserService;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -16,10 +17,15 @@ public class Apartment implements Comparable<Apartment> {
     private User owner;
     private String city;
     private String address;
+    private Integer id;
 
     private ApartType apartType;
 
     List<Reservation> reservations = new LinkedList<Reservation>();
+
+    public Integer getId() {
+        return id;
+    }
 
     public static Apartment registerBook(User owner, String city, String address, ApartType apartType) {
 
@@ -40,13 +46,21 @@ public class Apartment implements Comparable<Apartment> {
                 cities.add(city);
                 AirBnB.log.info("added new city - " + city);
                 AirBnB.sportLife.cityAdded(city);
+
             }
             return apartment;
         }
         return null;
     }
-
-    private Apartment(User owner, String city, String address, ApartType apartType) {
+    public Apartment(Integer id, Integer userId, String city, String address, ApartType apartType) {
+        UserService userService = new UserService();
+        this.owner = userService.getById(userId);
+        this.city = city;
+        this.address = address;
+        this.apartType = apartType;
+        this.id = id;
+    }
+    public Apartment(User owner, String city, String address, ApartType apartType) {
         this.owner = owner;
         this.city = city;
         this.address = address;
@@ -67,10 +81,6 @@ public class Apartment implements Comparable<Apartment> {
 
     public String getCity() {
         return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
     }
 
     public ApartType getApartType() {

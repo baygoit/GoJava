@@ -12,6 +12,8 @@ public class Apartment {
     private int idAparnament;
     private static final Logger log = Logger.getLogger(Apartment.class);
 
+    public Apartment(){}
+
     public Apartment(String apartmentType, String city, int ownerId) {
         this.apartmentType = apartmentType;
         this.city = city;
@@ -24,6 +26,14 @@ public class Apartment {
 
     public String getCity() {
         return city;
+    }
+
+    public void setOwnerId(int ownerId) {
+        this.ownerId = ownerId;
+    }
+
+    public void setApartmentType(String apartmentType) {
+        this.apartmentType = apartmentType;
     }
 
     public int getIdAparnament() {

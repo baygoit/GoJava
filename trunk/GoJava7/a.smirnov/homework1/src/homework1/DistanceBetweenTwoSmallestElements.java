@@ -8,118 +8,115 @@ import java.util.Scanner;
 /**
  * DistanceBetweenTwoSmallestElements.java
  * @author Anton Smirnov
- * @version 22.10.2015
+ * @version 01.11.2015
  * @java 7
  * @category homework1
- *
+ * 
  */
 
 public class DistanceBetweenTwoSmallestElements {
 	public static void main(String[] args) {
 
 		// Testing
-		new DistanceBetweenTwoSmallestElements().findDistancesBetweenSmallestElements(setUpUserInputData());
+		new DistanceBetweenTwoSmallestElements().startProgram();
 	}
 
-	// Method searching all smallest and second smallest numbers in array of user's input numbers
-	public void findDistancesBetweenSmallestElements(int[] userInputNumbers) {
-
-		// Maps for saving all smallest and second smallest numbers and their positions
-		Map<Integer, Integer> mapOfSmallestElements = new HashMap<>();
-		Map<Integer, Integer> mapOfSecondSmallestElements = new HashMap<>();
-
-		int smallestElement = userInputNumbers[0];
-		int secondSmallestElement = Integer.MAX_VALUE;
-
-		// Searching the smallest number in array of user's input numbers
-		for (int barrier = 0; barrier < userInputNumbers.length; barrier++) {
-			if (smallestElement > userInputNumbers[barrier]) {
-				smallestElement = userInputNumbers[barrier];
-			}
-		}
-
-		// Putting all smallest numbers and their positions in map of smallest numbers
-		for (int barrier = 0; barrier < userInputNumbers.length; barrier++) {
-			if (smallestElement == userInputNumbers[barrier]) {
-				mapOfSmallestElements.put(barrier, smallestElement);
-			}
-		}
-
-		// Searching the second smallest numbers in array of user's input numbers
-		for (int barrier = 0; barrier < userInputNumbers.length; barrier++) {
-			if (secondSmallestElement > userInputNumbers[barrier] && userInputNumbers[barrier] > smallestElement) {
-				secondSmallestElement = userInputNumbers[barrier];
-			}
-		}
-
-		// Putting all second smallest numbers and their positions in map of second smallest numbers
-		for (int barrier = 0; barrier < userInputNumbers.length; barrier++) {
-			if (secondSmallestElement == userInputNumbers[barrier]) {
-				mapOfSecondSmallestElements.put(barrier, secondSmallestElement);
-			}
-		}
-
-		// Checking of second smallest number existing in array of user's input numbers
-		if (secondSmallestElement == Integer.MAX_VALUE) {
-			printUsersInputNumbers(userInputNumbers);
-			System.out.println("There is no second smallest element in inserted numbers."
-					+ " All inserted numbers are equals.");
-		} else {
-			printUsersInputNumbers(userInputNumbers);
-			printAllDistanceBetweenTwoSmallestElements(userInputNumbers, mapOfSmallestElements,
-					mapOfSecondSmallestElements);
-		}
+	public void startProgram() {	
+		printUserInsertedNumbersAndDistanceBetweenTwoSmallestNumbers();
 	}
 
-	// Method prints into console distances between smallest numbers in array of user's input numbers
-	public void printAllDistanceBetweenTwoSmallestElements(int[] userInputNumbers,
-			Map<Integer, Integer> mapOfSmallestElements, Map<Integer, Integer> mapOfSecondSmallestElements) {
-
-		for (Map.Entry<Integer, Integer> firstEntry : mapOfSmallestElements.entrySet()) {
-			for (Map.Entry<Integer, Integer> secondEntry : mapOfSecondSmallestElements.entrySet()) {
-				System.out.println("Distance between numbers [" + firstEntry.getValue() + "] and ["
-						+ secondEntry.getValue() + "] is: " + (Math.abs(firstEntry.getKey() - secondEntry.getKey())));
-			}
-		}
-	}
-
-	// Method allows user to set up data
-	public static int[] setUpUserInputData() {
-		String greeting = "integer numbers (not less than 2 numbers and not more than 20 numbers) "
+	// Setup input data by User
+	private static int[] setupUserNumbers() {
+		String instruction = "Please insert integer numbers (not less than 2 numbers and not more than 20 numbers) "
 				+ "separated by spaces: ";
-		
-		// Printing into console greeting string with instruction
-		System.out.println("Please insert " + greeting);
 
-		// Handling of user's input data
+		System.out.println(instruction);
 		while (true) {
 			try {
-				Scanner input = new Scanner(System.in);
-				String inputUserString = input.nextLine();
-				String[] userInputNumbers = inputUserString.split(" ");
-				int[] parsedUserInputNumbers = new int[userInputNumbers.length];
+				Scanner in = new Scanner(System.in);
+				String tempText = in.nextLine();
+				String[] inputUserText = tempText.split(" ");
+				int[] storageOfUsersNumbers = new int[inputUserText.length];
 
-				// Parsing every user's input numbers and adding to integer array
-				for (int barrier = 0; barrier < userInputNumbers.length; barrier++) {
-					parsedUserInputNumbers[barrier] = Integer.parseInt(userInputNumbers[barrier]);
+				for (int barrier = 0; barrier < inputUserText.length; barrier++) {
+					storageOfUsersNumbers[barrier] = Integer.parseInt(inputUserText[barrier]);
 				}
 
-				// Checking integer array's capacity of user's input numbers
-				if (parsedUserInputNumbers.length == 0 || parsedUserInputNumbers.length == 1
-						|| parsedUserInputNumbers.length > 20) {
-					throw new Exception();
+				if (storageOfUsersNumbers.length < 2 || storageOfUsersNumbers.length > 20) {
+					throw new RuntimeException();
 				} else {
-					return parsedUserInputNumbers;
+					return storageOfUsersNumbers;
 				}
-			} catch (Exception e) {
-				System.out.println("User insert wrong value." + System.lineSeparator() + "Please, insert one more time "
-						+ greeting);
+			} catch (RuntimeException e) {
+				System.out.println("User inserted wrong value. Please try again." + System.lineSeparator() + instruction);
 			}
 		}
 	}
+	
+	// Finding distance between smallest and second smallest numbers in storage of user's inserted numbers
+	private String findDistancesBetweenSmallestElements() {
+		int[] storageOfUserNumbers = setupUserNumbers();
 
-	// Method prints into console user's input numbers
-	public void printUsersInputNumbers(int[] userInputNumbers) {
-		System.out.println("User inserted numbers " + Arrays.toString(userInputNumbers));
+		Map<Integer, Integer> storageOfSmallestNumbers = new HashMap<>();
+		Map<Integer, Integer> storageOfSecondSmallestNumbers = new HashMap<>();
+
+		int smallestElement = searchSmallestNumber(storageOfUserNumbers);
+		StringBuilder result = new StringBuilder();
+		result.append("User's inserted numbers: " + Arrays.toString(storageOfUserNumbers) + System.lineSeparator());
+		try {
+
+			int secondSmallestElement = searchSecondSmallestNumber(storageOfUserNumbers);
+			addNumbersAndTheirPositionInStorage(storageOfSmallestNumbers, storageOfUserNumbers, smallestElement);
+			addNumbersAndTheirPositionInStorage(storageOfSecondSmallestNumbers, storageOfUserNumbers, secondSmallestElement);
+
+			for (Map.Entry<Integer, Integer> firstEntry : storageOfSmallestNumbers.entrySet()) {
+				for (Map.Entry<Integer, Integer> secondEntry : storageOfSecondSmallestNumbers.entrySet()) {
+					result.append("Distance between numbers [").append(firstEntry.getValue()).append("] and [").
+							append(secondEntry.getValue()).append("] is: ").append(Math.abs(firstEntry.getKey() - secondEntry.getKey())).
+							append(System.lineSeparator());
+				}
+			}
+
+		} catch (RuntimeException e) {
+			result.append("There is no second smallest number. All user's numbers are equals.");
+		}
+		return result.toString();
+	}
+
+	
+	// Printing into console distance between smallest and second smallest numbers
+	private void printUserInsertedNumbersAndDistanceBetweenTwoSmallestNumbers() {
+		String result = findDistancesBetweenSmallestElements();
+		System.out.println(result);
+	}
+
+	
+	// Searching second smallest number in storage of user's inserted numbers
+	private int searchSmallestNumber(int[] storageOfNumbers) {
+		Arrays.sort(storageOfNumbers);
+		return storageOfNumbers[0];
+	}
+
+	
+	// Searching smallest number in storage of user's inserted numbers
+	private int searchSecondSmallestNumber(int[] storageOfNumbers) {
+		int secondSmallestNumber = 0;
+		for (int index = 0; index < storageOfNumbers.length; index++) {
+			if (storageOfNumbers[index] > storageOfNumbers[0]) {
+				secondSmallestNumber = storageOfNumbers[index];
+				return secondSmallestNumber;
+			}
+		}
+		throw new RuntimeException();
+	}
+
+	
+	// Finding and putting all smallest or second smallest numbers and their positions in storage
+	private void addNumbersAndTheirPositionInStorage(Map<Integer, Integer> storage, int[] numbers, int smallestNumber) {
+		for (int index = 0; index < numbers.length; index++) {
+			if (smallestNumber == numbers[index]) {
+				storage.put(index, smallestNumber);
+			}
+		}
 	}
 }
