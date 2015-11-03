@@ -10,9 +10,9 @@
 <table width="100%" border="1">
         <caption><h1>List cities<h1></caption>
         <tr>
-        <c:forEach var="name" items="${city}">
+        <c:forEach var="item" items="${city}">
             <th class="headtab1">
-            <a href="/search?cityid=${name.getId()}">${name.getName()}</a>
+            <a href="/search?cityid=${item.getId()}">${item.getName()}</a>
             </th>
         </c:forEach>
         </tr>
@@ -24,9 +24,9 @@
 <table width="100%" border="0">
         <caption><h1>List apartment<h1></caption>
         <tr>
-        <c:forEach var="name" items="${apartment}">
+        <c:forEach var="item" items="${apartment}">
             <th class="headtab2">
-            <a href="/search?cityid=${name.getId()}">${name.getName()}</a>
+            <a href="/search?userid=${item.getId()}">${item.getCity()} ${item.getAddress()}</a>
             </th>
         </c:forEach>
         </tr>

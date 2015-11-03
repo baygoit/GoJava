@@ -40,7 +40,7 @@ public class SearchServlet extends HttpServlet {
                 HashMap<String, String> map = parseQuery(query);
                 ApartmentService apartmentService = new ApartmentService();
                 List<Apartment> apartment = null;
-                apartment = ApartmentService.getByCity(Integer.parseInt(map.get("city")));
+                apartment = ApartmentService.getByCity(Integer.parseInt(map.get("cityid")));
                 req.setAttribute("apartment", apartment);
             }
             ServletContext context = req.getSession().getServletContext();
