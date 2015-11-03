@@ -3,21 +3,11 @@ package homework1;
 import java.util.Arrays;
 import java.util.Scanner;
 
-/**
- * MergeSort.java
- * 
- * @author Anton Smirnov
- * @version 03.11.2015
- * @java 7
- * @category homework1
- *
- */
-
-public class MergeSort {
+public class BubblesSort {
 	public static void main(String[] args) {
-
+		
 		// Testing
-		new MergeSort().startProgram();
+		new BubblesSort().startProgram();
 	}
 
 	public void startProgram() {
@@ -54,37 +44,19 @@ public class MergeSort {
 		}
 	}
 
-	// Dividing user storage of numbers on two halves and sorting its
-	private int[] sortMerge(int[] UserNumbers) {
-		if (UserNumbers.length < 2) {
-			return UserNumbers;
-		}
-		int middleOfArrayLength = UserNumbers.length / 2;
+	// Sorting user's inserted numbers
+	private int[] bubblesSort(int[] userNumbers) {
+		for (int barrier = userNumbers.length - 1; barrier > 0; barrier--) {
+			for (int index = 0; index < barrier; index++) {
+				if (userNumbers[index] > userNumbers[index + 1]) {
+					int temp = userNumbers[index];
+					userNumbers[index] = userNumbers[index + 1];
+					userNumbers[index + 1] = temp;
 
-		return merge(sortMerge(Arrays.copyOfRange(UserNumbers, 0, middleOfArrayLength)),
-				sortMerge(Arrays.copyOfRange(UserNumbers, middleOfArrayLength, UserNumbers.length)));
-	}
-
-	// Merging two sorted arrays in one general
-	private int[] merge(int[] firstArray, int[] secondArray) {
-
-		int indexOfFirstArray = 0, indexOfSecondArray = 0;
-		int[] result = new int[firstArray.length + secondArray.length];
-
-		for (int barrier = 0; barrier < result.length; barrier++) {
-			if (indexOfSecondArray < secondArray.length && indexOfFirstArray < firstArray.length) {
-				if (firstArray[indexOfFirstArray] > secondArray[indexOfSecondArray]) {
-					result[barrier] = secondArray[indexOfSecondArray++];
-				} else {
-					result[barrier] = firstArray[indexOfFirstArray++];
 				}
-			} else if (indexOfSecondArray < secondArray.length) {
-				result[barrier] = secondArray[indexOfSecondArray++];
-			} else {
-				result[barrier] = firstArray[indexOfFirstArray++];
 			}
 		}
-		return result;
+		return userNumbers;
 	}
 
 	// Printing into console user's inserted numbers
@@ -94,7 +66,7 @@ public class MergeSort {
 
 	// Printing into console user's sorted numbers
 	private void printSortedNumbers(int[] userNumbers) {
-		System.out.println("User's sorted numbers: " + Arrays.toString(sortMerge(userNumbers)));
+		System.out.println("User's sorted numbers: " + Arrays.toString(bubblesSort(userNumbers)));
 	}
 
 }
