@@ -8,7 +8,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class UserValidator {
-    private User user;
     private Map<String, String> errors = new HashMap<>();
 
     //TODO login pattern
@@ -26,11 +25,9 @@ public class UserValidator {
     private static String cityValidationPatternString =
             "([A-Z][a-z]{1,39})(-?([A-Z][a-z]{1,39}))*";
 
-    public UserValidator(User user) {
-        this.user = user;
-    }
+    public UserValidator() {}
 
-    public void validate() {
+    public void validate(User user) {
         validateLogin(user.getLogin());
         validatePassword(user.getPassword());
         validateEmail(user.getEmail());
