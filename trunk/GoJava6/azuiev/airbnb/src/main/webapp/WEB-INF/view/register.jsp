@@ -1,9 +1,4 @@
-<html>
-<head>
-    <title>Registration Form</title>
-</head>
-<body>
-<table border="0">
+<table class="middle" border="0">
     <tr>
         <td valign="top" align="left">
 
