@@ -1,39 +1,33 @@
 package ua.com.goit.gojava7.mergesort;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
 public class Console {
-	
+
 	public static void main(String[] args) {
 		Console con = new Console();
 		con.start();
 		System.out.println(con.getStorageOfUserNumbers());
 	}
-	
+
 	private int[] storageOfNumbersFromUser;
-	private static final String INSTRUCTION_STARTING_MENU = "Please make choose:\n" 
-											+ " 1. Automatic generation of numbers \n"
-											+ " 2. Manual generation of numbers \n" 
-											+ " 3. Quit the program";
-	
+	private static final String INSTRUCTION_STARTING_MENU = "Please make choose:\n"
+			+ " 1. Automatic generation of numbers \n" 
+			+ " 2. Manual generation of numbers \n" 
+			+ " 3. Quit the program";
+
 	private static final String INSTRUCTION_FOR_MANUAL = "Please enter integer numbers "
-											+ "(not more than 20) separated by spaces:"; 
+			+ "(not more than 20) separated by spaces:";
 	private static final String INSTRUCTION_FOR_AUTOMATICAL = "Please enter desired amount "
-											+ "(not more than 20) of generated numbers:";
+			+ "(not more than 20) of generated numbers:";
 	private static final String SEPARATOR = "=========================";
 	private static final Random RANDOM = new Random();
 
 	private boolean flagOne = true;
 	private boolean flagTwo = true;
 
-	
 	public void start() {
 		while (flagOne) {
 			System.out.println(INSTRUCTION_STARTING_MENU + "\n" + SEPARATOR);
@@ -120,9 +114,9 @@ public class Console {
 	public void print(int[] array) {
 		System.out.println(Arrays.toString(array));
 	}
-	
-	public int[] getStorageOfUserNumbers () {
+
+	public int[] getStorageOfUserNumbers() {
 		return storageOfNumbersFromUser;
 	}
-	
+
 }
