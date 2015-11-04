@@ -1,7 +1,6 @@
 package com.donishchenko.airbnb.model;
 
 import com.donishchenko.airbnb.common.Observer;
-import com.donishchenko.airbnb.validation.Validator;
 import com.google.common.base.Joiner;
 
 public class User implements Observer {
@@ -86,14 +85,6 @@ public class User implements Observer {
 
     public void setHost(boolean host) {
         this.isHost = host;
-    }
-
-    public boolean validate() {
-        return Validator.validateName(login) &&
-//                Validator.validatePassword(password) && //TODO password validation
-                Validator.validateEmail(email) &&
-                Validator.validateName(name) &&
-                Validator.validateSurname(surname);
     }
 
     @Override

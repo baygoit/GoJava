@@ -8,13 +8,12 @@
 </head>
 <body>
 
-<center><h1>Welcome User!</h1></center>
+<center><h1>Welcome ${sessionScope.user.login}!</h1></center>
 
 <div>
     <form action="/profile" method="POST">
         <table style="border: 1px solid black">
             Update User Info
-            <input type="text" hidden name="id" value="${sessionScope.user.id}">
             <tr>
                 <td>Your name</td>
                 <td><input type="text" name="name" placeholder="name" value="${sessionScope.user.name}"></td>
@@ -28,7 +27,7 @@
                 <td><input type="text" name="email" placeholder="user@cats.com" value="${sessionScope.user.email}"></td>
             </tr>
             <tr>
-                <td colspan="2"><input type="submit" value="Save changes"></td>
+                <td colspan="2"><input style="width: 100%" type="submit" value="Save changes"></td>
             </tr>
         </table>
     </form>

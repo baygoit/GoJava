@@ -17,25 +17,20 @@ public class UserService {
 
     private UserDao userDao = new JdbcUserDao();
 
-    public void register(User user) {
+    public void register(User user) throws SQLException {
         log.entry();
 
-        if (!user.validate()) {
-            log.info(Joiner.on("").join("User ID=", user.getId(), "Fail validation. Registration was rejected."));
-            return;
-        }
+//        if (!user.validate()) {
+//            log.info(Joiner.on("").join("User ID=", user.getId(), "Fail validation. Registration was rejected."));
+//            return;
+//        }
 
-        try {
-            userDao.save(user);
-            log.info(Joiner.on("").join("User ID=", user.getId(), " | Successful validation. New User registered!"));
-            log.exit(user.getId());
-        } catch (SQLException ex) {
-            //TODO handle exception
-            ex.printStackTrace();
-        }
+        userDao.save(user);
+        log.info(Joiner.on("").join("User ID=", user.getId(), " | Successful validation. New User registered!"));
+        log.exit(user.getId());
     }
 
-    public void register(String name, String surname, String email, boolean isHost) {
+    public void register(String name, String surname, String email, boolean isHost) throws SQLException {
         User user = new User(name, surname, email, isHost);
         register(user);
     }
