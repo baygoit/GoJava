@@ -5,15 +5,15 @@ import java.util.Scanner;
 public class Console {
 
 	private Scanner inputReader;
-	
-	private Scanner getInputReader(){
+
+	private Scanner getInputReader() {
 		if (inputReader == null) {
-			inputReader = new Scanner(System.in);			
+			inputReader = new Scanner(System.in);
 		}
 		return inputReader;
 	}
-	
-	private String readLine(){
+
+	private String readLine() {
 		if (getInputReader().hasNextLine()) {
 			return getInputReader().nextLine();
 		} else {
@@ -30,14 +30,14 @@ public class Console {
 	public int[] parseIntArray(String numbersInLine, String delimiter) throws IllegalArgumentException {
 		String[] numbers = numbersInLine.split(delimiter);
 		int[] result = new int[numbers.length];
-		
+
 		for (int i = 0; i < numbers.length; i++) {
 			result[i] = Integer.parseInt(numbers[i]);
 		}
 		return result;
 	}
 
-	public void print(String message){
+	public void print(String message) {
 		System.out.println(message);
 	}
 
