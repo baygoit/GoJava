@@ -1,10 +1,4 @@
-<html>
-<head>
-<link rel="stylesheet" type="text/css" href="css/style.css"/>
-<title>Search page</title>
-</head>
- <body>
-
+<body>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <table width="100%" border="1">
@@ -13,6 +7,7 @@
         <c:forEach var="item" items="${city}">
             <th class="headtab1">
             <a href="/search?cityid=${item.getId()}">${item.getName()}</a>
+            <p><img src=${item.getImage()} alt="0_0"></p>
             </th>
         </c:forEach>
         </tr>
@@ -30,10 +25,7 @@
             </th>
         </c:forEach>
         </tr>
-
-
 </table>
 <br>
-
 </body>
 </html>

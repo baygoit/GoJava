@@ -12,13 +12,17 @@ import java.io.PrintWriter;
 /**
  * Created by Masta on 17.10.2015.
  */
-public class RegistrationServlet extends HttpServlet {
+public class ControllerServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         ServletContext context = getServletContext();
-        req.getRequestDispatcher(context.getInitParameter("path")+"RegistrationForm.html").forward(req, resp);
+        String path = req.getServletPath();
+        if ("/login".equals(path)){
+
+        }
+        req.getRequestDispatcher(context.getInitParameter("path")+path+".jsp").forward(req, resp);
 
     }
 

@@ -1,4 +1,4 @@
-INSERT INTO `airbnb`.`city` (`city`) VALUES
+INSERT INTO `airbnb`.`city` (`name`) VALUES
 ('Kiev'),
 ('Moskva'),
 ('Kharkov'),

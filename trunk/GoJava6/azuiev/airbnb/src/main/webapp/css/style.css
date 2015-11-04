@@ -3,6 +3,8 @@ font:24px verdana, arial, helvetica, sans-serif; /* шрифт, размер ш�
 color : red; /* цвет шрифта */
 font-weight:900; /* насыщенность шрифта */
 background-color: light-blue;
+width: 25%; /* Ширина ячейки*/
+vertical-align: top; /* выравниевание по вертикали */
 }
 
 .headtab2 {
@@ -12,15 +14,30 @@ font-weight:900; /* насыщенность шрифта */
 background-color: light-blue;
 }
 
+.middle{
+border: 0px solid green; /* Рамка вокруг таблицы */
+margin: auto;           /* Таблица поцентру */
+}
+
 h1 {
 font: 36px ravie, arial, helvetica, sans-serif;
 color : #999999;
 font-weight:100;
 padding-left : 6px;
-
 }
 
 body{
 background-color: #FFECDE;
+margin-top: 10%; /* Отступ сверху */
+}
 
+img{
+width: 80%;
+}
+
+td {
+    padding-top: 5px;
+    padding-right: 5px;
+    padding-bottom: 5px;
+    padding-left: 5px;
 }
