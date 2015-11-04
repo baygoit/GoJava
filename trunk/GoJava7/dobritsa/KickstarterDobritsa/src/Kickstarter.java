@@ -19,8 +19,7 @@ public class Kickstarter {
 			ConsoleInspector consoleInspector = new ConsoleInspector();
 			
 			ConsolePrinter.println("You have chosen the category: " 
-					+ categoryStorage.getCategiry(consoleInspector.getInt())-1);
-			
+					+ categoryStorage.getCategiry(consoleInspector.getInt() - 1));
 		
 
 				
