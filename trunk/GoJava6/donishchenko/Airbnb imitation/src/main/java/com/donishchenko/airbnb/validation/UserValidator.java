@@ -11,6 +11,14 @@ public class UserValidator {
     private User user;
     private Map<String, String> errors = new HashMap<>();
 
+    //TODO login pattern
+    private static final String loginValidationPatternString =
+            "[a-zA-Z0-9]{4,40}";
+
+    //TODO password pattern
+    private static final String passwordValidationPatternString =
+            "(?=.*\\d*)(?=.*[a-z]*)(?=.*[A-Z]*).{6,100}";
+
     private static String nameValidationPatternString =
             "([A-Z][a-z]{1,39})(-([A-Z][a-z]{1,39}))*";
     private static String emailValidationPatternString =
@@ -24,15 +32,14 @@ public class UserValidator {
 
     public void validate() {
         validateLogin(user.getLogin());
-        //TODO password validation
-//      validatePassword(user.getPassword());
+        validatePassword(user.getPassword());
         validateEmail(user.getEmail());
         validateName(user.getName());
         validateSurname(user.getSurname());
     }
 
     public boolean validateLogin(String login) {
-        boolean valid = validateString(nameValidationPatternString, login);
+        boolean valid = validateString(loginValidationPatternString, login);
         if (!valid) {
             errors.put("login", "Invalid login");
         }
@@ -40,7 +47,7 @@ public class UserValidator {
     }
 
     public boolean validatePassword(String password) {
-        boolean valid = validateString(nameValidationPatternString, password);
+        boolean valid = validateString(passwordValidationPatternString, password);
         if (!valid) {
             errors.put("password", "Invalid password");
         }

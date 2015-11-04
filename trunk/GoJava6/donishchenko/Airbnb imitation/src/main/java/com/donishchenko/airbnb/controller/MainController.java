@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Map;
 
 public class MainController extends HttpServlet {
@@ -32,6 +33,8 @@ public class MainController extends HttpServlet {
 
         if ("/".equals(path)) {
             path = "/home";
+        } else if ("/search".equals(path)) {
+            //TODO
         }
 
         String url = "/WEB-INF/views" + path + ".jsp";
@@ -64,15 +67,21 @@ public class MainController extends HttpServlet {
 
                 req.getRequestDispatcher(url).forward(req, resp);
             } else {
-                //TODO handle exception
-                userService.register(user);
+                try {
+                    userService.register(user);
+                    HttpSession session = req.getSession();
+                    session.setAttribute("user", user);
 
-                HttpSession session = req.getSession();
-                session.setAttribute("user", user);
+                    resp.sendRedirect("/");
+                } catch (SQLException e) {
+                    //TODO handle exception
+                    req.getRequestDispatcher(url).forward(req, resp);
+                    e.printStackTrace();
+                }
 
-                resp.sendRedirect("/");
             }
-        } else if (SimpleAuthFilter.LOGIN_URL.equals(path)) {
+        }
+        else if (SimpleAuthFilter.LOGIN_URL.equals(path)) {
             String login = req.getParameter("login");
             String password = req.getParameter("password");
 
@@ -88,25 +97,6 @@ public class MainController extends HttpServlet {
                 req.getRequestDispatcher(url).forward(req, resp);
             }
         }
-//        else if ("/profile".equals(path)) {
-//            String name = req.getParameter("name");
-//            String surname = req.getParameter("surname");
-//            String email = req.getParameter("email");
-//
-//            User user = new User(name, surname, email);
-//            UserValidator userValidator = new UserValidator(user);
-//            userValidator.validate();
-//
-//            if (userValidator.hasErrors()) {
-//                Map<String, String> errors = userValidator.getErrors();
-//                for (Map.Entry<String, String> error : errors.entrySet()) {
-//                    req.setAttribute(error.getKey(), error.getValue());
-//                }
-//
-//                req.setAttribute("user", user);
-//
-//                req.getRequestDispatcher(url).forward(req, resp);
-//            }
-//        }
+        //TODO profile.POST
     }
 }
