@@ -1,6 +1,7 @@
 package ua.com.goit.gojava7.kickstarter;
 
 import java.util.List;
+import java.util.Scanner;
 
 public class Kickstarter {
 
@@ -10,21 +11,12 @@ public class Kickstarter {
 
 		// show all categories with index
 		CategoryStorage categoryStorage = new CategoryStorage();
-		// ConsolePrinter.println(categoryStorage);
 
 		List<String> categories = categoryStorage.getAllCategories();
 		ConsolePrinter.println(categories);
-		// ConsolePrinter.printlnListWithIndexes(categories);
-
-		// CategoriesPrinter cp cs
-
-		// CS => LIst<String> => List<Category>
-
-		/*
-		 * for (int i = 0; i < categories.size(); i++) {
-		 * ConsolePrinter.println(i + " : " + categories.get(i)); }
-		 */
-
+		ConsolePrinter.println("Please choose category by number");
+		Scanner scan = new Scanner(System.in);
+		int number = scan.nextInt();
 		// ask use to select 1
 		// read user input
 		// show selected category
