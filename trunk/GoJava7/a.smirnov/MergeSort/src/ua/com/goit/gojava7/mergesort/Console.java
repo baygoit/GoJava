@@ -32,7 +32,7 @@ public class Console {
 
 				switch (userInputedString.charAt(0)) {
 					case '1': {
-						getAutomaticGenereGeneratedNumbers();
+						getAutomaticGeneratedNumbers();
 						flagOne = false;
 					}
 						break;
@@ -82,7 +82,7 @@ public class Console {
 		}
 	}
 
-	private void getAutomaticGenereGeneratedNumbers() {
+	private void getAutomaticGeneratedNumbers() {
 		while (flagTwo) {
 			System.out.println(INSTRUCTION_FOR_AUTOMATICAL);
 			try {
