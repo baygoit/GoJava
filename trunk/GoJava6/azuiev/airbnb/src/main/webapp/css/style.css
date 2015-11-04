@@ -17,6 +17,7 @@ background-color: light-blue;
 .middle{
 border: 0px solid green; /* Рамка вокруг таблицы */
 margin: auto;           /* Таблица поцентру */
+margin-top: 10%;       /* Отступ сверху */
 }
 
 h1 {
@@ -28,7 +29,6 @@ padding-left : 6px;
 
 body{
 background-color: #FFECDE;
-margin-top: 10%; /* Отступ сверху */
 }
 
 img{
