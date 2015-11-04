@@ -5,13 +5,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Console {
-
-	public static void main(String[] args) {
-		Console con = new Console();
-		con.start();
-		System.out.println(con.getStorageOfUserNumbers());
-	}
-
+	
 	private int[] storageOfNumbersFromUser;
 	private static final String INSTRUCTION_STARTING_MENU = "Please make choose:\n"
 			+ " 1. Automatic generation of numbers \n" 
