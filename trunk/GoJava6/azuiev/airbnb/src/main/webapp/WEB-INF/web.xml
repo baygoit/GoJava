@@ -17,7 +17,7 @@
         <servlet-name>ControllerServlet</servlet-name>
         <url-pattern>/register</url-pattern>
         <url-pattern>/login</url-pattern>
-    </servlet-mapping>
+        </servlet-mapping>
 
     <servlet>
         <servlet-name>SearchServlet</servlet-name>
@@ -30,12 +30,12 @@
 
     <jsp-config>
         <jsp-property-group>
-            <url-pattern>/*</url-pattern>
-            <!--<url-pattern>/WEB-INF/view/*</url-pattern>-->
+           <url-pattern>/WEB-INF/view/*</url-pattern>
             <include-prelude>/WEB-INF/include/header.jsp</include-prelude>
             <!--<include-coda>/WEB-INF/jspf/footer.jspf</include-coda>-->
         </jsp-property-group>
     </jsp-config>
+
 
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>

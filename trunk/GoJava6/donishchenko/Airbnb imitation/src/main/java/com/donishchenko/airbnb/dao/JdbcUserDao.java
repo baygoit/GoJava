@@ -22,7 +22,7 @@ public class JdbcUserDao implements UserDao {
             "SELECT * FROM user";
 
     private static final String updateUserQuery =
-            "UPDATE user SET login = ?, password = ?, name = ?, surname = ?, email = ?, isHost = ? WHERE id = ?";
+            "UPDATE user SET login = ?, password = ?, email = ?, isHost = ?, name = ?, surname = ? WHERE id = ?";
 
     private static final String getUserByLoginPasswordQuery =
             "SELECT * FROM user WHERE login = ? and password = ?";
