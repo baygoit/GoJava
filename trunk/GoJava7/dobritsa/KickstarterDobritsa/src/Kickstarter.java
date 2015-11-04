@@ -9,10 +9,8 @@ public class Kickstarter {
 			QuoteStorage quoteStorage = new QuoteStorage();
 			ConsolePrinter.println(quoteStorage.getRandomQuote());
 			
-			// show all categories with index
 			CategoryStorage categoryStorage = new CategoryStorage();
 			
-			// ConsolePrinter.println(categoryStorage);
 			List<String> categories = categoryStorage.getAllCategories();
 			ConsolePrinter.printlnListWithIndexes(categories);
 			ConsolePrinter.println("Choose a category by number: ");
@@ -21,11 +19,6 @@ public class Kickstarter {
 			ConsolePrinter.println("You have chosen the category: " 
 					+ categoryStorage.getCategiry(consoleInspector.getInt() - 1));
 		
-
-				
-					// read user input
-					// show selected category
-
 
 	}
 
