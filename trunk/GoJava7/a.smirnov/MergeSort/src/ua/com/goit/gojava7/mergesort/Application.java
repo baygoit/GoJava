@@ -6,17 +6,13 @@ public class Application {
 		Console console = new Console();
 		MergeSort mergeSort = new MergeSort();
 		
-		// Eugene: From here I can't understand, what happens in 'start' method
-		console.start();
+		console.showMenuForUser();
 		
-		// Eugene: Maybe 'userArray' sounds a bit better. But nevermind
-		// Eugene: 'getStorage' sounds like it will return some Storage, not array
-		int[] userInputedNumbers = console.getStorageOfUserNumbers();
-		// Eugene: if you make output using 'Console' class, why here you use SOP?
+		int[] arrayOfUserInputedNumbers = console.getInputedUserNumbers();
 		System.out.print("User's inputed numbers:");
-		console.print(userInputedNumbers);
+		console.print(arrayOfUserInputedNumbers);
 		
-		int[] sortedUserInputedNumbers = mergeSort.sort(userInputedNumbers);
+		int[] sortedUserInputedNumbers = mergeSort.sort(arrayOfUserInputedNumbers);
 		System.out.print("Sorted inputed numbers:");
 		console.print(sortedUserInputedNumbers);
 	
