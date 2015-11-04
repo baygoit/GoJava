@@ -7,10 +7,10 @@ public class Console {
 	private Scanner inputReader;
 	
 	private Scanner getInputReader(){
-		if (this.inputReader == null) {
-			this.inputReader = new Scanner(System.in);			
+		if (inputReader == null) {
+			inputReader = new Scanner(System.in);			
 		}
-		return this.inputReader;
+		return inputReader;
 	}
 	
 	private String readLine(){
