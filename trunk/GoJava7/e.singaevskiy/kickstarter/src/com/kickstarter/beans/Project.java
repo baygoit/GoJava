@@ -109,6 +109,11 @@ public class Project {
 	public void setRewards(List<Reward> rewards) {
 		this.rewards = rewards;
 	}
+	
+	public long daysLeft() {
+		long ms = getEndDate().getTime() - System.currentTimeMillis();
+		return ms / (1000L*60L*60L*24L);
+	}
 
 	@Override
 	public String toString() {
