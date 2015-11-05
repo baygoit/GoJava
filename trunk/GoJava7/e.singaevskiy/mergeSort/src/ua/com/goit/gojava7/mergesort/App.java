@@ -22,8 +22,7 @@ public class App {
 
 		while (numbers == null) {
 			try {
-				// numbers = console.parseIntArray("2 0 3 6 10 8 7 1 9 4 5",
-				// DELIMITER);
+				// numbers = console.parseIntArray("2 0 3 6 10 8 7 1 9 4 5", DELIMITER);
 				numbers = console.readIntArray(DELIMITER);
 			} catch (IllegalArgumentException e) {
 				console.print(ERROR_MESSAGE);
