@@ -1,4 +1,4 @@
-package com.donishchenko.airbnb.jdbc;
+package com.donishchenko.airbnb.dbutils;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -9,7 +9,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
-public class DBUtils {
+public class JdbcUtils {
     private static final String url;
     private static final String username;
     private static final String password;
