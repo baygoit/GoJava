@@ -1,0 +1,5 @@
+INSERT INTO `airbnb`.`cityimages` (`image`,`city`) VALUES
+('Kiev.jpg',1),
+('Moskva.jpg',2),
+('Kharkov.jpg',3),
+('Odessa.jpg',4);
