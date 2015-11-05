@@ -9,12 +9,12 @@ public class Application {
 		console.showMenuForUser();
 		
 		int[] arrayOfUserInputedNumbers = console.getInputedUserNumbers();
-		System.out.print("User's inputed numbers:");
-		console.print(arrayOfUserInputedNumbers);
+		console.printInputedArray(arrayOfUserInputedNumbers);
 		
 		int[] sortedUserInputedNumbers = mergeSort.sort(arrayOfUserInputedNumbers);
-		System.out.print("Sorted inputed numbers:");
-		console.print(sortedUserInputedNumbers);
+		console.printSortedArray(sortedUserInputedNumbers);
+		
+		console.closeScanner();
 	
 	}
 }
