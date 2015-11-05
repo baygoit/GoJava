@@ -1,12 +1,14 @@
 package com.donishchenko.airbnb.controller;
 
-import com.donishchenko.airbnb.filter.SimpleAuthFilter;
 import com.donishchenko.airbnb.model.User;
 import com.donishchenko.airbnb.services.UserService;
 import com.donishchenko.airbnb.validation.UserValidator;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.*;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Map;
@@ -45,6 +47,7 @@ public class MainController extends HttpServlet {
         String path = req.getServletPath();
         String url = "/WEB-INF/views" + path + ".jsp";
 
+        /* Registration */
         if ("/registration".equals(path)) {
             String login = req.getParameter("login");
             String password = req.getParameter("password");
@@ -81,7 +84,8 @@ public class MainController extends HttpServlet {
 
             }
         }
-        else if (SimpleAuthFilter.LOGIN_URL.equals(path)) {
+        /* Login */
+        else if ("/login".equals(path)) {
             String login = req.getParameter("login");
             String password = req.getParameter("password");
 
@@ -97,7 +101,7 @@ public class MainController extends HttpServlet {
                 req.getRequestDispatcher(url).forward(req, resp);
             }
         }
-        //TODO profile.POST
+        /* Profile */
         else if ("/profile".equals(path)) {
             String name = req.getParameter("name");
             String surname = req.getParameter("surname");
