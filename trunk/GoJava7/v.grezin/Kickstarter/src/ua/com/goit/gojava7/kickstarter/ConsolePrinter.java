@@ -13,8 +13,8 @@ public final class ConsolePrinter {
 	}
 
 	public static void println(List<String> aCategories) {
-		for (int i = 0; i < aCategories.size(); i++) {
-			ConsolePrinter.println(i + " : " + aCategories.get(i));
+		for (int i = 1; i <= aCategories.size(); i++) {
+			ConsolePrinter.println(i + " : " + aCategories.get(i - 1));
 		}
 	}
 }
