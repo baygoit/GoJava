@@ -31,4 +31,14 @@ public class UserService {
         }
         return user;
     }
+
+    public User login(String email, String password) {
+        User user = null;
+        try {
+            user = dao.login(email,password);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return user;
+    }
 }
