@@ -17,8 +17,8 @@ public class Kickstarter {
 		ConsolePrinter.println("Please choose category by number");
 		Scanner scan = new Scanner(System.in);
 		int number = scan.nextInt();
-		// ask use to select 1
-		// read user input
+		ConsolePrinter.println(categories.get(number) + ":");
+		scan.close();
 		// show selected category
 	}
 }
