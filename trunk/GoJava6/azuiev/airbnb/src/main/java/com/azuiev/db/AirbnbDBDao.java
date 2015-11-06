@@ -1,13 +1,13 @@
 package com.azuiev.db;
 
-import com.azuiev.dao.DaoDB;
+import com.azuiev.dao.DBDao;
 
 import java.sql.*;
 
 /**
  * Created by Administrator on 06.10.15.
  */
-public class AirbnbDB implements DaoDB {
+public class AirbnbDBDao implements DBDao {
 
     // JDBC URL, username and password of MySQL server
     private static final String url = "jdbc:mysql://localhost:3306/airbnb";

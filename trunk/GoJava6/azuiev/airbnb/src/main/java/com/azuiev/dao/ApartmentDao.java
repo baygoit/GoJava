@@ -1,6 +1,6 @@
 package com.azuiev.dao;
 
-import com.azuiev.db.AirbnbDB;
+import com.azuiev.db.AirbnbDBDao;
 import com.azuiev.enums.ApartType;
 import com.azuiev.model.Apartment;
 import com.azuiev.model.User;
@@ -15,19 +15,19 @@ import java.util.List;
 /**
  * Created by Administrator on 02.11.15.
  */
-public class DaoApartment implements DaoModel{
+public class ApartmentDao implements ModelDao {
     private final Connection connection;
 
 
-    public DaoApartment(Connection connection) {
+    public ApartmentDao(Connection connection) {
         this.connection = connection;
     }
-    public DaoApartment() {
-        connection = new AirbnbDB().getConnection();
+    public ApartmentDao() {
+        connection = new AirbnbDBDao().getConnection();
 
     }
     @Override
-    public List<Apartment> getAll() throws SQLException {
+    public List<?> getAll() throws SQLException {
         String sql = "select * from apartment;";
         PreparedStatement stmt = connection.prepareStatement(sql);
 
@@ -44,11 +44,11 @@ public class DaoApartment implements DaoModel{
     }
 
     @Override
-    public Apartment getById(Integer id) throws SQLException {
+    public Apartment getById(Long id) throws SQLException {
 
         String sql = "select * from apartment where id = ?;";
         PreparedStatement stmt = connection.prepareStatement(sql);
-        stmt.setInt(1, id);
+        stmt.setLong(1, id);
 
         ResultSet rs = stmt.executeQuery();
 
@@ -62,18 +62,18 @@ public class DaoApartment implements DaoModel{
 
     }
 
-    public List<Apartment> getByCity(Integer id) throws SQLException {
+    public List<Apartment> getByCity(Long id) throws SQLException {
         String sql = "select apartment.id, user, city.name, address, aparttype from apartment \n" +
                 "left join city on (apartment.city=city.id) where apartment.city = ?;";
         PreparedStatement stmt = connection.prepareStatement(sql);
-        stmt.setInt(1, id);
+        stmt.setLong(1, id);
 
         ResultSet rs = stmt.executeQuery();
 
         List<Apartment> list = new ArrayList<Apartment>();
 
         while (rs.next()){
-            list.add(new Apartment(rs.getInt(1),rs.getInt(2),rs.getString(3),rs.getString(4), ApartType.values()[rs.getInt(5)]));
+            list.add(new Apartment(rs.getLong(1),rs.getLong(2),rs.getString(3),rs.getString(4), ApartType.values()[rs.getInt(5)]));
         }
 
         return list;
@@ -85,7 +85,7 @@ public class DaoApartment implements DaoModel{
     }
 
     @Override
-    public void insert(Object obj) {
+    public void add(Object obj) {
         //TODO
     }
 

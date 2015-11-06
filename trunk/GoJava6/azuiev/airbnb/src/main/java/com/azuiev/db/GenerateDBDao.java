@@ -1,6 +1,6 @@
 package com.azuiev.db;
 
-import com.azuiev.dao.DaoDB;
+import com.azuiev.dao.DBDao;
 
 import java.io.*;
 import java.sql.Connection;
@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * Created by Administrator on 09.10.15.
  */
-public class GenerateDB implements DaoDB{
+public class GenerateDBDao implements DBDao {
     private static final String url = "jdbc:mysql://localhost:3306/";
     private static final String dbName = "airbnb";
     private static final String user = "root";
@@ -23,7 +23,7 @@ public class GenerateDB implements DaoDB{
     private static Connection connection = null;
 
     public static void main(String[] args) {
-        new GenerateDB().recreate();
+        new GenerateDBDao().recreate();
     }
 
     @Override
@@ -75,7 +75,7 @@ public class GenerateDB implements DaoDB{
     }
 
     private void execute(String fileName) {
-        DaoDB db = new GenerateDB();
+        DBDao db = new GenerateDBDao();
         Connection connection = db.getConnection();
         try {
 

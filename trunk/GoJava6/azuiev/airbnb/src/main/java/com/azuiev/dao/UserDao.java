@@ -1,5 +1,5 @@
 package com.azuiev.dao;
-import com.azuiev.db.AirbnbDB;
+import com.azuiev.db.AirbnbDBDao;
 import com.azuiev.model.User;
 
 import java.sql.Connection;
@@ -12,16 +12,16 @@ import java.util.List;
 /**
  * Created by Administrator on 08.10.15.
  */
-public class DaoUser implements DaoModel {
+public class UserDao implements ModelDao {
 
     private final Connection connection;
 
 
-    public DaoUser(Connection connection) {
+    public UserDao(Connection connection) {
         this.connection = connection;
     }
-    public DaoUser() {
-        connection = new AirbnbDB().getConnection();
+    public UserDao() {
+        connection = new AirbnbDBDao().getConnection();
 
     }
     @Override
@@ -45,11 +45,11 @@ public class DaoUser implements DaoModel {
     }
 
     @Override
-    public User getById(Integer id) throws SQLException {
+    public User getById(Long id) throws SQLException {
 
         String sql = "select * from user where id = ?;";
         PreparedStatement stmt = connection.prepareStatement(sql);
-        stmt.setInt(1, id);
+        stmt.setLong(1, id);
 
         ResultSet rs = stmt.executeQuery();
 
@@ -90,7 +90,7 @@ public class DaoUser implements DaoModel {
     }
 
     @Override
-    public void insert(Object obj) {
+    public void add(Object obj) {
         //TODO
     }
 

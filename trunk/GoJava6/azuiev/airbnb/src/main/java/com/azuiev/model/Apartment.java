@@ -17,13 +17,13 @@ public class Apartment implements Comparable<Apartment> {
     private User owner;
     private String city;
     private String address;
-    private Integer id;
+    private Long id;
 
     private ApartType apartType;
 
     List<Reservation> reservations = new LinkedList<Reservation>();
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
@@ -52,7 +52,7 @@ public class Apartment implements Comparable<Apartment> {
         }
         return null;
     }
-    public Apartment(Integer id, Integer userId, String city, String address, ApartType apartType) {
+    public Apartment(Long id, Long userId, String city, String address, ApartType apartType) {
         UserService userService = new UserService();
         this.owner = userService.getById(userId);
         this.city = city;
