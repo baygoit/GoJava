@@ -28,14 +28,20 @@ public class Kickstarter {
 		consolePrinter.print(quoteStorage.getRandomQuote());
 
 		List<Category> categories = categoryStorage.getAllCategories();
-		consolePrinter.print(categories);
 
 		int selectedCategory;
 		do {
+			consolePrinter.print("");
+			consolePrinter.print(categories);
 			consolePrinter.print("Please select category (0 for exit): ");
 			selectedCategory = consoleScanner.getInt();
 
 			consolePrinter.print("You selected category number " + selectedCategory);
+
+			if (selectedCategory < 0 || selectedCategory >= categoryStorage.size()) {
+				consolePrinter.print("Please, enter the number between 0 and " + (categoryStorage.size() - 1));
+			}
+			// consolePrinter.print(categoryStorage.get(selectedCategory));
 			// show selected category
 		} while(selectedCategory != 0 );
 	}

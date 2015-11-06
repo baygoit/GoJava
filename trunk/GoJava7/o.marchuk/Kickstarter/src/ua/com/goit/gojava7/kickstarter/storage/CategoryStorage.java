@@ -17,4 +17,8 @@ public class CategoryStorage {
 		return Collections.unmodifiableList(categories);
 	}
 
+	public int size() {
+		return categories.size();
+	}
+
 }
