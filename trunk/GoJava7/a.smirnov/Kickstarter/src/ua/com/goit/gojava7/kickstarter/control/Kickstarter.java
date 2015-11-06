@@ -59,7 +59,7 @@ public class Kickstarter {
 					};break;
 					case 2: {
 						result.append(USER_CHOICE).
-							append("Arts").
+							append("Music").
 							append("\n").
 							append(SEPARATOR).
 							append(CATEGORY_PROJECTS).
@@ -69,7 +69,7 @@ public class Kickstarter {
 					};break;
 					case 3: {
 						result.append(USER_CHOICE).
-							append("Arts").
+							append("Sports").
 							append("\n").
 							append(SEPARATOR).
 							append(CATEGORY_PROJECTS).
@@ -79,7 +79,7 @@ public class Kickstarter {
 					};break;
 					case 4: {
 						result.append(USER_CHOICE).
-							append("Arts").
+							append("Culture").
 							append("\n").
 							append(SEPARATOR).
 							append(CATEGORY_PROJECTS).
@@ -89,7 +89,7 @@ public class Kickstarter {
 					};break;
 					case 5: {
 						result.append(USER_CHOICE).
-							append("Arts").
+							append("Movie").
 							append("\n").
 							append(SEPARATOR).
 							append(CATEGORY_PROJECTS).

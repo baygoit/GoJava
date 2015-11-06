@@ -17,15 +17,7 @@ public class Quote {
 		this.author = author;
 	}
 
-<<<<<<< HEAD
 	public String getAuthor() {
 		return author;
-=======
-	@Override
-	public String toString() {
-		// OLEG no StringBuilder? Why? :)
-		String infoQuote = getTitle() + " \n" + getAuthor();
-		return infoQuote;
->>>>>>> ab663b305363e409959091aee5fef442b1a5cbf8
 	}
 }

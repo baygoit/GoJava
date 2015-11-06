@@ -1,17 +1,13 @@
 package ua.com.goit.gojava7.kickstarter.view;
 
 import java.util.List;
-<<<<<<< HEAD
-
 import ua.com.goit.gojava7.kickstarter.dao.CategoryDAO;
-=======
 // OLEG unused
 import java.util.Scanner;
 
 import ua.com.goit.gojava7.kickstarter.dao.CategoryDAO;
 //OLEG unused
 import ua.com.goit.gojava7.kickstarter.dao.ProjectDAO;
->>>>>>> ab663b305363e409959091aee5fef442b1a5cbf8
 import ua.com.goit.gojava7.kickstarter.model.Category;
 
 public class PrinterCategory {

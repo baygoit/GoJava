@@ -27,8 +27,6 @@ public class Category {
 		}
 		return false;
 	}
-<<<<<<< HEAD
-=======
 
 	@Override
 	public String toString() {
@@ -37,5 +35,4 @@ public class Category {
 		return "Category: " + getName();
 	}
 
->>>>>>> ab663b305363e409959091aee5fef442b1a5cbf8
 }

@@ -8,16 +8,11 @@ import java.util.List;
 
 public class Project {
 
-<<<<<<< HEAD
 	private List<String> projectCategories;
 	private String projectName;
-=======
-	private List<String> projectCategories = new ArrayList<>();
 	// OLEG why DAO? Why not list of categories? Does it means that any project relates to all categories?
 	// OLEG not used, BTW
-	private CategoryDAO storageOfCategories;
 	private String title;
->>>>>>> ab663b305363e409959091aee5fef442b1a5cbf8
 	private String briefDescription;
 	private String fullDescription;
 	// OLEG double and money!!! WTF?
@@ -25,14 +20,11 @@ public class Project {
 	// OLEG double and money!!! WTF?
 	// OLEG Amout != Amount
 	private double currentAmoutOfMoney;
-<<<<<<< HEAD
 	private int expireProjectDate;
-=======
 	// OLEG do we really need it? It looks like calculated field
 	private int daysLeft;
 	// OLEG do we have code conversions to deny this and use class variable declaration on separated lines? let's discuss.
 	// OLEG what is these data for? the end date of fundraising? So, rename it
->>>>>>> ab663b305363e409959091aee5fef442b1a5cbf8
 	private int day, month, year;
 
 	public Project() {
