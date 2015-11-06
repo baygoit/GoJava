@@ -7,7 +7,7 @@
         <c:forEach var="item" items="${city}">
             <th class="headtab1">
             <a href="/search?cityid=${item.getId()}">${item.getName()}</a>
-            <p><img src=${item.getImage()}  alt="0_0"></p>
+            <p><img src=${item.imagePath()}  alt="0_0"></p>
             </th>
         </c:forEach>
         </tr>
