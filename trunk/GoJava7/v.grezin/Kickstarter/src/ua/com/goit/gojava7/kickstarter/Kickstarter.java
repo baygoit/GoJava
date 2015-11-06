@@ -11,24 +11,34 @@ public class Kickstarter {
 
 		// show all categories with index
 		ProjectStorage categoryStorage = new ProjectStorage();
-
 		List<String> categories = categoryStorage.getAllCategories();
-		ConsolePrinter.println(categories);
+		ProjectStorage projectStore = new ProjectStorage();
+		List<Project> projects;
 		Scanner scan = new Scanner(System.in);
 		for (int number = -1; number != 0;) {
-			ConsolePrinter.println("Please choose category by number");
+			ConsolePrinter.println(categories);
+			ConsolePrinter.println(
+					"Please choose category by number or '0' for exit");
 
 			number = scan.nextInt();
 			if (number != 0) {
 				ConsolePrinter.println(categories.get(number - 1) + ":");
 			}
 			for (int projectNumber = -1; projectNumber != 0;) {
-				categoryStorage
+				projects = projectStore
 						.getCategorizedProjects(categories.get(number - 1));
-				ConsolePrinter.println("Please choose project by number");
+				for (int i = 1; i <= projects.size(); i++) {
+					Project tempProject = projects.get(i - 1);
+					System.out.print(i + ": ");
+					ConsolePrinter.printProjects(tempProject);
+				}
+
+				ConsolePrinter.println(
+						"Please choose project by number or '0' for exit to category list");
+				projectNumber = scan.nextInt();
 			}
 		}
 		scan.close();
-		// show selected category
+
 	}
 }
