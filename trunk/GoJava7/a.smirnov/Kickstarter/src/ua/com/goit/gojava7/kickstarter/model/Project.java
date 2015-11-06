@@ -6,19 +6,20 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
-import ua.com.goit.gojava7.kickstarter.dao.CategoryDAO;
-
 public class Project {
 
-	private List<String> projectCategories = new ArrayList<>();
-	private CategoryDAO storageOfCategories;
-	private String title;
+	private List<String> projectCategories;
+	private String projectName;
 	private String briefDescription;
 	private String fullDescription;
 	private double requiredAmountOfMoney;
 	private double currentAmoutOfMoney;
-	private int daysLeft;
+	private int expireProjectDate;
 	private int day, month, year;
+
+	public Project() {
+		projectCategories = new ArrayList<>();
+	}
 
 	public void setBriefDescription(String briefDescription) {
 		this.briefDescription = briefDescription;
@@ -37,11 +38,11 @@ public class Project {
 	}
 
 	public void setTitle(String title) {
-		this.title = title;
+		this.projectName = title;
 	}
 
 	public String getTitle() {
-		return title;
+		return projectName;
 	}
 
 	public double getRequiredAmountOfMoney() {
@@ -60,7 +61,7 @@ public class Project {
 		return currentAmoutOfMoney;
 	}
 
-	public int getCalculationDaysLeft() {
+	public int getDaysLeft() {
 		Date date = new Date();
 		Calendar currentCalendar = Calendar.getInstance();
 		currentCalendar.setTime(date);
@@ -79,16 +80,16 @@ public class Project {
 		return Math.abs((int) days);
 	}
 
-	public void setFinalDateForFundraising(int day, int month, int year) {
+	public void setExpireProjectDate(int day, int month, int year) {
 		this.day = day;
 		this.month = month;
 		this.year = year;
 
-		this.daysLeft = getCalculationDaysLeft();
+		this.expireProjectDate = getDaysLeft();
 	}
 
-	public int getDaysLeft() {
-		return daysLeft;
+	public int getExpireProjectDate() {
+		return expireProjectDate;
 	}
 
 	public void setProjectCategory(String categoryName) {
