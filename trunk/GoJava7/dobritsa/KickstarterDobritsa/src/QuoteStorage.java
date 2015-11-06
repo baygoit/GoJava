@@ -33,6 +33,13 @@ public class QuoteStorage {
 		int randomNumber = RANDOM.nextInt(QUOTES.size());
 		return QUOTES.get(randomNumber);
 	}
+	
+	public static void printForChoice() {
+		for(int i = 0; i < QUOTES.size(); i++) {
+			System.out.println(i + 1 + ": " + QUOTES.get(i));
+		}
+		System.out.println("0: for exit");
+	}
 }
 	
 

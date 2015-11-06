@@ -10,12 +10,7 @@ public class CategoryStorage {
 	{
 		CATEGORIES.add("Movie");
 		CATEGORIES.add("Dance");
-		CATEGORIES.add("Food");
-		//CATEGORIES.add("Art");
-		//CATEGORIES.add("Design");
-		//CATEGORIES.add("Fashion");
-		//CATEGORIES.add("Music");
-		
+		CATEGORIES.add("Food");		
 	}
 	
 	public List<String> getAllCategories() {
@@ -25,4 +20,11 @@ public class CategoryStorage {
 	public String getCategiry(int index) {
 		return CATEGORIES.get(index);		
 	}
+	
+	public static void printForChoice() {
+		System.out.println("0: for exit");
+		for(int i = 0; i < CATEGORIES.size(); i++) {
+			System.out.println(i + 1 + ": " + CATEGORIES.get(i));
+		}		
+	}	
 }
