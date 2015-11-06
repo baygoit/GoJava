@@ -2,7 +2,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class SecondCategory {
-	Map<Integer, Project> secondCategory = new HashMap<>();
+	private Map<Integer, Project> secondCategory = new HashMap<>();
 	{ 
 		secondCategory.put(1, new Project(
 				"Shift the Grid presents Vacancy", 

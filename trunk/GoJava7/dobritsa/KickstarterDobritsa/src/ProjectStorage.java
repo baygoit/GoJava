@@ -21,6 +21,7 @@ public class ProjectStorage {
 	public static Map<Integer, Project> getProjectFourth() {return projectsInCategory;}
 	
 	public static void printAllShort() {
+		System.out.println("_________________________________________");
 		System.out.println("\n0: for return to list of categories");
 		for(Map.Entry<Integer, Project> item : projectsInCategory.entrySet()){			
 			System.out.println("\n" + item.getKey() + ":");
@@ -29,6 +30,7 @@ public class ProjectStorage {
 	}
 	
 	public static void printOneFull() {	
+		System.out.println("_________________________________________");
 		System.out.println("\n0: for return to Projects");
 		for(Map.Entry<Integer, Project> item : projectsInCategory.entrySet()){			
 			System.out.println("\n" + item.getKey() + ":");

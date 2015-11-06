@@ -38,6 +38,7 @@ public class Project{
     }
     
     public void printFull() {
+    	System.out.println("_________________________________________");  
     	System.out.println("\n0: for return to list of projects\n");    	
     	printShort();
     	System.out.println("History: " + history);

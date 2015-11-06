@@ -22,6 +22,7 @@ public class CategoryStorage {
 	}
 	
 	public static void printForChoice() {
+		System.out.println("\n_________________________________________");
 		System.out.println("0: for exit");
 		for(int i = 0; i < CATEGORIES.size(); i++) {
 			System.out.println(i + 1 + ": " + CATEGORIES.get(i));

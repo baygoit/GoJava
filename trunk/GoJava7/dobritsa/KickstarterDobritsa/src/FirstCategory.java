@@ -2,7 +2,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class FirstCategory {
-	Map<Integer, Project> firstCategory = new HashMap<>();
+	private Map<Integer, Project> firstCategory = new HashMap<>();
 	{
 		firstCategory.put(1, new Project(
 				"'Critical Mass': New solo music from Jerry Chamberlain!", 

@@ -23,7 +23,7 @@ public class Kickstarter {
 			System.out.println("See you soon!");
 			System.exit(0);
 			}
-		System.out.println("You have chosen the category: " + categoryStorage.getCategiry(categoryNumber - 1));		
+		System.out.println("Current category: " + categoryStorage.getCategiry(categoryNumber - 1));		
 		return categoryNumber;			
 	}
 	
@@ -35,7 +35,7 @@ public class Kickstarter {
 		if(projectNumber == 0) {
 			chooseProject(chooseCategory());
 			};
-		System.out.println("You have chosen the project: " + ProjectStorage.getProject(projectNumber).getName());
+		System.out.println("Current project: " + ProjectStorage.getProject(projectNumber).getName());
 		return projectNumber;
 	}
 	

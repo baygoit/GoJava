@@ -2,7 +2,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ThirdCategory {
-	Map<Integer, Project> thirdProjects = new HashMap<>();
+	private Map<Integer, Project> thirdProjects = new HashMap<>();
 	{ 
 		thirdProjects.put(1, new Project(
 			"The Cookie Counter: vegan bakery, espresso bar, & ice cream!", 
