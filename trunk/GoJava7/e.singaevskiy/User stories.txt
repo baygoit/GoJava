@@ -1,14 +1,19 @@
-UserStory 1. As a user, I want to be able to find projects by the title or description
-Scenario: In the search bar I insert text, pushing the button gets a list of matched projects
+Search 
+As a user, I want to be able to find projects by the title or description
+AC: In the search bar I insert text, pushing the button gets a list of matched projects
 
-UserStory 2. As a user, I want to login.
-Scenario: In authorization page  I type email, password, after pushing the 'Submit' button I get a confirmation email.
+Authorization 
+As a user, I want to login.
+AC: In authorization page  I type email, password, after pushing the 'Submit' button I get a confirmation email.
 
-UserStory 3. As an authorized user, I want to be able to add my own project
-Scenario: I can add projects, specifying their category, name, description, attaching files.
+Project creation 
+As an authorized user, I want to be able to add my own project
+AC: I can add projects, specifying their category, name, description, attaching files.
 
-UserStory 4. As an authorized user, I want to be able to add selected project to favorites 
-Scenario: Being on the page of projects, I mark the desired project, then I can see it in a separate favorites list.
+Favorites
+As an authorized user, I want to be able to add selected project to favorites 
+AC: Being on the page of projects, I mark the desired project, then I can see it in a separate favorites list.
 
-UserStory 5. As a user, I want to sort projects by popularity.
-Scenario 1: Being on the page of projects, I choose the type of sorting, get a sorted list in which projects are arranged by percentage of contributions.
+Sort popularity
+As a user, I want to sort projects by popularity.
+AC: Being on the page of projects, I choose the type of sorting, get a sorted list in which projects are arranged by percentage of contributions.
