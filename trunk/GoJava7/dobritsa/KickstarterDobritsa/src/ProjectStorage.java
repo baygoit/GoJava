@@ -5,6 +5,7 @@ public class ProjectStorage {
 	
 	private static Map<Integer, Project> projectsInCategory = new HashMap<Integer, Project>();	
 	
+	// OLEG SRL violated
 	public static void setProjectStorage(Integer i) {
 		if (i == 0) {
 			FirstCategory firstCategory = new FirstCategory();
@@ -18,8 +19,10 @@ public class ProjectStorage {
 		} else System.out.println("wrong choice");		
 	}
 	
+	// OLEG what?
 	public static Map<Integer, Project> getProjectFourth() {return projectsInCategory;}
 	
+	// OLEG SRL violated
 	public static void printAllShort() {
 		System.out.println("_________________________________________");
 		System.out.println("\n0: for return to list of categories");
@@ -29,6 +32,7 @@ public class ProjectStorage {
 		}				
 	}
 	
+	// OLEG SRL violated
 	public static void printOneFull() {	
 		System.out.println("_________________________________________");
 		System.out.println("\n0: for return to Projects");

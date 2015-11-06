@@ -1,4 +1,5 @@
-import java.util.List;
+//OLEG default package is not OK. Please use some
+// OLEG unused import
 
 public class Kickstarter {
 
@@ -7,7 +8,9 @@ public class Kickstarter {
 	private static Integer categoryNumber = null;
 	private static Integer projectNumber = null;
 
-	public static void main(String[] args) {				
+	public static void main(String[] args) {
+		// OLEG The static method getRandomQuote() from the type QuoteStorage should be accessed in a static way
+		// OLEG If you create new storage - make all methods non static. Or call methods in static wat
 		System.out.println(quoteStorage.getRandomQuote() + "\n");				
 		categoryNumber = chooseCategory();		
 		projectNumber = chooseProject(categoryNumber);
@@ -21,7 +24,9 @@ public class Kickstarter {
 		if(categoryNumber == 0) {
 			ConsoleInspector.close();		
 			System.out.println("See you soon!");
+			// OLEG avoid System.exit()
 			System.exit(0);
+			// OLEG something wrong with formatting
 			}
 		System.out.println("Current category: " + categoryStorage.getCategiry(categoryNumber - 1));		
 		return categoryNumber;			
