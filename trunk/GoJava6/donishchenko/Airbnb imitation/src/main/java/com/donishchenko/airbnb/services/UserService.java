@@ -1,8 +1,8 @@
 package com.donishchenko.airbnb.services;
 
 
+import com.donishchenko.airbnb.dao.HibernateUserDao;
 import com.donishchenko.airbnb.dao.UserDao;
-import com.donishchenko.airbnb.dao.JdbcUserDao;
 import com.donishchenko.airbnb.model.User;
 import com.google.common.base.Joiner;
 import org.apache.logging.log4j.LogManager;
@@ -15,7 +15,7 @@ import java.util.List;
 public class UserService {
     public static Logger log = LogManager.getLogger(UserService.class.getName());
 
-    private UserDao userDao = new JdbcUserDao();
+    private UserDao userDao = new HibernateUserDao();
 
     public void register(User user) throws SQLException {
         log.entry();

@@ -5,112 +5,125 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Console {
-	
-	private int[] storageOfNumbersFromUser;
-	private static final String INSTRUCTION_STARTING_MENU = "Please make choose:\n"
-			+ " 1. Automatic generation of numbers \n" 
-			+ " 2. Manual generation of numbers \n" 
-			+ " 3. Quit the program";
 
-	private static final String INSTRUCTION_FOR_MANUAL = "Please enter integer numbers "
+	private static final String STARTING_MENU = "Please, choose one option:\n" + " 1. Automatic generation numbers \n"
+			+ " 2. Manual generation numbers \n" + " 3. Quit the program";
+
+	private static final String INSTRUCTION_FOR_MANUAL_PROCESS = "Please enter integer numbers "
 			+ "(not more than 20) separated by spaces:";
-	private static final String INSTRUCTION_FOR_AUTOMATICAL = "Please enter desired amount "
+	private static final String INSTRUCTION_FOR_AUTOMATICAL_PROCESS = "Please enter desired amount "
 			+ "(not more than 20) of generated numbers:";
 	private static final String SEPARATOR = "=========================";
+	private static final String ACTIVITY_IF_EXCEPTION = "You entered forbidden symbols. So, try again";
 	private static final Random RANDOM = new Random();
 
-	private boolean flagOne = true;
-	private boolean flagTwo = true;
+	private int[] arrayOfUserInputedNumbers = null;
+	private boolean flagForStartingMenu = true;
+	private boolean flagForProcess = true;
+	private Scanner in = null;
 
-	public void start() {
-		while (flagOne) {
-			System.out.println(INSTRUCTION_STARTING_MENU + "\n" + SEPARATOR);
+	public void showMenuForUser() {
+		String userInputedString = "";
+		while (flagForStartingMenu) {
+			System.out.println(STARTING_MENU + "\n" + SEPARATOR);
+			
 			try {
-				Scanner in = new Scanner(System.in);
-				String userInputedString = in.nextLine();
+				in = new Scanner(System.in);
+				userInputedString = in.nextLine();
 				System.out.println(SEPARATOR);
 
 				switch (userInputedString.charAt(0)) {
 					case '1': {
-						getAutomaticGeneratedNumbers();
-						flagOne = false;
+						flagForStartingMenu = false;
+						generateAutomaticlyNumbers();
 					}
 						break;
 					case '2': {
-						getNumbersFromUser();
-						flagOne = false;
+						flagForStartingMenu = false;
+						generateNumbersFromUser();
 					}
 						break;
 					case '3': {
-						System.out.println("Good buy");
+						System.out.println("Good bye");
 						System.exit(1);
 					}
 						break;
 					default: {
-						System.out.println("You chose mismatch item. So try again");
+						System.out.println("You chose mismatch option. So try again");
 					}
 				}
+
 			} catch (Exception e) {
-				System.out.println("Sorry, An unexpected exception....");
-			}
+				System.out.println("ppppp");
+			} 
 		}
 	}
 
-	private void getNumbersFromUser() {
-		while (flagTwo) {
-			System.out.println(INSTRUCTION_FOR_MANUAL);
+	public void generateNumbersFromUser() {
+		while (flagForProcess) {
+			System.out.println(INSTRUCTION_FOR_MANUAL_PROCESS);
 			try {
-				Scanner in = new Scanner(System.in);
+				in = new Scanner(System.in);
 				String userInputedString = in.nextLine();
-				String[] storageOfNonparsingInputedValues = userInputedString.split(" ");
-				int amountOfInputedValues = storageOfNonparsingInputedValues.length;
-				storageOfNumbersFromUser = new int[amountOfInputedValues];
+				String[] nonparsingInputedValues = userInputedString.split(" ");
+				int amountOfInputedValues = nonparsingInputedValues.length;
+				arrayOfUserInputedNumbers = new int[amountOfInputedValues];
 
-				if (amountOfInputedValues > 20) {
-					System.out.println("You entered to much many numbers. Limit: 20 numbers. So, try again");
+				if (amountOfInputedValues > 25) {
+					System.out.println("You entered to many numbers. Limit: 25 numbers. So, try again");
 				} else if (amountOfInputedValues == 0) {
 					System.out.println("You did not enter any number. So, try again");
 				} else {
 					for (int index = 0; index < amountOfInputedValues; index++) {
-						storageOfNumbersFromUser[index] = Integer.parseInt(storageOfNonparsingInputedValues[index]);
+						arrayOfUserInputedNumbers[index] = Integer.parseInt(nonparsingInputedValues[index]);
 					}
-					flagTwo = false;
+					flagForProcess = false;
 				}
 			} catch (Exception e) {
-				System.out.println("You entered forbidden symbols. So, try again");
+				System.out.println(ACTIVITY_IF_EXCEPTION);
 			}
 		}
 	}
 
-	private void getAutomaticGeneratedNumbers() {
-		while (flagTwo) {
-			System.out.println(INSTRUCTION_FOR_AUTOMATICAL);
+	public void generateAutomaticlyNumbers() {
+		while (flagForProcess) {
+			System.out.println(INSTRUCTION_FOR_AUTOMATICAL_PROCESS);
 			try {
-				Scanner in = new Scanner(System.in);
+				in = new Scanner(System.in);
 				int amountOfInputedValues = in.nextInt();
-				if (amountOfInputedValues > 20) {
-					System.out.println("You want to  generate to many numbers. Limit: 20 numbers. So, try again");
+				if (amountOfInputedValues > 25) {
+					System.out.println("You want to  generate to many numbers. Limit: 25 numbers. So, try again");
 				} else if (amountOfInputedValues == 0) {
 					System.out.println("You entered 0...Do you want to generate numbers? So, try again");
 				} else {
-					storageOfNumbersFromUser = new int[amountOfInputedValues];
+					arrayOfUserInputedNumbers = new int[amountOfInputedValues];
 					for (int index = 0; index < amountOfInputedValues; index++) {
-						storageOfNumbersFromUser[index] = RANDOM.nextInt(amountOfInputedValues);
+						arrayOfUserInputedNumbers[index] = RANDOM.nextInt(amountOfInputedValues);
 					}
-					flagTwo = false;
+					flagForProcess = false;
 				}
 			} catch (Exception e) {
-				System.out.println("You entered forbidden symbols. So, try again");
+				System.out.println(ACTIVITY_IF_EXCEPTION);
 			}
 		}
 	}
 
-	public void print(int[] array) {
-		System.out.println(Arrays.toString(array));
+	public void printInputedArray(int[] array) {
+		System.out.println("User's inputed numbers:" + Arrays.toString(array));
+	}
+	
+	public void printSortedArray(int[] array) {
+		System.out.println("Sorted inputed numbers:" + Arrays.toString(array));
 	}
 
-	public int[] getStorageOfUserNumbers() {
-		return storageOfNumbersFromUser;
+	public int[] getInputedUserNumbers() {
+		return arrayOfUserInputedNumbers;
+	}
+	
+	public void closeScanner() {
+		if (in != null) {
+			in.close();
+		}
 	}
 
 }

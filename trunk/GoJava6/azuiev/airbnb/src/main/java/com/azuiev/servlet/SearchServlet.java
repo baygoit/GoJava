@@ -45,7 +45,7 @@ public class SearchServlet extends HttpServlet {
             }
             ServletContext context = req.getSession().getServletContext();
             // ServletContext context = getServletContext();
-            req.getRequestDispatcher(context.getInitParameter("path") + "search.jsp").forward(req, resp);
+            req.getRequestDispatcher(context.getInitParameter("path") +req.getServletPath()+ ".jsp").forward(req, resp);
          }
 
     }

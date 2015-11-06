@@ -1,69 +1,45 @@
 package homework1;
 
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class StringReverse {
+	private static final String PATTERN = "[A-zÀ-ÿ,¸¨]+";
+
 	public static void main(String[] args) {
 
-		// Testing
-		new StringReverse().reverseString(setUpUserInputData());
+		new StringReverse().print();
 	}
 
-	// Method reverses user's input text
-	public void reverseString(String inputUserText) {
+	public void print() {
+		StringBuilder result = new StringBuilder();
+		String userInputedString = getUserInputedString();
+		String reversedString = reverseInputedString(userInputedString);
+		result.append("User's inputed string: ").
+			append(userInputedString).
+			append("\n").
+			append("Reversed string: ").
+			append(reversedString);
+		System.out.println(result.toString());
+	}
 
-		// Converting input text into char array
-		char[] storageOfAllCharsFromUserInputText = inputUserText.toCharArray();
+	private String getUserInputedString() {
+		System.out.println("Please enter string: ");
+		Scanner in = new Scanner(System.in);
+		return in.nextLine();
+	}
 
-		StringBuilder tempWord = new StringBuilder();
-		StringBuilder finishText = new StringBuilder();
+	private String reverseInputedString(String userInputedString) {
+		StringBuilder result = new StringBuilder(userInputedString);
+		Matcher metcher = Pattern.compile(PATTERN).matcher(userInputedString);
 
-		// Loop over user input string
-		for (int step = 0; step < storageOfAllCharsFromUserInputText.length; step++) {
-
-			// Checking of every char in the storage
-			if (storageOfAllCharsFromUserInputText[step] >= 'a' && storageOfAllCharsFromUserInputText[step] <= 'z' || storageOfAllCharsFromUserInputText[step] >= 'A' && storageOfAllCharsFromUserInputText[step] <= 'Z') {
-
-				// Adding to temporary variable
-				tempWord.append(storageOfAllCharsFromUserInputText[step]);
-
-				// Checking of loop step 
-				if (step == storageOfAllCharsFromUserInputText.length - 1) {
-					finishText.append(tempWord.reverse());
-				}
-			} else {
-
-				// Checking of capacity of temporary word
-				if (tempWord.toString().isEmpty()) {
-
-					// Adding char to finish text
-					finishText.append(storageOfAllCharsFromUserInputText[step]);
-				} else {
-
-					// Reversing of temporary word and adding to finish text
-					finishText.append(tempWord.reverse());
-
-					// Deleting all chars from temporary word
-					tempWord.delete(0, tempWord.length());
-
-					// Adding char to finish text
-					finishText.append(storageOfAllCharsFromUserInputText[step]);
-				}
-			}
+		while (metcher.find()) {
+			result.replace(
+					metcher.start(), 
+					metcher.end(), 
+					new StringBuilder(metcher.group()).reverse().toString());
 		}
-		printUserInptTextAndReversedText(inputUserText, finishText);
+		return result.toString();
 	}
-	
-	// Method prints into console reversed text
-	public void printUserInptTextAndReversedText(String inputText, StringBuilder reversedText) {
-		System.out.println("User's input text: " + inputText + System.lineSeparator()
-							+ "Reversed user's text: " + reversedText.toString());
-	}
-
-	public static String setUpUserInputData() {
-		System.out.println("Please input text: ");
-		Scanner input = new Scanner(System.in);
-		return input.nextLine();
-	}
-
 }

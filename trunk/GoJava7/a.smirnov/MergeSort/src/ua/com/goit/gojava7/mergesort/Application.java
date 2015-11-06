@@ -6,15 +6,15 @@ public class Application {
 		Console console = new Console();
 		MergeSort mergeSort = new MergeSort();
 		
-		console.start();
+		console.showMenuForUser();
 		
-		int[] userInputedNumbers = console.getStorageOfUserNumbers();
-		System.out.print("User's inputed numbers:");
-		console.print(userInputedNumbers);
+		int[] arrayOfUserInputedNumbers = console.getInputedUserNumbers();
+		console.printInputedArray(arrayOfUserInputedNumbers);
 		
-		int[] sortedUserInputedNumbers = mergeSort.sort(userInputedNumbers);
-		System.out.print("Sorted inputed numbers:");
-		console.print(sortedUserInputedNumbers);
+		int[] sortedUserInputedNumbers = mergeSort.sort(arrayOfUserInputedNumbers);
+		console.printSortedArray(sortedUserInputedNumbers);
+		
+		console.closeScanner();
 	
 	}
 }
