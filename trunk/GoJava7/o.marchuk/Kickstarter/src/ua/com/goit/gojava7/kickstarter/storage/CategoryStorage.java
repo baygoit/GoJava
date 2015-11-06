@@ -21,4 +21,7 @@ public class CategoryStorage {
 		return categories.size();
 	}
 
+	public Category get(int i) {
+		return categories.get(i);
+	}
 }

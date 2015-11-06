@@ -36,12 +36,13 @@ public class Kickstarter {
 			consolePrinter.print("Please select category (0 for exit): ");
 			selectedCategory = consoleScanner.getInt();
 
-			consolePrinter.print("You selected category number " + selectedCategory);
-
 			if (selectedCategory < 0 || selectedCategory >= categoryStorage.size()) {
 				consolePrinter.print("Please, enter the number between 0 and " + (categoryStorage.size() - 1));
+				continue;
 			}
-			// consolePrinter.print(categoryStorage.get(selectedCategory));
+
+			consolePrinter.print("You selected category number " + selectedCategory);
+			consolePrinter.print(categoryStorage.get(selectedCategory));
 			// show selected category
 		} while(selectedCategory != 0 );
 	}

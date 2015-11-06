@@ -18,6 +18,10 @@ public class ConsolePrinter {
 			System.out.println(i + " : " + category.getName());
 		}
 	}
+	
+	public void print(Category category) {
+		System.out.println(category.getName());
+	}
 
 	public void print(String string) {
 		System.out.println(string);
