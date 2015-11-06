@@ -7,7 +7,7 @@ public class Category {
 	public Category() {
 		super();
 	}
-	
+
 	public Category(String name) {
 		super();
 		this.name = name;
@@ -25,14 +25,34 @@ public class Category {
 	public String toString() {
 		return "Category [name=" + name + "]";
 	}
-	
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		return result;
+	}
+
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null || obj instanceof Category) {
-			Category category  = (Category)obj;
-			return category.getName().equals(name);
+		if (this == obj) {
+			return true;
 		}
-		return false;
+		if (obj == null) {
+			return false;
+		}
+		if (getClass() != obj.getClass()) {
+			return false;
+		}
+		Category other = (Category) obj;
+		if (name == null && other.name != null) {
+			return false;
+		} 
+		if (!name.equals(other.name)) {
+			return false;
+		}
+		return true;
 	}
 
 }

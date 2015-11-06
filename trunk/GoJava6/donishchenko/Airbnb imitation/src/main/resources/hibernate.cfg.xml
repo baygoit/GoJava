@@ -9,6 +9,7 @@
         <property name="connection.url">jdbc:mysql://localhost/airbnb</property>
         <property name="connection.username">airbnbadmin</property>
         <property name="connection.password">147852</property>
+        <property name="connection.autocommit">false</property>
         <property name="connection.pool_size">10</property>
     </session-factory>
 </hibernate-configuration>

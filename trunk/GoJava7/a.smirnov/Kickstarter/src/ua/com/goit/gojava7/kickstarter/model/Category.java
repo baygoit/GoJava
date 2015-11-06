@@ -18,10 +18,24 @@ public class Category {
 
 	@Override
 	public boolean equals(Object obj) {
+		// OLEG why we selected equals with instanceof?
+		// OLEG WTF hashCode?
 		if (obj != null && obj instanceof Category) {
 			Category category = (Category) obj;
+			// OLEG this?
 			return this.name.equals(category.getName());
 		}
 		return false;
 	}
+<<<<<<< HEAD
+=======
+
+	@Override
+	public String toString() {
+		// OLEG not StringBuilder?
+		// OLEG why we use getter here?
+		return "Category: " + getName();
+	}
+
+>>>>>>> ab663b305363e409959091aee5fef442b1a5cbf8
 }

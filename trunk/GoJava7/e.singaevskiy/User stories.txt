@@ -1,15 +1,14 @@
-UserStory 1.  ак пользователь, € хочу иметь возможность найти нужный проект по названию или описанию
-—ценарий: ¬ строке поиска ввожу текст, по нажатию на кнопку получаю список проектов с совпадени€ми
+UserStory 1. As a user, I want to be able to find projects by the title or description
+Scenario: In the search bar I insert text, pushing the button gets a list of matched projects
 
-UserStory 2.  ак пользователь, € хочу авторизоватьс€ на сайте.
-—ценарий: ”казываю почту, пароль, получаю письмо с подтверждением. 
+UserStory 2. As a user, I want to login.
+Scenario: In authorization page  I type email, password, after pushing the 'Submit' button I get a confirmation email.
 
-UserStory 3.  ак авторизованный пользователь, € хочу иметь возможность добавить собственный проект 
-—ценарий: ћогу добавл€ть проекты, указыва€ их категорию, наименование, описание, прикрепл€€ файлы.
+UserStory 3. As an authorized user, I want to be able to add my own project
+Scenario: I can add projects, specifying their category, name, description, attaching files.
 
-UserStory 4.  ак авторизованный пользователь, € хочу иметь возможность добавить выбранный проект в закладки 
-—ценарий: Ќаход€сь в списке проектов, отмечаю нужный маркером, впоследствии могу видеть все отмеченные в отдельном списке.
+UserStory 4. As an authorized user, I want to be able to add selected project to favorites 
+Scenario: Being on the page of projects, I mark the desired project, then I can see it in a separate favorites list.
 
-UserStory 5.  ак пользователь, € хочу сортировать проекты по попул€рности.
-—ценарий 1: Ќаход€сь в списке проектов, выбираю тип сортировки, получаю список, в котором вверху оказываютс€ проекты с высшим процентом вкладов.
-
+UserStory 5. As a user, I want to sort projects by popularity.
+Scenario 1: Being on the page of projects, I choose the type of sorting, get a sorted list in which projects are arranged by percentage of contributions.
