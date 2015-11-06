@@ -7,6 +7,7 @@ import ua.com.goit.gojava7.kickstarter.dao.CategoryDAO;
 import ua.com.goit.gojava7.kickstarter.dao.ProjectDAO;
 import ua.com.goit.gojava7.kickstarter.dao.QuoteDAO;
 import ua.com.goit.gojava7.kickstarter.model.Category;
+// OLEG unused import
 import ua.com.goit.gojava7.kickstarter.model.Project;
 import ua.com.goit.gojava7.kickstarter.view.PrinterCategory;
 import ua.com.goit.gojava7.kickstarter.view.PrinterProject;
@@ -23,7 +24,8 @@ public class Main {
 	private String chooseCategoryName;
 
 	public static void main(String[] args) {
-
+		// OLEG all variables are not used
+		// OLEG how to run the application?
 		QuoteDAO allQuotes = new QuoteDAO();
 		CategoryDAO allCategories = new CategoryDAO();
 		ProjectDAO allProjects = new ProjectDAO();
