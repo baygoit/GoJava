@@ -1,6 +1,7 @@
 package ua.com.goit.gojava7.kickstarter;
 
 import ua.com.goit.gojava7.kickstarter.console.ConsolePrinter;
+import ua.com.goit.gojava7.kickstarter.console.ConsoleScanner;
 import ua.com.goit.gojava7.kickstarter.domain.Category;
 import ua.com.goit.gojava7.kickstarter.domain.Quote;
 import ua.com.goit.gojava7.kickstarter.storage.CategoryStorage;
@@ -10,12 +11,14 @@ public class KickstarterRunner {
 
 	public static void main(String[] args) {
 		ConsolePrinter consolePrinter = new ConsolePrinter();
+		ConsoleScanner consoleScanner = new ConsoleScanner();
 
 		QuoteStorage quoteStorage = initQuotes();
 		CategoryStorage categoryStorage = initCategories();
 
-		Kickstarter kickstarter = new Kickstarter(consolePrinter, quoteStorage, categoryStorage);
+		Kickstarter kickstarter = new Kickstarter(consolePrinter, consoleScanner, quoteStorage, categoryStorage);
 		kickstarter.run();
+		kickstarter.shutdown();
 	}
 
 	private static QuoteStorage initQuotes() {
