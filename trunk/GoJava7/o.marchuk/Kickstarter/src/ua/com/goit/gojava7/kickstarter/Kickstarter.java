@@ -2,31 +2,21 @@ package ua.com.goit.gojava7.kickstarter;
 
 import java.util.List;
 
+import ua.com.goit.gojava7.kickstarter.domain.Category;
 import ua.com.goit.gojava7.kickstarter.domain.Quote;
+import ua.com.goit.gojava7.kickstarter.storage.CategoryStorage;
 import ua.com.goit.gojava7.kickstarter.storage.QuoteStorage;
 
 public class Kickstarter {
 
 	public static void main(String[] args) {
 		QuoteStorage quoteStorage = initQuotes();
+		ConsolePrinter.print(quoteStorage.getRandomQuote());
 
-		ConsolePrinter.println(quoteStorage.getRandomQuote());
+		CategoryStorage categoryStorage = initCategories();
+		List<Category> categories = categoryStorage.getAllCategories();
+		ConsolePrinter.print(categories);
 
-		// show all categories with index
-		CategoryStorage categoryStorage = new CategoryStorage();
-		// ConsolePrinter.println(categoryStorage);
-
-		List<String> categories = categoryStorage.getAllCategories();
-
-		// ConsolePrinter.printlnListWithIndexes(categories);
-
-		// CategoriesPrinter cp cs
-
-		// CS => LIst<String> => List<Category>
-
-		for (int i = 0; i < categories.size(); i++) {
-			// ConsolePrinter.println(i + " : " + categories.get(i));
-		}
 		// ask use to select 1
 		// read user input
 		// show selected category
@@ -47,5 +37,13 @@ public class Kickstarter {
 				"Innovation distinguishes between a leader and a follower.",
 				"Steve Jobs"));
 		return quoteStorage;
+	}
+
+	private static CategoryStorage initCategories() {
+		CategoryStorage categoryStorage = new CategoryStorage();
+		categoryStorage.add(new Category("Movie"));
+		categoryStorage.add(new Category("Dances"));
+		categoryStorage.add(new Category("Food"));
+		return categoryStorage;
 	}
 }
