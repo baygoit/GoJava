@@ -2,12 +2,13 @@ import java.util.List;
 
 public class Kickstarter {
 
+	private static QuoteStorage quoteStorage = new QuoteStorage();
 	private static CategoryStorage categoryStorage = new CategoryStorage();
 	private static Integer categoryNumber = null;
 	private static Integer projectNumber = null;
 
 	public static void main(String[] args) {			
-		QuoteStorage quoteStorage = new QuoteStorage();
+		//QuoteStorage quoteStorage = new QuoteStorage();
 		System.out.println(quoteStorage.getRandomQuote() + "\n");				
 		categoryNumber = chooseCategory();		
 		projectNumber = chooseProject(categoryNumber);
@@ -17,10 +18,13 @@ public class Kickstarter {
 	}
 	
 	public static Integer chooseCategory() {
-		categoryStorage.printForChoice();
+		CategoryStorage.printForChoice();
 		System.out.println("\nChoose a category by number: ");		
-		Integer categoryNumber = ConsoleInspector.getInt();
-		if(categoryNumber == 0) {System.exit(0);}
+		categoryNumber = ConsoleInspector.getInt();
+		if(categoryNumber == 0) {
+			System.out.println("See you soon!");
+			System.exit(0);
+			}
 		System.out.println("You have chosen the category: " + categoryStorage.getCategiry(categoryNumber - 1));		
 		return categoryNumber;			
 	}
@@ -29,8 +33,10 @@ public class Kickstarter {
 		ProjectStorage.setProjectStorage(categoryNumber - 1);
 		ProjectStorage.printAllShort();			
 		System.out.println("\nChoose a project by number: ");
-		Integer projectNumber = ConsoleInspector.getInt();
-		if(projectNumber == 0) {chooseCategory();};
+		projectNumber = ConsoleInspector.getInt();
+		if(projectNumber == 0) {
+			chooseProject(chooseCategory());
+			};
 		System.out.println("You have chosen the project: " + ProjectStorage.getProject(projectNumber).getName());
 		return projectNumber;
 	}
@@ -39,6 +45,8 @@ public class Kickstarter {
 		Project project = new Project();
 		project =  ProjectStorage.getProject(projectNumber);
 		project.printFull();
-		if(ConsoleInspector.getInt() == 0) {chooseProject(categoryNumber);}
+		if(ConsoleInspector.getInt() == 0) {
+			viewProject(chooseProject(categoryNumber));
+			}
 	}
 }

@@ -30,7 +30,7 @@ public class Project{
     String getQuestions(){return questions;}
     
     public void printShort() {
-    	System.out.println("Number: " + name);
+    	System.out.println("Name: " + name);
     	System.out.println("Short description: " + description);
     	System.out.println("Goal: " + goal);
     	System.out.println("Pledged: " + pledged);

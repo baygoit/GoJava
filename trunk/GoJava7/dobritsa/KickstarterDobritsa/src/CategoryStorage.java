@@ -8,7 +8,7 @@ public class CategoryStorage {
 
 	private static final List<String> CATEGORIES = new ArrayList<String>();
 	{
-		CATEGORIES.add("Movie");
+		CATEGORIES.add("Music");
 		CATEGORIES.add("Dance");
 		CATEGORIES.add("Food");		
 	}
