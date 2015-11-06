@@ -8,20 +8,20 @@ public class QuoteStorage {
 	private static final List<String> QUOTES = new ArrayList<String>();
 		{
 			QUOTES.add("I work to stay alive. "
-					+ "\n(c) Bette Davis");
+					+ "\n     (c) Bette Davis");
 			QUOTES.add("There is only one boss. The customer. And he can fire everybody"
-					+ " in the company from the chairman on down, simply by "
-					+ "spending his money somewhere else. "
-					+ "\n(c) Sam Walton");
+					+ "\n     in the company from the chairman on down, simply by "
+					+ "\n     spending his money somewhere else. "
+					+ "\n     (c) Sam Walton");
 			QUOTES.add("Ideas pull the trigger, but instinct loads the gun. "
-					+ "\n(c) Don Marquis");
+					+ "\n     (c) Don Marquis");
 			QUOTES.add("There are no secrets to success. It is the result of preparation, "
-					+ "hard work, and learning from failure. "
-					+ "\n(c) Colin Powell");
+					+ "\n     hard work, and learning from failure. "
+					+ "\n     (c) Colin Powell");
 			QUOTES.	add("Happiness does not come from doing easy work but from the "
-					+ "afterglow of satisfaction that comes after the achievement "
-					+ "of a difficult task that demanded our best. "
-					+ "\n(c) Theodore Isaac Rubin");
+					+ "\n     afterglow of satisfaction that comes after the achievement "
+					+ "\n     of a difficult task that demanded our best. "
+					+ "\n     (c) Theodore Isaac Rubin");
 		}
 				
 	
