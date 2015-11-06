@@ -1,12 +1,8 @@
-
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class QuoteStorage {
-	
-	
+public class QuoteStorage {		
 	public static final Random RANDOM = new Random();
 	
 	private static final List<String> QUOTES = new ArrayList<String>();
@@ -32,6 +28,13 @@ public class QuoteStorage {
 	public static String getRandomQuote(){
 		int randomNumber = RANDOM.nextInt(QUOTES.size());
 		return QUOTES.get(randomNumber);
+	}
+	
+	public static void printForChoice() {
+		for(int i = 0; i < QUOTES.size(); i++) {
+			System.out.println(i + 1 + ": " + QUOTES.get(i));
+		}
+		System.out.println("0: for exit");
 	}
 }
 	

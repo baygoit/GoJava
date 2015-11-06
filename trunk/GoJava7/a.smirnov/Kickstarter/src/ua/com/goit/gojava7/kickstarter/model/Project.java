@@ -10,7 +10,7 @@ import ua.com.goit.gojava7.kickstarter.dao.CategoryDAO;
 
 public class Project {
 
-	private List<Category> projectCategories = new ArrayList<>();
+	private List<String> projectCategories = new ArrayList<>();
 	private CategoryDAO storageOfCategories;
 	private String title;
 	private String briefDescription;
@@ -92,29 +92,10 @@ public class Project {
 	}
 
 	public void setProjectCategory(String categoryName) {
-		List<Category> allCategories = storageOfCategories.getDataSource();
-		for (Category category : allCategories) {
-			if (category.getName().equalsIgnoreCase(categoryName)) {
-				projectCategories.add(category);
-			} else {
-				System.out.println("Category: " + categoryName + "does not exist. Do you want to new category?");
-				// TODO implements mechanism to add new category in general
-				// storage
-			}
-		}
+		projectCategories.add(categoryName);
 	}
 
-	public List<Category> getCategories() {
+	public List<String> getCategories() {
 		return Collections.unmodifiableList(projectCategories);
-	}
-
-	@Override
-	public String toString() {
-		String projectInfo = "Title: " + getTitle() + "\n" 
-				+ "Brief description: " + getBriefDescription() + "\n"
-				+ "Full description: " + getFullDescription() + "\n" 
-				+ "Required amount of money: " + getRequiredAmountOfMoney() + "\n" 
-				+ "Left days: " + getDaysLeft();
-		return projectInfo;
 	}
 }

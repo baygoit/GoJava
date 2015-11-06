@@ -2,9 +2,9 @@ package com.azuiev;
 
 import com.azuiev.dao.DaoDB;
 import com.azuiev.dao.DaoUser;
+import com.azuiev.db.AirbnbDB;
 import com.azuiev.enums.ApartType;
 import com.azuiev.model.Apartment;
-import com.azuiev.db.AirbnbDB;
 import com.azuiev.model.Organization;
 import com.azuiev.model.User;
 import org.apache.log4j.Logger;

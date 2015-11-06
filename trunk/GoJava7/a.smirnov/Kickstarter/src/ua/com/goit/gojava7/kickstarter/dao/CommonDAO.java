@@ -21,7 +21,7 @@ public abstract class CommonDAO<T> {
 	void remove(T element) {
 		dataSource.remove(element);
 	}
-	
+
 	public List<T> getDataSource() {
 		return dataSource;
 	}

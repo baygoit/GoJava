@@ -17,7 +17,7 @@
         <servlet-name>ControllerServlet</servlet-name>
         <url-pattern>/register</url-pattern>
         <url-pattern>/login</url-pattern>
-        </servlet-mapping>
+    </servlet-mapping>
 
     <servlet>
         <servlet-name>SearchServlet</servlet-name>
@@ -27,6 +27,16 @@
         <servlet-name>SearchServlet</servlet-name>
         <url-pattern>/search</url-pattern>
     </servlet-mapping>
+
+    <filter>
+        <filter-name>LoginFilter</filter-name>
+        <filter-class>com.azuiev.filter.LoginFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>LoginFilter</filter-name>
+        <url-pattern>/login</url-pattern>
+    </filter-mapping>
+
 
     <jsp-config>
         <jsp-property-group>
