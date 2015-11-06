@@ -23,16 +23,15 @@ public class Project{
         questions=q;
     }
     
-	// OLEG why package default access
 	// OLEG what is our code convention?
-    String getName(){return name;}
-    String getDescription(){return description;}
-    Integer getAmount(){return goal;}
-    Integer getPledged(){return pledged;}
-    Integer getDaysToGo(){return daysToGo;}
-    String getHistory(){return history;}
-    String getLink(){return link;}
-    String getQuestions(){return questions;}
+    public String getName(){return name;}
+    public String getDescription(){return description;}
+    public Integer getAmount(){return goal;}
+    public Integer getPledged(){return pledged;}
+    public Integer getDaysToGo(){return daysToGo;}
+    public String getHistory(){return history;}
+    public String getLink(){return link;}
+    public String getQuestions(){return questions;}
     
 	// OLEG SRL violated
     public void printShort() {

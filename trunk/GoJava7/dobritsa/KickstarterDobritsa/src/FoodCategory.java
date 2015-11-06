@@ -1,7 +1,7 @@
 import java.util.HashMap;
 import java.util.Map;
 
-public class ThirdCategory {
+public class FoodCategory {
 	private Map<Integer, Project> thirdProjects = new HashMap<>();
 	{ 
 		thirdProjects.put(1, new Project(
@@ -23,7 +23,7 @@ public class ThirdCategory {
 		thirdProjects.put(3, new Project("Name33", "Description33", 33000, 3300, 33, "history33", "link33", "questions33"));
 	}
 	
-	Map<Integer, Project> getProjects() {		
+	public Map<Integer, Project> getProjects() {		
 		return thirdProjects;		
 	}	
 }
