@@ -63,7 +63,7 @@ public class DaoApartment implements DaoModel{
     }
 
     public List<Apartment> getByCity(Integer id) throws SQLException {
-        String sql = "select apartment.id, user, city.city, address, aparttype from apartment \n" +
+        String sql = "select apartment.id, user, city.name, address, aparttype from apartment \n" +
                 "left join city on (apartment.city=city.id) where apartment.city = ?;";
         PreparedStatement stmt = connection.prepareStatement(sql);
         stmt.setInt(1, id);

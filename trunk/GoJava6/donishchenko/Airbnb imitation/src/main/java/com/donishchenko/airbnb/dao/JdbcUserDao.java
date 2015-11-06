@@ -1,7 +1,7 @@
 package com.donishchenko.airbnb.dao;
 
-import com.donishchenko.airbnb.jdbc.DBUtils;
-import com.donishchenko.airbnb.jdbc.QueryBuilder;
+import com.donishchenko.airbnb.dbutils.JdbcUtils;
+import com.donishchenko.airbnb.dbutils.QueryBuilder;
 import com.donishchenko.airbnb.model.User;
 
 import java.sql.*;
@@ -10,7 +10,7 @@ import java.util.List;
 
 public class JdbcUserDao implements UserDao {
     private static final String saveUserQuery =
-            "INSERT INTO user VALUES(null, ?, ?, ?, ?)";
+            "INSERT INTO user VALUES(null, ?, ?, ?, ?, ?, ?)";
 
     private static final String deleteUserQuery =
             "DELETE FROM user WHERE id = ?";
@@ -22,16 +22,21 @@ public class JdbcUserDao implements UserDao {
             "SELECT * FROM user";
 
     private static final String updateUserQuery =
-            "UPDATE user SET name = ?, surname = ?, email = ?, isHost = ? WHERE id = ?";
+            "UPDATE user SET login = ?, password = ?, email = ?, isHost = ?, name = ?, surname = ? WHERE id = ?";
+
+    private static final String getUserByLoginPasswordQuery =
+            "SELECT * FROM user WHERE login = ? and password = ?";
 
     @Override
-    public int save(User user) throws SQLException {
-        try (Connection conn = DBUtils.getConnection()) {
+    public Integer save(User user) throws SQLException {
+        try (Connection conn = JdbcUtils.getConnection()) {
             PreparedStatement stat = conn.prepareStatement(saveUserQuery, Statement.RETURN_GENERATED_KEYS);
-            stat.setString(1, user.getName());
-            stat.setString(2, user.getSurname());
+            stat.setString(1, user.getLogin());
+            stat.setString(2, user.getPassword());
             stat.setString(3, user.getEmail());
             stat.setBoolean(4, user.isHost());
+            stat.setString(5, user.getName());
+            stat.setString(6, user.getSurname());
 
             stat.executeUpdate();
 
@@ -44,8 +49,8 @@ public class JdbcUserDao implements UserDao {
     }
 
     @Override
-    public boolean delete(int id) throws SQLException {
-        try (Connection conn = DBUtils.getConnection()) {
+    public boolean delete(Integer id) throws SQLException {
+        try (Connection conn = JdbcUtils.getConnection()) {
             PreparedStatement stat = conn.prepareStatement(deleteUserQuery);
             stat.setInt(1, id);
 
@@ -56,19 +61,21 @@ public class JdbcUserDao implements UserDao {
     }
 
     @Override
-    public boolean update(int id, User user) throws SQLException {
+    public boolean update(Integer id, User user) throws SQLException {
         User existingUser = get(id);
         if (existingUser == null) {
             throw new SQLException("Wrong id");
         }
 
-        try (Connection conn = DBUtils.getConnection()) {
+        try (Connection conn = JdbcUtils.getConnection()) {
             PreparedStatement stat = conn.prepareStatement(updateUserQuery);
-            stat.setString(1, user.getName());
-            stat.setString(2, user.getSurname());
+            stat.setString(1, user.getLogin());
+            stat.setString(2, user.getPassword());
             stat.setString(3, user.getEmail());
             stat.setBoolean(4, user.isHost());
-            stat.setInt(5, id);
+            stat.setString(5, user.getName());
+            stat.setString(6, user.getSurname());
+            stat.setInt(7, id);
 
             int affectedRows = stat.executeUpdate();
 
@@ -77,15 +84,33 @@ public class JdbcUserDao implements UserDao {
     }
 
     @Override
-    public User get(int id) throws SQLException {
-        try (Connection conn = DBUtils.getConnection()) {
+    public User get(Integer id) throws SQLException {
+        try (Connection conn = JdbcUtils.getConnection()) {
             PreparedStatement stat = conn.prepareStatement(getUserByIdQuery);
             stat.setInt(1, id);
 
             ResultSet result = stat.executeQuery();
-            result.next();
+            if (result.next()) {
+                return createUser(result);
+            }
 
-            return createUser(result);
+            return null;
+        }
+    }
+
+    @Override
+    public User getByLoginPassword(String login, String password) throws SQLException {
+        try (Connection conn = JdbcUtils.getConnection()) {
+            PreparedStatement stat = conn.prepareStatement(getUserByLoginPasswordQuery);
+            stat.setString(1, login);
+            stat.setString(2, password);
+
+            ResultSet result = stat.executeQuery();
+            if (result.next()) {
+                return createUser(result);
+            }
+
+            return null;
         }
     }
 
@@ -106,9 +131,9 @@ public class JdbcUserDao implements UserDao {
 
     private List<User> getAllUsersWithParameter(Object...args) throws SQLException {
         QueryBuilder queryBuilder = new QueryBuilder(getAllUsersQuery);
-        queryBuilder.parse(args);
+        queryBuilder.parseSql(args);
 
-        try (Connection conn = DBUtils.getConnection()) {
+        try (Connection conn = JdbcUtils.getConnection()) {
             List<User> list = new LinkedList<>();
 
             String query = queryBuilder.getQuery();
@@ -129,12 +154,14 @@ public class JdbcUserDao implements UserDao {
 
     private User createUser(ResultSet result) throws SQLException {
         int id          = result.getInt(1);
-        String name     = result.getString(2);
-        String surname  = result.getString(3);
+        String login    = result.getString(2);
+        String password = result.getString(3);
         String email    = result.getString(4);
         boolean isHost  = result.getBoolean(5);
+        String name     = result.getString(6);
+        String surname  = result.getString(7);
 
-        User user = new User(name, surname, email, isHost);
+        User user = new User(login, password, email, isHost, name, surname);
         user.setId(id);
 
         return user;

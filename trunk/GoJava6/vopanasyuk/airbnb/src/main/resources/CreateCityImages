@@ -1,0 +1,9 @@
+CREATE  TABLE `airbnb`.`cityimages` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `image` VARCHAR(45) NOT NULL ,
+  `city` INT NOT NULL ,
+  PRIMARY KEY (`id`) ,
+  INDEX `city` (`city` ASC) ,
+    FOREIGN KEY (`city` )
+    REFERENCES `airbnb`.`city` (`id` )
+);

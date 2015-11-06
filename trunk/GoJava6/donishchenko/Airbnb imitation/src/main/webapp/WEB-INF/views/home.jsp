@@ -14,13 +14,13 @@
 </head>
 <body>
 
-<center><h1>Welcome User!</h1></center>
+<center><h1>Welcome ${sessionScope.user.login}!</h1></center>
 
 <div id="userInfo">
     <table style="border: 1px solid black">
         User Info
         <tr>
-            <td>Your name</td><td><c:out value="${sessionScope.user.name}" /></td>
+            <td>Your name</td><td>${sessionScope.user.name}</td>
         </tr>
         <tr>
             <td>Your surname</td><td><c:out value="${sessionScope.user.surname}" /></td>
@@ -29,10 +29,13 @@
             <td>Email</td><td><c:out value="${sessionScope.user.email}" /></td>
         </tr>
         <tr>
-            <td colspan="2"><a href="/editUser">Edit</a></td>
+            <td colspan="2"><a href="/profile">Edit</a></td>
         </tr>
-
     </table>
+
+    <a href="/logout">Log out</a>
 </div>
+
+<a href="/search">Search page</a>
 
 </body>
