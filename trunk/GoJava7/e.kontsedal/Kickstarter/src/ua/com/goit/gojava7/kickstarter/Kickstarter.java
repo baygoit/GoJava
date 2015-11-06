@@ -21,6 +21,7 @@ public class Kickstarter {
 		// read user input
 		UserCategorySelect selectedCategory = new UserCategorySelect();
 		int numberOfSelectedCategory = selectedCategory.getCategoryNumber();
+
 		// show selected category
 		CategoryConsolePrinter
 				.println(categoryStorage.getCategory(numberOfSelectedCategory));
@@ -30,6 +31,8 @@ public class Kickstarter {
 		projectStorage.setProject(new Project("THE BOONDOCK SAINTS",
 				"The Boondock Saints is a 1999 American crime film written and directed by Troy Duffy",
 				100000000D, 180), 0);
+
+		// show projects in selected category
 		ProjectsConsolePrinter.println(projectStorage,
 				numberOfSelectedCategory);
 
