@@ -22,6 +22,7 @@ public class Quote {
 
 	@Override
 	public String toString() {
+		// OLEG no StringBuilder? Why? :)
 		String infoQuote = getTitle() + " \n" + getAuthor();
 		return infoQuote;
 	}
