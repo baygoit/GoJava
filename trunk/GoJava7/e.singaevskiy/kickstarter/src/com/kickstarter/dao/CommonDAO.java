@@ -1,6 +1,7 @@
 package com.kickstarter.dao;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public abstract class CommonDAO<T> {
@@ -11,7 +12,7 @@ public abstract class CommonDAO<T> {
 	}
 
 	public List<T> getAll() {
-		return dataSource;
+		return Collections.unmodifiableList(dataSource);
 	}
 
 	public void add(T element) {
