@@ -1,9 +1,11 @@
 package ua.com.goit.gojava7.kickstarter.view;
 
 import java.util.List;
+// OLEG unused
 import java.util.Scanner;
 
 import ua.com.goit.gojava7.kickstarter.dao.CategoryDAO;
+//OLEG unused
 import ua.com.goit.gojava7.kickstarter.dao.ProjectDAO;
 import ua.com.goit.gojava7.kickstarter.model.Category;
 
