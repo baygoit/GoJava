@@ -44,15 +44,16 @@ public class ProjectStorage {
 	public List<Project> getCategorizedProjects(String categoryName) {
 		List<Project> categorizedProjects = new ArrayList<>();
 		for (Project aProject : projects) {
-			for (int j = 0; j < categorizedProjects.size(); j++) {
-				if ((aProject.getProjectCategory()
-						.equalsIgnoreCase(categoryName))) {
-					categorizedProjects.add(aProject);
-				}
-
+			if ((aProject.getProjectCategory()
+					.equalsIgnoreCase(categoryName))) {
+				categorizedProjects.add(aProject);
 			}
 
 		}
 		return categorizedProjects;
+	}
+
+	public List<Project> getAllProjects() {
+		return projects;
 	}
 }
