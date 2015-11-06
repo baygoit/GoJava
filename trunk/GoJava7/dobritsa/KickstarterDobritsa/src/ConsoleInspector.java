@@ -1,3 +1,4 @@
+import java.util.List;
 import java.util.Scanner;
 
 public class ConsoleInspector {
@@ -12,4 +13,14 @@ public class ConsoleInspector {
 	public static void close() {
 		sc.close();
 	}
+	
+	public static Integer waitCorrectChoice(List<Integer> list) {
+		Integer number = getInt();
+		for (Integer i : list) {
+			if(i == number) {
+				return number;
+			}
+		}		
+		return waitCorrectChoice(list);
+	}	
 }

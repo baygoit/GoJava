@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 
 public class Kickstarter {
@@ -42,9 +43,12 @@ public class Kickstarter {
 	public static void viewProject(Integer projectNumber){		
 		Project project = new Project();
 		project =  ProjectStorage.getProject(projectNumber);
-		project.printFull();
-		if(ConsoleInspector.getInt() == 0) {
-			viewProject(chooseProject(categoryNumber));
+		project.printFull();				
+		while(true) {
+			if (ConsoleInspector.getInt() == 0 ) {			
+				viewProject(chooseProject(categoryNumber));												
+			} 
+			System.out.println("Type 0 to choose another project");
 		}
 	}
 }
