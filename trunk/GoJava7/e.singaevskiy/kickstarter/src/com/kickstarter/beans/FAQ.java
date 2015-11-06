@@ -1,6 +1,7 @@
 package com.kickstarter.beans;
 
 public class FAQ {
+
 	private String question;
 	private String answer;
 
@@ -28,5 +29,10 @@ public class FAQ {
 
 	public void setAnswer(String answer) {
 		this.answer = answer;
+	}
+	
+	@Override
+	public String toString() {
+		return question + " : " + answer;
 	}
 }

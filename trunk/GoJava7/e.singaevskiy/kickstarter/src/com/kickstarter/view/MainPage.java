@@ -38,6 +38,11 @@ public class MainPage {
 		System.out.println("Goal: " + project.getGoalSum());
 		System.out.println("Balance: " + project.getBalanceSum());
 		System.out.println("Days left: " + project.daysLeft());
+		System.out.println("Video: " + project.getVideoUrl());
+		System.out.println("FAQ:");
+		project.getQuestionsAndAnswers().stream()
+			.map(faq -> "\t" + faq.toString())
+			.forEach(System.out::println);
 		showExit();
 	}
 	
