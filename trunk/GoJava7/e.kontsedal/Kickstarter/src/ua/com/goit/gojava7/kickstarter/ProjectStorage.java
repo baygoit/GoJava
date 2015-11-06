@@ -8,8 +8,7 @@ import java.util.Map;
 public class ProjectStorage {
 	private static final Map<Project, Integer> PROJECTS = new HashMap<>();
 
-	public static List<Project> getAllProjectsInCategory(
-			Integer numberOfCategory) {
+	public List<Project> getAllProjectsInCategory(Integer numberOfCategory) {
 		List<Project> projectsInCategory = new ArrayList<>();
 		for (Map.Entry<Project, Integer> project : PROJECTS.entrySet()) {
 			if (project.getValue() == numberOfCategory) {

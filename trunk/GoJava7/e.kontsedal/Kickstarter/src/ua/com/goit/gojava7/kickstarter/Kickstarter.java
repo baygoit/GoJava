@@ -5,11 +5,6 @@ public class Kickstarter {
 	public static void main(String[] args) {
 		QuoteStorage quoteStorage = new QuoteStorage();
 		StringConsolePrinter.println(quoteStorage.getRandomQuote());
-		ProjectStorage projectStorage = new ProjectStorage();
-		// add project in category 0
-		projectStorage.setProject(new Project("THE BOONDOCK SAINTS",
-				"The Boondock Saints is a 1999 American crime film written and directed by Troy Duffy",
-				100000000D, 180), 0);
 
 		CategoryStorage categoryStorage = new CategoryStorage();
 		// creating of categories
@@ -25,13 +20,18 @@ public class Kickstarter {
 
 		// read user input
 		UserCategorySelect selectedCategory = new UserCategorySelect();
-
-		CategoryConsolePrinter.println(categoryStorage
-				.getCategory(selectedCategory.getCategoryNumber()));
-
+		int numberOfSelectedCategory = selectedCategory.getCategoryNumber();
 		// show selected category
-		// StringConsolePrinter.println(categoryStorage
-		// .getCategory(selectedCategory.getCategoryNumber()));
+		CategoryConsolePrinter
+				.println(categoryStorage.getCategory(numberOfSelectedCategory));
+
+		ProjectStorage projectStorage = new ProjectStorage();
+		// add project in category 0
+		projectStorage.setProject(new Project("THE BOONDOCK SAINTS",
+				"The Boondock Saints is a 1999 American crime film written and directed by Troy Duffy",
+				100000000D, 180), 0);
+		ProjectsConsolePrinter.println(projectStorage,
+				numberOfSelectedCategory);
 
 	}
 }
