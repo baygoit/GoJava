@@ -11,8 +11,7 @@ public class Kickstarter {
 		System.out.println(quoteStorage.getRandomQuote() + "\n");				
 		categoryNumber = chooseCategory();		
 		projectNumber = chooseProject(categoryNumber);
-		viewProject(projectNumber);		
-		//ConsoleInspector.close();		
+		viewProject(projectNumber);				
 	}
 	
 	public static Integer chooseCategory() {
@@ -20,6 +19,7 @@ public class Kickstarter {
 		System.out.println("\nChoose a category by number: ");		
 		categoryNumber = ConsoleInspector.getInt();
 		if(categoryNumber == 0) {
+			ConsoleInspector.close();		
 			System.out.println("See you soon!");
 			System.exit(0);
 			}
