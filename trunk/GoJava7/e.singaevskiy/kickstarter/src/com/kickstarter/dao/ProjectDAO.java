@@ -12,7 +12,13 @@ import com.kickstarter.util.Utils;
 
 public class ProjectDAO extends CommonDAO<Project> {
 
+	private CategoryDAO categoryDAO;	
+	private FaqDAO faqDAO;
+	
 	public ProjectDAO() {
+		categoryDAO = new CategoryDAO();
+		faqDAO = new FaqDAO();
+		
 		addElementToDataSource("Xpand Lacing System",
 				"Get your shoes on in 3 seconds flat! No more bows, no more knots, no more tying!", 
 				"25.10.2015",
@@ -60,8 +66,10 @@ public class ProjectDAO extends CommonDAO<Project> {
 		project.setGoalSum(rnd.nextInt(100)*100L);
 		project.setBalanceSum(rnd.nextInt(100)*100L);
 		// project.setRewards(rewards);
+		
+		project.setQuestionsAndAnswers(faqDAO.getAll());
 
-		project.addCategory(new CategoryDAO().getByName(categoryName));
+		project.addCategory(categoryDAO.getByName(categoryName));
 		dataSource.add(project);
 	}
 

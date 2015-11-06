@@ -11,12 +11,20 @@ public class Project {
 	private Long balanceSum;
 	private Date startDate;
 	private Date endDate;
-	private List<Category> categories = new ArrayList<>();
+	private List<Category> categories;
 	private String description;
 	private String videoUrl;
 	private List<User> backers;
 	private List<Reward> rewards;
+	private List<FAQ> questionsAndAnswers;
 	private User author;
+	
+	public Project() {
+		categories = new ArrayList<>();
+		questionsAndAnswers = new ArrayList<>();
+		backers = new ArrayList<>();
+		rewards = new ArrayList<>();
+	}
 	
 	public String getName() {
 		return name;
@@ -68,6 +76,18 @@ public class Project {
 	
 	public void addCategory(Category category) {
 		this.categories.add(category);
+	}
+
+	public List<FAQ> getQuestionsAndAnswers() {
+		return questionsAndAnswers;
+	}
+
+	public void setQuestionsAndAnswers(List<FAQ> questionsAndAnswers) {
+		this.questionsAndAnswers = questionsAndAnswers;
+	}
+	
+	public void addQuestionAndAnswer(FAQ questionAndAnswer) {
+		this.questionsAndAnswers.add(questionAndAnswer);
 	}
 
 	public String getDescription() {
