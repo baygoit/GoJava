@@ -19,7 +19,7 @@ public class ProjectDAO extends CommonDAO<Project> {
 		project2.setFullDescription("AAAAAAAAAAAAAAAAAAA");
 		project2.setRequiredAmountOfMoney(4000);
 		project2.setFinalDateForFundraising(21, 11, 2016);
-		project2.setProjectCategory("Art");
+		project2.setProjectCategory("Sports");
 		
 		dataSource.add(project1);
 		dataSource.add(project2);

@@ -4,52 +4,46 @@ import java.util.List;
 import java.util.Scanner;
 
 import ua.com.goit.gojava7.kickstarter.dao.CategoryDAO;
+import ua.com.goit.gojava7.kickstarter.dao.ProjectDAO;
 import ua.com.goit.gojava7.kickstarter.model.Category;
 
 public class PrinterCategory {
 	private static final String CHOOSE_CATEGORY = "You choose category: ";
 	private static final String MAKE_CHOISE = "Please, make a choise: ";
-	private String userChoice = "";
 	private List<Category> listOfCategories = null;
-	private Scanner scanner;
-	private PrinterProject printerProject;
+	private Scanner in = null;
 	
-	public void showMenu() {
-		boolean flag = true;
+	public void showMenuToChooseCategory(CategoryDAO categories, ProjectDAO projects) {
+		boolean UserAccurancy = true;
 		
-		while(flag) {
+		while(UserAccurancy) {
 			try {
 				System.out.println(MAKE_CHOISE);
-				printAllCategories();
-				scanner = new Scanner(System.in);
-				int chooseNumber = scanner.nextInt();
+				printAllCategories(categories);
+				in = new Scanner(System.in);
+				int chooseNumber = in.nextInt();
 				
-				userChoice = listOfCategories.get(chooseNumber - 1).getName(); 
-				System.out.println(CHOOSE_CATEGORY + userChoice);
-				printerProject.printProjectsFromCategory(userChoice);
+				Category userChoice = listOfCategories.get(chooseNumber - 1);
+				System.out.println(CHOOSE_CATEGORY + userChoice.getName());
 				
-				flag = false;
+				UserAccurancy = false;
 			} catch (Exception e) {
 				System.out.println("Problems...");
+			} finally {
+				in.close();
 			}
 		}
 	}
 	
-	private void printAllCategories() {
-		CategoryDAO storageOfQuotes = new CategoryDAO();
-
-		listOfCategories = storageOfQuotes.getDataSource();
+	public void printAllCategories(CategoryDAO storageOfCategories) {
+		listOfCategories = storageOfCategories.getDataSource();
 		int amountOfCategories = listOfCategories.size();
 		StringBuilder result = new StringBuilder();
+		
 		for (int index = 0; index < amountOfCategories; index++) {
 			result.append(index + 1).append(". ").append(listOfCategories.get(index).getName()).append("\n");
 		}
+		
 		System.out.println(result.toString());
 	}
-	
-	public String getUserChoice() {
-		return userChoice;
-	}
-	
-	
 }
