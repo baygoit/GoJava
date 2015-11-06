@@ -92,46 +92,46 @@ public class MergeSort {
 		}
 	}
 
-	// OLEG ah, nice, comment for method again.
-	// Dividing user storage of numbers on two halves and sorting its
-	// OLEG check our code convention. UserNumbers is a name for class, not variable.
-	// OLEG why not just sort()?
-	private int[] sortMerge(int[] UserNumbers) {
-		if (UserNumbers.length < 2) {
-			return UserNumbers;
+		// OLEG ah, nice, comment for method again.
+		// Dividing user storage of numbers on two halves and sorting its
+		// OLEG check our code convention. UserNumbers is a name for class, not variable.
+		// OLEG why not just sort()?
+		private int[] sortMerge(int[] UserNumbers) {
+			if (UserNumbers.length < 2) {
+				return UserNumbers;
+			}
+			int middleOfArrayLength = UserNumbers.length / 2;
+	
+			// OLEG we can avoid Arrays.copy at all, I think. Not sure. Bot ok.
+			// OLEG Just too many actions for 1 line
+			return merge(sortMerge(Arrays.copyOfRange(UserNumbers, 0, middleOfArrayLength)),
+					sortMerge(Arrays.copyOfRange(UserNumbers, middleOfArrayLength, UserNumbers.length)));
 		}
-		int middleOfArrayLength = UserNumbers.length / 2;
-
-		// OLEG we can avoid Arrays.copy at all, I think. Not sure. Bot ok.
-		// OLEG Just too many actions for 1 line
-		return merge(sortMerge(Arrays.copyOfRange(UserNumbers, 0, middleOfArrayLength)),
-				sortMerge(Arrays.copyOfRange(UserNumbers, middleOfArrayLength, UserNumbers.length)));
-	}
-
-	// OLEG ok, i get it
-	// Merging two sorted arrays in one general
-	private int[] merge(int[] firstArray, int[] secondArray) {
-
-		int indexOfFirstArray = 0, indexOfSecondArray = 0;
-		// OLEG do we use a lot of memory? again and again? can we avoid this? I don't know now
-		int[] result = new int[firstArray.length + secondArray.length];
-
-		// OLEG Ok, i should think about more, but i am tired as code reviewer. next time
-		for (int barrier = 0; barrier < result.length; barrier++) {
-			if (indexOfSecondArray < secondArray.length && indexOfFirstArray < firstArray.length) {
-				if (firstArray[indexOfFirstArray] > secondArray[indexOfSecondArray]) {
+	
+		// OLEG ok, i get it
+		// Merging two sorted arrays in one general
+		private int[] merge(int[] firstArray, int[] secondArray) {
+	
+			int indexOfFirstArray = 0, indexOfSecondArray = 0;
+			// OLEG do we use a lot of memory? again and again? can we avoid this? I don't know now
+			int[] result = new int[firstArray.length + secondArray.length];
+	
+			// OLEG Ok, i should think about more, but i am tired as code reviewer. next time
+			for (int barrier = 0; barrier < result.length; barrier++) {
+				if (indexOfSecondArray < secondArray.length && indexOfFirstArray < firstArray.length) {
+					if (firstArray[indexOfFirstArray] > secondArray[indexOfSecondArray]) {
+						result[barrier] = secondArray[indexOfSecondArray++];
+					} else {
+						result[barrier] = firstArray[indexOfFirstArray++];
+					}
+				} else if (indexOfSecondArray < secondArray.length) {
 					result[barrier] = secondArray[indexOfSecondArray++];
 				} else {
 					result[barrier] = firstArray[indexOfFirstArray++];
 				}
-			} else if (indexOfSecondArray < secondArray.length) {
-				result[barrier] = secondArray[indexOfSecondArray++];
-			} else {
-				result[barrier] = firstArray[indexOfFirstArray++];
 			}
+			return result;
 		}
-		return result;
-	}
 
 	// OLEG nice
 	// Printing into console user's inserted numbers

@@ -25,7 +25,8 @@ public class DaoCity implements DaoModel {
 
     @Override
     public List<City> getAll() throws SQLException {
-        String sql = "select * from city;";
+        String sql = "select city.id,city.name,cityimages.image from city left join cityimages " +
+                "on (city.id = cityimages.city);";
         PreparedStatement stmt = connection.prepareStatement(sql);
 
         ResultSet rs = stmt.executeQuery();
@@ -33,7 +34,7 @@ public class DaoCity implements DaoModel {
 
 
         while (rs.next()){
-            list.add(new City(rs.getInt(1),rs.getString(2)));
+            list.add(new City(rs.getInt(1),rs.getString(2),rs.getString(3)));
         }
 
         return list;

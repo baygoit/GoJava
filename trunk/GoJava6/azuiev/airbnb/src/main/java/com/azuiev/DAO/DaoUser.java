@@ -65,6 +65,25 @@ public class DaoUser implements DaoModel {
 
     }
 
+    public User login(String email, String password) throws SQLException {
+        String sql = "select id, name, surname, email  from user where email = ? and password = ?;";
+        PreparedStatement stmt = connection.prepareStatement(sql);
+        stmt.setString(1, email);
+        stmt.setString(2, password);
+
+        ResultSet rs = stmt.executeQuery();
+
+        User user = null;
+
+        while (rs.next()){
+            User.Builder builder = User.createBuilder();
+            user = builder.createUser(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4));
+
+        }
+
+        return user;
+    }
+
     @Override
     public void update(Object obj) {
         //TODO
@@ -75,10 +94,9 @@ public class DaoUser implements DaoModel {
         //TODO
     }
 
+
     @Override
     public void delete(Object obj) {
         //TODO
     }
-
-
 }

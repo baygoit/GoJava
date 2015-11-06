@@ -1,16 +1,36 @@
 package com.donishchenko.airbnb.model;
 
-import com.donishchenko.airbnb.common.Observer;
 import com.google.common.base.Joiner;
+import org.hibernate.annotations.GenericGenerator;
 
-public class User implements Observer {
+import javax.persistence.*;
+
+@Entity
+@Table(name = "user")
+public class User {
+    @Id
+    @GeneratedValue(generator = "increment")
+    @GenericGenerator(name = "increment", strategy = "increment")
+    @Column(name = "id")
     private int id;
+
+    @Column(name = "login")
     private String login;
+
+    @Column(name = "password")
     private String password;
-    private String name;
-    private String surname;
+
+    @Column(name = "email")
     private String email;
+
+    @Column(name = "isHost")
     private boolean isHost;
+
+    @Column(name = "name")
+    private String name;
+
+    @Column(name = "surname")
+    private String surname;
 
     public User() {}
 
@@ -55,22 +75,6 @@ public class User implements Observer {
         this.password = password;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getSurname() {
-        return surname;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
-
     public String getEmail() {
         return email;
     }
@@ -87,9 +91,20 @@ public class User implements Observer {
         this.isHost = host;
     }
 
-    @Override
-    public void update(String message) {
-        System.out.println(toString() + ": " + message);
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
     }
 
     @Override

@@ -1,6 +1,5 @@
 package com.donishchenko.airbnb.controller;
 
-import com.donishchenko.airbnb.filter.SimpleAuthFilter;
 import com.donishchenko.airbnb.model.User;
 import com.donishchenko.airbnb.services.UserService;
 import com.donishchenko.airbnb.validation.UserValidator;
@@ -48,14 +47,18 @@ public class MainController extends HttpServlet {
         String path = req.getServletPath();
         String url = "/WEB-INF/views" + path + ".jsp";
 
-        if (SimpleAuthFilter.REGISTRATION_URL.equals(path)) {
+        /* Registration */
+        if ("/registration".equals(path)) {
             String login = req.getParameter("login");
             String password = req.getParameter("password");
             String email = req.getParameter("email");
 
             User user = new User(login, password, email);
-            UserValidator userValidator = new UserValidator(user);
-            userValidator.validate();
+            UserValidator userValidator = new UserValidator();
+
+            userValidator.validateLogin(login);
+            userValidator.validatePassword(password);
+            userValidator.validateEmail(email);
 
             if (userValidator.hasErrors()) {
                 Map<String, String> errors = userValidator.getErrors();
@@ -81,7 +84,8 @@ public class MainController extends HttpServlet {
 
             }
         }
-        else if (SimpleAuthFilter.LOGIN_URL.equals(path)) {
+        /* Login */
+        else if ("/login".equals(path)) {
             String login = req.getParameter("login");
             String password = req.getParameter("password");
 
@@ -97,6 +101,38 @@ public class MainController extends HttpServlet {
                 req.getRequestDispatcher(url).forward(req, resp);
             }
         }
-        //TODO profile.POST
+        /* Profile */
+        else if ("/profile".equals(path)) {
+            String name = req.getParameter("name");
+            String surname = req.getParameter("surname");
+            String email = req.getParameter("email");
+
+            UserValidator userValidator = new UserValidator();
+            userValidator.validateName(name);
+            userValidator.validateSurname(surname);
+            userValidator.validateEmail(email);
+
+            if (userValidator.hasErrors()) {
+                Map<String, String> errors = userValidator.getErrors();
+                for (Map.Entry<String, String> error : errors.entrySet()) {
+                    req.setAttribute(error.getKey(), error.getValue());
+                }
+
+                req.getRequestDispatcher(url).forward(req, resp);
+            } else {
+                HttpSession session = req.getSession();
+
+                User user = (User) session.getAttribute("user");
+                user.setName(name);
+                user.setSurname(surname);
+                user.setEmail(email);
+
+                userService.updateUser(user.getId(), user);
+
+                req.setAttribute("success", "Successfully");
+
+                req.getRequestDispatcher(url).forward(req, resp);
+            }
+        }
     }
 }
