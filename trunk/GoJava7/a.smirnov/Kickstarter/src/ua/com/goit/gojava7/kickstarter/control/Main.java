@@ -32,8 +32,6 @@ public class Main {
 		PrinterProject printerProject = new PrinterProject();
 		PrinterQuotes printerQuotes = new PrinterQuotes();
 
-		new Main().showMenu(allCategories, allProjects);
-		printerProject.printProjectsFromCategory(allProjects, new Main().getChooseCategoryName());
 	}
 
 	public void showMenu(CategoryDAO categories, ProjectDAO projects) {
@@ -76,10 +74,9 @@ public class Main {
 			}
 		}
 	}
-	
-	
-	public  String getChooseCategoryName() {
+
+	public String getChooseCategoryName() {
 		return chooseCategoryName;
 	}
-	
+
 }

@@ -5,7 +5,7 @@ import ua.com.goit.gojava7.kickstarter.model.Category;
 public class CategoryDAO extends CommonDAO<Category> {
 
 	public CategoryDAO() {
-	
+
 		Category category1 = new Category("Art");
 		Category category2 = new Category("Music");
 		Category category3 = new Category("Sports");

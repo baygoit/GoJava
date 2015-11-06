@@ -11,7 +11,7 @@ public class PrinterQuotes {
 	private static final Random RANDOM = new Random();
 
 	public void printQuotes(QuoteDAO storageOfQuotes) {
-		
+
 		List<Quote> listOfQuotes = storageOfQuotes.getDataSource();
 		int amountOfQuotes = listOfQuotes.size();
 		StringBuilder result = new StringBuilder();
