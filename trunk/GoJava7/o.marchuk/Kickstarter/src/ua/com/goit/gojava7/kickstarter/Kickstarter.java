@@ -2,6 +2,7 @@ package ua.com.goit.gojava7.kickstarter;
 
 import java.util.List;
 
+import ua.com.goit.gojava7.kickstarter.console.ConsolePrinter;
 import ua.com.goit.gojava7.kickstarter.domain.Category;
 import ua.com.goit.gojava7.kickstarter.domain.Quote;
 import ua.com.goit.gojava7.kickstarter.storage.CategoryStorage;
