@@ -15,7 +15,7 @@ public class Kickstarter {
 		viewProject(projectNumber);				
 	}
 	
-	public static Integer chooseCategory() {
+	private static Integer chooseCategory() {
 		CategoryStorage.printForChoice();
 		System.out.println("\nChoose a category by number: ");		
 		categoryNumber = ConsoleInspector.getInt();
@@ -28,7 +28,7 @@ public class Kickstarter {
 		return categoryNumber;			
 	}
 	
-	public static Integer chooseProject(Integer categoryNumber) {
+	private static Integer chooseProject(Integer categoryNumber) {
 		ProjectStorage.setProjectStorage(categoryNumber - 1);
 		ProjectStorage.printAllShort();			
 		System.out.println("\nChoose a project by number: ");
@@ -40,7 +40,7 @@ public class Kickstarter {
 		return projectNumber;
 	}
 	
-	public static void viewProject(Integer projectNumber){		
+	private static void viewProject(Integer projectNumber){		
 		Project project = new Project();
 		project =  ProjectStorage.getProject(projectNumber);
 		project.printFull();				

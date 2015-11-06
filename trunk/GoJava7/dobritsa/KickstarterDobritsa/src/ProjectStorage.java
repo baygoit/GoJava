@@ -7,13 +7,13 @@ public class ProjectStorage {
 	
 	public static void setProjectStorage(Integer i) {
 		if (i == 0) {
-			FirstCategory firstCategory = new FirstCategory();
+			MusicCategory firstCategory = new MusicCategory();
 			projectsInCategory = firstCategory.getProjects();		
 		} else if (i == 1) {
-			SecondCategory secondCategory = new SecondCategory();
+			DanceCategory secondCategory = new DanceCategory();
 			projectsInCategory = secondCategory.getProjects();	
 		} else if (i == 2) {
-			ThirdCategory thirdCategory = new ThirdCategory();
+			FoodCategory thirdCategory = new FoodCategory();
 			projectsInCategory = thirdCategory.getProjects();	
 		} else System.out.println("wrong choice");		
 	}

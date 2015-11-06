@@ -3,7 +3,7 @@ import java.util.List;
 import java.util.Random;
 
 public class QuoteStorage {		
-	public static final Random RANDOM = new Random();
+	private static final Random RANDOM = new Random();
 	
 	private static final List<String> QUOTES = new ArrayList<String>();
 		{
