@@ -1,8 +1,5 @@
 package ua.com.goit.gojava7.kickstarter.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Category {
 	private String name;
 
@@ -19,7 +16,21 @@ public class Category {
 	}
 
 	@Override
+	public boolean equals(Object obj) {
+		// OLEG why we selected equals with instanceof?
+		// OLEG WTF hashCode?
+		if (obj != null && obj instanceof Category) {
+			Category category = (Category) obj;
+			// OLEG this?
+			return this.name.equals(category.getName());
+		}
+		return false;
+	}
+
+	@Override
 	public String toString() {
+		// OLEG not StringBuilder?
+		// OLEG why we use getter here?
 		return "Category: " + getName();
 	}
 

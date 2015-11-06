@@ -1,7 +1,5 @@
 package ua.com.goit.gojava7.kickstarter;
 
-import java.util.Date;
-
 public class Project {
 
 	private String projectName;
@@ -9,18 +7,18 @@ public class Project {
 	private String projectDescription;
 	private double projectAimBalance;
 	private double projectCurrentBalance;
-	private Date dueDate;
+	private int daysLeft;
 
 	public Project(String projectName, String projectCategory,
 			String projectDescription, double projectAimBalance,
-			double projectCurrentBalance, Date dueDate) {
+			double projectCurrentBalance, int daysLeft) {
 		super();
 		this.projectName = projectName;
 		this.projectCategory = projectCategory;
 		this.projectDescription = projectDescription;
 		this.projectAimBalance = projectAimBalance;
 		this.projectCurrentBalance = projectCurrentBalance;
-		this.dueDate = dueDate;
+		this.daysLeft = daysLeft;
 	}
 
 	public String getProjectName() {
@@ -63,12 +61,12 @@ public class Project {
 		this.projectCurrentBalance = projectCurrentBalance;
 	}
 
-	public Date getDueDate() {
-		return dueDate;
+	public int getdaysLeft() {
+		return daysLeft;
 	}
 
-	public void setDueDate(Date dueDate) {
-		this.dueDate = dueDate;
+	public void setdaysLeft(int daysLeft) {
+		this.daysLeft = daysLeft;
 	}
 
 }

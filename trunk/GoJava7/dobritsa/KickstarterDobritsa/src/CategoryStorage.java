@@ -8,9 +8,9 @@ public class CategoryStorage {
 
 	private static final List<String> CATEGORIES = new ArrayList<String>();
 	{
-		CATEGORIES.add("Movie");
-		CATEGORIES.add("Dances");
-		CATEGORIES.add("Food");
+		CATEGORIES.add("Music");
+		CATEGORIES.add("Dance");
+		CATEGORIES.add("Food");		
 	}
 	
 	public List<String> getAllCategories() {
@@ -20,4 +20,12 @@ public class CategoryStorage {
 	public String getCategiry(int index) {
 		return CATEGORIES.get(index);		
 	}
+	
+	public static void printForChoice() {
+		System.out.println("\n_________________________________________");
+		System.out.println("0: for exit");
+		for(int i = 0; i < CATEGORIES.size(); i++) {
+			System.out.println(i + 1 + ": " + CATEGORIES.get(i));
+		}		
+	}	
 }

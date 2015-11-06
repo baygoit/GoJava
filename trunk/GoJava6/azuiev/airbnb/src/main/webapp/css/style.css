@@ -1,5 +1,5 @@
 .headtab1 {
-font:24px verdana, arial, helvetica, sans-serif; /* шрифт, размер шрифта */
+font:24px sans-serif; /* шрифт, размер шрифта */
 color : red; /* цвет шрифта */
 font-weight:900; /* насыщенность шрифта */
 background-color: light-blue;
@@ -8,7 +8,7 @@ vertical-align: top; /* выравниевание по вертикали */
 }
 
 .headtab2 {
-font:24px verdana, arial, helvetica, sans-serif; /* шрифт, размер шрифта */
+font:24px sans-serif; /* шрифт, размер шрифта */
 color : red; /* цвет шрифта */
 font-weight:900; /* насыщенность шрифта */
 background-color: light-blue;
@@ -17,7 +17,7 @@ background-color: light-blue;
 .middle{
 border: 0px solid green; /* Рамка вокруг таблицы */
 margin: auto;           /* Таблица поцентру */
-margin-top: 10%;       /* Отступ сверху */
+margin-top: 5%;       /* Отступ сверху */
 }
 
 h1 {
@@ -40,4 +40,11 @@ td {
     padding-right: 5px;
     padding-bottom: 5px;
     padding-left: 5px;
+}
+
+#middletext{
+font:24px serif;
+color: #993333;
+text-align: center;    /* Выравнивание текста по центру */
+margin-top: 5%;       /* Отступ сверху */
 }
