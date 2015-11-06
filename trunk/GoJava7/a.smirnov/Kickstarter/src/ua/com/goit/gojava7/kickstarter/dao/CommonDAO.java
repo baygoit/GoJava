@@ -21,7 +21,8 @@ public abstract class CommonDAO<T> {
 	void remove(T element) {
 		dataSource.remove(element);
 	}
-	
+
+	// OLEG breaks encapsulation
 	public List<T> getDataSource() {
 		return dataSource;
 	}

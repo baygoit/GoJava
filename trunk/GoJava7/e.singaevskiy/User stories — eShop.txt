@@ -1,0 +1,27 @@
+Search 
+As a user, I want to be able to find goods by title
+AC: In the search bar I insert text, pushing the button gets a list of matched goods
+
+Categories 
+As a user, I want to see the list of product categories to focus.
+AC: I can click on a category to filter products
+
+Subcategories 
+As a user, I want to see the list of subcategories in each category.
+AC: I can click on a category to see subcategories, each of them can have any amount of inner subcategories
+
+Product details
+As user, I want to be able to see product detailed chracteristics
+AC: I can click a product and will get to the product description page
+
+Cart
+As a user, I want to be able to add selected goods to the cart
+AC: Being on the page of goods or in concrete product page, I mark the desired product, then I can see it in a separate cart list.
+
+Popularity sort
+As a user, I want to sort projects by popularity.
+AC: Being on the page of goods, I choose the type of sorting, get a sorted list in which goods are arranged by amount of purchases.
+
+Price sort 
+As a user, I want to sort goods by price.
+AC: Being on the page of goods, I choose the type of sorting, get a sorted list in which goods are arranged by price.
