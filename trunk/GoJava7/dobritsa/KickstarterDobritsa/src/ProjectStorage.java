@@ -38,7 +38,5 @@ public class ProjectStorage {
 	
 	public static Project getProject(Integer index) {
 		return projectsInCategory.get(index);		
-	}
-
-	//for(Map.Entry<Integer, Project> item : projectsInCategory.entrySet()){System.out.printf("Key: %s  Value: %s \n", item.getKey(), item.getValue().getDescription());}				
+	}		
 }

@@ -38,12 +38,8 @@ public class Project{
     }
     
     public void printFull() {
-    	System.out.println("\n0: for return to list of projects\n");
-    	System.out.println("Name: " + name);
-    	System.out.println("Short description: " + description);
-    	System.out.println("Goal: " + goal);
-    	System.out.println("Pledged: " + pledged);
-    	System.out.println("Days to go: " + daysToGo);
+    	System.out.println("\n0: for return to list of projects\n");    	
+    	printShort();
     	System.out.println("History: " + history);
     	System.out.println("Link to the demo video: " + link);
     	System.out.println("Questions/Answers: " + questions);

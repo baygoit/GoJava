@@ -7,14 +7,12 @@ public class Kickstarter {
 	private static Integer categoryNumber = null;
 	private static Integer projectNumber = null;
 
-	public static void main(String[] args) {			
-		//QuoteStorage quoteStorage = new QuoteStorage();
+	public static void main(String[] args) {				
 		System.out.println(quoteStorage.getRandomQuote() + "\n");				
 		categoryNumber = chooseCategory();		
 		projectNumber = chooseProject(categoryNumber);
 		viewProject(projectNumber);		
-		//ConsoleInspector.close();
-		
+		//ConsoleInspector.close();		
 	}
 	
 	public static Integer chooseCategory() {
@@ -47,6 +45,6 @@ public class Kickstarter {
 		project.printFull();
 		if(ConsoleInspector.getInt() == 0) {
 			viewProject(chooseProject(categoryNumber));
-			}
+		}
 	}
 }
