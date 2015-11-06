@@ -15,7 +15,7 @@ public class ConsolePrinter {
 		System.out.println("All categories:");
 		for (int i = 0; i < categories.size(); i++) {
 			Category category = categories.get(i);
-			System.out.println(i + " : " + category.getName());
+			System.out.println((i + 1) + " : " + category.getName());
 		}
 	}
 	
