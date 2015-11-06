@@ -11,10 +11,10 @@ public class CategoryStorage {
 		CATEGORIES.add("Movie");
 		CATEGORIES.add("Dance");
 		CATEGORIES.add("Food");
-		CATEGORIES.add("Art");
-		CATEGORIES.add("Design");
-		CATEGORIES.add("Fashion");
-		CATEGORIES.add("Music");
+		//CATEGORIES.add("Art");
+		//CATEGORIES.add("Design");
+		//CATEGORIES.add("Fashion");
+		//CATEGORIES.add("Music");
 		
 	}
 	
