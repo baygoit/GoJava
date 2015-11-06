@@ -10,13 +10,19 @@ import ua.com.goit.gojava7.kickstarter.storage.QuoteStorage;
 
 public class Kickstarter {
 
-	public static void main(String[] args) {
-		QuoteStorage quoteStorage = initQuotes();
-		ConsolePrinter.print(quoteStorage.getRandomQuote());
+	private static QuoteStorage quoteStorage;
+	private static CategoryStorage categoryStorage;
+	private static ConsolePrinter consolePrinter;
 
-		CategoryStorage categoryStorage = initCategories();
+	public static void main(String[] args) {
+		quoteStorage = initQuotes();
+		categoryStorage = initCategories();
+		consolePrinter = new ConsolePrinter();
+
+		consolePrinter.print(quoteStorage.getRandomQuote());
+
 		List<Category> categories = categoryStorage.getAllCategories();
-		ConsolePrinter.print(categories);
+		consolePrinter.print(categories);
 
 		// ask use to select 1
 		// read user input
