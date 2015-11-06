@@ -22,12 +22,24 @@ public class ProjectStorage {
 	
 	public static Map<Integer, Project> getProjectFourth() {return projectsInCategory;}
 	
-	public static void printShort() {		 
+	public static void printAllShort() {		 
 		for(Map.Entry<Integer, Project> item : projectsInCategory.entrySet()){
 			//System.out.printf("Key: %s  Value: %s \n", item.getKey(), item.getValue().getDescription());
 			System.out.println("\nNumber of project: " + item.getKey());
-			item.getValue().printAll();
+			item.getValue().printShort();
 		}				
+	}
+	
+	public static void printOneFull() {		 
+		for(Map.Entry<Integer, Project> item : projectsInCategory.entrySet()){
+			//System.out.printf("Key: %s  Value: %s \n", item.getKey(), item.getValue().getDescription());
+			System.out.println("\nNumber of project: " + item.getKey());
+			item.getValue().printFull();
+		}				
+	}
+	
+	public Project getProject(Integer index) {
+		return projectsInCategory.get(index);		
 	}
 
 }

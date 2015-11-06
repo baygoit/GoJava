@@ -18,11 +18,15 @@ public class Kickstarter {
 			
 		ProjectStorage projectStorage = new ProjectStorage();
 		projectStorage.setProjectStorage(categoryNumber);
-		projectStorage.printShort();		
+		projectStorage.printAllShort();		
 		
 		ConsolePrinter.println("\nChoose a project by number: ");
-		int projectNumber = consoleInspector.getInt();
-		ConsolePrinter.println("You have chosen the project: " + projectNumber);
+		Integer projectNumber = consoleInspector.getInt();
+		ConsolePrinter.println("You have chosen the project: " + projectStorage.getProject(projectNumber).getName());
+		
+		Project project = new Project();
+		project =  projectStorage.getProject(projectNumber);
+		project.printFull();
 		
 		consoleInspector.close();
 	}
