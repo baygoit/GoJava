@@ -1,4 +1,4 @@
-package project;
+package ua.com.goit.gojava7.kickstarter;
 
 public class User {
 	private UserSettings settings;
