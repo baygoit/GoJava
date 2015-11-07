@@ -1,12 +1,12 @@
-package ua.com.goit.gojava7.kickstarter.dao;
+package ua.com.goit.gojava7.kickstarter.storage;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class CommonDAO<T> {
+public abstract class AbstractStorage<T> {
 	protected List<T> dataSource;
 
-	protected CommonDAO() {
+	protected AbstractStorage() {
 		dataSource = new ArrayList<>();
 	}
 

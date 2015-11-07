@@ -2,16 +2,16 @@ package ua.com.goit.gojava7.kickstarter.view;
 
 import java.util.List;
 
-import ua.com.goit.gojava7.kickstarter.dao.ProjectDAO;
 import ua.com.goit.gojava7.kickstarter.model.Category;
 import ua.com.goit.gojava7.kickstarter.model.Project;
+import ua.com.goit.gojava7.kickstarter.storage.ProjectsStorage;
 
 public class PrinterProject {
 	private List<Project> listOfProjects = null;
 	
 	
 	public void printProjectsFromCategory(String s) {
-		ProjectDAO storageOfProjects = new ProjectDAO();
+		ProjectsStorage storageOfProjects = new ProjectsStorage();
 
 		listOfProjects = storageOfProjects.getDataSource();
 		int amountOfProjects = listOfProjects.size();

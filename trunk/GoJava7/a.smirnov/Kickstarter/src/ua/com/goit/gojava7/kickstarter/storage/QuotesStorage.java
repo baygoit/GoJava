@@ -1,10 +1,10 @@
-package ua.com.goit.gojava7.kickstarter.dao;
+package ua.com.goit.gojava7.kickstarter.storage;
 
 import ua.com.goit.gojava7.kickstarter.model.Quote;
 
-public class QuoteDAO extends CommonDAO<Quote>{
+public class QuotesStorage extends AbstractStorage<Quote>{
 	
-	public QuoteDAO() {
+	public QuotesStorage() {
 		Quote quote1 = new Quote();
 		quote1.setTitle("Liberty will not descend to a people, a people must "
 				+ "raise themselves to liberty; it is a blessing that must "

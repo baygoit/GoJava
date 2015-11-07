@@ -3,8 +3,8 @@ package ua.com.goit.gojava7.kickstarter.view;
 import java.util.List;
 import java.util.Scanner;
 
-import ua.com.goit.gojava7.kickstarter.dao.CategoryDAO;
 import ua.com.goit.gojava7.kickstarter.model.Category;
+import ua.com.goit.gojava7.kickstarter.storage.CategoriesStorage;
 
 public class PrinterCategory {
 	private static final String CHOOSE_CATEGORY = "You choose category: ";
@@ -36,7 +36,7 @@ public class PrinterCategory {
 	}
 	
 	private void printAllCategories() {
-		CategoryDAO storageOfQuotes = new CategoryDAO();
+		CategoriesStorage storageOfQuotes = new CategoriesStorage();
 
 		listOfCategories = storageOfQuotes.getDataSource();
 		int amountOfCategories = listOfCategories.size();

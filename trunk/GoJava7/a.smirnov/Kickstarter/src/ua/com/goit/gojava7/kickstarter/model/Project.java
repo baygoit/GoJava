@@ -6,12 +6,12 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
-import ua.com.goit.gojava7.kickstarter.dao.CategoryDAO;
+import ua.com.goit.gojava7.kickstarter.storage.CategoriesStorage;
 
 public class Project {
 
 	private List<String> projectCategories = new ArrayList<>();
-	private CategoryDAO storageOfCategories;
+	private CategoriesStorage storageOfCategories;
 	private String title;
 	private String briefDescription;
 	private String fullDescription;

@@ -1,10 +1,10 @@
-package ua.com.goit.gojava7.kickstarter.dao;
+package ua.com.goit.gojava7.kickstarter.storage;
 
 import ua.com.goit.gojava7.kickstarter.model.Project;
 
-public class ProjectDAO extends CommonDAO<Project> {
+public class ProjectsStorage extends AbstractStorage<Project> {
 
-	public ProjectDAO() {
+	public ProjectsStorage() {
 		Project project1 = new Project();
 		project1.setTitle("Testing 1");
 		project1.setBriefDescription("XXXXXXXXXXXXXXXX");
