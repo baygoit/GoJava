@@ -24,7 +24,6 @@ public class MainPageController {
 	private Scanner sc;
 	
 	public MainPageController(MainPage page) {
-		super();
 		this.page = page;
 		quoteDAO = new QuoteDAO();
 		categoryDAO = new CategoryDAO();

@@ -7,8 +7,8 @@ import java.util.List;
 public class Project {
 
 	private String name;
-	private Long goalSum;
-	private Long balanceSum;
+	private long goalSum;
+	private long balanceSum;
 	private Date startDate;
 	private Date endDate;
 	private List<Category> categories;
