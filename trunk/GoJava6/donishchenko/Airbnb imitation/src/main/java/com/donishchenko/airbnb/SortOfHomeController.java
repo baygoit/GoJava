@@ -18,7 +18,7 @@ public class SortOfHomeController {
     private UserService userService = new UserService();
 
     public void registerUser(String name, String surname, String email, boolean isHost) {
-        userService.register(name, surname, email, isHost);
+//        userService.register(name, surname, email, isHost);
     }
 
     public void deleteUser(int id) {

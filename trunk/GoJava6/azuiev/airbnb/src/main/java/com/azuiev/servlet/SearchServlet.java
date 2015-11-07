@@ -1,10 +1,9 @@
 package com.azuiev.servlet;
 
 
-import com.azuiev.dao.DaoDB;
-import com.azuiev.db.AirbnbDB;
 import com.azuiev.model.Apartment;
 import com.azuiev.model.City;
+import com.azuiev.model.User;
 import com.azuiev.service.CityService;
 import com.azuiev.service.ApartmentService;
 
@@ -15,7 +14,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -23,29 +24,35 @@ import java.util.List;
  * Created by Masta on 31.10.2015.
  */
 public class SearchServlet extends HttpServlet {
+    List<City> city = new ArrayList<City>();
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    public void init() throws ServletException {
 
-        String query = req.getQueryString();
+        CityService cityService = new CityService();
+        city.add(cityService.getById(new Long(1)));
+       // city = cityService.getAll();
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+        String query = request.getQueryString();
         {
 
-            DaoDB db = new AirbnbDB();
-            CityService cityService = new CityService();
-            List<City> city = null;
-            city = cityService.getAll();
-
-            req.setAttribute("city", city);
+            request.setAttribute("city", city);
 
             if (query!=null){
                 HashMap<String, String> map = parseQuery(query);
                 ApartmentService apartmentService = new ApartmentService();
                 List<Apartment> apartment = null;
-                apartment = ApartmentService.getByCity(Integer.parseInt(map.get("cityid")));
-                req.setAttribute("apartment", apartment);
+                apartment = ApartmentService.getByCity(Long.parseLong(map.get("cityid")));
+                request.setAttribute("apartment", apartment);
             }
-            ServletContext context = req.getSession().getServletContext();
+            ServletContext context = request.getSession().getServletContext();
             // ServletContext context = getServletContext();
-            req.getRequestDispatcher(context.getInitParameter("path") + "search.jsp").forward(req, resp);
+            request.getRequestDispatcher(context.getInitParameter("path") +request.getServletPath()+ ".jsp").forward(request, response);
          }
 
     }

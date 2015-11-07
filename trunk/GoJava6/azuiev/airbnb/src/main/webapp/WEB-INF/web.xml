@@ -6,16 +6,17 @@
 
     <context-param>
         <param-name>path</param-name>
-        <param-value>/WEB-INF/view/</param-value>
+        <param-value>/WEB-INF/view</param-value>
     </context-param>
 
     <servlet>
-        <servlet-name>RegistrationServlet</servlet-name>
-        <servlet-class>com.azuiev.servlet.RegistrationServlet</servlet-class>
+        <servlet-name>ControllerServlet</servlet-name>
+        <servlet-class>com.azuiev.servlet.ControllerServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>RegistrationServlet</servlet-name>
+        <servlet-name>ControllerServlet</servlet-name>
         <url-pattern>/register</url-pattern>
+        <url-pattern>/login</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -26,14 +27,28 @@
         <servlet-name>SearchServlet</servlet-name>
         <url-pattern>/search</url-pattern>
     </servlet-mapping>
-<!--
+
+    <filter>
+        <filter-name>LoginFilter</filter-name>
+        <filter-class>com.azuiev.filter.LoginFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>LoginFilter</filter-name>
+        <url-pattern>/login</url-pattern>
+    </filter-mapping>
+
+
     <jsp-config>
         <jsp-property-group>
-            <url-pattern>/</url-pattern>
-            <url-pattern>/WEB-INF/view/*</url-pattern>
+           <url-pattern>/WEB-INF/view/*</url-pattern>
             <include-prelude>/WEB-INF/include/header.jsp</include-prelude>
-            <include-coda>/WEB-INF/jspf/footer.jspf</include-coda>
+            <!--<include-coda>/WEB-INF/jspf/footer.jspf</include-coda>-->
         </jsp-property-group>
     </jsp-config>
-    -->
+
+
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
+
 </web-app>

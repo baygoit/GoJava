@@ -10,7 +10,8 @@
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/</url-pattern>
-        <url-pattern>/edituser</url-pattern>
+        <url-pattern>/search</url-pattern>
+        <url-pattern>/profile</url-pattern>
         <url-pattern>/login</url-pattern>
         <url-pattern>/registration</url-pattern>
     </servlet-mapping>

@@ -5,15 +5,15 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 /**
- * Unit RegistrationForm.html for simple App.
+ * Unit register.jsp for simple App.
  */
 public class AirBnBTest
     extends TestCase
 {
     /**
-     * Create the RegistrationForm.html case
+     * Create the register.jsp case
      *
-     * @param testName name of the RegistrationForm.html case
+     * @param testName name of the register.jsp case
      */
     public AirBnBTest(String testName)
     {

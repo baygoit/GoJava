@@ -6,10 +6,11 @@ import java.sql.SQLException;
 import java.util.List;
 
 public interface UserDao {
-    int save(User user) throws SQLException;
-    boolean delete(int id) throws SQLException;
-    boolean update(int id, User user) throws SQLException;
-    User get(int id) throws SQLException;
+    Integer save(User user) throws SQLException;
+    boolean delete(Integer id) throws SQLException;
+    boolean update(Integer id, User user) throws SQLException;
+    User get(Integer id) throws SQLException;
+    User getByLoginPassword(String login, String password) throws SQLException;
     List<User> getAllUsers() throws SQLException;
     List<User> getAllClients() throws SQLException;
     List<User> getAllHosts() throws SQLException;
