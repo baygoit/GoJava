@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+       xmlns:p="http://primefaces.org/ui"
+      >
+    <h:head>
+    	
+    </h:head>
+ 
+    <h:body>
+ 
+    	<h1> Editing info about goods, represented in shop </h1>
+    	
+		<p:separator />	
+		
+ 		<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+ 		
+ 		<p:dataTable id="goodDataTable" var="g" value="#{goodBean.allGoods}"
+    			styleClass="order-table"
+    			headerClass="order-table-header"
+    			rowClasses="order-table-odd-row,order-table-even-row"
+    			lazy="true" 
+    			rows="7"  
+    			paginatorAlwaysVisible="false">
+ 
+    		<p:column>
+    			<f:facet name="header">
+    				Good ID
+    			</f:facet>
+    				#{g.id}
+    		</p:column>
+ 
+    		<p:column>
+    			<f:facet name="header">
+    				Name
+				</f:facet>
+    				#{g.name}
+    		</p:column>
+ 
+ 			<p:column>
+    			<f:facet name="header">
+    				Type
+				</f:facet>
+    				#{g.type.name}
+    		</p:column>
+    		
+ 
+    	</p:dataTable>
+ 
+ 		<h2>Add New Good</h2>
+ 		<h:form  id="createGood">
+ 
+ 			<p:panelGrid columns="3">
+ 
+				Name : 
+				<p:inputText id="nameCreate" value="#{goodBean.name}" 
+					size="20" required="true"
+					label="Name" >
+					 <f:validateRegex pattern="^[a-zA-Z]{1,}$" />
+				</p:inputText>
+ 
+				<p:message for="nameCreate" style="color:red" />
+ 
+				Type : 
+				<p:autoComplete id="typeDropdown"
+	        		value="#{goodBean.chosenType}"        	  
+	        	 	completeMethod="#{autocompleteBean.completeType}"
+	        	 	var="goodType" 
+	        	 	itemLabel="#{goodType.name}" 
+	        	 	itemValue="#{goodType}"        	 	
+	        	 	converter="#{goodTypeConverter}"
+	        	 	dropdown="true" 
+	        	 	required="true"
+	        	 	forceSelection="true"/>
+ 
+				<p:message for="typeDropdown" style="color:red" />
+ 
+			</p:panelGrid>
+ 
+			<p:commandButton value="Submit" action="#{goodBean.addGood}" 
+			update=":goodDataTable"/>
+ 
+ 		</h:form>
+ 		
+ 		<h2>Update Existing Good</h2>
+ 		<h:form id="updateGood">
+ 
+ 			<p:panelGrid columns="3">
+ 			
+ 				Modified good : 
+				<p:autoComplete id="goodDropdownUpdate"
+	        		value="#{goodBean.chosenGood}"        	  
+	        	 	completeMethod="#{autocompleteBean.completeGood}"
+	        	 	var="good" 
+	        	 	itemLabel="#{good.name}" 
+	        	 	itemValue="#{good}"        	 	
+	        	 	converter="#{goodConverter}"
+	        	 	dropdown="true" 
+	        	 	forceSelection="true"
+	        	 	required="true"/>
+ 
+				<p:message for="goodDropdownUpdate" style="color:red" />
+ 
+				New name : 
+				<p:inputText id="nameUpdate" value="#{goodBean.name}" 
+					size="20" required="false"
+					label="Name" >
+					 <f:validateRegex pattern="^[a-zA-Z]{1,}$" />
+				</p:inputText>
+ 
+				<p:message for="nameUpdate" style="color:red" />
+ 
+				New type : 
+				<p:autoComplete id="typeDropdownUpdate"
+	        		value="#{goodBean.chosenType}"        	  
+	        	 	completeMethod="#{autocompleteBean.completeType}"
+	        	 	var="goodType" 
+	        	 	itemLabel="#{goodType.name}" 
+	        	 	itemValue="#{goodType}"        	 	
+	        	 	converter="#{goodTypeConverter}"
+	        	 	dropdown="true" 
+	        	 	forceSelection="true"
+	        	 	required="false"/>
+        	 	
+				<p:message for="typeDropdownUpdate" style="color:red" />
+ 
+			</p:panelGrid>
+ 
+			<p:commandButton value="Submit" action="#{goodBean.updateGood}"
+			update=":goodDataTable, :createGood, :deleteGood"/>
+ 
+ 		</h:form>
+ 		
+ 		<h2>Delete Good</h2>
+ 		<h:form  id="deleteGood">
+ 
+ 			<p:panelGrid columns="2">
+ 				 
+				Target : 
+				<p:autoComplete id="goodDelete"
+	        		value="#{goodBean.chosenGood}"        	  
+	        	 	completeMethod="#{autocompleteBean.completeGood}"
+	        	 	var="good" 
+	        	 	itemLabel="#{good.name}" 
+	        	 	itemValue="#{good}"        	 	
+	        	 	converter="#{goodConverter}"
+	        	 	dropdown="true" 
+	        	 	forceSelection="true"
+	        	 	required="true"/>
+ 
+				<p:message for="goodDelete" style="color:red" />
+ 
+			</p:panelGrid>
+ 
+			<p:commandButton value="Submit" action="#{goodBean.deleteGood}" 
+			update=":goodDataTable, :createGood, :updateGood"/>
+ 
+ 		</h:form>	
+ 
+    </h:body>
+ 
+</html>

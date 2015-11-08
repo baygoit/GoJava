@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+
+
+    <bean id="userService" class="com.airbnb.services.UserService">
+        <constructor-arg ref="userDaoJDBC"/>
+    </bean>
+
+    <bean id="userDaoJDBC" class="com.airbnb.jdbc.JDBCUserDataAcces">
+    </bean>
+
+    <bean id="apartamentService" class="com.airbnb.services.ApartamentService">
+        <constructor-arg ref="apartamentDaoJDBC"/>
+    </bean>
+
+    <bean id="apartamentDaoJDBC" class="com.airbnb.jdbc.JDBCApartmentDataAcces">
+    </bean>
+
+    <bean id="reservationDatesService" class="com.airbnb.services.ReservationDatesService">
+        <constructor-arg ref="reservationDatesDaoJDBC"/>
+    </bean>
+
+    <bean id="reservationDatesDaoJDBC" class="com.airbnb.jdbc.JDBCReservationDateDataAcces">
+    </bean>
+
+    <bean id="newsSubscribeService" class="com.airbnb.services.NewsSubscribeService">
+        <constructor-arg ref="newsSubscribeDaoJDBC"/>
+    </bean>
+
+    <bean id="newsSubscribeDaoJDBC" class="com.airbnb.jdbc.JDBCSubscribersDataAcces">
+    </bean>
+
+    <!-- Initialization for data source -->
+    <bean id="dataSource"
+          class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://localhost:3306/AIRBNB"/>
+        <property name="username" value="root"/>
+        <property name="password" value="root"/>
+    </bean>
+
+    <!-- Definition for studentJDBCTemplate bean -->
+    <bean id="userJDBCTemplate"
+          class="com.airbnb.springJdbc.UserJDBCTemplate">
+        <property name="dataSource"  ref="dataSource" />
+    </bean>
+
+    <bean id="apartamentJDBCTemplate"
+          class="com.airbnb.springJdbc.ApartamentJDBCTemplate">
+        <property name="dataSource"  ref="dataSource" />
+    </bean>
+
+    <bean id="reservationJDBCTemplate"
+          class="com.airbnb.springJdbc.ReservationDateJDBCTemplate">
+        <property name="dataSource"  ref="dataSource" />
+    </bean>
+
+    <bean id="subscribersJDBCTemplate"
+          class="com.airbnb.springJdbc.SubscriberJDBCTemplate">
+        <property name="dataSource"  ref="dataSource" />
+    </bean>
+
+    <!--<bean id="userDaoIO" class="com.airbnb.jdbc.IOUserDataAcces">-->
+    <!--</bean>-->
+
+</beans>

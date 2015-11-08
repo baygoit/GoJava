@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+ 
+<hibernate-configuration>
+    <session-factory>
+ 
+        <!-- Connection settings -->
+        
+        <!-- SQL dialect -->
+        <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+ 
+        <!-- Print executed SQL to stdout -->
+        <property name="show_sql">true</property>
+  
+        <!-- Annotated entity classes -->
+        <mapping class="ua.com.goit.gojava.kickstarter.Model.Category"/>
+        <mapping class="ua.com.goit.gojava.kickstarter.Model.Project"/>
+        <mapping class="ua.com.goit.gojava.kickstarter.Model.Quote"/>
+        <mapping class="ua.com.goit.gojava.kickstarter.Model.Faq"/>
+        
+    </session-factory>
+</hibernate-configuration>
