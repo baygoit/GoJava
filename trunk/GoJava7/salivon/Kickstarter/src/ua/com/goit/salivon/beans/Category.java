@@ -9,7 +9,7 @@ import ua.com.goit.salivon.IdCategory;
 
 /**
  *
- * @author salivon.i
+ * @author salivon.i+
  */
 public class Category {
 
