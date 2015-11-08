@@ -1,3 +1,4 @@
+package com.kickstarter;
 import com.kickstarter.controller.MainPageController;
 import com.kickstarter.view.MainPage;
 
