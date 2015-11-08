@@ -1,5 +1,8 @@
+package ua.com.goit.gojava7.kickstarter.storage;
 import java.util.HashMap;
 import java.util.Map;
+
+import ua.com.goit.gojava7.kickstarter.domain.Project;
 
 // OLEG what will be our work if the list of categories can be changed?
 public class MusicCategory {

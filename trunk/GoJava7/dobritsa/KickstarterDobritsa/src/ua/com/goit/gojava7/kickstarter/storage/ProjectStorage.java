@@ -1,5 +1,8 @@
+package ua.com.goit.gojava7.kickstarter.storage;
 import java.util.HashMap;
 import java.util.Map;
+
+import ua.com.goit.gojava7.kickstarter.domain.Project;
 
 public class ProjectStorage {
 	

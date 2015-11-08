@@ -1,5 +1,12 @@
+package ua.com.goit.gojava7.kickstarter;
 import java.util.ArrayList;
 import java.util.List;
+
+import ua.com.goit.gojava7.kickstarter.console.ConsoleInspector;
+import ua.com.goit.gojava7.kickstarter.domain.Project;
+import ua.com.goit.gojava7.kickstarter.storage.CategoryStorage;
+import ua.com.goit.gojava7.kickstarter.storage.ProjectStorage;
+import ua.com.goit.gojava7.kickstarter.storage.QuoteStorage;
 
 public class Kickstarter {
 
