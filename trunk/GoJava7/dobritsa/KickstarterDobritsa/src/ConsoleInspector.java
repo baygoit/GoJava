@@ -20,13 +20,19 @@ public class ConsoleInspector {
 		sc.close();
 	}
 	
-	public static Integer waitCorrectChoice(List<Integer> list) {
-		Integer number = getInt();
-		for (Integer i : list) {
-			if(i == number) {
-				return number;
-			}
-		}		
-		return waitCorrectChoice(list);
+	public static Integer getCorrectInt(Integer limitation) {
+		Integer a = null;
+		try {		
+			a =  sc.nextInt();
+			} catch (Exception e) {
+				System.out.println("Ohhh no.. It is not a number :(");
+				System.exit(0);
+			} 
+	
+		if(a >= limitation) {
+			System.out.println("Ohhh no.. It is a bad number :(");
+			System.exit(0);
+		}
+		return a;
 	}	
 }

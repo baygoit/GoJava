@@ -46,4 +46,8 @@ public class ProjectStorage {
 	public static Project getProject(Integer index) {
 		return projectsInCategory.get(index);		
 	}		
+	
+	public static Integer size() {
+		return projectsInCategory.size();		
+	}
 }

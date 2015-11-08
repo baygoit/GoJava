@@ -30,4 +30,8 @@ public class CategoryStorage {
 			System.out.println(i + 1 + ": " + CATEGORIES.get(i));
 		}		
 	}	
+	
+	public static Integer size() {
+		return CATEGORIES.size();		
+	}
 }

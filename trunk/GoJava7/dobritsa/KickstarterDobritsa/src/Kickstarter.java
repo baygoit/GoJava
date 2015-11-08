@@ -17,44 +17,26 @@ public class Kickstarter {
 	
 	private static Integer chooseCategory() {
 		CategoryStorage.printForChoice();
-		System.out.println("\nChoose a category by number: ");		
-		try {
-			categoryNumber = ConsoleInspector.getInt();
-			if(categoryNumber == 0) {
-				ConsoleInspector.close();		
-				System.out.println("See you soon!");
-				System.exit(0);
-				}
-			System.out.println("Current category: " + categoryStorage.getCategory(categoryNumber - 1));		
-		}catch (Exception e) {
-			System.out.println("Ohhh no.. It is a bad number :(");
+		System.out.println("\nChoose a category by number: ");				
+		categoryNumber = ConsoleInspector.getCorrectInt(CategoryStorage.size());
+		if(categoryNumber == 0) {
+			ConsoleInspector.close();		
+			System.out.println("See you soon!");
 			System.exit(0);
-		} catch (Error err) {
-			System.out.println("Ohhh no.. It is not a number :(");
-			System.exit(0);
-		}
-		
-		
-		return categoryNumber;			
+			}
+		System.out.println("Current category: " + categoryStorage.getCategory(categoryNumber - 1));		
+	return categoryNumber;			
 	}
 	
 	private static Integer chooseProject(Integer categoryNumber) {
 		ProjectStorage.setProjectStorage(categoryNumber - 1);
 		ProjectStorage.printAllShort();			
-		System.out.println("\nChoose a project by number: ");
-		try {
-			projectNumber = ConsoleInspector.getInt();		
+		System.out.println("\nChoose a project by number: ");	
+		projectNumber = ConsoleInspector.getCorrectInt(ProjectStorage.size());		
 		if(projectNumber == 0) {
 			chooseProject(chooseCategory());
 			}
-		System.out.println("Current project: " + ProjectStorage.getProject(projectNumber).getName());
-		} catch (Exception e) {
-			System.out.println("Ohhh no.. It is a bad number :(");
-			System.exit(0);
-		} catch (Error err) {
-			System.out.println("Ohhh no.. It is not a number :(");
-			System.exit(0);
-		}
+		System.out.println("Current project: " + ProjectStorage.getProject(projectNumber).getName());		
 		return projectNumber;
 	}
 	
@@ -63,16 +45,10 @@ public class Kickstarter {
 		project =  ProjectStorage.getProject(projectNumber);
 		project.printFull();				
 		while(true) {
-			try{
-				if (ConsoleInspector.getInt() == 0 ) {			
-					viewProject(chooseProject(categoryNumber));												
-				} 
-			} catch (Error err) {
-				System.out.println("Ohhh no.. It is not a number :(");
-				System.exit(0);
-			}
-			
-			System.out.println("Type 0 to choose another project");
+			if (ConsoleInspector.getCorrectInt(0) == 0 ) {			
+				viewProject(chooseProject(categoryNumber));												
+			} 	
+		System.out.println("Type 0 to choose another project");
 		}
 	}
 }
