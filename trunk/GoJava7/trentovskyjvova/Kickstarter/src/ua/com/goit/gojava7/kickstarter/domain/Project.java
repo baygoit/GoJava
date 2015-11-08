@@ -34,15 +34,10 @@ public class Project {
 		return categorie;
 	}
 	
-	public String getProject(){
-		StringBuilder projectDetails = new StringBuilder();
-		
-		projectDetails.append("").append(name);
-		projectDetails.append(" | ").append(funded);
-		projectDetails.append(" | ").append(daysToGo);
-		projectDetails.append(" | ").append(pledged);
-		
-		return projectDetails.toString();
+	public Object[] getProject(int number){
+		Object[] result = {number, name, funded, daysToGo, pledged};
+				
+		return result;
 	}
 	
 	public String getAllDetails(){
