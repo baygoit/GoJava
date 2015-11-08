@@ -51,7 +51,7 @@ public class KickstarterRunner {
 
 		Project progect1 = new Project("Super project", categoryStorage.get(0), 123, 14, 123, "descr", "owner", 100,
 				"link");
-		Project progect2 = new Project("Mege project", categoryStorage.get(1), 342, 12, 432, "descrip", "owner2", 100,
+		Project progect2 = new Project("Mege project", categoryStorage.get(0), 1342, 12, 3432, "descrip", "owner2", 100,
 				"link2");
 
 		projectStorage.add(progect1);

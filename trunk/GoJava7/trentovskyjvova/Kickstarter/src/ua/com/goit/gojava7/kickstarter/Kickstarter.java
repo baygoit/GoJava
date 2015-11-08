@@ -97,7 +97,7 @@ public class Kickstarter {
 				Project project = projects.get(userChoise);
 				
 				consolePrinter.print("You selected '" + project.getName() + "' project");
-				consolePrinter.print(project.getName());
+				consolePrinter.print(project.getAllDetails());
 				
 				consolePrinter.print(0 + " : to project list");
 			}

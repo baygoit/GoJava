@@ -33,4 +33,31 @@ public class Project {
 	public Category getCategorie() {
 		return categorie;
 	}
+	
+	public String getProject(){
+		StringBuilder projectDetails = new StringBuilder();
+		
+		projectDetails.append("").append(name);
+		projectDetails.append(" | ").append(funded);
+		projectDetails.append(" | ").append(daysToGo);
+		projectDetails.append(" | ").append(pledged);
+		
+		return projectDetails.toString();
+	}
+	
+	public String getAllDetails(){
+		StringBuilder projectDetails = new StringBuilder();
+		
+		projectDetails.append("name: ").append(name).append("\n");
+		projectDetails.append("categorie: ").append(categorie.getName()).append("\n");
+		projectDetails.append("funded: ").append(funded).append("\n");
+		projectDetails.append("daysToGo: ").append(daysToGo).append("\n");
+		projectDetails.append("pledged: ").append(pledged).append("\n");
+		projectDetails.append("description: ").append(description).append("\n");
+		projectDetails.append("owner: ").append(owner).append("\n");
+		projectDetails.append("goal: ").append(goal).append("\n");
+		projectDetails.append("linkVideo: ").append(linkVideo);
+		
+		return projectDetails.toString();
+	}
 }

@@ -21,10 +21,10 @@ public class ConsolePrinter {
 	}
 	
 	public void printProjects(List<Project> projects) {
-		System.out.println("All projects of category:");
+		System.out.println("  name | funded | days to go | pledged");
 		for (int i = 0; i < projects.size(); i++) {
 			Project progect = projects.get(i);
-			System.out.println((i + 1) + " : " + progect.getName());
+			System.out.println((i + 1) + " : " + progect.getProject());
 		}
 	}
 	
