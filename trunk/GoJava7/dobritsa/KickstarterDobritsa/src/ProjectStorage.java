@@ -5,6 +5,8 @@ public class ProjectStorage {
 	
 	private static Map<Integer, Project> projectsInCategory = new HashMap<Integer, Project>();	
 	
+	
+	//TODO
 	// OLEG SRL violated
 	public static void setProjectStorage(Integer i) {
 		if (i == 0) {
@@ -19,9 +21,7 @@ public class ProjectStorage {
 		} else System.out.println("wrong choice");		
 	}
 	
-	// OLEG what?
-	public static Map<Integer, Project> getProjectFourth() {return projectsInCategory;}
-	
+	//TODO
 	// OLEG SRL violated
 	public static void printAllShort() {
 		System.out.println("_________________________________________");
@@ -32,6 +32,7 @@ public class ProjectStorage {
 		}				
 	}
 	
+	//TODO
 	// OLEG SRL violated
 	public static void printOneFull() {	
 		System.out.println("_________________________________________");
@@ -45,4 +46,8 @@ public class ProjectStorage {
 	public static Project getProject(Integer index) {
 		return projectsInCategory.get(index);		
 	}		
+	
+	public static Integer size() {
+		return projectsInCategory.size();		
+	}
 }

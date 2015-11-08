@@ -30,6 +30,7 @@ public class QuoteStorage {
 		return QUOTES.get(randomNumber);
 	}
 	
+	//TODO
 	// OLEG SRL violated
 	public static void printForChoice() {
 		for(int i = 0; i < QUOTES.size(); i++) {

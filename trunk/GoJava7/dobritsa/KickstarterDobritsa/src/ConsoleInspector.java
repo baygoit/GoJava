@@ -4,25 +4,35 @@ import java.util.Scanner;
 public class ConsoleInspector {
 	private static Scanner sc = new Scanner(System.in);
 	
-	public static int getInt() {
-		// OLEG why 2 lines? int a = sc.nextInt();? or even return sc.nextInt();
-		int a;		
-		// OLEG what will it be if an user type not int?
-		a = sc.nextInt();		
-		return a;
+	public static Integer getInt() {
+		//int a;		
+		//a = sc.nextInt();				
+		try {		
+		return sc.nextInt();
+		}  catch (Exception e) {
+			//Error ref = new Error(); 
+			//System.out.println("What does it mean? This is not good");
+	        throw new Error();
+        }		
 	}		
 	
 	public static void close() {
 		sc.close();
 	}
 	
-	public static Integer waitCorrectChoice(List<Integer> list) {
-		Integer number = getInt();
-		for (Integer i : list) {
-			if(i == number) {
-				return number;
-			}
-		}		
-		return waitCorrectChoice(list);
+	public static Integer getCorrectInt(Integer limitation) {
+		Integer a = null;
+		try {		
+			a =  sc.nextInt();
+			} catch (Exception e) {
+				System.out.println("Ohhh no.. It is not a number :(");
+				System.exit(0);
+			} 
+	
+		if(a >= limitation) {
+			System.out.println("Ohhh no.. It is a bad number :(");
+			System.exit(0);
+		}
+		return a;
 	}	
 }

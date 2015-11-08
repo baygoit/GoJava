@@ -3,7 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ua.com.goit.salivon;
+package ua.com.goit.salivon.handlers;
+
+import ua.com.goit.salivon.handlers.HendlingError;
+import ua.com.goit.salivon.stores.StoreCategories;
 
 /**
  *
@@ -11,7 +14,6 @@ package ua.com.goit.salivon;
  */
 public class HendlingErrorWelcomScene implements HendlingError {
 
-    HendlingError hendError = new HendlingErrorQuit();
     StoreCategories categories;
 
     public HendlingErrorWelcomScene(StoreCategories categories) {
@@ -20,11 +22,13 @@ public class HendlingErrorWelcomScene implements HendlingError {
 
     @Override
     public boolean validate(String inConsole) {
+        if (inConsole==null) {
+            return true;
+        }
         try {
 
             int n = Integer.parseInt(inConsole);
-            if ((n - 1 >= 0 && n - 1 < categories.getCategories().size())
-                    || hendError.validate(inConsole)) {
+            if (n - 1 >= 0 && n - 1 < categories.getCategories().size()) {
                 return true;
             } else {
                 return false;
@@ -32,8 +36,8 @@ public class HendlingErrorWelcomScene implements HendlingError {
 
         } catch (NumberFormatException e) {
             if (inConsole.equalsIgnoreCase("q")) {
-            System.exit(0);
-        }
+                return true;
+            }
             return false;
         }
 

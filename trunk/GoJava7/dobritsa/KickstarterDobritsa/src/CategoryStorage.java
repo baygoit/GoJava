@@ -17,11 +17,11 @@ public class CategoryStorage {
 		return Collections.unmodifiableList(CATEGORIES);		
 	}
 	
-	// OLEG Categiry => Category
-	public String getCategiry(int index) {
+	public String getCategory(int index) {
 		return CATEGORIES.get(index);		
 	}
 	
+	//TODO
 	// OLEG SRL violated
 	public static void printForChoice() {
 		System.out.println("\n_________________________________________");
@@ -30,4 +30,8 @@ public class CategoryStorage {
 			System.out.println(i + 1 + ": " + CATEGORIES.get(i));
 		}		
 	}	
+	
+	public static Integer size() {
+		return CATEGORIES.size();		
+	}
 }
