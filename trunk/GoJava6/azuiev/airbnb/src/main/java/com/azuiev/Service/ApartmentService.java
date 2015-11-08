@@ -1,8 +1,7 @@
 package com.azuiev.service;
 
-import com.azuiev.dao.DaoApartment;
+import com.azuiev.dao.ApartmentDao;
 import com.azuiev.model.Apartment;
-import com.azuiev.model.City;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -12,7 +11,7 @@ import java.util.List;
  * Created by Administrator on 02.11.15.
  */
 public class ApartmentService  {
-    private static DaoApartment dao = new DaoApartment();
+    private static ApartmentDao dao = new ApartmentDao();
 
     public List<Apartment> getAll(){
         List<Apartment> list = new ArrayList<Apartment>();
@@ -23,7 +22,7 @@ public class ApartmentService  {
         }
         return list;
     }
-    public Apartment getById(Integer i){
+    public Apartment getById(Long i){
         Apartment Apartment = null;
         try {
             Apartment = dao.getById(i);
@@ -33,7 +32,7 @@ public class ApartmentService  {
         return Apartment;
     }
 
-    public static List<Apartment> getByCity(Integer id) {
+    public static List<Apartment> getByCity(Long id) {
 
         List<Apartment> list = new ArrayList<Apartment>();
         try {
