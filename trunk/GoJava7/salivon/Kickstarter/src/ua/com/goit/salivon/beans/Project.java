@@ -3,10 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ua.com.goit.salivon;
+package ua.com.goit.salivon.beans;
 
 import java.util.Calendar;
 import java.util.Date;
+import ua.com.goit.salivon.IdProject;
 
 /**
  *
@@ -22,6 +23,9 @@ public class Project {
     private int collectedAmount;
     private int numberOfDaysToImplement;
     private Date dateStart;
+    private String historyProject;
+    private String link;
+    private String faq;
 
     public Project(String title, int total, int idCategory) {
         setDateStart();
@@ -30,12 +34,27 @@ public class Project {
         this.title = title;
         this.total = total;
         this.idCategory = idCategory;
+        historyProject ="...history...";
+        link = "...link...";
+        faq = "...FAQ...";
         setId();
     }
 
     private void setDateStart() {
         dateStart = new Date();
 
+    }
+
+    public String getHistoryProject() {
+        return historyProject;
+    }
+
+    public String getLink() {
+        return link;
+    }
+
+    public String getFaq() {
+        return faq;
     }
 
     public int getCollectedAmount() {

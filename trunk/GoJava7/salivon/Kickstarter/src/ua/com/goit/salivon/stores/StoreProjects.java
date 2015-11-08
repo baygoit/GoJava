@@ -3,10 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ua.com.goit.salivon;
+package ua.com.goit.salivon.stores;
 
 import java.util.ArrayList;
 import java.util.List;
+import ua.com.goit.salivon.beans.Project;
 
 /**
  *
