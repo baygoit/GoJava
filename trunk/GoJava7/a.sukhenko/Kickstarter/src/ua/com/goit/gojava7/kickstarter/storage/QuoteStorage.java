@@ -7,6 +7,10 @@ import java.util.Random;
 
 import ua.com.goit.gojava7.kickstarter.model.Quote;
 
+/**
+ * @author Devian
+ * @category Storage
+ */
 public class QuoteStorage {
 	private List<Quote> quotes = new ArrayList<>();
 	private static final Random rand = new Random();
