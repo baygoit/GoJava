@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
-    <wb-module deploy-name="MedicalSystem Project">
-        <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
-        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
-        <wb-resource deploy-path="/WEB-INF/classes" source-path="/tests"/>
-        <property name="context-root" value="MedicalSystem_Project"/>
-        <property name="java-output-path" value="/MedicalSystem Project/bin"/>
-    </wb-module>
-</project-modules>

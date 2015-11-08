@@ -1,6 +1,0 @@
-#SELECT * FROM users;
-#insert into users (usersName, UserSurname, UsersEmail, IsHost) values ('Nik', 'Tolkin', 'NTolkin@gmail.com', 1);
-#select * from users where UsersName ='Anna';
-#update users set UserSurname = 'Holms' where idUsers = 4;
-#delete from users where idUsers = 9;
-#select UserSurname, UsersEmail from users where UsersName ='Anna';
