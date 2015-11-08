@@ -2,6 +2,9 @@ package ua.com.goit.gojava7.kickstarter;
 import java.util.ArrayList;
 import java.util.List;
 
+import ua.com.goit.gojava7.kickstarter.storage.CategoryStorage;
+import ua.com.goit.gojava7.kickstarter.storage.QuoteStorage;
+
 public class Kickstarter {
 
 	private static QuoteStorage quoteStorage = new QuoteStorage();
