@@ -4,8 +4,16 @@ import java.util.Scanner;
 public class ConsoleInspector {
 	private static Scanner sc = new Scanner(System.in);
 	
-	public static int getInt() {	
+	public static Integer getInt() {
+		//int a;		
+		//a = sc.nextInt();				
+		try {		
 		return sc.nextInt();
+		}  catch (Exception e) {
+			//Error ref = new Error(); 
+			//System.out.println("What does it mean? This is not good");
+	        throw new Error();
+        }		
 	}		
 	
 	public static void close() {
