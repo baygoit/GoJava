@@ -30,7 +30,7 @@ public class Kickstarter {
 		this.projectStorage = projectStorage;
 	}
 	
-	public void run(){
+	public void runKickstarter(){
 		consolePrinter.print(quoteStorage.getRandomQuote());
 		
 		List<Category> categories = categoryStorage.getAllCategories();

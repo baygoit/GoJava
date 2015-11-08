@@ -20,7 +20,7 @@ public class KickstarterRunner {
 
 		Kickstarter kickstarter = new Kickstarter(consolePrinter, consoleReader, quoteStorage, categoryStorage,
 				projectStorage);
-		kickstarter.run();
+		kickstarter.runKickstarter();
 		kickstarter.shutdown();
 
 	}

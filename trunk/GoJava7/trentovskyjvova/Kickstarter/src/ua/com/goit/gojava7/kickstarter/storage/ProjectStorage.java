@@ -26,7 +26,7 @@ public class ProjectStorage {
 		projects.add(progect);
 	}
 
-/*	public int size(Category category) {
-		return getProgects(category).size();
+/*	public int size() {
+		return projects.size();
 	}*/
 }
