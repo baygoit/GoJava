@@ -20,6 +20,7 @@ public class PaymentDaoTest {
 	{
 		dao.add(new Payment(user, 123312L, 200L, Utils.dateFromString("25.04.2015")));
 		dao.add(new Payment(user, 123312L, 150L, Utils.dateFromString("11.11.2015")));
+		dao.add(new Payment(new User("AnotherUser"), 123312L, 150L, Utils.dateFromString("11.11.2015")));
 	}
 	
 	@Test
@@ -29,7 +30,7 @@ public class PaymentDaoTest {
 	}
 	
 	@Test
-	public void getByProject() {
+	public void getByUser() {
 		List<Payment> list = dao.getByUser(user);
 		assertThat(list.size(), is(2));
 		list.forEach(payment -> assertThat(payment.getUser(), is(user)));
