@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+
+<!--    <resource-ref>
+        <description>affablebean</description>
+        <res-ref-name>jdbc/affablebean</res-ref-name>
+        <res-type>javax.sql.DataSource</res-type>
+        <res-auth>Container</res-auth>
+    </resource-ref>-->
+
+    <context-param>
+        <description>The relative path to product images</description>
+        <param-name>productImagePath</param-name>
+        <param-value>img/products/</param-value>
+    </context-param>
+
+    <context-param>
+        <description>The relative path to category images</description>
+        <param-name>categoryImagePath</param-name>
+        <param-value>img/categories/</param-value>
+    </context-param>
+
+    <context-param>
+        <description>The delivery surcharge applied to all orders</description>
+        <param-name>deliverySurcharge</param-name>
+        <param-value>3.00</param-value>
+    </context-param>
+
+    <session-config>
+        <session-timeout>
+            1
+        </session-timeout>
+    </session-config>
+
+    <servlet>
+        <servlet-name>ControllerServlet</servlet-name>
+        <servlet-class>com.gojava6.controller.ControllerServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ControllerServlet</servlet-name>
+        <url-pattern>/category</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ControllerServlet</servlet-name>
+        <url-pattern>/addToCart</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ControllerServlet</servlet-name>
+        <url-pattern>/viewCart</url-pattern>
+    </servlet-mapping>
+
+    <jsp-config>
+        <jsp-property-group>
+            <url-pattern>/index.jsp</url-pattern>
+            <url-pattern>/WEB-INF/view/*</url-pattern>
+            <include-prelude>/WEB-INF/jspf/header.jspf</include-prelude>
+            <include-coda>/WEB-INF/jspf/footer.jspf</include-coda>
+        </jsp-property-group>
+    </jsp-config>
+
+    <filter>
+        <filter-name>SessionTimeoutFilter</filter-name>
+        <display-name>SessionTimeoutFilter</display-name>
+        <filter-class>com.gojava6.filter.SessionTimeoutFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+       <filter-name>SessionTimeoutFilter</filter-name>
+       <servlet-name>ControllerServlet</servlet-name>
+    </filter-mapping>
+
+
+</web-app>

@@ -40,5 +40,23 @@ public class Runner {
 //        book.makeReservation(new Date(2016, 2, 9), new Date(2016, 2, 19), apartment1);
 //        book.makeReservation(new Date(2016, 1, 27), new Date(2016, 3, 5), apartment2);
 //        book.makeReservation(new Date(2015, 1, 1), new Date(2016, 7, 2), apartment);
+
+//        Integer a = 42;
+//        Integer b = 42;
+//        System.out.println(a==b);
+//        Integer c = 666;
+//        Integer d = 666;
+//        System.out.println(c==d);
+//
+//        char ch = '0';
+//        ch *= 1.1;
+//        System.out.println(ch);
+//
+//        String _‎ = "Hello ";
+//        String _‏ = "World";
+//        String _‎‏ = " !!";
+//        System.out.println(_‎+_‏+_‎‏);
+
+
     }
 }

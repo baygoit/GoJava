@@ -1,8 +1,10 @@
 Servlets\Listener\MyListener.class
+com\gojava6\airbnb\dao\UserDao.class
 Practice\collection\GoITMap$Pair.class
 com\gojava6\airbnb\common\Subject.class
 Servlets\Listener\FirstListener.class
 Practice\collection\GoITMap.class
+com\gojava6\airbnb\dao\ApartmentDao.class
 Practice\decorator\BacisTicket.class
 Servlets\Listener\LogoutServlet.class
 Practice\MyList\MyLinkedList.class
@@ -14,8 +16,8 @@ com\gojava6\airbnb\user\User.class
 com\gojava6\airbnb\Runner.class
 Practice\iterator\Deque$DequeIterator.class
 Practice\io\InputCase.class
-com\gojava6\airbnb\servlets\DeleteUserServlet.class
 Servlets\Cookie\CookieServlet2.class
+com\gojava6\airbnb\dao\DbDao.class
 com\gojava6\airbnb\validator\Validator.class
 Practice\PascalTriangle.class
 Servlets\ServletConfig\DemoServlet.class
@@ -23,9 +25,7 @@ com\gojava6\airbnb\persistence\PersistenceException.class
 Practice\IslandProblemResolving.class
 Practice\decorator\InternetTicketSaling.class
 com\gojava6\airbnb\apartment\ApartType.class
-com\gojava6\airbnb\dao\userDao.class
 com\gojava6\airbnb\data\Lists.class
-com\gojava6\airbnb\servlets\GetAppartmentsByCity.class
 Practice\iterator\Deque$1.class
 Servlets\Cookie\CookieServlet1.class
 com\gojava6\airbnb\application\AirBnB.class
@@ -34,15 +34,15 @@ Practice\decorator\PlaceTicket.class
 Servlets\Attribute\ServletAttribute1.class
 Servlets\SendRedirect\MySearcher.class
 com\gojava6\airbnb\apartment\Apartment.class
+com\gojava6\airbnb\controller\ControllerServlet.class
+com\gojava6\airbnb\services\ApartmentService.class
 Practice\OneSwipeArray.class
 com\gojava6\airbnb\reservation\Book.class
 Practice\iterator\Deque$Node.class
-com\gojava6\airbnb\dao\dbDao.class
 Servlets\HttpSession\FirstServlet.class
 Practice\iterator\ResizingArrayQueue.class
 Servlets\RequestDispatcher\SimpleLogin.class
 Servlets\Filter\MyAuthFilter.class
-com\gojava6\airbnb\servlets\RegistrationServlet.class
 com\gojava6\airbnb\services\UserService.class
 com\gojava6\airbnb\common\Observer.class
 Servlets\ServletContext\DemoServletContext.class
@@ -54,4 +54,3 @@ Servlets\HttpSession\SecondServlet.class
 Servlets\UrlRewriting\UrlRewritingServlet1.class
 Servlets\Filter\AdminServlet.class
 Servlets\Attribute\ServletAttribute2.class
-com\gojava6\airbnb\dao\apartmentDao.class

@@ -31,7 +31,7 @@ public class BookingService {
                         "', apartmentID='", apartment.getId(), "', start='", format.format(start),
                         "', end='", format.format(end), "'"));
             }
-            Reservation reservation = new Reservation(user.getId(), apartment, start, end, comment);
+            Reservation reservation = new Reservation(user.getId(), apartment.getId(), start, end, comment);
             SortOfDataBase.reservations.put(reservation.getId(), reservation);
             return true;
         }

@@ -1,7 +1,7 @@
 package com.donishchenko.airbnb.dao;
 
-import com.donishchenko.airbnb.jdbc.DBUtils;
-import com.donishchenko.airbnb.jdbc.QueryBuilder;
+import com.donishchenko.airbnb.dbutils.JdbcUtils;
+import com.donishchenko.airbnb.dbutils.QueryBuilder;
 import com.donishchenko.airbnb.model.Apartment;
 import com.donishchenko.airbnb.model.ApartmentType;
 
@@ -23,11 +23,11 @@ public class JdbcApartmentDao implements ApartmentDao {
             "SELECT * FROM apartment";
 
     private static final String updateApartmentQuery =
-            "UPDATE apartment SET host = ?, city = ?, type = ?, active = ? WHERE id = ?";
+            "UPDATE apartment SET userId = ?, city = ?, type = ?, active = ? WHERE id = ?";
 
     @Override
     public int save(Apartment apartment) throws SQLException {
-        try (Connection conn = DBUtils.getConnection()){
+        try (Connection conn = JdbcUtils.getConnection()){
             PreparedStatement stat = conn.prepareStatement(saveApartmentQuery, Statement.RETURN_GENERATED_KEYS);
             stat.setInt(1, apartment.getHostId());
             stat.setString(2, apartment.getCity());
@@ -46,7 +46,7 @@ public class JdbcApartmentDao implements ApartmentDao {
 
     @Override
     public boolean delete(int id) throws SQLException {
-        try (Connection conn = DBUtils.getConnection()) {
+        try (Connection conn = JdbcUtils.getConnection()) {
             PreparedStatement stat = conn.prepareStatement(deleteApartmentQuery);
             stat.setInt(1, id);
 
@@ -63,7 +63,7 @@ public class JdbcApartmentDao implements ApartmentDao {
             throw new SQLException("Wrong id");
         }
 
-        try (Connection conn = DBUtils.getConnection()) {
+        try (Connection conn = JdbcUtils.getConnection()) {
             PreparedStatement stat = conn.prepareStatement(updateApartmentQuery);
             stat.setInt(1, apartment.getHostId());
             stat.setString(2, apartment.getCity());
@@ -79,7 +79,7 @@ public class JdbcApartmentDao implements ApartmentDao {
 
     @Override
     public Apartment get(int id) throws SQLException {
-        try (Connection conn = DBUtils.getConnection()) {
+        try (Connection conn = JdbcUtils.getConnection()) {
             PreparedStatement stat = conn.prepareStatement(getApartmentByIdQuery);
             stat.setInt(1, id);
 
@@ -107,15 +107,15 @@ public class JdbcApartmentDao implements ApartmentDao {
 
     private List<Apartment> getAllApartmentsWithParameter(String...args) throws SQLException {
         QueryBuilder queryBuilder = new QueryBuilder(getAllApartmentsQuery);
-        queryBuilder.parse(args);
+        queryBuilder.parseSql(args);
 
-        try (Connection conn = DBUtils.getConnection()) {
+        try (Connection conn = JdbcUtils.getConnection()) {
             List<Apartment> list = new LinkedList<>();
             String query = queryBuilder.getQuery();
             PreparedStatement stat = conn.prepareStatement(query);
 
             int i = 1;
-            for (String value : queryBuilder.values()) {
+            for (Object value : queryBuilder.values()) {
                 stat.setObject(i, value);
             }
 

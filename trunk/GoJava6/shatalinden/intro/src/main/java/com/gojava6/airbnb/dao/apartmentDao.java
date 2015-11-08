@@ -9,12 +9,28 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class apartmentDao {
+public class ApartmentDao {
+
     public static List<Apartment> pullApartmentsByCity(String city) {
         List<Apartment> apartmentsByCity = new ArrayList<>();
-        try (Connection connection = dbDao.initConnection()) {
+        try (Connection connection = DbDao.initConnection()) {
             PreparedStatement ps = connection.prepareStatement("SELECT * FROM apartments WHERE city = ?");
             ps.setString(1, city);
+            ResultSet resultSet = ps.executeQuery();
+            while (resultSet.next()) {
+                apartmentsByCity.add(createApartment(resultSet));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return apartmentsByCity;
+    }
+
+    public static List<Apartment> pullApartmentsByUserID(int id) {
+        List<Apartment> apartmentsByCity = new ArrayList<>();
+        try (Connection connection = DbDao.initConnection()) {
+            PreparedStatement ps = connection.prepareStatement("SELECT * FROM apartments WHERE userID = ?");
+            ps.setInt(1, id);
             ResultSet resultSet = ps.executeQuery();
             while (resultSet.next()) {
                 apartmentsByCity.add(createApartment(resultSet));
@@ -32,10 +48,18 @@ public class apartmentDao {
         return apartment;
     }
 
-//    public static void main(String[] args) {
-//        List<Apartment> list = pullApartmentsByCity("London");
-//        for (int i = 0; i < list.size(); i++) {
-//            System.out.println(list.get(i).getShortDescription());
-//        }
-//    }
+    public static void pushApartment(Apartment apartment) {
+        try (Connection connection = DbDao.initConnection()) {
+            PreparedStatement ps = connection.prepareStatement("INSERT INTO apartments VALUES(?,?,?,?,?,?)");
+            ps.setInt(1, apartment.getApartmentID());
+            ps.setString(2, apartment.getCity());
+            ps.setString(3, apartment.getType().toLowerCase());
+            ps.setInt(4, apartment.getUserID());
+            ps.setInt(5, apartment.getPrice());
+            ps.setString(6, apartment.getShortDescription());
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

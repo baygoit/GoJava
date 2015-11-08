@@ -2,13 +2,12 @@ package model;
 
 import observer.Observer;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.HashMap;
 
-public class User implements Observer{
-    private static int USER_ID = 0;
+public class User implements Observer, Serializable{
     private int id;
-    private int externalCode;
     private String name;
     private String lastName;
     private GenderType gender;
@@ -21,8 +20,8 @@ public class User implements Observer{
     public User() {
     }
 
-    public User(int externalCode, String name, String lastName, GenderType gender, Date birthDate, String email, CityList city) {
-        this.externalCode = externalCode;
+    public User(int id, String name, String lastName, GenderType gender, Date birthDate, String email, CityList city) {
+        this.id = id;
         this.name = name;
         this.lastName = lastName;
         this.gender = gender;
@@ -31,21 +30,12 @@ public class User implements Observer{
         this.city = city;
     }
 
-
     public int getId() {
         return id;
     }
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public int getExternalCode() {
-        return externalCode;
-    }
-
-    public void setExternalCode(int externalCode) {
-        this.externalCode = externalCode;
     }
 
     public void setName(String name) {
@@ -117,7 +107,7 @@ public class User implements Observer{
     @Override
     public String toString() {
         return "User{" +
-                "external code='" + externalCode + '\'' +
+                "email='" + email + '\'' +
                 ", name='" + name + '\'' +
                 ", lastName='" + lastName + '\'' +
                 '}';

@@ -2,15 +2,19 @@ package services;
 
 import dao.file.HomeFileDao;
 import model.Home;
-import model.User;
 
 import java.io.IOException;
+import java.util.List;
 
 public class HomeService{
     private HomeFileDao homeFileDao = new HomeFileDao();
 
+    public void createHome(Home home) throws IOException {
+        homeFileDao.create(home);
+    }
 
-    public void createHome(User host, Home home) throws IOException {
+    public List<Home> realAllHomes() throws IOException {
+        return homeFileDao.readAll();
     }
 
 }

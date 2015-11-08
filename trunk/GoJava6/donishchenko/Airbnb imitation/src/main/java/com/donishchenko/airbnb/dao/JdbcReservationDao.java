@@ -1,7 +1,7 @@
 package com.donishchenko.airbnb.dao;
 
-import com.donishchenko.airbnb.jdbc.DBUtils;
-import com.donishchenko.airbnb.jdbc.QueryBuilder;
+import com.donishchenko.airbnb.dbutils.JdbcUtils;
+import com.donishchenko.airbnb.dbutils.QueryBuilder;
 import com.donishchenko.airbnb.model.Reservation;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -45,7 +45,7 @@ public class JdbcReservationDao implements ReservationDao {
 
     @Override
     public int save(Reservation reservation) throws SQLException {
-        try (Connection conn = DBUtils.getConnection()) {
+        try (Connection conn = JdbcUtils.getConnection()) {
             PreparedStatement stat = conn.prepareStatement(saveReservationQuery, Statement.RETURN_GENERATED_KEYS);
             stat.setInt(1, reservation.getUserId());
             stat.setInt(2, reservation.getApartmenId());
@@ -65,7 +65,7 @@ public class JdbcReservationDao implements ReservationDao {
 
     @Override
     public boolean delete(int id) throws SQLException {
-        try (Connection conn = DBUtils.getConnection()) {
+        try (Connection conn = JdbcUtils.getConnection()) {
             PreparedStatement stat = conn.prepareStatement(deleteReservationQuery);
             stat.setInt(1, id);
 
@@ -82,7 +82,7 @@ public class JdbcReservationDao implements ReservationDao {
             throw new SQLException("Wrong id");
         }
 
-        try (Connection conn = DBUtils.getConnection()) {
+        try (Connection conn = JdbcUtils.getConnection()) {
             PreparedStatement stat = conn.prepareStatement(updateReservationQuery);
             stat.setInt(1, reservation.getUserId());
             stat.setInt(2, reservation.getApartmenId());
@@ -99,7 +99,7 @@ public class JdbcReservationDao implements ReservationDao {
 
     @Override
     public Reservation get(int id) throws SQLException {
-        try (Connection conn = DBUtils.getConnection()) {
+        try (Connection conn = JdbcUtils.getConnection()) {
             PreparedStatement stat = conn.prepareStatement(getReservationByIdQuery);
             stat.setInt(1, id);
 
@@ -138,9 +138,9 @@ public class JdbcReservationDao implements ReservationDao {
 
     private List<Reservation> getAllReservationsWithParameters(Object...args) throws SQLException {
         QueryBuilder queryBuilder = new QueryBuilder(getAllReservationsQuery);
-        queryBuilder.parse(args);
+        queryBuilder.parseSql(args);
 
-        try (Connection conn = DBUtils.getConnection()) {
+        try (Connection conn = JdbcUtils.getConnection()) {
             List<Reservation> list = new LinkedList<>();
 
             String query = queryBuilder.getQuery();

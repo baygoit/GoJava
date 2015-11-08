@@ -14,6 +14,8 @@ public class User implements com.airbnb.observer.Observer {
     private String city;
     private static final Logger log = Logger.getLogger(User.class);
 
+    public User() {}
+
     public User(String name, String surname, String email, String city, String userType) {
         this.Name = name;
         this.Surname = surname;
@@ -30,15 +32,15 @@ public class User implements com.airbnb.observer.Observer {
         this.userId = userId;
     }
 
-    public void setName(String name) throws Exception {
+    public void setName(String name) {
         Name = name;
     }
 
-    public void setSurname(String surname) throws Exception {
+    public void setSurname(String surname){
         Surname = surname;
     }
 
-    public void setEmail(String email) throws Exception {
+    public void setEmail(String email) {
         Email = email;
     }
 
@@ -50,7 +52,7 @@ public class User implements com.airbnb.observer.Observer {
         return city;
     }
 
-    public void setCity(String city) throws Exception {
+    public void setCity(String city) {
         this.city = city;
     }
 
