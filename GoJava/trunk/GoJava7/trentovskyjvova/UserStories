@@ -1,0 +1,22 @@
+1. Quote 
+As a Guest, I want to see one of predefined quotes when I go into the app, so I am motivated and not bored.
+AC: I go into the app several times -> I see different quotes.
+
+2. Categories list
+As a Guest, I want to see categories list, to view projects of a definite topic.
+AC: I go into the app -> I see a categories list.
+
+3. Project list
+As a Guest, I want to see the list of projects of a certain category, in order to understand what I want to invest.
+AC: I go into the app -> I choose any category -> I see a project list, each of which contains: the name, the percentage of the collected money, days to go, the amount of money collected.
+
+4. Project details
+As a Guest, I want to explore a particular project to decide to invest money in it or not.
+AC: While in the project list -> I choose any project -> I see a detailed description of the project (everything on the list as well as description, owner of the project, how much money you need, links to videos and photos)
+
+5. Navigation 
+As a Guest I want to be able to view different projects in different categories without restarting app.
+AC 1: While in the project list -> I choose 0 -> I see the front page with a list of categories.
+AC 2: From the project description -> I choose 0 -> I see the list of projects
+
+

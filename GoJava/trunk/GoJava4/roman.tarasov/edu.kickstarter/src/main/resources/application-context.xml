@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
+
+
+       <context:component-scan base-package="edu.kickstarter" />
+
+       <bean id="dataSource" class="org.apache.tomcat.jdbc.pool.DataSource"
+                destroy-method="close">
+                <property name="driverClassName" value="org.postgresql.Driver" />
+                <property name="url" value="jdbc:postgresql://127.0.0.1:5432/kickstarter" />
+                <property name="username" value="postgres" />
+                <property name="password" value="7575" />
+                <property name="initialSize" value="5" />
+                <property name="maxActive" value="10" />
+                <property name="maxIdle" value="5" />
+                <property name="minIdle" value="2" />
+        </bean>
+
+
+       <!-- bank -->
+	<bean id="Bank" class="dao.bank.Bank" />
+	<!-- <bean id="BankException" class="dao.bank.BankException" <constructor-arg></constructor-arg> 
+		</bean> -->
+	<!-- category -->
+	<bean id="Category" class="dao.category.Category" scope="prototype" />
+	<bean id="CategoryService" class="dao.category.CategoryService"
+		abstract="true" autowire="default" />
+	<bean id="DBcategoryServiceImpl" class="dao.category.DBcategoryServiceImpl" />
+	<bean id="DefaultCategoryServiceImpl" class="dao.category.DefaultCategoryServiceImpl" />
+
+	<!-- project -->
+	<bean id="DBProjectService" class="dao.project.DBprojectServiceImpl" />
+	<bean id="DefaultProjectService" class="dao.project.DefaultProjectServiceImpl" />
+	<bean id="Project" class="dao.project.Project" scope="prototype" />
+	<!-- <bean id="ProjectService" class="dao.project.ProjectService" /> -->
+
+	<!-- quote -->
+	<bean id="DBQuoteService" class="dao.quote.DBquoteServiceImpl" />
+	<bean id="DefaultQuoteService" class="dao.quote.DefaultQuoteServiceImpl" />
+	<bean id="Quote" class="dao.quote.Quote" scope="prototype" />
+	<!-- <bean id="QuoteService" class="dao.quote.QuoteService" /> -->
+
+	<!-- user -->
+	<bean id="DBUserService" class="dao.user.DBUserService" />
+	<bean id="DefaultUserService" class="dao.user.DefaultUserService" />
+	<bean id="User" class="dao.user.User" scope="prototype" />
+	<!-- <bean id="UserService" class="dao.user.UserService" /> -->
+
+	<!-- model -->
+	<bean id="beansDetailedProject" class="beans.DetailedProject" />
+	<bean id="beansLogin" class="beans.Login" />
+	<bean id="beansMain" class="beans.Main" />
+	
+	<bean id="beansProjectsDao" class="beans.Projects" />
+
+	<!-- servlet -->
+	<bean id="DetailedProject" class="servlet.DetailedProject" />
+	<bean id="Login" class="servlet.Login" />
+	<bean id="Main" class="servlet.Main" />
+	<bean id="Projects" class="servlet.Projects" />
+
+	<!-- view -->
+	<bean id="viewCategories" class="view.Categories" />
+	<bean id="viewDetailedProjectView" class="view.DetailedProject" />
+	<bean id="viewLogin" class="view.Login" />
+	<bean id="viewProjects" class="view.Projects" />
+	<bean id="viewViewStrategy" class="view.ViewStrategy" />
+
+	<bean id="beansBeansStrategy" name="BeansStrategy"
+		class="beans.BeansStrategy" scope="singleton"
+		depends-on="Main Projects Login">
+	</bean>
+</beans>

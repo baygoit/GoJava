@@ -1,0 +1,9 @@
+INSERT INTO `airbnb`.`apartment` (`address`, `aparttype`, `user`, `city`) VALUES
+('Shevchenko 32/12', 0, 1, 1),
+('Elitnaya 24/10', 1, 1, 1),
+('Dorognaya 15a', 1, 2, 2),
+('Gurova 16d', 1, 2, 3),
+('Gurova 16d', 2 ,2 , 4);
+
+
+

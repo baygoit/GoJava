@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/jdbc
+        http://www.springframework.org/schema/jdbc/spring-jdbc.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<bean
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:db.properties</value>
+			</list>
+		</property>
+		<property name="ignoreUnresolvablePlaceholders" value="true" />
+	</bean>
+
+	<!-- Data Source -->
+	<!-- 
+	<bean id="dataProvider" class="goit.nz.kickstarter.storage.PostgreDataProvider"
+		init-method="init">
+		<constructor-arg type="java.lang.String" value="db.properties" />
+	</bean>
+	 -->
+	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
+		<property name="driverClassName" value="${driver}" />
+		<property name="url" value="${url}" />
+		<property name="username" value="${user}" />
+		<property name="password" value="${password}" />
+	</bean>
+
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="packagesToScan" value="goit.nz.kickstarter.domain" />
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQL9Dialect</prop>
+				<prop key="hibernate.show_sql">false</prop>
+				<prop key="hibernate.format_sql">false</prop>
+			</props>
+		</property>
+	</bean>
+
+	<tx:annotation-driven />
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<!-- DAO -->
+	<bean id="quoteDAO" class="goit.nz.kickstarter.dao.hibernate.QuoteDAOImplHibernate">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="categoryDAO"
+		class="goit.nz.kickstarter.dao.hibernate.CategoryDAOImplHibernate">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="projectDAO" class="goit.nz.kickstarter.dao.hibernate.ProjectDAOImplHibernate">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<!-- Services -->
+	<bean id="quoteService" class="goit.nz.kickstarter.service.QuoteService">
+		<constructor-arg ref="quoteDAO" />
+	</bean>
+	<bean id="categoryService" class="goit.nz.kickstarter.service.CategoryService">
+		<constructor-arg ref="categoryDAO" />
+	</bean>
+	<bean id="projectService" class="goit.nz.kickstarter.service.ProjectService">
+		<constructor-arg ref="projectDAO" />
+	</bean>
+
+	<!-- Actions -->
+	<bean id="addQuestionAction" class="goit.nz.kickstarter.action.AddQuestionAction">
+		<property name="projectService" ref="projectService" />
+	</bean>
+	<bean id="categoryAction" class="goit.nz.kickstarter.action.CategoryAction">
+		<property name="categoryService" ref="categoryService" />
+		<property name="projectService" ref="projectService" />
+	</bean>
+	<bean id="mainPageAction" class="goit.nz.kickstarter.action.MainPageAction">
+		<property name="quoteService" ref="quoteService" />
+		<property name="categoryService" ref="categoryService" />
+	</bean>
+	<bean id="donateAction" class="goit.nz.kickstarter.action.DonateAction">
+		<property name="projectService" ref="projectService" />
+	</bean>
+	<bean id="projectAction" class="goit.nz.kickstarter.action.ProjectAction">
+		<property name="projectService" ref="projectService" />
+	</bean>
+	
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/pages/" />
+        <property name="suffix" value=".jsp" />
+    </bean>
+    
+    <context:component-scan base-package="goit.nz.kickstarter.action" />
+
+</beans>
