@@ -1,5 +1,9 @@
 package ua.com.goit.gojava7.kickstarter.model;
 
+/**
+ * @author Devian
+ * @category Model
+ */
 public class Quote {
 	public Quote(String quote, String author) {
 		super();
