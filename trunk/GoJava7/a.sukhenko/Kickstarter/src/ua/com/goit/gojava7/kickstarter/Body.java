@@ -1,19 +1,15 @@
 package ua.com.goit.gojava7.kickstarter;
 
+import ua.com.goit.gojava7.kickstarter.model.Quote;
+
 public class Body {
 	private Lang language = Lang.English;
+	Kickstarter kickstarter;
 	
-	private static Body instance;
-
-	private Body() {
+	public Body(Kickstarter kickstarter) {
+		this.kickstarter = kickstarter;
 	}
 
-	public static Body getInstance() {
-		if (null == instance) {
-			instance = new Body();
-		}
-		return instance;
-	}
 	public void generateHeader(){
 		if(language == Lang.Russian)
 		ConsolePrinter.println(LanguageConst.RU_HELLO_MSG);
@@ -27,15 +23,22 @@ public class Body {
 	}
 	public void generateBody(){
 		ConsolePrinter.printDeflector();
-		Project first = Kickstarter.getInstance().getProjectById(0);
+		Project first = kickstarter.getProjectById(0);
 		ConsolePrinter.println("Project: " + first.getProjectName() + "   |  Category: " + first.getProjectCategory().toString());
 		ConsolePrinter.println(first.getProjectDescription());
 		ConsolePrinter.println("Backers: " + first.getBackers().size() + " | Pledged: $" + first.getMoneyPledged());
 		ConsolePrinter.printDeflector();
 	}
+	
+	public void generateQuoteBlock(){
+		Quote quote = kickstarter.getQuoteStorage().getRandomQuote();
+		ConsolePrinter.printDeflector();
+		ConsolePrinter.println(quote);
+	}
 
-	public void generateAll() {
+	public void generateMainPage() {
 		generateHeader();
+		generateQuoteBlock();
 		generateBody();
 		generateFooter();		
 	}
