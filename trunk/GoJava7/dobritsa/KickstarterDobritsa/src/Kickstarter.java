@@ -30,7 +30,7 @@ public class Kickstarter {
 			System.exit(0);
 			// OLEG something wrong with formatting
 			}
-		System.out.println("Current category: " + categoryStorage.getCategiry(categoryNumber - 1));		
+		System.out.println("Current category: " + categoryStorage.getCategory(categoryNumber - 1));		
 		return categoryNumber;			
 	}
 	

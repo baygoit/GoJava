@@ -9,29 +9,49 @@ public class Project{
     private String questions;
     
     public Project() {}
-    // OLEG ok, I will ask you in a month what is "g" meaning. Can you answer it?
-	// OLEG identifiers in java are not limited by length. User small by
-	// meaningful names for are item
-    public Project(String n, String d, Integer g, Integer p, Integer dtg, String his, String l, String q){         
-    	name=n;
-    	description=d;
-        goal=g;
-        pledged = p;
-        daysToGo=dtg;
-        history=his;
-        link=l;
-        questions=q;
-    }
+ 
+    public Project(String name, String description, Integer goal, Integer pledged, Integer daysToGo, String history, String link, String questions){         
+    	this.name = name;
+    	this.description = description;
+        this.goal = goal;
+        this.pledged = pledged;
+        this.daysToGo = daysToGo;
+        this.history = history;
+        this.link = link;
+        this.questions = questions;
+    }    
+
+    public String getName() {
+    	return name;
+    	}
     
-	// OLEG what is our code convention?
-    public String getName(){return name;}
-    public String getDescription(){return description;}
-    public Integer getAmount(){return goal;}
-    public Integer getPledged(){return pledged;}
-    public Integer getDaysToGo(){return daysToGo;}
-    public String getHistory(){return history;}
-    public String getLink(){return link;}
-    public String getQuestions(){return questions;}
+    public String getDescription() {
+    	return description;
+    	}
+    
+    public Integer getAmount() {
+    	return goal;
+    	}
+    
+    public Integer getPledged() {
+    	return pledged;
+    	}
+    
+    public Integer getDaysToGo() {
+    	return daysToGo;
+    	}
+    
+    public String getHistory(){
+    	return history;
+    	}
+    
+    public String getLink(){
+    	return link;
+    	}
+    
+    public String getQuestions(){
+    	return questions;
+    	}
     
 	// OLEG SRL violated
     public void printShort() {

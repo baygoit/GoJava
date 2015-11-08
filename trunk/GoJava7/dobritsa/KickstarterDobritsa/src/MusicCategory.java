@@ -1,11 +1,9 @@
 import java.util.HashMap;
 import java.util.Map;
 
-// OLEG Ok, we assume that list of categories is fixed. Then why we call them First, Second etc.? Why not use semantic names?
 // OLEG what will be our work if the list of categories can be changed?
 public class MusicCategory {
 
-	// OLEG music of first?
 	private Map<Integer, Project> firstCategory = new HashMap<>();
 	{
 		firstCategory.put(1, new Project(

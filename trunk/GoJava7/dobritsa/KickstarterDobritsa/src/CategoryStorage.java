@@ -17,8 +17,7 @@ public class CategoryStorage {
 		return Collections.unmodifiableList(CATEGORIES);		
 	}
 	
-	// OLEG Categiry => Category
-	public String getCategiry(int index) {
+	public String getCategory(int index) {
 		return CATEGORIES.get(index);		
 	}
 	
