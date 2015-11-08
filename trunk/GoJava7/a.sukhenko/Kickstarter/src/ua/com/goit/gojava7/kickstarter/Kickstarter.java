@@ -18,6 +18,7 @@ public class Kickstarter {
 	
 	public Kickstarter() {
 		initQuotes();
+		initCategories();
 	}
 	private static final boolean LOGS_ENABLED = true;
 	private ArrayList<String> logs = new ArrayList<>();
@@ -32,12 +33,14 @@ public class Kickstarter {
 	}
 	
 	public void initCategories(){
-		
+		categoryStorage.addCategory(new Category("Movie", 1));
+		categoryStorage.addCategory(new Category("Technology", 2));
+		categoryStorage.addCategory(new Category("Games", 3));
 	}
 	
 	public static void main(String[] args) {
 		Kickstarter kickstarter = new Kickstarter();
-		Project project = new Project("GoIT Java 7", "Movie about our GoIT Java 7 Group", new Category("Movie", 1), Calendar.getInstance());
+		Project project = new Project("GoIT Java 7", "Movie about our GoIT Java 7 Group", kickstarter.getCategoryStorage().getCategoryById(1), Calendar.getInstance());
 		User backerOne = new User();
 		project.addBacker(backerOne, Double.valueOf(100501));
 		kickstarter.addProject(project);
@@ -77,7 +80,9 @@ public class Kickstarter {
 	public CategoryStorage getCategoryStorage() {
 		return categoryStorage;
 	}
-
+	
+	
+	
 	public void setCategoryStorage(CategoryStorage categoryStorage) {
 		this.categoryStorage = categoryStorage;
 	}

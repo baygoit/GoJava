@@ -37,10 +37,17 @@ public class Body {
 		ConsolePrinter.printDeflector();
 		ConsolePrinter.println(quote);
 	}
-
+	public void generateCategories(){
+		ConsolePrinter.printDeflector();
+		ConsolePrinter.println("Categories: ");
+		kickstarter.getCategoryStorage().getCategories().forEach((a,b) -> {
+			ConsolePrinter.printCategory(b);
+		});
+	}
 	public void generateMainPage() {
 		generateHeader();
 		generateQuoteBlock();
+		generateCategories();
 		generateBody();
 		generateFooter();		
 	}
