@@ -53,6 +53,7 @@ public class Project{
     	return questions;
     	}
     
+    //TODO
 	// OLEG SRL violated
     public void printShort() {
     	System.out.println("Name: " + name);
@@ -62,6 +63,7 @@ public class Project{
     	System.out.println("Days to go: " + daysToGo);    	
     }
     
+    //TODO
 	// OLEG SRL violated
     public void printFull() {
     	System.out.println("_________________________________________");  

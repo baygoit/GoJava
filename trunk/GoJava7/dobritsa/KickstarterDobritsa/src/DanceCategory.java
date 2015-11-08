@@ -31,6 +31,8 @@ public class DanceCategory {
 		secondCategory.put(3, new Project("Name23", "Description23", 23000, 2300, 23, "history22", "link22", "questions22"));
 	}
 	
+	
+	//TODO
 	public Map<Integer, Project> getProjects() {		
 		return secondCategory;		
 	}

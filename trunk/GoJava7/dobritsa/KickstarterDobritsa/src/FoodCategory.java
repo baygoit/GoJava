@@ -23,6 +23,8 @@ public class FoodCategory {
 		thirdProjects.put(3, new Project("Name33", "Description33", 33000, 3300, 33, "history33", "link33", "questions33"));
 	}
 	
+	
+	//TODO
 	public Map<Integer, Project> getProjects() {		
 		return thirdProjects;		
 	}	

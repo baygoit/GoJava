@@ -21,6 +21,7 @@ public class CategoryStorage {
 		return CATEGORIES.get(index);		
 	}
 	
+	//TODO
 	// OLEG SRL violated
 	public static void printForChoice() {
 		System.out.println("\n_________________________________________");

@@ -32,6 +32,7 @@ public class MusicCategory {
 		firstCategory.put(3, new Project("Name13", "Description13", 13000, 1300, 13, "history13", "link13", "questions13"));
 	}
 	
+	//TODO
 	// OLEG why we return inner map as is?
 	public Map<Integer, Project> getProjects() {		
 		return firstCategory;		
