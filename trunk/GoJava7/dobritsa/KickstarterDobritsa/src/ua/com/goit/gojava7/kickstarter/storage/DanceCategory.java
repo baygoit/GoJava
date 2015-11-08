@@ -1,6 +1,8 @@
-package ua.com.goit.gojava7.kickstarter;
+package ua.com.goit.gojava7.kickstarter.storage;
 import java.util.HashMap;
 import java.util.Map;
+
+import ua.com.goit.gojava7.kickstarter.domain.Project;
 
 public class DanceCategory {
 	private Map<Integer, Project> secondCategory = new HashMap<>();

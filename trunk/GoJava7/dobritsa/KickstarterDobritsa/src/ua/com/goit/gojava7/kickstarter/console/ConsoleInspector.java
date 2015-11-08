@@ -1,4 +1,4 @@
-package ua.com.goit.gojava7.kickstarter;
+package ua.com.goit.gojava7.kickstarter.console;
 import java.util.List;
 import java.util.Scanner;
 
