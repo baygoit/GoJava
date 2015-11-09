@@ -1,5 +1,7 @@
 package ua.com.goit.gojava7.kickstarter;
 
+import java.util.Random;
+
 import ua.com.goit.gojava7.kickstarter.console.ConsolePrinter;
 import ua.com.goit.gojava7.kickstarter.console.ConsoleScanner;
 import ua.com.goit.gojava7.kickstarter.domain.Category;
@@ -22,7 +24,7 @@ public class KickstarterRunner {
 	}
 
 	private static QuoteStorage initQuotes() {
-		QuoteStorage quoteStorage = new QuoteStorage();
+		QuoteStorage quoteStorage = new QuoteStorage(new Random());
 		quoteStorage
 				.add(new Quote(
 						"Your work is going to fill a large part of your life,"
