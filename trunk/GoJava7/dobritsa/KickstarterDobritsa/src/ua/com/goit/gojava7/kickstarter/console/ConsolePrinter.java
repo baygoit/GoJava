@@ -13,8 +13,8 @@ public class ConsolePrinter {
 		}
 	
 	public void printCategories(List<Category> categories) {
-		System.out.println("\n_________________________________________");
-		System.out.println("0: for exit");
+		//System.out.println("\n_________________________________________");
+		//System.out.println("0: for exit");
 		for(int i = 0; i < categories.size(); i++) {
 			System.out.println(i + 1 + ": " + categories.get(i).getName());
 		}	
@@ -35,9 +35,7 @@ public class ConsolePrinter {
     	System.out.println("Questions/Answers: " + project.getQuestions());
 	}
 	
-	public void printProjects(List<Project> projects) {
-		System.out.println("_________________________________________");
-		System.out.println("\n0: for return to list of categories");
+	public void printProjects(List<Project> projects) {		
 		for(int i = 0; i < projects.size(); i++){			
 			System.out.println("\n" + (i+1) + ":");
 			printShort(projects.get(i));

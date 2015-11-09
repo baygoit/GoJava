@@ -15,8 +15,9 @@ public class KickstarterRun {
 
 		QuoteStorage quoteStorage = initQuotes();
 		CategoryStorage categoryStorage = initCategories();
+		ProjectStorage projectStorage = null;
 
-		Kickstarter kickstarter = new Kickstarter(consolePrinter, consoleInspector, quoteStorage, categoryStorage);
+		Kickstarter kickstarter = new Kickstarter(consolePrinter, consoleInspector, quoteStorage, categoryStorage, projectStorage);
 		kickstarter.run();
 		kickstarter.shutdown();
 	}

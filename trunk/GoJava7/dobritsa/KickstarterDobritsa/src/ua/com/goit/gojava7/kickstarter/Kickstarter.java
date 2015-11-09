@@ -23,12 +23,13 @@ public class Kickstarter {
 	List<Category> categories;
 	
 	public Kickstarter(ConsolePrinter consolePrinter, ConsoleInspector consoleInspector,
-			QuoteStorage quoteStorage, CategoryStorage categoryStorage) {
+			QuoteStorage quoteStorage, CategoryStorage categoryStorage, ProjectStorage projectStorage) {
 		this.consolePrinter = consolePrinter;
 		this.consoleInspector = consoleInspector;
 
 		this.quoteStorage = quoteStorage;
 		this.categoryStorage = categoryStorage;
+		this.projectStorage = projectStorage;
 	}
 
 	//int selectedCategory;
@@ -52,6 +53,8 @@ public class Kickstarter {
 	
 	public void run() {
 		consolePrinter.print(quoteStorage.getRandomQuote());		
+		
+		
 		categories = categoryStorage.get();
 		categoryNumber = chooseCategory();		
 		projectNumber = chooseProject(categoryNumber);
@@ -59,19 +62,22 @@ public class Kickstarter {
 	}
 
 	public Integer chooseCategory() {
+		System.out.println("\nList of categories:");
 		consolePrinter.printCategories(categories);
-		System.out.println("\nChoose a category by number: ");				
+		System.out.println("\nChoose a category by number (0 for exit): ");				
 		categoryNumber = consoleInspector.getCorrectInt(categoryStorage.size());
 		if(categoryNumber == 0) {
 			consoleInspector.close();		
 			System.out.println("See you soon!");
 			System.exit(0);
 			}
+		System.out.println("\n_______________________________________________________");		
 		System.out.println("Current category: " + categoryStorage.get(categoryNumber - 1).getName());		
 	return categoryNumber;			
 	}
 	
-	private Integer chooseProject(Integer categoryNumber) {
+	private Integer chooseProject(Integer categoryNumber) {		
+		System.out.println("List of projects:");
 		if(categoryNumber == 1) {
 			projectStorage = initMusicStorage();
 		}	else if(categoryNumber == 2) {
@@ -80,12 +86,13 @@ public class Kickstarter {
 			projectStorage = initFoodStorage();
 		}
 		consolePrinter.printProjects(projectStorage.get());	
-		System.out.println("\nChoose a project by number: ");	
+		System.out.println("\nChoose a project by number (0 for return to list of categories): ");	
 		projectNumber = consoleInspector.getCorrectInt(projectStorage.size());		
 		if(projectNumber == 0) {
 			chooseProject(chooseCategory());
 			}
-		System.out.println("Current project: " + projectStorage.get(projectNumber -1 ).getName());		
+		System.out.println("\n_______________________________________________________");	
+		System.out.println("Current project number " + projectNumber + ": ");		
 		return projectNumber -1;
 	}
 	
