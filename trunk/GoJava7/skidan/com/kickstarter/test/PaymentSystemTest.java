@@ -3,11 +3,9 @@ package com.kickstarter.test;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
-
 import org.junit.Test;
 
 import com.kickstarter.PaymentSystem;
-
 import com.kickstarter.storages.CategoryStorage;
 import com.kickstarter.storages.PayersDataBase;
 
@@ -30,8 +28,15 @@ public class PaymentSystemTest {
 	}
 
 	@Test
-	public void addPayerTest() {
+	public void addPayerListFillTest() {
 		assertEquals(pdb.getPayersList().size(), 0);
+
+	}
+
+	@Test
+	public void addPayerToDBTest() {
+		ps.addPayer(12345, "Bill");
+		assertEquals(pdb.getPayersList().get(12345).getName(), "Bill");
 
 	}
 }
