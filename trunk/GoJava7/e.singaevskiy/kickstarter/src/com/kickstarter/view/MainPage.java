@@ -50,6 +50,11 @@ public class MainPage {
 		showExit();
 	}
 	
+	public void showPaymentRequest(Project project){
+		System.out.println(project);
+		System.out.println("Enter your name, card ID and sum, divided by ' '");
+	}
+	
 	private void showExit(){
 		System.out.println("0. Exit");
 	}
