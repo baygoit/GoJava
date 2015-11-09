@@ -1,43 +1,37 @@
 package ua.com.goit.gojava7.kikstarter;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class Kikstarter {
 
 	/**
+	 * @throws IOException
 	 * 
 	 */
-	public static void main(String[] args) {
-		int selectCategorie;
-		Scanner input = new Scanner(System.in);
+
+	public static void main(String[] args) throws IOException {
+		String strResult;
+		BufferedReader reader = new BufferedReader(new InputStreamReader(
+				System.in));
 		Quote quote = new Quote();
 		Project project = new Project();
+		Category category = new Category();
 
 		// show quote random
-		System.out.println(quote.getQuote());
+		System.out.println(quote.getQuoteRandom());
 		System.out.println("====================");
 
-		// create object class Category for display list categories
-		Categorie categorie = new Categorie();
-		for (int i = 0; i < categorie.listCategoies.size(); i++) {
-			System.out.println(i + " : " + categorie.listCategoies.get(i));
-		}
+		// show all categories
+		category.getMapCategory();
 
 		System.out.println("====================");
+		System.out.println("Selec one of the categories from list");
+		strResult = reader.readLine();
+		System.out.println("You selected category #" + strResult);
 
-		// offer the customer to select a category from the list
-		System.out.println("Select number categorie from list");
-		selectCategorie = Integer.parseInt(input.nextLine());
-		System.out.println("You selected categorie - "
-				+ categorie.getCategoie(selectCategorie));
+		project.getProject(Integer.parseInt(strResult));
 
-		if (selectCategorie >= 0) {
-			System.out.println("Selected category contain projects: "
-					+ project.listPoject.get(selectCategorie));
-		}
 	}
-
 }
