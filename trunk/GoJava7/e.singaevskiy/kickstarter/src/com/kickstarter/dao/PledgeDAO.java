@@ -46,4 +46,9 @@ public class PledgeDAO extends CommonDAO<Pledge> {
 		return filtered;
 	}
 
+	public long getSum(Project project) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }

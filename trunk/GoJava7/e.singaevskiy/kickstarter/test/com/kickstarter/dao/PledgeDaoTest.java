@@ -31,9 +31,9 @@ public class PledgeDaoTest {
 		PaymentDAO paymentDAO = new PaymentDAO();
 		
 		List<Pledge> dataSource = new ArrayList<>();
-		dataSource.add(new Pledge(project, paymentDAO.get(0)));
-		dataSource.add(new Pledge(project, new Payment(user, 123, 123, new Date())));
-		dataSource.add(new Pledge(project, new Payment(user, 456, 456, new Date())));
+		dataSource.add(new Pledge(project, new Payment(new User("OtherTestUser"), 123, 200, new Date())));
+		dataSource.add(new Pledge(project, new Payment(user, 123, 300, new Date())));
+		dataSource.add(new Pledge(project, new Payment(user, 456, 500, new Date())));
 		dataSource.add(new Pledge(projectDAO.get(1), paymentDAO.get(3)));
 		dataSource.add(new Pledge(projectDAO.get(2), paymentDAO.get(4)));
 		
@@ -58,6 +58,11 @@ public class PledgeDaoTest {
 		List<Pledge> list = dao.getByProject(project);
 		assertThat(list.size(), is(3));
 		list.forEach(pledge -> assertThat(pledge.getProject(), is(project)));
+	}
+	
+	@Test
+	public void getSum() {
+		assertThat(dao.getSum(project), is(1000L));
 	}
 
 }
