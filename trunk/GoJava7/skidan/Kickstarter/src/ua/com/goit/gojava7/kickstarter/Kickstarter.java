@@ -2,9 +2,10 @@ package ua.com.goit.gojava7.kickstarter;
 
 import java.util.Scanner;
 
-import com.kickstarter.PaymentSystem;
-import com.kickstarter.storages.CategoryStorage;
-import com.kickstarter.storages.QuteHolder;
+import ua.com.goit.gojava7.kickstarter.storage.CategoryStorage;
+import ua.com.goit.gojava7.kickstarter.storage.QuteHolder;
+
+
 
 public class Kickstarter {
 	static int exitSign = 0;
