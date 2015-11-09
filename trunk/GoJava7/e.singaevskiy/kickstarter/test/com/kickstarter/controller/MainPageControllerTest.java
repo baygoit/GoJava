@@ -1,4 +1,4 @@
-package com.kickstarter.dao;
+package com.kickstarter.controller;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -18,6 +18,9 @@ import com.kickstarter.beans.Category;
 import com.kickstarter.beans.Project;
 import com.kickstarter.beans.Quote;
 import com.kickstarter.controller.MainPageController;
+import com.kickstarter.dao.CategoryDAO;
+import com.kickstarter.dao.ProjectDAO;
+import com.kickstarter.dao.QuoteDAO;
 import com.kickstarter.view.MainPage;
 
 public class MainPageControllerTest {
