@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Context path="/kickstarter" crossContext="true" reloadable="true">
-	<Resource name="jdbc/kickstarter" auth="Container" type="javax.sql.DataSource"
-		maxActive="100" maxIdle="30" maxWait="10000" username="postgres"
-		password="111" driverClassName="org.postgresql.Driver"
-		removeAbandoned="true" removeAbandonedTimeout="60" logAbandoned="true"
-		url="jdbc:postgresql://localhost:5433/kickstarter" />
-</Context>

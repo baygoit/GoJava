@@ -3,17 +3,22 @@ package ua.com.goit.gojava7.kikstarter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-	
-	/**
-	 * create class Quote which contain list quotes
-	 *  
-	 */
+
+
+/**
+ * create class Quote which contain list quotes
+ * 
+ */
 public class Quote {
 
 	private static Random RANDOM = new Random();
-	private static List<String> listQuotes = new ArrayList<>();
+	private List<String> listQuotes = new ArrayList<>();
 
-	private static void setQuote() {
+	public Quote() {
+		setQuoteDefault();
+	}
+
+	private void setQuoteDefault() {
 		listQuotes.add("Two things are infinite: "
 				+ "the universe and human stupidity;"
 				+ " and I'm not sure about the universe. Albert Einstein");
@@ -26,11 +31,14 @@ public class Quote {
 				+ "you'll never get it done. Bruce Lee");
 	}
 
-	//method outputs one random quote
-	public String getQuote() {
-		setQuote();getClass();
+	// method outputs one random quote
+	public String getQuoteRandom() {
 		int randomNumber = RANDOM.nextInt(listQuotes.size());
 		return listQuotes.get(randomNumber);
+	}
+
+	public void setHisQuote(String strValue) {
+		listQuotes.add(strValue);
 	}
 
 }

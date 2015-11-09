@@ -10,13 +10,22 @@ public class QuoteStorage {
 	private static final Random RANDOM = new Random(42);
 	private List<Quote> quotes = new ArrayList<>();
 
-	public void add(Quote quote){
+	public Quote getRandomQuote() {
+		int randomNumber = RANDOM.nextInt(quotes.size());
+
+		return quotes.get(randomNumber);
+	}
+
+	public void add(Quote quote) {
 		quotes.add(quote);
 	}
 
-	public Quote getRandomQuote() {
-		int randomNumber = RANDOM.nextInt(quotes.size());
-		
-		return quotes.get(randomNumber);
+	public int size() {
+		return quotes.size();
 	}
+	
+	public Quote get(int index){
+		return quotes.get(index);
+	}
+	
 }

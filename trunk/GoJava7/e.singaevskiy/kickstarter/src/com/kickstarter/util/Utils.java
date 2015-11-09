@@ -6,6 +6,11 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class Utils {
+	
+	public static Date dateFromString(String stringDate) {
+		return dateFromString("dd.MM.yyyy", stringDate);
+	}
+	
 	public static Date dateFromString(String pattern, String stringDate) {
 		SimpleDateFormat formatter = new SimpleDateFormat(pattern);
 		try {

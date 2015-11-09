@@ -14,6 +14,10 @@ public abstract class CommonDAO<T> {
 	public List<T> getAll() {
 		return Collections.unmodifiableList(dataSource);
 	}
+	
+	public T get(int index) {
+		return dataSource.get(index);
+	}
 
 	public void add(T element) {
 		dataSource.add(element);

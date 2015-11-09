@@ -1,6 +1,0 @@
-﻿User story
-
-1) User enters the site and sees up-to-date information for all available finance indicators and their values for TODAY.
-
-2) User can choose between them to see historical changes for a particular indicator value.
-

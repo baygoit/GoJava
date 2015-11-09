@@ -7,23 +7,19 @@ import java.util.List;
 public class Project {
 
 	private String name;
-	private Long goalSum;
-	private Long balanceSum;
+	private long goalSum;
+	private long balanceSum;
 	private Date startDate;
 	private Date endDate;
 	private List<Category> categories;
 	private String description;
 	private String videoUrl;
-	private List<User> backers;
-	private List<Reward> rewards;
 	private List<FAQ> questionsAndAnswers;
 	private User author;
 	
 	public Project() {
 		categories = new ArrayList<>();
 		questionsAndAnswers = new ArrayList<>();
-		backers = new ArrayList<>();
-		rewards = new ArrayList<>();
 	}
 	
 	public String getName() {
@@ -106,14 +102,6 @@ public class Project {
 		this.videoUrl = videoUrl;
 	}
 
-	public List<User> getBackers() {
-		return backers;
-	}
-
-	public void setBackers(List<User> backers) {
-		this.backers = backers;
-	}
-
 	public User getAuthor() {
 		return author;
 	}
@@ -121,18 +109,53 @@ public class Project {
 	public void setAuthor(User author) {
 		this.author = author;
 	}
-
-	public List<Reward> getRewards() {
-		return rewards;
-	}
-
-	public void setRewards(List<Reward> rewards) {
-		this.rewards = rewards;
-	}
 	
 	public long daysLeft() {
 		long ms = getEndDate().getTime() - System.currentTimeMillis();
 		return ms / (1000L*60L*60L*24L);
+	}
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((author == null) ? 0 : author.hashCode());
+		result = prime * result + ((description == null) ? 0 : description.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((startDate == null) ? 0 : startDate.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Project other = (Project) obj;
+		if (author == null) {
+			if (other.author != null)
+				return false;
+		} else if (!author.equals(other.author))
+			return false;
+		if (description == null) {
+			if (other.description != null)
+				return false;
+		} else if (!description.equals(other.description))
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		if (startDate == null) {
+			if (other.startDate != null)
+				return false;
+		} else if (!startDate.equals(other.startDate))
+			return false;
+		return true;
 	}
 
 	@Override

@@ -30,7 +30,7 @@ public class Kickstarter {
 		this.projectStorage = projectStorage;
 	}
 	
-	public void run(){
+	public void runKickstarter(){
 		consolePrinter.print(quoteStorage.getRandomQuote());
 		
 		List<Category> categories = categoryStorage.getAllCategories();
@@ -97,7 +97,7 @@ public class Kickstarter {
 				Project project = projects.get(userChoise);
 				
 				consolePrinter.print("You selected '" + project.getName() + "' project");
-				consolePrinter.print(project.getName());
+				consolePrinter.print(project.getAllDetails());
 				
 				consolePrinter.print(0 + " : to project list");
 			}

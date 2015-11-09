@@ -3,13 +3,8 @@ package com.kickstarter.beans;
 public class Quote {
 	private String author;
 	private String text;
-
-	public Quote() {
-		super();
-	}
 	
 	public Quote(String author, String text) {
-		super();
 		this.author = author;
 		this.text = text;
 	}

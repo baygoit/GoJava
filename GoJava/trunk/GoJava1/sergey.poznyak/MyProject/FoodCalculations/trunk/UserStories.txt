@@ -1,2 +1,0 @@
-1. The dishes list is displayed to the user.
-2. User selects one of the dishes and gets its ingredients.
