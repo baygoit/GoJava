@@ -44,6 +44,9 @@ public class MainPage {
 		project.getQuestionsAndAnswers().stream()
 			.map(faq -> "\t" + faq.toString())
 			.forEach(System.out::println);
+		
+		System.out.println("1. Pay");
+		
 		showExit();
 	}
 	
@@ -52,7 +55,7 @@ public class MainPage {
 	}
 	
 	public void showDivider(){
-		System.out.println("------------------------------------------");
+		System.out.println("==========================================");
 	}
 	
 	public void showMessage(String message){

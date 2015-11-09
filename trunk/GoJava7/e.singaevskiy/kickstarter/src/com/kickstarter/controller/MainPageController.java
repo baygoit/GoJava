@@ -10,6 +10,7 @@ import com.kickstarter.beans.Project;
 import com.kickstarter.beans.Quote;
 import com.kickstarter.dao.CategoryDAO;
 import com.kickstarter.dao.CommonDAO;
+import com.kickstarter.dao.PledgeDAO;
 import com.kickstarter.dao.ProjectDAO;
 import com.kickstarter.dao.QuoteDAO;
 import com.kickstarter.view.MainPage;
@@ -21,6 +22,7 @@ public class MainPageController {
 	private CommonDAO<Quote> quoteDAO;
 	private CommonDAO<Category> categoryDAO;
 	private ProjectDAO projectDAO;
+	private PledgeDAO pledgeDAO;
 	private Scanner sc;
 	
 	public MainPageController(MainPage page) {
@@ -28,30 +30,23 @@ public class MainPageController {
 		quoteDAO = new QuoteDAO();
 		categoryDAO = new CategoryDAO();
 		projectDAO = new ProjectDAO();
+		pledgeDAO = new PledgeDAO();
 		sc = new Scanner(System.in);
 	}
 	
 	public void showMainPage() {
-		
-		try {
-			showCategories();
-		} catch (InputMismatchException e) {
-			sc.nextLine();
-			page.showMessage("Use correct numeric index! \nPress <Enter> to return to main page");
-			if (sc.nextLine().isEmpty()) {
-				showMainPage();
-			}
-		}
+	
+		showCategories();
 	
 	}
 	
-	public void showCategories() throws InputMismatchException{
+	public void showCategories(){
 		List<Category> categories = categoryDAO.getAll();
 		
 		showTopPage();
 		page.showCategories(categories);
 		
-		int option = sc.nextInt();
+		int option = getUserInput(categories.size());
 		if (option == 0) {
 			return;
 		} 
@@ -67,7 +62,7 @@ public class MainPageController {
 		showTopPage();
 		page.showProjects(foundProjects);
 		
-		int option = sc.nextInt();
+		int option = getUserInput(foundProjects.size());
 		if (option == 0) {
 			return;
 		}
@@ -77,11 +72,29 @@ public class MainPageController {
 		showProjectsInCategory(category);
 	}
 
-	public void showProjectDetails(Project project)  throws InputMismatchException{
+	private int getUserInput(int limit) {
+		int option = -1;
+		do{
+			if (sc.hasNextInt()) {
+				option = sc.nextInt();
+			} else {
+				sc.next();
+			}
+			
+			if (option > limit || option < 0) {
+				page.showMessage("Use positive numeric index not higher than " + limit);
+			}
+		}
+		while(option > limit || option < 0);
+		
+		return option;
+	}
+
+	public void showProjectDetails(Project project){
 		showTopPage();
 		page.showProjectDetails(project);
 		
-		int option = sc.nextInt();
+		int option = getUserInput(0);
 		if (option == 0) {
 			return;
 		}
