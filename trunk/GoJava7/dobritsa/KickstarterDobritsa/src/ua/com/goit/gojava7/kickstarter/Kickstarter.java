@@ -21,7 +21,7 @@ public class Kickstarter {
 	Integer categoryNumber = null;
 	Integer projectNumber = null;
 	List<Category> categories;
-	String BORDER = "/n________________________________________________________";
+	String BORDER = "\n________________________________________________________";
 	
 	public Kickstarter(ConsolePrinter consolePrinter, ConsoleInspector consoleInspector,
 			QuoteStorage quoteStorage, CategoryStorage categoryStorage, ProjectStorage projectStorage) {
