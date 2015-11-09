@@ -21,6 +21,7 @@ public class Kickstarter {
 	Integer categoryNumber = null;
 	Integer projectNumber = null;
 	List<Category> categories;
+	String BORDER = "/n________________________________________________________";
 	
 	public Kickstarter(ConsolePrinter consolePrinter, ConsoleInspector consoleInspector,
 			QuoteStorage quoteStorage, CategoryStorage categoryStorage, ProjectStorage projectStorage) {
@@ -31,30 +32,9 @@ public class Kickstarter {
 		this.categoryStorage = categoryStorage;
 		this.projectStorage = projectStorage;
 	}
-
-	//int selectedCategory;
-			//do {
-			//	System.out.println("");
-			//	System.out.println(categories);
-			//	System.out.println("Please select category (0 for exit): ");
-			//	selectedCategory = consoleInspector.getCorrectInt(9);
-	//
-			//	if (selectedCategory < 0 || selectedCategory > categoryStorage.size()) {
-			//		System.out.println("Please, enter the number between 0 and " + categoryStorage.size());
-			//		continue;
-			//	} else if (selectedCategory != 0) {
-			//		System.out.println("You selected category number " + selectedCategory);
-			//		System.out.println(categoryStorage.get(selectedCategory - 1));
-			//	} else {
-			//		System.out.println("You entered 0. Bye.");
-			//	}
-			//	// show selected category
-			//} while(selectedCategory != 0 );
 	
 	public void run() {
-		consolePrinter.print(quoteStorage.getRandomQuote());		
-		
-		
+		consolePrinter.print(quoteStorage.getRandomQuote());				
 		categories = categoryStorage.get();
 		categoryNumber = chooseCategory();		
 		projectNumber = chooseProject(categoryNumber);
@@ -71,7 +51,7 @@ public class Kickstarter {
 			System.out.println("See you soon!");
 			System.exit(0);
 			}
-		System.out.println("\n_______________________________________________________");		
+		System.out.println(BORDER);		
 		System.out.println("Current category: " + categoryStorage.get(categoryNumber - 1).getName());		
 	return categoryNumber;			
 	}
@@ -91,7 +71,7 @@ public class Kickstarter {
 		if(projectNumber == 0) {
 			chooseProject(chooseCategory());
 			}
-		System.out.println("\n_______________________________________________________");	
+		System.out.println(BORDER);	
 		System.out.println("Current project number " + projectNumber + ": ");		
 		return projectNumber -1;
 	}
