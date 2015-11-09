@@ -32,6 +32,6 @@ public class LoginServlet extends HttpServlet {
         session.setAttribute("user", user);
         session.setAttribute("pass", pass);
         logger.info("you are try to login with user: " + user + " and password: " + pass);
-        resp.sendRedirect("admin/admin.jsp");
+        resp.sendRedirect("/admin");
         }
 }

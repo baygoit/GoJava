@@ -29,6 +29,8 @@ public class CategoryDao extends AbstractDao<Category, Short>{
                 entityManager.createNamedQuery("Category.findById", Category.class);
         query.setParameter("id", id);
 
-        return (Category) query.getSingleResult();
+        /*return (Category) query.getSingleResult();*/
+        entityManager.clear();
+        return entityManager.find(Category.class, id);
     }
 }
