@@ -1,5 +1,6 @@
 package com.azuiev.dao;
 
+import com.azuiev.model.City;
 import org.hibernate.Session;
 
 import java.sql.SQLException;
@@ -10,15 +11,19 @@ import java.util.List;
  * Created by Administrator on 06.11.15.
  */
 public class AbstractModelDao implements ModelDao {
-    Class clazz = Object.class;
-    Object obj = new Object();
+    Object model;
+
+    public AbstractModelDao(Object model) {
+        this.model = model;
+    }
+
     @Override
     public List<?> getAll() throws SQLException {
         Session session = null;
         List<?> list = new ArrayList<>();
         try {
             session = HibernateUtil.getSessionFactory().openSession();
-            list = session.createCriteria(clazz).list();
+            list = session.createCriteria(model.getClass()).list();
         } catch (Exception e) {
             //NOP
         } finally {
@@ -32,19 +37,18 @@ public class AbstractModelDao implements ModelDao {
     @Override
     public Object getById(Long id) throws SQLException {
         Session session = null;
-        obj = null;
-        if(clazz!=null);
         try {
             session = HibernateUtil.getSessionFactory().openSession();
-            obj = session.load(clazz, id);
+            model = (City)session.get(model.getClass(), id);
+            System.out.println("ttt");
         } catch (Exception e) {
-            //NOP
+            //TODO
         } finally {
             if (session != null && session.isOpen()) {
                 session.close();
             }
         }
-        return obj;
+        return model;
     }
 
     @Override

@@ -10,15 +10,17 @@ import java.util.List;
  * Created by Masta on 31.10.2015.
  */
 public class CityDao implements ModelDao  {
+    static ModelDao dao = new AbstractModelDao(new City());
 
     @Override
     public List<City> getAll() throws SQLException {
-        return null;
+        return (List<City>) dao.getAll();
     }
 
     @Override
-    public Object getById(Long id) throws SQLException {
-        return null;
+    public City getById(Long id) throws SQLException {
+        City city = (City) dao.getById(id);
+        return city;
     }
 
 

@@ -28,14 +28,14 @@
         <url-pattern>/search</url-pattern>
     </servlet-mapping>
 
-    <filter>
-        <filter-name>LoginFilter</filter-name>
-        <filter-class>com.azuiev.filter.LoginFilter</filter-class>
-    </filter>
-    <filter-mapping>
-        <filter-name>LoginFilter</filter-name>
-        <url-pattern>/login</url-pattern>
-    </filter-mapping>
+    <!--<filter>-->
+        <!--<filter-name>LoginFilter</filter-name>-->
+        <!--<filter-class>com.azuiev.filter.LoginFilter</filter-class>-->
+    <!--</filter>-->
+    <!--<filter-mapping>-->
+        <!--<filter-name>LoginFilter</filter-name>-->
+        <!--<url-pattern>/login</url-pattern>-->
+    <!--</filter-mapping>-->
 
 
     <jsp-config>
