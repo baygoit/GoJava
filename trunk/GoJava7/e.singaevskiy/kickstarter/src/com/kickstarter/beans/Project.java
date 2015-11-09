@@ -14,16 +14,12 @@ public class Project {
 	private List<Category> categories;
 	private String description;
 	private String videoUrl;
-	private List<User> backers;
-	private List<Reward> rewards;
 	private List<FAQ> questionsAndAnswers;
 	private User author;
 	
 	public Project() {
 		categories = new ArrayList<>();
 		questionsAndAnswers = new ArrayList<>();
-		backers = new ArrayList<>();
-		rewards = new ArrayList<>();
 	}
 	
 	public String getName() {
@@ -106,28 +102,12 @@ public class Project {
 		this.videoUrl = videoUrl;
 	}
 
-	public List<User> getBackers() {
-		return backers;
-	}
-
-	public void setBackers(List<User> backers) {
-		this.backers = backers;
-	}
-
 	public User getAuthor() {
 		return author;
 	}
 
 	public void setAuthor(User author) {
 		this.author = author;
-	}
-
-	public List<Reward> getRewards() {
-		return rewards;
-	}
-
-	public void setRewards(List<Reward> rewards) {
-		this.rewards = rewards;
 	}
 	
 	public long daysLeft() {

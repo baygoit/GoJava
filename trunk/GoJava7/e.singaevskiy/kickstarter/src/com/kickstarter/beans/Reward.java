@@ -3,6 +3,15 @@ package com.kickstarter.beans;
 public class Reward {
 	private Long pledgeSum;
 	private String description;
+	private Project project;
+
+	public Project getProject() {
+		return project;
+	}
+
+	public void setProject(Project project) {
+		this.project = project;
+	}
 
 	public Long getPledgeSum() {
 		return pledgeSum;
