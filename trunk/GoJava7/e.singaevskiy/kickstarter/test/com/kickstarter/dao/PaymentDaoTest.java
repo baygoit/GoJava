@@ -1,4 +1,4 @@
-package kickstarter;
+package com.kickstarter.dao;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
