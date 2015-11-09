@@ -26,14 +26,4 @@ public class CategoryStorage {
 	public Integer size() {
 		return categories.size();		
 	}
-	
-	//TODO
-	// OLEG SRL violated
-	public  void printForChoice() {
-		System.out.println("\n_________________________________________");
-		System.out.println("0: for exit");
-		for(int i = 0; i < categories.size(); i++) {
-			System.out.println(i + 1 + ": " + categories.get(i));
-		}		
-	}		
 }

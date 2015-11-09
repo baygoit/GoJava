@@ -10,7 +10,7 @@ import ua.com.goit.gojava7.kickstarter.storage.CategoryStorage;
 import ua.com.goit.gojava7.kickstarter.storage.ProjectStorage;
 import ua.com.goit.gojava7.kickstarter.storage.QuoteStorage;
 
-public class Kick {
+public class Kickstarter {
 	private QuoteStorage quoteStorage;
 	private CategoryStorage categoryStorage;
 	private ProjectStorage projectStorage;
@@ -22,7 +22,7 @@ public class Kick {
 	Integer projectNumber = null;
 	List<Category> categories;
 	
-	public Kick(ConsolePrinter consolePrinter, ConsoleInspector consoleInspector,
+	public Kickstarter(ConsolePrinter consolePrinter, ConsoleInspector consoleInspector,
 			QuoteStorage quoteStorage, CategoryStorage categoryStorage) {
 		this.consolePrinter = consolePrinter;
 		this.consoleInspector = consoleInspector;
@@ -31,34 +31,35 @@ public class Kick {
 		this.categoryStorage = categoryStorage;
 	}
 
+	//int selectedCategory;
+			//do {
+			//	System.out.println("");
+			//	System.out.println(categories);
+			//	System.out.println("Please select category (0 for exit): ");
+			//	selectedCategory = consoleInspector.getCorrectInt(9);
+	//
+			//	if (selectedCategory < 0 || selectedCategory > categoryStorage.size()) {
+			//		System.out.println("Please, enter the number between 0 and " + categoryStorage.size());
+			//		continue;
+			//	} else if (selectedCategory != 0) {
+			//		System.out.println("You selected category number " + selectedCategory);
+			//		System.out.println(categoryStorage.get(selectedCategory - 1));
+			//	} else {
+			//		System.out.println("You entered 0. Bye.");
+			//	}
+			//	// show selected category
+			//} while(selectedCategory != 0 );
+	
 	public void run() {
 		consolePrinter.print(quoteStorage.getRandomQuote());		
 		categories = categoryStorage.get();
 		categoryNumber = chooseCategory();		
 		projectNumber = chooseProject(categoryNumber);
 		viewProject(projectNumber);				
-		//int selectedCategory;
-		//do {
-		//	System.out.println("");
-		//	System.out.println(categories);
-		//	System.out.println("Please select category (0 for exit): ");
-		//	selectedCategory = consoleInspector.getCorrectInt(9);
-//
-		//	if (selectedCategory < 0 || selectedCategory > categoryStorage.size()) {
-		//		System.out.println("Please, enter the number between 0 and " + categoryStorage.size());
-		//		continue;
-		//	} else if (selectedCategory != 0) {
-		//		System.out.println("You selected category number " + selectedCategory);
-		//		System.out.println(categoryStorage.get(selectedCategory - 1));
-		//	} else {
-		//		System.out.println("You entered 0. Bye.");
-		//	}
-		//	// show selected category
-		//} while(selectedCategory != 0 );
 	}
 
 	public Integer chooseCategory() {
-		consolePrinter.print(categories);
+		consolePrinter.printCategories(categories);
 		System.out.println("\nChoose a category by number: ");				
 		categoryNumber = consoleInspector.getCorrectInt(categoryStorage.size());
 		if(categoryNumber == 0) {
@@ -78,20 +79,20 @@ public class Kick {
 		} else if(categoryNumber == 3) {
 			projectStorage = initFoodStorage();
 		}
-		projectStorage.printAllShort();			
+		consolePrinter.printProjects(projectStorage.get());	
 		System.out.println("\nChoose a project by number: ");	
 		projectNumber = consoleInspector.getCorrectInt(projectStorage.size());		
 		if(projectNumber == 0) {
 			chooseProject(chooseCategory());
 			}
-		System.out.println("Current project: " + projectStorage.getProject(projectNumber -1 ).getName());		
+		System.out.println("Current project: " + projectStorage.get(projectNumber -1 ).getName());		
 		return projectNumber -1;
 	}
 	
 	private void viewProject(Integer projectNumber){		
 		Project project = new Project();
-		project =  projectStorage.getProject(projectNumber);
-		project.printFull();				
+		project =  projectStorage.get(projectNumber);
+		consolePrinter.printFull(project);	
 		while(true) {
 			if (consoleInspector.getCorrectInt(0) == 0 ) {			
 				viewProject(chooseProject(categoryNumber));												
