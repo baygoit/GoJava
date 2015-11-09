@@ -1,5 +1,7 @@
 package ua.com.goit.gojava7.kickstarter;
 
+import ua.com.goit.gojava7.kickstarter.model.Lang;
+import ua.com.goit.gojava7.kickstarter.model.Project;
 import ua.com.goit.gojava7.kickstarter.model.Quote;
 
 public class Body {

@@ -37,13 +37,22 @@ public class MainPage {
 		System.out.println(project.getDescription());
 		System.out.println("Goal: " + project.getGoalSum());
 		System.out.println("Balance: " + project.getBalanceSum());
+		System.out.println("Started:" + project.getEndDate());		
 		System.out.println("Days left: " + project.daysLeft());
 		System.out.println("Video: " + project.getVideoUrl());
 		System.out.println("FAQ:");
 		project.getQuestionsAndAnswers().stream()
 			.map(faq -> "\t" + faq.toString())
 			.forEach(System.out::println);
+		
+		System.out.println("1. Pay");
+		
 		showExit();
+	}
+	
+	public void showPaymentRequest(Project project){
+		System.out.println(project);
+		System.out.println("Enter your name, card ID and sum, divided by ' '");
 	}
 	
 	private void showExit(){
@@ -51,7 +60,7 @@ public class MainPage {
 	}
 	
 	public void showDivider(){
-		System.out.println("------------------------------------------");
+		System.out.println("==========================================");
 	}
 	
 	public void showMessage(String message){

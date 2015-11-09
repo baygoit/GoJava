@@ -1,0 +1,8 @@
+CREATE  TABLE `airbnb`.`role` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `role` TINYINT,
+  `user` INT,
+  PRIMARY KEY (`id`) ,
+    FOREIGN KEY (`user` )
+    REFERENCES `airbnb`.`user` (`id` )
+);

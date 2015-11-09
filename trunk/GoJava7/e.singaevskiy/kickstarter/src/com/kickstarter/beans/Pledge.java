@@ -3,26 +3,21 @@ package com.kickstarter.beans;
 import java.util.Date;
 
 public class Pledge {
-	private Long pledgeSum;
-	private User user;
 	private Reward reward;
 	private Project project;
-	private Date date;
+	private Payment payment;
 
-	public Long getPledgeSum() {
-		return pledgeSum;
+	public Pledge(Project project, Payment payment) {
+		this.project = project;
+		this.payment = payment;
 	}
 
-	public void setPledgeSum(Long pledgeSum) {
-		this.pledgeSum = pledgeSum;
+	public long getPledgeSum() {
+		return payment.getSum();
 	}
 
 	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
+		return payment.getUser();
 	}
 
 	public Reward getReward() {
@@ -42,10 +37,7 @@ public class Pledge {
 	}
 
 	public Date getDate() {
-		return date;
+		return payment.getDate();
 	}
 
-	public void setDate(Date date) {
-		this.date = date;
-	}
 }

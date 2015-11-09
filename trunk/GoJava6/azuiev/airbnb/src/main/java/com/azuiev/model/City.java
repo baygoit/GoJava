@@ -3,6 +3,7 @@ package com.azuiev.model;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.List;
 
 /**
  * Created by Masta on 31.10.2015.
@@ -13,7 +14,7 @@ import javax.persistence.*;
 public class City {
     private Long id;
     private String name;
-    private String image;
+    private List<Image> image;
 
     public City() {
     }
@@ -26,18 +27,19 @@ public class City {
         return id;
     }
 
-
     @Column(name="name")
     public String getName() {
         return name;
     }
 
-    public String getImage() {
+    @OneToMany
+    @JoinColumn(name="city")
+    public List<Image> getImage() {
         return image;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setImage(Image image) {
+        this.image.add(image);
     }
 
     public void setId(Long id) {
@@ -49,6 +51,7 @@ public class City {
     }
 
     public String imagePath(){
-        return "city/images/"+image;
+        return "city/images/";
+                /*+image;*/
     }
 }
