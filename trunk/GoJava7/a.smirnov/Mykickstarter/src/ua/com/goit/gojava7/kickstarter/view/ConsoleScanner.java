@@ -13,6 +13,14 @@ public class ConsoleScanner {
 		int inputedInt = scanner.nextInt();
 		return inputedInt;
 	}
+	
+	public String getString() {
+		while (!scanner.hasNextInt()) {
+			scanner.next();
+		}
+		String inputedString = scanner.nextLine();
+		return inputedString;
+	}
 
 	public void close() {
 		scanner.close();

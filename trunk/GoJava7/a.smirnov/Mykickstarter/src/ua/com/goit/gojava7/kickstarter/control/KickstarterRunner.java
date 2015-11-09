@@ -1,11 +1,18 @@
 package ua.com.goit.gojava7.kickstarter.control;
 
+import java.util.List;
+
 import ua.com.goit.gojava7.kickstarter.model.Category;
+import ua.com.goit.gojava7.kickstarter.model.CreditCard;
 import ua.com.goit.gojava7.kickstarter.model.Project;
 import ua.com.goit.gojava7.kickstarter.model.Quote;
+import ua.com.goit.gojava7.kickstarter.model.User;
 import ua.com.goit.gojava7.kickstarter.storage.CategoriesStorage;
+import ua.com.goit.gojava7.kickstarter.storage.CreditCardStorage;
+import ua.com.goit.gojava7.kickstarter.storage.PaymentStorage;
 import ua.com.goit.gojava7.kickstarter.storage.ProjectsStorage;
 import ua.com.goit.gojava7.kickstarter.storage.QuotesStorage;
+import ua.com.goit.gojava7.kickstarter.storage.UserStorage;
 import ua.com.goit.gojava7.kickstarter.view.ConsolePrinter;
 import ua.com.goit.gojava7.kickstarter.view.ConsoleScanner;
 
@@ -16,11 +23,15 @@ public class KickstarterRunner {
 		QuotesStorage quotesStorage = initQuotes();
 		CategoriesStorage categoriesStorage = initCategories();
 		ProjectsStorage projectsStorage = initProjects(categoriesStorage);
+		CreditCardStorage creditCardStorage = initCreditCards();
+		UserStorage userStorage = initUsers(creditCardStorage);
+		PaymentStorage paymentStorage = initPayments();
+		CreditCardStorage cardStorage = initCreditCards();
 		ConsoleScanner consoleScanner = new ConsoleScanner();
 		ConsolePrinter consolePrinter = new ConsolePrinter();
 
 		Kickstarter kickstarter = new Kickstarter(consoleScanner, consolePrinter, 
-				categoriesStorage, quotesStorage, projectsStorage);
+				categoriesStorage, quotesStorage, projectsStorage, paymentStorage, userStorage, cardStorage);
 
 		consolePrinter.print(quotesStorage.getRandomQuote());
 		kickstarter.start();
@@ -118,6 +129,40 @@ public class KickstarterRunner {
 		projectsStorage.add(project3);
 		
 		return projectsStorage;
+	}
+	
+	public static CreditCardStorage initCreditCards() {
+		CreditCardStorage cardStorage = new CreditCardStorage();
+		
+		CreditCard creditCard1 = new CreditCard(123456789);
+		creditCard1.setType(CreditCard.Type.MasterCard);
+		
+		CreditCard creditCard2 = new CreditCard(55555555);
+		creditCard2.setType(CreditCard.Type.Visa);
+		
+		cardStorage.add(creditCard1);
+		cardStorage.add(creditCard2);
+		
+		return cardStorage;
+	}
+	
+	public static UserStorage initUsers(CreditCardStorage cardStorage) {
+		UserStorage userStorage = new UserStorage();
+		List<CreditCard> listOfCredintCards = cardStorage.getListOfSource();
+		
+		User user1 = new User("Anton Smirnov", 123, listOfCredintCards.get(0));
+		User user2 = new User("Anna Smirnova", 555, listOfCredintCards.get(1));
+
+		userStorage.add(user1);
+		userStorage.add(user2);
+		
+		return userStorage;
+	}
+	
+	public static PaymentStorage initPayments() {
+		PaymentStorage paymentStorage = new PaymentStorage();
+		
+		return paymentStorage;
 	}
 
 }

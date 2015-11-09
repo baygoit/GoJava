@@ -3,29 +3,43 @@ package ua.com.goit.gojava7.kickstarter.control;
 import java.util.List;
 
 import ua.com.goit.gojava7.kickstarter.model.Category;
+import ua.com.goit.gojava7.kickstarter.model.Payment;
 import ua.com.goit.gojava7.kickstarter.model.Project;
+import ua.com.goit.gojava7.kickstarter.model.User;
 import ua.com.goit.gojava7.kickstarter.storage.CategoriesStorage;
+import ua.com.goit.gojava7.kickstarter.storage.CreditCardStorage;
+import ua.com.goit.gojava7.kickstarter.storage.PaymentStorage;
 import ua.com.goit.gojava7.kickstarter.storage.ProjectsStorage;
 import ua.com.goit.gojava7.kickstarter.storage.QuotesStorage;
+import ua.com.goit.gojava7.kickstarter.storage.UserStorage;
 import ua.com.goit.gojava7.kickstarter.view.ConsolePrinter;
 import ua.com.goit.gojava7.kickstarter.view.ConsoleScanner;
 
 public class Kickstarter {
 
 	private static final String SEPARATOR = "**********************************************************************";
+	private static final String MOVE_TO_THE_NEXT_LINE = "\n";
 	ConsolePrinter consolePrinter;
 	ConsoleScanner consoleScanner;
 	CategoriesStorage categoriesStorage;
 	QuotesStorage quotesStorage;
 	ProjectsStorage projectsStorage;
+	UserStorage userStorage;
+	CreditCardStorage cardStorage;
+	PaymentStorage paymentStorage;
 
 	public Kickstarter(ConsoleScanner consoleScanner, ConsolePrinter consolePrinter,
-			CategoriesStorage categoriesStorage, QuotesStorage quotesStorage, ProjectsStorage projectsStorage) {
+			CategoriesStorage categoriesStorage, QuotesStorage quotesStorage, 
+			ProjectsStorage projectsStorage, PaymentStorage paymentStorage, 
+			UserStorage userStorage, CreditCardStorage cardStorage) {
 		this.consoleScanner = consoleScanner;
 		this.consolePrinter = consolePrinter;
 		this.categoriesStorage = categoriesStorage;
 		this.quotesStorage = quotesStorage;
 		this.projectsStorage = projectsStorage;
+		this.paymentStorage = paymentStorage;
+		this.userStorage = userStorage;
+		this.cardStorage = cardStorage;
 	}
 
 	public void start() {
@@ -96,10 +110,21 @@ public class Kickstarter {
 				consolePrinter.print(SEPARATOR);
 				
 				do {
-					consolePrinter.print("Please enter 0 - back to list of projects");
+					StringBuilder instruction = new StringBuilder();
+					instruction.
+						append("Please select : ").
+						append(MOVE_TO_THE_NEXT_LINE).
+						append("0 : back to list of projects").
+						append(MOVE_TO_THE_NEXT_LINE).
+						append("1 : donate money");
+					
+					consolePrinter.print(instruction.toString());
 					numberOfSelectedProject = consoleScanner.getInt();
 					consolePrinter.print(SEPARATOR);
-					
+					if (numberOfSelectedProject == 1) {
+						donateMoney(selectedProject, userStorage.getListOfSource().get(0));
+						consolePrinter.printBriefInfoProject(selectedProject);
+					} 
 				} while (numberOfSelectedProject != 0);			
 				
 			} else {
@@ -111,6 +136,19 @@ public class Kickstarter {
 
 	}
 
+	public void donateMoney(Project project, User user) {
+		consolePrinter.print("Please enter you name :");
+		String userName = consoleScanner.getString();
+		consolePrinter.print("Please enter you card number :");
+		int cardNumber = consoleScanner.getInt();
+		consolePrinter.print("Please enter donateing sum : ");
+		int donatingSum = consoleScanner.getInt();
+		
+		Payment payment = new Payment(user, donatingSum, cardNumber);
+		paymentStorage.add(payment);
+		project.addToCurrentAmountOfMoney(donatingSum);		
+	}
+	
 	public void shutdown() {
 		consoleScanner.close();
 	}
