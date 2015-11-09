@@ -27,23 +27,25 @@ public class PledgeDAO extends CommonDAO<Pledge> {
 	}
 
 	public List<Pledge> getByUser(User user) {
-		List<Pledge> filtered = dataSource.stream().filter(pledge -> {
-			if (pledge.getUser().equals(user)) {
-				return true;
-			}
-			return false;
-		}).collect(Collectors.toList());
+		List<Pledge> filtered = dataSource.stream()
+				.filter(pledge -> pledge.getUser().equals(user))
+				.collect(Collectors.toList());
 		return filtered;
 	}
 
 	public List<Pledge> getByProject(Project project) {
-		List<Pledge> filtered = dataSource.stream().filter(pledge -> {
-			if (pledge.getProject().equals(project)) {
-				return true;
-			}
-			return false;
-		}).collect(Collectors.toList());
+		List<Pledge> filtered = dataSource.stream()
+				.filter(pledge -> pledge.getProject().equals(project))
+				.collect(Collectors.toList());
 		return filtered;
+	}
+
+	public long getSum(Project project) {
+		long sum = dataSource.stream()
+			    .filter(pledge -> pledge.getProject().equals(project))
+			    .mapToLong(Pledge::getPledgeSum)
+			    .sum();
+		return sum;
 	}
 
 }

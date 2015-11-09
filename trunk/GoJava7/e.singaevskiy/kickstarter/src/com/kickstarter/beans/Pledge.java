@@ -12,7 +12,7 @@ public class Pledge {
 		this.payment = payment;
 	}
 
-	public Long getPledgeSum() {
+	public long getPledgeSum() {
 		return payment.getSum();
 	}
 
