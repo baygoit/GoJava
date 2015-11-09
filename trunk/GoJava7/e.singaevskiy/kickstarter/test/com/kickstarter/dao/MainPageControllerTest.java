@@ -66,10 +66,11 @@ public class MainPageControllerTest {
 		int lastIndex=0;
 		for (int i = 0; i < iterations; i++) {
 			controller.showTopPage();
+			
 			for (Quote element : mappedQuotes.keySet()) {
 				int foundIndex = outContent.toString().substring(lastIndex).indexOf(element.getText());
 				if (foundIndex > 0) {
-					mappedQuotes.put(element, mappedQuotes.get(element).intValue()+1);
+					mappedQuotes.put(element, mappedQuotes.get(element)+1);
 					lastIndex += foundIndex + element.getText().length();
 					break;
 				}
