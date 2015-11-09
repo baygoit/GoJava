@@ -18,4 +18,12 @@ public class QuoteStorage {
 		int randomNumber = RANDOM.nextInt(quotes.size());
 		return quotes.get(randomNumber);
 	}
+	
+	public Integer size() {
+		return quotes.size();		
+	}
+	
+	public List<Quote> get() {
+		return quotes;
+	}
 }

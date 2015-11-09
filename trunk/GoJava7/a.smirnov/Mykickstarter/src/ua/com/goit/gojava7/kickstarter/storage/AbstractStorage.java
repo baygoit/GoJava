@@ -18,11 +18,10 @@ public abstract class AbstractStorage<T> {
 		sourceStorage.add(element);
 	}
 
-	void remove(T element) {
+	public void remove(T element) {
 		sourceStorage.remove(element);
 	}
 
-	// OLEG breaks encapsulation
 	public List<T> getListOfSource() {
 		return sourceStorage;
 	}

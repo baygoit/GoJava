@@ -47,8 +47,6 @@ public class ConsolePrinter {
 		}
 	}	
 		
-
-	
 	// Printing information about project
 	public void printBriefInfoProject(Project project) {
 		StringBuilder result = new StringBuilder();
@@ -121,4 +119,6 @@ public class ConsolePrinter {
 	public void print(String string) {
 		System.out.println(string);
 	}	
+	
+	
 }
