@@ -1,5 +1,7 @@
 package ua.com.goit.gojava7.kickstarter.storage;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import ua.com.goit.gojava7.kickstarter.domain.Project;
@@ -7,9 +9,9 @@ import ua.com.goit.gojava7.kickstarter.domain.Project;
 // OLEG what will be our work if the list of categories can be changed?
 public class MusicCategory {
 
-	private Map<Integer, Project> firstCategory = new HashMap<>();
+	private List<Project> firstCategory = new ArrayList<Project>();
 	{
-		firstCategory.put(1, new Project(
+		firstCategory.add(new Project(
 				"'Critical Mass': New solo music from Jerry Chamberlain!", 
 				"You can help Jerry Chamberlain (Daniel Amos, Swirling Eddies, "
 				+ "\n     Boy-O-Boy, Pamelita & Parker) record his first solo album! ", 
@@ -30,14 +32,14 @@ public class MusicCategory {
 				"https://d2pq0u4uni88oo.cloudfront.net/projects/2150887/video-600235-h264_high.mp4", 
 				"No questions at the moment"));
 	
-		firstCategory.put(2, new Project("Name12", "Description12", 12000, 1200, 12, "history12", "link12", "questions12"));
+		firstCategory.add(new Project("Name12", "Description12", 12000, 1200, 12, "history12", "link12", "questions12"));
 	
-		firstCategory.put(3, new Project("Name13", "Description13", 13000, 1300, 13, "history13", "link13", "questions13"));
+		firstCategory.add(new Project("Name13", "Description13", 13000, 1300, 13, "history13", "link13", "questions13"));
 	}
 	
 	//TODO
 	// OLEG why we return inner map as is?
-	public Map<Integer, Project> getProjects() {		
+	public List<Project> getProjects() {		
 		return firstCategory;		
 	}
 	

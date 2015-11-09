@@ -1,56 +1,62 @@
 package ua.com.goit.gojava7.kickstarter.storage;
-import java.util.HashMap;
-import java.util.Map;
-
+import java.util.ArrayList;
+import java.util.List;
 import ua.com.goit.gojava7.kickstarter.domain.Project;
 
 public class ProjectStorage {
 	
-	private static Map<Integer, Project> projectsInCategory = new HashMap<Integer, Project>();	
+	private List<Project> projectsInCategory = new ArrayList<Project>();	
 	
 	
-	//TODO
-	// OLEG SRL violated
-	public static void setProjectStorage(Integer i) {
-		if (i == 0) {
-			MusicCategory firstCategory = new MusicCategory();
-			projectsInCategory = firstCategory.getProjects();		
-		} else if (i == 1) {
-			DanceCategory secondCategory = new DanceCategory();
-			projectsInCategory = secondCategory.getProjects();	
-		} else if (i == 2) {
-			FoodCategory thirdCategory = new FoodCategory();
-			projectsInCategory = thirdCategory.getProjects();	
-		} else System.out.println("wrong choice");		
-	}
+	
+	
 	
 	//TODO
 	// OLEG SRL violated
-	public static void printAllShort() {
+	//public void setProjectStorage(Integer i) {
+	//	if (i == 0) {
+	//		MusicCategory musicCategory = new MusicCategory();
+	//		projectsInCategory = musicCategory.getProjects();		
+	//	} else if (i == 1) {
+	//		DanceCategory danceCategory = new DanceCategory();
+	//		projectsInCategory = danceCategory.getProjects();	
+	//	} else if (i == 2) {
+	//		FoodCategory foodCategory = new FoodCategory();
+	//		projectsInCategory = foodCategory.getProjects();	
+	//	} else System.out.println("wrong choice");		
+	//}
+	
+	//TODO
+	// OLEG SRL violated
+	public void printAllShort() {
 		System.out.println("_________________________________________");
 		System.out.println("\n0: for return to list of categories");
-		for(Map.Entry<Integer, Project> item : projectsInCategory.entrySet()){			
-			System.out.println("\n" + item.getKey() + ":");
-			item.getValue().printShort();
+		for(int i = 0; i < projectsInCategory.size(); i++){			
+			System.out.println("\n" + (i+1) + ":");
+			projectsInCategory.get(i).printShort();
 		}				
 	}
 	
 	//TODO
 	// OLEG SRL violated
-	public static void printOneFull() {	
+	public void printOneFull() {	
 		System.out.println("_________________________________________");
 		System.out.println("\n0: for return to Projects");
-		for(Map.Entry<Integer, Project> item : projectsInCategory.entrySet()){			
-			System.out.println("\n" + item.getKey() + ":");
-			item.getValue().printFull();
-		}				
+	//	for(Map.Entry<Integer, Project> item : projectsInCategory.entrySet()){			
+	//		System.out.println("\n" + item.getKey() + ":");
+	//		item.getValue().printFull();
+	//	}				
 	}
 	
-	public static Project getProject(Integer index) {
+	public Project getProject(Integer index) {
 		return projectsInCategory.get(index);		
 	}		
 	
-	public static Integer size() {
+	public Integer size() {
 		return projectsInCategory.size();		
+	}
+
+	public void add(Project project) {
+		projectsInCategory.add(project);		
 	}
 }

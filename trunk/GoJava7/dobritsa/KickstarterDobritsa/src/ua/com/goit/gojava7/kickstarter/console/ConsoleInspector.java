@@ -1,11 +1,10 @@
 package ua.com.goit.gojava7.kickstarter.console;
-import java.util.List;
 import java.util.Scanner;
 
 public class ConsoleInspector {
-	private static Scanner sc = new Scanner(System.in);	
+	private Scanner sc = new Scanner(System.in);	
 	
-	public static Integer getCorrectInt(Integer limitation) {
+	public Integer getCorrectInt(Integer limitation) {
 		Integer a = null;
 		try {		
 			a =  sc.nextInt();
@@ -21,7 +20,7 @@ public class ConsoleInspector {
 		return a;
 	}	
 	
-	public static void close() {
+	public void close() {
 		sc.close();
 	}
 }
