@@ -7,7 +7,7 @@ public class Project {
 	private String projectName;
 	private String projectShortDescription;
 	private Double projectCostNeed;
-	private Double projectCostsCollected = 0D;
+	private Double projectCostsCollected = 0D;// OLEG we can avoid D. Up to you
 	private Calendar deadline = new GregorianCalendar();
 
 	public Project(String projectName, String projectShortDescription,
@@ -29,7 +29,7 @@ public class Project {
 	public int getProjectDaysLeft() {
 		Calendar today = new GregorianCalendar();
 		return (int) ((deadline.getTimeInMillis() - today.getTimeInMillis())
-				/ 1000 / 60 / 60 / 24);
+				/ 1000 / 60 / 60 / 24);// OLEG Magic number. Think about timezone
 	}
 
 	public Double getProjectCostNeed() {
@@ -41,6 +41,7 @@ public class Project {
 	}
 
 	public void setProjectCostCollected(Double price) {
+		// OLEG do not use floating numbers for storing money
 		projectCostsCollected += price;
 	}
 
