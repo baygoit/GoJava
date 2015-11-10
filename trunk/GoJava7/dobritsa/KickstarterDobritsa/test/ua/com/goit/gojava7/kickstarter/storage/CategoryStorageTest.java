@@ -31,7 +31,7 @@ public class CategoryStorageTest {
 
 	@Test
 	public void testGetAll() {
-		assertThat(categoryStorage.get().size(), is(1));
+		assertThat(categoryStorage.getAll().size(), is(1));
 	}
 
 
@@ -42,7 +42,7 @@ public class CategoryStorageTest {
 
 	@Test(expected = IndexOutOfBoundsException.class)
 	public void testGetMore() {
-		categoryStorage.get(categoryStorage.get().size());
+		categoryStorage.get(categoryStorage.getAll().size());
 	}
 
 	@Test

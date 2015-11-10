@@ -23,8 +23,8 @@ public class Image {
         return id;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "city")
+
+    @ManyToOne(cascade = CascadeType.ALL)
     public City getCity() {
         return city;
     }

@@ -4,7 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
-public class QuteHolder {
+public class QuoteHolder {
 	Random random = new Random();
 	 private List<String> quotes = new LinkedList<>();
 
