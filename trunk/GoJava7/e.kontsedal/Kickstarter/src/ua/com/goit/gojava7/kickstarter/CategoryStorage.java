@@ -11,10 +11,12 @@ public class CategoryStorage {
 		return Collections.unmodifiableList(categories);
 	}
 
+// OLEG setCategory but actuall add it
 	public void setCategory(String name) {
 		categories.add(new Category(name));
 	}
 
+// OLEG why -1? Why not start index from 0 in storage methods?
 	public Category getCategory(int numberOfCategory) {
 		return categories.get(numberOfCategory - 1);
 	}
