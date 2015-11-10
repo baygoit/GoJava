@@ -1,55 +1,64 @@
 package ua.com.goit.gojava7.kickstarter;
 
+import ua.com.goit.gojava7.kickstarter.console.ConsolePrinter;
+import ua.com.goit.gojava7.kickstarter.model.Category;
 import ua.com.goit.gojava7.kickstarter.model.Lang;
 import ua.com.goit.gojava7.kickstarter.model.Project;
 import ua.com.goit.gojava7.kickstarter.model.Quote;
 
 public class Body {
 	private Lang language = Lang.English;
-	Kickstarter kickstarter;
-	
-	public Body(Kickstarter kickstarter) {
+	private Kickstarter kickstarter;
+	private ConsolePrinter consolePrinter;
+	public Body(Kickstarter kickstarter,ConsolePrinter consolePrinter2) {
 		this.kickstarter = kickstarter;
+		this.consolePrinter = consolePrinter2;
 	}
 
 	public void generateHeader(){
 		if(language == Lang.Russian)
-		ConsolePrinter.println(LanguageConst.RU_HELLO_MSG);
+			consolePrinter.println(LanguageConst.RU_HELLO_MSG);
 		else{
-			ConsolePrinter.println(LanguageConst.ENG_HELLO_MSG);
+			consolePrinter.println(LanguageConst.ENG_HELLO_MSG);
 		}
 	}
 	
 	public void generateFooter(){
-		ConsolePrinter.println("GoIT Kickstarter (c) by Artur Sukhenko");
+		consolePrinter.println("GoIT Kickstarter (c) by Artur Sukhenko");
 	}
 	public void generateBody(){
-		ConsolePrinter.printDeflector();
 		Project first = kickstarter.getProjectById(0);
-		ConsolePrinter.println("Project: " + first.getProjectName() + "   |  Category: " + first.getProjectCategory().toString());
-		ConsolePrinter.println(first.getProjectDescription());
-		ConsolePrinter.println("Backers: " + first.getBackers().size() + " | Pledged: $" + first.getMoneyPledged());
-		ConsolePrinter.printDeflector();
+		generateProjectInfo(first);
 	}
 	
 	public void generateQuoteBlock(){
 		Quote quote = kickstarter.getQuoteStorage().getRandomQuote();
-		ConsolePrinter.printDeflector();
-		ConsolePrinter.println(quote);
+		consolePrinter.printDeflector();
+		consolePrinter.println(quote);
 	}
 	public void generateCategories(){
-		ConsolePrinter.printDeflector();
-		ConsolePrinter.println("Categories: ");
+		consolePrinter.printDeflector();
+		consolePrinter.println("Categories: ");
 		kickstarter.getCategoryStorage().getCategories().forEach((a,b) -> {
-			ConsolePrinter.printCategory(b);
+			generateCategoryInfo(b);
 		});
 	}
 	public void generateMainPage() {
 		generateHeader();
 		generateQuoteBlock();
-		generateCategories();
 		generateBody();
 		generateFooter();		
+	}
+	
+	public void generateCategoryInfo(Category category){
+		consolePrinter.printCategory(category);
+	}
+	
+	public void generateProjectInfo(Project project){
+		consolePrinter.printDeflector();
+		consolePrinter.println("Project: " + project.getProjectName() + "   |  Category: " + project.getProjectCategory().getCategoryName());
+		consolePrinter.println("[ " + project.getProjectDescription() + " ]");
+		consolePrinter.println("Backers: " + project.getBackers().size() + " | Pledged: $" + project.getMoneyPledged());
 	}
 	
 }

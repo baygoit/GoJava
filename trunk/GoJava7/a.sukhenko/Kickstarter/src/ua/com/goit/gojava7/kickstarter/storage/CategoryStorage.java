@@ -29,5 +29,9 @@ public class CategoryStorage {
 			throw new NoSuchElementException();
 		}
 	}
+
+	public int size() {
+		return categories.size();
+	}
 	
 }
