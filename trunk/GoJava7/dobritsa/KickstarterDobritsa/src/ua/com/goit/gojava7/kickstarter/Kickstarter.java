@@ -55,14 +55,14 @@ public class Kickstarter {
 		return categoryNumber;
 	}
 
-	public Integer chooseProject(Integer categoryNumber) {
+	public Integer chooseProject(Integer selectedCategory) {
 		consolePrinter.print(BORDER);
-		consolePrinter.print("Current category: " + categoryStorage.get(categoryNumber - shiftOne).getName());
-		categoryStorage.get(categoryNumber - shiftOne);
+		consolePrinter.print("Current category: " + categoryStorage.get(selectedCategory - shiftOne).getName());
+		categoryStorage.get(selectedCategory - shiftOne);
 		consolePrinter.print("List of projects:");
-		consolePrinter.printProjects(categoryStorage.get(categoryNumber - shiftOne).get());
+		consolePrinter.printProjects(categoryStorage.get(selectedCategory - shiftOne).get());
 		consolePrinter.print("\nChoose a project by number (0 to choose another category): ");
-		projectNumber = consoleInspector.getCorrectInt(categoryStorage.get(categoryNumber - shiftOne).size());
+		projectNumber = consoleInspector.getCorrectInt(categoryStorage.get(selectedCategory - shiftOne).size());
 		if (projectNumber == 0) {
 			chooseProject(chooseCategory());
 		}
