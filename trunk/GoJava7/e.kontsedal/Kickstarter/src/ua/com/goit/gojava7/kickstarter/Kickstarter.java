@@ -2,6 +2,8 @@ package ua.com.goit.gojava7.kickstarter;
 
 import java.io.IOException;
 
+// OLEG do we need so many comments here?
+// OLEG to big main method - think how to split it
 public class Kickstarter {
 
 	public static void main(String[] args) throws IOException {
@@ -29,6 +31,7 @@ public class Kickstarter {
 		categoryStorage.setCategory("Food");
 
 		// add project in category #1
+		// OLEG formatting?
 		categoryStorage.getCategory(1)
 				.setProject(new Project("THE BOONDOCK SAINTS",
 						"The Boondock Saints is a 1999 American crime film written and directed by Troy Duffy",
@@ -53,6 +56,7 @@ public class Kickstarter {
 		// read user input project
 		int numberOfselectedProject = consoleReader.getNumberFromConsole();
 
+// OLEG formatting?
 		consolePrinter
 				.println(categoryStorage.getCategory(numberOfSelectedCategory)
 						.getProject(numberOfselectedProject));
