@@ -14,7 +14,7 @@ public class CategoryStorage {
 		categories.add(category);
 	}
 
-	public List<Category> get() {
+	public List<Category> getAll() {
 		return Collections.unmodifiableList(categories);
 	}
 

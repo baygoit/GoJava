@@ -17,10 +17,10 @@ public class Kickstarter {
 	private ConsolePrinter consolePrinter;
 	private ConsoleInspector consoleInspector;
 
-	Integer categoryNumber = null;
-	Integer projectNumber = null;
-	List<Category> categories;
-	String BORDER = "\n________________________________________________________";
+	private Integer categoryNumber = null;
+	private Integer projectNumber = null;
+	private List<Category> categories;
+	private String BORDER = "\n________________________________________________________";
 
 	public Kickstarter(ConsolePrinter consolePrinter, ConsoleInspector consoleInspector, QuoteStorage quoteStorage,
 			CategoryStorage categoryStorage) {
@@ -33,7 +33,7 @@ public class Kickstarter {
 
 	public void run() {
 		consolePrinter.print(quoteStorage.getRandomQuote());
-		categories = categoryStorage.get();
+		categories = categoryStorage.getAll();
 		categoryNumber = chooseCategory();
 		projectNumber = chooseProject(categoryNumber);
 		viewProject(projectNumber);
@@ -50,28 +50,28 @@ public class Kickstarter {
 			consolePrinter.print("See you soon!");
 			System.exit(0);
 		}
-		
+
 		return categoryNumber;
 	}
 
 	public Integer chooseProject(Integer categoryNumber) {
 		consolePrinter.print(BORDER);
 		consolePrinter.print("Current category: " + categoryStorage.get(categoryNumber - 1).getName());
-		categoryStorage.get(categoryNumber-1);		
+		categoryStorage.get(categoryNumber - 1);
 		consolePrinter.print("List of projects:");
 		consolePrinter.printProjects(categoryStorage.get(categoryNumber - 1).get());
 		consolePrinter.print("\nChoose a project by number (0 to choose another category): ");
 		projectNumber = consoleInspector.getCorrectInt(categoryStorage.get(categoryNumber - 1).size());
 		if (projectNumber == 0) {
 			chooseProject(chooseCategory());
-		}		
+		}
 		return projectNumber - 1;
 	}
 
 	private void viewProject(Integer projectNumber) {
 		consolePrinter.print(BORDER);
 		consolePrinter.print("Current category: " + categoryStorage.get(categoryNumber - 1).getName());
-		consolePrinter.print("Current project: #" + (projectNumber + 1) + "\n");		
+		consolePrinter.print("Current project: #" + (projectNumber + 1) + "\n");
 		Project project = new Project();
 		project = categoryStorage.get(categoryNumber - 1).get(projectNumber);
 		consolePrinter.printFull(project);
@@ -79,9 +79,10 @@ public class Kickstarter {
 		while (true) {
 			if (consoleInspector.getCorrectInt(0) == 0) {
 				viewProject(chooseProject(categoryNumber));
-			}		consolePrinter.print(BORDER);	
+			}
+			consolePrinter.print(BORDER);
 		}
-		
+
 	}
 
 	public void shutdown() {
