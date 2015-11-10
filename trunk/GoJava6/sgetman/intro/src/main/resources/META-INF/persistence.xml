@@ -7,7 +7,7 @@
   <persistence-unit name="module01-persistence-unit" transaction-type="RESOURCE_LOCAL">
     <!--<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>-->
     <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-    <!--<class>com.gojava6.persistence.demo02.Book</class>-->
+    <!--<class>com.gojava6.persistence.lesson1.demo02.Book</class>-->
     <properties>
       <property name="javax.persistence.schema-generation.database.action"
                 value="drop-and-create"/>

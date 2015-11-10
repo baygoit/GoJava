@@ -29,8 +29,9 @@ public class SearchServlet extends HttpServlet {
     public void init() throws ServletException {
 
         CityService cityService = new CityService();
-        city.add(cityService.getById(new Long(1)));
-       // city = cityService.getAll();
+//        City test = cityService.getById(new Long(2));
+//        city.add(test);
+       city = cityService.getAll();
     }
 
     @Override
