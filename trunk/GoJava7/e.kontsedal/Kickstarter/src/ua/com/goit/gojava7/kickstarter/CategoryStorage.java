@@ -11,7 +11,7 @@ public class CategoryStorage {
 		return Collections.unmodifiableList(categories);
 	}
 
-// OLEG setCategory but actuall add it
+// OLEG setCategory but actual add it
 	public void setCategory(String name) {
 		categories.add(new Category(name));
 	}
