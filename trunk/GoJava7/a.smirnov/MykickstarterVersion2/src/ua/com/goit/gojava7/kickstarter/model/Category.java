@@ -5,7 +5,7 @@ import java.util.TreeSet;
 
 import ua.com.goit.gojava7.kickstarter.storage.AbstractTemplate;
 
-public class Category extends AbstractTemplate<Project> implements Comparable<Category> {
+public class Category implements Comparable<Category> {
 	private String name;
 	private Set<Project> projects;
 

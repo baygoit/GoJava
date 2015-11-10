@@ -11,17 +11,15 @@ import ua.com.goit.gojava7.kickstarter.model.Quote;
 public class ConsolePrinter {
 	private static final String MOVE_TO_THE_NEXT_LINE = "\n";
 	private static final String DOUBLE_MOVE_TO_THE_NEXT_LINE = "\n\n";
-	private static final String USD = "USD";
+	private static final String USD = " USD";
 	private static final char SPACE = ' ';
 	private static final TextModifer TEXT_MODIFER = new TextModifer();
 
-	// Printing quote and its author
 	public void print(Quote quote) {
 		String result = TEXT_MODIFER.modifyQuoteTextBeforePrint(quote.getQuoteText(), quote.getAuthor());
 		System.out.println(result);
 	}
 
-	// Printing all categories 
 	public void printCategories(Set<Category> categories) {
 		Iterator<Category> categoryIterator = categories.iterator();
 		StringBuilder result = new StringBuilder();
@@ -43,7 +41,6 @@ public class ConsolePrinter {
 		System.out.println(result.toString());
 	}
 		
-	// Printing brief projects info
 	public void printProjects(Set<Project> projects) {	
 		StringBuilder result = new StringBuilder();
 		
@@ -54,7 +51,7 @@ public class ConsolePrinter {
 		} else {
 			result.
 				append("All projects from selected category : ").
-				append(MOVE_TO_THE_NEXT_LINE);
+				append(DOUBLE_MOVE_TO_THE_NEXT_LINE);
 			
 			int stepCounter = 0;
 			Iterator<Project> projectIterator = projects.iterator();
@@ -63,14 +60,13 @@ public class ConsolePrinter {
 					append("Project ¹ : ").
 					append(++ stepCounter).
 					append(MOVE_TO_THE_NEXT_LINE).
-					append(printBriefInfoProject(projectIterator.next()));
+					append(getBriefInfoProject(projectIterator.next()));
 			}
-			System.out.println(result.toString());
+			System.out.print(result.toString());
 		}
 	}	
 		
-	// Printing information about project
-	public String printBriefInfoProject(Project project) {
+	public String getBriefInfoProject(Project project) {
 		StringBuilder result = new StringBuilder();
 		result.
 			append("Project title : ").
@@ -81,20 +77,18 @@ public class ConsolePrinter {
 			append(MOVE_TO_THE_NEXT_LINE).
 			append("Required amount of $ : ").
 			append(project.getRequiredAmountOfMoney()).
-			append(SPACE).
 			append(USD).
 			append(MOVE_TO_THE_NEXT_LINE).
 			append("Current collected amount of $ : ").
 			append(project.getCurrentAmoutOfMoney()).
-			append(SPACE).
 			append(USD).
 			append(MOVE_TO_THE_NEXT_LINE).
 			append("Days to go : ").
-			append(project.getDaysLeft());
+			append(project.getExpiryDays()).
+			append(DOUBLE_MOVE_TO_THE_NEXT_LINE);
 		return result.toString();
 	}
 	
-	// Printing information about project
 		public void printFullInfoProject(Project project) {
 			StringBuilder result = new StringBuilder();
 			result.
@@ -106,16 +100,14 @@ public class ConsolePrinter {
 				append(DOUBLE_MOVE_TO_THE_NEXT_LINE).
 				append("Required amount of $ : ").
 				append(project.getRequiredAmountOfMoney()).
-				append(SPACE).
 				append(USD).
 				append(DOUBLE_MOVE_TO_THE_NEXT_LINE).
 				append("Current collected amount of $ : ").
 				append(project.getCurrentAmoutOfMoney()).
-				append(SPACE).
 				append(USD).
 				append(DOUBLE_MOVE_TO_THE_NEXT_LINE).
 				append("Days to go : ").
-				append(project.getDaysLeft()).
+				append(project.getExpiryDays()).
 				append(DOUBLE_MOVE_TO_THE_NEXT_LINE).
 				append("About this project : ").
 				append(TEXT_MODIFER.getModifiedString(project.getFullDescription())).
@@ -131,16 +123,11 @@ public class ConsolePrinter {
 			System.out.println(result.toString());
 		}
 	
-		
-	// Printing category name
 	public void print(Category category) {
 		System.out.println("Category : " + category.getName());
 	}
 
-	// Printing simple string
 	public void print(String string) {
 		System.out.println(string);
-	}	
-	
-	
+	}		
 }

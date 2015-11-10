@@ -65,7 +65,7 @@ public class Kickstarter {
 				consolePrinter.print("You selected category number " + numberOfSelectedCategory);
 				selectedCategory = getSelectedCategory(numberOfSelectedCategory, AllCategories);
 				consolePrinter.print(selectedCategory);
-				consolePrinter.print(SEPARATOR);
+				consolePrinter.print("");
 				selectProjects(selectedCategory);
 				
 			} else {
@@ -77,7 +77,7 @@ public class Kickstarter {
 		} while (userChoise);
 	}
 
-	private void selectProjects(Category category) {
+	protected void selectProjects(Category category) {
 		Set<Project> AllProjectsFromCategory = category.getAllProjectsFromCategory();
 		Project selectedProject = null;
 		int amountOfPrjects = AllProjectsFromCategory.size();
@@ -98,10 +98,12 @@ public class Kickstarter {
 				
 			} else if (numberOfSelectedProject != 0) {
 				consolePrinter.print("You selected project number " + numberOfSelectedProject);
-				consolePrinter.print(SEPARATOR);
 				selectedProject = getSelectedProject(numberOfSelectedProject, AllProjectsFromCategory);
+				consolePrinter.print("");
 				consolePrinter.printFullInfoProject(selectedProject);
 				consolePrinter.print(SEPARATOR);
+				
+				activityInsideSelectedProject(selectedProject);
 						
 			} else {
 				consolePrinter.print("You entered 0. Back to categories.");
@@ -113,7 +115,7 @@ public class Kickstarter {
 
 	}
 	
-	public Category getSelectedCategory(int numberOfSelectedCategory, Set<Category> categories) {
+	protected Category getSelectedCategory(int numberOfSelectedCategory, Set<Category> categories) {
 		Iterator<Category> categoryIterator = categories.iterator();
 		Category selectedCategory = null;
 		int stepsCounter = 0;
@@ -130,7 +132,7 @@ public class Kickstarter {
 	}
 	
 	
-	public Project getSelectedProject(int numberOfSelectedProject, Set<Project> project) {
+	protected Project getSelectedProject(int numberOfSelectedProject, Set<Project> project) {
 		Iterator<Project> projectIterator = project.iterator();
 		Project selectedProject = null;
 		int stepsCounter = 0;
@@ -146,7 +148,7 @@ public class Kickstarter {
 		return selectedProject;
 	}
 	
-	public void activityInsideSelectedProject(Project selectedProject) {
+	protected void activityInsideSelectedProject(Project selectedProject) {
 		StringBuilder chooseMenuInProject = new StringBuilder();
 		
 		chooseMenuInProject.
@@ -163,31 +165,28 @@ public class Kickstarter {
 			choseNumber = consoleScanner.getInt();
 			consolePrinter.print(SEPARATOR);
 			if (choseNumber == 1) {
-				donateMoney(selectedProject);
-				consolePrinter.printBriefInfoProject(selectedProject);
+				donateMoneyForProject(selectedProject);
+				consolePrinter.print(SEPARATOR);
 			} 
 			
 		} while (choseNumber != 0);			
 		
 	}
 	
-	public void donateMoney(Project project) {
-
+	protected void donateMoneyForProject(Project project) {
 		String userName = enterUserName();
-		int cardNumber = consoleScanner.getInt();
+		int cardNumber = enterCreditCardNumber();
 		int donatingSum = enterDonatingSum();
 		
+		consolePrinter.print(SEPARATOR);
 		project.addToCurrentAmountOfMoney(donatingSum);
-
+		System.out.print(consolePrinter.getBriefInfoProject(project));
+		
 		Payment payment = new Payment(userName, donatingSum, cardNumber);
 		paymentStorage.add(payment);	
 	}
 	
-	public void shutdown() {
-		consoleScanner.close();
-	}
-	
-	public int enterDonatingSum() {
+	protected int enterDonatingSum() {
 		int donatingSum;
 		do {
 			consolePrinter.print("Please enter donateing sum : ");
@@ -197,7 +196,7 @@ public class Kickstarter {
 		return donatingSum;
 	}
 	
-	public int enterCreditCardNumber() {
+	protected int enterCreditCardNumber() {
 		int creditCardNumber;
 		do {
 			consolePrinter.print("Please enter you card number : ");
@@ -207,9 +206,13 @@ public class Kickstarter {
 		return creditCardNumber;
 	}
 	
-	public String enterUserName() {
+	protected String enterUserName() {
 		consolePrinter.print("Please enter you name :");
 		String userName = consoleScanner.getString();
 		return userName;
+	}
+	
+	protected void shutdown() {
+		consoleScanner.close();
 	}
 }
