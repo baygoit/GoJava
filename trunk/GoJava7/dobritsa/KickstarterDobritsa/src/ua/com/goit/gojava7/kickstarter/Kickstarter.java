@@ -21,6 +21,7 @@ public class Kickstarter {
 	private Integer projectNumber = null;
 	private List<Category> categories;
 	private String BORDER = "\n________________________________________________________";
+	private int shiftOne = 1;
 
 	public Kickstarter(ConsolePrinter consolePrinter, ConsoleInspector consoleInspector, QuoteStorage quoteStorage,
 			CategoryStorage categoryStorage) {
@@ -56,24 +57,24 @@ public class Kickstarter {
 
 	public Integer chooseProject(Integer categoryNumber) {
 		consolePrinter.print(BORDER);
-		consolePrinter.print("Current category: " + categoryStorage.get(categoryNumber - 1).getName());
-		categoryStorage.get(categoryNumber - 1);
+		consolePrinter.print("Current category: " + categoryStorage.get(categoryNumber - shiftOne).getName());
+		categoryStorage.get(categoryNumber - shiftOne);
 		consolePrinter.print("List of projects:");
-		consolePrinter.printProjects(categoryStorage.get(categoryNumber - 1).get());
+		consolePrinter.printProjects(categoryStorage.get(categoryNumber - shiftOne).get());
 		consolePrinter.print("\nChoose a project by number (0 to choose another category): ");
-		projectNumber = consoleInspector.getCorrectInt(categoryStorage.get(categoryNumber - 1).size());
+		projectNumber = consoleInspector.getCorrectInt(categoryStorage.get(categoryNumber - shiftOne).size());
 		if (projectNumber == 0) {
 			chooseProject(chooseCategory());
 		}
-		return projectNumber - 1;
+		return projectNumber - shiftOne;
 	}
 
 	private void viewProject(Integer projectNumber) {
 		consolePrinter.print(BORDER);
-		consolePrinter.print("Current category: " + categoryStorage.get(categoryNumber - 1).getName());
-		consolePrinter.print("Current project: #" + (projectNumber + 1) + "\n");
+		consolePrinter.print("Current category: " + categoryStorage.get(categoryNumber - shiftOne).getName());
+		consolePrinter.print("Current project: #" + (projectNumber + shiftOne) + "\n");
 		Project project = new Project();
-		project = categoryStorage.get(categoryNumber - 1).get(projectNumber);
+		project = categoryStorage.get(categoryNumber - shiftOne).get(projectNumber);
 		consolePrinter.printFull(project);
 		consolePrinter.print("\nType 0 to choose another project");
 		while (true) {
