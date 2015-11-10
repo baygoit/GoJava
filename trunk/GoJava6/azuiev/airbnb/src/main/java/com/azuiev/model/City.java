@@ -32,8 +32,7 @@ public class City {
         return name;
     }
 
-    @OneToMany
-    @JoinColumn(name="city")
+    @OneToMany(cascade = CascadeType.ALL , mappedBy="city")
     public List<Image> getImage() {
         return image;
     }
