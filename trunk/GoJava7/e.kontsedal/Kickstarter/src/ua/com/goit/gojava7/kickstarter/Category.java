@@ -10,6 +10,7 @@ public class Category {
 
 	public Category(String name) {
 		this.categoryName = name;
+		// OLEG it doesn't work. You will see it if try to test it
 		categoryId++;
 	}
 
@@ -22,6 +23,7 @@ public class Category {
 	}
 
 	public int getCategoryId() {
+		// OLEG do we have code convension for using this. in getters?
 		return this.categoryId;
 	}
 
