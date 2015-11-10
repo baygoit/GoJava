@@ -49,10 +49,16 @@ public class KickstarterRunner {
 	private static ProjectStorage initProjects(CategoryStorage categoryStorage) {
 		ProjectStorage projectStorage = new ProjectStorage();
 
-		Project progect1 = new Project("Super project", categoryStorage.get(0), 123, 14, 123, "descr", "owner", 100,
-				"link");
-		Project progect2 = new Project("Mege project", categoryStorage.get(0), 1342, 12, 3432, "descrip", "owner2", 100,
-				"link2");
+		Project progect1 = new Project("Super project", categoryStorage.get(0));
+		progect1.setFunded(123);
+		progect1.setDaysToGo(14);
+		progect1.setPledged(123);
+		progect1.setGoal(100);
+		progect1.setOwner("owner");
+		progect1.setDescription("descr");
+		progect1.setLinkVideo("link");
+
+		Project progect2 = new Project("Mege project", categoryStorage.get(0));
 
 		projectStorage.add(progect1);
 		projectStorage.add(progect2);
