@@ -12,7 +12,6 @@ public class ConsolePrinter {
 	private static final String MOVE_TO_THE_NEXT_LINE = "\n";
 	private static final String DOUBLE_MOVE_TO_THE_NEXT_LINE = "\n\n";
 	private static final String USD = " USD";
-	private static final char SPACE = ' ';
 	private static final TextModifer TEXT_MODIFER = new TextModifer();
 
 	public void print(Quote quote) {

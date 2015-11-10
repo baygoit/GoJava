@@ -1,8 +1,5 @@
 package ua.com.goit.gojava7.kickstarter.control;
 
-import java.util.Iterator;
-import java.util.Set;
-
 import ua.com.goit.gojava7.kickstarter.model.Category;
 import ua.com.goit.gojava7.kickstarter.model.Project;
 import ua.com.goit.gojava7.kickstarter.model.Quote;
@@ -31,30 +28,23 @@ public class KickstarterRunner {
 
 	public static QuotesStorage initQuotes() {
 		QuotesStorage quotesStorage = new QuotesStorage();
-		Quote quote1 = new Quote();
-		quote1.setQuoteText(
-				"Every truth passes through three stages before " + "it is recognized. In the first, it is ridiculed. "
-						+ "In the second, it is opposed. In the third, " + "it is regarded as self evident.");
-		quote1.setAuthor("Arthur Schopenhauer");
 
-		Quote quote2 = new Quote();
-		quote2.setQuoteText("Liberty will not descend to a people, a people must "
-				+ "raise themselves to liberty; it is a blessing that must " + "be earned before it can be enjoyed.");
-		quote2.setAuthor("B. Franklin");
+		Quote quote1 = new Quote("B. Franklin", 
+				"Liberty will not descend to a people, a people must "
+				+ "raise themselves to liberty; it is a blessing that must " 
+				+ "be earned before it can be enjoyed.");
 
-		Quote quote3 = new Quote();
-		quote3.setQuoteText("Government's first duty is to protect the people, not " + "run their lives.");
-		quote3.setAuthor("Ronald Reagan");
+		Quote quote2 = new Quote("Ronald Reagan", 
+				"Government's first duty is to protect the people, not " 
+				+ "run their lives.");
 
-		Quote quote4 = new Quote();
-		quote4.setQuoteText("The most terrifying words in the English language are: "
+		Quote quote3 = new Quote("Ronald Reagan", 
+				"The most terrifying words in the English language are: "
 				+ "I'm from the government and I'm here to help.");
-		quote4.setAuthor("Ronald Reagan");
 
 		quotesStorage.add(quote1);
 		quotesStorage.add(quote2);
 		quotesStorage.add(quote3);
-		quotesStorage.add(quote4);
 
 		return quotesStorage;
 	}

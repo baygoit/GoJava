@@ -99,7 +99,7 @@ public class Kickstarter {
 			} else if (numberOfSelectedProject != 0) {
 				consolePrinter.print("You selected project number " + numberOfSelectedProject);
 				selectedProject = getSelectedProject(numberOfSelectedProject, AllProjectsFromCategory);
-				consolePrinter.print("");
+				consolePrinter.print(SEPARATOR);
 				consolePrinter.printFullInfoProject(selectedProject);
 				consolePrinter.print(SEPARATOR);
 				
