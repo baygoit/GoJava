@@ -66,15 +66,15 @@ public class Kickstarter {
 		if (selectedProject == 0) {
 			chooseProject(chooseCategory());
 		}
-		return selectedProject - shiftOne;
+		return selectedProject;
 	}
 
 	private void viewProject(Integer selectedProject) {
 		consolePrinter.print(BORDER);
 		consolePrinter.print("Current category: " + categoryStorage.get(selectedCategory - shiftOne).getName());
-		consolePrinter.print("Current project: #" + (selectedProject + shiftOne) + "\n");
+		consolePrinter.print("Current project: #" + (selectedProject) + "\n");
 		Project project = new Project();
-		project = categoryStorage.get(selectedCategory - shiftOne).get(selectedProject);
+		project = categoryStorage.get(selectedCategory - shiftOne).get(selectedProject - shiftOne);
 		consolePrinter.printFull(project);
 		consolePrinter.print("\nType 0 to choose another project");
 		while (true) {

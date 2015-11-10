@@ -6,18 +6,18 @@ public class ConsoleInspector {
 	private Scanner sc = new Scanner(System.in);
 
 	public int getCorrectInt(int limitation) {
-		int a = -1;		
+		int number = -1;		
 		do {
 			while (!sc.hasNextInt()) {
 				sc.next();
 			}
-			a = sc.nextInt();
-			if (a > limitation | a < 0) {
+			number = sc.nextInt();
+			if (number > limitation | number < 0) {
 				System.out.println("You should type a number from 0 to " + limitation + ": ");
-				a = -1;
+				number = -1;
 			}
-		} while (a == -1);
-		return a;
+		} while (number == -1);
+		return number;
 	}
 
 	public void close() {
