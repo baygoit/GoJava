@@ -1,4 +1,4 @@
-package com.gojava6.persistence.demo02;
+package com.gojava6.persistence.lesson1.demo02;
 
 import org.junit.After;
 import org.junit.Before;

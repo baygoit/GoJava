@@ -1,4 +1,4 @@
-package com.gojava6.persistence.demo01;
+package com.gojava6.persistence.lesson1.demo01;
 
 import java.sql.*;
 

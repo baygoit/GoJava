@@ -1,22 +1,32 @@
-package com.gojava6.persistence.demo01;
+package com.gojava6.persistence.lesson3;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import java.util.Date;
 
 /**
  * @author Antonio Goncalves
  *         http://www.antoniogoncalves.org
  *         --
  */
-public class Book {
+@Entity
+public class Book extends Item {
 
   // ======================================
   // =             Attributes             =
   // ======================================
 
-  private Long id;
-  private String title;
-  private String description;
-  private Float unitCost;
+  @Column(length = 15)
   private String isbn;
+
+  @Column(name = "nb_of_pages")
   private Integer nbOfPage;
+
+  @Column(name = "publication_date")
+  @Temporal(TemporalType.DATE)
+  private Date publicationDate;
 
   // ======================================
   // =            Constructors            =
@@ -25,54 +35,27 @@ public class Book {
   public Book() {
   }
 
-  public Book(Long id) {
-    this.id = id;
+  public Book(String title) {
+    this.title = title;
   }
 
-  public Book(Long id, String title, String description, Float unitCost, String isbn, Integer nbOfPage) {
-    this.id = id;
+  public Book(String title, String isbn) {
+    this.title = title;
+    this.isbn = isbn;
+  }
+
+  public Book(String title, String description, Float unitCost, String isbn, Integer nbOfPage, Date publicationDate) {
     this.title = title;
     this.description = description;
     this.unitCost = unitCost;
     this.isbn = isbn;
     this.nbOfPage = nbOfPage;
+    this.publicationDate = publicationDate;
   }
 
   // ======================================
   // =          Getters & Setters         =
   // ======================================
-
-  public Long getId() {
-    return id;
-  }
-
-  public void setId(Long id) {
-    this.id = id;
-  }
-
-  public String getTitle() {
-    return title;
-  }
-
-  public void setTitle(String title) {
-    this.title = title;
-  }
-
-  public String getDescription() {
-    return description;
-  }
-
-  public void setDescription(String description) {
-    this.description = description;
-  }
-
-  public Float getUnitCost() {
-    return unitCost;
-  }
-
-  public void setUnitCost(Float unitCost) {
-    this.unitCost = unitCost;
-  }
 
   public String getIsbn() {
     return isbn;
@@ -90,6 +73,14 @@ public class Book {
     this.nbOfPage = nbOfPage;
   }
 
+  public Date getPublicationDate() {
+    return publicationDate;
+  }
+
+  public void setPublicationDate(Date publicationDate) {
+    this.publicationDate = publicationDate;
+  }
+
   // ======================================
   // =    hashcode, equals & toString     =
   // ======================================
@@ -98,27 +89,23 @@ public class Book {
   public boolean equals(Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
+    if (!super.equals(o)) return false;
 
     Book book = (Book) o;
 
-    if (description != null ? !description.equals(book.description) : book.description != null) return false;
-    if (id != null ? !id.equals(book.id) : book.id != null) return false;
     if (isbn != null ? !isbn.equals(book.isbn) : book.isbn != null) return false;
     if (nbOfPage != null ? !nbOfPage.equals(book.nbOfPage) : book.nbOfPage != null) return false;
-    if (title != null ? !title.equals(book.title) : book.title != null) return false;
-    if (unitCost != null ? !unitCost.equals(book.unitCost) : book.unitCost != null) return false;
+    if (publicationDate != null ? !publicationDate.equals(book.publicationDate) : book.publicationDate != null) return false;
 
     return true;
   }
 
   @Override
   public int hashCode() {
-    int result = id != null ? id.hashCode() : 0;
-    result = 31 * result + (title != null ? title.hashCode() : 0);
-    result = 31 * result + (description != null ? description.hashCode() : 0);
-    result = 31 * result + (unitCost != null ? unitCost.hashCode() : 0);
+    int result = super.hashCode();
     result = 31 * result + (isbn != null ? isbn.hashCode() : 0);
     result = 31 * result + (nbOfPage != null ? nbOfPage.hashCode() : 0);
+    result = 31 * result + (publicationDate != null ? publicationDate.hashCode() : 0);
     return result;
   }
 
@@ -127,10 +114,7 @@ public class Book {
     final StringBuilder sb = new StringBuilder("Book{");
     sb.append("id=").append(id);
     sb.append(", title='").append(title).append('\'');
-    sb.append(", description='").append(description).append('\'');
-    sb.append(", unitCost=").append(unitCost);
     sb.append(", isbn='").append(isbn).append('\'');
-    sb.append(", nbOfPage=").append(nbOfPage);
     sb.append('}');
     return sb.toString();
   }
