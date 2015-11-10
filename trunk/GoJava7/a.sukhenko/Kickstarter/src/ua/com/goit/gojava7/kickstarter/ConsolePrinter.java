@@ -1,5 +1,6 @@
 package ua.com.goit.gojava7.kickstarter;
 
+import ua.com.goit.gojava7.kickstarter.model.Category;
 import ua.com.goit.gojava7.kickstarter.model.Quote;
 
 public class ConsolePrinter {
@@ -12,6 +13,10 @@ public class ConsolePrinter {
 	}
 	public static void println(Quote quote) {
 		System.out.println("\"" + quote.getQuoteName() + "\"\n" + quote.getAuthor());
+		
+	}
+	public static void printCategory(Category b) {
+		System.out.println(b.getCategoryId() + "# " + b.getCategoryName());
 		
 	}
 }
