@@ -10,6 +10,7 @@ import ua.com.goit.gojava7.kickstarter.model.Project;
 import ua.com.goit.gojava7.kickstarter.model.Quote;
 import ua.com.goit.gojava7.kickstarter.model.User;
 import ua.com.goit.gojava7.kickstarter.storage.CategoryStorage;
+import ua.com.goit.gojava7.kickstarter.storage.ProjectManager;
 import ua.com.goit.gojava7.kickstarter.storage.QuoteStorage;
 
 /**
@@ -21,19 +22,31 @@ public class Kickstarter {
 	public Kickstarter() {
 		initQuotes();
 		initCategories();
+		initProjects();
 		body = new Body(this, consolePrinter);
 	}
+	
 	private Body body;
 	private static final boolean LOGS_ENABLED = true;
 	private ArrayList<String> logs = new ArrayList<>();
-	private ArrayList<Project> projects = new ArrayList<Project>();
+	private ProjectManager projectManager = new ProjectManager(this);
+
+
+	public ProjectManager getProjectManager() {
+		return projectManager;
+	}
+
+	public void setProjectManager(ProjectManager projectManager) {
+		this.projectManager = projectManager;
+	}
+
 	private QuoteStorage quoteStorage = new QuoteStorage();
 	private CategoryStorage categoryStorage = new CategoryStorage();
 	
 	private ConsoleScanner cs = new ConsoleScanner();
 	private ConsolePrinter consolePrinter = new ConsolePrinter();
 	
-	private UserManager userManager = new UserManager(consolePrinter, cs, categoryStorage);
+	private UserManager userManager = new UserManager(consolePrinter, cs, categoryStorage,this);
 	
 
 	
@@ -43,10 +56,12 @@ public class Kickstarter {
 	public static void main(String[] args) {
 		Kickstarter kickstarter = new Kickstarter();
 		Project project = new Project("GoIT Java 7", "Movie about our GoIT Java 7 Group", kickstarter.getCategoryStorage().getCategoryById(1), Calendar.getInstance());
+		kickstarter.addProject(project);
 		User guest = new User();
 		kickstarter.addProject(project);
 		kickstarter.getBody().generateMainPage();
 		kickstarter.getUserManager().chooseCategory(guest);
+		kickstarter.getProjectManager().showCategoryInfo(guest);
 		
 		
 	}
@@ -60,7 +75,7 @@ public class Kickstarter {
 	}
 	
 	public Project getProjectById(int id){
-		return projects.get(id);
+		return projectManager.getProjects().get(id);
 	}
 
 	public QuoteStorage getQuoteStorage() {
@@ -94,7 +109,7 @@ public class Kickstarter {
 	
 	
 	public void addProject(Project pr){
-		projects.add(pr);
+		projectManager.getProjects().add(pr);
 		
 		addLog("Project " + pr.getProjectName() + " added.");
 	}
@@ -114,6 +129,12 @@ public class Kickstarter {
 		categoryStorage.addCategory(new Category("Technology", 2));
 		categoryStorage.addCategory(new Category("Games", 3));
 		categoryStorage.addCategory(new Category("Books", 4));
+	}
+	
+	private void initProjects() {
+		projectManager.addProject(new Project("Catana", "New sword-fighting game", categoryStorage.getCategoryById(3), Calendar.getInstance()));
+		projectManager.addProject(new Project("Terminator Exodus", "New game about fighting as Terminator", categoryStorage.getCategoryById(3), Calendar.getInstance()));
+		
 	}
 	
 	

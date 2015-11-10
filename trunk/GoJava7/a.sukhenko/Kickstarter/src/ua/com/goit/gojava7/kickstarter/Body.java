@@ -1,6 +1,7 @@
 package ua.com.goit.gojava7.kickstarter;
 
 import ua.com.goit.gojava7.kickstarter.console.ConsolePrinter;
+import ua.com.goit.gojava7.kickstarter.model.Category;
 import ua.com.goit.gojava7.kickstarter.model.Lang;
 import ua.com.goit.gojava7.kickstarter.model.Project;
 import ua.com.goit.gojava7.kickstarter.model.Quote;
@@ -26,12 +27,8 @@ public class Body {
 		consolePrinter.println("GoIT Kickstarter (c) by Artur Sukhenko");
 	}
 	public void generateBody(){
-		consolePrinter.printDeflector();
 		Project first = kickstarter.getProjectById(0);
-		consolePrinter.println("Project: " + first.getProjectName() + "   |  Category: " + first.getProjectCategory().toString());
-		consolePrinter.println(first.getProjectDescription());
-		consolePrinter.println("Backers: " + first.getBackers().size() + " | Pledged: $" + first.getMoneyPledged());
-		consolePrinter.printDeflector();
+		generateProjectInfo(first);
 	}
 	
 	public void generateQuoteBlock(){
@@ -43,15 +40,25 @@ public class Body {
 		consolePrinter.printDeflector();
 		consolePrinter.println("Categories: ");
 		kickstarter.getCategoryStorage().getCategories().forEach((a,b) -> {
-			consolePrinter.printCategory(b);
+			generateCategoryInfo(b);
 		});
 	}
 	public void generateMainPage() {
 		generateHeader();
 		generateQuoteBlock();
-		//generateCategories();
 		generateBody();
 		generateFooter();		
+	}
+	
+	public void generateCategoryInfo(Category category){
+		consolePrinter.printCategory(category);
+	}
+	
+	public void generateProjectInfo(Project project){
+		consolePrinter.printDeflector();
+		consolePrinter.println("Project: " + project.getProjectName() + "   |  Category: " + project.getProjectCategory().getCategoryName());
+		consolePrinter.println("[ " + project.getProjectDescription() + " ]");
+		consolePrinter.println("Backers: " + project.getBackers().size() + " | Pledged: $" + project.getMoneyPledged());
 	}
 	
 }
