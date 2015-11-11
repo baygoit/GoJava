@@ -8,23 +8,22 @@ import javax.persistence.*;
  * Created by Administrator on 09.11.15.
  */
 @Entity
-@Table(name="CityImages")
+@Table(name="cityimages", catalog = "airbnb")
 public class Image {
     private Long id;
     private City city;
     private String name;
 
     @Id
-    @GeneratedValue(generator="increment")
-    @GenericGenerator(name="increment", strategy = "increment")
-
-    @Column(name="id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", unique = true, nullable = false)
     public Long getId() {
         return id;
     }
 
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @JoinColumn(name = "city", referencedColumnName = "id")
     public City getCity() {
         return city;
     }

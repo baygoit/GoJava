@@ -31,7 +31,7 @@ public class Validator {
     }
 
     public boolean validateApartment(Apartment apartment) {
-        return validateCity(apartment.getCity())&&validateApartType(apartment.getApartType());
+        return validateCity(apartment.getCity().getName())&&validateApartType(apartment.getApartType());
     }
 
     private boolean validate(User user) {

@@ -1,13 +1,12 @@
 package ua.com.goit.gojava7.kickstarter.model;
 
+import ua.com.goit.gojava7.kickstarter.model.Project;
 import java.util.Set;
 import java.util.TreeSet;
 
-import ua.com.goit.gojava7.kickstarter.storage.AbstractTemplate;
-
-public class Category extends AbstractTemplate<Project> implements Comparable<Category> {
-	private String name;
+public class Category implements Comparable<Category> {
 	private Set<Project> projects;
+	private String name;
 
 	public Category(String name) {
 		this.name = name;

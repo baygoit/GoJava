@@ -1,7 +1,6 @@
 package ua.com.goit.gojava7.kickstarter.storage;
 
 import java.util.Random;
-
 import ua.com.goit.gojava7.kickstarter.model.Quote;
 
 public class QuotesStorage extends AbstractTemplate<Quote>{

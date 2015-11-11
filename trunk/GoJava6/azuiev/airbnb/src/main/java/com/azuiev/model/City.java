@@ -3,6 +3,7 @@ package com.azuiev.model;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -10,19 +11,20 @@ import java.util.List;
  */
 
 @Entity
-@Table(name="city")
+@Table(name="city", catalog = "airbnb")
 public class City {
     private Long id;
     private String name;
-    private List<Image> image;
+
+    @Transient
+    private List<Image> image = new ArrayList<Image>();
 
     public City() {
     }
 
     @Id
-    @GeneratedValue(generator="increment")
-    @GenericGenerator(name="increment", strategy = "increment")
-    @Column(name="id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", unique = true, nullable = false)
     public Long getId() {
         return id;
     }
@@ -32,13 +34,13 @@ public class City {
         return name;
     }
 
-    @OneToMany(cascade = CascadeType.ALL , mappedBy="city")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "city")
     public List<Image> getImage() {
         return image;
     }
 
-    public void setImage(Image image) {
-        this.image.add(image);
+    public void setImage(List<Image> image) {
+        this.image=image;
     }
 
     public void setId(Long id) {
@@ -50,7 +52,6 @@ public class City {
     }
 
     public String imagePath(){
-        return "city/images/";
-                /*+image;*/
+        return "images/city/"+image.get(0).getName();
     }
 }

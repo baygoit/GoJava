@@ -10,13 +10,14 @@ C:\Documents and Settings\Administrator\goit\trunk\GoJava6\azuiev\airbnb\src\mai
 C:\Documents and Settings\Administrator\goit\trunk\GoJava6\azuiev\airbnb\src\main\java\com\azuiev\dao\AbstractModelDao.java
 C:\Documents and Settings\Administrator\goit\trunk\GoJava6\azuiev\airbnb\src\main\java\com\azuiev\model\City.java
 C:\Documents and Settings\Administrator\goit\trunk\GoJava6\azuiev\airbnb\src\main\java\com\azuiev\enums\UserRoles.java
+C:\Documents and Settings\Administrator\goit\trunk\GoJava6\azuiev\airbnb\src\main\java\com\azuiev\db\HibernateAdd.java
 C:\Documents and Settings\Administrator\goit\trunk\GoJava6\azuiev\airbnb\src\main\java\com\azuiev\model\User.java
 C:\Documents and Settings\Administrator\goit\trunk\GoJava6\azuiev\airbnb\src\main\java\com\azuiev\interfaces\Subject.java
 C:\Documents and Settings\Administrator\goit\trunk\GoJava6\azuiev\airbnb\src\main\java\com\azuiev\dao\ModelDao.java
 C:\Documents and Settings\Administrator\goit\trunk\GoJava6\azuiev\airbnb\src\main\java\com\azuiev\dao\DBDao.java
 C:\Documents and Settings\Administrator\goit\trunk\GoJava6\azuiev\airbnb\src\main\java\com\azuiev\model\Organization.java
-C:\Documents and Settings\Administrator\goit\trunk\GoJava6\azuiev\airbnb\src\main\java\com\azuiev\db\AirbnbDBDao.java
 C:\Documents and Settings\Administrator\goit\trunk\GoJava6\azuiev\airbnb\src\main\java\com\azuiev\servlet\ControllerServlet.java
+C:\Documents and Settings\Administrator\goit\trunk\GoJava6\azuiev\airbnb\src\main\java\com\azuiev\db\AirbnbDBDao.java
 C:\Documents and Settings\Administrator\goit\trunk\GoJava6\azuiev\airbnb\src\main\java\com\azuiev\model\Apartment.java
 C:\Documents and Settings\Administrator\goit\trunk\GoJava6\azuiev\airbnb\src\main\java\com\azuiev\model\Reservation.java
 C:\Documents and Settings\Administrator\goit\trunk\GoJava6\azuiev\airbnb\src\main\java\com\azuiev\Validator.java
