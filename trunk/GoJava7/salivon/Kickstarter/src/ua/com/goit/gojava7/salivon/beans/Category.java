@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ua.com.goit.salivon.beans;
+package ua.com.goit.gojava7.salivon.beans;
 
-import ua.com.goit.salivon.IdCategory;
+import ua.com.goit.gojava7.salivon.IdCategory;
 
 /**
  *

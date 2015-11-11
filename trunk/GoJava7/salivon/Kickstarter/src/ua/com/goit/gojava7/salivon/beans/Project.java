@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ua.com.goit.salivon.beans;
+package ua.com.goit.gojava7.salivon.beans;
 
 import java.util.Calendar;
 import java.util.Date;
-import ua.com.goit.salivon.IdProject;
+import ua.com.goit.gojava7.salivon.IdProject;
 
 /**
  *
@@ -34,7 +34,7 @@ public class Project {
         this.title = title;
         this.total = total;
         this.idCategory = idCategory;
-        historyProject ="...history...";
+        historyProject = "...history...";
         link = "...link...";
         faq = "...FAQ...";
         setId();
@@ -93,6 +93,5 @@ public class Project {
     public int getId() {
         return id;
     }
-    
 
 }

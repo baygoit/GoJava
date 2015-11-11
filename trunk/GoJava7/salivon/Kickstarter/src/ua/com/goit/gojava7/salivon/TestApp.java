@@ -3,20 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ua.com.goit.salivon;
+package ua.com.goit.gojava7.salivon;
 
-import ua.com.goit.salivon.view.Console;
+import ua.com.goit.gojava7.salivon.view.Console;
 
-/**
- *
- * @author Оля
- */
 public class TestApp {
 
     public static void main(String[] args) {
-        Console con = new Console();
-        con.execute();
-
+        Console console = new Console();
+        console.execute();
     }
 
 }
