@@ -1,5 +1,0 @@
-INSERT INTO `airbnb`.`city` (`name`) VALUES
-('Kiev'),
-('Moskva'),
-('Kharkov'),
-('Odessa');
