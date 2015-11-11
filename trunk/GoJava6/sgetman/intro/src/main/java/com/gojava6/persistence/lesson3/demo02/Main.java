@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -21,7 +22,7 @@ public class Main {
 
     System.out.println("\n\n>>> Executing : " + Main.class.toString() + " <<<\n");
 
-    EntityManagerFactory emf = Persistence.createEntityManagerFactory("module04-persistence-unit");
+    EntityManagerFactory emf = Persistence.createEntityManagerFactory("module01-persistence-unit");
     EntityManager em = emf.createEntityManager();
     EntityTransaction tx = em.getTransaction();
 
@@ -30,10 +31,22 @@ public class Main {
     // Creates and persists a CD
     tx.begin();
     Set<Musician> beatles = new HashSet<>();
-    beatles.add(new Musician("John", "Lennon"));
-    beatles.add(new Musician("Paul", "McCartney"));
-    beatles.add(new Musician("Ringo", "Starr"));
-    beatles.add(new Musician("Georges", "Harrison"));
+    Musician john = new Musician("John", "Lennon");
+    Musician paul = new Musician("Paul", "McCartney");
+    Musician ringo = new Musician("Ringo", "Starr");
+    Musician georges = new Musician("Georges", "Harrison");
+    em.persist(john);
+    em.persist(paul);
+    em.persist(ringo);
+    em.persist(georges);
+    beatles.add(john);
+
+    beatles.add(paul);
+
+    beatles.add(ringo);
+
+    beatles.add(georges);
+
     CD sergentPepper = new CD("Sergent Pepper");
     sergentPepper.setMusicians(beatles);
     sergentPepper = service.createCD(sergentPepper);
@@ -41,14 +54,35 @@ public class Main {
 
     System.out.println("CD Persisted : " + sergentPepper);
 
-    // Finds the cd
-    sergentPepper = service.findCD(sergentPepper.getId());
+    /*Query query = em.createNativeQuery("select * from CD where id =  ?");
+    query.setParameter(1, "1").getSingleResult();
 
-    System.out.println("CD Found     : " + sergentPepper);
-    System.out.println("   Musicians : " + sergentPepper.getMusicians());
+    query.setParameter(1, "1").getSingleResult();*/
+
+
+    // Finds the cd
+    em = emf.createEntityManager();
+    tx = em.getTransaction();
+    tx.begin();
+    sergentPepper = service.findCD(sergentPepper.getId());
+    tx.commit();
+    em.close();
+
+    em = emf.createEntityManager();
+    tx = em.getTransaction();
+    tx.begin();
+    service = new CDService(em);
+    sergentPepper = service.findCD(sergentPepper.getId());
+    tx.commit();
+    em.close();
+
+
+
+    /*System.out.println("CD Found     : " + sergentPepper);
+    System.out.println("   Musicians : " + sergentPepper.getMusicians());*/
 
     // Removes the cd
-    tx.begin();
+    /*tx.begin();
     service.removeCD(sergentPepper.getId());
     tx.commit();
 
@@ -59,7 +93,7 @@ public class Main {
 
     System.out.println("CD Not Found : " + sergentPepper);
 
-    em.close();
+    em.close();*/
     emf.close();
   }
 }

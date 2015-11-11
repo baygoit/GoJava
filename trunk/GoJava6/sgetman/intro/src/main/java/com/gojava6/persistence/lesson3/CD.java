@@ -1,18 +1,23 @@
 package com.gojava6.persistence.lesson3;
 
 import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
 import java.util.HashSet;
 import java.util.Set;
 
 import static javax.persistence.CascadeType.*;
 import static javax.persistence.FetchType.*;
 
+import org.hibernate.annotations.*;
+
 /**
  * @author Antonio Goncalves
  *         http://www.antoniogoncalves.org
  *         --
  */
-/*@Entity*/
+@Entity
+/*@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)*/
 public class CD extends Item {
 
   // ======================================
