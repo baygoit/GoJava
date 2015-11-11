@@ -132,8 +132,10 @@ public class Kickstarter {
 	}
 	
 	private void initProjects() {
-		projectManager.addProject(new Project("Catana", "New sword-fighting game", categoryStorage.getCategoryById(3), Calendar.getInstance()));
-		projectManager.addProject(new Project("Terminator Exodus", "New game about fighting as Terminator", categoryStorage.getCategoryById(3), Calendar.getInstance()));
+		Calendar cal = Calendar.getInstance();
+		cal.set(2015, 11, 26, 14, 00);
+		projectManager.addProject(new Project("Catana", "New sword-fighting game", categoryStorage.getCategoryById(3), cal));
+		projectManager.addProject(new Project("Terminator Exodus", "New game about fighting as Terminator", categoryStorage.getCategoryById(3), cal));
 		
 	}
 	

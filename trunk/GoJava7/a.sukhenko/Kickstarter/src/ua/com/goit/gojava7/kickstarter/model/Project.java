@@ -7,6 +7,16 @@ public class Project {
 	private String projectName;
 	private String projectDescription;
 	private double moneyPledged;
+	private double moneyNeeded;
+	public double getMoneyNeeded() {
+		return moneyNeeded;
+	}
+
+
+
+	public void setMoneyNeeded(double moneyNeeded) {
+		this.moneyNeeded = moneyNeeded;
+	}
 	private Category projectCategory;
 	private HashMap<User,Double> backers = new HashMap<>();
 	private Calendar enddate;
