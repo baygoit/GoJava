@@ -39,7 +39,7 @@ public class PaymentSystem {
 		addPayer(cardId, holderName);
 		acceptPayment(payment, projectNumber, categoryTitle);
 		consolePrintView.singleCategorysProjectsView(prm.getProject(categoryTitle, projectNumber));
-		Kickstarter.projectSelector(categoryNumber);
+		Kickstarter.projectSelector(categoryNumber, categoryTitle);
 	}
 
 	public String acceptPayerName() {

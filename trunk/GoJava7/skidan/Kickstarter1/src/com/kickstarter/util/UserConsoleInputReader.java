@@ -24,12 +24,14 @@ public class UserConsoleInputReader {
 		try{
 			Scanner sc = new Scanner(System.in);
 			name = sc.nextLine();
-
+           
 		} catch (Exception e) {
 			System.out.println("No such category or project avaliable. Check your Input");
 			readString();
 		}
 		return name;
-
 	}
+	
+	
+
 }
