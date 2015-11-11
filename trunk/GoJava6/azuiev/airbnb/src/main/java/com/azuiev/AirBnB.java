@@ -37,8 +37,8 @@ public class AirBnB {
 
         sportLife.register(user);
 
-        Apartment book1 = user.registerBook("Kiev", "Lenina 1", ApartType.APARTAMENT);
-        Apartment book2 = user.registerBook("Moskva", "Pushkina 1", ApartType.PLACE);
+//        Apartment book1 = user.registerBook("Kiev", "Lenina 1", ApartType.APARTAMENT);
+//        Apartment book2 = user.registerBook("Moskva", "Pushkina 1", ApartType.PLACE);
 
         System.out.println(user);
         ApartType t = ApartType.values()[0];
