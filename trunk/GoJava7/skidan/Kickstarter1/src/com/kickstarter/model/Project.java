@@ -1,8 +1,8 @@
 package com.kickstarter.model;
 
 public class Project {
-
-	private String title;;
+	private int id;
+	private String title;
 	private String discription;
 	private int daysLeft;
 	private int requiredSum;
@@ -10,9 +10,11 @@ public class Project {
 	private String projectHistory;
 	private String videoLink;
 	private String questionSection;
+	private String categoryName;
 
-	public Project(String title, String discription, int daysLeft, int requiredSum, int gainedSum,
-			String projectHistory, String videoLink, String questionSection) {
+	public Project(int id, String title, String discription, int daysLeft, int requiredSum, int gainedSum,
+			String projectHistory, String videoLink, String questionSection, String categoryName) {
+		this.id = id;
 		this.title = title;
 		this.discription = discription;
 		this.daysLeft = daysLeft;
@@ -21,6 +23,7 @@ public class Project {
 		this.projectHistory = projectHistory;
 		this.videoLink = videoLink;
 		this.questionSection = questionSection;
+		this.categoryName = categoryName;
 	}
 
 	public String getTitle() {
@@ -85,6 +88,23 @@ public class Project {
 
 	public void setQuestionSection(String questionSection) {
 		this.questionSection = questionSection;
+	}
+
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getCategoryName() {
+		return categoryName;
+	}
+
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
 	}
 
 	@Override

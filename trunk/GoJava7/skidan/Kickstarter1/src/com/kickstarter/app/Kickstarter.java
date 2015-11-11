@@ -43,9 +43,9 @@ public class Kickstarter {
 				categorySelector();
 			} else {
 				String categoryTitle = categoryManager.getCategorieByNumber(categoryNumber).getTitle();
-                String title = projectManager.getProject(categoryTitle, projectNumber).get(0).getTitle();
+                String title = projectManager.getProject(categoryTitle, projectNumber).getTitle();
 				consolePrint.choosenProjectTitleInform(title);
-				consolePrint.categorysProjectsView(projectManager.getProject(categoryTitle, projectNumber));
+				consolePrint.singleCategorysProjectsView(projectManager.getProject(categoryTitle, projectNumber));
                 consolePrint.posobilitiesInfirm();
             	int selectedAction = UserConsoleInputReader.read();
             	int payChoise = 200;

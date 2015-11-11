@@ -11,16 +11,25 @@ public class ProjectManager {
 	ProjectDB pdb = new ProjectDB();
 
 	public Map<Integer, Project> getProjectsForCategory(String categoryTitle) {
-		return pdb.allProjectsList.get(categoryTitle);
+		Map<Integer, Project> allProjects = pdb.allProjectsList;
+		Map<Integer, Project> categoryProjects = new HashMap<>();
+		for (Project p : allProjects.values()) {
+			if (p.getCategoryName().equals(categoryTitle)) {
+				categoryProjects.put(p.getId(), p);
+			}
+		}
+		return categoryProjects;
 
 	}
 
-	public Map<Integer, Project> getProject(String categoryTitle, int projectNumber) {
-		Map<Integer, Project> list = new HashMap<>();
-		Project p = pdb.allProjectsList.get(categoryTitle).get(projectNumber);
-		list.put(0, p);
-		return list;
+	public  Project getProject(String categoryTitle, int projectNumber) {
+		Map<Integer, Project> requiredCategoryProjects = getProjectsForCategory(categoryTitle);
+    	Project p = requiredCategoryProjects.get(projectNumber);
+    	Map<Integer, Project> singleRequredProjectList = getProjectsForCategory(categoryTitle);
+    	singleRequredProjectList.put(0, p);
+		return p;
 
 	}
 
 }
+

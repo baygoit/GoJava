@@ -9,13 +9,13 @@ public class CategoryDB {
 
 	public CategoryDB() {
 
-		categorylist = listFiller();
+		categorylist = fillList();
 
 	}
 
 	public List<Category> categorylist = new ArrayList<>();
 
-	private List<Category> listFiller() {
+	private List<Category> fillList() {
 		List<Category> categorylist = new ArrayList<>();
 		categorylist.add(new Category("it", 1));
 		categorylist.add(new Category("it", 1));
