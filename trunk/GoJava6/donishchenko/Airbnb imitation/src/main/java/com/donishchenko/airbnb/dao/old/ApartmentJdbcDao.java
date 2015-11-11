@@ -1,5 +1,6 @@
-package com.donishchenko.airbnb.dao;
+package com.donishchenko.airbnb.dao.old;
 
+import com.donishchenko.airbnb.dao.ApartmentDao;
 import com.donishchenko.airbnb.dbutils.JdbcUtils;
 import com.donishchenko.airbnb.dbutils.QueryBuilder;
 import com.donishchenko.airbnb.model.Apartment;
@@ -9,7 +10,7 @@ import java.sql.*;
 import java.util.LinkedList;
 import java.util.List;
 
-public class JdbcApartmentDao implements ApartmentDao {
+public class ApartmentJdbcDao implements ApartmentDao {
     private static final String saveApartmentQuery =
             "INSERT INTO apartment VALUES(null, ?, ?, ?, ?)";
 

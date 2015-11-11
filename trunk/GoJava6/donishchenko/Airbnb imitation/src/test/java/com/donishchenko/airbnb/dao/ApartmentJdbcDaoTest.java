@@ -1,5 +1,7 @@
 package com.donishchenko.airbnb.dao;
 
+import com.donishchenko.airbnb.dao.old.ApartmentJdbcDao;
+import com.donishchenko.airbnb.dao.old.UserJdbcDao;
 import com.donishchenko.airbnb.model.Apartment;
 import com.donishchenko.airbnb.model.ApartmentType;
 import com.donishchenko.airbnb.model.User;
@@ -12,10 +14,10 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
-public class JdbcApartmentDaoTest {
+public class ApartmentJdbcDaoTest {
 
-    private ApartmentDao apartmentDao = new JdbcApartmentDao();
-    private static UserDao userDao = new JdbcUserDao();
+    private ApartmentDao apartmentDao = new ApartmentJdbcDao();
+    private static UserDao userDao = new UserJdbcDao();
     private static User user = new User("Dmitry", "Onishchenko", "sacr8tum@gmail.com", true);
     private static Apartment apartment;
 

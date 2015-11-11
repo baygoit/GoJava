@@ -1,5 +1,6 @@
-package com.donishchenko.airbnb.dao;
+package com.donishchenko.airbnb.dao.old;
 
+import com.donishchenko.airbnb.dao.ReservationDao;
 import com.donishchenko.airbnb.dbutils.JdbcUtils;
 import com.donishchenko.airbnb.dbutils.QueryBuilder;
 import com.donishchenko.airbnb.model.Reservation;
@@ -11,8 +12,8 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
-public class JdbcReservationDao implements ReservationDao {
-    public static final Logger log = LogManager.getLogger(JdbcReservationDao.class.getName());
+public class ReservationJdbcDao implements ReservationDao {
+    public static final Logger log = LogManager.getLogger(ReservationJdbcDao.class.getName());
 
     private static final String saveReservationQuery =
             "INSERT INTO reservation VALUES(null, ?, ?, ?, ?, ?)";

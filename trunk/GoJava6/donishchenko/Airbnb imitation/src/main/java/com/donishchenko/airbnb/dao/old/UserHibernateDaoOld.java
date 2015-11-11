@@ -1,5 +1,6 @@
-package com.donishchenko.airbnb.dao;
+package com.donishchenko.airbnb.dao.old;
 
+import com.donishchenko.airbnb.dao.UserDao;
 import com.donishchenko.airbnb.dbutils.HibernateDbUtils;
 import com.donishchenko.airbnb.dbutils.QueryBuilder;
 import com.donishchenko.airbnb.model.User;
@@ -12,10 +13,10 @@ import java.sql.SQLException;
 import java.util.Collections;
 import java.util.List;
 
-public class HibernateUserDao implements UserDao {
+public class UserHibernateDaoOld implements UserDao {
     private SessionFactory sessionFactory;
 
-    public HibernateUserDao() {
+    public UserHibernateDaoOld() {
         sessionFactory = HibernateDbUtils.getSessionFactory();
     }
 

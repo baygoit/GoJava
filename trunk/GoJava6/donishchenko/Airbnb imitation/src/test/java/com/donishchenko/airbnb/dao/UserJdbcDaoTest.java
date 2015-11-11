@@ -1,14 +1,15 @@
 package com.donishchenko.airbnb.dao;
 
+import com.donishchenko.airbnb.dao.old.UserJdbcDao;
 import com.donishchenko.airbnb.model.User;
 import org.junit.Assert;
 import org.junit.Test;
 
 import java.sql.SQLException;
 
-public class JdbcUserDaoTest extends Assert {
+public class UserJdbcDaoTest extends Assert {
 
-    private UserDao userDao = new JdbcUserDao();
+    private UserDao userDao = new UserJdbcDao();
     private User user = new User("Dmitry", "Onishchenko", "sacr8tum@gmail.com");
 
     @Test
