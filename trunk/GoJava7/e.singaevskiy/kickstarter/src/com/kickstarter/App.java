@@ -10,8 +10,8 @@ public class App {
 	
 	public static void start(){
 		
-		MainPage page = new MainPage();
-		MainPageController controller = new MainPageController(page);
+		MainPage page = new MainPage(System.out);
+		MainPageController controller = new MainPageController(page, System.in);
 		controller.showMainPage();
 		
 	}	

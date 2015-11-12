@@ -30,19 +30,19 @@ public class Project {
 		this.name = name;
 	}
 
-	public Long getGoalSum() {
+	public long getGoalSum() {
 		return goalSum;
 	}
 
-	public void setGoalSum(Long goalSum) {
+	public void setGoalSum(long goalSum) {
 		this.goalSum = goalSum;
 	}
 
-	public Long getBalanceSum() {
+	public long getBalanceSum() {
 		return balanceSum;
 	}
 
-	public void setBalanceSum(Long balanceSum) {
+	public void setBalanceSum(long balanceSum) {
 		this.balanceSum = balanceSum;
 	}
 

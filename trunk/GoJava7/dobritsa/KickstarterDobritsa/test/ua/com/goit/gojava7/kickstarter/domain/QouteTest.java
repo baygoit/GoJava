@@ -3,7 +3,6 @@ package ua.com.goit.gojava7.kickstarter.domain;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
-import org.junit.Before;
 import org.junit.Test;
 
 public class QouteTest {

@@ -19,6 +19,22 @@ public class Payment {
 		return cardId;
 	}
 
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public void setCardId(long cardId) {
+		this.cardId = cardId;
+	}
+
+	public void setSum(long sum) {
+		this.sum = sum;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
 	public long getSum() {
 		return sum;
 	}
