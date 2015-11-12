@@ -34,7 +34,7 @@ public class City {
         return name;
     }
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "city")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "city")
     public List<Image> getImage() {
         return image;
     }
@@ -52,7 +52,6 @@ public class City {
     }
 
     public String imagePath(){
-        return "city/images/";
-                /*+image;*/
+        return "images/city/"+image.get(0).getName();
     }
 }

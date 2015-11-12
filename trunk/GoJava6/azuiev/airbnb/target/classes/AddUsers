@@ -1,7 +1,0 @@
-INSERT INTO `airbnb`.`user` (`name`, `surname`, `email`,`password`) VALUES
-('Ivanov', 'Ivan', 'ivanov@gmail.com','111'),
-('Petrov', 'Maksim', 'petrov@gmail.com','111'),
-('Gusev', 'Andrey', 'gusev@gmail.com','111'),
-('Andreev', 'Oleg', 'andreev@gmail.com','111'),
-('Malik', 'Marina', 'malik@gmail.com','111'),
-('Kravchuk', 'Viktoriia', 'kravchuk@gmail.com','111');

@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.Map;
 
 public class MainController extends HttpServlet {
@@ -49,9 +48,9 @@ public class MainController extends HttpServlet {
 
         /* Registration */
         if ("/registration".equals(path)) {
-            String login = req.getParameter("login");
+            String login    = req.getParameter("login");
             String password = req.getParameter("password");
-            String email = req.getParameter("email");
+            String email    = req.getParameter("email");
 
             User user = new User(login, password, email);
             UserValidator userValidator = new UserValidator();
@@ -70,47 +69,40 @@ public class MainController extends HttpServlet {
 
                 req.getRequestDispatcher(url).forward(req, resp);
             } else {
-                try {
-                    userService.register(user);
-                    HttpSession session = req.getSession();
-                    session.setAttribute("user", user);
-
-                    resp.sendRedirect("/");
-                } catch (SQLException e) {
-                    //TODO handle exception
-                    req.getRequestDispatcher(url).forward(req, resp);
-                    e.printStackTrace();
-                }
-
-            }
-        }
-        /* Login */
-        else if ("/login".equals(path)) {
-            String login = req.getParameter("login");
-            String password = req.getParameter("password");
-
-            User user = userService.login(login, password);
-            if (user != null) {
+                userService.register(user);
                 HttpSession session = req.getSession();
                 session.setAttribute("user", user);
 
                 resp.sendRedirect("/");
-            } else {
+            }
+        }
+        /* Login */
+        else if ("/login".equals(path)) {
+            String login    = req.getParameter("login");
+            String password = req.getParameter("password");
+
+            User user = userService.login(login, password);
+            if (user == null) {
                 req.setAttribute("loginError", "Invalid login or password");
 
                 req.getRequestDispatcher(url).forward(req, resp);
+            } else {
+                HttpSession session = req.getSession();
+                session.setAttribute("user", user);
+
+                resp.sendRedirect("/");
             }
         }
         /* Profile */
         else if ("/profile".equals(path)) {
-            String name = req.getParameter("name");
-            String surname = req.getParameter("surname");
-            String email = req.getParameter("email");
+            String email    = req.getParameter("email");
+            String name     = req.getParameter("name");
+            String surname  = req.getParameter("surname");
 
             UserValidator userValidator = new UserValidator();
+            userValidator.validateEmail(email);
             userValidator.validateName(name);
             userValidator.validateSurname(surname);
-            userValidator.validateEmail(email);
 
             if (userValidator.hasErrors()) {
                 Map<String, String> errors = userValidator.getErrors();
@@ -122,14 +114,15 @@ public class MainController extends HttpServlet {
             } else {
                 HttpSession session = req.getSession();
 
+                //TODO maybe save old values if fail update
                 User user = (User) session.getAttribute("user");
+                user.setEmail(email);
                 user.setName(name);
                 user.setSurname(surname);
-                user.setEmail(email);
 
-                userService.updateUser(user.getId(), user);
+                userService.updateUser(user);
 
-                req.setAttribute("success", "Successfully");
+                req.setAttribute("updateMessage", "Successfully");
 
                 req.getRequestDispatcher(url).forward(req, resp);
             }

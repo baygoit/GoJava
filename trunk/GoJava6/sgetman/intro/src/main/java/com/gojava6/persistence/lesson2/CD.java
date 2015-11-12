@@ -10,7 +10,7 @@ import javax.persistence.Id;
  *         http://www.antoniogoncalves.org
  *         --
  */
-@Entity
+/*@Entity*/
 public class CD {
 
   // ======================================

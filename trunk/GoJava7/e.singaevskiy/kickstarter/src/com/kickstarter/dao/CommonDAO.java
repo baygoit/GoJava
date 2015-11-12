@@ -23,7 +23,4 @@ public abstract class CommonDAO<T> {
 		dataSource.add(element);
 	}
 
-	public void remove(T element) {
-		dataSource.remove(element);
-	}
 }

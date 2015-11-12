@@ -2,95 +2,73 @@ package com.azuiev.model;
 
 import com.azuiev.AirBnB;
 import com.azuiev.enums.ApartType;
-import com.azuiev.Validator;
-import com.azuiev.service.UserService;
-
 import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
- * Created by Lera on 23.09.2015.
+ * Created by Masta on 23.09.2015.
  */
+//TODO hibernate
 public class Apartment implements Comparable<Apartment> {
-    private static Set<Apartment> apartments = new TreeSet<Apartment>();
-    private static Set<String> cities = new TreeSet<String>();
-    private User owner;
-    private String city;
-    private String address;
     private Long id;
-
+    private String address;
     private ApartType apartType;
+    private City city;
+    private User owner;
+    private List<Reservation> reservations = new ArrayList<Reservation>();
 
-    List<Reservation> reservations = new LinkedList<Reservation>();
+    //constructor
+    public Apartment() {
+    }
 
+    public Apartment(String address, ApartType apartType, City city, User user) {
+
+    }
+
+    //getters and setters
     public Long getId() {
         return id;
     }
-
-    public static Apartment registerBook(User owner, String city, String address, ApartType apartType) {
-
-        Apartment apartment = new Apartment(owner, city, address, apartType);
-
-        Validator v = Validator.getInstance();
-
-        if (!v.validateApartment(apartment)) {
-            AirBnB.log.error("failed to create - " + apartment);
-        } else {
-            AirBnB.log.info("successfully created - " + apartment);
-            if (apartments.add(apartment)) {
-                AirBnB.log.info("added into listBooks - " + apartment);
-            } else {
-                AirBnB.log.error("already in listBooks - " + apartment);
-            }
-            if (!cities.contains(city)){
-                cities.add(city);
-                AirBnB.log.info("added new city - " + city);
-                AirBnB.sportLife.cityAdded(city);
-
-            }
-            return apartment;
-        }
-        return null;
-    }
-    public Apartment(Long id, Long userId, String city, String address, ApartType apartType) {
-        UserService userService = new UserService();
-        this.owner = userService.getById(userId);
-        this.city = city;
-        this.address = address;
-        this.apartType = apartType;
+    public void setId(Long id) {
         this.id = id;
-    }
-    public Apartment(User owner, String city, String address, ApartType apartType) {
-        this.owner = owner;
-        this.city = city;
-        this.address = address;
-        this.apartType = apartType;
-    }
-
-    public static Set<Apartment> getApartments() {
-        return apartments;
     }
 
     public String getAddress() {
         return address;
     }
-
     public void setAddress(String address) {
         this.address = address;
-    }
-
-    public String getCity() {
-        return city;
     }
 
     public ApartType getApartType() {
         return apartType;
     }
-
     public void setApartType(ApartType apartType) {
         this.apartType = apartType;
     }
 
+    public City getCity() {
+        return city;
+    }
+    public void setCity(City city) {
+        this.city = city;
+    }
+
+    public User getOwner() {
+        return owner;
+    }
+    public void setOwner(User owner) {
+        this.owner = owner;
+    }
+
+    public List<Reservation> getReservations() {
+        return reservations;
+    }
+    public void setReservations(List<Reservation> reservations) {
+        this.reservations = reservations;
+    }
+
+    //other methods
     public boolean reserveApartment(User user, Date start, Date end) {
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd G 'at' HH:mm:ss z");
@@ -124,7 +102,6 @@ public class Apartment implements Comparable<Apartment> {
 
     @Override
     public int compareTo(Apartment o) {
-        return city.compareTo(o.getCity()) * 100 + address.compareTo(o.getAddress());
+        return city.getName().compareTo(o.getCity().getName()) * 100 + address.compareTo(o.getAddress());
     }
-
 }

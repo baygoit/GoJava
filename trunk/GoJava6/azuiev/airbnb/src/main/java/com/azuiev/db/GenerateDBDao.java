@@ -63,7 +63,7 @@ public class GenerateDBDao implements DBDao {
         list.add("AddRole");
         list.add("AddApartment");
         list.add("AddReservations");
-       // list.add("AddCityImages");
+        list.add("AddCityImages");
 
 
         for (String fileName : list) {

@@ -69,9 +69,9 @@ public class User implements Observer {
         }
     }
 
-    public Apartment registerBook(String city, String address, ApartType apartType) {
+    public Apartment registerBook(City city, String address, ApartType apartType) {
         if (hasRole(UserRoles.HOST)) {
-            return Apartment.registerBook(this, city, address, apartType);
+            return new Apartment(address, apartType, city, this);
         } else {
             AirBnB.log.error("User: " + this + "has`t role " + UserRoles.HOST);
             return null;
