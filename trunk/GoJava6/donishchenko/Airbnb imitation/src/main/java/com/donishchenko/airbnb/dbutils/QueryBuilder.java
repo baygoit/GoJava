@@ -15,12 +15,21 @@ public class QueryBuilder {
 
     public void parseSql(Object[] params) {
         if (params.length != 0) {
+            if (params.length % 2 != 0) {
+                throw new IllegalArgumentException("An odd number of arguments");
+            }
+
             StringBuilder builder = new StringBuilder(initialQuery);
 
             builder.append(" WHERE ");
-            for (int i = 0; i < params.length; i += 2) {
+            for (int i = 0; i < params.length; ) {
                 builder.append(params[i]).append(" = ?");
                 values.add(params[i+1]);
+
+                i += 2;
+                if (i < params.length) {
+                    builder.append(" AND ");
+                }
             }
 
             query = builder.toString();

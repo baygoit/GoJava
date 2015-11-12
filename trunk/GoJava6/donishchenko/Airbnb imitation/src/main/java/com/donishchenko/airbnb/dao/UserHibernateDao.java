@@ -31,7 +31,7 @@ public class UserHibernateDao implements UserDao {
 
     @Override
     public User getByLoginPassword(String login, String password) {
-        return (User) defaultDao.getUniqueResult(login, password);
+        return (User) defaultDao.getUniqueResult("login", login, "password", password);
     }
 
     @Override
@@ -41,11 +41,11 @@ public class UserHibernateDao implements UserDao {
 
     @Override
     public List<User> getAllClients() {
-        return defaultDao.getList("isHost", true);
+        return defaultDao.getList("isHost", false);
     }
 
     @Override
     public List<User> getAllHosts() {
-        return defaultDao.getList("isHost", false);
+        return defaultDao.getList("isHost", true);
     }
 }

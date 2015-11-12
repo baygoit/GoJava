@@ -148,7 +148,7 @@ public class ReservationJdbcDao implements ReservationDao {
             PreparedStatement stat = conn.prepareStatement(query);
             int i = 1;
             for (Object value : queryBuilder.values()) {
-                stat.setObject(i, value);
+                stat.setObject(i++, value);
             }
 
             ResultSet result = stat.executeQuery();

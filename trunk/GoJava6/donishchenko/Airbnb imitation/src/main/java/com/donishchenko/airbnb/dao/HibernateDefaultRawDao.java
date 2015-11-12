@@ -24,7 +24,7 @@ public class HibernateDefaultRawDao {
         return sessionFactory;
     }
 
-    public void save(Object entity){
+    public void save(Object entity) {
         Session session = sessionFactory.openSession();
 
         try {
@@ -122,9 +122,9 @@ public class HibernateDefaultRawDao {
         queryBuilder.parseSql(params);
         Query query = session.createQuery(queryBuilder.getQuery());
 
-        int i = 1;
+        int i = 0;
         for (Object value : queryBuilder.values()) {
-            query.setParameter(i, value);
+            query.setParameter(i++, value);
         }
 
         try {
@@ -154,9 +154,9 @@ public class HibernateDefaultRawDao {
         queryBuilder.parseSql(params);
         Query query = session.createQuery(queryBuilder.getQuery());
 
-        int i = 1;
+        int i = 0;
         for (Object value : queryBuilder.values()) {
-            query.setParameter(i, value);
+            query.setParameter(i++, value);
         }
 
         try {
