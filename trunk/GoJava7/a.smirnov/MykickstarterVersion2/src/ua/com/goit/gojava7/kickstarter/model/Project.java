@@ -2,28 +2,27 @@ package ua.com.goit.gojava7.kickstarter.model;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Set;
 import java.util.TimeZone;
+import java.util.TreeSet;
 
 public class Project implements Comparable<Project> {
 	private String title;
 	private String briefDescription;
 	private String fullDescription;
 	private String linkOnVideo;
-	private String question;
-	private String answer;
 	private int requiredAmountOfMoney;
 	private int currentAmountOfMoney;
 	private int expiryDays;
+	private Set<FAQ> faqStorage;
 
-	public Project(String title, String briefDescription, int requiredAmountOfMoney) {
+	public Project(String title, String briefDescription, 
+			int requiredAmountOfMoney) {
+		
 		this.title = title;
 		this.briefDescription = briefDescription;
 		this.requiredAmountOfMoney = requiredAmountOfMoney;
-		
-		this.fullDescription = "";
-		this.linkOnVideo = "";
-		this.question = "";
-		this.answer = "";
+		faqStorage = new TreeSet<>();		
 	}
 
 	public String getTitle() {
@@ -74,22 +73,6 @@ public class Project implements Comparable<Project> {
 		this.linkOnVideo = linkOnVideo;
 	}
 	
-	public String getAnswer() {
-		return answer;
-	}
-	
-	public void addAnswer(String answer) {
-		this.answer = answer;
-	}
-	
-	public String getQuestion() {
-		return question;
-	}
-	
-	public void addQuestion(String question) {
-		this.question = question;
-	}
-	
 	public void setExpiryDays(int day, int month, int year) {
 		expiryDays = getDaysLeft(day, month, year);
 	}
@@ -117,6 +100,20 @@ public class Project implements Comparable<Project> {
 		return (int)days;
 	}
 
+	public String getQuestion() {
+		StringBuilder result = new StringBuilder();
+		for (FAQ faq : faqStorage) {
+			result.
+				append(faq.getQuestion());
+		}
+		return result.toString();
+	}
+	
+	public void addQuestion(String question) {
+		FAQ faq = new FAQ(question);
+		faqStorage.add(faq);
+	}
+	
 	@Override
 	public int compareTo(Project that) {
 		return this.getTitle().compareTo(that.getTitle());

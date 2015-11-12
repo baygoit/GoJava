@@ -18,19 +18,55 @@ public class Kickstarter {
 
 	public void start() throws NumberFormatException, IOException {
 		consolePrinter.println(quoteStorage.getRandomQuote());
-		consolePrinter.println(categoryStorage);
-		consolePrinter.println("Chose the category");
-		
-		int numberOfSelectedCategory = consoleReader.getNumberFromConsole();
-		consolePrinter.println(categoryStorage.getCategory(numberOfSelectedCategory));
-		consolePrinter.println(categoryStorage, numberOfSelectedCategory);
-		
-		int numberOfselectedProject = consoleReader.getNumberFromConsole();
-		consolePrinter.println(categoryStorage.getCategory(
-				numberOfSelectedCategory).getProject(numberOfselectedProject));
+		boolean stopWhile = true;
+		do {
+			consolePrinter.println(categoryStorage);
+			consolePrinter.println("Chose the category");
+
+			int numberOfSelectedCategory = consoleReader.getNumberFromConsole();
+			do {
+				try {
+					consolePrinter.println(categoryStorage.getCategory(numberOfSelectedCategory));
+				} catch (ArrayIndexOutOfBoundsException e) {
+					System.out.println("there is no such category!");
+					break;
+				} catch (IndexOutOfBoundsException e) {
+					System.out.println("there is no such category!");
+					break;
+				}
+
+				consolePrinter.println(categoryStorage, numberOfSelectedCategory);
+
+				consolePrinter.println("Enter 0 ot see all categories");
+				int numberOfselectedProject = consoleReader.getNumberFromConsole();
+				if (numberOfselectedProject == 0)
+					break;
+				try {
+					consolePrinter.println(
+							categoryStorage.getCategory(numberOfSelectedCategory).getProject(numberOfselectedProject));
+				} catch (ArrayIndexOutOfBoundsException e) {
+					System.out.println("there is no such project!");
+					continue;
+				} catch (IndexOutOfBoundsException e) {
+					System.out.println("there is no such project!");
+					continue;
+				}
+				consolePrinter.println("Enter 0 ot see all projects in this category");
+				int exitProject = consoleReader.getNumberFromConsole();
+				if (exitProject == 0)
+					continue;
+				else {
+					System.out.println("bye");
+					stopWhile = false;
+				}
+
+			} while (stopWhile);
+
+		} while (stopWhile);
+
 	}
 
 	public void stop() throws IOException {
-			consoleReader.closeReader();
+		consoleReader.closeReader();
 	}
 }
