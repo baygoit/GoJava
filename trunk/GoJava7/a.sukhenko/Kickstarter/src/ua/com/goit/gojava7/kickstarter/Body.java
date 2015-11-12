@@ -23,7 +23,7 @@ public class Body {
 	}
 
 	public void generateBody() {
-		Project first = kickstarter.getProjectById(0);
+		Project first = kickstarter.getProjectManager().getProjectById(0);
 		generateProjectInfo(first);
 	}
 
