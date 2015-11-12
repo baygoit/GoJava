@@ -6,7 +6,7 @@ import static org.junit.Assert.assertThat;
 import org.junit.Test;
 
 import ua.com.goit.gojava7.kickstarter.Printer;
-import ua.com.goit.gojava7.kickstarter.storage.QuteHolder;
+import ua.com.goit.gojava7.kickstarter.storage.QuoteHolder;
 
 
 
@@ -14,7 +14,7 @@ public class QuoteHolderTest {
 
 	
 	Printer p = new Printer();
-	QuteHolder qh = new QuteHolder();
+	QuoteHolder qh = new QuoteHolder();
 	
 	@Test
 	public void getQuoteTest() {

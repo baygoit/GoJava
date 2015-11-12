@@ -8,8 +8,6 @@ import ua.com.goit.gojava7.kickstarter.model.Project;
 import ua.com.goit.gojava7.kickstarter.storage.CategoryStorage;
 import ua.com.goit.gojava7.kickstarter.storage.PayersDataBase;
 
-
-
 public class PaymentSystem {
 
 	PayersDataBase pdb = new PayersDataBase();
@@ -43,8 +41,8 @@ public class PaymentSystem {
 
 	public String acceptPayerName() {
 		Printer.payerNameGet();
-		String holderName = UserInputReader.readString();
-		return holderName;
+
+		return UserInputReader.readString();
 
 	}
 

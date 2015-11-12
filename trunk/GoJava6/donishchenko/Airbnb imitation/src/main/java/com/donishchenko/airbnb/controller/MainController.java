@@ -127,7 +127,7 @@ public class MainController extends HttpServlet {
                 user.setSurname(surname);
                 user.setEmail(email);
 
-                userService.updateUser(user.getId(), user);
+                userService.updateUser(user);
 
                 req.setAttribute("success", "Successfully");
 
