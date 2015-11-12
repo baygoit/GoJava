@@ -21,7 +21,8 @@ public class Kickstarter {
 	private Integer selectedProject = null;
 	private List<Category> categories;
 	private String BORDER = "\n________________________________________________________";
-	private int shiftOne = 1;
+	private int SHIFT_ONE = 1;
+	private int FIRST = 0;
 
 	public Kickstarter(ConsolePrinter consolePrinter, ConsoleInspector consoleInspector, QuoteStorage quoteStorage,
 			CategoryStorage categoryStorage) {
@@ -46,7 +47,7 @@ public class Kickstarter {
 		
 		consolePrinter.printCategories(categories);
 		consolePrinter.print("\nChoose a category by number (0 for exit): ");
-		selectedCategory = consoleInspector.getCorrectInt(categoryStorage.size());
+		selectedCategory = consoleInspector.getCorrectInt(FIRST, categoryStorage.size());
 		if (selectedCategory == 0) {
 			consoleInspector.close();
 			consolePrinter.print("See you soon!");
@@ -58,12 +59,12 @@ public class Kickstarter {
 
 	public Integer chooseProject(Integer selectedCategory) {
 		consolePrinter.print(BORDER);
-		consolePrinter.print("Current category: " + categoryStorage.get(selectedCategory - shiftOne).getName());
-		categoryStorage.get(selectedCategory - shiftOne);
+		consolePrinter.print("Current category: " + categoryStorage.get(selectedCategory - SHIFT_ONE).getName());
+		categoryStorage.get(selectedCategory - SHIFT_ONE);
 		consolePrinter.print("List of projects:");
-		consolePrinter.printProjects(categoryStorage.get(selectedCategory - shiftOne).getAll());
-		consolePrinter.print("\nChoose a project by number (0 to choose another category): ");
-		selectedProject = consoleInspector.getCorrectInt(categoryStorage.get(selectedCategory - shiftOne).size());
+		consolePrinter.printProjects(categoryStorage.get(selectedCategory - SHIFT_ONE).getAll());
+		consolePrinter.print("\nChoose a project by number (first to choose another category): ");
+		selectedProject = consoleInspector.getCorrectInt(FIRST, categoryStorage.get(selectedCategory - SHIFT_ONE).size());
 		if (selectedProject == 0) {
 			chooseProject(chooseCategory());
 		}
@@ -72,14 +73,14 @@ public class Kickstarter {
 
 	private void viewProject(Integer selectedProject) {
 		consolePrinter.print(BORDER);
-		consolePrinter.print("Current category: " + categoryStorage.get(selectedCategory - shiftOne).getName());
+		consolePrinter.print("Current category: " + categoryStorage.get(selectedCategory - SHIFT_ONE).getName());
 		consolePrinter.print("Current project: #" + (selectedProject) + "\n");
 		Project project = new Project();
-		project = categoryStorage.get(selectedCategory - shiftOne).get(selectedProject - shiftOne);
+		project = categoryStorage.get(selectedCategory - SHIFT_ONE).get(selectedProject - SHIFT_ONE);
 		consolePrinter.printFull(project);
 		consolePrinter.print("\nType 0 to choose another project");
 		while (true) {
-			if (consoleInspector.getCorrectInt(0) == 0) {
+			if (consoleInspector.getCorrectInt(FIRST, 0) == 0) {
 				viewProject(chooseProject(selectedCategory));
 			}
 			consolePrinter.print(BORDER);
