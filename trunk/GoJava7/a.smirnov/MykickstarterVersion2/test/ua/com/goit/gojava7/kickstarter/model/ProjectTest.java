@@ -93,17 +93,6 @@ public class ProjectTest {
 	}
 
 	@Test
-	public void testGetAnswer() {
-		assertThat(project1.getAnswer().length(), is(0));
-	}
-
-	@Test
-	public void testAddAnswer() {
-		project1.addAnswer("Hello");
-		assertThat(project1.getAnswer(), is("Hello"));
-	}
-
-	@Test
 	public void testGetQuestion() {
 		assertThat(project1.getQuestion().length(), is(0));
 	}
