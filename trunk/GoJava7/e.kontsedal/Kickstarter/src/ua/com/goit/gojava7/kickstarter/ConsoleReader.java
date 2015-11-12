@@ -10,7 +10,16 @@ public class ConsoleReader {
 
 	public int getNumberFromConsole()
 			throws NumberFormatException, IOException {
-		return Integer.parseInt(reader.readLine());
+		do {
+			String s = reader.readLine();
+			try {
+				return Integer.parseInt(s);	
+			} catch (NumberFormatException e) {
+				System.out.println("Write a number!");
+				continue;
+			}
+		} while (true);
+		
 	}
 
 	public void closeReader() throws IOException {
