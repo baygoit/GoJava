@@ -44,21 +44,20 @@ public class PaymentSystem {
 
 	public String acceptPayerName() {
 		consolePrintView.InputPayersNameInfo();
-		String holderName = UserConsoleInputReader.readString();
-		return holderName;
+		return UserConsoleInputReader.readStringInput();
 
 	}
 
 	public int acceptPayercardId() {
 		consolePrintView.InputCardIdInfo();
-		int cardId = UserConsoleInputReader.read();
+		int cardId = UserConsoleInputReader.readInput();
 		return cardId;
 
 	}
 
 	public int acceptPayment() {
 		consolePrintView.paymentSizeInfo();
-		int payment = UserConsoleInputReader.read();
+		int payment = UserConsoleInputReader.readInput();
 		return payment;
 	}
 
