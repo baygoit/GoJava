@@ -3,11 +3,9 @@ package ua.com.goit.gojava7.kickstarter.storage;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 
-import org.hamcrest.core.IsNot;
 import org.junit.Before;
 import org.junit.Test;
 
-import ua.com.goit.gojava7.kickstarter.storage.CategoryStorage;
 import ua.com.goit.gojava7.kickstarter.storage.QuoteStorage;
 import ua.com.goit.gojava7.kickstarter.domain.Quote;
 
