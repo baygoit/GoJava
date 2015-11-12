@@ -6,7 +6,7 @@ import java.util.List;
 
 import ua.com.goit.gojava7.kickstarter.domain.Category;
 
-public class CategoryStorage {
+public class CategoryStorage implements Storage {
 
 	private List<Category> categories = new ArrayList<Category>();
 
@@ -22,7 +22,9 @@ public class CategoryStorage {
 		return categories.get(index);
 	}
 
+	@Override
 	public int size() {
 		return categories.size();
 	}
+	
 }

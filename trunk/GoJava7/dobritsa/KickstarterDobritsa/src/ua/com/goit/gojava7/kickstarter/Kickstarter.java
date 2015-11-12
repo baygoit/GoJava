@@ -43,6 +43,7 @@ public class Kickstarter {
 	public Integer chooseCategory() {
 		consolePrinter.print(BORDER);
 		consolePrinter.print("\nList of categories:");
+		
 		consolePrinter.printCategories(categories);
 		consolePrinter.print("\nChoose a category by number (0 for exit): ");
 		selectedCategory = consoleInspector.getCorrectInt(categoryStorage.size());

@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class Category {
+import ua.com.goit.gojava7.kickstarter.storage.Storage;
+
+public class Category implements Storage {
 
 	private String name;
 	private List<Project> projects = new ArrayList<Project>();
@@ -29,6 +31,7 @@ public class Category {
 		return projects.get(index);
 	}
 
+	@Override
 	public int size() {
 		return projects.size();
 	}
