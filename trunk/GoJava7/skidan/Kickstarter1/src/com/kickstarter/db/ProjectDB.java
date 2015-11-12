@@ -8,50 +8,41 @@ import com.kickstarter.model.Project;
 public class ProjectDB {
 
 	public ProjectDB() {
-		allProjectsList.put("education", educationProjectsFiller());
-		allProjectsList.put("sport", sportProjectsFiller());
-		allProjectsList.put("it", itProjectsFiller());
-
+		allProjectsList = ProjectsFiller();
 	}
 
-	public Map<String, Map<Integer, Project>> allProjectsList = new HashMap<>();
+	public Map<Integer, Project> allProjectsList = new HashMap<>();
 
-	public static Map<Integer, Project> educationProjectsFiller() {
-		Map<Integer, Project> educationProjects = new HashMap<>();
-		educationProjects.put(1, new Project("educationProjec1", "discription1", 10, 10500, 8300, "Project History ",
-				"www.videolink.com", "Ask questions section"));
-		educationProjects.put(2, new Project("educationProjec2", "discription1", 10, 10500, 8300, "Project History ",
-				"www.videolink.com", "Ask questions section"));
-		educationProjects.put(3, new Project("educationProjec3", "discription1", 10, 10500, 8300, "Project History ",
-				"www.videolink.com", "Ask questions section"));
-		educationProjects.put(4, new Project("educationProjec4", "discription1", 10, 10500, 8300, "Project History ",
-				"www.videolink.com", "Ask questions section"));
-		return educationProjects;
-	}
+	public static Map<Integer, Project> ProjectsFiller() {
+		
+		Map<Integer, Project> allProjects = new HashMap<>();
+		
+		allProjects.put(1, new Project(1, "educationProjec1", "discription1", 10, 10500, 8300, "Project History ",
+				"www.videolink.com", "Ask questions section", "education"));
+		allProjects.put(2, new Project(2, "educationProjec2", "discription1", 10, 10500, 8300, "Project History ",
+				"www.videolink.com", "Ask questions section", "education"));
+		allProjects.put(3, new Project(3, "educationProjec3", "discription1", 10, 10500, 8300, "Project History ",
+				"www.videolink.com", "Ask questions section", "education"));
+		allProjects.put(4, new Project(4, "educationProjec4", "discription1", 10, 10500, 8300, "Project History ",
+				"www.videolink.com", "Ask questions section", "education"));
 
-	public static Map<Integer, Project> itProjectsFiller() {
-		Map<Integer, Project> itProjects = new HashMap<>();
-		itProjects.put(1, new Project("itproject1", "discription1", 10, 10500, 8300, "Project History ",
-				"www.videolink.com", "Ask questions section"));
-		itProjects.put(2, new Project("itproject2", "discription1", 10, 10500, 8300, "Project History ",
-				"www.videolink.com", "Ask questions section"));
-		itProjects.put(3, new Project("itproject2", "discription1", 10, 10500, 8300, "Project History ",
-				"www.videolink.com", "Ask questions section"));
-		itProjects.put(4, new Project("itproject4", "discription1", 10, 10500, 8300, "Project History ",
-				"www.videolink.com", "Ask questions section"));
-		return itProjects;
-	}
+		allProjects.put(5, new Project(1, "itproject1", "discription1", 10, 10500, 8300, "Project History ",
+				"www.videolink.com", "Ask questions section", "it"));
+		allProjects.put(6, new Project(2, "itproject2", "discription1", 10, 10500, 8300, "Project History ",
+				"www.videolink.com", "Ask questions section", "it"));
+		allProjects.put(7, new Project(3, "itproject3", "discription1", 10, 10500, 8300, "Project History ",
+				"www.videolink.com", "Ask questions section", "it"));
+		allProjects.put(8, new Project(4, "itproject4", "discription1", 10, 10500, 8300, "Project History ",
+				"www.videolink.com", "Ask questions section", "it"));
 
-	public static Map<Integer, Project> sportProjectsFiller() {
-		Map<Integer, Project> sportProjects = new HashMap<>();
-		sportProjects.put(1, new Project("sportProjec1", "discription1", 10, 10500, 8300, "Project History ",
-				"www.videolink.com", "Ask questions section"));
-		sportProjects.put(2, new Project("sportProjec2", "discription1", 10, 10500, 8300, "Project History ",
-				"www.videolink.com", "Ask questions section"));
-		sportProjects.put(3, new Project("sportProjec3", "discription1", 10, 10500, 8300, "Project History ",
-				"www.videolink.com", "Ask questions section"));
-		sportProjects.put(4, new Project("sportProjec4", "discription1", 10, 10500, 8300, "Project History ",
-				"www.videolink.com", "Ask questions section"));
-		return sportProjects;
+		allProjects.put(9, new Project(1, "sportProjec1", "discription1", 10, 10500, 8300, "Project History ",
+				"www.videolink.com", "Ask questions section", "sport"));
+		allProjects.put(10, new Project(2, "sportProjec2", "discription1", 10, 10500, 8300, "Project History ",
+				"www.videolink.com", "Ask questions section", "sport"));
+		allProjects.put(11, new Project(3, "sportProjec3", "discription1", 10, 10500, 8300, "Project History ",
+				"www.videolink.com", "Ask questions section", "sport"));
+		allProjects.put(12, new Project(4, "sportProjec4", "discription1", 10, 10500, 8300, "Project History ",
+				"www.videolink.com", "Ask questions section", "sport"));
+		return allProjects;
 	}
 }

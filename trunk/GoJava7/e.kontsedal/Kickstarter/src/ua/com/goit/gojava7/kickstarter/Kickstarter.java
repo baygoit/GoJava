@@ -30,11 +30,7 @@ public class Kickstarter {
 				numberOfSelectedCategory).getProject(numberOfselectedProject));
 	}
 
-	public void stop() {
-		try {
+	public void stop() throws IOException {
 			consoleReader.closeReader();
-		} catch (IOException e) {
-			System.out.println("wtf?");
-		}
 	}
 }

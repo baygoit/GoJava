@@ -12,11 +12,10 @@ public class KickstarterRunner {
 		QuoteStorage quoteStorage = initQuotes();
 		CategoryStorage categoryStorage = initCategiries();
 		initProjects(categoryStorage);
-		
+
 		Kickstarter kickstarter = new Kickstarter(consoleReader, consolePrinter, quoteStorage, categoryStorage);
 		kickstarter.start();
 		kickstarter.stop();
-
 	}
 
 	private static QuoteStorage initQuotes() {
@@ -30,17 +29,19 @@ public class KickstarterRunner {
 		quoteStorage.setQuote("Innovation distinguishes between a leader and a follower. Steve Jobs.");
 		return quoteStorage;
 	}
+
 	private static CategoryStorage initCategiries() {
 		CategoryStorage categoryStorage = new CategoryStorage();
 		categoryStorage.setCategory("Movie");
 		categoryStorage.setCategory("Art");
 		categoryStorage.setCategory("Food");
-		
+
 		return categoryStorage;
 	}
+
 	private static void initProjects(CategoryStorage categoryStorage) {
-		categoryStorage.getCategory(1).setProject(new Project("THE BOONDOCK SAINTS",
-				"The Boondock Saints is a 1999 American crime film written and directed by Troy Duffy",
-				1000000, 180));
+		Project boondockSaints = new Project("THE BOONDOCK SAINTS",
+				"The Boondock Saints is a 1999 American crime film written and directed by Troy Duffy", 1000000, 180);
+		categoryStorage.getCategory(1).setProject(boondockSaints);
 	}
 }

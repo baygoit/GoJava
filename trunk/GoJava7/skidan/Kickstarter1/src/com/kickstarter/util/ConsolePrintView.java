@@ -10,19 +10,23 @@ import com.kickstarter.model.Project;
 public class ConsolePrintView {
 
 	public void allCategoriesView(List<Category> list) {
+		// int i = 1;
+		// list.forEach((category)->System.out.println(i++ + "\t->" +
+		// list.get(i)));
+
 		for (int i = 1; i < list.size(); i++) {
 			System.out.println(i + "\t->" + list.get(i));
 		}
 	}
 
 	public void categorySelectionInform() {
-		System.out.println("\n" + "Please choose category you'd like to see: ");
+		System.out.println("\nPlease choose category you'd like to see: ");
 	}
 
-	public void selectedCategoryInformer(Category selectedCategory) {
+	public void selectedCategoryInformer(String title) {
 		try {
 
-			System.out.println("You have choosen " + selectedCategory.getTitle() + "\n");
+			System.out.println("You have choosen " + title + "\n");
 		} catch (Exception e) {
 			System.out.println("There is no such number of Category available");
 			Kickstarter.categorySelector();
@@ -80,5 +84,21 @@ public class ConsolePrintView {
 
 	public void paymentSizeInfo() {
 		System.out.println("Please input amount of payment : ");
+	}
+
+	public void singleCategorysProjectsView(Project p) {
+		System.out.println("\nProject Title : " + p.getTitle() + "\n Project Discription :" + p.getDiscription()
+				+ "\n Project History : " + p.getProjectHistory() + "\n Video Link : " + p.getVideoLink()
+				+ "\n Required Sum :" + p.getRequiredSum() + "\n Gained Sum :" + p.getGainedSum() + "\n Days Left :"
+				+ p.getDaysLeft() + "\n");
+	}
+
+	public void viewSelectedCategoryProjects(Map<Integer, Project> projectList) {
+		int i = 1;
+		for (Project p : projectList.values()) {
+			System.out.println("Press " + i + " to select -> " + p.getTitle());
+			i++;
+		}
+
 	}
 }
