@@ -22,7 +22,7 @@ public class CategoryStorage {
 		return categories.get(index);
 	}
 
-	public Integer size() {
+	public int size() {
 		return categories.size();
 	}
 }

@@ -19,7 +19,7 @@ public class QuoteStorage {
 		return quotes.get(randomNumber);
 	}
 	
-	public Integer size() {
+	public int size() {
 		return quotes.size();		
 	}
 	

@@ -29,7 +29,7 @@ public class Category {
 		return projects.get(index);
 	}
 
-	public Integer size() {
+	public int size() {
 		return projects.size();
 	}
 }
