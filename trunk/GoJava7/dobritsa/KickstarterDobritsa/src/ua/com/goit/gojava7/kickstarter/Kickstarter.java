@@ -61,7 +61,7 @@ public class Kickstarter {
 		consolePrinter.print("Current category: " + categoryStorage.get(selectedCategory - shiftOne).getName());
 		categoryStorage.get(selectedCategory - shiftOne);
 		consolePrinter.print("List of projects:");
-		consolePrinter.printProjects(categoryStorage.get(selectedCategory - shiftOne).get());
+		consolePrinter.printProjects(categoryStorage.get(selectedCategory - shiftOne).getAll());
 		consolePrinter.print("\nChoose a project by number (0 to choose another category): ");
 		selectedProject = consoleInspector.getCorrectInt(categoryStorage.get(selectedCategory - shiftOne).size());
 		if (selectedProject == 0) {
