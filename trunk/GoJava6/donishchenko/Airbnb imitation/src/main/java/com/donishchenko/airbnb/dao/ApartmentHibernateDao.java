@@ -1,5 +1,6 @@
 package com.donishchenko.airbnb.dao;
 
+import com.donishchenko.airbnb.dbutils.HibernateDefaultRawDao;
 import com.donishchenko.airbnb.model.Apartment;
 
 import java.util.List;

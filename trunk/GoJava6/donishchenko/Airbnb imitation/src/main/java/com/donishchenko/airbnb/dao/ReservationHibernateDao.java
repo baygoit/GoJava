@@ -1,5 +1,6 @@
 package com.donishchenko.airbnb.dao;
 
+import com.donishchenko.airbnb.dbutils.HibernateDefaultRawDao;
 import com.donishchenko.airbnb.model.Reservation;
 
 import java.util.Date;
