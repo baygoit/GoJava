@@ -16,6 +16,7 @@ public class Main {
     persistBook(new Book(5044L, "H2G2", "Best IT Scifi Book", 12.5f, "1234-5678-5678", 247));
 
     Book book = findBook(5044L);
+    findBook(5044L);
 
     System.out.println("# " + book);
   }

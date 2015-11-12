@@ -9,7 +9,6 @@ import ua.com.goit.gojava7.kickstarter.model.Project;
 import ua.com.goit.gojava7.kickstarter.storage.CategoriesStorage;
 import ua.com.goit.gojava7.kickstarter.storage.PaymentStorage;
 import ua.com.goit.gojava7.kickstarter.storage.QuotesStorage;
-import ua.com.goit.gojava7.kickstarter.storage.UserStorage;
 import ua.com.goit.gojava7.kickstarter.view.ConsolePrinter;
 import ua.com.goit.gojava7.kickstarter.view.ConsoleScanner;
 
@@ -17,15 +16,15 @@ public class Kickstarter {
 
 	private static final String SEPARATOR = "**********************************************************************";
 	private static final String MOVE_TO_THE_NEXT_LINE = "\n";
-	ConsolePrinter consolePrinter;
-	ConsoleScanner consoleScanner;
-	CategoriesStorage categoriesStorage;
-	QuotesStorage quotesStorage;
-	UserStorage userStorage;
-	PaymentStorage paymentStorage;
+	private ConsolePrinter consolePrinter;
+	private ConsoleScanner consoleScanner;
+	private CategoriesStorage categoriesStorage;
+	private QuotesStorage quotesStorage;
+	private PaymentStorage paymentStorage;
 
 	public Kickstarter(ConsoleScanner consoleScanner, ConsolePrinter consolePrinter,
 			CategoriesStorage categoriesStorage, QuotesStorage quotesStorage, PaymentStorage paymentStorage) {
+		
 		this.consoleScanner = consoleScanner;
 		this.consolePrinter = consolePrinter;
 		this.categoriesStorage = categoriesStorage;
@@ -34,19 +33,15 @@ public class Kickstarter {
 	}
 
 	public void start() {
-		
 		consolePrinter.print(quotesStorage.getRandomQuote());
-		
 		selectCategory();
-		
-		
 	}
 	
 	protected void selectCategory() {
 		Set<Category> AllCategories = categoriesStorage.getAllCategories();
+		int amountOfCategories = AllCategories.size();
 		
 		Category selectedCategory = null;
-		int amountOfCategories = AllCategories.size();
 		int numberOfSelectedCategory;
 		boolean userChoise = true;
 		
@@ -62,10 +57,11 @@ public class Kickstarter {
 				continue;
 				
 			} else if (numberOfSelectedCategory != 0) {
-				consolePrinter.print("You selected category number " + numberOfSelectedCategory);
+				consolePrinter.print("You selected category number : " + numberOfSelectedCategory);
 				selectedCategory = getSelectedCategory(numberOfSelectedCategory, AllCategories);
 				consolePrinter.print(selectedCategory);
-				consolePrinter.print("");
+				consolePrinter.print(SEPARATOR);
+				
 				selectProjects(selectedCategory);
 				
 			} else {
@@ -79,39 +75,46 @@ public class Kickstarter {
 
 	protected void selectProjects(Category category) {
 		Set<Project> AllProjectsFromCategory = category.getAllProjectsFromCategory();
-		Project selectedProject = null;
 		int amountOfPrjects = AllProjectsFromCategory.size();
-		int numberOfSelectedProject;
-		boolean userChoise = true;
 		
-		do {
-			consolePrinter.printProjects(AllProjectsFromCategory);
+		int numberOfSelectedProject;
+		
+		if (amountOfPrjects == 0) {
+			consolePrinter.print("There is no any project in selected category.");
 			consolePrinter.print(SEPARATOR);
-			consolePrinter.print("Please select project (0 - back to list of categories): ");
-			
-			numberOfSelectedProject = consoleScanner.getInt();
-
-			if (numberOfSelectedProject < 0 || numberOfSelectedProject > amountOfPrjects) {
-				consolePrinter.print("Please, enter the number between 0 and " + amountOfPrjects);
+			numberOfSelectedProject = 0;
+		} else {
+			Project selectedProject = null;
+			boolean userChoise = true;
+			do {
+				consolePrinter.printProjects(AllProjectsFromCategory, userChoise);
 				consolePrinter.print(SEPARATOR);
-				continue;
+				consolePrinter.print("Please select project (0 for back to categories): ");
 				
-			} else if (numberOfSelectedProject != 0) {
-				consolePrinter.print("You selected project number " + numberOfSelectedProject);
-				selectedProject = getSelectedProject(numberOfSelectedProject, AllProjectsFromCategory);
-				consolePrinter.print(SEPARATOR);
-				consolePrinter.printFullInfoProject(selectedProject);
-				consolePrinter.print(SEPARATOR);
+				numberOfSelectedProject = consoleScanner.getInt();
+	
+				if (numberOfSelectedProject < 0 || numberOfSelectedProject > amountOfPrjects) {
+					consolePrinter.print("Please, enter the number between 0 and " + amountOfPrjects);
+					consolePrinter.print(SEPARATOR);
+					continue;
+					
+				} else if (numberOfSelectedProject != 0) {
+					consolePrinter.print("You selected project number : " + numberOfSelectedProject);
+					selectedProject = getSelectedProject(numberOfSelectedProject, AllProjectsFromCategory);
+					consolePrinter.print(SEPARATOR);
+					consolePrinter.printFullProjectInfo(selectedProject);
+					consolePrinter.print(SEPARATOR);
+					
+					activityInsideSelectedProject(selectedProject);
+							
+				} else {
+					consolePrinter.print("You entered 0. Back to categories.");
+					consolePrinter.print(SEPARATOR);
+					userChoise = false;
+				}
 				
-				activityInsideSelectedProject(selectedProject);
-						
-			} else {
-				consolePrinter.print("You entered 0. Back to categories.");
-				consolePrinter.print(SEPARATOR);
-				userChoise = false;
-			}
-			
-		} while (userChoise);
+			} while (userChoise);
+		}
 
 	}
 	
@@ -132,16 +135,16 @@ public class Kickstarter {
 	}
 	
 	
-	protected Project getSelectedProject(int numberOfSelectedProject, Set<Project> project) {
-		Iterator<Project> projectIterator = project.iterator();
+	protected Project getSelectedProject(int numberOfSelectedProject, Set<Project> projects) {
+		Iterator<Project> projectsIterator = projects.iterator();
 		Project selectedProject = null;
 		int stepsCounter = 0;
-		while (projectIterator.hasNext()) {
+		while (projectsIterator.hasNext()) {
 			stepsCounter ++;
 			if (stepsCounter == numberOfSelectedProject) {
-				selectedProject = projectIterator.next();
+				selectedProject = projectsIterator.next();
 			} else {
-				projectIterator.next();
+				projectsIterator.next();
 			}
 			
 		}
@@ -152,51 +155,64 @@ public class Kickstarter {
 		StringBuilder chooseMenuInProject = new StringBuilder();
 		
 		chooseMenuInProject.
-			append("Please select : ").
+			append("Please select (0 for back to projects): ").
 			append(MOVE_TO_THE_NEXT_LINE).
-			append("0 : back to projects of selected category").
+			append("1 : donate money").
 			append(MOVE_TO_THE_NEXT_LINE).
-			append("1 : donate money");
+			append("2 : Ask a question");
 		
 		int choseNumber;
 		do {
 			consolePrinter.print(chooseMenuInProject.toString());
-			
 			choseNumber = consoleScanner.getInt();
 			consolePrinter.print(SEPARATOR);
+			
 			if (choseNumber == 1) {
 				donateMoneyForProject(selectedProject);
 				consolePrinter.print(SEPARATOR);
-			} 
+			}
 			
-		} while (choseNumber != 0);			
+			if (choseNumber == 2) {
+				askQuestion(selectedProject);
+			}
+			
+		} while (choseNumber != 0);
 		
+		consolePrinter.print("You entered 0. Back to projects.");
+		consolePrinter.print(SEPARATOR);
 	}
 	
 	protected void donateMoneyForProject(Project project) {
-		String userName = enterUserName();
-		int cardNumber = enterCreditCardNumber();
-		int donatingSum = enterDonatingSum();
+		String userName = getUserName();
+		int cardNumber = getCreditCardNumber();
+		int donatingSum = getPledgeAmount();
 		
 		consolePrinter.print(SEPARATOR);
 		project.addToCurrentAmountOfMoney(donatingSum);
-		System.out.print(consolePrinter.getBriefInfoProject(project));
+		System.out.print(consolePrinter.getBriefProjectInfo(project));
 		
 		Payment payment = new Payment(userName, donatingSum, cardNumber);
 		paymentStorage.add(payment);	
 	}
 	
-	protected int enterDonatingSum() {
-		int donatingSum;
-		do {
-			consolePrinter.print("Please enter donateing sum : ");
-			donatingSum = consoleScanner.getInt();
-		} while (donatingSum == Integer.MAX_VALUE);
-		
-		return donatingSum;
+	protected void askQuestion(Project project) {
+		String question = getAskingQuestion();
+		consolePrinter.print(SEPARATOR);
+		project.addQuestion(question);
+		consolePrinter.printFullProjectInfo(project);
 	}
 	
-	protected int enterCreditCardNumber() {
+	protected int getPledgeAmount() {
+		int pledgeAmount;
+		do {
+			consolePrinter.print("Please enter donateing sum : ");
+			pledgeAmount = consoleScanner.getInt();
+		} while (pledgeAmount == Integer.MAX_VALUE);
+		
+		return pledgeAmount;
+	}
+	
+	protected int getCreditCardNumber() {
 		int creditCardNumber;
 		do {
 			consolePrinter.print("Please enter you card number : ");
@@ -206,10 +222,16 @@ public class Kickstarter {
 		return creditCardNumber;
 	}
 	
-	protected String enterUserName() {
+	protected String getUserName() {
 		consolePrinter.print("Please enter you name :");
 		String userName = consoleScanner.getString();
 		return userName;
+	}
+	
+	protected String getAskingQuestion() {
+		consolePrinter.print("Please your question :");
+		String question = consoleScanner.getString();
+		return question;
 	}
 	
 	protected void shutdown() {

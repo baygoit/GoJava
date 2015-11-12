@@ -17,7 +17,7 @@ public class KickstarterRunner {
 		CategoriesStorage categoriesStorage = initCategories();
 		PaymentStorage paymentStorage = initPayments();
 		ConsoleScanner consoleScanner = new ConsoleScanner();
-		ConsolePrinter consolePrinter = new ConsolePrinter();
+		ConsolePrinter consolePrinter = new ConsolePrinter(System.out);
 
 		Kickstarter kickstarter = new Kickstarter(consoleScanner, consolePrinter, categoriesStorage, quotesStorage,
 				paymentStorage);
@@ -78,8 +78,6 @@ public class KickstarterRunner {
 				+ "talents through the medium of live theatre, specifically acting, singing, dancing "
 				+ "and music.");
 		project1.addLinkOnVideo("https://d2pq0u4uni88oo.cloudfront.net/projects/2113569/video-592557-h264_high.mp4");
-		project1.addQuestion("I like description of your project. Can you provide more pics?");
-		project1.addAnswer("Yes, We are going to add pics ASAP");
 
 		Project project2 = new Project("Bassel's Street Food", "Super amazing street food from quality ingredients.",
 				45_000);
@@ -91,8 +89,6 @@ public class KickstarterRunner {
 				+ "chicken like the label says? Is there wheat in your gluten-free pizza crust? Our "
 				+ "advanced genomic analysis uncovers it all.");
 		project2.addLinkOnVideo("https://d2pq0u4uni88oo.cloudfront.net/projects/2137323/video-604147-h264_high.mp4");
-		project2.addQuestion("I like description of your project. Can you provide more pics?");
-		project2.addAnswer("Yes, We are going to add pics ASAP");
 
 		Project project3 = new Project("First Ever Soft Shell Football Helmet",
 				"Designed by former NFL players, Rocksolid brings to you the RS1, "
@@ -103,8 +99,17 @@ public class KickstarterRunner {
 				+ "such as flag football, 7v7, padless play, and off-season practice. Did you know that 80% of practice "
 				+ "time is without traditional football pads, and that most injuries actually occur in the off-season?");
 		project3.addLinkOnVideo("https://d2pq0u4uni88oo.cloudfront.net/projects/2015663/video-594783-h264_high.mp4");
-		project3.addQuestion("Amazing project. Can you provide email to me, I will send you my idea for improving?");
-		project3.addAnswer("Hello, here you are: bigboss@gmail.com");
+		
+		category.addProjectToCategory(project1);
+		category.addProjectToCategory(project2);
+		category.addProjectToCategory(project3);
+		
+//		project1.addQuestion("I like description of your project. Can you provide more pics?");
+//		project1.addAnswer("Yes, We are going to add pics ASAP");
+//		project2.addQuestion("I like description of your project. Can you provide more pics?");
+//		project2.addAnswer("Yes, We are going to add pics ASAP");
+//		project3.addQuestion("Amazing project. Can you provide email to me, I will send you my idea for improving?");
+//		project3.addAnswer("Hello, here you are: bigboss@gmail.com");
 		
 		category.addProjectToCategory(project1);
 		category.addProjectToCategory(project2);
@@ -117,5 +122,4 @@ public class KickstarterRunner {
 
 		return paymentStorage;
 	}
-
 }

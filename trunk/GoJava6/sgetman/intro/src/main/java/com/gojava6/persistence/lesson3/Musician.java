@@ -10,7 +10,7 @@ import java.util.Set;
  *         http://www.antoniogoncalves.org
  *         --
  */
-/*@Entity*/
+@Entity
 public class Musician {
 
   // ======================================
@@ -39,6 +39,9 @@ public class Musician {
 
   @Column(name = "preferred_instrument")
   private String preferredInstrument;
+
+  @ManyToOne
+  private CD cd;
 
   // ======================================
   // =            Constructors            =

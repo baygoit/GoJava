@@ -10,9 +10,9 @@ public class Payment {
 	private int cardId;
 	private Calendar paymentDate;
 	
-	public Payment(String user, long donatingSum, int cardId) {
+	public Payment(String user, long donateSum, int cardId) {
 		this.userName = user;
-		this.donatingSum = donatingSum;
+		this.donatingSum = donateSum;
 		this.cardId = cardId;
 		
 		TimeZone timeZone = TimeZone.getTimeZone("Europe/Kiev");

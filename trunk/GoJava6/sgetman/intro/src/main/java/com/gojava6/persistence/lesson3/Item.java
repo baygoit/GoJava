@@ -1,9 +1,12 @@
 package com.gojava6.persistence.lesson3;
 
 import javax.persistence.*;
+import javax.persistence.Entity;
 import java.io.Serializable;
 
 import static javax.persistence.DiscriminatorType.*;
+
+import org.hibernate.annotations.*;
 
 /**
  * @author Antonio Goncalves
@@ -12,6 +15,7 @@ import static javax.persistence.DiscriminatorType.*;
  */
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Item {
 
   // ======================================
@@ -19,7 +23,7 @@ public class Item {
   // ======================================
 
   @Id
-  @GeneratedValue
+  @GeneratedValue(strategy = GenerationType.TABLE)
   protected Long id;
 
   @Column(length = 100)

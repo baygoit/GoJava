@@ -110,7 +110,10 @@ public class HibernateDefaultRawDao {
     }
 
     public <T> List<T> getList(Object...params) {
-        return getList(defaultQueryString, params);
+        QueryBuilder queryBuilder = new QueryBuilder(defaultQueryString);
+        queryBuilder.parse(params);
+
+        return getList(queryBuilder.getQuery(), queryBuilder.values().toArray());
     }
 
     //TODO try to extract some logic into separate method
@@ -118,13 +121,10 @@ public class HibernateDefaultRawDao {
         Session session = sessionFactory.openSession();
         List<T> list = Collections.emptyList();
 
-        QueryBuilder queryBuilder = new QueryBuilder(queryString);
-        queryBuilder.parseSql(params);
-        Query query = session.createQuery(queryBuilder.getQuery());
+        Query query = session.createQuery(queryString);
 
-        int i = 0;
-        for (Object value : queryBuilder.values()) {
-            query.setParameter(i++, value);
+        for (int i = 0; i < params.length; i++) {
+            query.setParameter(i, params[i]);
         }
 
         try {
@@ -142,7 +142,10 @@ public class HibernateDefaultRawDao {
     }
 
     public <T> T getUniqueResult(Object...params) {
-        return getUniqueResult(defaultQueryString, params);
+        QueryBuilder queryBuilder = new QueryBuilder(defaultQueryString);
+        queryBuilder.parse(params);
+
+        return getUniqueResult(queryBuilder.getQuery(), queryBuilder.values().toArray());
     }
 
     //TODO try to extract some logic into separate method
@@ -150,13 +153,10 @@ public class HibernateDefaultRawDao {
         Session session = sessionFactory.openSession();
         T entity = null;
 
-        QueryBuilder queryBuilder = new QueryBuilder(queryString);
-        queryBuilder.parseSql(params);
-        Query query = session.createQuery(queryBuilder.getQuery());
+        Query query = session.createQuery(queryString);
 
-        int i = 0;
-        for (Object value : queryBuilder.values()) {
-            query.setParameter(i++, value);
+        for (int i = 0; i < params.length; i++) {
+            query.setParameter(i, params[i]);
         }
 
         try {
