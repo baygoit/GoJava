@@ -47,7 +47,13 @@ public class ProjectManager {
 		});
 
 	}
-
+	
+	public Project getProjectById(int id) {
+		return getProjects().get(id);
+	}
+	
+	
+	
 	public Kickstarter getKickstarter() {
 		return kickstarter;
 	}
