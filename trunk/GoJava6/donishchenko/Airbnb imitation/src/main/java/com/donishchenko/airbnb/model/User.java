@@ -12,7 +12,7 @@ public class User {
     @GeneratedValue(generator = "increment")
     @GenericGenerator(name = "increment", strategy = "increment")
     @Column(name = "id")
-    private int id;
+    private Integer id;
 
     @Column(name = "login")
     private String login;
@@ -51,11 +51,11 @@ public class User {
         this.surname = surname;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -116,7 +116,7 @@ public class User {
 
         User other = (User) obj;
 
-        return id == other.id &&
+        return id.equals(other.id) &&
                 login.equals(other.login) &&
                 password.equals(other.password) &&
                 email.equals(other.email) &&

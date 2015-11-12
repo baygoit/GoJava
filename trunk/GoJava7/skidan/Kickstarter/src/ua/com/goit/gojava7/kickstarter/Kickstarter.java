@@ -3,7 +3,7 @@ package ua.com.goit.gojava7.kickstarter;
 import java.util.Scanner;
 
 import ua.com.goit.gojava7.kickstarter.storage.CategoryStorage;
-import ua.com.goit.gojava7.kickstarter.storage.QuteHolder;
+import ua.com.goit.gojava7.kickstarter.storage.QuoteHolder;
 
 
 
@@ -14,7 +14,7 @@ public class Kickstarter {
 	
 	public static void main(String[] args) {
 	
-		QuteHolder qh = new QuteHolder();
+		QuoteHolder qh = new QuoteHolder();
 		Printer.print(qh.getQuote());
 		Printer.prints(CategoryStorage.getCategories());
 		category();

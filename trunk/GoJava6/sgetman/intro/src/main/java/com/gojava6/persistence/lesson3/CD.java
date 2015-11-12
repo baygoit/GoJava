@@ -17,7 +17,7 @@ import org.hibernate.annotations.*;
  *         --
  */
 @Entity
-/*@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)*/
+@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class CD extends Item {
 
   // ======================================

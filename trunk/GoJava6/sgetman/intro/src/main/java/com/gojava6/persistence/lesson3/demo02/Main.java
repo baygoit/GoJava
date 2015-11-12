@@ -29,7 +29,7 @@ public class Main {
     CDService service = new CDService(em);
 
     // Creates and persists a CD
-    tx.begin();
+    /*tx.begin();
     Set<Musician> beatles = new HashSet<>();
     Musician john = new Musician("John", "Lennon");
     Musician paul = new Musician("Paul", "McCartney");
@@ -46,33 +46,37 @@ public class Main {
     beatles.add(ringo);
 
     beatles.add(georges);
+*/
 
-    CD sergentPepper = new CD("Sergent Pepper");
-    sergentPepper.setMusicians(beatles);
-    sergentPepper = service.createCD(sergentPepper);
+    tx.begin();
+    CD sergentPepper = null;
+    /*sergentPepper.setMusicians(beatles);*/
+    //sergentPepper = service.createCD(sergentPepper);
     tx.commit();
 
     System.out.println("CD Persisted : " + sergentPepper);
-
+    em.close();
     /*Query query = em.createNativeQuery("select * from CD where id =  ?");
     query.setParameter(1, "1").getSingleResult();
 
-    query.setParameter(1, "1").getSingleResult();*/
-
+    query.setParameter(1, "1").getSingleResult();*//*
+*/
 
     // Finds the cd
+
     em = emf.createEntityManager();
     tx = em.getTransaction();
     tx.begin();
-    sergentPepper = service.findCD(sergentPepper.getId());
+    sergentPepper = em.find(CD.class, 1L);
+    /*sergentPepper = service.findCD(sergentPepper.getId());*/
     tx.commit();
     em.close();
 
     em = emf.createEntityManager();
     tx = em.getTransaction();
     tx.begin();
-    service = new CDService(em);
-    sergentPepper = service.findCD(sergentPepper.getId());
+    /*service = new CDService(em);*/
+    sergentPepper = em.find(CD.class, 1L);
     tx.commit();
     em.close();
 

@@ -20,22 +20,15 @@ public class ConsolePrinter {
 	public void println(CategoryStorage categoryStorage, int numberOfCategory) {
 		Category projects = categoryStorage.getCategory(numberOfCategory);
 		for (int i = 0; i < projects.getAllProjectsInCategory().size(); i++) {
+			Project currentProject = projects.getAllProjectsInCategory().get(i);
+			String n = "\n";
 			System.out.println("========================\n" + (i + 1) + " : "
-					+ projects.getAllProjectsInCategory().get(i)
-							.getProjectName()
-					+ "\n"
-					+ projects.getAllProjectsInCategory().get(i)
-							.getProjectShortDescription()
-					+ "\n"
-					+ projects.getAllProjectsInCategory().get(i)
-							.getProjectCostNeed()
-					+ "\n"
-					+ projects.getAllProjectsInCategory().get(i)
-							.getProjectCostCollected()
-					+ "\n"
-					+ projects.getAllProjectsInCategory().get(i)
-							.getProjectDaysLeft()
-					+ "\n" + "========================");
+					+ currentProject.getProjectName() + n
+					+ currentProject.getProjectShortDescription() + n
+					+ currentProject.getProjectCostNeed() + n
+					+ currentProject.getProjectCostCollected() + n
+					+ currentProject.getProjectDaysLeft() + n 
+					+ "========================");
 		}
 	}
 
