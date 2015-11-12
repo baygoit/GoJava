@@ -1,5 +1,8 @@
 package com.kickstarter.view;
 
+import java.io.PrintStream;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 
 import com.kickstarter.beans.Category;
@@ -8,63 +11,71 @@ import com.kickstarter.beans.Quote;
 
 public class MainPage {
 	
+	PrintStream outStream;
+	
+	public MainPage(PrintStream outStream) {
+		this.outStream = outStream;
+	}
+	
 	public void showQuote(Quote quote){
-		System.out.println("\"" + quote.getText() + "\" - " + quote.getAuthor() + "\n");
+		outStream.println("\"" + quote.getText() + "\" - " + quote.getAuthor() + "\n");
 	}
 
 	public void showCategories(List<Category> categories){
-		System.out.print("Categories: | ");
+		outStream.print("Categories: | ");
 
 		for (int i = 1; i <= categories.size(); i++) {
-			System.out.print("" + i + ". " + categories.get(i-1).getName() + " | ");
+			outStream.print("" + i + ". " + categories.get(i-1).getName() + " | ");
 		}
 		showExit();
 	}
 	
-	public void showProjects(List<Project> projects){
-		for (int i = 1; i <= projects.size(); i++) {
-			Project project = projects.get(i-1);
-			System.out.println(i + ". " + project);
-			System.out.println("\t" + "Goal: " + project.getGoalSum() 
+	public void showProjects(Collection<Project> projects){
+		int i = 1;
+		for (Iterator<Project> iterator = projects.iterator(); iterator.hasNext();) {
+			Project project = iterator.next();
+			outStream.println(i++ + ". " + project);
+			outStream.println("\t" + "Goal: " + project.getGoalSum() 
 				+ "; Balance: " + project.getBalanceSum()
 				+ "; Days left: " + project.daysLeft());
 		}
+		
 		showExit();
 	}
 	
 	public void showProjectDetails(Project project){
-		System.out.println(project);
-		System.out.println(project.getDescription());
-		System.out.println("Goal: " + project.getGoalSum());
-		System.out.println("Balance: " + project.getBalanceSum());
-		System.out.println("Started:" + project.getEndDate());		
-		System.out.println("Days left: " + project.daysLeft());
-		System.out.println("Video: " + project.getVideoUrl());
-		System.out.println("FAQ:");
+		outStream.println(project);
+		outStream.println(project.getDescription());
+		outStream.println("Goal: " + project.getGoalSum());
+		outStream.println("Balance: " + project.getBalanceSum());
+		outStream.println("Started:" + project.getEndDate());		
+		outStream.println("Days left: " + project.daysLeft());
+		outStream.println("Video: " + project.getVideoUrl());
+		outStream.println("FAQ:");
 		project.getQuestionsAndAnswers().stream()
 			.map(faq -> "\t" + faq.toString())
-			.forEach(System.out::println);
+			.forEach(outStream::println);
 		
-		System.out.println("1. Pay");
+		outStream.println("1. Pay");
 		
 		showExit();
 	}
 	
 	public void showPaymentRequest(Project project){
-		System.out.println(project);
-		System.out.println("Enter your name, card ID and sum, divided by ' '");
+		outStream.println(project);
+		outStream.println("Enter your name, card ID and sum, divided by ' '");
 	}
 	
 	private void showExit(){
-		System.out.println("0. Exit");
+		outStream.println("0. Exit");
 	}
 	
 	public void showDivider(){
-		System.out.println("==========================================");
+		outStream.println("==========================================");
 	}
 	
 	public void showMessage(String message){
-		System.out.println(message);
+		outStream.println(message);
 	}
 	
 }

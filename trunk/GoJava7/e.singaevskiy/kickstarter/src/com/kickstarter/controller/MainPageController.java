@@ -1,6 +1,6 @@
 package com.kickstarter.controller;
 
-import java.util.Arrays;
+import java.io.InputStream;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
@@ -22,26 +22,24 @@ import com.kickstarter.view.MainPage;
 
 public class MainPageController {
 
-	public static final int OPTION_EXIT = 0;
-	public static final int OPTION_SHOW = -1;
-	public static final int OPTION_SHOW_AND_PROCESS = -2;
+	private static final int OPTION_EXIT = 0;
 	private final Random RND = new Random();
 	private MainPage page;
 	private CommonDAO<Quote> quoteDAO;
 	private CommonDAO<Category> categoryDAO;
 	private ProjectDAO projectDAO;
 	private PledgeDAO pledgeDAO;
-	private PaymentDAO paymentDAO;
+	private CommonDAO<Payment> paymentDAO;
 	private Scanner sc;
 
-	public MainPageController(MainPage page) {
+	public MainPageController(MainPage page, InputStream stream) {
 		this.page = page;
 		quoteDAO = new QuoteDAO();
 		categoryDAO = new CategoryDAO();
 		projectDAO = new ProjectDAO();
 		paymentDAO = new PaymentDAO();
 		pledgeDAO = new PledgeDAO();
-		sc = new Scanner(System.in);
+		sc = new Scanner(stream);
 	}
 
 	public void showMainPage() {
@@ -93,7 +91,7 @@ public class MainPageController {
 
 	public boolean processPayment(Project project, String paymentRequest) {
 		String[] paymentParameters = paymentRequest.split(" ");
-		System.out.println(Arrays.toString(paymentParameters));
+
 		if (paymentParameters.length != 3) {
 			return false;
 		} else {
@@ -106,6 +104,8 @@ public class MainPageController {
 				paymentDAO.add(payment);
 				Pledge pledge = new Pledge(project, payment);
 				pledgeDAO.add(pledge);
+				
+				project.setBalanceSum(pledgeDAO.getSum(project));
 					
 			} catch (NumberFormatException e) {
 				return false;
@@ -156,12 +156,18 @@ public class MainPageController {
 
 	public void showTopPage() {
 
-		List<Quote> quotes = quoteDAO.getAll();
-
 		page.showDivider();
 
+		showRandomQuote(RND);
+
+	}
+	
+	public void showRandomQuote(Random rnd) {
+
+		List<Quote> quotes = quoteDAO.getAll();
+
 		if (quotes.size() > 0) {
-			page.showQuote(quotes.get(RND.nextInt(quotes.size())));
+			page.showQuote(quotes.get(rnd.nextInt(quotes.size())));
 		}
 
 	}

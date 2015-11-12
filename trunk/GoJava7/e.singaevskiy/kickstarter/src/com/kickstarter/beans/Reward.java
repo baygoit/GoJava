@@ -1,10 +1,16 @@
 package com.kickstarter.beans;
 
 public class Reward {
-	private Long pledgeSum;
+	private long pledgeSum;
 	private String description;
 	private Project project;
-
+	
+	public Reward(Project project, String description, Long pledgeSum) {
+		this.project = project;
+		this.description = description;
+		this.pledgeSum = pledgeSum;
+	}
+	
 	public Project getProject() {
 		return project;
 	}
