@@ -139,7 +139,7 @@ public class UserHibernateDaoOld implements UserDao {
 
     @Override
     public List<User> getAllUsers() throws SQLException {
-//        Session session = sessionFactory.openSession();
+//        Session session = sessionFactory.getSessionFactory();
 //        List<User> users = Collections.emptyList();
 //
 //        try {
