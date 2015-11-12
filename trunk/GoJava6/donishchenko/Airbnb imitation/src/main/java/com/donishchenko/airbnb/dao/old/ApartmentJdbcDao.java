@@ -117,7 +117,7 @@ public class ApartmentJdbcDao implements ApartmentDao {
 
             int i = 1;
             for (Object value : queryBuilder.values()) {
-                stat.setObject(i, value);
+                stat.setObject(i++, value);
             }
 
             ResultSet result = stat.executeQuery();
