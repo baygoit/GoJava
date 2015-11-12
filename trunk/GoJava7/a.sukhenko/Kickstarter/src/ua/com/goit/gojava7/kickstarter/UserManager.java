@@ -11,14 +11,16 @@ public class UserManager {
 	private CategoryStorage categoryStorage;
 	private ConsoleScanner consoleScanner;
 	private Kickstarter kickStarter;
-	public UserManager(ConsolePrinter consolePrinter,ConsoleScanner consoleScanner,CategoryStorage categoryStorage,Kickstarter kickstarter) {
+
+	public UserManager(ConsolePrinter consolePrinter, ConsoleScanner consoleScanner, CategoryStorage categoryStorage,
+			Kickstarter kickstarter) {
 		this.consolePrinter = consolePrinter;
 		this.categoryStorage = categoryStorage;
 		this.consoleScanner = consoleScanner;
 		this.setKickStarter(kickstarter);
 	}
-	
-	public void chooseCategory(User u){
+
+	public void chooseCategory(User u) {
 		int selectedCategory = 0;
 		do {
 			consolePrinter.print(categoryStorage.getCategories());
@@ -35,13 +37,9 @@ public class UserManager {
 			} else {
 				consolePrinter.println("You entered 0. See you soon");
 			}
-		} while(selectedCategory != 0 );
-		
-		
-		
-	}
+		} while (selectedCategory != 0);
 
-	
+	}
 
 	public Kickstarter getKickStarter() {
 		return kickStarter;
