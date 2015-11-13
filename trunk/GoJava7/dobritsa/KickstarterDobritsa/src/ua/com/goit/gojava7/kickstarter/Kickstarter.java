@@ -41,13 +41,19 @@ public class Kickstarter {
 		while (true) {
 			Integer selectedCategory = chooseCategory();
 			while (selectedCategory != 0) {
-				currentCategory = categoryStorage.get(selectedCategory - SHIFT_ONE);				
-				Integer selectedProject = chooseProject(selectedCategory);
-				if (selectedProject != null) {		
-					currentProject = currentCategory.get(selectedProject - SHIFT_ONE);					
-					viewProject(selectedCategory, selectedProject);
-				} else {
+				currentCategory = categoryStorage.get(selectedCategory - SHIFT_ONE);	
+				if(currentCategory.getAll().size() == 0) {
+					System.out.println("No projects in this categories.");
 					break;
+				} else {
+					Integer selectedProject = chooseProject(selectedCategory);
+					if (selectedProject != null) {		
+						currentProject = currentCategory.get(selectedProject - SHIFT_ONE);					
+						viewProject(selectedCategory, selectedProject);
+					} else {
+						break;
+				}
+				
 				}
 			}
 		}

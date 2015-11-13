@@ -12,12 +12,14 @@ public class QuoteStorage extends Storage<Quote> {
 	}
 
 	public Quote getRandomQuote() {
+		if(size() == 0) {
+			add(new Quote("I work to stay alive.", "Bette Davis"));			
+		}
 		int randomNumber = RANDOM.nextInt(size());
 		return get(randomNumber);
 	}
 
-	private void initQuotes() {
-		add(new Quote("I work to stay alive.", "Bette Davis"));
+	private void initQuotes() {		
 		add(new Quote("There is only one boss. The customer. And he can fire everybody"
 				+ "\n     in the company from the chairman on down, simply by "
 				+ "\n     spending his money somewhere else.", "Sam Walton"));
@@ -27,7 +29,6 @@ public class QuoteStorage extends Storage<Quote> {
 		add(new Quote("Happiness does not come from doing easy work but from the "
 				+ "\n     afterglow of satisfaction that comes after the achievement "
 				+ "\n     of a difficult task that demanded our best. ", "Theodore Isaac Rubin"));
-
 	}
 
 }

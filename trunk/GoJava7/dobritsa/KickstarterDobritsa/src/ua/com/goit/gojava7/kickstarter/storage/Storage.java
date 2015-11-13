@@ -17,8 +17,11 @@ public abstract class Storage<T> {
 	}
 	
 	public T get(int index) {
-		//TODO Error
-		
+		if(dataSource.size() == 0) {
+			System.out.println("Nothing to show");
+			System.exit(0);
+			return null;
+		}		
 		return dataSource.get(index);
 	}
 
