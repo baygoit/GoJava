@@ -4,6 +4,11 @@ public class Quote {
 
 	private String author;
 	private String quoteText;
+	
+	public Quote(String author, String quoteText) {
+		this.author = author;
+		this.quoteText = quoteText;
+	}
 
 	public void setQuoteText(String title) {
 		this.quoteText = title;

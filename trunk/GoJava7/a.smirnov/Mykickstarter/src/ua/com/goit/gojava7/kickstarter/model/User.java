@@ -4,12 +4,10 @@ public class User {
 
 	private String name;
 	private int password;
-	private CreditCard creditCard;
 
-	public User(String name, int password, CreditCard creditCard) {
+	public User(String name, int password) {
 		this.name = name;
 		this.password = password;
-		this.creditCard = creditCard;
 	}
 	
 	public void setName(String name) {
@@ -27,15 +25,4 @@ public class User {
 	public int getPassword() {
 		return password;
 	}
-	
-	public void setCreditCard(CreditCard creditCard) {
-		this.creditCard = creditCard;
-	}
-	
-	public CreditCard getCreditCard() {
-		return creditCard;
-	}
-	
-	
-
 }
