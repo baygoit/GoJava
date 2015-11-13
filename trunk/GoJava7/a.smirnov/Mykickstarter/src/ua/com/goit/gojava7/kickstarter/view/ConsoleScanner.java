@@ -1,29 +1,44 @@
 package ua.com.goit.gojava7.kickstarter.view;
 
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class ConsoleScanner {
-
-	private Scanner scanner = new Scanner(System.in);
+	private static final String PROBLEMS = "Problems with stream...";
+	private BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
 
 	public int getInt() {
-		while (!scanner.hasNextInt()) {
-			scanner.next();
+		int userNumber = Integer.MAX_VALUE;
+		
+		try {
+			String inputedUserString = bufferedReader.readLine();
+			userNumber = Integer.parseInt(inputedUserString);
+		} catch (NumberFormatException | IOException e) {
+			System.out.print("You entered forbidden symbol. ");
 		}
-		int inputedInt = scanner.nextInt();
-		return inputedInt;
+		return userNumber;
 	}
-	
+
 	public String getString() {
-		while (!scanner.hasNextInt()) {
-			scanner.next();
+		String name = null;
+		
+		try {
+			name = bufferedReader.readLine();
+		} catch (IOException e) {
+			System.out.println(PROBLEMS);
 		}
-		String inputedString = scanner.nextLine();
-		return inputedString;
+		return name;
 	}
 
 	public void close() {
-		scanner.close();
+		try {
+			if (bufferedReader != null) {
+				bufferedReader.close();
+			}
+		} catch (IOException e) {
+			System.out.println(PROBLEMS);
+		}
 	}
 
 }

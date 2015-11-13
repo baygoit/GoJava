@@ -14,22 +14,23 @@ import ua.com.goit.gojava7.kickstarter.model.Quote;
 public class QuoteStorage {
 	private List<Quote> quotes = new ArrayList<>();
 	private static final Random rand = new Random();
-	
-	public Quote getRandomQuote(){
+
+	public Quote getRandomQuote() {
 		int random = rand.nextInt(quotes.size());
 		return quotes.get(random);
-		
+
 	}
-	public void addQuote(Quote q){
+
+	public void addQuote(Quote q) {
 		quotes.add(q);
 	}
-	
+
 	/**
 	 * @return Unmodifiable List of <b>Quote</b>s
 	 */
-	public List<Quote> getQuotes(){
+	public List<Quote> getQuotes() {
 		return Collections.unmodifiableList(quotes);
-		
+
 	}
-	
+
 }

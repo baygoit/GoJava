@@ -8,8 +8,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
-import java.util.LinkedList;
 import java.util.List;
 
 public class ReservationJdbcDao implements ReservationDao {
@@ -45,11 +46,11 @@ public class ReservationJdbcDao implements ReservationDao {
                     "\tap.type = 0";
 
     @Override
-    public int save(Reservation reservation) throws SQLException {
+    public void save(Reservation reservation) {
         try (Connection conn = JdbcUtils.getConnection()) {
             PreparedStatement stat = conn.prepareStatement(saveReservationQuery, Statement.RETURN_GENERATED_KEYS);
-            stat.setInt(1, reservation.getUserId());
-            stat.setInt(2, reservation.getApartmenId());
+            stat.setInt(1, reservation.getUser().getId());
+            stat.setInt(2, reservation.getApartment().getId());
             stat.setObject(3, reservation.getStart());
             stat.setObject(4, reservation.getEnd());
             stat.setString(5, reservation.getComment());
@@ -59,93 +60,103 @@ public class ReservationJdbcDao implements ReservationDao {
             ResultSet keys = stat.getGeneratedKeys();
             keys.next();
             reservation.setId(keys.getInt(1));
-
-            return reservation.getId();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 
     @Override
-    public boolean delete(int id) throws SQLException {
+    public Reservation get(Integer id) {
+        Reservation reservation = null;
+
+        try (Connection conn = JdbcUtils.getConnection()) {
+            PreparedStatement stat = conn.prepareStatement(getReservationByIdQuery);
+            stat.setInt(1, id);
+
+            ResultSet result = stat.executeQuery();
+            if (result.next()) {
+                reservation = createReservation(result);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return reservation;
+    }
+
+    @Override
+    public boolean update(Reservation reservation) {
+        boolean updated = false;
+
+        try (Connection conn = JdbcUtils.getConnection()) {
+            PreparedStatement stat = conn.prepareStatement(updateReservationQuery);
+            stat.setInt(1, reservation.getUser().getId());
+            stat.setInt(2, reservation.getApartment().getId());
+            stat.setObject(3, reservation.getStart());
+            stat.setObject(4, reservation.getEnd());
+            stat.setString(5, reservation.getComment());
+            stat.setInt(6, reservation.getId());
+
+            int affectedRows = stat.executeUpdate();
+
+            updated = affectedRows != 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return updated;
+    }
+
+    @Override
+    public boolean delete(Integer id) {
+        boolean updated = false;
+
         try (Connection conn = JdbcUtils.getConnection()) {
             PreparedStatement stat = conn.prepareStatement(deleteReservationQuery);
             stat.setInt(1, id);
 
             int affectedRows = stat.executeUpdate();
 
-            return affectedRows != 0;
+            updated = affectedRows != 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
+
+        return updated;
     }
 
     @Override
-    public boolean update(int id, Reservation reservation) throws SQLException {
-        Reservation existingReservation = get(id);
-        if (existingReservation == null) {
-            throw new SQLException("Wrong id");
-        }
-
-        try (Connection conn = JdbcUtils.getConnection()) {
-            PreparedStatement stat = conn.prepareStatement(updateReservationQuery);
-            stat.setInt(1, reservation.getUserId());
-            stat.setInt(2, reservation.getApartmenId());
-            stat.setObject(3, reservation.getStart());
-            stat.setObject(4, reservation.getEnd());
-            stat.setString(5, reservation.getComment());
-            stat.setInt(6, id);
-
-            int affectedRows = stat.executeUpdate();
-
-            return affectedRows != 0;
-        }
-    }
-
-    @Override
-    public Reservation get(int id) throws SQLException {
-        try (Connection conn = JdbcUtils.getConnection()) {
-            PreparedStatement stat = conn.prepareStatement(getReservationByIdQuery);
-            stat.setInt(1, id);
-
-            ResultSet result = stat.executeQuery();
-            result.next();
-
-            return createReservation(result);
-        }
-    }
-
-    @Override
-    public List<Reservation> getAll() throws SQLException {
+    public List<Reservation> getAll() {
         return getAllReservationsWithParameters();
     }
 
     @Override
-    public List<Reservation> getAllByApartment(int apartmentId) throws SQLException {
-        return getAllReservationsWithParameters("apartmentId", Integer.toString(apartmentId));
+    public List<Reservation> getAllByApartment(Integer apartmentId) {
+        return getAllReservationsWithParameters("apartmentId", apartmentId);
     }
 
     @Override
-    public List<Reservation> getAllByUser(int userId) throws SQLException {
-        return getAllReservationsWithParameters("userId", Integer.toString(userId));
+    public List<Reservation> getAllByUser(Integer userId) {
+        return getAllReservationsWithParameters("userId", userId);
     }
 
     @Override
-    public List<Reservation> getAllByHost(int userId) throws SQLException {
-        //TODO list of reservations of host's apartments
-        return null;
-    }
-
-    @Override
-    public List<Reservation> getAllBetweenDates(Date start, Date end) throws SQLException {
+    public List<Reservation> getAllBetweenDates(Date start, Date end) {
         return getAllReservationsWithParameters("start", start, "end", end);
     }
 
-    private List<Reservation> getAllReservationsWithParameters(Object...args) throws SQLException {
+    private List<Reservation> getAllReservationsWithParameters(Object...args) {
+        List<Reservation> list = Collections.emptyList();
+
         QueryBuilder queryBuilder = new QueryBuilder(getAllReservationsQuery);
-        queryBuilder.parseSql(args);
+        queryBuilder.parse(args);
 
         try (Connection conn = JdbcUtils.getConnection()) {
-            List<Reservation> list = new LinkedList<>();
+            list = new ArrayList<>();
 
             String query = queryBuilder.getQuery();
             PreparedStatement stat = conn.prepareStatement(query);
+
             int i = 1;
             for (Object value : queryBuilder.values()) {
                 stat.setObject(i++, value);
@@ -155,9 +166,11 @@ public class ReservationJdbcDao implements ReservationDao {
             while (result.next()) {
                 list.add(createReservation(result));
             }
-
-            return list;
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
+
+        return list;
     }
 
     private Reservation createReservation(ResultSet result) throws SQLException {
@@ -168,9 +181,11 @@ public class ReservationJdbcDao implements ReservationDao {
         Date end        = (Date) result.getObject(5);
         String comment  = result.getString(6);
 
-        Reservation reservation = new Reservation(userId, apartmentId, start, end, comment);
-        reservation.setId(id);
 
-        return reservation;
+        //TODO
+//        Reservation reservation = new Reservation(userId, apartmentId, start, end, comment);
+//        reservation.setId(id);
+
+        return new Reservation();
     }
 }

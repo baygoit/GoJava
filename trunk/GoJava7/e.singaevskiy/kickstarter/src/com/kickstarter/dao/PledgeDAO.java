@@ -3,6 +3,7 @@ package com.kickstarter.dao;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.kickstarter.beans.Payment;
 import com.kickstarter.beans.Pledge;
 import com.kickstarter.beans.Project;
 import com.kickstarter.beans.User;
@@ -10,8 +11,8 @@ import com.kickstarter.beans.User;
 public class PledgeDAO extends CommonDAO<Pledge> {
 
 	public PledgeDAO() {
-		ProjectDAO projectDAO = new ProjectDAO();
-		PaymentDAO paymentDAO = new PaymentDAO();
+		CommonDAO<Project> projectDAO = new ProjectDAO();
+		CommonDAO<Payment> paymentDAO = new PaymentDAO();
 		
 		dataSource.add(new Pledge(projectDAO.get(0), paymentDAO.get(0)));
 		dataSource.add(new Pledge(projectDAO.get(0), paymentDAO.get(1)));

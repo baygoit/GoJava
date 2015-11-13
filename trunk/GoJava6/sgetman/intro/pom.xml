@@ -39,11 +39,32 @@
       <artifactId>mysql-connector-java</artifactId>
       <version>5.1.36</version>
     </dependency>
+    <!-- hibernate -->
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-core</artifactId>
+      <version>4.3.6.Final</version>
+    </dependency>
+
+    <dependency>
+      <groupId>net.sf.ehcache</groupId>
+      <artifactId>ehcache</artifactId>
+      <version>2.10.1</version>
+      <type>pom</type>
+    </dependency>
+
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-ehcache</artifactId>
+      <version>4.3.6.Final</version>
+    </dependency>
+
+    <!-- JPA -->
 
     <dependency>
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate-entitymanager</artifactId>
-      <version>5.0.0.CR1</version>
+      <version>4.3.6.Final</version>
     </dependency>
 
 
