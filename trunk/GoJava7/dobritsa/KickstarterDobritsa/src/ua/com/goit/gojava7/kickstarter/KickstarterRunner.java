@@ -7,7 +7,7 @@ import ua.com.goit.gojava7.kickstarter.console.QuotePrinter;
 import ua.com.goit.gojava7.kickstarter.storage.CategoryStorage;
 import ua.com.goit.gojava7.kickstarter.storage.QuoteStorage;
 
-public class KickstarterRun {
+public class KickstarterRunner {
 	public static void main(String[] args) {
 		ConsoleScanner consoleScanner = new ConsoleScanner();
 		
