@@ -1,8 +1,11 @@
 package ua.com.goit.gojava7.kickstarter;
 
+
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
+import java.util.List;
 
 public class Project {
 	private String projectName;
@@ -13,6 +16,7 @@ public class Project {
 	private int projectCostNeed;
 	private int projectCostsCollected = 0;
 	private Calendar deadline = new GregorianCalendar();
+	private List<Payment> payments;
 
 	public Project(String projectName, String projectShortDescription,
 			int projectCostNeed, int projectDaysNeed) {
@@ -20,6 +24,7 @@ public class Project {
 		this.questionsAndAnswers = new HashMap<>();
 		this.projectShortDescription = projectShortDescription;
 		this.projectCostNeed = projectCostNeed;
+		this.payments = new ArrayList<>();
 		deadline.add(Calendar.DAY_OF_YEAR, projectDaysNeed);
 	}
 
@@ -64,6 +69,10 @@ public class Project {
 	}
 	public void setProjectDescription(String description) {
 		this.projectDescription = description;
+	}
+	public void setPayment(String cardOwner, long cardNumber, int rechargeAmount){
+		this.payments.add(new Payment(cardOwner, cardNumber, rechargeAmount));
+		this.projectCostsCollected += rechargeAmount;
 	}
 
 }

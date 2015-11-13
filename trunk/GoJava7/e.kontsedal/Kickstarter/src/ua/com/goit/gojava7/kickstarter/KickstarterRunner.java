@@ -42,7 +42,6 @@ public class KickstarterRunner {
 	private static void initProjects(CategoryStorage categoryStorage) {
 		Project boondockSaints = new Project("THE BOONDOCK SAINTS",
 				"The Boondock Saints is a 1999 American crime film written and directed by Troy Duffy", 1000000, 180);
-		boondockSaints.setProjectCostCollected(85000);
 		boondockSaints.setProjectDescription("The MacManus brothers are living a quiet life in Ireland with their father, but when they learn that their beloved priest has been killed by mob forces, they go back to Boston to bring justice to those responsible and avenge the priest. ");
 		boondockSaints.setQuestionsAndAnswer("Is it my question?", "No! this is my answer!");
 		boondockSaints.setVideoUrl("http://youtube.com");
