@@ -8,25 +8,24 @@ import ua.com.goit.gojava7.kickstarter.storage.CategoryStorage;
 
 public class ProjectManager {
 	private String BORDER = "\n________________________________________________________";
-	private int SHIFT_ONE = 1;
 	private int FIRST = 0;
-	private ConsolePrinter consolePrinter = new ConsolePrinter();
-	private ConsoleInspector consoleInspector = new ConsoleInspector();
+	private ConsolePrinter consolePrinter;
+	private ConsoleInspector consoleInspector;
 	
 	Project project;
 	CategoryStorage categoryStorage;
 	Kickstarter kickstarter;
 	
-	public ProjectManager(Project project) {
+	public ProjectManager(Project project, ConsolePrinter consolePrinter, ConsoleInspector consoleInspector) {
 		this.project = project;
+		this.consolePrinter = consolePrinter;
+		this.consoleInspector = consoleInspector;
 	}
 	
-	public void viewProject() {
+	public void viewProject(Integer selectedCategory, Integer selectedProject) {
 		consolePrinter.print(BORDER);
 		//consolePrinter.print("Current category: " + category.getName());
-		//consolePrinter.print("Current project: #" + (projectNumber) + "\n");
-		//Project project = new Project();
-		//project = categoryStorage.get(categoryNumber - SHIFT_ONE).get(projectNumber - SHIFT_ONE);
+		consolePrinter.print("Current project: #" + (selectedProject) + "\n");		
 		consolePrinter.printFull(project);
 		consolePrinter.print("\nType 0 to choose another project");
 		consoleInspector.getCorrectInt(FIRST, 0);

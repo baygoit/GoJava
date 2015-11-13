@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import ua.com.goit.gojava7.kickstarter.domain.Category;
+
 public abstract class Storage<T> {
 	
 	protected List<T> dataSource;
@@ -30,6 +32,11 @@ public abstract class Storage<T> {
 	
 	public int size() {
 		return dataSource.size();
+	}
+	
+	public int indexOf(T element) {
+		return dataSource.indexOf(element);
+		
 	}
 	
 }

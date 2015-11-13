@@ -1,10 +1,7 @@
 package ua.com.goit.gojava7.kickstarter;
 
-import java.util.List;
-
 import ua.com.goit.gojava7.kickstarter.console.ConsoleInspector;
 import ua.com.goit.gojava7.kickstarter.console.ConsolePrinter;
-import ua.com.goit.gojava7.kickstarter.domain.Category;
 import ua.com.goit.gojava7.kickstarter.manager.CategoryManager;
 import ua.com.goit.gojava7.kickstarter.manager.ProjectManager;
 import ua.com.goit.gojava7.kickstarter.storage.CategoryStorage;
@@ -17,14 +14,8 @@ public class Kickstarter {
 
 	private ConsolePrinter consolePrinter;
 	private ConsoleInspector consoleInspector;
-
-	private Integer selectedCategory = -1;
-	private Integer selectedProject = -1;
-	//private List<Category> categories;
-	private int SHIFT_ONE = 1;
-		
+	
 	private ProjectManager projectManager;
-	private CategoryManager categoryManager;
 
 	public Kickstarter(ConsolePrinter consolePrinter, ConsoleInspector consoleInspector, QuoteStorage quoteStorage,
 			CategoryStorage categoryStorage) {
@@ -36,17 +27,23 @@ public class Kickstarter {
 	}
 
 	public void run() {
+		Integer selectedCategory = -1;
+		Integer selectedProject = -1;	
+		int SHIFT_ONE = 1;	
+		
 		consolePrinter.print(quoteStorage.getRandomQuote());
-		List<Category> categories = categoryStorage.getAll();
-		categoryManager = new CategoryManager(categories);		
+		CategoryManager categoryManager = new CategoryManager(consolePrinter, 
+				consoleInspector, categoryStorage);					
 		
 		while (selectedCategory != 0){
 			selectedCategory = categoryManager.chooseCategory();
 			while (selectedCategory != 0) {
-				selectedProject = categoryManager.chooseProject(categoryStorage.get(selectedCategory - SHIFT_ONE));
+				selectedProject = categoryManager.chooseProject(categoryStorage.get(selectedCategory - SHIFT_ONE), categoryStorage);
 				if(selectedProject != 0) {
-					projectManager = new ProjectManager(categoryStorage.get(selectedCategory - SHIFT_ONE).get(selectedProject - SHIFT_ONE));
-					projectManager.viewProject();					
+					projectManager = new ProjectManager(categoryStorage.
+							get(selectedCategory - SHIFT_ONE).get(selectedProject - SHIFT_ONE), 
+							consolePrinter, consoleInspector);
+					projectManager.viewProject(selectedCategory, selectedProject);					
 				}else {
 					break;
 				}			
