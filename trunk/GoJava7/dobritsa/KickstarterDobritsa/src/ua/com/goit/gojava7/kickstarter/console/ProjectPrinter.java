@@ -7,7 +7,6 @@ public class ProjectPrinter {
 
 	public ProjectPrinter(Project project) {
 		this.project = project;
-
 	}
 
 	public void printShort() {
