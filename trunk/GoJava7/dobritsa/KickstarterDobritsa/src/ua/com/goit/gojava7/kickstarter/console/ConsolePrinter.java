@@ -12,15 +12,15 @@ public class ConsolePrinter {
 		System.out.println(string);
 	}
 	
-	public void print(Quote quote) {
-		System.out.println(quote.getText() + "\n     " + 	quote.getAuthor());
-		}
+	//public void print(Quote quote) {
+	//	System.out.println(quote.getText() + "\n     " + 	quote.getAuthor());
+	//	}
 	
-	public void printCategories(List<Category> categories) {
-		for(int i = 0; i < categories.size(); i++) {
-			System.out.println(i + 1 + ": " + categories.get(i).getName());
-		}	
-	}
+	//public void printCategories(List<Category> categories) {
+	//	for(int i = 0; i < categories.size(); i++) {
+	//		System.out.println(i + 1 + ": " + categories.get(i).getName());
+	//	}	
+	//}
 	
 	public void printShort(Project project) {
 		System.out.println("Name: " + project.getName());
