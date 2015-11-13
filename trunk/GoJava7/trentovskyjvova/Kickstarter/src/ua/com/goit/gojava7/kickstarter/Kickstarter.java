@@ -1,116 +1,95 @@
 package ua.com.goit.gojava7.kickstarter;
 
-import java.io.IOException;
+import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.ListIterator;
 
+import ua.com.goit.gojava7.kickstarter.Level.CategoryLevel;
+import ua.com.goit.gojava7.kickstarter.Level.Level;
+import ua.com.goit.gojava7.kickstarter.Level.MenuLevel;
+import ua.com.goit.gojava7.kickstarter.Level.ProjectLevel;
 import ua.com.goit.gojava7.kickstarter.console.ConsolePrinter;
-import ua.com.goit.gojava7.kickstarter.console.ConsoleReader;
+import ua.com.goit.gojava7.kickstarter.console.ConsoleScanner;
 import ua.com.goit.gojava7.kickstarter.domain.Category;
-import ua.com.goit.gojava7.kickstarter.domain.Project;
 import ua.com.goit.gojava7.kickstarter.storage.CategoryStorage;
-import ua.com.goit.gojava7.kickstarter.storage.ProjectStorage;
 import ua.com.goit.gojava7.kickstarter.storage.QuoteStorage;
 
 public class Kickstarter {
+
 	private QuoteStorage quoteStorage;
 	private CategoryStorage categoryStorage;
-	private ProjectStorage projectStorage;
-	
 	private ConsolePrinter consolePrinter;
-	private ConsoleReader consoleReader;
+	private ConsoleScanner consoleScanner;
 
-	public Kickstarter(ConsolePrinter consolePrinter, ConsoleReader consoleReader, QuoteStorage quoteStorage,
-			CategoryStorage categoryStorage, ProjectStorage projectStorage) {
+	private List<Level> levels;
 
-		this.consolePrinter = consolePrinter;
-		this.consoleReader = consoleReader;
-
+	public Kickstarter(ConsolePrinter consolePrinter, ConsoleScanner consoleScanner, QuoteStorage quoteStorage,
+			CategoryStorage categoryStorage) {
 		this.quoteStorage = quoteStorage;
 		this.categoryStorage = categoryStorage;
-		this.projectStorage = projectStorage;
+		this.consolePrinter = consolePrinter;
+		this.consoleScanner = consoleScanner;
+
+		levels = new LinkedList<>(Arrays.asList(new MenuLevel(), new CategoryLevel(), new ProjectLevel()));
 	}
-	
-	public void runKickstarter(){
-		consolePrinter.print(quoteStorage.getRandomQuote());
-		
+
+	public void runKickstarter() {
+		ListIterator<Level> levelsIterator = levels.listIterator();
 		List<Category> categories = categoryStorage.getAllCategories();
-		consolePrinter.print(categories);
 
-		List<Project> projects = null;
+		consolePrinter.print(quoteStorage.getRandomQuote());
 
-		consolePrinter.print(0 + " : Exit from application");
-		consolePrinter.print("Select a category");
-
-		int userPositionLevel = 0;
+		Level userPositionLevel = levelsIterator.next();
 		int userChoise = 0;
-		Category selected = null;
-		boolean notExit = true;
+		Category selectedCategory = null;
+		StringBuilder answer;
 
+		answer = userPositionLevel.generateAnswer(categories, userChoise, selectedCategory);
+
+		consolePrinter.print(answer);
+
+		boolean notExit = true;
 		while (notExit) {
-			try {
-				userChoise = consoleReader.read();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+
+			userChoise = consoleScanner.scan();
+
 			if (userChoise == 0) {
-				if (userPositionLevel == 0) {
+				if (levelsIterator.nextIndex() == 1) {
 					notExit = false;
 					continue;
-				} else {
-					userPositionLevel--;
 				}
-			} else if (userPositionLevel == 0 && (userChoise < 0 || userChoise > categories.size())) {
-				consolePrinter.print("Please, enter the number between 0 and " + categories.size());
-				continue;
-			} else if (userPositionLevel == 1 && (userChoise < 0 || userChoise > projects.size())) {
-				consolePrinter.print("Please, enter the number between 0 and " + projects.size());
-				continue;
-			} else {
-				userPositionLevel++;
-				userChoise--;
 			}
 
-			if (userPositionLevel == 0) {
-				selected = null;
-				
-				consolePrinter.print("You selected main menu");
-				consolePrinter.print(categories);
-				
-				consolePrinter.print(0 + " : Exit from application");
-				consolePrinter.print("Select a category");
-				
-			} else if (userPositionLevel == 1) {
-				if (selected == null){
-					selected = categories.get(userChoise);
-				}
-				
-				consolePrinter.print("You selected '" + selected.getName() + "' category");
-				
-				projects = projectStorage.getProgects(selected);
-				consolePrinter.printProjects(projects);
-								
-				consolePrinter.print(0 + " : main menu");
-				consolePrinter.print("Select a project");
-		
-			} else if (userPositionLevel == 2) {
-				Project project = projects.get(userChoise);
-				
-				consolePrinter.print("You selected '" + project.getName() + "' project");
-				consolePrinter.print(project.getAllDetails());
-				
-				consolePrinter.print(0 + " : to project list");
+			answer = userPositionLevel.validateUserChoise(categories, userChoise, selectedCategory);
+			if (!answer.toString().equals("")) {
+				consolePrinter.print(answer);
+				continue;
 			}
 
+			userPositionLevel = findNewUserPositionLevel(levelsIterator, userChoise);
+			userChoise--;
+
+			selectedCategory = userPositionLevel.findSelectedCategory(categories, userChoise, selectedCategory);
+
+			answer = userPositionLevel.generateAnswer(categories, userChoise, selectedCategory);
+			consolePrinter.print(answer);
 		}
+		consolePrinter.print("Goodbye!");
 	}
-	
+
 	public void shutdown() {
-		try {
-			consoleReader.close();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		consoleScanner.close();
+	}
+
+	private Level findNewUserPositionLevel(ListIterator<Level> listIterator, int userChoise) {
+
+		if (userChoise == 0) {
+			if (listIterator.hasPrevious()) {
+				listIterator.previous();
+				listIterator.previous();
+			}
 		}
+		return listIterator.next();
 	}
 }
