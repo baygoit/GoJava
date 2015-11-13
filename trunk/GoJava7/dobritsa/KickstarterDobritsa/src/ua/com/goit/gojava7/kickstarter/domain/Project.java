@@ -43,6 +43,10 @@ public class Project{
     	return pledged;
     }
     
+    public void addToPledged(int amount) {
+    	this.pledged += amount;
+    }
+    
     public Integer getDaysToGo() {
     	return daysToGo;
     }
@@ -58,4 +62,6 @@ public class Project{
     public String getQuestions(){
     	return questions;
     }    
+    
+    
 }

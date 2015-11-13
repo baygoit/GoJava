@@ -5,6 +5,7 @@ import java.util.List;
 import ua.com.goit.gojava7.kickstarter.console.ConsoleScanner;
 import ua.com.goit.gojava7.kickstarter.domain.Category;
 import ua.com.goit.gojava7.kickstarter.domain.Project;
+import ua.com.goit.gojava7.kickstarter.domain.User;
 import ua.com.goit.gojava7.kickstarter.storage.CategoryStorage;
 
 public class CategoryManager {
@@ -52,6 +53,7 @@ public class CategoryManager {
 	}
 
 	public void viewProject(Integer selectedCategory, Integer selectedProject) {
+		
 		System.out.println(BORDER);
 		System.out.println("Current project: #" + (selectedProject));
 		System.out.println("Current category: " + categoryStorage.get(selectedCategory - 1).getName() + "\n");
@@ -59,7 +61,20 @@ public class CategoryManager {
 				categoryStorage.get(selectedCategory - 1).get(selectedProject - 1), consoleScanner);
 		projectManager.printFull();		
 		String text = consoleScanner.getBackOrZero();
-		if(text.equals("b")) System.out.println("\nyou have typed b");
+		if(text.equals("b")) {
+			System.out.println("\nEnter your name:");
+			String name = consoleScanner.getString();
+			System.out.println("\nEnter your card's number:");
+			String card = consoleScanner.getString();
+			System.out.println("\nEnter amount:");
+			int amount = consoleScanner.getInteger(0, 
+					categoryStorage.get(selectedCategory - 1).get(selectedProject - 1).getGoal() - 
+					categoryStorage.get(selectedCategory - 1).get(selectedProject - 1).getPledged());
+			System.out.println("\nOld amount:" + categoryStorage.get(selectedCategory - 1).get(selectedProject - 1).getPledged());
+			categoryStorage.get(selectedCategory - 1).get(selectedProject - 1).addToPledged(amount);
+			System.out.println("\nOld amount:" + categoryStorage.get(selectedCategory - 1).get(selectedProject - 1).getPledged());
+			
+		}
 	}
 
 	public void printCategories(List<Category> categories) {
