@@ -20,8 +20,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="3" language="java" name="ua.com.goit.gojava7.kickstarter.domain.Payer" project="Kickstarter" 
-    file="/Kickstarter/src/ua/com/goit/gojava7/kickstarter/domain/Payer.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="3" language="java" name="ua.com.goit.gojava7.kickstarter.domain.User" project="Kickstarter" 
+    file="/Kickstarter/src/ua/com/goit/gojava7/kickstarter/domain/User.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="81" width="175" x="488" y="37"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      

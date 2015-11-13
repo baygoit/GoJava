@@ -7,10 +7,11 @@ import ua.com.goit.gojava7.kickstarter.manager.QuoteManager;
 public class Kickstarter {
 	private ConsoleScanner consoleScanner;
 	private QuoteManager quoteManager = new QuoteManager();;
-	private CategoryManager categoryManager = new CategoryManager(consoleScanner);
+	private CategoryManager categoryManager;// = new CategoryManager(consoleScanner);
 
 	public Kickstarter(ConsoleScanner consoleScanner) {	
 		this.consoleScanner = consoleScanner;
+		categoryManager = new CategoryManager(consoleScanner);
 	}
 
 	public void run() {

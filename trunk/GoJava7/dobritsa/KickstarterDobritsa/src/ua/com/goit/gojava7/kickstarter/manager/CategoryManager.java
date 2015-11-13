@@ -26,6 +26,7 @@ public class CategoryManager {
 		System.out.println("\nList of categories:");
 		printCategories(categoryStorage.getAll());
 		System.out.println("\nChoose a category by number (0 for exit): ");
+		
 		Integer selectedCategory = consoleScanner.getInteger(FIRST, categoryStorage.size());
 		if (selectedCategory == null) {
 			consoleScanner.close();
@@ -52,14 +53,13 @@ public class CategoryManager {
 
 	public void viewProject(Integer selectedCategory, Integer selectedProject) {
 		System.out.println(BORDER);
-		System.out.println("Current project: #" + (selectedProject) + "\n");
-		System.out.println(
-				"Current category: " + categoryStorage.get(selectedCategory - 1).get(selectedProject - 1).getName());
+		System.out.println("Current project: #" + (selectedProject));
+		System.out.println("Current category: " + categoryStorage.get(selectedCategory - 1).getName() + "\n");
 		ProjectManager projectManager = new ProjectManager(
-				categoryStorage.get(selectedCategory - 1).get(selectedProject - 1));
-		projectManager.printFull();
-		System.out.println("\nType 0 to choose another project");
-		consoleScanner.getInteger(FIRST, 0);
+				categoryStorage.get(selectedCategory - 1).get(selectedProject - 1), consoleScanner);
+		projectManager.printFull();		
+		String text = consoleScanner.getBackOrZero();
+		if(text.equals("b")) System.out.println("\nyou have typed b");
 	}
 
 	public void printCategories(List<Category> categories) {
@@ -71,7 +71,7 @@ public class CategoryManager {
 	public void printProjects(List<Project> projects) {
 		for (int i = 0; i < projects.size(); i++) {
 			System.out.println("\n" + (i + 1) + ":");
-			ProjectManager projectManager = new ProjectManager(projects.get(i));
+			ProjectManager projectManager = new ProjectManager(projects.get(i), consoleScanner);
 			projectManager.printShort();
 		}
 	}

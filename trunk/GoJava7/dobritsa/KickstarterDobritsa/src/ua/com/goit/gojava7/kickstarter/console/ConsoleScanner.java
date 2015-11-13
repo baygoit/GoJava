@@ -23,6 +23,20 @@ public class ConsoleScanner {
 		return number;
 	}
 
+	
+	
+	public String getBackOrZero() {
+		String text = "-1";
+		while(true) {
+			System.out.println("\nType:"
+					+ "\nb: to back this project"
+					+ "\n0: to choose another project");
+			text = sc.next();
+			if(text.equals("0")) return "0";
+			else if (text.equals("b")) return "b";
+		}
+	}
+	
 	public void close() {
 		sc.close();
 	}
