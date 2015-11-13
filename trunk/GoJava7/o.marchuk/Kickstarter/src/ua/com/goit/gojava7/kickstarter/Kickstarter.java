@@ -32,7 +32,7 @@ public class Kickstarter {
 		showCategoriesMenu();
 	}
 
-	private void showCategoriesMenu() {
+	void showCategoriesMenu() {
 		List<Category> categories = categoryStorage.getAllCategories();
 
 		int selectedCategoryIndex;
@@ -74,7 +74,7 @@ public class Kickstarter {
 				Project selectedProject = projects.get(selectedProjectIndex - 1);
 				consolePrinter.print(selectedProject);
 			} else {
-				consolePrinter.print("You entered 0. Bye.");
+				consolePrinter.print("You entered 0. Go up.");
 			}
 			// show selected category
 		} while (selectedProjectIndex != 0);

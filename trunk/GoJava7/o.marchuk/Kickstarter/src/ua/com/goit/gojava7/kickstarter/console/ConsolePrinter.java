@@ -9,7 +9,8 @@ import ua.com.goit.gojava7.kickstarter.domain.Quote;
 public class ConsolePrinter {
 
 	public void print(Quote quote) {
-		System.out.println("Quote: " + quote.getText() + " " + quote.getAuthor());
+		System.out.println("Quote: " + quote.getText() + " (c) " + quote.getAuthor());
+		System.out.println();
 	}
 
 	public void print(List<Category> categories) {
