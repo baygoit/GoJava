@@ -5,13 +5,16 @@ import java.util.Map;
 
 import com.kickstarter.model.Project;
 
+
 public class ProjectDB {
+	
+	public static Map<Integer, Project> allProjectsList;
 
 	public ProjectDB() {
 		allProjectsList = ProjectsFiller();
 	}
 
-	public Map<Integer, Project> allProjectsList = new HashMap<>();
+	
 
 	public static Map<Integer, Project> ProjectsFiller() {
 		
