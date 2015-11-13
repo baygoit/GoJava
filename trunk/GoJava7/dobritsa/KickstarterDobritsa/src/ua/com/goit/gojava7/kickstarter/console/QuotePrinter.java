@@ -10,7 +10,7 @@ public class QuotePrinter {
 	
 	public void printRandomQuote(QuoteStorage quoteStorage) {
 		Quote quote = quoteStorage.getRandomQuote();
-		System.out.println(quote.getText() + "\n     " + quote.getAuthor());
+		System.out.println(quote.getText() + "\n          " + quote.getAuthor());
 	}
 
 	public void print(QuoteStorage quoteStorage, int index) {

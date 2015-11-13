@@ -16,7 +16,7 @@ public class ConsoleScanner {
 				if (end == 0)
 					System.out.println("Type " + end + " to choose another project:");
 				else
-					System.out.println("You should type a number from 0 to " + end + ": ");
+					System.out.println("You should type a number from " + start + " to " + end + ": ");
 				number = -1;
 			} else if (number == 0) {
 				return null;
@@ -35,6 +35,16 @@ public class ConsoleScanner {
 			else if (text.equals("b"))
 				return "b";
 		}
+	}
+	
+	public String getName() {
+		String text = sc.next();
+		return text;
+	}
+	
+	public String getCreditCard() {
+		String text = sc.next();
+		return text;
 	}
 
 	public String getString() {

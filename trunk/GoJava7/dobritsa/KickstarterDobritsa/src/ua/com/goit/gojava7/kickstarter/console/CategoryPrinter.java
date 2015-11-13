@@ -18,7 +18,6 @@ public class CategoryPrinter {
 	public void printProjects(List<Project> projects) {
 		for (int i = 0; i < projects.size(); i++) {
 			System.out.println("\n" + (i + 1) + ":");
-			//ProjectPrinter projectPrinter = new ProjectPrinter(projects.get(i));
 			projectPrinter.printShort(projects.get(i));
 		}
 	}
