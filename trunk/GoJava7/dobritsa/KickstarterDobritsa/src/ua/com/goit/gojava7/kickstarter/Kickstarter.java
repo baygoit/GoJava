@@ -5,13 +5,11 @@ import ua.com.goit.gojava7.kickstarter.manager.CategoryManager;
 import ua.com.goit.gojava7.kickstarter.manager.QuoteManager;
 
 public class Kickstarter {
-	private ConsoleScanner consoleInspector;
+	private ConsoleScanner consoleScanner;
 	private QuoteManager quoteManager;
 	private CategoryManager categoryManager;
 
-	public Kickstarter(ConsoleScanner consoleInspector, 
-			CategoryManager categoryManager, QuoteManager quoteManager) {
-		this.consoleInspector = consoleInspector;
+	public Kickstarter(CategoryManager categoryManager, QuoteManager quoteManager) {
 		this.quoteManager = quoteManager;
 		this.categoryManager = categoryManager;
 	}
@@ -33,7 +31,7 @@ public class Kickstarter {
 	}
 
 	public void shutdown() {
-		consoleInspector.close();
+		consoleScanner.close();
 	}
 
 }

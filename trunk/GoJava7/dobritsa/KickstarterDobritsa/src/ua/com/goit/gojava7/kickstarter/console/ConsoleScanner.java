@@ -17,7 +17,6 @@ public class ConsoleScanner {
 				else System.out.println("You should type a number from 0 to " + end + ": ");
 				number = -1;
 			} else if (number == 0) {
-				System.out.println("else if (number == 0)");
 				return null;
 			}
 		} while (number == -1);
