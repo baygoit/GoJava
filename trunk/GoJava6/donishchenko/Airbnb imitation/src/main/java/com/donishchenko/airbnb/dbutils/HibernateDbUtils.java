@@ -1,5 +1,7 @@
 package com.donishchenko.airbnb.dbutils;
 
+import com.donishchenko.airbnb.model.Apartment;
+import com.donishchenko.airbnb.model.Reservation;
 import com.donishchenko.airbnb.model.User;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -12,7 +14,11 @@ public class HibernateDbUtils {
         try {
             Configuration configuration = new Configuration();
             configuration.configure("hibernate.cfg.xml");
-            configuration.addAnnotatedClass(User.class);
+            configuration
+                    .addAnnotatedClass(User.class)
+                    .addAnnotatedClass(Apartment.class)
+                    .addAnnotatedClass(Reservation.class);
+
 
             StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder()
                     .applySettings(configuration.getProperties());

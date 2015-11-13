@@ -15,6 +15,7 @@ import java.util.List;
 /**
  * Created by Administrator on 02.11.15.
  */
+//TODO reimplement metods
 public class ApartmentDao implements ModelDao {
     private final Connection connection;
 

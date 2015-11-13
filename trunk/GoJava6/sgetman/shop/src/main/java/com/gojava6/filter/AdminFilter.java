@@ -23,7 +23,7 @@ import java.io.IOException;
  * @author Sergii Getman (GESE) / WorldTicket A/S
  * @version 10/30/15
  */
-@WebFilter(urlPatterns = "admin/admin.jsp")
+@WebFilter(urlPatterns = "/admin")
 public class AdminFilter implements Filter {
 
 

@@ -2,7 +2,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<div id="middletext">Комбинация email и пароль неверная</div>
+<c:if test="${loginFail}">
+   <div id="middletext">Комбинация email и пароль неверная</div>
+</c:if>
+
 <table class="middle" border="0">
     <caption>Login</caption>
 

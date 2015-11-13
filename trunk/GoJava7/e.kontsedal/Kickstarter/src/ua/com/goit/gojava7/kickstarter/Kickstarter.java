@@ -1,40 +1,87 @@
 package ua.com.goit.gojava7.kickstarter;
 
+import java.io.IOException;
+
 public class Kickstarter {
+	private ConsoleReader consoleReader;
+	private ConsolePrinter consolePrinter;
+	private QuoteStorage quoteStorage;
+	private CategoryStorage categoryStorage;
 
-	public static void main(String[] args) {
-		QuoteStorage quoteStorage = new QuoteStorage();
-		StringConsolePrinter.println(quoteStorage.getRandomQuote());
+	public Kickstarter(ConsoleReader consoleReader, ConsolePrinter consolePrinter, QuoteStorage quoteStorage,
+			CategoryStorage categoryStorage) {
+		this.consoleReader = consoleReader;
+		this.consolePrinter = consolePrinter;
+		this.quoteStorage = quoteStorage;
+		this.categoryStorage = categoryStorage;
+	}
 
-		CategoryStorage categoryStorage = new CategoryStorage();
-		// creating of categories
-		categoryStorage.setCategory("Movie");
-		categoryStorage.setCategory("Art");
-		categoryStorage.setCategory("Food");
+	public void start() throws NumberFormatException, IOException {
+		consolePrinter.println(quoteStorage.getRandomQuote());
+		boolean stopWhile = true;
+		do {
+			consolePrinter.println(categoryStorage);
+			consolePrinter.println("Chose the category");
 
-		// show all categories with index
-		CategoryListConsolePrinter.println(categoryStorage);
+			int numberOfSelectedCategory = consoleReader.getNumberFromConsole();
+			do {
 
-		// ask user to select 1
-		StringConsolePrinter.println("Chose the category");
+				try {
+					Category currentCategory = categoryStorage.getCategory(numberOfSelectedCategory);
+					consolePrinter.println(currentCategory);
+				} catch (ArrayIndexOutOfBoundsException e) {
+					System.out.println("there is no such category!");
+					break;
+				} catch (IndexOutOfBoundsException e) {
+					System.out.println("there is no such category!");
+					break;
+				}
 
-		// read user input
-		UserCategorySelect selectedCategory = new UserCategorySelect();
-		int numberOfSelectedCategory = selectedCategory.getCategoryNumber();
+				consolePrinter.println(categoryStorage, numberOfSelectedCategory);
 
-		// show selected category
-		CategoryConsolePrinter
-				.println(categoryStorage.getCategory(numberOfSelectedCategory));
+				consolePrinter.println("Enter 0 ot see all categories");
+				int numberOfselectedProject = consoleReader.getNumberFromConsole();
+				if (numberOfselectedProject == 0)
+					break;
+				try {
+					Project currentProject = categoryStorage.getCategory(numberOfSelectedCategory)
+							.getProject(numberOfselectedProject);
+					do {
+						consolePrinter.println(currentProject);
+						consolePrinter.println("Enter 0 ot see all projects in this category\nEnter 1 ot make payment");
+						int actionInProject = consoleReader.getNumberFromConsole();
+						if (actionInProject == 0)
+							break;
+						else if (actionInProject == 1) {
+							consolePrinter.println("Enter your Name");
+							String cardOwner = consoleReader.getStringFromConsole();
+							consolePrinter.println("Enter Card number");
+							long cardNumber = consoleReader.getLongNumberFromConsole();
+							consolePrinter.println("Enter the amount");
+							int rechargeAmount = consoleReader.getNumberFromConsole();
+							currentProject.setPayment(cardOwner, cardNumber, rechargeAmount);
 
-		ProjectStorage projectStorage = new ProjectStorage();
-		// add project in category 0
-		projectStorage.setProject(new Project("THE BOONDOCK SAINTS",
-				"The Boondock Saints is a 1999 American crime film written and directed by Troy Duffy",
-				100000000D, 180), 0);
+						} else {
+							System.out.println("bye");
+							stopWhile = false;
+						}
+					} while (stopWhile);
 
-		// show projects in selected category
-		ProjectsConsolePrinter.println(projectStorage,
-				numberOfSelectedCategory);
+				} catch (ArrayIndexOutOfBoundsException e) {
+					System.out.println("there is no such project!");
+					continue;
+				} catch (IndexOutOfBoundsException e) {
+					System.out.println("there is no such project!");
+					continue;
+				}
 
+			} while (stopWhile);
+
+		} while (stopWhile);
+
+	}
+
+	public void stop() throws IOException {
+		consoleReader.closeReader();
 	}
 }
