@@ -2,6 +2,8 @@ package ua.com.goit.gojava7.kickstarter;
 
 import ua.com.goit.gojava7.kickstarter.console.ConsoleInspector;
 import ua.com.goit.gojava7.kickstarter.console.ConsolePrinter;
+import ua.com.goit.gojava7.kickstarter.domain.Category;
+import ua.com.goit.gojava7.kickstarter.domain.Project;
 import ua.com.goit.gojava7.kickstarter.manager.CategoryManager;
 import ua.com.goit.gojava7.kickstarter.manager.ProjectManager;
 import ua.com.goit.gojava7.kickstarter.storage.CategoryStorage;
@@ -16,6 +18,8 @@ public class Kickstarter {
 	private ConsoleInspector consoleInspector;
 	
 	private ProjectManager projectManager;
+	private Project project;
+	private Category category;
 
 	public Kickstarter(ConsolePrinter consolePrinter, ConsoleInspector consoleInspector, QuoteStorage quoteStorage,
 			CategoryStorage categoryStorage) {
@@ -27,22 +31,20 @@ public class Kickstarter {
 	}
 
 	public void run() {
-		Integer selectedCategory = -1;
-		Integer selectedProject = -1;	
+		//Integer selectedCategory = -1;
+		//Integer selectedProject = -1;	
 		int SHIFT_ONE = 1;	
 		
 		consolePrinter.print(quoteStorage.getRandomQuote());
-		CategoryManager categoryManager = new CategoryManager(consolePrinter, 
-				consoleInspector, categoryStorage);					
+		CategoryManager categoryManager = new CategoryManager(categoryStorage, 
+				category, projectManager);					
 		
-		while (selectedCategory != 0){
-			selectedCategory = categoryManager.chooseCategory();
+		while (true){
+			Integer selectedCategory = categoryManager.chooseCategory();
 			while (selectedCategory != 0) {
-				selectedProject = categoryManager.chooseProject(categoryStorage.get(selectedCategory - SHIFT_ONE), categoryStorage);
-				if(selectedProject != 0) {
-					projectManager = new ProjectManager(categoryStorage.
-							get(selectedCategory - SHIFT_ONE).get(selectedProject - SHIFT_ONE), 
-							consolePrinter, consoleInspector);
+				Integer selectedProject = categoryManager.chooseProject(categoryStorage.get(selectedCategory - SHIFT_ONE), categoryStorage);
+				if(selectedProject != null) {
+					projectManager = new ProjectManager(categoryStorage.get(selectedCategory - SHIFT_ONE).get(selectedProject - SHIFT_ONE));
 					projectManager.viewProject(selectedCategory, selectedProject);					
 				}else {
 					break;

@@ -13,7 +13,5 @@ public class Category extends Storage<Project> {
 	public String getName() {
 		return name;
 	}
-	
-	
 
 }

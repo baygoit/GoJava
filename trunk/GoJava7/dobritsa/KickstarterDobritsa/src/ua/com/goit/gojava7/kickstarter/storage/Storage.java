@@ -19,6 +19,8 @@ public abstract class Storage<T> {
 	}
 	
 	public T get(int index) {
+		//TODO Error
+		
 		return dataSource.get(index);
 	}
 

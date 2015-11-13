@@ -5,8 +5,8 @@ import java.util.Scanner;
 public class ConsoleInspector {
 	private Scanner sc = new Scanner(System.in);
 
-	public int getCorrectInt(int start, int end) {
-		int number = -1;		
+	public Integer getCorrectInt(int start, int end) {
+		Integer number = -1;		
 		do {
 			while (!sc.hasNextInt()) {
 				sc.next();
@@ -16,6 +16,9 @@ public class ConsoleInspector {
 				if (end == 0) System.out.println("Type " + end + " to choose another project:");
 				else System.out.println("You should type a number from 0 to " + end + ": ");
 				number = -1;
+			} else if (number == 0) {
+				System.out.println("else if (number == 0)");
+				return null;
 			}
 		} while (number == -1);
 		return number;
