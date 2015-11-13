@@ -3,7 +3,7 @@
   associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
   <class id="1" language="java" name="ua.com.goit.gojava7.kickstarter.ConsolePrinter" project="Kickstarter" 
     file="/Kickstarter/src/ua/com/goit/gojava7/kickstarter/ConsolePrinter.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="187" width="181" x="182" y="145"/>    
+    <position height="-1" width="-1" x="408" y="352"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -12,7 +12,7 @@
   </class>  
   <class id="2" language="java" name="ua.com.goit.gojava7.kickstarter.QuoteStorage" project="Kickstarter" 
     file="/Kickstarter/src/ua/com/goit/gojava7/kickstarter/QuoteStorage.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="151" width="150" x="630" y="145"/>    
+    <position height="-1" width="-1" x="841" y="334"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -21,7 +21,7 @@
   </class>  
   <class id="3" language="java" name="ua.com.goit.gojava7.kickstarter.CategoryStorage" project="Kickstarter" 
     file="/Kickstarter/src/ua/com/goit/gojava7/kickstarter/CategoryStorage.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="133" width="187" x="403" y="145"/>    
+    <position height="-1" width="-1" x="632" y="325"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -30,7 +30,7 @@
   </class>  
   <class id="4" language="java" name="ua.com.goit.gojava7.kickstarter.ConsoleReader" project="Kickstarter" 
     file="/Kickstarter/src/ua/com/goit/gojava7/kickstarter/ConsoleReader.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="169" width="200" x="820" y="145"/>    
+    <position height="-1" width="-1" x="1056" y="343"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -39,7 +39,7 @@
   </class>  
   <class id="5" language="java" name="ua.com.goit.gojava7.kickstarter.Kickstarter" project="Kickstarter" 
     file="/Kickstarter/src/ua/com/goit/gojava7/kickstarter/Kickstarter.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="115" width="388" x="403" y="-46"/>    
+    <position height="-1" width="-1" x="733" y="125"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -48,7 +48,7 @@
   </class>  
   <class id="6" language="java" name="ua.com.goit.gojava7.kickstarter.Project" project="Kickstarter" 
     file="/Kickstarter/src/ua/com/goit/gojava7/kickstarter/Project.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="457" width="271" x="403" y="581"/>    
+    <position height="-1" width="-1" x="674" y="923"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -57,7 +57,7 @@
   </class>  
   <class id="7" language="java" name="ua.com.goit.gojava7.kickstarter.Payment" project="Kickstarter" 
     file="/Kickstarter/src/ua/com/goit/gojava7/kickstarter/Payment.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="187" width="147" x="403" y="1078"/>    
+    <position height="-1" width="-1" x="370" y="929"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -66,7 +66,7 @@
   </class>  
   <class id="8" language="java" name="ua.com.goit.gojava7.kickstarter.Category" project="Kickstarter" 
     file="/Kickstarter/src/ua/com/goit/gojava7/kickstarter/Category.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="169" width="215" x="403" y="372"/>    
+    <position height="-1" width="-1" x="646" y="570"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -75,7 +75,7 @@
   </class>  
   <class id="9" language="java" name="ua.com.goit.gojava7.kickstarter.KickstarterRunner" project="Kickstarter" 
     file="/Kickstarter/src/ua/com/goit/gojava7/kickstarter/KickstarterRunner.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="151" width="189" x="831" y="-46"/>    
+    <position height="-1" width="-1" x="1061" y="143"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -91,27 +91,27 @@
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="13">    
-    <end type="SOURCE" refId="8" navigable="false">      
-      <attribute id="14" name="projects"/>      
-      <multiplicity id="15" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="6" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="16">    
     <end type="SOURCE" refId="5" navigable="false">      
-      <attribute id="17" name="quoteStorage"/>      
-      <multiplicity id="18" minimum="0" maximum="1"/>    
+      <attribute id="14" name="quoteStorage"/>      
+      <multiplicity id="15" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="2" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
+  <association id="16">    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="17" name="payments"/>      
+      <multiplicity id="18" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
   <association id="19">    
     <end type="SOURCE" refId="5" navigable="false">      
-      <attribute id="20" name="consoleReader"/>      
+      <attribute id="20" name="consolePrinter"/>      
       <multiplicity id="21" minimum="0" maximum="1"/>    
     </end>    
-    <end type="TARGET" refId="4" navigable="true"/>    
+    <end type="TARGET" refId="1" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="22">    
@@ -123,19 +123,19 @@
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="25">    
-    <end type="SOURCE" refId="6" navigable="false">      
-      <attribute id="26" name="payments"/>      
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="26" name="projects"/>      
       <multiplicity id="27" minimum="0" maximum="2147483647"/>    
     </end>    
-    <end type="TARGET" refId="7" navigable="true"/>    
+    <end type="TARGET" refId="6" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="28">    
     <end type="SOURCE" refId="5" navigable="false">      
-      <attribute id="29" name="consolePrinter"/>      
+      <attribute id="29" name="consoleReader"/>      
       <multiplicity id="30" minimum="0" maximum="1"/>    
     </end>    
-    <end type="TARGET" refId="1" navigable="true"/>    
+    <end type="TARGET" refId="4" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
