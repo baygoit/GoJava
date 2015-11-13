@@ -2,10 +2,10 @@ package ua.com.goit.gojava7.kickstarter.console;
 
 import java.util.Scanner;
 
-public class ConsoleInspector {
+public class ConsoleScanner {
 	private Scanner sc = new Scanner(System.in);
 
-	public Integer getCorrectInt(int start, int end) {
+	public Integer getInteger(int start, int end) {
 		Integer number = -1;		
 		do {
 			while (!sc.hasNextInt()) {

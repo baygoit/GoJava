@@ -1,15 +1,15 @@
 package ua.com.goit.gojava7.kickstarter;
 
-import ua.com.goit.gojava7.kickstarter.console.ConsoleInspector;
+import ua.com.goit.gojava7.kickstarter.console.ConsoleScanner;
 import ua.com.goit.gojava7.kickstarter.manager.CategoryManager;
 import ua.com.goit.gojava7.kickstarter.manager.QuoteManager;
 
 public class Kickstarter {
-	private ConsoleInspector consoleInspector;
+	private ConsoleScanner consoleInspector;
 	private QuoteManager quoteManager;
 	private CategoryManager categoryManager;
 
-	public Kickstarter(ConsoleInspector consoleInspector, 
+	public Kickstarter(ConsoleScanner consoleInspector, 
 			CategoryManager categoryManager, QuoteManager quoteManager) {
 		this.consoleInspector = consoleInspector;
 		this.quoteManager = quoteManager;

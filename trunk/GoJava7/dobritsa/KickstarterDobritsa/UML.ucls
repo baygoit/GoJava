@@ -20,8 +20,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="3" language="java" name="ua.com.goit.gojava7.kickstarter.console.ConsoleInspector" project="Kickstarter" 
-    file="/Kickstarter/src/ua/com/goit/gojava7/kickstarter/console/ConsoleInspector.java" binary="false" 
+  <class id="3" language="java" name="ua.com.goit.gojava7.kickstarter.console.ConsoleScanner" project="Kickstarter" 
+    file="/Kickstarter/src/ua/com/goit/gojava7/kickstarter/console/ConsoleScanner.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="135" width="177" x="832" y="675"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 

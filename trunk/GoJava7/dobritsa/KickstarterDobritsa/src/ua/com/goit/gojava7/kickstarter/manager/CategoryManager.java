@@ -2,14 +2,14 @@ package ua.com.goit.gojava7.kickstarter.manager;
 
 import java.util.List;
 
-import ua.com.goit.gojava7.kickstarter.console.ConsoleInspector;
+import ua.com.goit.gojava7.kickstarter.console.ConsoleScanner;
 import ua.com.goit.gojava7.kickstarter.domain.Category;
 import ua.com.goit.gojava7.kickstarter.domain.Project;
 import ua.com.goit.gojava7.kickstarter.storage.CategoryStorage;
 
 public class CategoryManager {	
 	
-	private ConsoleInspector consoleInspector = new ConsoleInspector();
+	private ConsoleScanner consoleInspector = new ConsoleScanner();
 	private CategoryStorage categoryStorage;
 	
 	private String BORDER = "\n________________________________________________________";
@@ -25,7 +25,7 @@ public class CategoryManager {
 		System.out.println("\nList of categories:");
 		printCategories(categoryStorage.getAll());
 		System.out.println("\nChoose a category by number (0 for exit): ");
-		Integer selectedCategory = consoleInspector.getCorrectInt(FIRST, categoryStorage.size());
+		Integer selectedCategory = consoleInspector.getInteger(FIRST, categoryStorage.size());
 		if (selectedCategory == null) {
 			consoleInspector.close();
 			System.out.println("See you soon!");
@@ -41,7 +41,7 @@ public class CategoryManager {
 		System.out.println("List of projects:");
 		printProjects(categoryStorage.get(selectedCategory - SHIFT_ONE).getAll());
 		System.out.println("\nChoose a project by number (first to choose another category): ");
-		Integer selectedProject = consoleInspector.getCorrectInt(FIRST, 
+		Integer selectedProject = consoleInspector.getInteger(FIRST, 
 				categoryStorage.get(selectedCategory - SHIFT_ONE).size());
 		if(selectedProject == null) {
 			return null;
@@ -56,7 +56,7 @@ public class CategoryManager {
 		ProjectManager projectManager = new ProjectManager(categoryStorage.get(selectedCategory - 1).get(selectedProject - 1));
 		projectManager.printFull();
 		System.out.println("\nType 0 to choose another project");
-		consoleInspector.getCorrectInt(FIRST, 0);
+		consoleInspector.getInteger(FIRST, 0);
 	}
 		
 	public void printCategories(List<Category> categories) {
