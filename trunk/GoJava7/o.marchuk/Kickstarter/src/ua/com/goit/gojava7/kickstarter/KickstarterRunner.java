@@ -52,12 +52,12 @@ public class KickstarterRunner {
 		category = new Category("Dances");
 		category.getProjects().add(new Project("Dance with me", "It's about tango", 50000L, 30));
 		category.getProjects().add(new Project("Waltz", "It's about waltz", 20000L, 14));
-		categoryStorage.add(new Category("Dances"));
+		categoryStorage.add(category);
 
 		category = new Category("Food");
 		category.getProjects().add(new Project("Prosciutto ", "Italian ham", 5000L, 10));
 		category.getProjects().add(new Project("Popato", "Belarussian potato", 200L, 5));
-		categoryStorage.add(new Category("Food"));
+		categoryStorage.add(category);
 		return categoryStorage;
 	}
 }
