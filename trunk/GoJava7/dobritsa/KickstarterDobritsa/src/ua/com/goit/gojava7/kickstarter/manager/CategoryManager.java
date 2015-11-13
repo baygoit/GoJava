@@ -1,18 +1,17 @@
 package ua.com.goit.gojava7.kickstarter.manager;
 
-import java.util.List;
-
 import ua.com.goit.gojava7.kickstarter.console.ConsoleScanner;
 import ua.com.goit.gojava7.kickstarter.console.ProjectPrinter;
+import ua.com.goit.gojava7.kickstarter.console.CategoryPrinter;
 import ua.com.goit.gojava7.kickstarter.domain.Category;
 import ua.com.goit.gojava7.kickstarter.domain.Project;
-import ua.com.goit.gojava7.kickstarter.domain.User;
 import ua.com.goit.gojava7.kickstarter.storage.CategoryStorage;
 
 public class CategoryManager {
 
 	private ConsoleScanner consoleScanner;
 	private CategoryStorage categoryStorage;
+	private CategoryPrinter categoryPrinter = new CategoryPrinter();
 
 	private String BORDER = "\n________________________________________________________";
 	private int SHIFT_ONE = 1;
@@ -26,7 +25,7 @@ public class CategoryManager {
 	public Integer chooseCategory() {
 		System.out.println(BORDER);
 		System.out.println("\nList of categories:");
-		printCategories(categoryStorage.getAll());
+		categoryPrinter.printCategories(categoryStorage.getAll());
 		System.out.println("\nChoose a category by number (0 for exit): ");
 		
 		Integer selectedCategory = consoleScanner.getInteger(FIRST, categoryStorage.size());
@@ -43,7 +42,7 @@ public class CategoryManager {
 		System.out.println("Current category N: " + selectedCategory + "("
 				+ categoryStorage.get(selectedCategory - SHIFT_ONE).getName() + ")");
 		System.out.println("List of projects:");
-		printProjects(categoryStorage.get(selectedCategory - SHIFT_ONE).getAll());
+		categoryPrinter.printProjects(categoryStorage.get(selectedCategory - SHIFT_ONE).getAll());
 		System.out.println("\nChoose a project by number (first to choose another category): ");
 		Integer selectedProject = consoleScanner.getInteger(FIRST,
 				categoryStorage.get(selectedCategory - SHIFT_ONE).size());
@@ -75,20 +74,6 @@ public class CategoryManager {
 			categoryStorage.get(selectedCategory - 1).get(selectedProject - 1).addToPledged(amount);
 			System.out.println("\nOld amount:" + categoryStorage.get(selectedCategory - 1).get(selectedProject - 1).getPledged());
 			
-		}
-	}
-
-	public void printCategories(List<Category> categories) {
-		for (int i = 0; i < categories.size(); i++) {
-			System.out.println(i + 1 + ": " + categories.get(i).getName());
-		}
-	}
-
-	public void printProjects(List<Project> projects) {
-		for (int i = 0; i < projects.size(); i++) {
-			System.out.println("\n" + (i + 1) + ":");
-			ProjectPrinter projectPrinter = new ProjectPrinter(projects.get(i));
-			projectPrinter.printShort();
 		}
 	}
 
