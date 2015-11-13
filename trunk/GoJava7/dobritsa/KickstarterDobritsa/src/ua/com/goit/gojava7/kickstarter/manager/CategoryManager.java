@@ -3,6 +3,7 @@ package ua.com.goit.gojava7.kickstarter.manager;
 import java.util.List;
 
 import ua.com.goit.gojava7.kickstarter.console.ConsoleScanner;
+import ua.com.goit.gojava7.kickstarter.console.ProjectPrinter;
 import ua.com.goit.gojava7.kickstarter.domain.Category;
 import ua.com.goit.gojava7.kickstarter.domain.Project;
 import ua.com.goit.gojava7.kickstarter.domain.User;
@@ -57,9 +58,9 @@ public class CategoryManager {
 		System.out.println(BORDER);
 		System.out.println("Current project: #" + (selectedProject));
 		System.out.println("Current category: " + categoryStorage.get(selectedCategory - 1).getName() + "\n");
-		ProjectManager projectManager = new ProjectManager(
-				categoryStorage.get(selectedCategory - 1).get(selectedProject - 1), consoleScanner);
-		projectManager.printFull();		
+		ProjectPrinter projectPrinter = new ProjectPrinter(
+				categoryStorage.get(selectedCategory - 1).get(selectedProject - 1));
+		projectPrinter.printFull();		
 		String text = consoleScanner.getBackOrZero();
 		if(text.equals("b")) {
 			System.out.println("\nEnter your name:");
@@ -86,8 +87,8 @@ public class CategoryManager {
 	public void printProjects(List<Project> projects) {
 		for (int i = 0; i < projects.size(); i++) {
 			System.out.println("\n" + (i + 1) + ":");
-			ProjectManager projectManager = new ProjectManager(projects.get(i), consoleScanner);
-			projectManager.printShort();
+			ProjectPrinter projectPrinter = new ProjectPrinter(projects.get(i));
+			projectPrinter.printShort();
 		}
 	}
 

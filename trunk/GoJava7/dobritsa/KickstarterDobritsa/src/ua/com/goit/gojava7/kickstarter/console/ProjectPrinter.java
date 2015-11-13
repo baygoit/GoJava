@@ -1,17 +1,15 @@
-package ua.com.goit.gojava7.kickstarter.manager;
+package ua.com.goit.gojava7.kickstarter.console;
 
-import ua.com.goit.gojava7.kickstarter.console.ConsoleScanner;
 import ua.com.goit.gojava7.kickstarter.domain.Project;
 
-public class ProjectManager {
+public class ProjectPrinter {
 	Project project;
-	ConsoleScanner consoleScanner;
 
-	public ProjectManager(Project project, ConsoleScanner consoleScanner) {
+	public ProjectPrinter(Project project) {
 		this.project = project;
-		this.consoleScanner = consoleScanner;
+
 	}
-	
+
 	public void printShort() {
 		System.out.println("Name: " + project.getName());
 		System.out.println("Short description: " + project.getDescription());
@@ -26,6 +24,5 @@ public class ProjectManager {
 		System.out.println("Link to the demo video: " + project.getLink());
 		System.out.println("Questions/Answers: " + project.getQuestions());
 	}
-	
-	
+
 }
