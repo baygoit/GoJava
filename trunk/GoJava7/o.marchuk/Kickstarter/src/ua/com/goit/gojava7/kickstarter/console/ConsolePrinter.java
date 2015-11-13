@@ -42,8 +42,15 @@ public class ConsolePrinter {
 		
 	}
 
-	public void print(Project selectedProject) {
-		// TODO Auto-generated method stub
+	public void print(Project project) {
+		System.out.println("Project: " + project.getName());
+		System.out.println("\t Short description: " + project.getShortDescription());
+		System.out.println("\t Required amount: " + project.getRequiredAmount() / (double) 10);
+		System.out.println("\t Gathered amount: " + project.getGatheredAmount() / (double) 10);
+		System.out.println("\t Days left: " + project.getDaysLeft());
+		System.out.println("\t History: " + project.getHistory());
+		System.out.println("\t Video: " + project.getVideoUrl());
+		System.out.println("\t Q&As: " + project.getQuestionsAndAnswers());
 
 	}
 }

@@ -20,9 +20,32 @@ public class ProjectTest {
 
 	@Test
 	public void testSetGetGatheredAmount() {
+		assertThat(project.getGatheredAmount(), is(0L));
 		project.setGatheredAmount(555L);
 		assertThat(project.getGatheredAmount(), is(555L));
 	}
+
+	@Test
+	public void testSetGetHistory() {
+		assertThat(project.getHistory(), is(""));
+		project.setHistory("History");
+		assertThat(project.getHistory(), is("History"));
+	}
+
+	@Test
+	public void testSetGetVideoUrl() {
+		assertThat(project.getVideoUrl(), is(""));
+		project.setVideoUrl("Url");
+		assertThat(project.getVideoUrl(), is("Url"));
+	}
+
+	@Test
+	public void testSetGetQuestionsAndAnswers() {
+		assertThat(project.getQuestionsAndAnswers(), is(""));
+		project.setQuestionsAndAnswers("Q&As");
+		assertThat(project.getQuestionsAndAnswers(), is("Q&As"));
+	}
+
 
 	@Test
 	public void testHashCode() {

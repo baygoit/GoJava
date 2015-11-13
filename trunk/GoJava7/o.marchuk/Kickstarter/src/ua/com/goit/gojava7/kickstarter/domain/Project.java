@@ -7,6 +7,9 @@ public class Project {
 	private long requiredAmount;
 	private long gatheredAmount;
 	private int daysLeft;
+	private String history = "";
+	private String videoUrl = "";
+	private String questionsAndAnswers = "";
 
 	public Project(String name, String shortDescription, long requiredAmount, int daysLeft) {
 		this.name = name;
@@ -25,6 +28,30 @@ public class Project {
 
 	public long getRequiredAmount() {
 		return requiredAmount;
+	}
+
+	public String getHistory() {
+		return history;
+	}
+
+	public void setHistory(String history) {
+		this.history = history;
+	}
+
+	public String getVideoUrl() {
+		return videoUrl;
+	}
+
+	public void setVideoUrl(String videoUrl) {
+		this.videoUrl = videoUrl;
+	}
+
+	public String getQuestionsAndAnswers() {
+		return questionsAndAnswers;
+	}
+
+	public void setQuestionsAndAnswers(String questionsAndAnswers) {
+		this.questionsAndAnswers = questionsAndAnswers;
 	}
 
 	@Override
