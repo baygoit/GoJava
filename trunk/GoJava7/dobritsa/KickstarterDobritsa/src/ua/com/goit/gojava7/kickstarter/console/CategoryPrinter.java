@@ -6,6 +6,9 @@ import ua.com.goit.gojava7.kickstarter.domain.Category;
 import ua.com.goit.gojava7.kickstarter.domain.Project;
 
 public class CategoryPrinter {
+	
+	ProjectPrinter projectPrinter = new ProjectPrinter();
+	
 	public void printCategories(List<Category> categories) {
 		for (int i = 0; i < categories.size(); i++) {
 			System.out.println(i + 1 + ": " + categories.get(i).getName());
@@ -15,8 +18,8 @@ public class CategoryPrinter {
 	public void printProjects(List<Project> projects) {
 		for (int i = 0; i < projects.size(); i++) {
 			System.out.println("\n" + (i + 1) + ":");
-			ProjectPrinter projectPrinter = new ProjectPrinter(projects.get(i));
-			projectPrinter.printShort();
+			//ProjectPrinter projectPrinter = new ProjectPrinter(projects.get(i));
+			projectPrinter.printShort(projects.get(i));
 		}
 	}
 }
