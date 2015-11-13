@@ -1,18 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ua.com.goit.gojava7.salivon.beans;
 
 import java.util.Calendar;
 import java.util.Date;
-import ua.com.goit.gojava7.salivon.IdProject;
 
-/**
- *
- * @author salivon.i
- */
 public class Project {
 
     private int id;
@@ -27,7 +17,7 @@ public class Project {
     private String link;
     private String faq;
 
-    public Project(String title, int total, int idCategory) {
+    public Project(String title, int total, int idCategory, int id) {
         setDateStart();
         description = "...description...";
         collectedAmount = 0;
@@ -37,7 +27,11 @@ public class Project {
         historyProject = "...history...";
         link = "...link...";
         faq = "...FAQ...";
-        setId();
+        this.id = id;
+    }
+
+    public Date getDateStart() {
+        return dateStart;
     }
 
     private void setDateStart() {
@@ -45,53 +39,91 @@ public class Project {
 
     }
 
-    public String getHistoryProject() {
-        return historyProject;
-    }
-
-    public String getLink() {
-        return link;
-    }
-
-    public String getFaq() {
-        return faq;
-    }
-
-    public int getCollectedAmount() {
-        return collectedAmount;
-    }
-
-    public int getTotal() {
-        return total;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
     public int getIdCategory() {
         return idCategory;
+    }
+
+    public void setIdCategory(int idCategory) {
+        this.idCategory = idCategory;
     }
 
     public String getTitle() {
         return title;
     }
 
-    public int getNumberOfDaysToEnd() {
-        long milSecondStart = dateStart.getTime();
-        long milSecondEnd = Calendar.getInstance().getTimeInMillis();
-        int numberOfDaysInWork = (int) (milSecondEnd - milSecondStart) / (1000 * 60 * 60 * 24);
-        return numberOfDaysInWork - numberOfDaysToImplement;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    private void setId() {
-        IdProject ic = IdProject.getInstance();
-        id = ic.getNumberId();
-        ic.setNumberId();
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public int getTotal() {
+        return total;
+    }
+
+    public void setTotal(int total) {
+        this.total = total;
+    }
+
+    public int getNumberOfDaysToImplement() {
+        return numberOfDaysToImplement;
+    }
+
+    public void setNumberOfDaysToImplement(int numberOfDaysToImplement) {
+        this.numberOfDaysToImplement = numberOfDaysToImplement;
+    }
+
+    public String getHistoryProject() {
+        return historyProject;
+    }
+
+    public void setHistoryProject(String historyProject) {
+        this.historyProject = historyProject;
+    }
+
+    public String getLink() {
+        return link;
+    }
+
+    public void setLink(String link) {
+        this.link = link;
+    }
+
+    public int getCollectedAmount() {
+        return collectedAmount;
+    }
+
+    public void setCollectedAmount(int collectedAmount) {
+        this.collectedAmount += collectedAmount;
+    }
+
+    public String getFaq() {
+        return faq;
+    }
+
+    public void setFaq(String faq) {
+        this.faq += faq + "\n";
+    }
+
+    private void setId(int id) {
+        this.id = id;
     }
 
     public int getId() {
         return id;
+    }
+
+    public int getNumberOfDaysToEnd() {
+        long milSecondStart = dateStart.getTime();
+        long milSecondEnd = Calendar.getInstance().getTimeInMillis();
+        int numberOfDaysInWork = (int) (milSecondEnd - milSecondStart) / (1000 * 60 * 60 * 24);
+        return numberOfDaysToImplement - numberOfDaysInWork;
     }
 
 }

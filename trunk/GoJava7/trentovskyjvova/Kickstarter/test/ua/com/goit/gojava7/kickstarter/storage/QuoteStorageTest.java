@@ -11,12 +11,13 @@ import org.junit.Test;
 import ua.com.goit.gojava7.kickstarter.domain.Quote;
 
 public class QuoteStorageTest {
-	private static final Random RANDOM = new Random(42);
+	private Random random;
 	private QuoteStorage quoteStorage;
 	
     @Before
     public void setUp() {
-    	quoteStorage = new QuoteStorage();
+    	random = new FakeRandom();
+    	quoteStorage = new QuoteStorage(random);
     }
 	
 	@Test
@@ -42,8 +43,14 @@ public class QuoteStorageTest {
 	public void TestGetRandomQuote() {
 		quoteStorage.add(new Quote("aaa", "sdsd"));
 		quoteStorage.add(new Quote("aaa2", "sdsd2"));
-		int randomNumber = RANDOM.nextInt(quoteStorage.size());
+		int randomNumber = random.nextInt(quoteStorage.size());
 
 		assertThat(quoteStorage.getRandomQuote(), is(quoteStorage.get(randomNumber)));
+	}
+	
+	class FakeRandom extends Random{
+		public int nextInt(int size) {
+			return 1;
+		}
 	}
 }

@@ -1,7 +1,9 @@
 package ua.com.goit.gojava7.kickstarter;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
 import ua.com.goit.gojava7.kickstarter.console.ConsolePrinter;
 import ua.com.goit.gojava7.kickstarter.console.ConsoleScanner;
 import ua.com.goit.gojava7.kickstarter.model.Category;
@@ -12,11 +14,10 @@ import ua.com.goit.gojava7.kickstarter.storage.CategoryStorage;
 import ua.com.goit.gojava7.kickstarter.storage.ProjectManager;
 import ua.com.goit.gojava7.kickstarter.storage.QuoteStorage;
 
-/**
- * @author Devian
- * @category Main
- */
 public class Kickstarter {
+
+	private static final String QUOTE_BY_MISHA_COLLINS = "I actually think that the most efficacious way of making a difference is to lead by example, and doing random acts of kindness is setting a very good example of how to behave in the world.";
+	private static final String QUOTE_BY_PRINCESS_DIANA = "Carry out a random act of kindness, with no expectation of reward, safe in the knowledge that one day someone might do the same for you.";
 
 	public Kickstarter() {
 		initQuotes();
@@ -26,8 +27,6 @@ public class Kickstarter {
 	}
 
 	private Body body;
-	private static final boolean LOGS_ENABLED = true;
-	private ArrayList<String> logs = new ArrayList<>();
 	private ProjectManager projectManager = new ProjectManager(this);
 
 	public ProjectManager getProjectManager() {
@@ -40,22 +39,28 @@ public class Kickstarter {
 
 	private QuoteStorage quoteStorage = new QuoteStorage();
 	private CategoryStorage categoryStorage = new CategoryStorage();
-
 	private ConsoleScanner cs = new ConsoleScanner();
 	private ConsolePrinter consolePrinter = new ConsolePrinter();
-
 	private UserManager userManager = new UserManager(consolePrinter, cs, categoryStorage, this);
 
 	public static void main(String[] args) {
 		Kickstarter kickstarter = new Kickstarter();
 		Project project = new Project("GoIT Java 7", "Movie about our GoIT Java 7 Group",
 				kickstarter.getCategoryStorage().getCategoryById(1), LocalDateTime.now().plusHours(23));
+		kickstarter.getProjectManager().getProjectByName("Catana").setDemoLink("www.catana.game");
+		Map<String,String> qa = new HashMap<String,String>();
+		qa.put("What is project about?","It is about our goit7 group");
+		qa.put("When was it started", "October 2015");
+		kickstarter.getProjectManager().getProjectByName("Catana").setQuestionsAndAnswers(qa);
 		kickstarter.addProject(project);
 		User guest = new User();
 		kickstarter.addProject(project);
+		kickstarter.getProjectManager().getProjects().forEach(p -> {
+			p.setMoneyNeeded(50000);
+		});
 		kickstarter.getBody().generateMainPage();
-		kickstarter.getUserManager().chooseCategory(guest);
-		kickstarter.getProjectManager().showCategoryInfo(guest);
+		kickstarter.getUserManager().chooseProject(kickstarter.getProjectManager(), kickstarter.getUserManager().chooseCategory(guest));
+		//kickstarter.getProjectManager().showCategoryInfo(guest);
 
 	}
 
@@ -67,9 +72,7 @@ public class Kickstarter {
 		this.cs = cs;
 	}
 
-	public Project getProjectById(int id) {
-		return projectManager.getProjects().get(id);
-	}
+	
 
 	public QuoteStorage getQuoteStorage() {
 		return quoteStorage;
@@ -99,23 +102,16 @@ public class Kickstarter {
 		this.categoryStorage = categoryStorage;
 	}
 
-	public void addProject(Project pr) {
+	public synchronized void addProject(Project pr) {
 		projectManager.getProjects().add(pr);
-
-		addLog("Project " + pr.getProjectName() + " added.");
-	}
-
-	protected void addLog(String s) {
-		if (LOGS_ENABLED)
-			logs.add(s);
 	}
 
 	public void initQuotes() {
 		quoteStorage.addQuote(new Quote(
-				"Carry out a random act of kindness, with no expectation of reward, safe in the knowledge that one day someone might do the same for you.",
+				QUOTE_BY_PRINCESS_DIANA,
 				"Princess Diana"));
 		quoteStorage.addQuote(new Quote(
-				"I actually think that the most efficacious way of making a difference is to lead by example, and doing random acts of kindness is setting a very good example of how to behave in the world.",
+				QUOTE_BY_MISHA_COLLINS,
 				"Misha Collins"));
 	}
 
@@ -133,9 +129,7 @@ public class Kickstarter {
 		projectManager.addProject(new Project("Terminator Exodus", "New game about fighting as Terminator",
 				categoryStorage.getCategoryById(3), dateTime));
 		projectManager.getProjectByName("Catana").addBacker(new User(), Double.valueOf(25000));
-		projectManager.getProjects().forEach(p -> {
-			p.setMoneyNeeded(50000);
-		});
+		
 
 	}
 

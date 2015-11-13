@@ -11,7 +11,7 @@ import static org.junit.Assert.*;
 
 public class UserHibernateDaoTest {
 
-    private UserHibernateDao dao = new UserHibernateDao();
+    private UserDao dao = new UserHibernateDao();
     private User user = new User("testuser", "secretpassword", "sacr8tum@gmail.com", true, "Dmitry", "Onishchenko");
 
     @Before
@@ -42,10 +42,9 @@ public class UserHibernateDaoTest {
 
     @Test
     public void testUpdate() {
-        String oldLogin = user.getLogin();
-
         dao.save(user);
 
+        String oldLogin = user.getLogin();
         user.setLogin("NewLogin");
         assertTrue("Successful update returns true", dao.update(user));
 

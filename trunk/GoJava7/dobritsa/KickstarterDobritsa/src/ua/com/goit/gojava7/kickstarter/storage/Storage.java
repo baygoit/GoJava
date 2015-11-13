@@ -17,6 +17,11 @@ public abstract class Storage<T> {
 	}
 	
 	public T get(int index) {
+		if(dataSource.size() == 0) {
+			System.out.println("Nothing to show");
+			System.exit(0);
+			return null;
+		}		
 		return dataSource.get(index);
 	}
 
@@ -30,6 +35,11 @@ public abstract class Storage<T> {
 	
 	public int size() {
 		return dataSource.size();
+	}
+	
+	public int indexOf(T element) {
+		return dataSource.indexOf(element);
+		
 	}
 	
 }
