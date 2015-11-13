@@ -1,53 +1,21 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package ua.com.goit.gojava7.salivon.view;
+package ua.com.goit.gojava7.salivon.context;
 
 import java.util.Scanner;
 import ua.com.goit.gojava7.salivon.state.CategoryState;
+import ua.com.goit.gojava7.salivon.state.PaymentState;
 import ua.com.goit.gojava7.salivon.state.ProjectState;
 import ua.com.goit.gojava7.salivon.state.State;
 import ua.com.goit.gojava7.salivon.state.WelcomeState;
 import ua.com.goit.gojava7.salivon.stores.StoreCategories;
 import ua.com.goit.gojava7.salivon.stores.StoreProjects;
 
-/**
- *
- * @author Salivon Ivan
- */
 public class Console {
 
-    private State welcomState;
-    private State categoryState;
-    private State projectState;
-    private State currentState;
+    private State currentState = new WelcomeState();
     private String inData;
-    private Scanner scan;
-
-    public Console() {
-        welcomState = new WelcomeState();
-        categoryState = new CategoryState();
-        projectState = new ProjectState();
-        scan = new Scanner(System.in);
-        currentState = welcomState;
-    }
 
     public String getInData() {
         return inData;
-    }
-
-    public State getWelcomState() {
-        return welcomState;
-    }
-
-    public State getCategoryState() {
-        return categoryState;
-    }
-
-    public State getProjectState() {
-        return projectState;
     }
 
     public State getCurrentState() {
