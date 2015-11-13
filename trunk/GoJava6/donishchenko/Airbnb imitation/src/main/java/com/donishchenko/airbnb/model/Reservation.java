@@ -1,23 +1,42 @@
 package com.donishchenko.airbnb.model;
 
 import com.google.common.base.Joiner;
+import org.hibernate.annotations.GenericGenerator;
 
+import javax.persistence.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+@Entity
+@Table(name = "reservation")
 public class Reservation {
-    private int id;
-    private int userId;
-    private int apartmentId;
+    @Id
+    @GeneratedValue(generator = "increment")
+    @GenericGenerator(name = "increment", strategy = "increment")
+    private Integer id;
+
+    @ManyToOne
+    @JoinColumn(name = "userId")
+    private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "apartmentId")
+    private Apartment apartment;
+
+    @Column(name = "start")
     private Date start;
+
+    @Column(name = "end")
     private Date end;
+
+    @Column(name = "comment")
     private String comment;
 
     public Reservation() {}
 
-    public Reservation(int userId, int apartmentId, Date start, Date end, String comment) {
-        this.userId = userId;
-        this.apartmentId = apartmentId;
+    public Reservation(User user, Apartment apartment, Date start, Date end, String comment) {
+        this.user = user;
+        this.apartment = apartment;
         this.start = start;
         this.end = end;
         this.comment = comment;
@@ -31,20 +50,20 @@ public class Reservation {
         this.id = id;
     }
 
-    public int getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public int getApartmenId() {
-        return apartmentId;
+    public Apartment getApartment() {
+        return apartment;
     }
 
-    public void setApartment(int apartmentId) {
-        this.apartmentId = apartmentId;
+    public void setApartment(Apartment apartmentId) {
+        this.apartment = apartmentId;
     }
 
     public Date getStart() {
@@ -72,10 +91,27 @@ public class Reservation {
     }
 
     @Override
+    public boolean equals(Object obj) {
+        if (obj == this) return true;
+        if (obj == null) return false;
+
+        if (!(obj instanceof Reservation)) return false;
+
+        Reservation other = (Reservation) obj;
+
+        return id.equals(other.id) &&
+                user.equals(other.user) &&
+                apartment.equals(other.apartment) &&
+                start.equals(other.start) &&
+                end.equals(other.end) &&
+                comment.equals(other.comment);
+    }
+
+    @Override
     public String toString() {
         SimpleDateFormat format = new SimpleDateFormat("dd.MM.yy");
-        return Joiner.on("").join("Reservation{id='", id, "', userId='", userId,
-                "', apartmentId='", apartmentId, "', start='", format.format(start), "', end='",
+        return Joiner.on("").join("Reservation{id='", id, "', user='", user,
+                "', apartment='", apartment, "', start='", format.format(start), "', end='",
                 format.format(end), "', comment='", comment, "'}");
     }
 }

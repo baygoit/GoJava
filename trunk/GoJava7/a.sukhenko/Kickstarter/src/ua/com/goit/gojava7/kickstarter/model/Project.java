@@ -3,13 +3,15 @@ package ua.com.goit.gojava7.kickstarter.model;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.HashMap;
+import java.util.Map;
 
 public class Project {
 	private String projectName;
 	private String projectDescription;
-	private double moneyPledged;
 	private double moneyNeeded;
-
+	private String projectHistory;
+	private String demoLink;
+	private Map<String,String> questionsAndAnswers = new HashMap<>();
 	public double getMoneyNeeded() {
 		return moneyNeeded;
 	}
@@ -76,12 +78,13 @@ public class Project {
 	}
 
 	public double getMoneyPledged() {
+		double moneyPledged=0;
+		for(Double money : backers.values()){
+			moneyPledged+=money;
+		}
 		return moneyPledged;
 	}
 
-	public void setMoneyPledged(double moneyPledged) {
-		this.moneyPledged = moneyPledged;
-	}
 
 	public Category getProjectCategory() {
 		return projectCategory;
@@ -105,6 +108,30 @@ public class Project {
 
 	public void setEnddate(LocalDateTime enddate) {
 		this.enddate = enddate;
+	}
+
+	public String getProjectHistory() {
+		return projectHistory;
+	}
+
+	public void setProjectHistory(String projectHistory) {
+		this.projectHistory = projectHistory;
+	}
+
+	public Map<String,String> getQuestionsAndAnswers() {
+		return questionsAndAnswers;
+	}
+
+	public void setQuestionsAndAnswers(Map<String,String> questionsAndAnswers) {
+		this.questionsAndAnswers = questionsAndAnswers;
+	}
+
+	public String getDemoLink() {
+		return demoLink;
+	}
+
+	public void setDemoLink(String demoLink) {
+		this.demoLink = demoLink;
 	}
 
 }

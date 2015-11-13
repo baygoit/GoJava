@@ -10,13 +10,13 @@ import com.kickstarter.model.Project;
 public class ConsolePrintView {
 
 	public void allCategoriesView(List<Category> list) {
-		// int i = 1;
-		// list.forEach((category)->System.out.println(i++ + "\t->" +
-		// list.get(i)));
-
-		for (int i = 1; i < list.size(); i++) {
-			System.out.println(i + "\t->" + list.get(i));
-		}
+//		 int i = 1;
+//		 list.forEach((category)->System.out.println(i + "\t->" +
+//		 list.get(i)));
+//		 i++;
+     	for (int i = 1; i < list.size(); i++) {
+		System.out.println(i + "\t->" + list.get(i));
+	}
 	}
 
 	public void categorySelectionInform() {
@@ -100,5 +100,9 @@ public class ConsolePrintView {
 			i++;
 		}
 
+	}
+
+	public void qoutePrint(String quote) {
+		System.out.println(quote);
 	}
 }

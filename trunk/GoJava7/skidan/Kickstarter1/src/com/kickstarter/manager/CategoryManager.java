@@ -1,6 +1,6 @@
 package com.kickstarter.manager;
 
-import java.util.ArrayList;
+
 import java.util.List;
 
 import com.kickstarter.db.CategoryDB;

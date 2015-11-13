@@ -17,6 +17,8 @@ public abstract class Storage<T> {
 	}
 	
 	public T get(int index) {
+		//TODO Error
+		
 		return dataSource.get(index);
 	}
 
@@ -30,6 +32,11 @@ public abstract class Storage<T> {
 	
 	public int size() {
 		return dataSource.size();
+	}
+	
+	public int indexOf(T element) {
+		return dataSource.indexOf(element);
+		
 	}
 	
 }
