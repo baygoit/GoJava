@@ -1,15 +1,15 @@
 package ua.com.goit.gojava7.kickstarter.domain;
 
 public class Quote {
-	
+
 	private String text;
 	private String author;
-	
+
 	public Quote(String text, String author) {
 		setText(text);
 		setAuthor(author);
 	}
-	
+
 	public String getText() {
 		return text;
 	}

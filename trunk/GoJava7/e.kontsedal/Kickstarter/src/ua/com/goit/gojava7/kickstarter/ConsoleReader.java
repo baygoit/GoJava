@@ -9,7 +9,7 @@ public class ConsoleReader {
 			new InputStreamReader(System.in));
 
 	public int getNumberFromConsole()
-			throws NumberFormatException, IOException {
+			throws IOException {
 		do {
 			String s = reader.readLine();
 			try {
@@ -20,6 +20,22 @@ public class ConsoleReader {
 			}
 		} while (true);
 		
+	}
+	public long getLongNumberFromConsole()
+			throws IOException {
+		do {
+			String s = reader.readLine();
+			try {
+				return Long.parseLong(s);	
+			} catch (NumberFormatException e) {
+				System.out.println("Write a number!");
+				continue;
+			}
+		} while (true);
+		
+	}
+	public String getStringFromConsole() throws IOException {
+		return reader.readLine();
 	}
 
 	public void closeReader() throws IOException {

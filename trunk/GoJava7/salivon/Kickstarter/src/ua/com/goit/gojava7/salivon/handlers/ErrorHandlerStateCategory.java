@@ -1,31 +1,22 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ua.com.goit.gojava7.salivon.handlers;
 
 import java.util.List;
 import ua.com.goit.gojava7.salivon.beans.Category;
-import ua.com.goit.gojava7.salivon.handlers.HandlerError;
+import ua.com.goit.gojava7.salivon.handlers.ErrorHandler;
 import ua.com.goit.gojava7.salivon.beans.Project;
 import ua.com.goit.gojava7.salivon.state.State;
 import ua.com.goit.gojava7.salivon.stores.StoreCategories;
 import ua.com.goit.gojava7.salivon.stores.StoreProjects;
 
-/**
- *
- * @author salivon.i
- */
-public class HandlerErrorCategoryScene extends HandlerError {
+public class ErrorHandlerStateCategory implements ErrorHandler {
 
     private List<Category> categories = StoreCategories.getCategories();
     private List<Project> projects = StoreProjects.getProjects();
 
     @Override
-    public boolean validate(String inDate) {
+    public boolean validate(String inData) {
         try {
-            int n = Integer.parseInt(inDate);
+            int n = Integer.parseInt(inData);
             if (n == 0) {
                 return true;
             }
@@ -33,9 +24,6 @@ public class HandlerErrorCategoryScene extends HandlerError {
             return n - 1 >= 0 && n - 1 < projects.size() && hasProject(n);
 
         } catch (NumberFormatException e) {
-            if (inDate.equalsIgnoreCase("q")) {
-                exit();
-            }
             return false;
         }
 

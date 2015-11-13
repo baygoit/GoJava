@@ -1,55 +1,37 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ua.com.goit.gojava7.salivon.stores;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import ua.com.goit.gojava7.salivon.beans.Quote;
 
-/**
- *
- * @author Оля
- */
 public class StoreQuotes {
 
-    private static List<String> quotes = new ArrayList<>();
-    private static List< String> authorQuotes = new ArrayList<>();
+    private static List<Quote> quotes = new ArrayList<>();
     private static final Random random = new Random();
 
     static {
-        StoreQuotes.quotes.add("Two things are infinite: the universe and human"
-                + "stupidity; and I'm not sure about the universe.");
-        StoreQuotes.quotes.add("Be the change that you wish to see in the world.");
-        StoreQuotes.quotes.add("If you tell the truth, you don't have to remember anything.");
+        StoreQuotes.quotes.add(new Quote("Two things are infinite: the universe and human"
+                + "stupidity; and I'm not sure about the universe.", "Albert Einstein"));
+        StoreQuotes.quotes.add(new Quote("Be the change that you wish to see in the world.",
+                "Mahatma Gandhi"));
+        StoreQuotes.quotes.add(new Quote("If you tell the truth, you don't have to remember anything.",
+                "Mark Twain"));
 
-        StoreQuotes.authorQuotes.add("Albert Einstein");
-        StoreQuotes.authorQuotes.add("Mahatma Gandhi");
-        StoreQuotes.authorQuotes.add("Mark Twain");
     }
 
-    public List<String> getQuotes() {
+    public List<Quote> getQuotes() {
         return quotes;
     }
 
-    public void setQuotes(List<String> quotes) {
+    public void setQuotes(List<Quote> quotes) {
         this.quotes = quotes;
     }
 
-    public List<String> getAuthorQuotes() {
-        return authorQuotes;
-    }
-
-    public void setAuthorQuotes(List<String> authorQuotes) {
-        this.authorQuotes = authorQuotes;
-    }
-
-    public static String getQuote() {
+    public static String getRandomQuote() {
         String quote;
         int number = (int) (random.nextDouble() * quotes.size());
-        quote = quotes.get(number) + "\n Autor:" + authorQuotes.get(number);
+        quote = quotes.get(number).getText() + "\n Autor:" + quotes.get(number).getAutor();
         return quote;
     }
 
