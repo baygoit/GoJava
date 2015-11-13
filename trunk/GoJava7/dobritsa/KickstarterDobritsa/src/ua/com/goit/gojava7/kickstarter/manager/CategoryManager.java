@@ -8,9 +8,9 @@ import ua.com.goit.gojava7.kickstarter.domain.Project;
 import ua.com.goit.gojava7.kickstarter.storage.CategoryStorage;
 
 public class CategoryManager {	
+	
 	private ConsoleInspector consoleInspector = new ConsoleInspector();
 	private CategoryStorage categoryStorage;
-
 	
 	private String BORDER = "\n________________________________________________________";
 	private int SHIFT_ONE = 1;
@@ -37,37 +37,28 @@ public class CategoryManager {
 	public Integer chooseProject(Integer selectedCategory) {		
 		System.out.println(BORDER);
 		System.out.println("Current category N: " + selectedCategory 
-				+ "(" + categoryStorage.get(selectedCategory - 1).getName() + ")");		
+				+ "(" + categoryStorage.get(selectedCategory - SHIFT_ONE).getName() + ")");		
 		System.out.println("List of projects:");
-		printProjects(categoryStorage.get(selectedCategory - 1).getAll());
+		printProjects(categoryStorage.get(selectedCategory - SHIFT_ONE).getAll());
 		System.out.println("\nChoose a project by number (first to choose another category): ");
 		Integer selectedProject = consoleInspector.getCorrectInt(FIRST, 
-				categoryStorage.get(selectedCategory - 1).size());
+				categoryStorage.get(selectedCategory - SHIFT_ONE).size());
 		if(selectedProject == null) {
 			return null;
-		}		
-		//project = category.get(selectedProject);
-		
-		//selectedProject = consoleInspector.getCorrectInt(FIRST, 
-		//		categoryStorage.get(selectedCategory - SHIFT_ONE).size());
+		}			
 		return selectedProject;
 	}
 	
 	public void viewProject(Integer selectedCategory, Integer selectedProject) {
 		System.out.println(BORDER);
-		//consolePrinter.print("Current category: " + category.getName());
+		System.out.println("Current category: " + categoryStorage.get(selectedCategory - 1).get(selectedProject - 1).getName());
 		System.out.println("Current project: #" + (selectedProject) + "\n");
 		ProjectManager projectManager = new ProjectManager(categoryStorage.get(selectedCategory - 1).get(selectedProject - 1));
 		projectManager.printFull();
 		System.out.println("\nType 0 to choose another project");
 		consoleInspector.getCorrectInt(FIRST, 0);
 	}
-	
-	//
-	//public int indexOfProject(Project project) {
-	//	return category.indexOf(project);
-	//}
-	
+		
 	public void printCategories(List<Category> categories) {
 		for(int i = 0; i < categories.size(); i++) {
 			System.out.println(i + 1 + ": " + categories.get(i).getName());
@@ -82,7 +73,6 @@ public class CategoryManager {
 		}	
 	}	
 	
-
 	private static CategoryStorage initCategories() {
 		CategoryStorage categoryStorage = new CategoryStorage();
 		categoryStorage.add(initMusicCategory());

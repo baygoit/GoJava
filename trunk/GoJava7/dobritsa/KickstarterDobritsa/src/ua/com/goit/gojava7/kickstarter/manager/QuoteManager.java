@@ -6,26 +6,27 @@ import ua.com.goit.gojava7.kickstarter.domain.Quote;
 import ua.com.goit.gojava7.kickstarter.storage.QuoteStorage;
 
 public class QuoteManager {
+
 	private QuoteStorage quoteStorage;
+	private static final Random RANDOM = new Random();
+
 	public QuoteManager() {
 		quoteStorage = initQuotes();
 	}
-	//private QuoteStorage quoteStorage = initQuotes();
-	
-	private static final Random RANDOM = new Random();
-	
-	public void printRandomQuote() {
-		Quote quote = getRandomQuote();
-		System.out.println(quote.getText() + "\n     " + 	quote.getAuthor());
-		}
-	
-	public void print(int index) {
-		System.out.println(quoteStorage.get(index).getText());// + "\n     " + 	quoteStorage.get(index).getAuthor());
-		}
 
 	public Quote getRandomQuote() {
 		int randomNumber = RANDOM.nextInt(quoteStorage.size());
 		return quoteStorage.get(randomNumber);
+	}
+
+	public void printRandomQuote() {
+		Quote quote = getRandomQuote();
+		System.out.println(quote.getText() + "\n     " + quote.getAuthor());
+	}
+
+	public void print(int index) {
+		System.out.println(quoteStorage.get(index).getText() + 
+				"\n " +	 quoteStorage.get(index).getAuthor());
 	}
 
 	private static QuoteStorage initQuotes() {
@@ -39,8 +40,8 @@ public class QuoteManager {
 				+ "\n     hard work, and learning from failure. ", "Colin Powell"));
 		quoteStorage.add(new Quote("Happiness does not come from doing easy work but from the "
 				+ "\n     afterglow of satisfaction that comes after the achievement "
-				+ "\n     of a difficult task that demanded our best. ", "Theodore Isaac Rubin"));		
+				+ "\n     of a difficult task that demanded our best. ", "Theodore Isaac Rubin"));
 		return quoteStorage;
 	}
-	
+
 }
