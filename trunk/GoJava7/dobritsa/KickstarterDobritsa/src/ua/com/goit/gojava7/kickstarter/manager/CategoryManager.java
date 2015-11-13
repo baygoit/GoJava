@@ -9,14 +9,15 @@ import ua.com.goit.gojava7.kickstarter.storage.CategoryStorage;
 
 public class CategoryManager {
 
-	private ConsoleScanner consoleInspector = new ConsoleScanner();
+	private ConsoleScanner consoleScanner;
 	private CategoryStorage categoryStorage;
 
 	private String BORDER = "\n________________________________________________________";
 	private int SHIFT_ONE = 1;
 	private int FIRST = 1;
 
-	public CategoryManager() {
+	public CategoryManager(ConsoleScanner consoleScanner) {
+		this.consoleScanner = consoleScanner;
 		categoryStorage = initCategories();
 	}
 
@@ -25,9 +26,9 @@ public class CategoryManager {
 		System.out.println("\nList of categories:");
 		printCategories(categoryStorage.getAll());
 		System.out.println("\nChoose a category by number (0 for exit): ");
-		Integer selectedCategory = consoleInspector.getInteger(FIRST, categoryStorage.size());
+		Integer selectedCategory = consoleScanner.getInteger(FIRST, categoryStorage.size());
 		if (selectedCategory == null) {
-			consoleInspector.close();
+			consoleScanner.close();
 			System.out.println("See you soon!");
 			System.exit(0);
 		}
@@ -41,7 +42,7 @@ public class CategoryManager {
 		System.out.println("List of projects:");
 		printProjects(categoryStorage.get(selectedCategory - SHIFT_ONE).getAll());
 		System.out.println("\nChoose a project by number (first to choose another category): ");
-		Integer selectedProject = consoleInspector.getInteger(FIRST,
+		Integer selectedProject = consoleScanner.getInteger(FIRST,
 				categoryStorage.get(selectedCategory - SHIFT_ONE).size());
 		if (selectedProject == null) {
 			return null;
@@ -58,7 +59,7 @@ public class CategoryManager {
 				categoryStorage.get(selectedCategory - 1).get(selectedProject - 1));
 		projectManager.printFull();
 		System.out.println("\nType 0 to choose another project");
-		consoleInspector.getInteger(FIRST, 0);
+		consoleScanner.getInteger(FIRST, 0);
 	}
 
 	public void printCategories(List<Category> categories) {
