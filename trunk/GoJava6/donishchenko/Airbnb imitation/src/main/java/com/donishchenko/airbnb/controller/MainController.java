@@ -1,6 +1,9 @@
 package com.donishchenko.airbnb.controller;
 
+import com.donishchenko.airbnb.model.Apartment;
+import com.donishchenko.airbnb.model.City;
 import com.donishchenko.airbnb.model.User;
+import com.donishchenko.airbnb.services.SearchService;
 import com.donishchenko.airbnb.services.UserService;
 import com.donishchenko.airbnb.validation.UserValidator;
 
@@ -10,11 +13,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 public class MainController extends HttpServlet {
 
-    private UserService userService = new UserService();
+    private UserService userService     = new UserService();
+    private SearchService searchService = new SearchService();
+//    private List<City> availableCities  = new ArrayList<>();
+
+    @Override
+    public void init() throws ServletException {
+        super.init();
+
+        List<City> availableCities = searchService.getAllCities();
+        getServletContext().setAttribute("availableCities", availableCities);
+    }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -32,7 +46,15 @@ public class MainController extends HttpServlet {
         if ("/".equals(path)) {
             path = "/home";
         } else if ("/search".equals(path)) {
-            //TODO
+            //TODO search
+            Map<String, String[]> params = req.getParameterMap();
+            if (params.size() != 0) {
+                /* Search */
+                String city = params.keySet().iterator().next();
+
+                List<Apartment> apartments = searchService.getAllApartmentsByCity(city);
+                req.setAttribute("apartments", apartments);
+            }
         }
 
         String url = "/WEB-INF/views" + path + ".jsp";
