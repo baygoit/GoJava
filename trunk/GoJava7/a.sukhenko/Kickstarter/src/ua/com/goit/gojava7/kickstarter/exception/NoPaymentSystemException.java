@@ -1,6 +1,6 @@
 package ua.com.goit.gojava7.kickstarter.exception;
 
-public class NoPaymentSystemException extends Exception {
+public class NoPaymentSystemException extends Exception{
 
 	/**
 	 * 

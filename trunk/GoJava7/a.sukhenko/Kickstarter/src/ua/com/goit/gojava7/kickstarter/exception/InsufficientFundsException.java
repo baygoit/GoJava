@@ -1,6 +1,6 @@
 package ua.com.goit.gojava7.kickstarter.exception;
 
-public class InsufficientFundsException extends Exception {
+public class InsufficientFundsException extends Exception{
 
 	/**
 	 * 

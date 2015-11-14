@@ -9,7 +9,7 @@ import org.junit.Test;
 import static org.hamcrest.CoreMatchers.is;
 import ua.com.goit.gojava7.kickstarter.model.Quote;
 
-public class QuoteStorageTest {
+public class QuoteStorageTest{
 	private QuoteStorage quoteStorage = new QuoteStorage();
 
 	@Before
@@ -42,6 +42,5 @@ public class QuoteStorageTest {
 	public void testUnmodifiableList() {
 		// Exception should appear after we try to add new Quote.
 		quoteStorage.getQuotes().add(new Quote("Some Quote", "Some Author"));
-		assertThat(quoteStorage.getQuotes().size(), is(0));
 	}
 }

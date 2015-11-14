@@ -1,15 +1,11 @@
 package ua.com.goit.gojava7.kickstarter.model;
 
-/**
- * 
- * 
- */
-public class UserSettings {
-	private Category category;
-	private Project selectedProject;
-	private MENU_OPTIONS menuOption = MENU_OPTIONS.SHOW_MAIN_MENU;
+public class UserSettings{
+	private Category		category;
+	private Project			selectedProject;
+	private MENU_OPTIONS	menuOption	= MENU_OPTIONS.SHOW_MAIN_MENU;
+
 	public UserSettings() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public Category getCategory() {

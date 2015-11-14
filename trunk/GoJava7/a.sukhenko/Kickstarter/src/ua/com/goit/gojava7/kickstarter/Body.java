@@ -5,9 +5,9 @@ import ua.com.goit.gojava7.kickstarter.model.Category;
 import ua.com.goit.gojava7.kickstarter.model.Project;
 import ua.com.goit.gojava7.kickstarter.model.Quote;
 
-public class Body {
-	private Kickstarter kickstarter;
-	private ConsolePrinter consolePrinter;
+public class Body{
+	private Kickstarter		kickstarter;
+	private ConsolePrinter	consolePrinter;
 
 	public Body(Kickstarter kickstarter, ConsolePrinter consolePrinter2) {
 		this.kickstarter = kickstarter;
@@ -21,7 +21,7 @@ public class Body {
 	public void generateFooter() {
 		consolePrinter.print("GoIT Kickstarter (c) by Artur Sukhenko");
 	}
-	
+
 	public void generateBody() {
 		Project first = kickstarter.getProjectManager().getProjectById(0);
 		generateProjectInfo(first);
@@ -55,12 +55,14 @@ public class Body {
 	public void generateProjectInfo(Project project) {
 
 		consolePrinter.printDeflector();
-		consolePrinter.print("Project: " + project.getProjectName() + "   |  Category: "
-				+ project.getProjectCategory().getCategoryName());
+		consolePrinter.print(
+				"Project: " + project.getProjectName() + "   |  Category: "
+						+ project.getProjectCategory().getCategoryName());
 		consolePrinter.print(project.getProjectEndTime());
 		consolePrinter.print("[ " + project.getProjectDescription() + " ]");
-		consolePrinter.print("Funded: " + project.getFundedPercentage() + " Backers: " + project.getBackers().size()
-				+ " | Pledged: $" + project.getMoneyPledged());
+		consolePrinter.print("Funded: " + project.getFundedPercentage()
+				+ " Backers: " + project.getBackers().size() + " | Pledged: $"
+				+ project.getMoneyPledged());
 
 	}
 
