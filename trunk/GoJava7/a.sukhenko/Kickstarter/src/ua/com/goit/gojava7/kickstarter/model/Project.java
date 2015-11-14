@@ -26,7 +26,7 @@ public class Project {
 	private LocalDateTime enddate;
 
 	public Project() {
-		// TODO Auto-generated constructor stub
+
 	}
 
 	public Project(String projectName, String projectDescription, Category projectCategory, LocalDateTime enddate) {
@@ -54,10 +54,10 @@ public class Project {
 	}
 
 	public void addBacker(User u, Double money) {
-		if(backers.containsKey(u)){
-			backers.put(u, backers.get(u)+money);
-		}else{
-		backers.put(u, money);
+		if (backers.containsKey(u)) {
+			backers.put(u, backers.get(u) + money);
+		} else {
+			backers.put(u, money);
 		}
 	}
 

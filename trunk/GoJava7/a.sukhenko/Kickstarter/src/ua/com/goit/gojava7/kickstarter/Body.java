@@ -15,13 +15,13 @@ public class Body {
 	}
 
 	public void generateHeader() {
-		consolePrinter.println("Welcome to Kickstarter Beta");
+		consolePrinter.print("Welcome to Kickstarter Beta");
 	}
 
 	public void generateFooter() {
-		consolePrinter.println("GoIT Kickstarter (c) by Artur Sukhenko");
+		consolePrinter.print("GoIT Kickstarter (c) by Artur Sukhenko");
 	}
-
+	
 	public void generateBody() {
 		Project first = kickstarter.getProjectManager().getProjectById(0);
 		generateProjectInfo(first);
@@ -35,7 +35,7 @@ public class Body {
 
 	public void generateCategories() {
 		consolePrinter.printDeflector();
-		consolePrinter.println("Categories: ");
+		consolePrinter.print("Categories: ");
 		kickstarter.getCategoryStorage().getCategories().forEach((a, b) -> {
 			generateCategoryInfo(b);
 		});
@@ -55,11 +55,11 @@ public class Body {
 	public void generateProjectInfo(Project project) {
 
 		consolePrinter.printDeflector();
-		consolePrinter.println("Project: " + project.getProjectName() + "   |  Category: "
+		consolePrinter.print("Project: " + project.getProjectName() + "   |  Category: "
 				+ project.getProjectCategory().getCategoryName());
-		consolePrinter.println(project.getProjectEndTime());
-		consolePrinter.println("[ " + project.getProjectDescription() + " ]");
-		consolePrinter.println("Funded: " + project.getFundedPercentage() + " Backers: " + project.getBackers().size()
+		consolePrinter.print(project.getProjectEndTime());
+		consolePrinter.print("[ " + project.getProjectDescription() + " ]");
+		consolePrinter.print("Funded: " + project.getFundedPercentage() + " Backers: " + project.getBackers().size()
 				+ " | Pledged: $" + project.getMoneyPledged());
 
 	}

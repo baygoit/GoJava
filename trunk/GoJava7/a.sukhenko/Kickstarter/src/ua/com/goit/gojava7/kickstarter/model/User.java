@@ -1,6 +1,6 @@
 package ua.com.goit.gojava7.kickstarter.model;
 
-import ua.com.goit.gojava7.kickstarter.PaymentSystem;
+import ua.com.goit.gojava7.kickstarter.payment.PaymentSystem;
 
 public class User {
 	public User() {
@@ -11,8 +11,9 @@ public class User {
 		super();
 		this.settings = settings;
 	}
+
 	private PaymentSystem paymentSystem;
-	private UserSettings settings;
+	private UserSettings settings = new UserSettings();
 
 	public UserSettings getSettings() {
 		return settings;
@@ -23,7 +24,6 @@ public class User {
 	}
 
 	public PaymentSystem getPaymentSystem() {
-		// TODO Auto-generated method stub
 		return paymentSystem;
 	}
 

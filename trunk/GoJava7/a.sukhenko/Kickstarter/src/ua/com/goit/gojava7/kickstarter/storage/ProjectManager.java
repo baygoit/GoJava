@@ -15,25 +15,20 @@ public class ProjectManager {
 	}
 
 	private Kickstarter kickstarter;
-	
-	public boolean userContributeToProject(Project project, User payer, Double amount) throws InsufficientFundsException, NoPaymentSystemException{
+
+	public boolean userContributeToProject(Project project, User payer, Double amount){
 		boolean operationSuccess = false;
-		//check that user has amount of money
-		if(payer.getPaymentSystem() == null){
-			throw new NoPaymentSystemException();
-		}
-		else if(payer.getPaymentSystem().getBalance() < amount){
-			throw new InsufficientFundsException();
-		}
-		else{
-			if(payer.getPaymentSystem().payMoney(amount)){
-				project.addBacker(payer, amount);
-			}
-		}
-		
+		project.addBacker(payer, amount);
+		operationSuccess = true;
 		return operationSuccess;
 	}
-	
+
+	public Project newProject() {
+		Project p = new Project();
+		projects.add(p);
+		return p;
+	}
+
 	public ProjectManager(Kickstarter kickStarter) {
 		this.setKickstarter(kickStarter);
 	}

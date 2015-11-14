@@ -38,6 +38,14 @@ public class Kickstarter {
 	private CategoryStorage categoryStorage = new CategoryStorage();
 	private ConsoleScanner cs = new ConsoleScanner();
 	private ConsolePrinter consolePrinter = new ConsolePrinter();
+	public ConsolePrinter getConsolePrinter() {
+		return consolePrinter;
+	}
+
+	public void setConsolePrinter(ConsolePrinter consolePrinter) {
+		this.consolePrinter = consolePrinter;
+	}
+
 	private UserManager userManager = new UserManager(consolePrinter, cs, categoryStorage, this);
 
 	public static void main(String[] args) {
