@@ -1,32 +1,68 @@
 package model;
 
-import observer.Observer;
-import observer.Subject;
+import common.Observer;
+import common.Subject;
+import model.enums.CityList;
+import model.enums.HomeType;
 
-public class Home implements Subject {
-    private String hostEmail;
+import javax.persistence.*;
+import java.io.Serializable;
+
+@Entity
+@Table(name = "homes")
+public class Home implements Serializable, Subject {
+    private int id;
+    private User host;
     private CityList city;
     private HomeType homeType;
-    private boolean active;
+    private String hostEmail;
 
-    public Home(){};
+    public Home(){}
 
     public Home(CityList city, HomeType homeType) {
         this.city = city;
         this.homeType = homeType;
-        this.active = true;
     }
 
+    //===============getters======================
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name = "id")
+    public int getId() {
+        return id;
+    }
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "city")
     public CityList getCity() {
         return city;
     }
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "hometype")
     public HomeType getHomeType() {
         return homeType;
     }
 
-    public String getHost() {
+    @ManyToOne(cascade=CascadeType.ALL)
+    @Column(name = "user_id")
+    public User getHost() {
+        return host;
+    }
+
+    @Transient
+    public String getHostByEmail() {
         return hostEmail;
+    }
+
+    //===============setters======================
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setHost(User host) {
+        this.host = host;
     }
 
     public void setCity(CityList city) {
@@ -37,16 +73,8 @@ public class Home implements Subject {
         this.homeType = homeType;
     }
 
-    public void setHost(String hostEmail) {
+    public void setHostByEmail(String hostEmail) {
         this.hostEmail = hostEmail;
-    }
-
-    public boolean isActive() {
-        return active;
-    }
-
-    public void setActive(boolean active) {
-        this.active = active;
     }
 
 
