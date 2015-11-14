@@ -45,8 +45,8 @@ public class Kickstarter {
 		Project project = new Project("GoIT Java 7", "Movie about our GoIT Java 7 Group",
 				kickstarter.getCategoryStorage().getCategoryById(1), LocalDateTime.now().plusHours(23));
 		kickstarter.getProjectManager().getProjectByName("Catana").setDemoLink("www.catana.game");
-		Map<String,String> qa = new HashMap<String,String>();
-		qa.put("What is project about?","It is about our goit7 group");
+		Map<String, String> qa = new HashMap<String, String>();
+		qa.put("What is project about?", "It is about our goit7 group");
 		qa.put("When was it started", "October 2015");
 		kickstarter.getProjectManager().getProjectByName("Catana").setQuestionsAndAnswers(qa);
 		kickstarter.addProject(project);
@@ -67,8 +67,6 @@ public class Kickstarter {
 	public void setConsoleScanner(ConsoleScanner cs) {
 		this.cs = cs;
 	}
-
-	
 
 	public QuoteStorage getQuoteStorage() {
 		return quoteStorage;
@@ -103,12 +101,8 @@ public class Kickstarter {
 	}
 
 	public void initQuotes() {
-		quoteStorage.addQuote(new Quote(
-				QuoteStorage.QUOTE_BY_PRINCESS_DIANA,
-				"Princess Diana"));
-		quoteStorage.addQuote(new Quote(
-				QuoteStorage.QUOTE_BY_MISHA_COLLINS,
-				"Misha Collins"));
+		quoteStorage.addQuote(new Quote(QuoteStorage.QUOTE_BY_PRINCESS_DIANA, "Princess Diana"));
+		quoteStorage.addQuote(new Quote(QuoteStorage.QUOTE_BY_MISHA_COLLINS, "Misha Collins"));
 	}
 
 	public void initCategories() {
@@ -125,7 +119,6 @@ public class Kickstarter {
 		projectManager.addProject(new Project("Terminator Exodus", "New game about fighting as Terminator",
 				categoryStorage.getCategoryById(3), dateTime));
 		projectManager.getProjectByName("Catana").addBacker(new User(), Double.valueOf(25000));
-		
 
 	}
 
