@@ -35,13 +35,13 @@ public class ConsolePrinter {
 			System.out.println(id + "# " + cat.getCategoryName());
 		});
 	}
-	
-	public void showProjectList(Category cat,ProjectManager projectManager){
+
+	public void showProjectList(Category cat, ProjectManager projectManager) {
 		ArrayList<Project> projects = projectManager.getProjectsByCategory(cat);
 		for (int i = 0; i < projects.size(); i++) {
-			println(i+1+"# " + projects.get(i).getProjectName());
+			println(i + 1 + "# " + projects.get(i).getProjectName());
 		}
-		
+
 	}
 
 	public void printFullProjectInfo(Project project) {
@@ -55,26 +55,25 @@ public class ConsolePrinter {
 		println("Funded: " + project.getFundedPercentage() + " Backers: " + project.getBackers().size()
 				+ " | Pledged: $" + project.getMoneyPledged());
 		printQuestionsAndAnswers(project.getQuestionsAndAnswers());
-		
+
 	}
-	
-	public void printQuestionsAndAnswers(Map<String,String> qa){
+
+	public void printQuestionsAndAnswers(Map<String, String> qa) {
 		println("Questions and Answers:");
-		qa.forEach((q,a) ->{
+		qa.forEach((q, a) -> {
 			println("Q: " + q);
 			println("A: " + a);
 			printDeflector();
 		});
 	}
-	
-	public String getBlankStringIfNull(String s){
+
+	public String getBlankStringIfNull(String s) {
 		String blank = " - ";
-		if(s == null)
-		return blank;
-		else{
+		if (s == null)
+			return blank;
+		else {
 			return s;
 		}
 	}
-	
-	
+
 }

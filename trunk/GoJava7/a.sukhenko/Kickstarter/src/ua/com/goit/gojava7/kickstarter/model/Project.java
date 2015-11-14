@@ -11,7 +11,8 @@ public class Project {
 	private double moneyNeeded;
 	private String projectHistory;
 	private String demoLink;
-	private Map<String,String> questionsAndAnswers = new HashMap<>();
+	private Map<String, String> questionsAndAnswers = new HashMap<>();
+
 	public double getMoneyNeeded() {
 		return moneyNeeded;
 	}
@@ -78,13 +79,12 @@ public class Project {
 	}
 
 	public double getMoneyPledged() {
-		double moneyPledged=0;
-		for(Double money : backers.values()){
-			moneyPledged+=money;
+		double moneyPledged = 0;
+		for (Double money : backers.values()) {
+			moneyPledged += money;
 		}
 		return moneyPledged;
 	}
-
 
 	public Category getProjectCategory() {
 		return projectCategory;
@@ -96,10 +96,6 @@ public class Project {
 
 	public HashMap<User, Double> getBackers() {
 		return backers;
-	}
-
-	public void setBackers(HashMap<User, Double> backers) {
-		this.backers = backers;
 	}
 
 	public LocalDateTime getEnddate() {
@@ -118,11 +114,11 @@ public class Project {
 		this.projectHistory = projectHistory;
 	}
 
-	public Map<String,String> getQuestionsAndAnswers() {
+	public Map<String, String> getQuestionsAndAnswers() {
 		return questionsAndAnswers;
 	}
 
-	public void setQuestionsAndAnswers(Map<String,String> questionsAndAnswers) {
+	public void setQuestionsAndAnswers(Map<String, String> questionsAndAnswers) {
 		this.questionsAndAnswers = questionsAndAnswers;
 	}
 
