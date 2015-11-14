@@ -81,6 +81,13 @@ public class MainController extends HttpServlet {
             String login    = req.getParameter("login");
             String password = req.getParameter("password");
 
+            if (login.isEmpty() || password.isEmpty()) {
+                req.setAttribute("loginError", "Invalid login or password");
+
+                req.getRequestDispatcher(url).forward(req, resp);
+                return;
+            }
+
             User user = userService.login(login, password);
             if (user == null) {
                 req.setAttribute("loginError", "Invalid login or password");

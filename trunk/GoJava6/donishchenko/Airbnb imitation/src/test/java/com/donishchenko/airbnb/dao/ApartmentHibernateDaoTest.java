@@ -2,6 +2,7 @@ package com.donishchenko.airbnb.dao;
 
 import com.donishchenko.airbnb.model.Apartment;
 import com.donishchenko.airbnb.model.ApartmentType;
+import com.donishchenko.airbnb.model.City;
 import com.donishchenko.airbnb.model.User;
 import org.junit.*;
 
@@ -14,17 +15,22 @@ public class ApartmentHibernateDaoTest {
     private static UserDao userDao = new UserHibernateDao();
     private static User user = new User("testuser", "secretpassword", "sacr8tum@gmail.com", true, "Dmitry", "Onishchenko");
 
+    private static CityDao cityDao = new CityHibernateDao();
+    private static City city = new City("TestCity");
+
     private static ApartmentDao dao = new ApartmentHibernateDao();
-    private static Apartment apartment = new Apartment(user, "TestCity", ApartmentType.APARTMENT, true);
+    private static Apartment apartment = new Apartment(user, city, ApartmentType.APARTMENT, true);
 
     @BeforeClass
     public static void setUp() {
         userDao.save(user);
+        cityDao.save(city);
     }
 
     @AfterClass
     public static void tearDown() {
         userDao.delete(user.getId());
+        cityDao.delete(city.getId());
     }
 
     @Before
@@ -54,8 +60,10 @@ public class ApartmentHibernateDaoTest {
     public void testUpdate() {
         dao.save(apartment);
 
-        String oldCity = apartment.getCity();
-        apartment.setCity("NewTestCity");
+        City oldCity = apartment.getCity();
+        City newCity = new City("NewTestCity");
+        cityDao.save(newCity);
+        apartment.setCity(newCity);
         assertTrue("Successful update returns true", dao.update(apartment));
 
         Integer oldId = apartment.getId();
@@ -68,6 +76,7 @@ public class ApartmentHibernateDaoTest {
 
         dao.delete(apartment.getId());
         apartment.setCity(oldCity);
+        cityDao.delete(newCity.getId());
     }
 
     @Test
@@ -91,7 +100,7 @@ public class ApartmentHibernateDaoTest {
     public void testGetAllByCity() {
         dao.save(apartment);
 
-        List<Apartment> list = dao.getAllByCity(apartment.getCity());
+        List<Apartment> list = dao.getAllByCity(apartment.getCity().getName());
         assertFalse("Not empty list", list.isEmpty());
 
         dao.delete(apartment.getId());
