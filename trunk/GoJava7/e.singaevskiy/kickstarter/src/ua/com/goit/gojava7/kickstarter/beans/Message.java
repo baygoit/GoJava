@@ -8,6 +8,10 @@ public class Message {
     private Date date;
     private Message replyTo;
 
+    public Message() {
+        // default bean constructor
+    }
+    
     public Message(User author, String text) {
         this.author = author;
         this.text = text;

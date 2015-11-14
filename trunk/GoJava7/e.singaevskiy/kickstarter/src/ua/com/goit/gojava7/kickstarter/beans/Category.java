@@ -3,6 +3,10 @@ package ua.com.goit.gojava7.kickstarter.beans;
 public class Category {
 
     private String name;
+    
+    public Category() {
+        // default bean constructor
+    }
 
     public Category(String name) {
         this.name = name;
