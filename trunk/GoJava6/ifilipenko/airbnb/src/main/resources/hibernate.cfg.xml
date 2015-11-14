@@ -15,6 +15,6 @@
         <!--<property name="hibernate.hbm2ddl.auto">create</property>-->
 
         <!-- mappings for annotated classes -->
-        <mapping class="airbnb.src.main.java.model.User"/>
+        <!--<mapping class="model.User"/>-->
     </session-factory>
 </hibernate-configuration>

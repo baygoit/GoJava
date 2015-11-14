@@ -14,13 +14,38 @@ import java.util.Date;
 @Entity
 @Table(name = "users")
 public class User implements Observer, Serializable {
+    @Transient
     private static final long serialVersionUID = 1L;
+
+    @Id
+    @GeneratedValue(generator = "increment")
+    @GenericGenerator(name = "increment", strategy = "increment")
+    @Column(name = "id")
     private int id;
+
+    @Column(name = "firstname")
     private String name;
+
+    @Transient
+    @Column(name = "lastname")
     private String lastName;
+
+    @Transient
+    @Enumerated(EnumType.STRING)
+    @Column(name = "gender")
     private GenderType gender;
+
+    @Transient
+    @Type(type="timestamp")
+    @Column(name = "birthdate")
     private Date birthDate;
+
+    @Transient
+    @Column(name = "emailaddress")
     private String email;
+
+    @Transient
+    @Column(name = "city")
     private CityList cityEnum;
 
     public User() {
@@ -36,43 +61,31 @@ public class User implements Observer, Serializable {
     }
 
     //===============getters======================
-    @Id
-    @GeneratedValue(generator = "increment")
-    @GenericGenerator(name = "increment", strategy = "increment")
-    @Column(name = "id")
+
     public int getId() {
         return id;
     }
 
-    @Column(name = "firstname")
     public String getName() {
         return name;
     }
 
-    @Column(name = "lastname")
     public String getLastName() {
         return lastName;
     }
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "gender")
     public GenderType getGender() {
         return gender;
     }
 
-
-    @Type(type="timestamp")
-    @Column(name = "birthdate")
     public Date getBirthDate() {
         return birthDate;
     }
 
-    @Column(name = "emailaddress")
     public String getEmail() {
         return email;
     }
 
-    @Column(name = "city")
     public CityList getCityEnum() {
         return cityEnum;
     }

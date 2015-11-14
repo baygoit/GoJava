@@ -1,5 +1,6 @@
 package hibernate;
 
+import dao.hibernate.HibernateUtil;
 import dao.hibernate.HibernateUtilities;
 import dao.hibernate.UserDbDao;
 import model.User;
@@ -18,7 +19,7 @@ public class UserDbDaoTest {
 
     @Before
     public void init(){
-        session = HibernateUtilities.getSessionFactory().openSession();
+        session = HibernateUtil.getSessionFactory().openSession();
     }
 
     @Test
@@ -31,7 +32,8 @@ public class UserDbDaoTest {
         userDao.create(user);
 
         //------------assert------------
-        User extUser = session.load(User.class, 4);
+        session = HibernateUtilities.getSessionFactory().openSession();
+        User extUser = session.load(User.class, 8);
         Assert.assertEquals(user.getEmail(), extUser.getEmail());
     }
 
