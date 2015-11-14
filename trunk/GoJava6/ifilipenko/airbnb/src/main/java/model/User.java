@@ -1,39 +1,83 @@
 package model;
 
-import observer.Observer;
+import common.Observer;
+import model.enums.CityList;
+import model.enums.GenderType;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
-import java.util.HashMap;
 
-public class User implements Observer, Serializable{
+
+@Entity
+@Table(name = "users")
+public class User implements Observer, Serializable {
+    private static final long serialVersionUID = 1L;
     private int id;
     private String name;
     private String lastName;
     private GenderType gender;
     private Date birthDate;
     private String email;
-    private CityList city;
-    private String country;
-    private HashMap<Integer, User> users;
+    private CityList cityEnum;
 
     public User() {
     }
 
-    public User(int id, String name, String lastName, GenderType gender, Date birthDate, String email, CityList city) {
-        this.id = id;
+    public User(String name, String lastName, GenderType gender, Date birthDate, String email, CityList city) {
         this.name = name;
         this.lastName = lastName;
         this.gender = gender;
         this.birthDate = birthDate;
         this.email = email;
-        this.city = city;
+        this.cityEnum = city;
     }
 
+    //===============getters======================
+    @Id
+    @GeneratedValue(generator = "increment")
+    @GenericGenerator(name = "increment", strategy = "increment")
+    @Column(name = "id")
     public int getId() {
         return id;
     }
 
+    @Column(name = "firstname")
+    public String getName() {
+        return name;
+    }
+
+    @Column(name = "lastname")
+    public String getLastName() {
+        return lastName;
+    }
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "gender")
+    public GenderType getGender() {
+        return gender;
+    }
+
+
+    @Type(type="timestamp")
+    @Column(name = "birthdate")
+    public Date getBirthDate() {
+        return birthDate;
+    }
+
+    @Column(name = "emailaddress")
+    public String getEmail() {
+        return email;
+    }
+
+    @Column(name = "city")
+    public CityList getCityEnum() {
+        return cityEnum;
+    }
+
+    //===============setters======================
     public void setId(int id) {
         this.id = id;
     }
@@ -58,51 +102,10 @@ public class User implements Observer, Serializable{
         this.email = email;
     }
 
-    public void setCity(CityList city) {
-        this.city = city;
+    public void setCityEnum(CityList city) {
+        this.cityEnum = city;
     }
 
-    public void setCountry(String country) {
-        this.country = country;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public GenderType getGender() {
-        return gender;
-    }
-
-
-
-    public Date getBirthDate() {
-        return birthDate;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public CityList getCity() {
-        return city;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public HashMap<Integer, User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(HashMap<Integer, User> users) {
-        this.users = users;
-    }
 
     @Override
     public String toString() {
