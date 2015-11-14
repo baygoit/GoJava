@@ -32,7 +32,7 @@ public class ApartmentJdbcDao implements ApartmentDao {
         try (Connection conn = JdbcUtils.getConnection()){
             PreparedStatement stat = conn.prepareStatement(saveApartmentQuery, Statement.RETURN_GENERATED_KEYS);
             stat.setInt(1, apartment.getHost().getId());
-            stat.setString(2, apartment.getCity());
+            stat.setString(2, apartment.getCity().getName());
             stat.setInt(3, apartment.getApartmentType().ordinal());
             stat.setBoolean(4, apartment.isActive());
 
@@ -72,7 +72,7 @@ public class ApartmentJdbcDao implements ApartmentDao {
         try (Connection conn = JdbcUtils.getConnection()) {
             PreparedStatement stat = conn.prepareStatement(updateApartmentQuery);
             stat.setInt(1, apartment.getHost().getId());
-            stat.setString(2, apartment.getCity());
+            stat.setString(2, apartment.getCity().getName());
             stat.setInt(3, apartment.getApartmentType().ordinal());
             stat.setBoolean(4, apartment.isActive());
             stat.setInt(5, apartment.getId());
