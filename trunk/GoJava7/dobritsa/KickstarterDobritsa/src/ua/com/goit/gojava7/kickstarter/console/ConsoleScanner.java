@@ -38,11 +38,13 @@ public class ConsoleScanner {
 	}
 	
 	public String getName() {
+		//TODO check
 		String text = sc.next();
 		return text;
 	}
 	
 	public String getCreditCard() {
+		//TODO check
 		String text = sc.next();
 		return text;
 	}

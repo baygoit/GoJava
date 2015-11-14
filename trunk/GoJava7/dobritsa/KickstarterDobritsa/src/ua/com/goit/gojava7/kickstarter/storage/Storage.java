@@ -16,6 +16,10 @@ public abstract class Storage<T> {
 		return Collections.unmodifiableList(dataSource);
 	}
 	
+	public void setAll(List<T> dataSource) {
+		this.dataSource = dataSource;
+	}
+	
 	public T get(int index) {
 		if(dataSource.size() == 0) {
 			System.out.println("Nothing to show");
