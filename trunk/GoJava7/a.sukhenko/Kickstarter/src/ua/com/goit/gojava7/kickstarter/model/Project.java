@@ -98,9 +98,7 @@ public class Project {
 		return backers;
 	}
 
-	public void setBackers(HashMap<User, Double> backers) {
-		this.backers = backers;
-	}
+
 
 	public LocalDateTime getEnddate() {
 		return enddate;

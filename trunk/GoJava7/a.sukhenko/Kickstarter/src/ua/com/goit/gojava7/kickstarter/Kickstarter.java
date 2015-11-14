@@ -16,9 +16,6 @@ import ua.com.goit.gojava7.kickstarter.storage.QuoteStorage;
 
 public class Kickstarter {
 
-	private static final String QUOTE_BY_MISHA_COLLINS = "I actually think that the most efficacious way of making a difference is to lead by example, and doing random acts of kindness is setting a very good example of how to behave in the world.";
-	private static final String QUOTE_BY_PRINCESS_DIANA = "Carry out a random act of kindness, with no expectation of reward, safe in the knowledge that one day someone might do the same for you.";
-
 	public Kickstarter() {
 		initQuotes();
 		initCategories();
@@ -59,8 +56,7 @@ public class Kickstarter {
 			p.setMoneyNeeded(50000);
 		});
 		kickstarter.getBody().generateMainPage();
-		kickstarter.getUserManager().chooseProject(kickstarter.getProjectManager(), kickstarter.getUserManager().chooseCategory(guest));
-		//kickstarter.getProjectManager().showCategoryInfo(guest);
+		kickstarter.getUserManager().generateMenu(guest);
 
 	}
 
@@ -108,10 +104,10 @@ public class Kickstarter {
 
 	public void initQuotes() {
 		quoteStorage.addQuote(new Quote(
-				QUOTE_BY_PRINCESS_DIANA,
+				QuoteStorage.QUOTE_BY_PRINCESS_DIANA,
 				"Princess Diana"));
 		quoteStorage.addQuote(new Quote(
-				QUOTE_BY_MISHA_COLLINS,
+				QuoteStorage.QUOTE_BY_MISHA_COLLINS,
 				"Misha Collins"));
 	}
 
