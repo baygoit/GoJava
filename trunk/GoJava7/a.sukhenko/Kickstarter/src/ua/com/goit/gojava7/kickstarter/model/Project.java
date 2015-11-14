@@ -54,7 +54,11 @@ public class Project {
 	}
 
 	public void addBacker(User u, Double money) {
+		if(backers.containsKey(u)){
+			backers.put(u, backers.get(u)+money);
+		}else{
 		backers.put(u, money);
+		}
 	}
 
 	public String getFundedPercentage() {

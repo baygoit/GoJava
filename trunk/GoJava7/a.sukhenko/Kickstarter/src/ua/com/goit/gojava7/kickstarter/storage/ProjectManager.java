@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
 import ua.com.goit.gojava7.kickstarter.Kickstarter;
+import ua.com.goit.gojava7.kickstarter.exception.InsufficientFundsException;
+import ua.com.goit.gojava7.kickstarter.exception.NoPaymentSystemException;
 import ua.com.goit.gojava7.kickstarter.model.Category;
 import ua.com.goit.gojava7.kickstarter.model.Project;
 import ua.com.goit.gojava7.kickstarter.model.User;
@@ -13,7 +15,25 @@ public class ProjectManager {
 	}
 
 	private Kickstarter kickstarter;
-
+	
+	public boolean userContributeToProject(Project project, User payer, Double amount) throws InsufficientFundsException, NoPaymentSystemException{
+		boolean operationSuccess = false;
+		//check that user has amount of money
+		if(payer.getPaymentSystem() == null){
+			throw new NoPaymentSystemException();
+		}
+		else if(payer.getPaymentSystem().getBalance() < amount){
+			throw new InsufficientFundsException();
+		}
+		else{
+			if(payer.getPaymentSystem().payMoney(amount)){
+				project.addBacker(payer, amount);
+			}
+		}
+		
+		return operationSuccess;
+	}
+	
 	public ProjectManager(Kickstarter kickStarter) {
 		this.setKickstarter(kickStarter);
 	}
