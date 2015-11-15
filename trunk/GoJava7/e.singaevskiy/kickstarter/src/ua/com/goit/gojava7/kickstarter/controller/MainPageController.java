@@ -7,42 +7,47 @@ import java.util.Random;
 import java.util.Scanner;
 
 import ua.com.goit.gojava7.kickstarter.beans.Category;
+import ua.com.goit.gojava7.kickstarter.beans.QnA;
 import ua.com.goit.gojava7.kickstarter.beans.Payment;
 import ua.com.goit.gojava7.kickstarter.beans.Pledge;
 import ua.com.goit.gojava7.kickstarter.beans.Project;
 import ua.com.goit.gojava7.kickstarter.beans.Quote;
 import ua.com.goit.gojava7.kickstarter.beans.User;
-import ua.com.goit.gojava7.kickstarter.dao.CategoryDAO;
-import ua.com.goit.gojava7.kickstarter.dao.CommonDAO;
-import ua.com.goit.gojava7.kickstarter.dao.PaymentDAO;
-import ua.com.goit.gojava7.kickstarter.dao.PledgeDAO;
-import ua.com.goit.gojava7.kickstarter.dao.ProjectDAO;
-import ua.com.goit.gojava7.kickstarter.dao.QuoteDAO;
+import ua.com.goit.gojava7.kickstarter.dao.DataStorage;
+import ua.com.goit.gojava7.kickstarter.dao.DataType;
+import ua.com.goit.gojava7.kickstarter.dao.PledgeStorage;
+import ua.com.goit.gojava7.kickstarter.dao.ProjectStorage;
+import ua.com.goit.gojava7.kickstarter.dao.StorageFactory;
 import ua.com.goit.gojava7.kickstarter.view.MainPage;
 
 public class MainPageController {
 
+    private static final int OPTION_CHAT = 1;
     private static final int OPTION_EXIT = 0;
     private final Random rnd = new Random();
     private MainPage page;
-    private CommonDAO<Quote> quoteDAO;
-    private CommonDAO<Category> categoryDAO;
-    private ProjectDAO projectDAO;
-    private PledgeDAO pledgeDAO;
-    private CommonDAO<Payment> paymentDAO;
+    private DataStorage<Quote> quoteDAO;
+    private DataStorage<Category> categoryDAO;
+    private ProjectStorage projectDAO;
+    private PledgeStorage pledgeDAO;
+    private DataStorage<Payment> paymentDAO;
     private Scanner sc;
 
-    public MainPageController(MainPage page, InputStream stream) {
+    public MainPageController(MainPage page, DataType dataType, InputStream stream) {
         this.page = page;
-        quoteDAO = new QuoteDAO();
-        categoryDAO = new CategoryDAO();
-        projectDAO = new ProjectDAO();
-        paymentDAO = new PaymentDAO();
-        pledgeDAO = new PledgeDAO();
+        page.showMessage("Kickstarter runs in " + dataType + " mode");
+        StorageFactory factory = new StorageFactory(dataType);
+        
+        quoteDAO = factory.getQuoteDAO();
+        categoryDAO = factory.getCategoryDAO();
+        projectDAO = factory.getProjectDAO();
+        paymentDAO = factory.getPaymentDAO();
+        pledgeDAO = factory.getPledgeDAO();
         sc = new Scanner(stream);
     }
 
     public void showMainPage() {
+        
         showCategoryMenu();
     }
 
@@ -73,10 +78,15 @@ public class MainPageController {
     private void showProjectDetailsMenu(Project project) {
         printProjectDetails(project);
 
-        int option = getMenuOptionFromUser(1);
+        int option = getMenuOptionFromUser(2);
 
         if (option != OPTION_EXIT) {
-            showPaymentMenu(project);
+            if (option == OPTION_CHAT) {
+                showChatMenu(project);
+            } else {
+                showPaymentMenu(project);
+            }
+            
             showProjectDetailsMenu(project);
         }
     }
@@ -87,6 +97,14 @@ public class MainPageController {
         if (!processPayment(project, sc.nextLine())) {
             showPaymentMenu(project);
         }
+    }
+    
+    private void showChatMenu(Project project) {
+        page.showShortProject(project);
+        page.showMessageRequest();
+        String text = sc.nextLine();
+        QnA message = new QnA(text, "");
+        project.addQnA(message);
     }
 
     public boolean processPayment(Project project, String paymentRequest) {
