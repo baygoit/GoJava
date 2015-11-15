@@ -23,22 +23,6 @@ public class QuoteStorage extends Storage<Quote> {
 
 	public void initQuotes(String fileName) throws FileNotFoundException {
 		setAll(FileWorker.readQuotes(fileName));
-		/*
-		 * add(new Quote(
-		 * "There is only one boss. The customer. And he can fire everybody" +
-		 * "\n     in the company from the chairman on down, simply by " +
-		 * "\n     spending his money somewhere else.", "Sam Walton")); add(new
-		 * Quote("Ideas pull the trigger, but instinct loads the gun. ",
-		 * "Don Marquis")); add(new Quote(
-		 * "There are no secrets to success. It is the result of preparation, "
-		 * + "\n     hard work, and learning from failure. ", "Colin Powell"));
-		 * add(new Quote(
-		 * "Happiness does not come from doing easy work but from the " +
-		 * "\n     afterglow of satisfaction that comes after the achievement "
-		 * + "\n     of a difficult task that demanded our best. ",
-		 * "Theodore Isaac Rubin"));
-		 */
-
 	}
 
 }

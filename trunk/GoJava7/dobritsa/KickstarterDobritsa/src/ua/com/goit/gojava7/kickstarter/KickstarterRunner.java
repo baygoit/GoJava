@@ -19,10 +19,13 @@ public class KickstarterRunner {
 		ProjectPrinter projectPrinter = new ProjectPrinter();
 		CategoryPrinter categoryPrinter = new CategoryPrinter();
 
-		QuoteStorage quoteStorage = new QuoteStorage("D:/1/1.txt");
-	
-		CategoryStorage categoryStorage = new CategoryStorage();
-
+		QuoteStorage quoteStorage = new QuoteStorage("D:/1/Quotes.txt");
+		
+		CategoryStorage categoryStorage= new CategoryStorage();
+				categoryStorage.initCategories("D:/1/CategoryMusic.txt");
+				categoryStorage.initCategories("D:/1/CategoryFood.txt");
+				categoryStorage.initCategories("D:/1/CategoryDances.txt");
+		
 		Kickstarter kickstarter = new Kickstarter(consoleScanner, quotetPrinter, projectPrinter, categoryPrinter,
 				quoteStorage, categoryStorage);
 
