@@ -7,27 +7,27 @@ import ua.com.goit.gojava7.kickstarter.domain.Project;
 
 public class ProjectLevel implements Level {
 
-	public StringBuilder generateAnswer(List<Category> categories, int userChoise, Category selectedCategory) {
+	public String generateAnswer(List<Category> categories, int userChoise, Category selectedCategory) {
 		StringBuilder stringBuilder = new StringBuilder();
 		Project project = selectedCategory.getProject(userChoise);
 
 		stringBuilder.append("You selected '").append(project.getName()).append("' project").append("\n");
 		stringBuilder.append(project.getAllDetails()).append("\n");
 		stringBuilder.append(0).append(" : to project list");
-		return stringBuilder;
+		return stringBuilder.toString();
 	}
 
 	public Category findSelectedCategory(List<Category> categories, int userChoise, Category selectedCategory) {
 		return selectedCategory;
 	}
 
-	public StringBuilder validateUserChoise(List<Category> categories, int userChoise, Category selectedCategory) {
+	public String validateUserChoise(List<Category> categories, int userChoise, Category selectedCategory) {
 		StringBuilder stringBuilder = new StringBuilder();
 
-		if (userChoise != 0) {
+		if (userChoise < 0 || userChoise > 2) { // TODO add a project sub level
 			stringBuilder.append("Please, enter the correct number");
 		}
-		return stringBuilder;
+		return stringBuilder.toString();
 	}
 
 }
