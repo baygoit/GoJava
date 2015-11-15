@@ -14,7 +14,14 @@ import ua.com.goit.gojava7.kickstarter.storage.CategoryStorage;
 import ua.com.goit.gojava7.kickstarter.storage.ProjectManager;
 import ua.com.goit.gojava7.kickstarter.storage.QuoteStorage;
 
-public class Kickstarter {
+public class Kickstarter{
+
+	private QuoteStorage	quoteStorage	= new QuoteStorage();
+	private CategoryStorage	categoryStorage	= new CategoryStorage();
+	private ConsoleScanner	consoleScanner	= new ConsoleScanner();
+	private ConsolePrinter	consolePrinter	= new ConsolePrinter();
+	private Body			body;
+	private ProjectManager	projectManager	= new ProjectManager(this);
 
 	public Kickstarter() {
 		initQuotes();
@@ -22,50 +29,12 @@ public class Kickstarter {
 		initProjects();
 		body = new Body(this, consolePrinter);
 	}
-
-	private Body body;
-	private ProjectManager projectManager = new ProjectManager(this);
-
-	public ProjectManager getProjectManager() {
-		return projectManager;
-	}
-
-	public void setProjectManager(ProjectManager projectManager) {
-		this.projectManager = projectManager;
-	}
-
-	private QuoteStorage quoteStorage = new QuoteStorage();
-	private CategoryStorage categoryStorage = new CategoryStorage();
-	private ConsoleScanner cs = new ConsoleScanner();
-	private ConsolePrinter consolePrinter = new ConsolePrinter();
-	private UserManager userManager = new UserManager(consolePrinter, cs, categoryStorage, this);
-
-	public static void main(String[] args) {
-		Kickstarter kickstarter = new Kickstarter();
-		Project project = new Project("GoIT Java 7", "Movie about our GoIT Java 7 Group",
-				kickstarter.getCategoryStorage().getCategoryById(1), LocalDateTime.now().plusHours(23));
-		kickstarter.getProjectManager().getProjectByName("Catana").setDemoLink("www.catana.game");
-		Map<String, String> qa = new HashMap<String, String>();
-		qa.put("What is project about?", "It is about our goit7 group");
-		qa.put("When was it started", "October 2015");
-		kickstarter.getProjectManager().getProjectByName("Catana").setQuestionsAndAnswers(qa);
-		kickstarter.addProject(project);
-		User guest = new User();
-		kickstarter.addProject(project);
-		kickstarter.getProjectManager().getProjects().forEach(p -> {
-			p.setMoneyNeeded(50000);
-		});
-		kickstarter.getBody().generateMainPage();
-		kickstarter.getUserManager().generateMenu(guest);
-
-	}
-
 	public ConsoleScanner getConsoleScanner() {
-		return cs;
+		return consoleScanner;
 	}
 
 	public void setConsoleScanner(ConsoleScanner cs) {
-		this.cs = cs;
+		this.consoleScanner = cs;
 	}
 
 	public QuoteStorage getQuoteStorage() {
@@ -96,13 +65,59 @@ public class Kickstarter {
 		this.categoryStorage = categoryStorage;
 	}
 
+	public ProjectManager getProjectManager() {
+		return projectManager;
+	}
+
+	public void setProjectManager(ProjectManager projectManager) {
+		this.projectManager = projectManager;
+	}
+
+	public ConsolePrinter getConsolePrinter() {
+		return consolePrinter;
+	}
+
+	public void setConsolePrinter(ConsolePrinter consolePrinter) {
+		this.consolePrinter = consolePrinter;
+	}
+
+	private UserManager userManager = new UserManager(consolePrinter,
+			consoleScanner, categoryStorage, this);
+
+	public static void main(String[] args) {
+		Kickstarter kickstarter = new Kickstarter();
+		
+		Project project = new Project("GoIT Java 7",
+				"Movie about our GoIT Java 7 Group",
+				kickstarter.getCategoryStorage().getCategoryById(1),
+				LocalDateTime.now().plusHours(23));
+		
+		kickstarter.getProjectManager().getProjectByName("Catana")
+				.setDemoLink("www.catana.game");
+		Map<String, String> qa = new HashMap<String, String>();
+		qa.put("What is project about?", "It is about our goit7 group");
+		qa.put("When was it started", "October 2015");
+		kickstarter.getProjectManager().getProjectByName("Catana")
+				.setQuestionsAndAnswers(qa);
+		kickstarter.addProject(project);
+		User guest = new User();
+		kickstarter.getProjectManager().getProjects().forEach(p -> {
+			p.setMoneyNeeded(50000);
+		});
+		kickstarter.getBody().generateMainPage();
+		kickstarter.getUserManager().generateMenu(guest);
+
+	}
+
 	public synchronized void addProject(Project pr) {
 		projectManager.getProjects().add(pr);
 	}
 
 	public void initQuotes() {
-		quoteStorage.addQuote(new Quote(QuoteStorage.QUOTE_BY_PRINCESS_DIANA, "Princess Diana"));
-		quoteStorage.addQuote(new Quote(QuoteStorage.QUOTE_BY_MISHA_COLLINS, "Misha Collins"));
+		quoteStorage.addQuote(new Quote(QuoteStorage.QUOTE_BY_PRINCESS_DIANA,
+				"Princess Diana"));
+		quoteStorage.addQuote(new Quote(QuoteStorage.QUOTE_BY_MISHA_COLLINS,
+				"Misha Collins"));
 	}
 
 	public void initCategories() {
@@ -114,11 +129,14 @@ public class Kickstarter {
 
 	private void initProjects() {
 		LocalDateTime dateTime = LocalDateTime.now();
-		projectManager.addProject(new Project("Catana", "New sword-fighting game", categoryStorage.getCategoryById(3),
+		projectManager.addProject(new Project("Catana",
+				"New sword-fighting game", categoryStorage.getCategoryById(3),
 				dateTime.plusDays(14)));
-		projectManager.addProject(new Project("Terminator Exodus", "New game about fighting as Terminator",
+		projectManager.addProject(new Project("Terminator Exodus",
+				"New game about fighting as Terminator",
 				categoryStorage.getCategoryById(3), dateTime));
-		projectManager.getProjectByName("Catana").addBacker(new User(), Double.valueOf(25000));
+		projectManager.getProjectByName("Catana").addBacker(new User(),
+				Double.valueOf(25000));
 
 	}
 

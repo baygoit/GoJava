@@ -6,7 +6,7 @@ import org.junit.Test;
 import static org.hamcrest.CoreMatchers.is;
 import ua.com.goit.gojava7.kickstarter.model.Project;
 
-public class ProjectManagerTest {
+public class ProjectManagerTest{
 	ProjectManager projectManager = new ProjectManager();
 
 	@Test
