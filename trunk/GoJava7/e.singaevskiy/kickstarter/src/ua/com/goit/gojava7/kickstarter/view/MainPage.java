@@ -53,14 +53,22 @@ public class MainPage {
         outStream.println("FAQ:");
         project.getQuestionsAndAnswers().stream().map(faq -> "\t" + faq.toString()).forEach(outStream::println);
 
-        outStream.println("1. Pay");
-        outStream.println("2. Questions");
+        outStream.println("1. Send message");
+        outStream.println("2. Pay");
 
         showExit();
     }
-
-    public void showPaymentRequest(Project project) {
+    
+    public void showMessageRequest() {
+        outStream.print("Enter your message: ");
+    }
+    
+    public void showShortProject(Project project) {
         outStream.println(project);
+    }
+    
+    public void showPaymentRequest(Project project) {
+        showShortProject(project);
         outStream.println("Enter your name, card ID and sum, divided by ' '");
     }
 

@@ -14,7 +14,7 @@ public class Project {
     private List<Category> categories = new ArrayList<>();
     private String description;
     private String videoUrl;
-    private List<FAQ> questionsAndAnswers = new ArrayList<>();
+    private List<QnA> questionsAndAnswers = new ArrayList<>();
     private User author;
 
     public Project() {
@@ -80,15 +80,15 @@ public class Project {
         this.categories.add(category);
     }
 
-    public List<FAQ> getQuestionsAndAnswers() {
+    public List<QnA> getQuestionsAndAnswers() {
         return questionsAndAnswers;
     }
 
-    public void setQuestionsAndAnswers(List<FAQ> questionsAndAnswers) {
+    public void setQuestionsAndAnswers(List<QnA> questionsAndAnswers) {
         this.questionsAndAnswers = questionsAndAnswers;
     }
 
-    public void addQuestionAndAnswer(FAQ questionAndAnswer) {
+    public void addQuestionAndAnswer(QnA questionAndAnswer) {
         this.questionsAndAnswers.add(questionAndAnswer);
     }
 
@@ -172,7 +172,7 @@ public class Project {
         return "Project \"" + name + "\" by " + author;
     }
 
-    public void addFAQ(FAQ faq) {
+    public void addQnA(QnA faq) {
         this.questionsAndAnswers.add(faq);
     }
 

@@ -7,6 +7,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 import ua.com.goit.gojava7.kickstarter.beans.Category;
+import ua.com.goit.gojava7.kickstarter.beans.QnA;
 import ua.com.goit.gojava7.kickstarter.beans.Payment;
 import ua.com.goit.gojava7.kickstarter.beans.Pledge;
 import ua.com.goit.gojava7.kickstarter.beans.Project;
@@ -21,6 +22,7 @@ import ua.com.goit.gojava7.kickstarter.view.MainPage;
 
 public class MainPageController {
 
+    private static final int OPTION_CHAT = 1;
     private static final int OPTION_EXIT = 0;
     private final Random rnd = new Random();
     private MainPage page;
@@ -76,10 +78,15 @@ public class MainPageController {
     private void showProjectDetailsMenu(Project project) {
         printProjectDetails(project);
 
-        int option = getMenuOptionFromUser(1);
+        int option = getMenuOptionFromUser(2);
 
         if (option != OPTION_EXIT) {
-            showPaymentMenu(project);
+            if (option == OPTION_CHAT) {
+                showChatMenu(project);
+            } else {
+                showPaymentMenu(project);
+            }
+            
             showProjectDetailsMenu(project);
         }
     }
@@ -90,6 +97,14 @@ public class MainPageController {
         if (!processPayment(project, sc.nextLine())) {
             showPaymentMenu(project);
         }
+    }
+    
+    private void showChatMenu(Project project) {
+        page.showShortProject(project);
+        page.showMessageRequest();
+        String text = sc.nextLine();
+        QnA message = new QnA(text, "");
+        project.addQnA(message);
     }
 
     public boolean processPayment(Project project, String paymentRequest) {

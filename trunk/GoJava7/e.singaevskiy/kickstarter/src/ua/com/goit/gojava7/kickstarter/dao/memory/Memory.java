@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ua.com.goit.gojava7.kickstarter.beans.Category;
-import ua.com.goit.gojava7.kickstarter.beans.FAQ;
+import ua.com.goit.gojava7.kickstarter.beans.QnA;
 import ua.com.goit.gojava7.kickstarter.beans.Payment;
 import ua.com.goit.gojava7.kickstarter.beans.Pledge;
 import ua.com.goit.gojava7.kickstarter.beans.Project;
@@ -54,8 +54,8 @@ public class Memory {
         project.setEndDate(Utils.dateFromString("25.11.2015"));
         project.setVideoUrl(videoUrl);
         project.setGoalSum(2000L);
-        project.addFAQ(new FAQ("q1", "a1"));
-        project.addFAQ(new FAQ("q2", "a2"));
+        project.addQnA(new QnA("q1", "a1"));
+        project.addQnA(new QnA("q2", "a2"));
         projects.add(project);
         
         project = new Project("Draw Like a Boss : The Physical Book", new User("Ash and Eli"), new Category("Art"));
@@ -64,8 +64,8 @@ public class Memory {
         project.setEndDate(Utils.dateFromString("27.11.2015"));
         project.setVideoUrl(videoUrl);
         project.setGoalSum(9000L);
-        project.addFAQ(new FAQ("q3", "a3"));
-        project.addFAQ(new FAQ("q4", "a4"));
+        project.addQnA(new QnA("q3", "a3"));
+        project.addQnA(new QnA("q4", "a4"));
         projects.add(project);
         
         project = new Project("Mini Museum 2: The Second Edition", new User("Hans Fex"), new Category("Art"));
@@ -74,8 +74,8 @@ public class Memory {
         project.setEndDate(Utils.dateFromString("25.12.2015"));
         project.setVideoUrl(videoUrl);
         project.setGoalSum(5500L);
-        project.addFAQ(new FAQ("q5", "a5"));
-        project.addFAQ(new FAQ("q6", "a6"));
+        project.addQnA(new QnA("q5", "a5"));
+        project.addQnA(new QnA("q6", "a6"));
         projects.add(project);
         
         project = new Project("FlyKly Smart Ped", new User("FlyKly"), new Category("Sports"));
@@ -84,8 +84,8 @@ public class Memory {
         project.setEndDate(Utils.dateFromString("01.01.2016"));
         project.setVideoUrl(videoUrl);
         project.setGoalSum(4000L);
-        project.addFAQ(new FAQ("q7", "a7"));
-        project.addFAQ(new FAQ("q8", "a8"));
+        project.addQnA(new QnA("q7", "a7"));
+        project.addQnA(new QnA("q8", "a8"));
         projects.add(project);
         
         project = new Project("Music for Cats", new User("David Teie"), new Category("Music"));
@@ -94,8 +94,8 @@ public class Memory {
         project.setEndDate(Utils.dateFromString("05.01.2016"));
         project.setVideoUrl(videoUrl);
         project.setGoalSum(2500L);
-        project.addFAQ(new FAQ("q9", "a9"));
-        project.addFAQ(new FAQ("q0", "a0"));
+        project.addQnA(new QnA("q9", "a9"));
+        project.addQnA(new QnA("q0", "a0"));
         projects.add(project);
     }
 
