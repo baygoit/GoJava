@@ -15,8 +15,11 @@ As a Guest, I want to explore a particular project to decide to invest money in 
 AC: While in the project list -> I choose any project -> I see a detailed description of the project (everything on the list as well as description, owner of the project, how much money you need, links to videos and photos)
 
 5. Navigation 
-As a Guest I want to be able to view different projects in different categories without restarting app.
+As a Guest I, want to be able to view different projects in different categories without restarting app.
 AC 1: While in the project list -> I choose 0 -> I see the front page with a list of categories.
 AC 2: From the project description -> I choose 0 -> I see the list of projects
 
+6. Invest in the project
+As a guest, I want to invest in a project I liked to support him.
+AC: While in the project description -> I see a menu item to invest in the project -> I choose it -> I see a request for entering a name, card number and amount -> I enter them -> I pass to the project description -> I see that info about the number of donations has changed
 
