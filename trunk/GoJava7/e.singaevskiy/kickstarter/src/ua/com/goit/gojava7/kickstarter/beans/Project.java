@@ -11,15 +11,21 @@ public class Project {
     private long balanceSum;
     private Date startDate;
     private Date endDate;
-    private List<Category> categories;
+    private List<Category> categories = new ArrayList<>();
     private String description;
     private String videoUrl;
-    private List<FAQ> questionsAndAnswers;
+    private List<QnA> questionsAndAnswers = new ArrayList<>();
     private User author;
 
     public Project() {
-        categories = new ArrayList<>();
-        questionsAndAnswers = new ArrayList<>();
+        // default bean constructor
+    }
+
+    public Project(String name, User author, Category category) {
+        super();
+        this.name = name;
+        this.categories.add(category);
+        this.author = author;
     }
 
     public String getName() {
@@ -74,15 +80,15 @@ public class Project {
         this.categories.add(category);
     }
 
-    public List<FAQ> getQuestionsAndAnswers() {
+    public List<QnA> getQuestionsAndAnswers() {
         return questionsAndAnswers;
     }
 
-    public void setQuestionsAndAnswers(List<FAQ> questionsAndAnswers) {
+    public void setQuestionsAndAnswers(List<QnA> questionsAndAnswers) {
         this.questionsAndAnswers = questionsAndAnswers;
     }
 
-    public void addQuestionAndAnswer(FAQ questionAndAnswer) {
+    public void addQuestionAndAnswer(QnA questionAndAnswer) {
         this.questionsAndAnswers.add(questionAndAnswer);
     }
 
@@ -111,7 +117,10 @@ public class Project {
     }
 
     public long daysLeft() {
-        long ms = getEndDate().getTime() - System.currentTimeMillis();
+        long ms = 0;
+        if (getEndDate() != null) {
+            ms = getEndDate().getTime() - System.currentTimeMillis(); 
+        }
         return ms / (1000L * 60L * 60L * 24L);
     }
 
@@ -163,70 +172,8 @@ public class Project {
         return "Project \"" + name + "\" by " + author;
     }
 
-    public static Builder newBuilder() {
-        return new Project().new Builder();
-    }
-
-    public class Builder {
-
-        private Builder() {
-
-        }
-
-        public Builder setAuthor(User author) {
-            Project.this.author = author;
-            return this;
-        }
-
-        public Builder setDescription(String description) {
-            Project.this.description = description;
-            return this;
-        }
-
-        public Builder setStartDate(Date startDate) {
-            Project.this.startDate = startDate;
-            return this;
-        }
-
-        public Builder setEndDate(Date endDate) {
-            Project.this.endDate = endDate;
-            return this;
-        }
-
-        public Builder setGoalSum(Long goalSum) {
-            Project.this.goalSum = goalSum;
-            return this;
-        }
-
-        public Builder setBalanceSum(Long balanceSum) {
-            Project.this.balanceSum = balanceSum;
-            return this;
-        }
-
-        public Builder setVideoURL(String videoUrl) {
-            Project.this.videoUrl = videoUrl;
-            return this;
-        }
-
-        public Builder setName(String name) {
-            Project.this.name = name;
-            return this;
-        }
-
-        public Builder addCategory(Category category) {
-            Project.this.addCategory(category);
-            return this;
-        }
-
-        public Builder addFAQ(FAQ faq) {
-            Project.this.questionsAndAnswers.add(faq);
-            return this;
-        }
-
-        public Project build() {
-            return Project.this;
-        }
-
+    public void addQnA(QnA faq) {
+        this.questionsAndAnswers.add(faq);
     }
 
 }

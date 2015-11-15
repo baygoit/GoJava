@@ -3,6 +3,10 @@ package ua.com.goit.gojava7.kickstarter.beans;
 public class Category {
 
     private String name;
+    
+    public Category() {
+        // default bean constructor
+    }
 
     public Category(String name) {
         this.name = name;
@@ -44,7 +48,7 @@ public class Category {
         if (name == null && other.name != null) {
             return false;
         }
-        if (!name.equals(other.name)) {
+        if (name != null && !name.equals(other.name)) {
             return false;
         }
         return true;

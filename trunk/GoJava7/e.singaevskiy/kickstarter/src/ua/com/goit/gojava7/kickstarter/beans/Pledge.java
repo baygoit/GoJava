@@ -7,17 +7,21 @@ public class Pledge {
     private Project project;
     private Payment payment;
 
+    public Pledge() {
+        // default bean constructor
+    }
+    
     public Pledge(Project project, Payment payment) {
         this.project = project;
         this.payment = payment;
     }
 
-    public long getPledgeSum() {
-        return payment.getSum();
+    public Payment getPayment() {
+        return payment;
     }
 
-    public User getUser() {
-        return payment.getUser();
+    public void setPayment(Payment payment) {
+        this.payment = payment;
     }
 
     public Reward getReward() {
@@ -36,8 +40,16 @@ public class Pledge {
         this.project = project;
     }
 
-    public Date getDate() {
+    public Date paymentDate() {
         return payment.getDate();
+    }
+    
+    public User paymentUser() {
+        return payment.getUser();
+    }
+    
+    public long paymentPledgeSum() {
+        return payment.getSum();
     }
 
 }

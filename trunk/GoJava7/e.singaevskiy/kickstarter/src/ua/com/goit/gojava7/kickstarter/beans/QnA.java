@@ -1,11 +1,11 @@
 package ua.com.goit.gojava7.kickstarter.beans;
 
-public class FAQ {
+public class QnA {
 
     private String question;
     private String answer;
 
-    public FAQ(String question, String answer) {
+    public QnA(String question, String answer) {
         this.question = question;
         this.answer = answer;
     }

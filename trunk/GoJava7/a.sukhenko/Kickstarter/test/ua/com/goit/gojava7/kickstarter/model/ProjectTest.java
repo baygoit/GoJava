@@ -10,7 +10,7 @@ import static org.hamcrest.CoreMatchers.is;
 
 import org.junit.Test;
 
-public class ProjectTest {
+public class ProjectTest{
 	Project project = new Project();
 
 	@Test
@@ -28,11 +28,12 @@ public class ProjectTest {
 	public void testProject4() {
 		Category projectCategory = new Category();
 		LocalDateTime now = LocalDateTime.now();
-		project = new Project("1", "2", projectCategory, now);
-		assertThat(project.getProjectName(), is("1"));
+		String projectName = "project";
+		project = new Project(projectName, "2", projectCategory, now);
+		assertThat(project.getProjectName(), is(projectName));
 		assertThat(project.getProjectDescription(), is("2"));
 		assertThat(project.getProjectCategory(), is(projectCategory));
-		assertThat(project.getEnddate(), is(now));
+		assertThat(project.getEndDate(), is(now));
 	}
 
 	@Test
@@ -40,19 +41,20 @@ public class ProjectTest {
 		Category projectCategory = new Category();
 		LocalDateTime now = LocalDateTime.now().plusDays(14).minusHours(1);
 		project = new Project("1", "2", projectCategory, now);
-		assertThat(project.getProjectEndTime(), is("13 дней до окончания"));
+		assertThat(project.getProjectEndTime(), is("13 days left"));
 
 		project.setEnddate(LocalDateTime.now().plusHours(4).minusMinutes(1));
-		assertThat(project.getProjectEndTime(), is("239 минут до окончания"));
+		assertThat(project.getProjectEndTime(), is("239 minutes left"));
 
 		project.setEnddate(LocalDateTime.now().plusHours(4));
-		assertThat(project.getProjectEndTime(), is("4 часов до окончания"));
+		assertThat(project.getProjectEndTime(), is("4 hours left"));
 	}
 
 	@Test
 	public void testAddBacker() {
 		project.addBacker(new User(), 4321.0);
 		assertThat(project.getBackers().size(), is(1));
+		// test that it is our User
 	}
 
 	@Test
@@ -89,7 +91,8 @@ public class ProjectTest {
 	@Test
 	public void testGetMoneyPledged() {
 		project.addBacker(new User(), 50000.0);
-		assertThat(project.getMoneyPledged(), is(50000.0));
+		project.addBacker(new User(), 48000.0);
+		assertThat(project.getMoneyPledged(), is(98000.0));
 	}
 
 	@Test
@@ -100,10 +103,10 @@ public class ProjectTest {
 	}
 
 	@Test
-	public void testGetEnddate() {
+	public void testGetEndDate() {
 		LocalDateTime loc = LocalDateTime.now();
 		project.setEnddate(loc);
-		assertThat(project.getEnddate(), is(loc));
+		assertThat(project.getEndDate(), is(loc));
 	}
 
 	@Test

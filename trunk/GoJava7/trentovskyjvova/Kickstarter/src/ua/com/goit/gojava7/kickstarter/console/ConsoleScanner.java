@@ -1,10 +1,19 @@
 package ua.com.goit.gojava7.kickstarter.console;
 
+import java.io.InputStream;
 import java.util.Scanner;
 
 public class ConsoleScanner {
 
-	private Scanner scanner = new Scanner(System.in);
+	private Scanner scanner;
+
+	public ConsoleScanner() {
+		scanner = new Scanner(System.in);
+	}
+
+	public ConsoleScanner(InputStream inputStream) {
+		scanner = new Scanner(inputStream);
+	}
 
 	public int scan() {
 

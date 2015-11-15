@@ -8,7 +8,7 @@ import ua.com.goit.gojava7.kickstarter.model.Project;
 import ua.com.goit.gojava7.kickstarter.model.Quote;
 import ua.com.goit.gojava7.kickstarter.storage.ProjectManager;
 
-public class ConsolePrinter {
+public class ConsolePrinter{
 	private final String deflector = "===========================";
 
 	public void print(String s) {
@@ -20,7 +20,8 @@ public class ConsolePrinter {
 	}
 
 	public void println(Quote quote) {
-		System.out.println("\"" + quote.getQuoteName() + "\"\n" + quote.getAuthor());
+		System.out.println(
+				"\"" + quote.getQuoteName() + "\"\n" + quote.getAuthor());
 
 	}
 
@@ -52,8 +53,9 @@ public class ConsolePrinter {
 		print("[ " + project.getProjectDescription() + " ]");
 		print("History: " + getBlankStringIfNull(project.getProjectHistory()));
 		print("Demo: " + getBlankStringIfNull(project.getDemoLink()));
-		print("Funded: " + project.getFundedPercentage() + " Backers: " + project.getBackers().size()
-				+ " | Pledged: $" + project.getMoneyPledged());
+		print("Funded: " + project.getFundedPercentage() + " Backers: "
+				+ project.getBackers().size() + " | Pledged: $"
+				+ project.getMoneyPledged());
 		printQuestionsAndAnswers(project.getQuestionsAndAnswers());
 
 	}

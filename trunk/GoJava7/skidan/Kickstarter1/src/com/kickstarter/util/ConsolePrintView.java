@@ -70,7 +70,7 @@ public class ConsolePrintView {
 
 	public void posobilitiesInfirm() {
 		System.out.println(
-				"You can donate ti this projec. If you'd lile to, please input 200,  \n or you can return to project selecrion menu presing any button ");
+				"\n You can donate to this projec. If you'd lile to, please input 200, \n or you can ask a question inpyt 300,\n if you want to return to project selection menu pres any button ");
 
 	}
 

@@ -65,7 +65,7 @@ public class Kickstarter {
 					if (selectedAction == payChoise) {
 						ps.makePayment(projectNumber, categoryNumber, categoryTitle);
 					}if (selectedAction == quastionChoice) {
-							questionSystem.addQuestion(projectNumber, categoryNumber, categoryTitle);
+							questionSystem.provideNewQuestion(projectNumber, categoryNumber, categoryTitle);
 						
 					} else {
 						projectSelector(categoryNumber, categoryTitle);

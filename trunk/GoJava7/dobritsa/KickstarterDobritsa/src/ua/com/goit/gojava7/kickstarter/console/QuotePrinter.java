@@ -6,8 +6,6 @@ import ua.com.goit.gojava7.kickstarter.storage.QuoteStorage;
 
 public class QuotePrinter {
 	
-	
-	
 	public void printRandomQuote(QuoteStorage quoteStorage) {
 		Quote quote = quoteStorage.getRandomQuote();
 		System.out.println(quote.getText() + "\n          " + quote.getAuthor());

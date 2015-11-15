@@ -35,15 +35,15 @@ public class Kickstarter {
 	}
 
 	public void runKickstarter() {
+		consolePrinter.print(quoteStorage.getRandomQuote());
+		
 		ListIterator<Level> levelsIterator = levels.listIterator();
 		List<Category> categories = categoryStorage.getAllCategories();
-
-		consolePrinter.print(quoteStorage.getRandomQuote());
 
 		Level userPositionLevel = levelsIterator.next();
 		int userChoise = 0;
 		Category selectedCategory = null;
-		StringBuilder answer;
+		String answer;
 
 		answer = userPositionLevel.generateAnswer(categories, userChoise, selectedCategory);
 
@@ -62,7 +62,7 @@ public class Kickstarter {
 			}
 
 			answer = userPositionLevel.validateUserChoise(categories, userChoise, selectedCategory);
-			if (!answer.toString().equals("")) {
+			if (!answer.equals("")) {
 				consolePrinter.print(answer);
 				continue;
 			}
@@ -85,10 +85,10 @@ public class Kickstarter {
 	private Level findNewUserPositionLevel(ListIterator<Level> listIterator, int userChoise) {
 
 		if (userChoise == 0) {
-			if (listIterator.hasPrevious()) {
+			listIterator.hasPrevious();
 				listIterator.previous();
 				listIterator.previous();
-			}
+			
 		}
 		return listIterator.next();
 	}

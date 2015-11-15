@@ -5,7 +5,7 @@ import ua.com.goit.gojava7.kickstarter.domain.Quote;
 public class ConsolePrinter {
 
 	public void print(Quote quote) {
-		System.out.println(quote.getText() + " " + quote.getAuthor());
+		System.out.println(quote.getText() + " (c) " + quote.getAuthor());
 	}
 	
 	public void print(String string) {
