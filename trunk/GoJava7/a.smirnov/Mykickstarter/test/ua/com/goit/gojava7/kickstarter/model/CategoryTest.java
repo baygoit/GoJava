@@ -28,31 +28,31 @@ public class CategoryTest {
 		category.setName("Film");
 		assertThat(category.getName(), is("Film"));
 	}
-
-	@Test
-	public void testAddProjectToCategory() {
-		category.addProjectToCategory(project1);
-		category.addProjectToCategory(project2);
-		assertThat(category.getAllProjectsFromCategory().size(), is(2));
-	}
-
-	@Test
-	public void testDeleteProjectToCategory() {
-		category.addProjectToCategory(project1);
-		category.addProjectToCategory(project2);
-		
-		category.deleteProjectToCategory(project1);
-		category.deleteProjectToCategory(project2);
-		assertThat(category.getAllProjectsFromCategory().isEmpty(), is(true));
-	}
-
-	@Test
-	public void testGetAllProjectsFromCategory() {
-		category.addProjectToCategory(project1);
-		category.addProjectToCategory(project2);
-		Set<Project> projects = category.getAllProjectsFromCategory();
-		assertThat(projects.size(), is(2));
-	}
+//
+//	@Test
+//	public void testAddProjectToCategory() {
+//		category.addProjectToCategory(project1);
+//		category.addProjectToCategory(project2);
+//		assertThat(category.getAllProjectsFromCategory().size(), is(2));
+//	}
+//
+//	@Test
+//	public void testDeleteProjectToCategory() {
+//		category.addProjectToCategory(project1);
+//		category.addProjectToCategory(project2);
+//		
+//		category.deleteProjectToCategory(project1);
+//		category.deleteProjectToCategory(project2);
+//		assertThat(category.getAllProjectsFromCategory().isEmpty(), is(true));
+//	}
+//
+//	@Test
+//	public void testGetAllProjectsFromCategory() {
+//		category.addProjectToCategory(project1);
+//		category.addProjectToCategory(project2);
+//		Set<Project> projects = category.getAllProjectsFromCategory();
+//		assertThat(projects.size(), is(2));
+//	}
 
 	@Test
 	public void testCompareTo() {

@@ -1,10 +1,15 @@
 package ua.com.goit.gojava7.kickstarter.model;
 
-public class FAQ implements Comparable<FAQ>{
+import java.io.Serializable;
+
+public class Faq implements Comparable<Faq>, Serializable {
+
+	private static final long serialVersionUID = 1L;
+	private Project project;
 	private String question;
 	private String answer;
 	
-	public FAQ(String question) {
+	public Faq(String question) {
 		this.question = question;
 	}
 	
@@ -23,9 +28,17 @@ public class FAQ implements Comparable<FAQ>{
 	public void setAnswer(String answer) {
 		this.answer = answer;
 	}
+	
+	public Project getProject() {
+		return project;
+	}
+	
+	public void setProject(Project project) {
+		this.project = project;
+	}
 
 	@Override
-	public int compareTo(FAQ that) {
+	public int compareTo(Faq that) {
 		return this.question.compareTo(that.getQuestion());
 	}
 }

@@ -92,21 +92,21 @@ public class ProjectTest {
 		assertThat(project1.getLinkOnVideo(), is("youtube.com"));
 	}
 
-	@Test
-	public void testGetQuestion() {
-		assertThat(project1.getQuestion().length(), is(0));
-	}
-
-	@Test
-	public void testAddQuestion() {
-		project1.addQuestion("Question");
-		assertThat(project1.getQuestion(), is("Question"));
-	}
-
-	@Test
-	public void testGetExpiryDays() {
-		assertThat(project1.getExpiryDays(), is(0));
-	}
+//	@Test
+//	public void testGetQuestion() {
+//		assertThat(project1.getQuestion().length(), is(0));
+//	}
+//
+//	@Test
+//	public void testAddQuestion() {
+//		project1.addQuestion("Question");
+//		assertThat(project1.getQuestion(), is("Question"));
+//	}
+//
+//	@Test
+//	public void testGetExpiryDays() {
+//		assertThat(project1.getExpiryDays(), is(0));
+//	}
 	
 	@Test
 	public void testSetExpiryDays() {

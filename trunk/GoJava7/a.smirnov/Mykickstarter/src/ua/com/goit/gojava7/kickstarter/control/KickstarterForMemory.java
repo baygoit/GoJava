@@ -4,32 +4,38 @@ import java.util.Iterator;
 import java.util.Set;
 
 import ua.com.goit.gojava7.kickstarter.model.Category;
+import ua.com.goit.gojava7.kickstarter.model.Faq;
 import ua.com.goit.gojava7.kickstarter.model.Payment;
 import ua.com.goit.gojava7.kickstarter.model.Project;
-import ua.com.goit.gojava7.kickstarter.storage.CategoriesStorage;
-import ua.com.goit.gojava7.kickstarter.storage.PaymentStorage;
-import ua.com.goit.gojava7.kickstarter.storage.QuotesStorage;
+import ua.com.goit.gojava7.kickstarter.storage_in_memory.CategoriesStorage;
+import ua.com.goit.gojava7.kickstarter.storage_in_memory.FaqStorage;
+import ua.com.goit.gojava7.kickstarter.storage_in_memory.PaymentStorage;
+import ua.com.goit.gojava7.kickstarter.storage_in_memory.ProjectsStorage;
+import ua.com.goit.gojava7.kickstarter.storage_in_memory.QuotesStorage;
 import ua.com.goit.gojava7.kickstarter.view.ConsolePrinter;
 import ua.com.goit.gojava7.kickstarter.view.ConsoleScanner;
 
-public class Kickstarter {
+public class KickstarterForMemory {
 
 	private static final String SEPARATOR = "**********************************************************************";
 	private static final String MOVE_TO_THE_NEXT_LINE = "\n";
+	
 	private ConsolePrinter consolePrinter;
 	private ConsoleScanner consoleScanner;
 	private CategoriesStorage categoriesStorage;
+	private ProjectsStorage projectsStorage;
 	private QuotesStorage quotesStorage;
 	private PaymentStorage paymentStorage;
+	private FaqStorage faqStorage;
 
-	public Kickstarter(ConsoleScanner consoleScanner, ConsolePrinter consolePrinter,
-			CategoriesStorage categoriesStorage, QuotesStorage quotesStorage, PaymentStorage paymentStorage) {
-		
-		this.consoleScanner = consoleScanner;
-		this.consolePrinter = consolePrinter;
-		this.categoriesStorage = categoriesStorage;
-		this.quotesStorage = quotesStorage;
-		this.paymentStorage = paymentStorage;
+	public KickstarterForMemory() {
+		this.consoleScanner = new ConsoleScanner();
+		this.consolePrinter = new ConsolePrinter();
+		this.categoriesStorage = new CategoriesStorage();
+		this.quotesStorage = new QuotesStorage();
+		this.paymentStorage = new PaymentStorage();
+		this.projectsStorage = new ProjectsStorage(categoriesStorage);
+		this.faqStorage = new FaqStorage();
 	}
 
 	public void start() {
@@ -38,7 +44,7 @@ public class Kickstarter {
 	}
 	
 	protected void selectCategory() {
-		Set<Category> AllCategories = categoriesStorage.getAllCategories();
+		Set<Category> AllCategories = categoriesStorage.getAll();
 		int amountOfCategories = AllCategories.size();
 		
 		Category selectedCategory = null;
@@ -74,7 +80,7 @@ public class Kickstarter {
 	}
 
 	protected void selectProjects(Category category) {
-		Set<Project> AllProjectsFromCategory = category.getAllProjectsFromCategory();
+		Set<Project> AllProjectsFromCategory = projectsStorage.getAllProjectsFromCategory(category);
 		int amountOfPrjects = AllProjectsFromCategory.size();
 		
 		int numberOfSelectedProject;
@@ -163,16 +169,21 @@ public class Kickstarter {
 		
 		int choseNumber;
 		do {
-			consolePrinter.print(chooseMenuInProject.toString());
-			choseNumber = consoleScanner.getInt();
-			consolePrinter.print(SEPARATOR);
 			
+			consolePrinter.print(chooseMenuInProject.toString());
+			consolePrinter.print(SEPARATOR);
+			choseNumber = consoleScanner.getInt();
+
 			if (choseNumber == 1) {
+				consolePrinter.print("You selected 1. Donate money on project ");
+				consolePrinter.print(SEPARATOR);
 				donateMoneyForProject(selectedProject);
 				consolePrinter.print(SEPARATOR);
-			}
+			} 
 			
 			if (choseNumber == 2) {
+				consolePrinter.print("You selected 2. Ask a question ");
+				consolePrinter.print(SEPARATOR);
 				askQuestion(selectedProject);
 			}
 			
@@ -185,31 +196,34 @@ public class Kickstarter {
 	protected void donateMoneyForProject(Project project) {
 		String userName = getUserName();
 		int cardNumber = getCreditCardNumber();
-		int donatingSum = getPledgeAmount();
+		int pledgeSum = getDonatingAmount();
 		
 		consolePrinter.print(SEPARATOR);
-		project.addToCurrentAmountOfMoney(donatingSum);
-		System.out.print(consolePrinter.getBriefProjectInfo(project));
+		project.addToCurrentAmountOfMoney(pledgeSum);
+		consolePrinter.printBriefProjectInfo(project);
 		
-		Payment payment = new Payment(userName, donatingSum, cardNumber);
+		Payment payment = new Payment(userName, pledgeSum, cardNumber);
 		paymentStorage.add(payment);	
 	}
 	
 	protected void askQuestion(Project project) {
 		String question = getAskingQuestion();
+		Faq faq = new Faq(question);
+		faq.setProject(project);
+		faqStorage.add(faq);
 		consolePrinter.print(SEPARATOR);
-		project.addQuestion(question);
-		consolePrinter.printFullProjectInfo(project);
+		consolePrinter.printBriefProjectInfo(project);
+		consolePrinter.printFaqs(faqStorage.getAll());
 	}
 	
-	protected int getPledgeAmount() {
-		int pledgeAmount;
+	protected int getDonatingAmount() {
+		int donatingAmount = -1;
 		do {
-			consolePrinter.print("Please enter donateing sum : ");
-			pledgeAmount = consoleScanner.getInt();
-		} while (pledgeAmount == Integer.MAX_VALUE);
+			consolePrinter.print("Please enter donating sum : ");
+			donatingAmount = consoleScanner.getInt();
+		} while (donatingAmount < 0);
 		
-		return pledgeAmount;
+		return donatingAmount;
 	}
 	
 	protected int getCreditCardNumber() {
@@ -217,7 +231,7 @@ public class Kickstarter {
 		do {
 			consolePrinter.print("Please enter you card number : ");
 			creditCardNumber = consoleScanner.getInt();
-		} while (creditCardNumber == Integer.MAX_VALUE);
+		} while (creditCardNumber == 0);
 		
 		return creditCardNumber;
 	}
@@ -229,12 +243,12 @@ public class Kickstarter {
 	}
 	
 	protected String getAskingQuestion() {
-		consolePrinter.print("Please your question :");
+		consolePrinter.print("Please enter your question :");
 		String question = consoleScanner.getString();
 		return question;
 	}
 	
-	protected void shutdown() {
+	protected void stop() {
 		consoleScanner.close();
 	}
 }

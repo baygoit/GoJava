@@ -1,17 +1,20 @@
 package ua.com.goit.gojava7.kickstarter.model;
 
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
 
-public class Payment {
+public class Payment implements Comparable<Payment>, Serializable{
+
+	private static final long serialVersionUID = 1L;
 	private String userName;
 	private long donatingSum;
 	private int cardId;
 	private Calendar paymentDate;
 	
-	public Payment(String user, long donateSum, int cardId) {
-		this.userName = user;
+	public Payment(String userName, long donateSum, int cardId) {
+		this.userName = userName;
 		this.donatingSum = donateSum;
 		this.cardId = cardId;
 		
@@ -38,15 +41,20 @@ public class Payment {
 		this.cardId = cardId;
 	}
 	
-	public String getUser() {
+	public String getUserName() {
 		return userName;
 	}
 	
-	public void setUser(String userName) {
+	public void setUserName(String userName) {
 		this.userName = userName;
 	}
 	
 	public Calendar getPaymentDate() {
 		return paymentDate;
+	}
+
+	@Override
+	public int compareTo(Payment that) {
+		return  this.userName.compareTo(that.getUserName());
 	}
 }

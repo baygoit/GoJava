@@ -1,12 +1,20 @@
 package ua.com.goit.gojava7.kickstarter.model;
 
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.Set;
 import java.util.TimeZone;
 import java.util.TreeSet;
 
-public class Project implements Comparable<Project> {
+import ua.com.goit.gojava7.kickstarter.storage_in_memory.FaqStorage;
+import ua.com.goit.gojava7.kickstarter.templates.Templateble;
+
+public class Project implements Comparable<Project>, Serializable{
+	
+	private static final long serialVersionUID = 1L;
+	private Category category;
 	private String title;
 	private String briefDescription;
 	private String fullDescription;
@@ -14,15 +22,13 @@ public class Project implements Comparable<Project> {
 	private int requiredAmountOfMoney;
 	private int currentAmountOfMoney;
 	private int expiryDays;
-	private Set<FAQ> faqStorage;
 
 	public Project(String title, String briefDescription, 
 			int requiredAmountOfMoney) {
 		
 		this.title = title;
 		this.briefDescription = briefDescription;
-		this.requiredAmountOfMoney = requiredAmountOfMoney;
-		faqStorage = new TreeSet<>();		
+		this.requiredAmountOfMoney = requiredAmountOfMoney;		
 	}
 
 	public String getTitle() {
@@ -99,19 +105,30 @@ public class Project implements Comparable<Project> {
 
 		return (int)days;
 	}
-
-	public String getQuestion() {
-		StringBuilder result = new StringBuilder();
-		for (FAQ faq : faqStorage) {
-			result.
-				append(faq.getQuestion());
-		}
-		return result.toString();
+	
+	public Category getCategory() {
+		return category;
 	}
 	
-	public void addQuestion(String question) {
-		FAQ faq = new FAQ(question);
-		faqStorage.add(faq);
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+	
+	public Set<Faq> getAllFaqsFromProject(Templateble<Faq> templateble) {
+		Set<Faq> allFaqs = templateble.getAll();
+		
+		Set<Faq> allFaqsFromSelectedProject = new TreeSet<>();
+		
+		Iterator<Faq> iteratorFaq = allFaqs.iterator();
+		
+		while (iteratorFaq.hasNext()) {
+			Faq faq = iteratorFaq.next();
+			if (faq.getProject().getTitle().equals(title)) {
+				allFaqsFromSelectedProject.add(faq);
+			}
+		}
+		
+		return allFaqsFromSelectedProject;
 	}
 	
 	@Override
