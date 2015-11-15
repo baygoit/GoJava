@@ -7,14 +7,11 @@ import static org.junit.Assert.assertThat;
 
 import org.junit.Test;
 
-public class PledgeTest {
+public class ProjectTest {
 
     @Test
     public void testBean() {
-        assertThat(Pledge.class, allOf(hasValidBeanConstructor(), hasValidGettersAndSetters()
-        /*
-         hasValidBeanHashCode(), hasValidBeanEquals(), hasValidBeanToString()
-         */
+        assertThat(Project.class, allOf(hasValidBeanConstructor(), hasValidGettersAndSetters()
         ));
 
     }

@@ -54,6 +54,7 @@ public class MainPage {
         project.getQuestionsAndAnswers().stream().map(faq -> "\t" + faq.toString()).forEach(outStream::println);
 
         outStream.println("1. Pay");
+        outStream.println("2. Questions");
 
         showExit();
     }

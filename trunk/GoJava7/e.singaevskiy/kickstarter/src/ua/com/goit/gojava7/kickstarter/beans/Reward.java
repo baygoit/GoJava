@@ -5,6 +5,10 @@ public class Reward {
     private String description;
     private Project project;
 
+    public Reward() {
+        // default bean constructor
+    }
+    
     public Reward(Project project, String description, Long pledgeSum) {
         this.project = project;
         this.description = description;

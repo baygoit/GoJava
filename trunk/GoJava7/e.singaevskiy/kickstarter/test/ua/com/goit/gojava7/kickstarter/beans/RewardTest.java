@@ -1,37 +1,35 @@
 package ua.com.goit.gojava7.kickstarter.beans;
 
+import static com.google.code.beanmatchers.BeanMatchers.hasValidBeanConstructor;
+import static com.google.code.beanmatchers.BeanMatchers.hasValidGettersAndSetters;
+import static org.hamcrest.CoreMatchers.allOf;
+import static org.junit.Assert.assertThat;
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.*;
 
 import org.junit.Test;
-
-import ua.com.goit.gojava7.kickstarter.beans.Project;
-import ua.com.goit.gojava7.kickstarter.beans.Reward;
+import org.mockito.Mockito;
 
 public class RewardTest {
 
-	Project project = new Project();
-	Reward testObject = new Reward(project, "testMessage", 200L);
-	
-	@Test
-	public void testSetProject() {
-		Project project = Project.newBuilder().setName("testProj").build();
-		testObject.setProject(project);
-		assertThat(testObject.getProject(), is(project));
-	}
+    @Test
+    public void testBean() {
+        assertThat(Reward.class, allOf(hasValidBeanConstructor(), hasValidGettersAndSetters()
+        /*
+         hasValidBeanHashCode(), hasValidBeanEquals(), hasValidBeanToString()
+         */
+        ));
 
-	@Test
-	public void testSetPledgeSum() {
-		long sum = 500L;
-		testObject.setPledgeSum(sum);
-		assertThat(testObject.getPledgeSum(), is(sum));
-	}
-
-	@Test
-	public void testSetDescription() {
-		String desc = "testDescription";
-		testObject.setDescription(desc);
-		assertThat(testObject.getDescription(), is(desc));
-	}
+    }
+    
+    @Test
+    public void testConstructor() {
+        Project project = Mockito.mock(Project.class);
+        long pledgeSum = 100L;
+        String description = "d1";
+        Reward reward = new Reward(project, description, pledgeSum);
+        assertThat(reward.getProject(), is(project));
+        assertThat(reward.getDescription(), is(description));
+        assertThat(reward.getPledgeSum(), is(pledgeSum));
+    }
 
 }
