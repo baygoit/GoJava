@@ -39,13 +39,15 @@ public class Kickstarter {
 		quotePrinter.printRandomQuote(quoteStorage);
 		while (true) {
 			Integer selectedCategory = chooseCategory();
+			Integer indexOfSelectedCategory = selectedCategory - 1;
 			while (selectedCategory != 0) {
-				currentCategory = categoryStorage.get(selectedCategory - SHIFT_ONE);
+				currentCategory = categoryStorage.get(indexOfSelectedCategory);
 				if (currentCategory.getAll().size() == 0) {
 					System.out.println("No projects in this categories.");
 					break;
 				} else {
 					Integer selectedProject = chooseProject(selectedCategory);
+					Integer indexOfSelectedProject = selectedProject - 1;
 					if (selectedProject != null) {
 						currentProject = currentCategory.get(selectedProject - SHIFT_ONE);
 						viewProject(selectedCategory, selectedProject);
