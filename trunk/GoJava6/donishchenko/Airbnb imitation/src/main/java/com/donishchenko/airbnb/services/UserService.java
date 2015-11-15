@@ -8,7 +8,6 @@ import com.google.common.base.Joiner;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.Collections;
 import java.util.List;
 
 public class UserService {
@@ -21,7 +20,7 @@ public class UserService {
 
         userDao.save(user);
 
-        log.info(Joiner.on("").join("User ID=", user.getId(), " | Successful validation. New User registered!"));
+        log.info(Joiner.on("").join("User ID=", user.getId(), " | Successful registered!"));
         log.exit(user.getId());
     }
 
@@ -38,27 +37,15 @@ public class UserService {
     }
 
     public List<User> getAllUsers() {
-        List<User> list = Collections.emptyList();
-
-        list = userDao.getAllUsers();
-
-        return list;
+        return userDao.getAllUsers();
     }
 
     public List<User> getAllClients() {
-        List<User> list = Collections.emptyList();
-
-        list = userDao.getAllClients();
-
-        return list;
+        return userDao.getAllClients();
     }
 
     public List<User> getAllHosts() {
-        List<User> list = Collections.emptyList();
-
-        list = userDao.getAllHosts();
-
-        return list;
+        return userDao.getAllHosts();
     }
 
     public User login(String login, String password) {

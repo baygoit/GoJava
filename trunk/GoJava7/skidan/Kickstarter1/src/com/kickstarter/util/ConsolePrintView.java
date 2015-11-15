@@ -90,7 +90,7 @@ public class ConsolePrintView {
 		System.out.println("\nProject Title : " + p.getTitle() + "\n Project Discription :" + p.getDiscription()
 				+ "\n Project History : " + p.getProjectHistory() + "\n Video Link : " + p.getVideoLink()
 				+ "\n Required Sum :" + p.getRequiredSum() + "\n Gained Sum :" + p.getGainedSum() + "\n Days Left :"
-				+ p.getDaysLeft() + "\n");
+				+ p.getDaysLeft() + "\n QustionSection : " + p.getQuestionSection());
 	}
 
 	public void viewSelectedCategoryProjects(Map<Integer, Project> projectList) {
@@ -104,5 +104,8 @@ public class ConsolePrintView {
 
 	public void qoutePrint(String quote) {
 		System.out.println(quote);
+	}
+	public void InputQuestionInfo(){
+		System.out.println("Plese enter your quastion : ");
 	}
 }

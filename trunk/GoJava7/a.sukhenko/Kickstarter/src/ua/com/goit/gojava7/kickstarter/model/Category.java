@@ -1,12 +1,9 @@
 package ua.com.goit.gojava7.kickstarter.model;
 
-/**
- * @author Devian
- * @category Model
- */
-public class Category {
+public class Category{
+	private String	categoryName;
+	private int		categoryId;
 	public Category() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public Category(String categoryName, int categoryId) {
@@ -14,9 +11,6 @@ public class Category {
 		this.categoryName = categoryName;
 		this.categoryId = categoryId;
 	}
-
-	private String categoryName;
-	private int categoryId;
 
 	public int getCategoryId() {
 		return categoryId;

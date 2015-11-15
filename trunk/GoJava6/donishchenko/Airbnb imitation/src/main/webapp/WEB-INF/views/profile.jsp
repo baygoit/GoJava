@@ -14,7 +14,7 @@
     <form action="/profile" method="POST">
         <table style="border: 1px solid black">
             Update User Info
-            <c:if test="${not empty requestScope.success}">
+            <c:if test="${not empty requestScope.updateMessage}">
                 <br><span style="color: green">${requestScope.updateMessage}</span>
             </c:if>
             <tr>
