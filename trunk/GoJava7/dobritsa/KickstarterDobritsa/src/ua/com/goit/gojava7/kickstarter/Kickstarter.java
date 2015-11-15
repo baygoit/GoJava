@@ -47,7 +47,7 @@ public class Kickstarter {
 					break;
 				} else {
 					Integer selectedProject = chooseProject(selectedCategory);
-					Integer indexOfSelectedProject = selectedProject - 1;
+					//Integer indexOfSelectedProject = selectedProject - 1;
 					if (selectedProject != null) {
 						currentProject = currentCategory.get(selectedProject - SHIFT_ONE);
 						viewProject(selectedCategory, selectedProject);
