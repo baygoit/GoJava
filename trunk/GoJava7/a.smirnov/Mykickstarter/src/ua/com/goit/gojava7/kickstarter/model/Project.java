@@ -8,7 +8,6 @@ import java.util.Set;
 import java.util.TimeZone;
 import java.util.TreeSet;
 
-import ua.com.goit.gojava7.kickstarter.storage_in_memory.FaqStorage;
 import ua.com.goit.gojava7.kickstarter.templates.Templateble;
 
 public class Project implements Comparable<Project>, Serializable{
@@ -67,7 +66,7 @@ public class Project implements Comparable<Project>, Serializable{
 		return currentAmountOfMoney;
 	}
 	
-	public void addToCurrentAmountOfMoney(int money) {
+	public void addMoneyToProject(int money) {
 		this.currentAmountOfMoney += money;
 	}
 	
@@ -87,7 +86,15 @@ public class Project implements Comparable<Project>, Serializable{
 		return expiryDays;
 	}
 	
-	public int getDaysLeft(int day, int month, int year) {
+	public Category getCategory() {
+		return category;
+	}
+	
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+	
+	protected int getDaysLeft(int day, int month, int year) {
 		TimeZone timeZone = TimeZone.getTimeZone("Europe/Kiev");
 		Calendar currentCalendar = Calendar.getInstance();
 		Date date = new Date();
@@ -106,15 +113,7 @@ public class Project implements Comparable<Project>, Serializable{
 		return (int)days;
 	}
 	
-	public Category getCategory() {
-		return category;
-	}
-	
-	public void setCategory(Category category) {
-		this.category = category;
-	}
-	
-	public Set<Faq> getAllFaqsFromProject(Templateble<Faq> templateble) {
+	protected Set<Faq> getAllFaqsFromProject(Templateble<Faq> templateble) {
 		Set<Faq> allFaqs = templateble.getAll();
 		
 		Set<Faq> allFaqsFromSelectedProject = new TreeSet<>();

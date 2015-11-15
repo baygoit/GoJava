@@ -9,36 +9,23 @@ public class Payment implements Comparable<Payment>, Serializable{
 
 	private static final long serialVersionUID = 1L;
 	private String userName;
-	private long donatingSum;
-	private int cardId;
+	private long creditCardNumber;
+	private int donatingSum;
 	private Calendar paymentDate;
 	
-	public Payment(String userName, long donateSum, int cardId) {
+	public Payment(String userName, long creditCardNumber, int donatingSum) {
 		this.userName = userName;
-		this.donatingSum = donateSum;
-		this.cardId = cardId;
-		
-		TimeZone timeZone = TimeZone.getTimeZone("Europe/Kiev");
-		paymentDate = Calendar.getInstance();
-		Date date = new Date();
-		paymentDate.setTimeZone(timeZone);
-		paymentDate.setTime(date);
+		this.creditCardNumber = creditCardNumber;
+		this.donatingSum = donatingSum;
+		setPaymentDay();
 	}
 	
-	public long getContribution() {
-		return donatingSum;
+	public long getCreditCardNumber() {
+		return creditCardNumber;
 	}
 	
-	public void setContribution(long contribution) {
-		this.donatingSum = contribution;
-	}
-	
-	public int getCardId() {
-		return cardId;
-	}
-	
-	public void setCardId(int cardId) {
-		this.cardId = cardId;
+	public void setCreditCardNumber(long creditCardNumber) {
+		this.creditCardNumber = creditCardNumber;
 	}
 	
 	public String getUserName() {
@@ -49,12 +36,28 @@ public class Payment implements Comparable<Payment>, Serializable{
 		this.userName = userName;
 	}
 	
+	public int getDonatingSum() {
+		return donatingSum;
+	}
+	
+	public void setDonatingSum(int donatingSum) {
+		this.donatingSum = donatingSum;
+	}
+	
 	public Calendar getPaymentDate() {
 		return paymentDate;
 	}
 
+	protected void setPaymentDay() {
+		TimeZone timeZone = TimeZone.getTimeZone("Europe/Kiev");
+		paymentDate = Calendar.getInstance();
+		Date date = new Date();
+		paymentDate.setTimeZone(timeZone);
+		paymentDate.setTime(date);
+	}
+	
 	@Override
 	public int compareTo(Payment that) {
-		return  this.userName.compareTo(that.getUserName());
+		return  (int) (this.paymentDate.getTimeInMillis() - that.getPaymentDate().getTimeInMillis());
 	}
 }

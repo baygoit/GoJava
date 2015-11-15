@@ -163,7 +163,7 @@ public class KickstarterForFiles {
 		chooseMenuInProject.
 			append("Please select (0 for back to projects): ").
 			append(MOVE_TO_THE_NEXT_LINE).
-			append("1 : donate money").
+			append("1 : Donate money").
 			append(MOVE_TO_THE_NEXT_LINE).
 			append("2 : Ask a question");
 		
@@ -194,58 +194,28 @@ public class KickstarterForFiles {
 	}
 	
 	protected void donateMoneyForProject(Project project) {
-		String userName = getUserName();
-		int cardNumber = getCreditCardNumber();
-		int pledgeSum = getDonatingAmount();
+		String userName = consoleScanner.parseUserName();
+		long cardNumber = consoleScanner.parseCreditCardNumber();
+		int donatingSum = consoleScanner.parseDonatingAmount();
 		
 		consolePrinter.print(SEPARATOR);
-		project.addToCurrentAmountOfMoney(pledgeSum);
-		consolePrinter.printBriefProjectInfo(project);
 		
-		Payment payment = new Payment(userName, pledgeSum, cardNumber);
-		paymentStorage.add(payment);	
+		Payment payment = new Payment(userName, cardNumber, donatingSum);
+		project.addMoneyToProject(payment.getDonatingSum());
+		paymentStorage.add(payment);
+		consolePrinter.printBriefProjectInfo(project);	
 	}
 	
 	protected void askQuestion(Project project) {
-		String question = getAskingQuestion();
+		String question = consoleScanner.parseAskingQuestion();
 		Faq faq = new Faq(question);
 		faq.setProject(project);
 		faqStorage.add(faq);
+		
 		consolePrinter.print(SEPARATOR);
+		
 		consolePrinter.printBriefProjectInfo(project);
-		consolePrinter.printFaqs(faqStorage.getAll());
-	}
-	
-	protected int getDonatingAmount() {
-		int donatingAmount = -1;
-		do {
-			consolePrinter.print("Please enter donating sum : ");
-			donatingAmount = consoleScanner.getInt();
-		} while (donatingAmount < 0);
-		
-		return donatingAmount;
-	}
-	
-	protected int getCreditCardNumber() {
-		int creditCardNumber;
-		do {
-			consolePrinter.print("Please enter you card number : ");
-			creditCardNumber = consoleScanner.getInt();
-		} while (creditCardNumber == 0);
-		
-		return creditCardNumber;
-	}
-	
-	protected String getUserName() {
-		consolePrinter.print("Please enter you name :");
-		String userName = consoleScanner.getString();
-		return userName;
-	}
-	
-	protected String getAskingQuestion() {
-		consolePrinter.print("Please enter your question :");
-		String question = consoleScanner.getString();
-		return question;
+		consolePrinter.printFAQs(faqStorage.getAll());
 	}
 	
 	protected void stop() {

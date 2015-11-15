@@ -1,12 +1,6 @@
 package ua.com.goit.gojava7.kickstarter.model;
 
-import java.io.IOException;
 import java.io.Serializable;
-import java.util.Iterator;
-import java.util.Set;
-import java.util.TreeSet;
-
-import ua.com.goit.gojava7.kickstarter.model.Project;
 
 public class Category implements Comparable<Category>, Serializable {
 	

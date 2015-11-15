@@ -108,7 +108,7 @@ public class ConsolePrinter {
 		}
 	}
 	
-	public void printFaqs(Set<Faq> FAQs) {
+	public void printFAQs(Set<Faq> FAQs) {
 		Set<Faq> AllFAQsInSelectedProject = FAQs;
 		
 		if (AllFAQsInSelectedProject.size() == 0) {

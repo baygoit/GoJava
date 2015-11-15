@@ -4,12 +4,12 @@ public class KickstarterRunner {
 
 	public static void main(String[] args) {
 
-		if (args[0].equals("1")) {
+		if (args.length == 0) {
 			System.out.println("Starting program using files storages");
 			KickstarterForFiles kickstarterForFiles = new KickstarterForFiles();
 			kickstarterForFiles.start();
 			kickstarterForFiles.stop();
-			
+
 		} else {
 			System.out.println("Starting program using memory storages");
 			KickstarterForMemory kickstarterForMemory = new KickstarterForMemory();

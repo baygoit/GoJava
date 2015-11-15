@@ -17,7 +17,7 @@ public abstract class AbstractTemplateFiles<T> implements Templateble<T> {
 	private File file;
 
 	public AbstractTemplateFiles() {
-		file = new File("d://gojava7/" + getClass().getName() + ".txt");
+		file = new File("c://gojava7/" + getClass().getName() + ".txt");
 		
 		if (!file.exists()) {
 			try {
@@ -30,17 +30,13 @@ public abstract class AbstractTemplateFiles<T> implements Templateble<T> {
 
 	public void add(T element) {
 		Set<T> sourceStorage = getSetFromFile();
-		
 		sourceStorage.add(element);
-		
 		writeSetToFile(sourceStorage);
 	}
 
 	public void remove(T element) {
-		Set<T> sourceStorage = getSetFromFile();
-		
+		Set<T> sourceStorage = getSetFromFile();	
 		sourceStorage.remove(element);
-		
 		writeSetToFile(sourceStorage);
 	}
 
@@ -64,7 +60,7 @@ public abstract class AbstractTemplateFiles<T> implements Templateble<T> {
 		Set<T> sourceStorage = new TreeSet<>();
 		
 		try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(file))) {
-			sourceStorage = (TreeSet) in.readObject();
+			sourceStorage = (TreeSet<T>) in.readObject();
 		} catch (IOException | ClassNotFoundException e) {
 			System.out.println(PROBLEMS);
 		}
