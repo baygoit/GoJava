@@ -30,4 +30,12 @@ public class ConsoleScannerTest {
 		assertThat(consoleScanner.scan(), is(4));
 	}
 	
+	@Test
+	public void testScanString() {
+		ByteArrayInputStream in = new ByteArrayInputStream("djsdjhsdf".getBytes());
+
+		consoleScanner = new ConsoleScanner(in);
+		
+		assertThat(consoleScanner.scan(), is("djsdjhsdf"));
+	}
 }

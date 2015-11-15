@@ -20,12 +20,15 @@ public class ProjectLevelTest {
 	List<Category> categories;
 	Category selectedCategory;
 	Level projectLevel = new ProjectLevel();
-
+	Project project1;
+	
 	@Before 
 	public void setUp() {
 		categories = new ArrayList<Category>();
 		Category category = new Category("Some Category");
-		category.addProject(new Project("proj 1"));
+		project1 = new Project("proj 1");
+		project1.setPledged(10);
+		category.addProject(project1);
 		categories.add(category);
 		categories.add(new Category("Second Category"));
 		selectedCategory = category;
@@ -60,6 +63,13 @@ public class ProjectLevelTest {
 		String result = projectLevel.generateAnswer(categories, 0, selectedCategory);
 		assertThat(result, containsString("You selected 'proj 1' project"));
 		assertThat(result, containsString("daysToGo"));
+		assertThat(result, containsString("1 : to invest in the project"));
 		assertThat(result, containsString("0 : to project list"));
+	}
+	
+	@Test
+	public void testFindSelectedProject() {
+		Project result = projectLevel.findSelectedProject(new ArrayList<Category>(), 0, selectedCategory);
+		assertThat(result, is(project1));
 	}
 }
