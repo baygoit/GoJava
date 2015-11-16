@@ -10,7 +10,6 @@ import static org.mockito.Mockito.when;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Arrays;
 
 import org.junit.After;
 import org.junit.Before;
@@ -57,8 +56,6 @@ public class ConsoleScannerTest {
 			byte[] buffer = invocation.getArgumentAt(0, byte[].class);
 			byte[] userInput1 = "1\n".getBytes();
 			System.arraycopy(userInput1, 0, buffer, 0, userInput1.length);
-			System.out.println(Arrays.toString(invocation.getArguments()));
-			System.out.println("2");
 			return userInput1.length;
 		});
 
