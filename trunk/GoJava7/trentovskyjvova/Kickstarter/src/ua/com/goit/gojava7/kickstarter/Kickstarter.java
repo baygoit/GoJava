@@ -82,7 +82,7 @@ public class Kickstarter {
 				consolePrinter.print(answer);
 			}
 						
-			answer = userPositionLevel.fillOutForm(selectedProject, userChoise, consoleScanner);			
+			answer = userPositionLevel.fillOutForm(selectedProject, userChoise+1, consoleScanner);			
 			if (!answer.equals("")) {
 				consolePrinter.print(answer);
 			}
