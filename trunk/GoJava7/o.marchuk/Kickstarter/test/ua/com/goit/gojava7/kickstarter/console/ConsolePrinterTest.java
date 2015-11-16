@@ -1,5 +1,7 @@
 package ua.com.goit.gojava7.kickstarter.console;
 
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 import static org.mockito.Matchers.contains;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
@@ -16,6 +18,7 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import ua.com.goit.gojava7.kickstarter.domain.Category;
+import ua.com.goit.gojava7.kickstarter.domain.Project;
 import ua.com.goit.gojava7.kickstarter.domain.Quote;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -76,10 +79,37 @@ public class ConsolePrinterTest {
 	@Test
 	public void testPrintCategory() {
 		Category category = new Category("category name");
+
 		consolePrinter.print(category);
 
 		verify(printSteam).println(contains("Category:"));
 		verify(printSteam).println(contains("category name"));
 	}
 
+	@Test
+	public void testPrintProject() {
+		Project project = new Project("project name", "short description", 50, 10);
+		
+		consolePrinter.print(project);
+		
+		verify(printSteam).println(contains("Project:"));
+		verify(printSteam).println(contains("project name"));
+		verify(printSteam).println(contains("Short description:"));
+		verify(printSteam).println(contains("short description"));
+		verify(printSteam).println(contains("Required amount:"));
+		verify(printSteam).println(contains("0.5"));
+		verify(printSteam).println(contains("Gathered amount:"));
+		verify(printSteam).println(contains("Days left:"));
+		verify(printSteam).println(contains("10"));
+		verify(printSteam).println(contains("History:"));
+		verify(printSteam).println(contains("Video:"));
+		verify(printSteam).println(contains("Q&As:"));
+	}
+
+	@Test
+	public void testFormatMoney() {
+		assertThat(consolePrinter.formatMoney(0), is("0.00"));
+		assertThat(consolePrinter.formatMoney(1), is("0.01"));
+		assertThat(consolePrinter.formatMoney(100), is("1.00"));
+	}
 }
