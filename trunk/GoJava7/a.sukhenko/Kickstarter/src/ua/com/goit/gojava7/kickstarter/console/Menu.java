@@ -1,8 +1,8 @@
 package ua.com.goit.gojava7.kickstarter.console;
 
-import ua.com.goit.gojava7.kickstarter.UserManager;
+import ua.com.goit.gojava7.kickstarter.Kickstarter;
 import ua.com.goit.gojava7.kickstarter.model.Category;
-import ua.com.goit.gojava7.kickstarter.model.MENU_OPTIONS;
+import ua.com.goit.gojava7.kickstarter.model.MenuOptions;
 import ua.com.goit.gojava7.kickstarter.model.Project;
 import ua.com.goit.gojava7.kickstarter.model.User;
 import ua.com.goit.gojava7.kickstarter.payment.CreditCardSystem;
@@ -10,6 +10,8 @@ import ua.com.goit.gojava7.kickstarter.storage.CategoryStorage;
 import ua.com.goit.gojava7.kickstarter.storage.ProjectManager;
 
 public class Menu{
+	private static final int	MENU_EXIT_OPTION						= 0;
+	private static final int	MENU_DEFAULT_OPTION						= -1;
 	private static final String	PLEASE_SELECT							= "Please select";
 	private static final String	PROJECT									= " project";
 	private static final String	CATEGORY								= " category";
@@ -17,32 +19,24 @@ public class Menu{
 	private static final String	YOU_SELECTED_PROJECT					= "You selected project: ";
 	private static final String	YOU_SELECTED_CATEGORY_NUMBER			= "You selected category number ";
 	private static final String	PLEASE_ENTER_THE_NUMBER_BETWEEN_1_AND	= "Please, enter the number between 1 and ";
-	private UserManager			userManager;
 	private User				user;
 	private ConsolePrinter		consolePrinter;
 	private ConsoleScanner		consoleScanner;
+	private Kickstarter			kickstarter;
 
-	public Menu(UserManager userManager, User u) {
-		this.setUserManager(userManager);
+	public Menu(Kickstarter kickstarter, User u) {
 		this.user = u;
-		this.consolePrinter = userManager.getConsolePrinter();
-		this.consoleScanner = userManager.getConsoleScanner();
-		showMenu();
+		this.kickstarter = kickstarter;
+		this.consolePrinter = kickstarter.getConsolePrinter();
+		this.consoleScanner = kickstarter.getConsoleScanner();
 	}
+
 	public User getUser() {
 		return user;
 	}
 
 	public void setUser(User user) {
 		this.user = user;
-	}
-
-	public UserManager getUserManager() {
-		return userManager;
-	}
-
-	public void setUserManager(UserManager userManager) {
-		this.userManager = userManager;
 	}
 
 	public void showMenu() {
@@ -79,23 +73,19 @@ public class Menu{
 	}
 
 	private void addPaymentSystem() {
-		String name;
-		int cardnumber;
 		consolePrinter.print("Please add card holder name: ");
-		name = consoleScanner.getString();
+		String name = consoleScanner.getString();
 		consolePrinter.print("Please add card number: ");
-		cardnumber = consoleScanner.getInt();
+		int cardnumber = consoleScanner.getInt();
 
 		CreditCardSystem userPaymentSystem = new CreditCardSystem();
 		userPaymentSystem.setCardNumber(cardnumber);
 		userPaymentSystem.setHolderName(name);
-		ProjectManager projectManager = userManager.getKickStarter()
-				.getProjectManager();
-		if (projectManager.userContributeToProject(
-				user.getSettings().getSelectedProject(), user, enterAmount())) {
+		ProjectManager projectManager = kickstarter.getProjectManager();
+		if (projectManager.userContributeToProject(user, enterAmount())) {
 			consolePrinter.print("Payment done.");
 			user.getSettings()
-					.setMenuOption(MENU_OPTIONS.SHOW_SPECIFIC_PROJECT);
+					.setMenuOption(MenuOptions.SHOW_SPECIFIC_PROJECT);
 
 		}
 
@@ -105,12 +95,10 @@ public class Menu{
 	public void donateToProject() {
 		if (user.getPaymentSystem() == null) {
 			user.getSettings()
-					.setMenuOption(MENU_OPTIONS.ADD_PAYMENT_SYSTEM_TO_ACCOUNT);
+					.setMenuOption(MenuOptions.ADD_PAYMENT_SYSTEM_TO_ACCOUNT);
 			consolePrinter.print(
 					"You don't have any payment system. Add new one please");
-		} else {
-
-		}
+		} 
 
 		showMenu();
 	}
@@ -118,46 +106,46 @@ public class Menu{
 	public void showFullProjectInfo() {
 		consolePrinter
 				.printFullProjectInfo(user.getSettings().getSelectedProject());
-		int selectedOption = -1;
-		while (selectedOption == -1) {
+		int selectedOption = MENU_DEFAULT_OPTION;
+		while (selectedOption == MENU_DEFAULT_OPTION) {
 			consolePrinter.print("Do you want to donate: (1) - Yes (0) - No");
 			selectedOption = consoleScanner.getInt();
 			if (selectedOption == 1) {
 				user.getSettings()
-						.setMenuOption(MENU_OPTIONS.DONATE_TO_PROJECT);
+						.setMenuOption(MenuOptions.DONATE_TO_PROJECT);
 
 			}
 			if (selectedOption == 0) {
 				user.getSettings().setMenuOption(
-						MENU_OPTIONS.SHOW_PROJECTS_IN_SPECIFIC_CATEGORY);
+						MenuOptions.SHOW_PROJECTS_IN_SPECIFIC_CATEGORY);
 			}
 		}
 		showMenu();
 	}
 
 	public void chooseCategory() {
-		int selectedCategory = -1;
-		while (selectedCategory == -1) {
-			CategoryStorage categoryStorage = userManager.getCategoryStorage();
+		int selectedCategory = MENU_DEFAULT_OPTION;
+		while (selectedCategory == MENU_DEFAULT_OPTION) {
+			CategoryStorage categoryStorage = kickstarter.getCategoryStorage();
 			consolePrinter.print(categoryStorage.getCategories());
 			consolePrinter.print(PLEASE_SELECT + CATEGORY + O_FOR_EXIT);
 			selectedCategory = consoleScanner.getInt();
 
-			if (selectedCategory < 0
+			if (selectedCategory < MENU_EXIT_OPTION
 					|| selectedCategory > categoryStorage.size()) {
 				consolePrinter.print(PLEASE_ENTER_THE_NUMBER_BETWEEN_1_AND
 						+ categoryStorage.size());
 				continue;
-			} else if (selectedCategory != 0) {
+			} else if (selectedCategory != MENU_EXIT_OPTION) {
 				consolePrinter
 						.print(YOU_SELECTED_CATEGORY_NUMBER + selectedCategory);
 				user.getSettings().setCategory(
 						categoryStorage.getCategoryById(selectedCategory));
 				user.getSettings().setMenuOption(
-						MENU_OPTIONS.SHOW_PROJECTS_IN_SPECIFIC_CATEGORY);
+						MenuOptions.SHOW_PROJECTS_IN_SPECIFIC_CATEGORY);
 
 			} else {
-				user.getSettings().setMenuOption(MENU_OPTIONS.EXIT);
+				user.getSettings().setMenuOption(MenuOptions.EXIT);
 				consolePrinter.printDeflector();
 			}
 			showMenu();
@@ -165,9 +153,8 @@ public class Menu{
 	}
 
 	public void chooseProject() {
-		int selectedOption = -1;
-		ProjectManager projectManager = userManager.getKickStarter()
-				.getProjectManager();
+		int selectedOption = MENU_DEFAULT_OPTION;
+		ProjectManager projectManager = kickstarter.getProjectManager();
 		Category category = user.getSettings().getCategory();
 		do {
 			consolePrinter.print("Projects in category "
@@ -177,10 +164,10 @@ public class Menu{
 			consolePrinter.print(PLEASE_SELECT + PROJECT + O_FOR_EXIT);
 			selectedOption = consoleScanner.getInt();
 
-			if (selectedOption < 0 || selectedOption > projectManager
+			if (selectedOption < MENU_EXIT_OPTION || selectedOption > projectManager
 					.getProjectsByCategory(category).size()) {
 				consolePrinter.print(PLEASE_ENTER_THE_NUMBER_BETWEEN_1_AND
-						+ userManager.getCategoryStorage().size() + 1);
+						+ kickstarter.getCategoryStorage().size() + 1);
 				continue;
 			} else if (selectedOption != 0) {
 				Project selectedProject = projectManager
@@ -190,13 +177,13 @@ public class Menu{
 						+ selectedProject.getProjectName());
 				user.getSettings().setSelectedProject(selectedProject);
 				user.getSettings()
-						.setMenuOption(MENU_OPTIONS.SHOW_SPECIFIC_PROJECT);
+						.setMenuOption(MenuOptions.SHOW_SPECIFIC_PROJECT);
 			} else {
-				user.getSettings().setMenuOption(MENU_OPTIONS.SHOW_CATEGORIES);
+				user.getSettings().setMenuOption(MenuOptions.SHOW_CATEGORIES);
 				consolePrinter.print("Exit [Choose Project]");
 				consolePrinter.printDeflector();
 			}
-		} while (selectedOption == -1);
+		} while (selectedOption == MENU_DEFAULT_OPTION);
 		showMenu();
 	}
 

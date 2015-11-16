@@ -36,8 +36,8 @@ public class Body{
 	public void generateCategories() {
 		consolePrinter.printDeflector();
 		consolePrinter.print("Categories: ");
-		kickstarter.getCategoryStorage().getCategories().forEach((a, b) -> {
-			generateCategoryInfo(b);
+		kickstarter.getCategoryStorage().getCategories().forEach(a -> {
+			generateCategoryInfo(a);
 		});
 	}
 

@@ -4,7 +4,6 @@ public class Quote{
 	private String	quote;
 	private String	author;
 	public Quote(String quote, String author) {
-		super();
 		this.setQuoteName(quote);
 		this.setAuthor(author);
 	}
