@@ -1,6 +1,7 @@
 package controller;
 
-import model.*;
+import model.Home;
+import model.User;
 import model.enums.CityList;
 import model.enums.GenderType;
 import model.enums.HomeType;
@@ -63,7 +64,6 @@ public class MainController extends HttpServlet {
         } else if (userPath.equals("/homes")) {
             userPath = pageHomes(request, session);
         }
-
 
         // use RequestDispatcher to forward request internally
         String url = isResource ? userPath : ("/WEB-INF/view" + userPath + ".jsp");

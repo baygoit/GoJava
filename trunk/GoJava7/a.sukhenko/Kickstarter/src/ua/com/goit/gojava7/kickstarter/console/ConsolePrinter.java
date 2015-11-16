@@ -1,6 +1,7 @@
 package ua.com.goit.gojava7.kickstarter.console;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import ua.com.goit.gojava7.kickstarter.model.Category;
@@ -29,13 +30,13 @@ public class ConsolePrinter{
 		System.out.println(b.getCategoryId() + "# " + b.getCategoryName());
 
 	}
-
-	public void print(Map<Integer, Category> categories) {
+	public void print(List<Category> categories){
 		System.out.println("Categories: ");
-		categories.forEach((id, cat) -> {
-			System.out.println(id + "# " + cat.getCategoryName());
-		});
+		for (int i = 0; i < categories.size(); i++) {
+			System.out.println(i+"#" + categories.get(i).getCategoryName());
+		}
 	}
+	
 
 	public void showProjectList(Category cat, ProjectManager projectManager) {
 		ArrayList<Project> projects = projectManager.getProjectsByCategory(cat);

@@ -14,6 +14,7 @@ public class ProjectLevel implements Level {
 		stringBuilder.append("You selected '").append(selectedProject.getName()).append("' project").append("\n");
 		stringBuilder.append(selectedProject.getAllDetails()).append("\n");
 		stringBuilder.append("1 : to invest in the project").append("\n");
+		stringBuilder.append("2 : to ask a question").append("\n");
 		stringBuilder.append("0 : to project list");
 		return stringBuilder.toString();
 	}

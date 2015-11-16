@@ -49,8 +49,8 @@ public class PaymentLevelTest {
 	@Test
 	public void testFillOutForm() {
 		
-		when(consoleScanner.scanLine()).thenReturn("name", "card", "290");
-		
+		when(consoleScanner.scanLine()).thenReturn("name", "card");
+		when(consoleScanner.scan()).thenReturn(290);
 		String result = paymentLevel.fillOutForm(project1, 1, consoleScanner);
 		
 		assertThat(project1.getPledged(), is(300));

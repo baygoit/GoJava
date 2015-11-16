@@ -70,10 +70,10 @@ public class ProjectManager{
 
 	}
 
-	public boolean userContributeToProject(Project project, User payer,
+	public boolean userContributeToProject(User payer,
 			Double amount) {
 		boolean operationSuccess = false;
-		project.addBacker(payer, amount);
+		payer.getSettings().getSelectedProject().addBacker(payer, amount);
 		operationSuccess = true;
 		return operationSuccess;
 	}

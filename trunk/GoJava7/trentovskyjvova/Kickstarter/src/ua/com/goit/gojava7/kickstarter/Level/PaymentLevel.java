@@ -26,19 +26,31 @@ public class PaymentLevel implements Level {
 		return "";
 	}
 
-	public String fillOutForm(Project project, int userChoise, ConsoleScanner consoleScanner) {		
+	public String fillOutForm(Project project, int userChoise,
+			ConsoleScanner consoleScanner) {
 		ConsolePrinter consolePrinter = new ConsolePrinter();
-		
-		consolePrinter.print("Enter your name");
-		String name = consoleScanner.scanLine();
-		consolePrinter.print("Enter card number");
-		String card = consoleScanner.scanLine();
-		consolePrinter.print("Enter amount to donate");
-		int donate = Integer.parseInt(consoleScanner.scanLine());
-		
-		project.setPledged(project.getPledged()+donate);
-		
-		return "Thank you!\n0 : back to project";
+
+		if (userChoise == 1) {
+			consolePrinter.print("Enter your name");
+			String name = consoleScanner.scanLine();
+			consolePrinter.print("Enter card number");
+			String card = consoleScanner.scanLine();
+			consolePrinter.print("Enter amount to donate");
+			int donate = consoleScanner.scan();
+
+			project.setPledged(project.getPledged() + donate);
+
+			return "Thank you!\n0 : back to project";
+		} else if (userChoise == 2) {
+			consolePrinter.print("Enter your question");
+			String question = consoleScanner.scanLine();
+			
+			project.addQuestion(question);
+			
+			return "Thank for your question!\n0 : back to project";
+		} else {
+			return "";
+		}
 	}
 
 	public Project findSelectedProject(int userChoise,
