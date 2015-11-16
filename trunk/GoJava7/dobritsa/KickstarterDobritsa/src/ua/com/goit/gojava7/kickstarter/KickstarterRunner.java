@@ -12,22 +12,15 @@ import ua.com.goit.gojava7.kickstarter.storage.QuoteStorage;
 
 public class KickstarterRunner {
 
-	public static void main(String[] args) throws FileNotFoundException { //
-		ConsoleScanner consoleScanner = new ConsoleScanner();
-
-		QuotePrinter quotetPrinter = new QuotePrinter();
-		ProjectPrinter projectPrinter = new ProjectPrinter();
-		CategoryPrinter categoryPrinter = new CategoryPrinter();
-
+	public static void main(String[] args) throws FileNotFoundException {
 		QuoteStorage quoteStorage = new QuoteStorage("D:/1/Quotes.txt");
-		
-		CategoryStorage categoryStorage= new CategoryStorage();
-				categoryStorage.initCategories("D:/1/CategoryMusic.txt");
-				categoryStorage.initCategories("D:/1/CategoryFood.txt");
-				categoryStorage.initCategories("D:/1/CategoryDances.txt");
-		
-		Kickstarter kickstarter = new Kickstarter(consoleScanner, quotetPrinter, projectPrinter, categoryPrinter,
-				quoteStorage, categoryStorage);
+
+		CategoryStorage categoryStorage = new CategoryStorage();
+		categoryStorage.initCategories("D:/1/CategoryMusic.txt");
+		categoryStorage.initCategories("D:/1/CategoryFood.txt");
+		categoryStorage.initCategories("D:/1/CategoryDances.txt");
+
+		Kickstarter kickstarter = new Kickstarter(quoteStorage, categoryStorage);
 
 		kickstarter.run();
 		kickstarter.shutdown();

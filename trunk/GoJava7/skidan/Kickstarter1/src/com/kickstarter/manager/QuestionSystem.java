@@ -1,11 +1,12 @@
 package com.kickstarter.manager;
 
-import com.kickstarter.app.Kickstarter;
+import com.kickstarter.app.KRun;
 import com.kickstarter.model.Project;
 import com.kickstarter.util.ConsolePrintView;
 import com.kickstarter.util.UserConsoleInputReader;
 
 public class QuestionSystem {
+	KRun kr = new KRun();
 	ConsolePrintView consolePrintView = new ConsolePrintView();
 	ProjectManager prm = new ProjectManager();
 
@@ -13,7 +14,7 @@ public class QuestionSystem {
 		String newQuestion = reciveQuestion();
 		addNewQuestion(newQuestion, projectNumber, categoryTitle);
 		consolePrintView.singleCategorysProjectsView(prm.getProject(categoryTitle, projectNumber));
-		Kickstarter.projectSelector(categoryNumber, categoryTitle);
+		kr.projectSelector(categoryNumber, categoryTitle);
 	}
 
 	public String reciveQuestion() {

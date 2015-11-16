@@ -10,11 +10,11 @@ import ua.com.goit.gojava7.kickstarter.storage.CategoryStorage;
 import ua.com.goit.gojava7.kickstarter.storage.QuoteStorage;
 
 public class Kickstarter {
-	private ConsoleScanner consoleScanner;
+	private ConsoleScanner consoleScanner = new ConsoleScanner();;
 
-	private CategoryPrinter categoryPrinter;
-	private ProjectPrinter projectPrinter;
-	private QuotePrinter quotePrinter;
+	private CategoryPrinter categoryPrinter = new CategoryPrinter();
+	private ProjectPrinter projectPrinter = new ProjectPrinter();
+	private QuotePrinter quotePrinter = new QuotePrinter();
 
 	private QuoteStorage quoteStorage;
 	private CategoryStorage categoryStorage;
@@ -24,13 +24,12 @@ public class Kickstarter {
 	private int ZERO = 1;
 	private Project currentProject = null;
 	private Category currentCategory = null;
+	private int numberOfCategory;
+	private int indexOfCategory;
+	private int numberOfProject;
+	private int indexOfProject;
 
-	public Kickstarter(ConsoleScanner consoleScanner, QuotePrinter quotePrinter, ProjectPrinter projectPrinter,
-			CategoryPrinter categoryPrinter, QuoteStorage quoteStorage, CategoryStorage categoryStorage) {
-		this.consoleScanner = consoleScanner;
-		this.categoryPrinter = categoryPrinter;
-		this.projectPrinter = projectPrinter;
-		this.quotePrinter = quotePrinter;
+	public Kickstarter(QuoteStorage quoteStorage, CategoryStorage categoryStorage) {
 		this.quoteStorage = quoteStorage;
 		this.categoryStorage = categoryStorage;
 	}
@@ -38,17 +37,19 @@ public class Kickstarter {
 	public void run() {
 		quotePrinter.printRandomQuote(quoteStorage);
 		while (true) {
-			Integer selectedCategory = chooseCategory();
-			while (selectedCategory != 0) {
-				currentCategory = categoryStorage.get(selectedCategory - SHIFT_ONE);
+			chooseCategory();
+			indexOfCategory = numberOfCategory - 1;
+			while (numberOfCategory != 0) {
+				//currentCategory = categoryStorage.get(indexOfCategory);				
 				if (currentCategory.getAll().size() == 0) {
 					System.out.println("No projects in this categories.");
 					break;
 				} else {
-					Integer selectedProject = chooseProject(selectedCategory);
-					if (selectedProject != null) {
-						currentProject = currentCategory.get(selectedProject - SHIFT_ONE);
-						viewProject(selectedCategory, selectedProject);
+					chooseProject();					
+					if (numberOfProject != 0) {
+						indexOfProject = numberOfProject - 1;
+						//currentProject = currentCategory.get(indexOfProject);
+						viewProject();
 					} else {
 						break;
 					}
@@ -57,41 +58,61 @@ public class Kickstarter {
 		}
 	}
 
-	public Integer chooseCategory() {
-		System.out.println(BORDER);
-		System.out.println("\nList of categories:");
+	public void chooseCategory() {
+		printAboutCategories();
+		setCurrentCategory();		
+	}
+	
+	public void printAboutCategories() {
+		System.out.println(BORDER +
+				"\nList of categories:");	
 		categoryPrinter.printCategories(categoryStorage.getAll());
 		System.out.println("\nChoose a category by number ('0' for exit): ");
-
-		Integer selectedCategory = consoleScanner.getInteger(ZERO, categoryStorage.size());
-		if (selectedCategory == null) {
-			consoleScanner.close();
+	}
+	
+	public void setCurrentCategory() {
+		numberOfCategory = consoleScanner.getInt(ZERO, categoryStorage.size());
+		if (numberOfCategory == 0) {
 			System.out.println("See you soon!");
+			consoleScanner.close();
 			System.exit(0);
 		}
-		return selectedCategory;
+		currentCategory = categoryStorage.get(numberOfCategory);
 	}
 
-	public Integer chooseProject(Integer selectedCategory) {
-		System.out.println(BORDER);
-		System.out.println("Current category: #" + selectedCategory + "("
-				+ categoryStorage.get(selectedCategory - SHIFT_ONE).getName() + ")");
-		System.out.println("List of projects:");
+	public void chooseProject() {
+		printAboutProjects();
+		setCurrentProject();	
+	}
+	
+	public void printAboutProjects() {
+		System.out.println(BORDER
+				+ "\nCurrent category: #" + numberOfCategory + "(" + currentCategory.getName() + ")"
+				+ "List of projects:");	
 		categoryPrinter.printProjects(currentCategory.getAll());
 		System.out.println("\nChoose a project by number ('0' to choose another category): ");
-		Integer selectedProject = consoleScanner.getInteger(ZERO, currentCategory.size());
-		if (selectedProject == null) {
-			return null;
-		}
-		return selectedProject;
+	}
+	
+	public void setCurrentProject() {
+		numberOfProject = consoleScanner.getInt(ZERO, currentCategory.size());
+		currentProject = categoryStorage.get(numberOfCategory).get(numberOfProject);
+	}
+	
+
+	public void viewProject() {
+		printAboutProject(currentCategory.getName(), numberOfProject);
+		chooseOptionOfProject();
 	}
 
-	public void viewProject(Integer selectedCategory, Integer selectedProject) {
-		System.out.println(BORDER);
-		System.out.println("Current category: " + currentCategory.getName());
-		System.out.println("Current project: #" + (selectedProject) + "\n");
+	public void printAboutProject(String categoryName, int numberProject) {
+		System.out.println(BORDER
+				+ "\nCurrent category: " + categoryName
+				+ "\nCurrent project: #" + (numberProject) + "\n");
 		projectPrinter.printFull(currentProject);
-		String text = consoleScanner.getBackOrZero();
+	}
+
+	public void chooseOptionOfProject() {
+		String text = consoleScanner.getMenu();
 		if (text.equals("b")) {
 			System.out.println("\nEnter your name:");
 			String name = consoleScanner.getName();
@@ -100,11 +121,19 @@ public class Kickstarter {
 			int minDonation = 1;
 			int maxDonation = currentProject.getGoal() - currentProject.getPledged();
 			System.out.println("\nEnter amount from " + minDonation + " to " + maxDonation + " :");
-			int amount = consoleScanner.getInteger(minDonation, maxDonation);
+			int amount = consoleScanner.getInt(minDonation, maxDonation);
 			System.out.println("\nIt was collected before:" + currentProject.getPledged());
 			currentProject.addToPledged(amount);
 			System.out.println("\nNow collected:" + currentProject.getPledged());
 		}
+		if (text.equals("a")) {
+			currentProject.addQuestion(getQuestion());
+		}
+	}
+
+	public String getQuestion() {
+		System.out.println("Ask your qouestion about project: ");
+		return consoleScanner.getString();
 	}
 
 	public void shutdown() {

@@ -7,10 +7,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Date;
-import jxl.*;
-import jxl.*;
-import jexcelapi.*;
+
+
 import ua.com.goit.gojava7.kickstarter.domain.Category;
 import ua.com.goit.gojava7.kickstarter.domain.Project;
 import ua.com.goit.gojava7.kickstarter.domain.Quote;
@@ -24,10 +22,9 @@ public class FileWorker {
 		try {
 			BufferedReader in = new BufferedReader(new FileReader(file));
 			try {
-				String line;
 				category = new Category(in.readLine());
 				
-				while ((line = in.readLine()) != null) {
+				while ((in.readLine()) != null) {
 					Project project = new Project();
 					project.setName(in.readLine());
 					project.setDescription(in.readLine());
@@ -37,8 +34,8 @@ public class FileWorker {
 					project.setDaysToGo(new Integer(in.readLine()));
 					project.setHistory(in.readLine());
 					project.setLink(in.readLine());
-					project.setQuestions(in.readLine());
-					
+					//TODO change addQuestion to setQuestions
+					project.addQuestion(in.readLine()); 					
 					category.add(project);
 				}
 			} finally {

@@ -16,69 +16,65 @@ public class Kickstarter {
 		this.categoryStorage = categoryStorage;
 	}
 
-	public void start() throws NumberFormatException, IOException {
+	public void start() throws IOException {
 		consolePrinter.println(quoteStorage.getRandomQuote());
-		boolean stopWhile = true;
+		showChosenCategory();
+	}
+
+	public void showChosenCategory() throws IOException {
+		boolean repeatChosingOfCategory = true;
 		do {
 			consolePrinter.println(categoryStorage);
 			consolePrinter.println("Chose the category");
-
 			int numberOfSelectedCategory = consoleReader.getNumberFromConsole();
-			do {
+			if (numberOfSelectedCategory > 0 && numberOfSelectedCategory <= categoryStorage.getAllCategories().size()) {
+				Category currentCategory = categoryStorage.getCategory(numberOfSelectedCategory);
+				consolePrinter.println(currentCategory);
+				showChosenProject(numberOfSelectedCategory);
+				repeatChosingOfCategory = false;
+			} else {
+				consolePrinter.println("there is no such category!");
+			}
+		} while (repeatChosingOfCategory);
+	}
 
-				try {
-					Category currentCategory = categoryStorage.getCategory(numberOfSelectedCategory);
-					consolePrinter.println(currentCategory);
-				} catch (ArrayIndexOutOfBoundsException e) {
-					System.out.println("there is no such category!");
-					break;
-				} catch (IndexOutOfBoundsException e) {
-					System.out.println("there is no such category!");
-					break;
-				}
+	public void showChosenProject(int numberOfSelectedCategory) throws IOException {
 
-				consolePrinter.println(categoryStorage, numberOfSelectedCategory);
-
-				consolePrinter.println("Enter 0 ot see all categories");
-				int numberOfselectedProject = consoleReader.getNumberFromConsole();
-				if (numberOfselectedProject == 0)
-					break;
-				try {
-					Project currentProject = categoryStorage.getCategory(numberOfSelectedCategory)
-							.getProject(numberOfselectedProject);
-					do {
-						consolePrinter.println(currentProject);
-						consolePrinter.println("Enter 0 ot see all projects in this category\nEnter 1 ot make payment");
-						int actionInProject = consoleReader.getNumberFromConsole();
-						if (actionInProject == 0)
-							break;
-						else if (actionInProject == 1) {
-							consolePrinter.println("Enter your Name");
-							String cardOwner = consoleReader.getStringFromConsole();
-							consolePrinter.println("Enter Card number");
-							long cardNumber = consoleReader.getLongNumberFromConsole();
-							consolePrinter.println("Enter the amount");
-							int rechargeAmount = consoleReader.getNumberFromConsole();
-							currentProject.setPayment(cardOwner, cardNumber, rechargeAmount);
-
-						} else {
-							System.out.println("bye");
-							stopWhile = false;
-						}
-					} while (stopWhile);
-
-				} catch (ArrayIndexOutOfBoundsException e) {
-					System.out.println("there is no such project!");
+		boolean repeatChosingOfProject = true;
+		do {
+			consolePrinter.println(categoryStorage, numberOfSelectedCategory);
+			consolePrinter.println("Enter 0 ot see all categories or chose number of category");
+			int numberOfselectedProject = consoleReader.getNumberFromConsole();
+			if (numberOfselectedProject == 0) {
+				showChosenCategory();
+			} else if (numberOfselectedProject > 0 && numberOfselectedProject <= categoryStorage
+					.getCategory(numberOfSelectedCategory).getAllProjectsInCategory().size()) {
+				Project currentProject = categoryStorage.getCategory(numberOfSelectedCategory)
+						.getProject(numberOfselectedProject);
+				consolePrinter.println(currentProject);
+				consolePrinter.println("Enter 0 ot see all projects in this category\nEnter 1 ot make payment");
+				int actionInProject = consoleReader.getNumberFromConsole();
+				if (actionInProject == 0) {
 					continue;
-				} catch (IndexOutOfBoundsException e) {
-					System.out.println("there is no such project!");
-					continue;
+				} else if (actionInProject == 1) {
+					makePayment(numberOfSelectedCategory, currentProject);
+				} else {
+					consolePrinter.println("bye!");
+					repeatChosingOfProject = false;
 				}
+			}
+		} while (repeatChosingOfProject);
+	}
 
-			} while (stopWhile);
-
-		} while (stopWhile);
-
+	public void makePayment(int numberOfSelectedCategory, Project project) throws IOException {
+		consolePrinter.println("Enter your Name");
+		String cardOwner = consoleReader.getStringFromConsole();
+		consolePrinter.println("Enter Card number");
+		long cardNumber = consoleReader.getLongNumberFromConsole();
+		consolePrinter.println("Enter the amount");
+		int rechargeAmount = consoleReader.getNumberFromConsole();
+		project.setPayment(cardOwner, cardNumber, rechargeAmount);
+		showChosenProject(numberOfSelectedCategory);
 	}
 
 	public void stop() throws IOException {

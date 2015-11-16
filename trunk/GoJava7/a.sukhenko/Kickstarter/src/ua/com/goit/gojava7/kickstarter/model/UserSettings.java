@@ -3,7 +3,7 @@ package ua.com.goit.gojava7.kickstarter.model;
 public class UserSettings{
 	private Category		category;
 	private Project			selectedProject;
-	private MENU_OPTIONS	menuOption	= MENU_OPTIONS.SHOW_MAIN_MENU;
+	private MenuOptions	menuOption	= MenuOptions.SHOW_MAIN_MENU;
 
 	public UserSettings() {
 	}
@@ -16,11 +16,11 @@ public class UserSettings{
 		this.category = category;
 	}
 
-	public MENU_OPTIONS getMenuOption() {
+	public MenuOptions getMenuOption() {
 		return menuOption;
 	}
 
-	public void setMenuOption(MENU_OPTIONS menuOption) {
+	public void setMenuOption(MenuOptions menuOption) {
 		this.menuOption = menuOption;
 	}
 

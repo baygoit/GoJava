@@ -8,12 +8,12 @@ public class QuotePrinter {
 	
 	public void printRandomQuote(QuoteStorage quoteStorage) {
 		Quote quote = quoteStorage.getRandomQuote();
-		System.out.println(quote.getText() + "\n          " + quote.getAuthor());
+		print(quote);		
 	}
-
-	public void print(QuoteStorage quoteStorage, int index) {
-		System.out.println(quoteStorage.get(index).getText() + 
-				"\n " +	 quoteStorage.get(index).getAuthor());
+	
+	public void print(Quote quote) {
+		System.out.println(quote.getText() + 
+				"\n " +	 quote.getAuthor());
 	}
 
 }

@@ -21,11 +21,20 @@ public class ConsoleScanner {
 			scanner.next();
 		}
 		int inputedInt = scanner.nextInt();
+		scanner.nextLine();
 		return inputedInt;
 	}
 
 	public void close() {
 		scanner.close();
+	}
+
+	public String scanLine() {
+
+/*		if (scanner.hasNextLine()) {
+			scanner.nextLine();
+		}*/
+		return scanner.nextLine();
 	}
 
 }

@@ -8,6 +8,10 @@ import ua.com.goit.gojava7.kickstarter.file.FileWorker;
 
 public class QuoteStorage extends Storage<Quote> {
 	private static final Random RANDOM = new Random();
+	
+	public QuoteStorage() {
+		
+	}
 
 	public QuoteStorage(String fileName) throws FileNotFoundException {
 		initQuotes(fileName);

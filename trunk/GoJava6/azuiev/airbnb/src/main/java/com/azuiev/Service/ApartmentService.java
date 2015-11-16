@@ -36,7 +36,8 @@ public class ApartmentService  {
 
         List<Apartment> list = new ArrayList<Apartment>();
         try {
-            list = (List<Apartment>) dao.getByCity(id);
+           // list = (List<Apartment>) dao.getByCity(id);
+            list = (List<Apartment>) dao.getAll();
         } catch (SQLException e) {
             e.printStackTrace();
         }

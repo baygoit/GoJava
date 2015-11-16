@@ -4,7 +4,8 @@ import java.util.Scanner;
 
 public class ConsoleScanner {
 
-	private Scanner scanner = new Scanner(System.in);
+	// TODO replace me with something else, I cannot be mocked even with powermock :(
+	Scanner scanner = new Scanner(System.in);
 
 	public int getInt() {
 		while (!scanner.hasNextInt()) {
