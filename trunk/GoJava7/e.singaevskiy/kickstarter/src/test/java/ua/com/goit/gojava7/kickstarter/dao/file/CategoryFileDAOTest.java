@@ -10,22 +10,25 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import ua.com.goit.gojava7.kickstarter.beans.Quote;
+import ua.com.goit.gojava7.kickstarter.beans.Category;
+import ua.com.goit.gojava7.kickstarter.dao.memory.Memory;
 
-public class QuoteFileDAOTest {
+public class CategoryFileDAOTest {
     
-    FileDAO<Quote> fs;
-    List<Quote> list = new ArrayList<>();
+    FileDAO<Category> fs;
+    List<Category> list = new ArrayList<>();
     
     @Before
     public void setUp(){
-        Class<Quote> persistentClass = Quote.class;
-        fs = new FileDAO<Quote>(persistentClass, 
-                "target/generated-test-sources/storages/file/%name%.txt".replace("%name%", persistentClass.getSimpleName()));
+        Class<Category> persistentClass = Category.class;
+        fs = new FileDAO<Category>(persistentClass, 
+                "src/test/resources/storages/file/%name%.txt".replace("%name%", persistentClass.getSimpleName()));
         
-        list.add(new Quote("a1", "t1"));
-        list.add(new Quote("a2", "t2"));
-        list.add(new Quote(null, null));
+        list.add(new Category("c1"));
+        list.add(new Category("c2"));
+        list.add(new Category(null));
+        
+        list = new Memory().getCategories();
         
         fs.clear();
         fs.addAll(list);
@@ -52,9 +55,9 @@ public class QuoteFileDAOTest {
     @Test
     public void testAdd() {
         int lastIndex = list.size()-1;
-        Quote quote = new Quote("author", "text");
-        fs.add(quote);
-        assertThat(fs.get(++lastIndex), is(quote));
+        Category element = new Category("cat");
+        fs.add(element);
+        assertThat(fs.get(++lastIndex), is(element));
     }
 
     @Test

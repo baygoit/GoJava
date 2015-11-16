@@ -35,7 +35,6 @@ public class MainPageController {
 
     public MainPageController(MainPage page, DataType dataType, InputStream stream) {
         this.page = page;
-        page.showMessage("Kickstarter runs in " + dataType + " mode");
         StorageFactory factory = new StorageFactory(dataType);
         
         quoteDAO = factory.getQuoteDAO();
