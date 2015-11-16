@@ -3,7 +3,7 @@ package com.kickstarter.manager;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.kickstarter.app.Kickstarter;
+import com.kickstarter.app.KRun;
 import com.kickstarter.db.PayersDB;
 import com.kickstarter.model.Payer;
 import com.kickstarter.model.Project;
@@ -11,7 +11,7 @@ import com.kickstarter.util.ConsolePrintView;
 import com.kickstarter.util.UserConsoleInputReader;
 
 public class PaymentSystem {
-
+	KRun kr = new KRun();
 	ConsolePrintView consolePrintView = new ConsolePrintView();
 	PayersDB pdb = new PayersDB();
 	ProjectManager prm = new ProjectManager();
@@ -39,7 +39,7 @@ public class PaymentSystem {
 		addPayer(cardId, holderName);
 		acceptPayment(payment, projectNumber, categoryTitle);
 	    consolePrintView.singleCategorysProjectsView(prm.getProject(categoryTitle, projectNumber));
-    	Kickstarter.projectSelector(categoryNumber, categoryTitle);
+	    kr.projectSelector(categoryNumber, categoryTitle);
 	}
 
 	public String acceptPayerName() {
