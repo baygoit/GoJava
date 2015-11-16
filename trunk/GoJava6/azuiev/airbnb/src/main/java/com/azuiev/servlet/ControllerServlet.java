@@ -37,6 +37,9 @@ public class ControllerServlet extends HttpServlet {
             String password = (String)request.getParameter("password");
             UserService userService = new UserService();
             User user = userService.login(email, password);
+            //temp
+            user = new User();
+
             if (user==null) {
                 request.setAttribute("loginFail",true);
                 request.getRequestDispatcher(context.getInitParameter("path")+path+".jsp").forward(request, response);
