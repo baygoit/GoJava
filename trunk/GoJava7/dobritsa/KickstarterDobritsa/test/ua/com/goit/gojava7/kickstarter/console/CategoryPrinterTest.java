@@ -47,8 +47,10 @@ public class CategoryPrinterTest {
 		PrintStream printSteam = mock(PrintStream.class);
 		System.setOut(printSteam);
 		Category category = new Category("Category1");
+		List<String> questions = new ArrayList<String>();
+		questions.add("QuestionsTest");
 		Project project1 = new Project("NameTest", "DescriptionTest", 1000000, 10000, 10, "HistoryTest", "LinkTest",
-				"QuestionsTest");
+				questions);
 		category.add(project1);
 		List<Category> categories = new ArrayList<Category>();
 		categories.add(category);

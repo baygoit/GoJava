@@ -24,6 +24,7 @@ public class Kickstarter {
 	private int ZERO = 1;
 	private Project currentProject = null;
 	private Category currentCategory = null;
+	private int numberOgCategory;
 
 	public Kickstarter(QuoteStorage quoteStorage, CategoryStorage categoryStorage) {
 		this.quoteStorage = quoteStorage;
@@ -33,19 +34,19 @@ public class Kickstarter {
 	public void run() {
 		quotePrinter.printRandomQuote(quoteStorage);
 		while (true) {
-			Integer selectedCategory = chooseCategory();
-			Integer indexOfSelectedCategory = selectedCategory - 1;
-			while (selectedCategory != 0) {
+			int numberOfCategory = chooseCategory();
+			Integer indexOfSelectedCategory = numberOfCategory - 1;
+			while (numberOfCategory != 0) {
 				currentCategory = categoryStorage.get(indexOfSelectedCategory);
 				if (currentCategory.getAll().size() == 0) {
 					System.out.println("No projects in this categories.");
 					break;
 				} else {
-					Integer selectedProject = chooseProject(selectedCategory);
-					//Integer indexOfSelectedProject = selectedProject - 1;
+					Integer selectedProject = chooseProject(numberOfCategory);
+					// Integer indexOfSelectedProject = selectedProject - 1;
 					if (selectedProject != 0) {
 						currentProject = currentCategory.get(selectedProject - SHIFT_ONE);
-						viewProject(selectedCategory, selectedProject);
+						viewProject(numberOfCategory, selectedProject);
 					} else {
 						break;
 					}
@@ -60,35 +61,43 @@ public class Kickstarter {
 		categoryPrinter.printCategories(categoryStorage.getAll());
 		System.out.println("\nChoose a category by number ('0' for exit): ");
 
-		Integer selectedCategory = consoleScanner.getInteger(ZERO, categoryStorage.size());
-		if (selectedCategory == 0) {			
+		int numberOfCategory = consoleScanner.getInt(ZERO, categoryStorage.size());
+		if (numberOfCategory == 0) {
 			System.out.println("See you soon!");
 			consoleScanner.close();
 			System.exit(0);
 		}
-		return selectedCategory;
+		return numberOfCategory;
 	}
 
-	public Integer chooseProject(Integer selectedCategory) {
+	public Integer chooseProject(Integer numberOfCategory) {
 		System.out.println(BORDER);
-		System.out.println("Current category: #" + selectedCategory + "("
-				+ categoryStorage.get(selectedCategory - SHIFT_ONE).getName() + ")");
+		System.out.println("Current category: #" + numberOfCategory + "("
+				+ categoryStorage.get(numberOfCategory - SHIFT_ONE).getName() + ")");
 		System.out.println("List of projects:");
 		categoryPrinter.printProjects(currentCategory.getAll());
 		System.out.println("\nChoose a project by number ('0' to choose another category): ");
-		Integer selectedProject = consoleScanner.getInteger(ZERO, currentCategory.size());
-		if (selectedProject == null) {
-			return null;
+		int numberOfProject = consoleScanner.getInt(ZERO, currentCategory.size());
+		if (numberOfProject == 0) {
+			return 0;
 		}
-		return selectedProject;
+		return numberOfProject;
 	}
 
-	public void viewProject(Integer selectedCategory, Integer selectedProject) {
-		System.out.println(BORDER);
-		System.out.println("Current category: " + currentCategory.getName());
-		System.out.println("Current project: #" + (selectedProject) + "\n");
+	public void viewProject(int selectedCategory, int numberOfProject) {
+		printAboutProject(currentCategory.getName(), numberOfProject);
+		chooseOptionOfProject();
+	}
+
+	public void printAboutProject(String categoryName, int numberProject) {
+		System.out.println(BORDER
+				+ "\nCurrent category: " + categoryName
+				+ "\nCurrent project: #" + (numberProject) + "\n");
 		projectPrinter.printFull(currentProject);
-		String text = consoleScanner.getBackOrZero();
+	}
+
+	public void chooseOptionOfProject() {
+		String text = consoleScanner.getMenu();
 		if (text.equals("b")) {
 			System.out.println("\nEnter your name:");
 			String name = consoleScanner.getName();
@@ -97,11 +106,19 @@ public class Kickstarter {
 			int minDonation = 1;
 			int maxDonation = currentProject.getGoal() - currentProject.getPledged();
 			System.out.println("\nEnter amount from " + minDonation + " to " + maxDonation + " :");
-			int amount = consoleScanner.getInteger(minDonation, maxDonation);
+			int amount = consoleScanner.getInt(minDonation, maxDonation);
 			System.out.println("\nIt was collected before:" + currentProject.getPledged());
 			currentProject.addToPledged(amount);
 			System.out.println("\nNow collected:" + currentProject.getPledged());
 		}
+		if (text.equals("a")) {
+			currentProject.addQuestion(getQuestion());
+		}
+	}
+
+	public String getQuestion() {
+		System.out.println("Ask your qouestion about project: ");
+		return consoleScanner.getString();
 	}
 
 	public void shutdown() {

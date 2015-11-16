@@ -33,24 +33,24 @@ public class ConsoleScannerTest {
 	}
 
 	@Test
-	public void testGetIntCorrect() {
+	public void testGetInt() {
 		ByteArrayInputStream in = new ByteArrayInputStream("1".getBytes());
 		consoleScanner = new ConsoleScanner(in);
-		assertThat(consoleScanner.getInteger(0, 3), is(1));
+		assertThat(consoleScanner.getInt(0, 3), is(1));
 	}
 
 	@Test
-	public void testGetInt0() {
+	public void testGetIntEnteged0() {
 		ByteArrayInputStream in = new ByteArrayInputStream("0".getBytes());
 		consoleScanner = new ConsoleScanner(in);
-		assertNull(consoleScanner.getInteger(0, 3));
+		assertThat(consoleScanner.getInt(0, 3), is(0));
 	}
 
 	@Test
-	public void testGetIntfrom0to0() {
+	public void testGetIntfrom0To0Entered0() {
 		ByteArrayInputStream in = new ByteArrayInputStream("0".getBytes());
 		consoleScanner = new ConsoleScanner(in);
-		assertNull(consoleScanner.getInteger(0, 0));
+		assertThat(consoleScanner.getInt(0, 0), is(0));
 	}
 
 	// @Test
@@ -69,14 +69,14 @@ public class ConsoleScannerTest {
 	public void testGetBackOrZeroEntered0() {
 		ByteArrayInputStream in = new ByteArrayInputStream("0".getBytes());
 		consoleScanner = new ConsoleScanner(in);
-		assertThat(consoleScanner.getBackOrZero(), is("0"));
+		assertThat(consoleScanner.getMenu(), is("0"));
 	}
 
 	@Test
 	public void testGetBackOrZeroEnteredB() {
 		ByteArrayInputStream in = new ByteArrayInputStream("b".getBytes());
 		consoleScanner = new ConsoleScanner(in);
-		assertThat(consoleScanner.getBackOrZero(), is("b"));
+		assertThat(consoleScanner.getMenu(), is("b"));
 	}
 
 

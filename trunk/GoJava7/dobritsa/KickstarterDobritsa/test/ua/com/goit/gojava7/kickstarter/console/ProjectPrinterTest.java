@@ -5,6 +5,8 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
 import java.io.PrintStream;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.After;
 import org.junit.Before;
@@ -36,7 +38,9 @@ public class ProjectPrinterTest {
 	public void testPrint() {
 		PrintStream printSteam = mock(PrintStream.class);
 		System.setOut(printSteam);
-		Project project = new Project("NameTest", "DescriptionTest", 1000000, 10000, 10, "HistoryTest", "LinkTest", "QuestionsTest");
+		List<String> questions = new ArrayList<String>();
+		questions.add("QuestionsTest");
+		Project project = new Project("NameTest", "DescriptionTest", 1000000, 10000, 10, "HistoryTest", "LinkTest", questions);
 		projectPrinter.printFull(project);
 		verify(printSteam).println(contains("NameTest"));
 		verify(printSteam).println(contains("QuestionsTest"));
