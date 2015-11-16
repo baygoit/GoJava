@@ -6,10 +6,10 @@ import ua.com.goit.gojava7.kickstarter.domain.Category;
 
 public interface Level {
 
-	public StringBuilder generateAnswer(List<Category> categories, int userChoise, Category selectedCategory);
+	public String generateAnswer(List<Category> categories, int userChoise, Category selectedCategory);
 
 	public Category findSelectedCategory(List<Category> categories, int userChoise, Category selectedCategory);
 
-	public StringBuilder validateUserChoise(List<Category> categories, int userChoise, Category selectedCategory);
+	public String validateUserChoise(List<Category> categories, int userChoise, Category selectedCategory);
 
 }

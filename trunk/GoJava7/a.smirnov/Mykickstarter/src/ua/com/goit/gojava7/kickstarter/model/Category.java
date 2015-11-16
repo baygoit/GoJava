@@ -1,16 +1,14 @@
 package ua.com.goit.gojava7.kickstarter.model;
 
-import ua.com.goit.gojava7.kickstarter.model.Project;
-import java.util.Set;
-import java.util.TreeSet;
+import java.io.Serializable;
 
-public class Category implements Comparable<Category> {
-    private Set<Project> projects;
+public class Category implements Comparable<Category>, Serializable {
+	
+	private static final long serialVersionUID = 1L;
 	private String name;
 
 	public Category(String name) {
 		this.name = name;
-		projects = new TreeSet<>();
 	}
 
 	public String getName() {
@@ -19,18 +17,6 @@ public class Category implements Comparable<Category> {
 	
 	public void setName(String name) {
 		this.name = name;
-	}
-		
-	public Set<Project> getAllProjectsFromCategory() {
-		return projects;
-	}
-	
-	public void addProjectToCategory(Project project) {
-		projects.add(project);
-	}
-	
-	public void deleteProjectToCategory(Project project) {
-		projects.remove(project);
 	}
 	
 	@Override

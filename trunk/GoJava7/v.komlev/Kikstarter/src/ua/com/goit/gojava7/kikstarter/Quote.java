@@ -1,44 +1,31 @@
 package ua.com.goit.gojava7.kikstarter;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
-
 /**
  * create class Quote which contain list quotes
  * 
  */
 public class Quote {
 
-	private static Random RANDOM = new Random();
-	private List<String> listQuotes = new ArrayList<>();
+	private String quoteContent;
+	private String quoteAuthor;
 
 	public Quote() {
-		setQuoteDefault();
 	}
 
-	private void setQuoteDefault() {
-		listQuotes.add("Two things are infinite: "
-				+ "the universe and human stupidity;"
-				+ " and I'm not sure about the universe. Albert Einstein");
-
-		listQuotes.add("Coming together is a beginning; "
-				+ "keeping together is progress; "
-				+ "working together is success. Henry Ford");
-
-		listQuotes.add("If you spend too much time thinking about a thing, "
-				+ "you'll never get it done. Bruce Lee");
+	public String getQuoteContent() {
+		return quoteContent;
 	}
 
-	// method outputs one random quote
-	public String getQuoteRandom() {
-		int randomNumber = RANDOM.nextInt(listQuotes.size());
-		return listQuotes.get(randomNumber);
+	public String getQuoteAuthor() {
+		return quoteAuthor;
 	}
 
-	public void setHisQuote(String strValue) {
-		listQuotes.add(strValue);
+	public void setQuoteContent(String quoteContent) {
+		this.quoteContent = quoteContent;
+	}
+
+	public void setQuoteAuthor(String quoteAuthor) {
+		this.quoteAuthor = quoteAuthor;
 	}
 
 }

@@ -7,7 +7,7 @@ import ua.com.goit.gojava7.kickstarter.domain.Project;
 
 public class CategoryLevel implements Level {
 
-	public StringBuilder generateAnswer(List<Category> categories, int userChoise, Category selectedCategory) {
+	public String generateAnswer(List<Category> categories, int userChoise, Category selectedCategory) {
 		StringBuilder stringBuilder = new StringBuilder();
 
 		stringBuilder.append("You selected '").append(selectedCategory.getName()).append("' category").append("\n");
@@ -22,7 +22,7 @@ public class CategoryLevel implements Level {
 		stringBuilder.append(0).append(" : main menu").append("\n");
 		stringBuilder.append("Select a project");
 
-		return stringBuilder;
+		return stringBuilder.toString();
 	}
 
 	public Category findSelectedCategory(List<Category> categories, int userChoise, Category selectedCategory) {
@@ -32,12 +32,12 @@ public class CategoryLevel implements Level {
 		return selectedCategory;
 	}
 
-	public StringBuilder validateUserChoise(List<Category> categories, int userChoise, Category selectedCategory) {
+	public String validateUserChoise(List<Category> categories, int userChoise, Category selectedCategory) {
 		StringBuilder stringBuilder = new StringBuilder();
 
 		if (userChoise < 0 || userChoise > selectedCategory.projectsSize()) {
 			stringBuilder.append("Please, enter the number between 0 and ").append(selectedCategory.projectsSize());
 		}
-		return stringBuilder;
+		return stringBuilder.toString();
 	}
 }

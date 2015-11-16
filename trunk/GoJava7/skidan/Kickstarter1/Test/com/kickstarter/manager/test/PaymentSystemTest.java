@@ -5,14 +5,18 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 
+
 import com.kickstarter.db.PayersDB;
 import com.kickstarter.manager.PaymentSystem;
 import com.kickstarter.manager.ProjectManager;
+
 
 public class PaymentSystemTest {
 	PayersDB pdb;
 	PaymentSystem ps;
 	ProjectManager pm;
+	
+	
 
 	@Before
 	public void start() {

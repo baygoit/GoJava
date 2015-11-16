@@ -6,11 +6,11 @@ import static org.junit.Assert.assertThat;
 
 import org.junit.Test;
 
-import ua.com.goit.gojava7.kickstarter.beans.FAQ;
+import ua.com.goit.gojava7.kickstarter.beans.QnA;
 
 public class FAQTest {
 	
-	FAQ testObject = new FAQ("testQ", "testA");
+	QnA testObject = new QnA("testQ", "testA");
 
 	@Test
 	public void testFAQ() {

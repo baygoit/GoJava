@@ -8,15 +8,14 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
 
 import org.junit.Test;
 
+import ua.com.goit.gojava7.kickstarter.beans.Category;
 import ua.com.goit.gojava7.kickstarter.beans.Project;
 import ua.com.goit.gojava7.kickstarter.beans.Quote;
 import ua.com.goit.gojava7.kickstarter.beans.User;
 import ua.com.goit.gojava7.kickstarter.util.Utils;
-import ua.com.goit.gojava7.kickstarter.view.MainPage;
 
 public class MainPageTest {
 
@@ -44,12 +43,11 @@ public class MainPageTest {
 	}
 
 	private Project getMockProject() {
-		Project project = Project.newBuilder().setName("Xpand Lacing System")
-				.setDescription("Get your shoes on in 3 seconds flat! No more bows, no more knots, no more tying!")
-				.setStartDate(Utils.dateFromString("dd.MM.yyyy", "25.10.2015"))
-				.setEndDate(Utils.dateFromString("dd.MM.yyyy", "25.11.2015"))
-				.setAuthor(new User("Charles Harris", ""))
-				.setVideoURL("https://www.youtube.com/watch?v=PaEnaoydUUo").build();
+		Project project = new Project("Xpand Lacing System", new User("Charles Harris"), new Category("Art"));
+		project.setDescription("Get your shoes on in 3 seconds flat! No more bows, no more knots, no more tying!");
+		project.setStartDate(Utils.dateFromString("dd.MM.yyyy", "25.10.2015"));
+		project.setEndDate(Utils.dateFromString("dd.MM.yyyy", "25.11.2015"));
+		project.setVideoUrl("https://www.youtube.com/watch?v=PaEnaoydUUo");
 		return project;
 	}
 
@@ -73,18 +71,11 @@ public class MainPageTest {
 	
 	@Test
 	public void showProjects() {
+
 		Collection<Project> projects = new ArrayList<>();
-		projects.add(Project.newBuilder().setName("test1")
-				.setDescription("Description1")
-				.setStartDate(new Date())
-				.setEndDate(new Date())
-				.build());
+		projects.add(new Project("pr1", null, null));
 		
-		projects.add(Project.newBuilder().setName("test2")
-				.setDescription("Description2")
-				.setStartDate(new Date())
-				.setEndDate(new Date())
-				.build());
+		projects.add(new Project("pr2", null, null));
 
 		page.showProjects(projects);
 		
