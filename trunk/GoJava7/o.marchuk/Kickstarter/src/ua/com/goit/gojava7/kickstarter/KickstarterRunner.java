@@ -1,5 +1,7 @@
 package ua.com.goit.gojava7.kickstarter;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import ua.com.goit.gojava7.kickstarter.console.ConsolePrinter;
@@ -25,8 +27,9 @@ public class KickstarterRunner {
 	}
 
 	private static QuoteStorage initQuotes() {
-		QuoteStorage quoteStorage = new QuoteStorage(new Random());
-		quoteStorage
+		List<Quote> quotes = new ArrayList<>();
+
+		quotes
 				.add(new Quote(
 						"Your work is going to fill a large part of your life,"
 								+ " and the only way to be truly satisfied is to do what"
@@ -35,9 +38,12 @@ public class KickstarterRunner {
 								+ " found it yet, keep looking. Don't settle. As with"
 								+ " all matters of the heart, you'll know when you"
 								+ " find it.", "Steve Jobs"));
-		quoteStorage.add(new Quote(
+		quotes.add(new Quote(
 				"Innovation distinguishes between a leader and a follower.",
 				"Steve Jobs"));
+
+		QuoteStorage quoteStorage = new QuoteStorage(new Random());
+		quoteStorage.setQuotes(quotes);
 		return quoteStorage;
 	}
 
