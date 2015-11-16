@@ -3,7 +3,7 @@ package com.kickstarter.util;
 import java.util.List;
 import java.util.Map;
 
-import com.kickstarter.app.Kickstarter;
+import com.kickstarter.app.KRun;
 import com.kickstarter.model.Category;
 import com.kickstarter.model.Project;
 
@@ -20,6 +20,7 @@ public class ConsolePrintView {
 	}
 
 	public void categorySelectionInform() {
+		
 		System.out.println("\nPlease choose category you'd like to see: ");
 	}
 
@@ -28,8 +29,9 @@ public class ConsolePrintView {
 
 			System.out.println("You have choosen " + title + "\n");
 		} catch (Exception e) {
+			KRun kr = new KRun();
 			System.out.println("There is no such number of Category available");
-			Kickstarter.categorySelector();
+			kr.categorySelector();
 		}
 	}
 

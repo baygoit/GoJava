@@ -19,12 +19,14 @@ public class CategoryLevelTest {
 	List<Category> categories;
 	Category selectedCategory;
 	Level categoryLevel = new CategoryLevel();
-
+	Project project;
+	
 	@Before 
 	public void setUp() {
 		categories = new ArrayList<Category>();
 		Category category = new Category("Some Category");
-		category.addProject(new Project("proj 1"));
+		project = new Project("proj 1");
+		category.addProject(project);
 		categories.add(category);
 		categories.add(new Category("Second Category"));
 		selectedCategory = category;
@@ -62,7 +64,7 @@ public class CategoryLevelTest {
 	
 	@Test
 	public void testGenerateAnswer() {
-		String result = categoryLevel.generateAnswer(categories, 0, selectedCategory);
+		String result = categoryLevel.generateAnswer(categories, 0, selectedCategory, project);
 		assertThat(result, containsString("You selected 'Some Category' category"));
 		assertThat(result, containsString("proj 1"));
 		assertThat(result, containsString("0 : main menu"));
