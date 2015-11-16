@@ -146,7 +146,7 @@ public class Menu{
 
 			} else {
 				user.getSettings().setMenuOption(MenuOptions.EXIT);
-				consolePrinter.printDeflector();
+				consolePrinter.printHorizontalLine();
 			}
 			showMenu();
 		}
@@ -181,7 +181,7 @@ public class Menu{
 			} else {
 				user.getSettings().setMenuOption(MenuOptions.SHOW_CATEGORIES);
 				consolePrinter.print("Exit [Choose Project]");
-				consolePrinter.printDeflector();
+				consolePrinter.printHorizontalLine();
 			}
 		} while (selectedOption == MENU_DEFAULT_OPTION);
 		showMenu();
