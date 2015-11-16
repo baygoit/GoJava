@@ -107,6 +107,27 @@ public class ConsolePrinterTest {
 	}
 
 	@Test
+	public void testPrintCategoryProjects() {
+		Category category = new Category("category name");
+		category.getProjects().add(new Project("project name", "short description", 50, 10));
+
+		consolePrinter.printCategoryWithProjects(category);
+
+		verify(printSteam).println(contains("Category:"));
+		verify(printSteam).println(contains("category name"));
+
+		verify(printSteam).println(contains("Category projects:"));
+		verify(printSteam).println(contains("project name"));
+		verify(printSteam).println(contains("Short description:"));
+		verify(printSteam).println(contains("short description"));
+		verify(printSteam).println(contains("Required amount:"));
+		verify(printSteam).println(contains("0.5"));
+		verify(printSteam).println(contains("Gathered amount:"));
+		verify(printSteam).println(contains("Days left:"));
+		verify(printSteam).println(contains("10"));
+	}
+
+	@Test
 	public void testFormatMoney() {
 		assertThat(consolePrinter.formatMoney(0), is("0.00"));
 		assertThat(consolePrinter.formatMoney(1), is("0.01"));

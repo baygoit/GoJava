@@ -1,6 +1,7 @@
 package ua.com.goit.gojava7.kickstarter.console;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 import ua.com.goit.gojava7.kickstarter.domain.Category;
@@ -32,9 +33,12 @@ public class ConsolePrinter {
 		System.out.println(string);
 	}
 
-	public void print(Category category, List<Project> projects) {
+	public void printCategoryWithProjects(Category category) {
+		ArrayList<Project> projects = new ArrayList<Project>(category.getProjects());
+
 		this.print(category);
-		System.out.println("Category Projects:");
+
+		System.out.println("Category projects:");
 		for (int i = 0; i < projects.size(); i++) {
 			Project project = projects.get(i);
 			System.out.println((i + 1) + " : " + project.getName());

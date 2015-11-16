@@ -62,7 +62,7 @@ public class Kickstarter {
 		int selectedProjectIndex;
 		do {
 			consolePrinter.print("");
-			consolePrinter.print(selectedCategory, projects);
+			consolePrinter.printCategoryWithProjects(selectedCategory);
 			consolePrinter.print("Please select a project (0 for exit): ");
 			selectedProjectIndex = consoleScanner.getInt();
 

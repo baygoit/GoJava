@@ -1,7 +1,6 @@
 package ua.com.goit.gojava7.kickstarter;
 
 import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyListOf;
 import static org.mockito.Matchers.contains;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -18,7 +17,6 @@ import org.mockito.runners.MockitoJUnitRunner;
 import ua.com.goit.gojava7.kickstarter.console.ConsolePrinter;
 import ua.com.goit.gojava7.kickstarter.console.ConsoleScanner;
 import ua.com.goit.gojava7.kickstarter.domain.Category;
-import ua.com.goit.gojava7.kickstarter.domain.Project;
 import ua.com.goit.gojava7.kickstarter.storage.CategoryStorage;
 import ua.com.goit.gojava7.kickstarter.storage.QuoteStorage;
 
@@ -61,7 +59,7 @@ public class KickstarterTest {
 
 		kickstarter.showCategoriesMenu();
 
-		verify(consolePrinter).print(any(Category.class), anyListOf(Project.class));
+		verify(consolePrinter).printCategoryWithProjects(any(Category.class));
 		verify(consolePrinter).print(contains("Bye"));
 	}
 
