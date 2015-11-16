@@ -66,9 +66,9 @@ public class Kickstarter {
 		System.out.println("\nChoose a category by number ('0' for exit): ");
 
 		Integer selectedCategory = consoleScanner.getInteger(ZERO, categoryStorage.size());
-		if (selectedCategory == null) {
-			consoleScanner.close();
+		if (selectedCategory == null) {			
 			System.out.println("See you soon!");
+			consoleScanner.close();
 			System.exit(0);
 		}
 		return selectedCategory;
