@@ -30,8 +30,8 @@ public class ReservationFileDao {
             params[i] = params[i].trim();
         }
 
-        res.setUser(Integer.parseInt(params[0]));
-        res.setHome(Integer.parseInt(params[1]));
+        res.setUserId(Integer.parseInt(params[0]));
+        res.setHomeId(Integer.parseInt(params[1]));
         res.setStart(new SimpleDateFormat("dd/MM/yyyy").parse(params[2]));
         res.setEnd(new SimpleDateFormat("dd/MM/yyyy").parse(params[3]));
 
