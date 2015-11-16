@@ -60,7 +60,7 @@ public class ProjectLevelTest {
 	
 	@Test
 	public void testGenerateAnswer() {
-		String result = projectLevel.generateAnswer(categories, 0, selectedCategory);
+		String result = projectLevel.generateAnswer(categories, 0, selectedCategory, project1);
 		assertThat(result, containsString("You selected 'proj 1' project"));
 		assertThat(result, containsString("daysToGo"));
 		assertThat(result, containsString("1 : to invest in the project"));
@@ -69,7 +69,7 @@ public class ProjectLevelTest {
 	
 	@Test
 	public void testFindSelectedProject() {
-		Project result = projectLevel.findSelectedProject(new ArrayList<Category>(), 0, selectedCategory);
+		Project result = projectLevel.findSelectedProject(0, selectedCategory, project1);
 		assertThat(result, is(project1));
 	}
 }

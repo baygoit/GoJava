@@ -105,19 +105,21 @@ public class KickstarterTest {
 	public void testInvestInTheProject() {
 		List<Category> categories = new ArrayList<Category>();
 		Category category = new Category("category name");
-		category.addProject(new Project("project 1"));
+		Project project = new Project("project 1");
+		project.setPledged(10);
+		category.addProject(project);
 		categories.add(category);
 		
 		when(categoryStorage.getAllCategories()).thenReturn(categories);
 		when(consoleScanner.scan()).thenReturn(1, 1, 1, 0);
-		when(consoleScanner.scanLine()).thenReturn("sf", "234234", 290);
+		when(consoleScanner.scanLine()).thenReturn("sf", "234234", "290");
 		
 		kickstarter.runKickstarter();
 		
 		verify(consolePrinter, times(2)).print(contains("1 : category name"));
-		verify(consolePrinter).print(contains("You selected 'project 1' project"));
-		verify(consolePrinter).print(contains("to invest in the project"));
-		verify(consolePrinter).print(contains("300"));
+		verify(consolePrinter, times(2)).print(contains("You selected 'project 1' project"));
+		verify(consolePrinter, times(2)).print(contains("to invest in the project"));
+		verify(consolePrinter, times(2)).print(contains("300"));
 		verify(consolePrinter).print("Goodbye!");
 	}
 }
