@@ -46,6 +46,17 @@ public class KickstarterTest {
 
 		kickstarter.showCategoriesMenu();
 
+		verify(consolePrinter).print(contains("Please, enter the number between"));
+		verify(consolePrinter).print(contains("Bye"));
+	}
+
+	@Test
+	public void testShowCategoriesMenuEnter_1NoCategoriesAtAll() {
+		when(consoleScanner.getInt()).thenReturn(-1, 0);
+
+		kickstarter.showCategoriesMenu();
+
+		verify(consolePrinter).print(contains("Please, enter the number between"));
 		verify(consolePrinter).print(contains("Bye"));
 	}
 
