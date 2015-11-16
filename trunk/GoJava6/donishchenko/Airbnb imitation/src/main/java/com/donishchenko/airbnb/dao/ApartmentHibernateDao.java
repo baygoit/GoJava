@@ -1,5 +1,6 @@
 package com.donishchenko.airbnb.dao;
 
+import com.donishchenko.airbnb.dbutils.HibernateDefaultRawDao;
 import com.donishchenko.airbnb.model.Apartment;
 
 import java.util.List;
@@ -36,7 +37,7 @@ public class ApartmentHibernateDao implements ApartmentDao {
 
     @Override
     public List<Apartment> getAllByCity(String city) {
-        return defaultDao.getList("city", city);
+        return defaultDao.getList("city.name", city);
     }
 
     @Override

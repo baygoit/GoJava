@@ -18,8 +18,9 @@ public class Apartment {
     @JoinColumn(name = "hostId")
     private User host;
 
-    @Column(name = "city")
-    private String city;
+    @ManyToOne
+    @JoinColumn(name = "cityId")
+    private City city;
 
     @Column(name = "type")
     private ApartmentType apartmentType;
@@ -29,7 +30,7 @@ public class Apartment {
 
     public Apartment() {}
 
-    public Apartment(User host, String city, ApartmentType apartmentType, boolean active) {
+    public Apartment(User host, City city, ApartmentType apartmentType, boolean active) {
         this.host = host;
         this.city = city;
         this.apartmentType = apartmentType;
@@ -52,11 +53,11 @@ public class Apartment {
         this.host = host;
     }
 
-    public String getCity() {
+    public City getCity() {
         return city;
     }
 
-    public void setCity(String city) {
+    public void setCity(City city) {
         this.city = city;
     }
 

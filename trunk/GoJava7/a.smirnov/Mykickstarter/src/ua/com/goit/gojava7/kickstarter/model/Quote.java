@@ -1,9 +1,17 @@
 package ua.com.goit.gojava7.kickstarter.model;
 
-public class Quote {
+import java.io.Serializable;
 
+public class Quote implements Serializable, Comparable<Quote> {
+
+	private static final long serialVersionUID = 1L;
 	private String author;
 	private String quoteText;
+	
+	public Quote(String author, String quoteText) {
+		this.author = author;
+		this.quoteText = quoteText;
+	}
 
 	public void setQuoteText(String title) {
 		this.quoteText = title;
@@ -19,5 +27,15 @@ public class Quote {
 
 	public String getAuthor() {
 		return author;
+	}
+	
+	@Override
+	public String toString() {
+		return getQuoteText();
+	}
+
+	@Override
+	public int compareTo(Quote that) {
+		return this.getAuthor().compareTo(that.getAuthor());
 	}
 }

@@ -1,7 +1,7 @@
 package dao.file;
 
-import model.CityList;
-import model.GenderType;
+import model.enums.CityList;
+import model.enums.GenderType;
 import model.User;
 
 import java.io.IOException;
@@ -14,7 +14,7 @@ public class UserFileDao {
     private final FileAccess fileAccess;
 
     public UserFileDao() {
-        String file = this.getClass().getResource("/users").getPath();
+        String file = this.getClass().getResource("/files/users").getPath();
         this.fileAccess = new FileAccess(file);
     }
 
@@ -42,7 +42,7 @@ public class UserFileDao {
                 .append(" | ")
                 .append(user.getEmail())
                 .append(" | ")
-                .append(user.getCity());
+                .append(user.getCityEnum());
 
         return builder.toString();
     }
@@ -84,7 +84,7 @@ public class UserFileDao {
         user.setGender(params[3].equals("FEMALE") ? GenderType.FEMALE : GenderType.MALE);
         user.setBirthDate(new SimpleDateFormat("dd/MM/yyyy").parse(params[4]));
         user.setEmail(params[5]);
-        user.setCity(CityList.valueOf(params[6]));
+        user.setCityEnum(CityList.valueOf(params[6]));
 
         return user;
     }

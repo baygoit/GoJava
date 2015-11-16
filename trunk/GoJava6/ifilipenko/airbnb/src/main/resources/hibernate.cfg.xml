@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <!-- connection details -->
+        <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+        <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/airbnb</property>
+        <property name="hibernate.connection.username">postgres</property>
+        <property name="hibernate.connection.password">root</property>
+        <property name="hibernate.default_schema">public</property>
+
+
+        <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQL94Dialect</property>
+        <property name="hibernate.show_sql">true</property>
+        <property name="cache.provider_class">org.hibernate.cache.HashtableCacheProvider</property>
+        <property name="transaction.factory_class">org.hibernate.transaction.JDBCTransactionFactory</property>
+        <!--<property name="db.hbm2ddl.auto">create</property>-->
+
+        <property name="hibernate.cache.region.factory_class">org.hibernadbehcache.EhCacheRegionFactory</property>
+        <property name="hibernate.cache.use_second_level_cache">false</property>
+        <property name="hibernate.cache.use_query_cache">false</property>
+    </session-factory>
+</hibernate-configuration>

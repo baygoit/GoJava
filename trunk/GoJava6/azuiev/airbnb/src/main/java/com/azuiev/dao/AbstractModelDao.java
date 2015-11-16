@@ -39,8 +39,7 @@ public class AbstractModelDao implements ModelDao {
         Session session = null;
         try {
             session = HibernateUtil.getSessionFactory().openSession();
-            model = (City)session.get(model.getClass(), id);
-            System.out.println("ttt");
+            model = session.get(model.getClass(), id);
         } catch (Exception e) {
             //TODO
         } finally {

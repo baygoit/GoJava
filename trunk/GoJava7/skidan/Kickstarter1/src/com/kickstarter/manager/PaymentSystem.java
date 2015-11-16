@@ -3,7 +3,7 @@ package com.kickstarter.manager;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.kickstarter.app.Kickstarter;
+import com.kickstarter.app.KRun;
 import com.kickstarter.db.PayersDB;
 import com.kickstarter.model.Payer;
 import com.kickstarter.model.Project;
@@ -11,7 +11,7 @@ import com.kickstarter.util.ConsolePrintView;
 import com.kickstarter.util.UserConsoleInputReader;
 
 public class PaymentSystem {
-
+	KRun kr = new KRun();
 	ConsolePrintView consolePrintView = new ConsolePrintView();
 	PayersDB pdb = new PayersDB();
 	ProjectManager prm = new ProjectManager();
@@ -38,27 +38,27 @@ public class PaymentSystem {
 		int payment = acceptPayment();
 		addPayer(cardId, holderName);
 		acceptPayment(payment, projectNumber, categoryTitle);
-		consolePrintView.singleCategorysProjectsView(prm.getProject(categoryTitle, projectNumber));
-		Kickstarter.projectSelector(categoryNumber, categoryTitle);
+	    consolePrintView.singleCategorysProjectsView(prm.getProject(categoryTitle, projectNumber));
+	    kr.projectSelector(categoryNumber, categoryTitle);
 	}
 
 	public String acceptPayerName() {
+		
 		consolePrintView.InputPayersNameInfo();
-		String holderName = UserConsoleInputReader.readString();
-		return holderName;
+		return UserConsoleInputReader.readStringInput();
 
 	}
 
 	public int acceptPayercardId() {
 		consolePrintView.InputCardIdInfo();
-		int cardId = UserConsoleInputReader.read();
+		int cardId = UserConsoleInputReader.readInput();
 		return cardId;
 
 	}
 
 	public int acceptPayment() {
 		consolePrintView.paymentSizeInfo();
-		int payment = UserConsoleInputReader.read();
+		int payment = UserConsoleInputReader.readInput();
 		return payment;
 	}
 

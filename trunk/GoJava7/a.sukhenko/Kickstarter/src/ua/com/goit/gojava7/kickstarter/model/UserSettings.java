@@ -1,14 +1,11 @@
 package ua.com.goit.gojava7.kickstarter.model;
 
-/**
- * 
- * 
- */
-public class UserSettings {
-	private Category category;
+public class UserSettings{
+	private Category		category;
+	private Project			selectedProject;
+	private MenuOptions	menuOption	= MenuOptions.SHOW_MAIN_MENU;
 
-	public UserSettings(Category cat) {
-		category = cat;
+	public UserSettings() {
 	}
 
 	public Category getCategory() {
@@ -17,5 +14,21 @@ public class UserSettings {
 
 	public void setCategory(Category category) {
 		this.category = category;
+	}
+
+	public MenuOptions getMenuOption() {
+		return menuOption;
+	}
+
+	public void setMenuOption(MenuOptions menuOption) {
+		this.menuOption = menuOption;
+	}
+
+	public Project getSelectedProject() {
+		return selectedProject;
+	}
+
+	public void setSelectedProject(Project selectedProject) {
+		this.selectedProject = selectedProject;
 	}
 }
