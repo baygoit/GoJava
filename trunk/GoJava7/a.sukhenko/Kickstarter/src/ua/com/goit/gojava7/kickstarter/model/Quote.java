@@ -1,10 +1,8 @@
 package ua.com.goit.gojava7.kickstarter.model;
 
-/**
- * @author Devian
- * @category Model
- */
-public class Quote {
+public class Quote{
+	private String	quote;
+	private String	author;
 	public Quote(String quote, String author) {
 		super();
 		this.setQuoteName(quote);
@@ -26,8 +24,5 @@ public class Quote {
 	public void setAuthor(String author) {
 		this.author = author;
 	}
-
-	private String quote;
-	private String author;
 
 }

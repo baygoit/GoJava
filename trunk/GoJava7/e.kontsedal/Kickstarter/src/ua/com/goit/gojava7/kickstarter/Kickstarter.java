@@ -25,8 +25,10 @@ public class Kickstarter {
 
 			int numberOfSelectedCategory = consoleReader.getNumberFromConsole();
 			do {
+
 				try {
-					consolePrinter.println(categoryStorage.getCategory(numberOfSelectedCategory));
+					Category currentCategory = categoryStorage.getCategory(numberOfSelectedCategory);
+					consolePrinter.println(currentCategory);
 				} catch (ArrayIndexOutOfBoundsException e) {
 					System.out.println("there is no such category!");
 					break;
@@ -42,22 +44,35 @@ public class Kickstarter {
 				if (numberOfselectedProject == 0)
 					break;
 				try {
-					consolePrinter.println(
-							categoryStorage.getCategory(numberOfSelectedCategory).getProject(numberOfselectedProject));
+					Project currentProject = categoryStorage.getCategory(numberOfSelectedCategory)
+							.getProject(numberOfselectedProject);
+					do {
+						consolePrinter.println(currentProject);
+						consolePrinter.println("Enter 0 ot see all projects in this category\nEnter 1 ot make payment");
+						int actionInProject = consoleReader.getNumberFromConsole();
+						if (actionInProject == 0)
+							break;
+						else if (actionInProject == 1) {
+							consolePrinter.println("Enter your Name");
+							String cardOwner = consoleReader.getStringFromConsole();
+							consolePrinter.println("Enter Card number");
+							long cardNumber = consoleReader.getLongNumberFromConsole();
+							consolePrinter.println("Enter the amount");
+							int rechargeAmount = consoleReader.getNumberFromConsole();
+							currentProject.setPayment(cardOwner, cardNumber, rechargeAmount);
+
+						} else {
+							System.out.println("bye");
+							stopWhile = false;
+						}
+					} while (stopWhile);
+
 				} catch (ArrayIndexOutOfBoundsException e) {
 					System.out.println("there is no such project!");
 					continue;
 				} catch (IndexOutOfBoundsException e) {
 					System.out.println("there is no such project!");
 					continue;
-				}
-				consolePrinter.println("Enter 0 ot see all projects in this category");
-				int exitProject = consoleReader.getNumberFromConsole();
-				if (exitProject == 0)
-					continue;
-				else {
-					System.out.println("bye");
-					stopWhile = false;
 				}
 
 			} while (stopWhile);

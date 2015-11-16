@@ -2,7 +2,7 @@ package ua.com.goit.gojava7.kickstarter.console;
 
 import java.util.Scanner;
 
-public class ConsoleScanner {
+public class ConsoleScanner{
 	private Scanner scanner = new Scanner(System.in);
 
 	public int getInt() {
@@ -11,6 +11,14 @@ public class ConsoleScanner {
 		}
 		int inputedInt = scanner.nextInt();
 		return inputedInt;
+	}
+
+	public String getString() {
+		while (!scanner.hasNextLine()) {
+			scanner.next();
+		}
+		String inputString = scanner.nextLine();
+		return inputString;
 	}
 
 	public void close() {

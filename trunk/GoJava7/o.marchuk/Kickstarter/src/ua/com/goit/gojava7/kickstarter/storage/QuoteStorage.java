@@ -8,15 +8,20 @@ import ua.com.goit.gojava7.kickstarter.domain.Quote;
 
 public class QuoteStorage {
 
-	private static final Random RANDOM = new Random();
+	private Random random;
+
 	private List<Quote> quotes = new ArrayList<>();
+
+	public QuoteStorage(Random random) {
+		this.random = random;
+	}
 
 	public void add(Quote quote) {
 		quotes.add(quote);
 	}
 
 	public Quote getRandomQuote() {
-		int randomNumber = RANDOM.nextInt(quotes.size());
+		int randomNumber = random.nextInt(quotes.size());
 		return quotes.get(randomNumber);
 	}
 }

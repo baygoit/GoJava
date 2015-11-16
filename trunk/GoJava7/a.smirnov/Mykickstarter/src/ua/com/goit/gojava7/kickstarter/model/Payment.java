@@ -1,56 +1,63 @@
 package ua.com.goit.gojava7.kickstarter.model;
 
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
 
-public class Payment {
-	private User user;
-	private long donatingSum;
-	private int cardId;
+public class Payment implements Comparable<Payment>, Serializable{
+
+	private static final long serialVersionUID = 1L;
+	private String userName;
+	private long creditCardNumber;
+	private int donatingSum;
 	private Calendar paymentDate;
 	
-	public Payment(User user, long donatingSum, int cardId) {
-		this.user = user;
+	public Payment(String userName, long creditCardNumber, int donatingSum) {
+		this.userName = userName;
+		this.creditCardNumber = creditCardNumber;
 		this.donatingSum = donatingSum;
-		this.cardId = cardId;
-		
-		TimeZone timeZone = TimeZone.getTimeZone("Europe/Kiev");
-		paymentDate = Calendar.getInstance();
-		Date date = new Date();
-		
-		paymentDate.setTimeZone(timeZone);
-		paymentDate.setTime(date);
+		setPaymentDay();
 	}
 	
-	public void setContribution(long contribution) {
-		this.donatingSum = contribution;
+	public long getCreditCardNumber() {
+		return creditCardNumber;
 	}
 	
-	public long getContribution() {
+	public void setCreditCardNumber(long creditCardNumber) {
+		this.creditCardNumber = creditCardNumber;
+	}
+	
+	public String getUserName() {
+		return userName;
+	}
+	
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+	
+	public int getDonatingSum() {
 		return donatingSum;
 	}
 	
-	public void setCardId(int cardId) {
-		this.cardId = cardId;
-	}
-	
-	public int getCardId() {
-		return cardId;
-	}
-	
-	public void setUser(User user) {
-		this.user = user;
-	}
-	
-	public User getUser() {
-		return user;
+	public void setDonatingSum(int donatingSum) {
+		this.donatingSum = donatingSum;
 	}
 	
 	public Calendar getPaymentDate() {
 		return paymentDate;
 	}
-	
-	
 
+	protected void setPaymentDay() {
+		TimeZone timeZone = TimeZone.getTimeZone("Europe/Kiev");
+		paymentDate = Calendar.getInstance();
+		Date date = new Date();
+		paymentDate.setTimeZone(timeZone);
+		paymentDate.setTime(date);
+	}
+	
+	@Override
+	public int compareTo(Payment that) {
+		return  (int) (this.paymentDate.getTimeInMillis() - that.getPaymentDate().getTimeInMillis());
+	}
 }

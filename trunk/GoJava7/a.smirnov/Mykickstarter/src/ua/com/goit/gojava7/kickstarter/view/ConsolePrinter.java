@@ -1,124 +1,143 @@
 package ua.com.goit.gojava7.kickstarter.view;
 
-import java.util.List;
+import java.util.Iterator;
+import java.util.Set;
+
+
 import ua.com.goit.gojava7.kickstarter.model.Category;
+import ua.com.goit.gojava7.kickstarter.model.Faq;
 import ua.com.goit.gojava7.kickstarter.model.Project;
 import ua.com.goit.gojava7.kickstarter.model.Quote;
+import ua.com.goit.gojava7.kickstarter.storage_in_memory.FaqStorage;
+import ua.com.goit.gojava7.kickstarter.templates.Templateble;
 
 public class ConsolePrinter {
 	private static final String MOVE_TO_THE_NEXT_LINE = "\n";
-	private static final String DOUBLE_MOVE_TO_THE_NEXT_LINE = "\n\n";
-	private static final String USD = "USD";
-	private static final char SPACE = ' ';
 	private static final TextModifer TEXT_MODIFER = new TextModifer();
 
-	// Printing quote and its author in console
 	public void print(Quote quote) {
-		String result = TEXT_MODIFER.modifyQuoteTextBeforePrint(quote.getQuoteText(), quote.getAuthor());
+		String result = TEXT_MODIFER.getModifiedQuoteBeforePrint(quote.getQuoteText(), quote.getAuthor());
 		System.out.println(result);
 	}
 
-	// Printing all categories 
-	public void print(List<Category> categories) {
-		System.out.println("All categories:");
-		for (int i = 0; i < categories.size(); i++) {
-			Category category = categories.get(i);
-			System.out.println((i + 1) + " : " + category.getName());
-		}
+	public void print(Category category) {
+		System.out.println("Category : " + category.getName());
 	}
 	
-	// Printing brief projects info
-	public void printListOfProjects(List<Project> listOfProjects) {		
-		if (listOfProjects.isEmpty()) {
-			System.out.println("There are no any projects in selected category.");
-		} else {
-			System.out.println("All projects from selected category : ");
-			List<Project> projects = listOfProjects;
-			int amountOfProjects = listOfProjects.size();
-			for (int index = 0; index < amountOfProjects; index++) {
-				StringBuilder projectInfo = new StringBuilder();
-				projectInfo.
-					append(MOVE_TO_THE_NEXT_LINE).
-					append("Project ¹ : ").
-					append(index + 1);
-				System.out.println(projectInfo.toString());
-				printBriefInfoProject(projects.get(index));
-			}
-		}
-	}	
-		
-	// Printing information about project
-	public void printBriefInfoProject(Project project) {
+	public void print(String string) {
+		System.out.println(string);
+	}		
+	
+	public void printBriefProjectInfo(Project project) {
 		StringBuilder result = new StringBuilder();
+		
 		result.
-			append("Project title : ").
-			append(TEXT_MODIFER.getModifiedString(project.getTitle())).
+			append("Title : ").
+			append(TEXT_MODIFER.getModifiedText(project.getTitle())).
 			append(MOVE_TO_THE_NEXT_LINE).
 			append("About : ").
-			append(TEXT_MODIFER.getModifiedString(project.getBriefDescription())).
+			append(TEXT_MODIFER.getModifiedText(project.getBriefDescription())).
 			append(MOVE_TO_THE_NEXT_LINE).
-			append("Required amount of $ : ").
-			append(project.getRequiredAmountOfMoney()).
-			append(SPACE).
-			append(USD).
-			append(MOVE_TO_THE_NEXT_LINE).
-			append("Current collected amount of $ : ").
 			append(project.getCurrentAmoutOfMoney()).
-			append(SPACE).
-			append(USD).
+			append(" pledged of $ ").
+			append(project.getRequiredAmountOfMoney()).
+			append(" goal").
 			append(MOVE_TO_THE_NEXT_LINE).
 			append("Days to go : ").
-			append(project.getDaysLeft());
+			append(project.getExpiryDays());
 		System.out.println(result.toString());
 	}
 	
-	// Printing information about project
-		public void printFullInfoProject(Project project) {
-			StringBuilder result = new StringBuilder();
-			result.
-				append("Project title : ").
-				append(TEXT_MODIFER.getModifiedString(project.getTitle())).
-				append(DOUBLE_MOVE_TO_THE_NEXT_LINE).
-				append("About : ").
-				append(TEXT_MODIFER.getModifiedString(project.getBriefDescription())).
-				append(DOUBLE_MOVE_TO_THE_NEXT_LINE).
-				append("Required amount of $ : ").
-				append(project.getRequiredAmountOfMoney()).
-				append(SPACE).
-				append(USD).
-				append(DOUBLE_MOVE_TO_THE_NEXT_LINE).
-				append("Current collected amount of $ : ").
-				append(project.getCurrentAmoutOfMoney()).
-				append(SPACE).
-				append(USD).
-				append(DOUBLE_MOVE_TO_THE_NEXT_LINE).
-				append("Days to go : ").
-				append(project.getDaysLeft()).
-				append(DOUBLE_MOVE_TO_THE_NEXT_LINE).
-				append("About this project : ").
-				append(TEXT_MODIFER.getModifiedString(project.getFullDescription())).
-				append(DOUBLE_MOVE_TO_THE_NEXT_LINE).
-				append("Link on viedo with demo : ").
-				append(project.getLinkOnVideo()).
-				append(DOUBLE_MOVE_TO_THE_NEXT_LINE).
-				append("Question : ").
-				append(TEXT_MODIFER.getModifiedString(project.getQuestion())).
-				append(MOVE_TO_THE_NEXT_LINE).
-				append("Answer : ").
-				append(TEXT_MODIFER.getModifiedString(project.getAnswer()));
-			System.out.println(result.toString());
-		}
-	
+	public void printFullProjectInfo(Project project) {
+		StringBuilder result = new StringBuilder();
 		
-	// Printing category name
-	public void print(Category category) {
-		System.out.println(category.getName());
+		printBriefProjectInfo(project);
+		
+		result.
+			append("History : ").
+			append(TEXT_MODIFER.getModifiedText(project.getFullDescription())).
+			append(MOVE_TO_THE_NEXT_LINE).
+			append("Video : ").
+			append(project.getLinkOnVideo()).
+			append(MOVE_TO_THE_NEXT_LINE);
+		System.out.println(result.toString());
+		
 	}
 
-	// Printing simple string
-	public void print(String string) {
-		System.out.println(string);
-	}	
+	public void printCategories(Set<Category> categories) {
+		Iterator<Category> categoryIterator = categories.iterator();
+		StringBuilder categoriesInfo = new StringBuilder();
+		
+		categoriesInfo.
+			append("All categories : ").
+			append(MOVE_TO_THE_NEXT_LINE);
+			
+		int categoryNumber = 0;
+		while (categoryIterator.hasNext()) {
+			categoryNumber ++;
+			Category category = categoryIterator.next();
+			
+			categoriesInfo.
+				append(categoryNumber).
+				append(" : ").
+				append(category.getName()).
+				append(MOVE_TO_THE_NEXT_LINE);
+		}
+		System.out.println(categoriesInfo.toString());
+	}
+		
+	public void printProjects(Set<Project> projects, boolean userChoise) {	
+		StringBuilder projectInfo = new StringBuilder();
+		
+		projectInfo.
+			append("All projects from selected category : ").
+			append(MOVE_TO_THE_NEXT_LINE);
+		
+		int stepCounter = 0;
+		Iterator<Project> projectIterator = projects.iterator();
+		
+		while (projectIterator.hasNext()) {				
+			projectInfo.
+				append(MOVE_TO_THE_NEXT_LINE).
+				append("Project ¹ ").
+				append(++ stepCounter);
+			System.out.println(projectInfo.toString());
+			projectInfo.delete(0, projectInfo.length());
+			
+			printBriefProjectInfo(projectIterator.next());
+		}
+	}
 	
-	
+	public void printFAQs(Set<Faq> FAQs) {
+		Set<Faq> AllFAQsInSelectedProject = FAQs;
+		
+		if (AllFAQsInSelectedProject.size() == 0) {
+			return;
+		} else {
+			StringBuilder result = new StringBuilder();
+			
+			result.
+				append("FAQ : ").
+				append(MOVE_TO_THE_NEXT_LINE);
+			
+			Iterator<Faq> iteratorFAQ = AllFAQsInSelectedProject.iterator();
+			
+			int stepsCounter = 0;
+			while (iteratorFAQ.hasNext()) {
+				stepsCounter ++;
+				
+				Faq faq = iteratorFAQ.next();
+				
+				if (!faq.getQuestion().isEmpty()) {
+					result.
+						append(" ").
+						append(stepsCounter).
+						append(" question : ").
+						append(faq.getQuestion()).
+						append(MOVE_TO_THE_NEXT_LINE);
+				} 
+			}
+			System.out.println(result.toString());
+		}
+	}
 }

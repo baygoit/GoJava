@@ -4,10 +4,12 @@ import com.kickstarter.db.QuoteStorage;
 import com.kickstarter.manager.CategoryManager;
 import com.kickstarter.manager.PaymentSystem;
 import com.kickstarter.manager.ProjectManager;
+import com.kickstarter.manager.QuestionSystem;
 import com.kickstarter.util.ConsolePrintView;
 import com.kickstarter.util.UserConsoleInputReader;
 
 public class Kickstarter {
+	static QuestionSystem questionSystem = new QuestionSystem();
 	static QuoteStorage qs = new QuoteStorage();
 	static PaymentSystem ps = new PaymentSystem();
 	static ConsolePrintView consolePrint = new ConsolePrintView();
@@ -32,7 +34,7 @@ public class Kickstarter {
 				String categoryTitle = categoryManager.getCategorieByNumber(categoryNumber).getTitle();
 				consolePrint.selectedCategoryInformer(categoryTitle);
 				consolePrint.categorysProjectsView(projectManager.getProjectsForCategory(categoryTitle));
-//				consolePrint.exitInformer();
+				// consolePrint.exitInformer();
 				projectSelector(categoryNumber, categoryTitle);
 			}
 		} catch (Exception e) {
@@ -59,12 +61,17 @@ public class Kickstarter {
 					consolePrint.posobilitiesInfirm();
 					int selectedAction = UserConsoleInputReader.readInput();
 					int payChoise = 200;
+					int quastionChoice = 300;
 					if (selectedAction == payChoise) {
 						ps.makePayment(projectNumber, categoryNumber, categoryTitle);
+					}if (selectedAction == quastionChoice) {
+							questionSystem.provideNewQuestion(projectNumber, categoryNumber, categoryTitle);
+						
 					} else {
 						projectSelector(categoryNumber, categoryTitle);
 
 					}
+
 				}
 
 			}
