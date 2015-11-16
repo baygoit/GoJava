@@ -2,18 +2,19 @@ package ua.com.goit.gojava7.kickstarter.Level;
 
 import java.util.List;
 
+import ua.com.goit.gojava7.kickstarter.console.ConsoleScanner;
 import ua.com.goit.gojava7.kickstarter.domain.Category;
 import ua.com.goit.gojava7.kickstarter.domain.Project;
 
 public class ProjectLevel implements Level {
 
-	public String generateAnswer(List<Category> categories, int userChoise, Category selectedCategory) {
+	public String generateAnswer(List<Category> categories, int userChoise, Category selectedCategory, Project selectedProject) {
 		StringBuilder stringBuilder = new StringBuilder();
-		Project project = selectedCategory.getProject(userChoise);
-
-		stringBuilder.append("You selected '").append(project.getName()).append("' project").append("\n");
-		stringBuilder.append(project.getAllDetails()).append("\n");
-		stringBuilder.append(0).append(" : to project list");
+		
+		stringBuilder.append("You selected '").append(selectedProject.getName()).append("' project").append("\n");
+		stringBuilder.append(selectedProject.getAllDetails()).append("\n");
+		stringBuilder.append("1 : to invest in the project").append("\n");
+		stringBuilder.append("0 : to project list");
 		return stringBuilder.toString();
 	}
 
@@ -28,6 +29,20 @@ public class ProjectLevel implements Level {
 			stringBuilder.append("Please, enter the correct number");
 		}
 		return stringBuilder.toString();
+	}
+
+	@Override
+	public String fillOutForm(Project project, int userChoise, ConsoleScanner consoleScanner) {
+
+		return "";
+	}
+
+	public Project findSelectedProject(int userChoise,
+			Category selectedCategory, Project selectedProject) {
+		if (selectedProject == null) {
+			selectedProject = selectedCategory.getProject(userChoise);
+		}
+		return selectedProject;
 	}
 
 }

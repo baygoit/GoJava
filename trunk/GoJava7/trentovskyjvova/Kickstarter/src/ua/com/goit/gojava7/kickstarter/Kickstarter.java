@@ -8,10 +8,12 @@ import java.util.ListIterator;
 import ua.com.goit.gojava7.kickstarter.Level.CategoryLevel;
 import ua.com.goit.gojava7.kickstarter.Level.Level;
 import ua.com.goit.gojava7.kickstarter.Level.MenuLevel;
+import ua.com.goit.gojava7.kickstarter.Level.PaymentLevel;
 import ua.com.goit.gojava7.kickstarter.Level.ProjectLevel;
 import ua.com.goit.gojava7.kickstarter.console.ConsolePrinter;
 import ua.com.goit.gojava7.kickstarter.console.ConsoleScanner;
 import ua.com.goit.gojava7.kickstarter.domain.Category;
+import ua.com.goit.gojava7.kickstarter.domain.Project;
 import ua.com.goit.gojava7.kickstarter.storage.CategoryStorage;
 import ua.com.goit.gojava7.kickstarter.storage.QuoteStorage;
 
@@ -31,7 +33,8 @@ public class Kickstarter {
 		this.consolePrinter = consolePrinter;
 		this.consoleScanner = consoleScanner;
 
-		levels = new LinkedList<>(Arrays.asList(new MenuLevel(), new CategoryLevel(), new ProjectLevel()));
+		levels = new LinkedList<>(Arrays.asList(new MenuLevel(),
+				new CategoryLevel(), new ProjectLevel(), new PaymentLevel()));
 	}
 
 	public void runKickstarter() {
@@ -43,9 +46,10 @@ public class Kickstarter {
 		Level userPositionLevel = levelsIterator.next();
 		int userChoise = 0;
 		Category selectedCategory = null;
+		Project selectedProject = null;
 		String answer;
 
-		answer = userPositionLevel.generateAnswer(categories, userChoise, selectedCategory);
+		answer = userPositionLevel.generateAnswer(categories, userChoise, selectedCategory, selectedProject);
 
 		consolePrinter.print(answer);
 
@@ -71,9 +75,18 @@ public class Kickstarter {
 			userChoise--;
 
 			selectedCategory = userPositionLevel.findSelectedCategory(categories, userChoise, selectedCategory);
+			selectedProject = userPositionLevel.findSelectedProject(userChoise, selectedCategory, selectedProject);	
+			
+			answer = userPositionLevel.generateAnswer(categories, userChoise, selectedCategory, selectedProject);
+			if (!answer.equals("")) {
+				consolePrinter.print(answer);
+			}
+						
+			answer = userPositionLevel.fillOutForm(selectedProject, userChoise, consoleScanner);			
+			if (!answer.equals("")) {
+				consolePrinter.print(answer);
+			}
 
-			answer = userPositionLevel.generateAnswer(categories, userChoise, selectedCategory);
-			consolePrinter.print(answer);
 		}
 		consolePrinter.print("Goodbye!");
 	}

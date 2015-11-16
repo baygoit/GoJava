@@ -38,11 +38,12 @@ public class PaymentSystem {
 		int payment = acceptPayment();
 		addPayer(cardId, holderName);
 		acceptPayment(payment, projectNumber, categoryTitle);
-		consolePrintView.singleCategorysProjectsView(prm.getProject(categoryTitle, projectNumber));
-		Kickstarter.projectSelector(categoryNumber, categoryTitle);
+	    consolePrintView.singleCategorysProjectsView(prm.getProject(categoryTitle, projectNumber));
+    	Kickstarter.projectSelector(categoryNumber, categoryTitle);
 	}
 
 	public String acceptPayerName() {
+		
 		consolePrintView.InputPayersNameInfo();
 		return UserConsoleInputReader.readStringInput();
 

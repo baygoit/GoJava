@@ -42,16 +42,16 @@ public class PaymentLevelTest {
 	
 	@Test
 	public void testGenerateAnswer() {
-		String result = paymentLevel.generateAnswer(categories, 0, selectedCategory);
-		assertThat(result, containsString("You selected to invest in the project 'proj 1' project"));
+		String result = paymentLevel.generateAnswer(categories, 0, selectedCategory, project1);
+		assertThat(result, containsString(""));
 	}
 	
 	@Test
 	public void testFillOutForm() {
 		
-		when(consoleScanner.scanLine()).thenReturn("name", "card", 290);
+		when(consoleScanner.scanLine()).thenReturn("name", "card", "290");
 		
-		String result = paymentLevel.fillOutForm(project1, 1);
+		String result = paymentLevel.fillOutForm(project1, 1, consoleScanner);
 		
 		assertThat(project1.getPledged(), is(300));
 	}

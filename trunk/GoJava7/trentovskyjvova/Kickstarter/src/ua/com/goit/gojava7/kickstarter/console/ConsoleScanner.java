@@ -28,4 +28,13 @@ public class ConsoleScanner {
 		scanner.close();
 	}
 
+	public String scanLine() {
+		String result = "";
+		while (!scanner.hasNext()) {
+			scanner.next();
+		}
+		result = scanner.next();
+		return result;
+	}
+
 }

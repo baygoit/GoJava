@@ -53,7 +53,7 @@ public class MenuLevelTest {
 	
 	@Test
 	public void testGenerateAnswer() {
-		String result = menuLevel.generateAnswer(categories, 0, selectedCategory);
+		String result = menuLevel.generateAnswer(categories, 0, selectedCategory, null);
 		assertThat(result, containsString("1 : Some Category"));
 		assertThat(result, containsString("0 : Exit from application"));
 		assertThat(result, containsString("Select a category"));
