@@ -62,6 +62,7 @@ public class Project{
     public void setDaysToGo(Integer daysToGo) {
     	this.daysToGo = daysToGo;
     }
+    
     public String getHistory(){
     	return history;
     }

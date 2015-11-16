@@ -1,5 +1,6 @@
 package model;
 
+import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
@@ -9,51 +10,66 @@ import java.util.Date;
 @Entity
 @Table(name = "reservations")
 public class Reservation implements Serializable{
+    @Id
+    @GeneratedValue(generator = "increment")
+    @GenericGenerator(name = "increment", strategy = "increment")
+    @Column(name = "id")
     private int id;
-    private int userId;
-    private int homeId;
+
+    @ManyToOne(cascade=CascadeType.ALL)
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    @ManyToOne(cascade=CascadeType.ALL)
+    @JoinColumn(name = "home_id")
+    private Home home;
+
+    @Type(type="timestamp")
+    @Column(name = "startdate")
     private Date start;
+
+    @Type(type="timestamp")
+    @Column(name = "endatedate")
     private Date end;
+
+    @Transient
     private String comment;
+
+    //-- file --
+    @Transient
+    private int userId;
+
+    @Transient
+    private int homeId;
 
     public Reservation(){
     }
 
-    public Reservation(int userId, int homeId, Date start, Date end) {
-        this.userId = userId;
-        this.homeId = homeId;
+    public Reservation(User user, Home home, Date start, Date end) {
+        this.user = user;
+        this.home = home;
         this.start = start;
         this.end = end;
     }
 
     //===============getters======================
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "id")
+
     public int getId() {
         return id;
     }
 
-    @ManyToOne(cascade=CascadeType.ALL)
-    @Column(name = "user_id")
-    public int getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    @ManyToOne(cascade=CascadeType.ALL)
-    @Column(name = "user_id")
-    public int getHomeId() {
-        return homeId;
+    public Home getHome() {
+        return home;
     }
 
-    @Type(type="timestamp")
-    @Column(name = "startdate")
     public Date getStart() {
         return start;
     }
 
-    @Type(type="timestamp")
-    @Column(name = "endatedate")
     public Date getEnd() {
         return end;
     }
@@ -62,18 +78,28 @@ public class Reservation implements Serializable{
         return comment;
     }
 
+    //-- file -->
+    public int getUserId() {
+        return userId;
+    }
+
+    public int getHomeId() {
+        return homeId;
+    }
+
+
     //===============setters======================
 
     public void setId(int id) {
         this.id = id;
     }
 
-    public void setUser(int userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public void setHome(int homeId) {
-        this.homeId = homeId;
+    public void setHome(Home home) {
+        this.home = home;
     }
 
     public void setStart(Date start) {
@@ -88,11 +114,20 @@ public class Reservation implements Serializable{
         this.comment = comment;
     }
 
+    //-- file -->
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public void setHomeId(int homeId) {
+        this.homeId = homeId;
+    }
+
     @Override
     public String toString() {
         return "Reservation{" +
-                "userId=" + userId +
-                ", homeId=" + homeId +
+                "user=" + user.toString() +
+                ", home=" + home.toString() +
                 ", start=" + start +
                 ", end=" + end +
                 '}';

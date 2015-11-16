@@ -7,7 +7,7 @@ import static org.hamcrest.CoreMatchers.is;
 public class CategoryTest extends  Assert{
 
 	@Test
-	public void testCategoryAndGetName() {
+	public void testGetName() {
 		Category category = new Category("category");
 		assertThat(category.getName(), is("category"));
 	}	

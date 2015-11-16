@@ -1,5 +1,6 @@
 package com.kickstarter.db;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,15 +8,17 @@ import com.kickstarter.model.Category;
 
 public class CategoryDB {
 
-	public CategoryDB() {
+	public CategoryDB()  {
 
-		categorylist = fillList();
+		
+			categorylist = fillList();
+		
 
 	}
 
 	public List<Category> categorylist = new ArrayList<>();
 
-	private List<Category> fillList() {
+	private List<Category> fillList()  {
 		List<Category> categorylist = new ArrayList<>();
 		categorylist.add(new Category("it", 1));
 		categorylist.add(new Category("it", 1));
