@@ -10,11 +10,11 @@ import ua.com.goit.gojava7.kickstarter.storage.CategoryStorage;
 import ua.com.goit.gojava7.kickstarter.storage.QuoteStorage;
 
 public class Kickstarter {
-	private ConsoleScanner consoleScanner;
+	private ConsoleScanner consoleScanner = new ConsoleScanner();;
 
-	private CategoryPrinter categoryPrinter;
-	private ProjectPrinter projectPrinter;
-	private QuotePrinter quotePrinter;
+	private CategoryPrinter categoryPrinter = new CategoryPrinter();
+	private ProjectPrinter projectPrinter = new ProjectPrinter();
+	private QuotePrinter quotePrinter = new QuotePrinter();
 
 	private QuoteStorage quoteStorage;
 	private CategoryStorage categoryStorage;
@@ -25,12 +25,7 @@ public class Kickstarter {
 	private Project currentProject = null;
 	private Category currentCategory = null;
 
-	public Kickstarter(ConsoleScanner consoleScanner, QuotePrinter quotePrinter, ProjectPrinter projectPrinter,
-			CategoryPrinter categoryPrinter, QuoteStorage quoteStorage, CategoryStorage categoryStorage) {
-		this.consoleScanner = consoleScanner;
-		this.categoryPrinter = categoryPrinter;
-		this.projectPrinter = projectPrinter;
-		this.quotePrinter = quotePrinter;
+	public Kickstarter(QuoteStorage quoteStorage, CategoryStorage categoryStorage) {
 		this.quoteStorage = quoteStorage;
 		this.categoryStorage = categoryStorage;
 	}
@@ -48,7 +43,7 @@ public class Kickstarter {
 				} else {
 					Integer selectedProject = chooseProject(selectedCategory);
 					//Integer indexOfSelectedProject = selectedProject - 1;
-					if (selectedProject != null) {
+					if (selectedProject != 0) {
 						currentProject = currentCategory.get(selectedProject - SHIFT_ONE);
 						viewProject(selectedCategory, selectedProject);
 					} else {
@@ -66,7 +61,7 @@ public class Kickstarter {
 		System.out.println("\nChoose a category by number ('0' for exit): ");
 
 		Integer selectedCategory = consoleScanner.getInteger(ZERO, categoryStorage.size());
-		if (selectedCategory == null) {			
+		if (selectedCategory == 0) {			
 			System.out.println("See you soon!");
 			consoleScanner.close();
 			System.exit(0);

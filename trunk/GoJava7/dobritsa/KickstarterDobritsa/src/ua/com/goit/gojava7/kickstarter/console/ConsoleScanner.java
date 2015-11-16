@@ -14,25 +14,23 @@ public class ConsoleScanner {
 		sc = new Scanner(inputStream);
 	}
 
-	public Integer getInteger(int start, int end) {
-		Integer number = -1;
-		do {
+	public int getInteger(int start, int end) {
+		while (true) {
 			while (!sc.hasNextInt()) {
-				System.out.println("You should type a number from " + start + " to " + end + ": ");
+				System.out.println("You should type a NUMBER from " + start + " to " + end + ": ");
 				sc.next();
 			}
-			number = sc.nextInt();
-			if (number > end | number < 0) {
+			int number = sc.nextInt();
+			if ((number < start | number > end) & number != 0) {
 				if (end == 0)
 					System.out.println("Type " + end + " to choose another project:");
 				else
-					System.out.println("You should type a number from " + start + " to " + end + ": ");
-				number = -1;
-			} else if (number == 0) {
-				return null;
+					System.out.println("You should type a number FROM " + start + " TO " + end + ": ");
+				continue;
+			} else  {
+				return number;
 			}
-		} while (number == -1);
-		return number;
+		} 
 	}
 
 	public String getBackOrZero() {
