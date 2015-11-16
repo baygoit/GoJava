@@ -22,7 +22,7 @@ public class ProjectFileDAOTest {
     @Before
     public void setUp(){
         Class<Project> persistentClass = Project.class;
-        fs = new ProjectFileDAO("target/generated-test-sources/storages/file/%name%.txt".replace("%name%", persistentClass.getSimpleName()));
+        fs = new ProjectFileDAO("src/test/resources/storages/file/%name%.txt".replace("%name%", persistentClass.getSimpleName()));
         
         list = new Memory().getProjects();
         
