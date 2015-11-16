@@ -25,6 +25,7 @@ import ua.com.goit.gojava7.kickstarter.console.ProjectPrinter;
 import ua.com.goit.gojava7.kickstarter.console.QuotePrinter;
 import ua.com.goit.gojava7.kickstarter.domain.Category;
 import ua.com.goit.gojava7.kickstarter.domain.Project;
+import ua.com.goit.gojava7.kickstarter.domain.Quote;
 import ua.com.goit.gojava7.kickstarter.storage.CategoryStorage;
 import ua.com.goit.gojava7.kickstarter.storage.QuoteStorage;
 
@@ -65,14 +66,7 @@ public class KickstarterTest {
 	public void testChooseCategoryEntered0() {
 		PrintStream printSteam = mock(PrintStream.class);
 		System.setOut(printSteam);
-		
-		//List<Category> categories = new ArrayList<Category>();		
-		//categories.add(new Category("Category1"));
-		////categories.add(new Category("Category2"));
-		//categoryStorage.setAll(categories);
-		
-		//when(categoryStorage.getAll()).thenReturn(categories);
-		//when(categoryStorage.size()).thenReturn(1);
+	
 		when(consoleScanner.getInteger(0, 0)).thenReturn(null);
 		kickstarter.chooseCategory();
 		
@@ -85,5 +79,5 @@ public class KickstarterTest {
 		//verify(categoryPrinter).printCategories(anyListOf(Category.class));
 		//verify(printSteam).println(contains("soon"));
 	}
-	
+
 }

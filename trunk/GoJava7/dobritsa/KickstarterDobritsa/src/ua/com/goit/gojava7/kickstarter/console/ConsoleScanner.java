@@ -1,9 +1,18 @@
 package ua.com.goit.gojava7.kickstarter.console;
 
+import java.io.InputStream;
 import java.util.Scanner;
 
 public class ConsoleScanner {
 	private Scanner sc = new Scanner(System.in);
+	
+	public ConsoleScanner() {
+		sc = new Scanner(System.in);
+	}
+	
+	public ConsoleScanner(InputStream inputStream) {
+		sc = new Scanner(inputStream);
+	}
 
 	public Integer getInteger(int start, int end) {
 		Integer number = -1;
