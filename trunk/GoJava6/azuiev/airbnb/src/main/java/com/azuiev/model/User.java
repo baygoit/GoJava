@@ -10,6 +10,8 @@ import java.util.*;
 /**
  * Created by Lera on 21.09.2015.
  */
+
+//TODO hibernate
 public class User implements Observer {
     private String name;
     private String surName;
@@ -17,6 +19,10 @@ public class User implements Observer {
     private Integer id;
     private List<UserRoles> myRoles = new LinkedList<UserRoles>();
 
+
+    public User(){
+
+    }
      private User(String name, String surName, String email) {
         this.name = name;
         this.surName = surName;
