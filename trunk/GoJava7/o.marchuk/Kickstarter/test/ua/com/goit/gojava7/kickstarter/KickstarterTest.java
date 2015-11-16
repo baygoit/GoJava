@@ -34,6 +34,13 @@ public class KickstarterTest {
 	private Kickstarter kickstarter = new Kickstarter(consolePrinter, consoleScanner, quoteStorage, categoryStorage);
 
 	@Test
+	public void testShutdown() {
+		kickstarter.shutdown();
+
+		verify(consoleScanner).close();
+	}
+
+	@Test
 	public void testShowCategoriesMenuEntered0SaysBye() {
 		kickstarter.showCategoriesMenu();
 
