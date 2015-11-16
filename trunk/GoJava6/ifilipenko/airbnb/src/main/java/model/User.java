@@ -26,25 +26,20 @@ public class User implements Observer, Serializable {
     @Column(name = "firstname")
     private String name;
 
-    @Transient
     @Column(name = "lastname")
     private String lastName;
 
-    @Transient
     @Enumerated(EnumType.STRING)
     @Column(name = "gender")
     private GenderType gender;
 
-    @Transient
     @Type(type="timestamp")
     @Column(name = "birthdate")
     private Date birthDate;
 
-    @Transient
     @Column(name = "emailaddress")
     private String email;
 
-    @Transient
     @Column(name = "city")
     private CityList cityEnum;
 

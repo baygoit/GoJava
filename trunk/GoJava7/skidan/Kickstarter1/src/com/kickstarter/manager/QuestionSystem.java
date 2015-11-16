@@ -1,25 +1,30 @@
 package com.kickstarter.manager;
 
-import com.kickstarter.app.Kickstarter;
+import com.kickstarter.app.KRun;
 import com.kickstarter.model.Project;
 import com.kickstarter.util.ConsolePrintView;
 import com.kickstarter.util.UserConsoleInputReader;
 
 public class QuestionSystem {
+	KRun kr = new KRun();
 	ConsolePrintView consolePrintView = new ConsolePrintView();
 	ProjectManager prm = new ProjectManager();
 
-	public void addQuestion(int projectNumber, int categoryNumber, String categoryTitle) {
+	public void provideNewQuestion(int projectNumber, int categoryNumber, String categoryTitle) {
 		String newQuestion = reciveQuestion();
-		Project p = prm.getProject(categoryTitle, projectNumber);
-		String questionSection = p.getQuestionSection();
-		p.setQuestionSection(questionSection+= newQuestion + "\n");
+		addNewQuestion(newQuestion, projectNumber, categoryTitle);
 		consolePrintView.singleCategorysProjectsView(prm.getProject(categoryTitle, projectNumber));
-		Kickstarter.projectSelector(categoryNumber, categoryTitle);
+		kr.projectSelector(categoryNumber, categoryTitle);
 	}
 
 	public String reciveQuestion() {
 		consolePrintView.InputQuestionInfo();
 		return UserConsoleInputReader.readStringInput();
+	}
+
+	public void addNewQuestion(String newQuestion, int projectNumber, String categoryTitle) {
+		Project p = prm.getProject(categoryTitle, projectNumber);
+		String questionSection = p.getQuestionSection();
+		p.setQuestionSection(questionSection += newQuestion + "\n");
 	}
 }

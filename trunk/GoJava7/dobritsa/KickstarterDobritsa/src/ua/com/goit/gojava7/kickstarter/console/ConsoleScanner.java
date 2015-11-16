@@ -9,6 +9,7 @@ public class ConsoleScanner {
 		Integer number = -1;
 		do {
 			while (!sc.hasNextInt()) {
+				System.out.println("You should type a number from " + start + " to " + end + ": ");
 				sc.next();
 			}
 			number = sc.nextInt();
@@ -26,7 +27,7 @@ public class ConsoleScanner {
 	}
 
 	public String getBackOrZero() {
-		String text = "-1";
+		String text;
 		while (true) {
 			System.out.println("\nType:" + "\nb: to back this project" + "\n0: to choose another project");
 			text = sc.next();
@@ -38,11 +39,13 @@ public class ConsoleScanner {
 	}
 	
 	public String getName() {
+		//TODO check
 		String text = sc.next();
 		return text;
 	}
 	
 	public String getCreditCard() {
+		//TODO check
 		String text = sc.next();
 		return text;
 	}

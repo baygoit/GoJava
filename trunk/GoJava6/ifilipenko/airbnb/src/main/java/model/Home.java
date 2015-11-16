@@ -4,6 +4,7 @@ import common.Observer;
 import common.Subject;
 import model.enums.CityList;
 import model.enums.HomeType;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -11,10 +12,25 @@ import java.io.Serializable;
 @Entity
 @Table(name = "homes")
 public class Home implements Serializable, Subject {
+    @Id
+    @GeneratedValue(generator = "increment")
+    @GenericGenerator(name = "increment", strategy = "increment")
+    @Column(name = "id")
     private int id;
+
+    @ManyToOne(cascade=CascadeType.ALL)
+    @JoinColumn(name = "host_id")
     private User host;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "city")
     private CityList city;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "hometype")
     private HomeType homeType;
+
+    @Transient
     private String hostEmail;
 
     public Home(){}
@@ -25,32 +41,23 @@ public class Home implements Serializable, Subject {
     }
 
     //===============getters======================
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "id")
+
     public int getId() {
         return id;
     }
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "city")
     public CityList getCity() {
         return city;
     }
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "hometype")
     public HomeType getHomeType() {
         return homeType;
     }
 
-    @ManyToOne(cascade=CascadeType.ALL)
-    @Column(name = "user_id")
     public User getHost() {
         return host;
     }
 
-    @Transient
     public String getHostByEmail() {
         return hostEmail;
     }
