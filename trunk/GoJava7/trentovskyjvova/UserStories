@@ -23,3 +23,6 @@ AC 2: From the project description -> I choose 0 -> I see the list of projects
 As a guest, I want to invest in a project I liked to support him.
 AC: While in the project description -> I see a menu item to invest in the project -> I choose it -> I see a request for entering a name, card number and amount -> I enter them -> I pass to the project description -> I see that info about the number of donations has changed
 
+7. Question
+As a guest, I want to ask a question to the project owner
+AC: While a particular project -> I see a menu item to ask a question -> I choose it -> I see a request to enter the issue -> I enter a question, send -> I see a description of the project with my question.

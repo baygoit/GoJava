@@ -23,7 +23,7 @@ public abstract class Storage<T> {
 	public T get(int index) {
 		if(data.size() == 0) {
 			System.out.println("Nothing to show");
-			System.exit(0);
+			//System.exit(0);
 			return null;
 		}		
 		return data.get(index);
@@ -33,17 +33,8 @@ public abstract class Storage<T> {
 		data.add(element);
 	}
 
-	public void remove(T element) {
-		data.remove(element);
-	}
-	
 	public int size() {
 		return data.size();
-	}
-	
-	public int indexOf(T element) {
-		return data.indexOf(element);
-		
 	}
 	
 }
