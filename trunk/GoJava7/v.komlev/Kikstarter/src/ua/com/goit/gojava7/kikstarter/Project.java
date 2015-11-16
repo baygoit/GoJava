@@ -77,4 +77,8 @@ public class Project {
 		this.projectDaysToEnd = projectDaysToEnd;
 	}
 
+	public void setProjectSumFromUser(int enteredAmount) {
+		projectAmountCollected += enteredAmount;
+	}
+
 }
