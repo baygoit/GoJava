@@ -4,32 +4,38 @@ import java.util.Iterator;
 import java.util.Set;
 
 import ua.com.goit.gojava7.kickstarter.model.Category;
+import ua.com.goit.gojava7.kickstarter.model.Faq;
 import ua.com.goit.gojava7.kickstarter.model.Payment;
 import ua.com.goit.gojava7.kickstarter.model.Project;
-import ua.com.goit.gojava7.kickstarter.storage.CategoriesStorage;
-import ua.com.goit.gojava7.kickstarter.storage.PaymentStorage;
-import ua.com.goit.gojava7.kickstarter.storage.QuotesStorage;
+import ua.com.goit.gojava7.kickstarter.storage_in_memory.CategoriesStorage;
+import ua.com.goit.gojava7.kickstarter.storage_in_memory.FaqStorage;
+import ua.com.goit.gojava7.kickstarter.storage_in_memory.PaymentStorage;
+import ua.com.goit.gojava7.kickstarter.storage_in_memory.ProjectsStorage;
+import ua.com.goit.gojava7.kickstarter.storage_in_memory.QuotesStorage;
 import ua.com.goit.gojava7.kickstarter.view.ConsolePrinter;
 import ua.com.goit.gojava7.kickstarter.view.ConsoleScanner;
 
-public class Kickstarter {
+public class KickstarterForMemory {
 
 	private static final String SEPARATOR = "**********************************************************************";
 	private static final String MOVE_TO_THE_NEXT_LINE = "\n";
+	
 	private ConsolePrinter consolePrinter;
 	private ConsoleScanner consoleScanner;
 	private CategoriesStorage categoriesStorage;
+	private ProjectsStorage projectsStorage;
 	private QuotesStorage quotesStorage;
 	private PaymentStorage paymentStorage;
+	private FaqStorage faqStorage;
 
-	public Kickstarter(ConsoleScanner consoleScanner, ConsolePrinter consolePrinter,
-			CategoriesStorage categoriesStorage, QuotesStorage quotesStorage, PaymentStorage paymentStorage) {
-		
-		this.consoleScanner = consoleScanner;
-		this.consolePrinter = consolePrinter;
-		this.categoriesStorage = categoriesStorage;
-		this.quotesStorage = quotesStorage;
-		this.paymentStorage = paymentStorage;
+	public KickstarterForMemory() {
+		this.consoleScanner = new ConsoleScanner();
+		this.consolePrinter = new ConsolePrinter();
+		this.categoriesStorage = new CategoriesStorage();
+		this.quotesStorage = new QuotesStorage();
+		this.paymentStorage = new PaymentStorage();
+		this.projectsStorage = new ProjectsStorage(categoriesStorage);
+		this.faqStorage = new FaqStorage();
 	}
 
 	public void start() {
@@ -38,7 +44,7 @@ public class Kickstarter {
 	}
 	
 	protected void selectCategory() {
-		Set<Category> AllCategories = categoriesStorage.getAllCategories();
+		Set<Category> AllCategories = categoriesStorage.getAll();
 		int amountOfCategories = AllCategories.size();
 		
 		Category selectedCategory = null;
@@ -74,7 +80,7 @@ public class Kickstarter {
 	}
 
 	protected void selectProjects(Category category) {
-		Set<Project> AllProjectsFromCategory = category.getAllProjectsFromCategory();
+		Set<Project> AllProjectsFromCategory = projectsStorage.getAllProjectsFromCategory(category);
 		int amountOfPrjects = AllProjectsFromCategory.size();
 		
 		int numberOfSelectedProject;
@@ -157,22 +163,27 @@ public class Kickstarter {
 		chooseMenuInProject.
 			append("Please select (0 for back to projects): ").
 			append(MOVE_TO_THE_NEXT_LINE).
-			append("1 : donate money").
+			append("1 : Donate money").
 			append(MOVE_TO_THE_NEXT_LINE).
 			append("2 : Ask a question");
 		
 		int choseNumber;
 		do {
-			consolePrinter.print(chooseMenuInProject.toString());
-			choseNumber = consoleScanner.getInt();
-			consolePrinter.print(SEPARATOR);
 			
+			consolePrinter.print(chooseMenuInProject.toString());
+			consolePrinter.print(SEPARATOR);
+			choseNumber = consoleScanner.getInt();
+
 			if (choseNumber == 1) {
+				consolePrinter.print("You selected 1. Donate money on project ");
+				consolePrinter.print(SEPARATOR);
 				donateMoneyForProject(selectedProject);
 				consolePrinter.print(SEPARATOR);
-			}
+			} 
 			
 			if (choseNumber == 2) {
+				consolePrinter.print("You selected 2. Ask a question ");
+				consolePrinter.print(SEPARATOR);
 				askQuestion(selectedProject);
 			}
 			
@@ -183,58 +194,31 @@ public class Kickstarter {
 	}
 	
 	protected void donateMoneyForProject(Project project) {
-		String userName = getUserName();
-		int cardNumber = getCreditCardNumber();
-		int donatingSum = getPledgeAmount();
+		String userName = consoleScanner.parseUserName();
+		long cardNumber = consoleScanner.parseCreditCardNumber();
+		int donatingSum = consoleScanner.parseDonatingAmount();
 		
 		consolePrinter.print(SEPARATOR);
-		project.addToCurrentAmountOfMoney(donatingSum);
-		System.out.print(consolePrinter.getBriefProjectInfo(project));
 		
-		Payment payment = new Payment(userName, donatingSum, cardNumber);
-		paymentStorage.add(payment);	
+		Payment payment = new Payment(userName, cardNumber, donatingSum);
+		project.addMoneyToProject(payment.getDonatingSum());
+		paymentStorage.add(payment);
+		consolePrinter.printBriefProjectInfo(project);	
 	}
 	
 	protected void askQuestion(Project project) {
-		String question = getAskingQuestion();
+		String question = consoleScanner.parseAskingQuestion();
+		Faq faq = new Faq(question);
+		faq.setProject(project);
+		faqStorage.add(faq);
+		
 		consolePrinter.print(SEPARATOR);
-		project.addQuestion(question);
-		consolePrinter.printFullProjectInfo(project);
-	}
-	
-	protected int getPledgeAmount() {
-		int pledgeAmount;
-		do {
-			consolePrinter.print("Please enter donateing sum : ");
-			pledgeAmount = consoleScanner.getInt();
-		} while (pledgeAmount == Integer.MAX_VALUE);
 		
-		return pledgeAmount;
+		consolePrinter.printBriefProjectInfo(project);
+		consolePrinter.printFAQs(faqStorage.getAll());
 	}
 	
-	protected int getCreditCardNumber() {
-		int creditCardNumber;
-		do {
-			consolePrinter.print("Please enter you card number : ");
-			creditCardNumber = consoleScanner.getInt();
-		} while (creditCardNumber == Integer.MAX_VALUE);
-		
-		return creditCardNumber;
-	}
-	
-	protected String getUserName() {
-		consolePrinter.print("Please enter you name :");
-		String userName = consoleScanner.getString();
-		return userName;
-	}
-	
-	protected String getAskingQuestion() {
-		consolePrinter.print("Please your question :");
-		String question = consoleScanner.getString();
-		return question;
-	}
-	
-	protected void shutdown() {
+	protected void stop() {
 		consoleScanner.close();
 	}
 }
