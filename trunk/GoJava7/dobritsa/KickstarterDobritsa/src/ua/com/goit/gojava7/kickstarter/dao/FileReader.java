@@ -37,7 +37,7 @@ public abstract class FileReader<T> {
 			}
 		}
 		if (data.isEmpty()) {
-			throw new IllegalStateException("There is not quotes in file");
+			throw new IllegalStateException("There are not dates in file");
 		}
 		return data;
 	}
