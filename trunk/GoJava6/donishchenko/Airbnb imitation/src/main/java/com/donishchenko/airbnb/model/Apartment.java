@@ -1,43 +1,63 @@
 package com.donishchenko.airbnb.model;
 
-import com.donishchenko.airbnb.validation.Validator;
 import com.google.common.base.Joiner;
+import org.hibernate.annotations.GenericGenerator;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "apartment")
 public class Apartment {
-    private int id;
-    private int hostId;
-    private String city;
+    @Id
+    @GeneratedValue(generator = "increment")
+    @GenericGenerator(name = "increment", strategy = "increment")
+    @Column(name = "id")
+    private Integer id;
+
+    @ManyToOne
+    @JoinColumn(name = "hostId")
+    private User host;
+
+    @ManyToOne
+    @JoinColumn(name = "cityId")
+    private City city;
+
+    @Column(name = "type")
     private ApartmentType apartmentType;
+
+    @Column(name = "active")
     private boolean active;
 
-    public Apartment(int hostId, String city, ApartmentType apartmentType, boolean active) {
-        this.hostId = hostId;
+    public Apartment() {}
+
+    public Apartment(User host, City city, ApartmentType apartmentType, boolean active) {
+        this.host = host;
         this.city = city;
         this.apartmentType = apartmentType;
         this.active = active;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public int getHostId() {
-        return hostId;
+    public User getHost() {
+        return host;
     }
 
-    public void setHostId(int hostId) {
-        this.hostId = hostId;
+    public void setHost(User host) {
+        this.host = host;
     }
 
-    public String getCity() {
+    public City getCity() {
         return city;
     }
 
-    public void setCity(String city) {
+    public void setCity(City city) {
         this.city = city;
     }
 
@@ -58,12 +78,23 @@ public class Apartment {
     }
 
     @Override
-    public String toString() {
-        return Joiner.on("").join("Apartment{id='", id, "', hostId='", hostId, "', city='", city,
-                "', type='", apartmentType, "', active='", active, "'}");
+    public boolean equals(Object obj) {
+        if (obj == this) return true;
+        if (obj == null) return false;
+        if (!(obj instanceof Apartment)) return false;
+
+        Apartment other = (Apartment) obj;
+
+        return id.equals(other.id) &&
+                host.equals(other.host) &&
+                city.equals(other.city) &&
+                apartmentType.equals(other.apartmentType) &&
+                active == other.active;
     }
 
-    public boolean validate() {
-        return Validator.validateCity(city);
+    @Override
+    public String toString() {
+        return Joiner.on("").join("Apartment{id='", id, "', host='", host, "', city='", city,
+                "', type='", apartmentType, "', active='", active, "'}");
     }
 }

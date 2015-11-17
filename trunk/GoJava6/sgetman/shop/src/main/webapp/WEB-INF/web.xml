@@ -8,6 +8,11 @@
         <res-auth>Container</res-auth>
     </resource-ref>-->
 
+    <!--<context-param>
+        <param-name>log4jConfiguration</param-name>
+        <param-value>log4j2.xml</param-value>
+    </context-param>-->
+
     <context-param>
         <description>The relative path to product images</description>
         <param-name>productImagePath</param-name>
@@ -26,9 +31,21 @@
         <param-value>3.00</param-value>
     </context-param>
 
+    <context-param>
+        <description>User login</description>
+        <param-name>user</param-name>
+        <param-value>admin</param-value>
+    </context-param>
+
+    <context-param>
+        <description>User password</description>
+        <param-name>pass</param-name>
+        <param-value>admin</param-value>
+    </context-param>
+
     <session-config>
         <session-timeout>
-            1
+            30
         </session-timeout>
     </session-config>
 
@@ -61,7 +78,6 @@
 
     <filter>
         <filter-name>SessionTimeoutFilter</filter-name>
-        <display-name>SessionTimeoutFilter</display-name>
         <filter-class>com.gojava6.filter.SessionTimeoutFilter</filter-class>
     </filter>
 
@@ -69,6 +85,5 @@
        <filter-name>SessionTimeoutFilter</filter-name>
        <servlet-name>ControllerServlet</servlet-name>
     </filter-mapping>
-
 
 </web-app>

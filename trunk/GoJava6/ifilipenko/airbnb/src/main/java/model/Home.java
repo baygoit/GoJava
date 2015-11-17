@@ -1,27 +1,49 @@
 package model;
 
-import observer.Observer;
-import observer.Subject;
+import common.Observer;
+import common.Subject;
+import model.enums.CityList;
+import model.enums.HomeType;
+import org.hibernate.annotations.GenericGenerator;
 
-public class Home implements Subject {
-    private int hostId;
+import javax.persistence.*;
+import java.io.Serializable;
+
+@Entity
+@Table(name = "homes")
+public class Home implements Serializable, Subject {
+    @Id
+    @GeneratedValue(generator = "increment")
+    @GenericGenerator(name = "increment", strategy = "increment")
+    @Column(name = "id")
+    private int id;
+
+    @ManyToOne(cascade=CascadeType.ALL)
+    @JoinColumn(name = "host_id")
+    private User host;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "city")
     private CityList city;
-    private HomeType homeType;
-    private boolean active;
 
-    public Home(){};
+    @Enumerated(EnumType.STRING)
+    @Column(name = "hometype")
+    private HomeType homeType;
+
+    @Transient
+    private String hostEmail;
+
+    public Home(){}
 
     public Home(CityList city, HomeType homeType) {
         this.city = city;
         this.homeType = homeType;
-        this.active = true;
     }
 
-    public Home(int hostId, CityList city, HomeType homeType) {
-        this.hostId = hostId;
-        this.city = city;
-        this.homeType = homeType;
-        this.active = true;
+    //===============getters======================
+
+    public int getId() {
+        return id;
     }
 
     public CityList getCity() {
@@ -32,8 +54,22 @@ public class Home implements Subject {
         return homeType;
     }
 
-    public int getHostCode() {
-        return hostId;
+    public User getHost() {
+        return host;
+    }
+
+    public String getHostByEmail() {
+        return hostEmail;
+    }
+
+    //===============setters======================
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setHost(User host) {
+        this.host = host;
     }
 
     public void setCity(CityList city) {
@@ -44,23 +80,15 @@ public class Home implements Subject {
         this.homeType = homeType;
     }
 
-    public void setHost(int hostId) {
-        this.hostId = hostId;
-    }
-
-    public boolean isActive() {
-        return active;
-    }
-
-    public void setActive(boolean active) {
-        this.active = active;
+    public void setHostByEmail(String hostEmail) {
+        this.hostEmail = hostEmail;
     }
 
 
     @Override
     public String toString() {
         return "Home{" +
-                "hostID=" + hostId +
+                "hostEmail=" + hostEmail +
                 ", city=" + city +
                 ", homeType=" + homeType +
                 '}';

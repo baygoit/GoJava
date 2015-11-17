@@ -1,10 +1,10 @@
 package com.azuiev;
 
-import com.azuiev.dao.DaoDB;
-import com.azuiev.dao.DaoUser;
+import com.azuiev.dao.DBDao;
+import com.azuiev.dao.UserDao;
+import com.azuiev.db.AirbnbDBDao;
 import com.azuiev.enums.ApartType;
 import com.azuiev.model.Apartment;
-import com.azuiev.db.AirbnbDB;
 import com.azuiev.model.Organization;
 import com.azuiev.model.User;
 import org.apache.log4j.Logger;
@@ -26,19 +26,19 @@ public class AirBnB {
             log.error("Organization creating failed");
         }
 
-        DaoDB db = new AirbnbDB();
-        DaoUser dao = new DaoUser(db.getConnection());
+        DBDao db = new AirbnbDBDao();
+        UserDao dao = new UserDao(db.getConnection());
         User user = null;
         try {
-            user = dao.getById(1);
+            user = dao.getById(new Long(1));
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
         sportLife.register(user);
 
-        Apartment book1 = user.registerBook("Kiev", "Lenina 1", ApartType.APARTAMENT);
-        Apartment book2 = user.registerBook("Moskva", "Pushkina 1", ApartType.PLACE);
+//        Apartment book1 = user.registerBook("Kiev", "Lenina 1", ApartType.APARTAMENT);
+//        Apartment book2 = user.registerBook("Moskva", "Pushkina 1", ApartType.PLACE);
 
         System.out.println(user);
         ApartType t = ApartType.values()[0];

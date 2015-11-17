@@ -1,15 +1,28 @@
-UserStory 1. Как пользователь, я хочу видеть при открытии сайта название и обращение одного из проектов чтобы я заинтересовался.
-Сценарий: Захожу на сайт и вижу баннер с названием проекта (Например, «Очиститель воздуха») и обращением (Например, «Помогите сделать мир чище»).
+1. Quote 
+As a Guest, I want to see one of predefined quotes when I go into the app, so I am motivated and not bored.
+AC: I go into the app several times -> I see different quotes.
 
-UserStory 2. Как пользователь, я хочу видеть список категорий проектов, для ускорения поиска проекта.
-Сценарий: Захожу на сайт, вижу список категорий, выбираю нужную и вижу надпись со своим новым местоположением на сайте.
+2. Categories list
+As a Guest, I want to see categories list, to view projects of a definite topic.
+AC: I go into the app -> I see a categories list.
 
-UserStory 3. Как пользователь, я хочу видеть основную информацию о проектах в выбранной категории, чтобы лучше сориентироваться среди проектов.
-Сценарий: Захожу на сайт и вижу список категорий, выбираю любую и выводится список проектов, и для каждого вижу название, процент собранных денег, дней осталось, суму собранных денег.
+3. Project list
+As a Guest, I want to see the list of projects of a certain category, in order to understand what I want to invest.
+AC: I go into the app -> I choose any category -> I see a project list, each of which contains: the name, the percentage of the collected money, days to go, the amount of money collected.
 
-UserStory 4. Как пользователь, я хочу посмотреть всю информацию о проекте, чтобы решить вкладывать в него деньги или нет.
-Сценарий: Находясь в списке проектов, выбираю нужный, вижу подробное описание проекта (все что в списке + обращение, описание, владелец проекта, сколько всего денег нужно, ссылки на видео и фото).
+4. Project details
+As a Guest, I want to explore a particular project to decide to invest money in it or not.
+AC: While in the project list -> I choose any project -> I see a detailed description of the project (everything on the list as well as description, owner of the project, how much money you need, links to videos and photos)
 
-UserStory 5. Как пользователь, я хочу возвращаться в предыдущие местоположения, чтобы просматривать разные проекты в разных категориях.
-Сценарий 1: Находясь в списке проектов, выбираю «go back», и открывается стартовая страница со списком категорий.
-Сценарий 2: Находясь в описании проекта, выбираю «go back», и выводится список проектов.
+5. Navigation 
+As a Guest I, want to be able to view different projects in different categories without restarting app.
+AC 1: While in the project list -> I choose 0 -> I see the front page with a list of categories.
+AC 2: From the project description -> I choose 0 -> I see the list of projects
+
+6. Invest in the project
+As a guest, I want to invest in a project I liked to support him.
+AC: While in the project description -> I see a menu item to invest in the project -> I choose it -> I see a request for entering a name, card number and amount -> I enter them -> I pass to the project description -> I see that info about the number of donations has changed
+
+7. Question
+As a guest, I want to ask a question to the project owner
+AC: While a particular project -> I see a menu item to ask a question -> I choose it -> I see a request to enter the issue -> I enter a question, send -> I see a description of the project with my question.

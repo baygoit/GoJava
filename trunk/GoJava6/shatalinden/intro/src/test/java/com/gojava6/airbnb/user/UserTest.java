@@ -18,7 +18,7 @@ public class UserTest {
 
     @Before
     public void setUp() throws Exception {
-        user = new User("Denis", "Shatalin", "shatalinden@gmail.com", UserType.CLIENT);
+        user = new User("Denis", "Shatalin", "shatalinden@gmail.com",  0, 0, "password");
     }
 
     @Test

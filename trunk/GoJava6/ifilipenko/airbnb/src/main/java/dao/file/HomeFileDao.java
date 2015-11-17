@@ -1,8 +1,8 @@
 package dao.file;
 
-import model.CityList;
+import model.enums.CityList;
 import model.Home;
-import model.HomeType;
+import model.enums.HomeType;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -12,7 +12,7 @@ public class HomeFileDao {
     private final FileAccess fileAccess;
 
     public HomeFileDao() {
-        String file = this.getClass().getResource("/home").getPath();
+        String file = this.getClass().getResource("/files/home").getPath();
         this.fileAccess = new FileAccess(file);
     }
 
@@ -22,7 +22,7 @@ public class HomeFileDao {
 
     public String serialize(Home home) {
         StringBuilder sb = new StringBuilder();
-        sb.append(home.getHostCode())
+        sb.append(home.getHostByEmail())
                 .append(" | ")
                 .append(home.getCity())
                 .append(" | ")
@@ -39,7 +39,7 @@ public class HomeFileDao {
             params[i] = params[i].trim();
         }
 
-        home.setHost(Integer.parseInt(params[0]));
+        home.setHostByEmail(params[0]);
         home.setCity(CityList.valueOf(params[1]));
         home.setHomeType(HomeType.valueOf(params[2]));
 
@@ -63,7 +63,7 @@ public class HomeFileDao {
 
     public void create(Home home) throws IOException {
         List<String> homes = fileAccess.readAllLines();
-        homes.add(serialize(home));
-        fileAccess.save(String.join("\n", homes));
+        homes.add(this.serialize(home));
+        fileAccess.writeAllLines(String.join("\n", homes));
     }
 }

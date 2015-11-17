@@ -1,7 +1,7 @@
 package dao.file;
 
-import model.CityList;
-import model.GenderType;
+import model.enums.CityList;
+import model.enums.GenderType;
 import model.User;
 
 import java.io.IOException;
@@ -14,7 +14,7 @@ public class UserFileDao {
     private final FileAccess fileAccess;
 
     public UserFileDao() {
-        String file = this.getClass().getResource("/users").getPath();
+        String file = this.getClass().getResource("/files/users").getPath();
         this.fileAccess = new FileAccess(file);
     }
 
@@ -25,12 +25,12 @@ public class UserFileDao {
     public void create(User newUser) throws IOException {
         List<String> users = fileAccess.readAllLines();
         users.add((serialize(newUser)));
-        fileAccess.save(String.join("\n", users));
+        fileAccess.writeAllLines(String.join("\n", users));
     }
 
     public String serialize(User user) {
         StringBuilder builder = new StringBuilder();
-        builder.append(user.getExternalCode())
+        builder.append(user.getId())
                 .append(" | ")
                 .append(user.getName())
                 .append(" | ")
@@ -42,7 +42,7 @@ public class UserFileDao {
                 .append(" | ")
                 .append(user.getEmail())
                 .append(" | ")
-                .append(user.getCity());
+                .append(user.getCityEnum());
 
         return builder.toString();
     }
@@ -64,7 +64,7 @@ public class UserFileDao {
 
     public User readByCode(int code) {
         for (User user : readAll()) {
-            if (user.getExternalCode() == code) {
+            if (user.getId() == code) {
                 return user;
             }
         }
@@ -78,15 +78,23 @@ public class UserFileDao {
             params[j] = params[j].trim();
         }
 
-        user.setExternalCode(Integer.parseInt(params[0]));
+        user.setId(Integer.parseInt(params[0]));
         user.setName(params[1]);
         user.setLastName(params[2]);
         user.setGender(params[3].equals("FEMALE") ? GenderType.FEMALE : GenderType.MALE);
         user.setBirthDate(new SimpleDateFormat("dd/MM/yyyy").parse(params[4]));
         user.setEmail(params[5]);
-        user.setCity(CityList.valueOf(params[6]));
+        user.setCityEnum(CityList.valueOf(params[6]));
 
         return user;
     }
 
+    public User readByEmail(String email) {
+        for (User user : readAll()) {
+            if (user.getEmail().equalsIgnoreCase(email)) {
+                return user;
+            }
+        }
+        return null;
+    }
 }

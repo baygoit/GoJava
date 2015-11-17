@@ -2,8 +2,9 @@ package com.donishchenko.airbnb;
 
 import com.donishchenko.airbnb.model.Apartment;
 import com.donishchenko.airbnb.model.ApartmentType;
+import com.donishchenko.airbnb.model.City;
 import com.donishchenko.airbnb.model.User;
-import com.donishchenko.airbnb.services.RegistrationService;
+import com.donishchenko.airbnb.services.UserService;
 import com.google.common.base.Joiner;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -15,33 +16,33 @@ import java.util.List;
 public class SortOfHomeController {
     public static final Logger log = LogManager.getLogger(SortOfHomeController.class.getName());
 
-    private RegistrationService registrationService = new RegistrationService();
+    private UserService userService = new UserService();
 
     public void registerUser(String name, String surname, String email, boolean isHost) {
-        registrationService.register(name, surname, email, isHost);
+//        userService.register(name, surname, email, isHost);
     }
 
     public void deleteUser(int id) {
-        registrationService.deleteUser(id);
+        userService.deleteUser(id);
     }
 
     public void deleteUser(User user) {
-        registrationService.deleteUser(user.getId());
+        userService.deleteUser(user.getId());
     }
 
     public List<User> getAllUsers() {
-        return registrationService.getAllUsers();
+        return userService.getAllUsers();
     }
 
     public List<User> getAllClients() {
-        return registrationService.getAllClients();
+        return userService.getAllClients();
     }
 
     public List<User> getAllHosts() {
-        return registrationService.getAllHosts();
+        return userService.getAllHosts();
     }
 
-    public int createApartment(int hostId, String city, ApartmentType type, boolean active) {
+    public int createApartment(int hostId, City city, ApartmentType type, boolean active) {
         if (hostId < 1) {
             return -1;
         }
@@ -51,12 +52,12 @@ public class SortOfHomeController {
             return -1;
         }
 
-        Apartment apartment = new Apartment(existingHost.getId(), city, type, active);
-        if (apartment.validate()) {
-            checkUniqueCity(apartment.getCity());
-//            apartmentDao.save(apartment);
-            return apartment.getId();
-        }
+        Apartment apartment = new Apartment(existingHost, city, type, active);
+//        if (apartment.validate()) {
+//            checkUniqueCity(apartment.getCity());
+////            apartmentDao.save(apartment);
+//            return apartment.getId();
+//        }
 
         return -1;
     }

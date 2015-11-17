@@ -2,33 +2,52 @@ package dao.file;
 
 import model.Reservation;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 public class ReservationFileDao {
-    private List<Reservation> reservations = new ArrayList<>();
-    private File file = new File(this.getClass().getResource("/reservation").getFile());
+    private FileAccess fileAccess;
 
-    public void create(Reservation res){
-        reservations.add(res);
-        try (
-                BufferedWriter writer = new BufferedWriter(new FileWriter(file))
-        ) {
-            for (Reservation reservation : reservations) {
-                writer.write(reservation.getUser() + " | ");
-                writer.write(reservation.getHome() + " | ");
-                writer.write(reservation.getStart() + " | ");
-                writer.write(reservation.getEnd() + "\n");
-            }
-        } catch (IOException ex) {
-            System.out.println("Cannot perform output" + ex);
-        }
+    public ReservationFileDao() {
+        String path = this.getClass().getResource("/files/reservation").getPath();
+        this.fileAccess = new FileAccess(path);
+    }
+
+    public ReservationFileDao(FileAccess fileAccess) {
+        this.fileAccess = fileAccess;
     }
 
 
+    public void create(Reservation res) {
 
+    }
+
+    public Reservation read(String data) throws ParseException {
+        Reservation res = new Reservation();
+        String[] params = data.split("\\|");
+
+        for (int i = 0; i < params.length; i++) {
+            params[i] = params[i].trim();
+        }
+
+        res.setUserId(Integer.parseInt(params[0]));
+        res.setHomeId(Integer.parseInt(params[1]));
+        res.setStart(new SimpleDateFormat("dd/MM/yyyy").parse(params[2]));
+        res.setEnd(new SimpleDateFormat("dd/MM/yyyy").parse(params[3]));
+
+        return res;
+    }
+
+    public String serialize(Reservation res) {
+        StringBuilder builder = new StringBuilder();
+        builder.append(res.getUserId())
+                .append(" | ")
+                .append(res.getHomeId())
+                .append(" | ")
+                .append(new SimpleDateFormat("dd/MM/yyyy").format(res.getStart()))
+                .append(" | ")
+                .append(new SimpleDateFormat("dd/MM/yyyy").format(res.getEnd()));
+
+        return builder.toString();
+    }
 }
