@@ -36,23 +36,16 @@ public class Kickstarter {
 
 	public void run() {
 		quotePrinter.printRandomQuote(quoteStorage);
-		while (true) {
+		do {
 			chooseCategory();
-			while (numberOfCategory != 0) {
-				if (currentCategory.getAll().size() == 0) {
-					System.out.println("No projects in this categories.");
-					break;
-				} else {
-					chooseProject();
-					if (numberOfProject != 0) {
-						viewProject();
-					} else {
-						break;
-					}
-				}
-			}
-		}
-	}
+			do {
+				chooseProject();
+				if (numberOfProject != 0) 
+					viewProject();				
+			} while (numberOfProject != 0);
+
+		} while (numberOfCategory != 0);
+	}	
 
 	public void chooseCategory() {
 		printAboutCategories();
