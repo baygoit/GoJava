@@ -22,6 +22,33 @@ public class ConsoleReader {
 
 	}
 
+	public String getStringFromConsoel() throws IOException {
+
+		do {
+			try {
+				return reader.readLine();
+			} catch (NumberFormatException e) {
+				System.out.println("Write a string!");
+				continue;
+			}
+		} while (true);
+
+	}
+
+	public long getLongFromConsoel() throws IOException {
+
+		do {
+			String s = reader.readLine();
+			try {
+				return Long.parseLong(s);
+			} catch (NumberFormatException e) {
+				System.out.println("Write a string!");
+				continue;
+			}
+		} while (true);
+
+	}
+
 	public void closeReader() throws IOException {
 		reader.close();
 	}

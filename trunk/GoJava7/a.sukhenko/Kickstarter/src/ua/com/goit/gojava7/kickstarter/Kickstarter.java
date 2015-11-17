@@ -26,6 +26,10 @@ public class Kickstarter{
 	private  boolean loadFromFile = false;
 	private  boolean saveToFile = false;
 	public Kickstarter() {
+		
+	}
+	
+	public void init(){
 		initQuotes();
 		initCategories();
 		initProjects();
@@ -79,6 +83,7 @@ public class Kickstarter{
 	
 	public static void main(String[] args) {
 		Kickstarter kickstarter = new Kickstarter();
+		kickstarter.init();
 		User guest = new User();
 		kickstarter.getBody().generateMainPage();
 		kickstarter.generateMenu(guest).showMenu();

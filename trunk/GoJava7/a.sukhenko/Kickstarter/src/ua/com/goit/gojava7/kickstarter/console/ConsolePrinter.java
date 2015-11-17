@@ -10,14 +10,14 @@ import ua.com.goit.gojava7.kickstarter.model.Quote;
 import ua.com.goit.gojava7.kickstarter.storage.ProjectManager;
 
 public class ConsolePrinter{
-	private final String deflector = "===========================";
+	public static final String HORIZONTAL_LINE = "===========================";
 
 	public void print(String s) {
 		System.out.println(s);
 	}
 
-	public void printDeflector() {
-		System.out.println(deflector);
+	public void printHorizontalLine() {
+		System.out.println(HORIZONTAL_LINE);
 	}
 
 	public void println(Quote quote) {
@@ -47,7 +47,7 @@ public class ConsolePrinter{
 	}
 
 	public void printFullProjectInfo(Project project) {
-		printDeflector();
+		printHorizontalLine();
 		print("Project: " + project.getProjectName() + "   |  Category: "
 				+ project.getProjectCategory().getCategoryName());
 		print(project.getProjectEndTime());
@@ -66,7 +66,7 @@ public class ConsolePrinter{
 		qa.forEach((q, a) -> {
 			print("Q: " + q);
 			print("A: " + a);
-			printDeflector();
+			printHorizontalLine();
 		});
 	}
 
