@@ -15,6 +15,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import ua.com.goit.gojava7.kickstarter.domain.Category;
 import ua.com.goit.gojava7.kickstarter.domain.Project;
+import ua.com.goit.gojava7.kickstarter.domain.Question;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CategoryPrinterTest {
@@ -47,8 +48,8 @@ public class CategoryPrinterTest {
 		PrintStream printSteam = mock(PrintStream.class);
 		System.setOut(printSteam);
 		Category category = new Category("Category1");
-		List<String> questions = new ArrayList<String>();
-		questions.add("QuestionsTest");
+		List<Question> questions = new ArrayList<Question>();
+		questions.add(new Question("QuestionsTest"));
 		Project project1 = new Project("NameTest", "DescriptionTest", 1000000, 10000, 10, "HistoryTest", "LinkTest",
 				questions);
 		category.add(project1);

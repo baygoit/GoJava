@@ -33,11 +33,11 @@ public class ConsoleScanner {
 		}
 	}
 
-	public String getMenu() {
+	public String getOption() {
 		String text;
 		while (true) {
-			System.out.println("\nType:" + "\nb: to back this project" + "\n0: to choose another project"
-					+ "\na: to ask a questions");
+			System.out.println("\nType:" + "\nb: to back this project" + "\na: to ask a questions"
+					+ "\n0: to choose another project");
 			text = sc.next();
 			if (text.equals("0"))
 				return "0";

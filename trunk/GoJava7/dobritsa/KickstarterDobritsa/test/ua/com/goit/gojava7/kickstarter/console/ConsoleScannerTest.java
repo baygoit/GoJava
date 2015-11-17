@@ -69,14 +69,14 @@ public class ConsoleScannerTest {
 	public void testGetBackOrZeroEntered0() {
 		ByteArrayInputStream in = new ByteArrayInputStream("0".getBytes());
 		consoleScanner = new ConsoleScanner(in);
-		assertThat(consoleScanner.getMenu(), is("0"));
+		assertThat(consoleScanner.getOption(), is("0"));
 	}
 
 	@Test
 	public void testGetBackOrZeroEnteredB() {
 		ByteArrayInputStream in = new ByteArrayInputStream("b".getBytes());
 		consoleScanner = new ConsoleScanner(in);
-		assertThat(consoleScanner.getMenu(), is("b"));
+		assertThat(consoleScanner.getOption(), is("b"));
 	}
 
 

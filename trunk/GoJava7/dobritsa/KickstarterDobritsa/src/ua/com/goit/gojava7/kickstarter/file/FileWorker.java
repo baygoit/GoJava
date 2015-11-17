@@ -34,8 +34,7 @@ public class FileWorker {
 					project.setDaysToGo(new Integer(in.readLine()));
 					project.setHistory(in.readLine());
 					project.setLink(in.readLine());
-					//TODO change addQuestion to setQuestions
-					project.addQuestion(in.readLine()); 					
+					//TODO addQuestion				
 					category.add(project);
 				}
 			} finally {

@@ -14,6 +14,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import ua.com.goit.gojava7.kickstarter.domain.Project;
+import ua.com.goit.gojava7.kickstarter.domain.Question;
 
 import org.mockito.runners.MockitoJUnitRunner;
 
@@ -38,8 +39,8 @@ public class ProjectPrinterTest {
 	public void testPrint() {
 		PrintStream printSteam = mock(PrintStream.class);
 		System.setOut(printSteam);
-		List<String> questions = new ArrayList<String>();
-		questions.add("QuestionsTest");
+		List<Question> questions = new ArrayList<Question>();
+		questions.add(new Question("QuestionsTest"));
 		Project project = new Project("NameTest", "DescriptionTest", 1000000, 10000, 10, "HistoryTest", "LinkTest", questions);
 		projectPrinter.printFull(project);
 		verify(printSteam).println(contains("NameTest"));
