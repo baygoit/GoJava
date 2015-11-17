@@ -1,10 +1,10 @@
 package ua.com.goit.gojava7.kickstarter.domain;
 
-import java.util.List;
+import ua.com.goit.gojava7.kickstarter.storage.DonationStorage;
+import ua.com.goit.gojava7.kickstarter.storage.QuestionStorage;
 
-import ua.com.goit.gojava7.kickstarter.storage.Storage;
 
-public class Project extends Storage<Question>{
+public class Project{
 	private String name;
     private String description;
     private Integer goal;
@@ -12,8 +12,10 @@ public class Project extends Storage<Question>{
     private Integer daysToGo;
     private String history;
     private String link;
-    
-    public Project() {}
+    private DonationStorage donationStorage = new DonationStorage();;
+    private QuestionStorage questionStorage = new QuestionStorage();;    
+ 
+	public Project() {}
     
     public Project(String name, String description, Integer goal, Integer pledged, 
     		Integer daysToGo, String history, String link){         
@@ -23,21 +25,9 @@ public class Project extends Storage<Question>{
         this.pledged = pledged;
         this.daysToGo = daysToGo;
         this.history = history;
-        this.link = link;    
+        this.link = link;          
     }    
- 
-    public Project(String name, String description, Integer goal, Integer pledged, 
-    		Integer daysToGo, String history, String link, List<Question> questions){         
-    	this.name = name;
-    	this.description = description;
-        this.goal = goal;
-        this.pledged = pledged;
-        this.daysToGo = daysToGo;
-        this.history = history;
-        this.link = link;
-        setAll(questions);
-    }    
-
+    
     public String getName() {
     	return name;
     }
@@ -94,16 +84,28 @@ public class Project extends Storage<Question>{
     	this.link = link;
     }
     
-    public List<Question> getQuestions(){
-    	return getAll();
-    }
-    
-    public void addQuestion(Question question) {
-    	add(question);
-    }
-    
     public void addToPledged(int amount) {
     	this.pledged += amount;
     }
+
+	public DonationStorage getDonationStorage() {
+		return donationStorage;
+	}
+
+	public void setDonationStorage(DonationStorage donationStorage) {
+		this.donationStorage = donationStorage;
+	}
+
+	public QuestionStorage getQuestionStorage() {	
+		return questionStorage;
+	}
+
+	public void setQuestionStorage(QuestionStorage questionStorage) {
+		this.questionStorage = questionStorage;
+	}
+
+	public void addQuestion(Question question) {
+		questionStorage.add(question);
+	}
         
 }

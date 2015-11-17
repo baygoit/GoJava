@@ -1,6 +1,7 @@
 package ua.com.goit.gojava7.kickstarter.console;
 
 import static org.mockito.Matchers.contains;
+import static org.mockito.Matchers.endsWith;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
@@ -13,6 +14,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import ua.com.goit.gojava7.kickstarter.domain.Category;
 import ua.com.goit.gojava7.kickstarter.domain.Project;
 import ua.com.goit.gojava7.kickstarter.domain.Question;
 
@@ -41,10 +43,28 @@ public class ProjectPrinterTest {
 		System.setOut(printSteam);
 		List<Question> questions = new ArrayList<Question>();
 		questions.add(new Question("QuestionsTest"));
-		Project project = new Project("NameTest", "DescriptionTest", 1000000, 10000, 10, "HistoryTest", "LinkTest", questions);
+		Project project = new Project("NameTest", "DescriptionTest", 1000000, 10000, 10, "HistoryTest", "LinkTest");
 		projectPrinter.printFull(project);
 		verify(printSteam).println(contains("NameTest"));
 		verify(printSteam).println(contains("QuestionsTest"));
+	}
+	
+	@Test
+	public void testPrintProjects() {
+		PrintStream printSteam = mock(PrintStream.class);
+		System.setOut(printSteam);
+		Category category = new Category("Category1");
+		List<Question> questions = new ArrayList<Question>();
+		questions.add(new Question("QuestionsTest"));
+		Project project1 = new Project("NameTest", "DescriptionTest", 1000000, 10000, 10, "HistoryTest", "LinkTest");
+		category.add(project1);
+		List<Category> categories = new ArrayList<Category>();
+		categories.add(category);
+
+		projectPrinter.printProjects(categories.get(0).getAll());
+		verify(printSteam).println(contains("NameTest"));
+		verify(printSteam).println(contains("DescriptionTest"));
+		verify(printSteam).println(endsWith("10"));
 	}
 
 }

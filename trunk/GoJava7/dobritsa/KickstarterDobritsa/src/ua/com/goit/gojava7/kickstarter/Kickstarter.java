@@ -84,7 +84,7 @@ public class Kickstarter {
 	public void printAboutProjects() {
 		System.out.println(BORDER + "\nCurrent category: #" + numberOfCategory + "(" + currentCategory.getName() + ")"
 				+ "\nList of projects:");
-		categoryPrinter.printProjects(currentCategory.getAll());
+		projectPrinter.printProjects(currentCategory.getAll());
 		System.out.println("\nChoose a project by number ('0' to choose another category): ");
 	}
 
@@ -124,19 +124,22 @@ public class Kickstarter {
 	}
 
 	public void donate() {
-		System.out.println("\nEnter your name:");
+		System.out.println(BORDER + "\n\nEnter your name:");
 		consoleScanner.getName();
 		System.out.println("\nEnter your card's number:");
 		consoleScanner.getCreditCard();
 		int minDonation = 1;
 		int maxDonation = currentProject.getGoal() - currentProject.getPledged();
+		System.out.println("\nLet's choose your reward!\n");
+		
+		
 		System.out.println("\nEnter amount from " + minDonation + " to " + maxDonation + " :");
 		int amount = consoleScanner.getInt(minDonation, maxDonation);
 		System.out.println("\nIt was collected before:" + currentProject.getPledged());
 		currentProject.addToPledged(amount);
 		System.out.println("\nNow collected:" + currentProject.getPledged());
 	}
-
+	
 	public void ask() {
 		System.out.println("Ask your qouestion about project: ");
 		currentProject.addQuestion(new Question(consoleScanner.getString()));

@@ -19,7 +19,7 @@ public class ProjectTest extends Assert {
 		List<Question> questions = new ArrayList<Question>();
 		questions.add(new Question("quest1"));
 	project = new Project("NameTest", "DescriptionTest", 111111, 22222, 33333, "HistoryTest",
-				"LinkTest", questions);
+				"LinkTest");
 		
 	}
 
@@ -75,8 +75,8 @@ public class ProjectTest extends Assert {
 	@Test
 	public void testGetQuestions() {
 		projectEmpty.addQuestion(new Question("Questions of empty project"));
-		assertThat(project.getQuestions().get(0), is("QuestionsTest"));
-		assertThat(projectEmpty.getQuestions().get(0), is("Questions of empty project"));
+		assertThat(project.getQuestionStorage().get(0), is("QuestionsTest"));
+		assertThat(projectEmpty.getQuestionStorage().get(0), is("Questions of empty project"));
 	}
 
 	@Test
