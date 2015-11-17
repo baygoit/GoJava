@@ -38,14 +38,18 @@ public class Kickstarter {
 		quotePrinter.printRandomQuote(quoteStorage);
 		do {
 			chooseCategory();
+			if (numberOfCategory == 0) {
+				System.out.println("See you soon!");
+				break;
+			}
 			do {
 				chooseProject();
-				if (numberOfProject != 0) 
-					viewProject();				
+				if (numberOfProject != 0)
+					viewProject();
 			} while (numberOfProject != 0);
 
 		} while (numberOfCategory != 0);
-	}	
+	}
 
 	public void chooseCategory() {
 		printAboutCategories();
@@ -60,11 +64,8 @@ public class Kickstarter {
 
 	public void setCurrentCategory() {
 		numberOfCategory = consoleScanner.getInt(NUMBER_OF_FIRST_PROJECT, categoryStorage.size());
-		if (numberOfCategory == 0) {
-			System.out.println("See you soon!");
-			consoleScanner.close();
-			System.exit(0);
-		}
+		if (numberOfCategory == 0)
+			return;
 		indexOfCategory = numberOfCategory - 1;
 		currentCategory = categoryStorage.get(indexOfCategory);
 	}
