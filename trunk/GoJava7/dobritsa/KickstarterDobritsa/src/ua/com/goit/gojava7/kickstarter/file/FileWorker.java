@@ -22,10 +22,9 @@ public class FileWorker {
 		try {
 			BufferedReader in = new BufferedReader(new FileReader(file));
 			try {
-				String line;
 				category = new Category(in.readLine());
 				
-				while ((line = in.readLine()) != null) {
+				while ((in.readLine()) != null) {
 					Project project = new Project();
 					project.setName(in.readLine());
 					project.setDescription(in.readLine());
@@ -35,8 +34,7 @@ public class FileWorker {
 					project.setDaysToGo(new Integer(in.readLine()));
 					project.setHistory(in.readLine());
 					project.setLink(in.readLine());
-					project.setQuestions(in.readLine());
-					
+					//TODO addQuestion				
 					category.add(project);
 				}
 			} finally {

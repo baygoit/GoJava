@@ -111,8 +111,8 @@ public class KickstarterTest {
 		categories.add(category);
 		
 		when(categoryStorage.getAllCategories()).thenReturn(categories);
-		when(consoleScanner.scan()).thenReturn(1, 1, 1, 0);
-		when(consoleScanner.scanLine()).thenReturn("sf", "234234", "290");
+		when(consoleScanner.scan()).thenReturn(1, 1, 1, 290, 0);
+		when(consoleScanner.scanLine()).thenReturn("sf", "234234");
 		
 		kickstarter.runKickstarter();
 		

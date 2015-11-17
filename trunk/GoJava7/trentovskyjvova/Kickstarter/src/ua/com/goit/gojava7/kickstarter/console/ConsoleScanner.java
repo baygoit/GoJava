@@ -21,6 +21,7 @@ public class ConsoleScanner {
 			scanner.next();
 		}
 		int inputedInt = scanner.nextInt();
+		scanner.nextLine();
 		return inputedInt;
 	}
 
@@ -29,12 +30,11 @@ public class ConsoleScanner {
 	}
 
 	public String scanLine() {
-		String result = "";
-		while (!scanner.hasNext()) {
-			scanner.next();
-		}
-		result = scanner.next();
-		return result;
+
+/*		if (scanner.hasNextLine()) {
+			scanner.nextLine();
+		}*/
+		return scanner.nextLine();
 	}
 
 }

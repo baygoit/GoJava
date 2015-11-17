@@ -1,5 +1,10 @@
 package ua.com.goit.gojava7.kickstarter.domain;
-public class Project{
+
+import java.util.List;
+
+import ua.com.goit.gojava7.kickstarter.storage.Storage;
+
+public class Project extends Storage<Question>{
 	private String name;
     private String description;
     private Integer goal;
@@ -7,12 +12,22 @@ public class Project{
     private Integer daysToGo;
     private String history;
     private String link;
-    private String questions;
     
     public Project() {}
+    
+    public Project(String name, String description, Integer goal, Integer pledged, 
+    		Integer daysToGo, String history, String link){         
+    	this.name = name;
+    	this.description = description;
+        this.goal = goal;
+        this.pledged = pledged;
+        this.daysToGo = daysToGo;
+        this.history = history;
+        this.link = link;    
+    }    
  
     public Project(String name, String description, Integer goal, Integer pledged, 
-    		Integer daysToGo, String history, String link, String questions){         
+    		Integer daysToGo, String history, String link, List<Question> questions){         
     	this.name = name;
     	this.description = description;
         this.goal = goal;
@@ -20,7 +35,7 @@ public class Project{
         this.daysToGo = daysToGo;
         this.history = history;
         this.link = link;
-        this.questions = questions;
+        setAll(questions);
     }    
 
     public String getName() {
@@ -79,16 +94,16 @@ public class Project{
     	this.link = link;
     }
     
-    public String getQuestions(){
-    	return questions;
-    }    
-
-    public void setQuestions(String questions) {
-    	this.questions = questions;
+    public List<Question> getQuestions(){
+    	return getAll();
+    }
+    
+    public void addQuestion(Question question) {
+    	add(question);
     }
     
     public void addToPledged(int amount) {
     	this.pledged += amount;
     }
-    
+        
 }

@@ -20,6 +20,7 @@ public class QuoteStorageTest{
 	@Test
 	public void testQuoteStorageAddQuote() {
 		assertThat(quoteStorage.getQuotes().get(0).getQuoteName(), is("Quote"));
+		assertThat(quoteStorage.getQuotes().get(0).getAuthor(), is("Author"));
 	}
 
 	@Test
@@ -42,5 +43,6 @@ public class QuoteStorageTest{
 	public void testUnmodifiableList() {
 		// Exception should appear after we try to add new Quote.
 		quoteStorage.getQuotes().add(new Quote("Some Quote", "Some Author"));
+		assertThat(quoteStorage.getQuotes().size(),is(2));
 	}
 }

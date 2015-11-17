@@ -9,7 +9,6 @@ public class User{
 	}
 
 	public User(UserSettings settings) {
-		super();
 		this.settings = settings;
 	}
 

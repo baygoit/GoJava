@@ -1,5 +1,9 @@
 package ua.com.goit.gojava7.kickstarter.domain;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 public class Project {
 	private String name;
 	private int funded;
@@ -9,9 +13,9 @@ public class Project {
 	private String owner;
 	private int goal;
 	private String linkVideo;
-
+	private List<String> questions;
+	
 	public Project(String name) {
-
 		setName(name);
 		setFunded(0);
 		setDaysToGo(40);
@@ -20,6 +24,7 @@ public class Project {
 		setOwner("");
 		setGoal(0);
 		setLinkVideo("");
+		questions = new ArrayList<String>();
 	}
 
 	public String getName() {
@@ -96,8 +101,18 @@ public class Project {
 		projectDetails.append("description: ").append(description).append("\n");
 		projectDetails.append("owner: ").append(owner).append("\n");
 		projectDetails.append("goal: ").append(goal).append("\n");
-		projectDetails.append("linkVideo: ").append(linkVideo);
-
+		projectDetails.append("linkVideo: ").append(linkVideo).append("\n");
+		for (String question : questions) {
+			projectDetails.append("Question: '").append(question).append("'\n");
+		}
 		return projectDetails.toString();
+	}
+	
+	public void addQuestion(String question){
+		questions.add(question);
+	}
+	
+	public List<String> getQuestions(){
+		return questions;
 	}
 }

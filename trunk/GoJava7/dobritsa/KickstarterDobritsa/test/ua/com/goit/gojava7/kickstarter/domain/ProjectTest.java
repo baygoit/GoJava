@@ -1,14 +1,28 @@
 package ua.com.goit.gojava7.kickstarter.domain;
 
 import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import static org.hamcrest.CoreMatchers.is;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ProjectTest extends Assert {
-	private Project project = new Project("NameTest", "DescriptionTest", 111111, 22222, 33333, "HistoryTest", "LinkTest",
-			"QuestionsTest");
+
 	private Project projectEmpty = new Project();
+	private Project project;
 	
+	@Before
+	public void test() {
+		List<Question> questions = new ArrayList<Question>();
+		questions.add(new Question("quest1"));
+	project = new Project("NameTest", "DescriptionTest", 111111, 22222, 33333, "HistoryTest",
+				"LinkTest", questions);
+		
+	}
+
 	@Test
 	public void testGetName() {
 		projectEmpty.setName("Name of empty project");
@@ -60,11 +74,11 @@ public class ProjectTest extends Assert {
 
 	@Test
 	public void testGetQuestions() {
-		projectEmpty.setQuestions("Questions of empty project");
-		assertThat(project.getQuestions(), is("QuestionsTest"));
-		assertThat(projectEmpty.getQuestions(), is("Questions of empty project"));
+		projectEmpty.addQuestion(new Question("Questions of empty project"));
+		assertThat(project.getQuestions().get(0), is("QuestionsTest"));
+		assertThat(projectEmpty.getQuestions().get(0), is("Questions of empty project"));
 	}
-	
+
 	@Test
 	public void testAddToPledged() {
 		project.addToPledged(2222);

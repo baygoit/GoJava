@@ -3,6 +3,8 @@ package com.gojava6.persistence.lesson3;
 import javax.persistence.*;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -17,7 +19,10 @@ import org.hibernate.annotations.*;
  *         --
  */
 @Entity
-@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+@Cacheable
+@NamedQueries({@NamedQuery(name = "select.title", query = "select cd from CD cd "
+        + "where cd.title = :title",
+        hints = {@QueryHint(name = "org.hibernate.cacheable", value = "true")})})
 public class CD extends Item {
 
   // ======================================
