@@ -1,16 +1,15 @@
 package com.azuiev.dao;
 
 import com.azuiev.model.City;
-import org.hibernate.Session;
+
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by Masta on 31.10.2015.
  */
 public class CityDao implements ModelDao  {
-    static ModelDao dao = new AbstractModelDao(new City());
+    static ModelDao dao = new BasicModelDao(new City());
 
     @Override
     public List<City> getAll() throws SQLException {

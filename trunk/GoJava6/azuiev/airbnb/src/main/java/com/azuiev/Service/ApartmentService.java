@@ -1,6 +1,7 @@
 package com.azuiev.service;
 
 import com.azuiev.dao.ApartmentDao;
+import com.azuiev.dao.CityDao;
 import com.azuiev.model.Apartment;
 
 import java.sql.SQLException;

@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * Created by Administrator on 09.10.15.
  */
-public class GenerateDBDao implements DBDao {
+public class GenerateDB implements DBDao {
     private static final String url = "jdbc:mysql://localhost:3306/";
     private static final String dbName = "airbnb";
     private static final String user = "root";
@@ -23,7 +23,7 @@ public class GenerateDBDao implements DBDao {
     private static Connection connection = null;
 
     public static void main(String[] args) {
-        new GenerateDBDao().recreate();
+        new GenerateDB().recreate();
     }
 
     @Override
@@ -75,7 +75,7 @@ public class GenerateDBDao implements DBDao {
     }
 
     private void execute(String fileName) {
-        DBDao db = new GenerateDBDao();
+        DBDao db = new GenerateDB();
         Connection connection = db.getConnection();
         try {
 

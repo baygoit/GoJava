@@ -1,15 +1,10 @@
 package com.azuiev.dao;
 
-import com.azuiev.db.AirbnbDBDao;
-import com.azuiev.enums.ApartType;
 import com.azuiev.model.Apartment;
-import com.azuiev.model.User;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import com.azuiev.model.City;
+import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,66 +12,23 @@ import java.util.List;
  */
 //TODO reimplement metods
 public class ApartmentDao implements ModelDao {
-    private final Connection connection;
 
-
-    public ApartmentDao(Connection connection) {
-        this.connection = connection;
-    }
-    public ApartmentDao() {
-        connection = new AirbnbDBDao().getConnection();
-
-    }
+    static ModelDao dao = new BasicModelDao(new Apartment());
     @Override
-    public List<?> getAll() throws SQLException {
-        String sql = "select * from apartment;";
-        PreparedStatement stmt = connection.prepareStatement(sql);
-
-        ResultSet rs = stmt.executeQuery();
-        Apartment Apartment = null;
-        List<Apartment> list = new ArrayList<Apartment>();
-
-
-        while (rs.next()){
-            list.add(new Apartment((User)rs.getObject(1),rs.getString(3),rs.getString(2), ApartType.values()[1]));
-        }
-
-        return list;
+    public List<Apartment> getAll() throws SQLException {
+        return (List<Apartment>) dao.getAll();
     }
 
     @Override
     public Apartment getById(Long id) throws SQLException {
-
-        String sql = "select * from apartment where id = ?;";
-        PreparedStatement stmt = connection.prepareStatement(sql);
-        stmt.setLong(1, id);
-
-        ResultSet rs = stmt.executeQuery();
-
-        Apartment Apartment = null;
-
-        while (rs.next()){
-            Apartment = new Apartment((User)rs.getObject(1),rs.getString(3),rs.getString(2), ApartType.values()[1]);
-        }
-
+        Apartment Apartment = (Apartment) dao.getById(id);
         return Apartment;
-
     }
 
     public List<Apartment> getByCity(Long id) throws SQLException {
-        String sql = "select apartment.id, user, city.name, address, aparttype from apartment \n" +
-                "left join city on (apartment.city=city.id) where apartment.city = ?;";
-        PreparedStatement stmt = connection.prepareStatement(sql);
-        stmt.setLong(1, id);
+        Session session = HibernateUtil.getSessionFactory().openSession();
 
-        ResultSet rs = stmt.executeQuery();
-
-        List<Apartment> list = new ArrayList<Apartment>();
-
-        while (rs.next()){
-            list.add(new Apartment(rs.getLong(1),rs.getLong(2),rs.getString(3),rs.getString(4), ApartType.values()[rs.getInt(5)]));
-        }
-
+        List<Apartment> list = session.createQuery("from Apartment where city = "+ id).list();
         return list;
     }
 

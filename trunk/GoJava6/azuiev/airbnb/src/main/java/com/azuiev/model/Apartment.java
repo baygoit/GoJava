@@ -2,13 +2,17 @@ package com.azuiev.model;
 
 import com.azuiev.AirBnB;
 import com.azuiev.enums.ApartType;
+
+import javax.persistence.*;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
  * Created by Masta on 23.09.2015.
  */
-//TODO hibernate
+
+@Entity
+@Table(name="apartment", catalog = "airbnb")
 public class Apartment implements Comparable<Apartment> {
     private Long id;
     private String address;
@@ -26,6 +30,9 @@ public class Apartment implements Comparable<Apartment> {
     }
 
     //getters and setters
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", unique = true, nullable = false)
     public Long getId() {
         return id;
     }
@@ -33,6 +40,7 @@ public class Apartment implements Comparable<Apartment> {
         this.id = id;
     }
 
+    @Column(name="address")
     public String getAddress() {
         return address;
     }
@@ -40,6 +48,8 @@ public class Apartment implements Comparable<Apartment> {
         this.address = address;
     }
 
+    @Enumerated(EnumType.ORDINAL)
+    @Column(name="aparttype")
     public ApartType getApartType() {
         return apartType;
     }
@@ -47,6 +57,8 @@ public class Apartment implements Comparable<Apartment> {
         this.apartType = apartType;
     }
 
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @JoinColumn(name = "city", referencedColumnName = "id")
     public City getCity() {
         return city;
     }
@@ -54,6 +66,8 @@ public class Apartment implements Comparable<Apartment> {
         this.city = city;
     }
 
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @JoinColumn(name = "owner", referencedColumnName = "id")
     public User getOwner() {
         return owner;
     }
@@ -61,6 +75,7 @@ public class Apartment implements Comparable<Apartment> {
         this.owner = owner;
     }
 
+    @Transient
     public List<Reservation> getReservations() {
         return reservations;
     }

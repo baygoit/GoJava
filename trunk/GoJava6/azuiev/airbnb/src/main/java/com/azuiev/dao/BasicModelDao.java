@@ -10,10 +10,10 @@ import java.util.List;
 /**
  * Created by Administrator on 06.11.15.
  */
-public class AbstractModelDao implements ModelDao {
+public class BasicModelDao implements ModelDao {
     Object model;
 
-    public AbstractModelDao(Object model) {
+    public BasicModelDao(Object model) {
         this.model = model;
     }
 
@@ -39,7 +39,7 @@ public class AbstractModelDao implements ModelDao {
         Session session = null;
         try {
             session = HibernateUtil.getSessionFactory().openSession();
-            model = (City)session.get(model.getClass(), id);
+            model = session.get(model.getClass(), id);
             System.out.println("ttt");
         } catch (Exception e) {
             //TODO
