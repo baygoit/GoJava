@@ -124,9 +124,9 @@ public class Kickstarter {
 
 	public void donate() {
 		System.out.println("\nEnter your name:");
-		String name = consoleScanner.getName();
+		consoleScanner.getName();
 		System.out.println("\nEnter your card's number:");
-		String card = consoleScanner.getCreditCard();
+		consoleScanner.getCreditCard();
 		int minDonation = 1;
 		int maxDonation = currentProject.getGoal() - currentProject.getPledged();
 		System.out.println("\nEnter amount from " + minDonation + " to " + maxDonation + " :");
