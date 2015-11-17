@@ -3,7 +3,9 @@ package ua.com.goit.gojava7.kickstarter.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Project{
+import ua.com.goit.gojava7.kickstarter.storage.Storage;
+
+public class Project extends Storage<Question>{
 	private String name;
     private String description;
     private Integer goal;
@@ -11,12 +13,12 @@ public class Project{
     private Integer daysToGo;
     private String history;
     private String link;
-    private List<String> questions = new ArrayList<String>();
+    private List<Question> questions = new ArrayList<Question>();
     
     public Project() {}
  
     public Project(String name, String description, Integer goal, Integer pledged, 
-    		Integer daysToGo, String history, String link, List<String> questions){         
+    		Integer daysToGo, String history, String link, List<Question> questions){         
     	this.name = name;
     	this.description = description;
         this.goal = goal;
@@ -83,24 +85,16 @@ public class Project{
     	this.link = link;
     }
     
-    public List<String> getQuestions(){
-    	return questions;
-    }    
+    public List<Question> getQuestions(){
+    	return getAll();
+    }
     
-    public String getQuestions(int index){
-    	return questions.get(index);
-    } 
-
-    public void setQuestions(List<String> questions) {
-    	this.questions = questions;
+    public void addQuestion(Question question) {
+    	add(question);
     }
     
     public void addToPledged(int amount) {
     	this.pledged += amount;
     }
-    
-    public void addQuestion(String question) {
-    	this.questions.add(question);
-    }
-    
+        
 }

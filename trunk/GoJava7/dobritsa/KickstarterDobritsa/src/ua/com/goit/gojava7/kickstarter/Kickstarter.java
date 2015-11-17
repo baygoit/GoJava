@@ -6,6 +6,7 @@ import ua.com.goit.gojava7.kickstarter.console.ProjectPrinter;
 import ua.com.goit.gojava7.kickstarter.console.QuotePrinter;
 import ua.com.goit.gojava7.kickstarter.domain.Category;
 import ua.com.goit.gojava7.kickstarter.domain.Project;
+import ua.com.goit.gojava7.kickstarter.domain.Question;
 import ua.com.goit.gojava7.kickstarter.storage.CategoryStorage;
 import ua.com.goit.gojava7.kickstarter.storage.QuoteStorage;
 
@@ -138,7 +139,7 @@ public class Kickstarter {
 
 	public void ask() {
 		System.out.println("Ask your qouestion about project: ");
-		currentProject.addQuestion(consoleScanner.getString());
+		currentProject.addQuestion(new Question(consoleScanner.getString()));
 	}
 
 	public void shutdown() {

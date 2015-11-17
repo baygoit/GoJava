@@ -2,6 +2,7 @@ package ua.com.goit.gojava7.kickstarter.domain;
 
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import static org.hamcrest.CoreMatchers.is;
 
@@ -15,8 +16,8 @@ public class ProjectTest extends Assert {
 	
 	@Before
 	public void test() {
-		List<String> questions = new ArrayList<String>();
-		questions.add("QuestionsTest");
+		List<Question> questions = new ArrayList<Question>();
+		questions.add(new Question("quest1"));
 	project = new Project("NameTest", "DescriptionTest", 111111, 22222, 33333, "HistoryTest",
 				"LinkTest", questions);
 		
@@ -73,7 +74,7 @@ public class ProjectTest extends Assert {
 
 	@Test
 	public void testGetQuestions() {
-		projectEmpty.addQuestion("Questions of empty project");
+		projectEmpty.addQuestion(new Question("Questions of empty project"));
 		assertThat(project.getQuestions().get(0), is("QuestionsTest"));
 		assertThat(projectEmpty.getQuestions().get(0), is("Questions of empty project"));
 	}
