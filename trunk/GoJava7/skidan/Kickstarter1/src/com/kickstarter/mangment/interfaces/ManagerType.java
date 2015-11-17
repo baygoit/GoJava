@@ -1,4 +1,4 @@
-package com.kickstarter.manager;
+package com.kickstarter.mangment.interfaces;
 
 import java.util.Map;
 

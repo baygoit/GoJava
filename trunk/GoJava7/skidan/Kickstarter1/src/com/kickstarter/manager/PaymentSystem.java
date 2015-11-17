@@ -33,17 +33,37 @@ public class PaymentSystem {
 	}
 
 	public void makePayment(int projectNumber, int categoryNumber, String categoryTitle) {
+		consolePrintView.paymentPosobilitiesInfo();
+		int kind = acceptKindOfPayment();
 		String holderName = acceptPayerName();
 		int cardId = acceptPayercardId();
-		int payment = acceptPayment();
+		int payment = providePaymentKind(kind);
 		addPayer(cardId, holderName);
 		acceptPayment(payment, projectNumber, categoryTitle);
-	    consolePrintView.singleCategorysProjectsView(prm.getOne(categoryTitle, projectNumber));
-	    kr.projectSelector(categoryNumber, categoryTitle);
+		consolePrintView.singleCategorysProjectsView(prm.getOne(categoryTitle, projectNumber));
+		kr.projectSelector(categoryNumber, categoryTitle);
+	}
+
+	public int providePaymentKind(int kind) {
+		int payment;
+		if (kind == 1) {
+			payment = 50;
+			return payment;
+		} else if (kind == 2) {
+			payment = 100;
+			return payment;
+		} else if (kind == 3) {
+			payment = 150;
+			return payment;
+		} else {
+			payment = acceptPayment();
+			return payment;
+		}
+
 	}
 
 	public String acceptPayerName() {
-		
+
 		consolePrintView.InputPayersNameInfo();
 		return UserConsoleInputReader.readStringInput();
 
@@ -60,6 +80,12 @@ public class PaymentSystem {
 		consolePrintView.paymentSizeInfo();
 		int payment = UserConsoleInputReader.readInput();
 		return payment;
+	}
+
+	public int acceptKindOfPayment() {
+		consolePrintView.paymentSizeInfo();
+		int kind = UserConsoleInputReader.readInput();
+		return kind;
 	}
 
 }

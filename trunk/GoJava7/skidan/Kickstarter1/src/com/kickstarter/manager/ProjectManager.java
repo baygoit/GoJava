@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.kickstarter.db.ProjectDB;
+import com.kickstarter.mangment.interfaces.ManagerType;
+import com.kickstarter.mangment.interfaces.MemoryManagerImplementation;
 import com.kickstarter.model.Project;
 
 public class ProjectManager extends ManagerType {

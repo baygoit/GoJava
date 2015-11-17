@@ -1,4 +1,4 @@
-package com.kickstarter.manager;
+package com.kickstarter.mangment.interfaces;
 
 import java.io.BufferedReader;
 import java.io.File;
