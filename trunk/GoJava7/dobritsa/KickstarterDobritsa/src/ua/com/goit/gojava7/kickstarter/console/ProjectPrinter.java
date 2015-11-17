@@ -15,23 +15,23 @@ public class ProjectPrinter {
 	}
 	
 	public void printShort(Project project) {
-		System.out.println("Name: " + project.getName());
-		System.out.println("Short description: " + project.getDescription());
-		System.out.println("Goal: " + project.getGoal());
-		System.out.println("Pledged: " + project.getPledged());
-		System.out.println("Days to go: " + project.getDaysToGo());
+		System.out.println("Name: \t\t" + project.getName());
+		System.out.println("Description: \t" + project.getDescription());
+		System.out.println("Goal: \t\t" + project.getGoal());
+		System.out.println("Pledged: \t" + project.getPledged());
+		System.out.println("Days to go: \t" + project.getDaysToGo());
 	}
 
 	public void printFull(Project project) {
 		printShort(project);
-		System.out.println("History: " + project.getHistory());
-		System.out.println("Link to the demo video: " + project.getLink());
+		System.out.println("History: \t" + project.getHistory());
+		System.out.println("Demo video: \t" + project.getLink());
 		printQuestions(project.getQuestionStorage().getAll());
 	}
 	
 	public void printQuestions(List<Question> questions) {	
 		if(questions.size() == 0) {
-			System.out.println("There is no question.");
+			System.out.println("Questions: \tThere are no questions.");
 			return;
 		}		
 		for (int i = questions.size() - 1; i >= 0; i--) {

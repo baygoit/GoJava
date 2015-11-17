@@ -39,7 +39,8 @@ public class FileCategoryReader implements CategoryReader {
 					project.setDaysToGo(new Integer(fileReader.readLine()));
 					project.setHistory(fileReader.readLine());
 					project.setLink(fileReader.readLine());
-					// TODO addQuestion
+					project.setQuestionFile(fileReader.readLine());
+					project.setRewardFile(fileReader.readLine());
 					category.add(project);
 				}
 				categories.add(category);

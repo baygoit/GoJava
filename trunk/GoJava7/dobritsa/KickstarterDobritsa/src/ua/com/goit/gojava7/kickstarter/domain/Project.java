@@ -107,5 +107,24 @@ public class Project{
 	public void addQuestion(Question question) {
 		questionStorage.add(question);
 	}
+
+	
+	String questionFile;
+	public void setQuestionFile(String questionFile) {
+		this.questionFile = questionFile;
+	}
+	
+	public String getQuestionFile() {
+		return questionFile;
+	}
+
+	public String getRewardFile() {
+		return rewardFile;
+	}
+
+	String rewardFile;
+	public void setRewardFile(String rewardFile) {
+		this.rewardFile = rewardFile;
+	}
         
 }

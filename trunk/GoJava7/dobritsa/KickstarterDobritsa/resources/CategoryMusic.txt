@@ -1,25 +1,31 @@
 (File) Music
 
-(File) 'Critical Mass': New solo music from Jerry Chamberlain!"
-You can help Jerry Chamberlain (Daniel Amos, Swirling Eddies, Boy-O-Boy, Pamelita & Parker) record his first solo album!
-20000
-3903
-23
-Forty years ago in 1975, Jerry Chamberlain walked into a professional recording studio for the first time to lay down his initial recorded work as a founding member with Daniel Amos (DA). Since that time, he has played guitar and sung on many artists’ projects, some of those his own (Boy-O-Boy, The Balls Of France), and lent musical support for many recordings. Besides Daniel Amos, Chamberlain has been a long-time member of Swirling Eddies (under the pseudonym of “Spot”). His own songs have surfaced here and there (“Man In The Moon”, “Little Crosses”, etc.), but he has never recorded a solo album. Until now. Announcing the eclectic rock debut from lead guitarist-singer/songwriter/producer, Jerry Chamberlain. We have reached Critical Mass.",
-https://d2pq0u4uni88oo.cloudfront.net/projects/2150887/video-600235-h264_high.mp4
-
-(File) Name12
-Description12
-12000
-1200
+(File) Flobots' TWO NEW ALBUMS for 2016 "NOENEMIES"
+NEW ALBUM by FLOBOTS. We've been asking you to raise your voice. Now it is time to raise ours. Actually, let's raise them together. 
+72390
+50000
 12
-history12
-link12
+After months of dropping hints at shows and teasing you on Twitter, we are pleased to announce that production on the fourth Flobots record is underway. 
+https://d2pq0u4uni88oo.cloudfront.net/projects/2119077/video-596491-h264_high.mp4
+Questions_Flobots.txt
+Reward_Flobots.txt
 
-(File) Name13
-Description13
-13000
-1300
-13
-history13
-link13
+(File) North Eugene Ukulele Allstars Uke It Old-School!
+We're back for a second album. This time with new kids, new songs, and a new name! 
+10000
+543
+24
+In 2007, a few students at North Eugene High School in Eugene, Oregon asked their teacher to teach them how to play the ukulele. Today those students have graduated and moved on, but what they started still remains. Now nearly nine years later, the North Eugene Ukulele Allstars are ready to throw it down with their second album: Ukeing It Old-School! 
+https://d2pq0u4uni88oo.cloudfront.net/projects/2128669/video-608005-h264_high.mp4
+Questions_North Eugene.txt
+Reward_North Eugene.txt
+
+(File) PATAGONIA - A new full-length album from Sheridan Fox
+Help Sheridan finish manufacturing his new album so he can send it to you. Yeah, you! @thesheridanfox sheridanfox.com #patagoniaalbum
+35000
+3500
+25
+The birth canal- I recorded this album in fits and spurts the last handful of years in places I’ve lived, with the bulk of stuff happening in Minnesota and Alaska when I wasn't on tour. The album was mixed at Old Blackberry Way, mastered at Magneto Mastering, and the vinyl lacquers cut at Chicago Mastering. 
+https://d2pq0u4uni88oo.cloudfront.net/projects/1386341/video-606904-h264_high.mp4
+Questions_PATAGONIA.txt
+Reward_PATAGONIA.txt
