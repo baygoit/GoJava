@@ -14,8 +14,8 @@ import org.hibernate.annotations.*;
  *         --
  */
 @Entity
+@Cacheable
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Item {
 
   // ======================================

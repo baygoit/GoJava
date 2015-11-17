@@ -49,12 +49,14 @@ public class Main {
 */
 
     tx.begin();
-    CD sergentPepper = null;
+    CD sergentPepper = new CD();
+    sergentPepper.setTitle("Cache");
     /*sergentPepper.setMusicians(beatles);*/
-    //sergentPepper = service.createCD(sergentPepper);
+    sergentPepper = service.createCD(sergentPepper);
+    em.persist(sergentPepper);
     tx.commit();
 
-    System.out.println("CD Persisted : " + sergentPepper);
+    //System.out.println("CD Persisted : " + sergentPepper);
     em.close();
     /*Query query = em.createNativeQuery("select * from CD where id =  ?");
     query.setParameter(1, "1").getSingleResult();
@@ -70,8 +72,13 @@ public class Main {
     sergentPepper = em.find(CD.class, 1L);
     /*sergentPepper = service.findCD(sergentPepper.getId());*/
     tx.commit();
-    em.close();
 
+
+    if (em.getEntityManagerFactory().getCache().contains(CD.class, 1L)) {
+      System.out.println("exist!");
+    }
+
+    em.close();
     em = emf.createEntityManager();
     tx = em.getTransaction();
     tx.begin();

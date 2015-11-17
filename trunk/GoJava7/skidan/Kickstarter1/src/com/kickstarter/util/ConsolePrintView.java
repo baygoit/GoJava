@@ -3,23 +3,24 @@ package com.kickstarter.util;
 import java.util.List;
 import java.util.Map;
 
-import com.kickstarter.app.Kickstarter;
+import com.kickstarter.app.KRun;
 import com.kickstarter.model.Category;
 import com.kickstarter.model.Project;
 
 public class ConsolePrintView {
 
-	public void allCategoriesView(List<Category> list) {
-//		 int i = 1;
-//		 list.forEach((category)->System.out.println(i + "\t->" +
-//		 list.get(i)));
-//		 i++;
-     	for (int i = 1; i < list.size(); i++) {
-		System.out.println(i + "\t->" + list.get(i));
-	}
+	public void allCategoriesView(Map<Integer, Category> list) {
+		// int i = 1;
+		// list.forEach((category)->System.out.println(i + "\t->" +
+		// list.get(i)));
+		// i++;
+		for (int i = 1; i <= list.size(); i++) {
+			System.out.println(i + "\t->" + list.get(i));
+		}
 	}
 
 	public void categorySelectionInform() {
+
 		System.out.println("\nPlease choose category you'd like to see: ");
 	}
 
@@ -28,8 +29,9 @@ public class ConsolePrintView {
 
 			System.out.println("You have choosen " + title + "\n");
 		} catch (Exception e) {
+			KRun kr = new KRun();
 			System.out.println("There is no such number of Category available");
-			Kickstarter.categorySelector();
+			kr.categorySelector();
 		}
 	}
 
@@ -70,7 +72,7 @@ public class ConsolePrintView {
 
 	public void posobilitiesInfirm() {
 		System.out.println(
-				"You can donate ti this projec. If you'd lile to, please input 200,  \n or you can return to project selecrion menu presing any button ");
+				"\n You can donate to this projec. If you'd lile to, please input 200, \n or you can ask a question inpyt 300,\n if you want to return to project selection menu pres any button ");
 
 	}
 
@@ -90,7 +92,7 @@ public class ConsolePrintView {
 		System.out.println("\nProject Title : " + p.getTitle() + "\n Project Discription :" + p.getDiscription()
 				+ "\n Project History : " + p.getProjectHistory() + "\n Video Link : " + p.getVideoLink()
 				+ "\n Required Sum :" + p.getRequiredSum() + "\n Gained Sum :" + p.getGainedSum() + "\n Days Left :"
-				+ p.getDaysLeft() + "\n");
+				+ p.getDaysLeft() + "\n QustionSection : " + p.getQuestionSection());
 	}
 
 	public void viewSelectedCategoryProjects(Map<Integer, Project> projectList) {
@@ -104,5 +106,13 @@ public class ConsolePrintView {
 
 	public void qoutePrint(String quote) {
 		System.out.println(quote);
+	}
+
+	public void InputQuestionInfo() {
+		System.out.println("Plese enter your quastion : ");
+	}
+
+	public void paymentPosobilitiesInfo() {
+		System.out.println("Amount of posible  payment to the project : \n Press 1 -> 50$ \n Press 2 -> 100$ \n Press 3 -> 100$ \n Press 4 -> user amount \n");
 	}
 }

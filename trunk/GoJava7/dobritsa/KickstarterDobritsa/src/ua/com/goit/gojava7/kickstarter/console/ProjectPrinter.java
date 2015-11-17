@@ -1,6 +1,9 @@
 package ua.com.goit.gojava7.kickstarter.console;
 
+import java.util.List;
+
 import ua.com.goit.gojava7.kickstarter.domain.Project;
+import ua.com.goit.gojava7.kickstarter.domain.Question;
 
 public class ProjectPrinter {
 	public void printShort(Project project) {
@@ -15,7 +18,14 @@ public class ProjectPrinter {
 		printShort(project);
 		System.out.println("History: " + project.getHistory());
 		System.out.println("Link to the demo video: " + project.getLink());
-		System.out.println("Questions/Answers: " + project.getQuestions());
+		printQuestions(project.getQuestions());
+	}
+	
+	public void printQuestions(List<Question> questions) {
+		for (int i = questions.size() - 1; i >= 0; i--) {
+			System.out.println(
+					"Question: " + questions.get(i).getQuestion() + "\n\tAnswer: " + questions.get(i).getAnswear());
+		}
 	}
 
 }

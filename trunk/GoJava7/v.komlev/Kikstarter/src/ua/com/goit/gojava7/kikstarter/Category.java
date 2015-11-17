@@ -1,9 +1,8 @@
 package ua.com.goit.gojava7.kikstarter;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
 
 /**
  * create class Category which contain list categories
@@ -11,23 +10,37 @@ import java.util.Map;
  */
 public class Category {
 
-	protected static List<String> listCategoies = new ArrayList<>();
-	private Map<Integer, String> mapCategory = new HashMap<>();
+	private String categoryName;
+	private List<Project> projectsList = new ArrayList<>();
 
-	public Category() {
-		setMapCategory();
+	public Category(String categoryName) {
+		this.categoryName = categoryName;
 	}
 
-	private void setMapCategory() {
-		mapCategory.put(1, "Photo");
-		mapCategory.put(2, "Movie");
-		mapCategory.put(3, "Record");
+	public String getNameCategory() {
+		return categoryName;
 	}
 
-	public void getMapCategory() {
-		for (Map.Entry<Integer, String> entry : mapCategory.entrySet()) {
-			System.out.println(entry.getKey() + " : " + entry.getValue());
-		}
+	public void setNameCategory(String nameCategory) {
+		this.categoryName = nameCategory;
 	}
+
+	public List<Project> getAllProjectsInThisCategory() {
+		return projectsList;
+	}
+	
+	public void setProject(Project project) {
+		projectsList.add(project);
+	}
+
+	public Project getProject(int num) {
+		return projectsList.get(num);
+	}
+
+	// private void setMapCategory() {
+	// mapCategory.put(1, "Photo");
+	// mapCategory.put(2, "Movie");
+	// mapCategory.put(3, "Record");
+	// }
 
 }

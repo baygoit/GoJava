@@ -12,8 +12,13 @@ import java.util.*;
 /**
  * Created by Lera on 21.09.2015.
  */
+<<<<<<< HEAD
 @Entity
 @Table(name = "user", catalog = "airbnb")
+=======
+
+//TODO hibernate
+>>>>>>> 369492fefa35007740916941c8076d64c3c7e213
 public class User implements Observer {
     private String name;
     private String surName;
@@ -24,10 +29,18 @@ public class User implements Observer {
     @Transient
     private List<UserRoles> myRoles = new LinkedList<UserRoles>();
 
+<<<<<<< HEAD
     public User() {
     }
 
     private User(String name, String surName, String email) {
+=======
+
+    public User(){
+
+    }
+     private User(String name, String surName, String email) {
+>>>>>>> 369492fefa35007740916941c8076d64c3c7e213
         this.name = name;
         this.surName = surName;
         this.email = email;

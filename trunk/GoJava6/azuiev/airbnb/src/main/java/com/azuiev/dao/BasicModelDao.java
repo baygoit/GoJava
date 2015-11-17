@@ -40,7 +40,10 @@ public class BasicModelDao implements ModelDao {
         try {
             session = HibernateUtil.getSessionFactory().openSession();
             model = session.get(model.getClass(), id);
+<<<<<<< HEAD:trunk/GoJava6/azuiev/airbnb/src/main/java/com/azuiev/dao/BasicModelDao.java
             System.out.println("ttt");
+=======
+>>>>>>> 369492fefa35007740916941c8076d64c3c7e213:trunk/GoJava6/azuiev/airbnb/src/main/java/com/azuiev/dao/AbstractModelDao.java
         } catch (Exception e) {
             //TODO
         } finally {
