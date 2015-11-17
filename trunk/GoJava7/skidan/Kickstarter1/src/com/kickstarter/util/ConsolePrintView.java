@@ -9,12 +9,12 @@ import com.kickstarter.model.Project;
 
 public class ConsolePrintView {
 
-	public void allCategoriesView(List<Category> list) {
+	public void allCategoriesView(Map<Integer, Category> list) {
 //		 int i = 1;
 //		 list.forEach((category)->System.out.println(i + "\t->" +
 //		 list.get(i)));
 //		 i++;
-     	for (int i = 1; i < list.size(); i++) {
+     	for (int i = 1; i <= list.size(); i++) {
 		System.out.println(i + "\t->" + list.get(i));
 	}
 	}

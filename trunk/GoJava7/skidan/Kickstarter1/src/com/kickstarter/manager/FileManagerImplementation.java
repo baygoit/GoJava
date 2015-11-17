@@ -11,26 +11,35 @@ import java.util.Map;
 import com.kickstarter.db.ProjectDB;
 import com.kickstarter.model.Project;
 
-public class ProjectFileManager {
+public class FileManagerImplementation implements ProjectManagerInterface {
 	ProjectDB pdb = new ProjectDB();
 
-	public Map<Integer, Project> getProjectsForCategory(String categoryTitle) throws FileNotFoundException, IOException {
-		Map<Integer, Project> allProjects = fileReader();
+	public Map<Integer, Project> getAll(String categoryTitle) {
+		Map<Integer, Project> allProjects = new HashMap<>();
+        try {
+			allProjects = fileReader();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		Map<Integer, Project> categoryProjects = new HashMap<>();
 		for (Project p : allProjects.values()) {
 			if (p.getCategoryName().equals(categoryTitle)) {
 				categoryProjects.put(p.getId(), p);
 			}
-			
+
 		}
 		return categoryProjects;
 
 	}
 
-	public Project getProject(String categoryTitle, int projectNumber) throws FileNotFoundException, IOException {
-		Map<Integer, Project> requiredCategoryProjects = getProjectsForCategory(categoryTitle);
+	public Project getOne(String categoryTitle, int projectNumber) {
+		Map<Integer, Project> requiredCategoryProjects = getAll(categoryTitle);
 		Project p = requiredCategoryProjects.get(projectNumber);
-		Map<Integer, Project> singleRequredProjectList = getProjectsForCategory(categoryTitle);
+		Map<Integer, Project> singleRequredProjectList = getAll(categoryTitle);
 		singleRequredProjectList.put(0, p);
 		return p;
 
@@ -42,29 +51,29 @@ public class ProjectFileManager {
 		Map<Integer, Project> allProjectList = new HashMap<>();
 		try (BufferedReader br = new BufferedReader(new FileReader(file))) {
 			try {
-				String section;
-				// category = new Category(br.readLine());
-				while ((section = br.readLine()) != null) {
+				String line;
+				while ((line = br.readLine()) != null) {
 					Project project = new Project();
-					
+
+					project.setId(new Integer((line)));
 					project.setTitle(br.readLine());
 					project.setDiscription(br.readLine());
-					project.setCategoryName(br.readLine());
 					project.setDaysLeft((new Integer(br.readLine())));
-					project.setGainedSum((new Integer(br.readLine())));					project.setId(Integer.parseInt((br.readLine())));
+					project.setRequiredSum(new Integer(br.readLine()));
+					project.setGainedSum((new Integer(br.readLine())));
+					project.setProjectHistory((br.readLine()));
 					project.setVideoLink((br.readLine()));
 					project.setQuestionSection(br.readLine());
-					project.setRequiredSum(new Integer(br.readLine()));
-					project.setProjectHistory((br.readLine()));
-
+					project.setCategoryName(br.readLine());
 
 					allProjectList.put(i++, project);
 				}
-	
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		}
-		return allProjectList;
-	}
 
-}}
+			} catch (IOException e) {
+				throw new RuntimeException(e);
+			}
+			return allProjectList;
+		}
+
+	}
+}

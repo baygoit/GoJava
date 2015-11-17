@@ -26,7 +26,7 @@ public class PaymentSystem {
 	}
 
 	public void acceptPayment(int payment, int projectNumber, String categoryTitle) {
-		Project p = prm.getProject(categoryTitle, projectNumber);
+		Project p = prm.getOne(categoryTitle, projectNumber);
 		int lastGainedSum = p.getGainedSum();
 		p.setGainedSum(lastGainedSum += payment);
 
@@ -38,7 +38,7 @@ public class PaymentSystem {
 		int payment = acceptPayment();
 		addPayer(cardId, holderName);
 		acceptPayment(payment, projectNumber, categoryTitle);
-	    consolePrintView.singleCategorysProjectsView(prm.getProject(categoryTitle, projectNumber));
+	    consolePrintView.singleCategorysProjectsView(prm.getOne(categoryTitle, projectNumber));
 	    kr.projectSelector(categoryNumber, categoryTitle);
 	}
 

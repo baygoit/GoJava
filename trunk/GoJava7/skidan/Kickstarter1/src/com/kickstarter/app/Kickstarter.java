@@ -7,5 +7,4 @@ public class Kickstarter {
 		kr.categorySelector();
 
 	}
-
 }
