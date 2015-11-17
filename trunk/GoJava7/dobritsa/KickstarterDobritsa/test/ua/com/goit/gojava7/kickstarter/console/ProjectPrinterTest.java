@@ -25,18 +25,17 @@ public class ProjectPrinterTest {
 
 	private ProjectPrinter projectPrinter = new ProjectPrinter();
 	private PrintStream systemOut;
-	
+
 	@Before
 	public void setUp() {
 		systemOut = System.out;
 	}
-	
+
 	@After
 	public void tearDown() {
 		System.setOut(systemOut);
 	}
-	
-	
+
 	@Test
 	public void testPrint() {
 		PrintStream printSteam = mock(PrintStream.class);
@@ -46,9 +45,8 @@ public class ProjectPrinterTest {
 		Project project = new Project("NameTest", "DescriptionTest", 1000000, 10000, 10, "HistoryTest", "LinkTest");
 		projectPrinter.printFull(project);
 		verify(printSteam).println(contains("NameTest"));
-		verify(printSteam).println(contains("QuestionsTest"));
 	}
-	
+
 	@Test
 	public void testPrintProjects() {
 		PrintStream printSteam = mock(PrintStream.class);

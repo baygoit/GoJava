@@ -73,13 +73,6 @@ public class ProjectTest extends Assert {
 	}
 
 	@Test
-	public void testGetQuestions() {
-		projectEmpty.addQuestion(new Question("Questions of empty project"));
-		assertThat(project.getQuestionStorage().get(0), is("QuestionsTest"));
-		assertThat(projectEmpty.getQuestionStorage().get(0), is("Questions of empty project"));
-	}
-
-	@Test
 	public void testAddToPledged() {
 		project.addToPledged(2222);
 		assertThat(project.getPledged(), is(24444));

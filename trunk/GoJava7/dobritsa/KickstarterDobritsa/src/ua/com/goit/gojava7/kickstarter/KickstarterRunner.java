@@ -1,28 +1,73 @@
 package ua.com.goit.gojava7.kickstarter;
 
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.List;
+import java.util.Random;
 
 import ua.com.goit.gojava7.kickstarter.console.CategoryPrinter;
 import ua.com.goit.gojava7.kickstarter.console.ConsoleScanner;
 import ua.com.goit.gojava7.kickstarter.console.ProjectPrinter;
 import ua.com.goit.gojava7.kickstarter.console.QuotePrinter;
-
+import ua.com.goit.gojava7.kickstarter.dao.CategoryReader;
+import ua.com.goit.gojava7.kickstarter.dao.FileCategoryReader;
+import ua.com.goit.gojava7.kickstarter.dao.FileQuoteReader;
+import ua.com.goit.gojava7.kickstarter.dao.MemoryCategoryReader;
+import ua.com.goit.gojava7.kickstarter.dao.MemoryQuoteReader;
+import ua.com.goit.gojava7.kickstarter.dao.QuoteReader;
+import ua.com.goit.gojava7.kickstarter.domain.Quote;
 import ua.com.goit.gojava7.kickstarter.storage.CategoryStorage;
 import ua.com.goit.gojava7.kickstarter.storage.QuoteStorage;
 
 public class KickstarterRunner {
 
+	private static final File QUOTES_FILE = new File("./resources/Quotes.txt");
+	private static final File CATEGORY_MUSIC_FILE = new File("./resources/CategoryMusic.txt");
+	private static final File CATEGORY_FOOD_FILE = new File("./resources/CategoryMusic.txt");
+	private static final File CATEGORY_DANCE_FILE = new File("./resources/CategoryMusic.txt");
+
+	private static QuoteReader getQuoteReader(boolean isFromFile) {
+		if (!isFromFile) {
+			return new MemoryQuoteReader();		
+		} else {
+			return new FileQuoteReader(QUOTES_FILE);
+		}
+	}
+	
+	private static CategoryReader getCategoryReader(boolean isFromFile) {
+		if (!isFromFile) {		
+			return new MemoryCategoryReader();
+		} else {		
+			return new FileCategoryReader(CATEGORY_MUSIC_FILE);
+			//return new FileCategoryReader(CATEGORY_FOOD_FILE);
+			//return new FileCategoryReader(CATEGORY_DANCE_FILE);
+		}
+	}
+
 	public static void main(String[] args) throws FileNotFoundException {
-		QuoteStorage quoteStorage = new QuoteStorage("D:/1/Quotes.txt");
+		boolean isFromFile = false;
+		if (args.length != 0) {
+			isFromFile = true;
+		}
+
+		QuoteStorage quoteStorage = initQuotes(isFromFile);
 
 		CategoryStorage categoryStorage = new CategoryStorage();
-		categoryStorage.initCategories("D:/1/CategoryMusic.txt");
-		categoryStorage.initCategories("D:/1/CategoryFood.txt");
-		categoryStorage.initCategories("D:/1/CategoryDances.txt");
+		categoryStorage.initCategories("./resources/CategoryMusic.txt");
+		categoryStorage.initCategories("./resources/CategoryFood.txt");
+		categoryStorage.initCategories("./resources/CategoryDances.txt");
 
 		Kickstarter kickstarter = new Kickstarter(quoteStorage, categoryStorage);
 
 		kickstarter.run();
 		kickstarter.shutdown();
+	}
+
+	private static QuoteStorage initQuotes(boolean isFromFile) {
+		QuoteStorage quoteStorage = new QuoteStorage();
+		QuoteReader quoteReader = getQuoteReader(isFromFile);
+		List<Quote> quotes = quoteReader.readQuotes();
+		quoteStorage.setAll(quotes);
+		return quoteStorage;
 	}
 }

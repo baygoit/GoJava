@@ -46,29 +46,6 @@ public class FileWorker {
 		return category;
 	}
 	
-	public static List<Quote> readQuotes(String fileName) throws FileNotFoundException {
-		List<Quote> list = new ArrayList<Quote>();
-		File file = new File(fileName);
-		exists(fileName);
-		try {
-			BufferedReader in = new BufferedReader(new FileReader(file));
-			try {
-				String line;
-				while ((line = in.readLine()) != null) {
-					Quote quote = new Quote();
-					quote.setText(line);
-					quote.setAuthor(in.readLine());
-					list.add(quote);
-				}
-			} finally {
-				in.close();
-			}
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		}
-		return list;
-	}
-
 	private static void exists(String fileName) throws FileNotFoundException {
 		File file = new File(fileName);
 		if (!file.exists()) {
