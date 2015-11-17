@@ -6,6 +6,6 @@ import ua.com.goit.gojava7.kickstarter.domain.Quote;
 
 public interface QuoteReader {
 	
-	List<Quote> readQuotes();
+	List<Quote> read();
 
 }

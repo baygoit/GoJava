@@ -8,7 +8,7 @@ import ua.com.goit.gojava7.kickstarter.domain.Quote;
 public class MemoryQuoteReader implements QuoteReader {
 
 	@Override
-	public List<Quote> readQuotes() {
+	public List<Quote> read() {
 		List<Quote> quotes = new ArrayList<>();
 
 		quotes.add(new Quote(

@@ -9,7 +9,7 @@ import ua.com.goit.gojava7.kickstarter.domain.Project;
 public class MemoryCategoryReader implements CategoryReader {
 
 	@Override
-	public List<Category> readCategories() {		
+	public List<Category> read() {		
 		List<Category> categories = new ArrayList<Category>();
 		categories.add(initMusicCategory());
 		categories.add(initFoodCategory());

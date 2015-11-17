@@ -18,7 +18,5 @@ public class QuoteStorage extends Storage<Quote> {
 		int randomNumber = RANDOM.nextInt(size());
 		return get(randomNumber);
 	}
-	
-	
 
 }

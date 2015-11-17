@@ -1,0 +1,6 @@
+Music
+./resources/CategoryMusic1.txt
+Food
+./resources/CategoryFood1.txt
+Dances
+./resources/CategoryDances1.txt
