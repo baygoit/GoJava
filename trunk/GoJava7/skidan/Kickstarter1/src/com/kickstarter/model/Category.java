@@ -1,5 +1,7 @@
 package com.kickstarter.model;
 
+
+
 import java.util.Map;
 
 import com.kickstarter.manager.ProjectManager;
@@ -10,11 +12,11 @@ public class Category {
 	private int id;
 	Map<Integer, Project> projectList;
 
-	public Category(String title, int id) {
+	public Category(String title, int id)   {
 		ProjectManager pm = new ProjectManager();
 		this.title = title;
 		this.id = id;
-		projectList = pm.getProjectsForCategory(this.title);
+		projectList = pm.getAll(this.title);
 	}
 
 	public Map<Integer, Project> getProjectList() {
@@ -22,6 +24,7 @@ public class Category {
 	}
 
 	public String getTitle() {
+		
 		return title;
 	}
 

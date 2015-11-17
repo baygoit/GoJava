@@ -1,0 +1,15 @@
+package ua.com.goit.gojava7.kickstarter.dao;
+
+import java.util.List;
+
+public interface DataStorage<T> {
+    
+    List<T> getAll() ;
+
+    T get(int index);
+
+    void add(T element);
+    
+    void addAll(List<T> elemens);
+    
+}

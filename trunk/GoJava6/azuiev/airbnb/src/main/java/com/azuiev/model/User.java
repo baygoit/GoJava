@@ -12,8 +12,10 @@ import java.util.*;
 /**
  * Created by Lera on 21.09.2015.
  */
+
 @Entity
 @Table(name = "user", catalog = "airbnb")
+
 public class User implements Observer {
     private String name;
     private String surName;
@@ -28,6 +30,7 @@ public class User implements Observer {
     }
 
     private User(String name, String surName, String email) {
+
         this.name = name;
         this.surName = surName;
         this.email = email;

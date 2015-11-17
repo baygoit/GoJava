@@ -1,9 +1,7 @@
 package com.azuiev.dao;
 
 import com.azuiev.model.Apartment;
-import com.azuiev.model.City;
 import org.hibernate.Session;
-import org.hibernate.criterion.Restrictions;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -13,14 +11,17 @@ import java.util.List;
 //TODO reimplement metods
 public class ApartmentDao implements ModelDao {
 
+
     static ModelDao dao = new BasicModelDao(new Apartment());
     @Override
     public List<Apartment> getAll() throws SQLException {
         return (List<Apartment>) dao.getAll();
     }
 
+
     @Override
     public Apartment getById(Long id) throws SQLException {
+
         Apartment Apartment = (Apartment) dao.getById(id);
         return Apartment;
     }
@@ -30,6 +31,8 @@ public class ApartmentDao implements ModelDao {
 
         List<Apartment> list = session.createQuery("from Apartment where city = "+ id).list();
         return list;
+
+
     }
 
     @Override

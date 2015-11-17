@@ -4,6 +4,8 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.assertThat;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import org.junit.Ignore;
@@ -35,15 +37,22 @@ public class QuoteStorageTest {
 	}
 
 	@Test
-	public void testAdd() {
-		quoteStorage.add(new Quote("text", "author"));
+	public void testSetQuotes() {
+		Quote quote = new Quote("text", "author");
+		List<Quote> quotes = new ArrayList<>();
+		quotes.add(quote);
+
+		quoteStorage.setQuotes(quotes);
 		assertThat(quoteStorage.getRandomQuote(), notNullValue());
 	}
 
 	@Test
 	public void testGetRandomQuote() {
-		quoteStorage.add(new Quote("text 1", "author 1"));
-		quoteStorage.add(new Quote("text 2", "author 2"));
+		List<Quote> quotes = new ArrayList<>();
+		quotes.add(new Quote("text 1", "author 1"));
+		quotes.add(new Quote("text 2", "author 2"));
+
+		quoteStorage.setQuotes(quotes);
 		assertThat(quoteStorage.getRandomQuote().getText(), is("text 1"));
 		assertThat(quoteStorage.getRandomQuote().getText(), is("text 2"));
 	}

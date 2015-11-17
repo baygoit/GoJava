@@ -41,6 +41,7 @@ public class BasicModelDao implements ModelDao {
             session = HibernateUtil.getSessionFactory().openSession();
             model = session.get(model.getClass(), id);
             System.out.println("ttt");
+
         } catch (Exception e) {
             //TODO
         } finally {

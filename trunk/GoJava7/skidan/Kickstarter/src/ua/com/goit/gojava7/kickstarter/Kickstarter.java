@@ -55,6 +55,8 @@ public class Kickstarter {
 					project(categoryNumber);
 					Printer.ProjectInform();
 					Printer.exitInform();
+					Printer.exitInform();
+
 				}
 			}
 

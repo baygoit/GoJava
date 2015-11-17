@@ -41,14 +41,7 @@ CREATE TABLE users (
 	emailaddress character varying(255),
 	gender character varying(64),
 	birthdate timestamp without time zone,
-	city character varying(255),
-	country character varying(255),
-    password bytea,
-    passwordsalt bytea,
-    lastloginon timestamp without time zone,
-	active boolean DEFAULT true NOT NULL,
-	modifiedon timestamp without time zone DEFAULT (now() at time zone 'utc') NOT NULL,
-    createdon timestamp without time zone DEFAULT (now() at time zone 'utc') NOT NULL
+	city character varying(255)
 );
 
 ALTER TABLE users OWNER TO postgres;
@@ -77,10 +70,7 @@ CREATE TABLE homes (
     id integer NOT NULL,
     host_id integer NOT NULL,
     city character varying(255),
-	hometype character varying(255),
-	active boolean DEFAULT true NOT NULL,
-	modifiedon timestamp without time zone DEFAULT (now() at time zone 'utc') NOT NULL,
-    createdon timestamp without time zone DEFAULT (now() at time zone 'utc') NOT NULL
+	hometype character varying(255)
 );
 
 ALTER TABLE homes OWNER TO postgres;
@@ -111,11 +101,7 @@ CREATE TABLE reservations (
     user_id integer NOT NULL,
     home_id integer NOT NULL,
 	startdate timestamp without time zone,
-	endatedate timestamp without time zone,
-	comment character varying(500),
-	active boolean DEFAULT true NOT NULL,
-	modifiedon timestamp without time zone DEFAULT (now() at time zone 'utc') NOT NULL,
-    createdon timestamp without time zone DEFAULT (now() at time zone 'utc') NOT NULL
+	endatedate timestamp without time zone
 );
 
 ALTER TABLE reservations OWNER TO postgres;
