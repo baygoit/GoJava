@@ -20,8 +20,7 @@ public class Kickstarter {
 	private CategoryStorage categoryStorage;
 
 	private String BORDER = "\n________________________________________________________";
-	private int SHIFT_ONE = 1;
-	private int ZERO = 1;
+	private int NUMBER_OF_FIRST_PROJECT = 1;
 	private Project currentProject = null;
 	private Category currentCategory = null;
 	private int numberOfCategory;
@@ -37,18 +36,14 @@ public class Kickstarter {
 	public void run() {
 		quotePrinter.printRandomQuote(quoteStorage);
 		while (true) {
-			chooseCategory();
-			indexOfCategory = numberOfCategory - 1;
-			while (numberOfCategory != 0) {
-				//currentCategory = categoryStorage.get(indexOfCategory);				
+			chooseCategory();			
+			while (numberOfCategory != 0) {				
 				if (currentCategory.getAll().size() == 0) {
 					System.out.println("No projects in this categories.");
 					break;
 				} else {
 					chooseProject();					
-					if (numberOfProject != 0) {
-						indexOfProject = numberOfProject - 1;
-						//currentProject = currentCategory.get(indexOfProject);
+					if (numberOfProject != 0) {						
 						viewProject();
 					} else {
 						break;
@@ -65,19 +60,20 @@ public class Kickstarter {
 	
 	public void printAboutCategories() {
 		System.out.println(BORDER +
-				"\nList of categories:");	
+				"\nList of categories:\n");	
 		categoryPrinter.printCategories(categoryStorage.getAll());
 		System.out.println("\nChoose a category by number ('0' for exit): ");
 	}
 	
 	public void setCurrentCategory() {
-		numberOfCategory = consoleScanner.getInt(ZERO, categoryStorage.size());
+		numberOfCategory = consoleScanner.getInt(NUMBER_OF_FIRST_PROJECT, categoryStorage.size());
 		if (numberOfCategory == 0) {
 			System.out.println("See you soon!");
 			consoleScanner.close();
 			System.exit(0);
 		}
-		currentCategory = categoryStorage.get(numberOfCategory);
+		indexOfCategory = numberOfCategory - 1;
+		currentCategory = categoryStorage.get(indexOfCategory);		
 	}
 
 	public void chooseProject() {
@@ -88,52 +84,57 @@ public class Kickstarter {
 	public void printAboutProjects() {
 		System.out.println(BORDER
 				+ "\nCurrent category: #" + numberOfCategory + "(" + currentCategory.getName() + ")"
-				+ "List of projects:");	
+				+ "\nList of projects:");	
 		categoryPrinter.printProjects(currentCategory.getAll());
 		System.out.println("\nChoose a project by number ('0' to choose another category): ");
 	}
 	
 	public void setCurrentProject() {
-		numberOfProject = consoleScanner.getInt(ZERO, currentCategory.size());
-		currentProject = categoryStorage.get(numberOfCategory).get(numberOfProject);
+		numberOfProject = consoleScanner.getInt(NUMBER_OF_FIRST_PROJECT, currentCategory.size());
+		indexOfProject = numberOfProject - 1;		
+		currentProject = categoryStorage.get(indexOfCategory).get(indexOfProject);					
 	}
 	
 
-	public void viewProject() {
-		printAboutProject(currentCategory.getName(), numberOfProject);
+	public void viewProject() {		
+		printAboutProject();
 		chooseOptionOfProject();
 	}
 
-	public void printAboutProject(String categoryName, int numberProject) {
+	public void printAboutProject() {
 		System.out.println(BORDER
-				+ "\nCurrent category: " + categoryName
-				+ "\nCurrent project: #" + (numberProject) + "\n");
+				+ "\nCurrent category: " + currentCategory.getName()
+				+ "\nCurrent project: #" + (numberOfProject) + "\n");
 		projectPrinter.printFull(currentProject);
 	}
 
 	public void chooseOptionOfProject() {
-		String text = consoleScanner.getMenu();
+		String text = consoleScanner.getOption();
 		if (text.equals("b")) {
-			System.out.println("\nEnter your name:");
-			String name = consoleScanner.getName();
-			System.out.println("\nEnter your card's number:");
-			String card = consoleScanner.getCreditCard();
-			int minDonation = 1;
-			int maxDonation = currentProject.getGoal() - currentProject.getPledged();
-			System.out.println("\nEnter amount from " + minDonation + " to " + maxDonation + " :");
-			int amount = consoleScanner.getInt(minDonation, maxDonation);
-			System.out.println("\nIt was collected before:" + currentProject.getPledged());
-			currentProject.addToPledged(amount);
-			System.out.println("\nNow collected:" + currentProject.getPledged());
+			donate();
 		}
 		if (text.equals("a")) {
-			currentProject.addQuestion(getQuestion());
+			ask();			
 		}
 	}
+	
+	public void donate() {
+		System.out.println("\nEnter your name:");
+		String name = consoleScanner.getName();
+		System.out.println("\nEnter your card's number:");
+		String card = consoleScanner.getCreditCard();
+		int minDonation = 1;
+		int maxDonation = currentProject.getGoal() - currentProject.getPledged();
+		System.out.println("\nEnter amount from " + minDonation + " to " + maxDonation + " :");
+		int amount = consoleScanner.getInt(minDonation, maxDonation);
+		System.out.println("\nIt was collected before:" + currentProject.getPledged());
+		currentProject.addToPledged(amount);
+		System.out.println("\nNow collected:" + currentProject.getPledged());
+	}
 
-	public String getQuestion() {
+	public void ask() {
 		System.out.println("Ask your qouestion about project: ");
-		return consoleScanner.getString();
+		currentProject.addQuestion(consoleScanner.getString());
 	}
 
 	public void shutdown() {
