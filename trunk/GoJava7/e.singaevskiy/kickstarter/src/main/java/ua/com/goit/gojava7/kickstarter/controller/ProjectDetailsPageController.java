@@ -24,7 +24,7 @@ public class ProjectDetailsPageController extends PageController<Project> {
 
         } else if (option == 2) { 
             
-            dispatchNext(request, new PaymentPageController());
+            dispatchNext(request, new RewardSelectionPageController());
 
         }
         

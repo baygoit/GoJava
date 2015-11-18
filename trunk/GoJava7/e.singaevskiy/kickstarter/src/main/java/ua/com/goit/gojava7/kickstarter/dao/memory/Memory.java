@@ -9,6 +9,7 @@ import ua.com.goit.gojava7.kickstarter.beans.Payment;
 import ua.com.goit.gojava7.kickstarter.beans.Pledge;
 import ua.com.goit.gojava7.kickstarter.beans.Project;
 import ua.com.goit.gojava7.kickstarter.beans.Quote;
+import ua.com.goit.gojava7.kickstarter.beans.Reward;
 import ua.com.goit.gojava7.kickstarter.beans.User;
 import ua.com.goit.gojava7.kickstarter.util.Utils;
 
@@ -18,6 +19,7 @@ public class Memory {
     private List<Project> projects = new ArrayList<>();
     private List<Payment> payments = new ArrayList<>();
     private List<Pledge> pledges = new ArrayList<>();
+    private List<Reward> rewards = new ArrayList<>();
     
     public Memory() {
         initQuotes();
@@ -29,6 +31,8 @@ public class Memory {
         initPayments();
         
         initPledges();
+        
+        initRewards();
     }
 
     private void initQuotes() {
@@ -124,6 +128,19 @@ public class Memory {
         pledges.add(new Pledge(projects.get(3), payments.get(6)));
     }
     
+    private void initRewards() {
+        rewards.add(new Reward(projects.get(0), "Get one package", 5L));
+        rewards.add(new Reward(projects.get(0), "Get 3 packages", 15L));
+        rewards.add(new Reward(projects.get(0), "Get 7 packages", 30L));
+        
+        rewards.add(new Reward(projects.get(1), "Get copy of a book", 10L));
+        rewards.add(new Reward(projects.get(1), "Get 2 copys of a book and a poster", 30L));
+        rewards.add(new Reward(projects.get(1), "Get 2 copys of a book, poster and set of brushes", 50L));
+        
+        rewards.add(new Reward(projects.get(2), "Get one sample", 5L));
+        rewards.add(new Reward(projects.get(2), "Get one sample and discount for next purchase", 10L));
+    }
+    
     
     public List<Quote> getQuotes() {
         return quotes;
@@ -143,5 +160,9 @@ public class Memory {
 
     public List<Pledge> getPledges() {
         return pledges;
+    }
+
+    public List<Reward> getRewards() {
+        return rewards;
     }
 }

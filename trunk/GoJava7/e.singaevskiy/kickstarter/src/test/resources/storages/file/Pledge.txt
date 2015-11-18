@@ -1,0 +1,3 @@
+{"reward":null,"project":{"name":"proj","goalSum":0,"balanceSum":0,"startDate":null,"endDate":null,"categories":[{"name":"cat"}],"description":null,"videoUrl":null,"questionsAndAnswers":[],"author":{"name":"usr","password":""}},"payment":null}
+{"reward":null,"project":{"name":"proj","goalSum":0,"balanceSum":0,"startDate":null,"endDate":null,"categories":[{"name":"cat"}],"description":null,"videoUrl":null,"questionsAndAnswers":[],"author":{"name":"usr","password":""}},"payment":null}
+{"reward":null,"project":{"name":null,"goalSum":0,"balanceSum":0,"startDate":null,"endDate":null,"categories":[],"description":null,"videoUrl":null,"questionsAndAnswers":[],"author":null},"payment":null}
