@@ -4,6 +4,7 @@ import java.util.List;
 
 import ua.com.goit.gojava7.kickstarter.domain.Project;
 import ua.com.goit.gojava7.kickstarter.domain.Question;
+import ua.com.goit.gojava7.kickstarter.domain.Reward;
 
 public class ProjectPrinter {
 	
@@ -26,7 +27,7 @@ public class ProjectPrinter {
 		printShort(project);
 		System.out.println("History: \t" + project.getHistory());
 		System.out.println("Demo video: \t" + project.getLink());
-		printQuestions(project.getQuestionStorage().getAll());
+		printQuestions(project.getQuestions());
 	}
 	
 	public void printQuestions(List<Question> questions) {	
@@ -39,5 +40,20 @@ public class ProjectPrinter {
 					"Question: " + questions.get(i).getQuestion() + "\n\tAnswer: " + questions.get(i).getAnswear());
 		}
 	}
+	
+	public void printRewards(List<Reward> rewards) {	
+		if(rewards.size() == 0) {
+			System.out.println("There are no rewards. You can just help the project.");
+			return;
+		}	
+		System.out.println("Type:/n");
+		for (int i = 0; i < rewards.size(); i++) {
+			System.out.println((i + 1) + ": \t$" + rewards.get(i).getAmount() + "\t-\t" + rewards.get(i).getReward());
+		}
+		System.out.println("\n" + (rewards.size() + 1) + ":\tNo thanks, I just want to help the project."
+				+ "\n0:\tTo choose another project");
+	}
+	
+	
 
 }

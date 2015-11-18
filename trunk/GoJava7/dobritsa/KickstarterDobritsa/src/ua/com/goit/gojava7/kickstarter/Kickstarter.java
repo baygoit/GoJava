@@ -1,5 +1,8 @@
 package ua.com.goit.gojava7.kickstarter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import ua.com.goit.gojava7.kickstarter.console.CategoryPrinter;
 import ua.com.goit.gojava7.kickstarter.console.ConsoleScanner;
 import ua.com.goit.gojava7.kickstarter.console.ProjectPrinter;
@@ -7,6 +10,7 @@ import ua.com.goit.gojava7.kickstarter.console.QuotePrinter;
 import ua.com.goit.gojava7.kickstarter.domain.Category;
 import ua.com.goit.gojava7.kickstarter.domain.Project;
 import ua.com.goit.gojava7.kickstarter.domain.Question;
+import ua.com.goit.gojava7.kickstarter.domain.Reward;
 import ua.com.goit.gojava7.kickstarter.storage.CategoryStorage;
 import ua.com.goit.gojava7.kickstarter.storage.QuoteStorage;
 
@@ -20,14 +24,16 @@ public class Kickstarter {
 	private QuoteStorage quoteStorage;
 	private CategoryStorage categoryStorage;
 
-	private String BORDER = "\n________________________________________________________";
-	private int NUMBER_OF_FIRST_PROJECT = 1;
 	private Project currentProject = null;
 	private Category currentCategory = null;
+
 	private int numberOfCategory;
 	private int indexOfCategory;
 	private int numberOfProject;
 	private int indexOfProject;
+
+	private String BORDER = "\n________________________________________________________";
+	private int NUMBER_OF_FIRST_PROJECT = 1;
 
 	public Kickstarter(QuoteStorage quoteStorage, CategoryStorage categoryStorage) {
 		this.quoteStorage = quoteStorage;
@@ -84,7 +90,8 @@ public class Kickstarter {
 
 	public void setCurrentProject() {
 		numberOfProject = consoleScanner.getInt(NUMBER_OF_FIRST_PROJECT, currentCategory.size());
-		if(numberOfProject == 0) return;
+		if (numberOfProject == 0)
+			return;
 		indexOfProject = numberOfProject - 1;
 		currentProject = categoryStorage.get(indexOfCategory).get(indexOfProject);
 	}
@@ -122,18 +129,36 @@ public class Kickstarter {
 		consoleScanner.getName();
 		System.out.println("\nEnter your card's number:");
 		consoleScanner.getCreditCard();
-		int minDonation = 1;
-		int maxDonation = currentProject.getGoal() - currentProject.getPledged();
-		System.out.println("\nLet's choose your reward!\n");
-		
-		
-		System.out.println("\nEnter amount from " + minDonation + " to " + maxDonation + " :");
-		int amount = consoleScanner.getInt(minDonation, maxDonation);
-		System.out.println("\nIt was collected before:" + currentProject.getPledged());
-		currentProject.addToPledged(amount);
-		System.out.println("\nNow collected:" + currentProject.getPledged());
+		chooseReward();		
 	}
-	
+
+	public void chooseReward() {
+		System.out.println("\nLet's choose your reward!\n");
+		List<Reward> rewards = new ArrayList<>(currentProject.getRewards());
+		projectPrinter.printRewards(rewards);
+		int numberOfReward = consoleScanner.getInt(0, rewards.size() + 1);
+		if (numberOfReward == 0)
+			return;
+		if (numberOfReward == (rewards.size() + 1)) {
+			int minDonation = 1;
+			int maxDonation = currentProject.getGoal() - currentProject.getPledged();
+			System.out.println("\nEnter amount from " + minDonation + " to " + maxDonation + " :");
+			int amount = consoleScanner.getInt(minDonation, maxDonation);
+			System.out.println("\nIt was collected before: $" + currentProject.getPledged());
+			doDonate(amount);
+			System.out.println("Now collected: $" + currentProject.getPledged());
+		} else {
+			System.out.println("\nAmount of your donation is $" + rewards.get(numberOfReward - 1).getAmount());
+			System.out.println("It was collected before: $" + currentProject.getPledged());
+			doDonate(currentProject.getRewards().get(numberOfReward - 1).getAmount());
+			System.out.println("Now collected: $" + currentProject.getPledged());
+		}
+	}
+
+	public void doDonate(int amount) {
+		currentProject.addToPledged(amount);
+	}
+
 	public void ask() {
 		System.out.println("Ask your qouestion about project: ");
 		currentProject.addQuestion(new Question(consoleScanner.getString()));

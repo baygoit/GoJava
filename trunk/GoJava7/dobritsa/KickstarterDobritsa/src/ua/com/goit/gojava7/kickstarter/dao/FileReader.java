@@ -26,7 +26,7 @@ public abstract class FileReader<T> {
 			fileReader = new BufferedReader(new InputStreamReader(quotesFileSteam));
 			data = readIt();
 		} catch (IOException e) {
-			throw new IllegalStateException("File not found or read error", e);
+			throw new IllegalStateException("File not found or read error " + file, e);
 		} finally {
 			if (fileReader != null) {
 				try {
@@ -37,7 +37,7 @@ public abstract class FileReader<T> {
 			}
 		}
 		if (data.isEmpty()) {
-			throw new IllegalStateException("There are not dates in file");
+			throw new IllegalStateException("There are not dates in file " + file);
 		}
 		return data;
 	}
