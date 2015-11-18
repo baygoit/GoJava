@@ -1,4 +1,9 @@
 package ua.com.goit.gojava7.kickstarter.domain;
+
+import ua.com.goit.gojava7.kickstarter.storage.DonationStorage;
+import ua.com.goit.gojava7.kickstarter.storage.QuestionStorage;
+
+
 public class Project{
 	private String name;
     private String description;
@@ -7,22 +12,22 @@ public class Project{
     private Integer daysToGo;
     private String history;
     private String link;
-    private String questions;
-    
-    public Project() {}
+    private DonationStorage donationStorage = new DonationStorage();;
+    private QuestionStorage questionStorage = new QuestionStorage();;    
  
+	public Project() {}
+    
     public Project(String name, String description, Integer goal, Integer pledged, 
-    		Integer daysToGo, String history, String link, String questions){         
+    		Integer daysToGo, String history, String link){         
     	this.name = name;
     	this.description = description;
         this.goal = goal;
         this.pledged = pledged;
         this.daysToGo = daysToGo;
         this.history = history;
-        this.link = link;
-        this.questions = questions;
+        this.link = link;          
     }    
-
+    
     public String getName() {
     	return name;
     }
@@ -62,6 +67,7 @@ public class Project{
     public void setDaysToGo(Integer daysToGo) {
     	this.daysToGo = daysToGo;
     }
+    
     public String getHistory(){
     	return history;
     }
@@ -78,16 +84,47 @@ public class Project{
     	this.link = link;
     }
     
-    public String getQuestions(){
-    	return questions;
-    }    
-
-    public void setQuestions(String questions) {
-    	this.questions = questions;
-    }
-    
     public void addToPledged(int amount) {
     	this.pledged += amount;
     }
-    
+
+	public DonationStorage getDonationStorage() {
+		return donationStorage;
+	}
+
+	public void setDonationStorage(DonationStorage donationStorage) {
+		this.donationStorage = donationStorage;
+	}
+
+	public QuestionStorage getQuestionStorage() {	
+		return questionStorage;
+	}
+
+	public void setQuestionStorage(QuestionStorage questionStorage) {
+		this.questionStorage = questionStorage;
+	}
+
+	public void addQuestion(Question question) {
+		questionStorage.add(question);
+	}
+
+	
+	String questionFile;
+	public void setQuestionFile(String questionFile) {
+		this.questionFile = questionFile;
+	}
+	
+	public String getQuestionFile() {
+		return questionFile;
+	}
+
+	public String getRewardFile() {
+		return rewardFile;
+	}
+
+	String rewardFile;
+	public void setRewardFile(String rewardFile) {
+		this.rewardFile = rewardFile;
+	}
+        
 }

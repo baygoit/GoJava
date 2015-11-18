@@ -3,7 +3,7 @@ package ua.com.goit.gojava7.kickstarter;
 import java.util.Map;
 
 public class ConsolePrinter {
-	private final String N = "\n";
+	private static final String N = "\n";
 	public void println(String string) {
 		System.out.println(string);
 	}

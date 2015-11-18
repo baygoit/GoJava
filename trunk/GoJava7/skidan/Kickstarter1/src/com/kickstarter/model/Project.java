@@ -11,6 +11,10 @@ public class Project {
 	private String videoLink;
 	private String questionSection;
 	private String categoryName;
+	
+	public Project(){
+		
+	}
 
 	public Project(int id, String title, String discription, int daysLeft, int requiredSum, int gainedSum,
 			String projectHistory, String videoLink, String questionSection, String categoryName) {

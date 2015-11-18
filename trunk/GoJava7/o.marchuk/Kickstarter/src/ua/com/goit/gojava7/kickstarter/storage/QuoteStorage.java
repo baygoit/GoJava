@@ -16,12 +16,12 @@ public class QuoteStorage {
 		this.random = random;
 	}
 
-	public void add(Quote quote) {
-		quotes.add(quote);
-	}
-
 	public Quote getRandomQuote() {
 		int randomNumber = random.nextInt(quotes.size());
 		return quotes.get(randomNumber);
+	}
+
+	public void setQuotes(List<Quote> quotes) {
+		this.quotes = quotes;
 	}
 }

@@ -1,6 +1,7 @@
 package ua.com.goit.gojava7.kickstarter.console;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import ua.com.goit.gojava7.kickstarter.model.Category;
@@ -9,14 +10,14 @@ import ua.com.goit.gojava7.kickstarter.model.Quote;
 import ua.com.goit.gojava7.kickstarter.storage.ProjectManager;
 
 public class ConsolePrinter{
-	private final String deflector = "===========================";
+	public static final String HORIZONTAL_LINE = "===========================";
 
 	public void print(String s) {
 		System.out.println(s);
 	}
 
-	public void printDeflector() {
-		System.out.println(deflector);
+	public void printHorizontalLine() {
+		System.out.println(HORIZONTAL_LINE);
 	}
 
 	public void println(Quote quote) {
@@ -29,13 +30,13 @@ public class ConsolePrinter{
 		System.out.println(b.getCategoryId() + "# " + b.getCategoryName());
 
 	}
-
-	public void print(Map<Integer, Category> categories) {
+	public void print(List<Category> categories){
 		System.out.println("Categories: ");
-		categories.forEach((id, cat) -> {
-			System.out.println(id + "# " + cat.getCategoryName());
-		});
+		for (int i = 0; i < categories.size(); i++) {
+			System.out.println(i+"#" + categories.get(i).getCategoryName());
+		}
 	}
+	
 
 	public void showProjectList(Category cat, ProjectManager projectManager) {
 		ArrayList<Project> projects = projectManager.getProjectsByCategory(cat);
@@ -46,7 +47,7 @@ public class ConsolePrinter{
 	}
 
 	public void printFullProjectInfo(Project project) {
-		printDeflector();
+		printHorizontalLine();
 		print("Project: " + project.getProjectName() + "   |  Category: "
 				+ project.getProjectCategory().getCategoryName());
 		print(project.getProjectEndTime());
@@ -65,7 +66,7 @@ public class ConsolePrinter{
 		qa.forEach((q, a) -> {
 			print("Q: " + q);
 			print("A: " + a);
-			printDeflector();
+			printHorizontalLine();
 		});
 	}
 

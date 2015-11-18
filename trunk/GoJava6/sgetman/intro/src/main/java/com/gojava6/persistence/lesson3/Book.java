@@ -11,7 +11,7 @@ import java.util.Date;
  *         http://www.antoniogoncalves.org
  *         --
  */
-/*@Entity*/
+@Entity
 public class Book extends Item {
 
   // ======================================

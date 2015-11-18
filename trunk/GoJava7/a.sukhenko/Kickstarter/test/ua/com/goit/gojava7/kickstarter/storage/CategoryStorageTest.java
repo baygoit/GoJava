@@ -20,11 +20,10 @@ public class CategoryStorageTest{
 		assertThat(categoryStorage.getCategories().size(), is(1));
 	}
 
-	@Test(expected = UnsupportedOperationException.class)
+	@Test
 	public void testGetCategories() {
-		categoryStorage.getCategories().put(100500,
-				new Category("TestCategory", 100500));
-		assertThat(categoryStorage.getCategories().size(), is(1));
+		categoryStorage.getCategories().add(new Category("TestCategory", 100500));
+		assertThat(categoryStorage.getCategories().size(), is(2));
 	}
 
 }

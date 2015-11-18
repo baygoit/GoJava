@@ -36,6 +36,6 @@ public class ConsoleScannerTest {
 
 		consoleScanner = new ConsoleScanner(in);
 		
-		assertThat(consoleScanner.scan(), is("djsdjhsdf"));
+		assertThat(consoleScanner.scanLine(), is("djsdjhsdf"));
 	}
 }
