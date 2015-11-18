@@ -8,6 +8,10 @@ public class Payment {
     private long sum;
     private Date date;
 
+    public Payment() {
+        // default bean constructor
+    }
+    
     public Payment(User user, long cardId, long sum, Date date) {
         this.user = user;
         this.cardId = cardId;

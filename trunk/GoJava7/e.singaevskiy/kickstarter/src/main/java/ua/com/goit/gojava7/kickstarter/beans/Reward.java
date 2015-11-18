@@ -24,11 +24,11 @@ public class Reward {
         this.project = project;
     }
 
-    public Long getPledgeSum() {
+    public long getPledgeSum() {
         return pledgeSum;
     }
 
-    public void setPledgeSum(Long pledgeSum) {
+    public void setPledgeSum(long pledgeSum) {
         this.pledgeSum = pledgeSum;
     }
 
