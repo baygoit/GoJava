@@ -17,7 +17,7 @@ public class ProjectTest extends Assert {
 	@Before
 	public void test() {
 		List<Question> questions = new ArrayList<Question>();
-		questions.add(new Question("quest1"));
+		questions.add(new Question(new java.util.Date ().toLocaleString(), "quest1"));
 	project = new Project("NameTest", "DescriptionTest", 111111, 22222, 33333, "HistoryTest",
 				"LinkTest");
 		

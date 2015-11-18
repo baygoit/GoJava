@@ -32,12 +32,12 @@ public class ProjectPrinter {
 	
 	public void printQuestions(List<Question> questions) {	
 		if(questions.size() == 0) {
-			System.out.println("Questions: \tThere are no questions.");
+			System.out.println("Questions: \tThere are no questions yet.");
 			return;
 		}		
 		for (int i = questions.size() - 1; i >= 0; i--) {
-			System.out.println(
-					"Question: " + questions.get(i).getQuestion() + "\n\tAnswer: " + questions.get(i).getAnswear());
+			System.out.println("\n" + questions.get(i).getTime() + 
+					"\nQuestion: " + questions.get(i).getQuestion() + "\nAnswer: " + questions.get(i).getAnswer());
 		}
 	}
 	

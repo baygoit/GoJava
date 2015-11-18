@@ -1,6 +1,8 @@
 package ua.com.goit.gojava7.kickstarter;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import ua.com.goit.gojava7.kickstarter.console.CategoryPrinter;
@@ -42,7 +44,7 @@ public class Kickstarter {
 
 	public void run() {
 		quotePrinter.printRandomQuote(quoteStorage);
-		do {
+		do {System.out.println (new java.util.Date ().toLocaleString());
 			chooseCategory();
 			if (numberOfCategory == 0) {
 				System.out.println("See you soon!");
@@ -154,14 +156,14 @@ public class Kickstarter {
 			System.out.println("Now collected: $" + currentProject.getPledged());
 		}
 	}
-
+	
 	public void doDonate(int amount) {
 		currentProject.addToPledged(amount);
 	}
 
 	public void ask() {
-		System.out.println("Ask your qouestion about project: ");
-		currentProject.addQuestion(new Question(consoleScanner.getString()));
+		System.out.println("Ask your question about project: ");
+		currentProject.addQuestion(new Question((new java.util.Date ().toLocaleString()), consoleScanner.getString()));
 	}
 
 	public void shutdown() {

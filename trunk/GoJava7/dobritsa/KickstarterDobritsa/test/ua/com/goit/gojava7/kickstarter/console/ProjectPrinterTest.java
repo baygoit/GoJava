@@ -41,7 +41,7 @@ public class ProjectPrinterTest {
 		PrintStream printSteam = mock(PrintStream.class);
 		System.setOut(printSteam);
 		List<Question> questions = new ArrayList<Question>();
-		questions.add(new Question("QuestionsTest"));
+		questions.add(new Question(new java.util.Date ().toLocaleString(), "QuestionsTest"));
 		Project project = new Project("NameTest", "DescriptionTest", 1000000, 10000, 10, "HistoryTest", "LinkTest");
 		projectPrinter.printFull(project);
 		verify(printSteam).println(contains("NameTest"));
@@ -53,7 +53,7 @@ public class ProjectPrinterTest {
 		System.setOut(printSteam);
 		Category category = new Category("Category1");
 		List<Question> questions = new ArrayList<Question>();
-		questions.add(new Question("QuestionsTest"));
+		questions.add(new Question(new java.util.Date ().toLocaleString(), "QuestionsTest"));
 		Project project1 = new Project("NameTest", "DescriptionTest", 1000000, 10000, 10, "HistoryTest", "LinkTest");
 		category.add(project1);
 		List<Category> categories = new ArrayList<Category>();
