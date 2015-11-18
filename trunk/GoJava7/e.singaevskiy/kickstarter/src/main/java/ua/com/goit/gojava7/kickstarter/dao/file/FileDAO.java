@@ -26,7 +26,7 @@ public class FileDAO<T> implements DataStorage<T> {
     private final int READ_ALL = -2;
 
     public FileDAO(Class<T> persistentClass) {
-        this(persistentClass, "resources/storages/file/%name%.txt".replace("%name%", persistentClass.getSimpleName()));
+        this(persistentClass, "./kicks-files/%name%.txt".replace("%name%", persistentClass.getSimpleName()));
     }
     
     public FileDAO(Class<T> persistentClass, String pathToFile) {
