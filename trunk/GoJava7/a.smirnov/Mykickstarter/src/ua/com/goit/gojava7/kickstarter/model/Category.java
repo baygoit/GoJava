@@ -2,25 +2,29 @@ package ua.com.goit.gojava7.kickstarter.model;
 
 import java.io.Serializable;
 
-public class Category implements Comparable<Category>, Serializable {
+public class Category implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	private String name;
+	private int uniqueID;
 
 	public Category(String name) {
 		this.name = name;
 	}
 
-	public String getName() {
+	public String getCategoryName() {
 		return name;
 	}
 	
-	public void setName(String name) {
+	public void setCategoryName(String name) {
 		this.name = name;
 	}
 	
-	@Override
-	public int compareTo(Category that) {
-		return this.getName().compareTo(that.getName());
+	public int getUniqueID() {
+		return uniqueID;
+	}
+	
+	public void setUniqueID(int uniqueID) {
+		this.uniqueID = uniqueID;
 	}
 }

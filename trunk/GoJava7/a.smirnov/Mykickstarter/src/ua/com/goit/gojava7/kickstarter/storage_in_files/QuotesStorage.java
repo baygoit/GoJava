@@ -4,9 +4,9 @@ import java.util.List;
 import java.util.Random;
 
 import ua.com.goit.gojava7.kickstarter.model.Quote;
-import ua.com.goit.gojava7.kickstarter.templates.AbstractTemplateFiles;
+import ua.com.goit.gojava7.kickstarter.templates.AbstractStorage;
 
-public class QuotesStorage extends AbstractTemplateFiles<Quote>{
+public class QuotesStorage extends AbstractStorage<Quote>{
 	
 	private static final Random RANDOM = new Random();
 	
@@ -32,7 +32,7 @@ public class QuotesStorage extends AbstractTemplateFiles<Quote>{
 	
 	
 	public Quote getRandomQuote() {
-		List<Quote> listQuotes = convertSetInList(getAll());
+		List<Quote> listQuotes = getAll();
 		
 		int randomNumber = RANDOM.nextInt(listQuotes.size());
 		
