@@ -58,8 +58,8 @@ public class WelcomePageControllerTest {
         when(quotesStorage.getAll()).thenReturn(quotes);
         
         cats = new ArrayList<>();
-        cats.add(new Category("c1"));
-        cats.add(new Category("c2"));
+        cats.add(new Category(1, "c1"));
+        cats.add(new Category(2, "c2"));
         
         when(factory.getCategoryDAO()).thenReturn(catStorage);
         when(catStorage.getAll()).thenReturn(cats);

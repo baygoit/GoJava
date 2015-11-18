@@ -68,7 +68,7 @@ public class PledgeFileDAOTest {
     
     @Test
     public void testGetByProject() {
-        Project project = new Project("proj", new User("usr"), new Category("cat"));
+        Project project = new Project("proj", new User("usr"), new Category(1,"cat"));
         List<Pledge> pList = new ArrayList<>();
         pList.add(new Pledge(project, null));
         pList.add(new Pledge(project, null));

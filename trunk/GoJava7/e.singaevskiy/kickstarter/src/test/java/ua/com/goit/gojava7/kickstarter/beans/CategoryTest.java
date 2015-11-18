@@ -17,7 +17,7 @@ public class CategoryTest {
     public void testConstructor() {
         
         String name = "name";
-        Category category = new Category(name);
+        Category category = new Category(1, name);
         
         assertThat(category.getName(), is(name));
          

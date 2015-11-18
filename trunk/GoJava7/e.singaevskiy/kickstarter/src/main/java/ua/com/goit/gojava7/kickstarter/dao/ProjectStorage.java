@@ -10,8 +10,7 @@ public interface ProjectStorage extends DataStorage<Project> {
 
     default List<Project> getByCategory(Category category){
         return this.getAll().stream()
-                .filter(project -> project.getCategories().stream()
-                .anyMatch(projectCategory -> projectCategory.equals(category)))
+                .filter(project -> project.getCategory().equals(category))
                 .collect(Collectors.toList());
     }
     

@@ -24,7 +24,6 @@ public class MainPage {
 
     public void showCategories(List<Category> categories) {
         outStream.print("Categories: | ");
-
         for (int i = 1; i <= categories.size(); i++) {
             outStream.print(String.valueOf(i) + ". " + categories.get(i - 1).getName() + " | ");
         }

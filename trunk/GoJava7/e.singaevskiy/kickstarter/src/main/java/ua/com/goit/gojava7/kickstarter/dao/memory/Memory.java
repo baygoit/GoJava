@@ -42,9 +42,9 @@ public class Memory {
     }
 
     private void initCategories() {
-        categories.add(new Category("Art"));
-        categories.add(new Category("Music"));
-        categories.add(new Category("Sports"));
+        categories.add(new Category(1, "Art"));
+        categories.add(new Category(2, "Music"));
+        categories.add(new Category(3, "Sports"));
     }
 
     private void initProjects() {
@@ -52,7 +52,8 @@ public class Memory {
         
         Project project;
         
-        project = new Project("Xpand Lacing System", new User("Charles Harris"), new Category("Sports"));
+        project = new Project("Xpand Lacing System", new User("Charles Harris"), categories.get(2));
+        project.setId(1);
         project.setDescription("Get your shoes on in 3 seconds flat! No more bows, no more knots, no more tying!");
         project.setStartDate(Utils.dateFromString("25.10.2015"));
         project.setEndDate(Utils.dateFromString("25.11.2015"));
@@ -62,7 +63,8 @@ public class Memory {
         project.addQnA(new QnA("q2", "a2"));
         projects.add(project);
         
-        project = new Project("Draw Like a Boss : The Physical Book", new User("Ash and Eli"), new Category("Art"));
+        project = new Project("Draw Like a Boss : The Physical Book", new User("Ash and Eli"), categories.get(0));
+        project.setId(2);
         project.setDescription("Two years in the making and it's finally ready to become a physical instructional book about drawing.");
         project.setStartDate(Utils.dateFromString("11.10.2015"));
         project.setEndDate(Utils.dateFromString("27.11.2015"));
@@ -72,7 +74,8 @@ public class Memory {
         project.addQnA(new QnA("q4", "a4"));
         projects.add(project);
         
-        project = new Project("Mini Museum 2: The Second Edition", new User("Hans Fex"), new Category("Art"));
+        project = new Project("Mini Museum 2: The Second Edition", new User("Hans Fex"), categories.get(0));
+        project.setId(3);
         project.setDescription("Billions of years of life, science and history in the palm of your hand! Curated and handcrafted to inspire for generations.");
         project.setStartDate(Utils.dateFromString("30.10.2015"));
         project.setEndDate(Utils.dateFromString("25.12.2015"));
@@ -82,7 +85,8 @@ public class Memory {
         project.addQnA(new QnA("q6", "a6"));
         projects.add(project);
         
-        project = new Project("FlyKly Smart Ped", new User("FlyKly"), new Category("Sports"));
+        project = new Project("FlyKly Smart Ped", new User("FlyKly"), categories.get(2));
+        project.setId(4);
         project.setDescription("This beautifully practical kick assist e-bike is the smartest move around the city as it extends your ride and folds easily.");
         project.setStartDate(Utils.dateFromString("29.10.2015"));
         project.setEndDate(Utils.dateFromString("01.01.2016"));
@@ -92,7 +96,8 @@ public class Memory {
         project.addQnA(new QnA("q8", "a8"));
         projects.add(project);
         
-        project = new Project("Music for Cats", new User("David Teie"), new Category("Music"));
+        project = new Project("Music for Cats", new User("David Teie"), categories.get(1));
+        project.setId(5);
         project.setDescription("We need your help to create an album featuring the first-ever music scientifically proven to enrich cats' lives.");
         project.setStartDate(Utils.dateFromString("15.09.2015"));
         project.setEndDate(Utils.dateFromString("05.01.2016"));
