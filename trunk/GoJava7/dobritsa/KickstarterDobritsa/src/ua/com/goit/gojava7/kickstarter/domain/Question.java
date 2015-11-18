@@ -1,9 +1,9 @@
 package ua.com.goit.gojava7.kickstarter.domain;
 
 public class Question {
-	private String question = "";
-	private String answer = "";
 	private String time = "";
+	private String question = "";
+	private String answer = "";	
 	
 	public Question() {		
 		
@@ -29,13 +29,13 @@ public class Question {
 		this.time = time;
 	}
 
-	public void setQuestion(String question) {
-		this.question = question;
-	}
-
 	public String getQuestion() {
 		return question;
 	}
+	
+	public void setQuestion(String question) {
+		this.question = question;
+	}	
 
 	public String getAnswer() {
 		return answer;

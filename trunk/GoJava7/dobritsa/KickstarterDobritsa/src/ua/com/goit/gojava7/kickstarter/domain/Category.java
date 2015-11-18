@@ -7,8 +7,7 @@ import ua.com.goit.gojava7.kickstarter.storage.Storage;
 
 public class Category extends Storage<Project> {
 
-	private String name;
-	//private List<String> pathFiles = new ArrayList<String>();
+	private String name;	
 	
 	public Category() {		
 	}
@@ -16,19 +15,6 @@ public class Category extends Storage<Project> {
 	public Category(String name) {
 		this.name = name;
 	}
-
-	//public List<String> getPathFiles() {
-	//	return pathFiles;
-	//}
-
-	//public void setPathFile(List<String> pathFiles) {
-	//	this.pathFiles = pathFiles;
-	//}
-	
-	//public void addPathFile(String pathFile) {
-	//	this.pathFiles.add(pathFile);
-	//}
-
 
 	public String getName() {
 		return name;

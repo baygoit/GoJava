@@ -1,12 +1,12 @@
 package ua.com.goit.gojava7.kickstarter;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 import ua.com.goit.gojava7.kickstarter.console.CategoryPrinter;
 import ua.com.goit.gojava7.kickstarter.console.ConsoleScanner;
+import ua.com.goit.gojava7.kickstarter.console.Printer;
 import ua.com.goit.gojava7.kickstarter.console.ProjectPrinter;
 import ua.com.goit.gojava7.kickstarter.console.QuotePrinter;
 import ua.com.goit.gojava7.kickstarter.domain.Category;
@@ -17,7 +17,8 @@ import ua.com.goit.gojava7.kickstarter.storage.CategoryStorage;
 import ua.com.goit.gojava7.kickstarter.storage.QuoteStorage;
 
 public class Kickstarter {
-	private ConsoleScanner consoleScanner = new ConsoleScanner();;
+	private ConsoleScanner consoleScanner = new ConsoleScanner();
+	private Printer printer = new Printer();
 
 	private CategoryPrinter categoryPrinter = new CategoryPrinter();
 	private ProjectPrinter projectPrinter = new ProjectPrinter();
@@ -44,7 +45,7 @@ public class Kickstarter {
 
 	public void run() {
 		quotePrinter.printRandomQuote(quoteStorage);
-		do {System.out.println (new java.util.Date ().toLocaleString());
+		do {
 			chooseCategory();
 			if (numberOfCategory == 0) {
 				System.out.println("See you soon!");
@@ -161,9 +162,10 @@ public class Kickstarter {
 		currentProject.addToPledged(amount);
 	}
 
+	
 	public void ask() {
-		System.out.println("Ask your question about project: ");
-		currentProject.addQuestion(new Question((new java.util.Date ().toLocaleString()), consoleScanner.getString()));
+		printer.print("Ask your question about project: ");
+		currentProject.addQuestion(new Question((new Date().toString()), consoleScanner.getString()));
 	}
 
 	public void shutdown() {
