@@ -31,9 +31,9 @@ public class PaymentSystemTest {
 
 	@Test
 	public void makePaymentTest() {
-		int GainedSum = pm.getProject("sport", 1).getGainedSum();
+		int GainedSum = pm.getOne("sport", 1).getGainedSum();
 		ps.acceptPayment(200, 1, "sport");
-		int newGainedSum = pm.getProject("sport", 1).getGainedSum();
+		int newGainedSum = pm.getOne("sport", 1).getGainedSum();
 		assertEquals(newGainedSum, GainedSum + 200);
 	}
 

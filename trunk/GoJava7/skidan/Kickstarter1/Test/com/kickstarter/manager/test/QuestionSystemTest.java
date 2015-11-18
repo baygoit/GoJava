@@ -30,7 +30,7 @@ public class QuestionSystemTest {
 	@Test
 	public void addQuestiontTest() {
 		qs.addNewQuestion("q", 2, "sport");
-		assertEquals("q"+ "\n", pm.getProject("sport", 2).getQuestionSection());
+		assertEquals("q"+ "\n", pm.getOne("sport", 2).getQuestionSection());
 	}
 
 }

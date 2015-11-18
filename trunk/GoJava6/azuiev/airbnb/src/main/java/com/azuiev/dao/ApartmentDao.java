@@ -1,16 +1,8 @@
 package com.azuiev.dao;
 
-import com.azuiev.db.AirbnbDBDao;
-import com.azuiev.enums.ApartType;
 import com.azuiev.model.Apartment;
-import com.azuiev.model.City;
-import com.azuiev.model.User;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import org.hibernate.Session;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,10 +11,10 @@ import java.util.List;
 //TODO reimplement metods
 public class ApartmentDao implements ModelDao {
 
-    static ModelDao dao = new AbstractModelDao(new Apartment());
 
+    static ModelDao dao = new BasicModelDao(new Apartment());
     @Override
-    public List<?> getAll() throws SQLException {
+    public List<Apartment> getAll() throws SQLException {
         return (List<Apartment>) dao.getAll();
     }
 
@@ -30,13 +22,17 @@ public class ApartmentDao implements ModelDao {
     @Override
     public Apartment getById(Long id) throws SQLException {
 
-        return null;
-
+        Apartment Apartment = (Apartment) dao.getById(id);
+        return Apartment;
     }
 
     public List<Apartment> getByCity(Long id) throws SQLException {
+        Session session = HibernateUtil.getSessionFactory().openSession();
 
-        return null;
+        List<Apartment> list = session.createQuery("from Apartment where city = "+ id).list();
+        return list;
+
+
     }
 
     @Override
