@@ -1,8 +1,6 @@
 package ua.com.goit.gojava7.kickstarter.control;
 
-import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 
 import ua.com.goit.gojava7.kickstarter.model.Category;
 import ua.com.goit.gojava7.kickstarter.model.Faq;
@@ -150,6 +148,7 @@ public class KickstarterForMemory {
 				consolePrinter.print("You selected 2. Ask a question ");
 				consolePrinter.print(SEPARATOR);
 				askQuestion(selectedProject);
+				consolePrinter.print(SEPARATOR);
 			}
 			
 		} while (choseNumber != 0);
@@ -169,7 +168,8 @@ public class KickstarterForMemory {
 		payment.setProjectID(project.getUniqueID());
 		project.donateMoney(payment.getDonatingSum());
 		paymentStorage.add(payment);
-		consolePrinter.printShortProjectInfo(project, faqStorage, paymentStorage);	
+		consolePrinter.printShortProjectInfo(project, faqStorage, paymentStorage);
+		
 	}
 	
 	protected void askQuestion(Project project) {
@@ -179,8 +179,8 @@ public class KickstarterForMemory {
 		faqStorage.add(faq);
 		
 		consolePrinter.print(SEPARATOR);
-		
 		consolePrinter.printShortProjectInfo(project, faqStorage, paymentStorage);
+		
 	}
 	
 	protected void stop() {

@@ -1,48 +1,49 @@
-//package ua.com.goit.gojava7.kickstarter.control;
-//
-//import java.util.Iterator;
-//import java.util.Set;
-//
-//import ua.com.goit.gojava7.kickstarter.model.Category;
-//import ua.com.goit.gojava7.kickstarter.model.Faq;
-//import ua.com.goit.gojava7.kickstarter.model.Payment;
-//import ua.com.goit.gojava7.kickstarter.model.Project;
-//import ua.com.goit.gojava7.kickstarter.storage_in_files.CategoriesStorage;
-//import ua.com.goit.gojava7.kickstarter.storage_in_files.FaqStorage;
-//import ua.com.goit.gojava7.kickstarter.storage_in_files.PaymentStorage;
-//import ua.com.goit.gojava7.kickstarter.storage_in_files.ProjectsStorage;
-//import ua.com.goit.gojava7.kickstarter.storage_in_files.QuotesStorage;
-//import ua.com.goit.gojava7.kickstarter.view.ConsolePrinter;
-//import ua.com.goit.gojava7.kickstarter.view.ConsoleScanner;
-//
-//public class KickstarterForFiles {
-//
-//	private static final String SEPARATOR = "**********************************************************************";
-//	private static final String MOVE_TO_THE_NEXT_LINE = "\n";
-//	
-//	private ConsolePrinter consolePrinter;
-//	private ConsoleScanner consoleScanner;
-//	private CategoriesStorage categoriesStorage;
-//	private ProjectsStorage projectsStorage;
-//	private QuotesStorage quotesStorage;
-//	private PaymentStorage paymentStorage;
-//	private FaqStorage faqStorage;
-//
-//	public KickstarterForFiles() {
-//		this.consoleScanner = new ConsoleScanner();
-//		this.consolePrinter = new ConsolePrinter();
-//		this.categoriesStorage = new CategoriesStorage();
-//		this.quotesStorage = new QuotesStorage();
-//		this.paymentStorage = new PaymentStorage();
-//		this.projectsStorage = new ProjectsStorage(categoriesStorage);
-//		this.faqStorage = new FaqStorage();
-//	}
-//
-//	public void start() {
+package ua.com.goit.gojava7.kickstarter.control;
+
+import java.util.Iterator;
+import java.util.Set;
+
+import ua.com.goit.gojava7.kickstarter.model.Category;
+import ua.com.goit.gojava7.kickstarter.model.Faq;
+import ua.com.goit.gojava7.kickstarter.model.Payment;
+import ua.com.goit.gojava7.kickstarter.model.Project;
+import ua.com.goit.gojava7.kickstarter.storage_in_files.CategoriesStorage;
+import ua.com.goit.gojava7.kickstarter.storage_in_files.FaqStorage;
+import ua.com.goit.gojava7.kickstarter.storage_in_files.PaymentStorage;
+import ua.com.goit.gojava7.kickstarter.storage_in_files.ProjectsStorage;
+import ua.com.goit.gojava7.kickstarter.storage_in_files.QuotesStorage;
+import ua.com.goit.gojava7.kickstarter.view.ConsolePrinter;
+import ua.com.goit.gojava7.kickstarter.view.ConsoleScanner;
+
+public class KickstarterForFiles {
+
+	private static final String SEPARATOR = "**********************************************************************";
+	private static final String MOVE_TO_THE_NEXT_LINE = "\n";
+	
+	private ConsolePrinter consolePrinter;
+	private ConsoleScanner consoleScanner;
+	private CategoriesStorage categoriesStorage;
+	private ProjectsStorage projectsStorage;
+	private QuotesStorage quotesStorage;
+	private PaymentStorage paymentStorage;
+	private FaqStorage faqStorage;
+
+	public KickstarterForFiles() {
+		this.consoleScanner = new ConsoleScanner();
+		this.consolePrinter = new ConsolePrinter();
+		this.categoriesStorage = new CategoriesStorage();
+		this.quotesStorage = new QuotesStorage();
+		this.paymentStorage = new PaymentStorage();
+		this.projectsStorage = new ProjectsStorage(categoriesStorage);
+		this.faqStorage = new FaqStorage();
+	}
+
+	public void start() {
 //		consolePrinter.print(quotesStorage.getRandomQuote());
 //		selectCategory();
-//	}
-//	
+	}
+}
+	
 //	protected void selectCategory() {
 //		Set<Category> AllCategories = categoriesStorage.getAll();
 //		int amountOfCategories = AllCategories.size();

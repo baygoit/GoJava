@@ -6,12 +6,12 @@ public class Quote implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
-	private String author;
 	private String quoteText;
+	private String author;
 	
-	public Quote(String author, String quoteText) {
-		this.author = author;
+	public Quote(String quoteText, String author) {
 		this.quoteText = quoteText;
+		this.author = author;
 	}
 
 	public void setQuoteText(String title) {
