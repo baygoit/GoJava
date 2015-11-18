@@ -1,10 +1,7 @@
 package ua.com.goit.gojava7.kickstarter.controller;
 
-import java.io.IOException;
 import java.util.Date;
 import java.util.List;
-
-import org.objenesis.strategy.PlatformDescription;
 
 import ua.com.goit.gojava7.kickstarter.beans.Payment;
 import ua.com.goit.gojava7.kickstarter.beans.Pledge;
