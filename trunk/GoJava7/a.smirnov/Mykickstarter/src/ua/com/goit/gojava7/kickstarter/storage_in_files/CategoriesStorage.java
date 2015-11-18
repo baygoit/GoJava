@@ -2,9 +2,9 @@
 package ua.com.goit.gojava7.kickstarter.storage_in_files;
 
 import ua.com.goit.gojava7.kickstarter.model.Category;
-import ua.com.goit.gojava7.kickstarter.templates.AbstractTemplateFiles;
+import ua.com.goit.gojava7.kickstarter.templates.AbstractStorage;
 
-public class CategoriesStorage extends AbstractTemplateFiles<Category> {
+public class CategoriesStorage extends AbstractStorage<Category> {
 	
 	public CategoriesStorage() {
 		Category category1 = new Category("Arts");

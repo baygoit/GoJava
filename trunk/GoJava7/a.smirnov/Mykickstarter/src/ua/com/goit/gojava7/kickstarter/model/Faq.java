@@ -5,13 +5,13 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
 
-public class Faq implements Comparable<Faq>, Serializable {
+public class Faq implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	private Project project;
 	private String question;
 	private String answer;
 	private Calendar receivedQuestionDate;
+	private int projectID;
 	
 	public Faq(String question) {
 		this.question = question;
@@ -34,16 +34,16 @@ public class Faq implements Comparable<Faq>, Serializable {
 		this.answer = answer;
 	}
 	
-	public Project getProject() {
-		return project;
-	}
-	
-	public void setProject(Project project) {
-		this.project = project;
-	}
-
 	public Calendar getReceivedQuestionDay() {
 		return receivedQuestionDate;
+	}
+	
+	public int getProjectID() {
+		return projectID;
+	}
+	
+	public void setProjectID(int projectID) {
+		this.projectID = projectID;
 	}
 
 	protected void setReceivedQuestionDay() {
@@ -52,10 +52,5 @@ public class Faq implements Comparable<Faq>, Serializable {
 		Date date = new Date();
 		receivedQuestionDate.setTimeZone(timeZone);
 		receivedQuestionDate.setTime(date);
-	}
-	
-	@Override
-	public int compareTo(Faq that) {
-		return  (int) (this.receivedQuestionDate.getTimeInMillis() - that.getReceivedQuestionDay().getTimeInMillis());
 	}
 }
