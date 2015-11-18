@@ -52,4 +52,41 @@ public class Pledge {
         return payment.getSum();
     }
 
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((payment == null) ? 0 : payment.hashCode());
+        result = prime * result + ((project == null) ? 0 : project.hashCode());
+        result = prime * result + ((reward == null) ? 0 : reward.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Pledge other = (Pledge) obj;
+        if (payment == null) {
+            if (other.payment != null)
+                return false;
+        } else if (!payment.equals(other.payment))
+            return false;
+        if (project == null) {
+            if (other.project != null)
+                return false;
+        } else if (!project.equals(other.project))
+            return false;
+        if (reward == null) {
+            if (other.reward != null)
+                return false;
+        } else if (!reward.equals(other.reward))
+            return false;
+        return true;
+    }
+
 }
