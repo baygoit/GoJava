@@ -5,14 +5,15 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 public class CsvParser {
@@ -20,12 +21,9 @@ public class CsvParser {
     private String dateTimeFormat = "yyyy.MM.dd";
     private String delimiter = ";";
     private String lineSeparator = "\n";
-    private Class<?> clazz;
     private Set<Class<?>> simpleTypes;
 
-    public CsvParser(Class<?> clazz) {
-        this.clazz = clazz;
-
+    public CsvParser() {
         simpleTypes = new HashSet<>();
         simpleTypes.add(String.class);
         simpleTypes.add(Integer.class);
@@ -57,55 +55,74 @@ public class CsvParser {
     }
 
     public <T> void write(T element, String filePath)
-            throws IllegalAccessException, InvocationTargetException, IOException {
+            throws ReflectiveOperationException, IOException {
         List<T> list = new ArrayList<>();
         list.add(element);
         write(list, filePath);
     }
 
     public <T> void write(List<T> collection, String filePath)
-            throws IOException, IllegalAccessException, InvocationTargetException {
+            throws IOException, ReflectiveOperationException {
 
-        List<Method> getters = new ArrayList<>();
-        List<Method> setters = new ArrayList<>();
+        if (!collection.isEmpty()) {
+            Class<?> clazz = collection.get(0).getClass();
+            
+            Map<String, Method> methods = getMethods(clazz, "get");
 
-        StringBuilder header = new StringBuilder();
+            writeToFile(collection, filePath, methods);
+        }
+        
+    }
+    
+    private Map<String, Method> getMethods(Class<?> clazz, String methodType){
+        Map<String, Method> methods = new HashMap<>();
+
         for (Field field : clazz.getDeclaredFields()) {
 
             if (Collection.class.isAssignableFrom(field.getType()) || field.getType().isArray()) {
                 continue;
             }
 
-            String name = "";
+            String name = field.getName();
             try {
-                name = field.getName();
                 name = name.substring(0, 1).toUpperCase() + name.substring(1);
-                Method setter = clazz.getMethod("set" + name, field.getType());
-                setters.add(setter);
-                Method getter = clazz.getMethod("get" + name);
-                getters.add(getter);
+                Method method;
+                
+                if (methodType.equals("get")) {
+                    method = clazz.getMethod(methodType + name);
+                }else {
+                    method = clazz.getMethod(methodType + name, field.getType());
+                }
+                
+                methods.put(name.toLowerCase(), method);
 
-                header.append(name).append(delimiter);
             } catch (Exception e) {
                 e.printStackTrace();
                 System.out.println(name + " not found");
             }
         }
-
-        writeToFile(collection, filePath, getters, header);
+        return methods;
     }
 
-    private <T> void writeToFile(List<T> collection, String filePath, List<Method> getters, StringBuilder header)
-            throws IOException, IllegalAccessException, InvocationTargetException {
+    private <T> void writeToFile(List<T> collection, String filePath, Map<String, Method> methods)
+            throws IOException, ReflectiveOperationException {
+        
+        StringBuilder header = new StringBuilder();
+        for (String fieldName : methods.keySet()) {
+            header.append(fieldName).append(delimiter);
+        }
+        header.append(lineSeparator);
+       
         
         BufferedWriter writer = new BufferedWriter(new FileWriter(getDataFile(filePath)));
-        writer.write(header.append(lineSeparator).toString());
+        writer.write(header.toString());
 
         for (T element : collection) {
-            for (Method method : getters) {
+            System.out.println(element);
+            for (Method method : methods.values()) {
                 Object value = method.invoke(element);
 
-                if (simpleTypes.contains(value.getClass())) {
+                if (value.getClass().isPrimitive() || simpleTypes.contains(value.getClass())) {
                     writer.write("\"" + value.toString() + "\"");
                 } else if (value instanceof Date) {
                     SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateTimeFormat);
