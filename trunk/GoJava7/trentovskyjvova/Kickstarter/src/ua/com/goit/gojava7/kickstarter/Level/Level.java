@@ -15,7 +15,7 @@ public interface Level {
 			int userChoise, Category selectedCategory);
 
 	public String validateUserChoise(List<Category> categories, int userChoise,
-			Category selectedCategory);
+			Category selectedCategory, Project selectedProject);
 
 	public String fillOutForm(Project project, int userChoise, ConsoleScanner consoleScanner);
 

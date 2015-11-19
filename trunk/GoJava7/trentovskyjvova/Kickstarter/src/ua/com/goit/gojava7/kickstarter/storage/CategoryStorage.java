@@ -24,5 +24,21 @@ public class CategoryStorage {
 	public Category get(int index){
 		return categories.get(index);
 	}
+
+	public void setCategories(List<Category> categories) {
+		this.categories = categories;
+		
+	}
+
+	public Category getCategory(int categoryId) {
+		Category result = null;
+		for (Category category : categories) {
+			if(category.getId() == categoryId){
+				result = category;
+				break;
+			}
+		}
+		return result;
+	}
 	
 }

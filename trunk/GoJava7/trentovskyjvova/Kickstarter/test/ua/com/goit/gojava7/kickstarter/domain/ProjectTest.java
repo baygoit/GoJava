@@ -11,7 +11,7 @@ public class ProjectTest {
 
 	@Before 
 	public void setUp(){
-		progect = new Project("Super project");
+		progect = new Project("Super project", 1);
 	}
 	
 	@Test

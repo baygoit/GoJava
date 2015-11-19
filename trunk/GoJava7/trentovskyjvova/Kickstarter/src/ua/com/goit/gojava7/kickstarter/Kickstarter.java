@@ -9,6 +9,7 @@ import ua.com.goit.gojava7.kickstarter.Level.CategoryLevel;
 import ua.com.goit.gojava7.kickstarter.Level.Level;
 import ua.com.goit.gojava7.kickstarter.Level.MenuLevel;
 import ua.com.goit.gojava7.kickstarter.Level.PaymentLevel;
+import ua.com.goit.gojava7.kickstarter.Level.PledgeLevel;
 import ua.com.goit.gojava7.kickstarter.Level.ProjectLevel;
 import ua.com.goit.gojava7.kickstarter.console.ConsolePrinter;
 import ua.com.goit.gojava7.kickstarter.console.ConsoleScanner;
@@ -26,7 +27,8 @@ public class Kickstarter {
 
 	private List<Level> levels;
 
-	public Kickstarter(ConsolePrinter consolePrinter, ConsoleScanner consoleScanner, QuoteStorage quoteStorage,
+	public Kickstarter(ConsolePrinter consolePrinter,
+			ConsoleScanner consoleScanner, QuoteStorage quoteStorage,
 			CategoryStorage categoryStorage) {
 		this.quoteStorage = quoteStorage;
 		this.categoryStorage = categoryStorage;
@@ -34,12 +36,12 @@ public class Kickstarter {
 		this.consoleScanner = consoleScanner;
 
 		levels = new LinkedList<>(Arrays.asList(new MenuLevel(),
-				new CategoryLevel(), new ProjectLevel(), new PaymentLevel()));
+				new CategoryLevel(), new ProjectLevel(), new PaymentLevel(), new PledgeLevel()));
 	}
 
 	public void runKickstarter() {
 		consolePrinter.print(quoteStorage.getRandomQuote());
-		
+
 		ListIterator<Level> levelsIterator = levels.listIterator();
 		List<Category> categories = categoryStorage.getAllCategories();
 
@@ -49,7 +51,8 @@ public class Kickstarter {
 		Project selectedProject = null;
 		String answer;
 
-		answer = userPositionLevel.generateAnswer(categories, userChoise, selectedCategory, selectedProject);
+		answer = userPositionLevel.generateAnswer(categories, userChoise,
+				selectedCategory, selectedProject);
 
 		consolePrinter.print(answer);
 
@@ -65,24 +68,30 @@ public class Kickstarter {
 				}
 			}
 
-			answer = userPositionLevel.validateUserChoise(categories, userChoise, selectedCategory);
+			answer = userPositionLevel.validateUserChoise(categories,
+					userChoise, selectedCategory, selectedProject);
 			if (!answer.equals("")) {
 				consolePrinter.print(answer);
 				continue;
 			}
 
-			userPositionLevel = findNewUserPositionLevel(levelsIterator, userChoise);
+			userPositionLevel = findNewUserPositionLevel(levelsIterator,
+					userChoise);
 			userChoise--;
 
-			selectedCategory = userPositionLevel.findSelectedCategory(categories, userChoise, selectedCategory);
-			selectedProject = userPositionLevel.findSelectedProject(userChoise, selectedCategory, selectedProject);	
-			
-			answer = userPositionLevel.generateAnswer(categories, userChoise, selectedCategory, selectedProject);
+			selectedCategory = userPositionLevel.findSelectedCategory(
+					categories, userChoise, selectedCategory);
+			selectedProject = userPositionLevel.findSelectedProject(userChoise,
+					selectedCategory, selectedProject);
+
+			answer = userPositionLevel.generateAnswer(categories, userChoise,
+					selectedCategory, selectedProject);
 			if (!answer.equals("")) {
 				consolePrinter.print(answer);
 			}
-						
-			answer = userPositionLevel.fillOutForm(selectedProject, userChoise+1, consoleScanner);			
+
+			answer = userPositionLevel.fillOutForm(selectedProject,
+					userChoise + 1, consoleScanner);
 			if (!answer.equals("")) {
 				consolePrinter.print(answer);
 			}
@@ -95,13 +104,14 @@ public class Kickstarter {
 		consoleScanner.close();
 	}
 
-	private Level findNewUserPositionLevel(ListIterator<Level> listIterator, int userChoise) {
+	private Level findNewUserPositionLevel(ListIterator<Level> listIterator,
+			int userChoise) {
 
 		if (userChoise == 0) {
 			listIterator.hasPrevious();
-				listIterator.previous();
-				listIterator.previous();
-			
+			listIterator.previous();
+			listIterator.previous();
+
 		}
 		return listIterator.next();
 	}

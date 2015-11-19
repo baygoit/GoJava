@@ -12,6 +12,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import ua.com.goit.gojava7.kickstarter.domain.Category;
+import ua.com.goit.gojava7.kickstarter.domain.Project;
 
 public class MenuLevelTest {
 	private static final String ANSVER = "Please, enter the number between 0 and 1";
@@ -19,11 +20,12 @@ public class MenuLevelTest {
 	List<Category> categories;
 	Category selectedCategory;
 	Level menuLevel = new MenuLevel();
-
+	Project project;
+	
 	@Before 
 	public void setUp() {
 		categories = new ArrayList<Category>();
-		Category category = new Category("Some Category");
+		Category category = new Category("Some Category", 1);
 		categories.add(category);
 	}
 	
@@ -35,19 +37,19 @@ public class MenuLevelTest {
 
 	@Test
 	public void testValidateUserChoise1() {
-		String result = menuLevel.validateUserChoise(categories, 1, selectedCategory);
+		String result = menuLevel.validateUserChoise(categories, 1, selectedCategory, project);
 		assertThat(result, is(""));
 	}
 	
 	@Test
 	public void testValidateUserChoise2() {
-		String result = menuLevel.validateUserChoise(categories, 2, selectedCategory);
+		String result = menuLevel.validateUserChoise(categories, 2, selectedCategory, project);
 		assertThat(result, is(ANSVER));
 	}
 	
 	@Test
 	public void testValidateUserChoiseMinus1() {
-		String result = menuLevel.validateUserChoise(categories, -1, selectedCategory);
+		String result = menuLevel.validateUserChoise(categories, -1, selectedCategory, project);
 		assertThat(result, is(ANSVER));
 	}
 	
