@@ -2,9 +2,9 @@
 package ua.com.goit.gojava7.kickstarter.storage_in_memory;
 
 import ua.com.goit.gojava7.kickstarter.model.Category;
-import ua.com.goit.gojava7.kickstarter.templates.AbstractTemplateMemory;
+import ua.com.goit.gojava7.kickstarter.templates.AbstractStorage;
 
-public class CategoriesStorage extends AbstractTemplateMemory<Category> {
+public class CategoriesStorage extends AbstractStorage<Category> {
 	
 	public CategoriesStorage() {
 		Category category1 = new Category("Arts");
@@ -18,5 +18,14 @@ public class CategoriesStorage extends AbstractTemplateMemory<Category> {
 		add(category3);
 		add(category4);
 		add(category5);
+		
+		setCategoriesID();
+	}
+	
+	public void setCategoriesID() {
+		for (int index = 0; index < getAll().size(); index++) {
+			Category category = getAll().get(index);
+			category.setUniqueID(index + 1);
+		}
 	}
 }

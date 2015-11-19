@@ -6,18 +6,16 @@ import java.sql.SQLException;
 import java.util.List;
 
 /**
- * Created by Administrator on 02.11.15.
+ * Created by Masta on 02.11.15.
  */
 //TODO reimplement metods
-public class ApartmentDao implements ModelDao {
+public class ApartmentDao implements ModelDao<Apartment> {
 
-
-    static ModelDao dao = new BasicModelDao(new Apartment());
+    static ModelDao dao = new BasicModelDao<Apartment>(Apartment.class);
     @Override
     public List<Apartment> getAll() throws SQLException {
-        return (List<Apartment>) dao.getAll();
+        return dao.getAll();
     }
-
 
     @Override
     public Apartment getById(Long id) throws SQLException {
@@ -32,21 +30,20 @@ public class ApartmentDao implements ModelDao {
         List<Apartment> list = session.createQuery("from Apartment where city = "+ id).list();
         return list;
 
-
     }
 
     @Override
-    public void update(Object obj) {
-        //TODO
+    public void update(Apartment apartment) throws SQLException {
+        dao.update(apartment);
     }
 
     @Override
-    public void add(Object obj) {
-        //TODO
+    public void add(Apartment apartment) throws SQLException {
+        dao.add(apartment);
     }
 
     @Override
-    public void delete(Object obj) {
-        //TODO
+    public void delete(Apartment apartment) throws SQLException {
+        dao.delete(apartment);
     }
 }

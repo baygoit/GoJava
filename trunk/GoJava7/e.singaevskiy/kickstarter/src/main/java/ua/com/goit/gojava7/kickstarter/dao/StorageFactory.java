@@ -6,10 +6,12 @@ import ua.com.goit.gojava7.kickstarter.beans.Quote;
 import ua.com.goit.gojava7.kickstarter.dao.file.FileDAO;
 import ua.com.goit.gojava7.kickstarter.dao.file.PledgeFileDAO;
 import ua.com.goit.gojava7.kickstarter.dao.file.ProjectFileDAO;
+import ua.com.goit.gojava7.kickstarter.dao.file.RewardFileDAO;
 import ua.com.goit.gojava7.kickstarter.dao.memory.Memory;
 import ua.com.goit.gojava7.kickstarter.dao.memory.MemoryDAO;
 import ua.com.goit.gojava7.kickstarter.dao.memory.PledgeMemoryDAO;
 import ua.com.goit.gojava7.kickstarter.dao.memory.ProjectMemoryDAO;
+import ua.com.goit.gojava7.kickstarter.dao.memory.RewardMemoryDAO;
 
 public class StorageFactory {
     private DataType dataType;
@@ -18,6 +20,7 @@ public class StorageFactory {
     private ProjectStorage projectDAO;
     private PledgeStorage pledgeDAO;
     private DataStorage<Payment> paymentDAO;
+    private RewardStorage rewardDAO;
     
     public StorageFactory(DataType dataType) {
         this.dataType = dataType;
@@ -45,6 +48,7 @@ public class StorageFactory {
         
         projectDAO = new ProjectMemoryDAO(mem.getProjects());
         pledgeDAO = new PledgeMemoryDAO(mem.getPledges());
+        rewardDAO = new RewardMemoryDAO(mem.getRewards());
     }
     
     private void initFileStorage(){
@@ -54,6 +58,7 @@ public class StorageFactory {
         
         projectDAO = new ProjectFileDAO();
         pledgeDAO = new PledgeFileDAO();
+        rewardDAO = new RewardFileDAO();
     }
 
     public DataStorage<Category> getCategoryDAO() {
@@ -78,5 +83,9 @@ public class StorageFactory {
 
     public DataStorage<Payment> getPaymentDAO() {
         return paymentDAO;
+    }
+
+    public RewardStorage getRewardDAO() {
+        return rewardDAO;
     }
 }

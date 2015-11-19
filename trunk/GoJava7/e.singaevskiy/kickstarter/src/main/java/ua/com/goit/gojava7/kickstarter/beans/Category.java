@@ -1,14 +1,16 @@
 package ua.com.goit.gojava7.kickstarter.beans;
 
 public class Category {
-
+    
+    private int id;
     private String name;
     
     public Category() {
         // default bean constructor
     }
 
-    public Category(String name) {
+    public Category(int id, String name) {
+        this.id = id;
         this.name = name;
     }
 
@@ -52,6 +54,14 @@ public class Category {
             return false;
         }
         return true;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
 }

@@ -24,9 +24,9 @@ public class CategoryFileDAOTest {
         fs = new FileDAO<Category>(persistentClass, 
                 "src/test/resources/storages/file/%name%.txt".replace("%name%", persistentClass.getSimpleName()));
         
-        list.add(new Category("c1"));
-        list.add(new Category("c2"));
-        list.add(new Category(null));
+        list.add(new Category(1, "c1"));
+        list.add(new Category(2, "c2"));
+        list.add(new Category(3, null));
         
         list = new Memory().getCategories();
         
@@ -55,7 +55,7 @@ public class CategoryFileDAOTest {
     @Test
     public void testAdd() {
         int lastIndex = list.size()-1;
-        Category element = new Category("cat");
+        Category element = new Category(4, "cat");
         fs.add(element);
         assertThat(fs.get(++lastIndex), is(element));
     }

@@ -1,31 +1,29 @@
 package com.azuiev.dao;
 
-import com.azuiev.model.City;
 import org.hibernate.Session;
-
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Administrator on 06.11.15.
+ * Created by Masta on 06.11.15.
  */
-public class BasicModelDao implements ModelDao {
-    Object model;
+public class BasicModelDao<T> implements ModelDao<T> {
+    Class clazz;
 
-    public BasicModelDao(Object model) {
-        this.model = model;
+    public BasicModelDao(Class clazz) {
+        this.clazz = clazz;
     }
 
     @Override
-    public List<?> getAll() throws SQLException {
+    public List<T> getAll() throws SQLException {
         Session session = null;
-        List<?> list = new ArrayList<>();
+        List<T> list = new ArrayList<>();
         try {
             session = HibernateUtil.getSessionFactory().openSession();
-            list = session.createCriteria(model.getClass()).list();
+            list = session.createCriteria(clazz).list();
         } catch (Exception e) {
-            //NOP
+            //TODO add logging
         } finally {
             if (session != null && session.isOpen()) {
                 session.close();
@@ -35,35 +33,65 @@ public class BasicModelDao implements ModelDao {
     }
 
     @Override
-    public Object getById(Long id) throws SQLException {
+    public T getById(Long id) throws SQLException {
         Session session = null;
+        T obj = null;
         try {
             session = HibernateUtil.getSessionFactory().openSession();
-            model = session.get(model.getClass(), id);
-            System.out.println("ttt");
+            obj = (T) session.get(clazz, id);
 
         } catch (Exception e) {
-            //TODO
+            //TODO add logging
         } finally {
             if (session != null && session.isOpen()) {
                 session.close();
             }
         }
-        return model;
+        return obj;
     }
 
     @Override
-    public void update(Object obj) throws SQLException {
-
+    public void update(T obj) {
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            session.update(obj);
+        } catch (Exception e) {
+            //TODO add logging
+        } finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
+        }
     }
 
     @Override
-    public void add(Object obj) throws SQLException {
-
+    public void add(T obj) throws SQLException {
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            session.save(obj);
+        } catch (Exception e) {
+            //TODO add logging
+        } finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
+        }
     }
 
     @Override
-    public void delete(Object obj) throws SQLException {
-
+    public void delete(T obj) throws SQLException {
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            session.delete(obj);
+        } catch (Exception e) {
+            //TODO add logging
+        } finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
+        }
     }
 }

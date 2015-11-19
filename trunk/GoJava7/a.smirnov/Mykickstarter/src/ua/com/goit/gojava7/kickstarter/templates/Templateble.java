@@ -1,6 +1,6 @@
 package ua.com.goit.gojava7.kickstarter.templates;
 
-import java.util.Set;
+import java.util.List;
 
 public interface Templateble<T> {
 	
@@ -8,6 +8,6 @@ public interface Templateble<T> {
 
 	public void remove(T element);
 	
-	public Set<T> getAll();
+	public List<T> getAll();
 	
 }

@@ -1,7 +1,12 @@
 package ua.com.goit.gojava7.kickstarter;
 
-import ua.com.goit.gojava7.kickstarter.controller.MainPageController;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+
+import ua.com.goit.gojava7.kickstarter.controller.PageController;
+import ua.com.goit.gojava7.kickstarter.controller.WelcomePageController;
 import ua.com.goit.gojava7.kickstarter.dao.DataType;
+import ua.com.goit.gojava7.kickstarter.dao.StorageFactory;
 import ua.com.goit.gojava7.kickstarter.view.MainPage;
 
 public class App {
@@ -10,11 +15,14 @@ public class App {
         start(initDataType(args));
     }
 
+    @SuppressWarnings("rawtypes")
     public static void start(DataType dataType) {  
 
-        MainPage page = new MainPage(System.out);
-        MainPageController controller = new MainPageController(page, dataType, System.in);
-        controller.showMainPage();
+        PageController page = new WelcomePageController();
+        page.setStorageFactory(new StorageFactory(dataType));
+        page.setInputReader(new BufferedReader(new InputStreamReader(System.in))); 
+        page.setMainPage(new MainPage(System.out));
+        page.dispatch();
 
     }
 
