@@ -14,7 +14,6 @@ public class PaymentStorage extends AbstractMemoryStorage<Payment> {
 		if (allProjectPayments.size() == 0) {
 			return 0;
 		} else {
-			
 			int result = 0;		
 			for (int index = 0; index < allProjectPayments.size(); index++) {
 				Payment payment = allProjectPayments.get(index);
@@ -22,7 +21,6 @@ public class PaymentStorage extends AbstractMemoryStorage<Payment> {
 					result += payment.getDonatingSum();
 				}
 			}
-			
 			return result;
 		}
 	}

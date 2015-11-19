@@ -13,7 +13,7 @@ import ua.com.goit.gojava7.kickstarter.model.Category;
 import ua.com.goit.gojava7.kickstarter.model.Project;
 
 public class ProjectsStorage extends AbstractFilesStorage<Project> {
-	private final File file = new File("D:\\projects.csv");
+	private final File file = new File("./sources/projects.csv");
 	
 	private static final int UNIQUE_ID = 0;
 	private static final int CATEGORY_ID = 1;

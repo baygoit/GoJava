@@ -30,7 +30,6 @@ public class QuotesStorage extends AbstractMemoryStorage<Quote>{
 		add(quote3);
 	}
 	
-	
 	public Quote getRandomQuote() {
 		List<Quote> listQuotes = getAll();
 		

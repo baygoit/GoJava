@@ -13,19 +13,17 @@ public class CategoriesStorage extends AbstractMemoryStorage<Category> {
 		Category category4 = new Category("Culture");
 		Category category5 = new Category("Food");
 
+		category1.setUniqueID(1);
+		category2.setUniqueID(2);
+		category3.setUniqueID(3);
+		category4.setUniqueID(4);
+		category5.setUniqueID(5);
+		
 		add(category1);
 		add(category2);
 		add(category3);
 		add(category4);
 		add(category5);
 		
-		setCategoriesID();
-	}
-	
-	public void setCategoriesID() {
-		for (int index = 0; index < getAll().size(); index++) {
-			Category category = getAll().get(index);
-			category.setUniqueID(index + 1);
-		}
 	}
 }

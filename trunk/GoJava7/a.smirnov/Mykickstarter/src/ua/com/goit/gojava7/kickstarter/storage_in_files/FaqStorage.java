@@ -12,7 +12,7 @@ import ua.com.goit.gojava7.kickstarter.dao.AbstractFilesStorage;
 import ua.com.goit.gojava7.kickstarter.model.Faq;
 
 public class FaqStorage extends AbstractFilesStorage<Faq>{
-	private final File file = new File("D:\\FAQs.csv");
+	private final File file = new File("./sources/FAQs.csv");
 	
 	private static final int PROJECT_ID = 0;
 	private static final int QUESTION = 1;

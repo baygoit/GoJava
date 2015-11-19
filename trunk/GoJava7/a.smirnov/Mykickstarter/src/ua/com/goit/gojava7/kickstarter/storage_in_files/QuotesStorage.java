@@ -14,7 +14,7 @@ import ua.com.goit.gojava7.kickstarter.model.Quote;
 
 public class QuotesStorage extends AbstractFilesStorage<Quote> {
 	private static final Random RANDOM = new Random();
-	private final File file = new File("D:\\quotes.csv");
+	private final File file = new File("./sources/quotes.csv");
 	
 	private static final int AUTHOR = 0;
 	private static final int QUOTE_TEXT = 1;

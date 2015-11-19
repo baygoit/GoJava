@@ -12,7 +12,7 @@ import ua.com.goit.gojava7.kickstarter.dao.AbstractFilesStorage;
 import ua.com.goit.gojava7.kickstarter.model.Payment;
 
 public class PaymentStorage extends AbstractFilesStorage<Payment> {
-	private final File file = new File("D:\\payments.csv");
+	private final File file = new File("./sources/payments.csv");
 	
 	private static final int PRJECT_ID = 0;
 	private static final int USER_NAME = 1;
