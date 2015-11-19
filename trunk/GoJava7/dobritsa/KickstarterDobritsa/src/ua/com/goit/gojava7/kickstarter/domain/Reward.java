@@ -1,11 +1,15 @@
 package ua.com.goit.gojava7.kickstarter.domain;
 
-public class Donation {
+public class Reward {
 
 	private int amount;
 	private String reward;
 	
-	public Donation(int amount, String reward) {		
+	public Reward() {		
+		
+	}
+	
+	public Reward(int amount, String reward) {		
 		this.amount = amount;
 		this.reward = reward;
 	}

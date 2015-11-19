@@ -18,8 +18,8 @@ public class FileCategoryReader extends FileReader<Category> implements Category
 		String line;
 		while ((line = fileReader.readLine()) != null) {
 			Category category = new Category(line);
-			FileProjectReader fpr = new FileProjectReader(new File(fileReader.readLine()));
-			category.setAll(fpr.read());
+			FileProjectReader fileProjectReader = new FileProjectReader(new File(fileReader.readLine()));
+			category.setAll(fileProjectReader.read());
 			data.add(category);
 		}
 		return data;

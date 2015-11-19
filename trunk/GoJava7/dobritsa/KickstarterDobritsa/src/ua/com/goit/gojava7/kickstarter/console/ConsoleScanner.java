@@ -23,7 +23,7 @@ public class ConsoleScanner {
 			int number = sc.nextInt();
 			if ((number < start | number > end) & number != 0) {
 				if (end == 0)
-					System.out.println("Type " + end + " to choose another project:");
+					System.out.println("Type 0 to exit to the previous menu:");
 				else
 					System.out.println("You should type a number FROM " + start + " TO " + end + ": ");
 				continue;
@@ -63,7 +63,7 @@ public class ConsoleScanner {
 	public String getString() {
 		String text = sc.next();
 		return text;
-	}
+	}	
 
 	public void close() {
 		sc.close();

@@ -1,6 +1,6 @@
 Music
-./resources/CategoryMusic1.txt
+./resources/CategoryMusic.txt
 Food
-./resources/CategoryFood1.txt
+./resources/CategoryFood.txt
 Dances
-./resources/CategoryDances1.txt
+./resources/CategoryDances.txt
