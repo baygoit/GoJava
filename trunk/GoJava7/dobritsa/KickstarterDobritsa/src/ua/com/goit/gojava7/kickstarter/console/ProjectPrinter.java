@@ -46,7 +46,7 @@ public class ProjectPrinter {
 			System.out.println("There are no rewards. You can just help the project.");
 			return;
 		}	
-		System.out.println("Type:/n");
+		System.out.println("Type:");
 		for (int i = 0; i < rewards.size(); i++) {
 			System.out.println((i + 1) + ": \t$" + rewards.get(i).getAmount() + "\t-\t" + rewards.get(i).getReward());
 		}

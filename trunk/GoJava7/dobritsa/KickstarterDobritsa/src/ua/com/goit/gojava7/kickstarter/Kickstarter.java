@@ -54,7 +54,9 @@ public class Kickstarter {
 			do {
 				chooseProject();
 				if (numberOfProject != 0)
-					viewProject();
+					printer.print(BORDER + "\nCurrent category: " + currentCategory.getName() + "\nCurrent project: #"
+							+ (numberOfProject) + "\n");					
+					viewProject(currentProject);
 			} while (numberOfProject != 0);
 
 		} while (numberOfCategory != 0);
@@ -99,27 +101,21 @@ public class Kickstarter {
 		currentProject = categoryStorage.get(indexOfCategory).get(indexOfProject);
 	}
 
-	public void viewProject() {
+	public void viewProject(Project project) { 
 		boolean exit = false;
 		while (!exit) {
-			printAboutProject();
-			exit = chooseOptionOfProject();
+			projectPrinter.printFull(project);
+			exit = chooseOptionOfProject(currentProject);
 		}
 	}
 
-	public void printAboutProject() {
-		System.out.println(BORDER + "\nCurrent category: " + currentCategory.getName() + "\nCurrent project: #"
-				+ (numberOfProject) + "\n");
-		projectPrinter.printFull(currentProject);
-	}
-
-	public boolean chooseOptionOfProject() {
+	public boolean chooseOptionOfProject(Project project) { 
 		String text = consoleScanner.getOption();
 		if (text.equals("b")) { 
-			donate();
+			donate(project);
 		}
 		if (text.equals("a")) {
-			ask();
+			addQuestion(project);
 		}
 		if (text.equals("0")) {
 			return true;
@@ -127,49 +123,48 @@ public class Kickstarter {
 		return false;
 	}
 
-	public void donate() {
-		System.out.println(BORDER + "\n\nEnter your name:");
+	public void donate(Project project) {
+		printer.print(BORDER + "\n\nEnter your name:");
 		consoleScanner.getName();
-		System.out.println("\nEnter your card's number:");
+		printer.print("\nEnter your card's number:");
 		consoleScanner.getCreditCard();
-		chooseReward();		
+		chooseReward(project);		
 	}
 
-	public void chooseReward() {
-		System.out.println("\nLet's choose your reward!\n");
-		List<Reward> rewards = new ArrayList<>(currentProject.getRewards());
+	public void chooseReward(Project project) {
+		printer.print("\nLet's choose your reward!\n");
+		List<Reward> rewards = new ArrayList<>(project.getRewards());
 		projectPrinter.printRewards(rewards);
 		int numberOfReward = consoleScanner.getInt(0, rewards.size() + 1);
 		if (numberOfReward == 0)
 			return;
 		if (numberOfReward == (rewards.size() + 1)) {
 			int minDonation = 1;
-			int maxDonation = currentProject.getGoal() - currentProject.getPledged();
-			System.out.println("\nEnter amount from " + minDonation + " to " + maxDonation + " :");
+			int maxDonation = project.getGoal() - project.getPledged();
+			printer.print("\nEnter amount from " + minDonation + " to " + maxDonation + " :");
 			int amount = consoleScanner.getInt(minDonation, maxDonation);
-			System.out.println("\nIt was collected before: $" + currentProject.getPledged());
-			doDonate(amount);
-			System.out.println("Now collected: $" + currentProject.getPledged());
+			printer.print("\nIt was collected before: $" + project.getPledged());
+			doDonate(project, amount);
+			printer.print("Now collected: $" + project.getPledged());
 		} else {
-			System.out.println("\nAmount of your donation is $" + rewards.get(numberOfReward - 1).getAmount());
-			System.out.println("It was collected before: $" + currentProject.getPledged());
-			doDonate(currentProject.getRewards().get(numberOfReward - 1).getAmount());
-			System.out.println("Now collected: $" + currentProject.getPledged());
+			printer.print("\nAmount of your donation is $" + rewards.get(numberOfReward - 1).getAmount());
+			printer.print("It was collected before: $" + project.getPledged());
+			doDonate(project, project.getRewards().get(numberOfReward - 1).getAmount());
+			printer.print("Now collected: $" + project.getPledged());
 		}
 	}
 	
-	public void doDonate(int amount) {
-		currentProject.addToPledged(amount);
+	public void doDonate(Project project, int amount) {
+		project.addToPledged(amount);
 	}
 
 	
-	public void ask() {
+	public void addQuestion(Project project) {
 		printer.print("Ask your question about project: ");
-		currentProject.addQuestion(new Question((new Date().toString()), consoleScanner.getString()));
+		project.addQuestion(new Question(consoleScanner.getString()));
 	}
 
 	public void shutdown() {
 		consoleScanner.close();
-	}
-
+	}	
 }
