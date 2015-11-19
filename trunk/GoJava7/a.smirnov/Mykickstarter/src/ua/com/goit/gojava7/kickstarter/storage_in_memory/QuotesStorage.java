@@ -3,10 +3,10 @@ package ua.com.goit.gojava7.kickstarter.storage_in_memory;
 import java.util.List;
 import java.util.Random;
 
+import ua.com.goit.gojava7.kickstarter.dao.AbstractMemoryStorage;
 import ua.com.goit.gojava7.kickstarter.model.Quote;
-import ua.com.goit.gojava7.kickstarter.templates.AbstractStorage;
 
-public class QuotesStorage extends AbstractStorage<Quote>{
+public class QuotesStorage extends AbstractMemoryStorage<Quote>{
 	
 	private static final Random RANDOM = new Random();
 	

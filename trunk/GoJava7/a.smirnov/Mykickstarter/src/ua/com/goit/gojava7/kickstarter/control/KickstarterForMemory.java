@@ -166,7 +166,7 @@ public class KickstarterForMemory {
 		
 		Payment payment = new Payment(userName, cardNumber, donatingSum);
 		payment.setProjectID(project.getUniqueID());
-		project.donateMoney(payment.getDonatingSum());
+		project.setCollectedSum(payment.getDonatingSum());
 		paymentStorage.add(payment);
 		consolePrinter.printShortProjectInfo(project, faqStorage, paymentStorage);
 		

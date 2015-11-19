@@ -1,4 +1,4 @@
-package ua.com.goit.gojava7.kickstarter.templates;
+package ua.com.goit.gojava7.kickstarter.dao;
 
 import java.util.List;
 

@@ -1,16 +1,13 @@
 package ua.com.goit.gojava7.kickstarter.storage_in_memory;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
 
+import ua.com.goit.gojava7.kickstarter.dao.AbstractMemoryStorage;
 import ua.com.goit.gojava7.kickstarter.model.Category;
 import ua.com.goit.gojava7.kickstarter.model.Project;
-import ua.com.goit.gojava7.kickstarter.templates.AbstractStorage;
 
-public class ProjectsStorage extends AbstractStorage<Project> {
+public class ProjectsStorage extends AbstractMemoryStorage<Project> {
 	
 	public ProjectsStorage(CategoriesStorage categoriesStorage) {
 	

@@ -3,12 +3,10 @@ package ua.com.goit.gojava7.kickstarter.model;
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Iterator;
-import java.util.Set;
+import java.util.List;
 import java.util.TimeZone;
-import java.util.TreeSet;
 
-import ua.com.goit.gojava7.kickstarter.templates.Templateble;
+import ua.com.goit.gojava7.kickstarter.storage_in_files.PaymentStorage;
 
 public class Project implements Serializable{
 
@@ -22,17 +20,16 @@ public class Project implements Serializable{
 	private String videoLink;
 	private int requiredSum;
 	private int collectedSum;
-	private int dayLeft;
+	private int daysLeft;
 
 	public Project(String title, String briefDescription, int requiredSum) {
-		this.categoryID = Integer.MIN_VALUE;
 		this.title = title;
 		this.briefDescription = briefDescription;
 		this.fullDescription = "----";
 		this.videoLink = "----";
 		this.requiredSum = requiredSum;	
 		this.collectedSum = 0;
-		this.dayLeft = 0;
+		this.daysLeft = 0;
 	}
 
 	public String getTitle() {
@@ -71,7 +68,7 @@ public class Project implements Serializable{
 		return collectedSum;
 	}
 	
-	public void donateMoney(int someMoney) {
+	public void setCollectedSum(int someMoney) {
 		this.collectedSum += someMoney;
 	}
 	
@@ -84,11 +81,15 @@ public class Project implements Serializable{
 	}
 	
 	public void setDeadline(int day, int month, int year) {
-		dayLeft = getDaysLeft(day, month, year);
+		daysLeft = getDaysLeft(day, month, year);
 	}
 	
 	public int getDaysLeft() {
-		return dayLeft;
+		return daysLeft;
+	}
+	
+	public void setDaysLeft(int daysLeft) {
+		this.daysLeft = daysLeft;
 	}
 	
 	public int getCategoryID() {
@@ -126,20 +127,19 @@ public class Project implements Serializable{
 		return (int) days;
 	}
 	
-//	protected Set<Faq> getAllFaqsFromProject(Templateble<Faq> templateble) {
-//		Set<Faq> allFaqs = templateble.getAll();
-//		
-//		Set<Faq> allFaqsFromSelectedProject = new TreeSet<>();
-//		
-//		Iterator<Faq> iteratorFaq = allFaqs.iterator();
-//		
-//		while (iteratorFaq.hasNext()) {
-//			Faq faq = iteratorFaq.next();
-//			if (faq.getProject().getTitle().equals(title)) {
-//				allFaqsFromSelectedProject.add(faq);
-//			}
-//		}
-//		
-//		return allFaqsFromSelectedProject;
-//	}
+	public int getSumProjectPayments(List<Payment> payments) {
+		
+		if (payments.size() == 0) {
+			return 0;
+		} else {	
+			int result = 0;		
+			for (int index = 0; index < payments.size(); index++) {
+				Payment payment = payments.get(index);
+				if (payment.getProjectID() == this.getUniqueID()) {
+					result += payment.getDonatingSum();
+				}
+			}	
+			return result;
+		}
+	}
 }
