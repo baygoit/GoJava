@@ -52,6 +52,7 @@ public class ProjectPrinter {
 		}
 		System.out.println("\n" + (rewards.size() + 1) + ":\tNo thanks, I just want to help the project."
 				+ "\n0:\tTo choose another project");
+	
 	}
 	
 	

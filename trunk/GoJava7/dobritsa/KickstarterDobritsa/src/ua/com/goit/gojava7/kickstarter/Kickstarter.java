@@ -115,7 +115,7 @@ public class Kickstarter {
 
 	public boolean chooseOptionOfProject() {
 		String text = consoleScanner.getOption();
-		if (text.equals("b")) {
+		if (text.equals("b")) { 
 			donate();
 		}
 		if (text.equals("a")) {

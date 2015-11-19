@@ -4,10 +4,11 @@ import static org.mockito.Matchers.contains;
 import static org.mockito.Matchers.endsWith;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyNoMoreInteractions;
+import static org.mockito.Mockito.*;
 
 import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.junit.After;
@@ -27,7 +28,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 public class ProjectPrinterTest {
 
 	private ProjectPrinter projectPrinter = new ProjectPrinter();
-	
+	String time = new Date().toString();
 	private PrintStream defaultSystemOut;
 	
 	@Mock
@@ -96,5 +97,28 @@ public class ProjectPrinterTest {
 		projectPrinter.printRewards(rewards);
 		verify(printSteam).println(contains("There are no rewards. You can just help the project."));	
 	}
-
+	
+	@Test
+	public void testPrintQuestions() {
+		PrintStream printSteam = mock(PrintStream.class);
+		System.setOut(printSteam);		
+		List<Question> questions = new ArrayList<>();		
+		questions.add(new Question(time, "Test Question 1", "Test Answer 1"));
+		questions.add(new Question(time, "Test Question 2"));
+		projectPrinter.printQuestions(questions);
+		verify(printSteam, times(2)).println(contains("Question:"));
+		verify(printSteam).println(contains("Test Question 1"));
+		verify(printSteam, times(2)).println(contains(time));
+		verify(printSteam).println(endsWith("There is no answer yet"));
+	}
+	
+	@Test
+	public void testPrintEmptyQuestions() {
+		PrintStream printSteam = mock(PrintStream.class);
+		System.setOut(printSteam);		
+		List<Question> questions = new ArrayList<>();
+		projectPrinter.printQuestions(questions);
+		verify(printSteam).println(contains("There are no questions yet"));	
+	}
+	
 }
