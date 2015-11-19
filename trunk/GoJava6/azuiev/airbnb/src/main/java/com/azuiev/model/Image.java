@@ -21,7 +21,6 @@ public class Image {
         return id;
     }
 
-
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "city", referencedColumnName = "id")
     public City getCity() {

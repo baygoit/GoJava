@@ -1,7 +1,6 @@
 package ua.com.goit.gojava7.kickstarter.control;
 
-import java.util.Iterator;
-import java.util.Set;
+import java.util.List;
 
 import ua.com.goit.gojava7.kickstarter.model.Category;
 import ua.com.goit.gojava7.kickstarter.model.Faq;
@@ -27,6 +26,9 @@ public class KickstarterForMemory {
 	private QuotesStorage quotesStorage;
 	private PaymentStorage paymentStorage;
 	private FaqStorage faqStorage;
+	
+	private Category selectedCategoryByUser;
+	private Project selectedProjectByUser;
 
 	public KickstarterForMemory() {
 		this.consoleScanner = new ConsoleScanner();
@@ -44,31 +46,27 @@ public class KickstarterForMemory {
 	}
 	
 	protected void selectCategory() {
-		Set<Category> AllCategories = categoriesStorage.getAll();
-		int amountOfCategories = AllCategories.size();
 		
-		Category selectedCategory = null;
-		int numberOfSelectedCategory;
+		int selectedNumber;
 		boolean userChoise = true;
 		
 		do {
-			consolePrinter.printCategories(AllCategories);
+			consolePrinter.printCategories(categoriesStorage.getAll());
 			consolePrinter.print(SEPARATOR);
 			consolePrinter.print("Please select category (0 for exit): ");
-			numberOfSelectedCategory = consoleScanner.getInt();
+			selectedNumber = consoleScanner.getInt();
 
-			if (numberOfSelectedCategory < 0 || numberOfSelectedCategory > amountOfCategories) {
-				consolePrinter.print("Please, enter the number between 0 and " + amountOfCategories);
-				consolePrinter.print(SEPARATOR);
-				continue;
-				
-			} else if (numberOfSelectedCategory != 0) {
-				consolePrinter.print("You selected category number : " + numberOfSelectedCategory);
-				selectedCategory = getSelectedCategory(numberOfSelectedCategory, AllCategories);
-				consolePrinter.print(selectedCategory);
+			if (selectedNumber < 0 || selectedNumber > categoriesStorage.getSize()) {
+				consolePrinter.print("Please, enter the number between 0 and " + categoriesStorage.getSize());
 				consolePrinter.print(SEPARATOR);
 				
-				selectProjects(selectedCategory);
+			} else if (selectedNumber != 0) {
+				consolePrinter.print("You selected category number : " + selectedNumber);
+				selectedCategoryByUser = categoriesStorage.getAll().get(selectedNumber - 1);
+				consolePrinter.print(selectedCategoryByUser);
+				consolePrinter.print(SEPARATOR);
+				
+				selectProjects(selectedCategoryByUser);
 				
 			} else {
 				consolePrinter.print("You entered 0. Bye.");
@@ -80,38 +78,36 @@ public class KickstarterForMemory {
 	}
 
 	protected void selectProjects(Category category) {
-		Set<Project> AllProjectsFromCategory = projectsStorage.getAllProjectsFromCategory(category);
-		int amountOfPrjects = AllProjectsFromCategory.size();
+		List<Project> projectsFromCategory = projectsStorage.getProjectsFromCategory(category);
 		
 		int numberOfSelectedProject;
 		
-		if (amountOfPrjects == 0) {
+		if (projectsFromCategory.size() == 0) {
 			consolePrinter.print("There is no any project in selected category.");
 			consolePrinter.print(SEPARATOR);
+			
 			numberOfSelectedProject = 0;
 		} else {
-			Project selectedProject = null;
 			boolean userChoise = true;
 			do {
-				consolePrinter.printProjects(AllProjectsFromCategory, userChoise);
+				consolePrinter.printProjects(projectsFromCategory, faqStorage, paymentStorage);
 				consolePrinter.print(SEPARATOR);
 				consolePrinter.print("Please select project (0 for back to categories): ");
 				
 				numberOfSelectedProject = consoleScanner.getInt();
 	
-				if (numberOfSelectedProject < 0 || numberOfSelectedProject > amountOfPrjects) {
-					consolePrinter.print("Please, enter the number between 0 and " + amountOfPrjects);
+				if (numberOfSelectedProject < 0 || numberOfSelectedProject > projectsFromCategory.size()) {
+					consolePrinter.print("Please, enter the number between 0 and " + projectsFromCategory.size());
 					consolePrinter.print(SEPARATOR);
-					continue;
-					
+									
 				} else if (numberOfSelectedProject != 0) {
 					consolePrinter.print("You selected project number : " + numberOfSelectedProject);
-					selectedProject = getSelectedProject(numberOfSelectedProject, AllProjectsFromCategory);
+					selectedProjectByUser = projectsFromCategory.get(numberOfSelectedProject - 1);
 					consolePrinter.print(SEPARATOR);
-					consolePrinter.printFullProjectInfo(selectedProject);
+					consolePrinter.printFullProjectInfo(selectedProjectByUser, faqStorage, paymentStorage);
 					consolePrinter.print(SEPARATOR);
 					
-					activityInsideSelectedProject(selectedProject);
+					activityInsideSelectedProject(selectedProjectByUser);
 							
 				} else {
 					consolePrinter.print("You entered 0. Back to categories.");
@@ -122,41 +118,8 @@ public class KickstarterForMemory {
 			} while (userChoise);
 		}
 
-	}
-	
-	protected Category getSelectedCategory(int numberOfSelectedCategory, Set<Category> categories) {
-		Iterator<Category> categoryIterator = categories.iterator();
-		Category selectedCategory = null;
-		int stepsCounter = 0;
-		while (categoryIterator.hasNext()) {
-			stepsCounter ++;
-			if (stepsCounter == numberOfSelectedCategory) {
-				selectedCategory = categoryIterator.next();
-			} else {
-				categoryIterator.next();
-			}
-			
-		}
-		return selectedCategory;
-	}
-	
-	
-	protected Project getSelectedProject(int numberOfSelectedProject, Set<Project> projects) {
-		Iterator<Project> projectsIterator = projects.iterator();
-		Project selectedProject = null;
-		int stepsCounter = 0;
-		while (projectsIterator.hasNext()) {
-			stepsCounter ++;
-			if (stepsCounter == numberOfSelectedProject) {
-				selectedProject = projectsIterator.next();
-			} else {
-				projectsIterator.next();
-			}
-			
-		}
-		return selectedProject;
-	}
-	
+	}	
+		
 	protected void activityInsideSelectedProject(Project selectedProject) {
 		StringBuilder chooseMenuInProject = new StringBuilder();
 		
@@ -185,6 +148,7 @@ public class KickstarterForMemory {
 				consolePrinter.print("You selected 2. Ask a question ");
 				consolePrinter.print(SEPARATOR);
 				askQuestion(selectedProject);
+				consolePrinter.print(SEPARATOR);
 			}
 			
 		} while (choseNumber != 0);
@@ -201,21 +165,22 @@ public class KickstarterForMemory {
 		consolePrinter.print(SEPARATOR);
 		
 		Payment payment = new Payment(userName, cardNumber, donatingSum);
-		project.addMoneyToProject(payment.getDonatingSum());
+		payment.setProjectID(project.getUniqueID());
+		project.setCollectedSum(payment.getDonatingSum());
 		paymentStorage.add(payment);
-		consolePrinter.printBriefProjectInfo(project);	
+		consolePrinter.printShortProjectInfo(project, faqStorage, paymentStorage);
+		
 	}
 	
 	protected void askQuestion(Project project) {
 		String question = consoleScanner.parseAskingQuestion();
 		Faq faq = new Faq(question);
-		faq.setProject(project);
+		faq.setProjectID(project.getUniqueID());
 		faqStorage.add(faq);
 		
 		consolePrinter.print(SEPARATOR);
+		consolePrinter.printShortProjectInfo(project, faqStorage, paymentStorage);
 		
-		consolePrinter.printBriefProjectInfo(project);
-		consolePrinter.printFAQs(faqStorage.getAll());
 	}
 	
 	protected void stop() {

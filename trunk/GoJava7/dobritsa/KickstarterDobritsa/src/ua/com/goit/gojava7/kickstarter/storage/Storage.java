@@ -16,8 +16,8 @@ public abstract class Storage<T> {
 		return Collections.unmodifiableList(data);
 	}
 	
-	public void setAll(List<T> dataSource) {
-		this.data = dataSource;
+	public void setAll(List<T> data) {
+		this.data = data;
 	}
 	
 	public T get(int index) {

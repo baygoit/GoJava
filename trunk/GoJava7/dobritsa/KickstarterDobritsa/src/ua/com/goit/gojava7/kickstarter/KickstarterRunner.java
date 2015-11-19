@@ -1,35 +1,66 @@
 package ua.com.goit.gojava7.kickstarter;
 
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.List;
 
-import ua.com.goit.gojava7.kickstarter.console.CategoryPrinter;
-import ua.com.goit.gojava7.kickstarter.console.ConsoleScanner;
-import ua.com.goit.gojava7.kickstarter.console.ProjectPrinter;
-import ua.com.goit.gojava7.kickstarter.console.QuotePrinter;
-
+import ua.com.goit.gojava7.kickstarter.dao.CategoryReader;
+import ua.com.goit.gojava7.kickstarter.dao.FileCategoryReader;
+import ua.com.goit.gojava7.kickstarter.dao.FileQuoteReader;
+import ua.com.goit.gojava7.kickstarter.dao.MemoryCategoryReader;
+import ua.com.goit.gojava7.kickstarter.dao.MemoryQuoteReader;
+import ua.com.goit.gojava7.kickstarter.dao.QuoteReader;
+import ua.com.goit.gojava7.kickstarter.domain.Category;
+import ua.com.goit.gojava7.kickstarter.domain.Quote;
 import ua.com.goit.gojava7.kickstarter.storage.CategoryStorage;
 import ua.com.goit.gojava7.kickstarter.storage.QuoteStorage;
 
 public class KickstarterRunner {
 
-	public static void main(String[] args) throws FileNotFoundException { //
-		ConsoleScanner consoleScanner = new ConsoleScanner();
+	private static final File QUOTES_FILE = new File("./resources/Quotes.txt");
+	private static final File CATEGORIES_FILE = new File("./resources/Category.txt");
+	
+	private static QuoteReader getQuoteReader(boolean isFromFile) {
+		if (!isFromFile) {
+			return new MemoryQuoteReader();		
+		} else {
+			return new FileQuoteReader(QUOTES_FILE);
+		}
+	}
+	
+	private static CategoryReader getCategoryReader(boolean isFromFile) {
+		if (!isFromFile) {		
+			return new MemoryCategoryReader();
+		} else {		
+			return new FileCategoryReader(CATEGORIES_FILE);			
+		}
+	}
 
-		QuotePrinter quotetPrinter = new QuotePrinter();
-		ProjectPrinter projectPrinter = new ProjectPrinter();
-		CategoryPrinter categoryPrinter = new CategoryPrinter();
-
-		QuoteStorage quoteStorage = new QuoteStorage("D:/1/Quotes.txt");
-		
-		CategoryStorage categoryStorage= new CategoryStorage();
-				categoryStorage.initCategories("D:/1/CategoryMusic.txt");
-				categoryStorage.initCategories("D:/1/CategoryFood.txt");
-				categoryStorage.initCategories("D:/1/CategoryDances.txt");
-		
-		Kickstarter kickstarter = new Kickstarter(consoleScanner, quotetPrinter, projectPrinter, categoryPrinter,
-				quoteStorage, categoryStorage);
-
+	public static void main(String[] args) throws FileNotFoundException {
+		boolean isFromFile = false;
+		if (args.length != 0) {
+			isFromFile = true;
+		}
+		QuoteStorage quoteStorage = initQuotes(isFromFile);
+		CategoryStorage categoryStorage = initCategories(isFromFile);	
+		Kickstarter kickstarter = new Kickstarter(quoteStorage, categoryStorage);
 		kickstarter.run();
 		kickstarter.shutdown();
+	}
+
+	private static QuoteStorage initQuotes(boolean isFromFile) {
+		QuoteStorage quoteStorage = new QuoteStorage();
+		QuoteReader quoteReader = getQuoteReader(isFromFile);
+		List<Quote> quotes = quoteReader.read();
+		quoteStorage.setAll(quotes);
+		return quoteStorage;
+	}
+	
+	private static CategoryStorage initCategories(boolean isFromFile) {
+		CategoryStorage categoryStorage = new CategoryStorage();
+		CategoryReader categoryReader = getCategoryReader(isFromFile);
+		List<Category> categories = categoryReader.read();
+		categoryStorage.setAll(categories);
+		return categoryStorage;
 	}
 }

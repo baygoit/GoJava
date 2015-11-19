@@ -26,6 +26,9 @@ public class Kickstarter {
 		this.categoryStorage = categoryStorage;
 	}
 
+	/**
+	 * You should use {@link #shutdown()} after you finished with {@link Kickstarter}
+	 */
 	public void run() {
 		consolePrinter.print(quoteStorage.getRandomQuote());
 
@@ -52,17 +55,16 @@ public class Kickstarter {
 			} else {
 				consolePrinter.print("You entered 0. Bye.");
 			}
-			// show selected category
 		} while (selectedCategoryIndex != 0);
 	}
 
-	private void showProjectsMenu(Category selectedCategory) {
+	void showProjectsMenu(Category selectedCategory) {
 		List<Project> projects = new ArrayList<Project>(selectedCategory.getProjects());
 
 		int selectedProjectIndex;
 		do {
 			consolePrinter.print("");
-			consolePrinter.print(selectedCategory, projects);
+			consolePrinter.printCategoryWithProjects(selectedCategory);
 			consolePrinter.print("Please select a project (0 for exit): ");
 			selectedProjectIndex = consoleScanner.getInt();
 
@@ -72,14 +74,45 @@ public class Kickstarter {
 			} else if (selectedProjectIndex != 0) {
 				consolePrinter.print("You selected the project number " + selectedProjectIndex);
 				Project selectedProject = projects.get(selectedProjectIndex - 1);
-				consolePrinter.print(selectedProject);
+				showProjectActionsMenu(selectedProject);
 			} else {
 				consolePrinter.print("You entered 0. Go up.");
 			}
-			// show selected category
 		} while (selectedProjectIndex != 0);
 	}
 
+	void showProjectActionsMenu(Project selectedProject) {
+		List<String> projectActions = new ArrayList<String>();
+		projectActions.add("Ask a question");
+		projectActions.add("Invest");
+
+		int selectedProjectActionIndex;
+		do {
+			consolePrinter.print("");
+			consolePrinter.print(selectedProject);
+			consolePrinter.print("Actions:");
+			for (int i = 0; i < projectActions.size(); i++) {
+				consolePrinter.print("\t" + (i + 1) + " : " + projectActions.get(i));
+			}
+			consolePrinter.print("Please select an action (0 for exit): ");
+			selectedProjectActionIndex = consoleScanner.getInt();
+
+			if (selectedProjectActionIndex < 0 || selectedProjectActionIndex > projectActions.size()) {
+				consolePrinter.print("Please, enter the number between 0 and " + projectActions.size());
+				continue;
+			} else if (selectedProjectActionIndex != 0) {
+				consolePrinter.print("You selected the project number " + selectedProjectActionIndex);
+				String selectedProjectAction = projectActions.get(selectedProjectActionIndex - 1);
+				consolePrinter.print("You selected : " + selectedProjectAction);
+			} else {
+				consolePrinter.print("You entered 0. Go up.");
+			}
+		} while (selectedProjectActionIndex != 0);
+	}
+
+	/**
+	 * Should be run before GC
+	 */
 	public void shutdown() {
 		consoleScanner.close();
 	}

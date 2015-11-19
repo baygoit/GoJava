@@ -1,19 +1,31 @@
 package ua.com.goit.gojava7.kickstarter.beans;
 
+import static com.google.code.beanmatchers.BeanMatchers.hasValidBeanConstructor;
+import static com.google.code.beanmatchers.BeanMatchers.hasValidBeanEquals;
+import static com.google.code.beanmatchers.BeanMatchers.hasValidBeanHashCode;
+import static org.hamcrest.CoreMatchers.allOf;
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 
 import java.util.Date;
 
 import org.junit.Test;
 
-import ua.com.goit.gojava7.kickstarter.beans.Payment;
-import ua.com.goit.gojava7.kickstarter.beans.User;
-
 public class PaymentTest {
 	
 	Payment testObject = new Payment(new User("testUser"), 123, 456, new Date());
 
+    @Test
+    public void testBean() {
+        assertThat(Payment.class, allOf(hasValidBeanConstructor(),
+                hasValidBeanHashCode(), hasValidBeanEquals()
+        /*
+         * , hasValidBeanToString()
+         */
+        ));
+
+    }
+	
 	@Test
 	public void testGetCardId() {
 		long id = 1000;

@@ -1,51 +1,61 @@
 package ua.com.goit.gojava7.kickstarter.console;
 
+import java.io.InputStream;
 import java.util.Scanner;
 
 public class ConsoleScanner {
 	private Scanner sc = new Scanner(System.in);
 
-	public Integer getInteger(int start, int end) {
-		Integer number = -1;
-		do {
-			while (!sc.hasNextInt()) {
-				System.out.println("You should type a number from " + start + " to " + end + ": ");
-				sc.next();
-			}
-			number = sc.nextInt();
-			if (number > end | number < 0) {
-				if (end == 0)
-					System.out.println("Type " + end + " to choose another project:");
-				else
-					System.out.println("You should type a number from " + start + " to " + end + ": ");
-				number = -1;
-			} else if (number == 0) {
-				return null;
-			}
-		} while (number == -1);
-		return number;
+	public ConsoleScanner() {
+		sc = new Scanner(System.in);
 	}
 
-	public String getBackOrZero() {
+	public ConsoleScanner(InputStream inputStream) {
+		sc = new Scanner(inputStream);
+	}
+
+	public int getInt(int start, int end) {
+		while (true) {
+			while (!sc.hasNextInt()) {
+				System.out.println("You should type a NUMBER from " + start + " to " + end + ": ");
+				sc.next();
+			}
+			int number = sc.nextInt();
+			if ((number < start | number > end) & number != 0) {
+				if (end == 0)
+					System.out.println("Type 0 to exit to the previous menu:");
+				else
+					System.out.println("You should type a number FROM " + start + " TO " + end + ": ");
+				continue;
+			} else {
+				return number;
+			}
+		}
+	}
+
+	public String getOption() {
 		String text;
 		while (true) {
-			System.out.println("\nType:" + "\nb: to back this project" + "\n0: to choose another project");
+			System.out.println("\nType:" + "\nb: to back this project" + "\na: to ask a questions"
+					+ "\n0: to choose another project");
 			text = sc.next();
 			if (text.equals("0"))
 				return "0";
 			else if (text.equals("b"))
 				return "b";
+			else if (text.equals("a"))
+				return "a";
 		}
 	}
-	
+
 	public String getName() {
-		//TODO check
+		// TODO check
 		String text = sc.next();
 		return text;
 	}
-	
+
 	public String getCreditCard() {
-		//TODO check
+		// TODO check
 		String text = sc.next();
 		return text;
 	}
@@ -53,9 +63,10 @@ public class ConsoleScanner {
 	public String getString() {
 		String text = sc.next();
 		return text;
-	}
+	}	
 
 	public void close() {
 		sc.close();
 	}
+
 }

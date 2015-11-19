@@ -1,9 +1,14 @@
 package ua.com.goit.gojava7.kickstarter;
 
+import java.io.File;
+import java.util.List;
 import java.util.Random;
 
 import ua.com.goit.gojava7.kickstarter.console.ConsolePrinter;
 import ua.com.goit.gojava7.kickstarter.console.ConsoleScanner;
+import ua.com.goit.gojava7.kickstarter.dao.FileQuoteReader;
+import ua.com.goit.gojava7.kickstarter.dao.MemoryQuoteReader;
+import ua.com.goit.gojava7.kickstarter.dao.QuoteReader;
 import ua.com.goit.gojava7.kickstarter.domain.Category;
 import ua.com.goit.gojava7.kickstarter.domain.Project;
 import ua.com.goit.gojava7.kickstarter.domain.Quote;
@@ -12,11 +17,26 @@ import ua.com.goit.gojava7.kickstarter.storage.QuoteStorage;
 
 public class KickstarterRunner {
 
+	private static final File QUOTES_FILE = new File("./quotes.txt");
+
+	private static QuoteReader getQuoteReader(boolean isFromFile) {
+		if (!isFromFile) {
+			return new MemoryQuoteReader();
+		} else {
+			return new FileQuoteReader(QUOTES_FILE);
+		}
+	}
+
 	public static void main(String[] args) {
+		boolean isFromFile = false;
+		if (args.length != 0) {
+			isFromFile = true;
+		}
+
 		ConsolePrinter consolePrinter = new ConsolePrinter();
 		ConsoleScanner consoleScanner = new ConsoleScanner();
 
-		QuoteStorage quoteStorage = initQuotes();
+		QuoteStorage quoteStorage = initQuotes(isFromFile);
 		CategoryStorage categoryStorage = initCategories();
 
 		Kickstarter kickstarter = new Kickstarter(consolePrinter, consoleScanner, quoteStorage, categoryStorage);
@@ -24,20 +44,11 @@ public class KickstarterRunner {
 		kickstarter.shutdown();
 	}
 
-	private static QuoteStorage initQuotes() {
+	private static QuoteStorage initQuotes(boolean isFromFile) {
 		QuoteStorage quoteStorage = new QuoteStorage(new Random());
-		quoteStorage
-				.add(new Quote(
-						"Your work is going to fill a large part of your life,"
-								+ " and the only way to be truly satisfied is to do what"
-								+ " you believe is great work. And the only way to do"
-								+ " great work is to love what you do. If you haven't"
-								+ " found it yet, keep looking. Don't settle. As with"
-								+ " all matters of the heart, you'll know when you"
-								+ " find it.", "Steve Jobs"));
-		quoteStorage.add(new Quote(
-				"Innovation distinguishes between a leader and a follower.",
-				"Steve Jobs"));
+		QuoteReader quoteReader = getQuoteReader(isFromFile);
+		List<Quote> quotes = quoteReader.readQuotes();
+		quoteStorage.setQuotes(quotes);
 		return quoteStorage;
 	}
 

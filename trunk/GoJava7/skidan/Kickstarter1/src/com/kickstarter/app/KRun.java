@@ -30,7 +30,7 @@ public class KRun {
 			} else {
 				String categoryTitle = categoryManager.getCategorieByNumber(categoryNumber).getTitle();
 				consolePrint.selectedCategoryInformer(categoryTitle);
-				consolePrint.categorysProjectsView(projectManager.getProjectsForCategory(categoryTitle));
+				consolePrint.categorysProjectsView(projectManager.getAll(categoryTitle));
 				// consolePrint.exitInformer();
 				projectSelector(categoryNumber, categoryTitle);
 			}
@@ -45,16 +45,16 @@ public class KRun {
 		try {
 			consolePrint.projectSelectionInform();
 			consolePrint.exitInformer();
-			projectManager.getProjectsForCategory(categoryTitle);
-			consolePrint.viewSelectedCategoryProjects(projectManager.getProjectsForCategory(categoryTitle));
+			projectManager.getAll(categoryTitle);
+			consolePrint.viewSelectedCategoryProjects(projectManager.getAll(categoryTitle));
 			while (true) {
 				int projectNumber = UserConsoleInputReader.readInput();
 				if (projectNumber == EXIT_SIGN) {
 					categorySelector();
 				} else {
-					String title = projectManager.getProject(categoryTitle, projectNumber).getTitle();
+					String title = projectManager.getOne(categoryTitle, projectNumber).getTitle();
 					consolePrint.choosenProjectTitleInform(title);
-					consolePrint.singleCategorysProjectsView(projectManager.getProject(categoryTitle, projectNumber));
+					consolePrint.singleCategorysProjectsView(projectManager.getOne(categoryTitle, projectNumber));
 					consolePrint.posobilitiesInfirm();
 					int selectedAction = UserConsoleInputReader.readInput();
 					int payChoise = 200;

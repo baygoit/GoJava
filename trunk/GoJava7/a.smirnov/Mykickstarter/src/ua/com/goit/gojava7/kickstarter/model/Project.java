@@ -3,31 +3,33 @@ package ua.com.goit.gojava7.kickstarter.model;
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Iterator;
-import java.util.Set;
+import java.util.List;
 import java.util.TimeZone;
-import java.util.TreeSet;
 
-import ua.com.goit.gojava7.kickstarter.templates.Templateble;
+import ua.com.goit.gojava7.kickstarter.storage_in_files.PaymentStorage;
 
-public class Project implements Comparable<Project>, Serializable{
-	
+public class Project implements Serializable{
+
 	private static final long serialVersionUID = 1L;
-	private Category category;
+	
+	private int uniqueID;
+	private int categoryID;
 	private String title;
 	private String briefDescription;
 	private String fullDescription;
-	private String linkOnVideo;
-	private int requiredAmountOfMoney;
-	private int currentAmountOfMoney;
-	private int expiryDays;
+	private String videoLink;
+	private int requiredSum;
+	private int collectedSum;
+	private int daysLeft;
 
-	public Project(String title, String briefDescription, 
-			int requiredAmountOfMoney) {
-		
+	public Project(String title, String briefDescription, int requiredSum) {
 		this.title = title;
 		this.briefDescription = briefDescription;
-		this.requiredAmountOfMoney = requiredAmountOfMoney;		
+		this.fullDescription = "----";
+		this.videoLink = "----";
+		this.requiredSum = requiredSum;	
+		this.collectedSum = 0;
+		this.daysLeft = 0;
 	}
 
 	public String getTitle() {
@@ -54,44 +56,56 @@ public class Project implements Comparable<Project>, Serializable{
 		this.fullDescription = fullDescription;
 	}
 
-	public int getRequiredAmountOfMoney() {
-		return requiredAmountOfMoney;
+	public int getRequiredSum() {
+		return requiredSum;
 	}
 
-	public void setRequiredAmountOfMoney(int money) {
-		this.requiredAmountOfMoney = money;
+	public void setRequiredSum(int requiredSum) {
+		this.requiredSum = requiredSum;
 	}
 
-	public int getCurrentAmoutOfMoney() {
-		return currentAmountOfMoney;
+	public int getCollectedSum() {
+		return collectedSum;
 	}
 	
-	public void addMoneyToProject(int money) {
-		this.currentAmountOfMoney += money;
+	public void setCollectedSum(int someMoney) {
+		this.collectedSum += someMoney;
 	}
 	
-	public String getLinkOnVideo() {
-		return linkOnVideo;
+	public String getVideoLink() {
+		return videoLink;
 	}
 	
-	public void addLinkOnVideo(String linkOnVideo) {
-		this.linkOnVideo = linkOnVideo;
+	public void setVideoLink(String videoLink) {
+		this.videoLink = videoLink;
 	}
 	
-	public void setExpiryDays(int day, int month, int year) {
-		expiryDays = getDaysLeft(day, month, year);
+	public void setDeadline(int day, int month, int year) {
+		daysLeft = getDaysLeft(day, month, year);
 	}
 	
-	public int getExpiryDays() {
-		return expiryDays;
+	public int getDaysLeft() {
+		return daysLeft;
 	}
 	
-	public Category getCategory() {
-		return category;
+	public void setDaysLeft(int daysLeft) {
+		this.daysLeft = daysLeft;
 	}
 	
-	public void setCategory(Category category) {
-		this.category = category;
+	public int getCategoryID() {
+		return categoryID;
+	}
+	
+	public void setCategoryID(int categoryID) {
+		this.categoryID = categoryID;
+	}
+	
+	public int getUniqueID() {
+		return uniqueID;
+	}
+	
+	public void setUniqueID(int uniqueID) {
+		this.uniqueID = uniqueID;
 	}
 	
 	protected int getDaysLeft(int day, int month, int year) {
@@ -110,28 +124,22 @@ public class Project implements Comparable<Project>, Serializable{
 		long difference = calendar.getTimeInMillis() - currentCalendar.getTimeInMillis();
 		long days = difference / (1000 * 60 * 60 * 24);
 
-		return (int)days;
+		return (int) days;
 	}
 	
-	protected Set<Faq> getAllFaqsFromProject(Templateble<Faq> templateble) {
-		Set<Faq> allFaqs = templateble.getAll();
+	public int getSumProjectPayments(List<Payment> payments) {
 		
-		Set<Faq> allFaqsFromSelectedProject = new TreeSet<>();
-		
-		Iterator<Faq> iteratorFaq = allFaqs.iterator();
-		
-		while (iteratorFaq.hasNext()) {
-			Faq faq = iteratorFaq.next();
-			if (faq.getProject().getTitle().equals(title)) {
-				allFaqsFromSelectedProject.add(faq);
-			}
+		if (payments.size() == 0) {
+			return 0;
+		} else {	
+			int result = 0;		
+			for (int index = 0; index < payments.size(); index++) {
+				Payment payment = payments.get(index);
+				if (payment.getProjectID() == this.getUniqueID()) {
+					result += payment.getDonatingSum();
+				}
+			}	
+			return result;
 		}
-		
-		return allFaqsFromSelectedProject;
-	}
-	
-	@Override
-	public int compareTo(Project that) {
-		return this.getTitle().compareTo(that.getTitle());
 	}
 }
