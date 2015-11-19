@@ -81,10 +81,54 @@ public class KickstarterTest {
 		
 	}
 	
+	@Test
+	public void testSetCurrentCategory() {
+		
+	}
+	
+	
+	@Test
+	public void testChooseProject() {
+		Category category = new Category("Category for test");
+		category.add(new Project("NameTest1", "DescriptionTest1", 100000, 100, 10, "HistoryTest1", "LinkTest1"));	
+		category.add(new Project("NameTest2", "DescriptionTest2", 100000, 100, 10, "HistoryTest2", "LinkTest2"));
+		kickstarter.chooseProject(category);
+		verify(printer).print(contains("Current category: Category for test"));
+		verify(printer).print(contains("Choose a project by number ('0' to choose another category): "));
+	}
+	
+	@Test
+	public void testPrintAboutProjects() {
+		Category category = new Category("Category for test");
+		category.add(new Project("NameTest1", "DescriptionTest1", 100000, 100, 10, "HistoryTest1", "LinkTest1"));	
+		category.add(new Project("NameTest2", "DescriptionTest2", 100000, 100, 10, "HistoryTest2", "LinkTest2"));
+		kickstarter.printAboutProjects(category);
+		verify(printer).print(contains("Current category: Category for test"));
+		verify(projectPrinter).printProjects(category.getAll());
+		verify(printer).print(contains("Choose a project by number ('0' to choose another category): "));
+	}	
+	
+	@Test
+	public void testSetCurrentProjectEntered0() {
+		Category category = new Category("Category for test");
+		category.add(new Project("NameTest", "DescriptionTest", 100000, 100, 10, "HistoryTest", "LinkTest"));	
+		when(consoleScanner.getInt(0, category.size())).thenReturn(0);
+		assertNull(kickstarter.setCurrentProject(category));
+	}
+	
+	@Test
+	public void testSetCurrentProjectEnteredCorrectNumber() {
+		Category category = new Category("Category for test");
+		category.add(new Project("NameTest", "DescriptionTest", 100000, 100, 10, "HistoryTest", "LinkTest"));	
+		
+		when(consoleScanner.getInt(0, category.size())).thenReturn(1);
+		assertNotNull(kickstarter.setCurrentProject(category));
+	}
 	
 	@Test
 	public void testViewProject() {
 		Project project = new Project("NameTest", "DescriptionTest", 100000, 100, 10, "HistoryTest", "LinkTest");	
+		
 		when(consoleScanner.getOption()).thenReturn("0");
 		kickstarter.viewProject(project);
 		verify(projectPrinter).printFull(project);
