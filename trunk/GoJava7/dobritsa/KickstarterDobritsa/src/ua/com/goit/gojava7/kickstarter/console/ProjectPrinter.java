@@ -36,7 +36,7 @@ public class ProjectPrinter {
 			return;
 		}		
 		for (int i = questions.size() - 1; i >= 0; i--) {
-			System.out.println("\n" + questions.get(i).getTime() + 
+			System.out.println("\nData: " + questions.get(i).getTime() + 
 					"\nQuestion: " + questions.get(i).getQuestion() + "\nAnswer: " + questions.get(i).getAnswer());
 		}
 	}
