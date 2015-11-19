@@ -31,12 +31,12 @@ public class PaymentLevelTest {
 	@Before 
 	public void setUp() {
 		categories = new ArrayList<Category>();
-		Category category = new Category("Some Category");
-		project1 = new Project("proj 1");
+		Category category = new Category("Some Category", 1);
+		project1 = new Project("proj 1", 1);
 		project1.setPledged(10);
 		category.addProject(project1);
 		categories.add(category);
-		categories.add(new Category("Second Category"));
+		categories.add(new Category("Second Category", 2));
 		selectedCategory = category;
 	}
 	

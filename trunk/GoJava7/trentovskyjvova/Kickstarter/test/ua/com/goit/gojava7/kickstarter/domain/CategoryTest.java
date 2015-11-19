@@ -9,7 +9,7 @@ public class CategoryTest {
 
 	@Test
 	public void testCategoryAndGetName() {
-		Category category = new Category("category");
+		Category category = new Category("category", 1);
 		assertThat(category.getName(), is("category"));
 	}
 

@@ -54,7 +54,7 @@ public class KickstarterTest {
 	@Test
 	public void testShowCategoriesMenuEnter1Has1Category() {
 		List<Category> categories = new ArrayList<Category>();
-		categories.add(new Category("category name"));
+		categories.add(new Category("category name", 1));
 		
 		when(categoryStorage.getAllCategories()).thenReturn(categories);
 		when(consoleScanner.scan()).thenReturn(1, 0);
@@ -68,8 +68,8 @@ public class KickstarterTest {
 	@Test
 	public void testShowProjectsMenuEnter1Has1Project() {
 		List<Category> categories = new ArrayList<Category>();
-		Category category = new Category("category name");
-		category.addProject(new Project("project 1"));
+		Category category = new Category("category name", 1);
+		category.addProject(new Project("project 1", 1));
 		categories.add(category);
 		
 		when(categoryStorage.getAllCategories()).thenReturn(categories);
@@ -86,8 +86,8 @@ public class KickstarterTest {
 	@Test
 	public void testShowProjectDetails() {
 		List<Category> categories = new ArrayList<Category>();
-		Category category = new Category("category name");
-		category.addProject(new Project("project 1"));
+		Category category = new Category("category name", 1);
+		category.addProject(new Project("project 1", 1));
 		categories.add(category);
 		
 		when(categoryStorage.getAllCategories()).thenReturn(categories);
@@ -104,8 +104,8 @@ public class KickstarterTest {
 	@Test
 	public void testInvestInTheProject() {
 		List<Category> categories = new ArrayList<Category>();
-		Category category = new Category("category name");
-		Project project = new Project("project 1");
+		Category category = new Category("category name", 1);
+		Project project = new Project("project 1", 1);
 		project.setPledged(10);
 		category.addProject(project);
 		categories.add(category);

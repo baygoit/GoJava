@@ -30,7 +30,7 @@ public class MenuLevel implements Level {
 	}
 
 	public String validateUserChoise(List<Category> categories, int userChoise,
-			Category selectedCategory) {
+			Category selectedCategory, Project selectedProject) {
 		StringBuilder stringBuilder = new StringBuilder();
 
 		if (userChoise < 0 || userChoise > categories.size()) {

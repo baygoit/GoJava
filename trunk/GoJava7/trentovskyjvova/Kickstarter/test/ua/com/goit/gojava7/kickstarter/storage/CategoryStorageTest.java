@@ -11,7 +11,7 @@ import ua.com.goit.gojava7.kickstarter.domain.Category;
 public class CategoryStorageTest {
 
 	private CategoryStorage categoryStorage = new CategoryStorage();
-	private Category category = new Category("Category");
+	private Category category = new Category("Category", 1);
 
 	@Before
 	public void setUp() {
