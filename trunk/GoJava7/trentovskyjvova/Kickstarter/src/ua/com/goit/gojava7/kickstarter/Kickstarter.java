@@ -16,6 +16,8 @@ import ua.com.goit.gojava7.kickstarter.console.ConsoleScanner;
 import ua.com.goit.gojava7.kickstarter.domain.Category;
 import ua.com.goit.gojava7.kickstarter.domain.Project;
 import ua.com.goit.gojava7.kickstarter.storage.CategoryStorage;
+import ua.com.goit.gojava7.kickstarter.storage.PaymentStorage;
+import ua.com.goit.gojava7.kickstarter.storage.QuestionStorage;
 import ua.com.goit.gojava7.kickstarter.storage.QuoteStorage;
 
 public class Kickstarter {
@@ -24,19 +26,25 @@ public class Kickstarter {
 	private CategoryStorage categoryStorage;
 	private ConsolePrinter consolePrinter;
 	private ConsoleScanner consoleScanner;
+	private QuestionStorage questionStorage;
+	private PaymentStorage paymentStorage;
 
 	private List<Level> levels;
 
 	public Kickstarter(ConsolePrinter consolePrinter,
 			ConsoleScanner consoleScanner, QuoteStorage quoteStorage,
-			CategoryStorage categoryStorage) {
+			CategoryStorage categoryStorage, QuestionStorage questionStorage,
+			PaymentStorage paymentStorage) {
 		this.quoteStorage = quoteStorage;
 		this.categoryStorage = categoryStorage;
 		this.consolePrinter = consolePrinter;
 		this.consoleScanner = consoleScanner;
+		this.questionStorage = questionStorage;
+		this.paymentStorage = paymentStorage;
 
 		levels = new LinkedList<>(Arrays.asList(new MenuLevel(),
-				new CategoryLevel(), new ProjectLevel(), new PaymentLevel(), new PledgeLevel()));
+				new CategoryLevel(), new ProjectLevel(), new PaymentLevel(),
+				new PledgeLevel()));
 	}
 
 	public void runKickstarter() {
@@ -91,7 +99,8 @@ public class Kickstarter {
 			}
 
 			answer = userPositionLevel.fillOutForm(selectedProject,
-					userChoise + 1, consoleScanner);
+					userChoise + 1, consoleScanner, questionStorage,
+					paymentStorage);
 			if (!answer.equals("")) {
 				consolePrinter.print(answer);
 			}

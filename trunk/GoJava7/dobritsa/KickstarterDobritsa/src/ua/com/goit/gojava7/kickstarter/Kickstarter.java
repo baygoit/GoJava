@@ -116,9 +116,9 @@ public class Kickstarter {
 
 	public void donate(Project project) {
 		printer.print(BORDER + "\n\nEnter your name:");
-		consoleScanner.getName();
+		consoleScanner.getString();
 		printer.print("\nEnter your card's number:");
-		consoleScanner.getCreditCard();
+		consoleScanner.getString();
 		chooseReward(project);		
 	}
 

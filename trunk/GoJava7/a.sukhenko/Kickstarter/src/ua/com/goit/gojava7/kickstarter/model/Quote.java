@@ -1,8 +1,11 @@
 package ua.com.goit.gojava7.kickstarter.model;
 
-public class Quote{
-	private String	quote;
-	private String	author;
+import javax.xml.bind.annotation.XmlAttribute;
+
+public class Quote {
+	private String quote;
+	private String author;
+
 	public Quote(String quote, String author) {
 		this.setQuoteName(quote);
 		this.setAuthor(author);
@@ -12,6 +15,7 @@ public class Quote{
 		return quote;
 	}
 
+	@XmlAttribute
 	public void setQuoteName(String quote) {
 		this.quote = quote;
 	}
@@ -20,6 +24,7 @@ public class Quote{
 		return author;
 	}
 
+	@XmlAttribute
 	public void setAuthor(String author) {
 		this.author = author;
 	}

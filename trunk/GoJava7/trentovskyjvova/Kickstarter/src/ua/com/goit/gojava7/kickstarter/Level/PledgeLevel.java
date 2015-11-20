@@ -6,7 +6,10 @@ import java.util.List;
 import ua.com.goit.gojava7.kickstarter.console.ConsolePrinter;
 import ua.com.goit.gojava7.kickstarter.console.ConsoleScanner;
 import ua.com.goit.gojava7.kickstarter.domain.Category;
+import ua.com.goit.gojava7.kickstarter.domain.Payment;
 import ua.com.goit.gojava7.kickstarter.domain.Project;
+import ua.com.goit.gojava7.kickstarter.storage.PaymentStorage;
+import ua.com.goit.gojava7.kickstarter.storage.QuestionStorage;
 
 public class PledgeLevel implements Level {
 
@@ -33,7 +36,8 @@ public class PledgeLevel implements Level {
 
 	@Override
 	public String fillOutForm(Project project, int userChoise,
-			ConsoleScanner consoleScanner) {
+			ConsoleScanner consoleScanner, QuestionStorage questionStorage,
+			PaymentStorage paymentStorage) {
 		ConsolePrinter consolePrinter = new ConsolePrinter();
 
 		int donate = 0;
@@ -58,11 +62,17 @@ public class PledgeLevel implements Level {
 		consolePrinter.print("Enter your name");
 		String name = consoleScanner.scanLine();
 		consolePrinter.print("Enter card number");
-		String card = consoleScanner.scanLine();
+		String cardNumber = consoleScanner.scanLine();
 
-		project.setPledged(project.getPledged() + donate); // TODO create class
-															// Pledge
-
+		Payment payment = new Payment(paymentStorage.generateIdOfNewElement());
+		payment.setProjectId(project.getId());
+		payment.setName(name);
+		payment.setCardNumber(cardNumber);		
+		payment.setPledge(donate);
+		
+		project.addPayment(payment);	
+		paymentStorage.addPayment(payment);
+		
 		return "Thank you!\n0 : back to rewards";
 	}
 

@@ -4,9 +4,6 @@ import ua.com.goit.gojava7.kickstarter.model.Project;
 import ua.com.goit.gojava7.kickstarter.view.ConsoleView;
 import ua.com.goit.gojava7.kickstarter.view.exception.ExitException;
 
-/**
- * Created by Dmytro on 07.11.2015.
- */
 public class ProjectPage implements Page {
     ConsoleView view;
 

@@ -27,7 +27,7 @@ public class ProjectLevelTest {
 		categories = new ArrayList<Category>();
 		Category category = new Category("Some Category", 1);
 		project1 = new Project("proj 1", 1);
-		project1.setPledged(10);
+
 		category.addProject(project1);
 		categories.add(category);
 		categories.add(new Category("Second Category", 1));

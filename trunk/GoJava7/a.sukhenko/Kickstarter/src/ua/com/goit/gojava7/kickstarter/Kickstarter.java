@@ -15,26 +15,27 @@ import ua.com.goit.gojava7.kickstarter.storage.CategoryStorage;
 import ua.com.goit.gojava7.kickstarter.storage.ProjectManager;
 import ua.com.goit.gojava7.kickstarter.storage.QuoteStorage;
 
-public class Kickstarter{
+public class Kickstarter {
 
-	private QuoteStorage	quoteStorage	= new QuoteStorage();
-	private CategoryStorage	categoryStorage	= new CategoryStorage();
-	private ConsoleScanner	consoleScanner	= new ConsoleScanner();
-	private ConsolePrinter	consolePrinter	= new ConsolePrinter();
-	private Body			body;
-	private ProjectManager	projectManager	= new ProjectManager(this);
-	private  boolean loadFromFile = false;
-	private  boolean saveToFile = false;
+	private QuoteStorage quoteStorage = new QuoteStorage();
+	private CategoryStorage categoryStorage = new CategoryStorage();
+	private ConsoleScanner consoleScanner = new ConsoleScanner();
+	private ConsolePrinter consolePrinter = new ConsolePrinter();
+	private Body body = new Body();
+	private ProjectManager projectManager = new ProjectManager();
+	private boolean loadFromFile = false;
+	private boolean saveToFile = true;
+
 	public Kickstarter() {
-		
+
 	}
-	
-	public void init(){
+
+	public void init() {
 		initQuotes();
 		initCategories();
 		initProjects();
-		body = new Body(this, consolePrinter);
 	}
+
 	public ConsoleScanner getConsoleScanner() {
 		return consoleScanner;
 	}
@@ -59,8 +60,6 @@ public class Kickstarter{
 		return categoryStorage;
 	}
 
-
-
 	public void setCategoryStorage(CategoryStorage categoryStorage) {
 		this.categoryStorage = categoryStorage;
 	}
@@ -80,27 +79,44 @@ public class Kickstarter{
 	public void setConsolePrinter(ConsolePrinter consolePrinter) {
 		this.consolePrinter = consolePrinter;
 	}
-	
+
+	public void showCategoryInfo(User guest) {
+		projectManager.getProjectsByCategory(guest.getSettings().getCategory()).forEach(project -> {
+			getBody().generateProjectInfo(project,consolePrinter);
+		});
+
+	}
+
 	public static void main(String[] args) {
 		Kickstarter kickstarter = new Kickstarter();
 		kickstarter.init();
 		User guest = new User();
-		kickstarter.getBody().generateMainPage();
+		kickstarter.getBody().generateMainPage(kickstarter.getQuoteStorage(), kickstarter.getProjectManager(),kickstarter.getConsolePrinter());
+		kickstarter.saveCagories();
+		kickstarter.saveQuotes();
+		kickstarter.saveProjects();
 		kickstarter.generateMenu(guest).showMenu();
 
 	}
-	public Menu generateMenu(User u) {
-		return new Menu(this, u);
+
+	private void saveProjects() {
+		if (saveToFile) {
+			FileLoader.saveProjects(projectManager);
+		}
+
 	}
+
+	public Menu generateMenu(User u) {
+		return new Menu(u, projectManager, categoryStorage);
+	}
+
 	public synchronized void addProject(Project pr) {
 		projectManager.getProjects().add(pr);
 	}
-	
+
 	public void initQuotes() {
-		quoteStorage.addQuote(new Quote(QuoteStorage.QUOTE_BY_PRINCESS_DIANA,
-				"Princess Diana"));
-		quoteStorage.addQuote(new Quote(QuoteStorage.QUOTE_BY_MISHA_COLLINS,
-				"Misha Collins"));
+		quoteStorage.addQuote(new Quote(QuoteStorage.QUOTE_BY_PRINCESS_DIANA, "Princess Diana"));
+		quoteStorage.addQuote(new Quote(QuoteStorage.QUOTE_BY_MISHA_COLLINS, "Misha Collins"));
 	}
 
 	public void initCategories() {
@@ -108,42 +124,44 @@ public class Kickstarter{
 		categoryStorage.addCategory(new Category("Technology", 2));
 		categoryStorage.addCategory(new Category("Games", 3));
 		categoryStorage.addCategory(new Category("Books", 4));
-		saveCagories();
-		
+
 	}
-	protected void saveCagories(){
-		if(saveToFile){
+
+	private void saveQuotes() {
+		if (saveToFile) {
+			FileLoader.saveQuotes(quoteStorage);
+		}
+
+	}
+
+	protected void saveCagories() {
+		if (saveToFile) {
 			FileLoader.saveCategories(categoryStorage);
 		}
 	}
+
 	private void initProjects() {
 		LocalDateTime dateTime = LocalDateTime.now();
-		projectManager.addProject(new Project("Catana",
-				"New sword-fighting game", categoryStorage.getCategoryById(3),
+		projectManager.addProject(new Project("Catana", "New sword-fighting game", categoryStorage.getCategoryById(3),
 				dateTime.plusDays(14)));
-		projectManager.addProject(new Project("Terminator Exodus",
-				"New game about fighting as Terminator",
+		projectManager.addProject(new Project("Terminator Exodus", "New game about fighting as Terminator",
 				categoryStorage.getCategoryById(3), dateTime));
-		projectManager.getProjectByName("Catana").addBacker(new User(),
-				Double.valueOf(25000));
-		Project project = new Project("GoIT Java 7",
-				"Movie about our GoIT Java 7 Group",
-				getCategoryStorage().getCategoryById(1),
-				LocalDateTime.now().plusHours(23));
+		projectManager.getProjectByName("Catana").addBacker(new User(), Double.valueOf(25000));
+		Project project = new Project("GoIT Java 7", "Movie about our GoIT Java 7 Group",
+				getCategoryStorage().getCategoryById(1), LocalDateTime.now().plusHours(23));
 		
-		getProjectManager().getProjectByName("Catana")
-				.setDemoLink("www.catana.game");
+		getProjectManager().getProjectByName("Catana").setDemoLink("www.catana.game");
 		Map<String, String> qa = new HashMap<String, String>();
 		qa.put("What is project about?", "It is about our goit7 group");
 		qa.put("When was it started", "October 2015");
-		getProjectManager().getProjectByName("Catana")
-				.setQuestionsAndAnswers(qa);
+		getProjectManager().getProjectByName("Catana").setQuestionsAndAnswers(qa);
 		addProject(project);
 		getProjectManager().getProjects().forEach(p -> {
 			p.setMoneyNeeded(50000);
 		});
 
 	}
+
 	public boolean isLoadFromFile() {
 		return loadFromFile;
 	}

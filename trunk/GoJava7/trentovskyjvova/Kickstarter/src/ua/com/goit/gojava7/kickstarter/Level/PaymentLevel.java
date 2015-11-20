@@ -6,7 +6,10 @@ import ua.com.goit.gojava7.kickstarter.console.ConsolePrinter;
 import ua.com.goit.gojava7.kickstarter.console.ConsoleScanner;
 import ua.com.goit.gojava7.kickstarter.domain.Category;
 import ua.com.goit.gojava7.kickstarter.domain.Project;
+import ua.com.goit.gojava7.kickstarter.domain.Question;
 import ua.com.goit.gojava7.kickstarter.domain.Reward;
+import ua.com.goit.gojava7.kickstarter.storage.PaymentStorage;
+import ua.com.goit.gojava7.kickstarter.storage.QuestionStorage;
 
 public class PaymentLevel implements Level {
 
@@ -48,14 +51,20 @@ public class PaymentLevel implements Level {
 	}
 
 	public String fillOutForm(Project project, int userChoise,
-			ConsoleScanner consoleScanner) {
+			ConsoleScanner consoleScanner, QuestionStorage questionStorage,
+			PaymentStorage paymentStorage) {
 		ConsolePrinter consolePrinter = new ConsolePrinter();
 
 		if (userChoise == 2) {
 			consolePrinter.print("Enter your question");
-			String question = consoleScanner.scanLine();
+			String questionText = consoleScanner.scanLine();
+			
+			Question question = new Question(questionStorage.generateIdOfNewElement());
+			question.setProjectId(project.getId());
+			question.setQuestionText(questionText);
 			
 			project.addQuestion(question);
+			questionStorage.addQuestion(question);
 			
 			return "Thank for your question!\n0 : back to project";
 		} else {

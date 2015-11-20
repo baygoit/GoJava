@@ -47,7 +47,7 @@ public class KickstarterTest {
 	private ProjectPrinter projectPrinter;
 	@Mock
 	private QuotePrinter quotePrinter;
-	//@Mock
+	
 	private QuoteStorage quoteStorage;
 	@Mock
 	private CategoryStorage categoryStorage;
@@ -55,16 +55,6 @@ public class KickstarterTest {
 	@InjectMocks
 	private Kickstarter kickstarter = new Kickstarter(quoteStorage, categoryStorage);
 	
-	@Before
-	public void setUp() {
-		systemOut = System.out;		
-	}
-	
-	@After
-	public void tearDown() {
-		System.setOut(systemOut);
-	}
-
 	@Test
 	public void testRunEntered0SaysFarewell() {		
 		when(categoryStorage.size()).thenReturn(1);
@@ -220,8 +210,7 @@ public class KickstarterTest {
 	public void testDonate() {
 		Project project = new Project("NameTest", "DescriptionTest", 100000, 100, 10, "HistoryTest", "LinkTest");	
 		kickstarter.donate(project);
-		when(consoleScanner.getName()).thenReturn("jjkljfhc");
-		when(consoleScanner.getCreditCard()).thenReturn("kjblvycyx");
+		when(consoleScanner.getString()).thenReturn("jjkljfhc").thenReturn("kjblvycyx");
 		verify(printer).print(contains("Enter your name:"));
 		verify(printer).print(contains("Enter your card's number:"));
 	}
