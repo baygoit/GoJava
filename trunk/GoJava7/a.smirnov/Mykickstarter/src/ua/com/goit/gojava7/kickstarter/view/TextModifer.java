@@ -47,41 +47,31 @@ public class TextModifer {
 			if (modifedTextLine.length() + quoteWords[index].length() <= 70) {
 				
 				if (index == amountOfWords - 1) {
-					modifedTextLine.
-						append(quoteWords[index]);
-
-					result.
-						append(modifedTextLine);
-					
-					modifedTextLine.
-						delete(0, modifedTextLine.length());
+					modifedTextLine.append(quoteWords[index]);
+					result.append(modifedTextLine);	
+					modifedTextLine.delete(0, modifedTextLine.length());
 				} else {
-					
 					modifedTextLine.
 						append(quoteWords[index]).
 						append(SPACE);
 				}
 			} else {
 				if (index == amountOfWords - 1) {
-					
 					result.
 						append(modifedTextLine).
 						append(MOVE_TO_THE_NEXT_LINE).
 						append(quoteWords[index]);
-				
 				} else {
 					result.
 						append(modifedTextLine).
 						append(MOVE_TO_THE_NEXT_LINE);
 				
-					modifedTextLine.
-						delete(0, modifedTextLine.length());
+					modifedTextLine.delete(0, modifedTextLine.length());
 					
 					modifedTextLine.
 						append(quoteWords[index]).
 						append(SPACE);
 				}
-				
 			}
 		}
 		return result.toString();
