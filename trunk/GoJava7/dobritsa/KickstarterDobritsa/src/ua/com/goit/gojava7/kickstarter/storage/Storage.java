@@ -6,37 +6,35 @@ import java.util.List;
 
 public abstract class Storage<T> {
 	
-	protected List<T> dataSource;
+	protected List<T> data;
 
 	protected Storage() {
-		dataSource = new ArrayList<>();
+		data = new ArrayList<>();
 	}
 
 	public List<T> getAll() {
-		return Collections.unmodifiableList(dataSource);
+		return Collections.unmodifiableList(data);
+	}
+	
+	public void setAll(List<T> data) {
+		this.data = data;
 	}
 	
 	public T get(int index) {
-		//TODO Error
-		
-		return dataSource.get(index);
+		if(data.size() == 0) {
+			System.out.println("Nothing to show");
+			//System.exit(0);
+			return null;
+		}		
+		return data.get(index);
 	}
 
 	public void add(T element) {
-		dataSource.add(element);
+		data.add(element);
 	}
 
-	public void remove(T element) {
-		dataSource.remove(element);
-	}
-	
 	public int size() {
-		return dataSource.size();
-	}
-	
-	public int indexOf(T element) {
-		return dataSource.indexOf(element);
-		
+		return data.size();
 	}
 	
 }

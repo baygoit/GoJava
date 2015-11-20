@@ -16,12 +16,12 @@ public class City {
     private Long id;
     private String name;
 
-    @Transient
     private List<Image> image = new ArrayList<Image>();
 
     public City() {
     }
 
+    //getters and setters
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", unique = true, nullable = false)
@@ -51,6 +51,7 @@ public class City {
         this.name = name;
     }
 
+    //other
     public String imagePath(){
         return "images/city/"+image.get(0).getName();
     }

@@ -49,3 +49,4 @@ crashlytics-build.properties
 
 ##maven
 /target/
+target/

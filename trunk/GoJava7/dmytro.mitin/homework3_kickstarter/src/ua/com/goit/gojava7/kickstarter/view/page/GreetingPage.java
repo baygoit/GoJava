@@ -3,9 +3,6 @@ package ua.com.goit.gojava7.kickstarter.view.page;
 import ua.com.goit.gojava7.kickstarter.model.Category;
 import ua.com.goit.gojava7.kickstarter.view.ConsoleView;
 
-/**
- * Created by Dmytro on 07.11.2015.
- */
 public class GreetingPage implements Page {
     ConsoleView view;
 

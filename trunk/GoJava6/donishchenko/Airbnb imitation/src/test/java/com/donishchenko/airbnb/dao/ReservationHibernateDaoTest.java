@@ -1,9 +1,6 @@
 package com.donishchenko.airbnb.dao;
 
-import com.donishchenko.airbnb.model.Apartment;
-import com.donishchenko.airbnb.model.ApartmentType;
-import com.donishchenko.airbnb.model.Reservation;
-import com.donishchenko.airbnb.model.User;
+import com.donishchenko.airbnb.model.*;
 import org.junit.*;
 
 import java.util.Date;
@@ -17,8 +14,11 @@ public class ReservationHibernateDaoTest {
     private static User host = new User("TestHost", "secretpassword", "sacr8tum@gmail.com", true, "Dmitry", "Onishchenko");
     private static User user = new User("TestUser", "secretpassword", "sacr8tum@gmail.com", false, "Dmitry", "Onishchenko");
 
+    private static CityDao cityDao = new CityHibernateDao();
+    private static City city = new City("TestCity");
+
     private static ApartmentDao apartmentDao = new ApartmentHibernateDao();
-    private static Apartment apartment = new Apartment(host, "TestCity", ApartmentType.APARTMENT, true);
+    private static Apartment apartment = new Apartment(host, city, ApartmentType.APARTMENT, true);
 
     private static ReservationDao dao = new ReservationHibernateDao();
     private static Reservation reservation;
@@ -27,6 +27,7 @@ public class ReservationHibernateDaoTest {
     public static void setUp() {
         userDao.save(host);
         userDao.save(user);
+        cityDao.save(city);
         apartmentDao.save(apartment);
 
         Date start = new GregorianCalendar(2015, 11, 1).getTime();
@@ -38,6 +39,7 @@ public class ReservationHibernateDaoTest {
     public static void tearDown() {
         userDao.delete(host.getId());
         userDao.delete(user.getId());
+        cityDao.delete(city.getId());
     }
 
     @Before

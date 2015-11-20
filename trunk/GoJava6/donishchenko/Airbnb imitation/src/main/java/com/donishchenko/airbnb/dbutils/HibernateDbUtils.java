@@ -1,6 +1,7 @@
 package com.donishchenko.airbnb.dbutils;
 
 import com.donishchenko.airbnb.model.Apartment;
+import com.donishchenko.airbnb.model.City;
 import com.donishchenko.airbnb.model.Reservation;
 import com.donishchenko.airbnb.model.User;
 import org.hibernate.SessionFactory;
@@ -16,6 +17,7 @@ public class HibernateDbUtils {
             configuration.configure("hibernate.cfg.xml");
             configuration
                     .addAnnotatedClass(User.class)
+                    .addAnnotatedClass(City.class)
                     .addAnnotatedClass(Apartment.class)
                     .addAnnotatedClass(Reservation.class);
 

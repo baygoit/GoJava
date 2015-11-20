@@ -2,6 +2,7 @@ package com.donishchenko.airbnb;
 
 import com.donishchenko.airbnb.model.Apartment;
 import com.donishchenko.airbnb.model.ApartmentType;
+import com.donishchenko.airbnb.model.City;
 import com.donishchenko.airbnb.model.User;
 import com.donishchenko.airbnb.services.UserService;
 import com.google.common.base.Joiner;
@@ -41,7 +42,7 @@ public class SortOfHomeController {
         return userService.getAllHosts();
     }
 
-    public int createApartment(int hostId, String city, ApartmentType type, boolean active) {
+    public int createApartment(int hostId, City city, ApartmentType type, boolean active) {
         if (hostId < 1) {
             return -1;
         }

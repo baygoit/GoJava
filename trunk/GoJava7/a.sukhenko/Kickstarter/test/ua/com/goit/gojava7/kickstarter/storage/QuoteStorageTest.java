@@ -9,20 +9,24 @@ import org.junit.Test;
 import static org.hamcrest.CoreMatchers.is;
 import ua.com.goit.gojava7.kickstarter.model.Quote;
 
-public class QuoteStorageTest {
+public class QuoteStorageTest{
 	private QuoteStorage quoteStorage = new QuoteStorage();
-	
+
 	@Before
-	public void addQuote(){
-		quoteStorage.addQuote(new Quote("Quote","Author"));
+	public void addQuote() {
+		quoteStorage.addQuote(new Quote("Quote", "Author"));
 	}
+
 	@Test
 	public void testQuoteStorageAddQuote() {
 		assertThat(quoteStorage.getQuotes().get(0).getQuoteName(), is("Quote"));
+		assertThat(quoteStorage.getQuotes().get(0).getAuthor(), is("Author"));
 	}
+
 	@Test
-	// Testing our getRandomQuote to be sure that every quote appears at least 1 time after calling getRandomQuote() 100 times.
-	public void testRandomQuote(){
+	// Testing our getRandomQuote to be sure that every quote appears at least 1
+	// time after calling getRandomQuote() 100 times.
+	public void testRandomQuote() {
 		HashSet<Quote> quotesRandomHolder = new HashSet<>();
 		quoteStorage.addQuote(new Quote("Q1", "A1"));
 		quoteStorage.addQuote(new Quote("Q2", "A2"));
@@ -32,14 +36,13 @@ public class QuoteStorageTest {
 			quotesRandomHolder.add(quoteStorage.getRandomQuote());
 		}
 		assertTrue(quotesRandomHolder.size() == 5);
-		
-		
+
 	}
-	
-	@Test (expected = UnsupportedOperationException.class)
-	public void testUnmodifiableList(){
+
+	@Test(expected = UnsupportedOperationException.class)
+	public void testUnmodifiableList() {
 		// Exception should appear after we try to add new Quote.
 		quoteStorage.getQuotes().add(new Quote("Some Quote", "Some Author"));
-		assertThat(quoteStorage.getQuotes().size(), is(0));
+		assertThat(quoteStorage.getQuotes().size(),is(2));
 	}
 }
