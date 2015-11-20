@@ -2,7 +2,6 @@ package ua.com.goit.gojava7.kickstarter.console;
 
 import static org.mockito.Matchers.contains;
 import static org.mockito.Matchers.endsWith;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.*;
 
@@ -29,38 +28,32 @@ public class ProjectPrinterTest {
 
 	private ProjectPrinter projectPrinter = new ProjectPrinter();
 	String time = new Date().toString();
-	private PrintStream defaultSystemOut;
-	
+		
 	@Mock
 	private PrintStream printSteam;
 
 	@Before
-	public void setUp() {
-		defaultSystemOut = System.out;
+	public void setUp() {		
 		System.setOut(printSteam);
 	}
 
 	@After
 	public void tearDown() {
-		verifyNoMoreInteractions(printSteam);
-		System.setOut(defaultSystemOut);
+		
 	}
 
 	@Test
-	public void testPrint() {
-		PrintStream printSteam = mock(PrintStream.class);
-		System.setOut(printSteam);
+	public void testPrint() {		
 		List<Question> questions = new ArrayList<Question>();
 		questions.add(new Question(new java.util.Date ().toString(), "QuestionsTest"));
 		Project project = new Project("NameTest", "DescriptionTest", 1000000, 10000, 10, "HistoryTest", "LinkTest");
+		
 		projectPrinter.printFull(project);
 		verify(printSteam).println(contains("NameTest"));
 	}
 
 	@Test
-	public void testPrintProjects() {
-		PrintStream printSteam = mock(PrintStream.class);
-		System.setOut(printSteam);
+	public void testPrintProjects() {	
 		Category category = new Category("Category1");
 		List<Question> questions = new ArrayList<Question>();
 		questions.add(new Question(new java.util.Date ().toString(), "QuestionsTest"));
@@ -76,12 +69,11 @@ public class ProjectPrinterTest {
 	}
 	
 	@Test
-	public void testPrintRewards() {
-		PrintStream printSteam = mock(PrintStream.class);
-		System.setOut(printSteam);		
+	public void testPrintRewards() {		
 		List<Reward> rewards = new ArrayList<>();		
 		rewards.add(new Reward(10, "ten Bonuses"));
-		rewards.add(new Reward(20, "twenty Bonuses"));		
+		rewards.add(new Reward(20, "twenty Bonuses"));	
+		
 		projectPrinter.printRewards(rewards);
 		verify(printSteam).println(contains("Type:"));
 		verify(printSteam).println(contains("10"));
@@ -90,21 +82,19 @@ public class ProjectPrinterTest {
 	}
 	
 	@Test
-	public void testPrintEmptyRewards() {
-		PrintStream printSteam = mock(PrintStream.class);
-		System.setOut(printSteam);		
+	public void testPrintEmptyRewards() {		
 		List<Reward> rewards = new ArrayList<>();
+		
 		projectPrinter.printRewards(rewards);
 		verify(printSteam).println(contains("There are no rewards. You can just help the project."));	
 	}
 	
 	@Test
-	public void testPrintQuestions() {
-		PrintStream printSteam = mock(PrintStream.class);
-		System.setOut(printSteam);		
+	public void testPrintQuestions() {			
 		List<Question> questions = new ArrayList<>();		
 		questions.add(new Question(time, "Test Question 1", "Test Answer 1"));
 		questions.add(new Question(time, "Test Question 2"));
+		
 		projectPrinter.printQuestions(questions);
 		verify(printSteam, times(2)).println(contains("Question:"));
 		verify(printSteam).println(contains("Test Question 1"));
@@ -113,12 +103,10 @@ public class ProjectPrinterTest {
 	}
 	
 	@Test
-	public void testPrintEmptyQuestions() {
-		PrintStream printSteam = mock(PrintStream.class);
-		System.setOut(printSteam);		
+	public void testPrintEmptyQuestions() {		
 		List<Question> questions = new ArrayList<>();
+		
 		projectPrinter.printQuestions(questions);
 		verify(printSteam).println(contains("There are no questions yet"));	
-	}
-	
+	}	
 }
