@@ -1,8 +1,8 @@
 
 package ua.com.goit.gojava7.kickstarter.storage_in_memory;
 
+import ua.com.goit.gojava7.kickstarter.beans.Category;
 import ua.com.goit.gojava7.kickstarter.dao.AbstractMemoryStorage;
-import ua.com.goit.gojava7.kickstarter.model.Category;
 
 public class CategoriesStorage extends AbstractMemoryStorage<Category> {
 	

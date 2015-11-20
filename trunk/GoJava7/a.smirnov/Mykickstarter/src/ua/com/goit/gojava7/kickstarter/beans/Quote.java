@@ -1,4 +1,4 @@
-package ua.com.goit.gojava7.kickstarter.model;
+package ua.com.goit.gojava7.kickstarter.beans;
 
 import java.io.Serializable;
 
@@ -22,16 +22,11 @@ public class Quote implements Serializable {
 		return quoteText;
 	}
 
-	public void setAuthor(String author) {
-		this.author = author;
-	}
-
 	public String getAuthor() {
 		return author;
 	}
 	
-	@Override
-	public String toString() {
-		return getQuoteText();
+	public void setAuthor(String author) {
+		this.author = author;
 	}
 }

@@ -2,10 +2,10 @@ package ua.com.goit.gojava7.kickstarter.control;
 
 import java.util.List;
 
-import ua.com.goit.gojava7.kickstarter.model.Category;
-import ua.com.goit.gojava7.kickstarter.model.Faq;
-import ua.com.goit.gojava7.kickstarter.model.Payment;
-import ua.com.goit.gojava7.kickstarter.model.Project;
+import ua.com.goit.gojava7.kickstarter.beans.Category;
+import ua.com.goit.gojava7.kickstarter.beans.Faq;
+import ua.com.goit.gojava7.kickstarter.beans.Payment;
+import ua.com.goit.gojava7.kickstarter.beans.Project;
 import ua.com.goit.gojava7.kickstarter.storage_in_memory.CategoriesStorage;
 import ua.com.goit.gojava7.kickstarter.storage_in_memory.FaqStorage;
 import ua.com.goit.gojava7.kickstarter.storage_in_memory.PaymentStorage;

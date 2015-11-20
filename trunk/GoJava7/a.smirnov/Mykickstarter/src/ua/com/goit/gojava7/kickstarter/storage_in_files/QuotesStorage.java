@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import ua.com.goit.gojava7.kickstarter.beans.Quote;
 import ua.com.goit.gojava7.kickstarter.dao.AbstractFilesStorage;
-import ua.com.goit.gojava7.kickstarter.model.Quote;
 
 public class QuotesStorage extends AbstractFilesStorage<Quote> {
 	
