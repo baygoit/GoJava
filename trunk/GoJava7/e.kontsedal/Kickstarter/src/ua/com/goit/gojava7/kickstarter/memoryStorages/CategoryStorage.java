@@ -1,8 +1,10 @@
-package ua.com.goit.gojava7.kickstarter;
+package ua.com.goit.gojava7.kickstarter.memoryStorages;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import ua.com.goit.gojava7.kickstarter.model.Category;
 
 public class CategoryStorage {
 	private static List<Category> categories = new ArrayList<>();

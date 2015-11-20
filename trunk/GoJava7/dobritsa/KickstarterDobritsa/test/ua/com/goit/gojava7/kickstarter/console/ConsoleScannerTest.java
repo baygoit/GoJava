@@ -9,12 +9,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import static org.mockito.Matchers.contains;
-import static org.mockito.Mockito.*;
-
 import java.io.ByteArrayInputStream;
 import java.io.PrintStream;
-import java.util.List;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ConsoleScannerTest {
