@@ -105,10 +105,7 @@ public class KickstarterTest {
 		kickstarter.run();
 		verify(printer, times(2)).print(contains("List of categories:"));	
 		verify(printer, times(3)).print(contains("Current category:"));	
-		verify(printer, times(2)).print(contains("List of projects:"));		
-		
-		//TODO How do it
-		//verify(printer, times(2)).print(NOTcontains("List of projects:"));		
+		verify(printer, times(2)).print(contains("List of projects:"));				
 		verify(printer).print(contains("Current project: #"));		
 		verify(printer).print(contains("See you soon!"));			
 	}
@@ -208,9 +205,7 @@ public class KickstarterTest {
 		Project project = new Project("NameTest", "DescriptionTest", 100000, 100, 10, "HistoryTest", "LinkTest");	
 		when(consoleScanner.getOption()).thenReturn("a");
 		kickstarter.chooseOptionOfProject(project);
-		verify(printer).print(contains("Ask your question about project:"));
-		//TODO How do it?
-		//verify(kickstarter).addQuestion(project);
+		verify(printer).print(contains("Ask your question about project:"));	
 	}
 	
 	@Test	
@@ -218,9 +213,7 @@ public class KickstarterTest {
 		Project project = new Project("NameTest", "DescriptionTest", 100000, 100, 10, "HistoryTest", "LinkTest");	
 		when(consoleScanner.getOption()).thenReturn("b");
 		kickstarter.chooseOptionOfProject(project);
-		verify(printer).print(contains("Enter your name:"));
-		//TODO How do it?
-		//verify(kickstarter).donate(project);
+		verify(printer).print(contains("Enter your name:"));	
 	}
 	
 	@Test
