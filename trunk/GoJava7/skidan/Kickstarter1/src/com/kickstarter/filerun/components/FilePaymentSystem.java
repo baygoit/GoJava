@@ -1,4 +1,4 @@
-package com.kickstarter.manager;
+package com.kickstarter.filerun.components;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -7,18 +7,18 @@ import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.kickstarter.app.KRun;
+
 import com.kickstarter.db.PayersDB;
 import com.kickstarter.model.Payer;
 import com.kickstarter.model.Project;
 import com.kickstarter.util.ConsolePrintView;
 import com.kickstarter.util.UserConsoleInputReader;
 
-public class PaymentSystem {
-	KRun kr = new KRun();
+public class FilePaymentSystem {
+	KRunFromFile kr = new KRunFromFile();
 	ConsolePrintView consolePrintView = new ConsolePrintView();
 	PayersDB pdb = new PayersDB();
-	ProjectManager prm = new ProjectManager();
+	FileProjectManager prm = new FileProjectManager();
 
 	public void addPayer(int cardId, String holderName) {
 
@@ -30,12 +30,12 @@ public class PaymentSystem {
 	}
 
 	public void acceptPayment(int payment, int projectNumber, String categoryTitle) {
-//		Map<Integer, Project> allProjects = prm.getWholeProjectMap();
+		Map<Integer, Project> allProjects = prm.getWholeProjectMap();
 		Project p = prm.getOne(categoryTitle, projectNumber);
 		int lastGainedSum = p.getGainedSum();
 		p.setGainedSum(lastGainedSum += payment);
-//		allProjects.put(projectNumber, p);
-//		writeToFile(allProjects);
+		allProjects.put(projectNumber, p);
+		writeToFile(allProjects);
 	}
 
 	public void makePayment(int projectNumber, int categoryNumber, String categoryTitle) {
