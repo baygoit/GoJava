@@ -230,7 +230,7 @@ protected void selectCategory() {
 		} while (payment == null);
 	}
 	
-	protected void stop() {
+	public void stop() {
 		consoleScanner.close();
 	}
 }
