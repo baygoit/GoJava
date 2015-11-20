@@ -60,11 +60,6 @@ public class BodyTest {
 
 	
 	@Test
-	public void testGenerateMainPage() {
-		fail("Not yet implemented");
-	}
-
-	@Test
 	public void testGenerateCategoryInfo() {
 		Category cat = new Category();
 		cat.setCategoryId(1);
