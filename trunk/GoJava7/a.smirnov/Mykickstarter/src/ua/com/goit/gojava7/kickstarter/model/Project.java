@@ -1,12 +1,11 @@
 package ua.com.goit.gojava7.kickstarter.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
-
-import ua.com.goit.gojava7.kickstarter.storage_in_files.PaymentStorage;
 
 public class Project implements Serializable{
 
@@ -128,16 +127,21 @@ public class Project implements Serializable{
 	}
 	
 	public int getSumProjectPayments(List<Payment> payments) {
+		List<Payment> projectsPayments = new ArrayList<>();
 		
-		if (payments.size() == 0) {
+		for (Payment payment : payments) {
+			if (payment.getProjectID() == this.uniqueID) {
+				projectsPayments.add(payment);
+			}
+		}
+		
+		if (projectsPayments.isEmpty()) {
 			return 0;
+			
 		} else {	
 			int result = 0;		
-			for (int index = 0; index < payments.size(); index++) {
-				Payment payment = payments.get(index);
-				if (payment.getProjectID() == this.getUniqueID()) {
-					result += payment.getDonatingSum();
-				}
+			for (Payment payment : projectsPayments) {
+				result += payment.getDonatingSum();
 			}	
 			return result;
 		}

@@ -1,126 +1,145 @@
-//package ua.com.goit.gojava7.kickstarter.model;
-//
-//import static org.hamcrest.CoreMatchers.is;
-//import static org.junit.Assert.*;
-//
-//import java.util.Calendar;
-//import java.util.Date;
-//import java.util.TimeZone;
-//
-//import org.junit.Before;
-//import org.junit.Test;
-//
-//public class ProjectTest {
-//
-//	private Project project1;
-//	private Project project2;
-//	
-//	@Before
-//	public void setUp() throws Exception {
-//		project1 = new Project("Football game", "The best game in the world", 10_000);
-//		project2 = new Project("Soccer game", "The worst game in the world", 12_000);
-//	}
-//	
-//	@Test
-//	public void testProject() {
-//		Project project = new Project("1", "2", 3);
-//		StringBuilder result = new StringBuilder();
-//		result.
-//			append(project.getTitle()).
-//			append(project.getBriefDescription()).
-//			append(project.getRequiredAmountOfMoney());
-//		assertThat(result.toString(), is("123"));
-//	}
-//
-//	@Test
-//	public void testGetTitle() {
-//		assertThat(project1.getTitle(), is("Football game"));
-//		assertThat(project2.getTitle(), is("Soccer game"));
-//	}
-//
-//	@Test
-//	public void testSetTitle() {
-//		project1.setTitle("Apolon");
-//		project2.setTitle("Ukraine");
-//		assertThat(project1.getTitle(), is("Apolon"));
-//		assertThat(project2.getTitle(), is("Ukraine"));
-//	}
-//
-//	@Test
-//	public void testGetBriefDescription() {
-//		assertThat(project1.getBriefDescription(), is("The best game in the world"));
-//	}
-//
-//	@Test
-//	public void testAddBriefDescription() {
-//		project1.addBriefDescription("New project");
-//		assertThat(project1.getBriefDescription(), is("New project"));
-//	}
-//
-//	@Test
-//	public void testAddAndGetFullDescription() {
-//		project1.addFullDescription("There are a lot of information...");
-//		assertThat(project1.getFullDescription(), is("There are a lot of information..."));
-//	}
-//
-//	@Test
-//	public void testGetRequiredAmountOfMoney() {
-//		assertThat(project1.getRequiredAmountOfMoney(), is(10000));
-//	}
-//
-//	@Test
-//	public void testSetRequiredAmountOfMoney() {
-//		project1.setRequiredAmountOfMoney(2000);
-//		project2.setRequiredAmountOfMoney(5000);
-//		assertThat(project1.getRequiredAmountOfMoney(), is(2000));
-//		assertThat(project2.getRequiredAmountOfMoney(), is(5000));
-//	}
-//
-//	@Test
-//	public void testGetCurrentAmoutOfMoney() {
-//		assertThat(project1.getCurrentAmoutOfMoney(), is(0));
-//		assertThat(project2.getCurrentAmoutOfMoney(), is(0));
-//	}
-//
-//	@Test
-//	public void testAddToCurrentAmountOfMoney() {
-//		project1.addMoneyToProject(2000);
-//		project2.addMoneyToProject(5000);
-//		assertThat(project1.getCurrentAmoutOfMoney(), is(2000));
-//		assertThat(project2.getCurrentAmoutOfMoney(), is(5000));
-//	}
-//
-//	@Test (expected=NullPointerException.class)
-//	public void testGetLinkOnVideo() {
-//		assertThat(project1.getLinkOnVideo().length(), is(0));
-//		assertThat(project2.getLinkOnVideo().length(), is(0));
-//	}
-//
-//	@Test
-//	public void testAddLinkOnVideo() {
-//		project1.addLinkOnVideo("youtube.com");
-//		project2.addLinkOnVideo("rutube.com");
-//		assertThat(project1.getLinkOnVideo(), is("youtube.com"));
-//		assertThat(project2.getLinkOnVideo(), is("rutube.com"));
-//	}
-//	
-//	@Test
-//	public void testGetDaysLeft() {
-//		TimeZone timeZone = TimeZone.getTimeZone("Europe/Kiev");
-//		Calendar currentCalendar = Calendar.getInstance();
-//		Date date = new Date();	
-//		currentCalendar.setTimeZone(timeZone);
-//		currentCalendar.setTime(date);
-//		
-//		int result = project1.getDaysLeft(currentCalendar.get(Calendar.DAY_OF_MONTH), 
-//				currentCalendar.get(Calendar.MONTH) + 1, currentCalendar.get(Calendar.YEAR));
-//		assertThat(result, is(0));
-//	}
-//
-//	@Test
-//	public void testCompareTo() {
-//		int result = project1.getTitle().compareTo(project2.getTitle());
-//		assertTrue(result < 0);
-//	}
-//
-//}
+package ua.com.goit.gojava7.kickstarter.model;
+
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.*;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.Before;
+import org.junit.Test;
+
+public class ProjectTest {
+
+	private String title = "Game FIFA 2020";
+	private String briefDescription = "The best game in the world!";
+	private int requiredSum = 100_000;
+	
+	private Project project;
+	
+	@Before
+	public void setUp() throws Exception {
+		project = new Project(title, briefDescription, requiredSum);
+	}
+
+	@Test
+	public void testProject() {
+		assertThat(project.getTitle(), is(title));
+		assertThat(project.getBriefDescription(), is(briefDescription));
+		assertThat(project.getRequiredSum(), is(requiredSum));
+	}
+
+	@Test
+	public void testGetTitle() {
+		assertThat(project.getTitle(), is(title));
+	}
+
+	@Test
+	public void testSetTitle() {
+		String newTitle = "Soccer game";
+		project.setTitle(newTitle);
+		assertThat(project.getTitle(), is(newTitle));
+	}
+
+	@Test
+	public void testGetBriefDescription() {
+		assertThat(project.getBriefDescription(), is(briefDescription));
+	}
+
+	@Test
+	public void testAddBriefDescription() {
+		String newBriefDescription = "Good game";
+		project.addBriefDescription(newBriefDescription);
+	}
+
+	@Test
+	public void testGetFullDescription() {
+		assertEquals(project.getFullDescription(), "----");
+	}
+
+	@Test
+	public void testAddFullDescription() {
+		String fullDescription = "a lot of text...";
+		project.addFullDescription(fullDescription);
+		assertThat(project.getFullDescription(), is(fullDescription));
+	}
+
+	@Test
+	public void testGetRequiredSum() {
+		assertThat(project.getRequiredSum(), is(requiredSum));
+	}
+
+	@Test
+	public void testSetRequiredSum() {
+		int money = 20_000;
+		project.setRequiredSum(money);
+		assertThat(project.getRequiredSum(), is(money));
+	}
+
+	@Test
+	public void testGetCollectedSum() {
+		assertThat(project.getCollectedSum(), is(0));
+	}
+
+	@Test
+	public void testSetCollectedSum() {
+		int money = 100;
+		project.setCollectedSum(money);
+		assertThat(project.getCollectedSum(), is(money));
+	}
+
+	@Test
+	public void testGetVideoLink() {
+		assertEquals(project.getVideoLink(), "----");
+	}
+
+	@Test
+	public void testSetVideoLink() {
+		String videoLink = "youtube.com";
+		project.setVideoLink(videoLink);
+		assertThat(project.getVideoLink(), is(videoLink));
+	}
+
+	@Test
+	public void testGetCategoryID() {
+		assertThat(project.getCategoryID(), is(0));
+	}
+
+	@Test
+	public void testSetCategoryID() {
+		int categoryID = 1;
+		project.setCategoryID(categoryID);
+		assertThat(project.getCategoryID(), is(categoryID));
+	}
+
+	@Test
+	public void testGetUniqueID() {
+		assertThat(project.getUniqueID(), is(0));
+	}
+
+	@Test
+	public void testSetUniqueID() {
+		int uniqueID = 1;
+		project.setUniqueID(uniqueID);
+		assertThat(project.getUniqueID(), is(uniqueID));
+	}
+
+	@Test
+	public void testGetSumProjectPayments() {
+		int projectID = 1;
+		
+		List<Payment> payments = new ArrayList<>();
+		Payment payment1 = new Payment("Anton", 1111, 100);
+		payment1.setProjectID(projectID);
+		payments.add(payment1);
+		
+		Payment payment2 = new Payment("Alex", 2222, 250);
+		payment2.setProjectID(projectID);
+		payments.add(payment2);
+		
+		project.setUniqueID(projectID);
+		
+		assertThat(project.getSumProjectPayments(payments), 
+				is(payment1.getDonatingSum() + payment2.getDonatingSum()));
+	}
+}

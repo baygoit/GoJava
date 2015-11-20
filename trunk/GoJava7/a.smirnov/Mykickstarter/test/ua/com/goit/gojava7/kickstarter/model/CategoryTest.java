@@ -1,38 +1,47 @@
-//package ua.com.goit.gojava7.kickstarter.model;
-//
-//import static org.hamcrest.CoreMatchers.is;
-//
-//import org.junit.Test;
-//import static org.junit.Assert.*;
-//import org.junit.Before;
-//
-//public class CategoryTest {
-//	private Category category1;
-//	private Category category2;
-//	
-//	@Before
-//	public void setUp() throws Exception {
-//		category1 = new Category("Football");
-//		category2 = new Category("Volleybol");
-//	}
-//
-//	@Test
-//	public void testCategory() {
-//		assertThat(category1.getName(), is ("Football"));
-//	}
-//
-//
-//
-//	@Test
-//	public void testSetName() {
-//		category1.setName("Soccer");
-//		assertThat(category1.getName(), is ("Soccer"));
-//	}
-//
-//	@Test
-//	public void testCompareTo() {
-//		int result = category1.getName().compareTo(category2.getName());
-//		assertTrue(result < 0);
-//	}
-//
-//}
+package ua.com.goit.gojava7.kickstarter.model;
+
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.*;
+
+import org.junit.Before;
+import org.junit.Test;
+
+public class CategoryTest {
+	
+	private String categoryName = "Film";
+	private Category category;
+	
+	@Before
+	public void setUp() throws Exception {
+		category = new Category(categoryName);
+	}
+
+	@Test
+	public void testCategory() {
+		assertThat(category.getCategoryName(), is(categoryName));
+	}
+
+	@Test
+	public void testGetCategoryName() {
+		assertThat(category.getCategoryName(), is(categoryName));
+	}
+
+	@Test
+	public void testSetCategoryName() {
+		String name = "Movie";
+		category.setCategoryName(name);
+		assertThat(category.getCategoryName(), is(name));
+	}
+
+	@Test
+	public void testGetUniqueID() {
+		assertThat(category.getUniqueID(), is(0));
+	}
+
+	@Test
+	public void testSetUniqueID() {
+		int id = 1;
+		category.setUniqueID(id);
+		assertThat(category.getUniqueID(), is(id));
+	}
+}
