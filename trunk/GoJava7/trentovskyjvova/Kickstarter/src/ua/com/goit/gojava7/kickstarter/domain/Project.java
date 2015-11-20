@@ -1,11 +1,12 @@
 package ua.com.goit.gojava7.kickstarter.domain;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 public class Project {
 	private String name;
+	private final int id;
+	private int categoryId;
 	private int funded;
 	private int daysToGo;
 	private int pledged;
@@ -14,9 +15,12 @@ public class Project {
 	private int goal;
 	private String linkVideo;
 	private List<String> questions;
+	private List<Reward> rewards;
 	
-	public Project(String name) {
+	public Project(String name, int id) {
 		setName(name);
+		this.id = id;
+		setCategoryId(0);
 		setFunded(0);
 		setDaysToGo(40);
 		setPledged(0);
@@ -25,12 +29,17 @@ public class Project {
 		setGoal(0);
 		setLinkVideo("");
 		questions = new ArrayList<String>();
+		rewards = new ArrayList<Reward>();
 	}
 
 	public String getName() {
 		return name;
 	}
-
+	
+	public int getId() {
+		return id;
+	}
+	
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -90,7 +99,15 @@ public class Project {
 	public void setPledged(int pledged) {
 		this.pledged = pledged;
 	}
+	
+	public int getCategoryId() {
+		return categoryId;
+	}
 
+	public void setCategoryId(int categoryId) {
+		this.categoryId = categoryId;
+	}
+	
 	public String getAllDetails() {
 		StringBuilder projectDetails = new StringBuilder();
 
@@ -115,4 +132,26 @@ public class Project {
 	public List<String> getQuestions(){
 		return questions;
 	}
+	
+	public int questionsSize(){
+		return questions.size();
+	}
+	
+	public List<Reward> getRewards(){
+		return rewards;
+	}
+	
+	public Reward getReward(int index){
+		return rewards.get(index);
+	}
+	
+	public void addReward(Reward reward){
+		rewards.add(reward);
+	}
+	
+	public int rewardsSize(){
+		return rewards.size();
+	}
+
+
 }

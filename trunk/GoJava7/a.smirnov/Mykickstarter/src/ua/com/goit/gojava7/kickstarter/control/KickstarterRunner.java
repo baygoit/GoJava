@@ -8,7 +8,7 @@ public class KickstarterRunner {
 			System.out.println("Starting program using files storages");
 			KickstarterForFiles kickstarterForFiles = new KickstarterForFiles();
 			kickstarterForFiles.start();
-//			kickstarterForFiles.stop();
+			kickstarterForFiles.stop();
 
 		} else {
 			System.out.println("Starting program using memory storages");

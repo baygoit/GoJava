@@ -1,13 +1,13 @@
-package ua.com.goit.gojava7.kickstarter.templates;
+package ua.com.goit.gojava7.kickstarter.dao;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-public abstract class AbstractStorage<T> implements Templateble<T> {
+public abstract class AbstractMemoryStorage<T> implements Templateble<T> {
 	private List<T> storage;
 
-	public AbstractStorage() {
+	public AbstractMemoryStorage() {
 		storage = new ArrayList<>();
 	}
 

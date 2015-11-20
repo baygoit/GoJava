@@ -11,14 +11,6 @@ public class QuoteStorage {
 	private List<Quote> quotes = new ArrayList<>();
 
 	public QuoteStorage(Random random) {
-		setRandom(random);
-	}
-
-	public Random getRandom() {
-		return random;
-	}
-
-	public void setRandom(Random random) {
 		this.random = random;
 	}
 
@@ -39,5 +31,8 @@ public class QuoteStorage {
 	public Quote get(int index) {
 		return quotes.get(index);
 	}
-
+	
+	public void setQuotes(List<Quote> quotes) {
+		this.quotes = quotes;
+	}
 }
