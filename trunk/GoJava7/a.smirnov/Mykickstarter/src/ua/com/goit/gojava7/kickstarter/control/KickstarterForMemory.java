@@ -230,7 +230,7 @@ public class KickstarterForMemory {
 		} while (payment == null);
 	}
 	
-	protected void stop() {
+	public void stop() {
 		consoleScanner.close();
 	}
 }

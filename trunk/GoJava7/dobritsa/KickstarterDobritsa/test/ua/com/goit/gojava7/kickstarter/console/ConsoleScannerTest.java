@@ -3,6 +3,8 @@ package ua.com.goit.gojava7.kickstarter.console;
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.is;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -27,6 +29,11 @@ public class ConsoleScannerTest {
 	@InjectMocks
 	private ConsoleScanner consoleScanner = new ConsoleScanner();
 
+	@Before
+	public void setUp() {		
+		System.setOut(printSteam);
+	}
+	
 	@Test
 	public void testGetIntEntered0() throws IOException {
 		when(bufferedReader.readLine()).thenReturn("0");

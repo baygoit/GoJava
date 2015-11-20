@@ -6,9 +6,10 @@ import org.junit.Test;
 
 public class ConsolePrinterTest {
 	ConsolePrinter consolePrinter = new ConsolePrinter();
+
 	@Test
 	public void testPrintString() {
-		
+
 	}
 
 	@Test

@@ -10,11 +10,11 @@ import ua.com.goit.gojava7.kickstarter.model.User;
 import ua.com.goit.gojava7.kickstarter.payment.PaymentSystem;
 import ua.com.goit.gojava7.kickstarter.storage.ProjectManager;
 
-public class PaymentSystemTest{
-	ProjectManager	projectManager	= new ProjectManager();
-	Project			project			= new Project();
-	User			payer			= new User();
-	PaymentSystem	paymentSystem	= new PaymentSystem();
+public class PaymentSystemTest {
+	ProjectManager projectManager = new ProjectManager();
+	Project project = new Project();
+	User payer = new User();
+	PaymentSystem paymentSystem = new PaymentSystem();
 
 	@Before
 	public void setUp() {

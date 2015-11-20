@@ -20,28 +20,27 @@ import ua.com.goit.gojava7.kickstarter.model.Project;
 import ua.com.goit.gojava7.kickstarter.model.User;
 
 public class BodyTest {
+	public static final String PROJECT2 = "Project: ";
 	String newLine = "\r\n";
 	Body body = new Body();
 	ConsolePrinter consolePrinter = new ConsolePrinter();
 	Kickstarter kickstarter = new Kickstarter();
-	
-	
+
 	private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 	private final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
 
 	@Before
 	public void setUpStreams() {
-		body.setConsolePrinter(consolePrinter);
-	   System.setOut(new PrintStream(outContent));
-	    System.setErr(new PrintStream(errContent));
+		System.setOut(new PrintStream(outContent));
+		System.setErr(new PrintStream(errContent));
 	}
 
 	@After
 	public void cleanUpStreams() {
-	    System.setOut(null);
-	    System.setErr(null);
+		System.setOut(null);
+		System.setErr(null);
 	}
-	
+
 	@Test
 	public void testBody() {
 		assertNotNull(body);
@@ -49,23 +48,14 @@ public class BodyTest {
 
 	@Test
 	public void testGenerateHeader() {
-		body.generateHeader();
-		assertThat(outContent.toString(),is(Body.WELCOME_TO_KICKSTARTER_BETA+newLine));
+		body.generateHeader(consolePrinter);
+		assertThat(outContent.toString(), is(Body.WELCOME_TO_KICKSTARTER_BETA + newLine));
 	}
 
 	@Test
 	public void testGenerateFooter() {
-		body.generateFooter();
-		assertThat(outContent.toString(), is(Body.GO_IT_KICKSTARTER_C_BY_ARTUR_SUKHENKO+newLine));
-	}
-
-	@Test
-	public void testGenerateBody() {
-		/*
-		kickstarter.init();
-		kickstarter.setBody(body);
-		body.generateBody();
-		fail("Not yet implemented");*/
+		body.generateFooter(consolePrinter);
+		assertThat(outContent.toString(), is(Body.GO_IT_KICKSTARTER_C_BY_ARTUR_SUKHENKO + newLine));
 	}
 
 	@Test
@@ -73,17 +63,17 @@ public class BodyTest {
 		fail("Not yet implemented");
 	}
 
-	@Test
-	public void testGenerateCategories() {
-		String stuff = ConsolePrinter.HORIZONTAL_LINE+newLine;
-		stuff += Body.CATEGORIES;
-		consolePrinter.printHorizontalLine();
-		
-				body.generateCategories();	
-				//assertThat()
-				
-	}
-
+	/*
+	 * @Test public void testGenerateCategories() { String stuff =
+	 * ConsolePrinter.HORIZONTAL_LINE+newLine; stuff += Body.CATEGORIES;
+	 * //body.getKickstarter().getCategoryStorage(). // stuff +=
+	 * b.getCategoryId() + "# " + b.getCategoryName());
+	 * consolePrinter.printHorizontalLine();
+	 * 
+	 * // body.generateCategories(); //assertThat()
+	 * 
+	 * }
+	 */
 	@Test
 	public void testGenerateMainPage() {
 		fail("Not yet implemented");
@@ -94,14 +84,28 @@ public class BodyTest {
 		Category cat = new Category();
 		cat.setCategoryId(1);
 		cat.setCategoryName("category");
-		body.generateCategoryInfo(cat);
-		assertThat(outContent.toString(), is(cat.getCategoryId() + "# " + cat.getCategoryName()+newLine));
+		body.generateCategoryInfo(cat, consolePrinter);
+		assertThat(outContent.toString(), is(cat.getCategoryId() + "# " + cat.getCategoryName() + newLine));
 	}
 
 	@Test
 	public void testGenerateProjectInfo() {
+		Project project = getProject();
+		body.generateProjectInfo(project, consolePrinter);
+
+		String stuff = "===========================" + newLine;
+		stuff += PROJECT2 + project.getProjectName() + "   |  Category: "
+				+ project.getProjectCategory().getCategoryName() + newLine;
+		stuff += "59 minutes left" + newLine;
+		stuff += "[ Description ]" + newLine;
+		stuff += "Funded: " + project.getFundedPercentage() + " Backers: " + project.getBackers().size()
+				+ " | Pledged: $" + project.getMoneyPledged() + newLine;
+		assertThat(outContent.toString(), is(stuff));
+	}
+
+	private Project getProject() {
 		Project project = new Project();
-		Map<String,String> qa = new HashMap<String,String>();
+		Map<String, String> qa = new HashMap<String, String>();
 		Category cat = new Category("cat", 1);
 		project.setProjectCategory(cat);
 		project.setMoneyNeeded(100000.0);
@@ -113,14 +117,7 @@ public class BodyTest {
 		project.setProjectHistory("history");
 		project.setProjectDescription("Description");
 		project.setQuestionsAndAnswers(qa);
-		body.generateProjectInfo(project);
-		
-		String stuff = "===========================" + newLine;
-		stuff += "Project: " + project.getProjectName() + "   |  Category: " + project.getProjectCategory().getCategoryName()+ newLine;
-		stuff+= "59 minutes left"+ newLine;
-		stuff+= "[ Description ]"+ newLine;
-		stuff+= "Funded: " + project.getFundedPercentage() + " Backers: " + project.getBackers().size() + " | Pledged: $" + project.getMoneyPledged()+ newLine;
-		assertThat(outContent.toString(), is(stuff));
+		return project;
 	}
 
 }

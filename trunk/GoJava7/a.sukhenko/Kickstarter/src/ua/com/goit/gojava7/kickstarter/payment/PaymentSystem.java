@@ -1,8 +1,8 @@
 package ua.com.goit.gojava7.kickstarter.payment;
 
-public class PaymentSystem{
-	protected String	paymentSystemName;
-	protected int		paymentSystemID;
+public class PaymentSystem {
+	protected String paymentSystemName;
+	protected int paymentSystemID;
 
 	public void setPaymentSystemName(String paymentSystemName) {
 		this.paymentSystemName = paymentSystemName;

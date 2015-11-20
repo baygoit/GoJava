@@ -1,3 +1,5 @@
+package model;
+
 import org.junit.Test;
 import ua.com.goit.gojava7.kickstarter.controller.Controller;
 import ua.com.goit.gojava7.kickstarter.model.Category;

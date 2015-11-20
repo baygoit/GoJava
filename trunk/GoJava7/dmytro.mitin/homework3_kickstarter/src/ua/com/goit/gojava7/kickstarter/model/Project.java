@@ -1,8 +1,5 @@
 package ua.com.goit.gojava7.kickstarter.model;
 
-/**
- * Created by Dmytro on 06.11.2015.
- */
 public class Project {
     private Category category;
 

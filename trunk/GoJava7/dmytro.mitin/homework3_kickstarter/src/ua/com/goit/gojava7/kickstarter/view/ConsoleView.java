@@ -1,17 +1,15 @@
 package ua.com.goit.gojava7.kickstarter.view;
 
 import ua.com.goit.gojava7.kickstarter.controller.Controller;
-import ua.com.goit.gojava7.kickstarter.model.*;
+import ua.com.goit.gojava7.kickstarter.model.Category;
+import ua.com.goit.gojava7.kickstarter.model.Project;
+import ua.com.goit.gojava7.kickstarter.model.Quote;
 import ua.com.goit.gojava7.kickstarter.view.exception.ExitException;
 import ua.com.goit.gojava7.kickstarter.view.page.*;
 
 import java.util.List;
 import java.util.Scanner;
 
-
-/**
- * Created by Dmytro on 06.11.2015.
- */
 public class ConsoleView implements View {
     private Page currentPage;
 
@@ -40,7 +38,7 @@ public class ConsoleView implements View {
     public void run() {
         while (true) {
             try {
-                reloadPage();
+                handleNotification();
                 String command = scannerIn.nextLine();
                 Page nextPage = currentPage.getUpdated(command);
                 previousPage = currentPage;
@@ -80,7 +78,7 @@ public class ConsoleView implements View {
 
     // implementing Observer pattern
     @Override
-    public void reloadPage() throws ExitException {
+    public void handleNotification() throws ExitException {
         currentPage.show();
     }
 

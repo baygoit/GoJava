@@ -8,21 +8,19 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.kickstarter.db.ProjectDB;
+
 import com.kickstarter.model.Project;
 
 public class FileManagerImplementation implements ProjectManagerInterface {
-	ProjectDB pdb = new ProjectDB();
+	
 
 	public Map<Integer, Project> getAll(String categoryTitle) {
 		Map<Integer, Project> allProjects = new HashMap<>();
-        try {
+		try {
 			allProjects = fileReader();
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		Map<Integer, Project> categoryProjects = new HashMap<>();
@@ -74,6 +72,21 @@ public class FileManagerImplementation implements ProjectManagerInterface {
 			}
 			return allProjectList;
 		}
+
+	}
+
+	public Map<Integer, Project> getWholeProjectMap() {
+		Map<Integer, Project> list = new HashMap<>();
+		try {
+			list = fileReader();
+		} catch (FileNotFoundException e) {
+
+			e.printStackTrace();
+		} catch (IOException e) {
+
+			e.printStackTrace();
+		}
+		return list;
 
 	}
 }
