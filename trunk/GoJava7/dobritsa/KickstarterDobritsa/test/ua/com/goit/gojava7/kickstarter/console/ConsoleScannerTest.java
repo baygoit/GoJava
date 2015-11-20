@@ -92,14 +92,6 @@ public class ConsoleScannerTest {
 	@Test
 	public void testGetString() throws IOException {
 		when(bufferedReader.readLine()).thenReturn("kdkadkw29w90");
-		assertThat(consoleScanner.getOption(), is("kdkadkw29w90"));	
+		assertThat(consoleScanner.getString(), is("kdkadkw29w90"));	
 	}
-	
-	@Test
-	public void testClose() {
-		
-	}
-	
-
-
 }
