@@ -64,6 +64,7 @@ public class Body {
 		ConsolePrinter.print("[ " + project.getProjectDescription() + " ]");
 		ConsolePrinter.print("Funded: " + project.getFundedPercentage() + " Backers: " + project.getBackers().size()
 				+ " | Pledged: $" + project.getMoneyPledged());
+	
 
 	}
 

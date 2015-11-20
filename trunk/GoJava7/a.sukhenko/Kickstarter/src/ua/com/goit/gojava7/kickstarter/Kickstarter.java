@@ -152,6 +152,9 @@ public class Kickstarter {
 				getCategoryStorage().getCategoryById(1), LocalDateTime.now().plusHours(23));
 
 		getProjectManager().getProjectByName("Catana").setDemoLink("www.catana.game");
+		getProjectManager().getProjectByName("Catana").getPaymentBonus().getBonuses().put(1, "You will be mentioned in the project");
+		getProjectManager().getProjectByName("Catana").getPaymentBonus().getBonuses().put(10, "Tea Cup with Catana + mentioned in the project");
+		getProjectManager().getProjectByName("Catana").getPaymentBonus().getBonuses().put(40, "Same as for 10$ + Early Access pack.");
 		Map<String, String> qa = new HashMap<String, String>();
 		qa.put("What is project about?", "It is about our goit7 group");
 		qa.put("When was it started", "October 2015");

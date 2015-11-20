@@ -18,15 +18,15 @@
             <bonuses>
                 <entry>
                     <key>1</key>
-                    <value>Bonus for 1</value>
+                    <value>You will be mentioned in the project</value>
                 </entry>
                 <entry>
                     <key>40</key>
-                    <value>Bonus for 40</value>
+                    <value>Same as for 10$ + Early Access pack.</value>
                 </entry>
                 <entry>
                     <key>10</key>
-                    <value>Bonus for 10</value>
+                    <value>Tea Cup with Catana + mentioned in the project</value>
                 </entry>
             </bonuses>
         </paymentBonus>

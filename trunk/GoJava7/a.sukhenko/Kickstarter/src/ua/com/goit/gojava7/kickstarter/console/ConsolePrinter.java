@@ -55,6 +55,10 @@ public class ConsolePrinter {
 		print("Demo: " + getBlankStringIfNull(project.getDemoLink()));
 		print("Funded: " + project.getFundedPercentage() + " Backers: " + project.getBackers().size() + " | Pledged: $"
 				+ project.getMoneyPledged());
+		ConsolePrinter.print("Donate bonuses:");
+		project.getPaymentBonus().getBonuses().forEach((money,bonus) -> {
+			ConsolePrinter.print(money+ "$ - " + bonus);
+		});
 		printQuestionsAndAnswers(project.getQuestionsAndAnswers());
 
 	}
