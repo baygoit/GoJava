@@ -6,7 +6,7 @@ import java.util.Random;
 
 import ua.com.goit.gojava7.kickstarter.domain.Quote;
 
-public class QuoteStorage {
+public class QuoteStorage implements QuoteDao {
 
 	private Random random;
 
@@ -16,6 +16,10 @@ public class QuoteStorage {
 		this.random = random;
 	}
 
+	/* (non-Javadoc)
+	 * @see ua.com.goit.gojava7.kickstarter.storage.QuoteDao#getRandomQuote()
+	 */
+	@Override
 	public Quote getRandomQuote() {
 		int randomNumber = random.nextInt(quotes.size());
 		return quotes.get(randomNumber);

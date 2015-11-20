@@ -8,17 +8,17 @@ import ua.com.goit.gojava7.kickstarter.console.ConsoleScanner;
 import ua.com.goit.gojava7.kickstarter.domain.Category;
 import ua.com.goit.gojava7.kickstarter.domain.Project;
 import ua.com.goit.gojava7.kickstarter.storage.CategoryStorage;
-import ua.com.goit.gojava7.kickstarter.storage.QuoteStorage;
+import ua.com.goit.gojava7.kickstarter.storage.QuoteDao;
 
 public class Kickstarter {
-	private QuoteStorage quoteStorage;
+	private QuoteDao quoteStorage;
 	private CategoryStorage categoryStorage;
 
 	private ConsolePrinter consolePrinter;
 	private ConsoleScanner consoleScanner;
 
 	public Kickstarter(ConsolePrinter consolePrinter, ConsoleScanner consoleScanner,
-			QuoteStorage quoteStorage, CategoryStorage categoryStorage) {
+			QuoteDao quoteStorage, CategoryStorage categoryStorage) {
 		this.consolePrinter = consolePrinter;
 		this.consoleScanner = consoleScanner;
 
