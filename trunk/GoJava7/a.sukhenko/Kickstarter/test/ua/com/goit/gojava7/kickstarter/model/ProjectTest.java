@@ -10,7 +10,7 @@ import static org.hamcrest.CoreMatchers.is;
 
 import org.junit.Test;
 
-public class ProjectTest{
+public class ProjectTest {
 	Project project = new Project();
 
 	@Test

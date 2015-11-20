@@ -3,14 +3,17 @@ package ua.com.goit.gojava7.kickstarter.storage;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
-import ua.com.goit.gojava7.kickstarter.Kickstarter;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import ua.com.goit.gojava7.kickstarter.model.Category;
 import ua.com.goit.gojava7.kickstarter.model.Project;
 import ua.com.goit.gojava7.kickstarter.model.User;
 
-public class ProjectManager{
-	private Kickstarter			kickstarter;
-	private ArrayList<Project>	projects	= new ArrayList<Project>();
+
+
+@XmlRootElement(name = "projects")
+public class ProjectManager {
+	private ArrayList<Project> projects = new ArrayList<Project>();
 
 	public ProjectManager() {
 	}
@@ -19,22 +22,13 @@ public class ProjectManager{
 		return getProjects().get(id);
 	}
 
-	public Kickstarter getKickstarter() {
-		return kickstarter;
-	}
-
-	public void setKickstarter(Kickstarter kickstarter) {
-		this.kickstarter = kickstarter;
-	}
-
-	public ProjectManager(Kickstarter kickStarter) {
-		this.setKickstarter(kickStarter);
-	}
-
 	public ArrayList<Project> getProjects() {
 		return projects;
 	}
 
+	
+	
+	@XmlElement(name = "project")
 	public void setProjects(ArrayList<Project> projects) {
 		this.projects = projects;
 	}
@@ -55,23 +49,13 @@ public class ProjectManager{
 	public ArrayList<Project> getProjectsByCategory(Category cat) {
 		ArrayList<Project> projectsByCategory = new ArrayList<>();
 		for (Project project : projects) {
-			if (project.getProjectCategory().getCategoryId() == cat
-					.getCategoryId())
+			if (project.getProjectCategory().getCategoryId() == cat.getCategoryId())
 				projectsByCategory.add(project);
 		}
 		return projectsByCategory;
 	}
 
-	public void showCategoryInfo(User guest) {
-		getProjectsByCategory(guest.getSettings().getCategory())
-				.forEach(project -> {
-					kickstarter.getBody().generateProjectInfo(project);
-				});
-
-	}
-
-	public boolean userContributeToProject(User payer,
-			Double amount) {
+	public boolean userContributeToProject(User payer, Double amount) {
 		boolean operationSuccess = false;
 		payer.getSettings().getSelectedProject().addBacker(payer, amount);
 		operationSuccess = true;

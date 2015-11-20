@@ -7,7 +7,7 @@ import org.junit.Test;
 import static org.hamcrest.CoreMatchers.is;
 import ua.com.goit.gojava7.kickstarter.model.Category;
 
-public class CategoryStorageTest{
+public class CategoryStorageTest {
 	private CategoryStorage categoryStorage = new CategoryStorage();
 
 	@Before
