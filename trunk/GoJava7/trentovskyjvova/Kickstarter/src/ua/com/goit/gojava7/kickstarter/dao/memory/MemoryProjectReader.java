@@ -14,9 +14,7 @@ public class MemoryProjectReader implements ProjectReader {
 		
 		Project progect1 = new Project("Super project", 1);
 		progect1.setCategoryId(1);
-		progect1.setFunded(123);
 		progect1.setDaysToGo(14);
-		progect1.setPledged(123);
 		progect1.setGoal(100);
 		progect1.setOwner("owner");
 		progect1.setDescription("descr");

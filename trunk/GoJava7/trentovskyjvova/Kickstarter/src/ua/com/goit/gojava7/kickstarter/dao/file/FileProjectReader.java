@@ -37,7 +37,7 @@ public class FileProjectReader implements ProjectReader {
 			Project project;
 			while (null != (line = fileReader.readLine())) {
 				String[] loadedProject = line.split(CSV_SPLIT_BY);
-				if (loadedProject.length < 10) {
+				if (loadedProject.length < 8) {
 					throw new ProjectReadException(
 							"Wrong projects.csv format.");
 				} else if (loadedProject[0] == "") {
@@ -54,13 +54,11 @@ public class FileProjectReader implements ProjectReader {
 				projectName = loadedProject[1];
 				project = new Project(projectName, projectId);
 				project.setCategoryId(Integer.parseInt(loadedProject[2]));
-				project.setFunded(Integer.parseInt(loadedProject[3]));
-				project.setDaysToGo(Integer.parseInt(loadedProject[4]));
-				project.setPledged(Integer.parseInt(loadedProject[5]));
-				project.setDescription(loadedProject[6]);
-				project.setOwner(loadedProject[7]);
-				project.setGoal(Integer.parseInt(loadedProject[8]));
-				project.setLinkVideo(loadedProject[9]);
+				project.setDaysToGo(Integer.parseInt(loadedProject[3]));
+				project.setDescription(loadedProject[4]);
+				project.setOwner(loadedProject[5]);
+				project.setGoal(Integer.parseInt(loadedProject[6]));
+				project.setLinkVideo(loadedProject[7]);
 				
 				projects.add(project);
 			}

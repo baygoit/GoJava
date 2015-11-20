@@ -1,4 +1,4 @@
-package com.kickstarter.mangment.interfaces;
+package com.kickstarter.filerun.components;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -6,16 +6,17 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 
 import com.kickstarter.model.Project;
 
-public class FileManagerImplementation implements ProjectManagerInterface {
+public class FileProjectManager {
 	
 
 	public Map<Integer, Project> getAll(String categoryTitle) {
-		Map<Integer, Project> allProjects = new HashMap<>();
+		LinkedHashMap<Integer, Project> allProjects = new LinkedHashMap<>();
 		try {
 			allProjects = fileReader();
 		} catch (FileNotFoundException e) {
@@ -43,10 +44,10 @@ public class FileManagerImplementation implements ProjectManagerInterface {
 
 	}
 
-	public Map<Integer, Project> fileReader() throws FileNotFoundException, IOException {
+	public LinkedHashMap<Integer, Project> fileReader() throws FileNotFoundException, IOException {
 		int i = 1;
 		File file = new File("project.txt");
-		Map<Integer, Project> allProjectList = new HashMap<>();
+		LinkedHashMap<Integer, Project> allProjectList = new LinkedHashMap<>();
 		try (BufferedReader br = new BufferedReader(new FileReader(file))) {
 			try {
 				String line;
@@ -75,8 +76,8 @@ public class FileManagerImplementation implements ProjectManagerInterface {
 
 	}
 
-	public Map<Integer, Project> getWholeProjectMap() {
-		Map<Integer, Project> list = new HashMap<>();
+	public LinkedHashMap<Integer, Project> getWholeProjectMap() {
+		LinkedHashMap<Integer, Project> list = new LinkedHashMap<>();
 		try {
 			list = fileReader();
 		} catch (FileNotFoundException e) {

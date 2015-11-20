@@ -31,5 +31,10 @@ public class MemoryManagerImplementation implements ProjectManagerInterface {
 	}
 
 	
+	public Map<Integer, Project> getWholeProjectMap() {
+		return null;
+	}
+
+	
 
 }

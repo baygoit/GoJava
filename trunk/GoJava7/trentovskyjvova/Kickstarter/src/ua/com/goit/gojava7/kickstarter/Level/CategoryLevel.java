@@ -5,6 +5,8 @@ import java.util.List;
 import ua.com.goit.gojava7.kickstarter.console.ConsoleScanner;
 import ua.com.goit.gojava7.kickstarter.domain.Category;
 import ua.com.goit.gojava7.kickstarter.domain.Project;
+import ua.com.goit.gojava7.kickstarter.storage.PaymentStorage;
+import ua.com.goit.gojava7.kickstarter.storage.QuestionStorage;
 
 public class CategoryLevel implements Level {
 
@@ -50,7 +52,11 @@ public class CategoryLevel implements Level {
 		return stringBuilder.toString();
 	}
 
-	public String fillOutForm(Project project, int userChoise) {
+	@Override
+	public String fillOutForm(Project project, int userChoise,
+			ConsoleScanner consoleScanner, QuestionStorage questionStorage,
+			PaymentStorage paymentStorage) {
+
 		return "";
 	}
 
